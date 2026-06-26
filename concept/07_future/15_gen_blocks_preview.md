@@ -123,7 +123,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 `async` 和 `gen` 的**统一底层机制**——两者都是编译器状态机，区别仅在恢复触发条件和返回类型。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 需要惰性序列（大集合、无限流）时使用 gen；需要异步等待时使用 async；两者结合时使用 async gen。
 > **关键洞察**: `gen` 的引入使 Rust 的**状态机语法**成为通用机制，不再局限于异步编程。
 > [来源: [Rust Compiler — Generator Internals](https://rustc-dev-guide.rust-lang.org/)]
@@ -383,7 +383,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0+ (Edition 2024)
 
 **文档版本**: 1.0
@@ -429,7 +429,7 @@ fn numbers() -> impl Iterator<Item = i32> {
 > 这与 Python 的生成器（`yield` 可返回任意类型，动态类型）或 JavaScript 的生成器（同样动态）不同——Rust 保持静态类型安全，生成器的 `Item` 类型在编译期确定。
 > `gen` 块的设计目标：消除手写 `Iterator` 实现的样板代码（`next` 方法 + 手动状态机），同时保持零成本抽象。
 > [来源: [Rust RFC 3513](https://rust-lang.github.io/rfcs//3513-gen-blocks.html)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：`gen` 块与借用生命周期的冲突（编译错误）
 
@@ -478,7 +478,7 @@ fn self_referential_gen() -> impl Iterator<Item = &str> {
 > 这与 `async` 块的自引用问题相同——`async fn` 自动处理 `Pin`，但 `gen` 块的返回类型设计仍在演进。
 > `gen` 块的简化目标（消除手写 Iterator 的样板）与自引用的复杂性形成张力。
 > [来源: [Rust RFC 3513](https://rust-lang.github.io/rfcs//3513-gen-blocks.html)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.4 边界测试：gen 块与异常控制流（`return`、`break`）的语义（编译错误）
 

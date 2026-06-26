@@ -97,7 +97,7 @@
   │ 类型安全        │ 逐步验证        │ 良定义性        │
   │ 并发            │ 交织序列        │ 幂域 / 余代数   │
   └─────────────────┴─────────────────┴─────────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
   基本框架:
   [[_]]: 语法 → 语义域
@@ -230,7 +230,7 @@ fn main() {
 > `Result::Err` 的指称是 `Ok(v) ⊑ Err(e)` 域中的一个正常元素——错误是值空间的一部分，可被匹配、传播、转换。
 > Rust 强制区分这两种错误模式：`panic` 用于不可恢复错误（bug），`Result` 用于可恢复错误（文件不存在、网络超时）。
 > 这与 Java 的异常（Exception vs Error）或 Haskell 的 `Either`（无 panic 机制）形成对比。
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ```text
 Rust 类型的指称:

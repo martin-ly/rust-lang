@@ -426,7 +426,7 @@ fn main() {
 > Edition 演进可能逐步放宽这些限制。 workaround：使用 trait 对象 `Box<dyn Iterator<Item = i32>>`（有运行时虚函数开销），或手写具体类型（暴露实现细节）。
 > 这与 C++ 的 `auto`（不能用于 `static`）或 Java 的接口（可用于 `static`，但需具体实现类）不同——Rust 的 `impl Trait` 设计追求零成本抽象，但静态位置的单态化要求与之冲突。
 > [来源: [Rust RFC 2289](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：Edition 迁移的宏展开差异（编译错误）
 

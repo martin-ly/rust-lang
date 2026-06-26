@@ -92,7 +92,7 @@ ECS (Entity-Component-System):
   │ 并行化          │ 困难            │ 天然并行        │
   │ 运行时灵活性    │ 低              │ 高              │
   └─────────────────┴─────────────────┴─────────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
   Rust 中的 ECS:
   ├── bevy_ecs: 最流行

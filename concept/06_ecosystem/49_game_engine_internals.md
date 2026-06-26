@@ -1044,7 +1044,7 @@ enum AssetState {
 - [嵌入式系统](./22_embedded_systems.md) — `#![no_std]`、资源受限
 - [架构设计模式](./35_architecture_patterns.md) — 分层/六边形架构
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 > **过渡**: Game Engine Internals（游戏引擎内部原理） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Game Engine Internals（游戏引擎内部原理） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

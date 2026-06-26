@@ -103,7 +103,7 @@ Rust 字符串类型的所有权谱系:
 ```
 
 ```rust
-// 所有权转换示例 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)
+// 所有权转换示例 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-storing-utf-8-encoded-text-with-strings.html)
 fn main() {
     let s1 = String::from("hello");     // 拥有的 String
     let s2 = &s1;                        // 借用为 &str
@@ -553,7 +553,7 @@ classDiagram
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-storing-utf-8-encoded-text-with-strings.html), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 

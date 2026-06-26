@@ -955,7 +955,7 @@ fn invariant<'a>(x: &'a mut String) -> &'a mut str {
 > 演进方向见 [`../07_future/03_evolution.md`](../07_future/03_evolution.md)（语言演进路线图）与 [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md)（形式化方法的未来）。
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -1044,7 +1044,7 @@ fn fixed() {
 > 和类型的值是"若干选择之一"，模式匹配是"对每个选择给出响应"。
 > 不覆盖所有变体在逻辑上是不完整的——相当于没有定义函数在某些输入上的行为。
 > Rust 编译器通过构造决策树（decision tree）验证穷尽性，这是类型安全的核心保证。
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：GAT 与高阶类型（编译错误）
 

@@ -16,7 +16,7 @@
 > **双维定位**: C×App — 应用算法和竞赛编程模式
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Generics](../02_intermediate/02_generics.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **后置概念**: [Formal Ecosystem Tower](./05_formal_ecosystem_tower.md) · [Performance Optimization](./15_performance_optimization.md)
-> **主要来源**: [CLRS — Introduction to Algorithms] · [LeetCode] · [Codeforces] · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [VeriContest arXiv 2026-05-08] · [Kani Docs] · [CSES Problem Set]
+> **主要来源**: [CLRS — Introduction to Algorithms] · [LeetCode] · [Codeforces] · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [VeriContest arXiv 2026-05-08] · [Kani Docs] · [CSES Problem Set]
 
 >
 > **来源**: [std::collections](https://doc.rust-lang.org/std/collections/) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/) · [The Algorithms — Rust](https://github.com/TheAlgorithms/Rust)
@@ -85,7 +85,7 @@ VeriContest 证明：946 道经典竞赛题的 Rust 实现可通过 Verus 形式
 | **竞赛生态** | ⚠️ 模板库较少，社区在成长 | ✅ 极成熟（AC Library 等） | ✅ LeetCode 默认支持 |
 | **形式验证** | ✅ Verus/Kani/Creusot 生态领先 | ⚠️ 有限（Frama-C 等） | ⚠️ 有限 |
 
-> [来源: [TRPL](https://doc.rust-lang.org/book/)] Rust 的零成本抽象原则意味着：使用高阶函数、迭代器、泛型不会引入运行时开销。`slice::sort_unstable()` 在随机数据上通常比 C++ `std::sort` 更快。
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)] Rust 的零成本抽象原则意味着：使用高阶函数、迭代器、泛型不会引入运行时开销。`slice::sort_unstable()` 在随机数据上通常比 C++ `std::sort` 更快。
 
 ### 1.2 VeriContest：形式验证的竞赛基准
 
@@ -808,7 +808,7 @@ temp.extend_from_slice(&nums[..]);
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
 > **权威来源对齐变更日志**: 2026-05-22 新增算法与竞赛编程概念文件，覆盖 CLRS、LeetCode、Codeforces、VeriContest、Kani 等权威来源 [来源: Authority Source Sprint Batch 8]
 
@@ -885,7 +885,7 @@ fn main() {
 }
 ```
 
-> **修正**: `sort_by` 要求比较器实现**严格弱序**（strict weak ordering）：1) 反自反性（`a < a` 为假）；2) 非对称性（`a < b` ⇒ `b < a` 为假）；3) 传递性（`a < b` ∧ `b < c` ⇒ `a < c`）。违反这些性质的比较器导致 `sort` panic（debug 模式）或产生未定义顺序（release 模式）。常见错误：比较浮点数时未处理 `NaN`（`NaN < x` 和 `NaN > x` 都为假，破坏严格弱序）。安全替代：`partial_cmp` 返回 `Option<Ordering>`，`NaN` 时返回 `None`；`sort_by` 的闭包必须返回 `Ordering`（非 `Option`），因此需要显式处理 `NaN`（如映射到特定值或使用 `total_cmp`）。这与 C++ 的 `std::sort`（同样要求严格弱序，违反时 UB）类似，但 Rust 在 debug 模式下检查并 panic。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/vec/struct.Vec.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: `sort_by` 要求比较器实现**严格弱序**（strict weak ordering）：1) 反自反性（`a < a` 为假）；2) 非对称性（`a < b` ⇒ `b < a` 为假）；3) 传递性（`a < b` ∧ `b < c` ⇒ `a < c`）。违反这些性质的比较器导致 `sort` panic（debug 模式）或产生未定义顺序（release 模式）。常见错误：比较浮点数时未处理 `NaN`（`NaN < x` 和 `NaN > x` 都为假，破坏严格弱序）。安全替代：`partial_cmp` 返回 `Option<Ordering>`，`NaN` 时返回 `None`；`sort_by` 的闭包必须返回 `Ordering`（非 `Option`），因此需要显式处理 `NaN`（如映射到特定值或使用 `total_cmp`）。这与 C++ 的 `std::sort`（同样要求严格弱序，违反时 UB）类似，但 Rust 在 debug 模式下检查并 panic。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/vec/struct.Vec.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.4 边界测试：大数组栈分配导致的编译错误
 
@@ -918,7 +918,7 @@ fn main() {
 }
 ```
 
-> **修正**: `slice::binary_search` 要求切片**按相同顺序排序**（默认升序）。若切片无序或使用不同比较器排序，结果是未定义的（可能返回错误位置、可能 panic）。`binary_search_by` 允许自定义比较器，但比较器必须与排序时使用的比较器一致。这与 C++ 的 `std::binary_search`（同样要求有序，否则 UB）或 Python 的 `bisect`（同样要求有序）相同——二分查找的前提条件。竞赛编程中常见错误：1) 忘记先 `sort`；2) 降序排序后用默认 `binary_search`；3) 自定义比较器与排序不一致。Rust 在 debug 模式下不检查有序性（检查成本 O(n)，抵消二分查找的优势），依赖开发者保证。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.slice.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: `slice::binary_search` 要求切片**按相同顺序排序**（默认升序）。若切片无序或使用不同比较器排序，结果是未定义的（可能返回错误位置、可能 panic）。`binary_search_by` 允许自定义比较器，但比较器必须与排序时使用的比较器一致。这与 C++ 的 `std::binary_search`（同样要求有序，否则 UB）或 Python 的 `bisect`（同样要求有序）相同——二分查找的前提条件。竞赛编程中常见错误：1) 忘记先 `sort`；2) 降序排序后用默认 `binary_search`；3) 自定义比较器与排序不一致。Rust 在 debug 模式下不检查有序性（检查成本 O(n)，抵消二分查找的优势），依赖开发者保证。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.slice.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.7 边界测试：`BinaryHeap` 的 `peek_mut` 与忘记 `drop`（逻辑错误/UB）
 

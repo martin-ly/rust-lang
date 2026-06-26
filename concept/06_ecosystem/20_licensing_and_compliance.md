@@ -128,7 +128,7 @@ Rust 生态的许可证现状:
   │ ISC             │ 无              │ 否              │
   │ zlib            │ 无              │ 否              │
   └─────────────────┴─────────────────┴─────────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
   Copyleft 许可证:
   ┌─────────────────┬─────────────────┬─────────────────┐
@@ -503,7 +503,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
 

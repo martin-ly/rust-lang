@@ -517,7 +517,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 
@@ -603,7 +603,7 @@ struct TransactionFixed {
 }
 ```
 
-> **修正**: 分布式事务协调器通常需要将事务状态传递给线程池中的工作者。`Rc<T>` 不能跨线程，`Arc<T>` 可以。Rust 编译器在编译期验证这些约束，阻止将非 Send 类型传递到多线程环境中。这与 Java 的 `ExecutorService.submit()`（运行时才可能报错）或 Go 的 goroutine（自动共享，但可能数据竞争）不同——Rust 在编译期消除并发错误。分布式系统中的 Saga 模式、2PC（两阶段提交）等算法在 Rust 中实现时，类型系统保证事务状态的线程安全传递。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: 分布式事务协调器通常需要将事务状态传递给线程池中的工作者。`Rc<T>` 不能跨线程，`Arc<T>` 可以。Rust 编译器在编译期验证这些约束，阻止将非 Send 类型传递到多线程环境中。这与 Java 的 `ExecutorService.submit()`（运行时才可能报错）或 Go 的 goroutine（自动共享，但可能数据竞争）不同——Rust 在编译期消除并发错误。分布式系统中的 Saga 模式、2PC（两阶段提交）等算法在 Rust 中实现时，类型系统保证事务状态的线程安全传递。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：序列化消息的大小限制（运行时错误）
 

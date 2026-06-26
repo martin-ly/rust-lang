@@ -576,7 +576,7 @@ async fn good() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Tokio 文档](https://docs.rs/tokio/), [Tower 文档](https://docs.rs/tower/), [rayon 文档](https://docs.rs/rayon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Tokio 文档](https://docs.rs/tokio/), [Tower 文档](https://docs.rs/tower/), [rayon 文档](https://docs.rs/rayon/)
 >
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
@@ -592,7 +592,7 @@ async fn good() {
 >
 >
 >
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
 
 ---
@@ -730,7 +730,7 @@ fn main() {}
 ## 参考来源
 
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 > [来源: [Wikipedia — System Design](https://en.wikipedia.org/wiki/Systems_design)]
 > [来源: [Wikipedia — Software Architecture](https://en.wikipedia.org/wiki/Software_architecture)]

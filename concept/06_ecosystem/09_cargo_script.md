@@ -267,7 +267,7 @@ graph TD
 > 此流程图揭示 Cargo Script 的"隐式编译"本质——单文件并非解释执行，而是经 frontmatter 解析、临时 crate 生成、缓存复用等步骤透明地完成编译。
 > 建议在理解执行延迟来源（首次编译 vs 缓存命中）和调试脚本依赖问题时调用此心智模型。
 > 关键洞察：缓存键基于文件内容与 frontmatter 的哈希，修改任一字符即触发重新编译。[来源: 💡 原创分析]
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **思维表征说明**: `graph TD` 流程图将 Cargo Script 的**内部执行机制**可视化——从单文件输入到最终运行的完整管道。
 > 关键洞察：Cargo Script 并非「无需编译」，而是「**隐式管理编译**」——frontmatter 被解析为临时 `Cargo.toml`，编译缓存存储在 `~/.cargo/script-cache/`，第二次执行时若源码未变更则直接复用。
 > 这与传统 `cargo run` 的差异在于「临时项目」的自动化管理。 [来源: [RFC 3502](https://rust-lang.github.io/rfcs//3502-cargo-script.html) §Execution Model; Cargo Book — Scripts]
@@ -453,7 +453,7 @@ Cargo Script:  File = Crate (单模块，无子模块)
 | **Scripting language** | [Scripting language](https://en.wikipedia.org/wiki/Scripting_language) | 脚本语言 |
 | **Package manager** | [Package manager](https://en.wikipedia.org/wiki/Package_manager) | 包管理器 |
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 

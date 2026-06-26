@@ -475,7 +475,7 @@ let max = vec.par_iter().max();
 | 负载均衡 | 无 | work-stealing 动态均衡 |
 | 嵌套并行 | 阻塞 | 自适应（防止线程爆炸） |
 
-> **关键洞察**: rayon 的 `join` 和 `scope` 允许**嵌套并行**——在并行任务内部再次调用并行操作。rayon 通过线程池的 work-stealing 动态调整，避免传统线程池的线程爆炸问题。 [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> **关键洞察**: rayon 的 `join` 和 `scope` 允许**嵌套并行**——在并行任务内部再次调用并行操作。rayon 通过线程池的 work-stealing 动态调整，避免传统线程池的线程爆炸问题。 [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
 #### parking_lot：轻量级同步原语
 
@@ -1191,7 +1191,7 @@ graph TD
 > **[来源: Rust Foundation Survey 2024; Rust in Production Report; crates.io Download Statistics]** 生态数据基于公开统计和社区报告。✅
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1

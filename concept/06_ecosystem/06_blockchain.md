@@ -97,7 +97,7 @@ mindmap
 > **认知功能**: 本 mindmap 以四层架构组织区块链安全知识全景，帮助读者建立"链架构→漏洞消除→形式化验证→跨链对比"的系统认知框架。[来源: 💡 原创分析]
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> **使用建议**: 学习新链时，将其归入对应分支并比较漏洞消除机制与形式化验证策略。 [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> **使用建议**: 学习新链时，将其归入对应分支并比较漏洞消除机制与形式化验证策略。 [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 >
 > **关键洞察**: Rust 链的安全优势不是单一技术点，而是从编译期类型系统到运行时调度再到形式化验证的纵深防御体系。
 
@@ -685,7 +685,7 @@ Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** 形式化映射基于 RustBelt 和分离逻辑的理论框架。✅
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1

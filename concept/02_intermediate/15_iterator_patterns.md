@@ -136,7 +136,7 @@ Iterator Trait:
   │ take            │ Iterator<T>     │ Iterator<T>     │
   │ flat_map        │ Iterator<T>     │ Iterator<U>     │
   └─────────────────┴─────────────────┴─────────────────┘
-> [来源: [TRPL — Iterators](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL — Iterators](https://doc.rust-lang.org/book/ch13-00-functional-features.html)]
 ```
 
 > **认知功能**: **适配器链让数据转换声明式且可组合**——每个适配器只做一件事，组合起来完成复杂转换。
@@ -513,7 +513,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 的迭代器适配器（`map`、`filter`、`take` 等）是**惰性**的——它们返回新的迭代器，不立即执行。这类似于 Haskell 的 lazy list 或 Python 的 generator，但 Rust 的惰性是"零成本"的：适配器链在编译期展开为状态机，通过 `next()` 逐个消费。忘记最终消费（如只创建 `map` 而不 `collect`）是常见错误，clippy 会警告 `must_use` 的迭代器结果。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: Rust 的迭代器适配器（`map`、`filter`、`take` 等）是**惰性**的——它们返回新的迭代器，不立即执行。这类似于 Haskell 的 lazy list 或 Python 的 generator，但 Rust 的惰性是"零成本"的：适配器链在编译期展开为状态机，通过 `next()` 逐个消费。忘记最终消费（如只创建 `map` 而不 `collect`）是常见错误，clippy 会警告 `must_use` 的迭代器结果。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-00-functional-features.html)]
 
 ## 十二、边界测试：迭代器模式的编译错误（续）
 

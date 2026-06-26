@@ -11,7 +11,7 @@
 > **方法论对齐**: Semantic Link Network (Zhuge 2010) · Bloom's Revised Taxonomy · KB Completeness & Consistency (Torchiano et al. 2018)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Rust Internals Forum](https://internals.rust-lang.org/) · [concept/知识体系规范](./authority_source_map.md)
@@ -164,7 +164,7 @@ graph TB
 ```
 
 > **认知功能**: 此图是知识体系的**全局层级依赖骨架**。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > 读者可将其作为「学习路径规划器」——从 L0 元信息出发，沿实线箭头逐层深入，理解每一层概念的前置依赖。
 > 反向箭头（虚线）揭示上层需求如何驱动下层设计（如 L7 AI 需求 → L3 Unsafe 约束）。
 > 关键认知：这不是静态的「知识目录」，而是动态的「依赖网络」——改变一个节点的理解深度会影响所有下游节点的认知质量。
@@ -261,7 +261,7 @@ graph LR
 | Move/Copy | 内存管理 (Box) | Unsafe (MaybeUninit) | 线性逻辑 ⊗ /  weakening | **部分映射** | Copy = weakening 特例 |
 | — | Send/Sync (Marker Trait) | 并发安全保证 | 并发分离逻辑 (CSL) | **同态** | Send/Sync ⟹ CSL 资源安全 |
 
-[来源: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/) · [TAPL (Pierce, 2002)](https://www.cis.upenn.edu/~bcpierce/tapl/)]
+[来源: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [TAPL (Pierce, 2002)](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 
 ### 3.2 L4-L3-L2 定理传递链
 
@@ -329,7 +329,7 @@ graph LR
     来源: ✅ [Jung et al. POPL 2017] · ✅ [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ```
 
-[来源: [TRPL](https://doc.rust-lang.org/book/) ·
+[来源: [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
 [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) ·
 [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
 [Wikipedia — Memory Safety](https://en.wikipedia.org/wiki/Memory_safety)]
@@ -471,7 +471,7 @@ L4 形式化保证的边界:
 | **L6 生态** | 应用 + 评价 | 实施、测试、优化 | "如何设计可维护的 Cargo workspace？" |
 | **L7 前沿** | 创造 | 假设、设计、预测 | "AI 生成代码需要怎样的类型系统？" |
 
-[来源: [Wikipedia — Bloom's Taxonomy](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [TRPL](https://doc.rust-lang.org/book/)]
+[来源: [Wikipedia — Bloom's Taxonomy](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
 ---
 
@@ -561,7 +561,7 @@ L4 结论: 安全 = 编译期保证 ∪ 运行时检查 ∪ 程序员契约
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1

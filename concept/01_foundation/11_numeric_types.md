@@ -506,7 +506,7 @@ fn main() {
 > 这与 Swift 的整数（默认饱和/检查，溢出 panic）或 C 的整数（无检查，UB）不同——Rust 要求开发者显式选择语义。
 > 安全关键代码（航空、医疗）应使用 `checked_*` 或 `saturating_*`，并处理所有 `None` 情况。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/num/struct.Wrapping.html)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)]
 
 ### 10.4 边界测试：`NonZeroU32` 的构造与优化假设（编译错误/运行时 panic）
 

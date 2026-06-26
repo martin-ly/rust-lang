@@ -2,13 +2,13 @@
 >
 > **EN**: Readme
 > **Summary**: Readme. Core Rust concept.
-> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Cargo Book](https://doc.rust-lang.org/cargo/) · [Rust RFCs](https://rust-lang.github.io/rfcs/) · [crates.io](https://crates.io/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Cargo Book](https://doc.rust-lang.org/cargo/) · [Rust RFCs](https://rust-lang.github.io/rfcs/) · [crates.io](https://crates.io/)
 > **内容分级**: [综述级]
 > **受众**: [进阶]
 > **定位**：Rust 的工程实践、工具链、设计模式和生态协作机制。本层是 L1-L5 知识的**工程化落地**，将理论转化为可维护、可扩展的代码库。
 > **Bloom 层级**: 应用 + 评价
 > **功能**: 将概念知识转化为**工程能力**
-> **来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)** · **来源: [crates.io](https://crates.io/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)** · **来源: [crates.io](https://crates.io/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)**
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -247,7 +247,7 @@ L6 的工程实践输出到：
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 

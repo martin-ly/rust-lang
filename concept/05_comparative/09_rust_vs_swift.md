@@ -16,7 +16,7 @@
 
 ---
 
-> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
 > [Swift Documentation](https://www.swift.org/documentation/) ·
 > [Swift Ownership Manifesto](https://github.com/apple/swift/blob/main/docs/OwnershipManifesto.md) ·
 > [Wikipedia — Swift (programming language)](https://en.wikipedia.org/wiki/Swift_(programming_language)) ·
@@ -97,7 +97,7 @@
   │ 学习难度        │ 中              │ 高              │
   │ 调试内存问题    │ 运行时检测      │ 编译期阻止      │
   └─────────────────┴─────────────────┴─────────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
   ARC 示例:
   class Person {
@@ -497,7 +497,7 @@ graph TD
 |:---|:---:|:---|
 | [Swift Documentation](https://www.swift.org/documentation/) | ✅ 一级 | 官方文档 |
 | [Swift Ownership Manifesto](https://github.com/apple/swift/blob/main/docs/OwnershipManifesto.md) | ✅ 一级 | 所有权设计 |
-| [TRPL](https://doc.rust-lang.org/book/) | ✅ 一级 | Rust 官方书 |
+| [TRPL](https://doc.rust-lang.org/book/title-page.html) | ✅ 一级 | Rust 官方书 |
 | [Swift on Server](https://www.swift.org/server/) | ✅ 一级 | 服务端 Swift |
 | [Swift vs Rust Blog](https://www.ben-morris.com/swift-vs-rust/) | ✅ 二级 | 对比分析 |
 | [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/) | 🔍 三级 | Web 框架性能对比 |
@@ -520,7 +520,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
 
@@ -564,7 +564,7 @@ fn fixed() {
 }
 ```
 
-> **Swift 对比**: Swift 使用 ARC（Automatic Reference Counting）管理内存——`String` 是引用类型，赋值时增加引用计数，原变量仍可用。Rust 的 `String` 是拥有所有权的值类型，赋值时 move（转移所有权），原变量失效。Swift 的 ARC 类似于 Rust 的 `Rc<T>`（引用计数），但 Swift 默认对所有类实例使用 ARC，而 Rust 默认使用所有权转移。Rust 的 move 语义消除了循环引用风险（除非显式使用 `Rc`），而 Swift 需要 `weak`/`unowned` 打破循环。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **Swift 对比**: Swift 使用 ARC（Automatic Reference Counting）管理内存——`String` 是引用类型，赋值时增加引用计数，原变量仍可用。Rust 的 `String` 是拥有所有权的值类型，赋值时 move（转移所有权），原变量失效。Swift 的 ARC 类似于 Rust 的 `Rc<T>`（引用计数），但 Swift 默认对所有类实例使用 ARC，而 Rust 默认使用所有权转移。Rust 的 move 语义消除了循环引用风险（除非显式使用 `Rc`），而 Swift 需要 `weak`/`unowned` 打破循环。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：Swift 的 Optional 链与 Rust 的 `?` 运算符（编译错误）
 
@@ -588,7 +588,7 @@ fn main_fixed() -> Result<(), String> {
 }
 ```
 
-> **Swift 对比**: Swift 的 `try?` 可在任何上下文中使用，将 throws 函数的结果转为 Optional（错误时返回 `nil`）。Rust 的 `?` 运算符只能在返回 `Result` 或 `Option` 的函数中使用，将错误自动传播给调用者。Swift 的 `guard let` 和 `if let` 对应 Rust 的 `match` 和 `if let`。Rust 的设计强制错误处理的一致性——不能在忽略错误的函数中悄悄丢弃 `Result`；Swift 更灵活，允许通过 `try?` 静默忽略错误。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **Swift 对比**: Swift 的 `try?` 可在任何上下文中使用，将 throws 函数的结果转为 Optional（错误时返回 `nil`）。Rust 的 `?` 运算符只能在返回 `Result` 或 `Option` 的函数中使用，将错误自动传播给调用者。Swift 的 `guard let` 和 `if let` 对应 Rust 的 `match` 和 `if let`。Rust 的设计强制错误处理的一致性——不能在忽略错误的函数中悄悄丢弃 `Result`；Swift 更灵活，允许通过 `try?` 静默忽略错误。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：Swift 的 ARC 与 Rust 的所有权的循环引用差异（运行时内存泄漏）
 

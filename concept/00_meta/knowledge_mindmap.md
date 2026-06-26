@@ -8,7 +8,7 @@
 > **使用方法**: 在支持 Mermaid 的 Markdown 阅读器中查看，点击节点 mentally 定位到对应主题。
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **Bloom 层级**: 记忆 → 理解
@@ -236,7 +236,7 @@ mindmap
 > **文档版本**: 1.1
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 全局思维导图 v1.1 — 新增相关概念链接
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 
 ## 认知路径

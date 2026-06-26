@@ -14,7 +14,7 @@
 
 ---
 
-> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Zig Documentation](https://ziglang.org/documentation/master/) · [Ziglang.org](https://ziglang.org/) · [Andrew Kelley — Zig Design](https://ziglang.org/learn/overview/) · [Wikipedia — Zig (programming language)](https://en.wikipedia.org/wiki/Zig_(programming_language))
+> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Zig Documentation](https://ziglang.org/documentation/master/) · [Ziglang.org](https://ziglang.org/) · [Andrew Kelley — Zig Design](https://ziglang.org/learn/overview/) · [Wikipedia — Zig (programming language)](https://en.wikipedia.org/wiki/Zig_(programming_language))
 
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 
@@ -501,7 +501,7 @@ graph TD
 |:---|:---:|:---|
 | [Zig Documentation](https://ziglang.org/documentation/master/) | ✅ 一级 | 官方文档 |
 | [Zig Overview](https://ziglang.org/learn/overview/) | ✅ 一级 | 设计概览 |
-| [TRPL](https://doc.rust-lang.org/book/) | ✅ 一级 | Rust 官方书 |
+| [TRPL](https://doc.rust-lang.org/book/title-page.html) | ✅ 一级 | Rust 官方书 |
 | [Zig Build System](https://ziglang.org/learn/build-system/) | ✅ 一级 | 构建系统 |
 | [Zig News](https://ziglang.org/news/) | ✅ 二级 | 社区新闻 |
 | [Wikipedia — Zig](https://en.wikipedia.org/wiki/Zig_(programming_language)) | ✅ 一级 | 语言概述 |
@@ -552,7 +552,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
 

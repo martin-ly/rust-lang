@@ -9,7 +9,7 @@
 > **对齐来源**: [Gentzen 自然演绎系统] · [Novak & Cañas (2008) 概念地图理论] · [Torchiano et al. (2018) 边界分析] · [Rust Reference 类型判断规则](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 > **符号约定**: `⊢` 推导 / `⟹` 蕴含 / `⇐` 依赖 / `⊘` 反例 / `≡` 等价 / `∧` 与 / `∨` 或
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **来源**: [Gentzen, G. — *Untersuchungen über das logische Schließen*. 1935; 自然演绎系统]

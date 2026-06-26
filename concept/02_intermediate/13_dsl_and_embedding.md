@@ -383,7 +383,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树展示 DSL 的**适用边界**。核心原则是：**需要编译期验证时用 Rust DSL，需要通用可编辑性时用标准格式**。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > [source: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 ---
@@ -498,7 +498,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 
@@ -572,7 +572,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: 构建器模式（Builder Pattern）通过消耗 `self` 的方法链实现不可变构建。每次调用 `.name()` 返回新的 `Builder`（或消耗后返回自身），原实例被 move。忘记链式调用会导致"use of moved value"错误。这与 Java 的构建器（可变对象，方法返回 `this`）不同——Rust 的消耗式构建器在类型层面保证每个字段只设置一次，防止部分初始化的对象被构建。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: 构建器模式（Builder Pattern）通过消耗 `self` 的方法链实现不可变构建。每次调用 `.name()` 返回新的 `Builder`（或消耗后返回自身），原实例被 move。忘记链式调用会导致"use of moved value"错误。这与 Java 的构建器（可变对象，方法返回 `this`）不同——Rust 的消耗式构建器在类型层面保证每个字段只设置一次，防止部分初始化的对象被构建。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：状态机 DSL 的非法状态转换（编译错误）
 

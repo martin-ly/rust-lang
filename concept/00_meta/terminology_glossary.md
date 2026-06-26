@@ -2,7 +2,7 @@
 >
 > 本表为最小国际化 efforts（决策 3-C），聚焦高频术语标准化。
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
-> 所有英文术语与 [TRPL](https://doc.rust-lang.org/book/) 及 [Rust Reference](https://doc.rust-lang.org/reference/) 保持一致，
+> 所有英文术语与 [TRPL](https://doc.rust-lang.org/book/title-page.html) 及 [Rust Reference](https://doc.rust-lang.org/reference/) 保持一致，
 > 确保学习者能顺利对接 crates.io、RFC、GitHub Issue 等英文生态。
 >
 > **标准来源**: TRPL · Rust Reference · std API Docs · Rustnomicon · Async Book · Cargo Book · Edition Guide
@@ -17,7 +17,7 @@
 > **Summary**: Terminology Glossary. Core Rust concept.
 > **来源**:
 >
-> [TRPL](https://doc.rust-lang.org/book/) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
 > [Rust Reference](https://doc.rust-lang.org/reference/) ·
 > [std API Docs](https://doc.rust-lang.org/std/) ·
 > [Rustnomicon](https://doc.rust-lang.org/nomicon/) ·

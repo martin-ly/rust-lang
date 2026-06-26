@@ -8,7 +8,7 @@
 > **更新周期**: 每次新增/修改 00_meta/ 元信息文件时更新
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **来源**: [`concept/` 知识体系规范 — `methodology.md`]

@@ -2066,7 +2066,7 @@ fn demo_invariance<'a>(ptr: *mut &'a str) -> *mut &'static str {
 
 ### 补充章节：`MaybeUninit` 数组初始化模式
 
-> **权威来源**: [Rust Reference: MaybeUninit](https://doc.rust-lang.org/reference/) · [Unsafe Code Guidelines: Validity Invariants] · [TRPL Ch19.3](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference: MaybeUninit](https://doc.rust-lang.org/reference/) · [Unsafe Code Guidelines: Validity Invariants] · [TRPL Ch19.3](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html)
 > **层级标注**: `L3::未初始化内存` → `L1::所有权` 初始化要求 · `L2::内存管理` 堆栈分配
 
 **定义**：`std::mem::MaybeUninit<T>` 是 Rust 处理**未初始化内存**的官方抽象。
@@ -2583,7 +2583,7 @@ fn main() {
 | **Memory safety** | [Memory safety](https://en.wikipedia.org/wiki/Memory_safety) | 内存安全 |
 | **Foreign function interface** | [Foreign function interface](https://en.wikipedia.org/wiki/Foreign_function_interface) | FFI |
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -2965,7 +2965,7 @@ fn inspect(ring: &IoUring) {
 > [来源: [Rust Internals — Unsafe Fields Discussion](https://internals.rust-lang.org/t/unsafe-fields/)] ·
 > [来源: [Rust Project Goals 2026 — Unsafe Fields](https://rust-lang.github.io/rust-project-goals/2026/unsafe-fields.html)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) ·
-> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html) ·
 > [Rust Standard Library](https://doc.rust-lang.org/std/) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

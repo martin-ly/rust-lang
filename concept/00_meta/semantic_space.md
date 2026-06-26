@@ -10,7 +10,7 @@
 > **方法论对齐**: Felleisen 1989 "On the Expressive Power of Programming Languages" · Observational Equivalence · Turing Completeness · Semantic Closure
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Rust RFCs](https://rust-lang.github.io/rfcs/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
@@ -405,7 +405,7 @@ Unsafe Rust 不是"关闭所有检查"，而是**打开特定的逃逸门**：
 | **编译期计算** | `const generics` + `const fn` | 部分 | 零 | 常量求值 |
 | **类型级约束** | Trait bounds + 关联类型 | 完全 | 零 | 接口一致性 |
 
-[来源: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)]
+[来源: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.3 能但低效/痛苦表达
 
@@ -418,7 +418,7 @@ Unsafe Rust 不是"关闭所有检查"，而是**打开特定的逃逸门**：
 | **快速原型** | 完整类型标注 | 编译时间 + 学习曲线 | 迭代慢 | `cargo script`、`.rs` 单文件 |
 | **递归数据结构** | `Box`/`Rc` + `enum` | 间接访问 | 无栈分配 | `Vec` 模拟树、arena 分配 |
 
-[来源: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Wikipedia — Green Thread](https://en.wikipedia.org/wiki/Green_thread)]
+[来源: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Wikipedia — Green Thread](https://en.wikipedia.org/wiki/Green_thread)]
 
 ### 3.4 不能表达 / 故意排除
 
@@ -1006,7 +1006,7 @@ graph TD
 | **内存安全保证** | 编译期完全 | 无（依赖程序员） | 编译期（GC 辅助） | 运行时（GC） | 运行时（VM） |
 | **并发安全保证** | 编译期（Send/Sync） | 无（依赖程序员） | 运行时（STM/GHC） | 运行时（channel） | 运行时（JMM） |
 
-[来源: [Wikipedia — Comparison of Programming Languages](https://en.wikipedia.org/wiki/Comparison_of_programming_languages) · [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)]
+[来源: [Wikipedia — Comparison of Programming Languages](https://en.wikipedia.org/wiki/Comparison_of_programming_languages) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 6.2 表征空间的包含关系
 
@@ -1217,7 +1217,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1

@@ -14,7 +14,7 @@
 
 ---
 
-> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Scala Documentation](https://docs.scala-lang.org/) · [Scala Book](https://docs.scala-lang.org/scala3/book/introduction.html) · [Wikipedia — Scala](https://en.wikipedia.org/wiki/Scala_(programming_language)) · [Wikipedia — Rust](https://en.wikipedia.org/wiki/Rust_(programming_language))
+> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Scala Documentation](https://docs.scala-lang.org/) · [Scala Book](https://docs.scala-lang.org/scala3/book/introduction.html) · [Wikipedia — Scala](https://en.wikipedia.org/wiki/Scala_(programming_language)) · [Wikipedia — Rust](https://en.wikipedia.org/wiki/Rust_(programming_language))
 
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 
@@ -520,7 +520,7 @@ graph TD
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
 | [Scala Documentation](https://docs.scala-lang.org/) | ✅ 一级 | 官方文档 |
-| [TRPL](https://doc.rust-lang.org/book/) | ✅ 一级 | Rust 官方书 |
+| [TRPL](https://doc.rust-lang.org/book/title-page.html) | ✅ 一级 | Rust 官方书 |
 | [Scala Book](https://docs.scala-lang.org/scala3/book/introduction.html) | ✅ 一级 | Scala 3 书 |
 | [Akka](https://akka.io/) | ✅ 二级 | Actor 框架 |
 | [Scala vs Rust](https://users.scala-lang.org/) | ✅ 三级 | 社区讨论 |
@@ -596,7 +596,7 @@ fn fixed() {
 }
 ```
 
-> **Scala 对比**: Scala 的隐式转换（`implicit def`）允许自动将 `Int` 转为 `JsonValue`。Rust 禁止隐式转换——必须显式 `impl Trait for Type`。Scala 的隐式解析在编译期执行，但可能导致意外转换和难以追踪的编译错误。Rust 的显式实现确保每个类型转换都是设计者的有意选择，错误信息更精确。这与 Scala 3 的 `given`/`using`（显式隐式）方向一致——Rust 从一开始就选择了显式路径。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **Scala 对比**: Scala 的隐式转换（`implicit def`）允许自动将 `Int` 转为 `JsonValue`。Rust 禁止隐式转换——必须显式 `impl Trait for Type`。Scala 的隐式解析在编译期执行，但可能导致意外转换和难以追踪的编译错误。Rust 的显式实现确保每个类型转换都是设计者的有意选择，错误信息更精确。这与 Scala 3 的 `given`/`using`（显式隐式）方向一致——Rust 从一开始就选择了显式路径。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：Scala 的 null 与 Rust 的 Option（编译错误）
 
@@ -617,7 +617,7 @@ fn fixed() {
 }
 ```
 
-> **Scala 对比**: Scala 运行在 JVM 上，与 Java 互操作，因此存在 `null`（`String = null`）。Scala 推荐使用 `Option[T]`，但无法完全禁止 `null`。Rust 没有 `null`——引用类型（`&T`、`Box<T>`）永远指向有效内存，`Option<T>` 是唯一的可空表示。这消除了 NullPointerException 的整个类别，是 Rust 相对于 JVM 语言的核心安全优势。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **Scala 对比**: Scala 运行在 JVM 上，与 Java 互操作，因此存在 `null`（`String = null`）。Scala 推荐使用 `Option[T]`，但无法完全禁止 `null`。Rust 没有 `null`——引用类型（`&T`、`Box<T>`）永远指向有效内存，`Option<T>` 是唯一的可空表示。这消除了 NullPointerException 的整个类别，是 Rust 相对于 JVM 语言的核心安全优势。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：Scala 的隐式转换与 Rust 的显式 `From`/`Into`（编译错误）
 

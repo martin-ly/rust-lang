@@ -16,7 +16,7 @@
 ---
 
 > **来源**:
-> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
 > [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) ·
 > [RFC 2052 — Epochs](https://rust-lang.github.io/rfcs//2052-epochs.html) ·
 > [Rust Blog — Edition 2024](https://blog.rust-lang.org/) ·
@@ -90,7 +90,7 @@ Edition 机制:
 
 ### 1.2 版本兼容性
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]**
 
 ```text
 兼容性承诺:
@@ -411,7 +411,7 @@ fn main() {
 > **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
 > **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]**
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ---

@@ -512,7 +512,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
 
@@ -559,7 +559,7 @@ fn make_closure_fixed() -> impl Fn() -> i32 {
 ```
 
 > **修正**: 默认闭包以引用捕获环境变量。若闭包的生命周期超过被捕获变量的生命周期（如返回闭包），必须使用 `move` 关键字转移所有权。
-> `move` 闭包将环境变量复制/移动到闭包自身中，脱离原作用域。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> `move` 闭包将环境变量复制/移动到闭包自身中，脱离原作用域。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)]
 
 ### 10.2 边界测试：`Fn` vs `FnMut` vs `FnOnce` 不匹配（编译错误）
 

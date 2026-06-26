@@ -19,7 +19,7 @@
 > **双维定位**: C×App — 在复杂场景下正确标注生命周期
 > **前置概念**: [Ownership](./01_ownership.md) · [Borrowing](./02_borrowing.md)
 > **后置概念**: [Advanced Generics](../02_intermediate/02_generics.md) · [Async/Await](../03_advanced/02_async.md) · [Pin](../03_advanced/02_async.md)
-> **主要来源**: [TRPL: Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) · [Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region_based_memory_management) · [Rust Reference: Lifetime elision](https://doc.rust-lang.org/reference/lifetime-elision.html)
+> **主要来源**: [TRPL: Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) · [Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region_based_memory_management) · [Rust Reference: Lifetime elision](https://doc.rust-lang.org/reference/lifetime-elision.html) · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch10-03-lifetime-syntax.html)
 
 ---
 
@@ -914,7 +914,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 的所有权转移（move）与借用是互斥的。若变量已被借用（无论是共享借用 `&T` 还是可变借用 `&mut T`），在借用释放前不能转移其所有权。这与 C++ 的移动语义不同——C++ 允许从被引用对象移动（可能导致悬垂引用），而 Rust 在编译期阻止这种危险模式。此外，Rust 禁止读取未初始化变量（uninitialized），`let x: i32;` 声明后若未赋值就使用，编译器报错。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: Rust 的所有权转移（move）与借用是互斥的。若变量已被借用（无论是共享借用 `&T` 还是可变借用 `&mut T`），在借用释放前不能转移其所有权。这与 C++ 的移动语义不同——C++ 允许从被引用对象移动（可能导致悬垂引用），而 Rust 在编译期阻止这种危险模式。此外，Rust 禁止读取未初始化变量（uninitialized），`let x: i32;` 声明后若未赋值就使用，编译器报错。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
 
 ---
 

@@ -89,7 +89,7 @@ Target Triple 格式: <arch><sub>-<vendor>-<sys>-<abi>
   │ sys      │ 操作系统: linux, darwin, windows, none      │
   │ abi      │ ABI: gnu, musl, eabi, eabihf, elf           │
   └──────────┴─────────────────────────────────────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
   特殊 target:
   ├── *-none-*: 裸机/无操作系统（嵌入式）
@@ -460,7 +460,7 @@ graph TD
 | [cross crate](https://github.com/cross-rs/cross) | ✅ 一级 | 交叉编译工具 |
 | [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html) | ✅ 一级 | 平台支持列表 |
 | [Cargo Book — Targets](https://doc.rust-lang.org/cargo/reference/config.html#target) | ✅ 一级 | Cargo 目标配置 |
-| [Rust Book](https://doc.rust-lang.org/book/) | ✅ 一级 | 官方教程 |
+| [Rust Book](https://doc.rust-lang.org/book/title-page.html) | ✅ 一级 | 官方教程 |
 
 ---
 
@@ -473,7 +473,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 
@@ -583,7 +583,7 @@ fn main() {
 }
 ```
 
-> **修正**: `cfg` 条件编译根据目标平台选择代码，但若所有条件都不满足，函数不存在，调用点编译错误。安全模式：添加默认实现或 `_` 通配：`#[cfg(not(any(target_os = "linux", target_os = "macos")))] fn platform_specific() -> &'static str { "other" }`。或使用 `cfg!` 宏在运行时检查：`if cfg!(target_os = "linux") { ... } else { ... }`。交叉编译时的常见陷阱：1) 开发在 Linux 上，忘记 Windows 路径；2) `target_family = "unix"` 和 `target_family = "windows"` 的互斥性；3) `target_arch` 的嵌套（`target_arch = "x86_64"` 下还有 `target_feature = "sse2"`）。这与 C 的 `#ifdef _WIN32`（预处理器，相同模式）或 Go 的 `//go:build`（构建约束，类似 `cfg`）类似——跨平台代码的 `cfg` 覆盖是质量保证的关键。[来源: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: `cfg` 条件编译根据目标平台选择代码，但若所有条件都不满足，函数不存在，调用点编译错误。安全模式：添加默认实现或 `_` 通配：`#[cfg(not(any(target_os = "linux", target_os = "macos")))] fn platform_specific() -> &'static str { "other" }`。或使用 `cfg!` 宏在运行时检查：`if cfg!(target_os = "linux") { ... } else { ... }`。交叉编译时的常见陷阱：1) 开发在 Linux 上，忘记 Windows 路径；2) `target_family = "unix"` 和 `target_family = "windows"` 的互斥性；3) `target_arch` 的嵌套（`target_arch = "x86_64"` 下还有 `target_feature = "sse2"`）。这与 C 的 `#ifdef _WIN32`（预处理器，相同模式）或 Go 的 `//go:build`（构建约束，类似 `cfg`）类似——跨平台代码的 `cfg` 覆盖是质量保证的关键。[来源: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 > **过渡**: 交叉编译：多目标平台支持与条件编译 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链

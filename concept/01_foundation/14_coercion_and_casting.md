@@ -500,7 +500,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
 
@@ -729,13 +729,13 @@ fn main() {}
 >
 > **权威来源**:
 > [Rust Reference](https://doc.rust-lang.org/reference/) ·
-> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
 > [Rust Standard Library](https://doc.rust-lang.org/std/) ·
 > [Rust RFCs](https://rust-lang.github.io/rfcs/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 > **权威来源**:
 > [Rust Reference](https://doc.rust-lang.org/reference/) ·
-> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
 > [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 

@@ -33,7 +33,7 @@
 > [RFC 2515 — Type Alias Impl Trait](https://github.com/rust-lang/rfcs/pull/2515) ·
 > [Rust Internals — 2027 Edition Wishlist](https://internals.rust-lang.org/) ·
 > [Rust Foundation Roadmap](https://foundation.rust-lang.org/) ·
-> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
 > [RFC 3516 — gen blocks](https://github.com/rust-lang/rfcs/pull/3516)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
@@ -724,7 +724,7 @@ graph TD
 | [RFC 3185 — Async Traits](https://github.com/rust-lang/rfcs/pull/3185) | ✅ 一级 | 异步 Trait |
 | [RFC 3516 — gen blocks](https://github.com/rust-lang/rfcs/pull/3516) | ✅ 一级 | 生成器语法 |
 | [Rust Foundation Roadmap](https://foundation.rust-lang.org/news/) | ✅ 一级 | 基金会战略 |
-| [The Rust Programming Language](https://doc.rust-lang.org/book/) | ✅ 一级 | 官方教程 |
+| [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) | ✅ 一级 | 官方教程 |
 | [Rust Internals Forum](https://internals.rust-lang.org/) | ⚠️ 二级 | 设计讨论 |
 | [Ferrocene Specification](https://ferrocene.dev/) | ✅ 一级 | 工业级 Rust 规范 |
 
@@ -771,7 +771,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 11]
 
 **文档版本**: 1.0
@@ -831,7 +831,7 @@ fn main() {
 >
 > `!` 的稳定化是 Rust 类型系统成熟度的重要里程碑——它使"不可恢复错误"在类型层面得到精确表达，而非使用占位类型（`std::convert::Infallible`）。
 > 这与 Haskell 的 `Void`（需显式 `absurd` 转换）或 TypeScript 的 `never`（类似语义，但无运行时对应）类似。
-> [来源: [Rust RFC 1216](https://rust-lang.github.io/rfcs//1216-bang-type.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [Rust RFC 1216](https://rust-lang.github.io/rfcs//1216-bang-type.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：GAT（泛型关联类型）的递归约束（编译错误）
 
@@ -862,7 +862,7 @@ impl Iterable for Vec<i32> {
 > GAT 的正确使用模式：标准库中的 `LendingIterator`（实验性）、自定义集合的借用视图、类型状态机（type-state machines）。
 > Rust 的 GAT 设计与 Haskell 的 type families、C++ 的模板模板参数类似，但集成在 trait system 中，保持零成本抽象。
 > [来源: [Rust RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.6 边界测试：`impl Trait` 在 `let` 绑定中的类型推断限制（编译错误）
 

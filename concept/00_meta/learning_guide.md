@@ -12,7 +12,7 @@
 > **方法论**：基于 Bloom 认知层级设计路径，每条路径标注预计阅读时间、前置依赖和 Checkpoint 自测题。
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 ## 📑 目录
@@ -157,7 +157,7 @@ graph TD
 
 ---
 
-> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** 不同背景的学习者有不同的概念迁移路径。
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)** 不同背景的学习者有不同的概念迁移路径。
 
 ## 二、按背景的详细起点指南
 
@@ -596,7 +596,7 @@ rustc 错误信息结构:
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1

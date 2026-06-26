@@ -109,7 +109,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 Rust 智能指针的**三维分类**——所有权（Ownership）（唯一/共享）、线程安全（单线程/多线程）、可变性（外部/内部）。每种智能指针对应特定的语义组合。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]
 > **使用建议**: 根据"是否需要共享"和"是否需要线程安全"两个维度快速定位合适的智能指针。
 > **关键洞察**: Rust 的智能指针不是 C++ 的"自动释放指针"——它们是**所有权的显式表达**，每种类型都对应一种特定的所有权语义。
 > [来源: [TRPL Ch15 — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]
@@ -550,7 +550,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: `Rc` 的强引用循环会导致内存泄漏（引用计数永不为零）。使用 `Weak<T>`（弱引用）打破循环——弱引用不阻止对象被释放。这是 Rust 显式内存管理的代价：编译器不检测循环引用，需开发者自行设计。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: `Rc` 的强引用循环会导致内存泄漏（引用计数永不为零）。使用 `Weak<T>`（弱引用）打破循环——弱引用不阻止对象被释放。这是 Rust 显式内存管理的代价：编译器不检测循环引用，需开发者自行设计。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]
 
 ### 4.5 边界测试：`Box::leak` 后尝试回收（编译错误）
 
@@ -596,7 +596,7 @@ fn fixed() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 
@@ -701,7 +701,7 @@ fn main() {
 
 > [来源: [Rustonomicon — Rc and Arc](https://doc.rust-lang.org/std/rc/struct.Rc.html)]
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 
 ## 嵌入式测验（Embedded Quiz）

@@ -1,0 +1,12 @@
+[package]
+name = "incremental_practice"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.96.0"
+description = "最小可运行示例：观测 rustc 增量编译的 dep-graph 与 Red-Green 复用"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+
+# 本示例为独立包，不属于根 workspace，避免与 workspace 的依赖解析冲突。
+[workspace]

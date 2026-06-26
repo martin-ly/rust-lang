@@ -132,7 +132,7 @@ AsyncDrop 的提案设计（Async Drop Initiative，简化版）:
   │  ├── async_drop(): 异步优雅关闭（需要 executor）         │
   │  └── drop(): 同步 fallback（内存不安全但必须完成）       │
   └─────────────────────────────────────────────────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
   编译器生成的销毁逻辑:
   1. 如果类型实现 AsyncDrop:
@@ -467,7 +467,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 

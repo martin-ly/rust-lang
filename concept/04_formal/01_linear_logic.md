@@ -931,7 +931,7 @@ Rust 所有权系统（仿射变体）:
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -986,7 +986,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: 线性逻辑的核心是**资源的一次性使用**。Rust 的默认语义是 move（对非 Copy 类型），即资源在传参时被消耗。这与传统命令式语言的"复制传参"（pass-by-value 复制）或"引用传参"（pass-by-reference）不同——Rust 的传参语义由类型的 `Copy`/`Clone` trait 决定。`String`、`Vec` 等堆分配类型默认 move，避免隐式深拷贝；`i32`、`bool` 等标量类型默认 copy，因为它们的大小固定且拷贝成本低。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: 线性逻辑的核心是**资源的一次性使用**。Rust 的默认语义是 move（对非 Copy 类型），即资源在传参时被消耗。这与传统命令式语言的"复制传参"（pass-by-value 复制）或"引用传参"（pass-by-reference）不同——Rust 的传参语义由类型的 `Copy`/`Clone` trait 决定。`String`、`Vec` 等堆分配类型默认 move，避免隐式深拷贝；`i32`、`bool` 等标量类型默认 copy，因为它们的大小固定且拷贝成本低。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：借用与所有权的分权（编译错误）
 

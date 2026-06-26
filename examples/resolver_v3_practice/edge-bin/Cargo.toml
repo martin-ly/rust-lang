@@ -1,0 +1,14 @@
+[package]
+name = "edge-bin"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.96"
+description = "模拟前沿组件：MSRV 1.96，复用 clap 4"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+legacy-lib = { path = "../legacy-lib" }
+modern-app = { path = "../modern-app" }
+
+# 本 crate 属于 examples/resolver_v3_practice workspace，不在此处声明 [workspace]。

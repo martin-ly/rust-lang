@@ -751,7 +751,7 @@ fn main() {}
 > [来源: [LLVM AtomicRMW](https://llvm.org/docs/LangRef.html#atomicrmw-instruction)]
 > [来源: [Lock-free Algorithms — Michael Scott](https://dl.acm.org/doi/10.1145/248052.248106)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) ·
-> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch16-00-concurrency.html) ·
 > [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 

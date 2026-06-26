@@ -7,7 +7,7 @@
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 >
 > **来源**:
-> [TRPL](https://doc.rust-lang.org/book/) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
 > [Rust Reference](https://doc.rust-lang.org/reference/)
 >
 ---

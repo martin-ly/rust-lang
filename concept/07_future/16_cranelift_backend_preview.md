@@ -128,7 +128,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 Cranelift 与 LLVM 的**互补定位**——Cranelift 负责快速 Debug 编译，LLVM 负责优化 Release 编译。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 开发迭代使用 Cranelift（`cargo build`）；CI/发布使用 LLVM（`cargo build --release`）。
 > **关键洞察**: Cranelift 的设计哲学是**"足够快，而非足够优"**——牺牲 10-20% 的运行时性能换取 2-5x 的编译速度提升。
 > [来源: [Cranelift Design Principles](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/ir.md)]
@@ -366,7 +366,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0+ (Edition 2024)
 

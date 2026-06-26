@@ -1,6 +1,6 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-06-26（P1 权威事实修正 + Rust 1.96 覆盖缺口回填 + workspace version 对齐 + C-class 长期维护规则落地）
+> **最后更新**: 2026-06-26（P1 权威事实修正 + Rust 1.96 覆盖缺口回填 + workspace version 对齐 + C-class 长期维护规则落地 + P2 深度内容冲刺完成）
 
 ---
 
@@ -29,6 +29,29 @@
 - **生态状态更新**：
   - Sea-ORM 2.0 stable 仍未发布（最新 `2.0.0-rc.41`），代码侧保持现状，文档侧标注“实验性/跟踪中”。
   - AFIDT / `dyn async Trait` 仍为实验性（tracking issue #133882），代码侧保留 `async_trait`。
+
+### P2 深度内容冲刺：rustc / Cargo / Kani / TRPL-Brown 对齐（2026-06-26）
+
+- **rustc 查询系统与增量编译实践**：
+  - 扩展 `concept/04_formal/19_rustc_query_system.md` §4，新增可运行实验、真实输出解读与 Red-Green 对比练习。
+  - 新建 `examples/incremental_practice/` 独立可运行示例，验证 `-Z incremental-info` 冷编译 / 无修改 / 修改后复用行为。
+  - 验证：`cargo test` 3 passed；`-Z incremental-info` 输出与文档一致。
+- **Cargo resolver v3 与 MSRV workspace 实践**：
+  - 修正 `concept/06_ecosystem/60_cargo_dependency_resolution.md` §7.2 解析策略描述，使用实际生效的 `incompatible-rust-versions` / `CARGO_RESOLVER_INCOMPATIBLE_RUST_VERSIONS`。
+  - 新增第九章可运行实践，演示 resolver v3 的 MSRV 感知行为与 `cargo tree --duplicates` 诊断。
+  - 新建 `examples/resolver_v3_practice/` 独立 workspace，成员 MSRV 分别为 1.70 / 1.84 / 1.96。
+  - 验证：`cargo check --workspace` 通过；`cargo update` 在 fallback 策略下选择 MSRV 兼容版本。
+- **Kani 独立概念页**：
+  - 新建 `concept/04_formal/32_kani.md`（327 行），系统介绍 Kani 有界模型检查器、安装、核心概念、可运行示例、项目内示例导航与常见限制。
+  - 在 `concept/04_formal/22_modern_verification_tools.md` 增加指向新页的交叉链接。
+- **TRPL 3rd Ed / Brown Book 链接对齐**：
+  - 扫描并修复 `concept/` 下 242 个 Markdown 文件中的泛化 TRPL 链接，替换为 TRPL 3rd Ed 具体章节链接。
+  - 对所有权/借用/生命周期/并发/异步相关 15 个文件补充 Brown University Interactive Book 链接。
+  - 生成完整报告 `reports/TRPL_GENERIC_LINK_FIX_2026_06_26.md`。
+  - 新增自动化脚本 `scripts/fix_generic_trpl_links.py`，支持后续批量修复。
+- **附加修复**：
+  - 修复 `docs/05_guides/05_async_programming_usage_guide.md` 中 1 处损坏的目录锚点链接。
+  - 运行 `scripts/check_links.py` 验证全仓库 Markdown 链接：`91816` 总链接，`0` 损坏。
 
 ### docs/ 目录 A/B/C 价值审计收尾（2026-06-25）
 

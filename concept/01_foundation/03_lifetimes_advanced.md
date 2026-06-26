@@ -12,7 +12,7 @@
 > **前置依赖**: [Lifetimes 基础](./03_lifetimes.md)
 > **定理链编号**: T-015 Polonius 流敏感安全 ⟹ T-016 Elision 完备性
 >
-> **来源**: [TRPL — Advanced Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) · [Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) · [Reference — Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html)
+> **来源**: [TRPL — Advanced Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) · [Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) · [Reference — Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html) · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch10-03-lifetime-syntax.html)
 ---
 
 从直觉到形式化的过渡需要六步递进的认知脚手架。
@@ -812,7 +812,7 @@ impl<'s> Iterator for Words<'s> {
 Lending Iterator 通过 GATs 将 `Item` 参数化为 `Item<'a>`，并用 `where Self: 'a` 确保**迭代器本身至少存活到返回引用的生命周期**，从而安全地表达自引用迭代。这是 GATs 解决表达力鸿沟的经典案例。
 
 > **[来源: [RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html) (GATs)]** `where Self: 'a` 约束确保关联类型不会引用比 `Self` 更短的生命周期，构成自引用集合的类型安全基础。✅
-> **来源: [Rust Reference](https://doc.rust-lang.org/reference/); [The Rust Programming Language](https://doc.rust-lang.org/book/); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/); [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
 > **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page); POPL/PLDI/ECOOP Papers; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)/Iris Project** 形式化概念参考了权威学术来源和类型论研究。✅
 
 ---
@@ -1141,7 +1141,7 @@ enum SafeValue {
 | **Variable shadowing** | [Variable shadowing](https://en.wikipedia.org/wiki/Variable_shadowing) | 变量遮蔽 |
 | **Non-lexical lifetimes** | [Non-lexical lifetimes](https://en.wikipedia.org/wiki/Rust_(programming_language)#Non-lexical_lifetimes) | 非词法生命周期 |
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1

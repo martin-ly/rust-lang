@@ -24,7 +24,7 @@
 > **来源**:
 > [ECMAScript Specification](https://tc39.es/ecma262/) ·
 > [MDN — JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) ·
-> [TRPL](https://doc.rust-lang.org/book/) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
 > [WASM Specification](https://webassembly.github.io/spec/) ·
 > [Rust and WASM](https://rustwasm.github.io/book/) ·
 > [V8 Blog](https://v8.dev/blog)
@@ -184,7 +184,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 Rust 和 JavaScript 的**内存模型差异**及 WASM 的**桥梁作用**。Rust 的确定性内存管理与 JS 的 GC 在 WASM 中通过线性内存交互。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **关键洞察**: WASM 是 Rust 和 JavaScript **共存的运行时**——Rust 编译为 WASM 模块，JS 通过 JS API 调用，两者共享线性内存。
 > [来源: [WASM Memory Model](https://webassembly.github.io/spec/core/syntax/modules.html#memories)]
 
@@ -486,7 +486,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [ECMAScript](https://tc39.es/ecma262/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [ECMAScript](https://tc39.es/ecma262/)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 
@@ -529,7 +529,7 @@ fn fixed() {
 }
 ```
 
-> **JavaScript 对比**: JavaScript 的隐式转换（coercion）允许 `"42" + 1 = "421"` 和 `"42" - 1 = 41`，导致大量意外行为。Rust 禁止所有隐式转换——字符串不能自动转为数字，数字不能自动转为字符串。`parse()` 返回 `Result`，强制处理解析失败。这与 TypeScript 的 `as number` 也不同——TypeScript 的类型断言在编译期检查，但运行期无保护；Rust 的 `parse()` 在运行期验证，返回 `Err` 而非静默失败。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **JavaScript 对比**: JavaScript 的隐式转换（coercion）允许 `"42" + 1 = "421"` 和 `"42" - 1 = 41`，导致大量意外行为。Rust 禁止所有隐式转换——字符串不能自动转为数字，数字不能自动转为字符串。`parse()` 返回 `Result`，强制处理解析失败。这与 TypeScript 的 `as number` 也不同——TypeScript 的类型断言在编译期检查，但运行期无保护；Rust 的 `parse()` 在运行期验证，返回 `Err` 而非静默失败。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：JavaScript 的闭包变量捕获与 Rust 的所有权（编译错误）
 
@@ -558,7 +558,7 @@ fn fixed() {
 }
 ```
 
-> **JavaScript 对比**: JavaScript 的闭包捕获变量引用，允许在闭包内外同时修改同一变量（`var count = 0; function inc() { count++; }`）。Rust 的闭包根据修改方式捕获环境：若修改变量，则以 `&mut` 捕获，外部不能再访问该变量直到闭包释放。`Cell<T>` 通过内部可变性绕过此限制——`&Cell` 允许修改内部值，因为 `Cell` 禁止获取内部引用。这是 Rust 所有权系统与闭包交互的精妙设计。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **JavaScript 对比**: JavaScript 的闭包捕获变量引用，允许在闭包内外同时修改同一变量（`var count = 0; function inc() { count++; }`）。Rust 的闭包根据修改方式捕获环境：若修改变量，则以 `&mut` 捕获，外部不能再访问该变量直到闭包释放。`Cell<T>` 通过内部可变性绕过此限制——`&Cell` 允许修改内部值，因为 `Cell` 禁止获取内部引用。这是 Rust 所有权系统与闭包交互的精妙设计。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：JavaScript 的 `this` 动态绑定与 Rust 的方法调用（编译错误）
 

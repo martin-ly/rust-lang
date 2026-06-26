@@ -134,7 +134,7 @@ Panic 的定义:
         是                         是
          │                           │
          └────→ Result ─────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)]
 
   经典对比:
   ├── String::from_utf8(vec) -> Result<String, FromUtf8Error>
@@ -500,7 +500,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
 

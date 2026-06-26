@@ -1400,7 +1400,7 @@ HashMap<K, V>:
 ├──────────────────────────────────────────────┤
 │  entries: [Entry<K, V>; N]  // 实际的键值对存储            │
 └──────────────────────────────────────────────┘
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]
 ```
 
 ```rust
@@ -1638,7 +1638,7 @@ Box<MaybeUninit<T>>.field → Box<MaybeUninit<FieldType>>
 | **Pointer (computer programming)** | [Pointer (computer programming)](https://en.wikipedia.org/wiki/Pointer_(computer_programming)) | 指针 |
 | **RAII** | [RAII](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization) | 资源获取即初始化 |
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1

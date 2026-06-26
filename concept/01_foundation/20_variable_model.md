@@ -356,7 +356,7 @@ fn reference_vs_pointer() {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) ·
-> [TRPL](https://doc.rust-lang.org/book/) ·
+> [TRPL](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html) ·
 > [Pierce TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
 > [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) ·
 > [SICP](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book.html)

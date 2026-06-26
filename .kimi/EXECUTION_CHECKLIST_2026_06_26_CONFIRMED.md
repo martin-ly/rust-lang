@@ -133,7 +133,51 @@
 - [ ] 最终回填 `CHANGELOG.md [3.1.0]` 实际条目。
 - [ ] 归档发布日清单到 `archive/project_reports/`。
 - [ ] 全 workspace 回归：`cargo check` / `cargo test` / `cargo clippy` / `cargo audit --no-fetch`。
-- [ ] 启动 P2 深度内容（编译器/Cargo、形式化工具、TRPL 3rd / Brown Book 对齐）。
+
+---
+
+## 工作流 D：P2 深度内容冲刺（2026-06-26 完成）
+
+本轮冲刺覆盖四个轨道，均已在 2026-06-26 完成并验证。
+
+### D1. rustc query system / 增量编译实践
+
+- [x] 扩展 `concept/04_formal/19_rustc_query_system.md` §4，新增可观测实验步骤与输出解读。
+- [x] 创建 `examples/incremental_practice/` 独立可运行示例，含 `math` / `greet` / `analyze` 三模块与单元测试。
+- [x] 验证：`cargo test` 3 passed；`-Z incremental-info` 冷编译 / 无修改 / 修改后输出与文档一致。
+
+### D2. Cargo resolver v3 / MSRV workspace 可运行示例
+
+- [x] 修正 §7.2 解析策略描述，使用实际生效的 `incompatible-rust-versions` / `CARGO_RESOLVER_INCOMPATIBLE_RUST_VERSIONS`。
+- [x] 新增 `concept/06_ecosystem/60_cargo_dependency_resolution.md` 第九章可运行实践。
+- [x] 创建 `examples/resolver_v3_practice/` 独立 workspace，演示混合 MSRV（1.70 / 1.84 / 1.96）与 resolver v3 fallback/allow 行为。
+- [x] 验证：`cargo check --workspace` 通过；`cargo tree --duplicates` 正确显示 `indexmap` 1.x / 2.x 重复。
+
+### D3. Kani 独立概念页
+
+- [x] 新建 `concept/04_formal/32_kani.md`（327 行），系统介绍 Kani 原理、核心概念、可运行示例、项目内示例导航与限制。
+- [x] 在 `concept/04_formal/22_modern_verification_tools.md` 增加指向新独立页的交叉链接。
+- [x] 风格对齐 `31_miri.md`，链接到 `crates/c01/c02/c08` 的 `kani_examples.rs`。
+
+### D4. TRPL / Brown Book 对齐剩余旧版链接修复
+
+- [x] 扫描 `concept/` 下 242 个 Markdown 文件，将泛化 `https://doc.rust-lang.org/book/` 链接替换为 TRPL 3rd Ed 具体章节。
+- [x] 对所有权/借用/生命周期/并发/异步相关 15 个文件补充 Brown University Interactive Book 章节链接。
+- [x] 生成完整报告 `reports/TRPL_GENERIC_LINK_FIX_2026_06_26.md`。
+- [x] 验证：`grep -R "doc.rust-lang.org/book/)" concept/` 无剩余泛化链接。
+
+### D5. 交付物汇总
+
+| 交付物 | 路径 | 状态 |
+|:---|:---|:---:|
+| rustc query system 实践章节 | `concept/04_formal/19_rustc_query_system.md` | ✅ |
+| 增量编译示例 | `examples/incremental_practice/` | ✅ |
+| Cargo resolver v3 实践章节 | `concept/06_ecosystem/60_cargo_dependency_resolution.md` | ✅ |
+| MSRV workspace 示例 | `examples/resolver_v3_practice/` | ✅ |
+| Kani 独立概念页 | `concept/04_formal/32_kani.md` | ✅ |
+| Kani 交叉链接 | `concept/04_formal/22_modern_verification_tools.md` | ✅ |
+| TRPL/Brown 链接修复报告 | `reports/TRPL_GENERIC_LINK_FIX_2026_06_26.md` | ✅ |
+| 自动化脚本 | `scripts/fix_generic_trpl_links.py` | ✅ |
 
 ---
 

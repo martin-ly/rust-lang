@@ -595,7 +595,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: 组合子模式（Combinator Pattern）通过小函数组合构建复杂行为。Rust 的所有权系统要求组合链中的每个中间结果必须正确传递或释放。部分 move（如 `w.0` 被 move 但 `w` 仍被视为整体）会导致编译错误。解构（`let Wrapper(inner) = w`）是安全的替代方案，它明确声明"消耗整个结构体，提取其字段"。这与 Haskell 的无限惰性组合链不同——Rust 的组合是严格的、所有权感知的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: 组合子模式（Combinator Pattern）通过小函数组合构建复杂行为。Rust 的所有权系统要求组合链中的每个中间结果必须正确传递或释放。部分 move（如 `w.0` 被 move 但 `w` 仍被视为整体）会导致编译错误。解构（`let Wrapper(inner) = w`）是安全的替代方案，它明确声明"消耗整个结构体，提取其字段"。这与 Haskell 的无限惰性组合链不同——Rust 的组合是严格的、所有权感知的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：组合子嵌套过深导致的类型爆炸（编译错误/编译超时）
 
@@ -634,7 +634,7 @@ fn option_j(_: i32) -> Option<i32> { Some(10) }
 
 > [来源: [GoF — Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)]
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 > [来源: [Wikipedia — Category Theory](https://en.wikipedia.org/wiki/Category_theory)]
 > [来源: [Wikipedia — Monad](https://en.wikipedia.org/wiki/Monad_(functional_programming))]
 > [来源: [Wikipedia — Functor](https://en.wikipedia.org/wiki/Functor)]

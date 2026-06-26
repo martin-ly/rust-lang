@@ -101,7 +101,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 rustdoc 的**工作流**——它不仅是文档渲染器，还是**文档测试运行器**。这是 Rust 文档生态区别于其他语言的关键特性。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 将 rustdoc 视为 CI 的一部分——`cargo test --doc` 应在每次提交时运行。
 > **关键洞察**: rustdoc 与**编译器共享 AST**——它直接读取编译器的解析结果，确保文档与代码始终同步。
 > [来源: [rustdoc Documentation](https://doc.rust-lang.org/rustdoc/)]
@@ -490,7 +490,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 

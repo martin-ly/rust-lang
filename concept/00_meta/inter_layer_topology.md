@@ -11,7 +11,7 @@
 > **符号约定**: `⟹` 蕴含 / `←` 依赖 / `≡` 同构 / `⊘` 互斥 / `↔` 双向映射
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **Bloom 层级**: 元（Meta）
@@ -164,7 +164,7 @@ graph TD
 ```
 
 > **认知功能**: 本图提供 Rust 知识体系的**全局导航地图**，将八层架构的纵向依赖与横向同构关系可视化。**使用建议**: 在学习新层级前，先定位当前所在层，沿箭头追溯前置依赖，避免知识断层。**关键洞察**: L1-L3 是形式化根基的「现象层」，L4 是它们的「理论层」——每根虚线同构边都是一座从工程直觉通往数学证明的桥。[来源: 💡 原创分析]
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
 ---
 

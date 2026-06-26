@@ -522,7 +522,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-00-functional-features.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
 
@@ -676,7 +676,7 @@ fn main() {
 }
 ```
 
-> **修正**: `chunks_exact(n)` 返回大小严格为 `n` 的块，可能剩余少于 `n` 的元素。迭代 `ChunksExact` 后，需调用 `remainder()` 获取剩余元素——遗漏是常见 bug。替代方法：`chunks(n)` 返回大小至多为 `n` 的块（最后块可能更小），无需单独处理剩余。选择取决于场景：1) 需要固定大小块（如 SIMD 处理）→ `chunks_exact` + `remainder`；2) 可接受变长块 → `chunks`。这与 Python 的 `iterools.grouper`（填充或截断）或 NumPy 的 `array_split`（自动处理剩余）类似——Rust 提供两种语义，让开发者根据需求选择。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.slice.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: `chunks_exact(n)` 返回大小严格为 `n` 的块，可能剩余少于 `n` 的元素。迭代 `ChunksExact` 后，需调用 `remainder()` 获取剩余元素——遗漏是常见 bug。替代方法：`chunks(n)` 返回大小至多为 `n` 的块（最后块可能更小），无需单独处理剩余。选择取决于场景：1) 需要固定大小块（如 SIMD 处理）→ `chunks_exact` + `remainder`；2) 可接受变长块 → `chunks`。这与 Python 的 `iterools.grouper`（填充或截断）或 NumPy 的 `array_split`（自动处理剩余）类似——Rust 提供两种语义，让开发者根据需求选择。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.slice.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-00-functional-features.html)]
 
 ### 10.2 边界测试：`flat_map` 与嵌套迭代器的类型匹配（编译错误）
 
@@ -688,7 +688,7 @@ fn main() {
 }
 ```
 
-> **修正**: `flat_map` 要求闭包返回一个**迭代器（Iterator）**，然后将所有迭代器扁平化为一个。`data.iter()` 产生 `&Vec<i32>`，`v.iter()` 产生 `&i32`。`flat_map(|v| v.iter())` 返回 `Iter<&i32>`，collect 后为 `Vec<&i32>` 而非 `Vec<i32>`。修复：1) `data.into_iter().flat_map(|v| v.into_iter()).collect()`（移动所有权）；2) `data.iter().flat_map(|v| v.iter().copied()).collect()`（复制值）。`flat_map` 是 monadic `bind` 在迭代器上的实现：`Iter<Item=Iter<Item=T>>` → `Iter<Item=T>`。这与 Haskell 的 `concatMap` 或 Python 的 `itertools.chain.from_iterable` 类似——Rust 的类型系统要求迭代器元素类型精确匹配。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: `flat_map` 要求闭包返回一个**迭代器（Iterator）**，然后将所有迭代器扁平化为一个。`data.iter()` 产生 `&Vec<i32>`，`v.iter()` 产生 `&i32`。`flat_map(|v| v.iter())` 返回 `Iter<&i32>`，collect 后为 `Vec<&i32>` 而非 `Vec<i32>`。修复：1) `data.into_iter().flat_map(|v| v.into_iter()).collect()`（移动所有权）；2) `data.iter().flat_map(|v| v.iter().copied()).collect()`（复制值）。`flat_map` 是 monadic `bind` 在迭代器上的实现：`Iter<Item=Iter<Item=T>>` → `Iter<Item=T>`。这与 Haskell 的 `concatMap` 或 Python 的 `itertools.chain.from_iterable` 类似——Rust 的类型系统要求迭代器元素类型精确匹配。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-00-functional-features.html)]
 
 ### 10.9 边界测试：const fn 中的非编译期操作
 

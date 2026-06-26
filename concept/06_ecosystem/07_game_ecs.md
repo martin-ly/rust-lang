@@ -853,7 +853,7 @@ graph LR
 ```
 
 > **认知功能**: 此图追踪了渲染所有权从 World 到 GPU Queue 的完整转移链条——Extract 跨线程移动，Prepare 可变借用，Render 消费生成 CommandBuffer，Submit 最终转移所有权。建议在自定义 RenderNode 时严格遵循这一单向流动，避免在节点间保留对已消费资源的引用。关键洞察：wgpu 的 API 设计本质上是线性类型理论的工程实现，每一次所有权转移都对应一次形式化的资源消耗。[来源: 💡 原创分析]
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
 | 阶段 | 所有权操作 | Rust 保证 |
 |:---|:---|:---|
@@ -1174,7 +1174,7 @@ struct ChildOf {
 > **[来源: Rust Concurrency Book; Rayon Docs; Rust Book Ch.16]** 并发渲染分析基于 Rust 并发安全的核心文献。✅
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1

@@ -738,7 +738,7 @@ fn correct_fix(s: &str) -> String {
 > **权威来源**:
 >
 > [Rust Reference](https://doc.rust-lang.org/reference/) ·
-> [TRPL](https://doc.rust-lang.org/book/) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
 > [PLDI 2024/2025 Compiler-Guided Code Generation] ·
 > [RustRepair-RL, ETH Zurich, 2024]
@@ -923,7 +923,7 @@ fn main() {
 > 4) 不依赖 AI 生成 unsafe 代码。这与人类初学者的错误模式类似——Rust 的所有权系统是独特的，需要专门学习，AI 也无法从其他语言的训练中自动掌握。
 >
 > [来源: [GitHub Copilot](https://github.com/features/copilot)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 > **过渡**: AI × Rust：生成-验证闭环与确定性容器 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链

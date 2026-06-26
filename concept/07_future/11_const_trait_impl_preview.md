@@ -127,7 +127,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 `const impl` 解决的核心问题——通过 `~const` 限定和 `const impl` 标记，将 Trait 方法调用引入常量上下文。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 对于需要在 `const fn` 中使用的 Trait，使用 `const impl` 实现；对于仅运行时使用的 Trait，保持普通 impl。
 > **关键洞察**: `const impl` 不是简单的语法扩展，而是 Rust **效果系统**（Effect System）的雏形——`const` 是一种**效果**（effect），表示"无副作用、可编译期执行"。
 > [来源: [Rust [RFC 2632](https://github.com/rust-lang/rfcs/pull/2632) — Motivation](https://github.com/rust-lang/rfcs/pull/2632)]
@@ -353,7 +353,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0+ (Edition 2024)
 
 **文档版本**: 1.0
@@ -404,7 +404,7 @@ fn main() {
 > 例如 `const impl Add for Point` 允许 `const SUM: Point = A + B;`。
 > 这是 Rust"编译期计算"能力的关键扩展，使自定义类型在 const 上下文中的表现力接近内置类型。
 > [来源: [Rust RFC 2632](https://github.com/rust-lang/rust/issues/67792)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：trait bound 的 const 兼容性（编译错误）
 

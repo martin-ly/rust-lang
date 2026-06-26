@@ -141,7 +141,7 @@ unsafe {
 │ 别名规则        │ 编译期强制      │ 开发者负责      │
 │ 多别名          │ &mut 禁止       │ 允许            │
 └─────────────────┴─────────────────┴─────────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html)]
 
 // 原始指针的算术:
 let arr = [1, 2, 3, 4, 5];
@@ -535,7 +535,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
 
@@ -825,7 +825,7 @@ fn main() {}
 > 3) 编译期限制逐步放宽（`const_mut_refs`、`const_vec_string` 等）。
 >
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) ·
-> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html) ·
 > [Rust Standard Library](https://doc.rust-lang.org/std/) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

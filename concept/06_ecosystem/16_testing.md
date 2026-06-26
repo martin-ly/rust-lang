@@ -139,7 +139,7 @@ mod tests {
 ```
 
 > **认知功能**: Rust 的测试框架是**语言内置**的——不需要外部依赖即可写测试。这与 JavaScript（需要 Jest/Mocha）或 Java（需要 JUnit）形成对比。
-> [来源: [TRPL — Testing](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)]
 > **关键洞察**: `#[cfg(test)]` 条件编译使测试代码在生产构建中**完全消除**——零运行时开销。
 > [来源: [TRPL Ch11 — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)]
 
@@ -509,7 +509,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-00-testing.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 
@@ -554,7 +554,7 @@ fn broken_test() {
 > CI 系统需要区分"编译失败"（代码错误）和"测试失败"（逻辑错误）。
 > Rust 的测试框架在编译期检查测试代码的类型安全，确保测试本身无 bug。
 > 这与 Python 的动态测试（测试代码错误在运行时发现）或 Java 的反射测试（运行时方法查找）不同——Rust 的测试在编译期就验证完整性。
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-00-testing.html)]
 
 ### 10.2 边界测试：mock 对象的 trait 约束（编译错误）
 

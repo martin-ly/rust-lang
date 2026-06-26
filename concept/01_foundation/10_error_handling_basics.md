@@ -93,7 +93,7 @@ Result<T, E>:
   │ 控制流          │ 非局部跳转       │ 显式传播        │
   │ 文档化          │ 差               │ 类型即文档      │
   └─────────────────┴─────────────────┴─────────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/ch09-00-error-handling.html)]
 
   代码示例:
 
@@ -648,7 +648,7 @@ fn main() {
 }
 ```
 
-> **修正**: `unwrap()` 是"快速失败"策略，仅在确定值为 `Ok` 时使用。生产代码应使用 `match`、`if let` 或 `?` 运算符传播错误。`unwrap()` 在测试代码和原型开发中常见，但不应出现在健壮的生产代码中。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: `unwrap()` 是"快速失败"策略，仅在确定值为 `Ok` 时使用。生产代码应使用 `match`、`if let` 或 `?` 运算符传播错误。`unwrap()` 在测试代码和原型开发中常见，但不应出现在健壮的生产代码中。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-00-error-handling.html)]
 
 ### 12.2 边界测试：`?` 在返回 `()` 的函数中使用（编译错误）
 
@@ -778,13 +778,13 @@ fn main() {}
 > **权威来源**:
 >
 > [Rust Reference](https://doc.rust-lang.org/reference/) ·
-> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
 > [Rust Standard Library](https://doc.rust-lang.org/std/) ·
 > [Rust RFCs](https://rust-lang.github.io/rfcs/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 > **权威来源**:
 > [Rust Reference](https://doc.rust-lang.org/reference/) ·
-> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
 > [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 

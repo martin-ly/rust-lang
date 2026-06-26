@@ -1349,7 +1349,7 @@ fn main() {
 
 > [来源: [Tokio Internals](https://tokio.rs/tokio/topics/runtime)]
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 
 ## 认知路径
@@ -1687,4 +1687,4 @@ async fn traverse_dir(path: &Path) -> Vec<String> {
 
 ---
 
-> **测验设计来源**: [Bloom Taxonomy 2001] · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Async Book](https://rust-lang.github.io/async-book/) · [Brown University Interactive TRPL](https://rust-book.cs.brown.edu/)
+> **测验设计来源**: [Bloom Taxonomy 2001] · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Async Book](https://rust-lang.github.io/async-book/) · [Brown University Interactive TRPL](https://rust-book.cs.brown.edu/ch17-00-async-await.html)

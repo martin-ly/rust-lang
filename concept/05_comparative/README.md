@@ -10,7 +10,7 @@
 > **来源: [Wikipedia - Programming Language Comparison](https://en.wikipedia.org/wiki/Programming_Language_Comparison)** · **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)** · **[来源: PLDI 2023 - Comparative Language Studies]** · **[来源: IEEE Software - Rust Adoption Analysis]**
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 ---
 
 ## 〇、L5 认知入口
@@ -214,7 +214,7 @@ L5 的综合分析输出到：
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 > **内容分级**: [综述级]
@@ -229,7 +229,7 @@ L5 的综合分析输出到：
 ## 参考来源
 
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 > [来源: [Wikipedia — Programming Language Comparison](https://en.wikipedia.org/wiki/Comparison_of_programming_languages)]
 > [来源: [Wikipedia — Memory Safety](https://en.wikipedia.org/wiki/Memory_safety)]

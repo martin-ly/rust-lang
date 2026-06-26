@@ -8,12 +8,12 @@
 >
 > **EN**: Authority Source Index
 > **Summary**: Index of authoritative sources used throughout the concept knowledge system.
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/) · [RFCs](https://rust-lang.github.io/rfcs/)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/) · [RFCs](https://rust-lang.github.io/rfcs/)
 >
 > | 标识符 | 全称 | 根 URL | 更新频率 | 建议引用格式 |
 > | :--- | :--- | :--- | :--- | :--- |
 > | `REF` | Rust Reference | <https://doc.rust-lang.org/reference/> | 与 stable 同步 | `[来源: REF — §章节]` |
-> | `TRPL` | The Rust Programming Language | <https://doc.rust-lang.org/book/> | 每 Edition 更新 | `来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)` |
+> | `TRPL` | The Rust Programming Language | <https://doc.rust-lang.org/book/title-page.html> | 每 Edition 更新 | `来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)` |
 > | `NOM` |
 >
 > **定位**: 本项目所有 `[来源: ...]` 标注的**单一真相源（Single Source of Truth）**。
@@ -27,7 +27,7 @@
 | 标识符 | 全称 | 根 URL | 更新频率 | 建议引用格式 |
 | :--- | :--- | :--- | :--- | :--- |
 | `REF` | Rust Reference | <https://doc.rust-lang.org/reference/> | 与 stable 同步 | `[来源: REF — §章节]` |
-| `TRPL` | The Rust Programming Language | <https://doc.rust-lang.org/book/> | 每 Edition 更新 | `来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)` |
+| `TRPL` | The Rust Programming Language | <https://doc.rust-lang.org/book/title-page.html> | 每 Edition 更新 | `来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)` |
 | `NOM` | The Rustonomicon | <https://doc.rust-lang.org/nomicon/> | 持续维护 | `[来源: NOM — 章节名]` |
 | `RBE` | Rust by Example | <https://doc.rust-lang.org/rust-by-example/> | 与 stable 同步 | `[来源: RBE — 示例名]` |
 | `RFC` | Rust RFCs | <https://rust-lang.github.io/rfcs/> | 持续活跃 | `[来源: RFC XXXX]` |
@@ -127,7 +127,7 @@
 
 ### 推荐行为
 
-1. ✅ **精确到章节**: `[来源: REF — §4.1.9 Borrowing]` 或 `来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)`
+1. ✅ **精确到章节**: `[来源: REF — §4.1.9 Borrowing]` 或 `来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)`
 2. ✅ **标注来源状态**: 对 nightly/unstable 特性标注 `[来源: UNB — gen_blocks] (nightly, 1.95+)`
 3. ✅ **区分原创与引用**: `[来源: 💡 原创分析]` 仅用于有实质原创洞见的段落
 4. ✅ **论文引用完整**: `[来源: Jung21 — Stacked Borrows, POPL 2021, §3.2]`

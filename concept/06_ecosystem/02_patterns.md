@@ -10,7 +10,7 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×App — 应用设计模式解决类型安全问题
 > **前置概念**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type System](../01_foundation/04_type_system.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
-> **主要来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **主要来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [TRPL — Patterns](https://doc.rust-lang.org/book/ch18-00-patterns.html) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
@@ -40,7 +40,7 @@
 > **来源**: <https://en.wikipedia.org/wiki/Typestate_analysis>
 
 > **认知路径（6步递进）**
-[来源: [TRPL](https://doc.rust-lang.org/book/)]
+[来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 >
 > 1. **为什么需要设计模式？** → 复用经过验证的方案，降低认知负荷与沟通成本
 > 2. **GoF模式在Rust中怎么用？** → 以Trait替代继承，以enum+match替代多态类层次
@@ -191,7 +191,7 @@ impl Invoker {
 
 ### 4.2 Visitor 模式
 
-[来源: [TRPL](https://doc.rust-lang.org/book/)]
+[来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
 **定义**：表示一个作用于某对象结构中各元素的操作，使你可以在不改变各元素类的前提下定义作用于这些元素的新操作。
 
@@ -341,7 +341,7 @@ impl<S: PaymentStrategy> ShoppingCart<S> {
 - **Java**: 接口 + 多态；无静态分发零成本特性，所有策略均为动态。
 - **Go**: 接口值隐式实现；Rust trait 需显式实现，静态分发默认内联。
 
-> **来源**: [GoF Design Patterns] · [The Rust Programming Language](https://doc.rust-lang.org/book/) · 可信度: ✅
+> **来源**: [GoF Design Patterns] · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · 可信度: ✅
 
 ### 4.4 State Machine 模式
 
@@ -416,7 +416,7 @@ impl Connection<Open> {
 - **Rust**: `match` 穷尽性检查强制处理所有状态；Typestate 变体将非法转换上移至编译期。
 - **TypeScript**: 可用 discriminated union 模拟，但运行期仍可能处于无效状态。
 
-> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · 可信度: ✅
+> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · 可信度: ✅
 
 ### 4.5 Plugin 模式
 >
@@ -562,7 +562,7 @@ impl TemperatureDisplay {
 
 **关键洞察**：`Weak<T>` 不增加引用计数，当 Subject 被释放时，`upgrade()` 返回 `None`，Observer 自动失效。这避免了 `Rc`/`Arc` 循环引用导致的内存泄漏。来源: [TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
-> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** `Rc::downgrade` 产生 `Weak<T>`，允许引用而不拥有所有权，是打破循环引用的标准手段。✅
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)** `Rc::downgrade` 产生 `Weak<T>`，允许引用而不拥有所有权，是打破循环引用的标准手段。✅
 
 ---
 
@@ -930,7 +930,7 @@ struct ParseError {
 }
 
 // snafu：上下文敏感
-use snafu::{Snafu, ResultExt, ensure}; [来源: [TRPL](https://doc.rust-lang.org/book/)]
+use snafu::{Snafu, ResultExt, ensure}; [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
 # [derive(Debug, Snafu)]
 
@@ -1386,7 +1386,7 @@ fn main() {
 ```
 
 > **关键洞察**: Typestate 模式利用泛型将运行时状态检查转化为编译期类型约束；Builder 模式利用所有权转移保证构造过程的原子性。两者都是 Rust 类型系统的**零成本抽象**——编译后无运行时开销。
-[来源: [TRPL](https://doc.rust-lang.org/book/)]
+[来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
 ---
 
@@ -1425,13 +1425,13 @@ fn main() {
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
-| RAII 是 Rust 核心模式 | [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Wikipedia: RAII](https://en.wikipedia.org/wiki/RAII) | ✅ |
+| RAII 是 Rust 核心模式 | [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Wikipedia: RAII](https://en.wikipedia.org/wiki/RAII) | ✅ |
 | Typestate 利用类型系统 | [Rust Design Patterns] · [Aldrich et al. 2009] | ✅ |
-| Newtype 零成本 | [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ |
+| Newtype 零成本 | [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ |
 | Command/Visitor/Strategy 为 GoF 经典模式 | [GoF Design Patterns, 1994] | ✅ |
 | Stringly typed 为反模式 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | ✅ |
 | Over-engineering 定义与检测 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns — Gold Plating] | ✅ |
-| Premature abstraction 与三次法则 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) | ✅ |
+| Premature abstraction 与三次法则 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) | ✅ |
 | God Object 违反单一职责 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | ✅ |
 | Spaghetti Code 形式化定义 | [Wikipedia — Spaghetti code](https://en.wikipedia.org/wiki/Spaghetti_code) | ✅ |
 | 设计模式定义 | [Wikipedia: Design pattern](https://en.wikipedia.org/wiki/Design_pattern) | ✅ |
@@ -1443,7 +1443,7 @@ fn main() {
 | 设计模式系统化 | [Gamma et al. 1994 — Design Patterns: Elements of Reusable Object-Oriented Software] | ✅ |
 | Typestate 工业实现 | [Aldrich et al. 2009 — Typestates for Objects, ECOOP] | ✅ |
 | Observer 模式定义 | [GoF Design Patterns, 1994] | ✅ |
-| Weak 打破循环引用 | [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | ✅ |
+| Weak 打破循环引用 | [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | ✅ |
 
 ---
 
@@ -1521,7 +1521,7 @@ fn main() {
 > **来源: [RFC 1598 GATs; RFC 1210 Specialization; Rust Reference: Generics](https://github.com/rust-lang/rfcs/pull/1598)** 高级模式的技术细节有 RFC 支撑。✅
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -1692,7 +1692,7 @@ fn main() {
 }
 ```
 
-> **修正**: Builder 模式的**链式调用**在 Rust 中需处理所有权：`fn name(mut self, ...)` 消耗 `self` 并返回新的 `Self`，旧的 `self` 不可用。修复：1) `fn name(&mut self, ...)` — 借用，支持链式但不返回 `Self`（需分开调用：`builder.name(...); builder.age(...);`）；2) `fn name(mut self, ...) -> Self` — 消耗式，但要求一次性链式调用：`Builder::new().name(...).age(...).build()`；3) `fn name(self, ...) -> Self` — 无 `mut`，在函数内重新绑定。Rust 的 builder 模式通常采用**消耗式**（`mut self`），因为构建完成后 builder 不再需要。这与 Java 的 builder（总是返回 `this`，无所有权问题）或 Python 的 builder（同样无所有权）不同——Rust 的 builder 需显式处理移动语义。[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/print.html#builder)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: Builder 模式的**链式调用**在 Rust 中需处理所有权：`fn name(mut self, ...)` 消耗 `self` 并返回新的 `Self`，旧的 `self` 不可用。修复：1) `fn name(&mut self, ...)` — 借用，支持链式但不返回 `Self`（需分开调用：`builder.name(...); builder.age(...);`）；2) `fn name(mut self, ...) -> Self` — 消耗式，但要求一次性链式调用：`Builder::new().name(...).age(...).build()`；3) `fn name(self, ...) -> Self` — 无 `mut`，在函数内重新绑定。Rust 的 builder 模式通常采用**消耗式**（`mut self`），因为构建完成后 builder 不再需要。这与 Java 的 builder（总是返回 `this`，无所有权问题）或 Python 的 builder（同样无所有权）不同——Rust 的 builder 需显式处理移动语义。[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/print.html#builder)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ## 嵌入式测验（Embedded Quiz）
 

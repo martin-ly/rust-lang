@@ -655,7 +655,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
 
@@ -806,7 +806,7 @@ fn main() {}
 > [来源: [Async Fn In Traits](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)] ·
 > [来源: [RPITIT](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) ·
-> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html) ·
 > [Rust Standard Library](https://doc.rust-lang.org/std/) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
@@ -1140,4 +1140,4 @@ async fn write_with_timeout(file: &mut File, data: &[u8]) -> std::io::Result<()>
 
 ---
 
-> **测验设计来源**: [Bloom Taxonomy 2001] · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Tokio Docs](https://tokio.rs/) · [Brown University Interactive TRPL](https://rust-book.cs.brown.edu/)
+> **测验设计来源**: [Bloom Taxonomy 2001] · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Tokio Docs](https://tokio.rs/) · [Brown University Interactive TRPL](https://rust-book.cs.brown.edu/ch17-00-async-await.html)

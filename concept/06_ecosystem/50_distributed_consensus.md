@@ -736,7 +736,7 @@ async fn query_tendermint_consensus() -> anyhow::Result<()> {
 - [性能优化](./15_performance_optimization.md) — 批处理、流水线、零拷贝
 - [安全与密码学](./43_security_cryptography.md) — 数字签名、阈值密码学
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 > **过渡**: Distributed Consensus（分布式共识） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Distributed Consensus（分布式共识） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

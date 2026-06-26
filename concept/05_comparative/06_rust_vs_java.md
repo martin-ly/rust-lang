@@ -89,7 +89,7 @@ graph LR
 ```
 
 > **认知功能**: 此图对比 Rust 与 Java 的**内存管理债务转移**——Rust 将复杂性前移到编译期，Java 将其后移到运行时。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 延迟敏感场景（实时系统、高频交易、游戏引擎）选 Rust；快速迭代、延迟不敏感场景选 Java。
 > **关键洞察**: GC 的"开发者无负担"是一种**假象**——GC 调优（堆大小、GC 算法、暂停时间）在大型 Java 应用中同样复杂，只是复杂性从"写代码"转移到"运维调优"。
 > [来源: [TRPL — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)] · [Java GC Tuning Guide](https://docs.oracle.com/en/java/javase/21/gctuning/)
@@ -365,7 +365,7 @@ Java → Rust 的渐进迁移策略:
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0+ (Edition 2024)
 
@@ -416,7 +416,7 @@ fn fixed() {
 }
 ```
 
-> **Java 对比**: Java 的泛型通过**类型擦除**（type erasure）实现——编译后 `List<Integer>` 和 `List<String>` 都是 `List<Object>`，运行时无类型信息。Rust 通过**单态化**（monomorphization）实现泛型——为每个具体类型生成独立代码，`generic_id<i32>` 和 `generic_id<f64>` 是完全不同的函数。Java 的擦除允许运行时类型统一（`List<?>`），但无法获取泛型参数；Rust 的单态化提供零成本抽象，但不同类型不能共存于同质集合（需用 `enum` 或 `Box<dyn Trait>`）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **Java 对比**: Java 的泛型通过**类型擦除**（type erasure）实现——编译后 `List<Integer>` 和 `List<String>` 都是 `List<Object>`，运行时无类型信息。Rust 通过**单态化**（monomorphization）实现泛型——为每个具体类型生成独立代码，`generic_id<i32>` 和 `generic_id<f64>` 是完全不同的函数。Java 的擦除允许运行时类型统一（`List<?>`），但无法获取泛型参数；Rust 的单态化提供零成本抽象，但不同类型不能共存于同质集合（需用 `enum` 或 `Box<dyn Trait>`）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：Java 的 null 与 Rust 的 `Option`（编译错误）
 
@@ -436,7 +436,7 @@ fn fixed() {
 }
 ```
 
-> **Java 对比**: Java 的引用类型默认可为 `null`——`String s = null;` 编译通过，但运行时 `s.length()` 抛出 `NullPointerException`。Rust 的 `Option<T>` 将可空性编码到类型中，`Some` 和 `None` 是两个不同的变体，`match` 强制处理两者。这与 Java 8+ 的 `Optional<T>` 类似，但 Rust 的 `Option` 是语言核心（零开销），而 Java 的 `Optional` 是库类（有对象包装开销）。Rust 消除了十亿美元错误（billion-dollar mistake）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **Java 对比**: Java 的引用类型默认可为 `null`——`String s = null;` 编译通过，但运行时 `s.length()` 抛出 `NullPointerException`。Rust 的 `Option<T>` 将可空性编码到类型中，`Some` 和 `None` 是两个不同的变体，`match` 强制处理两者。这与 Java 8+ 的 `Optional<T>` 类似，但 Rust 的 `Option` 是语言核心（零开销），而 Java 的 `Optional` 是库类（有对象包装开销）。Rust 消除了十亿美元错误（billion-dollar mistake）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：Java 的泛型擦除与 Rust 的单态化（编译错误）
 

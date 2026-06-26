@@ -496,7 +496,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-00-packages-crates-and-modules.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
 
@@ -552,7 +552,7 @@ mod inner_fixed {
 }
 ```
 
-> **修正**: Rust 的可见性默认是私有的（`private`）。结构体字段、模块项、trait 方法等除非标记 `pub`，否则只能在定义模块内访问。这与 C++ 的 `public`/`private` 类似，但 Rust 默认私有，需显式公开。公共 API 设计应通过方法暴露数据，而非直接公开字段。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: Rust 的可见性默认是私有的（`private`）。结构体字段、模块项、trait 方法等除非标记 `pub`，否则只能在定义模块内访问。这与 C++ 的 `public`/`private` 类似，但 Rust 默认私有，需显式公开。公共 API 设计应通过方法暴露数据，而非直接公开字段。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-00-packages-crates-and-modules.html)]
 
 ### 10.2 边界测试：`use` 路径循环依赖（编译错误）
 
@@ -704,7 +704,7 @@ fn main() {
 > [来源: [Rust Reference — Use Declarations](https://doc.rust-lang.org/reference/items/use-declarations.html)]
 > **权威来源**:
 > [Rust Reference](https://doc.rust-lang.org/reference/) ·
-> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-00-packages-crates-and-modules.html) ·
 > [Rust Standard Library](https://doc.rust-lang.org/std/) ·
 > [Rust RFCs](https://rust-lang.github.io/rfcs/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

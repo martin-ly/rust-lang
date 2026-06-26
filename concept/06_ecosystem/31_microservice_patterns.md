@@ -755,7 +755,7 @@ Rust 微服务并非银弹:
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建微服务架构模式概念文件 [来源: Authority Source Sprint Batch 9]
 
@@ -819,7 +819,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: 微服务中的配置对象通常需要在多个服务间共享。使用引用（`&Config`）会引入生命周期约束，要求配置对象比所有服务更长寿。`Arc<T>`（原子引用计数）允许配置在多个服务间共享，无需显式生命周期标注。这与 Go 的共享指针（垃圾回收）或 Java 的 Spring 单例 bean 不同——Rust 通过类型系统显式表达共享语义，避免隐式全局状态。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: 微服务中的配置对象通常需要在多个服务间共享。使用引用（`&Config`）会引入生命周期约束，要求配置对象比所有服务更长寿。`Arc<T>`（原子引用计数）允许配置在多个服务间共享，无需显式生命周期标注。这与 Go 的共享指针（垃圾回收）或 Java 的 Spring 单例 bean 不同——Rust 通过类型系统显式表达共享语义，避免隐式全局状态。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：gRPC trait 对象与序列化（编译错误）
 

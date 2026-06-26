@@ -159,7 +159,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 Rust 中三种**隐式引用/解引用机制**——自动引用（方法调用）、自动解引用（显式 * 操作）和 Deref 强制（类型转换）。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)] · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch04-02-references-and-borrowing.html)
 > **使用建议**: 利用自动机制简化代码，但理解其背后的规则以避免意外行为。
 > **关键洞察**: 这些隐式转换是**语法糖**——它们在编译期展开为显式操作，无运行时开销。
 > [来源: [Rust Reference — Method Call Expressions](https://doc.rust-lang.org/reference/expressions/method-call-expr.html#automatic-referencing)]
@@ -452,7 +452,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0+ (Edition 2024)
 
 **文档版本**: 1.1
@@ -1181,7 +1181,7 @@ let s: &mut &Secret = &mut &Secret(String::from("x"));
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-22 新增多级引用语义、部分重借用、Tree Borrows 模型、as_ref/as_mut 嵌套引用转换 [来源: Authority Source Sprint Batch 9]
 
 ---
@@ -1256,7 +1256,7 @@ fn fixed() {
 > `String` 实现 `Deref<Target = str>`，因此 `&String` 可自动转为 `&str`（Deref coercion）。
 > 但 `&str` 不能自动转为 `String`（需要分配堆内存）。
 > `String` 和 `&str` 的关系类似于 C++ 的 `std::string` 和 `const char*`，但 Rust 的强制转换是显式定义的 trait 行为。
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]
 
 ### 10.3 边界测试：`&mut` 的重新借用与原始引用失效（编译错误）
 

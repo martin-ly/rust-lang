@@ -519,7 +519,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0+ (Edition 2024)
 
@@ -659,7 +659,7 @@ fn main() {
 > 这与 Go 的`json.Unmarshal`（默认忽略未知字段，`DisallowUnknownFields` 选项开启严格模式）或 Python 的 `dataclasses`（无内置未知字段检查）类似，
 > 但 Rust 的配置在编译期固定，无运行时开销。
 > [来源: [Serde Documentation](https://serde.rs/container-attrs.html)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.4 边界测试：枚举的 `untagged` 反序列化歧义（运行时错误）
 
@@ -728,7 +728,7 @@ fn main() {
 > 这与 GraphQL 的 nullable vs optional（同样区分）或 Protocol Buffers 的 `has_field()`（可区分未设置和默认值）类似——序列化格式的表达能力影响 API 设计。
 > Rust 的类型系统可帮助建模这些状态（`Option<Option<T>>` 或自定义 enum）。
 > [来源: [Serde Documentation](https://serde.rs/field-attrs.html)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：serde 的私有字段与反序列化失败（运行时错误）
 
@@ -803,7 +803,7 @@ fn main() {
 > [来源: [serde](https://serde.rs/enum-representations.html)] ·
 > [来源: [serde_json](https://docs.rs/serde_json/)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) ·
-> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
 > [Rust Standard Library](https://doc.rust-lang.org/std/) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

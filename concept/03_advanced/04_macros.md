@@ -2075,8 +2075,8 @@ mod internal {
 | 宏是编译期元编程 | [TRPL Ch19.5](https://doc.rust-lang.org/book/ch19-05-advanced-functions-and-closures.html) | ✅ |
 | macro_rules! 是声明式宏 | [TRPL Ch19.5](https://doc.rust-lang.org/book/ch19-05-advanced-functions-and-closures.html) · [Little Book of Rust Macros] | ✅ |
 | 过程宏分三类：Derive/Attr/Fn | [TRPL Ch19.5](https://doc.rust-lang.org/book/ch19-05-advanced-functions-and-closures.html) · [RFC 1566](https://rust-lang.github.io/rfcs/1566-proc-macros.html) | ✅ |
-| Rust 宏是卫生的 | [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Scheme 卫生宏论文] | ✅ |
-| `vec!` / `format!` 是宏 | [The Rust Programming Language](https://doc.rust-lang.org/book/) | ✅ |
+| Rust 宏是卫生的 | [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-05-macros.html) · [Scheme 卫生宏论文] | ✅ |
+| `vec!` / `format!` 是宏 | [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-05-macros.html) | ✅ |
 | 编译期代码生成零运行时开销 | [Rust Reference: Macros](https://doc.rust-lang.org/reference/macros.html) | ✅ |
 | 卫生宏原始论文 | [Kohlbecker et al. 1986 — Macro-by-Example: Deriving Syntactic Transformations from their Specifications, POPL] | ✅ |
 | 元编程理论基础 | [Taha 2004 — A Gentle Introduction to Multi-stage Programming] | ✅ |
@@ -2090,7 +2090,7 @@ mod internal {
 | macro_rules! 语法 | [Rust Reference: Macros by Example](https://doc.rust-lang.org/reference/macros-by-example.html) · [TRPL Ch19.5](https://doc.rust-lang.org/book/ch19-05-advanced-functions-and-closures.html) | ✅ |
 | 过程宏设计 | [Rust Reference: Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html) · [RFC 1566](https://rust-lang.github.io/rfcs/1566-proc-macros.html) | ✅ |
 | 卫生宏机制 | [Rust Reference: Hygiene](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene) · [Kohlbecker et al. 1986] | ✅ |
-| 编译期内置宏 | [Rust Reference: Built-in Macros](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) | ✅ |
+| 编译期内置宏 | [Rust Reference: Built-in Macros](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-05-macros.html) | ✅ |
 | const fn 替代趋势 | [Rust Reference: const_eval](https://doc.rust-lang.org/reference/) · [RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html) | ✅ |
 | syn/quote/proc_macro2 | [syn docs] · [quote docs] · [proc_macro2 docs] | ✅ |
 | 声明宏 2.0 演进 | [Rust Reference: macro keyword](https://doc.rust-lang.org/reference/) · [RFC 1584](https://rust-lang.github.io/rfcs/1584-macros.html) | ✅ |
@@ -2137,7 +2137,7 @@ mod internal {
 | **Metaprogramming** | [Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming) | 元编程 |
 | **Quasi-quotation** | [Quasi-quotation](https://en.wikipedia.org/wiki/Quasi-quotation) | 准引用 |
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-05-macros.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -2221,7 +2221,7 @@ fn main() {}
 > [来源: [Rust By Example — Macros](https://doc.rust-lang.org/rust-by-example/macros.html)]
 > [来源: [proc-macro2 crate](https://docs.rs/proc-macro2/)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) ·
-> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-05-macros.html) ·
 > [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 

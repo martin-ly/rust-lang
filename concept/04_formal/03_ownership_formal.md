@@ -1090,7 +1090,7 @@ Tree Borrows 的状态空间 Σ = (M, P, T) 其中：
     ┌─────────────┐
     │   Unique    │ ◄──── 初始状态（根节点或最新 &mut）
     └──────┬──────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
            │ 创建子 &mut
            ▼
     ┌─────────────┐
@@ -1183,7 +1183,7 @@ Miri 的 Tree Borrows 检测器直接实现了上述操作语义：
 > 演进方向见 [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md)（形式化方法工具链）与 [`../07_future/03_evolution.md`](../07_future/03_evolution.md)（语言演进路线图）。
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1

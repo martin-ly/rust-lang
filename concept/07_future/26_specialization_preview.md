@@ -162,7 +162,7 @@
 ```
 
 > **认知功能**: 特化引入了**实现优先级**的概念——当多个 impl 适用时，编译器选择最精确（最特化）的那个。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **关键洞察**: 这与 C++ 的**模板特化**类似，但 Rust 的版本是**类型安全**的——特化在编译期解析，不会出现链接期错误。
 > [来源: [RFC 1210 — Specialization](https://github.com/rust-lang/rfcs/pull/1210)]
 
@@ -456,7 +456,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 
 **文档版本**: 1.0
@@ -502,7 +502,7 @@ impl Display for MyString {
 > 若添加 `impl<T: Deref<Target=str>> Display for T`，它与 `impl Display for String` 重叠（`String: Deref<Target=str>`），且 neither 是对方的子集——编译错误。
 > 这与 C++ 的模板特化（允许任意重叠，由偏序规则解决）不同——Rust 的特化更保守，确保始终存在唯一最特化实现，避免歧义。
 > [来源: [Rust RFC 1210](https://rust-lang.github.io/rfcs//1210-impl-specialization.html)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：`default` 方法与最终实现的冲突（编译错误）
 
@@ -611,7 +611,7 @@ fn main() {
 > 这与 C++ 的 ADL（Argument Dependent Lookup，类似但无特化序）或 Scala 的 implicit resolution（更复杂的优先级规则）类似
 > ——Rust 的特化增加了方法解析的复杂度，但设计目标始终是"有唯一最具体实现"。
 > [来源: [Rust RFC 1210](https://rust-lang.github.io/rfcs//1210-impl-specialization.html)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：特化（specialization）的 soundness 问题与编译错误（编译错误）
 

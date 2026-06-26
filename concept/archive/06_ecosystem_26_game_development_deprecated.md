@@ -86,7 +86,7 @@ Rust 游戏引擎生态:
   │ 学习曲线        │ 中              │ 中              │ 低              │
   │ 适用场景        │ 通用            │ 3D 游戏         │ 2D 原型         │
   └─────────────────┴─────────────────┴─────────────────┴─────────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
 > [来源: [Bevy Engine](https://bevyengine.org/learn/book/introduction/)]
 ```
@@ -98,7 +98,7 @@ Rust 游戏引擎生态:
 
 ### 1.2 ECS 架构
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]**
 
 ```text
 ECS (Entity-Component-System):
@@ -193,7 +193,7 @@ fn main() {
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 2.1 wgpu 与跨平台渲染
 >
@@ -215,7 +215,7 @@ wgpu:
   │  Vulkan/Metal   │  ← 后端抽象
   │  /DX12/WebGPU   │
   └─────────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
   代码示例:
 
@@ -281,7 +281,7 @@ wgpu:
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
 ```text
 音频系统:
@@ -348,7 +348,7 @@ wgpu:
   │ 生态成熟度      │ 中              │ 高              │
   │ 学习曲线        │ 中              │ 陡峭            │
   └─────────────────┴─────────────────┴─────────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
 > [来源: [Rust GameDev WG](https://gamedev.rs/)]
 ```
@@ -504,7 +504,7 @@ graph TD
 | [Rust GameDev WG](https://gamedev.rs/) | ✅ 二级 | 社区 |
 | [rodio](https://github.com/RustAudio/rodio) | ✅ 二级 | 音频 |
 | [Are We Game Yet](https://arewegameyet.rs/) | ✅ 二级 | 生态盘点 |
-| [Rust Book](https://doc.rust-lang.org/book/) | ✅ 一级 | 官方教程 |
+| [Rust Book](https://doc.rust-lang.org/book/title-page.html) | ✅ 一级 | 官方教程 |
 
 ---
 
@@ -542,7 +542,7 @@ graph TD
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]**
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >

@@ -45,6 +45,14 @@
 | :--- | :--- | :--- |
 | `cargo_script_demo.rs` | Cargo Script 单文件脚本演示 | `cargo +nightly -Zscript cargo_script_demo.rs` |
 
+## 独立 Cargo 示例
+
+| 目录 | 内容 | 运行方式 |
+| :--- | :--- | :--- |
+| `build_script_practice/` | build script 与外部 C 代码链接练习 | `cd build_script_practice && cargo build` |
+| `incremental_practice/` | 观测 rustc 增量编译的 dep-graph 与 Red-Green 复用 | `cd incremental_practice && cargo test` |
+| `resolver_v3_practice/` | resolver v3 与 MSRV 感知依赖解析实践 | `cd resolver_v3_practice && cargo tree` |
+
 ## 可运行示例
 
 各模块的 `crates/*/examples/` 为 workspace 内可运行示例，使用以下命令运行：

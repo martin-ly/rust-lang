@@ -79,7 +79,7 @@ Rust 整数类型:
   │ i128     │ 16 字节    │ -1.7e38 ~ 1.7e38             │
   │ isize    │ 指针大小   │ -2^(N-1) ~ 2^(N-1)-1         │
   └──────────┴────────────┴──────────────────────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/ch03-02-data-types.html)]
 
   无符号整数:
   ┌──────────┬────────────┬──────────────────────────────┐
@@ -475,7 +475,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 

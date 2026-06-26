@@ -481,7 +481,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-storing-utf-8-encoded-text-with-strings.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 
@@ -534,7 +534,7 @@ fn get_static() -> &'static str {
 > 返回 `&str` 意味着返回一个引用，但被引用的 `String` 在函数返回时释放。
 > 这与悬垂引用问题相同——生命周期系统阻止返回指向局部 `String` 的 `&str`。
 > 正确做法是返回 `String`（转移所有权）或返回 `'static str`（字符串字面量）。
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-storing-utf-8-encoded-text-with-strings.html)]
 
 ### 12.2 边界测试：字符串索引操作（编译错误）
 
@@ -587,7 +587,7 @@ fn main() {
 > 3) 使用 `regex` crate 处理复杂分割模式。
 > 这与 Python 的 `str.split`（接受 `str` 或 `None`）或 JavaScript 的 `String.prototype.split`（接受字符串或正则）不同——Rust 的 `split` 参数类型在编译期严格检查，但灵活性较低。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.str.html)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-storing-utf-8-encoded-text-with-strings.html)]
 
 ### 10.4 边界测试：字符串拼接的 `+` 运算符消耗左操作数（编译错误）
 

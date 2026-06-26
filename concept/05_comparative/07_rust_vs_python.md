@@ -15,7 +15,7 @@
 
 > **来源**: [Python Documentation](https://docs.python.org/3/) ·
 > [PEP 484 — Type Hints](https://peps.python.org/pep-0484/) ·
-> [TRPL](https://doc.rust-lang.org/book/) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
 > [Wikipedia — Python (programming language)](https://en.wikipedia.org/wiki/Python_(programming_language)) ·
 > [Wikipedia — Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))
@@ -441,7 +441,7 @@ graph TD
 |:---|:---:|:---|
 | [Python Documentation](https://docs.python.org/3/) | ✅ 一级 | 官方文档 |
 | [PEP 484 — Type Hints](https://peps.python.org/pep-0484/) | ✅ 一级 | Python 类型系统 |
-| [TRPL](https://doc.rust-lang.org/book/) | ✅ 一级 | Rust 入门 |
+| [TRPL](https://doc.rust-lang.org/book/title-page.html) | ✅ 一级 | Rust 入门 |
 | [PyO3](https://pyo3.rs/) | ✅ 一级 | Python-Rust 互操作 |
 | [mypy](https://mypy.readthedocs.io/) | ✅ 一级 | Python 静态类型检查 |
 | [Python GIL](https://wiki.python.org/moin/GlobalInterpreterLock) | ✅ 一级 | GIL 说明 |
@@ -457,7 +457,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Python Documentation](https://docs.python.org/3/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Python Documentation](https://docs.python.org/3/)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 
@@ -530,7 +530,7 @@ fn fixed() {
 }
 ```
 
-> **Python 对比**: Python 是动态类型——变量名只是标签，可以指向任何类型的对象：`x = 42; x = "hello"` 完全合法。Rust 是静态类型——变量类型在编译期确定，`x = 42` 后 `x` 的类型是 `i32`，不能再赋值为 `String`。Rust 的 shadowing（`let x = ...`）创建新变量而非修改原变量。这消除了 Python 中常见的类型错误（如 `len(42)`），但增加了类型标注的样板代码。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **Python 对比**: Python 是动态类型——变量名只是标签，可以指向任何类型的对象：`x = 42; x = "hello"` 完全合法。Rust 是静态类型——变量类型在编译期确定，`x = 42` 后 `x` 的类型是 `i32`，不能再赋值为 `String`。Rust 的 shadowing（`let x = ...`）创建新变量而非修改原变量。这消除了 Python 中常见的类型错误（如 `len(42)`），但增加了类型标注的样板代码。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：Python 的 GIL 与 Rust 的所有权并发（编译错误）
 
@@ -559,7 +559,7 @@ fn fixed() {
 }
 ```
 
-> **Python 对比**: Python 通过 **GIL**（Global Interpreter Lock）保证单线程执行字节码，实现"线程安全"——但代价是真正的并行计算受限（CPU 密集型任务无法利用多核）。Rust 没有 GIL，通过**所有权和类型系统**保证线程安全：`Rc<T>`（非原子）不能跨线程，`Arc<T>`（原子）可以。编译器在编译期拒绝数据竞争，无需运行时锁。这使得 Rust 的并发程序既有 C/C++ 的性能，又有 Python 的安全性——但无需全局锁。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **Python 对比**: Python 通过 **GIL**（Global Interpreter Lock）保证单线程执行字节码，实现"线程安全"——但代价是真正的并行计算受限（CPU 密集型任务无法利用多核）。Rust 没有 GIL，通过**所有权和类型系统**保证线程安全：`Rc<T>`（非原子）不能跨线程，`Arc<T>`（原子）可以。编译器在编译期拒绝数据竞争，无需运行时锁。这使得 Rust 的并发程序既有 C/C++ 的性能，又有 Python 的安全性——但无需全局锁。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.5 边界测试：Python 的 GIL 与 Rust 的 `Arc<Mutex<T>>` 的性能对比（运行时开销）
 

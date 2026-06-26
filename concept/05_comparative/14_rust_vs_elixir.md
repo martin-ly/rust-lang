@@ -16,7 +16,7 @@
 
 ---
 
-> **来源**: [Elixir Official](https://elixir-lang.org/) · [Erlang/OTP](https://www.erlang.org/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Wikipedia — Erlang](https://en.wikipedia.org/wiki/Erlang_(programming_language))
+> **来源**: [Elixir Official](https://elixir-lang.org/) · [Erlang/OTP](https://www.erlang.org/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Wikipedia — Erlang](https://en.wikipedia.org/wiki/Erlang_(programming_language))
 
 > **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md) · [Unsafe](../03_advanced/03_unsafe.md)
 
@@ -94,7 +94,7 @@
   │ 失败代价        │ 低（类型检查）  │ 低（进程隔离）  │
   │ 整体理念        │ 预防错误        │ 拥抱失败        │
   └─────────────────┴─────────────────┴─────────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
   代码对比:
 
@@ -311,7 +311,7 @@ Rust 并发模型:
   │ 学习曲线        │ 陡峭            │ 平缓            │
   │ 文档内省        │ rustdoc         │ 类型规范        │
   └─────────────────┴─────────────────┴─────────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
 
   Elixir 类型规范:
@@ -595,7 +595,7 @@ graph TD
 |:---|:---:|:---|
 | [Elixir Official](https://elixir-lang.org/) | ✅ 一级 | 官方 |
 | [Erlang/OTP](https://www.erlang.org/) | ✅ 一级 | 官方 |
-| [TRPL](https://doc.rust-lang.org/book/) | ✅ 一级 | 官方 |
+| [TRPL](https://doc.rust-lang.org/book/title-page.html) | ✅ 一级 | 官方 |
 | [Rustler](https://github.com/rusterlium/rustler) | ✅ 二级 | 互操作 |
 | [Designing for Scalability with Erlang/OTP](https://www.oreilly.com/library/view/designing-for-scalability/9781449361556/) | ✅ 二级 | 书籍 |
 | [Wikipedia — Erlang](https://en.wikipedia.org/wiki/Erlang_(programming_language)) | ✅ 一级 | 语言概述 |
@@ -686,7 +686,7 @@ fn fixed() {
 }
 ```
 
-> **Elixir 对比**: Elixir 是动态类型，变量可以重新绑定为任何类型。Rust 的变量类型在编译期固定，不能重新赋值为不同类型。Rust 的 `enum` 是表达"多种可能类型"的方式，调用者必须通过 `match` 处理每个变体。这与 Elixir 的 pattern matching 类似，但 Rust 在编译期验证穷尽性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **Elixir 对比**: Elixir 是动态类型，变量可以重新绑定为任何类型。Rust 的变量类型在编译期固定，不能重新赋值为不同类型。Rust 的 `enum` 是表达"多种可能类型"的方式，调用者必须通过 `match` 处理每个变体。这与 Elixir 的 pattern matching 类似，但 Rust 在编译期验证穷尽性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：Elixir 的进程邮箱与 Rust 的 channel（编译错误）
 

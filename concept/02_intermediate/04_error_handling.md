@@ -145,7 +145,7 @@
 ### 1.2 TRPL 官方定义
 
 >
-> **[TRPL Ch9.0](https://doc.rust-lang.org/book/)** Rust groups errors into two major categories: recoverable and unrecoverable errors. For a recoverable error, we most likely want to report the problem to the user and retry the operation. Unrecoverable errors are always symptoms of bugs, and we want to immediately stop the program.
+> **[TRPL Ch9.0](https://doc.rust-lang.org/book/ch09-00-error-handling.html)** Rust groups errors into two major categories: recoverable and unrecoverable errors. For a recoverable error, we most likely want to report the problem to the user and retry the operation. Unrecoverable errors are always symptoms of bugs, and we want to immediately stop the program.
 
 > **[TRPL Ch9.2](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)** The `?` placed after a `Result` value is defined to work in almost the same way as the `match` expressions we defined to handle the `Result` values. If the value of the `Result` is an `Ok`, the value inside the `Ok` will get returned from this expression, and the program will continue. If the value is an `Err`, the `Err` will be returned from the whole function as if we had used the `return` keyword.
 
@@ -1113,7 +1113,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 | `Result<T, E>`（T 非 ()） | 同 Result<(), E> | 同上 | 极少使用（T 的 report 通常也返回 0） |
 | `!`（永不返回） | 无 | 无 | 守护进程、事件循环 |
 
-> **来源**: [Rust Reference: Termination](https://doc.rust-lang.org/reference/) · [RFC 1937: const fn](https://github.com/rust-lang/rfcs/pull/1937) · [TRPL Ch12.6](https://doc.rust-lang.org/book/) · [Wikipedia: Exit status](https://en.wikipedia.org/wiki/Exit_status)
+> **来源**: [Rust Reference: Termination](https://doc.rust-lang.org/reference/) · [RFC 1937: const fn](https://github.com/rust-lang/rfcs/pull/1937) · [TRPL Ch12.6](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Wikipedia: Exit status](https://en.wikipedia.org/wiki/Exit_status)
 
 ### 9.2 补充：`Result<T, !>` 与 `!` (never type) 在错误处理中的使用
 
@@ -2044,7 +2044,7 @@ fn compute() -> Maybe<i32> {
 - [x] **TODO**: 补充 `poll_fn` / `TryFuture` 等异步错误处理 —— 优先级: 高 —— 已完成 §5.5
 - [x] **TODO**: 补充 `Try` trait（稳定化中）与自定义 ? 行为 —— 优先级: 中 —— 已完成 §9.6
 
-> **来源: [Rust Reference](https://doc.rust-lang.org/reference/); [The Rust Programming Language](https://doc.rust-lang.org/book/); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/); [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-00-error-handling.html); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
 
 > **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page); POPL/PLDI/ECOOP Papers; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)/Iris Project** 形式化概念参考了权威学术来源和类型论研究。✅
 ---
@@ -2063,7 +2063,7 @@ fn compute() -> Maybe<i32> {
 | **Monad (functional programming)** | [Monad (functional programming)](https://en.wikipedia.org/wiki/Monad_(functional_programming)) | Monad 模式 |
 | **Panic (computing)** | [Panic (computing)](https://en.wikipedia.org/wiki/Panic_(computing)) | Panic |
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-00-error-handling.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1

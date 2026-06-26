@@ -129,7 +129,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 Rust 规范需要服务的**多层次用户群体**，以及对应的规范分层结构。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 不同场景查阅不同层次的规范——开发看参考文档，认证看技术规范，形式化验证看逻辑规约。
 > **关键洞察**: 单一文档无法同时满足所有需求。Rust 规范的正确形态是**分层文档体系**，而非一本"圣经"。
 > [来源: [Rust Specification Discussion](https://rust-lang.github.io/rust-project-goals/)]
@@ -393,7 +393,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0+ (Edition 2024)
 

@@ -749,7 +749,7 @@ graph LR
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Tokio Documentation](https://tokio.rs/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Tokio Documentation](https://tokio.rs/)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 
@@ -801,7 +801,7 @@ async fn echo(stream: TcpStream) {
 }
 ```
 
-> **修正**: `TcpStream::split` 将双向流拆分为独立的读半和写半，允许并发读写（如一个任务读，一个任务写）。`split` 消耗 `TcpStream`，返回的 `ReadHalf` 和 `WriteHalf` 是独立的类型，不可复制。`reunite` 在两者都未 drop 时恢复原始的 `TcpStream`。这与 `TcpStream::into_split`（返回 `OwnedReadHalf` 和 `OwnedWriteHalf`，可发送到不同任务）或标准库的 `std::net::TcpStream`（`try_clone` 复制文件描述符）不同——tokio 的 `split` 是零成本的借用拆分，`into_split` 是引用计数的所有权拆分。选择取决于并发模型：单任务内并发用 `split`，跨任务用 `into_split`。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: `TcpStream::split` 将双向流拆分为独立的读半和写半，允许并发读写（如一个任务读，一个任务写）。`split` 消耗 `TcpStream`，返回的 `ReadHalf` 和 `WriteHalf` 是独立的类型，不可复制。`reunite` 在两者都未 drop 时恢复原始的 `TcpStream`。这与 `TcpStream::into_split`（返回 `OwnedReadHalf` 和 `OwnedWriteHalf`，可发送到不同任务）或标准库的 `std::net::TcpStream`（`try_clone` 复制文件描述符）不同——tokio 的 `split` 是零成本的借用拆分，`into_split` 是引用计数的所有权拆分。选择取决于并发模型：单任务内并发用 `split`，跨任务用 `into_split`。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.4 边界测试：缓冲区大小与 MTU 的匹配（运行时性能问题）
 
@@ -874,7 +874,7 @@ fn main() {
 
 > **修正**: **借用规则**：1) 任意数量的 `&T` 或一个 `&mut T`；2) 不能同时存在；3) NLL 使借用仅在**使用点**检查，非作用域结束。
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 
 ## 嵌入式测验（Embedded Quiz）

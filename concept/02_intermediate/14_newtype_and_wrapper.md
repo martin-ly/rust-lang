@@ -475,7 +475,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 
@@ -535,7 +535,7 @@ impl Add for Meters {
 }
 ```
 
-> **修正**: Newtype 模式（`struct Wrapper(T)`）创建全新的类型，**不继承**原类型的任何 trait 实现。这是 Newtype 的核心特征——类型隔离。如需使用原类型的操作，必须手动实现（或使用 `derive_more` crate 委托）。这与 C++ 的 `typedef` 或 `using`（类型别名）完全不同——Rust 的 Newtype 是强类型抽象，编译器将 `Meters` 和 `u32` 视为完全不同的类型。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: Newtype 模式（`struct Wrapper(T)`）创建全新的类型，**不继承**原类型的任何 trait 实现。这是 Newtype 的核心特征——类型隔离。如需使用原类型的操作，必须手动实现（或使用 `derive_more` crate 委托）。这与 C++ 的 `typedef` 或 `using`（类型别名）完全不同——Rust 的 Newtype 是强类型抽象，编译器将 `Meters` 和 `u32` 视为完全不同的类型。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：PhantomData 的协变/逆变误用（编译错误 / 运行时 UB）
 

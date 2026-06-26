@@ -11,7 +11,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 ## 📑 目录
@@ -114,7 +114,7 @@
 >
 >
 
-### A 来源: 概念定义基于 Rust Reference / [The Rust Programming Language](https://doc.rust-lang.org/book/) / 学术论文
+### A 来源: 概念定义基于 Rust Reference / [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) / 学术论文
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
@@ -128,7 +128,7 @@
 | **Async/Await** | [L3: 异步](../03_advanced/02_async.md) | L2 泛型、L3 Pin、L4 形式化 | 分析 | ← Future + Pin → 运行时 |
 | **Atomic Memory Ordering** | [L3: 并发](../03_advanced/01_concurrency.md) | L1 借用、L4 内存模型 | 评价 | ← Send/Sync → 无锁数据结构 |
 
-### B 来源: 概念定义基于 Rust Reference / [The Rust Programming Language](https://doc.rust-lang.org/book/) / 学术论文
+### B 来源: 概念定义基于 Rust Reference / [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) / 学术论文
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
@@ -137,7 +137,7 @@
 | **Box** | [L2: 内存管理](../02_intermediate/03_memory_management.md) | L1 所有权、L4 线性逻辑 | 应用 | ← 所有权 → 智能指针 |
 | **Builder Pattern** | [L6: 设计模式](../06_ecosystem/02_patterns.md) | L2 Trait、L1 类型系统 | 应用 | ← 所有权 + 方法链 → API 设计 |
 
-### C 来源: 概念定义基于 Rust Reference / [The Rust Programming Language](https://doc.rust-lang.org/book/) / 学术论文
+### C 来源: 概念定义基于 Rust Reference / [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) / 学术论文
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
@@ -149,7 +149,7 @@
 | **Career Landscape** | [L0: 职业市场](./career_landscape.md) | L0 Bloom、L6 应用领域 | 知道 | ← 市场数据 → 职业决策 |
 | **Comprehensive Rust** | [L0: 课程映射](./comprehensive_rust_mapping.md) | L0 学习指南、L1-L3 | 知道 | ← Google 课程 → 本体系映射
 
-### D 来源: 概念定义基于 Rust Reference / [The Rust Programming Language](https://doc.rust-lang.org/book/) / 学术论文
+### D 来源: 概念定义基于 Rust Reference / [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) / 学术论文
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
@@ -159,7 +159,7 @@
 | **Drop Trait** | [L1: 所有权](../01_foundation/01_ownership.md) | L2 Trait、L4 线性逻辑 | 理解 | ← 所有权 → RAII ≡ 资源消耗 |
 | **dyn Trait** | [L1: 类型系统](../01_foundation/04_type_system.md) | L2 Trait、L4 类型论 | 分析 | ⊘ impl Trait → 动态分发 |
 
-### E 来源: 概念定义基于 Rust Reference / [The Rust Programming Language](https://doc.rust-lang.org/book/) / 学术论文
+### E 来源: 概念定义基于 Rust Reference / [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) / 学术论文
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
@@ -180,7 +180,7 @@
 | **Cargo Manifest Reference** | [L6: Cargo Manifest](../06_ecosystem/64_cargo_manifest_reference.md) | L6 Cargo | 应用 | ← Toolchain → Profiles / Lints |
 | **Cargo Profiles and Lints** | [L6: Cargo Profiles](../06_ecosystem/65_cargo_profiles_and_lints.md) | L6 Cargo | 应用 | ← Manifest → Build Tuning
 
-### F 来源: 概念定义基于 Rust Reference / [The Rust Programming Language](https://doc.rust-lang.org/book/) / 学术论文
+### F 来源: 概念定义基于 Rust Reference / [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) / 学术论文
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
@@ -718,7 +718,7 @@
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 

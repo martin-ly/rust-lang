@@ -21,7 +21,7 @@
 > [Rust Edition Guide — 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) ·
 > [Rust Blog — Edition 2024](https://blog.rust-lang.org/) ·
 > [RFC 3501 — Edition 2024](https://rust-lang.github.io/rfcs//3501-edition-2024.html) ·
-> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
 > [Wikipedia — Software Release Life Cycle](https://en.wikipedia.org/wiki/Software_release_life_cycle)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
@@ -499,7 +499,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
 

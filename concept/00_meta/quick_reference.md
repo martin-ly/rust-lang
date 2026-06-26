@@ -10,7 +10,7 @@
 > **使用方式**：按 Ctrl+F 搜索概念名，或按字母序浏览。
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 ## 📑 目录
@@ -89,7 +89,7 @@
     - [测验 2：《Rust 概念速查卡片（Quick Reference）》的主要用途是什么？（理解层）](#测验-2rust-概念速查卡片quick-reference的主要用途是什么理解层)
     - [测验 3：元数据层文档能否替代 L1-L7 的核心概念学习？（理解层）](#测验-3元数据层文档能否替代-l1-l7-的核心概念学习理解层)
 
-## 一、核心概念速查（按字母序） 来源: 速查内容基于 Rust Reference / [The Rust Programming Language](https://doc.rust-lang.org/book/) / [Rustonomicon](https://doc.rust-lang.org/nomicon/) / RFCs; 概念定义与 concept / 目录核心文件保持一致
+## 一、核心概念速查（按字母序） 来源: 速查内容基于 Rust Reference / [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) / [Rustonomicon](https://doc.rust-lang.org/nomicon/) / RFCs; 概念定义与 concept / 目录核心文件保持一致
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/) / 2025; Rust Reference / 2025; TRPL / 2024** 本速查表的所有概念定义均来源于 Rust 官方文档和学术论文。
 
@@ -736,7 +736,7 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 
 > **权威来源**:
 > [Rust Reference](https://doc.rust-lang.org/reference/),
-> [The Rust Programming Language](https://doc.rust-lang.org/book/),
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html),
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/),
 > [Rust Standard Library](https://doc.rust-lang.org/std/),
 > [Rust Async Book](https://rust-lang.github.io/async-book/),
@@ -747,7 +747,7 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 > | 来源 | 链接 |
 > |:---|:---|
 > | Rust Reference | [doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/) |
-> | TRPL | [doc.rust-lang.org/book](https://doc.rust-lang.org/book/) |
+> | TRPL | [doc.rust-lang.org/book](https://doc.rust-lang.org/book/title-page.html) |
 > | Rustonomicon | [doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/) |
 > | Rust Standard Library | [doc.rust-lang.org/std](https://doc.rust-lang.org/std/) |
 > | Rust Async Book | [rust-lang.github.io/async-book](https://rust-lang.github.io/async-book/) |

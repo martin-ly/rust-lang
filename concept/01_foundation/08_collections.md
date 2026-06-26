@@ -108,7 +108,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 Rust 标准库集合的**分类谱系**。每种集合类型针对特定的访问模式和排序需求设计。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/ch08-00-common-collections.html)]
 > **使用建议**: 默认使用 Vec 和 HashMap；需要排序时使用 BTreeMap；需要双端操作时使用 VecDeque。
 > **关键洞察**: Rust 的集合类型与 C++ STL 对应，但**所有权语义更严格**——插入操作是 move，访问需要借用。
 > [来源: [std::collections](https://doc.rust-lang.org/std/collections/index.html)]
@@ -490,7 +490,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-00-common-collections.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 
@@ -575,7 +575,7 @@ fn fixed() {
 > **修正**: `into_iter()` 消耗集合所有权，迭代器只能遍历一次。
 > 如需多次遍历，使用 `iter()`（共享引用）或 `iter_mut()`（可变引用）。
 > 这体现了 Rust 所有权系统与迭代器模式的紧密结合——编译器通过所有权追踪防止"迭代器失效"和"重复消费"。
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-00-common-collections.html)]
 
 ### 10.3 边界测试：`Vec::drain` 的范围越界（运行时 panic）
 
@@ -600,7 +600,7 @@ fn main() {
 > Rust 的边界检查在 `drain` 等批量操作上同样严格，防止内存越界。
 > 这与 C++ 的 `vector::erase(first, last)`（范围无效是 UB）不同——Rust 将 UB 转化为 panic。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/vec/struct.Vec.html)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-00-common-collections.html)]
 
 ### 10.4 边界测试：`HashMap` 的自定义哈希器与 `BuildHasherDefault`（编译错误）
 
@@ -654,7 +654,7 @@ fn main() {
 > 这与 `retain`（原地过滤，不返回迭代器）或 `splice`（替换范围）不同——`drain` 是"取出并消费"的操作。
 > 常见模式：`for x in v.drain(..) { process(x); }` 完成后 `v` 为空。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/vec/struct.Vec.html)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-00-common-collections.html)]
 
 ### 10.4 边界测试：不可变借用与可变借用的冲突
 

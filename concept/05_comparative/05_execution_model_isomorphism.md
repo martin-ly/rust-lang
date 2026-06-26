@@ -4,7 +4,7 @@
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 ---
 
 > **内容分级**: [专家级]
@@ -733,7 +733,7 @@ graph TD
 ## 权威来源索引
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/),
-> [The Rust Programming Language](https://doc.rust-lang.org/book/),
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html),
 > [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
 > **相关文件**: [范式矩阵](./03_paradigm_matrix.md) · [异步](../03_advanced/02_async.md) · [并发](../03_advanced/01_concurrency.md)
@@ -799,7 +799,7 @@ fn main() {
 > 这与 Go 的 goroutine（轻量级线程，自动调度）或 Erlang 的 process（独立执行单元）不同。
 > Rust 的 async/await 是**零成本抽象**——Future 被编译为状态机，无运行时开销（除非使用运行时如 Tokio）。
 > 理解 "Future ≠ Thread" 是正确使用 Rust 异步编程的关键。
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：绿色线程与 OS 线程的 API 混用（编译错误）
 
@@ -881,7 +881,7 @@ fn cps_factorial(n: u64, k: Box<dyn Fn(u64) -> u64>) -> u64 {
 > 真正的 CPS 优化：使用 trampoline（蹦床）模式——返回 "下一步" 闭包而非调用它，外层循环执行。
 > 这与 Scheme 的 TCO（语言保证）或 JavaScript 的异步回调（事件循环作为 trampoline）不同——Rust 要求开发者手动实现 trampoline 或使用迭代。
 > [来源: [Continuation-Passing Style](https://en.wikipedia.org/wiki/Continuation-passing_style)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：尾递归与 Rust 的 TCO 缺失（运行时栈溢出）
 

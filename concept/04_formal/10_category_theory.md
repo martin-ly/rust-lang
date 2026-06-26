@@ -18,7 +18,7 @@
 > [Wikipedia — Monad (functional programming)](https://en.wikipedia.org/wiki/Monad_(functional_programming)) ·
 > [Rust RFC — Monad](https://github.com/rust-lang/rfcs/issues/1815) ·
 > [Haskell Wiki — Typeclassopedia](https://wiki.haskell.org/Typeclassopedia) ·
-> [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 > **前置依赖**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
 > **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md)
 > 🚨 **纯数学内容警告**
@@ -132,7 +132,7 @@
   │ Box<T>          │ 无直接 map（Deref 替代） │
   │ Cow<'a, T>      │ 无（但可手动实现） │
   └─────────────────┴─────────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
   Option 的函子 laws:
   let x = Some(5);
@@ -549,7 +549,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
 
@@ -594,7 +594,7 @@ where
 }
 ```
 
-> **修正**: 范畴论中的 **Functor** 是保持结构的映射：`F: C → D`，对任意 `f: A → B`，有 `F(f): F(A) → F(B)`。Haskell 的 `Functor` typeclass 将这一概念编码为 `fmap :: (a -> b) -> f a -> f b`。Rust 中没有高阶类型（HKT），因此没有直接的 `Functor` trait——`Option` 的 `map`、`Result` 的 `map`、`Iterator` 的 `map` 是每个类型独立实现的方法，而非统一的 `fmap`。这是 Rust 与 Haskell 的核心差异：Haskell 通过 HKT 实现统一的抽象，Rust 通过宏和 trait 实现类似的 ergonomics，但无理论统一性。`fmap` 的缺失不影响表达能力（每个类型有自己的 `map`），但影响了代码复用（不能写跨类型的 `map` 泛型函数）。这与 Scala 的 `Functor`（通过 higher-kinded types 实现）或 C++ 的模板（无 HKT，但 `std::transform` 可跨容器）类似。[来源: [Category Theory](https://en.wikipedia.org/wiki/Category_theory)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: 范畴论中的 **Functor** 是保持结构的映射：`F: C → D`，对任意 `f: A → B`，有 `F(f): F(A) → F(B)`。Haskell 的 `Functor` typeclass 将这一概念编码为 `fmap :: (a -> b) -> f a -> f b`。Rust 中没有高阶类型（HKT），因此没有直接的 `Functor` trait——`Option` 的 `map`、`Result` 的 `map`、`Iterator` 的 `map` 是每个类型独立实现的方法，而非统一的 `fmap`。这是 Rust 与 Haskell 的核心差异：Haskell 通过 HKT 实现统一的抽象，Rust 通过宏和 trait 实现类似的 ergonomics，但无理论统一性。`fmap` 的缺失不影响表达能力（每个类型有自己的 `map`），但影响了代码复用（不能写跨类型的 `map` 泛型函数）。这与 Scala 的 `Functor`（通过 higher-kinded types 实现）或 C++ 的模板（无 HKT，但 `std::transform` 可跨容器）类似。[来源: [Category Theory](https://en.wikipedia.org/wiki/Category_theory)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.4 边界测试：`Monad` 与 Rust 的 `?` 运算符（编译错误）
 

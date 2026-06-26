@@ -137,7 +137,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 Rust → Wasm 的**完整编译与运行链路**，以及不同运行时的互操作层。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 浏览器场景用 `wasm-bindgen`；服务端/边缘用 `wasmtime` + WASI；组件化系统用 `wit-bindgen` + 组件模型。
 > **关键洞察**: Rust 编译到 Wasm **不是转译**（transpile），而是完整编译——rustc 通过 LLVM 的 Wasm 后端直接生成 Wasm 字节码，保留所有优化。
 > [来源: [Rust Wasm Book](https://rustwasm.github.io/book/)]
@@ -328,7 +328,7 @@ RUSTFLAGS="-Clink-arg=--allow-undefined" cargo build --target wasm32-unknown-unk
 | **嵌入式/IoT** | Wasm3 / wasm-micro-runtime | 资源受限设备的安全执行 | [Wasm3](https://github.com/wasm3/wasm3) |
 
 > **场景洞察**: Rust + Wasm 的最大价值在于**"安全的高性能沙箱化"**——在需要执行不可信代码（插件、智能合约、边缘函数）的场景中，Rust 的编译期安全保证与 Wasm 的运行时隔离形成双重防护。
-> [来源: [Wasm Use Cases](https://webassembly.org/docs/use-cases/)] · [来源: [Rust Book](https://doc.rust-lang.org/book/)]
+> [来源: [Wasm Use Cases](https://webassembly.org/docs/use-cases/)] · [来源: [Rust Book](https://doc.rust-lang.org/book/title-page.html)]
 
 ---
 
@@ -455,7 +455,7 @@ Rust Wasm 工具链:
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0+ (Edition 2024)
 
 **文档版本**: 1.0

@@ -498,7 +498,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-02-advanced-traits.html)
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
 
 **文档版本**: 1.0
@@ -596,7 +596,7 @@ struct Buffer<C: Config> {
 }
 ```
 
-> **修正**: Rust 的关联常量（associated constants）在 trait 中声明，在实现中定义。但**泛型参数**的关联常量不能在类型定义中用于确定数组大小——`[u8; C::MAX_SIZE]` 中 `C` 是泛型参数，编译器无法在单态化前知道 `MAX_SIZE` 的具体值。这是 Rust 常量泛化的限制：只有具体类型（如 `[u8; 1024]`）或 const 泛型参数（`[u8; N]`）可用于数组大小。Workaround：1) 使用 `GenericArray`（`typenum` crate，通过类型级数字模拟常量）；2) 使用 `Vec<u8>` 替代数组；3) 使用宏为每个具体配置生成代码。这与 C++ 的 `template<size_t N>`（非类型模板参数可用于数组大小）或 Zig 的 `comptime`（编译期常量可用于任何类型位置）不同——Rust 的 const 泛型仍在扩展中。[来源: [Rust RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: Rust 的关联常量（associated constants）在 trait 中声明，在实现中定义。但**泛型参数**的关联常量不能在类型定义中用于确定数组大小——`[u8; C::MAX_SIZE]` 中 `C` 是泛型参数，编译器无法在单态化前知道 `MAX_SIZE` 的具体值。这是 Rust 常量泛化的限制：只有具体类型（如 `[u8; 1024]`）或 const 泛型参数（`[u8; N]`）可用于数组大小。Workaround：1) 使用 `GenericArray`（`typenum` crate，通过类型级数字模拟常量）；2) 使用 `Vec<u8>` 替代数组；3) 使用宏为每个具体配置生成代码。这与 C++ 的 `template<size_t N>`（非类型模板参数可用于数组大小）或 Zig 的 `comptime`（编译期常量可用于任何类型位置）不同——Rust 的 const 泛型仍在扩展中。[来源: [Rust RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-02-advanced-traits.html)]
 
 ### 10.6 边界测试：trait alias 与 bound 的冗余（编译错误）
 
@@ -614,7 +614,7 @@ fn main() {
 }
 ```
 
-> **修正**: Trait alias（不稳定特性）允许为 trait bound 组合创建别名，但**不自动为符合条件的类型实现**。`MyTrait` 是真实 trait，类型需 `impl MyTrait for Type` 才能使用。这与 C++ 的 `concept`（同样需显式 `requires` 或 `template` 约束）或 Haskell 的 typeclass 别名（同样需显式 `instance`）类似。Workaround：1) 使用 blanket impl：`impl<T: Clone + Send + Sync + 'static> MyTrait for T {}`；2) 使用 `where` 从句直接写 bound，不使用别名；3) 等待 trait alias 稳定（可能包含自动实现语义）。Rust 的设计权衡：trait alias 是语法糖还是新类型？当前倾向语法糖，但自动实现的需求强烈。[来源: [Trait Alias RFC](https://rust-lang.github.io/rfcs//1733-trait-alias.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: Trait alias（不稳定特性）允许为 trait bound 组合创建别名，但**不自动为符合条件的类型实现**。`MyTrait` 是真实 trait，类型需 `impl MyTrait for Type` 才能使用。这与 C++ 的 `concept`（同样需显式 `requires` 或 `template` 约束）或 Haskell 的 typeclass 别名（同样需显式 `instance`）类似。Workaround：1) 使用 blanket impl：`impl<T: Clone + Send + Sync + 'static> MyTrait for T {}`；2) 使用 `where` 从句直接写 bound，不使用别名；3) 等待 trait alias 稳定（可能包含自动实现语义）。Rust 的设计权衡：trait alias 是语法糖还是新类型？当前倾向语法糖，但自动实现的需求强烈。[来源: [Trait Alias RFC](https://rust-lang.github.io/rfcs//1733-trait-alias.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-02-advanced-traits.html)]
 
 ### 10.3 边界测试：关联类型在 trait 边界中的不一致（编译错误）
 

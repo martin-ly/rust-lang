@@ -1,0 +1,3 @@
+[workspace]
+resolver = "3"
+members = ["legacy-lib", "modern-app", "edge-bin"]

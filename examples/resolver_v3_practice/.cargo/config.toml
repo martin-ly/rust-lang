@@ -1,0 +1,4 @@
+# 本示例覆盖根 workspace 的 resolver 配置，
+# 显式启用 MSRV-aware resolver 的 fallback 行为。
+[resolver]
+incompatible-rust-versions = "fallback"

@@ -39,6 +39,7 @@
     - [4.1 开启与观察](#41-开启与观察)
     - [4.2 典型输出解读](#42-典型输出解读)
     - [4.3 增量编译不生效的常见原因](#43-增量编译不生效的常见原因)
+    - [4.4 动手实验：修改-对比](#44-动手实验修改-对比)
   - [五、局限与边界](#五局限与边界)
   - [六、与 Salsa 的关系](#六与-salsa-的关系)
   - [嵌入式测验](#嵌入式测验)
@@ -158,17 +159,80 @@ graph TD
 
 ## 四、增量编译实战
 
+本节所有命令均可在项目内最小示例 [`examples/incremental_practice/`](../../../examples/incremental_practice/) 上复现。该示例包含三个 intentionally 独立的模块 `math`、`greet`、`analyze`，用来观察“修改一个函数时，dep-graph 中哪些节点会变 dirty”。
+
 ### 4.1 开启与观察
 
 ```bash
 # 默认情况下 Cargo 会启用增量编译
 CARGO_INCREMENTAL=1 cargo build
 
-# 查看 rustc 内部增量统计（verbose）
+# 查看 rustc 内部增量统计（verbose，需要 nightly）
 RUSTFLAGS="-Z incremental-info" cargo +nightly build
 ```
 
+在 `examples/incremental_practice/` 目录下执行：
+
+```bash
+cd examples/incremental_practice
+
+# 冷编译：建立 dep-graph 与磁盘缓存
+CARGO_INCREMENTAL=1 RUSTFLAGS="-Z incremental-info" cargo +nightly build
+
+# 无修改再次编译：应几乎没有 dirty 节点
+CARGO_INCREMENTAL=1 RUSTFLAGS="-Z incremental-info" cargo +nightly build
+
+# 修改 greet 模块后编译：仅影响依赖该模块的节点
+# Linux/macOS
+sed -i 's/Hello, {name}!/Hi, {name}!/' src/lib.rs
+# Windows (PowerShell)
+# (Get-Content src/lib.rs) -replace 'Hello, {name}!','Hi, {name}!' | Set-Content src/lib.rs
+CARGO_INCREMENTAL=1 RUSTFLAGS="-Z incremental-info" cargo +nightly build
+```
+
+> **提示**: `-Z incremental-info` 在不同 nightly 版本中的输出格式会变化：旧版显示 `reusing X out of Y modules` 汇总行，新版（1.98+）改为 `DepGraph Statistics` 与 `session directory: N files hard-linked`。二者语义相同——都说明“多少中间产物被复用”。
+
 ### 4.2 典型输出解读
+
+#### 冷编译（无缓存）
+
+```text
+   Compiling incremental_practice v0.1.0 (...)
+incremental: DepGraph Statistics
+  Total Node Count: 6939
+  Total Edge Count: 25072
+...
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.23s
+```
+
+- 没有 `session directory` 复用行，说明这是首次建立缓存。
+- `Total Node Count` / `Total Edge Count` 给出本次编译 dep-graph 的规模。
+
+#### 无修改再次编译
+
+```text
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+```
+
+- 没有 `Compiling` 行，耗时骤降至毫秒级，说明 dep-graph 中所有节点都是 green，全部复用。
+
+#### 修改 `greet::hello` 后
+
+```text
+   Compiling incremental_practice v0.1.0 (...)
+incremental: session directory: 29 files hard-linked
+incremental: DepGraph Statistics
+  Total Node Count: 6969
+  Total Edge Count: 25132
+...
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.42s
+```
+
+- `session directory: 29 files hard-linked` 表示大量中间产物从上次缓存硬链接复用；
+- `Total Node Count` 微增（新增/修改的 HIR/MIR 节点），但整体编译时间远低于冷编译；
+- 如果只修改 `greet` 而 `math` 不变，`math` 模块相关的查询节点仍保持 green。
+
+旧版 nightly 可能输出类似：
 
 ```text
 incremental: reusing 28 out of 30 modules
@@ -189,6 +253,23 @@ incremental: process 23 dirty nodes
 | 修改了 `Cargo.toml` | resolver/workspace 变化导致全量重编 |
 | 使用了 `RUSTFLAGS` 变化 | 编译配置变化会破坏缓存 |
 | 缓存损坏 | 可执行 `cargo clean` 后重试 |
+
+### 4.4 动手实验：修改-对比
+
+在 `examples/incremental_practice/` 中完成下表实验，验证 Red-Green 算法的实际行为：
+
+| 实验 | 修改位置 | 预期 dirty 范围 | 预期耗时 |
+|:---|:---|:---|:---|
+| A | 不修改 | 无 | ~0.00s |
+| B | `math::add` 实现 | `math` 及 `analyze` | 短 |
+| C | `greet::hello` 字符串 | `greet` 及 `analyze` | 短 |
+| D | `analyze::report` 输出格式 | 仅 `analyze` | 最短 |
+
+思考题：
+
+1. 为什么修改 `math::add` 会影响 `analyze::report`，但修改 `greet::hello` 不会影响 `math::add`？
+2. 如果给 `math::add` 添加 `#[inline(always)]`，dep-graph 会发生什么变化？
+3. 什么情况下 `cargo build` 会“看起来”没有增量效果？（提示：检查 `CARGO_INCREMENTAL` 与 `RUSTFLAGS`）
 
 ---
 
@@ -282,9 +363,9 @@ Salsa 本身是从 `rustc` 查询系统中提取出来的通用框架，被 `rus
 ---
 
 > **权威来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/), [The Rust Reference](https://doc.rust-lang.org/reference/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.0 编译器架构
+> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.96.0 编译器架构；2026-06-26 新增 `examples/incremental_practice/` 可运行增量编译实验 [来源: P2 Deep Content Sprint]
 
-**文档版本**: 1.0
+**文档版本**: 1.1
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-06-21
+**最后更新**: 2026-06-26
 **状态**: ✅ 已对齐 Rust 1.96.0 编译器内部文档

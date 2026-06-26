@@ -24,7 +24,7 @@
 > [simplifycpp.org C++_Rust.pdf]
 
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 ---
 
 > **Bloom 层级**: 分析 → 评价
@@ -605,7 +605,7 @@ fn fixed() {
 }
 ```
 
-> **C++ 对比**: C++ 支持隐式构造函数（`Point(int x) : x(x), y(0) {}`），允许 `Point p = 5;` 这样的代码。这可能导致意外转换和性能问题（临时对象）。Rust 禁止隐式构造——必须显式写出字段名或使用构造函数函数。这消除了 C++ 中常见的"unexpected implicit conversion" bug，但增加了样板代码。Rust 的 `From`/`Into` trait 提供显式、可追踪的类型转换，编译器拒绝未实现的转换。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **C++ 对比**: C++ 支持隐式构造函数（`Point(int x) : x(x), y(0) {}`），允许 `Point p = 5;` 这样的代码。这可能导致意外转换和性能问题（临时对象）。Rust 禁止隐式构造——必须显式写出字段名或使用构造函数函数。这消除了 C++ 中常见的"unexpected implicit conversion" bug，但增加了样板代码。Rust 的 `From`/`Into` trait 提供显式、可追踪的类型转换，编译器拒绝未实现的转换。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：C++ 虚函数表与 Rust trait 对象的 ABI 差异（运行时崩溃）
 

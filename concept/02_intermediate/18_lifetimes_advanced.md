@@ -19,7 +19,7 @@
 ---
 
 > **来源**: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) ·
-> [TRPL — Advanced Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) ·
+> [TRPL — Advanced Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch10-03-lifetime-syntax.html) ·
 > [RFC 0387 — Higher-Ranked Trait Bounds](https://rust-lang.github.io/rfcs//0387-higher-ranked-trait-bounds.html) ·
 > [The Rustonomicon — Subtyping and Variance](https://doc.rust-lang.org/nomicon/subtyping.html) ·
 > [Wikipedia — Region-based Memory Management](https://en.wikipedia.org/wiki/Region-based_memory_management)
@@ -179,7 +179,7 @@ HRTB (Higher-Ranked Trait Bounds):
   │ *const T        │ 对 T 协变       │
   │ *mut T          │ 对 T 不变       │
   └─────────────────┴─────────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
 
   变型的影响:
   ├── 协变允许放宽生命周期约束
@@ -531,7 +531,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
 

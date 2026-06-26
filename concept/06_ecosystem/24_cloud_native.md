@@ -345,7 +345,7 @@ Actix-web:
   │ 配置            │ 简单            │ 强大            │
   │ 语言            │ Ruby            │ Rust            │
   └─────────────────┴─────────────────┴─────────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
   其他工具:
   ├── Prometheus [来源: [Prometheus](https://prometheus.io/)] 客户端库

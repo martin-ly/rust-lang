@@ -562,7 +562,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
 
@@ -939,7 +939,7 @@ static ALLOCATOR: KernelAllocator = KernelAllocator;
 
 ### 与标准 Rust 开发的差异
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]**
 
 | 维度 | 标准 Rust（用户态） | Rust for Linux（内核态） |
 | :--- | :--- | :--- |

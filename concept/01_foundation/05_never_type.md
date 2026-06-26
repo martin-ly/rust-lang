@@ -20,7 +20,7 @@
 > **来源**:
 >
 > [Rust Reference — Never Type](https://doc.rust-lang.org/reference/types/never.html) ·
-> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
 > [RFC 1216](https://rust-lang.github.io/rfcs/1216-bang-type.html) ·
 > [Rust Release Notes — 1.92.0](https://doc.rust-lang.org/beta/releases.html) ·
@@ -157,7 +157,7 @@ fn demo_coercion(flag: bool) -> String {
 
 ### 2.1 发散函数
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]**
 
 发散函数（diverging function）是返回 `!` 的函数，它们通过 `panic!`、`exit` 或无限循环结束，不会正常返回。
 
@@ -450,7 +450,7 @@ fn incomplete_match(result: Result<i32, !>) -> i32 {
 
 > **权威来源**:
 > [Rust Reference — Never Type](https://doc.rust-lang.org/reference/types/never.html) ·
-> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
 > [RFC 1216](https://rust-lang.github.io/rfcs/1216-bang-type.html)
 >

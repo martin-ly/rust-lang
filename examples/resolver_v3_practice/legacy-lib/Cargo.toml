@@ -1,0 +1,13 @@
+[package]
+name = "legacy-lib"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.70"
+description = "模拟旧组件：MSRV 1.70，使用 clap 4 与 indexmap 1"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+indexmap = "1"
+
+# 本 crate 属于 examples/resolver_v3_practice workspace，不在此处声明 [workspace]。

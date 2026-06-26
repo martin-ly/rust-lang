@@ -57,7 +57,7 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/items/associated-items.html)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]**
 
 ### 1.1 当前限制
 

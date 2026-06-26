@@ -9,7 +9,7 @@
 > **Summary**: Rust vs C++: comparative analysis with Rust across type systems, memory safety, and concurrency.
 > **受众**: [进阶]
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 ---
 
 > **层级**: L5 对比分析
@@ -28,7 +28,7 @@
 >
 > **主要来源**:
 >
-> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
 > [Rust Reference](https://doc.rust-lang.org/reference/) ·
 > [Wikipedia: C++](https://en.wikipedia.org/wiki/C%2B%2B) ·
 > [Wikipedia: Rust](https://en.wikipedia.org/wiki/Rust) ·
@@ -1883,7 +1883,7 @@ fn main() {
 >
 >
 >
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
 
 ---
@@ -2072,7 +2072,7 @@ fn main() {
 ## 参考来源
 
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 > [来源: [C++ Reference](https://en.cppreference.com/)]
 > [来源: [ISO C++ Standard](https://isocpp.org/)]

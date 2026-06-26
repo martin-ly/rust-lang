@@ -130,7 +130,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 Cow 的**核心机制**——只在需要修改时才克隆，否则保持零拷贝借用。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)] · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch04-02-references-and-borrowing.html)
 > **使用建议**: 当 API 可能接受借用或拥有，且可能或不可能需要修改时，使用 Cow。
 > **关键洞察**: Cow 是 Rust **零成本抽象（Zero-Cost Abstraction）**的典范——如果不修改，它的开销与直接借用完全相同；如果需要修改，自动退化为拥有。
 > [来源: [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html)]
@@ -466,7 +466,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 
@@ -599,7 +599,7 @@ fn main() {
 >
 > 这与 C++ 的 `std::variant<const std::string&, std::string>` 或 Swift 的 `copy-on-write` 字符串类似——Rust 的 `Cow` 是显式、类型安全的 COW 抽象。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]
 
 ### 10.4 边界测试：`Cow` 在 `match` 中的所有权转移（编译错误）
 
@@ -624,7 +624,7 @@ fn main() {
 > 这与 `Option` 和 `Result` 的所有权管理相同——枚举的按值匹配消耗所有者。
 > `Cow` 提供 `into_owned()`（无论借用或拥有，都转为拥有）和 `to_mut()`（转为可变引用，必要时克隆）简化常见模式。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]
 
 ### 10.2 边界测试：`Cow` 的生命周期与所有权转换（编译错误）
 
@@ -652,7 +652,7 @@ fn main() {
 > 2) `Cow` 不能跨越 await 点（若 `Borrowed` 引用局部变量）；
 > 3) `Cow<'static, str>` 与 `Cow<'a, str>` 的类型不匹配。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]
 
 ### 10.4 边界测试：Cow 的生命周期与泛型约束不匹配（编译错误）
 
@@ -667,7 +667,7 @@ fn bad_cow<'a>(s: &'a str) -> Cow<'static, str> {
 fn main() {}
 ```
 
-> **修正**: `Cow<'a, B>` 的**生命周期参数**：1) `'a` 是借用的最长期限；2) `Cow::Borrowed(&'a B)` 要求引用至少存活 `'a`；3) 返回 `Cow<'static, str>` 要求数据是 `'static`（如 `String` 或字面量）。解决：1) 返回 `Cow<'a, str>` 而非 `'static`；2) 若必须 `'static`，使用 `Cow::Owned(s.to_string())`；3) 使用 `Into<Cow<'static, str>>` 让调用方决定。这与 C++ 的 `std::variant`（无生命周期，存储值或引用）或 Swift 的 `copy-on-write`（隐式，无生命周期标记）不同——Rust 的 `Cow` 显式跟踪所有权和借用生命周期。[来源: [Cow Documentation](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: `Cow<'a, B>` 的**生命周期参数**：1) `'a` 是借用的最长期限；2) `Cow::Borrowed(&'a B)` 要求引用至少存活 `'a`；3) 返回 `Cow<'static, str>` 要求数据是 `'static`（如 `String` 或字面量）。解决：1) 返回 `Cow<'a, str>` 而非 `'static`；2) 若必须 `'static`，使用 `Cow::Owned(s.to_string())`；3) 使用 `Into<Cow<'static, str>>` 让调用方决定。这与 C++ 的 `std::variant`（无生命周期，存储值或引用）或 Swift 的 `copy-on-write`（隐式，无生命周期标记）不同——Rust 的 `Cow` 显式跟踪所有权和借用生命周期。[来源: [Cow Documentation](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]
 
 ## 嵌入式测验（Embedded Quiz）
 

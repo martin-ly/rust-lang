@@ -751,7 +751,7 @@ fn undefined_behavior() {
 - [形式化验证](../04_formal/05_verification_toolchain.md) — Kani、Prusti、MIRI
 - [工具链](../06_ecosystem/01_toolchain.md) — Cargo、编译器标志、目标平台
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 > **过渡**: Compiler Internals（Rust 编译器内部原理） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Compiler Internals（Rust 编译器内部原理） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

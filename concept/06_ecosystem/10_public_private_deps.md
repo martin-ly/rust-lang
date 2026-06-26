@@ -142,7 +142,7 @@ graph TD
 > **泄漏模式**（红）中，Crate C 通过 Crate A 隐式依赖了 Crate B——当 A 升级或移除 B 时，C 的编译会意外失败。
 > **隔离模式**（绿）中，`public = false` 将 Crate D 限制在 A 的私有模块内，Crate C 既看不到也用不了 D 的类型。
 > 这是 Rust 从"默认开放"向"显式契约"演进的关键机制。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
 > **认知功能**: 将依赖泄漏抽象问题具象为 crate 关系拓扑。
 > **功能定位**：作为引入依赖时的可见性边界预判框架，左侧为反模式，右侧为目标架构。
@@ -396,7 +396,7 @@ internal = { path = "crates/internal", public = false } # 实现细节 crate
 | **Semantic versioning** | [Semantic versioning](https://en.wikipedia.org/wiki/Semantic_versioning) | 语义版本控制 |
 | **Diamond dependency problem** | [Diamond dependency problem](https://en.wikipedia.org/wiki/Dependency_hell#Diamond_dependency_problem) | 菱形依赖问题 |
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 

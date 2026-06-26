@@ -10,7 +10,7 @@
 > **对齐来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Iris 分离逻辑教程] · [O'Hearn — Separation Logic] · [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 > **来源**: [Jung, R. et al. — *RustBelt: Securing the Foundations of the Rust Programming Language*. POPL 2018]
 >
@@ -180,7 +180,7 @@ graph LR
 ### 3.3 谓词状态转换
 
 | 操作 | 谓词变换 | Rust 代码 | 含义 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | **创建共享** | `own(τ)(v̄) ⟹ own(τ)(v̄) ∗ shr(κ, ℓ)` | `let r = &x;` | 从所有权创建共享引用 |
 | **复制共享** | `shr(κ, ℓ) ⟹ shr(κ, ℓ) ∗ shr(κ, ℓ)` | `let r2 = r1;` | 共享引用可复制（Reborrow） |
 | **终结共享** | `shr(κ, ℓ) ∗ †κ ⟹ ⊤` | `r` 作用域结束 | 生命周期结束，共享谓词消失 |

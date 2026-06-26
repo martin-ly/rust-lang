@@ -729,7 +729,7 @@ fn main() {
 > [来源: [RFC 2996 — Async Iteration](https://rust-lang.github.io/rfcs//2996-async-iterator.html)]
 > [来源: [Stream Processing — Akka Streams](https://doc.akka.io/docs/akka/current/stream/)]
 > [来源: [Apache Flink — Stream Semantics](https://nightlies.apache.org/flink/flink-docs-stable/)]
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch17-00-async-await.html)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 
 ## 嵌入式测验（Embedded Quiz）

@@ -132,6 +132,8 @@ fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
 ## Kani 0.65+：循环契约与 Autoharness
 
 > **定位**: AWS 开发的 Rust 有界模型检查器，0.65 版本引入循环契约（Loop Contracts）和自动测试 harness 生成（Autoharness），大幅扩展验证范围。
+>
+> 📚 **深度概念页**: 更系统的 Kani 教程、项目内可运行示例与工具选型对比，参见 [Kani：Rust 有界模型检查器](./32_kani.md)。
 
 ### 新特性 1：循环契约
 
@@ -383,6 +385,8 @@ cargo miri run --manifest-path crates/c01_ownership_borrow_scope/Cargo.toml --bi
 
 ### Kani（AWS 有界模型检查器）
 
+> 📚 **深度概念页**: [Kani：Rust 有界模型检查器](./32_kani.md)
+
 ```bash
 # 安装 Kani
 cargo install kani-verifier
@@ -450,9 +454,10 @@ cd verus/source && ./tools/get-z3.sh && cargo build --release
 
 > **权威来源**: [AutoVerus arXiv 2025] · [Kani 0.65 Release Notes](https://model-checking.github.io/kani/) · [ESBMC GitHub](https://github.com/esbmc/esbmc) · [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [TrustInSoft](https://trust-in-soft.com/)
 
-> **文档版本**: 1.0
+> **文档版本**: 1.1
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-> **最后更新**: 2026-05-30
+> **最后更新**: 2026-06-26
+> **权威来源对齐变更日志**: 2026-06-26 新增 Kani 独立概念页 `./32_kani.md` 交叉链接 [来源: P2 Deep Content Sprint]
 > **状态**: ✅ 现代验证工具生态补全
 
 ## 认知路径

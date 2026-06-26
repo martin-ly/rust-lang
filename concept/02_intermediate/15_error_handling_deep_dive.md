@@ -92,7 +92,7 @@ Option<T> 和 Result<T, E> 是 Rust 错误处理的代数数据类型:
   │ ok_or           │ Option → Result                          │
   │ transpose       │ Vec<Result<T, E>> → Result<Vec<T>, E>   │
   └─────────────────┴──────────────────────────────────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/ch09-00-error-handling.html)]
 
   代数性质:
   ├── Option<T> 类似于 Maybe Monad
@@ -512,7 +512,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
 

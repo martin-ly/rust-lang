@@ -14,7 +14,7 @@
 > **主要来源**: [Wikipedia: Comparison of programming languages](https://en.wikipedia.org/wiki/Comparison_of_programming_languages) · [Wikipedia: Programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm) · [Wikipedia: Type system](https://en.wikipedia.org/wiki/Type_system) · [PL Papers]
 
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 ---
 
 > **Bloom 层级**: 评价
@@ -614,8 +614,8 @@ graph TD
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
-| Rust 无 GC + 内存安全 | [The Rust Programming Language](https://doc.rust-lang.org/book/) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | ✅ |
-| Rust 数据竞争编译期消除 | [The Rust Programming Language](https://doc.rust-lang.org/book/) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | ✅ |
+| Rust 无 GC + 内存安全 | [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | ✅ |
+| Rust 数据竞争编译期消除 | [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | ✅ |
 | 各语言适用域 | 社区共识 · 工业实践 | ⚠️ 主观 |
 | Rust 线性类型论根基 | [Girard 1987 — Linear Logic] | ✅ |
 | Haskell 范畴论基础 | [Wadler 1989 — Theorems for Free, POPL] | ✅ |
@@ -743,12 +743,12 @@ fn process(data: Vec<String>) -> Vec<String> {
 - [x] **TODO**: 补充更多新兴语言的 benchmark 对比数据（Vale、Hylo、Mojo） —— 已完成 §8.3
 - [x] **TODO**: 补充编程范式在 AI 辅助编程时代的演化趋势 —— 已完成 §8.4
 
-> **来源: [Rust Reference](https://doc.rust-lang.org/reference/); [The Rust Programming Language](https://doc.rust-lang.org/book/); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/); [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
 
 > **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page); POPL/PLDI/ECOOP Papers; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)/Iris Project** 形式化概念参考了权威学术来源和类型论研究。✅
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -796,7 +796,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 的所有权系统在命令式编程（可变变量）和函数式编程（纯函数组合）之间建立了严格边界。闭包捕获环境变量时，若需要可变访问，则外部不能同时访问该变量。`fold` 将可变状态封装为累加器参数，避免了共享可变状态的问题。这体现了 Rust 的多范式融合——命令式的性能（无闭包分配）与函数式的安全（无数据竞争）通过所有权系统统一。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: Rust 的所有权系统在命令式编程（可变变量）和函数式编程（纯函数组合）之间建立了严格边界。闭包捕获环境变量时，若需要可变访问，则外部不能同时访问该变量。`fold` 将可变状态封装为累加器参数，避免了共享可变状态的问题。这体现了 Rust 的多范式融合——命令式的性能（无闭包分配）与函数式的安全（无数据竞争）通过所有权系统统一。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：面向对象与 trait 的封装差异（编译错误）
 
@@ -827,7 +827,7 @@ mod inner_fixed {
 }
 ```
 
-> **修正**: Rust 没有 `class` 关键字，封装通过模块（`mod`）和可见性修饰符（`pub`）实现。结构体字段默认私有，方法默认私有。这与 Java/C++ 的"类即封装边界"不同——Rust 的封装边界是模块，一个模块内的多个类型可互相访问私有字段。trait 只定义行为接口，不包含字段。这种设计鼓励"组合优于继承"，通过 trait 实现多态，通过模块实现封装。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: Rust 没有 `class` 关键字，封装通过模块（`mod`）和可见性修饰符（`pub`）实现。结构体字段默认私有，方法默认私有。这与 Java/C++ 的"类即封装边界"不同——Rust 的封装边界是模块，一个模块内的多个类型可互相访问私有字段。trait 只定义行为接口，不包含字段。这种设计鼓励"组合优于继承"，通过 trait 实现多态，通过模块实现封装。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：多范式代码的 trait bound 爆炸（编译错误）
 

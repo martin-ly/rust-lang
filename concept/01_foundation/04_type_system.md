@@ -301,7 +301,7 @@ classDiagram
 > 图中的 note 标注了典型实现者和例外，帮助读者快速判断「我的类型是否自动实现了某 trait」。
 > 建议将此图作为「trait 实现推断」的参考——看到 `T: Copy` 约束时，知道它也满足 `T: Clone + Sized`。
 > 来源: [Rust Reference §11; TRPL §10; UML Class Diagram Standard](https://doc.rust-lang.org/reference/)
-> [来源: [TRPL — Types](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL — Types](https://doc.rust-lang.org/book/title-page.html)]
 > **类型分类层次（另一视角——数据导向）**:
 
 ```mermaid
@@ -435,7 +435,7 @@ Rust 类型系统的安全性保障同样由引理、定理与推论构成严密
 ```
 
 > **[来源: [Rust Reference: Patterns](https://doc.rust-lang.org/reference/patterns.html)]** match 穷尽性检查由编译器验证，确保 enum 的所有变体都被处理。✅
-> **来源: [TRPL Ch6.1](https://doc.rust-lang.org/book/)** `Option<T>` 强制处理 None 情况，消除空指针错误。✅
+> **来源: [TRPL Ch6.1](https://doc.rust-lang.org/book/title-page.html)** `Option<T>` 强制处理 None 情况，消除空指针错误。✅
 
 ### 4.4 定理：类型推断完备性 ⟹ Principal type property
 
@@ -909,7 +909,7 @@ fn main() {
 | Rust 是静态类型语言 | [TRPL Ch3.2](https://doc.rust-lang.org/book/ch03-02-data-types.html) | ✅ |
 | 编译器通常可推断类型 | [TRPL Ch3.2](https://doc.rust-lang.org/book/ch03-02-data-types.html) | ✅ |
 | enum 类似函数式语言的 ADT | [TRPL Ch6](https://doc.rust-lang.org/book/ch06-00-enums.html) | ✅ |
-| `Option<T>` 消除空指针 | [TRPL Ch6.1](https://doc.rust-lang.org/book/) · [Wikipedia: Null pointer](https://en.wikipedia.org/wiki/Null_pointer) | ✅ |
+| `Option<T>` 消除空指针 | [TRPL Ch6.1](https://doc.rust-lang.org/book/title-page.html) · [Wikipedia: Null pointer](https://en.wikipedia.org/wiki/Null_pointer) | ✅ |
 | `Result<T, E>` 强制错误处理 | [TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) | ✅ |
 | NPO 优化 Option<&T> | [Rust Reference: Enums](https://doc.rust-lang.org/reference/items/enumerations.html) | ✅ |
 | ADT 对应积与余积 | [Category Theory for Programmers] | ✅ |
@@ -1449,7 +1449,7 @@ Rust enum 的抽象内存模型是 **tagged union**（标签联合体）：
 ┌─────────────────────────────────────────────────┐
 │  discriminant (tag)  │  payload (union of variants) │
 └─────────────────────────────────────────────────┘
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 ```
 
 | 组件 | 语义 | 大小决定因素 |
@@ -1936,7 +1936,7 @@ distance_km(k);  // ✅
 // distance_km(m);  // ❌ 编译错误：类型不匹配
 ```
 
-> **来源: [TRPL Ch19.3](https://doc.rust-lang.org/book/)** "The newtype pattern is useful for tasks like ensuring type safety and encapsulation... A tuple struct with a single field is a newtype pattern." ✅
+> **来源: [TRPL Ch19.3](https://doc.rust-lang.org/book/title-page.html)** "The newtype pattern is useful for tasks like ensuring type safety and encapsulation... A tuple struct with a single field is a newtype pattern." ✅
 
 **幻影数据（PhantomData）与方差控制**:
 
@@ -2324,7 +2324,7 @@ let p: &Point = &Point(1, 2);
 | **Structural type system** | [Structural type system](https://en.wikipedia.org/wiki/Structural_type_system) | 结构类型 |
 | **Nominal type system** | [Nominal type system](https://en.wikipedia.org/wiki/Nominal_type_system) | 名义类型 |
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -2433,7 +2433,7 @@ fn longest_fixed<'a>(x: &'a str, y: &'a str) -> &'a str {
 }
 ```
 
-> **修正**: 生命周期省略规则（lifetime elision）仅适用于简单模式（单个输入引用 → 输出引用与其相同）。当存在多个输入引用且输出引用需要与其中某个关联时，必须显式标注生命周期。省略规则不适用于复杂签名。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: 生命周期省略规则（lifetime elision）仅适用于简单模式（单个输入引用 → 输出引用与其相同）。当存在多个输入引用且输出引用需要与其中某个关联时，必须显式标注生命周期。省略规则不适用于复杂签名。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 > **相关判定树**: [泛型判定树](../00_meta/concept_definition_decision_forest.md#六泛型判定树) · [Trait 判定树](../00_meta/concept_definition_decision_forest.md#五trait-判定树)
 > **相关 FTA**: [类型系统失效树](../00_meta/fault_tree_analysis_collection.md#四类型系统失效树)
 

@@ -11,7 +11,7 @@
 > **对齐来源**: [Microsoft RustTraining — C++→Rust 案例研究] · [Google — Rust in Chromium] · [Linux Kernel — Rust 引入报告] · [Ferrous Systems — Rust Migration Guide]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **来源**: [Microsoft RustTraining — github.com/microsoft/RustTraining · C++ Case Studies]

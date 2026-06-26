@@ -131,7 +131,7 @@
 
 ### 1.2 Wikipedia 对齐定义
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]**
 > **[Wikipedia: Region-based memory management]** Region-based memory management is a type of memory management in which each allocated object is assigned to a region. A region, also called a zone, arena, area, or memory context, is a collection of allocated objects that can be efficiently deallocated all at once. In Rust, lifetimes are a form of **static region inference** where regions are associated with references and checked at compile time.
 
 ### 1.3 形式化定义（区域类型）
@@ -423,7 +423,7 @@ graph BT
 
 ### 4.4 定理：NLL 流敏感安全 ⟹ 比词法作用域更精确的存活期
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]**
 
 ```text
 定理 T2: NLL 流敏感安全
@@ -568,7 +568,7 @@ fn main() {
 
 ### 5.3 反例：返回局部引用（E0106 / E0716）
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]**
 
 ```rust,ignore
 // ❌ 反例: 返回悬垂引用
@@ -805,7 +805,7 @@ fn main() {
 
 ### 7.3 边界：'static 的构造与协变收窄
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]**
 
 ```rust
 use std::sync::LazyLock;
@@ -1032,7 +1032,7 @@ where
 
 ### 12.2 Polonius 的核心设计
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]**
 
 Polonius 将借用检查重构为 **Datalog 程序**，在三元关系上进行推理：
 
@@ -1387,7 +1387,7 @@ fn filter<'a, 'b>(
 
 ### 14.2 `impl Trait` + `+'a` 的显式生命周期约束
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]**
 
 当需要**显式限制** `impl Trait` 的生命周期时，可使用 `+ 'a` 语法。这在以下场景尤为关键：
 
@@ -1726,7 +1726,7 @@ fn main() {
 
 ### 16.3 `ManuallyDrop<T>` 在 union 中的使用
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]**
 
 **核心问题**：若 union 的某个 variant 实现了 `Drop`，当 union 离开作用域时，编译器**不知道该调用哪个变体的 `drop`**。
 
@@ -1975,7 +1975,7 @@ enum SafeValue {
 | **Variable shadowing** | [Variable shadowing](https://en.wikipedia.org/wiki/Variable_shadowing) | 变量遮蔽 |
 | **Non-lexical lifetimes** | [Non-lexical lifetimes](https://en.wikipedia.org/wiki/Rust_(programming_language)#Non-lexical_lifetimes) | 非词法生命周期 |
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
@@ -1990,7 +1990,7 @@ enum SafeValue {
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]**
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >

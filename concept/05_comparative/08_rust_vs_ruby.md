@@ -13,7 +13,7 @@
 
 ---
 
-> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
 > [Ruby Documentation](https://www.ruby-lang.org/en/documentation/) ·
 > [Matz's Keynote — RubyConf](https://rubyconf.org/) ·
 > [Speed of Rust vs Ruby](https://benchmarksgame-team.pages.debian.net/benchmarksgame/) ·
@@ -469,7 +469,7 @@ graph TD
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
 | [Ruby Documentation](https://www.ruby-lang.org/en/documentation/) | ✅ 一级 | 官方文档 |
-| [TRPL](https://doc.rust-lang.org/book/) | ✅ 一级 | Rust 官方书 |
+| [TRPL](https://doc.rust-lang.org/book/title-page.html) | ✅ 一级 | Rust 官方书 |
 | [Benchmarks Game](https://benchmarksgame-team.pages.debian.net/benchmarksgame/) | ✅ 一级 | 性能基准 |
 | [Shopify Engineering](https://shopify.engineering/rust-at-shopify) | ✅ 二级 | 生产案例 |
 | [RubyConf Talks](https://rubyconf.org/) | ✅ 二级 | 社区演讲 |
@@ -518,7 +518,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
 
@@ -566,7 +566,7 @@ fn print_length_fixed<T: HasLength>(x: T) {
 }
 ```
 
-> **Ruby 对比**: Ruby 使用 duck typing——`x.len` 在运行时检查 `x` 是否有 `len` 方法，有则调用，无则抛出 `NoMethodError`。Rust 在编译期通过 trait bound 检查类型是否实现所需方法。Ruby 的灵活性允许更自由的元编程，但错误延迟到运行时；Rust 的严格性在编译期捕获错误，但要求预先定义接口。这与 Go 的隐式接口（structural typing）也不同——Rust 是 nominal typing，必须显式 `impl Trait for Type`。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **Ruby 对比**: Ruby 使用 duck typing——`x.len` 在运行时检查 `x` 是否有 `len` 方法，有则调用，无则抛出 `NoMethodError`。Rust 在编译期通过 trait bound 检查类型是否实现所需方法。Ruby 的灵活性允许更自由的元编程，但错误延迟到运行时；Rust 的严格性在编译期捕获错误，但要求预先定义接口。这与 Go 的隐式接口（structural typing）也不同——Rust 是 nominal typing，必须显式 `impl Trait for Type`。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：Ruby 的 open classes 与 Rust 的孤儿规则（编译错误）
 

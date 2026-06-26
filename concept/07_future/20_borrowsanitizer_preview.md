@@ -142,7 +142,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 Rust 内存安全检测的**三层架构**——编译器负责静态保证，Miri 负责深度验证，BorrowSanitizer 负责工业级运行时检测。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 开发阶段使用编译器；测试阶段使用 BorrowSanitizer；深度审计使用 Miri。
 > **关键洞察**: BorrowSanitizer 的定位是"**可部署的 Miri 子集**"——牺牲部分检测能力以换取可接受的运行时开销。
 > [来源: 💡 原创分析]

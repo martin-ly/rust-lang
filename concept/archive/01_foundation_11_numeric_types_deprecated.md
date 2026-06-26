@@ -12,7 +12,7 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
-> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) · [std::num](https://doc.rust-lang.org/std/num/index.html) · [Wikipedia — Integer Overflow](https://en.wikipedia.org/wiki/Integer_overflow) · [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754)
+> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html) · [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) · [std::num](https://doc.rust-lang.org/std/num/index.html) · [Wikipedia — Integer Overflow](https://en.wikipedia.org/wiki/Integer_overflow) · [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754)
 
 ## 📑 目录
 
@@ -87,7 +87,7 @@ Rust 整数类型:
 
 ### 1.2 浮点类型
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)]**
 
 ```text
 Rust 浮点类型:
@@ -338,7 +338,7 @@ graph TD
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/ch03-02-data-types.html)]
 
 ```text
 陷阱 1: 默认整数类型假设
@@ -387,7 +387,7 @@ graph TD
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/ch03-02-data-types.html)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -445,7 +445,7 @@ fn main() {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)]**
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >

@@ -10,7 +10,7 @@
 > **原则**: 每条定理链必须可追溯至 L4 形式化公理，并标注失效条件（什么情况下定理不成立）。
 > **符号约定**: `⊢` 推导 / `⟹` 蕴含 / `⇐` 依赖 / `⊘` 反例 / `≡` 等价
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 > **Bloom 层级**: 元（Meta）
@@ -303,7 +303,7 @@ graph TD
     「T: Send ⟺ T 的所有权可跨线程转移」
     「T: Sync ⟺ &T: Send」
     ↓
-定理 T-041: fearless concurrency 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)
+定理 T-041: fearless concurrency 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
     「Safe Rust + Send/Sync ⟹ 无数据竞争」
     ↓
 推论 C-040: MutexGuard 自动释放 [来源: RAII 原则, Rust std docs]

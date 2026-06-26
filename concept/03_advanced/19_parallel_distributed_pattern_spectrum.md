@@ -744,7 +744,7 @@ fn main() {
 > 2) `ThreadPoolBuilder` 自定义；
 > 3) `join`（分治并行）。
 > 这与 OpenMP 的 `parallel for`（编译指令，隐式 reduction）或 C++ 的 `std::execution::par`（类似 rayon，但标准库支持）不同——Rust 的 rayon 是库级并行，类型安全。
-> [来源: [Rayon](https://docs.rs/rayon/)] · [来源: [Data Parallelism](https://doc.rust-lang.org/book/)]
+> [来源: [Rayon](https://docs.rs/rayon/)] · [来源: [Data Parallelism](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.8 边界测试：生命周期参数的不匹配返回
 
@@ -775,13 +775,13 @@ fn main() {}
 > [来源: [Shapiro et al. — CRDT](https://hal.inria.fr/hal-00932836/document)]
 > [来源: [Rust Atomics and Locks](https://marabos.nl/atomics/)]
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 > [来源: [RFC 2349 — Async Closures](https://rust-lang.github.io/rfcs/)]
 > [来源: [Data Parallelism in Rust](https://doc.rust-lang.org/std/thread/)]
 > [来源: [MPI for Rust](https://docs.rs/mpi/)]
 > [来源: [Apache Arrow Rust](https://arrow.apache.org/rust/)]
 > [来源: [Rust Concurrency Patterns](https://rust-lang.github.io/async-book/)]
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 
 ## 嵌入式测验（Embedded Quiz）

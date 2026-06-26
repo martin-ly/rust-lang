@@ -21,7 +21,7 @@
 
 ---
 
-> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [C# Documentation](https://docs.microsoft.com/en-us/dotnet/csharp/) · [Wikipedia — C Sharp](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) · [.NET Blog](https://devblogs.microsoft.com/dotnet/) · [Wikipedia — Rust](https://en.wikipedia.org/wiki/Rust_(programming_language))
+> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [C# Documentation](https://docs.microsoft.com/en-us/dotnet/csharp/) · [Wikipedia — C Sharp](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) · [.NET Blog](https://devblogs.microsoft.com/dotnet/) · [Wikipedia — Rust](https://en.wikipedia.org/wiki/Rust_(programming_language))
 
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 
@@ -568,7 +568,7 @@ graph TD
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
 | [C# Documentation](https://docs.microsoft.com/en-us/dotnet/csharp/) | ✅ 一级 | 官方文档 |
-| [TRPL](https://doc.rust-lang.org/book/) | ✅ 一级 | Rust 官方书 |
+| [TRPL](https://doc.rust-lang.org/book/title-page.html) | ✅ 一级 | Rust 官方书 |
 | [.NET Blog](https://devblogs.microsoft.com/dotnet/) | ✅ 一级 | 官方博客 |
 | [.NET Performance](https://github.com/dotnet/performance) | ✅ 二级 | 性能指南 |
 | [C# Language Specification](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/) | ✅ 一级 | 语言规范 |
@@ -640,7 +640,7 @@ async fn main_fixed() {
 }
 ```
 
-> **C# 对比**: C# 的 `async/await` 可在任何方法中使用（包括 `Main`），编译器自动生成状态机。Rust 的 `async fn` 返回 `Future`，必须在异步运行时上执行。C# 的 `Task` 与 Rust 的 `Future` 类似，但 C# 有隐式运行时（线程池），Rust 要求显式选择运行时（Tokio）。Rust 的设计更灵活（可选择无运行时），但增加了认知负担。C# 的 `await` 可在 `catch`/`finally` 中使用，Rust 的 `?` 运算符在 `async` 中有类似限制。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **C# 对比**: C# 的 `async/await` 可在任何方法中使用（包括 `Main`），编译器自动生成状态机。Rust 的 `async fn` 返回 `Future`，必须在异步运行时上执行。C# 的 `Task` 与 Rust 的 `Future` 类似，但 C# 有隐式运行时（线程池），Rust 要求显式选择运行时（Tokio）。Rust 的设计更灵活（可选择无运行时），但增加了认知负担。C# 的 `await` 可在 `catch`/`finally` 中使用，Rust 的 `?` 运算符在 `async` 中有类似限制。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：C# 的 LINQ 与 Rust 的迭代器（编译错误）
 

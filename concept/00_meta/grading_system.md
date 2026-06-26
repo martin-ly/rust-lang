@@ -7,7 +7,7 @@
 > **适用范围**: `concept/` / `knowledge/` / `book/` 全部内容文件
 > **强制执行**: 自 2026-06-06 起，所有新增/修改文件必须携带双标签
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 ## 一、四级内容分级标签

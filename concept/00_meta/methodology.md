@@ -10,7 +10,7 @@
 > **定位**：本文件定义 `concept/` 下所有主题文件的内容结构、思维表征方式和知识组织规范，确保内容的**一致性、可比较性、可扩展性**。
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 ## 📑 目录
@@ -250,7 +250,7 @@ graph TD
 >
 > 例如：
 > **[Wikipedia: Rust]** Rust is a multi-paradigm, general-purpose programming language.
-> **[The Rust Programming Language](https://doc.rust-lang.org/book/)** Ownership is Rust's most unique feature.
+> **[The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)** Ownership is Rust's most unique feature.
 > **[Stanford CS340R: Syllabus]** What are the most important open research challenges?
 ```
 
@@ -472,7 +472,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1

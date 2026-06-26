@@ -5,7 +5,7 @@
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Cargo Book](https://doc.rust-lang.org/cargo/) · [crates.io](https://crates.io/)
+> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Cargo Book](https://doc.rust-lang.org/cargo/) · [crates.io](https://crates.io/)
 ---
 
 # Application Domains（软件工程应用主题）
@@ -77,7 +77,7 @@
 >
 
 > **学习递进**: 从直觉出发，逐层深入核心概念。
-[来源: [TRPL](https://doc.rust-lang.org/book/)]
+[来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 第 1 步：Rust适合哪些应用领域？
 
@@ -507,7 +507,7 @@ Rust 编译为 WASM 的核心优势：
 | **Sycamore** | 细粒度响应式 | 类似 Solid.js、性能优先 | ⭐⭐⭐ |
 
 > **关键洞察**: Leptos 的**细粒度响应式**系统不在 WASM 层面做虚拟 DOM diff，而是直接在编译期生成信号（signal）依赖图。这使得其 WASM 输出体积极小，且运行时性能与手写 JavaScript 相当。
-[来源: [TRPL](https://doc.rust-lang.org/book/)]
+[来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
 > **来源**: [WebAssembly.org] · [Leptos Book] · [Dioxus Docs] · 可信度: ✅
 
@@ -798,7 +798,7 @@ graph TD
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
-| Rust 适合系统编程 | [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Wikipedia: Systems programming](https://en.wikipedia.org/wiki/Systems_programming) | ✅ |
+| Rust 适合系统编程 | [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Wikipedia: Systems programming](https://en.wikipedia.org/wiki/Systems_programming) | ✅ |
 | Web 框架定义 | [Wikipedia: Web framework](https://en.wikipedia.org/wiki/Web_framework) | ✅ |
 | 嵌入式系统定义 | [Wikipedia: Embedded system](https://en.wikipedia.org/wiki/Embedded_system) | ✅ |
 | 区块链定义 | [Wikipedia: Blockchain](https://en.wikipedia.org/wiki/Blockchain) | ✅ |
@@ -1386,7 +1386,7 @@ graph TD
 > **[来源: Rust Blockchain Report 2024; Solana Docs; Polkadot Substrate Docs; Near Protocol Docs]** 区块链方向基于公开协议文档和社区报告。✅
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1

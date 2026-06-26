@@ -14,7 +14,7 @@
 
 ---
 
-> **来源**: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) · [TypeScript Deep Dive](https://basarat.gitbook.io/typescript/) · [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [TC39 ECMAScript](https://tc39.es/ecma262/) · [WASM Specification](https://webassembly.github.io/spec/) · [Rust and WASM](https://rustwasm.github.io/book/) · [wasm-bindgen](https://rustwasm.github.io/docs/wasm-bindgen/) · [ts-rs crate](https://docs.rs/ts-rs/latest/ts_rs/) · [oxc project](https://oxc.rs/) · [swc project](https://swc.rs/) · [Type System — Wikipedia](https://en.wikipedia.org/wiki/Type_system) · [Structural vs Nominal Typing](https://www.typescriptlang.org/docs/handbook/type-compatibility.html) · [Rustnomicon](https://doc.rust-lang.org/nomicon/) · [Node.js Performance](https://nodejs.org/en/docs/guides/dont-block-the-event-loop)
+> **来源**: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) · [TypeScript Deep Dive](https://basarat.gitbook.io/typescript/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [TC39 ECMAScript](https://tc39.es/ecma262/) · [WASM Specification](https://webassembly.github.io/spec/) · [Rust and WASM](https://rustwasm.github.io/book/) · [wasm-bindgen](https://rustwasm.github.io/docs/wasm-bindgen/) · [ts-rs crate](https://docs.rs/ts-rs/latest/ts_rs/) · [oxc project](https://oxc.rs/) · [swc project](https://swc.rs/) · [Type System — Wikipedia](https://en.wikipedia.org/wiki/Type_system) · [Structural vs Nominal Typing](https://www.typescriptlang.org/docs/handbook/type-compatibility.html) · [Rustnomicon](https://doc.rust-lang.org/nomicon/) · [Node.js Performance](https://nodejs.org/en/docs/guides/dont-block-the-event-loop)
 
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 
@@ -93,7 +93,7 @@ TypeScript 核心特征:
   ├── 无 any 等价物: unsafe 是受限的逃生舱
   ├── 所有权: 编译期资源管理证明
   └── 设计目标: 系统编程的安全与性能
-  > [来源: [TRPL](https://doc.rust-lang.org/book/)] · [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+  > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)] · [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 ```
 
 > **认知功能**: TypeScript 的"类型擦除"与 Rust 的"类型单态化"是根本不同的编译策略——TypeScript 类型只影响编译期检查，Rust 类型决定代码生成和内存布局。
@@ -137,7 +137,7 @@ TypeScript 核心特征:
   │ 泛型            │ 擦除（erasure）     │ 单态化（monomorph） │
   │ 类型完备性      │ 渐进（可 any）      │ 穷尽（必须处理）    │
   └─────────────────┴─────────────────────┴─────────────────────┘
-  > [来源: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)] · [来源: [TRPL](https://doc.rust-lang.org/book/)]
+  > [来源: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)] · [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 ```
 
 > **认知功能**: TypeScript 的"渐进式类型"允许**逐步迁移** JavaScript 代码库，而 Rust 的"穷尽式类型"要求**upfront 设计**——这是两种截然不同的工程哲学。
@@ -180,7 +180,7 @@ TypeScript 核心特征:
   │ 编译时间        │ 快（类型擦除）      │ 慢（LLVM 优化）     │
   │ 迭代速度        │ 快（无需编译）      │ 中等（cargo check） │
   └─────────────────┴─────────────────────┴─────────────────────┘
-  > [来源: [Node.js Performance](https://nodejs.org/en/docs/guides/dont-block-the-event-loop)] · [来源: [TRPL](https://doc.rust-lang.org/book/)]
+  > [来源: [Node.js Performance](https://nodejs.org/en/docs/guides/dont-block-the-event-loop)] · [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 ```
 
 > **认知功能**: TypeScript 牺牲编译期保证换取**开发速度和生态兼容**，Rust 牺牲开发速度换取**运行时安全和性能**——这是"开发效率"与"运行时效率"的经典权衡。
@@ -355,7 +355,7 @@ TypeScript 核心特征:
   }
   // 调用方必须处理（编译期强制）
   let result = divide(10.0, 0.0)?;
-  > [来源: [TRPL](https://doc.rust-lang.org/book/)]
+  > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 ```
 
 > **认知功能**: TypeScript 的错误处理依赖**约定和 linter**，Rust 的错误处理是**类型系统的一部分**——调用 `?` 的函数必须返回 Result，形成编译期传播链。
@@ -492,7 +492,7 @@ graph TB
 ```
 
 > **认知功能**: 此图揭示 TypeScript 和 Rust 的**共同目标**（消除运行时类型错误）与**不同路径**（擦除 vs 证明、渐进 vs 穷尽）。
-> [来源: [TypeScript Design Goals](https://github.com/microsoft/TypeScript/wiki/TypeScript-Design-Goals)] · [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TypeScript Design Goals](https://github.com/microsoft/TypeScript/wiki/TypeScript-Design-Goals)] · [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **关键洞察**: TypeScript 的"渐进"允许**局部收益**（给 JS 加类型即可获益），Rust 的"穷尽"要求**全局一致**（整个程序需满足所有权规则）。
 > [来源: 💡 原创分析]
 
@@ -595,7 +595,7 @@ graph TD
   ├── 大型项目编译: 数分钟（debug）到数十分钟（release）
   ├── cargo check: 秒级语法/类型检查（不生成代码）
   └── 边界: 迭代速度低于 TS 的 tsc --watch
-  > [来源: [TRPL](https://doc.rust-lang.org/book/)] · [来源: [Cargo Documentation](https://doc.rust-lang.org/cargo/)]
+  > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)] · [来源: [Cargo Documentation](https://doc.rust-lang.org/cargo/)]
 
   边界 3: WASM 的内存限制
   ├── 默认线性内存: 1-2 GB（32-bit 地址空间）
@@ -657,7 +657,7 @@ graph TD
 |:---|:---:|:---|
 | [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) | ✅ 一级 | TypeScript 官方文档 |
 | [TypeScript Deep Dive](https://basarat.gitbook.io/typescript/) | ✅ 二级 | TypeScript 深度指南 |
-| [TRPL](https://doc.rust-lang.org/book/) | ✅ 一级 | Rust 官方教程 |
+| [TRPL](https://doc.rust-lang.org/book/title-page.html) | ✅ 一级 | Rust 官方教程 |
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | Rust 语言参考 |
 | [TC39 ECMAScript](https://tc39.es/ecma262/) | ✅ 一级 | JavaScript 语言规范 |
 | [WASM Specification](https://webassembly.github.io/spec/) | ✅ 一级 | WebAssembly 规范 |
@@ -691,7 +691,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 
@@ -738,7 +738,7 @@ fn fixed() {
 }
 ```
 
-> **TypeScript 对比**: TypeScript 的 `any` 类型绕过所有类型检查，允许任意操作（`x.foo()` 不会报错，即使 `foo` 不存在）。Rust 没有 `any` 等价物——所有操作必须在编译期验证。`enum` 是 Rust 表达"多种可能类型"的方式，但调用者必须通过 `match` 处理每个变体。这与 TypeScript 的联合类型（`number | string`）类似，但 Rust 的穷尽性检查更严格——必须覆盖所有变体，不能遗漏。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **TypeScript 对比**: TypeScript 的 `any` 类型绕过所有类型检查，允许任意操作（`x.foo()` 不会报错，即使 `foo` 不存在）。Rust 没有 `any` 等价物——所有操作必须在编译期验证。`enum` 是 Rust 表达"多种可能类型"的方式，但调用者必须通过 `match` 处理每个变体。这与 TypeScript 的联合类型（`number | string`）类似，但 Rust 的穷尽性检查更严格——必须覆盖所有变体，不能遗漏。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：TypeScript 的可选属性与 Rust 的 Option（编译错误）
 
@@ -763,7 +763,7 @@ fn fixed() {
 }
 ```
 
-> **TypeScript 对比**: TypeScript 的可选属性（`host?: string`）在访问时可能是 `undefined`，但编译器只在 `strictNullChecks` 开启时检查。Rust 的 `Option<T>` 是枚举类型，无论何种编译模式，访问内部值必须通过 `match`、`if let` 或 `unwrap`。这与 TypeScript 4.4+ 的 `--exactOptionalPropertyTypes` 类似，但 Rust 的设计更根本——可空性不是类型的属性，而是独立的类型构造器。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **TypeScript 对比**: TypeScript 的可选属性（`host?: string`）在访问时可能是 `undefined`，但编译器只在 `strictNullChecks` 开启时检查。Rust 的 `Option<T>` 是枚举类型，无论何种编译模式，访问内部值必须通过 `match`、`if let` 或 `unwrap`。这与 TypeScript 4.4+ 的 `--exactOptionalPropertyTypes` 类似，但 Rust 的设计更根本——可空性不是类型的属性，而是独立的类型构造器。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：TypeScript 的结构类型与 Rust 的名义类型的互操作（编译错误）
 

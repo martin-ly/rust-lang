@@ -198,7 +198,7 @@ Step 6: "什么时候会阻塞？"
 
 ### 1.2 官方文档定义
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html)]**
 
 > **[Async Book]** Asynchronous code allows us to run multiple tasks concurrently on the same OS thread. In Rust, asynchronous code is lazy: it does nothing until it is actively executed by calling `.await`.
 
@@ -696,7 +696,7 @@ graph LR
 
 ### 3.5·补充：跨语言异步机制对比
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html)]**
 
 | 维度 | Rust `async/await` | C++20 Coroutines | Haskell `async` / `IO` | Go Goroutine |
 |:---|:---|:---|:---|:---|
@@ -987,7 +987,7 @@ graph TD
 
 ### 8.1 正确示例：async fn + .await
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html)]**
 
 ```rust,ignore
 // ✅ 正确: async/await 基本用法
@@ -1313,7 +1313,7 @@ graph TD
 
 ### 8.9 Waker/Context 的底层机制
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html)]**
 > **章节过渡**：取消安全与 Waker 契约从语义层面描述了 Future 的生命周期，但 Waker 本身是如何实现的？理解 Waker 的 VTable 机制、Context 与 Waker 的关系，以及自定义 Waker 的实现方式，是手写 Future 和构建自定义运行时的必备知识。
 
 **Waker 的 VTable 机制**
@@ -2623,7 +2623,7 @@ let fut2 = closure("world");  // ✅ 现在可以再次调用
 
 ### 12.4 效果系统原型
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html)]**
 
 `AsyncFn` 可视为 Rust 向**显式效果追踪**迈出的第一步：
 
@@ -2760,7 +2760,7 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 | **Event loop** | [Event loop](https://en.wikipedia.org/wiki/Event_loop) | 事件循环 |
 | **Promise (programming)** | [Promise (programming)](https://en.wikipedia.org/wiki/Promise_(programming)) | Promise |
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
@@ -2779,7 +2779,7 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html)]**
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >

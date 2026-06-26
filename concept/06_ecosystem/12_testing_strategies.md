@@ -105,7 +105,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 Rust **质量保证的分层体系**——从编译期保证到运行时测试再到形式化验证，形成纵深防御。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/ch11-00-testing.html)]
 > **使用建议**: 利用 Rust 的编译期保证减少运行时测试负担；对 unsafe 代码使用 Miri；对关键算法使用 Kani。
 > **关键洞察**: Rust 的**类型系统本身就是测试**——许多在其他语言中需要单元测试保证的属性（如空指针安全、数据竞争自由），在 Rust 中由编译器自动保证。
 > [来源: [Rust Book — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)]
@@ -456,7 +456,7 @@ jobs:
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-00-testing.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0+ (Edition 2024)
 
 **文档版本**: 1.0
@@ -504,7 +504,7 @@ fn test_panic_fixed() {
 }
 ```
 
-> **修正**: `#[should_panic]` 标记测试用例期望 panic，若测试正常完成则失败。`expected` 参数可指定期望的 panic 消息子串，防止捕获错误的 panic。这与 JUnit 的 `@Test(expected = Exception.class)` 或 pytest 的 `pytest.raises` 类似，但 Rust 的 `should_panic` 更严格——必须实际 panic，不能只抛出异常（Rust 没有异常）。在测试 unsafe 代码的边界条件时，`should_panic` 是验证编译期无法阻止的运行时错误的唯一方式。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: `#[should_panic]` 标记测试用例期望 panic，若测试正常完成则失败。`expected` 参数可指定期望的 panic 消息子串，防止捕获错误的 panic。这与 JUnit 的 `@Test(expected = Exception.class)` 或 pytest 的 `pytest.raises` 类似，但 Rust 的 `should_panic` 更严格——必须实际 panic，不能只抛出异常（Rust 没有异常）。在测试 unsafe 代码的边界条件时，`should_panic` 是验证编译期无法阻止的运行时错误的唯一方式。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-00-testing.html)]
 
 ### 10.2 边界测试：异步测试的运行时要求（编译错误）
 

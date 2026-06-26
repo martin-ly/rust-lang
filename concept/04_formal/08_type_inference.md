@@ -170,7 +170,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 Rust 类型推断的**层次结构**——基于 HM 基础，扩展了 Trait、生命周期、关联类型等工业级特性。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **关键洞察**: Rust 的类型推断不是纯 HM——它结合了**约束求解**（类型统一）和**Trait 解析**（目标导向搜索）。
 > [来源: [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/types.html)]
 
@@ -493,7 +493,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 

@@ -184,7 +184,7 @@ Comprehensive Rust 与本知识体系的互补关系:
 
 ---
 
-> **权威来源**: [Comprehensive Rust](https://google.github.io/comprehensive-rust/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Comprehensive Rust](https://google.github.io/comprehensive-rust/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 > **权威来源对齐变更日志**: 2026-06-02 创建，映射 Comprehensive Rust 2026 版
 
 **文档版本**: 1.0

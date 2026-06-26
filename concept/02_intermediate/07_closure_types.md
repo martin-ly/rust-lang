@@ -121,7 +121,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示三种闭包 Trait 的**继承关系和能力层级**——Fn 最严格（只读），FnMut 次之（可修改），FnOnce 最宽松（可消费）。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/ch13-01-closures.html)]
 > **使用建议**: 泛型约束优先使用最严格的 Trait（Fn → FnMut → FnOnce），以获得最大的调用灵活性。
 > **关键洞察**: `Fn: FnMut: FnOnce` 形成**子类型关系**——如果一个闭包是 `Fn`，它自动也是 `FnMut` 和 `FnOnce`。反之不成立。
 > [来源: [TRPL Ch13 — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html)]
@@ -399,7 +399,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0+ (Edition 2024)
 
@@ -479,7 +479,7 @@ fn main() {
 }
 ```
 
-> **修正**: `dyn Fn` 使用动态分发（vtable），有间接调用开销。泛型（Generics） `F: Fn` 通过单态化生成直接调用，无运行时开销。在性能关键路径上，优先使用泛型而非 trait object。这与 C++ 的模板 vs 虚函数对比一致——Rust 的零成本抽象要求显式选择静态或动态分发。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: `dyn Fn` 使用动态分发（vtable），有间接调用开销。泛型（Generics） `F: Fn` 通过单态化生成直接调用，无运行时开销。在性能关键路径上，优先使用泛型而非 trait object。这与 C++ 的模板 vs 虚函数对比一致——Rust 的零成本抽象要求显式选择静态或动态分发。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)]
 
 ### 10.3 边界测试：`Fn` trait 的自动实现与 `move` 闭包（编译错误）
 

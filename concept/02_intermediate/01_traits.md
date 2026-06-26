@@ -669,7 +669,7 @@ fn returns_iter() -> impl Iterator<Item = u32> {
 
 #### 语法与动机
 
-普通关联类型只能表达"每个实现者对应一个类型"来源: [TRPL Ch19.3](https://doc.rust-lang.org/book/)：
+普通关联类型只能表达"每个实现者对应一个类型"来源: [TRPL Ch19.3](https://doc.rust-lang.org/book/ch10-02-traits.html)：
 
 ```rust
 trait Iterator {
@@ -729,7 +729,7 @@ impl<'t, T> LendingIterator for Windows<'t, T> {
 
 #### 为什么 GATs 解决了关联类型不能泛型的问题
 
-在 GATs 之前，若 trait 需要与泛型参数相关的类型，只能将泛型参数提升到 trait 本身来源: [TRPL Ch19.3](https://doc.rust-lang.org/book/)：
+在 GATs 之前，若 trait 需要与泛型参数相关的类型，只能将泛型参数提升到 trait 本身来源: [TRPL Ch19.3](https://doc.rust-lang.org/book/ch10-02-traits.html)：
 
 ```rust
 // GATs 之前：笨拙的 trait 级泛型
@@ -992,7 +992,7 @@ graph TD
 ### 6.3 反命题 3: "`dyn Trait` 和 `impl Trait` 等价"
 
 > 语义/编译期层 — 两者在类型论中不等价：`impl Trait` 是存在类型（编译期擦除），`dyn Trait` 是动态分发（运行时擦除），分发方式和大小信息有本质差异。
-> **来源: [TRPL Ch19.3](https://doc.rust-lang.org/book/)** `impl Trait`（存在类型，编译期擦除）与 `dyn Trait`（动态分发，运行时擦除）在类型论中不等价，信息隐藏的时机决定了能力边界。
+> **来源: [TRPL Ch19.3](https://doc.rust-lang.org/book/ch10-02-traits.html)** `impl Trait`（存在类型，编译期擦除）与 `dyn Trait`（动态分发，运行时擦除）在类型论中不等价，信息隐藏的时机决定了能力边界。
 
 ```mermaid
 graph TD
@@ -2028,7 +2028,7 @@ RUSTFLAGS="-Znext-solver=globally" cargo +nightly check
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1

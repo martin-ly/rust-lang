@@ -91,7 +91,7 @@ Rust 是表达式导向语言（Expression-Oriented Language）:
   │ 三元运算符       │ a ? b : c       │ if a { b } else │
   │                 │                 │ { c }           │
   └─────────────────┴─────────────────┴─────────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/ch03-05-control-flow.html)]
 
   表达式导向的好处:
   ├── 控制流可以返回值，减少临时变量
@@ -539,7 +539,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-05-control-flow.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 
@@ -613,7 +613,7 @@ fn fixed() {
 > 若模式不使用 `ref` 或 `ref mut`，则发生所有权移动（对非 `Copy` 类型）。
 > 使用 `ref` 绑定创建引用而非获取所有权，允许在匹配后继续使用原值。
 > 这是 Rust 模式匹配与所有权系统的关键交互点。
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-05-control-flow.html)]
 
 ### 10.3 边界测试：`loop` 表达式的类型推断（编译错误）
 

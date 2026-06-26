@@ -124,7 +124,7 @@ graph LR
 ```
 
 > **认知功能**: 此图对比 Rust **单态化**与 Java **类型擦除**的实现差异——Rust 为每个类型生成专门代码，Java 使用通用代码加运行时类型处理。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 泛型代码无需担心性能——单态化保证与手写特化代码等效。但注意二进制大小可能增加（每个特化一份代码）。
 > **关键洞察**: 单态化的代价是**二进制膨胀**（code bloat）——每个类型参数组合生成独立代码。Rust 通过 LLVM 的合并优化（COMDAT folding）缓解这一问题。
 > [来源: [Rust Reference — Monomorphization](https://doc.rust-lang.org/reference/items/generics.html#monomorphization)]
@@ -404,7 +404,7 @@ Rust 性能分析工具链:
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0+ (Edition 2024)
 
@@ -498,7 +498,7 @@ enum ListFixed<T> {
 > 递归类型直接包含自身会导致无限递归的大小计算。
 > `Box<T>` 在堆上分配，指针大小固定（平台相关，通常为 8 字节），使编译器能计算 `ListFixed<T>` 的大小。
 > 这与 C 的链表（`struct Node { int data; struct Node* next; }`）相同，但 Rust 在类型层面强制此约束——不允许隐式指针，必须显式 `Box`。
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 12.4 边界测试：`dyn Trait` 的大小未知（编译错误）
 

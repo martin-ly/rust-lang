@@ -2,7 +2,7 @@
 
 > **EN**: Advanced 03 Unsafe Rust Archived
 > **Summary**: Advanced 03 Unsafe Rust Archived. Core Rust concept.
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **内容分级**: [专家级]
 > **受众**: [专家]
 > **Bloom 层级**: 理解
@@ -15,7 +15,7 @@
 > - `03_unsafe_rust.md` → 整合至 [`03_unsafe.md`](./03_unsafe.md)
 > - `05_macros.md` → 整合至 [`04_macros.md`](./04_macros.md) 和 [`07_proc_macro.md`](./07_proc_macro.md)
 > - `08_zero_cost_abstractions.md` → 整合至 [`06_zero_cost_abstractions.md`](../01_foundation/06_zero_cost_abstractions.md)
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 > **后置概念**: [Formal Verification](../04_formal/03_ownership_formal.md)
 > **前置依赖**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md)

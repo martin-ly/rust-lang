@@ -21,7 +21,7 @@
 
 ---
 
-> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Kotlin Documentation](https://kotlinlang.org/docs/home.html) · [Kotlinlang.org](https://kotlinlang.org/) · [Wikipedia — Kotlin](https://en.wikipedia.org/wiki/Kotlin_(programming_language)) · [Wikipedia — Rust](https://en.wikipedia.org/wiki/Rust_(programming_language))
+> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Kotlin Documentation](https://kotlinlang.org/docs/home.html) · [Kotlinlang.org](https://kotlinlang.org/) · [Wikipedia — Kotlin](https://en.wikipedia.org/wiki/Kotlin_(programming_language)) · [Wikipedia — Rust](https://en.wikipedia.org/wiki/Rust_(programming_language))
 
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 
@@ -551,7 +551,7 @@ graph TD
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
 | [Kotlin Documentation](https://kotlinlang.org/docs/home.html) | ✅ 一级 | 官方文档 |
-| [TRPL](https://doc.rust-lang.org/book/) | ✅ 一级 | Rust 官方书 |
+| [TRPL](https://doc.rust-lang.org/book/title-page.html) | ✅ 一级 | Rust 官方书 |
 | [Kotlin vs Java](https://kotlinlang.org/docs/comparison-to-java.html) | ✅ 一级 | 对比 |
 | [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html) | ✅ 一级 | 协程 |
 | [Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform.html) | ✅ 一级 | 多平台 |
@@ -620,7 +620,7 @@ fn fixed() -> Result<(), String> {
 }
 ```
 
-> **Kotlin 对比**: Kotlin 的可空类型（`String?`）与 Rust 的 `Option<String>` 类似，但 Kotlin 提供 `?.`（安全调用）和 `?:`（Elvis 运算符）简化空值处理。Rust 的 `?` 运算符用于 `Result`/`Option` 传播，`.map()` 和 `unwrap_or()` 对应 Kotlin 的 `?.let` 和 `?:`。Kotlin 的 null safety 在编译期检查，但 JVM 运行时仍可能有 null（与 Java 互操作时）。Rust 的 `Option` 是枚举，无运行时 null——`None` 和 `Some` 在内存布局中明确区分（niche optimization）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **Kotlin 对比**: Kotlin 的可空类型（`String?`）与 Rust 的 `Option<String>` 类似，但 Kotlin 提供 `?.`（安全调用）和 `?:`（Elvis 运算符）简化空值处理。Rust 的 `?` 运算符用于 `Result`/`Option` 传播，`.map()` 和 `unwrap_or()` 对应 Kotlin 的 `?.let` 和 `?:`。Kotlin 的 null safety 在编译期检查，但 JVM 运行时仍可能有 null（与 Java 互操作时）。Rust 的 `Option` 是枚举，无运行时 null——`None` 和 `Some` 在内存布局中明确区分（niche optimization）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：Kotlin 的 data class 与 Rust 的 derive（编译错误）
 
@@ -651,7 +651,7 @@ fn fixed() {
 }
 ```
 
-> **Kotlin 对比**: Kotlin 的 `data class` 自动生成 `equals`、`hashCode`、`toString`、`copy`，默认支持解构和比较。Rust 的 `#[derive(...)]` 提供类似功能，但要求显式 opt-in——默认不生成任何 trait 实现。这体现了 Rust 的"显式优于隐式"哲学：只有声明了 `#[derive(Clone)]` 的类型才可 clone，避免了 Kotlin/Java 中意外深拷贝的性能问题。Rust 的 derive 在编译期展开，无运行时开销。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **Kotlin 对比**: Kotlin 的 `data class` 自动生成 `equals`、`hashCode`、`toString`、`copy`，默认支持解构和比较。Rust 的 `#[derive(...)]` 提供类似功能，但要求显式 opt-in——默认不生成任何 trait 实现。这体现了 Rust 的"显式优于隐式"哲学：只有声明了 `#[derive(Clone)]` 的类型才可 clone，避免了 Kotlin/Java 中意外深拷贝的性能问题。Rust 的 derive 在编译期展开，无运行时开销。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：Kotlin 的协程与 Rust 的 async 的调度模型差异（运行时死锁）
 

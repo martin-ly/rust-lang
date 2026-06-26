@@ -561,7 +561,7 @@ graph TD
 | [Rust Database Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/database.html) | ✅ 二级 | 数据库指南 |
 | [deadpool](https://docs.rs/deadpool/latest/deadpool/) | ✅ 二级 | 连接池 |
 | [Toasty](https://tokio.rs/blog/2026-04-03-toasty-released) | ✅ 一级 | Tokio 团队异步 ORM |
-| [Rust Book](https://doc.rust-lang.org/book/) | ✅ 一级 | 官方教程 |
+| [Rust Book](https://doc.rust-lang.org/book/title-page.html) | ✅ 一级 | 官方教程 |
 
 ---
 

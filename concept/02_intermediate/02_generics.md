@@ -289,7 +289,7 @@ graph TD
 > **认知功能**:
 > 泛型系统概念拓扑导航图。将分散的语法要素组织为可遍历的知识网络，读者可按分支顺序建立"参数声明→约束施加→代码生成"的完整心智模型。
 > 关键洞察：泛型不是单一概念，而是由类型参数、生命周期（Lifetimes）、常量泛型、约束系统构成的多维参数空间。[来源: 💡 原创分析]
-> [来源: [TRPL — Generics](https://doc.rust-lang.org/book/)]
+> [来源: [TRPL — Generics](https://doc.rust-lang.org/book/ch10-00-generics.html)]
 > **过渡到定理推理链**:
 > 思维导图呈现了泛型系统的概念拓扑，但缺乏严格的逻辑推导关系。
 > 下一节通过"⟹"标注的定理链，将参数多态、System F、单态化、零成本抽象（Zero-Cost Abstraction）、Const Generics 等核心命题形式化为可验证的推理网络，每个定理标注其依赖的引理、推论的下游定理，以及失效条件和编译错误码。
@@ -1347,7 +1347,7 @@ fn transpose<T: Copy, const R: usize, const C: usize>(
 
 **核心问题**: "如何写一段对任何类型都适用的代码？"
 
-**过渡解释**: 从熟悉的概念出发是认知的最小阻力路径。将泛型类比为"填空题模板"——结构固定，具体内容由调用方填入。这一步建立直觉锚点：swap、min/max、容器等自然需要"对任意类型生效"。但类比有边界——填空题模板在 Rust 中不是文本替换（C++ 模板风格），而是类型参数化。从 Step 1 到 Step 2 的过渡发生在学习者首次写 `fn swap<T>(a: &mut T, b: &mut T)` 时，发现编译器不仅接受代码，还会检查类型能力。来源: [TRPL Ch10.1](https://doc.rust-lang.org/book/)
+**过渡解释**: 从熟悉的概念出发是认知的最小阻力路径。将泛型类比为"填空题模板"——结构固定，具体内容由调用方填入。这一步建立直觉锚点：swap、min/max、容器等自然需要"对任意类型生效"。但类比有边界——填空题模板在 Rust 中不是文本替换（C++ 模板风格），而是类型参数化。从 Step 1 到 Step 2 的过渡发生在学习者首次写 `fn swap<T>(a: &mut T, b: &mut T)` 时，发现编译器不仅接受代码，还会检查类型能力。来源: [TRPL Ch10.1](https://doc.rust-lang.org/book/ch10-00-generics.html)
 
 ```text
 直觉映射:
@@ -2241,12 +2241,12 @@ fn foo<'a>(x: &'a str) -> impl Display + use<'a> { x }
 - [x] **TODO**: 补充 Generic Associated Types (GATs) 的完整形式化视角 —— 优先级: 中 —— 已完成 §9.5 —— 2026-05-13
 - [x] **TODO**: 补充 Const Generics 进阶用法（表达式、where 约束、generic_const_exprs、GATs 交互、C++ 对比） —— 优先级: 高 —— 已完成 §5.7 —— 2026-05-14
 
-> **来源: [Rust Reference](https://doc.rust-lang.org/reference/); [The Rust Programming Language](https://doc.rust-lang.org/book/); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/); [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-00-generics.html); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
 
 > **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page); POPL/PLDI/ECOOP Papers; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)/Iris Project** 形式化概念参考了权威学术来源和类型论研究。✅
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-00-generics.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -2481,7 +2481,7 @@ fn main() {
 > 3) 编译期配置（缓冲区大小、哈希表容量）。
 > 这与 C++ 的非类型模板参数（`template<size_t N>`，推断更灵活）或 Ada 的泛型（类似，但语法不同）不同——Rust 的 const generic 保守但类型安全。
 > [来源: [Rust Reference — Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-00-generics.html)]
 
 ## 实践
 

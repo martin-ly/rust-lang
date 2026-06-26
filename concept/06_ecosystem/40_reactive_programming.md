@@ -991,7 +991,7 @@ fn circular_signal_deadlock() {
 - [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、线程安全
 - [范型矩阵](../05_comparative/03_paradigm_matrix.md) — 多语言范式对比
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 > **过渡**: Reactive Programming & FRP（响应式编程与函数式响应编程） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Reactive Programming & FRP（响应式编程与函数式响应编程） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

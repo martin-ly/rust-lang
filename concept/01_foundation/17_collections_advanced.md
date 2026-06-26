@@ -671,7 +671,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-00-common-collections.html), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 
@@ -806,7 +806,7 @@ fn main() {
 > 3) 使用 `Cursor` API（不稳定，`BTreeMap::cursor_mut`）。
 > Rust 的标准库设计优先考虑安全而非便利——遍历中修改是常见需求，但 Rust 要求显式处理，避免隐式迭代器失效。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-00-common-collections.html)]
 
 ### 10.5 边界测试：`HashSet` 的自定义哈希与 `Hash` 一致性（运行时逻辑错误）
 
@@ -847,7 +847,7 @@ fn main() {
 > 3) `PartialEq` 和 `Hash` 基于不同字段（如 `Eq` 比较 `id`，`Hash` 哈希 `name`）。
 > 这与 Java 的 `hashCode`/`equals` 契约（同样要求一致）或 Python 的 `__hash__`/`__eq__`（同样要求一致）相同——哈希表的正确性依赖哈希函数的一致性。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/hash/trait.Hash.html)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-00-common-collections.html)]
 
 ### 10.5 边界测试：`HashMap` 的 `Entry` API 与借用冲突（编译错误）
 
@@ -872,7 +872,7 @@ fn main() {
 > 常见模式：`map.entry(key).and_modify(|v| v.push(4)).or_insert(vec![4])`。
 > 这与 C++ 的 `std::map::operator[]`（自动插入默认值，但返回引用不解决借用冲突）或 Java 的 `Map.compute`（类似，但无编译期借用检查）不同——Rust 的 `Entry` API 在类型系统层面保证操作的原子性（从调用者视角）。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/hash_map/enum.Entry.html)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-00-common-collections.html)]
 
 ### 10.6 边界测试：`BTreeMap` 的键修改与排序不变性破坏（逻辑错误/UB）
 
@@ -902,7 +902,7 @@ fn main() {
 > Rust 的 API 设计禁止键修改：`keys()` 返回不可变引用，`values_mut()` 只返回值的可变引用。
 > `HashMap` 同理：键的哈希值决定桶位置，修改键会破坏哈希表。这与 C++ 的 `std::map`（`iterator->first` 是 const，不能修改键）或 Java 的 `TreeMap`（`Map.Entry.setValue` 只允许修改值）类似——Rust 的编译期不可变性保证更严格。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-00-common-collections.html)]
 
 ## 嵌入式测验（Embedded Quiz）
 
