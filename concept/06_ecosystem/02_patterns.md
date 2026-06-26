@@ -1,7 +1,6 @@
 # Design Patterns（设计模式）
 
 > **代码状态**: ✅ 含可编译示例
-
 >
 > **EN**: Design Patterns
 > **Summary**: Design Patterns. Guide to 02 Patterns.
@@ -898,11 +897,11 @@ impl Drop for FooContext {
 | **适用场景** | 库作者（轻量） | CLI/应用（用户友好报告） | 复杂领域错误（状态机） |
 | **额外依赖** | 几乎零 | `miette` 自身 + `owo-colors` | `snafu` 自身 |
 
-rust,ignore
+```rust,ignore
 // thiserror：库的首选
 use thiserror::Error;
 
-# [derive(Error, Debug)]
+#[derive(Error, Debug)]
 
 pub enum ConfigError {
     #[error("invalid port: {0}")]
@@ -955,7 +954,6 @@ fn load(path: &str) -> Result<Config, Error> {
 ## 五、反模式（Anti-patterns）
 
 > **Bloom 层级**: 应用 → 分析
-
 
 反模式是"看似正确、实则有害"的惯用做法。Rust 的类型系统与所有权模型在消除某些经典反模式（如悬空指针、数据竞争）的同时，也催生了特有的抽象陷阱——过度使用泛型、过早拆分模块、`Rc<RefCell<...>>` 迷宫等。以下从工程直觉到成本分析，建立反模式的识别框架。
 

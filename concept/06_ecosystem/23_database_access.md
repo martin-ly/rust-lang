@@ -1,7 +1,7 @@
-> **内容分级**: [综述级]
-
+> **内容分级**:
+>
+> [综述级]
 > **代码状态**: ✅ 含可编译示例
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Rust 数据库访问生态
@@ -10,7 +10,6 @@
 > **Summary**: Database Access. Core Rust concept covering mechanism analysis, ecosystem and tooling, HTTP and web services.
 >
 > **受众**: [进阶]
-
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用数据库访问模式

@@ -43,6 +43,14 @@
   - [六、反命题与边界](#六反命题与边界)
     - [6.1 反命题树](#61-反命题树)
     - [6.2 边界极限](#62-边界极限)
+  - [七、实践：版本注入 + FFI 最小项目](#七实践版本注入--ffi-最小项目)
+    - [7.1 目录结构](#71-目录结构)
+    - [7.2 `Cargo.toml`](#72-cargotoml)
+    - [7.3 `build.rs`](#73-buildrs)
+    - [7.4 `native/math.c`](#74-nativemathc)
+    - [7.5 `src/lib.rs`](#75-srclibrs)
+    - [7.6 运行与验证](#76-运行与验证)
+    - [7.7 练习](#77-练习)
   - [嵌入式测验](#嵌入式测验)
     - [测验 1：`build.rs` 运行在目标平台还是构建主机？](#测验-1buildrs-运行在目标平台还是构建主机)
     - [测验 2：如何让 Cargo 在 `src/config.json` 改变时重新运行 `build.rs`？](#测验-2如何让-cargo-在-srcconfigjson-改变时重新运行-buildrs)
@@ -290,6 +298,129 @@ graph TD
 - `build.rs` 运行在**构建主机**，不能假设目标平台文件系统布局。
 - `build.rs` 的 `rerun-if-changed` 只监控文件内容，不监控目录列表变化。
 - 如果 `build.rs` 失败，主 crate 不会编译；错误信息会出现在 Cargo 输出中。
+
+---
+
+## 七、实践：版本注入 + FFI 最小项目
+
+本节提供一个**完整可运行**的最小项目，演示 `build.rs` 的两个高频场景：
+
+1. **代码生成**：读取 `build-info.json` 并向 `OUT_DIR` 注入常量；
+2. **原生库链接**：使用 `cc` crate 编译 C 文件并链接到 Rust。
+
+项目路径：`examples/build_script_practice/`
+
+### 7.1 目录结构
+
+```text
+examples/build_script_practice/
+├── Cargo.toml
+├── build.rs
+├── build-info.json
+├── native/
+│   └── math.c
+└── src/
+    └── lib.rs
+```
+
+### 7.2 `Cargo.toml`
+
+```toml
+[package]
+name = "build_script_practice"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.96.0"
+
+[dependencies]
+
+[build-dependencies]
+cc = "1.2"
+serde_json = "1.0"
+
+# 本示例为独立包，避免与根 workspace 冲突。
+[workspace]
+```
+
+### 7.3 `build.rs`
+
+```rust
+use std::env;
+use std::fs;
+use std::path::{Path, PathBuf};
+
+fn main() {
+    // 监控 build-info.json，变化时重新运行 build.rs
+    let info_path = Path::new("build-info.json");
+    println!("cargo:rerun-if-changed={}", info_path.display());
+
+    // 读取 JSON 并生成 Rust 常量到 OUT_DIR
+    let out_dir = PathBuf::from(env::var("OUT_DIR").expect("OUT_DIR not set"));
+    let info: serde_json::Value = serde_json::from_str(
+        &fs::read_to_string(info_path).expect("failed to read build-info.json"),
+    )
+    .expect("failed to parse build-info.json");
+
+    let generated = format!(
+        "pub const PROJECT_NAME: &str = \"{}\";\n\
+         pub const MAINTAINER: &str = \"{}\";\n\
+         pub const LICENSE: &str = \"{}\";\n",
+        info["project"].as_str().unwrap_or("unknown"),
+        info["maintainer"].as_str().unwrap_or("unknown"),
+        info["license"].as_str().unwrap_or("unknown"),
+    );
+    fs::write(out_dir.join("build_info.rs"), generated)
+        .expect("failed to write build_info.rs");
+
+    // 编译 native/math.c
+    println!("cargo:rerun-if-changed=native/math.c");
+    cc::Build::new().file("native/math.c").compile("mymath");
+}
+```
+
+### 7.4 `native/math.c`
+
+```c
+int mylib_add(int a, int b) {
+    return a + b;
+}
+```
+
+### 7.5 `src/lib.rs`
+
+```rust
+// 引入 build.rs 生成的代码
+include!(concat!(env!("OUT_DIR"), "/build_info.rs"));
+
+// Rust 2024 Edition 要求 extern 块标记为 unsafe
+unsafe extern "C" {
+    fn mylib_add(a: i32, b: i32) -> i32;
+}
+
+pub fn add_via_c(a: i32, b: i32) -> i32 {
+    // SAFETY: mylib_add 是无副作用的纯函数。
+    unsafe { mylib_add(a, b) }
+}
+```
+
+### 7.6 运行与验证
+
+```bash
+cd examples/build_script_practice
+cargo build
+cargo test
+```
+
+预期结果：
+
+- `cargo build` 成功编译 C 文件并生成 `build_info.rs`；
+- `cargo test` 通过 2 个测试：`generated_constants_are_present` 和 `c_addition_works`。
+
+### 7.7 练习
+
+1. 修改 `build-info.json` 中的 `maintainer` 字段，观察 `cargo build` 是否重新运行 `build.rs`。
+2. 在 `native/math.c` 中新增一个 `mylib_mul` 函数，并在 `src/lib.rs` 中暴露安全包装。
+3. 尝试删除 `println!("cargo:rerun-if-changed=...")` 后修改 `build-info.json`，验证 Cargo 不会自动重新运行 `build.rs`。
 
 ---
 

@@ -10,7 +10,6 @@
 > <details> <summary>💡 点击展开答案与解析</summary> **答案**：❌ 不能编译。
 > **错误信息**：`borrow of moved value: s1` **解析**：`String` 未实现 `Copy` trait，赋值 `let s2 = s1` 会**移动（move）**ownership。`s1` 在移动后变为未初始化状态，不能再使用。
 > **知识点**：Rust 中每个值有且只有一个所有者
-
 > **受众**: [初学者]
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)

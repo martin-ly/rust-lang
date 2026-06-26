@@ -1,7 +1,7 @@
-> **内容分级**: [专家级]
-
+> **内容分级**:
+>
+> [专家级]
 > **代码状态**: ✅ 含可编译示例
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Workflow Theory & Formalization（工作流理论与形式化）
@@ -10,7 +10,6 @@
 > **Summary**: Formal Methods. Guide to 41 Workflow Theory.
 >
 > **受众**: [进阶]
-
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Eva — 评价工作流模型的形式化正确性
@@ -21,7 +20,6 @@
 > **后置延伸**: [CQRS & Event Sourcing](./33_cqrs_event_sourcing.md) ·
 > [Reactive Programming](./40_reactive_programming.md) ·
 > [分布式系统](./18_distributed_systems.md)
-
 >
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Cargo Book](https://doc.rust-lang.org/cargo/)
 ---

@@ -368,6 +368,8 @@ pub fn safe_wrapper(data: &[u8]) -> u32 {
 
 ### Miri（Rust 官方动态分析器）
 
+> **深度概念页**: [Miri：Rust 未定义行为动态检测器](./31_miri.md)
+
 ```bash
 # 安装 Miri
 rustup component add miri

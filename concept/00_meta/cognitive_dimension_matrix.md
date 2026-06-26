@@ -148,7 +148,7 @@ mindmap
 ### 2.2 L2 进阶概念层映射
 
 | 概念文件 | 事实性 (F) | 概念性 (C) | 程序性 (P) | 元认知 (M) |
-|:---|:---|:---|:---|:---|:---|:---|
+|:---|:---|:---|:---|:---|:---|:---| :--- | :--- |
 | **01_traits** | F×Mem: `trait` / `impl` / `dyn` 语法 F×App: 编写 `#[derive]` 可用 trait | C×Und: Trait = 类型类的 Haskell 对应 C×Ana: 分析 Orphan Rule 对 coherence 的保障 | P×App: 设计可对象安全的 Trait P×Eva: 评估 GATs 的引入代价 | M×Ana: 识别自身 Trait 设计中的过度抽象倾向 |
 | **02_generics** | F×Mem: `<T: Bound>` 语法 F×App: Const Generics 数组长度参数化 | C×Und: 单态化 = 零成本抽象的编译机制 C×Ana: 分析单态化代码膨胀的影响 | P×App: 设计合理的 Trait Bound 层次 P×Eva: 评估 `&dyn` vs `impl` 的性能权衡 | M×Cre: 设计领域特定的类型约束语言 |
 | **03_memory_management** | F×Mem: `Box` / `Rc` / `Arc` / `RefCell` API F×App: `Pin::new_unchecked` 调用 | C×Und: 智能指针 = 所有权策略的封装 C×Ana: 分析 `Pin` 不动性与自引用的关系 | P×App: 实现 `Deref` / `Drop` 自定义 P×Eva: 评估内存布局优化策略 | M×Eva: 评估自身对堆/栈分配敏感度的认知 |
@@ -166,7 +166,7 @@ mindmap
 ### 2.4 L4 形式化层映射
 
 | 概念文件 | 事实性 (F) | 概念性 (C) | 程序性 (P) | 元认知 (M) |
-|:---|:---|:---|:---|:---|
+|:---|:---|:---|:---|:---| :--- | :--- |
 | **01_linear_logic** | F×Mem: `!A` / `⊗` / `⊸` 符号 F×App: 将线性逻辑规则映射到 Rust 代码 | C×Und: 线性逻辑 = 资源敏感推理 C×Ana: 分析 weakening/contraction 在 Rust 中的缺失 | P×App: 用类型编码线性协议 P×Eva: 评估会话类型的 Rust 编码完备性 | M×Und: 理解自身对"资源即命题"的直觉差距 |
 | **02_type_theory** | F×Mem: System F / HM / F_ω 的语法 F×App: 手写 λ 演算类型推导 | C×Und: Curry-Howard 对应在 Rust 中的实例 C×Ana: 分析 Rust 类型系统与 System F 的差距 | P×App: 利用参数性推导"免费定理" P×Eva: 评估 GATs 的类型论扩展 | M×Ana: 评估自身类型论基础对理解 Rust 的帮助 |
 | **03_ownership_formal** | F×Mem: COR / 区域类型 / 分离逻辑的符号 F×App: 将借用规则翻译为分离逻辑公式 | C×Und: 所有权 = 仿射逻辑 + 区域约束 C×Ana: 分析 Polonius 与 NLL 的精度差异 | P×App: 使用 Kani 验证 unsafe 代码 P×Eva: 评估形式化验证的 ROI | M×Eva: 评估形式化方法在项目中的适用边界 |
@@ -175,7 +175,7 @@ mindmap
 ### 2.5 L5-L7 层映射
 
 | 层级 | 事实性 (F) | 概念性 (C) | 程序性 (P) | 元认知 (M) |
-|:---|:---|:---|:---|:---|
+|:---|:---|:---|:---|:---| :--- | :--- |
 | **L5 对比层** | F×Mem: 各语言特性对照表 F×App: 编写跨语言等价代码 | C×Und: 范式差异的本体论根源 C×Ana: 分析 Rust vs C++ 内存模型同构性 | P×App: 执行 C++→Rust 范式转换 P×Eva: 评估技术选型的形式化论据 | M×Eva: 评估自身语言偏见的认知影响 |
 | **L6 生态层** | F×Mem: Crate 名称 / 版本 / API 签名 F×App: Cargo.toml 依赖配置 | C×Und: 设计模式 = 类型系统的工程投影 C×Ana: 分析生态系统中的安全性依赖链 | P×App: 设计可组合的系统架构 P×Eva: 评估 unsafe 依赖的可审计性 | M×Cre: 设计团队 Rust 能力建设计划 |
 | **L7 前沿层** | F×Mem: RFC 编号 / Edition 变更清单 F×App: 使用 nightly preview 特性 | C×Und: 语言演进的类型论约束 C×Ana: 分析 Effects 系统对 async 的统一潜力 | P×App: 参与 RFC 社区讨论 P×Eva: 评估新特性的生产就绪度 | M×Cre: 预测 Rust 5 年演进方向 |

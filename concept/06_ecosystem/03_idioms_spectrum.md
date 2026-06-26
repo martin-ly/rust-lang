@@ -1,7 +1,6 @@
 # Rust 惯用法谱系全景（Idioms Spectrum）
 
 > **代码状态**: ✅ 含可编译示例
-
 >
 > **EN**: Idioms Spectrum
 > **Summary**: Idioms Spectrum: Rust ecosystem tools, crates, and engineering practices.
@@ -25,7 +24,6 @@
 ---
 
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-
 > **前置概念**: [Patterns](../06_ecosystem/02_patterns.md)
 
 ## 📑 目录
@@ -1171,21 +1169,14 @@ quadrantChart
 
 ## 权威来源索引
 
->
->
->
->
->
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
-
----
-
----
-
----
-
-> **相关文件**: [A/S/P 标记规范](../00_meta/asp_marking_guide.md) · [问题图谱](../00_meta/problem_graph.md) · [范式转换矩阵](../00_meta/paradigm_transition_matrix.md)
+> **相关文件**:
+>
+> [A/S/P 标记规范](../00_meta/asp_marking_guide.md) ·
+> [问题图谱](../00_meta/problem_graph.md) ·
+> [范式转换矩阵](../00_meta/paradigm_transition_matrix.md)
+>
 
 ## 十、边界测试：惯用法谱系的编译错误
 
@@ -1227,7 +1218,14 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 的所有权系统强制开发者思考数据克隆的成本。`Vec::clone()` 分配新内存并复制所有元素——O(n) 操作。在性能关键路径上，应使用引用（`&T`）或迭代器（`iter()`）避免克隆。这与 C++ 的拷贝构造函数（隐式调用）或 Java 的对象引用（总是共享）不同——Rust 的 `clone()` 是显式方法调用，提醒开发者注意成本。`Rc<T>` 和 `Arc<T>` 在需要共享时减少克隆，但增加了引用计数开销。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**:
+>
+> Rust 的所有权系统强制开发者思考数据克隆的成本。
+> `Vec::clone()` 分配新内存并复制所有元素——O(n) 操作。
+> 在性能关键路径上，应使用引用（`&T`）或迭代器（`iter()`）避免克隆。
+> 这与 C++ 的拷贝构造函数（隐式调用）或 Java 的对象引用（总是共享）不同——Rust 的 `clone()` 是显式方法调用，提醒开发者注意成本。
+> `Rc<T>` 和 `Arc<T>` 在需要共享时减少克隆，但增加了引用计数开销。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.3 边界测试：Clippy 警告的编译错误等价（编译错误）
 

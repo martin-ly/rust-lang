@@ -1,0 +1,295 @@
+# 🦀 Rust 版本对齐检查表
+>
+> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **分级**: [B]
+> **Bloom 层级**: L2 (理解)
+> **使用说明:** 每半年（建议 6月、12月）执行一次 Rust 版本对齐检查，确保项目与 Rust 最新版本保持同步。
+>
+> **本次检查周期:** 2026 年 6 月
+> **执行人:** Kimi
+> **Rust 最新稳定版:** 1.96.0
+> **项目当前 MSRV:** 1.96.0
+
+---
+
+## 📑 目录
+
+- [🦀 Rust 版本对齐检查表](#-rust-版本对齐检查表)
+  - [📑 目录](#-目录)
+    - [自动采集摘要](#自动采集摘要)
+  - [1️⃣ Rust 新版本发布跟踪](#1️⃣-rust-新版本发布跟踪)
+    - [版本信息收集](#版本信息收集)
+    - [发布说明审查](#发布说明审查)
+  - [2️⃣ Edition 兼容性检查](#2️⃣-edition-兼容性检查)
+    - [当前 Edition 状态](#当前-edition-状态)
+    - [Edition 迁移评估](#edition-迁移评估)
+    - [Edition 迁移计划（如适用）](#edition-迁移计划如适用)
+  - [3️⃣ MSRV 更新评估](#3️⃣-msrv-更新评估)
+    - [当前 MSRV 审查](#当前-msrv-审查)
+    - [MSRV 更新分析](#msrv-更新分析)
+    - [MSRV 更新决策](#msrv-更新决策)
+    - [MSRV 更新执行清单（如决定更新）](#msrv-更新执行清单如决定更新)
+  - [4️⃣ 废弃特性迁移计划](#4️⃣-废弃特性迁移计划)
+    - [编译器弃用警告检查](#编译器弃用警告检查)
+    - [依赖废弃项检查](#依赖废弃项检查)
+  - [5️⃣ 新特性集成机会](#5️⃣-新特性集成机会)
+    - [值得集成的新特性](#值得集成的新特性)
+    - [示例代码更新](#示例代码更新)
+  - [6️⃣ 检查结果汇总](#6️⃣-检查结果汇总)
+    - [行动项总结](#行动项总结)
+    - [风险与阻塞项](#风险与阻塞项)
+    - [完成确认](#完成确认)
+  - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
+
+<!-- 以下由 scripts/quarterly_sync.py 于 2026-06-26 自动生成 -->
+
+### 自动采集摘要
+
+| 版本类型 | 版本号 | 项目当前使用 | 状态 |
+|:---|:---|:---:|:---|
+| 当前 rustc | rustc 1.98.0-nightly (4429659e4 2026-06-22) | - | - |
+| 最新稳定版 (Stable) | 1.96.0 | ✅ | 已同步 |
+| Beta | 1.97.0-beta.4 | - | 跟踪中 |
+| Nightly | 1.98.0-nightly | - | 跟踪中 |
+| 项目 MSRV | 1.96.0 | - | - |
+| 项目 Edition | 2024 | - | - |
+
+---
+
+## 1️⃣ Rust 新版本发布跟踪
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+### 版本信息收集
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+| 版本类型 | 版本号 | 发布日期 | 项目当前使用 | 状态 |
+|----------|--------|----------|-------------|------|
+| 稳定版 (Stable) | | | | |
+| Beta | | | - | |
+| Nightly | | | - | |
+| 当前项目 MSRV | - | - | | |
+
+### 发布说明审查
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+- [ ] 阅读 [Rust Release Notes](https://github.com/rust-lang/rust/releases)
+- [ ] 阅读 [Rust 博客](https://blog.rust-lang.org/) 对应版本文章
+- [ ] 识别对本项目有影响的语言特性变更
+- [ ] 识别标准库新增 API
+- [ ] 识别编译器行为变更（可能引入新警告或错误）
+
+| 特性/变更 | 版本 | 影响范围 | 项目适用性 | 计划 |
+|-----------|------|----------|-----------|------|
+| | | | | |
+| | | | | |
+
+---
+
+## 2️⃣ Edition 兼容性检查
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+### 当前 Edition 状态
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+- [ ] 项目当前使用的 Rust Edition: ________
+- [ ] 最新可用的 Rust Edition: ________
+- [ ] 是否有新的 Edition 发布: ⬜ 是 ⬜ 否
+
+### Edition 迁移评估
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+如存在新 Edition，评估迁移影响：
+
+- [ ] 阅读 [Edition 迁移指南](https://doc.rust-lang.org/edition-guide/)
+- [ ] 评估 `cargo fix --edition` 自动修复覆盖率
+- [ ] 识别需要手动修改的代码
+- [ ] 评估第三方 crate 对新 Edition 的支持情况
+
+| Crate | 当前 Edition | 支持新 Edition | 阻塞项 | 决策 |
+|-------|-------------|---------------|--------|------|
+| | | | | |
+| | | | | |
+
+### Edition 迁移计划（如适用）
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+| 阶段 | 任务 | 负责人 | 截止日期 | 状态 |
+|------|------|--------|----------|------|
+| 1 | 评估与准备 | | | |
+| 2 | 运行 cargo fix | | | |
+| 3 | 手动修复剩余问题 | | | |
+| 4 | 全量测试验证 | | | |
+| 5 | 文档更新 | | | |
+| 6 | 合并与发布 | | | |
+
+---
+
+## 3️⃣ MSRV 更新评估
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+### 当前 MSRV 审查
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+- [ ] 当前声明的 MSRV: ________________
+- [ ] 实际最低测试版本: ________________
+- [ ] CI 中配置的 Rust 版本: ________________
+
+### MSRV 更新分析
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+| 评估维度 | 当前状态 | 建议 | 备注 |
+|----------|----------|------|------|
+| 依赖 crates 的 MSRV 要求 | | | |
+| 所需新特性的重要性 | | | |
+| 用户环境兼容性 | | | |
+| CI 维护成本 | | | |
+
+### MSRV 更新决策
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+- [ ] 保持当前 MSRV
+- [ ] 更新 MSRV 至: ________________
+- [ ] 更新理由: ________________________________
+
+### MSRV 更新执行清单（如决定更新）
+
+- [ ] 更新 `Cargo.toml` 中所有 `rust-version` 字段
+- [ ] 更新 CI 工作流中的 Rust 版本
+- [ ] 更新 `README.md` 中的版本要求
+- [ ] 更新 `10_changelog.md`
+- [ ] 运行全量测试验证
+- [ ] 创建 PR 并审查
+- [ ] 合并后打 tag（如适用）
+
+---
+
+## 4️⃣ 废弃特性迁移计划
+
+### 编译器弃用警告检查
+
+运行以下命令检查弃用警告：
+
+```bash
+cargo check --workspace --all-features
+cargo clippy --workspace --all-features -- -D warnings
+```
+
+- [ ] 记录所有弃用警告
+- [ ] 评估修复优先级
+
+| 警告类型 | 出现位置 | 建议替代方案 | 优先级 | 状态 |
+|----------|----------|-------------|--------|------|
+| | | | | |
+| | | | | |
+
+### 依赖废弃项检查
+
+- [ ] 运行 `cargo audit` 检查是否有废弃的 crate
+- [ ] 检查 `Cargo.lock` 中是否有长期未更新的依赖
+- [ ] 评估替换或移除废弃依赖的可行性
+
+| 依赖 | 状态 | 建议操作 | 替代方案 | 状态 |
+|------|------|----------|----------|------|
+| | | | | |
+| | | | | |
+
+---
+
+## 5️⃣ 新特性集成机会
+
+### 值得集成的新特性
+
+| 特性 | 引入版本 | 应用场景 | 集成收益 | 工作量 | 优先级 |
+|------|----------|----------|----------|--------|--------|
+| | | | | | |
+| | | | | | |
+
+### 示例代码更新
+
+- [ ] 检查 `examples/` 目录是否使用最佳实践
+- [ ] 评估是否需要新增示例展示新特性
+- [ ] 验证所有示例在最新稳定版上编译通过
+
+---
+
+## 6️⃣ 检查结果汇总
+
+### 行动项总结
+
+| 序号 | 行动项 | 类型 | 优先级 | 负责人 | 截止日期 |
+|------|--------|------|--------|--------|----------|
+| 1 | | | | | |
+| 2 | | | | | |
+| 3 | | | | | |
+
+### 风险与阻塞项
+
+| 风险 | 影响 | 缓解措施 | 状态 |
+|------|------|----------|------|
+| | | | |
+
+### 完成确认
+
+- [ ] 所有新版本特性已审查
+- [ ] Edition 兼容性已确认
+- [ ] MSRV 决策已记录
+- [ ] 废弃项迁移计划已制定
+- [ ] 检查结果已归档
+
+---
+
+> 📁 **归档路径:** `archive/YYYY/HN/rust-version-alignment-YYYY-HN.md`
+>
+> 🔄 **关联工作流:** `.github/workflows/rust-version-tracking.yml`
+>
+> 📚 **参考文档:**
+>
+> - [Rust Release Notes](https://github.com/rust-lang/rust/releases)
+> - [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
+> - [Rust RFC Book](https://rust-lang.github.io/rfcs/)
+>
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)
+
+---
+
+## 权威来源索引
+
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**

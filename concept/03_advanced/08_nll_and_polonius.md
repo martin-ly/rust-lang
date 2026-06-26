@@ -1,4 +1,6 @@
-> **内容分级**: [专家级]
+> **内容分级**:
+>
+> [专家级]
 
 # NLL 与 Polonius：借用检查器的演进
 >
@@ -11,7 +13,6 @@
 > **定位**: 深入分析 Rust **借用检查器**的两个里程碑——Non-Lexical Lifetimes (NLL) 如何放宽词法作用域限制，以及 Polonius 如何通过数据流分析实现更精确的借用检查，揭示 Rust 类型系统的持续演进。
 > **前置概念**: [Borrowing](../01_foundation/02_borrowing.md) · [Lifetimes](../01_foundation/03_lifetimes.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Unsafe](./03_unsafe.md) · [Formal Methods](../04_formal/04_rustbelt.md)
-
 >
 > **来源**: [RFC 2094 — NLL](https://rust-lang.github.io/rfcs//2094-nll.html) · [Polonius](https://github.com/rust-lang/polonius) · [Reference — Lifetimes](https://doc.rust-lang.org/reference/items/generics.html)
 ---

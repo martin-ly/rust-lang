@@ -3,11 +3,8 @@
 > **EN**: Rust for Operating System Kernel Development
 > **Summary**: Os Kernel: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [专家级]
-
 > **代码状态**: [综述级 — 待补充代码]
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-
 > **来源**: [Rust for Linux](https://rust-for-linux.com/) · [Redox OS](https://www.redox-os.org/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 
 ## 一、Rust for Linux：内核中的 Rust 代码

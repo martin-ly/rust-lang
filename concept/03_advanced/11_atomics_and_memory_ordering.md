@@ -23,11 +23,8 @@
 > [C++ Memory Model](https://en.cppreference.com/w/cpp/atomic/memory_order) ·
 > [LLVM Atomic Instructions](https://llvm.org/docs/Atomics.html) ·
 > [Wikipedia — Memory Ordering](https://en.wikipedia.org/wiki/Memory_ordering)
-
 > **前置依赖**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md)
-
 > **前置依赖**: [Traits](../02_intermediate/01_traits.md)
-
 > **对应 Crate**: [`c05_threads`](../../crates/c05_threads/)
 > **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency/)
 

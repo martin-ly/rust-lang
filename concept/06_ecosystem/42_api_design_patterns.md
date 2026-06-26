@@ -1,7 +1,7 @@
-> **内容分级**: [专家级]
-
+> **内容分级**:
+>
+> [专家级]
 > **代码状态**: ✅ 含可编译示例
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # API Design Patterns（API 设计模式）
@@ -10,7 +10,6 @@
 > **Summary**: Design Patterns. Guide to 42 Api Design Patterns.
 >
 > **受众**: [进阶]
-
 > **Bloom 层级**: 应用 → 创造
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Cre — 设计类型安全的 REST/GraphQL/gRPC API
@@ -21,7 +20,6 @@
 > **后置延伸**: [微服务架构模式](./31_microservice_patterns.md) ·
 > [事件驱动架构](./32_event_driven_architecture.md) ·
 > [分布式系统](./18_distributed_systems.md)
-
 >
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 ---
@@ -35,11 +33,8 @@
 > [axum](https://docs.rs/axum/latest/axum/) ·
 > [tonic](https://docs.rs/tonic/latest/tonic/) ·
 > [async-graphql](https://docs.rs/async-graphql/latest/async_graphql/)
-
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录

@@ -20,7 +20,6 @@
 > [crossbeam crate](https://docs.rs/crossbeam/latest/crossbeam/) ·
 > [tokio::sync](https://docs.rs/tokio/latest/tokio/sync/index.html) ·
 > [Wikipedia — Non-blocking Algorithm](https://en.wikipedia.org/wiki/Non-blocking_algorithm)
-
 > **对应 Crate**: [`c05_threads`](../../crates/c05_threads/)
 > **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency/)
 

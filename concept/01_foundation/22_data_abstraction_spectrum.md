@@ -15,10 +15,16 @@
 > **双维定位**: C×Ana — 分析数据抽象机制的演进谱系
 > **前置概念**: [Type System](./04_type_system.md) · [Variable Model](./20_variable_model.md) · [Ownership](./01_ownership.md)
 > **后置概念**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type Erasure](../03_advanced/17_type_erasure.md)
-> **主要来源**: [Pierce TAPL, §18-§24] · [Cardelli & Wegner 1985 — On Understanding Types, Data Abstraction, and Polymorphism] · [Wikipedia: Abstract data type](https://en.wikipedia.org/wiki/Abstract_data_type) · [Rust Reference — §4.2 Types](https://doc.rust-lang.org/reference/)
-
+> **主要来源**:
 >
-> **来源**: [TRPL — Structs](https://doc.rust-lang.org/book/ch05-00-structs.html) · [TRPL — Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html) · [Reference — Items](https://doc.rust-lang.org/reference/items.html)
+> [Pierce TAPL, §18-§24] · [Cardelli & Wegner 1985 — On Understanding Types, Data Abstraction, and Polymorphism] ·
+> [Wikipedia: Abstract data type](https://en.wikipedia.org/wiki/Abstract_data_type) ·
+> [Rust Reference — §4.2 Types](https://doc.rust-lang.org/reference/)
+>
+> **来源**: [TRPL — Structs](https://doc.rust-lang.org/book/ch05-00-structs.html) ·
+> [TRPL — Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html) ·
+> [Reference — Items](https://doc.rust-lang.org/reference/items.html)
+>
 ---
 
 > **Bloom 层级**: 理解 → 分析 → 评价

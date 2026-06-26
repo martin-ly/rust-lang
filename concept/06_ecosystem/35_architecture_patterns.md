@@ -1,7 +1,7 @@
-> **内容分级**: [专家级]
-
+> **内容分级**:
+>
+> [专家级]
 > **代码状态**: ✅ 含可编译示例
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Architecture Patterns（架构设计模式）
@@ -15,7 +15,6 @@
 > **双维定位**: C×Cre — 分析系统架构层级与依赖关系设计
 > **前置依赖**: [泛型](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md) · [生命周期](../01_foundation/03_lifetimes.md) · [设计模式](./02_patterns.md)
 > **后置延伸**: [CQRS & Event Sourcing](./33_cqrs_event_sourcing.md) · [微服务架构模式](./31_microservice_patterns.md) · [事件驱动架构](./32_event_driven_architecture.md)
-
 >
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 ---
@@ -28,11 +27,8 @@
 > [AWS Lambda Best Practices](https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html)
 > [来源: [Fowler — EAA](https://martinfowler.com/books/eaa.html)] ·
 > [来源: [Cockburn — Hexagonal](https://alistair.cockburn.us/hexagonal-architecture/)]
-
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录

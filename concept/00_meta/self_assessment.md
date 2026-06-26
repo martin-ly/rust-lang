@@ -15,8 +15,14 @@
 > **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
-> **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [concept/知识体系]
+> **来源**:
 >
+> [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [concept/知识体系]
+>
+
 ## 📑 目录
 
 - [Rust 知识体系自测题库（Self-Assessment）](#rust-知识体系自测题库self-assessment)
@@ -1450,9 +1456,21 @@ ZST 在运行时不占内存，但编译期类型信息完整。常用于**类�
 
 ---
 
-> **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [concept/知识体系]
-> **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Rust Async Book](https://rust-lang.github.io/async-book/)
+> **来源**:
 >
+> [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [concept/知识体系]
+>
+> **来源**:
+>
+> [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rust Async Book](https://rust-lang.github.io/async-book/)
+>
+
 ## L3 扩展层：并发、异步、unsafe 与宏（8 题） [来源: 题目基于 TRPL Ch16 (并发), Rust Async Book / 2025; Rust Reference — unsafe, Macros / 2025; [RFC 2349](https://rust-lang.github.io/rfcs//2349-pin.html) (Pin)](<https://rust-lang.github.io/async-book/>)
 
 ### Q57: Atomic Ordering

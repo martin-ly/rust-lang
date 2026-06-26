@@ -22,7 +22,7 @@
 > **测验入口**: 每个阶段末尾标注可运行的 L3 嵌入式测验，用于验证学习效果。
 >
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [TRPL 3rd Ed](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 ---
 
 ## 路径总览
@@ -43,16 +43,16 @@ Week 2: 并发与工程化（20h）
 
 ### 必修/选修快速对照
 
-| 模块 | 类型 | 对应 L3 测验 |
-|:---|:---:|:---|
-| Hello World + 基础语法 | 🔴 必修 | — |
-| 所有权与借用 | 🔴 必修 | `exercises/tests/l3_core.rs` |
-| 类型系统与错误处理 | 🔴 必修 | `exercises/tests/l3_core.rs` |
-| 第一个 CLI 工具 | 🔴 必修 | — |
-| 集合与迭代器 | 🔴 必修 | `exercises/tests/l3_core.rs` |
-| 多线程与并发 | 🔴 必修 | `exercises/tests/l3_advanced_systems.rs` |
-| 异步基础 | 🟡 选修 | `exercises/tests/l3_async_concurrency.rs` |
-| 综合项目 | 🔴 必修 | — |
+| 模块 | 类型 | 对应 L3 测验 | TRPL 3rd Ed 章节 |
+|:---|:---:|:---|:---|
+| Hello World + 基础语法 | 🔴 必修 | — | [Ch 1](https://doc.rust-lang.org/book/ch01-00-getting-started.html) · [Ch 3](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html) |
+| 所有权与借用 | 🔴 必修 | `exercises/tests/l3_core.rs` | [Ch 4](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) · [Ch 19.2](https://doc.rust-lang.org/book/ch19-03-pattern-syntax.html#refutability-whether-a-pattern-might-fail-to-match) |
+| 类型系统与错误处理 | 🔴 必修 | `exercises/tests/l3_core.rs` | [Ch 5](https://doc.rust-lang.org/book/ch05-00-structs.html) · [Ch 6](https://doc.rust-lang.org/book/ch06-00-enums.html) · [Ch 9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) |
+| 第一个 CLI 工具 | 🔴 必修 | — | [Ch 2](https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html) · [Ch 12](https://doc.rust-lang.org/book/ch12-00-an-io-project.html) |
+| 集合与迭代器 | 🔴 必修 | `exercises/tests/l3_core.rs` | [Ch 8](https://doc.rust-lang.org/book/ch08-00-common-collections.html) · [Ch 13](https://doc.rust-lang.org/book/ch13-00-functional-features.html) |
+| 多线程与并发 | 🔴 必修 | `exercises/tests/l3_advanced_systems.rs` | [Ch 16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) |
+| 异步基础 | 🟡 选修 | `exercises/tests/l3_async_concurrency.rs` | [Ch 17](https://doc.rust-lang.org/book/ch17-00-async-await.html) |
+| 综合项目 | 🔴 必修 | — | [Ch 12](https://doc.rust-lang.org/book/ch12-00-an-io-project.html) · [Ch 21](https://doc.rust-lang.org/book/ch21-00-final-project-a-web-server.html) |
 
 ---
 
@@ -62,7 +62,7 @@ Week 2: 并发与工程化（20h）
 
 **目标**: 安装 Rust，理解变量、函数、控制流，能编写简单程序。
 
-> 📚 **TRPL 3rd Ed 参考**: Ch 1 (Getting Started) · Ch 3 (Common Programming Concepts)
+> 📚 **TRPL 3rd Ed 参考**: [Ch 1 (Getting Started)](https://doc.rust-lang.org/book/ch01-00-getting-started.html) · [Ch 3 (Common Programming Concepts)](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)
 
 | 任务 | 内容 | 时长 | 类型 | 验证标准 |
 |:---|:---|:---:|:---:|:---|
@@ -83,7 +83,7 @@ Week 2: 并发与工程化（20h）
 
 **目标**: 理解 Rust 最核心的内存管理规则，能独立解决借用检查器错误。
 
-> 📚 **TRPL 3rd Ed 参考**: Ch 4 (Understanding Ownership) · Ch 19.2 (Refutability)
+> 📚 **TRPL 3rd Ed 参考**: [Ch 4 (Understanding Ownership)](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) · [Ch 19.2 (Refutability)](https://doc.rust-lang.org/book/ch19-03-pattern-syntax.html#refutability-whether-a-pattern-might-fail-to-match)
 > 🎓 **Brown 书强化**: [Understanding Ownership](https://rust-book.cs.brown.edu/ch04-00-understanding-ownership.html) — Aquascope 可视化 + Fixing Ownership Errors 小节
 > 📝 **自测**: [所有权清单自测（Brown University Ownership Inventory）](../01_foundation/28_ownership_inventories_brown_book.md) — Inventory #1 本地映射与样题
 
@@ -107,7 +107,7 @@ Week 2: 并发与工程化（20h）
 
 **目标**: 掌握 Rust 的类型系统核心，能用 `Result`/`Option` 处理错误。
 
-> 📚 **TRPL 3rd Ed 参考**: Ch 5 (Structs) · Ch 6 (Enums) · Ch 9 (Error Handling)
+> 📚 **TRPL 3rd Ed 参考**: [Ch 5 (Structs)](https://doc.rust-lang.org/book/ch05-00-structs.html) · [Ch 6 (Enums)](https://doc.rust-lang.org/book/ch06-00-enums.html) · [Ch 9 (Error Handling)](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
 
 | 任务 | 内容 | 时长 | 类型 | 验证标准 |
 |:---|:---|:---:|:---:|:---|
@@ -127,7 +127,7 @@ Week 2: 并发与工程化（20h）
 
 **目标**: 综合运用 Week 1 知识，完成一个真实可用的 CLI 程序。
 
-> 📚 **TRPL 3rd Ed 参考**: Ch 2 (Guessing Game) · Ch 12 (An I/O Project)
+> 📚 **TRPL 3rd Ed 参考**: [Ch 2 (Guessing Game)](https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html) · [Ch 12 (An I/O Project)](https://doc.rust-lang.org/book/ch12-00-an-io-project.html)
 
 | 任务 | 内容 | 时长 | 类型 | 验证标准 |
 |:---|:---|:---:|:---:|:---|
@@ -147,7 +147,7 @@ Week 2: 并发与工程化（20h）
 
 **目标**: 熟练使用 Rust 标准库集合和迭代器，写出惯用代码。
 
-> 📚 **TRPL 3rd Ed 参考**: Ch 8 (Common Collections) · Ch 13 (Iterators and Closures)
+> 📚 **TRPL 3rd Ed 参考**: [Ch 8 (Common Collections)](https://doc.rust-lang.org/book/ch08-00-common-collections.html) · [Ch 13 (Iterators and Closures)](https://doc.rust-lang.org/book/ch13-00-functional-features.html)
 
 | 任务 | 内容 | 时长 | 类型 | 验证标准 |
 |:---|:---|:---:|:---:|:---|
@@ -166,7 +166,7 @@ Week 2: 并发与工程化（20h）
 
 **目标**: 理解 `Send`/`Sync`，能用 `std::thread` 和通道编写并发程序。
 
-> 📚 **TRPL 3rd Ed 参考**: Ch 16 (Fearless Concurrency)
+> 📚 **TRPL 3rd Ed 参考**: [Ch 16 (Fearless Concurrency)](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 > 🎓 **Brown 书强化**: [Fearless Concurrency](https://rust-book.cs.brown.edu/ch16-00-concurrency.html) — 并发中的所有权转移可视化
 > 📝 **自测**: 生命周期相关 Inventory 见 [所有权清单自测](../01_foundation/28_ownership_inventories_brown_book.md) Inventory #3
 
@@ -187,7 +187,7 @@ Week 2: 并发与工程化（20h）
 
 **目标**: 理解 `Future`/`async`/`await`，能用 Tokio 编写简单异步程序。
 
-> 📚 **TRPL 3rd Ed 参考**: Ch 17 (Fundamentals of Asynchronous Programming) — 3rd Ed 新增完整 async 章
+> 📚 **TRPL 3rd Ed 参考**: [Ch 17 (Fundamentals of Asynchronous Programming)](https://doc.rust-lang.org/book/ch17-00-async-await.html) — 3rd Ed 新增完整 async 章
 
 | 任务 | 内容 | 时长 | 类型 | 验证标准 |
 |:---|:---|:---:|:---:|:---|
@@ -207,7 +207,7 @@ Week 2: 并发与工程化（20h）
 
 **目标**: 整合两周知识，完成一个可展示的 CLI 项目。
 
-> 📚 **TRPL 3rd Ed 参考**: Ch 12 (I/O Project) · Ch 21 (Multithreaded Web Server)
+> 📚 **TRPL 3rd Ed 参考**: [Ch 12 (I/O Project)](https://doc.rust-lang.org/book/ch12-00-an-io-project.html) · [Ch 21 (Multithreaded Web Server)](https://doc.rust-lang.org/book/ch21-00-final-project-a-web-server.html)
 
 **项目选项**（三选一）：
 
@@ -294,7 +294,7 @@ cargo test --test l3_ecosystem_alignment
 | | **精通** (5-8 周) | Week 2 Day 12-14 + 扩展路径 | 异步 + 综合项目 + 深入方向 |
 | [Rust Learning Path (官方)](https://www.rust-lang.org/learn) | 入门 → 进阶 | Week 1 → Week 2 | 官方路径更侧重语言本身，本路径增加工程实践 |
 | [Rust by Example](https://doc.rust-lang.org/rust-by-example/) | 主题式学习 | Day 1-6 阅读材料 | 可作为概念文件的代码示例补充 |
-| [TRPL 3rd Ed](https://doc.rust-lang.org/book/) | 官方教程 | 全路径 | Rust 1.90.0+ / Edition 2024 基准；Ch 17 为完整异步编程入门 |
+| [TRPL 3rd Ed](https://doc.rust-lang.org/book/title-page.html) | 官方教程 | 全路径 | Rust 1.96.0+ / Edition 2024 基准；Ch 17 为完整异步编程入门 |
 | [Brown University Interactive Book](https://rust-book.cs.brown.edu/) | 交互式教程 | Day 3-4 / Day 10-11 | Aquascope 所有权可视化 + 嵌入式测验；OOPSLA 2023/2024 研究支撑；本地映射见 [`28_ownership_inventories_brown_book.md`](../01_foundation/28_ownership_inventories_brown_book.md) |
 | [Google Comprehensive Rust](https://google.github.io/comprehensive-rust/) | 工业级课程 | Week 1 Day 1-6 + 扩展专题 | Google Android 团队维护；4 天基础 + Android/Chromium/Bare Metal/Concurrency/Idiomatic/Unsafe 专题；本地映射见 [`GOOGLE_COMPREHENSIVE_RUST_MAPPING_2026_06_19.md`](../../../reports/GOOGLE_COMPREHENSIVE_RUST_MAPPING_2026_06_19.md) |
 
