@@ -1,4 +1,7 @@
-> **生态状态提示**：本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
+> **生态状态提示**：
+>
+> 本文档提及 `async-std` 与/或 `wasm32-wasi`。
+> 请注意：
 >
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
@@ -44,7 +47,6 @@
     - [选择建议](#选择建议)
     - [性能对比](#性能对比)
     - [最佳实践总结](#最佳实践总结)
-  - [通过合理选择和优化，现代 Rust 进程管理库能够满足从简单脚本到企业级应用的各种需求](#通过合理选择和优化现代-rust-进程管理库能够满足从简单脚本到企业级应用的各种需求)
 
 本章深入解析现代 Rust 进程管理库，包括 Tokio、Async-Std、Duct、Subprocess 等，提供详细的对比分析和实践指南。
 
@@ -1786,6 +1788,7 @@ pub struct ProcessConfig {
 5. **性能监控**：指标收集、性能分析、优化建议
 
 通过合理选择和优化，现代 Rust 进程管理库能够满足从简单脚本到企业级应用的各种需求
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

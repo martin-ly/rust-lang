@@ -57,7 +57,6 @@
     - [功能验证](#功能验证)
     - [文档验证](#文档验证)
   - [🎉 总结](#-总结)
-  - [**作者**: Claude (Sonnet 4.5)](#作者-claude-sonnet-45)
 
 **日期**: 2025年10月4日
 **项目**: c06_async - Rust 异步编程完整实践
@@ -577,6 +576,7 @@ cargo run --example tokio_smol_latest_features_2025
 **最后更新**: 2025-10-04
 **版本**: v1.0.0
 **作者**: Claude (Sonnet 4.5)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

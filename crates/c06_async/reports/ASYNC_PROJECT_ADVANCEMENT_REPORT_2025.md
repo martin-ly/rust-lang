@@ -34,7 +34,6 @@
     - [2. 中期目标](#2-中期目标)
     - [3. 长期目标](#3-长期目标)
   - [总结](#总结)
-  - [*Rust 版本: 1.90*](#rust-版本-190)
 
 ## 项目概述
 
@@ -247,6 +246,7 @@ cat docs/async_performance_optimization_2025.md
 *报告生成时间: 2025-09-24*
 *项目版本: v0.1.0*
 *Rust 版本: 1.90*
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

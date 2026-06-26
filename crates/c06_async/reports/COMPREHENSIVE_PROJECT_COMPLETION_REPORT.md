@@ -54,7 +54,6 @@
   - [📝 结论](#-结论)
     - [核心价值](#核心价值)
     - [最终评价](#最终评价)
-  - [**许可证**: MIT or Apache-2.0](#许可证-mit-or-apache-20)
 
 ## 📊 项目概览
 
@@ -470,6 +469,7 @@
 **最后更新**: 2025-10-02
 **贡献者**: AI Assistant + User
 **许可证**: MIT or Apache-2.0
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

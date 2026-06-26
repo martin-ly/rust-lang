@@ -55,7 +55,6 @@
     - [10.2 平台特定进程模型](#102-平台特定进程模型)
     - [10.3 多进程架构形式化](#103-多进程架构形式化)
     - [10.4 资源限制与隔离机制](#104-资源限制与隔离机制)
-  - [结合多种隔离技术，使得成功攻击需要绕过多个独立防御机制](#结合多种隔离技术使得成功攻击需要绕过多个独立防御机制)
 
 ## 1. 理论基础：Rust并发模型的本质
 
@@ -1391,6 +1390,7 @@ Sandbox = {
 
 这种方法的实际应用是安全敏感环境中的层叠防御策略：
 结合多种隔离技术，使得成功攻击需要绕过多个独立防御机制
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

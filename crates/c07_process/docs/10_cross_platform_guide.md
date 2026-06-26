@@ -35,7 +35,6 @@
     - [关键差异总结](#关键差异总结)
     - [最佳实践](#最佳实践)
     - [开发建议](#开发建议)
-  - [通过合理的抽象和平台特定处理，可以构建出既跨平台又高性能的进程管理系统](#通过合理的抽象和平台特定处理可以构建出既跨平台又高性能的进程管理系统)
 
 本章提供基于 Rust 1.92.0 的全面跨平台进程管理指南（兼容 Rust 1.90+ 特性），
 涵盖 Windows、Unix/Linux 和 macOS 的差异处理，以及 Rust 1.92.0 新特性在跨平台开发中的应用。
@@ -1634,6 +1633,7 @@ pub enum Severity {
 5. **安全第一**：权限控制和资源限制
 
 通过合理的抽象和平台特定处理，可以构建出既跨平台又高性能的进程管理系统
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

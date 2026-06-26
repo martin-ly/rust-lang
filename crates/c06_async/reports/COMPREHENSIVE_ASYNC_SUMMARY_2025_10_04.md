@@ -1,4 +1,6 @@
-> **⚠️ 历史文档提示**：本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
+> **⚠️ 历史文档提示**：
+>
+> 本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
 > 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
 > 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
 >
@@ -79,7 +81,6 @@
     - [中期 (1-2 月)](#中期-1-2-月)
     - [长期 (3-6 月)](#长期-3-6-月)
   - [📝 总结](#-总结)
-  - [**状态**: ✅ 完成并持续维护](#状态--完成并持续维护)
 
 **日期**: 2025年10月4日
 **版本**: Rust 1.90+ | Tokio 1.41+ | Smol 2.0+
@@ -758,6 +759,7 @@ impl Client<Connected> {
 **总耗时**: 完整梳理
 **维护者**: Rust 异步编程研究组
 **状态**: ✅ 完成并持续维护
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

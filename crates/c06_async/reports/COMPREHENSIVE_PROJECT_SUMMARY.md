@@ -1,4 +1,6 @@
-> **⚠️ 历史文档提示**：本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
+> **⚠️ 历史文档提示**：
+>
+> 本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
 > 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
 > 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
 >
@@ -51,7 +53,6 @@
     - [技术成就](#技术成就)
     - [教育成就](#教育成就)
     - [社区成就](#社区成就)
-  - [*许可证: MIT License*](#许可证-mit-license)
 
 ## 🎯 项目愿景
 
@@ -329,6 +330,7 @@ ls examples/
 *最后更新: 2024年12月*
 *维护者: Rust 异步编程社区*
 *许可证: MIT License*
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -9,12 +9,11 @@
 //! - async task functionality complete
 //! - 异步资源分配器工作正常
 //! - async
-use c06_async::rust_192_features::{
-    AsyncTaskQueue, AsyncTaskScheduler, AsyncResourceAllocator,
-    TaskItem, calculate_async_pool_size, compare_async_task_lists,
-    check_async_task_states,
-};
 use anyhow::Result;
+use c06_async::rust_192_features::{
+    AsyncResourceAllocator, AsyncTaskQueue, AsyncTaskScheduler, TaskItem,
+    calculate_async_pool_size, check_async_task_states, compare_async_task_lists,
+};
 use std::num::NonZeroUsize;
 use std::time::Duration;
 use tokio::time::timeout;
@@ -100,11 +99,13 @@ async fn test_async_task_scheduler() -> Result<()> {
 
     // 添加多个任务
     for i in 1..=3 {
-        scheduler.add_task(TaskItem {
-            id: i,
-            priority: (i * 10) as u8,
-            data: format!("task{}", i),
-        }).await;
+        scheduler
+            .add_task(TaskItem {
+                id: i,
+                priority: (i * 10) as u8,
+                data: format!("task{}", i),
+            })
+            .await;
     }
 
     // 执行调度（轮转队列）
@@ -137,11 +138,13 @@ async fn test_async_task_scheduler_concurrent() -> Result<()> {
     for i in 1..=10 {
         let scheduler_clone = scheduler_arc.clone();
         let handle = tokio::spawn(async move {
-            scheduler_clone.add_task(TaskItem {
-                id: i,
-                priority: (i * 10) as u8,
-                data: format!("task{}", i),
-            }).await;
+            scheduler_clone
+                .add_task(TaskItem {
+                    id: i,
+                    priority: (i * 10) as u8,
+                    data: format!("task{}", i),
+                })
+                .await;
         });
         handles.push(handle);
     }
@@ -201,13 +204,11 @@ fn test_compare_async_task_lists() {
     assert!(!compare_async_task_lists(&list1, &list3));
 
     // 测试不同长度的列表
-    let list4 = vec![
-        TaskItem {
-            id: 1,
-            priority: 10,
-            data: "task1",
-        },
-    ];
+    let list4 = vec![TaskItem {
+        id: 1,
+        priority: 10,
+        data: "task1",
+    }];
     assert!(!compare_async_task_lists(&list1, &list4));
 }
 
@@ -281,11 +282,13 @@ async fn test_async_task_scheduler_timeout() -> Result<()> {
     let scheduler = AsyncTaskScheduler::new(1);
 
     // 添加任务
-    scheduler.add_task(TaskItem {
-        id: 1,
-        priority: 10,
-        data: "task1",
-    }).await;
+    scheduler
+        .add_task(TaskItem {
+            id: 1,
+            priority: 10,
+            data: "task1",
+        })
+        .await;
 
     // 执行调度（应该很快完成）
     let result = timeout(Duration::from_secs(1), scheduler.schedule()).await;
@@ -391,9 +394,21 @@ async fn test_batch_operations() {
 
     // 批量添加任务
     let tasks = vec![
-        TaskItem { id: 1, priority: 10, data: 1 },
-        TaskItem { id: 2, priority: 20, data: 2 },
-        TaskItem { id: 3, priority: 30, data: 3 },
+        TaskItem {
+            id: 1,
+            priority: 10,
+            data: 1,
+        },
+        TaskItem {
+            id: 2,
+            priority: 20,
+            data: 2,
+        },
+        TaskItem {
+            id: 3,
+            priority: 30,
+            data: 3,
+        },
     ];
 
     queue.push_batch(tasks);
@@ -416,11 +431,13 @@ async fn test_scheduler_utility_methods() -> Result<()> {
     assert!(scheduler.is_empty().await);
 
     // 添加任务
-    scheduler.add_task(TaskItem {
-        id: 1,
-        priority: 10,
-        data: "task1",
-    }).await;
+    scheduler
+        .add_task(TaskItem {
+            id: 1,
+            priority: 10,
+            data: "task1",
+        })
+        .await;
 
     // 测试 task_count
     assert_eq!(scheduler.task_count().await, 1);
@@ -428,8 +445,16 @@ async fn test_scheduler_utility_methods() -> Result<()> {
 
     // 测试批量添加
     let tasks = vec![
-        TaskItem { id: 2, priority: 20, data: "task2" },
-        TaskItem { id: 3, priority: 30, data: "task3" },
+        TaskItem {
+            id: 2,
+            priority: 20,
+            data: "task2",
+        },
+        TaskItem {
+            id: 3,
+            priority: 30,
+            data: "task3",
+        },
     ];
     scheduler.add_tasks_batch(tasks).await;
     assert_eq!(scheduler.task_count().await, 3);

@@ -27,7 +27,6 @@
   - [4. 错误处理与恢复](#4-错误处理与恢复)
     - [4.1 异步错误处理](#41-异步错误处理)
   - [5. 总结](#5-总结)
-  - [这些技术为构建高性能、高可用的异步进程管理系统提供了坚实的基础，能够充分利用 Rust 的异步特性和现代运行时](#这些技术为构建高性能高可用的异步进程管理系统提供了坚实的基础能够充分利用-rust-的异步特性和现代运行时)
 
 本章深入探讨 Rust 中的异步进程管理，包括异步进程创建、监控、通信和错误处理，以及与现代异步运行时的集成。
 
@@ -1414,6 +1413,7 @@ impl AsyncErrorHandler {
 5. **错误处理与恢复**: 完善的错误处理和自动恢复机制
 
 这些技术为构建高性能、高可用的异步进程管理系统提供了坚实的基础，能够充分利用 Rust 的异步特性和现代运行时
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

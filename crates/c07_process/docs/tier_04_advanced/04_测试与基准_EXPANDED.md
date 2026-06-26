@@ -36,7 +36,6 @@
     - [案例：完整测试套件](#案例完整测试套件)
   - [7. 最佳实践](#7-最佳实践)
   - [总结](#总结)
-  - [**适用版本**: Rust 1.92.0+](#适用版本-rust-1920)
 
 ---
 
@@ -880,6 +879,7 @@ assert!(condition);
 **创建日期**: 2025-10-22
 **最后更新**: 2025-12-11
 **适用版本**: Rust 1.92.0+
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

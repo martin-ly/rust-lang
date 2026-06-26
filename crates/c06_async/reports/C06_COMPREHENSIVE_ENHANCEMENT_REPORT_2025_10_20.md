@@ -19,7 +19,6 @@
   - [📈 与现有文档整合](#-与现有文档整合)
   - [🎯 技术选型建议](#-技术选型建议)
   - [✅ 已完成](#-已完成)
-  - [*C06 异步编程核心增强完成！*](#c06-异步编程核心增强完成)
 
 ## 📊 执行摘要
 
@@ -93,6 +92,7 @@ C06已有丰富文档体系，本次增强**提炼核心**、**系统对比**：
 ---
 
 *C06 异步编程核心增强完成！*
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

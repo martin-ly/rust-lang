@@ -30,7 +30,6 @@
     - [5.1 性能指标收集](#51-性能指标收集)
     - [5.2 性能分析和优化建议](#52-性能分析和优化建议)
   - [6. 总结](#6-总结)
-  - [这些技术为构建高性能的进程管理系统提供了全面的优化方案，能够显著提升系统的吞吐量、响应时间和资源利用率](#这些技术为构建高性能的进程管理系统提供了全面的优化方案能够显著提升系统的吞吐量响应时间和资源利用率)
 
 本章深入探讨 Rust 进程管理的性能优化技术，包括内存管理、CPU 优化、I/O 优化、并发优化和性能监控。
 
@@ -1904,6 +1903,7 @@ impl Default for TrendDirection {
 5. **性能监控**: 性能指标收集、性能分析和优化建议
 
 这些技术为构建高性能的进程管理系统提供了全面的优化方案，能够显著提升系统的吞吐量、响应时间和资源利用率
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

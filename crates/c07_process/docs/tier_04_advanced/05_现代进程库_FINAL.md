@@ -37,7 +37,6 @@
     - [案例2：守护进程框架](#案例2守护进程框架)
   - [6. 最佳实践](#6-最佳实践)
   - [总结](#总结)
-  - [**适用版本**: Rust 1.92.0+](#适用版本-rust-1920)
 
 ---
 
@@ -748,7 +747,8 @@ sysinfo = "0.30"
 **库选择矩阵**:
 
 | 需求     | 推荐库         | 原因     |
-| :--- | :--- | :--- || 高并发   | tokio::process | 异步优势 |
+| :--- | :--- | :--- |
+| 高并发   | tokio::process | 异步优势 |
 | 简单脚本 | std::process   | 零依赖   |
 | 管道组合 | duct           | API简洁  |
 | Unix特性 | nix            | 完整支持 |
@@ -787,6 +787,7 @@ users = "0.11"
 **创建日期**: 2025-10-22
 **最后更新**: 2025-12-11
 **适用版本**: Rust 1.92.0+
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -1,4 +1,7 @@
-> **生态状态提示**：本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
+> **生态状态提示**：
+>
+> 本文档提及 `async-std` 与/或 `wasm32-wasi`。
+> 请注意：
 >
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
@@ -28,7 +31,6 @@
   - [4. 进程调度与优先级管理](#4-进程调度与优先级管理)
     - [4.1 进程调度器](#41-进程调度器)
   - [5. 总结](#5-总结)
-  - [这些技术为构建企业级的进程管理系统提供了坚实的基础，能够确保系统的稳定性、可扩展性和高性能](#这些技术为构建企业级的进程管理系统提供了坚实的基础能够确保系统的稳定性可扩展性和高性能)
 
 本章深入探讨 Rust 中的高级进程管理技术，包括进程池、负载均衡、健康检查、资源监控等企业级特性。
 
@@ -1148,6 +1150,7 @@ pub enum SchedulerError {
 6. **进程调度**: 基于优先级的进程调度系统
 
 这些技术为构建企业级的进程管理系统提供了坚实的基础，能够确保系统的稳定性、可扩展性和高性能
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

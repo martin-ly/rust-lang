@@ -21,7 +21,6 @@
   - [5. 进程优先级调度](#5-进程优先级调度)
     - [5.1 优先级调度器](#51-优先级调度器)
   - [总结](#总结)
-  - [这些示例展示了如何在 Rust 1.92.0 中构建企业级的进程管理系统（兼容 Rust 1.90+ 特性），提供了完整的错误处理、资源管理和监控功能](#这些示例展示了如何在-rust-1920-中构建企业级的进程管理系统兼容-rust-190-特性提供了完整的错误处理资源管理和监控功能)
 
 本章提供高级进程管理示例，涵盖进程池、生命周期管理、资源监控、故障恢复和优先级调度等企业级功能。
 
@@ -1979,6 +1978,7 @@ pub async fn priority_scheduling_example() -> Result<(), Box<dyn std::error::Err
 5. **进程优先级调度** - 基于优先级的任务调度和资源分配
 
 这些示例展示了如何在 Rust 1.92.0 中构建企业级的进程管理系统（兼容 Rust 1.90+ 特性），提供了完整的错误处理、资源管理和监控功能
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

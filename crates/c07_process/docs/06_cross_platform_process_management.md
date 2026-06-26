@@ -34,7 +34,6 @@
     - [6.1 跨平台测试](#61-跨平台测试)
     - [6.2 错误处理策略](#62-错误处理策略)
   - [7. 总结](#7-总结)
-  - [这些技术为构建真正跨平台的进程管理系统提供了坚实的基础，能够确保在不同操作系统上的一致性和可靠性](#这些技术为构建真正跨平台的进程管理系统提供了坚实的基础能够确保在不同操作系统上的一致性和可靠性)
 
 本章深入探讨 Rust 中的跨平台进程管理，包括 Windows、Linux、macOS 等不同平台的特性差异、兼容性处理和最佳实践。
 
@@ -1507,6 +1506,7 @@ impl CrossPlatformErrorHandler {
 7. **错误处理策略**: 完善的跨平台错误处理机制
 
 这些技术为构建真正跨平台的进程管理系统提供了坚实的基础，能够确保在不同操作系统上的一致性和可靠性
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
