@@ -50,7 +50,6 @@
     - [官方文档](#官方文档)
     - [工具推荐](#工具推荐)
     - [相关文档](#相关文档)
-  - [_有新问题？欢迎提交 Issue 或 Pull Request！_ 🦀📦](#有新问题欢迎提交-issue-或-pull-request-)
 
 **版本**: Rust 1.92.0 / Cargo 1.92.0
 **创建日期**: 2025-10-19
@@ -1152,6 +1151,7 @@ jobs:
 **最后更新**: 2026-01-26
 
 _有新问题？欢迎提交 Issue 或 Pull Request！_ 🦀📦
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

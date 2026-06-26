@@ -46,7 +46,6 @@
     - [长期计划](#长期计划)
   - [🙏 致谢](#-致谢)
   - [📚 快速链接](#-快速链接)
-  - [_构建完整的知识体系，赋能 Rust 开发者！_ 🦀📚✨](#构建完整的知识体系赋能-rust-开发者-)
 
 **创建日期**: 2025-10-19
 **项目**: c02_type_system
@@ -491,6 +490,7 @@ c02_type_system/
 ---
 
 _构建完整的知识体系，赋能 Rust 开发者！_ 🦀📚✨
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
