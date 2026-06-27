@@ -19,7 +19,11 @@ fn main() {
         if !deps.is_empty() {
             let dep_labels: Vec<_> = deps
                 .iter()
-                .map(|d| kg.get_entity(d).and_then(|e| e.label_for("zh")).unwrap_or(d.as_str()))
+                .map(|d| {
+                    kg.get_entity(d)
+                        .and_then(|e| e.label_for("zh"))
+                        .unwrap_or(d.as_str())
+                })
                 .collect();
             println!("学习「{}」之前需掌握: {}", label, dep_labels.join(", "));
         }
@@ -43,7 +47,14 @@ fn main() {
     let common = common_prerequisites(&kg, "ex:Lifetimes", "ex:AsyncAwait");
     let common_labels: Vec<_> = common
         .iter()
-        .map(|d| kg.get_entity(d).and_then(|e| e.label_for("zh")).unwrap_or(d.as_str()))
+        .map(|d| {
+            kg.get_entity(d)
+                .and_then(|e| e.label_for("zh"))
+                .unwrap_or(d.as_str())
+        })
         .collect();
-    println!("Lifetimes 与 AsyncAwait 的共同前置概念: {}", common_labels.join(", "));
+    println!(
+        "Lifetimes 与 AsyncAwait 的共同前置概念: {}",
+        common_labels.join(", ")
+    );
 }

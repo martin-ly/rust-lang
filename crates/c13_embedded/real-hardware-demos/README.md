@@ -8,7 +8,7 @@
 
 ## 目录结构
 
-```
+```text
 real-hardware-demos/
 ├── README.md                 # 本文件
 ├── embassy-demo/             # Embassy 异步框架示例 (RP2040)

@@ -15,7 +15,14 @@ fn main() {
 
     let report = Validator::new().validate(&kg);
 
-    println!("\n验证结果: {}", if report.is_valid() { "✅ 通过" } else { "❌ 失败" });
+    println!(
+        "\n验证结果: {}",
+        if report.is_valid() {
+            "✅ 通过"
+        } else {
+            "❌ 失败"
+        }
+    );
 
     if !report.errors().is_empty() {
         println!("\n错误:");

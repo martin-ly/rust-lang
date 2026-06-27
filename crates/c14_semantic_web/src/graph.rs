@@ -28,7 +28,10 @@ impl<'de> Deserialize<'de> for EntityType {
             "Property" => Ok(EntityType::Property),
             "Rule" => Ok(EntityType::Rule),
             "Primitive" => Ok(EntityType::Primitive),
-            other => Err(serde::de::Error::custom(format!("unknown entity type: {}", other))),
+            other => Err(serde::de::Error::custom(format!(
+                "unknown entity type: {}",
+                other
+            ))),
         }
     }
 }
@@ -214,7 +217,14 @@ impl KnowledgeGraph {
             if visited.contains(start) {
                 continue;
             }
-            self.dfs_cycles(start, predicate, &mut visited, &mut stack, &mut on_stack, &mut cycles);
+            self.dfs_cycles(
+                start,
+                predicate,
+                &mut visited,
+                &mut stack,
+                &mut on_stack,
+                &mut cycles,
+            );
         }
         cycles
     }

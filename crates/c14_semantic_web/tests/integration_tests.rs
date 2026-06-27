@@ -1,4 +1,6 @@
-use c14_semantic_web::graph::{Entity, EntityType, KnowledgeGraph, LangString, Relation, RelationMeta};
+use c14_semantic_web::graph::{
+    Entity, EntityType, KnowledgeGraph, LangString, Relation, RelationMeta,
+};
 use c14_semantic_web::reasoning::reason;
 use c14_semantic_web::validation::Validator;
 
@@ -25,9 +27,21 @@ fn build_test_kg() -> KnowledgeGraph {
         asp: Some("S".into()),
     };
 
-    kg.add_entity(make_entity("ex:Ownership", EntityType::Concept, "Ownership"));
-    kg.add_entity(make_entity("ex:Borrowing", EntityType::Concept, "Borrowing"));
-    kg.add_entity(make_entity("ex:Lifetimes", EntityType::Concept, "Lifetimes"));
+    kg.add_entity(make_entity(
+        "ex:Ownership",
+        EntityType::Concept,
+        "Ownership",
+    ));
+    kg.add_entity(make_entity(
+        "ex:Borrowing",
+        EntityType::Concept,
+        "Borrowing",
+    ));
+    kg.add_entity(make_entity(
+        "ex:Lifetimes",
+        EntityType::Concept,
+        "Lifetimes",
+    ));
 
     kg.add_relation(Relation {
         subject: "ex:Borrowing".into(),
