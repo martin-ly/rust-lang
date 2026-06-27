@@ -84,7 +84,7 @@
 > **Bloom 层级**: 应用 → 评价
 **变更日志**:
 
-> **补充来源**: [Reactive Streams JVM](https://github.com/reactive-streams/reactive-streams-jvm) · [Tokio Stream Internals](https://tokio.rs/tokio/topics/internals)
+> **补充来源**: [Reactive Streams JVM](https://github.com/reactive-streams/reactive-streams-jvm) · [Tokio Stream Internals](https://tokio.rs/tokio/topics)
 
 > **补充来源**: [来源: [RxRust](https://docs.rs/rxrust/latest/rxrust/)] · [来源: [futures-signals](https://docs.rs/futures-signals/latest/futures_signals/)]
 
@@ -592,7 +592,7 @@ Rust 的所有权（Ownership）系统与 FRP 的**有状态信号**存在根本
 
 ## 六、数据流编程
 
-> **来源**: [Tokio Internals](https://tokio.rs/tokio/topics/internals)
+> **来源**: [Tokio Internals](https://tokio.rs/tokio/topics)
 
 ### 6.1 推模型 vs 拉模型
 >
@@ -615,7 +615,7 @@ Rust 的所有权（Ownership）系统与 FRP 的**有状态信号**存在根本
   }
 ```
 
-> **来源**: [来源: [Tokio Internals](https://tokio.rs/tokio/topics/internals)]
+> **来源**: [来源: [Tokio Internals](https://tokio.rs/tokio/topics)]
 
 ### 6.2 与 Rust Stream 的对应
 >
@@ -836,7 +836,7 @@ async fn send_alert(log: &LogEntry) -> Result<(), AlertError> {
 
 > **来源**: [Reactive Streams Spec](https://www.reactive-streams.org/) ·
 > [Elliott 2009](https://conal.net/papers/push-pull-frp/push-pull-frp.pdf) ·
-> [Tokio Internals](https://tokio.rs/tokio/topics/internals)
+> [Tokio Internals](https://tokio.rs/tokio/topics)
 
 ---
 

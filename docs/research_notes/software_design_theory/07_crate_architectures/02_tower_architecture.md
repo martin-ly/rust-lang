@@ -73,7 +73,7 @@ where
 }
 ```
 
-> [来源: [Tokio 文档 - Backpressure](https://tokio.rs/tokio/topics/backpressure)]
+> [来源: [Tokio 文档 - Backpressure](https://tokio.rs/tokio/tutorial)]
 
 ### 2.2 `Service` 的函子性质
 >
@@ -232,7 +232,7 @@ Client -> Timeout.poll_ready()
 
 此时请求不会到达 `Core`，避免了"限流器失效后下游被压垮"的级联故障。这是**背压的完整性保证**。
 
-> [来源: [Tokio 文档 - Backpressure](https://tokio.rs/tokio/topics/backpressure)]
+> [来源: [Tokio 文档 - Backpressure](https://tokio.rs/tokio/tutorial)]
 
 ---
 

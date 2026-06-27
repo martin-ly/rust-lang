@@ -58,7 +58,6 @@
     - [7.2 跨任务所有权转移的安全性](#72-跨任务所有权转移的安全性)
     - [定理 7.2 (跨任务所有权安全)](#定理-72-跨任务所有权安全)
   - [参考文献](#参考文献)
-<a id="最后更新-2026-03-04"></a>
   - [*最后更新: 2026-03-04*](#最后更新-2026-03-04)
   - [权威来源索引](#权威来源索引)
 
@@ -645,7 +644,7 @@ Tokio的内部使用unsafe代码，但通过以下方式保证安全:
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-1. **Tokio Team.** (2024). *Tokio Documentation*. <https://tokio.rs/docs>
+1. **Tokio Team.** (2024). *Tokio Documentation*. <https://tokio.rs/tokio/tutorial>
 
 2. **Blumofe, R. D., & Leiserson, C. E.** (1999). Scheduling Multithreaded Computations by Work Stealing. *JACM*.
    - 关键贡献: 工作窃取算法的理论分析

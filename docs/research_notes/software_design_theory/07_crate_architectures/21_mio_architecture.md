@@ -38,7 +38,7 @@ mio 的三大核心抽象：
 | **`Waker`** | `eventfd` / `kqueue EVFILT_USER` / `PostQueuedCompletionStatus` | 同上 | 跨线程唤醒事件循环 |
 
 > [来源: mio Docs — Getting Started](https://docs.rs/mio/latest/mio/)
-> [来源: Tokio Docs — mio Integration](https://tokio.rs/tokio/topics/runtime-internals)
+> [来源: Tokio Docs — mio Integration](https://tokio.rs/tokio/topics)
 
 ```rust,ignore
 use mio::{Events, Interest, Poll, Token};
@@ -381,7 +381,7 @@ graph BT
 
 > **关键事实**: 几乎所有 Rust 异步网络 IO 最终都归结为 mio 的 `Poll::poll()` 调用。Tokio 的 `TcpListener::accept().await` 在底层就是：注册 `READABLE` 兴趣 → `mio::Poll::poll()` → 收到就绪事件 → 调用 `std::net::TcpListener::accept_nonblocking()`。
 
-> [来源: Tokio Runtime Internals](https://tokio.rs/tokio/topics/runtime-internals)
+> [来源: Tokio Runtime Internals](https://tokio.rs/tokio/topics)
 
 ---
 

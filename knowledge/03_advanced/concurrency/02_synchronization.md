@@ -1039,7 +1039,7 @@ fn reader_writer_pattern() {
 |------|-----------|----------|--------------|
 | **Mara Bos** | [Rust Atomics and Locks](https://marabos.nl/atomics/) | 第 3-5 章深入 Mutex、Condvar、RwLock 的实现与优化 | 模块 4-6 |
 | **Amanieu d'Antras** | [parking_lot](https://github.com/Amanieu/parking_lot) | 比标准库更快更小的同步原语实现 | 模块 9 |
-| **Tokio 团队** | [Tokio Sync Primitives](https://tokio.rs/tokio/topics/shared-state) | 异步上下文中的同步原语选择 | 模块 7 |
+| **Tokio 团队** | [Tokio Sync Primitives](https://tokio.rs/tokio/tutorial/shared-state) | 异步上下文中的同步原语选择 | 模块 7 |
 
 ### 8.4 跨语言对比
 >

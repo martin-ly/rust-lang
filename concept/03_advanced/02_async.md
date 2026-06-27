@@ -934,7 +934,7 @@ graph TD
 ```
 
 > **认知功能**: 类型安全判定器——为手写 Future 或设计自引用结构提供 Pin 使用的判定流程。读者只需回答"是否包含自引用"和"是否需要地址稳定"两个问题，即可确定是否需要 Pin。关键洞察：自引用是 Pin 的充分条件而非必要条件，某些非自引用场景（如与硬件 DMA 交互）同样需要地址稳定。[来源: 💡 原创分析]
-> [来源: [Tokio Docs: Runtime](https://tokio.rs/tokio/topics/runtime)]
+> [来源: [Tokio Docs: Runtime](https://tokio.rs/tokio/tutorial)]
 
 ---
 

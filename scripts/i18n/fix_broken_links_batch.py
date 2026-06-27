@@ -36,6 +36,15 @@ WIKIPEDIA_FIXES = {
 URL_REPLACEMENTS = {
     # Known moved/removed resources
     "https://releases.rs/1.95.0/": "https://releases.rs/",
+    # Tokio topics reorganized into tutorial (old /tokio/topics/X pages removed)
+    "https://tokio.rs/tokio/topics/runtime": "https://tokio.rs/tokio/tutorial",
+    "https://tokio.rs/tokio/topics/internals": "https://tokio.rs/tokio/topics",
+    "https://tokio.rs/tokio/topics/cancellation": "https://tokio.rs/tokio/tutorial/select",
+    "https://tokio.rs/tokio/topics/shared-state": "https://tokio.rs/tokio/tutorial/shared-state",
+    "https://tokio.rs/tokio/topics/backpressure": "https://tokio.rs/tokio/tutorial",
+    "https://tokio.rs/tokio/topics/io": "https://tokio.rs/tokio/tutorial/io",
+    "https://tokio.rs/tokio/topics/runtime-internals": "https://tokio.rs/tokio/topics",
+    "https://tokio.rs/docs": "https://tokio.rs/tokio/tutorial",
 }
 
 

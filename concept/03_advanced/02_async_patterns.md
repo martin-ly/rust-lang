@@ -197,7 +197,7 @@ Waker: 异步通知机制
 ```
 
 > **Waker 洞察**: **Waker 是"按需唤醒"的优化**——没有它，执行器需要不断轮询所有任务（忙等待）。
-> [来源: [tokio.rs — Runtime](https://tokio.rs/tokio/topics/runtime)]
+> [来源: [tokio.rs — Runtime](https://tokio.rs/tokio/tutorial)]
 
 ---
 

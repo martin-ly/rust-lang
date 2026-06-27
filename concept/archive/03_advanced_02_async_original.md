@@ -968,7 +968,7 @@ graph TD
 ```
 
 > **认知功能**: 类型安全判定器——为手写 Future 或设计自引用结构提供 Pin 使用的判定流程。读者只需回答"是否包含自引用"和"是否需要地址稳定"两个问题，即可确定是否需要 Pin。关键洞察：自引用是 Pin 的充分条件而非必要条件，某些非自引用场景（如与硬件 DMA 交互）同样需要地址稳定。[来源: 💡 原创分析]
-> [来源: [Tokio Docs: Runtime](https://tokio.rs/tokio/topics/runtime)]
+> [来源: [Tokio Docs: Runtime](https://tokio.rs/tokio/tutorial)]
 > [来源: [Rust Async Book]]
 
 ---
@@ -2356,7 +2356,7 @@ warning: the type `bool` does not permit being left uninitialized
 
 > **关键洞察**: async 状态机的局部变量在挂起时被存入状态机结构体（Struct）。若局部变量未初始化（通过 `MaybeUninit::uninit().assume_init()`），恢复执行后读取该变量即触发 UB。Miri 的 `invalid_value` lint 在解释执行时检测此类问题，而编译器仅发出 warning（无法静态确定 `assume_init` 是否安全）。
 [来源: [TRPL](https://doc.rust-lang.org/book/ch17-00-async-await.html)]
-> [来源: [Tokio Docs: Cancellation](https://tokio.rs/tokio/topics/cancellation)]
+> [来源: [Tokio Docs: Cancellation](https://tokio.rs/tokio/tutorial/select)]
 >
 #### Miri 与 async 状态机的特殊关联
 

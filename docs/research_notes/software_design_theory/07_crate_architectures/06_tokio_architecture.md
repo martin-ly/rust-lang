@@ -26,7 +26,7 @@ Tokio 的四大核心子系统：
 | **Timer Wheel** | 超时与定时器管理 | 分层时间轮 |
 | **Blocking Pool** | 同步阻塞任务托管 | 独立线程池 |
 
-> [来源: Tokio Docs — Runtime Internals](https://tokio.rs/tokio/topics/runtime-internals)
+> [来源: Tokio Docs — Runtime Internals](https://tokio.rs/tokio/topics)
 > [来源: Rust Reference — async/await](https://doc.rust-lang.org/reference/expressions/await-expr.html)
 
 ```rust,ignore
@@ -326,7 +326,7 @@ sequenceDiagram
     R-->>T: 恢复执行
 ```
 
-> [来源: Tokio Internals — IO Driver](https://tokio.rs/tokio/topics/io)
+> [来源: Tokio Internals — IO Driver](https://tokio.rs/tokio/tutorial/io)
 
 ---
 
@@ -607,7 +607,7 @@ async fn background_task() {
 | `watch` | 单播状态广播 | 无阻塞（覆盖旧值） | 固定 |
 | `broadcast` | 多播事件 | send 阻塞（满时） | 有界 |
 
-> [来源: Tokio Docs — Backpressure](https://tokio.rs/tokio/topics/backpressure)
+> [来源: Tokio Docs — Backpressure](https://tokio.rs/tokio/tutorial)
 
 ---
 

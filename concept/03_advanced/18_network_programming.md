@@ -130,7 +130,7 @@
 > **认知功能**: Tokio 将**多路复用 + 非阻塞 IO** 包装为 async/await 语法，使开发者能以"顺序代码"的思维编写高并发网络服务。
 > [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
 > **关键洞察**: Tokio 的 Runtime 本质上是一个**事件循环 + 任务调度器**——网络事件（可读/可写）触发对应的 Future 继续执行。
-> [来源: [Tokio Documentation — Runtime](https://tokio.rs/tokio/topics/runtime)]
+> [来源: [Tokio Documentation — Runtime](https://tokio.rs/tokio/tutorial)]
 
 ---
 
@@ -182,7 +182,7 @@ Tokio Runtime 架构:
 ```
 
 > **认知功能**: Tokio Runtime 的核心价值在于**统一了不同 OS 的异步 IO 机制**——epoll/kqueue/IOCP 的差异被 mio 抽象，开发者只需写 async/await 代码。
-> [来源: [mio crate](https://docs.rs/mio/latest/mio/)] · [来源: [Tokio Runtime Docs](https://tokio.rs/tokio/topics/runtime)]
+> [来源: [mio crate](https://docs.rs/mio/latest/mio/)] · [来源: [Tokio Runtime Docs](https://tokio.rs/tokio/tutorial)]
 
 ---
 
@@ -438,7 +438,7 @@ async fn main() -> tokio::io::Result<()> {
 ```
 
 > **性能洞察**: `TCP_NODELAY` 与 `TCP_CORK` 是一对矛盾选项——NODELAY 降低延迟，CORK 提高吞吐量（合并小数据包）。Tokio 默认启用 NODELAY，适合大多数 async 服务场景。
-> [来源: [Tokio Network Performance](https://tokio.rs/tokio/topics/runtime)]
+> [来源: [Tokio Network Performance](https://tokio.rs/tokio/tutorial)]
 
 ---
 
@@ -560,7 +560,7 @@ graph TB
 ```
 
 > **认知功能**: 此图揭示 async/await 的**暂停-恢复**机制——当 socket 未就绪时，任务从 Runtime 卸载；当内核通知 IO 就绪时，Waker 重新调度任务。
-> [来源: [Tokio Internals](https://tokio.rs/tokio/topics/runtime)] · [来源: [Rust Async Book — Executors](https://rust-lang.github.io/async-book//02_execution/01_chapter.html)]
+> [来源: [Tokio Internals](https://tokio.rs/tokio/tutorial)] · [来源: [Rust Async Book — Executors](https://rust-lang.github.io/async-book//02_execution/01_chapter.html)]
 > **关键洞察**: `await` 点的本质是将**状态机控制权交还 Runtime**——Runtime 决定何时基于 IO 事件恢复执行。
 > [来源: [RFC 2394 — async/await](https://rust-lang.github.io/rfcs//2394-async_await.html)]
 
