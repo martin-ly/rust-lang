@@ -134,7 +134,7 @@ assert_eq!(v2, vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
 > | 实现 | `Iterator` | `IntoIterator` |
 > | `Copy` | ❌ 无 | ✅ 有（若元素 `Copy`） |
 > | 迭代后状态 | 消费（不可用） | 保留（可复用） |
-> | 语义模型 | 有状态迭代器 | 纯值（数学区间） |
+> | 语义模型 | 有状态迭代器（Iterator） | 纯值（数学区间） |
 > [来源: [RFC 3550](https://github.com/rust-lang/rfcs/pull/3550)]
 
 ---
@@ -574,12 +574,12 @@ fn main() {
 
 ### 测验 4：当使用 `Range` 作为切片索引超出范围时会发生什么？（理解层）
 
-**题目**: 当使用 `Range` 作为切片索引超出范围时会发生什么？
+**题目**: 当使用 `Range` 作为切片（Slice）索引超出范围时会发生什么？
 
 <details>
 <summary>✅ 答案与解析</summary>
 
-会触发 panic（对于 `Vec` 和数组的索引）。Rust 的切片索引范围检查是运行时的。
+会触发 panic（对于 `Vec` 和数组的索引）。Rust 的切片索引范围检查是运行时（Runtime）的。
 </details>
 
 ---

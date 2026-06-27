@@ -47,7 +47,7 @@
   - [相关概念文件](#相关概念文件)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
-    - [10.3 边界测试：FFI 中的空指针解引用（Reference）（运行时 UB）](LINK_PLACEHOLDER)
+    - [10.3 边界测试：FFI 中的空指针解引用（Reference）（运行时（Runtime） UB）](LINK_PLACEHOLDER)
     - [10.5 边界测试：所有权（Ownership）移动后的再次使用](LINK_PLACEHOLDER)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -60,7 +60,7 @@
     - [测验 1：FFI 边界安全性（记忆层）](#测验-1ffi-边界安全性记忆层)
     - [测验 2：`extern "C"` 与 ABI（理解层）](#测验-2extern-c-与-abi理解层)
     - [测验 3：FFI 类型映射（应用层）](#测验-3ffi-类型映射应用层)
-    - [测验 4：跨语言所有权转移（分析层）](#测验-4跨语言所有权转移分析层)
+    - [测验 4：跨语言所有权（Ownership）转移（分析层）](#测验-4跨语言所有权转移分析层)
 
 ---
 
@@ -146,7 +146,7 @@ Rust 支持的 ABI:
 | `char` | — | ❌ | Rust `char` 是 Unicode 标量值（4 字节） |
 | `*const T` | `const T*` | ✅ | 裸指针布局相同 |
 | `*mut T` | `T*` | ✅ | 裸指针布局相同 |
-| `&T` | — | ❌ | 引用有 Rust 特定语义 |
+| `&T` | — | ❌ | 引用（Reference）有 Rust 特定语义 |
 | `Option<&T>` | — | ⚠️ | 可能为 null 的指针优化（NIC） |
 | `struct` | `struct` | ⚠️ | 需 `#[repr(C)]` 保证布局 |
 | `enum` | `enum` | ❌ | 需 `#[repr(C)]` 或 `#[repr(u8)]` 等 |
@@ -237,7 +237,7 @@ impl Drop for SafeConnection {
 }
 ```
 
-> **封装模式**: 外部不透明指针 + Rust 安全封装结构体 + Drop trait 管理生命周期（Lifetimes）。这是 FFI 中最常见的安全化模式。
+> **封装模式**: 外部不透明指针 + Rust 安全封装结构体（Struct） + Drop trait 管理生命周期（Lifetimes）。这是 FFI 中最常见的安全化模式。
 > [来源: [Rust FFI Patterns](https://doc.rust-lang.org/nomicon/ffi.html)]
 
 ---
@@ -282,8 +282,8 @@ where
 > **回调难点**:
 >
 > 1. C 回调必须是 `extern "C" fn`（函数指针），不能是闭包（Closures）
-> 2. 需要通过 `user_data` 参数传递闭包环境
-> 3. **生命周期管理复杂**——谁释放 `user_data`？何时释放？
+> 2. 需要通过 `user_data` 参数传递闭包（Closures）环境
+> 3. **生命周期（Lifetimes）管理复杂**——谁释放 `user_data`？何时释放？
 > 4. panic 跨越 FFI 边界是 UB——必须用 `catch_unwind` 包裹
 > [来源: [Rustonomicon — Panic Across FFI](https://doc.rust-lang.org/nomicon/unwinding.html)]
 
@@ -622,7 +622,7 @@ fn main() {
 
 > 跨语言调用安全 ⟸ C ABI 兼容 ⟸ 布局一致性（Coherence）
 > 内存管理边界 ⟸ Box::into_raw / from_raw ⟸ 所有权转移
-> **过渡**: 掌握 Rust FFI：与外部代码的安全边界 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 Rust FFI：与外部代码的安全边界 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 Rust FFI：与外部代码的安全边界 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 

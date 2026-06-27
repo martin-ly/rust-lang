@@ -156,7 +156,7 @@ fn main() {
 
 **答案**：✅ 能编译，但**运行期可能 segfault**。
 
-**解析**：`0x12345 as *const i32` 创建了一个**悬垂/无效原始指针**。解引用（Reference）它是未定义行为（UB）。
+**解析**：`0x12345 as *const i32` 创建了一个**悬垂/无效原始指针（Raw Pointer）**。解引用（Reference）它是未定义行为（UB）。
 
 **原始指针（Raw Pointer） vs 引用（Reference）**：
 
@@ -165,7 +165,7 @@ fn main() {
 | 可为 null | ✅ | ❌ |
 | 可悬垂 | ✅ | ❌（编译期保证） |
 | 可别名 | ✅（多个 `*mut` 同时存在） | ❌ |
-| 自动解引用 | ❌ | ✅ |
+| 自动解引用（Reference） | ❌ | ✅ |
 | 生命周期（Lifetimes）检查 | ❌ | ✅ |
 
 **安全创建原始指针的方式**：
@@ -526,7 +526,7 @@ fn main() {
 error: Undefined Behavior: trying to retag from <tag> for Unique permission
 ```
 
-**问题**：`u8` 数组和 `u32` 指针的别名规则不兼容。`u32` 写入需要一个指向整个 4 字节区域的独占引用，但原始 `data` 数组的借用仍然存在。
+**问题**：`u8` 数组和 `u32` 指针的别名规则不兼容。`u32` 写入需要一个指向整个 4 字节区域的独占引用，但原始 `data` 数组的借用（Borrowing）仍然存在。
 
 **正确做法**——使用 `std::ptr::write_unaligned` 或 `std::slice::align_to`：
 

@@ -326,7 +326,7 @@ where
 | `into_` | 消耗式转换 | `U`（_owned_） | `into_inner()` |
 | `from` | 标准 `From` trait | `Self` | `String::from("x")` |
 | `mut_` / `_mut` | 可变引用（Reference）访问器 | `&mut U` | `get_mut()` |
-| `by` / `by_key` | 通过闭包/key 执行 | varies | `sort_by()` |
+| `by` / `by_key` | 通过闭包（Closures）/key 执行 | varies | `sort_by()` |
 
 ---
 

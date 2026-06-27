@@ -35,7 +35,7 @@ fn make_callback() -> impl FnOnce() -> Pin<Box<dyn Future<Output = i32> + Send>>
 这种写法的问题：
 
 1. **语法冗余**：闭包（Closures） + `async move` 块两层嵌套。
-2. **捕获不精确**：`async move` 会强制把捕获变量 move 进 Future，无法像同步闭包那样按使用自动推断借用（Borrowing）。
+2. **捕获不精确**：`async move` 会强制把捕获变量 move 进 Future，无法像同步闭包（Closures）那样按使用自动推断借用（Borrowing）。
 3. **类型表达困难**：返回 `impl Fn() -> impl Future` 在 trait bound、高阶回调中非常冗长。
 
 Rust 1.85 引入 `async || {}` 语法后，上述代码可简化为：
@@ -119,7 +119,7 @@ async fn capture_examples() {
 | 语法层级 | 闭包（Closures） + 内部 async 块 | 单一 async 闭包 |
 | 捕获 | 强制 `move` | 自动推断（可 `move`） |
 | 返回类型 | `impl Fn(...) -> impl Future` | `impl AsyncFn(...) -> T` |
-| 借用捕获 | ❌ 困难 | ✅ 原生支持 |
+| 借用（Borrowing）捕获 | ❌ 困难 | ✅ 原生支持 |
 | dyn 兼容 | `Fn` trait 是 dyn-compatible | `AsyncFn` **当前不是** dyn-compatible |
 
 ---
@@ -339,8 +339,8 @@ Future trait          (1.36)
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | async closures 提供原生异步闭包 ⟹ 简化高阶异步回调 | 掌握旧写法 `\|x\| async move {}` | 能用 `async \|x\| {}` 编写更简洁的异步回调 | 高 |
-| 借用捕获支持 ⟹ 生命周期（Lifetimes）推断更精确 | 理解同步闭包捕获规则 | 能在异步场景中安全借用环境变量 | 高 |
-| `AsyncFn` 非 dyn-compatible ⟹ 不能直接用 `Box<dyn AsyncFn>` | 理解 trait object safety | 能用泛型或传统闭包绕过 | 高 |
+| 借用捕获支持 ⟹ 生命周期（Lifetimes）推断更精确 | 理解同步闭包捕获规则 | 能在异步（Async）场景中安全借用环境变量 | 高 |
+| `AsyncFn` 非 dyn-compatible ⟹ 不能直接用 `Box<dyn AsyncFn>` | 理解 trait object safety | 能用泛型（Generics）或传统闭包绕过 | 高 |
 
 ### 反命题与边界
 

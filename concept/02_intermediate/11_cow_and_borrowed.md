@@ -43,13 +43,13 @@
   - [相关概念文件](#相关概念文件)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
-  - [十、边界测试：Cow 与借用的编译错误](#十边界测试cow-与借用的编译错误)
+  - [十、边界测试：Cow 与借用（Borrowing）的编译错误](#十边界测试cow-与借用的编译错误)
     - [10.1 边界测试：`Cow` 的写时复制与借用冲突（编译错误）](#101-边界测试cow-的写时复制与借用冲突编译错误)
     - [10.2 边界测试：`Borrow` trait 与 `AsRef` 的误用（编译错误）](#102-边界测试borrow-trait-与-asref-的误用编译错误)
     - [10.3 边界测试：`Cow` 的 `ToOwned` 约束（编译错误）](#103-边界测试cow-的-toowned-约束编译错误)
     - [10.4 边界测试：`Cow` 在 `match` 中的所有权（Ownership）转移（编译错误）](LINK_PLACEHOLDER)
-    - [10.2 边界测试：`Cow` 的生命周期（Lifetimes）与所有权转换（编译错误）](LINK_PLACEHOLDER)
-    - [10.4 边界测试：Cow 的生命周期与泛型（Generics）约束不匹配（编译错误）](LINK_PLACEHOLDER)
+    - [10.2 边界测试：`Cow` 的生命周期（Lifetimes）与所有权（Ownership）转换（编译错误）](LINK_PLACEHOLDER)
+    - [10.4 边界测试：Cow 的生命周期（Lifetimes）与泛型（Generics）约束不匹配（编译错误）](LINK_PLACEHOLDER)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`Cow<'a, str>` 的两种变体是什么？各自代表什么语义？（理解层）](#测验-1cowa-str-的两种变体是什么各自代表什么语义理解层)
     - [测验 2：`Cow::Borrowed(s).to_mut()` 在什么情况下会触发克隆？（理解层）](#测验-2cowborrowedsto_mut-在什么情况下会触发克隆理解层)
@@ -620,7 +620,7 @@ fn main() {
 > **修正**:
 > `Cow` 是枚举（Enum）（`enum Cow<'a, B> { Borrowed(&'a B), Owned(<B as ToOwned>::Owned) }`），在 `match` 中按值解构时，`Cow` 被移动，`Owned` 变体的内部值被取出。
 > 若需保留 `Cow`，应使用 `match &cow`（匹配引用（Reference））或 `cow.as_ref()`（获取 `&B`）。
-> `Cow` 的灵活性伴随着所有权复杂性：有时需要 `Cow` 本身（传递），有时需要内部值（使用），有时需要引用（检查）。
+> `Cow` 的灵活性伴随着所有权复杂性：有时需要 `Cow` 本身（传递），有时需要内部值（使用），有时需要引用（Reference）（检查）。
 > 这与 `Option` 和 `Result` 的所有权管理相同——枚举（Enum）的按值匹配消耗所有者。
 > `Cow` 提供 `into_owned()`（无论借用或拥有，都转为拥有）和 `to_mut()`（转为可变引用（Mutable Reference），必要时克隆）简化常见模式。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] ·
@@ -690,7 +690,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-当 `Cow` 处于 `Borrowed` 状态且调用 `to_mut()` 需要可变引用时，会克隆底层数据并转为 `Owned`。
+当 `Cow` 处于 `Borrowed` 状态且调用 `to_mut()` 需要可变引用（Mutable Reference）时，会克隆底层数据并转为 `Owned`。
 </details>
 
 ---

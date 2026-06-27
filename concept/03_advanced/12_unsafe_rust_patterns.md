@@ -44,7 +44,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Unsafe Rust 模式的编译错误](#十边界测试unsafe-rust-模式的编译错误)
     - [10.1 边界测试：自定义 `Drop` 中的 `mem::forget` 循环（运行时（Runtime） UB）](LINK_PLACEHOLDER)
-    - [10.2 边界测试：`unsafe impl` 的 trait 契约违反（编译错误 / 运行时 UB）](#102-边界测试unsafe-impl-的-trait-契约违反编译错误--运行时-ub)
+    - [10.2 边界测试：`unsafe impl` 的 trait 契约违反（编译错误 / 运行时（Runtime） UB）](#102-边界测试unsafe-impl-的-trait-契约违反编译错误--运行时-ub)
     - [10.3 边界测试：自引用（Reference）结构的 `Pin` 误用（编译错误/运行时 UB）](LINK_PLACEHOLDER)
     - [10.4 边界测试：`MaybeUninit` 的数组初始化模式（编译错误）](#104-边界测试maybeuninit-的数组初始化模式编译错误)
     - [10.5 边界测试：`std::ptr::read` 的重复读取（运行时 UB）](#105-边界测试stdptrread-的重复读取运行时-ub)
@@ -53,7 +53,7 @@
     - [10.1 边界测试：const fn 中的非编译期操作](#101-边界测试const-fn-中的非编译期操作)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：unsafe 的语义边界（理解层）](#测验-1unsafe-的语义边界理解层)
-    - [测验 2：原始指针 vs 引用（应用层）](#测验-2原始指针-vs-引用应用层)
+    - [测验 2：原始指针（Raw Pointer） vs 引用（Reference）（应用层）](#测验-2原始指针-vs-引用应用层)
     - [测验 3：`MaybeUninit<T>` 的用途（应用层）](#测验-3maybeuninitt-的用途应用层)
     - [测验 4：安全抽象层设计（分析层）](#测验-4安全抽象层设计分析层)
     - [测验 5：UB 检测工具（评价层）](#测验-5ub-检测工具评价层)
@@ -638,7 +638,7 @@ unsafe impl Sync for ThreadSafe {} // 安全，因为 Mutex 保证同步
 ```
 
 > **修正**: `unsafe impl Sync` / `unsafe impl Send` 是 Rust 中最危险的操作之一——它告诉编译器"我保证此类型在多线程环境下是安全的"，但编译器**不验证**此保证。
-> `RefCell` 内部使用非原子借用计数，多线程共享会导致数据竞争。
+> `RefCell` 内部使用非原子借用（Borrowing）计数，多线程共享会导致数据竞争。
 > 正确的线程安全必须通过 `Mutex`、`RwLock`、原子类型等同步原语实现。
 > `unsafe impl Sync` 仅在封装了底层同步机制时使用（如标准库的 `Mutex` 本身）。
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
@@ -770,7 +770,7 @@ fn main() {
 > 堆栈上分配数组（`let mut buf = [MaybeUninit::<u8>::uninit(); 1024]`），填充后 `transmute` 为初始化数组。
 > `MaybeUninit` 替代了已废弃的 `mem::uninitialized()`（后者读取未初始化值是 instant UB）。
 > 这与 C 的 `malloc` + `memcpy`（未初始化内存默认合法读取，但值不确定）或 C++ 的 `std::optional`（有状态跟踪）不同
-> ——Rust 的 `MaybeUninit` 将未初始化状态编码到类型系统，强制显式初始化。
+> ——Rust 的 `MaybeUninit` 将未初始化状态编码到类型系统（Type System），强制显式初始化。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html)] ·
 > [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/uninitialized.html)]
 
@@ -928,7 +928,7 @@ fn main() {}
 Rust unsafe 代码的最佳实践：
 
 1. **最小化 unsafe 范围**：只在必要的地方使用 `unsafe` 块
-2. **封装不变量**：模块内部维护安全契约，对外暴露无法违反契约的 API
+2. **封装不变量**：模块（Module）内部维护安全契约，对外暴露无法违反契约的 API
 3. **文档化契约**：用 `SAFETY:` 注释说明为什么这段代码是安全的
 4. **用 Miri 验证**：检测 Stacked Borrows/Tree Borrows 违规
 

@@ -66,7 +66,7 @@ mindmap
 > 关键洞察：L3 并非新增孤立语法，而是 L1 所有权（Ownership）与 L2 Trait 在复杂场景中的组合应用与边界突破。[来源: 💡 原创分析]
 > **认知路径**: 本 mindmap 展示 L3 层的**复杂场景组合**。
 > 并发将 L1 借用（Borrowing）规则扩展到多线程，异步（Async）将所有权（Ownership）扩展到状态机，Unsafe 是安全边界的逃逸舱口，宏（Macro）是元编程工具。
-> 核心洞察：**并发和异步（Async）都是所有权系统在不同执行模型下的应用**——线程是抢占式并行，Future 是协作式串行。
+> 核心洞察：**并发和异步（Async）都是所有权（Ownership）系统在不同执行模型下的应用**——线程是抢占式并行，Future 是协作式串行。
 
 ## 一、本层概念关系图（完整版）
 
@@ -179,7 +179,7 @@ graph TB
 | 文件 | 概念 | 核心内容 | 状态 | 前置（L1-L2） | 后置（L4-L7） |
 |:---|:---|:---|:---|:---|:---|
 | [01_concurrency.md](./01_concurrency.md) | 并发模型 | `Send`/`Sync`、fearless concurrency、同步原语、原子操作（Atomic Operations） | ✅ v1.0 | Ownership + Borrowing + Trait (Auto) | RustBelt (并发验证), AI (并发代码生成) |
-| [02_async.md](./02_async.md) | 异步编程 | `Future`、`async/await`、`Pin`、AFIT/RPITIT、运行时（Runtime） | ✅ v1.0 | Generics + Trait + Pin (L2) | 形式化 (Pin 语义), 生态 (Tokio) |
+| [02_async.md](./02_async.md) | 异步（Async）编程 | `Future`、`async/await`、`Pin`、AFIT/RPITIT、运行时（Runtime） | ✅ v1.0 | Generics + Trait + Pin (L2) | 形式化 (Pin 语义), 生态 (Tokio) |
 | [03_unsafe.md](./03_unsafe.md) | Unsafe Rust | 裸指针、FFI、UB 边界、Safety 契约、Miri | ✅ v1.0 | 所有 L1-L2 概念 | RustBelt (unsafe 验证), C++ 对比 |
 | [04_macros.md](./04_macros.md) | 宏系统 | `macro_rules!`、过程宏（Procedural Macro）、DSL、卫生宏 | ✅ v1.0 | Type System + Trait | 生态 (代码生成), AI (模板生成) |
 | [05_rust_ffi.md](./05_rust_ffi.md) | FFI 跨语言 | extern 块、ABI 兼容、类型映射、bindgen、回调封装 | ✅ v1.0 | Type System + Unsafe | 生态 (跨语言), C++ 对比 |
@@ -207,7 +207,7 @@ graph TB
 - [类型擦除与动态分发](./17_type_erasure.md)
 - [测验：并发与异步（嵌入式互动试点）](./21_quiz_concurrency_async.md)
 - [测验：Unsafe Rust（嵌入式互动试点）](./22_quiz_unsafe.md)
-- [测验：宏系统（嵌入式互动试点）](./23_quiz_macros.md)
+- [测验：宏（Macro）系统（嵌入式互动试点）](./23_quiz_macros.md)
 
 ## 三、学习路径建议
 
@@ -270,7 +270,7 @@ Macros
 | 定理 | 前提 | 结论 | 依赖的 L4 理论 | 失效条件 | 边界 |
 |:---|:---|:---|:---|:---|:---|
 | Fearless Concurrency | `T: Send + Sync` | 跨线程共享无数据竞争 | CSL + Iris | `unsafe impl`、裸指针别名 | UnsafeCell |
-| Future 轮询安全 | `Pin<&mut Self>` | 自引用在 poll 中有效 | —（部分形式化） | poll 中手动移动 | `!Unpin` 标记 |
+| Future 轮询安全 | `Pin<&mut Self>` | 自引用（Reference）在 poll 中有效 | —（部分形式化） | poll 中手动移动 | `!Unpin` 标记 |
 | async 状态机安全 | 编译器生成 + Pin | await 点状态转换合法 | —（待形式化） | 跨越 await 持有非 Send 变量 | `Send` 自动推导 |
 | unsafe 契约充分性 | 程序员手动保证 | safe API 封装后内部 unsafe 不泄漏 | —（手动证明） | 契约不完整、前置条件遗漏 | Miri 动态检测 |
 | 宏卫生性 | 规则遵循 | 宏变量不污染外部作用域 | Hygienic Macros | 过程宏（Procedural Macro）可绕过卫生性 | 命名冲突 |

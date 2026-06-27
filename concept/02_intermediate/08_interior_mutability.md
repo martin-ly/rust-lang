@@ -33,9 +33,9 @@
   - [一、核心概念](#一核心概念)
     - [1.1 外部可变性与内部可变性的对比](#11-外部可变性与内部可变性的对比)
     - [1.2 内部可变性的类型谱系](#12-内部可变性的类型谱系)
-    - [1.3 运行时借用（Borrowing）检查](LINK_PLACEHOLDER)
+    - [1.3 运行时（Runtime）借用（Borrowing）检查](LINK_PLACEHOLDER)
   - [二、技术细节](#二技术细节)
-    - [2.1 `Cell<T>`：无借用语义的复制](#21-cellt无借用语义的复制)
+    - [2.1 `Cell<T>`：无借用（Borrowing）语义的复制](#21-cellt无借用语义的复制)
     - [2.2 `RefCell<T>`：动态借用规则](#22-refcellt动态借用规则)
     - [2.3 `Mutex<T>` 与 `RwLock<T>`：线程安全版本](#23-mutext-与-rwlockt线程安全版本)
   - [三、使用模式](#三使用模式)
@@ -609,7 +609,7 @@ fn main() {
 > 1) 避免递归/重入的 `borrow_mut`；
 > 2) 使用 `Cell<T>`（若 `T: Copy`，无运行时检查开销）；
 > 3) 重构为 `take` + `replace` 模式（`let mut temp = data.take(); ...; data.set(temp);`）。
-> 这与 C++ 的 `mutable` 关键字（无运行时检查，突破 const 约束）或 Java 的 `final` 字段（引用不可变，但对象状态可变）不同——Rust 的 `RefCell` 是显式、有检查的安全机制。
+> 这与 C++ 的 `mutable` 关键字（无运行时检查，突破 const 约束）或 Java 的 `final` 字段（引用（Reference）不可变，但对象状态可变）不同——Rust 的 `RefCell` 是显式、有检查的安全机制。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-05-interior-mutability.html)] ·
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/cell/struct.RefCell.html)]
 
@@ -763,13 +763,13 @@ fn main() {
 `Rc<RefCell<T>>` 提供了什么组合能力？
 
 - A. 单所有权（Ownership） + 编译期可变借用（Mutable Borrow）
-- B. 多所有权 + 运行时可变借用（Mutable Borrow）
+- B. 多所有权（Ownership） + 运行时可变借用（Mutable Borrow）
 - C. 线程安全共享 + 编译期不可变借用（Immutable Borrow）
 
 <details>
 <summary>✅ 答案</summary>
 
-**B. 多所有权 + 运行时可变借用**。
+**B. 多所有权 + 运行时可变借用（Mutable Borrow）**。
 
 组合语义：
 
@@ -798,7 +798,7 @@ fn main() {
 <details>
 <summary>✅ 答案</summary>
 
-**B. 因为它的借用计数器不是原子操作，多线程同时访问会导致数据竞争**。
+**B. 因为它的借用计数器不是原子操作（Atomic Operations），多线程同时访问会导致数据竞争**。
 
 `RefCell` 的借用状态（当前有多少个 `borrow`/是否有 `borrow_mut`）存储在普通整型中，非线程安全。如果两个线程同时调用 `borrow()`，计数器更新会产生数据竞争。
 

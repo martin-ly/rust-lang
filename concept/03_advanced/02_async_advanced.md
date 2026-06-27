@@ -26,15 +26,15 @@
     - [8.10 `Stream` / `Sink` trait 完整分析](#810-stream--sink-trait-完整分析)
     - [8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异](#811-pinboxdyn-future-vs-impl-future-的性能差异)
     - [8.12 `loom` 并发模型检测工具](#812-loom-并发模型检测工具)
-    - [8.13 Miri 动态验证：async 状态机的内存安全检测](#813-miri-动态验证async-状态机的内存安全检测)
+    - [8.13 Miri 动态验证：async 状态机的内存安全（Memory Safety）检测](#813-miri-动态验证async-状态机的内存安全检测)
       - [场景 1：悬垂指针检测（使用已释放的 Box）](#场景-1悬垂指针检测使用已释放的-box)
       - [场景 2：无效值检测（非法 bool 构造）](#场景-2无效值检测非法-bool-构造)
       - [场景 3：async 状态机中的未初始化内存](#场景-3async-状态机中的未初始化内存)
       - [Miri 与 async 状态机的特殊关联](#miri-与-async-状态机的特殊关联)
   - [九、知识来源关系（Provenance）](#九知识来源关系provenance)
-  - [十、边界测试：高级异步模式的编译错误](#十边界测试高级异步模式的编译错误)
-    - [10.1 边界测试：`select!` 宏中分支完成后的变量使用（编译错误）](#101-边界测试select-宏中分支完成后的变量使用编译错误)
-    - [10.2 边界测试：`Stream::next()` 与所有权冲突（编译错误）](#102-边界测试streamnext-与所有权冲突编译错误)
+  - [十、边界测试：高级异步（Async）模式的编译错误](#十边界测试高级异步模式的编译错误)
+    - [10.1 边界测试：`select!` 宏（Macro）中分支完成后的变量使用（编译错误）](#101-边界测试select-宏中分支完成后的变量使用编译错误)
+    - [10.2 边界测试：`Stream::next()` 与所有权（Ownership）冲突（编译错误）](#102-边界测试streamnext-与所有权冲突编译错误)
     - [10.5 边界测试：`Pin` 与 `Unpin` 的自动实现冲突（编译错误）](#105-边界测试pin-与-unpin-的自动实现冲突编译错误)
     - [10.3 边界测试：类型不匹配的基础错误](#103-边界测试类型不匹配的基础错误)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
@@ -308,7 +308,7 @@ Waker 四契约:
 
 **`std::task::Wake` trait：高级自定义 Waker**
 
-> **[Rust std 文档]** `std::task::Wake` trait 提供了比 `RawWakerVTable` 更安全的自定义 Waker 路径。实现 `Wake` 后，可通过 `Waker::from(Arc<T>)` 直接构造 `Waker`，无需手动管理 `RawWaker` 和 `RawWakerVTable` 的生命周期。✅ 已验证
+> **[Rust std 文档]** `std::task::Wake` trait 提供了比 `RawWakerVTable` 更安全的自定义 Waker 路径。实现 `Wake` 后，可通过 `Waker::from(Arc<T>)` 直接构造 `Waker`，无需手动管理 `RawWaker` 和 `RawWakerVTable` 的生命周期（Lifetimes）。✅ 已验证
 
 ```rust,ignore
 // ✅ 正确: 使用 std::task::Wake trait 实现自定义 Waker
@@ -386,7 +386,7 @@ impl UringReactor {
 
 > **[来源: tokio-rs/tokio-uring 设计文档]** io_uring 的 `user_data` 字段天然适合存储 Waker 标识，避免了 epoll 的 fd→Waker HashMap 查找开销。但 io_uring 的共享环设计对线程安全提出更高要求——Waker 的 `wake` 需是线程安全的（`Send + Sync`），因为完成事件可能在任意 CPU 核心上产生。
 
-> **Bloom 层级**: 分析 —— 理解 Waker 与 OS 的交互边界，是手写 Future 和自定义运行时的必要知识。
+> **Bloom 层级**: 分析 —— 理解 Waker 与 OS 的交互边界，是手写 Future 和自定义运行时（Runtime）的必要知识。
 
 ---
 
@@ -754,7 +754,7 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
   5. ❌ 不满足以上条件 → 性能退化，但语义仍正确
 ```
 
-> **[Tokio 博客: Pinning]** 栈 pinning 是零成本抽象的最后一块拼图——在 `pin!` 稳定之前，即使临时 Future 也需要 `Box::pin`，造成不必要的堆分配。✅ 已验证
+> **[Tokio 博客: Pinning]** 栈 pinning 是零成本抽象（Zero-Cost Abstraction）的最后一块拼图——在 `pin!` 稳定之前，即使临时 Future 也需要 `Box::pin`，造成不必要的堆分配。✅ 已验证
 
 **编译期优化差异：单态化 vs 虚调用**
 
@@ -1070,7 +1070,7 @@ mod tests {
 
 ### 8.13 Miri 动态验证：async 状态机的内存安全检测
 
-> **来源: [Miri Book](https://github.com/rust-lang/miri)** Miri 是 Rust 的 MIR 解释器，也是 Tree Borrows 别名模型的动态检查器。对于 async 状态机，Miri 能检测编译器无法捕获的 unsafe 边界违规——特别是涉及自引用、Pin 和跨 await 内存操作的场景。
+> **来源: [Miri Book](https://github.com/rust-lang/miri)** Miri 是 Rust 的 MIR 解释器，也是 Tree Borrows 别名模型的动态检查器。对于 async 状态机，Miri 能检测编译器无法捕获的 unsafe 边界违规——特别是涉及自引用（Reference）、Pin 和跨 await 内存操作的场景。
 
 #### 场景 1：悬垂指针检测（使用已释放的 Box）
 
@@ -1285,7 +1285,7 @@ async fn fixed_stream() {
 }
 ```
 
-> **修正**: `Stream::next()` 获取 `&mut self`，返回的 `Item` 可能与 Stream 的内部状态关联。在 `while let Some(item) = s.next().await` 中，`s` 被可变借用（Mutable Borrow）直到 `item` 释放。不能在循环体内再次调用 `s.next()`。这与迭代器的借用规则一致——`Iterator::next(&mut self)` 要求独占可变访问。[来源: [futures-rs Documentation](https://docs.rs/futures/)]
+> **修正**: `Stream::next()` 获取 `&mut self`，返回的 `Item` 可能与 Stream 的内部状态关联。在 `while let Some(item) = s.next().await` 中，`s` 被可变借用（Mutable Borrow）直到 `item` 释放。不能在循环体内再次调用 `s.next()`。这与迭代器（Iterator）的借用规则一致——`Iterator::next(&mut self)` 要求独占可变访问。[来源: [futures-rs Documentation](https://docs.rs/futures/)]
 
 ### 10.5 边界测试：`Pin` 与 `Unpin` 的自动实现冲突（编译错误）
 
@@ -1683,7 +1683,7 @@ async fn traverse_dir(path: &Path) -> Vec<String> {
 }
 ```
 
-> **核心洞察**: `async fn` 的递归 = 返回类型的递归 = 需要 `Box` 消除无限大小。这是 Rust 类型系统的根本限制，不是 Tokio 的问题。
+> **核心洞察**: `async fn` 的递归 = 返回类型的递归 = 需要 `Box` 消除无限大小。这是 Rust 类型系统（Type System）的根本限制，不是 Tokio 的问题。
 </details>
 
 ---

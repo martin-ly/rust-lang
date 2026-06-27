@@ -40,7 +40,7 @@
     - [1.2 泛型（Generics）关联类型（GATs）](LINK_PLACEHOLDER)
     - [1.3 特化（Specialization）](#13-特化specialization)
   - [二、技术细节](#二技术细节)
-    - [2.1 关联类型 vs 泛型参数](#21-关联类型-vs-泛型参数)
+    - [2.1 关联类型 vs 泛型（Generics）参数](#21-关联类型-vs-泛型参数)
     - [2.2 负 Trait 实现](#22-负-trait-实现)
     - [2.3 Trait 别名](#23-trait-别名)
   - [三、Trait 模式矩阵](#三trait-模式矩阵)
@@ -296,7 +296,7 @@ impl<T> !Send for MyType<T> {}  // 明确非 Send
 impl<T> !Sync for MyType<T> {}  // 明确非 Sync
 ```
 
-> **负实现洞察**: 负实现是 Rust **类型系统的"明确拒绝"机制**——它使 unsafe 代码的不变性可以在类型层面表达。
+> **负实现洞察**: 负实现是 Rust **类型系统（Type System）的"明确拒绝"机制**——它使 unsafe 代码的不变性可以在类型层面表达。
 > [来源: [Rust Reference — Negative Implementations](https://doc.rust-lang.org/reference/items/implementations.html#negative-implementations)]
 
 ---
@@ -729,7 +729,7 @@ trait LendingIterator {
 ```
 
 - A. 允许 trait 有多个关联类型
-- B. 允许关联类型自身带生命周期/泛型参数
+- B. 允许关联类型自身带生命周期（Lifetimes）/泛型参数
 - C. 允许 trait 有默认实现
 
 <details>
@@ -741,7 +741,7 @@ GAT（Generic Associated Types）是 Rust 1.65 稳定化的重要特性。它允
 
 - `type Item<'a>;` —— 关联类型带生命周期参数
 - 用于实现"出借迭代器"（lending iterator），返回引用（Reference）而非值
-- 解决传统 `Iterator` 无法返回自引用数据的限制
+- 解决传统 `Iterator` 无法返回自引用（Reference）数据的限制
 
 没有 GAT 时，返回生命周期依赖于 `&mut self` 的元素非常困难。
 </details>

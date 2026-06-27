@@ -30,8 +30,8 @@
 - [过程宏（Macro）：编译期代码生成的元编程工具](LINK_PLACEHOLDER)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 过程宏 vs macro\_rules](#11-过程宏-vs-macro_rules)
-    - [1.2 三种过程宏类型](#12-三种过程宏类型)
+    - [1.1 过程宏（Procedural Macro） vs macro\_rules](#11-过程宏-vs-macro_rules)
+    - [1.2 三种过程宏（Macro）类型](#12-三种过程宏类型)
     - [1.3 编译期执行模型](#13-编译期执行模型)
   - [二、技术细节](#二技术细节)
     - [2.1 TokenStream 操作](#21-tokenstream-操作)
@@ -813,7 +813,7 @@ Rust 过程宏具有**卫生性（hygiene）**：
 
 - 宏生成的标识符与调用处的标识符隔离
 - 宏不能意外引用（Reference）或遮蔽用户变量
-- 用户也不能意外引用宏内部的私有标识符
+- 用户也不能意外引用（Reference）宏内部的私有标识符
 
 这与 C 预处理器不同，C 的 `#define` 是纯文本替换，常导致命名冲突。
 
@@ -833,7 +833,7 @@ Derive 宏能为外部 crate 的类型添加 trait 实现吗？
 <details>
 <summary>✅ 答案</summary>
 
-**B. 不能，Derive 宏只是生成代码，生成的实现仍需遵守孤儿规则**。
+**B. 不能，Derive 宏只是生成代码，生成的实现仍需遵守孤儿规则（Orphan Rule）**。
 
 Derive 宏不是"魔法"——它只是自动编写你本来可以手写的 `impl` 块。因此：
 

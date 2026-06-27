@@ -55,16 +55,16 @@
   - [三、思维导图（Mind Map）](#三思维导图mind-map)
   - [四、定理推理链（Theorem Chain）](#四定理推理链theorem-chain)
     - [4.1 引理：Box ⟹ 堆分配 + 唯一所有权（Ownership）](LINK_PLACEHOLDER)
-    - [4.2 定理：Rc/Arc ⟹ 共享所有权安全（引用（Reference）计数）](LINK_PLACEHOLDER)
+    - [4.2 定理：Rc/Arc ⟹ 共享所有权（Ownership）安全（引用（Reference）计数）](LINK_PLACEHOLDER)
     - [4.3 推论：RefCell ⟹ 内部可变性运行时（Runtime）检查](LINK_PLACEHOLDER)
     - [4.4 RAII + 所有权 ⟹ 确定性释放](#44-raii--所有权--确定性释放)
     - [4.5 定理一致性（Coherence）矩阵](LINK_PLACEHOLDER)
   - [五、示例与反例（Examples \& Counter-examples）](#五示例与反例examples--counter-examples)
     - [5.1 正确示例：Box 堆分配](#51-正确示例box-堆分配)
     - [5.2 正确示例：Rc 共享所有权](#52-正确示例rc-共享所有权)
-    - [5.3 正确示例：用 Weak 打破循环引用](#53-正确示例用-weak-打破循环引用)
+    - [5.3 正确示例：用 Weak 打破循环引用（Reference）](#53-正确示例用-weak-打破循环引用)
     - [5.4 反例：Rc 循环引用导致泄漏](#54-反例rc-循环引用导致泄漏)
-    - [5.5 反例：RefCell 运行时借用（Borrowing）冲突（panic）](LINK_PLACEHOLDER)
+    - [5.5 反例：RefCell 运行时（Runtime）借用（Borrowing）冲突（panic）](LINK_PLACEHOLDER)
     - [5.5 补充：`Pin<&mut T>` 的堆内存语义与自引用安全](#55-补充pinmut-t-的堆内存语义与自引用安全)
       - [栈 Pin vs 堆 Pin](#栈-pin-vs-堆-pin)
       - [自引用结构的形式化保证](#自引用结构的形式化保证)
@@ -74,9 +74,9 @@
       - [`String`：UTF-8 字节数组的特化](#stringutf-8-字节数组的特化)
       - [`HashMap<K, V>`：Robin Hood 哈希 + 开放寻址](#hashmapk-vrobin-hood-哈希--开放寻址)
   - [六、反命题与边界分析（Counter-proposition \& Boundary Analysis）](#六反命题与边界分析counter-proposition--boundary-analysis)
-    - [6.1 反命题 1: "智能指针总是安全的"](#61-反命题-1-智能指针总是安全的)
+    - [6.1 反命题 1: "智能指针（Smart Pointer）总是安全的"](#61-反命题-1-智能指针总是安全的)
     - [6.2 反命题 2: "Rust 无内存泄漏"](#62-反命题-2-rust-无内存泄漏)
-    - [6.3 反命题 3: "RefCell 等价于编译期借用检查"](#63-反命题-3-refcell-等价于编译期借用检查)
+    - [6.3 反命题 3: "RefCell 等价于编译期借用（Borrowing）检查"](#63-反命题-3-refcell-等价于编译期借用检查)
     - [6.4 反命题 4: "Arc + Mutex 总是线程安全的"](#64-反命题-4-arc--mutex-总是线程安全的)
   - [七、边界极限测试代码（Boundary Limit Tests）](#七边界极限测试代码boundary-limit-tests)
     - [7.1 测试 1: Rc\<RefCell\> 循环引用极限](#71-测试-1-rcrefcell-循环引用极限)
@@ -373,7 +373,7 @@ graph TD
 
 > **一致性（Coherence）检查**: Box（独占）⟹ Rc（单线程共享）⟹ Arc（多线程共享）⟹ RefCell（内部可变），形成**从严格到宽松**的能力递进链。Pin 是独立维度（位置稳定性），Weak 是共享所有权的补充（不拥有）。
 > **关键洞察**: Rc/Arc/RefCell 的定理**不在 L4 形式化范围内**（运行时机制），是工程折衷而非编译期证明。Box 的所有权可由线性逻辑完全编码。
-> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.1 "内存安全完备性"
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.1 "内存安全（Memory Safety）完备性"
 
 > **过渡到示例与反例**: 定理链提供了形式化与工程保证，但实践中这些保证的边界在哪里？下一节通过正例展示智能指针的正确使用方式，通过反例揭示定理失效的精确条件——特别是 Rc 循环引用、RefCell panic、内存泄漏等边界场景。
 
@@ -573,7 +573,7 @@ impl SelfReferential {
 ```
 
 > **来源: [RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)** `PhantomPinned` 是一个零大小类型，仅用于将包含它的类型标记为 `!Unpin`。这不是运行时标记，而是类型系统（Type System）标记——编译器在 trait 自动推导时将 `PhantomPinned` 视为"不可安全移动"的信号。✅
-> **[来源: PLDI 2024 · RefinedRust]** Pin 的形式化语义对应于分离逻辑中的 "location stability"：地址一旦被分配，就在该对象的整个生命周期内保持不变。这与 Rust 的 `&mut T` 可移动形成对比——`Pin` 通过类型系统（Type System）剥夺了 `&mut T` 的移动能力。
+> **[来源: PLDI 2024 · RefinedRust]** Pin 的形式化语义对应于分离逻辑中的 "location stability"：地址一旦被分配，就在该对象的整个生命周期（Lifetimes）内保持不变。这与 Rust 的 `&mut T` 可移动形成对比——`Pin` 通过类型系统（Type System）剥夺了 `&mut T` 的移动能力。
 
 ---
 
@@ -810,7 +810,7 @@ graph TD
 | 语义 | 内存安全保证成立（无数据竞争） | ✅ 安全 |
 | 工程 | 锁顺序约定、锁粒度设计、try_lock 是实践标准 | ✅ 可缓解 |
 
-> **过渡到边界极限测试**: 反命题决策树揭示了定理失效的逻辑路径，但极限测试将定理推向边界——通过代码展示极端场景下的精确行为，验证理论预测与实现的一致性。
+> **过渡到边界极限测试**: 反命题决策树揭示了定理失效的逻辑路径，但极限测试将定理推向边界——通过代码展示极端场景下的精确行为，验证理论预测与实现的一致性（Coherence）。
 
 ---
 
@@ -1019,7 +1019,7 @@ c.borrow_mut().push_str("hello");     // 运行时检查的可变借用
 
 **核心问题**: "编译期不让我可变借用（Mutable Borrow），RefCell 为什么可以？"
 
-**过渡解释**: 语法熟练后，学习者遭遇编译期借用检查与 RefCell 运行时检查的矛盾。关键在于解释：编译期检查是"静态证明"（零运行时开销，但保守），RefCell 是"动态监控"（运行时开销，但更灵活）。这是 Rust 内存安全哲学的核心折衷——安全是多层次的，不是所有安全都能在编译期证明。从 Step 3 到 Step 4 的过渡由追问驱动："如果 Rc 让多人共享，RefCell 让运行时可变借用，那跨线程怎么办？"——引出 Arc/Mutex。
+**过渡解释**: 语法熟练后，学习者遭遇编译期借用检查与 RefCell 运行时检查的矛盾。关键在于解释：编译期检查是"静态证明"（零运行时开销，但保守），RefCell 是"动态监控"（运行时开销，但更灵活）。这是 Rust 内存安全哲学的核心折衷——安全是多层次的，不是所有安全都能在编译期证明。从 Step 3 到 Step 4 的过渡由追问驱动："如果 Rc 让多人共享，RefCell 让运行时可变借用（Mutable Borrow），那跨线程怎么办？"——引出 Arc/Mutex。
 
 ```text
 可变性光谱:
@@ -1052,7 +1052,7 @@ c.borrow_mut().push_str("hello");     // 运行时检查的可变借用
 
 **核心问题**: "Rust 真的完全安全吗？泄漏是怎么回事？"
 
-**过渡解释**: 学习者在前四步建立了对 Rust 内存安全的信任，这一步需要精确校准这种信任。Rust 的安全保证是：无 UAF、无 double-free、无数据竞争。但 Rust **不保证**无内存泄漏——Rc 循环引用和 `mem::forget` 都是 Safe Rust 中的合法泄漏。这不是缺陷，而是设计决策：防止泄漏需要运行时 GC 或限制性极强的类型系统，Rust 选择将泄漏排除在 unsafe 之外。从 Step 5 到 Step 6 的过渡是"从现象到原理"——理解为什么 Rust 做这种取舍。
+**过渡解释**: 学习者在前四步建立了对 Rust 内存安全的信任，这一步需要精确校准这种信任。Rust 的安全保证是：无 UAF、无 double-free、无数据竞争。但 Rust **不保证**无内存泄漏——Rc 循环引用和 `mem::forget` 都是 Safe Rust 中的合法泄漏。这不是缺陷，而是设计决策：防止泄漏需要运行时 GC 或限制性极强的类型系统（Type System），Rust 选择将泄漏排除在 unsafe 之外。从 Step 5 到 Step 6 的过渡是"从现象到原理"——理解为什么 Rust 做这种取舍。
 
 ```text
 安全边界精确表述:

@@ -27,7 +27,7 @@
 
 ## 📑 目录
 
-- [Rust 迭代器模式](#rust-迭代器模式)
+- [Rust 迭代器（Iterator）模式](#rust-迭代器模式)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 Iterator Trait](#11-iterator-trait)
@@ -620,7 +620,7 @@ fn main() {
 }
 ```
 
-> **修正**: `Iterator::collect()` 将迭代器消费为目标集合，但 Rust 的类型推断**仅从上下文**推导目标类型。若无处指定（如 `let x = ...collect()` 且无后续使用约束），编译器报错。常见模式：1) `let v: Vec<_> = iter.collect()`；2) `iter.collect::<Vec<_>>()`（turbofish 语法）；3) 函数返回类型约束（`fn foo() -> Vec<i32> { iter.collect() }`）。`collect()` 是 Rust 迭代器适配器的关键"终止操作"（consuming adaptor），与惰性适配器（`map`、`filter`）不同——它是编译器推断链的终点。这与 Java 的 `Stream.collect(Collectors.toList())`（显式指定收集器）或 Python 的 `list(iter)`（目标类型由构造函数决定）不同——Rust 的 `collect` 依赖类型推断，更灵活但可能需显式标注。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)]
+> **修正**: `Iterator::collect()` 将迭代器消费为目标集合，但 Rust 的类型推断（Type Inference）**仅从上下文**推导目标类型。若无处指定（如 `let x = ...collect()` 且无后续使用约束），编译器报错。常见模式：1) `let v: Vec<_> = iter.collect()`；2) `iter.collect::<Vec<_>>()`（turbofish 语法）；3) 函数返回类型约束（`fn foo() -> Vec<i32> { iter.collect() }`）。`collect()` 是 Rust 迭代器适配器的关键"终止操作"（consuming adaptor），与惰性适配器（`map`、`filter`）不同——它是编译器推断链的终点。这与 Java 的 `Stream.collect(Collectors.toList())`（显式指定收集器）或 Python 的 `list(iter)`（目标类型由构造函数决定）不同——Rust 的 `collect` 依赖类型推断，更灵活但可能需显式标注。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)]
 
 ### 10.8 边界测试：match 分支返回类型不一致
 
@@ -717,7 +717,7 @@ fn main() {
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | Rust 迭代器模式 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| Rust 迭代器模式 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| Rust 迭代器模式 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | Rust 迭代器模式 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 惰性求值安全 ⟸ Iterator 状态机 ⟸ 借用（Borrowing）检查

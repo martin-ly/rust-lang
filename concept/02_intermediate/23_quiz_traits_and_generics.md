@@ -188,7 +188,7 @@ where
 
 **where 子句的优势**：约束与函数签名分离，可读性更好，支持更复杂的约束组合。
 
-**知识点**：trait bound 是 Rust 泛型的"类型类约束"，编译器通过它进行单态化（Monomorphization）生成具体代码。[→ 泛型详解](./02_generics.md)
+**知识点**：trait bound 是 Rust 泛型（Generics）的"类型类约束"，编译器通过它进行单态化（Monomorphization）生成具体代码。[→ 泛型详解](./02_generics.md)
 
 </details>
 
@@ -349,14 +349,14 @@ Square
 |:---|:---|:---|
 | 分发方式 | 静态分发（单态化） | 动态分发（虚表 vtable） |
 | 运行时（Runtime）开销 | 无 | 指针解引用（Reference） + 虚表查找 |
-| 同质/异质集合 | 同质（编译期确定类型） | 异质（运行时确定类型） |
+| 同质/异质集合 | 同质（编译期确定类型） | 异质（运行时（Runtime）确定类型） |
 | 代码体积 | 每种类型生成一份代码 | 一份代码处理所有类型 |
 
 **`draw_all(&[&c, &s])` 的关键**：`&c` 和 `&s` 是不同类型，但都可以通过 `&dyn Drawable` 统一引用（Reference）。
 
 **注意**：`dyn Trait` 必须 behind a pointer（`&dyn`、`Box<dyn>`、`Rc<dyn>`），因为编译期不知道具体大小。
 
-**知识点**：trait 对象是实现运行时多态的 Rust 方式，与 Java interface 的引用类型类似，但显式标注 `dyn`。[→ Trait 对象详解](./01_traits.md)
+**知识点**：trait 对象是实现运行时多态的 Rust 方式，与 Java interface 的引用（Reference）类型类似，但显式标注 `dyn`。[→ Trait 对象详解](./01_traits.md)
 
 </details>
 
@@ -553,7 +553,7 @@ impl Point<f32> {
 }
 ```
 
-**知识点**：Rust 允许为泛型结构体（Struct）的特定实例类型提供额外方法，这是零成本抽象的典型案例。[→ 泛型详解](./02_generics.md)
+**知识点**：Rust 允许为泛型结构体（Struct）的特定实例类型提供额外方法，这是零成本抽象（Zero-Cost Abstraction）的典型案例。[→ 泛型详解](./02_generics.md)
 
 </details>
 
@@ -597,7 +597,7 @@ fn main() {
 
 **关键区别**：`Copy` 是隐式的、不可重定义的；`Clone` 是显式的、可自定义的。
 
-**注意**：一个类型可以同时实现 `Copy` 和 `Clone`（`Clone` 的行为必须与 `Copy` 一致）。若尝试为含 `String` 的结构体 derive `Copy`，编译器会报错。
+**注意**：一个类型可以同时实现 `Copy` 和 `Clone`（`Clone` 的行为必须与 `Copy` 一致）。若尝试为含 `String` 的结构体（Struct） derive `Copy`，编译器会报错。
 
 **知识点**：`Copy` 标记"按位复制安全"，`Clone` 提供显式复制能力。理解两者的区别是管理所有权（Ownership）的关键。[→ 所有权详解](../01_foundation/01_ownership.md)
 

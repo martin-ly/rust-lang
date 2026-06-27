@@ -38,7 +38,7 @@
 - v4.0 (2026-05-13): Phase 4 TODO 清理——新增 proc_macro2/syn/quote 最佳实践、macro_rules! 重复模式完整语法、const fn + const generics 替代宏趋势、编译期内置宏完整列表、属性宏修改函数体完整示例（#[measure_time]）、macro 关键字（声明宏（Declarative Macro） 2.0）演进对比
 - v1.0 (2026-05-12): 初始版本，完成权威定义、宏（Macro）类型对比矩阵、卫生性分析、形式化视角、思维导图、示例反例
 - v2.0 (2026-05-13): 深度重构——增强定理一致性（Coherence）矩阵至11行（带⟹推理链）、新增3个反命题决策树、重写6步递进认知路径、补充章节过渡段落与层次一致性标注
-- v3.0 (2026-05-13): 深度重构——增强§2编译管道精确位置、增强§3.1卫生宏形式化（隐式gensym/对比矩阵/边界案例）、新增§5.5宏与类型系统（Type System）交互边界、新增2个反命题决策树、补充章节过渡段落
+- v3.0 (2026-05-13): 深度重构——增强§2编译管道精确位置、增强§3.1卫生宏（Macro）形式化（隐式gensym/对比矩阵/边界案例）、新增§5.5宏与类型系统（Type System）交互边界、新增2个反命题决策树、补充章节过渡段落
 
 ---
 
@@ -81,7 +81,7 @@ Rust 宏 hygiene:
 
 ---
 
-<!-- 层级一致性: L2 概念分类矩阵 — 横向对比四种宏类型，纵向对比多语言元编程机制 -->
+<!-- 层级一致性（Coherence）: L2 概念分类矩阵 — 横向对比四种宏类型，纵向对比多语言元编程机制 -->
 
 ## 二、概念属性矩阵（Attribute Matrix）
 
@@ -137,7 +137,7 @@ Rust 宏 hygiene:
 ## 三、形式化理论根基（Formal Foundation）
 
 > **[Rust Reference: Hygiene](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene)**
-> Rust 的 macro_rules! 和过程宏是卫生的：宏内部定义的标识符不与外部冲突，形式化为 α-等价在宏展开中保持。✅ 已验证
+> Rust 的 macro_rules! 和过程宏（Procedural Macro）是卫生的：宏内部定义的标识符不与外部冲突，形式化为 α-等价在宏展开中保持。✅ 已验证
 > **[Scheme 卫生宏论文 (Kohlbecker et al. 1986)]**
 > 卫生宏的原始理论：宏展开应保持 α-重命名等价，内部绑定不泄露、外部绑定不捕获。Rust 的 hygiene 机制受此理论启发。 ✅ 已验证
 > **[Kohlbecker et al. 1986 — Hygienic Macro Expansion, POPL]** Scheme's hygienic macro system, implemented via implicit identifier renaming (gensym), is the direct theoretical ancestor of Rust's macro hygiene. ✅ 已验证
@@ -271,7 +271,7 @@ graph TD
 > [来源: [Rust Reference: const fn](https://doc.rust-lang.org/reference/items/functions.html#const-functions)]
 > [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]
 > 建议在学习初期将其作为导航锚点，快速建立"宏系统包含哪些子领域"的空间认知。
-> 核心洞察：卫生性（Hygiene）是贯穿所有宏类型的核心安全保证，而非仅属于声明宏的局部特性。[来源: 💡 原创分析]
+> 核心洞察：卫生性（Hygiene）是贯穿所有宏类型的核心安全保证，而非仅属于声明宏（Declarative Macro）的局部特性。[来源: 💡 原创分析]
 > [来源: [Rust Reference: Macros](https://doc.rust-lang.org/reference/macros.html)]
 
 ---
@@ -395,7 +395,7 @@ graph TD
 
 ### 5.5 宏与类型系统的交互边界
 
-宏系统与类型系统之间存在严格的**阶段隔离**：宏展开在类型检查之前完成，这决定了宏无法执行任何需要类型信息的操作。
+宏系统与类型系统（Type System）之间存在严格的**阶段隔离**：宏展开在类型检查之前完成，这决定了宏无法执行任何需要类型信息的操作。
 
 **不可跨越的边界**（Rust Reference: Macros · [RFC 1584](https://rust-lang.github.io/rfcs//1584-macros.html)）：
 
@@ -757,7 +757,7 @@ let v1 = make_vec![1, 2];
 let v2 = make_vec![3, 4];
 ```
 
-**过渡**: 重复代码的抽象手段不止宏一种——泛型也是强大的 DRY 工具。那么，什么时候泛型够用了，什么时候必须上宏？
+**过渡**: 重复代码的抽象手段不止宏一种——泛型（Generics）也是强大的 DRY 工具。那么，什么时候泛型够用了，什么时候必须上宏？
 
 ---
 
@@ -1366,7 +1366,7 @@ fn main() {
 | `env!(name)` | 环境变量名 | `&'static str` | 读取编译时环境变量 |
 | `option_env!(name)` | 环境变量名 | `Option<&'static str>` | 安全读取可能不存在的环境变量 |
 | `cfg!(expr)` | 条件表达式 | `bool` | 编译期条件判断（如 `cfg!(test)`） |
-| `module_path!()` | 无 | `&'static str` | 获取当前模块路径 |
+| `module_path!()` | 无 | `&'static str` | 获取当前模块（Module）路径 |
 | `line!()` / `column!()` | 无 | `u32` | 获取源码位置 |
 | `file!()` | 无 | `&'static str` | 获取当前文件名 |
 
@@ -1410,7 +1410,7 @@ fn main() {
 }
 ```
 
-**反例：env! 在运行时不存在时的编译错误**
+**反例：env! 在运行时（Runtime）不存在时的编译错误**
 
 ```rust,compile_fail
 // ❌ 反例: env! 读取不存在的环境变量
@@ -1848,7 +1848,7 @@ pub fn with_cleanup(_args: TokenStream, input: TokenStream) -> TokenStream {
 }
 ```
 
-> **[Rust Reference: async fn](https://doc.rust-lang.org/reference/)** 对于 `async fn`，闭包包装需额外注意保留 `async` 语义。最安全的做法始终是通过 `#fn_sig` 整体引用原始签名（已含 `async` 关键字），仅在 block 层面做包裹。✅ 已验证
+> **[Rust Reference: async fn](https://doc.rust-lang.org/reference/)** 对于 `async fn`，闭包（Closures）包装需额外注意保留 `async` 语义。最安全的做法始终是通过 `#fn_sig` 整体引用原始签名（已含 `async` 关键字），仅在 block 层面做包裹。✅ 已验证
 
 #### 5.5 错误处理：使用 `proc_macro_error2` 提供友好的编译错误
 
@@ -2135,7 +2135,7 @@ mod internal {
 | **Hygienic macro** | [Hygienic macro](https://en.wikipedia.org/wiki/Hygienic_macro) | 卫生宏 |
 | **Abstract syntax tree** | [Abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) | AST |
 | **Metaprogramming** | [Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming) | 元编程 |
-| **Quasi-quotation** | [Quasi-quotation](https://en.wikipedia.org/wiki/Quasi-quotation) | 准引用 |
+| **Quasi-quotation** | [Quasi-quotation](https://en.wikipedia.org/wiki/Quasi-quotation) | 准引用（Reference） |
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-05-macros.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
@@ -2395,7 +2395,7 @@ struct User {
 **派生宏的优势**：
 
 - 与类型定义紧密耦合，语义清晰
-- 不需要修改结构体定义语法
+- 不需要修改结构体（Struct）定义语法
 - 生态成熟（`derive_builder`、`structopt` → `clap`）
 
 ```rust,ignore

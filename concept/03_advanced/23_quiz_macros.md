@@ -144,7 +144,7 @@ fn main() {
 
 **注意**：`sum!()` 匹配零次，展开为 `temp = 0`，返回 0。
 
-**知识点**：重复模式是声明宏最强大的特性，允许处理任意数量的参数。分隔符的选择影响宏的调用语法。[→ 宏系统详解](./04_macros.md)
+**知识点**：重复模式是声明宏（Declarative Macro）最强大的特性，允许处理任意数量的参数。分隔符的选择影响宏的调用语法。[→ 宏系统详解](./04_macros.md)
 
 </details>
 
@@ -173,7 +173,7 @@ fn main() {
 
 **答案**：✅ 能编译，输出 `outer`。
 
-**解析**：Rust 的声明宏是**半卫生（semi-hygienic）**的。
+**解析**：Rust 的声明宏（Macro）是**半卫生（semi-hygienic）**的。
 
 **卫生性含义**：宏内部定义的变量不会与外部变量冲突，但**从外部传入的标识符**仍引用（Reference）外部作用域。
 
@@ -262,7 +262,7 @@ impl PartialEq for Point {
 
 **自定义 derive**：通过 `proc_macro_derive` 创建自己的 derive 宏（Macro）。
 
-**知识点**：derive 宏是最常用的过程宏，消除了大量 boilerplate。理解其生成的代码有助于调试复杂的 trait 约束问题。[→ 过程宏详解](./07_proc_macro.md)
+**知识点**：derive 宏是最常用的过程宏（Procedural Macro），消除了大量 boilerplate。理解其生成的代码有助于调试复杂的 trait 约束问题。[→ 过程宏详解](./07_proc_macro.md)
 
 </details>
 
@@ -599,7 +599,7 @@ macro_rules! make_vec {
 
 **最佳实践**：
 
-1. 宏中引用的外部类型应使用**绝对路径**（`::std::...`）
+1. 宏中引用（Reference）的外部类型应使用**绝对路径**（`::std::...`）
 2. 如果宏在库 crate 中定义并引用自己的类型，使用 `$crate`
 3. 避免在宏中生成 `use` 语句，直接写全路径
 

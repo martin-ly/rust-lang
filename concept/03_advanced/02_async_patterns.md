@@ -34,7 +34,7 @@
   - [二、技术细节](#二技术细节)
     - [2.1 并发执行模式](#21-并发执行模式)
     - [2.2 取消与超时](#22-取消与超时)
-  - [十、边界测试：异步模式的编译错误](#十边界测试异步模式的编译错误)
+  - [十、边界测试：异步（Async）模式的编译错误](#十边界测试异步模式的编译错误)
     - [10.1 边界测试：`Stream` 与 `Future` 的所有权（Ownership）混淆（编译错误）](LINK_PLACEHOLDER)
     - [10.2 边界测试：取消安全（Cancellation Safety）违反（逻辑错误）](#102-边界测试取消安全cancellation-safety违反逻辑错误)
     - [2.3 背压与流控制](#23-背压与流控制)
@@ -49,7 +49,7 @@
   - [权威来源索引](#权威来源索引)
     - [10.3 边界测试：取消安全性（Cancellation Safety）的违反（运行时（Runtime）行为）](LINK_PLACEHOLDER)
     - [10.4 边界测试：`tokio::spawn` 的 `Send` 约束与 `Rc`（编译错误）](#104-边界测试tokiospawn-的-send-约束与-rc编译错误)
-    - [10.5 边界测试：`Stream` 的 `fuse` 与 `select_next_some` 的交互（运行时 panic）](#105-边界测试stream-的-fuse-与-select_next_some-的交互运行时-panic)
+    - [10.5 边界测试：`Stream` 的 `fuse` 与 `select_next_some` 的交互（运行时（Runtime） panic）](#105-边界测试stream-的-fuse-与-select_next_some-的交互运行时-panic)
     - [10.3 边界测试：`Stream` 的背压与缓冲区溢出（运行时内存增长）](#103-边界测试stream-的背压与缓冲区溢出运行时内存增长)
     - [10.4 边界测试：async fn 在 trait 中的生命周期（Lifetimes）推断与实现约束（编译错误）](LINK_PLACEHOLDER)
   - [认知路径](#认知路径)
@@ -725,7 +725,7 @@ async fn work() {
 }
 ```
 
-> **修正**: `tokio::spawn` 将 future 发送到线程池执行，要求 future 是 `Send + 'static`。`Rc<T>` 不是 `Send`（引用计数非原子），因此不能出现在 spawn 的闭包（Closures）中。解决方案：1) 使用 `Arc<T>`（原子引用计数，`Send + Sync`）；2) 在单线程执行器（`tokio::runtime::Builder::new_current_thread()`）中使用 `task::spawn_local`（不要求 `Send`）；3) 使用 `tokio::sync::Mutex` 而非 `std::sync::Mutex`（异步友好的锁）。这与 Go 的 goroutine（任何变量都可共享，通过 channel 同步）或 JavaScript 的 Worker（通过 `postMessage` 传递结构化克隆数据）不同——Rust 在编译期阻止非线程安全数据跨线程，即使通过异步抽象。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)]
+> **修正**: `tokio::spawn` 将 future 发送到线程池执行，要求 future 是 `Send + 'static`。`Rc<T>` 不是 `Send`（引用（Reference）计数非原子），因此不能出现在 spawn 的闭包（Closures）中。解决方案：1) 使用 `Arc<T>`（原子引用计数，`Send + Sync`）；2) 在单线程执行器（`tokio::runtime::Builder::new_current_thread()`）中使用 `task::spawn_local`（不要求 `Send`）；3) 使用 `tokio::sync::Mutex` 而非 `std::sync::Mutex`（异步友好的锁）。这与 Go 的 goroutine（任何变量都可共享，通过 channel 同步）或 JavaScript 的 Worker（通过 `postMessage` 传递结构化克隆数据）不同——Rust 在编译期阻止非线程安全数据跨线程，即使通过异步抽象。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)]
 
 ### 10.5 边界测试：`Stream` 的 `fuse` 与 `select_next_some` 的交互（运行时 panic）
 

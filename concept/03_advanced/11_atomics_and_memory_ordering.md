@@ -30,7 +30,7 @@
 
 ## 📑 目录
 
-- [原子操作与内存序：无锁并发的精确控制](#原子操作与内存序无锁并发的精确控制)
+- [原子操作（Atomic Operations）与内存序：无锁并发的精确控制](#原子操作与内存序无锁并发的精确控制)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 原子类型全景](#11-原子类型全景)
@@ -52,7 +52,7 @@
   - [相关概念文件](#相关概念文件)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
-    - [10.5 边界测试：`AtomicPtr` 的 `compare_exchange` ABA 问题（运行时逻辑错误）](#105-边界测试atomicptr-的-compare_exchange-aba-问题运行时逻辑错误)
+    - [10.5 边界测试：`AtomicPtr` 的 `compare_exchange` ABA 问题（运行时（Runtime）逻辑错误）](#105-边界测试atomicptr-的-compare_exchange-aba-问题运行时逻辑错误)
     - [10.3 边界测试：`Relaxed` 顺序与 happens-before 缺失（逻辑错误/UB）](#103-边界测试relaxed-顺序与-happens-before-缺失逻辑错误ub)
     - [10.9 边界测试：match 分支返回类型不一致](#109-边界测试match-分支返回类型不一致)
   - [参考来源](#参考来源)
@@ -751,7 +751,7 @@ fn main() {
 > 解决方案：
 >
 > 1) **Tagged pointer**：在低位存储版本计数器（`(ptr & !0xF) | (version & 0xF)`）；
-> 2) **Hazard pointer**：延迟释放，确保无其他线程引用；
+> 2) **Hazard pointer**：延迟释放，确保无其他线程引用（Reference）；
 > 3) **Epoch-based reclamation**（`crossbeam-epoch`）：分代回收。
 > Rust 的 `crossbeam`  crate 提供成熟的内存回收方案。
 > 这与 C++ 的 `std::atomic<T*>`（同样 ABA 问题）或 Java 的 `AtomicReference`（同样问题，GC 缓解）相同——ABA 是所有 CAS 操作的固有限制。

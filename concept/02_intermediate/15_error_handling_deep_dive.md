@@ -33,7 +33,7 @@
   - [二、技术细节](#二技术细节)
     - [2.1 错误转换与 From Trait](#21-错误转换与-from-trait)
     - [2.2 自定义错误类型](#22-自定义错误类型)
-    - [2.3 错误处理框架](#23-错误处理框架)
+    - [2.3 错误处理（Error Handling）框架](#23-错误处理框架)
   - [三、错误处理模式矩阵](#三错误处理模式矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -360,7 +360,7 @@ impl std::error::Error for ManualError {
   → file.read_to_string(&mut buf).context("read config")?
 ```
 
-> **模式矩阵**: Rust 错误处理的**核心哲学**是"显式优于隐式"——每个可能的失败点都在类型系统中可见。
+> **模式矩阵**: Rust 错误处理的**核心哲学**是"显式优于隐式"——每个可能的失败点都在类型系统（Type System）中可见。
 > [来源: [Rust Error Handling Patterns](https://doc.rust-lang.org/rust-by-example/error.html)]
 
 ---

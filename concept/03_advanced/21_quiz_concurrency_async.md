@@ -87,7 +87,7 @@ fn main() {
 
 | 类型 | `Send` | `Sync` | 说明 |
 |:---|:---:|:---:|:---|
-| `Rc<T>` | ❌ | ❌ | 非原子引用计数 |
+| `Rc<T>` | ❌ | ❌ | 非原子引用（Reference）计数 |
 | `Arc<T>` | ✅（若 `T: Send + Sync`） | ✅（若 `T: Send + Sync`） | 原子引用计数 |
 | `Mutex<T>` | ✅（若 `T: Send`） | ✅（若 `T: Send`） | 互斥锁保护 |
 | `Cell<T>` | ✅ | ❌ | 内部可变性，非同步 |
@@ -161,7 +161,7 @@ fn main() {
 }
 ```
 
-**知识点**：`Arc` 提供共享所有权，`Mutex` 提供互斥访问。组合是 Rust 中多线程共享可变状态的标准模式。[→ 并发模式详解](./10_concurrency_patterns.md)
+**知识点**：`Arc` 提供共享所有权（Ownership），`Mutex` 提供互斥访问。组合是 Rust 中多线程共享可变状态的标准模式。[→ 并发模式详解](./10_concurrency_patterns.md)
 
 </details>
 
@@ -377,8 +377,8 @@ async fn main() {
 
 | 特性 | `std::thread::spawn` | `tokio::spawn` |
 |:---|:---|:---|
-| 执行单元 | OS 线程 | 异步任务（协作式调度） |
-| 闭包要求 | `FnOnce + Send + 'static` | `Future + Send + 'static` |
+| 执行单元 | OS 线程 | 异步（Async）任务（协作式调度） |
+| 闭包（Closures）要求 | `FnOnce + Send + 'static` | `Future + Send + 'static` |
 | 内存开销 | ~1-2 MB 栈 | ~几 KB |
 | 适用场景 | CPU 密集型 | IO 密集型 |
 
@@ -511,7 +511,7 @@ let s = String::from("hello");
 thread::spawn(|| { println!("{}", &s); });
 ```
 
-**知识点**：`'static` 不等于"程序全局存活"，而是"不借用任何非 `'static` 数据"。理解这一点是掌握 Rust 并发闭包的关键。[→ 生命周期（Lifetimes）详解](LINK_PLACEHOLDER)
+**知识点**：`'static` 不等于"程序全局存活"，而是"不借用（Borrowing）任何非 `'static` 数据"。理解这一点是掌握 Rust 并发闭包的关键。[→ 生命周期（Lifetimes）详解](LINK_PLACEHOLDER)
 
 </details>
 

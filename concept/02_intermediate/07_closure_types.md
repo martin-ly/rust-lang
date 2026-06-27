@@ -30,7 +30,7 @@
 - [闭包（Closures）类型系统（Type System）：Fn、FnMut、FnOnce 的捕获语义](LINK_PLACEHOLDER)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 闭包的本质：匿名结构体（Struct）](LINK_PLACEHOLDER)
+    - [1.1 闭包（Closures）的本质：匿名结构体（Struct）](LINK_PLACEHOLDER)
     - [1.2 三种闭包 Trait](#12-三种闭包-trait)
     - [1.3 捕获方式：引用（Reference） vs 移动](LINK_PLACEHOLDER)
   - [二、技术细节](#二技术细节)
@@ -50,7 +50,7 @@
     - [10.1 边界测试：闭包类型推断（Type Inference）与 `fn` 指针的不兼容（编译错误）](LINK_PLACEHOLDER)
     - [10.2 边界测试：`dyn Fn` 与泛型（Generics）闭包的性能差异（逻辑错误）](LINK_PLACEHOLDER)
     - [10.3 边界测试：`Fn` trait 的自动实现与 `move` 闭包（编译错误）](#103-边界测试fn-trait-的自动实现与-move-闭包编译错误)
-    - [10.4 边界测试：闭包递归的类型推断失败（编译错误）](#104-边界测试闭包递归的类型推断失败编译错误)
+    - [10.4 边界测试：闭包递归的类型推断（Type Inference）失败（编译错误）](#104-边界测试闭包递归的类型推断失败编译错误)
     - [10.5 边界测试：闭包在 `match` 臂中的类型推断（编译错误）](#105-边界测试闭包在-match-臂中的类型推断编译错误)
     - [10.6 边界测试：生命周期（Lifetimes）参数的不匹配返回](LINK_PLACEHOLDER)
   - [实践](#实践)
@@ -278,7 +278,7 @@ println!("{}", n);  // ✅ n 仍可用（因为 Copy）
   assert_eq!(add5(3), 8);
 ```
 
-> **最佳实践**: 泛型约束优先用 `Fn`（最灵活），只在需要修改状态时用 `FnMut`，只在需要消费所有权（Ownership）时用 `FnOnce`。
+> **最佳实践**: 泛型（Generics）约束优先用 `Fn`（最灵活），只在需要修改状态时用 `FnMut`，只在需要消费所有权（Ownership）时用 `FnOnce`。
 > [来源: [Rust API Guidelines — Closure Types](https://rust-lang.github.io/api-guidelines/)]
 
 ---
@@ -393,7 +393,7 @@ graph TD
 
 - [Traits](./01_traits.md) — Trait 系统与接口抽象
 - [Ownership](../01_foundation/01_ownership.md) — 所有权模型
-- [Borrowing](../01_foundation/02_borrowing.md) — 借用（Borrowing）与生命周期
+- [Borrowing](../01_foundation/02_borrowing.md) — 借用（Borrowing）与生命周期（Lifetimes）
 - [Async](../03_advanced/02_async.md) — 异步编程（async 块是特殊闭包）
 - [Generics](./02_generics.md) — 泛型与参数多态
 
@@ -457,7 +457,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 的闭包是匿名结构体，实现 `Fn`/`FnMut`/`FnOnce` trait。只有**不捕获环境**的闭包可以强制转换为函数指针（`fn`）。捕获环境变量的闭包有唯一的匿名类型，不能当作 `fn` 使用。这类似于 C++ 的 lambda——捕获变量的 lambda 不能转换为函数指针，无捕获的可以。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: Rust 的闭包是匿名结构体（Struct），实现 `Fn`/`FnMut`/`FnOnce` trait。只有**不捕获环境**的闭包可以强制转换为函数指针（`fn`）。捕获环境变量的闭包有唯一的匿名类型，不能当作 `fn` 使用。这类似于 C++ 的 lambda——捕获变量的 lambda 不能转换为函数指针，无捕获的可以。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.2 边界测试：`dyn Fn` 与泛型闭包的性能差异（逻辑错误）
 
@@ -504,7 +504,7 @@ fn main() {
 > 值捕获/移动 → `FnOnce`（只能调用一次，因为值被消耗）。
 > `let _t = s` 在闭包体内移动 `s`，因此闭包只能调用一次（`FnOnce`）。
 > 若需要 `Fn` bound，闭包不能消耗捕获变量——应使用 `let _t = &s` 或 `let _t = s.clone()`。
-> 这与 JavaScript 的闭包（总是引用捕获，无所有权（Ownership）概念）或 C++ 的 lambda（值捕获可复制，除非 `std::move`）不同——Rust 的闭包类型系统（Type System）自动推断最严格的 trait 实现，约束调用方式。
+> 这与 JavaScript 的闭包（总是引用（Reference）捕获，无所有权（Ownership）概念）或 C++ 的 lambda（值捕获可复制，除非 `std::move`）不同——Rust 的闭包类型系统（Type System）自动推断最严格的 trait 实现，约束调用方式。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] ·
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/ops/trait.Fn.html)]
 
@@ -521,7 +521,7 @@ fn main() {
 ```
 
 > **修正**: Rust 的闭包类型推断（Type Inference）是单向的——编译器需要知道闭包的完整类型才能生成代码，但递归闭包在定义时引用自身，形成循环依赖。解决方案：1) 使用 `fn` 函数（有明确类型）；2) 使用 `Box<dyn Fn(i32) -> i32>` 或 `Rc<dyn Fn(i32) -> i32>` 延迟类型解析；3) 使用 Y 组合子或固定点组合子（函数式编程技巧）。
-> 这与 Haskell 的递归 let（`let fib n = ... in fib 10`， Hindley-Milner 类型推断自动处理递归）或 JavaScript（无静态类型，无此问题）不同——Rust 的类型系统要求所有类型在编译期解析，递归闭包的自引用需要通过间接层（指针、trait 对象）打破循环。
+> 这与 Haskell 的递归 let（`let fib n = ... in fib 10`， Hindley-Milner 类型推断自动处理递归）或 JavaScript（无静态类型，无此问题）不同——Rust 的类型系统（Type System）要求所有类型在编译期解析，递归闭包的自引用需要通过间接层（指针、trait 对象）打破循环。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] ·
 
 ### 10.5 边界测试：闭包在 `match` 臂中的类型推断（编译错误）
@@ -586,7 +586,7 @@ let f = || drop(s);
 
 **B. 仅 `FnOnce`**。
 
-`drop(s)` 消费了 `s` 的所有权，因此闭包只能被调用一次。它实现 `FnOnce`，但不实现 `FnMut` 或 `Fn`（后两者要求可多次调用）。
+`drop(s)` 消费了 `s` 的所有权（Ownership），因此闭包只能被调用一次。它实现 `FnOnce`，但不实现 `FnMut` 或 `Fn`（后两者要求可多次调用）。
 
 | Trait | 捕获方式 | 调用次数 |
 |:---|:---|:---|
@@ -689,7 +689,7 @@ let f = || {
 <details>
 <summary>✅ 答案</summary>
 
-**B. `&mut s` — 可变引用捕获**。
+**B. `&mut s` — 可变引用（Mutable Reference）捕获**。
 
 闭包体内调用了 `s.push_str(...)`（需要 `&mut self`）和 `println!("{}", s)`（需要 `&self`）。编译器选择**最小权限但满足需求**的捕获方式：
 
@@ -734,7 +734,7 @@ let f = || {
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | 闭包类型系统：Fn、FnMut、FnOnce 的捕获语义 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 闭包类型系统：Fn、FnMut、FnOnce 的捕获语义 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 闭包类型系统：Fn、FnMut、FnOnce 的捕获语义 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 闭包类型系统：Fn、FnMut、FnOnce 的捕获语义 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 环境捕获类型安全 ⟸ Fn/FnMut/FnOnce 选择 ⟸ 借用（Borrowing）检查
@@ -743,7 +743,7 @@ let f = || {
 
 > **过渡**: 在实践中应用 闭包类型系统：Fn、FnMut、FnOnce 的捕获语义 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: 闭包类型系统：Fn、FnMut、FnOnce 的捕获语义 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 闭包类型系统：Fn、FnMut、FnOnce 的捕获语义 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

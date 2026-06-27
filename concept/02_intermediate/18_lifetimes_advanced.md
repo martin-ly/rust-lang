@@ -30,11 +30,11 @@
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 高阶生命周期（HRTB）](#11-高阶生命周期hrtb)
-    - [1.2 生命周期省略规则](#12-生命周期省略规则)
+    - [1.2 生命周期（Lifetimes）省略规则](#12-生命周期省略规则)
     - [1.3 变型（Variance）](#13-变型variance)
   - [二、技术细节](#二技术细节)
     - [2.1 HRTB 的实际应用](#21-hrtb-的实际应用)
-    - [2.2 自引用与 Pin](#22-自引用与-pin)
+    - [2.2 自引用（Reference）与 Pin](#22-自引用与-pin)
     - [2.3 生命周期与闭包（Closures）](LINK_PLACEHOLDER)
   - [三、生命周期模式矩阵](#三生命周期模式矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
@@ -48,7 +48,7 @@
   - [十、边界测试：高级生命周期的编译错误](#十边界测试高级生命周期的编译错误)
     - [10.1 边界测试：自引用结构体（Struct）与 `Pin`（编译错误）](LINK_PLACEHOLDER)
     - [10.2 边界测试：生命周期边界中的 `for<'a>` HRTB（编译错误）](#102-边界测试生命周期边界中的-fora-hrtb编译错误)
-    - [10.5 边界测试：闭包捕获引用与 `Fn` trait 的生命周期约束（编译错误）](#105-边界测试闭包捕获引用与-fn-trait-的生命周期约束编译错误)
+    - [10.5 边界测试：闭包（Closures）捕获引用与 `Fn` trait 的生命周期约束（编译错误）](#105-边界测试闭包捕获引用与-fn-trait-的生命周期约束编译错误)
     - [10.6 边界测试：`impl Trait` 返回类型的生命周期捕获（编译错误）](#106-边界测试impl-trait-返回类型的生命周期捕获编译错误)
     - [10.3 边界测试：lifetime bounds 与 trait object 的交互（编译错误）](#103-边界测试lifetime-bounds-与-trait-object-的交互编译错误)
   - [实践](#实践)
@@ -57,7 +57,7 @@
     - [测验 2：HRTB 与闭包（应用层）](#测验-2hrtb-与闭包应用层)
     - [测验 3：`Pin` 与自引用（分析层）](#测验-3pin-与自引用分析层)
     - [测验 4：生命周期边界中的 `+ 'a`（应用层）](#测验-4生命周期边界中的--a应用层)
-    - [测验 5：生命周期省略规则的例外（分析层）](#测验-5生命周期省略规则的例外分析层)
+    - [测验 5：生命周期省略（Lifetime Elision）规则的例外（分析层）](#测验-5生命周期省略规则的例外分析层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -359,7 +359,7 @@ fn closure_lifetimes() {
 // └── 只需要一次/消耗数据 → FnOnce
 ```
 
-> **闭包洞察**: 闭包的**三种 Fn trait**对应三种借用模式——它们是 Rust **所有权（Ownership）系统**在闭包上的自然延伸。
+> **闭包洞察**: 闭包的**三种 Fn trait**对应三种借用（Borrowing）模式——它们是 Rust **所有权（Ownership）系统**在闭包上的自然延伸。
 > [来源: [TRPL — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html)]
 
 ---
@@ -595,7 +595,7 @@ impl SelfRefFixed {
 ```
 
 > **修正**:
-> 自引用结构体（字段引用同一结构体的其他字段）在 Rust 的生命周期系统中无法表达，因为结构体的生命周期参数只能引用外部数据。
+> 自引用结构体（Struct）（字段引用同一结构体的其他字段）在 Rust 的生命周期系统中无法表达，因为结构体的生命周期参数只能引用外部数据。
 > 解决方案是使用裸指针（无生命周期约束）+ `Pin`（防止移动）+ `PhantomPinned`（标记为 !Unpin）。
 > 这是 Rust 安全边界的典型突破——编译器无法证明的安全属性，由 unsafe 代码承担证明义务。
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
@@ -630,7 +630,7 @@ where
 > **修正**:
 > 高阶 trait bound（HRTB）`for<'a>` 要求实现对所有可能的生命周期 `'a` 有效。
 > 当闭包作为参数传递时，默认的生命周期推断可能过于具体（绑定到特定作用域），
-> 导致无法满足泛型函数的 trait bound。HRTB 在回调函数、比较器、迭代器（Iterator）适配器等高阶函数场景中至关重要，是 Rust 类型系统（Type System）表达"多态生命周期"的关键机制。
+> 导致无法满足泛型（Generics）函数的 trait bound。HRTB 在回调函数、比较器、迭代器（Iterator）适配器等高阶函数场景中至关重要，是 Rust 类型系统（Type System）表达"多态生命周期"的关键机制。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.5 边界测试：闭包捕获引用与 `Fn` trait 的生命周期约束（编译错误）
@@ -680,7 +680,7 @@ fn make_ref<'a>(s: &'a str) -> impl Iterator<Item = &'a char> + 'a {
 > 3) 使用 `unsafe` 和 `ManuallyDrop`（不推荐）。
 >
 > 这与 `async fn` 的生命周期捕获类似：返回的 future 可引用输入参数，但不能引用局部变量。
-> `impl Trait` 的生命周期规则是 Rust 类型系统的核心——它确保返回的抽象不依赖已释放的数据。
+> `impl Trait` 的生命周期规则是 Rust 类型系统（Type System）的核心——它确保返回的抽象不依赖已释放的数据。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)] ·
 > [来源: [Rust Reference — Impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html)]
 

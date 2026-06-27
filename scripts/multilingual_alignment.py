@@ -62,9 +62,12 @@ THRESHOLD = 0.7
 
 
 def _is_cached(repo_id: str) -> bool:
-    """Check whether a sentence-transformers model has its config cached."""
+    """Check whether a sentence-transformers model has its weights cached."""
     try:
-        return try_to_load_from_cache(repo_id=repo_id, filename="config.json") is not None
+        for weights_file in ("model.safetensors", "pytorch_model.bin"):
+            if try_to_load_from_cache(repo_id=repo_id, filename=weights_file) is not None:
+                return True
+        return False
     except Exception:
         return False
 

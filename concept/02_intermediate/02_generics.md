@@ -13,7 +13,7 @@
 > **受众**: [进阶]
 > **层次定位**: L2 进阶概念 / 泛型（Generics）子域
 > **A/S/P 标记**: **A+S** — Application + Structure
-> **双维定位**: C×App — 实施泛型参数化设计
+> **双维定位**: C×App — 实施泛型（Generics）参数化设计
 > **前置依赖**: [L1 类型系统（Type System）](LINK_PLACEHOLDER) · [L2 Trait](LINK_PLACEHOLDER)
 > **后置延伸**: [L3 Async](../03_advanced/02_async.md) · [L4 类型论](../04_formal/02_type_theory.md) · [L7 效果系统](../07_future/04_effects_system.md)
 > **跨层映射**: L2→L4 参数多态 ↔ System F | L2→L7 泛型效果 → Effect System
@@ -74,7 +74,7 @@
   - [三、思维导图（Mind Map）](#三思维导图mind-map)
   - [四、定理推理链（Theorem Chain）](#四定理推理链theorem-chain)
     - [4.1 引理：参数多态 ⟹ System F 类型规则](#41-引理参数多态--system-f-类型规则)
-    - [4.2 定理：单态化 ⟹ 零成本抽象（Zero-Cost Abstraction） ⟹ 语义保持](LINK_PLACEHOLDER)
+    - [4.2 定理：单态化（Monomorphization） ⟹ 零成本抽象（Zero-Cost Abstraction） ⟹ 语义保持](LINK_PLACEHOLDER)
     - [4.3 推论：Const Generics ⟹ 类型级编程](#43-推论const-generics--类型级编程)
     - [4.4 约束多态的类型安全](#44-约束多态的类型安全)
     - [4.5 定理一致性（Coherence）矩阵](LINK_PLACEHOLDER)
@@ -100,7 +100,7 @@
     - [6.4 反命题 4: "Const Generics 完全替代运行时（Runtime）值"](LINK_PLACEHOLDER)
   - [七、边界极限测试代码（Boundary Limit Tests）](#七边界极限测试代码boundary-limit-tests)
     - [7.1 测试 1: 单态化代码膨胀与 dyn Trait 权衡极限](#71-测试-1-单态化代码膨胀与-dyn-trait-权衡极限)
-    - [7.2 测试 2: 生命周期约束递归传递与 HRTB 边界](#72-测试-2-生命周期约束递归传递与-hrtb-边界)
+    - [7.2 测试 2: 生命周期（Lifetimes）约束递归传递与 HRTB 边界](#72-测试-2-生命周期约束递归传递与-hrtb-边界)
     - [7.3 测试 3: Const Generics 类型级运算与特化边界](#73-测试-3-const-generics-类型级运算与特化边界)
   - [八、认知路径（Cognitive Path）](#八认知路径cognitive-path)
     - [Step 1: 直觉类比 — "泛型像填空题模板"](#step-1-直觉类比--泛型像填空题模板)
@@ -121,8 +121,8 @@
       - [与 `default impl` 的交互](#与-default-impl-的交互)
       - [实际用例：为 `&str` 和 `String` 提供不同优化实现](#实际用例为-str-和-string-提供不同优化实现)
     - [9.3 补充：泛型代码的编译时间优化策略](#93-补充泛型代码的编译时间优化策略)
-      - [策略 1：Turbofish 显式标注减少类型推断开销](#策略-1turbofish-显式标注减少类型推断开销)
-      - [策略 2：dyn Trait 替代单态化（运行时代码共享）](#策略-2dyn-trait-替代单态化运行时代码共享)
+      - [策略 1：Turbofish 显式标注减少类型推断（Type Inference）开销](#策略-1turbofish-显式标注减少类型推断开销)
+      - [策略 2：dyn Trait 替代单态化（运行时（Runtime）代码共享）](#策略-2dyn-trait-替代单态化运行时代码共享)
       - [策略 3：编译单元拆分与 `-Zshare-generics`](#策略-3编译单元拆分与--zshare-generics)
       - [策略 4：`cargo bloat` 工具——量化单态化膨胀](#策略-4cargo-bloat-工具量化单态化膨胀)
       - [策略 5：`thin LTO` 与泛型编译时间优化](#策略-5thin-lto-与泛型编译时间优化)
@@ -213,7 +213,7 @@
 | **参数类型** | **语法** | **约束目标** | **默认值** | **使用场景** |
 |:---|:---|:---|:---|:---|
 | **类型参数** | `<T>` | 类型 | 无 | 最常见，泛型容器/函数 |
-| **生命周期参数** | `<'a>` | 引用有效期 | 推断 | 函数/结构体（Struct）含引用 |
+| **生命周期参数** | `<'a>` | 引用（Reference）有效期 | 推断 | 函数/结构体（Struct）含引用 |
 
 > **形式化对应**: 生命周期参数在类型论中对应 **区域类型 (Region Types, Tofte & Talpin 1994)**，即引用有效性的形式化约束。详见 [L1 生命周期](LINK_PLACEHOLDER) §4 和 [L4 所有权（Ownership）形式化](LINK_PLACEHOLDER) §2.2。[来源: Tofte & Talpin 1994 — Region Types]
 | **常量泛型** | `<const N: usize>` | 编译期常量值 | 无 | 固定大小数组、类型状态 |
@@ -421,7 +421,7 @@ fn draw_dyn(d: &dyn Drawable) {
 
 ### 4.5 定理一致性矩阵
 
-> **[原创分析]** · **[Rust Reference: Generic Parameters](https://doc.rust-lang.org/reference/items/generics.html)** 泛型定理矩阵基于 Rust 类型系统约束可满足性和单态化语义。 💡 原创分析
+> **[原创分析]** · **[Rust Reference: Generic Parameters](https://doc.rust-lang.org/reference/items/generics.html)** 泛型定理矩阵基于 Rust 类型系统（Type System）约束可满足性和单态化语义。 💡 原创分析
 
 | **定理/引理/推论** | **前提** | **结论** | **依赖的 L4 公理** | **被哪些定理依赖** | **失效条件** | **典型错误码** |
 |:---|:---|:---|:---|:---|:---|:---|
@@ -430,7 +430,7 @@ fn draw_dyn(d: &dyn Drawable) {
 | **推论**: Const Generics ⟹ 类型级编程 | 常量参数为编译期求值标量 | 类型参数包含常量值，值决定类型 | 依赖类型基础（有限形式） | 数组抽象、类型级状态机 | 非 const 表达式或浮点参数 | E0435 |
 | **定理**: 约束可满足性 | where 子句为 Horn 子句形式 | 类型推导可判定，Trait 解析终止 | HM 推断扩展 | Trait 解析、编译通过 | GATs 无界递归导致不终止 | E0275 |
 | **引理**: HRTB 全称约束 | `for<'a>` 合法，高阶函数签名良构 | 高阶函数类型安全，生命周期无关性 | 全称量词 (∀) 语义 | 回调抽象、生命周期擦除 | 过度约束不可满足，闭包（Closures）推断失败 | E0582 |
-| **推论**: 泛型一致性 | 单态化后类型检查通过 | 所有实例类型安全，行为一致 | 类型替换引理（Substitution Lemma） | — | `transmute` 绕过类型系统 | E0133 |
+| **推论**: 泛型一致性（Coherence） | 单态化后类型检查通过 | 所有实例类型安全，行为一致 | 类型替换引理（Substitution Lemma） | — | `transmute` 绕过类型系统 | E0133 |
 | **引理**: 关联类型归一化 | 关联类型有唯一实现，无重叠 | 类型别名可替换，Trait 方法可解析 | 约束可满足性 | GATs 使用、Iterator 实现 | 重叠关联类型定义（coherence 破坏） | E0119 |
 | **定理**: 生命周期约束可满足 | `T: 'a` 合法，区域包含关系成立 | 无悬垂引用，借用（Borrowing）检查通过 | 区域子类型（Region Subtyping） | 泛型生命周期安全 | 约束遗漏，T 含短于 'a 的引用 | E0310 |
 | **引理**: Sized 默认约束 ⟹ 静态分发 | T 默认 Sized，内存布局已知 | 单态化生成确定代码，无动态分发 | Sized trait 语义 | 泛型数据结构布局 | `?Sized` 使用但未正确处理 DST | E0277 |
@@ -1367,7 +1367,7 @@ fn transpose<T: Copy, const R: usize, const C: usize>(
 
 **核心问题**: "泛型参数写在哪里？怎么约束它？"
 
-**过渡解释**: 在直觉锚定后，需要将抽象概念映射到具体语法。这一步覆盖 `<T>` 在函数、结构体（Struct）、枚举、impl 块中的位置，以及 `where` 子句的使用。关键是建立"泛型参数是编译期变量"的理解——它在编译时被替换为具体类型，而非运行时箱型。从 Step 2 到 Step 3 的过渡发生在学习者发现 `Vec<i32>` 和 `Vec<String>` 是不同类型时，意识到泛型不是"运行时多态"，而是"编译期复制"。
+**过渡解释**: 在直觉锚定后，需要将抽象概念映射到具体语法。这一步覆盖 `<T>` 在函数、结构体（Struct）、枚举（Enum）、impl 块中的位置，以及 `where` 子句的使用。关键是建立"泛型参数是编译期变量"的理解——它在编译时被替换为具体类型，而非运行时箱型。从 Step 2 到 Step 3 的过渡发生在学习者发现 `Vec<i32>` 和 `Vec<String>` 是不同类型时，意识到泛型不是"运行时多态"，而是"编译期复制"。
 
 ```rust,ignore
 // 核心语法模式:
@@ -1391,7 +1391,7 @@ fn foo<T>() where T: Display + Clone { }  // where 子句（复杂约束）
 
 **核心问题**: "Rust 泛型和 Java/C++ 泛型有什么区别？"
 
-**过渡解释**: 语法熟练后，学习者需要理解不同语言泛型实现的本质差异。Rust 的单态化（为每个具体类型生成专用代码）与 Java 的类型擦除（编译为 Object + 转换）、C++ 的模板（文本替换）形成鲜明对比。这一步是认知的关键跃迁——理解"零成本抽象"的工程含义：不是魔法，是编译期工作量换运行时零开销。从 Step 3 到 Step 4 的过渡由性能问题驱动：当二进制体积膨胀时，学习者需要理解为什么泛型"免费"的代价在哪里。来源: [Wikipedia: Generic programming / TRPL: Ch10.1](https://en.wikipedia.org/wiki/Generic_programming_/_TRPL%3A_Ch10.1)
+**过渡解释**: 语法熟练后，学习者需要理解不同语言泛型实现的本质差异。Rust 的单态化（为每个具体类型生成专用代码）与 Java 的类型擦除（编译为 Object + 转换）、C++ 的模板（文本替换）形成鲜明对比。这一步是认知的关键跃迁——理解"零成本抽象（Zero-Cost Abstraction）"的工程含义：不是魔法，是编译期工作量换运行时零开销。从 Step 3 到 Step 4 的过渡由性能问题驱动：当二进制体积膨胀时，学习者需要理解为什么泛型"免费"的代价在哪里。来源: [Wikipedia: Generic programming / TRPL: Ch10.1](https://en.wikipedia.org/wiki/Generic_programming_/_TRPL%3A_Ch10.1)
 
 ```text
 三语言对比:
@@ -2153,7 +2153,7 @@ impl<'t, T> LendingIterator for Windows<'t, T> {
 ## 十、Rust 2024 Edition：`use<..>` Precise Capturing（[RFC 3617](https://rust-lang.github.io/rfcs//3617-precise-capturing.html)）
 
 > **稳定版本**: Rust 1.82 (stable) · **2024 Edition 默认行为变更**
-> **形式化意义**: 存在类型的区域参数显化——从"隐式闭包"到"显式契约"
+> **形式化意义**: 存在类型的区域参数显化——从"隐式闭包（Closures）"到"显式契约"
 
 ### 10.1 问题：隐式捕获的泄漏
 

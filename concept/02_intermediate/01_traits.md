@@ -93,7 +93,7 @@
       - [语法与动机](#语法与动机)
       - [与 HKT（Higher-Kinded Types）的关系](#与-hkthigher-kinded-types的关系)
       - [Lending Iterator 示例](#lending-iterator-示例)
-      - [为什么 GATs 解决了关联类型不能泛型的问题](#为什么-gats-解决了关联类型不能泛型的问题)
+      - [为什么 GATs 解决了关联类型不能泛型（Generics）的问题](#为什么-gats-解决了关联类型不能泛型的问题)
     - [5.7 正确示例：Specialization（特化）的语义与边界](#57-正确示例specialization特化的语义与边界)
       - [问题与默认实现](#问题与默认实现)
       - [特化实现：为具体类型提供更优路径](#特化实现为具体类型提供更优路径)
@@ -246,7 +246,7 @@ Trait 作为逻辑命题:
 
 > **来源: [Wikipedia: Type class](https://en.wikipedia.org/wiki/Type_class)** Type class 支持 ad hoc 多态，Rust Trait 直接受 Haskell Type Class 启发。 ✅
 > **来源: [Rust Reference: Traits](https://doc.rust-lang.org/reference/)** Rust Trait 通过显式 `impl` 实现，支持关联类型、默认实现和泛型约束。 ✅
-> **[来源: C++ Reference: Concepts]** C++20 Concepts 是模板的约束机制，通过 duck typing 自动匹配，无孤儿规则。 ✅
+> **[来源: C++ Reference: Concepts]** C++20 Concepts 是模板的约束机制，通过 duck typing 自动匹配，无孤儿规则（Orphan Rule）。 ✅
 > **[来源: Go Spec: Interface types]** Go 接口是结构类型（structural typing），隐式实现，无显式 `implements` 关键字。 ✅
 
 ### 2.3 Orphan Rule 判定矩阵
@@ -405,7 +405,7 @@ impl<P₁...Pn> Trait<T₁...Tm> for Type
 
 Auto trait 由 `auto trait` 关键字声明，是编译器自动为类型实现的标记 trait。
 标准库中最重要的 Auto trait 是 `Send` 和 `Sync`
-——`Send` 表示类型可安全跨线程转移所有权（Ownership）（值 move 到另一线程无数据竞争），`Sync` 表示类型可安全跨线程共享引用（`&T` 可在多线程间安全读取）：
+——`Send` 表示类型可安全跨线程转移所有权（Ownership）（值 move 到另一线程无数据竞争），`Sync` 表示类型可安全跨线程共享引用（Reference）（`&T` 可在多线程间安全读取）：
 
 ```rust,ignore
 // Send: 标记可安全跨线程转移所有权的类型（值 move 到另一线程安全）
@@ -415,7 +415,7 @@ pub unsafe auto trait Sync {}
 ```
 
 > **形式化定义**:
-> T: Send ⇔ 类型 T 可安全跨线程转移所有权（值 move 到另一线程不会导致数据竞争或内存不安全）。
+> T: Send ⇔ 类型 T 可安全跨线程转移所有权（Ownership）（值 move 到另一线程不会导致数据竞争或内存不安全）。
 > T: Sync ⇔ &T: Send，即 T 的共享引用可安全跨线程共享。
 
 与普通 trait 不同，Auto trait **不含任何关联项（方法、类型、常量）**，仅作为类型的编译期属性标记。
@@ -514,14 +514,14 @@ impl !Sync for RawFd {}  // 显式阻止自动 Sync
 ### 4.5 定理一致性矩阵
 
 > **[原创分析]** · **[Rust Reference: Type System](https://doc.rust-lang.org/reference/type-system.html)**
-> 定理一致性矩阵基于 Rust 编译器错误码和类型系统公理的系统归纳，每条推理链标注"⟹"因果关系。 💡 原创分析
+> 定理一致性（Coherence）矩阵基于 Rust 编译器错误码和类型系统（Type System）公理的系统归纳，每条推理链标注"⟹"因果关系。 💡 原创分析
 
 | **定理/引理/推论** | **前提** | **结论** | **依赖的 L4 公理** | **被哪些定理依赖** | **失效条件** | **典型错误码** |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **引理**: Orphan Rule ⟹ Coherence | crate 边界清晰；至少一方本地 | impl 声明位置受限，无跨 crate 孤儿 impl | 类型论一致性；模块（Module）化封装 | 全局唯一 impl；Blanket impl 可满足 | `#[fundamental]` 类型例外（`&T`, `Box<T>`, `&mut T`） | E0117 |
-| **定理**: 全局唯一 impl | Orphan Rule + 无重叠 impl | 调用目标唯一确定；单态化可行 | Coherence 公理 | 单态化零成本；Trait 对象安全 | specialization（min_specialization 不稳定） | E0119 |
+| **定理**: 全局唯一 impl | Orphan Rule + 无重叠 impl | 调用目标唯一确定；单态化（Monomorphization）可行 | Coherence 公理 | 单态化零成本；Trait 对象安全 | specialization（min_specialization 不稳定） | E0119 |
 | **定理**: Trait 对象安全 | 方法无 `Self: Sized`；无泛型方法；无静态方法 | `dyn Trait` 是合法类型；vtable 可构造 | 存在类型 + vtable 理论 | 运行时（Runtime）多态分发；`Box<dyn Trait>` | `Self: Sized` superbound；泛型方法 | E0038 |
-| **推论**: Auto Trait 结构化推导 | 所有字段满足 Auto Trait；类型非 `!Trait` 覆盖 | 复合类型自动实现 Send/Sync/Sized/Unpin | 结构化推导规则；归纳定义 | 并发安全（Concurrency Safety）分析；类型布局推导 | `unsafe impl !Send for T` 手动否定；原始指针保守 | — |
+| **推论**: Auto Trait 结构化推导 | 所有字段满足 Auto Trait；类型非 `!Trait` 覆盖 | 复合类型自动实现 Send/Sync/Sized/Unpin | 结构化推导规则；归纳定义 | 并发安全（Concurrency Safety）分析；类型布局推导 | `unsafe impl !Send for T` 手动否定；原始指针（Raw Pointer）保守 | — |
 | **引理**: Supertrait 传递 | `trait A: B` 声明 | A 的实现者必须实现 B | 子类型传递性；偏序关系 | Trait 层次设计；对象安全传递 | 循环 supertrait（`trait A: B; trait B: A`） | E0399 / E0398 |
 | **定理**: Trait + 泛型零成本 | 单态化 + LLVM 内联优化 | 无运行时（Runtime）开销；直接函数调用 | Parametricity；β-归约 | 性能敏感代码路径优化 | `dyn Trait` 动态分发选择 | — |
 | **引理**: Blanket impl 可满足 | `impl<T: A> B for T` 形式 | 全称量词 + 蕴含；Horn 子句可满足 | Horn 子句逻辑；一阶可满足性 | 默认行为提供；组合子设计 | 与具体 impl 重叠（如 `impl Foo for Vec<T>` + `impl<T> Foo for T`） | E0119 |
@@ -725,7 +725,7 @@ impl<'t, T> LendingIterator for Windows<'t, T> {
 }
 ```
 
-> 普通 `Iterator` 无法表达 `Item` 依赖于 `&mut self` 生命周期的情况，因为 `type Item` 不允许带参数。
+> 普通 `Iterator` 无法表达 `Item` 依赖于 `&mut self` 生命周期（Lifetimes）的情况，因为 `type Item` 不允许带参数。
 
 #### 为什么 GATs 解决了关联类型不能泛型的问题
 
@@ -824,7 +824,7 @@ impl Convert<String> for &str {
 | **类型安全** | 编译期检查重叠；Coherence 保证唯一性 | 无类型系统检查；SFINAE 复杂 |
 | **默认实现** | ✅ 支持默认 impl + 特化 impl | ✅ 支持默认模板 + 特化模板 |
 | **部分特化** | ❌ `min_specialization` 限制多参数 | ✅ 支持部分特化（`template<T> class Foo<T*>`） |
-| **零成本抽象（Zero-Cost Abstraction）** | 单态化后无运行时开销 | 单态化后无运行时开销 |
+| **零成本抽象（Zero-Cost Abstraction）** | 单态化后无运行时（Runtime）开销 | 单态化后无运行时开销 |
 | **稳定状态** | ❌ nightly only（`min_specialization`） | ✅ 稳定 20+ 年 |
 
 > **来源: [RFC 1210](https://github.com/rust-lang/rfcs/pull/1210)** Specialization 的核心约束是**永远特化（always applicable）**：特化 impl 的约束必须是默认 impl 约束的**逻辑子集**，否则编译器拒绝。

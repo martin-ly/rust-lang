@@ -32,7 +32,7 @@
     - [1.2 惰性计算链](#12-惰性计算链)
     - [1.3 消费者与适配器](#13-消费者与适配器)
   - [二、技术细节](#二技术细节)
-    - [2.1 自定义迭代器](#21-自定义迭代器)
+    - [2.1 自定义迭代器（Iterator）](#21-自定义迭代器)
     - [2.2 迭代器优化](#22-迭代器优化)
     - [2.3 IntoIterator 与 for 循环](#23-intoiterator-与-for-循环)
   - [三、迭代器模式矩阵](#三迭代器模式矩阵)
@@ -49,7 +49,7 @@
     - [10.2 边界测试：`flat_map` 与嵌套迭代器的所有权（Ownership）（编译错误）](LINK_PLACEHOLDER)
   - [十二、边界测试：迭代器模式的编译错误（续）](#十二边界测试迭代器模式的编译错误续)
     - [12.1 边界测试：`enumerate` 与索引类型（逻辑错误）](#121-边界测试enumerate-与索引类型逻辑错误)
-    - [12.2 边界测试：`partition` 与所有权分割（编译错误）](#122-边界测试partition-与所有权分割编译错误)
+    - [12.2 边界测试：`partition` 与所有权（Ownership）分割（编译错误）](#122-边界测试partition-与所有权分割编译错误)
     - [10.5 边界测试：`Iterator::fold` 的初始值类型与闭包（Closures）返回类型不匹配（编译错误）](LINK_PLACEHOLDER)
     - [10.5 边界测试：`ChunksExact` 的剩余元素处理（逻辑错误）](#105-边界测试chunksexact-的剩余元素处理逻辑错误)
     - [10.2 边界测试：`flat_map` 与嵌套迭代器的类型匹配（编译错误）](#102-边界测试flat_map-与嵌套迭代器的类型匹配编译错误)
@@ -688,7 +688,7 @@ fn main() {
 }
 ```
 
-> **修正**: `flat_map` 要求闭包返回一个**迭代器（Iterator）**，然后将所有迭代器扁平化为一个。`data.iter()` 产生 `&Vec<i32>`，`v.iter()` 产生 `&i32`。`flat_map(|v| v.iter())` 返回 `Iter<&i32>`，collect 后为 `Vec<&i32>` 而非 `Vec<i32>`。修复：1) `data.into_iter().flat_map(|v| v.into_iter()).collect()`（移动所有权）；2) `data.iter().flat_map(|v| v.iter().copied()).collect()`（复制值）。`flat_map` 是 monadic `bind` 在迭代器上的实现：`Iter<Item=Iter<Item=T>>` → `Iter<Item=T>`。这与 Haskell 的 `concatMap` 或 Python 的 `itertools.chain.from_iterable` 类似——Rust 的类型系统要求迭代器元素类型精确匹配。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-00-functional-features.html)]
+> **修正**: `flat_map` 要求闭包（Closures）返回一个**迭代器（Iterator）**，然后将所有迭代器扁平化为一个。`data.iter()` 产生 `&Vec<i32>`，`v.iter()` 产生 `&i32`。`flat_map(|v| v.iter())` 返回 `Iter<&i32>`，collect 后为 `Vec<&i32>` 而非 `Vec<i32>`。修复：1) `data.into_iter().flat_map(|v| v.into_iter()).collect()`（移动所有权）；2) `data.iter().flat_map(|v| v.iter().copied()).collect()`（复制值）。`flat_map` 是 monadic `bind` 在迭代器上的实现：`Iter<Item=Iter<Item=T>>` → `Iter<Item=T>`。这与 Haskell 的 `concatMap` 或 Python 的 `itertools.chain.from_iterable` 类似——Rust 的类型系统（Type System）要求迭代器元素类型精确匹配。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-00-functional-features.html)]
 
 ### 10.9 边界测试：const fn 中的非编译期操作
 
@@ -776,7 +776,7 @@ fn main() {}
 
 ## 认知路径
 
-> **认知路径**: 从 L0 基础概念出发，经由本节的 **迭代器模式：Rust 的惰性计算与零成本抽象** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+> **认知路径**: 从 L0 基础概念出发，经由本节的 **迭代器模式：Rust 的惰性计算与零成本抽象（Zero-Cost Abstraction）** 核心原理，通向 L2 进阶模式与 L3 工程实践。
 
 ### 核心推理链
 
@@ -786,7 +786,7 @@ fn main() {}
 | 迭代器模式：Rust 的惰性计算与零成本抽象 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 迭代器模式：Rust 的惰性计算与零成本抽象 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
-> 惰性求值安全 ⟸ Iterator 状态机 ⟸ 借用检查
+> 惰性求值安全 ⟸ Iterator 状态机 ⟸ 借用（Borrowing）检查
 > 适配器组合正确 ⟸ map/filter 生命周期（Lifetimes） ⟸ 闭包捕获
 > **过渡**: 掌握 迭代器模式：Rust 的惰性计算与零成本抽象 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 

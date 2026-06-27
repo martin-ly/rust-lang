@@ -31,7 +31,7 @@
   - [三、学习路径建议](#三学习路径建议)
     - [3.1 严格依赖路径](#31-严格依赖路径)
   - [四、形式化层级定位](#四形式化层级定位)
-  - [五、本层定理一致性概览](#五本层定理一致性概览)
+  - [五、本层定理一致性（Coherence）概览](#五本层定理一致性概览)
   - [六、认知路径](#六认知路径)
   - [七、跨层出口](#七跨层出口)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -71,7 +71,7 @@ mindmap
 > [来源: 💡 原创分析]
 > **认知路径**: 本 mindmap 展示 L2 层的**四核机制**。
 > Trait 是 Rust 的行为抽象核心，泛型（Generics）实现零成本参数多态，内存管理扩展所有权（Ownership）的表达能力（共享、内部可变性），错误处理（Error Handling）将异常转化为类型系统（Type System）的一部分。
-> 关键交叉点：**Trait Bounds** 是 Trait 与泛型的结合部。
+> 关键交叉点：**Trait Bounds** 是 Trait 与泛型（Generics）的结合部。
 
 ## 一、本层概念关系图（完整版）
 
@@ -196,13 +196,13 @@ Trait Bounds 是 L2 的"枢纽概念"：
 
 ### 补充文件索引
 
-- [错误处理深入：从 Result 到自定义错误生态](./15_error_handling_deep_dive.md)
+- [错误处理（Error Handling）深入：从 Result 到自定义错误生态](./15_error_handling_deep_dive.md)
 - [Rust 迭代器（Iterator）模式](LINK_PLACEHOLDER)
-- [迭代器模式：Rust 的惰性计算与零成本抽象（Zero-Cost Abstraction）](LINK_PLACEHOLDER)
+- [迭代器（Iterator）模式：Rust 的惰性计算与零成本抽象（Zero-Cost Abstraction）](LINK_PLACEHOLDER)
 - [宏（Macro）模式：编译期代码生成的工程实践](LINK_PLACEHOLDER)
 - [生命周期（Lifetimes）高级主题：从 HRTB 到自引用（Reference）类型](LINK_PLACEHOLDER)
 - [高级 Trait 主题：从关联类型到特化](./19_advanced_traits.md)
-- [高级类型系统：从关联类型到类型级编程](./20_type_system_advanced.md)
+- [高级类型系统（Type System）：从关联类型到类型级编程](./20_type_system_advanced.md)
 - [元编程：Rust 的编译期代码生成与变换](./21_metaprogramming.md)
 - [测验：Trait 与泛型（嵌入式互动试点）](./23_quiz_traits_and_generics.md)
 - [测验：内存管理（嵌入式互动试点）](./24_quiz_memory_management.md)
@@ -270,7 +270,7 @@ Error Handling
 |:---|:---|:---|:---|:---|:---|
 | Orphan Rule 保证一致性 | crate 边界清晰 | 无矛盾 impl | Coherence (类型论) | 允许覆盖 impl（特化） | 孤儿规则冲突 |
 | 单态化（Monomorphization）零成本 | 泛型函数编译时实例化 | 无运行时（Runtime）分发开销 | Parametricity | `dyn Trait` 动态分发 | vtable 间接调用 |
-| Rc 共享安全 | 单线程 | 共享所有权无 UAF | —（运行时） | 跨线程使用 Rc | 编译错误：Rc 非 Send |
+| Rc 共享安全 | 单线程 | 共享所有权（Ownership）无 UAF | —（运行时） | 跨线程使用 Rc | 编译错误：Rc 非 Send |
 | RefCell 运行时借用（Borrowing）检查 | 单线程 | 运行时检测借用违规 | —（运行时） | 已借出时再次借用 | panic: already borrowed |
 | ? 运算符传播 | 函数返回 Result/Option | 自动错误短路 | Monad bind (>>=) | 在非 Result 返回函数中使用 | 编译错误 |
 
@@ -338,7 +338,7 @@ Error Handling
 <details>
 <summary>✅ 答案与解析</summary>
 
-先浏览整体结构建立全局视野，然后根据自身水平选择对应层级，遇到模糊概念时利用交叉引用跳转复习。
+先浏览整体结构建立全局视野，然后根据自身水平选择对应层级，遇到模糊概念时利用交叉引用（Reference）跳转复习。
 </details>
 
 ---

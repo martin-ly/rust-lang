@@ -64,8 +64,8 @@
     - [10.1 边界测试：`rayon::join` 闭包（Closures）返回值生命周期（Lifetimes）（编译错误）](LINK_PLACEHOLDER)
     - [10.2 边界测试：分布式 Actor 的消息类型未实现 `Serialize`（编译错误）](#102-边界测试分布式-actor-的消息类型未实现-serialize编译错误)
     - [10.3 边界测试：`rayon` 的线程池饥饿与任务粒度（运行时（Runtime）性能下降）](LINK_PLACEHOLDER)
-    - [10.4 边界测试：rayon 的并行迭代与顺序依赖（运行时逻辑错误）](#104-边界测试rayon-的并行迭代与顺序依赖运行时逻辑错误)
-    - [10.8 边界测试：生命周期参数的不匹配返回](#108-边界测试生命周期参数的不匹配返回)
+    - [10.4 边界测试：rayon 的并行迭代与顺序依赖（运行时（Runtime）逻辑错误）](#104-边界测试rayon-的并行迭代与顺序依赖运行时逻辑错误)
+    - [10.8 边界测试：生命周期（Lifetimes）参数的不匹配返回](#108-边界测试生命周期参数的不匹配返回)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -352,7 +352,7 @@ enum NodeState {
 Raft 是 **CP 系统**（Consistency + Partition tolerance，牺牲 Availability）：
 
 - 网络分区时，少数派节点不可用（不响应读写请求）
-- 保证强一致性（线性一致性）
+- 保证强一致性（Coherence）（线性一致性）
 
 ### 5.2 Gossip 协议
 
@@ -726,10 +726,10 @@ fn main() {
 ```
 
 > **修正**:
-> **`rayon`** 的**并行迭代器**：
+> **`rayon`** 的**并行迭代器（Iterator）**：
 >
 > 1) `par_iter()` / `into_par_iter()` — 将工作负载分片到线程池；
-> 2) 闭包必须是 `Send`（跨线程安全）和 `Fn`（无 `&mut` 环境捕获）；
+> 2) 闭包（Closures）必须是 `Send`（跨线程安全）和 `Fn`（无 `&mut` 环境捕获）；
 > 3) 顺序结果需使用 `reduce`、`fold` + `sum`、或原子变量。
 >
 > 正确模式：
@@ -757,7 +757,7 @@ fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
 fn main() {}
 ```
 
-> **修正**: **生命周期（Lifetimes）标注**：1) `&'a str` 表示引用至少存活 `'a`；2) 返回 `'a` 要求数据存活至少 `'a`；3) `y` 的 lifetime `'b` 可能短于 `'a`，返回会导致悬垂引用。
+> **修正**: **生命周期（Lifetimes）标注**：1) `&'a str` 表示引用（Reference）至少存活 `'a`；2) 返回 `'a` 要求数据存活至少 `'a`；3) `y` 的 lifetime `'b` 可能短于 `'a`，返回会导致悬垂引用。
 
 ## 逆向推理链（Backward Reasoning）
 
@@ -793,7 +793,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-`std::thread::spawn` 创建 OS 线程，由操作系统调度，切换成本高。`tokio::spawn` 创建异步任务（绿色线程/协程），由 Tokio runtime 在用户态调度，切换成本极低。
+`std::thread::spawn` 创建 OS 线程，由操作系统调度，切换成本高。`tokio::spawn` 创建异步（Async）任务（绿色线程/协程），由 Tokio runtime 在用户态调度，切换成本极低。
 </details>
 
 ---
@@ -824,7 +824,7 @@ API 几乎相同（得益于相同的 `Iterator`/`ParallelIterator` 接口），
 
 ### 测验 4：分布式系统中，Rust 的 Serde + 强类型系统在消息序列化上有什么优势？（理解层）
 
-**题目**: 分布式系统中，Rust 的 Serde + 强类型系统在消息序列化上有什么优势？
+**题目**: 分布式系统中，Rust 的 Serde + 强类型系统（Type System）在消息序列化上有什么优势？
 
 <details>
 <summary>✅ 答案与解析</summary>

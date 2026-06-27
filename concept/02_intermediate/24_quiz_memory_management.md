@@ -75,7 +75,7 @@ fn main() {
 - 大对象转移所有权（Ownership）时避免拷贝
 - trait 对象（`Box<dyn Trait>`）
 
-**知识点**：`Box` 是最简单的智能指针，提供唯一的堆所有权，零运行时（Runtime）开销（与 C++ `unique_ptr` 类似）。[→ 内存管理详解](./03_memory_management.md)
+**知识点**：`Box` 是最简单的智能指针（Smart Pointer），提供唯一的堆所有权（Ownership），零运行时（Runtime）开销（与 C++ `unique_ptr` 类似）。[→ 内存管理详解](./03_memory_management.md)
 
 </details>
 
@@ -173,7 +173,7 @@ fn main() {
 | 实现 `Send` | 否 | 是（若 `T: Send + Sync`） |
 | 实现 `Sync` | 否 | 是（若 `T: Send + Sync`） |
 
-**引用计数规则**：
+**引用（Reference）计数规则**：
 
 - `Rc::clone(&data)`：增加强引用计数，不克隆数据
 - `Rc::strong_count`：当前强引用数
@@ -247,10 +247,10 @@ let b2 = ref_cell.borrow_mut(); // ❌ 运行时 panic！
 | 组合 | 线程安全 | 可变性 | 检查时机 |
 |:---|:---:|:---|:---:|
 | `Rc<RefCell<T>>` | ❌ | ✅ | 运行时（Runtime） |
-| `Arc<Mutex<T>>` | ✅ | ✅ | 运行时（锁） |
+| `Arc<Mutex<T>>` | ✅ | ✅ | 运行时（Runtime）（锁） |
 | `Arc<RwLock<T>>` | ✅ | ✅（读多写少） | 运行时（锁） |
 
-**知识点**：`Rc<RefCell<T>>` 是 Rust 标准库中"绕过编译期借用检查"的标准方式——不是关闭检查器，而是将检查推迟到运行时。[→ 内存管理详解](./03_memory_management.md)
+**知识点**：`Rc<RefCell<T>>` 是 Rust 标准库中"绕过编译期借用（Borrowing）检查"的标准方式——不是关闭检查器，而是将检查推迟到运行时。[→ 内存管理详解](./03_memory_management.md)
 
 </details>
 

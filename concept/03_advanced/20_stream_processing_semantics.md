@@ -373,7 +373,7 @@ Producer (1000 events/s) ──► Consumer (100 events/s)
 
 ### 8.3 Rust 的背压优势
 
-Rust 的所有权系统使背压实现更加安全：
+Rust 的所有权（Ownership）系统使背压实现更加安全：
 
 ```rust
 // tokio::sync::mpsc::channel 自动背压
@@ -477,7 +477,7 @@ GROUP BY region;
 > **关键洞察**:
 > Materialize 的核心创新是将"物化视图维护"从批处理（定时刷新）转化为流处理（增量更新）。
 > 其正确性保证来自 Differential Dataflow 的严格串行化（strict serializability）——每个更新都对应一个逻辑时间戳，查询结果始终是某时间戳下的全局一致快照。
-> 这与 C++ 或 Java 流处理框架的"最终一致性"形成鲜明对比。[来源: Materialize Documentation] ✅
+> 这与 C++ 或 Java 流处理框架的"最终一致性（Coherence）"形成鲜明对比。[来源: Materialize Documentation] ✅
 
 ---
 
@@ -655,7 +655,7 @@ async fn fixed_stream() {
 > `stream::iter(data)` 消耗 `data` 的所有权，将其转换为流。
 > 若需在流消费后继续使用原数据，必须传递引用（Reference）（`stream::iter(&data)`）。
 > 这与迭代器（Iterator）的所有权规则一致——`into_iter` 消耗，`iter` 借用（Borrowing）。
-> Rust 的流处理（`Stream` trait）与所有权系统的结合确保了内存安全（Memory Safety）：流不能产出指向已释放数据的引用。
+> Rust 的流处理（`Stream` trait）与所有权系统的结合确保了内存安全（Memory Safety）：流不能产出指向已释放数据的引用（Reference）。
 > [来源: [futures-rs Documentation](https://docs.rs/futures/)]
 
 ### 10.2 边界测试：背压传播中的类型不匹配（编译错误）
@@ -711,7 +711,7 @@ fn main() {
 > 这与 `Iterator` 的行为不同：`Iterator::next()` 返回 `None` 后再次调用是明确定义的（继续返回 `None`）。
 > `Stream` 的设计原因：某些底层源（如 I/O、channel）在关闭后可能重新打开或产生错误，不强制 `None` 后终止。
 > 安全模式：消费 Stream 后使用 `.fuse()`，或用 `while let Some(item) = stream.next().await`（自动处理）。
-> 这与 Tokio 的 `StreamExt` 或 futures-rs 的 `Stream` 实现一致——Rust 的异步流语义比迭代器（Iterator）更复杂，因涉及外部事件源。
+> 这与 Tokio 的 `StreamExt` 或 futures-rs 的 `Stream` 实现一致——Rust 的异步（Async）流语义比迭代器（Iterator）更复杂，因涉及外部事件源。
 > [来源: [futures-rs Documentation](https://docs.rs/futures/)] · [来源: [Tokio Stream](https://docs.rs/tokio-stream/)]
 
 ## 逆向推理链（Backward Reasoning）

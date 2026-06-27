@@ -29,12 +29,12 @@
 
 ## 📑 目录
 
-- [智能指针：堆内存管理与共享语义](#智能指针堆内存管理与共享语义)
+- [智能指针（Smart Pointer）：堆内存管理与共享语义](#智能指针堆内存管理与共享语义)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 智能指针谱系](#11-智能指针谱系)
     - [1.2 Box：独占堆分配](#12-box独占堆分配)
-    - [1.3 Rc 与 Arc：引用计数共享](#13-rc-与-arc引用计数共享)
+    - [1.3 Rc 与 Arc：引用（Reference）计数共享](#13-rc-与-arc引用计数共享)
   - [二、技术细节](#二技术细节)
     - [2.1 RefCell 与 Cell：内部可变性](#21-refcell-与-cell内部可变性)
     - [2.2 智能指针的组合模式](#22-智能指针的组合模式)
@@ -271,7 +271,7 @@ struct Node {
 }
 ```
 
-> **组合模式**: Rust 的智能指针通过**组合**表达复杂的所有权语义——`Rc<RefCell<T>>` = 共享 + 可变，`Arc<Mutex<T>>` = 跨线程共享 + 互斥可变。
+> **组合模式**: Rust 的智能指针通过**组合**表达复杂的所有权（Ownership）语义——`Rc<RefCell<T>>` = 共享 + 可变，`Arc<Mutex<T>>` = 跨线程共享 + 互斥可变。
 > [来源: [TRPL — RefCell](https://doc.rust-lang.org/book/ch15-05-interior-mutability.html)]
 
 ---
@@ -679,7 +679,7 @@ fn main() {
 }
 ```
 
-> **修正**: `Arc<T>` 实现 `Send` + `Sync` 当且仅当 `T: Send + Sync`。`RefCell<T>` 不实现 `Sync`（单线程运行时（Runtime）借用检查），所以 `Arc<RefCell<T>>` 不能跨线程。线程安全的内部可变性：1) `Arc<Mutex<T>>` — 互斥锁；2) `Arc<RwLock<T>>` — 读写锁；3) `Arc<AtomicUsize>` — 无锁原子操作（Atomic Operations）。`RefCell` 的设计：单线程场景下零开销（无原子操作），但线程间共享导致编译错误。这与 C++ 的 `std::shared_ptr<std::mutex>`（可跨线程，但需手动锁管理）或 Java 的 `AtomicInteger`（线程安全，但无 RefCell 的借用语义）不同——Rust 的类型系统（Type System）通过 `Send`/`Sync` 在编译期排除不安全的线程共享。[来源: [The Rust Programming Language](LINK_PLACEHOLDER)] · [来源: [Rust Standard Library](LINK_PLACEHOLDER)]
+> **修正**: `Arc<T>` 实现 `Send` + `Sync` 当且仅当 `T: Send + Sync`。`RefCell<T>` 不实现 `Sync`（单线程运行时（Runtime）借用（Borrowing）检查），所以 `Arc<RefCell<T>>` 不能跨线程。线程安全的内部可变性：1) `Arc<Mutex<T>>` — 互斥锁；2) `Arc<RwLock<T>>` — 读写锁；3) `Arc<AtomicUsize>` — 无锁原子操作（Atomic Operations）。`RefCell` 的设计：单线程场景下零开销（无原子操作），但线程间共享导致编译错误。这与 C++ 的 `std::shared_ptr<std::mutex>`（可跨线程，但需手动锁管理）或 Java 的 `AtomicInteger`（线程安全，但无 RefCell 的借用语义）不同——Rust 的类型系统（Type System）通过 `Send`/`Sync` 在编译期排除不安全的线程共享。[来源: [The Rust Programming Language](LINK_PLACEHOLDER)] · [来源: [Rust Standard Library](LINK_PLACEHOLDER)]
 
 ## 实践
 
@@ -712,7 +712,7 @@ fn main() {
 
 - A. 引用计数，允许多个所有者
 - B. 在堆上分配数据，使类型大小确定（如递归枚举（Enum））
-- C. 提供运行时借用检查
+- C. 提供运行时（Runtime）借用检查
 
 <details>
 <summary>✅ 答案</summary>
@@ -858,7 +858,7 @@ fn main() {
 
 > 自动内存管理 ⟸ Drop 顺序正确 ⟸ Deref 解引用
 > 循环引用避免 ⟸ Weak 指针降级 ⟸ Rc/Arc 内部计数
-> **过渡**: 掌握 智能指针：堆内存管理与共享语义 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 智能指针：堆内存管理与共享语义 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 智能指针：堆内存管理与共享语义 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
