@@ -200,6 +200,8 @@ Trait Bounds 是 L2 的"枢纽概念"：
 - [Rust 迭代器（Iterator）模式](LINK_PLACEHOLDER)
 - [迭代器（Iterator）模式：Rust 的惰性计算与零成本抽象（Zero-Cost Abstraction）](LINK_PLACEHOLDER)
 - [宏（Macro）模式：编译期代码生成的工程实践](LINK_PLACEHOLDER)
+- [RTTI 与动态类型识别：从 C++ 到 Rust](./25_rtti_and_dynamic_typing.md)
+- [C 预处理器 vs Rust 宏：从文本替换到语法树](./26_c_preprocessor_vs_rust_macros.md)
 - [生命周期（Lifetimes）高级主题：从 HRTB 到自引用（Reference）类型](LINK_PLACEHOLDER)
 - [高级 Trait 主题：从关联类型到特化](./19_advanced_traits.md)
 - [高级类型系统（Type System）：从关联类型到类型级编程](./20_type_system_advanced.md)

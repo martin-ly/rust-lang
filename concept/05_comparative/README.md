@@ -141,6 +141,7 @@ L1-L4 知识                L5 综合                L6-L7 决策
 
 - [Rust 安全保证的边界条件全景（Safety Boundary Panorama）](./04_safety_boundaries.md)
 - [Rust 执行模型同构性矩阵：同步 · 异步（Async） · 并发 · 并行](LINK_PLACEHOLDER)
+- [C++ vs Rust：构造、运算符、RTTI、友元](./16_cpp_rust_surface_features.md)
 - [Rust vs Ruby：性能与表达力的两极](./08_rust_vs_ruby.md)
 - [Rust vs Swift：现代系统语言的两种路径](./09_rust_vs_swift.md)
 - [Rust vs Zig：现代系统语言的两种哲学](./10_rust_vs_zig.md)

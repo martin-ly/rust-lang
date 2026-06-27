@@ -17,6 +17,7 @@
 > [Traits](../02_intermediate/01_traits.md) ·
 > [Generics](../02_intermediate/02_generics.md)
 > **后置概念**: [DSL Construction] · [Meta-programming]
+> **相关阅读**: [C 预处理器 vs Rust 宏](../02_intermediate/26_c_preprocessor_vs_rust_macros.md) — 从文本替换到语法树的入门对比
 > **主要来源**:
 > [TRPL: Ch19.5](https://doc.rust-lang.org/book/ch19-06-macros.html) ·
 > [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/) ·

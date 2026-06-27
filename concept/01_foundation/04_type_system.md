@@ -2699,3 +2699,126 @@ fn main() {
 
 > **警告**: `as` 转换在溢出时不报错，是潜在 bug 来源。Rust 1.45+ 推荐使用 `TryInto` 进行可失败转换。
 </details>
+
+---
+
+## 十二、补充：运算符重载（Operator Overloading）
+
+### 12.1 核心命题
+
+> **运算符重载不是语法糖，而是类型系统能力的显式化。
+> C++ 允许为任意类型自由重载 `+`、`-`、`*`、`/` 等运算符；Rust 将运算符重载限制在 `std::ops` trait 体系内，从而保证：
+> 1. 重载行为必须显式实现；
+> 2. 编译器可以静态检查运算符两侧类型是否匹配；
+> 3. 不会出现 C++ 中"意外重载导致语义漂移"的问题。**
+
+### 12.2 C++ 自由运算符重载
+
+```cpp
+// C++: 可以为任意类型重载任意运算符
+struct Vector2 {
+    double x, y;
+};
+
+Vector2 operator+(const Vector2& a, const Vector2& b) {
+    return Vector2{a.x + b.x, a.y + b.y};
+}
+
+// 甚至可以重载 &、->、[]、() 等
+```
+
+**C++ 的问题**：
+- 运算符语义完全由程序员定义，可能与自然直觉相悖。
+- 无法静态保证 `a + b` 的两边类型兼容。
+- 重载决策可能涉及隐式转换，导致意外行为。
+
+### 12.3 Rust 的 `std::ops` Trait 约束
+
+Rust 中，`a + b` 是 `a.add(b)` 的语法糖，而 `add` 来自 `std::ops::Add` trait：
+
+```rust
+use std::ops::Add;
+
+#[derive(Debug, Clone, Copy)]
+struct Vector2 {
+    x: f64,
+    y: f64,
+}
+
+impl Add for Vector2 {
+    type Output = Self;
+    fn add(self, other: Self) -> Self {
+        Self {
+            x: self.x + other.x,
+            y: self.y + other.y,
+        }
+    }
+}
+
+fn main() {
+    let a = Vector2 { x: 1.0, y: 2.0 };
+    let b = Vector2 { x: 3.0, y: 4.0 };
+    println!("{:?}", a + b); // 必须实现 Add
+}
+```
+
+**关键差异**：
+
+| 维度 | C++ | Rust |
+|:---|:---|:---|
+| 重载机制 | 自由函数 `operator+` | `std::ops::Add` trait impl |
+| 类型检查 | 运行时/重载决议 | 编译期 trait bound 检查 |
+| 可重载运算符 | 几乎所有运算符 | 仅限于 `std::ops` 中定义的 trait |
+| 隐式转换 | 可参与重载决议 | 不参与；必须类型完全匹配或显式 `Into` |
+| 错误信息 | 复杂，涉及候选函数列表 | 直接提示未实现 `Add` trait |
+
+### 12.4 常用 `std::ops` trait
+
+| 运算符 | Trait | 说明 |
+|:---|:---|:---|
+| `+` | `std::ops::Add` | 加法 |
+| `-` | `std::ops::Sub` | 减法 |
+| `*` | `std::ops::Mul` | 乘法 |
+| `/` | `std::ops::Div` | 除法 |
+| `%` | `std::ops::Rem` | 取模 |
+| `-x` | `std::ops::Neg` | 取负 |
+| `!x` | `std::ops::Not` | 逻辑非/按位非 |
+| `a += b` | `std::ops::AddAssign` | 复合赋值 |
+| `a[b]` | `std::ops::Index` / `IndexMut` | 索引 |
+| `()` | `Fn` / `FnMut` / `FnOnce` | 函数调用（闭包） |
+| `?` | `Try` | 错误传播 |
+
+### 12.5 形式化视角
+
+C++ 的运算符重载是**特设多态（ad-hoc polymorphism）**的语法扩展：编译器根据操作数类型选择重载函数。Rust 的运算符重载是**参数化多态 + trait bound**的语法扩展：`a + b` 等价于 `Add::add(a, b)`，类型系统保证只有实现了 `Add<Output=Self>` 的类型才能使用 `+`。
+
+> **关键洞察**：Rust 没有"重载决议"，只有"trait 求解"。这消除了 C++ 中因隐式转换和重载优先级导致的许多歧义。
+
+### 12.6 边界与反例
+
+```rust,compile_fail
+struct Foo;
+
+fn main() {
+    let a = Foo;
+    let b = Foo;
+    let _ = a + b; // ❌ 错误: cannot add `Foo` to `Foo`
+}
+```
+
+错误信息直接指出 `Foo` 未实现 `Add`：
+
+```text
+error[E0369]: cannot add `Foo` to `Foo`
+  --> src/main.rs:7:15
+   |
+7  |     let _ = a + b;
+   |               ^ no implementation for `Foo + Foo`
+```
+
+### 12.7 权威来源
+
+- [Rust Reference — Operator Expressions](https://doc.rust-lang.org/reference/expressions/operator-expr.html)
+- [std::ops](https://doc.rust-lang.org/std/ops/index.html)
+- Stroustrup, B. *The C++ Programming Language*, 4th Ed., Ch. 18
+

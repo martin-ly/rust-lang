@@ -44,6 +44,7 @@
   - [RustBelt 谓词映射图（RustBelt Predicate Map）](00_meta/rustbelt_predicate_map.md)
   - [Rust 知识体系自测题库（Self-Assessment）](00_meta/self_assessment.md)
   - [语义桥：算法、设计模式与工作流模式的统一谱系](00_meta/semantic_bridge_algorithms_patterns.md)
+  - [模式语义空间索引：设计模式在概念体系中的坐标](00_meta/pattern_semantic_space_index.md)
   - [Rust Semantic Expressiveness: A Panoramic Survey（Rust 语义表达力全景梳理）](00_meta/semantic_expressiveness.md)
   - [Rust 表征空间（Semantic / Representational Space）](00_meta/semantic_space.md)
   - [权威来源清单与知识来源关系分析](00_meta/sources.md)
@@ -110,6 +111,8 @@
   - [元编程：Rust 的编译期代码生成与变换](02_intermediate/21_metaprogramming.md)
   - [测验：Trait 与泛型（Generics）（试点扩展）](LINK_PLACEHOLDER)
   - [测验：内存管理（L2 试点扩展）](02_intermediate/24_quiz_memory_management.md)
+  - [RTTI 与动态类型识别：从 C++ 到 Rust](02_intermediate/25_rtti_and_dynamic_typing.md)
+  - [C 预处理器 vs Rust 宏：从文本替换到语法树](02_intermediate/26_c_preprocessor_vs_rust_macros.md)
 
 - [L3 高级概念](03_advanced/README.md)
   - [是否需要进入 L4 形式化层？](03_advanced/00_before_formal.md)
@@ -182,6 +185,7 @@
   - [Rust vs C#：托管与原生之路](05_comparative/13_rust_vs_csharp.md)
   - [Rust vs Elixir](05_comparative/14_rust_vs_elixir.md)
   - [Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程](05_comparative/15_rust_vs_typescript.md)
+  - [C++ vs Rust：构造、运算符、RTTI、友元](05_comparative/16_cpp_rust_surface_features.md)
   - [测验：Rust vs 系统编程语言（L5 试点扩展）](05_comparative/17_quiz_rust_vs_systems.md)
 
 - [L6 生态工程](06_ecosystem/README.md)
