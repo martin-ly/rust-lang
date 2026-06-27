@@ -183,7 +183,7 @@ fn main() {
 }
 ```
 
-> **ECS 洞察**: **ECS 架构天然适合 Rust 的所有权模型**——系统之间不共享可变状态，编译期保证并行安全。
+> **ECS 洞察**: **ECS 架构天然适合 Rust 的所有权（Ownership）模型**——系统之间不共享可变状态，编译期保证并行安全。
 > [来源: [Bevy ECS Guide](https://bevyengine.org/learn/book/)]
 > [来源: [Bevy ECS](https://bevyengine.org/learn/book/)]
 
@@ -272,7 +272,7 @@ wgpu:
   └── 遮挡剔除
 ```
 
-> **渲染洞察**: **Rust 的零成本抽象让渲染代码既可读又高效**——无运行时开销。
+> **渲染洞察**: **Rust 的零成本抽象（Zero-Cost Abstraction）让渲染代码既可读又高效**——无运行时（Runtime）开销。
 > [来源: [Bevy Rendering](https://bevyengine.org/learn/book/)]
 
 ---
@@ -442,7 +442,7 @@ graph TD
   └── FFI 桥接
 ```
 
-> **场景洞察**: **Rust 在游戏开发中更适合模块化和独立项目**——大型项目需要生态成熟度。
+> **场景洞察**: **Rust 在游戏开发中更适合模块（Module）化和独立项目**——大型项目需要生态成熟度。
 > [来源: [Bevy Engine](https://bevyengine.org/)]
 
 ---
@@ -488,7 +488,7 @@ graph TD
      // 使用 tracing
 ```
 
-> **陷阱总结**: 游戏开发的陷阱与**ECS 设计**、**资源加载**、**系统顺序**和**生命周期管理**相关。
+> **陷阱总结**: 游戏开发的陷阱与**ECS 设计**、**资源加载**、**系统顺序**和**生命周期（Lifetimes）管理**相关。
 > [来源: [Bevy Best Practices](https://bevyengine.org/learn/book/)]
 
 ---
@@ -519,7 +519,7 @@ graph TD
 - [Performance](15_performance_optimization.md) — 性能优化
 - [Memory](../02_intermediate/03_memory_management.md) — 内存管理
 - [Concurrency](../03_advanced/01_concurrency.md) — 并发
-- [Ownership](../01_foundation/01_ownership.md) — 所有权
+- [Ownership](../01_foundation/01_ownership.md) — 所有权（Ownership）
 
 ---
 

@@ -56,10 +56,10 @@
   - [十、边界测试：形式化方法的编译错误](#十边界测试形式化方法的编译错误)
     - [10.1 边界测试：`unsafe` 块的形式化验证边界（编译错误）](#101-边界测试unsafe-块的形式化验证边界编译错误)
     - [10.2 边界测试：循环不变量与编译期验证（逻辑错误）](#102-边界测试循环不变量与编译期验证逻辑错误)
-    - [10.3 边界测试：`contracts` crate 的运行时断言开销（逻辑错误）](#103-边界测试contracts-crate-的运行时断言开销逻辑错误)
+    - [10.3 边界测试：`contracts` crate 的运行时（Runtime）断言开销（逻辑错误）](LINK_PLACEHOLDER)
     - [10.4 边界测试：Kani 的循环展开限制（验证失败）](#104-边界测试kani-的循环展开限制验证失败)
     - [10.5 边界测试：形式化验证的时间复杂度与路径爆炸（验证失败/超时）](#105-边界测试形式化验证的时间复杂度与路径爆炸验证失败超时)
-    - [10.8 边界测试：不可变借用与可变借用的冲突](#108-边界测试不可变借用与可变借用的冲突)
+    - [10.8 边界测试：不可变借用（Mutable Borrow）与可变借用的冲突](LINK_PLACEHOLDER)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：形式化方法（Formal Methods）在 Rust 中的主要应用形式有哪些？（理解层）](#测验-1形式化方法formal-methods在-rust-中的主要应用形式有哪些理解层)
     - [测验 2：Kani 与 Miri 在验证目标上有什么区别？（理解层）](#测验-2kani-与-miri-在验证目标上有什么区别理解层)
@@ -106,7 +106,7 @@
   └── 从"安全"到"正确"的自然延伸
 ```
 
-> **认知功能**: **Rust 的类型系统已经将验证提升到编译期**——形式化方法是向更高层次的延伸。
+> **认知功能**: **Rust 的类型系统（Type System）已经将验证提升到编译期**——形式化方法是向更高层次的延伸。
 > [来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]
 
 ---
@@ -590,7 +590,7 @@ fn main() {
 ```
 
 > **修正**:
-> Rust 的契约（contracts）生态（`contracts` crate、实验性的内置契约）提供运行时前置/后置条件检查。
+> Rust 的契约（contracts）生态（`contracts` crate、实验性的内置契约）提供运行时（Runtime）前置/后置条件检查。
 > 与形式化验证（编译期证明）不同，运行时契约有性能开销，且只在实际执行路径上检查（不保证所有路径）。
 > 使用模式：
 >
@@ -599,7 +599,7 @@ fn main() {
 > 3) 结合模糊测试（fuzzing）增加路径覆盖。
 >
 > 这与 Eiffel 的 Design by Contract（原生语言特性，可配置断言级别）、D 的 `in`/`out` 契约、或 Python 的 `deal`/`icontract` 类似。
-> Rust 的设计趋势：契约作为宏/属性，最终可能集成到编译器（如 `rustc_contracts` 实验），支持编译期证明和运行时检查的双模式。
+> Rust 的设计趋势：契约作为宏（Macro）/属性，最终可能集成到编译器（如 `rustc_contracts` 实验），支持编译期证明和运行时检查的双模式。
 > [来源: [contracts Crate](https://docs.rs/contracts/)] ·
 > [来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)]
 
@@ -627,7 +627,7 @@ fn verify_loop() {
 > 3) 将复杂循环改写为递归（若尾递归优化适用）。
 >
 > 这与 Coq/Isabelle 的交互式证明（手动提供不变量）或 CBMC（C 的模型检查器，同样受限于循环展开）相同——自动化验证的瓶颈在于处理循环和递归。
-> Rust 的所有权系统简化了部分不变量（无别名 = 无意外修改），但循环逻辑仍需人工或半自动处理。
+> Rust 的所有权（Ownership）系统简化了部分不变量（无别名 = 无意外修改），但循环逻辑仍需人工或半自动处理。
 > [来源: [Kani Documentation](https://model-checking.github.io/kani/)] ·
 > [来源: [Bounded Model Checking](https://en.wikipedia.org/wiki/Model_checking#Bounded_model_checking)]
 
@@ -645,7 +645,7 @@ fn verify_loop_unbounded() {
 }
 ```
 
-> **修正**: 模型检查器（Kani、CBMC）通过展开循环验证程序。`#[kani::unwind(10)]` 限制循环展开次数，若实际迭代超过 10 次，验证失败（"unwinding assertion"）。无界循环（`while` 依赖外部输入）在模型检查中本质不可判定——需提取循环不变量（`sum == i * (i - 1) / 2`）或用归纳法证明。形式化验证的**可扩展性**是核心挑战：1) 状态空间随变量和路径指数增长；2) 复杂数据结构（链表、图）的验证需抽象（用长度代替具体元素）；3) 并发程序的验证需考虑所有交错（interleaving）。这与数学证明（可处理无限，但需人类智慧）或测试（有限覆盖，但可扩展）形成能力光谱——形式化验证在关键代码（密码学、安全模块）中提供最高保证，但成本高昂。[来源: [Kani Documentation](https://model-checking.github.io/kani/)] · [来源: [Bounded Model Checking](https://en.wikipedia.org/wiki/Model_checking#Bounded_model_checking)]
+> **修正**: 模型检查器（Kani、CBMC）通过展开循环验证程序。`#[kani::unwind(10)]` 限制循环展开次数，若实际迭代超过 10 次，验证失败（"unwinding assertion"）。无界循环（`while` 依赖外部输入）在模型检查中本质不可判定——需提取循环不变量（`sum == i * (i - 1) / 2`）或用归纳法证明。形式化验证的**可扩展性**是核心挑战：1) 状态空间随变量和路径指数增长；2) 复杂数据结构（链表、图）的验证需抽象（用长度代替具体元素）；3) 并发程序的验证需考虑所有交错（interleaving）。这与数学证明（可处理无限，但需人类智慧）或测试（有限覆盖，但可扩展）形成能力光谱——形式化验证在关键代码（密码学、安全模块（Module））中提供最高保证，但成本高昂。[来源: [Kani Documentation](https://model-checking.github.io/kani/)] · [来源: [Bounded Model Checking](https://en.wikipedia.org/wiki/Model_checking#Bounded_model_checking)]
 
 ### 10.8 边界测试：不可变借用与可变借用的冲突
 
@@ -659,7 +659,7 @@ fn main() {
 }
 ```
 
-> **修正**: **借用规则**：1) 任意数量的 `&T` 或一个 `&mut T`；2) 不能同时存在；3) NLL 使借用仅在**使用点**检查，非作用域结束。
+> **修正**: **借用（Borrowing）规则**：1) 任意数量的 `&T` 或一个 `&mut T`；2) 不能同时存在；3) NLL 使借用仅在**使用点**检查，非作用域结束。
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -670,7 +670,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-1) 模型检测（Kani）—— 验证 unsafe 代码；2) 演绎验证（Prusti/Creusot）—— Hoare 逻辑验证；3) 类型系统本身—— 线性逻辑编码所有权；4) 符号执行（Miri）—— 检测 UB。
+1) 模型检测（Kani）—— 验证 unsafe 代码；2) 演绎验证（Prusti/Creusot）—— Hoare 逻辑验证；3) 类型系统（Type System）本身—— 线性逻辑编码所有权（Ownership）；4) 符号执行（Miri）—— 检测 UB。
 
 </details>
 
@@ -695,7 +695,7 @@ Kani 是模型检测器，通过符号执行穷举所有可能输入路径，证
 <details>
 <summary>✅ 答案与解析</summary>
 
-基于 Viper 验证基础设施，使用分离逻辑（Separation Logic）和权限（Permissions）来建模 Rust 的所有权和借用。
+基于 Viper 验证基础设施，使用分离逻辑（Separation Logic）和权限（Permissions）来建模 Rust 的所有权和借用（Borrowing）。
 </details>
 
 ---
@@ -707,7 +707,7 @@ Kani 是模型检测器，通过符号执行穷举所有可能输入路径，证
 <details>
 <summary>✅ 答案与解析</summary>
 
-不能。形式化验证通常针对特定属性（如内存安全、功能正确性），且受限于规模、复杂性和规约编写的正确性。测试补充验证实际运行时的性能和集成行为。
+不能。形式化验证通常针对特定属性（如内存安全（Memory Safety）、功能正确性），且受限于规模、复杂性和规约编写的正确性。测试补充验证实际运行时的性能和集成行为。
 </details>
 
 ---
@@ -738,7 +738,7 @@ Rust 的类型系统将大量运行时错误（空指针、数据竞争、use-af
 
 > **过渡**: 在实践中应用 形式化方法在 Rust 中的应用 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: 形式化方法在 Rust 中的应用 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 形式化方法在 Rust 中的应用 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

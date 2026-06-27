@@ -15,8 +15,8 @@
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
-> **双维定位**: C×Ana — 分析高级类型系统特性的形式化边界
-> **定位**: 深入分析 Rust **类型系统的高级特性**——从 GATs、impl Trait 到类型级计算和 const generics，揭示 Rust 如何在保持编译期安全的同时提供强大的抽象能力。
+> **双维定位**: C×Ana — 分析高级类型系统（Type System）特性的形式化边界
+> **定位**: 深入分析 Rust **类型系统（Type System）的高级特性**——从 GATs、impl Trait 到类型级计算和 const generics，揭示 Rust 如何在保持编译期安全的同时提供强大的抽象能力。
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Generics](./02_generics.md) · [Traits](./01_traits.md)
 > **后置概念**: [RustBelt](../04_formal/04_rustbelt.md) · [Category Theory](../04_formal/10_category_theory.md)
 
@@ -35,7 +35,7 @@
   - [一、核心概念](#一核心概念)
     - [1.1 impl Trait 的演进](#11-impl-trait-的演进)
     - [1.2 Const Generics](#12-const-generics)
-    - [1.3 类型推断与约束求解](#13-类型推断与约束求解)
+    - [1.3 类型推断（Type Inference）与约束求解](LINK_PLACEHOLDER)
   - [二、技术细节](#二技术细节)
     - [2.1 impl Trait 在参数位置](#21-impl-trait-在参数位置)
     - [2.2 Const Generics 实战](#22-const-generics-实战)
@@ -53,7 +53,7 @@
     - [7.3 重载决议 vs Trait 解析](#73-重载决议-vs-trait-解析)
     - [编译错误示例](#编译错误示例)
     - [4.4 边界测试：高阶 trait bound（HRTB）误用（编译错误）](#44-边界测试高阶-trait-boundhrtb误用编译错误)
-    - [4.5 边界测试：关联类型与泛型参数冲突（编译错误）](#45-边界测试关联类型与泛型参数冲突编译错误)
+    - [4.5 边界测试：关联类型与泛型（Generics）参数冲突（编译错误）](LINK_PLACEHOLDER)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
@@ -117,12 +117,12 @@ trait Foo {
 }
 ```
 
-> **impl Trait 洞察**: **impl Trait 是 Rust "零成本抽象（Zero-Cost Abstraction）"的关键**——它隐藏实现细节而不引入运行时开销。
+> **impl Trait 洞察**: **impl Trait 是 Rust "零成本抽象（Zero-Cost Abstraction）"的关键**——它隐藏实现细节而不引入运行时（Runtime）开销。
 > [来源: [RFC 1522 — Conservative impl Trait](https://rust-lang.github.io/rfcs//1522-conservative-impl-trait.html)]
 
-> **Rust 2024 edition 补充**: 返回位置 `impl Trait` 的生命周期捕获规则发生变化。
+> **Rust 2024 edition 补充**: 返回位置 `impl Trait` 的生命周期（Lifetimes）捕获规则发生变化。
 >
-> - Rust 2021：隐式捕获所有输入生命周期。
+> - Rust 2021：隐式捕获所有输入生命周期（Lifetimes）。
 > - Rust 2024：默认捕获所有输入生命周期；如需精确控制，使用 `+ use<'lt>` 或 `+ use<>`。
 >
 > ```rust,ignore
@@ -231,7 +231,7 @@ Rust 的类型推断机制:
   let sum: i32 = iter.sum(); // 类型从 sum 的目标类型推断
 ```
 
-> **推断洞察**: Rust 的**类型推断是"辅助"而非"全自动"**——它减少噪声，但关键边界保持显式。
+> **推断洞察**: Rust 的**类型推断（Type Inference）是"辅助"而非"全自动"**——它减少噪声，但关键边界保持显式。
 > [来源: [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/types.html)]
 
 ---
@@ -277,7 +277,7 @@ trait Parser {
 // └── 不能用于 trait bound 组合
 ```
 
-> **参数洞察**: **impl Trait 参数是泛型的语法糖**——它更简洁，但牺牲了显式命名类型参数的能力。
+> **参数洞察**: **impl Trait 参数是泛型（Generics）的语法糖**——它更简洁，但牺牲了显式命名类型参数的能力。
 > [来源: [Rust Reference — impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html)]
 
 ---
@@ -339,7 +339,7 @@ impl<T: Copy, const N: usize> Stack<T, N> {
 }
 ```
 
-> **实战洞察**: **Const generics 将运行时的维度检查提升为编译期类型检查**——矩阵乘法维度不匹配成为编译错误。
+> **实战洞察**: **Const generics 将运行时（Runtime）的维度检查提升为编译期类型检查**——矩阵乘法维度不匹配成为编译错误。
 > [来源: [Const Generics MVP](https://rust-lang.github.io/rfcs//2000-const-generics.html)]
 
 ---
@@ -547,9 +547,9 @@ graph TD
 |:---|:---|:---|
 | `+` | `operator+(const T&)` / `operator+(const T&, const T&)` | `std::ops::Add` |
 | `-` | `operator-`（一元/二元同名） | `std::ops::Neg`（一元）/ `std::ops::Sub`（二元） |
-| `*` | `operator*`（解引用/乘法同名） | `std::ops::Deref` / `std::ops::Mul`（区分） |
+| `*` | `operator*`（解引用（Reference）/乘法同名） | `std::ops::Deref` / `std::ops::Mul`（区分） |
 | `->` | `operator->` | `std::ops::Deref::deref` + 自动 `.` |
-| `()` | `operator()` — 仿函数 | 无直接等价（使用闭包或 Fn trait） |
+| `()` | `operator()` — 仿函数 | 无直接等价（使用闭包（Closures）或 Fn trait） |
 | `[]` | `operator[]` | `std::ops::Index` / `std::ops::IndexMut` |
 | `==` | `operator==` | `std::cmp::PartialEq` / `Eq` |
 | `<` | `operator<` | `std::cmp::PartialOrd` / `Ord` |
@@ -617,7 +617,7 @@ let b: i32 = a.into();          // ✅ 显式: MyInt → i32
 >
 > // From<T> for LazyCell<T, F>: 从值直接创建已初始化的 LazyCell
 > let cell: std::cell::LazyCell<i32> = 42.into();
-> // 等价于 LazyCell::new(|| 42)，但无需闭包开销
+> // 等价于 LazyCell::new(|| 42)，但无需闭包（Closures）开销
 >
 > // From<T> for LazyLock<T, F>: 从值直接创建已初始化的 LazyLock
 > let lock: std::sync::LazyLock<i32> = 42.into();
@@ -739,7 +739,7 @@ impl Container for BadWrapper {
 }
 ```
 
-> **修正**: 关联类型（associated type）在 trait 实现中只能指定一次，且必须与实际方法签名一致。试图在同一实现中为关联类型指定多个不同具体类型，或方法返回类型与关联类型不匹配，都会导致编译错误。关联类型的单态化约束保证了类型一致性。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: 关联类型（associated type）在 trait 实现中只能指定一次，且必须与实际方法签名一致。试图在同一实现中为关联类型指定多个不同具体类型，或方法返回类型与关联类型不匹配，都会导致编译错误。关联类型的单态化（Monomorphization）约束保证了类型一致性（Coherence）。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
@@ -751,7 +751,7 @@ impl Container for BadWrapper {
 | [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) | ✅ 一级 | 类型参考 |
 | [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs//2000-const-generics.html) | ✅ 一级 | 常量泛型 |
 | [RFC 1522 — impl Trait](https://rust-lang.github.io/rfcs//1522-conservative-impl-trait.html) | ✅ 一级 | impl Trait |
-| [Rust Type Inference](https://doc.rust-lang.org/reference/types.html) | ✅ 一级 | 类型推断 |
+| [Rust Type Inference](https://doc.rust-lang.org/reference/types.html) | ✅ 一级 | 类型推断（Type Inference） |
 | [typenum crate](https://docs.rs/typenum/latest/typenum/) | ✅ 一级 | 类型级数字 |
 
 ---
@@ -916,7 +916,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-表示某个 trait bound 对所有可能的生命周期都成立。典型用例是要求闭包能处理任意生命周期的引用：`F: for<'a> Fn(&'a str) -> &'a str`。
+表示某个 trait bound 对所有可能的生命周期都成立。典型用例是要求闭包能处理任意生命周期的引用（Reference）：`F: for<'a> Fn(&'a str) -> &'a str`。
 </details>
 
 ---
@@ -965,11 +965,11 @@ fn main() {}
 | 高级类型系统：从关联类型到类型级编程 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | 高级类型系统：从关联类型到类型级编程 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
-> 模式匹配穷尽性 ⟸ 代数数据类型完备 ⟸ 类型安全
-> 零成本抽象 ⟸ 编译期类型擦除 ⟸ 泛型单态化
+> 模式匹配（Pattern Matching）穷尽性 ⟸ 代数数据类型完备 ⟸ 类型安全
+> 零成本抽象（Zero-Cost Abstraction） ⟸ 编译期类型擦除 ⟸ 泛型单态化（Monomorphization）
 > **过渡**: 掌握 高级类型系统：从关联类型到类型级编程 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 高级类型系统：从关联类型到类型级编程 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: 高级类型系统：从关联类型到类型级编程 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 高级类型系统：从关联类型到类型级编程 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

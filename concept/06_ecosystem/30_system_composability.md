@@ -31,7 +31,7 @@
 
 **可组合性 (Composability)**：软件组件通过明确定义的接口相互连接，形成更大系统的性质，且组合后的行为是各组件行为的确定性函数。
 
-Rust 的类型系统通过**零成本抽象 (Zero-Cost Abstractions)** 使可组合性成为工程现实：组合不仅在语义层面成立，更在编译期被完全展开为高效机器码，运行时无虚拟分发、无动态类型检查、无额外内存分配。
+Rust 的类型系统（Type System）通过**零成本抽象 (Zero-Cost Abstractions)** 使可组合性成为工程现实：组合不仅在语义层面成立，更在编译期被完全展开为高效机器码，运行时（Runtime）无虚拟分发、无动态类型检查、无额外内存分配。
 
 ---
 
@@ -40,7 +40,7 @@ Rust 的类型系统通过**零成本抽象 (Zero-Cost Abstractions)** 使可组
 ### 第 1 步：为什么 Rust 特别适合可组合系统？
 >
 
-所有权系统天然禁止数据竞争，使得跨组件的数据流动可以被编译器验证；泛型与 Trait 允许接口层面的代数组合；`async/await` 将状态机转换透明化。这三者共同构成了"组合即正确"的工程基础。
+所有权（Ownership）系统天然禁止数据竞争，使得跨组件的数据流动可以被编译器验证；泛型（Generics）与 Trait 允许接口层面的代数组合；`async/await` 将状态机转换透明化。这三者共同构成了"组合即正确"的工程基础。
 
 ### 第 2 步：从语法糖到代数结构
 >
@@ -50,21 +50,21 @@ Rust 的类型系统通过**零成本抽象 (Zero-Cost Abstractions)** 使可组
 ### 第 3 步：组合的成本与边界
 >
 
-并非所有组合都是免费的。类型爆炸、`dyn Trait` 对单态化的破坏、过度抽象导致的编译时间膨胀，是可组合架构必须面对的现实约束。
+并非所有组合都是免费的。类型爆炸、`dyn Trait` 对单态化（Monomorphization）的破坏、过度抽象导致的编译时间膨胀，是可组合架构必须面对的现实约束。
 
 ---
 
 ## 一、引言：类型系统赋能的零成本组合抽象
 
-在传统面向对象语言中，组件组合常依赖运行时多态（虚函数表、反射）或动态类型转换，带来不可消除的性能开销和运行时错误风险。Rust 通过以下机制实现了编译期可验证的零成本组合：
+在传统面向对象语言中，组件组合常依赖运行时（Runtime）多态（虚函数表、反射）或动态类型转换，带来不可消除的性能开销和运行时错误风险。Rust 通过以下机制实现了编译期可验证的零成本组合：
 
 | 机制 | 作用 | 组合性保障 |
 |:---|:---|:---|
-| **所有权转移** | 数据在组件间流动时，编译器跟踪唯一所有者 | 无 use-after-move、无 double-free |
-| **生命周期参数** | 借用数据的存活范围被形式化约束 | 无 dangling reference 跨组件传播 |
-| **泛型单态化** | 每个类型组合生成特化代码 | 零运行时分发开销 |
+| **所有权（Ownership）转移** | 数据在组件间流动时，编译器跟踪唯一所有者 | 无 use-after-move、无 double-free |
+| **生命周期（Lifetimes）参数** | 借用（Borrowing）数据的存活范围被形式化约束 | 无 dangling reference 跨组件传播 |
+| **泛型（Generics）单态化（Monomorphization）** | 每个类型组合生成特化代码 | 零运行时分发开销 |
 | **Trait 关联类型** | 接口契约编码输出类型 | 管道阶段的输出自动匹配下一阶段输入 |
-| `Send`/`Sync` | 跨线程/异步边界的能力标记 | 编译期拒绝不安全并发组合 |
+| `Send`/`Sync` | 跨线程/异步（Async）边界的能力标记 | 编译期拒绝不安全并发组合 |
 
 这些机制使得 Rust 的组合不仅是**工程实践**，更是**数学结构**的编程语言实现。下文将系统阐述四种工业级可组合模式及其背后的代数定理。
 
@@ -101,7 +101,7 @@ let result: Vec<i32> = [1, 2, 3, 4, 5]
 
 **并行管道：rayon**
 
-`rayon` 将顺序迭代器无缝升级为并行数据流，保持相同的组合接口：
+`rayon` 将顺序迭代器（Iterator）无缝升级为并行数据流，保持相同的组合接口：
 
 ```rust
 use rayon::prelude::*;
@@ -139,7 +139,7 @@ let (tx2, rx2) = unbounded::<i32>();
 
 ### 2.2 数据流管道 (Dataflow Pipeline)
 
-异步数据流管道处理的是**随时间到达的数据序列**。`futures::Stream` trait 是异步版本的 `Iterator`，支持背压感知 (backpressure-aware) 的组合。
+异步（Async）数据流管道处理的是**随时间到达的数据序列**。`futures::Stream` trait 是异步版本的 `Iterator`，支持背压感知 (backpressure-aware) 的组合。
 
 ```mermaid
 graph LR
@@ -164,7 +164,7 @@ let s = stream::iter(1..=100)
     .filter(|x| futures::future::ready(x % 3 == 0));
 ```
 
-`buffered(n)` 将 `Stream<Item = impl Future<Output = T>>` 转换为 `Stream<Item = T>`，同时限制并发度为 `n`。这是**资源受限的组合**——类型系统不仅保证数据正确性，还编码了执行策略约束。
+`buffered(n)` 将 `Stream<Item = impl Future<Output = T>>` 转换为 `Stream<Item = T>`，同时限制并发度为 `n`。这是**资源受限的组合**——类型系统（Type System）不仅保证数据正确性，还编码了执行策略约束。
 
 **背压传播：tokio::sync::mpsc**
 
@@ -190,9 +190,9 @@ while let Some(data) = rx.recv().await {
 }
 ```
 
-**生命周期防止 use-after-close**：Rust 的借用检查器确保管道关闭后无法再发送数据。`tx.send()` 返回 `Result`，而编译器拒绝在 `rx` 被 `drop` 后继续持有引用——这是**协议安全性**的类型系统保证。
+**生命周期（Lifetimes）防止 use-after-close**：Rust 的借用（Borrowing）检查器确保管道关闭后无法再发送数据。`tx.send()` 返回 `Result`，而编译器拒绝在 `rx` 被 `drop` 后继续持有引用（Reference）——这是**协议安全性**的类型系统保证。
 
-**async_stream 宏**：生成自定义 Stream 的声明式方式
+**async_stream 宏（Macro）**：生成自定义 Stream 的声明式方式
 
 ```rust
 use async_stream::stream;
@@ -342,7 +342,7 @@ pub trait Layer<S> {
 }
 ```
 
-`Layer` 接收一个 `Service` 并返回一个新的 `Service`，在两者之间注入横切关注点（超时、重试、限流、日志）。关键洞察：层的组合是**类型驱动的**——每层精确声明其输入和输出 Service 的类型约束，编译器验证整个栈的类型一致性。
+`Layer` 接收一个 `Service` 并返回一个新的 `Service`，在两者之间注入横切关注点（超时、重试、限流、日志）。关键洞察：层的组合是**类型驱动的**——每层精确声明其输入和输出 Service 的类型约束，编译器验证整个栈的类型一致性（Coherence）。
 
 ```rust
 use tower::{ServiceBuilder, ServiceExt};
@@ -429,7 +429,7 @@ use tower::layer::util::Identity;
 ### 定理 3：有界通道组合保持背压
 >
 
-> **[来源类型: 原创分析]** 基于异步运行时内存安全模型。
+> **[来源类型: 原创分析]** 基于异步运行时内存安全（Memory Safety）模型。
 
 **定理 3**：设系统由生产者 `P`、有界通道 `C(n)`（容量 `n`）和消费者 `K` 顺序组合。若 `K` 的处理速率为 `r_k`，`P` 的生产速率为 `r_p`，则：
 
@@ -545,7 +545,7 @@ async fn good() {
 
 | 场景特征 | 推荐模式 | 关键 crate | 背压策略 |
 |:---|:---|:---|:---|
-| 数据批处理、ETL | 管道-过滤器 | `rayon`, `itertools` | 有界迭代器/通道 |
+| 数据批处理、ETL | 管道-过滤器 | `rayon`, `itertools` | 有界迭代器（Iterator）/通道 |
 | 流式数据处理 | 数据流管道 | `tokio::sync::mpsc`, `futures::Stream` | `buffered(n)` + `mpsc::channel` |
 | 事件分发、消息总线 | 事件驱动组合 | `tokio::select!`, `bus`, `event-listener` | 消费者速率控制 |
 | HTTP/RPC 中间件 | 层组合 | `tower`, `axum` | `poll_ready` 级联 |
@@ -562,7 +562,7 @@ async fn good() {
 | 有界通道将无界内存转为有界延迟 | Tokio 背压文档 · 排队论 | ✅ |
 | `dyn Trait` 阻止内联 | Rust Reference · LLVM 优化模型 | ✅ |
 | rayon 工作窃取调度 | rayon 论文 · PLDI 研究 | ✅ |
-| async_stream 宏生成 Stream | async_stream crate 文档 | ✅ |
+| async_stream 宏（Macro）生成 Stream | async_stream crate 文档 | ✅ |
 
 ---
 
@@ -645,7 +645,7 @@ pub struct PluginVTable {
 }
 ```
 
-> **修正**: Rust 的 trait 和泛型**不保证 ABI 稳定性**——不同编译器版本、不同优化级别可能生成不同的 vtable 布局。设计插件系统时，必须使用 `#[repr(C)]` 结构体和 `extern "C"` 函数作为 FFI 边界。这与 COM（Windows）或 GObject（GNOME）的虚表稳定 ABI 不同——Rust 优先类型安全和零成本抽象，牺牲了跨版本二进制兼容性。`abi_stable` crate 提供了一种在 Rust 插件间维持 ABI 稳定的方案，但增加了运行时开销。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**: Rust 的 trait 和泛型**不保证 ABI 稳定性**——不同编译器版本、不同优化级别可能生成不同的 vtable 布局。设计插件系统时，必须使用 `#[repr(C)]` 结构体（Struct）和 `extern "C"` 函数作为 FFI 边界。这与 COM（Windows）或 GObject（GNOME）的虚表稳定 ABI 不同——Rust 优先类型安全和零成本抽象（Zero-Cost Abstraction），牺牲了跨版本二进制兼容性。`abi_stable` crate 提供了一种在 Rust 插件间维持 ABI 稳定的方案，但增加了运行时开销。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.3 边界测试：trait 组合子的菱形继承问题（编译错误）
 
@@ -698,7 +698,7 @@ impl Car {
 }
 ```
 
-> **修正**: Rust 不支持继承（无 `class Car extends Vehicle`），强制使用**组合**（composition）。组合的代价是**boilerplate**：需手动编写转发方法暴露内部组件的 API。缓解工具：1) `Deref` 委托（仅适用于智能指针模式，不推荐领域类型）；2) `delegate` crate（宏自动生成转发方法）；3) 公开内部字段（`pub engine: Engine`，牺牲封装）。Rust 的设计哲学：组合更灵活（运行时替换组件）、更安全（无继承层次导致的脆弱基类问题），但确实增加了样板代码。这与 Go 的 struct 嵌入（类似组合，但自动转发方法，是 Go 唯一的"继承"机制）或 Java 的委托模式（手动编写，与 Rust 类似）不同——Rust 正在探索 `#[derive(Delegate)]` 等宏简化组合委托。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-01-what-is-oo.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
+> **修正**: Rust 不支持继承（无 `class Car extends Vehicle`），强制使用**组合**（composition）。组合的代价是**boilerplate**：需手动编写转发方法暴露内部组件的 API。缓解工具：1) `Deref` 委托（仅适用于智能指针（Smart Pointer）模式，不推荐领域类型）；2) `delegate` crate（宏（Macro）自动生成转发方法）；3) 公开内部字段（`pub engine: Engine`，牺牲封装）。Rust 的设计哲学：组合更灵活（运行时替换组件）、更安全（无继承层次导致的脆弱基类问题），但确实增加了样板代码。这与 Go 的 struct 嵌入（类似组合，但自动转发方法，是 Go 唯一的"继承"机制）或 Java 的委托模式（手动编写，与 Rust 类似）不同——Rust 正在探索 `#[derive(Delegate)]` 等宏简化组合委托。[来源: [The Rust Programming Language](LINK_PLACEHOLDER)] · [来源: [Rust API Guidelines](LINK_PLACEHOLDER)]
 
 ### 10.3 边界测试：泛型组件的类型参数爆炸（编译错误/设计反模式）
 
@@ -754,7 +754,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-指系统组件可以灵活组合、替换和扩展，而无需修改现有代码。Rust 的 trait 系统、泛型和模块系统天然支持高可组合性。
+指系统组件可以灵活组合、替换和扩展，而无需修改现有代码。Rust 的 trait 系统、泛型和模块（Module）系统天然支持高可组合性。
 </details>
 
 ---

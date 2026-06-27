@@ -179,7 +179,7 @@ API_PORT="8080"
 
 ```
 
-> **认知功能**: Rust 的**静态链接和零运行时依赖**特性使其在 CI/CD 中具备独特优势——构建产物是自包含的可执行文件，部署无需考虑目标环境的运行时版本。[来源: [TRPL — Building](https://doc.rust-lang.org/book/ch14-01-release-profiles.html)]
+> **认知功能**: Rust 的**静态链接和零运行时（Runtime）依赖**特性使其在 CI/CD 中具备独特优势——构建产物是自包含的可执行文件，部署无需考虑目标环境的运行时版本。[来源: [TRPL — Building](https://doc.rust-lang.org/book/ch14-01-release-profiles.html)]
 > **关键洞察**: Rust 的编译时间成本集中在 CI 阶段，但换来了部署阶段的极简性和可预测性。
 > [来源: [Cargo Book — Profiles](https://doc.rust-lang.org/cargo/reference/profiles.html)]
 
@@ -248,7 +248,7 @@ Rust DevOps 工具全景:
   └─────────────┴─────────────────┴─────────────────┘
 ```
 
-> **认知功能**: 安全审计不是**发布前的一次性检查**，而是贯穿整个开发周期的持续过程——从开发者本地的预提交到 CI 门禁再到运行时监控。
+> **认知功能**: 安全审计不是**发布前的一次性检查**，而是贯穿整个开发周期的持续过程——从开发者本地的预提交到 CI 门禁再到运行时（Runtime）监控。
 > [来源: [RustSec](https://rustsec.org/)] · [来源: [SLSA Framework](https://slsa.dev/)]
 
 ---
@@ -730,7 +730,7 @@ fn test_b() {
 }
 ```
 
-> **修正**: `static mut` 在 Rust 中是极不安全的机制：任何访问都需要 `unsafe` 块，但编译器不保证线程安全或测试隔离。并行测试（`cargo test -- --test-threads=8`）时，`test_a` 和 `test_b` 可能并发执行，导致 `COUNTER` 的值不确定。正确做法：1) 使用 `std::sync::atomic::AtomicI32`（无锁、线程安全）；2) 使用 `std::sync::Mutex`（互斥）；3) 使用 `thread_local!`（每个线程独立）。Rust 2024 Edition 进一步限制 `static mut` 的使用，鼓励迁移到安全抽象。这与 C 的全局变量（无任何保护）或 Go 的 `sync/atomic`（包级原子操作）不同——Rust 的类型系统逐步淘汰最危险的并发原语。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-03-shared-state.html)] · [来源: [Rust RFC 3560](https://github.com/rust-lang/rfcs/pull/3560)]
+> **修正**: `static mut` 在 Rust 中是极不安全的机制：任何访问都需要 `unsafe` 块，但编译器不保证线程安全或测试隔离。并行测试（`cargo test -- --test-threads=8`）时，`test_a` 和 `test_b` 可能并发执行，导致 `COUNTER` 的值不确定。正确做法：1) 使用 `std::sync::atomic::AtomicI32`（无锁、线程安全）；2) 使用 `std::sync::Mutex`（互斥）；3) 使用 `thread_local!`（每个线程独立）。Rust 2024 Edition 进一步限制 `static mut` 的使用，鼓励迁移到安全抽象。这与 C 的全局变量（无任何保护）或 Go 的 `sync/atomic`（包级原子操作（Atomic Operations））不同——Rust 的类型系统（Type System）逐步淘汰最危险的并发原语。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-03-shared-state.html)] · [来源: [Rust RFC 3560](https://github.com/rust-lang/rfcs/pull/3560)]
 
 ### 10.6 边界测试：Docker 多阶段构建的缓存失效（编译时间膨胀）
 
@@ -808,7 +808,7 @@ fn test_b() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-Rust 编译器进行大量优化和类型检查（LLVM 后端、单态化）。依赖也需要从源码编译（无预编译二进制分发）。增量编译和 `sccache` 可缓解。
+Rust 编译器进行大量优化和类型检查（LLVM 后端、单态化（Monomorphization））。依赖也需要从源码编译（无预编译二进制分发）。增量编译和 `sccache` 可缓解。
 </details>
 
 ---

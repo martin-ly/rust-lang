@@ -38,19 +38,19 @@
 > **来源**: <https://en.wikipedia.org/wiki/Competitive_programming>
 
 > **[来源: VeriContest arXiv 2026-05-08]** VeriContest: A Benchmark of 946 LeetCode and Codeforces Problems for Rust + Verus Formal Verification.
-> **来源**: <https://arxiv.org/abs/2026.05.08> (概念引用)
+> **来源**: <https://arxiv.org/abs/2026.05.08> (概念引用（Reference）)
 
 ---
 
 ## 认知路径（Cognitive Path）
 >
 
-> **学习递进**: 从"Rust 能不能打竞赛"的直觉质疑，深入到"所有权模型如何在不牺牲性能的前提下消除算法实现中的内存错误"的形式化理解。
+> **学习递进**: 从"Rust 能不能打竞赛"的直觉质疑，深入到"所有权（Ownership）模型如何在不牺牲性能的前提下消除算法实现中的内存错误"的形式化理解。
 
 ### 第 1 步：为什么 Rust 在算法竞赛中被低估？
 >
 
-编译期借用检查、显式生命周期、没有垃圾回收——这些特性在快速原型阶段似乎增加了认知负担。但换来的零成本抽象和无运行时错误，在复杂数据结构和图算法中反而是**可靠性倍增器**。
+编译期借用（Borrowing）检查、显式生命周期（Lifetimes）、没有垃圾回收——这些特性在快速原型阶段似乎增加了认知负担。但换来的零成本抽象（Zero-Cost Abstraction）和无运行时（Runtime）错误，在复杂数据结构和图算法中反而是**可靠性倍增器**。
 
 ### 第 2 步：所有权模型如何重塑算法实现范式？
 >
@@ -60,7 +60,7 @@
 ### 第 3 步：竞赛编程的 Rust 工程化策略是什么？
 >
 
-Fast I/O、内存池复用、零分配算法、位运算压缩——这些惯用法将 Rust 的性能推向 C++ 级别，同时保持内存安全。核心策略：**用类型系统编码不变量，用迭代替代递归避免栈溢出**。
+Fast I/O、内存池复用、零分配算法、位运算压缩——这些惯用法将 Rust 的性能推向 C++ 级别，同时保持内存安全（Memory Safety）。核心策略：**用类型系统（Type System）编码不变量，用迭代替代递归避免栈溢出**。
 
 ### 第 4 步：形式验证能在算法竞赛中落地吗？
 >
@@ -77,14 +77,14 @@ VeriContest 证明：946 道经典竞赛题的 Rust 实现可通过 Verus 形式
 
 | 维度 | Rust | C++ | Python |
 |:---|:---|:---|:---|
-| **运行时性能** | ✅ 零成本抽象，与 C++ 同级 | ✅ 原生性能 | ⚠️ 解释型，10-100x 慢 |
-| **内存安全** | ✅ 编译期保证，无 data race | ❌ 手动管理，UB 常见 | ✅ GC 安全，但无并发安全 |
+| **运行时（Runtime）性能** | ✅ 零成本抽象（Zero-Cost Abstraction），与 C++ 同级 | ✅ 原生性能 | ⚠️ 解释型，10-100x 慢 |
+| **内存安全（Memory Safety）** | ✅ 编译期保证，无 data race | ❌ 手动管理，UB 常见 | ✅ GC 安全，但无并发安全（Concurrency Safety） |
 | **编译速度** | ⚠️ 慢于 C++（增量编译缓解） | ✅ 较快 | ✅ 无需编译 |
 | **标准库算法** | ✅ `slice::sort` (Timsort), `BinaryHeap` | ✅ `std::sort`, `priority_queue` | ✅ 丰富但性能有限 |
 | **竞赛生态** | ⚠️ 模板库较少，社区在成长 | ✅ 极成熟（AC Library 等） | ✅ LeetCode 默认支持 |
 | **形式验证** | ✅ Verus/Kani/Creusot 生态领先 | ⚠️ 有限（Frama-C 等） | ⚠️ 有限 |
 
-> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)] Rust 的零成本抽象原则意味着：使用高阶函数、迭代器、泛型不会引入运行时开销。`slice::sort_unstable()` 在随机数据上通常比 C++ `std::sort` 更快。
+> [来源: [TRPL](LINK_PLACEHOLDER)] Rust 的零成本抽象（Zero-Cost Abstraction）原则意味着：使用高阶函数、迭代器（Iterator）、泛型（Generics）不会引入运行时开销。`slice::sort_unstable()` 在随机数据上通常比 C++ `std::sort` 更快。
 
 ### 1.2 VeriContest：形式验证的竞赛基准
 
@@ -112,7 +112,7 @@ VeriContest 证明：946 道经典竞赛题的 Rust 实现可通过 Verus 形式
 
 - `slice::sort` / `slice::sort_unstable`：基于 Timsort / pdqsort，自适应 $O(n \log n)$
 - `rayon::join`：并行分治，工作窃取调度
-- 安全切片：`&mut [T]` 分裂为两个不重叠的可变引用，编译期保证无别名冲突
+- 安全切片（Slice）：`&mut [T]` 分裂为两个不重叠的可变引用（Mutable Reference），编译期保证无别名冲突
 
 ```rust
 /// 归并排序：所有权友好的安全切片分裂
@@ -142,8 +142,8 @@ pub fn par_merge_sort<T: Ord + Send + Clone>(arr: &mut [T]) {
 }
 ```
 
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)] `split_at_mut` 返回 `(&mut [T], &mut [T])`，编译器通过借用检查器保证两段切片生命周期互斥。
-> [来源: [Rayon Docs](https://docs.rs/rayon)] Rayon 的 `join` 在编译期要求闭包满足 `Send`，将数据竞争转化为类型错误。
+> [来源: [Rust Standard Library](LINK_PLACEHOLDER)] `split_at_mut` 返回 `(&mut [T], &mut [T])`，编译器通过借用（Borrowing）检查器保证两段切片（Slice）生命周期（Lifetimes）互斥。
+> [来源: [Rayon Docs](https://docs.rs/rayon)] Rayon 的 `join` 在编译期要求闭包（Closures）满足 `Send`，将数据竞争转化为类型错误。
 
 ---
 
@@ -705,7 +705,7 @@ mod verification {
 | **DP — 线性** | `Vec` 滚动 / `Vec<Vec>` 填表 | 53, 70, 121, 198, 300 | O(n) ~ O(n²) |
 | **DP — 区间** | `Vec<Vec<T>>` 二维表 | 5, 516, 647, 1143, 1312 | O(n²) |
 | **DP — 树形** | 后序遍历 + `HashMap` 记忆化 | 337, 543, 687, 968 | O(n) |
-| **Bit Manipulation** | `count_ones`, `trailing_zeros`, 掩码枚举 | 136, 191, 231, 268, 461 | O(1) ~ O(2^n) |
+| **Bit Manipulation** | `count_ones`, `trailing_zeros`, 掩码枚举（Enum） | 136, 191, 231, 268, 461 | O(1) ~ O(2^n) |
 | **Backtracking** | 递归 + `Vec` 状态 + `bool` 标记 | 17, 39, 46, 78, 90 | O(2^n) ~ O(n!) |
 | **Design** | `HashMap` + `Vec` + 自定义 struct | 146, 155, 208, 380, 460 | 按操作 |
 
@@ -788,11 +788,11 @@ temp.extend_from_slice(&nums[..]);
 
 ### 8.1 核心要点回顾
 
-1. **Rust 的竞赛竞争力**: 零成本抽象 + 编译期内存安全，使 Rust 在复杂数据结构中比 C++ 更不易出错，性能同级。
-2. **所有权即算法约束**: `split_at_mut` 替代危险指针算术，`Option<T>` 强制处理空节点，`VecDeque` 提供安全双端队列。
+1. **Rust 的竞赛竞争力**: 零成本抽象 + 编译期内存安全（Memory Safety），使 Rust 在复杂数据结构中比 C++ 更不易出错，性能同级。
+2. **所有权（Ownership）即算法约束**: `split_at_mut` 替代危险指针算术，`Option<T>` 强制处理空节点，`VecDeque` 提供安全双端队列。
 3. **Fast I/O 是入场券**: `BufRead` + 自定义 scanner 是将 Rust 竞赛代码从 TLE 边缘拯救出来的第一步。
 4. **形式验证从可能到可行**: VeriContest 证明 946 道题可验证，Kani 可在 CI 中自动化验证边界安全。
-5. **类型系统编码不变量**: Const generics 将数组维度编码进类型，迭代器 `size_hint` 指导预分配，将运行时错误转化为编译期拒绝。
+5. **类型系统（Type System）编码不变量**: Const generics 将数组维度编码进类型，迭代器（Iterator） `size_hint` 指导预分配，将运行时错误转化为编译期拒绝。
 
 ### 8.2 相关概念文件
 
@@ -802,7 +802,7 @@ temp.extend_from_slice(&nums[..]);
 | [`concept/04_formal/05_verification_toolchain.md`](../04_formal/05_verification_toolchain.md) | Kani / Verus / Creusot 形式验证工具链选型指南 |
 | [`concept/02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) | 泛型与 const generics 的理论基础 |
 | [`concept/01_foundation/06_zero_cost_abstractions.md`](../01_foundation/06_zero_cost_abstractions.md) | 零成本抽象原则的理论根基 |
-| [`concept/03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) | `rayon` 并行分治的并发安全原理 |
+| [`concept/03_advanced/01_concurrency.md`](LINK_PLACEHOLDER) | `rayon` 并行分治的并发安全（Concurrency Safety）原理 |
 | [`concept/06_ecosystem/15_performance_optimization.md`](./15_performance_optimization.md) | Criterion / flamegraph 性能分析方法论 |
 
 ---
@@ -849,7 +849,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的默认线程栈大小（Linux 上 8MB）对竞赛编程中的深度递归可能不足。栈溢出在 Rust 中是 panic（可捕获）而非段错误（SIGSEGV），但这仍导致程序终止。解决方案：1) 将递归改写为迭代（显式栈 `Vec`）；2) 使用 `#![recursion_limit = "256"]` 增加宏递归限制（不影响运行时递归）；3) 在 `main` 中使用 `std::thread::Builder::new().stack_size(64 * 1024 * 1024).spawn(...)` 增加栈大小。竞赛编程中，Rust 的栈溢出保护比 C++ 更友好（panic 信息明确），但迭代写法仍是最佳实践。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-05-control-flow.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/thread/struct.Builder.html)]
+> **修正**: Rust 的默认线程栈大小（Linux 上 8MB）对竞赛编程中的深度递归可能不足。栈溢出在 Rust 中是 panic（可捕获）而非段错误（SIGSEGV），但这仍导致程序终止。解决方案：1) 将递归改写为迭代（显式栈 `Vec`）；2) 使用 `#![recursion_limit = "256"]` 增加宏（Macro）递归限制（不影响运行时递归）；3) 在 `main` 中使用 `std::thread::Builder::new().stack_size(64 * 1024 * 1024).spawn(...)` 增加栈大小。竞赛编程中，Rust 的栈溢出保护比 C++ 更友好（panic 信息明确），但迭代写法仍是最佳实践。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-05-control-flow.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/thread/struct.Builder.html)]
 
 ### 10.2 边界测试：`Vec` 索引越界与 `get` 的安全替代（编译错误/运行时 panic）
 
@@ -867,7 +867,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的索引操作 `v[i]` 在越界时 panic（与 C 的未定义行为、Python 的 `IndexError` 类似）。但 Rust 提供 `get` 方法返回 `Option<&T>`，允许安全处理越界情况。竞赛编程中，输入数据的不确定性（如边界条件、空数组）要求防御式编程：`v.get(i).copied().unwrap_or(0)` 是常见模式。Rust 的边界检查在 debug 模式下完全启用，release 模式下编译器可能优化掉已证明安全的检查（如迭代器遍历）。这与 C++ 的 `vector::at()`（越界抛异常）或 `operator[]`（无检查）不同——Rust 在安全和性能间提供明确选择：`[]` 快速但 panic，`get` 安全但略慢。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/vec/struct.Vec.html)]
+> **修正**: Rust 的索引操作 `v[i]` 在越界时 panic（与 C 的未定义行为、Python 的 `IndexError` 类似）。但 Rust 提供 `get` 方法返回 `Option<&T>`，允许安全处理越界情况。竞赛编程中，输入数据的不确定性（如边界条件、空数组）要求防御式编程：`v.get(i).copied().unwrap_or(0)` 是常见模式。Rust 的边界检查在 debug 模式下完全启用，release 模式下编译器可能优化掉已证明安全的检查（如迭代器（Iterator）遍历）。这与 C++ 的 `vector::at()`（越界抛异常）或 `operator[]`（无检查）不同——Rust 在安全和性能间提供明确选择：`[]` 快速但 panic，`get` 安全但略慢。[来源: [The Rust Programming Language](LINK_PLACEHOLDER)] · [来源: [Rust Standard Library](LINK_PLACEHOLDER)]
 
 ### 10.3 边界测试：自定义排序的比较器错误（编译错误/运行时 panic）
 
@@ -884,7 +884,7 @@ fn main() {
 }
 ```
 
-> **修正**: `sort_by` 要求比较器实现**严格弱序**（strict weak ordering）：1) 反自反性（`a < a` 为假）；2) 非对称性（`a < b` ⇒ `b < a` 为假）；3) 传递性（`a < b` ∧ `b < c` ⇒ `a < c`）。违反这些性质的比较器导致 `sort` panic（debug 模式）或产生未定义顺序（release 模式）。常见错误：比较浮点数时未处理 `NaN`（`NaN < x` 和 `NaN > x` 都为假，破坏严格弱序）。安全替代：`partial_cmp` 返回 `Option<Ordering>`，`NaN` 时返回 `None`；`sort_by` 的闭包必须返回 `Ordering`（非 `Option`），因此需要显式处理 `NaN`（如映射到特定值或使用 `total_cmp`）。这与 C++ 的 `std::sort`（同样要求严格弱序，违反时 UB）类似，但 Rust 在 debug 模式下检查并 panic。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/vec/struct.Vec.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> **修正**: `sort_by` 要求比较器实现**严格弱序**（strict weak ordering）：1) 反自反性（`a < a` 为假）；2) 非对称性（`a < b` ⇒ `b < a` 为假）；3) 传递性（`a < b` ∧ `b < c` ⇒ `a < c`）。违反这些性质的比较器导致 `sort` panic（debug 模式）或产生未定义顺序（release 模式）。常见错误：比较浮点数时未处理 `NaN`（`NaN < x` 和 `NaN > x` 都为假，破坏严格弱序）。安全替代：`partial_cmp` 返回 `Option<Ordering>`，`NaN` 时返回 `None`；`sort_by` 的闭包（Closures）必须返回 `Ordering`（非 `Option`），因此需要显式处理 `NaN`（如映射到特定值或使用 `total_cmp`）。这与 C++ 的 `std::sort`（同样要求严格弱序，违反时 UB）类似，但 Rust 在 debug 模式下检查并 panic。[来源: [Rust Standard Library](LINK_PLACEHOLDER)] · [来源: [The Rust Programming Language](LINK_PLACEHOLDER)]
 
 ### 10.4 边界测试：大数组栈分配导致的编译错误
 
@@ -941,7 +941,7 @@ fn main() {
 }
 ```
 
-> **修正**: `BinaryHeap::peek_mut()` 返回 `PeekMut` guard，允许修改堆顶元素，drop 时自动 `sift_down` 恢复堆性质。若通过 `std::mem::forget(peek_mut)` 或循环引用阻止 drop：1) 堆性质破坏（父节点 < 子节点）；2) 后续 `pop()` 返回错误元素。这是 Rust "leak safety" 哲学的一部分：标准库不保证防泄漏（`mem::forget` 是 safe），但泄漏不应导致内存不安全——`PeekMut` 的泄漏仅破坏逻辑不变量，不触发 UB。这与 C++ 的 `std::priority_queue::top()`（返回 const 引用，不可修改）或 Java 的 `PriorityQueue.peek()`（不可修改）不同——Rust 的 `peek_mut` 是独特设计，修改 + 自动恢复，但需理解 guard 模式。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.BinaryHeap.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
+> **修正**: `BinaryHeap::peek_mut()` 返回 `PeekMut` guard，允许修改堆顶元素，drop 时自动 `sift_down` 恢复堆性质。若通过 `std::mem::forget(peek_mut)` 或循环引用阻止 drop：1) 堆性质破坏（父节点 < 子节点）；2) 后续 `pop()` 返回错误元素。这是 Rust "leak safety" 哲学的一部分：标准库不保证防泄漏（`mem::forget` 是 safe），但泄漏不应导致内存不安全——`PeekMut` 的泄漏仅破坏逻辑不变量，不触发 UB。这与 C++ 的 `std::priority_queue::top()`（返回 const 引用（Reference），不可修改）或 Java 的 `PriorityQueue.peek()`（不可修改）不同——Rust 的 `peek_mut` 是独特设计，修改 + 自动恢复，但需理解 guard 模式。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.BinaryHeap.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 ### 10.3 边界测试：`BinaryHeap` 的 `peek_mut` 与忘记 drop（逻辑错误）
 
@@ -965,7 +965,7 @@ fn main() {
 }
 ```
 
-> **修正**: `BinaryHeap::peek_mut()` 返回 `PeekMut` guard，允许修改堆顶元素，drop 时自动 `sift_down` 恢复堆性质。若通过 `std::mem::forget(peek_mut)` 阻止 drop：1) 堆性质破坏（父节点 < 子节点）；2) 后续 `pop()` 返回错误元素；3) 但不触发内存不安全（`forget` 是 safe）。这是 Rust "leak safety" 的体现：泄漏只破坏逻辑不变量，不导致 UB。安全使用：1) 避免 `mem::forget`；2) 不在 `peek_mut` 活跃时修改堆的其他元素；3) 使用 `pop` + `push` 替代（若需完全替换堆顶）。这与 C++ 的 `std::priority_queue::top()`（const 引用，不可修改）或 Java 的 `PriorityQueue.peek()`（不可修改）不同——Rust 的 `peek_mut` 是独特设计，修改 + 自动恢复。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.BinaryHeap.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
+> **修正**: `BinaryHeap::peek_mut()` 返回 `PeekMut` guard，允许修改堆顶元素，drop 时自动 `sift_down` 恢复堆性质。若通过 `std::mem::forget(peek_mut)` 阻止 drop：1) 堆性质破坏（父节点 < 子节点）；2) 后续 `pop()` 返回错误元素；3) 但不触发内存不安全（`forget` 是 safe）。这是 Rust "leak safety" 的体现：泄漏只破坏逻辑不变量，不导致 UB。安全使用：1) 避免 `mem::forget`；2) 不在 `peek_mut` 活跃时修改堆的其他元素；3) 使用 `pop` + `push` 替代（若需完全替换堆顶）。这与 C++ 的 `std::priority_queue::top()`（const 引用（Reference），不可修改）或 Java 的 `PriorityQueue.peek()`（不可修改）不同——Rust 的 `peek_mut` 是独特设计，修改 + 自动恢复。[来源: [Rust Standard Library](LINK_PLACEHOLDER)] · [来源: [Rust API Guidelines](LINK_PLACEHOLDER)]
 > **过渡**: 算法与竞赛编程 (Algorithms & Competitive Programming) 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 算法与竞赛编程 (Algorithms & Competitive Programming) 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 算法与竞赛编程 (Algorithms & Competitive Programming) 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

@@ -5,6 +5,7 @@
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 
+> **前置概念**: N/A
 ---
 
 # WASM Target Evolution Preview
@@ -42,18 +43,18 @@ fn main() {
 > **修正**:
 > **WASI**（WebAssembly System Interface）的**capability-based security**：
 >
-> 1) 程序不能随意访问文件系统，需运行时显式授予（`wasmtime --dir=/tmp`）；
+> 1) 程序不能随意访问文件系统，需运行时（Runtime）显式授予（`wasmtime --dir=/tmp`）；
 > 2) 类似能力模型：程序持有"capability"（文件描述符），而非拥有全局权限；
 > 3) 沙箱化：即使代码被入侵，攻击者只能访问授权资源。
 >
 > 对比 POSIX：
 >
-> 1) POSIX 进程拥有用户所有权限（一旦运行，可访问用户的全部文件）；
+> 1) POSIX 进程拥有用户所有权（Ownership）限（一旦运行，可访问用户的全部文件）；
 > 2) WASI 的 capability 更细粒度（per-directory、per-file）；
 > 3) 未来：网络、环境变量的 capability。
 >
 > Rust 的 WASI target：`wasm32-wasip1`（旧名 `wasm32-wasi`）→ `wasm32-wasip2`（组件模型）。
-> 这与浏览器的同源策略（类似 capability，但基于 origin）或 Android 的权限模型（安装时授予，运行时检查）不同——WASI 的 capability 是传递给运行时的，程序本身声明需要的能力。
+> 这与浏览器的同源策略（类似 capability，但基于 origin）或 Android 的权限模型（安装时授予，运行时（Runtime）检查）不同——WASI 的 capability 是传递给运行时的，程序本身声明需要的能力。
 > [来源: [WASI](https://wasi.dev/)] ·
 > [来源: [Wasmtime](https://docs.wasmtime.dev/)]
 > **后置概念**: [Rust Specification](https://www.rust-lang.org/) ·

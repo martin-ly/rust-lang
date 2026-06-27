@@ -11,6 +11,7 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
 
+> **后置概念**: N/A
 ---
 
 > **来源**:
@@ -50,7 +51,7 @@ fn main() {
 
 **错误信息**：`expected integer, found floating-point number`
 
-**解析**：Rust 闭包**没有泛型参数**，类型在第一次使用时被推断并固定。
+**解析**：Rust 闭包（Closures）**没有泛型（Generics）参数**，类型在第一次使用时被推断并固定。
 
 ```rust,ignore
 let add = |a, b| a + b;
@@ -58,7 +59,7 @@ let add = |a, b| a + b;
 // 第二次调用 add(2.5, 3.5) 期望 |f64, f64| -> f64，不匹配！
 ```
 
-**修复方案**——使用泛型函数：
+**修复方案**——使用泛型（Generics）函数：
 
 ```rust
 fn add<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
@@ -66,16 +67,16 @@ fn add<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
 }
 ```
 
-或定义多个闭包：
+或定义多个闭包（Closures）：
 
 ```rust
 let add_i32 = |a: i32, b: i32| a + b;
 let add_f64 = |a: f64, b: f64| a + b;
 ```
 
-**闭包的匿名结构**：
+**闭包（Closures）的匿名结构**：
 
-Rust 闭包编译后实际上是匿名结构体：
+Rust 闭包编译后实际上是匿名结构体（Struct）：
 
 ```rust,ignore
 // let f = |x| x + 1;
@@ -132,8 +133,8 @@ fn main() {
 
 | Trait | 调用方式 | 实现条件 |
 |:---|:---|:---|
-| `Fn` | `&self` | 只捕获不可变引用 |
-| `FnMut` | `&mut self` | 捕获可变引用 |
+| `Fn` | `&self` | 只捕获不可变引用（Mutable Reference） |
+| `FnMut` | `&mut self` | 捕获可变引用（Reference） |
 | `FnOnce` | `self` | 消耗捕获的值 |
 
 **层次关系**：`Fn` <: `FnMut` <: `FnOnce`（所有实现 `Fn` 的闭包也自动实现 `FnMut` 和 `FnOnce`）
@@ -172,7 +173,7 @@ fn make_adder(x: i32) -> impl Fn(i32) -> i32 {
 }
 ```
 
-不加 `move` 时，闭包捕获 `x` 的引用。但 `x` 是函数参数，在 `make_adder` 返回后失效，闭包将持有悬垂引用。
+不加 `move` 时，闭包捕获 `x` 的引用（Reference）。但 `x` 是函数参数，在 `make_adder` 返回后失效，闭包将持有悬垂引用。
 
 **加了 `move`**：
 
@@ -185,9 +186,9 @@ move |y| x + y
 **使用场景**：
 
 - 闭包需要比捕获变量存活更久（如 `thread::spawn`、`tokio::spawn`）
-- 强制闭包获取所有权（避免生命周期问题）
+- 强制闭包获取所有权（避免生命周期（Lifetimes）问题）
 
-**知识点**：`move` 闭包是异步编程和多线程中的常见模式。它将环境变量的所有权转移到闭包内部，解决生命周期不匹配问题。[→ 闭包详解](./15_closure_basics.md)
+**知识点**：`move` 闭包是异步（Async）编程和多线程中的常见模式。它将环境变量的所有权转移到闭包内部，解决生命周期（Lifetimes）不匹配问题。[→ 闭包详解](LINK_PLACEHOLDER)
 
 </details>
 
@@ -224,7 +225,7 @@ mapping 5
 Result: [2, 4, 6, 8, 10]
 ```
 
-**解析**：`.collect()` 是**消费者（consumer）**，它驱动迭代器链执行。
+**解析**：`.collect()` 是**消费者（consumer）**，它驱动迭代器（Iterator）链执行。
 
 **惰性求值（Lazy Evaluation）**：
 
@@ -242,7 +243,7 @@ iter.for_each(|x| ...); // 驱动整个链
 
 | 类型 | 示例 | 行为 |
 |:---|:---|:---|
-| 适配器 | `map`、`filter`、`take`、`skip` | 返回新迭代器，惰性执行 |
+| 适配器 | `map`、`filter`、`take`、`skip` | 返回新迭代器（Iterator），惰性执行 |
 | 消费者 | `collect`、`sum`、`for_each`、`find` | 驱动迭代器执行，返回非迭代器值 |
 
 **性能优势**：惰性求值允许编译器优化整个迭代器链，消除中间分配：
@@ -252,7 +253,7 @@ iter.for_each(|x| ...); // 驱动整个链
 let sum: i32 = v.iter().map(|x| x * 2).filter(|x| x > 4).sum();
 ```
 
-**知识点**：迭代器的惰性求值是 Rust 零成本抽象的核心。整个适配器链在编译期被内联为单一循环。[→ 迭代器详解](../02_intermediate/15_iterator_patterns.md)
+**知识点**：迭代器的惰性求值是 Rust 零成本抽象（Zero-Cost Abstraction）的核心。整个适配器链在编译期被内联为单一循环。[→ 迭代器详解](../02_intermediate/15_iterator_patterns.md)
 
 </details>
 
@@ -540,7 +541,7 @@ fn main() {
 
 **答案**：`[8, 10]`
 
-**解析**：闭包 `|x| *x > threshold` 捕获了 `threshold` 的不可变引用。
+**解析**：闭包 `|x| *x > threshold` 捕获了 `threshold` 的不可变引用（Immutable Reference）。
 
 **闭包捕获分析**：
 

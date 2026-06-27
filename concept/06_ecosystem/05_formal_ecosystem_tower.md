@@ -94,7 +94,7 @@ graph BT
     L0 -.->|内存安全基线| L4
 ```
 
-> **认知功能**: 此图是 Rust 生态的**形式化成熟度分层塔**。读者可按项目可靠性需求「对号入座」——需要基本内存安全选 L0（ rustc 自动保证），需要类型契约验证选 L1（Serde/SQLx），需要架构组合正确性选 L2（Tokio/Tower），需要可观测性选 L3（Tracing），需要功能正确性证明选 L4（Kani/Verus）。关键认知：形式化不是「全有或全无」的二元选择，而是**可逐层递增的投资**——从 L0 到 L4，每上一层都增加验证深度和开发成本，读者应根据项目安全关键性选择适当的层级组合。 [来源: 💡 原创分析]
+> **认知功能**: 此图是 Rust 生态的**形式化成熟度分层塔**。读者可按项目可靠性需求「对号入座」——需要基本内存安全（Memory Safety）选 L0（ rustc 自动保证），需要类型契约验证选 L1（Serde/SQLx），需要架构组合正确性选 L2（Tokio/Tower），需要可观测性选 L3（Tracing），需要功能正确性证明选 L4（Kani/Verus）。关键认知：形式化不是「全有或全无」的二元选择，而是**可逐层递增的投资**——从 L0 到 L4，每上一层都增加验证深度和开发成本，读者应根据项目安全关键性选择适当的层级组合。 [来源: 💡 原创分析]
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
 > **认知路径**: 此分层塔自下而上展示 Rust 生态的**形式化深度递进**。L0 是所有 Rust 代码的基线（编译器自动证明），L1-L3 是工业级成熟层（生态竞争焦点），L4 是前沿扩展层（2026 年工业突破中）。箭头的虚实区分：**实线**表示功能依赖（上层依赖下层），**虚线**表示形式化保证的传递（下层的证明结论被上层继承）。 [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
@@ -106,10 +106,10 @@ graph BT
 
 | **库** | **Stars** | **形式化根基** | **可组合性** | **可观测性** |
 |:---|:---|:---|:---|:---|
-| **Tokio** | 27.9k+ | 无显式形式化，但 `async/await` 状态机转换受 Rust 所有权/生命周期严格约束，运行时调度器有形式化并发模型研究 | `Task` 作为线性资源，`spawn` 即所有权转移；与整个生态零成本组合 | `tokio-console` 提供运行时任务级观测；深度集成 `tracing` |
+| **Tokio** | 27.9k+ | 无显式形式化，但 `async/await` 状态机转换受 Rust 所有权（Ownership）/生命周期（Lifetimes）严格约束，运行时（Runtime）调度器有形式化并发模型研究 | `Task` 作为线性资源，`spawn` 即所有权转移；与整个生态零成本组合 | `tokio-console` 提供运行时任务级观测；深度集成 `tracing` |
 | **Tower** | 核心生态 | `Service` Trait 是**态射（Morphism）**的工业实现：请求-响应作为输入输出，中间件作为高阶函数复合 | **可组合性的数学核心**：`Service` 的 `call` 方法允许中间件嵌套、路由组合、超时/重试/限流的无缝堆叠 | 通过 `Service::poll_ready` 暴露背压状态，可接入链路追踪 |
 
-**关键论证**：Tokio + Tower 构成了 Rust 异步生态的**范畴论骨架**——`Service` 是对象间的态射，`Layer` 是函子（Functor），整个中间件栈是**态射的复合（Composition）**。这是 Rust 生态中最接近"代数组合"的工业实现。
+**关键论证**：Tokio + Tower 构成了 Rust 异步（Async）生态的**范畴论骨架**——`Service` 是对象间的态射，`Layer` 是函子（Functor），整个中间件栈是**态射的复合（Composition）**。这是 Rust 生态中最接近"代数组合"的工业实现。
 
 ---
 
@@ -117,7 +117,7 @@ graph BT
 
 | **库** | **Stars** | **形式化根基** | **可组合性** | **可观测性** |
 |:---|:---|:---|:---|:---|
-| **Axum** | 25.5k+ | Handler 是**纯异步函数**，参数提取器（Extractor）基于 Rust 类型系统的**模式匹配与穷尽性检查**；路由表在编译期构建为有限状态机 | `Router::merge` / `nest` 实现子系统组合；`State` 通过类型参数实现依赖注入的编译期验证；Tower 中间件即插即用 | 原生集成 `tracing` + OpenTelemetry；Tower 层可注入请求级 metrics |
+| **Axum** | 25.5k+ | Handler 是**纯异步（Async）函数**，参数提取器（Extractor）基于 Rust 类型系统（Type System）的**模式匹配（Pattern Matching）与穷尽性检查**；路由表在编译期构建为有限状态机 | `Router::merge` / `nest` 实现子系统组合；`State` 通过类型参数实现依赖注入的编译期验证；Tower 中间件即插即用 | 原生集成 `tracing` + OpenTelemetry；Tower 层可注入请求级 metrics |
 | **Actix-web** | 22.4k+ | Actor 模型（CSP 变体）的 Rust 实现，消息传递受 `Send` 约束 | 基于 Actor 地址的解耦组合，但不如 Axum 的函数式组合透明 | 支持中间件级观测，但生态向 Axum 迁移趋势明显 |
 
 **2026 现状**：Axum 已成为**生产标准**。TechEmpower Round 23 显示 Axum 处理 162.3万 req/sec，且其基于 Tower 的组合架构使其在大型微服务中更易形式化验证接口契约。
@@ -128,11 +128,11 @@ graph BT
 
 | **库** | **Stars/地位** | **形式化根基** | **可组合性** | **可观测性** |
 |:---|:---|:---|:---|:---|
-| **SQLx** | 生产标准 | **编译期查询验证**：SQL 语句在编译期被解析并与数据库 Schema 比对，类型不匹配即编译错误——这是**将数据库约束提升到类型论层面** | `Executor` Trait 统一了连接池、事务、连接的执行语义；`QueryAs` 将 SQL 行映射到 Rust 结构体是函子映射 | 集成 `tracing` 记录查询耗时；连接池暴露指标 |
-| **Diesel** | 成熟 ORM | 查询构建器是**领域特定语言（DSL）**，利用 Rust 类型系统保证 SQL 生成的语法合法性 | 强类型 Schema 与 Rust 结构体同构，变更通过 Migration 的线性历史管理 | 支持查询日志与性能分析 |
+| **SQLx** | 生产标准 | **编译期查询验证**：SQL 语句在编译期被解析并与数据库 Schema 比对，类型不匹配即编译错误——这是**将数据库约束提升到类型论层面** | `Executor` Trait 统一了连接池、事务、连接的执行语义；`QueryAs` 将 SQL 行映射到 Rust 结构体（Struct）是函子映射 | 集成 `tracing` 记录查询耗时；连接池暴露指标 |
+| **Diesel** | 成熟 ORM | 查询构建器是**领域特定语言（DSL）**，利用 Rust 类型系统（Type System）保证 SQL 生成的语法合法性 | 强类型 Schema 与 Rust 结构体（Struct）同构，变更通过 Migration 的线性历史管理 | 支持查询日志与性能分析 |
 | **Serde** | 生态基石 | 序列化/反序列化是**结构保持映射（Homomorphism）**：Rust ADT ↔ JSON/Protobuf/YAML 的同态转换 | `Serialize`/`Deserialize` Trait 是接口代数，任何实现可与任何格式组合 | 可通过 `serde_json` 的 `features` 开启诊断 |
 
-**关键论证**：SQLx 的编译期查询验证是**形式化方法工业化的典范**——它将数据库的语义约束（字段类型、表存在性）转化为 Rust 编译期的类型约束，消除了"运行时 SQL 语法错误"这一整类故障。
+**关键论证**：SQLx 的编译期查询验证是**形式化方法工业化的典范**——它将数据库的语义约束（字段类型、表存在性）转化为 Rust 编译期的类型约束，消除了"运行时（Runtime） SQL 语法错误"这一整类故障。
 
 ---
 
@@ -142,7 +142,7 @@ graph BT
 |:---|:---|:---|:---|:---|
 | **Tonic** | 生态标准 | 基于 Protobuf 的强类型 gRPC；`prost` 将模式定义编译为 Rust ADT，保持**代数结构同态** | `Service` Trait（Tower）与 gRPC 方法自动映射；拦截器（Interceptor）作为中间件组合 | gRPC 状态码自动映射；OpenTelemetry 集成 |
 | **Prost** | 底层基石 | Protobuf 模式即**代数规范**：字段编号、类型标签、可选/重复约束在编译期生成 Rust 代码 | 生成的 Rust 结构体自动实现 Serde/Traits，与生态无缝组合 | — |
-| **GraphQL (async-graphql)** | 活跃 | Schema 即类型契约；查询解析在编译期无验证（运行时），但 Rust 类型系统保证 Resolver 的返回类型匹配 | Schema 模块化组合；Federation 支持分布式 Schema 拼接 | 字段级 tracing 与性能分析 |
+| **GraphQL (async-graphql)** | 活跃 | Schema 即类型契约；查询解析在编译期无验证（运行时），但 Rust 类型系统保证 Resolver 的返回类型匹配 | Schema 模块（Module）化组合；Federation 支持分布式 Schema 拼接 | 字段级 tracing 与性能分析 |
 
 ---
 
@@ -153,7 +153,7 @@ graph BT
 | **Tracing** | 生态标准 | `Span` 是**调用树的形式化节点**；`#[instrument]` 将函数调用转化为可追踪的层次结构；与 Rust 的 `async` 状态机集成保证上下文不丢失 | `Layer` 模型（类似 Tower）允许日志、指标、追踪的组合；`tracing-subscriber` 支持多后端同时输出 | 本身就是观测基础设施；支持结构化日志、OpenTelemetry 导出 |
 | **OpenTelemetry Rust** | 生产标准 | 遵循 W3C Trace Context 标准；Trace ID / Span ID 的传递受 Rust 类型系统约束（不能随意伪造） | 与 `tracing` 通过 `tracing-opentelemetry` 桥接；与 Axum/Tokio 通过中间件注入 | 完整的分布式追踪、指标、日志三支柱 |
 | **Vector** | 14.3k+ | 数据管道是**函数式转换图**：源 → 转换 → 汇聚，每个节点是纯函数，组合后形成有向无环图 | 配置文件即组合声明；Rust 源码级可扩展 | 自观测 + 数据流背压监控 |
-| **Prometheus (metrics-rs)** | 标准 | 指标类型（Counter/Gauge/Histogram）是**代数数据类型**，保证只能执行合法操作（如 Counter 只增不减） | 通过宏自动注册；与 Tokio 运行时指标集成 | 原生 Prometheus 协议导出 |
+| **Prometheus (metrics-rs)** | 标准 | 指标类型（Counter/Gauge/Histogram）是**代数数据类型**，保证只能执行合法操作（如 Counter 只增不减） | 通过宏（Macro）自动注册；与 Tokio 运行时指标集成 | 原生 Prometheus 协议导出 |
 
 ---
 
@@ -165,11 +165,11 @@ graph BT
 |:---|:---|:---|:---|:---|
 | **Kani** | AWS | **模型检测（Model Checking）**：基于 CBMC，对 Rust 并发代码做**路径全覆盖验证** | **工业级**：AWS 用于验证 Rust 服务组件 | 通过 `#[kani::proof]` 注解，与 Cargo 集成 |
 | **Verus** | 微软/亚马逊 | **自动验证**：前置/后置条件、不变式、终止性证明 | **工业级**：内部用于系统代码验证 | 注解驱动，与 Rust 语法接近 |
-| **Creusot** | INRIA/学术 | **分离逻辑（Separation Logic）** → Why3 → SMT 求解器；支持预言（Prophecy）验证 | **学术前沿**：POPL 2026 教程，支持 unsafe 代码 | 通过 `creusot-contracts` 提供契约宏 |
-| **Aeneas** | 学术 | **MIR → 纯函数式 Rocq/F\***：将所有权语义翻译为函数式等价物 | **研究级**：支持复杂指针结构验证 | 生成 Coq/F\* 证明脚本 |
+| **Creusot** | INRIA/学术 | **分离逻辑（Separation Logic）** → Why3 → SMT 求解器；支持预言（Prophecy）验证 | **学术前沿**：POPL 2026 教程，支持 unsafe 代码 | 通过 `creusot-contracts` 提供契约宏（Macro） |
+| **Aeneas** | 学术 | **MIR → 纯函数式 Rocq/F\***：将所有权（Ownership）语义翻译为函数式等价物 | **研究级**：支持复杂指针结构验证 | 生成 Coq/F\* 证明脚本 |
 | **RefinedRust** | 研究 | **分离逻辑 + 自动化**：半自动化功能正确性 | **新兴**：2025 年发布，支持 safe/unsafe 混合 | 基于 Rust MIR 的精炼类型 |
 
-**关键洞察**：这些工具不是替代 Rust 编译器，而是**在其之上构建形式化塔楼**——编译器证明内存安全，Kani/Verus 证明功能正确性，TLA+/P 证明分布式协议一致性。
+**关键洞察**：这些工具不是替代 Rust 编译器，而是**在其之上构建形式化塔楼**——编译器证明内存安全（Memory Safety），Kani/Verus 证明功能正确性，TLA+/P 证明分布式协议一致性（Coherence）。
 
 ---
 
@@ -177,9 +177,9 @@ graph BT
 
 | **库/项目** | **Stars** | **形式化根基** | **可组合性** | **可观测性** |
 |:---|:---|:---|:---|:---|
-| **Firecracker** | 27k | AWS 微虚拟机；Rust 所有权保证设备模型内存安全；**形式化安全边界**通过 KVM 隔离实现 | 通过 API 组合配置；每个 MicroVM 是独立形式化单元 | 完整的 Metrics 与日志输出 |
-| **Wasmtime** | 13k | WebAssembly 的**形式化语义**（W3C 标准）；Rust 实现保证运行时与规范的一致性 | 组件模型（Component Model）支持跨语言组合 | 内置 Profiling 与性能分析 |
-| **TiKV** | 13.6k | 分布式 KV；**Raft 共识协议**有形式化规约；Rust 保证状态机实现无数据竞争 | 模块化存储引擎（RocksDB/Titan）；PD 调度独立组合 | Prometheus 指标 + Jaeger 追踪 |
+| **Firecracker** | 27k | AWS 微虚拟机；Rust 所有权（Ownership）保证设备模型内存安全；**形式化安全边界**通过 KVM 隔离实现 | 通过 API 组合配置；每个 MicroVM 是独立形式化单元 | 完整的 Metrics 与日志输出 |
+| **Wasmtime** | 13k | WebAssembly 的**形式化语义**（W3C 标准）；Rust 实现保证运行时与规范的一致性（Coherence） | 组件模型（Component Model）支持跨语言组合 | 内置 Profiling 与性能分析 |
+| **TiKV** | 13.6k | 分布式 KV；**Raft 共识协议**有形式化规约；Rust 保证状态机实现无数据竞争 | 模块（Module）化存储引擎（RocksDB/Titan）；PD 调度独立组合 | Prometheus 指标 + Jaeger 追踪 |
 
 ---
 
@@ -233,7 +233,7 @@ quadrantChart
 
 2026 年 5 月的 Rust 生态已呈现清晰的形式化层级：
 
-> **L0 编译器层**：所有权/生命周期/并发安全（已完成，所有库受益） [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
+> **L0 编译器层**：所有权/生命周期（Lifetimes）/并发安全（Concurrency Safety）（已完成，所有库受益） [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 > **L1 类型契约层**：Trait/Schema/接口（Serde/SQLx/Prost/Tonic 在此竞争）
 > **L2 架构组合层**：Tower/Axum 的 Service 态射复合（范畴论的工业实现）
 > **L3 可观测层**：Tracing/OpenTelemetry 的调用树形式化（Span 即节点）
@@ -249,7 +249,7 @@ quadrantChart
 |:---|:---|:---|
 | Tokio + Tower 构成范畴论骨架 | [Tower 文档] · [Tokio 博客] | ✅ |
 | Axum 162.3万 req/sec (TechEmpower R23) | [TechEmpower Benchmarks] | ✅ |
-| SQLx 编译期查询验证消除运行时 SQL 错误 | [SQLx 文档] · [Rust 类型系统] | ✅ |
+| SQLx 编译期查询验证消除运行时 SQL 错误 | [SQLx 文档] · [Rust 类型系统（Type System）] | ✅ |
 | Serde 是结构保持映射（Homomorphism） | [抽象代数 · 同态定义] | 💡 原创映射 |
 | Kani 模型检测覆盖并发路径 | [AWS Kani 论文] · [CBMC 文档] | ✅ |
 | Verus 用于微软/亚马逊内部系统验证 | [Verus 官方] · [Microsoft Research] | ✅ |
@@ -560,7 +560,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-Rust 的所有权、生命周期和 trait 系统需要专门的建模。C 的工具不理解这些语义，直接复用会丢失 Rust 的安全保证信息。
+Rust 的所有权、生命周期（Lifetimes）和 trait 系统需要专门的建模。C 的工具不理解这些语义，直接复用会丢失 Rust 的安全保证信息。
 </details>
 
 ---

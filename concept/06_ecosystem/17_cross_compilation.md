@@ -137,7 +137,7 @@ if cfg!(target_endian = "little") {
 }
 ```
 
-> **cfg 洞察**: `cfg` 是 Rust **零成本条件编译**的机制——不匹配的分支在编译期被完全消除，不产生任何运行时开销。
+> **cfg 洞察**: `cfg` 是 Rust **零成本条件编译**的机制——不匹配的分支在编译期被完全消除，不产生任何运行时（Runtime）开销。
 > [来源: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)]
 
 ---
@@ -356,7 +356,7 @@ graph TD
     style NATIVE fill:#fff3e0
 ```
 
-> **认知功能**: 交叉编译的决策很简单——**只在需要在其他平台上运行时配置**。
+> **认知功能**: 交叉编译的决策很简单——**只在需要在其他平台上运行时（Runtime）配置**。
 > [来源: [Rustup Cross-compilation](https://rust-lang.github.io/rustup//cross-compilation.html)]
 
 ---
@@ -519,7 +519,7 @@ fn main() {
 > **修正**:
 > Rust 的 `#[cfg]` 属性是条件编译的核心机制。`target_os`、`target_arch`、`target_family` 等条件控制代码的编译。
 > 交叉编译时（如从 x86_64 Linux 编译到 ARM Android），条件编译根据目标平台而非宿主平台过滤代码。
-> 这与 C 的 `#ifdef` 预处理器类似，但 Rust 的 `cfg` 更结构化——编译器在编译期验证条件，提供 `cfg!` 宏在运行期检查，支持复杂的布尔表达式（`all()`、`any()`、`not()`）。
+> 这与 C 的 `#ifdef` 预处理器类似，但 Rust 的 `cfg` 更结构化——编译器在编译期验证条件，提供 `cfg!` 宏（Macro）在运行期检查，支持复杂的布尔表达式（`all()`、`any()`、`not()`）。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.2 边界测试：`std` 与 `no_std` 的 API 差异（编译错误）
@@ -547,7 +547,7 @@ fn fixed() {
 > 嵌入式和内核开发使用 `#![no_std]` 禁用标准库（`std` 依赖操作系统）。
 > `no_std` 环境下，`Vec`、`String`、`Box` 等堆分配类型通过 `alloc` crate 提供；完全不分配的环境（如某些微控制器）连 `alloc` 也不可用。
 > 交叉编译时，目标平台可能不支持 `std`（如 `thumbv7em-none-eabihf`），编译器在编译期拒绝 `std` API 的使用。
-> 这与 C 的嵌入式开发（通常使用 libc 子集）类似，但 Rust 的 `no_std` 在类型系统层面强制执行，错误信息更精确。
+> 这与 C 的嵌入式开发（通常使用 libc 子集）类似，但 Rust 的 `no_std` 在类型系统（Type System）层面强制执行，错误信息更精确。
 > [来源: [The Rust Embedded Book](https://docs.rust-embedded.org/book/)]
 
 ### 10.3 边界测试：交叉编译的链接器缺失（编译错误）
@@ -583,7 +583,7 @@ fn main() {
 }
 ```
 
-> **修正**: `cfg` 条件编译根据目标平台选择代码，但若所有条件都不满足，函数不存在，调用点编译错误。安全模式：添加默认实现或 `_` 通配：`#[cfg(not(any(target_os = "linux", target_os = "macos")))] fn platform_specific() -> &'static str { "other" }`。或使用 `cfg!` 宏在运行时检查：`if cfg!(target_os = "linux") { ... } else { ... }`。交叉编译时的常见陷阱：1) 开发在 Linux 上，忘记 Windows 路径；2) `target_family = "unix"` 和 `target_family = "windows"` 的互斥性；3) `target_arch` 的嵌套（`target_arch = "x86_64"` 下还有 `target_feature = "sse2"`）。这与 C 的 `#ifdef _WIN32`（预处理器，相同模式）或 Go 的 `//go:build`（构建约束，类似 `cfg`）类似——跨平台代码的 `cfg` 覆盖是质量保证的关键。[来源: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> **修正**: `cfg` 条件编译根据目标平台选择代码，但若所有条件都不满足，函数不存在，调用点编译错误。安全模式：添加默认实现或 `_` 通配：`#[cfg(not(any(target_os = "linux", target_os = "macos")))] fn platform_specific() -> &'static str { "other" }`。或使用 `cfg!` 宏（Macro）在运行时检查：`if cfg!(target_os = "linux") { ... } else { ... }`。交叉编译时的常见陷阱：1) 开发在 Linux 上，忘记 Windows 路径；2) `target_family = "unix"` 和 `target_family = "windows"` 的互斥性；3) `target_arch` 的嵌套（`target_arch = "x86_64"` 下还有 `target_feature = "sse2"`）。这与 C 的 `#ifdef _WIN32`（预处理器，相同模式）或 Go 的 `//go:build`（构建约束，类似 `cfg`）类似——跨平台代码的 `cfg` 覆盖是质量保证的关键。[来源: [Rust Reference — Conditional Compilation](LINK_PLACEHOLDER)] · [来源: [The Rust Programming Language](LINK_PLACEHOLDER)]
 > **过渡**: 交叉编译：多目标平台支持与条件编译 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 
 ### 补充定理链

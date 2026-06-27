@@ -9,7 +9,7 @@
 > **内容分级**: [实验级]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
-> **双维定位**: S×Ana — 分析运行时别名验证机制
+> **双维定位**: S×Ana — 分析运行时（Runtime）别名验证机制
 >
 > **跟踪版本**: nightly 1.98.0
 > **状态**: 🧪 Nightly 实验性 | **Rust Project Goals 2026 重点目标**（取代 "Emit Retags in Codegen"）
@@ -72,7 +72,7 @@ Rust 内存安全验证工具谱系:
 
 ### 2.1 核心设计哲学
 
-BSan 基于 **Emit Retags in Codegen** 的演进，但采用完全不同的运行时策略：
+BSan 基于 **Emit Retags in Codegen** 的演进，但采用完全不同的运行时（Runtime）策略：
 
 ```text
 传统 Miri 策略:           BSan 策略 (2026-04 更新):
@@ -246,7 +246,7 @@ Safety Tags (RFC #3842)        BorrowSanitizer
 <details>
 <summary>✅ 答案与解析</summary>
 
-Miri 是解释器，检测广泛的 UB（越界、未对齐、数据竞争）。BorrowSanitizer 是运行时 sanitizer，专注于借用规则违规，速度更快，适合 CI。
+Miri 是解释器，检测广泛的 UB（越界、未对齐、数据竞争）。BorrowSanitizer 是运行时 sanitizer，专注于借用（Borrowing）规则违规，速度更快，适合 CI。
 </details>
 
 ---
@@ -258,14 +258,14 @@ Miri 是解释器，检测广泛的 UB（越界、未对齐、数据竞争）。
 <details>
 <summary>✅ 答案与解析</summary>
 
-基于 LLVM 的 sanitizer 框架，编译时插入检查代码，运行时通过 shadow memory 追踪引用状态，检测悬垂引用和非法别名。
+基于 LLVM 的 sanitizer 框架，编译时插入检查代码，运行时通过 shadow memory 追踪引用（Reference）状态，检测悬垂引用和非法别名。
 </details>
 
 ---
 
 ### 测验 3：为什么需要 BorrowSanitizer 而不是仅依赖编译器借用检查？（理解层）
 
-**题目**: 为什么需要 BorrowSanitizer 而不是仅依赖编译器借用检查？
+**题目**: 为什么需要 BorrowSanitizer 而不是仅依赖编译器借用（Borrowing）检查？
 
 <details>
 <summary>✅ 答案与解析</summary>

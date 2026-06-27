@@ -7,16 +7,16 @@
 # Lifetimes（生命周期）
 >
 > **EN**: Lifetimes
-> **Summary**: Lifetimes. Compile-time scope tracking ensuring references never outlive their referents. Covers lifetime elision, explicit annotations, subtyping, and advanced patterns like Higher-Ranked Trait Bounds (HRTB).
+> **Summary**: Lifetimes are compile-time annotations that track how long references remain valid, ensuring borrowed data outlives every reference to it. The chapter explains lifetime elision rules, explicit lifetime parameters, subtyping relationships, and advanced forms such as Higher-Ranked Trait Bounds, showing how Rust proves reference safety statically.
 >
-> **📎 交叉引用**
+> **📎 交叉引用（Reference）**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[生命周期](../../knowledge/01_fundamentals/03_lifetimes.md)
+> 本主题在 knowledge 中有系统化的知识索引：[生命周期（Lifetimes）](LINK_PLACEHOLDER)
 >
 > **受众**: [初学者]
 > **层级**: L1 基础概念
 > **A/S/P 标记**: **S+A** — Structure + Application
-> **双维定位**: C×App — 在复杂场景下正确标注生命周期
+> **双维定位**: C×App — 在复杂场景下正确标注生命周期（Lifetimes）
 > **前置概念**: [Ownership](./01_ownership.md) · [Borrowing](./02_borrowing.md)
 > **后置概念**: [Advanced Generics](../02_intermediate/02_generics.md) · [Async/Await](../03_advanced/02_async.md) · [Pin](../03_advanced/02_async.md)
 > **主要来源**: [TRPL: Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) · [Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region_based_memory_management) · [Rust Reference: Lifetime elision](https://doc.rust-lang.org/reference/lifetime-elision.html) · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch10-03-lifetime-syntax.html)
@@ -50,10 +50,10 @@
   - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attribute-matrix)
     - [2.1 生命周期标注矩阵](#21-生命周期标注矩阵)
     - [2.2 生命周期关系矩阵](#22-生命周期关系矩阵)
-    - [2.3 生命周期省略规则（Elision Rules）](#23-生命周期省略规则elision-rules)
+    - [2.3 生命周期省略（Lifetime Elision）规则（Elision Rules）](LINK_PLACEHOLDER)
   - [三、思维导图（Mind Map）](#三思维导图mind-map)
   - [四、定理推理链（Theorem Chain）](#四定理推理链theorem-chain)
-    - [4.1 引理：引用不能比数据活得更久 ⟹ 悬垂指针在编译期被消除](#41-引理引用不能比数据活得更久--悬垂指针在编译期被消除)
+    - [4.1 引理：引用（Reference）不能比数据活得更久 ⟹ 悬垂指针在编译期被消除](LINK_PLACEHOLDER)
     - [4.2 引理：生命周期构成偏序集 ⟹ outlives 关系可传递](#42-引理生命周期构成偏序集--outlives-关系可传递)
     - [4.3 定理：函数签名中的生命周期省略规则 ⟹ Elision 的完备性](#43-定理函数签名中的生命周期省略规则--elision-的完备性)
     - [4.4 定理：NLL 流敏感安全 ⟹ 比词法作用域更精确的存活期](#44-定理nll-流敏感安全--比词法作用域更精确的存活期)
@@ -61,30 +61,30 @@
     - [4.6 推论：'static 生命周期 ⟹ 全局/泄漏数据的安全性](#46-推论static-生命周期--全局泄漏数据的安全性)
     - [4.7 推论：HRTB 全称量化 ⟹ 高阶回调的类型安全](#47-推论hrtb-全称量化--高阶回调的类型安全)
     - [4.8 推论：GATs + where Self: 'a ⟹ 自引用集合的表达能力](#48-推论gats--where-self-a--自引用集合的表达能力)
-    - [4.9 定理一致性矩阵](#49-定理一致性矩阵)
+    - [4.9 定理一致性（Coherence）矩阵](LINK_PLACEHOLDER)
   - [五、示例与反例（Examples \& Counter-examples）](#五示例与反例examples--counter-examples)
     - [5.1 正确示例：显式生命周期标注](#51-正确示例显式生命周期标注)
-    - [5.2 正确示例：结构体中的生命周期](#52-正确示例结构体中的生命周期)
+    - [5.2 正确示例：结构体（Struct）中的生命周期](LINK_PLACEHOLDER)
     - [5.3 反例：返回局部引用（E0106 / E0716）](#53-反例返回局部引用e0106--e0716)
     - [5.4 反例：生命周期不匹配（E0597）](#54-反例生命周期不匹配e0597)
-    - [5.5 边界示例：NLL 减少借用冲突](#55-边界示例nll-减少借用冲突)
+    - [5.5 边界示例：NLL 减少借用（Borrowing）冲突](LINK_PLACEHOLDER)
   - [六、反命题与边界分析（Inverse Propositions \& Boundary Analysis）](#六反命题与边界分析inverse-propositions--boundary-analysis)
     - [6.1 命题: "生命周期约束保证无悬垂指针"](#61-命题-生命周期约束保证无悬垂指针)
     - [6.2 命题: "生命周期标注总是必要的"](#62-命题-生命周期标注总是必要的)
     - [6.3 命题: "'static 意味着永远存活"](#63-命题-static-意味着永远存活)
   - [七、边界极限测试代码（Boundary Stress Tests）](#七边界极限测试代码boundary-stress-tests)
     - [7.1 边界：生命周期偏序的传递链](#71-边界生命周期偏序的传递链)
-    - [7.2 边界：HRTB 与闭包生命周期的极限](#72-边界hrtb-与闭包生命周期的极限)
+    - [7.2 边界：HRTB 与闭包（Closures）生命周期的极限](LINK_PLACEHOLDER)
     - [7.3 边界：'static 的构造与协变收窄](#73-边界static-的构造与协变收窄)
   - [八、边界测试：生命周期规则的编译错误](#八边界测试生命周期规则的编译错误)
     - [8.1 边界测试：生命周期标注缺失（编译错误）](#81-边界测试生命周期标注缺失编译错误)
     - [8.2 边界测试：生命周期过短（编译错误）](#82-边界测试生命周期过短编译错误)
     - [8.4 边界测试：生命周期在闭包中的捕获（编译错误）](#84-边界测试生命周期在闭包中的捕获编译错误)
     - [8.5 边界测试：方法签名中 self 引用的生命周期省略冲突（编译错误）](#85-边界测试方法签名中-self-引用的生命周期省略冲突编译错误)
-    - [8.3 边界测试：生命周期与泛型冲突（编译错误）](#83-边界测试生命周期与泛型冲突编译错误)
+    - [8.3 边界测试：生命周期与泛型（Generics）冲突（编译错误）](LINK_PLACEHOLDER)
     - [8.4 边界测试：`'static` 误用（编译错误）](#84-边界测试static-误用编译错误)
     - [8.5 边界测试：生命周期省略规则在复杂签名中失效（编译错误）](#85-边界测试生命周期省略规则在复杂签名中失效编译错误)
-    - [8.6 边界测试：生命周期与所有权转移的交互（编译错误）](#86-边界测试生命周期与所有权转移的交互编译错误)
+    - [8.6 边界测试：生命周期与所有权（Ownership）转移的交互（编译错误）](LINK_PLACEHOLDER)
   - [九、认知路径（Cognitive Path）](#九认知路径cognitive-path)
     - [10.5 边界测试：生命周期省略规则的三条规则（编译错误）](#105-边界测试生命周期省略规则的三条规则编译错误)
     - [10.6 边界测试：静态生命周期 `'static` 的滥用与字符串字面量（编译错误）](#106-边界测试静态生命周期-static-的滥用与字符串字面量编译错误)
@@ -120,7 +120,7 @@
 
 > **[Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region_based_memory_management)** Rust uses a system of lifetimes that can be understood as **region types** (Tofte & Talpin, 1994) adapted for an imperative, non-GC language. Each reference `&'a T` is parameterized by a lifetime `'a` representing the region during which the reference is guaranteed to be valid.
 
-> **过渡**: 权威定义从学术和官方来源确立了生命周期的语义——引用有效期的编译期保证。而概念属性矩阵则将这些语义转化为可操作的规则对比——`'a` 标注的不同形式、生命周期关系的推导规则、以及它们与所有权、借用系统的交互约束。
+> **过渡**: 权威定义从学术和官方来源确立了生命周期的语义——引用有效期的编译期保证。而概念属性矩阵则将这些语义转化为可操作的规则对比——`'a` 标注的不同形式、生命周期关系的推导规则、以及它们与所有权（Ownership）、借用（Borrowing）系统的交互约束。
 
 ### 1.3b Tofte-Talpin 区域推断算法的 Rust 适配
 
@@ -246,9 +246,9 @@ Polonius 的改进:
 
 | **标注形式** | **含义** | **使用场景** | **省略规则（Elision）** |
 |:---|:---|:---|:---|
-| `&'a T` | 引用存活至少 `'a` | 函数返回引用、结构体含引用 | Rule 2/3 可省 |
-| `&'a mut T` | 可变引用存活至少 `'a` | 同上，可变版本 | Rule 2/3 可省 |
-| `T: 'a` | 类型 `T` 中所有引用存活至少 `'a` | 泛型约束 | 不可省 |
+| `&'a T` | 引用存活至少 `'a` | 函数返回引用、结构体（Struct）含引用 | Rule 2/3 可省 |
+| `&'a mut T` | 可变引用（Mutable Reference）存活至少 `'a` | 同上，可变版本 | Rule 2/3 可省 |
+| `T: 'a` | 类型 `T` 中所有引用存活至少 `'a` | 泛型（Generics）约束 | 不可省 |
 | `fn foo<'a>(x: &'a T)` | 显式声明生命周期参数 | 函数含多个引用参数 | 3 条 elision 规则 |
 | `'static` | 全局生命周期（程序整个运行期） | 字符串字面量、全局常量、泄漏数据 | 永不省略 |
 
@@ -273,7 +273,7 @@ Polonius 的改进:
 
 ---
 
-> **过渡**: 属性矩阵展示了生命周期规则的静态特征，接下来需要建立概念之间的关联网络——生命周期如何与借用、泛型（Generics）、异步等机制交织，形成完整的引用安全体系。
+> **过渡**: 属性矩阵展示了生命周期规则的静态特征，接下来需要建立概念之间的关联网络——生命周期如何与借用、泛型（Generics）、异步（Async）等机制交织，形成完整的引用安全体系。
 
 ## 三、思维导图（Mind Map）
 
@@ -309,7 +309,7 @@ graph TD
     F --> F3[HRTB: for<'a> 高阶]
 ```
 
-> **认知功能**: 此思维导图将生命周期知识组织为「标注—推断—约束—检查—特殊形式」五维结构。生命周期的学习难点在于「何时需要标注、何时可以省略、为什么编译器报错」，此图通过 B（显式）与 C（隐式）的对照，帮助读者理解编译器的「推断边界」——Elision 覆盖 90% 场景，复杂场景需显式标注。F 分支的 HRTB 和 'static 是高阶用法的入口，提醒读者生命周期不仅是「语法标注」，更是「类型系统的参数化扩展」。 [来源: 💡 原创分析]
+> **认知功能**: 此思维导图将生命周期知识组织为「标注—推断—约束—检查—特殊形式」五维结构。生命周期的学习难点在于「何时需要标注、何时可以省略、为什么编译器报错」，此图通过 B（显式）与 C（隐式）的对照，帮助读者理解编译器的「推断边界」——Elision 覆盖 90% 场景，复杂场景需显式标注。F 分支的 HRTB 和 'static 是高阶用法的入口，提醒读者生命周期不仅是「语法标注」，更是「类型系统（Type System）的参数化扩展」。 [来源: 💡 原创分析]
 > [来源: [TRPL — Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
 
 ---
@@ -414,7 +414,7 @@ graph BT
   ⟹ 长生命周期引用可安全替代短生命周期引用，无悬垂风险
 ```
 
-> **[来源: [Rust Reference: Variance](https://doc.rust-lang.org/reference/subtyping.html#variance)]** 生命周期协变/逆变/不变的类型系统规则基于子类型理论。✅
+> **[来源: [Rust Reference: Variance](LINK_PLACEHOLDER)]** 生命周期协变/逆变/不变的类型系统（Type System）规则基于子类型理论。✅
 
 ### 4.6 推论：'static 生命周期 ⟹ 全局/泄漏数据的安全性
 
@@ -471,7 +471,7 @@ graph BT
 | C2: HRTB 全称量化 | T1 + L2 | 高阶回调接受任意生命周期 | 全称量词 (∀) | — | 过度约束（仅接受 'static） | — |
 | C3: GATs 生命周期自洽 | L1 + T3 | 自引用集合安全表达 | 关联类型 + 区域约束 | — | 缺少 where Self: 'a | E0309 |
 
-> **一致性检查**: L1 ⟹ L2 ⟹ T1/T2/T3 ⟹ C1/C2/C3，形成**从基础约束到高阶抽象**的递进链。T2 在宽松方向扩展合法程序，T3 在严格方向保证替换安全。
+> **一致性（Coherence）检查**: L1 ⟹ L2 ⟹ T1/T2/T3 ⟹ C1/C2/C3，形成**从基础约束到高阶抽象**的递进链。T2 在宽松方向扩展合法程序，T3 在严格方向保证替换安全。
 >
 > **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.2 "类型系统一致性"
 
@@ -479,7 +479,7 @@ graph BT
 
 ## 五、示例与反例（Examples & Counter-examples）
 
-定理链条的正确性需要通过代码实例来验证。以下示例覆盖正确用法、编译期反例与运行时边界。
+定理链条的正确性需要通过代码实例来验证。以下示例覆盖正确用法、编译期反例与运行时（Runtime）边界。
 
 ### 5.1 正确示例：显式生命周期标注
 
@@ -674,7 +674,7 @@ graph TD
     style F2 fill:#f66
 ```
 
-> **认知功能**: 此图解构了 'static 的**多重身份**。四种合法来源（字符串字面量、全局常量、Box::leak、LazyLock）本质不同——有的来自静态数据段，有的来自故意泄漏，有的来自延迟初始化——但类型系统将它们统一为 'static。关键认知：'static 不是「存储位置」的约束，而是「存活时间」的约束。两个反例展示了试图「伪造」'static 的后果：编译期拦截（局部变量）或运行时 UB（unsafe 伪造）。这帮助读者理解 'static 的语义本质：它是「时间」的 ⊤，而非「空间」的全局。 [来源: 💡 原创分析]
+> **认知功能**: 此图解构了 'static 的**多重身份**。四种合法来源（字符串字面量、全局常量、Box::leak、LazyLock）本质不同——有的来自静态数据段，有的来自故意泄漏，有的来自延迟初始化——但类型系统将它们统一为 'static。关键认知：'static 不是「存储位置」的约束，而是「存活时间」的约束。两个反例展示了试图「伪造」'static 的后果：编译期拦截（局部变量）或运行时（Runtime） UB（unsafe 伪造）。这帮助读者理解 'static 的语义本质：它是「时间」的 ⊤，而非「空间」的全局。 [来源: 💡 原创分析]
 
 ---
 
@@ -816,7 +816,7 @@ fn main() {
 }
 ```
 
-> **修正**: 闭包捕获引用时，被引用数据的生命周期必须覆盖闭包的整个使用范围。如需在闭包外使用，使用 `move` 闭包转移所有权。
+> **修正**: 闭包（Closures）捕获引用时，被引用数据的生命周期必须覆盖闭包的整个使用范围。如需在闭包外使用，使用 `move` 闭包转移所有权。
 
 ### 8.5 边界测试：方法签名中 self 引用的生命周期省略冲突（编译错误）
 
@@ -892,7 +892,7 @@ fn complex_lifetime_fixed<'a, 'b>(a: &'a str, b: &'b str, _c: &str) -> (&'a str,
 
 > **修正**:
 >
-> 生命周期省略规则仅适用于简单情况（单输入引用 → 单输出引用）。
+> 生命周期省略（Lifetime Elision）规则仅适用于简单情况（单输入引用 → 单输出引用）。
 > 当函数签名涉及多个输入引用和多个输出引用时，编译器无法自动推断生命周期关系，必须显式标注。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
@@ -920,7 +920,7 @@ fn fixed() {
 
 > **修正**:
 >
-> Rust 的所有权转移（move）与借用是互斥的。若变量已被借用（无论是共享借用 `&T` 还是可变借用 `&mut T`），在借用释放前不能转移其所有权。
+> Rust 的所有权转移（move）与借用是互斥的。若变量已被借用（无论是共享借用 `&T` 还是可变借用（Mutable Borrow） `&mut T`），在借用释放前不能转移其所有权。
 > 这与 C++ 的移动语义不同——C++ 允许从被引用对象移动（可能导致悬垂引用），而 Rust 在编译期阻止这种危险模式。
 > 此外，Rust 禁止读取未初始化变量（uninitialized），`let x: i32;` 声明后若未赋值就使用，编译器报错。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
@@ -951,7 +951,7 @@ fn main() {
 
 > **修正**:
 >
-> 生命周期**省略规则**（lifetime elision）的三条规则：
+> 生命周期（Lifetimes）**省略规则**（lifetime elision）的三条规则：
 >
 > 1) 每个引用参数获得独立生命周期参数；
 > 2) 若只有一个输入生命周期，它赋给所有输出生命周期；
@@ -1167,7 +1167,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 | 1 | ✅ | `'static` 表示数据在程序整个生命周期内有效 |
 | 2 | ✅ | 字符串字面量编译期嵌入二进制，是 `'static` |
 | 3 | ❌ | `'static` 引用可能被 drop，只是数据本身不释放（如 `Box::leak`）|
-| 4 | ✅ | `Box::leak(boxed)` 将堆内存泄漏为 `'static` 引用 |
+| 4 | ✅ | `Box::leak(boxed)` 将堆内存泄漏为 `'static` 引用（Reference） |
 
 > 常见误区：`'static` ≠ "永远不被 drop"。`let s: &'static str = "hi"` 中变量 `s` 本身有作用域，只是它指向的数据是静态的。
 
@@ -1348,7 +1348,7 @@ fn dangle() -> &String {
 
 **A. `s` 在函数返回后被 drop，返回悬垂引用**。
 
-`s` 是函数局部变量，在函数作用域结束时被 drop。返回 `&s` 会创建一个指向已释放内存的引用，违反 Rust 内存安全保证。
+`s` 是函数局部变量，在函数作用域结束时被 drop。返回 `&s` 会创建一个指向已释放内存的引用，违反 Rust 内存安全（Memory Safety）保证。
 
 **修复**: 直接返回 `String`（转移所有权），或使用 `'static` 生命周期（仅适用于编译期常量）。
 </details>
@@ -1400,7 +1400,7 @@ z.push_str(" world");
 
 - A. 所有版本都能编译：NLL 允许非词法生命周期
 - B. 仅 Polonius+ 能编译：需要数据流敏感分析
-- C. 所有版本都失败：不可变和可变借用不能共存
+- C. 所有版本都失败：不可变和可变借用（Mutable Borrow）不能共存
 
 <details>
 <summary>✅ 答案</summary>
@@ -1409,7 +1409,7 @@ z.push_str(" world");
 
 Rust 1.31 引入的 **Non-Lexical Lifetimes (NLL)** 使借用的有效期基于**最后一次使用**而非词法作用域：
 
-1. `y = &x` 创建不可变借用
+1. `y = &x` 创建不可变借用（Immutable Borrow）
 2. `println!("{}", y)` 是 `y` 的最后一次使用，`y` 在此处失效
 3. `z = &mut x` 创建新的可变借用，与已失效的 `y` 不冲突
 

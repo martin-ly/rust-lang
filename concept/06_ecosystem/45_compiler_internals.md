@@ -22,18 +22,18 @@
   - [二、概念属性矩阵](#二概念属性矩阵)
   - [三、前端：解析与 AST](#三前端解析与-ast)
     - [3.1 词法与语法分析](#31-词法与语法分析)
-    - [3.2 宏展开](#32-宏展开)
+    - [3.2 宏（Macro）展开](LINK_PLACEHOLDER)
   - [四、HIR：高级中间表示](#四hir高级中间表示)
     - [4.1 HIR 的设计目标](#41-hir-的设计目标)
     - [4.2 类型检查](#42-类型检查)
-  - [五、类型系统实现](#五类型系统实现)
+  - [五、类型系统（Type System）实现](LINK_PLACEHOLDER)
     - [5.1 Trait 解析与 Chalk](#51-trait-解析与-chalk)
-    - [5.2 类型推断](#52-类型推断)
+    - [5.2 类型推断（Type Inference）](LINK_PLACEHOLDER)
   - [六、MIR：中级中间表示](#六mir中级中间表示)
     - [6.1 MIR 的结构](#61-mir-的结构)
     - [6.2 MIR 优化](#62-mir-优化)
     - [6.3 常量求值（MIRI / Const Eval）](#63-常量求值miri--const-eval)
-  - [七、借用检查器](#七借用检查器)
+  - [七、借用（Borrowing）检查器](LINK_PLACEHOLDER)
     - [7.1 NLL（Non-Lexical Lifetimes）](#71-nllnon-lexical-lifetimes)
     - [7.2 Polonius：基于逻辑的借用检查](#72-polonius基于逻辑的借用检查)
     - [7.3 别名模型：Tree Borrows](#73-别名模型tree-borrows)
@@ -46,8 +46,8 @@
     - [10.2 边界极限](#102-边界极限)
   - [十一、边界测试](#十一边界测试)
     - [11.1 边界测试：递归宏展开导致栈溢出（编译错误）](#111-边界测试递归宏展开导致栈溢出编译错误)
-    - [11.2 边界测试：泛型单态化导致二进制膨胀（编译/链接错误）](#112-边界测试泛型单态化导致二进制膨胀编译链接错误)
-    - [11.3 边界测试：unsafe 代码在 Miri 中触发 UB（运行时错误）](#113-边界测试unsafe-代码在-miri-中触发-ub运行时错误)
+    - [11.2 边界测试：泛型（Generics）单态化（Monomorphization）导致二进制膨胀（编译/链接错误）](LINK_PLACEHOLDER)
+    - [11.3 边界测试：unsafe 代码在 Miri 中触发 UB（运行时（Runtime）错误）](LINK_PLACEHOLDER)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -63,8 +63,9 @@
 > **Bloom 层级**: 分析 → 评价
 **变更日志**:
 
-- v1.0 (2026-05-25): 初始创建——rustc 编译管线、HIR/MIR、类型系统实现、借用检查器（NLL/Polonius/Tree Borrows）、LLVM 后端、查询系统
+- v1.0 (2026-05-25): 初始创建——rustc 编译管线、HIR/MIR、类型系统（Type System）实现、借用（Borrowing）检查器（NLL/Polonius/Tree Borrows）、LLVM 后端、查询系统
 
+> **前置概念**: N/A
 ---
 
 ## 一、权威定义（Definition）
@@ -143,9 +144,9 @@ Phase 6 — 代码生成
 |:---|:---|:---|:---|:---|
 | 词法分析 | `.rs` 源码 | `TokenStream` | `rustc_lexer` | Unicode 识别、注释剥离 |
 | 语法分析 | `TokenStream` | `AST` | `rustc_parse` | 递归下降解析、错误恢复 |
-| 宏展开 | `AST` | 展开后的 `AST` | `rustc_expand` | 声明宏/过程宏求值 |
+| 宏展开 | `AST` | 展开后的 `AST` | `rustc_expand` | 声明宏（Declarative Macro）/过程宏（Procedural Macro）求值 |
 | HIR 构建 | `AST` | `HIR` | `rustc_hir` | 去语法糖、名称解析 |
-| 类型检查 | `HIR` | 类型化 `HIR` | `rustc_typeck` | Trait 解析、类型推断 |
+| 类型检查 | `HIR` | 类型化 `HIR` | `rustc_typeck` | Trait 解析、类型推断（Type Inference） |
 | MIR 构建 | `HIR` | `MIR` | `rustc_mir_build` | 控制流图、基本块 |
 | 借用检查 | `MIR` | 验证后的 `MIR` | `rustc_borrowck` | NLL/Polonius/Tree Borrows |
 | 代码生成 | `MIR` | `LLVM IR` | `rustc_codegen_llvm` | LLVM 优化、目标代码生成 |
@@ -160,11 +161,11 @@ Phase 6 — 代码生成
 |:---|:---|:---|:---|:---|
 | **前端语言** | Rust | C/C++/Fortran... | C/C++/Obj-C | IR（任何前端）|
 | **中间表示** | HIR → MIR | GIMPLE | AST → LLVM IR | CLIF |
-| **类型系统** | 强类型 + Trait | C 弱类型 / C++ 模板 | C++ 模板 | 无（前端负责）|
+| **类型系统（Type System）** | 强类型 + Trait | C 弱类型 / C++ 模板 | C++ 模板 | 无（前端负责）|
 | **借用检查** | ✅ NLL/Polonius | ❌ 手动 | ❌ 手动 | ❌ |
 | **增量编译** | ✅ 查询系统 | ⚠️ PCH | ⚠️ Modules | ❌ |
 | **后端** | LLVM / Cranelift | RTL | LLVM | 自研 |
-| **宏系统** | 声明 + 过程宏 | C 预处理器 | 预处理器 | 无 |
+| **宏系统** | 声明 + 过程宏（Procedural Macro） | C 预处理器 | 预处理器 | 无 |
 | **编译速度** | 中（优化后慢）| 快 | 中 | 快 |
 
 > **来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [LLVM](https://llvm.org/docs/) · [Cranelift](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/ir.md)
@@ -203,7 +204,7 @@ pub enum ExprKind {
 ### 3.2 宏展开
 >
 
-宏在 **AST 层级**展开，而非文本替换（与 C 预处理器不同）。
+宏（Macro）在 **AST 层级**展开，而非文本替换（与 C 预处理器不同）。
 
 ```text
 宏展开顺序:
@@ -258,9 +259,9 @@ for i in 0..10 { println!("{}", i); }
 
 类型检查在 HIR 上进行，核心组件：
 
-- **类型推断**: Hindley-Milner 风格的约束求解（但 Rust 比 HM 更复杂，因为有子类型、Trait）
+- **类型推断（Type Inference）**: Hindley-Milner 风格的约束求解（但 Rust 比 HM 更复杂，因为有子类型、Trait）
 - **Trait 解析**: 判断 `impl Trait for Type` 是否满足某个 bound
-- **方法解析**: 根据参数类型选择正确的方法实现（包括自动解引用 `Deref`）
+- **方法解析**: 根据参数类型选择正确的方法实现（包括自动解引用（Reference） `Deref`）
 
 ```rust,ignore
 // 类型推断的简化示例
@@ -460,7 +461,7 @@ MIRI（MIR Interpreter）:
 ### 7.1 NLL（Non-Lexical Lifetimes）
 >
 
-> **[Niko Matsakis — Rust Blog](https://smallcultfollowing.com/babysteps/blog/2016/04/27/non-lexical-lifetimes-introduction/)** NLL 是 Rust 2018 Edition 引入的借用检查改进，核心洞察：**引用的有效性应基于实际使用位置，而非词法作用域**。
+> **[Niko Matsakis — Rust Blog](LINK_PLACEHOLDER)** NLL 是 Rust 2018 Edition 引入的借用检查改进，核心洞察：**引用（Reference）的有效性应基于实际使用位置，而非词法作用域**。
 
 ```text
 NLL 之前的词法生命周期:
@@ -660,7 +661,7 @@ rustc 查询系统的核心设计:
 | **边界** | **现状** | **理论极限** | **工程影响** |
 |:---|:---|:---|:---|
 | **编译时间** | 中项目 10-60s | LLVM 优化是下限 | Cranelift 后端可加速 debug 构建 |
-| **单态化膨胀** | 典型 2-5x | 无上限 | 动态分发（dyn Trait）替代 |
+| **单态化（Monomorphization）膨胀** | 典型 2-5x | 无上限 | 动态分发（dyn Trait）替代 |
 | **增量编译粒度** | 查询级 | 语句级（理论上）| 磁盘 I/O 开销 |
 | **借用检查精度** | NLL / Polonius Alpha | 完整流敏感分析 | 编译时间指数增长 |
 | **常量求值深度** | 有限（循环/递归限制）| 停机问题不可判定 | 超时保护 |
@@ -703,13 +704,13 @@ process::<Vec<u8>>(vec); // 生成 process_Vec_u8
 // 若有 100 个不同类型调用 → 100 份代码 → 二进制巨大
 ```
 
-> **修正**: 使用 `dyn Trait` 动态分发替代泛型：
+> **修正**: 使用 `dyn Trait` 动态分发替代泛型（Generics）：
 >
 > ```rust
 > fn process(items: Vec<Box<dyn Debug>>) { /* 单份代码 */ }
 > ```
 >
-> 权衡: 泛型 = 零成本 + 代码膨胀；动态分发 = 运行时开销 + 代码紧凑。
+> 权衡: 泛型（Generics） = 零成本 + 代码膨胀；动态分发 = 运行时（Runtime）开销 + 代码紧凑。
 > [来源: [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html)]
 
 ### 11.3 边界测试：unsafe 代码在 Miri 中触发 UB（运行时错误）
@@ -741,8 +742,8 @@ fn undefined_behavior() {
 ## 相关概念文件
 
 - [类型系统](../01_foundation/04_type_system.md) — 类型论基础
-- [泛型](../02_intermediate/02_generics.md) — 单态化、Trait bound
-- [生命周期](../01_foundation/03_lifetimes.md) — 借用规则、NLL
+- [泛型](../02_intermediate/02_generics.md) — 单态化（Monomorphization）、Trait bound
+- [生命周期（Lifetimes）](LINK_PLACEHOLDER) — 借用规则、NLL
 - [Trait](../02_intermediate/01_traits.md) — 多态、Trait 解析
 - [Async/Await](../03_advanced/02_async.md) — 状态机转换、MIR 生成
 - [宏系统](../03_advanced/07_proc_macro.md) — 宏展开、 hygiene

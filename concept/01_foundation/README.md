@@ -5,7 +5,7 @@
 > **受众**: [初学者]
 > **定位**：Rust 最核心的基础性概念，是所有进阶内容的**必要前提**。本层内容对齐 TRPL 第 3-10 章、Wikipedia 核心词条、Stanford/CMU 基础课程。
 > **Bloom 层级**: 记忆 → 理解
-> **对应 L4 形式化**: 线性逻辑 ⊗ · 分离逻辑 · 区域类型系统 · 代数类型论
+> **对应 L4 形式化**: 线性逻辑 ⊗ · 分离逻辑 · 区域类型系统（Type System） · 代数类型论
 > **来源: [TRPL Ch3](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)** ·
 > **来源: [Wikipedia - Ownership (programming)](https://en.wikipedia.org/wiki/Ownership_(programming))** ·
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)** ·
@@ -13,6 +13,8 @@
 > **本节关键术语**: 基础概念 (Foundation) · 所有权 (Ownership) · 借用 (Borrowing) · 生命周期 (Lifetime) · 类型系统 (Type System) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 ## 📑 目录
@@ -27,7 +29,7 @@
     - [补充文件索引](#补充文件索引)
   - [三、课程对齐路径](#三课程对齐路径)
   - [四、形式化层级定位（理论-模型-实践）](#四形式化层级定位理论-模型-实践)
-  - [五、本层定理一致性概览](#五本层定理一致性概览)
+  - [五、本层定理一致性（Coherence）概览](LINK_PLACEHOLDER)
   - [六、认知路径（从直觉到形式化）](#六认知路径从直觉到形式化)
   - [七、待创建内容](#七待创建内容)
   - [八、跨层出口](#八跨层出口)
@@ -63,7 +65,7 @@ mindmap
       Trait对象[impl Trait / dyn Trait]
 ```
 
-> **认知功能**: 本 mindmap 是 L1 层的**放射式认知入口**。放射式结构（中心向外扩散）适合展示「一个核心主题的多维分解」。四个分支对应 Rust 内存安全的「四根支柱」，每根支柱下的子节点是读者需要掌握的「最小核心概念集」。建议用法：新读者将此图作为「学习进度追踪器」——掌握一个子节点后标记完成，全部标记后再进入 L2。四根支柱的依赖关系是：所有权（Ownership） → 借用（Borrowing） → 生命周期（Lifetimes）（递进），类型系统贯穿始终（横向支撑）。 [来源: 💡 原创分析]
+> **认知功能**: 本 mindmap 是 L1 层的**放射式认知入口**。放射式结构（中心向外扩散）适合展示「一个核心主题的多维分解」。四个分支对应 Rust 内存安全（Memory Safety）的「四根支柱」，每根支柱下的子节点是读者需要掌握的「最小核心概念集」。建议用法：新读者将此图作为「学习进度追踪器」——掌握一个子节点后标记完成，全部标记后再进入 L2。四根支柱的依赖关系是：所有权（Ownership） → 借用（Borrowing） → 生命周期（Lifetimes）（递进），类型系统（Type System）贯穿始终（横向支撑）。 [来源: 💡 原创分析]
 
 > **认知路径**:
 
@@ -114,13 +116,13 @@ graph TB
     style TS fill:#ff9,stroke:#333
 ```
 
-> **认知功能**: 此图是 L1 层的**概念关系拓扑图**，展示四概念之间的「递进依赖」与「循环强化」双重结构。==> 实线箭头表示严格的学习依赖顺序（所有权 → 借用 → 生命周期），-.-> 虚线箭头表示概念间的反馈循环（类型系统影响所有权语义，生命周期验证借用）。四种颜色编码帮助快速区分概念域。关键认知：L1 不是四个孤立文件的集合，而是一个**有机系统**——每个概念既依赖前面的概念，又反过来强化整个系统的保证。建议读者在学习过程中定期回到此图，确认自己理解了「当前概念与相邻概念的交互关系」。 [来源: 💡 原创分析]
+> **认知功能**: 此图是 L1 层的**概念关系拓扑图**，展示四概念之间的「递进依赖」与「循环强化」双重结构。==> 实线箭头表示严格的学习依赖顺序（所有权（Ownership） → 借用（Borrowing） → 生命周期（Lifetimes）），-.-> 虚线箭头表示概念间的反馈循环（类型系统影响所有权语义，生命周期验证借用）。四种颜色编码帮助快速区分概念域。关键认知：L1 不是四个孤立文件的集合，而是一个**有机系统**——每个概念既依赖前面的概念，又反过来强化整个系统的保证。建议读者在学习过程中定期回到此图，确认自己理解了「当前概念与相邻概念的交互关系」。 [来源: 💡 原创分析]
 
 ### 1.1 概念间语义链接
 
 | 关系 | 从 | 到 | 语义类型 | 说明 |
 |:---|:---|:---|:---|:---|
-| 1 | **Ownership** | **Borrowing** | `==>` 前提/启用 | 所有权唯一性是借用规则成立的根本前提。若无唯一 owner，则无法安全地出借引用。 |
+| 1 | **Ownership** | **Borrowing** | `==>` 前提/启用 | 所有权唯一性是借用规则成立的根本前提。若无唯一 owner，则无法安全地出借引用（Reference）。 |
 | 2 | **Borrowing** | **Lifetimes** | `==>` 导致/约束 | 引用（Reference）（&T）必须在其指向数据的生命周期内有效，借用规则直接产生生命周期约束需求。 |
 | 3 | **Ownership** | **Type System** | `-.->` 体现/映射 | Move/Copy/Drop 在类型层面通过 trait 和编译器内建规则实现。 |
 | 4 | **Type System** | **Ownership** | `-.->` 反馈/决定 | 类型（如 `Copy` / `!Copy`）决定值在传递时是 move 还是 copy。 |
@@ -156,12 +158,12 @@ Type System（理解"类型即证明"）
 
 | 文件 | 概念 | 核心内容 | 状态 | 前置 | 后置 |
 |:---|:---|:---|:---|:---|:---|
-| [01_ownership.md](./01_ownership.md) | 所有权 | 唯一所有权、Move/Copy/Drop、线性/仿射逻辑、RAII | ✅ v1.0 | 无（L1 入口） | Borrowing, Type System |
-| [02_borrowing.md](./02_borrowing.md) | 借用 | `&T`/`&mut T`、AXM 规则、Reborrow、NLL | ✅ v1.0 | Ownership | Lifetimes, Concurrency |
-| [03_lifetimes.md](./03_lifetimes.md) | 生命周期 | 标注、Elision、NLL、`'static`、HRTB、Variance | ✅ v1.0 | Borrowing | Generics, Async |
-| [04_type_system.md](./04_type_system.md) | 类型系统基础 | 标量/复合/ADT、impl/dyn Trait、类型推断 | ✅ v1.0 | Ownership | Trait, Generics, Macros |
-| [05_reference_semantics.md](./05_reference_semantics.md) | 引用语义 | Deref/DerefMut、自动解引用、智能指针接口 | ✅ v1.0 | Borrowing, Type System | Pin, FFI |
-| [06_zero_cost_abstractions.md](./06_zero_cost_abstractions.md) | 零成本抽象（Zero-Cost Abstraction） | 单态化、内联、迭代器零成本、编译期优化 | ✅ v1.0 | Type System, Generics | Ecosystem Patterns |
+| [01_ownership.md](./01_ownership.md) | 所有权（Ownership） | 唯一所有权、Move/Copy/Drop、线性/仿射逻辑、RAII | ✅ v1.0 | 无（L1 入口） | Borrowing, Type System |
+| [02_borrowing.md](./02_borrowing.md) | 借用（Borrowing） | `&T`/`&mut T`、AXM 规则、Reborrow、NLL | ✅ v1.0 | Ownership | Lifetimes, Concurrency |
+| [03_lifetimes.md](./03_lifetimes.md) | 生命周期（Lifetimes） | 标注、Elision、NLL、`'static`、HRTB、Variance | ✅ v1.0 | Borrowing | Generics, Async |
+| [04_type_system.md](./04_type_system.md) | 类型系统基础 | 标量/复合/ADT、impl/dyn Trait、类型推断（Type Inference） | ✅ v1.0 | Ownership | Trait, Generics, Macros |
+| [05_reference_semantics.md](LINK_PLACEHOLDER) | 引用（Reference）语义 | Deref/DerefMut、自动解引用、智能指针（Smart Pointer）接口 | ✅ v1.0 | Borrowing, Type System | Pin, FFI |
+| [06_zero_cost_abstractions.md](./06_zero_cost_abstractions.md) | 零成本抽象（Zero-Cost Abstraction） | 单态化（Monomorphization）、内联、迭代器（Iterator）零成本、编译期优化 | ✅ v1.0 | Type System, Generics | Ecosystem Patterns |
 | [07_control_flow.md](./07_control_flow.md) | 控制流 | match/if let/loop、表达式导向、穷尽性检查 | ✅ v1.0 | Ownership, Type System | Iterator, Async |
 | [08_collections.md](./08_collections.md) | 集合类型 | Vec/HashMap/BTreeMap/HashSet、Entry API、容量管理 | ✅ v1.0 | Ownership, Generics | Smart Pointers, Ecosystem |
 | [09_strings_and_text.md](./09_strings_and_text.md) | 字符串与文本 | String/str、UTF-8、格式化、OS 字符串、C 字符串 | ✅ v1.0 | Ownership, Type System | Collections, FFI |
@@ -177,21 +179,21 @@ Type System（理解"类型即证明"）
 - [编程语言理论基础（PL Prerequisites）](./00_pl_prerequisites.md)
 - [Lifetimes 高级主题](./03_lifetimes_advanced.md)
 - [Never Type (`!`)：底类型与穷尽性](./05_never_type.md)
-- [Rust 错误处理基础](./10_error_handling_basics.md)
-- [模块系统与路径：Rust 的代码组织哲学](./11_modules_and_paths.md)
+- [Rust 错误处理（Error Handling）基础](LINK_PLACEHOLDER)
+- [模块（Module）系统与路径：Rust 的代码组织哲学](LINK_PLACEHOLDER)
 - [Rust 数值类型与运算](./11_numeric_types.md)
-- [属性与声明宏：编译期元编程基础](./12_attributes_and_macros.md)
+- [属性与声明宏（Declarative Macro）：编译期元编程基础](LINK_PLACEHOLDER)
 - [Panic 与 Abort：不可恢复错误的处理机制](./13_panic_and_abort.md)
 - [类型强制与转换：显式与隐式的边界](./14_coercion_and_casting.md)
-- [闭包基础：捕获环境与匿名函数](./15_closure_basics.md)
+- [闭包（Closures）基础：捕获环境与匿名函数](LINK_PLACEHOLDER)
 - [测试基础：从单元测试到集成测试](./16_testing_basics.md)
 - [高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析](./17_collections_advanced.md)
 - [字符串与编码：Rust 的文本处理类型系统](./18_strings_and_encoding.md)
-- [测验：所有权、借用与生命周期（嵌入式互动试点）](./23_quiz_ownership_borrowing.md)
+- [测验：所有权（Ownership）、借用（Borrowing）与生命周期（Lifetimes）（嵌入式互动试点）](LINK_PLACEHOLDER)
 - [测验：类型系统（嵌入式互动试点）](./24_quiz_type_system.md)
 - [测验：错误处理（嵌入式互动试点）](./25_quiz_error_handling.md)
 - [测验：模块系统与测试（嵌入式互动试点）](./26_quiz_modules_testing.md)
-- [测验：闭包与迭代器（嵌入式互动试点）](./27_quiz_closures_iterators.md)
+- [测验：闭包与迭代器（Iterator）（嵌入式互动试点）](LINK_PLACEHOLDER)
 
 ## 三、课程对齐路径
 
@@ -200,7 +202,7 @@ Type System（理解"类型即证明"）
 | 所有权 | Ch 4.1 | Week 1-2 基础 | Lecture: Ownership | 记忆 → 理解 |
 | 借用 | Ch 4.2 | Week 1-2 基础 | Lecture: Borrowing | 理解 |
 | 生命周期 | Ch 10.3 | Week 3 | Lecture: Lifetime Elision | 理解 → 应用 |
-| 类型系统 | Ch 3, 6, 8 | Week 1 | Lecture: ADT & Pattern Matching | 记忆 → 理解 |
+| 类型系统（Type System） | Ch 3, 6, 8 | Week 1 | Lecture: ADT & Pattern Matching | 记忆 → 理解 |
 
 ---
 
@@ -226,7 +228,7 @@ Type System（理解"类型即证明"）
 | 引用有效性 | 生命周期约束满足 | 无悬垂指针 | 区域类型 | `'static` 误用、循环引用 | E0597 |
 | Move 语义安全 | 非 Copy 类型赋值后 | 原变量不可访问 | 仿射逻辑 | 隐式 Copy（意外） | E0382 |
 
-> 完整定理一致性矩阵见各文件"定理推理链"章节。跨层映射见 [`../00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md)。
+> 完整定理一致性（Coherence）矩阵见各文件"定理推理链"章节。跨层映射见 [`../00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md)。
 
 ---
 

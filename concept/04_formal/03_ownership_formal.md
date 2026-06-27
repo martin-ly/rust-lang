@@ -8,13 +8,13 @@
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
 >
-> **层次定位**: L4 形式化理论 / 所有权形式化子域 [来源: [TAPL — Pierce 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)]
+> **层次定位**: L4 形式化理论 / 所有权（Ownership）形式化子域 [来源: [TAPL — Pierce 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价形式化模型的完备性
-> **前置依赖**: [L1 所有权](../01_foundation/01_ownership.md) · [L1 借用](../01_foundation/02_borrowing.md) · [L4 线性逻辑](./01_linear_logic.md)
+> **前置依赖**: [L1 所有权（Ownership）](LINK_PLACEHOLDER) · [L1 借用（Borrowing）](LINK_PLACEHOLDER) · [L4 线性逻辑](LINK_PLACEHOLDER)
 > **后置延伸**: [L4 RustBelt](./04_rustbelt.md) · [L7 形式化方法](../07_future/02_formal_methods.md) · [L3 Unsafe](../03_advanced/03_unsafe.md)
 > **跨层映射**: L4↔L1 形式化 ↔ 直觉 双射 | L4→L3 Unsafe 边界 ↔ 公理扩展
-> **定理链编号**: T-100 借用检查可判定性 → T-101 所有权类型 soundness → T-102 内存安全完备性
+> **定理链编号**: T-100 借用（Borrowing）检查可判定性 → T-101 所有权类型 soundness → T-102 内存安全（Memory Safety）完备性
 
 > **ROD 迁移备注**: 本文档是所有权形式化的主入口。关于借用检查的**可判定性**与**复杂度**，详见 [Borrow Checking Decidability](./28_borrow_checking_decidability.md)；关于 Aeneas 符号化语义对借用规则的自动化证明，详见 [Aeneas Symbolic Semantics](./30_aeneas_symbolic_semantics.md)。
 
@@ -44,7 +44,7 @@
 
 直觉上，Rust 编译器通过"借用检查器"拒绝危险代码，但这一过程为什么是**正确且完备**的？形式化的作用是将编译器的隐式规则转化为可证明的数学对象，从而回答：
 
-- 编译器拒绝的程序是否**确实**存在内存安全问题？（可靠性 / Soundness）
+- 编译器拒绝的程序是否**确实**存在内存安全（Memory Safety）问题？（可靠性 / Soundness）
 - 所有内存安全的程序是否**都能**被编译器接受？（完备性 / Completeness，答案是否定的，Rust 是保守的）
 
 **> [L1↔L4: ownership]** L1 中"一个值只有一个所有者"的直观规则，在 L4 中被形式化为堆状态 `Σ` 上的独占权限断言 `p ↦_1 v`。形式化揭示了该规则的本质：它是对程序状态空间的**可达性剪枝**，而非单纯的语法约束。
@@ -55,17 +55,17 @@
 将所有权建模为**权限（permission）**，借用建模为**分数权限（fractional permission）**：
 
 - 独占所有权 = 权限 `π = 1`，可读可写可转移（move/转移所有权：赋值、传参后原变量变为 uninitialized）
-- 共享借用 `&T` = 权限 `0 < π < 1`，多个引用权限之和 `≤ 1` [来源: [Wikipedia — Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)]
-- 可变借用 `&mut T` = 临时将 `π = 1` 从原所有者处**出借**，原变量被冻结
+- 共享借用 `&T` = 权限 `0 < π < 1`，多个引用（Reference）权限之和 `≤ 1` [来源: [Wikipedia — Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)]
+- 可变借用（Mutable Borrow） `&mut T` = 临时将 `π = 1` 从原所有者处**出借**，原变量被冻结
 
-**> [L1↔L4: borrowing]** L1 中"&T 不转移所有权"对应 L4 的分数权限拆分：`&{π}x * &{ρ}x ⇔ π + ρ ≤ 1`。L1 的"&mut T 独占"对应 L4 的临时独占断言 `&mut{x} ↦_1 v`，其生命周期结束后果断归还。
+**> [L1↔L4: borrowing]** L1 中"&T 不转移所有权"对应 L4 的分数权限拆分：`&{π}x * &{ρ}x ⇔ π + ρ ≤ 1`。L1 的"&mut T 独占"对应 L4 的临时独占断言 `&mut{x} ↦_1 v`，其生命周期（Lifetimes）结束后果断归还。
 
 ### Step 3: 怎么证明没有悬垂指针？
 >
 
-通过**区域类型（Region/Tofte-Talpin）**将生命周期 `'a` 形式化为偏序约束集 `κ ⊑ κ'`：
+通过**区域类型（Region/Tofte-Talpin）**将生命周期（Lifetimes） `'a` 形式化为偏序约束集 `κ ⊑ κ'`：
 
-- 每个引用类型 `&'a T` 携带区域参数 `κ`
+- 每个引用（Reference）类型 `&'a T` 携带区域参数 `κ`
 - 生命周期检查转化为**约束可满足性（Constraint Satisfaction）**问题
 - 若约束图无环且满足包含关系，则引用的使用点始终位于被引用值的存活区域内
 
@@ -144,6 +144,8 @@ stateDiagram-v2
 > **认知功能**: 此状态图将所有权形式化的**分数权限模型**转化为可视化的状态机。关键洞察：**所有权不是静态属性，而是随程序执行动态变化的状态**。`Owned` 态（π=1）可以分化为 `SharedBorrow`（π 拆分）或 `MutBorrow`（临时转移），但最终必须回归 `Owned` 或进入 `Dropped`。这对应分离逻辑中的资源不变量：资源要么被持有，要么被释放，不存在"悬空持有"状态。
 > [来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)]
 
+> **前置概念**: [Type System](./06_subtype_variance.md)
+> **后置概念**: [Borrowing](./Borrowing.md)
 ---
 
 ## 一、权威定义（Definition）
@@ -203,7 +205,7 @@ COR 的核心类型判断：
 |:---|:---|:---|:---|:---|:---|
 | **机构** | ETH Zurich | MPI-SWS | Inria | MPI-SWS | AWS |
 | **逻辑基础** | 操作语义 | Iris 分离逻辑 | 纯函数式 Rocq | 分离逻辑 | CBMC 模型检测 |
-| **验证目标** | 类型安全 | 内存安全 + 并发 | 功能正确性 | 功能正确性 | 并发路径 |
+| **验证目标** | 类型安全 | 内存安全（Memory Safety） + 并发 | 功能正确性 | 功能正确性 | 并发路径 |
 | **覆盖范围** | Safe Rust 核心 | Safe + Unsafe | Safe Rust | Safe + Unsafe | Safe Rust |
 | **工具支持** | 无（纸面） | Coq (Iris) | Rocq/Lean | Coq | 自动化 |
 | **工业可用** | 否 | 否 | 学术 | 否 | ✅ 是 |
@@ -214,7 +216,7 @@ COR 的核心类型判断：
 |:---|:---|:---|:---|:---|:---|:---|
 | 独有所有权 | `Own(p)` | ✅ | ✅ | ✅ | `p ↦_1 v`（独占指针） | `let x = v;` |
 | 共享借用 | `Shr(p)` | ✅ | ❌ | ❌ | `p ↦_π v`（分数权限 π < 1） | `let r = &x;` |
-| 可变借用 | `Mut(p)` | ❌ | ✅ | ❌ | `p ↦_1 v`（临时独占） | `let r = &mut x;` |
+| 可变借用（Mutable Borrow） | `Mut(p)` | ❌ | ✅ | ❌ | `p ↦_1 v`（临时独占） | `let r = &mut x;` |
 | 已释放 | `Dealloc(p)` | ❌ | ❌ | ❌ | `p ↦ ⊥` | `drop(x);` / 作用域结束 |
 
 ---
@@ -253,7 +255,7 @@ COR 的核心类型判断：
   ⟨drop(x), σ⟩ → ⟨skip, σ[heap.dealloc(x)]⟩ [来源] ✅
 ```
 
-**> [L1↔L4: ownership]** L1 中值离开作用域自动调用 `drop`。L4 中对应堆状态移除 `p ↦ v`，且线性/仿射类型系统保证该操作**恰好执行一次**。
+**> [L1↔L4: ownership]** L1 中值离开作用域自动调用 `drop`。L4 中对应堆状态移除 `p ↦ v`，且线性/仿射类型系统（Type System）保证该操作**恰好执行一次**。
 
 > **[学术来源: Reynolds 2002, *Separation Logic: A Logic for Shared Mutable Data Structures* (LICS); Boyland 2003, *Checking Interference with Fractional Permissions* (SAS); Jung et al. 2018 POPL, *Iris from the Ground Up*]** 分离逻辑断言与分数权限是 RustBelt/Iris 验证框架的基础。
 
@@ -335,15 +337,15 @@ graph TD
 | **L1**: 所有权作为权限 | permission ⟹ 读写权限分离 | 堆状态 `Σ` 与变量上下文 `Γ` 良构 | 独占状态下读写原子性得到保证 | T1（所有权转移）、T2（线性类型）、T4（分离逻辑） | 未定义行为导致 `Σ` 与 `Γ` 不一致（如 `unsafe` 直接写裸指针） | [ownership] `let x = ...` 的独占保证 |
 | **L2**: 借用作为 fractional permission | fractional permission ⟹ 共享读/独占写 | 分数权限公理 `π + ρ ≤ 1` | `&T` 可共享读，`&mut T` 独占写，二者互斥 | T3（区域约束）、T5（别名模型）、C2（内部可变性） | 权限超额（`π + ρ > 1`），即同时存在 `&x` 与 `&mut x` | [borrowing] `&x` 与 `&mut x` 互斥 |
 | **T1**: 所有权转移 | 权限 100% 移交 | `Own(x)` 且 `y` 未初始化 | `Own(y) * x ↦ ⊥`，原变量失效 | C1（仿射弱化）、T4（分离逻辑） | 部分移动（partial move）后未正确处理 `x` 的剩余字段 | [ownership] `let y = x;` 后 `x` 失效 |
-| **T2**: 线性类型 | 线性类型 ⟹ 无 use-after-free | 类型系统为线性或仿射 | 每个堆分配恰好释放一次，无 UAF/DF | T1（所有权转移）、T4（分离逻辑） | 通过 `unsafe` 或 `mem::forget` 绕过类型系统 | [ownership] 自动 `drop`，禁止 UAF |
+| **T2**: 线性类型 | 线性类型 ⟹ 无 use-after-free | 类型系统（Type System）为线性或仿射 | 每个堆分配恰好释放一次，无 UAF/DF | T1（所有权转移）、T4（分离逻辑） | 通过 `unsafe` 或 `mem::forget` 绕过类型系统 | [ownership] 自动 `drop`，禁止 UAF |
 | **T3**: 区域（Region） | Region ⟹ 生命周期形式化 | 生命周期约束为偏序 `κ ⊑ κ'` | 约束图可求解，引用使用点位于被引用值存活区域内 | T5（别名模型）、L2（借用权限） | HRTB（高阶 trait bound）不可判定片段；NLL 近似导致保守拒绝 | [lifetimes] `'a` 的数学本质 |
 | **C1**: 仿射弱化 | weakening ⟹ move 后原变量失效 | 仿射类型允许丢弃（weakening） | `move` 后原变量从 `Γ` 中移除或标记为 `⊥` | T1（所有权转移）、T2（线性类型） | 在 `Copy` 类型上误用 move 语义（实际为复制） | [ownership] `move` 与 `Copy` 的区别 |
-| **C2**: 内部可变性 | 运行时权限检查 | `UnsafeCell` 打破静态 `&T` 只读承诺 | 通过运行时借用计数（`RefCell`）或原子操作（`AtomicT`）确保安全 | T5（别名模型）、T6（内存模型） | 运行时权限检查失败：`borrow_mut` 时已有活跃借用，触发 `panic` | [borrowing + unsafe] `RefCell<T>`、`Mutex<T>` |
+| **C2**: 内部可变性 | 运行时（Runtime）权限检查 | `UnsafeCell` 打破静态 `&T` 只读承诺 | 通过运行时借用计数（`RefCell`）或原子操作（Atomic Operations）（`AtomicT`）确保安全 | T5（别名模型）、T6（内存模型） | 运行时权限检查失败：`borrow_mut` 时已有活跃借用，触发 `panic` | [borrowing + unsafe] `RefCell<T>`、`Mutex<T>` |
 | **T4**: 分离逻辑断言 | 堆内存不相交 | `own(x, T) * own(y, U)` | `x` 与 `y` 的堆区域不相交，支持局部推理 | T2（线性类型）、T1（所有权转移） | `unsafe` 代码制造别名导致断言重叠，破坏 `*` 的分离性 | [ownership] 两个 `Box<T>` 永不相交 |
 | **T5**: 别名模型安全 | Stacked/Tree Borrows ⟹ 引用使用合法 | 别名模型公理（SB/TB） | 引用解引用行为符合内存模型假设 | T3（区域约束）、C2（内部可变性） | 模型假设被突破（如 `unsafe` 构造非法别名），Miri 报错 | [unsafe / raw pointer] `miri` 检测 |
-| **T6**: 内存模型一致性 | TSO/Release-Acquire ⟹ 并发访问有序 | C11 内存模型 + Atomic 操作正确标记 | 并发读写无数据竞争，满足 `Send`/`Sync` trait 语义 | C2（内部可变性）、T4（分离逻辑） | 错误使用 `Ordering::Relaxed` 或绕过 `UnsafeCell` 的原子保证 | [concurrency] `Arc<T>`、`Mutex<T>` |
+| **T6**: 内存模型一致性（Coherence） | TSO/Release-Acquire ⟹ 并发访问有序 | C11 内存模型 + Atomic 操作正确标记 | 并发读写无数据竞争，满足 `Send`/`Sync` trait 语义 | C2（内部可变性）、T4（分离逻辑） | 错误使用 `Ordering::Relaxed` 或绕过 `UnsafeCell` 的原子保证 | [concurrency] `Arc<T>`、`Mutex<T>` |
 
-> **一致性检查**: **L1（权限分离） ⟹ L2（分数权限） ⟹ T1（100% 移交） ⟹ C1（弱化失效）** 构成"从权限定义到转移再到失效"的静态链；**T3（区域） ⟹ T5（别名模型） ⟹ T6（内存模型）** 构成"从时间约束到空间约束到并发有序"的动态链。两条链在 **C2（内部可变性）** 处交汇，体现静态规则与运行时检查的互补。
+> **一致性（Coherence）检查**: **L1（权限分离） ⟹ L2（分数权限） ⟹ T1（100% 移交） ⟹ C1（弱化失效）** 构成"从权限定义到转移再到失效"的静态链；**T3（区域） ⟹ T5（别名模型） ⟹ T6（内存模型）** 构成"从时间约束到空间约束到并发有序"的动态链。两条链在 **C2（内部可变性）** 处交汇，体现静态规则与运行时（Runtime）检查的互补。
 > **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §3.1 "L1-L4 形式化映射" · §4.1 "内存安全完备性"
 
 ### 5.2 反命题决策树
@@ -389,7 +391,7 @@ graph TD
 
 > **认知功能**: 此决策树对比**线性类型与 Rust 所有权的本质差异**。功能定位：澄清 Rust 不是严格线性类型，而是仿射类型系统。使用建议：在阅读线性逻辑文献时，注意 Rust 额外引入了生命周期和 unsafe 封装两个维度。关键洞察：**仿射弱化（允许丢弃）+ 区域约束 + Iris 高阶协议 = Rust 超越经典线性类型的三要素**。[来源: 💡 原创分析]
 
-> **分析**: Rust 是**仿射类型（Affine）**而非严格线性类型：值可以被丢弃（weakening），但不能被复制（contraction）。此外，Rust 的**生命周期**和 **unsafe** 封装都是传统线性类型系统不具备的维度。RustBelt 的 Iris 模型正是为了弥合这一差距而设计。 [来源: [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/)]
+> **分析**: Rust 是**仿射类型（Affine）**而非严格线性类型：值可以被丢弃（weakening），但不能被复制（contraction）。此外，Rust 的**生命周期（Lifetimes）**和 **unsafe** 封装都是传统线性类型系统不具备的维度。RustBelt 的 Iris 模型正是为了弥合这一差距而设计。 [来源: [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/)]
 
 #### 决策树 3: "权限系统可自动化验证所有属性"
 
@@ -462,7 +464,7 @@ Pin 不变式:  给定 Pin<P<T>>，在 Pin 的生命周期内，
 
 | 线性逻辑概念 | Rust 对应 | Pin 扩展 |
 |:---|:---|:---|
-| 资源 `R` | 所有权 `Own(T)` | `Own(T) @ addr`（资源绑定到特定地址）|
+| 资源 `R` | 所有权（Ownership） `Own(T)` | `Own(T) @ addr`（资源绑定到特定地址）|
 | 资源消耗 | `Drop` / Move | `Pin` 阻止 Move（冻结位置）|
 | 资源重组 | `mem::swap` | `Pin` 下禁止（除非 `Unpin`）|
 | 模态算子 `□` | — | `Pin` 作为 "必然位置稳定" 的模态 |
@@ -531,7 +533,7 @@ Oxide 视角:
 |:---|:---|:---|
 | 所有权 | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) | 形式化对象 |
 | 生命周期 | [`../01_foundation/03_lifetimes.md`](../01_foundation/03_lifetimes.md) | 区域类型对应 |
-| 借用 | [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md) | 分数权限对应 |
+| 借用（Borrowing） | [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md) | 分数权限对应 |
 | 线性逻辑 | [`./01_linear_logic.md`](./01_linear_logic.md) | 理论基础 |
 | 类型论 | [`./02_type_theory.md`](./02_type_theory.md) | 约束求解 |
 | RustBelt | [`./04_rustbelt.md`](./04_rustbelt.md) | 验证实现 |
@@ -1173,7 +1175,7 @@ Miri 的 Tree Borrows 检测器直接实现了上述操作语义：
 > **过渡: L4 → L3**
 > 形式化的别名模型（SB/TB）和所有权逻辑（Oxide）是 Rust 编译器优化假设的理论根基，但程序员日常接触的只是 `&T`/`&mut T` 的语法糖。
 > 从形式化规则到工程实践的认知桥梁在于：理解 "为什么 `&mut T` 保证唯一性" 不需要掌握分离逻辑，但掌握分离逻辑能帮你写出更安全的 `unsafe` 代码。
-> 工程实践中的对应见 [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md)（unsafe 逃逸门）与 [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md)（并发安全的编译期保证）。
+> 工程实践中的对应见 [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md)（unsafe 逃逸门）与 [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md)（并发安全（Concurrency Safety）的编译期保证）。
 > **过渡: L4 → L5**
 > Rust 的所有权形式化是独特的——C++ 没有系统性的所有权逻辑，Go 依赖 GC 消除所有权问题，Haskell 用纯函数隔离副作用。
 > 理解这些差异需要在形式化层面比较 "语言如何表达资源的生命周期"。
@@ -1277,7 +1279,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: 分离逻辑（separation logic）的核心规则是"独占资源可组合，共享资源需分权"。`RefCell` 在单线程内通过运行时借用检查实现分权（`borrow`/`borrow_mut`），`Mutex` 在多线程间通过互斥实现分权。两者都体现了分离逻辑的 **borrow-splitting** 原则：独占权限 `own(τ)` 可拆分为共享权限 `shr(κ, ℓ)` 和独占权限 `own(τ) ∗ shr(κ, ℓ)`，但不能同时拥有两个可变权限。Rust 编译器（`RefCell` 运行时）和操作系统（`Mutex`）分别在不同层级实现了这一形式化保证。[来源: [Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)]
+> **修正**: 分离逻辑（separation logic）的核心规则是"独占资源可组合，共享资源需分权"。`RefCell` 在单线程内通过运行时借用检查实现分权（`borrow`/`borrow_mut`），`Mutex` 在多线程间通过互斥实现分权。两者都体现了分离逻辑的 **borrow-splitting** 原则：独占权限 `own(τ)` 可拆分为共享权限 `shr(κ, ℓ)` 和独占权限 `own(τ) ∗ shr(κ, ℓ)`，但不能同时拥有两个可变权限。Rust 编译器（`RefCell` 运行时（Runtime））和操作系统（`Mutex`）分别在不同层级实现了这一形式化保证。[来源: [Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)]
 
 ### 10.3 边界测试：子类型化与生命周期协变（编译错误）
 
@@ -1295,7 +1297,7 @@ fn bad_assign<'a, 'b>(x: &'a str, y: &'b str) {
 }
 ```
 
-> **修正**: 引用的生命周期具有**协变性**（covariance）：`&'a T` 是 `'a` 的协变，即若 `'long: 'short`，则 `&'long T` 可视为 `&'short T` 的子类型。这是安全的，因为短生命周期的引用不会比长生命周期更久存活。但逆方向不成立：`&'short T` 不能赋值给 `&'long T`，因为短引用可能在长引用仍被使用时失效。Rust 编译器通过**子类型化**（subtyping）检查实现生命周期约束：`'a: 'b` 表示 `'a` 是 `'b` 的子类型（`'a` 更长）。这与 Java 的泛型协变（`? extends T`）或 C# 的泛型约束（`where T : class`）不同——Rust 的协变仅限于生命周期和某些类型构造器（`&T`、`Box<T>`、`fn(T) -> U` 的返回类型），`&mut T` 和 `fn(T) -> U` 的参数类型是逆变的。[来源: [Rust Reference — Subtyping](https://doc.rust-lang.org/reference/subtyping.html)] · [来源: [Variance in Rust](https://doc.rust-lang.org/nomicon/subtyping.html)]
+> **修正**: 引用的生命周期具有**协变性**（covariance）：`&'a T` 是 `'a` 的协变，即若 `'long: 'short`，则 `&'long T` 可视为 `&'short T` 的子类型。这是安全的，因为短生命周期的引用不会比长生命周期更久存活。但逆方向不成立：`&'short T` 不能赋值给 `&'long T`，因为短引用可能在长引用仍被使用时失效。Rust 编译器通过**子类型化**（subtyping）检查实现生命周期约束：`'a: 'b` 表示 `'a` 是 `'b` 的子类型（`'a` 更长）。这与 Java 的泛型（Generics）协变（`? extends T`）或 C# 的泛型约束（`where T : class`）不同——Rust 的协变仅限于生命周期和某些类型构造器（`&T`、`Box<T>`、`fn(T) -> U` 的返回类型），`&mut T` 和 `fn(T) -> U` 的参数类型是逆变的。[来源: [Rust Reference — Subtyping](https://doc.rust-lang.org/reference/subtyping.html)] · [来源: [Variance in Rust](https://doc.rust-lang.org/nomicon/subtyping.html)]
 
 ### 10.4 边界测试：悬垂指针的形式化禁止（编译错误）
 
@@ -1574,7 +1576,7 @@ fn increment() {
 ```
 
 - A. `SeqCst` 创建了一个全局锁，所以是线程安全的
-- B. 分离逻辑中的 **Frame Rule** 允许每个线程独立拥有资源的一部分，原子操作保证这部分的不可分性
+- B. 分离逻辑中的 **Frame Rule** 允许每个线程独立拥有资源的一部分，原子操作（Atomic Operations）保证这部分的不可分性
 - C. `AtomicUsize` 内部使用了 `Mutex`，只是隐藏了
 - D. 编译器自动将这段代码转换为单线程执行
 

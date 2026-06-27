@@ -1,6 +1,6 @@
 > **内容分级**: [综述级]
 
-> **本节关键术语**: 内部可变性 (Interior Mutability) · RefCell · Cell · Mutex · RwLock · 运行时借用检查 — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: 内部可变性 (Interior Mutability) · RefCell · Cell · Mutex · RwLock · 运行时（Runtime）借用（Borrowing）检查 — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 内部可变性：编译期规则的运行时逃逸
 >
@@ -28,12 +28,12 @@
 
 ## 📑 目录
 
-- [内部可变性：编译期规则的运行时逃逸](#内部可变性编译期规则的运行时逃逸)
+- [内部可变性：编译期规则的运行时（Runtime）逃逸](LINK_PLACEHOLDER)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 外部可变性与内部可变性的对比](#11-外部可变性与内部可变性的对比)
     - [1.2 内部可变性的类型谱系](#12-内部可变性的类型谱系)
-    - [1.3 运行时借用检查](#13-运行时借用检查)
+    - [1.3 运行时借用（Borrowing）检查](LINK_PLACEHOLDER)
   - [二、技术细节](#二技术细节)
     - [2.1 `Cell<T>`：无借用语义的复制](#21-cellt无借用语义的复制)
     - [2.2 `RefCell<T>`：动态借用规则](#22-refcellt动态借用规则)
@@ -197,7 +197,7 @@ let v = c.get();  // v = 5, c 内部仍为 5
 >
 > 1. `get()` 要求 `T: Copy`——因为返回的是副本
 > 2. 对于 `!Copy` 类型，使用 `replace()` 或 `take()`（要求 `T: Default`）
-> 3. 无法直接获取内部值的引用
+> 3. 无法直接获取内部值的引用（Reference）
 > [来源: [std::cell::Cell](https://doc.rust-lang.org/std/cell/struct.Cell.html)]
 
 ---
@@ -231,7 +231,7 @@ println!("{:?}", r);
 > **RefCell 用途**:
 >
 > 1. 在 `Rc` 内部提供可变性：`Rc<RefCell<T>>`
-> 2. 实现自引用结构（配合 Pin）
+> 2. 实现自引用（Reference）结构（配合 Pin）
 > 3. 在单线程上下文中模拟 `&mut` 的灵活性
 > [来源: [std::cell::RefCell](https://doc.rust-lang.org/std/cell/struct.RefCell.html)]
 
@@ -325,7 +325,7 @@ let rw = RwLock::new(vec![1, 2, 3]);
   }
 ```
 
-> **最佳实践**: 内部可变性应**封装在模块内部**，对外暴露 safe API。不要让 `RefCell`/`Mutex` 泄漏到公共接口中，除非这是设计意图。
+> **最佳实践**: 内部可变性应**封装在模块（Module）内部**，对外暴露 safe API。不要让 `RefCell`/`Mutex` 泄漏到公共接口中，除非这是设计意图。
 > [来源: [Rust API Guidelines — Interior Mutability](https://rust-lang.github.io/api-guidelines/)]
 
 ---
@@ -356,7 +356,7 @@ graph TD
 
 > **认知功能**: 此决策树判断是否使用内部可变性。核心判断标准是**线程上下文**、**共享需求**和**性能敏感度**。
 > **使用建议**: 优先外部可变性（编译期安全），仅在需要时才引入内部可变性。内部可变性是**工具而非默认**。
-> **关键洞察**: 过度使用内部可变性会导致**运行时 panic 风险**和**性能开销**。最佳设计是：大部分代码用外部可变性，仅在边界处使用内部可变性。
+> **关键洞察**: 过度使用内部可变性会导致**运行时（Runtime） panic 风险**和**性能开销**。最佳设计是：大部分代码用外部可变性，仅在边界处使用内部可变性。
 > [来源: 💡 原创分析]
 
 ---
@@ -549,11 +549,11 @@ fn correct_upgrade() {
 
 ## 相关概念文件
 
-- [Ownership](../01_foundation/01_ownership.md) — 所有权模型
-- [Borrowing](../01_foundation/02_borrowing.md) — 借用与生命周期
-- [Type System](../01_foundation/04_type_system.md) — Rust 类型系统
+- [Ownership](../01_foundation/01_ownership.md) — 所有权（Ownership）模型
+- [Borrowing](../01_foundation/02_borrowing.md) — 借用与生命周期（Lifetimes）
+- [Type System](../01_foundation/04_type_system.md) — Rust 类型系统（Type System）
 - [Concurrency](../03_advanced/01_concurrency.md) — 并发编程
-- [Async](../03_advanced/02_async.md) — 异步编程
+- [Async](../03_advanced/02_async.md) — 异步（Async）编程
 
 ---
 
@@ -679,7 +679,7 @@ fn main() {
 
 - A. `Cell` 线程安全，`RefCell` 不是
 - B. `Cell` 只能存储 `Copy` 类型，`RefCell` 提供动态借用检查
-- C. `Cell` 允许多个可变引用同时存在
+- C. `Cell` 允许多个可变引用（Mutable Reference）同时存在
 
 <details>
 <summary>✅ 答案</summary>
@@ -724,8 +724,8 @@ fn main() {
 
 `RefCell` 在运行时强制执行借用规则：
 
-- `borrow()` 获取不可变引用
-- `borrow_mut()` 获取可变引用
+- `borrow()` 获取不可变引用（Immutable Reference）
+- `borrow_mut()` 获取可变引用（Mutable Reference）
 - 两者不能同时存在，违反时在**运行时 panic**
 
 这与编译期借用检查不同：编译器无法在运行时跟踪 `RefCell` 的借用状态，因此将检查推迟到运行时。若需要线程安全版本，使用 `Mutex`（同样运行时检查）。
@@ -739,7 +739,7 @@ fn main() {
 
 - A. 多线程共享可变状态
 - B. 单线程中需要绕过编译期借用规则（如实现自引用或回调）
-- C. 需要原子操作保证无锁并发
+- C. 需要原子操作（Atomic Operations）保证无锁并发
 
 <details>
 <summary>✅ 答案</summary>
@@ -762,9 +762,9 @@ fn main() {
 
 `Rc<RefCell<T>>` 提供了什么组合能力？
 
-- A. 单所有权 + 编译期可变借用
-- B. 多所有权 + 运行时可变借用
-- C. 线程安全共享 + 编译期不可变借用
+- A. 单所有权（Ownership） + 编译期可变借用（Mutable Borrow）
+- B. 多所有权 + 运行时可变借用（Mutable Borrow）
+- C. 线程安全共享 + 编译期不可变借用（Immutable Borrow）
 
 <details>
 <summary>✅ 答案</summary>
@@ -792,8 +792,8 @@ fn main() {
 为什么 `RefCell<T>` 不是 `Sync`？
 
 - A. 因为它使用操作系统锁
-- B. 因为它的借用计数器不是原子操作，多线程同时访问会导致数据竞争
-- C. 因为它只允许不可变借用
+- B. 因为它的借用计数器不是原子操作（Atomic Operations），多线程同时访问会导致数据竞争
+- C. 因为它只允许不可变借用（Immutable Borrow）
 
 <details>
 <summary>✅ 答案</summary>
@@ -827,11 +827,11 @@ fn main() {
 
 > 内部可变性安全 ⟸ RefCell/Cell/Mutex 隔离 ⟸ 运行时检查
 > 共享可变状态正确 ⟸ Arc<Mutex<T>> 模式 ⟸ Send/Sync 边界
-> **过渡**: 掌握 内部可变性：编译期规则的运行时逃逸 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 内部可变性：编译期规则的运行时逃逸 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 内部可变性：编译期规则的运行时逃逸 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: 内部可变性：编译期规则的运行时逃逸 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 内部可变性：编译期规则的运行时逃逸 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

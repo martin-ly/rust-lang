@@ -14,12 +14,14 @@
 > | [RFC 0243](https://rust-lang.github.io/rfcs//0243-trait-based-exception-handling.html) | Trait-based exception handling (`Try` trait) | ✅ | 1.26 | `04_error_handling.md` |
 > | [RFC 1210](https://rust-lang.github.io/rfcs//1210-impl-specialization.html) | Specialization | 🚧 | nightly|
 >
-> **定位**: 覆盖对 Rust 语言语义、类型系统、内存模型、并发和生态有结构性影响的 RFC。
+> **定位**: 覆盖对 Rust 语言语义、类型系统（Type System）、内存模型、并发和生态有结构性影响的 RFC。
 > **状态标注**: ✅ Implemented | 🚧 Accepted (未实现) | ⚠️ Deprecated | 🔍 Draft | ❌ Rejected
 > **维护**: 每 6 周扫描 RFC 仓库更新状态。
 
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 ## 一、语言核心（Language Core）
@@ -134,7 +136,7 @@
 <details>
 <summary>✅ 答案与解析</summary>
 
-记录和规范化所有概念文件的权威引用来源，确保知识的可追溯性和学术严谨性，便于读者深入查证。
+记录和规范化所有概念文件的权威引用（Reference）来源，确保知识的可追溯性和学术严谨性，便于读者深入查证。
 </details>
 
 ---
@@ -153,7 +155,7 @@
 
 ### 测验 3：在引用来源时，为什么建议精确到具体章节而非只写根 URL？（理解层）
 
-**题目**: 在引用来源时，为什么建议精确到具体章节而非只写根 URL？
+**题目**: 在引用（Reference）来源时，为什么建议精确到具体章节而非只写根 URL？
 
 <details>
 <summary>✅ 答案与解析</summary>

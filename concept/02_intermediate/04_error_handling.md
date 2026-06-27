@@ -8,9 +8,9 @@
 >
 > **EN**: Error Handling
 > **Summary**: Error Handling. Guide to 04 Error Handling.
-> **📎 交叉引用**
+> **📎 交叉引用（Reference）**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[错误处理](../../knowledge/02_intermediate/02_error_handling.md)
+> 本主题在 knowledge 中有系统化的知识索引：[错误处理（Error Handling）](LINK_PLACEHOLDER)
 > **受众**: [进阶]
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: **A+S** — Application + Structure
@@ -54,15 +54,15 @@
     - [4.2 定理：? 运算符 ⟹ 错误传播自动化](#42-定理-运算符--错误传播自动化)
     - [4.3 推论：panic ⟹ 不可恢复错误的显式边界](#43-推论panic--不可恢复错误的显式边界)
     - [4.4 类型安全错误处理](#44-类型安全错误处理)
-    - [4.5 定理一致性矩阵](#45-定理一致性矩阵)
+    - [4.5 定理一致性（Coherence）矩阵](LINK_PLACEHOLDER)
   - [五、示例与反例（Examples \& Counter-examples）](#五示例与反例examples--counter-examples)
     - [5.1 正确示例：`?` 运算符链式传播](#51-正确示例-运算符链式传播)
     - [5.2 正确示例：自定义错误类型](#52-正确示例自定义错误类型)
     - [5.3 反例：`?` 在错误返回类型中不匹配](#53-反例-在错误返回类型中不匹配)
     - [5.4 反例：忽略 Result 导致 bug](#54-反例忽略-result-导致-bug)
     - [5.5 边界示例：`Option` 与 `Result` 互转](#55-边界示例option-与-result-互转)
-    - [5.5 补充：异步错误处理与 `poll_fn` / `TryFuture` 模式](#55-补充异步错误处理与-poll_fn--tryfuture-模式)
-      - [`poll_fn`：将闭包提升为 Future](#poll_fn将闭包提升为-future)
+    - [5.5 补充：异步（Async）错误处理与 `poll_fn` / `TryFuture` 模式](LINK_PLACEHOLDER)
+      - [`poll_fn`：将闭包（Closures）提升为 Future](LINK_PLACEHOLDER)
       - [`TryFuture` 与 `?` 运算符的异步扩展](#tryfuture-与--运算符的异步扩展)
       - [取消安全（Cancellation Safety）与错误处理](#取消安全cancellation-safety与错误处理)
   - [六、反命题与边界分析（Counter-proposition \& Boundary Analysis）](#六反命题与边界分析counter-proposition--boundary-analysis)
@@ -123,7 +123,7 @@
     - [11.1 边界测试：? 运算符在错误类型不匹配时使用（编译错误）](#111-边界测试-运算符在错误类型不匹配时使用编译错误)
     - [11.2 边界测试：panic 在 const fn 中（编译错误）](#112-边界测试panic-在-const-fn-中编译错误)
     - [11.3 边界测试：`Result` 未处理（编译错误）](#113-边界测试result-未处理编译错误)
-    - [11.4 边界测试：`?` 在闭包中的类型推断失败（编译错误）](#114-边界测试-在闭包中的类型推断失败编译错误)
+    - [11.4 边界测试：`?` 在闭包中的类型推断（Type Inference）失败（编译错误）](LINK_PLACEHOLDER)
     - [11.5 边界测试：自定义 Error 未实现 `std::error::Error`（编译错误）](#115-边界测试自定义-error-未实现-stderrorerror编译错误)
     - [11.6 边界测试：`Result` 与 `Option` 混用（编译错误）](#116-边界测试result-与-option-混用编译错误)
     - [11.7 边界测试：`panic!` 在 `const fn` 中的限制（编译错误）](#117-边界测试panic-在-const-fn-中的限制编译错误)
@@ -158,7 +158,7 @@
 
 > **[Haskell Wiki: Either]** Rust's `Result<T, E>` corresponds directly to Haskell's `Either e a` monad, with `Ok` as `Right` and `Err` as `Left`. ✅ 已验证
 
-Rust 的错误处理对应**单子**（Monad）模式中的 `Option` 和 `Result`：
+Rust 的错误处理（Error Handling）对应**单子**（Monad）模式中的 `Option` 和 `Result`：
 
 ```text
 Option<T> ≅ 1 + T          （余和类型: None + Some(T)）
@@ -184,7 +184,7 @@ Result<T, E> ≅ T + E       （余和类型: Ok(T) + Err(E)）
 
 | **机制** | **类型** | **可恢复** | **栈展开** | **使用场景** |
 |:---|:---|:---|:---|:---|
-| `panic!` | 运行时崩溃 | ❌ | 默认展开 | 不可恢复 bug、assert |
+| `panic!` | 运行时（Runtime）崩溃 | ❌ | 默认展开 | 不可恢复 bug、assert |
 | `Option<T>` | 值可能存在 | ✅ | ❌ | 可能为空的查询 |
 | `Result<T, E>` | 操作可能失败 | ✅ | ❌ | IO、解析、外部调用 |
 | `?` 运算符 | 错误传播 | ✅ | ❌ | 链式错误处理 |
@@ -200,7 +200,7 @@ Result<T, E> ≅ T + E       （余和类型: Ok(T) + Err(E)）
 | **强制性** | 强：必须处理或显式传播 | 弱：可忽略 | 中：checked/unchecked | 强：Monad bind | 弱：可忽略 |
 | **传播语法** | `?` 运算符 | `if err != nil` | `throw/throws` | `>>=` / do notation | 手动检查 |
 | **组合性** | ✅ `and_then`, `map` | ⚠️ 手动 | ⚠️ try/catch | ✅ `>>=` | ❌ 差 |
-| **运行时开销** | 零（tagged union） | 接口调用 | 栈展开/对象分配 | 零 | 零 |
+| **运行时（Runtime）开销** | 零（tagged union） | 接口调用 | 栈展开/对象分配 | 零 | 零 |
 | **类型安全** | ✅ 编译期 | ⚠️ 运行时断言 | ⚠️ catch 任意类型 | ✅ 编译期 | ❌ 无 |
 
 ### 2.3 `Result` 组合子矩阵
@@ -341,17 +341,17 @@ graph TD
 | **定理/引理/推论** | **前提** | **结论** | **依赖的 L4 公理** | **被哪些定理依赖** | **失效条件** | **典型错误码** |
 |:---|:---|:---|:---|:---|:---|:---|
 | **引理**: Result ⟹ 和类型强制 | Result 返回 + 编译器检查 | 错误不可忽略 | 和类型 (A + E) | 所有错误处理代码 | `unwrap()` 忽略 | — |
-| **定理**: ? 运算符传播 | 函数返回兼容 Result/Option | 自动错误短路 | Monad bind (>>=) | 异步错误传播 | 在闭包/回调中误用 | E0277 |
+| **定理**: ? 运算符传播 | 函数返回兼容 Result/Option | 自动错误短路 | Monad bind (>>=) | 异步（Async）错误传播 | 在闭包（Closures）/回调中误用 | E0277 |
 | **推论**: panic 边界 | 不可恢复状态 | 显式程序终止 | —（运行时机制） | 设计决策 | 滥用 panic 处理预期错误 | panic |
-| **定理**: Error trait 一致性 | 自定义错误实现 Error | 可与 ? 和其他错误互操作 | 类型类一致性 | 错误链、报告 | 未实现 Source | — |
-| **引理**: Option 空值安全 | 使用 Option<T> | 无 null 解引用 | Maybe Monad | 所有可空场景 | `unwrap()` on None | — |
+| **定理**: Error trait 一致性（Coherence） | 自定义错误实现 Error | 可与 ? 和其他错误互操作 | 类型类一致性 | 错误链、报告 | 未实现 Source | — |
+| **引理**: Option 空值安全 | 使用 Option<T> | 无 null 解引用（Reference） | Maybe Monad | 所有可空场景 | `unwrap()` on None | — |
 | **推论**: From 转换链 | E1: From<E2> | 错误类型自动统一 | 类型类传递性 | ? 运算符 | 未实现 From | E0277 |
 | **定理**: 类型状态编码 | enum 表达状态 | 非法状态不可表示 | 代数类型穷尽性 | Typestate 模式 | 状态转换遗漏 | — |
 | **引理**: catch_unwind 隔离 | 闭包内 panic | 线程级别隔离 | —（运行时机制） | FFI 边界 | 跨线程 panic 传播 | panic |
 
-> **一致性检查**: Option 空值安全 ⟹ Result 显式传播 ⟹ ? 运算符合法性 ⟹ From 转换链，形成**从值到函数到控制流到类型统一**的递进链。panic 是独立维度（不可恢复边界），与 Result 形成互补。
+> **一致性（Coherence）检查**: Option 空值安全 ⟹ Result 显式传播 ⟹ ? 运算符合法性 ⟹ From 转换链，形成**从值到函数到控制流到类型统一**的递进链。panic 是独立维度（不可恢复边界），与 Result 形成互补。
 >
-> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.1 "内存安全完备性"
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.1 "内存安全（Memory Safety）完备性"
 > **过渡到示例与反例**: 定理链提供了形式化保证，但工程实践中这些保证的边界在哪里？下一节通过正例展示错误处理的正确使用方式，通过反例揭示定理失效的精确条件——特别是 unwrap panic、? 类型不匹配、错误忽略等边界场景。
 
 ---
@@ -579,7 +579,7 @@ let result = select! {
 > 异步错误处理有**两个维度**：
 >
 > 1) `Result` 维度的业务错误（IO 失败、解析错误）；
-> 2) **取消维度**的生命周期错误（Future 被 `select!` 丢弃时资源未清理）。
+> 2) **取消维度**的生命周期（Lifetimes）错误（Future 被 `select!` 丢弃时资源未清理）。
 > `Drop` 实现负责后者，`?` 运算符负责前者，但两者在 `unsafe` 或 FFI 边界处可能交互产生 UB。
 > **来源**:
 > [Tokio 文档: Cancellation Safety] ·
@@ -661,7 +661,7 @@ graph TD
     style T1 fill:#6f6
 ```
 
-> **认知功能**: 反事实验证器——通过系统化枚举定理失效的精确路径，帮助读者建立"Result 的强制处理边界"。读者可沿分支逐一检验自己代码中是否存在 unwrap、let _ = result 或 unsafe 绕过等反模式。核心洞察：Result 的 `#[must_use]` 仅是弱强制；unwrap 和 unsafe 是类型系统安全性的两个主要逃逸通道。[来源: 💡 原创分析]
+> **认知功能**: 反事实验证器——通过系统化枚举（Enum）定理失效的精确路径，帮助读者建立"Result 的强制处理边界"。读者可沿分支逐一检验自己代码中是否存在 unwrap、let _ = result 或 unsafe 绕过等反模式。核心洞察：Result 的 `#[must_use]` 仅是弱强制；unwrap 和 unsafe 是类型系统（Type System）安全性的两个主要逃逸通道。[来源: 💡 原创分析]
 
 **四层分析**:
 
@@ -704,7 +704,7 @@ graph TD
 | **层面** | **分析** | **结果** |
 |:---|:---|:---|
 | 编译期 | 类型不匹配时编译错误（E0277） | ✅ 安全 |
-| 运行时 | 无运行时检查开销（纯语法糖） | ✅ 零成本 |
+| 运行时（Runtime） | 无运行时检查开销（纯语法糖） | ✅ 零成本 |
 | 语义 | 要求 From 实现，语义边界明确 | ✅ 语义清晰 |
 | 工程 | map_err 或 anyhow 是标准 workaround | ✅ 可解 |
 
@@ -768,7 +768,7 @@ graph TD
     style T3 fill:#6f6
 ```
 
-> **认知功能**: 语义等价性检验器——澄清 Option 替代 null 的精确语义边界，揭示 unwrap 如何重新引入 null 解引用的等价风险。读者可用此图审查代码中 Option 的使用是否真正遵循类型安全路径。核心洞察：Option 在编译期替代了 null，但 unwrap 在运行期将"有定义的行为（panic）"重新暴露为崩溃风险；模式匹配和组合子才是安全替代。[来源: 💡 原创分析]
+> **认知功能**: 语义等价性检验器——澄清 Option 替代 null 的精确语义边界，揭示 unwrap 如何重新引入 null 解引用的等价风险。读者可用此图审查代码中 Option 的使用是否真正遵循类型安全路径。核心洞察：Option 在编译期替代了 null，但 unwrap 在运行期将"有定义的行为（panic）"重新暴露为崩溃风险；模式匹配（Pattern Matching）和组合子才是安全替代。[来源: 💡 原创分析]
 
 **四层分析**:
 
@@ -1138,7 +1138,7 @@ where
 }
 ```
 
-> **关键洞察**: `Result<T, !>` 将"不可能出错"这一信息编码进类型系统。当泛型函数要求 `Result<T, E>` 时，传入 `Result<T, !>` 完全合法——因为 `!` 是任意类型的子类型，`Result<T, !>` 自然满足 `Result<T, E>` 的约束（当 `E` 接收 `!` 时）。这是子类型多态在错误处理中的优雅应用。
+> **关键洞察**: `Result<T, !>` 将"不可能出错"这一信息编码进类型系统（Type System）。当泛型（Generics）函数要求 `Result<T, E>` 时，传入 `Result<T, !>` 完全合法——因为 `!` 是任意类型的子类型，`Result<T, !>` 自然满足 `Result<T, E>` 的约束（当 `E` 接收 `!` 时）。这是子类型多态在错误处理中的优雅应用。
 > **来源**: [Rust Reference: Never type](https://doc.rust-lang.org/reference/) · [RFC 1216: Never type](https://github.com/rust-lang/rfcs/pull/1216) · [TAPL Ch.11: Bottom type]
 
 ### 9.3 `std::backtrace::Backtrace` 与错误追踪
@@ -1290,7 +1290,7 @@ impl std::error::Error for TracedError {
 
 | 模式 | 实现方式 | 适用场景 | 性能影响 |
 |:---|:---|:---|:---|
-| 主动捕获 | `Backtrace::capture()` 嵌入错误结构体 | 库代码、结构化错误 | 仅在错误路径触发 |
+| 主动捕获 | `Backtrace::capture()` 嵌入错误结构体（Struct） | 库代码、结构化错误 | 仅在错误路径触发 |
 | 延迟捕获 | `anyhow::Error` 自动捕获 | 应用代码、快速迭代 | 同上 |
 | 强制捕获 | `Backtrace::force_capture()` | 关键安全审计点 | 无视环境变量，始终展开 |
 | 不捕获 | 纯 `std::io::Error` | 高频错误路径、性能敏感 | 零额外开销 |
@@ -1308,7 +1308,7 @@ impl std::error::Error for TracedError {
 | **运行时开销** | 极低（额外寄存器/栈参数） | 高（符号解析、栈展开） |
 | **信息类型** | 调用者位置（精确到语句） | 函数调用链（精确到函数） |
 | **可控性** | 编译器自动管理 | 受 `RUST_BACKTRACE` 环境变量控制 |
-| **适用场景** | 包装函数、断言宏 | 错误诊断、日志审计 |
+| **适用场景** | 包装函数、断言宏（Macro） | 错误诊断、日志审计 |
 
 **协同使用示例**：
 
@@ -1617,13 +1617,13 @@ fn parse_port(s: &str) -> Result<u16, AppError> {
 | 模式 | 说明 | 来源 |
 |:---|:---|:---|
 | **Context Selector** | 每个变体生成 `VariantSnafu` 结构体（Struct），显式构造错误 | [snafu docs] |
-| **`#[snafu(module)]`** | 将选择器放入子模块，避免命名空间污染 | [snafu guide] |
+| **`#[snafu(module)]`** | 将选择器放入子模块（Module），避免命名空间污染 | [snafu guide] |
 | **`#[snafu(transparent)]`** | 委托 Display/source 给底层错误，消除冗余包装 | [snafu docs] |
 | **`#[snafu(context(false))]`** | 跳过选择器生成，直接实现 `From`（类似 `thiserror`） | [snafu docs] |
-| **`ensure!` / `whatever!`** | 类似 `assert!` 的错误构造宏；`Whatever` 类型用于快速原型 | [snafu docs] |
+| **`ensure!` / `whatever!`** | 类似 `assert!` 的错误构造宏（Macro）；`Whatever` 类型用于快速原型 | [snafu docs] |
 | **`snafu::Location`** | 轻量级错误源点跟踪（类似 `#[track_caller]`） | [snafu changelog] |
 
-> **[来源: snafu docs]** `snafu` 特别适合大型多 crate 项目：每个模块定义自己的错误类型，通过 `context` 方法在边界处转换，保持错误类型的模块内聚性。GreptimeDB 等工业项目采用此模式管理数百个错误变体。✅
+> **[来源: snafu docs]** `snafu` 特别适合大型多 crate 项目：每个模块（Module）定义自己的错误类型，通过 `context` 方法在边界处转换，保持错误类型的模块内聚性。GreptimeDB 等工业项目采用此模式管理数百个错误变体。✅
 
 #### 9.4.5 六库综合对比矩阵
 
@@ -1632,7 +1632,7 @@ fn parse_port(s: &str) -> Result<u16, AppError> {
 | **核心定位** | 应用级快速错误传播 | 库级结构化错误定义 | 可定制报告的应用错误 | 富媒体诊断报告 | 源码级诊断协议 | 显式上下文错误类型 |
 | **使用场景** | CLI / 原型 / 应用顶层 | 库公共 API | 需自定义报告格式的应用 | 终端用户面向的 CLI | 编译器 / 解析器 / DSL | 大型多模块系统 |
 | **API 风格** | 隐式转换，`?` 即用 | 派生宏减少样板 | 类似 anyhow + WrapErr | eyre handler 扩展 | Diagnostic trait + 派生 | Context Selector 强制显式 |
-| **错误类型** | 动态 `anyhow::Error` | 静态枚举/结构体 | 动态 `eyre::Report` | 动态（基于 eyre） | 静态 + `Report` 包装 | 静态枚举 |
+| **错误类型** | 动态 `anyhow::Error` | 静态枚举（Enum）/结构体（Struct） | 动态 `eyre::Report` | 动态（基于 eyre） | 静态 + `Report` 包装 | 静态枚举 |
 | **源码标注** | ❌ | ❌ | ❌ | ❌ | ✅ `SourceSpan` + 高亮 | ❌ |
 | **错误代码** | ❌ | ✅ 手动 | ❌ | ❌ | ✅ `#[diagnostic(code(...))]` | ❌ |
 | **Backtrace** | ✅ 自动 | ✅ `#[backtrace]` | ✅ 自动 | ✅ 彩色 backtrace | ✅ 可集成 | ✅ 可选 |
@@ -1779,7 +1779,7 @@ fn parse_port(s: &str) -> Result<u16, LocatedError> {
 }
 ```
 
-**设计模式：零成本抽象**
+**设计模式：零成本抽象（Zero-Cost Abstraction）**
 
 | 模式 | 存储类型 | 运行时开销 | 精度 | 适用场景 |
 |:---|:---|:---|:---|:---|
@@ -1891,7 +1891,7 @@ impl AppError {
 | 策略 | 实现方式 | 开销 | 推荐场景 |
 |:---|:---|:---|:---|
 | 纯 `anyhow` | `anyhow::Error` + `?` | 中（自动 backtrace + track_caller） | 应用代码、CLI 工具 |
-| `thiserror` + `#[backtrace]` | 枚举 + 自动 Backtrace | 高（仅在错误路径） | 库代码、需结构化 match |
+| `thiserror` + `#[backtrace]` | 枚举（Enum） + 自动 Backtrace | 高（仅在错误路径） | 库代码、需结构化 match |
 | `thiserror` + `#[track_caller]` | 枚举 + `Location::caller()` | 极低 | 高频错误、性能敏感的库 |
 | 混合策略 | `Location` + 条件 `Backtrace` | 按需 | 关键路径错误审计 |
 
@@ -1906,7 +1906,7 @@ impl AppError {
 | 函数类型 | 支持状态 | 说明 |
 |:---|:---:|:---|
 | 普通函数 | ✅ 稳定 | Rust 1.46+ |
-| 泛型函数 | ✅ 稳定 | 单态化后隐式参数正确传递 |
+| 泛型（Generics）函数 | ✅ 稳定 | 单态化（Monomorphization）后隐式参数正确传递 |
 | `const fn` | ✅ 稳定 | 编译期错误定位 |
 | trait 方法 | ✅ 稳定 | [RFC 2091](https://rust-lang.github.io/rfcs//2091-inline-semantic.html) 最初因 MIR 传递时机限制而禁止；后实现改为 monomorphization 之后注入，解除限制 [来源: rustc-dev-guide — track_caller in traits] |
 | `async fn` | ⚠️ 部分支持 | Stable 上为 **no-op**（编译通过但 `Location::caller()` 返回 async fn 自身位置）；完整支持需 nightly `#![feature(async_fn_track_caller)]`（Tracking: [rust-lang/rust#110011]） |
@@ -2028,7 +2028,7 @@ fn compute() -> Maybe<i32> {
 |:---|:---|:---|
 | Trait 系统 | [01_traits.md](./01_traits.md) | Error/From trait 的实现基础 |
 | 泛型系统 | [02_generics.md](./02_generics.md) | Result<T, E> 的泛型参数约束 |
-| 所有权与生命周期 | [01_foundation/01_ownership.md](../01_foundation/01_ownership.md) | panic 时的资源清理 |
+| 所有权（Ownership）与生命周期（Lifetimes） | [01_foundation/01_ownership.md](LINK_PLACEHOLDER) | panic 时的资源清理 |
 | 类型系统基础 | [01_foundation/04_type_system.md](../01_foundation/04_type_system.md) | 和类型的理论基础 |
 | 并发与 Send/Sync | [03_advanced/01_concurrency.md](../03_advanced/01_concurrency.md) | 跨线程错误传播 |
 | 异步与 Future | [03_advanced/02_async.md](../03_advanced/02_async.md) | async 中的 ? 运算符 |
@@ -2434,7 +2434,7 @@ fn main() {
 <details>
 <summary>✅ 答案</summary>
 
-**B. 使用 `thiserror` derive 宏**。
+**B. 使用 `thiserror` derive 宏（Macro）**。
 
 `thiserror` 是最常用的错误类型库：
 

@@ -45,7 +45,7 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十二、边界测试：数值类型的编译错误](#十二边界测试数值类型的编译错误)
-    - [12.1 边界测试：整数溢出在 Debug 与 Release 中的差异（运行时行为）](#121-边界测试整数溢出在-debug-与-release-中的差异运行时行为)
+    - [12.1 边界测试：整数溢出在 Debug 与 Release 中的差异（运行时（Runtime）行为）](LINK_PLACEHOLDER)
     - [12.2 边界测试：浮点数相等比较（逻辑错误）](#122-边界测试浮点数相等比较逻辑错误)
     - [12.3 边界测试：`as` 转换的截断风险（编译错误）](#123-边界测试as-转换的截断风险编译错误)
     - [12.4 边界测试：浮点数作为 `match` 条件（编译错误）](#124-边界测试浮点数作为-match-条件编译错误)
@@ -318,7 +318,7 @@ let size = NonZeroU32::new(1024).unwrap();
 // Option<NonNull<T>>: 双重优化
 ```
 
-> **NonZero 洞察**: `NonZero` 类型是 Rust **类型系统与优化**结合的经典案例——编译器利用**niche value**（零）压缩 `Option<T>` 的表示。
+> **NonZero 洞察**: `NonZero` 类型是 Rust **类型系统（Type System）与优化**结合的经典案例——编译器利用**niche value**（零）压缩 `Option<T>` 的表示。
 > [来源: [std::num::NonZeroU32](https://doc.rust-lang.org/std/num/type.NonZeroU32.html)]
 
 ---
@@ -465,14 +465,14 @@ graph TD
 | [Rust Reference — Numeric Types](https://doc.rust-lang.org/reference/types/numeric.html) | ✅ 一级 | 数值类型参考 |
 | [TRPL — Data Types](https://doc.rust-lang.org/book/ch03-02-data-types.html) | ✅ 一级 | 基础教程 |
 | [RFC 0560 — Integer Overflow](https://github.com/rust-lang/rfcs/blob/master/text/0560-integer-overflow.md) | ✅ 一级 | 溢出行为 RFC |
-| [std::num](https://doc.rust-lang.org/std/num/) | ✅ 一级 | 数值模块 |
+| [std::num](https://doc.rust-lang.org/std/num/) | ✅ 一级 | 数值模块（Module） |
 | [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754) | ✅ 一级 | 浮点标准 |
 
 ---
 
 ## 相关概念文件
 
-- [Type System](./04_type_system.md) — 类型系统
+- [Type System](./04_type_system.md) — 类型系统（Type System）
 - [Zero Cost Abstractions](./06_zero_cost_abstractions.md) — 零成本抽象（Zero-Cost Abstraction）
 - [Collections](./08_collections.md) — 集合类型
 
@@ -628,7 +628,7 @@ fn main() {
 > 2) `checked_cast`（不稳定）；
 > 3) 显式范围检查。
 > Rust 的设计哲学：`as` 是"我知道我在做什么"的低级操作，需要开发者负责正确性。
-> 这与 C 的 `(type)value`（相同行为，无替代）或 Swift 的 `Int8(big)`（运行时检查，失败 panic）不同——Rust 在性能和安全性间提供明确选择。
+> 这与 C 的 `(type)value`（相同行为，无替代）或 Swift 的 `Int8(big)`（运行时（Runtime）检查，失败 panic）不同——Rust 在性能和安全性间提供明确选择。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] ·
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/convert/trait.TryInto.html)]
 
@@ -655,7 +655,7 @@ fn main() {
 > Rust 的 `HashMap` 和 `BTreeMap` 不直接支持 `f32`/`f64` 作为键，因为 `NaN` 使相等性不满足等价关系（反身性不成立）。
 > `ordered_float` crate 通过将 `NaN` 映射到特定值解决此问题。
 > 这与 C/C++ 的 `isnan()` 宏（Macro）、Python 的 `math.isnan()`、Java 的 `Double.isNaN()` 相同——所有遵循 IEEE 754 的语言都有此问题。
-> Rust 的类型系统不阻止 `NaN` 比较错误，但 `Hash` 限制防止 `NaN` 导致更严重的集合不一致。
+> Rust 的类型系统（Type System）不阻止 `NaN` 比较错误，但 `Hash` 限制防止 `NaN` 导致更严重的集合不一致。
 > [来源: [IEEE 754 Standard](https://ieeexplore.ieee.org/document/8766229)] ·
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.f64.html)]
 
@@ -708,10 +708,10 @@ fn main() {
 | 数值类型与运算：从整数到浮点的完整图景 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 算术安全 ⟸ 溢出检查 / Wrapping ⟸ 整数类型系统
-> 浮点一致性 ⟸ IEEE 754 遵循 ⟸ f32/f64 语义
+> 浮点一致性（Coherence） ⟸ IEEE 754 遵循 ⟸ f32/f64 语义
 > **过渡**: 掌握 数值类型与运算：从整数到浮点的完整图景 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 数值类型与运算：从整数到浮点的完整图景 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: 数值类型与运算：从整数到浮点的完整图景 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 数值类型与运算：从整数到浮点的完整图景 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

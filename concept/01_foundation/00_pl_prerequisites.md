@@ -14,6 +14,7 @@
 > **阅读建议**: 可选阅读。若你已有 Haskell/Scheme/OCaml 背景，可跳过；若你只有 Python/JavaScript 背景，强烈建议先读本文。
 >
 > **来源**: [TRPL — Foreword](https://doc.rust-lang.org/book/foreword.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **前置概念**: N/A
 ---
 
 > **后置概念**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
@@ -47,9 +48,9 @@
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：静态类型检查与动态类型检查的核心区别是什么？Rust 属于哪一类？（理解层）](#测验-1静态类型检查与动态类型检查的核心区别是什么rust-属于哪一类理解层)
     - [测验 2：什么是"语法"（Syntax）和"语义"（Semantics）？编译错误通常属于哪一类问题？（理解层）](#测验-2什么是语法syntax和语义semantics编译错误通常属于哪一类问题理解层)
-    - [测验 3："引用透明"（Referential Transparency）对程序优化有什么意义？（理解层）](#测验-3引用透明referential-transparency对程序优化有什么意义理解层)
+    - [测验 3："引用（Reference）透明"（Referential Transparency）对程序优化有什么意义？（理解层）](LINK_PLACEHOLDER)
     - [测验 4：什么是"副作用"（Side Effect）？为什么副作用使程序推理更困难？（理解层）](#测验-4什么是副作用side-effect为什么副作用使程序推理更困难理解层)
-    - [测验 5：类型系统的主要目标是什么？Rust 的类型系统额外提供了什么保证？（理解层）](#测验-5类型系统的主要目标是什么rust-的类型系统额外提供了什么保证理解层)
+    - [测验 5：类型系统（Type System）的主要目标是什么？Rust 的类型系统额外提供了什么保证？（理解层）](LINK_PLACEHOLDER)
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -64,7 +65,7 @@ Rust 的 `move` 语义与 C++ 的 `move` 看起来相似，但根源完全不同
 | 语言 | 求值策略 | Move 语义的根源 |
 |:---|:---|:---|
 | **C++** | 按值复制（CBV）+ 自定义复制/移动构造函数 | 性能优化：避免深拷贝 |
-| **Rust** | 按值移动（Move） | 类型系统的必然：资源唯一性保证安全 |
+| **Rust** | 按值移动（Move） | 类型系统（Type System）的必然：资源唯一性保证安全 |
 
 > **关键洞察**: Rust 的 move 不是"优化选项"，而是**安全基础设施**。
 > 如果一个值只能有一个所有者，那么就不可能存在两个指针同时释放同一块内存——这从根本上消除了 use-after-free。
@@ -103,7 +104,7 @@ head xs                -- 直接使用记住的结果
 
 **Rust 的策略**：
 
-Rust 是**严格的 CBV**（eager evaluation），但引入了**所有权移动**：
+Rust 是**严格的 CBV**（eager evaluation），但引入了**所有权（Ownership）移动**：
 
 ```rust
 fn take_ownership(s: String) { /* s 被消费 */ }
@@ -122,7 +123,7 @@ take_ownership(s);      // s 的所有权移入函数
 | CBV | 立即 | 否 | C, Java, Python | `T`（`Copy` 类型） |
 | CBN | 使用时 | 可能 | Algol 60 | 无直接对应 |
 | CBNeed | 使用时 + 缓存 | 否 | Haskell | `LazyCell<T>`, `LazyLock<T>` |
-| Move | 立即 + 转移所有权 | 否 | Rust | `T`（非 `Copy` 类型） |
+| Move | 立即 + 转移所有权（Ownership） | 否 | Rust | `T`（非 `Copy` 类型） |
 
 ---
 
@@ -329,7 +330,7 @@ impl Future for FetchDataFuture {
 | 机制 | 调度者 | 上下文切换成本 | Continuation 存储 |
 |:---|:---|:---:|:---|
 | OS 线程 | 内核 | 高（~1μs，需切换页表） | 内核栈（MB 级） |
-| Rust async | 用户态运行时 | 低（~ns 级，状态机切换） | 状态机结构体（按需分配） |
+| Rust async | 用户态运行时（Runtime） | 低（~ns 级，状态机切换） | 状态机结构体（Struct）（按需分配） |
 | Goroutine | Go 运行时（Runtime） | 中（~100ns） | Go 运行时管理的轻量栈 |
 
 ---
@@ -380,7 +381,7 @@ unsafe {
 }
 ```
 
-> **结构化程序定理的 Rust 版本**: 在 safe Rust 中，控制流的所有路径都可由编译器静态分析，因此所有资源（内存、文件、锁）的生命周期都可追踪。`unsafe` 打破了这一保证，需要程序员手动维护。
+> **结构化程序定理的 Rust 版本**: 在 safe Rust 中，控制流的所有路径都可由编译器静态分析，因此所有资源（内存、文件、锁）的生命周期（Lifetimes）都可追踪。`unsafe` 打破了这一保证，需要程序员手动维护。
 
 ---
 
@@ -418,7 +419,7 @@ unsafe {
 <details>
 <summary>✅ 答案与解析</summary>
 
-静态类型检查在编译期验证类型正确性，运行时无类型错误；动态类型检查在运行时进行。Rust 属于静态类型语言，编译期强制类型检查。
+静态类型检查在编译期验证类型正确性，运行时（Runtime）无类型错误；动态类型检查在运行时进行。Rust 属于静态类型语言，编译期强制类型检查。
 </details>
 
 ---
@@ -437,7 +438,7 @@ unsafe {
 
 ### 测验 3："引用透明"（Referential Transparency）对程序优化有什么意义？（理解层）
 
-**题目**: "引用透明"（Referential Transparency）对程序优化有什么意义？
+**题目**: "引用（Reference）透明"（Referential Transparency）对程序优化有什么意义？
 
 <details>
 <summary>✅ 答案与解析</summary>
@@ -466,7 +467,7 @@ unsafe {
 <details>
 <summary>✅ 答案与解析</summary>
 
-主要目标是防止运行时类型错误、提供抽象。Rust 额外通过所有权和生命周期系统保证内存安全（无悬垂指针、无数据竞争）无需垃圾回收。
+主要目标是防止运行时类型错误、提供抽象。Rust 额外通过所有权和生命周期（Lifetimes）系统保证内存安全（Memory Safety）（无悬垂指针、无数据竞争）无需垃圾回收。
 </details>
 
 ## 实践
@@ -488,13 +489,13 @@ unsafe {
 | 编程语言理论基础（PL Prerequisites） 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | 编程语言理论基础（PL Prerequisites） 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
-> 类型安全 ⟸ 静态类型检查 ⟸ 语法与语义一致性
+> 类型安全 ⟸ 静态类型检查 ⟸ 语法与语义一致性（Coherence）
 > 程序正确性 ⟸ 无副作用推理 ⟸ 纯函数基础
 > **过渡**: 掌握 编程语言理论基础（PL Prerequisites） 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 编程语言理论基础（PL Prerequisites） 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: 编程语言理论基础（PL Prerequisites） 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 编程语言理论基础（PL Prerequisites） 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

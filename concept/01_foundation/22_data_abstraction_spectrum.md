@@ -39,7 +39,7 @@
 > C++ 在此之上添加行为封装和继承，
 > Java 将抽象与实现彻底分离，
 > Haskell 用代数数据类型统一了数据与计算，
-> 而 Rust 通过 enum + trait + 所有权将数据抽象推向了"编译期可验证的行为契约"的新高度。**
+> 而 Rust 通过 enum + trait + 所有权（Ownership）将数据抽象推向了"编译期可验证的行为契约"的新高度。**
 
 ---
 
@@ -107,7 +107,7 @@ class Circle implements Drawable {
 
 - 抽象单位 = 接口（纯行为契约）+ 类（实现）
 - 封装 = 包级访问控制
-- 多态 = 接口实现 + 运行时动态分发
+- 多态 = 接口实现 + 运行时（Runtime）动态分发
 - 类型安全 = 编译期 + 运行时（Runtime）（`ClassCastException`）
 
 **关键创新**: 接口与实现的**完全分离**。一个类可实现多个接口（mixin 风格的多态）。
@@ -184,7 +184,7 @@ impl Drawable for Shape {
 |:---|:---|:---|:---|:---|
 | 数据组织 | 类层次（继承） | 类实现接口 | 代数类型（和+积） | **代数类型 + 外部实现** |
 | 行为绑定 | 类内部定义 | 接口声明 + 类实现 | 独立函数 | **trait 声明 + impl 实现** |
-| 扩展性 | 继承（侵入式） | 实现接口（类需修改） | 类型类实例（独立） | **孤儿规则控制的外部 impl** |
+| 扩展性 | 继承（侵入式） | 实现接口（类需修改） | 类型类实例（独立） | **孤儿规则（Orphan Rule）控制的外部 impl** |
 | 和类型 | `std::variant`（C++17） | 无原生支持 | `data` | **`enum`（原生）** |
 | 穷尽性检查 | `std::visit`（不强制） | `switch` 不强制 | 强制 | **`match` 强制** |
 | 内存布局 | vptr 内嵌 | 对象头 | 紧凑 | **紧凑 + niche optimization** |
@@ -197,7 +197,7 @@ impl Drawable for Shape {
 
 ### 2.6 第六层：所有权约束下的数据抽象
 
-Rust 在第五层之上增加了**所有权约束**，使数据抽象具有**资源安全保证**：
+Rust 在第五层之上增加了**所有权（Ownership）约束**，使数据抽象具有**资源安全保证**：
 
 ```rust,ignore
 // 文件句柄: 抽象了操作系统资源
@@ -319,7 +319,7 @@ fn process<T: Drawable + Serializable>(item: T) {
 |:---|:---|:---:|
 | C | `T*` | ❌ 可空，无检查 |
 | C++ | `T*` / `std::optional<T>`（C++17） | ⚠️ optional 较安全，但非原生 |
-| Java | `T`（引用默认可空） | ❌ `NullPointerException` |
+| Java | `T`（引用（Reference）默认可空） | ❌ `NullPointerException` |
 | Haskell | `Maybe a` | ✅ 强制处理 |
 | Rust | `Option<T>` | ✅ `match` 强制穷尽 |
 
@@ -490,8 +490,8 @@ fn fixed() {
 ```
 
 > **修正**:
-> 零大小类型（ZST，如 `()`、`PhantomData<T>`、空结构体）不占用内存，其引用可能指向同一虚拟地址。
-> 依赖 ZST 指针唯一性（如哈希表键）是未定义行为。ZST 的正确用途是类型级标记（phantom type）、编译期常量、状态机状态标签——利用类型系统传递信息，无运行时开销。
+> 零大小类型（ZST，如 `()`、`PhantomData<T>`、空结构体（Struct））不占用内存，其引用（Reference）可能指向同一虚拟地址。
+> 依赖 ZST 指针唯一性（如哈希表键）是未定义行为。ZST 的正确用途是类型级标记（phantom type）、编译期常量、状态机状态标签——利用类型系统（Type System）传递信息，无运行时（Runtime）开销。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.2 边界测试：枚举变体内存布局的不可变性（逻辑错误）
@@ -521,8 +521,8 @@ fn fixed() {
 ```
 
 > **修正**:
-> 枚举变体的字段默认不可变。即使枚举实例是 `mut`，通过模式匹配获取的可变引用仍需显式 `ref mut`。
-> 枚举的内存布局由编译器优化（discriminant 可能内联、 niche optimization），应用代码不应假设枚举的具体内存表示（除非 `#[repr(C)]` 或 `#[repr(u8)]` 显式标记）。
+> 枚举（Enum）变体的字段默认不可变。即使枚举实例是 `mut`，通过模式匹配（Pattern Matching）获取的可变引用（Mutable Reference）仍需显式 `ref mut`。
+> 枚举（Enum）的内存布局由编译器优化（discriminant 可能内联、 niche optimization），应用代码不应假设枚举的具体内存表示（除非 `#[repr(C)]` 或 `#[repr(u8)]` 显式标记）。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.3 边界测试：零大小类型的 `Box` 分配（编译错误/运行时差异）
@@ -542,7 +542,7 @@ fn main() {
 > **修正**:
 > 零大小类型（ZST，如 `()`、`PhantomData<T>`、空 struct）的大小为 0，不占用内存。
 > `Box<ZST>` 的 `into_raw` 返回的指针不指向有效堆内存——它是悬垂指针（dangling pointer），但对 ZST 解引用是安全的（不读取任何字节）。
-> 这是 Rust 类型系统的边缘情况：内存安全保证不依赖指针的有效性，而依赖访问的字节数。`Box::new(ZeroSized)` 可能不调用分配器（优化为无操作），`Box::from_raw(ptr)` 可能不调用 deallocator。
+> 这是 Rust 类型系统（Type System）的边缘情况：内存安全（Memory Safety）保证不依赖指针的有效性，而依赖访问的字节数。`Box::new(ZeroSized)` 可能不调用分配器（优化为无操作），`Box::from_raw(ptr)` 可能不调用 deallocator。
 > 这与 C 的 `malloc(0)`（实现定义行为，可能返回 NULL 或有效指针）不同——Rust 的 ZST 处理是类型系统层面的，不依赖分配器行为。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-04-advanced-types.html)] ·
 > [来源: [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html)]
@@ -627,7 +627,7 @@ fn main() {
 > 但 `println!("{}", p.age)` 实际上**可以编译**——部分移动后未移动字段仍可用。
 > 真正的编译错误：`let q = p;`（试图整体移动已部分移动的变量）或 `println!("{:?}", p)`（使用已移动字段）。
 > 部分移动使 Rust 的所有权系统更灵活：无需为单个字段移动而拆分整个 struct。
-> 这与 C++ 的默认拷贝（无移动语义）或 Swift 的拷贝语义不同——Rust 的部分移动是零成本抽象，编译期跟踪每个字段的所有权状态。
+> 这与 C++ 的默认拷贝（无移动语义）或 Swift 的拷贝语义不同——Rust 的部分移动是零成本抽象（Zero-Cost Abstraction），编译期跟踪每个字段的所有权状态。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] ·
 > [来源: [Rust Reference — Moved Values](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
 
@@ -676,7 +676,7 @@ Rust `enum`（代数数据类型）带有标签（tag），编译器知道当前
 <details>
 <summary>✅ 答案与解析</summary>
 
-ZST 不占用内存，可用于类型级标记（phantom types）、空迭代器、`Result<(), Error>` 表示"成功但无返回值"等场景。
+ZST 不占用内存，可用于类型级标记（phantom types）、空迭代器（Iterator）、`Result<(), Error>` 表示"成功但无返回值"等场景。
 </details>
 
 ---
@@ -714,10 +714,10 @@ ZST 不占用内存，可用于类型级标记（phantom types）、空迭代器
 | 数据抽象谱系：从 C struct 到 Rust enum + trait 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > API 稳定性 ⟸ 封装边界清晰 ⟸ pub/private 分层
-> 零成本抽象 ⟸ 泛型与 trait ⟸ 编译期分发
+> 零成本抽象（Zero-Cost Abstraction） ⟸ 泛型（Generics）与 trait ⟸ 编译期分发
 > **过渡**: 掌握 数据抽象谱系：从 C struct 到 Rust enum + trait 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 数据抽象谱系：从 C struct 到 Rust enum + trait 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: 数据抽象谱系：从 C struct 到 Rust enum + trait 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 数据抽象谱系：从 C struct 到 Rust enum + trait 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

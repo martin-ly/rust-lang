@@ -2,7 +2,7 @@
 >
 > [综述级]
 >
-> **本节关键术语**: 强制转换 (Coercion) · 显式转换 (Casting) · as · Deref 强制转换 · 类型推断 — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: 强制转换 (Coercion) · 显式转换 (Casting) · as · Deref 强制转换 · 类型推断（Type Inference） — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 类型强制与转换：显式与隐式的边界
 >
@@ -45,19 +45,19 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：类型转换的编译错误](#十边界测试类型转换的编译错误)
-    - [10.1 边界测试：不安全的 `as` 转换导致截断（运行时错误）](#101-边界测试不安全的-as-转换导致截断运行时错误)
-    - [10.2 边界测试：裸指针与引用转换的生命周期丢失（编译错误 / 运行时 UB）](#102-边界测试裸指针与引用转换的生命周期丢失编译错误--运行时-ub)
+    - [10.1 边界测试：不安全的 `as` 转换导致截断（运行时（Runtime）错误）](LINK_PLACEHOLDER)
+    - [10.2 边界测试：裸指针与引用（Reference）转换的生命周期（Lifetimes）丢失（编译错误 / 运行时 UB）](LINK_PLACEHOLDER)
     - [10.3 边界测试： trait 对象强制转换的 `Sized` 约束（编译错误）](#103-边界测试-trait-对象强制转换的-sized-约束编译错误)
     - [10.4 边界测试：`as` 关键字的转换限制（编译错误）](#104-边界测试as-关键字的转换限制编译错误)
     - [10.5 边界测试：`dyn Trait` 到 `dyn Trait` 的跨 trait coercion（编译错误）](#105-边界测试dyn-trait-到-dyn-trait-的跨-trait-coercion编译错误)
     - [10.5 边界测试：强制类型转换与 `Deref` 的自动解引用（编译错误）](#105-边界测试强制类型转换与-deref-的自动解引用编译错误)
-    - [10.6 边界测试：函数指针到闭包的类型不兼容（编译错误）](#106-边界测试函数指针到闭包的类型不兼容编译错误)
+    - [10.6 边界测试：函数指针到闭包（Closures）的类型不兼容（编译错误）](LINK_PLACEHOLDER)
     - [10.8 边界测试：const fn 中的非编译期操作](#108-边界测试const-fn-中的非编译期操作)
   - [实践](#实践)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Deref 强制转换（理解层）](#测验-1deref-强制转换理解层)
     - [测验 2：`as` 与 `TryFrom`（应用层）](#测验-2as-与-tryfrom应用层)
-    - [测验 3：From/Into 的孤儿规则（分析层）](#测验-3frominto-的孤儿规则分析层)
+    - [测验 3：From/Into 的孤儿规则（Orphan Rule）（分析层）](LINK_PLACEHOLDER)
     - [测验 4：指针转换的安全性（分析层）](#测验-4指针转换的安全性分析层)
     - [测验 5：强制 vs 转换的选择（评价层）](#测验-5强制-vs-转换的选择评价层)
   - [认知路径](#认知路径)
@@ -186,7 +186,7 @@ takes_mut(&mut string);  // &mut String → &mut str
   takes_trait(&x);  // &i32 → &dyn Display
 ```
 
-> **子类型洞察**: 生命周期子类型是 Rust **借用检查器的核心**——它允许"长生命周期的值用于短生命周期的上下文"。
+> **子类型洞察**: 生命周期（Lifetimes）子类型是 Rust **借用（Borrowing）检查器的核心**——它允许"长生命周期的值用于短生命周期的上下文"。
 > [来源: [Rust Reference — Subtyping](https://doc.rust-lang.org/reference/subtyping.html)]
 
 ---
@@ -327,7 +327,7 @@ let ptr = &aligned as *const Aligned as *const u8;
 // ptr 是 16 字节对齐的
 ```
 
-> **指针洞察**: Rust 的**原始指针（Raw Pointer）**（*const T,*mut T）是**unsafe 的入口**——它们可以指向任意地址，解引用需要 unsafe 块。
+> **指针洞察**: Rust 的**原始指针（Raw Pointer）**（*const T,*mut T）是**unsafe 的入口**——它们可以指向任意地址，解引用（Reference）需要 unsafe 块。
 > [来源: [Rust Reference — Raw Pointers](https://doc.rust-lang.org/reference/types/pointer.html#raw-pointers-const-and-mut)]
 
 ---
@@ -392,7 +392,7 @@ graph TD
     style AS fill:#fff3e0
 ```
 
-> **认知功能**: **as 是最后手段**——优先使用类型系统保证安全的转换方式。
+> **认知功能**: **as 是最后手段**——优先使用类型系统（Type System）保证安全的转换方式。
 > [来源: [Rust Clippy — Casting Lints](https://rust-lang.github.io/rust-clippy//master/index.html#/cast)]
 
 ---
@@ -494,7 +494,7 @@ graph TD
 
 ## 相关概念文件
 
-- [Type System](./04_type_system.md) — 类型系统
+- [Type System](./04_type_system.md) — 类型系统（Type System）
 - [Traits](../02_intermediate/01_traits.md) — Trait 系统
 - [Generics](../02_intermediate/02_generics.md) — 泛型（Generics）
 - [FFI](../03_advanced/05_rust_ffi.md) — 外部函数接口
@@ -634,7 +634,7 @@ fn upcast(b: &dyn B) -> &dyn A {
 
 > **修正**: Trait object 的**向上转型**（upcasting）：`dyn B` → `dyn A`（`B: A`）在 Rust 中长期不支持，因为 vtable 布局问题：`dyn B` 的 vtable 包含 `B` 的方法，`dyn A` 的 vtable 只包含 `A` 的方法，需要额外的 vtable 指针或调整。
 > Rust 1.86+ 引入了 trait upcasting（不稳定特性），允许 `b as &dyn A`。
-> 旧版 workaround：1) 在 trait 中定义 `as_a(&self) -> &dyn A` 方法；2) 使用泛型而非 trait object；3) 使用 `downcast_ref`（若具体类型已知）。
+> 旧版 workaround：1) 在 trait 中定义 `as_a(&self) -> &dyn A` 方法；2) 使用泛型（Generics）而非 trait object；3) 使用 `downcast_ref`（若具体类型已知）。
 > 这与 Java 的接口向上转型（自动，无开销）或 C++ 的多继承（复杂 vtable 调整）不同——Rust 的单一继承 trait + 自动 upcasting 是设计演进的方向。
 > [来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)] ·
 > [来源: [Trait Upcasting RFC](https://rust-lang.github.io/rfcs//3324-dyn-upcasting.html)]
@@ -671,7 +671,7 @@ fn main() {
 > 1) 只作用于引用（`&T`），不作用于值移动；
 > 2) 不可链式用于方法调用的 receiver（`w.len()` 调用 `String::len` 是通过自动解引用）；
 > 3) 不可用于 `let s: String = w`（需要 `DerefMove`，Rust 中不存在）。
-> `Deref` 的设计目的：让自定义类型像智能指针一样行为（`Box<T>`、`Rc<T>`、`Arc<T>`）。
+> `Deref` 的设计目的：让自定义类型像智能指针（Smart Pointer）一样行为（`Box<T>`、`Rc<T>`、`Arc<T>`）。
 > 这与 C++ 的隐式转换运算符（`operator T()`，可作用于值移动）或 Swift 的 `ExpressibleByStringLiteral` 不同——Rust 的 `Deref` 是受限的自动解引用，滥用会导致设计问题。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-02-deref.html)] ·
 > [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines//predictability.html)]
@@ -699,14 +699,14 @@ fn main() {
 }
 ```
 
-> **修正**: 闭包与函数指针的类型关系：
+> **修正**: 闭包（Closures）与函数指针的类型关系：
 >
 > 1) **无捕获闭包**（`Fn` / `FnMut` / `FnOnce` 不捕获环境）可**强制转换**为函数指针 `fn(T) -> U`；
 > 2) **捕获闭包**有编译器生成的匿名类型（如 `{closure@main.rs:10:5}`），不能转为函数指针；
 > 3) `fn` 指针大小固定（两个指针：`data` + `code` 或单个代码指针），闭包类型大小取决于捕获的变量。
 > 需要传递捕获闭包时，使用 trait object：`Box<dyn Fn(i32) -> i32>` 或 `&dyn Fn(i32) -> i32`。
 > 这与 C++ 的 lambda（无捕获时可转为函数指针，有捕获时不能）或 Java 的 lambda（总是转为函数式接口，但底层是对象）类似
-> ——Rust 的闭包类型系统精确区分捕获和无捕获。
+> ——Rust 的闭包类型系统（Type System）精确区分捕获和无捕获。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] ·
 > [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
 
@@ -885,7 +885,7 @@ Deref 强制转换是 Rust 的隐式转换机制之一：
 
 - 发生在函数调用、方法调用、赋值等场景
 - 只适用于实现了 `Deref`/`DerefMut` 的类型
-- 不改变值的实际类型，只是临时借用为另一种引用
+- 不改变值的实际类型，只是临时借用（Borrowing）为另一种引用
 
 这与 `as` 不同：`as` 是显式、可能改变值表示的转换（如整数截断、指针重解释）。
 </details>
@@ -901,14 +901,14 @@ Deref 强制转换是 Rust 的隐式转换机制之一：
 | 定理 | 前提 | 结论 | 置信度 |
 | :--- | :--- | :--- | :--- |
 | 类型强制与转换：显式与隐式的边界 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 类型强制与转换：显式与隐式的边界 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 类型强制与转换：显式与隐式的边界 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 类型强制与转换：显式与隐式的边界 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 类型转换安全 ⟸ Deref/From/Into 自动 ⟸ 编译期检查
 > 显式转换正确 ⟸ as / try_from 语义 ⟸ 类型系统
 > **过渡**: 掌握 类型强制与转换：显式与隐式的边界 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 类型强制与转换：显式与隐式的边界 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: 类型强制与转换：显式与隐式的边界 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 类型强制与转换：显式与隐式的边界 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

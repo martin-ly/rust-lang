@@ -1,7 +1,7 @@
 # Async Closures（异步闭包）
 
 > **EN**: Async Closures
-> **Summary**: Stable Rust 1.85.0+ 引入的 `async || {}` 闭包语法，`AsyncFn`/`AsyncFnMut`/`AsyncFnOnce` trait 家族已进入标准库 prelude。
+> **Summary**: Stable Rust 1.85.0+ 引入的 `async || {}` 闭包（Closures）语法，`AsyncFn`/`AsyncFnMut`/`AsyncFnOnce` trait 家族已进入标准库 prelude。
 >
 > **特性状态**: ✅ **Stable since Rust 1.85.0**（2025-02-20）
 > **所属 Edition**: Rust 2024 / 2021（语法可用，但 `AsyncFn*` 在 prelude 中的暴露随 2024 edition 默认生效）
@@ -20,7 +20,7 @@
 
 ## 1. 为什么需要 async closures？
 
-在 Rust 1.85 之前，表达“一个异步闭包”通常写成：
+在 Rust 1.85 之前，表达“一个异步（Async）闭包（Closures）”通常写成：
 
 ```rust
 // 旧写法：闭包返回一个 Future
@@ -35,7 +35,7 @@ fn make_callback() -> impl FnOnce() -> Pin<Box<dyn Future<Output = i32> + Send>>
 这种写法的问题：
 
 1. **语法冗余**：闭包（Closures） + `async move` 块两层嵌套。
-2. **捕获不精确**：`async move` 会强制把捕获变量 move 进 Future，无法像同步闭包那样按使用自动推断借用。
+2. **捕获不精确**：`async move` 会强制把捕获变量 move 进 Future，无法像同步闭包那样按使用自动推断借用（Borrowing）。
 3. **类型表达困难**：返回 `impl Fn() -> impl Future` 在 trait bound、高阶回调中非常冗长。
 
 Rust 1.85 引入 `async || {}` 语法后，上述代码可简化为：
@@ -49,7 +49,7 @@ fn make_callback() -> impl AsyncFnOnce() -> i32 {
 }
 ```
 
-> **关键洞察**：`async || {}` 不是“返回 Future 的闭包”，而是**真正的异步闭包**——调用它返回一个 Future，且捕获语义与同步闭包一致。
+> **关键洞察**：`async || {}` 不是“返回 Future 的闭包”，而是**真正的异步（Async）闭包**——调用它返回一个 Future，且捕获语义与同步闭包一致。
 
 ---
 
@@ -78,7 +78,7 @@ let result = add(1, 2).await;
 
 ### 2.2 捕获模式
 
-async closures 的捕获规则**与同步闭包一致**：编译器根据闭包体对捕获变量的使用方式，自动选择借用或移动。
+async closures 的捕获规则**与同步闭包一致**：编译器根据闭包体对捕获变量的使用方式，自动选择借用（Borrowing）或移动。
 
 ```rust
 async fn capture_examples() {
@@ -109,14 +109,14 @@ async fn capture_examples() {
 }
 ```
 
-> ⚠️ 注意：async closure 体本身是一个 async block，调用时才产生 Future。捕获发生在闭包创建时，Future 内部再引用这些捕获。
+> ⚠️ 注意：async closure 体本身是一个 async block，调用时才产生 Future。捕获发生在闭包创建时，Future 内部再引用（Reference）这些捕获。
 
 ### 2.3 与 `|x| async move {}` 的对比
 
 | 维度 | `\|x\| async move {}` | `async \|x\| {}` |
 |---|---|---|
 | 稳定版本 | 任何版本 | **Rust 1.85.0+** |
-| 语法层级 | 闭包 + 内部 async 块 | 单一 async 闭包 |
+| 语法层级 | 闭包（Closures） + 内部 async 块 | 单一 async 闭包 |
 | 捕获 | 强制 `move` | 自动推断（可 `move`） |
 | 返回类型 | `impl Fn(...) -> impl Future` | `impl AsyncFn(...) -> T` |
 | 借用捕获 | ❌ 困难 | ✅ 原生支持 |
@@ -249,7 +249,7 @@ async fn middleware_chain(
 }
 ```
 
-> 💡 设计提示：由于 `AsyncFn` 暂不支持 `dyn`，生产级中间件通常仍用泛型 `impl AsyncFn(...)` 或返回 `Pin<Box<dyn Future>>` 的传统闭包。
+> 💡 设计提示：由于 `AsyncFn` 暂不支持 `dyn`，生产级中间件通常仍用泛型（Generics） `impl AsyncFn(...)` 或返回 `Pin<Box<dyn Future>>` 的传统闭包。
 
 ---
 
@@ -282,7 +282,7 @@ fn make_dyn() -> Box<dyn Fn(i32) -> std::pin::Pin<Box<dyn std::future::Future<Ou
 F: AsyncFn(i32) -> bool + AsyncFn(i32) -> Send,
 ```
 
-在 stable Rust 1.85–1.96 中，通常通过 `async move` + 闭包或泛型边界间接保证 Send。
+在 stable Rust 1.85–1.96 中，通常通过 `async move` + 闭包或泛型（Generics）边界间接保证 Send。
 
 ### 5.3 递归调用
 
@@ -328,7 +328,7 @@ Future trait          (1.36)
 | `AsyncFn` trait 语义 | [Rust Reference — Closure expressions](https://doc.rust-lang.org/reference/expressions/closure-expr.html#async-closures) |
 | RFC 设计动机 | [RFC 3668](https://rust-lang.github.io/rfcs/3668-async-closures.html) |
 | 稳定化公告 | [Rust 1.85.0 Release](https://blog.rust-lang.org/2025/02/20/Rust-1.85.0.html) |
-| async 生态与运行时 | [Async Book](https://rust-lang.github.io/async-book/)（rewrite 中，状态 WIP） |
+| async 生态与运行时（Runtime） | [Async Book](https://rust-lang.github.io/async-book/)（rewrite 中，状态 WIP） |
 
 ---
 
@@ -339,7 +339,7 @@ Future trait          (1.36)
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | async closures 提供原生异步闭包 ⟹ 简化高阶异步回调 | 掌握旧写法 `\|x\| async move {}` | 能用 `async \|x\| {}` 编写更简洁的异步回调 | 高 |
-| 借用捕获支持 ⟹ 生命周期推断更精确 | 理解同步闭包捕获规则 | 能在异步场景中安全借用环境变量 | 高 |
+| 借用捕获支持 ⟹ 生命周期（Lifetimes）推断更精确 | 理解同步闭包捕获规则 | 能在异步场景中安全借用环境变量 | 高 |
 | `AsyncFn` 非 dyn-compatible ⟹ 不能直接用 `Box<dyn AsyncFn>` | 理解 trait object safety | 能用泛型或传统闭包绕过 | 高 |
 
 ### 反命题与边界

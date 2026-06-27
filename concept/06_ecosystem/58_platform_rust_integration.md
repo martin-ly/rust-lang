@@ -56,7 +56,7 @@
 
 | 维度 | Android AOSP | Chromium | Bare Metal |
 |:---|:---|:---|:---|
-| **运行时环境** | 完整 OS，有 libc / Binder / JVM | 完整 OS（多平台），沙箱进程 | 无 OS 或极简 RTOS |
+| **运行时（Runtime）环境** | 完整 OS，有 libc / Binder / JVM | 完整 OS（多平台），沙箱进程 | 无 OS 或极简 RTOS |
 | **标准库** | `std` 可用 | `std` 可用 | `no_std`，可能无 `alloc` |
 | **构建系统** | `Android.bp` (Soong) | `GN` + `ninja` | `cargo` + 链接脚本 / 厂商 SDK |
 | **包管理** | `external/rust/crates/` 预审计 | `third_party/rust/` + `gnrt` | crates.io / 厂商 PAC/HAL |
@@ -74,9 +74,9 @@
 
 AOSP 是全球最大的开源代码库之一，数十亿设备运行。Rust 被引入主要为了：
 
-1. **消除内存安全漏洞**：Binder、DNS 解析、加密库等系统组件历史上大量 bug 源于 C/C++ 的内存错误。
+1. **消除内存安全（Memory Safety）漏洞**：Binder、DNS 解析、加密库等系统组件历史上大量 bug 源于 C/C++ 的内存错误。
 2. **与现有代码共存**：不替换整个子系统，而是对新组件或安全关键组件使用 Rust。
-3. **利用类型系统**：将运行时错误（如权限、生命周期）前移到编译期。
+3. **利用类型系统（Type System）**：将运行时（Runtime）错误（如权限、生命周期（Lifetimes））前移到编译期。
 
 > [来源: [Android Security Blog — Memory Safety in Android 14](https://security.googleblog.com/)] · 可信度: ✅
 
@@ -99,7 +99,7 @@ rust_binary {
 
 关键点：
 
-- `rust_binary` / `rust_library` / `rust_proc_macro` / `rust_test` 等模块类型
+- `rust_binary` / `rust_library` / `rust_proc_macro` / `rust_test` 等模块（Module）类型
 - `rustlibs` 依赖预置在 AOSP 中的 Rust crate（通常位于 `external/rust/crates/`）
 - 所有依赖 crate 必须经过 AOSP 的审计与版本锁定
 
@@ -116,7 +116,7 @@ pub trait IMyService: Interface {
 }
 ```
 
-> **边界**：Rust AIDL 绑定目前覆盖常用类型，但复杂 Parcelable / 文件描述符传递需要额外注意生命周期与所有权。
+> **边界**：Rust AIDL 绑定目前覆盖常用类型，但复杂 Parcelable / 文件描述符传递需要额外注意生命周期（Lifetimes）与所有权（Ownership）。
 
 ### 2.4 C / C++ / Java 互操作
 
@@ -134,9 +134,9 @@ pub trait IMyService: Interface {
 
 Chromium 对 Rust 的采用相对谨慎，核心原则：
 
-1. **沙箱边界优先**：Rust 用于处理不可信输入的组件（如解析器），利用内存安全减少沙箱逃逸风险。
+1. **沙箱边界优先**：Rust 用于处理不可信输入的组件（如解析器），利用内存安全（Memory Safety）减少沙箱逃逸风险。
 2. **与 C++ 深度互操作**：由于 Chromium 主体是 C++，Rust 必须无缝集成到 GN 构建系统。
-3. **逐步引入**：从安全关键的小模块开始，而非重写核心引擎。
+3. **逐步引入**：从安全关键的小模块（Module）开始，而非重写核心引擎。
 
 ### 3.2 GN 构建与 CXX
 
@@ -263,7 +263,7 @@ unsafe fn uart_putc(c: u8) {
 | 场景 | 陷阱 | 应对 |
 |:---|:---|:---|
 | AOSP | 直接使用 crates.io 未审计 crate | 仅使用 AOSP 预置或自行审计后导入 `external/rust/crates/` |
-| AOSP | AIDL 类型映射与 Rust 生命周期混淆 | 仔细阅读 AIDL Rust 后端生成的绑定文档 |
+| AOSP | AIDL 类型映射与 Rust 生命周期（Lifetimes）混淆 | 仔细阅读 AIDL Rust 后端生成的绑定文档 |
 | Chromium | 手动写大量 `extern "C++"` | 优先使用 `cxx` 生成类型安全桥接 |
 | Chromium | 未审计第三方 crate 许可证 | 使用 `gnrt` 并遵循 Chromium 引入流程 |
 | Bare Metal | 在 `no_std` 中误用 `std` API | 使用 `core`/`alloc`，并通过 `cargo build --target` 验证 |

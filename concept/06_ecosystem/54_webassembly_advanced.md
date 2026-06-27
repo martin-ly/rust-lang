@@ -14,11 +14,11 @@
   - [📑 目录](#-目录)
   - [一、权威定义](#一权威定义)
     - [1.1 WebAssembly 作为通用字节码](#11-webassembly-作为通用字节码)
-    - [1.2 组件模型与模块链接](#12-组件模型与模块链接)
+    - [1.2 组件模型与模块（Module）链接](LINK_PLACEHOLDER)
     - [1.3 WASI：WebAssembly 系统接口](#13-wasiwebassembly-系统接口)
   - [二、WASM 执行模型全景](#二wasm-执行模型全景)
     - [2.1 浏览器宿主：JS 引擎集成](#21-浏览器宿主js-引擎集成)
-    - [2.2 独立运行时：wasmtime 与 wasmer](#22-独立运行时wasmtime-与-wasmer)
+    - [2.2 独立运行时（Runtime）：wasmtime 与 wasmer](LINK_PLACEHOLDER)
     - [2.3 边缘计算：Cloudflare Workers 与 Fastly Compute](#23-边缘计算cloudflare-workers-与-fastly-compute)
   - [三、Rust WASM 工具链深度](#三rust-wasm-工具链深度)
     - [3.1 wasm-bindgen：JS 互操作的生成艺术](#31-wasm-bindgenjs-互操作的生成艺术)
@@ -42,7 +42,7 @@
     - [7.2 wasm32-unknown-unknown 与 `wasm32-wasip1` 或 `wasm32-wasip2` 的安全边界](#72-wasm32-unknown-unknown-与-wasm32-wasip1-或-wasm32-wasip2-的安全边界)
   - [八、反命题树](#八反命题树)
   - [九、边界测试](#九边界测试)
-    - [9.1 边界测试：wasm-bindgen 跨边界传递含 `String` 的结构体](#91-边界测试wasm-bindgen-跨边界传递含-string-的结构体)
+    - [9.1 边界测试：wasm-bindgen 跨边界传递含 `String` 的结构体（Struct）](LINK_PLACEHOLDER)
     - [9.2 边界测试：JS→WASM→JS 递归调用导致栈溢出](#92-边界测试jswasmjs-递归调用导致栈溢出)
     - [9.3 边界测试：在 `wasm32-unknown-unknown` 中使用 `std::fs`](#93-边界测试在-wasm32-unknown-unknown-中使用-stdfs)
   - [十、概念属性矩阵](#十概念属性矩阵)
@@ -64,6 +64,8 @@
 >
 > - v1.0 (2026-05-26): 初始创建——覆盖 WASM 权威定义、执行模型、Rust 工具链、组件模型、WASI Preview 2、性能边界、安全沙箱、反命题树与边界测试
 
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 ## 一、权威定义
@@ -72,7 +74,7 @@
 
 > **[W3C WebAssembly Specification](https://www.w3.org/wasm/)** WebAssembly (Wasm) 是一种为基于栈的虚拟机设计的二进制指令格式。Wasm 被设计为编程语言的可移植编译目标，使客户端和服务端应用程序能够在 Web 上部署。[来源: [W3C WebAssembly](https://www.w3.org/wasm/)]
 
-> **[WebAssembly Specification](https://webassembly.github.io/spec/)** Wasm 的核心抽象包括：**线性内存**（单一可增长字节数组）、**函数表**（间接调用引用表）、**模块**（自包含代码与数据单元）以及**无未定义行为**保证（运行时边界检查确保安全性）。[来源: [WebAssembly Specification — Core](https://webassembly.github.io/spec/core/)]
+> **[WebAssembly Specification](https://webassembly.github.io/spec/)** Wasm 的核心抽象包括：**线性内存**（单一可增长字节数组）、**函数表**（间接调用引用（Reference）表）、**模块（Module）**（自包含代码与数据单元）以及**无未定义行为**保证（运行时（Runtime）边界检查确保安全性）。[来源: [WebAssembly Specification — Core](https://webassembly.github.io/spec/core/)]
 
 ```text
 Wasm 演进路径:
@@ -89,7 +91,7 @@ Wasm 演进路径:
 
 ### 1.2 组件模型与模块链接
 
-> **[Component Model Specification](https://component-model.bytecodealliance.org/)** WebAssembly 组件模型定义了模块如何组合在一起，以及如何使用高级类型进行通信。它将 Wasm 从低级的模块链接提升到软件组件级的组合抽象。[来源: [Component Model Spec](https://component-model.bytecodealliance.org/)]
+> **[Component Model Specification](https://component-model.bytecodealliance.org/)** WebAssembly 组件模型定义了模块（Module）如何组合在一起，以及如何使用高级类型进行通信。它将 Wasm 从低级的模块链接提升到软件组件级的组合抽象。[来源: [Component Model Spec](https://component-model.bytecodealliance.org/)]
 
 ```text
 模块链接 (低层)           组件组合 (高层)
@@ -122,7 +124,7 @@ WASI 演进:
 
 ### 2.1 浏览器宿主：JS 引擎集成
 
-> **[V8 Documentation](https://v8.dev/docs/wasm-compilation-pipeline)** 现代浏览器通过 JS 引擎（V8、SpiderMonkey、JavaScriptCore）内嵌 Wasm 运行时。Wasm 模块通过 `WebAssembly.instantiate()` 加载，与 JS 共享同一线程和事件循环。JS ↔ Wasm 互操作通过 `wasm-bindgen` 生成胶水代码实现。[来源: [V8 Wasm Pipeline](https://v8.dev/docs/wasm-compilation-pipeline)]
+> **[V8 Documentation](https://v8.dev/docs/wasm-compilation-pipeline)** 现代浏览器通过 JS 引擎（V8、SpiderMonkey、JavaScriptCore）内嵌 Wasm 运行时（Runtime）。Wasm 模块通过 `WebAssembly.instantiate()` 加载，与 JS 共享同一线程和事件循环。JS ↔ Wasm 互操作通过 `wasm-bindgen` 生成胶水代码实现。[来源: [V8 Wasm Pipeline](https://v8.dev/docs/wasm-compilation-pipeline)]
 
 ```rust,ignore
 use wasm_bindgen::prelude::*;
@@ -181,7 +183,7 @@ pub fn process_image_data(data: &[u8], width: u32, height: u32) -> Vec<u8> {
 
 ### 3.1 wasm-bindgen：JS 互操作的生成艺术
 
-> **[wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/)** `wasm-bindgen` 通过过程宏在编译期生成 **JS 胶水代码** 和 **Wasm 导入/导出包装**，自动处理字符串编码、对象引用管理和异常转换。[来源: [wasm-bindgen Reference](https://rustwasm.github.io/docs/wasm-bindgen/reference/)]
+> **[wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/)** `wasm-bindgen` 通过过程宏（Procedural Macro）在编译期生成 **JS 胶水代码** 和 **Wasm 导入/导出包装**，自动处理字符串编码、对象引用管理和异常转换。[来源: [wasm-bindgen Reference](https://rustwasm.github.io/docs/wasm-bindgen/reference/)]
 
 ```rust,ignore
 use wasm_bindgen::prelude::*;
@@ -304,7 +306,7 @@ interface type-examples {
 }
 ```
 
-> **类型提升规则**: WIT 的类型系统是多种编程语言类型系统的 **"最大公约数"**。Rust `Result<T, E>` ↔ WIT `result<T, E>`（精确对应）；Go `(T, error)` ↔ WIT `result<T, string>`（自动转换）；Python 异常 ↔ WIT `result<T, E>`（异常捕获包装）。
+> **类型提升规则**: WIT 的类型系统（Type System）是多种编程语言类型系统的 **"最大公约数"**。Rust `Result<T, E>` ↔ WIT `result<T, E>`（精确对应）；Go `(T, error)` ↔ WIT `result<T, string>`（自动转换）；Python 异常 ↔ WIT `result<T, E>`（异常捕获包装）。
 > [来源: [Component Model Types](https://component-model.bytecodealliance.org/design/types.html)]
 
 ---
@@ -375,12 +377,12 @@ let mut store = Store::new(&engine, wasi);
 // Guest 只能访问 /data 挂载点，无法访问 /etc/passwd 或上级目录
 ```
 
-**WASI 能力模型与 Rust 所有权模型的同构性**:
+**WASI 能力模型与 Rust 所有权（Ownership）模型的同构性**:
 
-| 概念 | WASI 能力模型 | Rust 所有权模型 |
+| 概念 | WASI 能力模型 | Rust 所有权（Ownership）模型 |
 |:---|:---|:---|
 | **资源标识** | 能力句柄（不可伪造） | 所有权变量（唯一） |
-| **资源转移** | 能力句柄 move 到 guest | 所有权 move |
+| **资源转移** | 能力句柄 move 到 guest | 所有权（Ownership） move |
 | **资源共享** | 能力降级（只读/只写） | `&T` / `&mut T` |
 | **资源回收** | 句柄 drop → 能力失效 | 所有权离开作用域 → drop |
 | **安全保证** | 无句柄 = 无访问权 | 无所有权 = 无访问权 |
@@ -532,7 +534,7 @@ pub fn rgba_to_grayscale_simd(rgba: &[u8], gray: &mut [u8]) {
 | **内存开销** | ~10KB+ | ~1MB+ | ~10MB+ |
 | **隔离粒度** | 函数级/模块级 | 进程级 | 进程+namespace |
 | **系统调用** | 无（WASI 能力过滤）| 全部（seccomp 可选）| 部分（capabilities）|
-| **内存安全** | 边界检查（运行时）| 依赖语言 | 依赖语言 |
+| **内存安全（Memory Safety）** | 边界检查（运行时）| 依赖语言 | 依赖语言 |
 | **类型安全** | 模块内验证（加载时）| 无 | 无 |
 | **跨语言** | ✅ WIT 接口 | ❌ ABI 特定 | ❌ ABI 特定 |
 
@@ -647,7 +649,7 @@ pub fn apply_config(config: Config) -> String {
 //   3. 将 String 替换为 &str，Vec<f64> 替换为 &[f64] 在函数参数中
 ```
 
-> **修正**: `wasm-bindgen` 的自动类型映射有严格限制。包含 `String`、`Vec<T>` 的自定义结构体不能直接作为函数参数或返回值——因为 JS 和 Rust 的内存布局不兼容（JS GC 堆 vs Wasm 线性内存）。安全做法：使用 `#[wasm_bindgen]` 标记的简单位段结构体，或通过 `serde-wasm-bindgen` 显式序列化为 `JsValue`。这反映了 FFI 边界的根本约束：**不同运行时之间不存在安全的直接指针共享**。
+> **修正**: `wasm-bindgen` 的自动类型映射有严格限制。包含 `String`、`Vec<T>` 的自定义结构体（Struct）不能直接作为函数参数或返回值——因为 JS 和 Rust 的内存布局不兼容（JS GC 堆 vs Wasm 线性内存）。安全做法：使用 `#[wasm_bindgen]` 标记的简单位段结构体，或通过 `serde-wasm-bindgen` 显式序列化为 `JsValue`。这反映了 FFI 边界的根本约束：**不同运行时之间不存在安全的直接指针共享**。
 > [来源: [wasm-bindgen Types](https://rustwasm.github.io/docs/wasm-bindgen/reference/types.html)] · [来源: [wasm-bindgen Exported Types](https://rustwasm.github.io/docs/wasm-bindgen/reference/types/exported-rust-types.html)]
 
 ---
@@ -682,7 +684,7 @@ pub fn recursive_call(n: i32) -> i32 {
 //   3. 使用 wasm-bindgen-futures 将递归转为异步 Future 链
 ```
 
-> **修正**: JS 引擎和 Wasm 运行时共享**同一块栈空间**（通常 1MB 左右）。JS → Wasm → JS → Wasm 的同步递归调用会在同一线程栈上累积帧，没有独立的栈切换机制。异步调用（Promise/Future）将调用帧卸载到堆上，是避免此类栈溢出的标准模式。
+> **修正**: JS 引擎和 Wasm 运行时共享**同一块栈空间**（通常 1MB 左右）。JS → Wasm → JS → Wasm 的同步递归调用会在同一线程栈上累积帧，没有独立的栈切换机制。异步（Async）调用（Promise/Future）将调用帧卸载到堆上，是避免此类栈溢出的标准模式。
 > [来源: [V8 Stack Size](https://v8.dev/blog/stackoverflow)] · [来源: [wasm-bindgen Callbacks](https://rustwasm.github.io/docs/wasm-bindgen/reference/receiving-js-closures-in-rust.html)]
 
 ---
@@ -725,7 +727,7 @@ fn main() {
 | **系统接口** | 无 | WASI Preview 2 | WASI Preview 2 + WIT | JS API（DOM/Window） |
 | **标准库支持** | `core` + `alloc` | `core` + `alloc` + 部分 `std` | `core` + `alloc` + 部分 `std` | `core` + `alloc` + 部分 `std` |
 | **互操作对象** | JavaScript | 宿主运行时 | 其他 Wasm 组件 | JavaScript |
-| **类型系统** | Wasm MVP（函数签名） | Wasm MVP + WASI 调用 | WIT 高级类型 | wasm-bindgen 映射 |
+| **类型系统（Type System）** | Wasm MVP（函数签名） | Wasm MVP + WASI 调用 | WIT 高级类型 | wasm-bindgen 映射 |
 | **安全模型** | 纯计算沙箱 | 能力安全沙箱 | 能力安全 + 类型安全组合 | JS GC + 沙箱 |
 | **二进制体积** | 较小（无运行时） | 较小 + WASI 导入 | 较小 + WIT 元数据 | 较小 + JS 胶水 |
 | **启动延迟** | < 10ms（流式编译） | < 5ms（AOT 可能 < 1ms） | < 5ms | < 10ms |
@@ -746,9 +748,9 @@ fn main() {
 - [性能优化](./15_performance_optimization.md) — SIMD、内存布局、缓存优化与零拷贝
 - [跨编译](./17_cross_compilation.md) — 目标三元组、条件编译与平台抽象
 - [FFI](../03_advanced/05_rust_ffi.md) — 跨语言边界、ABI 兼容与 unsafe 封装
-- [Unsafe Rust](../03_advanced/03_unsafe.md) — 原始指针、FFI 边界与 UB 规避
-- [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、线程模型与异步运行时
-- [类型系统](../01_foundation/04_type_system.md) — 泛型、Trait 与零成本抽象
+- [Unsafe Rust](../03_advanced/03_unsafe.md) — 原始指针（Raw Pointer）、FFI 边界与 UB 规避
+- [并发编程](LINK_PLACEHOLDER) — Send/Sync、线程模型与异步（Async）运行时
+- [类型系统（Type System）](LINK_PLACEHOLDER) — 泛型（Generics）、Trait 与零成本抽象（Zero-Cost Abstraction）
 
 ---
 

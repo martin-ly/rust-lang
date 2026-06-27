@@ -61,9 +61,9 @@
 `rustc` 采用了不同的设计：它把编译过程拆分为大量**查询（query）**。每个查询回答一个具体的问题，例如：
 
 - `type_of(def_id)`：某个定义的类型是什么？
-- `mir_borrowck(def_id)`：某个函数的借用检查结果是什么？
+- `mir_borrowck(def_id)`：某个函数的借用（Borrowing）检查结果是什么？
 - `optimized_mir(def_id)`：某个函数优化后的 MIR 是什么？
-- `collect_and_partition_mono_items(crate)`：整个 crate 需要为哪些单态化项生成代码？
+- `collect_and_partition_mono_items(crate)`：整个 crate 需要为哪些单态化（Monomorphization）项生成代码？
 
 > **关键洞察**: 查询系统是 `rustc` 实现**增量编译**的基础设施。通过记录查询之间的依赖关系，`rustc` 可以判断“上次编译后，哪些结果仍然有效”。
 >
@@ -78,7 +78,7 @@
 `TyCtxt<'tcx>` 是 `rustc` 中几乎所有编译器状态的**入口**。它持有：
 
 - 当前 crate 的 HIR/MIR 数据；
-- 类型上下文（`Ty<'tcx>`、生命周期、trait 约束）；
+- 类型上下文（`Ty<'tcx>`、生命周期（Lifetimes）、trait 约束）；
 - 查询缓存；
 - interning 池（保证相同类型/表达式只存一份内存）。
 
@@ -162,7 +162,7 @@ graph TD
 
 ## 四、增量编译实战
 
-本节所有命令均可在项目内最小示例 [`examples/incremental_practice/`](../../../examples/incremental_practice/) 上复现。该示例包含三个 intentionally 独立的模块 `math`、`greet`、`analyze`，用来观察“修改一个函数时，dep-graph 中哪些节点会变 dirty”。
+本节所有命令均可在项目内最小示例 [`examples/incremental_practice/`](../../../examples/incremental_practice/) 上复现。该示例包含三个 intentionally 独立的模块（Module） `math`、`greet`、`analyze`，用来观察“修改一个函数时，dep-graph 中哪些节点会变 dirty”。
 
 ### 4.1 开启与观察
 
@@ -233,7 +233,7 @@ incremental: DepGraph Statistics
 
 - `session directory: 29 files hard-linked` 表示大量中间产物从上次缓存硬链接复用；
 - `Total Node Count` 微增（新增/修改的 HIR/MIR 节点），但整体编译时间远低于冷编译；
-- 如果只修改 `greet` 而 `math` 不变，`math` 模块相关的查询节点仍保持 green。
+- 如果只修改 `greet` 而 `math` 不变，`math` 模块（Module）相关的查询节点仍保持 green。
 
 旧版 nightly 可能输出类似：
 
@@ -252,7 +252,7 @@ incremental: process 23 dirty nodes
 | 原因 | 说明 |
 |:---|:---|
 | 修改了 crate root 的 `#![feature]` | 影响整个 crate 的 feature gate 查询 |
-| 修改了泛型/宏 | 单态化集合可能大幅变化 |
+| 修改了泛型（Generics）/宏（Macro） | 单态化（Monomorphization）集合可能大幅变化 |
 | 修改了 `Cargo.toml` | resolver/workspace 变化导致全量重编 |
 | 使用了 `RUSTFLAGS` 变化 | 编译配置变化会破坏缓存 |
 | 缓存损坏 | 可执行 `cargo clean` 后重试 |
@@ -348,7 +348,7 @@ Salsa 本身是从 `rustc` 查询系统中提取出来的通用框架，被 `rus
 <details>
 <summary>✅ 答案与解析</summary>
 
-为了确保所有函数（包括不可达函数）的借用检查错误都能被报告，`mir_borrowck` 查询在 codegen 前会被强制触发所有函数，而不是按需 lazy 执行。
+为了确保所有函数（包括不可达函数）的借用（Borrowing）检查错误都能被报告，`mir_borrowck` 查询在 codegen 前会被强制触发所有函数，而不是按需 lazy 执行。
 
 </details>
 

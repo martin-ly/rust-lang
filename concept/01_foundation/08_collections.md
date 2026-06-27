@@ -8,14 +8,14 @@
 >
 > **EN**: Collections
 > **Summary**: Collections: core Rust concepts, syntax, and examples.
-> **📎 交叉引用**
+> **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[集合](../../knowledge/02_intermediate/01_collections.md)
 > **受众**: [初学者]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: F×App — 标准集合 API 的应用
-> **定位**: 系统分析 Rust **标准库集合类型**的设计——从 Vec/VecDeque 的顺序容器，到 HashMap/BTreeMap 的关联容器，再到 HashSet/BTreeSet 的集合类型，揭示每种数据结构的所有权语义、性能特征和选型策略。
+> **定位**: 系统分析 Rust **标准库集合类型**的设计——从 Vec/VecDeque 的顺序容器，到 HashMap/BTreeMap 的关联容器，再到 HashSet/BTreeSet 的集合类型，揭示每种数据结构的所有权（Ownership）语义、性能特征和选型策略。
 > **前置概念**: [Ownership](./01_ownership.md) ·
 > [Borrowing](./02_borrowing.md) ·
 > [Generics](../02_intermediate/02_generics.md)
@@ -53,11 +53,11 @@
   - [权威来源索引](#权威来源索引)
   - [十四、边界测试：集合的编译错误](#十四边界测试集合的编译错误)
     - [14.1 边界测试：`HashMap` 键未实现 `Hash` + `Eq`（编译错误）](#141-边界测试hashmap-键未实现-hash--eq编译错误)
-    - [14.2 边界测试：迭代器消费后重复使用（编译错误）](#142-边界测试迭代器消费后重复使用编译错误)
-    - [10.3 边界测试：`Vec::drain` 的范围越界（运行时 panic）](#103-边界测试vecdrain-的范围越界运行时-panic)
+    - [14.2 边界测试：迭代器（Iterator）消费后重复使用（编译错误）](LINK_PLACEHOLDER)
+    - [10.3 边界测试：`Vec::drain` 的范围越界（运行时（Runtime） panic）](LINK_PLACEHOLDER)
     - [10.4 边界测试：`HashMap` 的自定义哈希器与 `BuildHasherDefault`（编译错误）](#104-边界测试hashmap-的自定义哈希器与-buildhasherdefault编译错误)
     - [10.3 边界测试：`Vec::drain` 后继续使用原 Vec（编译错误）](#103-边界测试vecdrain-后继续使用原-vec编译错误)
-    - [10.4 边界测试：不可变借用与可变借用的冲突](#104-边界测试不可变借用与可变借用的冲突)
+    - [10.4 边界测试：不可变借用（Mutable Borrow）与可变借用的冲突](LINK_PLACEHOLDER)
   - [实践](#实践)
   - [参考来源](#参考来源)
   - [认知路径](#认知路径)
@@ -65,8 +65,8 @@
     - [反命题与边界](#反命题与边界)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Vec 与容量（理解层）](#测验-1vec-与容量理解层)
-    - [测验 2：HashMap 所有权（应用层）](#测验-2hashmap-所有权应用层)
-    - [测验 3：迭代器与借用（分析层）](#测验-3迭代器与借用分析层)
+    - [测验 2：HashMap 所有权（Ownership）（应用层）](LINK_PLACEHOLDER)
+    - [测验 3：迭代器与借用（Borrowing）（分析层）](LINK_PLACEHOLDER)
     - [测验 4：BTreeMap vs HashMap（评价层）](#测验-4btreemap-vs-hashmap评价层)
     - [测验 5： draining 与内存（应用层）](#测验-5-draining-与内存应用层)
   - [十二、延伸阅读与自测](#十二延伸阅读与自测)
@@ -110,7 +110,7 @@ graph TD
 > **认知功能**: 此图展示 Rust 标准库集合的**分类谱系**。每种集合类型针对特定的访问模式和排序需求设计。
 > [来源: [TRPL](https://doc.rust-lang.org/book/ch08-00-common-collections.html)]
 > **使用建议**: 默认使用 Vec 和 HashMap；需要排序时使用 BTreeMap；需要双端操作时使用 VecDeque。
-> **关键洞察**: Rust 的集合类型与 C++ STL 对应，但**所有权语义更严格**——插入操作是 move，访问需要借用。
+> **关键洞察**: Rust 的集合类型与 C++ STL 对应，但**所有权语义更严格**——插入操作是 move，访问需要借用（Borrowing）。
 > [来源: [std::collections](https://doc.rust-lang.org/std/collections/index.html)]
 
 ---
@@ -281,7 +281,7 @@ map.retain(|k, v| *v > 1);
 
 > **Rust 版本**: 1.85.0+ Stable · [来源: [Rust 1.85.0 Release Notes](https://blog.rust-lang.org/2025/02/20/Rust-1.85.0.html)]
 
-Rust 1.85.0 将 `FromIterator` 和 `Extend` 支持扩展到 **1-12 元组 arity**，允许单次 `collect()` 将迭代器 fanout 到多个集合：
+Rust 1.85.0 将 `FromIterator` 和 `Extend` 支持扩展到 **1-12 元组 arity**，允许单次 `collect()` 将迭代器（Iterator） fanout 到多个集合：
 
 ```rust
 use std::collections::{LinkedList, VecDeque};
@@ -305,7 +305,7 @@ assert_eq!(cubes.into_iter().next(), Some(0));
 | 使用场景 | 简单二元拆分 | 复杂多路 fanout |
 | 性能 | 单次遍历 | 单次遍历（零成本抽象） |
 
-> **设计洞察**: 这是 Rust 2024 Edition 的**零成本抽象**典范——编译期元组展开，运行时无额外开销。
+> **设计洞察**: 这是 Rust 2024 Edition 的**零成本抽象**典范——编译期元组展开，运行时（Runtime）无额外开销。
 
 ---
 
@@ -485,7 +485,7 @@ graph TD
 
 - [Ownership](./01_ownership.md) — 所有权模型
 - [Borrowing](./02_borrowing.md) — 借用规则
-- [Generics](../02_intermediate/02_generics.md) — 泛型系统
+- [Generics](../02_intermediate/02_generics.md) — 泛型（Generics）系统
 - [Smart Pointers](../02_intermediate/12_smart_pointers.md) — 智能指针（Smart Pointer）
 
 ---
@@ -573,7 +573,7 @@ fn fixed() {
 ```
 
 > **修正**: `into_iter()` 消耗集合所有权，迭代器只能遍历一次。
-> 如需多次遍历，使用 `iter()`（共享引用）或 `iter_mut()`（可变引用）。
+> 如需多次遍历，使用 `iter()`（共享引用（Reference））或 `iter_mut()`（可变引用）。
 > 这体现了 Rust 所有权系统与迭代器模式的紧密结合——编译器通过所有权追踪防止"迭代器失效"和"重复消费"。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-00-common-collections.html)]
 
@@ -622,7 +622,7 @@ fn main() {
 }
 ```
 
-> **修正**: `HashMap` 的第三个泛型参数是哈希器构建器（`S: BuildHasher`），默认 `RandomState`（使用 SipHash 1-3，防 HashDoS）。
+> **修正**: `HashMap` 的第三个泛型（Generics）参数是哈希器构建器（`S: BuildHasher`），默认 `RandomState`（使用 SipHash 1-3，防 HashDoS）。
 > 自定义哈希器（如 `fnv::FnvHasher` 用于小键高性能、`ahash::AHasher` 用于通用高性能）需实现 `BuildHasher` 和 `Hasher` trait。
 > `BuildHasherDefault<H>` 要求 `H: Default + Hasher`，是标准库提供的便捷包装。
 > 常见错误：
@@ -698,9 +698,9 @@ fn main() {
 | 集合类型：Rust 标准库的数据结构谱系 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | 集合类型：Rust 标准库的数据结构谱系 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
-> 内存安全数据结构 ⟸ 所有权自动管理 ⟸ Vec/HashMap 实现
+> 内存安全（Memory Safety）数据结构 ⟸ 所有权自动管理 ⟸ Vec/HashMap 实现
 > 迭代器安全 ⟸ 借用检查器验证 ⟸ 集合 API 设计
-> **过渡**: 掌握 集合类型：Rust 标准库的数据结构谱系 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 集合类型：Rust 标准库的数据结构谱系 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 集合类型：Rust 标准库的数据结构谱系 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 > **过渡**: 集合类型：Rust 标准库的数据结构谱系 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
@@ -760,7 +760,7 @@ fn main() {
 
 **编译错误**。
 
-`map.get("key")` 返回对 HashMap 内部值的不可变引用 `&Vec<i32>`。随后 `map.insert(...)` 需要可变借用 `&mut self`，与之前的不可变引用冲突。
+`map.get("key")` 返回对 HashMap 内部值的不可变引用（Immutable Reference） `&Vec<i32>`。随后 `map.insert(...)` 需要可变借用（Mutable Borrow） `&mut self`，与之前的不可变引用冲突。
 
 修复方案：
 
@@ -792,7 +792,7 @@ fn main() {
 
 **编译错误**。
 
-`for i in &v` 创建了对 `v` 的不可变借用。循环体内 `v.push(*i)` 尝试获取 `v` 的可变借用，冲突。
+`for i in &v` 创建了对 `v` 的不可变借用（Immutable Borrow）。循环体内 `v.push(*i)` 尝试获取 `v` 的可变借用，冲突。
 
 这是 Rust 借用检查器防止迭代器失效的经典保护。
 
@@ -859,7 +859,7 @@ fn main() {
 
 ## 十二、延伸阅读与自测
 
-> 学完常见集合后，建议通过 **Ownership Inventory #2** 检验对「Vec/String/HashMap 与所有权、借用（Borrowing）、迭代器」的理解：
+> 学完常见集合后，建议通过 **Ownership Inventory #2** 检验对「Vec/String/HashMap 与所有权、借用（Borrowing）、迭代器（Iterator）」的理解：
 >
 > - 本地映射与样题：[所有权清单自测：Brown University Ownership Inventory](./28_ownership_inventories_brown_book.md)
 > - Brown Book 交互式题目：[Ownership Inventory #2](https://rust-book.cs.brown.edu/ch08-04-inventory.html)

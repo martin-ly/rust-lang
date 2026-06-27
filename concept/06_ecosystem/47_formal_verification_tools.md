@@ -12,10 +12,11 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价 Rust 形式化验证工具的技术能力与适用边界
-> **前置依赖**: [类型系统](../01_foundation/04_type_system.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · [形式化验证](../04_formal/05_verification_toolchain.md) · [生命周期](../01_foundation/03_lifetimes.md)
+> **前置依赖**: [类型系统（Type System）](LINK_PLACEHOLDER) · [Unsafe Rust](LINK_PLACEHOLDER) · [形式化验证](LINK_PLACEHOLDER) · [生命周期（Lifetimes）](LINK_PLACEHOLDER)
 > **后置延伸**: [编译器内部原理](./45_compiler_internals.md) · [安全与密码学](./43_security_cryptography.md) · [嵌入式系统](./22_embedded_systems.md)
 >
 > **来源**: [Kani](https://model-checking.github.io/kani/) · [Creusot](https://creusot.rs/) · [Verus](https://verus-lang.github.io/verus/)
+> **前置概念**: N/A
 ---
 
 > **来源**: [Kani — Rust Verifier](https://github.com/model-checking/kani) ·
@@ -42,7 +43,7 @@
   - [三、模型检验工具](#三模型检验工具)
     - [3.1 Kani：基于 CBMC 的 Rust 验证器](#31-kani基于-cbmc-的-rust-验证器)
       - [Kani 0.66 新特性（2026-05 发布）](#kani-066-新特性2026-05-发布)
-    - [3.2 MIRI：运行时 UB 检测器](#32-miri运行时-ub-检测器)
+    - [3.2 MIRI：运行时（Runtime） UB 检测器](LINK_PLACEHOLDER)
   - [四、演绎验证工具](#四演绎验证工具)
     - [4.1 Prusti：Viper 分离逻辑验证器](#41-prustiviper-分离逻辑验证器)
     - [4.2 Creusot：Why3/WhyML 验证器](#42-creusotwhy3whyml-验证器)
@@ -81,7 +82,7 @@
 > **变更日志**:
 >
 > - v1.2 (2026-06-22): 更新 Kani 到 0.66，补充 quantifiers、autoharness、loop contracts 示例
-> - v1.1 (2026-05-26): 补充 Generic Refinement Types (POPL 2025) — Flux 泛型精化类型扩展 [来源: Web Authority Alignment Sprint]
+> - v1.1 (2026-05-26): 补充 Generic Refinement Types (POPL 2025) — Flux 泛型（Generics）精化类型扩展 [来源: Web Authority Alignment Sprint]
 > - v1.0 (2026-05-26): 初始创建——覆盖模型检验（Kani/MIRI）、演绎验证（Prusti/Creusot/Verus）、精化类型（Flux）、前沿框架（RefinedRust/RustBelt）、选型决策矩阵
 
 ---
@@ -127,12 +128,12 @@ Rust 形式化验证生态可按验证方法分层：
 
 ### 1.2 Rust 形式化验证的独特挑战
 
-Rust 的所有权、生命周期和借用检查器给形式化验证带来了独特挑战：
+Rust 的所有权（Ownership）、生命周期（Lifetimes）和借用（Borrowing）检查器给形式化验证带来了独特挑战：
 
 | **挑战** | **传统语言** | **Rust** | **影响** |
 |:---|:---|:---|:---|
 | **别名控制** | 任意指针别名 | 编译期保证无数据竞争 | 验证器可利用别名信息简化证明 |
-| **生命周期** | 无（GC 或手动）| 编译期推断 | 验证器需建模生命周期包含关系 |
+| **生命周期（Lifetimes）** | 无（GC 或手动）| 编译期推断 | 验证器需建模生命周期包含关系 |
 | **Unsafe 边界** | 全部代码都可能不安全 | 安全/Unsafe 明确分离 | 验证重点集中在 unsafe 块 |
 | **Drop 语义** | 手动/ GC | 确定性析构 | 需验证资源释放的完备性 |
 | **Panic 安全** | 异常机制 | 恐慌 + 展开/中止 | 需验证恐慌不破坏不变式 |
@@ -167,11 +168,11 @@ struct MyData(*mut i32);  // 包含裸指针 → 默认不实现 Send/Sync
 
 | **维度** | **Kani** | **MIRI** | **Prusti** | **Creusot** | **Verus** | **Flux** |
 |:---|:---|:---|:---|:---|:---|:---|
-| **验证方法** | 模型检验 (BMC) | 动态解释执行 | 分离逻辑 | 霍尔逻辑 | SMT + 所有权 | 精化类型 |
+| **验证方法** | 模型检验 (BMC) | 动态解释执行 | 分离逻辑 | 霍尔逻辑 | SMT + 所有权（Ownership） | 精化类型 |
 | **自动化程度** | 高（全自动）| 高（运行即检测）| 中（需规范）| 中（需规范）| 中（需规范）| 高（推断为主）|
 | **Unsafe 支持** | ✅ 完整 | ✅ 完整 | ⚠️ 有限 | ⚠️ 有限 | ⚠️ 有限 | ❌ 不支持 |
 | **循环/递归** | 需展开界限 | ✅ 自然支持 | ✅ 不变式 | ✅ 不变式 | ✅ 不变式 | ✅ 类型推导 |
-| **性能开销** | 编译期高 | 运行时 10-100x | 编译期中 | 编译期中 | 编译期中 | 编译期低 |
+| **性能开销** | 编译期高 | 运行时（Runtime） 10-100x | 编译期中 | 编译期中 | 编译期中 | 编译期低 |
 | **学习曲线** | 低 | 低 | 高（分离逻辑）| 高（WhyML）| 中 | 中 |
 | **成熟度** | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ |
 | **学术来源** | CBMC (CProver) | rustc 内部 | Viper (ETH) | Why3 (INRIA) | Ironclad Apps | Liquid Types |
@@ -230,16 +231,16 @@ mod verification {
 | **有界验证** | 对所有可能的输入值进行符号执行 | 需限制循环展开次数 |
 | **Panic 检测** | 自动检测数组越界、整数溢出、除零 | 仅验证有界路径 |
 | **Unsafe 验证** | 可验证包含 unsafe 的代码 | 需信任 unsafe 的规范 |
-| **内存安全** | 检测 use-after-free、双重释放 | 复杂数据结构状态爆炸 |
+| **内存安全（Memory Safety）** | 检测 use-after-free、双重释放 | 复杂数据结构状态爆炸 |
 
 #### Kani 0.66 新特性（2026-05 发布）
 
 Kani 0.66 引入了多项降低验证门槛的能力：
 
 - **Quantifiers（`kani::forall` / `kani::exists`）**：在规格中直接表达全称/存在量词，无需手写循环不变式。
-- **Autoharness**：自动为函数生成验证 harness，并支持为结构体/枚举派生 `Arbitrary`，减少样板代码。
+- **Autoharness**：自动为函数生成验证 harness，并支持为结构体（Struct）/枚举（Enum）派生 `Arbitrary`，减少样板代码。
 - **Loop Contracts**：通过 `#[kani::loop_invariant(...)]` 与 loop-modifies 子句提供循环 contract，减少对 `#[kani::unwind]` 的依赖。
-- **`--prove-safety-only`**：专注验证内存安全与 UB，跳过功能正确性断言，加速安全基线检查。
+- **`--prove-safety-only`**：专注验证内存安全（Memory Safety）与 UB，跳过功能正确性断言，加速安全基线检查。
 
 > **来源**: [Kani Documentation](https://model-checking.github.io/kani/) ·
 > [Kani GitHub Releases](https://github.com/model-checking/kani/releases) ·
@@ -276,7 +277,7 @@ mod verification_066 {
 ### 3.2 MIRI：运行时 UB 检测器
 
 > **[MIRI](https://github.com/rust-lang/miri)** 是 Rust 的 MIR（中级中间表示）解释器，用于检测**未定义行为**（Undefined Behavior, UB）。
-> 与 Kani 的静态验证不同，MIRI 在运行时解释执行 MIR，追踪内存访问的合法性。
+> 与 Kani 的静态验证不同，MIRI 在运行时（Runtime）解释执行 MIR，追踪内存访问的合法性。
 > [来源: [MIRI Book](https://github.com/rust-lang/miri)]
 
 ```rust
@@ -388,8 +389,8 @@ impl Node {
 
 | **优势** | **劣势** |
 |:---|:---|
-| 分离逻辑天然适合所有权推理 | 学习曲线陡峭（需理解权限、分形）|
-| 可验证复杂数据结构（链表、树）| 对泛型和 Trait 支持有限 |
+| 分离逻辑天然适合所有权（Ownership）推理 | 学习曲线陡峭（需理解权限、分形）|
+| 可验证复杂数据结构（链表、树）| 对泛型（Generics）和 Trait 支持有限 |
 | 与 Rust 所有权系统深度集成 | 编译速度慢（Viper 后端）|
 | 自动推理循环不变式（部分）| 工具链维护活跃度下降 |
 
@@ -489,7 +490,7 @@ fn binary_search(v: &Vec<u64>, k: u64) -> (r: usize)
 
 ### 5.1 Flux：精化类型（Refinement Types）
 
-> **[Flux](https://github.com/liquid-rust/flux)** 是 UC San Diego 开发的 Rust 精化类型系统扩展。精化类型将**逻辑谓词**附加到类型上，例如 `i32{v: 0 <= v && v < 100}` 表示范围在 [0, 100) 的整数。Flux 在编译期自动推断和检查这些谓词。[来源: [Flux Paper — PLDI 2023](https://ranjitjhala.github.io/static/flux-pldi23.pdf)]
+> **[Flux](https://github.com/liquid-rust/flux)** 是 UC San Diego 开发的 Rust 精化类型系统（Type System）扩展。精化类型将**逻辑谓词**附加到类型上，例如 `i32{v: 0 <= v && v < 100}` 表示范围在 [0, 100) 的整数。Flux 在编译期自动推断和检查这些谓词。[来源: [Flux Paper — PLDI 2023](https://ranjitjhala.github.io/static/flux-pldi23.pdf)]
 
 ```rust,ignore
 // Flux 精化类型示例
@@ -516,7 +517,7 @@ pub fn safe_get(vec: &Vec<i32>, i: usize) -> i32 {
 }
 ```
 
-**Flux vs 标准 Rust 类型系统**:
+**Flux vs 标准 Rust 类型系统（Type System）**:
 
 ```text
 标准 Rust:        Vec<i32>          →  编译期仅保证是 i32 向量
@@ -571,9 +572,9 @@ Rust MIR
 | **数组越界** | ✅ 自动 | ✅ 运行时 | ✅ 规范+自动 | ✅ 规范+自动 | ✅ 规范+自动 | ✅ 自动推断 |
 | **整数溢出** | ✅ 自动 | ✅ 运行时 | ✅ 自动 | ✅ 自动 | ✅ 自动 | ⚠️ 部分 |
 | **内存泄漏** | ✅ 自动 | ❌ 不检测 | ✅ 自动 | ✅ 自动 | ✅ 自动 | N/A |
-| **并发安全** | ⚠️ 有限 | ⚠️ 有限 | ❌ 不支持 | ❌ 不支持 | ⚠️ 部分 | ❌ 不支持 |
+| **并发安全（Concurrency Safety）** | ⚠️ 有限 | ⚠️ 有限 | ❌ 不支持 | ❌ 不支持 | ⚠️ 部分 | ❌ 不支持 |
 | **功能正确性** | ⚠️ 需断言 | ❌ 不验证 | ✅ 完整规范 | ✅ 完整规范 | ✅ 完整规范 | ⚠️ 部分 |
-| **泛型/Trait** | ✅ 支持 | ✅ 支持 | ⚠️ 有限 | ⚠️ 有限 | ✅ 良好 | ⚠️ 有限 |
+| **泛型（Generics）/Trait** | ✅ 支持 | ✅ 支持 | ⚠️ 有限 | ⚠️ 有限 | ✅ 良好 | ⚠️ 有限 |
 | **Unsafe 代码** | ✅ 支持 | ✅ 支持 | ❌ 不支持 | ❌ 不支持 | ⚠️ 有限 | ❌ 不支持 |
 | **CI 集成** | ✅ cargo kani | ✅ cargo miri | ⚠️ 复杂 | ⚠️ 复杂 | ✅ cargo verus | ⚠️ 实验性 |
 
@@ -634,7 +635,7 @@ Iris 分离逻辑公式
 
 ### 7.2 RustBelt 验证框架
 
-> **[RustBelt](https://plv.mpi-sws.org/rustbelt/)** 是 MPI-SWS 的奠基性工作（POPL 2018），首次在数学上证明了 Rust 类型系统的**语义正确性**：如果程序通过借用检查器，则它确实是内存安全的。RustBelt 使用 **Iris** 分离逻辑在 Coq 中形式化了 Rust 核心语言（包括生命周期、借用、共享/独占引用）。[来源: [RustBelt Paper — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)]
+> **[RustBelt](LINK_PLACEHOLDER)** 是 MPI-SWS 的奠基性工作（POPL 2018），首次在数学上证明了 Rust 类型系统的**语义正确性**：如果程序通过借用检查器，则它确实是内存安全（Memory Safety）的。RustBelt 使用 **Iris** 分离逻辑在 Coq 中形式化了 Rust 核心语言（包括生命周期、借用（Borrowing）、共享/独占引用（Reference））。[来源: [RustBelt Paper — POPL 2018](LINK_PLACEHOLDER)]
 
 ```text
 RustBelt 的核心定理:
@@ -693,12 +694,12 @@ F* / Rocq 规范
 
 ### 7.4 Kani verify-std：标准库验证计划
 
-> **Kani verify-std** 是 AWS 于 2024 年启动的社区倡议，目标是用 Kani 有界模型检验器**系统性地验证 Rust 标准库**的核心模块。这是 Rust 生态中首个大规模的标准库验证努力。
+> **Kani verify-std** 是 AWS 于 2024 年启动的社区倡议，目标是用 Kani 有界模型检验器**系统性地验证 Rust 标准库**的核心模块（Module）。这是 Rust 生态中首个大规模的标准库验证努力。
 > [来源: [VSTTE 2024 Invited Talk](https://www.soundandcomplete.org/vstte2024/vstte2024-invited.pdf)] · [来源: [Kani verify-std RFC](https://github.com/model-checking/verify-rust-std)]
 
 | 验证目标 | 当前状态 | 挑战 |
 |:---|:---|:---|
-| `core::ptr` | 进行中 | 原始指针的别名模型 |
+| `core::ptr` | 进行中 | 原始指针（Raw Pointer）的别名模型 |
 | `core::slice` | 进行中 | 边界条件的完整性 |
 | `alloc::vec` | 计划中 | Vec 的容量管理不变式 |
 | `std::collections` | 计划中 | HashMap 的哈希碰撞处理 |
@@ -748,7 +749,7 @@ F* / Rocq 规范
 | **边界** | **现状** | **理论极限** | **工程影响** |
 |:---|:---|:---|:---|
 | **Kani 循环展开** | 默认 0（需手动指定）| 状态爆炸 | 复杂算法需简化或拆分 |
-| **MIRI 执行时间** | 10-100x  slowdown | 解释执行固有开销 | CI 中只运行关键 unsafe 模块 |
+| **MIRI 执行时间** | 10-100x  slowdown | 解释执行固有开销 | CI 中只运行关键 unsafe 模块（Module） |
 | **Prusti 支持版本** | Rust 1.70 | 最新 stable | 无法验证使用新特性的代码 |
 | **SMT 求解器超时** | Z3 默认 30s | 不可判定问题 | 需简化规范或增加 hints |
 | **unsafe 验证覆盖率** | 标准库原语已验证 | 所有 unsafe 代码 | 手动规范工作量巨大 |
@@ -839,7 +840,7 @@ fn caller() {
 
 ## 相关概念文件
 
-- [编译器内部原理](./45_compiler_internals.md) — rustc 管线、MIR、借用检查器
+- [编译器内部原理](LINK_PLACEHOLDER) — rustc 管线、MIR、借用（Borrowing）检查器
 - [安全与密码学](./43_security_cryptography.md) — 侧信道防护、常量时间操作
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — Miri、UB、别名模型
 - [形式化验证](../04_formal/05_verification_toolchain.md) — 定理证明器、SMT、分离逻辑
@@ -894,7 +895,7 @@ fn caller() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-悬垂指针解引用、越界访问、数据竞争、未对齐访问、类型混淆（strict provenance 违规）、未初始化内存读取。
+悬垂指针解引用（Reference）、越界访问、数据竞争、未对齐访问、类型混淆（strict provenance 违规）、未初始化内存读取。
 </details>
 
 ---

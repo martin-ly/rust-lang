@@ -11,19 +11,19 @@
 >
 > **EN**: Async Programming
 > **Summary**: Async Programming. Asynchronous execution model in Rust using futures, async/await syntax, executors, and the Pin contract. Covers Stream, select!, and ecosystem patterns.
-> **📎 交叉引用**
+> **📎 交叉引用（Reference）**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[异步编程](../../knowledge/03_advanced/async)
+> 本主题在 knowledge 中有系统化的知识索引：[异步（Async）编程](LINK_PLACEHOLDER)
 > **受众**: [专家]
-> **层次定位**: L3 高级概念 / 异步子域
+> **层次定位**: L3 高级概念 / 异步（Async）子域
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Ana — 分析 Pin 与状态机的交互
-> **前置依赖**: [L2 泛型](../02_intermediate/02_generics.md) · [L2 Trait](../02_intermediate/01_traits.md) · [L1 生命周期](../01_foundation/03_lifetimes.md)
+> **前置依赖**: [L2 泛型（Generics）](LINK_PLACEHOLDER) · [L2 Trait](LINK_PLACEHOLDER) · [L1 生命周期（Lifetimes）](LINK_PLACEHOLDER)
 > **后置延伸**: [L4 异步语义形式化](../04_formal/03_ownership_formal.md) · [L6 Tokio](../06_ecosystem/03_core_crates.md) · [L7 效果系统](../07_future/04_effects_system.md)
 > **跨层映射**: L3→L4 Future [来源: [std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html)] ↔  continuation monad | L3→L7 async effects → algebraic effects
-> **定理链编号**: T-050 Pin 安全性 → T-051 轮询一致性 → T-052 async/await 转换正确性
+> **定理链编号**: T-050 Pin 安全性 → T-051 轮询一致性（Coherence） → T-052 async/await 转换正确性
 > **层级**: L3 高级概念
-> **层级一致性**:
+> **层级一致性（Coherence）**:
 > 本文件所有定理与定义均锚定于 L3 抽象层；涉及 L4 形式化公理处已显式标注。
 > 前置概念（L1-L2）为推理前提，后置概念（Pin/Streams）为自然延伸。
 > **前置概念**:
@@ -45,8 +45,8 @@
 
 - v4.2 (2026-05-13): Phase B 验证实践——新增§8.13 Miri 动态验证场景（悬垂指针检测、无效 bool 检测、async 状态机未初始化内存检测，含实际 Miri 输出截图）
 - v4.1 (2026-05-13): Phase B 形式化深化——新增§3.1b 状态机操作语义（小步语义、poll 状态转移函数、.await CPS 变换、Pin 约束在操作语义中的体现）；新增§3.2b Pin LTL 形式化（不动性公理 A1-A3、Unpin 豁免、poll 递归调用链验证、与§3.1b 操作语义衔接）
-- v4.0 (2026-05-13): Phase 4 TODO 清理——新增§8.9 Waker/Context 底层机制（VTable、自定义 Reactor）、§8.10 Stream/Sink trait 完整分析（异步迭代器与生产者）、§8.11 `Pin<Box<dyn Future>>` vs impl Future 性能差异（动态/静态分发、栈 pinning）、§8.12 loom 并发模型检测工具
-- v3.0 (2026-05-13): 深度重构——新增§3.5调度模型对比（含三维Mermaid图）、§3.1状态机变换精确推导（含Pin内存布局约束）、§8.7取消安全系统分析（含3种安全模式与形式化定义）、§8.8 Waker契约与活性（含决策树），建立异步语义模型完整推理链
+- v4.0 (2026-05-13): Phase 4 TODO 清理——新增§8.9 Waker/Context 底层机制（VTable、自定义 Reactor）、§8.10 Stream/Sink trait 完整分析（异步迭代器（Iterator）与生产者）、§8.11 `Pin<Box<dyn Future>>` vs impl Future 性能差异（动态/静态分发、栈 pinning）、§8.12 loom 并发模型检测工具
+- v3.0 (2026-05-13): 深度重构——新增§3.5调度模型对比（含三维Mermaid图）、§3.1状态机变换精确推导（含Pin（Pin）内存布局约束）、§8.7取消安全系统分析（含3种安全模式与形式化定义）、§8.8 Waker契约与活性（含决策树），建立异步语义模型完整推理链
 - v2.0 (2026-05-13): 定理一致性矩阵扩展至10行（含⟹推理链）、新增反命题决策树3组、认知路径6步递进、章节过渡段落与层次一致性标注
 - v1.0 (2026-05-12): 初始版本，完成权威定义、Future 状态机模型、async/await 语法糖解析、Pin 分析、思维导图、示例反例
 
@@ -67,7 +67,7 @@
   - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attribute-matrix)
     - [2.1 异步 vs 并发 vs 并行对比矩阵](#21-异步-vs-并发-vs-并行对比矩阵)
     - [2.2 Future 组合子矩阵](#22-future-组合子矩阵)
-    - [2.3 运行时对比矩阵](#23-运行时对比矩阵)
+    - [2.3 运行时（Runtime）对比矩阵](LINK_PLACEHOLDER)
   - [三、形式化理论根基（Formal Foundation）](#三形式化理论根基formal-foundation)
     - [3.1 async fn 作为状态机：精确推导](#31-async-fn-作为状态机精确推导)
     - [3.1b 状态机操作语义（Operational Semantics）](#31b-状态机操作语义operational-semantics)
@@ -99,7 +99,7 @@
     - [8.2 正确示例：并发执行](#82-正确示例并发执行)
     - [8.3 正确示例：Stream 异步迭代](#83-正确示例stream-异步迭代)
     - [8.4 反例：在 async 中阻塞线程](#84-反例在-async-中阻塞线程)
-    - [8.5 反例：未 Pin 的自引用 Future](#85-反例未-pin-的自引用-future)
+    - [8.5 反例：未 Pin 的自引用（Reference） Future](LINK_PLACEHOLDER)
     - [8.6 边界极限测试：跨越 await 的 Send 约束](#86-边界极限测试跨越-await-的-send-约束)
     - [8.7 边界极限测试：取消安全系统分析](#87-边界极限测试取消安全系统分析)
     - [8.8 Waker 契约与活性](#88-waker-契约与活性)
@@ -107,7 +107,7 @@
     - [8.10 `Stream` / `Sink` trait 完整分析](#810-stream--sink-trait-完整分析)
     - [8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异](#811-pinboxdyn-future-vs-impl-future-的性能差异)
     - [8.12 `loom` 并发模型检测工具](#812-loom-并发模型检测工具)
-    - [8.13 Miri 动态验证：async 状态机的内存安全检测](#813-miri-动态验证async-状态机的内存安全检测)
+    - [8.13 Miri 动态验证：async 状态机的内存安全（Memory Safety）检测](LINK_PLACEHOLDER)
       - [场景 1：悬垂指针检测（使用已释放的 Box）](#场景-1悬垂指针检测使用已释放的-box)
       - [场景 2：无效值检测（非法 bool 构造）](#场景-2无效值检测非法-bool-构造)
       - [场景 3：async 状态机中的未初始化内存](#场景-3async-状态机中的未初始化内存)
@@ -120,7 +120,7 @@
       - [限制与注意事项](#限制与注意事项)
       - [生命周期陷阱](#生命周期陷阱)
   - [十一、国际课程与论文对齐](#十一国际课程与论文对齐)
-  - [十二、`AsyncFn` Trait 家族：异步闭包的类型化（1.85 stable，RFC 3668）](#十二asyncfn-trait-家族异步闭包的类型化185-stablerfc-3668)
+  - [十二、`AsyncFn` Trait 家族：异步闭包（Closures）的类型化（1.85 stable，RFC 3668）](LINK_PLACEHOLDER)
     - [12.1 问题：异步闭包的类型真空](#121-问题异步闭包的类型真空)
     - [12.2 `AsyncFn` 家族层级](#122-asyncfn-家族层级)
     - [12.3 关键形式化特性：可重入性限制](#123-关键形式化特性可重入性限制)
@@ -140,7 +140,7 @@
     - [16.1 边界测试：非 Send 类型跨 await 点（编译错误）](#161-边界测试非-send-类型跨-await-点编译错误)
     - [16.2 边界测试：在 async 块中调用阻塞函数（逻辑错误）](#162-边界测试在-async-块中调用阻塞函数逻辑错误)
     - [16.3 边界测试：递归 async fn（编译错误）](#163-边界测试递归-async-fn编译错误)
-    - [16.4 边界测试：在 async 块中借用局部变量生命周期不足（编译错误）](#164-边界测试在-async-块中借用局部变量生命周期不足编译错误)
+    - [16.4 边界测试：在 async 块中借用（Borrowing）局部变量生命周期不足（编译错误）](LINK_PLACEHOLDER)
     - [16.5 边界测试：`Pin<&mut Self>` 在 async trait 中的误用（编译错误）](#165-边界测试pinmut-self-在-async-trait-中的误用编译错误)
     - [10.4 边界测试：`async fn` 在 trait 中的缺失与 `async_trait` crate（编译错误）](#104-边界测试async-fn-在-trait-中的缺失与-async_trait-crate编译错误)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
@@ -257,7 +257,7 @@ Poll 类型:
 ## 二、概念属性矩阵（Attribute Matrix）
 
 > **章节过渡**：定义之后需辨析 async 在并发光谱中的精确位置。
-> 以下矩阵将 async 与线程、并行对比，澄清"异步≠并行≠并发"的常见误解；随后给出 Future 组合子与运行时选型矩阵，为工程决策提供依据。
+> 以下矩阵将 async 与线程、并行对比，澄清"异步≠并行≠并发"的常见误解；随后给出 Future 组合子与运行时（Runtime）选型矩阵，为工程决策提供依据。
 > **[Wikipedia: Async/await](https://en.wikipedia.org/wiki/Async/await)** Rust's `async/await` draws inspiration from C# 5.0 (2012) and ECMAScript 2017 (JavaScript), but Rust compiles async blocks to zero-cost state machines rather than runtime task objects. ✅ 已验证
 
 ### 2.1 异步 vs 并发 vs 并行对比矩阵
@@ -308,7 +308,7 @@ Poll 类型:
 
 > **章节过渡**：属性矩阵回答了"是什么"，本节回答"为什么安全"。
 > Rust 的 async/await 安全性建立在两个形式化支柱上：(1) 编译器将 async fn 转换为状态机，(2) Pin 保证该状态机在挂起期间内存地址恒定。
-> 二者共同构成"零成本 + 内存安全"的基石。
+> 二者共同构成"零成本 + 内存安全（Memory Safety）"的基石。
 > **[Rust Reference: Async fn desugaring](https://doc.rust-lang.org/reference/items/functions.html#async-functions)** 编译器将 async fn 转换为匿名状态机类型（匿名 enum/struct），实现 Future trait，每个 await 点对应一个状态转换。✅ 已验证
 > **[TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html)** async fn 返回的 Future 是惰性的（lazy），直到被 .await 或执行器 poll 才会执行。✅ 已验证
 
@@ -370,7 +370,7 @@ Pin<&mut Self> 的内存布局约束:
 > **来源**: [RFC 2349 §3: Pin invariants](https://rust-lang.github.io/rfcs/2349-pin.html) · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Rustonomicon: Pinning](https://doc.rust-lang.org/std/pin/struct.Pin.html)
 > **[RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)** Pin 被引入以支持自引用结构：Pin<&mut T> 保证 T 的内存地址不会被改变，除非 T: Unpin。✅ 已验证
 > **[TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html)** Pin 是 async/await 安全的关键——编译器生成的状态机可能包含自引用（局部变量的引用），Pin 防止状态机被 move 后引用失效。✅ 已验证
-> **[Phil-opp OS blog]** 自引用结构在操作系统开发中常见（如页表自引用），Pin 提供了类型系统级别的安全保证。✅ 已验证
+> **[Phil-opp OS blog]** 自引用结构在操作系统开发中常见（如页表自引用），Pin 提供了类型系统（Type System）级别的安全保证。✅ 已验证
 > **[RFC 2349: Pin](https://rust-lang.github.io/rfcs/2349-pin.html)** `Pin<P<T>>` was introduced to guarantee that `!Unpin` values cannot be moved, providing the formal foundation for safe self-referential async state machines. ✅ 已验证
 
 ### 3.1b 状态机操作语义（Operational Semantics）
@@ -644,9 +644,9 @@ async 状态机的 Pin 验证场景:
 | **栈管理** | 固定 2MB | 状态机（最小，~几百字节） | 动态扩容（2KB 起） |
 | **阻塞影响** | 仅当前线程 | 阻塞整个执行器线程！ | 调度器将线程与 P 解绑 |
 | **FFI** | 完美（C ABI 兼容） | 需 `spawn_blocking` 桥接 | 栈切换成本，CGO 有开销 |
-| **Rust 排除原因** | —（基准模型） | ✅ **零成本抽象，无运行时依赖** | ❌ 运行时依赖（RFC 230 明确拒绝） |
+| **Rust 排除原因** | —（基准模型） | ✅ **零成本抽象（Zero-Cost Abstraction），无运行时依赖** | ❌ 运行时依赖（RFC 230 明确拒绝） |
 
-> **[without.boats blog]** Rust 明确拒绝绿色线程（green threads / M:N 线程），因为"每个零成本抽象都必须有不用不付钱的路径；绿色线程的运行时负担与 Rust 的系统编程定位冲突"。✅ 已验证
+> **[without.boats blog]** Rust 明确拒绝绿色线程（green threads / M:N 线程），因为"每个零成本抽象（Zero-Cost Abstraction）都必须有不用不付钱的路径；绿色线程的运行时负担与 Rust 的系统编程定位冲突"。✅ 已验证
 > **[RFC 230](https://github.com/rust-lang/rfcs/pull/230)** Rust 曾实验性支持绿色线程（Rust 1.0 前），后因运行时复杂性与 FFI 互操作困难被移除。✅ 已验证
 > **[The Rust Async Book](https://rust-lang.github.io/async-book/)** async/await 的协作式调度意味着"任务自己决定何时让出"——在 `.await` 点主动返回 Pending，而非被外部强制中断。✅ 已验证
 
@@ -668,7 +668,7 @@ graph LR
     style C fill:#ff9,stroke:#333
 ```
 
-> **认知功能**: 工程权衡决策辅助——在三维设计空间中定位不同并发模型的优劣。读者在技术选型时，可对照延迟、内存、吞吐量三个维度的项目需求优先级，判断 Rust 的协作式选择是否为最优解。关键洞察：零成本抽象是刻意 trade-off，用程序员的显式挂起标注换取对底层硬件的最大控制。[来源: 💡 原创分析]
+> **认知功能**: 工程权衡决策辅助——在三维设计空间中定位不同并发模型的优劣。读者在技术选型时，可对照延迟、内存、吞吐量三个维度的项目需求优先级，判断 Rust 的协作式选择是否为最优解。关键洞察：零成本抽象（Zero-Cost Abstraction）是刻意 trade-off，用程序员的显式挂起标注换取对底层硬件的最大控制。[来源: 💡 原创分析]
 > [来源: [Tokio Docs](https://tokio.rs/)]
 
 **关键洞察**：协作式调度的零成本并非无代价——它要求程序员显式标注所有挂起点（`.await`），且阻塞调用会惩罚整个执行器。Rust 接受这一 trade-off，以换取对底层硬件的最大控制和 FFI 的完美兼容。
@@ -690,7 +690,7 @@ graph LR
 
 > **来源: [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html)** Rust `async/await` 基于 `Future` trait 和编译器状态机转换，承诺零成本抽象。 ✅
 > **[来源: C++ Reference: Coroutines]** C++20 Coroutines 通过 `co_await`/`co_yield`/`co_return` 和 promise 类型实现，编译器生成状态机，与 Rust 类似但自定义能力更强。 ✅
-> **[来源: Haskell GHC User Guide: Concurrent Haskell]** Haskell 异步通过 `IO` monad 和 `forkIO` 实现，纯函数隔离保证并发安全，但运行时依赖 GC 和 thunk 求值。 ✅
+> **[来源: Haskell GHC User Guide: Concurrent Haskell]** Haskell 异步通过 `IO` monad 和 `forkIO` 实现，纯函数隔离保证并发安全（Concurrency Safety），但运行时依赖 GC 和 thunk 求值。 ✅
 > **[来源: Go Spec: Goroutines]** Go goroutine 是轻量级线程，由运行时 M:N 调度，内存占用约 2KB 起，阻塞不影响其他 goroutine。 ✅
 > **[来源: Without Boats, "Pin and Suffering"]** Rust `Pin<T>` 的设计是为了安全表达自引用结构，这是 Rust 异步与 C++20 Coroutines 的关键差异之一。 ✅
 
@@ -729,7 +729,7 @@ graph TD
     F --> F3[Stream 异步迭代]
 ```
 
-> **认知功能**: 概念拓扑速查图——以树状结构展示 async 知识体系的层级关系。读者遇到陌生子概念（如 Waker、Stream）时，可先在图中定位其所属分支，再追溯至文件对应章节。关键洞察：Future Trait 是整个异步子域的根节点，Pin 是连接"零成本"与"内存安全"的核心桥梁。[来源: 💡 原创分析]
+> **认知功能**: 概念拓扑速查图——以树状结构展示 async 知识体系的层级关系。读者遇到陌生子概念（如 Waker、Stream）时，可先在图中定位其所属分支，再追溯至文件对应章节。关键洞察：Future Trait 是整个异步子域的根节点，Pin 是连接"零成本"与"内存安全（Memory Safety）"的核心桥梁。[来源: 💡 原创分析]
 > [来源: [Rust Reference: Async/Await](https://doc.rust-lang.org/reference/expressions/await-expr.html)]
 
 ---
@@ -750,10 +750,10 @@ graph TD
 | **L2** | `Pin<&mut Self>` ⟹ 自引用安全 | `!Unpin` + 正确 Pin 构造（`Box::pin` 或栈 Pin） | 状态机内指针字段在跨 `poll` 间始终有效，地址恒定 | 内存位置稳定性公理 | T1, C2, P2 | `Unpin` 误实现、手动 `mem::swap`、栈帧移动 | UB（悬垂指针解引用） |
 | **T1** | async/await 状态机变换 ⟹ 零成本抽象 | 编译器生成 + L2（Pin 保证不动） | 运行时无额外开销，等价于手写状态机；无 GC、无动态分发（默认） | 编译器正确性公理 | A1, S1 | 强制 `Box::pin` 堆分配、`dyn Future` 动态分发、递归状态机膨胀 | 性能退化（非语义错误），缓存不友好 |
 | **T2** | `Send` Future ⟹ 跨 await 点状态迁移安全 | 状态机所有捕获字段均实现 `Send` | 可安全跨线程传递并在新线程恢复 `poll`；await 点即为状态序列化点 | 线程安全传递公理 | C1, P1 | 字段含 `!Send`（如 `Rc<T>`、`MutexGuard`） | 编译错误 E0277 |
-| **C1** | `!Send` 类型跨 await ⟹ 编译错误 | 状态机含 `Rc`/裸指针/`MutexGuard` 等 | `tokio::spawn` 及跨线程调度被类型系统拒绝 | 子类型拒绝公理 | — | `unsafe impl Send for T` 恶意/错误绕过 | 数据竞争（运行时 UB），破坏线程安全 |
+| **C1** | `!Send` 类型跨 await ⟹ 编译错误 | 状态机含 `Rc`/裸指针/`MutexGuard` 等 | `tokio::spawn` 及跨线程调度被类型系统（Type System）拒绝 | 子类型拒绝公理 | — | `unsafe impl Send for T` 恶意/错误绕过 | 数据竞争（运行时（Runtime） UB），破坏线程安全 |
 | **C2** | 未 Pin 的自引用结构被移动 ⟹ UB | 手写 Future 含自引用字段且未使用 `Pin<&mut Self>` | 内部指针悬垂，后续 `poll` 解引用无效 | 内存安全公理 | — | 编译器未生成 Pin（手写 `Future` 时遗漏） | UB（不可定义行为，可能静默崩溃） |
 | **P1** | Waker 契约 ⟹ 调度器活性 | 正确实现 `wake`/`wake_by_ref`；Waker 被传递至 Reactor | Future 在资源就绪后最终会被重新 `poll` | 活性约定（liveness guarantee） | S1 | 遗忘 wake、虚假 wake、Waker 被过早释放 | 活锁 / 饥饿 / 永久 Pending |
-| **P2** | `select!` / `drop(Future)` ⟹ 取消点 | Future 未完成时被显式丢弃或分支落选 | 部分副作用可能残留；所有权已转移者不可逆；资源由 `Drop` 释放 | 资源管理公理 + 线性类型 | — | 未按取消安全（cancellation safe）设计 | 状态不一致（如半写文件、半发消息） |
+| **P2** | `select!` / `drop(Future)` ⟹ 取消点 | Future 未完成时被显式丢弃或分支落选 | 部分副作用可能残留；所有权（Ownership）已转移者不可逆；资源由 `Drop` 释放 | 资源管理公理 + 线性类型 | — | 未按取消安全（cancellation safe）设计 | 状态不一致（如半写文件、半发消息） |
 | **A1** | AFIT/RPITIT ⟹ 异步（Async） Trait 零成本抽象 | Trait 方法返回 `impl Future<Output = T>`（Rust 1.75+） | 调用方无需知道具体 Future 类型，无 `Box` 开销 | 存在类型（existential type）公理 | — | `dyn Trait` 类型擦除场景 | E0720 / 编译错误 / 被迫动态分发 |
 | **S1** | `Poll::Pending` + Waker 注册 ⟹ 协作式多任务 | 运行时正确将 Waker 注册至 epoll/kqueue/IOCP | 单线程内多 Task 并发执行，无抢占上下文切换开销 | 协程语义公理 | — | 忙等轮询（busy loop，未返回 Pending） | CPU 空转，吞吐量崩溃 |
 
@@ -845,7 +845,7 @@ graph TD
     style T fill:#6f6
 ```
 
-> **认知功能**: 生命周期认知修正器——打破"函数调用即执行到返回"的同步思维惯性。读者在设计取消安全（cancellation safety）时，应将此图作为检查清单，确保所有可能导致 Future 提前终止的路径都被处理。关键洞察：poll 是协作式请求而非命令式保证，取消是一等公民。[来源: 💡 原创分析]
+> **认知功能**: 生命周期（Lifetimes）认知修正器——打破"函数调用即执行到返回"的同步思维惯性。读者在设计取消安全（cancellation safety）时，应将此图作为检查清单，确保所有可能导致 Future 提前终止的路径都被处理。关键洞察：poll 是协作式请求而非命令式保证，取消是一等公民。[来源: 💡 原创分析]
 > [来源: [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html)]
 
 **修正认知**：
@@ -1468,7 +1468,7 @@ fn create_waker(task_id: u64, scheduler: Arc<Scheduler>) -> Waker {
 
 > **关键差异**: `Wake` trait 隐藏了 `RawWakerVTable` 的 unsafe 细节，但底层仍通过 vtable 实现类型擦除。`Waker::from(Arc<T>)` 在内部自动构建符合 `clone`/`wake`/`wake_by_ref`/`drop` 契约的 vtable。[来源: Rust std: std::task::Wake]
 
-**与 OS 异步 I/O 的唤醒路径**
+**与 OS 异步（Async） I/O 的唤醒路径**
 
 `Waker` 的最终消费者是 OS 异步 I/O 机制。不同 OS 的唤醒路径决定了 Reactor 如何将 I/O 就绪事件映射到 `Waker::wake()` 调用：
 
@@ -1522,7 +1522,7 @@ impl UringReactor {
 
 ### 8.10 `Stream` / `Sink` trait 完整分析
 
-> **章节过渡**：Future 表示单个异步计算，但许多场景需要处理异步序列（如网络数据包流、消息队列）。`Stream` 将异步能力扩展到迭代器领域，`Sink` 则提供异步生产者抽象。理解它们与 `Iterator`、`Future` 的关系，是构建异步管道的关键。
+> **章节过渡**：Future 表示单个异步计算，但许多场景需要处理异步序列（如网络数据包流、消息队列）。`Stream` 将异步能力扩展到迭代器（Iterator）领域，`Sink` 则提供异步生产者抽象。理解它们与 `Iterator`、`Future` 的关系，是构建异步管道的关键。
 
 **`Stream`：异步迭代器**
 
@@ -1932,7 +1932,7 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
                 └── 否 → impl Future（默认最优路径）
 ```
 
-> **交叉链接**: 单态化机制见 [../02_intermediate/02_generics.md](../02_intermediate/02_generics.md) §4.5（泛型单态化与代码膨胀）；trait 对象的内存布局见 [../02_intermediate/01_traits.md](../02_intermediate/01_traits.md) §4.3（trait object 与 vtable）。
+> **交叉链接**: 单态化机制见 [../02_intermediate/02_generics.md](../02_intermediate/02_generics.md) §4.5（泛型（Generics）单态化与代码膨胀）；trait 对象的内存布局见 [../02_intermediate/01_traits.md](../02_intermediate/01_traits.md) §4.3（trait object 与 vtable）。
 
 ---
 
@@ -2293,7 +2293,7 @@ warning: the type `bool` does not permit being left uninitialized
   |                            this code causes undefined behavior when executed
 ```
 
-> **关键洞察**: async 状态机的局部变量在挂起时被存入状态机结构体。若局部变量未初始化（通过 `MaybeUninit::uninit().assume_init()`），恢复执行后读取该变量即触发 UB。Miri 的 `invalid_value` lint 在解释执行时检测此类问题，而编译器仅发出 warning（无法静态确定 `assume_init` 是否安全）。
+> **关键洞察**: async 状态机的局部变量在挂起时被存入状态机结构体（Struct）。若局部变量未初始化（通过 `MaybeUninit::uninit().assume_init()`），恢复执行后读取该变量即触发 UB。Miri 的 `invalid_value` lint 在解释执行时检测此类问题，而编译器仅发出 warning（无法静态确定 `assume_init` 是否安全）。
 
 >
 #### Miri 与 async 状态机的特殊关联
@@ -2480,7 +2480,7 @@ trait DataProvider<'a> {
 
 ### 12.1 问题：异步闭包的类型真空
 
-在 1.85 之前，异步闭包 `async |x| { ... }` 无法直接作为 trait bound 使用：
+在 1.85 之前，异步闭包（Closures） `async |x| { ... }` 无法直接作为 trait bound 使用：
 
 ```rust,ignore
 // 旧模式：verbose 的 workaround
@@ -2518,7 +2518,7 @@ AsyncFn<Args>         // 异步多次调用，不可变借用
 
 ### 12.3 关键形式化特性：可重入性限制
 
-`AsyncFn` 的 `call` 方法返回 `impl Future`，该 Future 可能**借用**闭包捕获的状态。因此：
+`AsyncFn` 的 `call` 方法返回 `impl Future`，该 Future 可能**借用（Borrowing）**闭包捕获的状态。因此：
 
 ```rust,ignore
 let closure = async |s| { db.save(s).await };
@@ -2530,7 +2530,7 @@ fut1.await;  // Future 完成后，借用释放
 let fut2 = closure("world");  // ✅ 现在可以再次调用
 ```
 
-**形式化洞察**: `AsyncFn` 将闭包的**同步可重入性**（`Fn` 的 `&self`）与**异步借用生命周期**（Future 的存活期）耦合。这是 Rust 借用检查器在**高阶异步函数**上的自然扩展。
+**形式化洞察**: `AsyncFn` 将闭包的**同步可重入性**（`Fn` 的 `&self`）与**异步借用（Borrowing）生命周期**（Future 的存活期）耦合。这是 Rust 借用检查器在**高阶异步函数**上的自然扩展。
 
 > **来源**: [RFC 3668](https://github.com/rust-lang/rfcs/pull/3668) · [Rust Reference: Async closures](https://doc.rust-lang.org/reference/) · [Rust 1.85 Release Notes]
 
@@ -2625,8 +2625,8 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| 所有权 | [](../01_foundation/01_ownership.md) | Pin 根基 |
-| 生命周期 | [](../01_foundation/03_lifetimes.md) | async fn 捕获规则 |
+| 所有权（Ownership） | [](../01_foundation/01_ownership.md) | Pin 根基 |
+| 生命周期（Lifetimes） | [](../01_foundation/03_lifetimes.md) | async fn 捕获规则 |
 | Traits | [](../02_intermediate/01_traits.md) | Future trait 定义 |
 | 并发 | [](../03_advanced/01_concurrency.md) | 并行与并发对比 |
 | Unsafe | [](../03_advanced/03_unsafe.md) | Pin 内部实现 |
@@ -2827,7 +2827,7 @@ async fn borrow_lifetime_fixed() {
 }
 ```
 
-> **修正**: `async fn` 编译为状态机，所有跨 `await` 的引用必须具有 `'static` 或等价生命周期。避免在 `async` 块中借用局部变量，改用所有权移动。
+> **修正**: `async fn` 编译为状态机，所有跨 `await` 的引用必须具有 `'static` 或等价生命周期。避免在 `async` 块中借用局部变量，改用所有权（Ownership）移动。
 
 ### 16.5 边界测试：`Pin<&mut Self>` 在 async trait 中的误用（编译错误）
 
@@ -2886,7 +2886,7 @@ impl Service for MyService {
 fn main() {}
 ```
 
-> **修正**: Rust stable **不支持 trait 中的 `async fn`**（RPITIT — Return Position Impl Trait In Traits，1.75.0+ 已稳定！）。`async_trait` crate 提供过程宏 workaround：`// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]` 自动将 `async fn` 转为返回 `Pin<Box<dyn Future>>`。1.75.0+ 后，原生 `async fn` 在 trait 中可用，但需注意：1) `Send` 约束不自动推导（`async_trait` 自动添加）；2) 动态分发（`dyn Trait`）仍需 `async_trait` 或手动 `Box::pin`。异步 trait 是 Rust async 生态的关键里程碑，使 async/await 可用于 trait 抽象。这与 C# 的 `async` 接口方法（原生支持）或 Java 的 `CompletableFuture`（接口中返回 Future，非 async 方法）不同——Rust 的 async trait 支持是语言演进的重要步骤。[来源: [Rust 1.75 Release Notes](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)] · [来源: [async_trait crate](https://docs.rs/async-trait/latest/async_trait/)]
+> **修正**: Rust stable **不支持 trait 中的 `async fn`**（RPITIT — Return Position Impl Trait In Traits，1.75.0+ 已稳定！）。`async_trait` crate 提供过程宏（Procedural Macro） workaround：`// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]` 自动将 `async fn` 转为返回 `Pin<Box<dyn Future>>`。1.75.0+ 后，原生 `async fn` 在 trait 中可用，但需注意：1) `Send` 约束不自动推导（`async_trait` 自动添加）；2) 动态分发（`dyn Trait`）仍需 `async_trait` 或手动 `Box::pin`。异步 trait 是 Rust async 生态的关键里程碑，使 async/await 可用于 trait 抽象。这与 C# 的 `async` 接口方法（原生支持）或 Java 的 `CompletableFuture`（接口中返回 Future，非 async 方法）不同——Rust 的 async trait 支持是语言演进的重要步骤。[来源: [Rust 1.75 Release Notes](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)] · [来源: [async_trait crate](https://docs.rs/async-trait/latest/async_trait/)]
 
 ## 逆向推理链（Backward Reasoning）
 
@@ -2961,7 +2961,7 @@ fn main() {}
 **题目**: `async fn` 在编译后本质上是什么？
 
 - A. 一个普通的同步函数，只是语法糖
-- B. 一个返回 `Future` 的匿名状态机结构体
+- B. 一个返回 `Future` 的匿名状态机结构体（Struct）
 - C. 一个在新线程中运行的函数
 - D. 一个绿色线程（green thread）
 
@@ -3059,7 +3059,7 @@ async fn process() {
 | 高并发 HTTP 服务器 | **Tokio** | 生态最成熟，`tokio::net`、`tokio::fs`、`hyper`、`axum` 等 |
 | 嵌入式设备 | **Embassy** | 专为 `no_std` 嵌入式设计，资源占用极小 |
 | 与 `async-std` 集成 | **async-std** `[已归档 2025-03]` | 项目已停止维护，建议迁移至 Tokio 或 smol |
-| 轻量级可组合 | **smol** | 核心仅 5k 行，模块化设计，易于嵌入 |
+| 轻量级可组合 | **smol** | 核心仅 5k 行，模块（Module）化设计，易于嵌入 |
 
 **Tokio 的生态系统**:
 

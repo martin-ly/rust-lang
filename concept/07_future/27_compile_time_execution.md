@@ -10,7 +10,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S+P** — StructureProcedure
 > **双维定位**: C×Eva — 评估编译期执行的能力边界
-> **定位**: 深入探讨 Rust 的**编译期执行**能力——从 `const fn` 到 `const` 泛型，分析 Rust 如何在编译期完成计算，实现零成本抽象。
+> **定位**: 深入探讨 Rust 的**编译期执行**能力——从 `const fn` 到 `const` 泛型（Generics），分析 Rust 如何在编译期完成计算，实现零成本抽象（Zero-Cost Abstraction）。
 > **前置概念**: [Generics](../02_intermediate/02_generics.md) · [Type System](../01_foundation/04_type_system.md) · [Trait](../02_intermediate/01_traits.md)
 > **后置概念**: [Macros](../03_advanced/04_macros.md) · [Zero Cost Abstractions](../01_foundation/06_zero_cost_abstractions.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
@@ -30,7 +30,7 @@
   - [一、核心概念](#一核心概念)
     - [1.1 const fn](#11-const-fn)
     - [1.2 const 上下文](#12-const-上下文)
-    - [1.3 const 泛型](#13-const-泛型)
+    - [1.3 const 泛型（Generics）](LINK_PLACEHOLDER)
   - [二、编译期能力边界](#二编译期能力边界)
     - [2.1 稳定的编译期操作](#21-稳定的编译期操作)
     - [2.2 不稳定特性](#22-不稳定特性)
@@ -46,10 +46,10 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：编译期执行的编译错误](#十边界测试编译期执行的编译错误)
     - [10.1 边界测试：`const fn` 的受限操作（编译错误）](#101-边界测试const-fn-的受限操作编译错误)
-    - [10.2 边界测试：过程宏的 TokenStream 解析错误（编译错误）](#102-边界测试过程宏的-tokenstream-解析错误编译错误)
+    - [10.2 边界测试：过程宏（Procedural Macro）的 TokenStream 解析错误（编译错误）](LINK_PLACEHOLDER)
     - [10.3 边界测试：`const fn` 中的浮点数限制（编译错误）](#103-边界测试const-fn-中的浮点数限制编译错误)
     - [10.4 边界测试：编译期堆分配的 `const Heap` 展望（编译错误）](#104-边界测试编译期堆分配的-const-heap-展望编译错误)
-    - [10.3 边界测试：`const fn` 中的浮点运算精度与确定性（编译错误/运行时差异）](#103-边界测试const-fn-中的浮点运算精度与确定性编译错误运行时差异)
+    - [10.3 边界测试：`const fn` 中的浮点运算精度与确定性（编译错误/运行时（Runtime）差异）](LINK_PLACEHOLDER)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 的常量求值（const evaluation）目前已支持到什么程度？（理解层）](#测验-1rust-的常量求值const-evaluation目前已支持到什么程度理解层)
@@ -97,7 +97,7 @@ const fn:
   └── 持续扩展中...
 ```
 
-> **认知功能**: **const fn 是 Rust 编译期编程的核心**——将运行时代码直接提升到编译期执行。
+> **认知功能**: **const fn 是 Rust 编译期编程的核心**——将运行时（Runtime）代码直接提升到编译期执行。
 > [来源: [Rust Reference — Const Functions](https://doc.rust-lang.org/reference/items/functions.html#const-functions)]
 
 ---
@@ -177,7 +177,7 @@ Const Generics:
   └── 零运行时开销
 ```
 
-> **泛型洞察**: **Const Generics 是 Rust 类型系统的里程碑**——数组大小进入类型系统，实现真正的编译期类型安全。
+> **泛型洞察**: **Const Generics 是 Rust 类型系统（Type System）的里程碑**——数组大小进入类型系统，实现真正的编译期类型安全。
 > [来源: [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html)]
 
 ---
@@ -450,7 +450,7 @@ graph TD
      type DynMatrix = Matrix<f32, Dynamic, Dynamic>;
 ```
 
-> **陷阱总结**: 编译期执行的陷阱主要与**const/let 混淆**、**递归**、**限制忽略**、**浮点数**和**泛型过度**相关。
+> **陷阱总结**: 编译期执行的陷阱主要与**const/let 混淆**、**递归**、**限制忽略**、**浮点数**和**泛型（Generics）过度**相关。
 
 ---
 
@@ -477,8 +477,8 @@ fn main() {
 
 - [Generics](../02_intermediate/02_generics.md) — 泛型
 - [Trait](../02_intermediate/01_traits.md) — Trait
-- [Macros](../03_advanced/04_macros.md) — 宏
-- [Zero Cost Abstractions](../01_foundation/06_zero_cost_abstractions.md) — 零成本抽象
+- [Macros](../03_advanced/04_macros.md) — 宏（Macro）
+- [Zero Cost Abstractions](../01_foundation/06_zero_cost_abstractions.md) — 零成本抽象（Zero-Cost Abstraction）
 
 ---
 
@@ -527,7 +527,7 @@ fn main() {
 
 > **修正**:
 > `const fn` 在编译期执行，因此不能使用运行时才可用的功能：堆分配（`Box::new`、`Vec::new`）、I/O、随机数、线程、panic（Rust 1.57+ 允许 `const panic`）。
-> `vec![]` 宏在底层调用 `Vec::new()` 和堆分配，因此不能在 `const fn` 中使用。
+> `vec![]` 宏（Macro）在底层调用 `Vec::new()` 和堆分配，因此不能在 `const fn` 中使用。
 > 编译期计算应使用栈分配类型（数组 `[T; N]`、`const` 值）或 `const` 泛型。
 > Rust 的 `const fn` 能力在持续扩展：1.46 允许 `if`/`match`，1.57 允许 `panic`，1.64 允许 `dyn Trait`，未来可能允许有限堆分配（`const Heap` RFC）。
 > 这与 C++ 的 `constexpr`（C++20 允许堆分配和虚函数）相比，Rust 更保守——优先保证编译期执行的确定性和可预测性。
@@ -563,9 +563,9 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 > **修正**:
 > 过程宏（procedural macros）在编译期操作 TokenStream，将 Rust 代码作为数据变换。
 > `syn` crate 将 TokenStream 解析为 AST（`DeriveInput`、`ItemFn` 等），解析失败时产生编译错误。
-> 过程宏的调试困难：错误信息指向宏生成的代码，而非宏定义本身。
+> 过程宏（Procedural Macro）的调试困难：错误信息指向宏生成的代码，而非宏定义本身。
 > Rust 1.64+ 的 `Span::error` 和 `proc_macro::Diagnostic` 改善了错误报告。
-> 过程宏的编译期执行能力强大但风险高：无限循环的宏导致编译器挂起，`quote!` 生成的代码可能有类型错误（在宏调用点报告）。
+> 过程宏（Macro）的编译期执行能力强大但风险高：无限循环的宏导致编译器挂起，`quote!` 生成的代码可能有类型错误（在宏调用点报告）。
 > 这与 C 的宏预处理器（纯文本替换，无类型检查）或 Lisp 的宏（同像性，编译期执行）不同——Rust 的过程宏在编译期运行完整 Rust 代码，但输出仍需通过类型检查。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] ·
 > [来源: [syn Documentation](https://docs.rs/syn/)]
@@ -593,8 +593,8 @@ fn main() {
 > 3) 浮点数的 `==` 比较在 `const fn` 中受限（因 NaN 的语义）。
 >
 > 挑战：浮点数的编译期求值需要与运行期完全一致，但编译器和目标平台的浮点单元可能行为不同（如 FMA 可用性）。
-> `rustc` 使用 LLVM 的 APFloat 库进行编译期浮点模拟，确保一致性。
-> 这与 C++ 的 `constexpr`（C++23 允许浮点，同样需一致性保证）或 Zig 的 `comptime`（浮点完全支持，因 Zig 自托管编译器控制求值）不同——Rust 的 `const fn` 保守但逐步扩展。
+> `rustc` 使用 LLVM 的 APFloat 库进行编译期浮点模拟，确保一致性（Coherence）。
+> 这与 C++ 的 `constexpr`（C++23 允许浮点，同样需一致性（Coherence）保证）或 Zig 的 `comptime`（浮点完全支持，因 Zig 自托管编译器控制求值）不同——Rust 的 `const fn` 保守但逐步扩展。
 > [来源: [Rust Reference — Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html)] ·
 > [来源: [Rust Const Eval Working Group](https://rust-lang.github.io/const-eval/)]
 
@@ -615,7 +615,7 @@ const fn build_map() -> std::collections::HashMap<i32, i32> {
 >
 > 1) 分配的内存在编译后如何释放？
 > 2) 若 `const` 值嵌入二进制，堆分配的数据需序列化为静态数据；
-> 3) 循环引用的 `const` 值如何表示？`const Heap` RFC 提议允许编译期堆分配，但将分配的数据"冻结"为静态只读数据（类似 `let s = const { String::from("hello") }` 在编译期创建 `String`，运行期作为 `&'static str` 使用）。
+> 3) 循环引用（Reference）的 `const` 值如何表示？`const Heap` RFC 提议允许编译期堆分配，但将分配的数据"冻结"为静态只读数据（类似 `let s = const { String::from("hello") }` 在编译期创建 `String`，运行期作为 `&'static str` 使用）。
 > 这与 C++ 的 `constexpr` new（C++20，允许编译期分配，但对象需在编译期销毁）或 Zig 的 `comptime` 分配器（编译期分配，结果序列化到二进制）类似——Rust 的 `const Heap` 是语言演进的重要方向，使编译期元编程能力接近 Zig 和 C++20。
 > [来源: [Rust Const Heap RFC](https://github.com/rust-lang/rfcs/)] ·
 > [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]

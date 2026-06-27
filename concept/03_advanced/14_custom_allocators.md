@@ -42,18 +42,18 @@
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：自定义分配器的编译错误](#十边界测试自定义分配器的编译错误)
-    - [10.1 边界测试：分配器布局不匹配（运行时 UB）](#101-边界测试分配器布局不匹配运行时-ub)
-    - [10.2 边界测试：`Vec` 自定义分配器的泛型参数（编译错误）](#102-边界测试vec-自定义分配器的泛型参数编译错误)
+    - [10.1 边界测试：分配器布局不匹配（运行时（Runtime） UB）](LINK_PLACEHOLDER)
+    - [10.2 边界测试：`Vec` 自定义分配器的泛型（Generics）参数（编译错误）](LINK_PLACEHOLDER)
     - [10.3 边界测试：全局分配器的 `#[global_allocator]` 重复定义（编译错误）](#103-边界测试全局分配器的-global_allocator-重复定义编译错误)
     - [10.4 边界测试：自定义分配器的 `Layout` 对齐要求（运行时 UB）](#104-边界测试自定义分配器的-layout-对齐要求运行时-ub)
     - [10.5 边界测试：分配器的 `dealloc` 与 `alloc` 的布局不匹配（运行时 UB）](#105-边界测试分配器的-dealloc-与-alloc-的布局不匹配运行时-ub)
     - [10.3 边界测试：全局分配器与 `#[global_allocator]` 重复定义（编译错误）](#103-边界测试全局分配器与-global_allocator-重复定义编译错误)
-    - [10.4 边界测试：自定义分配器的 Layout 不匹配与内存安全（运行时 UB）](#104-边界测试自定义分配器的-layout-不匹配与内存安全运行时-ub)
+    - [10.4 边界测试：自定义分配器的 Layout 不匹配与内存安全（Memory Safety）（运行时 UB）](LINK_PLACEHOLDER)
     - [10.3 边界测试：函数重复定义](#103-边界测试函数重复定义)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`GlobalAlloc` trait 需要实现哪两个核心方法？（理解层）](#测验-1globalalloc-trait-需要实现哪两个核心方法理解层)
     - [测验 2：`#[global_allocator]` 属性的作用是什么？使用时有什么限制？（理解层）](#测验-2global_allocator-属性的作用是什么使用时有什么限制理解层)
-    - [测验 3：`Layout` 结构体描述内存分配的哪些属性？（理解层）](#测验-3layout-结构体描述内存分配的哪些属性理解层)
+    - [测验 3：`Layout` 结构体（Struct）描述内存分配的哪些属性？（理解层）](LINK_PLACEHOLDER)
     - [测验 4：`Allocator` trait 与 `GlobalAlloc` trait 的主要区别是什么？（理解层）](#测验-4allocator-trait-与-globalalloc-trait-的主要区别是什么理解层)
     - [测验 5：自定义分配器在释放内存时若传入了错误的 `Layout` 可能导致什么问题？（理解层）](#测验-5自定义分配器在释放内存时若传入了错误的-layout-可能导致什么问题理解层)
   - [认知路径](#认知路径)
@@ -237,7 +237,7 @@ Arena 分配器模式:
   // arena 内所有对象同生命周期
 ```
 
-> **Arena 洞察**: **Arena 分配器是 Rust 零成本抽象的典范**——无运行时开销，纯编译期内存管理策略。
+> **Arena 洞察**: **Arena 分配器是 Rust 零成本抽象（Zero-Cost Abstraction）的典范**——无运行时（Runtime）开销，纯编译期内存管理策略。
 > [来源: [typed-arena](https://docs.rs/typed-arena/latest/typed_arena/)]
 
 ---
@@ -309,7 +309,7 @@ Arena 分配器模式:
   └── 需使用 ptr::read_unaligned / write_unaligned
 ```
 
-> **对齐安全**: **Rust 的类型系统保证大部分对齐安全**——unsafe 代码中需手动维护 Layout 约束。
+> **对齐安全**: **Rust 的类型系统（Type System）保证大部分对齐安全**——unsafe 代码中需手动维护 Layout 约束。
 > [来源: [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html)]
 
 ---
@@ -410,7 +410,7 @@ graph TD
      // 或在 Cargo.toml 中选择特性
 ```
 
-> **陷阱总结**: 自定义分配器的陷阱主要与**Layout 一致性**、**ZST 处理**、**对齐假设**、**生命周期（Lifetimes）**和**全局唯一性**相关。
+> **陷阱总结**: 自定义分配器的陷阱主要与**Layout 一致性（Coherence）**、**ZST 处理**、**对齐假设**、**生命周期（Lifetimes）**和**全局唯一性**相关。
 > [来源: [Rust Reference — Global Allocators](https://doc.rust-lang.org/std/alloc/index.html)]
 
 ---
@@ -489,7 +489,7 @@ fn main() {
 
 - [Memory Management](../02_intermediate/03_memory_management.md) — 内存管理基础
 - [Unsafe Rust](./03_unsafe.md) — unsafe Rust 基础
-- [Type System](../01_foundation/04_type_system.md) — 类型系统
+- [Type System](../01_foundation/04_type_system.md) — 类型系统（Type System）
 - [Performance Optimization](../06_ecosystem/15_performance_optimization.md) — 性能优化
 
 ---
@@ -568,7 +568,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 的自定义分配器 API（`Allocator` trait）截至 1.95+ 仍为**不稳定特性**（`#![feature(allocator_api)]`）。`Vec<T, A>`、`Box<T, A>` 等类型的第二个泛型参数只在 nightly 可用。稳定 Rust 中，自定义分配通常通过全局分配器替换（`#[global_allocator]`）实现，而非为单个集合指定分配器。这与 C++ 的 `std::allocator`（稳定且广泛使用）形成对比——Rust 的分配器设计更强调全局优化和安全性，牺牲了部分灵活性。[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
+> **修正**: Rust 的自定义分配器 API（`Allocator` trait）截至 1.95+ 仍为**不稳定特性**（`#![feature(allocator_api)]`）。`Vec<T, A>`、`Box<T, A>` 等类型的第二个泛型（Generics）参数只在 nightly 可用。稳定 Rust 中，自定义分配通常通过全局分配器替换（`#[global_allocator]`）实现，而非为单个集合指定分配器。这与 C++ 的 `std::allocator`（稳定且广泛使用）形成对比——Rust 的分配器设计更强调全局优化和安全性，牺牲了部分灵活性。[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
 
 ### 10.3 边界测试：全局分配器的 `#[global_allocator]` 重复定义（编译错误）
 
@@ -693,8 +693,8 @@ fn main() {}
 >
 > 常见自定义分配器：`jemallocator`（性能优化）、`mimalloc`（微软）、`dlmalloc`（嵌入式）。
 > 测试分配器：`std::alloc::alloc` + 泄漏检测。
-> 这与 C 的 `malloc` 重载（通过宏或链接器钩子）或 C++ 的 `operator new` 重载（类级别和全局级别）不同
-> ——Rust 的全局分配器替换是 crate 级别的，通过 trait 系统保证接口一致性。
+> 这与 C 的 `malloc` 重载（通过宏（Macro）或链接器钩子）或 C++ 的 `operator new` 重载（类级别和全局级别）不同
+> ——Rust 的全局分配器替换是 crate 级别的，通过 trait 系统保证接口一致性（Coherence）。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/alloc/trait.GlobalAlloc.html)] ·
 > [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
@@ -778,7 +778,7 @@ fn main() {}
 
 ### 测验 3：`Layout` 结构体描述内存分配的哪些属性？（理解层）
 
-**题目**: `Layout` 结构体描述内存分配的哪些属性？
+**题目**: `Layout` 结构体（Struct）描述内存分配的哪些属性？
 
 <details>
 <summary>✅ 答案与解析</summary>
@@ -824,11 +824,11 @@ fn main() {}
 
 > 内存分配安全 ⟸ Allocator trait 契约 ⟸ 对齐与大小
 > 全局分配器替换 ⟸ #[global_allocator] ⟸ 堆统计
-> **过渡**: 掌握 自定义分配器与内存布局优化 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 自定义分配器与内存布局优化 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 自定义分配器与内存布局优化 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: 自定义分配器与内存布局优化 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 自定义分配器与内存布局优化 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

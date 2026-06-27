@@ -160,7 +160,7 @@ Edition 机制:
   cargo fix --edition-idioms
 ```
 
-> **2024 洞察**: **2024 Edition 聚焦异步和类型系统完善**——gen blocks 和精确捕获是核心特性。
+> **2024 洞察**: **2024 Edition 聚焦异步（Async）和类型系统（Type System）完善**——gen blocks 和精确捕获是核心特性。
 > [来源: [Rust Edition 2024 Guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)]
 
 ---
@@ -306,7 +306,7 @@ graph TD
 └── 缓解: 自动化测试、渐进式部署
 ```
 
-> **边界要点**: Edition 迁移的边界与**宏**、**依赖**、**文档**、**培训**和**CI/CD**相关。
+> **边界要点**: Edition 迁移的边界与**宏（Macro）**、**依赖**、**文档**、**培训**和**CI/CD**相关。
 > [来源: [Rust Edition Guide — Migration](https://doc.rust-lang.org/edition-guide/editions/transitioning-an-existing-project-to-a-new-edition.html)]
 
 ---
@@ -389,7 +389,7 @@ fn main() {
 - [Toolchain](../06_ecosystem/01_toolchain.md) — 工具链
 - [Evolution](./03_evolution.md) — 语言演进
 - [Version Tracking](./05_rust_version_tracking.md) — 版本跟踪
-- [Macros](../03_advanced/04_macros.md) — 宏系统
+- [Macros](../03_advanced/04_macros.md) — 宏（Macro）系统
 
 ---
 

@@ -1,6 +1,6 @@
 > **内容分级**: [综述级]
 
-> **本节关键术语**: 写时复制 (Copy-on-Write) · Cow · 借用数据 (Borrowed Data) · 克隆 (Clone) · ToOwned — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: 写时复制 (Copy-on-Write) · Cow · 借用（Borrowing）数据 (Borrowed Data) · 克隆 (Clone) · ToOwned — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Cow：写时克隆与零拷贝抽象
 >
@@ -27,7 +27,7 @@
 - [Cow：写时克隆与零拷贝抽象](#cow写时克隆与零拷贝抽象)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 问题：借用与拥有的选择困境](#11-问题借用与拥有的选择困境)
+    - [1.1 问题：借用（Borrowing）与拥有的选择困境](LINK_PLACEHOLDER)
     - [1.2 Cow 的设计：延迟克隆](#12-cow-的设计延迟克隆)
     - [1.3 两种变体：Borrowed vs Owned](#13-两种变体borrowed-vs-owned)
   - [二、技术细节](#二技术细节)
@@ -47,9 +47,9 @@
     - [10.1 边界测试：`Cow` 的写时复制与借用冲突（编译错误）](#101-边界测试cow-的写时复制与借用冲突编译错误)
     - [10.2 边界测试：`Borrow` trait 与 `AsRef` 的误用（编译错误）](#102-边界测试borrow-trait-与-asref-的误用编译错误)
     - [10.3 边界测试：`Cow` 的 `ToOwned` 约束（编译错误）](#103-边界测试cow-的-toowned-约束编译错误)
-    - [10.4 边界测试：`Cow` 在 `match` 中的所有权转移（编译错误）](#104-边界测试cow-在-match-中的所有权转移编译错误)
-    - [10.2 边界测试：`Cow` 的生命周期与所有权转换（编译错误）](#102-边界测试cow-的生命周期与所有权转换编译错误)
-    - [10.4 边界测试：Cow 的生命周期与泛型约束不匹配（编译错误）](#104-边界测试cow-的生命周期与泛型约束不匹配编译错误)
+    - [10.4 边界测试：`Cow` 在 `match` 中的所有权（Ownership）转移（编译错误）](LINK_PLACEHOLDER)
+    - [10.2 边界测试：`Cow` 的生命周期（Lifetimes）与所有权转换（编译错误）](LINK_PLACEHOLDER)
+    - [10.4 边界测试：Cow 的生命周期与泛型（Generics）约束不匹配（编译错误）](LINK_PLACEHOLDER)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`Cow<'a, str>` 的两种变体是什么？各自代表什么语义？（理解层）](#测验-1cowa-str-的两种变体是什么各自代表什么语义理解层)
     - [测验 2：`Cow::Borrowed(s).to_mut()` 在什么情况下会触发克隆？（理解层）](#测验-2cowborrowedsto_mut-在什么情况下会触发克隆理解层)
@@ -93,7 +93,7 @@ API 设计中的常见困境:
   └── 如果输入是 String，或需要修改 → 拥有并返回 String
 ```
 
-> **核心问题**: API 设计常面临**借用 vs 拥有**的选择——借用高效但受限，拥有灵活但有克隆成本。Cow 提供了**第三种选择**。
+> **核心问题**: API 设计常面临**借用（Borrowing） vs 拥有**的选择——借用高效但受限，拥有灵活但有克隆成本。Cow 提供了**第三种选择**。
 > [来源: [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines//flexibility.html)]
 
 ---
@@ -387,7 +387,7 @@ graph TD
 └── 但跨 await 点持有 Cow 需注意生命周期
 ```
 
-> **边界要点**: Cow 的边界主要与**使用场景**（只在需要时）、**返回类型复杂性**、**生命周期限制**和**嵌套复杂性**相关。
+> **边界要点**: Cow 的边界主要与**使用场景**（只在需要时）、**返回类型复杂性**、**生命周期（Lifetimes）限制**和**嵌套复杂性**相关。
 > [来源: [Rust API Guidelines — Cow](https://rust-lang.github.io/api-guidelines//flexibility.html#functions-minimize-assumptions-about-types-by-using-conversions)]
 
 ---
@@ -430,7 +430,7 @@ graph TD
   ✅ 只在真正需要灵活性的字段使用 Cow
 ```
 
-> **陷阱总结**: Cow 的主要陷阱与**过度使用**、**所有权语义**和**性能假设**相关。理解 Cow 的"延迟克隆"语义是正确使用它的关键。
+> **陷阱总结**: Cow 的主要陷阱与**过度使用**、**所有权（Ownership）语义**和**性能假设**相关。理解 Cow 的"延迟克隆"语义是正确使用它的关键。
 > [来源: [Rust Clippy — Needless Borrow](https://rust-lang.github.io/rust-clippy//master/index.html)]
 
 ---
@@ -452,7 +452,7 @@ graph TD
 |:---|:---:|:---|
 | [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html) | ✅ 一级 | 标准库文档 |
 | [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines//flexibility.html) | ✅ 一级 | API 设计指南 |
-| [TRPL — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) | ✅ 一级 | 智能指针章节 |
+| [TRPL — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) | ✅ 一级 | 智能指针（Smart Pointer）章节 |
 | [Wikipedia — Copy-on-write](https://en.wikipedia.org/wiki/Copy-on-write) | ✅ 三级 | 通用概念 |
 
 ---
@@ -462,7 +462,7 @@ graph TD
 - [Ownership](../01_foundation/01_ownership.md) — 所有权模型
 - [Borrowing](../01_foundation/02_borrowing.md) — 借用规则
 - [Trait](./01_traits.md) — Trait 系统
-- [Zero Cost Abstractions](../01_foundation/06_zero_cost_abstractions.md) — 零成本抽象
+- [Zero Cost Abstractions](../01_foundation/06_zero_cost_abstractions.md) — 零成本抽象（Zero-Cost Abstraction）
 
 ---
 
@@ -533,7 +533,7 @@ fn fixed() {
 > `Cow<T>`（Clone on Write）在读取时表现为借用（零拷贝），在修改时克隆为拥有值。
 > `to_mut()` 方法检查当前状态：
 > 若 `Borrowed`，则克隆数据为 `Owned`；
-> 若已是 `Owned`，则返回可变引用。
+> 若已是 `Owned`，则返回可变引用（Mutable Reference）。
 > `Cow` 的核心价值是延迟克隆——只在真正需要修改时才分配内存。
 > 这与 C++ 的 `copy-on-write` string 实现类似，但 Rust 的 `Cow` 是显式的、类型安全的。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
@@ -562,7 +562,7 @@ fn takes_ref<R: AsRef<[i32]>>(r: R) {
 ```
 
 > **修正**: `Borrow<T>` 要求 `T` 的哈希值和相等性与原类型一致（`x.borrow() == y.borrow()` ⟺ `x == y`），用于 `HashMap`/`BTreeMap` 的键查找。
-> `AsRef<T>` 只要求进行引用转换，无哈希/相等性约束。
+> `AsRef<T>` 只要求进行引用（Reference）转换，无哈希/相等性约束。
 > `String` 实现 `Borrow<str>` 和 `AsRef<str>`，但 `Vec<T>` 只实现 `AsRef<[T]>`，不实现 `Borrow<[T]>`（因 `Vec` 的容量字段不影响相等性）。
 > 混淆两者可能导致 `HashMap::get` 失败。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
@@ -618,11 +618,11 @@ fn main() {
 ```
 
 > **修正**:
-> `Cow` 是枚举（`enum Cow<'a, B> { Borrowed(&'a B), Owned(<B as ToOwned>::Owned) }`），在 `match` 中按值解构时，`Cow` 被移动，`Owned` 变体的内部值被取出。
-> 若需保留 `Cow`，应使用 `match &cow`（匹配引用）或 `cow.as_ref()`（获取 `&B`）。
+> `Cow` 是枚举（Enum）（`enum Cow<'a, B> { Borrowed(&'a B), Owned(<B as ToOwned>::Owned) }`），在 `match` 中按值解构时，`Cow` 被移动，`Owned` 变体的内部值被取出。
+> 若需保留 `Cow`，应使用 `match &cow`（匹配引用（Reference））或 `cow.as_ref()`（获取 `&B`）。
 > `Cow` 的灵活性伴随着所有权复杂性：有时需要 `Cow` 本身（传递），有时需要内部值（使用），有时需要引用（检查）。
-> 这与 `Option` 和 `Result` 的所有权管理相同——枚举的按值匹配消耗所有者。
-> `Cow` 提供 `into_owned()`（无论借用或拥有，都转为拥有）和 `to_mut()`（转为可变引用，必要时克隆）简化常见模式。
+> 这与 `Option` 和 `Result` 的所有权管理相同——枚举（Enum）的按值匹配消耗所有者。
+> `Cow` 提供 `into_owned()`（无论借用或拥有，都转为拥有）和 `to_mut()`（转为可变引用（Mutable Reference），必要时克隆）简化常见模式。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]
 
@@ -642,7 +642,7 @@ fn main() {
 ```
 
 > **修正**:
-> `Cow<'a, B>`（Clone-on-Write）是**写时克隆**的智能指针：`Borrowed(&'a B)` 持有借用，`Owned(B::Owned)` 持有所有权。
+> `Cow<'a, B>`（Clone-on-Write）是**写时克隆**的智能指针（Smart Pointer）：`Borrowed(&'a B)` 持有借用，`Owned(B::Owned)` 持有所有权。
 > `into_owned()` 将 `Borrowed` 克隆为 `Owned`（若已是 `Owned` 则直接移动）。
 > 关键：`Cow::Borrowed(&s)` 的生命周期受 `s` 限制，但 `into_owned()` 返回的 `String` 拥有独立数据，生命周期不再关联。
 > 上述代码在**当前 Rust 中实际可以编译**——`into_owned()` 返回所有权。
@@ -748,16 +748,16 @@ fn main() {}
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | Cow：写时克隆与零拷贝抽象 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| Cow：写时克隆与零拷贝抽象 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| Cow：写时克隆与零拷贝抽象 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | Cow：写时克隆与零拷贝抽象 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 写时复制安全 ⟸ CoW 借用转换 ⟸ 所有权转移
 > 零拷贝优化 ⟸ Borrowed 状态保持 ⟸ 生命周期（Lifetimes）
-> **过渡**: 掌握 Cow：写时克隆与零拷贝抽象 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 Cow：写时克隆与零拷贝抽象 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 Cow：写时克隆与零拷贝抽象 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: Cow：写时克隆与零拷贝抽象 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: Cow：写时克隆与零拷贝抽象 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

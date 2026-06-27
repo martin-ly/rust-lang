@@ -10,7 +10,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 应用 Serde 序列化设计模式
-> **定位**: 深入分析 **Serde** —— Rust 生态中主导的序列化/反序列化框架，探讨 `Serialize [来源: [serde::Serialize](https://docs.rs/serde/latest/serde/trait.Serialize.html)]`/`Deserialize` derive 宏（Macro）、自定义序列化逻辑、以及类型系统如何保障数据转换的安全性。
+> **定位**: 深入分析 **Serde** —— Rust 生态中主导的序列化/反序列化框架，探讨 `Serialize [来源: [serde::Serialize](https://docs.rs/serde/latest/serde/trait.Serialize.html)]`/`Deserialize` derive 宏（Macro）、自定义序列化逻辑、以及类型系统（Type System）如何保障数据转换的安全性。
 > **前置概念**: [Traits](./01_traits.md) · [Macros](../03_advanced/04_macros.md) · [Generics](./02_generics.md)
 > **后置概念**: [Core Crates](../06_ecosystem/03_core_crates.md) · [Application Domains](../06_ecosystem/04_application_domains.md)
 
@@ -30,7 +30,7 @@
     - [1.2 Serialize 与 Deserialize Trait](#12-serialize-与-deserialize-trait)
     - [1.3 数据格式解耦](#13-数据格式解耦)
   - [二、技术细节](#二技术细节)
-    - [2.1 Derive 宏的展开逻辑](#21-derive-宏的展开逻辑)
+    - [2.1 Derive 宏（Macro）的展开逻辑](LINK_PLACEHOLDER)
     - [2.2 自定义序列化行为](#22-自定义序列化行为)
     - [2.3 Visitor 模式与反序列化](#23-visitor-模式与反序列化)
   - [三、使用模式](#三使用模式)
@@ -43,10 +43,10 @@
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Serde 模式的编译错误](#十边界测试serde-模式的编译错误)
-    - [10.1 边界测试：反序列化时字段缺失（运行时错误）](#101-边界测试反序列化时字段缺失运行时错误)
+    - [10.1 边界测试：反序列化时字段缺失（运行时（Runtime）错误）](LINK_PLACEHOLDER)
     - [10.2 边界测试：`#[serde(flatten)]` 与重复字段（编译错误 / 运行时错误）](#102-边界测试serdeflatten-与重复字段编译错误--运行时错误)
     - [10.3 边界测试：反序列化的 `deny_unknown_fields`（运行时错误）](#103-边界测试反序列化的-deny_unknown_fields运行时错误)
-    - [10.4 边界测试：枚举的 `untagged` 反序列化歧义（运行时错误）](#104-边界测试枚举的-untagged-反序列化歧义运行时错误)
+    - [10.4 边界测试：枚举（Enum）的 `untagged` 反序列化歧义（运行时错误）](LINK_PLACEHOLDER)
     - [10.5 边界测试：`serde` 的 `skip_serializing_if` 与 `Option` 的交互（逻辑错误）](#105-边界测试serde-的-skip_serializing_if-与-option-的交互逻辑错误)
     - [10.3 边界测试：serde 的私有字段与反序列化失败（运行时错误）](#103-边界测试serde-的私有字段与反序列化失败运行时错误)
     - [10.4 边界测试：`serde` 的枚举标签与外部标签冲突（运行时反序列化失败）](#104-边界测试serde-的枚举标签与外部标签冲突运行时反序列化失败)
@@ -230,7 +230,7 @@ impl Deserialize for User {
 }
 ```
 
-> **展开要点**: Derive 宏生成的是**手写的 Trait 实现的机械版本**。编译器内联后，序列化代码与手写实现等效——零运行时开销。
+> **展开要点**: Derive 宏（Macro）生成的是**手写的 Trait 实现的机械版本**。编译器内联后，序列化代码与手写实现等效——零运行时（Runtime）开销。
 > [来源: [Serde Book — Derive](https://serde.rs/derive.html)]
 
 ---
@@ -291,7 +291,7 @@ impl<'de> Deserialize<'de> for PhoneNumber {
 }
 ```
 
-> **自定义场景**: 当需要**验证**（反序列化时检查格式）、**转换**（如将枚举序列化为字符串）或**隐藏**（不序列化某些字段）时使用自定义实现。
+> **自定义场景**: 当需要**验证**（反序列化时检查格式）、**转换**（如将枚举（Enum）序列化为字符串）或**隐藏**（不序列化某些字段）时使用自定义实现。
 > [来源: [Serde Book — Custom Serialization](https://serde.rs/custom-serialization.html)]
 
 ---
@@ -409,7 +409,7 @@ graph TD
 
 > **认知功能**: 此决策树评估是否使用 Serde。核心判断标准是**性能需求**和**格式灵活性需求**。
 > **使用建议**: 绝大多数场景使用 Serde；仅在极致性能（如网络协议栈、零拷贝解析器）或特殊二进制格式时考虑手写。
-> **关键洞察**: Serde 的**真正价值**不是序列化本身，而是**类型系统与数据格式的桥梁**——编译期保证类型安全，运行时处理任意格式。
+> **关键洞察**: Serde 的**真正价值**不是序列化本身，而是**类型系统（Type System）与数据格式的桥梁**——编译期保证类型安全，运行时处理任意格式。
 > [来源: 💡 原创分析]
 
 ---
@@ -512,8 +512,8 @@ graph TD
 ## 相关概念文件
 
 - [Traits](./01_traits.md) — Trait 系统与 derive
-- [Macros](../03_advanced/04_macros.md) — 过程宏机制
-- [Generics](./02_generics.md) — 泛型与参数多态
+- [Macros](../03_advanced/04_macros.md) — 过程宏（Procedural Macro）机制
+- [Generics](./02_generics.md) — 泛型（Generics）与参数多态
 - [Core Crates](../06_ecosystem/03_core_crates.md) — 核心 crate 生态
 - [Application Domains](../06_ecosystem/04_application_domains.md) — 应用领域分析
 
@@ -585,7 +585,7 @@ fn main() {
 > Serde 的 `Deserialize` derive 默认要求所有字段存在。
 > 缺失字段会导致反序列化错误（`Err`）。
 > 使用 `Option<T>` 或 `#[serde(default)]` 可使字段可选。
-> Serde 的编译期生成代码在运行期检查字段存在性——这与 Protobuf 的 schema 演化（向后兼容字段标记）不同，Rust/Serde 的反序列化严格遵循结构体定义，不自动填充默认值。
+> Serde 的编译期生成代码在运行期检查字段存在性——这与 Protobuf 的 schema 演化（向后兼容字段标记）不同，Rust/Serde 的反序列化严格遵循结构体（Struct）定义，不自动填充默认值。
 > [来源: [Serde Documentation](https://serde.rs/)]
 
 ### 10.2 边界测试：`#[serde(flatten)]` 与重复字段（编译错误 / 运行时错误）
@@ -626,7 +626,7 @@ struct InnerFixed {
 ```
 
 > **修正**:
-> `#[serde(flatten)]` 将嵌套结构体的字段展开到父结构体级别。
+> `#[serde(flatten)]` 将嵌套结构体（Struct）的字段展开到父结构体级别。
 > 若嵌套结构体与父结构体有同名字段，Serde 的反序列化逻辑会产生歧义——它尝试按顺序匹配字段，可能导致类型不匹配或数据错位。
 > 这是 Serde 的一个已知限制：flatten 不支持字段重名，且对枚举类型的 flatten 支持有限（需 `#[serde(untagged)]` 配合）。
 > [来源: [Serde Documentation](https://serde.rs/)]
@@ -722,7 +722,7 @@ fn main() {
 > 这导致**信息丢失**：无法区分"显式设置 None"和"未提供该字段"。
 > 解决方案：
 >
-> 1) 使用 tri-state 枚举：`enum MaybeTimeout { NotSet, Infinite, Seconds(u32) }`；
+> 1) 使用 tri-state 枚举（Enum）：`enum MaybeTimeout { NotSet, Infinite, Seconds(u32) }`；
 > 2) 不使用 `skip_serializing_if`，始终序列化 `null`；
 > 3) 使用 `#[serde(default)]` + 自定义默认值。
 > 这与 GraphQL 的 nullable vs optional（同样区分）或 Protocol Buffers 的 `has_field()`（可区分未设置和默认值）类似——序列化格式的表达能力影响 API 设计。
@@ -890,13 +890,13 @@ fn main() {
 | Serde 序列化模式：Rust 的类型驱动数据转换 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | Serde 序列化模式：Rust 的类型驱动数据转换 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
-> 序列化安全 ⟸ derive(Serialize) 完备 ⟸ 泛型约束
+> 序列化安全 ⟸ derive(Serialize) 完备 ⟸ 泛型（Generics）约束
 > 反序列化健壮 ⟸ Deserialize 生命周期（Lifetimes） ⟸ Visitor 模式
 > **过渡**: 掌握 Serde 序列化模式：Rust 的类型驱动数据转换 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 Serde 序列化模式：Rust 的类型驱动数据转换 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: Serde 序列化模式：Rust 的类型驱动数据转换 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: Serde 序列化模式：Rust 的类型驱动数据转换 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

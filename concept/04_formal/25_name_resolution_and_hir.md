@@ -10,7 +10,7 @@
 > **Bloom 层级**: 理解 → 分析
 > **A/S/P 标记**: **F** — Formal
 > **双维定位**: F×Inf — 编译器前端基础设施
-> **定位**: 把“名字怎么找到定义”和“源码如何变成编译器友好的 HIR”这两个前端核心步骤讲清楚，为理解类型检查、借用检查打下基础。
+> **定位**: 把“名字怎么找到定义”和“源码如何变成编译器友好的 HIR”这两个前端核心步骤讲清楚，为理解类型检查、借用（Borrowing）检查打下基础。
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Macros](../03_advanced/04_macros.md)
 > **后置概念**: [Rustc Query System](./19_rustc_query_system.md) · [Type Inference](./08_type_inference.md) · [Trait Solver in rustc](./26_trait_solver_in_rustc.md)
 
@@ -27,14 +27,14 @@
   - [📑 目录](#-目录)
   - [一、编译器前端概览](#一编译器前端概览)
   - [二、两阶段名称解析](#二两阶段名称解析)
-    - [2.1 第一阶段：宏展开期间的早期解析](#21-第一阶段宏展开期间的早期解析)
+    - [2.1 第一阶段：宏（Macro）展开期间的早期解析](LINK_PLACEHOLDER)
     - [2.2 第二阶段：完整解析（`rustc_resolve::late`）](#22-第二阶段完整解析rustc_resolvelate)
   - [三、命名空间与作用域 Rib](#三命名空间与作用域-rib)
     - [3.1 命名空间（Namespaces）](#31-命名空间namespaces)
     - [3.2 Rib（作用域抽象）](#32-rib作用域抽象)
   - [四、AST → HIR Lowering](#四ast--hir-lowering)
     - [4.1 典型解糖](#41-典型解糖)
-    - [4.2 生命周期省略](#42-生命周期省略)
+    - [4.2 生命周期（Lifetimes）省略](LINK_PLACEHOLDER)
   - [五、HIR 中的关键标识符](#五hir-中的关键标识符)
   - [六、如何观察 HIR](#六如何观察-hir)
   - [七、反命题与边界](#七反命题与边界)
@@ -44,7 +44,7 @@
     - [测验 1：`rustc` 的名称解析分为几个阶段？为什么需要分阶段？](#测验-1rustc-的名称解析分为几个阶段为什么需要分阶段)
     - [测验 2：类型名和变量名可以同名吗？为什么？](#测验-2类型名和变量名可以同名吗为什么)
     - [测验 3：HIR 和 AST 的主要区别是什么？](#测验-3hir-和-ast-的主要区别是什么)
-    - [测验 4：`DefId` 和 `HirId` 分别适合引用什么粒度的实体？](#测验-4defid-和-hirid-分别适合引用什么粒度的实体)
+    - [测验 4：`DefId` 和 `HirId` 分别适合引用（Reference）什么粒度的实体？](LINK_PLACEHOLDER)
   - [权威来源索引](#权威来源索引)
 
 ---
@@ -63,7 +63,7 @@
   → MIR（Mid-level IR，中层中间表示）
 ```
 
-> **关键洞察**: AST 接近源码；HIR 已做部分解糖（如 `for` 循环变成 `loop`），但仍保留模块/函数/impl 等结构；MIR 则是控制流图，供借用检查和优化使用。
+> **关键洞察**: AST 接近源码；HIR 已做部分解糖（如 `for` 循环变成 `loop`），但仍保留模块（Module）/函数/impl 等结构；MIR 则是控制流图，供借用（Borrowing）检查和优化使用。
 >
 > [来源: Rustc Dev Guide — The HIR](https://rustc-dev-guide.rust-lang.org/hir.html)
 
@@ -75,7 +75,7 @@
 
 ### 2.1 第一阶段：宏展开期间的早期解析
 
-- 解析 `use` 导入和宏名字；
+- 解析 `use` 导入和宏（Macro）名字；
 - 目的：知道要展开哪些宏；
 - 宏展开与名称解析通过 `ResolverAstLoweringExt` trait 互相通信。
 
@@ -107,10 +107,10 @@ Rust 中不同类型的名字可以同名，因为它们处于不同命名空间
 
 | 命名空间 | 包含 | 示例 |
 |:---|:---|:---|
-| **Type** | 类型、trait、结构体、枚举、union | `struct Foo; trait Foo {}` 可共存 |
-| **Value** | 变量、函数、常量、结构体字段 | `let foo = 1; fn foo() {}` 可共存 |
+| **Type** | 类型、trait、结构体（Struct）、枚举（Enum）、union | `struct Foo; trait Foo {}` 可共存 |
+| **Value** | 变量、函数、常量、结构体（Struct）字段 | `let foo = 1; fn foo() {}` 可共存 |
 | **Macro** | 宏、派生宏 | `macro_rules! foo` |
-| **Lifetime** | 生命周期参数 | `'a` |
+| **Lifetime** | 生命周期（Lifetimes）参数 | `'a` |
 
 ```rust
 #![allow(dead_code)]
@@ -123,7 +123,7 @@ let x: x = 1; // 值 x 与类型 x 不冲突
 `rustc_resolve` 用 **Rib** 表示一个作用域。每当可见名字集合可能变化时，就压入一个新的 Rib：
 
 - 进入块 `{ ... }`；
-- 进入函数/模块；
+- 进入函数/模块（Module）；
 - 引入 `let` 绑定（可能 shadow 外部同名绑定）；
 - 宏展开边界（处理宏卫生）。
 
@@ -139,7 +139,7 @@ fn outer() {
 }
 ```
 
-> **注意**: 嵌套函数（非闭包）比较特殊——内层函数不能访问外层函数的局部变量和参数，即使按普通作用域规则应该可见。
+> **注意**: 嵌套函数（非闭包（Closures））比较特殊——内层函数不能访问外层函数的局部变量和参数，即使按普通作用域规则应该可见。
 >
 > [来源: Rustc Dev Guide — Name Resolution — Scopes and ribs](https://rustc-dev-guide.rust-lang.org/name-resolution.html#scopes-and-ribs)
 
@@ -150,7 +150,7 @@ fn outer() {
 Lowering 把 AST 转换为 HIR，主要做两件事：
 
 1. **解糖（desugaring）**: 把语法糖展开成更基础的形式；
-2. **显式化（making implicit explicit）**: 把省略的生命周期、隐式解引用等显式表示。
+2. **显式化（making implicit explicit）**: 把省略的生命周期、隐式解引用（Reference）等显式表示。
 
 ### 4.1 典型解糖
 
@@ -159,7 +159,7 @@ Lowering 把 AST 转换为 HIR，主要做两件事：
 | `for x in iter { ... }` | `loop { match iter.next() { ... } }` |
 | `?` 错误传播 | `match expr { Ok(v) => v, Err(e) => return Err(e.into()) }` |
 | `async fn` / `async {}` | 状态机生成（generator/coroutine） |
-| `impl Trait` | 具体类型或泛型参数 |
+| `impl Trait` | 具体类型或泛型（Generics）参数 |
 
 ### 4.2 生命周期省略
 
@@ -182,9 +182,9 @@ HIR 使用多种 ID 来表示不同粒度的实体：
 | ID | 含义 | 稳定性 | 用途 |
 |:---|:---|:---|:---|
 | `DefId` | 跨 crate 定义标识 | 包含 `CrateNum` + `DefIndex` | 引用外部 crate 的项 |
-| `LocalDefId` | 当前 crate 的定义标识 | 不含 `CrateNum` | 引用本地项，类型系统更安全 |
+| `LocalDefId` | 当前 crate 的定义标识 | 不含 `CrateNum` | 引用本地项，类型系统（Type System）更安全 |
 | `HirId` | HIR 节点标识 | `owner` + `local_id` | 可指向表达式等细粒度节点 |
-| `BodyId` | HIR Body 标识 | 包裹 `HirId` | 指向函数/闭包/常量的可执行体 |
+| `BodyId` | HIR Body 标识 | 包裹 `HirId` | 指向函数/闭包（Closures）/常量的可执行体 |
 
 > **关键洞察**: HIR 把“项的内容”放在 `items`、`bodies` 等 map 中，父节点只保存 ID。这样：
 >
@@ -229,7 +229,7 @@ graph TD
 
 ### 7.2 边界极限
 
-- **Items 可以前向引用**: 模块级 item 即使在使用之后才定义也能被解析，因此每个块需要先扫描 item 再解析体。
+- **Items 可以前向引用**: 模块（Module）级 item 即使在使用之后才定义也能被解析，因此每个块需要先扫描 item 再解析体。
 - **Imports 需要固定点迭代**: 循环/嵌套 `use` 可能相互依赖，解析器需要迭代到不动点。
 - **Speculative crate loading**: 为了给出“你可能想导入…”建议，`rustc` 会尝试加载尚未显式引用的 crate；这类加载失败不会报错。
 

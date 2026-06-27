@@ -1,13 +1,13 @@
 > **内容分级**: [综述级]
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-> **本节关键术语**: 字符串 (String) · 字符串切片 (str) · UTF-8 · 所有权转移 (Move) · 格式化 (Formatting) — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: 字符串 (String) · 字符串切片 (str) · UTF-8 · 所有权（Ownership）转移 (Move) · 格式化 (Formatting) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 字符串与文本：Rust 的 Unicode 处理与格式化系统
 >
 > **EN**: Strings and Text
 > **Summary**: Strings and Text: core Rust concepts, syntax, and examples.
-> **📎 交叉引用**
+> **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[字符串与文本](../../knowledge/02_intermediate/05_strings.md)
 > **受众**: [初学者]
@@ -16,7 +16,7 @@
 > **双维定位**: C×App — 应用字符串处理和编码知识
 > **定位**:
 > 系统分析 Rust **字符串类型**的设计——String [来源: [Rust String](https://doc.rust-lang.org/std/string/struct.String.html)] 与
-> str [来源: [Rust str](https://doc.rust-lang.org/std/str/index.html)] 的所有权语义、
+> str [来源: [Rust str](LINK_PLACEHOLDER)] 的所有权（Ownership）语义、
 > UTF-8 [来源: [UTF-8](https://en.wikipedia.org/wiki/UTF-8)]
 > [来源: [UTF-8 Wikipedia](https://en.wikipedia.org/wiki/UTF-8)]
 > 编码约束、格式化宏（format!/write!）的类型安全设计，以及与 C 字符串、OS 字符串的互操作。
@@ -41,7 +41,7 @@
     - [1.2 UTF-8：Rust 的编码选择](#12-utf-8rust-的编码选择)
     - [1.3 格式化系统的类型安全](#13-格式化系统的类型安全)
   - [二、技术细节](#二技术细节)
-    - [2.1 字符串切片与索引](#21-字符串切片与索引)
+    - [2.1 字符串切片（String Slice）与索引](LINK_PLACEHOLDER)
     - [2.2 OS 字符串与路径](#22-os-字符串与路径)
     - [2.3 与 C 字符串的互操作](#23-与-c-字符串的互操作)
   - [三、选型决策矩阵](#三选型决策矩阵)
@@ -53,12 +53,12 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十二、边界测试：字符串与文本的编译错误](#十二边界测试字符串与文本的编译错误)
-    - [12.1 边界测试：`String` 与 `&str` 的生命周期不匹配（编译错误）](#121-边界测试string-与-str-的生命周期不匹配编译错误)
+    - [12.1 边界测试：`String` 与 `&str` 的生命周期（Lifetimes）不匹配（编译错误）](LINK_PLACEHOLDER)
     - [12.2 边界测试：字符串索引操作（编译错误）](#122-边界测试字符串索引操作编译错误)
     - [10.3 边界测试：`str::split` 与模式类型的不匹配（编译错误）](#103-边界测试strsplit-与模式类型的不匹配编译错误)
     - [10.4 边界测试：字符串拼接的 `+` 运算符消耗左操作数（编译错误）](#104-边界测试字符串拼接的--运算符消耗左操作数编译错误)
     - [10.5 边界测试：字符串索引与 UTF-8 编码边界（编译错误）](#105-边界测试字符串索引与-utf-8-编码边界编译错误)
-    - [10.6 边界测试：`String::from_utf8` 的无效序列与损失转换（运行时 panic）](#106-边界测试stringfrom_utf8-的无效序列与损失转换运行时-panic)
+    - [10.6 边界测试：`String::from_utf8` 的无效序列与损失转换（运行时（Runtime） panic）](LINK_PLACEHOLDER)
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -67,8 +67,8 @@
     - [测验 1：String vs \&str（理解层）](#测验-1string-vs-str理解层)
     - [测验 2：UTF-8 索引（应用层）](#测验-2utf-8-索引应用层)
     - [测验 3：String 修改（应用层）](#测验-3string-修改应用层)
-    - [测验 4：format! 宏（应用层）](#测验-4format-宏应用层)
-    - [测验 5：字符串切片边界（分析层）](#测验-5字符串切片边界分析层)
+    - [测验 4：format! 宏（Macro）（应用层）](LINK_PLACEHOLDER)
+    - [测验 5：字符串切片（Slice）边界（分析层）](LINK_PLACEHOLDER)
 
 ---
 
@@ -104,7 +104,7 @@ Rust 的两种字符串类型:
   String → 其他: into_bytes()、char [来源: [Rust char](https://doc.rust-lang.org/std/primitive.char.html)]s()、lines() 等
 ```
 
-> **认知功能**: String/str 的关系是 Rust **所有权模型**的典型应用——String 拥有数据，str 借用数据，两者通过 Deref 无缝协作。
+> **认知功能**: String/str 的关系是 Rust **所有权模型**的典型应用——String 拥有数据，str 借用（Borrowing）数据，两者通过 Deref 无缝协作。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **关键洞察**: 这种设计避免了 C++ 中 `std::string` 和 `const char*` 的混淆，以及 Java 中 `String` 和 `StringBuilder` 的性能陷阱。
 > [来源: [TRPL Ch8 — Strings](https://doc.rust-lang.org/book/ch08-02-strings.html)]
@@ -185,7 +185,7 @@ let p = Point { x: 1, y: 2 };
 println!("{}", p);  // 输出: (1, 2)
 ```
 
-> **格式化洞察**: Rust 的 `format!` 是**类型安全**的——它在编译期检查参数数量和类型，消除了 C `printf` 的整类运行时错误。
+> **格式化洞察**: Rust 的 `format!` 是**类型安全**的——它在编译期检查参数数量和类型，消除了 C `printf` 的整类运行时（Runtime）错误。
 > [来源: [std::fmt](https://doc.rust-lang.org/std/fmt/index.html)]
 
 ---
@@ -464,7 +464,7 @@ graph TD
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
 | [std::string::String](https://doc.rust-lang.org/std/string/struct.String.html) | ✅ 一级 | 标准库文档 |
-| [std::str](https://doc.rust-lang.org/std/str/index.html) | ✅ 一级 | 字符串切片文档 |
+| [std::str](https://doc.rust-lang.org/std/str/index.html) | ✅ 一级 | 字符串切片（String Slice）文档 |
 | [TRPL Ch8 — Strings](https://doc.rust-lang.org/book/ch08-02-strings.html) | ✅ 一级 | 字符串章节 |
 | [Unicode Standard](https://www.unicode.org/standard/standard.html) | ✅ 一级 | Unicode 规范 |
 | [std::fmt](https://doc.rust-lang.org/std/fmt/index.html) | ✅ 一级 | 格式化系统 |
@@ -530,9 +530,9 @@ fn get_static() -> &'static str {
 ```
 
 > **修正**:
-> `String` 拥有堆分配的 UTF-8 字节数组，`&str` 是对其内部数据的借用。
-> 返回 `&str` 意味着返回一个引用，但被引用的 `String` 在函数返回时释放。
-> 这与悬垂引用问题相同——生命周期系统阻止返回指向局部 `String` 的 `&str`。
+> `String` 拥有堆分配的 UTF-8 字节数组，`&str` 是对其内部数据的借用（Borrowing）。
+> 返回 `&str` 意味着返回一个引用（Reference），但被引用的 `String` 在函数返回时释放。
+> 这与悬垂引用问题相同——生命周期（Lifetimes）系统阻止返回指向局部 `String` 的 `&str`。
 > 正确做法是返回 `String`（转移所有权）或返回 `'static str`（字符串字面量）。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-storing-utf-8-encoded-text-with-strings.html)]
 
@@ -583,7 +583,7 @@ fn main() {
 > 替代方案：
 >
 > 1) 将 `Vec<char>` 转为 `&[char]`（`vec.as_slice()`）；
-> 2) 使用闭包 `|c| vec.contains(&c)`；
+> 2) 使用闭包（Closures） `|c| vec.contains(&c)`；
 > 3) 使用 `regex` crate 处理复杂分割模式。
 > 这与 Python 的 `str.split`（接受 `str` 或 `None`）或 JavaScript 的 `String.prototype.split`（接受字符串或正则）不同——Rust 的 `split` 参数类型在编译期严格检查，但灵活性较低。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.str.html)] ·
@@ -629,7 +629,7 @@ fn main() {
 >
 > 1) `s.chars().nth(i)` — 第 i 个 Unicode 标量值（O(n)）；
 > 2) `s.as_bytes()[i]` — 第 i 个字节（unsafe，可能切分多字节字符）；
-> 3) `s.get(i..j)` — 安全子串切片（返回 `Option<&str>`，检查边界完整性）。
+> 3) `s.get(i..j)` — 安全子串切片（Slice）（返回 `Option<&str>`，检查边界完整性）。
 >
 > 设计哲学：
 > 禁止可能产生无效 UTF-8 的操作。
@@ -683,10 +683,10 @@ fn main() {
 | 字符串与文本：Rust 的 Unicode 处理与格式化系统 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > UTF-8 安全性 ⟸ String/str 边界检查 ⟸ 所有权与借用
-> 文本处理正确性 ⟸ 编码一致性保证 ⟸ 类型系统约束
-> **过渡**: 掌握 字符串与文本：Rust 的 Unicode 处理与格式化系统 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> 文本处理正确性 ⟸ 编码一致性（Coherence）保证 ⟸ 类型系统（Type System）约束
+> **过渡**: 掌握 字符串与文本：Rust 的 Unicode 处理与格式化系统 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 字符串与文本：Rust 的 Unicode 处理与格式化系统 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: 字符串与文本：Rust 的 Unicode 处理与格式化系统 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 字符串与文本：Rust 的 Unicode 处理与格式化系统 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 
@@ -775,9 +775,9 @@ fn main() {
 
 **编译错误**。
 
-`r` 是对 `s` 的不可变借用，`s.push_str` 需要可变借用。两者不能同时存在。
+`r` 是对 `s` 的不可变借用（Mutable Borrow），`s.push_str` 需要可变借用。两者不能同时存在。
 
-修复方案：确保不可变借用在使用后才释放：
+修复方案：确保不可变借用（Immutable Borrow）在使用后才释放：
 
 ```rust
 let mut s = String::from("hello");
@@ -810,7 +810,7 @@ fn main() {
 
 **输出 `Rust 1.96`**。
 
-`format!` 宏返回 `String`，与 `println!` 使用相同的格式化语法。`{}` 使用 `Display` trait 格式化。
+`format!` 宏（Macro）返回 `String`，与 `println!` 使用相同的格式化语法。`{}` 使用 `Display` trait 格式化。
 
 `format!` 不会打印到 stdout，而是返回格式化后的字符串，适合构造消息、日志、文件路径等。
 </details>

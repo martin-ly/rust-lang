@@ -38,10 +38,10 @@
 | 文件 | 概念 | 核心内容 | 状态 |
 |:---|:---|:---|:---|
 | [`05_comparative/01_rust_vs_cpp.md`](05_comparative/01_rust_vs_cpp.md) | Rust vs C++ | 形式系统模型 vs 机制工程模型、多维矩阵、决策树、AI 时代分析 | ✅ v1.0 |
-| [`05_comparative/02_rust_vs_go.md`](05_comparative/02_rust_vs_go.md) | Rust vs Go | CSP vs 所有权并发、服务编排语义、确定性对比 | ✅ v1.0 |
-| [`05_comparative/03_paradigm_matrix.md`](05_comparative/03_paradigm_matrix.md) | 范式矩阵 | 多语言形式化对比、类型系统谱系、设计哲学 | ✅ v1.0 |
-| [`05_comparative/06_rust_vs_java.md`](05_comparative/06_rust_vs_java.md) | Rust vs Java | 所有权 vs GC、并发模型、运行时架构、场景矩阵 | ✅ v1.0 |
-| [`05_comparative/07_rust_vs_python.md`](05_comparative/07_rust_vs_python.md) | Rust vs Python | 静态 vs 动态类型、所有权 vs GC、 fearless vs GIL、元编程 | ✅ v1.0 |
+| [`05_comparative/02_rust_vs_go.md`](05_comparative/02_rust_vs_go.md) | Rust vs Go | CSP vs 所有权（Ownership）并发、服务编排语义、确定性对比 | ✅ v1.0 |
+| [`05_comparative/03_paradigm_matrix.md`](05_comparative/03_paradigm_matrix.md) | 范式矩阵 | 多语言形式化对比、类型系统（Type System）谱系、设计哲学 | ✅ v1.0 |
+| [`05_comparative/06_rust_vs_java.md`](05_comparative/06_rust_vs_java.md) | Rust vs Java | 所有权（Ownership） vs GC、并发模型、运行时（Runtime）架构、场景矩阵 | ✅ v1.0 |
+| [`05_comparative/07_rust_vs_python.md`](LINK_PLACEHOLDER) | Rust vs Python | 静态 vs 动态类型、所有权（Ownership） vs GC、 fearless vs GIL、元编程 | ✅ v1.0 |
 | [`05_comparative/08_rust_vs_javascript.md`](05_comparative/08_rust_vs_javascript.md) | Rust vs JavaScript | 编译 vs 解释、所有权 vs GC、Future vs Promise、WASM | ✅ v1.0 |
 
 ---
@@ -51,12 +51,12 @@
 
 | 维度 | Rust | C++ | Go |
 |:---|:---|:---|:---|
-| **内存安全** | 所有权 + 借用检查 | 智能指针 + RAII（运行时）| GC（运行时）|
-| **并发安全** | `Send/Sync`（类型级）| 无（程序员负责）| channel（语言级）|
-| **类型系统** | 代数类型 + Trait | 模板 + 继承 | 结构类型 + 接口 |
+| **内存安全（Memory Safety）** | 所有权 + 借用（Borrowing）检查 | 智能指针（Smart Pointer） + RAII（运行时）| GC（运行时）|
+| **并发安全（Concurrency Safety）** | `Send/Sync`（类型级）| 无（程序员负责）| channel（语言级）|
+| **类型系统（Type System）** | 代数类型 + Trait | 模板 + 继承 | 结构类型 + 接口 |
 | **形式化基础** | 线性逻辑 + 分离逻辑 | 无统一基础 | CSP + π 演算 |
-| **零成本抽象** | 单态化 | 模板实例化 | 无（接口有开销）|
-| **错误处理** | `Result`（显式）| 异常 + 返回值 | 多返回值 + error |
+| **零成本抽象（Zero-Cost Abstraction）** | 单态化（Monomorphization） | 模板实例化 | 无（接口有开销）|
+| **错误处理（Error Handling）** | `Result`（显式）| 异常 + 返回值 | 多返回值 + error |
 | **可验证性** | RustBelt/Kani | 有限工具支持 | 有限 |
 | **AI 适配** | 形式系统提供语义安全网 | 机制堆砌导致组合爆炸 | GC 延迟不可预测 |
 

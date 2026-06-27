@@ -11,13 +11,13 @@
 >
 > **EN**: Modules
 > **Summary**: Modules. Core Rust concept covering practical examples, aerospace and fault-tolerant systems.
-> **📎 交叉引用**
+> **📎 交叉引用（Reference）**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[模块系统](../02_intermediate/10_module_system.md)
+> 本主题在 knowledge 中有系统化的知识索引：[模块（Module）系统](LINK_PLACEHOLDER)
 > **受众**: [初学者]
 > **Bloom 层级**: 记忆 → 应用
 > **A/S/P 标记**: **A** — Application
-> **双维定位**: F×App — 模块系统和路径的语法应用
+> **双维定位**: F×App — 模块（Module）系统和路径的语法应用
 > **定位**: 系统讲解 Rust **模块系统**——从 `mod`、`use`、`pub` 的语法到文件系统映射、工作空间组织，揭示 Rust 如何通过模块系统实现代码封装、可见性控制和大型项目组织。
 > **前置概念**: [Ownership](./01_ownership.md) · [Type System](./04_type_system.md)
 > **后置概念**: [Crate Ecosystem](../06_ecosystem/03_core_crates.md) · [Workspace](../06_ecosystem/01_toolchain.md)
@@ -429,7 +429,7 @@ graph TD
 └── 缓解: 使用 fully qualified syntax
 ```
 
-> **边界要点**: 模块系统的边界主要与**循环依赖**、**集成测试限制**、**宏交互**和**路径冲突**相关。
+> **边界要点**: 模块系统的边界主要与**循环依赖**、**集成测试限制**、**宏（Macro）交互**和**路径冲突**相关。
 > [来源: [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html)]
 
 ---
@@ -492,8 +492,8 @@ graph TD
 
 ## 相关概念文件
 
-- [Ownership](./01_ownership.md) — 所有权系统
-- [Type System](./04_type_system.md) — 类型系统
+- [Ownership](./01_ownership.md) — 所有权（Ownership）系统
+- [Type System](./04_type_system.md) — 类型系统（Type System）
 - [Crate Ecosystem](../06_ecosystem/03_core_crates.md) — 核心 crate
 - [Toolchain](../06_ecosystem/01_toolchain.md) — 工具链
 
@@ -555,7 +555,7 @@ mod inner_fixed {
 }
 ```
 
-> **修正**: Rust 的可见性默认是私有的（`private`）。结构体字段、模块项、trait 方法等除非标记 `pub`，否则只能在定义模块内访问。这与 C++ 的 `public`/`private` 类似，但 Rust 默认私有，需显式公开。公共 API 设计应通过方法暴露数据，而非直接公开字段。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-00-packages-crates-and-modules.html)]
+> **修正**: Rust 的可见性默认是私有的（`private`）。结构体（Struct）字段、模块项、trait 方法等除非标记 `pub`，否则只能在定义模块内访问。这与 C++ 的 `public`/`private` 类似，但 Rust 默认私有，需显式公开。公共 API 设计应通过方法暴露数据，而非直接公开字段。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-00-packages-crates-and-modules.html)]
 
 ### 10.2 边界测试：`use` 路径循环依赖（编译错误）
 
@@ -640,11 +640,11 @@ pub use crate::a::A;
 > `use` 循环的常见场景：
 >
 > 1) `prelude` 模块集中暴露公开 API；
-> 2) 子模块互相引用类型；
+> 2) 子模块互相引用（Reference）类型；
 > 3) `pub use` 重新导出组织 API 表面。
 > Rust 的模块解析是声明式的：
 > 所有 `mod` 声明在编译期收集，然后解析 `use` 路径，最后检查循环。
-> 这与 Python 的循环 import（运行时动态，可能部分成功）或 C/C++ 的头文件循环 include（需 `#pragma once` 或 include guard）不同
+> 这与 Python 的循环 import（运行时（Runtime）动态，可能部分成功）或 C/C++ 的头文件循环 include（需 `#pragma once` 或 include guard）不同
 > ——Rust 的模块系统从设计上避免循环问题。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html)] ·
 > [来源: [Rust Reference — Items](https://doc.rust-lang.org/reference/items.html)]
@@ -731,14 +731,14 @@ fn main() {
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | 模块系统与路径：Rust 的代码组织哲学 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 模块系统与路径：Rust 的代码组织哲学 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 模块系统与路径：Rust 的代码组织哲学 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 模块系统与路径：Rust 的代码组织哲学 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 命名空间隔离 ⟸ 模块树结构 ⟸ use/pub 可见性
 > 编译单元独立 ⟸ crate 边界 ⟸ 模块系统封装
-> **过渡**: 掌握 模块系统与路径：Rust 的代码组织哲学 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 模块系统与路径：Rust 的代码组织哲学 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 模块系统与路径：Rust 的代码组织哲学 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: 模块系统与路径：Rust 的代码组织哲学 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 模块系统与路径：Rust 的代码组织哲学 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

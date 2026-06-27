@@ -9,7 +9,7 @@
 > **受众**: [专家 / 研究者]
 > **Bloom 层级**: 理解 → 分析
 > **A/S/P 标记**: **F** — Formal
-> **双维定位**: F×Type — 类型系统与形式化方法
+> **双维定位**: F×Type — 类型系统（Type System）与形式化方法
 > **定位**: 把“这个类型是否实现了某 trait”这一核心问题，还原为候选装配、筛选、确认与约束求解的完整算法。
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Traits](../02_intermediate/01_traits.md) · [Type Inference](./08_type_inference.md) · [Name Resolution and HIR](./25_name_resolution_and_hir.md)
 > **后置概念**: [Rustc Query System](./19_rustc_query_system.md) · [Ownership Formal](./03_ownership_formal.md)
@@ -55,7 +55,7 @@ let v = clone_slice(&[1, 2, 3]);
 // 这里需要证明 obligation: i32 : Clone
 ```
 
-在泛型函数体内部，`T: Clone` 也是一个 obligation，但它不能被具体实现，而是由调用者保证。
+在泛型（Generics）函数体内部，`T: Clone` 也是一个 obligation，但它不能被具体实现，而是由调用者保证。
 
 > **关键洞察**: Trait 求解 = 为每个 obligation 找到一个“证据”：一个 impl、一个 where-clause、或一个内建规则。
 >

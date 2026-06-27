@@ -81,7 +81,7 @@ registry = "sparse+https://mirrors.example.com/crates.io-index/"
 | `directory` | directory source（`cargo vendor` 生成） |
 | `git` | 替换 git 依赖的源 |
 
-> **定理**: `replace-with` 只能引用已定义的 source 名称或 `[registries]` 中注册的替代 registry。
+> **定理**: `replace-with` 只能引用（Reference）已定义的 source 名称或 `[registries]` 中注册的替代 registry。
 
 ---
 

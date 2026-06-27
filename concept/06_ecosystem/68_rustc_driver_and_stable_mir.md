@@ -100,8 +100,8 @@ fn main() {
 |:---|:---|
 | `config` | 编译器配置构建后 |
 | `after_crate_root_parsing` | 根 crate 解析完成后 |
-| `after_expansion` | 宏展开完成后 |
-| `after_analysis` | 类型检查/借用检查后 |
+| `after_expansion` | 宏（Macro）展开完成后 |
+| `after_analysis` | 类型检查/借用（Borrowing）检查后 |
 | `after_codegen` | 代码生成后 |
 
 ---

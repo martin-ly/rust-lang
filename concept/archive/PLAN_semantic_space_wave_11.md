@@ -15,11 +15,11 @@
 
 这需要从**元语言**层面回答：
 
-1. **Rust 的表征空间是什么？**（类型系统 + 所有权 + Trait + 宏 + unsafe 构成的"设计空间"）
+1. **Rust 的表征空间是什么？**（类型系统（Type System） + 所有权（Ownership） + Trait + 宏（Macro） + unsafe 构成的"设计空间"）
 2. **安全 Rust 的语义封闭性**（safe 子集是否是"封闭世界"？unsafe 如何打破封闭？）
 3. **能表达 vs 不能表达的边界**（哪些计算/结构可以表达？哪些被刻意排除？哪些需要 unsafe？）
 4. **等价表达的语义保持**（同一概念在 Rust 中的多种表达方式的语义等价性分析）
-5. **机制组合的语义空间**（所有权×生命周期×Trait×泛型×宏×async×unsafe 的组合爆炸与约束）
+5. **机制组合的语义空间**（所有权（Ownership）×生命周期（Lifetimes）×Trait×泛型（Generics）×宏（Macro）×async×unsafe 的组合爆炸与约束）
 
 ## 二、理论框架
 
@@ -31,7 +31,7 @@
 
 应用于 Rust：
 
-- **局部变换可实现的**（不增加表达力）：语法糖（? 运算符）、模式匹配简化
+- **局部变换可实现的**（不增加表达力）：语法糖（? 运算符）、模式匹配（Pattern Matching）简化
 - **需要全局变换的**（增加表达力）：异常 → Result（控制流全局重写）、继承 → Trait（设计模式全局改变）
 
 ### 2.2 观察等价性（Observational Equivalence）
@@ -66,18 +66,18 @@
 
 #### §1 表征空间的定义
 
-- Rust 表征空间 = {类型系统, 所有权系统, Trait系统, 生命周期系统, 宏系统, unsafe系统, async系统}
+- Rust 表征空间 = {类型系统（Type System）, 所有权（Ownership）系统, Trait（Trait）系统, 生命周期（Lifetimes）系统, 宏（Macro）系统, unsafe（Unsafe）系统, async系统}
 - 每个子系统的表征能力范围
-- 子系统之间的交互约束（如：所有权 × 生命周期 = 借用规则）
+- 子系统之间的交互约束（如：所有权 × 生命周期（Lifetimes） = 借用（Borrowing）规则）
 
 #### §2 安全 Rust 的语义封闭性
 
 - **封闭世界假设**：safe Rust 是一个封闭的形式系统
-  - 公理：所有权唯一性、借用规则、生命周期约束
+  - 公理：所有权唯一性、借用（Borrowing）规则、生命周期约束
   - 推理规则：类型检查、借用检查
   - 封闭性：safe 代码不能突破这些规则（除非通过 unsafe）
 - **逃逸舱口**：unsafe 作为封闭系统的"门"
-  - unsafe 不改变类型系统的规则，但允许程序员手动保证不变量
+  - unsafe 不改变类型系统（Type System）的规则，但允许程序员手动保证不变量
   - 类比：Haskell 的 `unsafePerformIO`、ML 的 `unsafe_cast`
 
 #### §3 能表达 vs 不能表达的边界
@@ -86,9 +86,9 @@
 
 | 概念 | Rust 表达 | 语义保持 | 成本 |
 |:---|:---|:---|:---|
-| 系统编程 | 所有权 + unsafe | 完全 | 零运行时 |
-| 零成本抽象 | 泛型 + 单态化 | 完全 | 编译时间 |
-| fearless并发 | Send/Sync + 借用 | 完全 | 零运行时 |
+| 系统编程 | 所有权 + unsafe | 完全 | 零运行时（Runtime） |
+| 零成本抽象（Zero-Cost Abstraction） | 泛型（Generics） + 单态化（Monomorphization） | 完全 | 编译时间 |
+| fearless并发 | Send/Sync + 借用（Borrowing） | 完全 | 零运行时（Runtime） |
 | 确定性资源管理 | RAII + Drop | 完全 | 零运行时 |
 | 编译期计算 | const generics + const fn | 部分 | 编译时间 |
 
@@ -96,10 +96,10 @@
 
 | 概念 | Rust 表达 | 痛点 | 替代方案 |
 |:---|:---|:---|:---|
-| GUI 开发 | 生命周期与回调冲突 | 自引用、事件循环 | `Rc<RefCell>`、`Pin` |
+| GUI 开发 | 生命周期与回调冲突 | 自引用（Reference）、事件循环 | `Rc<RefCell>`、`Pin` |
 | 动态类型 | enum 模拟 | 样板代码 | `dyn Any`（有限）|
 | 运行时反射 | `Any::downcast` | 类型信息丢失 | 宏生成代码 |
-| 复杂元编程 | 过程宏 | 调试困难、无类型信息 | `macro_rules!` + 约定 |
+| 复杂元编程 | 过程宏（Procedural Macro） | 调试困难、无类型信息 | `macro_rules!` + 约定 |
 | 快速原型 | 编译时间 + 学习曲线 | 迭代慢 | `cargo script` |
 
 **不能表达（或故意排除）**：
@@ -212,7 +212,7 @@ Lifetime('a) × Lifetime('b) where 'a > 'b → ❌ 生命周期不足 E0597
 
 ### 3.2 增强现有文件（标注映射）
 
-在以下文件的"层次一致性标注"部分，新增与 `semantic_space.md` 的映射：
+在以下文件的"层次一致性（Coherence）标注"部分，新增与 `semantic_space.md` 的映射：
 
 - `01_foundation/01_ownership.md`：§X 标注 "此处为表征空间 §2 的所有权算子"
 - `01_foundation/02_borrowing.md`：§X 标注 "此处为表征空间 §2 的借用算子"

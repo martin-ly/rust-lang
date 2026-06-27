@@ -16,7 +16,7 @@
 > **Summary**: Rust vs JavaScript: comparative analysis with Rust across type systems, memory safety, and concurrency.
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
-> **定位**: 对比分析 **Rust**（编译型、强类型、内存安全）与 **JavaScript**（解释型、动态类型、事件驱动）在语言语义、运行时模型、异步处理和生态工具链四个维度的本质差异，特别关注 WASM 作为两者交汇点的作用。
+> **定位**: 对比分析 **Rust**（编译型、强类型、内存安全（Memory Safety））与 **JavaScript**（解释型、动态类型、事件驱动）在语言语义、运行时（Runtime）模型、异步（Async）处理和生态工具链四个维度的本质差异，特别关注 WASM 作为两者交汇点的作用。
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [WebAssembly](../06_ecosystem/11_webassembly.md) · [Async](../03_advanced/02_async.md)
 
@@ -37,12 +37,12 @@
 - [Rust vs JavaScript：系统编程与脚本执行的范式差异](#rust-vs-javascript系统编程与脚本执行的范式差异)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 运行时模型：编译 vs 解释](#11-运行时模型编译-vs-解释)
-    - [1.2 类型系统：静态 vs 动态](#12-类型系统静态-vs-动态)
-    - [1.3 内存模型：所有权 vs GC](#13-内存模型所有权-vs-gc)
+    - [1.1 运行时（Runtime）模型：编译 vs 解释](LINK_PLACEHOLDER)
+    - [1.2 类型系统（Type System）：静态 vs 动态](LINK_PLACEHOLDER)
+    - [1.3 内存模型：所有权（Ownership） vs GC](LINK_PLACEHOLDER)
   - [二、技术细节](#二技术细节)
-    - [2.1 异步模型对比](#21-异步模型对比)
-    - [2.2 错误处理：Result vs Throw](#22-错误处理result-vs-throw)
+    - [2.1 异步（Async）模型对比](LINK_PLACEHOLDER)
+    - [2.2 错误处理（Error Handling）：Result vs Throw](LINK_PLACEHOLDER)
     - [2.3 WASM：两个世界的桥梁](#23-wasm两个世界的桥梁)
   - [三、选型决策矩阵](#三选型决策矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
@@ -54,7 +54,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Rust 与 JavaScript 的编译错误对比](#十边界测试rust-与-javascript-的编译错误对比)
     - [10.1 边界测试：JavaScript 的隐式转换 vs Rust 的显式转换（编译错误）](#101-边界测试javascript-的隐式转换-vs-rust-的显式转换编译错误)
-    - [10.2 边界测试：JavaScript 的闭包变量捕获与 Rust 的所有权（编译错误）](#102-边界测试javascript-的闭包变量捕获与-rust-的所有权编译错误)
+    - [10.2 边界测试：JavaScript 的闭包（Closures）变量捕获与 Rust 的所有权（编译错误）](LINK_PLACEHOLDER)
     - [10.3 边界测试：JavaScript 的 `this` 动态绑定与 Rust 的方法调用（编译错误）](#103-边界测试javascript-的-this-动态绑定与-rust-的方法调用编译错误)
     - [10.4 边界测试：JavaScript 的弱类型与 Rust 的强制类型（编译错误）](#104-边界测试javascript-的弱类型与-rust-的强制类型编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -62,7 +62,7 @@
     - [测验 2：JavaScript 的 `Promise` 与 Rust 的 `Future` 在语义上有什么区别？（理解层）](#测验-2javascript-的-promise-与-rust-的-future-在语义上有什么区别理解层)
     - [测验 3：为什么 Rust 编译为 WebAssembly 后可以与 JavaScript 互操作？WASM 在这两种语言间扮演什么角色？（理解层）](#测验-3为什么-rust-编译为-webassembly-后可以与-javascript-互操作wasm-在这两种语言间扮演什么角色理解层)
     - [测验 4：JavaScript 的"原型继承"与 Rust 的 `trait` 系统在代码复用上有什么区别？（理解层）](#测验-4javascript-的原型继承与-rust-的-trait-系统在代码复用上有什么区别理解层)
-    - [测验 5：Node.js 的 `require`/`import` 模块系统与 Rust 的 `crate`/`mod` 系统有什么主要区别？（理解层）](#测验-5nodejs-的-requireimport-模块系统与-rust-的-cratemod-系统有什么主要区别理解层)
+    - [测验 5：Node.js 的 `require`/`import` 模块（Module）系统与 Rust 的 `crate`/`mod` 系统有什么主要区别？（理解层）](LINK_PLACEHOLDER)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -150,7 +150,7 @@
   add(1, "2" as any);  // 编译通过，运行时仍可能出错
 ```
 
-> **类型洞察**: TypeScript 的"静态类型"是**开发时辅助**，不是**运行时保证**——`as any` 和 `JSON.parse` 可以绕过所有类型检查。Rust 的类型系统在编译后仍然有效（通过生成的代码结构）。
+> **类型洞察**: TypeScript 的"静态类型"是**开发时辅助**，不是**运行时保证**——`as any` 和 `JSON.parse` 可以绕过所有类型检查。Rust 的类型系统（Type System）在编译后仍然有效（通过生成的代码结构）。
 > [来源: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)] · [来源: [Rust Type System](https://doc.rust-lang.org/reference/type-system.html)]
 
 ---
@@ -186,7 +186,7 @@ graph LR
 
 > **认知功能**: 此图展示 Rust 和 JavaScript 的**内存模型差异**及 WASM 的**桥梁作用**。Rust 的确定性内存管理与 JS 的 GC 在 WASM 中通过线性内存交互。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
-> **关键洞察**: WASM 是 Rust 和 JavaScript **共存的运行时**——Rust 编译为 WASM 模块，JS 通过 JS API 调用，两者共享线性内存。
+> **关键洞察**: WASM 是 Rust 和 JavaScript **共存的运行时**——Rust 编译为 WASM 模块（Module），JS 通过 JS API 调用，两者共享线性内存。
 > [来源: [WASM Memory Model](https://webassembly.github.io/spec/core/syntax/modules.html#memories)]
 
 ---
@@ -267,7 +267,7 @@ async function readFile(path) {
 // - JS: 错误可以被忽略，导致未捕获异常
 ```
 
-> **错误处理洞察**: Rust 的 `Result` 将错误提升为**类型**——编译器强制处理。JavaScript 的异常是**运行时控制流**——容易遗漏，导致生产环境崩溃。
+> **错误处理（Error Handling）洞察**: Rust 的 `Result` 将错误提升为**类型**——编译器强制处理。JavaScript 的异常是**运行时控制流**——容易遗漏，导致生产环境崩溃。
 > [来源: [Rust Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)] · [来源: [MDN — try/catch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch)]
 
 ---
@@ -460,7 +460,7 @@ graph TD
      // 零拷贝数据交换
 ```
 
-> **陷阱总结**: Rust/JS/WASM 的陷阱主要与**边界穿越开销**、**包体积**、**性能假设**、**错误处理**和**内存管理**相关。
+> **陷阱总结**: Rust/JS/WASM 的陷阱主要与**边界穿越开销**、**包体积**、**性能假设**、**错误处理（Error Handling）**和**内存管理**相关。
 > [source: [wasm-bindgen Best Practices](https://rustwasm.github.io/docs/wasm-bindgen/contributing/design/index.html)]
 
 ---
@@ -482,7 +482,7 @@ graph TD
 
 - [WebAssembly](../06_ecosystem/11_webassembly.md) — WebAssembly 生态
 - [Async](../03_advanced/02_async.md) — 异步编程
-- [Ownership](../01_foundation/01_ownership.md) — 所有权模型
+- [Ownership](../01_foundation/01_ownership.md) — 所有权（Ownership）模型
 - [Rust vs Python](./07_rust_vs_python.md) — Rust vs Python 对比
 
 ---
@@ -559,7 +559,7 @@ fn fixed() {
 }
 ```
 
-> **JavaScript 对比**: JavaScript 的闭包捕获变量引用，允许在闭包内外同时修改同一变量（`var count = 0; function inc() { count++; }`）。Rust 的闭包根据修改方式捕获环境：若修改变量，则以 `&mut` 捕获，外部不能再访问该变量直到闭包释放。`Cell<T>` 通过内部可变性绕过此限制——`&Cell` 允许修改内部值，因为 `Cell` 禁止获取内部引用。这是 Rust 所有权系统与闭包交互的精妙设计。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> **JavaScript 对比**: JavaScript 的闭包（Closures）捕获变量引用（Reference），允许在闭包内外同时修改同一变量（`var count = 0; function inc() { count++; }`）。Rust 的闭包根据修改方式捕获环境：若修改变量，则以 `&mut` 捕获，外部不能再访问该变量直到闭包释放。`Cell<T>` 通过内部可变性绕过此限制——`&Cell` 允许修改内部值，因为 `Cell` 禁止获取内部引用。这是 Rust 所有权系统与闭包交互的精妙设计。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：JavaScript 的 `this` 动态绑定与 Rust 的方法调用（编译错误）
 
@@ -585,7 +585,7 @@ fn main() {
 }
 ```
 
-> **修正**: JavaScript 的 `this` 是**动态绑定**的：函数作为方法调用时 `this` 是对象，作为普通函数调用时 `this` 是 `undefined`（严格模式）或全局对象。Rust 无 `this` 概念：方法调用 `c.increment()` 是 `Counter::increment(&mut c)` 的语法糖，`self` 是显式参数。提取方法为函数值需要闭包：`|| c.increment()` 捕获 `c` 的引用。这与 Python 的 `self`（显式参数，但方法可作为 bound method 提取）或 C++ 的 `std::bind`/`lambda`（类似 Rust 闭包）不同——Rust 的方法无隐式绑定，所有参数显式传递，消除了 `this` 的歧义。JavaScript 的箭头函数（词法 `this`）解决了部分问题，但 Rust 从根本上避免了动态绑定。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch05-03-method-syntax.html)] · [来源: [JavaScript this Keyword](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)]
+> **修正**: JavaScript 的 `this` 是**动态绑定**的：函数作为方法调用时 `this` 是对象，作为普通函数调用时 `this` 是 `undefined`（严格模式）或全局对象。Rust 无 `this` 概念：方法调用 `c.increment()` 是 `Counter::increment(&mut c)` 的语法糖，`self` 是显式参数。提取方法为函数值需要闭包：`|| c.increment()` 捕获 `c` 的引用（Reference）。这与 Python 的 `self`（显式参数，但方法可作为 bound method 提取）或 C++ 的 `std::bind`/`lambda`（类似 Rust 闭包（Closures））不同——Rust 的方法无隐式绑定，所有参数显式传递，消除了 `this` 的歧义。JavaScript 的箭头函数（词法 `this`）解决了部分问题，但 Rust 从根本上避免了动态绑定。[来源: [The Rust Programming Language](LINK_PLACEHOLDER)] · [来源: [JavaScript this Keyword](LINK_PLACEHOLDER)]
 
 ### 10.4 边界测试：JavaScript 的弱类型与 Rust 的强制类型（编译错误）
 
@@ -655,7 +655,7 @@ JS 原型继承是运行时的对象链接，可动态修改。Rust trait 是编
 
 ### 测验 5：Node.js 的 `require`/`import` 模块系统与 Rust 的 `crate`/`mod` 系统有什么主要区别？（理解层）
 
-**题目**: Node.js 的 `require`/`import` 模块系统与 Rust 的 `crate`/`mod` 系统有什么主要区别？
+**题目**: Node.js 的 `require`/`import` 模块（Module）系统与 Rust 的 `crate`/`mod` 系统有什么主要区别？
 
 <details>
 <summary>✅ 答案与解析</summary>
@@ -679,7 +679,7 @@ Rust 模块系统是编译期静态的，路径和可见性由编译器解析。
 
 > **过渡**: 在实践中应用 Rust vs JavaScript：系统编程与脚本执行的范式差异 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: Rust vs JavaScript：系统编程与脚本执行的范式差异 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: Rust vs JavaScript：系统编程与脚本执行的范式差异 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

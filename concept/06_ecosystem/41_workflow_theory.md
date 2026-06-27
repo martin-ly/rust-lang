@@ -14,7 +14,7 @@
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Eva — 评价工作流模型的形式化正确性
 > **前置依赖**: [Async/Await](../03_advanced/02_async.md) ·
-> [异步状态机](../03_advanced/02_async.md) ·
+> [异步（Async）状态机](LINK_PLACEHOLDER) ·
 > [公理语义](../04_formal/20_axiomatic_semantics.md) ·
 > [类型语义](../04_formal/21_type_semantics.md)
 > **后置延伸**: [CQRS & Event Sourcing](./33_cqrs_event_sourcing.md) ·
@@ -22,6 +22,7 @@
 > [分布式系统](./18_distributed_systems.md)
 >
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Cargo Book](https://doc.rust-lang.org/cargo/)
+> **前置概念**: N/A
 ---
 
 > **来源**: [Workflow Management Coalition — Terminology & Glossary](https://www.wfmc.org/standards/terminology) ·
@@ -54,7 +55,7 @@
     - [3.3 执行语义](#33-执行语义)
   - [四、Rust 中的工作流实现](#四rust-中的工作流实现)
     - [4.1 异步机制与工作流同构性](#41-异步机制与工作流同构性)
-    - [4.2 类型系统映射](#42-类型系统映射)
+    - [4.2 类型系统（Type System）映射](LINK_PLACEHOLDER)
     - [4.3 状态机转换](#43-状态机转换)
   - [五、形式化验证](#五形式化验证)
     - [5.1 Petri 网模型](#51-petri-网模型)
@@ -69,7 +70,7 @@
     - [7.2 边界极限](#72-边界极限)
   - [八、边界测试](#八边界测试)
     - [8.1 边界测试：状态机转换遗漏导致死代码（编译/逻辑错误）](#81-边界测试状态机转换遗漏导致死代码编译逻辑错误)
-    - [8.2 边界测试：Petri 网可达性分析的 state explosion（运行时性能）](#82-边界测试petri-网可达性分析的-state-explosion运行时性能)
+    - [8.2 边界测试：Petri 网可达性分析的 state explosion（运行时（Runtime）性能）](LINK_PLACEHOLDER)
     - [8.3 边界测试：工作流循环缺乏终止条件导致无限执行（运行时错误）](#83-边界测试工作流循环缺乏终止条件导致无限执行运行时错误)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
@@ -133,7 +134,7 @@ WfMC 工作流参考模型（1995）:
 | **并行工作流** | A ∥ B → C，fork-join | Petri 网 | MapReduce、CI/CD | `tokio::join!` |
 | **条件工作流** | if-then-else 分支 | 状态机 + 守卫条件 | 审批流程 | `match` / `if` |
 | **循环工作流** | while / repeat-until | ω-自动机 | 重试、轮询 | `loop` / `while` |
-| **动态工作流** | 运行时修改流程图 | π 演算 | 自适应系统 | `dyn Trait` / 状态模式 |
+| **动态工作流** | 运行时（Runtime）修改流程图 | π 演算 | 自适应系统 | `dyn Trait` / 状态模式 |
 | **协作工作流** | 多参与者交互 | 会话类型 | 多方审批、B2B | Actor / Channel |
 
 ```rust
@@ -507,7 +508,7 @@ where G: FnMut() -> bool, W: FnMut() -> Future<Output = Result<T>>
 ### 4.2 类型系统映射
 >
 
-Rust 的类型系统为工作流组合提供了**编译期保证**：
+Rust 的类型系统（Type System）为工作流组合提供了**编译期保证**：
 
 ```rust,ignore
 // 工作流作为类型
@@ -545,7 +546,7 @@ where
 > - **输入输出匹配**: 顺序组合时，编译器检查前驱的输出类型与后继的输入类型一致
 > - **错误传播**: `Result` 类型强制处理失败路径（`?` 运算符自动传播）
 > - **Send/Sync 安全**: 跨线程工作流自动检查线程安全
-> - **生命周期**: 输入数据的生命周期在编译期验证，不存在 dangling reference
+> - **生命周期（Lifetimes）**: 输入数据的生命周期在编译期验证，不存在 dangling reference
 >
 > **来源**: [Rust Type System](https://doc.rust-lang.org/reference/type-system.html) · [Rust async-book](https://rust-lang.github.io/async-book/)
 
@@ -1112,8 +1113,8 @@ async fn recover_workflow(
 | **Petri 网可达性** | BFS/DFS + 状态压缩 | EXPSPACE-complete | 大规模工作流需要近似分析 |
 | **π 演算互模拟** | 有限控制子集可判定 | 一般情况不可判定 | 限制动态性以保证可验证 |
 | **CTL 模型检验** | 标记算法 O(\|φ\| × (\|S\| + \|T\|)) | 状态数指数增长 | 符号模型检验（BDD）缓解 |
-| **工作流持久化延迟** | < 10ms（本地 SSD）| 网络延迟下限 | 异步事件日志降低阻塞 |
-| **分布式一致性** | Saga / 事件溯源 | CAP 定理限制 | 选择最终一致性 + 补偿 |
+| **工作流持久化延迟** | < 10ms（本地 SSD）| 网络延迟下限 | 异步（Async）事件日志降低阻塞 |
+| **分布式一致性（Coherence）** | Saga / 事件溯源 | CAP 定理限制 | 选择最终一致性 + 补偿 |
 
 > **来源**: [Murata — Petri Nets](https://ieeexplore.ieee.org/document/24143) ·
 > [Milner — π-Calculus](https://www.amazon.com/Communicating-Mobile-Systems-Calculus-Cambridge/dp/0521658691) ·
@@ -1303,7 +1304,7 @@ async fn unbounded_backoff() -> Result<Output> {
 - [Async/Await](../03_advanced/02_async.md) — 异步编程基础
 - [异步状态机](../03_advanced/02_async.md) — async/await 状态机转换
 - [公理语义](../04_formal/20_axiomatic_semantics.md) — Hoare 逻辑、正确性证明
-- [类型语义](../04_formal/21_type_semantics.md) — 类型系统、Progress & Preservation
+- [类型语义](../04_formal/21_type_semantics.md) — 类型系统（Type System）、Progress & Preservation
 - [操作语义](../04_formal/17_operational_semantics.md) — 结构化操作语义
 
 > **过渡**: Workflow Theory & Formalization（工作流理论与形式化） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

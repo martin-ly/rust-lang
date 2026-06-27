@@ -55,9 +55,9 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：测试策略的编译错误](#十边界测试测试策略的编译错误)
     - [10.1 边界测试：`#[should_panic]` 的误用（测试失败）](#101-边界测试should_panic-的误用测试失败)
-    - [10.2 边界测试：异步测试的运行时要求（编译错误）](#102-边界测试异步测试的运行时要求编译错误)
-    - [10.3 边界测试：属性宏测试的顺序依赖（运行时测试失败）](#103-边界测试属性宏测试的顺序依赖运行时测试失败)
-    - [10.4 边界测试：`mockall` 的泛型 mock 限制（编译错误）](#104-边界测试mockall-的泛型-mock-限制编译错误)
+    - [10.2 边界测试：异步（Async）测试的运行时（Runtime）要求（编译错误）](LINK_PLACEHOLDER)
+    - [10.3 边界测试：属性宏（Macro）测试的顺序依赖（运行时测试失败）](LINK_PLACEHOLDER)
+    - [10.4 边界测试：`mockall` 的泛型（Generics） mock 限制（编译错误）](LINK_PLACEHOLDER)
     - [10.5 边界测试：属性测试的 shrink 陷阱（测试覆盖盲区）](#105-边界测试属性测试的-shrink-陷阱测试覆盖盲区)
     - [10.3 边界测试：mockall 的期望设置与调用顺序验证（测试失败）](#103-边界测试mockall-的期望设置与调用顺序验证测试失败)
     - [补充定理链](#补充定理链)
@@ -104,10 +104,10 @@ graph TD
     测试层 --> 验证层
 ```
 
-> **认知功能**: 此图展示 Rust **质量保证的分层体系**——从编译期保证到运行时测试再到形式化验证，形成纵深防御。
+> **认知功能**: 此图展示 Rust **质量保证的分层体系**——从编译期保证到运行时（Runtime）测试再到形式化验证，形成纵深防御。
 > [来源: [TRPL](https://doc.rust-lang.org/book/ch11-00-testing.html)]
 > **使用建议**: 利用 Rust 的编译期保证减少运行时测试负担；对 unsafe 代码使用 Miri；对关键算法使用 Kani。
-> **关键洞察**: Rust 的**类型系统本身就是测试**——许多在其他语言中需要单元测试保证的属性（如空指针安全、数据竞争自由），在 Rust 中由编译器自动保证。
+> **关键洞察**: Rust 的**类型系统（Type System）本身就是测试**——许多在其他语言中需要单元测试保证的属性（如空指针安全、数据竞争自由），在 Rust 中由编译器自动保证。
 > [来源: [Rust Book — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)]
 
 ---
@@ -180,7 +180,7 @@ fn share(data: Arc<Mutex<Vec<i32>>>) {
 // 在 Rust 中由编译器自动验证
 ```
 
-> **编译期测试**: Rust 的**零成本抽象**不仅是性能承诺，也是**测试承诺**——编译期验证的属性在运行时无需重复测试。
+> **编译期测试**: Rust 的**零成本抽象（Zero-Cost Abstraction）**不仅是性能承诺，也是**测试承诺**——编译期验证的属性在运行时无需重复测试。
 > [来源: [TRPL — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
 
 ---
@@ -235,7 +235,7 @@ fn test_public_api() {
 
 > **测试框架要点**:
 >
-> 1. `#[cfg(test)]` 模块：单元测试，可访问私有函数
+> 1. `#[cfg(test)]` 模块（Module）：单元测试，可访问私有函数
 > 2. `tests/` 目录：集成测试，只能访问 public API
 > 3. 文档测试：确保代码示例始终正确
 > 4. `#[bench]`（nightly）：基准测试
@@ -322,14 +322,14 @@ Miri 的局限:
 
 | 层级 | 工具/方法 | 目标 | 频率 | 成本 |
 |:---|:---|:---|:---:|:---:|
-| **L0: 编译期** | `rustc` + `clippy` | 类型安全、所有权、lint | 每次编译 | 零 |
+| **L0: 编译期** | `rustc` + `clippy` | 类型安全、所有权（Ownership）、lint | 每次编译 | 零 |
 | **L1: 单元测试** | `cargo test` | 函数正确性 | 每次提交 | 低 |
-| **L2: 集成测试** | `tests/` 目录 | 模块交互 | 每次提交 | 中 |
+| **L2: 集成测试** | `tests/` 目录 | 模块（Module）交互 | 每次提交 | 中 |
 | **L3: 文档测试** | `cargo test --doc` | 示例正确性 | 每次提交 | 低 |
 | **L4: 属性测试** | `proptest` | 不变量验证 | 每日构建 | 中 |
 | **L5: 模糊测试** | `cargo-fuzz` | Crash 发现 | 每周/发布前 | 高 |
 | **L6: Miri** | `cargo miri test` | UB 检测 | 关键 PR / 发布前 | 很高 |
-| **L7: Kani** | `cargo kani` | 形式化验证 | 关键模块 | 极高 |
+| **L7: Kani** | `cargo kani` | 形式化验证 | 关键模块（Module） | 极高 |
 
 > **策略建议**: 所有项目应覆盖 L0-L3；包含 unsafe 的项目必须覆盖 L6；安全关键项目应覆盖 L7。
 > [来源: [Rust Testing Guide](https://doc.rust-lang.org/rustc/tests/index.html)]
@@ -357,7 +357,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树评估 Rust 代码的测试需求。核心判断标准是**unsafe 使用**和**业务逻辑复杂度**。
-> **使用建议**: Rust 的类型系统保证**内存安全**和**线程安全**，但不保证**逻辑正确性**。业务逻辑、算法实现、边界条件仍需充分测试。
+> **使用建议**: Rust 的类型系统（Type System）保证**内存安全（Memory Safety）**和**线程安全**，但不保证**逻辑正确性**。业务逻辑、算法实现、边界条件仍需充分测试。
 > **关键洞察**: Rust 的编译期保证减少了**安全相关测试**的需求，但不减少**功能正确性测试**的需求。
 > [来源: 💡 原创分析]
 
@@ -525,7 +525,7 @@ async fn async_op() -> i32 { 42 }
 // }
 ```
 
-> **修正**: Rust 的标准测试运行时不支持 `async fn` 测试——`#[test]` 期望函数返回 `()`，而 `async fn` 返回 `Future`。`tokio::test`、`async_std::test` 等宏将异步测试包装在 `block_on` 中，自动执行 Future。这与 JavaScript 的 `async` 测试（测试框架自动 await）不同——Rust 要求显式选择运行时。这种显式性避免了隐式运行时依赖，但增加了测试代码的样板。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
+> **修正**: Rust 的标准测试运行时不支持 `async fn` 测试——`#[test]` 期望函数返回 `()`，而 `async fn` 返回 `Future`。`tokio::test`、`async_std::test` 等宏（Macro）将异步（Async）测试包装在 `block_on` 中，自动执行 Future。这与 JavaScript 的 `async` 测试（测试框架自动 await）不同——Rust 要求显式选择运行时。这种显式性避免了隐式运行时依赖，但增加了测试代码的样板。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
 
 ### 10.3 边界测试：属性宏测试的顺序依赖（运行时测试失败）
 
@@ -564,7 +564,7 @@ fn main() {
 }
 ```
 
-> **修正**: `mockall` 是 Rust 的功能强大的 mock 库，但泛型 trait 的 mocking 存在限制：`automock` 为每个具体类型实例生成 mock（`MockRepository_String`），而非保留泛型。这使得泛型 trait 的 mock 使用繁琐，且不支持某些高级场景（如关联类型、where clause）。替代方案：1) 手动实现 mock（手写 struct + trait impl）；2) 使用 `mockiato`（另一 mock 库，支持泛型更好）；3) 将泛型 trait 包装为具体 trait（`trait StringRepository: Repository<String> {}`）。Rust 的宏系统在生成泛型代码时的限制是生态的共同挑战：proc macro 在泛型上操作 AST，而非类型实例化后的代码。这与 Java 的 Mockito（通过反射和字节码生成 mock，支持泛型）或 C++ 的 GoogleMock（模板元编程，支持泛型）不同——Rust 的静态类型和宏系统使 mock 更受限但更类型安全。[来源: [mockall Documentation](https://docs.rs/mockall/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-01-writing-tests.html)]
+> **修正**: `mockall` 是 Rust 的功能强大的 mock 库，但泛型（Generics） trait 的 mocking 存在限制：`automock` 为每个具体类型实例生成 mock（`MockRepository_String`），而非保留泛型。这使得泛型 trait 的 mock 使用繁琐，且不支持某些高级场景（如关联类型、where clause）。替代方案：1) 手动实现 mock（手写 struct + trait impl）；2) 使用 `mockiato`（另一 mock 库，支持泛型更好）；3) 将泛型 trait 包装为具体 trait（`trait StringRepository: Repository<String> {}`）。Rust 的宏系统在生成泛型代码时的限制是生态的共同挑战：proc macro 在泛型上操作 AST，而非类型实例化后的代码。这与 Java 的 Mockito（通过反射和字节码生成 mock，支持泛型）或 C++ 的 GoogleMock（模板元编程，支持泛型）不同——Rust 的静态类型和宏系统使 mock 更受限但更类型安全。[来源: [mockall Documentation](https://docs.rs/mockall/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-01-writing-tests.html)]
 
 ### 10.5 边界测试：属性测试的 shrink 陷阱（测试覆盖盲区）
 
@@ -610,7 +610,7 @@ fn main() {
 }
 ```
 
-> **修正**: `mockall` 是 Rust 的**模拟框架**，基于 `mockall::automock` 过程宏自动生成 mock 实现。核心概念：1) `expect_*` — 设置方法期望（调用次数、参数、返回值）；2) `times(n)` — 精确次数，`times(..)` — 范围，`times(1..)` — 至少一次；3) `with(...)` — 参数匹配器；4) `in_sequence()` — 调用顺序验证。`mockall` 与 `mockito`（HTTP mock）、`wiremock`（异步 HTTP mock）形成 Rust 测试生态。这与 Java 的 Mockito（类似 expect/verify 模式）或 Python 的 `unittest.mock`（更灵活的 patch 机制）不同——Rust 的 `mockall` 在编译期生成 mock，类型安全但灵活性稍低。[来源: [mockall](https://docs.rs/mockall/)] · [来源: [Rust Testing](https://doc.rust-lang.org/rust-by-example/testing.html)]
+> **修正**: `mockall` 是 Rust 的**模拟框架**，基于 `mockall::automock` 过程宏（Procedural Macro）自动生成 mock 实现。核心概念：1) `expect_*` — 设置方法期望（调用次数、参数、返回值）；2) `times(n)` — 精确次数，`times(..)` — 范围，`times(1..)` — 至少一次；3) `with(...)` — 参数匹配器；4) `in_sequence()` — 调用顺序验证。`mockall` 与 `mockito`（HTTP mock）、`wiremock`（异步（Async） HTTP mock）形成 Rust 测试生态。这与 Java 的 Mockito（类似 expect/verify 模式）或 Python 的 `unittest.mock`（更灵活的 patch 机制）不同——Rust 的 `mockall` 在编译期生成 mock，类型安全但灵活性稍低。[来源: [mockall](https://docs.rs/mockall/)] · [来源: [Rust Testing](https://doc.rust-lang.org/rust-by-example/testing.html)]
 > **过渡**: Rust 测试策略：从单元测试到属性验证 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 测试策略：从单元测试到属性验证 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 测试策略：从单元测试到属性验证 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

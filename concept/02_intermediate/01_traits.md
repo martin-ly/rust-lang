@@ -7,21 +7,21 @@
 # Traits（Trait 系统）
 >
 > **EN**: Traits
-> **Summary**: Traits. Rust's interface abstraction mechanism defining shared behavior via trait bounds, default implementations, and associated types. Covers trait objects, coherence rules, and advanced patterns.
-> **📎 交叉引用**
+> **Summary**: Traits define shared behavior in Rust: interfaces with methods, associated types, and default implementations that can be composed through trait bounds. The chapter explores implementing traits, trait objects, object safety, the orphan rule, coherence, and advanced patterns such as associated types and blanket impls.
+> **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[Trait](../../knowledge/02_intermediate/06_traits.md)
 > **受众**: [进阶]
 > **层次定位**: L2 进阶概念 / Trait 子域
 > **A/S/P 标记**: **S** — Structure（心智模型）
 > **双维定位**: C×Ana — 分析 Orphan Rule 的设计意图
-> **前置依赖**: [L1 类型系统](../01_foundation/04_type_system.md) ·
-> [L1 所有权](../01_foundation/01_ownership.md)
+> **前置依赖**: [L1 类型系统（Type System）](LINK_PLACEHOLDER) ·
+> [L1 所有权（Ownership）](LINK_PLACEHOLDER)
 > **后置延伸**: [L3 并发](../03_advanced/01_concurrency.md) ·
 > [L4 类型论](../04_formal/02_type_theory.md) ·
 > [L6 设计模式](../06_ecosystem/02_patterns.md)
 > **跨层映射**: L2→L4 Trait ↔ 类型类 (Type Class) | L2→L3 Send/Sync Trait
-> **定理链编号**: T-020 特质一致性 → T-021 孤儿规则完备性 → T-022 关联类型规范化
+> **定理链编号**: T-020 特质一致性（Coherence） → T-021 孤儿规则（Orphan Rule）完备性 → T-022 关联类型规范化
 > **层级**: L2 进阶概念
 > **前置概念**: [Type System Basics](../01_foundation/04_type_system.md) ·
 > [Ownership](../01_foundation/01_ownership.md)
@@ -81,8 +81,8 @@
       - [定义与语法](#定义与语法)
       - [自动推导规则](#自动推导规则)
       - [`unsafe impl` 的例外情况](#unsafe-impl-的例外情况)
-    - [4.4 Trait + 泛型 ⟹ 零成本抽象](#44-trait--泛型--零成本抽象)
-    - [4.5 定理一致性矩阵](#45-定理一致性矩阵)
+    - [4.4 Trait + 泛型（Generics） ⟹ 零成本抽象（Zero-Cost Abstraction）](LINK_PLACEHOLDER)
+    - [4.5 定理一致性（Coherence）矩阵](LINK_PLACEHOLDER)
   - [五、示例与反例（Examples \& Counter-examples）](#五示例与反例examples--counter-examples)
     - [5.1 正确示例：Trait 定义与实现](#51-正确示例trait-定义与实现)
     - [5.2 正确示例：关联类型](#52-正确示例关联类型)
@@ -126,7 +126,7 @@
       - [编译器如何处理 `impl Trait` 返回](#编译器如何处理-impl-trait-返回)
       - [限制：不能用于 trait object](#限制不能用于-trait-object)
       - [形式化语义：存在类型 vs 全称类型](#形式化语义存在类型-vs-全称类型)
-      - [高阶边界：RPITIT 与 HRTB / 生命周期参数](#高阶边界rpitit-与-hrtb--生命周期参数)
+      - [高阶边界：RPITIT 与 HRTB / 生命周期（Lifetimes）参数](LINK_PLACEHOLDER)
     - [补充章节：Const Trait 与 `~const` 实验特性](#补充章节const-trait-与-const-实验特性)
       - [问题背景：const fn 中的 Trait Bound 限制](#问题背景const-fn-中的-trait-bound-限制)
       - [`~const` 语法与 `#[const_trait]`](#const-语法与-const_trait)
@@ -135,7 +135,7 @@
       - [`impl const Trait` 与 `~const` 的区别](#impl-const-trait-与-const-的区别)
       - [替代方案：当前稳定 Rust 的 workaround](#替代方案当前稳定-rust-的-workaround)
     - [补充章节：`#[fundamental]` Attribute 与 Orphan Rule 例外](#补充章节fundamental-attribute-与-orphan-rule-例外)
-      - [目的：为智能指针和引用打开 impl 空间](#目的为智能指针和引用打开-impl-空间)
+      - [目的：为智能指针（Smart Pointer）和引用（Reference）打开 impl 空间](LINK_PLACEHOLDER)
       - [哪些类型是 fundamental](#哪些类型是-fundamental)
       - [为什么这些类型是 fundamental：对下游 crate 的"透明性"](#为什么这些类型是-fundamental对下游-crate-的透明性)
       - [与 `#[non_exhaustive]` 的对比](#与-non_exhaustive-的对比)
@@ -153,7 +153,7 @@
     - [12.4 迁移准备](#124-迁移准备)
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
   - [权威来源索引](#权威来源索引)
-    - [10.5 边界测试：trait 的孤儿规则与 blanket impl 冲突（编译错误）](#105-边界测试trait-的孤儿规则与-blanket-impl-冲突编译错误)
+    - [10.5 边界测试：trait 的孤儿规则（Orphan Rule）与 blanket impl 冲突（编译错误）](LINK_PLACEHOLDER)
     - [10.6 边界测试：关联常量与泛型参数的交互（编译错误）](#106-边界测试关联常量与泛型参数的交互编译错误)
   - [实践](#实践)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
@@ -226,7 +226,7 @@ Trait 作为逻辑命题:
 | **普通 Trait** | `trait Foo { fn bar(&self); }` | `impl Foo for Type` | `dyn Foo` | `Display`、`Debug` |
 | **自动 Trait** | `unsafe auto trait Send {}` | 编译器自动推导 | ❌ | `Send`、`Sync`、`Sized` |
 | **标记 Trait** | `trait Marker {}` | 空实现 | 视情况 | `Copy`、`Sized` |
-| **泛型 Trait** | `trait Add<Rhs=Self>` | `impl Add<i32> for i32` | `dyn Add<i32>` | `Add`、`Mul` |
+| **泛型（Generics） Trait** | `trait Add<Rhs=Self>` | `impl Add<i32> for i32` | `dyn Add<i32>` | `Add`、`Mul` |
 | **关联类型 Trait** | `trait Iterator { type Item; }` | `type Item = T;` | `dyn Iterator<Item=T>` | `Iterator`、`Future` |
 | **生命周期（Lifetimes） Trait** | `trait Borrow<'a>` | 含生命周期参数 | 受限 | `ToOwned`、`Borrow` |
 
@@ -238,10 +238,10 @@ Trait 作为逻辑命题:
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **多态类型** | Ad hoc + 参数化 | Ad hoc + 参数化 | 参数化（约束） | Ad hoc | Structural（隐式） |
 | **实现方式** | 显式 `impl` | 显式 `instance` | 自动匹配（duck typing） | 显式 `implements` | 隐式（结构匹配） |
-| **孤儿规则** | ✅ 严格 | ✅ 严格 | ❌ 无 | ❌ 无 | ❌ 无 |
-| **关联类型** | ✅ | ✅ | ❌ | ❌（泛型替代） | ❌ |
+| **孤儿规则（Orphan Rule）** | ✅ 严格 | ✅ 严格 | ❌ 无 | ❌ 无 | ❌ 无 |
+| **关联类型** | ✅ | ✅ | ❌ | ❌（泛型（Generics）替代） | ❌ |
 | **默认实现** | ✅ | ✅（default methods） | ❌ | ✅（default methods） | ❌ |
-| **静态分发** | ✅ 单态化 | ✅ | ✅ 模板实例化 | ❌（虚方法默认） | ✅ 接口表 |
+| **静态分发** | ✅ 单态化（Monomorphization） | ✅ | ✅ 模板实例化 | ❌（虚方法默认） | ✅ 接口表 |
 | **动态分发** | ✅ `dyn Trait` | ❌（通常） | ✅ 虚函数 | ✅ 默认 | ✅ 接口值 |
 
 > **来源: [Wikipedia: Type class](https://en.wikipedia.org/wiki/Type_class)** Type class 支持 ad hoc 多态，Rust Trait 直接受 Haskell Type Class 启发。 ✅
@@ -328,7 +328,7 @@ graph TD
 
 ## 四、定理推理链（Theorem Chain）
 
-> **[来源: [RFC 1023](https://rust-lang.github.io/rfcs//1023-rebalancing-coherence.html); Rust Reference: Coherence]** Orphan Rule 是 Coherence 的工程实现机制，二者共同保证单态化的确定性。
+> **[来源: [RFC 1023](https://rust-lang.github.io/rfcs//1023-rebalancing-coherence.html); Rust Reference: Coherence]** Orphan Rule 是 Coherence 的工程实现机制，二者共同保证单态化（Monomorphization）的确定性。
 
 ### 4.1 引理：Orphan Rule ⟹ Coherence ⟹ 全局唯一 impl
 
@@ -378,7 +378,7 @@ impl<P₁...Pn> Trait<T₁...Tm> for Type
 #### Blanket impl 与 Horn 子句可满足性
 
 > **来源**: [Rust Reference: Impl overlapping](https://doc.rust-lang.org/reference/) · [Rust Reference: min_specialization](https://doc.rust-lang.org/reference/) · [Dowek & Jiang 2011 — Eigenvariables, bracketing and the decidability of positive minimal predicate logic] · [Rust Internals: Specialization soundness issues]
-> **来源: [Rust Reference: Coherence — 完整规则集](https://doc.rust-lang.org/reference/)** Coherence 系统是 Rust 类型检查器的核心，其实现分布在 rustc_trait_selection crate 的 coherence 模块中。
+> **来源: [Rust Reference: Coherence — 完整规则集](https://doc.rust-lang.org/reference/)** Coherence 系统是 Rust 类型检查器的核心，其实现分布在 rustc_trait_selection crate 的 coherence 模块（Module）中。
 
 ---
 
@@ -405,7 +405,7 @@ impl<P₁...Pn> Trait<T₁...Tm> for Type
 
 Auto trait 由 `auto trait` 关键字声明，是编译器自动为类型实现的标记 trait。
 标准库中最重要的 Auto trait 是 `Send` 和 `Sync`
-——`Send` 表示类型可安全跨线程转移所有权（值 move 到另一线程无数据竞争），`Sync` 表示类型可安全跨线程共享引用（`&T` 可在多线程间安全读取）：
+——`Send` 表示类型可安全跨线程转移所有权（Ownership）（值 move 到另一线程无数据竞争），`Sync` 表示类型可安全跨线程共享引用（`&T` 可在多线程间安全读取）：
 
 ```rust,ignore
 // Send: 标记可安全跨线程转移所有权的类型（值 move 到另一线程安全）
@@ -419,7 +419,7 @@ pub unsafe auto trait Sync {}
 > T: Sync ⇔ &T: Send，即 T 的共享引用可安全跨线程共享。
 
 与普通 trait 不同，Auto trait **不含任何关联项（方法、类型、常量）**，仅作为类型的编译期属性标记。
-`unsafe` 前缀意味着：当开发者通过 `unsafe impl` 手动实现或覆盖时，必须自行承担内存安全与线程安全的正确性责任。
+`unsafe` 前缀意味着：当开发者通过 `unsafe impl` 手动实现或覆盖时，必须自行承担内存安全（Memory Safety）与线程安全的正确性责任。
 
 > **Send 核心语义**:
 > `Send` 标记**可以安全跨线程转移所有权**的类型——即值的所有权从一个线程 move 到另一个线程不会导致数据竞争或内存不安全
@@ -441,7 +441,7 @@ pub unsafe auto trait Sync {}
 边界: 可通过 unsafe impl 手动覆盖；原始指针保守默认为 !Send/!Sync
 ```
 
-> **来源: [Rust Reference: Auto Traits](https://doc.rust-lang.org/reference/)** 结构化归纳推导是编译器对复合类型自动实现 Auto Trait 的标准机制，原始指针因保守策略默认排除。
+> **来源: [Rust Reference: Auto Traits](https://doc.rust-lang.org/reference/)** 结构化归纳推导是编译器对复合类型自动实现 Auto Trait 的标准机制，原始指针（Raw Pointer）因保守策略默认排除。
 
 具体规则如下：
 
@@ -450,7 +450,7 @@ pub unsafe auto trait Sync {}
 | `struct Foo<T>` | 所有字段 `T: Send` | 所有字段 `T: Sync` | 逐字段递归检查 |
 | `enum Bar` | 所有变体的所有字段满足 | 所有变体的所有字段满足 | 取变体并集 |
 | `Vec<T>` | `T: Send` | `T: Sync` | 标准库内部已声明 |
-| `*const T` / `*mut T` | ❌ 默认 !Send | ❌ 默认 !Sync | 原始指针保守策略 |
+| `*const T` / `*mut T` | ❌ 默认 !Send | ❌ 默认 !Sync | 原始指针（Raw Pointer）保守策略 |
 | `Rc<T>` | ❌ !Send（非原子引用计数） | ❌ !Sync | 内部状态非线程安全 |
 | `PhantomData<T>` | `T: Send` | `T: Sync` | 零大小，仅作标记 |
 
@@ -493,13 +493,13 @@ impl !Sync for RawFd {}  // 显式阻止自动 Sync
 > `unsafe impl Send/Sync` 是 Rust 并发抽象的安全根基。
 > 错误的实现会导致数据竞争、悬垂指针等未定义行为（UB）。
 > 仅在类型内部同步机制（如 Mutex、原子操作（Atomic Operations））确实保证线程安全时才应手动实现。
-> 一旦违反，整个程序的类型系统保证即告失效。
+> 一旦违反，整个程序的类型系统（Type System）保证即告失效。
 
 ### 4.4 Trait + 泛型 ⟹ 零成本抽象
 
 > **[TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html)** ·
 > **[Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/glossary.html#monomorphization)**
-> Trait 泛型的零成本抽象由单态化和编译器内联优化保证。 ✅ 已验证
+> Trait 泛型的零成本抽象（Zero-Cost Abstraction）由单态化（Monomorphization）和编译器内联优化保证。 ✅ 已验证
 
 ```text
 前提 1: Trait 定义接口契约
@@ -518,12 +518,12 @@ impl !Sync for RawFd {}  // 显式阻止自动 Sync
 
 | **定理/引理/推论** | **前提** | **结论** | **依赖的 L4 公理** | **被哪些定理依赖** | **失效条件** | **典型错误码** |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **引理**: Orphan Rule ⟹ Coherence | crate 边界清晰；至少一方本地 | impl 声明位置受限，无跨 crate 孤儿 impl | 类型论一致性；模块化封装 | 全局唯一 impl；Blanket impl 可满足 | `#[fundamental]` 类型例外（`&T`, `Box<T>`, `&mut T`） | E0117 |
+| **引理**: Orphan Rule ⟹ Coherence | crate 边界清晰；至少一方本地 | impl 声明位置受限，无跨 crate 孤儿 impl | 类型论一致性；模块（Module）化封装 | 全局唯一 impl；Blanket impl 可满足 | `#[fundamental]` 类型例外（`&T`, `Box<T>`, `&mut T`） | E0117 |
 | **定理**: 全局唯一 impl | Orphan Rule + 无重叠 impl | 调用目标唯一确定；单态化可行 | Coherence 公理 | 单态化零成本；Trait 对象安全 | specialization（min_specialization 不稳定） | E0119 |
-| **定理**: Trait 对象安全 | 方法无 `Self: Sized`；无泛型方法；无静态方法 | `dyn Trait` 是合法类型；vtable 可构造 | 存在类型 + vtable 理论 | 运行时多态分发；`Box<dyn Trait>` | `Self: Sized` superbound；泛型方法 | E0038 |
-| **推论**: Auto Trait 结构化推导 | 所有字段满足 Auto Trait；类型非 `!Trait` 覆盖 | 复合类型自动实现 Send/Sync/Sized/Unpin | 结构化推导规则；归纳定义 | 并发安全分析；类型布局推导 | `unsafe impl !Send for T` 手动否定；原始指针保守 | — |
+| **定理**: Trait 对象安全 | 方法无 `Self: Sized`；无泛型方法；无静态方法 | `dyn Trait` 是合法类型；vtable 可构造 | 存在类型 + vtable 理论 | 运行时（Runtime）多态分发；`Box<dyn Trait>` | `Self: Sized` superbound；泛型方法 | E0038 |
+| **推论**: Auto Trait 结构化推导 | 所有字段满足 Auto Trait；类型非 `!Trait` 覆盖 | 复合类型自动实现 Send/Sync/Sized/Unpin | 结构化推导规则；归纳定义 | 并发安全（Concurrency Safety）分析；类型布局推导 | `unsafe impl !Send for T` 手动否定；原始指针保守 | — |
 | **引理**: Supertrait 传递 | `trait A: B` 声明 | A 的实现者必须实现 B | 子类型传递性；偏序关系 | Trait 层次设计；对象安全传递 | 循环 supertrait（`trait A: B; trait B: A`） | E0399 / E0398 |
-| **定理**: Trait + 泛型零成本 | 单态化 + LLVM 内联优化 | 无运行时开销；直接函数调用 | Parametricity；β-归约 | 性能敏感代码路径优化 | `dyn Trait` 动态分发选择 | — |
+| **定理**: Trait + 泛型零成本 | 单态化 + LLVM 内联优化 | 无运行时（Runtime）开销；直接函数调用 | Parametricity；β-归约 | 性能敏感代码路径优化 | `dyn Trait` 动态分发选择 | — |
 | **引理**: Blanket impl 可满足 | `impl<T: A> B for T` 形式 | 全称量词 + 蕴含；Horn 子句可满足 | Horn 子句逻辑；一阶可满足性 | 默认行为提供；组合子设计 | 与具体 impl 重叠（如 `impl Foo for Vec<T>` + `impl<T> Foo for T`） | E0119 |
 | **推论**: GATs 约束可满足 | 关联类型参数合法；无递归约束 | 泛型关联类型可实例化 | System Fω 约束；类型族 | HKT 模拟；类型级编程 | 无界递归归一化；不一致约束 | E0275 / E0049 |
 | **引理**: `impl Trait` 存在类型 | 返回类型满足 Trait；单一具体类型 | 抽象返回类型；隐藏实现细节 | 存在量化 ∃T.Trait(T) | API 设计；版本兼容性 | 多分支返回不同类型（除非 `dyn Trait`） | E0746 / E0706 |
@@ -700,7 +700,7 @@ GATs 本质上是**受限的 HKT 模拟**：关联类型上的泛型参数允许
 
 #### Lending Iterator 示例
 
-GATs 的经典用例是"出借迭代器"——每次 `next` 返回的引用生命周期依赖于 `self` 的借用：
+GATs 的经典用例是"出借迭代器（Iterator）"——每次 `next` 返回的引用生命周期（Lifetimes）依赖于 `self` 的借用（Borrowing）：
 
 ```rust
 trait LendingIterator {
@@ -921,7 +921,7 @@ T add(T a, T b) { return a + b; }
 
 ## 六、反命题与边界分析（Counter-proposition & Boundary Analysis）
 
-> **[RFC 1023](https://rust-lang.github.io/rfcs//1023-rebalancing-coherence.html)** · **[Rust Reference: Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)** · **[Rust Reference: Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety)** 反命题分析基于 Trait 系统的形式化语义和已知边界案例，按四层（编译期/运行时/语义/工程）系统分类。反例节点用 `fill:#f66`，定理成立用 `fill:#6f6`。 ✅ 已验证
+> **[RFC 1023](https://rust-lang.github.io/rfcs//1023-rebalancing-coherence.html)** · **[Rust Reference: Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)** · **[Rust Reference: Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety)** 反命题分析基于 Trait 系统的形式化语义和已知边界案例，按四层（编译期/运行时（Runtime）/语义/工程）系统分类。反例节点用 `fill:#f66`，定理成立用 `fill:#6f6`。 ✅ 已验证
 
 ### 6.1 反命题 1: "Trait 实现总是无冲突的"
 
@@ -1357,7 +1357,7 @@ fn notify<T: Summary>(item: &T) { ... }
 | GATs 设计 | [RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html) | ✅ |
 | Negative impls | [RFC 683](https://github.com/rust-lang/rfcs/pull/683) | ✅ |
 
-> **过渡到相关概念链接**: 知识来源确立了单个论断的可信度，但 Trait 系统不是孤立存在的。下一节通过相关概念链接，将 Trait 与泛型、所有权（Ownership）、并发、异步等前置和后置概念编织成知识网络，为跨章节学习提供导航。
+> **过渡到相关概念链接**: 知识来源确立了单个论断的可信度，但 Trait 系统不是孤立存在的。下一节通过相关概念链接，将 Trait 与泛型、所有权（Ownership）、并发、异步（Async）等前置和后置概念编织成知识网络，为跨章节学习提供导航。
 
 ---
 
@@ -1369,7 +1369,7 @@ fn notify<T: Summary>(item: &T) { ... }
 | 所有权与生命周期 | [01_foundation/01_ownership.md](../01_foundation/01_ownership.md) | Trait 方法签名的基础约束 |
 | 类型系统基础 | [01_foundation/04_type_system.md](../01_foundation/04_type_system.md) | Trait 的理论前提 |
 | 并发与 Send/Sync | [03_advanced/01_concurrency.md](../03_advanced/01_concurrency.md) | Auto Trait 的核心应用 |
-| 异步与 Future | [03_advanced/02_async.md](../03_advanced/02_async.md) | 关联类型 Trait 的典型场景 |
+| 异步（Async）与 Future | [03_advanced/02_async.md](LINK_PLACEHOLDER) | 关联类型 Trait 的典型场景 |
 | 形式化验证 | [04_formal/04_rustbelt.md](../04_formal/04_rustbelt.md) | Trait 系统的逻辑基础 |
 
 > **过渡到待补充方向**: 相关概念链接描绘了 Trait 在知识体系中的坐标，但任何文档都有演进空间。最后一节记录已识别的待补充项和优先级，为后续迭代提供明确的路线图。
@@ -1427,7 +1427,7 @@ impl DrawableExplicit for Point {
 }
 ```
 
-> **来源: [Rust Reference: RPITIT; TRPL: Ch19.3](https://doc.rust-lang.org/reference/)** AFIT 隐藏具体类型，调用方仅知其满足 Trait；显式关联类型允许调用方通过 `T::Output` 引用，且支持 trait object。
+> **来源: [Rust Reference: RPITIT; TRPL: Ch19.3](https://doc.rust-lang.org/reference/)** AFIT 隐藏具体类型，调用方仅知其满足 Trait；显式关联类型允许调用方通过 `T::Output` 引用（Reference），且支持 trait object。
 
 #### 编译器如何处理 `impl Trait` 返回
 
@@ -1522,7 +1522,7 @@ trait Builder {
 }
 ```
 
-**高阶限制**：RPITIT 目前**不支持**在 trait 定义中同时存在多个 `impl Trait` 返回类型或嵌套存在类型；每个方法只能有一个匿名的存在类型返回值。这保持了类型推断的可判定性——避免 System F_ω 中无限制存在类型导致的类型检查不可判定问题。
+**高阶限制**：RPITIT 目前**不支持**在 trait 定义中同时存在多个 `impl Trait` 返回类型或嵌套存在类型；每个方法只能有一个匿名的存在类型返回值。这保持了类型推断（Type Inference）的可判定性——避免 System F_ω 中无限制存在类型导致的类型检查不可判定问题。
 
 > **[RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)** RPITIT 的设计刻意限制在"单个返回位置存在类型"，以平衡表达力与编译器实现复杂度。✅
 
@@ -1824,7 +1824,7 @@ match err {
 }
 ```
 
-**关键对比**: `#[fundamental]` 表示"此类型的行为是透明的，可以安全地基于其内容类型进行扩展"；`#[non_exhaustive]` 表示"此类型的定义是不完整的，不能安全地基于其当前结构做穷尽假设"。二者分别从**impl 空间**和**模式匹配空间**控制类型的开放边界。
+**关键对比**: `#[fundamental]` 表示"此类型的行为是透明的，可以安全地基于其内容类型进行扩展"；`#[non_exhaustive]` 表示"此类型的定义是不完整的，不能安全地基于其当前结构做穷尽假设"。二者分别从**impl 空间**和**模式匹配（Pattern Matching）空间**控制类型的开放边界。
 
 > **来源**: [RFC 2008 — non_exhaustive](https://rust-lang.github.io/rfcs//2008-non-exhaustive.html) · [Rust Reference: non_exhaustive](https://doc.rust-lang.org/reference/attributes/type_system.html#the-non_exhaustive-attribute) · [RFC 2451](https://rust-lang.github.io/rfcs//2451-re-rebalancing-coherence.html)
 
@@ -2099,7 +2099,7 @@ fn use_config<C: Config>() -> [u8; C::MAX_SIZE] {
 fn main() {}
 ```
 
-> **修正**: Rust 的**关联常量**（associated constant）是 trait 的一部分，但**不能**直接用于 `const generic` 数组大小。原因：关联常量依赖于具体实现，而 `const generic` 要求编译期确定的值。变通方案：1) 使用 `generic_const_exprs`（nightly，不稳定）；2) 用宏生成固定大小的数组；3) 使用 `Box<[u8]>` 或 `Vec<u8>`（运行时大小）；4) `typenum` crate（类型级整数）。关联常量的其他用途：1) 配置参数（`MAX_SIZE`、`VERSION`）；2) 类型标识（`const NAME: &'static str`）；3) 与 `const fn` 结合计算派生常量。这与 C++ 的 `static constexpr`（可在模板参数中使用）或 Swift 的 `associatedtype` + `static let`（类似限制）不同——Rust 的关联常量与 const generics 的集成仍在演进。[来源: [Rust Reference — Associated Constants](https://doc.rust-lang.org/reference/items/associated-items.html#associated-constants)] · [来源: [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs//2000-const-generics.html)]
+> **修正**: Rust 的**关联常量**（associated constant）是 trait 的一部分，但**不能**直接用于 `const generic` 数组大小。原因：关联常量依赖于具体实现，而 `const generic` 要求编译期确定的值。变通方案：1) 使用 `generic_const_exprs`（nightly，不稳定）；2) 用宏（Macro）生成固定大小的数组；3) 使用 `Box<[u8]>` 或 `Vec<u8>`（运行时大小）；4) `typenum` crate（类型级整数）。关联常量的其他用途：1) 配置参数（`MAX_SIZE`、`VERSION`）；2) 类型标识（`const NAME: &'static str`）；3) 与 `const fn` 结合计算派生常量。这与 C++ 的 `static constexpr`（可在模板参数中使用）或 Swift 的 `associatedtype` + `static let`（类似限制）不同——Rust 的关联常量与 const generics 的集成仍在演进。[来源: [Rust Reference — Associated Constants](https://doc.rust-lang.org/reference/items/associated-items.html#associated-constants)] · [来源: [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs//2000-const-generics.html)]
 
 ## 实践
 
@@ -2121,7 +2121,7 @@ fn main() {}
 >
 > - E0117 (only traits defined in the current crate can be implemented for arbitrary types) → Orphan Rule 违反
 > - E0038 (trait cannot be made into an object) → Trait 对象安全条件不满足 → 检查 `Self: Sized` 方法
-> - E0283 (type annotations needed) → 单态化类型推断歧义 → 显式指定类型参数
+> - E0283 (type annotations needed) → 单态化类型推断（Type Inference）歧义 → 显式指定类型参数
 
 ## 参考来源
 

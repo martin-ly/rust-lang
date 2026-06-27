@@ -9,7 +9,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Ana — 分析并发模式的设计意图
-> **定位**: 深入分析 Rust **并发编程的高级模式**——从 Actor 模型、通道模式到无锁数据结构和内存序，揭示 Rust 所有权系统如何为并发安全提供编译期保证。
+> **定位**: 深入分析 Rust **并发编程的高级模式**——从 Actor 模型、通道模式到无锁数据结构和内存序，揭示 Rust 所有权（Ownership）系统如何为并发安全（Concurrency Safety）提供编译期保证。
 > **前置概念**: [Concurrency](./01_concurrency.md) · [Async](./02_async.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Distributed Systems](../06_ecosystem/18_distributed_systems.md) · [Lockfree](../03_advanced/01_concurrency.md)
 
@@ -28,8 +28,8 @@
 - [并发 模式：从消息 传递到锁自由的数据结构](#并发-模式从消息-传递到锁自由的数据结构)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 所有权与并发的统一](#11-所有权与并发的统一)
-    - [1.2 Send 与 Sync：编译期并发安全](#12-send-与-sync编译期并发安全)
+    - [1.1 所有权（Ownership）与并发的统一](LINK_PLACEHOLDER)
+    - [1.2 Send 与 Sync：编译期并发安全（Concurrency Safety）](LINK_PLACEHOLDER)
     - [1.3 共享状态 vs 消息传递](#13-共享状态-vs-消息传递)
   - [二、技术细节](#二技术细节)
     - [2.1 通道模式](#21-通道模式)
@@ -41,7 +41,7 @@
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
     - [编译错误示例](#编译错误示例)
-    - [4.4 边界测试：`ScopedThread` 中引用逃逸（编译错误）](#44-边界测试scopedthread-中引用逃逸编译错误)
+    - [4.4 边界测试：`ScopedThread` 中引用（Reference）逃逸（编译错误）](LINK_PLACEHOLDER)
     - [4.5 边界测试：`Condvar` 虚假唤醒未处理（逻辑错误）](#45-边界测试condvar-虚假唤醒未处理逻辑错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
@@ -150,7 +150,7 @@ fn spawn_thread<T: Send + 'static>(data: T) {
 }
 ```
 
-> **Send/Sync 洞察**: `Send` 和 `Sync` 是 Rust **并发安全的类型系统根基**——它们将线程安全从文档约定提升为**编译期可验证的属性**。
+> **Send/Sync 洞察**: `Send` 和 `Sync` 是 Rust **并发安全的类型系统（Type System）根基**——它们将线程安全从文档约定提升为**编译期可验证的属性**。
 > [来源: [std::marker::Send](https://doc.rust-lang.org/std/marker/trait.Send.html)]
 
 ---
@@ -196,7 +196,7 @@ fn spawn_thread<T: Send + 'static>(data: T) {
     });
 ```
 
-> **模型洞察**: Rust 的**所有权系统**使两种模型都可以**安全地实现**——消息传递自动转移所有权，共享状态通过类型系统保证互斥。
+> **模型洞察**: Rust 的**所有权系统**使两种模型都可以**安全地实现**——消息传递自动转移所有权，共享状态通过类型系统（Type System）保证互斥。
 > [来源: [Rust By Example — Concurrency](https://doc.rust-lang.org/rust-by-example/std_misc/threads.html)]
 
 ---
@@ -506,7 +506,7 @@ fn mutex_guard_lifetime() {
 }
 ```
 
-> **修正**: 避免将 `MutexGuard` 移动到闭包中。若需跨线程共享数据，使用 `Arc<Mutex<T>>` 并在每个线程中独立 `lock()`。
+> **修正**: 避免将 `MutexGuard` 移动到闭包（Closures）中。若需跨线程共享数据，使用 `Arc<Mutex<T>>` 并在每个线程中独立 `lock()`。
 
 ```rust,compile_fail
 use std::sync::Arc;
@@ -540,7 +540,7 @@ fn thread_spawn_lifetime() {
 }
 ```
 
-> **修正**: `thread::spawn` 要求闭包满足 `'static` 生命周期（Lifetimes）。引用栈数据必须通过 `move` 闭包转移所有权，或使用 `crossbeam::scope` 进行有界线程。
+> **修正**: `thread::spawn` 要求闭包（Closures）满足 `'static` 生命周期（Lifetimes）。引用（Reference）栈数据必须通过 `move` 闭包转移所有权，或使用 `crossbeam::scope` 进行有界线程。
 
 ### 4.4 边界测试：`ScopedThread` 中引用逃逸（编译错误）
 
@@ -570,7 +570,7 @@ fn scoped_fixed() {
 }
 ```
 
-> **修正**: `std::thread::scope`（Rust 1.63+）允许创建非 `'static` 线程，保证所有子线程在 scope 结束时 join。这通过编译期生命周期检查实现——闭包借用栈数据的生命周期与 scope 绑定。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `std::thread::scope`（Rust 1.63+）允许创建非 `'static` 线程，保证所有子线程在 scope 结束时 join。这通过编译期生命周期（Lifetimes）检查实现——闭包借用（Borrowing）栈数据的生命周期与 scope 绑定。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 4.5 边界测试：`Condvar` 虚假唤醒未处理（逻辑错误）
 
@@ -636,7 +636,7 @@ fn fixed() {
 | [TRPL — Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) | ✅ 一级 | 基础教程 |
 | [crossbeam](https://docs.rs/crossbeam/latest/crossbeam/) | ✅ 一级 | 无锁并发 |
 | [rayon](https://docs.rs/rayon/latest/rayon/) | ✅ 一级 | 数据并行 |
-| [tokio::sync](https://docs.rs/tokio/latest/tokio/sync/index.html) | ✅ 一级 | 异步同步 |
+| [tokio::sync](https://docs.rs/tokio/latest/tokio/sync/index.html) | ✅ 一级 | 异步（Async）同步 |
 
 ---
 
@@ -767,7 +767,7 @@ fn main() {
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | 并发 模式：从消息 传递到锁自由的数据结构 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 并发 模式：从消息 传递到锁自由的数据结构 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 并发 模式：从消息 传递到锁自由的数据结构 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 并发 模式：从消息 传递到锁自由的数据结构 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 无数据竞争 ⟸ Send/Sync 正确实现 ⟸ 类型系统验证
@@ -776,7 +776,7 @@ fn main() {
 
 > **过渡**: 在实践中应用 并发 模式：从消息 传递到锁自由的数据结构 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: 并发 模式：从消息 传递到锁自由的数据结构 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 并发 模式：从消息 传递到锁自由的数据结构 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

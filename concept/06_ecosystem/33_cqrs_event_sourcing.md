@@ -13,10 +13,11 @@
 > **Bloom 层级**: 分析 → 创造
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Cre — 设计高可靠分布式系统的数据持久化模式
-> **前置依赖**: [Async](../03_advanced/02_async.md) · [事件驱动架构](./32_event_driven_architecture.md) · [泛型](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md)
+> **前置依赖**: [Async](LINK_PLACEHOLDER) · [事件驱动架构](LINK_PLACEHOLDER) · [泛型（Generics）](LINK_PLACEHOLDER) · [Trait](LINK_PLACEHOLDER)
 > **后置延伸**: [分布式系统](./18_distributed_systems.md) · [微服务架构模式](./31_microservice_patterns.md) · [云原生](./24_cloud_native.md)
 >
 > **来源**: [eventstore-rs](https://docs.rs/eventstore/) · [cqrs-es](https://docs.rs/cqrs-es/)
+> **前置概念**: N/A
 ---
 
 > **来源**: [Martin Fowler — CQRS](https://martinfowler.com/bliki/CQRS.html) ·
@@ -54,7 +55,7 @@
   - [五、CQRS+ES 协同模式](#五cqrses-协同模式)
     - [5.1 Saga / Process Manager 编排](#51-saga--process-manager-编排)
     - [5.2 Outbox 模式：保证事件发布](#52-outbox-模式保证事件发布)
-    - [5.3 读模型的最终一致性](#53-读模型的最终一致性)
+    - [5.3 读模型的最终一致性（Coherence）](LINK_PLACEHOLDER)
   - [六、Rust 实现](#六rust-实现)
     - [6.1 事件定义与序列化](#61-事件定义与序列化)
     - [6.2 命令处理器](#62-命令处理器)
@@ -64,7 +65,7 @@
     - [7.1 反命题树](#71-反命题树)
     - [7.2 边界极限](#72-边界极限)
   - [十、边界测试](#十边界测试)
-    - [10.1 边界测试：无快照的查询退化（运行时性能）](#101-边界测试无快照的查询退化运行时性能)
+    - [10.1 边界测试：无快照的查询退化（运行时（Runtime）性能）](LINK_PLACEHOLDER)
     - [10.2 边界测试：双写不一致导致数据丢失（逻辑错误）](#102-边界测试双写不一致导致数据丢失逻辑错误)
     - [10.3 边界测试：事件模式演化破坏反序列化（编译/运行时错误）](#103-边界测试事件模式演化破坏反序列化编译运行时错误)
   - [相关概念文件](#相关概念文件)
@@ -72,7 +73,7 @@
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：CQRS（命令查询职责分离）的核心思想是什么？与传统 CRUD 架构有什么区别？（理解层）](#测验-1cqrs命令查询职责分离的核心思想是什么与传统-crud-架构有什么区别理解层)
     - [测验 2：Event Sourcing（事件溯源）中，系统状态如何重建？（理解层）](#测验-2event-sourcing事件溯源中系统状态如何重建理解层)
-    - [测验 3：Rust 的强类型系统对实现 CQRS/Event Sourcing 有什么帮助？（理解层）](#测验-3rust-的强类型系统对实现-cqrsevent-sourcing-有什么帮助理解层)
+    - [测验 3：Rust 的强类型系统（Type System）对实现 CQRS/Event Sourcing 有什么帮助？（理解层）](LINK_PLACEHOLDER)
     - [测验 4：在 Event Sourcing 中，如何处理"事件 schema 演进"（Event Schema Evolution）？（理解层）](#测验-4在-event-sourcing-中如何处理事件-schema-演进event-schema-evolution理解层)
     - [测验 5：CQRS + Event Sourcing 相比传统架构增加了什么复杂度？什么场景下不值得使用？（理解层）](#测验-5cqrs--event-sourcing-相比传统架构增加了什么复杂度什么场景下不值得使用理解层)
   - [认知路径](#认知路径)
@@ -198,7 +199,7 @@ impl BankAccountState {
 }
 ```
 
-> **与 Rust 所有权的契合**: 事件溯源的**不可变性**与 Rust 的**所有权转移**哲学高度一致：
+> **与 Rust 所有权（Ownership）的契合**: 事件溯源的**不可变性**与 Rust 的**所有权转移**哲学高度一致：
 >
 > - 事件一旦产生即不可修改（只能通过**补偿事件**修正，如 `DepositReversed`）
 > - 这与 Rust 的 `let x = v; let y = x;`（`x` 失效）形成有趣的分布式类比——事件序列的单向追加就是分布式系统中的"Move 语义"
@@ -270,7 +271,7 @@ graph TB
 | **历史追溯** | ❌ 丢失 | ❌ 丢失 | ✅ 完整事件序列 |
 | **审计能力** | 需审计表 | 需审计表 | ✅ 天然审计 |
 | **查询复杂度** | 高（JOIN 多）| 低（读模型去规范化）| 低（物化视图）|
-| **最终一致性** | 强一致 | 可选择 | ✅ 天然最终一致 |
+| **最终一致性（Coherence）** | 强一致 | 可选择 | ✅ 天然最终一致 |
 | **存储成本** | 低 | 中 | 高（事件积累）|
 | **团队认知负荷** | 低 | 中 | 高（事件思维）|
 | **Rust 生态支持** | sqlx/sea-orm | sqlx + redis | eventstore + serde |
@@ -445,7 +446,7 @@ impl OrderProjection {
 | **架构** | 单一 PostgreSQL | PostgreSQL + Redis/ES | 独立的命令/查询服务 |
 | **命令端** | 写入主表 | 写入事件存储 | 通过 API 调用命令服务 |
 | **查询端** | 读取主表（只读事务）| 读取物化视图 | 通过 API 调用查询服务 |
-| **一致性** | 强一致 | 最终一致 | 最终一致 |
+| **一致性（Coherence）** | 强一致 | 最终一致 | 最终一致 |
 | **复杂度** | 低 | 中 | 高 |
 | **适用场景** | 简单 CQRS | 中等复杂度系统 | 大规模微服务 |
 
@@ -511,7 +512,7 @@ async fn append_with_occ(
 > **与 Rust 的契合**: 事件存储的追加模型与 Rust 的**不可变数据结构**哲学一致：
 >
 > - `RecordedEvent` 的所有字段都是不可变的（`struct` 默认不可变）
-> - `append` 操作接收 `&[OrderEvent]`（共享引用），不修改输入事件
+> - `append` 操作接收 `&[OrderEvent]`（共享引用（Reference）），不修改输入事件
 > - 乐观并发控制通过 `expected_version` 实现，类似于 Rust 的 CAS（Compare-And-Swap）操作
 >
 > **来源**: [EventStoreDB — Appending Events](https://developers.eventstore.com/server/v24.10/streams.html#appending-events) · [Fowler — Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html)
@@ -856,7 +857,7 @@ impl ConsistencyMetrics {
 
 > **最终一致性的工程处理**:
 >
-> - **前端乐观更新**：用户提交命令后，前端立即显示预期结果，后台异步同步真实状态
+> - **前端乐观更新**：用户提交命令后，前端立即显示预期结果，后台异步（Async）同步真实状态
 > - **读己之写**（Read-Your-Own-Writes）：在会话上下文中，查询端优先返回会话内已提交的写操作结果
 > - **版本向量**：客户端传递最后已知版本号，查询端若版本滞后则等待或返回提示
 >
@@ -1224,7 +1225,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 | **事件存储容量** | EventStoreDB 可处理 TB 级 | 无限追加导致存储成本线性增长 | 需要事件归档策略（冷存储）|
 | **投影延迟** | 通常 < 100ms | 受限于网络吞吐和消费者速度 | 前端需处理最终一致性 |
 | **Saga 补偿** | 手动实现补偿逻辑 | 补偿本身可能失败（级联故障）| 需要补偿的补偿（无限回归）|
-| **模式演化** | Upcasting / 版本化枚举 | 事件格式不可破坏式变更 | 需要严格的事件契约治理 |
+| **模式演化** | Upcasting / 版本化枚举（Enum） | 事件格式不可破坏式变更 | 需要严格的事件契约治理 |
 | **跨边界上下文** | 事件驱动的上下文映射 | 不存在全局一致的事件总线 | 需要显式的上下文契约（Anti-Corruption Layer）|
 
 > **来源**: [Fowler — CQRS](https://martinfowler.com/bliki/CQRS.html) · [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)) · [Vernon — Implementing DDD](https://www.amazon.com/Implementing-Domain-Driven-Design-Vaughn-Vernon/dp/0321834577)
@@ -1340,7 +1341,7 @@ fn good_deserialization() {
 > 1. **只添加字段**（从不删除或重命名）
 > 2. **使用 `Option<T>` 包装新字段**（旧事件无该字段时反序列化为 `None`）
 > 3. **显式版本标记**（`#[serde(tag = "version")]`）
-> 4. **Upcasting 层**（专门的版本转换模块）
+> 4. **Upcasting 层**（专门的版本转换模块（Module））
 >
 > **来源**: [Axon Framework — Event Versioning](https://docs.axoniq.io/reference-guide/axon-framework/events/event-versioning) · [serde 文档](https://serde.rs/)
 
@@ -1409,12 +1410,12 @@ fn good_deserialization() {
 
 ### 测验 3：Rust 的强类型系统对实现 CQRS/Event Sourcing 有什么帮助？（理解层）
 
-**题目**: Rust 的强类型系统对实现 CQRS/Event Sourcing 有什么帮助？
+**题目**: Rust 的强类型系统（Type System）对实现 CQRS/Event Sourcing 有什么帮助？
 
 <details>
 <summary>✅ 答案与解析</summary>
 
-Command 和 Event 可定义为枚举/struct，编译期保证处理器只接受有效命令、只产生有效事件。序列化/反序列化通过 Serde 保证 schema 兼容。
+Command 和 Event 可定义为枚举（Enum）/struct，编译期保证处理器只接受有效命令、只产生有效事件。序列化/反序列化通过 Serde 保证 schema 兼容。
 </details>
 
 ---

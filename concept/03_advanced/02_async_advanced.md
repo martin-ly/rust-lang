@@ -5,11 +5,12 @@
 > **EN**: Async Advanced
 > **Summary**: Async Advanced: advanced Rust topics, performance/runtime considerations, and ecosystem patterns.
 > **受众**: [专家]
-> **层次定位**: L3 高级概念 / 异步子域 — 高级主题
+> **层次定位**: L3 高级概念 / 异步（Async）子域 — 高级主题
 > **前置依赖**: [Async/Await 基础](./02_async.md)
 > **定理链编号**: T-053 Waker 活性 ⟹ T-054 Stream 安全性
 >
 > **来源**: [Async Book](https://rust-lang.github.io/async-book/) · [TRPL — Async/Await](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html)
+> **前置概念**: N/A
 ---
 
 > **后置概念**: [Formal Verification](../04_formal/03_ownership_formal.md)
@@ -25,15 +26,15 @@
     - [8.10 `Stream` / `Sink` trait 完整分析](#810-stream--sink-trait-完整分析)
     - [8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异](#811-pinboxdyn-future-vs-impl-future-的性能差异)
     - [8.12 `loom` 并发模型检测工具](#812-loom-并发模型检测工具)
-    - [8.13 Miri 动态验证：async 状态机的内存安全检测](#813-miri-动态验证async-状态机的内存安全检测)
+    - [8.13 Miri 动态验证：async 状态机的内存安全（Memory Safety）检测](LINK_PLACEHOLDER)
       - [场景 1：悬垂指针检测（使用已释放的 Box）](#场景-1悬垂指针检测使用已释放的-box)
       - [场景 2：无效值检测（非法 bool 构造）](#场景-2无效值检测非法-bool-构造)
       - [场景 3：async 状态机中的未初始化内存](#场景-3async-状态机中的未初始化内存)
       - [Miri 与 async 状态机的特殊关联](#miri-与-async-状态机的特殊关联)
   - [九、知识来源关系（Provenance）](#九知识来源关系provenance)
-  - [十、边界测试：高级异步模式的编译错误](#十边界测试高级异步模式的编译错误)
-    - [10.1 边界测试：`select!` 宏中分支完成后的变量使用（编译错误）](#101-边界测试select-宏中分支完成后的变量使用编译错误)
-    - [10.2 边界测试：`Stream::next()` 与所有权冲突（编译错误）](#102-边界测试streamnext-与所有权冲突编译错误)
+  - [十、边界测试：高级异步（Async）模式的编译错误](LINK_PLACEHOLDER)
+    - [10.1 边界测试：`select!` 宏（Macro）中分支完成后的变量使用（编译错误）](LINK_PLACEHOLDER)
+    - [10.2 边界测试：`Stream::next()` 与所有权（Ownership）冲突（编译错误）](LINK_PLACEHOLDER)
     - [10.5 边界测试：`Pin` 与 `Unpin` 的自动实现冲突（编译错误）](#105-边界测试pin-与-unpin-的自动实现冲突编译错误)
     - [10.3 边界测试：类型不匹配的基础错误](#103-边界测试类型不匹配的基础错误)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
@@ -54,7 +55,7 @@
 ### 8.8 Waker 契约与活性
 
 > **章节过渡**：取消安全回答了"Future 被丢弃时会发生什么"，而 Waker 契约则回答"Future 被挂起后如何复活"。
-> 二者共同构成异步执行的生命周期闭环：从 poll 到 Pending，从 wake 到再 poll，任何一环断裂都会导致活锁或资源泄漏。
+> 二者共同构成异步执行的生命周期（Lifetimes）闭环：从 poll 到 Pending，从 wake 到再 poll，任何一环断裂都会导致活锁或资源泄漏。
 
 **Waker 契约（Waker Contract）**：
 
@@ -118,20 +119,20 @@ graph TD
 >
 > **[Async Book: Waker](https://rust-lang.github.io/async-book/02_execution/03_wakeups.html)** Waker 是 Future 与 Reactor 之间的桥梁——poll 时将 Waker 传递给底层 I/O 源，I/O 就绪时源通过 Waker 通知执行器重新调度该 Future。✅ 已验证
 >
-> **[without.boats blog]** Waker 的设计刻意与具体执行器解耦：任何实现了 `Wake` trait 的类型均可作为 Waker，这使得同一个 Future 可在不同运行时之间复用。✅ 已验证
+> **[without.boats blog]** Waker 的设计刻意与具体执行器解耦：任何实现了 `Wake` trait 的类型均可作为 Waker，这使得同一个 Future 可在不同运行时（Runtime）之间复用。✅ 已验证
 
 ---
 
 ### 8.9 Waker/Context 的底层机制
 
-> **章节过渡**：取消安全与 Waker 契约从语义层面描述了 Future 的生命周期，但 Waker 本身是如何实现的？
-> 理解 Waker 的 VTable 机制、Context 与 Waker 的关系，以及自定义 Waker 的实现方式，是手写 Future 和构建自定义运行时的必备知识。
+> **章节过渡**：取消安全与 Waker 契约从语义层面描述了 Future 的生命周期（Lifetimes），但 Waker 本身是如何实现的？
+> 理解 Waker 的 VTable 机制、Context 与 Waker 的关系，以及自定义 Waker 的实现方式，是手写 Future 和构建自定义运行时（Runtime）的必备知识。
 
 **Waker 的 VTable 机制**
 
 > **[futures-rs 文档]** `Waker` 是一个不透明句柄，由执行器（executor）创建，通过 `RawWaker` 和 `RawWakerVTable` 实现类型擦除。
 > VTable 包含 `clone`、`wake`、`wake_by_ref` 和 `drop` 四个函数指针。✅ 已验证
-> **[Tokio 源码]** Tokio 的 Waker 基于 `std::task::Waker`，其底层通过 `Arc<Header>` 引用任务句柄，`wake` 操作将任务重新推入调度队列。✅ 已验证
+> **[Tokio 源码]** Tokio 的 Waker 基于 `std::task::Waker`，其底层通过 `Arc<Header>` 引用（Reference）任务句柄，`wake` 操作将任务重新推入调度队列。✅ 已验证
 
 ```rust,ignore
 // ✅ 正确: 自定义 Waker 的 VTable 实现（概念性代码）
@@ -292,7 +293,7 @@ impl Future for ForgetWakeFuture {
 | `wake(self)` | ✅ 是 | Waker 不再需要时，避免 clone 开销 |
 | `wake_by_ref(&self)` | ❌ 否 | Reactor 需要长期持有 Waker 时 |
 
-> **[futures-rs 文档]** `wake` 获取所有权（减少 Arc 引用计数），`wake_by_ref` 借用（Borrowing）。在性能敏感场景中，若已拥有 Waker 所有权（Ownership），优先使用 `wake`。✅ 已验证
+> **[futures-rs 文档]** `wake` 获取所有权（减少 Arc 引用（Reference）计数），`wake_by_ref` 借用（Borrowing）。在性能敏感场景中，若已拥有 Waker 所有权（Ownership），优先使用 `wake`。✅ 已验证
 
 **形式化契约**
 
@@ -339,7 +340,7 @@ fn create_waker(task_id: u64, scheduler: Arc<Scheduler>) -> Waker {
 
 **与 OS 异步（Async） I/O 的唤醒路径**
 
-`Waker` 的最终消费者是 OS 异步 I/O 机制。不同 OS 的唤醒路径决定了 Reactor 如何将 I/O 就绪事件映射到 `Waker::wake()` 调用：
+`Waker` 的最终消费者是 OS 异步（Async） I/O 机制。不同 OS 的唤醒路径决定了 Reactor 如何将 I/O 就绪事件映射到 `Waker::wake()` 调用：
 
 | **OS 机制** | **注册方式** | **唤醒路径** | **Reactor 模式** |
 |:---|:---|:---|:---|
@@ -392,9 +393,9 @@ impl UringReactor {
 ### 8.10 `Stream` / `Sink` trait 完整分析
 >
 
-> **章节过渡**：Future 表示单个异步计算，但许多场景需要处理异步序列（如网络数据包流、消息队列）。`Stream` 将异步能力扩展到迭代器领域，`Sink` 则提供异步生产者抽象。理解它们与 `Iterator`、`Future` 的关系，是构建异步管道的关键。
+> **章节过渡**：Future 表示单个异步计算，但许多场景需要处理异步序列（如网络数据包流、消息队列）。`Stream` 将异步能力扩展到迭代器（Iterator）领域，`Sink` 则提供异步生产者抽象。理解它们与 `Iterator`、`Future` 的关系，是构建异步管道的关键。
 
-**`Stream`：异步迭代器**
+**`Stream`：异步迭代器（Iterator）**
 
 > **[futures-rs 文档]** `Stream` 是异步版的 `Iterator`，其核心方法为 `poll_next`，返回 `Poll<Option<Self::Item>>`。每次 `poll_next` 可能返回 `Pending`，表示下一个元素尚未就绪。✅ 已验证
 
@@ -654,7 +655,7 @@ async fn pipeline() {
 ### 8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异
 >
 
-> **章节过渡**：定理 T1 声称 async/await 是零成本抽象，但实践中我们常常看到 `Box::pin` 和 `dyn Future`。理解静态分发与动态分发的边界、栈 pinning 与堆 pinning 的差异，是判断"何时零成本成立"的关键。
+> **章节过渡**：定理 T1 声称 async/await 是零成本抽象（Zero-Cost Abstraction），但实践中我们常常看到 `Box::pin` 和 `dyn Future`。理解静态分发与动态分发的边界、栈 pinning 与堆 pinning 的差异，是判断"何时零成本成立"的关键。
 
 **动态分发 vs 静态分发的 async 开销**
 
@@ -742,7 +743,7 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 }
 ```
 
-**边界：零成本抽象的失效条件**
+**边界：零成本抽象（Zero-Cost Abstraction）的失效条件**
 
 ```text
 零成本 async 的边界条件:
@@ -803,13 +804,13 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
                 └── 否 → impl Future（默认最优路径）
 ```
 
-> **交叉链接**: 单态化机制见 [../02_intermediate/02_generics.md](../02_intermediate/02_generics.md) §4.5（泛型单态化与代码膨胀）；trait 对象的内存布局见 [../02_intermediate/01_traits.md](../02_intermediate/01_traits.md) §4.3（trait object 与 vtable）。
+> **交叉链接**: 单态化机制见 [../02_intermediate/02_generics.md](../02_intermediate/02_generics.md) §4.5（泛型（Generics）单态化与代码膨胀）；trait 对象的内存布局见 [../02_intermediate/01_traits.md](../02_intermediate/01_traits.md) §4.3（trait object 与 vtable）。
 
 ---
 
 ### 8.12 `loom` 并发模型检测工具
 
-> **章节过渡**：异步代码的正确性不仅依赖类型系统，还依赖并发执行的时序。`loom` 通过穷举所有可能的线程交错（interleaving），在测试中发现数据竞争和死锁，是验证并发原语（如自定义 Mutex、Channel）的利器。
+> **章节过渡**：异步代码的正确性不仅依赖类型系统（Type System），还依赖并发执行的时序。`loom` 通过穷举所有可能的线程交错（interleaving），在测试中发现数据竞争和死锁，是验证并发原语（如自定义 Mutex、Channel）的利器。
 
 **loom 的用途与原理**
 
@@ -876,7 +877,7 @@ fn test_mutex_concurrent_access() {
 | 测试对象 | 同步原语、并发数据结构 | 任意 Rust 代码（含 unsafe） |
 | 执行方式 | 模型检测（穷举交错） | 解释执行（动态分析） |
 | 覆盖范围 | 小状态空间（需控制并发度） | 单执行路径 |
-| 适用场景 | 验证并发算法正确性 | 验证 unsafe 代码内存安全 |
+| 适用场景 | 验证并发算法正确性 | 验证 unsafe 代码内存安全（Memory Safety） |
 | 使用方式 | 替换 `std::sync` 为 `loom::sync` | `cargo +nightly miri test` |
 
 **反例：loom 状态空间爆炸**
@@ -1164,7 +1165,7 @@ warning: the type `bool` does not permit being left uninitialized
   |                            this code causes undefined behavior when executed
 ```
 
-> **关键洞察**: async 状态机的局部变量在挂起时被存入状态机结构体。若局部变量未初始化（通过 `MaybeUninit::uninit().assume_init()`），恢复执行后读取该变量即触发 UB。Miri 的 `invalid_value` lint 在解释执行时检测此类问题，而编译器仅发出 warning（无法静态确定 `assume_init` 是否安全）。
+> **关键洞察**: async 状态机的局部变量在挂起时被存入状态机结构体（Struct）。若局部变量未初始化（通过 `MaybeUninit::uninit().assume_init()`），恢复执行后读取该变量即触发 UB。Miri 的 `invalid_value` lint 在解释执行时检测此类问题，而编译器仅发出 warning（无法静态确定 `assume_init` 是否安全）。
 
 >
 #### Miri 与 async 状态机的特殊关联
@@ -1258,7 +1259,7 @@ async fn fixed_select() {
 }
 ```
 
-> **修正**: `tokio::select!`（以及 `futures::select!`）在编译时生成状态机，但只有**一个**分支完成执行。其他分支的绑定变量在 `select!` 之后不可用。试图在 `select!` 块外使用分支变量是编译错误（或未定义行为，取决于宏实现）。这类似于 `match` 的变量绑定只在对应臂中有效。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
+> **修正**: `tokio::select!`（以及 `futures::select!`）在编译时生成状态机，但只有**一个**分支完成执行。其他分支的绑定变量在 `select!` 之后不可用。试图在 `select!` 块外使用分支变量是编译错误（或未定义行为，取决于宏（Macro）实现）。这类似于 `match` 的变量绑定只在对应臂中有效。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
 
 ### 10.2 边界测试：`Stream::next()` 与所有权冲突（编译错误）
 
@@ -1284,7 +1285,7 @@ async fn fixed_stream() {
 }
 ```
 
-> **修正**: `Stream::next()` 获取 `&mut self`，返回的 `Item` 可能与 Stream 的内部状态关联。在 `while let Some(item) = s.next().await` 中，`s` 被可变借用直到 `item` 释放。不能在循环体内再次调用 `s.next()`。这与迭代器的借用规则一致——`Iterator::next(&mut self)` 要求独占可变访问。[来源: [futures-rs Documentation](https://docs.rs/futures/)]
+> **修正**: `Stream::next()` 获取 `&mut self`，返回的 `Item` 可能与 Stream 的内部状态关联。在 `while let Some(item) = s.next().await` 中，`s` 被可变借用（Mutable Borrow）直到 `item` 释放。不能在循环体内再次调用 `s.next()`。这与迭代器的借用规则一致——`Iterator::next(&mut self)` 要求独占可变访问。[来源: [futures-rs Documentation](https://docs.rs/futures/)]
 
 ### 10.5 边界测试：`Pin` 与 `Unpin` 的自动实现冲突（编译错误）
 
@@ -1366,7 +1367,7 @@ fn main() {
 
 > 异步状态机安全 ⟸ Pin 不动性 ⟸ Future::poll
 > 取消安全 ⟸ async drop 设计 ⟸ 结构化并发
-> **过渡**: 掌握 Async/Await 高级主题 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 Async/Await 高级主题 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 Async/Await 高级主题 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
@@ -1419,7 +1420,7 @@ fn main() {
 - A. 可以，任何版本的 Rust 都支持 `async fn` in trait
 - B. 不可以，必须使用返回 `Box<dyn Future>` 的函数
 - C. Rust 1.75+ 支持 `async fn` in trait，通过返回位置 impl Trait（RPITIT）实现
-- D. 必须使用 `#[async_trait]` 宏，这是唯一方案
+- D. 必须使用 `#[async_trait]` 宏（Macro），这是唯一方案
 
 <details>
 <summary>✅ 答案与解析</summary>
@@ -1431,7 +1432,7 @@ fn main() {
 | 版本 | 方案 | 说明 |
 |:---|:---|:---|
 | < 1.75 | `#[async_trait]` 宏 | 将 `async fn` 展开为返回 `Pin<Box<dyn Future>>` 的函数，有堆分配开销 |
-| ≥ 1.75 | 原生 `async fn` in trait | 使用 RPITIT（Return Position Impl Trait In Traits），零成本抽象 |
+| ≥ 1.75 | 原生 `async fn` in trait | 使用 RPITIT（Return Position Impl Trait In Traits），零成本抽象（Zero-Cost Abstraction） |
 
 **Rust 1.75+ 代码**：
 
@@ -1523,7 +1524,7 @@ impl Stream for MyInterval {
 // let stream = tokio_stream::wrappers::IntervalStream::new(interval(Duration::from_secs(1)));
 ```
 
-> **关键洞察**: `Pin<&mut Self>` 是 async/await 生态的基石。任何包含 `.await` 点的结构体都需要 `Pin` 保证，因为编译器生成的状态机可能自引用。
+> **关键洞察**: `Pin<&mut Self>` 是 async/await 生态的基石。任何包含 `.await` 点的结构体（Struct）都需要 `Pin` 保证，因为编译器生成的状态机可能自引用。
 </details>
 
 ---

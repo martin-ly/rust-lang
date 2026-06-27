@@ -15,7 +15,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Gen Blocks 预览特性
-> **定位**: 探讨 Rust 中 **gen blocks**（生成器块）的提案——将 `async`/`.await` 的模式从**异步计算**泛化到**惰性迭代**和**协程**，分析其对迭代器生态、流处理（Stream）和异步生成器的影响。
+> **定位**: 探讨 Rust 中 **gen blocks**（生成器块）的提案——将 `async`/`.await` 的模式从**异步（Async）计算**泛化到**惰性迭代**和**协程**，分析其对迭代器（Iterator）生态、流处理（Stream）和异步生成器的影响。
 > **前置概念**: [Async](../03_advanced/02_async.md) · [Traits/Iterators](../02_intermediate/01_traits.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Version Tracking](./05_rust_version_tracking.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
@@ -33,12 +33,12 @@
 
 ## 📑 目录
 
-- [Gen Blocks 预研：超越异步的泛化生成器](#gen-blocks-预研超越异步的泛化生成器)
+- [Gen Blocks 预研：超越异步（Async）的泛化生成器](LINK_PLACEHOLDER)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 从 async 到 gen 的泛化](#11-从-async-到-gen-的泛化)
     - [1.2 Gen Blocks 语法与语义](#12-gen-blocks-语法与语义)
-    - [1.3 与现有迭代器生态的关系](#13-与现有迭代器生态的关系)
+    - [1.3 与现有迭代器（Iterator）生态的关系](LINK_PLACEHOLDER)
   - [二、技术细节](#二技术细节)
     - [2.1 生成器状态机](#21-生成器状态机)
     - [2.2 与 Stream 的协同](#22-与-stream-的协同)
@@ -53,7 +53,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Gen Blocks 预览的编译错误](#十边界测试gen-blocks-预览的编译错误)
     - [10.1 边界测试：`gen` 块与 `Iterator` trait 的自动实现（编译错误）](#101-边界测试gen-块与-iterator-trait-的自动实现编译错误)
-    - [10.2 边界测试：`gen` 块与借用生命周期的冲突（编译错误）](#102-边界测试gen-块与借用生命周期的冲突编译错误)
+    - [10.2 边界测试：`gen` 块与借用（Borrowing）生命周期（Lifetimes）的冲突（编译错误）](LINK_PLACEHOLDER)
     - [10.3 边界测试：gen 块与 `Pin` 的隐式需求（编译错误）](#103-边界测试gen-块与-pin-的隐式需求编译错误)
     - [10.4 边界测试：gen 块与异常控制流（`return`、`break`）的语义（编译错误）](#104-边界测试gen-块与异常控制流returnbreak的语义编译错误)
     - [补充定理链](#补充定理链)
@@ -341,7 +341,7 @@ graph TD
 └── tokio/futures 等运行时需添加 async gen 支持
 ```
 
-> **边界要点**: gen block 的边界与 async fn 高度相似——两者共享状态机实现，因此面临相同的借用检查、Pin 和清理挑战。
+> **边界要点**: gen block 的边界与 async fn 高度相似——两者共享状态机实现，因此面临相同的借用（Borrowing）检查、Pin 和清理挑战。
 > [来源: [Rust [RFC 3513](https://rust-lang.github.io/rfcs//3513-gen-blocks.html) — Drawbacks](https://github.com/rust-lang/rfcs/pull/3513)]
 
 ---
@@ -427,7 +427,7 @@ fn numbers() -> impl Iterator<Item = i32> {
 > `gen` 块的返回类型隐式为 `impl Iterator<Item = T>`，其中 `T` 是所有 `yield` 表达式的统一类型。
 > 类型不匹配时编译错误，与 `async` 块（所有 `await` 的 future 类型必须统一）类似。
 > 这与 Python 的生成器（`yield` 可返回任意类型，动态类型）或 JavaScript 的生成器（同样动态）不同——Rust 保持静态类型安全，生成器的 `Item` 类型在编译期确定。
-> `gen` 块的设计目标：消除手写 `Iterator` 实现的样板代码（`next` 方法 + 手动状态机），同时保持零成本抽象。
+> `gen` 块的设计目标：消除手写 `Iterator` 实现的样板代码（`next` 方法 + 手动状态机），同时保持零成本抽象（Zero-Cost Abstraction）。
 > [来源: [Rust RFC 3513](https://rust-lang.github.io/rfcs//3513-gen-blocks.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
@@ -445,8 +445,8 @@ fn borrow_iter(data: &mut Vec<i32>) -> impl Iterator<Item = &i32> {
 ```
 
 > **修正**:
-> `gen` 块转换为状态机后，其 `next` 方法返回的引用的生命周期与状态机本身绑定。
-> 若 `gen` 块借用了外部变量（如 `data: &mut Vec<i32>`），返回的引用必须不超越 `data` 的生命周期。
+> `gen` 块转换为状态机后，其 `next` 方法返回的引用（Reference）的生命周期（Lifetimes）与状态机本身绑定。
+> 若 `gen` 块借用了外部变量（如 `data: &mut Vec<i32>`），返回的引用（Reference）必须不超越 `data` 的生命周期。
 > 但 `impl Iterator<Item = &i32>` 的隐式生命周期参数无法捕获 `data` 的生命周期——迭代器的 `Item` 类型需要一个显式生命周期参数。
 > 正确写法：返回 `impl Iterator<Item = &'_ i32>` 或显式命名生命周期。这与手写 `Iterator` 实现的生命周期问题相同——`gen` 块的便利不消除生命周期约束，只是隐藏了状态机的复杂性。
 > 这与 Rust 的 async/await 类似：await 点保存的引用必须满足状态机的生命周期。
@@ -502,7 +502,7 @@ fn early_return() -> impl Iterator<Item = i32> {
 > 3) `?` 运算符在 `gen` 块中如何传播错误？
 > 当前设计倾向：`return` 结束整个函数（与 `async` 块一致），`break` 和 `continue` 针对最内层循环（与常规块一致），
 > `?` 传播到函数的返回类型（要求函数返回 `Result`/`Option`）。
-> 这与 Python 的 generator（`return` 结束 generator，`return value` 成为 `StopIteration` 的 value）或 JavaScript 的 generator（`return` 结束迭代，`yield*` 委托）类似——`gen` 块的设计需与 Rust 的错误处理和控制流哲学一致。
+> 这与 Python 的 generator（`return` 结束 generator，`return value` 成为 `StopIteration` 的 value）或 JavaScript 的 generator（`return` 结束迭代，`yield*` 委托）类似——`gen` 块的设计需与 Rust 的错误处理（Error Handling）和控制流哲学一致。
 > [来源: [Rust RFC 3513](https://rust-lang.github.io/rfcs//3513-gen-blocks.html)] ·
 > [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
 > **过渡**: Gen Blocks 预研：超越异步的泛化生成器 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
@@ -545,7 +545,7 @@ fn early_return() -> impl Iterator<Item = i32> {
 <details>
 <summary>✅ 答案与解析</summary>
 
-语义相似：暂停执行并返回值给调用者。Rust 的 `yield` 会被编译器转换为状态机转移，保证内存安全（无悬垂引用）。
+语义相似：暂停执行并返回值给调用者。Rust 的 `yield` 会被编译器转换为状态机转移，保证内存安全（Memory Safety）（无悬垂引用）。
 </details>
 
 ---

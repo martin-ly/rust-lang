@@ -33,7 +33,7 @@
 | [`00_meta/concept_index.md`](00_meta/concept_index.md) | 全局概念索引 | 倒排索引、SSO 单一来源规范、Bloom 层级排序、交叉概念审计 | ✅ v1.1 |
 | [`00_meta/inter_layer_map.md`](00_meta/inter_layer_map.md) | 跨层依赖图 | L0-L7 层间语义链接 + 严格依赖路径 | ✅ v1.0 |
 | [`00_meta/semantic_space.md`](00_meta/semantic_space.md) | 表征空间 | 能/不能/等价表达三维分析 + 跨语言表征对比 | ✅ v1.0 |
-| [`00_meta/audit_checklist.md`](00_meta/audit_checklist.md) | 审计清单 | 概念一致性检查清单 + 月度审计机制 | ✅ v1.0 |
+| [`00_meta/audit_checklist.md`](00_meta/audit_checklist.md) | 审计清单 | 概念一致性（Coherence）检查清单 + 月度审计机制 | ✅ v1.0 |
 | [`00_meta/learning_guide.md`](00_meta/learning_guide.md) | 学习指南 | 不同背景读者的路径推荐 | ✅ v1.0 |
 | [`00_meta/quick_reference.md`](00_meta/quick_reference.md) | 速查手册 | 核心概念一页纸速查 | ✅ v1.0 |
 | [`00_meta/semantic_bridge_algorithms_patterns.md`](00_meta/semantic_bridge_algorithms_patterns.md) | 语义桥 | 算法↔设计模式↔工作流模式的三层同构坐标系 | ✅ v1.0 |
@@ -87,7 +87,7 @@ graph TD
     S5 -->|演进跟踪| L7
 ```
 
-> **认知功能**: 本图谱将 L0-L7 知识体系的权威来源可视化，帮助读者快速定位不同层级概念的一级/二级/三级来源。建议在引入新概念或验证引用时使用此图回溯原始出处，避免知识传递中的失真。关键洞察：Rust 的形式化理论（L4）与工业验证工具（L7）共享同一学术根基，体现了从论文到生产的知识闭环。[来源: 💡 原创分析]
+> **认知功能**: 本图谱将 L0-L7 知识体系的权威来源可视化，帮助读者快速定位不同层级概念的一级/二级/三级来源。建议在引入新概念或验证引用（Reference）时使用此图回溯原始出处，避免知识传递中的失真。关键洞察：Rust 的形式化理论（L4）与工业验证工具（L7）共享同一学术根基，体现了从论文到生产的知识闭环。[来源: 💡 原创分析]
 
 ---
 
@@ -118,7 +118,7 @@ graph TD
 **核心文件深度注入（5 个）**:
 
 - `01_rust_vs_cpp.md`: Move 语义系统深度对比（§7.3）
-- `04_error_handling.md`: C++ 异常安全 vs Rust 错误处理（§10）
+- `04_error_handling.md`: C++ 异常安全 vs Rust 错误处理（Error Handling）（§10）
 - `01_traits.md`: SFINAE 与 Trait Bounds 深度对比（§5.8）
 - `01_ownership.md`: C++ 构造函数/析构函数 vs Rust 初始化（§8.2）
 - `20_type_system_advanced.md`: C++ 运算符重载/类型转换 vs Rust Trait（§7）
@@ -128,7 +128,7 @@ graph TD
 - 所有新文件应用 Tier 1/2/3 定理分级体系
 - 新增 `compile_fail` 反例代码块
 - 各层 README.md 索引表同步更新
-- 交叉引用网络扩展至 PL 理论（TAPL、PFPL、线性逻辑）
+- 交叉引用（Reference）网络扩展至 PL 理论（TAPL、PFPL、线性逻辑）
 
 ---
 ---

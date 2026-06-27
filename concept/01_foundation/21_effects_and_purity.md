@@ -2,13 +2,13 @@
 >
 > [综述级]
 >
-> **本节关键术语**: 副作用 (Side Effect) · 纯函数 (Pure Function) · 引用透明 (Referential Transparency) · 效果系统 (Effect System) · IO — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: 副作用 (Side Effect) · 纯函数 (Pure Function) · 引用（Reference）透明 (Referential Transparency) · 效果系统 (Effect System) · IO — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 副作用与纯度：从引用透明到 Rust 的所有权效果
 >
 > **EN**: Effects and Purity
 > **Summary**: Tracking side effects and purity in Rust functions, const contexts, and unsafe boundaries.
-> 一个表达式是**引用透明**的，当且仅当：在程序的任何位置，该表达式都可以被其计算结果替换，而不改变程序的行为。
+> 一个表达式是**引用（Reference）透明**的，当且仅当：在程序的任何位置，该表达式都可以被其计算结果替换，而不改变程序的行为。
 > ```text 引用透明: expr ≡ value_of(expr) 在任何上下文中成立```
 > **引用透明的表达式**:- 纯数学函数：`2 + 3` ≡ `5` - 无副作用的函数：`square(4)` ≡ `16`
 > **非引用透明的表达式**: - `rand()` — 每次调用结果不同 - `println!("hello")` — 有 IO 副作用 - `x += 1` — 修改存储状态 | 特性 | 引用透明代码 | 非引用透明代码 |
@@ -29,7 +29,7 @@
 ## 一、核心命题
 
 > **副作用不是程序的"坏特性"，而是计算与外部世界交互的必要方式。
-> Rust 的创新不在于消除副作用，而在于将副作用从隐式（C/C++/Java）提升为显式、可追踪、可组合的类型系统契约——`&mut T` 是写效果，`unsafe` 是未定义效果，`async` 是并发效果，`Result` 是异常效果。**
+> Rust 的创新不在于消除副作用，而在于将副作用从隐式（C/C++/Java）提升为显式、可追踪、可组合的类型系统（Type System）契约——`&mut T` 是写效果，`unsafe` 是未定义效果，`async` 是并发效果，`Result` 是异常效果。**
 
 ---
 
@@ -64,7 +64,7 @@
 | **缓存/记忆化** | 结果可安全缓存 | 缓存可能导致错误行为 |
 | **调试** | 局部分析即可 | 需要全局状态追踪 |
 
-> **关键洞察**: Haskell 追求全局引用透明（所有副作用通过 Monad 显式化）；Rust 采用局部引用透明策略——在函数内部允许副作用，但通过类型系统限制副作用的传播范围。[来源: 💡 原创分析]
+> **关键洞察**: Haskell 追求全局引用透明（所有副作用通过 Monad 显式化）；Rust 采用局部引用透明策略——在函数内部允许副作用，但通过类型系统（Type System）限制副作用的传播范围。[来源: 💡 原创分析]
 
 ---
 
@@ -102,7 +102,7 @@ processState :: Int -> State s Int  -- 有状态副作用
 processExcept :: Int -> Either Error Int  -- 可能抛出异常
 ```
 
-Rust 通过 **所有权（Ownership） + 类型系统** 显式化副作用：
+Rust 通过 **所有权（Ownership） + 类型系统（Type System）** 显式化副作用：
 
 ```rust,ignore
 // Rust: 副作用通过参数类型和返回类型显式表达
@@ -123,7 +123,7 @@ fn process_unsafe(ptr: *mut i32) {  // unsafe 块表示未定义效果
 >
 > **论证**:
 > 虽然 Rust 目前没有显式的效果类型（如 Koka 的 `fn f(): <io, state> T`），但其类型签名通过参数和返回类型**隐式编码**了效果信息。
-> 这与 Moggi 1989 提出的"通过 Monad 结构显式化计算"的思想同构，但实现方式不同：Haskell 用 Monad 组合子，Rust 用所有权约束。
+> 这与 Moggi 1989 提出的"通过 Monad 结构显式化计算"的思想同构，但实现方式不同：Haskell 用 Monad 组合子，Rust 用所有权（Ownership）约束。
 > [来源: 💡 原创分析] · [Moggi 1989] · [Wadler 1992]
 >
 > **权威来源对齐**:
@@ -207,8 +207,8 @@ fn compose() -> Result<i32, Error> {
 
 | 语言 | 异常效果表达 | 强制处理 |
 |:---|:---|:---:|
-| Java | `throws Exception` / `try-catch` | ❌ 不强制（运行时可能遗漏） |
-| Haskell | `Either Error a` | ✅ 模式匹配强制处理 |
+| Java | `throws Exception` / `try-catch` | ❌ 不强制（运行时（Runtime）可能遗漏） |
+| Haskell | `Either Error a` | ✅ 模式匹配（Pattern Matching）强制处理 |
 | Rust | `Result<T, E>` | ✅ 编译器强制处理（或通过 `?` 显式传播） |
 | C++ | `throw` / `try-catch` / `noexcept` | ❌ 不强制（C++23 `std::expected` 改进） |
 
@@ -332,7 +332,7 @@ fn unwrap_or_default(opt: Option<i32>) -> i32 {
 }
 ```
 
-> **关键洞察**: Rust 通过**所有权系统**将函数式语言的"引用透明"理念部分地带入命令式世界：在 `&T` 借用的范围内，数据不可变，函数调用具有局部引用透明性。[来源: 💡 原创分析]
+> **关键洞察**: Rust 通过**所有权（Ownership）系统**将函数式语言的"引用透明"理念部分地带入命令式世界：在 `&T` 借用（Borrowing）的范围内，数据不可变，函数调用具有局部引用透明性。[来源: 💡 原创分析]
 
 ---
 
@@ -407,7 +407,7 @@ fn closure_effect() {
 }
 ```
 
-> **认知功能**: 此示例展示了 Rust 如何通过闭包类型（`Fn`, `FnMut`, `FnOnce`）将副作用限制在明确的边界内。`FnMut` = 可修改捕获的环境，`Fn` = 只读环境，`FnOnce` = 消费环境。来源: [Rust Reference — §8.2.13 Closure expressions](https://doc.rust-lang.org/reference/) ✅
+> **认知功能**: 此示例展示了 Rust 如何通过闭包（Closures）类型（`Fn`, `FnMut`, `FnOnce`）将副作用限制在明确的边界内。`FnMut` = 可修改捕获的环境，`Fn` = 只读环境，`FnOnce` = 消费环境。来源: [Rust Reference — §8.2.13 Closure expressions](https://doc.rust-lang.org/reference/) ✅
 
 ---
 
@@ -419,9 +419,9 @@ fn closure_effect() {
 | **C++** | 无约束 | 无约束 | `try/catch/throw` | `std::thread` | RAII |
 | **Java** | 无约束 | 无约束 | `try/catch/throw` | `synchronized` | GC |
 | **Haskell** | `State` Monad | `IO` Monad | `Either` / `Maybe` | `IO` / `STM` | Monad + 惰性 |
-| **Rust** | `&mut T` / `Cell` / `RefCell` | 普通函数（无特殊标记） | `Result<T, E>` | `async` / `Send`/`Sync` | 所有权 + 借用（Borrowing） |
+| **Rust** | `&mut T` / `Cell` / `RefCell` | 普通函数（无特殊标记） | `Result<T, E>` | `async` / `Send`/`Sync` | 所有权（Ownership） + 借用（Borrowing） |
 
-> **关键洞察**: Haskell 通过**Monad 组合子**将副作用完全显式化；Rust 通过**所有权约束**在类型层面部分显式化副作用。两者殊途同归——目标都是让副作用"可见、可追踪、可组合"。Rust 的选择更适合系统编程：零运行时开销、与命令式代码无缝集成。[来源: 💡 原创分析]
+> **关键洞察**: Haskell 通过**Monad 组合子**将副作用完全显式化；Rust 通过**所有权约束**在类型层面部分显式化副作用。两者殊途同归——目标都是让副作用"可见、可追踪、可组合"。Rust 的选择更适合系统编程：零运行时（Runtime）开销、与命令式代码无缝集成。[来源: 💡 原创分析]
 
 ---
 
@@ -513,7 +513,7 @@ fn safe_wrapper_fixed(size: usize) -> Vec<u8> {
 > **修正**:
 > `unsafe` 效果具有"传染性"——调用 `unsafe fn` 或解引用裸指针必须在 `unsafe` 块内进行。
 > 但 `unsafe` 块**不自动**使周围代码变为 unsafe；它只是告诉编译器"程序员已验证此处的安全性"。
-> 将 unsafe 操作包装为安全 API 时，必须确保所有 unsafe 前置条件在函数体内被满足（如空指针检查、长度验证、生命周期保证）。这是 Rust 安全抽象的核心契约。
+> 将 unsafe 操作包装为安全 API 时，必须确保所有 unsafe 前置条件在函数体内被满足（如空指针检查、长度验证、生命周期（Lifetimes）保证）。这是 Rust 安全抽象的核心契约。
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.3 边界测试：`const fn` 中的堆分配尝试（编译错误）
@@ -603,7 +603,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-主要体现在 `unsafe`（标记不安全效果）、`async`（标记异步效果）、`const`（标记编译期效果），通过类型系统显式标记效果。
+主要体现在 `unsafe`（标记不安全效果）、`async`（标记异步（Async）效果）、`const`（标记编译期效果），通过类型系统显式标记效果。
 </details>
 
 ---
@@ -615,7 +615,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-`map` 是惰性的，返回新迭代器而不立即执行。副作用（如闭包中的 `println!`）直到迭代被消费时才发生，可能导致意外的执行顺序。
+`map` 是惰性的，返回新迭代器（Iterator）而不立即执行。副作用（如闭包（Closures）中的 `println!`）直到迭代被消费时才发生，可能导致意外的执行顺序。
 </details>
 
 ## 实践
@@ -658,7 +658,7 @@ fn main() {
 > 编译期优化 ⟸ const 求值 ⟸ 无副作用保证
 > **过渡**: 掌握 副作用与纯度：从引用透明到 Rust 的所有权效果 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 副作用与纯度：从引用透明到 Rust 的所有权效果 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: 副作用与纯度：从引用透明到 Rust 的所有权效果 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 副作用与纯度：从引用透明到 Rust 的所有权效果 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

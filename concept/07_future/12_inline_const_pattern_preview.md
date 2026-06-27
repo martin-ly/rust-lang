@@ -14,7 +14,7 @@
 > **内容分级**: [实验级]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **A** — Application
-> **双维定位**: F×App — 应用 const 块于模式匹配
+> **双维定位**: F×App — 应用 const 块于模式匹配（Pattern Matching）
 > **前置依赖**: [Const Generics](../02_intermediate/02_generics.md) · [Pattern Matching](../01_foundation/07_control_flow.md)
 > **后置延伸**: [Const Trait](./17_const_trait_preview.md)
 > **来源**: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) · [RFC 2920](https://rust-lang.github.io/rfcs//2920-inline-const.html)
@@ -94,9 +94,10 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-允许在模式匹配中使用常量表达式，如 `match x { const { 1 + 2 } => ... }`。目前模式中的常量必须是字面量或命名常量。
+允许在模式匹配（Pattern Matching）中使用常量表达式，如 `match x { const { 1 + 2 } => ... }`。目前模式中的常量必须是字面量或命名常量。
 </details>
 
+> **前置概念**: N/A
 ---
 
 ### 测验 2：这个特性对 `match` 的表达能力有什么提升？（理解层）

@@ -34,7 +34,7 @@
   - [一、核心概念](#一核心概念)
     - [1.1 rustdoc：编译器集成的文档生成器](#11-rustdoc编译器集成的文档生成器)
     - [1.2 文档测试（Doc Tests）](#12-文档测试doc-tests)
-    - [1.3 文档作为类型系统的一部分](#13-文档作为类型系统的一部分)
+    - [1.3 文档作为类型系统（Type System）的一部分](LINK_PLACEHOLDER)
   - [二、技术细节](#二技术细节)
     - [2.1 文档注释语法](#21-文档注释语法)
     - [2.2 Intra-doc Links](#22-intra-doc-links)
@@ -222,7 +222,7 @@ pub fn documented() {}
 //! - 功能 B
 ```
 
-> **注释规范**: `///` 用于项文档，`//!` 用于容器（模块/crate）文档。[RFC 1574](https://rust-lang.github.io/rfcs//1574-more-api-documentation-conventions.html) 建议使用 Markdown 格式和特定章节结构（Examples、Panics、Errors、Safety）。
+> **注释规范**: `///` 用于项文档，`//!` 用于容器（模块（Module）/crate）文档。[RFC 1574](https://rust-lang.github.io/rfcs//1574-more-api-documentation-conventions.html) 建议使用 Markdown 格式和特定章节结构（Examples、Panics、Errors、Safety）。
 > [来源: [RFC 1574 — Documentation Conventions](https://rust-lang.github.io/rfcs//1574-more-api-documentation-conventions.html)]
 
 ---
@@ -486,7 +486,7 @@ graph TD
 
 - [Cargo Toolchain](./01_toolchain.md) — Cargo 与 rustdoc 集成
 - [Macros](../03_advanced/04_macros.md) — 文档宏（doc comments）
-- [Module System](../02_intermediate/10_module_system.md) — 模块级文档
+- [Module System](../02_intermediate/10_module_system.md) — 模块（Module）级文档
 
 ---
 
@@ -555,8 +555,8 @@ pub fn linked_fixed() {}
 
 > **修正**:
 > Rust 1.48+ 的 `rustdoc` 支持 intra-doc links——用 `[`Name`]` 语法链接到 crate 内的项或标准库类型。
-> 未解析的链接产生编译警告（CI 中可提升为错误）。这要求文档维护者确保所有引用有效，避免死链接。
-> 与 JavaDoc 或 Doxygen 的外部链接不同，Rust 的 intra-doc links 在编译期验证目标存在，将文档一致性检查提前到构建阶段。
+> 未解析的链接产生编译警告（CI 中可提升为错误）。这要求文档维护者确保所有引用（Reference）有效，避免死链接。
+> 与 JavaDoc 或 Doxygen 的外部链接不同，Rust 的 intra-doc links 在编译期验证目标存在，将文档一致性（Coherence）检查提前到构建阶段。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.4 边界测试：`doctest` 的 `compile_fail` 与 `ignore` 的误用（测试失败）
@@ -575,7 +575,7 @@ fn main() {}
 > `ignore` 属性：跳过测试（不编译也不运行）。`no_run` 属性：编译但不运行。
 > 常见误用：
 >
-> 1) `compile_fail` 用于运行时错误代码（应使用 `no_run` 或 `should_panic`）；
+> 1) `compile_fail` 用于运行时（Runtime）错误代码（应使用 `no_run` 或 `should_panic`）；
 > 2) `ignore` 用于依赖外部资源的测试（正确）；
 > 3) `compile_fail` 代码实际编译通过（测试失败）。
 >
@@ -616,7 +616,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-`///` 为紧随其后的项（函数、结构体等）添加文档。`//!` 为包含它的模块或 crate 添加模块级/ crate 级文档。
+`///` 为紧随其后的项（函数、结构体（Struct）等）添加文档。`//!` 为包含它的模块（Module）或 crate 添加模块级/ crate 级文档。
 </details>
 
 ---
@@ -640,7 +640,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-`rustdoc` 自动为类型和 trait 生成交叉引用链接。通过 `#[doc(inline)]`、`#[doc(no_inline)]` 和 `intra-doc links`（如 `[MyType](crate::module::MyType)`）控制链接行为。
+`rustdoc` 自动为类型和 trait 生成交叉引用（Reference）链接。通过 `#[doc(inline)]`、`#[doc(no_inline)]` 和 `intra-doc links`（如 `[MyType](crate::module::MyType)`）控制链接行为。
 </details>
 
 ---
@@ -652,7 +652,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-隐藏某项不出现在公共文档中。常用于：1) 内部实现细节；2) 已废弃但需向后兼容的 API；3) 宏展开产生的中间项。
+隐藏某项不出现在公共文档中。常用于：1) 内部实现细节；2) 已废弃但需向后兼容的 API；3) 宏（Macro）展开产生的中间项。
 </details>
 
 ## 认知路径

@@ -7,14 +7,14 @@
 > **EN**: Iterators
 > **Summary**: Iterators. Core Rust concept covering practical applications, mechanism analysis, in-depth analysis.
 >
-> **📎 交叉引用**
+> **📎 交叉引用（Reference）**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[迭代器](../../knowledge/01_fundamentals/02_iterators.md)
+> 本主题在 knowledge 中有系统化的知识索引：[迭代器（Iterator）](LINK_PLACEHOLDER)
 
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
-> **定位**: 深入探讨 Rust 迭代器模式——从适配器链到自定义迭代器，分析惰性求值、性能特征和最佳实践。
+> **定位**: 深入探讨 Rust 迭代器（Iterator）模式——从适配器链到自定义迭代器，分析惰性求值、性能特征和最佳实践。
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Generics](../02_intermediate/02_generics.md) · [Closures](../01_foundation/15_closure_basics.md)
 > **后置概念**: [Concurrency](../03_advanced/01_concurrency.md) · [Performance](../06_ecosystem/15_performance_optimization.md)
 
@@ -50,11 +50,11 @@
     - [10.2 边界测试：迭代器适配器的惰性求值陷阱（逻辑错误）](#102-边界测试迭代器适配器的惰性求值陷阱逻辑错误)
   - [十二、边界测试：迭代器模式的编译错误（续）](#十二边界测试迭代器模式的编译错误续)
     - [12.1 边界测试：`skip_while` 与 `take_while` 的互斥性（逻辑错误）](#121-边界测试skip_while-与-take_while-的互斥性逻辑错误)
-    - [12.2 边界测试：`cycle` 与无限迭代器（运行时死循环）](#122-边界测试cycle-与无限迭代器运行时死循环)
+    - [12.2 边界测试：`cycle` 与无限迭代器（运行时（Runtime）死循环）](LINK_PLACEHOLDER)
     - [10.3 边界测试：`Iterator::zip` 的长度不一致（逻辑错误）](#103-边界测试iteratorzip-的长度不一致逻辑错误)
     - [10.4 边界测试：消耗型适配器与双重迭代（编译错误）](#104-边界测试消耗型适配器与双重迭代编译错误)
     - [10.6 边界测试：`Iterator::fuse` 后的重复消费（逻辑错误）](#106-边界测试iteratorfuse-后的重复消费逻辑错误)
-    - [10.2 边界测试：`Iterator::collect` 的目标类型推断失败（编译错误）](#102-边界测试iteratorcollect-的目标类型推断失败编译错误)
+    - [10.2 边界测试：`Iterator::collect` 的目标类型推断（Type Inference）失败（编译错误）](LINK_PLACEHOLDER)
     - [10.8 边界测试：match 分支返回类型不一致](#108-边界测试match-分支返回类型不一致)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`Iterator::map` 和 `Iterator::filter` 返回的是新迭代器还是立即执行计算？（理解层）](#测验-1iteratormap-和-iteratorfilter-返回的是新迭代器还是立即执行计算理解层)
@@ -98,7 +98,7 @@ Iterator Trait:
   └── 类型安全
 ```
 
-> **认知功能**: **Iterator trait 是 Rust 零成本抽象的核心体现**——编译器将适配器链优化为高效的循环。
+> **认知功能**: **Iterator trait 是 Rust 零成本抽象（Zero-Cost Abstraction）的核心体现**——编译器将适配器链优化为高效的循环。
 > [来源: [TRPL — Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html)]
 
 ---
@@ -430,7 +430,7 @@ fn main() {
 
 ## 相关概念文件
 
-- [Type System](../01_foundation/04_type_system.md) — 类型系统
+- [Type System](../01_foundation/04_type_system.md) — 类型系统（Type System）
 - [Generics](../02_intermediate/02_generics.md) — 泛型（Generics）
 - [Closures](../01_foundation/15_closure_basics.md) — 闭包（Closures）
 - [Concurrency](../03_advanced/01_concurrency.md) — 并发
@@ -486,7 +486,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: `collect()` 是 Rust 中最常见的类型推断失败点之一。它返回 `FromIterator` trait 的实现类型，编译器无法从空上下文推断具体集合类型。turbofish 语法 `::<Type>` 允许在方法链中指定类型参数，避免引入中间变量。这是 Rust 类型系统的"显式优于隐式"原则在迭代器 API 中的体现。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `collect()` 是 Rust 中最常见的类型推断（Type Inference）失败点之一。它返回 `FromIterator` trait 的实现类型，编译器无法从空上下文推断具体集合类型。turbofish 语法 `::<Type>` 允许在方法链中指定类型参数，避免引入中间变量。这是 Rust 类型系统（Type System）的"显式优于隐式"原则在迭代器 API 中的体现。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.2 边界测试：迭代器适配器的惰性求值陷阱（逻辑错误）
 
@@ -575,7 +575,7 @@ fn main() {
 }
 ```
 
-> **修正**: `Iterator::zip` 在任一输入迭代器返回 `None` 时结束，不检查长度是否相等。长度不匹配时，较长迭代器的剩余元素被静默丢弃——这是常见的逻辑错误源。检测方法：1) 先比较长度 `assert_eq!(keys.len(), values.len())`；2) 使用 `keys.iter().zip(values.iter().chain(std::iter::repeat(&0)))` 填充缺失值；3) 使用 `itertools::zip_eq`（panic 若长度不等）。这与 Python 的 `zip`（同样静默截断，`zip_longest` 填充）或 Haskell 的 `zip`（同样截断）行为相同。Rust 的标准库不提供 `zip_eq`，但 `itertools` crate 补充了此类便利功能。编译期无法检查迭代器长度（某些迭代器是无限的或动态的），因此这是运行时检查的领域。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [itertools Documentation](https://docs.rs/itertools/)]
+> **修正**: `Iterator::zip` 在任一输入迭代器返回 `None` 时结束，不检查长度是否相等。长度不匹配时，较长迭代器的剩余元素被静默丢弃——这是常见的逻辑错误源。检测方法：1) 先比较长度 `assert_eq!(keys.len(), values.len())`；2) 使用 `keys.iter().zip(values.iter().chain(std::iter::repeat(&0)))` 填充缺失值；3) 使用 `itertools::zip_eq`（panic 若长度不等）。这与 Python 的 `zip`（同样静默截断，`zip_longest` 填充）或 Haskell 的 `zip`（同样截断）行为相同。Rust 的标准库不提供 `zip_eq`，但 `itertools` crate 补充了此类便利功能。编译期无法检查迭代器长度（某些迭代器是无限的或动态的），因此这是运行时（Runtime）检查的领域。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [itertools Documentation](https://docs.rs/itertools/)]
 
 ### 10.4 边界测试：消耗型适配器与双重迭代（编译错误）
 
@@ -593,7 +593,7 @@ fn main() {
 }
 ```
 
-> **修正**: 迭代器是**一次性**的——`collect`、`fold`、`for_each` 等消耗型方法获取迭代器所有权，调用后迭代器失效。这与 C++ 的 `std::istream_iterator`（同样一次性）或 Java 的 `Iterator`（同样 `hasNext`/`next` 消耗）类似。Rust 的所有权系统显式追踪迭代器的消耗：调用 `into_iter()` 转移 `Vec` 所有权到迭代器，`collect` 转移迭代器所有权到 `Vec`。若需多次遍历，应 `clone` 底层集合（`data.clone().into_iter()`），或使用非消耗型迭代（`data.iter()` 借用（Borrowing））。`Iterator` trait 的 `by_ref()` 方法可借出迭代器引用，允许部分消耗后继续使用——高级但有用。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)]
+> **修正**: 迭代器是**一次性**的——`collect`、`fold`、`for_each` 等消耗型方法获取迭代器所有权（Ownership），调用后迭代器失效。这与 C++ 的 `std::istream_iterator`（同样一次性）或 Java 的 `Iterator`（同样 `hasNext`/`next` 消耗）类似。Rust 的所有权系统显式追踪迭代器的消耗：调用 `into_iter()` 转移 `Vec` 所有权到迭代器，`collect` 转移迭代器所有权到 `Vec`。若需多次遍历，应 `clone` 底层集合（`data.clone().into_iter()`），或使用非消耗型迭代（`data.iter()` 借用（Borrowing））。`Iterator` trait 的 `by_ref()` 方法可借出迭代器引用（Reference），允许部分消耗后继续使用——高级但有用。[来源: [The Rust Programming Language](LINK_PLACEHOLDER)] · [来源: [Rust Standard Library](LINK_PLACEHOLDER)]
 
 ### 10.6 边界测试：`Iterator::fuse` 后的重复消费（逻辑错误）
 
@@ -720,13 +720,13 @@ fn main() {
 | Rust 迭代器模式 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | Rust 迭代器模式 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
-> 惰性求值安全 ⟸ Iterator 状态机 ⟸ 借用检查
-> 适配器组合正确 ⟸ map/filter 生命周期（Lifetimes） ⟸ 闭包捕获
-> **过渡**: 掌握 Rust 迭代器模式 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> 惰性求值安全 ⟸ Iterator 状态机 ⟸ 借用（Borrowing）检查
+> 适配器组合正确 ⟸ map/filter 生命周期（Lifetimes） ⟸ 闭包（Closures）捕获
+> **过渡**: 掌握 Rust 迭代器模式 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 Rust 迭代器模式 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: Rust 迭代器模式 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: Rust 迭代器模式 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

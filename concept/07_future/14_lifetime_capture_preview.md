@@ -13,7 +13,7 @@
 > **内容分级**: [实验级]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
-> **双维定位**: C×Ana — 分析 impl Trait 的生命周期捕获规则
+> **双维定位**: C×Ana — 分析 impl Trait 的生命周期（Lifetimes）捕获规则
 > **前置依赖**: [Lifetime](../01_foundation/03_lifetimes.md) · [Trait](../02_intermediate/01_traits.md)
 > **后置延伸**: [RPITIT](./15_rpitit_preview.md)
 > **来源**: [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) · [RFC 2289](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html)
@@ -47,11 +47,11 @@ fn main() {}
 >
 > 应用场景：
 >
-> 1) 返回迭代器但只借用部分输入；
-> 2) 闭包捕获部分环境；
+> 1) 返回迭代器（Iterator）但只借用（Borrowing）部分输入；
+> 2) 闭包（Closures）捕获部分环境；
 > 3) 复杂嵌套的 lifetime 关系简化。
 >
-> 这与 TypeScript 的泛型（默认全部捕获，无精确控制）或 Swift 的 `@escaping`（控制闭包捕获，但不精确到 lifetime）不同——Rust 的 `use<>` 是类型系统的精确性扩展，解决 impl trait 的 lifetime 泄露问题。
+> 这与 TypeScript 的泛型（Generics）（默认全部捕获，无精确控制）或 Swift 的 `@escaping`（控制闭包（Closures）捕获，但不精确到 lifetime）不同——Rust 的 `use<>` 是类型系统（Type System）的精确性扩展，解决 impl trait 的 lifetime 泄露问题。
 > [来源: [Precise Capturing RFC](https://rust-lang.github.io/rfcs//3498-lifetime-capture-rules-2024.html)] ·
 > [来源: [Rust 2024 Edition](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)]
 >
@@ -83,7 +83,7 @@ fn main() {}
 
 ### 测验 1："生命周期捕获规则"的改进解决了什么问题？（理解层）
 
-**题目**: "生命周期捕获规则"的改进解决了什么问题？
+**题目**: "生命周期（Lifetimes）捕获规则"的改进解决了什么问题？
 
 <details>
 <summary>✅ 答案与解析</summary>
@@ -91,6 +91,7 @@ fn main() {}
 `impl Trait` 返回类型隐式捕获所有输入生命周期，导致某些合法代码因生命周期过约束而编译失败。改进允许更精确的捕获控制。
 </details>
 
+> **前置概念**: N/A
 ---
 
 ### 测验 2：`impl Trait + use<'a>` 语法中的 `use<'a>` 有什么作用？（理解层）
@@ -112,7 +113,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-允许编写更精确、更灵活的泛型 API，特别是涉及异步和闭包时。减少了因生命周期推断保守性导致的不必要的 `Box` 分配。
+允许编写更精确、更灵活的泛型（Generics） API，特别是涉及异步（Async）和闭包时。减少了因生命周期推断保守性导致的不必要的 `Box` 分配。
 </details>
 
 ---

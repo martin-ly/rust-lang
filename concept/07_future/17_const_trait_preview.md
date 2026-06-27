@@ -44,7 +44,7 @@ fn main() {
 >
 > 1) `~const Trait` 语法标记"可在 const 上下文中使用的 trait"；
 > 2) `const impl Trait for Type` 标记实现支持常量求值；
-> 3) 目标：在 `const fn` 中使用泛型 trait bound（如 `T: ~const Add`）。
+> 3) 目标：在 `const fn` 中使用泛型（Generics） trait bound（如 `T: ~const Add`）。
 >
 > 当前状态：部分实现（nightly `const_trait_impl`）， design 迭代中。
 >
@@ -52,7 +52,7 @@ fn main() {
 >
 > 1) `macro_rules!` 生成多份代码；
 > 2) `min_specialization` 为常量/非常量分别实现；
-> 3) 放弃 const，使用运行时计算。
+> 3) 放弃 const，使用运行时（Runtime）计算。
 > 这与 C++ 的 `constexpr`（函数可自动在编译期/运行期使用，无需特殊标记）或 D 的 `CTFE`（Compile Time Function Execution，类似但更灵活）不同——Rust 追求显式控制：const 函数有严格的副作用限制，trait 的 const 支持需显式声明。
 > [来源: [Const Trait RFC](https://github.com/rust-lang/rust/issues/67792)] ·
 > [来源: [Const Generics](https://rust-lang.github.io/rfcs//2000-const-generics.html)]
@@ -90,9 +90,10 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-`const fn` 是单个函数可在编译期执行。`const trait` 允许 trait 的方法在常量上下文中使用，使泛型常量代码成为可能。
+`const fn` 是单个函数可在编译期执行。`const trait` 允许 trait 的方法在常量上下文中使用，使泛型（Generics）常量代码成为可能。
 </details>
 
+> **前置概念**: N/A
 ---
 
 ### 测验 2：为什么 `Vec::new()`  historically 不是 `const fn`？（理解层）
@@ -114,7 +115,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-表示"这个泛型参数可以是 const 或非 const 的 trait 实现"。允许函数同时服务于 const 和运行时上下文。
+表示"这个泛型参数可以是 const 或非 const 的 trait 实现"。允许函数同时服务于 const 和运行时（Runtime）上下文。
 </details>
 
 ---

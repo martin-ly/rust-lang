@@ -23,6 +23,7 @@
 > [形式化验证工具](./47_formal_verification_tools.md)
 >
 > **来源**: [rclrs](https://docs.rs/rclrs/) · [ROS2 Rust](https://github.com/ros2-rust/ros2_rust)
+> **前置概念**: N/A
 ---
 
 > **来源**: [ROS2 Design](https://design.ros2.org/) ·
@@ -138,7 +139,7 @@
 |:---|:---|:---|:---:|
 | **硬实时** (Hard) | 灾难性故障、人员伤亡 | 汽车制动、医疗机器人 | ⚠️ 需 `no_std` + RTOS |
 | **软实时** (Firm) | 任务完全失效 | 视频流、SLAM 建图 | ✅ `std` + 实时调度 |
-| **软实时** (Soft) | 性能降级 | 遥操作、日志记录 | ✅ `std` + 异步 |
+| **软实时** (Soft) | 性能降级 | 遥操作、日志记录 | ✅ `std` + 异步（Async） |
 
 ```text
 确定性 (Determinism) 的关键指标:
@@ -208,10 +209,10 @@ ROS2 通信原语:
 | **内存约束** | 中（1-4GB） | 高（16-64GB） | 极低（<1GB） | 中（4-8GB） |
 | **并发度** | 中（10-50 线程） | 极高（GPU+多传感器） | 高（RTOS+控制） | 极高（全身关节） |
 | **Rust 实时性** | ✅ `no_std` + RTOS | ⚠️ `std` + PREEMPT_RT | ✅ `no_std` + Tock | ⚠️ 混合架构 |
-| **Rust 安全性** | ✅ 内存安全替代 C++ | ✅ 消除 use-after-free | ✅ 堆分配可控 | ✅ 全身控制安全 |
+| **Rust 安全性** | ✅ 内存安全（Memory Safety）替代 C++ | ✅ 消除 use-after-free | ✅ 堆分配可控 | ✅ 全身控制安全 |
 | **Rust 生态成熟度** | ⚠️ ROS2 Rust 绑定年轻 | ⚠️ 传感器驱动不全 | ⚠️ HAL 覆盖有限 | ❌ 缺少完整 SDK |
 | **C++ 存量代码** | 极高（ROS1/ROS2 C++） | 极高（Autoware） | 高（PX4/ArduPilot） | 高（Tesla Optimus?） |
-| **迁移策略** | 渐进式（新模块 Rust） | 安全关键路径优先 | 飞控核心 Rust 化 | 关节驱动 Rust 化 |
+| **迁移策略** | 渐进式（新模块（Module） Rust） | 安全关键路径优先 | 飞控核心 Rust 化 | 关节驱动 Rust 化 |
 
 > **来源**: [ROS2 Rust WG](https://github.com/ros2-rust/ros2_rust) · [Tock OS Embedded](https://www.tockos.org/) · [Rust in Autonomous Systems — Ferrous Systems](https://ferrous-systems.com/) · [ISO 26262-6](https://www.iso.org/standard/68383.html)
 
@@ -221,7 +222,7 @@ ROS2 通信原语:
 
 ### 3.1 rclrs：官方 Rust 客户端库
 
-> **[ros2-rust/rclrs](https://github.com/ros2-rust/ros2_rust)** 是 ROS2 官方支持的 Rust 客户端库，通过 `rcl`（ROS Client Library，C 接口）与 ROS2 核心交互。设计理念：**零成本抽象**与**内存安全**并重，利用 Rust 的所有权系统防止常见的 DDS 数据竞争和生命周期错误。[来源: [ros2-rust GitHub](https://github.com/ros2-rust/ros2_rust)]
+> **[ros2-rust/rclrs](https://github.com/ros2-rust/ros2_rust)** 是 ROS2 官方支持的 Rust 客户端库，通过 `rcl`（ROS Client Library，C 接口）与 ROS2 核心交互。设计理念：**零成本抽象（Zero-Cost Abstraction）**与**内存安全（Memory Safety）**并重，利用 Rust 的所有权（Ownership）系统防止常见的 DDS 数据竞争和生命周期（Lifetimes）错误。[来源: [ros2-rust GitHub](https://github.com/ros2-rust/ros2_rust)]
 
 ```rust,ignore
 // rclrs 基础节点示例
@@ -566,7 +567,7 @@ fn solve_ik(chain: &Chain<f64>, target: &Isometry3<f64>) -> Result<Vec<f64>, Err
 }
 ```
 
-**OpenRR 模块结构**：
+**OpenRR 模块（Module）结构**：
 
 ```text
 openrr 生态:
@@ -622,7 +623,7 @@ fn plan_path(map: &GridMap, start: (usize, usize), goal: (usize, usize))
 
 ### 6.1 PID、MPC 与 LQR
 
-> **控制理论**是机器人学的数学基础。Rust 的类型系统和零成本抽象使得控制算法既可以表达为高可读性的数学公式，又能编译为无运行时开销的机器码。[来源: [Modern Control Engineering — Ogata](https://www.pearson.com/en-us/subject-catalog/p/modern-control-engineering/P200000005828)]
+> **控制理论**是机器人学的数学基础。Rust 的类型系统（Type System）和零成本抽象（Zero-Cost Abstraction）使得控制算法既可以表达为高可读性的数学公式，又能编译为无运行时（Runtime）开销的机器码。[来源: [Modern Control Engineering — Ogata](https://www.pearson.com/en-us/subject-catalog/p/modern-control-engineering/P200000005828)]
 
 ```rust
 // 数字 PID 控制器（位置式，抗积分饱和，微分先行）
@@ -675,7 +676,7 @@ fn control_law<const N: usize, const M: usize>(
 
 ### 6.2 状态空间与优化
 
-> 状态空间表示是现代控制理论的标准数学语言。`nalgebra` 和 `nshare` 使 Rust 能够直接操作状态空间矩阵，而无需像 C++ 那样依赖 Eigen 的宏魔法。[来源: [nalgebra User Guide](https://www.nalgebra.org/)]
+> 状态空间表示是现代控制理论的标准数学语言。`nalgebra` 和 `nshare` 使 Rust 能够直接操作状态空间矩阵，而无需像 C++ 那样依赖 Eigen 的宏（Macro）魔法。[来源: [nalgebra User Guide](https://www.nalgebra.org/)]
 
 ```rust,ignore
 // 卡尔曼滤波器（线性系统）
@@ -896,16 +897,16 @@ impl GoodNode {
 
 - [嵌入式系统](./22_embedded_systems.md) — `no_std`、硬件抽象层、交叉编译
 - [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、Mutex、线程池
-- [Async/Await](../03_advanced/02_async.md) — 异步运行时、非阻塞 I/O
+- [Async/Await](LINK_PLACEHOLDER) — 异步（Async）运行时（Runtime）、非阻塞 I/O
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — FFI、裸指针、内存模型
 - [网络协议](./38_network_protocols.md) — UDP/TCP、序列化、gRPC/QUIC
 - [操作系统内核](./39_os_kernel.md) — 调度器、中断、内存管理
 - [性能优化](./15_performance_optimization.md) — SIMD、缓存、零拷贝
-- [内存管理](../02_intermediate/03_memory_management.md) — 分配器、生命周期、RAII
-- [类型系统](../01_foundation/04_type_system.md) — 泛型、trait、类型状态
+- [内存管理](../02_intermediate/03_memory_management.md) — 分配器、生命周期（Lifetimes）、RAII
+- [类型系统（Type System）](LINK_PLACEHOLDER) — 泛型（Generics）、trait、类型状态
 - [机器学习生态](./46_machine_learning_ecosystem.md) — 感知算法、神经网络推理
 - [形式化验证工具](./47_formal_verification_tools.md) — 模型检查、定理证明、Kani
-- [分布式共识](./50_distributed_consensus.md) — 多机器人协同、一致性
+- [分布式共识](./50_distributed_consensus.md) — 多机器人协同、一致性（Coherence）
 
 > **过渡**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
@@ -926,7 +927,7 @@ impl GoodNode {
 <details>
 <summary>✅ 答案与解析</summary>
 
-实时性要求（确定性延迟、无 GC 停顿）、内存安全（避免机器人失控）、并发安全（传感器、控制器、规划器并行）。DARPA 和 NASA 已资助 Rust 机器人项目。
+实时性要求（确定性延迟、无 GC 停顿）、内存安全（Memory Safety）（避免机器人失控）、并发安全（Concurrency Safety）（传感器、控制器、规划器并行）。DARPA 和 NASA 已资助 Rust 机器人项目。
 </details>
 
 ---
@@ -974,7 +975,7 @@ impl GoodNode {
 <details>
 <summary>✅ 答案与解析</summary>
 
-使用卡尔曼滤波器（`kalman` crate）或粒子滤波器融合多传感器数据（IMU、激光雷达、摄像头）。Rust 的类型系统帮助确保数据时间戳和单位一致性。
+使用卡尔曼滤波器（`kalman` crate）或粒子滤波器融合多传感器数据（IMU、激光雷达、摄像头）。Rust 的类型系统帮助确保数据时间戳和单位一致性（Coherence）。
 </details>
 
 ## 认知路径

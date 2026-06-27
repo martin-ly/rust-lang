@@ -9,8 +9,8 @@
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **A+S** — Application + Structure
-> **双维定位**: C×App — 应用控制流结构和模式匹配
-> **定位**: 分析 Rust **控制流结构**的设计哲学——从表达式导向（expression-oriented）的 `if`/`match`/`loop`，到 `if let`/`while let` 的模式匹配集成，揭示 Rust 如何将控制流转化为**值生成**而非**副作用执行**。
+> **双维定位**: C×App — 应用控制流结构和模式匹配（Pattern Matching）
+> **定位**: 分析 Rust **控制流结构**的设计哲学——从表达式导向（expression-oriented）的 `if`/`match`/`loop`，到 `if let`/`while let` 的模式匹配（Pattern Matching）集成，揭示 Rust 如何将控制流转化为**值生成**而非**副作用执行**。
 > **前置概念**: [Ownership](./01_ownership.md) · [Type System](./04_type_system.md)
 > **后置概念**: [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md)
 
@@ -45,9 +45,9 @@
   - [十二、边界测试：控制流的编译错误](#十二边界测试控制流的编译错误)
     - [12.1 边界测试：`loop` 返回值类型不匹配（编译错误）](#121-边界测试loop-返回值类型不匹配编译错误)
     - [12.2 边界测试：`if let` 与 `while let` 的变量遮蔽（编译错误）](#122-边界测试if-let-与-while-let-的变量遮蔽编译错误)
-    - [10.3 边界测试：`loop` 表达式的类型推断（编译错误）](#103-边界测试loop-表达式的类型推断编译错误)
+    - [10.3 边界测试：`loop` 表达式的类型推断（Type Inference）（编译错误）](LINK_PLACEHOLDER)
     - [10.4 边界测试：`?` 运算符在 `main` 中的返回类型（编译错误）](#104-边界测试-运算符在-main-中的返回类型编译错误)
-    - [10.5 边界测试：`loop` 返回值与 `break` 的类型一致性（编译错误）](#105-边界测试loop-返回值与-break-的类型一致性编译错误)
+    - [10.5 边界测试：`loop` 返回值与 `break` 的类型一致性（Coherence）（编译错误）](LINK_PLACEHOLDER)
     - [10.6 边界测试：`match` 臂中的变量绑定与模式守卫（编译错误）](#106-边界测试match-臂中的变量绑定与模式守卫编译错误)
   - [实践](#实践)
   - [参考来源](#参考来源)
@@ -409,7 +409,7 @@ graph TD
     style IF fill:#c8e6c9
 ```
 
-> **认知功能**: 此决策树帮助选择正确的控制流结构。核心原则是：**枚举处理用 match，单模式解包用 if let，简单布尔条件用 if**。
+> **认知功能**: 此决策树帮助选择正确的控制流结构。核心原则是：**枚举（Enum）处理用 match，单模式解包用 if let，简单布尔条件用 if**。
 > [来源: [Rust Clippy — Match Patterns](https://rust-lang.github.io/rust-clippy//master/index.html)]
 
 ---
@@ -447,7 +447,7 @@ graph TD
 └── 解决方案: 使用 @ 绑定或部分匹配
 ```
 
-> **边界要点**: 控制流的边界主要与**穷尽性要求**、**类型一致性**、**异步交互**和**const 限制**相关。
+> **边界要点**: 控制流的边界主要与**穷尽性要求**、**类型一致性（Coherence）**、**异步（Async）交互**和**const 限制**相关。
 > [来源: [Rust Reference — Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html)]
 
 ---
@@ -532,8 +532,8 @@ graph TD
 
 ## 相关概念文件
 
-- [Ownership](./01_ownership.md) — 所有权模型
-- [Type System](./04_type_system.md) — 类型系统
+- [Ownership](./01_ownership.md) — 所有权（Ownership）模型
+- [Type System](./04_type_system.md) — 类型系统（Type System）
 - [Generics](../02_intermediate/02_generics.md) — 迭代器（Iterator）
 - [Async](../03_advanced/02_async.md) — 异步控制流
 
@@ -610,8 +610,8 @@ fn fixed() {
 ```
 
 > **修正**: `if let` 和 `while let` 通过模式匹配解构值。
-> 若模式不使用 `ref` 或 `ref mut`，则发生所有权移动（对非 `Copy` 类型）。
-> 使用 `ref` 绑定创建引用而非获取所有权，允许在匹配后继续使用原值。
+> 若模式不使用 `ref` 或 `ref mut`，则发生所有权（Ownership）移动（对非 `Copy` 类型）。
+> 使用 `ref` 绑定创建引用（Reference）而非获取所有权，允许在匹配后继续使用原值。
 > 这是 Rust 模式匹配与所有权系统的关键交互点。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-05-control-flow.html)]
 
@@ -656,8 +656,8 @@ fn main() {
 > `?` 运算符只能在返回 `Result` 或 `Option` 的函数中使用。
 > `main` 函数可返回 `Result<(), E>`（`E: Debug`），Rust 在返回 `Err` 时打印错误并设置非零退出码。
 > 正确写法：`fn main() -> Result<(), Box<dyn std::error::Error>> { let file = std::fs::File::open("...")?; Ok(()) }`。
-> 这与 Go 的 `if err != nil { return err }`（在 main 中返回 error 等价于 `os.Exit(1)`）或 Python 的 `sys.exit(1)` 类似——Rust 的类型系统要求显式声明 `main` 可能失败。
-> `main` 返回 `Result` 是 Rust 错误处理哲学的自然延伸：连程序入口点也使用 `Result`。
+> 这与 Go 的 `if err != nil { return err }`（在 main 中返回 error 等价于 `os.Exit(1)`）或 Python 的 `sys.exit(1)` 类似——Rust 的类型系统（Type System）要求显式声明 `main` 可能失败。
+> `main` 返回 `Result` 是 Rust 错误处理（Error Handling）哲学的自然延伸：连程序入口点也使用 `Result`。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)] ·
 > [来源: [Rust Reference — Main Function](https://doc.rust-lang.org/reference/crates-and-source-files.html#main-functions)]
 
@@ -709,15 +709,15 @@ fn main() {
 ```
 
 > **修正**:
-> `match` 的**模式守卫**（pattern guard，`if` 条件）在绑定后执行，但守卫中的借用可能与后续臂冲突。
-> `ref` 关键字创建引用绑定（`&T` 而非 `T`），避免 move。`ref mut` 创建可变引用绑定。
+> `match` 的**模式守卫**（pattern guard，`if` 条件）在绑定后执行，但守卫中的借用（Borrowing）可能与后续臂冲突。
+> `ref` 关键字创建引用绑定（`&T` 而非 `T`），避免 move。`ref mut` 创建可变引用（Mutable Reference）绑定。
 > 模式守卫的限制：
 >
 > 1) 守卫中不能引入新绑定；
-> 2) 守卫中的变量是引用而非值（若使用 `ref`）；
+> 2) 守卫中的变量是引用（Reference）而非值（若使用 `ref`）；
 > 3) 守卫不移动值，但若守卫失败，后续臂可能获得 move 绑定。
 > 这与 Haskell 的 `case` guard（类似，但 Haskell 是惰性求值，守卫语义不同）或 Scala 的 `match` with `if` guard（类似，但无所有权影响）不同
-> ——Rust 的模式守卫需考虑所有权和借用的交互。
+> ——Rust 的模式守卫需考虑所有权和借用（Borrowing）的交互。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html)] ·
 > [来源: [Rust Reference — Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards)]
 
@@ -746,14 +746,14 @@ fn main() {
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | 控制流：表达式导向的流程控制 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 控制流：表达式导向的流程控制 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 控制流：表达式导向的流程控制 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 控制流：表达式导向的流程控制 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 程序行为可预测 ⟸ 控制流结构化 ⟸ match/loop/if 穷尽性
-> 无未定义行为 ⟸ 穷尽性匹配强制 ⟸ 类型系统约束
+> 无未定义行为 ⟸ 穷尽性匹配强制 ⟸ 类型系统（Type System）约束
 > **过渡**: 掌握 控制流：表达式导向的流程控制 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 控制流：表达式导向的流程控制 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: 控制流：表达式导向的流程控制 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 控制流：表达式导向的流程控制 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 
@@ -940,3 +940,344 @@ after outer, count=3
 
 标签化的 `break` 允许从内层循环直接退出到指定的外层循环，避免使用额外的标志变量。
 </details>
+
+---
+
+## 补充章节：控制流理论深化（P1-4）
+
+本章节从**程序语言理论**视角深化对 Rust 控制流的理解：结构化程序定理说明为何 Rust 摒弃 `goto` 仍保持图灵完备；Continuation 与 CPS 变换解释 `async/await` 与 `?` 的本质；控制流图、基本块与支配树是理解 MIR 与借用检查器的基础；循环不变量与 Hoare 逻辑为编写可信的循环提供证明框架；最后对比 `goto`、`break 'label` 与 `?` 三种非局部控制转移机制。
+
+---
+
+### 7.1 结构化程序定理（Böhm–Jacopini）
+
+**定义**：结构化程序定理（Böhm & Jacopini, 1966）指出，任何可计算函数都可以由仅包含三种控制结构的程序实现：
+
+1. **顺序（Sequence）**：语句按先后顺序执行。
+2. **选择（Selection）**：根据条件选择分支（`if`）。
+3. **迭代（Iteration）**：在条件满足时重复执行（`while`）。
+
+该定理的重要意义在于：**无需无限制的 `goto`，单入口/单出口的结构化程序已足以表达全部可计算性**。这也为现代高级语言放弃 `goto` 提供了理论依据。
+
+#### Rust 关联
+
+Rust 的核心控制流——`if`/`match`/`loop`/`while`/`for`——正是结构化程序定理的工程实现：
+
+- `if` 与 `match` 提供选择；
+- `loop`/`while`/`for` 提供迭代；
+- 表达式块 `{}` 提供顺序组合；
+- 即使是 `break 'label`，也仍然受限于**退出命名循环**这一结构化操作，不会破坏单入口/单出口性质。
+
+Rust 没有 `goto`，因此任何 Rust 程序在控制流层面都是结构化的，这直接提升了代码的可推理性与可维护性。
+
+#### 代码示例
+
+以下用 Rust 实现欧几里得算法，它仅使用顺序、选择、迭代三种结构，展示了结构化控制流的充分性：
+
+```rust
+fn gcd(a: u64, b: u64) -> u64 {
+    let mut x = a;
+    let mut y = b;
+    while y != 0 {              // 迭代
+        let tmp = y;            // 顺序
+        y = x % y;
+        x = tmp;
+    }
+    x                           // 选择已内嵌在 while 条件中
+}
+
+fn main() {
+    println!("gcd(48, 18) = {}", gcd(48, 18));
+}
+```
+
+> **关联章节**: [Error Handling Basics](./10_error_handling_basics.md) · [Async Control Flow](../03_advanced/02_async.md)
+
+---
+
+### 7.2 Continuation / call/cc / CPS 变换
+
+**定义**：Continuation（续延）是"计算的剩余部分"。形式上，若表达式 `e` 在当前上下文 `C[·]` 中求值，则该上下文的语义函数 `κ(v) = C[v]` 就是 `e` 的 continuation。`call/cc`（call-with-current-continuation）是 Scheme 等语言提供的操作，它捕获当前 continuation 并作为普通函数暴露给调用者。
+
+**CPS 变换（Continuation-Passing Style）** 是一种程序变换：把每个函数扩展一个额外参数 `k`，函数不再直接返回结果，而是把结果传递给 `k`。经过 CPS 变换后，所有函数调用都变成**尾调用**，控制流完全显式化。
+
+#### Rust 关联
+
+Rust **没有** `call/cc`，原因与所有权模型密切相关：`call/cc` 会捕获整个调用栈的延续，可能与线性资源（如已获取的锁、已打开的文件）产生不可预测的生命周期（Lifetimes）交互，破坏 Rust 的借用规则。
+
+然而，Rust 中多处存在 continuation 的显式或隐式形式：
+
+- **`async/await`**：`Future` 本质上是一个可以挂起和恢复的**显式 continuation**；`await` 点将后续代码打包为状态机的下一个状态。
+- **`?` 运算符**：`expr?` 在错误时提前返回当前函数的 continuation（即把 `Err(e)` 交给调用者），等价于一种受限的"错误 continuation"。
+- **回调/闭包（Closures）**：高阶函数可以把后续计算作为闭包参数传递，这是手写的 CPS。
+
+#### 代码示例
+
+以下展示直接风格与 CPS 风格的阶乘对比，并展示 `?` 如何作为一种隐式 continuation：
+
+```rust
+// 直接风格
+fn factorial_direct(n: u64) -> u64 {
+    if n == 0 { 1 } else { n * factorial_direct(n - 1) }
+}
+
+// CPS 风格：显式传递 continuation
+fn factorial_cps<F: FnOnce(u64)>(n: u64, k: F) {
+    if n == 0 {
+        k(1);
+    } else {
+        factorial_cps(n - 1, move |r| k(n * r));
+    }
+}
+
+// ? 运算符：错误路径的隐式 continuation
+fn may_fail(n: i32) -> Result<i32, &'static str> {
+    if n < 0 {
+        return Err("negative");
+    }
+    Ok(n)
+}
+
+fn sum_checked(a: i32, b: i32) -> Result<i32, &'static str> {
+    let x = may_fail(a)?; // 错误时直接返回 Err，等价于 match + return
+    let y = may_fail(b)?;
+    Ok(x + y)
+}
+
+fn main() {
+    println!("direct: {}", factorial_direct(5));
+    factorial_cps(5, |r| println!("cps: {}", r));
+    println!("checked: {:?}", sum_checked(3, -1));
+}
+```
+
+**关键洞察**：CPS 把隐式的"返回"变成显式的函数调用，使控制流成为可编程对象；Rust 通过 `Future` 和 `?` 在保留所有权安全的前提下，提供了两种受限但工程上更可控的 continuation 形式。
+
+> **关联章节**: [Async](../03_advanced/02_async.md) · [Closures](./15_closure_basics.md) · [Error Handling](./10_error_handling_basics.md)
+
+---
+
+### 7.3 控制流图（CFG）、基本块与支配树
+
+**定义**：
+
+- **控制流图（Control Flow Graph, CFG）** 是有向图 `G = (B, E, entry)`，其中节点 `B` 是**基本块（Basic Block）**——一段顺序执行、只能从第一条指令进入、只能从最后一条指令离开的指令序列；边 `E` 表示基本块之间的可能转移。
+- **支配（Dominator）**：若从入口到节点 `n` 的每条路径都经过节点 `d`，则称 `d` 支配 `n`（记为 `d dom n`）。
+- **直接支配者（Immediate Dominator, idom）**：严格支配 `n` 且不被 `n` 的任何其他严格支配者所支配的节点，唯一存在（除入口外）。所有节点的 `idom` 构成**支配树（Dominator Tree）**。
+
+#### Rust 关联
+
+Rust 编译器在生成 MIR（Mid-level IR）时会构建函数的 CFG；借用检查器（borrowck）利用支配关系判断值的生命周期（Lifetimes）、借用是否合法以及 `&mut` 是否唯一。例如，变量的定义必须**支配**其使用点，否则会出现 use-before-init 错误。
+
+#### 代码示例
+
+以下用 Rust 实现一个极小的 CFG 与迭代式支配集计算：
+
+```rust
+use std::collections::{HashMap, HashSet};
+
+#[derive(Clone, Debug)]
+enum Terminator {
+    Jump(usize),
+    Branch { cond: bool, then_: usize, else_: usize },
+    Return,
+}
+
+#[derive(Clone, Debug)]
+struct BasicBlock {
+    id: usize,
+    instrs: Vec<String>,
+    term: Terminator,
+}
+
+struct Cfg {
+    blocks: Vec<BasicBlock>,
+    entry: usize,
+}
+
+impl Cfg {
+    fn predecessors(&self, id: usize) -> Vec<usize> {
+        let mut preds = Vec::new();
+        for bb in &self.blocks {
+            match bb.term {
+                Terminator::Jump(target) if target == id => preds.push(bb.id),
+                Terminator::Branch { then_, else_, .. } => {
+                    if then_ == id { preds.push(bb.id); }
+                    if else_ == id { preds.push(bb.id); }
+                }
+                _ => {}
+            }
+        }
+        preds
+    }
+
+    // 迭代法求支配集：entry 只支配自身，其余节点初始为全集，然后取前驱支配集交集 + 自身
+    fn dominators(&self) -> HashMap<usize, HashSet<usize>> {
+        let all: HashSet<usize> = self.blocks.iter().map(|b| b.id).collect();
+        let mut dom: HashMap<usize, HashSet<usize>> = HashMap::new();
+        for bb in &self.blocks {
+            if bb.id == self.entry {
+                let mut s = HashSet::new();
+                s.insert(bb.id);
+                dom.insert(bb.id, s);
+            } else {
+                dom.insert(bb.id, all.clone());
+            }
+        }
+
+        let mut changed = true;
+        while changed {
+            changed = false;
+            for bb in &self.blocks {
+                if bb.id == self.entry { continue; }
+                let preds = self.predecessors(bb.id);
+                let mut new_set: HashSet<usize> = all.clone();
+                for p in &preds {
+                    new_set = new_set.intersection(&dom[p]).copied().collect();
+                }
+                new_set.insert(bb.id);
+                if new_set != dom[&bb.id] {
+                    dom.insert(bb.id, new_set);
+                    changed = true;
+                }
+            }
+        }
+        dom
+    }
+}
+
+fn main() {
+    // if x > 0 { return 1 } else { return 2 }
+    let cfg = Cfg {
+        entry: 0,
+        blocks: vec![
+            BasicBlock { id: 0, instrs: vec!["x > 0".into()], term: Terminator::Branch { cond: true, then_: 1, else_: 2 } },
+            BasicBlock { id: 1, instrs: vec!["ret 1".into()], term: Terminator::Return },
+            BasicBlock { id: 2, instrs: vec!["ret 2".into()], term: Terminator::Return },
+        ],
+    };
+
+    for (id, doms) in cfg.dominators() {
+        println!("BB{} is dominated by {:?}", id, doms);
+    }
+}
+```
+
+**输出解释**：`BB0`（入口）支配所有块；`BB1` 与 `BB2` 只被 `BB0` 和自身支配。支配树中 `BB0` 是 `BB1`、`BB2` 的父节点。
+
+> **关联章节**: [Borrowing](./02_borrowing.md) · [Lifetimes](./03_lifetimes.md) · [Formal Type Theory](../04_formal/02_type_theory.md)
+
+---
+
+### 7.4 循环不变量与 Hoare 逻辑衔接
+
+**定义**：Hoare 三元组 `{P} S {Q}` 表示：若程序状态满足前置条件 `P`，执行语句 `S` 后，状态满足后置条件 `Q`。对于循环 `while C do S`，**循环不变量（Loop Invariant）** `I` 是满足以下条件的断言：
+
+1. **初始化**：进入循环前 `I` 成立；
+2. **保持**：若 `I ∧ C` 成立，执行循环体 `S` 后 `I` 仍然成立；
+3. **终止**：当 `I ∧ ¬C` 成立时，可推出循环后置条件 `Q`。
+
+#### Rust 关联
+
+Rust 的类型系统已经在编译期保证了许多不变量（如引用合法性、变量初始化），但数值/逻辑不变量仍需要程序员维护。Rust 通过 `assert!` / `debug_assert!` 可以在运行时（Runtime）检查不变量；在关键循环中显式写出不变量注释，是提高代码可信度的有效手段。
+
+#### 代码示例
+
+以下二分查找实现了清晰的循环不变量：
+
+```rust
+fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
+    let mut lo = 0usize;
+    let mut hi = arr.len(); // 搜索区间 [lo, hi)
+
+    // 循环不变量：
+    // 1. 0 <= lo <= hi <= arr.len()
+    // 2. 若 target 在 arr 中，则其下标 ∈ [lo, hi)
+    while lo < hi {
+        debug_assert!(lo <= hi && hi <= arr.len());
+
+        let mid = lo + (hi - lo) / 2;
+        match arr[mid].cmp(&target) {
+            std::cmp::Ordering::Equal => return Some(mid),
+            std::cmp::Ordering::Less => lo = mid + 1,   // target 不在 [lo, mid]
+            std::cmp::Ordering::Greater => hi = mid,    // target 不在 [mid, hi)
+        }
+
+        // 保持：区间缩小，但不变量仍然成立
+        debug_assert!(lo <= hi);
+    }
+
+    // 终止：lo == hi，且不变量说明 target 不在 arr 中
+    None
+}
+
+fn main() {
+    let arr = [1, 3, 5, 7, 9];
+    println!("{:?}", binary_search(&arr, 5));
+    println!("{:?}", binary_search(&arr, 4));
+}
+```
+
+**关键洞察**：循环不变量是连接"代码如何运行"与"代码为何正确"的桥梁。Rust 的穷尽性 `match` 与强类型系统进一步减少了需要显式维护的不变量数量。
+
+> **关联章节**: [Assert & Matches](../02_intermediate/05_assert_matches.md) · [Range Types](../02_intermediate/06_range_types.md)
+
+---
+
+### 7.5 `goto` / `break 'label` / `?` 的本质对比
+
+**定义**：
+
+- **`goto`**：任意跳转指令，可从函数内任意位置跳转到任意标签，破坏结构化控制流。
+- **`break 'label`**：Rust 提供的命名循环退出机制，只能从循环内部跳到该循环的结束点，保持单入口/单出口。
+- **`?`**：错误传播运算符，把 `Result`/`Option` 的错误/空值路径转换为从当前函数提前返回，等价于一种受限的"错误 continuation"。
+
+#### Rust 关联
+
+Rust 明确拒绝 `goto`， because it makes data-flow and lifetime analysis intractable. `break 'label` 是 Rust 对嵌套循环控制的唯一"非局部跳转"机制，且只能向上跳出循环，不能跳入循环或跳转到任意标签。`?` 则通过 `Try` trait 把错误处理（Error Handling）控制流从正常路径中分离，使代码保持线性阅读体验。
+
+#### 对比表
+
+| 特性 | `goto`（C/汇编） | `break 'label`（Rust） | `?`（Rust） |
+|:---|:---|:---|:---|
+| **跳转目标** | 任意标签 | 仅命名循环的结束点 | 当前函数调用者 |
+| **结构化程度** | 非结构化 | 结构化（单入口/单出口） | 结构化（限于错误返回） |
+| **与所有权交互** | 难以追踪资源释放 | 编译器保证 Drop | 编译器保证 Drop + 错误路径 |
+| **典型用途** | 早期优化/状态机 | 多层循环提前退出 | 错误传播 |
+
+#### 代码示例
+
+```rust
+fn find_pair_sum(target: i32, matrix: &[Vec<i32>]) -> Option<(usize, usize)> {
+    'outer: for (i, row) in matrix.iter().enumerate() {
+        for (j, &val) in row.iter().enumerate() {
+            if val == target {
+                // break 'label：结构化地跳出外层循环
+                break 'outer Some((i, j));
+            }
+        }
+    }
+    // 上面的 break 'outer 已经返回，此处兜底
+    None
+}
+
+fn read_config(path: &str) -> Result<String, std::io::Error> {
+    // ?：错误时把 Err 作为函数结果返回，正常时继续
+    let content = std::fs::read_to_string(path)?;
+    Ok(content.trim().to_string())
+}
+
+fn main() {
+    let m = vec![vec![1, 2], vec![3, 4]];
+    println!("{:?}", find_pair_sum(3, &m));
+    println!("{:?}", read_config("nonexistent.txt"));
+}
+```
+
+**关键洞察**：`break 'label` 与 `?` 都是 Rust 在结构化程序定理框架内提供的受限"跳转"机制——前者处理循环嵌套，后者处理错误路径；二者都不会破坏资源的安全释放，也不会像 `goto` 那样导致不可达代码或生命周期混乱。
+
+> **关联章节**: [Error Handling Basics](./10_error_handling_basics.md) · [Async Control Flow](../03_advanced/02_async.md) · [Panic and Abort](./13_panic_and_abort.md)
+
+---
+
+> **补充说明**：以上五个小节共同说明，Rust 的控制流设计并非随意删减 `goto`，而是在结构化程序定理、continuation 理论与编译器实现需求之间取得的工程平衡。

@@ -9,7 +9,7 @@
 > **受众**: [专家 / 研究者]
 > **Bloom 层级**: 理解 → 分析
 > **A/S/P 标记**: **F** — Formal
-> **双维定位**: F×Type — 类型系统与形式化方法
+> **双维定位**: F×Type — 类型系统（Type System）与形式化方法
 > **定位**: 把“编译器如何知道 `Vec<&str>` 并对未标注类型做推断”还原为约束生成、统一与区域求解的完整算法。
 > **前置概念**: [Name Resolution and HIR](./25_name_resolution_and_hir.md) · [Trait Solver in rustc](./26_trait_solver_in_rustc.md) · [Type Inference](./08_type_inference.md)
 > **后置概念**: [NLL 与 Polonius](../03_advanced/08_nll_and_polonius.md) · [LLVM Backend and Codegen](../06_ecosystem/67_llvm_backend_and_codegen.md)
@@ -23,7 +23,7 @@
 
 ## 📑 目录
 
-- [rustc 类型检查与类型推断](#rustc-类型检查与类型推断)
+- [rustc 类型检查与类型推断（Type Inference）](LINK_PLACEHOLDER)
   - [📑 目录](#-目录)
   - [一、类型检查在编译流水线中的位置](#一类型检查在编译流水线中的位置)
   - [二、`Ty<'tcx>`：rustc 内部类型表示](#二tytcxrustc-内部类型表示)
@@ -56,8 +56,8 @@
 类型检查在 HIR 之后执行，负责：
 
 - 为每个表达式确定类型；
-- 验证 trait bound 和泛型约束；
-- 收集生命周期/区域约束供借用检查使用。
+- 验证 trait bound 和泛型（Generics）约束；
+- 收集生命周期（Lifetimes）/区域约束供借用（Borrowing）检查使用。
 
 > **关键洞察**: Rust 的类型检查 = 为每个节点计算类型 + 生成并求解一组约束。
 >
@@ -69,8 +69,8 @@
 
 `rustc_middle::ty::Ty<'tcx>` 是编译器内部表示类型的核心类型。注意：
 
-- `Ty<'tcx>` 是一个指向 arena 分配类型的引用；
-- `'tcx` 是编译上下文生命周期；
+- `Ty<'tcx>` 是一个指向 arena 分配类型的引用（Reference）；
+- `'tcx` 是编译上下文生命周期（Lifetimes）；
 - 它区分整数变量 `{integer}`、浮点变量 `{float}` 等“待推断”类型。
 
 ```rust,ignore
@@ -103,7 +103,7 @@ let typeck_results = tcx.typeck(item_def_id);
 
 ### 3.2 `InferCtxt`
 
-`InferCtxt<'tcx>`（Inference Context）是类型推断的工作区：
+`InferCtxt<'tcx>`（Inference Context）是类型推断（Type Inference）的工作区：
 
 ```rust,ignore
 let infcx = tcx.infer_ctxt().build();
@@ -122,8 +122,8 @@ let infcx = tcx.infer_ctxt().build();
 | 通用类型变量 `?T` | `let v = Vec::new();` |
 | 整数变量 `{integer}` | 整数字面量 `42` |
 | 浮点变量 `{float}` | 浮点字面量 `3.14` |
-| 区域变量 `?r` | 借用表达式 `&x` |
-| 常量变量 `?C` | 泛型常量参数 |
+| 区域变量 `?r` | 借用（Borrowing）表达式 `&x` |
+| 常量变量 `?C` | 泛型（Generics）常量参数 |
 
 统一（unification）是最基本操作：如果推断变量 `?T` 要与 `i32` 相等，就把它实例化为 `i32`。
 

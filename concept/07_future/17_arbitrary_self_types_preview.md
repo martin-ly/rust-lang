@@ -36,7 +36,7 @@
   - [三、使用场景](#三使用场景)
     - [场景 1：内核编程（Rust for Linux）](#场景-1内核编程rust-for-linux)
     - [场景 2：嵌入式寄存器映射](#场景-2嵌入式寄存器映射)
-    - [场景 3：自定义智能指针](#场景-3自定义智能指针)
+    - [场景 3：自定义智能指针（Smart Pointer）](LINK_PLACEHOLDER)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 安全边界](#41-安全边界)
     - [4.2 设计决策](#42-设计决策)
@@ -153,7 +153,7 @@ impl<T> Deref for KernelPtr<T> {
 
 ### 场景 1：内核编程（Rust for Linux）
 
-Linux 内核中的对象通常通过特定类型的指针引用：
+Linux 内核中的对象通常通过特定类型的指针引用（Reference）：
 
 ```rust,ignore
 struct Device {
@@ -284,12 +284,12 @@ impl<T> TaggedPtr<T> {
 
 ### 测验 2：这个特性对自定义智能指针有什么意义？（理解层）
 
-**题目**: 这个特性对自定义智能指针有什么意义？
+**题目**: 这个特性对自定义智能指针（Smart Pointer）有什么意义？
 
 <details>
 <summary>✅ 答案与解析</summary>
 
-自定义智能指针可以直接作为方法接收器，无需先解引用为引用。使 API 更自然，例如 `my_ptr.method()` 而非 `(*my_ptr).method()`。
+自定义智能指针可以直接作为方法接收器，无需先解引用（Reference）为引用。使 API 更自然，例如 `my_ptr.method()` 而非 `(*my_ptr).method()`。
 </details>
 
 ---
@@ -325,7 +325,7 @@ impl<T> TaggedPtr<T> {
 <details>
 <summary>✅ 答案与解析</summary>
 
-已在 nightly 中实现，部分功能稳定化中。是 Rust 类型系统扩展的重要一步，使自定义类型更像一等公民。
+已在 nightly 中实现，部分功能稳定化中。是 Rust 类型系统（Type System）扩展的重要一步，使自定义类型更像一等公民。
 </details>
 
 ## 认知路径

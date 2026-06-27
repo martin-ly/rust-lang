@@ -19,6 +19,7 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
 
+> **后置概念**: N/A
 ---
 
 > **来源**:
@@ -36,7 +37,7 @@
 ---
 
 > **Bloom 层级**: 理解 → 应用
-> **定位**: L2 嵌入式互动测验——验证智能指针核心概念（Box、Rc/Arc、RefCell/Mutex、内部可变性模式）的掌握程度。
+> **定位**: L2 嵌入式互动测验——验证智能指针（Smart Pointer）核心概念（Box、Rc/Arc、RefCell/Mutex、内部可变性模式）的掌握程度。
 > **使用方式**: 先独立思考答案，再点击展开核对解析。
 
 ---
@@ -66,15 +67,15 @@ fn main() {
 | 生命周期（Lifetimes） | 作用域结束自动释放 | 离开作用域时 `Box` 被 drop，堆内存释放 |
 | 性能 | 快速（单指令调整栈指针） | 较慢（需要堆分配器） |
 
-**`Box<T>` 的核心语义**：`Box` 是拥有堆内存所有权的智能指针。`Box` 本身在栈上（只有一个指针大小），但指向的数据在堆上。
+**`Box<T>` 的核心语义**：`Box` 是拥有堆内存所有权（Ownership）的智能指针（Smart Pointer）。`Box` 本身在栈上（只有一个指针大小），但指向的数据在堆上。
 
 **使用场景**：
 
 - 递归类型（如链表、树节点）
-- 大对象转移所有权时避免拷贝
+- 大对象转移所有权（Ownership）时避免拷贝
 - trait 对象（`Box<dyn Trait>`）
 
-**知识点**：`Box` 是最简单的智能指针，提供唯一的堆所有权，零运行时开销（与 C++ `unique_ptr` 类似）。[→ 内存管理详解](./03_memory_management.md)
+**知识点**：`Box` 是最简单的智能指针，提供唯一的堆所有权，零运行时（Runtime）开销（与 C++ `unique_ptr` 类似）。[→ 内存管理详解](./03_memory_management.md)
 
 </details>
 
@@ -118,7 +119,7 @@ fn main() {
 **为什么 `Box` 能解决这个问题**：
 
 - `Box<List>` 的大小是固定的（一个指针大小）
-- 实际数据在堆上，通过指针间接引用
+- 实际数据在堆上，通过指针间接引用（Reference）
 - 编译期可以计算 `List` 的大小：`i32` + 指针 = 固定值
 
 **对比其他语言**：
@@ -126,7 +127,7 @@ fn main() {
 | 语言 | 递归类型表示 |
 |:---|:---|
 | C | `struct Node { int val; struct Node* next; }` |
-| Java | 隐式引用（所有对象都在堆上） |
+| Java | 隐式引用（Reference）（所有对象都在堆上） |
 | Rust | 显式 `Box`/`Rc`/`Arc` |
 
 **知识点**：Rust 的"显式堆分配"设计避免了 Java 的全局 GC 和 C 的隐式指针混淆。[→ 内存管理详解](./03_memory_management.md)
@@ -224,16 +225,16 @@ fn main() {
 | 类型 | 功能 | 解决的问题 |
 |:---|:---|:---|
 | `Rc<T>` | 共享所有权 | 多个所有者访问同一数据 |
-| `RefCell<T>` | 内部可变性 | 通过不可变引用修改数据 |
+| `RefCell<T>` | 内部可变性 | 通过不可变引用（Mutable Reference）修改数据 |
 
-**内部可变性原理**：`RefCell` 在**运行时（Runtime）**检查借用规则：
+**内部可变性原理**：`RefCell` 在**运行时（Runtime）**检查借用（Borrowing）规则：
 
 ```rust,ignore
 data.borrow()     // 获取不可变借用（运行时检查）
 data.borrow_mut() // 获取可变借用（运行时检查）
 ```
 
-**运行时 panic 条件**（与编译期借用检查器相同规则）：
+**运行时（Runtime） panic 条件**（与编译期借用（Borrowing）检查器相同规则）：
 
 ```rust,ignore
 let ref_cell = RefCell::new(0);
@@ -245,7 +246,7 @@ let b2 = ref_cell.borrow_mut(); // ❌ 运行时 panic！
 
 | 组合 | 线程安全 | 可变性 | 检查时机 |
 |:---|:---:|:---|:---:|
-| `Rc<RefCell<T>>` | ❌ | ✅ | 运行时 |
+| `Rc<RefCell<T>>` | ❌ | ✅ | 运行时（Runtime） |
 | `Arc<Mutex<T>>` | ✅ | ✅ | 运行时（锁） |
 | `Arc<RwLock<T>>` | ✅ | ✅（读多写少） | 运行时（锁） |
 
@@ -369,7 +370,7 @@ drop(num); // 显式释放锁
 println!("{}", *m.lock().unwrap());
 ```
 
-**知识点**：Rust 的 `MutexGuard`（`m.lock()` 的返回值）在离开作用域时自动释放锁。利用这个 RAII 特性管理锁生命周期是避免死锁的关键。[→ 并发模式详解](../03_advanced/10_concurrency_patterns.md)
+**知识点**：Rust 的 `MutexGuard`（`m.lock()` 的返回值）在离开作用域时自动释放锁。利用这个 RAII 特性管理锁生命周期（Lifetimes）是避免死锁的关键。[→ 并发模式详解](../03_advanced/10_concurrency_patterns.md)
 
 </details>
 
@@ -435,7 +436,7 @@ Dropping a
 
 **注意**：不能显式调用 `value.drop()`，必须通过 `drop(value)` 函数或让值离开作用域。
 
-**知识点**：`Drop` 是 Rust RAII（Resource Acquisition Is Initialization）模式的核心。资源释放与生命周期绑定，消除了 C 的手动释放和 Java 的 GC 不确定性。[→ 内存管理详解](./03_memory_management.md)
+**知识点**：`Drop` 是 Rust RAII（Resource Acquisition Is Initialization）模式的核心。资源释放与生命周期（Lifetimes）绑定，消除了 C 的手动释放和 Java 的 GC 不确定性。[→ 内存管理详解](LINK_PLACEHOLDER)
 
 </details>
 
@@ -634,8 +635,8 @@ hello(&(*m)[..]);
 |:---|:---|:---|
 | `Box<T>` | `T` | 解引用到堆数据 |
 | `Rc<T>` / `Arc<T>` | `T` | 解引用到共享数据 |
-| `Vec<T>` | `[T]` | 解引用到切片 |
-| `String` | `str` | 解引用到字符串切片 |
+| `Vec<T>` | `[T]` | 解引用到切片（Slice） |
+| `String` | `str` | 解引用到字符串切片（String Slice） |
 | `Cow<'a, T>` | `T` | 写时克隆指针 |
 
 **知识点**：`Deref` 是 Rust 中智能指针"透明化"的关键机制，使智能指针的使用体验接近普通引用。[→ 内存管理详解](./03_memory_management.md)

@@ -10,7 +10,7 @@
 > **Summary**: Index of authoritative sources used throughout the concept knowledge system.
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/) · [RFCs](https://rust-lang.github.io/rfcs/)
 >
-> | 标识符 | 全称 | 根 URL | 更新频率 | 建议引用格式 |
+> | 标识符 | 全称 | 根 URL | 更新频率 | 建议引用（Reference）格式 |
 > | :--- | :--- | :--- | :--- | :--- |
 > | `REF` | Rust Reference | <https://doc.rust-lang.org/reference/> | 与 stable 同步 | `[来源: REF — §章节]` |
 > | `TRPL` | The Rust Programming Language | <https://doc.rust-lang.org/book/title-page.html> | 每 Edition 更新 | `来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)` |
@@ -18,8 +18,10 @@
 >
 > **定位**: 本项目所有 `[来源: ...]` 标注的**单一真相源（Single Source of Truth）**。
 > **原则**: 每个来源必须指向**具体章节或锚点**，禁止仅使用根 URL。
-> **维护**: 新增来源必须先在此索引注册，获取唯一标识符，然后在概念文件中引用。
+> **维护**: 新增来源必须先在此索引注册，获取唯一标识符，然后在概念文件中引用（Reference）。
 
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 ## 一级来源：官方规范与设计文档
@@ -46,12 +48,12 @@
 | 所有权与移动语义 | REF — §4.1.8 Ownership and moves |
 | 借用与引用 | REF — §4.1.9 Borrowing |
 | 生命周期 | REF — §4.1.10 Lifetimes |
-| 类型系统 | REF — §4.2 Types |
-| 泛型 | REF — §4.2.4 Generic parameters |
+| 类型系统（Type System） | REF — §4.2 Types |
+| 泛型（Generics） | REF — §4.2.4 Generic parameters |
 | Trait | REF — §4.2.5 Trait objects |
 | 内存模型 | REF — §6.9 Memory model |
 | Unsafe | REF — §7.9 Unsafe functions and blocks |
-| 宏 | REF — §3.2 Macros |
+| 宏（Macro） | REF — §3.2 Macros |
 | 模式 | REF — §4.3 Patterns |
 | 常量求值 | REF — §4.4 Constant evaluation |
 | 内联汇编 | REF — §7.10 Inline assembly |

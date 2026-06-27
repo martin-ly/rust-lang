@@ -54,7 +54,7 @@ fn main() {}
 >
 > 当前限制：
 >
-> 1) `String` / `Vec` 不能安全传递（需 `CString` / 原始指针）；
+> 1) `String` / `Vec` 不能安全传递（需 `CString` / 原始指针（Raw Pointer））；
 > 2) `panic` 跨 FFI 边界是 UB；
 > 3) `Drop` 在 FFI 中的行为未定义。这与 C++ 的 ABI（由 Itanium/MSVC 定义，稳定但不跨编译器）或 Swift 的 ABI（稳定但版本锁定）不同——Rust 追求语言级别的稳定 ABI，而非依赖平台约定。
 >
@@ -94,9 +94,10 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-编译器优化（单态化、布局优化）可能改变结构体和枚举的内存布局。稳定 ABI 会限制这些优化，影响性能。
+编译器优化（单态化（Monomorphization）、布局优化）可能改变结构体（Struct）和枚举（Enum）的内存布局。稳定 ABI 会限制这些优化，影响性能。
 </details>
 
+> **前置概念**: N/A
 ---
 
 ### 测验 2：`repr(C)` 和 `extern "C"` 如何提供稳定的跨语言边界？（理解层）
@@ -130,7 +131,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-稳定 ABI 限制编译器优化布局的能力，可能导致更大的结构体和更慢的字段访问。需要精心设计以最小化性能损失。
+稳定 ABI 限制编译器优化布局的能力，可能导致更大的结构体（Struct）和更慢的字段访问。需要精心设计以最小化性能损失。
 </details>
 
 ---

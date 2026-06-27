@@ -25,6 +25,7 @@
 >
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 
+> **前置概念**: N/A
 ---
 
 > **后置概念**: [Rust 1.97 稳定特性](./rust_1_97_preview.md) · [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
@@ -44,7 +45,7 @@
 
 **提案方向**:
 
-- 引入 `&pin mut T` 和 `&pin const T` 原生借用类型
+- 引入 `&pin mut T` 和 `&pin const T` 原生借用（Borrowing）类型
 - 自动 reborrow、autoref、pattern matching 支持
 - 若 `T: Unpin`，`&pin mut T` 与 `&mut T` 可互相 coerce
 - 对 `!Unpin` 类型，`Drop` 可能需要 `fn drop(&pin mut self)`
@@ -116,7 +117,7 @@ where
 
 **跟踪**: [Project Goals — Field Projections](https://rust-lang.github.io/rust-project-goals/2026/field-projections.html)
 
-**核心问题**: 当前无法安全地在 trait 中表达 "返回某字段的引用/投影"，pin projection 尤其困难。
+**核心问题**: 当前无法安全地在 trait 中表达 "返回某字段的引用（Reference）/投影"，pin projection 尤其困难。
 
 **提案方向**:
 
@@ -124,7 +125,7 @@ where
 - 编译器可验证投影的合法性
 - 与 Pin ergonomics 配合，提供安全的 self-referential/pinned 字段访问
 
-**影响**: 可能取代大量 `pin-project` / `pin-project-lite` 宏的使用场景。
+**影响**: 可能取代大量 `pin-project` / `pin-project-lite` 宏（Macro）的使用场景。
 
 ```rust,ignore
 // 假设性字段投影 trait（最终 API 以 RFC 为准）
@@ -180,7 +181,7 @@ where
 
 **状态**: 🧪 MCP #727 已通过；实验性实现中
 
-**核心问题**: 当前 `drop` 是同步的，无法 `await` 异步清理操作（如关闭连接、刷新缓冲区）。
+**核心问题**: 当前 `drop` 是同步的，无法 `await` 异步（Async）清理操作（如关闭连接、刷新缓冲区）。
 
 **1.98+ 展望**:
 
@@ -233,7 +234,7 @@ impl AsyncDrop for AsyncFile {
 | `int_format_into` | [#152544](https://github.com/rust-lang/rust/pull/152544) | 整数直接格式化到现有缓冲区，避免 `write!` 的堆分配 |
 | `core::range::{RangeFull, RangeTo}` / `legacy::*` | [#156629](https://github.com/rust-lang/rust/pull/156629) | 将 `std::ops::RangeFull`、`std::ops::RangeTo` 下沉到 `core::range`，服务 `no_std` |
 | `NonZero<T>::from_str_radix` | [#157877](https://github.com/rust-lang/rust/pull/157877) | 按指定进制解析非零整数，结果为 0 时返回 `Err` |
-| `Box::as_ptr` / `Box::as_mut_ptr` | [#157876](https://github.com/rust-lang/rust/pull/157876) | 不物化引用的原始指针访问，对 aliasing model 更友好 |
+| `Box::as_ptr` / `Box::as_mut_ptr` | [#157876](LINK_PLACEHOLDER) | 不物化引用（Reference）的原始指针（Raw Pointer）访问，对 aliasing model 更友好 |
 | `hex_literal_case` (rustfmt) | [rustfmt #6935](https://github.com/rust-lang/rustfmt/pull/6935) | 十六进制字面量大小写风格配置 |
 
 ```rust
@@ -273,9 +274,9 @@ fn demo_198_apis() {
 | `#[optimize]` 属性 | 🔄 PFCP / Blocked | PR [#157273](https://github.com/rust-lang/rust/pull/157273)，函数级优化提示 |
 | `size_of_val_raw` / `align_of_val_raw` / `Layout::for_value_raw` | 🔄 等待 review | PR [#157572](https://github.com/rust-lang/rust/pull/157572)，裸值尺寸/对齐计算 |
 | C-variadic function definitions | 🔄 PFCP | PR [#155942](https://github.com/rust-lang/rust/pull/155942)，定义 C 风格可变参数函数 |
-| `proc_macro_value` | 🔄 等待 review | PR [#152092](https://github.com/rust-lang/rust/pull/152092)，过程宏在编译期产生值 |
+| `proc_macro_value` | 🔄 等待 review | PR [#152092](https://github.com/rust-lang/rust/pull/152092)，过程宏（Procedural Macro）在编译期产生值 |
 | `local_key_cell_update` | 🔄 等待 libs-api | PR [#157734](https://github.com/rust-lang/rust/pull/157734)，`LocalKey::update` 相关 Cell 更新 API |
-| `#[my_macro] mod foo;` (proc_macro_hygiene) | 🔄 PFCP | PR [#157857](https://github.com/rust-lang/rust/pull/157857)，过程宏卫生性的一部分 |
+| `#[my_macro] mod foo;` (proc_macro_hygiene) | 🔄 PFCP | PR [#157857](LINK_PLACEHOLDER)，过程宏（Procedural Macro）卫生性的一部分 |
 
 ---
 
@@ -345,7 +346,7 @@ rustflags = ["-Zcodegen-backend=cranelift"]
 
 **状态**: 🧪 已实现，默认在 nightly 中启用进行测试
 
-**核心问题**: 旧 trait solver 在复杂泛型、GATs、TAIT、RTN 等场景下存在限制和 bugs。
+**核心问题**: 旧 trait solver 在复杂泛型（Generics）、GATs、TAIT、RTN 等场景下存在限制和 bugs。
 
 **1.98+ 展望**:
 
@@ -413,7 +414,7 @@ serde = { version = "1.0", public = true }
 **提案方向**:
 
 - 细化 `Sized` trait hierarchy
-- 引入 `const Sized` 支持编译期未知但运行时确定的大小
+- 引入 `const Sized` 支持编译期未知但运行时（Runtime）确定的大小
 - 为 AArch64 SVE / SME 提供标准库支持
 
 **1.98+ 展望**: 基础 trait hierarchy 可能在 1.98 进入 FCP；SVE/SME 支持为 nightly 长期目标。
@@ -446,7 +447,7 @@ serde = { version = "1.0", public = true }
 
 **提案方向**:
 
-- 基于 LLVM 的 sanitizer，在运行时检测 Tree Borrows 违规
+- 基于 LLVM 的 sanitizer，在运行时（Runtime）检测 Tree Borrows 违规
 - 支持 C/C++/Rust 混合代码
 
 **深度文档**: [23_borrow_sanitizer.md](../04_formal/23_borrow_sanitizer.md)
@@ -480,7 +481,7 @@ serde = { version = "1.0", public = true }
 - 实验性支持 Wasm-specific 语言特性
 - WASI Preview 3（原生 async I/O）预计 2026 年发布
 
-**关联**: `c12_wasm` 模块应跟踪 `wasm32-wasip1` / `wasm32-wasip2` target 和 `cargo-component`。
+**关联**: `c12_wasm` 模块（Module）应跟踪 `wasm32-wasip1` / `wasm32-wasip2` target 和 `cargo-component`。
 
 ---
 

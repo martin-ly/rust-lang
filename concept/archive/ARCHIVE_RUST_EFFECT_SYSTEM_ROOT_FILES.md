@@ -33,7 +33,7 @@
 - **五种控制流效应完整分析** → 已扩展「二、Rust 中的现有 Effect 表达」
 - **跨语言代码对比矩阵** → 已保留「三、跨语言对比」
 - **Carried/Uncarried 边界** → 已保留「2.1 Carried vs Uncarried Effects」
-- **零成本抽象 vs 通用效应不相容性** → 已融入「一之二、开放与封闭效应系统」
+- **零成本抽象（Zero-Cost Abstraction） vs 通用效应不相容性** → 已融入「一之二、开放与封闭效应系统」
 
 ### Yoshua Wuyts 2025-2026 新增整合
 
@@ -44,7 +44,7 @@ v1.3 还新增了以下基于 Yoshua Wuyts 权威输出的内容：
 - 「一之三、Fallibility Effect」— `throws`/`throw` 语法设计
 - 「2.4 With-Clauses」— `eff`/`with`/`.do` 统一语法提案
 - 「6.3 未来演进」更新 — Rust 2030+ 三元愿景（effects × substructural types × refinement types）
-- 「6.4 Effect × Pin」— async/gen 效果与自引用类型的交叉
+- 「6.4 Effect × Pin」— async/gen 效果与自引用（Reference）类型的交叉
 
 ### 01.md 状态
 

@@ -11,7 +11,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
-> **定位**: 深入分析 Rust **元编程（Metaprogramming）**的技术体系——从声明式宏的模式匹配、过程宏的语法树操作，到 derive 宏的代码生成、quote/syn 工具体系，揭示 Rust 如何在编译期实现类型安全的代码变换同时保持宏卫生性（Hygiene）。
+> **定位**: 深入分析 Rust **元编程（Metaprogramming）**的技术体系——从声明式宏的模式匹配（Pattern Matching）、过程宏（Procedural Macro）的语法树操作，到 derive 宏的代码生成、quote/syn 工具体系，揭示 Rust 如何在编译期实现类型安全的代码变换同时保持宏卫生性（Hygiene）。
 > **前置概念**: [Attributes and Macros](../01_foundation/12_attributes_and_macros.md) · [Macro Patterns](./17_macro_patterns.md)
 > **后置概念**: [Proc Macros](../03_advanced/07_proc_macro.md) · [DSL](./13_dsl_and_embedding.md)
 
@@ -34,11 +34,11 @@
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 元编程的抽象层次](#11-元编程的抽象层次)
-    - [1.2 声明宏：模式匹配驱动](#12-声明宏模式匹配驱动)
-    - [1.3 过程宏：语法树操作](#13-过程宏语法树操作)
+    - [1.2 声明宏（Declarative Macro）：模式匹配（Pattern Matching）驱动](LINK_PLACEHOLDER)
+    - [1.3 过程宏（Procedural Macro）：语法树操作](LINK_PLACEHOLDER)
   - [二、技术细节](#二技术细节)
     - [2.1 syn/quote/proc-macro2 工具体系](#21-synquoteproc-macro2-工具体系)
-    - [2.2 Derive 宏的实现机制](#22-derive-宏的实现机制)
+    - [2.2 Derive 宏（Macro）的实现机制](LINK_PLACEHOLDER)
     - [2.3 宏卫生性的形式化](#23-宏卫生性的形式化)
   - [三、元编程技术矩阵](#三元编程技术矩阵)
     - [3.1 元编程技术选型矩阵](#31-元编程技术选型矩阵)
@@ -53,7 +53,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：元编程的编译错误](#十边界测试元编程的编译错误)
     - [10.1 边界测试：过程宏的 TokenStream 解析失败（编译错误）](#101-边界测试过程宏的-tokenstream-解析失败编译错误)
-    - [10.2 边界测试：常量泛型的非常量表达式（编译错误）](#102-边界测试常量泛型的非常量表达式编译错误)
+    - [10.2 边界测试：常量泛型（Generics）的非常量表达式（编译错误）](LINK_PLACEHOLDER)
     - [10.3 边界测试：常量泛型的表达式复杂度（编译错误）](#103-边界测试常量泛型的表达式复杂度编译错误)
     - [10.4 边界测试：`TypeId` 的跨 crate 稳定性（逻辑错误）](#104-边界测试typeid-的跨-crate-稳定性逻辑错误)
     - [10.4 边界测试：编译期递归深度限制（编译错误）](#104-边界测试编译期递归深度限制编译错误)
@@ -115,7 +115,7 @@ Rust 元编程的抽象层次（从低到高）:
   └─────────────┴─────────────┴─────────────┴─────────────┘
 ```
 
-> **认知功能**: Rust 元编程的**层次递进设计**——从 C 的文本替换到 macro_rules! 的语法树匹配再到过程宏的完整 AST 操作，每一步都增加了表达能力同时保持类型安全和卫生性。
+> **认知功能**: Rust 元编程的**层次递进设计**——从 C 的文本替换到 macro_rules! 的语法树匹配再到过程宏（Macro）的完整 AST 操作，每一步都增加了表达能力同时保持类型安全和卫生性。
 > [来源: [Wikipedia — Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming)]
 
 ---
@@ -367,11 +367,11 @@ sequenceDiagram
 |:---|:---|:---:|:---:|:---|
 | 简单代码重复消除 | macro_rules! | 低 | 高 | const fn（如适用） |
 | 数据结构派生实现 | Derive 宏（Macro） | 高 | 中 | 手动 impl / 泛型（Generics） |
-| 函数/方法增强（日志/度量） | Attribute 宏 | 高 | 中 | 泛型包装器 |
+| 函数/方法增强（日志/度量） | Attribute 宏（Macro） | 高 | 中 | 泛型（Generics）包装器 |
 | 嵌入式 DSL（SQL/JSON） | Function-like 宏 | 高 | 低 | 构建器模式 |
 | 编译期常量计算 | const fn / const eval | 低 | 极高 | 宏（不推荐） |
 | 条件编译 | cfg + cfg_if | 低 | 高 | macro_rules! |
-| 重复 trait 实现 | macro_rules! + 递归 | 中 | 中 | 泛型（受孤儿规则限制） |
+| 重复 trait 实现 | macro_rules! + 递归 | 中 | 中 | 泛型（Generics）（受孤儿规则（Orphan Rule）限制） |
 
 ### 3.2 宏与 const eval 的演进趋势
 >
@@ -398,7 +398,7 @@ Rust 元编程的演进方向:
   └── 状态: 实验性，未稳定
 ```
 
-> **认知功能**: 元编程技术选型的**核心原则**——"能用 const fn 就不用宏，能用泛型就不用宏"——因为宏放弃了类型系统的保护，而 const eval 在编译期计算的同时保持类型安全。
+> **认知功能**: 元编程技术选型的**核心原则**——"能用 const fn 就不用宏，能用泛型就不用宏"——因为宏放弃了类型系统（Type System）的保护，而 const eval 在编译期计算的同时保持类型安全。
 > [来源: [Rust RFC — const fn 演进](https://github.com/rust-lang/rfcs/blob/master/text/0911-const-fn.md)]
 
 ---
@@ -433,7 +433,7 @@ Rust 元编程的演进方向:
 > [来源: [RFC 1584](https://rust-lang.github.io/rfcs//1584-macros.html)]
 ```
 
-> **认知功能**: 反命题分析揭示了宏系统的**关键边界**——宏操作的是"语法"而非"语义"，这是宏强大与危险的根源：强大在于可以创造新语法，危险在于无法利用类型系统的安全保障。
+> **认知功能**: 反命题分析揭示了宏系统的**关键边界**——宏操作的是"语法"而非"语义"，这是宏强大与危险的根源：强大在于可以创造新语法，危险在于无法利用类型系统（Type System）的安全保障。
 > [来源: [The Little Book of Rust Macros — Hygiene](https://veykril.github.io/tlborm/)]
 
 ---
@@ -566,7 +566,7 @@ graph TD
 
 ## 相关概念文件
 
-- [Attributes and Macros](../01_foundation/12_attributes_and_macros.md) — 属性与声明宏基础
+- [Attributes and Macros](../01_foundation/12_attributes_and_macros.md) — 属性与声明宏（Declarative Macro）基础
 - [Macro Patterns](./17_macro_patterns.md) — 宏的工程模式
 - [Proc Macros](../03_advanced/07_proc_macro.md) — 过程宏高级主题
 - [DSL](./13_dsl_and_embedding.md) — 领域特定语言嵌入
@@ -640,7 +640,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 // }
 ```
 
-> **修正**: 过程宏（procedural macro）在编译期执行，将输入的 `TokenStream` 转换为输出的 `TokenStream`。输出必须是语法有效的 Rust 代码，否则编译器在展开后报错。`syn` crate 负责将 TokenStream 解析为 AST，`quote` crate 负责从模板生成 TokenStream。过程宏的错误处理具有挑战性——宏内部 panic 会生成不友好的编译错误信息，应使用 `proc_macro::Diagnostic` 或 `syn::Error` 提供结构化错误。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: 过程宏（procedural macro）在编译期执行，将输入的 `TokenStream` 转换为输出的 `TokenStream`。输出必须是语法有效的 Rust 代码，否则编译器在展开后报错。`syn` crate 负责将 TokenStream 解析为 AST，`quote` crate 负责从模板生成 TokenStream。过程宏的错误处理（Error Handling）具有挑战性——宏内部 panic 会生成不友好的编译错误信息，应使用 `proc_macro::Diagnostic` 或 `syn::Error` 提供结构化错误。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.2 边界测试：常量泛型的非常量表达式（编译错误）
 
@@ -663,7 +663,7 @@ fn fixed<const N: usize>() -> [u8; N] {
 }
 ```
 
-> **修正**: 数组大小 `[T; N]` 和常量泛型 `const N: usize` 要求 `N` 是编译期可求值的常量表达式。运行时变量不能作为数组大小或常量泛型参数。Rust 1.79+ 放宽了部分 `const` 上下文中的限制（`inline const`），但核心约束不变：类型系统的参数（如数组大小）必须在编译期确定。这与 C++ 的 `std::array<T, N>`（`N` 是模板参数）类似，但 Rust 的常量求值器更严格——某些在 C++ 中允许的表达式在 Rust 中可能需要显式 `const` 块。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: 数组大小 `[T; N]` 和常量泛型 `const N: usize` 要求 `N` 是编译期可求值的常量表达式。运行时（Runtime）变量不能作为数组大小或常量泛型参数。Rust 1.79+ 放宽了部分 `const` 上下文中的限制（`inline const`），但核心约束不变：类型系统的参数（如数组大小）必须在编译期确定。这与 C++ 的 `std::array<T, N>`（`N` 是模板参数）类似，但 Rust 的常量求值器更严格——某些在 C++ 中允许的表达式在 Rust 中可能需要显式 `const` 块。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.3 边界测试：常量泛型的表达式复杂度（编译错误）
 
@@ -699,7 +699,7 @@ fn main() {
 }
 ```
 
-> **修正**: `TypeId` 是 Rust 运行时的类型标识符，用于 `Any` trait 的向下转型（`downcast_ref`）。`TypeId` 在**同一编译会话**内是确定且可比较的，但不保证跨编译会话、跨 crate 版本、跨编译器版本的一致性。其内部表示是编译器生成的哈希值，可能随编译器版本变化。因此 `TypeId` 不能：1) 序列化到持久存储；2) 通过网络传递；3) 作为长期缓存的键。安全替代：使用自定义类型标签（`enum TypeTag { String, Int, ... }`）或字符串类型名（`std::any::type_name`，不稳定）。这与 Java 的 `Class.getName()`（跨 JVM 稳定）或 C++ 的 `typeid`（同一程序内稳定，跨程序不保证）类似——运行期类型信息的设计受限于编译器实现细节。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/any/struct.TypeId.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> **修正**: `TypeId` 是 Rust 运行时（Runtime）的类型标识符，用于 `Any` trait 的向下转型（`downcast_ref`）。`TypeId` 在**同一编译会话**内是确定且可比较的，但不保证跨编译会话、跨 crate 版本、跨编译器版本的一致性（Coherence）。其内部表示是编译器生成的哈希值，可能随编译器版本变化。因此 `TypeId` 不能：1) 序列化到持久存储；2) 通过网络传递；3) 作为长期缓存的键。安全替代：使用自定义类型标签（`enum TypeTag { String, Int, ... }`）或字符串类型名（`std::any::type_name`，不稳定）。这与 Java 的 `Class.getName()`（跨 JVM 稳定）或 C++ 的 `typeid`（同一程序内稳定，跨程序不保证）类似——运行期类型信息的设计受限于编译器实现细节。[来源: [Rust Standard Library](LINK_PLACEHOLDER)] · [来源: [The Rust Programming Language](LINK_PLACEHOLDER)]
 
 ### 10.4 边界测试：编译期递归深度限制（编译错误）
 
@@ -807,7 +807,7 @@ fn main() {
 
 > **过渡**: 在实践中应用 元编程：Rust 的编译期代码生成与变换 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: 元编程：Rust 的编译期代码生成与变换 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 元编程：Rust 的编译期代码生成与变换 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

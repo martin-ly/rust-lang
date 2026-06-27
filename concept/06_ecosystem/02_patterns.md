@@ -43,11 +43,11 @@
 [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 >
 > 1. **为什么需要设计模式？** → 复用经过验证的方案，降低认知负荷与沟通成本
-> 2. **GoF模式在Rust中怎么用？** → 以Trait替代继承，以enum+match替代多态类层次
-> 3. **Rust特有的模式？** → RAII、Typestate、Newtype——所有权与类型系统的直接产物
-> 4. **类型系统怎么替代模式？** → 编译期保证消除运行时校验需求（Typestate替代状态机检查）
+> 2. **GoF模式在Rust中怎么用？** → 以Trait（Trait）替代继承，以enum+match替代多态类层次
+> 3. **Rust特有的模式？** → RAII、Typestate、Newtype——所有权（Ownership）与类型系统（Type System）的直接产物
+> 4. **类型系统（Type System）怎么替代模式？** → 编译期保证消除运行时（Runtime）校验需求（Typestate替代状态机检查）
 > 5. **什么时候模式是反模式？** → 过度工程、过早抽象、Stringly typed——抽象债务超过收益 [来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/)]
-> 6. **模式选择的决策框架？** → 约束驱动：先问"类型系统能否证明"，再问"是否需要运行时多态"
+> 6. **模式选择的决策框架？** → 约束驱动：先问"类型系统能否证明"，再问"是否需要运行时（Runtime）多态"
 
 ---
 
@@ -60,11 +60,11 @@
 
 | **模式** | **分类** | **问题** | **Rust 实现** | **关键特性** |
 |:---|:---|:---|:---|:---|
-| **RAII** | 结构型/资源 | 资源自动释放 | `Drop` trait | 所有权离开作用域时自动清理 |
-| **Typestate** | Rust 特有 | 编译期状态验证 | 泛型 + `PhantomData` | 非法状态变为编译错误 |
+| **RAII** | 结构型/资源 | 资源自动释放 | `Drop` trait | 所有权（Ownership）离开作用域时自动清理 |
+| **Typestate** | Rust 特有 | 编译期状态验证 | 泛型（Generics） + `PhantomData` | 非法状态变为编译错误 |
 | **Builder** | 创建型 | 复杂对象构造 | 消费型 Builder | 所有权链确保必填字段 |
 | **Newtype** | 结构型 | 类型区分 + 约束 | `struct Wrapper(T)` | 零成本，获得类型安全 |
-| **Deref 多态** | 结构型 | 智能指针行为 | `Deref`/`DerefMut` | 自动解引用转换 |
+| **Deref 多态** | 结构型 | 智能指针（Smart Pointer）行为 | `Deref`/`DerefMut` | 自动解引用（Reference）转换 |
 | **FFI 模式** | 结构型 | 与 C 互操作 | `extern "C"` + `repr(C)` | 安全封装层 |
 
 ### 2.2 新增模式矩阵
@@ -75,9 +75,9 @@
 |:---|:---|:---|:---|:---|
 | **Command** | 行为型 | 请求参数化与队列化 | `trait Command` + `execute()` | 解耦调用者与接收者 |
 | **Visitor** | 行为型 | 异构结构遍历 | Trait + enum / `accept` 方法 | 开放/封闭选择 |
-| **Strategy** | 行为型 | 运行时算法切换 | `dyn Trait` / 泛型参数 | 静态/动态分发选择 |
+| **Strategy** | 行为型 | 运行时算法切换 | `dyn Trait` / 泛型（Generics）参数 | 静态/动态分发选择 |
 | **State Machine** | 行为型 | 状态转换管理 | enum + `match` / `transition` 方法 | 穷尽性检查保证完整覆盖 |
-| **Plugin** | 结构型 | 运行时扩展能力 | `dyn Trait` + 注册表 | 模块热插拔 |
+| **Plugin** | 结构型 | 运行时扩展能力 | `dyn Trait` + 注册表 | 模块（Module）热插拔 |
 | **Observer** | 行为型 | 一对多状态通知 | `Vec<Box<dyn Fn(&T)>>` / `broadcast` / `event-listener` | 解耦状态变化与响应 |
 
 > **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · [GoF Design Patterns] · 可信度: ✅
@@ -88,15 +88,15 @@
 
 | **模式** | **核心问题** | **解决方案** | **Rust特性** | **反模式/失效条件** |
 |:---|:---|:---|:---|:---|
-| **RAII** | 资源泄漏 | 确定性资源管理 ⟹ `Drop`自动调用 | 所有权+作用域 | 边界：`mem::forget`、引用循环泄漏 |
-| **Typestate** | 非法状态可达 | 不可表示非法状态 ⟹ 编译期拒绝 | 泛型+`PhantomData` | 边界：状态空间爆炸（>10状态） |
+| **RAII** | 资源泄漏 | 确定性资源管理 ⟹ `Drop`自动调用 | 所有权（Ownership）+作用域 | 边界：`mem::forget`、引用（Reference）循环泄漏 |
+| **Typestate** | 非法状态可达 | 不可表示非法状态 ⟹ 编译期拒绝 | 泛型（Generics）+`PhantomData` | 边界：状态空间爆炸（>10状态） |
 | **Builder** | 复杂对象构造易错 | 分步初始化 ⟹ 消费型链式API | 所有权转移+方法链 | 边界：字段<3时过度工程 |
-| **Newtype** | 类型语义混淆 | 零成本区分 ⟹ 编译期标签 | `struct Wrapper(T)` | 边界：需重复实现大量标准Trait |
-| **Strategy** | 算法硬编码难扩展 | 行为参数化 ⟹ 静态/动态分发 | `dyn Trait`/泛型单态化 | 边界：仅一种实现时的无用抽象 |
+| **Newtype** | 类型语义混淆 | 零成本区分 ⟹ 编译期标签 | `struct Wrapper(T)` | 边界：需重复实现大量标准Trait（Trait） |
+| **Strategy** | 算法硬编码难扩展 | 行为参数化 ⟹ 静态/动态分发 | `dyn Trait`/泛型单态化（Monomorphization） | 边界：仅一种实现时的无用抽象 |
 | **Visitor** | 异构结构操作扩展 | 遍历与操作分离 ⟹ 双重分发 | Trait+enum `accept` | 边界：频繁新增变体破坏开放封闭 |
 | **State Machine** | 状态转换遗漏 | 穷尽性匹配 ⟹ 非法转换编译错误 | `enum`+`match` | 边界：状态>20时enum难以维护 |
 
-> **过渡**：以上模式展示了Rust如何利用类型系统实现零成本抽象。然而，模式的滥用同样会产生"抽象债务"。以下反命题与反模式分析，旨在建立模式选择的批判性框架。
+> **过渡**：以上模式展示了Rust如何利用类型系统实现零成本抽象（Zero-Cost Abstraction）。然而，模式的滥用同样会产生"抽象债务"。以下反命题与反模式分析，旨在建立模式选择的批判性框架。
 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
@@ -149,7 +149,7 @@ graph TD
 **适用场景**：
 
 - 需要撤销/重做操作
-- 请求队列或异步任务
+- 请求队列或异步（Async）任务
 - 操作日志与事务系统
 
 **Rust 实现**：
@@ -184,7 +184,7 @@ impl Invoker {
 
 **与其他语言对比**：
 
-- **Java/C++**: 通常依赖 GC 或智能指针管理命令对象生命周期；Rust 需显式处理所有权，`Box<dyn Command>` 提供了堆分配动态分发。
+- **Java/C++**: 通常依赖 GC 或智能指针（Smart Pointer）管理命令对象生命周期（Lifetimes）；Rust 需显式处理所有权，`Box<dyn Command>` 提供了堆分配动态分发。
 - **Go**: 使用函数值或接口；Rust 的 trait 对象在 vtable 布局上与 Go interface 类似，但 Rust 要求显式 `Box`/`&dyn`。
 
 > **来源**: [GoF Design Patterns] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · 可信度: ✅
@@ -337,7 +337,7 @@ impl<S: PaymentStrategy> ShoppingCart<S> {
 
 **与其他语言对比**：
 
-- **C++**: 模板（静态）+ 虚函数（动态）；Rust 的泛型单态化与 C++ 模板实例化类似，但类型检查更严格。
+- **C++**: 模板（静态）+ 虚函数（动态）；Rust 的泛型单态化（Monomorphization）与 C++ 模板实例化类似，但类型检查更严格。
 - **Java**: 接口 + 多态；无静态分发零成本特性，所有策略均为动态。
 - **Go**: 接口值隐式实现；Rust trait 需显式实现，静态分发默认内联。
 
@@ -421,7 +421,7 @@ impl Connection<Open> {
 ### 4.5 Plugin 模式
 >
 
-**定义**：在运行时动态加载并注册扩展模块，无需修改核心代码。
+**定义**：在运行时动态加载并注册扩展模块（Module），无需修改核心代码。
 
 **适用场景**：
 
@@ -676,7 +676,7 @@ struct ThreadSafeSubject {
 impl ThreadSafeSubject {
     fn notify(&self, value: i32) {
         let mut observers = self.observers.lock().unwrap();
-        // retain 自动清理已释放的 Weak 引用
+        // retain 自动清理已释放的 Weak 引用（Reference）
         observers.retain(|weak| {
             if let Some(callback) = weak.upgrade() {
                 callback(value);
@@ -754,7 +754,7 @@ fn display_system(mut reader: EventReader<TemperatureChanged>) { [来源: [Rusto
 | Higher-Kinded Types 模拟 | 类型构造器的抽象 | 泛型集合接口 |
 
 ```rust
-// GATs 实现的 Lending Iterator：每次迭代借用自己的数据
+// GATs 实现的 Lending Iterator：每次迭代借用（Borrowing）自己的数据
 trait LendingIterator {
     type Item<'a>
     where
@@ -880,7 +880,7 @@ impl Drop for FooContext {
 }
 ```
 
-> **关键洞察**: FFI 安全封装的三层防线——**前置条件检查**（输入验证）、**不变式维护**（生命周期管理）、**后置条件保证**（返回值校验）。Rust 的类型系统负责编码不变式，运行时检查负责验证前置条件。
+> **关键洞察**: FFI 安全封装的三层防线——**前置条件检查**（输入验证）、**不变式维护**（生命周期（Lifetimes）管理）、**后置条件保证**（返回值校验）。Rust 的类型系统负责编码不变式，运行时检查负责验证前置条件。
 [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 > **来源**: [The Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) · [Rust FFI Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) · 可信度: ✅
@@ -890,8 +890,8 @@ impl Drop for FooContext {
 
 | **维度** | **thiserror** | **miette** | **snafu** |
 |:---|:---|:---|:---|
-| **定位** | 最小样板错误枚举 | 诊断丰富（报告、源码标注） | 结构化上下文错误 |
-| **derive 宏** | 极简化：`#[derive(Error)]` | 丰富：`#[derive(Diagnostic)]` | 显式：`#[derive(Snafu)]` |
+| **定位** | 最小样板错误枚举（Enum） | 诊断丰富（报告、源码标注） | 结构化上下文错误 |
+| **derive 宏（Macro）** | 极简化：`#[derive(Error)]` | 丰富：`#[derive(Diagnostic)]` | 显式：`#[derive(Snafu)]` |
 | **错误链** | `#[source]` 自动 `source()` | `#[related]` 支持多错误 | `source` + 上下文构造 |
 | **源码位置** | 需手动 | 自动捕获 span / 源码片段 | 需手动 |
 | **适用场景** | 库作者（轻量） | CLI/应用（用户友好报告） | 复杂领域错误（状态机） |
@@ -999,7 +999,7 @@ fn to_json<T: serde::Serialize>(input: T) -> Result<Vec<u8>, serde_json::Error> 
 |:---|:---|:---|
 | **认知负荷** | 新贡献者需理解多层抽象才能修改一行代码 | 修改简单功能需跨越 >3 个文件 |
 | **编译时间** | 泛型单态化导致代码膨胀 | debug 编译时间增长 >50% |
-| **运行时** | `dyn Trait` vtable 间接调用 | 性能敏感路径出现虚调用 |
+| **运行时（Runtime）** | `dyn Trait` vtable 间接调用 | 性能敏感路径出现虚调用 |
 | **维护性** | 抽象泄漏时修复成本指数增长 | 抽象层变更导致连锁修改 >5 处 |
 
 **避免方法**：YAGNI（You Aren't Gonna Need It）。当满足以下任一条件时，才考虑引入泛型或 Trait：
@@ -1081,7 +1081,7 @@ impl Transport {
 
 > **Bloom 层级**: 应用
 
-**定义**：使用字符串替代强类型来表示结构化数据或枚举状态，丧失编译期检查能力。来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+**定义**：使用字符串替代强类型来表示结构化数据或枚举（Enum）状态，丧失编译期检查能力。来源: [Rust API Guidelines](LINK_PLACEHOLDER)
 
 **Rust 表现**：
 
@@ -1129,7 +1129,7 @@ fn run_command(cmd: Command) {
 
 > **Bloom 层级**: 分析
 
-**定义**：一个对象或结构体掌握了过多职责和状态，成为系统中所有操作的中心枢纽，违反单一职责原则。来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+**定义**：一个对象或结构体（Struct）掌握了过多职责和状态，成为系统中所有操作的中心枢纽，违反单一职责原则。来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
 **Rust 表现**：
 
@@ -1174,7 +1174,7 @@ async fn handler(db: &DatabaseLayer, sessions: &SessionLayer) { /* ... */ }
 - 利用所有权系统将状态分散到不同模块，通过消息传递（channel）或 Actor 模式通信。
 - 对跨线程共享状态，优先使用 `tokio::sync::mpsc` 而非 `Arc<Mutex<GlobalState>>`，将共享可变转化为消息传递。
 
-**与 L1-L4 的关联**：上帝对象的 `Mutex<GlobalState>` 模式违背了 [L1 所有权](../01_foundation/01_ownership.md) 的核心理念——"单一所有者决定生命周期"。通过 Actor / Channel 模型将状态拆分，正是 [L3 并发](../03_advanced/01_concurrency.md) 中"共享状态转化为消息传递"原则的实践。参见 [L1 借用](../01_foundation/02_borrowing.md) §内部可变性、[L3 并发](../03_advanced/01_concurrency.md) §Actor 模型。
+**与 L1-L4 的关联**：上帝对象的 `Mutex<GlobalState>` 模式违背了 [L1 所有权](LINK_PLACEHOLDER) 的核心理念——"单一所有者决定生命周期"。通过 Actor / Channel 模型将状态拆分，正是 [L3 并发](LINK_PLACEHOLDER) 中"共享状态转化为消息传递"原则的实践。参见 [L1 借用（Borrowing）](LINK_PLACEHOLDER) §内部可变性、[L3 并发](LINK_PLACEHOLDER) §Actor 模型。
 
 > **来源**: [Rust API Guidelines — Structs](https://rust-lang.github.io/api-guidelines//predictability.html) · [Rust Design Patterns — Anti-patterns](https://rust-unofficial.github.io/patterns/anti_patterns/index.html) · 可信度: ✅
 
@@ -1226,11 +1226,11 @@ fn process_items(mut items: Vec<Item>) -> Vec<Processed> {
 | 症状 | 根因 | 重构策略 |
 |:---|:---|:---|
 | `Rc<RefCell<...>>` 网状结构 | 所有权设计回避 | 引入 Actor / Channel 模型，显式消息传递 |
-| `async` 嵌套 >4 层 | 回调思维残留 | 提取 `async fn` + `?` 传播，扁平化错误处理 |
+| `async` 嵌套 >4 层 | 回调思维残留 | 提取 `async fn` + `?` 传播，扁平化错误处理（Error Handling） |
 | `unsafe` 散布于业务代码 | FFI 封装不完整 | 集中 `unsafe` 到最小封装层，外层 API 全安全 |
 | 生命周期标注 >3 个嵌套 | 自引用或过度借用 | 考虑 `Pin<&mut Self>` 或所有权重新分配 |
 
-**与 L1-L4 的关联**：Spaghetti Code 在 Rust 中最危险的变体是生命周期意大利面——过度复杂的生命周期标注往往意味着违背了 [L1 所有权](../01_foundation/01_ownership.md) 的"单一所有者"原则，或需要 [L3 异步](../03_advanced/02_async.md) 中的 `Pin` 来安全表达自引用。`Rc<RefCell<...>>` 的滥用则是 [L2 内存管理](../02_intermediate/03_memory_management.md) 中内部可变性机制的误用，参见该文件 §`RefCell<T>` 边界。
+**与 L1-L4 的关联**：Spaghetti Code 在 Rust 中最危险的变体是生命周期意大利面——过度复杂的生命周期标注往往意味着违背了 [L1 所有权](LINK_PLACEHOLDER) 的"单一所有者"原则，或需要 [L3 异步（Async）](LINK_PLACEHOLDER) 中的 `Pin` 来安全表达自引用。`Rc<RefCell<...>>` 的滥用则是 [L2 内存管理](LINK_PLACEHOLDER) 中内部可变性机制的误用，参见该文件 §`RefCell<T>` 边界。
 
 > **来源**: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines//type-safety.html) · [Rust Design Patterns — Anti-patterns](https://rust-unofficial.github.io/patterns/anti_patterns/index.html) · [TRPL — Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Wikipedia — Spaghetti code](https://en.wikipedia.org/wiki/Spaghetti_code) · 可信度: ✅
 
@@ -1295,7 +1295,7 @@ graph TD
 ```
 
 > **认知功能**: 提供可编码的决策层级，将经验驱动的模式选择转化为"类型约束→性能约束→工程经验"的系统过程。建议在技术评审中用此框架质疑"凭感觉"的架构决策。
-> **关键洞察**: Rust优先将经验问题编译为类型约束（如Typestate替代运行时状态检查），这本身就是"经验→类型系统"的知识固化过程。
+> **关键洞察**: Rust优先将经验问题编译为类型约束（如Typestate替代运行时状态检查），这本身就是"经验→类型系统（Type System）"的知识固化过程。
 
 ### 编译验证：Typestate 与 Builder 模式
 >
@@ -1385,7 +1385,7 @@ fn main() {
 }
 ```
 
-> **关键洞察**: Typestate 模式利用泛型将运行时状态检查转化为编译期类型约束；Builder 模式利用所有权转移保证构造过程的原子性。两者都是 Rust 类型系统的**零成本抽象**——编译后无运行时开销。
+> **关键洞察**: Typestate 模式利用泛型将运行时状态检查转化为编译期类型约束；Builder 模式利用所有权转移保证构造过程的原子性。两者都是 Rust 类型系统的**零成本抽象（Zero-Cost Abstraction）**——编译后无运行时开销。
 [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
 ---
@@ -1398,8 +1398,8 @@ fn main() {
 | Typestate | L1 所有权 + L2 泛型 | `01_foundation/`, `02_intermediate/02_generics.md` | 编译期状态机验证 |
 | Newtype | L1 类型系统 | `01_foundation/04_type_system.md` | 零大小类型包装 |
 | Builder | L2 Trait + 方法链 | `../02_intermediate/01_traits.md` | fluent API 构造 |
-| Zero-cost Abstraction | L2 单态化 | `02_intermediate/02_generics.md` | 参数多态的编译期消除 |
-| Interior Mutability | L1 借用 + L2 内存 | `01_foundation/02_borrowing.md`, `02_intermediate/03_memory_management.md` | 运行时权限检查替代编译期 |
+| Zero-cost Abstraction | L2 单态化（Monomorphization） | `02_intermediate/02_generics.md` | 参数多态的编译期消除 |
+| Interior Mutability | L1 借用（Borrowing） + L2 内存 | `01_foundation/02_borrowing.md`, `02_intermediate/03_memory_management.md` | 运行时权限检查替代编译期 |
 | Command | L2 Trait + L1 所有权 | `../02_intermediate/01_traits.md` | 行为参数化 |
 | Visitor | L2 Trait + enum | `../02_intermediate/01_traits.md` | 结构归纳 |
 | Strategy | L2 Trait + 泛型 | `../02_intermediate/01_traits.md` | 多态分发 |
@@ -1412,7 +1412,7 @@ fn main() {
 
 | **论文/著作** | **作者** | **核心贡献** | **与 Rust 的关联** |
 |:---|:---|:---|:---|
-| *Design Patterns: Elements of Reusable Object-Oriented Software* (GoF, 1994) | Gamma, Helm, Johnson, Vlissides | 系统化了 23 种经典设计模式 | Rust 社区对 GoF 模式进行了零成本抽象改写 |
+| *Design Patterns: Elements of Reusable Object-Oriented Software* (GoF, 1994) | Gamma, Helm, Johnson, Vlissides | 系统化了 23 种经典设计模式 | Rust 社区对 GoF 模式进行了零成本抽象（Zero-Cost Abstraction）改写 |
 | *Rust API Guidelines* (Rust Lang Team) | Rust Lang Team | Rust 生态的 API 设计规范 | 明确提出了 Newtype、Builder、Error 等惯用法 |
 | *Typestates for Objects* (Aldrich et al., 2009) | Jonathan Aldrich et al. | 将 Typestate 引入面向对象语言 | Rust 的 PhantomData + 泛型是 Typestate 的工业级实现 |
 | *Ownership Types for Flexible Alias Protection* (Clarke et al., 1998) | Dave Clarke et al. | 所有权类型理论基础 | 支撑 RAII 和线性资源管理的学术研究 |
@@ -1456,10 +1456,10 @@ fn main() {
 | Trait 系统 | [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) | 模式实现基础 |
 | 泛型 | [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) | 零成本抽象 |
 | 内存管理 | [`../02_intermediate/03_memory_management.md`](../02_intermediate/03_memory_management.md) | 智能指针模式 |
-| 错误处理 | [`../02_intermediate/04_error_handling.md`](../02_intermediate/04_error_handling.md) | Result 模式 |
+| 错误处理（Error Handling） | [`../02_intermediate/04_error_handling.md`](../02_intermediate/04_error_handling.md) | Result 模式 |
 | 工具链 | [`./01_toolchain.md`](./01_toolchain.md) | 工程支撑 |
 | 设计模式对比 | [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md) | 范式定位 |
-| 并发 / 异步 | [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) · [`../03_advanced/02_async.md`](../03_advanced/02_async.md) | Observer 异步实现基础 |
+| 并发 / 异步（Async） | [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) · [`../03_advanced/02_async.md`](../03_advanced/02_async.md) | Observer 异步实现基础 |
 
 ---
 
@@ -1473,7 +1473,7 @@ fn main() {
 | **单态化泛型** | 通用算法 | 零 | 代码膨胀 | 高 | 任意 |
 | **Trait Object (`dyn`)** | 运行时多态 | vtable 间接调用 | 指针大小 | 低 | 类型未知时 |
 | **Type Erasure** | 隐藏具体类型 | 装箱 + vtable | 堆分配 | 中 | 跨 API 边界 |
-| **GATs Lending** | 自引用迭代器 | 零 | 栈分配 | 中 |  borrow 复杂场景 |
+| **GATs Lending** | 自引用迭代器（Iterator） | 零 | 栈分配 | 中 |  borrow 复杂场景 |
 | **Actor (Tokio)** | 并发消息传递 | 消息序列化 | 每 Actor | 低 | 高并发服务 |
 | **RC + RefCell** | 共享可变状态 | 引用计数 | 2×usize + 标志 | 低 | 单线程图结构 |
 | **Arc + Mutex** | 跨线程共享 | 锁竞争 | 2×usize + 锁 | 低 | 多线程共享 |
@@ -1505,7 +1505,7 @@ fn main() {
 
 - [x] **高**: 补充 GATs 模式、Type Erasure、async/await 设计模式
 - [x] **中**: 补充 FFI 边界的安全封装模式深度案例
-- [x] **中**: 补充错误处理模式对比（`thiserror`/`miette`/`snafu`）
+- [x] **中**: 补充错误处理（Error Handling）模式对比（`thiserror`/`miette`/`snafu`）
 - [x] **低**: 补充各模式的 benchmark 对比数据 —— 已完成 §8.1
 - [x] **高**: 补充 Observer 模式 —— 已完成 §4.6，2026-05-14
 - [x] **低**: 补充反模式（Over-engineering、Premature abstraction）—— 已完成 §5.1–5.5，2026-05-14
@@ -1653,7 +1653,7 @@ impl ExprVisitor for Evaluator {
 }
 ```
 
-> **修正**: 访问者模式（Visitor Pattern）在 OOP 语言中用于解耦操作与数据结构，但 Rust 的**代数数据类型**（枚举 + 模式匹配）使访问者模式往往不必要。`Expr` 的求值直接用 `match` 更简洁：
+> **修正**: 访问者模式（Visitor Pattern）在 OOP 语言中用于解耦操作与数据结构，但 Rust 的**代数数据类型**（枚举（Enum） + 模式匹配（Pattern Matching））使访问者模式往往不必要。`Expr` 的求值直接用 `match` 更简洁：
 
 ```rust
 fn eval(e: &Expr) -> i32 {
@@ -1664,7 +1664,7 @@ fn eval(e: &Expr) -> i32 {
 }
 ```
 
-访问者模式仅在"频繁添加新操作，不频繁添加新变体"时优势——Rust 的枚举匹配在"频繁添加新变体"时更有优势（编译器检查遗漏）。这与 Haskell 的代数数据类型（同样偏好模式匹配）或 Java 的 Visitor（因无枚举匹配而必需）不同——Rust 的类型系统使某些传统设计模式过时。[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch18-00-patterns.html)]
+访问者模式仅在"频繁添加新操作，不频繁添加新变体"时优势——Rust 的枚举匹配在"频繁添加新变体"时更有优势（编译器检查遗漏）。这与 Haskell 的代数数据类型（同样偏好模式匹配（Pattern Matching））或 Java 的 Visitor（因无枚举匹配而必需）不同——Rust 的类型系统使某些传统设计模式过时。[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch18-00-patterns.html)]
 
 ### 10.3 边界测试：builder 模式的链式调用与移动语义（编译错误）
 

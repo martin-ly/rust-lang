@@ -26,8 +26,8 @@
 - v1.0 (2026-05-12): 初始版本
 - v1.1 (2026-05-12): Wave 3 扩展——补充定义、工具链、RL研究、确定性容器、生态图、学术论文
 - v1.2 (2026-05-14): 深度扩展 §6 RL on Compiler Errors——补充 Getafix/Graph2Diff/DeepDelta/Break-It-Fix-It/DeepFix/Prophet 代表性研究、状态空间与奖励函数形式化定义、RL vs LLM 对比矩阵、Rust 编译器结构化诊断优势分析
-- v1.3 (2026-05-14): 补充 Kiro 深度分析（定位、Rust 类型系统结合、与 Copilot 对比）、新增 Cursor / Zed AI 独立章节、新增 §5.7 工具选择矩阵（Copilot / Codeium / Kiro / Cursor / Zed AI）
-- v1.4 (2026-05-22): 网络权威内容对齐 Batch 9：补充与 Rust 在 AI 中角色 (21_rust_in_ai.md) 的交叉引用、添加 LLM C→Rust 迁移研究笔记链接
+- v1.3 (2026-05-14): 补充 Kiro 深度分析（定位、Rust 类型系统（Type System）结合、与 Copilot 对比）、新增 Cursor / Zed AI 独立章节、新增 §5.7 工具选择矩阵（Copilot / Codeium / Kiro / Cursor / Zed AI）
+- v1.4 (2026-05-22): 网络权威内容对齐 Batch 9：补充与 Rust 在 AI 中角色 (21_rust_in_ai.md) 的交叉引用（Reference）、添加 LLM C→Rust 迁移研究笔记链接
 
 ---
 
@@ -41,8 +41,8 @@
 
 > **学习递进**: AI × Rust 的核心逻辑链
 
-1. **AI 生成代码的本质**: 统计模式匹配，高概率正确但不保证逻辑一致性
-2. **Rust 形式系统的角色**: 编译器作为不可压缩的语义安全网，将运行时错误转化为编译期错误
+1. **AI 生成代码的本质**: 统计模式匹配（Pattern Matching），高概率正确但不保证逻辑一致性（Coherence）
+2. **Rust 形式系统的角色**: 编译器作为不可压缩的语义安全网，将运行时（Runtime）错误转化为编译期错误
 3. **RL 与编译器反馈**: 将 `rustc --error-format=json` 的结构化诊断作为强化学习的密集奖励信号
 4. **确定性容器**: AI 生成 + Rust 编译 + Nix 构建 = 可复现、可验证的软件供应链
 5. **未来方向**: 形式化规格生成、证明辅助编程、自动 unsafe 审计
@@ -117,10 +117,10 @@ graph TD
 
 **技术细节**：AI 在 Rust 语法空间内生成代码，编译器作为第一道防线：
 
-- **所有权检查**：AI 生成的代码必须通过 borrow checker，消除 use-after-free 和数据竞争
-- **类型推断**：即使 AI 省略部分类型标注，Rust 的类型推断也能补全并验证一致性
-- **穷尽匹配**：`match` 表达式要求穷尽，AI 必须处理所有枚举变体
-- **unsafe 审计**：对 `unsafe` 块，AI 需配合 Miri 或 Kani 验证其内存安全假设
+- **所有权（Ownership）检查**：AI 生成的代码必须通过 borrow checker，消除 use-after-free 和数据竞争
+- **类型推断（Type Inference）**：即使 AI 省略部分类型标注，Rust 的类型推断也能补全并验证一致性（Coherence）
+- **穷尽匹配**：`match` 表达式要求穷尽，AI 必须处理所有枚举（Enum）变体
+- **unsafe 审计**：对 `unsafe` 块，AI 需配合 Miri 或 Kani 验证其内存安全（Memory Safety）假设
 
 **工具链**：GitHub Copilot、Codeium、Kiro、Cursor、Zed AI
 
@@ -129,7 +129,7 @@ graph TD
 **技术细节**：对超越单函数的协议和分布式属性进行验证：
 
 - **模型检测**：使用 TLA+ 或 P 语言验证状态机无死锁、满足活性
-- **运行时对齐**：PObserve 或自定义 trace-checking 将运行时行为与形式化规约对齐
+- **运行时（Runtime）对齐**：PObserve 或自定义 trace-checking 将运行时行为与形式化规约对齐
 - **版本代数**：接口演化遵循语义化版本和 Schema Registry 约束
 
 **工具链**：TLA+ Toolbox、P Language Runtime、PObserve、Buf Schema Registry
@@ -140,9 +140,9 @@ graph TD
 
 | **维度** | **AI + C++** | **AI + Rust** |
 |:---|:---|:---|
-| **错误检测** | 运行时/测试 | 编译期（类型/所有权/生命周期） |
+| **错误检测** | 运行时（Runtime）/测试 | 编译期（类型/所有权（Ownership）/生命周期（Lifetimes）） |
 | **错误反馈** | 段错误/UB（难以定位） | 编译错误（精确位置+解释） |
-| **组合安全性** | 模块组合可能不安全 | 类型检查保证组合安全 |
+| **组合安全性** | 模块（Module）组合可能不安全 | 类型检查保证组合安全 |
 | **AI 学习信号** | 弱（运行时错误稀疏） | 强（编译错误密集且结构化） |
 | **代码生成质量** | 高概率有安全漏洞 | 通过编译 = 基础安全保证 |
 
@@ -177,9 +177,9 @@ fn rl_fix_borrow_error() {
 | 特性 | C/C++ 编译器 | Python 解释器 | Rust 编译器 (`rustc`) |
 |:---|:---|:---|:---|
 | 错误结构化 | 文本诊断，难以解析 | 运行时异常，位置模糊 | **JSON 输出，精确 span** |
-| 反馈密度 | 编译错误稀疏 | 运行时错误稀疏 | **类型/所有权/生命周期错误密集** |
-| 确定性 | 宏/条件编译引入不确定性 | 动态类型引入不确定性 | **相同输入 → 相同诊断** |
-| 错误可修复性 | 指针错误难以自动修复 | 类型错误运行时才发现 | **类型系统约束缩小搜索空间** |
+| 反馈密度 | 编译错误稀疏 | 运行时错误稀疏 | **类型/所有权（Ownership）/生命周期（Lifetimes）错误密集** |
+| 确定性 | 宏（Macro）/条件编译引入不确定性 | 动态类型引入不确定性 | **相同输入 → 相同诊断** |
+| 错误可修复性 | 指针错误难以自动修复 | 类型错误运行时才发现 | **类型系统（Type System）约束缩小搜索空间** |
 
 > **关键洞察**: Rust 编译器的**结构化密度**（每字节源码对应的诊断信息量）是 C++ 的 3-5 倍，这意味着 RL agent 的状态表示更紧凑、奖励信号更密集。来源: [Rust Reference: JSON Diagnostic Format](https://doc.rust-lang.org/reference/) ✅
 
@@ -197,12 +197,12 @@ AI 生成空间 = 所有语法合法的 Rust 程序（超大规模）
 
 这种过滤对 AI 具有双重效应：
 
-- **正面**: 编译通过的代码几乎保证内存安全（无 UAF/DF/数据竞争）
-- **负面**: 生成难度显著增加（生命周期标注、所有权转移的准确率要求极高）
+- **正面**: 编译通过的代码几乎保证内存安全（Memory Safety）（无 UAF/DF/数据竞争）
+- **负面**: 生成难度显著增加（生命周期（Lifetimes）标注、所有权转移的准确率要求极高）
 
 > **命题 P-001** [Tier 3]: AI 生成 Rust 代码的编译通过率是其"逻辑正确率"的下界估计。
 >
-> **论证**: RustBelt 证明 Safe Rust 的内存安全（无 UAF/DF），因此编译通过 ⟹ 内存安全。但编译通过 ⇏ 逻辑正确（功能 bug 仍可能存在）。
+> **论证**: RustBelt 证明 Safe Rust 的内存安全（无 UAF/DF），因此编译通过 ⟹ 内存安全（Memory Safety）。但编译通过 ⇏ 逻辑正确（功能 bug 仍可能存在）。
 > **数据支撑**: Compiler-Guided Fine-Tuning (CMU 2025) 报告显示，在 LLM 解码过程中集成 rustc 类型检查器，可将生成代码的编译通过率从 34% 提升至 71%。[来源: PLDI 2024/2025] ⚠️ 前沿
 
 ### 5.3 工具选择决策树
@@ -590,7 +590,7 @@ Rust 编译器 = 形式过滤器，将空间限制为语义一致的子集
 
 核心发现：
 
-- LLM 在小型独立函数上表现优异，但在跨模块依赖和复杂类型推断上仍有差距
+- LLM 在小型独立函数上表现优异，但在跨模块（Module）依赖和复杂类型推断（Type Inference）上仍有差距
 - 类型信息作为额外上下文（type-aware prompting）可提升生成准确率 15-30%
 - 多轮对话式生成（iterative refinement）优于单次 completion
 
@@ -619,8 +619,8 @@ Rust 编译器 = 形式过滤器，将空间限制为语义一致的子集
 | AI 需求 | 驱动的下层变化 | 关联文件 | 约束类型 |
 |:---|:---|:---|:---|
 | AI 生成代码安全 | L3 Unsafe 契约需机器可读 | `03_advanced/03_unsafe.md` | 反向约束 |
-| AI 类型推断辅助 | L1 类型系统需更易推断 | `01_foundation/04_type_system.md` | 反向约束 |
-| AI 错误修复 | L2 错误处理模式需标准化 | `02_intermediate/04_error_handling.md` | 反向约束 |
+| AI 类型推断（Type Inference）辅助 | L1 类型系统需更易推断 | `01_foundation/04_type_system.md` | 反向约束 |
+| AI 错误修复 | L2 错误处理（Error Handling）模式需标准化 | `02_intermediate/04_error_handling.md` | 反向约束 |
 | 确定性容器 | L1 所有权需扩展确定性语义 | `01_foundation/01_ownership.md` | 潜在扩展 |
 
 ---
@@ -716,7 +716,7 @@ fn correct_fix(s: &str) -> String {
 > **关键洞察**:
 > 生命周期错误（E0716、E0515）是 AI 生成 Rust 代码的**最大弱点**之一。
 > RustRepair-RL 报告显示，RL 模型在修复 `E0382`（use of moved value）上达到 78% 准确率，但 `E0716`（lifetime mismatch）仅 45%。
-> 这表明生命周期推理需要更深层的语义理解，而非单纯的模式匹配。
+> 这表明生命周期推理需要更深层的语义理解，而非单纯的模式匹配（Pattern Matching）。
 > [来源: RustRepair-RL, 2024] ⚠️ 前沿
 
 ---
@@ -910,9 +910,9 @@ fn main() {
 
 > **修正**: AI 工具（Copilot、ChatGPT）生成 Rust 代码时，**所有权和生命周期**是最常见的错误类型：
 >
-> 1) 返回局部引用（悬垂引用）；
-> 2) 在闭包中错误捕获引用（非 `'static`）；
-> 3) 借用冲突（`&mut` 与 `&` 重叠）。
+> 1) 返回局部引用（Reference）（悬垂引用）；
+> 2) 在闭包（Closures）中错误捕获引用（非 `'static`）；
+> 3) 借用（Borrowing）冲突（`&mut` 与 `&` 重叠）。
 >
 > AI 的训练数据包含大量 C/Java/Python 代码，这些语言的引用语义与 Rust 不同，导致生成"看起来像正确 Rust"但实际编译错误的代码。
 > 缓解：
@@ -988,5 +988,5 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-允许同一模型代码编译到不同后端（CPU、CUDA、WGPU、WebGPU），通过泛型参数选择。这是 Rust 零成本抽象在 ML 领域的体现。
+允许同一模型代码编译到不同后端（CPU、CUDA、WGPU、WebGPU），通过泛型（Generics）参数选择。这是 Rust 零成本抽象（Zero-Cost Abstraction）在 ML 领域的体现。
 </details>

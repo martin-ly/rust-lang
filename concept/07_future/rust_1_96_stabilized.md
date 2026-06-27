@@ -1,7 +1,7 @@
 # Rust 1.96.0 稳定特性
 
 > **EN**: Rust 1.96.0 Stabilized Features
-> **Summary**: Rust 1.96.0（2026-05-28 stable）引入的关键语言与库特性：Copy-compatible range 类型、assert_matches! 宏、NonZero 范围迭代、AssertUnwindSafe / LazyCell / LazyLock 的 From 实现、s390x vector assembly 以及 Cargo 安全修复。
+> **Summary**: Rust 1.96.0（2026-05-28 stable）引入的关键语言与库特性：Copy-compatible range 类型、assert_matches! 宏（Macro）、NonZero 范围迭代、AssertUnwindSafe / LazyCell / LazyLock 的 From 实现、s390x vector assembly 以及 Cargo 安全修复。
 >
 > **受众**: [进阶] / [专家]
 > **内容分级**: [参考级]
@@ -51,7 +51,7 @@ debug_assert_matches!(result, Ok(n) if n > 0);
 
 ### 1.2 `expr` metavariable 在 `cfg` 中的使用
 
-过程宏可以将表达式元变量传递给 `cfg` / `cfg_attr`，增强了宏与条件编译的交互能力。
+过程宏（Procedural Macro）可以将表达式元变量传递给 `cfg` / `cfg_attr`，增强了宏与条件编译的交互能力。
 
 ### 1.3 s390x inline assembly vector registers
 
@@ -72,8 +72,8 @@ debug_assert_matches!(result, Ok(n) if n > 0);
 | `core::range::Range<T>` | 实现 `Copy`，`IntoIterator` |
 | `core::range::RangeFrom<T>` | 实现 `Copy`，`IntoIterator` |
 | `core::range::RangeToInclusive<T>` | 实现 `Copy`，`IntoIterator` |
-| `core::range::RangeIter<T>` | 对应迭代器 |
-| `core::range::RangeFromIter<T>` | 对应迭代器 |
+| `core::range::RangeIter<T>` | 对应迭代器（Iterator） |
+| `core::range::RangeFromIter<T>` | 对应迭代器（Iterator） |
 | `core::range::RangeToInclusiveIter<T>` | 对应迭代器 |
 
 ```rust

@@ -2,7 +2,7 @@
 >
 > [专家级]
 > **代码状态**: 📋 预览/研究 — Rust Project Goal 2026，LLVM 集成进行中
-> **定理链**: N/A — 工具链/运行时研究跟踪
+> **定理链**: N/A — 工具链/运行时（Runtime）研究跟踪
 >
 # BorrowSanitizer 预览
 >
@@ -12,11 +12,13 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva
-> **前置依赖**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Miri](../06_ecosystem/47_formal_verification_tools.md) · [所有权形式化](../04_formal/03_ownership_formal.md)
+> **前置依赖**: [Unsafe Rust](LINK_PLACEHOLDER) · [Miri](LINK_PLACEHOLDER) · [所有权（Ownership）形式化](LINK_PLACEHOLDER)
 > **后置延伸**: [Safety Tags](./31_safety_tags_preview.md) · [AutoVerus/Verus](./33_autoverus_preview.md)
 >
 > **来源**: [BorrowSanitizer 项目主页](https://borrowsanitizer.com/) · [Rust Project Goal #624](https://github.com/rust-lang/rust-project-goals/issues/624) · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/borrowsanitizer.html)
 
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 ## 一、权威定义
@@ -24,7 +26,7 @@
 > We are building BorrowSanitizer: an LLVM-based instrumentation tool for finding violations of Rust's aliasing model.
 > —— Rust Project Goal #624
 
-BorrowSanitizer（常缩写为 BSAN）是 Rust 2026 Project Goal 之一，目标是将研究原型转化为可在实践中使用的工具。它通过在 LLVM IR 层插桩 **retag intrinsic** 来追踪引用的创建、传递与失效，从而检测违反 Rust 别名规则的代码。
+BorrowSanitizer（常缩写为 BSAN）是 Rust 2026 Project Goal 之一，目标是将研究原型转化为可在实践中使用的工具。它通过在 LLVM IR 层插桩 **retag intrinsic** 来追踪引用（Reference）的创建、传递与失效，从而检测违反 Rust 别名规则的代码。
 
 ---
 
@@ -32,14 +34,14 @@ BorrowSanitizer（常缩写为 BSAN）是 Rust 2026 Project Goal 之一，目标
 
 ### 2.1 别名模型基础
 
-Rust 的内存安全建立在严格的别名规则之上，主要有两种操作语义解释：
+Rust 的内存安全（Memory Safety）建立在严格的别名规则之上，主要有两种操作语义解释：
 
 | 模型 | 特点 | 代表工具 |
 |:---|:---|:---|
-| **Stacked Borrows** | 将每次借用视为栈中的 tag，严格按 LIFO 失效 | Miri（默认） |
-| **Tree Borrows** | 将借用组织为树，允许更多合法的别名模式 | Miri（可选） |
+| **Stacked Borrows** | 将每次借用（Borrowing）视为栈中的 tag，严格按 LIFO 失效 | Miri（默认） |
+| **Tree Borrows** | 将借用（Borrowing）组织为树，允许更多合法的别名模式 | Miri（可选） |
 
-BorrowSanitizer 的目标是在**运行时**检测这些模型的违规，而不需要像 Miri 那样解释执行整个程序。
+BorrowSanitizer 的目标是在**运行时（Runtime）**检测这些模型的违规，而不需要像 Miri 那样解释执行整个程序。
 
 ### 2.2 LLVM 插桩与 Retag Intrinsics
 
@@ -53,7 +55,7 @@ BorrowSanitizer 在编译时向 LLVM IR 插入两类 intrinsic：
 %x = call ptr @__rust_retag_reg(ptr %y, ...)
 ```
 
-运行时，BorrowSanitizer 维护一个 **shadow stack** 和 **shadow memory**，记录每个指针 tag 的状态（如 Active、Frozen、Disabled）。当发生非法读/写时，报告类似 Miri 的错误信息。
+运行时（Runtime），BorrowSanitizer 维护一个 **shadow stack** 和 **shadow memory**，记录每个指针 tag 的状态（如 Active、Frozen、Disabled）。当发生非法读/写时，报告类似 Miri 的错误信息。
 
 ### 2.3 错误报告示例
 
@@ -116,8 +118,8 @@ cargo bsan test
 
 ## 六、反命题与边界
 
-- **不是类型系统替代**：BorrowSanitizer 是动态工具，只能发现执行到的路径上的违规。
-- **性能开销**：运行时追踪每个引用状态仍有显著开销，不适合生产环境。
+- **不是类型系统（Type System）替代**：BorrowSanitizer 是动态工具，只能发现执行到的路径上的违规。
+- **性能开销**：运行时追踪每个引用（Reference）状态仍有显著开销，不适合生产环境。
 - **模型差异**：BorrowSanitizer 实现的别名规则可能与 Miri 的 Stacked/Tree Borrows 存在细微差异，需要持续对齐。
 
 ---

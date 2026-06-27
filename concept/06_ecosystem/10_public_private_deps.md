@@ -50,9 +50,10 @@ let _ = serde_json::to_string(&s);
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用依赖可见性规则
 > **定位**: 解决 Rust  crate 图中"依赖泄漏"问题的核心机制，使 API 稳定性与依赖演进解耦。 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> **对标**: Java 模块系统 `requires` vs `requires transitive`，C++ 前置声明 vs 完整包含
+> **对标**: Java 模块（Module）系统 `requires` vs `requires transitive`，C++ 前置声明 vs 完整包含
 
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+> **前置概念**: N/A
 ---
 
 > 来源: [RFC 3516 — Public & Private Dependencies](https://github.com/rust-lang/rfcs/pull/3516) ·
@@ -140,7 +141,7 @@ graph TD
 
 > **认知路径**: 此对比图展示依赖泄漏问题的本质。
 > **泄漏模式**（红）中，Crate C 通过 Crate A 隐式依赖了 Crate B——当 A 升级或移除 B 时，C 的编译会意外失败。
-> **隔离模式**（绿）中，`public = false` 将 Crate D 限制在 A 的私有模块内，Crate C 既看不到也用不了 D 的类型。
+> **隔离模式**（绿）中，`public = false` 将 Crate D 限制在 A 的私有模块（Module）内，Crate C 既看不到也用不了 D 的类型。
 > 这是 Rust 从"默认开放"向"显式契约"演进的关键机制。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
@@ -358,7 +359,7 @@ internal = { path = "crates/internal", public = false } # 实现细节 crate
 
 | L1-L4 概念 | Public/Private Deps 映射 |
 |:---|:---|
-| **L1 所有权** | 类型封装（newtype 模式）是消除依赖泄漏的核心手段 |
+| **L1 所有权（Ownership）** | 类型封装（newtype 模式）是消除依赖泄漏的核心手段 |
 | **L2 Trait** | `pub trait` 的实现若依赖私有 crate 的类型，编译器拒绝 |
 | **L3 Unsafe** | `unsafe` FFI 绑定常通过 `public = false` 隔离，避免原生类型泄漏 |
 | **L4 形式化** | 公共依赖图可建模为 crate 接口的形式化合约；私有依赖属于实现细节 |
@@ -380,7 +381,7 @@ internal = { path = "crates/internal", public = false } # 实现细节 crate
 
 - [工具链总览](./01_toolchain.md) — SemVer 兼容性与 Cargo 工作空间
 - [核心 Crate 选型](./03_core_crates.md) — 依赖可见性对 API 设计的影响
-- [L2 泛型与 Trait](../02_intermediate/01_traits.md) — Trait 实现与依赖类型的边界控制
+- [L2 泛型（Generics）与 Trait](LINK_PLACEHOLDER) — Trait 实现与依赖类型的边界控制
 
 ---
 
@@ -543,7 +544,7 @@ fn main() {
 }
 ```
 
-> **修正**: `public = true` 的依赖成为 crate API 的**类型签名一部分**。若 crate A 公开返回 `serde_json::Value`，下游 crate B 若同时依赖不同版本的 serde，编译失败——同一 trait 的两个版本视为不同类型。 Cargo 的依赖解析：1) 尽量统一版本（语义版本兼容时）；2) 不兼容版本在依赖图中可共存（视为不同 crate）；3) 但 public dependency 要求 API 中只有一个版本。企业级策略：1) 核心库（serde、tokio）保持长期稳定版本；2) 用 newtype 封装外部类型（`struct MyValue(serde_json::Value)`）；3) `cargo-deny` 自动检测 public dependency 冲突。这与 npm 的 peer dependencies（运行时检查）或 Python 的依赖解析（pip 的宽松策略）不同——Rust 在编译期强制执行 public dependency 的一致性。[来源: [RFC 3516](https://rust-lang.github.io/rfcs//3516-public-private-dependencies.html)] · [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/features.html)]
+> **修正**: `public = true` 的依赖成为 crate API 的**类型签名一部分**。若 crate A 公开返回 `serde_json::Value`，下游 crate B 若同时依赖不同版本的 serde，编译失败——同一 trait 的两个版本视为不同类型。 Cargo 的依赖解析：1) 尽量统一版本（语义版本兼容时）；2) 不兼容版本在依赖图中可共存（视为不同 crate）；3) 但 public dependency 要求 API 中只有一个版本。企业级策略：1) 核心库（serde、tokio）保持长期稳定版本；2) 用 newtype 封装外部类型（`struct MyValue(serde_json::Value)`）；3) `cargo-deny` 自动检测 public dependency 冲突。这与 npm 的 peer dependencies（运行时（Runtime）检查）或 Python 的依赖解析（pip 的宽松策略）不同——Rust 在编译期强制执行 public dependency 的一致性（Coherence）。[来源: [RFC 3516](https://rust-lang.github.io/rfcs//3516-public-private-dependencies.html)] · [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/features.html)]
 > **过渡**: Public/Private Dependencies：可见性控制的工程化 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Public/Private Dependencies：可见性控制的工程化 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Public/Private Dependencies：可见性控制的工程化 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

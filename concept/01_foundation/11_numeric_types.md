@@ -46,7 +46,7 @@
     - [12.1 边界测试：`usize`/`isize` 平台相关大小（编译错误）](#121-边界测试usizeisize-平台相关大小编译错误)
     - [12.2 边界测试：位运算与逻辑运算混用（编译错误）](#122-边界测试位运算与逻辑运算混用编译错误)
     - [10.3 边界测试：`Wrapping` 与 `Saturating` 的语义选择（逻辑错误）](#103-边界测试wrapping-与-saturating-的语义选择逻辑错误)
-    - [10.4 边界测试：`NonZeroU32` 的构造与优化假设（编译错误/运行时 panic）](#104-边界测试nonzerou32-的构造与优化假设编译错误运行时-panic)
+    - [10.4 边界测试：`NonZeroU32` 的构造与优化假设（编译错误/运行时（Runtime） panic）](LINK_PLACEHOLDER)
     - [10.3 边界测试：`Wrapping<T>` 与 `T` 的混用陷阱（编译错误）](#103-边界测试wrappingt-与-t-的混用陷阱编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：在 Rust 中，`u8` 能表示的最大值是多少？如果执行 `255u8 + 1u8` 的 debug 构建会发生什么？（理解层）](#测验-1在-rust-中u8-能表示的最大值是多少如果执行-255u8--1u8-的-debug-构建会发生什么理解层)
@@ -407,7 +407,7 @@ fn main() {
 
 ## 相关概念文件
 
-- [Type System](04_type_system.md) — 类型系统
+- [Type System](04_type_system.md) — 类型系统（Type System）
 - [Generics](../02_intermediate/02_generics.md) — 泛型（Generics）
 - [Performance](../06_ecosystem/15_performance_optimization.md) — 性能优化
 - [Error Handling](../02_intermediate/04_error_handling.md) — 错误处理（Error Handling）
@@ -534,7 +534,7 @@ fn main() {
 > LLVM 利用此保证优化 `Option<NonZeroU32>` 的布局（niche optimization），用 0 表示 `None`，消除 tag 字节。
 > 这在高频 Option 场景（解析器、图算法）中显著减少内存。
 > 构造必须通过 `NonZeroU32::new(u32) -> Option<NonZeroU32>`——编译器无法在类型层面证明字面量非零（`NonZeroU32::new(0)` 返回 `None`）。
-> 这与 C 的 `assert(x != 0)`（运行时检查，无优化）或 Swift 的 `Nonzero` 类型（无标准支持）不同——Rust 的 `NonZero*` 是标准库类型，与编译器深度集成。
+> 这与 C 的 `assert(x != 0)`（运行时（Runtime）检查，无优化）或 Swift 的 `Nonzero` 类型（无标准支持）不同——Rust 的 `NonZero*` 是标准库类型，与编译器深度集成。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/num/type.NonZeroU32.html)] ·
 > [来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/type-sizes.html)]
 
@@ -644,9 +644,9 @@ IEEE 754 规定 NAN 与任何值（包括自身）都不相等。应使用 `f64:
 
 > 内存布局可预测 ⟸ 固定大小类型 ⟸ 平台无关性
 > 类型转换安全 ⟸ as / try_into 区分 ⟸ 数值范围约束
-> **过渡**: 掌握 Rust 数值类型与运算 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 Rust 数值类型与运算 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 Rust 数值类型与运算 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: Rust 数值类型与运算 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: Rust 数值类型与运算 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

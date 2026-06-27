@@ -7,14 +7,14 @@
 >
 > **EN**: Closures
 > **Summary**: Closures. Core Rust concept covering type system mechanics, ownership and borrowing, AI/ML integration patterns.
-> **📎 交叉引用**
+> **📎 交叉引用（Reference）**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[闭包](../../knowledge/02_intermediate)
+> 本主题在 knowledge 中有系统化的知识索引：[闭包（Closures）](LINK_PLACEHOLDER)
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **A+S** — Application + Structure
-> **双维定位**: C×App — 应用闭包和捕获模式
-> **定位**: 系统讲解 Rust **闭包（Closure）**——从环境捕获、Fn/FnMut/FnOnce trait 到闭包作为参数和返回值，揭示 Rust 如何将函数式编程的灵活性与所有权系统的安全性结合。
+> **双维定位**: C×App — 应用闭包（Closures）和捕获模式
+> **定位**: 系统讲解 Rust **闭包（Closure）**——从环境捕获、Fn/FnMut/FnOnce trait 到闭包作为参数和返回值，揭示 Rust 如何将函数式编程的灵活性与所有权（Ownership）系统的安全性结合。
 > **前置概念**: [Traits](../02_intermediate/01_traits.md) · [Ownership](./01_ownership.md) · [Borrowing](./02_borrowing.md)
 > **后置概念**: [Iterator](../02_intermediate/16_iterator_patterns.md) · [Async](../03_advanced/02_async.md) · [Functional Patterns](../02_intermediate/07_closure_types.md)
 
@@ -33,10 +33,10 @@
   - [一、核心概念](#一核心概念)
     - [1.1 闭包的语法与捕获](#11-闭包的语法与捕获)
     - [1.2 Fn / FnMut / FnOnce](#12-fn--fnmut--fnonce)
-    - [1.3 闭包与所有权](#13-闭包与所有权)
+    - [1.3 闭包与所有权（Ownership）](LINK_PLACEHOLDER)
   - [二、技术细节](#二技术细节)
     - [2.1 闭包作为函数参数](#21-闭包作为函数参数)
-    - [2.2 闭包与类型推断](#22-闭包与类型推断)
+    - [2.2 闭包与类型推断（Type Inference）](LINK_PLACEHOLDER)
     - [2.3 move 闭包](#23-move-闭包)
   - [三、闭包模式矩阵](#三闭包模式矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
@@ -61,7 +61,7 @@
     - [测验 1：闭包捕获模式（理解层）](#测验-1闭包捕获模式理解层)
     - [测验 2：`move` 关键字（应用层）](#测验-2move-关键字应用层)
     - [测验 3：Fn/FnMut/FnOnce（分析层）](#测验-3fnfnmutfnonce分析层)
-    - [测验 4：闭包与生命周期（分析层）](#测验-4闭包与生命周期分析层)
+    - [测验 4：闭包与生命周期（Lifetimes）（分析层）](LINK_PLACEHOLDER)
 
 ---
 
@@ -157,7 +157,7 @@ let closure_fn_once = move || {
 // 实现 FnMut 自动实现 FnOnce
 ```
 
-> **Trait 洞察**: **Fn/FnMut/FnOnce 是 Rust 闭包的核心类型系统**——它们精确描述了闭包对环境的访问方式。
+> **Trait 洞察**: **Fn/FnMut/FnOnce 是 Rust 闭包的核心类型系统（Type System）**——它们精确描述了闭包对环境的访问方式。
 > [来源: [std::ops::Fn](https://doc.rust-lang.org/std/ops/trait.Fn.html)]
 
 ---
@@ -290,7 +290,7 @@ let f: fn(i32) -> i32 = |x| x + 1;
 // 仅当闭包不捕获环境时
 ```
 
-> **推断洞察**: 每个闭包是**唯一的匿名类型**——这是 Rust 实现零成本抽象的**关键设计**。
+> **推断洞察**: 每个闭包是**唯一的匿名类型**——这是 Rust 实现零成本抽象（Zero-Cost Abstraction）的**关键设计**。
 > [来源: [RFC 1558 — Closure to Fn Coercion](https://rust-lang.github.io/rfcs//1558-closure-to-fn-coercion.html)]
 
 ---
@@ -336,7 +336,7 @@ let s = String::from("hello");
 let c = move || &s;  // ❌ 编译错误！s 被 move，无法返回引用
 ```
 
-> **move 洞察**: `move` 是**控制闭包所有权的显式工具**——它在需要延长数据生命周期或跨线程/异步边界时使用。
+> **move 洞察**: `move` 是**控制闭包所有权的显式工具**——它在需要延长数据生命周期（Lifetimes）或跨线程/异步（Async）边界时使用。
 > [来源: [TRPL — Move Closures](https://doc.rust-lang.org/book/ch13-01-closures.html#moving-captured-values-out-of-the-closure-and-the-fn-traits)]
 
 ---
@@ -374,7 +374,7 @@ async 块:
   → items.sort_by(|a, b| a.cmp(b))
 ```
 
-> **模式矩阵**: 闭包是 Rust **函数式编程风格的核心**——它们与迭代器、异步和并发深度集成。
+> **模式矩阵**: 闭包是 Rust **函数式编程风格的核心**——它们与迭代器（Iterator）、异步（Async）和并发深度集成。
 > [来源: [Rust Patterns — Closures](https://rust-unofficial.github.io/patterns/)]
 
 ---
@@ -485,7 +485,7 @@ graph TD
      // 或 Box< dyn Fn() > 减少复制
 ```
 
-> **陷阱总结**: 闭包的陷阱主要与**Fn trait 选择**、**move 遗漏**、**返回引用**、**多次调用**和**性能**相关。
+> **陷阱总结**: 闭包的陷阱主要与**Fn trait 选择**、**move 遗漏**、**返回引用（Reference）**、**多次调用**和**性能**相关。
 > [来源: [Common Closure Mistakes](https://doc.rust-lang.org/rust-by-example/fn/closures.html)]
 
 ---
@@ -590,7 +590,7 @@ where
 }
 ```
 
-> **修正**: 闭包根据捕获方式分为三类：`Fn`（共享借用）、`FnMut`（可变借用）、`FnOnce`（所有权消耗）。
+> **修正**: 闭包根据捕获方式分为三类：`Fn`（共享借用（Borrowing））、`FnMut`（可变借用）、`FnOnce`（所有权消耗）。
 > 接受闭包的函数必须声明正确的 trait bound。
 > 若闭包消耗捕获变量（如 `drop`），则只能实现 `FnOnce`，不能传递给要求 `Fn` 或 `FnMut` 的函数。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -651,9 +651,9 @@ fn main() {
 > **修正**: Rust 中每个闭包表达式有**唯一的匿名类型**，即使捕获环境和签名完全相同。
 > `impl Fn(i32) -> i32` 在返回类型中隐藏具体类型，但在变量类型中不可用（`let x: impl Trait` 非法）。
 > 若需存储多个相同签名的闭包，使用 `Box<dyn Fn(i32) -> i32>`（动态分发）或函数指针 `fn(i32) -> i32`（仅适用于无捕获闭包）。
-> 闭包的匿名类型使编译器能内联调用（零成本），但限制了类型层面的操作（不能 `==` 比较类型、不能模式匹配）。
-> 这与 C++ 的 lambda（每个 lambda 有唯一类型，但 `std::function` 提供类型擦除）或 Java 的 lambda（编译为 `invokedynamic`，运行时生成类）不同
-> ——Rust 的闭包类型在编译期完全确定，无运行时生成。
+> 闭包的匿名类型使编译器能内联调用（零成本），但限制了类型层面的操作（不能 `==` 比较类型、不能模式匹配（Pattern Matching））。
+> 这与 C++ 的 lambda（每个 lambda 有唯一类型，但 `std::function` 提供类型擦除）或 Java 的 lambda（编译为 `invokedynamic`，运行时（Runtime）生成类）不同
+> ——Rust 的闭包类型在编译期完全确定，无运行时（Runtime）生成。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] ·
 > [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
 
@@ -677,7 +677,7 @@ fn main() {
 > 3) 移动/消耗使用 → `T`（`FnOnce`）。
 > `move ||` 强制**按值捕获**所有变量（move 语义），用于延长闭包生命周期（如返回闭包或跨线程传递）。
 > 常见陷阱：
-> 4) 闭包捕获 `&s` 后，原变量 `s` 被借用，不能移动；
+> 4) 闭包捕获 `&s` 后，原变量 `s` 被借用（Borrowing），不能移动；
 > 5) `move ||` 闭包尝试多次调用（若捕获变量未实现 `Copy`）；
 > 6) 闭包返回后，捕获变量在闭包内 drop。
 > 修复：使用 `move ||` 强制转移所有权，或在闭包使用后立即 drop 闭包释放借用。
@@ -756,9 +756,9 @@ fn main() {
 
 > 高阶函数安全 ⟸ 环境捕获类型检查 ⟸ Fn/FnMut/FnOnce
 > 回调正确性 ⟸ 闭包生命周期推断 ⟸ 借用规则
-> **过渡**: 掌握 闭包基础：捕获环境与匿名函数 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 闭包基础：捕获环境与匿名函数 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 闭包基础：捕获环境与匿名函数 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: 闭包基础：捕获环境与匿名函数 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 闭包基础：捕获环境与匿名函数 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 
@@ -790,7 +790,7 @@ fn main() {
 
 **A. 能，输出 `1`**。
 
-闭包自动以可变引用捕获 `count`（`&mut count`），因为闭包体内修改了它。`count` 的类型是 `i32`，实现了 `Copy`，但闭包优先选择最少权限的捕获方式——此处需要 `&mut`，因此使用可变引用。
+闭包自动以可变引用（Mutable Reference）捕获 `count`（`&mut count`），因为闭包体内修改了它。`count` 的类型是 `i32`，实现了 `Copy`，但闭包优先选择最少权限的捕获方式——此处需要 `&mut`，因此使用可变引用。
 
 注意：调用 `inc()` 后，`count` 被闭包的可变借用锁定，直到闭包最后一次使用后才能再次直接访问 `count`。
 </details>

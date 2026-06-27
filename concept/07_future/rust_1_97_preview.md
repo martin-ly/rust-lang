@@ -22,6 +22,7 @@
 > - [releases.rs — Rust 1.97.0 beta](https://releases.rs/docs/1.97.0/)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
+> **前置概念**: N/A
 ---
 
 > **后置概念**: [Rust 1.98+ 前沿特性预览](./rust_1_98_preview.md) · [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
@@ -34,13 +35,13 @@
 
 **状态**: 🧪 Nightly 实验性，MCP 已通过。Project Goals 2026 中归属 "Control over Drop semantics" 路线图的子目标。
 
-**核心问题**: 当前 Rust 中 `drop` 是同步的，无法 `await` 异步清理操作（如关闭网络连接、刷新文件缓冲区）。
+**核心问题**: 当前 Rust 中 `drop` 是同步的，无法 `await` 异步（Async）清理操作（如关闭网络连接、刷新文件缓冲区）。
 
 **1.97 进展**:
 
 - `AsyncDrop` trait 设计已确定
 - `async fn drop(&mut self)` 语法支持
-- 编译器已能生成异步析构状态机
+- 编译器已能生成异步（Async）析构状态机
 
 **影响**: 解决异步资源释放的核心痛点，不再需要手动 `flush()`/`close()` 后丢弃。
 
@@ -102,7 +103,7 @@ where
 **Lang-team champion**: nrc
 **Project Goals 2026**: #6.13 "Continue Experimentation with Pin Ergonomics" / #6.26 "Field Projections" / #6.48 "Reborrow traits"
 
-**核心问题**: `Pin<&mut Self>` 的字段投影需要 `unsafe` 或 `pin-project` crate，学习曲线陡峭。自固定（self-referential）结构是异步运行时、无锁数据结构和内存映射 I/O 的核心抽象，但当前实现方式要求每个开发者理解 pinning contract。
+**核心问题**: `Pin<&mut Self>` 的字段投影需要 `unsafe` 或 `pin-project` crate，学习曲线陡峭。自固定（self-referential）结构是异步运行时（Runtime）、无锁数据结构和内存映射 I/O 的核心抽象，但当前实现方式要求每个开发者理解 pinning contract。
 
 **当前痛点** (需要 `unsafe` 或外部 crate):
 
@@ -128,7 +129,7 @@ impl MyFuture {
 
 - **编译器派生**: `#[derive(PinProject)]` 进入标准库或 core，自动为 `!Unpin` 字段生成安全的投影
 - **Safe API**: `Pin::map_unchecked` 的 safe 变体，编译器验证投影路径的结构性固定
-- **Field projection 语法**: `pin.field` 直接获取 `Pin<&mut field>`，无需宏介入
+- **Field projection 语法**: `pin.field` 直接获取 `Pin<&mut field>`，无需宏（Macro）介入
 
 **Project Goals 2026 关联**: 被列为 "Better pin ergonomics" 子目标，属于异步 Rust 生态系统成熟度的关键路径。
 
@@ -172,7 +173,7 @@ enum CCompatibleEnum {
 
 **状态**: 📋 早期设计讨论
 
-**核心问题**: 当前 `Pin<&mut T>` 无法通过 trait 边界优雅地重新借用为 `Pin<&mut U>`，导致泛型代码中固定语义传递困难。
+**核心问题**: 当前 `Pin<&mut T>` 无法通过 trait 边界优雅地重新借用（Borrowing）为 `Pin<&mut U>`，导致泛型（Generics）代码中固定语义传递困难。
 
 **场景示例**:
 
@@ -187,7 +188,7 @@ where
 }
 ```
 
-**关联**: Pin Ergonomics 的底层基础设施之一。若 Pin projection 进入标准库，reborrow trait 将提供泛型层面的语义支撑。
+**关联**: Pin Ergonomics 的底层基础设施之一。若 Pin projection 进入标准库，reborrow trait 将提供泛型（Generics）层面的语义支撑。
 
 **资源**: [rust-lang/rust#125153](https://github.com/rust-lang/rust/issues/125153) (Pin ergonomics umbrella issue)
 
@@ -388,7 +389,7 @@ async gen fn counter_stream(max: usize) -> impl Stream<Item = usize> {
 | `int_format_into` | 🟢 1.98 已确认 | 整数格式化到现有缓冲区（PR #152544，已合并至 master；因晚于 1.97 cutoff，将进入 1.98） |
 | `RefCell::try_map` | 🧪 Nightly | 尝试性 RefCell 映射 |
 | `String::into_raw_parts` | 🧪 Nightly | 分解 String 为原始组件 |
-| **`Box::as_ptr` / `Box::as_mut_ptr`** | 🟢 1.98 已确认 | `Box<T>` 返回不物化引用的原始指针（PR #157876，已合并至 master；将进入 1.98）。此前为 nightly-only `box_as_ptr` |
+| **`Box::as_ptr` / `Box::as_mut_ptr`** | 🟢 1.98 已确认 | `Box<T>` 返回不物化引用（Reference）的原始指针（PR #157876，已合并至 master；将进入 1.98）。此前为 nightly-only `box_as_ptr` |
 | **`core::range::RangeFull` / `RangeTo` / `legacy::*`** | 🟢 1.98 已确认 | `core::range` 类型补全（PR #156629，已合并至 master），`RangeFull` 和 `RangeTo` 作为 `core::ops` 的 re-export，`legacy::*` 为旧类型提供新家；将进入 1.98 |
 | **`float_algebraic`** | 🟢 1.98 已确认 | 浮点代数运算 intrinsics（`f32::add_algebraic` 等），允许编译器在代数等价前提下重组浮点运算（PR #157029，已合并至 master；将进入 1.98） |
 | **`RandomSource` / `DefaultRandomSource`** | 🔄 等待 libs-api | 可插拔随机数源抽象（PR #157168，当前 `S-waiting-on-t-libs-api`） [来源: releases.rs 2026-06-23] |
@@ -396,13 +397,13 @@ async gen fn counter_stream(max: usize) -> impl Stream<Item = usize> {
 | **`Result::map_or_default` / `Option::map_or_default`** | 🟢 1.98 已确认 | 便捷映射并返回默认值（PR #156222，已合并至 master；将进入 1.98） |
 | **`core::alloc::Alloc`** | 🔄 等待 review | `dyn` subset of `Allocator` 稳定化为 `core::alloc::Alloc` trait（PR #157286，4 days old） [来源: releases.rs 2026-06-06] |
 | **`box_vec_non_null`** | 🔄 PFCP | `Box<T>` / `Vec<T>` → `NonNull<T>` 转换优化（PR #157226，`proposed-final-comment-period`，`disposition-merge`） [来源: releases.rs 2026-06-23] |
-| **`new_range_remainder`** | 🧪 Nightly | 新 `core::range` 迭代器类型的 `remainder()` 方法（Tracking Issue #154458，2026-03-27），RFC 3550 的后续扩展 [来源: rust-lang/rust#154458] |
+| **`new_range_remainder`** | 🧪 Nightly | 新 `core::range` 迭代器（Iterator）类型的 `remainder()` 方法（Tracking Issue #154458，2026-03-27），RFC 3550 的后续扩展 [来源: rust-lang/rust#154458] |
 | **`VecDeque::retain_back`** | 🔄 FCP finished / waiting | `VecDeque` 反向保留元素（与 `truncate_front` 同在 PR #151973，FCP 已完成，当前等待 review / FCP completion；已确定错过 1.97 cutoff，推迟至 1.98+） [来源: releases.rs 2026-06-23] |
 | **`supertrait_item_shadowing`** | 🔄 PFCP | 允许子 trait 覆盖父 trait 的关联项（PR #150055，proposed-final-comment-period） [来源: releases.rs 2026-06-19] |
 | **`alignment_type` / `ptr_alignment_type`** | 🔄 PFCP | 类型级对齐抽象，部分稳定化为 `alignment_type`（PR #154065，proposed-final-comment-period） [来源: releases.rs 2026-06-19] |
 | **`stack-protector`** | 🔄 PFCP / Blocked | 栈保护编译器选项（PR #148051，proposed-final-comment-period，同时 `S-blocked`） [来源: releases.rs 2026-06-19] |
 | **`breakpoint` function** | 🔄 PFCP | 标准库断点函数（PR #142824，proposed-final-comment-period） [来源: releases.rs 2026-06-19] |
-| **`proc_macro_value`** | 🔄 等待 review | 过程宏值类型支持（PR #152092，`S-waiting-on-review`） [来源: releases.rs 2026-06-23] |
+| **`proc_macro_value`** | 🔄 等待 review | 过程宏（Procedural Macro）值类型支持（PR #152092，`S-waiting-on-review`） [来源: releases.rs 2026-06-23] |
 | **C-variadic function definitions** | 🔄 PFCP | C 可变参数函数定义稳定化（PR #155942，`proposed-final-comment-period`，`disposition-merge`） [来源: releases.rs 2026-06-23] |
 | **`size_of_val_raw` / `align_of_val_raw` / `Layout::for_value_raw`** | 🔄 等待 review | 裸值尺寸/对齐计算（PR #157572，15 days old，`S-waiting-on-review`） [来源: releases.rs 2026-06-23] |
 | **`#[optimize]` attribute** | 🔄 PFCP / Blocked | 函数级优化属性（PR #157273，proposed-final-comment-period，`S-blocked`，`needs-fcp`） [来源: releases.rs 2026-06-23] |
@@ -414,7 +415,7 @@ async gen fn counter_stream(max: usize) -> impl Stream<Item = usize> {
 | **`derive(CoercePointee)`** | 🔄 FCP 完成 / Blocked | 自动派生 `CoerceUnsized` 的 `CoercePointee`（PR #139673，finished-final-comment-period，`disposition-merge`，但 `S-blocked`） [来源: releases.rs 2026-06-19] |
 | **Associated Type Position Impl Trait (ATPIT)** | 🔄 PFCP / Blocked | 关联类型位置 `impl Trait`（PR #133820，proposed-final-comment-period，`disposition-merge`，`S-blocked`） [来源: releases.rs 2026-06-19] |
 | **`local_key_cell_update`** | 🔄 等待 libs-api | `LocalKey::update` 相关 Cell 更新 API（PR #157734，12 days old，`S-waiting-on-t-libs-api`） [来源: releases.rs 2026-06-23] |
-| **`#[my_macro] mod foo;` (proc_macro_hygiene)** | 🔄 PFCP | 过程宏卫生性的一部分（PR #157857，9 days old，`proposed-final-comment-period`，`disposition-merge`，`needs-reference-pr`） [来源: releases.rs 2026-06-23] |
+| **`#[my_macro] mod foo;` (proc_macro_hygiene)** | 🔄 PFCP | 过程宏（Procedural Macro）卫生性的一部分（PR #157857，9 days old，`proposed-final-comment-period`，`disposition-merge`，`needs-reference-pr`） [来源: releases.rs 2026-06-23] |
 | **`hex_literal_case` (rustfmt)** | 🟢 1.98 已确认 | 十六进制字面量大小写风格配置（rustfmt PR #6935，已合并；将进入 1.98） [来源: TWiR 656]
 
 > **代码示例来源**: [`crates/c08_algorithms/src/rust_197_features.rs`](../../../crates/c08_algorithms/src/rust_197_features.rs) 包含以下 API 的等效实现和 nightly 测试。
@@ -496,7 +497,7 @@ const NUL_CTRL: bool = '\0'.is_control();  // true
 
 **状态**: 🧪 Nightly
 
-**说明**: 在 `RefCell` 借用期间进行条件性映射，若闭包返回 `None` 则保持原值不变。
+**说明**: 在 `RefCell` 借用（Borrowing）期间进行条件性映射，若闭包（Closures）返回 `None` 则保持原值不变。
 
 ```rust,ignore
 #![feature(refcell_try_map)]
@@ -635,7 +636,7 @@ pub unsafe extern "C" fn my_printf(fmt: *const c_char, mut args: ...) -> c_int {
 
 ### 7.1 Rust for Linux
 
-- Linux 6.12+ 已支持 Rust 内核模块
+- Linux 6.12+ 已支持 Rust 内核模块（Module）
 - Rust 1.96.0 `unused_features` lint 影响内核构建流程（已适配）
 - 驱动开发框架 `pin-init` 成熟
 
@@ -714,12 +715,12 @@ pub unsafe extern "C" fn my_printf(fmt: *const c_char, mut args: ...) -> c_int {
 
 ### 测验 2：`if let` 临时值生命周期延长解决了什么问题？（理解层）
 
-**题目**: `if let` 临时值生命周期延长解决了什么问题？
+**题目**: `if let` 临时值生命周期（Lifetimes）延长解决了什么问题？
 
 <details>
 <summary>✅ 答案与解析</summary>
 
-允许 `if let Some(x) = get_lock().lock().as_ref()` 这样的代码编译通过，临时值的生命周期延长到 `if` 块结束。
+允许 `if let Some(x) = get_lock().lock().as_ref()` 这样的代码编译通过，临时值的生命周期（Lifetimes）延长到 `if` 块结束。
 </details>
 
 ---

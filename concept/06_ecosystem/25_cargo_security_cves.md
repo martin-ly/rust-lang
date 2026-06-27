@@ -340,7 +340,7 @@ graph TD
 
 - [Toolchain](./01_toolchain.md) — Rust 工具链与 rustup
 - [Public/Private Dependencies](./10_public_private_deps.md) — 依赖可见性与 registry 选择
-- [Security Practices](./19_security_practices.md) — Rust 安全开发生命周期
+- [Security Practices](./19_security_practices.md) — Rust 安全开发生命周期（Lifetimes）
 - [DevOps and CI/CD](./28_devops_and_ci_cd.md) — CI 安全扫描实践
 - [Cross Compilation](./17_cross_compilation.md) — 在隔离环境中构建与审计
 

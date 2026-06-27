@@ -8,7 +8,7 @@
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
 > **Bloom 层级**: 分析 → 评价
-> **定位**: 从**范畴论**视角分析 Rust 的类型系统——从函子（Functor）、应用函子（Applicative）到单子（Monad），揭示 Rust 的类型构造器如何隐式实现这些抽象代数结构。
+> **定位**: 从**范畴论**视角分析 Rust 的类型系统（Type System）——从函子（Functor）、应用函子（Applicative）到单子（Monad），揭示 Rust 的类型构造器如何隐式实现这些抽象代数结构。
 > **前置概念**: [Type Theory](./02_type_theory.md) · [Generics](../02_intermediate/02_generics.md) · [Traits](../02_intermediate/01_traits.md)
 > **后置概念**: [Linear Logic](./01_linear_logic.md) · [RustBelt](./04_rustbelt.md)
 
@@ -38,10 +38,10 @@
     - [1.3 单子（Monad）](#13-单子monad)
   - [二、技术细节](#二技术细节)
     - [2.1 Option 作为单子](#21-option-作为单子)
-    - [2.2 Result 与错误处理](#22-result-与错误处理)
+    - [2.2 Result 与错误处理（Error Handling）](LINK_PLACEHOLDER)
   - [十、边界测试：范畴论视角的编译错误](#十边界测试范畴论视角的编译错误)
     - [10.1 边界测试：`Option` 与 `Result` 的 monad 定律违反（编译错误）](#101-边界测试option-与-result-的-monad-定律违反编译错误)
-    - [10.2 边界测试：`Iterator` 的 functor 映射与所有权（编译错误）](#102-边界测试iterator-的-functor-映射与所有权编译错误)
+    - [10.2 边界测试：`Iterator` 的 functor 映射与所有权（Ownership）（编译错误）](LINK_PLACEHOLDER)
     - [2.3 Iterator 作为函子](#23-iterator-作为函子)
   - [三、范畴模式矩阵](#三范畴模式矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
@@ -51,7 +51,7 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
-    - [10.3 边界测试：`Functor` 与 Rust 迭代器的映射（编译错误）](#103-边界测试functor-与-rust-迭代器的映射编译错误)
+    - [10.3 边界测试：`Functor` 与 Rust 迭代器（Iterator）的映射（编译错误）](LINK_PLACEHOLDER)
     - [10.4 边界测试：`Monad` 与 Rust 的 `?` 运算符（编译错误）](#104-边界测试monad-与-rust-的--运算符编译错误)
     - [10.7 边界测试：所有权移动后的再次使用](#107-边界测试所有权移动后的再次使用)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -105,7 +105,7 @@
   └── 指导 API 设计（可组合性）
 ```
 
-> **认知功能**: 范畴论不是**抽象 nonsense**——它是**组合性的数学语言**，揭示了 Rust 类型系统的设计原则。
+> **认知功能**: 范畴论不是**抽象 nonsense**——它是**组合性的数学语言**，揭示了 Rust 类型系统（Type System）的设计原则。
 > [来源: [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)]
 
 ---
@@ -305,7 +305,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: 迭代器在范畴论中是 **functor**——通过 `map` 将函数 `A → B` 提升为 `Iterator<A> → Iterator<B>`。Rust 的 `Iterator` trait 还体现了 **applicative**（`zip` + `map`）和 **monad**（`flat_map`/`and_then` 的迭代器版本 `flatten`）结构。所有权系统确保映射操作不会创建悬垂引用：`v.into_iter()` 消耗集合，`v.iter()` 借用集合。这是 Rust 将范畴论抽象与资源管理结合的典范。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: 迭代器（Iterator）在范畴论中是 **functor**——通过 `map` 将函数 `A → B` 提升为 `Iterator<A> → Iterator<B>`。Rust 的 `Iterator` trait 还体现了 **applicative**（`zip` + `map`）和 **monad**（`flat_map`/`and_then` 的迭代器版本 `flatten`）结构。所有权（Ownership）系统确保映射操作不会创建悬垂引用（Reference）：`v.into_iter()` 消耗集合，`v.iter()` 借用（Borrowing）集合。这是 Rust 将范畴论抽象与资源管理结合的典范。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ```rust
 // Result 作为单子（Either monad）
@@ -548,9 +548,9 @@ graph TD
 ## 相关概念文件
 
 - [Type Theory](./02_type_theory.md) — 类型论
-- [Generics](../02_intermediate/02_generics.md) — 泛型
+- [Generics](../02_intermediate/02_generics.md) — 泛型（Generics）
 - [Traits](../02_intermediate/01_traits.md) — Trait 系统
-- [Iterator](../02_intermediate/16_iterator_patterns.md) — 迭代器
+- [Iterator](../02_intermediate/16_iterator_patterns.md) — 迭代器（Iterator）
 
 ---
 
@@ -599,7 +599,7 @@ where
 }
 ```
 
-> **修正**: 范畴论中的 **Functor** 是保持结构的映射：`F: C → D`，对任意 `f: A → B`，有 `F(f): F(A) → F(B)`。Haskell 的 `Functor` typeclass 将这一概念编码为 `fmap :: (a -> b) -> f a -> f b`。Rust 中没有高阶类型（HKT），因此没有直接的 `Functor` trait——`Option` 的 `map`、`Result` 的 `map`、`Iterator` 的 `map` 是每个类型独立实现的方法，而非统一的 `fmap`。这是 Rust 与 Haskell 的核心差异：Haskell 通过 HKT 实现统一的抽象，Rust 通过宏和 trait 实现类似的 ergonomics，但无理论统一性。`fmap` 的缺失不影响表达能力（每个类型有自己的 `map`），但影响了代码复用（不能写跨类型的 `map` 泛型函数）。这与 Scala 的 `Functor`（通过 higher-kinded types 实现）或 C++ 的模板（无 HKT，但 `std::transform` 可跨容器）类似。[来源: [Category Theory](https://en.wikipedia.org/wiki/Category_theory)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> **修正**: 范畴论中的 **Functor** 是保持结构的映射：`F: C → D`，对任意 `f: A → B`，有 `F(f): F(A) → F(B)`。Haskell 的 `Functor` typeclass 将这一概念编码为 `fmap :: (a -> b) -> f a -> f b`。Rust 中没有高阶类型（HKT），因此没有直接的 `Functor` trait——`Option` 的 `map`、`Result` 的 `map`、`Iterator` 的 `map` 是每个类型独立实现的方法，而非统一的 `fmap`。这是 Rust 与 Haskell 的核心差异：Haskell 通过 HKT 实现统一的抽象，Rust 通过宏（Macro）和 trait 实现类似的 ergonomics，但无理论统一性。`fmap` 的缺失不影响表达能力（每个类型有自己的 `map`），但影响了代码复用（不能写跨类型的 `map` 泛型（Generics）函数）。这与 Scala 的 `Functor`（通过 higher-kinded types 实现）或 C++ 的模板（无 HKT，但 `std::transform` 可跨容器）类似。[来源: [Category Theory](https://en.wikipedia.org/wiki/Category_theory)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.4 边界测试：`Monad` 与 Rust 的 `?` 运算符（编译错误）
 
@@ -634,7 +634,7 @@ fn main() {
 }
 ```
 
-> **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用 `&s`。
+> **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权（Ownership）；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用（Reference） `&s`。
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -713,7 +713,7 @@ Rust 的 `Option`、`Result`、`Iterator`、`Vec` 都满足函子定律。
 - **`bind` / `>>=` / `flat_map`**：序列化两个单子计算
   - Rust 对应：`Option::and_then`、`Result::and_then`、`Iterator::flat_map`
 
-单子定律保证了这些操作可以安全组合，是函数式编程错误处理、异步、列表推导的基础。
+单子定律保证了这些操作可以安全组合，是函数式编程错误处理、异步（Async）、列表推导的基础。
 </details>
 
 ---
@@ -722,7 +722,7 @@ Rust 的 `Option`、`Result`、`Iterator`、`Vec` 都满足函子定律。
 
 Rust 为什么不提供原生的 `Monad` trait？
 
-- A. Rust 不支持泛型
+- A. Rust 不支持泛型（Generics）
 - B. Monad 的 `bind` 需要高阶类型，而 Rust 类型系统有限制
 - C. Rust 社区反对函数式编程
 
@@ -796,14 +796,14 @@ let x = match some_operation() {
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | 范畴论与 Rust：从函子到单子 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 范畴论与 Rust：从函子到单子 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 范畴论与 Rust：从函子到单子 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 范畴论与 Rust：从函子到单子 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > **过渡**: 掌握 范畴论与 Rust：从函子到单子 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 范畴论与 Rust：从函子到单子 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: 范畴论与 Rust：从函子到单子 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 范畴论与 Rust：从函子到单子 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

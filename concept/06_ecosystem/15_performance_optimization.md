@@ -9,7 +9,7 @@
 >
 > **EN**: Performance Optimization
 > **Summary**: Performance Optimization. Core Rust concept covering performance optimization, testing and verification.
-> **📎 交叉引用**
+> **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[性能优化](../../knowledge/03_advanced/05_performance_optimization.md)
 > **受众**: [进阶]
@@ -19,7 +19,7 @@
 > **定位**:
 > 覆盖 Rust **性能优化**的核心方法论——从基准测试（criterion）、
 > 性能分析（flamegraph [来源: [flamegraph.rs](https://github.com/flamegraph-rs/flamegraph)]、perf）、
-> 缓存优化、SIMD [来源: [packed_simd](https://doc.rust-lang.org/std/simd/index.html)] 到零成本抽象的验证，
+> 缓存优化、SIMD [来源: [packed_simd](https://doc.rust-lang.org/std/simd/index.html)] 到零成本抽象（Zero-Cost Abstraction）的验证，
 > 建立"测量 → 分析 → 优化 → 验证"的工程闭环。
 > **前置概念**: [Zero Cost Abstractions](../01_foundation/06_zero_cost_abstractions.md) · [Ownership](../01_foundation/01_ownership.md)
 > **后置概念**: [Concurrency](../03_advanced/01_concurrency.md) · [Async](../03_advanced/02_async.md)
@@ -41,7 +41,7 @@
   - [一、核心概念](#一核心概念)
     - [1.1 测量优先原则](#11-测量优先原则)
     - [1.2 编译器优化层级](#12-编译器优化层级)
-    - [1.3 零成本抽象的验证](#13-零成本抽象的验证)
+    - [1.3 零成本抽象（Zero-Cost Abstraction）的验证](LINK_PLACEHOLDER)
   - [二、技术细节](#二技术细节)
     - [2.1 Criterion：统计性基准测试](#21-criterion统计性基准测试)
     - [2.2 Flamegraph：可视化性能分析](#22-flamegraph可视化性能分析)
@@ -55,10 +55,10 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：性能优化的编译错误](#十边界测试性能优化的编译错误)
-    - [10.1 边界测试：`unsafe` 性能优化的正确性假设（运行时 UB）](#101-边界测试unsafe-性能优化的正确性假设运行时-ub)
+    - [10.1 边界测试：`unsafe` 性能优化的正确性假设（运行时（Runtime） UB）](LINK_PLACEHOLDER)
     - [10.2 边界测试：`MaybeUninit` 的未初始化内存（运行时 UB）](#102-边界测试maybeuninit-的未初始化内存运行时-ub)
     - [10.3 边界测试：`mem::transmute` 的大小不匹配（编译错误）](#103-边界测试memtransmute-的大小不匹配编译错误)
-    - [10.4 边界测试：内联汇编的操作数类型约束（编译错误）](#104-边界测试内联汇编的操作数类型约束编译错误)
+    - [10.4 边界测试：内联汇编（Inline Assembly）的操作数类型约束（编译错误）](LINK_PLACEHOLDER)
     - [10.6 边界测试：`#[inline(always)]` 与代码膨胀（编译错误/链接错误）](#106-边界测试inlinealways-与代码膨胀编译错误链接错误)
     - [10.7 边界测试：`inline(always)` 的代码膨胀（编译后性能下降）](#107-边界测试inlinealways-的代码膨胀编译后性能下降)
     - [10.3 边界测试：SIMD 类型的内存对齐要求（运行时 UB）](#103-边界测试simd-类型的内存对齐要求运行时-ub)
@@ -161,7 +161,7 @@ Rust 编译器的优化:
   panic = "abort"    # 移除 panic 展开代码
 ```
 
-> **编译器洞察**: Rust 编译器（基于 LLVM）的优化能力极强——在 release 模式下，迭代器、闭包等抽象通常被完全内联和优化掉。
+> **编译器洞察**: Rust 编译器（基于 LLVM）的优化能力极强——在 release 模式下，迭代器（Iterator）、闭包（Closures）等抽象通常被完全内联和优化掉。
 > [来源: [Rust Performance Book — Compile Times](https://nnethercote.github.io/perf-book/compile-times.html)]
 
 ---
@@ -487,7 +487,7 @@ graph TD
 | [Rust Performance Book](https://nnethercote.github.io/perf-book/) | ✅ 一级 | 官方性能优化指南 |
 | [Criterion.rs](https://bokeh.github.io/criterion.rs/book/) | ✅ 一级 | 基准测试框架 |
 | [cargo-flamegraph](https://github.com/flamegraph-rs/flamegraph) | ✅ 一级 | 火焰图生成 |
-| [cargo-llvm-lines](https://github.com/dtolnay/cargo-llvm-lines) | ✅ 一级 | 泛型膨胀分析 |
+| [cargo-llvm-lines](https://github.com/dtolnay/cargo-llvm-lines) | ✅ 一级 | 泛型（Generics）膨胀分析 |
 | [std::simd](https://doc.rust-lang.org/std/simd/index.html) | ✅ 一级 | SIMD 支持 |
 | [Brendan Gregg — Flame Graphs](https://www.brendangregg.com/flamegraphs.html) | ✅ 二级 | 火焰图发明者 |
 
@@ -495,10 +495,10 @@ graph TD
 
 ## 相关概念文件
 
-- [Zero Cost Abstractions](../01_foundation/06_zero_cost_abstractions.md) — 零成本抽象
-- [Ownership](../01_foundation/01_ownership.md) — 所有权模型
+- [Zero Cost Abstractions](../01_foundation/06_zero_cost_abstractions.md) — 零成本抽象（Zero-Cost Abstraction）
+- [Ownership](../01_foundation/01_ownership.md) — 所有权（Ownership）模型
 - [Concurrency](../03_advanced/01_concurrency.md) — 并发模型
-- [Async](../03_advanced/02_async.md) — 异步编程
+- [Async](../03_advanced/02_async.md) — 异步（Async）编程
 
 ---
 
@@ -576,7 +576,7 @@ fn main() {
 }
 ```
 
-> **修正**: `MaybeUninit<T>` 是 Rust 中处理未初始化内存的安全抽象。`assume_init()` 告诉编译器"此值已初始化"，但实际上若未写入就读取，是未定义行为。编译器可能将未初始化值视为 `undef`（LLVM），导致任意行为。正确使用模式：1) `MaybeUninit::uninit()` 分配空间；2) `ptr.write(val)` 初始化；3) `assume_init()` 读取。这与 C 的 `malloc` + 使用未初始化内存相同，但 Rust 的类型系统追踪初始化状态，Miri 在运行时验证。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `MaybeUninit<T>` 是 Rust 中处理未初始化内存的安全抽象。`assume_init()` 告诉编译器"此值已初始化"，但实际上若未写入就读取，是未定义行为。编译器可能将未初始化值视为 `undef`（LLVM），导致任意行为。正确使用模式：1) `MaybeUninit::uninit()` 分配空间；2) `ptr.write(val)` 初始化；3) `assume_init()` 读取。这与 C 的 `malloc` + 使用未初始化内存相同，但 Rust 的类型系统（Type System）追踪初始化状态，Miri 在运行时（Runtime）验证。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.3 边界测试：`mem::transmute` 的大小不匹配（编译错误）
 
@@ -610,7 +610,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的内联汇编（`asm!` macro，stable since 1.59）在编译期验证操作数类型与约束（constraint）的兼容性。`mov` 指令在 x86-64 上操作 64 位寄存器，但 `x` 是 `u32`（32位），类型不匹配导致编译错误。正确写法：统一为 `u64`，或使用 `in("eax") x` 显式指定 32 位寄存器。Rust 的内联汇编比 C 的 `asm` 关键字类型安全：操作数与 Rust 变量绑定，编译器检查类型和生命周期，自动处理寄存器分配和 clobber 列表。这是 Rust "zero-cost abstraction with safety" 的延伸：直接控制硬件，同时保持类型系统的保护。[来源: [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**: Rust 的内联汇编（Inline Assembly）（`asm!` macro，stable since 1.59）在编译期验证操作数类型与约束（constraint）的兼容性。`mov` 指令在 x86-64 上操作 64 位寄存器，但 `x` 是 `u32`（32位），类型不匹配导致编译错误。正确写法：统一为 `u64`，或使用 `in("eax") x` 显式指定 32 位寄存器。Rust 的内联汇编比 C 的 `asm` 关键字类型安全：操作数与 Rust 变量绑定，编译器检查类型和生命周期（Lifetimes），自动处理寄存器分配和 clobber 列表。这是 Rust "zero-cost abstraction with safety" 的延伸：直接控制硬件，同时保持类型系统（Type System）的保护。[来源: [Rust Reference — Inline Assembly](LINK_PLACEHOLDER)] · [来源: [Rustonomicon](LINK_PLACEHOLDER)]
 
 ### 10.6 边界测试：`#[inline(always)]` 与代码膨胀（编译错误/链接错误）
 
@@ -657,7 +657,7 @@ fn main() {
 }
 ```
 
-> **修正**: SIMD（AVX/AVX2/SSE）指令对**内存对齐**有严格要求：1) `__m128`（SSE）需 16 字节对齐；2) `__m256`（AVX）需 32 字节对齐；3) `__m512`（AVX-512）需 64 字节对齐。未对齐加载（`_mm256_loadu_si256`，`u` = unaligned）性能稍低但安全。Rust 的 `std::arch` 模块提供平台特定的 SIMD 内联函数，是 `unsafe` 的。安全 SIMD 抽象：`packed_simd`（已废弃）、`std::simd`（nightly，portable SIMD）、`auto_vectorization`（编译器自动向量化）。最佳实践：1) 使用 `#[repr(align(32))]` 保证对齐；2) 优先用 `loadu` 除非在极致性能路径；3) 用 `std::simd`（稳定后）替代裸内联函数。这与 C 的 `__m256`（同样对齐要求）或编译器自动向量化（无对齐控制）不同——Rust 的 SIMD 显式暴露硬件约束。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/arch/index.html)] · [来源: [Portable SIMD](https://doc.rust-lang.org/std/simd/index.html)]
+> **修正**: SIMD（AVX/AVX2/SSE）指令对**内存对齐**有严格要求：1) `__m128`（SSE）需 16 字节对齐；2) `__m256`（AVX）需 32 字节对齐；3) `__m512`（AVX-512）需 64 字节对齐。未对齐加载（`_mm256_loadu_si256`，`u` = unaligned）性能稍低但安全。Rust 的 `std::arch` 模块（Module）提供平台特定的 SIMD 内联函数，是 `unsafe` 的。安全 SIMD 抽象：`packed_simd`（已废弃）、`std::simd`（nightly，portable SIMD）、`auto_vectorization`（编译器自动向量化）。最佳实践：1) 使用 `#[repr(align(32))]` 保证对齐；2) 优先用 `loadu` 除非在极致性能路径；3) 用 `std::simd`（稳定后）替代裸内联函数。这与 C 的 `__m256`（同样对齐要求）或编译器自动向量化（无对齐控制）不同——Rust 的 SIMD 显式暴露硬件约束。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/arch/index.html)] · [来源: [Portable SIMD](https://doc.rust-lang.org/std/simd/index.html)]
 > **过渡**: 性能优化：Rust 代码的测量与调优 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 性能优化：Rust 代码的测量与调优 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 性能优化：Rust 代码的测量与调优 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
@@ -713,7 +713,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-大型结构体在栈上分配可能导致栈帧过大、cache line 利用率低。`Box::pin` 将数据放在堆上，配合预分配和更好的局部性控制，在某些场景下提升 cache 性能。
+大型结构体（Struct）在栈上分配可能导致栈帧过大、cache line 利用率低。`Box::pin` 将数据放在堆上，配合预分配和更好的局部性控制，在某些场景下提升 cache 性能。
 </details>
 
 ---

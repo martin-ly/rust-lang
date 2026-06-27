@@ -4,9 +4,9 @@
 >
 > **EN**: Procedural Macros
 > **Summary**: Authoritative guide to procedural macros: derive, attribute, and function-like macros.
-> **📎 交叉引用**
+> **📎 交叉引用（Reference）**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[过程宏](../../knowledge/03_advanced/macros/02_procedural.md)
+> 本主题在 knowledge 中有系统化的知识索引：[过程宏（Procedural Macro）](LINK_PLACEHOLDER)
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 深入分析 Rust **过程宏（Procedural Macros）**的三种类型（derive、attribute、function-like）——它们的编译期执行模型、TokenStream 操作、卫生性（hygiene）保证，以及与 `macro_rules!` 的本质差异。
@@ -27,7 +27,7 @@
 
 ## 📑 目录
 
-- [过程宏：编译期代码生成的元编程工具](#过程宏编译期代码生成的元编程工具)
+- [过程宏（Macro）：编译期代码生成的元编程工具](LINK_PLACEHOLDER)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 过程宏 vs macro\_rules](#11-过程宏-vs-macro_rules)
@@ -50,7 +50,7 @@
     - [10.5 边界测试：过程宏的 `Span` 与错误定位精度（编译错误/调试困难）](#105-边界测试过程宏的-span-与错误定位精度编译错误调试困难)
     - [10.3 边界测试：过程宏的 hygiene 与路径解析（编译错误）](#103-边界测试过程宏的-hygiene-与路径解析编译错误)
     - [10.4 边界测试：proc\_macro 的 TokenStream 与 hygiene 标识符生成（编译错误）](#104-边界测试proc_macro-的-tokenstream-与-hygiene-标识符生成编译错误)
-    - [10.6 边界测试：不可变借用与可变借用的冲突](#106-边界测试不可变借用与可变借用的冲突)
+    - [10.6 边界测试：不可变借用（Mutable Borrow）与可变借用的冲突](LINK_PLACEHOLDER)
   - [参考来源](#参考来源)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：过程宏的类型（理解层）](#测验-1过程宏的类型理解层)
@@ -108,9 +108,9 @@
   └─────────────────┴─────────────────────┴─────────────────────┘
 ```
 
-> **认知功能**: 此对比揭示两种宏系统的**设计权衡**——macro_rules! 简单但受限，过程宏强大但复杂。选择取决于元编程任务的复杂度。
+> **认知功能**: 此对比揭示两种宏系统的**设计权衡**——macro_rules! 简单但受限，过程宏（Procedural Macro）强大但复杂。选择取决于元编程任务的复杂度。
 > [来源: [TRPL](https://doc.rust-lang.org/book/ch20-05-macros.html)]
-> **关键洞察**: 过程宏不是 macro_rules! 的替代品，而是**互补工具**——简单代码生成用 macro_rules!，复杂逻辑（如 derive）用过程宏。
+> **关键洞察**: 过程宏（Macro）不是 macro_rules! 的替代品，而是**互补工具**——简单代码生成用 macro_rules!，复杂逻辑（如 derive）用过程宏。
 > [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]
 
 ---
@@ -389,7 +389,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树判断是否应使用过程宏。核心原则是：**优先使用语言原生特性（泛型（Generics）、Trait），过程宏是最后手段**。
-> **使用建议**: 80% 的"重复代码"可以用泛型解决；只有当模式跨越类型边界且无法抽象为 Trait 时，才考虑过程宏。
+> **使用建议**: 80% 的"重复代码"可以用泛型（Generics）解决；只有当模式跨越类型边界且无法抽象为 Trait 时，才考虑过程宏。
 > **关键洞察**: 过程宏增加了**编译时间**和**调试复杂度**——只在 boilerplate 显著影响可维护性时使用。
 > [来源: [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines//macros.html)]
 
@@ -476,7 +476,7 @@ graph TD
   ✅ 将复杂逻辑移到运行时库，宏只做简单的代码生成
 ```
 
-> **陷阱总结**: 过程宏的陷阱主要与**标识符处理**、**泛型支持**、**卫生性**和**错误处理（Error Handling）**相关。遵循最佳实践可使宏更健壮、更易维护。
+> **陷阱总结**: 过程宏的陷阱主要与**标识符处理**、**泛型（Generics）支持**、**卫生性**和**错误处理（Error Handling）**相关。遵循最佳实践可使宏更健壮、更易维护。
 > [来源: [proc-macro-workshop](https://github.com/dtolnay/proc-macro-workshop)]
 
 ### 编译错误示例
@@ -638,7 +638,7 @@ pub fn derive_my_trait(input: TokenStream) -> TokenStream {
 >
 > 1) `no_std` 环境中 `std` 不可用，应使用 `::core`；
 > 2) 调用者重定义了 `std` 模块（Module）；
-> 3) 宏生成的代码使用相对路径，可能被调用者的模块结构影响。
+> 3) 宏生成的代码使用相对路径，可能被调用者的模块（Module）结构影响。
 >
 > `proc_macro2::Span::mixed_site()` 提供定义处解析（类似 `macro_rules!` 的 hygiene），`Span::call_site()` 提供调用处解析（可能冲突）。
 > `quote::quote_spanned!` 可指定特定 span。
@@ -666,7 +666,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 >
 > 1) `proc_macro` crate 只能在 `crate-type = ["proc-macro"]` 的 crate 中使用；
 > 2) `quote` 和 `syn` 是辅助库（非编译器内置）；
-> 3) 过程宏在编译期执行，无运行时开销。
+> 3) 过程宏在编译期执行，无运行时（Runtime）开销。
 >
 > TokenStream 的处理：
 >
@@ -695,7 +695,7 @@ fn main() {
 }
 ```
 
-> **修正**: **借用规则**：1) 任意数量的 `&T` 或一个 `&mut T`；2) 不能同时存在；3) NLL 使借用仅在**使用点**检查，非作用域结束。
+> **修正**: **借用（Borrowing）规则**：1) 任意数量的 `&T` 或一个 `&mut T`；2) 不能同时存在；3) NLL 使借用仅在**使用点**检查，非作用域结束。
 
 ## 参考来源
 
@@ -711,7 +711,7 @@ fn main() {
 
 以下哪种不属于 Rust 的过程宏？
 
-- A. Derive 宏（`#[derive(Debug)]`）
+- A. Derive 宏（Macro）（`#[derive(Debug)]`）
 - B. Attribute 宏（`#[route("/")]`）
 - C. Function-like 宏（`sql!(SELECT * FROM users)`）
 - D. 声明宏（Declarative Macro）（`macro_rules!`）
@@ -719,11 +719,11 @@ fn main() {
 <details>
 <summary>✅ 答案</summary>
 
-**D. 声明宏（`macro_rules!`）**。
+**D. 声明宏（Declarative Macro）（`macro_rules!`）**。
 
 Rust 有两种宏系统：
 
-- **声明宏（Declarative Macros）**：`macro_rules!`，基于模式匹配和文本替换
+- **声明宏（Declarative Macros）**：`macro_rules!`，基于模式匹配（Pattern Matching）和文本替换
 - **过程宏（Procedural Macros）**：Rust 函数，接收 `TokenStream` 并输出 `TokenStream`
 
 过程宏又分为三种：
@@ -812,7 +812,7 @@ proc_macro::TokenStream::from(expanded)
 Rust 过程宏具有**卫生性（hygiene）**：
 
 - 宏生成的标识符与调用处的标识符隔离
-- 宏不能意外引用或遮蔽用户变量
+- 宏不能意外引用（Reference）或遮蔽用户变量
 - 用户也不能意外引用宏内部的私有标识符
 
 这与 C 预处理器不同，C 的 `#define` 是纯文本替换，常导致命名冲突。
@@ -826,8 +826,8 @@ Rust 过程宏具有**卫生性（hygiene）**：
 
 Derive 宏能为外部 crate 的类型添加 trait 实现吗？
 
-- A. 能，Derive 宏不受孤儿规则限制
-- B. 不能，Derive 宏只是生成代码，生成的实现仍需遵守孤儿规则
+- A. 能，Derive 宏不受孤儿规则（Orphan Rule）限制
+- B. 不能，Derive 宏只是生成代码，生成的实现仍需遵守孤儿规则（Orphan Rule）
 - C. 能，只要 trait 是本地定义的
 
 <details>
@@ -839,7 +839,7 @@ Derive 宏不是"魔法"——它只是自动编写你本来可以手写的 `imp
 
 - 生成的 `impl` 必须遵守与普通代码相同的规则
 - 不能为外部类型实现外部 trait（Orphan Rule）
-- 不能绕过借用检查、生命周期规则
+- 不能绕过借用（Borrowing）检查、生命周期（Lifetimes）规则
 
 例如，`#[derive(Debug)]` 为你的本地类型生成 `impl Debug for YourType`，这是合法的（类型在本地）。
 </details>
@@ -848,21 +848,21 @@ Derive 宏不是"魔法"——它只是自动编写你本来可以手写的 `imp
 
 ## 认知路径
 
-> **认知路径**: 从 L0 基础概念出发，经由本节的 **过程宏：编译期代码生成的元编程工具** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+> **认知路径**: 从 L0 基础概念出发，经由本节的 **过程宏（Procedural Macro）：编译期代码生成的元编程工具** 核心原理，通向 L2 进阶模式与 L3 工程实践。
 
 ### 核心推理链
 
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | 过程宏：编译期代码生成的元编程工具 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 过程宏：编译期代码生成的元编程工具 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 过程宏：编译期代码生成的元编程工具 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 过程宏：编译期代码生成的元编程工具 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 代码生成安全 ⟸ TokenStream 卫生性 ⟸ Span 信息保留
 > derive 宏正确 ⟸ 属性解析 ⟸ 编译期元编程
-> **过渡**: 掌握 过程宏：编译期代码生成的元编程工具 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 过程宏：编译期代码生成的元编程工具 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 过程宏：编译期代码生成的元编程工具 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: 过程宏：编译期代码生成的元编程工具 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 过程宏：编译期代码生成的元编程工具 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

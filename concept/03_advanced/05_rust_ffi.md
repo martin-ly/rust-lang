@@ -4,7 +4,7 @@
 >
 > **EN**: Foreign Function Interface (FFI)
 > **Summary**: Foreign Function Interface (FFI). Core Rust concept covering practical examples, mechanism analysis, unsafe Rust and memory safety.
-> **📎 交叉引用**
+> **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[FFI](../../knowledge/03_advanced/02_ffi.md)
 > **受众**: [专家]
@@ -34,21 +34,21 @@
   - [二、技术细节](#二技术细节)
     - [2.1 extern 块的完整语法](#21-extern-块的完整语法)
     - [2.2 不透明类型与封装](#22-不透明类型与封装)
-    - [2.3 回调与闭包传递](#23-回调与闭包传递)
+    - [2.3 回调与闭包（Closures）传递](LINK_PLACEHOLDER)
   - [三、工具链生态](#三工具链生态)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱与最佳实践](#五常见陷阱与最佳实践)
     - [编译错误示例](#编译错误示例)
-    - [3.4 边界测试：C 结构体布局不匹配（编译错误 / 运行时 UB）](#34-边界测试c-结构体布局不匹配编译错误--运行时-ub)
-    - [3.5 边界测试：裸指针生命周期与 FFI 边界（编译错误）](#35-边界测试裸指针生命周期与-ffi-边界编译错误)
+    - [3.4 边界测试：C 结构体（Struct）布局不匹配（编译错误 / 运行时（Runtime） UB）](LINK_PLACEHOLDER)
+    - [3.5 边界测试：裸指针生命周期（Lifetimes）与 FFI 边界（编译错误）](LINK_PLACEHOLDER)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
-    - [10.3 边界测试：FFI 中的空指针解引用（运行时 UB）](#103-边界测试ffi-中的空指针解引用运行时-ub)
-    - [10.5 边界测试：所有权移动后的再次使用](#105-边界测试所有权移动后的再次使用)
+    - [10.3 边界测试：FFI 中的空指针解引用（Reference）（运行时 UB）](LINK_PLACEHOLDER)
+    - [10.5 边界测试：所有权（Ownership）移动后的再次使用](LINK_PLACEHOLDER)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -92,7 +92,7 @@ graph LR
     style CSide fill:#fff3e0
 ```
 
-> **认知功能**: 此图展示 FFI 边界的**安全截断机制**——Rust 的安全保证在 `extern` 块处终止，外部代码的行为不受 Rust 类型系统约束。
+> **认知功能**: 此图展示 FFI 边界的**安全截断机制**——Rust 的安全保证在 `extern` 块处终止，外部代码的行为不受 Rust 类型系统（Type System）约束。
 > [来源: [TRPL](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html)]
 > **使用建议**: 所有 FFI 调用都应通过**薄封装层**（thin wrapper）进行，在封装层内用 `unsafe` 块隔离，向外暴露 safe API。
 > **关键洞察**: FFI 是 Rust **安全边界的显式逃逸口**。与 `unsafe` 块一样，FFI 的使用需要人工审计和文档化契约。
@@ -151,7 +151,7 @@ Rust 支持的 ABI:
 | `struct` | `struct` | ⚠️ | 需 `#[repr(C)]` 保证布局 |
 | `enum` | `enum` | ❌ | 需 `#[repr(C)]` 或 `#[repr(u8)]` 等 |
 
-> **布局保证**: 只有标上 `#[repr(C)]`、`#[repr(u8)]` 等 repr 属性的 Rust 类型，其布局才与 C 兼容。默认的 Rust 结构体布局是**未定义的**，编译器可自由重排字段。
+> **布局保证**: 只有标上 `#[repr(C)]`、`#[repr(u8)]` 等 repr 属性的 Rust 类型，其布局才与 C 兼容。默认的 Rust 结构体（Struct）布局是**未定义的**，编译器可自由重排字段。
 > [来源: [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html)]
 
 ---
@@ -237,7 +237,7 @@ impl Drop for SafeConnection {
 }
 ```
 
-> **封装模式**: 外部不透明指针 + Rust 安全封装结构体 + Drop trait 管理生命周期。这是 FFI 中最常见的安全化模式。
+> **封装模式**: 外部不透明指针 + Rust 安全封装结构体 + Drop trait 管理生命周期（Lifetimes）。这是 FFI 中最常见的安全化模式。
 > [来源: [Rust FFI Patterns](https://doc.rust-lang.org/nomicon/ffi.html)]
 
 ---
@@ -281,7 +281,7 @@ where
 
 > **回调难点**:
 >
-> 1. C 回调必须是 `extern "C" fn`（函数指针），不能是闭包
+> 1. C 回调必须是 `extern "C" fn`（函数指针），不能是闭包（Closures）
 > 2. 需要通过 `user_data` 参数传递闭包环境
 > 3. **生命周期管理复杂**——谁释放 `user_data`？何时释放？
 > 4. panic 跨越 FFI 边界是 UB——必须用 `catch_unwind` 包裹
@@ -309,7 +309,7 @@ graph TD
     end
 ```
 
-> **认知功能**: 此图展示 Rust FFI 生态的**工具链层次**——从自动生成绑定到运行时动态加载，再到验证工具。
+> **认知功能**: 此图展示 Rust FFI 生态的**工具链层次**——从自动生成绑定到运行时（Runtime）动态加载，再到验证工具。
 > **使用建议**: 优先使用 `bindgen`/`cbindgen` 自动生成绑定，减少手工错误；复杂场景使用 `libloading` 动态加载；所有 FFI 代码应用 Miri 和 valgrind 验证。
 > [来源: [bindgen User Guide](https://rust-lang.github.io/rust-bindgen/)]
 
@@ -337,7 +337,7 @@ graph TD
 
 > **认知功能**: 此决策树评估 C 库是否适合被 Rust 安全封装。核心判断标准是**不变量的文档化程度**和**可表达性**。
 > **使用建议**: 优先封装有清晰 API 契约的 C 库（如 OpenSSL、SQLite）；避免封装内部行为不透明的遗留代码。
-> **关键洞察**: FFI 安全封装的本质是**将 C 的不变量映射到 Rust 的类型系统**。如果 C 库本身没有明确的不变量，映射就不可能完整。
+> **关键洞察**: FFI 安全封装的本质是**将 C 的不变量映射到 Rust 的类型系统（Type System）**。如果 C 库本身没有明确的不变量，映射就不可能完整。
 > [来源: 💡 原创分析]
 
 ---
@@ -531,7 +531,7 @@ unsafe fn c_get_buffer<'a>() -> &'a [u8] {
 
 ## 相关概念文件
 
-- [Unsafe](./03_unsafe.md) — unsafe Rust 与内存安全
+- [Unsafe](./03_unsafe.md) — unsafe Rust 与内存安全（Memory Safety）
 - [Type System](../01_foundation/04_type_system.md) — Rust 类型系统基础
 - [Memory Management](../02_intermediate/03_memory_management.md) — 内存管理模型
 - [Application Domains](../06_ecosystem/04_application_domains.md) — 应用领域分析
@@ -553,7 +553,7 @@ unsafe fn c_get_buffer<'a>() -> &'a [u8] {
 > **从编译错误反推**：
 >
 > ```text
-> FFI 边界安全 ⟸ ABI 兼容 + 所有权转移
+> FFI 边界安全 ⟸ ABI 兼容 + 所有权（Ownership）转移
 > ```
 >
 ## 权威来源索引
@@ -589,7 +589,7 @@ fn main() {
 }
 ```
 
-> **修正**: FFI 边界是 Rust 安全保证的**信任边界**：Rust 编译器无法验证 C 代码的行为。传递空指针、悬垂指针或未初始化内存到 C 函数是 UB。防御策略：1) 在 Rust 侧验证指针非空（`if ptr.is_null() { return Err(...) }`）；2) 使用 `NonNull<T>` 类型（编译期保证非空）；3) 用 `cbindgen`/`cxx` 生成安全的 C++ 绑定；4) 对 C API 包装为 safe Rust 函数（`unsafe fn raw_c_call` → `pub fn safe_call`）。Rust 的 `unsafe` 块是 FFI 的必要之恶——最小化 unsafe 范围，在边界处建立安全抽象层。这与 Go 的 cgo（自动处理指针，但性能开销大）或 Java 的 JNI（JVM 管理对象生命周期）不同——Rust 的 FFI 提供零成本抽象，但安全责任完全在开发者。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/ffi.html)] · [来源: [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html)]
+> **修正**: FFI 边界是 Rust 安全保证的**信任边界**：Rust 编译器无法验证 C 代码的行为。传递空指针、悬垂指针或未初始化内存到 C 函数是 UB。防御策略：1) 在 Rust 侧验证指针非空（`if ptr.is_null() { return Err(...) }`）；2) 使用 `NonNull<T>` 类型（编译期保证非空）；3) 用 `cbindgen`/`cxx` 生成安全的 C++ 绑定；4) 对 C API 包装为 safe Rust 函数（`unsafe fn raw_c_call` → `pub fn safe_call`）。Rust 的 `unsafe` 块是 FFI 的必要之恶——最小化 unsafe 范围，在边界处建立安全抽象层。这与 Go 的 cgo（自动处理指针，但性能开销大）或 Java 的 JNI（JVM 管理对象生命周期）不同——Rust 的 FFI 提供零成本抽象（Zero-Cost Abstraction），但安全责任完全在开发者。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/ffi.html)] · [来源: [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html)]
 
 ### 10.5 边界测试：所有权移动后的再次使用
 
@@ -620,13 +620,13 @@ fn main() {
 | Rust FFI：与外部代码的安全边界 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | Rust FFI：与外部代码的安全边界 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
-> 跨语言调用安全 ⟸ C ABI 兼容 ⟸ 布局一致性
+> 跨语言调用安全 ⟸ C ABI 兼容 ⟸ 布局一致性（Coherence）
 > 内存管理边界 ⟸ Box::into_raw / from_raw ⟸ 所有权转移
 > **过渡**: 掌握 Rust FFI：与外部代码的安全边界 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 Rust FFI：与外部代码的安全边界 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: Rust FFI：与外部代码的安全边界 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: Rust FFI：与外部代码的安全边界 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 
@@ -675,7 +675,7 @@ fn main() {
 - A. C 函数可能产生空指针解引用
 - B. C 函数不遵守 Rust 的所有权规则
 - C. C 函数的参数类型需要在 Rust 中声明为 `unsafe fn`
-- D. C 函数可能违反 Rust 的内存安全假设
+- D. C 函数可能违反 Rust 的内存安全（Memory Safety）假设
 
 <details>
 <summary>✅ 答案与解析</summary>
@@ -727,7 +727,7 @@ FFI 调用需要 `unsafe` 的根本原因：
 
 **关键区别**:
 
-- `extern "Rust"` 的名字修饰包含 crate 和模块路径（如 `_ZN4mycrate3foo17h...`）
+- `extern "Rust"` 的名字修饰包含 crate 和模块（Module）路径（如 `_ZN4mycrate3foo17h...`）
 - `extern "C"` 的名字修饰简单（如 `foo`），C 编译器可以直接链接
 
 ```rust,ignore
@@ -846,8 +846,8 @@ fn call_process(input: &str) {
 
 | 方法 | 作用 | 风险 |
 |:---|:---|:---|
-| `CString::into_raw()` | 将 `CString` 转换为原始指针，**释放 Rust 的所有权管理** | 如果不回收，内存泄露 |
-| `CString::from_raw(ptr)` | 从原始指针重新创建 `CString`，**恢复 Rust 的所有权管理** | 如果 C 已释放，double free |
+| `CString::into_raw()` | 将 `CString` 转换为原始指针（Raw Pointer），**释放 Rust 的所有权管理** | 如果不回收，内存泄露 |
+| `CString::from_raw(ptr)` | 从原始指针（Raw Pointer）重新创建 `CString`，**恢复 Rust 的所有权管理** | 如果 C 已释放，double free |
 
 **正确模式**：
 

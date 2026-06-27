@@ -178,6 +178,94 @@ impl<T: Ord + Clone> DataStructure<T> for Node<T> {
 > ```
 >
 
+### 3.5 递归细化：递归 ↔ Composite 后序遍历 ↔ 工作流 Sequence
+
+递归（Recursion）是算法层最自然的自相似分解手段；Composite 模式通过递归数据结构（Tree = Leaf | Node(Tree, Tree)）把这种自相似性显式化；工作流中的 **Sequence** 模式则把递归展开后的计算步骤线性化——三者共享同一语义：**"对相同操作的重复应用，直到达到不可再分的基例"**。
+
+#### 概念对应
+
+| 维度 | 算法层：递归 | 设计模式层：Composite | 工作流层：Sequence |
+|:---|:---|:---|:---|
+| **基例** | 直接返回的边界条件 | `Leaf` 节点 | 工作流中的原子活动 |
+| **复合体** | 对子问题的递归调用 | `Node` 包含子结构 | 顺序排列的子活动 |
+| **聚合方式** | 递归返回后合并结果 | 后序遍历 `postorder_map` | 按顺序传递的输出 → 输入 |
+| **终止保证** | 问题规模递减 | 递归数据结构有限深度 | 活动序列有限长度 |
+
+#### Rust 示例
+
+以下代码同时展示递归函数、Composite 表达式树，以及把求值过程视为 Sequence 的等价视角：
+
+```rust
+// 递归函数：阶乘
+fn factorial(n: u64) -> u64 {
+    if n == 0 { 1 } else { n * factorial(n - 1) }
+}
+
+// Composite 数据结构：表达式树
+enum Expr {
+    Lit(i64),
+    Add(Box<Expr>, Box<Expr>),
+    Mul(Box<Expr>, Box<Expr>),
+}
+
+impl Expr {
+    fn eval(&self) -> i64 {
+        match self {
+            Expr::Lit(v) => *v,
+            Expr::Add(l, r) => l.eval() + r.eval(), // 后序遍历聚合
+            Expr::Mul(l, r) => l.eval() * r.eval(),
+        }
+    }
+}
+
+// 工作流 Sequence：把递归求值线性化为步骤列表
+fn eval_steps(expr: &Expr) -> Vec<String> {
+    let mut steps = Vec::new();
+    fn walk(e: &Expr, out: &mut Vec<String>) {
+        match e {
+            Expr::Lit(v) => out.push(format!("push {}", v)),
+            Expr::Add(l, r) => {
+                walk(l, out);
+                walk(r, out);
+                out.push("add".to_string());
+            }
+            Expr::Mul(l, r) => {
+                walk(l, out);
+                walk(r, out);
+                out.push("mul".to_string());
+            }
+        }
+    }
+    walk(expr, &mut steps);
+    steps
+}
+
+fn main() {
+    let expr = Expr::Add(
+        Box::new(Expr::Lit(2)),
+        Box::new(Expr::Mul(Box::new(Expr::Lit(3)), Box::new(Expr::Lit(4)))),
+    );
+    println!("recursive eval: {}", expr.eval());          // 14
+    println!("workflow sequence: {:?}", eval_steps(&expr)); // ["push 2", "push 3", "push 4", "mul", "add"]
+    println!("factorial(5) = {}", factorial(5));
+}
+```
+
+#### 范畴论语境
+
+递归数据类型可以看作其形状函子的**初始代数（Initial Algebra）**。对于表达式树，形状函子为：
+
+```text
+F(X) = Lit(i64) + Add(X, X) + Mul(X, X)
+Expr ≅ F(Expr)                  // 不动点方程
+eval : Expr → i64               // F-代数（F-algebra）
+eval = cata(f)                  // catamorphism（折叠）
+```
+
+Composite 的 `eval` 就是一个 catamorphism；工作流 Sequence 则是把该 catamorphism 展开为线性指令序列。**后序遍历 + 节点聚合**的统一结构正是初始代数的折叠语义。[来源: [Category Theory for Programmers — Bartosz Milewski](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)]
+
+> **关联章节**: [Control Flow](../01_foundation/07_control_flow.md) · [Design Patterns](../06_ecosystem/02_patterns.md) · [Algorithms](../06_ecosystem/29_algorithms_competitive_programming.md)
+
 ---
 
 ## 四、动态规划 ↔ Memoization + Deferred Choice[来源: [Wikipedia — Dynamic Programming](https://en.wikipedia.org/wiki/Dynamic_programming)]
@@ -255,6 +343,99 @@ impl MemoizedFib {
 >   return result
 > ```
 
+### 4.5 惰性求值细化：动态规划 ↔ Memoization ↔ Lazy Evaluation
+
+动态规划（DP）的两种实现路径——**自顶向下记忆化**与**自底向上填表**——在语义上分别对应 **Memoization 设计模式** 与 **惰性求值（Lazy Evaluation）**：
+
+- **Memoization** 在运行时缓存子问题结果，避免重复计算，对应 DP 的"记忆化搜索"视角。
+- **Lazy Evaluation** 延迟计算直到值被需要，天然具备"按需填充缓存"的能力；当惰性值被多次访问时，其缓存机制（thunk 求值一次后冻结）与 Memoization 同构。
+- 二者的统一语义是 **"有向无环图（DAG）节点的按需、可共享求值"**。
+
+#### 概念对应
+
+| 维度 | 算法层：DP | 设计模式层：Memoization | 惰性求值 |
+|:---|:---|:---|:---|
+| **计算触发** | 按拓扑序主动填表 | 递归时查询/写入缓存 | 首次访问时触发 |
+| **缓存对象** | `dp[i]` | `HashMap<key, value>` | thunk / `OnceLock` |
+| **依赖处理** | 先计算前驱 | 递归计算并回填 | 解引用时递归展开 |
+| **共享方式** | 数组共享 | 缓存命中返回引用 | thunk 求值后共享结果 |
+
+#### Rust 示例
+
+以下代码展示 DP 的迭代实现、Memoization 包装，以及使用惰性迭代器按需生成斐波那契序列：
+
+```rust
+use std::collections::HashMap;
+
+// DP：自底向上
+fn fib_dp(n: usize) -> usize {
+    if n == 0 { return 0; }
+    let mut dp = vec![0; n + 1];
+    dp[1] = 1;
+    for i in 2..=n {
+        dp[i] = dp[i - 1] + dp[i - 2];
+    }
+    dp[n]
+}
+
+// Memoization：自顶向下 + 缓存
+struct MemoFib {
+    cache: HashMap<usize, usize>,
+}
+
+impl MemoFib {
+    fn new() -> Self {
+        let mut cache = HashMap::new();
+        cache.insert(0, 0);
+        cache.insert(1, 1);
+        Self { cache }
+    }
+
+    fn compute(&mut self, n: usize) -> usize {
+        if let Some(&v) = self.cache.get(&n) {
+            return v;
+        }
+        let v = self.compute(n - 1) + self.compute(n - 2);
+        self.cache.insert(n, v);
+        v
+    }
+}
+
+// Lazy Evaluation：按需生成，不预先分配完整表
+struct LazyFib {
+    prev: usize,
+    curr: usize,
+}
+
+impl LazyFib {
+    fn new() -> Self { Self { prev: 0, curr: 1 } }
+}
+
+impl Iterator for LazyFib {
+    type Item = usize;
+    fn next(&mut self) -> Option<Self::Item> {
+        let v = self.prev;
+        let next = self.prev + self.curr;
+        self.prev = self.curr;
+        self.curr = next;
+        Some(v)
+    }
+}
+
+fn main() {
+    println!("fib_dp(20) = {}", fib_dp(20));
+    let mut memo = MemoFib::new();
+    println!("memo fib(20) = {}", memo.compute(20));
+    println!("lazy first 10: {:?}", LazyFib::new().take(10).collect::<Vec<_>>());
+}
+```
+
+#### 范畴论语境
+
+惰性求值可以被建模为 **Thunk 函子** `T(A) = () → A` 上的 `let` 共享：第一次 `force` 将 thunk 替换为其值，后续 `force` 直接返回该值。Memoization 则把这一局部共享扩展为**全局 DAG 节点缓存**。从范畴论角度看，二者都是把 `eval : DAG → Value` 提升为 `eval_memo : DAG → Value`，使得同态节点共享同一个值对象；DP 的填表顺序则是 DAG 拓扑排序的一种具体实现。[来源: [Wikipedia — Lazy Evaluation](https://en.wikipedia.org/wiki/Lazy_evaluation)] · [来源: [CLRS — Introduction to Algorithms](https://mitpress.mit.edu/books/introduction-algorithms-fourth-edition)]
+
+> **关联章节**: [Iterator Patterns](../02_intermediate/15_iterator_patterns.md) · [Closures](../01_foundation/15_closure_basics.md) · [Algorithms](../06_ecosystem/29_algorithms_competitive_programming.md)
+
 ---
 
 ## 五、图遍历 ↔ Visitor + Arbitrary Cycles[来源: [Wikipedia — Graph Traversal](https://en.wikipedia.org/wiki/Graph_traversal)]
@@ -269,6 +450,126 @@ impl MemoizedFib {
 | **访问状态** | `visited` 数组 | `Visitor` 上下文 | 工作项状态 |
 | **循环检测** | 颜色标记（白/灰/黑） | 无（通常假设无环） | 显式循环模式 |
 | **节点处理** | `process(v)` | `visitor.visit(v)` | 活动执行 |
+
+### 5.2 遍历细化：图遍历 ↔ Visitor ↔ Iterator
+
+图遍历（BFS/DFS）、Visitor 模式与 Iterator 模式共享一个核心问题：**如何系统地访问一个离散结构中的所有元素，同时管理访问状态？** 三者的差异在于抽象层次：
+
+- **图遍历算法**关注访问顺序（队列/栈）与循环检测（颜色标记）。
+- **Visitor 模式**把"访问"与"处理"分离：`accept(visitor)` 定义遍历协议，`visitor.visit()` 定义具体操作。
+- **Iterator 模式**把遍历封装为惰性序列：`next()` 每次返回一个元素，隐藏底层数据结构。
+
+#### 概念对应
+
+| 维度 | 算法层：图遍历 | 设计模式层：Visitor | Iterator 模式 |
+|:---|:---|:---|:---|
+| **访问顺序** | 队列（BFS）/ 栈（DFS） | `accept` 调用顺序 | `next()` 调用顺序 |
+| **状态管理** | `visited` 集合 / 颜色标记 | Visitor 上下文对象 | 迭代器内部状态 |
+| **循环处理** | 显式检测（灰/黑节点） | 通常假设结构无环 | 由调用者控制终止 |
+| **操作扩展** | 修改 `process(v)` | 新增 Visitor 子类/实现 | 通过适配器链扩展 |
+
+#### Rust 示例
+
+以下代码实现一个图的 DFS Iterator，并展示 Visitor trait 如何对同一结构执行不同操作：
+
+```rust
+use std::collections::{HashMap, HashSet};
+
+#[derive(Clone, Debug)]
+struct Node {
+    id: usize,
+    edges: Vec<usize>,
+}
+
+struct Graph {
+    nodes: HashMap<usize, Node>,
+}
+
+// DFS 迭代器：Iterator 模式实现图遍历
+struct DfsIter<'a> {
+    graph: &'a Graph,
+    stack: Vec<usize>,
+    visited: HashSet<usize>,
+}
+
+impl<'a> DfsIter<'a> {
+    fn new(graph: &'a Graph, start: usize) -> Self {
+        Self { graph, stack: vec![start], visited: HashSet::new() }
+    }
+}
+
+impl<'a> Iterator for DfsIter<'a> {
+    type Item = usize;
+    fn next(&mut self) -> Option<Self::Item> {
+        while let Some(id) = self.stack.pop() {
+            if self.visited.insert(id) {
+                if let Some(node) = self.graph.nodes.get(&id) {
+                    for &next in &node.edges {
+                        self.stack.push(next);
+                    }
+                }
+                return Some(id);
+            }
+        }
+        None
+    }
+}
+
+// Visitor 模式：对节点执行不同操作
+trait GraphVisitor {
+    fn visit(&mut self, node: &Node);
+}
+
+struct PrintVisitor;
+impl GraphVisitor for PrintVisitor {
+    fn visit(&mut self, node: &Node) {
+        println!("visiting node {}", node.id);
+    }
+}
+
+struct CollectVisitor { ids: Vec<usize> }
+impl GraphVisitor for CollectVisitor {
+    fn visit(&mut self, node: &Node) {
+        self.ids.push(node.id);
+    }
+}
+
+impl Graph {
+    fn accept<V: GraphVisitor>(&self, start: usize, visitor: &mut V) {
+        let mut iter = DfsIter::new(self, start);
+        while let Some(id) = iter.next() {
+            if let Some(node) = self.nodes.get(&id) {
+                visitor.visit(node);
+            }
+        }
+    }
+}
+
+fn main() {
+    let mut nodes = HashMap::new();
+    nodes.insert(0, Node { id: 0, edges: vec![1, 2] });
+    nodes.insert(1, Node { id: 1, edges: vec![3] });
+    nodes.insert(2, Node { id: 2, edges: vec![3] });
+    nodes.insert(3, Node { id: 3, edges: vec![] });
+    let graph = Graph { nodes };
+
+    println!("DFS iterator:");
+    for id in DfsIter::new(&graph, 0) {
+        println!("{}", id);
+    }
+
+    println!("Visitor:");
+    let mut collector = CollectVisitor { ids: Vec::new() };
+    graph.accept(0, &mut collector);
+    println!("collected: {:?}", collector.ids);
+}
+```
+
+#### 范畴论语境
+
+图的 DFS 可以看作 **余代数（coalgebra）** 上的遍历：设 `P(X)` 为幂集函子，则邻接表可表示为 `next : V → P(V)`。DFS Iterator 是从该余代数出发构造的**轨迹（trace）**，即反复应用 `next` 并记录访问历史的序列。Visitor 则是定义在该轨迹上的代数操作：对每一个访问到的节点应用一个函数。Iterator 的惰性本质把图这一余代数结构展开为**最终的 `Option<(A, S)` 煤gebra**，其中 `S` 是迭代器状态。因此，图遍历 ↔ Visitor ↔ Iterator 的同构可以概括为：**从图的余代数到线性轨迹的展开，再对轨迹施加代数操作**。[来源: [Category Theory for Programmers — Coalgebras](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)]
+
+> **关联章节**: [Visitor](../06_ecosystem/02_patterns.md) · [Iterator Patterns](../02_intermediate/15_iterator_patterns.md) · [Control Flow](../01_foundation/07_control_flow.md)
 
 ---
 

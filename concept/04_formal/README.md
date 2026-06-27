@@ -12,6 +12,8 @@
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_Logic)** · **来源: [Wikipedia - Linear Logic](https://en.wikipedia.org/wiki/Linear_Logic)** · **来源: [Iris Project - iris-project.org](https://iris-project.org/)**
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 ## 〇、L4 前置检查清单
@@ -22,9 +24,9 @@
 
 | 前置能力 | 验证标准 | 学习资源 |
 |:---|:---|:---|
-| 所有权直觉 | 能向新手解释"为什么 `&mut` 不能别名" | [L1 所有权](../01_foundation/01_ownership.md) |
-| 借用规则 | 能独立标注含 3+ 引用的函数签名 | [L2 生命周期](../02_intermediate/18_lifetimes_advanced.md) |
-| 类型系统 | 理解 `enum`/`struct`/`trait` 的语义区别 | [L1 类型系统](../01_foundation/04_type_system.md) |
+| 所有权（Ownership）直觉 | 能向新手解释"为什么 `&mut` 不能别名" | [L1 所有权](../01_foundation/01_ownership.md) |
+| 借用（Borrowing）规则 | 能独立标注含 3+ 引用（Reference）的函数签名 | [L2 生命周期（Lifetimes）](LINK_PLACEHOLDER) |
+| 类型系统（Type System） | 理解 `enum`/`struct`/`trait` 的语义区别 | [L1 类型系统](../01_foundation/04_type_system.md) |
 | 并发原语 | 能解释 `Send`/`Sync` 为什么需要 `unsafe impl` | [L3 并发](../03_advanced/01_concurrency.md) |
 | 逻辑基础 | 了解命题逻辑（与/或/蕴含）的基本概念 | [L4 Hoare 逻辑](./15_hoare_logic.md)（可先读） |
 
@@ -62,9 +64,9 @@ mindmap
 ```
 
 > **认知功能**: 此 mindmap 是 L4 层的**放射式数学根基入口**。
-> 四个分支对应 Rust 安全保证的四种数学来源：线性逻辑（资源消耗公理）、类型论（结构规则）、所有权形式化（Rust 特定的操作语义）、RustBelt（机械验证框架）。
+> 四个分支对应 Rust 安全保证的四种数学来源：线性逻辑（资源消耗公理）、类型论（结构规则）、所有权（Ownership）形式化（Rust 特定的操作语义）、RustBelt（机械验证框架）。
 > 读者按数学背景选择入口——逻辑学背景从线性逻辑切入，类型论背景从 HM/System F 切入，程序验证背景从 RustBelt 切入。
-> 关键认知：L4 的四个分支不是并列的「可选知识」，而是「同一安全定理的不同证明视角」——它们共同构成 Rust 内存安全的形式化完备性。 [来源: 💡 原创分析]
+> 关键认知：L4 的四个分支不是并列的「可选知识」，而是「同一安全定理的不同证明视角」——它们共同构成 Rust 内存安全（Memory Safety）的形式化完备性。 [来源: 💡 原创分析]
 > **认知路径**: 本 mindmap 展示 L4 层的**数学根基**。
 > 线性逻辑提供资源语义，类型论提供结构规则，所有权形式化将两者映射到 Rust 的具体机制，RustBelt 提供机械可验证的安全证明。
 > 关键洞察：**L4 不是"更高级的知识"，而是 L1-L3 的"地基"**——形式化证明向下保证上层概念的安全性。
@@ -131,7 +133,7 @@ graph TB
 > **认知功能**: 此图是 L4 层的**形式化映射拓扑**。
 > 它展示了四股数学理论（线性逻辑、类型论、所有权形式化、RustBelt）如何向下支撑 L1-L3 的工程概念，又如何向上转化为 L6-L7 的工具与前沿研究。
 > 四种颜色编码四股理论，箭头方向揭示「理论奠基 → 工程实现 → 工具转化」的知识流动。
-> 关键认知：L4 不是孤立的数学象牙塔——每个形式化概念都有明确的工程对应（线性逻辑 ⊗ → 所有权转移、区域类型 → 生命周期、分数权限 → 借用规则），
+> 关键认知：L4 不是孤立的数学象牙塔——每个形式化概念都有明确的工程对应（线性逻辑 ⊗ → 所有权转移、区域类型 → 生命周期（Lifetimes）、分数权限 → 借用（Borrowing）规则），
 > 读者应建立「形式化 ↔ 工程」的双向翻译能力。 [来源: 💡 原创分析]
 
 ### 1.1 概念间语义链接
@@ -139,9 +141,9 @@ graph TB
 | 关系 | 从 | 到 | 语义类型 | 说明 |
 |:---|:---|:---|:---|:---|
 | 1 | **Linear Logic** | **Ownership Formalization** | `==>` 形式化根基 | 线性逻辑中的资源不可复制性（`A ⊗ B`）直接对应所有权的"唯一拥有"语义。这是 L4→L1 的**核心映射**。 |
-| 2 | **Type Theory** | **Ownership Formalization** | `==>` 形式化根基 | 区域类型（Region Types）是生命周期标注的数学模型；代数类型（和/积）是 enum/struct 的数学模型。 |
+| 2 | **Type Theory** | **Ownership Formalization** | `==>` 形式化根基 | 区域类型（Region Types）是生命周期（Lifetimes）标注的数学模型；代数类型（和/积）是 enum/struct 的数学模型。 |
 | 3 | **Ownership Formalization** | **RustBelt** | `==>` 验证实现 | COR（Calculus of Ownership and Resources）提供操作语义，RustBelt 在此基础上用 Iris 分离逻辑构建**机械可验证**的安全证明。 |
-| 4 | **RustBelt** | **L3 Concurrency** | `==>` 验证覆盖 | RustBelt 证明了 Send/Sync 规则足以保证并发安全（无数据竞争）。 |
+| 4 | **RustBelt** | **L3 Concurrency** | `==>` 验证覆盖 | RustBelt 证明了 Send/Sync 规则足以保证并发安全（Concurrency Safety）（无数据竞争）。 |
 | 5 | **RustBelt** | **L3 Unsafe** | `==>` 边界明确 | RustBelt 的证明**不覆盖** unsafe 块。这是形式化保证的明确边界。 |
 
 ### 1.2 L4 → L1 的核心映射链
@@ -182,9 +184,9 @@ graph TB
 | [05_verification_toolchain.md](./05_verification_toolchain.md) | 验证工具链选型 | ROI 分析、决策树、a-mir-formality、分层验证策略 | ✅ v1.2 | L3-L6 验证实践 | L7 a-mir-formality |
 | [06_subtype_variance.md](./06_subtype_variance.md) | 子类型与变型 | 协变/逆变/不变、生命周期子类型、类型安全边界 | ✅ v1.0 | L2 Generics, L1 Lifetimes | 编译器类型检查 |
 | [11_separation_logic.md](./11_separation_logic.md) | 分离逻辑 | * 算子、帧规则、CSL、Iris、RustBelt 应用映射 | ✅ v1.0 | L3 Concurrency, L1 Ownership | 形式化验证工具 |
-| [08_type_inference.md](./08_type_inference.md) | 类型推断 | HM 算法、统一、Rust 扩展、Trait 约束推断 | ✅ v1.0 | L2 Generics, L2 Trait | 编译器类型检查 |
+| [08_type_inference.md](./08_type_inference.md) | 类型推断（Type Inference） | HM 算法、统一、Rust 扩展、Trait 约束推断 | ✅ v1.0 | L2 Generics, L2 Trait | 编译器类型检查 |
 | [28_borrow_checking_decidability.md](./28_borrow_checking_decidability.md) | 借用检查可判定性 [ROD 迁移] | NLL/Polonius、区域约束、P-完全、与 rustc borrowck 映射 | ✅ 已迁移 | L1 Borrowing, L3 Unsafe | rustc_borrowck |
-| [29_type_inference_complexity.md](./29_type_inference_complexity.md) | 类型推断复杂度 [ROD 迁移] | HM 扩展、约束生成、PSPACE-完全、与 rustc typeck 映射 | ✅ 已迁移 | L2 Trait, L2 Generics | rustc_typeck |
+| [29_type_inference_complexity.md](./29_type_inference_complexity.md) | 类型推断（Type Inference）复杂度 [ROD 迁移] | HM 扩展、约束生成、PSPACE-完全、与 rustc typeck 映射 | ✅ 已迁移 | L2 Trait, L2 Generics | rustc_typeck |
 | [30_aeneas_symbolic_semantics.md](./30_aeneas_symbolic_semantics.md) | Aeneas 符号化语义 [ROD 迁移] | LLBC、HLPL、符号执行、模拟关系、Aeneas 工具链 | ✅ 已迁移 | L3 Unsafe, L7 Formal Methods | Aeneas, Miri |
 | [17_operational_semantics.md](./17_operational_semantics.md) | 操作语义 [教学类比] | 小步/大步语义、求值上下文、Rust 形式化 | ✅ v1.0 | L1 Ownership, L3 Unsafe | RustBelt, Miri |
 | [20_axiomatic_semantics.md](./20_axiomatic_semantics.md) | 公理语义 [教学类比] | Hoare 逻辑、wp/sp 计算、Rust 所有权公理化 | ✅ v1.0 | L4 形式化理论, L3 Unsafe | Prusti, Creusot, Kani |
@@ -203,7 +205,7 @@ graph TB
 - [航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)](./16_aerospace_certification_formal_methods.md)
 - [现代 Rust 验证工具生态（2025-2026）](./22_modern_verification_tools.md)
 - [借用检查可判定性](./28_borrow_checking_decidability.md)
-- [类型推断复杂度](./29_type_inference_complexity.md)
+- [类型推断（Type Inference）复杂度](LINK_PLACEHOLDER)
 - [Aeneas 符号化语义](./30_aeneas_symbolic_semantics.md)
 - [通用程序语言理论基础：Rust 的 PL 基座](./23_programming_language_foundations.md)
 - [测验：形式化方法概念（嵌入式互动试点）](./24_quiz_formal_methods.md)
@@ -214,14 +216,14 @@ graph TB
 
 | L4 理论 | L1-L3 概念 | 映射类型 | 精度 | 说明 |
 |:---|:---|:---|:---|:---|
-| 线性逻辑 ⊗ | 所有权唯一性 | 双射 | **精确** | 所有权 ⟺ 线性资源 |
+| 线性逻辑 ⊗ | 所有权唯一性 | 双射 | **精确** | 所有权（Ownership） ⟺ 线性资源 |
 | 仿射逻辑 weakening | Copy trait | 特化 | **精确** | Copy = 显式允许 weakening |
 | 区域类型 | 生命周期 'a | 嵌入 | **精确** | 生命周期 = 区域约束 |
-| 分数权限 | 借用 &/&mut | 同态 | **近似** | 借用 ⊂ 分数权限（编译期子集） |
-| 分离逻辑 | 并发安全 | 同态 | **近似** | Send/Sync ⟹ CSL 资源安全 |
+| 分数权限 | 借用（Borrowing） &/&mut | 同态 | **近似** | 借用 ⊂ 分数权限（编译期子集） |
+| 分离逻辑 | 并发安全（Concurrency Safety） | 同态 | **近似** | Send/Sync ⟹ CSL 资源安全 |
 | 代数类型 | enum/struct | 双射 | **精确** | sum/product 类型 ⟺ enum/struct |
 | HM 推断 | 类型推断 | 双射 | **精确** | Rust 类型推断是 HM 的扩展 |
-| System F | 泛型 | 嵌入 | **近似** | Rust 泛型 ≈ System F + 约束 |
+| System F | 泛型（Generics） | 嵌入 | **近似** | Rust 泛型 ≈ System F + 约束 |
 
 ### 3.2 映射的"损失"
 
@@ -246,7 +248,7 @@ L4 → L1 映射中的信息损失:
 | 概念 | 理论层 (Why) | 模型层 (What) | 实践层 (How) | 对应上层 |
 |:---|:---|:---|:---|:---|
 | **Linear Logic** | 资源敏感推理的元理论 | 线性/仿射证明系统 | Girard 的sequent calculus | L1 所有权语义 |
-| **Type Theory** | 类型即命题 (Curry-Howard) | HM / System F / 代数类型 | 类型规则、推断算法 | L1-L2 类型系统 |
+| **Type Theory** | 类型即命题 (Curry-Howard) | HM / System F / 代数类型 | 类型规则、推断算法 | L1-L2 类型系统（Type System） |
 | **Ownership Formal** | 所有权操作语义 | COR、区域约束图 | 借用检查器算法 | L1 编译器核心 |
 | **RustBelt** | 程序逻辑验证 | Iris 分离逻辑、Protocol | Kani/Creusot/Verus | L3 并发/unsafe 验证 |
 
@@ -257,10 +259,10 @@ L4 → L1 映射中的信息损失:
 | 定理 | 前提 | 结论 | 依赖的公理 | 失效条件 | 验证工具 |
 |:---|:---|:---|:---|:---|:---|
 | 线性资源 ⟹ 所有权安全 | 线性逻辑证明系统 | 无 use-after-move | 线性逻辑 ⊗ 规则 | 允许 weakening（Copy） | 逻辑推导 |
-| 区域约束可满足 ⟹ 无悬垂指针 | 区域偏序约束 | 所有引用合法 | Tofte-Talpin 区域类型 | HRTB 不可判定片段 | 约束求解器 |
+| 区域约束可满足 ⟹ 无悬垂指针 | 区域偏序约束 | 所有引用（Reference）合法 | Tofte-Talpin 区域类型 | HRTB 不可判定片段 | 约束求解器 |
 | 分数权限 ⟹ AXM | 分离逻辑框架 | &T 与 &mut T 不共存 | 分数权限分配规则 | UnsafeCell 绕过 | Iris 证明助手 |
 | RustBelt ⟹ Safe Rust 无数据竞争 | λRust 操作语义 | 所有 safe 程序安全 | Iris 高阶分离逻辑 | unsafe 块、FFI | Coq 证明 |
-| 单态化 ⟺ 参数多态实例化 | System F | 零运行时开销 | 参数性 (Parametricity) | dyn Trait（存在类型） | — |
+| 单态化（Monomorphization） ⟺ 参数多态实例化 | System F | 零运行时（Runtime）开销 | 参数性 (Parametricity) | dyn Trait（存在类型） | — |
 
 ---
 
@@ -287,7 +289,7 @@ L4 → L1 映射中的信息损失:
 
 L4 的形式化成果输出到：
 
-- **L1-L3**: 编译器借用检查器的算法根基、类型系统的一致性保证
+- **L1-L3**: 编译器借用检查器的算法根基、类型系统（Type System）的一致性（Coherence）保证
 - **L5 对比**: 形式系统 vs 机制工程的哲学论证（原 01.md 的核心论点）
 - **L6 生态**: Clippy lint、Miri 动态检测（形式化理论的工程近似）
 - **L7 前沿**: Kani/Creusot/Verus 工业验证工具、AI 形式化辅助证明

@@ -15,6 +15,8 @@
 
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 ## 一、三级定理体系
@@ -35,9 +37,9 @@
 
 **适用场景**:
 
-- RustBelt (POPL 2018) 证明的 Safe Rust 内存安全定理
+- RustBelt (POPL 2018) 证明的 Safe Rust 内存安全（Memory Safety）定理
 - Ralf Jung 论文中证明的 Stacked Borrows / Tree Borrows 操作语义性质
-- Pierce TAPL 中给出的类型系统元定理（Progress + Preservation）
+- Pierce TAPL 中给出的类型系统（Type System）元定理（Progress + Preservation）
 - Wadler 1989 参数性定理的形式化陈述
 
 **判断标准**:
@@ -69,12 +71,12 @@
 
 - 基于 RustBelt 框架推导的特定性质（但未在原始论文中显式证明）
 - 基于分离逻辑推导的 Rust 特定模式的安全性
-- 从 System F 规则推导 Rust 泛型系统的类型保持性
+- 从 System F 规则推导 Rust 泛型（Generics）系统的类型保持性
 
 **判断标准**:
 
 - [ ] 有明确的证明结构（引理 → 定理）
-- [ ] 每个步骤都有形式化依据（引用外部定理或公理）
+- [ ] 每个步骤都有形式化依据（引用（Reference）外部定理或公理）
 - [ ] 省略的细节是"机械的"而非"关键的"
 - [ ] 明确标注了省略的内容和补充来源
 
@@ -101,8 +103,8 @@
 
 **适用场景**:
 
-- "Safe Rust 无内存泄漏（模循环引用）"——Rust 不保证无泄漏，此命题本身就有语义边界
-- "单态化 ⟹ 零成本抽象 ⟹ 语义保持"——LLVM 优化差异使"同构"断言过强
+- "Safe Rust 无内存泄漏（模循环引用（Reference））"——Rust 不保证无泄漏，此命题本身就有语义边界
+- "单态化（Monomorphization） ⟹ 零成本抽象（Zero-Cost Abstraction） ⟹ 语义保持"——LLVM 优化差异使"同构"断言过强
 - "Vec 扩容因子约为 1.5–2×"——实现细节可能随版本变化
 - 任何带有 💡 原创分析 标注的"定理"
 
@@ -149,7 +151,7 @@
 
 - 文件内所有 Tier 1/2/3 标注格式统一
 - 无"伪形式化"残留（如 Tier 3 使用 "∴" 或 "QED"）
-- 定理一致性矩阵中的每个条目都有对应的 Tier 标注
+- 定理一致性（Coherence）矩阵中的每个条目都有对应的 Tier 标注
 
 ---
 

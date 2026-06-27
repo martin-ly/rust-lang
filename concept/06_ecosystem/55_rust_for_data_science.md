@@ -52,13 +52,14 @@
 >
 > - v1.0 (2026-05-26): 初始创建——覆盖数据科学 Rust 生态、Polars/DataFusion、统计计算、可视化、Python 互操作
 
+> **前置概念**: N/A
 ---
 
 ## 一、权威定义（Definition）
 
 ### 1.1 数据科学的 Rust 定位
 
-> **[来源: [Are We Learning Yet?](https://www.arewelearningyet.com/)]** Rust 在数据科学领域的定位是**高性能基础设施层**，而非直接替代 Python 的交互式探索。核心优势：零成本抽象（比 Python 快 10-100x）、内存安全（避免 pandas 中常见的 copy-on-write 陷阱）、 fearless concurrency（多核 DataFrame 操作）。劣势：交互式 REPL 体验差、Jupyter 生态不成熟、ML 模型训练库稀缺。[来源: [Are We Learning Yet?](https://www.arewelearningyet.com/)]
+> **[来源: [Are We Learning Yet?](https://www.arewelearningyet.com/)]** Rust 在数据科学领域的定位是**高性能基础设施层**，而非直接替代 Python 的交互式探索。核心优势：零成本抽象（Zero-Cost Abstraction）（比 Python 快 10-100x）、内存安全（Memory Safety）（避免 pandas 中常见的 copy-on-write 陷阱）、 fearless concurrency（多核 DataFrame 操作）。劣势：交互式 REPL 体验差、Jupyter 生态不成熟、ML 模型训练库稀缺。[来源: [Are We Learning Yet?](https://www.arewelearningyet.com/)]
 
 ```text
 Rust 数据科学栈分层:
@@ -91,7 +92,7 @@ Python 的不可撼动地位：交互探索、可视化、ML 模型生态
 | **交互体验** | 极佳（Jupyter + REPL）| 差（编译延迟）| Python 领先 |
 | **库生态** | 极丰富（sklearn, tf, torch）| 稀疏（linfa, burn）| Python 领先 |
 | **部署** | 复杂（依赖地狱）| 简单（静态链接）| Rust 领先 |
-| **学习曲线** | 平缓 | 陡峭（所有权 + 生命周期）| Python 领先 |
+| **学习曲线** | 平缓 | 陡峭（所有权（Ownership） + 生命周期（Lifetimes））| Python 领先 |
 
 > **来源**: [Polars vs Pandas Benchmark](https://pola.rs/benchmarks.html) · [H2O.ai DB Benchmark](https://h2oai.github.io/db-benchmark/)
 
@@ -105,7 +106,7 @@ Python 的不可撼动地位：交互探索、可视化、ML 模型生态
 | **性能** | 10-50x pandas | 分布式查询 | 中 | 高 | N/A（桥接）|
 | **API 稳定性** | 1.0+ | 活跃演进 | 0.x（不稳定）| 0.x | 1.0+ |
 | **Python 绑定** | ✅ 原生 PyPolars | ❌ 需手动 | ❌ 无 | ❌ 无 | N/A |
-| **内存安全** | ✅ Rust 保证 | ✅ Rust 保证 | ✅ Rust 保证 | ✅ Rust 保证 | GIL 风险 |
+| **内存安全（Memory Safety）** | ✅ Rust 保证 | ✅ Rust 保证 | ✅ Rust 保证 | ✅ Rust 保证 | GIL 风险 |
 | **学习资源** | 丰富 | 中 | 少 | 少 | 丰富 |
 
 > **来源**: [Polars Documentation](https://docs.pola.rs/) · [DataFusion README](https://github.com/apache/datafusion)
@@ -212,7 +213,7 @@ async fn datafusion_query() -> Result<(), DataFusionError> {
 
 ### 4.2 线性代数
 
-> **[来源: [nalgebra Documentation](https://docs.rs/nalgebra/latest/nalgebra/)]** `nalgebra` 是 Rust 的通用线性代数库，提供矩阵、向量、变换（旋转/平移/缩放）和数值求解。特色：编译期维度检查（避免运行时矩阵维度不匹配）、与几何计算深度集成。`ndarray` 提供 N 维数组（对标 numpy ndarray），是 Rust 数值计算的基础。[来源: [nalgebra](https://docs.rs/nalgebra/latest/nalgebra/)] · [ndarray](https://docs.rs/ndarray/latest/ndarray/)]
+> **[来源: [nalgebra Documentation](https://docs.rs/nalgebra/latest/nalgebra/)]** `nalgebra` 是 Rust 的通用线性代数库，提供矩阵、向量、变换（旋转/平移/缩放）和数值求解。特色：编译期维度检查（避免运行时（Runtime）矩阵维度不匹配）、与几何计算深度集成。`ndarray` 提供 N 维数组（对标 numpy ndarray），是 Rust 数值计算的基础。[来源: [nalgebra](https://docs.rs/nalgebra/latest/nalgebra/)] · [ndarray](https://docs.rs/ndarray/latest/ndarray/)]
 
 ```rust,ignore
 use nalgebra::{DMatrix, DVector};
@@ -491,7 +492,7 @@ fn robust_csv_read() -> Result<DataFrame, PolarsError> {
 - [WebAssembly](./11_webassembly.md) — 浏览器内数据分析、跨平台部署
 - [云原生](./24_cloud_native.md) — 容器化数据服务、对象存储
 - [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、Rayon 并行
-- [类型系统](../01_foundation/04_type_system.md) — 泛型、Trait、零成本抽象
+- [类型系统（Type System）](LINK_PLACEHOLDER) — 泛型（Generics）、Trait、零成本抽象（Zero-Cost Abstraction）
 - [量子计算](./51_quantum_computing_rust.md) — 量子模拟、量子机器学习
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)

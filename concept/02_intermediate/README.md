@@ -4,7 +4,7 @@
 > **Summary**: Readme. Core Rust concept.
 >
 > **受众**: [进阶]
-> **定位**：在掌握 L1 基础后，理解 Rust 的模块化、泛型（Generics）、内存管理和错误处理等进阶机制。本层内容对齐 TRPL 第 10-15 章、Microsoft RustTraining 进阶部分。
+> **定位**：在掌握 L1 基础后，理解 Rust 的模块（Module）化、泛型（Generics）、内存管理和错误处理（Error Handling）等进阶机制。本层内容对齐 TRPL 第 10-15 章、Microsoft RustTraining 进阶部分。
 > **Bloom 层级**: 理解 → 应用
 > **对应 L4 形式化**: 类型约束求解 · 参数多态 · 子类型 · 存在类型
 > **来源: [TRPL Ch10](https://doc.rust-lang.org/book/ch10-00-generics.html)** ·
@@ -14,6 +14,8 @@
 > **本节关键术语**: 进阶概念 (Intermediate) · 特征 (Trait) · 泛型 (Generics) · 生命周期 (Lifetime) · 智能指针 (Smart Pointer) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 ## 📑 目录
@@ -29,7 +31,7 @@
   - [三、学习路径建议](#三学习路径建议)
     - [3.1 严格依赖路径](#31-严格依赖路径)
   - [四、形式化层级定位](#四形式化层级定位)
-  - [五、本层定理一致性概览](#五本层定理一致性概览)
+  - [五、本层定理一致性（Coherence）概览](LINK_PLACEHOLDER)
   - [六、认知路径](#六认知路径)
   - [七、跨层出口](#七跨层出口)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -64,11 +66,11 @@ mindmap
 ```
 
 > **认知功能**: 本图是 L2 层的**全景认知地图**，帮助读者在深入学习前建立"四核机制"的整体拓扑框架。
-> 建议在学习各子模块前通览此图，定位当前概念在四核中的位置。
-> 关键洞察：Trait 是 Rust 行为抽象的基石，Trait Bounds 是 Trait 与泛型的枢纽交叉点。
+> 建议在学习各子模块（Module）前通览此图，定位当前概念在四核中的位置。
+> 关键洞察：Trait 是 Rust 行为抽象的基石，Trait Bounds 是 Trait 与泛型（Generics）的枢纽交叉点。
 > [来源: 💡 原创分析]
 > **认知路径**: 本 mindmap 展示 L2 层的**四核机制**。
-> Trait 是 Rust 的行为抽象核心，泛型实现零成本参数多态，内存管理扩展所有权的表达能力（共享、内部可变性），错误处理将异常转化为类型系统的一部分。
+> Trait 是 Rust 的行为抽象核心，泛型（Generics）实现零成本参数多态，内存管理扩展所有权（Ownership）的表达能力（共享、内部可变性），错误处理（Error Handling）将异常转化为类型系统（Type System）的一部分。
 > 关键交叉点：**Trait Bounds** 是 Trait 与泛型的结合部。
 
 ## 一、本层概念关系图（完整版）
@@ -136,7 +138,7 @@ graph TB
     style EH fill:#ff9,stroke:#333
 ```
 
-> **认知功能**: 本图是 L2 层的**概念关系网络图**，可视化四核心概念间的互构关系及与 L1/L3 的跨层连接。建议在遇到概念交叉问题时查阅，定位依赖路径与前置后置关系。关键洞察：Trait Bounds 是 L2 的枢纽交叉点，L2 整体是连接 L1 所有权基础与 L3 并发异步的语义桥梁。
+> **认知功能**: 本图是 L2 层的**概念关系网络图**，可视化四核心概念间的互构关系及与 L1/L3 的跨层连接。建议在遇到概念交叉问题时查阅，定位依赖路径与前置后置关系。关键洞察：Trait Bounds 是 L2 的枢纽交叉点，L2 整体是连接 L1 所有权（Ownership）基础与 L3 并发异步（Async）的语义桥梁。
 
 ### 1.1 概念间语义链接
 
@@ -146,7 +148,7 @@ graph TB
 | 2 | **Trait** | **Memory Management** | `==>` 启用 | `Drop` / `Copy` / `Clone` 等核心 trait 直接定义内存管理语义。 |
 | 3 | **L1 Lifetimes** | **Generics** | `-.->` 前置/参数化 | 生命周期 `'a` 本质上是泛型参数的一种（region parameter），L1 → L2 的严格递进。 |
 | 4 | **Generics** | **L3 Async** | `==>` 启用 | `Future` 是泛型 trait，`async fn` 的返回类型是匿名的 `impl Future<Output = T>`。 |
-| 5 | **Trait (Send/Sync)** | **L3 Concurrency** | `==>` 启用 | `Send` 和 `Sync` 是 marker trait，它们是并发安全的**类型级证明**。 |
+| 5 | **Trait (Send/Sync)** | **L3 Concurrency** | `==>` 启用 | `Send` 和 `Sync` 是 marker trait，它们是并发安全（Concurrency Safety）的**类型级证明**。 |
 
 ### 1.2 关键交叉点：Trait Bounds
 
@@ -176,29 +178,29 @@ Trait Bounds 是 L2 的"枢纽概念"：
 | 文件 | 概念 | 核心内容 | 状态 | 前置（L1） | 后置（L3） |
 |:---|:---|:---|:---|:---|:---|
 | [01_traits.md](./01_traits.md) | Trait 系统 | 定义、约束、Orphan Rule、关联类型/GATs、Supertrait、Auto Trait | ✅ v1.0 | Type System, Ownership | Concurrency (Send/Sync), Async (Future) |
-| [02_generics.md](./02_generics.md) | 泛型系统 | 单态化、Trait Bounds、Const Generics、GATs、HRTB | ✅ v1.0 | Lifetimes, Type System | Async (Future), Memory (Pin) |
+| [02_generics.md](./02_generics.md) | 泛型系统 | 单态化（Monomorphization）、Trait Bounds、Const Generics、GATs、HRTB | ✅ v1.0 | Lifetimes, Type System | Async (Future), Memory (Pin) |
 | [03_memory_management.md](./03_memory_management.md) | 内存管理 | Box/Rc/Arc、RefCell/Mutex、Cell/UnsafeCell、Pin、MaybeUninit | ✅ v1.0 | Ownership, Borrowing | Concurrency (Arc), Unsafe (MaybeUninit) |
 | [04_error_handling.md](./04_error_handling.md) | 错误处理（Error Handling） | Result/Option、`?`、Custom Error、Error trait | ✅ v1.0 | Type System (enum), Trait | Async (异步错误传播) |
-| [05_assert_matches.md](./05_assert_matches.md) | 模式匹配断言 | `matches!`、`assert_matches!`、模式断言语义 | ✅ v1.0 | Type System (Pattern), Error Handling | Macros |
+| [05_assert_matches.md](./05_assert_matches.md) | 模式匹配（Pattern Matching）断言 | `matches!`、`assert_matches!`、模式断言语义 | ✅ v1.0 | Type System (Pattern), Error Handling | Macros |
 | [06_range_types.md](./06_range_types.md) | 范围类型语义 | `std::ops::Range` → `core::range`、`IntoIterator` 设计 | ✅ v1.0 | Type System, Generics | Version Tracking |
-| [07_closure_types.md](./07_closure_types.md) | 闭包类型系统 | 捕获模式、Fn/FnMut/FnOnce、move 闭包（Closures）、生命周期擦除 | ✅ v1.0 | Ownership, Borrowing | Async, Iterator |
+| [07_closure_types.md](LINK_PLACEHOLDER) | 闭包类型系统（Type System） | 捕获模式、Fn/FnMut/FnOnce、move 闭包（Closures）、生命周期（Lifetimes）擦除 | ✅ v1.0 | Ownership, Borrowing | Async, Iterator |
 | [08_interior_mutability.md](./08_interior_mutability.md) | 内部可变性 | Cell/RefCell/UnsafeCell、Mutex/RwLock、原子类型 | ✅ v1.0 | Ownership, Borrowing | Concurrency, Unsafe |
 | [09_serde_patterns.md](./09_serde_patterns.md) | Serde 序列化 | Serialize/Deserialize、自定义 Visitor、性能优化 | ✅ v1.0 | Trait, Generics | Application Domains |
 | [10_module_system.md](./10_module_system.md) | 模块系统 | Crate/Module/Package、可见性、use 声明、Workspace | ✅ v1.0 | Ownership, Type System | Macros, Toolchain |
 | [11_cow_and_borrowed.md](./11_cow_and_borrowed.md) | Cow 写时克隆 | Clone-on-Write、零拷贝、ToOwned、API 灵活性 | ✅ v1.0 | Ownership, Borrowing | String Patterns, Zero Cost |
 | [12_smart_pointers.md](./12_smart_pointers.md) | 智能指针（Smart Pointer） | Box/Rc/Arc/RefCell/Cell、所有权语义、组合模式 | ✅ v1.0 | Ownership, Borrowing | Pin, Concurrency |
 | [13_dsl_and_embedding.md](./13_dsl_and_embedding.md) | DSL 与嵌入 | 宏（Macro） DSL、Builder、Parser Combinator、类型安全 | ✅ v1.0 | Trait, Macros | Serde, WebAssembly |
-| [14_newtype_and_wrapper.md](./14_newtype_and_wrapper.md) | Newtype 与包装器 | 类型安全、零成本抽象（Zero-Cost Abstraction）、孤儿规则、单位类型 | ✅ v1.0 | Type System, Trait | Patterns, Smart Pointers |
+| [14_newtype_and_wrapper.md](./14_newtype_and_wrapper.md) | Newtype 与包装器 | 类型安全、零成本抽象（Zero-Cost Abstraction）、孤儿规则（Orphan Rule）、单位类型 | ✅ v1.0 | Type System, Trait | Patterns, Smart Pointers |
 
 ---
 
 ### 补充文件索引
 
 - [错误处理深入：从 Result 到自定义错误生态](./15_error_handling_deep_dive.md)
-- [Rust 迭代器模式](./15_iterator_patterns.md)
-- [迭代器模式：Rust 的惰性计算与零成本抽象](./16_iterator_patterns.md)
-- [宏模式：编译期代码生成的工程实践](./17_macro_patterns.md)
-- [生命周期高级主题：从 HRTB 到自引用类型](./18_lifetimes_advanced.md)
+- [Rust 迭代器（Iterator）模式](LINK_PLACEHOLDER)
+- [迭代器模式：Rust 的惰性计算与零成本抽象（Zero-Cost Abstraction）](LINK_PLACEHOLDER)
+- [宏（Macro）模式：编译期代码生成的工程实践](LINK_PLACEHOLDER)
+- [生命周期（Lifetimes）高级主题：从 HRTB 到自引用（Reference）类型](LINK_PLACEHOLDER)
 - [高级 Trait 主题：从关联类型到特化](./19_advanced_traits.md)
 - [高级类型系统：从关联类型到类型级编程](./20_type_system_advanced.md)
 - [元编程：Rust 的编译期代码生成与变换](./21_metaprogramming.md)
@@ -256,8 +258,8 @@ Error Handling
 | 概念 | 理论层 (Why) | 模型层 (What) | 实践层 (How) | L4 形式化对应 |
 |:---|:---|:---|:---|:---|
 | **Trait** | 接口/类型类 (Type Class) | Trait 对象表、vtable | `trait` / `impl` / `dyn` | Type Class (Haskell) · 存在类型 (∃) |
-| **Generics** | 参数多态 (Parametricity) | 单态化算法、约束求解 | `<T>`、`where` 子句 | System F / Fω · HM 扩展 |
-| **Memory Mgmt** | 资源管理逻辑 | 引用计数、运行时借用检查 | `Rc`/`RefCell`/`Arc` | 无（运行时机制，非编译期） |
+| **Generics** | 参数多态 (Parametricity) | 单态化（Monomorphization）算法、约束求解 | `<T>`、`where` 子句 | System F / Fω · HM 扩展 |
+| **Memory Mgmt** | 资源管理逻辑 | 引用（Reference）计数、运行时（Runtime）借用（Borrowing）检查 | `Rc`/`RefCell`/`Arc` | 无（运行时机制，非编译期） |
 | **Error Handling** | 异常代数 (Exception Monad) | Result 类型、? 运算符脱糖 | `Result<T,E>`、`?` | 和类型的错误通道 (A + E) |
 
 ---
@@ -267,9 +269,9 @@ Error Handling
 | 定理 | 前提 | 结论 | 依赖的 L4 理论 | 失效条件 | 典型场景 |
 |:---|:---|:---|:---|:---|:---|
 | Orphan Rule 保证一致性 | crate 边界清晰 | 无矛盾 impl | Coherence (类型论) | 允许覆盖 impl（特化） | 孤儿规则冲突 |
-| 单态化零成本 | 泛型函数编译时实例化 | 无运行时分发开销 | Parametricity | `dyn Trait` 动态分发 | vtable 间接调用 |
+| 单态化（Monomorphization）零成本 | 泛型函数编译时实例化 | 无运行时（Runtime）分发开销 | Parametricity | `dyn Trait` 动态分发 | vtable 间接调用 |
 | Rc 共享安全 | 单线程 | 共享所有权无 UAF | —（运行时） | 跨线程使用 Rc | 编译错误：Rc 非 Send |
-| RefCell 运行时借用检查 | 单线程 | 运行时检测借用违规 | —（运行时） | 已借出时再次借用 | panic: already borrowed |
+| RefCell 运行时借用（Borrowing）检查 | 单线程 | 运行时检测借用违规 | —（运行时） | 已借出时再次借用 | panic: already borrowed |
 | ? 运算符传播 | 函数返回 Result/Option | 自动错误短路 | Monad bind (>>=) | 在非 Result 返回函数中使用 | 编译错误 |
 
 ---

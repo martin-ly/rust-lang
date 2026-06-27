@@ -12,6 +12,7 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
 
+> **后置概念**: N/A
 ---
 
 > **来源**: [Cargo Book](https://doc.rust-lang.org/cargo/) · [rustup](https://rust-lang.github.io/rustup/)
@@ -126,9 +127,9 @@ tokio = { version = "1.35", default-features = false }
 |:---|:---|
 | `members = ["crates/*"]` | 工作区包含 `crates/` 目录下的所有 crate |
 | `resolver = "3"` | 使用 Cargo 的第 3 版依赖解析器（Edition 2024 默认） |
-| `[workspace.dependencies]` | 集中定义依赖版本，子 crate 通过 `workspace = true` 引用 |
+| `[workspace.dependencies]` | 集中定义依赖版本，子 crate 通过 `workspace = true` 引用（Reference） |
 
-**子 crate 引用方式**：
+**子 crate 引用（Reference）方式**：
 
 ```toml
 # crates/my_app/Cargo.toml
@@ -234,7 +235,7 @@ error: Undefined Behavior: attempting to write to ... but tag ... does not have 
 
 **解析**：
 
-- `let ptr1 = &mut x as *mut u32`：创建独占引用 `&mut x`，再转换为原始指针
+- `let ptr1 = &mut x as *mut u32`：创建独占引用（Reference） `&mut x`，再转换为原始指针（Raw Pointer）
 - `let ptr2 = &mut x as *mut u32`：再次创建独占引用 `&mut x`，**第一个引用失效**
 - 在 Tree Borrows 模型中，`ptr1` 的写权限在 `ptr2` 创建时被撤销
 
@@ -262,7 +263,7 @@ fn main() {
 - 实现 Rust 的内存模型（Stacked Borrows / Tree Borrows）
 - 比 Valgrind/ASan 更精确地检测 Rust 特有的别名违规
 
-**知识点**：Miri 是 Rust 内存安全的终极验证工具。`&mut T as *mut T` 的转换模式在 Miri 下经常暴露别名问题，应优先使用 `addr_of_mut!`。[→ Miri 详解](../03_advanced/03_unsafe.md)
+**知识点**：Miri 是 Rust 内存安全（Memory Safety）的终极验证工具。`&mut T as *mut T` 的转换模式在 Miri 下经常暴露别名问题，应优先使用 `addr_of_mut!`。[→ Miri 详解](../03_advanced/03_unsafe.md)
 
 </details>
 
@@ -429,7 +430,7 @@ panic = "abort"
 
 | 配置 | 影响 |
 |:---|:---|
-| `opt-level = 1`（dev） | 基本优化，平衡编译速度和运行时性能 |
+| `opt-level = 1`（dev） | 基本优化，平衡编译速度和运行时（Runtime）性能 |
 | `incremental = true` | 增量编译，只重新编译变更部分 |
 | `opt-level = 3`（release） | 激进优化（内联、循环展开、向量化） |
 | `lto = "fat"` | 全程序链接时优化，跨 crate 内联 |

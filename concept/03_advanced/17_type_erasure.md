@@ -6,7 +6,7 @@
 > **Summary**: Type Erasure: advanced Rust topics, performance/runtime considerations, and ecosystem patterns.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 应用
-> **定位**: 深入探讨 Rust 中的**类型擦除**技术——从 trait object 到 vtable，分析动态分发如何在保持类型安全的同时实现运行时多态。
+> **定位**: 深入探讨 Rust 中的**类型擦除**技术——从 trait object 到 vtable，分析动态分发如何在保持类型安全的同时实现运行时（Runtime）多态。
 > **前置概念**:
 > [Trait](../02_intermediate/01_traits.md) ·
 > [Type System](../01_foundation/04_type_system.md) ·
@@ -50,11 +50,11 @@
   - [十、边界测试：类型擦除的编译错误](#十边界测试类型擦除的编译错误)
     - [10.1 边界测试：`dyn Trait` 的大小未知（编译错误）](#101-边界测试dyn-trait-的大小未知编译错误)
     - [10.2 边界测试：trait object 的方法返回 `Self`（编译错误）](#102-边界测试trait-object-的方法返回-self编译错误)
-    - [10.3 边界测试：`Any` 的 `downcast_ref` 与生命周期（编译错误）](#103-边界测试any-的-downcast_ref-与生命周期编译错误)
+    - [10.3 边界测试：`Any` 的 `downcast_ref` 与生命周期（Lifetimes）（编译错误）](LINK_PLACEHOLDER)
     - [10.4 边界测试：vtable 与对象安全的隐性约束（编译错误）](#104-边界测试vtable-与对象安全的隐性约束编译错误)
     - [10.3 边界测试：`dyn Trait` 与 `Sized` 边界的冲突（编译错误）](#103-边界测试dyn-trait-与-sized-边界的冲突编译错误)
-    - [10.4 边界测试：dyn Trait 的 Sized 要求与泛型约束（编译错误）](#104-边界测试dyn-trait-的-sized-要求与泛型约束编译错误)
-    - [10.6 边界测试：所有权移动后的再次使用](#106-边界测试所有权移动后的再次使用)
+    - [10.4 边界测试：dyn Trait 的 Sized 要求与泛型（Generics）约束（编译错误）](LINK_PLACEHOLDER)
+    - [10.6 边界测试：所有权（Ownership）移动后的再次使用](LINK_PLACEHOLDER)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`dyn Trait` 的大小为什么在编译时未知？它如何被实际使用？（理解层）](#测验-1dyn-trait-的大小为什么在编译时未知它如何被实际使用理解层)
     - [测验 2：`&dyn Trait` 在内存中的布局是什么？（理解层）](#测验-2dyn-trait-在内存中的布局是什么理解层)
@@ -147,7 +147,7 @@ fn main() {
 }
 ```
 
-> **认知功能**: **Trait object 是 Rust 的运行时多态机制**——在需要异构集合或编译期未知类型时使用。
+> **认知功能**: **Trait object 是 Rust 的运行时（Runtime）多态机制**——在需要异构集合或编译期未知类型时使用。
 > [来源: [TRPL — Trait Objects](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)]
 
 ---
@@ -216,7 +216,7 @@ VTable (虚函数表):
   // let obj: Box<dyn Unsafe> = ...; // 编译错误！
 ```
 
-> **对象安全洞察**: **对象安全限制了 trait object 的能力**——泛型和 Self 返回需要静态分发。
+> **对象安全洞察**: **对象安全限制了 trait object 的能力**——泛型（Generics）和 Self 返回需要静态分发。
 > [来源: [Rust Reference — Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety)]
 
 ---
@@ -547,7 +547,7 @@ graph TD
      let obj: Box<dyn Draw + Send> = ...;
 ```
 
-> **陷阱总结**: 类型擦除的陷阱主要与**dyn 语法**、**对象安全**、**生命周期**、**过度使用**和**Send**相关。
+> **陷阱总结**: 类型擦除的陷阱主要与**dyn 语法**、**对象安全**、**生命周期（Lifetimes）**、**过度使用**和**Send**相关。
 
 ---
 
@@ -569,7 +569,7 @@ graph TD
 - [Trait](../02_intermediate/01_traits.md) — Trait
 - [Generics](../02_intermediate/02_generics.md) — 泛型（Generics）
 - [Performance](../06_ecosystem/15_performance_optimization.md) — 性能优化
-- [Type System](../01_foundation/04_type_system.md) — 类型系统
+- [Type System](../01_foundation/04_type_system.md) — 类型系统（Type System）
 
 ---
 
@@ -589,7 +589,7 @@ graph TD
 > **从编译错误反推**：
 >
 > ```text
-> 类型擦除安全 ⟸ vtable + 生命周期擦除
+> 类型擦除安全 ⟸ vtable + 生命周期（Lifetimes）擦除
 > ```
 >
 ## 权威来源索引
@@ -657,7 +657,7 @@ fn make_clone(obj: &dyn Cloneable) -> Box<dyn Cloneable> {
 // }
 ```
 
-> **修正**: Trait object 在运行时通过 vtable 动态分发，vtable 中的方法签名必须是"对象安全"（object-safe）的。返回 `Self` 的方法不是对象安全的，因为编译器无法在编译期确定 `Self` 的具体类型和大小。类似地，泛型方法（`fn method<T>(&self, t: T)`）也不是对象安全的——vtable 无法存储无限多单态化版本。Rust 编译器在 trait 定义时检查对象安全性，拒绝将非对象安全 trait 转为 `dyn Trait`。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: Trait object 在运行时通过 vtable 动态分发，vtable 中的方法签名必须是"对象安全"（object-safe）的。返回 `Self` 的方法不是对象安全的，因为编译器无法在编译期确定 `Self` 的具体类型和大小。类似地，泛型方法（`fn method<T>(&self, t: T)`）也不是对象安全的——vtable 无法存储无限多单态化（Monomorphization）版本。Rust 编译器在 trait 定义时检查对象安全性，拒绝将非对象安全 trait 转为 `dyn Trait`。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.3 边界测试：`Any` 的 `downcast_ref` 与生命周期（编译错误）
 
@@ -672,7 +672,7 @@ fn main() {
 }
 ```
 
-> **修正**: `dyn Any` 要求底层类型是 `'static`，因为 `Any` trait 的 `type_id` 方法在运行时识别类型，而运行时需要类型在程序生命周期内稳定。带生命引用的类型（`&'a String`）不能转为 `dyn Any`，因为 `'a` 可能短于 `'static`。解决方案：1) 使用 `Any` 时只处理 `'static` 类型（`String`、`Vec<T>`、`i32`）；2) 对非 `'static` 类型使用自定义 trait object 或 enum；3) 使用 `unsafe` 和裸指针绕过（不推荐）。这与 Java 的 `instanceof`（无生命周期限制）或 C++ 的 `dynamic_cast`（无生命周期限制）不同——Rust 的生命周期系统渗透到运行时类型擦除，确保即使动态分派也不违反内存安全。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/any/trait.Any.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)]
+> **修正**: `dyn Any` 要求底层类型是 `'static`，因为 `Any` trait 的 `type_id` 方法在运行时识别类型，而运行时需要类型在程序生命周期内稳定。带生命引用（Reference）的类型（`&'a String`）不能转为 `dyn Any`，因为 `'a` 可能短于 `'static`。解决方案：1) 使用 `Any` 时只处理 `'static` 类型（`String`、`Vec<T>`、`i32`）；2) 对非 `'static` 类型使用自定义 trait object 或 enum；3) 使用 `unsafe` 和裸指针绕过（不推荐）。这与 Java 的 `instanceof`（无生命周期限制）或 C++ 的 `dynamic_cast`（无生命周期限制）不同——Rust 的生命周期系统渗透到运行时类型擦除，确保即使动态分派也不违反内存安全（Memory Safety）。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/any/trait.Any.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)]
 
 ### 10.4 边界测试：vtable 与对象安全的隐性约束（编译错误）
 
@@ -723,7 +723,7 @@ fn main() {
 }
 ```
 
-> **修正**: `dyn Trait` 是**动态分发**类型，大小不固定（`!Sized`），因为不同实现的大小不同。`Box<dyn Trait>` 和 `&dyn Trait` 是**胖指针**（数据指针 + vtable 指针），本身是 `Sized` 的。若函数要求 `P: Processor`（隐式 `P: Sized`），不能传入 `dyn Processor`。修复：1) `fn use_processor(p: &dyn Processor)`（接受引用）；2) `fn use_processor(p: Box<dyn Processor>)`（接受 Box）；3) `fn use_processor<P: Processor + ?Sized>(p: &P)`（放宽 Sized 约束）。类型擦除与单态化的权衡：`dyn Trait` 减少代码膨胀（一个函数处理所有类型），但有虚函数调用开销。这与 C++ 的虚函数（类似机制，但无显式 `dyn` 标记）或 Go 的 interface（类似 fat pointer，但隐式实现）不同——Rust 的 `dyn` 显式标记动态分发，编译器在类型层面区分静态和动态多态。[来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)]
+> **修正**: `dyn Trait` 是**动态分发**类型，大小不固定（`!Sized`），因为不同实现的大小不同。`Box<dyn Trait>` 和 `&dyn Trait` 是**胖指针**（数据指针 + vtable 指针），本身是 `Sized` 的。若函数要求 `P: Processor`（隐式 `P: Sized`），不能传入 `dyn Processor`。修复：1) `fn use_processor(p: &dyn Processor)`（接受引用）；2) `fn use_processor(p: Box<dyn Processor>)`（接受 Box）；3) `fn use_processor<P: Processor + ?Sized>(p: &P)`（放宽 Sized 约束）。类型擦除与单态化（Monomorphization）的权衡：`dyn Trait` 减少代码膨胀（一个函数处理所有类型），但有虚函数调用开销。这与 C++ 的虚函数（类似机制，但无显式 `dyn` 标记）或 Go 的 interface（类似 fat pointer，但隐式实现）不同——Rust 的 `dyn` 显式标记动态分发，编译器在类型层面区分静态和动态多态。[来源: [Rust Reference — Trait Objects](LINK_PLACEHOLDER)] · [来源: [The Rust Programming Language](LINK_PLACEHOLDER)]
 
 ### 10.4 边界测试：dyn Trait 的 Sized 要求与泛型约束（编译错误）
 
@@ -744,7 +744,7 @@ fn erased(item: dyn Process) {
 fn main() {}
 ```
 
-> **修正**: **`dyn Trait`** 是 **DST**（Dynamically Sized Type）：1) 编译时大小未知（vtable 指针 + 数据指针）；2) 必须 behind 指针：`&dyn Trait`、`Box<dyn Trait>`、`Arc<dyn Trait>`；3) 不能直接按值传递、不能作为泛型参数（除非 `T: ?Sized`）。`dyn Trait` 的限制：1) 只能 object-safe trait（方法无泛型、返回类型非 `Self`）；2) 方法调用有 vtable 间接开销；3) 不能从 `dyn Trait` 反向转为具体类型（除非 `Any` downcast）。零大小类型：`dyn Trait` 的 vtable 可能有零大小数据（`()`），但指针仍有 2 个 usize。这与 C++ 的虚函数（对象内含 vptr，大小固定）或 Java 的接口引用（始终是引用，类似 `&dyn`）不同——Rust 的 `dyn` 是显式的 DST，有明确的 object safety 规则。[来源: [Trait Objects](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)] · [来源: [Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety)]
+> **修正**: **`dyn Trait`** 是 **DST**（Dynamically Sized Type）：1) 编译时大小未知（vtable 指针 + 数据指针）；2) 必须 behind 指针：`&dyn Trait`、`Box<dyn Trait>`、`Arc<dyn Trait>`；3) 不能直接按值传递、不能作为泛型参数（除非 `T: ?Sized`）。`dyn Trait` 的限制：1) 只能 object-safe trait（方法无泛型、返回类型非 `Self`）；2) 方法调用有 vtable 间接开销；3) 不能从 `dyn Trait` 反向转为具体类型（除非 `Any` downcast）。零大小类型：`dyn Trait` 的 vtable 可能有零大小数据（`()`），但指针仍有 2 个 usize。这与 C++ 的虚函数（对象内含 vptr，大小固定）或 Java 的接口引用（Reference）（始终是引用，类似 `&dyn`）不同——Rust 的 `dyn` 是显式的 DST，有明确的 object safety 规则。[来源: [Trait Objects](LINK_PLACEHOLDER)] · [来源: [Object Safety](LINK_PLACEHOLDER)]
 
 ### 10.6 边界测试：所有权移动后的再次使用
 
@@ -839,11 +839,11 @@ fn main() {
 
 > 动态分发安全 ⟸ Any/TypeId 反射 ⟸ 向下转换
 > vtable 布局正确 ⟸ dyn Trait ⟸ 对象安全条件
-> **过渡**: 掌握 类型擦除与动态分发 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 类型擦除与动态分发 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 类型擦除与动态分发 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: 类型擦除与动态分发 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 类型擦除与动态分发 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

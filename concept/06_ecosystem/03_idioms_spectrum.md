@@ -79,18 +79,18 @@
     - [12.2 惯用法效率-认知负荷象限图](#122-惯用法效率-认知负荷象限图)
     - [12.3 惯用法效率矩阵](#123-惯用法效率矩阵)
   - [十三、定理推理链](#十三定理推理链)
-    - [定理一致性矩阵（惯用法谱系专集）](#定理一致性矩阵惯用法谱系专集)
+    - [定理一致性（Coherence）矩阵（惯用法谱系专集）](LINK_PLACEHOLDER)
   - [十四、相关概念链接（L0-L7 映射）](#十四相关概念链接l0-l7-映射)
     - [L0-L7 纵向映射](#l0-l7-纵向映射)
     - [相关概念文件](#相关概念文件)
   - [十五、惯用法选择的认知路径](#十五惯用法选择的认知路径)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：惯用法谱系的编译错误](#十边界测试惯用法谱系的编译错误)
-    - [10.1 边界测试：`unwrap` 的滥用（运行时 panic）](#101-边界测试unwrap-的滥用运行时-panic)
+    - [10.1 边界测试：`unwrap` 的滥用（运行时（Runtime） panic）](LINK_PLACEHOLDER)
     - [10.2 边界测试：`clone` 的隐式成本（逻辑错误）](#102-边界测试clone-的隐式成本逻辑错误)
     - [10.3 边界测试：Clippy 警告的编译错误等价（编译错误）](#103-边界测试clippy-警告的编译错误等价编译错误)
     - [10.4 边界测试：`String` 与 `&str` 的类型不匹配（编译错误）](#104-边界测试string-与-str-的类型不匹配编译错误)
-    - [10.5 边界测试：`Default::default()` 与类型推断的歧义（编译错误）](#105-边界测试defaultdefault-与类型推断的歧义编译错误)
+    - [10.5 边界测试：`Default::default()` 与类型推断（Type Inference）的歧义（编译错误）](LINK_PLACEHOLDER)
     - [10.7 边界测试：`std::mem::replace` 与 `take` 的惯用选择（逻辑错误）](#107-边界测试stdmemreplace-与-take-的惯用选择逻辑错误)
     - [10.3 边界测试：`Default` 派生与手动实现的语义差异（逻辑错误）](#103-边界测试default-派生与手动实现的语义差异逻辑错误)
     - [补充定理链](#补充定理链)
@@ -98,7 +98,7 @@
     - [测验 1：`Default` trait 的用途是什么？如何为自定义类型实现它？（理解层）](#测验-1default-trait-的用途是什么如何为自定义类型实现它理解层)
     - [测验 2：`AsRef` 与 `Borrow` trait 在语义上有什么区别？（理解层）](#测验-2asref-与-borrow-trait-在语义上有什么区别理解层)
     - [测验 3：什么是"早返回"（Early Return）模式？Rust 中通常如何实现？（理解层）](#测验-3什么是早返回early-return模式rust-中通常如何实现理解层)
-    - [测验 4：`todo!()` 和 `unimplemented!()` 宏在开发中有什么用途？（理解层）](#测验-4todo-和-unimplemented-宏在开发中有什么用途理解层)
+    - [测验 4：`todo!()` 和 `unimplemented!()` 宏（Macro）在开发中有什么用途？（理解层）](LINK_PLACEHOLDER)
     - [测验 5：Rust 的 `must_use` 属性有什么作用？什么类型的返回值通常应该标记它？（理解层）](#测验-5rust-的-must_use-属性有什么作用什么类型的返回值通常应该标记它理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -197,8 +197,8 @@ Rust 惯用法的判别标准（四级评价）：
 
 | 维度 | 权重 | 评价标准 |
 |:---|:---:|:---|
-| 正确性 | 40% | 是否利用类型系统排除更多错误？ |
-| 效率 | 30% | 是否为零成本抽象？运行时开销如何？ |
+| 正确性 | 40% | 是否利用类型系统（Type System）排除更多错误？ |
+| 效率 | 30% | 是否为零成本抽象（Zero-Cost Abstraction）？运行时（Runtime）开销如何？ |
 | 可读性 | 20% | 是否减少认知负荷？是否符合社区约定？ |
 | 可维护性 | 10% | 是否降低未来修改的引入错误风险？ |
 
@@ -375,7 +375,7 @@ for &n in &numbers {
 
 > 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) Newtype 模式
 
-> **惯用**: 用单字段元组结构体为已有类型赋予新的语义身份，零运行时成本。
+> **惯用**: 用单字段元组结构体（Struct）为已有类型赋予新的语义身份，零运行时成本。
 
 ```rust
 // 惯用：Newtype 区分同底层类型的不同语义
@@ -391,13 +391,13 @@ impl Meters {
 // 零成本：编译后 Meters 和 u64 完全同构
 ```
 
-**等价性**: `struct Meters(u64)` 与 `u64` 在内存布局上完全等价（`#[repr(transparent)]` 保证），但类型系统将其视为不兼容类型。
+**等价性**: `struct Meters(u64)` 与 `u64` 在内存布局上完全等价（`#[repr(transparent)]` 保证），但类型系统（Type System）将其视为不兼容类型。
 
 ### 4.2
 
 > [来源: Rust Design Patterns, Typestate] Typestate 模式
 
-> **惯用**: 利用泛型和 `PhantomData` 将状态编码到类型中，使非法状态不可表示。
+> **惯用**: 利用泛型（Generics）和 `PhantomData` 将状态编码到类型中，使非法状态不可表示。
 
 ```rust,ignore
 // 惯用：Typestate 编码连接状态
@@ -483,7 +483,7 @@ impl FileHandle<WritePermission> {
 
 > 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) Into/From 转换链
 
-> **惯用**: 实现 `From<T>` 自动获得 `Into<U>`，利用类型推断隐式转换。
+> **惯用**: 实现 `From<T>` 自动获得 `Into<U>`，利用类型推断（Type Inference）隐式转换。
 
 ```rust
 // 惯用：实现 From 获得 Into
@@ -507,7 +507,7 @@ connect(8080u16); // Into::into(8080u16)
 
 > 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) Deref/DerefMut 多态
 
-> **惯用**: 为智能指针和包装类型实现 `Deref`，使其透明地代理内部值的方法。
+> **惯用**: 为智能指针（Smart Pointer）和包装类型实现 `Deref`，使其透明地代理内部值的方法。
 
 ```rust
 // 惯用：Deref 实现透明代理
@@ -527,7 +527,7 @@ let buf = SmartBuffer { data: vec![1, 2, 3] };
 let first = buf.first(); // 透明调用 [T]::first
 ```
 
-> **边界**: 过度使用 `Deref` 会导致「隐式转换陷阱」——用户可能意识不到正在通过代理调用。仅对「明显是某种类型的智能指针/包装器」使用。 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+> **边界**: 过度使用 `Deref` 会导致「隐式转换陷阱」——用户可能意识不到正在通过代理调用。仅对「明显是某种类型的智能指针（Smart Pointer）/包装器」使用。 来源: [Rust API Guidelines](LINK_PLACEHOLDER)
 
 ### 5.3
 
@@ -574,7 +574,7 @@ greeting(&"Rust".to_owned());    // &String
 
 > 来源: [Rust Reference §10.8](https://doc.rust-lang.org/reference/) RAII 守卫模式
 
-> **惯用**: 将资源获取与释放绑定到值的生命周期，利用 `Drop` 自动清理。
+> **惯用**: 将资源获取与释放绑定到值的生命周期（Lifetimes），利用 `Drop` 自动清理。
 
 ```rust,ignore
 // 惯用：RAII 锁守卫
@@ -613,7 +613,7 @@ fn critical_section() {
 
 > 来源: [RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html) Pin 不动性契约
 
-> **惯用**: 对自引用结构和异步 Future 使用 `Pin<&mut T>`，保证内存位置稳定。
+> **惯用**: 对自引用（Reference）结构和异步（Async） Future 使用 `Pin<&mut T>`，保证内存位置稳定。
 
 ```rust
 // 惯用：Pin 保证自引用结构安全
@@ -650,7 +650,7 @@ impl SelfReferential {
 |:---|:---:|:---:|:---|
 | `UnsafeCell<T>` | 否 | 无 | `unsafe` 内部实现 |
 | `Cell<T>` | 否 | 无（`T: Copy`） | 单线程内部修改 |
-| `RefCell<T>` | 否 | 是（borrow 计数） | 单线程动态借用 |
+| `RefCell<T>` | 否 | 是（borrow 计数） | 单线程动态借用（Borrowing） |
 | `Mutex<T>` | 是 | 是（OS 锁） | 多线程独占访问 |
 | `RwLock<T>` | 是 | 是（OS 锁） | 多线程多读单写 |
 | `AtomicT` | 是 | 无（硬件指令） | 简单类型的无锁操作 |
@@ -806,7 +806,7 @@ impl Actor for CounterActor {
 
 ### 8.3
 
-> [来源: Hoare CSP 1978, Rust std docs] CSP channel 所有权转移
+> [来源: Hoare CSP 1978, Rust std docs] CSP channel 所有权（Ownership）转移
 
 > **惯用**: 通过 channel 发送值时利用 move 语义，编译期排除 use-after-send。
 
@@ -827,7 +827,7 @@ let received = rx.recv().unwrap(); // 所有权从 channel 转移到 received
 
 > [来源: crossbeam-epoch docs] 无锁结构的 epoch 安全
 
-> **惯用**: 使用 `crossbeam-epoch` 实现无锁数据结构的内存安全回收。
+> **惯用**: 使用 `crossbeam-epoch` 实现无锁数据结构的内存安全（Memory Safety）回收。
 
 ```rust
 // 惯用：epoch-based 内存回收（概念性）
@@ -1097,9 +1097,9 @@ quadrantChart
 | T-ID-002 | Newtype 零成本 | `#[repr(transparent)]` / 单字段元组 | 内存布局与内层类型等价 | 类型系统名义等价 | 多字段 / 非 `repr(transparent)` | — |
 | T-ID-003 | Typestate 编译期安全 | PhantomData + 状态转换方法 | 非法状态不可表示 | 类型系统完备性 | `unsafe` / `mem::transmute` | E0599 |
 | T-ID-004 | Iterator 链零成本 | 消费链被 LLVM 内联优化 | 性能等价于手写循环 | LLVM 优化理论 | 动态分发 / 未内联 | — |
-| T-ID-005 | RAII 资源安全 | `Drop` 实现正确 | 资源在作用域结束时释放 | 所有权 + Drop | `mem::forget` / `ManuallyDrop` | — |
+| T-ID-005 | RAII 资源安全 | `Drop` 实现正确 | 资源在作用域结束时释放 | 所有权（Ownership） + Drop | `mem::forget` / `ManuallyDrop` | — |
 | T-ID-006 | Send/Sync 推导正确 | 字段级 Send/Sync | 复合类型自动推导 | RustBelt Soundness | `unsafe impl` | E0277 |
-| T-ID-007 | Channel move 无竞争 | Safe Rust + `mpsc` | 发送后使用编译期拒绝 | 所有权唯一性 | `unsafe` / `unsafe_cell` | E0382 |
+| T-ID-007 | Channel move 无竞争 | Safe Rust + `mpsc` | 发送后使用编译期拒绝 | 所有权（Ownership）唯一性 | `unsafe` / `unsafe_cell` | E0382 |
 
 ---
 
@@ -1109,10 +1109,10 @@ quadrantChart
 
 | 本文件主题 | L1 基础 | L2 进阶 | L3 高级 | L4 形式化 | L5 对比 | L6 生态 | L7 前沿 |
 |:---|:---|:---|:---|:---|:---|:---|:---|
-| 词法级惯用法 | match / if let | `?` 运算符 | 宏扩展 | λ 演算语法糖 | vs C++ 异常 | Clippy lint | 语法演进 |
-| 类型级惯用法 | struct / enum | 泛型约束 | GATs | 类型论 | vs OCaml | derive 宏 | 类型系统扩展 |
+| 词法级惯用法 | match / if let | `?` 运算符 | 宏（Macro）扩展 | λ 演算语法糖 | vs C++ 异常 | Clippy lint | 语法演进 |
+| 类型级惯用法 | struct / enum | 泛型（Generics）约束 | GATs | 类型论 | vs OCaml | derive 宏（Macro） | 类型系统扩展 |
 | 接口级惯用法 | Trait 基础 | 关联类型 | 特化 | 范畴论 | vs Java 接口 | API Guidelines | Trait 系统演进 |
-| 资源级惯用法 | 所有权 / Drop | 智能指针 | Pin / Unsafe | 分离逻辑 | vs C++ RAII | Scopeguard crate | 自定义分配器 |
+| 资源级惯用法 | 所有权 / Drop | 智能指针（Smart Pointer） | Pin / Unsafe | 分离逻辑 | vs C++ RAII | Scopeguard crate | 自定义分配器 |
 | 控制级惯用法 | loop / for | Iterator | async/await | CPS | vs JS 生成器 | itertools | gen blocks |
 | 并发级惯用法 | — | Send/Sync | 线程 / async | π 演算 | vs Go channel | crossbeam | 异步 trait |
 | 架构级惯用法 | — | — | unsafe 架构 | 进程代数 | vs Erlang OTP | Tower / Bevy | 微服务框架 |
@@ -1121,7 +1121,7 @@ quadrantChart
 
 - [L6 设计模式](02_patterns.md) —— 设计模式（面向问题）与本文件惯用法（面向表达）的互补
 - [L1 所有权](../01_foundation/01_ownership.md) —— 所有权与 RAII 的根基
-- [L1 借用](../01_foundation/02_borrowing.md) —— 借用与内部可变性的分层
+- [L1 借用（Borrowing）](LINK_PLACEHOLDER) —— 借用与内部可变性的分层
 - [L2 Trait](../02_intermediate/01_traits.md) —— Trait Bound 组合与 Deref 多态
 - [L3 异步](../03_advanced/02_async.md) —— async/await 与 Pin 不动性
 - [L3 并发](../03_advanced/01_concurrency.md) —— Send/Sync 与并发原语
@@ -1222,7 +1222,7 @@ fn fixed() {
 >
 > Rust 的所有权系统强制开发者思考数据克隆的成本。
 > `Vec::clone()` 分配新内存并复制所有元素——O(n) 操作。
-> 在性能关键路径上，应使用引用（`&T`）或迭代器（`iter()`）避免克隆。
+> 在性能关键路径上，应使用引用（Reference）（`&T`）或迭代器（Iterator）（`iter()`）避免克隆。
 > 这与 C++ 的拷贝构造函数（隐式调用）或 Java 的对象引用（总是共享）不同——Rust 的 `clone()` 是显式方法调用，提醒开发者注意成本。
 > `Rc<T>` 和 `Arc<T>` 在需要共享时减少克隆，但增加了引用计数开销。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
@@ -1251,7 +1251,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: `ref` 绑定模式在模式匹配中创建引用，但在 `match s { ref t => ... }` 中，`s` 仍被按值匹配（转移所有权），而 `t` 是对被转移值的引用。这在逻辑上正确但语义令人困惑。惯用写法是 `match &s { t => ... }`——直接对引用进行匹配，清晰表达意图。Clippy lint `match_ref_pats` 建议将 `match x { ref y => ... }` 改写为 `match &x { y => ... }`。这是 Rust"显式优于隐式"原则的体现：让引用的创建位置一目了然。[来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)] · [来源: [Clippy Lints](https://rust-lang.github.io/rust-clippy//master/index.html)]
+> **修正**: `ref` 绑定模式在模式匹配（Pattern Matching）中创建引用，但在 `match s { ref t => ... }` 中，`s` 仍被按值匹配（转移所有权），而 `t` 是对被转移值的引用。这在逻辑上正确但语义令人困惑。惯用写法是 `match &s { t => ... }`——直接对引用进行匹配，清晰表达意图。Clippy lint `match_ref_pats` 建议将 `match x { ref y => ... }` 改写为 `match &x { y => ... }`。这是 Rust"显式优于隐式"原则的体现：让引用的创建位置一目了然。[来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)] · [来源: [Clippy Lints](https://rust-lang.github.io/rust-clippy//master/index.html)]
 
 ### 10.4 边界测试：`String` 与 `&str` 的类型不匹配（编译错误）
 

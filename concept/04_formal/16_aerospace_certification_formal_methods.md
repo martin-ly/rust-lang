@@ -8,9 +8,9 @@
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
 > **Bloom 层级**: 分析 → 评价
-> **定位**: 系统讲解 **DO-178C 航空软件标准** 与 **DO-333 形式化方法补充** 的 Rust 映射——从软件等级 A~E 到定理证明、模型检查、抽象解释三类形式化方法在 Rust 生态中的工具链映射，分析 Rust 所有权系统在航空航天安全关键软件中的独特形式化优势。
+> **定位**: 系统讲解 **DO-178C 航空软件标准** 与 **DO-333 形式化方法补充** 的 Rust 映射——从软件等级 A~E 到定理证明、模型检查、抽象解释三类形式化方法在 Rust 生态中的工具链映射，分析 Rust 所有权（Ownership）系统在航空航天安全关键软件中的独特形式化优势。
 > **前置概念**: [形式化方法](./13_formal_methods.md) · [Hoare 逻辑](./15_hoare_logic.md) · [RustBelt](./04_rustbelt.md)
-> **后置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [并发安全](../03_advanced/01_concurrency.md) · [验证工具链](./05_verification_toolchain.md)
+> **后置概念**: [Unsafe](LINK_PLACEHOLDER) · [并发安全（Concurrency Safety）](LINK_PLACEHOLDER) · [验证工具链](LINK_PLACEHOLDER)
 
 ---
 
@@ -64,7 +64,7 @@
     - [测验 2：Ferrocene 是什么？它在 Rust 航空航天认证中解决了什么问题？（理解层）](#测验-2ferrocene-是什么它在-rust-航空航天认证中解决了什么问题理解层)
     - [测验 3：为什么航空航天领域特别需要形式化验证，而普通 Web 应用通常不需要？（理解层）](#测验-3为什么航空航天领域特别需要形式化验证而普通-web-应用通常不需要理解层)
     - [测验 4：MISRA C 和 Rust 在安全性保证上有什么根本区别？（理解层）](#测验-4misra-c-和-rust-在安全性保证上有什么根本区别理解层)
-    - [测验 5：Rust 的所有权系统如何帮助满足 DO-178C 的"数据耦合"和"控制耦合"要求？（理解层）](#测验-5rust-的所有权系统如何帮助满足-do-178c-的数据耦合和控制耦合要求理解层)
+    - [测验 5：Rust 的所有权（Ownership）系统如何帮助满足 DO-178C 的"数据耦合"和"控制耦合"要求？（理解层）](LINK_PLACEHOLDER)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -108,7 +108,7 @@ DO-178C 软件生命周期:
   合格审定联络 (Certification Liaison)
 ```
 
-> **认知功能**: DO-178C 的核心洞察是**验证强度必须与失效影响成正比**——A 级软件的验证深度远高于 D 级软件。Rust 的所有权系统可以在编译期消除一整类内存安全错误，相当于为所有等级提供了"零成本"的额外验证层。
+> **认知功能**: DO-178C 的核心洞察是**验证强度必须与失效影响成正比**——A 级软件的验证深度远高于 D 级软件。Rust 的所有权系统可以在编译期消除一整类内存安全（Memory Safety）错误，相当于为所有等级提供了"零成本"的额外验证层。
 > [来源: [DO-178C Introductory Course - RTCA](https://www.rtca.org/)]
 
 ### 1.2 DO-333 Formal Methods Supplement
@@ -171,7 +171,7 @@ DO-178C 目标类别与 Rust 映射:
   └── 控制耦合分析 → CFG 分析 + Kani 状态空间探索
 ```
 
-> **认知功能**: Rust 的类型系统和所有权模型在编译期自动满足了 DO-178C 中大量与"数据耦合"、"内存安全"相关的验证目标——这是传统 C/C++ 航空软件需要额外工具（如 Polyspace、Astrée）才能实现的。
+> **认知功能**: Rust 的类型系统（Type System）和所有权模型在编译期自动满足了 DO-178C 中大量与"数据耦合"、"内存安全（Memory Safety）"相关的验证目标——这是传统 C/C++ 航空软件需要额外工具（如 Polyspace、Astrée）才能实现的。
 > [来源: [DO-178C Section 6.0](https://www.rtca.org/)]
 
 ---
@@ -352,17 +352,17 @@ Rust 抽象解释工具:
 | **FM.1.1** | 形式化方法计划 | 文档 + `#[doc]` | 过程合规 | 工具选择需论证 |
 | **FM.2.1** | 软件需求的形式化规格 | Verus / Creusot | 前置/后置条件 | 需求可形式化程度 |
 | **FM.2.2** | 高层需求的形式化分析 | Kani + `kani::any()` | 符号执行 | 需求抽象级别 |
-| **FM.3.1** | 架构的形式化规格 | Creusot / RefinedRust | 模块契约 | Trait 边界难规格化 |
+| **FM.3.1** | 架构的形式化规格 | Creusot / RefinedRust | 模块（Module）契约 | Trait 边界难规格化 |
 | **FM.4.1** | 低层需求的形式化规格 | Verus / Creusot | 函数契约 | 循环不变量需手工 |
 | **FM.5.1** | 源代码的形式化分析 | Kani / Miri / Prusti | 符号执行 / 解释 | unsafe 代码覆盖有限 |
 | **FM.6.1** | 形式化方法补充测试 | Kani proof harness | 属性验证 | 状态空间爆炸 |
 | **FM.6.2** | 形式化方法补充结构覆盖 | Miri (路径探索) | 动态分析 | 非穷举 |
-| **FM.6.3** | 形式化方法补充数据耦合 | 借用检查器 | 编译期分析 | 仅 Safe Rust |
+| **FM.6.3** | 形式化方法补充数据耦合 | 借用（Borrowing）检查器 | 编译期分析 | 仅 Safe Rust |
 | **FM.6.4** | 形式化方法补充控制耦合 | Kani CFG 分析 | 控制流验证 | 复杂控制流 |
 | **FM.7.1** | 形式化验证结果正确性 | SMT 求解器日志 | 证明检查 | 求解器信任假设 |
 | **FM.8.1** | 工具鉴定 | DO-330 TQL 评估 | 过程合规 | 无已鉴定 Rust 验证工具 |
 
-> **映射要点**: Rust 编译器本身（尤其是借用检查器）可视为一种**隐式形式化验证工具**，它在编译期自动完成了 FM.6.3（数据耦合）和 FM.6.4（控制耦合）的大量验证工作——这是传统 C/C++ 航空软件无法获得的"免费"验证层。
+> **映射要点**: Rust 编译器本身（尤其是借用（Borrowing）检查器）可视为一种**隐式形式化验证工具**，它在编译期自动完成了 FM.6.3（数据耦合）和 FM.6.4（控制耦合）的大量验证工作——这是传统 C/C++ 航空软件无法获得的"免费"验证层。
 > [来源: [DO-178C Section 6.4](https://www.rtca.org/)]
 
 ---
@@ -644,7 +644,7 @@ Ferrocene 认证分层:
   └── panic_handler 需自定义 → 避免 unwind
 ```
 
-> **Ferrocene 洞察**: Ferrocene 的 `core` 认证是 Rust 进入航空领域的**关键里程碑**——它意味着 Rust 的最小安全子集已经过独立机构的审查，其内存安全保证可被认证机构接受。这对于替代传统 C/C++ 航空嵌入式代码具有战略意义。
+> **Ferrocene 洞察**: Ferrocene 的 `core` 认证是 Rust 进入航空领域的**关键里程碑**——它意味着 Rust 的最小安全子集已经过独立机构的审查，其内存安全（Memory Safety）保证可被认证机构接受。这对于替代传统 C/C++ 航空嵌入式代码具有战略意义。
 > [来源: [Ferrocene - Certification Scope](https://ferrocene.dev/)]
 
 ---
@@ -799,7 +799,7 @@ Unsafe Rust 的形式化缺口:
   └── Safety-Critical Rust Consortium (2024-03 成立) 协调工业需求与 Rust Project 合作
 ```
 
-> **边界总结**: Rust 航空形式化验证的三大缺口——**Trait 系统**、**Unsafe 代码**和**认证编译器**——反映了从"理论安全"到"认证安全"的实践鸿沟。当前策略应是：在 safe Rust 子集内最大化利用编译器保证，对 unsafe 和复杂泛型代码采用保守策略并辅以人工评审和传统测试。
+> **边界总结**: Rust 航空形式化验证的三大缺口——**Trait 系统**、**Unsafe 代码**和**认证编译器**——反映了从"理论安全"到"认证安全"的实践鸿沟。当前策略应是：在 safe Rust 子集内最大化利用编译器保证，对 unsafe 和复杂泛型（Generics）代码采用保守策略并辅以人工评审和传统测试。
 > [来源: [Rust Verification Roadmap](https://alastairreid.github.io/rust-verification-tools/)]
 
 ---
@@ -812,7 +812,7 @@ Unsafe Rust 的形式化缺口:
 | [DO-333 - Formal Methods Supplement](https://www.rtca.org/) | ✅ 一级 | 形式化方法认证路径 |
 | [DO-330 - Tool Qualification](https://www.rtca.org/) | ✅ 一级 | 工具鉴定标准 |
 | [Ferrocene](https://ferrocene.dev/) | ✅ 一级 | 合格 Rust 编译器；ISO 26262 ASIL D / IEC 61508 SIL 3 / IEC 62304 Class C |
-| [RustBelt - POPL 2018](https://doi.org/10.1145/3158154) | ✅ 一级 | Rust 类型系统形式化证明 |
+| [RustBelt - POPL 2018](LINK_PLACEHOLDER) | ✅ 一级 | Rust 类型系统（Type System）形式化证明 |
 | [Verus - SOSP 2023](https://www.microsoft.com/en-us/research/publication/verus/) | ✅ 一级 | Rust SMT 验证 |
 | [Creusot - FM 2022](https://doi.org/10.1007/978-3-031-15077-8_26) | ✅ 一级 | Rust Why3 验证 |
 | [Kani](https://model-checking.github.io/kani/) | ✅ 一级 | Rust 模型检查 |
@@ -948,7 +948,7 @@ fn main() {
 }
 ```
 
-> **修正**: 航空航天系统要求**确定性执行**——相同输入总是产生相同输出，无未定义行为，无外部状态依赖。`const fn` 限制函数只能执行编译期可求值的操作（算术、控制流、调用其他 const fn），禁止 I/O、堆分配、可变静态变量。这与 SPARK/Ada 的 pure function 或 C 的 `constexpr` 类似，但 Rust 的 `const fn` 与类型系统集成更紧密——const 值可用于类型参数（数组大小、常量泛型）。形式化验证中，const fn 对应于"全函数"（total function）——对所有输入都终止并返回结果。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: 航空航天系统要求**确定性执行**——相同输入总是产生相同输出，无未定义行为，无外部状态依赖。`const fn` 限制函数只能执行编译期可求值的操作（算术、控制流、调用其他 const fn），禁止 I/O、堆分配、可变静态变量。这与 SPARK/Ada 的 pure function 或 C 的 `constexpr` 类似，但 Rust 的 `const fn` 与类型系统集成更紧密——const 值可用于类型参数（数组大小、常量泛型（Generics））。形式化验证中，const fn 对应于"全函数"（total function）——对所有输入都终止并返回结果。[来源: [Rust Reference](LINK_PLACEHOLDER)]
 
 ### 10.3 边界测试：SPARK 模式的 Rust 近似与 `no_panic`（编译错误）
 
@@ -965,7 +965,7 @@ fn main() {
 }
 ```
 
-> **修正**: SPARK（Ada 的子集，用于形式化验证）通过语言子集和工具（GNATprove）保证无运行时错误。Rust 中，`no_panic` crate 通过链接时检查验证函数不 panic，但前提是代码本身不使用可能 panic 的操作。`a / b` 在 `b = 0` 时 panic，因此 `no_panic` 构建会失败。安全替代：1) `a.checked_div(b).unwrap_or(0)`（返回 `Option`）；2) 前置条件检查 `assert!(b != 0)`（但 assert 在 `no_panic` 下也失败）；3) 使用 `wrapping_div`（不 panic，但结果可能无意义）。航空软件的 Rust 应用（如 Ferrocene 项目）正在探索将 Rust 子集用于 DO-178C 认证，但完整的形式化验证工具链（如 SPARK 的 GNATprove）尚未成熟。[来源: [no_panic Crate](https://docs.rs/no-panic/)] · [来源: [DO-178C Standard](https://www.rtca.org/product/do-178c/)]
+> **修正**: SPARK（Ada 的子集，用于形式化验证）通过语言子集和工具（GNATprove）保证无运行时（Runtime）错误。Rust 中，`no_panic` crate 通过链接时检查验证函数不 panic，但前提是代码本身不使用可能 panic 的操作。`a / b` 在 `b = 0` 时 panic，因此 `no_panic` 构建会失败。安全替代：1) `a.checked_div(b).unwrap_or(0)`（返回 `Option`）；2) 前置条件检查 `assert!(b != 0)`（但 assert 在 `no_panic` 下也失败）；3) 使用 `wrapping_div`（不 panic，但结果可能无意义）。航空软件的 Rust 应用（如 Ferrocene 项目）正在探索将 Rust 子集用于 DO-178C 认证，但完整的形式化验证工具链（如 SPARK 的 GNATprove）尚未成熟。[来源: [no_panic Crate](https://docs.rs/no-panic/)] · [来源: [DO-178C Standard](https://www.rtca.org/product/do-178c/)]
 
 ### 10.4 边界测试：MC/DC 覆盖率与短路逻辑（逻辑错误）
 
@@ -1064,7 +1064,7 @@ MISRA C 是一组编码规范和静态检查规则，依赖开发者遵守和工
 <details>
 <summary>✅ 答案与解析</summary>
 
-所有权和借用规则在编译期消除了别名突变（alias mutation）和悬垂指针，天然限制了模块间的隐式数据共享和未预期的控制流影响，降低了耦合度。
+所有权和借用规则在编译期消除了别名突变（alias mutation）和悬垂指针，天然限制了模块（Module）间的隐式数据共享和未预期的控制流影响，降低了耦合度。
 </details>
 
 ## 认知路径
@@ -1076,14 +1076,14 @@ MISRA C 是一组编码规范和静态检查规则，依赖开发者遵守和工
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods) 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods) 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods) 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods) 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > **过渡**: 掌握 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods) 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods) 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods) 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods) 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

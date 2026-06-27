@@ -8,7 +8,7 @@
 > **受众**: [进阶]
 > **内容分级**: [专家级]
 > **定位**: 本文件从**系统架构设计**视角梳理 Rust 的核心设计原则，并与国际权威内容（形式化方法、分布式系统理论、安全工程、容错计算）建立对齐关系。
-> **原则**: 不做"系统设计教程"，聚焦"Rust 的类型系统和所有权模型如何为系统设计提供形式化基础，以及这些基础与国际权威理论的对应关系"。
+> **原则**: 不做"系统设计教程"，聚焦"Rust 的类型系统（Type System）和所有权（Ownership）模型如何为系统设计提供形式化基础，以及这些基础与国际权威理论的对应关系"。
 > **对齐来源**: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [SE L4] · [NIST Zero Trust] · [AWS TLA+] · [Erlang OTP] · [CAP Theorem] · [CALM Theorem]
 > **基准版本**: Rust 1.96.0 stable (Edition 2024)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
@@ -35,11 +35,11 @@
   - [零、TL;DR —— 系统设计原则速查](#零tldr--系统设计原则速查)
   - [一、权威来源与设计原则分类学](#一权威来源与设计原则分类学)
   - [二、七项核心设计原则](#二七项核心设计原则)
-    - [2.1 内存安全：Capability-Based Security](#21-内存安全capability-based-security)
-    - [2.2 并发安全：Session Types 编译期编码](#22-并发安全session-types-编译期编码)
-    - [2.3 零成本抽象：Stroustrup 原则](#23-零成本抽象stroustrup-原则)
+    - [2.1 内存安全（Memory Safety）：Capability-Based Security](LINK_PLACEHOLDER)
+    - [2.2 并发安全（Concurrency Safety）：Session Types 编译期编码](LINK_PLACEHOLDER)
+    - [2.3 零成本抽象（Zero-Cost Abstraction）：Stroustrup 原则](LINK_PLACEHOLDER)
     - [2.4 组件组合：范畴论态射复合](#24-组件组合范畴论态射复合)
-    - [2.5 分布式一致性：从所有权到共识的隐喻](#25-分布式一致性从所有权到共识的隐喻)
+    - [2.5 分布式一致性（Coherence）：从所有权（Ownership）到共识的隐喻](LINK_PLACEHOLDER)
     - [2.6 安全边界：Zero Trust + WASI 能力安全](#26-安全边界zero-trust--wasi-能力安全)
     - [2.7 容错设计：Error Kernel + Let It Crash](#27-容错设计error-kernel--let-it-crash)
   - [三、系统设计决策矩阵](#三系统设计决策矩阵)
@@ -60,15 +60,15 @@
   - [十、边界测试：系统设计原则的编译错误](#十边界测试系统设计原则的编译错误)
     - [10.1 边界测试：Send/Sync 违反导致跨线程共享状态（编译错误）](#101-边界测试sendsync-违反导致跨线程共享状态编译错误)
     - [10.2 边界测试：trait 对象的安全性约束（编译错误）](#102-边界测试trait-对象的安全性约束编译错误)
-    - [10.5 边界测试：依赖注入与 trait object 的性能权衡（运行时开销）](#105-边界测试依赖注入与-trait-object-的性能权衡运行时开销)
+    - [10.5 边界测试：依赖注入与 trait object 的性能权衡（运行时（Runtime）开销）](LINK_PLACEHOLDER)
     - [10.5 边界测试：过度工程化的类型状态机（编译复杂度爆炸）](#105-边界测试过度工程化的类型状态机编译复杂度爆炸)
-    - [10.3 边界测试：过度泛型化导致的单态化膨胀（编译后体积爆炸）](#103-边界测试过度泛型化导致的单态化膨胀编译后体积爆炸)
+    - [10.3 边界测试：过度泛型（Generics）化导致的单态化（Monomorphization）膨胀（编译后体积爆炸）](LINK_PLACEHOLDER)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 中"零成本抽象"（Zero-Cost Abstractions）对系统架构设计意味着什么？（理解层）](#测验-1rust-中零成本抽象zero-cost-abstractions对系统架构设计意味着什么理解层)
     - [测验 2：在 Rust 微服务架构中，为什么选择 `tokio` 而非多线程模型？（理解层）](#测验-2在-rust-微服务架构中为什么选择-tokio-而非多线程模型理解层)
-    - [测验 3：Rust 的 `trait` 系统在解耦模块时有什么优势？（理解层）](#测验-3rust-的-trait-系统在解耦模块时有什么优势理解层)
-    - [测验 4：什么是"错误即类型"（Errors as Values）？Rust 如何通过类型系统实现它？（理解层）](#测验-4什么是错误即类型errors-as-valuesrust-如何通过类型系统实现它理解层)
+    - [测验 3：Rust 的 `trait` 系统在解耦模块（Module）时有什么优势？（理解层）](LINK_PLACEHOLDER)
+    - [测验 4：什么是"错误即类型"（Errors as Values）？Rust 如何通过类型系统（Type System）实现它？（理解层）](LINK_PLACEHOLDER)
     - [测验 5：在设计高可用 Rust 系统时，`Arc<Mutex<T>>` 与消息传递（channel）各适合什么场景？（理解层）](#测验-5在设计高可用-rust-系统时arcmutext-与消息传递channel各适合什么场景理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -99,11 +99,11 @@
 
 | 原则 | 国际权威来源 | 权威类型 | 应用领域 |
 |:---|:---|:---|:---|
-| 内存安全 | Dennis & Van Horn, *Programming Semantics for Multiprogrammed Computations* (1966) | 学术论文 | OS 内核 / 嵌入式 |
-| 并发安全 | Honda, *Session Types* (1993); Wadler, *Propositions as Sessions* (2012) | 学术会议论文 | 分布式协议 |
-| 零成本抽象 | Stroustrup, *The Design and Evolution of C++* (1994) | 技术书籍 | 系统编程 |
+| 内存安全（Memory Safety） | Dennis & Van Horn, *Programming Semantics for Multiprogrammed Computations* (1966) | 学术论文 | OS 内核 / 嵌入式 |
+| 并发安全（Concurrency Safety） | Honda, *Session Types* (1993); Wadler, *Propositions as Sessions* (2012) | 学术会议论文 | 分布式协议 |
+| 零成本抽象（Zero-Cost Abstraction） | Stroustrup, *The Design and Evolution of C++* (1994) | 技术书籍 | 系统编程 |
 | 组件组合 | Mac Lane, *Categories for the Working Mathematician* (1971) | 数学经典 | 软件架构 |
-| 分布式一致性 | Brewer, *CAP Twelve Years Later* (2012); Lamport, *Paxos Made Simple* (2001) | 学术/工业 | 分布式数据库 |
+| 分布式一致性（Coherence） | Brewer, *CAP Twelve Years Later* (2012); Lamport, *Paxos Made Simple* (2001) | 学术/工业 | 分布式数据库 |
 | 安全边界 | NIST SP 800-207, *Zero Trust Architecture* (2020) | 标准规范 | 企业安全 |
 | 容错设计 | Armstrong, *Making Reliable Distributed Systems in the Presence of Software Errors* (2003) | 博士论文 | 电信/分布式 |
 
@@ -121,9 +121,9 @@ Rust 的所有权系统正是 Capability-Based Security 的现代实现：
 |:---|:---|
 | 不可伪造的 capability | 值的所有权（编译器保证不可复制，除非 `Copy`） |
 | Capability 转移 | `move` 语义（所有权转移后原持有者失效） |
-| Capability 降级（只读） | `&T` 共享借用（只读 capability） |
-| Capability 委托（可写） | `&mut T` 独占借用（可写 capability） |
-| Capability 撤销 | 借用生命周期结束（编译器自动回收） |
+| Capability 降级（只读） | `&T` 共享借用（Borrowing）（只读 capability） |
+| Capability 委托（可写） | `&mut T` 独占借用（Borrowing）（可写 capability） |
+| Capability 撤销 | 借用生命周期（Lifetimes）结束（编译器自动回收） |
 
 ```rust
 // Rust 所有权 = Capability-Based Security
@@ -145,7 +145,7 @@ Rust 的 `Send`/`Sync` trait 和所有权转移在编译期编码了 Session Typ
 | Session Types 保证 | Rust 机制 |
 |:---|:---|
 | 协议顺序正确 | Typestate 模式 / 会话类型编码 |
-| 通道使用线性（不重复关闭/使用） | 所有权：channel 被 move 后原变量失效 |
+| 通道使用线性（不重复关闭/使用） | 所有权（Ownership）：channel 被 move 后原变量失效 |
 | 数据竞争排除 | `Send`/`Sync`：编译期标记线程安全 |
 | 死锁避免（部分） | 无锁数据结构 / Actor 单线程处理 |
 
@@ -155,17 +155,17 @@ Rust 的 `Send`/`Sync` trait 和所有权转移在编译期编码了 Session Typ
 
 > **Stroustrup 原则**: "你所不使用的，你就不应该为之付出代价。你使用的，你甚至不应该比手工编码付出更高代价。" [来源: Stroustrup, *The Design and Evolution of C++*, 1994]
 
-Rust 的零成本抽象机制：
+Rust 的零成本抽象（Zero-Cost Abstraction）机制：
 
-| 抽象 | 编译期机制 | 运行时成本 | 手工编码等价性 |
+| 抽象 | 编译期机制 | 运行时（Runtime）成本 | 手工编码等价性 |
 |:---|:---|:---:|:---|
-| 泛型 `Vec<T>` | 单态化（monomorphization） | 零 | 为每个 T 手写专用版本 |
+| 泛型（Generics） `Vec<T>` | 单态化（monomorphization） | 零 | 为每个 T 手写专用版本 |
 | Trait 对象 `dyn Trait` | 虚表（vtable） | 一次间接跳转 | 手写 vtable + 函数指针 |
 | Iterator 链 | LLVM 内联 + 循环融合 | 零（优化后） | 手写等效循环 |
 | `async/await` | 状态机变换 | 零（状态机在栈/内联内存） | 手写状态机 enum + poll |
 | `?` 错误传播 | `match` 展开 | 零 | 手写等效 match |
 
-> **定理 T-SD-001（零成本抽象保持）**: 在 `release` 模式下，Rust 的标准抽象（泛型、Iterator、async/await、`?`）经 LLVM 优化后，生成的机器码与等价的手工编码在性能和内存占用上无统计显著差异。 来源: [Rust Reference §8; LLVM 优化管道文档](https://doc.rust-lang.org/reference/)
+> **定理 T-SD-001（零成本抽象保持）**: 在 `release` 模式下，Rust 的标准抽象（泛型（Generics）、Iterator、async/await、`?`）经 LLVM 优化后，生成的机器码与等价的手工编码在性能和内存占用上无统计显著差异。 来源: [Rust Reference §8; LLVM 优化管道文档](https://doc.rust-lang.org/reference/)
 
 ### 2.4 组件组合：范畴论态射复合
 
@@ -217,7 +217,7 @@ Rust 的安全边界层次与 Zero Trust 的映射：
 | 资源访问最小权限 | `pub` / `pub(crate)` / `pub(super)` 细粒度可见性 |
 | 持续验证 | 编译期借用检查（每次访问都「验证」） |
 | 假设 breach | `unsafe` 块要求显式 SAFETY 注释（假设 breach 时的审计点） |
-| 微分段 | Crate 边界 = 安全边界；模块 = 微分段 |
+| 微分段 | Crate 边界 = 安全边界；模块（Module） = 微分段 |
 
 **WASI（WebAssembly System Interface）的能力安全**:
 WASI 采用 capability-based 设计——程序只能访问显式授予的资源（文件描述符、网络 socket）。Rust 的 `wasm32-wasip1` 或 `wasm32-wasip2` target 将 Rust 的所有权语义映射到 WASI 的 capability 模型，实现从源码到运行时的端到端安全。 [来源: WASI Specification; Bytecode Alliance]
@@ -308,7 +308,7 @@ graph LR
 | 场景 | 推荐架构 | Rust 生态 | 关键原则 |
 |:---|:---|:---|:---|
 | 高并发 Web 服务 | async/await + Tower + Axum | `tokio`, `axum`, `tower` | 协作式调度 + 服务组合 |
-| 数据密集型计算 | rayon + 迭代器 | `rayon`, `ndarray` | Fork-Join + 零成本并行 |
+| 数据密集型计算 | rayon + 迭代器（Iterator） | `rayon`, `ndarray` | Fork-Join + 零成本并行 |
 | 嵌入式 / IoT | no_std + 裸机 async | `embassy`, `defmt` | 资源受限 + 确定性延迟 |
 | 区块链节点 | Actor + 无锁共识 | `ractor`, `crossbeam` | Error Kernel + 状态机 |
 | 游戏引擎 | ECS + 数据导向 | `bevy`, `hecs` | Archetype + 缓存友好 |
@@ -337,11 +337,11 @@ graph TD
     C --> E[分布式系统: 协议验证]
 ```
 
-> **认知功能**: 通过 Rust 类型系统的已有直觉，建立对分布式协议的快速认知桥梁。读者可将编译期已熟悉的所有权、借用、生命周期等概念，迁移理解为分布式系统中的主从复制、锁机制和租约协议。[来源: 💡 原创分析]
+> **认知功能**: 通过 Rust 类型系统的已有直觉，建立对分布式协议的快速认知桥梁。读者可将编译期已熟悉的所有权、借用（Borrowing）、生命周期（Lifetimes）等概念，迁移理解为分布式系统中的主从复制、锁机制和租约协议。[来源: 💡 原创分析]
 
 **隐喻映射表**:
 
-| Rust 类型构造 | 分布式协议概念 | 一致性/安全保证 |
+| Rust 类型构造 | 分布式协议概念 | 一致性（Coherence）/安全保证 |
 |:---|:---|:---|
 | `T`（owned） | 主节点持有的状态 | 强一致性（唯一主） |
 | `&T` | 从节点的只读副本 | 最终一致性 |
@@ -402,7 +402,7 @@ graph TD
     style F fill:#9f9
 ```
 
-> **认知功能**: 揭示七项设计原则之间的支撑关系，帮助读者建立「内存安全是基础、零成本抽象是杠杆、组件组合是放大器」的系统观。绿色节点标识根原则——它们不依赖其他原则，是整个设计体系的公理。[来源: 💡 原创分析]
+> **认知功能**: 揭示七项设计原则之间的支撑关系，帮助读者建立「内存安全（Memory Safety）是基础、零成本抽象是杠杆、组件组合是放大器」的系统观。绿色节点标识根原则——它们不依赖其他原则，是整个设计体系的公理。[来源: 💡 原创分析]
 
 ### 6.2 系统架构决策树
 >
@@ -452,13 +452,13 @@ graph TD
 
 | 本文件主题 | L1 基础 | L2 进阶 | L3 高级 | L4 形式化 | L5 对比 | L6 生态 | L7 前沿 |
 |:---|:---|:---|:---|:---|:---|:---|:---|
-| Capability 安全 | 所有权 / 借用 | 智能指针 | Pin / Unsafe | 分离逻辑 | vs C++ 指针 | Scopeguard | 自定义分配器 |
-| Session Types | 生命周期 | Trait | 并发原语 | 线性逻辑 | vs Go channel | crossbeam | 流处理 |
-| 零成本抽象 | 类型系统 | 泛型 / GATs | async/await | 参数性 | vs C++ 模板 | 优化工具链 | Effects |
-| 组件组合 | struct / enum | Trait | 宏系统 | 范畴论 | vs Haskell | Tower / Axum | 架构框架 |
+| Capability 安全 | 所有权 / 借用 | 智能指针（Smart Pointer） | Pin / Unsafe | 分离逻辑 | vs C++ 指针 | Scopeguard | 自定义分配器 |
+| Session Types | 生命周期（Lifetimes） | Trait | 并发原语 | 线性逻辑 | vs Go channel | crossbeam | 流处理 |
+| 零成本抽象 | 类型系统（Type System） | 泛型 / GATs | async/await | 参数性 | vs C++ 模板 | 优化工具链 | Effects |
+| 组件组合 | struct / enum | Trait | 宏（Macro）系统 | 范畴论 | vs Haskell | Tower / Axum | 架构框架 |
 | 分布式一致性 | — | — | Send/Sync | TLA+ / Paxos | vs Erlang | 分布式 crate | 区块链 |
 | 安全边界 | unsafe | FFI | Miri | RustBelt | vs C 安全 | WASI | 零信任 |
-| 容错设计 | Result / panic | 错误处理 | 并发容错 | 进程代数 | vs Erlang OTP | Actor 框架 | 混沌工程 |
+| 容错设计 | Result / panic | 错误处理（Error Handling） | 并发容错 | 进程代数 | vs Erlang OTP | Actor 框架 | 混沌工程 |
 
 ### 相关概念文件
 >
@@ -563,7 +563,7 @@ fn main() {
 }
 ```
 
-> **修正**: `Rc<T>`（引用计数）不是 `Send`，因为其内部计数器非线程安全。跨线程共享数据必须使用 `Arc<T>`（原子引用计数），它使用原子操作维护计数器。这是 Rust 类型系统对**线程安全**的形式化保证：`Send` 标记类型可安全转移到其他线程，`Sync` 标记类型可安全被多个线程共享。编译器通过 trait bound 检查在编译期阻止数据竞争——`thread::spawn` 要求闭包是 `'static + Send`，`Rc<i32>` 不满足 `Send` 约束。这比 Java 的 `synchronized` 或 Go 的 `chan` 更根本：Rust 在类型层面消除数据竞争，而非运行时检测。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/marker/trait.Send.html)]
+> **修正**: `Rc<T>`（引用（Reference）计数）不是 `Send`，因为其内部计数器非线程安全。跨线程共享数据必须使用 `Arc<T>`（原子引用计数），它使用原子操作（Atomic Operations）维护计数器。这是 Rust 类型系统对**线程安全**的形式化保证：`Send` 标记类型可安全转移到其他线程，`Sync` 标记类型可安全被多个线程共享。编译器通过 trait bound 检查在编译期阻止数据竞争——`thread::spawn` 要求闭包（Closures）是 `'static + Send`，`Rc<i32>` 不满足 `Send` 约束。这比 Java 的 `synchronized` 或 Go 的 `chan` 更根本：Rust 在类型层面消除数据竞争，而非运行时检测。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/marker/trait.Send.html)]
 
 ### 10.2 边界测试：trait 对象的安全性约束（编译错误）
 
@@ -605,7 +605,7 @@ impl Service {
 }
 ```
 
-> **修正**: 依赖注入（DI）在 Rust 中通常通过**泛型**（静态分发）或 **trait object**（动态分发）实现。泛型无运行时开销，但代码膨胀；trait object 有 vtable 间接开销（约 1-2 个指针解引用），但二进制更小。上述代码使用 `Box<dyn Repository>` 实现 DI，每次 `find` 调用有虚函数开销。在性能关键路径上，应使用泛型：`struct Service<R: Repository> { repo: R }`。Rust 的类型系统允许在编译期选择：开发时使用 trait object（快速迭代），发布时重构为泛型（性能优化）。这与 Java 的接口（总是动态分发，JIT 可能内联）或 C++ 的模板（总是静态分发）不同——Rust 提供了两种机制，让开发者根据场景选择。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)] · [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
+> **修正**: 依赖注入（DI）在 Rust 中通常通过**泛型**（静态分发）或 **trait object**（动态分发）实现。泛型无运行时开销，但代码膨胀；trait object 有 vtable 间接开销（约 1-2 个指针解引用（Reference）），但二进制更小。上述代码使用 `Box<dyn Repository>` 实现 DI，每次 `find` 调用有虚函数开销。在性能关键路径上，应使用泛型：`struct Service<R: Repository> { repo: R }`。Rust 的类型系统允许在编译期选择：开发时使用 trait object（快速迭代），发布时重构为泛型（性能优化）。这与 Java 的接口（总是动态分发，JIT 可能内联）或 C++ 的模板（总是静态分发）不同——Rust 提供了两种机制，让开发者根据场景选择。[来源: [The Rust Programming Language](LINK_PLACEHOLDER)] · [来源: [Rust Performance Book](LINK_PLACEHOLDER)]
 
 ### 10.5 边界测试：过度工程化的类型状态机（编译复杂度爆炸）
 
@@ -630,7 +630,7 @@ impl HttpRequest<Unsent> {
 // 若有 5 个状态和 10 个转换，需 50 个 impl 块
 ```
 
-> **修正**: 类型状态（Typestate）模式将运行时状态检查移至编译期，但**状态机复杂度**随状态数指数增长。5 个状态 × 10 个转换 = 50 个 `impl` 块，维护困难。替代方案：1) 简化状态空间（合并相似状态）；2) 使用枚举状态 + 运行时检查（`match` + `panic!`），适用于复杂状态机；3) 使用宏生成重复实现（`macro_rules!`）。设计原则：类型状态用于**关键路径**（如 `File<Open>` vs `File<Closed>`），普通状态机用枚举。这与 Rust 的"零成本抽象"哲学一致——编译期检查的代价是编译时间增加，而非运行时。这与 Haskell 的 GADT 类型状态或 Idris 的依赖类型状态机类似——Rust 的 PhantomData 是轻量类型状态实现，但复杂度限制在工业规模系统中需权衡。[来源: [Typestate Pattern in Rust](https://cliffle.com/blog/rust-typestate/)] · [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
+> **修正**: 类型状态（Typestate）模式将运行时状态检查移至编译期，但**状态机复杂度**随状态数指数增长。5 个状态 × 10 个转换 = 50 个 `impl` 块，维护困难。替代方案：1) 简化状态空间（合并相似状态）；2) 使用枚举（Enum）状态 + 运行时检查（`match` + `panic!`），适用于复杂状态机；3) 使用宏（Macro）生成重复实现（`macro_rules!`）。设计原则：类型状态用于**关键路径**（如 `File<Open>` vs `File<Closed>`），普通状态机用枚举。这与 Rust 的"零成本抽象"哲学一致——编译期检查的代价是编译时间增加，而非运行时。这与 Haskell 的 GADT 类型状态或 Idris 的依赖类型状态机类似——Rust 的 PhantomData 是轻量类型状态实现，但复杂度限制在工业规模系统中需权衡。[来源: [Typestate Pattern in Rust](LINK_PLACEHOLDER)] · [来源: [Rust Design Patterns](LINK_PLACEHOLDER)]
 
 ### 10.3 边界测试：过度泛型化导致的单态化膨胀（编译后体积爆炸）
 
@@ -652,7 +652,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的**单态化**（monomorphization）为每个具体类型生成独立的机器码。`process<T>` 被调用 8 次（7 种不同类型），生成 8 份代码。这在泛型密集型代码中（如 `Vec<T>`、迭代器适配器）导致二进制膨胀。缓解：1) **动态分发**：`fn process(x: &dyn Display)`（一份代码，vtable 查找）；2) **泛型约束**：限制类型参数的使用场景；3) `cargo bloat` 分析二进制体积。设计原则：公共 API 使用 `&dyn Trait` 或 `impl Trait`（返回类型），内部实现使用泛型（性能关键路径）。这与 C++ 的模板（同样单态化，但编译器可能共享相同布局的实例化）或 Java 的泛型（类型擦除，无单态化）不同——Rust 的单态化提供零成本抽象，但体积代价需权衡。[来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)] · [来源: [cargo-bloat](https://github.com/RazrFalcon/cargo-bloat)]
+> **修正**: Rust 的**单态化**（monomorphization）为每个具体类型生成独立的机器码。`process<T>` 被调用 8 次（7 种不同类型），生成 8 份代码。这在泛型密集型代码中（如 `Vec<T>`、迭代器（Iterator）适配器）导致二进制膨胀。缓解：1) **动态分发**：`fn process(x: &dyn Display)`（一份代码，vtable 查找）；2) **泛型约束**：限制类型参数的使用场景；3) `cargo bloat` 分析二进制体积。设计原则：公共 API 使用 `&dyn Trait` 或 `impl Trait`（返回类型），内部实现使用泛型（性能关键路径）。这与 C++ 的模板（同样单态化，但编译器可能共享相同布局的实例化）或 Java 的泛型（类型擦除，无单态化）不同——Rust 的单态化提供零成本抽象，但体积代价需权衡。[来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)] · [来源: [cargo-bloat](https://github.com/RazrFalcon/cargo-bloat)]
 > **过渡**: Rust 系统设计原则与国际权威对齐 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 系统设计原则与国际权威对齐 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 系统设计原则与国际权威对齐 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
@@ -672,7 +672,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-意味着可以在不牺牲运行时性能的前提下使用高级抽象（迭代器、闭包、泛型）。编译器通过单态化和内联优化将抽象消除为与手写底层代码等价的机器码。
+意味着可以在不牺牲运行时性能的前提下使用高级抽象（迭代器（Iterator）、闭包（Closures）、泛型）。编译器通过单态化（Monomorphization）和内联优化将抽象消除为与手写底层代码等价的机器码。
 </details>
 
 ---
@@ -684,14 +684,14 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-Tokio 的异步任务切换成本远低于 OS 线程（~100ns vs ~1µs+），单线程可处理数万并发连接，内存占用更低，适合高并发 IO 密集型服务。
+Tokio 的异步（Async）任务切换成本远低于 OS 线程（~100ns vs ~1µs+），单线程可处理数万并发连接，内存占用更低，适合高并发 IO 密集型服务。
 </details>
 
 ---
 
 ### 测验 3：Rust 的 `trait` 系统在解耦模块时有什么优势？（理解层）
 
-**题目**: Rust 的 `trait` 系统在解耦模块时有什么优势？
+**题目**: Rust 的 `trait` 系统在解耦模块（Module）时有什么优势？
 
 <details>
 <summary>✅ 答案与解析</summary>

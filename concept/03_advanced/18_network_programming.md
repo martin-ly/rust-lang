@@ -15,7 +15,7 @@
 > Async Programming. Core Rust concept covering mechanism analysis, async/await patterns, network programming.
 > **受众**: [专家]
 > **Bloom 层级**: 应用 → 分析
-> **定位**: 系统分析 Rust **网络编程**的核心范式——从 Tokio 运行时下的 TCP/UDP 异步（Async） IO，到 socket 编程的底层细节，再到 Tower 服务抽象的设计哲学，建立从"怎么写"到"为什么这样设计"的完整认知框架。
+> **定位**: 系统分析 Rust **网络编程**的核心范式——从 Tokio 运行时（Runtime）下的 TCP/UDP 异步（Async） IO，到 socket 编程的底层细节，再到 Tower 服务抽象的设计哲学，建立从"怎么写"到"为什么这样设计"的完整认知框架。
 > **前置概念**: [Async/Await](./02_async.md) · [Concurrency](./01_concurrency.md) · [Traits](../02_intermediate/01_traits.md)
 > **后置概念**: [Web Frameworks](../06_ecosystem/27_web_frameworks.md) · [Lock-free](./16_lock_free.md)
 
@@ -40,7 +40,7 @@
 
 ## 📑 目录
 
-- [Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象](#rust-网络编程tokio-tcpudp异步-io-与-tower-服务抽象)
+- [Rust 网络编程：Tokio TCP/UDP、异步（Async） IO 与 Tower 服务抽象](LINK_PLACEHOLDER)
   - [📑 目录](#-目录)
   - [一、权威定义与核心概念](#一权威定义与核心概念)
     - [1.1 异步网络 IO 模型](#11-异步网络-io-模型)
@@ -67,11 +67,11 @@
   - [相关概念文件](#相关概念文件)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
-    - [10.3 边界测试：异步 TCP 的 `split` 与 `reunite` 的所有权（编译错误）](#103-边界测试异步-tcp-的-split-与-reunite-的所有权编译错误)
-    - [10.4 边界测试：缓冲区大小与 MTU 的匹配（运行时性能问题）](#104-边界测试缓冲区大小与-mtu-的匹配运行时性能问题)
+    - [10.3 边界测试：异步 TCP 的 `split` 与 `reunite` 的所有权（Ownership）（编译错误）](LINK_PLACEHOLDER)
+    - [10.4 边界测试：缓冲区大小与 MTU 的匹配（运行时（Runtime）性能问题）](LINK_PLACEHOLDER)
     - [10.3 边界测试：`TcpStream` 的 `set_nonblocking` 与 async 混用（运行时错误）](#103-边界测试tcpstream-的-set_nonblocking-与-async-混用运行时错误)
     - [10.4 边界测试：TcpStream 的同步读写与 async 混用（编译错误/运行时死锁）](#104-边界测试tcpstream-的同步读写与-async-混用编译错误运行时死锁)
-    - [10.7 边界测试：不可变借用与可变借用的冲突](#107-边界测试不可变借用与可变借用的冲突)
+    - [10.7 边界测试：不可变借用（Mutable Borrow）与可变借用的冲突](LINK_PLACEHOLDER)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`tokio::net::TcpListener::bind(...).await` 与 `std::net::TcpListener::bind(...)` 在阻塞行为上有什么区别？（理解层）](#测验-1tokionettcplistenerbindawait-与-stdnettcplistenerbind-在阻塞行为上有什么区别理解层)
     - [测验 2：在 async 函数中直接调用 `std::thread::sleep` 会有什么后果？（理解层）](#测验-2在-async-函数中直接调用-stdthreadsleep-会有什么后果理解层)
@@ -261,8 +261,8 @@ async fn fixed(stream: TcpStream) {
 
 > **修正**:
 > Tokio 的 `TcpStream` 提供两种分裂方式：
-> `split()`（返回 `&mut ReadHalf` / `&mut WriteHalf`，借用原流）和 `into_split()`（返回拥有所有权的 `OwnedReadHalf` / `OwnedWriteHalf`，消耗原流）。
-> `split()` 要求原流在分裂期间保持存活，且分裂引用不能跨 await 点（因 `&mut` 不能 Send）。
+> `split()`（返回 `&mut ReadHalf` / `&mut WriteHalf`，借用（Borrowing）原流）和 `into_split()`（返回拥有所有权（Ownership）的 `OwnedReadHalf` / `OwnedWriteHalf`，消耗原流）。
+> `split()` 要求原流在分裂期间保持存活，且分裂引用（Reference）不能跨 await 点（因 `&mut` 不能 Send）。
 > `into_split()` 将流拆分为两个独立对象，各自拥有内部 `Arc` 引用（Reference），可安全移动到不同任务。
 > [来源: [Tokio Documentation](https://docs.rs/tokio/)]
 
@@ -287,7 +287,7 @@ fn fixed() {
 
 > **修正**:
 > Rust 的网络地址类型严格区分 IPv4（`SocketAddrV4`、`Ipv4Addr`）和 IPv6（`SocketAddrV6`、`Ipv6Addr`），两者是不同的类型，不能隐式转换。
-> `SocketAddr` 是一个枚举，可持有 V4 或 V6 地址。`TcpListener::bind` 接受 `ToSocketAddrs` trait 的实现，因此可传入 `"127.0.0.1:8080"`、`SocketAddrV4` 或 `SocketAddr`。
+> `SocketAddr` 是一个枚举（Enum），可持有 V4 或 V6 地址。`TcpListener::bind` 接受 `ToSocketAddrs` trait 的实现，因此可传入 `"127.0.0.1:8080"`、`SocketAddrV4` 或 `SocketAddr`。
 > 这种严格类型区分避免了 C 中 `sockaddr` 指针强制转换导致的地址族混淆漏洞。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 > **[Tower Service Trait]** The Service trait is an abstraction of a function of the form `fn(Request) -> Future<Output = Response>`.
@@ -374,7 +374,7 @@ async fn main() -> tokio::io::Result<()> {
 }
 ```
 
-> **代码解读**: `tokio::spawn` 将每个连接的处理逻辑提交为独立的**异步任务**，这些任务由 Tokio 的线程池协作调度。任务的创建是轻量的（~几百字节），远小于 OS 线程。
+> **代码解读**: `tokio::spawn` 将每个连接的处理逻辑提交为独立的**异步（Async）任务**，这些任务由 Tokio 的线程池协作调度。任务的创建是轻量的（~几百字节），远小于 OS 线程。
 > [来源: [Tokio Spawning Tasks](https://tokio.rs/tokio/tutorial/spawning)]
 
 ---
@@ -639,7 +639,7 @@ graph LR
   > [来源: [RFC 768 — UDP](https://tools.ietf.org/html/rfc768)]
 ```
 
-> **层次一致性**: 反命题分析区分了**并发**（任务交替执行）与**并行**（任务同时执行）——async/await 是并发工具，多线程 Runtime 才提供并行。
+> **层次一致性（Coherence）**: 反命题分析区分了**并发**（任务交替执行）与**并行**（任务同时执行）——async/await 是并发工具，多线程 Runtime 才提供并行。
 > [来源: [Rust Async Book — Async vs Threads](https://rust-lang.github.io/async-book//01_getting_started/02_why_async.html)]
 
 ---
@@ -731,7 +731,7 @@ graph LR
 | [Hyper](https://hyper.rs/) | ✅ 二级 | Rust HTTP 实现，基于 Tokio |
 | [Linux socket man pages](https://man7.org/linux/man-pages/man2/socket.2.html) | ✅ 三级 | Linux socket 系统调用手册 |
 | [AFIT（async fn in trait，Rust 1.75.0+ 稳定） crate](<https://docs.rs/AFIT（async> fn in trait，Rust 1.75.0+ 稳定）/latest/async_trait/) | ✅ 三级 | trait 中 async fn 的过渡方案 |
-| [pin-project crate](https://docs.rs/pin-project/latest/pin_project/) | ✅ 三级 | 自引用结构体的 Pin 投影 |
+| [pin-project crate](LINK_PLACEHOLDER) | ✅ 三级 | 自引用（Reference）结构体（Struct）的 Pin 投影 |
 | [Tokio TCP Docs](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html) | ✅ 一级 | TcpListener API 文档 |
 | [Tokio UDP Docs](https://docs.rs/tokio/latest/tokio/net/struct.UdpSocket.html) | ✅ 一级 | UdpSocket API 文档 |
 
@@ -801,7 +801,7 @@ async fn echo(stream: TcpStream) {
 }
 ```
 
-> **修正**: `TcpStream::split` 将双向流拆分为独立的读半和写半，允许并发读写（如一个任务读，一个任务写）。`split` 消耗 `TcpStream`，返回的 `ReadHalf` 和 `WriteHalf` 是独立的类型，不可复制。`reunite` 在两者都未 drop 时恢复原始的 `TcpStream`。这与 `TcpStream::into_split`（返回 `OwnedReadHalf` 和 `OwnedWriteHalf`，可发送到不同任务）或标准库的 `std::net::TcpStream`（`try_clone` 复制文件描述符）不同——tokio 的 `split` 是零成本的借用拆分，`into_split` 是引用计数的所有权拆分。选择取决于并发模型：单任务内并发用 `split`，跨任务用 `into_split`。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> **修正**: `TcpStream::split` 将双向流拆分为独立的读半和写半，允许并发读写（如一个任务读，一个任务写）。`split` 消耗 `TcpStream`，返回的 `ReadHalf` 和 `WriteHalf` 是独立的类型，不可复制。`reunite` 在两者都未 drop 时恢复原始的 `TcpStream`。这与 `TcpStream::into_split`（返回 `OwnedReadHalf` 和 `OwnedWriteHalf`，可发送到不同任务）或标准库的 `std::net::TcpStream`（`try_clone` 复制文件描述符）不同——tokio 的 `split` 是零成本的借用（Borrowing）拆分，`into_split` 是引用计数的所有权拆分。选择取决于并发模型：单任务内并发用 `split`，跨任务用 `into_split`。[来源: [Tokio Documentation](LINK_PLACEHOLDER)] · [来源: [The Rust Programming Language](LINK_PLACEHOLDER)]
 
 ### 10.4 边界测试：缓冲区大小与 MTU 的匹配（运行时性能问题）
 
@@ -939,7 +939,7 @@ Tokio 版本是异步的，`bind` 本身通常不阻塞，但 `accept` 会返回
 
 ## 认知路径
 
-> **认知路径**: 从 L0 基础概念出发，经由本节的 **Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+> **认知路径**: 从 L0 基础概念出发，经由本节的 **Rust 网络编程：Tokio TCP/UDP、异步（Async） IO 与 Tower 服务抽象** 核心原理，通向 L2 进阶模式与 L3 工程实践。
 
 ### 核心推理链
 
@@ -951,11 +951,11 @@ Tokio 版本是异步的，`bind` 本身通常不阻塞，但 `accept` 会返回
 
 > 异步 I/O 安全 ⟸ mio/epoll 抽象 ⟸ 事件驱动状态机
 > 协议解析健壮 ⟸ 字节流边界 ⟸ 反序列化安全
-> **过渡**: 掌握 Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

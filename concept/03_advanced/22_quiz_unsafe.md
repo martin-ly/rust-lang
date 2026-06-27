@@ -9,6 +9,7 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
 
+> **后置概念**: N/A
 ---
 
 > **来源**:
@@ -61,7 +62,7 @@ r1 is: 5
 r2 is: 5
 ```
 
-**解析**：代码创建了一个不可变原始指针 `r1` 和一个可变原始指针 `r2`，同时指向同一数据。虽然这在 `unsafe` 块中允许，但违反了 Rust 的**别名规则**（Aliasing XOR Mutation）。
+**解析**：代码创建了一个不可变原始指针（Raw Pointer） `r1` 和一个可变原始指针 `r2`，同时指向同一数据。虽然这在 `unsafe` 块中允许，但违反了 Rust 的**别名规则**（Aliasing XOR Mutation）。
 
 **Miri 检测**：
 
@@ -72,13 +73,13 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri run
 
 **`unsafe` 的五大操作**：
 
-1. 解引用原始指针
+1. 解引用（Reference）原始指针（Raw Pointer）
 2. 调用 `unsafe` 函数或方法
 3. 访问或修改可变的静态变量
 4. 实现 `unsafe` trait
 5. 访问 `union` 的字段
 
-**关键原则**：`unsafe` 不关闭借用检查器——它允许你执行编译器无法验证的操作，但**你**必须保证安全性。
+**关键原则**：`unsafe` 不关闭借用（Borrowing）检查器——它允许你执行编译器无法验证的操作，但**你**必须保证安全性。
 
 **知识点**：`unsafe` 是"信任程序员"的契约，不是"关闭检查器"。每个 `unsafe` 块都应附带安全不变量的注释。[→ Unsafe 详解](./03_unsafe.md)
 
@@ -155,17 +156,17 @@ fn main() {
 
 **答案**：✅ 能编译，但**运行期可能 segfault**。
 
-**解析**：`0x12345 as *const i32` 创建了一个**悬垂/无效原始指针**。解引用它是未定义行为（UB）。
+**解析**：`0x12345 as *const i32` 创建了一个**悬垂/无效原始指针**。解引用（Reference）它是未定义行为（UB）。
 
-**原始指针 vs 引用（Reference）**：
+**原始指针（Raw Pointer） vs 引用（Reference）**：
 
-| 特性 | 原始指针 `*const T` / `*mut T` | 引用 `&T` / `&mut T` |
+| 特性 | 原始指针 `*const T` / `*mut T` | 引用（Reference） `&T` / `&mut T` |
 |:---|:---|:---|
 | 可为 null | ✅ | ❌ |
 | 可悬垂 | ✅ | ❌（编译期保证） |
 | 可别名 | ✅（多个 `*mut` 同时存在） | ❌ |
 | 自动解引用 | ❌ | ✅ |
-| 生命周期检查 | ❌ | ✅ |
+| 生命周期（Lifetimes）检查 | ❌ | ✅ |
 
 **安全创建原始指针的方式**：
 
@@ -202,7 +203,7 @@ fn main() {
 
 **答案**：✅ 能编译，但 **Miri 会报告 Undefined Behavior**。
 
-**解析**：`v.set_len(0)` 后，`Vec` 认为自己没有元素，但底层内存仍然有效。然而，`ptr` 是从 `v` 借用的，当 `v` 重新获得所有权时（函数结束），`ptr` 的使用可能与 `v` 的 drop 冲突。
+**解析**：`v.set_len(0)` 后，`Vec` 认为自己没有元素，但底层内存仍然有效。然而，`ptr` 是从 `v` 借用（Borrowing）的，当 `v` 重新获得所有权（Ownership）时（函数结束），`ptr` 的使用可能与 `v` 的 drop 冲突。
 
 **更深层问题**：即使 Miri 不报错，这种代码也是极度危险的。正确做法：
 
@@ -225,7 +226,7 @@ fn main() {
 }
 ```
 
-**知识点**：`Vec::from_raw_parts` 和 `mem::forget` 是构建自定义集合的核心工具，但也是 UB 高发区。每次使用都必须确保内存生命周期正确。[→ Unsafe 模式详解](./12_unsafe_rust_patterns.md)
+**知识点**：`Vec::from_raw_parts` 和 `mem::forget` 是构建自定义集合的核心工具，但也是 UB 高发区。每次使用都必须确保内存生命周期（Lifetimes）正确。[→ Unsafe 模式详解](LINK_PLACEHOLDER)
 
 </details>
 
@@ -262,7 +263,7 @@ fn main() {
 
 **为什么 `Cell` 不是 `Sync`**：
 
-`Cell::set` 在修改值时不进行任何同步（无锁、无原子操作）。如果两个线程同时通过 `&Cell` 调用 `set`，会导致数据竞争。
+`Cell::set` 在修改值时不进行任何同步（无锁、无原子操作（Atomic Operations））。如果两个线程同时通过 `&Cell` 调用 `set`，会导致数据竞争。
 
 **正确方案**：使用 `Mutex<Cell<i32>>` 或 `AtomicI32`：
 
@@ -276,7 +277,7 @@ struct MyType {
 // AtomicI32 自动实现 Send + Sync，无需 unsafe impl
 ```
 
-**关键原则**：`unsafe impl Send/Sync` 是最危险的 `unsafe` 操作之一——它允许编译器相信一个类型的线程安全性，若保证错误则会导致整个程序的并发安全崩溃。
+**关键原则**：`unsafe impl Send/Sync` 是最危险的 `unsafe` 操作之一——它允许编译器相信一个类型的线程安全性，若保证错误则会导致整个程序的并发安全（Concurrency Safety）崩溃。
 
 **知识点**：永远不要为包含非线程安全内部可变性的类型 `unsafe impl Sync`。[→ 并发模型详解](./01_concurrency.md)
 
@@ -308,7 +309,7 @@ fn main() {
 **潜在问题**：
 
 1. **函数签名不匹配**：如果 C 的 `abs` 实际接受 `long`（64 位），但声明为 `i32`（32 位），参数传递错误
-2. **函数不存在**：链接时或运行时可能找不到符号
+2. **函数不存在**：链接时或运行时（Runtime）可能找不到符号
 3. **调用约定错误**：`extern "C"` 使用 C 调用约定，但如果实际函数使用 `stdcall` 或其他约定，栈会损坏
 
 **更安全的做法**——使用 `libc` crate：
@@ -378,7 +379,7 @@ unsafe {
 
 **使用场景**：
 
-- 与 C 结构体交互（C 允许部分初始化）
+- 与 C 结构体（Struct）交互（C 允许部分初始化）
 - 实现 `Vec::with_capacity`（分配内存但延迟初始化）
 - 构建自定义集合类型
 
@@ -416,7 +417,7 @@ After write: 43
 
 **解析**：
 
-- `std::ptr::read(ptr)`：从 `ptr` 指向的地址**按位复制**值（不获取所有权）
+- `std::ptr::read(ptr)`：从 `ptr` 指向的地址**按位复制**值（不获取所有权（Ownership））
 - `std::ptr::write(ptr, val)`：将值**按位写入** `ptr` 指向的地址（不 drop 旧值）
 
 **危险对比**：

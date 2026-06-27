@@ -47,10 +47,10 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：日志与可观测性的编译错误](#十边界测试日志与可观测性的编译错误)
-    - [10.1 边界测试：`tracing` span 的生命周期（编译错误）](#101-边界测试tracing-span-的生命周期编译错误)
-    - [10.2 边界测试：OpenTelemetry 的全局提供者设置（运行时 panic）](#102-边界测试opentelemetry-的全局提供者设置运行时-panic)
+    - [10.1 边界测试：`tracing` span 的生命周期（Lifetimes）（编译错误）](LINK_PLACEHOLDER)
+    - [10.2 边界测试：OpenTelemetry 的全局提供者设置（运行时（Runtime） panic）](LINK_PLACEHOLDER)
     - [10.3 边界测试：结构化日志的字段类型不匹配（运行时错误）](#103-边界测试结构化日志的字段类型不匹配运行时错误)
-    - [10.4 边界测试：span 的生命周期与异步代码（编译错误/运行时丢失）](#104-边界测试span-的生命周期与异步代码编译错误运行时丢失)
+    - [10.4 边界测试：span 的生命周期与异步（Async）代码（编译错误/运行时丢失）](LINK_PLACEHOLDER)
     - [10.5 边界测试：`tracing` 的 span 泄漏与内存增长（运行时资源泄漏）](#105-边界测试tracing-的-span-泄漏与内存增长运行时资源泄漏)
     - [10.3 边界测试：tracing 的 span 生命周期与异步代码跨越 await（运行时泄漏）](#103-边界测试tracing-的-span-生命周期与异步代码跨越-await运行时泄漏)
     - [补充定理链](#补充定理链)
@@ -97,7 +97,7 @@ graph TD
 > **认知功能**: 此图展示可观测性三支柱在 Rust 生态中的**实现映射**。logs 记录离散事件，metrics 聚合数值趋势，traces 追踪请求全链路——三者互补，缺一不可。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 生产环境应同时部署三种可观测性手段，覆盖不同时间粒度和分析维度。
-> **关键洞察**: Rust 的**零成本抽象**哲学同样适用于可观测性——tracing 的 Span 在 release 模式下可通过编译期开关完全消除开销。
+> **关键洞察**: Rust 的**零成本抽象（Zero-Cost Abstraction）**哲学同样适用于可观测性——tracing 的 Span 在 release 模式下可通过编译期开关完全消除开销。
 > [来源: [Google SRE Book — Monitoring](https://sre.google/sre-book/monitoring-distributed-systems/)] · [来源: [OpenTelemetry Specification](https://opentelemetry.io/docs/specs/otel/)]
 
 **可编译示例** — 标准库日志输出：
@@ -269,8 +269,8 @@ sequenceDiagram
 ```
 
 > **认知功能**: 此序列图展示**分布式追踪**在微服务架构中的工作原理——trace ID 和 span context 通过 HTTP/gRPC header 传播，串联起跨服务的请求链路。
-> **使用建议**: 在异步 Rust 服务中使用 `tracing-opentelemetry` 自动集成 OpenTelemetry，无需手动管理 trace context。
-> **关键洞察**: Rust 的异步模型（Future + Pin）与分布式追踪天然契合——tracing Span 的生命周期与 Future 的 poll 周期对齐，实现**零侵入**的上下文传播。
+> **使用建议**: 在异步（Async） Rust 服务中使用 `tracing-opentelemetry` 自动集成 OpenTelemetry，无需手动管理 trace context。
+> **关键洞察**: Rust 的异步模型（Future + Pin）与分布式追踪天然契合——tracing Span 的生命周期（Lifetimes）与 Future 的 poll 周期对齐，实现**零侵入**的上下文传播。
 > [来源: [OpenTelemetry Context Propagation](https://opentelemetry.io/docs/specs/otel/context/api-propagators/)]
 
 ---
@@ -437,7 +437,7 @@ graph TD
 ## 相关概念文件
 
 - [Async](../03_advanced/02_async.md) — 异步编程（tracing 的核心用例）
-- [Error Handling](../02_intermediate/04_error_handling.md) — 错误处理（与日志紧密关联）
+- [Error Handling](../02_intermediate/04_error_handling.md) — 错误处理（Error Handling）（与日志紧密关联）
 - [WebAssembly](./11_webassembly.md) — WebAssembly 生态（tracing 的 WASM 限制）
 
 ---
@@ -489,7 +489,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: `tracing` crate 的结构化日志使用 **span** 表示操作上下文。创建 span（`info_span!`）不自动进入——必须调用 `.enter()` 将当前线程的上下文关联到 span。`_guard` 在 drop 时自动退出 span，确保即使 panic 也能正确关闭。这与 OpenTelemetry 的 span 或 Go 的 context 类似，但 Rust 的所有权系统保证 span 生命周期的正确性——不能忘记退出 span（资源泄漏），不能访问已退出的 span。[来源: [tracing Documentation](https://docs.rs/tracing/)]
+> **修正**: `tracing` crate 的结构化日志使用 **span** 表示操作上下文。创建 span（`info_span!`）不自动进入——必须调用 `.enter()` 将当前线程的上下文关联到 span。`_guard` 在 drop 时自动退出 span，确保即使 panic 也能正确关闭。这与 OpenTelemetry 的 span 或 Go 的 context 类似，但 Rust 的所有权（Ownership）系统保证 span 生命周期的正确性——不能忘记退出 span（资源泄漏），不能访问已退出的 span。[来源: [tracing Documentation](https://docs.rs/tracing/)]
 
 ### 10.2 边界测试：OpenTelemetry 的全局提供者设置（运行时 panic）
 
@@ -512,7 +512,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: OpenTelemetry 的全局 API 要求在首次使用前先设置 provider。这与 Go 的 `init()` 或 Java 的静态初始化不同——Rust 没有运行时自动初始化，必须显式调用 `set_tracer_provider`。忘记初始化会导致 panic 或静默丢弃 span。在大型应用中，初始化顺序管理（init order）是常见问题——使用 `once_cell::Lazy` 或 `std::sync::OnceLock` 可确保延迟初始化且线程安全。[来源: [OpenTelemetry Rust](https://docs.rs/opentelemetry/)]
+> **修正**: OpenTelemetry 的全局 API 要求在首次使用前先设置 provider。这与 Go 的 `init()` 或 Java 的静态初始化不同——Rust 没有运行时（Runtime）自动初始化，必须显式调用 `set_tracer_provider`。忘记初始化会导致 panic 或静默丢弃 span。在大型应用中，初始化顺序管理（init order）是常见问题——使用 `once_cell::Lazy` 或 `std::sync::OnceLock` 可确保延迟初始化且线程安全。[来源: [OpenTelemetry Rust](https://docs.rs/opentelemetry/)]
 
 ### 10.3 边界测试：结构化日志的字段类型不匹配（运行时错误）
 
@@ -529,7 +529,7 @@ fn main() {
 }
 ```
 
-> **修正**: `tracing` crate 支持结构化日志（key-value 对），但字段的格式化方式（`%` Display、`?` Debug、无修饰符的 `Value` trait）影响输出格式。在日志聚合系统中，同一字段的不一致格式导致解析失败或类型冲突。最佳实践：1) 定义统一的字段类型（`user_id` 总是 `u64`，用无修饰符形式）；2) 使用 `tracing` 的 `valuable` 集成（类型化结构化数据）；3) 在日志 schema 中显式声明字段类型。这与 OpenTelemetry 的 attribute 类型系统（`string`、`int`、`bool`、`double`）或 JSON 日志（无类型，解析器推断）相关——结构化日志的价值在于机器可解析，类型一致性是前提。[来源: [tracing Documentation](https://docs.rs/tracing/)] · [来源: [OpenTelemetry Specification](https://opentelemetry.io/docs/specs/otel/logs/)]
+> **修正**: `tracing` crate 支持结构化日志（key-value 对），但字段的格式化方式（`%` Display、`?` Debug、无修饰符的 `Value` trait）影响输出格式。在日志聚合系统中，同一字段的不一致格式导致解析失败或类型冲突。最佳实践：1) 定义统一的字段类型（`user_id` 总是 `u64`，用无修饰符形式）；2) 使用 `tracing` 的 `valuable` 集成（类型化结构化数据）；3) 在日志 schema 中显式声明字段类型。这与 OpenTelemetry 的 attribute 类型系统（Type System）（`string`、`int`、`bool`、`double`）或 JSON 日志（无类型，解析器推断）相关——结构化日志的价值在于机器可解析，类型一致性（Coherence）是前提。[来源: [tracing Documentation](https://docs.rs/tracing/)] · [来源: [OpenTelemetry Specification](https://opentelemetry.io/docs/specs/otel/logs/)]
 
 ### 10.4 边界测试：span 的生命周期与异步代码（编译错误/运行时丢失）
 
@@ -550,7 +550,7 @@ fn main() {
 }
 ```
 
-> **修正**: `tracing` 的 span 代表一个上下文范围（如 HTTP 请求、数据库事务），需显式 `enter()` 或 `.instrument()` 附加到异步任务。未进入的 span 不记录任何事件，导致日志缺乏上下文（难以关联同一请求的事件）。异步代码中的 span 传播：1) `.instrument(span)` 将 span 绑定到 future；2) `#[instrument]` 属性宏自动包装函数；3) `tracing-futures` 的 `WithSubscriber` 传播 subscriber。这与 OpenTelemetry 的 Context（需显式传播）或 Java 的 MDC（Mapped Diagnostic Context，ThreadLocal，不适用于异步）类似——异步代码打破了线程与请求的 1:1 映射，上下文传播需要显式机制。Rust 的 `tracing` 通过 `Instrument` trait 和 `#[instrument]` 宏简化了这一过程。[来源: [tracing Documentation](https://docs.rs/tracing/)] · [来源: [OpenTelemetry Rust](https://docs.rs/opentelemetry/)]
+> **修正**: `tracing` 的 span 代表一个上下文范围（如 HTTP 请求、数据库事务），需显式 `enter()` 或 `.instrument()` 附加到异步任务。未进入的 span 不记录任何事件，导致日志缺乏上下文（难以关联同一请求的事件）。异步代码中的 span 传播：1) `.instrument(span)` 将 span 绑定到 future；2) `#[instrument]` 属性宏（Macro）自动包装函数；3) `tracing-futures` 的 `WithSubscriber` 传播 subscriber。这与 OpenTelemetry 的 Context（需显式传播）或 Java 的 MDC（Mapped Diagnostic Context，ThreadLocal，不适用于异步）类似——异步代码打破了线程与请求的 1:1 映射，上下文传播需要显式机制。Rust 的 `tracing` 通过 `Instrument` trait 和 `#[instrument]` 宏简化了这一过程。[来源: [tracing Documentation](https://docs.rs/tracing/)] · [来源: [OpenTelemetry Rust](https://docs.rs/opentelemetry/)]
 
 ### 10.5 边界测试：`tracing` 的 span 泄漏与内存增长（运行时资源泄漏）
 
@@ -589,7 +589,7 @@ fn main() {
 }
 ```
 
-> **修正**: `tracing` 的 `Span::entered()` 返回 `Entered` guard，drop 时退出 span。在 async 代码中，guard 跨越 `await` 点：1) span 在任务挂起时不退出；2) 其他任务可能看到"活跃"的 span，但当前任务未执行；3) 分布式追踪中 trace 时长错误（包含挂起时间）。正确做法：1) `span.in_scope(|| { ... })` — 同步代码块；2) `.instrument(span)` — 异步 Future 的 span 绑定（进入 poll 时进入 span，poll 结束时退出）；3) `tracing::instrument` 宏 — 自动为 async fn 添加 instrument。这与 OpenTelemetry 的 span 管理或 Go 的 `context.WithTimeout` 类似——结构化追踪需严格的生命周期管理，异步代码尤其敏感。[来源: [tracing Documentation](https://docs.rs/tracing/)] · [来源: [OpenTelemetry Rust](https://github.com/open-telemetry/opentelemetry-rust)]
+> **修正**: `tracing` 的 `Span::entered()` 返回 `Entered` guard，drop 时退出 span。在 async 代码中，guard 跨越 `await` 点：1) span 在任务挂起时不退出；2) 其他任务可能看到"活跃"的 span，但当前任务未执行；3) 分布式追踪中 trace 时长错误（包含挂起时间）。正确做法：1) `span.in_scope(|| { ... })` — 同步代码块；2) `.instrument(span)` — 异步 Future 的 span 绑定（进入 poll 时进入 span，poll 结束时退出）；3) `tracing::instrument` 宏（Macro） — 自动为 async fn 添加 instrument。这与 OpenTelemetry 的 span 管理或 Go 的 `context.WithTimeout` 类似——结构化追踪需严格的生命周期管理，异步代码尤其敏感。[来源: [tracing Documentation](https://docs.rs/tracing/)] · [来源: [OpenTelemetry Rust](https://github.com/open-telemetry/opentelemetry-rust)]
 > **过渡**: 日志与可观测性：Rust 服务端监控生态 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 日志与可观测性：Rust 服务端监控生态 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 日志与可观测性：Rust 服务端监控生态 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

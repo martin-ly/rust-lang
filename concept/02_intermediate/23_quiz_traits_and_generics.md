@@ -13,6 +13,7 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
 
+> **后置概念**: [Async/Await](./AsyncAwait.md)
 ---
 
 > **来源**:
@@ -31,7 +32,7 @@
 ---
 
 > **Bloom 层级**: 理解 → 应用
-> **定位**: 嵌入式互动测验扩展——验证 L2 Trait 与泛型核心概念（trait 定义与实现、泛型约束、关联类型、trait 对象）的掌握程度。
+> **定位**: 嵌入式互动测验扩展——验证 L2 Trait 与泛型（Generics）核心概念（trait 定义与实现、泛型约束、关联类型、trait 对象）的掌握程度。
 > **使用方式**: 先独立思考答案，再点击展开核对解析。
 
 ---
@@ -78,7 +79,7 @@ impl Summary for Article {
 - **孤儿规则（Orphan Rule）**：trait 或类型至少有一个必须在当前 crate 中，才能写 `impl`
 - 与 Go interface 的区别：Rust trait 实现是显式的，Go interface 是隐式的
 
-**知识点**：trait 是 Rust 多态的核心机制，编译期通过单态化（monomorphization）实现零成本抽象。[→ Trait 详解](./01_traits.md)
+**知识点**：trait 是 Rust 多态的核心机制，编译期通过单态化（monomorphization）实现零成本抽象（Zero-Cost Abstraction）。[→ Trait 详解](./01_traits.md)
 
 </details>
 
@@ -167,7 +168,7 @@ fn main() {
 
 **答案**：✅ 能编译，输出 `Drawing circle`
 
-**解析**：`T: Drawable` 是**trait bound**（trait 约束），限制泛型参数 `T` 必须实现 `Drawable` trait。
+**解析**：`T: Drawable` 是**trait bound**（trait 约束），限制泛型（Generics）参数 `T` 必须实现 `Drawable` trait。
 
 **Trait bound 的多种写法**：
 
@@ -187,7 +188,7 @@ where
 
 **where 子句的优势**：约束与函数签名分离，可读性更好，支持更复杂的约束组合。
 
-**知识点**：trait bound 是 Rust 泛型的"类型类约束"，编译器通过它进行单态化生成具体代码。[→ 泛型详解](./02_generics.md)
+**知识点**：trait bound 是 Rust 泛型的"类型类约束"，编译器通过它进行单态化（Monomorphization）生成具体代码。[→ 泛型详解](./02_generics.md)
 
 </details>
 
@@ -212,7 +213,7 @@ fn main() {
 
 **答案**：✅ 能编译（需 `#[derive(Debug)]` 或确保类型实现 `Debug`）
 
-**解析**：`Option<T>` 和 `Result<T, E>` 是 Rust 标准库中的**泛型枚举**：
+**解析**：`Option<T>` 和 `Result<T, E>` 是 Rust 标准库中的**泛型枚举（Enum）**：
 
 ```rust
 enum Option<T> {
@@ -237,7 +238,7 @@ Option<&str>   // 编译期生成另一个版本
 
 对比 C++ 模板：Rust 泛型在类型检查阶段就验证约束，错误信息更清晰。
 
-**知识点**：泛型通过单态化实现零成本抽象——运行时没有类型擦除或虚函数调用的开销。[→ 泛型详解](./02_generics.md)
+**知识点**：泛型通过单态化（Monomorphization）实现零成本抽象（Zero-Cost Abstraction）——运行时（Runtime）没有类型擦除或虚函数调用的开销。[→ 泛型详解](LINK_PLACEHOLDER)
 
 </details>
 
@@ -347,11 +348,11 @@ Square
 | 特性 | `impl Trait` / 泛型（Generics） | `dyn Trait` |
 |:---|:---|:---|
 | 分发方式 | 静态分发（单态化） | 动态分发（虚表 vtable） |
-| 运行时开销 | 无 | 指针解引用 + 虚表查找 |
+| 运行时（Runtime）开销 | 无 | 指针解引用（Reference） + 虚表查找 |
 | 同质/异质集合 | 同质（编译期确定类型） | 异质（运行时确定类型） |
 | 代码体积 | 每种类型生成一份代码 | 一份代码处理所有类型 |
 
-**`draw_all(&[&c, &s])` 的关键**：`&c` 和 `&s` 是不同类型，但都可以通过 `&dyn Drawable` 统一引用。
+**`draw_all(&[&c, &s])` 的关键**：`&c` 和 `&s` 是不同类型，但都可以通过 `&dyn Drawable` 统一引用（Reference）。
 
 **注意**：`dyn Trait` 必须 behind a pointer（`&dyn`、`Box<dyn>`、`Rc<dyn>`），因为编译期不知道具体大小。
 
@@ -409,7 +410,7 @@ fn print_it<T: Sized>(t: T) {
 }
 ```
 
-所有泛型参数默认有 `T: Sized` 约束。要接受 trait 对象或切片，需使用 `?Sized`：
+所有泛型参数默认有 `T: Sized` 约束。要接受 trait 对象或切片（Slice），需使用 `?Sized`：
 
 ```rust
 fn print_it<T: ?Sized>(t: &T) {
@@ -552,7 +553,7 @@ impl Point<f32> {
 }
 ```
 
-**知识点**：Rust 允许为泛型结构体的特定实例类型提供额外方法，这是零成本抽象的典型案例。[→ 泛型详解](./02_generics.md)
+**知识点**：Rust 允许为泛型结构体（Struct）的特定实例类型提供额外方法，这是零成本抽象的典型案例。[→ 泛型详解](./02_generics.md)
 
 </details>
 
@@ -591,14 +592,14 @@ fn main() {
 
 | Trait | 调用方式 | 行为 | 适用类型 |
 |:---|:---|:---|:---|
-| `Copy` | 隐式（赋值、传参） | 按位复制 | 栈上标量、只含 `Copy` 字段的结构体 |
+| `Copy` | 隐式（赋值、传参） | 按位复制 | 栈上标量、只含 `Copy` 字段的结构体（Struct） |
 | `Clone` | 显式 `.clone()` | 自定义复制逻辑 | 堆数据（`String`、`Vec`）、深拷贝 |
 
 **关键区别**：`Copy` 是隐式的、不可重定义的；`Clone` 是显式的、可自定义的。
 
 **注意**：一个类型可以同时实现 `Copy` 和 `Clone`（`Clone` 的行为必须与 `Copy` 一致）。若尝试为含 `String` 的结构体 derive `Copy`，编译器会报错。
 
-**知识点**：`Copy` 标记"按位复制安全"，`Clone` 提供显式复制能力。理解两者的区别是管理所有权的关键。[→ 所有权详解](../01_foundation/01_ownership.md)
+**知识点**：`Copy` 标记"按位复制安全"，`Clone` 提供显式复制能力。理解两者的区别是管理所有权（Ownership）的关键。[→ 所有权详解](../01_foundation/01_ownership.md)
 
 </details>
 

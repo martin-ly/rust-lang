@@ -1,20 +1,20 @@
 > **内容分级**: [综述级]
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-> **本节关键术语**: 错误处理 (Error Handling) · Result · Option · 传播运算符 (? ) · 模式匹配错误 (Match on Result) — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: 错误处理 (Error Handling) · Result · Option · 传播运算符 (? ) · 模式匹配（Pattern Matching）错误 (Match on Result) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Rust 错误处理基础
 >
 > **EN**: Error Handling
 > **Summary**: Error Handling. Core Rust concept covering mechanism analysis, type system mechanics, error handling strategies.
-> **📎 交叉引用**
+> **📎 交叉引用（Reference）**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[错误处理基础](../../knowledge/02_intermediate/02_error_handling.md)
+> 本主题在 knowledge 中有系统化的知识索引：[错误处理（Error Handling）基础](LINK_PLACEHOLDER)
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 应用 Result/Option 错误传播模式
-> **定位**: 系统讲解 Rust 的错误处理机制——从 `Result` 和 `Option` 到 `?` 运算符，分析 Rust 如何将错误处理融入类型系统，实现编译期安全。
+> **定位**: 系统讲解 Rust 的错误处理（Error Handling）机制——从 `Result` 和 `Option` 到 `?` 运算符，分析 Rust 如何将错误处理融入类型系统（Type System），实现编译期安全。
 > **前置概念**: [Ownership](01_ownership.md) · [Type System](04_type_system.md) · [Control Flow](07_control_flow.md)
 > **后置概念**: [Error Handling](../02_intermediate/04_error_handling.md) ·
 > [Panic](../03_advanced/03_unsafe.md) ·
@@ -41,7 +41,7 @@
     - [2.2 map 与 and\_then](#22-map-与-and_then)
     - [2.3 组合模式](#23-组合模式)
   - [三、Panic 与不可恢复错误](#三panic-与不可恢复错误)
-    - [3.1 panic! 宏](#31-panic-宏)
+    - [3.1 panic! 宏（Macro）](LINK_PLACEHOLDER)
     - [3.2 unwrap 与 expect](#32-unwrap-与-expect)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -51,12 +51,12 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十二、边界测试：错误处理的编译错误](#十二边界测试错误处理的编译错误)
-    - [12.1 边界测试：`unwrap()` 在 `Result::Err` 上 panic（运行时错误）](#121-边界测试unwrap-在-resulterr-上-panic运行时错误)
+    - [12.1 边界测试：`unwrap()` 在 `Result::Err` 上 panic（运行时（Runtime）错误）](LINK_PLACEHOLDER)
     - [12.2 边界测试：`?` 在返回 `()` 的函数中使用（编译错误）](#122-边界测试-在返回--的函数中使用编译错误)
     - [10.3 边界测试：`Result` 与 `Option` 的混用（编译错误）](#103-边界测试result-与-option-的混用编译错误)
     - [10.4 边界测试：`catch_unwind` 与 `UnwindSafe`（编译错误）](#104-边界测试catch_unwind-与-unwindsafe编译错误)
     - [10.5 边界测试：`Result` 的 `unwrap_unchecked` 与 release 模式（运行时 UB）](#105-边界测试result-的-unwrap_unchecked-与-release-模式运行时-ub)
-    - [10.5 边界测试：生命周期参数的不匹配返回](#105-边界测试生命周期参数的不匹配返回)
+    - [10.5 边界测试：生命周期（Lifetimes）参数的不匹配返回](LINK_PLACEHOLDER)
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -599,7 +599,7 @@ graph TD
 ## 相关概念文件
 
 - [Error Handling](../02_intermediate/04_error_handling.md) — 进阶错误处理
-- [Type System](04_type_system.md) — 类型系统
+- [Type System](04_type_system.md) — 类型系统（Type System）
 - [Trait](../02_intermediate/01_traits.md) — Trait
 - [Logging](../06_ecosystem/13_logging_observability.md) — 日志
 
@@ -721,14 +721,14 @@ fn main() {
 
 > **修正**:
 >
-> `catch_unwind` 捕获 panic 并恢复执行，但要求闭包实现 `UnwindSafe`——保证 panic 不会破坏共享状态。
+> `catch_unwind` 捕获 panic 并恢复执行，但要求闭包（Closures）实现 `UnwindSafe`——保证 panic 不会破坏共享状态。
 > `&mut T` 不是 `UnwindSafe`，因为 panic 可能在 `push` 中途发生（`Vec` 内部指针已更新但长度未更新），导致 `Vec` 处于不一致状态。
 > 解决方案：
 >
 > 1) 使用 `AssertUnwindSafe` 包装（承诺手动保证安全）；
-> 2) 在闭包内 `clone` 数据；
-> 3) 使用 `std::panic::resume_unwind`。`UnwindSafe` 不是内存安全边界（unsafe 代码仍需保证 panic safety），而是防止逻辑不一致的标记 trait。
-> 这与 C++ 的异常安全（basic guarantee、strong guarantee、no-throw guarantee）理念相同，但 Rust 通过类型系统部分自动化。
+> 2) 在闭包（Closures）内 `clone` 数据；
+> 3) 使用 `std::panic::resume_unwind`。`UnwindSafe` 不是内存安全（Memory Safety）边界（unsafe 代码仍需保证 panic safety），而是防止逻辑不一致的标记 trait。
+> 这与 C++ 的异常安全（basic guarantee、strong guarantee、no-throw guarantee）理念相同，但 Rust 通过类型系统（Type System）部分自动化。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)] ·
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/panic/trait.UnwindSafe.html)]
 
@@ -769,9 +769,9 @@ fn main() {}
 ```
 
 > **修正**:
-> **生命周期标注**：
+> **生命周期（Lifetimes）标注**：
 >
-> 1) `&'a str` 表示引用至少存活 `'a`；
+> 1) `&'a str` 表示引用（Reference）至少存活 `'a`；
 > 2) 返回 `'a` 要求数据存活至少 `'a`；
 > 3) `y` 的 lifetime `'b` 可能短于 `'a`，返回会导致悬垂引用。
 >
@@ -807,14 +807,14 @@ fn main() {}
 | 定理 | 前提 | 结论 | 置信度 |
 | :--- | :--- | :--- | :--- |
 | Rust 错误处理基础 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| Rust 错误处理基础 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| Rust 错误处理基础 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | Rust 错误处理基础 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 错误传播安全 ⟸ ? 运算符自动转换 ⟸ Try trait
 > 错误类型精确 ⟸ thiserror/anyhow 分层 ⟸ 错误架构
 > **过渡**: 掌握 Rust 错误处理基础 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 Rust 错误处理基础 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: Rust 错误处理基础 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: Rust 错误处理基础 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

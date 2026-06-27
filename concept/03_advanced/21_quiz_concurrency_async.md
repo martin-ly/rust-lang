@@ -9,6 +9,7 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
 
+> **后置概念**: N/A
 ---
 
 > **来源**:
@@ -28,7 +29,7 @@
 ---
 
 > **Bloom 层级**: 分析 → 评价
-> **定位**: L3 嵌入式互动测验——验证并发模型（Send/Sync、Mutex/Arc、channel）与异步编程（Future、Pin、await）核心概念的掌握程度。
+> **定位**: L3 嵌入式互动测验——验证并发模型（Send/Sync、Mutex/Arc、channel）与异步（Async）编程（Future、Pin、await）核心概念的掌握程度。
 > **使用方式**: 先独立思考答案，再点击展开核对解析。
 
 ---
@@ -57,7 +58,7 @@ fn main() {
 
 **错误信息**：`Rc<i32> cannot be sent between threads safely`
 
-**解析**：`Rc<T>` 是**单线程引用计数**，未实现 `Send` trait，不能跨线程移动。
+**解析**：`Rc<T>` 是**单线程引用（Reference）计数**，未实现 `Send` trait，不能跨线程移动。
 
 **解决方案**——使用 `Arc<T>`（Atomic Reference Counted）：
 
@@ -79,8 +80,8 @@ fn main() {
 
 | Trait | 语义 | 实现条件 |
 |:---|:---|:---|
-| `Send` | 类型可以**跨线程转移所有权** | `T` 的所有权可以安全转移到另一个线程 |
-| `Sync` | 类型可以**跨线程共享引用**（`&T` 是 `Send`） | `T` 的内部状态访问是线程安全的 |
+| `Send` | 类型可以**跨线程转移所有权（Ownership）** | `T` 的所有权可以安全转移到另一个线程 |
+| `Sync` | 类型可以**跨线程共享引用（Reference）**（`&T` 是 `Send`） | `T` 的内部状态访问是线程安全的 |
 
 **组合**：
 
@@ -90,9 +91,9 @@ fn main() {
 | `Arc<T>` | ✅（若 `T: Send + Sync`） | ✅（若 `T: Send + Sync`） | 原子引用计数 |
 | `Mutex<T>` | ✅（若 `T: Send`） | ✅（若 `T: Send`） | 互斥锁保护 |
 | `Cell<T>` | ✅ | ❌ | 内部可变性，非同步 |
-| `RefCell<T>` | ✅ | ❌ | 运行时借用检查，非同步 |
+| `RefCell<T>` | ✅ | ❌ | 运行时（Runtime）借用（Borrowing）检查，非同步 |
 
-**知识点**：`Send` 和 `Sync` 是 Rust 并发安全的编译期保证。编译器自动为大多数类型推导实现，但 `unsafe impl` 可用于自定义类型。[→ 并发模型详解](./01_concurrency.md)
+**知识点**：`Send` 和 `Sync` 是 Rust 并发安全（Concurrency Safety）的编译期保证。编译器自动为大多数类型推导实现，但 `unsafe impl` 可用于自定义类型。[→ 并发模型详解](./01_concurrency.md)
 
 </details>
 
@@ -129,7 +130,7 @@ fn main() {
 
 **错误信息**：`cannot borrow`counter`as mutable more than once at a time`
 
-**解析**：闭包通过 `move` 捕获了 `counter`，但 `counter` 被多个闭包同时 `move`，违反了所有权规则。
+**解析**：闭包（Closures）通过 `move` 捕获了 `counter`，但 `counter` 被多个闭包同时 `move`，违反了所有权（Ownership）规则。
 
 **核心问题**：多个线程需要**共享可变状态**。
 
@@ -202,7 +203,7 @@ Got: 3
 
 - `tx`（transmitter）可克隆，多个线程可发送
 - `rx`（receiver）不能克隆，只有一个消费者
-- `rx` 作为迭代器使用时，当所有 `tx` 被 drop，迭代自动结束
+- `rx` 作为迭代器（Iterator）使用时，当所有 `tx` 被 drop，迭代自动结束
 
 **对比**：
 
@@ -263,7 +264,7 @@ future.await;             // 执行异步操作，可能让出线程
 
 **Future 状态机**：编译器将 `async fn` 转换为状态机，`.await` 处为状态切换点。
 
-**知识点**：Rust 的 async/await 是**零成本抽象（Zero-Cost Abstraction）**——没有运行时分配，状态机在栈上展开。[→ Async/Await 详解](./02_async.md)
+**知识点**：Rust 的 async/await 是**零成本抽象（Zero-Cost Abstraction）**——没有运行时（Runtime）分配，状态机在栈上展开。[→ Async/Await 详解](LINK_PLACEHOLDER)
 
 </details>
 
@@ -298,7 +299,7 @@ fn main() {
 
 **答案**：✅ 能编译（但 `main` 中 `.await` 需要 `async` 上下文）
 
-**解析**：`Pin<&mut Self>` 是 Rust 异步的核心保证。
+**解析**：`Pin<&mut Self>` 是 Rust 异步（Async）的核心保证。
 
 **为什么需要 `Pin`**：
 
@@ -352,7 +353,7 @@ async fn main() {
 
 **错误信息**：`use of moved value: v`
 
-**解析**：`async move` 闭包通过 `move` 捕获了 `v` 的所有权，`main` 中的 `v` 不再可用。
+**解析**：`async move` 闭包（Closures）通过 `move` 捕获了 `v` 的所有权，`main` 中的 `v` 不再可用。
 
 **解决方案**——使用 `Arc` 共享数据：
 
@@ -381,7 +382,7 @@ async fn main() {
 | 内存开销 | ~1-2 MB 栈 | ~几 KB |
 | 适用场景 | CPU 密集型 | IO 密集型 |
 
-**知识点**：`tokio::spawn` 要求 Future 是 `'static`，因此不能借用局部变量，必须转移所有权或使用 `Arc`。[→ Async 模式详解](./02_async.md)
+**知识点**：`tokio::spawn` 要求 Future 是 `'static`，因此不能借用（Borrowing）局部变量，必须转移所有权或使用 `Arc`。[→ Async 模式详解](LINK_PLACEHOLDER)
 
 </details>
 
@@ -510,7 +511,7 @@ let s = String::from("hello");
 thread::spawn(|| { println!("{}", &s); });
 ```
 
-**知识点**：`'static` 不等于"程序全局存活"，而是"不借用任何非 `'static` 数据"。理解这一点是掌握 Rust 并发闭包的关键。[→ 生命周期详解](../01_foundation/03_lifetimes.md)
+**知识点**：`'static` 不等于"程序全局存活"，而是"不借用任何非 `'static` 数据"。理解这一点是掌握 Rust 并发闭包的关键。[→ 生命周期（Lifetimes）详解](LINK_PLACEHOLDER)
 
 </details>
 

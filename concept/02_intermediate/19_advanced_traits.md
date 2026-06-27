@@ -11,8 +11,8 @@
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
-> **双维定位**: C×Ana — 分析 GATs 和 HRTB 的类型系统扩展
-> **定位**: 深入分析 Rust **Trait 系统的高级特性**——从关联类型、泛型关联类型（GATs）到特化（Specialization）和负实现，揭示 Trait 系统如何支持复杂抽象和零成本多态。
+> **双维定位**: C×Ana — 分析 GATs 和 HRTB 的类型系统（Type System）扩展
+> **定位**: 深入分析 Rust **Trait 系统的高级特性**——从关联类型、泛型（Generics）关联类型（GATs）到特化（Specialization）和负实现，揭示 Trait 系统如何支持复杂抽象和零成本多态。
 > **前置概念**: [Traits](./01_traits.md) · [Generics](./02_generics.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Type Inference](../04_formal/08_type_inference.md) · [RustBelt](../04_formal/04_rustbelt.md)
 
@@ -37,7 +37,7 @@
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 关联类型（Associated Types）](#11-关联类型associated-types)
-    - [1.2 泛型关联类型（GATs）](#12-泛型关联类型gats)
+    - [1.2 泛型（Generics）关联类型（GATs）](LINK_PLACEHOLDER)
     - [1.3 特化（Specialization）](#13-特化specialization)
   - [二、技术细节](#二技术细节)
     - [2.1 关联类型 vs 泛型参数](#21-关联类型-vs-泛型参数)
@@ -174,7 +174,7 @@ impl<'a, T> LendingIterator for MutWindows<'a, T> {
 // 例如: 流式反序列化、按行解析、窗口迭代
 ```
 
-> **GATs 洞察**: GATs 是 Rust **类型系统的重大扩展**——它使**生命周期泛型**可以出现在关联类型上，解决了自引用和流式处理的核心问题。
+> **GATs 洞察**: GATs 是 Rust **类型系统（Type System）的重大扩展**——它使**生命周期（Lifetimes）泛型**可以出现在关联类型上，解决了自引用（Reference）和流式处理的核心问题。
 > [来源: [RFC 1598 — GATs](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html)]
 
 ---
@@ -365,7 +365,7 @@ pub trait Service = Fn(Request) -> Response + Send + Sync + 'static;
   → F: for<'a> Fn(&'a str)
 ```
 
-> **模式矩阵**: Rust 的 **Trait 系统是 Haskell 类型类的工程化实现**——它提供表达能力，同时保持编译期单态化性能。
+> **模式矩阵**: Rust 的 **Trait 系统是 Haskell 类型类的工程化实现**——它提供表达能力，同时保持编译期单态化（Monomorphization）性能。
 > [来源: [Wikipedia — Type Class](https://en.wikipedia.org/wiki/Type_class)]
 
 ---
@@ -493,8 +493,8 @@ graph TD
 
 - [Traits](./01_traits.md) — Trait 基础
 - [Generics](./02_generics.md) — 泛型系统
-- [Type System](../01_foundation/04_type_system.md) — 类型系统
-- [Type Inference](../04_formal/08_type_inference.md) — 类型推断
+- [Type System](../01_foundation/04_type_system.md) — 类型系统（Type System）
+- [Type Inference](../04_formal/08_type_inference.md) — 类型推断（Type Inference）
 
 ---
 
@@ -582,7 +582,7 @@ fn main() {
 }
 ```
 
-> **修正**: Trait 特殊化（specialization）允许为具体类型提供优先于泛型默认实现的特化版本，但截至 Rust 1.95+ 仍为**不稳定特性**（`#![feature(specialization)]`）。标准库内部使用 `min_specialization`（简化版）优化性能，但用户代码不能依赖。这与 C++ 的模板特化（template specialization）类似，但 Rust 的设计更保守——特殊化必须保证"始终安全"（始终适用），不能破坏一致性。当前稳定 Rust 中，需通过 blanket impl 的约束或显式类型匹配实现类似效果。[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
+> **修正**: Trait 特殊化（specialization）允许为具体类型提供优先于泛型默认实现的特化版本，但截至 Rust 1.95+ 仍为**不稳定特性**（`#![feature(specialization)]`）。标准库内部使用 `min_specialization`（简化版）优化性能，但用户代码不能依赖。这与 C++ 的模板特化（template specialization）类似，但 Rust 的设计更保守——特殊化必须保证"始终安全"（始终适用），不能破坏一致性（Coherence）。当前稳定 Rust 中，需通过 blanket impl 的约束或显式类型匹配实现类似效果。[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
 
 ### 10.5 边界测试：关联常量与泛型参数的交互（编译错误）
 
@@ -596,7 +596,7 @@ struct Buffer<C: Config> {
 }
 ```
 
-> **修正**: Rust 的关联常量（associated constants）在 trait 中声明，在实现中定义。但**泛型参数**的关联常量不能在类型定义中用于确定数组大小——`[u8; C::MAX_SIZE]` 中 `C` 是泛型参数，编译器无法在单态化前知道 `MAX_SIZE` 的具体值。这是 Rust 常量泛化的限制：只有具体类型（如 `[u8; 1024]`）或 const 泛型参数（`[u8; N]`）可用于数组大小。Workaround：1) 使用 `GenericArray`（`typenum` crate，通过类型级数字模拟常量）；2) 使用 `Vec<u8>` 替代数组；3) 使用宏为每个具体配置生成代码。这与 C++ 的 `template<size_t N>`（非类型模板参数可用于数组大小）或 Zig 的 `comptime`（编译期常量可用于任何类型位置）不同——Rust 的 const 泛型仍在扩展中。[来源: [Rust RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-02-advanced-traits.html)]
+> **修正**: Rust 的关联常量（associated constants）在 trait 中声明，在实现中定义。但**泛型参数**的关联常量不能在类型定义中用于确定数组大小——`[u8; C::MAX_SIZE]` 中 `C` 是泛型参数，编译器无法在单态化（Monomorphization）前知道 `MAX_SIZE` 的具体值。这是 Rust 常量泛化的限制：只有具体类型（如 `[u8; 1024]`）或 const 泛型参数（`[u8; N]`）可用于数组大小。Workaround：1) 使用 `GenericArray`（`typenum` crate，通过类型级数字模拟常量）；2) 使用 `Vec<u8>` 替代数组；3) 使用宏（Macro）为每个具体配置生成代码。这与 C++ 的 `template<size_t N>`（非类型模板参数可用于数组大小）或 Zig 的 `comptime`（编译期常量可用于任何类型位置）不同——Rust 的 const 泛型仍在扩展中。[来源: [Rust RFC 2000](LINK_PLACEHOLDER)] · [来源: [The Rust Programming Language](LINK_PLACEHOLDER)]
 
 ### 10.6 边界测试：trait alias 与 bound 的冗余（编译错误）
 
@@ -673,7 +673,7 @@ fn main() {
 }
 ```
 
-> **修正**: **GAT**（Generic Associated Types，Rust 1.65+）允许关联类型带泛型参数：`type Item<'a>`。但 GAT 的使用常需额外约束：1) `where Self: 'a` — 保证 `self` 的生命周期覆盖 `'a`；2) `Item<'a>: 'a` — 保证输出类型在 `'a` 内有效。GAT 的应用：1)  lending iterator（`LendingIterator` trait，返回与自身绑定的引用）；2) 类型级函数（`type Family<T>`）；3) 替代部分 HKT（Higher-Kinded Types）用例。GAT 的编译错误信息可能复杂，因涉及多个生命周期和关联类型约束。这与 Haskell 的 associated type families（`type family Item c :: * -> *`）或 C++ 的模板模板参数（`template<template<typename> class F>`）类似——Rust 的 GAT 是类型系统的重要扩展，但学习曲线陡。[来源: [Rust Reference — Generic Associated Types](https://doc.rust-lang.org/reference/items/associated-items.html#generic-associated-types)] · [来源: [RFC 1598 — GAT](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html)]
+> **修正**: **GAT**（Generic Associated Types，Rust 1.65+）允许关联类型带泛型参数：`type Item<'a>`。但 GAT 的使用常需额外约束：1) `where Self: 'a` — 保证 `self` 的生命周期（Lifetimes）覆盖 `'a`；2) `Item<'a>: 'a` — 保证输出类型在 `'a` 内有效。GAT 的应用：1)  lending iterator（`LendingIterator` trait，返回与自身绑定的引用）；2) 类型级函数（`type Family<T>`）；3) 替代部分 HKT（Higher-Kinded Types）用例。GAT 的编译错误信息可能复杂，因涉及多个生命周期和关联类型约束。这与 Haskell 的 associated type families（`type family Item c :: * -> *`）或 C++ 的模板模板参数（`template<template<typename> class F>`）类似——Rust 的 GAT 是类型系统的重要扩展，但学习曲线陡。[来源: [Rust Reference — Generic Associated Types](LINK_PLACEHOLDER)] · [来源: [RFC 1598 — GAT](LINK_PLACEHOLDER)]
 
 ## 实践
 
@@ -712,7 +712,7 @@ trait Iterator {
 - **关联类型**：`type Item;` —— 每个类型实现 trait 时**唯一确定**
 - **泛型参数**：`trait Foo<T>` —— 一个类型可多次实现（`Foo<A>`、`Foo<B>`）
 
-`Iterator` 使用关联类型，因为给定类型作为迭代器时，其元素类型是唯一的。若用泛型，每次使用都要写 `Iterator<Item=T>`，且可能出现歧义。
+`Iterator` 使用关联类型，因为给定类型作为迭代器（Iterator）时，其元素类型是唯一的。若用泛型，每次使用都要写 `Iterator<Item=T>`，且可能出现歧义。
 </details>
 
 ---
@@ -740,7 +740,7 @@ trait LendingIterator {
 GAT（Generic Associated Types）是 Rust 1.65 稳定化的重要特性。它允许关联类型有自己的泛型参数：
 
 - `type Item<'a>;` —— 关联类型带生命周期参数
-- 用于实现"出借迭代器"（lending iterator），返回引用而非值
+- 用于实现"出借迭代器"（lending iterator），返回引用（Reference）而非值
 - 解决传统 `Iterator` 无法返回自引用数据的限制
 
 没有 GAT 时，返回生命周期依赖于 `&mut self` 的元素非常困难。
@@ -758,7 +758,7 @@ trait Numeric = PartialOrd + Add<Output = Self> + Copy;
 
 - A. 定义一个新的 trait 并要求手动实现
 - B. 为 trait bound 组合创建别名，简化泛型约束
-- C. 运行时自动实现这些 trait
+- C. 运行时（Runtime）自动实现这些 trait
 
 <details>
 <summary>✅ 答案</summary>
@@ -787,13 +787,13 @@ impl std::fmt::Display for String {}
 ```
 
 - A. `String` 已经实现了 `Display`
-- B. 违反了孤儿规则：trait 和类型都来自外部 crate
+- B. 违反了孤儿规则（Orphan Rule）：trait 和类型都来自外部 crate
 - C. `Display` 不是本地 trait
 
 <details>
 <summary>✅ 答案</summary>
 
-**B. 违反了孤儿规则**。
+**B. 违反了孤儿规则（Orphan Rule）**。
 
 Rust 的 Orphan Rule：
 
@@ -854,7 +854,7 @@ fn main() {
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | 高级 Trait 主题：从关联类型到特化 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 高级 Trait 主题：从关联类型到特化 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 高级 Trait 主题：从关联类型到特化 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 高级 Trait 主题：从关联类型到特化 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 多态代码正确 ⟸ Trait bound 满足 ⟸ 类型约束系统
@@ -863,7 +863,7 @@ fn main() {
 
 > **过渡**: 在实践中应用 高级 Trait 主题：从关联类型到特化 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: 高级 Trait 主题：从关联类型到特化 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 高级 Trait 主题：从关联类型到特化 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

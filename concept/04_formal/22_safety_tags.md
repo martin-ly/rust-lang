@@ -17,6 +17,8 @@
 >
 > **来源**: [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [Safety Tags 研究仓库](https://github.com/safer-rust/safety-tags) · [safety-tool slides](https://os-checker.github.io/slides/safety-tags) · [Rust for Linux Safety Standard](https://rust-for-linux.com/)
 
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 ## 一、权威定义
@@ -129,7 +131,7 @@ Safety Tags 的键值对可映射为：
 
 - A. 完全消除 `unsafe` 关键字
 - B. 将 `unsafe` 函数的安全前提结构化，使工具可检查
-- C. 替代 Rust 借用检查器
+- C. 替代 Rust 借用（Borrowing）检查器
 - D. 自动生成 FFI 绑定
 
 <details>

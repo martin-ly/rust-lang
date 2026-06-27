@@ -12,7 +12,7 @@
 > **受众**: [进阶]
 > **层级**: L6 生态工程 — 系统设计模式
 > **A/S/P 标记**: **S+A** — Structure + Application
-> **双维定位**: C×Eva — 评价模式组合的正确性与一致性
+> **双维定位**: C×Eva — 评价模式组合的正确性与一致性（Coherence）
 > **前置概念**: [Patterns](./02_patterns.md) · [Concurrency Patterns](../03_advanced/10_concurrency_patterns.md) · [Async Patterns](../03_advanced/02_async_patterns.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Distributed Systems](./18_distributed_systems.md) · [System Design Principles](./05_system_design_principles.md)
 > **主要来源**: [GoF — Design Patterns] · [POSA — Pattern-Oriented Software Architecture] · [Category Theory for Programmers, Bartosz Milewski] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
@@ -153,7 +153,7 @@ impl StrategyCommand {
 
 | 组合 | 场景 | 协同机制 | Rust 实现 |
 |:---|:---|:---|:---|
-| **Observer + WeakRef** | 事件通知 | Observer 持有 Weak 引用，打破循环依赖 | `Weak<dyn Observer>` + `Rc<RefCell<Subject>>` |
+| **Observer + WeakRef** | 事件通知 | Observer 持有 Weak 引用（Reference），打破循环依赖 | `Weak<dyn Observer>` + `Rc<RefCell<Subject>>` |
 | **Factory + Typestate** | 有状态对象创建 | Factory 创建 Typestate 对象，编译期保证状态转换合法 | PhantomData + Builder |
 | **Strategy + Command** | 可撤销的算法切换 | Strategy 定义算法，Command 封装执行上下文 | `Box<dyn Strategy>` + `Command` trait |
 | **Decorator + Trait** | 功能组合 | Trait 提供默认实现，Decorator 通过组合扩展 | `struct Decorator<T: Component>(T)` |
@@ -165,14 +165,14 @@ impl StrategyCommand {
 
 | 模式 A | 模式 B | 冲突类型 | 说明 | 解决方案 |
 |:---|:---|:---:|:---|:---|
-| **Singleton** | **Dependency Injection** | 🔴 互斥 | Singleton 隐藏依赖，DI 要求显式注入 | 放弃 Singleton，使用 DI 容器管理单例生命周期 |
+| **Singleton** | **Dependency Injection** | 🔴 互斥 | Singleton 隐藏依赖，DI 要求显式注入 | 放弃 Singleton，使用 DI 容器管理单例生命周期（Lifetimes） |
 | **Global State** | **Thread Safety** | 🔴 互斥 | 全局状态需要锁保护，降低并发性能 | 将全局状态改为 Actor 或 ThreadLocal |
 | **Deep Inheritance** | **Composition** | 🟡 张力 | 继承层次过深时组合更难维护 | 优先组合，仅在 is-a 关系时使用继承（trait） |
 | **Eager Loading** | **Lazy Initialization** | 🟡 张力 |  eager 启动慢但运行快；lazy 启动快但首次访问慢 | 根据启动时间 SLA 选择 |
 | **Strong Consistency** | **High Availability** | 🟡 张力 | CAP 定理约束 | 根据业务需求选择 CP 或 AP |
-| **Observer** | **Synchronous Call** | 🟡 张力 | Observer 通常是异步的，同步调用可能阻塞 | 使用 `tokio::spawn` 异步通知 |
+| **Observer** | **Synchronous Call** | 🟡 张力 | Observer 通常是异步（Async）的，同步调用可能阻塞 | 使用 `tokio::spawn` 异步通知 |
 | **Retry** | **Idempotency** | 🟡 依赖 | 无幂等保证的重试可能导致重复副作用 | 重试前必须确保操作幂等 |
-| **Cache** | **Consistency** | 🟡 张力 | 缓存引入最终一致性 | 使用 TTL + 失效策略 |
+| **Cache** | **Consistency** | 🟡 张力 | 缓存引入最终一致性（Coherence） | 使用 TTL + 失效策略 |
 
 ---
 
@@ -428,7 +428,7 @@ impl Service for BadService {
 }
 ```
 
-> **解决方案**: 使用 DI 容器管理单例生命周期，而非全局 `instance()` 方法。
+> **解决方案**: 使用 DI 容器管理单例生命周期（Lifetimes），而非全局 `instance()` 方法。
 
 ### 7.2 边界测试：Observer + Singleton 组合的所有权冲突（编译错误）
 
@@ -466,7 +466,7 @@ fn main() {
 }
 ```
 
-> **解决方案**: 使用 `Weak<RefCell<Subject>>` 打破循环引用，或改用 `tokio::sync::broadcast` 等无环通道。
+> **解决方案**: 使用 `Weak<RefCell<Subject>>` 打破循环引用（Reference），或改用 `tokio::sync::broadcast` 等无环通道。
 
 ### 7.3 边界测试：模式组合的状态空间爆炸
 
@@ -506,10 +506,10 @@ enum CircuitState {
 
 > **定理 C-001** [Tier 3]: 若模式 A 和模式 B 操作不相交的数据集，则 A ⊗ B（并行组合）是类型安全的。
 >
-> **论证**: Rust 的所有权系统保证不相交的数据集不能被同时可变借用。若 A 和 B 只读取共享数据，或各自操作独立数据，则 `A ⊗ B` 无数据竞争。
+> **论证**: Rust 的所有权（Ownership）系统保证不相交的数据集不能被同时可变借用（Mutable Borrow）。若 A 和 B 只读取共享数据，或各自操作独立数据，则 `A ⊗ B` 无数据竞争。
 
 > **定理 C-002** [Tier 3]: 若模式 A 的输出类型 `T_A` 满足模式 B 的输入约束 `C_B[T]`，则 `A ∘ B`（串行复合）是类型安全的。
-> **论证**: Rust 的类型系统保证函数复合的类型一致性。若 `A: Fn() -> T_A` 且 `B: Fn(T) -> U where T: C_B`，则当 `T_A: C_B` 时，`B(A())` 类型正确。
+> **论证**: Rust 的类型系统（Type System）保证函数复合的类型一致性。若 `A: Fn() -> T_A` 且 `B: Fn(T) -> U where T: C_B`，则当 `T_A: C_B` 时，`B(A())` 类型正确。
 
 > **定理 C-003** [Tier 3]: Singleton 与 Dependency Injection 在逻辑上互斥——Singleton 隐藏全局依赖，DI 要求依赖显式化。
 > **论证**: Singleton 模式通过全局访问点隐藏了依赖关系；DI 模式通过构造函数/参数显式注入依赖。二者对"依赖可见性"的哲学相反，不能在同一设计层级同时使用而不引入矛盾。
@@ -572,7 +572,7 @@ impl Machine<Running> {
 }
 ```
 
-> **修正**: 类型状态模式（Typestate Pattern）将状态机的状态编码为类型参数，非法的状态转换在编译期被拒绝。这是范畴论中**有限状态机作为类型**的直接应用：状态是类型，转换是函数，可达性由类型系统的可达性保证。与运行时状态检查（switch/case）相比，类型状态消除了运行时开销和遗漏分支的可能。[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
+> **修正**: 类型状态模式（Typestate Pattern）将状态机的状态编码为类型参数，非法的状态转换在编译期被拒绝。这是范畴论中**有限状态机作为类型**的直接应用：状态是类型，转换是函数，可达性由类型系统（Type System）的可达性保证。与运行时（Runtime）状态检查（switch/case）相比，类型状态消除了运行时开销和遗漏分支的可能。[来源: [Rust Design Patterns](LINK_PLACEHOLDER)]
 
 ### 10.2 边界测试：组合子模式的所有权链（编译错误）
 
@@ -595,7 +595,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: 组合子模式（Combinator Pattern）通过小函数组合构建复杂行为。Rust 的所有权系统要求组合链中的每个中间结果必须正确传递或释放。部分 move（如 `w.0` 被 move 但 `w` 仍被视为整体）会导致编译错误。解构（`let Wrapper(inner) = w`）是安全的替代方案，它明确声明"消耗整个结构体，提取其字段"。这与 Haskell 的无限惰性组合链不同——Rust 的组合是严格的、所有权感知的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> **修正**: 组合子模式（Combinator Pattern）通过小函数组合构建复杂行为。Rust 的所有权（Ownership）系统要求组合链中的每个中间结果必须正确传递或释放。部分 move（如 `w.0` 被 move 但 `w` 仍被视为整体）会导致编译错误。解构（`let Wrapper(inner) = w`）是安全的替代方案，它明确声明"消耗整个结构体（Struct），提取其字段"。这与 Haskell 的无限惰性组合链不同——Rust 的组合是严格的、所有权感知的。[来源: [The Rust Programming Language](LINK_PLACEHOLDER)]
 
 ### 10.3 边界测试：组合子嵌套过深导致的类型爆炸（编译错误/编译超时）
 
@@ -626,7 +626,7 @@ fn option_i(_: i32) -> Option<i32> { Some(9) }
 fn option_j(_: i32) -> Option<i32> { Some(10) }
 ```
 
-> **修正**: `Option`/`Result` 的 `and_then` 嵌套是**组合子模式**，但过度嵌套导致：1) 类型签名膨胀（每个 `and_then` 增加一层泛型）；2) 编译时间增加（类型推导复杂度）；3) 错误信息难读（10 层嵌套的错误链）。Rust 的替代方案：1) **`?` 运算符**：`let a = option_a()?; let b = option_b(a)?; ...`（扁平化，可读性高）；2) **`async`/`await`**：用异步组合替代同步组合子；3) **do-notation 宏**（如 `try_block!`）。这与 Haskell 的 `do` notation（语法糖扁平化 Monad 嵌套）或 Scala 的 `for` comprehension（类似）不同——Rust 的 `?` 运算符是编译器内建的特殊语法，不是通用 Monad 操作，但提供了等价的扁平化能力。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)] · [来源: [Rust Error Handling](https://doc.rust-lang.org/rust-by-example/error.html)]
+> **修正**: `Option`/`Result` 的 `and_then` 嵌套是**组合子模式**，但过度嵌套导致：1) 类型签名膨胀（每个 `and_then` 增加一层泛型（Generics））；2) 编译时间增加（类型推导复杂度）；3) 错误信息难读（10 层嵌套的错误链）。Rust 的替代方案：1) **`?` 运算符**：`let a = option_a()?; let b = option_b(a)?; ...`（扁平化，可读性高）；2) **`async`/`await`**：用异步（Async）组合替代同步组合子；3) **do-notation 宏（Macro）**（如 `try_block!`）。这与 Haskell 的 `do` notation（语法糖扁平化 Monad 嵌套）或 Scala 的 `for` comprehension（类似）不同——Rust 的 `?` 运算符是编译器内建的特殊语法，不是通用 Monad 操作，但提供了等价的扁平化能力。[来源: [The Rust Programming Language](LINK_PLACEHOLDER)] · [来源: [Rust Error Handling](LINK_PLACEHOLDER)]
 
 ---
 
@@ -658,7 +658,7 @@ fn option_j(_: i32) -> Option<i32> { Some(10) }
 <details>
 <summary>✅ 答案与解析</summary>
 
-组合子是将简单函数组合成复杂函数的高阶函数。Rust 中常见于：迭代器适配器（`map`、`filter`）、parser combinator（`nom`）、future 组合（`and_then`）。
+组合子是将简单函数组合成复杂函数的高阶函数。Rust 中常见于：迭代器（Iterator）适配器（`map`、`filter`）、parser combinator（`nom`）、future 组合（`and_then`）。
 </details>
 
 ---
@@ -694,7 +694,7 @@ fn option_j(_: i32) -> Option<i32> { Some(10) }
 <details>
 <summary>✅ 答案与解析</summary>
 
-`?` 对应 monadic bind（`>>=`）：从 `Result<T, E>` 中提取 `T`，若失败则提前返回 `Err`。它使错误处理代码呈线性流动，避免了嵌套 `match`。
+`?` 对应 monadic bind（`>>=`）：从 `Result<T, E>` 中提取 `T`，若失败则提前返回 `Err`。它使错误处理（Error Handling）代码呈线性流动，避免了嵌套 `match`。
 </details>
 
 ---

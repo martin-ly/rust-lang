@@ -18,6 +18,7 @@
 
 >
 > **来源**: [Bevy Engine](https://bevyengine.org/) · [wgpu](https://docs.rs/wgpu/)
+> **前置概念**: N/A
 ---
 
 > **来源**: [Bevy Engine](https://bevyengine.org/) ·
@@ -55,7 +56,7 @@
     - [6.1 音频管线](#61-音频管线)
     - [6.2 Rust 音频生态](#62-rust-音频生态)
   - [七、资源管理](#七资源管理)
-    - [7.1 异步资源加载](#71-异步资源加载)
+    - [7.1 异步（Async）资源加载](LINK_PLACEHOLDER)
     - [7.2 热重载与版本控制](#72-热重载与版本控制)
   - [八、网络同步](#八网络同步)
     - [8.1 状态同步 vs 输入同步](#81-状态同步-vs-输入同步)
@@ -66,14 +67,14 @@
   - [十、边界测试](#十边界测试)
     - [10.1 边界测试：渲染命令队列跨线程发送违反 Send（编译错误）](#101-边界测试渲染命令队列跨线程发送违反-send编译错误)
     - [10.2 边界测试：物理固定步长与渲染可变帧率解耦失败（时间抖动）](#102-边界测试物理固定步长与渲染可变帧率解耦失败时间抖动)
-    - [10.3 边界测试：资源加载 panic 导致游戏状态不一致（运行时错误）](#103-边界测试资源加载-panic-导致游戏状态不一致运行时错误)
+    - [10.3 边界测试：资源加载 panic 导致游戏状态不一致（运行时（Runtime）错误）](LINK_PLACEHOLDER)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：游戏引擎的"渲染管线"（Render Pipeline）通常分为哪几个阶段？（理解层）](#测验-1游戏引擎的渲染管线render-pipeline通常分为哪几个阶段理解层)
     - [测验 2：`wgpu` 的渲染通道（Render Pass）概念与 Vulkan 的有什么对应关系？（理解层）](#测验-2wgpu-的渲染通道render-pass概念与-vulkan-的有什么对应关系理解层)
     - [测验 3：为什么游戏引擎中的"实体变换层级"（Transform Hierarchy）通常使用扁平数组而非树结构？（理解层）](#测验-3为什么游戏引擎中的实体变换层级transform-hierarchy通常使用扁平数组而非树结构理解层)
-    - [测验 4：Rust 的所有权如何影响游戏引擎中的"资源管理"（Asset Management）？（理解层）](#测验-4rust-的所有权如何影响游戏引擎中的资源管理asset-management理解层)
+    - [测验 4：Rust 的所有权（Ownership）如何影响游戏引擎中的"资源管理"（Asset Management）？（理解层）](LINK_PLACEHOLDER)
     - [测验 5：`SPIR-V` 在 Rust 图形管线中扮演什么角色？（理解层）](#测验-5spir-v-在-rust-图形管线中扮演什么角色理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -153,7 +154,7 @@ ECS 调度器                    特定系统和组件
 | **ECS** | DOTS (可选) | 传统 OOP | Bevy ECS（核心）| 节点树 + 信号 |
 | **物理** | PhysX | PhysX/Chaos | Rapier | Godot Physics |
 | **脚本** | C# | Blueprint/C++ | Rust (原生) | GDScript |
-| **内存安全** | GC | 手动 | ✅ 所有权 | GC |
+| **内存安全（Memory Safety）** | GC | 手动 | ✅ 所有权（Ownership） | GC |
 | **热重载** | ✅ Play Mode | ✅ Live Coding | ✅ Asset 热重载 | ✅ |
 | **开源** | ❌ | 部分 | ✅ MIT | ✅ MIT |
 | **Rust 适配** | 绑定 | 绑定 | 原生 | 绑定 |
@@ -254,7 +255,7 @@ fn game_loop(event_loop: EventLoop<()>, mut app: App) {
 
 ### 3.2 子系统管理
 
-游戏引擎的子系统之间存在复杂的依赖关系。Rust 的所有权系统为子系统初始化提供了编译期保证：
+游戏引擎的子系统之间存在复杂的依赖关系。Rust 的所有权（Ownership）系统为子系统初始化提供了编译期保证：
 
 ```rust
 // 子系统依赖图（Rust 类型系统保证初始化顺序）
@@ -390,7 +391,7 @@ Vulkan 核心概念:
 ### 4.2 wgpu：安全的跨平台 GPU 抽象
 
 > **[wgpu](https://wgpu.rs/)** 是 Rust 的跨平台 GPU 抽象层，基于 WebGPU 标准，但也可用于原生应用。
-> 核心设计：**安全的 GPU 资源管理**——利用 Rust 的所有权和生命周期系统，在编译期防止常见的 GPU 编程错误（use-after-free、资源泄漏、错误的绑定）。
+> 核心设计：**安全的 GPU 资源管理**——利用 Rust 的所有权和生命周期（Lifetimes）系统，在编译期防止常见的 GPU 编程错误（use-after-free、资源泄漏、错误的绑定）。
 > [来源: [wgpu Documentation](https://docs.rs/wgpu/latest/wgpu/)]
 
 ```rust
@@ -461,11 +462,11 @@ fn render_frame(
 
 | **错误类别** | **传统 Vulkan/C++** | **wgpu/Rust** |
 | :--- | :--- | :--- |
-| **资源生命周期** | 手动管理，易 UAF | `Drop` 自动释放 GPU 资源 |
+| **资源生命周期（Lifetimes）** | 手动管理，易 UAF | `Drop` 自动释放 GPU 资源 |
 | **命令编码器使用** | 二次 begin 导致 UB | 编译期保证 encoder 唯一性 |
-| **缓冲区越界** | 运行时可能静默失败 | 绑定验证层检测 |
+| **缓冲区越界** | 运行时（Runtime）可能静默失败 | 绑定验证层检测 |
 | **线程安全** | 手动同步 | `Send`/`Sync` 编译期检查 |
-| **管线状态不匹配** | 运行时错误 | 类型系统保证绑定一致性 |
+| **管线状态不匹配** | 运行时错误 | 类型系统（Type System）保证绑定一致性（Coherence） |
 
 > **来源**: [wgpu Learn](https://sotrh.github.io/learn-wgpu/) ·
 > [WebGPU Spec](https://www.w3.org/TR/webgpu/) ·
@@ -693,7 +694,7 @@ fn spatial_audio_example() {
 
 ### 7.1 异步资源加载
 
-游戏资源（纹理、模型、音频）通常很大，需要在后台异步加载以避免卡顿：
+游戏资源（纹理、模型、音频）通常很大，需要在后台异步（Async）加载以避免卡顿：
 
 ```rust
 // 异步资源加载器
@@ -1097,7 +1098,7 @@ enum AssetState {
 <details>
 <summary>✅ 答案与解析</summary>
 
-`Handle<T>` 作为资源的弱引用，`AssetServer` 拥有实际资源。引用计数（`Arc`）或 ECS 资源存储管理生命周期，避免 use-after-free 和重复加载。
+`Handle<T>` 作为资源的弱引用（Reference），`AssetServer` 拥有实际资源。引用计数（`Arc`）或 ECS 资源存储管理生命周期，避免 use-after-free 和重复加载。
 </details>
 
 ---

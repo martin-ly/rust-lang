@@ -147,7 +147,7 @@ Rust 编译器通过 `llvm-cov` 基础设施实现覆盖率检测。MC/DC 支持
 >
 > 1. **短路求值**: `A && B` 中若 `A=false` 则 `B` 不执行，如何判定 B 的"独立影响"？
 > 2. **编译器优化**: 常量折叠、死代码消除会改变条件结构
-> 3. **模式匹配**: Rust 的 `match` 表达式条件提取比 C 的 `if` 更复杂
+> 3. **模式匹配（Pattern Matching）**: Rust 的 `match` 表达式条件提取比 C 的 `if` 更复杂
 > [来源: [Rust Tracking Issue #124656](https://github.com/rust-lang/rust/issues/124656)]
 
 ---
@@ -267,7 +267,7 @@ graph TD
 └── 需要扩展到状态机转换覆盖
 ```
 
-> **边界要点**: Rust 的独特语言特性（模式匹配、短路求值、异步状态机）为 MC/DC 实现带来额外挑战，需要在通用 MC/DC 框架上扩展 Rust 特定的分析。
+> **边界要点**: Rust 的独特语言特性（模式匹配（Pattern Matching）、短路求值、异步（Async）状态机）为 MC/DC 实现带来额外挑战，需要在通用 MC/DC 框架上扩展 Rust 特定的分析。
 
 ---
 
@@ -282,7 +282,7 @@ graph TD
 | DO-178C 工具认证 | ⬜ | 2028+ | 工业需求 |
 | ISO 26262 合规 | ⬜ | 2028+ | 汽车 Rust 采用 |
 
-> **预测**: Rust MC/DC 的实现路径参考 C/C++ 的 `-fcondition-coverage`。关键挑战是**模式匹配的覆盖分析**和**编译器优化的兼容性**。预期 2027 年可用 nightly，2028+ 达到工业认证水平。
+> **预测**: Rust MC/DC 的实现路径参考 C/C++ 的 `-fcondition-coverage`。关键挑战是**模式匹配（Pattern Matching）的覆盖分析**和**编译器优化的兼容性**。预期 2027 年可用 nightly，2028+ 达到工业认证水平。
 > [来源: 💡 原创分析 · [Rust Tracking Issue #124656](https://github.com/rust-lang/rust/issues/124656)]
 
 ---
@@ -465,7 +465,7 @@ fn main() {
 >
 > 1) 指令缓存（icache）污染；
 > 2) 分支预测表压力；
-> 3) 运行时 10-30% 的性能下降。生产环境通常禁用覆盖率，仅在 CI 的测试构建中启用。
+> 3) 运行时（Runtime） 10-30% 的性能下降。生产环境通常禁用覆盖率，仅在 CI 的测试构建中启用。
 >
 > 优化：
 >
@@ -473,7 +473,7 @@ fn main() {
 > 2) 使用 `thin-lto`（部分内联，平衡性能和覆盖粒度）；
 > 3) 对性能测试使用独立的 `profile.bench`（无插桩）。
 >
-> 这与 C/C++ 的 `gcov`（同样 IR 插桩，同样性能影响）或 Java 的 JaCoCo（字节码插桩，运行时 overhead）类似——覆盖率收集的精确性与性能是权衡。
+> 这与 C/C++ 的 `gcov`（同样 IR 插桩，同样性能影响）或 Java 的 JaCoCo（字节码插桩，运行时（Runtime） overhead）类似——覆盖率收集的精确性与性能是权衡。
 > [来源: [Rust Coverage Documentation](https://doc.rust-lang.org/rustc/instrument-coverage.html)] ·
 > [来源: [LLVM Coverage](https://clang.llvm.org/docs/SourceBasedCodeCoverage.html)]
 > **过渡**: MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
@@ -515,7 +515,7 @@ Rust 的布尔表达式经过 LLVM 优化后可能改变结构（短路求值、
 <details>
 <summary>✅ 答案与解析</summary>
 
-`tarpaulin` 使用 ptrace 在运行时跟踪代码执行。`cargo-llvm-cov` 使用 LLVM 的 Source-Based Code Coverage 基础设施，更精确且支持分支覆盖。
+`tarpaulin` 使用 ptrace 在运行时（Runtime）跟踪代码执行。`cargo-llvm-cov` 使用 LLVM 的 Source-Based Code Coverage 基础设施，更精确且支持分支覆盖。
 </details>
 
 ---

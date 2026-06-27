@@ -6,14 +6,14 @@
 >
 > **EN**: Smart Pointers
 > **Summary**: Smart Pointers. Core Rust concept covering mechanism analysis, design patterns, ownership and borrowing.
-> **📎 交叉引用**
+> **📎 交叉引用（Reference）**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[智能指针](../../knowledge/02_intermediate/04_smart_pointers.md)
+> 本主题在 knowledge 中有系统化的知识索引：[智能指针（Smart Pointer）](LINK_PLACEHOLDER)
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **S+P** — Structure + Procedure
-> **双维定位**: C×Eva — 评价不同智能指针的适用场景
-> **定位**: 系统分析 Rust **智能指针（Smart Pointer）**的设计——Box（独占堆分配）、Rc/Arc（引用计数共享）、RefCell/Cell（内部可变性）、以及它们的组合使用模式，揭示每种指针类型的所有权语义和适用场景。
+> **双维定位**: C×Eva — 评价不同智能指针（Smart Pointer）的适用场景
+> **定位**: 系统分析 Rust **智能指针（Smart Pointer）**的设计——Box（独占堆分配）、Rc/Arc（引用（Reference）计数共享）、RefCell/Cell（内部可变性）、以及它们的组合使用模式，揭示每种指针类型的所有权（Ownership）语义和适用场景。
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Memory Management](./03_memory_management.md)
 > **后置概念**: [Pin](../03_advanced/06_pin_unpin.md) · [Cow](./11_cow_and_borrowed.md)
 
@@ -111,7 +111,7 @@ graph TD
 > **认知功能**: 此图展示 Rust 智能指针的**三维分类**——所有权（Ownership）（唯一/共享）、线程安全（单线程/多线程）、可变性（外部/内部）。每种智能指针对应特定的语义组合。
 > [来源: [TRPL](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]
 > **使用建议**: 根据"是否需要共享"和"是否需要线程安全"两个维度快速定位合适的智能指针。
-> **关键洞察**: Rust 的智能指针不是 C++ 的"自动释放指针"——它们是**所有权的显式表达**，每种类型都对应一种特定的所有权语义。
+> **关键洞察**: Rust 的智能指针不是 C++ 的"自动释放指针"——它们是**所有权（Ownership）的显式表达**，每种类型都对应一种特定的所有权语义。
 > [来源: [TRPL Ch15 — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]
 
 ---
@@ -222,7 +222,7 @@ let weak = Rc::downgrade(&data);
   └─────────────┴─────────────┴─────────────┴─────────────┘
 ```
 
-> **内部可变性洞察**: Cell/RefCell 是 Rust **借用规则的逃逸舱口**——当编译器无法证明借用安全时，将检查推迟到运行时。这是**性能 vs 安全**的权衡。
+> **内部可变性洞察**: Cell/RefCell 是 Rust **借用（Borrowing）规则的逃逸舱口**——当编译器无法证明借用安全时，将检查推迟到运行时（Runtime）。这是**性能 vs 安全**的权衡。
 > [来源: [Rustonomicon — Interior Mutability](https://doc.rust-lang.org/nomicon/concurrency.html)]
 
 ---
@@ -462,7 +462,7 @@ graph TD
      // 智能指针是"逃生舱"，不是默认选择
 ```
 
-> **陷阱总结**: 智能指针的陷阱主要与**语义混淆**、**借用冲突**、**线程安全误解**和**过度使用**相关。理解每种指针的所有权语义是避免陷阱的关键。
+> **陷阱总结**: 智能指针的陷阱主要与**语义混淆**、**借用（Borrowing）冲突**、**线程安全误解**和**过度使用**相关。理解每种指针的所有权语义是避免陷阱的关键。
 > [来源: [Rust Clippy — Rc clone](https://rust-lang.github.io/rust-clippy//master/index.html)]
 
 ### 编译错误示例
@@ -516,7 +516,7 @@ fn pin_mut_after_pin() {
 }
 ```
 
-> **修正**: `Pin<&mut T>` 的设计目的是防止自引用类型在移动后失效。一旦值被 Pin 固定，除非 `T: Unpin`，否则无法获取可变引用。
+> **修正**: `Pin<&mut T>` 的设计目的是防止自引用类型在移动后失效。一旦值被 Pin 固定，除非 `T: Unpin`，否则无法获取可变引用（Mutable Reference）。
 
 ### 4.4 边界测试：`Rc` 循环引用导致内存泄漏（逻辑错误）
 
@@ -569,7 +569,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: `Box::leak` 消耗 `Box` 的所有权并返回 `&'static T`。`Box` 本身不再可用。此操作将堆内存转为静态引用，内存永远不会被释放（除非程序结束）。仅在确实需要 `'static` 生命周期时使用。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `Box::leak` 消耗 `Box` 的所有权并返回 `&'static T`。`Box` 本身不再可用。此操作将堆内存转为静态引用，内存永远不会被释放（除非程序结束）。仅在确实需要 `'static` 生命周期（Lifetimes）时使用。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ---
 
@@ -654,7 +654,7 @@ fn main() {
 }
 ```
 
-> **修正**: 自引用结构（self-referential struct）是 Rust 的**硬问题**：`&mut self` 允许移动 `self`（若 `Self: !Unpin`），但 `self.ptr` 指向 `self.data` 的地址，移动后 `ptr` 成为悬垂指针。`Pin` 是解决自引用的关键：`Pin<&mut Self>` 保证 `self` 在内存中不可移动（`!Unpin`），允许安全创建自引用。但 `Pin` 的 API 严格：`Pin::new_unchecked` 要求调用者保证对象永不被移动；`Box::pin` 是安全创建 `Pin<Box<T>>` 的标准方式。自引用是 async/await、生成器、Futures 的核心机制。这与 C++ 的 `this` 指针（无 Pin 约束，移动后自引用 UB）或 Swift 的引用类型（堆分配不移动）不同——Rust 通过 `Pin` 类型系统显式标记不可移动对象。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/pin/struct.Pin.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-04-rc.html)]
+> **修正**: 自引用结构（self-referential struct）是 Rust 的**硬问题**：`&mut self` 允许移动 `self`（若 `Self: !Unpin`），但 `self.ptr` 指向 `self.data` 的地址，移动后 `ptr` 成为悬垂指针。`Pin` 是解决自引用的关键：`Pin<&mut Self>` 保证 `self` 在内存中不可移动（`!Unpin`），允许安全创建自引用。但 `Pin` 的 API 严格：`Pin::new_unchecked` 要求调用者保证对象永不被移动；`Box::pin` 是安全创建 `Pin<Box<T>>` 的标准方式。自引用是 async/await、生成器、Futures 的核心机制。这与 C++ 的 `this` 指针（无 Pin 约束，移动后自引用 UB）或 Swift 的引用类型（堆分配不移动）不同——Rust 通过 `Pin` 类型系统（Type System）显式标记不可移动对象。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/pin/struct.Pin.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-04-rc.html)]
 
 ### 10.4 边界测试：`Arc<RefCell<T>>` 的线程安全幻觉（编译错误）
 
@@ -679,7 +679,7 @@ fn main() {
 }
 ```
 
-> **修正**: `Arc<T>` 实现 `Send` + `Sync` 当且仅当 `T: Send + Sync`。`RefCell<T>` 不实现 `Sync`（单线程运行时借用检查），所以 `Arc<RefCell<T>>` 不能跨线程。线程安全的内部可变性：1) `Arc<Mutex<T>>` — 互斥锁；2) `Arc<RwLock<T>>` — 读写锁；3) `Arc<AtomicUsize>` — 无锁原子操作。`RefCell` 的设计：单线程场景下零开销（无原子操作），但线程间共享导致编译错误。这与 C++ 的 `std::shared_ptr<std::mutex>`（可跨线程，但需手动锁管理）或 Java 的 `AtomicInteger`（线程安全，但无 RefCell 的借用语义）不同——Rust 的类型系统通过 `Send`/`Sync` 在编译期排除不安全的线程共享。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/cell/struct.RefCell.html)]
+> **修正**: `Arc<T>` 实现 `Send` + `Sync` 当且仅当 `T: Send + Sync`。`RefCell<T>` 不实现 `Sync`（单线程运行时（Runtime）借用检查），所以 `Arc<RefCell<T>>` 不能跨线程。线程安全的内部可变性：1) `Arc<Mutex<T>>` — 互斥锁；2) `Arc<RwLock<T>>` — 读写锁；3) `Arc<AtomicUsize>` — 无锁原子操作（Atomic Operations）。`RefCell` 的设计：单线程场景下零开销（无原子操作），但线程间共享导致编译错误。这与 C++ 的 `std::shared_ptr<std::mutex>`（可跨线程，但需手动锁管理）或 Java 的 `AtomicInteger`（线程安全，但无 RefCell 的借用语义）不同——Rust 的类型系统（Type System）通过 `Send`/`Sync` 在编译期排除不安全的线程共享。[来源: [The Rust Programming Language](LINK_PLACEHOLDER)] · [来源: [Rust Standard Library](LINK_PLACEHOLDER)]
 
 ## 实践
 
@@ -711,13 +711,13 @@ fn main() {
 `Box<T>` 最主要的作用是什么？
 
 - A. 引用计数，允许多个所有者
-- B. 在堆上分配数据，使类型大小确定（如递归枚举）
+- B. 在堆上分配数据，使类型大小确定（如递归枚举（Enum））
 - C. 提供运行时借用检查
 
 <details>
 <summary>✅ 答案</summary>
 
-**B. 在堆上分配数据，使类型大小确定（如递归枚举）**。
+**B. 在堆上分配数据，使类型大小确定（如递归枚举（Enum））**。
 
 `Box<T>` 是最简单的智能指针：
 
@@ -753,7 +753,7 @@ fn main() {
 | `Rc<T>` | ❌ 单线程 | 较低（非原子计数） | 单线程数据结构 |
 | `Arc<T>` | ✅ 多线程 | 较高（原子计数） | 跨线程共享 |
 
-`Arc` 使用原子操作维护引用计数，因此是 `Send + Sync`（当 `T` 满足条件时）。单线程场景优先使用 `Rc` 以获得更好性能。
+`Arc` 使用原子操作（Atomic Operations）维护引用计数，因此是 `Send + Sync`（当 `T` 满足条件时）。单线程场景优先使用 `Rc` 以获得更好性能。
 </details>
 
 ---
@@ -764,7 +764,7 @@ fn main() {
 
 - A. 提供不可变共享访问
 - B. 打破循环引用，避免内存泄漏
-- C. 提供可变借用能力
+- C. 提供可变借用（Mutable Borrow）能力
 
 <details>
 <summary>✅ 答案</summary>
@@ -846,7 +846,7 @@ fn main() {
 
 ## 认知路径
 
-> **认知路径**: 从 L0 基础概念出发，经由本节的 **智能指针：堆内存管理与共享语义** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+> **认知路径**: 从 L0 基础概念出发，经由本节的 **智能指针（Smart Pointer）：堆内存管理与共享语义** 核心原理，通向 L2 进阶模式与 L3 工程实践。
 
 ### 核心推理链
 
@@ -862,7 +862,7 @@ fn main() {
 
 > **过渡**: 在实践中应用 智能指针：堆内存管理与共享语义 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: 智能指针：堆内存管理与共享语义 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 智能指针：堆内存管理与共享语义 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

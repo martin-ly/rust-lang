@@ -420,10 +420,10 @@ fn main() {
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
-- [Type System](04_type_system.md) — 类型系统
-- [Generics](../02_intermediate/02_generics.md) — 泛型
+- [Type System](04_type_system.md) — 类型系统（Type System）
+- [Generics](../02_intermediate/02_generics.md) — 泛型（Generics）
 - [Performance](../06_ecosystem/15_performance_optimization.md) — 性能优化
-- [Error Handling](../02_intermediate/04_error_handling.md) — 错误处理
+- [Error Handling](../02_intermediate/04_error_handling.md) — 错误处理（Error Handling）
 
 ---
 

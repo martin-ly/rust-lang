@@ -88,8 +88,8 @@ Phase 2: Commit
 
 | 维度 | TiKV（Rust） | 传统实现（Java/Go） |
 |:---|:---|:---|
-| **内存管理** | 所有权 + RAII → 无 GC 暂停 | GC → STW 暂停 |
-| **并发安全** | `Send`/`Sync` 编译期检查 | 运行时锁 + 人工审查 |
+| **内存管理** | 所有权（Ownership） + RAII → 无 GC 暂停 | GC → STW 暂停 |
+| **并发安全（Concurrency Safety）** | `Send`/`Sync` 编译期检查 | 运行时（Runtime）锁 + 人工审查 |
 | **性能** | 亚毫秒 P99 延迟 | 毫秒级 P99 延迟 |
 | **存储引擎** | RocksDB（C++）+ Rust 封装 | 纯 Java/Go 实现 |
 | **部署模式** | 云原生（Kubernetes） | 虚拟机/裸金属为主 |
@@ -142,7 +142,7 @@ WHERE o.status = 'shipped';
 
 | 维度 | Materialize | CockroachDB |
 |:---|:---|:---|
-| **一致性** | 严格串行化 | 串行化（默认）/ 快照读 |
+| **一致性（Coherence）** | 严格串行化 | 串行化（默认）/ 快照读 |
 | **查询模型** | 持续查询（物化视图） | 点查 + 事务 |
 | **数据源** | Kafka CDC、PostgreSQL CDC | 原生存储 |
 | **写入路径** | 只读（从外部源摄取） | 原生写入 |
@@ -161,7 +161,7 @@ Meilisearch 用 Rust 重新实现了 Elasticsearch 的核心功能——但**无
 
 | 组件 | Meilisearch | Elasticsearch |
 |:---|:---|:---|
-| **运行时** | 原生二进制（无 GC） | JVM（GC 暂停） |
+| **运行时（Runtime）** | 原生二进制（无 GC） | JVM（GC 暂停） |
 | **启动时间** | 秒级 | 分钟级 |
 | **内存占用** | ~100MB（空实例） | ~1GB+ |
 | **索引性能** | 10-50k 文档/秒 | 10-100k 文档/秒 |
@@ -188,7 +188,7 @@ impl Index {
 }
 ```
 
-> **关键洞察**: 搜索引擎的"段（segment）不可变性"与 Rust 的所有权模型天然匹配。Lucene/Elasticsearch 的段一旦写入即不可变，新的写入创建新段，后台合并旧段。Rust 的 `&T` 共享引用完美表达了"段可被并发读取但不可修改"的语义，无需额外的读写锁。[来源: 💡 原创分析] · [Tantivy 设计文档] ✅
+> **关键洞察**: 搜索引擎的"段（segment）不可变性"与 Rust 的所有权（Ownership）模型天然匹配。Lucene/Elasticsearch 的段一旦写入即不可变，新的写入创建新段，后台合并旧段。Rust 的 `&T` 共享引用（Reference）完美表达了"段可被并发读取但不可修改"的语义，无需额外的读写锁。[来源: 💡 原创分析] · [Tantivy 设计文档] ✅
 
 ---
 
@@ -219,7 +219,7 @@ FROM person:tobie;
 
 | 特性 | SurrealDB（Rust） | MongoDB（C++） | Neo4j（Java） |
 |:---|:---|:---|:---|
-| **内存安全** | 编译期保证 | 运行时风险 | GC 保护 |
+| **内存安全（Memory Safety）** | 编译期保证 | 运行时（Runtime）风险 | GC 保护 |
 | **并发查询** | fearless（Send/Sync） | 锁 + 审查 | 线程安全 |
 | **嵌入部署** | ✅ 单二进制 | ❌ 需服务 | ❌ 需服务 |
 | **查询注入** | 参数化查询（类型安全） | 依赖驱动 | 依赖驱动 |
@@ -252,7 +252,7 @@ FROM person:tobie;
 | Materialize 严格串行化 | [Materialize Documentation] | ✅ | Tier 1 |
 | Meilisearch 架构 | [Meilisearch Documentation] | ✅ | Tier 1 |
 | SurrealDB 多模型 | [SurrealDB Documentation] | ✅ | Tier 1 |
-| 段不可变性与 Rust 所有权 | [💡 原创分析] | ⚠️ | Tier 3 |
+| 段不可变性与 Rust 所有权（Ownership） | [💡 原创分析] | ⚠️ | Tier 3 |
 | 选型决策矩阵 | [💡 原创分析] | ⚠️ | Tier 3 |
 
 ---
@@ -362,7 +362,7 @@ impl<T> Query<T> {
 }
 ```
 
-> **修正**: 泛型数据库操作必须添加 Trait bound（`T: Display` 或 `T: Serialize`）。
+> **修正**: 泛型（Generics）数据库操作必须添加 Trait bound（`T: Display` 或 `T: Serialize`）。
 
 ### 编译错误 3：生命周期不匹配导致悬垂引用
 
@@ -375,7 +375,7 @@ fn query_result() -> &str {
 }
 ```
 
-> **修正**: 数据库查询结果通常需要返回拥有所有权的类型（`String`、`Vec<u8>`）或 `Box<str>`，不能返回局部数据的引用。
+> **修正**: 数据库查询结果通常需要返回拥有所有权的类型（`String`、`Vec<u8>`）或 `Box<str>`，不能返回局部数据的引用（Reference）。
 
 ### 编译错误 4：并发连接池的 `Send` 约束不满足（编译错误）
 
@@ -431,7 +431,7 @@ async fn good_query(pool: &sqlx::SqlitePool) -> Result<(), sqlx::Error> {
 }
 ```
 
-> **修正**: SQLx 的宏（`query!`、`query_as!`）在编译期解析 SQL 并验证返回类型与数据库 schema 的一致性。若类型不匹配，编译错误而非运行时 panic。这是 Rust"将错误提前到编译期"哲学在数据库访问层的典型应用。与 Go/Java 的运行时反射映射相比，SQLx 提供零开销、类型安全的查询接口。[来源: [SQLx Documentation](https://docs.rs/sqlx/)]
+> **修正**: SQLx 的宏（Macro）（`query!`、`query_as!`）在编译期解析 SQL 并验证返回类型与数据库 schema 的一致性（Coherence）。若类型不匹配，编译错误而非运行时 panic。这是 Rust"将错误提前到编译期"哲学在数据库访问层的典型应用。与 Go/Java 的运行时反射映射相比，SQLx 提供零开销、类型安全的查询接口。[来源: [SQLx Documentation](https://docs.rs/sqlx/)]
 
 ---
 
@@ -453,7 +453,7 @@ async fn good_query(pool: &sqlx::SqlitePool) -> Result<(), sqlx::Error> {
 fn main() {}
 ```
 
-> **修正**: Rust 的 ORM 生态（`Sea-ORM`、`Diesel`、`sqlx`）的 schema 验证：1) **Sea-ORM** — 运行时验证，代码优先（entity 生成 migration）；2) **Diesel** — 编译期验证（`table!` 宏从 migration 生成 Rust 代码，schema 变更需重新运行 migration）；3) **sqlx** — 编译期验证（`query!` 宏在编译时连接数据库检查 SQL）。`sqlx` 的 compile-time checked queries 是 Rust 数据库访问的独特优势：SQL 语法、列名、类型在编译期验证，避免运行时错误。但这要求编译时数据库可访问（CI 中需配置 `SQLX_OFFLINE` + query 缓存文件）。这与 Python 的 SQLAlchemy（运行时反射）或 Java 的 Hibernate（注解 + 运行时验证）不同——Rust 的 ORM 趋向编译期安全。[来源: [Sea-ORM](https://www.sea-ql.org/SeaORM/)] · [来源: [Diesel](https://diesel.rs/)] · [来源: [sqlx](https://docs.rs/sqlx/)]
+> **修正**: Rust 的 ORM 生态（`Sea-ORM`、`Diesel`、`sqlx`）的 schema 验证：1) **Sea-ORM** — 运行时验证，代码优先（entity 生成 migration）；2) **Diesel** — 编译期验证（`table!` 宏（Macro）从 migration 生成 Rust 代码，schema 变更需重新运行 migration）；3) **sqlx** — 编译期验证（`query!` 宏在编译时连接数据库检查 SQL）。`sqlx` 的 compile-time checked queries 是 Rust 数据库访问的独特优势：SQL 语法、列名、类型在编译期验证，避免运行时错误。但这要求编译时数据库可访问（CI 中需配置 `SQLX_OFFLINE` + query 缓存文件）。这与 Python 的 SQLAlchemy（运行时反射）或 Java 的 Hibernate（注解 + 运行时验证）不同——Rust 的 ORM 趋向编译期安全。[来源: [Sea-ORM](LINK_PLACEHOLDER)] · [来源: [Diesel](LINK_PLACEHOLDER)] · [来源: [sqlx](LINK_PLACEHOLDER)]
 > **过渡**: 数据库系统：Rust 在存储引擎中的语义 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 数据库系统：Rust 在存储引擎中的语义 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 数据库系统：Rust 在存储引擎中的语义 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

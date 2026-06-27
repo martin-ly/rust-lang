@@ -43,16 +43,16 @@
 
 ## 认知路径（Cognitive Path）
 
-> **学习递进**: 从"区块链为什么需要 Rust"的直觉，深入到"类型系统如何消除整类合约漏洞"的形式化理解。
+> **学习递进**: 从"区块链为什么需要 Rust"的直觉，深入到"类型系统（Type System）如何消除整类合约漏洞"的形式化理解。
 
 ### 第 1 步：为什么区块链领域特别需要内存安全？
 >
 
-智能合约一旦部署即不可篡改，漏洞意味着**不可逆的资金损失**（The DAO、Parity 多签冻结等事件）。传统 EVM/Solidity 合约依赖运行时检查和人工审计，而 Rust 的编译期保证可消除整类漏洞。
+智能合约一旦部署即不可篡改，漏洞意味着**不可逆的资金损失**（The DAO、Parity 多签冻结等事件）。传统 EVM/Solidity 合约依赖运行时（Runtime）检查和人工审计，而 Rust 的编译期保证可消除整类漏洞。
 
 ### 第 2 步：Rust 链与 EVM 链的本质差异是什么？
 
-Solana/Polkadot/Near 等 Rust 链将**合约执行模型**从"单线程状态机"推进到"并行交易处理"（Sealevel）或"异构分片"（Substrate）。Rust 的所有权模型天然匹配这种并行资源管理需求。 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+Solana/Polkadot/Near 等 Rust 链将**合约执行模型**从"单线程状态机"推进到"并行交易处理"（Sealevel）或"异构分片"（Substrate）。Rust 的所有权（Ownership）模型天然匹配这种并行资源管理需求。 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 第 3 步：类型系统如何替代安全审计的一部分工作？
 >
@@ -62,7 +62,7 @@ Solana/Polkadot/Near 等 Rust 链将**合约执行模型**从"单线程状态机
 ### 第 4 步：形式化验证在合约中的边界在哪里？
 >
 
-Kani 等工具可以验证 unsafe 边界和整数无溢出，但无法验证**业务逻辑正确性**（如"只有所有者才能转账"）。类型系统消除"如何做"的错误，形式化验证消除"做什么"的偏差。
+Kani 等工具可以验证 unsafe 边界和整数无溢出，但无法验证**业务逻辑正确性**（如"只有所有者才能转账"）。类型系统（Type System）消除"如何做"的错误，形式化验证消除"做什么"的偏差。
 
 ---
 
@@ -99,7 +99,7 @@ mindmap
 >
 > **使用建议**: 学习新链时，将其归入对应分支并比较漏洞消除机制与形式化验证策略。 [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 >
-> **关键洞察**: Rust 链的安全优势不是单一技术点，而是从编译期类型系统到运行时调度再到形式化验证的纵深防御体系。
+> **关键洞察**: Rust 链的安全优势不是单一技术点，而是从编译期类型系统到运行时（Runtime）调度再到形式化验证的纵深防御体系。
 
 ---
 
@@ -110,7 +110,7 @@ mindmap
 
 | 漏洞类别 | Solidity/EVM 现状 | Rust 合约的编译期保证 |
 |:---|:---|:---|
-| **重入攻击 (Reentrancy)** | 依赖 `checks-effects-interactions` 模式和人工审计 | 所有权 + `&mut` 独占访问 ⟹ 同一时刻只有一个调用者可修改状态 |
+| **重入攻击 (Reentrancy)** | 依赖 `checks-effects-interactions` 模式和人工审计 | 所有权（Ownership） + `&mut` 独占访问 ⟹ 同一时刻只有一个调用者可修改状态 |
 | **整数溢出** | Solidity 0.8+ 引入运行时 checked math（gas 开销） | `u64`/`u128` 默认 panic on overflow；`checked_add` 强制显式处理 |
 | **未初始化存储指针** | 可指向 slot 0（即 `owner` 等敏感状态） | `Option<T>` + 编译期初始化检查 ⟹ 不存在未初始化变量 |
 | **栈深度攻击** | EVM 1024 栈深度限制可被利用 | 无显式栈深度限制；调用栈由操作系统管理，且受 Rust 的 safe 边界保护 |
@@ -142,7 +142,7 @@ fn process_instruction(
 }
 ```
 
-> **Solana 运行时借用检查**: Sealevel 并行执行引擎在**运行时**对账户状态进行借用检查（与 Rust 编译期借用检查同构），确保并行交易无数据竞争。 [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
+> **Solana 运行时借用（Borrowing）检查**: Sealevel 并行执行引擎在**运行时（Runtime）**对账户状态进行借用检查（与 Rust 编译期借用检查同构），确保并行交易无数据竞争。 [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 
 ---
 
@@ -154,9 +154,9 @@ fn process_instruction(
 | 维度 | Solana 设计 | Rust 角色 |
 |:---|:---|:---|
 | **执行模型** | Sealevel：基于账户访问模式的并行交易执行 | Rust `AccountInfo` 的 `&` / `&mut` 语义映射到运行时读/写锁 |
-| **状态模型** | 账户存储（非 UTXO 亦非 EVM 状态树） | `Account` 结构体的序列化/反序列化由 Rust 类型系统约束 |
+| **状态模型** | 账户存储（非 UTXO 亦非 EVM 状态树） | `Account` 结构体（Struct）的序列化/反序列化由 Rust 类型系统约束 |
 | **程序语言** | Rust（主要）、C | `no_std` + `solana-program` crate |
-| **关键安全机制** | 运行时借用检查 + 租金机制 | Rust 所有权防止账户数据别名写；租金防止状态膨胀 |
+| **关键安全机制** | 运行时借用（Borrowing）检查 + 租金机制 | Rust 所有权（Ownership）防止账户数据别名写；租金防止状态膨胀 |
 
 ```mermaid
 graph TD
@@ -179,10 +179,10 @@ graph TD
 
 | 维度 | Substrate 设计 | Rust 角色 |
 |:---|:---|:---|
-| **架构** | 中继链 + 平行链（heterogeneous sharding） | Substrate 节点完全用 Rust 编写；FRAME 宏生成 pallet 脚手架 |
-| **合约层** | pallet-contracts（Wasm）+ ink!（Rust DSL） | ink! 是嵌入式 DSL，利用 Rust 宏生成合约 ABI |
+| **架构** | 中继链 + 平行链（heterogeneous sharding） | Substrate 节点完全用 Rust 编写；FRAME 宏（Macro）生成 pallet 脚手架 |
+| **合约层** | pallet-contracts（Wasm）+ ink!（Rust DSL） | ink! 是嵌入式 DSL，利用 Rust 宏（Macro）生成合约 ABI |
 | **升级机制** | 无分叉运行时升级（Wasm 替换） | `sp_version` + `wasm-builder` 的编译期版本校验 |
-| **形式化方向** | KILT、Interlay 等团队使用 Kani 验证 pallet | Rust 类型系统 + Kani 覆盖 unsafe 和算术边界 |
+| **形式化方向** | KILT、Interlay 等团队使用 Kani 验证 pallet | Rust 类型系统（Type System） + Kani 覆盖 unsafe 和算术边界 |
 
 ```rust,ignore
 // ✅ ink! 智能合约：Rust 宏 DSL
@@ -227,7 +227,7 @@ mod erc20 {
 |:---|:---|:---|
 | **合约语言** | Rust、AssemblyScript | `near-sdk-rs` 提供 Rust 绑定 |
 | **状态模型** | Trie-based 账户状态 | Rust `LookupMap` / `UnorderedMap` 封装 trie 访问 |
-| **Promise API** | 异步跨合约调用的 first-class 抽象 | Rust `Promise` 类型封装异步调用链，编译期保证回调签名匹配 |
+| **Promise API** | 异步（Async）跨合约调用的 first-class 抽象 | Rust `Promise` 类型封装异步调用链，编译期保证回调签名匹配 |
 
 ---
 
@@ -242,9 +242,9 @@ mod erc20 {
 | **访问控制遗漏** | `onlyOwner` 修饰器需手动添加 | 无直接帮助，但 `Auth` 类型可通过类型状态模式强制检查 | Typestate：权限作为类型参数 |
 | **未检查的外部调用返回值** | `call` 返回 `bool` 可被忽略 | `Result<T, E>` 的 `#[must_use]` 强制处理错误 | 代数数据类型：错误不可静默丢弃 |
 | **时间操纵** | `block.timestamp` 为普通 `uint256` | 无根本解决，但 `Slot` / `Epoch` 新类型可限制误用 | 新类型模式（Newtype） |
-| **Delegatecall 注入** | `delegatecall` 可任意修改调用者状态 | Rust 无 delegatecall 等价物；Wasm 模块边界隔离 | 模块边界 = 所有权隔离 |
+| **Delegatecall 注入** | `delegatecall` 可任意修改调用者状态 | Rust 无 delegatecall 等价物；Wasm 模块（Module）边界隔离 | 模块边界 = 所有权隔离 |
 
-> **关键论证**: Rust 消除的不是"所有漏洞"，而是**与内存安全和类型错误相关的系统性漏洞类别**。业务逻辑漏洞（如价格预言机操纵、闪电贷攻击）仍需形式化规约和审计。
+> **关键论证**: Rust 消除的不是"所有漏洞"，而是**与内存安全（Memory Safety）和类型错误相关的系统性漏洞类别**。业务逻辑漏洞（如价格预言机操纵、闪电贷攻击）仍需形式化规约和审计。
 
 ### 3.2 形式化验证工具链：Kani 在合约验证中的应用
 
@@ -417,7 +417,7 @@ let coin: Coin = get_coin();
 | **所有权表达** | 对象有单一 `Owner` 地址 | 资源存储在发布者账户下 | `&mut self` 独占合约状态 |
 | **并行执行** | 交易显式声明输入对象，非冲突对象并行 | 区块级顺序执行（当前） | 依赖链运行时调度 |
 | **资源转移** | `transfer(object, recipient)` 显式转移 | `move_to` / `move_from` 全局操作 | 存储映射的 `insert` / `remove` |
-| **借用语义** | `&T` / `&mut T` 借用对象引用 | `borrow_global<T>(addr)` 全局借用 | `&` / `&mut` 编译期借用检查 |
+| **借用语义** | `&T` / `&mut T` 借用对象引用（Reference） | `borrow_global<T>(addr)` 全局借用 | `&` / `&mut` 编译期借用检查 |
 
 ```move
 // ✅ Sui: 对象所有权显式转移
@@ -438,9 +438,9 @@ public fun get_balance(addr: address): u64 acquires Coin {
 | 安全维度 | Move (Sui/Aptos) | Rust (ink!/Solana) | 形式化根基 |
 |:---|:---|:---|:---|
 | **资源唯一性** | Ability 系统 + 字节码验证器 | 所有权 + `Drop`/`Clone` trait | 线性逻辑：资源不可复制、不可丢弃 |
-| **内存安全** | 字节码验证器检查引用安全 | 编译期借用检查器 | 分离逻辑 / 别名类型系统 |
+| **内存安全（Memory Safety）** | 字节码验证器检查引用（Reference）安全 | 编译期借用检查器 | 分离逻辑 / 别名类型系统 |
 | **全局状态访问** | `borrow_global` / `move_to`（显式 acquires） | 运行时存储 API（`Mapping` / `AccountInfo`）| 效果系统：全局状态作为显式 effect |
-| **并发安全** | Sui 对象级并行；Aptos 顺序执行 | Solana Sealevel 运行时借用检查 | 会话类型 / 区域类型 |
+| **并发安全（Concurrency Safety）** | Sui 对象级并行；Aptos 顺序执行 | Solana Sealevel 运行时借用检查 | 会话类型 / 区域类型 |
 | **形式化验证** | Move Prover（Boogie/Z3 后端）| Kani（Rust 模型检测）| SMT 求解 / 符号执行 |
 
 > **关键差异**: Move 的**字节码验证器**在部署时执行额外的安全检查（引用不悬空、资源不丢失、类型不混淆），这是 Rust 编译器不提供的**链上验证层**。Rust 合约依赖 Wasm 沙箱和运行时检查，而 Move 合约在**字节码级别**即被验证为安全。
@@ -532,7 +532,7 @@ Substrate FRAME 的存储 API 使用宏生成（`#[pallet::storage]`），这对
 | 挑战 | 解决方案 | 验证范围 |
 |:---|:---|:---|
 | **宏生成的存储 getter** | 直接测试底层 `StorageValue` / `StorageMap` 的数学性质 | 绕过宏，验证核心逻辑 |
-| **运行时上下文依赖** | 将 `T::AccountId`、`T::BlockNumber` 抽象为符号化类型参数 | 验证泛型逻辑的正确性 |
+| **运行时上下文依赖** | 将 `T::AccountId`、`T::BlockNumber` 抽象为符号化类型参数 | 验证泛型（Generics）逻辑的正确性 |
 | **权重计算安全** | 验证 `#[pallet::weight]` 函数不会溢出且为正值 | 防止 gas 计量攻击 |
 
 ```rust,ignore
@@ -557,7 +557,7 @@ fn verify_weight_calculation_does_not_overflow() {
 | 整数溢出 / 下溢 | 业务逻辑正确性（"用户 A 是否真的拥有这些资产"）|
 | 数组/映射索引越界 | 预言机价格操纵的经济安全性 |
 | 状态转换函数的不变量 | 治理攻击（恶意提案通过）|
-| 纯计算逻辑的分支覆盖 | 跨链通信的异步安全性 |
+| 纯计算逻辑的分支覆盖 | 跨链通信的异步（Async）安全性 |
 
 > **核心结论**: Kani 在 Substrate pallet 中的价值不是"验证合约无漏洞"，而是**将运行时错误转化为编译期错误**——与 Rust 本身的哲学一致。业务逻辑漏洞仍需经济模型审计和博弈论分析。
 > **来源**: [Interlay — Security Audit Report] · [Kani — Substrate Verification Guide] · [Parity — FRAME Security Best Practices]
@@ -617,7 +617,7 @@ fn process_instruction(
 }
 ```
 
-> **SBF Verifier 的形式化根基**: Solana 字节码验证器实现了**控制流完整性（CFI）**和**内存安全**的静态检查。这与 Rust 编译器的借用检查器是互补的——Rust 保证源代码级安全，SBF verifier 保证字节码级安全。
+> **SBF Verifier 的形式化根基**: Solana 字节码验证器实现了**控制流完整性（CFI）**和**内存安全（Memory Safety）**的静态检查。这与 Rust 编译器的借用检查器是互补的——Rust 保证源代码级安全，SBF verifier 保证字节码级安全。
 
 ### 8.2 Polkadot PVF：Wasm 验证函数的形式化
 
@@ -650,8 +650,8 @@ Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，
 | L1-L4 核心概念 | 在区块链中的表达 | 安全效应 |
 |:---|:---|:---|
 | **L1 所有权** | 账户状态 `AccountInfo` 的独占/共享访问控制 | 编译期防止同一账户被多个交易并发修改（重入消除） |
-| **L1 生命周期** | 合约存储引用的有效性由区块高度/epoch 约束 | 状态引用不会指向已清理的账户（无 use-after-free） |
-| **L2 Trait / 泛型** | `Balance: CheckedAdd`、代币标准的 `PSP22` / `SPL` trait | 标准接口的编译期兼容性检查 |
+| **L1 生命周期（Lifetimes）** | 合约存储引用的有效性由区块高度/epoch 约束 | 状态引用不会指向已清理的账户（无 use-after-free） |
+| **L2 Trait / 泛型（Generics）** | `Balance: CheckedAdd`、代币标准的 `PSP22` / `SPL` trait | 标准接口的编译期兼容性检查 |
 | **L3 Unsafe** | 合约底层的序列化/VM 边界（如 Solana 的 `solana-program`） | `unsafe` 集中在运行时 crate，合约开发者保持 safe |
 | **L4 线性逻辑** | 代币作为线性资源（不可复制、不可凭空产生） | 总量守恒由类型系统保证 |
 
@@ -672,7 +672,7 @@ Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，
 |:---|:---|:---|
 | 所有权 | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) | 合约状态独占访问的根基 |
 | 借用检查 | [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md) | Sealevel 运行时并行调度同构 |
-| 生命周期 | [`../01_foundation/03_lifetimes.md`](../01_foundation/03_lifetimes.md) | 跨区块状态引用有效性 |
+| 生命周期（Lifetimes） | [`../01_foundation/03_lifetimes.md`](../01_foundation/03_lifetimes.md) | 跨区块状态引用有效性 |
 | 类型系统 | [`../01_foundation/04_type_system.md`](../01_foundation/04_type_system.md) | 漏洞类别消除机制 |
 | Unsafe | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | VM 运行时底层边界 |
 | 线性逻辑 | [`../04_formal/01_linear_logic.md`](../04_formal/01_linear_logic.md) | 代币作为线性资源的形式化 |
@@ -914,5 +914,5 @@ Solidity 是专为 EVM 设计的高级语言，有内置的合约和事件概念
 <details>
 <summary>✅ 答案与解析</summary>
 
-Substrate 是 Parity 开发的区块链开发框架，完全用 Rust 编写。它提供模块化组件（共识、P2P、存储），使开发者可以用 Rust 快速构建自定义区块链。
+Substrate 是 Parity 开发的区块链开发框架，完全用 Rust 编写。它提供模块（Module）化组件（共识、P2P、存储），使开发者可以用 Rust 快速构建自定义区块链。
 </details>

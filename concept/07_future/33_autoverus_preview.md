@@ -17,6 +17,8 @@
 >
 > **来源**: [Verus GitHub](https://github.com/verus-lang/verus) · [Verus 文档](https://verus-lang.github.io/verus/) · [AutoVerus 论文 (OOPSLA 2025)](https://doi.org/10.1145/3763174) · [arXiv 版本](https://arxiv.org/abs/2409.13082)
 
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 ## 一、权威定义
@@ -24,7 +26,7 @@
 > Verus is a tool for verifying the correctness of Rust code using proofs and specifications also written in Rust.
 > —— AutoVerus 论文
 
-**Verus** 允许开发者用 Rust 语法编写程序、规格（specifications）和证明（proofs），然后调用 SMT 求解器（Z3）自动验证。它充分利用 Rust 类型系统已经保证的内存安全与线程安全， thus the verifier only needs to reason about functional correctness.
+**Verus** 允许开发者用 Rust 语法编写程序、规格（specifications）和证明（proofs），然后调用 SMT 求解器（Z3）自动验证。它充分利用 Rust 类型系统（Type System）已经保证的内存安全（Memory Safety）与线程安全， thus the verifier only needs to reason about functional correctness.
 
 **AutoVerus** 则进一步利用大语言模型（LLM）自动为 Verus 程序生成证明，降低形式化验证的专家门槛。
 
@@ -66,7 +68,7 @@ fn binary_search(v: &Vec<i32>, x: i32) -> (r: usize)
 
 Verus 的证明语言是 Rust 的超集，但验证时：
 
-1. Rust 借用检查器保证内存安全、线程安全；
+1. Rust 借用（Borrowing）检查器保证内存安全（Memory Safety）、线程安全；
 2. Verus 验证器在此基础上证明功能正确性。
 
 这种分层显著减少了验证器需要处理的复杂度。
@@ -129,7 +131,7 @@ AutoVerus 论文提出五个核心原则：
 
 - **规格仍由人写**：AutoVerus 自动生成的是**证明**，不是规格。规格是否表达真实意图仍需人工判断。
 - **LLM 不可解释性**：当 AutoVerus 失败时，调试成本可能高于手写证明。
-- **仅限 Verus 子集**：复杂所有权、unsafe 代码、异步代码的自动证明仍具挑战。
+- **仅限 Verus 子集**：复杂所有权（Ownership）、unsafe 代码、异步（Async）代码的自动证明仍具挑战。
 - **工具链演进**：Verus 语言和标准库规格仍在快速迭代，AutoVerus 需要持续适配。
 
 ---

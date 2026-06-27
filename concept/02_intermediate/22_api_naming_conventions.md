@@ -42,7 +42,7 @@
     - [5.4 `from`](#54-from)
   - [六、动作与回调](#六动作与回调)
     - [6.1 `by`](#61-by)
-    - [6.2 `with` 闭包形式](#62-with-闭包形式)
+    - [6.2 `with` 闭包（Closures）形式](LINK_PLACEHOLDER)
   - [七、常见陷阱](#七常见陷阱)
   - [八、快速对照表](#八快速对照表)
   - [九、练习题](#九练习题)
@@ -171,8 +171,8 @@ impl Task {
 
 用于返回某种视图或转换结果：
 
-- `as_`：返回借用/视图（cheap，通常不分配）
-- `to_`：返回所有权转换结果（可能分配）
+- `as_`：返回借用（Borrowing）/视图（cheap，通常不分配）
+- `to_`：返回所有权（Ownership）转换结果（可能分配）
 
 ```rust,ignore
 impl Task {
@@ -194,7 +194,7 @@ impl Task {
 
 ### 4.1 `mut_`
 
-返回可变引用的访问器，对应 `xxx()` 的不可变版本。
+返回可变引用（Mutable Reference）的访问器，对应 `xxx()` 的不可变版本。
 
 ```rust,ignore
 impl Task {
@@ -216,7 +216,7 @@ impl Task {
 
 ### 5.1 `to_`
 
-`to_` 表示一个**可能分配、返回新所有权**的转换。
+`to_` 表示一个**可能分配、返回新所有权（Ownership）**的转换。
 
 ```rust
 let s: String = "hello".to_string(); // 分配
@@ -225,7 +225,7 @@ let v: Vec<i32> = [1, 2, 3].to_vec(); // 分配
 
 ### 5.2 `as_`
 
-`as_` 表示一个**廉价、返回借用/视图**的转换。
+`as_` 表示一个**廉价、返回借用（Borrowing）/视图**的转换。
 
 ```rust
 let s = String::from("hello");
@@ -286,7 +286,7 @@ where
 
 ### 6.2 `with` 闭包形式
 
-接收闭包以自定义行为的 API，通常用 `with_` 前缀。
+接收闭包（Closures）以自定义行为的 API，通常用 `with_` 前缀。
 
 ```rust,ignore
 fn with_each_task<F>(tasks: &[Task], mut f: F)
@@ -325,7 +325,7 @@ where
 | `to_` | 分配式转换 | `U`（_owned_） | `to_string()` |
 | `into_` | 消耗式转换 | `U`（_owned_） | `into_inner()` |
 | `from` | 标准 `From` trait | `Self` | `String::from("x")` |
-| `mut_` / `_mut` | 可变引用访问器 | `&mut U` | `get_mut()` |
+| `mut_` / `_mut` | 可变引用（Reference）访问器 | `&mut U` | `get_mut()` |
 | `by` / `by_key` | 通过闭包/key 执行 | varies | `sort_by()` |
 
 ---
@@ -347,7 +347,7 @@ pub struct Config {
 
 - 主构造函数
 - 从 `(&str, u16)` 构造的 `From` 实现
-- 返回 host 不可变/可变引用的访问器
+- 返回 host 不可变/可变引用（Mutable Reference）的访问器
 - 判断端口是否为默认 HTTP 端口（80）的谓词
 - 将配置序列化为 `String` 的方法（分配新内存）
 

@@ -17,7 +17,7 @@
 > 覆盖 Rust **测试生态**的全景——从内置测试框架（#[test]）、
 > mockall [来源: [mockall](https://docs.rs/mockall/latest/mockall/)] 模拟、
 > property-based testing（proptest [来源: [proptest](https://docs.rs/proptest/latest/proptest/)]）到模糊测试（cargo-fuzz），
-> 分析 Rust 的类型系统如何与测试策略协同实现"编译即验证"的工程学理念。
+> 分析 Rust 的类型系统（Type System）如何与测试策略协同实现"编译即验证"的工程学理念。
 > **前置概念**:
 > [Error Handling](../02_intermediate/04_error_handling.md) ·
 > [Macros](../03_advanced/04_macros.md)
@@ -140,7 +140,7 @@ mod tests {
 
 > **认知功能**: Rust 的测试框架是**语言内置**的——不需要外部依赖即可写测试。这与 JavaScript（需要 Jest/Mocha）或 Java（需要 JUnit）形成对比。
 > [来源: [TRPL — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)]
-> **关键洞察**: `#[cfg(test)]` 条件编译使测试代码在生产构建中**完全消除**——零运行时开销。
+> **关键洞察**: `#[cfg(test)]` 条件编译使测试代码在生产构建中**完全消除**——零运行时（Runtime）开销。
 > [来源: [TRPL Ch11 — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)]
 
 ---
@@ -208,7 +208,7 @@ Rust 类型系统作为验证工具:
   └── 测试应聚焦于**业务逻辑**和**边界条件**
 ```
 
-> **编译即验证洞察**: Rust 的**类型系统是最大的测试套件**——它在编译期消除了其他语言需要大量测试才能发现的错误。这使得 Rust 的测试可以**聚焦于业务价值**而非语言安全。
+> **编译即验证洞察**: Rust 的**类型系统（Type System）是最大的测试套件**——它在编译期消除了其他语言需要大量测试才能发现的错误。这使得 Rust 的测试可以**聚焦于业务价值**而非语言安全。
 > [来源: [Rust Type System as Verification](https://doc.rust-lang.org/reference/type-system.html)]
 
 ---
@@ -292,7 +292,7 @@ fn test_user_service() {
 // - 支持序列和状态机
 ```
 
-> **Mock 洞察**: `mockall` 通过**过程宏**自动生成 Mock 实现——这是 Rust 宏系统的强大应用，避免了手动编写 mock 的繁琐。
+> **Mock 洞察**: `mockall` 通过**过程宏（Procedural Macro）**自动生成 Mock 实现——这是 Rust 宏系统的强大应用，避免了手动编写 mock 的繁琐。
 > [来源: [mockall Documentation](https://docs.rs/mockall/latest/mockall/)]
 
 ---
@@ -366,7 +366,7 @@ unsafe 代码验证:
   → loom::model
 ```
 
-> **策略矩阵**: Rust 的测试生态是**分层验证**——从编译期类型检查到运行时模糊测试，每层针对不同类型的错误。
+> **策略矩阵**: Rust 的测试生态是**分层验证**——从编译期类型检查到运行时（Runtime）模糊测试，每层针对不同类型的错误。
 > [来源: [Rust Testing Guide](https://doc.rust-lang.org/rust-by-example/testing.html)] · [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
 
 ---
@@ -431,7 +431,7 @@ graph TD
 └── 缓解: 测试并行化、选择性测试
 ```
 
-> **边界要点**: 测试生态的边界主要与**异步复杂性**、**全局状态**、**外部依赖**、**unsafe 验证**和**编译时间**相关。
+> **边界要点**: 测试生态的边界主要与**异步（Async）复杂性**、**全局状态**、**外部依赖**、**unsafe 验证**和**编译时间**相关。
 > [来源: [Rust Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)]
 
 ---
@@ -503,7 +503,7 @@ graph TD
 
 ## 相关概念文件
 
-- [Error Handling](../02_intermediate/04_error_handling.md) — 错误处理
+- [Error Handling](../02_intermediate/04_error_handling.md) — 错误处理（Error Handling）
 - [Unsafe](../03_advanced/03_unsafe.md) — unsafe 代码测试
 - [Documentation](./14_documentation.md) — 文档测试
 
@@ -586,7 +586,7 @@ impl<T: Database> Service<T> {
 
 > **修正**:
 > Rust 的 mock 对象必须**显式实现**被模拟的 trait。这与 Python 的 `unittest.mock`（动态创建 mock）或 Java 的 Mockito（运行时字节码生成）不同——Rust 没有运行时反射，mock 必须在编译期存在。
-> `mockall` crate 通过过程宏自动生成 mock 实现，但底层仍是"为 trait 生成 struct 并实现"。
+> `mockall` crate 通过过程宏（Procedural Macro）自动生成 mock 实现，但底层仍是"为 trait 生成 struct 并实现"。
 > 这增加了测试代码的样板，但保证类型安全——mock 对象的方法签名必须与 trait 完全一致，编译器拒绝不一致的 mock。
 > [来源: [mockall Documentation](https://docs.rs/mockall/)]
 
@@ -609,12 +609,12 @@ mod more_tests {
 ```
 
 > **修正**:
-> Rust 的测试函数名在**模块路径层面**唯一：`tests::test_add` 和 `more_tests::test_add` 是不同的测试。
+> Rust 的测试函数名在**模块（Module）路径层面**唯一：`tests::test_add` 和 `more_tests::test_add` 是不同的测试。
 > 但 `cargo test` 的过滤器 `--test test_add` 会匹配两者，同时运行。
 > 真正的命名冲突：
 >
 > 1) `#[test]` 函数与 `#[bench]` 函数同名（不冲突，不同命名空间）；
-> 2) 集成测试文件（`tests/` 目录）中的模块名与 lib 中的模块名（可能解析歧义）；
+> 2) 集成测试文件（`tests/` 目录）中的模块（Module）名与 lib 中的模块名（可能解析歧义）；
 > 3) doc test 中的示例函数名与单元测试冲突（罕见）。
 > `cargo test` 的输出显示完整路径，帮助区分。
 > 这与 Java 的 JUnit（方法名 + 类名唯一）或 Python 的 `pytest`（模块路径 + 函数名唯一）类似——Rust 的测试命名空间是层次化的，冲突风险低但过滤器匹配需小心。
@@ -667,7 +667,7 @@ fn documented() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-先运行单元测试（`#[cfg(test)]` 模块），再运行集成测试（`tests/` 目录下的每个文件作为独立 crate），最后运行文档测试（`rustdoctest`）。
+先运行单元测试（`#[cfg(test)]` 模块（Module）），再运行集成测试（`tests/` 目录下的每个文件作为独立 crate），最后运行文档测试（`rustdoctest`）。
 </details>
 
 ---

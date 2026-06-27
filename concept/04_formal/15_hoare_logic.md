@@ -52,12 +52,12 @@
     - [10.3 边界测试：霍尔逻辑的不变量与 Rust 的 `while let`（编译错误）](#103-边界测试霍尔逻辑的不变量与-rust-的-while-let编译错误)
     - [10.4 边界测试： weakest precondition 与 `unsafe` 代码的规范缺口（编译错误/验证失败）](#104-边界测试-weakest-precondition-与-unsafe-代码的规范缺口编译错误验证失败)
     - [10.5 边界测试：循环不变量的发现与人工介入（验证失败）](#105-边界测试循环不变量的发现与人工介入验证失败)
-    - [10.9 边界测试：生命周期参数的不匹配返回](#109-边界测试生命周期参数的不匹配返回)
+    - [10.9 边界测试：生命周期（Lifetimes）参数的不匹配返回](LINK_PLACEHOLDER)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Hoare 三元组（理解层）](#测验-1hoare-三元组理解层)
     - [测验 2：最弱前置条件（Weakest Precondition）（应用层）](#测验-2最弱前置条件weakest-precondition应用层)
     - [测验 3：循环不变量（应用层）](#测验-3循环不变量应用层)
-    - [测验 4：Rust 类型系统对 Hoare 逻辑的编码（分析层）](#测验-4rust-类型系统对-hoare-逻辑的编码分析层)
+    - [测验 4：Rust 类型系统（Type System）对 Hoare 逻辑的编码（分析层）](LINK_PLACEHOLDER)
     - [测验 5：Hoare 逻辑的局限性与 Rust 扩展（评价层）](#测验-5hoare-逻辑的局限性与-rust-扩展评价层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -108,7 +108,7 @@ Hoare 三元组的形式化定义:
   └─────────────┴─────────────────────────┴─────────────────────────┘
 ```
 
-> **认知功能**: Hoare 三元组是**程序验证的原子单位**——它将"程序正确性"这一模糊概念转化为可验证的数学陈述：给定前提，执行代码，得到保证。这与 Rust 类型系统的"给定输入类型，执行函数，得到输出类型"在结构上同构。
+> **认知功能**: Hoare 三元组是**程序验证的原子单位**——它将"程序正确性"这一模糊概念转化为可验证的数学陈述：给定前提，执行代码，得到保证。这与 Rust 类型系统（Type System）的"给定输入类型，执行函数，得到输出类型"在结构上同构。
 > [来源: [Hoare 1969 — An Axiomatic Basis for Computer Programming](https://doi.org/10.1093/comjnl/12.4.576)]
 
 ---
@@ -320,7 +320,7 @@ Rust unsafe 代码的 Hoare 三元组视角:
   └─────────────────┴─────────────────────────┘
 ```
 
-> **认知功能**: 用 Hoare 逻辑审视 unsafe Rust，可以发现**借用检查器本质上是一个自动化的 Hoare 验证器**——它为 safe Rust 自动生成并验证前置/后置条件，而 unsafe Rust 将这些责任显式交还给开发者。
+> **认知功能**: 用 Hoare 逻辑审视 unsafe Rust，可以发现**借用（Borrowing）检查器本质上是一个自动化的 Hoare 验证器**——它为 safe Rust 自动生成并验证前置/后置条件，而 unsafe Rust 将这些责任显式交还给开发者。
 > [来源: [The Rustonomicon — What Unsafe Can Do](https://doc.rust-lang.org/nomicon/what-unsafe-does.html)]
 
 ---
@@ -337,7 +337,7 @@ Rust unsafe 代码的 Hoare 三元组视角:
 | Prusti | Viper（分离逻辑 + SMT） | 前置/后置/不变量注解 | 半自动 |
 | Creusot | Why3（Hoare 逻辑 + MLCFG） | Pearlite（Rust 子集） | 半自动 |
 | Kani | CBMC（有界模型检测） | 断言/harness | 全自动 |
-| Verus | Z3 SMT（所有权类型） | Verus 规格语言 | 半自动 |
+| Verus | Z3 SMT（所有权（Ownership）类型） | Verus 规格语言 | 半自动 |
 | Aeneas | 函数式翻译 + Coq/Lean | 手工证明 | 手动 |
 | RustBelt | Iris（高阶分离逻辑） | Coq 证明 | 手动 |
 
@@ -487,7 +487,7 @@ Rust unsafe 代码的 Hoare 三元组视角:
 > [来源: [Continuous Verification](https://www.verifythis.org/)]
 ```
 
-> **陷阱总结**: Hoare 逻辑应用的陷阱集中在**正确性层次混淆**、**不变量设计**、**unsafe 契约**、**运行时 vs 编译期验证**和**规格同步**五个方面——每个都反映了形式化方法从理论到实践的鸿沟。
+> **陷阱总结**: Hoare 逻辑应用的陷阱集中在**正确性层次混淆**、**不变量设计**、**unsafe 契约**、**运行时（Runtime） vs 编译期验证**和**规格同步**五个方面——每个都反映了形式化方法从理论到实践的鸿沟。
 > [来源: [Prusti User Guide](https://www.pm.inf.ethz.ch/research/prusti.html)]
 
 ---
@@ -594,7 +594,7 @@ fn divide_fixed(a: i32, b: NonZeroI32) -> i32 {
 > **修正**:
 > Hoare 逻辑的三元组 `{P} C {Q}` 中，前置条件 `P` 和后置条件 `Q` 是逻辑断言。
 > Rust 的类型系统可部分编码这些条件：`NonZeroI32` 类型编码 `b ≠ 0` 的前置条件，`Result<T, E>` 编码可能失败的后置条件。
-> 这是**类型驱动设计**（type-driven design）的体现——将运行时断言提升为编译期类型约束。
+> 这是**类型驱动设计**（type-driven design）的体现——将运行时（Runtime）断言提升为编译期类型约束。
 > 与依赖类型（Idris、Agda）相比，Rust 的编码能力有限（无法表达任意数学断言），但足以处理常见的不变量（非零、非空、正数等）。
 > [来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)]
 
@@ -644,13 +644,13 @@ fn drain_map(map: &mut std::collections::HashMap<i32, String>) {
 
 > **修正**:
 > 霍尔逻辑中的循环不变量（loop invariant）要求在循环体执行前后保持某个断言。
-> Rust 的借用检查在 `while let` 中隐式追踪不变量：
-> 迭代器 `map.iter()` 借用 `map`，循环体中 `map.remove` 需要 `&mut map`，二者冲突。
-> 即使逻辑上" draining 所有元素后 map 为空"是正确的，编译器无法验证每次迭代的不变量（迭代器状态与 map 状态一致）。
+> Rust 的借用（Borrowing）检查在 `while let` 中隐式追踪不变量：
+> 迭代器（Iterator） `map.iter()` 借用（Borrowing） `map`，循环体中 `map.remove` 需要 `&mut map`，二者冲突。
+> 即使逻辑上" draining 所有元素后 map 为空"是正确的，编译器无法验证每次迭代的不变量（迭代器（Iterator）状态与 map 状态一致）。
 >
 > 解决方案：
 >
-> 1) `while let Some((k, _)) = map.keys().next().copied() { map.remove(&k); }`（重新获取迭代器）；
+> 1) `while let Some((k, _)) = map.keys().next().copied() { map.remove(&k); }`（重新获取迭代器（Iterator））；
 > 2) `std::mem::take(map)` 后 drain；
 > 3) `retain`（若支持）。
 > 这与 Java 的 `ConcurrentHashMap`（迭代中修改可能抛 `ConcurrentModificationException`）或 C++ 的 `unordered_map`（迭代器可能失效）不同——Rust 在编译期阻止所有迭代中修改。
@@ -726,7 +726,7 @@ fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
 fn main() {}
 ```
 
-> **修正**: **生命周期标注**：1) `&'a str` 表示引用至少存活 `'a`；2) 返回 `'a` 要求数据存活至少 `'a`；3) `y` 的 lifetime `'b` 可能短于 `'a`，返回会导致悬垂引用。
+> **修正**: **生命周期（Lifetimes）标注**：1) `&'a str` 表示引用（Reference）至少存活 `'a`；2) 返回 `'a` 要求数据存活至少 `'a`；3) `y` 的 lifetime `'b` 可能短于 `'a`，返回会导致悬垂引用。
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -844,7 +844,7 @@ Hoare 逻辑视角：
 
 - `NonZeroI32` 的构造前提 `b ≠ 0` —— **前置条件**
 - 构造成功后，类型本身保证值非零 —— **不变量**
-- 除法操作无需运行时检查 —— 前置条件已在类型层面验证
+- 除法操作无需运行时（Runtime）检查 —— 前置条件已在类型层面验证
 
 这是**类型驱动设计**：将运行时断言提升为编译期类型约束。与依赖类型相比，Rust 的编码能力有限（无法表达任意数学断言），但足以处理常见不变量。
 </details>
@@ -875,7 +875,7 @@ Hoare 逻辑视角：
 - `P * Q` —— 分离合取（内存不重叠）
 - 帧规则 —— 局部推理
 
-Rust 的所有权系统正是分离逻辑的编译器自动实现：
+Rust 的所有权（Ownership）系统正是分离逻辑的编译器自动实现：
 
 - `own(T, ℓ)` ↔ `let x: T`
 - `&mut T` ↔ 独占分离权限
@@ -900,7 +900,7 @@ Rust 的所有权系统正是分离逻辑的编译器自动实现：
 
 > **过渡**: 掌握 Hoare 逻辑：程序验证的形式化基础与 Rust 契约 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 Hoare 逻辑：程序验证的形式化基础与 Rust 契约 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: Hoare 逻辑：程序验证的形式化基础与 Rust 契约 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: Hoare 逻辑：程序验证的形式化基础与 Rust 契约 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

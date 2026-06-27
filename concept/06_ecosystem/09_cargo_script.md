@@ -63,6 +63,7 @@ chmod +x csv_filter.rs && ./csv_filter.rs
 > **对标**: Python 单文件脚本、Go `go run`、Node.js 单文件执行
 
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+> **前置概念**: N/A
 ---
 
 > 来源: [RFC 3502 — Cargo Script Manifest](https://github.com/rust-lang/rfcs/pull/3502) ·
@@ -97,7 +98,7 @@ chmod +x csv_filter.rs && ./csv_filter.rs
     - [4.3 数据处理与临时任务](#43-数据处理与临时任务)
   - [五、形式化定位](#五形式化定位)
     - [5.1 匿名 Crate 语义](#51-匿名-crate-语义)
-    - [5.2 与模块系统的关系](#52-与模块系统的关系)
+    - [5.2 与模块（Module）系统的关系](LINK_PLACEHOLDER)
   - [六、与 L1-L4 的关系映射](#六与-l1-l4-的关系映射)
   - [七、来源与延伸阅读](#七来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
@@ -106,7 +107,7 @@ chmod +x csv_filter.rs && ./csv_filter.rs
   - [十、边界测试：Cargo Script 的编译错误](#十边界测试cargo-script-的编译错误)
     - [10.1 边界测试：`cargo script` 的依赖解析（编译错误）](#101-边界测试cargo-script-的依赖解析编译错误)
     - [10.2 边界测试：单文件脚本的模块限制（编译错误）](#102-边界测试单文件脚本的模块限制编译错误)
-    - [10.5 边界测试：`cargo script` 的缓存与依赖版本漂移（运行时行为变化）](#105-边界测试cargo-script-的缓存与依赖版本漂移运行时行为变化)
+    - [10.5 边界测试：`cargo script` 的缓存与依赖版本漂移（运行时（Runtime）行为变化）](LINK_PLACEHOLDER)
     - [10.7 边界测试：cargo script 的依赖解析与版本冲突（运行时/编译错误）](#107-边界测试cargo-script-的依赖解析与版本冲突运行时编译错误)
     - [10.3 边界测试：cargo script 的 shebang 与 Windows 兼容性（运行时错误）](#103-边界测试cargo-script-的-shebang-与-windows-兼容性运行时错误)
     - [补充定理链](#补充定理链)
@@ -229,7 +230,7 @@ edition = "2024"     # 默认当前 edition
 | **依赖管理** | 集中式 `Cargo.toml` | 嵌入式 frontmatter |
 | **版本控制** | 适合 Git 管理多文件 | 适合 gist / 快速分享 |
 | **编译缓存** | `target/` 目录 | `~/.cargo/script-cache/` |
-| **多文件模块** | ✅ `mod foo;` | ❌ 仅单文件（截至 1.95） |
+| **多文件模块（Module）** | ✅ `mod foo;` | ❌ 仅单文件（截至 1.95） |
 | `workspace = true` | ✅ 支持 | ❌ 不支持 |
 | `build.rs` | ✅ 支持 | ❌ 不支持 |
 | **适用场景** | 大型项目、库开发 | 脚本、原型、CI 辅助 |
@@ -415,8 +416,8 @@ Cargo Script:  File = Crate (单模块，无子模块)
 
 | L1-L4 概念 | Cargo Script 映射 |
 |:---|:---|
-| **L1 所有权** | 单文件脚本的 `main()` 仍遵循完整的所有权规则，无简化 |
-| **L2 泛型/Trait** | 依赖通过 frontmatter 声明，Trait bound 解析与传统项目一致 |
+| **L1 所有权（Ownership）** | 单文件脚本的 `main()` 仍遵循完整的所有权规则，无简化 |
+| **L2 泛型（Generics）/Trait** | 依赖通过 frontmatter 声明，Trait bound 解析与传统项目一致 |
 | **L3 Unsafe** | `unsafe` 代码在脚本中完全支持，无额外限制 |
 | **L4 形式化** | 脚本的形式化语义等价于"单文件匿名 crate"，编译器输入不变 |
 
@@ -437,7 +438,7 @@ Cargo Script:  File = Crate (单模块，无子模块)
 
 - [工具链总览](./01_toolchain.md) — Cargo 工作空间与编译器生态
 - [核心 Crate 选型](./03_core_crates.md) — 脚本中常用依赖的选择策略
-- [L2 泛型与 Trait](../02_intermediate/01_traits.md) — 脚本中泛型约束的完整支持
+- [L2 泛型与 Trait](../02_intermediate/01_traits.md) — 脚本中泛型（Generics）约束的完整支持
 
 ---
 

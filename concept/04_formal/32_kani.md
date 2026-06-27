@@ -126,7 +126,7 @@ fn verify_abs_returns_nonnegative() {
 }
 ```
 
-> **注意**: Kani 宏只在 `cfg(kani)` 下可用。项目内 crate 的 Kani 示例通常被 `#[cfg(kani)]` 包裹，普通 `cargo build/test` 会跳过它们。
+> **注意**: Kani 宏（Macro）只在 `cfg(kani)` 下可用。项目内 crate 的 Kani 示例通常被 `#[cfg(kani)]` 包裹，普通 `cargo build/test` 会跳过它们。
 
 ### 非确定性输入：`kani::any()`
 
@@ -287,11 +287,11 @@ fn verify_vec_push_safety() {
 
 | Crate / 文件 | 覆盖主题 | 运行命令 |
 |:---|:---|:---|
-| [`crates/c01_ownership_borrow_scope/src/kani_examples.rs`](../../crates/c01_ownership_borrow_scope/src/kani_examples.rs) | 所有权/借用、函数合约、循环合约、切片最大值 | `cargo kani --manifest-path crates/c01_ownership_borrow_scope/Cargo.toml` |
-| [`crates/c02_type_system/src/kani_examples.rs`](../../crates/c02_type_system/src/kani_examples.rs) | 泛型、trait bound、循环不变量、偶数计数 | `cargo kani --manifest-path crates/c02_type_system/Cargo.toml` |
+| [`crates/c01_ownership_borrow_scope/src/kani_examples.rs`](../../crates/c01_ownership_borrow_scope/src/kani_examples.rs) | 所有权（Ownership）/借用（Borrowing）、函数合约、循环合约、切片（Slice）最大值 | `cargo kani --manifest-path crates/c01_ownership_borrow_scope/Cargo.toml` |
+| [`crates/c02_type_system/src/kani_examples.rs`](../../crates/c02_type_system/src/kani_examples.rs) | 泛型（Generics）、trait bound、循环不变量、偶数计数 | `cargo kani --manifest-path crates/c02_type_system/Cargo.toml` |
 | [`crates/c08_algorithms/src/kani_examples.rs`](../../crates/c08_algorithms/src/kani_examples.rs) | 数组和、二分查找边界条件 | `cargo kani --manifest-path crates/c08_algorithms/Cargo.toml` |
 
-> **提示**: 由于 Kani 示例依赖 `kani` crate 的宏，普通 `cargo build` 不会编译这些模块。运行 `cargo kani` 时会自动进入 `cfg(kani)` 模式。
+> **提示**: 由于 Kani 示例依赖 `kani` crate 的宏（Macro），普通 `cargo build` 不会编译这些模块（Module）。运行 `cargo kani` 时会自动进入 `cfg(kani)` 模式。
 
 ---
 
@@ -301,7 +301,7 @@ fn verify_vec_push_safety() {
 |:---|:---|
 | **有界验证** | Kani 是 *bounded* model checker，对循环深度、递归深度、输入大小有界。超出边界无法保证结论。 |
 | **循环需合约或展开** | 无循环不变量时需要 `#[kani::unwind]`，且需验证展开次数足够。 |
-| **未支持 async / 并发** | 当前 Kani 主要验证同步、单线程 Rust 代码。async/await、多线程、原子操作支持有限或实验性。 |
+| **未支持 async / 并发** | 当前 Kani 主要验证同步、单线程 Rust 代码。async/await、多线程、原子操作（Atomic Operations）支持有限或实验性。 |
 | **标准库支持范围** | 部分 `std` API（如浮点运算、I/O、网络）建模不完整，可能报 "unsupported" 或需要 stub。 |
 | **验证复杂度** | 随着状态空间增长，求解时间可能指数级上升，需要合理设置边界或添加假设。 |
 | **Kani 版本更新** | 函数合约 / 循环合约 / Autoharness 等特性较新，不同版本语法可能变化。 |

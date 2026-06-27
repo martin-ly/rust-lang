@@ -10,8 +10,8 @@
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S** — Application + Structure
-> **双维定位**: C×App — 应用迭代器模式和惰性求值
-> **定位**: 深入分析 Rust **迭代器（Iterator trait）**的设计——从惰性计算链、消费者-迭代器分离到自定义迭代器实现，揭示 Rust 如何通过类型系统实现编译期优化的惰性序列处理。
+> **双维定位**: C×App — 应用迭代器（Iterator）模式和惰性求值
+> **定位**: 深入分析 Rust **迭代器（Iterator trait）**的设计——从惰性计算链、消费者-迭代器分离到自定义迭代器实现，揭示 Rust 如何通过类型系统（Type System）实现编译期优化的惰性序列处理。
 > **前置概念**: [Trait](./01_traits.md) · [Generics](./02_generics.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Async Iterator](../03_advanced/02_async.md) · [Zero Cost](../01_foundation/06_zero_cost_abstractions.md)
 
@@ -25,7 +25,7 @@
 
 ## 📑 目录
 
-- [迭代器模式：Rust 的惰性计算与零成本抽象](#迭代器模式rust-的惰性计算与零成本抽象)
+- [迭代器（Iterator）模式：Rust 的惰性计算与零成本抽象（Zero-Cost Abstraction）](LINK_PLACEHOLDER)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 Iterator Trait 的设计](#11-iterator-trait-的设计)
@@ -46,11 +46,11 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：迭代器模式的编译错误](#十边界测试迭代器模式的编译错误)
     - [10.1 边界测试：`Iterator::zip` 长度不匹配（逻辑错误）](#101-边界测试iteratorzip-长度不匹配逻辑错误)
-    - [10.2 边界测试：`flat_map` 与嵌套迭代器的所有权（编译错误）](#102-边界测试flat_map-与嵌套迭代器的所有权编译错误)
+    - [10.2 边界测试：`flat_map` 与嵌套迭代器的所有权（Ownership）（编译错误）](LINK_PLACEHOLDER)
   - [十二、边界测试：迭代器模式的编译错误（续）](#十二边界测试迭代器模式的编译错误续)
     - [12.1 边界测试：`enumerate` 与索引类型（逻辑错误）](#121-边界测试enumerate-与索引类型逻辑错误)
     - [12.2 边界测试：`partition` 与所有权分割（编译错误）](#122-边界测试partition-与所有权分割编译错误)
-    - [10.5 边界测试：`Iterator::fold` 的初始值类型与闭包返回类型不匹配（编译错误）](#105-边界测试iteratorfold-的初始值类型与闭包返回类型不匹配编译错误)
+    - [10.5 边界测试：`Iterator::fold` 的初始值类型与闭包（Closures）返回类型不匹配（编译错误）](LINK_PLACEHOLDER)
     - [10.5 边界测试：`ChunksExact` 的剩余元素处理（逻辑错误）](#105-边界测试chunksexact-的剩余元素处理逻辑错误)
     - [10.2 边界测试：`flat_map` 与嵌套迭代器的类型匹配（编译错误）](#102-边界测试flat_map-与嵌套迭代器的类型匹配编译错误)
     - [10.9 边界测试：const fn 中的非编译期操作](#109-边界测试const-fn-中的非编译期操作)
@@ -106,7 +106,7 @@ pub trait Iterator {
 //     └── 只需实现 next 即可获得全部功能
 ```
 
-> **认知功能**: `Iterator` trait 是 Rust **零成本抽象的典范**——丰富的适配器方法在编译期内联展开，不产生运行时开销。
+> **认知功能**: `Iterator` trait 是 Rust **零成本抽象（Zero-Cost Abstraction）的典范**——丰富的适配器方法在编译期内联展开，不产生运行时（Runtime）开销。
 > [来源: [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html)]
 
 ---
@@ -188,7 +188,7 @@ let result: Vec<i32> = vec![1, 2, 3, 4, 5]
   └── 消费者触发实际计算
 ```
 
-> **消费者洞察**: **适配器-消费者分离**是函数式编程的核心模式——Rust 通过类型系统在编译期保证这种分离的正确性。
+> **消费者洞察**: **适配器-消费者分离**是函数式编程的核心模式——Rust 通过类型系统（Type System）在编译期保证这种分离的正确性。
 > [来源: [std::iter — Adapters](https://doc.rust-lang.org/std/iter/index.html#adapters)]
 
 ---
@@ -495,7 +495,7 @@ graph TD
      // 或 Box/ Arc 避免复制
 ```
 
-> **陷阱总结**: 迭代器的陷阱主要与**collect 遗忘**、**修改集合**、**所有权选择**、**链长度**和**内存优化**相关。
+> **陷阱总结**: 迭代器的陷阱主要与**collect 遗忘**、**修改集合**、**所有权（Ownership）选择**、**链长度**和**内存优化**相关。
 > [来源: [Common Rust Iterator Mistakes](https://users.rust-lang.org/t/iterator-mistakes/)]
 
 ---
@@ -517,8 +517,8 @@ graph TD
 
 - [Trait](./01_traits.md) — Trait 系统
 - [Generics](./02_generics.md) — 泛型（Generics）
-- [Zero Cost](../01_foundation/06_zero_cost_abstractions.md) — 零成本抽象
-- [Async](../03_advanced/02_async.md) — 异步编程
+- [Zero Cost](../01_foundation/06_zero_cost_abstractions.md) — 零成本抽象（Zero-Cost Abstraction）
+- [Async](../03_advanced/02_async.md) — 异步（Async）编程
 
 ---
 
@@ -597,7 +597,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: `flat_map` 将嵌套迭代器扁平化为单层迭代器，但所有权规则仍然适用。若外层使用 `into_iter()`（消耗），内层也必须使用 `into_iter()`（消耗子集合），导致所有数据被转移。若需保留原数据，外层使用 `iter()`，内层使用 `iter()` + `cloned()`（复制元素）。`flat_map` 的签名 `FnMut(Self::Item) -> impl Iterator` 要求返回的迭代器与 `self` 的生命周期一致，增加了嵌套借用时的复杂性。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `flat_map` 将嵌套迭代器扁平化为单层迭代器，但所有权规则仍然适用。若外层使用 `into_iter()`（消耗），内层也必须使用 `into_iter()`（消耗子集合），导致所有数据被转移。若需保留原数据，外层使用 `iter()`，内层使用 `iter()` + `cloned()`（复制元素）。`flat_map` 的签名 `FnMut(Self::Item) -> impl Iterator` 要求返回的迭代器与 `self` 的生命周期（Lifetimes）一致，增加了嵌套借用（Borrowing）时的复杂性。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ## 十二、边界测试：迭代器模式的编译错误（续）
 
@@ -659,7 +659,7 @@ fn main() {
 }
 ```
 
-> **修正**: `Iterator::fold` 的签名：`fn fold<B, F>(self, init: B, f: F) -> B`，其中 `B` 是累加器类型，`F: FnMut(B, Self::Item) -> B`。编译器从初始值 `init` 推断 `B`，上述代码中 `0` 推断 `B = i32`，但注解 `let sum: String` 要求 `B = String`，类型冲突。正确写法：`nums.iter().fold(String::new(), |mut acc, x| { acc.push_str(&x.to_string()); acc })`。`fold` 是 Rust 迭代器的通用归约操作，类型安全但需确保初始值、闭包参数、闭包返回类型一致。这与 Haskell 的 `foldl`（同样类型严格）或 JavaScript 的 `Array.prototype.reduce`（动态类型，无此检查）不同——Rust 的 `fold` 在编译期验证类型一致性。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)]
+> **修正**: `Iterator::fold` 的签名：`fn fold<B, F>(self, init: B, f: F) -> B`，其中 `B` 是累加器类型，`F: FnMut(B, Self::Item) -> B`。编译器从初始值 `init` 推断 `B`，上述代码中 `0` 推断 `B = i32`，但注解 `let sum: String` 要求 `B = String`，类型冲突。正确写法：`nums.iter().fold(String::new(), |mut acc, x| { acc.push_str(&x.to_string()); acc })`。`fold` 是 Rust 迭代器的通用归约操作，类型安全但需确保初始值、闭包（Closures）参数、闭包返回类型一致。这与 Haskell 的 `foldl`（同样类型严格）或 JavaScript 的 `Array.prototype.reduce`（动态类型，无此检查）不同——Rust 的 `fold` 在编译期验证类型一致性（Coherence）。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)]
 
 ### 10.5 边界测试：`ChunksExact` 的剩余元素处理（逻辑错误）
 
@@ -761,7 +761,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-`by_ref()` 借用迭代器，允许在部分消费后继续在外部使用原迭代器。没有 `by_ref()` 的话，适配器会消耗迭代器所有权，无法再次使用。
+`by_ref()` 借用（Borrowing）迭代器，允许在部分消费后继续在外部使用原迭代器。没有 `by_ref()` 的话，适配器会消耗迭代器所有权，无法再次使用。
 </details>
 
 ## 实践
@@ -783,7 +783,7 @@ fn main() {}
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | 迭代器模式：Rust 的惰性计算与零成本抽象 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 迭代器模式：Rust 的惰性计算与零成本抽象 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 迭代器模式：Rust 的惰性计算与零成本抽象 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 迭代器模式：Rust 的惰性计算与零成本抽象 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 惰性求值安全 ⟸ Iterator 状态机 ⟸ 借用检查

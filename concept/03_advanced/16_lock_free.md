@@ -6,7 +6,7 @@
 > **Summary**: Locking Primitives. Core Rust concept covering mechanism analysis, in-depth analysis, memory safety guarantees.
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
-> **定位**: 深入探讨 Rust 中的**无锁编程**——从原子操作到内存序，分析 lock-free 算法的内存安全保证与性能优势。
+> **定位**: 深入探讨 Rust 中的**无锁编程**——从原子操作（Atomic Operations）到内存序，分析 lock-free 算法的内存安全（Memory Safety）保证与性能优势。
 > **前置概念**:
 > [Concurrency](../03_advanced/01_concurrency.md) ·
 > [Atomics](./11_atomics_and_memory_ordering.md) ·
@@ -55,9 +55,9 @@
   - [相关概念文件](#相关概念文件)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
-    - [10.5 边界测试：内存序的 `Release`/`Acquire` 与数据依赖（运行时可见性问题）](#105-边界测试内存序的-releaseacquire-与数据依赖运行时可见性问题)
-    - [10.3 边界测试：ABA 问题与无锁栈的内存安全（运行时 UB）](#103-边界测试aba-问题与无锁栈的内存安全运行时-ub)
-    - [10.5 边界测试：返回局部变量的悬垂引用](#105-边界测试返回局部变量的悬垂引用)
+    - [10.5 边界测试：内存序的 `Release`/`Acquire` 与数据依赖（运行时（Runtime）可见性问题）](LINK_PLACEHOLDER)
+    - [10.3 边界测试：ABA 问题与无锁栈的内存安全（Memory Safety）（运行时 UB）](LINK_PLACEHOLDER)
+    - [10.5 边界测试：返回局部变量的悬垂引用（Reference）](LINK_PLACEHOLDER)
   - [参考来源](#参考来源)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -538,7 +538,7 @@ fn atomic_ptr_send() {
 }
 ```
 
-> **修正**: `AtomicPtr<T>` 的 `Send`/`Sync` 依赖于 `T` 的 `Send`/`Sync`。若指针指向非 Send 数据，即使原子操作本身安全，指针内容也可能不安全。
+> **修正**: `AtomicPtr<T>` 的 `Send`/`Sync` 依赖于 `T` 的 `Send`/`Sync`。若指针指向非 Send 数据，即使原子操作（Atomic Operations）本身安全，指针内容也可能不安全。
 
 ```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -614,7 +614,7 @@ fn main() {
 ## 相关概念文件
 
 - [Concurrency](../03_advanced/01_concurrency.md) — 并发
-- [Atomics](./11_atomics_and_memory_ordering.md) — 原子操作
+- [Atomics](./11_atomics_and_memory_ordering.md) — 原子操作（Atomic Operations）
 - [Unsafe](../03_advanced/03_unsafe.md) — unsafe Rust
 - [Concurrent Patterns](./10_concurrency_patterns.md) — 并发模式
 
@@ -728,7 +728,7 @@ fn main() {
 }
 ```
 
-> **修正**: 上述代码展示了一个**有缺陷的无锁栈**：1) `compare_and_swap` 已废弃（应使用 `compare_exchange`）；2) `Relaxed` + `Release` 顺序不足（需 `Acquire` 保证可见性）；3) **ABA 问题**：节点 A 被 pop，节点 B 被 push 到同一地址，然后 CAS 误认为 A 仍存在。正确实现：1) 使用 `compare_exchange` + `Acquire`/`Release`；2) 使用 hazard pointers 或 epoch-based reclamation（`crossbeam-epoch`）防止 use-after-free；3) 标签指针（tagged pointer）解决 ABA。无锁数据结构是 Rust unsafe 代码的最难领域之一——编译器不验证线性化（linearizability）或内存安全。这与 C++ 的 `std::atomic`（类似 API，但 Rust 的 ownership 使 ABA 更复杂）或 Java 的 `AtomicReference`（JVM 管理内存，无 ABA 的 use-after-free）不同——Rust 的无锁代码需手动管理内存生命周期。[来源: [Rust Atomics and Locks](https://marabos.nl/atomics/)] · [来源: [crossbeam-epoch](https://docs.rs/crossbeam-epoch/)]
+> **修正**: 上述代码展示了一个**有缺陷的无锁栈**：1) `compare_and_swap` 已废弃（应使用 `compare_exchange`）；2) `Relaxed` + `Release` 顺序不足（需 `Acquire` 保证可见性）；3) **ABA 问题**：节点 A 被 pop，节点 B 被 push 到同一地址，然后 CAS 误认为 A 仍存在。正确实现：1) 使用 `compare_exchange` + `Acquire`/`Release`；2) 使用 hazard pointers 或 epoch-based reclamation（`crossbeam-epoch`）防止 use-after-free；3) 标签指针（tagged pointer）解决 ABA。无锁数据结构是 Rust unsafe 代码的最难领域之一——编译器不验证线性化（linearizability）或内存安全。这与 C++ 的 `std::atomic`（类似 API，但 Rust 的 ownership 使 ABA 更复杂）或 Java 的 `AtomicReference`（JVM 管理内存，无 ABA 的 use-after-free）不同——Rust 的无锁代码需手动管理内存生命周期（Lifetimes）。[来源: [Rust Atomics and Locks](https://marabos.nl/atomics/)] · [来源: [crossbeam-epoch](https://docs.rs/crossbeam-epoch/)]
 
 ### 10.5 边界测试：返回局部变量的悬垂引用
 
@@ -742,7 +742,7 @@ fn get_ref() -> &i32 {
 fn main() {}
 ```
 
-> **修正**: **悬垂引用**是 Rust borrow checker 的核心防护：1) 局部变量在函数结束时 drop；2) 返回其引用 → 引用指向已释放内存；3) 解决：返回所有权（`i32` 而非 `&i32`）或使用 `Box::leak` 获取 `'static` 引用（Reference）。
+> **修正**: **悬垂引用**是 Rust borrow checker 的核心防护：1) 局部变量在函数结束时 drop；2) 返回其引用 → 引用指向已释放内存；3) 解决：返回所有权（Ownership）（`i32` 而非 `&i32`）或使用 `Box::leak` 获取 `'static` 引用（Reference）。
 
 ## 参考来源
 
@@ -764,16 +764,16 @@ fn main() {}
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | 无锁编程与内存模型 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 无锁编程与内存模型 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 无锁编程与内存模型 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 无锁编程与内存模型 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 无锁算法正确 ⟸ CAS 循环 ⟸ ABA 问题避免
 > 内存回收安全 ⟸ Hazard Pointer / Epoch ⟸ 延迟释放
-> **过渡**: 掌握 无锁编程与内存模型 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 无锁编程与内存模型 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 无锁编程与内存模型 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: 无锁编程与内存模型 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 无锁编程与内存模型 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

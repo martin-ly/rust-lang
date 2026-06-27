@@ -1,7 +1,7 @@
 > **内容分级**:
 >
 > [综述级]
-> **本节关键术语**: 高级生命周期 (Advanced Lifetimes) · HRTB · 生命周期省略规则 (Elision) · 子类型 (Subtyping) · 变型 (Variance) — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: 高级生命周期 (Advanced Lifetimes) · HRTB · 生命周期省略（Lifetime Elision）规则 (Elision) · 子类型 (Subtyping) · 变型 (Variance) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 生命周期高级主题：从 HRTB 到自引用类型
 >
@@ -11,8 +11,8 @@
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
-> **双维定位**: C×Ana — 分析高级生命周期的约束传播
-> **定位**: 深入分析 Rust **生命周期**的高级主题——从高阶生命周期（HRTB）、生命周期省略规则到自引用结构和 Pin，揭示生命周期系统如何处理最复杂的借用场景。
+> **双维定位**: C×Ana — 分析高级生命周期（Lifetimes）的约束传播
+> **定位**: 深入分析 Rust **生命周期**的高级主题——从高阶生命周期（HRTB）、生命周期省略（Lifetime Elision）规则到自引用（Reference）结构和 Pin，揭示生命周期系统如何处理最复杂的借用（Borrowing）场景。
 > **前置概念**: [Lifetimes](../01_foundation/03_lifetimes.md) · [Traits](./01_traits.md) · [Generics](./02_generics.md)
 > **后置概念**: [Pin](../03_advanced/06_pin_unpin.md) · [NLL](../03_advanced/08_nll_and_polonius.md) · [RustBelt](../04_formal/04_rustbelt.md)
 
@@ -26,7 +26,7 @@
 
 ## 📑 目录
 
-- [生命周期高级主题：从 HRTB 到自引用类型](#生命周期高级主题从-hrtb-到自引用类型)
+- [生命周期（Lifetimes）高级主题：从 HRTB 到自引用（Reference）类型](LINK_PLACEHOLDER)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 高阶生命周期（HRTB）](#11-高阶生命周期hrtb)
@@ -35,7 +35,7 @@
   - [二、技术细节](#二技术细节)
     - [2.1 HRTB 的实际应用](#21-hrtb-的实际应用)
     - [2.2 自引用与 Pin](#22-自引用与-pin)
-    - [2.3 生命周期与闭包](#23-生命周期与闭包)
+    - [2.3 生命周期与闭包（Closures）](LINK_PLACEHOLDER)
   - [三、生命周期模式矩阵](#三生命周期模式矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -46,7 +46,7 @@
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：高级生命周期的编译错误](#十边界测试高级生命周期的编译错误)
-    - [10.1 边界测试：自引用结构体与 `Pin`（编译错误）](#101-边界测试自引用结构体与-pin编译错误)
+    - [10.1 边界测试：自引用结构体（Struct）与 `Pin`（编译错误）](LINK_PLACEHOLDER)
     - [10.2 边界测试：生命周期边界中的 `for<'a>` HRTB（编译错误）](#102-边界测试生命周期边界中的-fora-hrtb编译错误)
     - [10.5 边界测试：闭包捕获引用与 `Fn` trait 的生命周期约束（编译错误）](#105-边界测试闭包捕获引用与-fn-trait-的生命周期约束编译错误)
     - [10.6 边界测试：`impl Trait` 返回类型的生命周期捕获（编译错误）](#106-边界测试impl-trait-返回类型的生命周期捕获编译错误)
@@ -101,7 +101,7 @@ HRTB (Higher-Ranked Trait Bounds):
   └── 否则泛型函数无法接受闭包
 ```
 
-> **认知功能**: HRTB 是 Rust **泛型与借用结合**的关键机制——它使闭包和回调可以接受任意生命周期的引用。
+> **认知功能**: HRTB 是 Rust **泛型（Generics）与借用（Borrowing）结合**的关键机制——它使闭包（Closures）和回调可以接受任意生命周期的引用。
 > [来源: [RFC 0387 — HRTB](https://rust-lang.github.io/rfcs//0387-higher-ranked-trait-bounds.html)]
 
 ---
@@ -142,7 +142,7 @@ HRTB (Higher-Ranked Trait Bounds):
   // 返回的生命周期必须 <= 两个输入的最小值
 ```
 
-> **省略洞察**: 生命周期省略**不是可选特性**——它是使 Rust 代码可读的关键设计，覆盖了 90% 的常见模式。
+> **省略洞察**: 生命周期省略（Lifetime Elision）**不是可选特性**——它是使 Rust 代码可读的关键设计，覆盖了 90% 的常见模式。
 > [来源: [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html)]
 
 ---
@@ -187,7 +187,7 @@ HRTB (Higher-Ranked Trait Bounds):
   └── 理解变型有助于解决生命周期错误
 ```
 
-> **变型洞察**: **变型**是 Rust 类型系统的**隐藏齿轮**——它解释了为什么某些生命周期转换合法而另一些不合法。
+> **变型洞察**: **变型**是 Rust 类型系统（Type System）的**隐藏齿轮**——它解释了为什么某些生命周期转换合法而另一些不合法。
 > [来源: [The Rustonomicon — Variance](https://doc.rust-lang.org/nomicon/subtyping.html)]
 
 ---
@@ -251,7 +251,7 @@ where F: for<'a> Fn(&'a str)
 }
 ```
 
-> **HRTB 洞察**: HRTB 的**核心应用场景**是**闭包和回调**——它使泛型代码可以灵活地接受临时引用。
+> **HRTB 洞察**: HRTB 的**核心应用场景**是**闭包和回调**——它使泛型（Generics）代码可以灵活地接受临时引用。
 > [来源: [Rust Reference — HRTB](https://doc.rust-lang.org/reference/trait-bounds.html#higher-ranked-trait-bounds)]
 
 ---
@@ -310,7 +310,7 @@ impl SelfReferential {
 // └── async fn 返回 Pin<Box<dyn Future>>
 ```
 
-> **Pin 洞察**: `Pin` 是 Rust **自引用类型的解决方案**——它为 async/await、生成器等高级特性提供了内存安全保证。
+> **Pin 洞察**: `Pin` 是 Rust **自引用类型的解决方案**——它为 async/await、生成器等高级特性提供了内存安全（Memory Safety）保证。
 > [来源: [std::pin::Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)]
 
 ---
@@ -359,7 +359,7 @@ fn closure_lifetimes() {
 // └── 只需要一次/消耗数据 → FnOnce
 ```
 
-> **闭包洞察**: 闭包的**三种 Fn trait**对应三种借用模式——它们是 Rust **所有权系统**在闭包上的自然延伸。
+> **闭包洞察**: 闭包的**三种 Fn trait**对应三种借用模式——它们是 Rust **所有权（Ownership）系统**在闭包上的自然延伸。
 > [来源: [TRPL — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html)]
 
 ---
@@ -504,7 +504,7 @@ graph TD
      // s 被 move 进闭包
 ```
 
-> **陷阱总结**: 生命周期陷阱主要与**返回局部引用**、**标注不足**、**结构体存储引用**、**HRTB**和**闭包捕获**相关。
+> **陷阱总结**: 生命周期陷阱主要与**返回局部引用**、**标注不足**、**结构体（Struct）存储引用**、**HRTB**和**闭包捕获**相关。
 > [来源: [Common Lifetime Mistakes](https://doc.rust-lang.org/rust-by-example/scope/lifetime.html)]
 
 ---
@@ -630,7 +630,7 @@ where
 > **修正**:
 > 高阶 trait bound（HRTB）`for<'a>` 要求实现对所有可能的生命周期 `'a` 有效。
 > 当闭包作为参数传递时，默认的生命周期推断可能过于具体（绑定到特定作用域），
-> 导致无法满足泛型函数的 trait bound。HRTB 在回调函数、比较器、迭代器适配器等高阶函数场景中至关重要，是 Rust 类型系统表达"多态生命周期"的关键机制。
+> 导致无法满足泛型函数的 trait bound。HRTB 在回调函数、比较器、迭代器（Iterator）适配器等高阶函数场景中至关重要，是 Rust 类型系统（Type System）表达"多态生命周期"的关键机制。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.5 边界测试：闭包捕获引用与 `Fn` trait 的生命周期约束（编译错误）
@@ -656,7 +656,7 @@ fn main() {
 > `impl Fn() + 'a` 表示闭包本身的生命周期为 `'a`——闭包捕获的引用不能超越 `'a`。
 > `make_callback(&s)` 返回的闭包与 `s` 同生命周期，因此 `s` 释放后闭包失效。
 > 若需长生命周期的回调，必须拥有数据：`move || println!("{}", s.clone())` 或 `Arc<str>`。
-> 这是 Rust 异步和事件驱动编程的核心约束：回调、future、stream 的生命周期与捕获数据绑定。
+> 这是 Rust 异步（Async）和事件驱动编程的核心约束：回调、future、stream 的生命周期与捕获数据绑定。
 > 这与 C++ 的 `std::function`（可捕获引用，但悬垂是 UB）或 Java 的匿名类（捕获 final 引用（Reference），GC 管理生命周期）不同——Rust 在编译期防止了回调的悬垂引用。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] ·
 > [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
@@ -771,7 +771,7 @@ where
 }
 ```
 
-- A. 允许闭包返回 `'static` 引用
+- A. 允许闭包返回 `'static` 引用（Reference）
 - B. 允许闭包接受任意生命周期的引用，不限定 `'static`
 - C. 限制闭包只能接受局部变量引用
 
@@ -804,7 +804,7 @@ where
 
 - `Pin<P<T>>` 承诺不移动 `T`（若 `T: !Unpin`）
 - `Box::pin(value)` 在堆上分配并固定
-- 异步状态机和自引用数据结构都依赖 `Pin`
+- 异步（Async）状态机和自引用数据结构都依赖 `Pin`
 
 注意：`Pin` 本身不保证地址不变，它通过 API 约束实现这一点。`!Unpin` 类型（如包含自引用的结构）才真正受保护。
 </details>
@@ -885,14 +885,14 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | 生命周期高级主题：从 HRTB 到自引用类型 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 生命周期高级主题：从 HRTB 到自引用类型 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 生命周期高级主题：从 HRTB 到自引用类型 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 生命周期高级主题：从 HRTB 到自引用类型 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 编译通过 ⟸ 生命周期标注正确 ⟸ 引用有效性
 > 无悬垂引用 ⟸ 生命周期偏序关系 ⟸ 借用规则
 > **过渡**: 掌握 生命周期高级主题：从 HRTB 到自引用类型 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 生命周期高级主题：从 HRTB 到自引用类型 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: 生命周期高级主题：从 HRTB 到自引用类型 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 生命周期高级主题：从 HRTB 到自引用类型 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

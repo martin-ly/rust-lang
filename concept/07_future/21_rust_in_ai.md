@@ -11,7 +11,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S+P** — StructureProcedure
 > **双维定位**: P×Eva — 评估 Rust 在 AI 领域的应用
-> **定位**: 分析 Rust 在**AI/ML 基础设施**中的新兴应用——从张量运算、推理引擎到 ML 管道编排，揭示 Rust 如何在高性能 AI 系统中提供内存安全和低延迟优势。
+> **定位**: 分析 Rust 在**AI/ML 基础设施**中的新兴应用——从张量运算、推理引擎到 ML 管道编排，揭示 Rust 如何在高性能 AI 系统中提供内存安全（Memory Safety）和低延迟优势。
 > **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [Concurrency](../03_advanced/01_concurrency.md) · [WebAssembly](../06_ecosystem/11_webassembly.md)
 > **后置概念**: [AI Integration](./01_ai_integration.md) · [Evolution](./03_evolution.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
@@ -48,10 +48,10 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Rust in AI 的编译错误](#十边界测试rust-in-ai-的编译错误)
-    - [10.1 边界测试：`candle` 的张量形状不匹配（编译错误/运行时 panic）](#101-边界测试candle-的张量形状不匹配编译错误运行时-panic)
+    - [10.1 边界测试：`candle` 的张量形状不匹配（编译错误/运行时（Runtime） panic）](LINK_PLACEHOLDER)
     - [10.2 边界测试：`unsafe` 与 SIMD 的内在函数约束（编译错误）](#102-边界测试unsafe-与-simd-的内在函数约束编译错误)
     - [10.6 边界测试：AI 模型的序列化与版本兼容性（运行时加载失败）](#106-边界测试ai-模型的序列化与版本兼容性运行时加载失败)
-    - [10.5 边界测试：Rust AI 推理框架的张量生命周期与 GPU 内存管理（运行时 OOM）](#105-边界测试rust-ai-推理框架的张量生命周期与-gpu-内存管理运行时-oom)
+    - [10.5 边界测试：Rust AI 推理框架的张量生命周期（Lifetimes）与 GPU 内存管理（运行时 OOM）](LINK_PLACEHOLDER)
     - [10.3 边界测试：Rust AI 框架的张量维度不匹配（运行时 panic）](#103-边界测试rust-ai-框架的张量维度不匹配运行时-panic)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -474,7 +474,7 @@ graph TD
      // Result 传播，用户友好错误
 ```
 
-> **陷阱总结**: Rust AI 的陷阱主要与**过度优化**、**格式兼容**、**内存管理**、**批处理**和**错误处理**相关。
+> **陷阱总结**: Rust AI 的陷阱主要与**过度优化**、**格式兼容**、**内存管理**、**批处理**和**错误处理（Error Handling）**相关。
 > [来源: [Candle Examples](https://github.com/huggingface/candle/tree/main/candle-examples)]
 
 ---
@@ -547,7 +547,7 @@ fn matmul_incompatible() {
 
 > **修正**:
 > 深度学习框架（PyTorch、TensorFlow、candle）中，张量形状不匹配是最常见的错误。
-> Rust 的 candle 库在运行时检查形状兼容性（`a.matmul(&b)` 要求 `a.dims()[1] == b.dims()[0]`），失败时返回 `Result::Err`。
+> Rust 的 candle 库在运行时（Runtime）检查形状兼容性（`a.matmul(&b)` 要求 `a.dims()[1] == b.dims()[0]`），失败时返回 `Result::Err`。
 > 这与 Python 的 PyTorch（运行时抛出 Python 异常）类似，但 Rust 的 `Result` 强制显式处理错误。
 > 更安全的抽象：使用类型级别形状（如 `nalgebra` 的 `Matrix<M, N>` 或实验性的 `typed-tensor` crate）可在编译期检查矩阵乘法形状。
 > 但深度学习的动态形状（batch size 变化、序列长度变化）使静态形状检查困难。
@@ -574,7 +574,7 @@ fn simd_add(a: [f32; 4], b: [f32; 4]) -> [f32; 4] {
 ```
 
 > **修正**:
-> Rust 的 SIMD 支持通过 `std::arch` 模块提供目标架构特定的内在函数（intrinsics）。
+> Rust 的 SIMD 支持通过 `std::arch` 模块（Module）提供目标架构特定的内在函数（intrinsics）。
 > `_mm_add_ps`（SSE）和 `_mm256_add_ps`（AVX）要求目标 CPU 支持相应指令集。
 > 编译期通过 `target_feature` 属性控制：`#[target_feature(enable = "sse2")]` 标记函数需要 SSE2，调用者必须确保在支持 SSE2 的 CPU 上运行。
 > 若直接在不支持的 CPU 上调用，是未定义行为（非法指令异常）。
@@ -638,17 +638,17 @@ fn inference() -> anyhow::Result<()> {
 
 > **修正**:
 >
-> Rust AI 框架（`candle`、`burn`、`tch-rs`）的张量是**引用计数**的（类似 `Arc`），但 GPU 内存不受 Rust 所有权直接管理——张量 drop 时释放 GPU 内存，但：
+> Rust AI 框架（`candle`、`burn`、`tch-rs`）的张量是**引用（Reference）计数**的（类似 `Arc`），但 GPU 内存不受 Rust 所有权（Ownership）直接管理——张量 drop 时释放 GPU 内存，但：
 >
 > 1) 循环中创建大量中间张量 → 累积至 OOM；
-> 2) 克隆张量（`tensor.clone()`）增加引用计数，共享底层数据，不额外分配；
+> 2) 克隆张量（`tensor.clone()`）增加引用（Reference）计数，共享底层数据，不额外分配；
 > 3) `.detach()` 断开计算图，但保留数据。
 >
 > 优化：
 >
 > 1) 使用作用域（`{ let temp = ...; }`）及时 drop；
 > 2) 框架特定的内存池（`candle` 的 `Tensor::to_device` 重用时）；
-> 3) 批量推理控制 batch size。这与 PyTorch 的自动内存管理（Python GC + CUDA cache）或 TensorFlow 的 graph 模式（静态分配）不同——Rust 的显式生命周期使内存管理更可预测，但需开发者主动控制，尤其 GPU 内存昂贵且有限。
+> 3) 批量推理控制 batch size。这与 PyTorch 的自动内存管理（Python GC + CUDA cache）或 TensorFlow 的 graph 模式（静态分配）不同——Rust 的显式生命周期（Lifetimes）使内存管理更可预测，但需开发者主动控制，尤其 GPU 内存昂贵且有限。
 >
 > [来源: [candle Documentation](https://github.com/huggingface/candle)] · [来源: [burn Documentation](https://burn.dev/)]
 
@@ -673,9 +673,9 @@ fn main() {}
 ```
 
 > **修正**:
-> Rust AI 框架（`candle`、`burn`、`tch-rs`）的张量操作在**运行时**检查维度兼容性，不匹配时 panic（或返回 `Err`）。
+> Rust AI 框架（`candle`、`burn`、`tch-rs`）的张量操作在**运行时（Runtime）**检查维度兼容性，不匹配时 panic（或返回 `Err`）。
 > 这与 PyTorch（Python 中运行时检查，但可广播）或 TensorFlow（graph 模式在构建时检查）不同。
-> Rust 的类型系统目前**无法**在编译期检查张量维度（需依赖类型或 const generic 数组，设计复杂）。
+> Rust 的类型系统（Type System）目前**无法**在编译期检查张量维度（需依赖类型或 const generic 数组，设计复杂）。
 > 未来方向：
 >
 > 1) 依赖类型（`Tensor<[B, C, H, W]>`）在编译期检查维度；
@@ -715,7 +715,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-推理服务需要低延迟、高吞吐、稳定运行。Rust 的无 GC 特性避免了 Python 服务的 GC 停顿，内存安全防止了处理用户输入时的安全漏洞。
+推理服务需要低延迟、高吞吐、稳定运行。Rust 的无 GC 特性避免了 Python 服务的 GC 停顿，内存安全（Memory Safety）防止了处理用户输入时的安全漏洞。
 </details>
 
 ---

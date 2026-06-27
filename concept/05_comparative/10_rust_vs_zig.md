@@ -8,7 +8,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
-> **定位**: 对比分析 **Rust** 与 **Zig** 的设计哲学——从编译期计算、错误处理到内存管理，揭示两种语言如何在"显式控制"与"抽象安全"之间做出选择。
+> **定位**: 对比分析 **Rust** 与 **Zig** 的设计哲学——从编译期计算、错误处理（Error Handling）到内存管理，揭示两种语言如何在"显式控制"与"抽象安全"之间做出选择。
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md) · [Comptime](../06_ecosystem/03_core_crates.md)
 > **后置概念**: [Cross Compilation](../06_ecosystem/17_cross_compilation.md) · [Embedded](../06_ecosystem/04_application_domains.md)
 
@@ -24,7 +24,7 @@
   - [📑 目录](#-目录)
   - [一、核心对比](#一核心对比)
     - [1.1 编译期计算](#11-编译期计算)
-    - [1.2 错误处理哲学](#12-错误处理哲学)
+    - [1.2 错误处理（Error Handling）哲学](LINK_PLACEHOLDER)
     - [1.3 内存管理](#13-内存管理)
   - [二、工程实践差异](#二工程实践差异)
     - [2.1 构建系统](#21-构建系统)
@@ -41,7 +41,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Rust 与 Zig 的编译错误对比](#十边界测试rust-与-zig-的编译错误对比)
     - [10.1 边界测试：Zig 的 comptime vs Rust 的 const generics（编译错误）](#101-边界测试zig-的-comptime-vs-rust-的-const-generics编译错误)
-    - [10.2 边界测试：Zig 的显式内存管理与 Rust 的所有权（编译错误）](#102-边界测试zig-的显式内存管理与-rust-的所有权编译错误)
+    - [10.2 边界测试：Zig 的显式内存管理与 Rust 的所有权（Ownership）（编译错误）](LINK_PLACEHOLDER)
     - [10.3 边界测试：Zig 的 `comptime` 与 Rust 的 `const fn` 的能力差异（编译错误）](#103-边界测试zig-的-comptime-与-rust-的-const-fn-的能力差异编译错误)
     - [10.4 边界测试：Zig 的显式内存分配与 Rust 的全局分配器（编译错误）](#104-边界测试zig-的显式内存分配与-rust-的全局分配器编译错误)
     - [10.3 边界测试：Zig 的 `comptime` 与 Rust 的 `const fn` 能力差距（编译错误）](#103-边界测试zig-的-comptime-与-rust-的-const-fn-能力差距编译错误)
@@ -49,7 +49,7 @@
     - [测验 1：Rust 和 Zig 的设计哲学有什么根本差异？（理解层）](#测验-1rust-和-zig-的设计哲学有什么根本差异理解层)
     - [测验 2：Zig 的 `comptime` 与 Rust 的宏系统（`macro_rules!` / proc macro）有什么区别？（理解层）](#测验-2zig-的-comptime-与-rust-的宏系统macro_rules--proc-macro有什么区别理解层)
     - [测验 3：Zig 没有隐式内存分配的策略对系统编程有什么意义？（理解层）](#测验-3zig-没有隐式内存分配的策略对系统编程有什么意义理解层)
-    - [测验 4：Rust 的所有权系统与 Zig 的显式生命周期管理相比，哪种更适合大型团队协作？（理解层）](#测验-4rust-的所有权系统与-zig-的显式生命周期管理相比哪种更适合大型团队协作理解层)
+    - [测验 4：Rust 的所有权系统与 Zig 的显式生命周期（Lifetimes）管理相比，哪种更适合大型团队协作？（理解层）](LINK_PLACEHOLDER)
     - [测验 5：在已有 C 代码库的项目中，Zig 的 C 互操作与 Rust 的 FFI 相比有什么特点？（理解层）](#测验-5在已有-c-代码库的项目中zig-的-c-互操作与-rust-的-ffi-相比有什么特点理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -112,7 +112,7 @@
   └── Rust 宏系统和 const fn 互补
 ```
 
-> **认知功能**: **Zig 的 comptime 是"无宏的元编程"**——用同一套语言实现编译期和运行时代码，而 Rust 保持两者分离。
+> **认知功能**: **Zig 的 comptime 是"无宏（Macro）的元编程"**——用同一套语言实现编译期和运行时（Runtime）代码，而 Rust 保持两者分离。
 > [来源: [Zig Overview — comptime](https://ziglang.org/learn/overview/#comptime)]
 
 ---
@@ -224,7 +224,7 @@
   └── Zig 更灵活，Rust 更安全
 ```
 
-> **内存洞察**: **Zig 的显式分配器设计适合系统编程和嵌入式**——Rust 的自动所有权更适合应用开发。
+> **内存洞察**: **Zig 的显式分配器设计适合系统编程和嵌入式**——Rust 的自动所有权（Ownership）更适合应用开发。
 > [来源: [Zig Memory](https://ziglang.org/documentation/master/#Memory)]
 
 ---
@@ -491,7 +491,7 @@ graph TD
      // Zig 的错误不可静默忽略
 ```
 
-> **陷阱总结**: Rust vs Zig 的陷阱主要与**风格模仿**、**defer 顺序**、**unsafe 滥用**、**comptime 混淆**和**错误处理**相关。
+> **陷阱总结**: Rust vs Zig 的陷阱主要与**风格模仿**、**defer 顺序**、**unsafe 滥用**、**comptime 混淆**和**错误处理（Error Handling）**相关。
 
 ---
 
@@ -546,7 +546,7 @@ fn main() {
 ## 相关概念文件
 
 - [Ownership](../01_foundation/01_ownership.md) — 所有权系统
-- [Type System](../01_foundation/04_type_system.md) — 类型系统
+- [Type System](../01_foundation/04_type_system.md) — 类型系统（Type System）
 - [Cross Compilation](../06_ecosystem/17_cross_compilation.md) — 交叉编译
 - [FFI](../03_advanced/05_rust_ffi.md) — 外部函数接口
 
@@ -599,7 +599,7 @@ fn fixed() {
 }
 ```
 
-> **Zig 对比**: Zig 的 `comptime` 是更通用的编译期计算机制——任何参数可标记为 `comptime`，函数在编译期执行。Rust 的 `const generics` 是类型系统的扩展，仅支持特定上下文（数组大小、类型参数）。Zig 的 `comptime` 更灵活，但错误信息可能更复杂（编译期执行可能 panic）。Rust 的 `const generics` 更受限，但类型安全边界更清晰。两者都追求"编译期计算零运行时成本"，但 Zig 采用"通用编译期执行"，Rust 采用"受限常量泛型"。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **Zig 对比**: Zig 的 `comptime` 是更通用的编译期计算机制——任何参数可标记为 `comptime`，函数在编译期执行。Rust 的 `const generics` 是类型系统（Type System）的扩展，仅支持特定上下文（数组大小、类型参数）。Zig 的 `comptime` 更灵活，但错误信息可能更复杂（编译期执行可能 panic）。Rust 的 `const generics` 更受限，但类型安全边界更清晰。两者都追求"编译期计算零运行时（Runtime）成本"，但 Zig 采用"通用编译期执行"，Rust 采用"受限常量泛型（Generics）"。[来源: [Rust Reference](LINK_PLACEHOLDER)]
 
 ### 10.2 边界测试：Zig 的显式内存管理与 Rust 的所有权（编译错误）
 
@@ -620,7 +620,7 @@ fn fixed() {
 } // s 在此释放
 ```
 
-> **Zig 对比**: Zig 使用显式分配器（`std.heap.page_allocator`）和手动内存管理——没有 GC，也没有 Rust 的所有权系统。Zig 的安全策略是"在调试模式下检测 UB"（边界检查、use-after-free 检测），但在发布模式移除检查。Rust 的安全策略是"编译期阻止 UB"——通过借用检查器在编译期拒绝悬垂引用、use-after-free、数据竞争。Zig 更灵活（可直接操作原始指针），但安全性依赖运行时检查和程序员纪律；Rust 更严格，但编译器保证安全代码无 UB。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **Zig 对比**: Zig 使用显式分配器（`std.heap.page_allocator`）和手动内存管理——没有 GC，也没有 Rust 的所有权系统。Zig 的安全策略是"在调试模式下检测 UB"（边界检查、use-after-free 检测），但在发布模式移除检查。Rust 的安全策略是"编译期阻止 UB"——通过借用（Borrowing）检查器在编译期拒绝悬垂引用（Reference）、use-after-free、数据竞争。Zig 更灵活（可直接操作原始指针（Raw Pointer）），但安全性依赖运行时检查和程序员纪律；Rust 更严格，但编译器保证安全代码无 UB。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.3 边界测试：Zig 的 `comptime` 与 Rust 的 `const fn` 的能力差异（编译错误）
 
@@ -692,7 +692,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-Rust 通过类型系统强制安全（"编译期证明"）。Zig 相信程序员的能力，提供安全工具但不强制使用，更强调简单性和显式控制（"无隐藏控制流"）。
+Rust 通过类型系统（Type System）强制安全（"编译期证明"）。Zig 相信程序员的能力，提供安全工具但不强制使用，更强调简单性和显式控制（"无隐藏控制流"）。
 </details>
 
 ---
@@ -704,7 +704,7 @@ Rust 通过类型系统强制安全（"编译期证明"）。Zig 相信程序员
 <details>
 <summary>✅ 答案与解析</summary>
 
-`comptime` 是 Zig 语言内建的编译期执行能力，任何函数可加 `comptime` 修饰在编译期运行。Rust 宏是独立于语言的元编程系统，声明宏基于模式匹配，过程宏操作 TokenStream。
+`comptime` 是 Zig 语言内建的编译期执行能力，任何函数可加 `comptime` 修饰在编译期运行。Rust 宏是独立于语言的元编程系统，声明宏（Declarative Macro）基于模式匹配（Pattern Matching），过程宏（Procedural Macro）操作 TokenStream。
 </details>
 
 ---
@@ -723,7 +723,7 @@ Zig 要求显式传递分配器（Allocator），使内存使用完全可见。R
 
 ### 测验 4：Rust 的所有权系统与 Zig 的显式生命周期管理相比，哪种更适合大型团队协作？（理解层）
 
-**题目**: Rust 的所有权系统与 Zig 的显式生命周期管理相比，哪种更适合大型团队协作？
+**题目**: Rust 的所有权系统与 Zig 的显式生命周期（Lifetimes）管理相比，哪种更适合大型团队协作？
 
 <details>
 <summary>✅ 答案与解析</summary>
@@ -759,7 +759,7 @@ Zig 可直接导入 C 头文件（`@cImport`），无需 bindgen 等工具。Rus
 
 > **过渡**: 在实践中应用 Rust vs Zig：现代系统语言的两种哲学 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: Rust vs Zig：现代系统语言的两种哲学 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: Rust vs Zig：现代系统语言的两种哲学 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

@@ -23,7 +23,7 @@
 
 ## 📑 目录
 
-- [模块系统：Rust 的代码组织与可见性规则](#模块系统rust-的代码组织与可见性规则)
+- [模块（Module）系统：Rust 的代码组织与可见性规则](LINK_PLACEHOLDER)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 Crate、Module、Package 的三层结构](#11-cratemodulepackage-的三层结构)
@@ -137,7 +137,7 @@ Rust 模块系统的文件映射规则:
       └── integration.rs
 ```
 
-> **文件映射**: Rust 的模块声明（`mod foo;`）**显式控制**文件系统映射——不像 Java（文件路径 = 包路径）或 Python（文件即模块）的隐式映射。这种显式性带来了灵活性，但也增加了学习成本。
+> **文件映射**: Rust 的模块（Module）声明（`mod foo;`）**显式控制**文件系统映射——不像 Java（文件路径 = 包路径）或 Python（文件即模块）的隐式映射。这种显式性带来了灵活性，但也增加了学习成本。
 > [来源: [Rust Reference — Module Source Filenames](https://doc.rust-lang.org/reference/items/modules.html#module-source-filenames)]
 
 ---
@@ -333,7 +333,7 @@ graph TD
 └── 这是 Cargo features 与模块系统的结合点
 ```
 
-> **边界要点**: Rust 模块系统的边界主要与**编译期约束**（循环依赖检测）、**宏交互**（卫生性）和**测试可见性**相关。这些边界是 Rust "显式优于隐式"哲学的体现。
+> **边界要点**: Rust 模块系统的边界主要与**编译期约束**（循环依赖检测）、**宏（Macro）交互**（卫生性）和**测试可见性**相关。这些边界是 Rust "显式优于隐式"哲学的体现。
 > [来源: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)]
 
 ---
@@ -434,7 +434,7 @@ fn main() {
 ## 相关概念文件
 
 - [Cargo Toolchain](../06_ecosystem/01_toolchain.md) — Cargo 与 Workspace
-- [Macros](../03_advanced/04_macros.md) — 宏与模块交互
+- [Macros](LINK_PLACEHOLDER) — 宏（Macro）与模块交互
 - [Traits](./01_traits.md) — Trait 的可见性设计
 
 ---
@@ -577,7 +577,7 @@ pub mod b {
 > **修正**:
 > `pub use` 重导出是组织 API 表面的重要工具：将内部模块的项暴露到 crate 根或公共模块。
 > 但重导出不创建新项，只是别名——目标项必须存在。循环 `pub use`（A 重导出 B，B 重导出 A）在项存在时合法（只是双向别名），但若项不存在（如上述代码中 `A` 和 `B` 未定义），编译错误。
-> 这与 C++ 的 `using`（类似别名）或 JavaScript 的 `export { x } from './y'`（ES6 re-export）类似——重导出是模块系统的组织工具，不改变项的可见性或所有权。
+> 这与 C++ 的 `using`（类似别名）或 JavaScript 的 `export { x } from './y'`（ES6 re-export）类似——重导出是模块系统的组织工具，不改变项的可见性或所有权（Ownership）。
 > Rust 的 `pub use` 常用于 `prelude` 模式：在 crate 根集中暴露所有公开类型，简化用户的使用路径。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-04-bringing-paths-into-scope-with-the-use-keyword.html)] ·
 > [来源: [Rust Reference — Use Declarations](https://doc.rust-lang.org/reference/items/use-declarations.html)]
@@ -641,7 +641,7 @@ fn main() {}
 > 3) 同一 crate 的多个版本可在依赖图中共存（不同版本视为不同 crate）。
 >
 > 工作区（workspace）共享 `Cargo.lock` 和 `target/` 目录，但每个成员独立编译。
-> 这与 Java 的 Maven（同样禁止循环依赖）或 Python 的导入（运行时循环导入可能工作，但可能导致意外行为）不同——Rust 在编译期严格排除循环依赖。
+> 这与 Java 的 Maven（同样禁止循环依赖）或 Python 的导入（运行时（Runtime）循环导入可能工作，但可能导致意外行为）不同——Rust 在编译期严格排除循环依赖。
 > [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/workspaces.html)] ·
 > [来源: [Rust Reference — Crates](https://doc.rust-lang.org/reference/items/extern-crates.html)]
 
@@ -660,16 +660,16 @@ fn main() {}
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | 模块系统：Rust 的代码组织与可见性规则 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 模块系统：Rust 的代码组织与可见性规则 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 模块系统：Rust 的代码组织与可见性规则 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 模块系统：Rust 的代码组织与可见性规则 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > crate 接口稳定 ⟸ pub(restricted) 分层 ⟸ 可见性系统
 > 依赖管理正确 ⟸ workspace 隔离 ⟸ 版本解析
-> **过渡**: 掌握 模块系统：Rust 的代码组织与可见性规则 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 模块系统：Rust 的代码组织与可见性规则 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 模块系统：Rust 的代码组织与可见性规则 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: 模块系统：Rust 的代码组织与可见性规则 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 模块系统：Rust 的代码组织与可见性规则 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 
@@ -681,7 +681,7 @@ fn main() {}
 
 ### 测验 1：`mod` 声明（理解层）
 
-以下项目结构中，`src/main.rs` 如何正确引用 `src/utils/math.rs`？
+以下项目结构中，`src/main.rs` 如何正确引用（Reference） `src/utils/math.rs`？
 
 ```text
 src/
@@ -704,7 +704,7 @@ Rust 的模块系统基于文件系统：
 - `mod utils;` 告诉编译器查找 `utils.rs` 或 `utils/mod.rs`
 - 在 `utils/mod.rs` 中声明 `mod math;`，编译器查找 `utils/math.rs`
 
-`mod` 声明是**告诉编译器去加载文件**，不是路径引用。
+`mod` 声明是**告诉编译器去加载文件**，不是路径引用（Reference）。
 </details>
 
 ---

@@ -9,6 +9,7 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
 
+> **后置概念**: N/A
 ---
 
 > **来源**:
@@ -23,7 +24,7 @@
 ---
 
 > **Bloom 层级**: 分析 → 评价
-> **定位**: L5 嵌入式互动测验——通过代码对比验证 Rust 与 C/C++/Go 在内存安全、并发模型、错误处理等维度的核心差异。
+> **定位**: L5 嵌入式互动测验——通过代码对比验证 Rust 与 C/C++/Go 在内存安全（Memory Safety）、并发模型、错误处理（Error Handling）等维度的核心差异。
 > **使用方式**: 先独立思考答案，再点击展开核对解析。
 
 ---
@@ -65,7 +66,7 @@ fn main() {
 }
 ```
 
-**若尝试返回引用**：
+**若尝试返回引用（Reference）**：
 
 ```rust,compile_fail
 fn greet() -> &str {
@@ -80,11 +81,11 @@ fn greet() -> &str {
 
 | 方面 | C | Rust |
 |:---|:---|:---|
-| 局部变量返回 | 允许（UB） | 引用禁止，值必须转移所有权 |
+| 局部变量返回 | 允许（UB） | 引用（Reference）禁止，值必须转移所有权（Ownership） |
 | 检测时机 | 运行期 segfault（或更糟） | 编译期拒绝 |
 | 修复成本 | 调试困难 | 编译器直接指出问题 |
 
-**知识点**：Rust 的所有权系统在编译期消除了整类 C 语言内存错误。返回局部变量引用是最常见的 C bug 之一，在 Rust 中完全不可能。[→ Rust vs C++ 详解](./01_rust_vs_cpp.md)
+**知识点**：Rust 的所有权（Ownership）系统在编译期消除了整类 C 语言内存错误。返回局部变量引用是最常见的 C bug 之一，在 Rust 中完全不可能。[→ Rust vs C++ 详解](LINK_PLACEHOLDER)
 
 </details>
 
@@ -104,7 +105,7 @@ func main() {
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
-**答案**：Go 代码会 **panic**（运行时崩溃）：`runtime error: invalid memory address or nil pointer dereference`。
+**答案**：Go 代码会 **panic**（运行时（Runtime）崩溃）：`runtime error: invalid memory address or nil pointer dereference`。
 
 **Rust 的等效代码**：
 
@@ -138,7 +139,7 @@ fn main() {
 | 解引用 Optional | N/A（无此概念） | `unwrap()` panic；`if let`/`match` 安全处理 |
 | 默认安全 | 运行期检查 | 编译期强制处理所有情况 |
 
-**核心差异**：Go 的 `nil` 是**十亿美元错误**（C.A.R. Hoare）的现代延续。Rust 通过 `Option<T>` 将"可能缺失"显式编码到类型系统中。[→ Rust vs Go 详解](./02_rust_vs_go.md)
+**核心差异**：Go 的 `nil` 是**十亿美元错误**（C.A.R. Hoare）的现代延续。Rust 通过 `Option<T>` 将"可能缺失"显式编码到类型系统（Type System）中。[→ Rust vs Go 详解](./02_rust_vs_go.md)
 
 </details>
 
@@ -229,10 +230,10 @@ fn main() {
 |:---|:---|:---|
 | 数据竞争 | 允许（UB） | 编译期阻止 |
 | 同步原语 | 手动选择（mutex、atomic） | `Mutex`、`RwLock` 与所有权系统集成 |
-| 检测 | ThreadSanitizer（运行时） | 编译器借用检查（编译期） |
+| 检测 | ThreadSanitizer（运行时） | 编译器借用（Borrowing）检查（编译期） |
 | 性能开销 | 零（若代码正确） | 零（检查在编译期完成） |
 
-**知识点**：Rust 的"无畏并发"不是口号——编译器通过 `Send`/`Sync` trait 和借用检查器在编译期阻止所有数据竞争。[→ 并发模型详解](../03_advanced/01_concurrency.md)
+**知识点**：Rust 的"无畏并发"不是口号——编译器通过 `Send`/`Sync` trait 和借用（Borrowing）检查器在编译期阻止所有数据竞争。[→ 并发模型详解](LINK_PLACEHOLDER)
 
 </details>
 
@@ -277,7 +278,7 @@ async fn main() {
 
 **Rust 的优势**：
 
-1. **所有权追踪**：`tx` 的生命周期与任务绑定，若 `tx` 被 drop 而 `rx` 仍在等待，`recv()` 返回 `None`
+1. **所有权追踪**：`tx` 的生命周期（Lifetimes）与任务绑定，若 `tx` 被 drop 而 `rx` 仍在等待，`recv()` 返回 `None`
 2. **编译期检查**：Rust 要求显式处理 `Result`，不能"忘记"处理通道
 3. **结构化并发**：`tokio::select!` 和作用域确保任务在控制流结束时完成
 
@@ -286,7 +287,7 @@ async fn main() {
 | 方面 | Go goroutine | Rust async task |
 |:---|:---|:---|
 | 创建成本 | ~2 KB 栈 | ~几百字节 |
-| 泄漏检测 | 运行期（有限） | 编译期 + 所有权 drop |
+| 泄漏检测 | 运行期（有限） | 编译期 + 所有权（Ownership） drop |
 | 取消机制 | 通过 context 手动传递 | 内置 `AbortHandle` |
 | 调试 | goroutine dump | `tokio-console` 运行时检查 |
 
@@ -351,7 +352,7 @@ fn main() {
 | 错误传播 | 手动 `if (err) return err` | `?` 运算符自动传播 |
 | 资源释放 | 手动（易泄漏） | RAII：`File` 在作用域结束自动关闭 |
 
-**知识点**：Rust 的 `Result` 类型将错误处理从"约定"提升为"类型系统强制"。`?` 运算符消除了 Go 的 `if err != nil` 冗余和 C 的嵌套错误检查。[→ 错误处理详解](../01_foundation/10_error_handling_basics.md)
+**知识点**：Rust 的 `Result` 类型将错误处理（Error Handling）从"约定"提升为"类型系统（Type System）强制"。`?` 运算符消除了 Go 的 `if err != nil` 冗余和 C 的嵌套错误检查。[→ 错误处理详解](LINK_PLACEHOLDER)
 
 </details>
 
@@ -379,15 +380,15 @@ fn add<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
 
 **编译方式对比**：
 
-| 方面 | C++ 模板 | Rust 泛型 |
+| 方面 | C++ 模板 | Rust 泛型（Generics） |
 |:---|:---|:---|
 | 类型检查 | 实例化时（可能导致后期错误） | 定义时（早期错误检测） |
-| 单态化 | 是（每种类型生成一份代码） | 是 |
+| 单态化（Monomorphization） | 是（每种类型生成一份代码） | 是 |
 | 二进制体积 | 可能膨胀（重复代码） | 可能膨胀，但 LTO 可优化 |
 | 错误信息 | 复杂（模板实例化堆栈） | 清晰（trait bound 失败） |
 | 特化 | 完整支持 | `min_specialization`（不稳定） |
 
-**零成本抽象的含义**：
+**零成本抽象（Zero-Cost Abstraction）的含义**：
 
 > "你不需要为使用的抽象付出代价。"
 
@@ -400,15 +401,15 @@ fn add_generic<T: Add>(a: T, b: T) -> T { a + b }
 
 **对比其他语言**：
 
-| 语言 | 泛型实现 | 运行时开销 |
+| 语言 | 泛型（Generics）实现 | 运行时开销 |
 |:---|:---|:---:|
-| C++ | 模板单态化 | 无 |
-| Rust | 单态化 | 无 |
+| C++ | 模板单态化（Monomorphization） | 无 |
+| Rust | 单态化（Monomorphization） | 无 |
 | Java | 类型擦除（Object） | 装箱/拆箱 |
 | Go | 接口（interface{}） | 类型断言、间接调用 |
-| C# | 运行时泛型 | 少量（JIT 优化后接近零） |
+| C# | 运行时泛型（Generics） | 少量（JIT 优化后接近零） |
 
-**知识点**：Rust 的零成本抽象意味着你可以使用高阶概念（迭代器、闭包、泛型）而不牺牲性能——编译器生成的代码与手写底层代码一样高效。[→ 零成本抽象详解](../01_foundation/06_zero_cost_abstractions.md)
+**知识点**：Rust 的零成本抽象（Zero-Cost Abstraction）意味着你可以使用高阶概念（迭代器（Iterator）、闭包（Closures）、泛型）而不牺牲性能——编译器生成的代码与手写底层代码一样高效。[→ 零成本抽象详解](LINK_PLACEHOLDER)
 
 </details>
 
@@ -469,7 +470,7 @@ let sum: i64 = (0..1_000_000).map(|x| x as i64).sum();
 | 内存释放 | ❌ 手动 | ✅ RAII | ✅ GC | ✅ RAII |
 | 溢出检查 | ❌ 无 | ❌ 无 | ❌ 无 | ✅ debug 模式 panic |
 
-**知识点**：Rust 在安全性上接近 Go（自动内存管理、边界检查），在性能上接近 C++（零成本抽象、无 GC）。这是 Rust 独特定位的来源。[→ Rust vs C++ 详解](./01_rust_vs_cpp.md)
+**知识点**：Rust 在安全性上接近 Go（自动内存管理、边界检查），在性能上接近 C++（零成本抽象（Zero-Cost Abstraction）、无 GC）。这是 Rust 独特定位的来源。[→ Rust vs C++ 详解](./01_rust_vs_cpp.md)
 
 </details>
 
@@ -489,7 +490,7 @@ let sum: i64 = (0..1_000_000).map(|x| x as i64).sum();
 | C | ✅ 传统选择 | 成熟生态，所有嵌入式工具链支持 |
 | C++ | ⚠️ 可用 | 复杂特性在裸机环境受限，RTTI/异常通常禁用 |
 | Go | ❌ 不适合 | 需要运行时（GC、goroutine 调度器），无法裸机运行 |
-| **Rust** | ✅ **最佳选择** | 内存安全 + 零成本 + 无运行时；Rust for Linux 项目验证 |
+| **Rust** | ✅ **最佳选择** | 内存安全（Memory Safety） + 零成本 + 无运行时；Rust for Linux 项目验证 |
 
 **Rust 的嵌入式优势**：
 

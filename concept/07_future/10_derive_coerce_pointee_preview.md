@@ -15,7 +15,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Derive CoercePointee 预览特性
-> **定位**: 探讨 Rust 1.95+ 中通过派生宏自动化 `CoerceUnsized` 和 `DispatchFromDyn` 实现，降低自定义智能指针的**样板代码**和**unsafe 实现风险**。
+> **定位**: 探讨 Rust 1.95+ 中通过派生宏（Macro）自动化 `CoerceUnsized` 和 `DispatchFromDyn` 实现，降低自定义智能指针（Smart Pointer）的**样板代码**和**unsafe 实现风险**。
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Generics](../02_intermediate/02_generics.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **后置概念**: [Evolution](./03_evolution.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
@@ -30,14 +30,14 @@
 
 ## 📑 目录
 
-- [派生 CoercePointee 预研：智能指针的自动类型强制](#派生-coercepointee-预研智能指针的自动类型强制)
+- [派生 CoercePointee 预研：智能指针（Smart Pointer）的自动类型强制](LINK_PLACEHOLDER)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 问题：自定义智能指针的样板代码](#11-问题自定义智能指针的样板代码)
     - [1.2 CoerceUnsized 与 DispatchFromDyn](#12-coerceunsized-与-dispatchfromdyn)
     - [1.3 `#[derive(CoercePointee)]` 方案](#13-derivecoercepointee-方案)
   - [二、技术细节](#二技术细节)
-    - [2.1 派生宏的展开逻辑](#21-派生宏的展开逻辑)
+    - [2.1 派生宏（Macro）的展开逻辑](LINK_PLACEHOLDER)
     - [2.2 约束条件](#22-约束条件)
     - [2.3 与现有 Trait 的交互](#23-与现有-trait-的交互)
   - [三、安全分析](#三安全分析)
@@ -52,7 +52,7 @@
     - [10.1 边界测试：非 `#[repr(transparent)]` 类型的 CoercePointee（编译错误）](#101-边界测试非-reprtransparent-类型的-coercepointee编译错误)
     - [10.2 边界测试：多字段 struct 的 CoercePointee 尝试（编译错误）](#102-边界测试多字段-struct-的-coercepointee-尝试编译错误)
     - [10.3 边界测试：CoercePointee 与自定义 DST 的元数据（编译错误）](#103-边界测试coercepointee-与自定义-dst-的元数据编译错误)
-    - [10.4 边界测试：`PhantomData` 与 CoercePointee 的生命周期交互（编译错误）](#104-边界测试phantomdata-与-coercepointee-的生命周期交互编译错误)
+    - [10.4 边界测试：`PhantomData` 与 CoercePointee 的生命周期（Lifetimes）交互（编译错误）](LINK_PLACEHOLDER)
     - [10.4 边界测试：`CoercePointee` 与智能指针的自动转换（编译错误/未来特性）](#104-边界测试coercepointee-与智能指针的自动转换编译错误未来特性)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -192,7 +192,7 @@ struct SmartPtr<T: ?Sized> {
 | :--- | :--- | :--- |
 | `#[pointee(T)]` 必须存在 | 标记参与强制的类型参数 | 编译错误：无法确定哪个参数是 pointee |
 | T 必须是 `?Sized` | 只有 ?Sized 类型才能强制为 dyn Trait | 编译错误：类型参数必须支持动态大小 |
-| 单一 pointee 字段 | 结构体中只能有一个字段使用 T | 编译错误：多个字段的偏移计算不明确 |
+| 单一 pointee 字段 | 结构体（Struct）中只能有一个字段使用 T | 编译错误：多个字段的偏移计算不明确 |
 | 其他字段与 T 大小无关 | metadata、计数器等字段不能依赖 T: Sized | 编译错误：布局依赖无法自动推导 |
 
 > **边界说明**: 这些约束确保强制转换的**唯一性**——给定源类型和目标类型，转换后的布局是确定的。
@@ -275,8 +275,8 @@ graph TD
     style ALT2 fill:#fff3e0
 ```
 
-> **认知功能**: 此决策树帮助判断是否可以使用 `#[derive(CoercePointee)]`。核心判断标准是结构体是否满足约束条件以及是否需要特殊的强制行为。
-> **使用建议**: 对于绝大多数自定义智能指针（如引用计数、自定义 Box），派生宏完全足够；仅在非常规布局（如分片存储、内联小对象优化）时需要手动实现。
+> **认知功能**: 此决策树帮助判断是否可以使用 `#[derive(CoercePointee)]`。核心判断标准是结构体（Struct）是否满足约束条件以及是否需要特殊的强制行为。
+> **使用建议**: 对于绝大多数自定义智能指针（如引用（Reference）计数、自定义 Box），派生宏完全足够；仅在非常规布局（如分片存储、内联小对象优化）时需要手动实现。
 > **关键洞察**: `CoercePointee` 覆盖约 **80-90%** 的自定义智能指针场景，剩余场景需要手动 unsafe 实现。
 
 ---
@@ -337,9 +337,9 @@ graph TD
 
 ## 相关概念文件
 
-- [Type System](../01_foundation/04_type_system.md) — Rust 类型系统基础
-- [Generics](../02_intermediate/02_generics.md) — 泛型与 Trait Bounds
-- [Unsafe](../03_advanced/03_unsafe.md) — unsafe Rust 与内存安全
+- [Type System](../01_foundation/04_type_system.md) — Rust 类型系统（Type System）基础
+- [Generics](../02_intermediate/02_generics.md) — 泛型（Generics）与 Trait Bounds
+- [Unsafe](../03_advanced/03_unsafe.md) — unsafe Rust 与内存安全（Memory Safety）
 - [Evolution](./03_evolution.md) — 语言演进机制
 - [Version Tracking](./05_rust_version_tracking.md) — Rust 版本特性演进
 
@@ -434,7 +434,7 @@ fn main() {
 > 标准 DST（`str`、`[T]`、`dyn Trait`）的元数据是编译器内置的（长度或 vtable 指针）。
 > 自定义 DST（如 `dyn MyTrait + Send` 的特定组合）的元数据布局可能不同。
 > `CoercePointee` 目前主要针对标准库的智能指针（`Box`、`Rc`、`Arc`）的自定义版本，对完全自定义的 DST 支持有限。
-> 这与 C++ 的 `std::shared_ptr<void>`（类型擦除，无元数据）或 Rust 的 `dyn Any`（固定元数据布局）类似——DST 是 Rust 类型系统的高级特性，智能指针的 coercion 需要编译器的深度配合。
+> 这与 C++ 的 `std::shared_ptr<void>`（类型擦除，无元数据）或 Rust 的 `dyn Any`（固定元数据布局）类似——DST 是 Rust 类型系统（Type System）的高级特性，智能指针的 coercion 需要编译器的深度配合。
 > [来源: [Rust RFC 3621](https://rust-lang.github.io/rfcs//3621-derive-smart-pointer.html)] ·
 > [来源: [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html)]
 
@@ -460,8 +460,8 @@ fn main() {
 ```
 
 > **修正**:
-> `CoercePointee` 不仅涉及类型 coercion（`String` → `str`），还涉及**生命周期 coercion**。
-> `Ref<'a, T>` 的 `'a` 是引用的生命周期，`T` 的变化（`String` → `str`）需保持生命周期约束。
+> `CoercePointee` 不仅涉及类型 coercion（`String` → `str`），还涉及**生命周期（Lifetimes） coercion**。
+> `Ref<'a, T>` 的 `'a` 是引用（Reference）的生命周期（Lifetimes），`T` 的变化（`String` → `str`）需保持生命周期约束。
 > `Ref<'short, String>` → `Ref<'long, str>` 要求 `'short: 'long`（短生命周期可 coerce 为长生命周期）。
 > 若生命周期不匹配，编译错误。这是 Rust 生命周期系统的常规行为，但 `CoercePointee` 增加了复杂度：coercion 现在同时涉及类型和生命周期两个维度。
 > 这与 `&'a String` → `&'a str` 的自动 coercion（Deref coercion）类似——`CoercePointee` 将这一能力扩展到自定义智能指针。
@@ -561,7 +561,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-降低了实现自定义智能指针的门槛，鼓励更多库提供与标准库智能指针相同的行为一致性，减少用户遇到"我的智能指针为什么不能转 dyn Trait"的困惑。
+降低了实现自定义智能指针的门槛，鼓励更多库提供与标准库智能指针相同的行为一致性（Coherence），减少用户遇到"我的智能指针为什么不能转 dyn Trait"的困惑。
 </details>
 
 ## 认知路径

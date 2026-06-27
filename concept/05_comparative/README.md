@@ -10,6 +10,8 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 ## 〇、L5 认知入口
@@ -98,9 +100,9 @@ graph TB
 | 关系 | 从 | 到 | 语义类型 | 说明 |
 |:---|:---|:---|:---|:---|
 | 1 | **L1-L4 概念** | **Rust vs C++** | `==>` 对比映射 | C++ 文件是 L1-L4 概念的**镜像对照**。每个 Rust 概念在 C++ 中的对应机制（或缺失）形成对比。 |
-| 2 | **L3 Concurrency** | **Rust vs Go** | `==>` 对比映射 | Go 的 goroutine + channel 是 Rust 所有权并发的**对照模型**。 |
-| 3 | **Paradigm Matrix** | **所有层** | `-.->` 综合/定位 | 范式矩阵将 L1-L4 的所有概念置于**多语言类型系统谱系**中，回答"Rust 在设计空间中的位置"。 |
-| 4 | **L5 对比** | **L7 Evolution** | `==>` 驱动 | 对比分析揭示的设计权衡（如 GC vs 所有权）直接影响语言演进方向。 |
+| 2 | **L3 Concurrency** | **Rust vs Go** | `==>` 对比映射 | Go 的 goroutine + channel 是 Rust 所有权（Ownership）并发的**对照模型**。 |
+| 3 | **Paradigm Matrix** | **所有层** | `-.->` 综合/定位 | 范式矩阵将 L1-L4 的所有概念置于**多语言类型系统（Type System）谱系**中，回答"Rust 在设计空间中的位置"。 |
+| 4 | **L5 对比** | **L7 Evolution** | `==>` 驱动 | 对比分析揭示的设计权衡（如 GC vs 所有权（Ownership））直接影响语言演进方向。 |
 
 ### 1.2 对比层的"综合"功能
 
@@ -127,8 +129,8 @@ L1-L4 知识                L5 综合                L6-L7 决策
 |:---|:---|:---|:---|:---|:---|
 | [01_rust_vs_cpp.md](./01_rust_vs_cpp.md) | Rust vs C++ | 形式系统模型 vs 机制工程模型、多维矩阵、决策树、AI时代分析 | ✅ v1.0（原 01.md） | L1 Ownership, L3 Unsafe, L4 Linear Logic | 系统编程选型、C++ 迁移 |
 | [02_rust_vs_go.md](./02_rust_vs_go.md) | Rust vs Go | CSP vs 所有权并发、服务编排语义、确定性对比 | ✅ v1.0 | L3 Concurrency, L1 Ownership | 微服务选型、云原生架构 |
-| [03_paradigm_matrix.md](./03_paradigm_matrix.md) | 范式矩阵 | 多语言形式化对比、类型系统谱系、设计哲学 | ✅ v1.0 | L1-L4 所有概念 | 语言教学、研究定位 |
-| [06_rust_vs_java.md](./06_rust_vs_java.md) | Rust vs Java | 所有权 vs GC、并发模型、运行时架构、场景矩阵 | ✅ v1.0 | L1 Ownership, L3 Concurrency | JVM 迁移、企业系统选型 |
+| [03_paradigm_matrix.md](LINK_PLACEHOLDER) | 范式矩阵 | 多语言形式化对比、类型系统（Type System）谱系、设计哲学 | ✅ v1.0 | L1-L4 所有概念 | 语言教学、研究定位 |
+| [06_rust_vs_java.md](./06_rust_vs_java.md) | Rust vs Java | 所有权 vs GC、并发模型、运行时（Runtime）架构、场景矩阵 | ✅ v1.0 | L1 Ownership, L3 Concurrency | JVM 迁移、企业系统选型 |
 | [07_rust_vs_python.md](./07_rust_vs_python.md) | Rust vs Python | 静态 vs 动态类型、所有权 vs GC、 fearless vs GIL、元编程 | ✅ v1.0 | L1 Ownership, L1 Type System | 性能瓶颈、混合架构选型 |
 | [08_rust_vs_javascript.md](./08_rust_vs_javascript.md) | Rust vs JavaScript | 编译 vs 解释、所有权 vs GC、Future vs Promise、WASM | ✅ v1.0 | L1 Ownership, L3 Async | Web 性能、WASM 集成 |
 | [02_cpp_abi_object_model.md](./02_cpp_abi_object_model.md) | C++ ABI 与对象模型 | ABI 稳定性、对象布局、vtable、repr(C)、Move ABI、RTTI | ✅ v1.0 | L1 Ownership, L3 Unsafe, L3 FFI | C++ 迁移、FFI |
@@ -138,7 +140,7 @@ L1-L4 知识                L5 综合                L6-L7 决策
 ### 补充文件索引
 
 - [Rust 安全保证的边界条件全景（Safety Boundary Panorama）](./04_safety_boundaries.md)
-- [Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行](./05_execution_model_isomorphism.md)
+- [Rust 执行模型同构性矩阵：同步 · 异步（Async） · 并发 · 并行](LINK_PLACEHOLDER)
 - [Rust vs Ruby：性能与表达力的两极](./08_rust_vs_ruby.md)
 - [Rust vs Swift：现代系统语言的两种路径](./09_rust_vs_swift.md)
 - [Rust vs Zig：现代系统语言的两种哲学](./10_rust_vs_zig.md)
@@ -151,7 +153,7 @@ L1-L4 知识                L5 综合                L6-L7 决策
 
 ## 三、原 `01.md` 的结构化索引
 
-原文件 [01_rust_vs_cpp.md](./01_rust_vs_cpp.md) 包含以下核心内容，可按需引用：
+原文件 [01_rust_vs_cpp.md](./01_rust_vs_cpp.md) 包含以下核心内容，可按需引用（Reference）：
 
 | 章节 | 内容摘要 | 推荐用途 | 对应 L1-L4 概念 |
 |:---|:---|:---|:---|
@@ -161,7 +163,7 @@ L1-L4 知识                L5 综合                L6-L7 决策
 | 决策树 | 技术选型判断 | 工程决策支持 | L5 → L6 实践 |
 | 历史必然性 | 从 CS 到 SE 的两种路径 | 历史语境理解 | L7 演进 |
 | 编译模型对比 | 证明检查 vs 代码生成 | 编译器行为理解 | L4 类型论 vs L6 工具链 |
-| 形式化边界 | Pin、FFI、循环引用 | 能力边界认知 | L3 Unsafe, L2 Memory |
+| 形式化边界 | Pin、FFI、循环引用（Reference） | 能力边界认知 | L3 Unsafe, L2 Memory |
 | 五层扩展模型 | L0-L5 形式化层级 | 架构设计参考 | L0-L4 层级映射 |
 | 技术栈哲学 | PG18+/Rust/Go/Temporal/TS/AI | 全栈技术选型 | L5-L7 综合 |
 | 秩序与语义 | 欧氏几何模式论证 | 深层设计哲学 | L4 形式化根基 |
@@ -174,13 +176,13 @@ L1-L4 知识                L5 综合                L6-L7 决策
 
 | 维度 | Rust | C++ | Go | 形式化含义 |
 |:---|:---|:---|:---|:---|
-| 内存安全机制 | 所有权 + 借用检查 | 智能指针 + RAII（运行时） | GC（运行时） | 编译期证明 vs 运行时控制 vs 自动回收 |
-| 并发安全 | Send/Sync（类型级） | 无（程序员负责） | channel（语言级） | 类型系统保证 vs 无保证 vs 消息传递 |
-| 类型系统 | 代数类型 + Trait | 模板 + 继承 | 结构类型 + 接口 | 和/积类型 vs 参数多态 vs 鸭子类型 |
+| 内存安全（Memory Safety）机制 | 所有权（Ownership） + 借用（Borrowing）检查 | 智能指针（Smart Pointer） + RAII（运行时） | GC（运行时） | 编译期证明 vs 运行时控制 vs 自动回收 |
+| 并发安全（Concurrency Safety） | Send/Sync（类型级） | 无（程序员负责） | channel（语言级） | 类型系统保证 vs 无保证 vs 消息传递 |
+| 类型系统（Type System） | 代数类型 + Trait | 模板 + 继承 | 结构类型 + 接口 | 和/积类型 vs 参数多态 vs 鸭子类型 |
 | 形式化基础 | 线性逻辑 + 分离逻辑 | 无统一基础 | CSP + π 演算 | 资源敏感 vs 无 vs 进程代数 |
-| 零成本抽象 | 单态化 | 模板实例化 | 无（接口有开销） | 参数多态的编译期消除 |
-| 错误处理 | Result（显式） | 异常 + 返回值 | 多返回值 + error | 和类型错误通道 vs 隐式控制流 |
-| 元编程 | 宏 + 泛型 | 模板元编程 | 反射（有限） | 语法变换 vs 类型计算 |
+| 零成本抽象（Zero-Cost Abstraction） | 单态化（Monomorphization） | 模板实例化 | 无（接口有开销） | 参数多态的编译期消除 |
+| 错误处理（Error Handling） | Result（显式） | 异常 + 返回值 | 多返回值 + error | 和类型错误通道 vs 隐式控制流 |
+| 元编程 | 宏（Macro） + 泛型（Generics） | 模板元编程 | 反射（有限） | 语法变换 vs 类型计算 |
 | 可验证性 | RustBelt/Kani | 有限工具支持 | 有限 | 分离逻辑 vs 测试覆盖 |
 
 ---

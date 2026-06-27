@@ -8,12 +8,13 @@
 > **Summary**: Quiz Macros. Core Rust concept.
 > **答案**： ```rust // vec![1, 2, 3] 展开为： { let mut temp_vec = Vec::new(); temp_vec.push(1); temp_vec.push(2); temp_vec.push(3); temp_vec }```
 > **解析**：`vec!` 是 Rust 标准库中的**声明宏**（declarative macro），使用 `macro_rules!` 定义。
-> **声明宏的核心特征**： | 特性 | 说明 | |:---|:---| | 调用语法
+> **声明宏（Declarative Macro）的核心特征**： | 特性 | 说明 | |:---|:---| | 调用语法
 > **受众**: [专家]
 > **内容分级**: [专家级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
 
+> **后置概念**: N/A
 ---
 
 > **来源**:
@@ -59,7 +60,7 @@
 
 **解析**：`vec!` 是 Rust 标准库中的**声明宏**（declarative macro），使用 `macro_rules!` 定义。
 
-**声明宏的核心特征**：
+**声明宏（Macro）的核心特征**：
 
 | 特性 | 说明 |
 |:---|:---|
@@ -70,13 +71,13 @@
 
 **对比**：
 
-| 宏类型 | 展开阶段 | 输入 | 输出 |
+| 宏（Macro）类型 | 展开阶段 | 输入 | 输出 |
 |:---|:---|:---|:---|
-| 声明宏 `macro_rules!` | 早期（token 树） | token 树 | token 树 |
-| 过程宏 `derive` | 后期（AST） | AST | AST |
-| 过程宏 `proc_macro` | 后期（token 流） | token 流 | token 流 |
+| 声明宏（Declarative Macro） `macro_rules!` | 早期（token 树） | token 树 | token 树 |
+| 过程宏（Procedural Macro） `derive` | 后期（AST） | AST | AST |
+| 过程宏（Procedural Macro） `proc_macro` | 后期（token 流） | token 流 | token 流 |
 
-**知识点**：声明宏是 Rust 中最早的宏形式，适合简单的代码生成和 DSL。复杂场景（如 derive）应使用过程宏。[→ 宏系统详解](./04_macros.md)
+**知识点**：声明宏（Declarative Macro）是 Rust 中最早的宏形式，适合简单的代码生成和 DSL。复杂场景（如 derive）应使用过程宏（Procedural Macro）。[→ 宏系统详解](LINK_PLACEHOLDER)
 
 </details>
 
@@ -174,7 +175,7 @@ fn main() {
 
 **解析**：Rust 的声明宏是**半卫生（semi-hygienic）**的。
 
-**卫生性含义**：宏内部定义的变量不会与外部变量冲突，但**从外部传入的标识符**仍引用外部作用域。
+**卫生性含义**：宏内部定义的变量不会与外部变量冲突，但**从外部传入的标识符**仍引用（Reference）外部作用域。
 
 **执行分析**：
 
@@ -190,7 +191,7 @@ fn main() {
 
 但等一下，这个例子实际上是复杂的。让我澄清：
 
-在 Rust 中，`$e:expr` 参数中的 `a` 是在**调用点**解析的，因此它引用 `main` 中的 `a = "outer"`。宏内部 `let a = 42` 是宏自己生成的变量，与参数中的 `a` 隔离。
+在 Rust 中，`$e:expr` 参数中的 `a` 是在**调用点**解析的，因此它引用（Reference） `main` 中的 `a = "outer"`。宏内部 `let a = 42` 是宏自己生成的变量，与参数中的 `a` 隔离。
 
 **对比 C 预处理器**：
 
@@ -230,7 +231,7 @@ fn main() {
 
 **答案**：`true`
 
-**解析**：`#[derive(...)]` 是**派生宏（derive macro）**，编译器自动为结构体生成 trait 实现。
+**解析**：`#[derive(...)]` 是**派生宏（derive macro）**，编译器自动为结构体（Struct）生成 trait 实现。
 
 **生成的代码近似于**：
 
@@ -311,7 +312,7 @@ fn add(a: i32, b: i32) -> i32 {
 
 **属性宏 vs 函数宏**：
 
-- 属性宏：**修改**已有 AST 节点（函数、结构体等）
+- 属性宏：**修改**已有 AST 节点（函数、结构体（Struct）等）
 - 函数宏（`proc_macro`）：**生成**新代码，通过 `!` 调用
 
 **知识点**：属性宏是构建编译期 AOP（面向切面编程）和代码生成工具的核心机制。`tokio::main`、`test`、`derive` 都是属性宏。[→ 过程宏详解](./07_proc_macro.md)
@@ -462,13 +463,13 @@ Line: 8
 
 **解析**：
 
-| 宏 | 输入 | 输出 | 返回类型 |
+| 宏（Macro） | 输入 | 输出 | 返回类型 |
 |:---|:---|:---|:---|
 | `stringify!($tokens)` | 任意 token | token 的字符串表示 | `&'static str` |
 | `concat!("a", "b", ...)` | 字符串字面量 + 整数/布尔常量 | 拼接后的字符串 | `&'static str` |
 | `line!()` | 无 | 当前行号 | `u32` |
 | `file!()` | 无 | 当前文件名 | `&'static str` |
-| `module_path!()` | 无 | 当前模块路径 | `&'static str` |
+| `module_path!()` | 无 | 当前模块（Module）路径 | `&'static str` |
 | `column!()` | 无 | 当前列号 | `u32` |
 
 **使用场景**：
@@ -572,7 +573,7 @@ fn main() {}
 
 **错误信息**：`Vec` is not found in this scope`
 
-**解析**：`use_std!()` 展开为 `use std::vec::Vec;`，但这在 `inner` 模块中引入的是 `inner::Vec`，而调用时写的是 `Vec::new()`（相对路径）。
+**解析**：`use_std!()` 展开为 `use std::vec::Vec;`，但这在 `inner` 模块（Module）中引入的是 `inner::Vec`，而调用时写的是 `Vec::new()`（相对路径）。
 
 **修正方案**——在宏中使用绝对路径：
 

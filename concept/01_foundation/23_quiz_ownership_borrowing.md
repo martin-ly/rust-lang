@@ -15,6 +15,7 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
 
+> **后置概念**: [Borrowing](./02_borrowing.md)
 ---
 
 > **来源**:
@@ -62,7 +63,7 @@ fn main() {
 
 **解析**：`String` 未实现 `Copy` trait，赋值 `let s2 = s1` 会**移动（move）**所有权（Ownership）。`s1` 在移动后变为未初始化状态，不能再使用。
 
-**知识点**：Rust 中每个值有且只有一个所有者。当所有者离开作用域，值被自动丢弃（drop）。[→ 所有权规则详解](./01_ownership.md)
+**知识点**：Rust 中每个值有且只有一个所有者。当所有者离开作用域，值被自动丢弃（drop）。[→ 所有权（Ownership）规则详解](LINK_PLACEHOLDER)
 
 </details>
 
@@ -89,11 +90,11 @@ fn take_ownership(s: String) {
 
 **错误信息**：`borrow of moved value: s`
 
-**解析**：`take_ownership(s)` 将 `s` 的所有权移动到函数参数中。函数结束后 `s` 被 drop，`main` 中的 `s` 不再有效。
+**解析**：`take_ownership(s)` 将 `s` 的所有权（Ownership）移动到函数参数中。函数结束后 `s` 被 drop，`main` 中的 `s` 不再有效。
 
 **修改方案**（二选一）：
 
-1. **使用引用**（推荐，零成本）：
+1. **使用引用（Reference）**（推荐，零成本）：
 
 ```rust
 fn take_ownership(s: &String) {
@@ -109,7 +110,7 @@ take_ownership(s.clone());
 println!("{s}");
 ```
 
-**知识点**：通过引用借用可以避免所有权转移。[→ 借用详解](./02_borrowing.md)
+**知识点**：通过引用（Reference）借用（Borrowing）可以避免所有权转移。[→ 借用详解](LINK_PLACEHOLDER)
 
 </details>
 
@@ -131,7 +132,7 @@ println!("{s}");
 
 `String` 包含堆内存的指针，若按位复制会导致**双重释放（double free）**。Rust 禁止为管理堆内存的类型自动实现 `Copy`。
 
-**知识点**：`Copy` trait 标记"按位复制安全"的类型。自定义类型可通过 `#[derive(Copy, Clone)]` 显式实现（前提是所有字段都实现 `Copy`）。[→ 类型系统详解](./04_type_system.md)
+**知识点**：`Copy` trait 标记"按位复制安全"的类型。自定义类型可通过 `#[derive(Copy, Clone)]` 显式实现（前提是所有字段都实现 `Copy`）。[→ 类型系统（Type System）详解](LINK_PLACEHOLDER)
 
 </details>
 
@@ -157,9 +158,9 @@ fn main() {
 
 **错误信息**：`cannot borrow`s`as mutable more than once at a time`
 
-**解析**：Rust 的**可变借用规则**规定：在同一作用域内，对同一数据只能有一个可变引用（&mut）。这是数据竞争自由（data-race freedom）的编译期保证。
+**解析**：Rust 的**可变借用（Mutable Borrow）规则**规定：在同一作用域内，对同一数据只能有一个可变引用（Mutable Reference）（&mut）。这是数据竞争自由（data-race freedom）的编译期保证。
 
-**修改方案**——通过**限制作用域**或**顺序使用**分离借用：
+**修改方案**——通过**限制作用域**或**顺序使用**分离借用（Borrowing）：
 
 ```rust
 fn main() {
@@ -173,7 +174,7 @@ fn main() {
 }
 ```
 
-**知识点**：Rust 借用检查器通过作用域分析（而非运行时锁）保证内存安全。[→ 借用规则详解](./02_borrowing.md)
+**知识点**：Rust 借用检查器通过作用域分析（而非运行时（Runtime）锁）保证内存安全（Memory Safety）。[→ 借用规则详解](./02_borrowing.md)
 
 </details>
 
@@ -200,7 +201,7 @@ fn main() {
 
 **解析**：Rust 的**借用规则二**规定：不可变引用（Immutable Reference）（&T）和可变引用（&mut T）不能同时存在。因为不可变引用的使用者可能依赖数据不被修改。
 
-**修改方案**——确保不可变引用不再使用后再创建可变引用：
+**修改方案**——确保不可变引用（Immutable Reference）不再使用后再创建可变引用：
 
 ```rust
 fn main() {
@@ -265,11 +266,11 @@ fn longest(x: &str, y: &str) -> &str {
 <details>
 <summary>💡 点击展开答案与解析</summary>
 
-**答案**：❌ 不能编译——需要显式生命周期标注。
+**答案**：❌ 不能编译——需要显式生命周期（Lifetimes）标注。
 
 **错误信息**：`missing lifetime specifier`
 
-**解析**：编译器无法确定返回的引用是 `x` 的还是 `y` 的。需要显式标注生命周期：
+**解析**：编译器无法确定返回的引用是 `x` 的还是 `y` 的。需要显式标注生命周期（Lifetimes）：
 
 ```rust
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
@@ -279,7 +280,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 **语义**：返回的引用生命周期至少与 `x` 和 `y` 中**较短的那个**一样长。
 
-**知识点**：生命周期标注不改变运行时代码，仅向编译器提供**借用关系约束**。[→ 生命周期语法](./03_lifetimes.md)
+**知识点**：生命周期标注不改变运行时（Runtime）代码，仅向编译器提供**借用关系约束**。[→ 生命周期语法](LINK_PLACEHOLDER)
 
 </details>
 
@@ -351,7 +352,7 @@ fn main() {
 
 **错误信息**：`cannot borrow`v`as mutable because it is also borrowed as immutable`
 
-**解析**：`&v[0]` 创建了对 `v` 内部元素的不可变引用。`v.push(4)` 需要 `&mut v`。如果 `push` 导致 `Vec` 重新分配内存，`first` 将变成悬垂指针。
+**解析**：`&v[0]` 创建了对 `v` 内部元素的不可变引用（Mutable Reference）。`v.push(4)` 需要 `&mut v`。如果 `push` 导致 `Vec` 重新分配内存，`first` 将变成悬垂指针。
 
 **修改方案**——分离借用：
 
@@ -403,7 +404,7 @@ shared shared
 
 **限制**：`Rc` 不提供内部可变性。如需修改共享数据，需配合 `RefCell<T>` 或 `Mutex<T>`。
 
-**知识点**：`Rc` 是 Rust 所有权系统的**补充**而非替代——它通过运行时引用计数允许有限的共享所有权，代价是只能用于单线程场景。[→ 智能指针详解](../02_intermediate/03_memory_management.md)
+**知识点**：`Rc` 是 Rust 所有权系统的**补充**而非替代——它通过运行时引用计数允许有限的共享所有权，代价是只能用于单线程场景。[→ 智能指针（Smart Pointer）详解](LINK_PLACEHOLDER)
 
 </details>
 
@@ -428,7 +429,7 @@ shared shared
 >
 > **扩展计划**：若试点效果良好，可向以下主题推广：
 >
-> - L1: 类型系统、集合、错误处理（Error Handling）
+> - L1: 类型系统（Type System）、集合、错误处理（Error Handling）
 > - L2: Trait、泛型（Generics）、智能指针（Smart Pointer）
 > - L3: 并发、异步（Async）、Unsafe
 >
@@ -450,7 +451,7 @@ shared shared
 
 ### 测验 1：本文件是 测验：所有权、借用与生命周期（试点） 的专项测验集。这类测验文件的主要作用是什么？（理解层）
 
-**题目**: 本文件是 测验：所有权、借用与生命周期（试点） 的专项测验集。这类测验文件的主要作用是什么？
+**题目**: 本文件是 测验：所有权（Ownership）、借用与生命周期（试点） 的专项测验集。这类测验文件的主要作用是什么？
 
 <details>
 <summary>✅ 答案与解析</summary>

@@ -177,7 +177,7 @@ Cargo 支持多种 token 存储方式：
 index = "sparse+https://crates.my-company.com/git/index/"
 ```
 
-在 `Cargo.toml` 中引用：
+在 `Cargo.toml` 中引用（Reference）：
 
 ```toml
 [dependencies]

@@ -66,7 +66,7 @@ Call-by-Reference (CBR) → 传递参数的地址/引用
 | **CBV** | 值的副本 | 无副作用传播 | 可预测，可能重复计算参数 |
 | **CBN** | 表达式本身 | 副作用可能多次执行 | 避免无用计算，但重复求值 |
 | **CBV-need** | 表达式 + 缓存 | 副作用执行一次 | 最优：惰性 + 记忆化 |
-| **CBR** | 地址/引用 | 副作用直接传播 | 高效大对象传递，但别名风险 |
+| **CBR** | 地址/引用（Reference） | 副作用直接传播 | 高效大对象传递，但别名风险 |
 
 ---
 
@@ -102,11 +102,11 @@ fn main() {
 | 类型 | CBV 行为 | 等价于经典 PL |
 |:---|:---|:---|
 | `Copy` 类型（`i32`, `bool`, `f64`） | 位拷贝 | 经典 CBV（值拷贝） |
-| `!Copy` 类型（`String`, `Vec<T>`） | 所有权转移（destructive move） | CBV + 线性类型约束 |
-| `&T` 参数 | 传递引用（只读借用） | 受限的 CBR |
-| `&mut T` 参数 | 传递可变引用 | 受限的 CBR + 别名约束 |
+| `!Copy` 类型（`String`, `Vec<T>`） | 所有权（Ownership）转移（destructive move） | CBV + 线性类型约束 |
+| `&T` 参数 | 传递引用（Reference）（只读借用（Borrowing）） | 受限的 CBR |
+| `&mut T` 参数 | 传递可变引用（Mutable Reference） | 受限的 CBR + 别名约束 |
 
-> **关键洞察**: Rust 的默认参数传递**不是纯粹的 CBV**，而是 **CBV + 线性所有权** 的混合体。`Copy` 类型 = 经典 CBV；`!Copy` 类型 = CBV 但原变量失效（所有权转移）。[来源: 💡 原创分析]
+> **关键洞察**: Rust 的默认参数传递**不是纯粹的 CBV**，而是 **CBV + 线性所有权（Ownership）** 的混合体。`Copy` 类型 = 经典 CBV；`!Copy` 类型 = CBV 但原变量失效（所有权转移）。[来源: 💡 原创分析]
 
 ### 3.2 显式引用传递：受限的 Call-by-Reference
 
@@ -124,14 +124,14 @@ fn main() {
 }
 ```
 
-**与 C++ 引用的对比**:
+**与 C++ 引用（Reference）的对比**:
 
 | 维度 | C++ 引用 | Rust 引用 |
 |:---|:---|:---|
 | 语法 | 隐式（`int& y`） | 显式（`&mut x`） |
 | 可空性 | 不可为空（必须初始化） | 不可为空（编译器保证） |
 | 别名规则 | 无编译期检查 | borrow checker 静态验证 |
-| 生命周期 | 手动管理 | 编译器自动推断 |
+| 生命周期（Lifetimes） | 手动管理 | 编译器自动推断 |
 | 可变性 | `const` / 非 `const` | `&T`（只读）/ `&mut T`（独占写） |
 
 ### 3.3 短路求值：非严格性的局部表达
@@ -183,7 +183,7 @@ let fut = async { println!("lazy"); }; // 未执行
 | 维度 | Haskell 惰性 | Rust 显式惰性 |
 |:---|:---|:---|
 | 机制 | 语言级，默认行为 | 库级，显式类型（`Iterator`, `Future`） |
-|  thunk 管理 | 运行时自动创建和管理 | 编译器将 `async` 脱糖为状态机 |
+|  thunk 管理 | 运行时（Runtime）自动创建和管理 | 编译器将 `async` 脱糖为状态机 |
 | 记忆化 | 自动（CBV-need） | 手动（`once_cell::Lazy`, `lazy_static!`） |
 | 空间泄漏 | 可能（thunk 累积） | 不可能（惰性显式标注） |
 
@@ -238,7 +238,7 @@ Rust 明确规定了表达式的求值顺序：
 
 ### 5.1 严格性 vs 类型系统表达能力
 
-| 语言 | 求值策略 | 类型系统特征 |
+| 语言 | 求值策略 | 类型系统（Type System）特征 |
 |:---|:---|:---|
 | Haskell | 非严格 | 需要 Monad 显式管理副作用（IO、State） |
 | ML | 严格 CBV | 引用类型（`ref`）显式管理可变性 |
@@ -257,7 +257,7 @@ fn mutate(x: &mut i32) {
 -- mutate ref = modifyIORef ref (+1)
 ```
 
-> **形式化命题** [Tier 2]: Rust 的 `&mut T` 在类型系统中编码了**局部可变性效果**（local mutation effect），等价于将 CBR 的可变性限制在线性逻辑框架内。
+> **形式化命题** [Tier 2]: Rust 的 `&mut T` 在类型系统（Type System）中编码了**局部可变性效果**（local mutation effect），等价于将 CBR 的可变性限制在线性逻辑框架内。
 > **证明草图**: `&mut T` 满足线性逻辑的 `⊗`（张量积）规则：创建 `&mut T` 消耗 `T` 的所有权，归还 `&mut T` 恢复 `T` 的所有权。在此区间内，存储被独占修改，无别名干扰。来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 ---
@@ -283,7 +283,7 @@ fn lazy_solution() {
 }
 ```
 
-> **认知功能**: 此反例展示了 Rust 严格求值的代价。工程上通过 `Fn` 闭包、`Iterator` 适配器链、`Future` 等显式惰性机制来弥补。[来源: 💡 原创分析]
+> **认知功能**: 此反例展示了 Rust 严格求值的代价。工程上通过 `Fn` 闭包（Closures）、`Iterator` 适配器链、`Future` 等显式惰性机制来弥补。[来源: 💡 原创分析]
 
 ### 6.2 边界测试：求值顺序的确定性验证
 
@@ -335,7 +335,7 @@ fn linear_move() {
 | **Java** | CBR（对象）+ CBV（原始类型） | 严格 | 对象引用自动 | 无 | GC |
 | **Python** | CBR（对象）+ CBV（不可变） | 严格 | 名字绑定 | 生成器（`yield`） | GC |
 | **Haskell** | CBV-need | 非严格 | 无（纯函数） | 默认 | Monad |
-| **Rust** | CBV + 线性所有权 | 严格 | `&T` / `&mut T`（显式） | `Iterator` / `Future` / 闭包 | 所有权+借用 |
+| **Rust** | CBV + 线性所有权 | 严格 | `&T` / `&mut T`（显式） | `Iterator` / `Future` / 闭包（Closures） | 所有权（Ownership）+借用（Borrowing） |
 
 ---
 
@@ -417,8 +417,8 @@ fn main() {
 ```
 
 > **修正**:
-> Rust 的迭代器适配器（`map`、`filter`、`flat_map`）是**惰性求值**的——它们返回新的迭代器，不立即执行。
-> 副作用（`println`、修改外部状态）在迭代器被消费（`collect`、`for_each`、`fold`）时才发生。
+> Rust 的迭代器（Iterator）适配器（`map`、`filter`、`flat_map`）是**惰性求值**的——它们返回新的迭代器，不立即执行。
+> 副作用（`println`、修改外部状态）在迭代器（Iterator）被消费（`collect`、`for_each`、`fold`）时才发生。
 > 这是函数式编程的常规模式（Haskell 的惰性列表、Python 的生成器表达式），但 Rust 开发者常误以为 `map` 像 `Vec::map`（立即执行）。
 > 严格求值与惰性求值的边界：Rust 的值（非迭代器）是严格求值的，`Iterator` trait 的方法链是惰性求值的。
 > 混合时的陷阱：
@@ -449,10 +449,10 @@ fn main() {
 >
 > 1) 迭代器适配器（`map`、`filter`）惰性执行；
 > 2) `lazy_static`、`once_cell` 惰性初始化；
-> 3) 宏展开在编译期惰性。
+> 3) 宏（Macro）展开在编译期惰性。
 >
 > 惰性求值的风险：副作用（panic、I/O、修改状态）的触发时机不确定。
-> `unwrap_or_else(|| panic!(...))` 在 `None` 时立即 panic，因为 `unwrap_or_else` 是严格的（立即调用闭包）。
+> `unwrap_or_else(|| panic!(...))` 在 `None` 时立即 panic，因为 `unwrap_or_else` 是严格的（立即调用闭包（Closures））。
 > 这与 Haskell 的惰性求值（`error` 可能在不可预期时刻触发）或 Swift 的 `@autoclosure`（延迟求值参数）不同——Rust 的惰性仅限于迭代器和高阶函数，核心表达式是严格的。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)] ·
 > [来源: [Evaluation Strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)]
@@ -583,12 +583,12 @@ Rust 的惰性是局部的（仅在迭代器适配器链中），最终必须通
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | 求值策略：Call-by-Value, Call-by-Name, Call-by-Need 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 求值策略：Call-by-Value, Call-by-Name, Call-by-Need 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 求值策略：Call-by-Value, Call-by-Name, Call-by-Need 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 求值策略：Call-by-Value, Call-by-Name, Call-by-Need 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > **过渡**: 掌握 求值策略：Call-by-Value, Call-by-Name, Call-by-Need 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 求值策略：Call-by-Value, Call-by-Name, Call-by-Need 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: 求值策略：Call-by-Value, Call-by-Name, Call-by-Need 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 求值策略：Call-by-Value, Call-by-Name, Call-by-Need 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

@@ -10,7 +10,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
-> **定位**: 对比分析 **Rust**（编译期内存安全、零成本抽象、所有权系统）与 **TypeScript**（渐进式类型、JavaScript 超集、运行时主导）在类型系统、编译模型、异步生态和 WASM 互操作四个维度的本质差异，建立系统化的选型决策框架。
+> **定位**: 对比分析 **Rust**（编译期内存安全（Memory Safety）、零成本抽象（Zero-Cost Abstraction）、所有权（Ownership）系统）与 **TypeScript**（渐进式类型、JavaScript 超集、运行时（Runtime）主导）在类型系统（Type System）、编译模型、异步（Async）生态和 WASM 互操作四个维度的本质差异，建立系统化的选型决策框架。
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md) · [Async](../03_advanced/02_async.md)
 > **后置概念**: [WebAssembly](../06_ecosystem/11_webassembly.md) · [Rust vs JavaScript](./08_rust_vs_javascript.md)
 
@@ -23,17 +23,17 @@
 ## 📑 目录
 >
 
-- [Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程](#rust-vs-typescript静态类型系统的两种哲学--编译期证明与渐进式工程)
+- [Rust vs TypeScript：静态类型系统（Type System）的两种哲学 —— 编译期证明与渐进式工程](LINK_PLACEHOLDER)
   - [📑 目录](#-目录)
   - [一、权威定义与核心概念](#一权威定义与核心概念)
     - [1.1 TypeScript 权威定义](#11-typescript-权威定义)
     - [1.2 类型系统哲学对比](#12-类型系统哲学对比)
     - [1.3 编译模型差异](#13-编译模型差异)
-    - [1.4 内存模型：所有权 vs GC](#14-内存模型所有权-vs-gc)
+    - [1.4 内存模型：所有权（Ownership） vs GC](LINK_PLACEHOLDER)
   - [二、技术细节](#二技术细节)
     - [2.1 类型系统对比矩阵](#21-类型系统对比矩阵)
-    - [2.2 异步模型对比](#22-异步模型对比)
-    - [2.3 错误处理：Result vs Throw](#23-错误处理result-vs-throw)
+    - [2.2 异步（Async）模型对比](LINK_PLACEHOLDER)
+    - [2.3 错误处理（Error Handling）：Result vs Throw](LINK_PLACEHOLDER)
     - [2.4 WASM 互操作](#24-wasm-互操作)
   - [三、选型决策矩阵](#三选型决策矩阵)
   - [四、思维导图（Mermaid）](#四思维导图mermaid)
@@ -50,7 +50,7 @@
     - [10.1 边界测试：TypeScript 的 any 与 Rust 的显式类型（编译错误）](#101-边界测试typescript-的-any-与-rust-的显式类型编译错误)
     - [10.2 边界测试：TypeScript 的可选属性与 Rust 的 Option（编译错误）](#102-边界测试typescript-的可选属性与-rust-的-option编译错误)
     - [10.3 边界测试：TypeScript 的结构类型与 Rust 的名义类型的互操作（编译错误）](#103-边界测试typescript-的结构类型与-rust-的名义类型的互操作编译错误)
-    - [10.4 边界测试：TypeScript 的 `any` 与 Rust 的 `unsafe` 的语义鸿沟（编译错误/运行时 UB）](#104-边界测试typescript-的-any-与-rust-的-unsafe-的语义鸿沟编译错误运行时-ub)
+    - [10.4 边界测试：TypeScript 的 `any` 与 Rust 的 `unsafe` 的语义鸿沟（编译错误/运行时（Runtime） UB）](LINK_PLACEHOLDER)
     - [10.3 边界测试：TypeScript 的结构性类型与 Rust 的名义类型（编译错误）](#103-边界测试typescript-的结构性类型与-rust-的名义类型编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 和 TypeScript 的静态类型检查最根本的区别是什么？（理解层）](#测验-1rust-和-typescript-的静态类型检查最根本的区别是什么理解层)
@@ -98,7 +98,7 @@ TypeScript 核心特征:
   > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)] · [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 ```
 
-> **认知功能**: TypeScript 的"类型擦除"与 Rust 的"类型单态化"是根本不同的编译策略——TypeScript 类型只影响编译期检查，Rust 类型决定代码生成和内存布局。
+> **认知功能**: TypeScript 的"类型擦除"与 Rust 的"类型单态化（Monomorphization）"是根本不同的编译策略——TypeScript 类型只影响编译期检查，Rust 类型决定代码生成和内存布局。
 > [来源: [TypeScript Deep Dive](https://basarat.gitbook.io/typescript/)] · [来源: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html)]
 
 ---
@@ -223,7 +223,7 @@ TypeScript 核心特征:
   > [来源: [Rustnomicon — Leaking](https://doc.rust-lang.org/nomicon/leaking.html)]
 ```
 
-> **认知功能**: Rust 的"编译期内存管理"不是消除内存泄漏，而是将**泄漏原因从"隐式共享+GC 失效"转变为"显式循环引用"**——后者更容易在代码审查中发现。
+> **认知功能**: Rust 的"编译期内存管理"不是消除内存泄漏，而是将**泄漏原因从"隐式共享+GC 失效"转变为"显式循环引用（Reference）"**——后者更容易在代码审查中发现。
 > [来源: [TRPL — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]
 
 ---
@@ -267,7 +267,7 @@ TypeScript 核心特征:
   > [来源: [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html)]
 ```
 
-> **认知功能**: TypeScript 的"类型体操"允许在类型层面进行复杂计算，但增加了认知负担；Rust 的 trait 系统更侧重于**编译期多态和零成本抽象**。
+> **认知功能**: TypeScript 的"类型体操"允许在类型层面进行复杂计算，但增加了认知负担；Rust 的 trait 系统更侧重于**编译期多态和零成本抽象（Zero-Cost Abstraction）**。
 > [来源: [TypeScript — Type Challenges](https://github.com/type-challenges/type-challenges)] · [来源: [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html)]
 
 ---
@@ -360,7 +360,7 @@ TypeScript 核心特征:
   > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 ```
 
-> **认知功能**: TypeScript 的错误处理依赖**约定和 linter**，Rust 的错误处理是**类型系统的一部分**——调用 `?` 的函数必须返回 Result，形成编译期传播链。
+> **认知功能**: TypeScript 的错误处理（Error Handling）依赖**约定和 linter**，Rust 的错误处理是**类型系统的一部分**——调用 `?` 的函数必须返回 Result，形成编译期传播链。
 > [来源: [TRPL — The ? Operator](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)]
 
 ---
@@ -538,7 +538,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树从"性能是否关键"出发，通过团队背景、交付周期、维护周期等维度引导至最优选择。
-> **使用建议**: WASM 场景是两者的**交汇点**——Rust 负责计算密集型模块，TypeScript 负责 UI 和协调层。
+> **使用建议**: WASM 场景是两者的**交汇点**——Rust 负责计算密集型模块（Module），TypeScript 负责 UI 和协调层。
 > [来源: [Rust and WASM](https://rustwasm.github.io/book/)]
 
 ---
@@ -577,7 +577,7 @@ graph TD
   > [来源: [WASM Performance](https://webassembly.github.io/spec/core/benchmarks.html)] · [来源: [wasm-bindgen — Performance](https://rustwasm.github.io/docs/wasm-bindgen/contributing/design/js-objects-in-rust.html)]
 ```
 
-> **层次一致性**: 反命题分析区分了**类型系统的力量**（Rust 的穷尽保证 vs TS 的渐进检查）和**运行时的真实行为**（TS 类型擦除后即为无类型 JS）。
+> **层次一致性（Coherence）**: 反命题分析区分了**类型系统的力量**（Rust 的穷尽保证 vs TS 的渐进检查）和**运行时的真实行为**（TS 类型擦除后即为无类型 JS）。
 > [来源: [TypeScript — Design Non-Goals](https://github.com/microsoft/TypeScript/wiki/TypeScript-Design-Goals)]
 
 ---
@@ -765,7 +765,7 @@ fn fixed() {
 }
 ```
 
-> **TypeScript 对比**: TypeScript 的可选属性（`host?: string`）在访问时可能是 `undefined`，但编译器只在 `strictNullChecks` 开启时检查。Rust 的 `Option<T>` 是枚举类型，无论何种编译模式，访问内部值必须通过 `match`、`if let` 或 `unwrap`。这与 TypeScript 4.4+ 的 `--exactOptionalPropertyTypes` 类似，但 Rust 的设计更根本——可空性不是类型的属性，而是独立的类型构造器。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> **TypeScript 对比**: TypeScript 的可选属性（`host?: string`）在访问时可能是 `undefined`，但编译器只在 `strictNullChecks` 开启时检查。Rust 的 `Option<T>` 是枚举（Enum）类型，无论何种编译模式，访问内部值必须通过 `match`、`if let` 或 `unwrap`。这与 TypeScript 4.4+ 的 `--exactOptionalPropertyTypes` 类似，但 Rust 的设计更根本——可空性不是类型的属性，而是独立的类型构造器。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：TypeScript 的结构类型与 Rust 的名义类型的互操作（编译错误）
 
@@ -838,7 +838,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 使用**名义类型系统**（nominal typing）：类型的同一性由名称决定，而非结构。`Point` 和 `Coordinate` 有相同字段但不同名称，是完全不同的类型。TypeScript 使用**结构性类型系统**（structural typing）：`{ x: number, y: number }` 与 `Point` 兼容，只要结构匹配。Rust 的名义类型：优势——重构安全（重命名字段不影响其他类型）、清晰的错误信息；劣势——需显式转换（`From` trait）。TypeScript 的结构类型：优势——灵活、易于接口组合；劣势——意外兼容（两个不相关的类型因结构相同而混用）。Rust 的 newtype 模式（`struct Meters(u32)`）利用名义类型创建零成本抽象。这与 Go 的接口（结构性满足）或 Haskell 的 `newtype`（名义类型包装）类似——Rust 在名义类型的基础上提供结构化的模式匹配（`match`）。
+> **修正**: Rust 使用**名义类型系统**（nominal typing）：类型的同一性由名称决定，而非结构。`Point` 和 `Coordinate` 有相同字段但不同名称，是完全不同的类型。TypeScript 使用**结构性类型系统**（structural typing）：`{ x: number, y: number }` 与 `Point` 兼容，只要结构匹配。Rust 的名义类型：优势——重构安全（重命名字段不影响其他类型）、清晰的错误信息；劣势——需显式转换（`From` trait）。TypeScript 的结构类型：优势——灵活、易于接口组合；劣势——意外兼容（两个不相关的类型因结构相同而混用）。Rust 的 newtype 模式（`struct Meters(u32)`）利用名义类型创建零成本抽象（Zero-Cost Abstraction）。这与 Go 的接口（结构性满足）或 Haskell 的 `newtype`（名义类型包装）类似——Rust 在名义类型的基础上提供结构化的模式匹配（Pattern Matching）（`match`）。
 
 ## 嵌入式测验（Embedded Quiz）
 

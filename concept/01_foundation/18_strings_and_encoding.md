@@ -9,7 +9,7 @@
 > **Summary**: Rust's string types (`String`, `str`, `OsString`, `CString`) and Unicode/encoding handling.
 > **受众**: [初学者]
 > **Bloom 层级**: 应用 → 分析
-> **定位**: 系统分析 Rust **字符串类型体系**的设计——String 与 str 的所有权语义、UTF-8 编码约束、OsString/OsStr 的平台抽象、CString/CStr 的 FFI 互操作，以及 grapheme clusters、unicode normalization 等高级文本处理概念。
+> **定位**: 系统分析 Rust **字符串类型体系**的设计——String 与 str 的所有权（Ownership）语义、UTF-8 编码约束、OsString/OsStr 的平台抽象、CString/CStr 的 FFI 互操作，以及 grapheme clusters、unicode normalization 等高级文本处理概念。
 > **前置概念**: [Ownership](./01_ownership.md) · [Type System](./04_type_system.md)
 > **后置概念**: [Collections](./08_collections.md) · [FFI](../03_advanced/05_rust_ffi.md)
 
@@ -27,14 +27,14 @@
 
 ## 📑 目录
 
-- [字符串与编码：Rust 的文本处理类型系统](#字符串与编码rust-的文本处理类型系统)
+- [字符串与编码：Rust 的文本处理类型系统（Type System）](LINK_PLACEHOLDER)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 String vs \&str：所有权谱系](#11-string-vs-str所有权谱系)
+    - [1.1 String vs \&str：所有权（Ownership）谱系](LINK_PLACEHOLDER)
     - [1.2 UTF-8：Rust 的编码选择](#12-utf-8rust-的编码选择)
     - [1.3 平台字符串：OsString 与 CString](#13-平台字符串osstring-与-cstring)
   - [二、技术细节](#二技术细节)
-    - [2.1 字符串切片与字符边界](#21-字符串切片与字符边界)
+    - [2.1 字符串切片（String Slice）与字符边界](LINK_PLACEHOLDER)
     - [2.2 Grapheme Clusters 与文本分割](#22-grapheme-clusters-与文本分割)
     - [2.3 Unicode Normalization](#23-unicode-normalization)
   - [三、选型决策矩阵](#三选型决策矩阵)
@@ -48,7 +48,7 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十二、边界测试：字符串编码的编译错误](#十二边界测试字符串编码的编译错误)
-    - [12.1 边界测试：无效 UTF-8 的字节切片转 `str`（运行时 panic）](#121-边界测试无效-utf-8-的字节切片转-str运行时-panic)
+    - [12.1 边界测试：无效 UTF-8 的字节切片（Slice）转 `str`（运行时（Runtime） panic）](LINK_PLACEHOLDER)
     - [12.2 边界测试：`OsStr` 与 `str` 的跨平台差异（编译错误）](#122-边界测试osstr-与-str-的跨平台差异编译错误)
     - [10.3 边界测试：`String` 与 `OsString` 的编码差异（编译错误）](#103-边界测试string-与-osstring-的编码差异编译错误)
     - [10.4 边界测试：字符串切片的字符边界（运行时 panic）](#104-边界测试字符串切片的字符边界运行时-panic)
@@ -114,7 +114,7 @@ fn main() {
 }
 ```
 
-> **认知功能**: String/&str 的**所有权设计**是 Rust 所有权系统的教科书案例——String 拥有数据，&str 借用数据，通过 Deref 实现无缝协作，避免了 C++ 中 std::string/const char* 的混乱。
+> **认知功能**: String/&str 的**所有权设计**是 Rust 所有权系统的教科书案例——String 拥有数据，&str 借用（Borrowing）数据，通过 Deref 实现无缝协作，避免了 C++ 中 std::string/const char* 的混乱。
 > [来源: [TRPL Ch8 — Strings](https://doc.rust-lang.org/book/ch08-02-strings.html)]
 > **关键洞察**: &str 的普适性使其成为 Rust API 设计的首选参数类型——接受 &str 意味着调用者可以传入 String、&str 或任何能 Deref 到 str 的类型。
 > [来源: [Rust API Guidelines — Strings](https://rust-lang.github.io/api-guidelines//naming.html)]
@@ -251,7 +251,7 @@ fn char_at(s: &str, n: usize) -> Option<char> {
 }
 ```
 
-> **认知功能**: 字符串切片的**边界安全设计**——Rust 选择让越界切片 panic（或通过 get 返回 Option），而非像某些语言那样静默产生无效 UTF-8，这是对"数据完整性"优先于"操作便利性"的价值选择。
+> **认知功能**: 字符串切片（String Slice）的**边界安全设计**——Rust 选择让越界切片 panic（或通过 get 返回 Option），而非像某些语言那样静默产生无效 UTF-8，这是对"数据完整性"优先于"操作便利性"的价值选择。
 > [来源: [std::str — Slicing](https://doc.rust-lang.org/std/primitive.str.html#slicing)]
 
 ---
@@ -546,7 +546,7 @@ classDiagram
 ## 相关概念文件
 
 - [Ownership](./01_ownership.md) — 所有权系统基础
-- [Type System](./04_type_system.md) — 类型系统基础
+- [Type System](./04_type_system.md) — 类型系统（Type System）基础
 - [Strings and Text](./09_strings_and_text.md) — 字符串与文本处理概述
 - [Collections](./08_collections.md) — 集合类型
 - [FFI](../03_advanced/05_rust_ffi.md) — 外部函数接口
@@ -608,7 +608,7 @@ fn main() {
 > **修正**:
 > `std::str::from_utf8` 验证字节序列是否为有效 UTF-8，返回 `Result<&str, Utf8Error>`。
 > 这与 `from_utf8_unchecked`（unsafe，假设输入有效）形成对比。
-> Rust 的标准字符串类型 `String`/`str` **始终**是有效 UTF-8，任何创建无效 UTF-8 字符串的尝试都被编译器或运行时阻止。
+> Rust 的标准字符串类型 `String`/`str` **始终**是有效 UTF-8，任何创建无效 UTF-8 字符串的尝试都被编译器或运行时（Runtime）阻止。
 > 这与 C/C++ 的 `char*`（无编码保证）和 Python 的透明编码处理形成鲜明对比。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
@@ -681,7 +681,7 @@ fn main() {
 
 > **修正**:
 >
-> Rust 的字符串切片 `&s[begin..end]` 按字节索引，但要求 `begin` 和 `end` 都落在 UTF-8 字符边界处。
+> Rust 的字符串切片（Slice） `&s[begin..end]` 按字节索引，但要求 `begin` 和 `end` 都落在 UTF-8 字符边界处。
 > 违反此规则是 panic（debug 和 release 都检查），因为非边界切片会产生无效的 UTF-8 子串，破坏 `str` 的不变式。
 > 安全替代：
 >
@@ -747,7 +747,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-`String` 拥有堆上分配的可变 UTF-8 缓冲区；`&str` 是借用某处 UTF-8 数据的切片，不可变，不拥有数据。
+`String` 拥有堆上分配的可变 UTF-8 缓冲区；`&str` 是借用（Borrowing）某处 UTF-8 数据的切片，不可变，不拥有数据。
 </details>
 
 ---
@@ -821,10 +821,10 @@ fn main() {
 | 字符串与编码：Rust 的文本处理类型系统 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 跨编码安全 ⟸ OsStr/CString 区分 ⟸ 平台抽象
-> 零拷贝解析 ⟸ 字符串切片（String Slice） ⟸ 生命周期借用
+> 零拷贝解析 ⟸ 字符串切片（String Slice） ⟸ 生命周期（Lifetimes）借用
 > **过渡**: 掌握 字符串与编码：Rust 的文本处理类型系统 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 字符串与编码：Rust 的文本处理类型系统 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: 字符串与编码：Rust 的文本处理类型系统 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 字符串与编码：Rust 的文本处理类型系统 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

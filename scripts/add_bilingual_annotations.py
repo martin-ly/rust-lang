@@ -106,14 +106,15 @@ def mask_links_and_code(line: str) -> tuple[str, list[str], list[str]]:
 
     def link_repl(m: re.Match) -> str:
         links.append(m.group(0))
-        return LINK_PLACEHOLDER
+        return "](LINK_PLACEHOLDER)"
 
     def code_repl(m: re.Match) -> str:
         codes.append(m.group(0))
         return CODE_PLACEHOLDER
 
     line = re.sub(r"`[^`]+`", code_repl, line)
-    line = re.sub(r"!?\[[^\]]*\]\([^)]+\)", link_repl, line)
+    # 只遮蔽链接的 URL 部分，保留链接文本以便标注
+    line = re.sub(r"\]\([^)]+\)", link_repl, line)
     return line, links, codes
 
 
@@ -164,7 +165,7 @@ def annotate_line(line: str, seen_terms: set[str]) -> tuple[str, bool]:
             continue
 
         pattern = re.compile(
-            rf"(?<![A-Za-z0-9_\u4e00-\u9fff])({re.escape(cn)})(?![A-Za-z0-9_\u4e00-\u9fff])"
+            rf"(?<![A-Za-z0-9_])({re.escape(cn)})(?![A-Za-z0-9_])"
         )
 
         def repl(m: re.Match) -> str:

@@ -10,10 +10,10 @@
 > **受众**: [初学者]
 > **Bloom 层级**: L3-L4 (应用/分析)
 > **A/S/P 标记**: **S** — Structure
-> **双维定位**: C×Str — 结构型类型系统
+> **双维定位**: C×Str — 结构型类型系统（Type System）
 > **定位**: 系统讲解 Rust 中 `!` (never type) 的形式语义、类型推导规则、控制流应用和穷尽性检查机制。
-> **前置概念**: [类型系统](./04_type_system.md) · [所有权](./01_ownership.md) · [错误处理](../02_intermediate/04_error_handling.md)
-> **后置概念**: [泛型](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [形式方法](../04_formal/12_denotational_semantics.md)
+> **前置概念**: [类型系统（Type System）](LINK_PLACEHOLDER) · [所有权（Ownership）](LINK_PLACEHOLDER) · [错误处理（Error Handling）](LINK_PLACEHOLDER)
+> **后置概念**: [泛型（Generics）](LINK_PLACEHOLDER) · [Async](LINK_PLACEHOLDER) · [形式方法](LINK_PLACEHOLDER)
 
 ---
 
@@ -44,7 +44,7 @@
     - [2.3 `Option<!>` — 不可能存在](#23-option--不可能存在)
   - [三、穷尽性检查](#三穷尽性检查)
     - [3.1 Match 臂完备性](#31-match-臂完备性)
-    - [3.2 与空枚举的对比](#32-与空枚举的对比)
+    - [3.2 与空枚举（Enum）的对比](LINK_PLACEHOLDER)
   - [四、Never Type 稳定化进展](#四never-type-稳定化进展)
     - [4.1 完整稳定化仍在进行中](#41-完整稳定化仍在进行中)
     - [4.2 Rust 1.92：deny-by-default 的 future-compatibility lint](#42-rust-192deny-by-default-的-future-compatibility-lint)
@@ -59,7 +59,7 @@
     - [6.3 边界测试：忘记处理 `Ok` 分支（编译错误）](#63-边界测试忘记处理-ok-分支编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`!`（never type）在 Rust 类型系统中被称为底类型。它有一个特殊性质：它是任何类型的子类型。请问，`Result<i32, !>` 的 `Err` 分支在 match 中需要处理吗？（理解层）](#测验-1never-type在-rust-类型系统中被称为底类型它有一个特殊性质它是任何类型的子类型请问resulti32--的-err-分支在-match-中需要处理吗理解层)
-    - [测验 2：以下代码是否合法？`let x: String = panic!("abort");`。如果合法，运行时会发生什么？（理解层）](#测验-2以下代码是否合法let-x-string--panicabort如果合法运行时会发生什么理解层)
+    - [测验 2：以下代码是否合法？`let x: String = panic!("abort");`。如果合法，运行时（Runtime）会发生什么？（理解层）](LINK_PLACEHOLDER)
     - [测验 3：`continue`、`break`（带值除外）、`return` 和 `panic!` 有什么共同类型特征？（理解层）](#测验-3continuebreak带值除外return-和-panic-有什么共同类型特征理解层)
     - [测验 4：函数签名 `fn foo() -> !` 表示什么含义？这种函数可以正常返回吗？（理解层）](#测验-4函数签名-fn-foo----表示什么含义这种函数可以正常返回吗理解层)
     - [测验 5：为什么 `match` 一个类型为 `!` 的值时，可以写零个分支？这与 Rust 的穷尽性检查矛盾吗？（理解层）](#测验-5为什么-match-一个类型为--的值时可以写零个分支这与-rust-的穷尽性检查矛盾吗理解层)
@@ -111,7 +111,7 @@ fn fatal_error() -> ! {
 |------|------|------|
 | 顶类型（top type） | `dyn Any` / `()` | 所有类型的超集 |
 | 底类型（bottom type） | `!` | 所有类型的子集 |
-| 空类型 | `enum Void {}` | 无构造器的枚举 |
+| 空类型 | `enum Void {}` | 无构造器的枚举（Enum） |
 
 ```text
 类型层级（子类型关系）:
@@ -260,7 +260,7 @@ pub fn handle_events(event: Event<i32, !>) -> Option<i32> {
 }
 ```
 
-> **认知功能**: 穷尽性检查将运行时错误转化为编译时保证。`!` 的类型空性使编译器能够"删除"逻辑上不可能的分支，减少代码冗余的同时提升安全性。
+> **认知功能**: 穷尽性检查将运行时（Runtime）错误转化为编译时保证。`!` 的类型空性使编译器能够"删除"逻辑上不可能的分支，减少代码冗余的同时提升安全性。
 
 ### 3.2 与空枚举的对比
 
@@ -542,10 +542,10 @@ fn incomplete_match(result: Result<i32, !>) -> i32 {
 | Never Type (`!`)：底类型与穷尽性 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 控制流完整性 ⟸ 穷尽性匹配 ⟸ ! 类型包含无值
-> 类型系统一致性 ⟸ 底类型 ⊥ ⟸ 任何类型的子类型
+> 类型系统一致性（Coherence） ⟸ 底类型 ⊥ ⟸ 任何类型的子类型
 > **过渡**: 掌握 Never Type (`!`)：底类型与穷尽性 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 Never Type (`!`)：底类型与穷尽性 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: Never Type (`!`)：底类型与穷尽性 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: Never Type (`!`)：底类型与穷尽性 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

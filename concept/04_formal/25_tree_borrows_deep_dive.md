@@ -8,15 +8,17 @@
 >
 > **EN**: Tree Borrows Deep Dive
 > **Summary**: 深入解析 Rust 别名模型的演进：从 Stacked Borrows 到 Tree Borrows，理解其设计动机、核心规则、与 Miri 的关系及生产实践影响。
-> **受众**: [进阶] Unsafe Rust、形式化方法、运行时工具开发者
+> **受众**: [进阶] Unsafe Rust、形式化方法、运行时（Runtime）工具开发者
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Str
-> **前置依赖**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [所有权形式化](03_ownership_formal.md) · [Miri](../06_ecosystem/47_formal_verification_tools.md)
+> **前置依赖**: [Unsafe Rust](LINK_PLACEHOLDER) · [所有权（Ownership）形式化](LINK_PLACEHOLDER) · [Miri](LINK_PLACEHOLDER)
 > **后置延伸**: [BorrowSanitizer](23_borrow_sanitizer.md)
 >
 > **来源**: [Tree Borrows 论文 (PLDI 2023)](https://pldi23.sigplan.org/) · [Miri 文档 — Tree Borrows](https://github.com/rust-lang/miri/blob/master/borrow_stacked/README.md) · [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)
 
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 ## 一、权威定义
@@ -24,9 +26,9 @@
 > Tree Borrows is a new aliasing model for Rust that generalizes Stacked Borrows to support more flexible borrowing patterns.
 > —— Tree Borrows 论文核心思想
 
-**Stacked Borrows** 是 Rust 第一个广泛使用的别名模型，将每次借用视为栈中的 tag。它精确但严格，某些合法模式被误判为 UB。
+**Stacked Borrows** 是 Rust 第一个广泛使用的别名模型，将每次借用（Borrowing）视为栈中的 tag。它精确但严格，某些合法模式被误判为 UB。
 
-**Tree Borrows** 将借用组织为**树结构**，允许同一内存位置存在多个并行的借用分支，从而接受更多实际代码中常见但 Stacked Borrows 禁止的模式。
+**Tree Borrows** 将借用（Borrowing）组织为**树结构**，允许同一内存位置存在多个并行的借用分支，从而接受更多实际代码中常见但 Stacked Borrows 禁止的模式。
 
 ---
 
@@ -42,7 +44,7 @@ let r2 = &mut x; // 重新借用
 *r1 = 1; // Stacked Borrows 可能认为 r1 已失效
 ```
 
-虽然安全 Rust 不会出现这种模式，但在 unsafe 代码、自引用结构、某些 FFI 场景中，开发者需要更灵活的别名规则。
+虽然安全 Rust 不会出现这种模式，但在 unsafe 代码、自引用（Reference）结构、某些 FFI 场景中，开发者需要更灵活的别名规则。
 
 ---
 
@@ -97,7 +99,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 
 ## 六、对 BorrowSanitizer 的影响
 
-BorrowSanitizer 的目标是运行时检测 Tree Borrows 违规。与 Miri 相比：
+BorrowSanitizer 的目标是运行时（Runtime）检测 Tree Borrows 违规。与 Miri 相比：
 
 - **速度**：原生执行，显著快于 Miri 的解释执行。
 - **覆盖**：目前主要针对单线程别名违规，多线程和原子内存仍在完善。

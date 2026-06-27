@@ -15,7 +15,7 @@
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **S+P** — StructureProcedure
 > **双维定位**: P×Eva — 评估安全实践和审计策略
-> **定位**: 系统讲解 Rust **安全编程实践**——从输入验证、加密使用、到审计和供应链安全，揭示如何在 Rust 的内存安全基础上构建全面的安全防御体系。
+> **定位**: 系统讲解 Rust **安全编程实践**——从输入验证、加密使用、到审计和供应链安全，揭示如何在 Rust 的内存安全（Memory Safety）基础上构建全面的安全防御体系。
 > **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [Type System](../01_foundation/04_type_system.md) · [Error Handling](../02_intermediate/15_error_handling_deep_dive.md)
 > **后置概念**: [Blockchain](./06_blockchain.md) · [Formal Methods](../04_formal/04_rustbelt.md)
 >
@@ -65,7 +65,7 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：安全实践的编译错误](#十边界测试安全实践的编译错误)
-    - [10.1 边界测试：密码学常量时间操作（运行时风险）](#101-边界测试密码学常量时间操作运行时风险)
+    - [10.1 边界测试：密码学常量时间操作（运行时（Runtime）风险）](LINK_PLACEHOLDER)
     - [10.2 边界测试：`unsafe` 代码的审计边界（编译错误）](#102-边界测试unsafe-代码的审计边界编译错误)
     - [10.3 边界测试：`zeroize` 与编译器优化的冲突（逻辑错误）](#103-边界测试zeroize-与编译器优化的冲突逻辑错误)
     - [10.4 边界测试：依赖供应链的 typo-squatting（运行时安全风险）](#104-边界测试依赖供应链的-typo-squatting运行时安全风险)
@@ -75,7 +75,7 @@
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`cargo audit` 工具的主要功能是什么？（理解层）](#测验-1cargo-audit-工具的主要功能是什么理解层)
     - [测验 2：为什么在 Rust 中处理密码时，建议使用 `secrecy` crate 而非普通 `String`？（理解层）](#测验-2为什么在-rust-中处理密码时建议使用-secrecy-crate-而非普通-string理解层)
-    - [测验 3：Rust 的所有权系统如何帮助防御缓冲区溢出攻击？（理解层）](#测验-3rust-的所有权系统如何帮助防御缓冲区溢出攻击理解层)
+    - [测验 3：Rust 的所有权（Ownership）系统如何帮助防御缓冲区溢出攻击？（理解层）](LINK_PLACEHOLDER)
     - [测验 4：`#[forbid(unsafe_code)]` 属性有什么作用？（理解层）](#测验-4forbidunsafe_code-属性有什么作用理解层)
     - [测验 5：在 Rust Web 应用中，如何防御 SQL 注入攻击？（理解层）](#测验-5在-rust-web-应用中如何防御-sql-注入攻击理解层)
   - [认知路径](#认知路径)
@@ -309,7 +309,7 @@ where D: serde::Deserializer<'de>
 }
 ```
 
-> **验证洞察**: **"解析而非验证"**是 Rust 安全的核心模式——通过类型系统使非法状态不可表示。
+> **验证洞察**: **"解析而非验证"**是 Rust 安全的核心模式——通过类型系统（Type System）使非法状态不可表示。
 > [来源: [Parse Don't Validate](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)]
 
 ---
@@ -353,7 +353,7 @@ Rust 密码学生态:
   OsRng.fill_bytes(&mut key);  // 密码学安全
 ```
 
-> **加密洞察**: Rust 的**类型系统**防止了密码学中常见的**类型混淆错误**（如密钥和密文的混淆）。
+> **加密洞察**: Rust 的**类型系统（Type System）**防止了密码学中常见的**类型混淆错误**（如密钥和密文的混淆）。
 > [来源: [ring crate](https://docs.rs/ring/latest/ring/)]
 
 ---
@@ -397,7 +397,7 @@ Rust 安全审计工具:
   └── 定期 Miri 检测
 ```
 
-> **审计洞察**: Rust 的**工具链生态**使安全审计可以**自动化**——从依赖漏洞到运行时未定义行为，覆盖完整攻击面。
+> **审计洞察**: Rust 的**工具链生态**使安全审计可以**自动化**——从依赖漏洞到运行时（Runtime）未定义行为，覆盖完整攻击面。
 > [来源: [cargo-geiger](https://github.com/rust-secure-code/cargo-geiger)]
 
 ---
@@ -747,7 +747,7 @@ cargo deny check advisories
 
 | 依赖 | RUSTSEC | 状态 | 影响评估 | 计划 |
 |:---|:---|:---:|:---|:---|
-| `instant` | RUSTSEC-2024-0384 (unmaintained) | 🟡 已知 | 通过 `glommio → futures-lite → fastrand → instant` 传递引入；`glommio` 实验性模块使用 | 跟踪 `glommio`/`futures-lite` 上游升级 |
+| `instant` | RUSTSEC-2024-0384 (unmaintained) | 🟡 已知 | 通过 `glommio → futures-lite → fastrand → instant` 传递引入；`glommio` 实验性模块（Module）使用 | 跟踪 `glommio`/`futures-lite` 上游升级 |
 | `backoff` | RUSTSEC-2025-0012 (unmaintained) | 🟢 **已修复** | `c06_async` 已改用内部实现，workspace 中无实际依赖 | ✅ 完成 |
 | `sea-orm` | 无 CVE | 🟡 待观察 | 使用 `2.0.0-rc.41` 预发布版；crates.io 最新 stable 为 `1.1.20`，2.0 仍在 release-candidate 阶段 | 等待上游 2.0.0 stable |
 
@@ -916,7 +916,7 @@ fn verify_password_fixed(input: &[u8], secret: &[u8]) -> bool {
 }
 ```
 
-> **修正**: 安全关键代码（密码学、身份验证）必须防御**时序攻击**——攻击者通过测量执行时间推测密钥信息。Rust 的标准库不保证常量时间操作（优先性能），`subtle` crate 提供 `CtOption`、`ConstantTimeEq` 等原语。这与 C 的 OpenSSL（手动实现常量时间）或 Go 的 `crypto/subtle` 类似，但 Rust 的类型系统可帮助区分常量时间和非常量时间操作。形式化验证工具可进一步证明常量时间属性。[来源: [subtle Documentation](https://docs.rs/subtle/)]
+> **修正**: 安全关键代码（密码学、身份验证）必须防御**时序攻击**——攻击者通过测量执行时间推测密钥信息。Rust 的标准库不保证常量时间操作（优先性能），`subtle` crate 提供 `CtOption`、`ConstantTimeEq` 等原语。这与 C 的 OpenSSL（手动实现常量时间）或 Go 的 `crypto/subtle` 类似，但 Rust 的类型系统（Type System）可帮助区分常量时间和非常量时间操作。形式化验证工具可进一步证明常量时间属性。[来源: [subtle Documentation](LINK_PLACEHOLDER)]
 
 ### 10.2 边界测试：`unsafe` 代码的审计边界（编译错误）
 
@@ -1040,12 +1040,12 @@ fn main() {
 
 ### 测验 3：Rust 的所有权系统如何帮助防御缓冲区溢出攻击？（理解层）
 
-**题目**: Rust 的所有权系统如何帮助防御缓冲区溢出攻击？
+**题目**: Rust 的所有权（Ownership）系统如何帮助防御缓冲区溢出攻击？
 
 <details>
 <summary>✅ 答案与解析</summary>
 
-所有权和借用检查在编译期阻止越界访问和 use-after-free。`Vec` 和切片索引有边界检查，无法像 C 那样通过指针算术绕过。
+所有权和借用（Borrowing）检查在编译期阻止越界访问和 use-after-free。`Vec` 和切片（Slice）索引有边界检查，无法像 C 那样通过指针算术绕过。
 </details>
 
 ---
@@ -1069,7 +1069,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-使用参数化查询（prepared statements），如 `sqlx` 的 `query!` 宏在编译期检查 SQL 语法和参数类型，从根本上消除字符串拼接 SQL 的风险。
+使用参数化查询（prepared statements），如 `sqlx` 的 `query!` 宏（Macro）在编译期检查 SQL 语法和参数类型，从根本上消除字符串拼接 SQL 的风险。
 </details>
 
 ## 认知路径

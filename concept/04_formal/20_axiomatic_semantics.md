@@ -13,7 +13,7 @@
 > **前置依赖**: [Type Theory](./02_type_theory.md) · [Ownership Formalization](./03_ownership_formal.md) · [Operational Semantics](./17_operational_semantics.md)
 > **后置延伸**: [RustBelt](./04_rustbelt.md) · [Separation Logic](./11_separation_logic.md) · [Verification Toolchain](./05_verification_toolchain.md)
 > **跨层映射**: L4→L1 公理规约 ↔ 工程直觉 | L4→L3 Unsafe 边界 ↔ 公理失效区域
-> **定理链编号**: T-120 霍尔三元组可判定性 → T-121 wp 计算完备性 → T-122 所有权不变式可验证性
+> **定理链编号**: T-120 霍尔三元组可判定性 → T-121 wp 计算完备性 → T-122 所有权（Ownership）不变式可验证性
 
 > **后置概念**: [Comparative Studies](../05_comparative/01_rust_vs_cpp.md)
 
@@ -40,7 +40,7 @@ Hoare 逻辑的核心公理包括：
 | **条件规则** | \(\frac{\{P \land B\}C_1\{Q\},\ \{P \land \neg B\}C_2\{Q\}}{\{P\}\text{if }B\text{ then }C_1\text{ else }C_2\{Q\}}\) | `if` / `match` 表达式 |
 | **循环规则** | \(\frac{\{I \land B\}C\{I\}}{\{I\}\text{while }B\text{ do }C\{I \land \neg B\}}\) | `while` / `loop`（需循环不变式） |
 
-> **关键洞察**: Hoare 逻辑的**赋值公理**假设变量是无别名的（aliasing-free）。在 Rust 中，这一假设由**所有权系统**在编译期保证——`&mut T` 的独占性确保了赋值操作的公理化不会受到别名干扰。这与 C/C++ 形成鲜明对比：C 中任意指针可能别名同一内存，导致赋值公理失效，需要更复杂的分离逻辑来恢复。[来源: [Hoare 1969](https://doi.org/10.1145/363235.363259)] · [来源: [Separation Logic — Reynolds 2002](https://www.cs.cmu.edu/~jcr/seplogic.pdf)]
+> **关键洞察**: Hoare 逻辑的**赋值公理**假设变量是无别名的（aliasing-free）。在 Rust 中，这一假设由**所有权（Ownership）系统**在编译期保证——`&mut T` 的独占性确保了赋值操作的公理化不会受到别名干扰。这与 C/C++ 形成鲜明对比：C 中任意指针可能别名同一内存，导致赋值公理失效，需要更复杂的分离逻辑来恢复。[来源: [Hoare 1969](LINK_PLACEHOLDER)] · [来源: [Separation Logic — Reynolds 2002](LINK_PLACEHOLDER)]
 
 ### 1.2 最弱前置条件（Weakest Precondition）
 >
@@ -114,11 +114,12 @@ P → wp(C, Q)    ⟺    sp(P, C) → Q
 三种语义在 Rust 形式化中的协同：
 
 1. **操作语义**定义 Rust 的执行模型（Stacked Borrows / Tree Borrows 的内存模型）
-2. **指称语义**证明类型系统的 soundness（Progress + Preservation 定理）
+2. **指称语义**证明类型系统（Type System）的 soundness（Progress + Preservation 定理）
 3. **公理语义**为工程师提供可验证的规约语言（Prusti 的 `#[requires]/#[ensures]` 契约）
 
 > **来源**: [Winskel 1993 — Formal Semantics](https://mitpress.mit.edu/9780262731034) · [Pierce 2002 — TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Plotkin 1981 — A Structural Approach to Operational Semantics](https://homepages.inf.ed.ac.uk/gdp/publications/sos_jlap.pdf)
 
+> **前置概念**: N/A
 ---
 
 ## 二、概念属性矩阵
@@ -133,9 +134,9 @@ P → wp(C, Q)    ⟺    sp(P, C) → Q
 | **分离逻辑** | `P * Q`（资源分离）| 中（交互式证明）| RustBelt (Iris) | 别名/并发推理 | 证明复杂度高，需专家 |
 | **抽象解释** | 抽象域 +  widening | 高（全自动）| Miri（部分）、Prusti | 数值/数组边界检查 | 假阳性/假阴性，精度受限 |
 | **符号执行** | 路径条件 + SMT | 高（路径爆炸）| Kani | 断言验证/反例生成 | 路径空间指数级增长 |
-| **类型系统即规约** | 类型签名 | 全自动 | Rust 编译器本身 | 内存安全/数据竞争 | 无法表达功能性规约 |
+| **类型系统（Type System）即规约** | 类型签名 | 全自动 | Rust 编译器本身 | 内存安全（Memory Safety）/数据竞争 | 无法表达功能性规约 |
 
-> **洞察**: Rust 编译器的**借用检查器**本质上是一个轻量级的、全自动的公理验证器——它通过类型推导自动计算所有权和生命周期的不变式，无需程序员手动书写 `{P} C {Q}`。这是 Hoare 逻辑从学术研究走向工业实践的最成功范例：将公理规约"编译进"类型系统，使验证成为零成本抽象。[来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] · [来源: [Rust Reference — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
+> **洞察**: Rust 编译器的**借用（Borrowing）检查器**本质上是一个轻量级的、全自动的公理验证器——它通过类型推导自动计算所有权和生命周期（Lifetimes）的不变式，无需程序员手动书写 `{P} C {Q}`。这是 Hoare 逻辑从学术研究走向工业实践的最成功范例：将公理规约"编译进"类型系统（Type System），使验证成为零成本抽象（Zero-Cost Abstraction）。[来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] · [来源: [Rust Reference — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
 
 ---
 
@@ -151,7 +152,7 @@ $$\{Q[x/e]\}\ x := e\ \{Q\}$$
 Rust 的赋值操作 `x = e;` 需要额外考虑：
 
 1. **所有权转移**：若 `e` 是拥有所有权的值，赋值后原变量失效
-2. **借用检查**：若 `x` 当前被借用（`&x` 或 `&mut x` 活跃），赋值被禁止
+2. **借用（Borrowing）检查**：若 `x` 当前被借用（`&x` 或 `&mut x` 活跃），赋值被禁止
 3. **Drop 语义**：旧值在赋值前自动调用 `drop`
 
 Rust 赋值的扩展霍尔三元组：
@@ -241,7 +242,7 @@ Rust 借用规则的核心不变式可以通过公理语义表达：
 
 含义：若存在独占借用 `&mut x` 活跃，则不存在任何其他借用（共享或独占）。
 
-**不变式 3：生命周期包含性**
+**不变式 3：生命周期（Lifetimes）包含性**
 
 ```text
 ∀'a, 'b. ('a : 'b) → (lifetime(&'a x) ⊆ lifetime(&'b x))
@@ -271,7 +272,7 @@ fn check_invariants() {
 ### 3.4 unsafe 块的公理边界
 >
 
-Rust 的 `unsafe` 块是公理语义的**信任边界**（Trust Boundary）——在 `unsafe` 内部，编译器不再保证借用规则、别名规则和内存安全。公理语义需要明确标注这一边界：
+Rust 的 `unsafe` 块是公理语义的**信任边界**（Trust Boundary）——在 `unsafe` 内部，编译器不再保证借用规则、别名规则和内存安全（Memory Safety）。公理语义需要明确标注这一边界：
 
 ```text
 { P }
@@ -314,7 +315,7 @@ unsafe fn dereference_raw<T>(ptr: *const T) -> T {
 ### 4.1 Prusti：Viper 后端的契约推导
 >
 
-> **[Prusti — Viper-based Verification Tool](https://www.pm.inf.ethz.ch/research/prusti.html)** Prusti 是 ETH Zurich 开发的 Rust 验证工具，基于 Viper 验证基础设施。它将 Rust 程序翻译为 Viper 中间语言，利用分离逻辑自动验证内存安全和用户提供的函数契约。
+> **[Prusti — Viper-based Verification Tool](LINK_PLACEHOLDER)** Prusti 是 ETH Zurich 开发的 Rust 验证工具，基于 Viper 验证基础设施。它将 Rust 程序翻译为 Viper 中间语言，利用分离逻辑自动验证内存安全（Memory Safety）和用户提供的函数契约。
 
 Prusti 的核心公理语义能力：
 
@@ -340,7 +341,7 @@ fn increment_positive(x: i32) -> i32 {
 // wp(increment_positive, result > x) = (x + 1 > x) = true (given x > 0)
 ```
 
-> **局限**: Prusti 目前不支持 `unsafe` 块、并发、`dyn Trait` 和复杂的生命周期泛型。其验证范围本质上是"安全的 Rust 子集"——这正是公理语义在工业工具中的典型边界。[来源: [Prusti Documentation](https://www.pm.inf.ethz.ch/research/prusti.html)] · [来源: [Viper Project](https://www.pm.inf.ethz.ch/research/viper.html)]
+> **局限**: Prusti 目前不支持 `unsafe` 块、并发、`dyn Trait` 和复杂的生命周期泛型（Generics）。其验证范围本质上是"安全的 Rust 子集"——这正是公理语义在工业工具中的典型边界。[来源: [Prusti Documentation](https://www.pm.inf.ethz.ch/research/prusti.html)] · [来源: [Viper Project](https://www.pm.inf.ethz.ch/research/viper.html)]
 
 ### 4.2 Creusot：Why3 逻辑下的 WP 计算
 >
@@ -350,7 +351,7 @@ fn increment_positive(x: i32) -> i32 {
 Creusot 的公理语义特色：
 
 1. **PEARLite 规约语言**：Rust 语法的规约方言，降低学习成本
-2. **模块化验证**：利用 Rust 的模块边界进行分层的 wp 计算
+2. **模块（Module）化验证**：利用 Rust 的模块边界进行分层的 wp 计算
 3. **Ghost 代码**：允许在规约中编写不编译到目标的纯逻辑代码
 
 ```rust
@@ -450,7 +451,7 @@ fn check_increment() {
 > **前沿方向**:
 >
 > 1. **A-mir-formality**: Rust 编译器团队正在开发的 MIR 层形式化规格，旨在为公理语义提供**编译器可信的基础**
-> 2. **rustc 规格项目**: 将 Rust 语义写入机器可读的规格，使公理工具可以直接引用编译器定义的语义
+> 2. **rustc 规格项目**: 将 Rust 语义写入机器可读的规格，使公理工具可以直接引用（Reference）编译器定义的语义
 > 3. **Ghost code 标准化**: 在 Rust 中引入官方支持的 ghost/规约代码语法（类似 SPARK 的 `with Ghost`），降低契约编写的门槛
 >
 > **来源**: [A-mir-formality](https://github.com/rust-lang/a-mir-formality) · [Rust Specification Project](https://rust-lang.github.io/rfcs//3355-rust-spec.html) · [Rust Verification Workshop 2024](https://rustverify.github.io/)
@@ -559,9 +560,9 @@ fn undefined_behavior() {
 > **修正**: `unsafe` 块的验证是 Rust 形式化的**终极边界**。当前最可行的策略是：
 >
 > 1. **限制 unsafe 范围**：将 unsafe 封装在安全抽象中（Safe Abstraction），使公理边界最小化
-> 2. **Miri 动态检测**：使用 Miri 解释器在运行时检测 Stacked Borrows/Tree Borrows 违规
+> 2. **Miri 动态检测**：使用 Miri 解释器在运行时（Runtime）检测 Stacked Borrows/Tree Borrows 违规
 > 3. **RustBelt 手动证明**：对关键 unsafe 代码，使用 Iris 分离逻辑进行交互式证明
-> 4. **BorrowSanitizer（实验性）**：Rust 编译器团队正在开发的运行时借用检查器，未来可能自动验证部分 unsafe 模式
+> 4. **BorrowSanitizer（实验性）**：Rust 编译器团队正在开发的运行时（Runtime）借用检查器，未来可能自动验证部分 unsafe 模式
 >
 > **来源**: [Rustonomicon — Undefined Behavior](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) · [Miri — Stacked Borrows](https://github.com/rust-lang/miri) · [RustBelt — Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)
 
@@ -753,8 +754,8 @@ Prusti 将 Rust 翻译为 Viper 中间语言，使用分离逻辑自动验证内
 | **自动化程度** | 中（需编译器插件）| 中（需 Why3 IDE）| 高（命令行全自动）|
 | **unsafe 支持** | ❌ 不支持 | ❌ 不支持 | ⚠️ 部分支持（符号执行可覆盖简单 unsafe）|
 | **并发支持** | ❌ 不支持 | ❌ 不支持 | ❌ 不支持 |
-| **泛型/Trait** | 部分支持 | 良好支持 | 部分支持 |
-| **异步支持** | ❌ 不支持 | ❌ 不支持 | ❌ 不支持 |
+| **泛型（Generics）/Trait** | 部分支持 | 良好支持 | 部分支持 |
+| **异步（Async）支持** | ❌ 不支持 | ❌ 不支持 | ❌ 不支持 |
 | **循环处理** | 抽象解释推断不变式 | 需人工标注不变式 | 自动展开（有界）|
 | **标准库验证** | 有限 | 有限 | 较多（核心原语）|
 | **学习曲线** | 中等 | 中等 | 低 |
@@ -794,7 +795,7 @@ fn generic_trait_issue<T: PartialOrd + Copy>(x: T) -> T {
 // 无法直接处理高阶量化。
 ```
 
-> **修正**: 泛型代码的公理验证需要**参数化规约**（parametric specifications）。当前工业工具的通用策略是**单态化**（monomorphization）——将泛型代码实例化为具体类型后分别验证。这与 Rust 编译器的策略一致（rustc 在 MIR 层进行单态化），但代价是验证时间随实例化数量线性增长。未来方向：利用**参数化多态的语义**（Reynolds' relational parametricity）一次性验证所有实例。[来源: [Reynolds 1983 — Types, Abstraction and Parametric Polymorphism](https://doi.org/10.1007/3-540-16539-5_14)] · [来源: [Prusti GitHub Issues](https://github.com/viperproject/prusti-dev/issues)]
+> **修正**: 泛型（Generics）代码的公理验证需要**参数化规约**（parametric specifications）。当前工业工具的通用策略是**单态化**（monomorphization）——将泛型代码实例化为具体类型后分别验证。这与 Rust 编译器的策略一致（rustc 在 MIR 层进行单态化），但代价是验证时间随实例化数量线性增长。未来方向：利用**参数化多态的语义**（Reynolds' relational parametricity）一次性验证所有实例。[来源: [Reynolds 1983 — Types, Abstraction and Parametric Polymorphism](LINK_PLACEHOLDER)] · [来源: [Prusti GitHub Issues](LINK_PLACEHOLDER)]
 
 ### 10.5 边界测试：Kani 的路径爆炸与有界验证
 
@@ -826,7 +827,7 @@ fn path_explosion_demo() {
 > **修正**: 路径爆炸是符号执行的**根本局限**，不是 Kani 的实现缺陷。缓解策略：
 >
 > 1. **循环抽象**：用人工不变式替代循环展开（Kani 支持 `#[kani::loop_invariant]`）
-> 2. **切片**：只验证与目标断言相关的代码路径
+> 2. **切片（Slice）**：只验证与目标断言相关的代码路径
 > 3. **有界验证**：接受"在 k 次迭代内正确"的较弱保证
 > 4. **抽象解释结合**：先用 Prusti 推断不变式，再用 Kani 验证具体断言
 >

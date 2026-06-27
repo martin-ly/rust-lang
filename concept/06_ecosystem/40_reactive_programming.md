@@ -13,7 +13,7 @@
 
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+P** — Application + Procedure
-> **双维定位**: C×Ana — 分析异步数据流的声明式组合模式
+> **双维定位**: C×Ana — 分析异步（Async）数据流的声明式组合模式
 > **前置依赖**: [Async/Await](../03_advanced/02_async.md) ·
 > [Stream Processing Semantics](../03_advanced/20_stream_processing_semantics.md) ·
 > [事件驱动架构](./32_event_driven_architecture.md)
@@ -22,6 +22,7 @@
 
 >
 > **来源**: [futures](https://docs.rs/futures/) · [tokio](https://docs.rs/tokio/) · [rxrust](https://docs.rs/rxrust/)
+> **前置概念**: N/A
 ---
 
 > **来源**: [Reactive Manifesto](https://www.reactivemanifesto.org/) ·
@@ -41,7 +42,7 @@
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 Reactive Manifesto：响应式系统的四大特质](#11-reactive-manifesto响应式系统的四大特质)
-    - [1.2 Reactive Streams：背压感知的异步数据流](#12-reactive-streams背压感知的异步数据流)
+    - [1.2 Reactive Streams：背压感知的异步（Async）数据流](LINK_PLACEHOLDER)
     - [1.3 FRP：函数式响应编程](#13-frp函数式响应编程)
   - [二、概念属性矩阵](#二概念属性矩阵)
     - [2.1 Reactive 编程模型对比矩阵](#21-reactive-编程模型对比矩阵)
@@ -67,9 +68,9 @@
     - [8.1 反命题树](#81-反命题树)
     - [8.2 边界极限](#82-边界极限)
   - [九、边界测试](#九边界测试)
-    - [9.1 边界测试：无背压导致内存溢出（运行时错误）](#91-边界测试无背压导致内存溢出运行时错误)
+    - [9.1 边界测试：无背压导致内存溢出（运行时（Runtime）错误）](LINK_PLACEHOLDER)
     - [9.2 边界测试：跨线程 Stream 发送违反 Send（编译错误）](#92-边界测试跨线程-stream-发送违反-send编译错误)
-    - [9.3 边界测试：FRP 信号循环引用导致死锁（运行时错误）](#93-边界测试frp-信号循环引用导致死锁运行时错误)
+    - [9.3 边界测试：FRP 信号循环引用（Reference）导致死锁（运行时错误）](LINK_PLACEHOLDER)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -560,7 +561,7 @@ Rust 的现实:
 ### 5.3 Rust 中的 FRP 限制
 >
 
-Rust 的所有权系统与 FRP 的**有状态信号**存在根本张力：
+Rust 的所有权（Ownership）系统与 FRP 的**有状态信号**存在根本张力：
 
 ```rust
 // FRP 的核心问题：信号网络中的共享可变状态
@@ -582,10 +583,10 @@ Rust 的所有权系统与 FRP 的**有状态信号**存在根本张力：
 
 | **FRP 特性** | **Haskell** | **Rust** | **限制原因** |
 |:---|:---|:---|:---|
-| 不可变信号 | ✅ 原生 | ⚠️ `Arc<Mutex<T>>` | 所有权 vs 共享 |
-| 循环信号图 | ✅ Laziness | ❌ 难实现 | 借用检查器 |
-| 垃圾回收 | ✅ GC | ❌ 无 GC | 信号网络生命周期 |
-| 零成本抽象 | ⚠️ 惰性开销 | ✅ 编译期优化 | 设计权衡 |
+| 不可变信号 | ✅ 原生 | ⚠️ `Arc<Mutex<T>>` | 所有权（Ownership） vs 共享 |
+| 循环信号图 | ✅ Laziness | ❌ 难实现 | 借用（Borrowing）检查器 |
+| 垃圾回收 | ✅ GC | ❌ 无 GC | 信号网络生命周期（Lifetimes） |
+| 零成本抽象（Zero-Cost Abstraction） | ⚠️ 惰性开销 | ✅ 编译期优化 | 设计权衡 |
 
 > **来源**: [Rust FRP Survey](https://github.com/rust-unofficial/awesome-rust#frp) · [futures-signals crate](https://docs.rs/futures-signals/latest/futures_signals/)
 
@@ -833,7 +834,7 @@ async fn send_alert(log: &LogEntry) -> Result<(), AlertError> {
 | **并发 buffer_unordered** | tokio 默认 | 超过 CPU 核心数无收益 | 与 CPU 核心数对齐 |
 | **FRP 信号网络规模** | 数十个信号 | 大规模网络（> 1000）调度复杂 | Rust 无成熟 FRP 框架 |
 | **背压延迟** | 阻塞/缓冲引入 | 无法为零（物理限制）| 选择适合业务的策略 |
-| **跨线程 Stream** | 需要 Send + Sync | 自引用 Stream 不能跨线程 | 使用 channel 解耦 |
+| **跨线程 Stream** | 需要 Send + Sync | 自引用（Reference） Stream 不能跨线程 | 使用 channel 解耦 |
 
 > **来源**: [Reactive Streams Spec](https://www.reactive-streams.org/) ·
 > [Elliott 2009](https://conal.net/papers/push-pull-frp/push-pull-frp.pdf) ·

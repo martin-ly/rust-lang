@@ -9,7 +9,7 @@
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 理解 → 分析
-> **定位**: 探讨 Rust 范围类型从**运行时迭代器**到**编译期可复制的值类型**的语义演进，以及 `IntoIterator` vs `Iterator` 的设计权衡。
+> **定位**: 探讨 Rust 范围类型从**运行时（Runtime）迭代器（Iterator）**到**编译期可复制的值类型**的语义演进，以及 `IntoIterator` vs `Iterator` 的设计权衡。
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Generics](./02_generics.md)
 > **后置概念**: [Version Tracking](../07_future/05_rust_version_tracking.md)
 
@@ -29,7 +29,7 @@
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 范围类型的数学语义](#11-范围类型的数学语义)
-    - [1.2 `std::ops::Range`：运行时迭代器语义](#12-stdopsrange运行时迭代器语义)
+    - [1.2 `std::ops::Range`：运行时（Runtime）迭代器（Iterator）语义](LINK_PLACEHOLDER)
     - [1.3 `core::range`：编译期值语义](#13-corerange编译期值语义)
     - [1.4 `IntoIterator` vs `Iterator`：设计权衡](#14-intoiterator-vs-iterator设计权衡)
   - [二、形式化语义](#二形式化语义)
@@ -52,12 +52,12 @@
     - [10.3 边界测试：`RangeInclusive` 的 `Copy` 缺失（编译错误）](#103-边界测试rangeinclusive-的-copy-缺失编译错误)
     - [10.4 边界测试：`Iterator::size_hint` 与无限范围（逻辑错误）](#104-边界测试iteratorsize_hint-与无限范围逻辑错误)
     - [10.3 边界测试：范围模式的穷尽性检查（编译错误）](#103-边界测试范围模式的穷尽性检查编译错误)
-    - [10.5 边界测试：不可变借用与可变借用的冲突](#105-边界测试不可变借用与可变借用的冲突)
+    - [10.5 边界测试：不可变借用（Mutable Borrow）与可变借用的冲突](LINK_PLACEHOLDER)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`1..5` 与 `1..=5` 的类型和范围有什么区别？（理解层）](#测验-115-与-15-的类型和范围有什么区别理解层)
     - [测验 2：`Range` 类型本身是否实现了 `Iterator`？可以直接 `for i in 0..10` 吗？（理解层）](#测验-2range-类型本身是否实现了-iterator可以直接-for-i-in-010-吗理解层)
     - [测验 3：`..` 在 Rust 中有哪些常见用法？它可以单独使用吗？（理解层）](#测验-3-在-rust-中有哪些常见用法它可以单独使用吗理解层)
-    - [测验 4：当使用 `Range` 作为切片索引超出范围时会发生什么？（理解层）](#测验-4当使用-range-作为切片索引超出范围时会发生什么理解层)
+    - [测验 4：当使用 `Range` 作为切片（Slice）索引超出范围时会发生什么？（理解层）](LINK_PLACEHOLDER)
     - [测验 5：`RangeInclusive` 相比 `Range` 在迭代结束时有什么不同？为什么？（理解层）](#测验-5rangeinclusive-相比-range-在迭代结束时有什么不同为什么理解层)
   - [实践](#实践)
   - [认知路径](#认知路径)
@@ -276,7 +276,7 @@ let sum2: i32 = r.into_iter().sum(); // ✅ r 仍可用
 assert_eq!(sum1, sum2);
 ```
 
-> **关键洞察**: Rust 的新范围设计融合了 Python 的"不可变纯值"语义和 C++ 的"解耦迭代"架构，同时保持 Rust 的零成本抽象原则。
+> **关键洞察**: Rust 的新范围设计融合了 Python 的"不可变纯值"语义和 C++ 的"解耦迭代"架构，同时保持 Rust 的零成本抽象（Zero-Cost Abstraction）原则。
 
 ---
 
@@ -336,15 +336,15 @@ let rev = 10..0;
 | [RFC 3550 — New Range Types](https://github.com/rust-lang/rfcs/pull/3550) | ✅ 一级 | 设计动机与完整规范 |
 | [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/) | ✅ 一级 | 稳定化公告 |
 | [std::ops::Range](https://doc.rust-lang.org/std/ops/struct.Range.html) | ✅ 一级 | 当前范围类型文档 |
-| [core::range](https://doc.rust-lang.org/core/range/index.html) | ✅ 一级 | 新范围模块文档 |
+| [core::range](https://doc.rust-lang.org/core/range/index.html) | ✅ 一级 | 新范围模块（Module）文档 |
 | [IntoIterator Trait](https://doc.rust-lang.org/std/iter/trait.IntoIterator.html) | ✅ 一级 | 可迭代性抽象 |
 
 ---
 
 ## 相关概念文件
 
-- [Type System](../01_foundation/04_type_system.md) — 类型系统的形式化根基
-- [Generics](./02_generics.md) — 泛型与 trait bound
+- [Type System](../01_foundation/04_type_system.md) — 类型系统（Type System）的形式化根基
+- [Generics](./02_generics.md) — 泛型（Generics）与 trait bound
 - [Version Tracking](../07_future/05_rust_version_tracking.md) — Rust 版本特性演进
 
 ---
@@ -461,12 +461,12 @@ fn main() {
 > 这导致不一致：`1..5` 可复制，`1..=5` 不可复制。
 > 解决方案：
 >
-> 1) 使用引用 `&range` 迭代；
+> 1) 使用引用（Reference） `&range` 迭代；
 > 2) 显式 `clone()`；
 > 3) 使用 `Range` 替代（若语义允许）。
-> 这与 Rust 的"一致性"设计目标冲突——范围类型的 `Copy` 实现不一致是历史遗留，可能在未来版本中修正。
+> 这与 Rust 的"一致性（Coherence）"设计目标冲突——范围类型的 `Copy` 实现不一致是历史遗留，可能在未来版本中修正。
 >
-> 开发者的应对：记住 `..=` 的范围需要 `clone` 或引用才能复用。
+> 开发者的应对：记住 `..=` 的范围需要 `clone` 或引用（Reference）才能复用。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/ops/struct.RangeInclusive.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
@@ -515,7 +515,7 @@ fn main() {
 > Rust 的 `match` 要求**穷尽**（exhaustive）——覆盖所有可能的值。
 > 范围模式 `a..=b` 只覆盖闭区间，不覆盖区间外的值。
 > 整数类型（`i32`、`u8` 等）的范围是完整的，任何遗漏都会导致编译错误。
-> 修复：添加 `_ =>` 通配分支或补全范围。范围类型（`Range`、`RangeInclusive`）作为值时，不能直接用于 `match`（非枚举类型），需用 `if let` 或解构。
+> 修复：添加 `_ =>` 通配分支或补全范围。范围类型（`Range`、`RangeInclusive`）作为值时，不能直接用于 `match`（非枚举（Enum）类型），需用 `if let` 或解构。
 > 这与 Haskell 的 guard（不强制穷尽）或 Scala 的 `match`（非穷尽时警告）不同——Rust 的穷尽检查是编译错误，不可忽略。
 > [来源: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html)]
@@ -532,7 +532,7 @@ fn main() {
 }
 ```
 
-> **修正**: **借用规则**：1) 任意数量的 `&T` 或一个 `&mut T`；2) 不能同时存在；3) NLL 使借用仅在**使用点**检查，非作用域结束。
+> **修正**: **借用（Borrowing）规则**：1) 任意数量的 `&T` 或一个 `&mut T`；2) 不能同时存在；3) NLL 使借用仅在**使用点**检查，非作用域结束。
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -567,7 +567,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-`..` 可以作为全范围用于切片索引（如 `&arr[..]` 表示整个切片），也可以作为模式中的忽略绑定，但不能单独作为值迭代。
+`..` 可以作为全范围用于切片（Slice）索引（如 `&arr[..]` 表示整个切片），也可以作为模式中的忽略绑定，但不能单独作为值迭代。
 </details>
 
 ---
@@ -617,10 +617,10 @@ fn main() {
 | Rust 范围类型语义：`std::ops::Range` → `core::range` 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 区间操作安全 ⟸ RangeInclusive 边界 ⟸ 迭代器协议
-> 切片索引正确 ⟸ Range 范围检查 ⟸ 借用规则
-> **过渡**: 掌握 Rust 范围类型语义：`std::ops::Range` → `core::range` 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> 切片索引正确 ⟸ Range 范围检查 ⟸ 借用（Borrowing）规则
+> **过渡**: 掌握 Rust 范围类型语义：`std::ops::Range` → `core::range` 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 Rust 范围类型语义：`std::ops::Range` → `core::range` 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: Rust 范围类型语义：`std::ops::Range` → `core::range` 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: Rust 范围类型语义：`std::ops::Range` → `core::range` 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

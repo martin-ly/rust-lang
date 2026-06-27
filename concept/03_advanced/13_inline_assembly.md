@@ -7,8 +7,8 @@
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **P** — Process / Platform
-> **双维定位**: C×Ana — 分析跨平台内联汇编的语义差异与安全边界
-> **定位**: 深入分析 Rust `asm!` 宏的语法、约束系统、寄存器管理，以及 x86_64、aarch64、RISC-V、s390x 四大平台的差异，重点覆盖 Rust 1.96 为 s390x 引入的向量寄存器支持。
+> **双维定位**: C×Ana — 分析跨平台内联汇编（Inline Assembly）的语义差异与安全边界
+> **定位**: 深入分析 Rust `asm!` 宏（Macro）的语法、约束系统、寄存器管理，以及 x86_64、aarch64、RISC-V、s390x 四大平台的差异，重点覆盖 Rust 1.96 为 s390x 引入的向量寄存器支持。
 > **前置概念**: [Unsafe Rust](./03_unsafe.md) · [FFI](./05_rust_ffi.md) · [Platform Support](../06_ecosystem/17_cross_compilation.md)
 > **后置概念**: [Rust for Linux](../07_future/19_rust_for_linux.md) · [Kernel Development](../07_future/19_rust_for_linux.md)
 
@@ -27,8 +27,8 @@
 - [内联汇编 (Inline Assembly)](#内联汇编-inline-assembly)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 为什么需要内联汇编](#11-为什么需要内联汇编)
-    - [1.2 `asm!` 宏基础语法](#12-asm-宏基础语法)
+    - [1.1 为什么需要内联汇编（Inline Assembly）](LINK_PLACEHOLDER)
+    - [1.2 `asm!` 宏（Macro）基础语法](LINK_PLACEHOLDER)
     - [1.3 约束系统 (Constraints)](#13-约束系统-constraints)
     - [1.4 Clobber 与 Options](#14-clobber-与-options)
   - [二、平台差异矩阵](#二平台差异矩阵)
@@ -49,7 +49,7 @@
   - [嵌入式测验](#嵌入式测验)
     - [测验 1：asm! 宏基本语法（记忆层）](#测验-1asm-宏基本语法记忆层)
     - [测验 2：操作数约束（理解层）](#测验-2操作数约束理解层)
-    - [测验 3：用内联汇编实现原子操作（应用层）](#测验-3用内联汇编实现原子操作应用层)
+    - [测验 3：用内联汇编实现原子操作（Atomic Operations）（应用层）](LINK_PLACEHOLDER)
     - [测验 4：clobber 与内存屏障（分析层）](#测验-4clobber-与内存屏障分析层)
 
 ---
@@ -91,8 +91,8 @@ assert_eq!(x, 15);
 
 **模板语法**：
 
-- `{0}`、`{1}` ... 按位置引用操作数
-- `{name}` 按命名引用：`inout("name" reg) x`
+- `{0}`、`{1}` ... 按位置引用（Reference）操作数
+- `{name}` 按命名引用（Reference）：`inout("name" reg) x`
 - `{{` 和 `}}` 转义为字面量 `{` 和 `}`
 
 ### 1.3 约束系统 (Constraints)
@@ -211,7 +211,7 @@ unsafe fn read_cycle() -> u64 {
 }
 ```
 
-**特点**: 模块化 ISA 扩展；标准寄存器约束为 `reg`；浮点寄存器为 `freg`；向量扩展 (RVV) 的约束仍在 nightly 演进中。
+**特点**: 模块（Module）化 ISA 扩展；标准寄存器约束为 `reg`；浮点寄存器为 `freg`；向量扩展 (RVV) 的约束仍在 nightly 演进中。
 
 ### 2.4 s390x (IBM Z / LinuxONE)
 
@@ -483,7 +483,7 @@ unsafe {
 
 | 要求 | 说明 |
 |:---|:---|
-| `unsafe` 块 | `asm!` 是 unsafe 的（可能破坏内存安全）|
+| `unsafe` 块 | `asm!` 是 unsafe 的（可能破坏内存安全（Memory Safety））|
 | 命名操作数 | `{name}` 或 `name = in(reg) value` |
 | 寄存器约束 | `in(reg)` / `out(reg)` / `lateout(reg)` |
 
@@ -492,7 +492,7 @@ unsafe {
 - **A**: 缺少 `unsafe` 块
 - **B**: 使用 AT&T 语法 (`%rax`, `$0`)，Rust 默认使用 Intel 语法
 - **C**: ✅ 正确。`{val}` 引用命名操作数，`in(reg)` 指定输入寄存器
-- **D**: 硬编码立即数绕过 Rust 的类型系统，不安全
+- **D**: 硬编码立即数绕过 Rust 的类型系统（Type System），不安全
 
 **完整示例**：
 
@@ -616,7 +616,7 @@ unsafe fn atomic_inc(ptr: *mut u64) -> u64 {
 
 **正确答案是 D**。
 
-**x86_64 原子操作指令**：
+**x86_64 原子操作（Atomic Operations）指令**：
 
 ```rust,ignore
 unsafe fn atomic_fetch_add(ptr: *mut u64, value: u64) -> u64 {

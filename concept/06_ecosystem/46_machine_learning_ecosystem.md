@@ -13,10 +13,11 @@
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Ana — 分析 Rust ML 生态的技术选型与工程权衡
-> **前置依赖**: [类型系统](../01_foundation/04_type_system.md) · [泛型](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
+> **前置依赖**: [类型系统（Type System）](LINK_PLACEHOLDER) · [泛型（Generics）](LINK_PLACEHOLDER) · [Trait](LINK_PLACEHOLDER) · [Unsafe Rust](LINK_PLACEHOLDER)
 > **后置延伸**: [嵌入式系统](./22_embedded_systems.md) · [性能优化](./15_performance_optimization.md) · [并发编程](../03_advanced/01_concurrency.md)
 >
 > **来源**: [candle](https://docs.rs/candle-core/) · [burn](https://docs.rs/burn/) · [tch-rs](https://docs.rs/tch/)
+> **前置概念**: N/A
 ---
 
 > **来源**:
@@ -65,7 +66,7 @@
     - [8.2 边界极限](#82-边界极限)
   - [九、边界测试](#九边界测试)
     - [9.1 边界测试：未初始化张量内存导致信息泄露（安全漏洞）](#91-边界测试未初始化张量内存导致信息泄露安全漏洞)
-    - [9.2 边界测试：单线程 DataFrame 操作在并发场景下竞争（运行时错误）](#92-边界测试单线程-dataframe-操作在并发场景下竞争运行时错误)
+    - [9.2 边界测试：单线程 DataFrame 操作在并发场景下竞争（运行时（Runtime）错误）](LINK_PLACEHOLDER)
     - [9.3 边界测试：模型输入维度不匹配导致 panic（逻辑错误）](#93-边界测试模型输入维度不匹配导致-panic逻辑错误)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
@@ -90,8 +91,8 @@
 
 ### 1.1 Rust ML 生态定位
 
-> **[Rust ML Working Group](https://github.com/rust-ml)** Rust 机器学习生态是一个快速发展的领域，目标是利用 Rust 的内存安全和性能优势，构建从数据预处理到模型部署的完整流水线。
-> 与 Python 生态（PyTorch、TensorFlow、scikit-learn）相比，Rust ML 的核心差异化在于**零成本抽象 + 内存安全 + 无 GIL 限制**。
+> **[Rust ML Working Group](https://github.com/rust-ml)** Rust 机器学习生态是一个快速发展的领域，目标是利用 Rust 的内存安全（Memory Safety）和性能优势，构建从数据预处理到模型部署的完整流水线。
+> 与 Python 生态（PyTorch、TensorFlow、scikit-learn）相比，Rust ML 的核心差异化在于**零成本抽象（Zero-Cost Abstraction） + 内存安全（Memory Safety） + 无 GIL 限制**。
 
 ```text
 Rust ML 生态全景:
@@ -146,7 +147,7 @@ Rust ML 生态全景:
 | **GPU 支持** | ✅ CUDA/Metal | ✅ WGSL/CUDA | ✅ CUDA/ROCm | ✅ CUDA/DirectML | ❌ CPU | ❌ CPU |
 | **训练能力** | ⚠️ 有限 | ✅ 完整 | ✅ 完整 | ❌ 仅推理 | ✅ 完整 | N/A |
 | **模型导入** | GGML/Safetensors | 原生 | PyTorch 模型 | ONNX | N/A | N/A |
-| **内存安全** | ✅ 全安全 | ✅ 全安全 | ⚠️ libtorch C++ | ⚠️ C++ runtime | ✅ 全安全 | ✅ 全安全 |
+| **内存安全（Memory Safety）** | ✅ 全安全 | ✅ 全安全 | ⚠️ libtorch C++ | ⚠️ C++ runtime | ✅ 全安全 | ✅ 全安全 |
 | **适用场景** | 边缘推理 | 研究/生产 | 迁移 PyTorch | 跨平台部署 | 数据分析 | ETL/分析 |
 | **活跃程度** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
 
@@ -158,7 +159,7 @@ Rust ML 生态全景:
 
 ### 3.1 candle：纯 Rust 推理引擎
 
-> **[candle](https://github.com/huggingface/candle)** 是 Hugging Face 开发的纯 Rust 机器学习框架，设计目标：**最小依赖、高性能推理、无 Python 运行时**。支持 LLaMA、Mistral、Stable Diffusion 等主流模型。[来源: [candle README](https://github.com/huggingface/candle)]
+> **[candle](https://github.com/huggingface/candle)** 是 Hugging Face 开发的纯 Rust 机器学习框架，设计目标：**最小依赖、高性能推理、无 Python 运行时（Runtime）**。支持 LLaMA、Mistral、Stable Diffusion 等主流模型。[来源: [candle README](https://github.com/huggingface/candle)]
 
 ```rust
 // candle 核心 API：张量操作
@@ -190,7 +191,7 @@ fn candle_tensor_ops() -> anyhow::Result<()> {
 | **依赖** | 极少（纯 Rust）| Python + C++ + CUDA |
 | **启动时间** | < 100ms | 数秒（Python 导入）|
 | **二进制大小** | ~10-50MB | ~500MB+ |
-| **内存安全** | ✅ 编译期保证 | ⚠️ 运行时检查 |
+| **内存安全** | ✅ 编译期保证 | ⚠️ 运行时（Runtime）检查 |
 | **GIL 限制** | 无 | 有（Python GIL）|
 | **生态** |  growing | 成熟丰富 |
 
@@ -845,7 +846,7 @@ fn safe_inference(model: &impl Module<B>, input: Tensor<B, 2>) {
 - [性能优化](./15_performance_optimization.md) — SIMD、缓存优化、内存布局
 - [嵌入式系统](./22_embedded_systems.md) — `#![no_std]`、资源受限环境
 - [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、多线程并行
-- [类型系统](../01_foundation/04_type_system.md) — 泛型、Trait、类型安全
+- [类型系统](../01_foundation/04_type_system.md) — 泛型（Generics）、Trait、类型安全
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — FFI 绑定、C 库交互
 - [网络协议](./38_network_protocols.md) — gRPC、HTTP/2、序列化
 - [云原生](./24_cloud_native.md) — 容器化部署、微服务

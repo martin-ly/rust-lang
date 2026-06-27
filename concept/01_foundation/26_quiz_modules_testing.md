@@ -11,6 +11,7 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
 
+> **后置概念**: N/A
 ---
 
 > **来源**:
@@ -55,11 +56,11 @@ fn main() {
 
 | 关键字 | 作用 |
 |:---|:---|
-| `mod` | 声明一个模块，Rust 根据模块位置查找对应文件 |
+| `mod` | 声明一个模块（Module），Rust 根据模块位置查找对应文件 |
 | `pub` | 使项对外部可见；默认所有项都是私有的 |
 | `use` | 将路径导入当前作用域，创建快捷方式 |
 
-**模块查找规则**：
+**模块（Module）查找规则**：
 
 ```rust,ignore
 mod front_of_house; // 查找 src/front_of_house.rs 或 src/front_of_house/mod.rs
@@ -249,11 +250,11 @@ test tests::test_overflow ... ok
 
 | 类型 | 位置 | 访问范围 | 用途 |
 |:---|:---|:---|:---|
-| 单元测试 | `src/` 内 `#[cfg(test)]` mod | `pub` 项 | 测试单个函数/模块 |
+| 单元测试 | `src/` 内 `#[cfg(test)]` mod | `pub` 项 | 测试单个函数/模块（Module） |
 | 集成测试 | `tests/` 目录 | 仅 `pub` API | 测试 crate 的公共接口 |
 | 文档测试 | `///` 中的代码块 | `pub` 项 | 验证文档示例 |
 
-**常用断言宏**：
+**常用断言宏（Macro）**：
 
 ```rust,ignore
 assert!(condition);
@@ -291,7 +292,7 @@ fn test_add_integration() {
 
 1. 集成测试放在项目根目录的 `tests/` 文件夹下
 2. 每个 `.rs` 文件编译为独立的测试二进制
-3. 必须通过 crate 名（`my_project`）引用被测库的 `pub` API
+3. 必须通过 crate 名（`my_project`）引用（Reference）被测库的 `pub` API
 
 **项目结构**：
 
@@ -308,7 +309,7 @@ my_project/
 
 **共享辅助代码**：
 
-`tests/common/mod.rs` 不会被视为测试文件（因为 `common` 不是 `.rs` 测试文件），但可被其他测试文件引用：
+`tests/common/mod.rs` 不会被视为测试文件（因为 `common` 不是 `.rs` 测试文件），但可被其他测试文件引用（Reference）：
 
 ```rust,ignore
 // tests/integration_test.rs
@@ -389,7 +390,7 @@ assert_eq!(result.unwrap(), expected);
 assert_eq!(result.unwrap_err(), expected_err);
 ```
 
-**知识点**：返回 `Result` 的测试函数使错误处理测试更简洁，是 Rust 测试的惯用模式。[→ 测试详解](./16_testing_basics.md)
+**知识点**：返回 `Result` 的测试函数使错误处理（Error Handling）测试更简洁，是 Rust 测试的惯用模式。[→ 测试详解](./16_testing_basics.md)
 
 </details>
 
@@ -558,7 +559,7 @@ assertion `left != right` failed: IDs should be unique, but both were 42
 
 **解析**：`generate_id()` 总是返回 42，因此两个 ID 相等，`assert_ne!` 失败。
 
-**自定义错误消息**：所有断言宏都支持格式化字符串：
+**自定义错误消息**：所有断言宏（Macro）都支持格式化字符串：
 
 ```rust,ignore
 assert!(condition, "message: {}", value);
@@ -627,7 +628,7 @@ cargo test -- --include-ignored  # 运行所有测试，包括忽略的
 | 属性 | 作用 | 适用场景 |
 |:---|:---|:---|
 | `#[ignore]` | 跳过此测试 | 已知失败的测试、需要外部资源的测试、未完成的测试 |
-| `#[should_panic]` | 预期 panic | 验证错误处理路径、边界条件 |
+| `#[should_panic]` | 预期 panic | 验证错误处理（Error Handling）路径、边界条件 |
 | `#[should_panic(expected = "...")]` | 预期特定 panic 消息 | 验证正确的错误类型 |
 
 **测试筛选**：

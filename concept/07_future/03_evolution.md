@@ -47,13 +47,13 @@
 - v1.14 (2026-06-06): 权威内容对齐 Batch 15：① `19_security_practices.md` 补充 TrapDoor 跨生态系统供应链攻击（2026-05-25，含 Crates.io 恶意包 `sui-move-build-helper`、`move-compiler-tools` 及 AI 配置文件污染手法）；② `rust_1_97_preview.md` 补充 Open Enums / Unnamed Enum Variants（RFC 3894，Tracking Issue #156628，2026-04-22 批准为 lang experiment） [来源: ByteIota 2026-05-25; rust-lang/rust#156628]
 - v1.15 (2026-06-08): 权威内容对齐 Batch 16：① `19_security_practices.md` 补充 RustSec 2026-06-04/05 新公告——恶意 crate `logflux`（RUSTSEC-2026-0171）、`diesel` SQLite UAF（RUSTSEC-2026-0172）、`matrix-sdk-ui`/`matrix-sdk-crypto` 漏洞、PQClean 生态批量归档（7 个 `pqcrypto-*` unmaintained）；② `rust_1_97_preview.md` 补充 `VecDeque::retain_back`（PR #151973，FCP 完成） [来源: RustSec Advisory DB 2026-06-05; releases.rs 2026-06-08]
 - v1.16 (2026-06-08): 权威内容对齐 Batch 17：① `05_rust_version_tracking.md` 修复稳定化 PR 编号错误（`Result::map_or_default` #156629 误标为 #156222），补充 `-Zprofile-sample-use`（#156222）和 `c-variadic`（#155942）PFCP 状态；② `06_runtime_comparison_glommio_2025.md` / `02_网络库对比选择.md` 更新 `surf` / `tide` unmaintained 状态标注（RUSTSEC-2026-0169/0170） [来源: releases.rs 2026-06-06; RustSec Advisory DB 2026-06-04]
-- v1.17 (2026-06-08): 内部维护（信息平坦期）：① `04_formal/` L4 纯数学 `[教学类比]` 标注扫查完成（22/22 活跃文件已标注，2 归档文件无需标注）；② L3 概念-代码-练习循环链接补全——16 个活跃高级概念文件新增指向 `crates/` 和 `exercises/src/` 的交叉引用（并发/异步/Unsafe/宏/Pin/类型擦除/零拷贝解析/锁自由等主题）；③ `cargo check --workspace` 验证通过
+- v1.17 (2026-06-08): 内部维护（信息平坦期）：① `04_formal/` L4 纯数学 `[教学类比]` 标注扫查完成（22/22 活跃文件已标注，2 归档文件无需标注）；② L3 概念-代码-练习循环链接补全——16 个活跃高级概念文件新增指向 `crates/` 和 `exercises/src/` 的交叉引用（Reference）（并发/异步（Async）/Unsafe/宏（Macro）/Pin/类型擦除/零拷贝解析/锁自由等主题）；③ `cargo check --workspace` 验证通过
 - v1.18 (2026-06-08): 内部维护（信息平坦期）：补齐缺失追踪文档——① 新建 `24_cargo_semver_checks_preview.md`（cargo-semver-checks 从社区工具到 Cargo 官方集成跟踪，覆盖 ~245 lint、type-checking lints GSoC 2026、public 依赖标记集成）；② 新建 `25_aarch64_sve_sme_preview.md`（AArch64 SVE/SME 可伸缩向量扩展跟踪，RFC #3838 未接受、Tracking Issue #145052、`sve_zeroinitializer` #157110）
-- v1.19 (2026-06-08): 内部维护（信息平坦期）：嵌入式互动测验试点——新建 `concept/01_foundation/23_quiz_ownership_borrowing.md`，10 道所有权/借用/生命周期互动题，采用 `<details>` 标签实现"自测-展开-核对"闭环，每题链接至对应概念文件、crate 示例和 exercises 练习；已加入 L1 README 索引
-- v1.20 (2026-06-08): 内部维护（信息平坦期）：嵌入式测验扩展——① 新建 `concept/01_foundation/24_quiz_type_system.md`（类型系统 10 题，标量/复合类型、enum、模式匹配、类型转换）；② 新建 `concept/02_intermediate/23_quiz_traits_and_generics.md`（Trait/泛型 10 题，trait bound、关联类型、trait 对象、`impl Trait`）；③ 新建 `concept/01_foundation/25_quiz_error_handling.md`（错误处理 10 题，Result/Option、`?` 运算符、panic、自定义错误）；已全部加入对应层级 README 索引
-- v1.21 (2026-06-08): 内部维护（信息平坦期）：L3 嵌入式测验扩展——① 新建 `concept/03_advanced/21_quiz_concurrency_async.md`（并发/异步 10 题，Send/Sync、Mutex/Arc、channel、Future/Pin、`join!`）；② 新建 `concept/03_advanced/22_quiz_unsafe.md`（Unsafe 10 题，原始指针、MaybeUninit、FFI、`unsafe_op_in_unsafe_fn`、Miri 验证）；③ 新建 `concept/03_advanced/23_quiz_macros.md`（宏系统 10 题，`macro_rules!` 重复模式、卫生性、derive/属性/函数式过程宏）；已全部加入 L3 README 索引
-- v1.22 (2026-06-08): 内部维护（信息平坦期）：跨层级测验扩展——① 新建 `concept/06_ecosystem/57_quiz_toolchain.md`（工具链 10 题，Cargo 依赖解析、Clippy lint、Miri UB 检测、发布流程）；② 新建 `concept/01_foundation/26_quiz_modules_testing.md`（模块/测试 10 题，可见性、集成测试、`should_panic`）；③ 新建 `concept/04_formal/24_quiz_formal_methods.md`（形式化方法 10 题，分离逻辑、RustBelt、验证工具链对比、Tree Borrows）；已全部加入对应层级 README 索引
-- v1.23 (2026-06-08): 内部维护（信息平坦期）：核心概念补全测验——① 新建 `concept/02_intermediate/24_quiz_memory_management.md`（内存管理 10 题，Box/Rc/Arc/RefCell/Cell、Weak、Deref、Drop、内部可变性）；② 新建 `concept/05_comparative/17_quiz_rust_vs_systems.md`（跨语言对比 10 题，Rust vs C/C++/Go 在内存安全、并发、错误处理、零成本抽象、嵌入式场景的对比）；③ 新建 `concept/01_foundation/27_quiz_closures_iterators.md`（闭包/迭代器 10 题，Fn/FnMut/FnOnce、move 闭包、惰性求值、适配器/消费者、fold/find/filter/map 组合）；已全部加入对应层级 README 索引
+- v1.19 (2026-06-08): 内部维护（信息平坦期）：嵌入式互动测验试点——新建 `concept/01_foundation/23_quiz_ownership_borrowing.md`，10 道所有权（Ownership）/借用（Borrowing）/生命周期（Lifetimes）互动题，采用 `<details>` 标签实现"自测-展开-核对"闭环，每题链接至对应概念文件、crate 示例和 exercises 练习；已加入 L1 README 索引
+- v1.20 (2026-06-08): 内部维护（信息平坦期）：嵌入式测验扩展——① 新建 `concept/01_foundation/24_quiz_type_system.md`（类型系统（Type System） 10 题，标量/复合类型、enum、模式匹配（Pattern Matching）、类型转换）；② 新建 `concept/02_intermediate/23_quiz_traits_and_generics.md`（Trait/泛型（Generics） 10 题，trait bound、关联类型、trait 对象、`impl Trait`）；③ 新建 `concept/01_foundation/25_quiz_error_handling.md`（错误处理（Error Handling） 10 题，Result/Option、`?` 运算符、panic、自定义错误）；已全部加入对应层级 README 索引
+- v1.21 (2026-06-08): 内部维护（信息平坦期）：L3 嵌入式测验扩展——① 新建 `concept/03_advanced/21_quiz_concurrency_async.md`（并发/异步（Async） 10 题，Send/Sync、Mutex/Arc、channel、Future/Pin、`join!`）；② 新建 `concept/03_advanced/22_quiz_unsafe.md`（Unsafe 10 题，原始指针（Raw Pointer）、MaybeUninit、FFI、`unsafe_op_in_unsafe_fn`、Miri 验证）；③ 新建 `concept/03_advanced/23_quiz_macros.md`（宏系统 10 题，`macro_rules!` 重复模式、卫生性、derive/属性/函数式过程宏（Procedural Macro））；已全部加入 L3 README 索引
+- v1.22 (2026-06-08): 内部维护（信息平坦期）：跨层级测验扩展——① 新建 `concept/06_ecosystem/57_quiz_toolchain.md`（工具链 10 题，Cargo 依赖解析、Clippy lint、Miri UB 检测、发布流程）；② 新建 `concept/01_foundation/26_quiz_modules_testing.md`（模块（Module）/测试 10 题，可见性、集成测试、`should_panic`）；③ 新建 `concept/04_formal/24_quiz_formal_methods.md`（形式化方法 10 题，分离逻辑、RustBelt、验证工具链对比、Tree Borrows）；已全部加入对应层级 README 索引
+- v1.23 (2026-06-08): 内部维护（信息平坦期）：核心概念补全测验——① 新建 `concept/02_intermediate/24_quiz_memory_management.md`（内存管理 10 题，Box/Rc/Arc/RefCell/Cell、Weak、Deref、Drop、内部可变性）；② 新建 `concept/05_comparative/17_quiz_rust_vs_systems.md`（跨语言对比 10 题，Rust vs C/C++/Go 在内存安全（Memory Safety）、并发、错误处理（Error Handling）、零成本抽象（Zero-Cost Abstraction）、嵌入式场景的对比）；③ 新建 `concept/01_foundation/27_quiz_closures_iterators.md`（闭包（Closures）/迭代器（Iterator） 10 题，Fn/FnMut/FnOnce、move 闭包、惰性求值、适配器/消费者、fold/find/filter/map 组合）；已全部加入对应层级 README 索引
 - v1.24 (2026-06-08): Phase 3 内容瘦身启动：① 从 L1-L6 各层级 README 索引中移除 13 个已归档文件链接（`01_foundation/19_numerics.md`、`02_intermediate/22_iterator_patterns.md`、L3 的 6 个归档文件、`04_formal/07_separation_logic.md` 和 `09_operational_semantics.md`、`05_comparative/16_rust_vs_ruby.md`、L6 的 2 个归档文件）；② 清理 `07_future/README.md` 中指向 `archive/01_ai_integration_original.md` 的历史链接；③ 更新 `04_formal/README.md` 核心功能描述（"可机械验证"→"形式化直觉与教学类比"），为 6 个高形式化密度文件在索引表格中追加 `[教学类比]` 标注
 - v1.25 (2026-06-08): Phase 3 深度瘦身完成：① 迁移 12 个活跃层级中的"已归档-in-place"重复文件至 `concept/archive/`（L3 新增 5 个：02_async_programming、03_unsafe_rust、05_macros、08_zero_cost_abstractions、13_async_patterns；此前 L1/L2/L4/L5/L6 共 7 个）；② 归档/删除 8 个根目录级旧版索引（`00.md`/`03-07.md` 归档，`01.md` 已归档、`02.md` 0 字节占位符已删除）；③ 归档 3 个历史规划文件（`PLAN.md`、`PLAN_Semantic_Space_Wave.md`、`SUMMARY.md`）；④ 新建 `archive/ARCHIVE_INDEX.md` 统一索引；⑤ 修复 7 处指向已归档文件的活跃链接（`README.md` / `inter_layer_topology.md` / `LEARNING_MVP_PATH.md` / `53_embedded_graphics.md` / `17_quiz_rust_vs_systems.md` / `25_aarch64_sve_sme_preview.md` / `35_pattern_composition_algebra.md`），清理 `05_formal_ecosystem_tower.md` 变更日志 stray `$entry` 字符
 - v1.26 (2026-06-19): 权威内容对齐 Batch 22：① 新增 §6.9 维护者成长案例（Tiffany Pek Yuan）与 §6.10 跨仓库工程工具 Josh；② 新增 §6.11 Rust Foundation 3 月董事会治理动态。详见 `05_rust_version_tracking.md` §12.14–§12.16 [来源: Inside Rust 2026-05/06]
@@ -106,7 +106,7 @@ mindmap
 
 > **认知功能**: 提供 Rust 语言演进的全景认知框架，将 RFC 流程、火车模型、Edition 机制与各阶段核心主题统一为层级化心智模型。建议作为"地图"使用：首次阅读把握整体节奏，后续按需深入特定 Edition。关键洞察：三个 Edition 的主题递进揭示了 Rust 从语法简化到语义精确的演化逻辑。[来源: 💡 原创分析]
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> **认知路径**: 本 mindmap 将 Rust 演进组织为**机制层**（RFC/火车/Edition）和**内容层**（各 Edition 的核心主题）。读者可按时间轴从中心向外阅读，或按兴趣直接跳转到特定 Edition。2018 的主题是"路径清晰化"，2021 是"精细化所有权"，2024 是"显式化 Unsafe 边界"——三个 Edition 形成从"语法简化"到"语义精确"的递进。
+> **认知路径**: 本 mindmap 将 Rust 演进组织为**机制层**（RFC/火车/Edition）和**内容层**（各 Edition 的核心主题）。读者可按时间轴从中心向外阅读，或按兴趣直接跳转到特定 Edition。2018 的主题是"路径清晰化"，2021 是"精细化所有权（Ownership）"，2024 是"显式化 Unsafe 边界"——三个 Edition 形成从"语法简化"到"语义精确"的递进。
 
 ---
 
@@ -127,7 +127,7 @@ mindmap
 >
 > **来源**: [Wikipedia — Software release life cycle](https://en.wikipedia.org/wiki/Software_release_life_cycle)
 
-软件发布生命周期描述了软件从开发到退役的各个阶段：预 alpha → alpha → beta → release candidate (RC) → general availability (GA)。
+软件发布生命周期（Lifetimes）描述了软件从开发到退役的各个阶段：预 alpha → alpha → beta → release candidate (RC) → general availability (GA)。
 Rust 编译器采用"train model"——每 6 周发布一个稳定版本，nightly → beta → stable 的晋升机制确保新特性经过充分测试。
 这与传统的"大爆炸式发布"不同，提供了持续、可预测的演进节奏。
 
@@ -139,7 +139,7 @@ Rust 编译器采用"train model"——每 6 周发布一个稳定版本，night
 
 ### 第 1 步：Rust的设计哲学是什么？
 
-零成本抽象/内存安全/实用性/稳定性
+零成本抽象（Zero-Cost Abstraction）/内存安全（Memory Safety）/实用性/稳定性
 
 ### 第 2 步：Rust的演化历史关键点？
 
@@ -262,8 +262,8 @@ cargo build
 |:---|:---|
 | 关键字冲突重命名（`async` → `r#async`） | `unsafe fn` 内 unsafe 操作的语义审查 |
 | `dyn Trait` 显式标注 | `impl Trait` + `use<>` 的生命周期设计 |
-| 路径系统迁移（`extern crate` 移除） | `static mut` 引用移除后的并发安全重构 |
-| `macro_rules!` 片段指定符补全 | 闭包 disjoint capture 导致的 Drop 顺序变化 |
+| 路径系统迁移（`extern crate` 移除） | `static mut` 引用（Reference）移除后的并发安全（Concurrency Safety）重构 |
+| `macro_rules!` 片段指定符补全 | 闭包（Closures） disjoint capture 导致的 Drop 顺序变化 |
 | `unsafe extern` 块标记 | 指针比较从值语义到地址语义的逻辑影响 |
 
 对于无法自动修复的变更，编译器通过 `rust-2024-compatibility` lint group 提供诊断信息，开发者可按警告逐个处理：
@@ -283,18 +283,18 @@ cargo check -W rust-2024-compatibility
 
 | **类别** | **变更** | **影响** | **迁移方式** |
 |:---|:---|:---|:---|
-| **模块系统** | `extern crate` 不再需要（宏 crate 除外） | 依赖自动进入 extern prelude | 自动，无需 `extern crate` |
-| **模块系统** | `crate::` 作为当前 crate 绝对路径根 | 统一路径语义 | `cargo fix` 自动重写路径 |
+| **模块（Module）系统** | `extern crate` 不再需要（宏（Macro） crate 除外） | 依赖自动进入 extern prelude | 自动，无需 `extern crate` |
+| **模块（Module）系统** | `crate::` 作为当前 crate 绝对路径根 | 统一路径语义 | `cargo fix` 自动重写路径 |
 | **模块系统** | Uniform paths：`use` 路径相对当前模块 | 消除 `use` 与其他路径的不一致 | 自动 |
 | **模块系统** | `foo.rs` + `foo/` 共存，`mod.rs` 非必需 | 更灵活的目录布局 | 可选迁移 |
 | **关键字** | `async`、`await`、`try` 成为保留关键字 | 禁止作为标识符 | `cargo fix` 重命名或 `r#` 原始标识符 |
 | **关键字** | `dyn` 成为严格关键字 | 禁止作为标识符 | `cargo fix` |
 | **Trait** | `dyn Trait` 必须显式标注 | `Box<Trait>` → `Box<dyn Trait>` | `cargo fix` 自动添加 `dyn` |
-| **生命周期** | `'_` 匿名生命周期参数占位符 | 简化泛型签名中的显式生命周期 | 可选使用 |
-| **生命周期** | NLL（Non-Lexical Lifetimes）默认启用 | 借用检查更精确，释放更早 | 编译器自动（后回传至 2015 edition）|
-| **宏** | 过程宏（`proc_macro`）稳定；可用 `use` 导入宏 | 宏系统现代化 | 手动迁移宏导入方式 |
+| **生命周期（Lifetimes）** | `'_` 匿名生命周期参数占位符 | 简化泛型（Generics）签名中的显式生命周期 | 可选使用 |
+| **生命周期** | NLL（Non-Lexical Lifetimes）默认启用 | 借用（Borrowing）检查更精确，释放更早 | 编译器自动（后回传至 2015 edition）|
+| **宏** | 过程宏（Procedural Macro）（`proc_macro`）稳定；可用 `use` 导入宏 | 宏系统现代化 | 手动迁移宏导入方式 |
 | **Trait** | Trait 方法参数禁止匿名（必须有参数名） | `fn foo(&self, u8)` → `fn foo(&self, _: u8)` | `cargo fix` |
-| **类型推断** | 裸指针方法分派改进 | 对推断变量的原始指针更精确 | 自动 |
+| **类型推断（Type Inference）** | 裸指针方法分派改进 | 对推断变量的原始指针（Raw Pointer）更精确 | 自动 |
 
 **关键洞察**：Rust 2018 的核心主题是**路径清晰化（Path Clarity）**。`extern crate` 的消除、`crate::` 统一根路径、`use` 的相对化，共同构成了 "1path" 理念——无论身处 crate 的哪个模块，`use` 路径与非 `use` 路径的解析规则一致。[来源: Rust Blog — Rust 1.31 and Rust 2018]
 
@@ -303,16 +303,16 @@ cargo check -W rust-2024-compatibility
 | **类别** | **变更** | **影响** | **迁移方式** |
 |:---|:---|:---|:---|
 | **Prelude** | `TryInto`、`TryFrom`、`FromIterator` 加入 prelude | 无需手动 `use` 即可调用 `.try_into()` 等 | 自动，删除冗余 `use` |
-| **迭代器** | 数组 `[T; N]` 实现 `IntoIterator<Item = T>` | `for x in [1,2,3]` 按值移动迭代 | 自动，但需审查 `array.into_iter()` 语义变化 |
-| **闭包** | Disjoint capture（不相交捕获） | 闭包仅捕获用到的字段，而非整个变量 | 自动，极少数 Drop 顺序变化需手动处理 |
-| **模式** | 嵌套 `or` 模式在 `macro_rules!` `:pat` 中可用 | `matches!(x, A \| B \| C)` 在宏内合法 | 新语法，无需迁移 |
+| **迭代器（Iterator）** | 数组 `[T; N]` 实现 `IntoIterator<Item = T>` | `for x in [1,2,3]` 按值移动迭代 | 自动，但需审查 `array.into_iter()` 语义变化 |
+| **闭包（Closures）** | Disjoint capture（不相交捕获） | 闭包仅捕获用到的字段，而非整个变量 | 自动，极少数 Drop 顺序变化需手动处理 |
+| **模式** | 嵌套 `or` 模式在 `macro_rules!` `:pat` 中可用 | `matches!(x, A \| B \| C)` 在宏（Macro）内合法 | 新语法，无需迁移 |
 | **包解析** | Cargo Resolver 2 默认启用 | 按特性（feature）解析依赖，避免 feature 过度统一 | `resolver = "2"` 在 `Cargo.toml` 中声明 |
-| **宏** | `panic!` 宏一致性：必须传格式字符串 | `panic!(val)` → `panic!("{}", val)` | `cargo fix` 自动改写 |
+| **宏** | `panic!` 宏一致性（Coherence）：必须传格式字符串 | `panic!(val)` → `panic!("{}", val)` | `cargo fix` 自动改写 |
 | **语法预留** | 预留 `ident#`、`ident"..."` 语法 | 为未来语法扩展保留空间 | 自动检查冲突 |
 | **Lint 升级** | `bare_trait_objects`、`ellipsis_inclusive_range_patterns` 从 warn 升为 error | 强制 `dyn Trait` 和 `..=` 语法 | 编译器报错后手动修复 |
 | **生命周期** | `'_` 在更多上下文可用 | 进一步简化显式生命周期 | 可选 |
 
-**关键洞察**：Rust 2021 的核心主题是**精细化所有权与捕获**。Disjoint capture 使闭包不再过度捕获整个结构体，这是 Rust 所有权系统在「更精确、更细粒度」方向上的重要演进，与 [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) 中的「最小权限原则」一脉相承。
+**关键洞察**：Rust 2021 的核心主题是**精细化所有权与捕获**。Disjoint capture 使闭包不再过度捕获整个结构体（Struct），这是 Rust 所有权系统在「更精确、更细粒度」方向上的重要演进，与 [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) 中的「最小权限原则」一脉相承。
 
 #### 2.3.3 Rust 2021 → 2024（Rust 1.85，2025-02）
 
@@ -335,13 +335,13 @@ cargo check -W rust-2024-compatibility
 | **宏** | 缺失片段指定符成为硬错误 | `($x)` → `($x:tt)` 必须补全 | `cargo fix` |
 | **宏** | `macro_rules!` 支持 `pub` / `pub(crate)` | 宏可见性可控 | 可选显式声明 |
 | **Prelude** | `Future`、`IntoFuture` 加入 prelude | async 生态更无缝 | 自动 |
-| **迭代器** | `Box<[T]>` 实现 `IntoIterator<Item = T>` | 盒装切片可按值迭代 | 自动（方法解析隐藏旧行为）|
+| **迭代器（Iterator）** | `Box<[T]>` 实现 `IntoIterator<Item = T>` | 盒装切片（Slice）可按值迭代 | 自动（方法解析隐藏旧行为）|
 | **Cargo** | Rust-version aware resolver | 依赖解析考虑 `rust-version` 字段 | 自动 |
 
 **关键洞察**：
 Rust 2024 的核心主题是**显式化 Unsafe 边界**与**生命周期精确控制**。
 `unsafe extern` 块、`unsafe` 属性、`unsafe_op_in_unsafe_fn` 三重变化共同强化了 Rust 的安全契约——"unsafe 的边界必须肉眼可见"。
-而 RPIT `use<>` 则填补了 `impl Trait` 在生命周期表达上的长期模糊地带，与 [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) 中的泛型约束理论直接相关。
+而 RPIT `use<>` 则填补了 `impl Trait` 在生命周期表达上的长期模糊地带，与 [`../02_intermediate/02_generics.md`](LINK_PLACEHOLDER) 中的泛型（Generics）约束理论直接相关。
 
 ---
 
@@ -527,7 +527,7 @@ Rust 语言团队已公开表示 Edition 将继续以约 3 年为周期发布。
 
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Lang Team Blog](https://lang-team.rust-lang.org/) · [类型理论研究]
 
-Effects 系统是将"计算效果"（如 IO、异常、异步、非确定性）显式编码到类型系统中的理论框架。
+Effects 系统是将"计算效果"（如 IO、异常、异步（Async）、非确定性）显式编码到类型系统（Type System）中的理论框架。
 
 **在 Rust 中的映射**：
 
@@ -607,8 +607,8 @@ trait LendingIterator {
 
 **成熟应用场景**：
 
-- **lending iterators**：返回借用自迭代器本身的数据
-- **类型族（Type Families）**：将运行时类型映射到编译期类型
+- **lending iterators**：返回借用（Borrowing）自迭代器本身的数据
+- **类型族（Type Families）**：将运行时（Runtime）类型映射到编译期类型
 - **HKT（高阶类型）模拟**：通过 GATs 部分实现 Haskell 风格的 HKT
 - **异步 trait**：`async fn` in trait 的 desugaring 依赖 GATs
 
@@ -653,7 +653,7 @@ Rust 进入 Linux 内核是语言演进史上最重大的外部验证事件：
 
 #### 3.7.1 Effects System（效应系统）
 
-Effects 系统是将"计算效果"显式编码到类型系统中的理论框架，Rust 正在探索统一的 effect 关键字：
+Effects 系统是将"计算效果"显式编码到类型系统（Type System）中的理论框架，Rust 正在探索统一的 effect 关键字：
 
 ```rust,ignore
 // 未来可能的语法（概念性）
@@ -679,7 +679,7 @@ fn fetch_data() -> String
 
 #### 3.7.2 Generic Const Items（泛型 const 项）
 
-允许 `const` 和 `static` 拥有泛型参数，解决当前 `const` 必须完全单态化的问题：
+允许 `const` 和 `static` 拥有泛型参数，解决当前 `const` 必须完全单态化（Monomorphization）的问题：
 
 ```rust,ignore
 // 当前：必须为每个类型写单独的 const
@@ -938,9 +938,9 @@ fn main() {
 
 | **RFC流程保证质量** | 社区审查 ⟹ | 实现验证 | 时间成本高 | 语言演化控制 |
 
-| **零成本抽象是核心承诺** | 运行时无开销 ⟹ | 抽象即优化 | 编译时间代价 | 设计基石 |
+| **零成本抽象（Zero-Cost Abstraction）是核心承诺** | 运行时（Runtime）无开销 ⟹ | 抽象即优化 | 编译时间代价 | 设计基石 |
 
-| **async/await 是重大演进** | 语法糖简化 ⟹ | 生态广泛采用 | Pin复杂性 | 2019-2021 |
+| **async/await 是重大演进** | 语法糖简化 ⟹ | 生态广泛采用 | Pin（Pin）复杂性 | 2019-2021 |
 
 | **const generics 持续完善** | 编译期计算 ⟹ | 类型级编程 | 编译时间影响 | 2021+ |
 
@@ -1226,7 +1226,7 @@ fn fixed() {
 
 > **修正**:
 >
-> `let-else`（Rust 1.65 稳定）是模式匹配的语法糖，允许在绑定失败时执行发散代码块（`return`、`break`、`panic!`）。
+> `let-else`（Rust 1.65 稳定）是模式匹配（Pattern Matching）的语法糖，允许在绑定失败时执行发散代码块（`return`、`break`、`panic!`）。
 > 它简化了"提取值，否则退出"的常见模式，避免了 `match` 或 `if let` 的嵌套。
 > 这与 Swift 的 `guard let` 或 Kotlin 的 `?: return` 类似，但 Rust 的版本更通用——支持任意模式（不仅是 `Some`），且 else 块必须是发散的（否则编译错误）。
 > 这是 Rust 语法演进中"减少样板代码，但不牺牲显式性"的典范。
@@ -1263,7 +1263,7 @@ fn fixed() {
 | :--- | :--- | :--- |
 | **Pin Ergonomics** | 实验阶段 | `Pin<&mut T>` 的自引用场景（如异步状态机）需要显式 `unsafe` 解包；新设计旨在用类型系统自动证明"不会移动"，消除手动 `unsafe` |
 | **Field Projections** | 语言实验获积极反馈 | 允许 `&mut self.field` 在更复杂的嵌套结构中自动重新借用，减少生命周期标注；本质是**别名分析的局部精确化**。lang team 对 Field Representing Types PR 的实验性合并反应积极，Tyler Mandry 创建了 Beyond References wiki 统筹所有相关提案（含 Alice Ryhl 的 In-place Initialization 新提案） |
-| **Reborrow Traits** | RFC 阶段 | 将重新借用规则从编译器硬编码提升为 trait 系统的一部分，使自定义智能指针也能享受 `&mut` 的自动重借语义 |
+| **Reborrow Traits** | RFC 阶段 | 将重新借用规则从编译器硬编码提升为 trait 系统的一部分，使自定义智能指针（Smart Pointer）也能享受 `&mut` 的自动重借语义 |
 
 > **关键洞察**:
 > "Beyond the `&`" 标志着 Rust 类型系统从"编译器内置规则"向"用户可扩展规则"演进。
@@ -1278,7 +1278,7 @@ fn fixed() {
 | :--- | :--- | :--- |
 | **build-std** | **[RFC 3874](https://rust-lang.github.io/rfcs//3874-build-std-always.html) FCP 完成待合并** | [RFC 3873](https://rust-lang.github.io/rfcs//3873-build-std-context.html)（自定义标准库编译目标）已合并，3874（`build-std: always`）FCP 已完成待合并，3875（显式依赖）处理反馈中；允许自定义编译 `core`/`std`，为嵌入式、安全关键和形式化验证提供"可剪裁的标准库" |
 | **Cranelift Backend** | ⚠️ **未完成（资金不足）** | 用 Cranelift（Wasmtime 的 JIT 编译器）替代 LLVM 作为 debug 编译后端，编译速度提升 2-5x；不改变语义，但改变**编译期验证与运行时分发的边界**。2025H2 周期因 Trifecta Tech Foundation 资金不足未能完成生产就绪目标，社区正在寻求新的资助渠道 |
-| **Parallel Frontend** | 实现中 | 并行解析和类型检查；对 trait solver 的并发安全提出新要求 |
+| **Parallel Frontend** | 实现中 | 并行解析和类型检查；对 trait solver 的并发安全（Concurrency Safety）提出新要求 |
 | **Relink don't Rebuild** | 设计阶段 | 增量链接优化；通过精确依赖追踪减少全量重编译 |
 
 > **关键洞察**:
@@ -1323,7 +1323,7 @@ fn fixed() {
 | 目标 | 领域 | 形式模型意义 |
 | :--- | :--- | :--- |
 | **C++/Rust Interop Problem Space Mapping** | FFI | 系统梳理 C++ 与 Rust 的语义鸿沟，为自动化绑定生成（如 `autocxx`、`cxx`）提供理论基础 |
-| **Unsafe Fields** | Unsafe 边界 | 允许字段级 `unsafe` 标注，精确到字段而非整个结构体；细化 Rust 的**安全契约粒度** |
+| **Unsafe Fields** | Unsafe 边界 | 允许字段级 `unsafe` 标注，精确到字段而非整个结构体（Struct）；细化 Rust 的**安全契约粒度** |
 | **Const Generics 完善** | 编译期计算 | `generic_const_exprs` 和 `const_trait_impl` 的稳定化，使编译期计算 Turing-complete |
 | **MemorySanitizer / ThreadSanitizer** | 运行时安全 | 将 MSan/TSan 支持稳定化，与 Miri 形成"静态+动态"的 UB 检测双保险 |
 | **Rust Vision Document** | 语言哲学 | 社区驱动的 Rust 长期愿景文档，定义 2030 年的 Rust 应该是什么样 |
@@ -1511,7 +1511,7 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 
 - 完成混合语言开发生态研究，识别 ABI 边界、语义差异、构建系统、长期维护等跨语言摩擦点
 - 发布 [Rust–C++ Interoperability Problem Statement](https://rustfoundation.org/media/rust-foundation-releases-problem-statement-on-c-rust-interoperability/)，并据此设立 Rust Project Goal
-- 与 WG21（ISO C++ 标准委员会）建立联系，推动内存安全 C++ 的长期共识
+- 与 WG21（ISO C++ 标准委员会）建立联系，推动内存安全（Memory Safety） C++ 的长期共识
 
 **长期战略判断**：
 
@@ -1530,7 +1530,7 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 - 该 Foundation 倡议与 PM April 更新中提到的 `splat` lang experiment、Rust for Linux edition 迁移工具等项目共同构成 2026 年互操作工作组合
 - 它标志着 Rust 生态从“单语言替代”叙事转向“**在现有 C/C++ 系统中安全、渐进地集成 Rust**”的工业级路径
 
-> **关键洞察**: Rust/C++ 互操作不是单一语言特性问题，而是跨越 ABI、类型系统、构建系统、错误处理、内存分配器和标准政治的多层基础设施问题。Foundation 的阶段性策略——长期推动 C++ 内存安全标准化，近期聚焦问题映射与具体工程——体现了在“理想终点”与“当下可用性”之间取得平衡的治理智慧。
+> **关键洞察**: Rust/C++ 互操作不是单一语言特性问题，而是跨越 ABI、类型系统、构建系统、错误处理（Error Handling）、内存分配器和标准政治的多层基础设施问题。Foundation 的阶段性策略——长期推动 C++ 内存安全标准化，近期聚焦问题映射与具体工程——体现了在“理想终点”与“当下可用性”之间取得平衡的治理智慧。
 > **来源**: [Rust Foundation — Interop Initiative Update: From Research to Implementation](https://rustfoundation.org/media/rust-foundation-interop-initiative-update-from-research-to-implementation/) · 可信度: ✅
 
 ### 6.14 Rust Innovation Lab：孵化 Rust 生态的下一个项目（2026-03-30）
@@ -1745,7 +1745,7 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 **背景：从 Stagefright 到 Kaleidoscope**
 
 - 2015 年 Android **Stagefright** 漏洞让 WhatsApp 意识到：操作系统级媒体库漏洞无法由应用单独修补，必须在应用层增加防护
-- WhatsApp 早期用 C++ 开发了跨平台媒体一致性库 **wamedia**，用于检测不符合 MP4 标准的文件，防止触发 OS 库漏洞
+- WhatsApp 早期用 C++ 开发了跨平台媒体一致性（Coherence）库 **wamedia**，用于检测不符合 MP4 标准的文件，防止触发 OS 库漏洞
 - 由于媒体检查自动运行且处理不可信输入，wamedia 成为迁移到内存安全语言的理想目标
 
 **Rust 迁移成果**：
@@ -1988,13 +1988,13 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 
 ### 6.35 Compiler Team 新增七名成员（2025-10-28）
 
-**[Inside Rust, 2025-10-28]** Rust 编译器团队宣布七名新成员，进一步扩大团队在度量、构建性能、Rustdoc/GCC 后端、底层语言特性、测试套件、模式匹配与属性系统等方向的能力。
+**[Inside Rust, 2025-10-28]** Rust 编译器团队宣布七名新成员，进一步扩大团队在度量、构建性能、Rustdoc/GCC 后端、底层语言特性、测试套件、模式匹配（Pattern Matching）与属性系统等方向的能力。
 
 | 成员 | 角色 | 近期重点贡献 |
 |:---|:---|:---|
 | Jane Lusby (yaahc) | team member | Metrics Initiative（量化不稳定特性使用）与 “Relink Don't Rebuild” 项目目标，加速依赖树未变更时的重新编译 |
 | Guillaume Gomez (GuillameGomez) | team member | Rustdoc 团队负责人，长期贡献 Rustdoc 与 rustc GCC 后端 |
-| Amanieu d'Antras (Amanieu) | team member | Library 团队负责人，精通内联汇编与目标相关特性 |
+| Amanieu d'Antras (Amanieu) | team member | Library 团队负责人，精通内联汇编（Inline Assembly）与目标相关特性 |
 | Martin Nordholts (Enselic) | team member | 多年 issue triage，近期着力振兴与改进编译器集成测试套件 |
 | Dianne Hackborn (dianne) | team member | 改进 match ergonomics、实现 deref patterns、修复临时生命周期相关 bug |
 | Jonathan Brouwer (JonathanBrouwer) | team member | 重构编译器属性处理，增加属性参数校验 |

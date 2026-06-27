@@ -61,12 +61,12 @@ rustc 传统上是**单线程**的，编译大型 crate 时瓶颈明显。并行
 
 1. **查询系统并行化（Parallel Query System）**
    - rustc 内部使用 **Salsa** 风格的查询系统（`TyCtxt`）
-   - 每个查询（如"解析模块 A"、"类型检查函数 B"）可独立执行
+   - 每个查询（如"解析模块（Module） A"、"类型检查函数 B"）可独立执行
    - 通过 `rayon` 工作窃取线程池并行调度无依赖查询
 
 2. **增量编译（Incremental Compilation）**
    - 缓存 HIR/MIR 层的编译结果到 `target/incremental/`
-   - 仅重新编译变更的函数/模块
+   - 仅重新编译变更的函数/模块（Module）
    - 与并行前端协同：未变更的查询直接命中缓存，变更的查询并行重算
 
 ### 2.2 性能数据
@@ -101,7 +101,7 @@ CARGO_BUILD_RUSTC_WRAPPER="" RUSTFLAGS="-Z threads=8" cargo build --verbose
 | **LLVM** | 极致优化 | 慢（秒级）| 极高 | 发布构建（release）|
 | **Cranelift** | 快速编译 | 快（毫秒级）| 中等（-O1 水平）| 开发构建（debug）|
 
-Cranelift 是 [Bytecode Alliance](https://bytecodealliance.org/) 开发的代码生成器，原用于 Wasmtime WASM 运行时，现作为 rustc 的替代后端。
+Cranelift 是 [Bytecode Alliance](https://bytecodealliance.org/) 开发的代码生成器，原用于 Wasmtime WASM 运行时（Runtime），现作为 rustc 的替代后端。
 
 ### 3.2 为什么开发构建需要 Cranelift
 
@@ -270,24 +270,24 @@ RUSTFLAGS="-Z sanitizer=memory -Z build-std" \
 
 ### 测验 1：`syn` crate 在 Rust 过程宏开发中起什么作用？（理解层）
 
-**题目**: `syn` crate 在 Rust 过程宏开发中起什么作用？
+**题目**: `syn` crate 在 Rust 过程宏（Procedural Macro）开发中起什么作用？
 
 <details>
 <summary>✅ 答案与解析</summary>
 
-`syn` 将 `proc_macro::TokenStream` 解析为 AST（如 `DeriveInput`、`Expr`），使过程宏可以操作结构化语法而非原始 token。是几乎所有 derive 宏的基础依赖。
+`syn` 将 `proc_macro::TokenStream` 解析为 AST（如 `DeriveInput`、`Expr`），使过程宏（Macro）可以操作结构化语法而非原始 token。是几乎所有 derive 宏的基础依赖。
 </details>
 
 ---
 
 ### 测验 2：`quote!` 宏在过程宏中的用途是什么？（理解层）
 
-**题目**: `quote!` 宏在过程宏中的用途是什么？
+**题目**: `quote!` 宏在过程宏（Procedural Macro）中的用途是什么？
 
 <details>
 <summary>✅ 答案与解析</summary>
 
-`quote!` 从模板生成 `TokenStream`，支持变量插值（`#var`）。它是过程宏输出代码的主要方式，比手动拼接 token 更安全、更易读。
+`quote!` 从模板生成 `TokenStream`，支持变量插值（`#var`）。它是过程宏（Macro）输出代码的主要方式，比手动拼接 token 更安全、更易读。
 </details>
 
 ---

@@ -12,6 +12,7 @@
 > **定理链**: N/A — 测验性/互动性文档
 >
 > **来源**: [Brown University Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL — Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
+> **后置概念**: N/A
 ---
 
 > **来源**:
@@ -35,7 +36,7 @@
 > **Bloom 层级**: 理解 → 应用 → 分析
 > **定位**:
 > 本文档为 **Brown University Interactive Book** 中「Ownership Inventory」概念清单的本地映射。
-> Inventory 题目灵感来自真实 StackOverflow 问题，重点检验所有权、借用（Borrowing）、生命周期在**真实代码场景**中的运用。
+> Inventory 题目灵感来自真实 StackOverflow 问题，重点检验所有权（Ownership）、借用（Borrowing）、生命周期（Lifetimes）在**真实代码场景**中的运用。
 > **使用方式**: 先阅读对应前置概念，再尝试回答示例题，最后点击展开核对解析；亦可直接访问 Brown Book 的交互式题目获得 IDE 与可视化辅助。
 
 ---
@@ -44,10 +45,10 @@
 
 | Inventory | 完成时机 | Brown Book 链接 | 本项目对应 |
 |:---|:---|:---|:---|
-| **Inventory #1** | 学完所有权、借用、枚举后 | [Ch 6.4](https://rust-book.cs.brown.edu/ch06-04-inventory.html) | `01_ownership.md` · `02_borrowing.md` |
+| **Inventory #1** | 学完所有权（Ownership）、借用（Borrowing）、枚举（Enum）后 | [Ch 6.4](LINK_PLACEHOLDER) | `01_ownership.md` · `02_borrowing.md` |
 | **Inventory #2** | 学完集合类型后 | [Ch 8.4](https://rust-book.cs.brown.edu/ch08-04-inventory.html) | `08_collections.md` |
-| **Inventory #3** | 学完泛型、trait、生命周期后 | [Ch 10.4](https://rust-book.cs.brown.edu/ch10-04-inventory.html) | `03_lifetimes.md` |
-| **Inventory #4** | 学完智能指针后 | [Ch 18.4](https://rust-book.cs.brown.edu/ch18-04-inventory.html) | 智能指针相关章节 |
+| **Inventory #3** | 学完泛型（Generics）、trait、生命周期（Lifetimes）后 | [Ch 10.4](LINK_PLACEHOLDER) | `03_lifetimes.md` |
+| **Inventory #4** | 学完智能指针（Smart Pointer）后 | [Ch 18.4](https://rust-book.cs.brown.edu/ch18-04-inventory.html) | 智能指针相关章节 |
 
 > **提示**: Brown Book 提供浏览器内 IDE（基于 rust-analyzer WASM）和 Aquascope 可视化，推荐在 PC 端 Chrome/Firefox 体验。
 
@@ -111,9 +112,9 @@ fn main() {
 
 **解析**:
 
-- `s` 是对 `v` 的不可变借用（`&[i32]`）。
-- `v.push(4)` 需要可变借用 `&mut v`。
-- Rust 禁止同时存在对同一数据的可变借用和不可变借用，因此编译失败。
+- `s` 是对 `v` 的不可变借用（Mutable Borrow）（`&[i32]`）。
+- `v.push(4)` 需要可变借用（Borrowing） `&mut v`。
+- Rust 禁止同时存在对同一数据的可变借用和不可变借用（Immutable Borrow），因此编译失败。
 - 修复方案：在 `push` 之前停止使用 `s`，或先 `clone` 出独立数据。
 
 </details>
@@ -150,7 +151,7 @@ fn main() {
 
 - `first_word(&s)` 返回的 `&str` 生命周期不能超过 `s`。
 - `s` 在内部块结束时被释放，但 `result` 仍指向它。
-- 修复方案：将 `result` 的创建和使用限制在 `s` 的有效作用域内，或返回 `String` 而非引用。
+- 修复方案：将 `result` 的创建和使用限制在 `s` 的有效作用域内，或返回 `String` 而非引用（Reference）。
 
 </details>
 
@@ -168,11 +169,11 @@ fn main() {
 ## 四、与本地练习的衔接
 
 - 完成本样题后，可继续：
-  - [`23_quiz_ownership_borrowing.md`](./23_quiz_ownership_borrowing.md) — 更多所有权/借用选择题
+  - [`23_quiz_ownership_borrowing.md`](LINK_PLACEHOLDER) — 更多所有权/借用（Borrowing）选择题
   - [`exercises/src/ownership_borrowing/`](../../exercises/src/ownership_borrowing/) — 可编译的修复练习
     - [`ex06_string_replace_chain.rs`](../../exercises/src/ownership_borrowing/ex06_string_replace_chain.rs) — 字符串替换链（对应 Inventory #1）
-    - [`ex07_vec_slice_borrow.rs`](../../exercises/src/ownership_borrowing/ex07_vec_slice_borrow.rs) — Vec 与切片借用冲突（对应 Inventory #2）
-    - [`ex08_dangling_reference.rs`](../../exercises/src/ownership_borrowing/ex08_dangling_reference.rs) — 避免悬垂引用（对应 Inventory #3）
+    - [`ex07_vec_slice_borrow.rs`](../../exercises/src/ownership_borrowing/ex07_vec_slice_borrow.rs) — Vec 与切片（Slice）借用冲突（对应 Inventory #2）
+    - [`ex08_dangling_reference.rs`](LINK_PLACEHOLDER) — 避免悬垂引用（Reference）（对应 Inventory #3）
     - [`ex09_dangling_stack_reference.rs`](../../exercises/src/ownership_borrowing/ex09_dangling_stack_reference.rs) — 悬垂栈引用
     - [`ex10_vec_reallocation.rs`](../../exercises/src/ownership_borrowing/ex10_vec_reallocation.rs) — Vec 重新分配与引用失效
     - [`ex11_hashmap_borrow.rs`](../../exercises/src/ownership_borrowing/ex11_hashmap_borrow.rs) — HashMap 借用冲突

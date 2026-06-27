@@ -41,8 +41,8 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Rust Edition Guide 的编译错误](#十边界测试rust-edition-guide-的编译错误)
-    - [10.1 边界测试：`impl Trait` 在静态项中的生命周期捕获（编译错误）](#101-边界测试impl-trait-在静态项中的生命周期捕获编译错误)
-    - [10.2 边界测试：Edition 迁移的宏展开差异（编译错误）](#102-边界测试edition-迁移的宏展开差异编译错误)
+    - [10.1 边界测试：`impl Trait` 在静态项中的生命周期（Lifetimes）捕获（编译错误）](LINK_PLACEHOLDER)
+    - [10.2 边界测试：Edition 迁移的宏（Macro）展开差异（编译错误）](LINK_PLACEHOLDER)
     - [10.6 边界测试：Edition 2024 的 `gen` 关键字保留与现有标识符冲突（编译错误）](#106-边界测试edition-2024-的-gen-关键字保留与现有标识符冲突编译错误)
     - [10.5 边界测试：多 Edition workspace 的依赖解析冲突（编译错误）](#105-边界测试多-edition-workspace-的依赖解析冲突编译错误)
     - [10.3 边界测试：多 Edition workspace 的 resolver 冲突（编译错误）](#103-边界测试多-edition-workspace-的-resolver-冲突编译错误)
@@ -165,7 +165,7 @@ Edition 机制:
   cargo fix --edition-idioms
 ```
 
-> **2024 洞察**: **2024 Edition 聚焦异步和类型系统完善**——精确捕获是核心稳定特性；gen blocks 作为 `gen` 关键字预留后的 nightly 预览特性，为未来生成器语法铺路。
+> **2024 洞察**: **2024 Edition 聚焦异步（Async）和类型系统（Type System）完善**——精确捕获是核心稳定特性；gen blocks 作为 `gen` 关键字预留后的 nightly 预览特性，为未来生成器语法铺路。
 > [来源: [Rust Edition 2024 Guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)]
 
 ---
@@ -298,7 +298,7 @@ graph TD
 └── 缓解: 自动化测试、渐进式部署
 ```
 
-> **边界要点**: Edition 迁移的边界与**宏**、**依赖**、**文档**、**培训**和**CI/CD**相关。
+> **边界要点**: Edition 迁移的边界与**宏（Macro）**、**依赖**、**文档**、**培训**和**CI/CD**相关。
 
 ---
 
@@ -367,7 +367,7 @@ fn main() {
 - [Toolchain](../06_ecosystem/01_toolchain.md) — 工具链
 - [Evolution](./03_evolution.md) — 语言演进
 - [Version Tracking](./05_rust_version_tracking.md) — 版本跟踪
-- [Macros](../03_advanced/04_macros.md) — 宏系统
+- [Macros](../03_advanced/04_macros.md) — 宏（Macro）系统
 
 ---
 
@@ -422,8 +422,8 @@ fn main() {
 > `static` 和 `const` 要求类型在编译期完全已知（单态化），而 `impl Trait` 是**存在类型**（existential type）——隐藏具体实现，只暴露 trait bound。
 > 编译器需要知道 `static` 的确切大小和对齐，因此不能是抽象的 `impl Trait`。
 > [RFC 2289](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html)（`type_alias_impl_trait`）部分解决了类型别名的问题，但 `static`/`const` 仍不支持。
-> Edition 演进可能逐步放宽这些限制。 workaround：使用 trait 对象 `Box<dyn Iterator<Item = i32>>`（有运行时虚函数开销），或手写具体类型（暴露实现细节）。
-> 这与 C++ 的 `auto`（不能用于 `static`）或 Java 的接口（可用于 `static`，但需具体实现类）不同——Rust 的 `impl Trait` 设计追求零成本抽象，但静态位置的单态化要求与之冲突。
+> Edition 演进可能逐步放宽这些限制。 workaround：使用 trait 对象 `Box<dyn Iterator<Item = i32>>`（有运行时（Runtime）虚函数开销），或手写具体类型（暴露实现细节）。
+> 这与 C++ 的 `auto`（不能用于 `static`）或 Java 的接口（可用于 `static`，但需具体实现类）不同——Rust 的 `impl Trait` 设计追求零成本抽象（Zero-Cost Abstraction），但静态位置的单态化要求与之冲突。
 > [来源: [Rust RFC 2289](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
@@ -450,7 +450,7 @@ fn use_macro() {
 > **修正**:
 > Rust 的 Edition 是 crate 级别的，但宏展开继承调用点的 Edition。
 > 这意味着定义在 Edition 2021 crate 中的宏，在 Edition 2024 crate 中调用时，按 Edition 2024 规则展开。
-> 若宏生成的代码依赖特定 Edition 语义（如 `async` 块的生命周期捕获、`match` 的移动语义），跨 Edition 使用可能导致意外行为。
+> 若宏生成的代码依赖特定 Edition 语义（如 `async` 块的生命周期（Lifetimes）捕获、`match` 的移动语义），跨 Edition 使用可能导致意外行为。
 > `cargo fix` 的 Edition 迁移工具检查这些风险，但复杂宏可能需手动审查。这与 C 预处理器宏（纯文本替换，无 Edition 概念）或 Lisp 宏（同像性，环境继承）不同——Rust 的宏系统既有 hygiene（避免命名冲突）又有 Edition 敏感性，增加了复杂性。最佳实践：避免在宏中生成依赖 Edition 边缘语义的代码，使用显式、可移植的写法。
 > [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)] · [来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)]
 
@@ -471,7 +471,7 @@ fn main() {
 
 > **修正**:
 > Rust 2024 Edition 将 `gen` 设为保留关键字（为 `gen` 块特性预留）。
-> 现有代码中使用 `gen` 作为标识符（变量、函数、结构体字段）的需重命名。
+> 现有代码中使用 `gen` 作为标识符（变量、函数、结构体（Struct）字段）的需重命名。
 > `cargo fix --edition` 自动处理大部分冲突，但某些边缘情况需手动修复：
 >
 > 1) 宏生成的代码包含 `gen`；
@@ -562,7 +562,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-自动检测 crate 的版本升级是否违反了语义化版本控制（SemVer）规则，如删除公共 API、改变 trait 实现、修改泛型约束等。
+自动检测 crate 的版本升级是否违反了语义化版本控制（SemVer）规则，如删除公共 API、改变 trait 实现、修改泛型（Generics）约束等。
 </details>
 
 ---
@@ -574,7 +574,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-Rust 的强类型系统和 trait 系统使 API 变更影响透明。违反 SemVer 的更新可能导致下游 crate 编译失败。`cargo` 的依赖解析依赖 SemVer。
+Rust 的强类型系统（Type System）和 trait 系统使 API 变更影响透明。违反 SemVer 的更新可能导致下游 crate 编译失败。`cargo` 的依赖解析依赖 SemVer。
 </details>
 
 ---

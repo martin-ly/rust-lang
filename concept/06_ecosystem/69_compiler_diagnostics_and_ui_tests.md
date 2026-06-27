@@ -74,7 +74,7 @@ error[E0308]: mismatched types
 
 ## 二、`Diag` 与诊断等级
 
-`rustc_errors` crate 提供诊断 API。推荐方式是用 `Diagnostic` trait / derive 宏定义结构化诊断：
+`rustc_errors` crate 提供诊断 API。推荐方式是用 `Diagnostic` trait / derive 宏（Macro）定义结构化诊断：
 
 ```rust,ignore
 let mut err = sess.dcx().struct_span_err(sp, fluent::my_lint::my_error);
@@ -158,7 +158,7 @@ Lint 运行的时机：
 
 | Pass | 时机 | 信息可用性 |
 |:---|:---|:---|
-| Pre-expansion | 宏展开前 | 最少 |
+| Pre-expansion | 宏（Macro）展开前 | 最少 |
 | Early | AST 后、HIR lowering 前 | 语法级 |
 | Late | HIR 后、类型检查等分析后 | 完整类型信息 |
 | MIR | MIR 上 | 控制流 |

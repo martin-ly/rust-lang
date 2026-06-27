@@ -10,7 +10,7 @@
 >
 > **层级**: L4 形式化理论
 > **A/S/P 标记**: **S** — Structure（心智模型）
-> **双维定位**: C×Ana — 分析 Rust 类型系统的形式化边界
+> **双维定位**: C×Ana — 分析 Rust 类型系统（Type System）的形式化边界
 > **前置概念**:
 > [Type System](../01_foundation/04_type_system.md) ·
 > [Generics](../02_intermediate/02_generics.md) ·
@@ -30,7 +30,7 @@
 > **Bloom 层级**: 分析 → 评价
 **变更日志**:
 
-- v2.0 (2026-05-13): 深度重构——定理一致性矩阵扩展至11行（带⟹推理链），新增3个反命题决策树，认知路径重构为5步递进，全章补充Wikipedia/Pierce TAPL/Cardelli引用与L1-L3层次一致性标注
+- v2.0 (2026-05-13): 深度重构——定理一致性（Coherence）矩阵扩展至11行（带⟹推理链），新增3个反命题决策树，认知路径重构为5步递进，全章补充Wikipedia/Pierce TAPL/Cardelli引用与L1-L3层次一致性标注
 - v1.0 (2026-05-12): 初始版本
 
 ---
@@ -61,7 +61,7 @@
 
 > **[Cardelli 1996, *Type Systems* (ACM Computing Surveys 28(1))]** A type system is a syntactic discipline for enforcing levels of abstraction. Type soundness — the guarantee that well-typed programs do not cause certain errors — is the central meta-theorem of type theory.
 
-Rust 的类型系统是 **Hindley-Milner + 所有权约束 + 子类型（生命周期）** 的扩展：
+Rust 的类型系统（Type System）是 **Hindley-Milner + 所有权（Ownership）约束 + 子类型（生命周期）** 的扩展：
 
 ```text
 HM 核心:          Γ ⊢ e : τ  （上下文 Γ 下表达式 e 具有类型 τ） [来源: Pierce 2002, Ch.22] ✅
@@ -78,15 +78,15 @@ Rust 扩展:
 ### 2.1 类型论层次矩阵
 >
 
-| **层次** | **系统** | **多态性** | **类型推断** | **Rust 对应** |
+| **层次** | **系统** | **多态性** | **类型推断（Type Inference）** | **Rust 对应** |
 |:---|:---|:---|:---|:---|
-| **简单类型 λ 演算** | λ→ | 无 | 无 | 无泛型的函数 |
+| **简单类型 λ 演算** | λ→ | 无 | 无 | 无泛型（Generics）的函数 |
 | **参数多态（System F）** | λ2 | ∀α.τ | 无（需显式标注） | `identity::<T>` |
-| **HM 类型系统** | ML | let-多态 | ✅ 完备 | 大多数局部推断 |
+| **HM 类型系统（Type System）** | ML | let-多态 | ✅ 完备 | 大多数局部推断 |
 | **约束类型** | λc | 类型约束 | 部分 | `T: Trait` |
 | **依赖类型** | λΠ | 类型依赖值 | 部分 | `const N: usize` |
 | **子类型** | λ<: | 子类型关系 | 部分 | `'a: 'b` |
-| **线性/仿射** | 线性 λ | 资源敏感 | 部分 | 所有权系统 |
+| **线性/仿射** | 线性 λ | 资源敏感 | 部分 | 所有权（Ownership）系统 |
 
 ### 2.2 Variance 矩阵
 >
@@ -130,7 +130,7 @@ Rust 扩展:
   Vec<A> ≅ μX. 1 + (A × X)   （递归类型） [来源: Pierce 2002, Ch.20] ✅
 ```
 
-> **[学术来源: Damas & Milner 1982 POPL; Pierce 2002, Ch.22]** 算法 W 是 HM 类型推断的经典形式化描述。
+> **[学术来源: Damas & Milner 1982 POPL; Pierce 2002, Ch.22]** 算法 W 是 HM 类型推断（Type Inference）的经典形式化描述。
 
 ```text
 算法 W 核心规则:
@@ -209,7 +209,7 @@ classDiagram
 
 > **认知功能**:
 > 本类图将类型论八十年演进压缩为一张层次地图——从 λ→ 到 Dependent Types 的每一步扩展都清晰可见。
-> 建议对照 Rust 实际特性（泛型、GATs、所有权）定位其理论根基。
+> 建议对照 Rust 实际特性（泛型（Generics）、GATs、所有权（Ownership））定位其理论根基。
 > 关键洞察：Rust 刻意选择位于 `System F + HM + 线性类型` 的交集，排除了不可判定的 Dependent Types 和推断困难的完整 `System Fω`。
 > [来源: 💡 原创分析]
 > [来源: [TAPL — Pierce 2002]]
@@ -238,19 +238,19 @@ Preservation: 若 ⊢ e : τ 且 e → e'，则 ⊢ e' : τ                    [
 
 | **定理/引理** | **⟹ 推理链** | **前提** | **结论** | **被哪些定理依赖** | **失效条件** |
 |:---|:---|:---|:---|:---|:---|
-| **L1**: 简单类型 λ 演算 | λ→ 良类型性 ⟹ **类型保持（Subject Reduction）** | 项在 Γ 下良类型，β-归约一步 | 归约后项仍保持原类型 | T1（类型安全性）; L2（System F 扩展基础） | 引入非终止（`loop {}`）或运行时 panic（`unwrap()` 空值） |
-| **L2**: System F 参数多态 | L1 + ∀α.τ ⟹ **Rust 泛型理论基础** | 类型变量无约束，替换保持良类型 | 零成本单态化实例化，Parametricity 成立 | T3（约束可满足性）; C2（高阶类型） | 存在类型（`dyn Trait`）引入运行时开销；GATs 高阶约束不可推断 |
+| **L1**: 简单类型 λ 演算 | λ→ 良类型性 ⟹ **类型保持（Subject Reduction）** | 项在 Γ 下良类型，β-归约一步 | 归约后项仍保持原类型 | T1（类型安全性）; L2（System F 扩展基础） | 引入非终止（`loop {}`）或运行时（Runtime） panic（`unwrap()` 空值） |
+| **L2**: System F 参数多态 | L1 + ∀α.τ ⟹ **Rust 泛型（Generics）理论基础** | 类型变量无约束，替换保持良类型 | 零成本单态化（Monomorphization）实例化，Parametricity 成立 | T3（约束可满足性）; C2（高阶类型） | 存在类型（`dyn Trait`）引入运行时（Runtime）开销；GATs 高阶约束不可推断 |
 | **T1**: 类型安全性 | L1 + L2 ⟹ **进展性 + 保持性** | 程序通过类型检查，无 `unsafe` | 运行时无类型错误、无 UB | C1（递归类型安全性）; 所有 Rust Safe 代码 | `unsafe` 块；FFI；`std::mem::transmute`；非终止/资源耗尽 |
 | **T2**: 子类型传递性 | 偏序关系 ⟹ **trait bound 层次关系** | `'long <: 'short`，协变/逆变/不变定义清晰 | 生命周期替换安全，协变容器替换合法 | 生命周期替换、协变检查 | 逆变误用（`&mut T` 协变假设）; 循环子类型（`'a: 'b` 且 `'b: 'a` 非传递） |
 | **T3**: 约束可满足性 | L2 + Trait Bound ⟹ **类型推导可判定** | `where` 子句为 Horn 子句形式，约束图无环 | 类型推导终止，主类型存在 | 所有带 Trait Bound 的泛型代码 | GATs 无界递归导致不终止；重叠 impl（E0119）; HRTB 过度约束 |
-| **C1**: 递归类型 | μX.A(X) ⟹ **Rust enum 自引用** | 递归锚点（`Box<T>` 指针间接），类型方程有最小不动点 | 链表/树等递归结构类型安全，大小有限 | T1（作为类型安全子情况） | 无 `Box`/`Rc` 间接层 → 无限大小（E0072）; 循环引用导致内存泄漏 |
+| **C1**: 递归类型 | μX.A(X) ⟹ **Rust enum 自引用（Reference）** | 递归锚点（`Box<T>` 指针间接），类型方程有最小不动点 | 链表/树等递归结构类型安全，大小有限 | T1（作为类型安全子情况） | 无 `Box`/`Rc` 间接层 → 无限大小（E0072）; 循环引用导致内存泄漏 |
 | **C2**: 高阶类型 | System Fω ⟹ **关联类型/高阶 Trait bound** | 类型构造子可抽象（`Vec` 作为参数），GATs 参数合法 | `Iterator<Item=T>` 归一化唯一，`for<'a>` 全称约束可解 | HKT 模拟；GATs 使用 | 关联类型重叠定义（coherence 破坏，E0119）; 归一化无限递归（E0275） |
-| **L3**: 线性/仿射类型 | 资源敏感 ⟹ **Rust 所有权系统** | 每个值有唯一所有者，借用不重叠 | 无悬垂引用，无 use-after-free，无数据竞争 | T1（内存安全层面） | `unsafe` 绕过；`Rc`/`Arc` 打破唯一性；自引用结构（pinning 前） |
+| **L3**: 线性/仿射类型 | 资源敏感 ⟹ **Rust 所有权系统** | 每个值有唯一所有者，借用（Borrowing）不重叠 | 无悬垂引用（Reference），无 use-after-free，无数据竞争 | T1（内存安全（Memory Safety）层面） | `unsafe` 绕过；`Rc`/`Arc` 打破唯一性；自引用结构（pinning 前） |
 | **T4**: 子类型 + Variance | T2 + 构造器 Variance ⟹ **容器替换安全** | `&'a T` 对 `'a` 协变，`fn(T)` 对 T 逆变 | 子类型关系通过容器正确传播 | 所有含引用的泛型容器 | `Cell<T>` 协变假设（实际不变）; `*mut T` 协变误用（实际不变） |
 | **C3**: 存在类型 | `impl Trait` / `dyn Trait` ⟹ **抽象与分发** | 返回位置单一具体类型，或 Trait 对象安全 | 隐藏实现细节，保持静态/动态分发能力 | API 设计；版本兼容性 | 多分支返回不同类型（E0746，除非 `dyn Trait`）; 非对象安全 Trait（E0038） |
 | **T5**: HM 推断完备性 | L1 + 合一算法 ⟹ **Rust 局部推断** | 约束为 Hindley-Milner 片段，无显式高阶多态 | 主类型（Principal Type）存在且可自动推导 | 所有无歧义的局部变量声明 | 数值字面量多义（E0283）; `collect()` 多解（E0282）; HRTB/存在类型需标注 |
 
-> **⟹ 一致性推理链**:
+> **⟹ 一致性（Coherence）推理链**:
 >
 > **链 A（类型安全链）**: L1 (λ→ 类型保持) ⟹ L2 (System F 参数多态) ⟹ T1 (进展+保持=类型安全) ⟹ C1 (递归类型安全) / L3 (所有权安全)
 > **链 B（子类型链）**: T2 (子类型传递性) ⟹ T4 (Variance 传播) ⟹ Rust 生命周期替换与容器协变检查
@@ -297,7 +297,7 @@ graph TD
 | **层面** | **反例** | **性质** |
 |:---|:---|:---|
 | 语义 | `loop {}` 非终止 | 类型正确，但无进展性（Progress 假设程序可归约） |
-| 运行时 | 栈溢出、堆耗尽 | 类型正确，资源约束超出类型系统表达力 |
+| 运行时（Runtime） | 栈溢出、堆耗尽 | 类型正确，资源约束超出类型系统表达力 |
 | 编译期 | `unsafe` / FFI | 显式绕过类型系统，类型安全承诺失效 |
 | 工程 | `unwrap()` panic | Safe Rust 内的受控崩溃，非 UB 但属错误 |
 
@@ -338,7 +338,7 @@ graph TD
 | 无类型 λ 演算 | 表达任意计算 | Curry 悖论导致不一致 | 需要类型来限制自指 |
 | Java `null` | 引用类型安全 | `NullPointerException` 无处不在 | `null` 破坏 soundness 边界 |
 | 早期 Scala（2.x） | 类型安全 | 高阶类型与路径依赖类型存在 soundness hole | 复杂类型系统需形式化验证 |
-| pre-NLL Rust | 借用检查安全 | 某些合法模式被错误拒绝（不完备），存在悬垂借用误放过 | 生命周期算法需持续验证 |
+| pre-NLL Rust | 借用（Borrowing）检查安全 | 某些合法模式被错误拒绝（不完备），存在悬垂借用误放过 | 生命周期算法需持续验证 |
 
 ### 5.3 反命题 3: "子类型总是安全的"
 
@@ -475,7 +475,7 @@ Rust 类型系统 = λ→ + System F + HM + λ<: + 线性类型 + 约束类型
 | **L4 形式化概念** | **L1 基础文件** | **映射精度** | **标注** |
 |:---|:---|:---|:---|
 | L1: λ→ 简单类型 | [`../01_foundation/04_type_system.md`](../01_foundation/04_type_system.md) §4.5 T3 | **精确** | L1 的 T3 类型安全定理依赖 L4 的 λ→ 基础 |
-| T5: HM 推断完备性 | [`../01_foundation/04_type_system.md`](../01_foundation/04_type_system.md) §4.4 T2 | **精确** | L1 T2（类型推断完备性）是 T5 的工程实例 |
+| T5: HM 推断完备性 | [`../01_foundation/04_type_system.md`](LINK_PLACEHOLDER) §4.4 T2 | **精确** | L1 T2（类型推断（Type Inference）完备性）是 T5 的工程实例 |
 | T1: 进展+保持=类型安全 | [`../01_foundation/04_type_system.md`](../01_foundation/04_type_system.md) §4.5 T3 | **精确** | L1 T3 是 T1 在 Rust 中的受限形式 |
 | L3: 线性/所有权类型 | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) | **精确** | L1 所有权规则是 L3 线性类型的工程化 |
 
@@ -483,7 +483,7 @@ Rust 类型系统 = λ→ + System F + HM + λ<: + 线性类型 + 约束类型
 
 | **L4 形式化概念** | **L2 进阶文件** | **映射精度** | **标注** |
 |:---|:---|:---|:---|
-| L2: System F 参数多态 | [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) §4.1 | **精确** | L2 泛型形式化 = System F 的单态化实现 |
+| L2: System F 参数多态 | [`../02_intermediate/02_generics.md`](LINK_PLACEHOLDER) §4.1 | **精确** | L2 泛型形式化 = System F 的单态化（Monomorphization）实现 |
 | T3: 约束可满足性 | [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) §4.4 | **精确** | L2 约束多态是 T3 的工程语法 |
 | C2: 高阶类型/GATs | [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) §2.3 | **精确** | L2 GATs 是 C2 的 Rust 语法 |
 | T2: 子类型传递性 | [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) §4.3 | **近似** | L2 Supertrait 传递依赖 T2 子类型理论 |
@@ -496,7 +496,7 @@ Rust 类型系统 = λ→ + System F + HM + λ<: + 线性类型 + 约束类型
 | `fn<T>(x: T) -> T` | L2: System F `∀T. T → T` | L2 泛型 §4.1 → L4 L2 |
 | `T: Trait` | T3: 约束可满足性 | L2 约束 §4.4 → L4 T3 |
 | `'a: 'b` | T2: 子类型传递性 | L1 生命周期 → L4 T2 |
-| `&mut T` 不变 | T4: Variance | L1 借用 → L4 T4 |
+| `&mut T` 不变 | T4: Variance | L1 借用（Borrowing） → L4 T4 |
 | `Option<T>` / `Result<T, E>` | C1: 递归类型 + ADT | L1 ADT §4.1 → L4 C1 |
 | `impl Trait` | C3: 存在类型 | L2 Trait §4.4 → L4 C3 |
 
@@ -538,7 +538,7 @@ graph TD
     G --> G3[Subject Reduction]
 ```
 
-> **认知功能**: 本思维导图提供类型论六大知识模块的导航索引，将 λ 演算、多态性、ADT 代数语义、Variance、Rust 扩展和类型安全整合为一张定位地图。建议在学习或查阅时以此为「你在哪」的参照系。关键洞察：六轴并非独立——λ→ 是根基，System F 和 HM 是 Rust 泛型的双支柱，线性类型是所有权唯一性的理论来源。 [来源: 💡 原创分析]
+> **认知功能**: 本思维导图提供类型论六大知识模块（Module）的导航索引，将 λ 演算、多态性、ADT 代数语义、Variance、Rust 扩展和类型安全整合为一张定位地图。建议在学习或查阅时以此为「你在哪」的参照系。关键洞察：六轴并非独立——λ→ 是根基，System F 和 HM 是 Rust 泛型的双支柱，线性类型是所有权唯一性的理论来源。 [来源: 💡 原创分析]
 
 ---
 
@@ -825,7 +825,7 @@ impl<T> Option<T> { fn map<U>(self, f: impl FnOnce(T) -> U) -> Option<U> { ... }
 impl<T> Result<T, E> { fn map<U>(self, f: impl FnOnce(T) -> U) -> Result<U, E> { ... } }
 ```
 
-> **形式化视角**: HKT 需要 **System F_ω**（允许类型抽象的类型构造器）。Rust 的类型系统接近 System F_ω + 区域类型，但出于**单态化实现的复杂性**和**类型推断的实用性**，HKT 尚未加入语言。GATs 提供了约 80% 的 HKT 表达能力，剩余 20%（高阶类型抽象）需通过宏或显式实例化弥补。
+> **形式化视角**: HKT 需要 **System F_ω**（允许类型抽象的类型构造器）。Rust 的类型系统接近 System F_ω + 区域类型，但出于**单态化实现的复杂性**和**类型推断的实用性**，HKT 尚未加入语言。GATs 提供了约 80% 的 HKT 表达能力，剩余 20%（高阶类型抽象）需通过宏（Macro）或显式实例化弥补。
 > **来源**: [Wikipedia: Higher-kinded type](https://en.wikipedia.org/wiki/Higher_kinded_type) · [TAPL Ch.29] · [Rust Internals: HKT Discussion] · [RFC 1598: GATs](https://github.com/rust-lang/rfcs/pull/1598)
 
 ### 10.3 线性逻辑与所有权类型的 Curry-Howard 对应
@@ -836,7 +836,7 @@ impl<T> Result<T, E> { fn map<U>(self, f: impl FnOnce(T) -> U) -> Result<U, E> {
 |:---|:---|:---|:---|
 | **A ⊗ B** | `(A, B)` | A 且 B（同时成立，各自独立） | 元组：两个资源同时存在 |
 | **A ⊸ B** | `fn(A) -> B` | A 蕴含 B | 函数：消耗 A，产生 B |
-| **A ⊕ B** | `enum { A, B }` | A 或 B（二者择一） | 枚举：只有一个变体激活 |
+| **A ⊕ B** | `enum { A, B }` | A 或 B（二者择一） | 枚举（Enum）：只有一个变体激活 |
 | **!A** | `impl Copy` | A 可任意复制 | Copy：资源可 weakening/contraction |
 | **切消（Cut）** | `let y = f(x)` | 中间命题的消除 | 函数调用：求值后替换为结果 |
 | **证明网（Proof Net）** | 控制流图（CFG） | 无冗余的规范证明形式 | 编译器的中间表示（MIR） |
@@ -948,7 +948,7 @@ fn invariant<'a>(x: &'a mut String) -> &'a mut str {
 
 > **过渡: L4 → L3**
 > 类型论中的全称量词 `∀α.τ` 在 Rust 中就是 `fn foo<T>(x: T)`，存在量词 `∃α.τ` 就是 `impl Trait`。类型论不是抽象数学——它是编译器类型检查算法的理论基础。理解 HM 算法如何推导 `let x = 5` 的类型，就是理解 `rustc` 如何处理 90% 的日常代码。
-> 编译器实现见 [`../03_advanced/04_macros.md`](../03_advanced/04_macros.md)（宏扩展与类型检查交互）与 [`../06_ecosystem/01_toolchain.md`](../06_ecosystem/01_toolchain.md)（编译流程）。
+> 编译器实现见 [`../03_advanced/04_macros.md`](LINK_PLACEHOLDER)（宏（Macro）扩展与类型检查交互）与 [`../06_ecosystem/01_toolchain.md`](LINK_PLACEHOLDER)（编译流程）。
 
 > **过渡: L4 → L7**
 > Rust 的类型系统正在向更丰富的方向发展：Effects System 将副作用编码为类型约束、Generic Const Items 允许常量作为类型参数、Type Alias Impl Trait 简化存在类型的表达。这些演进不是偶然——它们都是类型论中已有概念的工程化落地。
@@ -1009,7 +1009,7 @@ fn unit_vs_never() {
 > **空类型** `!`（never）无值，对应逻辑中的假（`⊥`）。
 > `!` 是任何类型的子类型（`! <: T`），因为"假蕴含一切"（ex falso quodlibet）。
 > Rust 的 `!` 类型用于 `panic!()`、`loop {}`、`return` 等不返回的控制流。
-> 区分 `()` 和 `!` 是理解 Rust 错误处理（`Result<T, !>` 表示不会失败）和并发（`JoinHandle<!>` 表示线程永不结束）的关键。
+> 区分 `()` 和 `!` 是理解 Rust 错误处理（Error Handling）（`Result<T, !>` 表示不会失败）和并发（`JoinHandle<!>` 表示线程永不结束）的关键。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.2 边界测试：代数数据类型的穷尽匹配（编译错误）
@@ -1041,7 +1041,7 @@ fn fixed() {
 
 > **修正**: 代数数据类型（ADT）的 `match` 必须在编译期覆盖所有变体（exhaustiveness check）。
 > 这与类型论中的**和类型**（sum type，对应 `enum`）和**积类型**（product type，对应 `struct`）对应。
-> 和类型的值是"若干选择之一"，模式匹配是"对每个选择给出响应"。
+> 和类型的值是"若干选择之一"，模式匹配（Pattern Matching）是"对每个选择给出响应"。
 > 不覆盖所有变体在逻辑上是不完整的——相当于没有定义函数在某些输入上的行为。
 > Rust 编译器通过构造决策树（decision tree）验证穷尽性，这是类型安全的核心保证。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
@@ -1097,7 +1097,7 @@ fn main() {
 > Rust 的常量泛型（`const N: usize`）提供了**轻量级依赖类型**：数组长度 `[T; N]` 是类型的一部分，但 `N` 必须是编译期常量。
 > 运行时值（如 `args().len()`）不能用于类型构造。
 > 这与 Idris、Agda、Coq 的完全依赖类型（任意值可用于类型）或 C++ 的 `std::array<T, N>`（同样编译期常量）不同——Rust 在类型安全性和编译期复杂性间取平衡。
-> 未来可能的扩展：`const` 泛型表达式（`[T; N + 1]`）、依赖 trait bound，但完全依赖类型可能永远不会进入 Rust（与零成本抽象和编译速度冲突）。
+> 未来可能的扩展：`const` 泛型表达式（`[T; N + 1]`）、依赖 trait bound，但完全依赖类型可能永远不会进入 Rust（与零成本抽象（Zero-Cost Abstraction）和编译速度冲突）。
 > [来源: [Dependent Types](https://en.wikipedia.org/wiki/Dependent_type)] ·
 
 ### 10.3 边界测试：GADT 与 Rust 枚举的表达能力差距（编译错误）
@@ -1132,7 +1132,7 @@ fn main() {
 
 > **修正**:
 >
-> Rust 的枚举是**代数数据类型**（ADT），但不是**GADT**（Generalized Algebraic Data Type）。
+> Rust 的枚举（Enum）是**代数数据类型**（ADT），但不是**GADT**（Generalized Algebraic Data Type）。
 > GADT 允许类型参数在构造器中变化：`Expr<Int>` 和 `Expr<Bool>` 是不同的类型。
 > Rust 的替代方案：
 >
@@ -1143,7 +1143,7 @@ fn main() {
 > Rust 不原生支持 GADT 是因为：
 >
 > 1) 类型推断更复杂（GADT 的 unification 是半可判定的）；
-> 2) 模式匹配 exhaustiveness 检查需考虑类型约束；
+> 2) 模式匹配（Pattern Matching） exhaustiveness 检查需考虑类型约束；
 > 3) 与当前类型系统的交互（lifetime、trait bound）尚未完全设计。
 >
 > 这与 Haskell 的 GADT（`data Expr a where ...`）或 OCaml 的 GADT（`type _ expr = ...`）不同——Rust 的 phantom 类型是轻量替代，但语法噪音更大。
@@ -1176,7 +1176,7 @@ fn main() {}
 >
 > 1) **GAT**（泛型关联类型）：`trait Functor { type Map<T>; fn map<A, B>(...) -> Self::Map<B>; }`；
 > 2) **`typenum`** 和 **generic-array**：类型级编程；
-> 3) **宏**：生成特定实例化。
+> 3) **宏（Macro）**：生成特定实例化。
 >
 > HKT 的应用：
 >
@@ -1419,7 +1419,7 @@ v = 42 : v  -- 无限列表
 
 | 特性 | Haskell (HM) | Rust |
 |:---|:---|:---|
-| **范围** | 全局（整个模块/程序）| 局部（单个函数体）|
+| **范围** | 全局（整个模块（Module）/程序）| 局部（单个函数体）|
 | **多态** | let-绑定多态（全称量化）| 仅泛型参数多态 |
 | **约束求解** | 统一算法（unification）| 双向类型检查（bidirectional）|
 | **隐式参数** | 类型类推导（自动选择实例）| 无（必须显式传递 trait bound）|

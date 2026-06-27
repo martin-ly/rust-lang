@@ -49,8 +49,8 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Cranelift 后端预览的编译错误](#十边界测试cranelift-后端预览的编译错误)
-    - [10.1 边界测试：Cranelift 的调试构建与 LLVM 的语义差异（运行时差异）](#101-边界测试cranelift-的调试构建与-llvm-的语义差异运行时差异)
-    - [10.2 边界测试：Cranelift 不支持的平台特定内联汇编（编译错误）](#102-边界测试cranelift-不支持的平台特定内联汇编编译错误)
+    - [10.1 边界测试：Cranelift 的调试构建与 LLVM 的语义差异（运行时（Runtime）差异）](LINK_PLACEHOLDER)
+    - [10.2 边界测试：Cranelift 不支持的平台特定内联汇编（Inline Assembly）（编译错误）](LINK_PLACEHOLDER)
     - [10.3 边界测试：Cranelift 的尾调用优化缺失（运行时栈溢出）](#103-边界测试cranelift-的尾调用优化缺失运行时栈溢出)
     - [10.4 边界测试：Cranelift 的 SIMD 向量类型宽度限制（编译错误）](#104-边界测试cranelift-的-simd-向量类型宽度限制编译错误)
     - [10.6 边界测试：Cranelift 的 debug 信息生成与 GDB 兼容性（调试困难）](#106-边界测试cranelift-的-debug-信息生成与-gdb-兼容性调试困难)
@@ -129,7 +129,7 @@ graph LR
 > **认知功能**: 此图展示 Cranelift 与 LLVM 的**互补定位**——Cranelift 负责快速 Debug 编译，LLVM 负责优化 Release 编译。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 开发迭代使用 Cranelift（`cargo build`）；CI/发布使用 LLVM（`cargo build --release`）。
-> **关键洞察**: Cranelift 的设计哲学是**"足够快，而非足够优"**——牺牲 10-20% 的运行时性能换取 2-5x 的编译速度提升。
+> **关键洞察**: Cranelift 的设计哲学是**"足够快，而非足够优"**——牺牲 10-20% 的运行时（Runtime）性能换取 2-5x 的编译速度提升。
 > [来源: [Cranelift Design Principles](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/ir.md)]
 
 ---
@@ -240,7 +240,7 @@ graph TD
 | **CI/CD** | LLVM Release | 发布构建必须一致 |
 | **交叉编译** | LLVM | Cranelift 平台支持有限 |
 
-> **场景洞察**: Cranelift 的最佳应用是**开发者的本地工作流**——`cargo check`、`cargo build`、`cargo test`。CI 和生产环境继续使用 LLVM 以保证一致性和性能。
+> **场景洞察**: Cranelift 的最佳应用是**开发者的本地工作流**——`cargo check`、`cargo build`、`cargo test`。CI 和生产环境继续使用 LLVM 以保证一致性（Coherence）和性能。
 > [来源: [Rust Developer Survey](https://blog.rust-lang.org/)]
 
 ---
@@ -438,7 +438,7 @@ fn cpuid() {
 
 > **修正**:
 >
-> Cranelift 的内联汇编支持正在开发中，某些复杂约束（如特定寄存器分配、内存操作数、标志位读写）可能不被支持或生成次优代码。
+> Cranelift 的内联汇编（Inline Assembly）支持正在开发中，某些复杂约束（如特定寄存器分配、内存操作数、标志位读写）可能不被支持或生成次优代码。
 > `std::arch::asm!` 的标准化语法以 LLVM 为参考实现，Cranelift 需要独立实现汇编解析和寄存器分配。
 > 对于不支持的指令，Cranelift 回退到外部汇编器（`nasm`、`gas`）或报告编译错误。
 >
@@ -502,7 +502,7 @@ fn simd_operation() {
 >
 > Cranelift 的 SIMD 支持覆盖 SSE、SSE2、SSE4.1、AVX、AVX2，但 AVX-512（512 位向量）的支持仍在开发中。
 > AVX-512 有复杂的掩码寄存器（`k0-k7`）和指令子集（`F`、`VL`、`BW`、`DQ`、`CD` 等），代码生成复杂。
-> 在 Cranelift 不支持的平台上使用 AVX-512 内在函数会导致编译错误。Rust 的 `std::arch` 模块在编译期检查 `target_feature`，但 Cranelift 作为后端，其支持集可能与 LLVM 不同。
+> 在 Cranelift 不支持的平台上使用 AVX-512 内在函数会导致编译错误。Rust 的 `std::arch` 模块（Module）在编译期检查 `target_feature`，但 Cranelift 作为后端，其支持集可能与 LLVM 不同。
 >
 > 应对策略：
 >

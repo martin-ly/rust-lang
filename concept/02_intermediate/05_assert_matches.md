@@ -2,7 +2,7 @@
 >
 > [综述级]
 
-> **本节关键术语**: assert_matches! · 模式匹配断言 (Pattern Match Assertion) · debug_assert_matches! · 测试断言 (Test Assertion) — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: assert_matches! · 模式匹配（Pattern Matching）断言 (Pattern Match Assertion) · debug_assert_matches! · 测试断言 (Test Assertion) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # `assert_matches!`：模式匹配断言的形式化语义
 >
@@ -11,8 +11,8 @@
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A** — Application
-> **双维定位**: F×App — 断言和模式匹配语法应用
-> **定位**: 将 Rust 的**模式匹配（Pattern Matching）**能力从"表达式求值"扩展到"测试断言"的工程机制，实现编译期模式检查与运行时断言的统一。
+> **双维定位**: F×App — 断言和模式匹配（Pattern Matching）语法应用
+> **定位**: 将 Rust 的**模式匹配（Pattern Matching）**能力从"表达式求值"扩展到"测试断言"的工程机制，实现编译期模式检查与运行时（Runtime）断言的统一。
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Error Handling](./04_error_handling.md)
 > **后置概念**: [Macros](../03_advanced/04_macros.md) · [Version Tracking](../07_future/05_rust_version_tracking.md)
 
@@ -39,7 +39,7 @@
     - [2.2 绑定捕获与作用域](#22-绑定捕获与作用域)
   - [三、使用场景与最佳实践](#三使用场景与最佳实践)
     - [3.1 测试中的 Result/Option 断言](#31-测试中的-resultoption-断言)
-    - [3.2 复杂枚举变体验证](#32-复杂枚举变体验证)
+    - [3.2 复杂枚举（Enum）变体验证](LINK_PLACEHOLDER)
     - [3.3 与 `if let` 的互补关系](#33-与-if-let-的互补关系)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -54,7 +54,7 @@
     - [10.2 边界测试：嵌套模式匹配中的绑定冲突（编译错误）](#102-边界测试嵌套模式匹配中的绑定冲突编译错误)
     - [10.3 边界测试：`assert_matches!` 与嵌套模式的绑定（编译错误）](#103-边界测试assert_matches-与嵌套模式的绑定编译错误)
     - [10.4 边界测试：自定义断言失败消息的类型约束（编译错误）](#104-边界测试自定义断言失败消息的类型约束编译错误)
-    - [10.4 边界测试：所有权移动后的再次使用](#104-边界测试所有权移动后的再次使用)
+    - [10.4 边界测试：所有权（Ownership）移动后的再次使用](LINK_PLACEHOLDER)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`assert_matches!(value, pattern)` 的主要用途是什么？与 `assert!(matches!(value, pattern))` 相比有什么优势？（理解层）](#测验-1assert_matchesvalue-pattern-的主要用途是什么与-assertmatchesvalue-pattern-相比有什么优势理解层)
     - [测验 2：`assert_matches!` 是否可以在模式中绑定变量？绑定后的变量在测试体中可用吗？（理解层）](#测验-2assert_matches-是否可以在模式中绑定变量绑定后的变量在测试体中可用吗理解层)
@@ -104,7 +104,7 @@ assert!(matches!(x, Some(n) if n > 10)); // ✅ 通过
 assert!(matches!(x, Some(n) if n > 100)); // ❌ 失败
 ```
 
-> **关键洞察**: `matches!` 不改变模式匹配的语义，仅改变**返回类型**——从 `()`（控制流）到 `bool`（表达式值）。这是 Rust 宏系统的典型应用：语法糖不改变语义，仅改变语法形式。
+> **关键洞察**: `matches!` 不改变模式匹配的语义，仅改变**返回类型**——从 `()`（控制流）到 `bool`（表达式值）。这是 Rust 宏（Macro）系统的典型应用：语法糖不改变语义，仅改变语法形式。
 > [来源: 💡 原创分析]
 
 ---
@@ -136,7 +136,7 @@ assert_matches!(nested, Ok(Some(n)) if n > 0);
 > 4. 若匹配失败：触发 panic，显示不匹配信息
 > 5. 支持 guard 条件：`assert_matches!(e, p if guard)`
 >
-> **注意**: 绑定不可导出到宏外部。如需提取值并后续使用，请使用 `if let`。
+> **注意**: 绑定不可导出到宏（Macro）外部。如需提取值并后续使用，请使用 `if let`。
 > [来源: [std::assert_matches](https://doc.rust-lang.org/std/macro.assert_matches.html)]
 
 **与 `assert!(matches!(...))` 的对比**:
@@ -180,7 +180,7 @@ debug_assert_matches!(config, Some(true));
 >
 > [来源: [Rust 1.96 Release Notes — Assert matching patterns](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)]
 
-| 宏 | debug 模式 | release 模式 | 用例 |
+| 宏（Macro） | debug 模式 | release 模式 | 用例 |
 |:---|:---:|:---:|:---|
 | `assert_matches!` | ✅ 执行 | ✅ 执行 | 不变量检查、测试 |
 | `debug_assert_matches!` | ✅ 执行 | ❌ 消除 | 性能敏感路径的调试断言 |
@@ -214,7 +214,7 @@ graph LR
 
 > **认知功能**: 此图展示 Rust 断言宏的**家族关系**和**语义演进**。`assert_matches!` 填补了"模式匹配断言"的空白，使断言系统从"值相等"扩展到"结构匹配"。
 > [来源: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html)]
-> **使用建议**: 在测试枚举类型时，优先选择 `assert_matches!` 而非 `assert_eq!`——前者验证结构形状，后者仅验证相等性。
+> **使用建议**: 在测试枚举（Enum）类型时，优先选择 `assert_matches!` 而非 `assert_eq!`——前者验证结构形状，后者仅验证相等性。
 > **关键洞察**: 断言系统的演进轨迹是**从具体值到抽象模式**：`assert!`（任意布尔）→ `assert_eq!`（部分相等）→ `assert_matches!`（结构模式）。
 
 **形式化对比表**:
@@ -529,7 +529,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: 在 Rust 模式匹配的 `|`（或模式）中，所有分支必须绑定**相同的变量名和类型**。若一个分支绑定 `x: i32`，另一个分支绑定 `x: Option<i32>`，编译器报错。这是 Rust 模式匹配"穷尽性检查"的一部分——确保每个绑定在所有分支中具有一致性。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: 在 Rust 模式匹配的 `|`（或模式）中，所有分支必须绑定**相同的变量名和类型**。若一个分支绑定 `x: i32`，另一个分支绑定 `x: Option<i32>`，编译器报错。这是 Rust 模式匹配（Pattern Matching）"穷尽性检查"的一部分——确保每个绑定在所有分支中具有一致性（Coherence）。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.3 边界测试：`assert_matches!` 与嵌套模式的绑定（编译错误）
 
@@ -589,7 +589,7 @@ fn main() {
 }
 ```
 
-> **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权（Ownership）；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用 `&s`。
+> **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权（Ownership）；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用（Reference） `&s`。
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -670,16 +670,16 @@ fn main() {
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | `assert_matches!`：模式匹配断言的形式化语义 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| `assert_matches!`：模式匹配断言的形式化语义 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| `assert_matches!`：模式匹配断言的形式化语义 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | `assert_matches!`：模式匹配断言的形式化语义 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 测试断言安全 ⟸ assert_matches! 穷尽 ⟸ 模式匹配
 > 编译期检查 ⟸ 常量断言 ⟸ const 求值
-> **过渡**: 掌握 `assert_matches!`：模式匹配断言的形式化语义 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 `assert_matches!`：模式匹配断言的形式化语义 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 `assert_matches!`：模式匹配断言的形式化语义 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: `assert_matches!`：模式匹配断言的形式化语义 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: `assert_matches!`：模式匹配断言的形式化语义 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

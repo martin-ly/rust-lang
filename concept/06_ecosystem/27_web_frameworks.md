@@ -9,7 +9,7 @@
 > **EN**: Web Frameworks
 > **Summary**: Web Frameworks: Rust ecosystem tools, crates, and engineering practices.
 >
-> **📎 交叉引用**
+> **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[Web 框架](../../knowledge/06_ecosystem/deep_dives/01_axum_deep_dive.md)
 >
@@ -17,7 +17,7 @@
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用 Web 框架模式
-> **定位**: 对比分析 Rust 主流 Web 框架——Axum、Actix-web、Rocket、Poem——从架构设计、运行时集成、中间件机制到性能特征，建立系统化的选型决策框架。
+> **定位**: 对比分析 Rust 主流 Web 框架——Axum、Actix-web、Rocket、Poem——从架构设计、运行时（Runtime）集成、中间件机制到性能特征，建立系统化的选型决策框架。
 > **前置概念**: [Async](../03_advanced/02_async.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Traits](../02_intermediate/01_traits.md)
 > **后置概念**: [云原生生态](./24_cloud_native.md) · [设计模式](02_patterns.md)
 
@@ -50,8 +50,8 @@
     - [2.1 Axum：Tokio 生态的原生扩展](#21-axumtokio-生态的原生扩展)
     - [2.2 Actix-web：Actor 模型的工业级实现](#22-actix-webactor-模型的工业级实现)
     - [2.3 Rocket：声明式编程与类型安全](#23-rocket声明式编程与类型安全)
-    - [2.4 Poem：模块化与 OpenAPI 优先](#24-poem模块化与-openapi-优先)
-  - [三、异步运行时集成对比](#三异步运行时集成对比)
+    - [2.4 Poem：模块（Module）化与 OpenAPI 优先](LINK_PLACEHOLDER)
+  - [三、异步（Async）运行时（Runtime）集成对比](LINK_PLACEHOLDER)
     - [3.1 运行时绑定策略](#31-运行时绑定策略)
     - [3.2 运行时兼容性矩阵](#32-运行时兼容性矩阵)
   - [四、中间件机制深度对比](#四中间件机制深度对比)
@@ -72,7 +72,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Web 框架的编译错误](#十边界测试web-框架的编译错误)
     - [10.1 边界测试：axum 处理函数的签名约束（编译错误）](#101-边界测试axum-处理函数的签名约束编译错误)
-    - [10.2 边界测试：共享状态的生命周期与 `Clone` 约束（编译错误）](#102-边界测试共享状态的生命周期与-clone-约束编译错误)
+    - [10.2 边界测试：共享状态的生命周期（Lifetimes）与 `Clone` 约束（编译错误）](LINK_PLACEHOLDER)
     - [10.6 边界测试：HTTP 请求的 body 大小限制与内存 DoS（运行时 OOM）](#106-边界测试http-请求的-body-大小限制与内存-dos运行时-oom)
     - [10.5 边界测试：Axum 的 extractor 顺序与请求体消耗（运行时 panic）](#105-边界测试axum-的-extractor-顺序与请求体消耗运行时-panic)
     - [10.4 边界测试：Axum 的 extractor 顺序与请求体消耗（运行时 panic）](#104-边界测试axum-的-extractor-顺序与请求体消耗运行时-panic)
@@ -117,7 +117,7 @@ Web 框架职能分层:
 > [来源: [Axum Docs]]
 ```
 
-> **认知功能**: Rust Web 框架的竞争力来自 L1+L2 的零成本抽象——无 GC、无运行时解释器，编译后即为高效原生代码。[来源: 💡 原创分析]
+> **认知功能**: Rust Web 框架的竞争力来自 L1+L2 的零成本抽象（Zero-Cost Abstraction）——无 GC、无运行时解释器，编译后即为高效原生代码。[来源: 💡 原创分析]
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.2 Rust Web 框架演进史
@@ -381,7 +381,7 @@ fn rocket() -> _ {
 }
 ```
 
-> **Rocket 洞察**: **Rocket 的声明式宏系统提供了 Rust Web 框架中最优雅的 API**——但 Fairings 中间件模型与主流 Tower/Service 生态不兼容，是特立独行的选择。[来源: Rocket docs]
+> **Rocket 洞察**: **Rocket 的声明式宏（Macro）系统提供了 Rust Web 框架中最优雅的 API**——但 Fairings 中间件模型与主流 Tower/Service 生态不兼容，是特立独行的选择。[来源: Rocket docs]
 
 ### 2.4 Poem：模块化与 OpenAPI 优先
 
@@ -462,7 +462,7 @@ Server::new(TcpListener::bind("0.0.0.0:3000"))
 
 | **维度** | **Axum** | **Actix-web** | **Rocket** | **Poem** |
 |:---|:---|:---|:---|:---|
-| 运行时 | Tokio 独占 | Tokio（封装） | Tokio 独占 | Tokio 独占 |
+| 运行时（Runtime） | Tokio 独占 | Tokio（封装） | Tokio 独占 | Tokio 独占 |
 | 自定义运行时 | ❌ 不支持 | ⚠️ 困难 | ❌ 不支持 | ❌ 不支持 |
 | Tokio 兼容 | ❌ | ❌ | ❌ | ❌ |
 | glommio (io_uring) | ❌ | ❌ | ❌ | ❌ |
@@ -592,7 +592,7 @@ TechEmpower Round 22+ 解读（JSON 序列化 / 单次查询 / 多次查询）:
 | 冷启动时间 | < 50ms | < 50ms | < 80ms | < 60ms |
 | 内存占用（空闲） | ~2-3MB | ~3-4MB | ~4-5MB | ~3-4MB |
 | 内存占用（负载） | 线性增长，无 GC 抖动 | 线性增长，无 GC 抖动 | 线性增长，无 GC 抖动 | 线性增长，无 GC 抖动 |
-| 编译时间（debug） | 中等 | 中等 | 较慢（宏展开复杂） | 中等 |
+| 编译时间（debug） | 中等 | 中等 | 较慢（宏（Macro）展开复杂） | 中等 |
 | 编译时间（release） | 较慢 | 较慢 | 慢 | 较慢 |
 
 > **来源**: [Rust 编译优化实践] · [Cargo binary size optimization docs] · [框架官方 benchmark 脚本]
@@ -762,8 +762,8 @@ graph TD
 | [Axum 官方文档](https://docs.rs/axum/latest/axum/) | ✅ 一级 | Tokio 官方 Web 框架 |
 | [Actix-web 官方文档](https://actix.rs/) | ✅ 一级 | 最成熟的 Rust Web 框架 |
 | [Rocket 官方文档](https://rocket.rs/) | ✅ 一级 | 声明式 Web 框架 |
-| [Poem 官方文档](https://docs.rs/poem/latest/poem/) | ✅ 一级 | 模块化 Web 框架 |
-| [Tokio 官方文档](https://tokio.rs/) | ✅ 一级 | 异步运行时 |
+| [Poem 官方文档](https://docs.rs/poem/latest/poem/) | ✅ 一级 | 模块（Module）化 Web 框架 |
+| [Tokio 官方文档](https://tokio.rs/) | ✅ 一级 | 异步（Async）运行时 |
 | [Tower 文档](https://docs.rs/tower/latest/tower/) | ✅ 一级 | 中间件抽象 |
 | [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/) | ✅ 二级 | 性能基准测试 |
 | [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html) | ✅ 一级 | async/await 设计 |
@@ -778,7 +778,7 @@ graph TD
 
 - [Async/Await](../03_advanced/02_async.md) — 异步编程基础
 - [Concurrency](../03_advanced/01_concurrency.md) — 并发模型
-- [Traits](../02_intermediate/01_traits.md) — Trait 系统与泛型约束
+- [Traits](../02_intermediate/01_traits.md) — Trait 系统与泛型（Generics）约束
 - [云原生生态](./24_cloud_native.md) — 容器化与微服务部署
 - [设计模式](02_patterns.md) — Rust 设计模式
 
@@ -857,7 +857,7 @@ fn app(state: Arc<AppState>) -> Router {
 }
 ```
 
-> **修正**: Web 服务器需要在多个请求处理任务间共享状态（数据库连接、配置、缓存）。`Arc<T>` 提供共享所有权，但只给予 `&T` 访问。若需可变修改，必须使用：1) `Arc<Mutex<T>>`（互斥锁）；2) `Arc<RwLock<T>>`（读写锁）；3) 通道（channel）将修改请求发送到单线程执行器。直接修改 `Arc<T>` 内部数据会被编译器阻止——这是 Rust"共享不可变，可变不共享"原则的体现。与 Go 的 `map`（非并发安全，需 `sync.RWMutex` 包裹）或 Node.js 的单线程事件循环（无并发修改问题）不同，Rust 在类型层面要求显式同步原语。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-03-shared-state.html)] · [来源: [axum Documentation](https://docs.rs/axum/)]
+> **修正**: Web 服务器需要在多个请求处理任务间共享状态（数据库连接、配置、缓存）。`Arc<T>` 提供共享所有权（Ownership），但只给予 `&T` 访问。若需可变修改，必须使用：1) `Arc<Mutex<T>>`（互斥锁）；2) `Arc<RwLock<T>>`（读写锁）；3) 通道（channel）将修改请求发送到单线程执行器。直接修改 `Arc<T>` 内部数据会被编译器阻止——这是 Rust"共享不可变，可变不共享"原则的体现。与 Go 的 `map`（非并发安全（Concurrency Safety），需 `sync.RWMutex` 包裹）或 Node.js 的单线程事件循环（无并发修改问题）不同，Rust 在类型层面要求显式同步原语。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-03-shared-state.html)] · [来源: [axum Documentation](https://docs.rs/axum/)]
 
 ### 10.6 边界测试：HTTP 请求的 body 大小限制与内存 DoS（运行时 OOM）
 
@@ -875,7 +875,7 @@ fn app() -> Router {
 }
 ```
 
-> **修正**: Web 框架的默认配置通常**无请求体大小限制**，恶意客户端可发送 GB 级数据导致 OOM。安全模式：1) `axum` 的 `DefaultBodyLimit`（默认 2MB，可配置）；2) 流式处理（`axum::extract::BodyStream` 分块读取）；3) 反向代理（Nginx、Traefik）前置大小限制。Rust 的内存安全不防止 OOM——`Vec::push` 在内存不足时 panic（或 abort）。这与 Node.js 的 `body-parser`（默认 100KB 限制）、Go 的 `http.MaxBytesReader`、Python 的 Flask（`MAX_CONTENT_LENGTH`）类似——生产环境的 Web 服务必须配置请求限制。[来源: [axum Documentation](https://docs.rs/axum/)] · [来源: [OWASP DoS](https://owasp.org/www-community/attacks/Denial_of_Service)]
+> **修正**: Web 框架的默认配置通常**无请求体大小限制**，恶意客户端可发送 GB 级数据导致 OOM。安全模式：1) `axum` 的 `DefaultBodyLimit`（默认 2MB，可配置）；2) 流式处理（`axum::extract::BodyStream` 分块读取）；3) 反向代理（Nginx、Traefik）前置大小限制。Rust 的内存安全（Memory Safety）不防止 OOM——`Vec::push` 在内存不足时 panic（或 abort）。这与 Node.js 的 `body-parser`（默认 100KB 限制）、Go 的 `http.MaxBytesReader`、Python 的 Flask（`MAX_CONTENT_LENGTH`）类似——生产环境的 Web 服务必须配置请求限制。[来源: [axum Documentation](https://docs.rs/axum/)] · [来源: [OWASP DoS](https://owasp.org/www-community/attacks/Denial_of_Service)]
 
 ### 10.5 边界测试：Axum 的 extractor 顺序与请求体消耗（运行时 panic）
 
@@ -938,7 +938,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-基于 `tokio` 和 `tower` 服务抽象，强调类型安全的路由（通过提取器 Extractor）、中间件组合和错误处理。无全局状态，依赖注入通过处理器参数实现。
+基于 `tokio` 和 `tower` 服务抽象，强调类型安全的路由（通过提取器 Extractor）、中间件组合和错误处理（Error Handling）。无全局状态，依赖注入通过处理器参数实现。
 </details>
 
 ---

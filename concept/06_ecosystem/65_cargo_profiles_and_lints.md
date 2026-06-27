@@ -90,7 +90,7 @@ incremental = false
 codegen-units = 16
 ```
 
-> **关键洞察**: `dev` 追求编译速度，`release` 追求运行时性能；两者是日常开发中最常用的 profile。
+> **关键洞察**: `dev` 追求编译速度，`release` 追求运行时（Runtime）性能；两者是日常开发中最常用的 profile。
 
 ---
 

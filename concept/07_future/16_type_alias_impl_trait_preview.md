@@ -14,7 +14,7 @@
 > **内容分级**: [实验级]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **S** — Structure
-> **双维定位**: C×Ana — 分析 TAIT 的类型系统影响
+> **双维定位**: C×Ana — 分析 TAIT 的类型系统（Type System）影响
 > **前置依赖**: [Generics](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md)
 > **后置延伸**: [RPITIT](./15_rpitit_preview.md)
 > **来源**: [Rust Reference — Type Aliases](https://doc.rust-lang.org/reference/items/type-aliases.html) · [RFC 2515](https://rust-lang.github.io/rfcs//2515-type_alias_impl_trait.html)
@@ -40,22 +40,22 @@ fn main() {}
 > **TAIT**（Type Alias Impl Trait，稳定于 1.75）允许：
 >
 > 1) `type MyIter = impl Iterator<Item = i32>;` — 类型别名隐藏具体类型；
-> 2) 模块边界抽象（库内部使用具体类型，外部只看到 trait bound）；
+> 2) 模块（Module）边界抽象（库内部使用具体类型，外部只看到 trait bound）；
 > 3) 与 GAT 结合实现复杂类型关系。
 >
 > 限制：
 >
-> 1) TAIT 只能出现在**模块级**（不能在函数内部）；
+> 1) TAIT 只能出现在**模块（Module）级**（不能在函数内部）；
 > 2) concrete type 必须能从所有使用点**唯一确定**；
 > 3) 不支持递归（infinite type）。
 >
 > 应用场景：
 >
 > 1) 库 API 隐藏实现细节；
-> 2) 复杂泛型代码的类型简化；
+> 2) 复杂泛型（Generics）代码的类型简化；
 > 3) 与 `impl Trait` 返回类型配合。
 >
-> 这与 Haskell 的 `type` synonym（完全透明，不隐藏实现）或 OCaml 的 `module type`（模块签名抽象，类似但不同粒度）不同——Rust 的 TAIT 是类型系统的精确抽象机制。
+> 这与 Haskell 的 `type` synonym（完全透明，不隐藏实现）或 OCaml 的 `module type`（模块签名抽象，类似但不同粒度）不同——Rust 的 TAIT 是类型系统（Type System）的精确抽象机制。
 > [来源: [TAIT Tracking Issue](https://github.com/rust-lang/rust/issues/63063)] ·
 > [来源: [Type Alias Impl Trait](https://rust-lang.github.io/rfcs//2515-type_alias_impl_trait.html)]
 >
@@ -95,6 +95,7 @@ fn main() {}
 允许在类型别名中使用 `impl Trait`，如 `type MyIter = impl Iterator<Item = i32>`。隐藏具体类型同时提供命名抽象。
 </details>
 
+> **前置概念**: N/A
 ---
 
 ### 测验 2：TAIT 与 `impl Trait` 在函数返回位置有什么区别？（理解层）
@@ -116,7 +117,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-允许命名递归类型（如 `type TreeNode = impl Node`），简化自引用结构体和复杂状态机的类型签名。
+允许命名递归类型（如 `type TreeNode = impl Node`），简化自引用（Reference）结构体（Struct）和复杂状态机的类型签名。
 </details>
 
 ---

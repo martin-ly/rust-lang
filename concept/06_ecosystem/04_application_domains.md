@@ -89,7 +89,7 @@
 
 [来源: [Wikipedia](https://en.wikipedia.org/)]
 
-内存安全/性能/实时性/并发/安全性不同侧重
+内存安全（Memory Safety）/性能/实时性/并发/安全性不同侧重
 
 ### 第 3 步：Rust在每个领域的独特优势？
 
@@ -122,8 +122,8 @@ embedded-hal/actix/anchor/bevy等框架
 
 | **应用领域** | **核心 Crate 栈** | **关键 L1-L5 概念** | **unsafe 程度** | **成熟度** | **工业代表** |
 |:---|:---|:---|:---|:---|:---|
-| **Web 后端/API** | axum + tokio + sqlx + tracing | async/await + Send/Sync + 生命周期 | 低 | ⭐⭐⭐⭐⭐ | Discord, Cloudflare, AWS Firecracker |
-| **CLI 工具** | clap + serde + anyhow + indicatif | 所有权 + Result + Trait | 无 | ⭐⭐⭐⭐⭐ | ripgrep, fd, bat, eza |
+| **Web 后端/API** | axum + tokio + sqlx + tracing | async/await + Send/Sync + 生命周期（Lifetimes） | 低 | ⭐⭐⭐⭐⭐ | Discord, Cloudflare, AWS Firecracker |
+| **CLI 工具** | clap + serde + anyhow + indicatif | 所有权（Ownership） + Result + Trait | 无 | ⭐⭐⭐⭐⭐ | ripgrep, fd, bat, eza |
 | **嵌入式/IoT** | embassy + embedded-hal + defmt | no_std + 裸指针 + 中断安全 | 中 | ⭐⭐⭐⭐ | Ferrous Systems, Microsoft |
 | **游戏/图形** | bevy + wgpu + rapier | ECS + 并发 + unsafe(图形驱动) | 高 | ⭐⭐⭐⭐ | Embark Studios, Foresight |
 | **区块链/Web3** | solana-program + alloy + libp2p | 无溢出 + 确定执行 + unsafe(密码学) | 高 | ⭐⭐⭐⭐ | Solana, Polkadot, Near |
@@ -136,11 +136,11 @@ embedded-hal/actix/anchor/bevy等框架
 
 | **你的目标** | **首选领域栈** | **学习曲线** | **Rust 优势** | **Rust 劣势** |
 |:---|:---|:---|:---|:---|
-| 高并发 HTTP API | axum + tokio + sqlx | 高 |  fearless 并发、零成本抽象 | 编译慢、生态比 Go/Java 小 |
+| 高并发 HTTP API | axum + tokio + sqlx | 高 |  fearless 并发、零成本抽象（Zero-Cost Abstraction） | 编译慢、生态比 Go/Java 小 |
 | 替换 shell/Python 脚本 | clap + serde + anyhow | 低 |  性能 + 类型安全 + 单二进制 | 开发速度不及 Python |
-| 物联网固件 | embassy + probe-rs | 高 |  no_std + 内存安全 + 确定性 | 硬件抽象层不完整 |
+| 物联网固件 | embassy + probe-rs | 高 |  no_std + 内存安全（Memory Safety） + 确定性 | 硬件抽象层不完整 |
 | 独立游戏 | bevy + wgpu | 高 |  ECS + 并发 + WASM 部署 | 编辑器生态不及 Unity |
-| 智能合约/节点 | solana-program / substrate | 极高 |  无 GC 确定执行、内存安全 | 学习曲线陡峭 |
+| 智能合约/节点 | solana-program / substrate | 极高 |  无 GC 确定执行、内存安全（Memory Safety） | 学习曲线陡峭 |
 | 数据管道/ETL | polars + arrow + tokio | 中 |  性能接近 C++、类型安全 | Pandas 生态更大 |
 | OS/驱动/内核 | Rust for Linux + bindgen | 极高 |  内存安全 + 零成本 + C 互操作 | unsafe 比例高 |
 | 跨平台桌面应用 | tauri + React/Vue | 中 |  内存安全 + 小体积 + 前端生态 | 不如 Electron 成熟 |
@@ -195,15 +195,15 @@ graph TD
 | **维度** | **Rust 方案** | **对比语言** | **Rust 优势** |
 |:---|:---|:---|:---|
 | 并发模型 | async/await + work-stealing | Go goroutine / Java 线程池 | 编译期无数据竞争 |
-| 内存安全 | 所有权系统 | Go GC / Java GC | 无 GC 停顿、确定性内存 |
-| 性能 | 接近 C++ | Go 慢 2-5x | 零成本抽象 |
-| 错误处理 | Result + ? 显式传播 | Go error / Java exception | 错误不可忽略 |
-| 部署 | 单静态二进制 | Go 类似 / Java JAR | 无运行时依赖 |
+| 内存安全 | 所有权（Ownership）系统 | Go GC / Java GC | 无 GC 停顿、确定性内存 |
+| 性能 | 接近 C++ | Go 慢 2-5x | 零成本抽象（Zero-Cost Abstraction） |
+| 错误处理（Error Handling） | Result + ? 显式传播 | Go error / Java exception | 错误不可忽略 |
+| 部署 | 单静态二进制 | Go 类似 / Java JAR | 无运行时（Runtime）依赖 |
 
 **工业案例**:
 
 - **Discord**: 从 Go 迁移到 Rust，处理 500 万并发语音连接，内存减少 80%
-- **Cloudflare**: 边缘计算 Worker 运行时基于 Rust，替代部分 C++ 组件
+- **Cloudflare**: 边缘计算 Worker 运行时（Runtime）基于 Rust，替代部分 C++ 组件
 - **AWS Firecracker**: 微虚拟机管理器，Rust 实现，支撑 Lambda/Fargate
 - **Vercel**: 部分基础设施组件使用 Rust
 
@@ -218,7 +218,7 @@ graph TD
 | **reqwest** | **0.13.3** (2026-05) | TLS 后端迁移至 `aws-lc-rs`，为 FIPS 140-3 合规奠定基础 | [reqwest releases](https://github.com/seanmonstar/reqwest/releases) |
 | **arrow-rs** | **58.3.0 + 补丁** (2026-05-07) | 多处整数溢出修复（`BufferBuilder`、`ArrayData::slice`、`FixedSizeBinaryArray`） | [arrow-rs releases](https://github.com/apache/arrow-rs/releases) |
 
-> **关键洞察**: sqlx 0.9.0 的 MSRV 提升至 1.94.0 反映了 Rust 生态的**快速演进压力**——核心基础设施 crate 的 MSRV 提升会迫使下游项目跟进，否则被锁定在旧版本。这与 Go 的向后兼容性承诺（Go 1 兼容性保证）形成对比：Rust 的快速语言演进带来了表达力优势，但也增加了生态维护负担。tokio 的 LIFO slot stealing 回退则展示了**生产环境性能回归的敏感性**——即使在最流行的异步运行时中，看似微小的调度策略变更也可能引发大规模性能问题。[来源: 💡 原创分析]
+> **关键洞察**: sqlx 0.9.0 的 MSRV 提升至 1.94.0 反映了 Rust 生态的**快速演进压力**——核心基础设施 crate 的 MSRV 提升会迫使下游项目跟进，否则被锁定在旧版本。这与 Go 的向后兼容性承诺（Go 1 兼容性保证）形成对比：Rust 的快速语言演进带来了表达力优势，但也增加了生态维护负担。tokio 的 LIFO slot stealing 回退则展示了**生产环境性能回归的敏感性**——即使在最流行的异步（Async）运行时中，看似微小的调度策略变更也可能引发大规模性能问题。[来源: 💡 原创分析]
 
 **浏览器引擎里程碑 — Servo v0.1.0 on crates.io（2026-04-13）**:
 
@@ -242,7 +242,7 @@ Rust 在 CLI 领域是最成熟的应用之一。核心优势：
 
 - **单二进制部署**: `cargo build --release` 生成无依赖可执行文件
 - **性能**: 比 Python/Node 快 10-100x，比 Go 快 1.5-3x [来源: [Rust Foundation](https://foundation.rust-lang.org/)]
-- **错误信息**: 利用类型系统生成精确的 CLI 错误提示
+- **错误信息**: 利用类型系统（Type System）生成精确的 CLI 错误提示
 
 **标杆项目**:
 
@@ -269,11 +269,11 @@ Rust 在嵌入式领域的独特价值：
 - **no_std**: 无标准库运行时，适合裸机/RTOS
 - **内存安全**: 消除 C 中常见的缓冲区溢出、use-after-free
 - **确定性**: 无 GC、无隐式分配，满足硬实时需求
-- **现代抽象**: 泛型、Trait、模式匹配在裸机上的零成本使用
+- **现代抽象**: 泛型（Generics）、Trait、模式匹配（Pattern Matching）在裸机上的零成本使用
 
 | **平台** | **抽象层** | **特点** |
 |:---|:---|:---|
-| **ARM Cortex-M** | `cortex-m-rt` + `embassy` | 中断驱动异步、DMA 安全抽象 |
+| **ARM Cortex-M** | `cortex-m-rt` + `embassy` | 中断驱动异步（Async）、DMA 安全抽象 |
 | **RISC-V** | `riscv-rt` + `hifive` | 开源 ISA、Rust 原生友好 |
 | **ESP32** | `esp-hal` + `esp-wifi` | WiFi/BLE 全 Rust 栈 |
 | **nRF52** | `nrf-hal` + `embassy-nrf` | BLE 协议栈、低功耗 |
@@ -285,7 +285,7 @@ Rust 在嵌入式领域的独特价值：
 
 | **维度** | **详情** |
 |:---|:---|
-| 稳定化范围 | `esp_hal::init`、GPIO、UART、SPI、I2C（Blocking + Async）、time 模块、`#[main]` 宏 |
+| 稳定化范围 | `esp_hal::init`、GPIO、UART、SPI、I2C（Blocking + Async）、time 模块（Module）、`#[main]` 宏（Macro） |
 | 不稳定特性 | WiFi/BLE（`esp-radio`/`esp-wifi`）、其他外设驱动需启用 `unstable` feature |
 | 支持芯片 | ESP32、ESP32-C2/C3/C5/C6/C61、ESP32-H2、ESP32-S2/S3（Xtensa + RISC-V） |
 | 工具链 | `esp-generate` 项目生成器、`espflash` 烧录工具 |
@@ -309,8 +309,8 @@ Rust 在嵌入式领域的独特价值：
 | **wgpu** | 跨平台 GPU API | WebGPU 标准、D3D12/Metal/Vulkan 后端 | ⭐⭐⭐⭐⭐ |
 | **nannou** | 创意编程 | 音频/视觉交互、艺术装置 | ⭐⭐⭐ |
 
-**ECS 架构与 Rust 所有权的同构性**：
-Bevy 的 ECS 将游戏世界表示为**扁平化的类型化数组**（SoA），系统（System）以函数形式并行查询组件。这与 Rust 的 **Send/Sync + 借用检查**天然契合——系统间的数据依赖在编译期即可验证无数据竞争。
+**ECS 架构与 Rust 所有权（Ownership）的同构性**：
+Bevy 的 ECS 将游戏世界表示为**扁平化的类型化数组**（SoA），系统（System）以函数形式并行查询组件。这与 Rust 的 **Send/Sync + 借用（Borrowing）检查**天然契合——系统间的数据依赖在编译期即可验证无数据竞争。
 
 > **来源**: [Bevy Book] · [wgpu 文档] · 可信度: ✅
 
@@ -390,11 +390,11 @@ Rust 在区块链领域占据**主导地位**的原因：
 |:---|:---|:---|
 | `#![register_tool]` | RFC#3808 FCP 中 | 允许内核注册自定义编译器插件（如静态分析工具） |
 | `-Zdebuginfo-compression` | 稳定化提案中 | 减小内核调试信息体积，嵌入式场景关键 |
-| `-Zdirect-access-external-data` | **已合并** (rust#150494) | 优化外部数据访问，提升内核模块性能 |
+| `-Zdirect-access-external-data` | **已合并** (rust#150494) | 优化外部数据访问，提升内核模块（Module）性能 |
 | `--emit=noreturn` | 高优先级需求 | 帮助 objtool 识别无返回函数，替代手动检查 |
 | `-Zsanitizer=kernel-hwaddress` | **已合并** (rust#153049) | aarch64 内核硬件地址消毒器，内存安全加固 |
 | `-Zharden-sls` | 开发中 | 直线推测（Straight-Line Speculation）硬化，安全关键 |
-| `derive(CoercePointee)` | 稳定化推进 | 智能指针类型强制转换，简化内核抽象封装 |
+| `derive(CoercePointee)` | 稳定化推进 | 智能指针（Smart Pointer）类型强制转换，简化内核抽象封装 |
 | `cold_path` | 即将稳定 | 替代 `likely`/`unlikely`，与内核现有优化模式对齐 |
 | **New Trait Solver** | 长期阻塞 | 阻塞 unmovable types、guaranteed destructors、TAIT、const traits 等内核急需特性 |
 
@@ -402,11 +402,11 @@ Rust 在区块链领域占据**主导地位**的原因：
 
 | **修复** | **问题** | **解决方案** |
 |:---|:---|:---|
-| **pin-init InitOk token** | 初始化闭包可能在所有字段初始化前返回，导致部分初始化结构体的 soundness 漏洞 | 用不可外部构造的 `InitOk` token 替换脆弱的 name-shadowing 守卫 |
+| **pin-init InitOk token** | 初始化闭包（Closures）可能在所有字段初始化前返回，导致部分初始化结构体（Struct）的 soundness 漏洞 | 用不可外部构造的 `InitOk` token 替换脆弱的 name-shadowing 守卫 |
 | **移除未对齐字段初始化 escape hatch** | `#[disable_initialized_field_access]` 静默允许未对齐字段的就地初始化，产生运行时 UB | 移除该 escape hatch，依赖它的代码现在编译失败而非静默产生 UB |
 | **`unused_features` lint 兼容** | Rust 1.96 重新启用 `unused_features` lint，内核全局启用的 feature 列表触发大量警告 | 内核构建系统全局允许该 lint，避免逐 crate 修改 |
 
-> **关键洞察**: Rust for Linux 正在从"社区实验"转变为"Rust Project 官方目标"。编译器团队（Wesley Wiser）、语言团队（Niko Matsakis）和内核团队（Miguel Ojeda）的协同，标志着 Rust 在系统编程最深层的渗透。核心 tension：**内核需要的新语言特性**（如 guaranteed destructors、arbitrary self types）与**语言团队的稳定化保守主义**之间的平衡。pin-init 的 soundness 修复尤其重要：它展示了 Rust 内核代码如何通过类型系统级别的封闭（sealed token）来消除初始化顺序相关的漏洞类别——这是 C 语言无法实现的保证。[来源: [Rust Project Goals — Rust for Linux](https://rust-lang.github.io/rust-project-goals/2026/roadmap-rust-for-linux.html)] · [来源: [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/)] · [来源: [Linux Kernel v7.0-rc4](https://lexplain.net/release-notes/v7.0-rc4)] · 可信度: ✅
+> **关键洞察**: Rust for Linux 正在从"社区实验"转变为"Rust Project 官方目标"。编译器团队（Wesley Wiser）、语言团队（Niko Matsakis）和内核团队（Miguel Ojeda）的协同，标志着 Rust 在系统编程最深层的渗透。核心 tension：**内核需要的新语言特性**（如 guaranteed destructors、arbitrary self types）与**语言团队的稳定化保守主义**之间的平衡。pin-init 的 soundness 修复尤其重要：它展示了 Rust 内核代码如何通过类型系统（Type System）级别的封闭（sealed token）来消除初始化顺序相关的漏洞类别——这是 C 语言无法实现的保证。[来源: [Rust Project Goals — Rust for Linux](LINK_PLACEHOLDER)] · [来源: [Rust Blog — Project Goals Update 2026-04](LINK_PLACEHOLDER)] · [来源: [Linux Kernel v7.0-rc4](LINK_PLACEHOLDER)] · 可信度: ✅
 
 > **来源**: [Rust for Linux] · [LWN] · 可信度: ✅
 
@@ -443,7 +443,7 @@ Rust 在区块链领域占据**主导地位**的原因：
 | **内存分配** | `alloc` 通过 FFI 调用 C 分配器 | 实现 `GlobalAlloc`，桥接 modem 专用分配器 |
 | **崩溃处理统一** | `panic_handler` 通过 FFI 调用 C 崩溃后端 | 统一 Rust 和 C/C++ 的崩溃处理流程 |
 | **弱符号冲突** | 链接前 strip `compiler_builtin` 的 `memset`/`memcpy` | Rust 的 `compiler_builtin` 弱符号意外覆盖了 modem 优化的内存操作实现，导致性能和功耗回退 |
-| **FFI 回调** | bindgen 自动生成 C 回调的 Rust 绑定 | DNS 解析结果需写回 C 结构体，回调类型复杂 |
+| **FFI 回调** | bindgen 自动生成 C 回调的 Rust 绑定 | DNS 解析结果需写回 C 结构体（Struct），回调类型复杂 |
 
 **代码体积分析**：
 
@@ -629,7 +629,7 @@ fn move_player(
 // 3. 多个不重叠的 Query 可并行调度
 ```
 
-> **关键洞察**: Bevy 的调度器在**编译期分析系统签名**，构建数据依赖有向无环图（DAG），自动并行化无依赖的系统。这是 Rust 借用检查器在**运行时调度**中的延伸应用。
+> **关键洞察**: Bevy 的调度器在**编译期分析系统签名**，构建数据依赖有向无环图（DAG），自动并行化无依赖的系统。这是 Rust 借用（Borrowing）检查器在**运行时调度**中的延伸应用。
 [来源: [Tokio Docs](https://tokio.rs/)]
 
 > **来源**: [Bevy Book] · [Bevy Cheatsheet] · 可信度: ✅
@@ -641,14 +641,14 @@ fn move_player(
 
 | **应用领域** | **L1 基础** | **L2 进阶** | **L3 高级** | **L4 形式化** | **L5 对比** |
 |:---|:---|:---|:---|:---|:---|
-| **Web 后端** | 所有权 + 生命周期 | Trait (Handler) | async/await + Send/Sync | — | Go/Java 并发模型 |
-| **CLI** | 所有权 + Result | Trait (derive) | 过程宏 | — | Python Click |
+| **Web 后端** | 所有权 + 生命周期（Lifetimes） | Trait (Handler) | async/await + Send/Sync | — | Go/Java 并发模型 |
+| **CLI** | 所有权 + Result | Trait (derive) | 过程宏（Procedural Macro） | — | Python Click |
 | **嵌入式** | 裸指针 + no_std | — | unsafe + 中断安全 | — | C bare-metal |
 | **游戏** | 所有权 | 泛型 (ECS) | unsafe (GPU) | — | C++ Unreal |
 | **区块链** | 整数溢出检查 | — | unsafe (密码学) | — | Solidity/Go |
 | **数据工程** | 内存布局 | 泛型 (DataFrame) | SIMD + 并行 | — | Python pandas |
 | **系统编程** | 裸指针 | — | unsafe + FFI | — | C 驱动开发 |
-| **桌面 GUI** | 所有权 + 生命周期 | Trait (组件) | async (事件循环) | — | Electron/Flutter |
+| **桌面 GUI** | 所有权 + 生命周期（Lifetimes） | Trait (组件) | async (事件循环) | — | Electron/Flutter |
 
 ---
 
@@ -734,7 +734,7 @@ graph TD
 | *The Case for Writing Network Drivers in High-Level Programming Languages* | Rizzo, 2012 | 高级语言写驱动的可行性 | Rust for Linux 的理论先驱 |
 | *Security Analysis of the Rust Ecosystem* | 2023-2025 多篇 | crates.io 供应链安全 | 应用领域的安全评估 |
 | *Data Parallelism in Rust* | Josh Stone / Niko | rayon 设计原理 | 数据工程/游戏并行 |
-| *Embedding Rust in Linux Kernel* | Rust for Linux Team | 内核模块内存安全 | 系统编程范式转移 |
+| *Embedding Rust in Linux Kernel* | Rust for Linux Team | 内核模块（Module）内存安全 | 系统编程范式转移 |
 | *Candle: ML Framework in Rust* | Hugging Face, 2023 | 无 Python 依赖推理 | ML 应用领域 |
 | *Bevy ECS Architecture* | Bevy Team | 数据驱动游戏引擎 | 游戏领域设计模式 |
 
@@ -826,7 +826,7 @@ graph TD
 |:---|:---|:---|
 | 所有权 | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) | 所有领域的安全根基 |
 | 并发 | [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) | Web/游戏/数据工程核心 |
-| 异步 | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) | Web 后端/嵌入式事件循环 |
+| 异步（Async） | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) | Web 后端/嵌入式事件循环 |
 | Unsafe | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | 系统编程/游戏/密码学边界 |
 | 核心 Crate | [`./03_core_crates.md`](./03_core_crates.md) | 各领域的工具支撑 |
 | 工具链 | [`./01_toolchain.md`](./01_toolchain.md) | 工程构建基础 |
@@ -840,7 +840,7 @@ graph TD
 
 ### 编译验证：Web 后端最小可运行示例
 
-以下代码验证 axum + tokio 组合的核心抽象在编译期的类型一致性：
+以下代码验证 axum + tokio 组合的核心抽象在编译期的类型一致性（Coherence）：
 
 ```rust
 // 模拟 Web 路由框架的核心类型约束（类似 axum 的设计）
@@ -885,8 +885,8 @@ fn main() {
 
 | Python 概念 | Rust 对应 | 常见陷阱 |
 |:---|:---|:---|
-| 动态类型 `x = 5` | 显式类型 `let x: i32 = 5;` | 类型推断依赖使用场景 |
-| GC 内存管理 | 所有权 + 借用 | `Rc<RefCell<T>>` 不是银弹 |
+| 动态类型 `x = 5` | 显式类型 `let x: i32 = 5;` | 类型推断（Type Inference）依赖使用场景 |
+| GC 内存管理 | 所有权 + 借用（Borrowing） | `Rc<RefCell<T>>` 不是银弹 |
 | `try/except` | `Result<T, E>` + `?` | 忘记处理 `Err` 分支 |
 | `async/await` | `async/await` + `Future` | Tokio（推荐），async-std [已归档] |
 | 鸭子类型 | Trait bound | Orphan Rule 限制 |
@@ -925,7 +925,7 @@ fn main() {
 | `interface` | `trait` + `dyn Trait` / `impl Trait` | 动态分发 vs 静态分发 |
 | `defer` | `Drop` trait / `scopeguard` crate | 无内建 defer 语法 |
 | `error` interface | `std::error::Error` | 错误类型更丰富但更复杂 |
-| 无泛型约束 | `T: Trait` bound | 需要理解 Trait 系统 |
+| 无泛型（Generics）约束 | `T: Trait` bound | 需要理解 Trait 系统 |
 
 ```rust,ignore
 // ✅ Go 开发者常见的并发模式：worker pool
@@ -962,7 +962,7 @@ Rust 并非银弹。以下是真实场景中的**不适合案例**：
 | **快速原型 / MVP** | 编译期约束拖慢迭代速度；借用检查器对初学者门槛高 | Python/TypeScript/Go |
 | **极小的脚本（<100 行）** | 编译时间 > 运行时间；Cargo 项目结构过重 | Python/bash/Perl |
 | **与 GC 语言频繁互操作** | FFI 开销 + 所有权转换成本；心智负担高 | 纯 GC 语言或纯 Rust |
-| **需要频繁反射/动态分派** | Rust 反射能力弱（宏编译期）；动态分发需 `dyn` | Go/Java/C# |
+| **需要频繁反射/动态分派** | Rust 反射能力弱（宏（Macro）编译期）；动态分发需 `dyn` | Go/Java/C# |
 | **GUI 快速开发** | 生态不成熟（相比 Qt/Electron）；异步 GUI 复杂 | Electron/Tauri (JS) / Qt (C++) |
 | **数据科学探索性编程** | 缺少 Jupyter 原生支持；迭代编译慢 | Python (Jupyter) / R |
 
@@ -1012,7 +1012,7 @@ Rust 在科学计算和高性能计算领域的生态正在快速成熟：
 |:---|:---|:---|:---|
 | **ndarray** | N 维数组 | NumPy | 视图、广播、BLAS 集成 |
 | **faer-rs** | 密集线性代数 | LAPACK/MKL | 纯 Rust、SIMD 优化、并行 |
-| **nalgebra** | 线性代数 + 几何 | Eigen | 编译期维度检查、泛型矩阵 |
+| **nalgebra** | 线性代数 + 几何 | Eigen | 编译期维度检查、泛型（Generics）矩阵 |
 | **linfa** | 机器学习框架 | scikit-learn | 聚类、回归、降维 |
 | **polars** | DataFrame | pandas | 查询优化、惰性求值、多线程 |
 | **rayon** | 数据并行 | OpenMP | 工作窃取、零数据竞争 |
@@ -1087,7 +1087,7 @@ fn view(app: &App, frame: Frame) {
 
 |:---|:---|:---|:---|:---|
 
-| **Rust 擅长系统编程** | 所有权+零成本抽象 ⟹ | 替代C/C++系统代码 | FFI复杂度 | 操作系统/驱动/内核模块 |
+| **Rust 擅长系统编程** | 所有权+零成本抽象（Zero-Cost Abstraction） ⟹ | 替代C/C++系统代码 | FFI（FFI）复杂度 | 操作系统/驱动/内核模块 |
 
 | **Rust Web 后端性能优秀** | async零成本 ⟹ | 内存安全减少漏洞 | 生态数量vs Go/Java | 高并发API服务 |
 
@@ -1133,7 +1133,7 @@ graph TD
 
 ```
 
-> **认知功能**: 通过反例枚举建立命题边界意识，避免将 Rust 的系统编程优势过度泛化到所有场景。初学者可用此图自我校准期望——Rust 是系统编程领域的升级方案，并非所有编程任务的最优解。四个反例覆盖开发速度、学习门槛、生态成熟度、脚本复杂度四个维度，恰好对应 Rust 在设计上为"正确性"所付出的权衡成本。
+> **认知功能**: 通过反例枚举（Enum）建立命题边界意识，避免将 Rust 的系统编程优势过度泛化到所有场景。初学者可用此图自我校准期望——Rust 是系统编程领域的升级方案，并非所有编程任务的最优解。四个反例覆盖开发速度、学习门槛、生态成熟度、脚本复杂度四个维度，恰好对应 Rust 在设计上为"正确性"所付出的权衡成本。
 
 ### 2. "Rust 在 Web 后端已经取代 Go/Java"
 
@@ -1240,11 +1240,11 @@ graph TD
 
 ### 11.2 Rust for Linux：内核安全抽象的形式化边界
 
-**形式化定位**: Rust for Linux 是 Rust 类型系统与 Linux 内核 C API 的**形式化边界工程**。其核心挑战：将内核的复杂不变量（锁规则、引用计数、IRQ 上下文）编码为 Rust 的类型契约。
+**形式化定位**: Rust for Linux 是 Rust 类型系统与 Linux 内核 C API 的**形式化边界工程**。其核心挑战：将内核的复杂不变量（锁规则、引用（Reference）计数、IRQ 上下文）编码为 Rust 的类型契约。
 
 **与 L1-L4 的映射**:
 
-- **L1 所有权**: 内核对象的引用计数（`Arc` 的等价物）通过 `Ref<T>` 类型封装，编译期保证无 use-after-free。但内核的 `kref` 与 Rust 的所有权模型存在**语义间隙**——`kref` 允许从 C 代码任意获取引用，Rust 编译器无法验证这些引用的合法性。
+- **L1 所有权**: 内核对象的引用（Reference）计数（`Arc` 的等价物）通过 `Ref<T>` 类型封装，编译期保证无 use-after-free。但内核的 `kref` 与 Rust 的所有权模型存在**语义间隙**——`kref` 允许从 C 代码任意获取引用，Rust 编译器无法验证这些引用的合法性。
 - **L3 Unsafe**: 内核 Rust 代码的 `unsafe` 比例显著高于用户空间代码（约 10-20%），因为每个 C API 调用都是 FFI 边界。Rust for Linux 的创新在于：**将 unsafe 封装为 safe 抽象**，例如 `spinlock_t` → `SpinLock<T>` 的类型化封装。
 - **L4 形式化**: 内核的并发模型（RCU、seqlock、per-CPU 变量）尚无完整的 Rust 形式化证明。RustBelt 的并发分离逻辑（CSL）理论上可覆盖 `SpinLock<T>` 和 `Mutex<T>`，但 RCU 的读侧临界区（read-side critical section）无锁语义超出了当前 RustBelt 的证明范围。
 
@@ -1261,7 +1261,7 @@ graph TD
 **与 L1-L4 的映射**:
 
 - **L1 所有权**: eBPF 程序运行在内核地址空间的受限子集，无堆分配、无动态内存。Rust 的所有权模型在此退化为**静态单分配（SSA）形式**——每个变量有唯一的定义点，无别名。
-- **L3 Unsafe**: Aya 的 `#[aya_ebpf]` 宏将 Rust 函数编译为 eBPF 字节码。Rust 代码中的 `unsafe` 对应 eBPF 验证器的**信任边界**——验证器无法验证 `bpf_probe_read` 等 helper 函数的语义正确性，只能验证其调用合法性。
+- **L3 Unsafe**: Aya 的 `#[aya_ebpf]` 宏（Macro）将 Rust 函数编译为 eBPF 字节码。Rust 代码中的 `unsafe` 对应 eBPF 验证器的**信任边界**——验证器无法验证 `bpf_probe_read` 等 helper 函数的语义正确性，只能验证其调用合法性。
 - **L4 形式化**: eBPF 验证器本身是一个**形式化证明工具**（基于抽象解释），但其证明能力有限（例如不支持循环变量分析）。Rust 的类型系统补充了验证器的不足：Rust 编译期保证的内存安全，减少了验证器需要证明的断言数量。
 
 **安全边界**: Aya 的 `aya::maps` 模块将 eBPF map 操作封装为类型安全的 API。`PerCpuArray<T>` 的类型参数 `T` 必须在编译期满足 `Pod`（Plain Old Data）约束，确保 eBPF 验证器可以推断其内存布局。
@@ -1292,7 +1292,7 @@ graph TD
 
 **与 L1-L4 的映射**:
 
-- **L1 类型系统**: `quinn` 的 `Connection` 类型通过**内部可变性**（`ConnectionRef`）管理连接状态。QUIC 的**零 RTT 握手**（0-RTT）要求客户端在握手完成前发送数据——这在 Rust 中对应于**部分初始化状态**（`MaybeUninit` 的协议级类比）。
+- **L1 类型系统（Type System）**: `quinn` 的 `Connection` 类型通过**内部可变性**（`ConnectionRef`）管理连接状态。QUIC 的**零 RTT 握手**（0-RTT）要求客户端在握手完成前发送数据——这在 Rust 中对应于**部分初始化状态**（`MaybeUninit` 的协议级类比）。
 - **L3 并发**: QUIC 的**流隔离**（stream isolation）是 Rust `Send/Sync` 的理想场景——每个流独立拥有其数据，流间无共享状态。`quinn` 的 `SendStream` 和 `RecvStream` 分别实现 `Send` 和 `Sync`，编译期保证无跨流数据竞争。
 - **L4 形式化**: QUIC 的协议状态机（Idle → Handshake → Connected → Draining → Closed）可通过**会话类型（Session Types）**形式化。Rust 的 `enum` + `match` 是会话类型的工程近似，但缺少**线性通道**（linear channel）的显式表达。 [来源: [crates.io](https://crates.io/)]
 
@@ -1437,7 +1437,7 @@ struct AppStateFixed {
 }
 ```
 
-> **修正**: Web 服务器通常使用线程池或异步运行时处理并发请求。应用状态必须在多个线程间共享。`Rc<T>` 使用非原子引用计数，不能跨线程；`Arc<T>` 使用原子操作，是 `Send + Sync`。Rust 编译器在编译期验证这些约束——试图将 `Rc` 状态传递给多线程框架是编译错误。这与 Node.js 的全局状态（单线程事件循环）或 Python 的 GIL（全局解释器锁）不同——Rust 的并发安全通过类型系统静态保证，无运行时检查开销。[来源: [Actix Documentation](https://docs.rs/actix-web/)]
+> **修正**: Web 服务器通常使用线程池或异步运行时处理并发请求。应用状态必须在多个线程间共享。`Rc<T>` 使用非原子引用计数，不能跨线程；`Arc<T>` 使用原子操作（Atomic Operations），是 `Send + Sync`。Rust 编译器在编译期验证这些约束——试图将 `Rc` 状态传递给多线程框架是编译错误。这与 Node.js 的全局状态（单线程事件循环）或 Python 的 GIL（全局解释器锁）不同——Rust 的并发安全（Concurrency Safety）通过类型系统静态保证，无运行时检查开销。[来源: [Actix Documentation](https://docs.rs/actix-web/)]
 
 ### 10.2 边界测试：游戏引擎中的 ECS 组件查询（编译错误）
 
@@ -1457,7 +1457,7 @@ fn main() {
 }
 ```
 
-> **修正**: ECS（Entity-Component-System）是游戏开发的核心架构。Rust 的 ECS 框架（Bevy、hecs、legion）利用类型系统保证查询安全：系统函数签名定义所需的组件组合，编译器验证查询与组件存储的一致性。若系统要求 `Query<&mut Position, &Velocity>`，但某实体缺少 `Velocity`，该实体自动被过滤出查询结果。这与 Unity 的反射式组件访问或 C++ 的手动类型转换不同——Rust 的 ECS 在编译期保证组件类型安全，运行时无类型检查开销。[来源: [Bevy Documentation](https://docs.rs/bevy/)]
+> **修正**: ECS（Entity-Component-System）是游戏开发的核心架构。Rust 的 ECS 框架（Bevy、hecs、legion）利用类型系统保证查询安全：系统函数签名定义所需的组件组合，编译器验证查询与组件存储的一致性（Coherence）。若系统要求 `Query<&mut Position, &Velocity>`，但某实体缺少 `Velocity`，该实体自动被过滤出查询结果。这与 Unity 的反射式组件访问或 C++ 的手动类型转换不同——Rust 的 ECS 在编译期保证组件类型安全，运行时无类型检查开销。[来源: [Bevy Documentation](LINK_PLACEHOLDER)]
 
 ### 10.3 边界测试：嵌入式中的 `std` 依赖误用（编译错误）
 
@@ -1474,7 +1474,7 @@ fn main() {
 }
 ```
 
-> **修正**: 嵌入式系统（ bare-metal、RTOS、WASM 微内核）通常使用 `#![no_std]`，禁用标准库 `std`（依赖操作系统：文件系统、网络、线程、堆分配）。`no_std`  crate 只能使用 `core`（基本类型、迭代器、选项/结果）和可选的 `alloc`（`Vec`、`String`、`Box`，需全局分配器）。常见错误：1) 依赖的 crate 使用了 `std`（即使是简单的 `println!`）；2) 使用了 `std::collections::HashMap`（需 `std` 的随机数生成器，嵌入式中改用 `heapless::LinearMap`）；3) 使用了 `std::time`（嵌入式中改用 `embassy_time` 或硬件定时器）。`cargo tree` 和 `cargo-nono` 工具帮助检查 `no_std` 兼容性。这与 C 的嵌入式开发（无标准库依赖，直接使用寄存器）或 Arduino 的 C++（简化标准库）类似——Rust 的 `no_std` 提供了现代类型系统在资源受限环境中的应用。[来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: 嵌入式系统（ bare-metal、RTOS、WASM 微内核）通常使用 `#![no_std]`，禁用标准库 `std`（依赖操作系统：文件系统、网络、线程、堆分配）。`no_std`  crate 只能使用 `core`（基本类型、迭代器（Iterator）、选项/结果）和可选的 `alloc`（`Vec`、`String`、`Box`，需全局分配器）。常见错误：1) 依赖的 crate 使用了 `std`（即使是简单的 `println!`）；2) 使用了 `std::collections::HashMap`（需 `std` 的随机数生成器，嵌入式中改用 `heapless::LinearMap`）；3) 使用了 `std::time`（嵌入式中改用 `embassy_time` 或硬件定时器）。`cargo tree` 和 `cargo-nono` 工具帮助检查 `no_std` 兼容性。这与 C 的嵌入式开发（无标准库依赖，直接使用寄存器）或 Arduino 的 C++（简化标准库）类似——Rust 的 `no_std` 提供了现代类型系统在资源受限环境中的应用。[来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.4 边界测试：Web 服务中的阻塞操作与 async runtime 的冲突（运行时性能崩溃）
 

@@ -64,7 +64,7 @@
     - [2.3 框架选型矩阵](#23-框架选型矩阵)
   - [三、性能特征与 Wasm 内存模型](#三性能特征与-wasm-内存模型)
     - [3.1 Rust Wasm vs JavaScript 性能边界](#31-rust-wasm-vs-javascript-性能边界)
-    - [3.2 线性内存模型与所有权映射](#32-线性内存模型与所有权映射)
+    - [3.2 线性内存模型与所有权（Ownership）映射](LINK_PLACEHOLDER)
     - [3.3 JS ↔ Wasm 互操作开销分析](#33-js--wasm-互操作开销分析)
   - [四、工具链与工程实践](#四工具链与工程实践)
     - [4.1 目标三元组与编译配置](#41-目标三元组与编译配置)
@@ -77,9 +77,9 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：WebAssembly 的编译错误](#十边界测试webassembly-的编译错误)
-    - [10.1 边界测试：WASI 的文件系统权限（运行时错误）](#101-边界测试wasi-的文件系统权限运行时错误)
+    - [10.1 边界测试：WASI 的文件系统权限（运行时（Runtime）错误）](LINK_PLACEHOLDER)
     - [10.2 边界测试：`wasm-bindgen` 的类型不匹配（编译错误）](#102-边界测试wasm-bindgen-的类型不匹配编译错误)
-    - [10.3 边界测试：WASM 模块的大小限制与 `wee_alloc`（运行时错误）](#103-边界测试wasm-模块的大小限制与-wee_alloc运行时错误)
+    - [10.3 边界测试：WASM 模块（Module）的大小限制与 `wee_alloc`（运行时错误）](LINK_PLACEHOLDER)
     - [10.3 边界测试：WASM 组件模型（Component Model）的类型映射（编译错误）](#103-边界测试wasm-组件模型component-model的类型映射编译错误)
     - [10.4 边界测试：WASI Preview 2 的功能性权限（运行时错误）](#104-边界测试wasi-preview-2-的功能性权限运行时错误)
     - [10.3 边界测试：WASM 模块的线性内存与 Rust 的 Vec 增长策略（运行时 OOM）](#103-边界测试wasm-模块的线性内存与-rust-的-vec-增长策略运行时-oom)
@@ -124,7 +124,7 @@ Rust → Wasm 编译管线:
         [来源: [Wasmtime Runtime](https://docs.wasmtime.dev/)]
 ```
 
-> **编译保证**: Rust 的所有权检查、生命周期验证在 Wasm 目标上与 x86_64 目标**完全等价**。编译到 Wasm 不会降低内存安全保证——越界访问在 Wasm 运行时被捕获为 trap，而 Rust 在编译期已消除大部分此类错误。[来源: [WebAssembly Specification](https://webassembly.github.io/spec/)]
+> **编译保证**: Rust 的所有权（Ownership）检查、生命周期（Lifetimes）验证在 Wasm 目标上与 x86_64 目标**完全等价**。编译到 Wasm 不会降低内存安全（Memory Safety）保证——越界访问在 Wasm 运行时（Runtime）被捕获为 trap，而 Rust 在编译期已消除大部分此类错误。[来源: [WebAssembly Specification](https://webassembly.github.io/spec/)]
 
 ```mermaid
 graph LR
@@ -150,14 +150,14 @@ graph LR
     style 互操作层 fill:#fff3e0
 ```
 
-> **架构洞察**: wasm-bindgen 在编译期生成 JS 胶水代码，负责 Rust 结构体/枚举与 JS 对象之间的**序列化/反序列化**。这一层是性能开销的主要来源之一。[来源: [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/)]
+> **架构洞察**: wasm-bindgen 在编译期生成 JS 胶水代码，负责 Rust 结构体（Struct）/枚举（Enum）与 JS 对象之间的**序列化/反序列化**。这一层是性能开销的主要来源之一。[来源: [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/)]
 
 ---
 
 ### 1.2 wasm-bindgen 的互操作语义
 >
 
-`wasm-bindgen` 是 Rust 与 JavaScript 之间的**FFI 桥接层**，通过过程宏在编译期生成双向绑定：
+`wasm-bindgen` 是 Rust 与 JavaScript 之间的**FFI 桥接层**，通过过程宏（Procedural Macro）在编译期生成双向绑定：
 
 ```rust
 use wasm_bindgen::prelude::*;
@@ -194,7 +194,7 @@ impl Point {
 }
 ```
 
-> **互操作语义**: `#[wasm_bindgen]` 宏在编译期展开为 `__wasm_bindgen_generated_fibonacci` 等 shim 函数，处理参数/返回值的 ABI 转换。复杂类型（如 `String`、`Vec<T>`）通过 Wasm 线性内存传递指针+长度，JS 端负责解码。[来源: [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/)]
+> **互操作语义**: `#[wasm_bindgen]` 宏（Macro）在编译期展开为 `__wasm_bindgen_generated_fibonacci` 等 shim 函数，处理参数/返回值的 ABI 转换。复杂类型（如 `String`、`Vec<T>`）通过 Wasm 线性内存传递指针+长度，JS 端负责解码。[来源: [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/)]
 
 ```text
 wasm-bindgen 的类型映射规则:
@@ -273,7 +273,7 @@ fn Counter() -> Html {
 }
 ```
 
-> **架构特征**: Yew 使用 `html!` 宏在编译期将 JSX-like 语法转换为 Rust 代码，依赖 VDOM diff 算法更新 UI。这与 React 的运行时 diff 策略一致，适合从 React 生态迁移的开发者。[来源: [Yew Framework](https://yew.rs/)]
+> **架构特征**: Yew 使用 `html!` 宏（Macro）在编译期将 JSX-like 语法转换为 Rust 代码，依赖 VDOM diff 算法更新 UI。这与 React 的运行时 diff 策略一致，适合从 React 生态迁移的开发者。[来源: [Yew Framework](LINK_PLACEHOLDER)]
 
 ---
 
@@ -315,10 +315,10 @@ fn Counter() -> impl IntoView {
 | **编译产物** | 较大（VDOM runtime） | 较小（tree-shake 友好） | 均支持 wasm-opt 压缩 |
 | **路由** | yew-router | leptos_router | 均支持嵌套路由与懒加载 |
 | **生态系统** | 较成熟，示例丰富 | 快速增长，API 迭代中 | 社区规模均小于 React/Vue |
-| **学习曲线** | 熟悉 React 者易上手 | 需理解信号/响应式原语 | 均需掌握 Rust 所有权 |
+| **学习曲线** | 熟悉 React 者易上手 | 需理解信号/响应式原语 | 均需掌握 Rust 所有权（Ownership） |
 | **与 JS 集成** | 通过 wasm-bindgen | 通过 wasm-bindgen | 互操作层相同 |
 
-> **选型原则**: 优先 Yew 如果团队熟悉 React/VDOM 模型；优先 Leptos 如果追求极致性能或需要 SSR。两者均依赖 [Web 框架](../06_ecosystem/27_web_frameworks.md) 的异步运行时思维。[来源: [Web 框架](../06_ecosystem/27_web_frameworks.md)]
+> **选型原则**: 优先 Yew 如果团队熟悉 React/VDOM 模型；优先 Leptos 如果追求极致性能或需要 SSR。两者均依赖 [Web 框架](../06_ecosystem/27_web_frameworks.md) 的异步（Async）运行时思维。[来源: [Web 框架](../06_ecosystem/27_web_frameworks.md)]
 
 ---
 
@@ -439,7 +439,7 @@ pub fn deallocate_vec(ptr: *mut u8, size: usize) {
   └── 注意: Wasm 内存增长后旧视图失效
 ```
 
-> **优化策略**: 对于高频数据交换，使用 `Uint8Array` 视图直接读写 Wasm 线性内存，避免 wasm-bindgen 的自动序列化。这要求 Rust 端暴露固定布局的结构体指针。[来源: [MDN — WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly)]
+> **优化策略**: 对于高频数据交换，使用 `Uint8Array` 视图直接读写 Wasm 线性内存，避免 wasm-bindgen 的自动序列化。这要求 Rust 端暴露固定布局的结构体（Struct）指针。[来源: [MDN — WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly)]
 
 ---
 
@@ -541,7 +541,7 @@ Wasm 调试工具链:
 
 ### 5.2 边界极限测试
 
-**边界 1: Wasm 模块大小**
+**边界 1: Wasm 模块（Module）大小**
 
 ```text
 体积优化策略:
@@ -577,7 +577,7 @@ Rust panic in Wasm:
 
 > **可靠性边界**:
 > Wasm MVP 没有标准化异常处理机制。Rust 的 panic 在 Wasm 中表现为实例级终止，而非可捕获异常。
-> 健壮的错误处理应遵循 `Result` 传播模式。
+> 健壮的错误处理（Error Handling）应遵循 `Result` 传播模式。
 > [来源: [Wasmtime Security](https://docs.wasmtime.dev/security.html)]
 
 ---
@@ -608,7 +608,7 @@ Rust panic in Wasm:
   ✅ 服务端 Wasm → `wasm32-wasip1` 或 `wasm32-wasip2` + Wasmtime/WasmEdge
 ```
 
-> **陷阱总结**: Rust Wasm 开发的常见错误集中在**目标三元组选型**、**panic 处理**、**内存视图生命周期**、**主线程阻塞**和**宿主环境假设**五个维度。
+> **陷阱总结**: Rust Wasm 开发的常见错误集中在**目标三元组选型**、**panic 处理**、**内存视图生命周期（Lifetimes）**、**主线程阻塞**和**宿主环境假设**五个维度。
 > [来源: [Rust Wasm Book](https://rustwasm.github.io/book/)]
 
 ---
@@ -625,7 +625,7 @@ Rust panic in Wasm:
 | [MDN — WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly) | ✅ 一级 | Mozilla 开发者文档 |
 | [Yew Framework](https://yew.rs/) | ✅ 二级 | 前端框架文档 |
 | [Leptos Framework](https://leptos.dev/) | ✅ 二级 | 前端框架文档 |
-| [Wasmtime Runtime](https://docs.wasmtime.dev/) | ✅ 一级 | Bytecode Alliance 运行时 |
+| [Wasmtime Runtime](https://docs.wasmtime.dev/) | ✅ 一级 | Bytecode Alliance 运行时（Runtime） |
 | [Bytecode Alliance](https://bytecodealliance.org/) | ✅ 一级 | Wasm 生态组织 |
 | [Rustc Platform Support](https://doc.rust-lang.org/rustc/platform-support.html) | ✅ 一级 | 官方平台支持矩阵 |
 | [TRPL — Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) | ✅ 一级 | unsafe 语义官方文档 |
@@ -713,7 +713,7 @@ impl Point {
 
 > **修正**:
 > `wasm-bindgen` 生成 Rust 与 JavaScript 之间的绑定代码，但只支持可映射到 JavaScript 类型的 Rust 类型。
-> 不支持的类型包括：裸指针（`*const T`、`*mut T`）、引用（`&T` 在返回中有限支持）、泛型、闭包（有限支持）、大部分标准库类型（`Vec<T>` 支持，`HashMap` 不支持）。
+> 不支持的类型包括：裸指针（`*const T`、`*mut T`）、引用（Reference）（`&T` 在返回中有限支持）、泛型（Generics）、闭包（Closures）（有限支持）、大部分标准库类型（`Vec<T>` 支持，`HashMap` 不支持）。
 > 编译错误发生在 `wasm-bindgen` 宏展开阶段——它尝试为不支持的类型生成绑定代码并失败。
 > 安全替代：将裸指针包装为 `JsValue`，使用 `serde-wasm-bindgen` 序列化复杂类型，或手动编写 JS shim。
 > 这与 C 的 Emscripten（编译为 JS 并模拟 POSIX）不同——`wasm-bindgen` 是显式、类型安全的 FFI，而非透明移植。
@@ -780,7 +780,7 @@ fn greet(p: Person) -> String {
 >
 > 1) 数据类型（record、variant、resource）；
 > 2) 函数导入/导出；
-> 3) 异步支持（`future`、`stream`）。
+> 3) 异步（Async）支持（`future`、`stream`）。
 >
 > 类型映射的挑战：
 >
@@ -909,7 +909,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-将 Rust 编译为 WASM 模块，通过 `wasmtime` 嵌入 C++/Python/Go 应用。WASM 沙箱保证插件安全，Rust 提供高性能实现。
+将 Rust 编译为 WASM 模块（Module），通过 `wasmtime` 嵌入 C++/Python/Go 应用。WASM 沙箱保证插件安全，Rust 提供高性能实现。
 </details>
 
 ---

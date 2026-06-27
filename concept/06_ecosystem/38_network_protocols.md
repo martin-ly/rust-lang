@@ -14,7 +14,7 @@
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: C×Syn — 综合网络协议的工程实现与选型
-> **定位**: 深入分析 QUIC/HTTP-3、TCP 栈和 eBPF 的 Rust 实现，揭示 Rust 的所有权模型如何映射到网络协议的状态机和包处理。
+> **定位**: 深入分析 QUIC/HTTP-3、TCP 栈和 eBPF 的 Rust 实现，揭示 Rust 的所有权（Ownership）模型如何映射到网络协议的状态机和包处理。
 > **前置概念**: [Async/Await](../03_advanced/02_async.md) · [Ownership](../01_foundation/01_ownership.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **后置概念**: [Stream Processing Ecosystem](./36_stream_processing_ecosystem.md) · [Distributed Systems](./18_distributed_systems.md)
 
@@ -99,7 +99,7 @@ impl Connection {
 }
 ```
 
-> **关键洞察**: quinn 的设计中，**流（Stream）**的所有权模型与 Rust 的 `mpsc::channel` 同构——发送端（`SendStream`）和接收端（`RecvStream`）分离，各自独立关闭。这种设计自然映射到 QUIC 的"流独立传输"语义：一个流的丢包不影响其他流。[来源: quinn Documentation] ✅
+> **关键洞察**: quinn 的设计中，**流（Stream）**的所有权（Ownership）模型与 Rust 的 `mpsc::channel` 同构——发送端（`SendStream`）和接收端（`RecvStream`）分离，各自独立关闭。这种设计自然映射到 QUIC 的"流独立传输"语义：一个流的丢包不影响其他流。[来源: quinn Documentation] ✅
 
 ---
 
@@ -132,7 +132,7 @@ QPACK 解决:
   3. 若引用的条目未收到，stream 独立阻塞（不影响其他 stream）
 ```
 
-> **关键洞察**: QPACK 的设计体现了 QUIC"流独立"的哲学——即使头部压缩（通常是有全局状态的）也被拆分为独立的流。这与 Rust 的所有权模型有有趣的映射：动态表的更新是"共享状态"（`&mut`），但每个流的头部解码是"独立计算"（`&`），通过显式索引（类似 `Rc::clone`）引用共享状态。来源: [RFC 9204](https://github.com/rust-lang/rfcs/pull/9204) ✅
+> **关键洞察**: QPACK 的设计体现了 QUIC"流独立"的哲学——即使头部压缩（通常是有全局状态的）也被拆分为独立的流。这与 Rust 的所有权模型有有趣的映射：动态表的更新是"共享状态"（`&mut`），但每个流的头部解码是"独立计算"（`&`），通过显式索引（类似 `Rc::clone`）引用（Reference）共享状态。来源: [RFC 9204](https://github.com/rust-lang/rfcs/pull/9204) ✅
 
 ---
 
@@ -183,13 +183,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 | 维度 | Rust（aya-rs） | C（libbpf） | Go（cilium/ebpf） |
 |:---|:---|:---|:---|
-| **内存安全** | 编译期检查（所有权） | 手动管理 | GC（不适用于内核） |
+| **内存安全（Memory Safety）** | 编译期检查（所有权） | 手动管理 | GC（不适用于内核） |
 | **类型安全** | eBPF map 类型化 | 原始字节 | 部分类型化 |
-| **错误处理** | `Result<T, E>` | 错误码 | 异常 |
+| **错误处理（Error Handling）** | `Result<T, E>` | 错误码 | 异常 |
 | **代码共享** | 用户态/内核态共享 Rust 类型 | 需手动同步结构 | 有限 |
 | **验证器友好** | 生成验证器易接受的代码 | 直接控制 | 间接控制 |
 
-> **关键洞察**: eBPF 验证器（verifier）对内存访问极其严格——任何越界访问都会导致加载失败。Rust 的所有权系统天然生成"验证器友好"的代码：数组访问通过切片边界检查，指针操作通过 `&T`/`&mut T` 约束，无悬垂指针风险。这显著降低了 eBPF 程序被验证器拒绝的概率。[来源: aya-rs Documentation] ✅
+> **关键洞察**: eBPF 验证器（verifier）对内存访问极其严格——任何越界访问都会导致加载失败。Rust 的所有权系统天然生成"验证器友好"的代码：数组访问通过切片（Slice）边界检查，指针操作通过 `&T`/`&mut T` 约束，无悬垂指针风险。这显著降低了 eBPF 程序被验证器拒绝的概率。[来源: aya-rs Documentation] ✅
 
 ---
 
@@ -266,7 +266,7 @@ fn load_ebpf() {
 }
 ```
 
-> **修正**: eBPF 程序必须用 `#[aya::ebpf]` 宏标记，编译为 `bpfel-unknown-none` 目标，然后通过 `aya` 加载到内核。
+> **修正**: eBPF 程序必须用 `#[aya::ebpf]` 宏（Macro）标记，编译为 `bpfel-unknown-none` 目标，然后通过 `aya` 加载到内核。
 
 ### 编译错误 3：async fn 在 const fn 中调用
 
@@ -303,7 +303,7 @@ async fn handle_conn_fixed(conn: Connection) {
 }
 ```
 
-> **修正**: Quinn（Rust QUIC 实现）的 `Connection` 类型内部使用 `Arc` 管理状态，因此可以 `Clone`。但 QUIC 的流（stream）语义要求应用层理解连接、双向流、单向流的所有权关系。若自定义网络协议实现未正确设计所有权，可能出现"连接已关闭但仍尝试发送"的编译期或运行时错误。[来源: [Quinn Documentation](https://docs.rs/quinn/)]
+> **修正**: Quinn（Rust QUIC 实现）的 `Connection` 类型内部使用 `Arc` 管理状态，因此可以 `Clone`。但 QUIC 的流（stream）语义要求应用层理解连接、双向流、单向流的所有权关系。若自定义网络协议实现未正确设计所有权，可能出现"连接已关闭但仍尝试发送"的编译期或运行时（Runtime）错误。[来源: [Quinn Documentation](https://docs.rs/quinn/)]
 
 ### 编译错误 5：Tokio `UdpSocket` 的 `send` 与 `send_to` 混用（编译错误）
 
@@ -329,7 +329,7 @@ async fn fixed_udp2(socket: &UdpSocket) {
 }
 ```
 
-> **修正**: Tokio 的 `UdpSocket` 严格区分"已连接"和"未连接"模式。`connect` 后必须使用 `send`/`recv`（无需地址），未连接时必须使用 `send_to`/`recv_from`（需显式地址）。这是操作系统 UDP socket API 的 Rust 类型安全封装——编译器通过 API 设计阻止非法调用，而非运行时返回错误。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
+> **修正**: Tokio 的 `UdpSocket` 严格区分"已连接"和"未连接"模式。`connect` 后必须使用 `send`/`recv`（无需地址），未连接时必须使用 `send_to`/`recv_from`（需显式地址）。这是操作系统 UDP socket API 的 Rust 类型安全封装——编译器通过 API 设计阻止非法调用，而非运行时（Runtime）返回错误。[来源: [Tokio Documentation](LINK_PLACEHOLDER)]
 
 ---
 > **过渡**: 网络协议：QUIC/HTTP-3 与 Rust 实现 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
@@ -351,7 +351,7 @@ async fn fixed_udp2(socket: &UdpSocket) {
 <details>
 <summary>✅ 答案与解析</summary>
 
-提供异步字节流读取方法（`read`、`read_exact`、`read_buf`）和写入方法。协议解析器通过它们从 TCP/Unix socket 异步读取原始字节并解析为消息帧。
+提供异步（Async）字节流读取方法（`read`、`read_exact`、`read_buf`）和写入方法。协议解析器通过它们从 TCP/Unix socket 异步读取原始字节并解析为消息帧。
 </details>
 
 ---
@@ -387,7 +387,7 @@ JSON（可读、调试方便）、MessagePack（紧凑二进制）、Protobuf（
 <details>
 <summary>✅ 答案与解析</summary>
 
-`quinn` 是 QUIC 协议的 Rust 实现，基于 `tokio` 提供异步 QUIC 客户端和服务器。QUIC 基于 UDP，支持多路复用、0-RTT 握手和连接迁移。
+`quinn` 是 QUIC 协议的 Rust 实现，基于 `tokio` 提供异步（Async） QUIC 客户端和服务器。QUIC 基于 UDP，支持多路复用、0-RTT 握手和连接迁移。
 </details>
 
 ---

@@ -42,14 +42,14 @@
 |:---|:---|:---|:---|
 | [`07_future/01_ai_integration.md`](07_future/01_ai_integration.md) | AI × Rust | 生成-验证闭环、确定性容器、AI 语义安全网 | ✅ v1.0 |
 | [`07_future/02_formal_methods.md`](07_future/02_formal_methods.md) | 形式化方法工业化 | Code-Level + System-Level 验证、PObserve、CI 集成 | ✅ v1.0 |
-| [`07_future/03_evolution.md`](07_future/03_evolution.md) | 语言演进 | Edition、RFC、Const 泛型、GATs、Effects、特化 | ✅ v1.0 |
+| [`07_future/03_evolution.md`](07_future/03_evolution.md) | 语言演进 | Edition、RFC、Const 泛型（Generics）、GATs、Effects、特化 | ✅ v1.0 |
 | [`07_future/09_parallel_frontend_preview.md`](07_future/09_parallel_frontend_preview.md) | 并行前端编译 | 查询系统并行化、编译器多核扩展 | ✅ v1.0 |
-| [`07_future/10_derive_coerce_pointee_preview.md`](07_future/10_derive_coerce_pointee_preview.md) | 派生 CoercePointee | 智能指针自动类型强制、零 unsafe | ✅ v1.0 |
+| [`07_future/10_derive_coerce_pointee_preview.md`](07_future/10_derive_coerce_pointee_preview.md) | 派生 CoercePointee | 智能指针（Smart Pointer）自动类型强制、零 unsafe | ✅ v1.0 |
 | [`07_future/11_const_trait_impl_preview.md`](07_future/11_const_trait_impl_preview.md) | Const Trait Impl | 常量上下文 Trait 泛化、~const 限定 | ✅ v1.0 |
-| [`07_future/12_return_type_notation_preview.md`](07_future/12_return_type_notation_preview.md) | Return Type Notation | use<..> 精确捕获、生命周期控制 | ✅ v1.0 |
+| [`07_future/12_return_type_notation_preview.md`](07_future/12_return_type_notation_preview.md) | Return Type Notation | use<..> 精确捕获、生命周期（Lifetimes）控制 | ✅ v1.0 |
 | [`07_future/13_unsafe_fields_preview.md`](07_future/13_unsafe_fields_preview.md) | Unsafe Fields | 字段级 unsafe 标记、安全边界细化 | ✅ v1.0 |
 | [`07_future/14_ferrocene_preview.md`](07_future/14_ferrocene_preview.md) | Ferrocene | Rust 安全关键认证、ISO 26262 | ✅ v1.0 |
-| [`07_future/15_gen_blocks_preview.md`](07_future/15_gen_blocks_preview.md) | Gen Blocks | 泛化生成器、惰性迭代、异步流 | ✅ v1.0 |
+| [`07_future/15_gen_blocks_preview.md`](07_future/15_gen_blocks_preview.md) | Gen Blocks | 泛化生成器、惰性迭代、异步（Async）流 | ✅ v1.0 |
 | [`07_future/16_cranelift_backend_preview.md`](07_future/16_cranelift_backend_preview.md) | Cranelift 后端 | 快速调试编译、LLVM 替代 | ✅ v1.0 |
 | [`07_future/17_rust_specification_preview.md`](07_future/17_rust_specification_preview.md) | Rust 语言规范 | 形式化规范演进、分层需求 | ✅ v1.0 |
 | [`07_future/18_async_drop_preview.md`](07_future/18_async_drop_preview.md) | Async Drop | 异步资源销毁、[RFC 3308](https://rust-lang.github.io/rfcs//3308-offset_of.html)、Pin 交互 | ⚠️ nightly |
@@ -89,7 +89,7 @@
 | **确定性容器** | L1 Ownership, L2 Memory | 可能引入 `Deterministic<T>` 类型构造 |
 | **形式化 CI** | L4 RustBelt, L6 Toolchain | 每个 PR 自动运行形式化验证将成为标配 |
 | **Effects 系统** | L2 Trait, L3 Async | 可能引入 `effect` 关键字，扩展 Trait 系统 |
-| **GATs 完整化** | L2 Generics, L4 Type Theory | 类型系统向 System Fω 靠拢 |
+| **GATs 完整化** | L2 Generics, L4 Type Theory | 类型系统（Type System）向 System Fω 靠拢 |
 | **特化 (Specialization)** | L2 Trait, L4 Coherence | 允许重叠 impl 的特化版本 |
 
 ---

@@ -17,7 +17,7 @@
 > **内容分级**: [实验级]
 > **Bloom 层级**: L4 (分析)
 > **A/S/P 标记**: **S** — Structure
-> **定位**: 探讨 Rust 中 field projections 的提案——允许安全地从复合类型中"投影"出对字段的引用，而不暴露内部结构。分析其对内核编程、自引用结构和内存安全保证的影响。
+> **定位**: 探讨 Rust 中 field projections 的提案——允许安全地从复合类型中"投影"出对字段的引用（Reference），而不暴露内部结构。分析其对内核编程、自引用结构和内存安全（Memory Safety）保证的影响。
 > **前置概念**: [Pin](../03_advanced/06_pin_unpin.md) · [Lifetime](../01_foundation/03_lifetimes.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
@@ -33,11 +33,11 @@
     - [1.1 问题背景](#11-问题背景)
     - [1.2 Field Projections 提案](#12-field-projections-提案)
   - [二、技术细节](#二技术细节)
-    - [2.1 投影类型系统](#21-投影类型系统)
+    - [2.1 投影类型系统（Type System）](LINK_PLACEHOLDER)
     - [2.2 与 `Pin` 的协同](#22-与-pin-的协同)
   - [三、使用场景](#三使用场景)
     - [场景 1：MMIO 寄存器访问（嵌入式/内核）](#场景-1mmio-寄存器访问嵌入式内核)
-    - [场景 2：安全地自引用结构](#场景-2安全地自引用结构)
+    - [场景 2：安全地自引用（Reference）结构](LINK_PLACEHOLDER)
     - [场景 3：零拷贝反序列化](#场景-3零拷贝反序列化)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 与 `offset_of!` 的关系](#41-与-offset_of-的关系)
@@ -50,7 +50,7 @@
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Pinned field projections 解决的是什么问题？（理解层）](#测验-1pinned-field-projections-解决的是什么问题理解层)
-    - [测验 2：为什么自引用结构体的字段投影是 unsafe 的？（理解层）](#测验-2为什么自引用结构体的字段投影是-unsafe-的理解层)
+    - [测验 2：为什么自引用结构体（Struct）的字段投影是 unsafe 的？（理解层）](LINK_PLACEHOLDER)
     - [测验 3：`pin-project` crate 目前如何解决这个问题？（理解层）](#测验-3pin-project-crate-目前如何解决这个问题理解层)
     - [测验 4：语言级 field projection 支持对 `async fn` 有什么帮助？（理解层）](#测验-4语言级-field-projection-支持对-async-fn-有什么帮助理解层)
     - [测验 5：这个特性目前的实现状态如何？（理解层）](#测验-5这个特性目前的实现状态如何理解层)
@@ -66,7 +66,7 @@
 
 ### 1.1 问题背景
 
-当前 Rust 中，从结构体中获取字段引用是 trivial 的：
+当前 Rust 中，从结构体（Struct）中获取字段引用是 trivial 的：
 
 ```rust
 struct Packet {
@@ -92,7 +92,7 @@ let h = &p.header; // ✅ 简单
 
 Field projections 允许编译器生成**安全的字段访问投影**，提供以下保证：
 
-1. **生命周期保证**: 投影出的引用生命周期不超过父对象
+1. **生命周期（Lifetimes）保证**: 投影出的引用生命周期不超过父对象
 2. **对齐保证**: 字段访问始终对齐
 3. **不变性保证**: 只读/只写/读写权限精确控制
 
@@ -251,15 +251,15 @@ let tx_offset = offset_of!(UartRegs, tx); // 编译期常量
 
 | 特性 | `offset_of!` | Field Projections |
 |------|-------------|-------------------|
-| 时机 | 编译期 | 运行时/编译期 |
+| 时机 | 编译期 | 运行时（Runtime）/编译期 |
 | 安全性 | 纯计算，无 unsafe | 安全抽象 |
 | 用途 | 布局检查、手动指针计算 | 直接安全访问 |
 | 稳定状态 | **1.77+ stable** | 实验中 |
 
 ### 4.2 设计挑战
 
-1. **未初始化字段**: 投影到未初始化字段是 UB，需要类型系统跟踪初始化状态
-2. **packed 结构体**: `#[repr(packed)]` 字段可能未对齐，投影需要额外检查
+1. **未初始化字段**: 投影到未初始化字段是 UB，需要类型系统（Type System）跟踪初始化状态
+2. **packed 结构体（Struct）**: `#[repr(packed)]` 字段可能未对齐，投影需要额外检查
 3. **动态大小类型 (DST)**: 柔性数组字段的投影边界
 
 ---
@@ -271,8 +271,8 @@ let tx_offset = offset_of!(UartRegs, tx); // 编译期常量
 | 阶段 | 状态 | 说明 |
 |------|------|------|
 | **Step 1: `a-mir-formality`** | 进行中 | 为 borrow checker 变更建立形式化模型，确保正确性；同时编写人类可读的说明文档 |
-| **Step 2: FRT 原型落地** | ✅ 2026-02 已合并 | PR [rust-lang/rust#152730](https://github.com/rust-lang/rust/pull/152730) 合并：引入 `field_of!` 宏与 `std::field::Field` trait，为 struct/enum/tuple/union 字段生成 Field Representing Types（FRTs） |
-| **Step 3: Implementation** | 进行中 | 继续改进 FRTs；从库添加和低级宏开始探索 potential desugarings；待形式化模型成熟后移植到编译器 |
+| **Step 2: FRT 原型落地** | ✅ 2026-02 已合并 | PR [rust-lang/rust#152730](https://github.com/rust-lang/rust/pull/152730) 合并：引入 `field_of!` 宏（Macro）与 `std::field::Field` trait，为 struct/enum/tuple/union 字段生成 Field Representing Types（FRTs） |
+| **Step 3: Implementation** | 进行中 | 继续改进 FRTs；从库添加和低级宏（Macro）开始探索 potential desugarings；待形式化模型成熟后移植到编译器 |
 | **Step 4: Experimentation** | 计划中 | 在 Linux 内核（Benno Lossin）、crubit（Tyler Mandry）和标准库中 stress-test |
 
 > **关键依赖**: Step 1 被 Niko 正在开发的基于 expression 的新语法阻塞。
@@ -288,7 +288,7 @@ let tx_offset = offset_of!(UartRegs, tx); // 编译期常量
 
 ### 相关已稳定特性
 
-- `offset_of!` 宏（1.77+）: 编译期字段偏移计算
+- `offset_of!` 宏（Macro）（1.77+）: 编译期字段偏移计算
 - `addr_of!` / `addr_of_mut!`（1.51+）: 安全获取字段裸指针
 
 ---
@@ -343,7 +343,7 @@ let tx_offset = offset_of!(UartRegs, tx); // 编译期常量
 <details>
 <summary>✅ 答案与解析</summary>
 
-通过过程宏自动生成安全的投影代码。`pin-project-lite` 是声明宏版本，无 proc-macro 依赖。两者都是社区 workaround。
+通过过程宏（Procedural Macro）自动生成安全的投影代码。`pin-project-lite` 是声明宏（Declarative Macro）版本，无 proc-macro 依赖。两者都是社区 workaround。
 </details>
 
 ---

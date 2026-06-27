@@ -13,10 +13,11 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价分布式共识算法的安全性、活性与工程实现权衡
-> **前置依赖**: [分布式系统](./18_distributed_systems.md) · [并发编程](../03_advanced/01_concurrency.md) · [网络协议](./38_network_protocols.md) · [类型系统](../01_foundation/04_type_system.md)
+> **前置依赖**: [分布式系统](LINK_PLACEHOLDER) · [并发编程](LINK_PLACEHOLDER) · [网络协议](LINK_PLACEHOLDER) · [类型系统（Type System）](LINK_PLACEHOLDER)
 > **后置延伸**: [区块链](./06_blockchain.md) · [云原生](./24_cloud_native.md) · [微服务架构](./31_microservice_patterns.md)
 >
 > **来源**: [raft-rs](https://docs.rs/raft/) · [hotstuff-rs](https://docs.rs/hotstuff-rs/)
+> **前置概念**: N/A
 ---
 
 > **来源**:
@@ -88,7 +89,7 @@
 
 ### 1.1 共识问题的形式化定义
 
-> **[FLP Result — Fischer, Lynch, Paterson 1985](https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf)** 分布式共识是分布式计算中最基础的问题之一。在异步系统中，即使只有一个进程可能故障，也不存在确定性的共识算法。这一**不可能结果**（Impossibility Result）深刻影响了后续所有共识协议的设计——它们必须在**同步假设**、**随机化**或**故障模型限制**之间做出权衡。[来源: [FLP Paper](https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf)]
+> **[FLP Result — Fischer, Lynch, Paterson 1985](https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf)** 分布式共识是分布式计算中最基础的问题之一。在异步（Async）系统中，即使只有一个进程可能故障，也不存在确定性的共识算法。这一**不可能结果**（Impossibility Result）深刻影响了后续所有共识协议的设计——它们必须在**同步假设**、**随机化**或**故障模型限制**之间做出权衡。[来源: [FLP Paper](https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf)]
 
 共识问题的形式化定义（针对状态机复制）：
 
@@ -113,7 +114,7 @@
 
 ### 1.2 FLP 不可能结果
 
-> **[FLP — Fischer, Lynch, Paterson, JACM 1985](https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf)** 在**纯异步系统**（消息延迟无上界）中，即使只有一个进程可能崩溃（Crash-Stop），也不存在确定性的共识算法能同时满足安全性和终止性。
+> **[FLP — Fischer, Lynch, Paterson, JACM 1985](LINK_PLACEHOLDER)** 在**纯异步（Async）系统**（消息延迟无上界）中，即使只有一个进程可能崩溃（Crash-Stop），也不存在确定性的共识算法能同时满足安全性和终止性。
 
 ```text
 FLP 不可能性的直观解释:
@@ -309,7 +310,7 @@ Leader:
 
 ### 4.2 Rust 实现：raft-rs
 
-> **[raft-rs](https://github.com/tikv/raft-rs)** 是 PingCAP（TiKV 团队）开发的 Raft 共识库，生产级实现。被 TiKV、TiDB、etcd-rs 等项目使用。设计目标：**高性能**、**模块化**、**易于集成**。[来源: [raft-rs GitHub](https://github.com/tikv/raft-rs)]
+> **[raft-rs](https://github.com/tikv/raft-rs)** 是 PingCAP（TiKV 团队）开发的 Raft 共识库，生产级实现。被 TiKV、TiDB、etcd-rs 等项目使用。设计目标：**高性能**、**模块（Module）化**、**易于集成**。[来源: [raft-rs GitHub](https://github.com/tikv/raft-rs)]
 
 ```rust,ignore
 // raft-rs 基础使用
@@ -570,7 +571,7 @@ Rust 在 BFT 共识领域的生态仍在发展中：
 | **tendermint-rs** | Tendermint | 活跃 | informalsystems 维护，Cosmos 生态官方 Rust 绑定 |
 | **hotstuff-rs** | HotStuff | 研究 | 学术研究原型，非生产级 |
 | **pbft-rs** | PBFT | 实验 | 教育实现 |
-| **bft-core** | 通用 BFT | 实验 | 模块化 BFT 框架 |
+| **bft-core** | 通用 BFT | 实验 | 模块（Module）化 BFT 框架 |
 
 ```rust
 // tendermint-rs 基础使用
@@ -642,7 +643,7 @@ async fn query_tendermint_consensus() -> anyhow::Result<()> {
 | **BFT 节点规模** | 10-100（HotStuff）| n ≥ 3f+1 | 线性通信算法扩展更好 |
 | **网络分区恢复** | 自动（Raft）| 需人工干预（某些场景）| 监控 + 自动故障转移 |
 | **日志恢复** | snapshot + 增量 | 完整日志重放 | snapshot 频率权衡 |
-| **成员变更** | Joint Consensus | 运行时任意变更 | 需计划维护窗口 |
+| **成员变更** | Joint Consensus | 运行时（Runtime）任意变更 | 需计划维护窗口 |
 
 > **来源**: [Raft Performance](https://tikv.org/docs/) · [PBFT Scalability](https://ieeexplore.ieee.org/document/8326838)
 
@@ -724,13 +725,13 @@ async fn query_tendermint_consensus() -> anyhow::Result<()> {
 
 ## 相关概念文件
 
-- [分布式系统](./18_distributed_systems.md) — CAP 定理、一致性模型、分区容错
+- [分布式系统](./18_distributed_systems.md) — CAP 定理、一致性（Coherence）模型、分区容错
 - [区块链](./06_blockchain.md) — 智能合约、共识激励、密码学原语
 - [微服务架构](./31_microservice_patterns.md) — 服务发现、配置中心、领导者选举
 - [CQRS & Event Sourcing](./33_cqrs_event_sourcing.md) — 事件日志、状态重建
 - [云原生](./24_cloud_native.md) — Kubernetes、服务网格、可观测性
 - [网络协议](./38_network_protocols.md) — QUIC、gRPC、序列化
-- [并发编程](../03_advanced/01_concurrency.md) — 原子操作、内存顺序、锁
+- [并发编程](../03_advanced/01_concurrency.md) — 原子操作（Atomic Operations）、内存顺序、锁
 - [性能优化](./15_performance_optimization.md) — 批处理、流水线、零拷贝
 - [安全与密码学](./43_security_cryptography.md) — 数字签名、阈值密码学
 
@@ -767,7 +768,7 @@ Follower（跟随者，接收日志）、Candidate（候选者，发起选举）
 <details>
 <summary>✅ 答案与解析</summary>
 
-保证任何两个多数派集合至少有一个节点交集，确保已提交的日志不会被覆盖。这是线性一致性和安全性的基础。
+保证任何两个多数派集合至少有一个节点交集，确保已提交的日志不会被覆盖。这是线性一致性（Coherence）和安全性的基础。
 </details>
 
 ---
@@ -779,7 +780,7 @@ Follower（跟随者，接收日志）、Candidate（候选者，发起选举）
 <details>
 <summary>✅ 答案与解析</summary>
 
-内存安全消除了 C++ 共识实现中的缓冲区溢出和 use-after-free 风险。 fearless 并发使多线程日志复制和状态机应用更安全。
+内存安全（Memory Safety）消除了 C++ 共识实现中的缓冲区溢出和 use-after-free 风险。 fearless 并发使多线程日志复制和状态机应用更安全。
 </details>
 
 ---

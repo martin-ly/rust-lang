@@ -11,8 +11,8 @@
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 分析
 > **A/S/P 标记**: **S+P** — Structure + Procedure
-> **双维定位**: C×Eva — 评价零成本抽象的设计权衡
-> **定位**: 深入分析 Rust **零成本抽象（Zero-Cost Abstraction）**（Zero-Cost Abstractions）的设计哲学——探讨泛型、迭代器（Iterator）、Trait 对象等高层抽象如何在编译期消除运行时开销，以及与 C++ "零开销原则" 的对比。
+> **双维定位**: C×Eva — 评价零成本抽象（Zero-Cost Abstraction）的设计权衡
+> **定位**: 深入分析 Rust **零成本抽象（Zero-Cost Abstraction）**（Zero-Cost Abstractions）的设计哲学——探讨泛型（Generics）、迭代器（Iterator）、Trait 对象等高层抽象如何在编译期消除运行时（Runtime）开销，以及与 C++ "零开销原则" 的对比。
 > **前置概念**: [Ownership](./01_ownership.md) · [Generics](../02_intermediate/02_generics.md) · [Traits](../02_intermediate/01_traits.md)
 > **后置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md) · [Toolchain](../06_ecosystem/01_toolchain.md)
 
@@ -25,16 +25,16 @@
 
 ## 📑 目录
 
-- [零成本抽象：Rust 的性能哲学](#零成本抽象rust-的性能哲学)
+- [零成本抽象（Zero-Cost Abstraction）：Rust 的性能哲学](LINK_PLACEHOLDER)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 零成本抽象的定义](#11-零成本抽象的定义)
-    - [1.2 单态化：泛型的零成本实现](#12-单态化泛型的零成本实现)
-    - [1.3 迭代器与循环消除](#13-迭代器与循环消除)
+    - [1.2 单态化（Monomorphization）：泛型（Generics）的零成本实现](LINK_PLACEHOLDER)
+    - [1.3 迭代器（Iterator）与循环消除](LINK_PLACEHOLDER)
   - [二、技术细节](#二技术细节)
     - [2.1 编译期优化管道](#21-编译期优化管道)
-    - [2.2 Trait 对象的运行时开销](#22-trait-对象的运行时开销)
-    - [2.3 闭包的零成本实现](#23-闭包的零成本实现)
+    - [2.2 Trait 对象的运行时（Runtime）开销](LINK_PLACEHOLDER)
+    - [2.3 闭包（Closures）的零成本实现](LINK_PLACEHOLDER)
   - [三、抽象层次分析](#三抽象层次分析)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -51,7 +51,7 @@
     - [10.3 边界测试：泛型单态化导致的代码膨胀（编译错误/链接错误）](#103-边界测试泛型单态化导致的代码膨胀编译错误链接错误)
     - [10.4 边界测试：`async` 状态机的 `Pin` 开销（编译错误/运行时行为）](#104-边界测试async-状态机的-pin-开销编译错误运行时行为)
     - [10.3 边界测试：零大小类型的布局陷阱（编译错误/UB）](#103-边界测试零大小类型的布局陷阱编译错误ub)
-    - [10.3 边界测试：所有权移动后的再次使用](#103-边界测试所有权移动后的再次使用)
+    - [10.3 边界测试：所有权（Ownership）移动后的再次使用](LINK_PLACEHOLDER)
   - [实践](#实践)
   - [参考来源](#参考来源)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -125,9 +125,9 @@ graph LR
     end
 ```
 
-> **认知功能**: 此图对比 Rust **单态化**与 Java **类型擦除**的实现差异——Rust 为每个类型生成专门代码，Java 使用通用代码加运行时类型处理。
+> **认知功能**: 此图对比 Rust **单态化（Monomorphization）**与 Java **类型擦除**的实现差异——Rust 为每个类型生成专门代码，Java 使用通用代码加运行时类型处理。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
-> **使用建议**: 泛型代码无需担心性能——单态化保证与手写特化代码等效。但注意二进制大小可能增加（每个特化一份代码）。
+> **使用建议**: 泛型代码无需担心性能——单态化（Monomorphization）保证与手写特化代码等效。但注意二进制大小可能增加（每个特化一份代码）。
 > **关键洞察**: 单态化的代价是**二进制膨胀**（code bloat）——每个类型参数组合生成独立代码。Rust 通过 LLVM 的合并优化（COMDAT folding）缓解这一问题。
 > [来源: [Rust Reference — Monomorphization](https://doc.rust-lang.org/reference/items/generics.html#monomorphization)]
 
@@ -157,7 +157,7 @@ for x in 0..100 {
 // 生成的机器码与手写 SIMD 循环等效
 ```
 
-> **迭代器零成本**: Rust 的迭代器适配器（`.map`、`.filter`、`.fold`）通过**内联**和**循环融合**（loop fusion）在编译期消除抽象开销。
+> **迭代器（Iterator）零成本**: Rust 的迭代器适配器（`.map`、`.filter`、`.fold`）通过**内联**和**循环融合**（loop fusion）在编译期消除抽象开销。
 > 最终代码与手写循环等效，甚至更好（因为 LLVM 可以进行跨函数优化）。
 > [来源: [TRPL — Iterator Performance](https://doc.rust-lang.org/book/ch13-04-performance.html)]
 
@@ -261,7 +261,7 @@ impl<'a> FnMut(&i32) -> i32 for __Closure_1<'a> {
 // 最终等效于手写循环
 ```
 
-> **闭包零成本**: 闭包的环境捕获通过**结构体字段**实现，方法调用通过**trait 方法**实现。编译器内联后，闭包调用完全消除，等效于手写循环。
+> **闭包（Closures）零成本**: 闭包的环境捕获通过**结构体（Struct）字段**实现，方法调用通过**trait 方法**实现。编译器内联后，闭包调用完全消除，等效于手写循环。
 > [来源: [Rust Reference — Closures](https://doc.rust-lang.org/reference/types/closure.html)]
 
 ---
@@ -272,15 +272,15 @@ impl<'a> FnMut(&i32) -> i32 for __Closure_1<'a> {
 |:---|:---|:---:|:---|
 | **泛型（Generics） + monomorph** | `fn foo<T>(x: T)` | **零** | 默认选择，性能关键路径 |
 | **impl Trait** | `fn foo(x: impl Trait)` | **零** | API 简洁，仍单态化 |
-| **const 泛型** | `[T; N]` | **零** | 编译期计算数组大小 |
+| **const 泛型（Generics）** | `[T; N]` | **零** | 编译期计算数组大小 |
 | **迭代器适配器** | `.map().filter()` | **零**（Release） | 优先于手写循环 |
 | **闭包（Closures）** | `\|x\| x + 1` | **零**（内联后） | 回调、适配器参数 |
 | **async/await** | 状态机转换 | **零**（Poll 本身） | 异步 I/O |
 | **dyn Trait** | vtable 分发 | **有**（间接调用） | 运行时多态需求 |
-| **Rc/Arc** | 引用计数 | **有**（原子操作） | 共享所有权需求 |
+| **Rc/Arc** | 引用（Reference）计数 | **有**（原子操作） | 共享所有权（Ownership）需求 |
 | **Mutex/RwLock** | 系统调用 | **有**（阻塞） | 线程安全需求 |
 
-> **抽象选择原则**: 优先使用**零成本抽象**（泛型、迭代器、闭包）；只在需要**运行时灵活性**时接受有成本的抽象（dyn Trait、Rc、Mutex）。
+> **抽象选择原则**: 优先使用**零成本抽象（Zero-Cost Abstraction）**（泛型、迭代器（Iterator）、闭包（Closures））；只在需要**运行时灵活性**时接受有成本的抽象（dyn Trait、Rc、Mutex）。
 > [来源: [Rust Performance Book — Abstractions](https://nnethercote.github.io/perf-book/)]
 
 ---
@@ -307,7 +307,7 @@ graph TD
 
 > **认知功能**: 此决策树判断 Rust 抽象是否有运行时成本。核心判断标准是**是否使用动态分发或运行时管理机制**。
 > **使用建议**: 性能关键路径使用泛型 + 迭代器；需要运行时灵活性时接受 dyn Trait 的成本；避免在热路径使用 Rc/Arc/Mutex。
-> **关键洞察**: Rust 的**设计哲学**是"零成本抽象优先，运行时成本显式"。有成本的抽象（dyn Trait、Rc）在类型系统中明确标记，不会意外引入。
+> **关键洞察**: Rust 的**设计哲学**是"零成本抽象优先，运行时成本显式"。有成本的抽象（dyn Trait、Rc）在类型系统（Type System）中明确标记，不会意外引入。
 > [来源: 💡 原创分析]
 
 ---
@@ -591,10 +591,10 @@ fn main() {
 ```
 
 > **修正**:
-> `async fn` 编译为状态机，状态机可能**自引用**（某个状态包含指向其他状态的引用）。
+> `async fn` 编译为状态机，状态机可能**自引用（Reference）**（某个状态包含指向其他状态的引用）。
 > 自引用的值不能被移动（移动后引用悬垂），因此必须 `Pin` 在内存中。
 > `async fn` 的返回类型自动是 `impl Future`，调用者通过 `Pin<&mut impl Future>` `poll`。
-> `tokio::pin!` 宏在栈上创建 `Pin`，`Box::pin` 在堆上创建。这是零成本抽象的代价：自引用检测和 `Pin` 管理是编译器自动完成的，但底层机制复杂。
+> `tokio::pin!` 宏（Macro）在栈上创建 `Pin`，`Box::pin` 在堆上创建。这是零成本抽象的代价：自引用检测和 `Pin` 管理是编译器自动完成的，但底层机制复杂。
 > 与 JavaScript 的 Promise（无自引用问题，因为所有变量在闭包中按引用捕获）或 Go 的 goroutine（栈可增长和移动，通过指针重定位处理）不同
 > ——Rust 的 async 在编译期生成固定布局的状态机，运行时无额外开销。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-concurrency-with-async.html)] ·
@@ -801,7 +801,7 @@ let f = || x + 1;
 
 **B. 4 字节（一个 i32）**。
 
-Rust 闭包被编译为匿名结构体：
+Rust 闭包被编译为匿名结构体（Struct）：
 
 - 捕获的 `x` 作为字段存储（`i32` 占 4 字节）
 - 闭包代码通过函数项类型（零大小）内联调用
@@ -825,7 +825,7 @@ Rust 闭包被编译为匿名结构体：
 
 > 运行时性能等价于手写 C ⟸ 编译期优化完成 ⟸ 抽象无开销
 > 迭代器零成本 ⟸ 内联与向量化 ⟸ 泛型单态化
-> **过渡**: 掌握 零成本抽象：Rust 的性能哲学 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 零成本抽象：Rust 的性能哲学 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 零成本抽象：Rust 的性能哲学 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 > **过渡**: 零成本抽象：Rust 的性能哲学 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 

@@ -13,8 +13,8 @@
 > **Bloom 层级**: 应用 → 创造
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计微服务架构
-> **定位**: 从系统架构视角梳理 Rust 在微服务场景中的核心模式——服务发现、熔断、Saga、CQRS、事件溯源——揭示 Rust 的类型安全与零成本抽象如何支撑高可靠分布式系统。
-> **前置概念**: [Async](../03_advanced/02_async.md) · [分布式系统](./18_distributed_systems.md) · [错误处理](../02_intermediate/04_error_handling.md)
+> **定位**: 从系统架构视角梳理 Rust 在微服务场景中的核心模式——服务发现、熔断、Saga、CQRS、事件溯源——揭示 Rust 的类型安全与零成本抽象（Zero-Cost Abstraction）如何支撑高可靠分布式系统。
+> **前置概念**: [Async](LINK_PLACEHOLDER) · [分布式系统](LINK_PLACEHOLDER) · [错误处理（Error Handling）](LINK_PLACEHOLDER)
 > **后置概念**: [事件驱动架构](./32_event_driven_architecture.md) · [云原生](./24_cloud_native.md)
 >
 > **来源**: [tower](https://docs.rs/tower/) · [tonic](https://docs.rs/tonic/) · [failsafe](https://docs.rs/failsafe/)
@@ -48,9 +48,9 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：微服务模式的编译错误](#十边界测试微服务模式的编译错误)
-    - [10.1 边界测试：配置注入的生命周期（编译错误）](#101-边界测试配置注入的生命周期编译错误)
+    - [10.1 边界测试：配置注入的生命周期（Lifetimes）（编译错误）](LINK_PLACEHOLDER)
     - [10.2 边界测试：gRPC trait 对象与序列化（编译错误）](#102-边界测试grpc-trait-对象与序列化编译错误)
-    - [10.5 边界测试：断路器模式的半开状态竞态条件（运行时雪崩）](#105-边界测试断路器模式的半开状态竞态条件运行时雪崩)
+    - [10.5 边界测试：断路器模式的半开状态竞态条件（运行时（Runtime）雪崩）](LINK_PLACEHOLDER)
     - [10.3 边界测试：断路器模式的半开状态竞态条件（运行时雪崩）](#103-边界测试断路器模式的半开状态竞态条件运行时雪崩)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -144,7 +144,7 @@ async fn discover_service() -> Result<Vec<String>, Box<dyn std::error::Error>> {
 
 ### 2.2 Tower::discover 动态服务列表
 
-Tower 的 `Discover` trait 将服务发现抽象为异步流，支持动态上下线感知：
+Tower 的 `Discover` trait 将服务发现抽象为异步（Async）流，支持动态上下线感知：
 
 ```rust,ignore
 use tower::discover::Change;
@@ -165,10 +165,10 @@ impl Stream for ConsulDiscover {
 // Balance<Discover, Request> → 自动在可用端点间分配请求
 ```
 
-| 发现机制 | 实时性 | 一致性 | Rust Crate | 适用场景 |
+| 发现机制 | 实时性 | 一致性（Coherence） | Rust Crate | 适用场景 |
 |:---|:---:|:---:|:---|:---|
-| Consul | 秒级 | 强一致性 | `consul` | 多数据中心 |
-| etcd | 毫秒级 | 强一致性 | `etcd-client` | K8s 原生 |
+| Consul | 秒级 | 强一致性（Coherence） | `consul` | 多数据中心 |
+| etcd | 毫秒级 | 强一致性（Coherence） | `etcd-client` | K8s 原生 |
 | K8s DNS | 分钟级 | 最终一致 | `kube` | 集群内部 |
 | 静态配置 | 无 | - | - | 开发/测试 |
 
@@ -469,7 +469,7 @@ fn rebuild_order_state(events: &[OrderEvent]) -> Option<OrderState> {
 | 扩展 | 只读副本独立投影 | 最终一致性延迟 |
 | 容错 | 丢失快照可重建 | 序列化兼容性 |
 
-> **事件溯源洞察**: 事件溯源的不可变性与 Rust 的**所有权转移**哲学一致——事件一旦产生即不可修改（只能通过补偿事件修正），这与 `&mut` 的独占性形成有趣的分布式类比。
+> **事件溯源洞察**: 事件溯源的不可变性与 Rust 的**所有权（Ownership）转移**哲学一致——事件一旦产生即不可修改（只能通过补偿事件修正），这与 `&mut` 的独占性形成有趣的分布式类比。
 > [来源: [Event Store Documentation](https://developers.eventstore.com/server/v24.10/) · [Martin Fowler — Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html)]
 
 ---
@@ -521,14 +521,14 @@ async fn get_order_query(redis: &mut redis::aio::MultiplexedConnection, order_id
 | 一致性 | 强一致性 | 最终一致性 |
 | Rust Crate | `sqlx` | `redis`, `elasticsearch` |
 
-> **CQRS 洞察**: CQRS 的本质是**读写负载的物理隔离**。Rust 的零成本抽象使双模型不会带来运行时开销。
+> **CQRS 洞察**: CQRS 的本质是**读写负载的物理隔离**。Rust 的零成本抽象（Zero-Cost Abstraction）使双模型不会带来运行时（Runtime）开销。
 > [来源: [CQRS by Martin Fowler](https://martinfowler.com/bliki/CQRS.html)]
 
 ---
 
 ## 九、服务网格 Sidecar
 
-Rust 在服务网格中的代表性实现是 **Linkerd2-proxy**，一个零拷贝、内存安全的 sidecar 代理。
+Rust 在服务网格中的代表性实现是 **Linkerd2-proxy**，一个零拷贝、内存安全（Memory Safety）的 sidecar 代理。
 
 ```text
 Pod:
@@ -548,12 +548,12 @@ Rust sidecar 优势:
 
 | 特性 | Linkerd2-proxy (Rust) | Envoy (C++) |
 |:---|:---|:---|
-| 内存安全 | 编译期保证 | 手动管理 |
+| 内存安全（Memory Safety） | 编译期保证 | 手动管理 |
 | 二进制大小 | ~10MB | ~100MB |
 | 启动时间 | < 100ms | ~1s |
 | 配置复杂度 | 极简（自动注入） | 复杂（xDS） |
 
-> **Sidecar 洞察**: Linkerd2-proxy 证明 Rust 可以重写**基础设施核心**——用内存安全替代 C++ 实现，同时保持极低资源占用。
+> **Sidecar 洞察**: Linkerd2-proxy 证明 Rust 可以重写**基础设施核心**——用内存安全（Memory Safety）替代 C++ 实现，同时保持极低资源占用。
 > [来源: [Linkerd2-proxy GitHub](https://github.com/linkerd/linkerd2-proxy)] · [来源: [Why Linkerd Doesn't Use Envoy](https://linkerd.io/2020/12/03/why-linkerd-doesnt-use-envoy/)]
 
 ---
@@ -597,7 +597,7 @@ fn main() {
 }
 ```
 
-> **设计要点**: 此示例展示微服务的最小可行结构——**监听端口** → **解析请求** → **路由分发** → **构造响应**。Rust 的所有权模型天然保证 `TcpStream` 在一次请求处理后被正确关闭。生产环境应升级为 Tokio/Axum 以获得并发、中间件和生态集成。 [来源: 💡 原创实现]
+> **设计要点**: 此示例展示微服务的最小可行结构——**监听端口** → **解析请求** → **路由分发** → **构造响应**。Rust 的所有权（Ownership）模型天然保证 `TcpStream` 在一次请求处理后被正确关闭。生产环境应升级为 Tokio/Axum 以获得并发、中间件和生态集成。 [来源: 💡 原创实现]
 
 ### 10.2 生产级微服务骨架（依赖外部 crate）
 
@@ -682,7 +682,7 @@ async fn main() {
 }
 ```
 
-> **综合示例洞察**: 该示例展示了 Rust 微服务的**组合式架构**——Axum 路由 + Tower 重试 + 手写熔断 + Kafka 事件发布。每个组件都是独立、可测试、可替换的模块。
+> **综合示例洞察**: 该示例展示了 Rust 微服务的**组合式架构**——Axum 路由 + Tower 重试 + 手写熔断 + Kafka 事件发布。每个组件都是独立、可测试、可替换的模块（Module）。
 > [来源: [Axum Examples](https://github.com/tokio-rs/axum/tree/main/examples)]
 
 ---
@@ -816,7 +816,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: 微服务中的配置对象通常需要在多个服务间共享。使用引用（`&Config`）会引入生命周期约束，要求配置对象比所有服务更长寿。`Arc<T>`（原子引用计数）允许配置在多个服务间共享，无需显式生命周期标注。这与 Go 的共享指针（垃圾回收）或 Java 的 Spring 单例 bean 不同——Rust 通过类型系统显式表达共享语义，避免隐式全局状态。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> **修正**: 微服务中的配置对象通常需要在多个服务间共享。使用引用（Reference）（`&Config`）会引入生命周期（Lifetimes）约束，要求配置对象比所有服务更长寿。`Arc<T>`（原子引用计数）允许配置在多个服务间共享，无需显式生命周期标注。这与 Go 的共享指针（垃圾回收）或 Java 的 Spring 单例 bean 不同——Rust 通过类型系统（Type System）显式表达共享语义，避免隐式全局状态。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：gRPC trait 对象与序列化（编译错误）
 
@@ -856,7 +856,7 @@ enum CircuitState {
 // 需确保半开状态仅允许一个请求通过
 ```
 
-> **修正**: 断路器（Circuit Breaker）模式的三个状态：1) **Closed**：正常服务，记录失败率；2) **Open**：失败率超阈值，快速失败，避免雪崩；3) **HalfOpen**：超时后允许**单个**请求试探，成功则关闭，失败则重新打开。关键：**半开状态的并发控制**。若半开时多个请求通过：1) 服务仍可能过载；2) 全部失败后断路器重新打开，恢复时间延长。Rust 实现（`backon`、`rust-circuit-breaker`）：使用原子操作或锁确保半开状态单请求通过。这与 Hystrix（Java，原始实现）、Polly（C#）或 Go 的 `gobreaker` 类似——断路器的可靠性取决于状态转换的原子性。服务网格（Istio、Linkerd）的断路器在 sidecar 层实现，语言无关，但粒度粗（服务级别 vs 方法级别）。[来源: [Circuit Breaker Pattern](https://martinfowler.com/bliki/CircuitBreaker.html)] · [来源: [Release It!](https://pragprog.com/titles/mnee2/release-it-second-edition/)]
+> **修正**: 断路器（Circuit Breaker）模式的三个状态：1) **Closed**：正常服务，记录失败率；2) **Open**：失败率超阈值，快速失败，避免雪崩；3) **HalfOpen**：超时后允许**单个**请求试探，成功则关闭，失败则重新打开。关键：**半开状态的并发控制**。若半开时多个请求通过：1) 服务仍可能过载；2) 全部失败后断路器重新打开，恢复时间延长。Rust 实现（`backon`、`rust-circuit-breaker`）：使用原子操作（Atomic Operations）或锁确保半开状态单请求通过。这与 Hystrix（Java，原始实现）、Polly（C#）或 Go 的 `gobreaker` 类似——断路器的可靠性取决于状态转换的原子性。服务网格（Istio、Linkerd）的断路器在 sidecar 层实现，语言无关，但粒度粗（服务级别 vs 方法级别）。[来源: [Circuit Breaker Pattern](https://martinfowler.com/bliki/CircuitBreaker.html)] · [来源: [Release It!](https://pragprog.com/titles/mnee2/release-it-second-edition/)]
 
 ### 10.3 边界测试：断路器模式的半开状态竞态条件（运行时雪崩）
 
@@ -880,7 +880,7 @@ struct CircuitBreaker {
 fn main() {}
 ```
 
-> **修正**: 断路器（Circuit Breaker）的三个状态：1) **Closed**：正常服务，记录失败率；2) **Open**：失败率超阈值，快速失败，避免雪崩；3) **HalfOpen**：超时后允许**单个**请求试探，成功则关闭，失败则重新打开。关键：**半开状态的并发控制**。若半开时多个请求通过：1) 服务仍可能过载；2) 全部失败后断路器重新打开，恢复时间延长。Rust 实现（`backon`、`rust-circuit-breaker`）：使用原子操作或锁确保半开状态单请求通过。这与 Hystrix（Java，原始实现）、Polly（C#）或 Go 的 `gobreaker` 类似——断路器的可靠性取决于状态转换的原子性。服务网格（Istio、Linkerd）的断路器在 sidecar 层实现，语言无关，但粒度粗（服务级别 vs 方法级别）。[来源: [Circuit Breaker Pattern](https://martinfowler.com/bliki/CircuitBreaker.html)] · [来源: [Release It!](https://pragprog.com/titles/mnee2/release-it-second-edition/)]
+> **修正**: 断路器（Circuit Breaker）的三个状态：1) **Closed**：正常服务，记录失败率；2) **Open**：失败率超阈值，快速失败，避免雪崩；3) **HalfOpen**：超时后允许**单个**请求试探，成功则关闭，失败则重新打开。关键：**半开状态的并发控制**。若半开时多个请求通过：1) 服务仍可能过载；2) 全部失败后断路器重新打开，恢复时间延长。Rust 实现（`backon`、`rust-circuit-breaker`）：使用原子操作（Atomic Operations）或锁确保半开状态单请求通过。这与 Hystrix（Java，原始实现）、Polly（C#）或 Go 的 `gobreaker` 类似——断路器的可靠性取决于状态转换的原子性。服务网格（Istio、Linkerd）的断路器在 sidecar 层实现，语言无关，但粒度粗（服务级别 vs 方法级别）。[来源: [Circuit Breaker Pattern](LINK_PLACEHOLDER)] · [来源: [Release It!](LINK_PLACEHOLDER)]
 > **过渡**: 微服务架构模式 (Microservice Architecture Patterns) 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 微服务架构模式 (Microservice Architecture Patterns) 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 微服务架构模式 (Microservice Architecture Patterns) 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
@@ -937,7 +937,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-强类型接口契约（Protobuf）、HTTP/2 多路复用、流式支持、跨语言互操作。`tonic` 提供异步服务端/客户端、中间件、拦截器和健康检查。
+强类型接口契约（Protobuf）、HTTP/2 多路复用、流式支持、跨语言互操作。`tonic` 提供异步（Async）服务端/客户端、中间件、拦截器和健康检查。
 </details>
 
 ---

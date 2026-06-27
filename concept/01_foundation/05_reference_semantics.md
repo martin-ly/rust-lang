@@ -10,8 +10,8 @@
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S** — Structure
-> **双维定位**: C×Und — 理解引用语义是所有权模型的延伸
-> **定位**: 深入分析 Rust 的**引用语义机制**——自动解引用（Auto-deref）、Deref 强制（Deref Coercion）、类型强制（Type Coercion）以及它们与借用检查器的交互，澄清开发者常见的隐式转换困惑。
+> **双维定位**: C×Und — 理解引用（Reference）语义是所有权（Ownership）模型的延伸
+> **定位**: 深入分析 Rust 的**引用语义机制**——自动解引用（Auto-deref）、Deref 强制（Deref Coercion）、类型强制（Type Coercion）以及它们与借用（Borrowing）检查器的交互，澄清开发者常见的隐式转换困惑。
 > **前置概念**: [Ownership](./01_ownership.md) · [Borrowing](./02_borrowing.md) · [Type System](./04_type_system.md)
 > **后置概念**: [Smart Pointers](../02_intermediate/03_memory_management.md) · [Generics](../02_intermediate/02_generics.md)
 
@@ -25,7 +25,7 @@
 
 ## 📑 目录
 
-- [引用语义：自动解引用、Deref 强制与类型转换](#引用语义自动解引用deref-强制与类型转换)
+- [引用（Reference）语义：自动解引用、Deref 强制与类型转换](LINK_PLACEHOLDER)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 引用的多重含义](#11-引用的多重含义)
@@ -34,7 +34,7 @@
   - [二、技术细节](#二技术细节)
     - [2.1 方法调用的自动引用](#21-方法调用的自动引用)
     - [2.2 类型强制规则](#22-类型强制规则)
-    - [2.3 与借用检查的交互](#23-与借用检查的交互)
+    - [2.3 与借用（Borrowing）检查的交互](LINK_PLACEHOLDER)
   - [三、使用模式](#三使用模式)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -45,7 +45,7 @@
   - [七、多级引用语义与部分重借用（Multi-level References \& Partial Reborrows）](#七多级引用语义与部分重借用multi-level-references--partial-reborrows)
     - [7.1 多级引用类型](#71-多级引用类型)
       - [7.1.1 共享引用的嵌套：`&T` → `&&T` → `&&&T`](#711-共享引用的嵌套t--t--t)
-      - [7.1.2 可变引用的嵌套：`&mut T`、`&mut &T`、`&mut &mut T`](#712-可变引用的嵌套mut-tmut-tmut-mut-t)
+      - [7.1.2 可变引用（Mutable Reference）的嵌套：`&mut T`、`&mut &T`、`&mut &mut T`](LINK_PLACEHOLDER)
       - [7.1.3 弱化的不可逆性](#713-弱化的不可逆性)
     - [7.2 部分重借用（Partial Reborrows）](#72-部分重借用partial-reborrows)
       - [7.2.1 编译器的字段级借用粒度](#721-编译器的字段级借用粒度)
@@ -59,12 +59,12 @@
       - [7.4.2 权限树：Foreign / Read / Write / Unique](#742-权限树foreign--read--write--unique)
     - [7.5 `as_ref()` / `as_mut()` 与嵌套引用](#75-as_ref--as_mut-与嵌套引用)
       - [7.5.1 嵌套引用的类型转换](#751-嵌套引用的类型转换)
-      - [7.5.2 生命周期行为](#752-生命周期行为)
+      - [7.5.2 生命周期（Lifetimes）行为](LINK_PLACEHOLDER)
     - [7.6 代码示例集](#76-代码示例集)
-      - [7.6.1 嵌套引用的构造与模式匹配](#761-嵌套引用的构造与模式匹配)
-      - [7.6.2 结构体字段的部分重借用](#762-结构体字段的部分重借用)
+      - [7.6.1 嵌套引用的构造与模式匹配（Pattern Matching）](LINK_PLACEHOLDER)
+      - [7.6.2 结构体（Struct）字段的部分重借用](LINK_PLACEHOLDER)
       - [7.6.3 `split_mut` 创建不相交可变引用](#763-split_mut-创建不相交可变引用)
-      - [7.6.4 迭代器可变链](#764-迭代器可变链)
+      - [7.6.4 迭代器（Iterator）可变链](LINK_PLACEHOLDER)
     - [7.7 边界分析](#77-边界分析)
       - [7.7.1 命题与反命题](#771-命题与反命题)
       - [7.7.2 边界极限](#772-边界极限)
@@ -80,7 +80,7 @@
     - [10.1 边界测试：多级引用自动解引用层级（编译错误）](#101-边界测试多级引用自动解引用层级编译错误)
     - [10.2 边界测试：`&str` 与 `String` 的混用（编译错误）](#102-边界测试str-与-string-的混用编译错误)
     - [10.3 边界测试：`&mut` 的重新借用与原始引用失效（编译错误）](#103-边界测试mut-的重新借用与原始引用失效编译错误)
-    - [10.4 边界测试：内部可变性与 `&T` 的不可变性矛盾（编译错误/运行时 UB）](#104-边界测试内部可变性与-t-的不可变性矛盾编译错误运行时-ub)
+    - [10.4 边界测试：内部可变性与 `&T` 的不可变性矛盾（编译错误/运行时（Runtime） UB）](LINK_PLACEHOLDER)
     - [10.4 边界测试：`&mut T` 的重新借用与显式解引用混用（编译错误）](#104-边界测试mut-t-的重新借用与显式解引用混用编译错误)
     - [10.2 边界测试：返回局部变量的悬垂引用](#102-边界测试返回局部变量的悬垂引用)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -161,7 +161,7 @@ graph LR
 > **认知功能**: 此图展示 Rust 中三种**隐式引用/解引用机制**——自动引用（方法调用）、自动解引用（显式 * 操作）和 Deref 强制（类型转换）。
 > [来源: [TRPL](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)] · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch04-02-references-and-borrowing.html)
 > **使用建议**: 利用自动机制简化代码，但理解其背后的规则以避免意外行为。
-> **关键洞察**: 这些隐式转换是**语法糖**——它们在编译期展开为显式操作，无运行时开销。
+> **关键洞察**: 这些隐式转换是**语法糖**——它们在编译期展开为显式操作，无运行时（Runtime）开销。
 > [来源: [Rust Reference — Method Call Expressions](https://doc.rust-lang.org/reference/expressions/method-call-expr.html#automatic-referencing)]
 
 ---
@@ -230,7 +230,7 @@ b.len();        // 自动: (&*b).len() → &String::len()
 >
 > 1. 编译器尝试 `s.method()` → `(&s).method()` → `(&mut s).method()` → `(*s).method()`
 > 2. 选择**第一个成功匹配**的调用方式
-> 3. 不可变引用优先于可变引用（避免不必要的独占访问）
+> 3. 不可变引用（Mutable Reference）优先于可变引用（避免不必要的独占访问）
 > [来源: [Rust Reference — Method Call Expressions](https://doc.rust-lang.org/reference/expressions/method-call-expr.html#autoref)]
 
 ---
@@ -357,7 +357,7 @@ graph TD
     style FALSE fill:#ffebee
 ```
 
-> **认知功能**: 此决策树判断是否应为类型实现 Deref。核心判断标准是**语义是否属于"引用"家族**。
+> **认知功能**: 此决策树判断是否应为类型实现 Deref。核心判断标准是**语义是否属于"引用（Reference）"家族**。
 > **使用建议**: Deref 只用于**智能指针（Smart Pointer）/引用包装器**。普通封装应使用显式方法，而非 Deref。
 > **关键洞察**: Deref 的滥用会导致**隐式行为过度**——调用者无法从代码中看出转换发生，增加理解成本。
 > [来源: [Rust API Guidelines — Deref](https://rust-lang.github.io/api-guidelines//predictability.html)]
@@ -445,10 +445,10 @@ graph TD
 ## 相关概念文件
 
 - [Ownership](./01_ownership.md) — 所有权模型
-- [Borrowing](./02_borrowing.md) — 借用与生命周期
-- [Type System](./04_type_system.md) — Rust 类型系统
-- [Memory Management](../02_intermediate/03_memory_management.md) — 内存管理与智能指针
-- [Generics](../02_intermediate/02_generics.md) — 泛型与参数多态
+- [Borrowing](./02_borrowing.md) — 借用与生命周期（Lifetimes）
+- [Type System](./04_type_system.md) — Rust 类型系统（Type System）
+- [Memory Management](../02_intermediate/03_memory_management.md) — 内存管理与智能指针（Smart Pointer）
+- [Generics](../02_intermediate/02_generics.md) — 泛型（Generics）与参数多态
 
 ---
 
@@ -463,7 +463,7 @@ graph TD
 ## 七、多级引用语义与部分重借用（Multi-level References & Partial Reborrows）
 
 > **Bloom 层级**: 理解 → 分析 → 应用
-> **定位**: 深入 Rust 的**多级引用**（`&&T`、`&mut &T`）与**部分重借用**（partial reborrow）机制，澄清嵌套引用在借用检查器中的行为、编译器对结构体字段级粒度的跟踪，以及 Tree Borrows 模型下的权限语义。
+> **定位**: 深入 Rust 的**多级引用**（`&&T`、`&mut &T`）与**部分重借用**（partial reborrow）机制，澄清嵌套引用在借用检查器中的行为、编译器对结构体（Struct）字段级粒度的跟踪，以及 Tree Borrows 模型下的权限语义。
 > **前置概念**: [Ownership](./01_ownership.md) · [Borrowing](./02_borrowing.md) · [Lifetime](./03_lifetimes.md)
 > **后置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Formal Methods](../04_formal/01_linear_logic.md)
 
@@ -493,7 +493,7 @@ let r3 = &r2;      // r3: &&&i32
 assert_eq!(***r3, 42);
 ```
 
-类型推断行为：当写 `let r = &&&5;` 时，Rust 编译器推断的类型是 `&&&i32`，其中每一级引用都获得独立的匿名生命周期。
+类型推断（Type Inference）行为：当写 `let r = &&&5;` 时，Rust 编译器推断的类型是 `&&&i32`，其中每一级引用都获得独立的匿名生命周期。
 
 ```rust
 let r = &&&5;
@@ -619,7 +619,7 @@ fn partial_reborrow_demo(p: &mut Point3D) {
 
 #### 7.2.2 部分重借用的类型学限制
 
-Rust Internals 社区（quinedot, kpreid, 2023）深入讨论了部分重借用的一个核心限制：**当前 Rust 类型系统无法表达"对父结构体的可变引用，排除某个子字段"的签名**。
+Rust Internals 社区（quinedot, kpreid, 2023）深入讨论了部分重借用的一个核心限制：**当前 Rust 类型系统（Type System）无法表达"对父结构体的可变引用，排除某个子字段"的签名**。
 
 ```rust
 struct Parent {
@@ -929,7 +929,7 @@ fn iterator_mut_chains() {
 }
 ```
 
-> **关键洞察**: `iter_mut()` 返回的迭代器产生 `&mut T`，后续适配器（如 `enumerate()`）通过**部分重借用**原理将 `&mut T` 包装为 `(usize, &mut T)` 而不破坏可变性。
+> **关键洞察**: `iter_mut()` 返回的迭代器（Iterator）产生 `&mut T`，后续适配器（如 `enumerate()`）通过**部分重借用**原理将 `&mut T` 包装为 `(usize, &mut T)` 而不破坏可变性。
 > [来源: [Rust Standard Library — Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html)]（一级来源）
 
 ---
@@ -1105,7 +1105,7 @@ Tree Borrows 的权限树在 Iris 框架中可以建模为**分式权限（Fract
 
 > **Bloom 层级**: 分析
 
-多级引用语义与名义/结构类型系统的交叉点，决定了**复杂借用场景中类型检查的精确行为**：
+多级引用语义与名义/结构类型系统（Type System）的交叉点，决定了**复杂借用场景中类型检查的精确行为**：
 
 **引用的结构本质**：
 
@@ -1337,7 +1337,7 @@ fn get_ref() -> &i32 {
 fn main() {}
 ```
 
-> **修正**: **悬垂引用**是 Rust borrow checker 的核心防护：1) 局部变量在函数结束时 drop；2) 返回其引用 → 引用指向已释放内存；3) 解决：返回所有权（`i32` 而非 `&i32`）或使用 `Box::leak` 获取 `'static` 引用。
+> **修正**: **悬垂引用**是 Rust borrow checker 的核心防护：1) 局部变量在函数结束时 drop；2) 返回其引用 → 引用指向已释放内存；3) 解决：返回所有权（Ownership）（`i32` 而非 `&i32`）或使用 `Box::leak` 获取 `'static` 引用。
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -1372,7 +1372,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-因为 `Box<T>` 实现了 `Deref<Target=T>`。不是内建行为，而是标准库实现，体现零成本抽象。
+因为 `Box<T>` 实现了 `Deref<Target=T>`。不是内建行为，而是标准库实现，体现零成本抽象（Zero-Cost Abstraction）。
 </details>
 
 ---
@@ -1384,7 +1384,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-`DerefMut` 继承 `Deref`，提供可变解引用 `deref_mut`。当自定义智能指针需要支持 `&mut` 解引用到可变目标时需要实现。
+`DerefMut` 继承 `Deref`，提供可变解引用 `deref_mut`。当自定义智能指针（Smart Pointer）需要支持 `&mut` 解引用到可变目标时需要实现。
 </details>
 
 ---
@@ -1396,7 +1396,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-没有。`Deref::deref` 返回引用，所有转换在编译期完成，是零成本抽象。
+没有。`Deref::deref` 返回引用，所有转换在编译期完成，是零成本抽象（Zero-Cost Abstraction）。
 </details>
 
 ## 实践
@@ -1427,7 +1427,7 @@ fn main() {}
 | 引用语义：自动解引用、Deref 强制与类型转换 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | 引用语义：自动解引用、Deref 强制与类型转换 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
-> 内存安全 ⟸ 引用有效性保证 ⟸ 所有权与借用规则
+> 内存安全（Memory Safety） ⟸ 引用有效性保证 ⟸ 所有权与借用规则
 > 别名分析正确 ⟸ &T 共享读 / &mut T 独占写 ⟸ 类型系统
 > **过渡**: 掌握 引用语义：自动解引用、Deref 强制与类型转换 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 引用语义：自动解引用、Deref 强制与类型转换 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。

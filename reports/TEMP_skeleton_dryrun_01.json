@@ -3,8 +3,7 @@
     "path": "concept\\01_foundation\\00_pl_prerequisites.md",
     "modified": false,
     "en_existing": "Pl Prerequisites",
-    "prerequisites_generated": "N/A",
-    "followups_generated": "N/A"
+    "prerequisites_generated": "N/A"
   },
   {
     "path": "concept\\01_foundation\\00_start.md",
@@ -16,218 +15,163 @@
   {
     "path": "concept\\01_foundation\\01_ownership.md",
     "modified": false,
-    "en_existing": "Ownership",
-    "prerequisites_generated": "[Type System](./TypeSystem.md)",
-    "followups_generated": "[Borrowing](./Borrowing.md)"
+    "en_existing": "Ownership"
   },
   {
     "path": "concept\\01_foundation\\02_borrowing.md",
     "modified": false,
-    "en_existing": "Borrowing",
-    "prerequisites_generated": "[Ownership](./Ownership.md) · [Type System](./TypeSystem.md)",
-    "followups_generated": "[Lifetimes](./Lifetimes.md)"
+    "en_existing": "Borrowing"
   },
   {
     "path": "concept\\01_foundation\\03_lifetimes.md",
     "modified": false,
-    "en_existing": "Lifetimes",
-    "prerequisites_generated": "[Borrowing](./Borrowing.md) · [Ownership](./Ownership.md) · [Type System](./TypeSystem.md)",
-    "followups_generated": "N/A"
+    "en_existing": "Lifetimes"
   },
   {
     "path": "concept\\01_foundation\\03_lifetimes_advanced.md",
     "modified": false,
     "en_existing": "Lifetimes Advanced",
-    "prerequisites_generated": "N/A",
-    "followups_generated": "N/A"
+    "prerequisites_generated": "N/A"
   },
   {
     "path": "concept\\01_foundation\\04_type_system.md",
     "modified": false,
-    "en_existing": "Type System",
-    "prerequisites_generated": "N/A",
-    "followups_generated": "[Ownership](./Ownership.md)"
+    "en_existing": "Type System"
   },
   {
     "path": "concept\\01_foundation\\05_never_type.md",
     "modified": false,
-    "en_existing": "Never Type",
-    "prerequisites_generated": "N/A",
-    "followups_generated": "N/A"
+    "en_existing": "Never Type"
   },
   {
     "path": "concept\\01_foundation\\05_reference_semantics.md",
     "modified": false,
-    "en_existing": "Reference Semantics",
-    "prerequisites_generated": "N/A",
-    "followups_generated": "N/A"
+    "en_existing": "Reference Semantics"
   },
   {
     "path": "concept\\01_foundation\\06_zero_cost_abstractions.md",
     "modified": false,
-    "en_existing": "Zero Cost Abstractions",
-    "prerequisites_generated": "N/A",
-    "followups_generated": "N/A"
+    "en_existing": "Zero Cost Abstractions"
   },
   {
     "path": "concept\\01_foundation\\07_control_flow.md",
     "modified": false,
-    "en_existing": "Control Flow",
-    "prerequisites_generated": "N/A",
-    "followups_generated": "N/A"
+    "en_existing": "Control Flow"
   },
   {
     "path": "concept\\01_foundation\\08_collections.md",
     "modified": false,
-    "en_existing": "Collections",
-    "prerequisites_generated": "N/A",
-    "followups_generated": "N/A"
+    "en_existing": "Collections"
   },
   {
     "path": "concept\\01_foundation\\09_strings_and_text.md",
     "modified": false,
-    "en_existing": "Strings and Text",
-    "prerequisites_generated": "N/A",
-    "followups_generated": "N/A"
+    "en_existing": "Strings and Text"
   },
   {
     "path": "concept\\01_foundation\\10_error_handling_basics.md",
     "modified": false,
-    "en_existing": "Error Handling",
-    "prerequisites_generated": "N/A",
-    "followups_generated": "N/A"
+    "en_existing": "Error Handling"
   },
   {
     "path": "concept\\01_foundation\\10_numerics.md",
     "modified": false,
-    "en_existing": "Numerics",
-    "prerequisites_generated": "N/A",
-    "followups_generated": "N/A"
+    "en_existing": "Numerics"
   },
   {
     "path": "concept\\01_foundation\\11_modules_and_paths.md",
     "modified": false,
-    "en_existing": "Modules",
-    "prerequisites_generated": "N/A",
-    "followups_generated": "N/A"
+    "en_existing": "Modules"
   },
   {
     "path": "concept\\01_foundation\\11_numeric_types.md",
     "modified": false,
-    "en_existing": "Numeric Types",
-    "prerequisites_generated": "N/A",
-    "followups_generated": "N/A"
+    "en_existing": "Numeric Types"
   },
   {
     "path": "concept\\01_foundation\\12_attributes_and_macros.md",
     "modified": false,
-    "en_existing": "Macros",
-    "prerequisites_generated": "N/A",
-    "followups_generated": "N/A"
+    "en_existing": "Macros"
   },
   {
     "path": "concept\\01_foundation\\13_panic_and_abort.md",
     "modified": false,
-    "en_existing": "Panic and Abort",
-    "prerequisites_generated": "N/A",
-    "followups_generated": "N/A"
+    "en_existing": "Panic and Abort"
   },
   {
     "path": "concept\\01_foundation\\14_coercion_and_casting.md",
     "modified": false,
-    "en_existing": "Coercion and Casting",
-    "prerequisites_generated": "N/A",
-    "followups_generated": "N/A"
+    "en_existing": "Coercion and Casting"
   },
   {
     "path": "concept\\01_foundation\\15_closure_basics.md",
     "modified": false,
-    "en_existing": "Closures",
-    "prerequisites_generated": "N/A",
-    "followups_generated": "N/A"
+    "en_existing": "Closures"
   },
   {
     "path": "concept\\01_foundation\\16_testing_basics.md",
     "modified": false,
-    "en_existing": "Testing",
-    "prerequisites_generated": "N/A",
-    "followups_generated": "N/A"
+    "en_existing": "Testing"
   },
   {
     "path": "concept\\01_foundation\\17_collections_advanced.md",
     "modified": false,
-    "en_existing": "Collections Advanced",
-    "prerequisites_generated": "N/A",
-    "followups_generated": "N/A"
+    "en_existing": "Collections Advanced"
   },
   {
     "path": "concept\\01_foundation\\18_strings_and_encoding.md",
     "modified": false,
-    "en_existing": "Strings and Encoding",
-    "prerequisites_generated": "N/A",
-    "followups_generated": "N/A"
+    "en_existing": "Strings and Encoding"
   },
   {
     "path": "concept\\01_foundation\\20_variable_model.md",
     "modified": false,
-    "en_existing": "Variable Model",
-    "prerequisites_generated": "N/A",
-    "followups_generated": "N/A"
+    "en_existing": "Variable Model"
   },
   {
     "path": "concept\\01_foundation\\21_effects_and_purity.md",
     "modified": false,
-    "en_existing": "Effects and Purity",
-    "prerequisites_generated": "N/A",
-    "followups_generated": "N/A"
+    "en_existing": "Effects and Purity"
   },
   {
     "path": "concept\\01_foundation\\22_data_abstraction_spectrum.md",
     "modified": false,
-    "en_existing": "Data Abstraction Spectrum",
-    "prerequisites_generated": "N/A",
-    "followups_generated": "N/A"
+    "en_existing": "Data Abstraction Spectrum"
   },
   {
     "path": "concept\\01_foundation\\23_quiz_ownership_borrowing.md",
     "modified": false,
     "en_existing": "Ownership",
-    "prerequisites_generated": "[Type System](./TypeSystem.md)",
-    "followups_generated": "[Borrowing](./Borrowing.md)"
+    "followups_generated": "[Borrowing](./02_borrowing.md)"
   },
   {
     "path": "concept\\01_foundation\\24_quiz_type_system.md",
     "modified": false,
     "en_existing": "Type System",
-    "prerequisites_generated": "N/A",
-    "followups_generated": "[Ownership](./Ownership.md)"
+    "followups_generated": "[Ownership](./23_quiz_ownership_borrowing.md)"
   },
   {
     "path": "concept\\01_foundation\\25_quiz_error_handling.md",
     "modified": false,
     "en_existing": "Error Handling",
-    "prerequisites_generated": "N/A",
     "followups_generated": "N/A"
   },
   {
     "path": "concept\\01_foundation\\26_quiz_modules_testing.md",
     "modified": false,
     "en_existing": "Modules",
-    "prerequisites_generated": "N/A",
     "followups_generated": "N/A"
   },
   {
     "path": "concept\\01_foundation\\27_quiz_closures_iterators.md",
     "modified": false,
     "en_existing": "Closures",
-    "prerequisites_generated": "N/A",
     "followups_generated": "N/A"
   },
   {
     "path": "concept\\01_foundation\\28_ownership_inventories_brown_book.md",
     "modified": false,
     "en_existing": "Brown University Ownership Inventory",
-    "prerequisites_generated": "N/A",
     "followups_generated": "N/A"
   },
   {

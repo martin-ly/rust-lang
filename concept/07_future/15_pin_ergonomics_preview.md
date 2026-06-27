@@ -13,7 +13,7 @@
 > **内容分级**: [实验级]
 > **Bloom 层级**: 分析 → 评价
 >
-> **定位**: 探讨 Rust 编译器基础设施中最影响异步编程体验的长期痛点 —— `Pin` 的 ergonomics，以及 Project Goals 2026 Flagship "Beyond the `&`" 的解决方案：Reborrow Traits、Pinned Places、Safe Pin Projection。
+> **定位**: 探讨 Rust 编译器基础设施中最影响异步（Async）编程体验的长期痛点 —— `Pin` 的 ergonomics，以及 Project Goals 2026 Flagship "Beyond the `&`" 的解决方案：Reborrow Traits、Pinned Places、Safe Pin Projection。
 > **前置概念**:
 > [Async](../03_advanced/02_async.md) ·
 > [Pin/Unpin](../03_advanced/06_pin_unpin.md) ·
@@ -35,11 +35,11 @@
 
 | # | 痛点 | 示例 | 影响 |
 |:---:|:---|:---|:---:|
-| 1 | **栈上 Pin 需要宏** | `let mut pinned = pin!(future);` | 初学者困惑：为什么不能 `let pinned = Pin::new(&mut future)` |
-| 2 | **Pinned 引用不能自动 reborrow** | `pinned.as_mut().await` | 每次都需要显式调用 `as_mut()`，代码噪音大 |
+| 1 | **栈上 Pin 需要宏（Macro）** | `let mut pinned = pin!(future);` | 初学者困惑：为什么不能 `let pinned = Pin::new(&mut future)` |
+| 2 | **Pinned 引用（Reference）不能自动 reborrow** | `pinned.as_mut().await` | 每次都需要显式调用 `as_mut()`，代码噪音大 |
 | 3 | **方法签名噪音** | `fn poll(self: Pin<&mut Self>)` | 自定义 Future 必须写冗长的 self 类型 |
-| 4 | **Safe Pin Projection 需要外部 crate** | 必须使用 `pin-project` 或 `pin-project-lite` | 额外依赖、宏魔法、学习曲线 |
-| 5 | **Drop 与 Pin 的交互危险** | 手动实现 pin projection 时可能违反 pinning guarantee | 潜在的内存安全漏洞 |
+| 4 | **Safe Pin Projection 需要外部 crate** | 必须使用 `pin-project` 或 `pin-project-lite` | 额外依赖、宏（Macro）魔法、学习曲线 |
+| 5 | **Drop 与 Pin 的交互危险** | 手动实现 pin projection 时可能违反 pinning guarantee | 潜在的内存安全（Memory Safety）漏洞 |
 
 ### 1.2 为什么 Pin 如此重要？
 
@@ -53,7 +53,7 @@ graph LR
     end
 ```
 
-Rust 的 `async/await` 编译为**自引用状态机**。如果状态机在内存中移动，内部指针将悬空。`Pin` 是 Rust 内存安全模型的关键扩展 —— 但它的人机工程学一直是社区最大痛点之一。
+Rust 的 `async/await` 编译为**自引用（Reference）状态机**。如果状态机在内存中移动，内部指针将悬空。`Pin` 是 Rust 内存安全（Memory Safety）模型的关键扩展 —— 但它的人机工程学一直是社区最大痛点之一。
 
 ---
 
@@ -108,8 +108,8 @@ let shared: Pin<&MyFuture> = &pinned;  // ✅ 自动 CoerceShared
 
 **当前状态** (2026-06):
 
-- 2025H2 已实现 `Reborrow` / `CoerceShared` trait 的单生命周期 + trivial 内存布局原型
-- 2026 年继续迭代：收集用户反馈、支持多生命周期重借、非平凡 `CoerceShared`、安全性验证、基于实现经验重写 RFC
+- 2025H2 已实现 `Reborrow` / `CoerceShared` trait 的单生命周期（Lifetimes） + trivial 内存布局原型
+- 2026 年继续迭代：收集用户反馈、支持多生命周期（Lifetimes）重借、非平凡 `CoerceShared`、安全性验证、基于实现经验重写 RFC
 - Blocker：可能需要对编译器内部 `Rvalue::Ref` / `ExprKind::Ref` 进行大规模重构；多生命周期支持涉及 rmeta 复杂度
 - 详见 [Rust Project Goals 2026 — Reborrow Traits](https://rust-lang.github.io/rust-project-goals/2026/reborrow-traits.html)
 
@@ -181,7 +181,7 @@ let header: &mut Header = &mut dma_buf.header;  // 当前需要 unsafe
 |:---|:---|:---|
 | `pin` 关键字 + pinned fields | RFC 讨论 | 语言级 Pin ergonomics |
 | `Deref` / `Receiver` 重构 | 推进中 | 通用字段投影 |
-| `Field` trait + 宏 | 实验性 | Rust for Linux 当前方案 |
+| `Field` trait + 宏（Macro） | 实验性 | Rust for Linux 当前方案 |
 
 ---
 
@@ -226,7 +226,7 @@ graph TD
 |:---|:---|:---|
 | `pin-project` / `pin-project-lite` | Safe pin projection | 自定义 Future / Stream |
 | `pin-utils` | `pin_mut!` 宏 | 栈上 pinning（已被 `std::pin::pin!` 取代）|
-| `futures::FutureExt` | `.poll_unpin()` 等辅助方法 | 通用异步编程 |
+| `futures::FutureExt` | `.poll_unpin()` 等辅助方法 | 通用异步（Async）编程 |
 
 ---
 
@@ -243,14 +243,14 @@ graph TD
 <details>
 <summary>✅ 答案与解析</summary>
 
-自引用类型（如异步状态机）需要 `Pin` 保证内存不移动，但 `Pin<&mut T>` 不能自由重新借用，导致大量模板代码和不直观的错误信息。
+自引用类型（如异步状态机）需要 `Pin` 保证内存不移动，但 `Pin<&mut T>` 不能自由重新借用（Borrowing），导致大量模板代码和不直观的错误信息。
 </details>
 
 ---
 
 ### 测验 2：`Pin::as_mut()` 和普通的 `&mut` 重新借用有什么区别？（理解层）
 
-**题目**: `Pin::as_mut()` 和普通的 `&mut` 重新借用有什么区别？
+**题目**: `Pin::as_mut()` 和普通的 `&mut` 重新借用（Borrowing）有什么区别？
 
 <details>
 <summary>✅ 答案与解析</summary>
@@ -279,7 +279,7 @@ graph TD
 <details>
 <summary>✅ 答案与解析</summary>
 
-让 `Pin<&mut T>` 的行为更接近普通 `&mut T`，允许自动重新借用和模式匹配，减少显式的 `as_mut()` 调用。
+让 `Pin<&mut T>` 的行为更接近普通 `&mut T`，允许自动重新借用和模式匹配（Pattern Matching），减少显式的 `as_mut()` 调用。
 </details>
 
 ---

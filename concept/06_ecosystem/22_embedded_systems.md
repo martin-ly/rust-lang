@@ -13,7 +13,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计嵌入式系统架构
-> **定位**: 探讨 Rust 在嵌入式系统领域的应用——从 `no_std` 到裸机编程，分析内存安全如何保证关键系统的可靠性。
+> **定位**: 探讨 Rust 在嵌入式系统领域的应用——从 `no_std` 到裸机编程，分析内存安全（Memory Safety）如何保证关键系统的可靠性。
 > **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) ·
 > [Memory Management](../02_intermediate/03_memory_management.md) ·
 > [Type System](../01_foundation/04_type_system.md)
@@ -45,7 +45,7 @@
   - [三、实时系统](#三实时系统)
     - [3.1 实时约束](#31-实时约束)
     - [3.2 RTIC 框架](#32-rtic-框架)
-    - [3.3 Embassy：嵌入式异步运行时](#33-embassy嵌入式异步运行时)
+    - [3.3 Embassy：嵌入式异步（Async）运行时（Runtime）](LINK_PLACEHOLDER)
     - [3.4 embedded-hal-async：异步硬件抽象](#34-embedded-hal-async异步硬件抽象)
     - [3.5 Ariel OS：安全 IoT Library OS](#35-ariel-os安全-iot-library-os)
   - [四、反命题与边界分析](#四反命题与边界分析)
@@ -204,7 +204,7 @@ no_std:
   └── 设备寄存器必须 volatile 访问
 ```
 
-> **内存洞察**: **精确的内存布局控制是嵌入式 Rust 的核心能力**——类型系统保证寄存器映射的正确性。
+> **内存洞察**: **精确的内存布局控制是嵌入式 Rust 的核心能力**——类型系统（Type System）保证寄存器映射的正确性。
 > [来源: [Rust Embedded Book — Memory](https://docs.rust-embedded.org/book/peripherals/index.html)]
 
 ---
@@ -395,14 +395,14 @@ RTIC (Real-Time Interrupt-driven Concurrency):
   └── 类型安全任务通信
 ```
 
-> **RTIC 洞察**: **RTIC 将 Rust 的所有权模型应用于实时调度**——编译期保证资源无冲突，零运行时开销。
+> **RTIC 洞察**: **RTIC 将 Rust 的所有权（Ownership）模型应用于实时调度**——编译期保证资源无冲突，零运行时（Runtime）开销。
 > [来源: [RTIC](https://rtic.rs/)]
 
 ---
 
 ### 3.3 Embassy：嵌入式异步运行时
 
-> **[Embassy](https://embassy.dev/)** 是专为嵌入式系统设计的 async Rust 运行时，支持 `no_std`/`no_alloc` 环境，提供集成定时器、非阻塞 sleep（WFI）和多种 MCU 的 HAL（ESP32、Nordic、RP2040/RP2350、STM32）。
+> **[Embassy](https://embassy.dev/)** 是专为嵌入式系统设计的 async Rust 运行时（Runtime），支持 `no_std`/`no_alloc` 环境，提供集成定时器、非阻塞 sleep（WFI）和多种 MCU 的 HAL（ESP32、Nordic、RP2040/RP2350、STM32）。
 > [来源: [Embassy Book](https://embassy.dev/book/)] · [来源: [embedded-hal-async](https://docs.rs/embedded-hal-async/latest/embedded_hal_async/)]
 
 ```rust,ignore
@@ -425,7 +425,7 @@ async fn main(_spawner: Spawner) {
 }
 ```
 
-> **Embassy 洞察**: Embassy 将 **Tokio 的异步模型带入嵌入式**——`async/await` + 非阻塞 I/O，同时保持 `no_std` 的极简资源占用。
+> **Embassy 洞察**: Embassy 将 **Tokio 的异步（Async）模型带入嵌入式**——`async/await` + 非阻塞 I/O，同时保持 `no_std` 的极简资源占用。
 
 ---
 
@@ -475,7 +475,7 @@ where
 | **内存占用** | 极低 | 略高（Future 状态机） |
 | **CPU 效率** | 忙等/轮询 | 事件驱动，可进入低功耗模式 |
 
-> **设计洞察**: `embedded-hal-async` 的 trait 设计遵循**零成本抽象**原则——`async fn` 在编译后展开为状态机，不引入动态分配。对于不支持 async 的底层硬件，可通过 `embassy-embedded-hal` 适配层桥接。
+> **设计洞察**: `embedded-hal-async` 的 trait 设计遵循**零成本抽象（Zero-Cost Abstraction）**原则——`async fn` 在编译后展开为状态机，不引入动态分配。对于不支持 async 的底层硬件，可通过 `embassy-embedded-hal` 适配层桥接。
 
 ```text
 embedded-hal-async 生态栈:
@@ -532,7 +532,7 @@ Ariel OS 架构:
 | **网络** | embassy-net | 自定义栈 | embassy-net |
 | **适用场景** | 安全 IoT 终端 | 学术研究/安全关键 | 通用嵌入式 |
 
-> **Ariel OS 洞察**: Library OS 是嵌入式 Rust 的**新兴范式**——将 OS 的抽象成本降至最低，同时保留 Rust 的内存安全保证。
+> **Ariel OS 洞察**: Library OS 是嵌入式 Rust 的**新兴范式**——将 OS 的抽象成本降至最低，同时保留 Rust 的内存安全（Memory Safety）保证。
 
 ---
 
@@ -767,8 +767,8 @@ extern "C" fn timer_interrupt() {
 > 嵌入式中断处理器共享全局状态时必须处理并发——中断可能随时抢占主循环。
 > `static mut` 需要 `unsafe` 块访问，且存在数据竞争风险。
 > 正确做法：使用 `critical_section`（关中断）、原子类型（`AtomicU32`）、或 RTIC（Real-Time Interrupt-driven Concurrency）框架。
-> RTIC 利用 Rust 的所有权系统，在编译期验证中断与主任务之间的资源分配，消除运行时竞争。
-> 这与 C 的 `volatile` + 关中断手动管理不同——Rust 的类型系统提供更高级别的并发安全保证。
+> RTIC 利用 Rust 的所有权（Ownership）系统，在编译期验证中断与主任务之间的资源分配，消除运行时竞争。
+> 这与 C 的 `volatile` + 关中断手动管理不同——Rust 的类型系统（Type System）提供更高级别的并发安全（Concurrency Safety）保证。
 > [来源: [RTIC Documentation](https://rtic.rs/)]
 
 ### 10.3 边界测试：临界区的中断禁用与 `unsafe` 的误用（运行时数据竞争）
@@ -799,7 +799,7 @@ unsafe extern "C" fn isr() {
 > 2) 使用原子类型（`core::sync::atomic::AtomicU32`）；
 > 3) 使用 RTIC（Real-Time Interrupt-driven Concurrency）框架（编译期检查资源冲突）。
 >
-> Rust 的嵌入式生态（`cortex-m`、`embedded-hal`、`rtic`）将并发安全引入裸机编程。
+> Rust 的嵌入式生态（`cortex-m`、`embedded-hal`、`rtic`）将并发安全（Concurrency Safety）引入裸机编程。
 > 这与 C 的 `__disable_irq()`/`__enable_irq()`（手动开关中断，易遗漏）或 FreeRTOS 的互斥量（ heavier，需 OS 支持）不同——Rust 的类型系统可帮助管理临界区（如 RTIC 的任务优先级分析）。
 > [来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)] · [来源: [RTIC Documentation](https://rtic.rs/)]
 

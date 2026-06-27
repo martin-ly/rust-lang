@@ -75,7 +75,7 @@
     - [12.3 边界测试：背压与死锁](#123-边界测试背压与死锁)
   - [十三、知识来源关系](#十三知识来源关系)
   - [十、边界测试：流处理语义的编译错误](#十边界测试流处理语义的编译错误)
-    - [10.1 边界测试：Tokio Stream 与所有权冲突（编译错误）](#101-边界测试tokio-stream-与所有权冲突编译错误)
+    - [10.1 边界测试：Tokio Stream 与所有权（Ownership）冲突（编译错误）](LINK_PLACEHOLDER)
     - [10.2 边界测试：背压传播中的类型不匹配（编译错误）](#102-边界测试背压传播中的类型不匹配编译错误)
     - [10.3 边界测试：Stream 的 `fuse` 与重复 poll 后的行为（逻辑错误）](#103-边界测试stream-的-fuse-与重复-poll-后的行为逻辑错误)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
@@ -318,9 +318,9 @@ Checkpoint-1 完成（一致性全局快照）
 | **Unaligned** | 将 in-flight 数据一并快照 | 低 | 高 | 高反压场景 |
 | **Changelog** | 增量状态变更日志 | 极低 | 中 | 大状态、低 RTO |
 
-> **关键洞察**: Barrier 对齐是 Flink Exactly-Once 的核心代价——它通过阻塞数据流来确保快照的一致性切分。
+> **关键洞察**: Barrier 对齐是 Flink Exactly-Once 的核心代价——它通过阻塞数据流来确保快照的一致性（Coherence）切分。
 > 非对齐 Checkpoint 用"空间换时间"，将通道中的数据也纳入快照，消除了对齐等待。
-> Rust 的所有权系统为无锁实现非对齐 Checkpoint 提供了独特优势（无 GC 暂停意味着更稳定的 barrier 传播延迟）。
+> Rust 的所有权（Ownership）系统为无锁实现非对齐 Checkpoint 提供了独特优势（无 GC 暂停意味着更稳定的 barrier 传播延迟）。
 > [来源: 💡 原创分析] · [Flink FLIP-76] ✅
 
 ---
@@ -339,11 +339,11 @@ Checkpoint-1 完成（一致性全局快照）
 | 后端 | 存储介质 | 快照方式 | 适用场景 |
 |:---|:---|:---|:---|
 | **MemoryStateBackend** | JVM Heap | 同步快照 | 小状态、测试 |
-| **FsStateBackend** | 本地文件系统 | 异步快照 | 中等状态 |
-| **RocksDBStateBackend** | RocksDB (LSM-Tree) | 增量异步快照 | 大状态、生产环境 |
+| **FsStateBackend** | 本地文件系统 | 异步（Async）快照 | 中等状态 |
+| **RocksDBStateBackend** | RocksDB (LSM-Tree) | 增量异步（Async）快照 | 大状态、生产环境 |
 
 > **关键洞察**: RocksDB 的 LSM-Tree 结构天然支持增量快照——SST 文件一旦生成即不可变，Checkpoint 只需复制元数据并上传新增 SST。
-> 这与 Rust 的不可变性哲学（&T 共享引用）形成有趣的映射：两者都利用"写时复制"或"不可变快照"来实现高效的持久化。
+> 这与 Rust 的不可变性哲学（&T 共享引用（Reference））形成有趣的映射：两者都利用"写时复制"或"不可变快照"来实现高效的持久化。
 > [来源: 💡 原创分析] · [Flink Documentation] ✅
 
 ---
@@ -436,9 +436,9 @@ Timely Dataflow（TD）是 DD 的底层执行引擎，核心创新是**时间戳
 ```
 
 > **关键洞察**:
-> Timely Dataflow 的时间戳机制与 Rust 的生命周期系统有深层同构：两者都追踪"资源（数据/引用（Reference））何时可被安全释放"。
-> TD 的 `epoch` 类似于所有权的 drop 时刻，而 `iteration` 类似于借用链的嵌套深度。
-> 这种同构不是巧合——Frank McSherry 选择 Rust 实现 TD 正是因为其类型系统能精确表达 TD 的并发安全约束。
+> Timely Dataflow 的时间戳机制与 Rust 的生命周期（Lifetimes）系统有深层同构：两者都追踪"资源（数据/引用（Reference））何时可被安全释放"。
+> TD 的 `epoch` 类似于所有权的 drop 时刻，而 `iteration` 类似于借用（Borrowing）链的嵌套深度。
+> 这种同构不是巧合——Frank McSherry 选择 Rust 实现 TD 正是因为其类型系统（Type System）能精确表达 TD 的并发安全（Concurrency Safety）约束。
 > [来源: 💡 原创分析] · [McSherry Blog] ✅
 
 ---
@@ -452,7 +452,7 @@ Timely Dataflow（TD）是 DD 的底层执行引擎，核心创新是**时间戳
 | **表** | 静态快照 | 动态变化的事件流 |
 | **查询** | 一次性计算 | 持续计算（standing query） |
 | **结果** | 最终结果集 | 增量更新流 |
-| **正确性** | 读取时一致性 | 事件时间一致性 + retraction |
+| **正确性** | 读取时一致性（Coherence） | 事件时间一致性 + retraction |
 
 ### 10.2 CDC（Change Data Capture）
 
@@ -499,9 +499,9 @@ GROUP BY region;
 | **GC 暂停** | 有 | 有 | 有 | **无** ✅ | **无** ✅ |
 
 > **关键洞察**:
-> Rust 实现的流处理系统（Materialize、timely-dataflow）在"无 GC 暂停"和"内存安全"两个维度上具有结构性优势。
+> Rust 实现的流处理系统（Materialize、timely-dataflow）在"无 GC 暂停"和"内存安全（Memory Safety）"两个维度上具有结构性优势。
 > 对于低延迟流处理（sub-100ms），GC 暂停是不可接受的噪声源。
-> Rust 的所有权系统消除了 GC 的需要，同时保证了并发安全——这正是 Frank McSherry 选择 Rust 实现 TD/DD 的根本原因。
+> Rust 的所有权系统消除了 GC 的需要，同时保证了并发安全（Concurrency Safety）——这正是 Frank McSherry 选择 Rust 实现 TD/DD 的根本原因。
 > [来源: 💡 原创分析] · [Materialize Interview — SE-Radio 2022] ✅
 
 ---
@@ -589,7 +589,7 @@ async fn main() {
 }
 ```
 
-> **修正**: 避免循环背压依赖，或使用无界 channel（但会牺牲内存安全保证）。
+> **修正**: 避免循环背压依赖，或使用无界 channel（但会牺牲内存安全（Memory Safety）保证）。
 
 ---
 
@@ -606,7 +606,7 @@ async fn main() {
 | Naiad Timely Dataflow | [Murray et al., SOSP 2013] | ✅ | Tier 1 |
 | Materialize 严格串行化 | [Materialize Documentation] | ✅ | Tier 1 |
 | Rust 无 GC 优势的流处理 | [💡 原创分析] | ⚠️ | Tier 3 |
-| TD 时间戳 ↔ Rust 生命周期同构 | [💡 原创分析] | ⚠️ | Tier 3 |
+| TD 时间戳 ↔ Rust 生命周期（Lifetimes）同构 | [💡 原创分析] | ⚠️ | Tier 3 |
 
 ---
 
@@ -653,9 +653,9 @@ async fn fixed_stream() {
 
 > **修正**:
 > `stream::iter(data)` 消耗 `data` 的所有权，将其转换为流。
-> 若需在流消费后继续使用原数据，必须传递引用（`stream::iter(&data)`）。
-> 这与迭代器的所有权规则一致——`into_iter` 消耗，`iter` 借用（Borrowing）。
-> Rust 的流处理（`Stream` trait）与所有权系统的结合确保了内存安全：流不能产出指向已释放数据的引用。
+> 若需在流消费后继续使用原数据，必须传递引用（Reference）（`stream::iter(&data)`）。
+> 这与迭代器（Iterator）的所有权规则一致——`into_iter` 消耗，`iter` 借用（Borrowing）。
+> Rust 的流处理（`Stream` trait）与所有权系统的结合确保了内存安全（Memory Safety）：流不能产出指向已释放数据的引用。
 > [来源: [futures-rs Documentation](https://docs.rs/futures/)]
 
 ### 10.2 边界测试：背压传播中的类型不匹配（编译错误）
@@ -684,7 +684,7 @@ async fn consumer_fixed(mut rx: mpsc::Receiver<i32>) {
 }
 ```
 
-> **修正**: Rust 的 channel（`mpsc::channel<T>`）在类型层面保证发送和接收的类型一致性。编译器拒绝类型不匹配的 channel 连接，将运行时类型错误提前到编译期。这与 Go 的 `chan interface{}` 或 Erlang 的动态消息类型形成对比——Rust 的流处理是类型安全的，但要求在设计时明确消息类型。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
+> **修正**: Rust 的 channel（`mpsc::channel<T>`）在类型层面保证发送和接收的类型一致性。编译器拒绝类型不匹配的 channel 连接，将运行时（Runtime）类型错误提前到编译期。这与 Go 的 `chan interface{}` 或 Erlang 的动态消息类型形成对比——Rust 的流处理是类型安全的，但要求在设计时明确消息类型。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
 
 ### 10.3 边界测试：Stream 的 `fuse` 与重复 poll 后的行为（逻辑错误）
 
@@ -711,7 +711,7 @@ fn main() {
 > 这与 `Iterator` 的行为不同：`Iterator::next()` 返回 `None` 后再次调用是明确定义的（继续返回 `None`）。
 > `Stream` 的设计原因：某些底层源（如 I/O、channel）在关闭后可能重新打开或产生错误，不强制 `None` 后终止。
 > 安全模式：消费 Stream 后使用 `.fuse()`，或用 `while let Some(item) = stream.next().await`（自动处理）。
-> 这与 Tokio 的 `StreamExt` 或 futures-rs 的 `Stream` 实现一致——Rust 的异步流语义比迭代器更复杂，因涉及外部事件源。
+> 这与 Tokio 的 `StreamExt` 或 futures-rs 的 `Stream` 实现一致——Rust 的异步流语义比迭代器（Iterator）更复杂，因涉及外部事件源。
 > [来源: [futures-rs Documentation](https://docs.rs/futures/)] · [来源: [Tokio Stream](https://docs.rs/tokio-stream/)]
 
 ## 逆向推理链（Backward Reasoning）
@@ -801,16 +801,16 @@ fn main() {
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | 流处理语义：从 Dataflow Model 到 Differential Dataflow 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 流处理语义：从 Dataflow Model 到 Differential Dataflow 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 流处理语义：从 Dataflow Model 到 Differential Dataflow 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 流处理语义：从 Dataflow Model 到 Differential Dataflow 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 流处理一致性 ⟸ 背压控制 ⟸ 生产者-消费者协议
 > 异步流安全 ⟸ Stream/AsyncRead 生命周期（Lifetimes） ⟸ Pin 约束
-> **过渡**: 掌握 流处理语义：从 Dataflow Model 到 Differential Dataflow 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 流处理语义：从 Dataflow Model 到 Differential Dataflow 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 流处理语义：从 Dataflow Model 到 Differential Dataflow 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: 流处理语义：从 Dataflow Model 到 Differential Dataflow 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 流处理语义：从 Dataflow Model 到 Differential Dataflow 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

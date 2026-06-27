@@ -54,17 +54,17 @@
 
 | L1-L5 概念 | L6 工程实践 |
 |:---|:---|
-| 所有权 + `Drop` | RAII 模式 |
-| 借用规则 | Clippy lint（如 `needless_borrow`）|
-| Trait | `derive` 宏、接口设计 |
-| 泛型 | 零成本抽象模式 |
+| 所有权（Ownership） + `Drop` | RAII 模式 |
+| 借用（Borrowing）规则 | Clippy lint（如 `needless_borrow`）|
+| Trait | `derive` 宏（Macro）、接口设计 |
+| 泛型（Generics） | 零成本抽象（Zero-Cost Abstraction）模式 |
 | `Send`/`Sync` | `crossbeam`、`rayon` 设计 |
-| `async`/`await` | `tokio`、`axum` 异步生态 |
+| `async`/`await` | `tokio`、`axum` 异步（Async）生态 |
 | `unsafe` | Miri 动态检测、审计规范 |
 | 形式化方法 | Kani 集成测试、契约注释 |
-| 生命周期 | `sqlx` 编译期查询检查 |
-| 过程宏 | `serde`、`clap` derive |
-| `Pin` | `tokio` 自引用任务 |
+| 生命周期（Lifetimes） | `sqlx` 编译期查询检查 |
+| 过程宏（Procedural Macro） | `serde`、`clap` derive |
+| `Pin` | `tokio` 自引用（Reference）任务 |
 | 范畴论/态射 | `Tower` Service Trait 复合 |
 
 ---

@@ -10,7 +10,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S+P** — StructureProcedure
 > **双维定位**: C×Eva — 评价 Rust 技术路线图
-> **定位**: 分析 Rust **2027 Edition 及更远期**的潜在特性集合——从 gen/kw、特化稳定化、可移植 SIMD、自定义分配器到异步 Trait、TAIT 等前沿议题，评价其技术成熟度与生态影响。
+> **定位**: 分析 Rust **2027 Edition 及更远期**的潜在特性集合——从 gen/kw、特化稳定化、可移植 SIMD、自定义分配器到异步（Async） Trait、TAIT 等前沿议题，评价其技术成熟度与生态影响。
 > **前置概念**: [Edition Guide](23_rust_edition_guide.md) · [Version Tracking](./05_rust_version_tracking.md) · [Evolution](./03_evolution.md)
 > **后置概念**: [Formal Methods](./02_formal_methods.md) · [Rust in AI](./21_rust_in_ai.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
@@ -47,18 +47,18 @@
     - [1.1 Edition 演进节奏与政策](#11-edition-演进节奏与政策)
     - [1.2 候选特性概览](#12-候选特性概览)
     - [1.3 特性依赖与 Edition 2027 关联图](#13-特性依赖与-edition-2027-关联图)
-  - [二、类型系统前沿](#二类型系统前沿)
+  - [二、类型系统（Type System）前沿](LINK_PLACEHOLDER)
     - [2.1 Specialization 稳定化](#21-specialization-稳定化)
     - [2.2 Type Alias Impl Trait (TAIT)](#22-type-alias-impl-trait-tait)
     - [2.3 可移植 SIMD (std::simd)](#23-可移植-simd-stdsimd)
-  - [三、异步与执行模型](#三异步与执行模型)
+  - [三、异步（Async）与执行模型](LINK_PLACEHOLDER)
     - [3.1 Async Traits 与静态分发](#31-async-traits-与静态分发)
-    - [3.2 Async Drop 与生命周期](#32-async-drop-与生命周期)
+    - [3.2 Async Drop 与生命周期（Lifetimes）](LINK_PLACEHOLDER)
     - [3.3 Custom Allocators 稳定化](#33-custom-allocators-稳定化)
   - [四、语言级语法演进](#四语言级语法演进)
     - [4.1 gen/kw：生成器关键字扩展](#41-genkw生成器关键字扩展)
-    - [4.2 Open Enums 与可扩展枚举](#42-open-enums-与可扩展枚举)
-    - [4.3 Effects System 与关键字泛型](#43-effects-system-与关键字泛型)
+    - [4.2 Open Enums 与可扩展枚举（Enum）](LINK_PLACEHOLDER)
+    - [4.3 Effects System 与关键字泛型（Generics）](LINK_PLACEHOLDER)
   - [五、工具链与生态基础设施](#五工具链与生态基础设施)
     - [5.1 BorrowSanitizer 工业化](#51-borrowsanitizer-工业化)
     - [5.2 Cranelift 后端与编译速度](#52-cranelift-后端与编译速度)
@@ -72,7 +72,7 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Rust 路线图的编译错误](#十边界测试rust-路线图的编译错误)
-    - [10.1 边界测试：`never_type` (`!`) 的降级与类型推断（编译错误）](#101-边界测试never_type--的降级与类型推断编译错误)
+    - [10.1 边界测试：`never_type` (`!`) 的降级与类型推断（Type Inference）（编译错误）](LINK_PLACEHOLDER)
     - [10.2 边界测试：GAT（泛型关联类型）的递归约束（编译错误）](#102-边界测试gat泛型关联类型的递归约束编译错误)
     - [10.6 边界测试：`impl Trait` 在 `let` 绑定中的类型推断限制（编译错误）](#106-边界测试impl-trait-在-let-绑定中的类型推断限制编译错误)
     - [10.5 边界测试：语言特性稳定化的时间预估偏差（工程规划风险）](#105-边界测试语言特性稳定化的时间预估偏差工程规划风险)
@@ -207,7 +207,7 @@ graph TD
 ### 2.1 Specialization 稳定化
 >
 
-特化（Specialization）允许为特定类型提供比泛型实现更精确的 Trait 实现：
+特化（Specialization）允许为特定类型提供比泛型（Generics）实现更精确的 Trait 实现：
 
 ```rust,ignore
 // 假设特化已稳定（当前 nightly only）
@@ -264,7 +264,7 @@ fn main() {
 └── min_specialization 经验 — 标准库内部使用的简化版已积累实践经验
 ```
 
-> **技术评价**: 特化的稳定化挑战**不在语法，而在类型系统 soundness**。关联类型与生命周期交互的 corner case 是主要阻塞因素。预计 **2027–2028** 完成稳定化。
+> **技术评价**: 特化的稳定化挑战**不在语法，而在类型系统（Type System） soundness**。关联类型与生命周期（Lifetimes）交互的 corner case 是主要阻塞因素。预计 **2027–2028** 完成稳定化。
 > [来源: [RFC 1210](https://github.com/rust-lang/rfcs/pull/1210)] · [来源: [Tracking Issue #31844](https://github.com/rust-lang/rust/issues/31844)]
 
 ---
@@ -296,7 +296,7 @@ fn make_iter() -> MyIter {
 // 用途 2: 跨模块暴露有限类型信息
 ```
 
-> **认知功能**: TAIT 填补了 Rust **存在类型（existential types）**的表达能力缺口——允许在模块/私有边界内命名隐藏类型，同时对外保持抽象。
+> **认知功能**: TAIT 填补了 Rust **存在类型（existential types）**的表达能力缺口——允许在模块（Module）/私有边界内命名隐藏类型，同时对外保持抽象。
 > [来源: [RFC 2515](https://github.com/rust-lang/rfcs/pull/2515)] · [来源: [Rust Internals — TAIT Status](https://internals.rust-lang.org/)]
 
 **TAIT 与 `type_alias_impl_trait` feature**：
@@ -305,7 +305,7 @@ fn make_iter() -> MyIter {
 |:---|:---|:---|
 | 语法位置 | 函数返回类型 | 类型别名定义 |
 | 递归支持 | ❌ 有限 | ✅ 核心用例 |
-| 可见性控制 | 函数边界 | 模块边界 |
+| 可见性控制 | 函数边界 | 模块（Module）边界 |
 | 稳定化预测 | ✅ 已稳定 | 🟡 2026–2027 |
 
 > **来源**: [Rust Reference — Types](https://doc.rust-lang.org/reference/types/impl-trait.html)
@@ -341,7 +341,7 @@ std::simd 状态:
 └── 预计稳定: 2026–2027（不依赖 Edition）
 ```
 
-> **评价**: Portable SIMD 是 Rust **系统编程野心**的关键指标——向 C++ 的 `std::simd` (TS) 和 ISPC 看齐，同时保持零成本抽象和类型安全。
+> **评价**: Portable SIMD 是 Rust **系统编程野心**的关键指标——向 C++ 的 `std::simd` (TS) 和 ISPC 看齐，同时保持零成本抽象（Zero-Cost Abstraction）和类型安全。
 > [来源: [RFC 3086](https://github.com/rust-lang/rfcs/pull/3086)] · [来源: [std::simd tracking](https://github.com/rust-lang/rust/issues/86656)]
 
 ---
@@ -498,7 +498,7 @@ fn main() {
 
 ### 4.2 Open Enums 与可扩展枚举
 
-Rust 当前通过 `#[non_exhaustive]` 实现枚举的向后兼容扩展，但**非真正的开放枚举**：
+Rust 当前通过 `#[non_exhaustive]` 实现枚举（Enum）的向后兼容扩展，但**非真正的开放枚举**：
 
 ```rust
 // 当前: #[non_exhaustive]（编译期契约，运行时封闭）
@@ -509,7 +509,7 @@ pub enum Event { Click, KeyPress }
 // 尚处于早期设计讨论阶段，无 RFC
 ```
 
-**2027 预期**: `#[non_exhaustive]` 仍然是官方推荐路径。真正的开放枚举需要解决**穷尽性检查**与**零成本抽象**的根本张力。
+**2027 预期**: `#[non_exhaustive]` 仍然是官方推荐路径。真正的开放枚举需要解决**穷尽性检查**与**零成本抽象（Zero-Cost Abstraction）**的根本张力。
 
 > **来源**: [RFC 2008](https://github.com/rust-lang/rfcs/pull/2008) · [来源: [Open Enums Discussion](https://internals.rust-lang.org/)]
 
@@ -720,7 +720,7 @@ graph TD
 | [RFC 2515 — TAIT](https://github.com/rust-lang/rfcs/pull/2515) | ✅ 一级 | 类型别名 impl trait |
 | [RFC 3086 — Portable SIMD](https://github.com/rust-lang/rfcs/pull/3086) | ✅ 一级 | 可移植 SIMD |
 | [RFC 1398 — Global Allocators](https://github.com/rust-lang/rfcs/pull/1398) | ✅ 一级 | 全局分配器 |
-| [RFC 3185 — Async Traits](https://github.com/rust-lang/rfcs/pull/3185) | ✅ 一级 | 异步 Trait |
+| [RFC 3185 — Async Traits](https://github.com/rust-lang/rfcs/pull/3185) | ✅ 一级 | 异步（Async） Trait |
 | [RFC 3516 — gen blocks](https://github.com/rust-lang/rfcs/pull/3516) | ✅ 一级 | 生成器语法 |
 | [Rust Foundation Roadmap](https://foundation.rust-lang.org/news/) | ✅ 一级 | 基金会战略 |
 | [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) | ✅ 一级 | 官方教程 |
@@ -761,7 +761,7 @@ fn main() {
 ## 相关概念文件
 
 - [Edition Guide](23_rust_edition_guide.md) — Edition 机制与迁移策略
-- [BorrowSanitizer Preview](20_borrowsanitizer_preview.md) — 运行时借用检查工业化路径
+- [BorrowSanitizer Preview](20_borrowsanitizer_preview.md) — 运行时（Runtime）借用（Borrowing）检查工业化路径
 - [Specialization Preview](26_specialization_preview.md) — Trait 特化机制深度分析
 - [Open Enums Preview](25_open_enums_preview.md) — 可扩展枚举的设计空间
 - [Version Tracking](./05_rust_version_tracking.md) — 版本特性演进跟踪
@@ -822,14 +822,14 @@ fn main() {
 > `!`（never type）是 Rust 的类型系统核心：表示"永不返回"的计算。
 > `!` 可强制转换（coerce）为任意类型，因此 `if cond { 42 } else { panic!() }` 的类型为 `i32`。
 > 但 `!` 的稳定化过程漫长：从实验性到部分稳定（`Infallible` 别名）到完全稳定，跨越多个 Rust 版本。
-> 编译器在类型推断 `!` 时的边缘情况：
+> 编译器在类型推断（Type Inference） `!` 时的边缘情况：
 >
 > 1) `match` 分支类型统一；
-> 2) 闭包返回类型推断；
+> 2) 闭包（Closures）返回类型推断；
 > 3) `Result<T, !>` 的 `?` 运算符行为。
 >
 > `!` 的稳定化是 Rust 类型系统成熟度的重要里程碑——它使"不可恢复错误"在类型层面得到精确表达，而非使用占位类型（`std::convert::Infallible`）。
-> 这与 Haskell 的 `Void`（需显式 `absurd` 转换）或 TypeScript 的 `never`（类似语义，但无运行时对应）类似。
+> 这与 Haskell 的 `Void`（需显式 `absurd` 转换）或 TypeScript 的 `never`（类似语义，但无运行时（Runtime）对应）类似。
 > [来源: [Rust RFC 1216](https://rust-lang.github.io/rfcs//1216-bang-type.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：GAT（泛型关联类型）的递归约束（编译错误）
@@ -855,11 +855,11 @@ impl Iterable for Vec<i32> {
 
 > **修正**:
 >
-> GAT（Generic Associated Types，Rust 1.65 稳定）允许关联类型带有自己的泛型参数（通常是生命周期），解决了返回"借用迭代器"等长期问题。
+> GAT（Generic Associated Types，Rust 1.65 稳定）允许关联类型带有自己的泛型参数（通常是生命周期），解决了返回"借用（Borrowing）迭代器（Iterator）"等长期问题。
 > 但 GAT 的使用引入了新的复杂度：**递归约束**和**高阶 trait bound（HRTB）**。
 > 上述代码中，`fn iter` 的实现递归调用自身（无限循环），但编译错误可能首先由生命周期约束引起——`Self::Iter<'a>` 的定义要求 `'a` 与 `self` 的借用生命周期匹配。
 > GAT 的正确使用模式：标准库中的 `LendingIterator`（实验性）、自定义集合的借用视图、类型状态机（type-state machines）。
-> Rust 的 GAT 设计与 Haskell 的 type families、C++ 的模板模板参数类似，但集成在 trait system 中，保持零成本抽象。
+> Rust 的 GAT 设计与 Haskell 的 type families、C++ 的模板模板参数类似，但集成在 trait system 中，保持零成本抽象（Zero-Cost Abstraction）。
 > [来源: [Rust RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
@@ -917,7 +917,7 @@ where
 > 但某些复杂特性长期停滞：
 >
 > 1) `generic_const_exprs`：依赖类型级计算，设计困难；
-> 2) `specialization`：类型系统 soundness 问题；
+> 2) `specialization`：类型系统（Type System） soundness 问题；
 > 3) `unsized_locals`：实现复杂。
 >
 > 工程风险：

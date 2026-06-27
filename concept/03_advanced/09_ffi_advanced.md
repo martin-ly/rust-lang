@@ -28,11 +28,11 @@
   - [一、核心概念](#一核心概念)
     - [1.1 FFI 的安全契约](#11-ffi-的安全契约)
     - [1.2 内存布局控制](#12-内存布局控制)
-    - [1.3 回调与闭包](#13-回调与闭包)
+    - [1.3 回调与闭包（Closures）](LINK_PLACEHOLDER)
   - [二、技术细节](#二技术细节)
     - [2.1 复杂类型映射](#21-复杂类型映射)
     - [2.2 线程安全边界](#22-线程安全边界)
-    - [2.3 错误处理与 Panic 安全](#23-错误处理与-panic-安全)
+    - [2.3 错误处理（Error Handling）与 Panic 安全](LINK_PLACEHOLDER)
   - [三、FFI 模式矩阵](#三ffi-模式矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -44,12 +44,12 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：高级 FFI 的编译错误](#十边界测试高级-ffi-的编译错误)
     - [10.1 边界测试：可变静态变量在 FFI 中的线程安全（编译错误）](#101-边界测试可变静态变量在-ffi-中的线程安全编译错误)
-    - [10.2 边界测试：`Box::into_raw` 后重复释放（运行时 UB）](#102-边界测试boxinto_raw-后重复释放运行时-ub)
+    - [10.2 边界测试：`Box::into_raw` 后重复释放（运行时（Runtime） UB）](LINK_PLACEHOLDER)
     - [10.3 边界测试：C 变长参数的类型安全（编译错误/运行时 UB）](#103-边界测试c-变长参数的类型安全编译错误运行时-ub)
-    - [10.4 边界测试：回调函数的生命周期与 `Box::into_raw` 泄漏（编译错误/运行时 UB）](#104-边界测试回调函数的生命周期与-boxinto_raw-泄漏编译错误运行时-ub)
+    - [10.4 边界测试：回调函数的生命周期（Lifetimes）与 `Box::into_raw` 泄漏（编译错误/运行时 UB）](LINK_PLACEHOLDER)
     - [10.5 边界测试：C 的 `long double` 与 Rust 的类型映射缺失（编译错误）](#105-边界测试c-的-long-double-与-rust-的类型映射缺失编译错误)
     - [10.3 边界测试：C 可变参数函数的不安全绑定（运行时 UB）](#103-边界测试c-可变参数函数的不安全绑定运行时-ub)
-    - [10.4 边界测试：C 结构体的内存对齐与 Rust 的 `#[repr(C)]`（运行时 ABI 不匹配）](#104-边界测试c-结构体的内存对齐与-rust-的-reprc运行时-abi-不匹配)
+    - [10.4 边界测试：C 结构体（Struct）的内存对齐与 Rust 的 `#[repr(C)]`（运行时 ABI 不匹配）](LINK_PLACEHOLDER)
     - [10.7 边界测试：生命周期参数的不匹配返回](#107-边界测试生命周期参数的不匹配返回)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`extern "C"` 块中声明的函数在调用时为什么通常需要 `unsafe` 块？（理解层）](#测验-1extern-c-块中声明的函数在调用时为什么通常需要-unsafe-块理解层)
@@ -160,7 +160,7 @@ extern "C" {
 }
 ```
 
-> **布局洞察**: `#[repr(C)]` 是 FFI 的**基石**——它保证 Rust 结构体的内存布局与 C 完全相同。
+> **布局洞察**: `#[repr(C)]` 是 FFI 的**基石**——它保证 Rust 结构体（Struct）的内存布局与 C 完全相同。
 > [来源: [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html)]
 
 ---
@@ -217,7 +217,7 @@ impl Drop for CallbackHandle {
 }
 ```
 
-> **回调洞察**: Rust 闭包（Closures） → C 回调的**桥接**是 FFI 中最复杂的模式之一——它涉及生命周期、panic 安全和线程安全的多重考量。
+> **回调洞察**: Rust 闭包（Closures） → C 回调的**桥接**是 FFI 中最复杂的模式之一——它涉及生命周期（Lifetimes）、panic 安全和线程安全的多重考量。
 > [来源: [Rust FFI — Callbacks](https://doc.rust-lang.org/nomicon/ffi.html#callbacks-from-c-code-to-rust-functions)]
 
 ---
@@ -263,7 +263,7 @@ impl Drop for CallbackHandle {
   └── Option 用于允许 NULL 函数指针
 ```
 
-> **映射洞察**: Rust 的 `std::os::raw` 模块提供**平台无关的 C 类型映射**——但 `c_char` 的符号性（signed/unsigned）因平台而异。
+> **映射洞察**: Rust 的 `std::os::raw` 模块（Module）提供**平台无关的 C 类型映射**——但 `c_char` 的符号性（signed/unsigned）因平台而异。
 > [来源: [std::os::raw](https://doc.rust-lang.org/std/os/raw/index.html)]
 
 ---
@@ -378,7 +378,7 @@ impl<F: FnOnce()> Drop for CleanupGuard<F> {
 }
 ```
 
-> **Panic 安全洞察**: `catch_unwind` 是 FFI 边界的**安全网**——但不应作为常规错误处理机制使用，它有性能开销且不能捕获所有 panic。
+> **Panic 安全洞察**: `catch_unwind` 是 FFI 边界的**安全网**——但不应作为常规错误处理（Error Handling）机制使用，它有性能开销且不能捕获所有 panic。
 > [来源: [std::panic::catch_unwind](https://doc.rust-lang.org/std/panic/fn.catch_unwind.html)]
 
 ---
@@ -558,7 +558,7 @@ graph TD
 - [Unsafe](./03_unsafe.md) — 不安全代码
 - [FFI Basics](./05_rust_ffi.md) — FFI 基础
 - [Cross Compilation](../06_ecosystem/17_cross_compilation.md) — 交叉编译
-- [Type System](../01_foundation/04_type_system.md) — 类型系统
+- [Type System](../01_foundation/04_type_system.md) — 类型系统（Type System）
 
 ---
 
@@ -621,7 +621,7 @@ extern "C" fn increment_fixed() {
 }
 ```
 
-> **修正**: `static mut` 在 Rust 中几乎永远不应使用。它绕过所有权和借用检查，允许数据竞争。FFI 回调若需维护全局状态，应使用 `Mutex<T>`、`RwLock<T>` 或原子类型。`static mut` 的访问需要 `unsafe`，且即使单线程 FFI 调用也可能因信号处理或重入导致未定义行为。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**: `static mut` 在 Rust 中几乎永远不应使用。它绕过所有权（Ownership）和借用（Borrowing）检查，允许数据竞争。FFI 回调若需维护全局状态，应使用 `Mutex<T>`、`RwLock<T>` 或原子类型。`static mut` 的访问需要 `unsafe`，且即使单线程 FFI 调用也可能因信号处理或重入导致未定义行为。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.2 边界测试：`Box::into_raw` 后重复释放（运行时 UB）
 
@@ -650,7 +650,7 @@ fn fixed() {
 > 调用者必须确保：
 >
 > 1) 指针最终通过 `Box::from_raw` 或 `drop(Box::from_raw(ptr))` 释放恰好一次；
-> 2) 指针在释放后不再使用。双重释放（double free）是严重的内存安全漏洞，可能被利用进行代码执行。
+> 2) 指针在释放后不再使用。双重释放（double free）是严重的内存安全（Memory Safety）漏洞，可能被利用进行代码执行。
 > 这与 C 的 `malloc`/`free` 管理相同——Rust 的 unsafe 边界将责任完全转移给程序员。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.3 边界测试：C 变长参数的类型安全（编译错误/运行时 UB）
@@ -681,7 +681,7 @@ fn main() {
 > 1) 在 Rust 中封装为类型安全的 API（`fn rust_print(args: &[Arg])`）；
 > 2) 使用 `libffi` crate 动态构造调用；
 > 3) 避免使用 C 的变长参数，改用 struct 指针传递参数。
-> 这与 Go 的 `cgo`（同样无变长参数类型检查）或 Java 的 JNA（有类型映射，但仍可能出错）类似——FFI 的边界是类型系统的极限。
+> 这与 Go 的 `cgo`（同样无变长参数类型检查）或 Java 的 JNA（有类型映射，但仍可能出错）类似——FFI 的边界是类型系统（Type System）的极限。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)] ·
 > [来源: [libffi Crate](https://docs.rs/libffi/)]
 
@@ -713,13 +713,13 @@ fn main() {
 
 > **修正**:
 > 将 Rust 对象通过 `Box::into_raw` 传递给 C 代码时，
-> 所有权语义发生断裂：
+> 所有权（Ownership）语义发生断裂：
 > C 代码不理解 Rust 的所有权规则，可能不调用回调、多次调用回调、或在错误线程调用。
 > 这是 FFI 的**所有权边界**问题：
 > Rust 侧释放（`Box::from_raw`）要求对调用次数和时机的精确控制。
 > 安全模式：
 >
-> 1) 使用 `Arc<Mutex<T>>`（引用计数，多线程安全）；
+> 1) 使用 `Arc<Mutex<T>>`（引用（Reference）计数，多线程安全）；
 > 2) 在 C API 中明确文档回调调用次数（一次、零次或多次）；
 > 3) 使用 `ManuallyDrop` 延迟释放，直到确定安全。
 > 这与 C++ 的 `std::shared_ptr` 传递到外代码（同样问题，需要自定义 deleter）或 Swift 的 `Unmanaged<T>`（显式 retain/release）类似——跨语言边界时，自动内存管理让位于显式契约。
@@ -804,7 +804,7 @@ fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
 fn main() {}
 ```
 
-> **修正**: **生命周期标注**：1) `&'a str` 表示引用至少存活 `'a`；2) 返回 `'a` 要求数据存活至少 `'a`；3) `y` 的 lifetime `'b` 可能短于 `'a`，返回会导致悬垂引用。
+> **修正**: **生命周期标注**：1) `&'a str` 表示引用（Reference）至少存活 `'a`；2) 返回 `'a` 要求数据存活至少 `'a`；3) `y` 的 lifetime `'b` 可能短于 `'a`，返回会导致悬垂引用。
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -815,7 +815,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-因为 FFI 函数来自其他语言，Rust 编译器无法验证其内存安全、生命周期和并发正确性，调用方需承担安全责任。
+因为 FFI 函数来自其他语言，Rust 编译器无法验证其内存安全（Memory Safety）、生命周期和并发正确性，调用方需承担安全责任。
 </details>
 
 ---
@@ -839,7 +839,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-`*const T` 是原始指针，允许为空、允许别名、不受借用检查器管理，解引用需 `unsafe`。`&T` 是受借用规则约束的引用。
+`*const T` 是原始指针（Raw Pointer），允许为空、允许别名、不受借用（Borrowing）检查器管理，解引用需 `unsafe`。`&T` 是受借用规则约束的引用。
 </details>
 
 ---
@@ -875,16 +875,16 @@ fn main() {}
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | FFI 高级主题：跨语言边界的安全与性能 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| FFI 高级主题：跨语言边界的安全与性能 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| FFI 高级主题：跨语言边界的安全与性能 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | FFI 高级主题：跨语言边界的安全与性能 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 复杂类型布局安全 ⟸ repr(C) 兼容 ⟸ 对齐与填充
 > 回调安全 ⟸ 函数指针生命周期 ⟸ 线程边界
-> **过渡**: 掌握 FFI 高级主题：跨语言边界的安全与性能 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 FFI 高级主题：跨语言边界的安全与性能 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 FFI 高级主题：跨语言边界的安全与性能 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: FFI 高级主题：跨语言边界的安全与性能 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: FFI 高级主题：跨语言边界的安全与性能 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

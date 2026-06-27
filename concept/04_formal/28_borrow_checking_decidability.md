@@ -3,19 +3,21 @@
 # Borrow Checking Decidability（借用检查可判定性）
 
 > **EN**: Borrow Checking Decidability
-> **Summary**: 将 Rust 借用检查器判定的问题、三代演进（词法作用域 → NLL → Polonius）、核心形式化模型以及可判定性/复杂性直觉，提炼为面向研究者的教学类比。
+> **Summary**: 将 Rust 借用（Borrowing）检查器判定的问题、三代演进（词法作用域 → NLL → Polonius）、核心形式化模型以及可判定性/复杂性直觉，提炼为面向研究者的教学类比。
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的“定理/算法/规则”为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [RustBelt](https://plv.mpi-sws.org/rustbelt/)、[Polonius](https://github.com/rust-lang/polonius)、[RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html)。
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **F+P** — Formal + Procedure
 > **双维定位**: F×Algo — 形式化方法与算法可判定性
-> **前置依赖**: [L1 借用](../01_foundation/02_borrowing.md) · [L3 NLL 与 Polonius](../03_advanced/08_nll_and_polonius.md) · [L4 所有权形式化](./03_ownership_formal.md)
+> **前置依赖**: [L1 借用（Borrowing）](LINK_PLACEHOLDER) · [L3 NLL 与 Polonius](LINK_PLACEHOLDER) · [L4 所有权（Ownership）形式化](LINK_PLACEHOLDER)
 > **后置延伸**: [L4 RustBelt](./04_rustbelt.md) · [L4 类型检查与推断](./27_type_checking_and_inference.md) · [L4 树借用](./25_tree_borrows_deep_dive.md)
 
 > 本文内容来自已归档的 `docs/rust-ownership-decidability/04-decidability-analysis/04-02-borrow-checking.md`，经提炼后迁移。
 
 > **来源**: [RFC 2094 — NLL](https://rust-lang.github.io/rfcs/2094-nll.html) · [Polonius Repository](https://github.com/rust-lang/polonius) · [Rustc Dev Guide — Borrow Check](https://rustc-dev-guide.rust-lang.org/borrow_check.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
 
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 ## 零、认知路径（Cognitive Path）
@@ -34,10 +36,10 @@ NLL 的数据流分析与 Polonius 的 Datalog 视角如何统一？
 这些抽象如何落到 rustc 的 rustc_borrowck / Polonius crate？
 ```
 
-1. **判定目标**：拒绝可变/共享冲突、悬垂引用、数据竞争。
+1. **判定目标**：拒绝可变/共享冲突、悬垂引用（Reference）、数据竞争。
 2. **演进主线**：词法作用域 → NLL（基于使用点） → Polonius（基于约束传播），可接受程序集合单调扩大。
-3. **形式化直觉**：生命周期 `'a` 是 CFG 上的路径集合；约束可满足 ↔ 引用使用点位于被引用值存活区域内。
-4. **算法可判定性**：有限状态 + 单调闭包 → NLL/Polonius/区域求解均收敛。
+3. **形式化直觉**：生命周期（Lifetimes） `'a` 是 CFG 上的路径集合；约束可满足 ↔ 引用（Reference）使用点位于被引用值存活区域内。
+4. **算法可判定性**：有限状态 + 单调闭包（Closures） → NLL/Polonius/区域求解均收敛。
 5. **复杂性边界**：借用检查是 P-完全的——多项式时间，但难以高效并行化到 NC。
 
 ---
@@ -53,7 +55,7 @@ Rust 借用检查器在编译期回答一个**安全判定问题**：
 | 不变式 | 直觉 | 典型错误 |
 |:---|:---|:---|
 | **唯一可变 / 任意共享** | 同一路径上，要么一个 `&mut`，要么任意多个 `&` | E0502 |
-| **无悬垂引用** | 引用生命周期 ≤ 被引用值存活区域 | E0597 |
+| **无悬垂引用** | 引用生命周期（Lifetimes） ≤ 被引用值存活区域 | E0597 |
 | **无数据竞争** | 并发访问受 `Send`/`Sync` + 借用规则约束 | E0626 |
 
 > **教学类比**：借用检查器是保守的静态过滤器——sound but incomplete：会误判一些安全程序，但不会放过不安全程序。
@@ -75,7 +77,7 @@ flowchart LR
 
 ### 2.1 词法作用域（Lexical Scopes）
 
-借用生命周期绑定到词法块边界，线性扫描 $O(n)$，但过度保守。
+借用生命周期（Lifetimes）绑定到词法块边界，线性扫描 $O(n)$，但过度保守。
 
 ```rust
 fn lexical_problem() {
@@ -142,7 +144,7 @@ $$
 |:---|:---|
 | **Free** | 无借用，可读写 |
 | **Shared** | 共享借用 `&`，只读，可再共享 |
-| **Mut($\rho$)** | 可变借用 `&mut`，在区域 $\rho$ 内独占 |
+| **Mut($\rho$)** | 可变借用（Mutable Borrow） `&mut`，在区域 $\rho$ 内独占 |
 | **Reserved** | 两阶段借用的预留态 |
 
 ### 3.3 借用规则（Borrow Rules）
@@ -153,7 +155,7 @@ $$
    $$
    \text{State}(\pi, p) = \text{Shared} \Rightarrow \forall \pi' \sqsubseteq \pi.\ \text{State}(\pi', p) \neq \text{Mut}
    $$
-2. **可变借用规则**：
+2. **可变借用（Mutable Borrow）规则**：
    $$
    \text{State}(\pi, p) = \text{Mut}(\rho) \Rightarrow \forall \pi' \sqsubseteq \pi.\ \text{State}(\pi', p) = \text{Free}
    $$
@@ -197,7 +199,7 @@ fn solve_region_constraints(cs: &[Constraint]) -> Result<Solution, RegionError> 
 }
 ```
 
-> **复杂度直觉**：传递闭包 $O(n^3)$，矩阵乘法可优化至 $O(n^\omega)$，$\omega < 2.373$。
+> **复杂度直觉**：传递闭包（Closures） $O(n^3)$，矩阵乘法可优化至 $O(n^\omega)$，$\omega < 2.373$。
 
 ---
 

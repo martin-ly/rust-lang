@@ -4,7 +4,7 @@
 功能:
 - 为缺少 EN 标题的文件生成英文标题（基于 # 标题 + 术语表）。
 - 为缺少 Summary 的文件生成英文摘要（基于标题、层级、定义）。
-- 为缺少 Prerequisites/Follow-ups 的文件基于 kg_data_v2.json 的 dependsOn 关系补全。
+- 为缺少前置/后置概念的文件基于 kg_data_v2.json 的 dependsOn 关系补全。
 
 用法:
     python scripts/generate_en_skeleton.py --dry-run
@@ -35,7 +35,7 @@ def load_kg(path: Path) -> dict:
 
 
 def build_dependency_maps(kg: dict) -> tuple[dict[str, set[str]], dict[str, set[str]]]:
-    """构建前置/后置概念映射。"""
+    """构建前置/后置概念映射（仅直接关系）。"""
     prereqs: dict[str, set[str]] = {}
     followups: dict[str, set[str]] = {}
 
@@ -47,20 +47,7 @@ def build_dependency_maps(kg: dict) -> tuple[dict[str, set[str]], dict[str, set[
         prereqs.setdefault(subj, set()).add(obj)
         followups.setdefault(obj, set()).add(subj)
 
-    # 传递闭包
-    def transitive(closure: dict[str, set[str]]) -> dict[str, set[str]]:
-        changed = True
-        while changed:
-            changed = False
-            for node, deps in list(closure.items()):
-                for dep in list(deps):
-                    for dd in closure.get(dep, set()):
-                        if dd not in deps:
-                            deps.add(dd)
-                            changed = True
-        return closure
-
-    return transitive(prereqs), followups
+    return prereqs, followups
 
 
 def label_for(kg: dict, entity_id: str, lang: str = "en") -> str:
@@ -141,14 +128,10 @@ def extract_existing_header_value(content: str, key: str) -> str | None:
     return None
 
 
-def has_header_field(content: str, key: str) -> bool:
-    return f"**{key}**" in content
-
-
-def find_rust_version(content: str) -> str | None:
-    """从文件头提取 Rust 版本。"""
-    m = re.search(r"\*\*Rust 版本\*\*:\s*(\S+)", content)
-    return m.group(1) if m else None
+def has_header_field(content: str, key: str, aliases: list[str] | None = None) -> bool:
+    """检查文件头是否包含指定字段或其别名。"""
+    keys = [key] + (aliases or [])
+    return any(f"**{k}**" in content for k in keys)
 
 
 def find_layer(content: str) -> str | None:
@@ -157,7 +140,44 @@ def find_layer(content: str) -> str | None:
     return m.group(1) if m else None
 
 
-def generate_prerequisites_block(kg: dict, prereqs: dict[str, set[str]], entity_id: str) -> str:
+def build_entity_path_map(paths: Iterable[Path]) -> dict[str, Path]:
+    """通过扫描文件头 EN 字段建立实体 ID 到文件路径的映射。"""
+    mapping: dict[str, Path] = {}
+    for path in paths:
+        if not path.is_file() or path.suffix != ".md":
+            continue
+        try:
+            content = path.read_text(encoding="utf-8")
+        except Exception:
+            continue
+        m = re.search(r"\*\*EN\*\*:\s*(.+?)(?:\n|\n>)", content)
+        if not m:
+            continue
+        en = m.group(1).strip()
+        # 去掉括号注释，如 "Ownership (Summary TODO)"
+        en = re.sub(r"\s*[（(].*?[）)]\s*$", "", en)
+        entity_id = f"ex:{en.replace(' ', '')}"
+        mapping[entity_id] = path
+    return mapping
+
+
+def relative_link(target: Path, from_file: Path) -> str:
+    """计算从 from_file 到 target 的相对链接。"""
+    try:
+        rel = target.relative_to(from_file.parent)
+    except ValueError:
+        # 跨分支，使用从根出发的相对路径
+        rel = Path("..") / target.relative_to(ROOT)
+    return str(rel).replace("\\", "/")
+
+
+def generate_prerequisites_block(
+    kg: dict,
+    prereqs: dict[str, set[str]],
+    entity_id: str,
+    entity_path_map: dict[str, Path],
+    from_path: Path,
+) -> str:
     """生成前置概念链接块。"""
     deps = prereqs.get(entity_id, set())
     if not deps:
@@ -165,11 +185,22 @@ def generate_prerequisites_block(kg: dict, prereqs: dict[str, set[str]], entity_
     parts = []
     for dep in sorted(deps):
         label = label_for(kg, dep, "en")
-        parts.append(f"[{label}](./{path_for_entity(dep)})")
+        target = entity_path_map.get(dep)
+        if target:
+            link = relative_link(target, from_path)
+        else:
+            link = f"{dep.replace('ex:', '')}.md"
+        parts.append(f"[{label}](./{link})")
     return " · ".join(parts)
 
 
-def generate_followups_block(kg: dict, followups: dict[str, set[str]], entity_id: str) -> str:
+def generate_followups_block(
+    kg: dict,
+    followups: dict[str, set[str]],
+    entity_id: str,
+    entity_path_map: dict[str, Path],
+    from_path: Path,
+) -> str:
     """生成后置概念链接块。"""
     deps = followups.get(entity_id, set())
     if not deps:
@@ -177,28 +208,114 @@ def generate_followups_block(kg: dict, followups: dict[str, set[str]], entity_id
     parts = []
     for dep in sorted(deps):
         label = label_for(kg, dep, "en")
-        parts.append(f"[{label}](./{path_for_entity(dep)})")
+        target = entity_path_map.get(dep)
+        if target:
+            link = relative_link(target, from_path)
+        else:
+            link = f"{dep.replace('ex:', '')}.md"
+        parts.append(f"[{label}](./{link})")
     return " · ".join(parts)
 
 
-def path_for_entity(entity_id: str) -> str:
-    """从实体 ID 推断文件路径（简化版，实际需映射表）。"""
-    name = entity_id.replace("ex:", "")
-    return f"{name}.md"
-
-
 def entity_id_from_path(path: Path) -> str | None:
-    """从 concept 文件路径推断实体 ID（简化版）。"""
-    # 读取文件头 EN 字段作为实体名
+    """从 concept 文件路径推断实体 ID（基于现有 EN 字段）。"""
     try:
         content = path.read_text(encoding="utf-8")
         m = re.search(r"\*\*EN\*\*:\s*(.+?)(?:\n|\n>)", content)
         if m:
             en = m.group(1).strip()
+            en = re.sub(r"\s*[（(].*?[）)]\s*$", "", en)
             return f"ex:{en.replace(' ', '')}"
     except Exception:
         pass
     return None
+
+
+def inject_header_fields(content: str, changes: dict[str, str | bool]) -> str:
+    """在文件头中注入生成的字段。"""
+    lines = content.splitlines(keepends=True)
+    # 找到头部结束位置（第一个 --- 分隔线）
+    header_end = -1
+    for i, line in enumerate(lines):
+        if line.strip() == "---" and i > 2:
+            header_end = i
+            break
+
+    if header_end == -1:
+        return content
+
+    insertions = []
+    if "en_generated" in changes:
+        insertions.append(f"> **EN**: {changes['en_generated']}\n")
+    if "summary_generated" in changes:
+        insertions.append(f"> **Summary**: {changes['summary_generated']}\n")
+    if "prerequisites_generated" in changes:
+        insertions.append(f"> **前置概念**: {changes['prerequisites_generated']}\n")
+    if "followups_generated" in changes:
+        insertions.append(f"> **后置概念**: {changes['followups_generated']}\n")
+
+    if not insertions:
+        return content
+
+    # 插入到 --- 之前
+    new_lines = lines[:header_end] + insertions + lines[header_end:]
+    return "".join(new_lines)
+
+
+def iter_md_files(dirs: Iterable[Path]) -> Iterable[Path]:
+    for directory in dirs:
+        if directory.is_file() and directory.suffix == ".md":
+            yield directory
+            continue
+        yield from sorted(directory.rglob("*.md"))
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="批量生成英文骨架元数据")
+    parser.add_argument("--dir", nargs="+", type=Path, default=[Path("concept")], help="目标目录")
+    parser.add_argument("--dry-run", action="store_true", help="只预览不修改")
+    parser.add_argument("--apply", action="store_true", help="应用修改（与省略 --dry-run 等效）")
+    parser.add_argument("--output-report", type=Path, help="输出 JSON 报告")
+    args = parser.parse_args()
+
+    dry_run = args.dry_run or not args.apply
+
+    kg = load_kg(KG_PATH)
+    prereqs, followups = build_dependency_maps(kg)
+    glossary = load_glossary(TERM_GLOSSARY_PATH)
+
+    all_paths = list(iter_md_files(args.dir))
+    entity_path_map = build_entity_path_map(all_paths)
+
+    reports = []
+    for path in all_paths:
+        if "00_meta" in path.parts:
+            continue
+        reports.append(
+            process_file(path, kg, prereqs, followups, glossary, entity_path_map, dry_run)
+        )
+
+    generated_count = sum(1 for r in reports if r.get("modified"))
+    print(f"扫描文件数: {len(reports)}")
+    print(f"生成/修改文件数: {generated_count}")
+
+    if args.output_report:
+        args.output_report.write_text(
+            json.dumps(reports, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+        print(f"报告已保存: {args.output_report}")
+
+    if dry_run:
+        print("\n预览（前 10 个变更）:")
+        for r in reports[:10]:
+            if any(k.endswith("_generated") for k in r):
+                print(f"  {r['path']}")
+                for k, v in r.items():
+                    if k.endswith("_generated"):
+                        print(f"    {k}: {v}")
+
+    return 0
 
 
 def process_file(
@@ -207,6 +324,7 @@ def process_file(
     prereqs: dict[str, set[str]],
     followups: dict[str, set[str]],
     glossary: dict[str, str],
+    entity_path_map: dict[str, Path],
     dry_run: bool,
 ) -> dict[str, str | bool]:
     """处理单个文件，返回变更报告。"""
@@ -233,101 +351,29 @@ def process_file(
         summary = generate_summary(title_zh, str(title_en), layer)
         changes["summary_generated"] = summary
 
-    # 生成 Prerequisites/Follow-ups
-    if entity_id:
-        if not has_header_field(content, "Prerequisites"):
-            changes["prerequisites_generated"] = generate_prerequisites_block(kg, prereqs, entity_id)
-        if not has_header_field(content, "Follow-ups"):
-            changes["followups_generated"] = generate_followups_block(kg, followups, entity_id)
+    # 生成前置/后置概念（兼容英文标签和中文标签）
+    if not has_header_field(content, "前置概念", ["Prerequisites"]):
+        if entity_id:
+            changes["prerequisites_generated"] = generate_prerequisites_block(
+                kg, prereqs, entity_id, entity_path_map, path
+            )
+        else:
+            changes["prerequisites_generated"] = "N/A"
+    if not has_header_field(content, "后置概念", ["Follow-ups"]):
+        if entity_id:
+            changes["followups_generated"] = generate_followups_block(
+                kg, followups, entity_id, entity_path_map, path
+            )
+        else:
+            changes["followups_generated"] = "N/A"
 
     if not dry_run and any(k.endswith("_generated") for k in changes):
-        # 在文件头区域插入缺失字段
         new_content = inject_header_fields(content, changes)
         if new_content != content:
             path.write_text(new_content, encoding="utf-8")
             changes["modified"] = True
 
     return changes
-
-
-def inject_header_fields(content: str, changes: dict[str, str | bool]) -> str:
-    """在文件头中注入生成的字段。"""
-    lines = content.splitlines(keepends=True)
-    # 找到头部结束位置（第一个 --- 分隔线）
-    header_end = -1
-    for i, line in enumerate(lines):
-        if line.strip() == "---" and i > 2:
-            header_end = i
-            break
-
-    if header_end == -1:
-        return content
-
-    insertions = []
-    if "en_generated" in changes:
-        insertions.append(f"> **EN**: {changes['en_generated']}\n")
-    if "summary_generated" in changes:
-        insertions.append(f"> **Summary**: {changes['summary_generated']}\n")
-    if "prerequisites_generated" in changes:
-        insertions.append(f"> **Prerequisites**: {changes['prerequisites_generated']}\n")
-    if "followups_generated" in changes:
-        insertions.append(f"> **Follow-ups**: {changes['followups_generated']}\n")
-
-    if not insertions:
-        return content
-
-    # 插入到 --- 之前
-    new_lines = lines[:header_end] + insertions + lines[header_end:]
-    return "".join(new_lines)
-
-
-def iter_md_files(dirs: Iterable[Path]) -> Iterable[Path]:
-    for directory in dirs:
-        if directory.is_file() and directory.suffix == ".md":
-            yield directory
-            continue
-        yield from sorted(directory.rglob("*.md"))
-
-
-def main() -> int:
-    parser = argparse.ArgumentParser(description="批量生成英文骨架元数据")
-    parser.add_argument("--dir", nargs="+", type=Path, default=[Path("concept")], help="目标目录")
-    parser.add_argument("--dry-run", action="store_true", help="只预览不修改")
-    parser.add_argument("--output-report", type=Path, help="输出 JSON 报告")
-    args = parser.parse_args()
-
-    kg = load_kg(KG_PATH)
-    prereqs, followups = build_dependency_maps(kg)
-    glossary = load_glossary(TERM_GLOSSARY_PATH)
-
-    reports = []
-    for path in iter_md_files(args.dir):
-        if "00_meta" in path.parts:
-            continue
-        report = process_file(path, kg, prereqs, followups, glossary, args.dry_run)
-        reports.append(report)
-
-    generated_count = sum(1 for r in reports if r.get("modified"))
-    print(f"扫描文件数: {len(reports)}")
-    print(f"生成/修改文件数: {generated_count}")
-
-    if args.output_report:
-        args.output_report.write_text(
-            json.dumps(reports, ensure_ascii=False, indent=2),
-            encoding="utf-8",
-        )
-        print(f"报告已保存: {args.output_report}")
-
-    if args.dry_run:
-        print("\n预览（前 5 个变更）:")
-        for r in reports[:5]:
-            if any(k.endswith("_generated") for k in r):
-                print(f"  {r['path']}")
-                for k, v in r.items():
-                    if k.endswith("_generated"):
-                        print(f"    {k}: {v}")
-
-    return 0
 
 
 if __name__ == "__main__":

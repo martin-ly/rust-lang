@@ -50,7 +50,7 @@
   - [快速开始：工具安装与运行](#快速开始工具安装与运行)
     - [Miri（Rust 官方动态分析器）](#mirirust-官方动态分析器)
     - [Kani（AWS 有界模型检查器）](#kaniaws-有界模型检查器)
-    - [BorrowSanitizer（运行时借用检查 Sanitizer）](#borrowsanitizer运行时借用检查-sanitizer)
+    - [BorrowSanitizer（运行时（Runtime）借用（Borrowing）检查 Sanitizer）](LINK_PLACEHOLDER)
     - [Verus（Microsoft 演绎验证器）](#verusmicrosoft-演绎验证器)
   - [嵌入式测验](#嵌入式测验)
   - [认知路径](#认知路径)
@@ -92,7 +92,7 @@ Rust 代码 + 自然语言规范
 | 简单循环不变量 | ~75% | 复杂归纳假设 |
 | 递归函数终止性 | ~60% | 良基关系构造 |
 | 数据结构不变量 | ~45% | 幽灵状态（ghost state）管理 |
-| 并发协议 | ~20% | 原子操作序列的线性化证明 |
+| 并发协议 | ~20% | 原子操作（Atomic Operations）序列的线性化证明 |
 
 > **关键洞察**: AutoVerus 不是取代验证专家，而是将专家的时间从"写证明"重新分配到"审阅 LLM 输出、构造反例、设计归纳策略"。
 
@@ -300,7 +300,7 @@ Safety Tags
 
 ## TrustInSoft：C/Rust 混合代码的抽象解释
 
-> **定位**: 基于抽象解释（Abstract Interpretation）的商业级静态分析工具，专注于证明 C/C++ 代码无运行时错误（内存安全、整数溢出、除零等），正在扩展 Rust 支持。
+> **定位**: 基于抽象解释（Abstract Interpretation）的商业级静态分析工具，专注于证明 C/C++ 代码无运行时（Runtime）错误（内存安全（Memory Safety）、整数溢出、除零等），正在扩展 Rust 支持。
 
 ### 抽象解释原理
 
@@ -361,7 +361,7 @@ pub fn safe_wrapper(data: &[u8]) -> u32 {
 | C/Rust FFI 混合验证 | **ESBMC** | TrustInSoft | Rust 前端成熟度有限 |
 | 遗留 C 代码审计 | **TrustInSoft** | ESBMC | 商业工具，需许可证 |
 | unsafe API 标准化文档 | **Safety Tags** (未来) | rustdoc + 手写 | RFC 尚未批准 |
-| 生产环境借用检查（运行时） | **BorrowSanitizer** (BSan) | Miri | 2-5x 性能开销，需 nightly |
+| 生产环境借用（Borrowing）检查（运行时） | **BorrowSanitizer** (BSan) | Miri | 2-5x 性能开销，需 nightly |
 | 编译器本身验证 | **a-mir-formality** | — | 研究工具，非程序验证 |
 
 ---
@@ -472,11 +472,11 @@ cd verus/source && ./tools/get-z3.sh && cargo build --release
 | 现代 Rust 验证工具生态（2025-2026） 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
 | 现代 Rust 验证工具生态（2025-2026） 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
-> **过渡**: 掌握 现代 Rust 验证工具生态（2025-2026） 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 现代 Rust 验证工具生态（2025-2026） 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 现代 Rust 验证工具生态（2025-2026） 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: 现代 Rust 验证工具生态（2025-2026） 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 现代 Rust 验证工具生态（2025-2026） 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 
@@ -503,7 +503,7 @@ cd verus/source && ./tools/get-z3.sh && cargo build --release
 <details>
 <summary>✅ 答案与解析</summary>
 
-悬垂指针解引用、越界访问、数据竞争、未对齐访问、类型混淆、未初始化内存读取等。
+悬垂指针解引用（Reference）、越界访问、数据竞争、未对齐访问、类型混淆、未初始化内存读取等。
 </details>
 
 ---

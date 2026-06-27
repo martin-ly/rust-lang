@@ -103,7 +103,7 @@ repository = "https://github.com/you/my-crate"
 
 | 表 | 用途 |
 |:---|:---|
-| `[dependencies]` | 运行时依赖 |
+| `[dependencies]` | 运行时（Runtime）依赖 |
 | `[dev-dependencies]` | 测试/示例/基准依赖 |
 | `[build-dependencies]` | build.rs 依赖 |
 | `[target.'cfg(unix)'.dependencies]` | 平台特定依赖 |
@@ -263,7 +263,7 @@ serde = { path = "../serde-fix" }
 <details>
 <summary>✅ 答案与解析</summary>
 
-用于测试、示例和基准测试，不会成为发布 crate 的运行时依赖。
+用于测试、示例和基准测试，不会成为发布 crate 的运行时（Runtime）依赖。
 
 </details>
 

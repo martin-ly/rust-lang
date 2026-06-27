@@ -60,6 +60,7 @@
 >
 > - v1.0 (2026-05-26): 初始创建——覆盖量子计算权威定义、Rust 量子生态（roqoqo/rustqip/q1tsim）、经典模拟性能、NIST PQC 标准与 rustls 集成、量子-经典混合工作流、反命题树与边界测试
 
+> **前置概念**: N/A
 ---
 
 ## 一、权威定义（Definition）
@@ -167,7 +168,7 @@
 
 | **维度** | **roqoqo** | **rustqip** | **q1tsim** | **qasmsim** | **QuEST (via roqoqo-quest)** | **pqcrypto** | **rustls-post-quantum** |
 |:---|:---|:---|:---|:---|:---|:---|:---|
-| **定位** | 电路表示 / 运行时 | 图构建模拟 | 门级模拟 | QASM 解释器 | 高性能态向量模拟 | PQC 算法绑定 | 后量子 TLS |
+| **定位** | 电路表示 / 运行时（Runtime） | 图构建模拟 | 门级模拟 | QASM 解释器 | 高性能态向量模拟 | PQC 算法绑定 | 后量子 TLS |
 | **纯 Rust** | ✅ 是 | ✅ 是 | ✅ 是 | ✅ 是 | ❌ C 绑定 (quest-sys) | ❌ C 封装 | ✅ 是 (aws-lc-rs) |
 | **量子算法库** | ❌ 仅表示 | ⚠️ 基础 | ⚠️ 基础 | ⚠️ 基础 | ⚠️ 基础 | N/A | N/A |
 | **Python 绑定** | ✅ qoqo | ❌ | ❌ | ❌ | ✅ qoqo-quest | ❌ | ❌ |
@@ -299,7 +300,7 @@ Rust ↔ Python 量子生态的交互路径:
 ### 3.5 新兴研究原型
 
 > **[LogosQ (arXiv 2025)](https://arxiv.org/abs/2512.23183)** 是近期发表的高性能 Rust 量子计算库研究原型，宣称在量子傅里叶变换（QFT）上比 Python 框架（PennyLane、Qiskit）快 **900 倍**，在变分工作负载上快 **2–5 倍**，与 Julia 的 Yao 相比快 **6–22 倍**。
-> 其核心优势在于利用 Rust 的**编译期类型安全**消除参数移位梯度计算中的运行时错误。此外，`qforge` 和 `quantrs2` 是 crates.io 上涌现的模块化量子框架尝试，但尚处于早期阶段。[来源: [LogosQ arXiv](https://arxiv.org/abs/2512.23183)]
+> 其核心优势在于利用 Rust 的**编译期类型安全**消除参数移位梯度计算中的运行时（Runtime）错误。此外，`qforge` 和 `quantrs2` 是 crates.io 上涌现的模块（Module）化量子框架尝试，但尚处于早期阶段。[来源: [LogosQ arXiv](https://arxiv.org/abs/2512.23183)]
 
 ```text
 研究原型对比（LogosQ 论文数据，2025）:
@@ -369,7 +370,7 @@ Rust ↔ Python 量子生态的交互路径:
 ### 4.3 Rust 性能优势：SIMD 与并行化
 
 > **[Rust Performance Book](https://nnethercote.github.io/perf-book/)** 态向量模拟的核心操作（矩阵-向量乘法、按位索引置换）高度规则，非常适合向量化。
-> Rust 通过 `std::simd`（portable SIMD）和 `rayon` 并行迭代器，可以在不引入数据竞争的前提下充分利用多核 CPU 和 AVX-512。
+> Rust 通过 `std::simd`（portable SIMD）和 `rayon` 并行迭代器（Iterator），可以在不引入数据竞争的前提下充分利用多核 CPU 和 AVX-512。
 > [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
 
 ```rust,ignore
@@ -584,7 +585,7 @@ rustls 后量子 TLS 状态:
 >
 > $$\frac{\partial \langle O \rangle}{\partial \theta} = \frac{1}{2}\left[\langle O \rangle\left(\theta + \frac{\pi}{2}\right) - \langle O \rangle\left(\theta - \frac{\pi}{2}\right)\right]$$
 >
-> Rust 的类型系统可以在此处发挥独特作用：在编译期验证参数数量、门类型与梯度规则之间的匹配，避免运行时错误——这正是 LogosQ 论文强调的 Rust 优势。
+> Rust 的类型系统（Type System）可以在此处发挥独特作用：在编译期验证参数数量、门类型与梯度规则之间的匹配，避免运行时（Runtime）错误——这正是 LogosQ 论文强调的 Rust 优势。
 > [来源: [PennyLane Parameter Shift](https://docs.pennylane.ai/en/stable/code/api/pennylane.gradients.param_shift.html) ·
 > [LogosQ arXiv](https://arxiv.org/abs/2512.23183)]
 
@@ -802,8 +803,8 @@ fn main() {
 - [安全与密码学](./43_security_cryptography.md) — 对称/非对称加密、TLS、侧信道防护
 - [性能优化](./15_performance_optimization.md) — SIMD、缓存优化、内存布局、零拷贝
 - [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、多线程并行、内存模型
-- [类型系统](../01_foundation/04_type_system.md) — 泛型、Trait、类型状态模式
-- [泛型](../02_intermediate/02_generics.md) — 零成本抽象、类型参数化
+- [类型系统（Type System）](LINK_PLACEHOLDER) — 泛型（Generics）、Trait、类型状态模式
+- [泛型（Generics）](LINK_PLACEHOLDER) — 零成本抽象（Zero-Cost Abstraction）、类型参数化
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — FFI 绑定、C 库交互（QuEST、PQClean）
 - [机器学习生态](./46_machine_learning_ecosystem.md) — 优化算法、自动微分、张量运算
 - [分布式系统](./18_distributed_systems.md) — 分布式模拟、MPI、集群计算

@@ -37,7 +37,7 @@
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 Rust 在分布式系统中的定位](#11-rust-在分布式系统中的定位)
-    - [1.2 异步运行时作为分布式基础](#12-异步运行时作为分布式基础)
+    - [1.2 异步（Async）运行时（Runtime）作为分布式基础](LINK_PLACEHOLDER)
     - [1.3 服务发现与负载均衡](#13-服务发现与负载均衡)
   - [二、技术细节](#二技术细节)
     - [2.1 gRPC 与 Protocol Buffers](#21-grpc-与-protocol-buffers)
@@ -56,7 +56,7 @@
     - [10.2 边界测试：分布式事务的 `Send` 约束（编译错误）](#102-边界测试分布式事务的-send-约束编译错误)
     - [10.3 边界测试：序列化消息的大小限制（运行时错误）](#103-边界测试序列化消息的大小限制运行时错误)
     - [10.4 边界测试：分布式共识的时钟偏差（逻辑错误）](#104-边界测试分布式共识的时钟偏差逻辑错误)
-    - [10.5 边界测试：Raft 共识中的网络分区与脑裂（运行时一致性破坏）](#105-边界测试raft-共识中的网络分区与脑裂运行时一致性破坏)
+    - [10.5 边界测试：Raft 共识中的网络分区与脑裂（运行时一致性（Coherence）破坏）](LINK_PLACEHOLDER)
     - [10.3 边界测试：Raft 的日志不一致与快照安装（运行时一致性风险）](#103-边界测试raft-的日志不一致与快照安装运行时一致性风险)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -143,7 +143,7 @@ Rust async 运行时的分布式价值:
   └─────────────────┴──────────────────┴──────────────────┘
 ```
 
-> **运行时洞察**: Rust async 的**内存效率**（~200 字节 vs Go 的 ~2KB）使其在**海量连接**场景（代理、网关）具有数量级优势。
+> **运行时（Runtime）洞察**: Rust async 的**内存效率**（~200 字节 vs Go 的 ~2KB）使其在**海量连接**场景（代理、网关）具有数量级优势。
 > [来源: [tokio.rs](https://tokio.rs/)]
 
 ---
@@ -235,7 +235,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 // └── 类型安全的 Protocol Buffers
 ```
 
-> **gRPC 洞察**: Tonic 是 Rust **分布式服务通信**的事实标准——它将 gRPC 的**类型安全**与 Rust 的**内存安全**结合。
+> **gRPC 洞察**: Tonic 是 Rust **分布式服务通信**的事实标准——它将 gRPC 的**类型安全**与 Rust 的**内存安全（Memory Safety）**结合。
 > [来源: [tonic crate](https://docs.rs/tonic/latest/tonic/)]
 
 ---
@@ -266,7 +266,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   └── openraft: 异步 Raft 实现
 ```
 
-> **共识洞察**: TiKV（Rust 实现的分布式数据库）证明了 Rust 在**分布式共识**场景的可行性——内存安全对正确性至关重要。
+> **共识洞察**: TiKV（Rust 实现的分布式数据库）证明了 Rust 在**分布式共识**场景的可行性——内存安全（Memory Safety）对正确性至关重要。
 > [来源: [Raft Paper](https://raft.github.io/raft.pdf), [raft-rs](https://github.com/tikv/raft-rs)]
 
 ---
@@ -326,7 +326,7 @@ async fn main() {
 // └── coerce: 分布式 Actor
 ```
 
-> **Actor 洞察**: Actor 模型在 Rust 中通过**所有权**天然实现——每个 Actor 拥有其状态，消息传递对应所有权转移。
+> **Actor 洞察**: Actor 模型在 Rust 中通过**所有权（Ownership）**天然实现——每个 Actor 拥有其状态，消息传递对应所有权转移。
 > [来源: [Actix Documentation](https://actix.rs/)]
 
 ---
@@ -477,7 +477,7 @@ graph TD
      // 使用断路器、重试、降级策略
 ```
 
-> **陷阱总结**: 分布式系统的陷阱与**语言无关**——超时、背压、状态共享、错误处理、网络分区是所有分布式系统的普遍挑战。
+> **陷阱总结**: 分布式系统的陷阱与**语言无关**——超时、背压、状态共享、错误处理（Error Handling）、网络分区是所有分布式系统的普遍挑战。
 > [来源: [Distributed Systems in Rust](https://www.youtube.com/watch?v=OuhmIS_N4SA)]
 
 ---
@@ -498,7 +498,7 @@ graph TD
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [tonic crate](https://docs.rs/tonic/latest/tonic/) | ✅ 一级 | gRPC 框架 |
-| [tokio.rs](https://tokio.rs/) | ✅ 一级 | 异步运行时 |
+| [tokio.rs](https://tokio.rs/) | ✅ 一级 | 异步（Async）运行时 |
 | [Raft Paper](https://raft.github.io/raft.pdf) | ✅ 一级 | 共识算法 |
 | [raft-rs](https://github.com/tikv/raft-rs) | ✅ 一级 | Rust Raft 实现 |
 | [Actix](https://actix.rs/) | ✅ 一级 | Actor 框架 |
@@ -572,7 +572,7 @@ struct MessageV2Fixed {
 > Rust 的 `serde` 默认严格反序列化——缺失字段报错。
 > 使用 `#[serde(default)]` 可为新增字段提供默认值，保持向后兼容。
 > 这与 Protocol Buffers 的字段可选性（默认行为）不同——Rust/Serde 的默认是"严格"，需显式放宽。
-> 在微服务架构中，消息契约的演化需要仔细设计版本策略（如使用枚举包装不同版本的消息）。
+> 在微服务架构中，消息契约的演化需要仔细设计版本策略（如使用枚举（Enum）包装不同版本的消息）。
 > [来源: [Serde Documentation](https://serde.rs/)]
 
 ### 10.2 边界测试：分布式事务的 `Send` 约束（编译错误）
@@ -603,7 +603,7 @@ struct TransactionFixed {
 }
 ```
 
-> **修正**: 分布式事务协调器通常需要将事务状态传递给线程池中的工作者。`Rc<T>` 不能跨线程，`Arc<T>` 可以。Rust 编译器在编译期验证这些约束，阻止将非 Send 类型传递到多线程环境中。这与 Java 的 `ExecutorService.submit()`（运行时才可能报错）或 Go 的 goroutine（自动共享，但可能数据竞争）不同——Rust 在编译期消除并发错误。分布式系统中的 Saga 模式、2PC（两阶段提交）等算法在 Rust 中实现时，类型系统保证事务状态的线程安全传递。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> **修正**: 分布式事务协调器通常需要将事务状态传递给线程池中的工作者。`Rc<T>` 不能跨线程，`Arc<T>` 可以。Rust 编译器在编译期验证这些约束，阻止将非 Send 类型传递到多线程环境中。这与 Java 的 `ExecutorService.submit()`（运行时才可能报错）或 Go 的 goroutine（自动共享，但可能数据竞争）不同——Rust 在编译期消除并发错误。分布式系统中的 Saga 模式、2PC（两阶段提交）等算法在 Rust 中实现时，类型系统（Type System）保证事务状态的线程安全传递。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：序列化消息的大小限制（运行时错误）
 
@@ -623,7 +623,7 @@ fn send(msg: &LargeMessage) {
 }
 ```
 
-> **修正**: 分布式系统中，消息大小直接影响延迟、吞吐和可靠性。大消息导致：1) 网络分片（IP 分片、TCP 流式传输），增加丢包重传成本；2) 内存压力（反序列化时分配大缓冲区）；3) 序列化/反序列化 CPU 开销。Rust 的序列化生态（`serde` + `bincode`/`postcard`/`protobuf`）在编译期验证结构可序列化，但不限制大小。安全模式：1) 应用层限制消息大小（`MAX_MESSAGE_SIZE`）；2) 使用流式序列化（`serde_json::to_writer` 到网络流）；3) 分块传输（chunked transfer）。这与 gRPC 的 `max_message_size` 配置或 Kafka 的 `max.request.size` 类似——大小限制是协议设计的一部分，Rust 的类型系统不自动处理，但允许零成本的紧凑序列化（`postcard` 比 JSON 小 50%+）。[来源: [serde Documentation](https://serde.rs/)] · [来源: [Cap'n Proto Rust](https://docs.rs/capnp/)]
+> **修正**: 分布式系统中，消息大小直接影响延迟、吞吐和可靠性。大消息导致：1) 网络分片（IP 分片、TCP 流式传输），增加丢包重传成本；2) 内存压力（反序列化时分配大缓冲区）；3) 序列化/反序列化 CPU 开销。Rust 的序列化生态（`serde` + `bincode`/`postcard`/`protobuf`）在编译期验证结构可序列化，但不限制大小。安全模式：1) 应用层限制消息大小（`MAX_MESSAGE_SIZE`）；2) 使用流式序列化（`serde_json::to_writer` 到网络流）；3) 分块传输（chunked transfer）。这与 gRPC 的 `max_message_size` 配置或 Kafka 的 `max.request.size` 类似——大小限制是协议设计的一部分，Rust 的类型系统（Type System）不自动处理，但允许零成本的紧凑序列化（`postcard` 比 JSON 小 50%+）。[来源: [serde Documentation](LINK_PLACEHOLDER)] · [来源: [Cap'n Proto Rust](LINK_PLACEHOLDER)]
 
 ### 10.4 边界测试：分布式共识的时钟偏差（逻辑错误）
 
@@ -701,7 +701,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-内存安全（无 GC 停顿）、零成本并发抽象（async/await 无运行时开销）、强类型系统保证消息协议正确性。适合构建低延迟、高吞吐的网络服务。
+内存安全（Memory Safety）（无 GC 停顿）、零成本并发抽象（async/await 无运行时开销）、强类型系统保证消息协议正确性。适合构建低延迟、高吞吐的网络服务。
 </details>
 
 ---

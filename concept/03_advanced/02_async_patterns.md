@@ -7,8 +7,8 @@
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S+P** — Structure + Procedure
-> **双维定位**: C×Ana — 分析异步模式的状态机变换
-> **定位**: 深入分析 Rust **异步编程的高级模式**——从 Future 状态机、Pin 保证到并发执行和取消传播，揭示 Rust async/await 如何在零运行时开销下实现高效并发。
+> **双维定位**: C×Ana — 分析异步（Async）模式的状态机变换
+> **定位**: 深入分析 Rust **异步编程的高级模式**——从 Future 状态机、Pin 保证到并发执行和取消传播，揭示 Rust async/await 如何在零运行时（Runtime）开销下实现高效并发。
 > **前置概念**: [Async](./02_async.md) · [Pin](./06_pin_unpin.md) · [Concurrency](./01_concurrency.md)
 > **后置概念**: [Distributed Systems](../06_ecosystem/18_distributed_systems.md) · [Tokio](https://tokio.rs/)
 
@@ -25,17 +25,17 @@
 
 ## 📑 目录
 
-- [异步模式：从 Future 到生产级并发](#异步模式从-future-到生产级并发)
+- [异步（Async）模式：从 Future 到生产级并发](LINK_PLACEHOLDER)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 Future 与状态机](#11-future-与状态机)
-    - [1.2 Pin 与自引用](#12-pin-与自引用)
+    - [1.2 Pin 与自引用（Reference）](LINK_PLACEHOLDER)
     - [1.3 Waker 与执行器](#13-waker-与执行器)
   - [二、技术细节](#二技术细节)
     - [2.1 并发执行模式](#21-并发执行模式)
     - [2.2 取消与超时](#22-取消与超时)
   - [十、边界测试：异步模式的编译错误](#十边界测试异步模式的编译错误)
-    - [10.1 边界测试：`Stream` 与 `Future` 的所有权混淆（编译错误）](#101-边界测试stream-与-future-的所有权混淆编译错误)
+    - [10.1 边界测试：`Stream` 与 `Future` 的所有权（Ownership）混淆（编译错误）](LINK_PLACEHOLDER)
     - [10.2 边界测试：取消安全（Cancellation Safety）违反（逻辑错误）](#102-边界测试取消安全cancellation-safety违反逻辑错误)
     - [2.3 背压与流控制](#23-背压与流控制)
   - [三、异步模式矩阵](#三异步模式矩阵)
@@ -47,11 +47,11 @@
   - [相关概念文件](#相关概念文件)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
-    - [10.3 边界测试：取消安全性（Cancellation Safety）的违反（运行时行为）](#103-边界测试取消安全性cancellation-safety的违反运行时行为)
+    - [10.3 边界测试：取消安全性（Cancellation Safety）的违反（运行时（Runtime）行为）](LINK_PLACEHOLDER)
     - [10.4 边界测试：`tokio::spawn` 的 `Send` 约束与 `Rc`（编译错误）](#104-边界测试tokiospawn-的-send-约束与-rc编译错误)
     - [10.5 边界测试：`Stream` 的 `fuse` 与 `select_next_some` 的交互（运行时 panic）](#105-边界测试stream-的-fuse-与-select_next_some-的交互运行时-panic)
     - [10.3 边界测试：`Stream` 的背压与缓冲区溢出（运行时内存增长）](#103-边界测试stream-的背压与缓冲区溢出运行时内存增长)
-    - [10.4 边界测试：async fn 在 trait 中的生命周期推断与实现约束（编译错误）](#104-边界测试async-fn-在-trait-中的生命周期推断与实现约束编译错误)
+    - [10.4 边界测试：async fn 在 trait 中的生命周期（Lifetimes）推断与实现约束（编译错误）](LINK_PLACEHOLDER)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -157,7 +157,7 @@ fn poll_future(future: Pin<&mut dyn Future<Output = ()>>) {
 let future = Box::pin(async { /* ... */ });
 ```
 
-> **Pin 洞察**: **Pin 是 Rust async 的基石**——它解决了状态机自引用问题，使编译器生成的状态机可以安全地跨越 await 点。
+> **Pin 洞察**: **Pin 是 Rust async 的基石**——它解决了状态机自引用（Reference）问题，使编译器生成的状态机可以安全地跨越 await 点。
 > [来源: [std::pin::Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)]
 
 ---
@@ -725,7 +725,7 @@ async fn work() {
 }
 ```
 
-> **修正**: `tokio::spawn` 将 future 发送到线程池执行，要求 future 是 `Send + 'static`。`Rc<T>` 不是 `Send`（引用计数非原子），因此不能出现在 spawn 的闭包中。解决方案：1) 使用 `Arc<T>`（原子引用计数，`Send + Sync`）；2) 在单线程执行器（`tokio::runtime::Builder::new_current_thread()`）中使用 `task::spawn_local`（不要求 `Send`）；3) 使用 `tokio::sync::Mutex` 而非 `std::sync::Mutex`（异步友好的锁）。这与 Go 的 goroutine（任何变量都可共享，通过 channel 同步）或 JavaScript 的 Worker（通过 `postMessage` 传递结构化克隆数据）不同——Rust 在编译期阻止非线程安全数据跨线程，即使通过异步抽象。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)]
+> **修正**: `tokio::spawn` 将 future 发送到线程池执行，要求 future 是 `Send + 'static`。`Rc<T>` 不是 `Send`（引用计数非原子），因此不能出现在 spawn 的闭包（Closures）中。解决方案：1) 使用 `Arc<T>`（原子引用计数，`Send + Sync`）；2) 在单线程执行器（`tokio::runtime::Builder::new_current_thread()`）中使用 `task::spawn_local`（不要求 `Send`）；3) 使用 `tokio::sync::Mutex` 而非 `std::sync::Mutex`（异步友好的锁）。这与 Go 的 goroutine（任何变量都可共享，通过 channel 同步）或 JavaScript 的 Worker（通过 `postMessage` 传递结构化克隆数据）不同——Rust 在编译期阻止非线程安全数据跨线程，即使通过异步抽象。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)]
 
 ### 10.5 边界测试：`Stream` 的 `fuse` 与 `select_next_some` 的交互（运行时 panic）
 
@@ -802,7 +802,7 @@ fn main() {}
 > 1) `// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]` 宏（Macro）（将 `async fn` 转为返回 `Pin<Box<dyn Future>>`）；
 > 2) `trait T { fn method(&self) -> impl Future<Output = i32>; }` + 手动 `Box::pin`（复杂）。
 > 这与 JavaScript 的 `async` 方法（接口中直接声明，无特殊限制）或 Kotlin 的 `suspend` 函数（类似，但编译器处理）不同
-> ——Rust 的 `async fn` in trait 是类型系统的重大扩展。
+> ——Rust 的 `async fn` in trait 是类型系统（Type System）的重大扩展。
 > [来源: [Async Fn In Traits](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)] ·
 > [来源: [RPITIT](https://rust-lang.github.io/rfcs//2289-associated-type-bounds.html)]
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) ·
@@ -825,11 +825,11 @@ fn main() {}
 
 > 异步状态机安全 ⟸ Pin 不动性 ⟸ Future::poll
 > 取消安全 ⟸ async drop 设计 ⟸ 结构化并发
-> **过渡**: 掌握 异步模式：从 Future 到生产级并发 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 异步模式：从 Future 到生产级并发 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 异步模式：从 Future 到生产级并发 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: 异步模式：从 Future 到生产级并发 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 异步模式：从 Future 到生产级并发 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 
@@ -873,7 +873,7 @@ fn main() {}
 
 ### 测验 1：tokio::select!（记忆层）
 
-**题目**: `tokio::select!` 宏的核心作用是什么？
+**题目**: `tokio::select!` 宏（Macro）的核心作用是什么？
 
 - A. 同时运行多个异步任务并等待全部完成
 - B. 同时等待多个异步操作，**其中一个**完成时立即返回
@@ -910,7 +910,7 @@ async fn example() {
 
 **与 `join!` 的区别**：
 
-| 宏 | 行为 | 使用场景 |
+| 宏（Macro） | 行为 | 使用场景 |
 |:---|:---|:---|
 | `select!` | 等待**第一个**完成的 Future | 超时控制、竞争条件、取消信号 |
 | `join!` | 等待**所有** Future 完成 | 并行发起多个独立请求 |
@@ -987,7 +987,7 @@ let (tx, rx) = mpsc::channel::<i32>(100);  // 仅缓冲100条
 
 ### 测验 3：Actor 模式（应用层）
 
-**题目**: 以下代码实现了一个简单的 Actor 模式。`Actor` 结构体的 `handle` 方法被谁调用？
+**题目**: 以下代码实现了一个简单的 Actor 模式。`Actor` 结构体（Struct）的 `handle` 方法被谁调用？
 
 ```rust
 use tokio::sync::mpsc;

@@ -50,9 +50,9 @@
 
 ## 一、Miri 是什么
 
-**Miri** 是 Rust 官方维护的 **MIR（Mid-level IR）解释器**。与 `rustc` 直接生成机器码不同，Miri 在 MIR 层面逐条解释执行程序，同时追踪每块内存的**有效性、初始化状态、借用权限**和**别名关系**。当程序即将触发未定义行为（UB）时，Miri 会报错并指出具体位置。
+**Miri** 是 Rust 官方维护的 **MIR（Mid-level IR）解释器**。与 `rustc` 直接生成机器码不同，Miri 在 MIR 层面逐条解释执行程序，同时追踪每块内存的**有效性、初始化状态、借用（Borrowing）权限**和**别名关系**。当程序即将触发未定义行为（UB）时，Miri 会报错并指出具体位置。
 
-> **关键洞察**: Miri 不是测试框架，而是**运行时语义检查器**。它回答的问题是：“这段代码在 Rust 抽象机上的执行是否违反了内存模型？”
+> **关键洞察**: Miri 不是测试框架，而是**运行时（Runtime）语义检查器**。它回答的问题是：“这段代码在 Rust 抽象机上的执行是否违反了内存模型？”
 >
 > [来源: Miri 官方 README](https://github.com/rust-lang/miri)
 
@@ -60,7 +60,7 @@
 
 | 工具 | 检查阶段 | 能发现的问题 | 不能发现的问题 |
 |:---|:---|:---|:---|
-| `cargo test` | 运行时 | 逻辑错误、断言失败 | UB、内存模型违规 |
+| `cargo test` | 运行时（Runtime） | 逻辑错误、断言失败 | UB、内存模型违规 |
 | `cargo clippy` | 编译期 | 风格问题、常见反模式 | 复杂别名违规 |
 | **Miri** | MIR 解释执行 | 悬垂指针、use-after-free、别名冲突、越界偏移、未初始化读取 | 死锁、业务逻辑错误、无限循环 |
 
@@ -72,7 +72,7 @@ Miri 目前能检测的主要 UB 类别包括：
 
 | UB 类别 | 典型代码模式 | Miri 报错关键词 |
 |:---|:---|:---|
-| **悬垂指针解引用** | 返回局部变量指针后使用 | `use-after-free` |
+| **悬垂指针解引用（Reference）** | 返回局部变量指针后使用 | `use-after-free` |
 | **未初始化内存读取** | `MaybeUninit::assume_init()` 过早 | `reading uninitialized memory` |
 | **别名规则违反** | `&mut` 与 `&` 同时活跃并写入 | `ambiguous borrow` / `noprotected` |
 | **越界指针偏移** | `ptr.offset(n)` 超出分配对象 | `pointer arithmetic overflow` |
@@ -127,7 +127,7 @@ cargo miri test --manifest-path crates/c02_type_system/Cargo.toml miri_tests
 | `MIRIFLAGS="-Zmiri-tree-borrows"` | 使用 Tree Borrows 别名模型（推荐） |
 | `MIRIFLAGS="-Zmiri-stacked-borrows"` | 使用 Stacked Borrows 别名模型 |
 | `MIRIFLAGS="-Zmiri-disable-isolation"` | 允许文件系统 / 网络访问 |
-| `MIRIFLAGS="-Zmiri-disable-stacked-borrows"` | 关闭借用检查（仅检测基本 UB） |
+| `MIRIFLAGS="-Zmiri-disable-stacked-borrows"` | 关闭借用（Borrowing）检查（仅检测基本 UB） |
 
 ---
 
@@ -169,7 +169,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 | Crate / 文件 | 覆盖主题 | 运行命令 |
 |:---|:---|:---|
 | [`crates/c02_type_system/src/miri_tests.rs`](../../crates/c02_type_system/src/miri_tests.rs) | `MaybeUninit`、`NonNull`、`ManuallyDrop`、裸指针别名 | `cargo miri test --package c02_type_system miri_tests` |
-| [`crates/c06_async/src/miri_tests.rs`](../../crates/c06_async/src/miri_tests.rs) | 异步运行时内存安全 | `cargo miri test --package c06_async miri_tests` |
+| [`crates/c06_async/src/miri_tests.rs`](LINK_PLACEHOLDER) | 异步（Async）运行时（Runtime）内存安全（Memory Safety） | `cargo miri test --package c06_async miri_tests` |
 | [`crates/c08_algorithms/src/miri_tests.rs`](../../crates/c08_algorithms/src/miri_tests.rs) | 排序、链表、数据结构 | `cargo miri test --package c08_algorithms miri_tests` |
 | [`exercises/src/unsafe_rust/ex05_miri_validation.rs`](../../exercises/src/unsafe_rust/ex05_miri_validation.rs) | UB 识别与修复练习 | `cargo miri test --package exercises ex05_miri_validation` |
 
@@ -215,7 +215,7 @@ fn test_heap_pointer() {
 | 错误 | Miri 输出 | 修复策略 |
 |:---|:---|:---|
 | 返回局部变量指针 | `use-after-free` | 改为堆分配或让调用者提供缓冲区 |
-| 同时存在 `&mut` 与其他引用并写入 | `trying to reborrow` / `no protected tag` | 缩小借用作用域，或使用 `Cell`/`RefCell` |
+| 同时存在 `&mut` 与其他引用（Reference）并写入 | `trying to reborrow` / `no protected tag` | 缩小借用作用域，或使用 `Cell`/`RefCell` |
 | `MaybeUninit` 未初始化就 `assume_init` | `reading uninitialized memory` | 确保所有字节已写入后再调用 |
 | 裸指针越界偏移 | `pointer arithmetic overflow` | 检查偏移量，使用 `wrapping_offset` 仅在合法场景 |
 | 通过 `&T` 修改数据 | `trying to reborrow` | 使用 `UnsafeCell` 或内部可变性包装 |

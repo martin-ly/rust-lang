@@ -50,8 +50,8 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
-    - [10.3 边界测试：`should_panic` 的预期消息匹配（运行时测试失败）](#103-边界测试should_panic-的预期消息匹配运行时测试失败)
-    - [10.4 边界测试：集成测试的模块可见性（编译错误）](#104-边界测试集成测试的模块可见性编译错误)
+    - [10.3 边界测试：`should_panic` 的预期消息匹配（运行时（Runtime）测试失败）](LINK_PLACEHOLDER)
+    - [10.4 边界测试：集成测试的模块（Module）可见性（编译错误）](LINK_PLACEHOLDER)
     - [10.5 边界测试：`#[should_panic]` 的预期消息匹配（测试失败）](#105-边界测试should_panic-的预期消息匹配测试失败)
     - [10.6 边界测试：集成测试的模块可见性与 `pub` 要求（编译错误）](#106-边界测试集成测试的模块可见性与-pub-要求编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -271,7 +271,7 @@ mod tests {
 }
 ```
 
-> **单元测试洞察**: **#[cfg(test)] 模块可以访问父模块的私有项**——这是测试私有函数的标准方式。
+> **单元测试洞察**: **#[cfg(test)] 模块（Module）可以访问父模块的私有项**——这是测试私有函数的标准方式。
 > [来源: [TRPL — Unit Tests](https://doc.rust-lang.org/book/ch11-01-writing-tests.html)]
 
 ---
@@ -595,7 +595,7 @@ fn test_divide_by_zero() {
 }
 ```
 
-> **修正**: `#[should_panic(expected = "...")]` 检查 panic 消息是否**包含**指定子串，而非完全相等。`"divide by zero"` 不匹配 `"attempt to divide by zero"`（缺少前缀 `attempt to`），因此测试失败。正确写法：`#[should_panic(expected = "attempt to divide by zero")]` 或更宽松的 `#[should_panic]`（不检查消息）。`expected` 是子串匹配，因此可写关键部分：`"divide by zero"` 在旧版 Rust 中可能匹配（若消息恰好是此子串），但不可靠。测试 panic 的替代：`std::panic::catch_unwind`（在测试中捕获 panic，验证返回的 `Payload`），或 `std::panic::set_hook` 自定义 panic 处理。这与 Java 的 `assertThrows`（检查异常类型，不检查消息）或 Python 的 `pytest.raises`（可检查消息）类似——Rust 的 `should_panic` 是属性宏，简洁但功能有限。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-01-writing-tests.html)] · [来源: [Rust Reference — Testing](https://doc.rust-lang.org/reference/attributes/testing.html)]
+> **修正**: `#[should_panic(expected = "...")]` 检查 panic 消息是否**包含**指定子串，而非完全相等。`"divide by zero"` 不匹配 `"attempt to divide by zero"`（缺少前缀 `attempt to`），因此测试失败。正确写法：`#[should_panic(expected = "attempt to divide by zero")]` 或更宽松的 `#[should_panic]`（不检查消息）。`expected` 是子串匹配，因此可写关键部分：`"divide by zero"` 在旧版 Rust 中可能匹配（若消息恰好是此子串），但不可靠。测试 panic 的替代：`std::panic::catch_unwind`（在测试中捕获 panic，验证返回的 `Payload`），或 `std::panic::set_hook` 自定义 panic 处理。这与 Java 的 `assertThrows`（检查异常类型，不检查消息）或 Python 的 `pytest.raises`（可检查消息）类似——Rust 的 `should_panic` 是属性宏（Macro），简洁但功能有限。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-01-writing-tests.html)] · [来源: [Rust Reference — Testing](https://doc.rust-lang.org/reference/attributes/testing.html)]
 
 ### 10.4 边界测试：集成测试的模块可见性（编译错误）
 
@@ -726,16 +726,16 @@ fn main() {}
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | 测试基础：从单元测试到集成测试 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 测试基础：从单元测试到集成测试 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 测试基础：从单元测试到集成测试 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 测试基础：从单元测试到集成测试 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 回归预防 ⟸ 自动化测试覆盖 ⟸ assert/match 验证
 > 代码可靠性 ⟸ TDD 循环 ⟸ 红-绿-重构
-> **过渡**: 掌握 测试基础：从单元测试到集成测试 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 测试基础：从单元测试到集成测试 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 
 > **过渡**: 在实践中应用 测试基础：从单元测试到集成测试 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: 测试基础：从单元测试到集成测试 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 测试基础：从单元测试到集成测试 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

@@ -10,7 +10,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Async Drop 预览特性
-> **定位**: 分析 Rust 中 **异步资源销毁**的设计挑战——`Drop::drop` 是同步的，但异步资源（如数据库连接、网络流）需要 await 才能正确关闭。探讨 `AsyncDrop` trait 的提案（[Async Drop Initiative](https://github.com/rust-lang/rust/issues/126482)）、设计约束与当前 nightly 实现状态。
+> **定位**: 分析 Rust 中 **异步（Async）资源销毁**的设计挑战——`Drop::drop` 是同步的，但异步资源（如数据库连接、网络流）需要 await 才能正确关闭。探讨 `AsyncDrop` trait 的提案（[Async Drop Initiative](https://github.com/rust-lang/rust/issues/126482)）、设计约束与当前 nightly 实现状态。
 > **前置概念**: [Async](../03_advanced/02_async.md) · [Pin](../03_advanced/06_pin_unpin.md)
 > **后置概念**: [Gen Blocks](./15_gen_blocks_preview.md) · [Async Closures](../03_advanced/24_async_closures.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
@@ -32,7 +32,7 @@
 - [Async Drop：异步资源的优雅销毁](#async-drop异步资源的优雅销毁)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 问题：同步 Drop 与异步资源的冲突](#11-问题同步-drop-与异步资源的冲突)
+    - [1.1 问题：同步 Drop 与异步（Async）资源的冲突](LINK_PLACEHOLDER)
     - [1.2 AsyncDrop Trait 设计](#12-asyncdrop-trait-设计)
     - [1.3 与 Pin 的交互](#13-与-pin-的交互)
   - [二、技术细节](#二技术细节)
@@ -49,7 +49,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：async drop 的编译错误](#十边界测试async-drop-的编译错误)
     - [10.1 边界测试：异步析构的 `.await` 位置约束（编译错误）](#101-边界测试异步析构的-await-位置约束编译错误)
-    - [10.2 边界测试：异步析构与 panic 的交互（运行时 UB）](#102-边界测试异步析构与-panic-的交互运行时-ub)
+    - [10.2 边界测试：异步析构与 panic 的交互（运行时（Runtime） UB）](LINK_PLACEHOLDER)
     - [10.3 边界测试：async drop 与 `std::mem::forget` 的交互（内存泄漏）](#103-边界测试async-drop-与-stdmemforget-的交互内存泄漏)
     - [10.4 边界测试：async drop 在 panic 时的双重取消（运行时 UB）](#104-边界测试async-drop-在-panic-时的双重取消运行时-ub)
     - [10.3 边界测试：async drop 与同步 Drop 的语义冲突（编译错误/设计问题）](#103-边界测试async-drop-与同步-drop-的语义冲突编译错误设计问题)
@@ -174,7 +174,7 @@ AsyncDrop 与 Pin 的复杂关系:
   └── 编译器需确保 Bar::async_drop 在正确的 executor 上执行
 ```
 
-> **Pin 交互洞察**: AsyncDrop 与 Pin 的交互是设计中最复杂的部分——它涉及**自引用类型的安全销毁**、**executor 上下文传递**和**编译期代码生成**三个层面的协调。
+> **Pin 交互洞察**: AsyncDrop 与 Pin 的交互是设计中最复杂的部分——它涉及**自引用（Reference）类型的安全销毁**、**executor 上下文传递**和**编译期代码生成**三个层面的协调。
 > [来源: [Tracking Issue #126482](https://github.com/rust-lang/rust/issues/126482)]
 
 ---
@@ -233,7 +233,7 @@ impl<T: AsyncClose> Drop for CloseOnDrop<T> {
 }
 ```
 
-> **Workaround 评价**: 当前 workaround 都是**部分解决方案**——要么依赖程序员记住调用 close()，要么将异步关闭委托给运行时（可能不可靠）。没有一种方案能像 AsyncDrop 那样在编译期保证正确性。
+> **Workaround 评价**: 当前 workaround 都是**部分解决方案**——要么依赖程序员记住调用 close()，要么将异步关闭委托给运行时（Runtime）（可能不可靠）。没有一种方案能像 AsyncDrop 那样在编译期保证正确性。
 > [来源: [Tokio Documentation — Graceful Shutdown](https://docs.rs/tokio/latest/tokio/runtime/struct.Runtime.html#method.shutdown_timeout)]
 
 ---
@@ -520,10 +520,10 @@ fn main() {
 > 解决方案：
 >
 > 1) 在 async 函数/块中使用 `AsyncResource`，让编译器在生成的状态机中插入 `.await`；
-> 2) 使用 `pin!` 宏确保值在异步上下文中正确 drop；
+> 2) 使用 `pin!` 宏（Macro）确保值在异步上下文中正确 drop；
 > 3) 显式调用 `async_drop(res).await`（若 RFC 支持显式调用）。
 > 这是 Rust 异步生态的"最后一块拼图"：目前异步资源的清理（如数据库连接池、HTTP 客户端）常通过 `spawn` 后台任务或阻塞 drop 解决，既不优雅也不高效。
-> `async drop` 使资源生命周期与异步执行模型一致。
+> `async drop` 使资源生命周期（Lifetimes）与异步执行模型一致。
 > [来源: [Async Drop Initiative](https://rust-lang.github.io/async-fundamentals-initiative/roadmap/async_drop.html)] · [来源: [Tokio Documentation](https://docs.rs/tokio/)]
 
 ### 10.2 边界测试：异步析构与 panic 的交互（运行时 UB）
@@ -551,7 +551,7 @@ async fn some_condition() -> bool { true }
 >
 > 1) 取消安全性（cancellation safety）——drop 是否可安全中断；
 > 2) 双重 panic 行为——与同步 drop 一致（abort）；
-> 3) 与 `pin` 的交互——异步 drop 要求值被固定（pinned）。
+> 3) 与 `pin` 的交互——异步（Async） drop 要求值被固定（pinned）。
 > 这些约束使 `async drop` 的实现极具挑战性，也是该特性迟迟未稳定的主要原因。
 > [来源: [Async Drop Initiative](https://rust-lang.github.io/async-fundamentals-initiative/roadmap/async_drop.html)] ·
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
@@ -582,7 +582,7 @@ fn main() {
 > 对 `AsyncResource` 使用 `forget` 意味着 async drop 永不执行——网络连接不关闭、文件不刷新、内存不释放。
 > 这与同步 `Drop` 的 `forget` 行为相同，但 async drop 的泄漏更隐蔽（开发者可能期望"异步清理会在后台完成"）。
 > `AsyncDrop` 的设计必须明确：`forget` 是泄漏的合法方式，async drop 不例外。
-> 这与 `ManuallyDrop`（同样阻止自动 drop，但允许显式调用）或 `Rc` 循环引用（类似泄漏）相同——Rust 不保证无泄漏，只保证无 use-after-free。
+> 这与 `ManuallyDrop`（同样阻止自动 drop，但允许显式调用）或 `Rc` 循环引用（Reference）（类似泄漏）相同——Rust 不保证无泄漏，只保证无 use-after-free。
 > `async drop` 的生态系统影响：某些库（如数据库连接池）可能要求 `async drop` 完成，开发者需注意避免 `forget` 和循环引用。
 > [来源: [Async Drop Initiative](https://rust-lang.github.io/async-fundamentals-initiative/roadmap/async_drop.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)]

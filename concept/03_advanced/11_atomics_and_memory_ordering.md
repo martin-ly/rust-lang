@@ -4,13 +4,13 @@
 >
 > **EN**: Concurrency
 > **Summary**: Concurrency. Core Rust concept covering mental model building, mechanism analysis, in-depth analysis.
-> **📎 交叉引用**
+> **📎 交叉引用（Reference）**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[原子操作](../../knowledge/03_advanced/concurrency/01_atomics.md)
+> 本主题在 knowledge 中有系统化的知识索引：[原子操作（Atomic Operations）](LINK_PLACEHOLDER)
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S+P** — Structure + Procedure
-> **双维定位**: P×Eva — 评估原子操作内存序的选型
+> **双维定位**: P×Eva — 评估原子操作（Atomic Operations）内存序的选型
 > **定位**: 深入分析 Rust **原子类型（Atomic）**和**内存排序（Memory Ordering [来源: [Atomic Ordering](https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html)]）**——从基本的 load/store 到 compare-and-swap 和释放-获取语义，揭示无锁编程中硬件内存模型的精确控制。
 > **前置概念**: [Concurrency](./01_concurrency.md) · [Unsafe](./03_unsafe.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Lockfree Data Structures](https://en.wikipedia.org/wiki/Non-blocking_algorithm) · [Distributed Systems](../06_ecosystem/18_distributed_systems.md)
@@ -46,7 +46,7 @@
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
     - [编译错误示例](#编译错误示例)
-    - [4.4 边界测试：原子操作与非原子操作混用（数据竞争 / 运行时 UB）](#44-边界测试原子操作与非原子操作混用数据竞争--运行时-ub)
+    - [4.4 边界测试：原子操作与非原子操作混用（数据竞争 / 运行时（Runtime） UB）](LINK_PLACEHOLDER)
     - [4.5 边界测试：`Ordering::Relaxed` 导致逻辑错误（编译通过但语义错误）](#45-边界测试orderingrelaxed-导致逻辑错误编译通过但语义错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
@@ -557,7 +557,7 @@ graph TD
      // 或保持 SeqCst 除非证明瓶颈
 ```
 
-> **陷阱总结**: 原子操作的陷阱主要与**Relaxed 误用**、**CAS 参数**、**内存序假设**、**原子借用**和**盲目优化**相关。
+> **陷阱总结**: 原子操作的陷阱主要与**Relaxed 误用**、**CAS 参数**、**内存序假设**、**原子借用（Borrowing）**和**盲目优化**相关。
 > [来源: [Rust Atomics and Locks — Common Mistakes](https://marabos.nl/atomics/)]
 
 ### 编译错误示例
@@ -603,7 +603,7 @@ fn atomic_ptr_deref() {
 }
 ```
 
-> **修正**: `AtomicPtr::load` 返回 `*mut T`，解引用需要 `unsafe` 块。编译器在此处可能给出不同错误——核心点是原子指针加载后仍需 unsafe 才能访问目标内存。
+> **修正**: `AtomicPtr::load` 返回 `*mut T`，解引用（Reference）需要 `unsafe` 块。编译器在此处可能给出不同错误——核心点是原子指针加载后仍需 unsafe 才能访问目标内存。
 
 ### 4.4 边界测试：原子操作与非原子操作混用（数据竞争 / 运行时 UB）
 
@@ -661,7 +661,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: `Relaxed` 只保证原子性（无撕裂读写），但不保证顺序一致性。在"标志位 + 数据"模式中，必须使用 `Release`（写标志）/ `Acquire`（读标志）建立 happens-before 关系，确保数据在标志可见前已完成写入。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**: `Relaxed` 只保证原子性（无撕裂读写），但不保证顺序一致性（Coherence）。在"标志位 + 数据"模式中，必须使用 `Release`（写标志）/ `Acquire`（读标志）建立 happens-before 关系，确保数据在标志可见前已完成写入。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ---
 
@@ -827,14 +827,14 @@ fn main() {
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | 原子操作与内存序：无锁并发的精确控制 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 原子操作与内存序：无锁并发的精确控制 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 原子操作与内存序：无锁并发的精确控制 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 原子操作与内存序：无锁并发的精确控制 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 弱内存模型正确 ⟸ happens-before 关系 ⟸ Acquire/Release
-> 无数据竞争 ⟸ atomic 操作 ⟸ 缓存一致性
-> **过渡**: 掌握 原子操作与内存序：无锁并发的精确控制 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> 无数据竞争 ⟸ atomic 操作 ⟸ 缓存一致性（Coherence）
+> **过渡**: 掌握 原子操作与内存序：无锁并发的精确控制 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 原子操作与内存序：无锁并发的精确控制 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: 原子操作与内存序：无锁并发的精确控制 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 原子操作与内存序：无锁并发的精确控制 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

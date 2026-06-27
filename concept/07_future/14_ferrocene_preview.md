@@ -94,8 +94,8 @@
 ```
 
 > **核心痛点**:
-> 传统安全关键开发使用 C/C++，内存安全缺陷（use-after-free、缓冲区溢出）是认证中的**主要风险源**。
-> Rust 的所有权模型从源头上消除了这类缺陷，但 Rust 工具链本身需要通过认证才能用于安全关键项目。
+> 传统安全关键开发使用 C/C++，内存安全（Memory Safety）缺陷（use-after-free、缓冲区溢出）是认证中的**主要风险源**。
+> Rust 的所有权（Ownership）模型从源头上消除了这类缺陷，但 Rust 工具链本身需要通过认证才能用于安全关键项目。
 > [来源: [ISO 26262-6:2018](https://www.iso.org/standard/68383.html)]
 
 ---
@@ -169,7 +169,7 @@ Ferrocene 的认证范围（当前）:
 | `cargo` | rust-lang/cargo | ✅ 认证 | 构建系统，不含网络功能 |
 | `libtest` | rust-lang/rust | ✅ 认证 | 单元测试框架 |
 | `std` | rust-lang/rust | ❌ 不认证 | 依赖 OS，行为平台相关 |
-| `tokio` | 第三方 | ❌ 不认证 | 异步运行时超出当前范围 |
+| `tokio` | 第三方 | ❌ 不认证 | 异步（Async）运行时（Runtime）超出当前范围 |
 
 > **技术要点**: Ferrocene 的认证策略是**"冻结 + 验证"**——选择上游 Rust 的一个稳定版本，冻结其代码，然后对该冻结版本执行完整的认证测试和分析。
 > [来源: [Ferrocene Qualification Report](https://ferrocene.dev/)]
@@ -235,8 +235,8 @@ Ferrocene 证据包构成:
 
 | 行业 | 标准 | Rust/Ferrocene 价值 | 当前状态 |
 | :--- | :--- | :--- | :---: |
-| **汽车** | ISO 26262 ASIL-D | 所有权模型消除内存安全类缺陷（占汽车软件缺陷 70%） | 🟡 早期采用（BMW、Volvo 试点） |
-| **航空** | DO-178C Level-A/B | 形式化友好的类型系统，支持 A 级软件的 MC/DC 要求 | 🟡 评估阶段 |
+| **汽车** | ISO 26262 ASIL-D | 所有权（Ownership）模型消除内存安全（Memory Safety）类缺陷（占汽车软件缺陷 70%） | 🟡 早期采用（BMW、Volvo 试点） |
+| **航空** | DO-178C Level-A/B | 形式化友好的类型系统（Type System），支持 A 级软件的 MC/DC 要求 | 🟡 评估阶段 |
 | **工业控制** | IEC 61508 SIL 3/4 | no_std 支持适合嵌入式 PLC/RTU | 🟡 概念验证 |
 | **医疗** | IEC 62304 Class C | 高完整性要求与 Rust 的安全保证匹配 | ⬜ 待探索 |
 | **航天** | ECSS-Q-ST-80C | 长周期任务需要确定性内存管理 | ⬜ 待探索 |
@@ -257,7 +257,7 @@ Ferrocene 证据包构成:
 | **第三方 crate 使用** | 可自由使用 crates.io，后期加固 | 难以论证，通常重写、内部化或加抽象隔离层 |
 | **工具链选择** | 跟随最新稳定版 | 固定版本，但面临依赖漂移（crate 要求最新编译器） |
 | **目标平台** | 选择丰富 | QNX 等目标仅有 `no_std` 支持，Tier 3 目标稳定性不可接受 |
-| **async 运行时** | 可用 Tokio 等生态运行时 | 缺少可认证/可qualify的 async 运行时 |
+| **async 运行时（Runtime）** | 可用 Tokio 等生态运行时 | 缺少可认证/可qualify的 async 运行时 |
 | **C/C++ 互操作** | `cxx`/`autocxx` 可用 | FFI 边界是安全论证难点，需严格审计 |
 
 **已部署案例**（来自访谈）：
@@ -271,8 +271,8 @@ Ferrocene 证据包构成:
 1. **帮助安全关键社区自助**：以 Ferrocene Language Specification (FLS) 为成功模式，企业投入 + Rust Project 维护。
 2. **建立生态级 MSRV/LTS 约定**：减少"固定工具链 vs. 依赖要求最新版"的冲突。
 3. **将 target tier policy 转化为安全关键入场清单**：明确各目标的 `no_std`/std 状态、最后验证版本、主要阻塞项。
-4. **文档化依赖生命周期模式**：QM 阶段"先用后清"、ASIL B+"避免或隔离第三方 crate"。
-5. **定义安全案例友好的 async 运行时需求**：与 async wg/libs 团队合作。
+4. **文档化依赖生命周期（Lifetimes）模式**：QM 阶段"先用后清"、ASIL B+"避免或隔离第三方 crate"。
+5. **定义安全案例友好的 async 运行时（Runtime）需求**：与 async wg/libs 团队合作。
 6. **将 C/C++ 互操作视为安全故事的一部分**：提供可审计、可同步的 FFI 边界指导与工具。
 
 > **关键洞察**：安全关键 Rust 的最大障碍**不是语言本身**，而是**证据友好的软件栈组装能力**——包括认证工具链、稳定目标、可控依赖和可论证的 FFI 边界。Ferrocene 解决了编译器认证，但生态其余部分仍需社区与行业共建。
@@ -340,7 +340,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助评估 Ferrocene 是否适合特定项目。核心判断标准是**std 依赖**、**目标平台支持**和**功能延迟容忍度**。
-> **使用建议**: 裸机/RTOS 嵌入式项目优先考虑 Ferrocene；需要 std 或异步运行时的项目需评估替代方案。
+> **使用建议**: 裸机/RTOS 嵌入式项目优先考虑 Ferrocene；需要 std 或异步（Async）运行时的项目需评估替代方案。
 > **关键洞察**: Ferrocene 的**不适用场景**同样重要——明确边界避免项目在选择工具链时做出错误决策。
 > [来源: 💡 原创分析]
 
@@ -372,7 +372,7 @@ graph TD
 
 > **边界要点**:
 > Ferrocene 是 Rust 进入安全关键领域的**第一步**，但不是终点。
-> 未来的方向是"Ferrocene + 形式化验证"的组合，在工具链认证的基础上为关键模块提供数学级保证。
+> 未来的方向是"Ferrocene + 形式化验证"的组合，在工具链认证的基础上为关键模块（Module）提供数学级保证。
 > [来源: [Ferrocene Risk Assessment](https://ferrocene.dev/)]
 
 ---
@@ -480,7 +480,7 @@ fn process(data: &[u8]) -> u32 {
 > 在安全关键子集中，所有操作都必须在编译期验证为安全。
 > 这与 Rust 的常规开发（允许 unsafe 封装底层操作）截然不同——Ferrocene 的目标领域（刹车系统、转向控制、安全气囊）要求最高级别的保证。
 > 开发者必须使用纯 safe Rust 实现功能，或将有 unsafe 的代码隔离在非安全关键组件中（通过严格接口契约）。
-> 这与 MISRA C（C 的安全关键子集）类似，但 Ferrocene 的约束由 Rust 的类型系统和 borrow checker 强制执行，减少人为审查负担。
+> 这与 MISRA C（C 的安全关键子集）类似，但 Ferrocene 的约束由 Rust 的类型系统（Type System）和 borrow checker 强制执行，减少人为审查负担。
 > [来源: [Ferrocene Documentation](https://spec.ferrocene.dev/)] ·
 > [来源: [ISO 26262 Standard](https://www.iso.org/standard/68383.html)]
 

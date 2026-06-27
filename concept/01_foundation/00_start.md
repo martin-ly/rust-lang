@@ -13,6 +13,8 @@
 > **对应练习**: [exercises/src/ownership_borrowing/ex01_hello_move.rs](../../exercises/src/ownership_borrowing/)
 >
 > **来源**: [TRPL — Getting Started](https://doc.rust-lang.org/book/ch01-00-getting-started.html) · [Rust Installation](https://www.rust-lang.org/tools/install)
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 ## 安装 Rust
@@ -77,7 +79,7 @@ hello/
 
 ## 下一步
 
-完成安装后，进入 [所有权与移动语义](./01_ownership.md)——Rust 最核心的概念。
+完成安装后，进入 [所有权（Ownership）与移动语义](LINK_PLACEHOLDER)——Rust 最核心的概念。
 
 ## 嵌入式测验（Embedded Quiz）
 

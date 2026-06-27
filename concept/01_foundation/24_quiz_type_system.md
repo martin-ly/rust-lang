@@ -11,6 +11,7 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
 
+> **后置概念**: [Ownership](./23_quiz_ownership_borrowing.md)
 ---
 
 > **来源**:
@@ -29,7 +30,7 @@
 ---
 
 > **Bloom 层级**: 理解 → 应用
-> **定位**: 嵌入式互动测验扩展——验证 L1 类型系统核心概念（标量/复合类型、enum、模式匹配（Pattern Matching）、类型转换）的掌握程度。
+> **定位**: 嵌入式互动测验扩展——验证 L1 类型系统（Type System）核心概念（标量/复合类型、enum、模式匹配（Pattern Matching）、类型转换）的掌握程度。
 > **使用方式**: 先独立思考答案，再点击展开核对解析。
 
 ---
@@ -92,7 +93,7 @@ fn main() {
 - 通过索引访问：`tup.0`、`tup.1`
 - 空元组 `()` 是单元类型（unit type），表示"无返回值"
 
-**知识点**：元组是 Rust 中最轻量的"匿名结构体"，广泛用于函数多返回值。[→ 类型系统详解](./04_type_system.md)
+**知识点**：元组是 Rust 中最轻量的"匿名结构体（Struct）"，广泛用于函数多返回值。[→ 类型系统（Type System）详解](LINK_PLACEHOLDER)
 
 </details>
 
@@ -162,12 +163,12 @@ fn main() {
 
 **答案**：`Move to 10, 20`
 
-**解析**：`match` 表达式对 `Message::Move { x: 10, y: 20 }` 进行模式匹配，第二个 arm 匹配成功，解构出 `x = 10`、`y = 20`。
+**解析**：`match` 表达式对 `Message::Move { x: 10, y: 20 }` 进行模式匹配（Pattern Matching），第二个 arm 匹配成功，解构出 `x = 10`、`y = 20`。
 
 **Rust enum 的强大之处**：
 
 - 每个变体可携带**不同类型和数量**的数据
-- `Quit`（无数据）、`Move { x, y }`（匿名结构体）、`Write(String)`（单个值）、`ChangeColor(i32, i32, i32)`（元组）
+- `Quit`（无数据）、`Move { x, y }`（匿名结构体（Struct））、`Write(String)`（单个值）、`ChangeColor(i32, i32, i32)`（元组）
 - 对比 C/Java 的 enum：Rust enum 是**代数数据类型（ADT）**，远不止是常量标签
 
 **知识点**：Rust 的 enum + match 组合是语言核心特性，替代了其他语言中的 nullable 类型、union 和异常。[→ 枚举详解](./04_type_system.md)
@@ -216,7 +217,7 @@ match some_number {
 - 只匹配一个模式，其他情况统一处理
 - 比完整 `match` 更简洁，避免冗余的 `_ => {}`
 
-**相关语法**：`while let` 用于在模式匹配成功时循环
+**相关语法**：`while let` 用于在模式匹配（Pattern Matching）成功时循环
 
 **知识点**：`if let` / `while let` 是 Rust "**只想处理一个模式**"场景下的惯用写法。[→ 模式匹配详解](./04_type_system.md)
 
@@ -252,7 +253,7 @@ fn main() {
 
 `(3, 5, 7)` 不匹配前两个模式（第一个不是 0，最后一个不是 0），匹配第三个，捕获 `x = 3`、`z = 7`。
 
-**注意**：`..` 只能在元组/结构体模式中使用**一次**（不能歧义），数组切片模式除外。
+**注意**：`..` 只能在元组/结构体模式中使用**一次**（不能歧义），数组切片（Slice）模式除外。
 
 **知识点**：`_` 忽略单个值，`..` 忽略剩余部分，两者是 Rust 模式匹配中减少 boilerplate 的关键工具。[→ 模式匹配详解](./04_type_system.md)
 
@@ -292,7 +293,7 @@ let b: u64 = a as u64; // 显式类型转换
 | 数值截断 | `300_i32 as i8` | `-12`（二进制截断） |
 | 浮点转整数 | `3.9_f32 as i32` | `3`（向零截断） |
 | 指针转换 | `&x as *const T` | 允许 |
-| 引用转指针 | `&x as *const T as usize` | 两步转换 |
+| 引用（Reference）转指针 | `&x as *const T as usize` | 两步转换 |
 
 **知识点**：Rust 的"无隐式转换"原则消除了 C 家族语言中大量隐蔽的类型转换 bug。[→ 类型强制与转换详解](./14_coercion_and_casting.md)
 
@@ -322,7 +323,7 @@ fn main() {
 | 类型 | 存储位置 | 大小 | 是否可变 | 说明 |
 |:---|:---|:---:|:---:|:---|
 | `&str` | 指向字符串字面量或 `String` 的切片 | 固定（指针+长度） | ❌ | 字符串切片（String Slice），不可变引用（Immutable Reference） |
-| `String` | 堆分配 | 动态增长 | ✅ | 拥有所有权的可变字符串 |
+| `String` | 堆分配 | 动态增长 | ✅ | 拥有所有权（Ownership）的可变字符串 |
 
 **转换关系**：
 
@@ -337,7 +338,7 @@ let s: &str = "hello";       // ✅ 字符串切片
 let s = "hello";              // ✅ 类型推断为 &str
 ```
 
-**知识点**：`&str` 是"借用（Borrowing）"，`String` 是"拥有"。Rust 字符串设计的核心是明确所有权边界。[→ 字符串详解](./09_strings_and_text.md)
+**知识点**：`&str` 是"借用（Borrowing）"，`String` 是"拥有"。Rust 字符串设计的核心是明确所有权（Ownership）边界。[→ 字符串详解](LINK_PLACEHOLDER)
 
 </details>
 
@@ -370,14 +371,14 @@ Some(3)
 None
 ```
 
-**解析**：`.iter()` 创建对 `Vec` 的不可变迭代器。每次 `.next()` 返回 `Option<&T>`：
+**解析**：`.iter()` 创建对 `Vec` 的不可变迭代器（Iterator）。每次 `.next()` 返回 `Option<&T>`：
 
 | 调用 | 返回值 | 说明 |
 |:---|:---|:---|
-| 第 1 次 | `Some(1)` | 指向第一个元素的引用 |
+| 第 1 次 | `Some(1)` | 指向第一个元素的引用（Reference） |
 | 第 2 次 | `Some(2)` | 指向第二个元素的引用 |
 | 第 3 次 | `Some(3)` | 指向第三个元素的引用 |
-| 第 4 次 | `None` | 迭代器已耗尽 |
+| 第 4 次 | `None` | 迭代器（Iterator）已耗尽 |
 
 **注意**：`v.iter()` 不消耗 `v`（返回 `&T`）。若使用 `v.into_iter()`，则 `v` 被移动并消耗。
 
@@ -435,7 +436,7 @@ Rectangle {
 | `Eq` | 全序相等 | `PartialEq` + reflexive |
 | `PartialOrd` | 部分排序 | 所有字段实现 `PartialOrd` |
 
-**知识点**：`derive` 宏通过编译期代码生成减少 boilerplate，是 Rust 元编程的入门工具。[→ 属性与宏详解](./12_attributes_and_macros.md)
+**知识点**：`derive` 宏（Macro）通过编译期代码生成减少 boilerplate，是 Rust 元编程的入门工具。[→ 属性与宏详解](./12_attributes_and_macros.md)
 
 </details>
 
@@ -445,7 +446,7 @@ Rectangle {
 
 | 得分 | 评价 | 建议 |
 |:---:|:---|:---|
-| 10/10 | 🏆 类型系统已内化 | 进阶至 [L2 Trait/泛型](../02_intermediate/01_traits.md) |
+| 10/10 | 🏆 类型系统已内化 | 进阶至 [L2 Trait/泛型（Generics）](LINK_PLACEHOLDER) |
 | 7–9/10 | ✅ 核心概念掌握 | 强化 [L1 类型练习](../../exercises/src/type_system/)，关注错题 |
 | 4–6/10 | 🔄 需巩固基础 | 重读 [Type System](./04_type_system.md)，完成 rustlings 对应章节 |
 | 0–3/10 | 📚 建议重新开始 | 从 [Type System](./04_type_system.md) 逐节阅读，配合 [crates/c02_type_system](../../crates/c02_type_system/) 示例 |
@@ -463,7 +464,7 @@ Rectangle {
 
 ### 测验 1：本文件是 测验：类型系统（试点扩展） 的专项测验集。这类测验文件的主要作用是什么？（理解层）
 
-**题目**: 本文件是 测验：类型系统（试点扩展） 的专项测验集。这类测验文件的主要作用是什么？
+**题目**: 本文件是 测验：类型系统（Type System）（试点扩展） 的专项测验集。这类测验文件的主要作用是什么？
 
 <details>
 <summary>✅ 答案与解析</summary>

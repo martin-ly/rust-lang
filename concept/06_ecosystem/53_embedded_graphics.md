@@ -34,7 +34,7 @@
   - [八、常见陷阱](#八常见陷阱)
   - [九、来源与延伸阅读](#九来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
-  - [十、边界测试：嵌入式图形的编译错误与运行时风险](#十边界测试嵌入式图形的编译错误与运行时风险)
+  - [十、边界测试：嵌入式图形的编译错误与运行时（Runtime）风险](LINK_PLACEHOLDER)
     - [10.1 边界测试：DMA 缓冲区未对齐到缓存行（运行时数据竞争）](#101-边界测试dma-缓冲区未对齐到缓存行运行时数据竞争)
     - [10.2 边界测试：绘制超出帧缓冲边界（内存损坏）](#102-边界测试绘制超出帧缓冲边界内存损坏)
     - [10.3 边界测试：中断上下文中阻塞 SPI 传输（实时性违例）](#103-边界测试中断上下文中阻塞-spi-传输实时性违例)
@@ -49,6 +49,8 @@
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
 
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 ## 一、核心概念
@@ -325,7 +327,7 @@ lvgl-rs: Rust 绑定到 LVGL (Light and Versatile Graphics Library)
   loop { lvgl::task_handler(); lvgl::tick_inc(5); }
 ```
 
-> **绑定洞察**: **lvgl-rs 将 C 的 widget 系统包装为 Rust 的安全 API**——但底层仍依赖 LVGL 的 C 内存管理，需要谨慎处理生命周期和自定义分配器。
+> **绑定洞察**: **lvgl-rs 将 C 的 widget 系统包装为 Rust 的安全 API**——但底层仍依赖 LVGL 的 C 内存管理，需要谨慎处理生命周期（Lifetimes）和自定义分配器。
 > [来源: [lvgl-rs GitHub](https://github.com/lvgl/lv_binding_rust)]
 > [来源: [LVGL Rust Bindings](https://docs.rs/lvgl/latest/lvgl/)]
 > **生态洞察**: LVGL 是嵌入式 GUI 领域最成熟的 C 库之一，lvgl-rs 使其可被 Rust 项目利用，但绑定维护成本较高，API 更新可能滞后。
@@ -384,7 +386,7 @@ Slint (原 sixtyfps): 声明式 UI 框架
 > **嵌入式洞察**: Slint 的 `no_std` 后端通过 `slint::platform::Platform` trait 适配自定义显示和输入驱动，适合汽车仪表、工业 HMI 等场景。
 > [来源: [Slint Embedded Guide](https://slint-ui.com/docs/embedded/)]
 > [来源: [Slint Platform Trait](https://slint-ui.com/docs/rust/slint/platform/trait.Platform.html)]
-> **性能洞察**: 声明式 UI 在编译时展开为命令式绘制调用，无运行时布局引擎——这与 Web 浏览器的 DOM 布局截然不同，更适合资源受限环境。
+> **性能洞察**: 声明式 UI 在编译时展开为命令式绘制调用，无运行时（Runtime）布局引擎——这与 Web 浏览器的 DOM 布局截然不同，更适合资源受限环境。
 > [来源: [Slint Architecture](https://slint-ui.com/docs/architecture/)]
 
 ---
@@ -513,7 +515,7 @@ DMA (Direct Memory Access) 在图形中的应用:
 > **DMA 洞察**: **DMA 是高分辨率嵌入式图形的必需品**——没有 DMA，CPU 将全部时间花在数据搬运上，无法处理用户输入或业务逻辑。
 > [来源: [STM32 DMA Application Note](https://www.st.com/resource/en/application_note/an4031-using-the-stm32f2-stm32f4-and-stm32f7-series-dma-controllers-stmicroelectronics.pdf)]
 > [来源: [DMA Cache Coherency](https://developer.arm.com/documentation/dai0298/a/)]
-> **安全洞察**: DMA 缓冲区必须通过 `static mut` 或 `cortex-m::singleton!` 分配，且需要与缓存行对齐（通常 32 字节）以避免缓存一致性问题。这要求 `unsafe` 或专门的 safe 抽象。
+> **安全洞察**: DMA 缓冲区必须通过 `static mut` 或 `cortex-m::singleton!` 分配，且需要与缓存行对齐（通常 32 字节）以避免缓存一致性（Coherence）问题。这要求 `unsafe` 或专门的 safe 抽象。
 > [来源: [Rust Embedded Book — DMA](https://docs.rust-embedded.org/book/)]
 > [来源: [cortex-m Singleton](https://docs.rs/cortex-m/latest/cortex_m/macro.singleton.html)]
 > **async 洞察**: embassy 框架将 DMA 传输包装为 `Future`，允许在 `async fn` 中 `await` DMA 完成——这是 Rust 异步模型在嵌入式的优雅应用。
@@ -563,7 +565,7 @@ DMA (Direct Memory Access) 在图形中的应用:
   └── 需要 harfbuzz 或等价库（嵌入式中罕见）
 ```
 
-> **字体洞察**: **位图字体是嵌入式系统的默认选择**——牺牲灵活性换取确定性的渲染性能和内存占用，与 Rust 的零成本抽象哲学一致。
+> **字体洞察**: **位图字体是嵌入式系统的默认选择**——牺牲灵活性换取确定性的渲染性能和内存占用，与 Rust 的零成本抽象（Zero-Cost Abstraction）哲学一致。
 > [来源: [embedded-graphics Fonts](https://docs.rs/embedded-graphics/latest/embedded_graphics/mono_font/index.html)]
 > [来源: [embedded-fonts Crate](https://docs.rs/embedded-fonts/latest/embedded_fonts/)]
 > **TTF 洞察**: `ttf-parser` 是 `no_std` 可用的 TrueType 解析器，但完整栅格化需要额外的光栅化库（如 `ab_glyph` 的 `no_std` 路径）。在 Cortex-M4F（带 FPU）上性能可接受。
@@ -697,7 +699,7 @@ graph TD
 
 > **反命题洞察 1**: **"嵌入式 GUI 需要 OS"是错误命题**——`no_std` + `embedded-graphics` 或 `lvgl-rs` 已能在 64KB Flash 的 Cortex-M0+ 上驱动完整 UI。
 > [来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)]
-> **反命题洞察 2**: **"Rust 太慢"是错误命题**——零成本抽象使迭代器、闭包、泛型在优化后等价于手写 C；DMA 卸载数据传输后，CPU 只需处理逻辑。
+> **反命题洞察 2**: **"Rust 太慢"是错误命题**——零成本抽象（Zero-Cost Abstraction）使迭代器（Iterator）、闭包（Closures）、泛型（Generics）在优化后等价于手写 C；DMA 卸载数据传输后，CPU 只需处理逻辑。
 > [来源: [Rust Reference — Zero Cost Abstractions](https://doc.rust-lang.org/reference/)]
 > **反命题洞察 3**: **"嵌入式 UI 千篇一律"是错误命题**——从 `embedded-graphics` 的像素级控制到 Slint 的声明式主题，Rust 生态提供从底层到高层的全栈定制能力。
 > [来源: [Slint Theming](https://slint-ui.com/docs/rust/slint/theming.html)]
@@ -793,10 +795,10 @@ graph TD
      delay_ms(120); // 等待退出睡眠模式
 ```
 
-> **陷阱总结**: 嵌入式图形的陷阱主要与**总线共享**、**内存安全**、**中断约束**、**缓存一致性**和**硬件时序**相关。
+> **陷阱总结**: 嵌入式图形的陷阱主要与**总线共享**、**内存安全（Memory Safety）**、**中断约束**、**缓存一致性（Coherence）**和**硬件时序**相关。
 > [来源: [embedded-graphics Examples](https://github.com/embedded-graphics/examples)]
 > [来源: [Rust Embedded Patterns](https://docs.rust-embedded.org/book/peripherals/index.html)]
-> **Rust 优势**: Rust 的类型系统可防止帧缓冲越界（通过 safe 抽象），但 `unsafe` 直接指针操作仍需谨慎。`embedded-graphics` 的 `DrawTarget` 自动裁剪是安全的默认选择。
+> **Rust 优势**: Rust 的类型系统（Type System）可防止帧缓冲越界（通过 safe 抽象），但 `unsafe` 直接指针操作仍需谨慎。`embedded-graphics` 的 `DrawTarget` 自动裁剪是安全的默认选择。
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 > [来源: [Rust Reference — Unsafe](https://doc.rust-lang.org/reference/unsafe-blocks.html)]
 
@@ -843,7 +845,7 @@ graph TD
 - [Embedded Systems](./22_embedded_systems.md) — 嵌入式系统基础
 - [Performance Optimization](./15_performance_optimization.md) — 性能优化
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — unsafe Rust 模式
-- [Async/Await](../03_advanced/02_async.md) — 异步编程
+- [Async/Await](../03_advanced/02_async.md) — 异步（Async）编程
 
 ---
 
@@ -948,7 +950,7 @@ unsafe extern "C" fn touch_isr() {
 }
 ```
 
-> **修正**: **中断服务程序（ISR）必须尽可能短**——在 Cortex-M 中，硬实时要求 ISR 执行时间在微秒级。阻塞 SPI 传输需要数百个时钟周期，若在中断中执行，将延迟所有同级和更低优先级中断。**解决方案**: 1) ISR 中仅设置原子标志；2) 主循环检测到标志后执行 SPI 通信；3) 使用 SPI + DMA，ISR 中启动 DMA，在 DMA 完成中断中处理数据。embassy 框架的 `async` 模型通过 `Future` 和 `Waker` 将中断安全桥接到异步任务。这与 C 的 ISR 尽量短原则一致，但 Rust 的类型系统可帮助确保共享状态的安全访问。[来源: [RTIC Documentation](https://rtic.rs/)] · [来源: [embassy Interrupts](https://embassy.dev/book/#_interrupts)] · [来源: [ARM Cortex-M Interrupt Handling](https://developer.arm.com/documentation/100240/latest/)] · [来源: [Ferrous Systems — Real-Time](https://ferrous-systems.com/)]
+> **修正**: **中断服务程序（ISR）必须尽可能短**——在 Cortex-M 中，硬实时要求 ISR 执行时间在微秒级。阻塞 SPI 传输需要数百个时钟周期，若在中断中执行，将延迟所有同级和更低优先级中断。**解决方案**: 1) ISR 中仅设置原子标志；2) 主循环检测到标志后执行 SPI 通信；3) 使用 SPI + DMA，ISR 中启动 DMA，在 DMA 完成中断中处理数据。embassy 框架的 `async` 模型通过 `Future` 和 `Waker` 将中断安全桥接到异步（Async）任务。这与 C 的 ISR 尽量短原则一致，但 Rust 的类型系统（Type System）可帮助确保共享状态的安全访问。[来源: [RTIC Documentation](LINK_PLACEHOLDER)] · [来源: [embassy Interrupts](LINK_PLACEHOLDER)] · [来源: [ARM Cortex-M Interrupt Handling](LINK_PLACEHOLDER)] · [来源: [Ferrous Systems — Real-Time](LINK_PLACEHOLDER)]
 > **过渡**: Rust 嵌入式图形系统开发 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 嵌入式图形系统开发 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 嵌入式图形系统开发 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

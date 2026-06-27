@@ -15,7 +15,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Open Enums 预览特性
-> **定位**: 探讨 Rust 枚举类型在 API 演进与跨 crate 兼容性维度的**开放性语义**，从现有 `#[non_exhaustive]` 机制延伸到语言级开放枚举的设计空间。
+> **定位**: 探讨 Rust 枚举（Enum）类型在 API 演进与跨 crate 兼容性维度的**开放性语义**，从现有 `#[non_exhaustive]` 机制延伸到语言级开放枚举的设计空间。
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Traits](../02_intermediate/01_traits.md) · [Error Handling](../02_intermediate/04_error_handling.md) · [Evolution](./03_evolution.md)
 > **后置概念**:
 > [Version Tracking](./05_rust_version_tracking.md) ·
@@ -36,7 +36,7 @@
 
 ## 📑 目录
 
-- [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](#open-enums-概念预研从-non_exhaustive-到可扩展枚举)
+- [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举（Enum）](LINK_PLACEHOLDER)
   - [📑 目录](#-目录)
   - [一、核心概念：封闭 vs 开放枚举](#一核心概念封闭-vs-开放枚举)
     - [1.1 封闭枚举（Closed Enums）](#11-封闭枚举closed-enums)
@@ -44,8 +44,8 @@
     - [1.3 开放枚举（Open Enums）的设计空间](#13-开放枚举open-enums的设计空间)
   - [二、`#[non_exhaustive]` 的形式化语义](#二non_exhaustive-的形式化语义)
     - [2.1 编译期影响：穷尽性检查的弱化](#21-编译期影响穷尽性检查的弱化)
-    - [2.2 运行时语义：无变化](#22-运行时语义无变化)
-    - [2.3 与模式匹配的交互](#23-与模式匹配的交互)
+    - [2.2 运行时（Runtime）语义：无变化](LINK_PLACEHOLDER)
+    - [2.3 与模式匹配（Pattern Matching）的交互](LINK_PLACEHOLDER)
   - [三、跨语言对比：开放枚举的多种形态](#三跨语言对比开放枚举的多种形态)
     - [3.1 Scala：Sealed Traits + 子类](#31-scalasealed-traits--子类)
     - [3.2 Haskell：Open Data Types](#32-haskellopen-data-types)
@@ -107,7 +107,7 @@ fn handle(status: HttpStatus) {
 }
 ```
 
-> **关键特性**: 封闭枚举的变体集合在编译期完全已知，编译器可执行**穷尽性检查**（exhaustiveness checking）。这是 Rust 模式匹配安全性的基石。
+> **关键特性**: 封闭枚举的变体集合在编译期完全已知，编译器可执行**穷尽性检查**（exhaustiveness checking）。这是 Rust 模式匹配（Pattern Matching）安全性的基石。
 > [来源: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html)]
 
 ---
@@ -115,7 +115,7 @@ fn handle(status: HttpStatus) {
 ### 1.2 `#[non_exhaustive]`：兼容性层面的开放
 >
 
-Rust 1.40 引入 `#[non_exhaustive]`，在**不改变运行时语义**的前提下，向外部 crate 隐藏枚举的"完整性"：
+Rust 1.40 引入 `#[non_exhaustive]`，在**不改变运行时（Runtime）语义**的前提下，向外部 crate 隐藏枚举的"完整性"：
 
 ```rust
 // 在 crate A 中定义
@@ -176,10 +176,10 @@ extend enum Event {
 
 | 维度 | 封闭枚举 | `#[non_exhaustive]` | 真正的开放枚举 |
 |:---|:---|:---|:---|
-| 变体集合 | 编译期固定 | 编译期固定，但对下游隐藏 | 运行时/链接时可扩展 |
+| 变体集合 | 编译期固定 | 编译期固定，但对下游隐藏 | 运行时（Runtime）/链接时可扩展 |
 | 穷尽性检查 | ✅ 完全 | ⚠️ 弱化（需 `_`） | ❌ 不可能 |
 | 运行时开销 | 零 | 零 | 可能有（虚表/dispatch） |
-| 用例 | 内部状态机 | 公共 API 枚举 | 插件系统、事件总线 |
+| 用例 | 内部状态机 | 公共 API 枚举（Enum） | 插件系统、事件总线 |
 | Rust 现状 | 默认 | 稳定（1.40+） | 无计划 |
 
 > **关键洞察**: Rust 的设计哲学倾向于"编译期可知性"。`#[non_exhaustive]` 是在"向后兼容"和"编译期安全"之间做的**最小侵入式妥协**，而非向动态开放性的让步。
@@ -289,7 +289,7 @@ final case class Key(c: Char) extends Event
 
 **与 Rust 对比**:
 
-- Scala `sealed` = Rust `enum`（封闭，但允许同模块扩展）
+- Scala `sealed` = Rust `enum`（封闭，但允许同模块（Module）扩展）
 - Scala 非 `sealed` = Rust `#[non_exhaustive]`（开放性，但 Scala 在运行时）
 - Rust 的 `enum` 更严格：编译期变体集合完全固定
 
@@ -330,7 +330,7 @@ let handle_extended = function
   | `Scroll d -> "scroll"  (* 新变体，类型系统自动扩展 *)
 ```
 
-> **关键差异**: OCaml 的多态变体在**类型系统层面**支持开放——变体集合是类型的子结构，可通过子类型关系扩展。Rust 的枚举类型是**名义类型**（nominal），变体与类型名强绑定，不支持此类扩展。
+> **关键差异**: OCaml 的多态变体在**类型系统（Type System）层面**支持开放——变体集合是类型的子结构，可通过子类型关系扩展。Rust 的枚举类型是**名义类型**（nominal），变体与类型名强绑定，不支持此类扩展。
 > [来源: [OCaml Manual — Polymorphic Variants](https://ocaml.org/manual/polyvariant.html)]
 
 ---
@@ -479,7 +479,7 @@ pub enum ConstExample {
 // const 赋值仍可用，但 match 仍需 _
 ```
 
-> **极限测试**: `#[non_exhaustive]` 的约束在**crate 边界**处生效，不跨模块边界。这是 Rust 模块系统的最小可见性单元原则的体现。
+> **极限测试**: `#[non_exhaustive]` 的约束在**crate 边界**处生效，不跨模块（Module）边界。这是 Rust 模块系统的最小可见性单元原则的体现。
 > [来源: [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html)]
 
 ---
@@ -494,7 +494,7 @@ pub enum ConstExample {
 | **Sealed Traits 正式化** | 社区惯用法 | 2026–2027 | 与开放枚举互补的封闭控制 |
 | **Variant types / Row polymorphism** | 研究阶段 | 2027+ | 可能引入 OCaml 式开放变体 |
 
-> **预测**: Rust 短期内不会引入真正的运行时开放枚举（破坏零成本抽象原则）。更可能的方向是通过**类型系统扩展**（如 row polymorphism 或 effect system）在保持编译期安全的前提下提供更大的灵活性。
+> **预测**: Rust 短期内不会引入真正的运行时开放枚举（破坏零成本抽象（Zero-Cost Abstraction）原则）。更可能的方向是通过**类型系统（Type System）扩展**（如 row polymorphism 或 effect system）在保持编译期安全的前提下提供更大的灵活性。
 > [来源: 💡 原创分析 · [Rust Effects System RFC](https://github.com/rust-lang/rfcs/pull/))]
 
 ---

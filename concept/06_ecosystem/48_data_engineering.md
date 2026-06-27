@@ -13,10 +13,11 @@
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Ana — 分析 Rust 数据工程生态的技术选型与工程权衡
-> **前置依赖**: [类型系统](../01_foundation/04_type_system.md) · [泛型](../02_intermediate/02_generics.md) · [Async/Await](../03_advanced/02_async.md) · [Machine Learning Ecosystem](./46_machine_learning_ecosystem.md)
+> **前置依赖**: [类型系统（Type System）](LINK_PLACEHOLDER) · [泛型（Generics）](LINK_PLACEHOLDER) · [Async/Await](LINK_PLACEHOLDER) · [Machine Learning Ecosystem](LINK_PLACEHOLDER)
 > **后置延伸**: [流处理生态](./36_stream_processing_ecosystem.md) · [云原生](./24_cloud_native.md) · [性能优化](./15_performance_optimization.md)
 >
 > **来源**: [polars](https://docs.rs/polars/) · [arrow-rs](https://docs.rs/arrow/) · [datafusion](https://docs.rs/datafusion/)
+> **前置概念**: N/A
 ---
 
 > **来源**: [Apache Arrow](https://arrow.apache.org/) ·
@@ -62,8 +63,8 @@
     - [8.2 边界极限](#82-边界极限)
   - [九、边界测试](#九边界测试)
     - [9.1 边界测试：Parquet 写入时 schema 演化导致读取失败（兼容性错误）](#91-边界测试parquet-写入时-schema-演化导致读取失败兼容性错误)
-    - [9.2 边界测试：对象存储流式下载内存溢出（运行时错误）](#92-边界测试对象存储流式下载内存溢出运行时错误)
-    - [9.3 边界测试：ETL 管道中类型推断失败导致运行时 panic（类型错误）](#93-边界测试etl-管道中类型推断失败导致运行时-panic类型错误)
+    - [9.2 边界测试：对象存储流式下载内存溢出（运行时（Runtime）错误）](LINK_PLACEHOLDER)
+    - [9.3 边界测试：ETL 管道中类型推断（Type Inference）失败导致运行时 panic（类型错误）](LINK_PLACEHOLDER)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -71,7 +72,7 @@
     - [测验 2：`arrow-rs` 在数据生态中扮演什么角色？（理解层）](#测验-2arrow-rs-在数据生态中扮演什么角色理解层)
     - [测验 3：为什么列式存储（Columnar Storage）比行式存储更适合分析查询？（理解层）](#测验-3为什么列式存储columnar-storage比行式存储更适合分析查询理解层)
     - [测验 4：`datafusion` 在 Rust 中提供什么功能？（理解层）](#测验-4datafusion-在-rust-中提供什么功能理解层)
-    - [测验 5：Rust 的内存安全如何帮助数据管道避免生产事故？（理解层）](#测验-5rust-的内存安全如何帮助数据管道避免生产事故理解层)
+    - [测验 5：Rust 的内存安全（Memory Safety）如何帮助数据管道避免生产事故？（理解层）](LINK_PLACEHOLDER)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -210,7 +211,7 @@ fn batch_ingest_csv_to_parquet(input: &Path, output: &Path) -> PolarsResult<()> 
 
 ### 3.2 流处理摄取
 
-流处理摄取用于低延迟场景。Rust 的异步生态为流处理提供了高性能基础：
+流处理摄取用于低延迟场景。Rust 的异步（Async）生态为流处理提供了高性能基础：
 
 ```rust
 // 流处理摄取：Kafka → 内存缓冲 → 批写入
@@ -565,7 +566,7 @@ Rust 生态:
 | **分区裁剪** | 只扫描相关分区 | polars `filter` + 分区列 |
 | **列裁剪** | 只读取需要的列 | Parquet 列式存储天然支持 |
 | **结果缓存** | 缓存热点查询 | Redis / 内存缓存 |
-| **异步 I/O** | 并发读取多个文件 | tokio + object_store |
+| **异步（Async） I/O** | 并发读取多个文件 | tokio + object_store |
 
 ```rust,ignore
 // 查询加速：物化视图 + 缓存
@@ -846,7 +847,7 @@ fn good_csv_parse() -> PolarsResult<DataFrame> {
 - [云原生](./24_cloud_native.md) — 容器化、对象存储、微服务部署
 - [性能优化](./15_performance_optimization.md) — SIMD、缓存优化、内存布局
 - [API Design Patterns](./42_api_design_patterns.md) — REST/gRPC 数据服务
-- [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、异步并行
+- [并发编程](LINK_PLACEHOLDER) — Send/Sync、异步（Async）并行
 - [数据库系统](./37_database_systems.md) — 存储引擎、事务、索引
 - [网络协议](./38_network_protocols.md) — HTTP/2、gRPC、对象存储协议
 - [安全与密码学](./43_security_cryptography.md) — 数据加密、合规性
@@ -915,7 +916,7 @@ Apache Arrow 的 Rust 实现，提供列式内存格式标准。`polars`、`data
 
 ### 测验 5：Rust 的内存安全如何帮助数据管道避免生产事故？（理解层）
 
-**题目**: Rust 的内存安全如何帮助数据管道避免生产事故？
+**题目**: Rust 的内存安全（Memory Safety）如何帮助数据管道避免生产事故？
 
 <details>
 <summary>✅ 答案与解析</summary>

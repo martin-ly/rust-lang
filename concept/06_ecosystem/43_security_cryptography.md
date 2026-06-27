@@ -15,11 +15,12 @@
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Eva — 评价密码学实现的安全性
-> **前置依赖**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Trait](../02_intermediate/01_traits.md) · [类型系统](../01_foundation/04_type_system.md) · [安全实践](./19_security_practices.md)
+> **前置依赖**: [Unsafe Rust](LINK_PLACEHOLDER) · [Trait](LINK_PLACEHOLDER) · [类型系统（Type System）](LINK_PLACEHOLDER) · [安全实践](LINK_PLACEHOLDER)
 > **后置延伸**: [区块链与智能合约安全](./06_blockchain.md) · [网络协议](./38_network_protocols.md) · [TLS/QUIC](38_network_protocols.md)
 
 >
 > **来源**: [ring](https://docs.rs/ring/) · [rustls](https://docs.rs/rustls/) · [Rust Crypto](https://github.com/RustCrypto)
+> **前置概念**: N/A
 ---
 
 > **来源**: [NIST FIPS 197](https://csrc.nist.gov/publications/detail/fips/197/final) ·
@@ -65,14 +66,14 @@
     - [9.1 反命题树](#91-反命题树)
     - [9.2 边界极限](#92-边界极限)
   - [十、边界测试](#十边界测试)
-    - [10.1 边界测试：非常量时间比较导致定时攻击（运行时信息泄露）](#101-边界测试非常量时间比较导致定时攻击运行时信息泄露)
+    - [10.1 边界测试：非常量时间比较导致定时攻击（运行时（Runtime）信息泄露）](LINK_PLACEHOLDER)
     - [10.2 边界测试：Nonce 复用破坏 AES-GCM 机密性（逻辑错误）](#102-边界测试nonce-复用破坏-aes-gcm-机密性逻辑错误)
     - [10.3 边界测试：低迭代次数 KDF 导致暴力破解（安全漏洞）](#103-边界测试低迭代次数-kdf-导致暴力破解安全漏洞)
   - [相关概念文件](#相关概念文件)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 的 `ring` crate 在密码学中提供什么功能？（理解层）](#测验-1rust-的-ring-crate-在密码学中提供什么功能理解层)
-    - [测验 2：为什么密码学代码中绝对不应该使用 `unsafe` 或原始指针？（理解层）](#测验-2为什么密码学代码中绝对不应该使用-unsafe-或原始指针理解层)
+    - [测验 2：为什么密码学代码中绝对不应该使用 `unsafe` 或原始指针（Raw Pointer）？（理解层）](LINK_PLACEHOLDER)
     - [测验 3：Rust 的常量时间比较（Constant-Time Comparison）为什么对密码学重要？（理解层）](#测验-3rust-的常量时间比较constant-time-comparison为什么对密码学重要理解层)
     - [测验 4：`rustls` 与 OpenSSL 相比在安全性上有什么优势？（理解层）](#测验-4rustls-与-openssl-相比在安全性上有什么优势理解层)
     - [测验 5：在 Rust 中存储密码时，为什么必须使用 Argon2 / bcrypt / scrypt 而非 SHA-256？（理解层）](#测验-5在-rust-中存储密码时为什么必须使用-argon2--bcrypt--scrypt-而非-sha-256理解层)
@@ -538,7 +539,7 @@ fn ring_sign(key_pair: &Ed25519KeyPair, message: &[u8]) -> ring::signature::Sign
 > **设计特点**:
 >
 > - `ring` 的 API 刻意保持**小表面积**，只暴露最常用的操作（AES-GCM、ChaCha20-Poly1305、Ed25519、X25519、SHA-256/384/512）
-> - 所有密钥材料通过**类型系统**管理（`UnboundKey`、`SealingKey`、`OpeningKey`）
+> - 所有密钥材料通过**类型系统（Type System）**管理（`UnboundKey`、`SealingKey`、`OpeningKey`）
 > - 不支持 AES-CBC、RSA-PKCS#1 v1.5 等被认为不安全的模式
 >
 > **来源**: [ring Documentation](https://briansmith.org/rustdoc/ring/) · [BoringSSL](https://boringssl.googlesource.com/boringssl/)
@@ -546,7 +547,7 @@ fn ring_sign(key_pair: &Ed25519KeyPair, message: &[u8]) -> ring::signature::Sign
 ### 6.2 rustls：纯 Rust TLS
 >
 
-> **[rustls](https://docs.rs/rustls/latest/rustls/)** 是 Joseph Birr-Pixton 开发的纯 Rust TLS 库，目标是**替代 OpenSSL**。与 OpenSSL 相比：内存安全（无缓冲区溢出）、无 unsafe（核心代码）、API 设计更现代（基于 Rust 类型系统）。
+> **[rustls](https://docs.rs/rustls/latest/rustls/)** 是 Joseph Birr-Pixton 开发的纯 Rust TLS 库，目标是**替代 OpenSSL**。与 OpenSSL 相比：内存安全（Memory Safety）（无缓冲区溢出）、无 unsafe（核心代码）、API 设计更现代（基于 Rust 类型系统（Type System））。
 
 ```rust,ignore
 use rustls::{ClientConfig, ServerConfig, RootCertStore};
@@ -664,7 +665,7 @@ fn ct_compare_impl(a: &[u8], b: &[u8]) -> bool {
 > **局限**: Rust 编译器可能将常量时间代码优化为分支代码。当前解决方案：
 >
 > 1. 使用 `core::hint::black_box` 阻止优化
-> 2. 使用内联汇编实现关键路径
+> 2. 使用内联汇编（Inline Assembly）实现关键路径
 > 3. 依赖 LLVM 的 `volatile` 语义
 >
 > **来源**: [subtle crate](https://docs.rs/subtle/latest/subtle/) · [Constant-Time Programming](https://bearssl.org/constanttime.html) · [Timing Attacks on Implementations](https://crypto.stanford.edu/~dabo/papers/ssl-timing.pdf)
@@ -738,7 +739,7 @@ fn ct_compare_impl(a: &[u8], b: &[u8]) -> bool {
 
 | **边界** | **现状** | **理论极限** | **工程影响** |
 |:---|:---|:---|:---|
-| **常量时间保证** | `subtle` crate + 内联汇编 | 编译器优化可能破坏 | 需要密码学审计验证 |
+| **常量时间保证** | `subtle` crate + 内联汇编（Inline Assembly） | 编译器优化可能破坏 | 需要密码学审计验证 |
 | **密钥内存清零** | `zeroize` crate | 操作系统可能交换到磁盘 | 使用 `mlock` + `zeroize` |
 | **量子威胁** | 混合方案（ECC + PQC）| Grover/Shor 算法 | 2030+ 预计需要完全迁移 |
 | **侧信道防护** | 时间侧信道基本防护 | 功耗/电磁侧信道需硬件 | 高安全场景需要 HSM |
@@ -877,7 +878,7 @@ fn weak_hash_password(password: &str) -> String {
 
 ### 测验 2：为什么密码学代码中绝对不应该使用 `unsafe` 或原始指针？（理解层）
 
-**题目**: 为什么密码学代码中绝对不应该使用 `unsafe` 或原始指针？
+**题目**: 为什么密码学代码中绝对不应该使用 `unsafe` 或原始指针（Raw Pointer）？
 
 <details>
 <summary>✅ 答案与解析</summary>

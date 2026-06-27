@@ -11,6 +11,7 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
 
+> **后置概念**: N/A
 ---
 
 > **来源**:
@@ -29,7 +30,7 @@
 ---
 
 > **Bloom 层级**: 理解 → 应用
-> **定位**: 嵌入式互动测验扩展——验证 L1 错误处理核心概念（Result/Option、`?` 运算符、panic、自定义错误）的掌握程度。
+> **定位**: 嵌入式互动测验扩展——验证 L1 错误处理（Error Handling）核心概念（Result/Option、`?` 运算符、panic、自定义错误）的掌握程度。
 > **使用方式**: 先独立思考答案，再点击展开核对解析。
 
 ---
@@ -67,7 +68,7 @@ fn main() {
 | `unwrap()` | `-> T` | `Ok(v)` → `v`，`Err(_)` → **panic** |
 | `expect(msg)` | `-> T` | 同 `unwrap`，但带自定义 panic 消息 |
 
-**知识点**：`Result` 是 Rust 错误处理的核心类型，强迫调用者显式处理错误路径。[→ 错误处理基础详解](./10_error_handling_basics.md)
+**知识点**：`Result` 是 Rust 错误处理（Error Handling）的核心类型，强迫调用者显式处理错误路径。[→ 错误处理基础详解](LINK_PLACEHOLDER)
 
 </details>
 
@@ -412,7 +413,7 @@ fn main() {
 
 **解析**：
 
-- `AppError` 是**自定义错误枚举**，聚合了所有可能的错误类型
+- `AppError` 是**自定义错误枚举（Enum）**，聚合了所有可能的错误类型
 - `From<std::io::Error>` 和 `From<std::num::ParseIntError>` 让 `?` 运算符能**自动转换**底层错误为 `AppError`
 
 **`?` 的自动转换机制**：
@@ -491,7 +492,7 @@ let all_ok: Result<Vec<i32>, _> = vec![s1, s2, s3]
     .collect(); // Result 实现了 FromIterator
 ```
 
-**知识点**：`Result` 实现了 `FromIterator`，允许 `collect()` 将 `Vec<Result<T, E>>` 转换为 `Result<Vec<T>, E>`（第一个错误即整体失败）。[→ 迭代器详解](../02_intermediate/15_iterator_patterns.md)
+**知识点**：`Result` 实现了 `FromIterator`，允许 `collect()` 将 `Vec<Result<T, E>>` 转换为 `Result<Vec<T>, E>`（第一个错误即整体失败）。[→ 迭代器（Iterator）详解](LINK_PLACEHOLDER)
 
 </details>
 
@@ -588,7 +589,7 @@ result
 
 ### 测验 2：在 测验：错误处理（试点扩展） 的测验中，若遇到不确定答案的题目，最佳的学习策略是什么？（理解层）
 
-**题目**: 在 测验：错误处理（试点扩展） 的测验中，若遇到不确定答案的题目，最佳的学习策略是什么？
+**题目**: 在 测验：错误处理（Error Handling）（试点扩展） 的测验中，若遇到不确定答案的题目，最佳的学习策略是什么？
 
 <details>
 <summary>✅ 答案与解析</summary>

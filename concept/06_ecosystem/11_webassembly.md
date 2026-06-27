@@ -29,7 +29,7 @@
 
 ## 📑 目录
 
-- [WebAssembly 生态：Rust 的浏览器外运行时](#webassembly-生态rust-的浏览器外运行时)
+- [WebAssembly 生态：Rust 的浏览器外运行时（Runtime）](LINK_PLACEHOLDER)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 WebAssembly 的设计哲学](#11-webassembly-的设计哲学)
@@ -51,14 +51,14 @@
   - [十、边界测试：WebAssembly 的编译错误](#十边界测试webassembly-的编译错误)
     - [10.1 边界测试：`wasm32` 目标的标准库限制（编译错误）](#101-边界测试wasm32-目标的标准库限制编译错误)
     - [10.2 边界测试：`wasm-bindgen` 的类型映射（编译错误）](#102-边界测试wasm-bindgen-的类型映射编译错误)
-    - [10.3 边界测试：WASM 的线性内存与 Rust 引用的不兼容性（编译错误）](#103-边界测试wasm-的线性内存与-rust-引用的不兼容性编译错误)
+    - [10.3 边界测试：WASM 的线性内存与 Rust 引用（Reference）的不兼容性（编译错误）](LINK_PLACEHOLDER)
     - [10.4 边界测试：`wasm32-unknown-unknown` 的 panic 处理（编译错误/运行时陷阱）](#104-边界测试wasm32-unknown-unknown-的-panic-处理编译错误运行时陷阱)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：WebAssembly（WASM）相比 JavaScript 在性能上的主要优势是什么？（理解层）](#测验-1webassemblywasm相比-javascript-在性能上的主要优势是什么理解层)
     - [测验 2：Rust 编译为 WASM 时，为什么需要 `wasm-bindgen`？（理解层）](#测验-2rust-编译为-wasm-时为什么需要-wasm-bindgen理解层)
     - [测验 3：`wasm-pack` 在 Rust/WASM 工作流中扮演什么角色？（理解层）](#测验-3wasm-pack-在-rustwasm-工作流中扮演什么角色理解层)
-    - [测验 4：WASM 的线性内存（Linear Memory）模型是什么意思？Rust 的所有权系统如何与之交互？（理解层）](#测验-4wasm-的线性内存linear-memory模型是什么意思rust-的所有权系统如何与之交互理解层)
+    - [测验 4：WASM 的线性内存（Linear Memory）模型是什么意思？Rust 的所有权（Ownership）系统如何与之交互？（理解层）](LINK_PLACEHOLDER)
     - [测验 5：WASM 目前有哪些主要限制，使得它还不能完全替代原生应用？（理解层）](#测验-5wasm-目前有哪些主要限制使得它还不能完全替代原生应用理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -90,7 +90,7 @@ Wasm 的内存模型:
 └── 与 Rust 的契合: Rust 的所有权/借用模型天然适合 Wasm 的安全约束
 ```
 
-> **设计洞察**: Wasm 的**无未定义行为**保证与 Rust 的**安全子集**高度契合。C/C++ 编译到 Wasm 时，许多 UB 行为（如越界访问）被 Wasm 运行时捕获；而 Rust 在编译期就消除了这类 UB。
+> **设计洞察**: Wasm 的**无未定义行为**保证与 Rust 的**安全子集**高度契合。C/C++ 编译到 Wasm 时，许多 UB 行为（如越界访问）被 Wasm 运行时（Runtime）捕获；而 Rust 在编译期就消除了这类 UB。
 > [来源: [WebAssembly Specification — Security](https://webassembly.github.io/spec/core/appendix/security.html)]
 
 **可编译示例** — 极简 Wasm 导出函数（Rust 1.82+ 必须使用 `#[unsafe(no_mangle)]`）：
@@ -149,14 +149,14 @@ graph LR
 
 | 维度 | Rust | C/C++ | Go | AssemblyScript |
 |:---|:---|:---|:---|:---|
-| **二进制大小** | 小（无运行时） | 小（但 stdlib 大） | 大（含 GC 运行时） | 小 |
+| **二进制大小** | 小（无运行时） | 小（但 stdlib 大） | 大（含 GC 运行时（Runtime）） | 小 |
 | **运行时开销** | 零（无 GC） | 零 | GC 暂停 | 零 |
-| **安全保证** | 编译期内存安全 | 依赖程序员 | GC + 边界检查 | 类型安全 |
+| **安全保证** | 编译期内存安全（Memory Safety） | 依赖程序员 | GC + 边界检查 | 类型安全 |
 | **标准库支持** | core/alloc/no_std | 需 musl/newlib | 部分支持 | 有限 |
 | **工具链成熟** | wasm-pack, wasm-bindgen | Emscripten | TinyGo | 基础 |
 | **生态系统** | 丰富（crates.io） | 庞大但不针对 Wasm | 增长中 | 小规模 |
 
-> **核心论点**: Rust 的 **zero-cost abstractions + 无运行时 + 内存安全** 三元组使其成为 Wasm 的理想源语言。Go 的 GC 运行时增加了二进制体积和暂停；C/C++ 缺乏内存安全保证；AssemblyScript 生态有限。
+> **核心论点**: Rust 的 **zero-cost abstractions + 无运行时 + 内存安全（Memory Safety）** 三元组使其成为 Wasm 的理想源语言。Go 的 GC 运行时增加了二进制体积和暂停；C/C++ 缺乏内存安全保证；AssemblyScript 生态有限。
 > [来源: [Rust Wasm Book — Why Rust?](https://rustwasm.github.io/book/why-rust-and-webassembly.html)]
 
 ---
@@ -230,10 +230,10 @@ impl Point {
 }
 ```
 
-> **wasm-bindgen 机制**: 宏生成**JS 胶水代码**和**Wasm 导入/导出包装**，自动处理：
+> **wasm-bindgen 机制**: 宏（Macro）生成**JS 胶水代码**和**Wasm 导入/导出包装**，自动处理：
 >
 > 1. 字符串编码（UTF-8 ↔ UTF-16）
-> 2. 对象引用管理（JS 对象句柄表）
+> 2. 对象引用（Reference）管理（JS 对象句柄表）
 > 3. 异常转换（Rust panic → JS Error）
 > [来源: [wasm-bindgen Reference](https://rustwasm.github.io/docs/wasm-bindgen/reference/)]
 
@@ -261,10 +261,10 @@ graph TD
     end
 ```
 
-> **认知功能**: 此图对比当前**模块级 Wasm** 与未来的**组件模型**。组件模型通过 WIT（Wasm Interface Types）实现跨语言的类型安全组合。
+> **认知功能**: 此图对比当前**模块（Module）级 Wasm** 与未来的**组件模型**。组件模型通过 WIT（Wasm Interface Types）实现跨语言的类型安全组合。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> **使用建议**: 当前项目使用模块级 Wasm + wasm-bindgen；面向未来的组件化系统开始评估 wit-bindgen。
-> **关键洞察**: 组件模型是 Wasm 的**"跨语言 ABI"**——类似于 COM 或 gRPC，但基于 Wasm 沙箱和 WIT 类型系统。
+> **使用建议**: 当前项目使用模块（Module）级 Wasm + wasm-bindgen；面向未来的组件化系统开始评估 wit-bindgen。
+> **关键洞察**: 组件模型是 Wasm 的**"跨语言 ABI"**——类似于 COM 或 gRPC，但基于 Wasm 沙箱和 WIT 类型系统（Type System）。
 > [来源: [Bytecode Alliance — Component Model](https://component-model.bytecodealliance.org/)]
 
 ---
@@ -274,7 +274,7 @@ graph TD
 
 > **生态状态提示**：本小节涉及 2026-05-28 发布的 Rust 1.96 中的 **breaking change**。
 
-Rust 1.96 起，所有 WebAssembly 目标在链接时**不再默认**向 `wasm-ld` 传递 `--allow-undefined`。此前，Rust 代码中未定义的 `extern "C"` 符号会被 wasm-ld 静默转换为 Wasm 模块的导入（通常来自 `"env"` 模块）；现在，未定义符号将像原生平台一样产生**链接错误**。
+Rust 1.96 起，所有 WebAssembly 目标在链接时**不再默认**向 `wasm-ld` 传递 `--allow-undefined`。此前，Rust 代码中未定义的 `extern "C"` 符号会被 wasm-ld 静默转换为 Wasm 模块的导入（通常来自 `"env"` 模块（Module））；现在，未定义符号将像原生平台一样产生**链接错误**。
 > [来源: [Rust 1.96 Release Notes — WebAssembly linker behavior](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)]
 
 **典型影响**（Rust 1.96 之前可编译，之后报错）：
@@ -503,7 +503,7 @@ fn main() {
 // 或使用 Web Workers（通过 js-sys）
 ```
 
-> **修正**: `wasm32-unknown-unknown` 目标没有操作系统支持，因此 `std::thread`、`std::fs`、`std::net` 等模块不可用。WebAssembly 的线程支持通过 `wasm32-wasip1` 或 `wasm32-wasip2` 或 `wasm32-unknown-emscripten` 目标实现，或浏览器的 Web Workers。Rust 编译器在编译期拒绝 wasm32 上不支持的 API，防止运行时错误。这与 C/C++ 的 WASM 编译（可能链接失败或运行时崩溃）不同——Rust 在类型系统层面保证目标平台兼容性。[来源: [Rust and WebAssembly](https://rustwasm.github.io/book/)]
+> **修正**: `wasm32-unknown-unknown` 目标没有操作系统支持，因此 `std::thread`、`std::fs`、`std::net` 等模块不可用。WebAssembly 的线程支持通过 `wasm32-wasip1` 或 `wasm32-wasip2` 或 `wasm32-unknown-emscripten` 目标实现，或浏览器的 Web Workers。Rust 编译器在编译期拒绝 wasm32 上不支持的 API，防止运行时错误。这与 C/C++ 的 WASM 编译（可能链接失败或运行时崩溃）不同——Rust 在类型系统（Type System）层面保证目标平台兼容性。[来源: [Rust and WebAssembly](https://rustwasm.github.io/book/)]
 
 ### 10.2 边界测试：`wasm-bindgen` 的类型映射（编译错误）
 
@@ -519,7 +519,7 @@ pub fn process(data: String) -> Vec<u8> {
 // 需要返回 JsValue 或使用 #[wasm_bindgen] 标记的类型
 ```
 
-> **修正**: `wasm-bindgen` 在 Rust 和 JavaScript 之间自动生成绑定代码，但不是所有 Rust 类型都可自动映射。`String`、`Vec<T>`（特定 T）、`Option<T>` 等支持自动转换，但自定义结构体需要 `#[wasm_bindgen]` 标记，复杂类型需手动序列化为 `JsValue`。这与 AssemblyScript 的自动类型映射不同——Rust 的设计更保守，要求显式控制 FFI 边界，避免隐式转换导致的性能问题或语义差异。[来源: [wasm-bindgen Documentation](https://rustwasm.github.io/docs/wasm-bindgen/)]
+> **修正**: `wasm-bindgen` 在 Rust 和 JavaScript 之间自动生成绑定代码，但不是所有 Rust 类型都可自动映射。`String`、`Vec<T>`（特定 T）、`Option<T>` 等支持自动转换，但自定义结构体（Struct）需要 `#[wasm_bindgen]` 标记，复杂类型需手动序列化为 `JsValue`。这与 AssemblyScript 的自动类型映射不同——Rust 的设计更保守，要求显式控制 FFI 边界，避免隐式转换导致的性能问题或语义差异。[来源: [wasm-bindgen Documentation](https://rustwasm.github.io/docs/wasm-bindgen/)]
 
 ### 10.3 边界测试：WASM 的线性内存与 Rust 引用的不兼容性（编译错误）
 
@@ -549,7 +549,7 @@ fn main() {
 }
 ```
 
-> **修正**: `wasm32-unknown-unknown` 目标无默认 panic handler（`no_std` 环境）。panic 时调用 `core::panicking::panic`，默认实现是 `loop {}`（无限循环）或 `unreachable`（WASM 陷阱）。调试困难：浏览器控制台显示 `RuntimeError: unreachable`，无 Rust panic 消息。解决方案：1) 使用 `console_error_panic_hook` crate（将 panic 消息输出到浏览器 console）；2) 自定义 panic handler `#![feature(panic_handler)]` + `#[panic_handler]`；3) 使用 `wasm32-wasip1` 或 `wasm32-wasip2` 目标（有标准 panic 输出）。这与 C 的 WASM（`abort()` 同样产生陷阱）或 AssemblyScript（有内置 panic 处理）类似——`wasm32-unknown-unknown` 是最小化目标，需手动配置错误处理。[来源: [console_error_panic_hook](https://github.com/rustwasm/console_error_panic_hook)] · [来源: [Rust WASM Book](https://rustwasm.github.io/book/)]
+> **修正**: `wasm32-unknown-unknown` 目标无默认 panic handler（`no_std` 环境）。panic 时调用 `core::panicking::panic`，默认实现是 `loop {}`（无限循环）或 `unreachable`（WASM 陷阱）。调试困难：浏览器控制台显示 `RuntimeError: unreachable`，无 Rust panic 消息。解决方案：1) 使用 `console_error_panic_hook` crate（将 panic 消息输出到浏览器 console）；2) 自定义 panic handler `#![feature(panic_handler)]` + `#[panic_handler]`；3) 使用 `wasm32-wasip1` 或 `wasm32-wasip2` 目标（有标准 panic 输出）。这与 C 的 WASM（`abort()` 同样产生陷阱）或 AssemblyScript（有内置 panic 处理）类似——`wasm32-unknown-unknown` 是最小化目标，需手动配置错误处理（Error Handling）。[来源: [console_error_panic_hook](https://github.com/rustwasm/console_error_panic_hook)] · [来源: [Rust WASM Book](https://rustwasm.github.io/book/)]
 > **过渡**: WebAssembly 生态：Rust 的浏览器外运行时 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: WebAssembly 生态：Rust 的浏览器外运行时 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: WebAssembly 生态：Rust 的浏览器外运行时 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
@@ -600,12 +600,12 @@ WASM 是低级别字节码，解析和编译速度更快，执行性能接近原
 
 ### 测验 4：WASM 的线性内存（Linear Memory）模型是什么意思？Rust 的所有权系统如何与之交互？（理解层）
 
-**题目**: WASM 的线性内存（Linear Memory）模型是什么意思？Rust 的所有权系统如何与之交互？
+**题目**: WASM 的线性内存（Linear Memory）模型是什么意思？Rust 的所有权（Ownership）系统如何与之交互？
 
 <details>
 <summary>✅ 答案与解析</summary>
 
-WASM 使用单一的连续字节数组作为内存，通过偏移量访问。Rust 编译器将所有权和借用检查转化为安全的内存偏移计算，WASM 沙箱进一步隔离了越界访问的影响。
+WASM 使用单一的连续字节数组作为内存，通过偏移量访问。Rust 编译器将所有权和借用（Borrowing）检查转化为安全的内存偏移计算，WASM 沙箱进一步隔离了越界访问的影响。
 </details>
 
 ---

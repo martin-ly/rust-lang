@@ -10,7 +10,7 @@
 > **EN**: Advanced Layer Index Legacy
 >
 > **受众**: [专家]
-> **定位**: Rust 的高级特性，涉及并发、异步、Unsafe 和元编程。L1-L2 概念在**复杂场景**中的组合应用与边界突破。
+> **定位**: Rust 的高级特性，涉及并发、异步（Async）、Unsafe 和元编程。L1-L2 概念在**复杂场景**中的组合应用与边界突破。
 > **Bloom 层级**: 应用 → 分析 → 评价
 > **对应 L4**: 并发分离逻辑 · 线性时序逻辑 · 效果系统 · 元类型论
 > **规范文件**: [`03_advanced/README.md`](03_advanced/README.md)
@@ -38,14 +38,14 @@
 
 | 概念 | 规范文件 | 核心内容 | 状态 |
 |:---|:---|:---|:---|
-| **并发模型** | [`03_advanced/01_concurrency.md`](03_advanced/01_concurrency.md) | `Send`/`Sync`、fearless concurrency、同步原语、原子操作、内存序 | ✅ v1.0 |
-| **异步编程** | [`03_advanced/02_async.md`](03_advanced/02_async.md) | `Future`、`async/await`、`Pin`、AFIT/RPITIT、运行时、并发与异步的关系 | ✅ v1.0 |
+| **并发模型** | [`03_advanced/01_concurrency.md`](03_advanced/01_concurrency.md) | `Send`/`Sync`、fearless concurrency、同步原语、原子操作（Atomic Operations）、内存序 | ✅ v1.0 |
+| **异步（Async）编程** | [`03_advanced/02_async.md`](03_advanced/02_async.md) | `Future`、`async/await`、`Pin`、AFIT/RPITIT、运行时（Runtime）、并发与异步的关系 | ✅ v1.0 |
 | **Unsafe Rust** | [`03_advanced/03_unsafe.md`](03_advanced/03_unsafe.md) | 裸指针、FFI、UB 边界、Safety 契约、Miri、不安全代码的权限分离 | ✅ v1.0 |
-| **宏系统** | [`03_advanced/04_macros.md`](03_advanced/04_macros.md) | `macro_rules!`、过程宏、DSL、卫生宏、元编程 | ✅ v1.0 |
+| **宏系统** | [`03_advanced/04_macros.md`](03_advanced/04_macros.md) | `macro_rules!`、过程宏（Procedural Macro）、DSL、卫生宏、元编程 | ✅ v1.0 |
 | **FFI 跨语言** | [`03_advanced/05_rust_ffi.md`](03_advanced/05_rust_ffi.md) | extern 块、ABI 兼容、类型映射、bindgen、回调封装 | ✅ v1.0 |
-| **Pin 与 Unpin** | [`03_advanced/06_pin_unpin.md`](03_advanced/06_pin_unpin.md) | 自引用类型、PhantomPinned、async 状态机、Pin API 契约 | ✅ v1.0 |
-| **过程宏** | [`03_advanced/07_proc_macro.md`](03_advanced/07_proc_macro.md) | Derive/Attribute/Function-like、TokenStream、syn/quote | ✅ v1.0 |
-| **NLL 与 Polonius** | [`03_advanced/08_nll_and_polonius.md`](03_advanced/08_nll_and_polonius.md) | 非词法生命周期、数据流分析、Origin 模型 | ✅ v1.0 |
+| **Pin 与 Unpin** | [`03_advanced/06_pin_unpin.md`](03_advanced/06_pin_unpin.md) | 自引用（Reference）类型、PhantomPinned、async 状态机、Pin API 契约 | ✅ v1.0 |
+| **过程宏（Procedural Macro）** | [`03_advanced/07_proc_macro.md`](03_advanced/07_proc_macro.md) | Derive/Attribute/Function-like、TokenStream、syn/quote | ✅ v1.0 |
+| **NLL 与 Polonius** | [`03_advanced/08_nll_and_polonius.md`](03_advanced/08_nll_and_polonius.md) | 非词法生命周期（Lifetimes）、数据流分析、Origin 模型 | ✅ v1.0 |
 
 ---
 
@@ -67,10 +67,10 @@ L3 内部交叉
 
 | L3 概念 | L4 形式化对应 | 映射精度 |
 |:---|:---|:---|
-| 并发安全 | 并发分离逻辑（CSL）+ Iris Protocols | 近似 |
+| 并发安全（Concurrency Safety） | 并发分离逻辑（CSL）+ Iris Protocols | 近似 |
 | `Future`/`async` | 效果系统 / 续体（Continuation）| 部分形式化 |
 | `Pin` 不动性 | 线性时序逻辑（LTL）| 待形式化 |
-| 宏卫生性 | 元类型论 / 准引用（Quasiquote）| 近似 |
+| 宏（Macro）卫生性 | 元类型论 / 准引用（Quasiquote）| 近似 |
 
 ---
 

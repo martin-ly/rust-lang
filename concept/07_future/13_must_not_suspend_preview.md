@@ -14,7 +14,7 @@
 > **内容分级**: [实验级]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **P** — Procedure
-> **双维定位**: F×Eva — 评价跨 await 点的借用安全性
+> **双维定位**: F×Eva — 评价跨 await 点的借用（Borrowing）安全性
 > **前置依赖**: [Async/Await](../03_advanced/02_async.md) · [Interior Mutability](../02_intermediate/08_interior_mutability.md)
 > **后置延伸**: [Async Drop](./18_async_drop_preview.md)
 > **来源**: [RFC 3014](https://rust-lang.github.io/rfcs//3014-must-not-suspend-lint.html) · [Tracking Issue](https://github.com/rust-lang/rust/issues/83310)
@@ -41,11 +41,11 @@ fn main() {}
 > **修正**:
 >
 > **`must_not_suspend`** lint（nightly，`-W must_not_suspend`）警告：
-> 某些类型（`RefCell`、`MutexGuard`、`RwLockReadGuard`）在 async 函数中跨越 `.await` 点可能导致**运行时 panic** 或**死锁**。
+> 某些类型（`RefCell`、`MutexGuard`、`RwLockReadGuard`）在 async 函数中跨越 `.await` 点可能导致**运行时（Runtime） panic** 或**死锁**。
 >
 > 原因：
 >
-> 1) `RefCell::borrow_mut()` 获取的引用在 await 点仍然持有；
+> 1) `RefCell::borrow_mut()` 获取的引用（Reference）在 await 点仍然持有；
 > 2) 其他任务可能在同一线程尝试 `borrow()`/`borrow_mut()` → panic；
 > 3) `MutexGuard` 跨 await 可能导致死锁（若 executor 是单线程）。
 >
@@ -53,7 +53,7 @@ fn main() {}
 >
 > 1) 在 `.await` 前 drop guard；
 > 2) 使用 `tokio::sync::Mutex`（`async` 锁，可跨 await）；
-> 3) 重新设计数据结构避免跨 await 借用。这与 Go 的 defer + 锁（`defer mu.Unlock()`，goroutine 不挂起当前线程）或 Java 的 `synchronized`（阻塞线程，不挂起任务）不同——Rust 的 async/await 是协作式调度，锁跨越 yield 点危险。
+> 3) 重新设计数据结构避免跨 await 借用（Borrowing）。这与 Go 的 defer + 锁（`defer mu.Unlock()`，goroutine 不挂起当前线程）或 Java 的 `synchronized`（阻塞线程，不挂起任务）不同——Rust 的 async/await 是协作式调度，锁跨越 yield 点危险。
 > [来源: [must_not_suspend lint](https://doc.rust-lang.org/nightly/rustc/lints/listing/allowed-by-default.html#must-not-suspend)] ·
 > [来源: [Async Rust](https://rust-lang.github.io/async-book/)]
 >
@@ -90,9 +90,10 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-警告在异步上下文中持有不应该跨越 await 点的类型（如 `MutexGuard`、`RwLockReadGuard`）。防止因挂起导致的死锁或语义错误。
+警告在异步（Async）上下文中持有不应该跨越 await 点的类型（如 `MutexGuard`、`RwLockReadGuard`）。防止因挂起导致的死锁或语义错误。
 </details>
 
+> **前置概念**: N/A
 ---
 
 ### 测验 2：为什么 `MutexGuard` 不应该跨越 await 点？（理解层）
@@ -121,12 +122,12 @@ fn main() {}
 
 ### 测验 4：这个 lint 对异步代码质量有什么帮助？（理解层）
 
-**题目**: 这个 lint 对异步代码质量有什么帮助？
+**题目**: 这个 lint 对异步（Async）代码质量有什么帮助？
 
 <details>
 <summary>✅ 答案与解析</summary>
 
-在编译期捕获常见的 async 反模式，减少运行时死锁和性能问题。特别适用于代码审查和大型团队的异步代码规范。
+在编译期捕获常见的 async 反模式，减少运行时（Runtime）死锁和性能问题。特别适用于代码审查和大型团队的异步代码规范。
 </details>
 
 ---

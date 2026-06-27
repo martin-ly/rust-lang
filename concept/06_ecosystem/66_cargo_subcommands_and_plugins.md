@@ -139,7 +139,7 @@ JSON 消息类型：
 
 | 插件 | 用途 | 典型命令 |
 |:---|:---|:---|
-| **cargo-expand** | 展开宏，查看宏展开后的代码 | `cargo expand` |
+| **cargo-expand** | 展开宏（Macro），查看宏展开后的代码 | `cargo expand` |
 | **cargo-watch** | 文件变更时自动运行命令 | `cargo watch -x check` |
 | **cargo-tarpaulin** | 代码覆盖率 | `cargo tarpaulin` |
 | **cargo-audit** | 检查依赖漏洞 | `cargo audit` |

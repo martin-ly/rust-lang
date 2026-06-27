@@ -8,7 +8,7 @@
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
 > **Bloom 层级**: 评价 → 创造
-> **定位**: 深入讲解**分离逻辑（Separation Logic）**——从霍尔逻辑到分离合取、框架规则，揭示 Rust 所有权系统如何建立在严格的数学基础之上，并连接形式化验证工具如 Iris 和 Viper。
+> **定位**: 深入讲解**分离逻辑（Separation Logic）**——从霍尔逻辑到分离合取、框架规则，揭示 Rust 所有权（Ownership）系统如何建立在严格的数学基础之上，并连接形式化验证工具如 Iris 和 Viper。
 > **前置概念**: [Linear Logic](./01_linear_logic.md) · [Ownership Formalization](./03_ownership_formal.md) · [RustBelt](./04_rustbelt.md)
 > **后置概念**: [Verification Toolchain](./05_verification_toolchain.md) · [Type Theory](./02_type_theory.md)
 >
@@ -24,7 +24,7 @@
 
 ## 📑 目录
 
-- [分离逻辑：Rust 所有权的形式化根基](#分离逻辑rust-所有权的形式化根基)
+- [分离逻辑：Rust 所有权（Ownership）的形式化根基](LINK_PLACEHOLDER)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 从霍尔逻辑到分离逻辑](#11-从霍尔逻辑到分离逻辑)
@@ -44,11 +44,11 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：分离逻辑的编译错误](#十边界测试分离逻辑的编译错误)
     - [10.1 边界测试：独占资源的分割与重组（编译错误）](#101-边界测试独占资源的分割与重组编译错误)
-    - [10.2 边界测试：`Box::leak` 与资源永久转移（运行时行为）](#102-边界测试boxleak-与资源永久转移运行时行为)
+    - [10.2 边界测试：`Box::leak` 与资源永久转移（运行时（Runtime）行为）](LINK_PLACEHOLDER)
     - [10.3 边界测试：分离逻辑中的帧规则违反（编译错误）](#103-边界测试分离逻辑中的帧规则违反编译错误)
     - [10.4 边界测试：GhostCell 的分离逻辑建模（编译错误）](#104-边界测试ghostcell-的分离逻辑建模编译错误)
     - [10.5 边界测试：RustBelt 的 `own` 与 `shr` 断言的编码（编译错误）](#105-边界测试rustbelt-的-own-与-shr-断言的编码编译错误)
-    - [10.3 边界测试：分离逻辑与 Rust 引用的一致性（编译错误）](#103-边界测试分离逻辑与-rust-引用的一致性编译错误)
+    - [10.3 边界测试：分离逻辑与 Rust 引用（Reference）的一致性（Coherence）（编译错误）](LINK_PLACEHOLDER)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：分离合取 \*（理解层）](#测验-1分离合取-理解层)
     - [测验 2：帧规则（Frame Rule）（应用层）](#测验-2帧规则frame-rule应用层)
@@ -178,7 +178,7 @@
   // s 完全不受影响（编译期保证）
 ```
 
-> **框架洞察**: **框架规则是"局部推理"的数学基础**——它使验证可以模块化，与 Rust 的所有权隔离完美对应。
+> **框架洞察**: **框架规则是"局部推理"的数学基础**——它使验证可以模块（Module）化，与 Rust 的所有权隔离完美对应。
 > [来源: [O'Hearn — Resources, Concurrency and Local Reasoning](https://www.cs.ucl.ac.uk/staff/p.ohearn/papers/localreasoning.pdf)]
 
 ---
@@ -537,8 +537,8 @@ fn fixed() {
 
 > **修正**:
 > 分离逻辑的核心是 **frame rule**：若 `P` 描述某部分内存的状态，则可在保持 `P` 不变的情况下，对内存的其他部分进行推理。
-> `split_at_mut` 将数组分割为两个不重叠的可变切片，编译器验证分割点不会导致重叠借用。
-> 这是 Rust 借用检查器对分离逻辑 *-conjunction（`P ∗ Q`）的直接实现——两个不重叠的可变引用可以同时存在，因为它们操作分离的内存区域。
+> `split_at_mut` 将数组分割为两个不重叠的可变切片（Slice），编译器验证分割点不会导致重叠借用（Borrowing）。
+> 这是 Rust 借用（Borrowing）检查器对分离逻辑 *-conjunction（`P ∗ Q`）的直接实现——两个不重叠的可变引用（Mutable Reference）可以同时存在，因为它们操作分离的内存区域。
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.2 边界测试：`Box::leak` 与资源永久转移（运行时行为）
@@ -560,9 +560,9 @@ fn fixed() {
 ```
 
 > **修正**:
-> `Box::leak` 将堆内存转换为 `&'static` 引用，放弃释放义务。
+> `Box::leak` 将堆内存转换为 `&'static` 引用（Reference），放弃释放义务。
 > 在分离逻辑中，`Box<T>` 对应于 `own(τ, ℓ)`（对 ℓ 的独占所有权），`Box::leak` 将 `own(τ, ℓ)` 转换为 `shr(static, ℓ)`（静态共享权限）。
-> 一旦转换，资源永远不会被释放——这是显式的资源泄漏，在 Rust 中被视为安全操作（因为不破坏内存安全），但可能违反系统资源约束。
+> 一旦转换，资源永远不会被释放——这是显式的资源泄漏，在 Rust 中被视为安全操作（因为不破坏内存安全（Memory Safety）），但可能违反系统资源约束。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.3 边界测试：分离逻辑中的帧规则违反（编译错误）
@@ -589,7 +589,7 @@ fn main() {
 > 在 Rust 中，这意味着操作一部分内存时，不影响其他不重叠的内存。
 > 编译器通过借用检查验证不相交性：两个 `&mut T` 不能指向同一内存。
 > `swap` 要求 `a` 和 `b` 不重叠——若重叠，交换会破坏数据。
-> 这与 C 的 `swap`（无检查，重叠时 UB）或 Java 的引用交换（总是安全，因为是交换引用而非值）不同——Rust 在编译期保证内存区域的不相交性，使分离逻辑的推理在实战中可行。
+> 这与 C 的 `swap`（无检查，重叠时 UB）或 Java 的引用（Reference）交换（总是安全，因为是交换引用而非值）不同——Rust 在编译期保证内存区域的不相交性，使分离逻辑的推理在实战中可行。
 > [来源: [Separation Logic Tutorial](https://www.cs.cmu.edu/~jcr/seplogic.pdf)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]
 
@@ -612,12 +612,12 @@ fn main() {
 ```
 
 > **修正**:
-> `GhostCell`（基于 GhostCell paper）是 Rust 中**零运行时成本**的内部可变性抽象，使用分离逻辑建模：
-> 每个 `GhostCell` 关联一个编译期品牌（brand，由 `GhostToken` 代表），同一品牌的所有 cell 共享一个可变借用 token。
+> `GhostCell`（基于 GhostCell paper）是 Rust 中**零运行时（Runtime）成本**的内部可变性抽象，使用分离逻辑建模：
+> 每个 `GhostCell` 关联一个编译期品牌（brand，由 `GhostToken` 代表），同一品牌的所有 cell 共享一个可变借用（Mutable Borrow） token。
 > 这与 `RefCell`（运行时引用计数）或 `Mutex`（运行时锁）不同——`GhostCell` 在编译期检查借用规则，无运行时开销。
-> 代价：`GhostToken` 的生命周期约束要求所有相关操作在闭包内完成，API  ergonomics 较差。
+> 代价：`GhostToken` 的生命周期（Lifetimes）约束要求所有相关操作在闭包（Closures）内完成，API  ergonomics 较差。
 > 分离逻辑视角：`GhostToken` 是权限（capability），`GhostCell` 是资源，借用规则对应于权限的独占转移。
-> 这是 Rust 类型系统表达力的高级展示：将运行时检查迁移到编译期，同时保持零成本。
+> 这是 Rust 类型系统（Type System）表达力的高级展示：将运行时检查迁移到编译期，同时保持零成本。
 > [来源: [GhostCell Paper](https://plv.mpi-sws.org/rustbelt/ghostcell/)] ·
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
@@ -646,10 +646,10 @@ fn main() {
 > 关键规则：
 >
 > 1) `own(x, T)` 可分裂为 `shr(x, T) * shr(x, T)`（多个只读引用）；
-> 2) `own(x, T)` 不能分裂为 `own(x, T) * own(x, T)`（不能有两个可变引用）；
+> 2) `own(x, T)` 不能分裂为 `own(x, T) * own(x, T)`（不能有两个可变引用（Mutable Reference））；
 > 3) `shr(x, T)` 不能写入。这些规则在 RustBelt 中以**高阶协议**（higher-order protocol）编码，通过 Iris 框架证明。
 > RustBelt 证明了：若 unsafe 代码满足其协议，则 safe Rust 代码不可能触发 UB。
-> 这是 Rust 安全保证的形式化基础。这与 Hoare 逻辑的前置/后置条件（类似但非资源导向）或 C 的分离逻辑工具（VeriFast、VST）类似——RustBelt 是第一个为工业语言（Rust）提供完整内存安全形式化证明的项目。
+> 这是 Rust 安全保证的形式化基础。这与 Hoare 逻辑的前置/后置条件（类似但非资源导向）或 C 的分离逻辑工具（VeriFast、VST）类似——RustBelt 是第一个为工业语言（Rust）提供完整内存安全（Memory Safety）形式化证明的项目。
 > [来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] · [来源: [Iris Framework](https://iris-project.org/)]
 
 ### 10.3 边界测试：分离逻辑与 Rust 引用的一致性（编译错误）
@@ -754,7 +754,7 @@ let first = &mut v[0];
 `Vec` 的分离逻辑模型：
 
 - `own(Vec<i32>, ℓ) ≜ ℓ ↦ (cap, ptr, len) * own([i32; cap], ptr)`
-- 借用 `&mut v[0]` 将数组权限拆分为：`ptr[0] ↦ 1 * ptr[1..3] ↦ [2, 3]`
+- 借用（Borrowing） `&mut v[0]` 将数组权限拆分为：`ptr[0] ↦ 1 * ptr[1..3] ↦ [2, 3]`
 - 修改 `*first = 10` 仅更新 `ptr[0]`，对应分离逻辑的局部更新
 - 之后 `first` 被 drop，权限重新合并（* 的消除）
 
@@ -769,7 +769,7 @@ let first = &mut v[0];
 
 - A. 使用 `unsafe` 绕过编译器检查
 - B. 使用幽灵令牌（ghost token）在类型层面编码分离逻辑权限
-- C. 使用原子操作保证线程安全
+- C. 使用原子操作（Atomic Operations）保证线程安全
 
 <details>
 <summary>✅ 答案</summary>
@@ -783,7 +783,7 @@ let first = &mut v[0];
 - `GhostCell::borrow_mut(&self, token: &mut GhostToken<'id>) -> &mut T` —— 可变令牌证明独占访问
 - 运行时成本为零（令牌是零大小类型 ZST）
 
-这是"将逻辑证明编译为类型系统"的典范。
+这是"将逻辑证明编译为类型系统（Type System）"的典范。
 </details>
 
 ---
@@ -830,7 +830,7 @@ let s: &'static str = Box::leak(String::from("hello").into_boxed_str());
 
 > **过渡**: 掌握 分离逻辑：Rust 所有权的形式化根基 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 分离逻辑：Rust 所有权的形式化根基 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: 分离逻辑：Rust 所有权的形式化根基 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 分离逻辑：Rust 所有权的形式化根基 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

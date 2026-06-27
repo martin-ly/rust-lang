@@ -14,7 +14,7 @@
 > **内容分级**: [实验级]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A** — Application
-> **双维定位**: F×App — 应用 gen 块构建迭代器
+> **双维定位**: F×App — 应用 gen 块构建迭代器（Iterator）
 > **前置依赖**: [Iterator](../02_intermediate/15_iterator_patterns.md) · [Async](../03_advanced/02_async.md)
 > **后置延伸**: [Async Gen](./15_gen_blocks_preview.md)
 > **来源**: [RFC 3513 — Gen Blocks](https://rust-lang.github.io/rfcs/3513-gen-blocks.html) · [Tracking Issue #117078](https://github.com/rust-lang/rust/issues/117078)
@@ -57,7 +57,7 @@ fn main() {}
 > 2) 树遍历（yield 节点）；
 > 3) 流处理（yield 数据块）。
 >
-> 这与 Python 的 generator（`yield` 创建 generator object）或 C# 的 `yield return`（编译器状态机转换）类似——Rust 的 `gen` block 是编译器转换的状态机，零成本抽象。
+> 这与 Python 的 generator（`yield` 创建 generator object）或 C# 的 `yield return`（编译器状态机转换）类似——Rust 的 `gen` block 是编译器转换的状态机，零成本抽象（Zero-Cost Abstraction）。
 > [来源: [Gen Blocks RFC](https://rust-lang.github.io/rfcs/3513-gen-blocks.html)] ·
 > [来源: [Tracking Issue #117078 — `gen` blocks and functions](https://github.com/rust-lang/rust/issues/117078)] ·
 > [来源: [Generator Tracking #43122](https://github.com/rust-lang/rust/issues/43122)]
@@ -94,6 +94,7 @@ fn main() {}
 两者都是惰性计算的语法糖，编译为状态机。`async` 返回 `Future`，`gen` 返回 `Iterator`（或更一般的 `Generator`）。
 </details>
 
+> **前置概念**: N/A
 ---
 
 ### 测验 2：`gen` 块中的 `yield` 与 Python/JavaScript 的 `yield` 有什么区别？（理解层）
@@ -103,7 +104,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-语义相似：暂停执行并返回值给调用者。Rust 的 `yield` 编译为状态机转移，保证内存安全（无悬垂引用）。
+语义相似：暂停执行并返回值给调用者。Rust 的 `yield` 编译为状态机转移，保证内存安全（Memory Safety）（无悬垂引用（Reference））。
 </details>
 
 ---
@@ -115,7 +116,7 @@ fn main() {}
 <details>
 <summary>✅ 答案与解析</summary>
 
-可以自然地表达异步流：`gen { yield fetch_page(1).await; }`，比手动实现 `Stream` trait 简洁得多。
+可以自然地表达异步（Async）流：`gen { yield fetch_page(1).await; }`，比手动实现 `Stream` trait 简洁得多。
 </details>
 
 ---
@@ -134,7 +135,7 @@ fn main() {}
 
 ### 测验 5：`gen` 块与现有迭代器适配器（`map`、`filter`）有什么关系？（理解层）
 
-**题目**: `gen` 块与现有迭代器适配器（`map`、`filter`）有什么关系？
+**题目**: `gen` 块与现有迭代器（Iterator）适配器（`map`、`filter`）有什么关系？
 
 <details>
 <summary>✅ 答案与解析</summary>

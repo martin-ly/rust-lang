@@ -28,7 +28,7 @@
 - [线性逻辑在 Rust 中的工程应用](#线性逻辑在-rust-中的工程应用)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 从线性逻辑到所有权](#11-从线性逻辑到所有权)
+    - [1.1 从线性逻辑到所有权（Ownership）](LINK_PLACEHOLDER)
     - [1.2 资源作为类型](#12-资源作为类型)
     - [1.3 Session Types 与通信协议](#13-session-types-与通信协议)
   - [二、技术细节](#二技术细节)
@@ -45,7 +45,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：线性逻辑应用的编译错误](#十边界测试线性逻辑应用的编译错误)
     - [10.1 边界测试：资源线性消耗与 `Drop` 的冲突（编译错误）](#101-边界测试资源线性消耗与-drop-的冲突编译错误)
-    - [10.2 边界测试：`Vec` 的线性所有权与索引（运行时 panic）](#102-边界测试vec-的线性所有权与索引运行时-panic)
+    - [10.2 边界测试：`Vec` 的线性所有权与索引（运行时（Runtime） panic）](LINK_PLACEHOLDER)
     - [10.3 边界测试：线性资源的隐式复制（编译错误）](#103-边界测试线性资源的隐式复制编译错误)
     - [10.4 边界测试：`Copy` 与 `Drop` 的互斥性（编译错误）](#104-边界测试copy-与-drop-的互斥性编译错误)
     - [10.5 边界测试：`Vec::drain` 与线性资源的消耗（编译错误）](#105-边界测试vecdrain-与线性资源的消耗编译错误)
@@ -54,8 +54,8 @@
     - [测验 1：线性逻辑中的"线性"（linearity）指什么？与 Rust 的所有权有什么对应关系？（理解层）](#测验-1线性逻辑中的线性linearity指什么与-rust-的所有权有什么对应关系理解层)
     - [测验 2：在线性逻辑中，`A ⊗ B`（张量积）和 `A & B`（with）分别对应 Rust 的什么概念？（理解层）](#测验-2在线性逻辑中a--b张量积和-a--bwith分别对应-rust-的什么概念理解层)
     - [测验 3：Rust 的 `clone()` 在线性逻辑视角下是什么操作？（理解层）](#测验-3rust-的-clone-在线性逻辑视角下是什么操作理解层)
-    - [测验 4：为什么 Rust 的借用（`&T` 和 `&mut T`）可以在线性逻辑框架中被建模？（理解层）](#测验-4为什么-rust-的借用t-和-mut-t可以在线性逻辑框架中被建模理解层)
-    - [测验 5：线性逻辑对 Rust 类型系统设计的影响主要体现在哪个编译器组件中？（理解层）](#测验-5线性逻辑对-rust-类型系统设计的影响主要体现在哪个编译器组件中理解层)
+    - [测验 4：为什么 Rust 的借用（Borrowing）（`&T` 和 `&mut T`）可以在线性逻辑框架中被建模？（理解层）](LINK_PLACEHOLDER)
+    - [测验 5：线性逻辑对 Rust 类型系统（Type System）设计的影响主要体现在哪个编译器组件中？（理解层）](LINK_PLACEHOLDER)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -96,7 +96,7 @@
   └── 通过 Drop 允许"使用零次"
 ```
 
-> **认知功能**: Rust 的所有权是**仿射类型系统**的工程实现——它放宽了线性逻辑的"必须恰好使用一次"为"最多使用一次"，通过 Drop 实现资源的自动释放。
+> **认知功能**: Rust 的所有权（Ownership）是**仿射类型系统（Type System）**的工程实现——它放宽了线性逻辑的"必须恰好使用一次"为"最多使用一次"，通过 Drop 实现资源的自动释放。
 > [来源: [Girard — Linear Logic](https://girard.perso.math.cnrs.fr/linear.pdf)]
 
 ---
@@ -136,7 +136,7 @@ fd.close();  // fd 被消费
 // fd.read(...);  // ❌ 编译错误！fd 已被消费
 ```
 
-> **资源洞察**: 将**资源建模为线性类型**确保资源生命周期在类型层面被追踪——不可能使用已关闭的文件描述符。
+> **资源洞察**: 将**资源建模为线性类型**确保资源生命周期（Lifetimes）在类型层面被追踪——不可能使用已关闭的文件描述符。
 > [来源: [RustBelt — Ownership as Types](https://plv.mpi-sws.org/rustbelt/popl18/)]
 
 ---
@@ -175,7 +175,7 @@ Session Types: 将通信协议编码为类型
   └── 通信双方类型互补（对偶性）
 ```
 
-> **Session Types 洞察**: Session Types 将**通信协议的正确性**从运行时测试转化为**编译期类型检查**——协议违规成为类型错误。
+> **Session Types 洞察**: Session Types 将**通信协议的正确性**从运行时（Runtime）测试转化为**编译期类型检查**——协议违规成为类型错误。
 > [来源: [Wadler — Propositions as Sessions](https://homepages.inf.ed.ac.uk/wadler/papers/linearsubtypes/linearsubtypes.pdf)]
 
 ---
@@ -484,7 +484,7 @@ graph TD
 
 - [Linear Logic](./01_linear_logic.md) — 线性逻辑
 - [Ownership](../01_foundation/01_ownership.md) — 所有权系统
-- [Type System](../01_foundation/04_type_system.md) — 类型系统
+- [Type System](../01_foundation/04_type_system.md) — 类型系统（Type System）
 - [RustBelt](./04_rustbelt.md) — 形式化验证
 
 ---
@@ -592,7 +592,7 @@ fn main() {
 }
 ```
 
-> **修正**: 线性逻辑在 Rust 中的体现：未实现 `Copy` 的类型在传递时**移动**（move）所有权。`FileHandle` 没有 `Copy` derive，因此 `use_file(file)` 将 `file` 的所有权转移给函数参数，之后 `file` 不可用。这是 Rust 资源管理的核心：文件句柄、网络连接、锁守卫等必须唯一拥有，防止双重关闭或数据竞争。若需多次使用，应实现 `Clone`（显式复制）或使用引用（`&FileHandle`）。这与 C 的文件描述符（可复制 `int`，易双重 `close`）或 Java 的 `Closeable`（引用共享，依赖 GC 和 try-with-resources）不同——Rust 在编译期强制资源的一次性使用。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] · [来源: [Linear Logic in Computer Science](https://www.cs.cmu.edu/~fp/courses/15816-s12/lectures/01-linlogic.pdf)]
+> **修正**: 线性逻辑在 Rust 中的体现：未实现 `Copy` 的类型在传递时**移动**（move）所有权（Ownership）。`FileHandle` 没有 `Copy` derive，因此 `use_file(file)` 将 `file` 的所有权转移给函数参数，之后 `file` 不可用。这是 Rust 资源管理的核心：文件句柄、网络连接、锁守卫等必须唯一拥有，防止双重关闭或数据竞争。若需多次使用，应实现 `Clone`（显式复制）或使用引用（Reference）（`&FileHandle`）。这与 C 的文件描述符（可复制 `int`，易双重 `close`）或 Java 的 `Closeable`（引用共享，依赖 GC 和 try-with-resources）不同——Rust 在编译期强制资源的一次性使用。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] · [来源: [Linear Logic in Computer Science](https://www.cs.cmu.edu/~fp/courses/15816-s12/lectures/01-linlogic.pdf)]
 
 ### 10.4 边界测试：`Copy` 与 `Drop` 的互斥性（编译错误）
 
@@ -638,7 +638,7 @@ fn main() {
 }
 ```
 
-> **修正**: `Vec::drain(range)` 移除指定范围内的元素并返回迭代器——这是**批量消耗**线性资源的操作。每个被 drain 的元素在迭代器被消费时逐个 drop（若未 `collect` 到新的 `Vec`），或在 `collect` 时转移所有权。`drain` 的边界检查：范围必须在 `0..=len` 内，否则 panic。这与线性逻辑中的**批量资源释放**对应：一次性转移多个资源的所有权，而非逐个 `pop`。Rust 的 `drain` 是高效的（O(end - start)，只移动尾部元素），但要求范围有效。这与 C++ 的 `vector::erase(first, last)`（同样批量移除，迭代器失效）或 Haskell 的列表操作（无突变，无 drain 概念）不同——Rust 的 `drain` 是所有权系统下的批量资源管理工具。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/vec/struct.Vec.html)] · [来源: [Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]
+> **修正**: `Vec::drain(range)` 移除指定范围内的元素并返回迭代器（Iterator）——这是**批量消耗**线性资源的操作。每个被 drain 的元素在迭代器被消费时逐个 drop（若未 `collect` 到新的 `Vec`），或在 `collect` 时转移所有权。`drain` 的边界检查：范围必须在 `0..=len` 内，否则 panic。这与线性逻辑中的**批量资源释放**对应：一次性转移多个资源的所有权，而非逐个 `pop`。Rust 的 `drain` 是高效的（O(end - start)，只移动尾部元素），但要求范围有效。这与 C++ 的 `vector::erase(first, last)`（同样批量移除，迭代器失效）或 Haskell 的列表操作（无突变，无 drain 概念）不同——Rust 的 `drain` 是所有权系统下的批量资源管理工具。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/vec/struct.Vec.html)] · [来源: [Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]
 
 ### 10.3 边界测试：线性类型与 `Drop` 的资源泄漏边界（编译错误/逻辑问题）
 
@@ -660,7 +660,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的 `std::mem::forget` 是**safe 函数**：它阻止值的 `drop` 被调用，但不触发 UB。这是 Rust "**leak safety**" 哲学的一部分：标准库不保证防泄漏，但泄漏不应导致内存不安全。`forget` 的合法用途：1) 将值的所有权转移给外部系统（如 FFI 的 C 代码负责释放）；2) 手动管理内存生命周期；3) 创建循环引用（`Rc` 的 leak）。资源泄漏的风险：文件描述符耗尽、内存泄漏、锁未释放（导致死锁）。缓解：`ManuallyDrop<T>` 是更安全的替代——显式控制 drop 时机，不调用则编译器警告。这与 C++ 的 `std::unique_ptr::release`（放弃所有权，责任转移）或 Java 的 finalize（已废弃，不可靠）不同——Rust 的 `forget` 是显式的、有文档的安全操作。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/fn.forget.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**: Rust 的 `std::mem::forget` 是**safe 函数**：它阻止值的 `drop` 被调用，但不触发 UB。这是 Rust "**leak safety**" 哲学的一部分：标准库不保证防泄漏，但泄漏不应导致内存不安全。`forget` 的合法用途：1) 将值的所有权转移给外部系统（如 FFI 的 C 代码负责释放）；2) 手动管理内存生命周期（Lifetimes）；3) 创建循环引用（Reference）（`Rc` 的 leak）。资源泄漏的风险：文件描述符耗尽、内存泄漏、锁未释放（导致死锁）。缓解：`ManuallyDrop<T>` 是更安全的替代——显式控制 drop 时机，不调用则编译器警告。这与 C++ 的 `std::unique_ptr::release`（放弃所有权，责任转移）或 Java 的 finalize（已废弃，不可靠）不同——Rust 的 `forget` 是显式的、有文档的安全操作。[来源: [Rust Standard Library](LINK_PLACEHOLDER)] · [来源: [The Rustonomicon](LINK_PLACEHOLDER)]
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -702,7 +702,7 @@ fn main() {
 
 ### 测验 4：为什么 Rust 的借用（`&T` 和 `&mut T`）可以在线性逻辑框架中被建模？（理解层）
 
-**题目**: 为什么 Rust 的借用（`&T` 和 `&mut T`）可以在线性逻辑框架中被建模？
+**题目**: 为什么 Rust 的借用（Borrowing）（`&T` 和 `&mut T`）可以在线性逻辑框架中被建模？
 
 <details>
 <summary>✅ 答案与解析</summary>
@@ -738,7 +738,7 @@ fn main() {
 
 > **过渡**: 在实践中应用 线性逻辑在 Rust 中的工程应用 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: 线性逻辑在 Rust 中的工程应用 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 线性逻辑在 Rust 中的工程应用 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

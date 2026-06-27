@@ -9,14 +9,14 @@
 >
 > **EN**: Macros
 > **Summary**: Macros. Core Rust concept covering practical examples, design patterns, metaprogramming techniques.
-> **📎 交叉引用**
+> **📎 交叉引用（Reference）**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[属性与宏](../../knowledge/03_advanced/macros)
+> 本主题在 knowledge 中有系统化的知识索引：[属性与宏（Macro）](LINK_PLACEHOLDER)
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **A+S** — Application + Structure
-> **双维定位**: C×App — 应用属性和宏扩展
-> **定位**: 系统讲解 Rust **属性（attributes）**和**声明宏（macro_rules!）**——从编译期元编程的基础语法到模式匹配、递归宏和卫生性，揭示 Rust 如何在编译期生成代码同时保持类型安全。
+> **双维定位**: C×App — 应用属性和宏（Macro）扩展
+> **定位**: 系统讲解 Rust **属性（attributes）**和**声明宏（macro_rules!）**——从编译期元编程的基础语法到模式匹配（Pattern Matching）、递归宏和卫生性，揭示 Rust 如何在编译期生成代码同时保持类型安全。
 > **前置概念**: [Type System](./04_type_system.md) · [Modules](./11_modules_and_paths.md)
 > **后置概念**: [Proc Macros](../03_advanced/07_proc_macro.md) · [DSL](../02_intermediate/13_dsl_and_embedding.md)
 
@@ -30,14 +30,14 @@
 
 ## 📑 目录
 
-- [属性与声明宏：编译期元编程基础](#属性与声明宏编译期元编程基础)
+- [属性与声明宏（Declarative Macro）：编译期元编程基础](LINK_PLACEHOLDER)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 属性系统全景](#11-属性系统全景)
     - [1.2 声明宏基础](#12-声明宏基础)
     - [1.3 宏的卫生性](#13-宏的卫生性)
   - [二、技术细节](#二技术细节)
-    - [2.1 模式匹配与重复](#21-模式匹配与重复)
+    - [2.1 模式匹配（Pattern Matching）与重复](LINK_PLACEHOLDER)
     - [2.2 递归宏](#22-递归宏)
     - [2.3 常见属性详解](#23-常见属性详解)
   - [三、设计模式矩阵](#三设计模式矩阵)
@@ -51,7 +51,7 @@
   - [十二、边界测试：属性与宏的编译错误](#十二边界测试属性与宏的编译错误)
     - [12.1 边界测试：`derive` 宏的 trait 冲突（编译错误）](#121-边界测试derive-宏的-trait-冲突编译错误)
     - [12.2 边界测试：宏递归展开溢出（编译错误）](#122-边界测试宏递归展开溢出编译错误)
-    - [10.3 边界测试：过程宏的 hygiene 与标识符捕获（编译错误）](#103-边界测试过程宏的-hygiene-与标识符捕获编译错误)
+    - [10.3 边界测试：过程宏（Procedural Macro）的 hygiene 与标识符捕获（编译错误）](LINK_PLACEHOLDER)
     - [10.4 边界测试：`cfg` 条件编译的互斥性（编译错误/逻辑错误）](#104-边界测试cfg-条件编译的互斥性编译错误逻辑错误)
     - [10.3 边界测试：`cfg` 条件编译的互斥性（编译错误/逻辑错误）](#103-边界测试cfg-条件编译的互斥性编译错误逻辑错误)
     - [10.7 边界测试：match 分支返回类型不一致](#107-边界测试match-分支返回类型不一致)
@@ -381,7 +381,7 @@ macro_rules! build_vec {
   └── #[track_caller]: panic 显示调用者位置
 ```
 
-> **属性洞察**: Rust 的**属性系统是零成本抽象的语法糖**——所有属性在编译期处理，无运行时开销。
+> **属性洞察**: Rust 的**属性系统是零成本抽象（Zero-Cost Abstraction）的语法糖**——所有属性在编译期处理，无运行时（Runtime）开销。
 > [来源: [Rust Reference — Built-in Attributes](https://doc.rust-lang.org/reference/attributes.html#built-in-attributes-index)]
 
 ---
@@ -412,7 +412,7 @@ macro_rules! build_vec {
   → 跨平台/特性条件代码
 ```
 
-> **模式矩阵**: 宏和属性是 Rust **"不重复自己"（DRY）**原则的核心工具——在编译期消除重复，无运行时成本。
+> **模式矩阵**: 宏和属性是 Rust **"不重复自己"（DRY）**原则的核心工具——在编译期消除重复，无运行时（Runtime）成本。
 > [来源: [Rust Macros — Patterns](https://doc.rust-lang.org/reference/macros.html)]
 
 ---
@@ -436,7 +436,7 @@ graph TD
     style MACRO2 fill:#c8e6c9
 ```
 
-> **认知功能**: **泛型优先于宏**——当类型系统可以表达时，优先使用泛型（更好的错误信息、IDE 支持）。宏用于类型系统无法表达的场景。
+> **认知功能**: **泛型（Generics）优先于宏**——当类型系统（Type System）可以表达时，优先使用泛型（更好的错误信息、IDE 支持）。宏用于类型系统无法表达的场景。
 > [来源: [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines//macros.html)]
 
 ---
@@ -553,8 +553,8 @@ graph TD
 
 ## 相关概念文件
 
-- [Type System](./04_type_system.md) — 类型系统
-- [Modules](./11_modules_and_paths.md) — 模块系统
+- [Type System](./04_type_system.md) — 类型系统（Type System）
+- [Modules](./11_modules_and_paths.md) — 模块（Module）系统
 - [Proc Macros](../03_advanced/07_proc_macro.md) — 过程宏（Procedural Macro）
 - [DSL](../02_intermediate/13_dsl_and_embedding.md) — DSL 模式
 
@@ -615,7 +615,7 @@ struct PointFixed {
 }
 ```
 
-> **修正**: `#[derive(Eq)]` 要求所有字段实现 `Eq`（等价关系），`#[derive(Ord)]` 要求所有字段实现 `Ord`（全序关系）。`f32`/`f64` 因 IEEE 754 NaN 语义（NaN != NaN，且 NaN 不可比较）未实现 `Eq` 和 `Ord`，只实现 `PartialEq` 和 `PartialOrd`。包含浮点数的结构体只能 derive 后者。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `#[derive(Eq)]` 要求所有字段实现 `Eq`（等价关系），`#[derive(Ord)]` 要求所有字段实现 `Ord`（全序关系）。`f32`/`f64` 因 IEEE 754 NaN 语义（NaN != NaN，且 NaN 不可比较）未实现 `Eq` 和 `Ord`，只实现 `PartialEq` 和 `PartialOrd`。包含浮点数的结构体（Struct）只能 derive 后者。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 12.2 边界测试：宏递归展开溢出（编译错误）
 
@@ -702,7 +702,7 @@ fn main() {
 }
 ```
 
-> **修正**: `#[cfg]` 是**条件编译**：根据编译目标（OS、架构、特性）选择性地包含代码。上述代码在 Linux、Windows 和其他平台各有一个实现，编译时**恰好一个**生效。风险：1) 所有 `cfg` 条件互斥但不穷尽 → 某些平台无实现；2) `cfg` 与 `cfg_attr` 混用导致属性不一致；3) `cfg` 测试用 `cfg!(...)` 宏（编译期布尔值）与 `#[cfg(...)]` 属性（条件编译）混淆。这与 C 的 `#ifdef`（预处理器文本替换）不同——Rust 的 `cfg` 是编译器的语义分析阶段，能进行更精确的条件检查。[来源: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html)]
+> **修正**: `#[cfg]` 是**条件编译**：根据编译目标（OS、架构、特性）选择性地包含代码。上述代码在 Linux、Windows 和其他平台各有一个实现，编译时**恰好一个**生效。风险：1) 所有 `cfg` 条件互斥但不穷尽 → 某些平台无实现；2) `cfg` 与 `cfg_attr` 混用导致属性不一致；3) `cfg` 测试用 `cfg!(...)` 宏（Macro）（编译期布尔值）与 `#[cfg(...)]` 属性（条件编译）混淆。这与 C 的 `#ifdef`（预处理器文本替换）不同——Rust 的 `cfg` 是编译器的语义分析阶段，能进行更精确的条件检查。[来源: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html)]
 
 ### 10.7 边界测试：match 分支返回类型不一致
 
@@ -732,7 +732,7 @@ fn main() {
 
 ## 认知路径
 
-> **认知路径**: 从 L0 基础概念出发，经由本节的 **属性与声明宏：编译期元编程基础** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+> **认知路径**: 从 L0 基础概念出发，经由本节的 **属性与声明宏（Declarative Macro）：编译期元编程基础** 核心原理，通向 L2 进阶模式与 L3 工程实践。
 
 ### 核心推理链
 
@@ -744,9 +744,9 @@ fn main() {
 
 > 元编程安全 ⟸ 编译期代码生成 ⟸ 宏卫生性
 > 条件编译正确 ⟸ cfg 属性求值 ⟸ 平台抽象
-> **过渡**: 掌握 属性与声明宏：编译期元编程基础 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 属性与声明宏：编译期元编程基础 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 属性与声明宏：编译期元编程基础 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: 属性与声明宏：编译期元编程基础 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: 属性与声明宏：编译期元编程基础 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 
@@ -885,7 +885,7 @@ struct Point {
 
 - A. `f64` 未实现 `Clone`，需要手动实现
 - B. `f64` 未实现 `Eq` 和 `Ord`，因为 NaN 不满足全序关系
-- C. `derive` 不能用于包含浮点数的结构体
+- C. `derive` 不能用于包含浮点数的结构体（Struct）
 - D. `f64` 未实现 `Debug`，需要自定义格式化
 
 <details>

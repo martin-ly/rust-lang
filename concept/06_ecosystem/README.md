@@ -10,6 +10,8 @@
 > **功能**: 将概念知识转化为**工程能力**
 > **来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)** · **来源: [crates.io](https://crates.io/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)**
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 ## 📑 目录
@@ -59,7 +61,7 @@ mindmap
 
 > **认知功能**: 建立 L6 全景认知框架，按"工具链→设计模式→核心库→应用主题"四层递进组织工程知识。建议作为学习入口，快速定位目标领域后再深入各文件。关键洞察：每个分支都是 L1-L5 理论的可执行映射，而非独立知识集合。[来源: 💡 原创分析]
 
-> **认知路径**: 本 mindmap 展示 L6 层的**工程化落地**。工具链将 L4 类型论转化为编译器实践，设计模式将 L1 所有权规则模式化，核心库谱系是生态的"基础设施"，应用主题展示 Rust 在特定领域的工程形态。L6 是知识体系的"出口"——将理论转化为可维护、可扩展的代码库。
+> **认知路径**: 本 mindmap 展示 L6 层的**工程化落地**。工具链将 L4 类型论转化为编译器实践，设计模式将 L1 所有权（Ownership）规则模式化，核心库谱系是生态的"基础设施"，应用主题展示 Rust 在特定领域的工程形态。L6 是知识体系的"出口"——将理论转化为可维护、可扩展的代码库。
 
 ## 一、本层概念关系图（完整版）
 
@@ -122,7 +124,7 @@ graph TB
 | 关系 | 从 | 到 | 语义类型 | 说明 |
 |:---|:---|:---|:---|:---|
 | 1 | **L1 Ownership** | **Patterns** | `==>` 工程化 | RAII 是 L1 所有权概念在工程中的**直接模式化**。每个 Rust 设计模式都是对所有权规则的特定应用。 |
-| 2 | **L2 Traits** | **Toolchain + Patterns** | `==>` 支撑 | `derive` 宏（工具链）和 Typestate 模式（设计模式）都依赖 Trait 系统。 |
+| 2 | **L2 Traits** | **Toolchain + Patterns** | `==>` 支撑 | `derive` 宏（Macro）（工具链）和 Typestate 模式（设计模式）都依赖 Trait 系统。 |
 | 3 | **L4 Type Theory** | **Toolchain** | `-.->` 工具化 | 类型约束求解算法是 `rustc` 编译器的核心，类型论直接转化为工程工具。 |
 | 4 | **Patterns** | **L7 AI** | `==>` 驱动 | 设计模式库为 AI 代码生成提供**结构化模板**。 |
 
@@ -155,8 +157,8 @@ graph TB
 | [41_workflow_theory.md](./41_workflow_theory.md) | 工作流理论与形式化 | WfMC、Petri 网、π 演算、CTL/LTL、Rust async 同构 | ✅ v1.0 | L3 Async, L4 Formal | 分布式系统, 事件溯源 |
 | [42_api_design_patterns.md](./42_api_design_patterns.md) | API 设计模式 | REST/GraphQL/gRPC、OpenAPI、版本化、API 网关 | ✅ v1.0 | L3 Async, L2 Trait | 微服务, 事件驱动 |
 | [43_security_cryptography.md](./43_security_cryptography.md) | 安全与密码学 | AES-GCM/ChaCha20、Ed25519、Argon2、ring/rustls、后量子 | ✅ v1.0 | L3 Unsafe, L2 Trait | 区块链, 网络协议 |
-| [45_compiler_internals.md](./45_compiler_internals.md) | 编译器内部原理 | rustc 管线、HIR/MIR、类型系统、NLL/Polonius、LLVM | ✅ v1.0 | L3 Unsafe, L4 Formal | 类型系统, 宏系统 |
-| [35_pattern_composition_algebra.md](./35_pattern_composition_algebra.md) | 模式组合代数 | 设计模式的形式化组合、冲突检测、Rust 所有权约束 | ✅ v1.0 | L2 Trait, L3 Concurrency | Software Architecture |
+| [45_compiler_internals.md](./45_compiler_internals.md) | 编译器内部原理 | rustc 管线、HIR/MIR、类型系统（Type System）、NLL/Polonius、LLVM | ✅ v1.0 | L3 Unsafe, L4 Formal | 类型系统, 宏（Macro）系统 |
+| [35_pattern_composition_algebra.md](LINK_PLACEHOLDER) | 模式组合代数 | 设计模式的形式化组合、冲突检测、Rust 所有权（Ownership）约束 | ✅ v1.0 | L2 Trait, L3 Concurrency | Software Architecture |
 | [36_stream_processing_ecosystem.md](./36_stream_processing_ecosystem.md) | 流处理生态 | timely/differential dataflow、Materialize、RisingWave、Fluvio | ✅ v1.0 | L3 Stream Processing | Distributed Systems |
 | [37_database_systems.md](./37_database_systems.md) | 数据库系统 | TiKV/Percolator、Materialize、Meilisearch、SurrealDB | ✅ v1.0 | L3 Concurrency | Stream Processing |
 | [38_network_protocols.md](./38_network_protocols.md) | 网络协议 | QUIC/HTTP-3、quinn、h3、eBPF/aya | ✅ v1.0 | L3 Async | OS Kernel |
@@ -203,18 +205,18 @@ graph TB
 
 | L1-L5 概念 | L6 工程实践 | 映射说明 |
 |:---|:---|:---|
-| 所有权 + Drop | RAII 模式 | 资源管理自动化 |
-| 借用规则 | Clippy lint (e.g., `needless_borrow`) | 编译期最佳实践检查 |
-| Trait | `derive` 宏、接口设计 | 代码生成 + 模块化 |
-| 泛型 | 零成本抽象模式 | 库设计中的性能保证 |
+| 所有权（Ownership） + Drop | RAII 模式 | 资源管理自动化 |
+| 借用（Borrowing）规则 | Clippy lint (e.g., `needless_borrow`) | 编译期最佳实践检查 |
+| Trait | `derive` 宏（Macro）、接口设计 | 代码生成 + 模块（Module）化 |
+| 泛型（Generics） | 零成本抽象（Zero-Cost Abstraction）模式 | 库设计中的性能保证 |
 | Send/Sync | `crossbeam`、`rayon` 设计 | 并发库的安全封装 |
 | async/await | `tokio`、`axum` 异步生态 | Web 后端与网络服务 |
 | unsafe | Miri 动态检测、审计规范 | 安全关键代码验证 |
 | 形式化方法 | Kani 集成测试、契约注释 | 工业级验证流程 |
 | 对比分析 | 技术选型决策矩阵 | 架构设计文档 |
-| 生命周期 | `sqlx` 编译期查询检查 | 数据库类型安全 |
-| 过程宏 | `serde`、`clap` derive | 声明式代码生成 |
-| Pin | `tokio` 自引用任务 | 异步状态机安全 |
+| 生命周期（Lifetimes） | `sqlx` 编译期查询检查 | 数据库类型安全 |
+| 过程宏（Procedural Macro） | `serde`、`clap` derive | 声明式代码生成 |
+| Pin | `tokio` 自引用（Reference）任务 | 异步（Async）状态机安全 |
 | 范畴论/态射 | `Tower` Service Trait 复合 | 架构组合层的代数结构 |
 | 同态/结构保持 | `Serde`/`SQLx`/`Prost` | 数据层的类型安全转换 |
 
@@ -277,7 +279,7 @@ L6 的工程实践输出到：
 <details>
 <summary>✅ 答案与解析</summary>
 
-先浏览整体结构建立全局视野，然后根据自身水平选择对应层级，遇到模糊概念时利用交叉引用跳转复习。
+先浏览整体结构建立全局视野，然后根据自身水平选择对应层级，遇到模糊概念时利用交叉引用（Reference）跳转复习。
 </details>
 
 ---

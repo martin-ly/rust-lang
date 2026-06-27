@@ -189,7 +189,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 Safety Tags 在整个 Rust 安全验证生态中的**枢纽位置**——它是连接人工契约、静态检查、动态检测、形式化证明和 AI 生成的中间层。
-> **使用建议**: Safety Tags 的设计应兼容多种下游工具：编译器检查语法、BorrowSanitizer 检查运行时、Kani/Prusti 证明形式化属性。
+> **使用建议**: Safety Tags 的设计应兼容多种下游工具：编译器检查语法、BorrowSanitizer 检查运行时（Runtime）、Kani/Prusti 证明形式化属性。
 > **关键洞察**: Safety Tags 不是独立的验证工具，而是**契约的通用表示格式**——类似于类型签名之于类型检查器。
 
 ---
@@ -349,8 +349,8 @@ graph TD
 
 ## 相关概念文件
 
-- [Unsafe Rust](../03_advanced/03_unsafe.md) — Unsafe 边界与借用规则
-- [BorrowSanitizer](./borrow_sanitizer.md) — 运行时借用检查验证
+- [Unsafe Rust](../03_advanced/03_unsafe.md) — Unsafe 边界与借用（Borrowing）规则
+- [BorrowSanitizer](LINK_PLACEHOLDER) — 运行时（Runtime）借用（Borrowing）检查验证
 - [Formal Methods](./02_formal_methods.md) — 形式化验证工具链
 - [AI Integration](./01_ai_integration.md) — AI 生成代码的安全边界
 - [Version Tracking](./05_rust_version_tracking.md) — Rust 版本特性演进
@@ -392,7 +392,7 @@ fn safe_use(ptr: *mut u8) {
 
 > **修正**:
 > Safety Tags（实验性概念）是为 unsafe 代码提供形式化安全契约的元数据系统。
-> 函数或模块标记为 `"memory-safe"`、`"thread-safe"`、`"panic-safe"` 等，静态分析工具验证代码行为与标签一致。
+> 函数或模块（Module）标记为 `"memory-safe"`、`"thread-safe"`、`"panic-safe"` 等，静态分析工具验证代码行为与标签一致。
 > `safe_alloc` 标记为 `memory-safe` 但返回未初始化的裸指针——使用者必须知道指针的有效性约束，因此实际上不是"安全"的。
 > 正确做法：返回 `Vec<u8>` 或 `Box<[u8]>`，将裸指针封装在安全抽象中。
 > 这与 Rust 现有的 unsafe 函数契约（文档中描述前置条件）相比，Safety Tags 将非形式化的文档注释提升为可机器检查的声明。
@@ -585,7 +585,7 @@ Miri 可以根据安全标签选择不同的检查策略。例如，标记为 `e
 <details>
 <summary>✅ 答案与解析</summary>
 
-审查者可以基于标签快速定位不安全原因，自动化工具可以检查标签与实际代码的一致性，降低人工审查的认知负担，提高 unsafe 代码的可维护性。
+审查者可以基于标签快速定位不安全原因，自动化工具可以检查标签与实际代码的一致性（Coherence），降低人工审查的认知负担，提高 unsafe 代码的可维护性。
 </details>
 
 ## 认知路径

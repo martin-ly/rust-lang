@@ -55,7 +55,7 @@
   - [十、边界测试：Return Type Notation 预览的编译错误](#十边界测试return-type-notation-预览的编译错误)
     - [10.1 边界测试：RTN 在类型位置使用（编译错误）](#101-边界测试rtn-在类型位置使用编译错误)
     - [10.2 边界测试：RTN 用于非 AFIT/RPITIT 方法（编译错误）](#102-边界测试rtn-用于非-afitrpitit-方法编译错误)
-    - [10.3 边界测试：RTN 与 const/type 泛型方法（编译错误）](#103-边界测试rtn-与-consttype-泛型方法编译错误)
+    - [10.3 边界测试：RTN 与 const/type 泛型（Generics）方法（编译错误）](LINK_PLACEHOLDER)
     - [10.4 边界测试：RTN 与缺少 `feature(return_type_notation)`（编译错误）](#104-边界测试rtn-与缺少-featurereturn_type_notation编译错误)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -98,7 +98,7 @@ trait HealthCheck {
 
 ### 1.2 RTN 语法：`T::method(..): Send`
 
-Return Type Notation（RTN）提供了一种引用 trait 方法返回类型并为其添加边界的方式：
+Return Type Notation（RTN）提供了一种引用（Reference） trait 方法返回类型并为其添加边界的方式：
 
 ```rust
 #![feature(return_type_notation)]
@@ -118,7 +118,7 @@ where
 }
 ```
 
-`T::check(..)` 表示「调用 `T::check` 返回的类型」。`..` 占位符表示方法的泛型参数由编译器推导。
+`T::check(..)` 表示「调用 `T::check` 返回的类型」。`..` 占位符表示方法的泛型（Generics）参数由编译器推导。
 
 等价的关联类型 bound 写法：
 
@@ -178,8 +178,8 @@ fn use_factory2<T: Factory<make(..): DoubleEndedIterator>>() {
 
 语义规则：
 
-- `..` 表示方法的所有泛型参数由调用处推导；目前仅支持生命周期泛型。
-- RTN 类型只能出现在 bound/where 子句的 `Self` 位置；不能作为普通类型使用（如结构体字段）。
+- `..` 表示方法的所有泛型参数由调用处推导；目前仅支持生命周期（Lifetimes）泛型。
+- RTN 类型只能出现在 bound/where 子句的 `Self` 位置；不能作为普通类型使用（如结构体（Struct）字段）。
 
 [来源: [RFC 3654 — Return Type Notation](https://rust-lang.github.io/rfcs/3654-return-type-notation.html)]
 
@@ -190,8 +190,8 @@ fn use_factory2<T: Factory<make(..): DoubleEndedIterator>>() {
 截至 nightly 1.98.0：
 
 1. **仅支持 AFIT 和 RPITIT**：方法必须是 `async fn` 或返回 `-> impl Trait`。
-2. **仅支持生命周期泛型**：方法可以有生命周期参数，但不能有 const 或 type 泛型。
-3. **仅能在 bound/where 子句中使用**：不能写成 `let x: T::method(..)` 或结构体字段类型。
+2. **仅支持生命周期（Lifetimes）泛型**：方法可以有生命周期参数，但不能有 const 或 type 泛型（Generics）。
+3. **仅能在 bound/where 子句中使用**：不能写成 `let x: T::method(..)` 或结构体（Struct）字段类型。
 4. **需要 feature gate**：必须在 crate 根启用 `#![feature(return_type_notation)]`。
 
 ```rust
@@ -405,7 +405,7 @@ where
 
 ### 补充定理链
 
-> RTN 的存在性定理：若 trait 方法 `m` 返回一个不透明类型（AFIT/RPITIT），则存在一种语法 `T::m(..)` 可以在 where 子句中引用该返回类型并添加边界。
+> RTN 的存在性定理：若 trait 方法 `m` 返回一个不透明类型（AFIT/RPITIT），则存在一种语法 `T::m(..)` 可以在 where 子句中引用（Reference）该返回类型并添加边界。
 > 限制定理：RTN 目前不支持非不透明返回类型、type/const 泛型方法以及类型位置。
 
 ---

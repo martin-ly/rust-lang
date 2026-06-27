@@ -41,7 +41,7 @@
 | **数值微分** | `(f(x+h) - f(x)) / h` | 近似（截断/舍入误差）| 快速验证、黑盒函数 |
 | **自动微分** | 链式法则 + 程序结构追踪 | **精确到机器精度** | 深度学习、科学计算 |
 
-> **关键洞察**: AD 不是"符号微分的自动化"，也不是"更精确的数值微分"——它是一种**基于计算图的程序变换技术**，通过前向模式（Forward Mode）或反向模式（Reverse Mode）在运行时/编译期追踪每个操作的梯度。
+> **关键洞察**: AD 不是"符号微分的自动化"，也不是"更精确的数值微分"——它是一种**基于计算图的程序变换技术**，通过前向模式（Forward Mode）或反向模式（Reverse Mode）在运行时（Runtime）/编译期追踪每个操作的梯度。
 
 ### 1.2 Rust 为什么需要语言级 AD
 
@@ -56,15 +56,15 @@ tch-rs: 绑定 PyTorch Autograd（C++ 运行时）
 **问题**:
 
 1. **碎片化**: 每个框架有自己的 AD 抽象，模型无法跨框架
-2. **性能**: 运行时构建计算图有开销
+2. **性能**: 运行时（Runtime）构建计算图有开销
 3. **正确性**: 手动实现 backward 容易出错（梯度消失/爆炸、形状不匹配）
-4. **编译期优化**: 无法利用 Rust 的零成本抽象和 LLVM 优化
+4. **编译期优化**: 无法利用 Rust 的零成本抽象（Zero-Cost Abstraction）和 LLVM 优化
 
 **`std::autodiff` 的愿景**:
 
-- 语言级 `#[autodiff]` 属性宏
+- 语言级 `#[autodiff]` 属性宏（Macro）
 - 编译器自动生成前向/反向模式代码
-- 与现有 Rust 类型系统无缝集成（无需 DSL）
+- 与现有 Rust 类型系统（Type System）无缝集成（无需 DSL）
 - 零运行时开销（纯编译期变换）
 
 ---
@@ -171,7 +171,7 @@ fn g(x: f64, y: f64) -> f64 { x * y + x.powi(2) }
    // 需 impl Differentiable for Complex，或编译器自动推导
    ```
 
-3. **与泛型和 Trait 的集成**
+3. **与泛型（Generics）和 Trait 的集成**
 
    ```rust,ignore
    fn dot<T: Mul<Output=T> + Add<Output=T>>(a: &[T], b: &[T]) -> T { ... }
@@ -180,8 +180,8 @@ fn g(x: f64, y: f64) -> f64 { x * y + x.powi(2) }
 
 4. **内存管理（反向模式）**
    - 反向模式需保存前向计算的中间值（activations）
-   - 与 Rust 的所有权系统交互：谁拥有这些中间值？何时 drop？
-   - 可能的方案：编译器自动生成 `Checkpoint` 结构体
+   - 与 Rust 的所有权（Ownership）系统交互：谁拥有这些中间值？何时 drop？
+   - 可能的方案：编译器自动生成 `Checkpoint` 结构体（Struct）
 
 ---
 
@@ -265,14 +265,14 @@ std::autodiff 适合所有 Rust 数值计算?
 <details>
 <summary>✅ 答案与解析</summary>
 
-Rust 的所有权系统使反向传播的状态管理复杂（需要记录前向传播的中间值）。社区已有 `autodiff`、`dfdx`、`burn` 等实验性库，但尚未形成标准。
+Rust 的所有权（Ownership）系统使反向传播的状态管理复杂（需要记录前向传播的中间值）。社区已有 `autodiff`、`dfdx`、`burn` 等实验性库，但尚未形成标准。
 </details>
 
 ---
 
 ### 测验 3：`dfdx` 如何在 Rust 的类型系统中编码神经网络架构？（理解层）
 
-**题目**: `dfdx` 如何在 Rust 的类型系统中编码神经网络架构？
+**题目**: `dfdx` 如何在 Rust 的类型系统（Type System）中编码神经网络架构？
 
 <details>
 <summary>✅ 答案与解析</summary>
