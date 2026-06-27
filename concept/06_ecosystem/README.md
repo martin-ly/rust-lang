@@ -1,7 +1,7 @@
 # L6 生态工程层（Ecosystem & Engineering）
 >
 > **EN**: Readme
-> **Summary**: Readme. Core Rust concept.
+> **Summary**: Ecosystem guide: toolchain, crates, patterns, and production practices.
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Cargo Book](https://doc.rust-lang.org/cargo/) · [Rust RFCs](https://rust-lang.github.io/rfcs/) · [crates.io](https://crates.io/)
 > **内容分级**: [综述级]
 > **受众**: [进阶]

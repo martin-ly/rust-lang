@@ -424,7 +424,7 @@ fn test_wasm_integration() {
 
 ### 场景4: 可扩展的插件系统
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 使用宏 + 设计模式构建插件架构：
 

@@ -29,7 +29,7 @@
 >
 > [TRPL 3rd Ed: Ch4](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) ·
 > [Brown University Interactive Book: Ch4](https://rust-book.cs.brown.edu/ch04-00-understanding-ownership.html) ·
-> [Wikipedia: Ownership type](https://en.wikipedia.org/wiki/Ownership_type) ·
+> [Wikipedia: Ownership type](https://en.wikipedia.org/wiki/Ownership_types) ·
 > [Utrecht: Ownership Types]
 
 ---
@@ -133,7 +133,7 @@
 
 ### 1.1 Wikipedia 定义
 
-> **[Wikipedia: Ownership type](https://en.wikipedia.org/wiki/Ownership_type)** Ownership types are a form of type systems that control aliasing and access to mutable state in object-oriented programming languages.
+> **[Wikipedia: Ownership type](https://en.wikipedia.org/wiki/Ownership_types)** Ownership types are a form of type systems that control aliasing and access to mutable state in object-oriented programming languages.
 > They organize objects into hierarchies called *ownership contexts* or *ownership domains*, enforcing that an object may only be modified through its owner.
 
 ### 1.2 TRPL 官方定义

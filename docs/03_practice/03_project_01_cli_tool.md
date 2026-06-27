@@ -149,7 +149,7 @@ cd todo-cli
 
 ### 步骤 2: 定义数据结构
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 // src/models.rs

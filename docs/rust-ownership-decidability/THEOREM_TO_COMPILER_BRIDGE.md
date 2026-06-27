@@ -167,7 +167,7 @@ Theorem type_safety :
 
 ### 2.2 rustc 对应实现
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **rustc 模块**: `compiler/rustc_typeck/src/`
 

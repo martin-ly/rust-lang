@@ -276,7 +276,7 @@ Prusti 使用分离逻辑验证 Rust 代码。
 
 ### 前置/后置条件
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 

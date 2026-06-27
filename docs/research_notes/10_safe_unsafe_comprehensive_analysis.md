@@ -274,7 +274,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 ### 5.1 定义
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **安全抽象**：内部使用 unsafe，对外仅暴露安全 API，且若调用者仅用安全 API，则不会触发 UB。
 

@@ -11,7 +11,7 @@
 ---
 
 > **来源: [Rust Reference - Ownership](https://doc.rust-lang.org/reference/)** ·
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)** ·
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)** ·
 > **来源: [Wikipedia - Region-based Memory Management](https://en.wikipedia.org/wiki/Region_based_Memory_Management)** ·
 > **来源: [RFC 2094 - NLL](https://rust-lang.github.io/rfcs/2094-nll.html)** ·
 > **来源: [Wikipedia - Linear Type](https://en.wikipedia.org/wiki/Linear_Type)** ·
@@ -495,7 +495,7 @@ impl<T> Drop for Exclusive<T> {
 
 ### 3.4 二阶段借用
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 二阶段借用（Two-phase Borrow）用于解决某些借用模式：
 

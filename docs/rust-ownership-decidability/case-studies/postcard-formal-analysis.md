@@ -347,7 +347,7 @@ fn encode_varint_i64(mut value: i64) -> Vec<u8> {
 
 ### 3.4 解码过程
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **解码算法：**
 

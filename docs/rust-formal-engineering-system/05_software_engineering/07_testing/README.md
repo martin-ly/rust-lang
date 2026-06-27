@@ -99,7 +99,7 @@ fn test_add_integration() {
 
 ### 文档测试
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 /// 加法函数

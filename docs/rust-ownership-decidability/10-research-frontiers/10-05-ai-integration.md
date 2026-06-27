@@ -66,7 +66,6 @@
     - [9.3 长期愿景（5-10年）](#93-长期愿景5-10年)
   - [10. 结论](#10-结论)
   - [参考文献](#参考文献)
-<a id="本文档是-rust-所有权与可判定性研究系列第十章的一部分"></a>
   - [*本文档是 Rust 所有权与可判定性研究系列第十章的一部分。*](#本文档是-rust-所有权与可判定性研究系列第十章的一部分)
   - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引-1)
@@ -585,7 +584,7 @@ verus! {
 
 ### 4.1 循环不变量
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 自动合成循环不变量：
 

@@ -417,7 +417,7 @@ impl MyStruct {
 
 ### 3.3 'static 生命周期
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 // ===== 示例 3.3.1: 字符串字面量 =====
@@ -453,7 +453,7 @@ fn main() {
 
 ### 4.1 结构体与所有权
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 // ===== 示例 4.1.1: 所有权结构体 =====

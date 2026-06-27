@@ -142,7 +142,7 @@ unsafe {
 
 ### 2. 输出操作数 (out)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -286,7 +286,7 @@ unsafe fn exit_process(code: i32) -> ! {
 
 ### x86/x86_64
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 #[cfg(target_arch = "x86_64")]
@@ -473,7 +473,7 @@ pub unsafe fn add_vectors_avx(a: &[f32; 8], b: &[f32; 8]) -> [f32; 8] {
 
 ### 3. 原子操作（自定义实现）
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use std::sync::atomic::Ordering;

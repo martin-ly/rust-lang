@@ -9,7 +9,7 @@
 >
 > **来源: [Wikipedia - Type Theory](https://en.wikipedia.org/wiki/Type_Theory)** ·
 > **来源: [Wikipedia - Operational Semantics](https://en.wikipedia.org/wiki/Operational_Semantics)** ·
-> **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_Logic)** ·
+> **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)** ·
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** ·
 > **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)** ·
 > **来源: [Iris Project - iris-project.org](https://iris-project.org/) ·
@@ -269,7 +269,7 @@ $$
 
 ### 2.2 操作语义理论
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 2.2.1 小步操作语义 (SOS)
 
@@ -473,7 +473,7 @@ $$
 
 #### 3.2.1 语义域定义
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **基本集合**:
 
@@ -1067,7 +1067,7 @@ split; auto.
 
 ### 5.5 证明策略选择矩阵
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 | 证明目标 | 推荐策略 | 辅助策略 |
 |----------|----------|----------|

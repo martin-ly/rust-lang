@@ -230,7 +230,7 @@ where
 
 ### 常见 Trait 约束
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -371,7 +371,7 @@ let float = largest(&[1.0, 2.0]);   // 生成 largest_f64
 
 ### 反例 1: 遗漏 Trait 约束
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **错误示例**:
 

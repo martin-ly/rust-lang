@@ -284,7 +284,7 @@
 
 #### 基础阶段（C01-C03）
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -484,7 +484,7 @@ fn main() {
 
 ### 项目资源
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 - [快速参考卡片](../02_reference/quick_reference/README.md)
 - [使用指南](../05_guides/README.md)

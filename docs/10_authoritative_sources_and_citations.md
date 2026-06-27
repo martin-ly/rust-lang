@@ -56,7 +56,7 @@
 
 ### 官方发布
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 | 来源 | URL | 发布日期 | 关键内容 |
 |------|-----|---------|---------|
@@ -92,7 +92,7 @@ fn has_abba(s: &str) -> bool {
 
 #### 2. LazyCell/LazyLock API稳定化
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 

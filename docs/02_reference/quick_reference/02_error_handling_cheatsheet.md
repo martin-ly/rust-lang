@@ -110,7 +110,7 @@ enum Option<T> {
 
 ### 模式 1: 匹配处理
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -404,7 +404,7 @@ Rust 1.95+ 大幅增强了 `std::ops::ControlFlow`，使其成为错误处理和
 
 ### Rust 1.95+ ControlFlow 核心 API
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use std::ops::ControlFlow;
@@ -599,7 +599,7 @@ impl<T: PartialEq + Clone> TreeNode<T> {
 
 ### 生产场景 4：验证管道（组合模式）
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use std::ops::ControlFlow;

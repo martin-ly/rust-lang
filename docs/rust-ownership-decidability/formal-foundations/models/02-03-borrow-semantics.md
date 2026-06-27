@@ -93,7 +93,7 @@ fn calculate_length(s: &String) -> usize {
 
 ### 1.2 核心原则
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────┐

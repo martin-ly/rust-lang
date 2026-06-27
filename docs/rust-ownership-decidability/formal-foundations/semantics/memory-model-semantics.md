@@ -235,7 +235,7 @@ valid_val(v, Box<τ>) :=
 
 ### 3.1 栈帧结构
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 3.1.1 栈帧定义
 
@@ -366,7 +366,7 @@ allocate_heap(τ):
 
 #### 4.1.2 Box<T> 语义
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```
 Box::new(e):

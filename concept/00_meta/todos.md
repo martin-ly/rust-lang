@@ -1,7 +1,7 @@
 # 全局待办清单（Global TODO Tracker）
 >
 > **EN**: Todos
-> **Summary**: Todos. Core Rust concept.
+> **Summary**: Active tasks and backlog tracker for concept documentation.
 >
 > **受众**: [专家]
 >

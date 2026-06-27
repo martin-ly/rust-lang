@@ -488,7 +488,7 @@ where (x: T) ∈ Γ
 
 #### 2.3.5 Immutable Borrow Rule
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```
 Σ ⊢ e: T    T: Copy
@@ -645,7 +645,7 @@ T <: T
 
 #### 2.4.3 Mutable Reference Subtyping
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```
 'a: 'b ∈ Δ    T₁ <: T₂    T₂ <: T₁
@@ -823,7 +823,7 @@ where ℓ = fresh_loc(σ)    σ' = σ[ℓ↦v]
 
 #### 3.2.4 Application (Right)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```
 e₁ is value    ⟨σ; ρ; μ; e₂⟩ → ⟨σ'; ρ'; μ'; e₂'⟩
@@ -999,7 +999,7 @@ where ℓ = fresh_loc(σ₁)    σ₁' = σ₁[ℓ↦v₁]
 
 #### 4.1.1 Ownership Definition
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```
 owns(Γ, x, T)
@@ -1281,7 +1281,7 @@ for<'a> Trait<'a> ⊢ Trait<'b>
 
 ### 6.1 Progress Theorem
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **Theorem 6.1 (Progress)**:
 If `⊢ e: T`, then either:
@@ -1433,7 +1433,7 @@ If `Λ; Δ; Γ ⊢ e: T` and `'a ∈ Λ`, then all references with lifetime `'a`
 
 ## 7. Counter-Examples and Error Analysis
 
-> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 This section provides detailed analysis of 12+ common type system violations in Rust.
 
@@ -1720,7 +1720,7 @@ error[E0271]: type mismatch resolving `<VecWrapper<&str> as Container>::Item == 
 
 ### 7.6 Higher-Ranked Lifetime Error
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 7.6.1 Example Code
 
@@ -2367,7 +2367,7 @@ read_allowed(Path, P) :-
 
 ### 8.4 Universal Region Analysis
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 8.4.1 Universal Regions
 
@@ -2985,7 +2985,7 @@ Admitted.
 
 ### 11.1 Non-Lexical Lifetimes (NLL)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 11.1.1 Problem with Lexical Lifetimes
 
@@ -3216,7 +3216,7 @@ Well-typed programs don't get stuck.
 
 ### A.4 Memory Safety
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 Well-typed programs have no use-after-free, no dangling pointers, and no data races.
 

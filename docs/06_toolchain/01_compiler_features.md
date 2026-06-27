@@ -208,7 +208,7 @@ rustc --print target-list
 
 ### 2.1 增量编译原理
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -429,7 +429,7 @@ lto = true  # 所有依赖包也启用 LTO
 
 ### 5.1 PGO 工作流程
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```text
 ┌───────────────────────────────────────────────────┐
@@ -762,7 +762,7 @@ tokio = { version = "1.0", features = ["full"] }
 
 ### 9.3 代码组织
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **最佳实践**:
 

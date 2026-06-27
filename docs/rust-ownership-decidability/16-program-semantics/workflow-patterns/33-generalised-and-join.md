@@ -170,7 +170,7 @@ m 在运行时才确定
 
 ### 3.1 BPMN 表示
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 BPMN 2.0 中，广义AND合并可以通过**并行网关**结合动态子流程实现：
 
@@ -187,7 +187,7 @@ m 在运行时才确定
 
 ### 3.2 UML 活动图
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 UML 中，广义AND合并使用**扩展区域** (Expansion Region)：
 

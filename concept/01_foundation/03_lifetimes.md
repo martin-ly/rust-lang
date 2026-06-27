@@ -19,7 +19,7 @@
 > **双维定位**: C×App — 在复杂场景下正确标注生命周期（Lifetimes）
 > **前置概念**: [Ownership](./01_ownership.md) · [Borrowing](./02_borrowing.md)
 > **后置概念**: [Advanced Generics](../02_intermediate/02_generics.md) · [Async/Await](../03_advanced/02_async.md) · [Pin](../03_advanced/02_async.md)
-> **主要来源**: [TRPL: Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) · [Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region_based_memory_management) · [Rust Reference: Lifetime elision](https://doc.rust-lang.org/reference/lifetime-elision.html) · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch10-03-lifetime-syntax.html)
+> **主要来源**: [TRPL: Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) · [Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region-based_memory_management) · [Rust Reference: Lifetime elision](https://doc.rust-lang.org/reference/lifetime-elision.html) · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch10-03-lifetime-syntax.html)
 
 ---
 
@@ -114,11 +114,11 @@
 
 ### 1.2 Wikipedia 对齐定义
 
-> **[Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region_based_memory_management)** Region-based memory management is a type of memory management in which each allocated object is assigned to a region. A region, also called a zone, arena, area, or memory context, is a collection of allocated objects that can be efficiently deallocated all at once. In Rust, lifetimes are a form of **static region inference** where regions are associated with references and checked at compile time.
+> **[Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region-based_memory_management)** Region-based memory management is a type of memory management in which each allocated object is assigned to a region. A region, also called a zone, arena, area, or memory context, is a collection of allocated objects that can be efficiently deallocated all at once. In Rust, lifetimes are a form of **static region inference** where regions are associated with references and checked at compile time.
 
 ### 1.3 形式化定义（区域类型）
 
-> **[Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region_based_memory_management)** Rust uses a system of lifetimes that can be understood as **region types** (Tofte & Talpin, 1994) adapted for an imperative, non-GC language. Each reference `&'a T` is parameterized by a lifetime `'a` representing the region during which the reference is guaranteed to be valid.
+> **[Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region-based_memory_management)** Rust uses a system of lifetimes that can be understood as **region types** (Tofte & Talpin, 1994) adapted for an imperative, non-GC language. Each reference `&'a T` is parameterized by a lifetime `'a` representing the region during which the reference is guaranteed to be valid.
 
 > **过渡**: 权威定义从学术和官方来源确立了生命周期的语义——引用有效期的编译期保证。而概念属性矩阵则将这些语义转化为可操作的规则对比——`'a` 标注的不同形式、生命周期关系的推导规则、以及它们与所有权（Ownership）、借用（Borrowing）系统的交互约束。
 

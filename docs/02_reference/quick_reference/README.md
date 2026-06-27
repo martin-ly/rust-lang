@@ -353,7 +353,7 @@
 
 ### 14. Cargo 速查卡
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **文件**: [02_cargo_cheatsheet.md](./02_cargo_cheatsheet.md)
 

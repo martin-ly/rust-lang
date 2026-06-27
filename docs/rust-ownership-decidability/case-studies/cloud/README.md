@@ -719,7 +719,7 @@ pub async fn run(client: Client) -> Result<(), Error> {
 
 ### 3.3 CRD 定义与代码生成
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use kube::CustomResource;
@@ -1883,7 +1883,7 @@ impl ConsulClient {
 
 ### 6.3 负载均衡
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -3143,7 +3143,7 @@ linker = "rust-lld"
 
 ### 9.2 镜像大小优化
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```dockerfile
 # 多阶段构建优化版
@@ -3578,7 +3578,7 @@ allow-registry = ["https://github.com/rust-lang/crates.io-index"]
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -3592,4 +3592,4 @@ allow-registry = ["https://github.com/rust-lang/crates.io-index"]
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**

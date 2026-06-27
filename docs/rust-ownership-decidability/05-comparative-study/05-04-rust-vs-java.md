@@ -540,7 +540,7 @@ assert_eq!(std::mem::size_of::<ZeroSized>(), 0);
 
 ### 4.2 泛型实现对比
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **Java 类型擦除:**
 
@@ -1475,7 +1475,7 @@ pub fn operation_c() -> Result<()> {
 
 ### 7.3 零成本抽象
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **Java Stream 开销:**
 

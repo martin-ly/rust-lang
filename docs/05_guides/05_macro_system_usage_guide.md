@@ -306,7 +306,7 @@ test_case!(test_2, 2, 4);
 
 ### 3. 构建器宏
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 macro_rules! builder {
@@ -639,7 +639,7 @@ pub fn sql(input: TokenStream) -> TokenStream {
 
 ### 陷阱 1: 卫生性问题 (Hygiene)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 macro_rules! buggy_scope {

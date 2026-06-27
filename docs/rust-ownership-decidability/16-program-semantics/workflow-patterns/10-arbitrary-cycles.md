@@ -62,7 +62,7 @@ $$
 
 ### 与结构化循环的区别
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 | 特性 | 结构化循环 | 任意循环 |
 |------|------------|----------|

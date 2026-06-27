@@ -86,7 +86,7 @@
 
 #### B. 类型系统特性
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 - **Generic Const Expressions (GCE)** - 逐步稳定中
 - **Type Alias Impl Trait (TAIT)** - 逐步稳定中

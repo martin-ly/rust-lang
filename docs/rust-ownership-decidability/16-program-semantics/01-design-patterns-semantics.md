@@ -448,7 +448,7 @@ impl Directory {
 
 #### 3.1.2 Drop 传播语义
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 struct Resource { id: usize, name: String }
@@ -817,7 +817,7 @@ fn consumer_adapters() {
 
 ### 4.2 观察者模式 (Observer)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 4.2.1 回调所有权语义
 

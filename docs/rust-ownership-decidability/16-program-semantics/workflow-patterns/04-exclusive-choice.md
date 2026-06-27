@@ -220,7 +220,7 @@ graph LR
 
 ### BPMN 表示
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 BPMN 2.0 中，排他选择使用**排他网关** (Exclusive Gateway) 表示，图形符号为菱形内部带有 "X"：
 
@@ -250,7 +250,7 @@ graph LR
 
 ### UML 活动图
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 UML 活动图中，排他选择使用**决策节点** (Decision Node) 表示：
 

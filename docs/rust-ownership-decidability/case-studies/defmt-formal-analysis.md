@@ -266,7 +266,7 @@ $$
 
 ### 2.3 压缩编码的数学定义
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 定义 2.5 (字符串表压缩)
 
@@ -587,7 +587,7 @@ $$
 
 #### 定理 4.1 (传输带宽上界)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 > 对于包含 $n$ 个参数的日志语句，传输数据量有上界:
 >
@@ -1151,7 +1151,7 @@ $$
 
 ### 6.2 缓冲区溢出防护
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 定理 6.2 (溢出防护)
 
@@ -1279,7 +1279,7 @@ $$
 
 #### 定义 7.1 (日志操作时间)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 日志操作时间 $T_{\text{log}}$ 定义为:
 
@@ -1802,7 +1802,7 @@ rustflags = [
 
 ### 10.2 结构化日志
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **使用结构体记录相关数据**:
 

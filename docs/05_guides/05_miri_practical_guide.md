@@ -148,7 +148,7 @@ MIRIFLAGS="-Zmiri-disable-isolation -Zmiri-tree-borrows" cargo +nightly miri tes
 
 ### 1. Use-after-free (UAF)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -464,7 +464,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo +nightly miri test
 
 ### GitHub Actions 示例
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```yaml
 name: Miri UB Check

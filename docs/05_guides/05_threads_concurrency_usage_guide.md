@@ -114,7 +114,7 @@ handle.join().unwrap();
 
 ### 作用域线程（Rust 1.89+）
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -338,7 +338,7 @@ impl Semaphore {
 
 #### 屏障（Barrier）
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 use std::sync::{Arc, Barrier};
@@ -710,7 +710,7 @@ impl ThreadPool {
 
 ### 模式 4: 多阶段流水线并行
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use std::sync::mpsc::{channel, Sender, Receiver};

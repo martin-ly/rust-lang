@@ -160,7 +160,7 @@
 |:---|:---|:---|
 | **[CMU 17-363: Programming Language Pragmatics]** | Lifetimes、Region types、NLL | L1 生命周期 |
 | **[CMU 17-350: Safe Systems Programming]** | 生命周期在系统编程中的应用 | 工程实践 |
-| **[Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region_based_memory_management)** | 区域类型通用概念 | 权威定义 §1.2 |
+| **[Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region-based_memory_management)** | 区域类型通用概念 | 权威定义 §1.2 |
 | **[Wikipedia: Subtyping](https://en.wikipedia.org/wiki/Subtyping)** | 子类型、协变/逆变 | Variance §4.5 |
 | **[Tofte & Talpin 1994](https://en.wikipedia.org/wiki/Region-based_memory_management)** | 区域类型系统（Type System） | 形式化根基 §4.1–4.2 |
 | **[RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** | 生命周期逻辑 | 形式化验证 §4.1 |
@@ -198,7 +198,7 @@
 | 生命周期确保引用在使用时有效 | [TRPL Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) | ✅ |
 | 生命周期省略（Lifetime Elision）规则 | [Rust Reference: Lifetime elision](https://doc.rust-lang.org/reference/lifetime-elision.html) | ✅ |
 | NLL (Non-Lexical Lifetimes) | [RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html) · [Rust Reference: NLL](https://doc.rust-lang.org/reference/statements.html) | ✅ |
-| 区域类型理论 (Tofte & Talpin) | [Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region_based_memory_management) | ✅ |
+| 区域类型理论 (Tofte & Talpin) | [Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region-based_memory_management) | ✅ |
 | 生命周期子类型关系 | [Rust Reference: Subtyping](https://doc.rust-lang.org/reference/subtyping.html) | ✅ |
 | `'static` 是最长生命周期 | [TRPL Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) | ✅ |
 | HRTB 全称量化语义 | [Rust Reference: HRTB](https://doc.rust-lang.org/reference/) | ✅ |

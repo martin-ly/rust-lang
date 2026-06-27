@@ -109,7 +109,7 @@ dsl::users.filter(dsl::id.eq(1));
 
 ### 定义 2.1 (表类型)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 数据库表可表示为**记录类型**:
 
@@ -290,7 +290,7 @@ $$
 
 ### 4.1 列存在性检查
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ### 定义 4.1 (列存在性谓词)
 

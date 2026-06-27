@@ -228,7 +228,7 @@
 
 ### 3.1 所有权的三要素
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```text
 ┌─────────────────────────────────────────┐

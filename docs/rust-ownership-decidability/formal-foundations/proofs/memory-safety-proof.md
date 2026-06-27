@@ -390,7 +390,7 @@ drop $e$ 消耗 $e$ 的所有权，之后 $e$ 在环境中不再有效。
 
 ### 4.3 无缓冲区溢出证明
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **定理 4.3 (无缓冲区溢出)**:
 > 数组访问总是在有效范围内。

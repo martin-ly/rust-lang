@@ -266,7 +266,7 @@ difficulty = "进阶"
 
 ### 判断题 (TrueFalse)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```toml
 [[questions]]

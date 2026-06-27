@@ -38,7 +38,6 @@
     - [2. 并发处理](#2-并发处理)
     - [3. 错误处理](#3-错误处理)
   - [总结](#总结)
-<a id="通过本文档介绍的技术开发者可以构建高性能高可靠性的数据处理系统"></a>
   - [通过本文档介绍的技术，开发者可以构建高性能、高可靠性的数据处理系统](#通过本文档介绍的技术开发者可以构建高性能高可靠性的数据处理系统)
   - [权威来源索引](#权威来源索引)
 
@@ -50,7 +49,7 @@
 
 ### Rust 在数据工程中的优势
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -64,7 +63,7 @@
 
 ### 生态概览
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 | 类别 | 主要 Crate | 用途 |
 |------|-----------|------|
@@ -733,7 +732,7 @@ impl KafkaProcessor {
 
 ### 嵌入式数据库
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 //! 嵌入式键值存储（基于 RocksDB）
@@ -1530,7 +1529,7 @@ Rust 在数据工程领域提供了：
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ---

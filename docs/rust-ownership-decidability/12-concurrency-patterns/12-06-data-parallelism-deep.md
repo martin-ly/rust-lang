@@ -419,7 +419,7 @@ pub fn par_iter_safety_proof() {
 
 ### Theorem PAR-ITER-DETERMINISM
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **Statement**: Parallel iterator operations are deterministic when using pure functions.
 
@@ -470,7 +470,7 @@ pub fn determinism_proof() {
 
 #### Ownership Semantics
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use rayon::prelude::*;
@@ -1043,7 +1043,7 @@ pub fn safe_collection() {
 
 #### Sample Sort Algorithm
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use rayon::slice::ParallelSliceMut;
@@ -1514,7 +1514,7 @@ pub fn thread_local_accumulation() {
 
 ### 7.1 Implementing ParallelIterator
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### Producer/Consumer Traits
 

@@ -1,0 +1,10479 @@
+# 国际化权威来源链接健康检查报告
+> 检查日期: 2026-06-28
+> 扫描范围: concept, knowledge, docs
+> 外部链接总数: 4451
+> 手动检查（跳过）: 1508
+> 重定向链接: 226
+> 失效/异常链接: 530
+
+## 手动检查域名（跳过）
+
+- `https://arxiv.org/abs/2602.00697`
+  - `concept\00_meta\03_bloom_taxonomy.md`
+- `https://arxiv.org/html/2602.10527v2`
+  - `concept\00_meta\03_bloom_taxonomy.md`
+- `https://internals.rust-lang.org/`
+  - `concept\00_meta\audit_checklist.md`
+  - `concept\00_meta\inter_layer_map.md`
+  - `concept\01_foundation\05_reference_semantics.md`
+  - `concept\05_comparative\05_execution_model_isomorphism.md`
+  - `concept\07_future\03_evolution.md`
+  - `concept\07_future\08_safety_tags_preview.md`
+  - `concept\07_future\09_parallel_frontend_preview.md`
+  - `concept\07_future\10_derive_coerce_pointee_preview.md`
+  - `concept\07_future\11_const_trait_impl_preview.md`
+  - `concept\07_future\13_unsafe_fields_preview.md`
+  - `concept\07_future\15_gen_blocks_preview.md`
+  - `concept\07_future\16_cranelift_backend_preview.md`
+  - `concept\07_future\17_arbitrary_self_types_preview.md`
+  - `concept\07_future\17_ergonomic_ref_counting_preview.md`
+  - `concept\07_future\17_rust_specification_preview.md`
+  - `concept\07_future\18_field_projections_preview.md`
+  - `concept\07_future\20_borrowsanitizer_preview.md`
+  - `concept\07_future\24_roadmap.md`
+  - `concept\07_future\25_open_enums_preview.md`
+  - `concept\07_future\26_specialization_preview.md`
+  - `concept\07_future\27_compile_time_execution.md`
+  - `concept\07_future\rust_1_97_preview.md`
+  - `concept\07_future\rust_1_98_preview.md`
+  - `docs\05_guides\05_safety_tags_guide.md`
+  - `docs\05_guides\05_unsafe_fields_preview.md`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+  - `docs\content\emerging\README.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+  - `knowledge\04_expert\README.md`
+  - `knowledge\04_expert\miri\README.md`
+  - `knowledge\06_ecosystem\02_edition_2024.md`
+  - `knowledge\06_ecosystem\emerging\README.md`
+- `https://en.cppreference.com/`
+  - `concept\00_meta\authority_source_map.md`
+  - `concept\05_comparative\01_rust_vs_cpp.md`
+  - `docs\02_reference\02_cross_language_comparison.md`
+  - `docs\03_guides\03_cxx_interop_guide.md`
+- `https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines.html`
+  - `concept\00_meta\authority_source_map.md`
+  - `docs\02_reference\02_cross_language_comparison.md`
+- `https://survey.stackoverflow.com/`
+  - `concept\00_meta\career_landscape.md`
+- `https://google.github.io/comprehensive-rust/`
+  - `concept\00_meta\comprehensive_rust_mapping.md`
+  - `docs\01_learning\01_google_rust_mapping.md`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_google_rust_mapping.md`
+  - `knowledge\00_start\01_hello_world.md`
+  - `knowledge\00_start\02_installation.md`
+  - `knowledge\00_start\03_learning_roadmap.md`
+- `https://github.com/google/comprehensive-rust`
+  - `concept\00_meta\comprehensive_rust_mapping.md`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `https://github.com/rustfoundation/interop-initiative`
+  - `concept\00_meta\cpp_rust_engineering_roadmap.md`
+- `https://dblp.org/db/conf/popl/index.html`
+  - `concept\00_meta\decidability_spectrum.md`
+- `https://github.com/rust-lang/rfcs/pull/911`
+  - `concept\00_meta\decidability_spectrum.md`
+- `https://github.com/rust-lang/rfcs/pull/2000`
+  - `concept\00_meta\decidability_spectrum.md`
+  - `docs\rust-ownership-decidability\case-studies\generic-array-formal-analysis.md`
+- `https://github.com/rust-lang/rfcs/pull/2497`
+  - `concept\00_meta\decidability_spectrum.md`
+  - `concept\01_foundation\02_borrowing.md`
+- `https://github.com/rust-lang/rfcs/pull/1216`
+  - `concept\00_meta\decidability_spectrum.md`
+  - `concept\01_foundation\04_type_system.md`
+  - `concept\02_intermediate\04_error_handling.md`
+- `https://doi.org/10.1007/BF00119822`
+  - `concept\00_meta\expressiveness_multiview.md`
+- `https://doi.org/10.1007/BF00398256`
+  - `concept\00_meta\expressiveness_multiview.md`
+- `https://doi.org/10.1145/99370.99404`
+  - `concept\00_meta\expressiveness_multiview.md`
+- `https://arxiv.org/abs/1903.00982`
+  - `concept\00_meta\expressiveness_multiview.md`
+  - `concept\04_formal\23_programming_language_foundations.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\ULTIMATE_COMPREHENSIVE_GUIDE.md`
+  - `docs\archive\rust-ownership-chinese\README.md`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+  - `knowledge\03_advanced\06_type_driven_correctness.md`
+- `https://doi.org/10.1007/BFb0030902`
+  - `concept\00_meta\expressiveness_multiview.md`
+  - `concept\05_comparative\05_execution_model_isomorphism.md`
+- `https://doi.org/10.1016/0304-3975(92)00075-8`
+  - `concept\00_meta\expressiveness_multiview.md`
+- `https://doi.org/10.1016/S1571-0661(04)80968-1`
+  - `concept\00_meta\expressiveness_multiview.md`
+- `https://www.cis.upenn.edu/~bcpierce/tapl/`
+  - `concept\00_meta\inter_layer_map.md`
+  - `concept\00_meta\pl_foundations_roadmap.md`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\01_foundation\19_value_vs_reference_semantics.md`
+  - `concept\02_intermediate\02_generics.md`
+  - `concept\04_formal\01_linear_logic.md`
+  - `concept\04_formal\02_type_theory.md`
+  - `concept\04_formal\03_ownership_formal.md`
+  - `concept\04_formal\04_rustbelt.md`
+  - `concept\04_formal\06_subtype_variance.md`
+  - `concept\04_formal\14_lambda_calculus.md`
+  - `concept\04_formal\15_hoare_logic.md`
+  - `concept\04_formal\17_operational_semantics.md`
+  - `concept\04_formal\18_evaluation_strategies.md`
+  - `concept\04_formal\21_type_semantics.md`
+  - `concept\04_formal\23_programming_language_foundations.md`
+  - `docs\02_reference\quick_reference\02_type_system.md`
+  - `docs\05_guides\05_type_system_usage_guide.md`
+  - `docs\research_notes\type_theory\10_lifetime_formalization.md`
+  - `docs\research_notes\type_theory\10_variance_theory.md`
+  - `docs\research_notes\type_theory\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\01_type_system\README.md`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-semantic-framework.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\03-async-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\04-control-data-flow.md`
+  - `docs\rust-ownership-decidability\UNIFIED_THEORETICAL_FRAMEWORK.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-formal-analysis-deep.md`
+  - `docs\rust-ownership-decidability\formal-foundations\RUST_FORMAL_SEMANTICS_DEEP.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\type-ownership-unified-theory.md`
+  - `knowledge\02_intermediate\03_generics.md`
+  - `knowledge\03_advanced\06_type_driven_correctness.md`
+  - `knowledge\04_expert\academic\05_type_system_foundations_guide.md`
+- `https://github.com/rust-lang/rfcs/pull/3417`
+  - `concept\00_meta\inter_layer_map.md`
+- `https://www.iso.org/standard/71954.html`
+  - `concept\00_meta\kg_tlo_alignment.md`
+- `https://www.iso.org/standard/74374.html`
+  - `concept\00_meta\kg_tlo_alignment.md`
+- `https://www.iso.org/standard/77625.html`
+  - `concept\00_meta\kg_tlo_alignment.md`
+- `https://www.w3.org/TR/skos-reference/`
+  - `concept\00_meta\kg_tlo_alignment.md`
+- `https://github.com/information-artifact-ontology/iao/`
+  - `concept\00_meta\kg_tlo_alignment.md`
+- `https://www.w3.org/TR/prov-overview/`
+  - `concept\00_meta\kg_tlo_alignment.md`
+- `https://rust-unofficial.github.io/patterns/`
+  - `concept\00_meta\pattern_semantic_space_index.md`
+  - `concept\01_foundation\15_closure_basics.md`
+  - `concept\02_intermediate\17_macro_patterns.md`
+  - `concept\03_advanced\17_type_erasure.md`
+  - `concept\04_formal\09_linear_logic_applications.md`
+  - `concept\06_ecosystem\02_patterns.md`
+  - `concept\06_ecosystem\03_core_crates.md`
+  - `concept\06_ecosystem\03_idioms_spectrum.md`
+  - `concept\06_ecosystem\04_application_domains.md`
+  - `concept\06_ecosystem\05_formal_ecosystem_tower.md`
+  - `concept\06_ecosystem\06_blockchain.md`
+  - `concept\06_ecosystem\10_public_private_deps.md`
+  - `concept\06_ecosystem\35_architecture_patterns.md`
+  - `concept\06_ecosystem\35_pattern_composition_algebra.md`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+  - `concept\07_future\27_compile_time_execution.md`
+  - `docs\03_guides\03_let_chains_guide.md`
+  - `docs\05_guides\05_design_patterns_usage_guide.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-07_DESIGN_PATTERNS_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\11-02-idiomatic-patterns.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\11-03-type-state-pattern.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\behavioral\command.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\behavioral\observer.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\creational\factory.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\structural\adapter.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\structural\decorator.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\structural\proxy.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-05-async-patterns.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-07-distributed-patterns.md`
+  - `docs\rust-ownership-decidability\13-architecture-patterns\clean-architecture.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-workflow-patterns-master-index.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\01-design-patterns-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\08-workflow-patterns-index.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\08-workflow-patterns.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\01-message-passing-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\04-service-discovery-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\01-sequence.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\02-parallel-split.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\03-synchronization.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\04-exclusive-choice.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\05-simple-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\06-multi-choice.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\07-sync-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\09-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\10-arbitrary-cycles.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\11-implicit-termination.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\14-mi-with-runtime-knowledge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\15-interleaved-routing.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\16-milestone.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\17-critical-section.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\21-structured-loop.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\22-recursion.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\26-cancel-multiple-instance-activity.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\27-complete-multiple-instance-activity.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\28-blocking-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\29-cancelling-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\30-structured-partial-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\31-blocking-partial-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\32-cancelling-partial-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\33-generalised-and-join.md`
+  - `docs\rust-ownership-decidability\THEORY_TO_PATTERN_BRIDGE.md`
+  - `docs\rust-ownership-decidability\async-specialty\network\http-server-patterns.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\design-patterns-comprehensive.md`
+  - `knowledge\00_start\04_rust_philosophy.md`
+  - `knowledge\03_advanced\06_type_driven_correctness.md`
+- `https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/`
+  - `concept\00_meta\semantic_bridge_algorithms_patterns.md`
+  - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
+- `https://internals.rust-lang.org`
+  - `concept\00_meta\semantic_expressiveness.md`
+- `https://github.com/rust-lang/rfcs/pull/2344`
+  - `concept\00_meta\semantic_expressiveness.md`
+- `https://github.com/rust-lang/rfcs/pull/1210`
+  - `concept\00_meta\semantic_expressiveness.md`
+  - `concept\07_future\03_evolution.md`
+  - `concept\07_future\24_roadmap.md`
+  - `concept\07_future\26_specialization_preview.md`
+  - `docs\05_guides\05_design_patterns_usage_guide.md`
+- `https://github.com/rust-lang/rfcs/pull/1598`
+  - `concept\00_meta\semantic_expressiveness.md`
+  - `concept\01_foundation\03_lifetimes_advanced.md`
+  - `concept\04_formal\02_type_theory.md`
+  - `concept\06_ecosystem\02_patterns.md`
+  - `concept\07_future\03_evolution.md`
+- `https://github.com/rust-lang/rfcs/pull/3668`
+  - `concept\00_meta\semantic_expressiveness.md`
+  - `concept\03_advanced\02_async.md`
+  - `concept\07_future\05_rust_version_tracking.md`
+  - `docs\03_guides\03_async_closures_deep_dive.md`
+- `https://github.com/rust-lang/rfcs/pull/230`
+  - `concept\00_meta\semantic_expressiveness.md`
+  - `concept\03_advanced\02_async.md`
+- `https://bheisler.github.io/criterion.rs/book/`
+  - `concept\00_meta\semantic_expressiveness.md`
+  - `concept\01_foundation\16_testing_basics.md`
+  - `concept\06_ecosystem\15_performance_optimization.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\11_benchmark_minimal_guide.md`
+  - `docs\rust-ownership-decidability\case-studies\proptest-quickcheck-formal-analysis.md`
+  - `knowledge\03_advanced\05_performance_optimization.md`
+  - `knowledge\04_expert\safety_critical\09_reference\10_performance_optimization_guide.md`
+- `https://rust-fuzz.github.io/book/`
+  - `concept\00_meta\semantic_expressiveness.md`
+  - `concept\06_ecosystem\16_testing.md`
+  - `docs\03_guides\03_fuzzing_guide.md`
+  - `knowledge\04_expert\02_unsafe_audit.md`
+- `https://github.com/rust-lang/rfcs/pull/3762`
+  - `concept\00_meta\semantic_space.md`
+  - `concept\04_formal\02_type_theory.md`
+- `https://www.cis.upenn.edu/~cis1905/`
+  - `concept\00_meta\sources.md`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+- `https://docs.rs/futures/latest/futures/stream/trait.Stream.html`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\06_ecosystem\40_reactive_programming.md`
+- `https://docs.rs/tokio/latest/tokio/task/struct.LocalSet.html`
+  - `concept\00_meta\terminology_glossary.md`
+- `https://docs.rs/tokio/latest/tokio/task/fn.spawn_blocking.html`
+  - `concept\00_meta\terminology_glossary.md`
+- `https://docs.rs/rayon/latest/rayon/`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\03_advanced\10_concurrency_patterns.md`
+  - `concept\06_ecosystem\03_core_crates.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\13_rayon_architecture.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-05-async-patterns.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-07-distributed-patterns.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\01-thread-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\02-parallel-split.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\41-thread-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\42-thread-split.md`
+  - `docs\rust-ownership-decidability\case-studies\rayon-parallelism.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\async-concurrency-comparison.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\decision-trees\concurrency-model-selection.md`
+  - `knowledge\03_advanced\concurrency\02_synchronization.md`
+  - `knowledge\03_advanced\concurrency\03_threads.md`
+  - `knowledge\03_advanced\concurrency\README.md`
+- `https://github.com/rust-lang/rust/issues/154909`
+  - `concept\00_meta\terminology_glossary.md`
+- `https://github.com/rust-lang/rust/pull/157226`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\07_future\rust_1_98_preview.md`
+- `https://github.com/rust-lang/rust/pull/157168`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\07_future\rust_1_98_preview.md`
+- `https://github.com/rust-lang/rust/pull/152092`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\07_future\rust_1_98_preview.md`
+- `https://github.com/rust-lang/rust/pull/157572`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\07_future\rust_1_98_preview.md`
+- `https://github.com/rust-lang/rust/pull/148051`
+  - `concept\00_meta\terminology_glossary.md`
+- `https://github.com/rust-lang/rust/pull/154065`
+  - `concept\00_meta\terminology_glossary.md`
+- `https://github.com/rust-lang/rust/pull/142824`
+  - `concept\00_meta\terminology_glossary.md`
+- `https://github.com/rust-lang/rust/pull/150055`
+  - `concept\00_meta\terminology_glossary.md`
+- `https://doi.org/10.1145/363235.363259`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\04_formal\20_axiomatic_semantics.md`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `https://mitpress.mit.edu/9780262731034`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\04_formal\17_operational_semantics.md`
+  - `concept\04_formal\20_axiomatic_semantics.md`
+- `https://model-checking.github.io/kani/`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\03_advanced\00_before_formal.md`
+  - `concept\04_formal\01_linear_logic.md`
+  - `concept\04_formal\02_type_theory.md`
+  - `concept\04_formal\03_ownership_formal.md`
+  - `concept\04_formal\04_rustbelt.md`
+  - `concept\04_formal\05_verification_toolchain.md`
+  - `concept\04_formal\06_subtype_variance.md`
+  - `concept\04_formal\08_type_inference.md`
+  - `concept\04_formal\09_linear_logic_applications.md`
+  - `concept\04_formal\10_category_theory.md`
+  - `concept\04_formal\11_separation_logic.md`
+  - `concept\04_formal\12_denotational_semantics.md`
+  - `concept\04_formal\13_formal_methods.md`
+  - `concept\04_formal\14_lambda_calculus.md`
+  - `concept\04_formal\15_hoare_logic.md`
+  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
+  - `concept\04_formal\17_operational_semantics.md`
+  - `concept\04_formal\18_evaluation_strategies.md`
+  - `concept\04_formal\20_axiomatic_semantics.md`
+  - `concept\04_formal\21_type_semantics.md`
+  - `concept\04_formal\22_modern_verification_tools.md`
+  - `concept\04_formal\23_programming_language_foundations.md`
+  - `concept\04_formal\32_kani.md`
+  - `concept\04_formal\README.md`
+  - `concept\06_ecosystem\01_toolchain.md`
+  - `concept\06_ecosystem\05_formal_ecosystem_tower.md`
+  - `concept\06_ecosystem\12_testing_strategies.md`
+  - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+  - `concept\07_future\02_formal_methods.md`
+  - `concept\07_future\22_std_autodiff_preview.md`
+  - `concept\07_future\rust_1_97_preview.md`
+  - `docs\05_guides\05_kani_practical_guide.md`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+  - `docs\content\academic\README.md`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview-deep.md`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+  - `knowledge\04_expert\academic\02_tree_borrows_authoritative_guide.md`
+  - `knowledge\04_expert\academic\README.md`
+  - `knowledge\04_expert\safety_critical\04_axiomatic_reasoning\01_formal_verification_practical_guide.md`
+- `https://github.com/rust-lang/rfcs/pull/3367`
+  - `concept\00_meta\terminology_glossary.md`
+- `https://creusot-rs.github.io/`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\04_formal\15_hoare_logic.md`
+  - `docs\04_research\04_rust_formal_verification.md`
+- `https://verus-lang.github.io/verus/`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\04_formal\04_rustbelt.md`
+  - `concept\04_formal\05_verification_toolchain.md`
+  - `concept\04_formal\22_modern_verification_tools.md`
+  - `concept\04_formal\24_autoverus.md`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+  - `concept\07_future\01_ai_integration.md`
+  - `concept\07_future\33_autoverus_preview.md`
+  - `docs\04_research\04_verusbelt_pldi_2026.md`
+  - `docs\05_guides\05_verus_practical_guide.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-06-verus-guide.md`
+  - `knowledge\04_expert\academic\02_tree_borrows_authoritative_guide.md`
+  - `knowledge\04_expert\academic\README.md`
+  - `knowledge\04_expert\safety_critical\04_axiomatic_reasoning\01_formal_verification_practical_guide.md`
+- `https://github.com/rust-lang/miri`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\01_foundation\02_borrowing.md`
+  - `concept\01_foundation\03_lifetimes_advanced.md`
+  - `concept\01_foundation\05_reference_semantics.md`
+  - `concept\03_advanced\01_concurrency.md`
+  - `concept\03_advanced\02_async.md`
+  - `concept\03_advanced\02_async_advanced.md`
+  - `concept\03_advanced\03_unsafe.md`
+  - `concept\03_advanced\12_unsafe_rust_patterns.md`
+  - `concept\04_formal\03_ownership_formal.md`
+  - `concept\04_formal\05_verification_toolchain.md`
+  - `concept\04_formal\13_formal_methods.md`
+  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
+  - `concept\04_formal\30_aeneas_symbolic_semantics.md`
+  - `concept\04_formal\31_miri.md`
+  - `concept\06_ecosystem\01_toolchain.md`
+  - `concept\06_ecosystem\12_testing_strategies.md`
+  - `concept\06_ecosystem\16_testing.md`
+  - `concept\06_ecosystem\45_compiler_internals.md`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+  - `concept\06_ecosystem\57_quiz_toolchain.md`
+  - `concept\07_future\01_ai_integration.md`
+  - `concept\07_future\02_formal_methods.md`
+  - `concept\07_future\20_borrowsanitizer_preview.md`
+  - `docs\03_guides\03_miri_guide.md`
+  - `docs\04_research\04_endangered_by_language_saved_by_compiler_popl_2026.md`
+  - `docs\04_research\04_llm_c_to_rust_migration.md`
+  - `docs\05_guides\05_miri_practical_guide.md`
+  - `docs\05_miri_integration_summary.md`
+  - `docs\10_miri_guide.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\ULTIMATE_COMPREHENSIVE_GUIDE.md`
+  - `docs\archive\duplicate_content_2026_06_08\10_tree_borrows_authoritative_guide.md`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+  - `docs\archive\rust-ownership-chinese\Rust所有权与可判定性：全面形式语义分析与论证.md`
+  - `docs\archive\rust-ownership-chinese\guides\miri-tutorial.md`
+  - `docs\archive\rust-ownership-chinese\papers\stacked-tree-borrows-analysis.md`
+  - `docs\archive\rust-ownership-chinese\papers\stacked-tree-borrows-formal-semantics.md`
+  - `docs\archive\rust-ownership-chinese\rust_ownership_semantics_complete_analysis.md`
+  - `docs\archive\rust-ownership-chinese\rust_ownership_semantics_complete_analysis_v2.md`
+  - `docs\content\academic\10_tree_borrows_guide.md`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview-deep.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-03-miri-deep-dive.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+  - `docs\rust-ownership-decidability\RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\tree-borrows-comprehensive.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\mechanized-proofs.md`
+  - `knowledge\03_advanced\unsafe\04_unsafe_rust.md`
+  - `knowledge\03_advanced\unsafe\README.md`
+  - `knowledge\04_expert\02_unsafe_audit.md`
+  - `knowledge\04_expert\academic\02_tree_borrows_authoritative_guide.md`
+  - `knowledge\04_expert\academic\04_borrow_checker_proof_guide.md`
+  - `knowledge\04_expert\academic\05_type_system_foundations_guide.md`
+  - `knowledge\04_expert\miri\01_tree_borrows.md`
+  - `knowledge\04_expert\miri\README.md`
+- `https://rustwasm.github.io/book/`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\05_comparative\08_rust_vs_javascript.md`
+  - `concept\05_comparative\15_rust_vs_typescript.md`
+  - `concept\06_ecosystem\08_wasi.md`
+  - `concept\06_ecosystem\11_webassembly.md`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+  - `concept\07_future\21_rust_in_ai.md`
+  - `concept\07_future\28_rust_for_webassembly.md`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `https://github.com/WebAssembly/WASI`
+  - `concept\00_meta\terminology_glossary.md`
+- `https://docs.rs/tokio/latest/tokio/runtime/struct.Runtime.html`
+  - `concept\00_meta\terminology_glossary.md`
+- `https://docs.rs/mio/latest/mio/`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\03_advanced\18_network_programming.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\21_mio_architecture.md`
+- `https://docs.rs/clap/latest/clap/`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\06_ecosystem\25_cli_development.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\04_clap_architecture.md`
+- `https://github.com/bytecodealliance/wasmtime/tree/main/cranelift`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\06_ecosystem\47_compiler_infrastructure.md`
+  - `docs\04_research\04_cranelift_backend.md`
+  - `docs\06_toolchain\06_cranelift_backend_guide.md`
+- `https://github.com/RustSec/rustsec/tree/main/cargo-audit`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\06_ecosystem\19_security_practices.md`
+  - `concept\06_ecosystem\25_cargo_security_cves.md`
+  - `concept\06_ecosystem\28_devops_and_ci_cd.md`
+- `https://github.com/dtolnay/cargo-expand`
+  - `concept\00_meta\terminology_glossary.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/mozilla/sccache`
+  - `concept\00_meta\terminology_glossary.md`
+  - `docs\01_cargo_build_optimization.md`
+  - `docs\10_sccache_setup.md`
+- `https://github.com/cross-rs/cross`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\06_ecosystem\01_toolchain.md`
+  - `concept\06_ecosystem\17_cross_compilation.md`
+  - `concept\06_ecosystem\28_devops_and_ci_cd.md`
+  - `knowledge\04_expert\safety_critical\09_reference\05_deployment_and_maintenance_guide.md`
+  - `knowledge\06_ecosystem\deployment\01_kubernetes_deployment_guide.md`
+- `https://github.com/rust-lang/rustfmt`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\06_ecosystem\01_toolchain.md`
+  - `concept\06_ecosystem\57_quiz_toolchain.md`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://docs.rs/anyhow/latest/anyhow/`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\01_foundation\10_error_handling_basics.md`
+  - `concept\02_intermediate\04_error_handling.md`
+  - `concept\02_intermediate\15_error_handling_deep_dive.md`
+  - `docs\rust-ownership-decidability\case-studies\cli\README.md`
+- `https://docs.rs/serde_json/latest/serde_json/`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\02_intermediate\09_serde_patterns.md`
+- `https://docs.rs/reqwest/latest/reqwest/`
+  - `concept\00_meta\terminology_glossary.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_reqwest_architecture.md`
+- `https://docs.rs/tracing/latest/tracing/`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\06_ecosystem\13_logging_observability.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\18_tracing_architecture.md`
+- `https://docs.rs/scopeguard/latest/scopeguard/`
+  - `concept\00_meta\terminology_glossary.md`
+- `https://github.com/rust-lang/rust/issues/ `
+  - `concept\00_meta\terminology_glossary.md`
+- `https://github.com/rust-lang/rust/pull/151973`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\07_future\rust_1_98_preview.md`
+- `https://github.com/rust-lang/rust/pull/155942`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\07_future\rust_1_98_preview.md`
+- `https://github.com/rust-lang/rust/pull/157273`
+  - `concept\00_meta\terminology_glossary.md`
+  - `concept\07_future\rust_1_98_preview.md`
+- `https://dl.acm.org/doi/10.1145/355592.365646`
+  - `concept\01_foundation\00_pl_prerequisites.md`
+- `https://doi.org/10.1145/362929.362947`
+  - `concept\01_foundation\00_pl_prerequisites.md`
+- `https://doi.org/10.1016/0304-3975(75)90017-1`
+  - `concept\01_foundation\00_pl_prerequisites.md`
+  - `concept\04_formal\18_evaluation_strategies.md`
+- `https://doi.org/10.1007/3-540-59451-5_2`
+  - `concept\01_foundation\00_pl_prerequisites.md`
+- `https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer`
+  - `concept\01_foundation\00_start.md`
+- `https://en.cppreference.com/w/cpp/memory/unique_ptr`
+  - `concept\01_foundation\01_ownership.md`
+  - `docs\02_reference\02_cross_language_comparison.md`
+- `https://github.com/rust-lang/rfcs/pull/2025`
+  - `concept\01_foundation\02_borrowing.md`
+- `https://github.com/rust-lang/rfcs`
+  - `concept\01_foundation\03_lifetimes_advanced.md`
+  - `concept\02_intermediate\02_generics.md`
+  - `concept\02_intermediate\03_memory_management.md`
+  - `concept\02_intermediate\04_error_handling.md`
+  - `concept\05_comparative\03_paradigm_matrix.md`
+  - `concept\05_comparative\04_safety_boundaries.md`
+  - `concept\06_ecosystem\05_formal_ecosystem_tower.md`
+  - `concept\06_ecosystem\README.md`
+  - `concept\07_future\03_evolution.md`
+  - `concept\07_future\14_ferrocene_preview.md`
+  - `concept\07_future\19_rust_for_linux.md`
+  - `concept\07_future\20_borrowsanitizer_preview.md`
+  - `concept\07_future\21_rust_in_ai.md`
+  - `concept\07_future\24_cargo_semver_checks_preview.md`
+  - `concept\07_future\26_rust_in_space.md`
+  - `concept\07_future\README.md`
+  - `concept\archive\00_meta_layer_index_legacy.md`
+  - `concept\archive\01.md`
+  - `concept\archive\01_foundation_19_numerics_archived.md`
+  - `concept\archive\02_intermediate_22_iterator_patterns_archived.md`
+  - `concept\archive\03_advanced_02_async_programming_archived.md`
+  - `concept\archive\03_advanced_13_async_patterns_archived.md`
+  - `concept\archive\03_advanced_layer_index_legacy.md`
+  - `concept\archive\04_formal_07_separation_logic_archived.md`
+  - `concept\archive\04_formal_09_operational_semantics_archived.md`
+  - `concept\archive\04_formal_layer_index_legacy.md`
+  - `concept\archive\05_comparative_16_rust_vs_ruby_archived.md`
+  - `concept\archive\05_comparative_layer_index_legacy.md`
+  - `concept\archive\06_ecosystem_26_game_development_deprecated.md`
+  - `concept\archive\06_ecosystem_33_idioms_spectrum_archived.md`
+  - `concept\archive\06_ecosystem_34_formal_ecosystem_tower_archived.md`
+  - `concept\archive\ARCHIVE_INDEX.md`
+  - `concept\archive\ARCHIVE_RUST_EFFECT_SYSTEM_ROOT_FILES.md`
+  - `concept\archive\PLAN_concept_knowledge_system_v2.md`
+  - `concept\archive\PLAN_semantic_space_wave_11.md`
+  - `concept\archive\Rust vs C++：形式系统模型 vs 机制工程模型 —— 核心论点索引.md`
+  - `concept\archive\rust_effect_system_boundary_analysis.md`
+  - `concept\archive\rust_effect_system_comprehensive_analysis.md`
+  - `concept\archive\rust_effect_system_deepened_broadened_analysis.md`
+  - `concept\archive\rust_effect_system_encyclopedia.md`
+  - `docs\00_meta\00_annual_review_template.md`
+  - `docs\00_meta\00_content_reconstruction_plan_2026.md`
+  - `docs\00_meta\00_docs_reorganization_complete.md`
+  - `docs\00_meta\00_documentation_division_of_labor.md`
+  - `docs\00_meta\00_documentation_lifecycle.md`
+  - `docs\00_meta\00_improvement_plan_execution_complete.md`
+  - `docs\00_meta\00_pdca_template.md`
+  - `docs\00_meta\00_project_health_dashboard.md`
+  - `docs\00_meta\00_quarterly_sync_checklist.md`
+  - `docs\00_meta\00_reorganization_complete.md`
+  - `docs\00_meta\00_rust_feature_tracking_template.md`
+  - `docs\00_meta\00_rust_version_alignment_checklist.md`
+  - `docs\00_meta\00_template_concept_doc.md`
+  - `docs\00_meta\00_template_decision_tree.md`
+  - `docs\00_meta\analysis\00_rust_2026_project_goals_monthly_tracking.md`
+  - `docs\00_meta\history\00_2026_reorganization.md`
+  - `docs\01_core\01_ownership_borrowing_lifetimes.md`
+  - `docs\01_core\README.md`
+  - `docs\01_learning\01_cross_module_learning_roadmap_2025_10_25.md`
+  - `docs\01_learning\01_cross_module_navigation.md`
+  - `docs\01_learning\01_learning_path_guide_2025_10_24.md`
+  - `docs\01_learning\01_learning_path_planning.md`
+  - `docs\01_learning\01_lfrs_certification_mapping.md`
+  - `docs\01_learning\01_mdbook_quiz_guide.md`
+  - `docs\02_reference\02_cross_language_comparison.md`
+  - `docs\02_reference\02_edge_cases_and_special_cases.md`
+  - `docs\02_reference\02_error_code_mapping.md`
+  - `docs\02_reference\02_rustnomicon_alignment.md`
+  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
+  - `docs\02_reference\ALIGNMENT_GUIDE.md`
+  - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_algorithm_decision_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_algorithms_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_assert_matches_guide.md`
+  - `docs\02_reference\quick_reference\02_async_patterns.md`
+  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_closures_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_control_flow_functions_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_error_handling_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_generics_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_network_programming_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_ownership_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_pin_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_process_management_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_rust_195_features_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_rust_196_features_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_smart_pointers_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_strings_formatting_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_testing_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_type_system.md`
+  - `docs\02_reference\quick_reference\02_wasm_cheatsheet.md`
+  - `docs\02_reference\quick_reference\README.md`
+  - `docs\03_guides\03_async_closures_deep_dive.md`
+  - `docs\03_guides\03_cxx_interop_guide.md`
+  - `docs\03_guides\03_embedded_rust_guide.md`
+  - `docs\03_guides\03_fuzzing_guide.md`
+  - `docs\03_guides\03_io_uring_guide.md`
+  - `docs\03_guides\03_let_chains_guide.md`
+  - `docs\03_guides\03_miri_guide.md`
+  - `docs\03_guides\03_quic_http3_guide.md`
+  - `docs\03_guides\03_semver_checks.md`
+  - `docs\03_guides\03_test_coverage.md`
+  - `docs\03_practice\03_cross_module_practical_projects_2025_10_25.md`
+  - `docs\03_practice\03_project_01_cli_tool.md`
+  - `docs\03_practice\03_project_02_file_processor.md`
+  - `docs\03_practice\03_project_03_calculator.md`
+  - `docs\03_practice\03_project_04_password_generator.md`
+  - `docs\03_practice\03_project_05_text_statistics.md`
+  - `docs\03_practice\03_project_06_concurrent_downloader.md`
+  - `docs\03_practice\03_project_07_chat_server.md`
+  - `docs\03_practice\03_project_08_cache_system.md`
+  - `docs\03_practice\03_project_09_log_parser.md`
+  - `docs\03_practice\03_project_10_data_pipeline.md`
+  - `docs\03_practice\03_project_12_wasm_app.md`
+  - `docs\03_practice\03_project_13_database_engine.md`
+  - `docs\03_practice\03_project_15_distributed_system.md`
+  - `docs\03_practice\README.md`
+  - `docs\04_research\04_cranelift_backend.md`
+  - `docs\04_research\04_llm_c_to_rust_migration.md`
+  - `docs\04_research\04_ng_trait_solver.md`
+  - `docs\04_research\04_polonius_next_gen_borrow_checker.md`
+  - `docs\04_research\04_polonius_tracking.md`
+  - `docs\04_research\04_rust_for_linux.md`
+  - `docs\04_research\04_rust_for_linux_2026.md`
+  - `docs\04_research\04_rust_formal_verification.md`
+  - `docs\04_research\04_verusbelt_pldi_2026.md`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+  - `docs\04_thinking\04_applications_analysis_view.md`
+  - `docs\04_thinking\04_decision_graph_network.md`
+  - `docs\04_thinking\04_mind_map_collection.md`
+  - `docs\04_thinking\04_proof_graph_network.md`
+  - `docs\04_thinking\04_thinking_representation_methods.md`
+  - `docs\05_guides\05_advanced_topics_deep_dive.md`
+  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
+  - `docs\05_guides\05_algorithms_usage_guide.md`
+  - `docs\05_guides\05_async_programming_usage_guide.md`
+  - `docs\05_guides\05_cli_applications_guide.md`
+  - `docs\05_guides\05_control_flow_functions_usage_guide.md`
+  - `docs\05_guides\05_cross_module_integration_examples.md`
+  - `docs\05_guides\05_cxx_rust_interop_evaluation.md`
+  - `docs\05_guides\05_design_patterns_usage_guide.md`
+  - `docs\05_guides\05_embedded_rust_guide.md`
+  - `docs\05_guides\05_formal_verification_integration_guide.md`
+  - `docs\05_guides\05_inline_assembly_guide.md`
+  - `docs\05_guides\05_macro_system_usage_guide.md`
+  - `docs\05_guides\05_miri_practical_guide.md`
+  - `docs\05_guides\05_performance_tuning_guide.md`
+  - `docs\05_guides\05_pragmatic_guidelines_checklist.md`
+  - `docs\05_guides\05_safety_tags_guide.md`
+  - `docs\05_guides\05_threads_concurrency_usage_guide.md`
+  - `docs\05_guides\05_troubleshooting_guide.md`
+  - `docs\05_guides\05_wasm_usage_guide.md`
+  - `docs\05_guides\BEST_PRACTICES.md`
+  - `docs\05_guides\workflow\01_workflow_theory.md`
+  - `docs\06_docker_guide.md`
+  - `docs\06_toolchain\01_compiler_features.md`
+  - `docs\06_toolchain\06_05_rust_1_93_vs_1_92_comparison.md`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+  - `docs\06_toolchain\06_09_rust_1_93_compatibility_deep_dive.md`
+  - `docs\06_toolchain\06_11_rust_1_93_cargo_rustdoc_changes.md`
+  - `docs\06_toolchain\06_14_rust_1_95_nightly_preview.md`
+  - `docs\06_toolchain\06_cranelift_backend_guide.md`
+  - `docs\06_toolchain\06_toml_v11_cargo_guide.md`
+  - `docs\06_toolchain\README.md`
+  - `docs\07_project\07_completion_status.md`
+  - `docs\07_project\07_documentation_cross_reference_guide.md`
+  - `docs\07_project\07_extension_deepening_plan_2026.md`
+  - `docs\07_project\07_hierarchy_mapping_master.md`
+  - `docs\07_project\07_knowledge_structure_framework.md`
+  - `docs\07_project\07_module_knowledge_structure_guide.md`
+  - `docs\07_project\07_project_architecture_guide.md`
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\10_api_guide.md`
+  - `docs\10_architecture.md`
+  - `docs\10_authoritative_sources_and_citations.md`
+  - `docs\10_dependency_graph.md`
+  - `docs\10_migration_guide_2026.md`
+  - `docs\10_miri_guide.md`
+  - `docs\10_sccache_setup.md`
+  - `docs\10_terminology_standard.md`
+  - `docs\content\10_content_crates_mapping.md`
+  - `docs\content\academic\10_tree_borrows_guide.md`
+  - `docs\content\academic\README.md`
+  - `docs\content\ecosystem\README.md`
+  - `docs\content\emerging\README.md`
+  - `docs\content\production\README.md`
+  - `docs\content\representations\10_knowledge_representation_matrix.md`
+  - `docs\research_notes\10_research_notes_organization.md`
+  - `docs\research_notes\10_safe_unsafe_comprehensive_analysis.md`
+  - `docs\research_notes\10_theorem_rust_example_mapping.md`
+  - `docs\research_notes\INDEX.md`
+  - `docs\research_notes\README.md`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+  - `docs\research_notes\type_theory\10_variance_theory.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\01_type_system\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\03_ownership_borrowing\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\05_trait_system\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\README.md`
+  - `docs\rust-formal-engineering-system\02_practical_applications\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\01_synchronous\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\09_actor_model\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\README.md`
+  - `docs\rust-formal-engineering-system\03_compiler_theory\README.md`
+  - `docs\rust-formal-engineering-system\03_design_patterns\04_concurrent\README.md`
+  - `docs\rust-formal-engineering-system\05_software_engineering\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\02_package_manager\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\03_build_tools\README.md`
+  - `docs\rust-formal-engineering-system\09_research_agenda\04_research_methods\README.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-01-linear-logic-deep.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-01-linear-logic.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-02-affine-types.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-03-separation-logic-deep.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-03-separation-logic.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-04-theory-connections.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-01-ownership-rules-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-01-ownership-rules.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-02-borrowing-system-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-02-borrowing-system.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-04-runtime-vs-compile-time.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\borrowing-in-depth.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\interior-mutability.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\lifetimes-mastery.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\ownership-deep-dive.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\polonius-borrow-checker.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\trait-system.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\ownership-counterexamples.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\short-concepts\borrowing-concept-card.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\short-concepts\lifetime-concept-card.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\short-concepts\ownership-concept-card.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview-deep.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-02-creusot-deep-dive.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-03-miri-deep-dive.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-06-verus-guide.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-07-refinedrust-deep-dive.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-08-gillian-rust.md`
+  - `docs\rust-ownership-decidability\04-decidability-analysis\04-01-type-inference.md`
+  - `docs\rust-ownership-decidability\04-decidability-analysis\04-02-borrow-checking.md`
+  - `docs\rust-ownership-decidability\05-comparative-study\05-01-linear-vs-affine.md`
+  - `docs\rust-ownership-decidability\05-comparative-study\05-03-rust-vs-go.md`
+  - `docs\rust-ownership-decidability\05-comparative-study\05-04-rust-vs-java.md`
+  - `docs\rust-ownership-decidability\05-comparative-study\05-05-rust-vs-swift.md`
+  - `docs\rust-ownership-decidability\06-visualizations\06-01-concept-matrix.md`
+  - `docs\rust-ownership-decidability\06-visualizations\06-02-decision-trees.md`
+  - `docs\rust-ownership-decidability\06-visualizations\06-03-architecture-diagrams.md`
+  - `docs\rust-ownership-decidability\07-references\README.md`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+  - `docs\rust-ownership-decidability\07-references\bibliography.md`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `docs\rust-ownership-decidability\08-advanced-topics\08-01-const-generics.md`
+  - `docs\rust-ownership-decidability\08-advanced-topics\08-05-rust-195-features-formal.md`
+  - `docs\rust-ownership-decidability\08-advanced-topics\README.md`
+  - `docs\rust-ownership-decidability\08-advanced-topics\data-layout.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-01-future-directions.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-02-type-system-extensions.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-03-verification-advancements.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-04-ownership-variations.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-05-ai-integration.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-06-formal-verification.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-07-std-verification-initiative.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\rust-1.93-features-analysis.md`
+  - `docs\rust-ownership-decidability\100_PERCENT_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\11-01-rust-design-patterns.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\11-02-idiomatic-patterns.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\11-03-type-state-pattern.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\behavioral\command.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\behavioral\observer.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\behavioral\strategy.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\creational\builder.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\creational\factory.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\rust-specific\newtype.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\rust-specific\raii-guard.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\structural\adapter.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\structural\decorator.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\structural\proxy.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-02-thread-safety-patterns.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-03-message-passing-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-04-lock-free-patterns.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-05-async-patterns-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-05-async-patterns.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-07-distributed-patterns.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\README.md`
+  - `docs\rust-ownership-decidability\13-architecture-patterns\clean-architecture.md`
+  - `docs\rust-ownership-decidability\14-distributed-systems\13-01-distributed-patterns.md`
+  - `docs\rust-ownership-decidability\14-distributed-systems\consensus-patterns.md`
+  - `docs\rust-ownership-decidability\15-application-domains\data-engineering.md`
+  - `docs\rust-ownership-decidability\15-application-domains\systems-programming.md`
+  - `docs\rust-ownership-decidability\15-application-domains\web-development.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00a-lambda-calculus.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00b-type-theory-basics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00c-operational-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00d-denotational-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00e-axiomatic-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\README.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-semantic-framework.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\01-design-patterns-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\02-concurrency-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\03-async-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\04-control-data-flow.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\08-workflow-patterns.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\COMPLETION_STATUS_2026_03_08.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\COMPREHENSIVE_ANALYSIS_AND_ROADMAP.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\README.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\TOPIC_COVERAGE_MATRIX.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\README.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\01-message-passing-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\02-rpc-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\03-event-driven-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\04-service-discovery-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\consistency\01-cap-theorem.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\consistency\02-consensus-algorithms.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\consistency\03-eventual-consistency.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\consistency\05-distributed-locks.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\fault-tolerance\01-failure-models.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\fault-tolerance\03-retry-patterns.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\fault-tolerance\04-timeout-patterns.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\microservices\05-bulkhead-pattern.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\01-thread-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\02-lock-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\03-condition-variable-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\04-semaphore-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\05-barrier-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\06-memory-ordering-deep.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\01-reborrow-trait-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\02-coerceshared-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\03-const-generics-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\04-precise-capturing-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\06-array-windows-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\04-exclusive-choice.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\05-simple-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\06-multi-choice.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\07-sync-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\08-multi-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\09-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\10-arbitrary-cycles.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\11-implicit-termination.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\12-mi-without-sync.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\13-mi-with-sync.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\14-deferred-choice.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\15-interleaved-routing.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\16-milestone.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\17-critical-section.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\18-cancel-activity.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\22-recursion.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\23-transient-trigger.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\24-persistent-trigger.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\26-cancel-multiple-instance-activity.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\27-complete-multiple-instance-activity.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\28-blocking-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\29-cancelling-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\30-structured-partial-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\31-blocking-partial-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\32-cancelling-partial-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\33-generalised-and-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\37-local-synchronizing-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\38-general-synchronizing-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\40-interleaved-routing.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\02-raw-pointers.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\03-unsafe-functions.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\04-extern-ffi.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\05-uninitialized-memory.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\06-maybe-uninit.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\07-drop-flags.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\08-aliasing.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\09-atomics.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\10-inline-asm.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\11-impl-vec.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\README.md`
+  - `docs\rust-ownership-decidability\AUDIT_REPORTS_INDEX.md`
+  - `docs\rust-ownership-decidability\BATCH_4_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\COMPARATIVE_ANALYSIS.md`
+  - `docs\rust-ownership-decidability\COMPILATION_VERIFICATION_REPORT.md`
+  - `docs\rust-ownership-decidability\COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md`
+  - `docs\rust-ownership-decidability\COMPLETE_KNOWLEDGE_MATRIX.md`
+  - `docs\rust-ownership-decidability\COMPLETION_100_PERCENT_SUMMARY.md`
+  - `docs\rust-ownership-decidability\COMPREHENSIVE_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\COMPREHENSIVE_COUNTEREXAMPLES_HANDBOOK.md`
+  - `docs\rust-ownership-decidability\COMPREHENSIVE_FAQ.md`
+  - `docs\rust-ownership-decidability\COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md`
+  - `docs\rust-ownership-decidability\CONCEPT_MAP.md`
+  - `docs\rust-ownership-decidability\CONTENT_ASSOCIATION_ANALYSIS.md`
+  - `docs\rust-ownership-decidability\CONTENT_TEMPLATE_L2.md`
+  - `docs\rust-ownership-decidability\CONTINUOUS_IMPROVEMENT_ACTION_PLAN.md`
+  - `docs\rust-ownership-decidability\CROSS_REFERENCE_VERIFICATION_REPORT.md`
+  - `docs\rust-ownership-decidability\CROSS_REFERENCE_VERIFICATION_SUMMARY.md`
+  - `docs\rust-ownership-decidability\DESIGN_RATIONALE.md`
+  - `docs\rust-ownership-decidability\ERROR_DIAGNOSTICS_GUIDE.md`
+  - `docs\rust-ownership-decidability\EXECUTIVE_SUMMARY_AND_RECOMMENDATIONS.md`
+  - `docs\rust-ownership-decidability\FAQ_COMPREHENSIVE.md`
+  - `docs\rust-ownership-decidability\FINAL_100_PERCENT_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\FINAL_ASSOCIATION_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\FINAL_COMPLETION_CERTIFICATE.md`
+  - `docs\rust-ownership-decidability\FINAL_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\FINAL_DOCUMENTATION.md`
+  - `docs\rust-ownership-decidability\FINAL_EXECUTIVE_SUMMARY.md`
+  - `docs\rust-ownership-decidability\FINAL_MASTER_INDEX.md`
+  - `docs\rust-ownership-decidability\FINAL_ULTIMATE_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\FINAL_VERIFICATION_100_PERCENT.md`
+  - `docs\rust-ownership-decidability\FOUNDATIONS_TO_PRACTICE_BRIDGE.md`
+  - `docs\rust-ownership-decidability\FRAMEWORK_ANALYSIS_AND_GAP_REPORT.md`
+  - `docs\rust-ownership-decidability\FRAMEWORK_COMPLETION_SUMMARY.md`
+  - `docs\rust-ownership-decidability\HISTORICAL_EVOLUTION.md`
+  - `docs\rust-ownership-decidability\HORIZONTAL_CONNECTIONS.md`
+  - `docs\rust-ownership-decidability\INITIAL_PHASE_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\INTERACTIVE_LEARNING_GUIDE.md`
+  - `docs\rust-ownership-decidability\MASTER_COMPREHENSIVE_ANALYSIS.md`
+  - `docs\rust-ownership-decidability\NATURAL_LANGUAGE_ARGUMENTATION_INDEX.md`
+  - `docs\rust-ownership-decidability\NATURAL_LANGUAGE_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\OVERVIEW_AND_INTUITION.md`
+  - `docs\rust-ownership-decidability\PROJECT_COMPREHENSIVE_AUDIT_REPORT.md`
+  - `docs\rust-ownership-decidability\PROJECT_STRUCTURE.md`
+  - `docs\rust-ownership-decidability\QUICK_REFERENCE_CARD.md`
+  - `docs\rust-ownership-decidability\RESEARCH_TRACKING_SYSTEM.md`
+  - `docs\rust-ownership-decidability\RUST_194_ALIGNMENT_PLAN.md`
+  - `docs\rust-ownership-decidability\RUST_194_VS_193_COMPARISON.md`
+  - `docs\rust-ownership-decidability\RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md`
+  - `docs\rust-ownership-decidability\THEOREM_DEPENDENCY_GRAPH.md`
+  - `docs\rust-ownership-decidability\THEOREM_INTUITIONS.md`
+  - `docs\rust-ownership-decidability\THEOREM_TO_COMPILER_BRIDGE.md`
+  - `docs\rust-ownership-decidability\THEORY_TO_PATTERN_BRIDGE.md`
+  - `docs\rust-ownership-decidability\UNIFIED_THEORETICAL_FRAMEWORK.md`
+  - `docs\rust-ownership-decidability\VISUAL_THINKING_GUIDE.md`
+  - `docs\rust-ownership-decidability\actor-specialty\ACTOR_MODEL_DEEP_DIVE.md`
+  - `docs\rust-ownership-decidability\actor-specialty\COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\actor-specialty\case-studies\actix-web-production.md`
+  - `docs\rust-ownership-decidability\actor-specialty\decision-trees\actor-framework-selection.md`
+  - `docs\rust-ownership-decidability\actor-specialty\distributed\distributed-actors-formal.md`
+  - `docs\rust-ownership-decidability\actor-specialty\examples\chat-system-example.md`
+  - `docs\rust-ownership-decidability\actor-specialty\formal-proofs\actor-safety-theorems.md`
+  - `docs\rust-ownership-decidability\actor-specialty\matrices\actor-framework-matrix.md`
+  - `docs\rust-ownership-decidability\actor-specialty\mindmaps\actor-model-mindmap.md`
+  - `docs\rust-ownership-decidability\actor-specialty\patterns\actor-design-patterns-expanded.md`
+  - `docs\rust-ownership-decidability\actor-specialty\patterns\actor-design-patterns.md`
+  - `docs\rust-ownership-decidability\actor-specialty\scenario-trees\actor-application-domains.md`
+  - `docs\rust-ownership-decidability\actor-specialty\theory\actor-model-foundation.md`
+  - `docs\rust-ownership-decidability\async-specialty\ASYNC_ECOSYSTEM_COMPLETE.md`
+  - `docs\rust-ownership-decidability\async-specialty\COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\async-specialty\README.md`
+  - `docs\rust-ownership-decidability\async-specialty\authoritative\tokio-deep-dive.md`
+  - `docs\rust-ownership-decidability\async-specialty\ecosystem\IO_URING_DEEP_DIVE.md`
+  - `docs\rust-ownership-decidability\async-specialty\ecosystem\async-ecosystem-landscape.md`
+  - `docs\rust-ownership-decidability\async-specialty\embedded\embassy-guide.md`
+  - `docs\rust-ownership-decidability\async-specialty\network\http-server-patterns.md`
+  - `docs\rust-ownership-decidability\audit_reports\CONTENT_QUALITY_AUDIT.md`
+  - `docs\rust-ownership-decidability\audit_reports\FINAL_COMPLETE_ANALYSIS_REPORT.md`
+  - `docs\rust-ownership-decidability\audit_reports\FINAL_COMPLETION_REPORT_V3.md`
+  - `docs\rust-ownership-decidability\audit_reports\FORMALIZATION_FRAMEWORK.md`
+  - `docs\rust-ownership-decidability\audit_reports\LIBRARY_ANALYSIS_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\audit_reports\PHASE3_LIBRARY_ANALYSIS_REPORT.md`
+  - `docs\rust-ownership-decidability\case-studies\COMPLETE_DOMAIN_COVERAGE_INDEX.md`
+  - `docs\rust-ownership-decidability\case-studies\MODERN_CRATES_EXPANSION_REPORT.md`
+  - `docs\rust-ownership-decidability\case-studies\MODERN_CRATES_FINAL_REPORT.md`
+  - `docs\rust-ownership-decidability\case-studies\MODERN_CRATES_INDEX.md`
+  - `docs\rust-ownership-decidability\case-studies\MODERN_CRATES_ROUND2_REPORT.md`
+  - `docs\rust-ownership-decidability\case-studies\README.md`
+  - `docs\rust-ownership-decidability\case-studies\actix-web-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\alloc-cortex-m-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\anyhow-thiserror-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\arc-swap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\async-graphql-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\async-std-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\backoff-retry-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bevy-ecs-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bindgen-cbindgen-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\blockchain\README.md`
+  - `docs\rust-ownership-decidability\case-studies\bytemuck-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bytes-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\chrono-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\clap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\cli\README.md`
+  - `docs\rust-ownership-decidability\case-studies\cloud\README.md`
+  - `docs\rust-ownership-decidability\case-studies\compile-time-macros-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\config-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\const-gen-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\cortex-m-rt-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\criterion-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\crossbeam-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\cxx-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\dashmap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\database\README.md`
+  - `docs\rust-ownership-decidability\case-studies\deadpool-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\defmt-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\derive-more-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\diesel-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\diesel-orm-type-safety.md`
+  - `docs\rust-ownership-decidability\case-studies\embassy-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-graphics-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-storage-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded\EMBEDDED_CRATES_INDEX.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded\README.md`
+  - `docs\rust-ownership-decidability\case-studies\figment-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\flate2-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\frunk-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\futures-crate-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\futures-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\gamedev\README.md`
+  - `docs\rust-ownership-decidability\case-studies\generic-array-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\governor-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\heapless-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\heim-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\hyper-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\image-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\indexmap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\industrial-verification-aws-meta.md`
+  - `docs\rust-ownership-decidability\case-studies\insta-snapshot-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\jsonwebtoken-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\lapin-rdkafka-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\littlefs2-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\loom-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\lru-cached-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\media\README.md`
+  - `docs\rust-ownership-decidability\case-studies\ml-ai\README.md`
+  - `docs\rust-ownership-decidability\case-studies\moka-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\ndarray-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\nom-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\notify-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\nrf-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\once_cell-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\opentelemetry-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\ouroboros-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\panic-probe-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\parking_lot-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\pin-project-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\postcard-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\prometheus-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\proptest-quickcheck-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\pulldown-cmark-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\pyo3-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\quinn-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rand-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rayon-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rayon-parallelism.md`
+  - `docs\rust-ownership-decidability\case-studies\ref-cast-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\regex-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\reqwest-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rkyv-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rtic-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rustls-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\security\README.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-formal-analysis-deep.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-json-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\shuttle-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\slog-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\smoltcp-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\socket2-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\sqlx-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\static-assertions-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-future-stream-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-hashmap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-iterator-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-option-result-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-pin-unpin-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-smart-pointers-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-string-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-sync-primitives-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-trait-semantics-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-vec-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\stm32f4xx-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tantivy-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tarpc-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tera-askama-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\thiserror-anyhow-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-graceful-shutdown-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-process-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-deep.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-stream-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-util-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tonic-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tonic-grpc-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tonic-health-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tower-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tracing-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\typenum-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\usb-device-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\validator-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\walkdir-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\wasm-bindgen-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\wasm\README.md`
+  - `docs\rust-ownership-decidability\case-studies\web-server-architecture.md`
+  - `docs\rust-ownership-decidability\case-studies\wgpu-glium-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\zerocopy-formal-analysis.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\README.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\async-concurrency-comparison.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\memory-management-comparison.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\refinedrust-vs-rustbelt.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-cpp.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-go.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-java.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-python.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\authoritative-sources\academic-papers.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\case-studies\embassy-embedded-analysis.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\case-studies\tokio-runtime-analysis.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\decision-trees\concurrency-model-selection.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\decision-trees\pattern-selection.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\design-patterns-comprehensive.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\extensions\advanced-ownership-patterns.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\extensions\performance-optimization.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\formal-framework\definitions.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\matrices\comprehensive-comparison-matrix.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\matrices\safety-analysis-matrix.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\mindmaps\borrowing-system-mindmap.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\mindmaps\ownership-system-mindmap.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\open-source-analysis.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\proofs\memory-safety-proof.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\scenario-trees\application-domain-tree.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\scenario-trees\real-time-systems-tree.md`
+  - `docs\rust-ownership-decidability\exercises\09-01-practice-problems.md`
+  - `docs\rust-ownership-decidability\exercises\ADVANCED_OWNERSHIP_WORKSHOP.md`
+  - `docs\rust-ownership-decidability\exercises\ownership-basics.md`
+  - `docs\rust-ownership-decidability\extensions\README.md`
+  - `docs\rust-ownership-decidability\extensions\ffi-interoperability.md`
+  - `docs\rust-ownership-decidability\extensions\no-std-development.md`
+  - `docs\rust-ownership-decidability\formal-foundations\README.md`
+  - `docs\rust-ownership-decidability\formal-foundations\RUST_FORMAL_SEMANTICS_DEEP.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-01-rustbelt.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-02-ownership-types.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-03-borrow-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-04-lifetime-logic.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-05-move-analysis.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\README.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\drop-elaboration-formal.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\executable-semantics-comparison.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\refinedrust-type-system.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\relaxed-memory-model.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\symbolic-borrow-checking.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\tree-borrows-comprehensive.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\ASYNC_ANALYSIS_COMPLETE_INDEX.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\PROOF_PATTERNS.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\README.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\affine-logic-decidability.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\async-execution-examples.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\async-execution-model-formal.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\decidability-theorem.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\memory-safety-proof.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\rustbelt-formalization.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\separation-logic-soundness.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\type-ownership-unified-theory.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\logical-relations.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\mechanized-proofs.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\memory-model-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\operational-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\semantics-equivalence-proof.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\type-system-formalization.md`
+  - `docs\rust-ownership-decidability\meta-model\01_abstract_syntax.md`
+  - `docs\rust-ownership-decidability\meta-model\02_semantic_domains.md`
+  - `docs\rust-ownership-decidability\meta-model\03_judgments.md`
+  - `docs\rust-ownership-decidability\meta-model\RUST_194_COMPREHENSIVE_GUIDE.md`
+  - `docs\rust-ownership-decidability\meta-model\rust-194-alignment.md`
+  - `docs\rust-ownership-decidability\practical-examples\comprehensive-code-collection.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-05_initial_setup.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-06_FORMAL_ANALYSIS_PROGRESS.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-06_week1_progress.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-07_CONTENT_CREATION_BATCH_1.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-07_CONTENT_CREATION_BATCH_2.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-07_CONTENT_CREATION_BATCH_3.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-07_FINAL_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-07_daily_update.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-08_weekend_sprint.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-09_50_PERCENT_MILESTONE.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-09_phase1_completion.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-10_MILESTONE_75_PERCENT.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-11_MILESTONE_90_PERCENT.md`
+  - `docs\rust-ownership-decidability\progress\COMPREHENSIVE_STATUS_REPORT.md`
+  - `docs\rust-ownership-decidability\progress\FINAL_100_PERCENT_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\progress\FINAL_COMPLETION_REPORT_40_PERCENT.md`
+  - `docs\rust-ownership-decidability\progress\PROGRESS_TRACKING.md`
+  - `docs\rust-ownership-decidability\ref.md`
+  - `docs\rust-ownership-decidability\theorems\README.md`
+  - `docs\rust-ownership-decidability\theorems\decidability_theorems.md`
+  - `docs\rust-ownership-decidability\visualizations\KNOWLEDGE_GRAPH_MINDMAP.md`
+  - `docs\rust-ownership-decidability\visualizations\concept-matrix.md`
+  - `docs\rust-ownership-decidability\visualizations\decision-tree.md`
+  - `docs\rust-ownership-decidability\visualizations\decision-trees\type-selection-decision-tree.md`
+  - `docs\rust-ownership-decidability\visualizations\matrices\rust-safety-mechanisms-matrix.md`
+  - `docs\rust-ownership-decidability\visualizations\ownership-comprehensive-mindmap.md`
+  - `docs\rust-ownership-decidability\visualizations\ownership-mindmap.md`
+  - `docs\rust-ownership-decidability\visualizations\scenario-tree.md`
+  - `docs\templates\10_versioned_doc_template.md`
+  - `knowledge\04_expert\academic\README.md`
+  - `knowledge\06_ecosystem\emerging\README.md`
+- `https://github.com/rust-lang/rfcs/pull/2584`
+  - `concept\01_foundation\04_type_system.md`
+- `https://github.com/rust-lang/rust/issues/156512`
+  - `concept\01_foundation\05_never_type.md`
+  - `docs\06_toolchain\06_19_rust_1_96_features.md`
+  - `docs\06_toolchain\06_20_rustdoc_196_improvements.md`
+  - `docs\06_toolchain\rustdoc_196_improvements.md`
+  - `knowledge\06_ecosystem\emerging\05_rust_1_96.md`
+- `https://verus-lang.github.io/verus/guide/`
+  - `concept\01_foundation\05_reference_semantics.md`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+  - `docs\05_guides\05_verus_practical_guide.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-06-verus-guide.md`
+- `https://nnethercote.github.io/perf-book/`
+  - `concept\01_foundation\06_zero_cost_abstractions.md`
+  - `concept\01_foundation\11_numeric_types.md`
+  - `concept\01_foundation\18_strings_and_encoding.md`
+  - `concept\02_intermediate\03_memory_management.md`
+  - `concept\02_intermediate\11_cow_and_borrowed.md`
+  - `concept\02_intermediate\12_smart_pointers.md`
+  - `concept\02_intermediate\15_iterator_patterns.md`
+  - `concept\03_advanced\02_async.md`
+  - `concept\03_advanced\02_async_advanced.md`
+  - `concept\03_advanced\12_unsafe_rust_patterns.md`
+  - `concept\03_advanced\14_custom_allocators.md`
+  - `concept\03_advanced\15_zero_copy_parsing.md`
+  - `concept\03_advanced\16_lock_free.md`
+  - `concept\03_advanced\17_type_erasure.md`
+  - `concept\03_advanced\19_parallel_distributed_pattern_spectrum.md`
+  - `concept\04_formal\18_evaluation_strategies.md`
+  - `concept\05_comparative\03_paradigm_matrix.md`
+  - `concept\06_ecosystem\03_core_crates.md`
+  - `concept\06_ecosystem\03_idioms_spectrum.md`
+  - `concept\06_ecosystem\05_system_design_principles.md`
+  - `concept\06_ecosystem\15_performance_optimization.md`
+  - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+  - `concept\07_future\27_compile_time_execution.md`
+  - `concept\archive\01_foundation_11_numeric_types_deprecated.md`
+  - `docs\01_cargo_build_optimization.md`
+  - `docs\05_guides\05_advanced_topics_deep_dive.md`
+  - `docs\05_guides\05_performance_tuning_guide.md`
+  - `docs\05_guides\05_troubleshooting_guide.md`
+  - `docs\05_guides\BEST_PRACTICES.md`
+  - `docs\archive\2026_05_historical_docs\RUST_194_195_FEATURES_DEEP_DIVE.md`
+  - `docs\archive\c_class_audit_2026_06_08\05_guides\05_performance_testing_report.md`
+  - `docs\archive\rust-ownership-chinese\guides\zero-cost-abstraction-proof.md`
+  - `docs\content\production\README.md`
+  - `docs\rust-formal-engineering-system\02_practical_applications\performance\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\11_benchmark_minimal_guide.md`
+  - `docs\rust-ownership-decidability\05-comparative-study\05-04-rust-vs-java.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\extensions\performance-optimization.md`
+  - `knowledge\03_advanced\05_performance_optimization.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\03_rust_194_195_features_deep_dive.md`
+  - `knowledge\04_expert\safety_critical\09_reference\10_performance_optimization_guide.md`
+- `https://nnethercote.github.io/perf-book/profiling.html`
+  - `concept\01_foundation\06_zero_cost_abstractions.md`
+  - `concept\06_ecosystem\15_performance_optimization.md`
+- `https://github.com/rust-lang/rfcs/pull/160`
+  - `concept\01_foundation\07_control_flow.md`
+- `https://github.com/rust-lang/rfcs/pull/3137`
+  - `concept\01_foundation\07_control_flow.md`
+- `https://nnethercote.github.io/perf-book/collections.html`
+  - `concept\01_foundation\08_collections.md`
+  - `concept\01_foundation\17_collections_advanced.md`
+- `https://docs.rs/fnv/`
+  - `concept\01_foundation\08_collections.md`
+- `https://github.com/rust-lang/rfcs/pull/504`
+  - `concept\01_foundation\09_strings_and_text.md`
+  - `concept\01_foundation\18_strings_and_encoding.md`
+- `https://nnethercote.github.io/perf-book/string-processing.html`
+  - `concept\01_foundation\09_strings_and_text.md`
+- `https://docs.rs/thiserror/latest/thiserror/`
+  - `concept\01_foundation\10_error_handling_basics.md`
+  - `concept\02_intermediate\15_error_handling_deep_dive.md`
+- `https://github.com/rust-lang/rfcs/blob/master/text/0560-integer-overflow.md`
+  - `concept\01_foundation\10_numerics.md`
+- `https://nnethercote.github.io/perf-book/type-sizes.html`
+  - `concept\01_foundation\11_numeric_types.md`
+  - `concept\06_ecosystem\15_performance_optimization.md`
+- `https://veykril.github.io/tlborm/`
+  - `concept\01_foundation\12_attributes_and_macros.md`
+  - `concept\02_intermediate\17_macro_patterns.md`
+  - `concept\02_intermediate\21_metaprogramming.md`
+  - `concept\02_intermediate\26_c_preprocessor_vs_rust_macros.md`
+  - `concept\03_advanced\04_macros.md`
+  - `docs\rust-ownership-decidability\case-studies\compile-time-macros-formal-analysis.md`
+  - `knowledge\02_intermediate\macros\01_cfg_select.md`
+  - `knowledge\03_advanced\macros\01_declarative.md`
+  - `knowledge\03_advanced\macros\02_procedural.md`
+  - `knowledge\03_advanced\macros\README.md`
+- `https://veykril.github.io/tlborm/print.html#counting`
+  - `concept\01_foundation\12_attributes_and_macros.md`
+- `https://danielkeep.github.io/tlborm/book/`
+  - `concept\01_foundation\12_attributes_and_macros.md`
+  - `concept\03_advanced\04_macros.md`
+  - `concept\07_future\23_rust_edition_guide.md`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+  - `knowledge\03_advanced\macros\01_declarative.md`
+- `https://docs.rs/log/latest/log/`
+  - `concept\01_foundation\13_panic_and_abort.md`
+  - `concept\06_ecosystem\13_logging_observability.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\18_tracing_architecture.md`
+- `https://github.com/rust-lang/hashbrown`
+  - `concept\01_foundation\17_collections_advanced.md`
+- `https://github.com/rust-lang/rustc-hash`
+  - `concept\01_foundation\17_collections_advanced.md`
+- `https://docs.rs/fxhash/latest/fxhash/`
+  - `concept\01_foundation\17_collections_advanced.md`
+- `https://docs.rs/seahash/latest/seahash/`
+  - `concept\01_foundation\17_collections_advanced.md`
+- `https://docs.rs/ahash/latest/ahash/`
+  - `concept\01_foundation\17_collections_advanced.md`
+- `https://nnethercote.github.io/perf-book/hashing.html`
+  - `concept\01_foundation\17_collections_advanced.md`
+- `https://docs.rs/unicode-segmentation/latest/unicode_segmentation/`
+  - `concept\01_foundation\18_strings_and_encoding.md`
+- `https://docs.rs/unicode-segmentation/latest/`
+  - `concept\01_foundation\18_strings_and_encoding.md`
+- `https://docs.rs/unicode-normalization/latest/`
+  - `concept\01_foundation\18_strings_and_encoding.md`
+- `https://simonsapin.github.io/wtf-8/`
+  - `concept\01_foundation\18_strings_and_encoding.md`
+- `https://doi.org/10.1145/6041.6042`
+  - `concept\01_foundation\19_value_vs_reference_semantics.md`
+- `https://en.cppreference.com/w/cpp/language/value_category`
+  - `concept\01_foundation\19_value_vs_reference_semantics.md`
+  - `concept\01_foundation\23_move_semantics.md`
+- `https://dl.acm.org/doi/10.1145/6041.6042`
+  - `concept\01_foundation\19_value_vs_reference_semantics.md`
+  - `concept\02_intermediate\02_generics.md`
+  - `concept\04_formal\02_type_theory.md`
+  - `concept\04_formal\21_type_semantics.md`
+- `https://en.cppreference.com/w/cpp/language/move_constructor`
+  - `concept\01_foundation\23_move_semantics.md`
+  - `concept\02_intermediate\28_construction_and_initialization.md`
+- `https://en.cppreference.com/w/cpp/language/move_assignment`
+  - `concept\01_foundation\23_move_semantics.md`
+- `https://stackoverflow.com/questions/27922584/how-does-rust-provide-move-semantics`
+  - `concept\01_foundation\23_move_semantics.md`
+- `https://thecodedmessage.com/posts/cpp-move-harmful/`
+  - `concept\01_foundation\23_move_semantics.md`
+- `https://en.cppreference.com/w/cpp/language/copy_elision`
+  - `concept\01_foundation\23_move_semantics.md`
+- `https://doi.org/10.1145/3622841`
+  - `concept\01_foundation\28_ownership_inventories_brown_book.md`
+- `http://ropas.snu.ac.kr/~bruno/papers/TypeClasses.pdf`
+  - `concept\02_intermediate\01_traits.md`
+- `https://dl.acm.org/doi/10.1145/75277.75305`
+  - `concept\02_intermediate\02_generics.md`
+- `https://github.com/rust-lang/rust/issues/76560`
+  - `concept\02_intermediate\02_generics.md`
+  - `docs\content\emerging\README.md`
+  - `knowledge\06_ecosystem\emerging\02_generic_const_exprs.md`
+- `https://nnethercote.github.io/perf-book/compile-times.html`
+  - `concept\02_intermediate\02_generics.md`
+  - `concept\06_ecosystem\01_toolchain.md`
+  - `concept\06_ecosystem\15_performance_optimization.md`
+- `https://www.unige.ch/~girard/thesis.pdf`
+  - `concept\02_intermediate\02_generics.md`
+- `https://dl.acm.org/doi/10.1145/582153.582176`
+  - `concept\02_intermediate\02_generics.md`
+- `https://github.com/rust-lang/rfcs/pull/1951`
+  - `concept\02_intermediate\02_generics.md`
+- `https://github.com/rust-lang/rust/issues/31844`
+  - `concept\02_intermediate\02_generics.md`
+  - `concept\02_intermediate\19_advanced_traits.md`
+  - `concept\07_future\24_roadmap.md`
+  - `concept\07_future\26_specialization_preview.md`
+- `https://internals.rust-lang.org/t/soundness-of-min-specialization/`
+  - `concept\02_intermediate\02_generics.md`
+- `https://github.com/RazrFalcon/cargo-bloat`
+  - `concept\02_intermediate\02_generics.md`
+  - `concept\06_ecosystem\01_toolchain.md`
+  - `concept\06_ecosystem\05_system_design_principles.md`
+- `https://nnethercote.github.io/perf-book/build-configuration.html`
+  - `concept\02_intermediate\02_generics.md`
+- `https://docs.rs/typenum`
+  - `concept\02_intermediate\02_generics.md`
+  - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
+- `https://docs.rs/generic-array`
+  - `concept\02_intermediate\02_generics.md`
+- `https://docs.rs/typenum/latest/typenum/`
+  - `concept\02_intermediate\02_generics.md`
+- `https://docs.rs/typenum/latest/src/typenum/uint.rs.html`
+  - `concept\02_intermediate\02_generics.md`
+- `https://sdleffler.github.io/RustTypeSystemTuringComplete/`
+  - `concept\02_intermediate\02_generics.md`
+- `https://github.com/rust-lang/rfcs/pull/3617`
+  - `concept\02_intermediate\02_generics.md`
+  - `concept\07_future\05_rust_version_tracking.md`
+- `https://github.com/rust-lang/rfcs/pull/1974`
+  - `concept\02_intermediate\03_memory_management.md`
+- `https://crates.io/`
+  - `concept\02_intermediate\04_error_handling.md`
+  - `concept\03_advanced\01_concurrency.md`
+  - `concept\06_ecosystem\03_core_crates.md`
+  - `concept\06_ecosystem\04_application_domains.md`
+  - `concept\06_ecosystem\06_blockchain.md`
+  - `concept\06_ecosystem\10_public_private_deps.md`
+  - `concept\06_ecosystem\27_web_frameworks.md`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+  - `concept\06_ecosystem\README.md`
+  - `concept\07_future\archive\01_ai_integration_original.md`
+  - `concept\archive\01_foundation_03_lifetimes_original.md`
+  - `concept\archive\01_foundation_11_numeric_types_deprecated.md`
+  - `concept\archive\03_advanced_02_async_original.md`
+  - `concept\archive\06_ecosystem_26_game_development_deprecated.md`
+  - `concept\archive\06_ecosystem_layer_index_legacy.md`
+  - `concept\archive\07_future_23_rust_edition_guide_deprecated.md`
+  - `docs\01_cargo_build_optimization.md`
+  - `docs\01_core\01_ownership_borrowing_lifetimes.md`
+  - `docs\01_learning\01_cross_module_learning_roadmap_2025_10_25.md`
+  - `docs\01_learning\01_cross_module_navigation.md`
+  - `docs\01_learning\01_learning_path_guide_2025_10_24.md`
+  - `docs\01_learning\01_learning_path_planning.md`
+  - `docs\01_learning\01_lfrs_certification_mapping.md`
+  - `docs\01_learning\01_mdbook_quiz_guide.md`
+  - `docs\02_reference\02_cross_language_comparison.md`
+  - `docs\02_reference\02_edge_cases_and_special_cases.md`
+  - `docs\02_reference\ALIGNMENT_GUIDE.md`
+  - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_algorithms_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_assert_matches_guide.md`
+  - `docs\02_reference\quick_reference\02_async_patterns.md`
+  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_control_flow_functions_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_error_handling_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_generics_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_network_programming_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_pin_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_process_management_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_rust_196_features_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_smart_pointers_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_strings_formatting_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_type_system.md`
+  - `docs\02_reference\quick_reference\02_wasm_cheatsheet.md`
+  - `docs\03_guides\03_async_closures_deep_dive.md`
+  - `docs\03_guides\03_cxx_interop_guide.md`
+  - `docs\03_guides\03_embassy_deep_dive.md`
+  - `docs\03_guides\03_embedded_rust_guide.md`
+  - `docs\03_guides\03_fuzzing_guide.md`
+  - `docs\03_guides\03_io_uring_guide.md`
+  - `docs\03_guides\03_let_chains_guide.md`
+  - `docs\03_guides\03_libp2p_guide.md`
+  - `docs\03_guides\03_miri_guide.md`
+  - `docs\03_guides\03_quic_http3_guide.md`
+  - `docs\03_guides\03_rust_2024_edition_future_in_prelude.md`
+  - `docs\03_guides\03_rust_2024_edition_rpit_migration.md`
+  - `docs\03_guides\03_semver_checks.md`
+  - `docs\03_guides\03_test_coverage.md`
+  - `docs\03_practice\03_project_01_cli_tool.md`
+  - `docs\04_research\04_cranelift_backend.md`
+  - `docs\04_research\04_llm_c_to_rust_migration.md`
+  - `docs\04_research\04_next_generation_trait_solver.md`
+  - `docs\04_research\04_ng_trait_solver.md`
+  - `docs\04_research\04_polonius_next_gen_borrow_checker.md`
+  - `docs\04_research\04_polonius_tracking.md`
+  - `docs\04_research\04_rust_for_linux.md`
+  - `docs\04_research\04_rust_for_linux_2026.md`
+  - `docs\04_research\04_rust_formal_verification.md`
+  - `docs\04_research\04_safety_critical_alignment_2026.md`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+  - `docs\04_thinking\04_applications_analysis_view.md`
+  - `docs\04_thinking\04_thinking_representation_methods.md`
+  - `docs\05_guides\05_advanced_topics_deep_dive.md`
+  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
+  - `docs\05_guides\05_cli_applications_guide.md`
+  - `docs\05_guides\05_cross_module_integration_examples.md`
+  - `docs\05_guides\05_embedded_rust_guide.md`
+  - `docs\05_guides\05_inline_assembly_guide.md`
+  - `docs\05_guides\05_macro_system_usage_guide.md`
+  - `docs\05_guides\05_miri_practical_guide.md`
+  - `docs\05_guides\05_performance_tuning_guide.md`
+  - `docs\05_guides\05_pragmatic_guidelines_checklist.md`
+  - `docs\05_guides\05_safety_tags_guide.md`
+  - `docs\05_guides\05_troubleshooting_guide.md`
+  - `docs\05_guides\05_wasm_usage_guide.md`
+  - `docs\05_guides\BEST_PRACTICES.md`
+  - `docs\05_miri_integration_summary.md`
+  - `docs\06_docker_guide.md`
+  - `docs\06_toolchain\01_compiler_features.md`
+  - `docs\06_toolchain\03_rustdoc_advanced.md`
+  - `docs\06_toolchain\06_05_rust_1_93_vs_1_92_comparison.md`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+  - `docs\06_toolchain\06_11_rust_1_93_cargo_rustdoc_changes.md`
+  - `docs\06_toolchain\06_14_rust_1_95_nightly_preview.md`
+  - `docs\06_toolchain\06_cargo_script_guide.md`
+  - `docs\06_toolchain\06_parallel_frontend.md`
+  - `docs\06_toolchain\06_toml_v11_cargo_guide.md`
+  - `docs\07_project\07_extension_deepening_plan_2026.md`
+  - `docs\07_project\07_hierarchy_mapping_master.md`
+  - `docs\07_project\07_knowledge_structure_framework.md`
+  - `docs\07_project\07_project_architecture_guide.md`
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\10_api_guide.md`
+  - `docs\10_architecture.md`
+  - `docs\10_authoritative_sources_and_citations.md`
+  - `docs\10_dependency_graph.md`
+  - `docs\10_miri_guide.md`
+  - `docs\10_sccache_setup.md`
+  - `docs\10_terminology_standard.md`
+  - `docs\archive\c_class_audit_2026_06_08\00_master_index.md`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_google_rust_mapping.md`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+  - `docs\archive\c_class_audit_2026_06_08\02_reference\02_platform_support_matrix.md`
+  - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
+  - `docs\archive\c_class_audit_2026_06_08\04_thinking\04_multi_dimensional_concept_matrix.md`
+  - `docs\archive\c_class_audit_2026_06_08\05_guides\05_final_documentation_completion_guide.md`
+  - `docs\archive\c_class_audit_2026_06_08\05_guides\05_performance_testing_report.md`
+  - `docs\archive\c_class_audit_2026_06_08\07_future\07_rust_project_goals_2026_matrix.md`
+  - `docs\archive\c_class_audit_2026_06_08\07_project\07_project_critical_evaluation_report_2026_02.md`
+  - `docs\archive\c_class_audit_2026_06_08\10_project_structure.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\COMPLETION_REPORT_V3.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\COMPLETION_ROADMAP_2026_Q1.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\COMPLETION_SYNTHESIS_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\CONTENT_UPDATE_SUMMARY_2026_03_12.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\DOCUMENT_INDEX_MASTER.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\FINAL_COMPLETE_STATUS_100_PERCENT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\FINAL_COMPLETION_CERTIFICATION_2026_03_13.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\FINAL_EXECUTIVE_SUMMARY_V2.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\LEARNING_ROADMAP_DETAILED.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\MASTER_INDEX_AUTO.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\PHASE2_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\PROOF_STRATEGIES.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\READING_GUIDE.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_100%_COMPLETE_FINAL.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_100_PERCENT_COMPLETION_FINAL.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_100_PERCENT_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_ALIGNMENT_FINAL_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_ALIGNMENT_PROGRESS.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_ALIGNMENT_SUMMARY_2026_03_12.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_FINAL_100_PERCENT_SUMMARY.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_FINAL_COMPLETION.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_FINAL_SUMMARY.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_PO_100_PERCENT_FINAL.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_TRUE_100_PERCENT_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\SEMANTIC_EXPANSION_ROADMAP.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\TECHNICAL_DEBT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\ULTIMATE_COMPREHENSIVE_GUIDE.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\VERSION_ANNOTATION_GUIDELINE.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-06_100_PERCENT_COMPLETION_FINAL_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-06_TRUE_100_PERCENT_COMPLETION_CERTIFICATION.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-07_ADMIT_CLEARANCE_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-07_FINAL_100_PERCENT_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-07_SEMANTIC_EXPANSION_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-07_SEMANTIC_MODELS_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-09_CONTINUOUS_IMPROVEMENT_REPORT.md`
+  - `docs\archive\duplicate_content_2026_06_08\10_tree_borrows_authoritative_guide.md`
+  - `docs\content\academic\10_tree_borrows_guide.md`
+  - `docs\content\ecosystem\README.md`
+  - `docs\content\representations\10_knowledge_representation_matrix.md`
+  - `docs\research_notes\10_research_notes_organization.md`
+  - `docs\research_notes\10_safe_unsafe_comprehensive_analysis.md`
+  - `docs\research_notes\10_theorem_rust_example_mapping.md`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+  - `docs\research_notes\formal_methods\10_variance_concept_mindmap.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\00_crate_architecture_master_index.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\01_serde_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\02_tower_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\03_diesel_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\04_clap_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_sqlx_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_tonic_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_reqwest_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_wasm_bindgen_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\11_wgpu_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\12_actix_web_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\13_rayon_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\14_nalgebra_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\15_sqlx_advanced_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\18_tracing_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\19_crossbeam_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\20_ratatui_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\21_mio_architecture.md`
+  - `docs\research_notes\type_theory\10_lifetime_formalization.md`
+  - `docs\research_notes\type_theory\10_variance_theory.md`
+  - `docs\rust-formal-engineering-system\00_master_index.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\11_benchmark_minimal_guide.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-01-linear-logic.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-03-separation-logic-deep.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-03-separation-logic.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-04-theory-connections.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-01-ownership-rules.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-02-borrowing-system.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-04-runtime-vs-compile-time.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\borrowing-in-depth.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\interior-mutability.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\lifetimes-mastery.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\ownership-deep-dive.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\polonius-borrow-checker.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\trait-system.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\ownership-counterexamples.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\short-concepts\borrowing-concept-card.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\short-concepts\lifetime-concept-card.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview-deep.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-02-creusot-deep-dive.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-03-miri-deep-dive.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-06-verus-guide.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-07-refinedrust-deep-dive.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-08-gillian-rust.md`
+  - `docs\rust-ownership-decidability\04-decidability-analysis\04-01-type-inference.md`
+  - `docs\rust-ownership-decidability\04-decidability-analysis\04-02-borrow-checking.md`
+  - `docs\rust-ownership-decidability\05-comparative-study\05-01-linear-vs-affine.md`
+  - `docs\rust-ownership-decidability\05-comparative-study\05-04-rust-vs-java.md`
+  - `docs\rust-ownership-decidability\05-comparative-study\05-05-rust-vs-swift.md`
+  - `docs\rust-ownership-decidability\06-visualizations\06-01-concept-matrix.md`
+  - `docs\rust-ownership-decidability\06-visualizations\06-02-decision-trees.md`
+  - `docs\rust-ownership-decidability\06-visualizations\06-03-architecture-diagrams.md`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `docs\rust-ownership-decidability\08-advanced-topics\08-01-const-generics.md`
+  - `docs\rust-ownership-decidability\08-advanced-topics\data-layout.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-01-future-directions.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-02-type-system-extensions.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-03-verification-advancements.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-04-ownership-variations.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-05-ai-integration.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-07-std-verification-initiative.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\rust-1.93-features-analysis.md`
+  - `docs\rust-ownership-decidability\100_PERCENT_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\11-02-idiomatic-patterns.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\11-03-type-state-pattern.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\creational\builder.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\creational\factory.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\structural\decorator.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-03-message-passing-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-05-async-patterns-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-05-async-patterns.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-07-distributed-patterns.md`
+  - `docs\rust-ownership-decidability\13-architecture-patterns\clean-architecture.md`
+  - `docs\rust-ownership-decidability\14-distributed-systems\13-01-distributed-patterns.md`
+  - `docs\rust-ownership-decidability\14-distributed-systems\consensus-patterns.md`
+  - `docs\rust-ownership-decidability\15-application-domains\data-engineering.md`
+  - `docs\rust-ownership-decidability\15-application-domains\systems-programming.md`
+  - `docs\rust-ownership-decidability\15-application-domains\web-development.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00a-lambda-calculus.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00b-type-theory-basics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00c-operational-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00d-denotational-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00e-axiomatic-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-semantic-framework.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-workflow-patterns-master-index.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\08-workflow-patterns-index.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\09-workflow-ownership-analysis.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\COMPREHENSIVE_ANALYSIS_AND_ROADMAP.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\TOPIC_COVERAGE_MATRIX.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\01-message-passing-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\02-rpc-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\03-event-driven-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\04-service-discovery-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\consistency\01-cap-theorem.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\consistency\02-consensus-algorithms.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\consistency\03-eventual-consistency.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\consistency\05-distributed-locks.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\fault-tolerance\01-failure-models.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\microservices\05-bulkhead-pattern.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\01-thread-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\02-lock-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\03-condition-variable-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\04-semaphore-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\05-barrier-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\06-memory-ordering-deep.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\01-reborrow-trait-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\02-coerceshared-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\03-const-generics-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\04-precise-capturing-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\06-array-windows-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\01-sequence.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\02-parallel-split.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\03-synchronization.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\04-exclusive-choice.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\05-simple-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\06-multi-choice.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\07-sync-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\09-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\10-arbitrary-cycles.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\11-implicit-termination.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\12-mi-without-sync.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\13-mi-with-design-time-knowledge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\13-mi-with-sync.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\14-deferred-choice.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\14-mi-with-runtime-knowledge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\15-interleaved-routing.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\16-milestone.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\17-critical-section.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\20-cancel-case.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\22-recursion.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\23-transient-trigger.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\24-persistent-trigger.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\25-cancel-region.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\26-cancel-multiple-instance-activity.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\27-complete-multiple-instance-activity.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\28-blocking-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\29-cancelling-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\30-structured-partial-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\31-blocking-partial-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\32-cancelling-partial-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\33-generalised-and-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\37-local-synchronizing-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\38-general-synchronizing-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\40-interleaved-routing.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\41-thread-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\42-thread-split.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\43-explicit-termination.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\02-raw-pointers.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\03-unsafe-functions.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\04-extern-ffi.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\05-uninitialized-memory.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\06-maybe-uninit.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\07-drop-flags.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\08-aliasing.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\09-atomics.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\10-inline-asm.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\11-impl-vec.md`
+  - `docs\rust-ownership-decidability\AUDIT_REPORTS_INDEX.md`
+  - `docs\rust-ownership-decidability\COMPARATIVE_ANALYSIS.md`
+  - `docs\rust-ownership-decidability\COMPILATION_VERIFICATION_REPORT.md`
+  - `docs\rust-ownership-decidability\COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md`
+  - `docs\rust-ownership-decidability\COMPREHENSIVE_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\COMPREHENSIVE_FAQ.md`
+  - `docs\rust-ownership-decidability\COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md`
+  - `docs\rust-ownership-decidability\CONCEPT_MAP.md`
+  - `docs\rust-ownership-decidability\CONTENT_ASSOCIATION_ANALYSIS.md`
+  - `docs\rust-ownership-decidability\CONTENT_TEMPLATE_L2.md`
+  - `docs\rust-ownership-decidability\CONTINUOUS_IMPROVEMENT_ACTION_PLAN.md`
+  - `docs\rust-ownership-decidability\CROSS_REFERENCE_VERIFICATION_SUMMARY.md`
+  - `docs\rust-ownership-decidability\ERROR_DIAGNOSTICS_GUIDE.md`
+  - `docs\rust-ownership-decidability\EXECUTIVE_SUMMARY_AND_RECOMMENDATIONS.md`
+  - `docs\rust-ownership-decidability\FAQ_COMPREHENSIVE.md`
+  - `docs\rust-ownership-decidability\FINAL_100_PERCENT_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\FINAL_ASSOCIATION_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\FINAL_COMPLETION_CERTIFICATE.md`
+  - `docs\rust-ownership-decidability\FINAL_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\FINAL_DOCUMENTATION.md`
+  - `docs\rust-ownership-decidability\FINAL_EXECUTIVE_SUMMARY.md`
+  - `docs\rust-ownership-decidability\FINAL_MASTER_INDEX.md`
+  - `docs\rust-ownership-decidability\FINAL_ULTIMATE_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\FINAL_VERIFICATION_100_PERCENT.md`
+  - `docs\rust-ownership-decidability\FOUNDATIONS_TO_PRACTICE_BRIDGE.md`
+  - `docs\rust-ownership-decidability\FRAMEWORK_ANALYSIS_AND_GAP_REPORT.md`
+  - `docs\rust-ownership-decidability\FRAMEWORK_COMPLETION_SUMMARY.md`
+  - `docs\rust-ownership-decidability\HISTORICAL_EVOLUTION.md`
+  - `docs\rust-ownership-decidability\HORIZONTAL_CONNECTIONS.md`
+  - `docs\rust-ownership-decidability\INITIAL_PHASE_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\INTERACTIVE_LEARNING_GUIDE.md`
+  - `docs\rust-ownership-decidability\MASTER_COMPREHENSIVE_ANALYSIS.md`
+  - `docs\rust-ownership-decidability\NATURAL_LANGUAGE_ARGUMENTATION_INDEX.md`
+  - `docs\rust-ownership-decidability\NATURAL_LANGUAGE_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\OVERVIEW_AND_INTUITION.md`
+  - `docs\rust-ownership-decidability\PROJECT_COMPREHENSIVE_AUDIT_REPORT.md`
+  - `docs\rust-ownership-decidability\PROJECT_STRUCTURE.md`
+  - `docs\rust-ownership-decidability\QUICK_REFERENCE_CARD.md`
+  - `docs\rust-ownership-decidability\RESEARCH_TRACKING_SYSTEM.md`
+  - `docs\rust-ownership-decidability\RUST_194_ALIGNMENT_PLAN.md`
+  - `docs\rust-ownership-decidability\RUST_194_VS_193_COMPARISON.md`
+  - `docs\rust-ownership-decidability\RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md`
+  - `docs\rust-ownership-decidability\THEOREM_DEPENDENCY_GRAPH.md`
+  - `docs\rust-ownership-decidability\THEOREM_INTUITIONS.md`
+  - `docs\rust-ownership-decidability\THEOREM_TO_COMPILER_BRIDGE.md`
+  - `docs\rust-ownership-decidability\THEORY_TO_PATTERN_BRIDGE.md`
+  - `docs\rust-ownership-decidability\UNIFIED_THEORETICAL_FRAMEWORK.md`
+  - `docs\rust-ownership-decidability\VISUAL_THINKING_GUIDE.md`
+  - `docs\rust-ownership-decidability\actor-specialty\ACTOR_MODEL_DEEP_DIVE.md`
+  - `docs\rust-ownership-decidability\actor-specialty\COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\actor-specialty\case-studies\actix-web-production.md`
+  - `docs\rust-ownership-decidability\actor-specialty\decision-trees\actor-framework-selection.md`
+  - `docs\rust-ownership-decidability\actor-specialty\distributed\distributed-actors-formal.md`
+  - `docs\rust-ownership-decidability\actor-specialty\examples\chat-system-example.md`
+  - `docs\rust-ownership-decidability\actor-specialty\formal-proofs\actor-safety-theorems.md`
+  - `docs\rust-ownership-decidability\actor-specialty\matrices\actor-framework-matrix.md`
+  - `docs\rust-ownership-decidability\actor-specialty\patterns\actor-design-patterns-expanded.md`
+  - `docs\rust-ownership-decidability\actor-specialty\patterns\actor-design-patterns.md`
+  - `docs\rust-ownership-decidability\actor-specialty\scenario-trees\actor-application-domains.md`
+  - `docs\rust-ownership-decidability\actor-specialty\theory\actor-model-foundation.md`
+  - `docs\rust-ownership-decidability\async-specialty\ASYNC_ECOSYSTEM_COMPLETE.md`
+  - `docs\rust-ownership-decidability\async-specialty\COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\async-specialty\authoritative\tokio-deep-dive.md`
+  - `docs\rust-ownership-decidability\async-specialty\ecosystem\IO_URING_DEEP_DIVE.md`
+  - `docs\rust-ownership-decidability\async-specialty\ecosystem\async-ecosystem-landscape.md`
+  - `docs\rust-ownership-decidability\async-specialty\embedded\embassy-guide.md`
+  - `docs\rust-ownership-decidability\async-specialty\network\http-server-patterns.md`
+  - `docs\rust-ownership-decidability\audit_reports\CONTENT_QUALITY_AUDIT.md`
+  - `docs\rust-ownership-decidability\audit_reports\FINAL_COMPLETE_ANALYSIS_REPORT.md`
+  - `docs\rust-ownership-decidability\audit_reports\FINAL_COMPLETION_REPORT_V3.md`
+  - `docs\rust-ownership-decidability\audit_reports\FORMALIZATION_FRAMEWORK.md`
+  - `docs\rust-ownership-decidability\audit_reports\LIBRARY_ANALYSIS_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\audit_reports\PHASE3_LIBRARY_ANALYSIS_REPORT.md`
+  - `docs\rust-ownership-decidability\case-studies\COMPLETE_DOMAIN_COVERAGE_INDEX.md`
+  - `docs\rust-ownership-decidability\case-studies\MODERN_CRATES_EXPANSION_REPORT.md`
+  - `docs\rust-ownership-decidability\case-studies\MODERN_CRATES_FINAL_REPORT.md`
+  - `docs\rust-ownership-decidability\case-studies\MODERN_CRATES_ROUND2_REPORT.md`
+  - `docs\rust-ownership-decidability\case-studies\actix-web-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\alloc-cortex-m-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\anyhow-thiserror-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\async-std-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bevy-ecs-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bytemuck-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bytes-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\chrono-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\clap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\dashmap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\defmt-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\diesel-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\diesel-orm-type-safety.md`
+  - `docs\rust-ownership-decidability\case-studies\embassy-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-graphics-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-storage-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\figment-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\frunk-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\futures-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\generic-array-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\hyper-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\industrial-verification-aws-meta.md`
+  - `docs\rust-ownership-decidability\case-studies\littlefs2-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\nrf-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\ouroboros-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\panic-probe-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\parking_lot-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\pin-project-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\postcard-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\pyo3-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rand-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rayon-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rayon-parallelism.md`
+  - `docs\rust-ownership-decidability\case-studies\reqwest-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rkyv-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rtic-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-formal-analysis-deep.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\smoltcp-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\sqlx-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-future-stream-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-hashmap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-iterator-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-option-result-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-pin-unpin-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-smart-pointers-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-sync-primitives-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-trait-semantics-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\stm32f4xx-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\thiserror-anyhow-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-deep.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-stream-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tonic-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tonic-grpc-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tower-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tracing-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\typenum-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\usb-device-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\wasm-bindgen-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\web-server-architecture.md`
+  - `docs\rust-ownership-decidability\case-studies\zerocopy-formal-analysis.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\async-concurrency-comparison.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\memory-management-comparison.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\refinedrust-vs-rustbelt.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-cpp.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-go.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-java.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-python.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\authoritative-sources\academic-papers.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\case-studies\embassy-embedded-analysis.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\case-studies\tokio-runtime-analysis.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\decision-trees\concurrency-model-selection.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\design-patterns-comprehensive.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\extensions\advanced-ownership-patterns.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\extensions\performance-optimization.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\formal-framework\definitions.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\open-source-analysis.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\proofs\memory-safety-proof.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\scenario-trees\application-domain-tree.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\scenario-trees\real-time-systems-tree.md`
+  - `docs\rust-ownership-decidability\exercises\09-01-practice-problems.md`
+  - `docs\rust-ownership-decidability\extensions\ffi-interoperability.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-01-rustbelt.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-02-ownership-types.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-03-borrow-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-04-lifetime-logic.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-05-move-analysis.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\drop-elaboration-formal.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\executable-semantics-comparison.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\refinedrust-type-system.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\relaxed-memory-model.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\symbolic-borrow-checking.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\tree-borrows-comprehensive.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\ASYNC_ANALYSIS_COMPLETE_INDEX.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\PROOF_PATTERNS.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\affine-logic-decidability.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\async-execution-examples.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\async-execution-model-formal.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\decidability-theorem.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\memory-safety-proof.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\rustbelt-formalization.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\separation-logic-soundness.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\type-ownership-unified-theory.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\logical-relations.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\mechanized-proofs.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\memory-model-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\operational-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\semantics-equivalence-proof.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\type-system-formalization.md`
+  - `docs\rust-ownership-decidability\meta-model\01_abstract_syntax.md`
+  - `docs\rust-ownership-decidability\meta-model\02_semantic_domains.md`
+  - `docs\rust-ownership-decidability\meta-model\03_judgments.md`
+  - `docs\rust-ownership-decidability\meta-model\RUST_194_COMPREHENSIVE_GUIDE.md`
+  - `docs\rust-ownership-decidability\meta-model\rust-194-alignment.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-05_initial_setup.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-06_FORMAL_ANALYSIS_PROGRESS.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-06_week1_progress.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-07_FINAL_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-08_weekend_sprint.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-10_MILESTONE_75_PERCENT.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-11_MILESTONE_90_PERCENT.md`
+  - `docs\rust-ownership-decidability\progress\COMPREHENSIVE_STATUS_REPORT.md`
+  - `docs\rust-ownership-decidability\progress\FINAL_100_PERCENT_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\progress\FINAL_COMPLETION_REPORT_40_PERCENT.md`
+  - `docs\rust-ownership-decidability\ref.md`
+  - `docs\rust-ownership-decidability\theorems\decidability_theorems.md`
+  - `docs\rust-ownership-decidability\visualizations\KNOWLEDGE_GRAPH_MINDMAP.md`
+  - `docs\rust-ownership-decidability\visualizations\concept-matrix.md`
+  - `docs\rust-ownership-decidability\visualizations\decision-trees\type-selection-decision-tree.md`
+  - `docs\rust-ownership-decidability\visualizations\ownership-comprehensive-mindmap.md`
+  - `docs\templates\10_versioned_doc_template.md`
+  - `knowledge\00_start\01_hello_world.md`
+  - `knowledge\00_start\02_installation.md`
+  - `knowledge\00_start\03_learning_roadmap.md`
+  - `knowledge\00_start\04_rust_philosophy.md`
+  - `knowledge\01_fundamentals\02_iterators.md`
+  - `knowledge\02_intermediate\control_flow\02_let_chains.md`
+  - `knowledge\02_intermediate\macros\01_cfg_select.md`
+  - `knowledge\02_intermediate\type_system\01_core_range.md`
+  - `knowledge\03_advanced\async\01_async_closures_2024.md`
+  - `knowledge\03_advanced\unsafe\03_maybe_uninit.md`
+  - `knowledge\04_expert\safety_critical\01_completion_report_100_percent.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\01_academic_research_landscape.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\02_rust_ecosystem_mind_map.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\03_rust_194_195_features_deep_dive.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\01_comprehensive_language_comparison_matrix.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\02_rust_multi_dimensional_matrix.md`
+  - `knowledge\04_expert\safety_critical\02_rust_safety_critical_ecosystem_master_index.md`
+  - `knowledge\04_expert\safety_critical\03_decision_trees\01_rust_decision_trees.md`
+  - `knowledge\04_expert\safety_critical\03_readme_rust_safety_critical_ecosystem.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\03_sustainable_roadmap_and_plans.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\04_technology_watch_and_emerging_trends.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\01_case_study_01_ferrocene_certification.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\02_case_study_02_nasa_cfs_rust.md`
+  - `knowledge\04_expert\safety_critical\08_training\01_assessment_and_certification.md`
+  - `knowledge\04_expert\safety_critical\08_training\02_certification_prep_guide.md`
+  - `knowledge\04_expert\safety_critical\08_training\04_interactive_learning_resources.md`
+  - `knowledge\04_expert\safety_critical\09_reference\04_comprehensive_international_alignment_completion_report.md`
+  - `knowledge\04_expert\safety_critical\09_reference\05_deployment_and_maintenance_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\08_glossary_and_definitions.md`
+  - `knowledge\04_expert\safety_critical\09_reference\09_metrics_and_measurement_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\10_performance_optimization_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\16_supply_chain_security_guide.md`
+  - `knowledge\04_expert\safety_critical\10_standards\04_misra_c_2025_addendum_6_guide.md`
+  - `knowledge\04_expert\safety_critical\10_standards\05_regulatory_landscape_and_approvals.md`
+  - `knowledge\05_reference\02_math_constants.md`
+  - `knowledge\06_ecosystem\01_cargo_basics.md`
+  - `knowledge\06_ecosystem\02_edition_2024.md`
+  - `knowledge\06_ecosystem\README.md`
+  - `knowledge\06_ecosystem\databases\01_sea_orm_deep_dive.md`
+  - `knowledge\06_ecosystem\databases\02_sqlx_deep_dive.md`
+  - `knowledge\06_ecosystem\deep_dives\01_axum_deep_dive.md`
+  - `knowledge\06_ecosystem\deep_dives\02_tokio_deep_dive.md`
+  - `knowledge\06_ecosystem\deployment\01_kubernetes_deployment_guide.md`
+  - `knowledge\06_ecosystem\emerging\01_async_closures.md`
+  - `knowledge\06_ecosystem\emerging\02_generic_const_exprs.md`
+  - `knowledge\06_ecosystem\emerging\03_rust_1_95.md`
+  - `knowledge\06_ecosystem\emerging\04_rust_1_95_preview.md`
+  - `knowledge\06_ecosystem\emerging\05_rust_1_96.md`
+- `https://github.com/rust-lang/rfcs/pull/1937`
+  - `concept\02_intermediate\04_error_handling.md`
+- `https://github.com/rust-lang/rfcs/pull/2504`
+  - `concept\02_intermediate\04_error_handling.md`
+- `https://rust-cli.github.io/book/`
+  - `concept\02_intermediate\04_error_handling.md`
+  - `concept\06_ecosystem\02_patterns.md`
+  - `concept\06_ecosystem\03_core_crates.md`
+  - `concept\06_ecosystem\04_application_domains.md`
+  - `concept\06_ecosystem\25_cli_development.md`
+  - `docs\05_guides\05_cli_applications_guide.md`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+- `https://github.com/rust-lang/rfcs/pull/2091`
+  - `concept\02_intermediate\04_error_handling.md`
+- `https://github.com/rust-lang/rfcs/pull/3058`
+  - `concept\02_intermediate\04_error_handling.md`
+- `https://github.com/rust-lang/rfcs/pull/2005`
+  - `concept\02_intermediate\05_assert_matches.md`
+- `https://github.com/rust-lang/rfcs/pull/3550`
+  - `concept\02_intermediate\06_range_types.md`
+  - `concept\07_future\rust_1_96_stabilized.md`
+  - `knowledge\06_ecosystem\emerging\03_rust_1_95.md`
+- `https://en.cppreference.com/w/cpp/ranges`
+  - `concept\02_intermediate\06_range_types.md`
+- `https://github.com/rust-lang/rfcs/pull/1558`
+  - `concept\02_intermediate\07_closure_types.md`
+- `https://github.com/rust-lang/rfcs/pull/1681`
+  - `concept\02_intermediate\09_serde_patterns.md`
+- `https://github.com/rust-lang/rfcs/pull/2126`
+  - `concept\02_intermediate\10_module_system.md`
+- `https://rust-lang-nursery.github.io/rust-cookbook/`
+  - `concept\02_intermediate\11_cow_and_borrowed.md`
+  - `concept\02_intermediate\14_newtype_and_wrapper.md`
+  - `concept\06_ecosystem\03_core_crates.md`
+  - `concept\06_ecosystem\04_application_domains.md`
+  - `concept\06_ecosystem\05_formal_ecosystem_tower.md`
+  - `concept\06_ecosystem\06_blockchain.md`
+  - `concept\06_ecosystem\10_public_private_deps.md`
+  - `concept\06_ecosystem\15_performance_optimization.md`
+  - `concept\06_ecosystem\16_testing.md`
+  - `concept\06_ecosystem\18_distributed_systems.md`
+  - `concept\06_ecosystem\19_security_practices.md`
+  - `concept\07_future\07_mcdc_coverage_preview.md`
+  - `concept\07_future\09_parallel_frontend_preview.md`
+  - `concept\07_future\13_unsafe_fields_preview.md`
+  - `concept\07_future\14_ferrocene_preview.md`
+  - `concept\07_future\16_cranelift_backend_preview.md`
+  - `concept\07_future\archive\01_ai_integration_original.md`
+  - `concept\archive\01_foundation_03_lifetimes_original.md`
+  - `concept\archive\01_foundation_11_numeric_types_deprecated.md`
+  - `concept\archive\03_advanced_02_async_original.md`
+  - `concept\archive\06_ecosystem_26_game_development_deprecated.md`
+  - `concept\archive\07_future_23_rust_edition_guide_deprecated.md`
+  - `docs\01_cargo_build_optimization.md`
+  - `docs\01_core\01_ownership_borrowing_lifetimes.md`
+  - `docs\01_learning\01_cross_module_learning_roadmap_2025_10_25.md`
+  - `docs\01_learning\01_cross_module_navigation.md`
+  - `docs\01_learning\01_learning_path_guide_2025_10_24.md`
+  - `docs\01_learning\01_learning_path_planning.md`
+  - `docs\01_learning\01_lfrs_certification_mapping.md`
+  - `docs\01_learning\01_mdbook_quiz_guide.md`
+  - `docs\02_reference\02_cross_language_comparison.md`
+  - `docs\02_reference\02_edge_cases_and_special_cases.md`
+  - `docs\02_reference\ALIGNMENT_GUIDE.md`
+  - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_algorithms_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_assert_matches_guide.md`
+  - `docs\02_reference\quick_reference\02_async_patterns.md`
+  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_control_flow_functions_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_error_handling_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_generics_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_network_programming_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_pin_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_process_management_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_rust_195_features_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_rust_196_features_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_smart_pointers_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_strings_formatting_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_type_system.md`
+  - `docs\02_reference\quick_reference\02_wasm_cheatsheet.md`
+  - `docs\03_guides\03_async_closures_deep_dive.md`
+  - `docs\03_guides\03_cxx_interop_guide.md`
+  - `docs\03_guides\03_embassy_deep_dive.md`
+  - `docs\03_guides\03_embedded_rust_guide.md`
+  - `docs\03_guides\03_fuzzing_guide.md`
+  - `docs\03_guides\03_io_uring_guide.md`
+  - `docs\03_guides\03_let_chains_guide.md`
+  - `docs\03_guides\03_libp2p_guide.md`
+  - `docs\03_guides\03_miri_guide.md`
+  - `docs\03_guides\03_quic_http3_guide.md`
+  - `docs\03_guides\03_rust_2024_edition_future_in_prelude.md`
+  - `docs\03_guides\03_rust_2024_edition_rpit_migration.md`
+  - `docs\03_guides\03_semver_checks.md`
+  - `docs\03_guides\03_test_coverage.md`
+  - `docs\03_practice\03_project_01_cli_tool.md`
+  - `docs\04_research\04_cranelift_backend.md`
+  - `docs\04_research\04_llm_c_to_rust_migration.md`
+  - `docs\04_research\04_next_generation_trait_solver.md`
+  - `docs\04_research\04_ng_trait_solver.md`
+  - `docs\04_research\04_polonius_next_gen_borrow_checker.md`
+  - `docs\04_research\04_polonius_tracking.md`
+  - `docs\04_research\04_rust_for_linux.md`
+  - `docs\04_research\04_rust_for_linux_2026.md`
+  - `docs\04_research\04_rust_formal_verification.md`
+  - `docs\04_research\04_safety_critical_alignment_2026.md`
+  - `docs\04_research\04_verusbelt_pldi_2026.md`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+  - `docs\04_thinking\04_applications_analysis_view.md`
+  - `docs\04_thinking\04_thinking_representation_methods.md`
+  - `docs\05_guides\05_advanced_topics_deep_dive.md`
+  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
+  - `docs\05_guides\05_algorithms_usage_guide.md`
+  - `docs\05_guides\05_cli_applications_guide.md`
+  - `docs\05_guides\05_cross_module_integration_examples.md`
+  - `docs\05_guides\05_design_patterns_usage_guide.md`
+  - `docs\05_guides\05_embedded_rust_guide.md`
+  - `docs\05_guides\05_inline_assembly_guide.md`
+  - `docs\05_guides\05_macro_system_usage_guide.md`
+  - `docs\05_guides\05_miri_practical_guide.md`
+  - `docs\05_guides\05_performance_tuning_guide.md`
+  - `docs\05_guides\05_pragmatic_guidelines_checklist.md`
+  - `docs\05_guides\05_safety_tags_guide.md`
+  - `docs\05_guides\05_troubleshooting_guide.md`
+  - `docs\05_guides\05_verus_practical_guide.md`
+  - `docs\05_guides\05_wasm_usage_guide.md`
+  - `docs\05_guides\BEST_PRACTICES.md`
+  - `docs\05_miri_integration_summary.md`
+  - `docs\06_docker_guide.md`
+  - `docs\06_toolchain\01_compiler_features.md`
+  - `docs\06_toolchain\03_rustdoc_advanced.md`
+  - `docs\06_toolchain\06_05_rust_1_93_vs_1_92_comparison.md`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+  - `docs\06_toolchain\06_11_rust_1_93_cargo_rustdoc_changes.md`
+  - `docs\06_toolchain\06_14_rust_1_95_nightly_preview.md`
+  - `docs\06_toolchain\06_cargo_script_guide.md`
+  - `docs\06_toolchain\06_cranelift_backend_guide.md`
+  - `docs\06_toolchain\06_parallel_frontend.md`
+  - `docs\06_toolchain\06_toml_v11_cargo_guide.md`
+  - `docs\07_project\07_extension_deepening_plan_2026.md`
+  - `docs\07_project\07_hierarchy_mapping_master.md`
+  - `docs\07_project\07_knowledge_structure_framework.md`
+  - `docs\07_project\07_project_architecture_guide.md`
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\10_api_guide.md`
+  - `docs\10_architecture.md`
+  - `docs\10_authoritative_sources_and_citations.md`
+  - `docs\10_dependency_graph.md`
+  - `docs\10_miri_guide.md`
+  - `docs\10_sccache_setup.md`
+  - `docs\10_terminology_standard.md`
+  - `docs\archive\c_class_audit_2026_06_08\00_master_index.md`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_google_rust_mapping.md`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+  - `docs\archive\c_class_audit_2026_06_08\02_reference\02_platform_support_matrix.md`
+  - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
+  - `docs\archive\c_class_audit_2026_06_08\04_thinking\04_multi_dimensional_concept_matrix.md`
+  - `docs\archive\c_class_audit_2026_06_08\05_guides\05_final_documentation_completion_guide.md`
+  - `docs\archive\c_class_audit_2026_06_08\05_guides\05_performance_testing_report.md`
+  - `docs\archive\c_class_audit_2026_06_08\05_guides\05_rust_196_guides_index.md`
+  - `docs\archive\c_class_audit_2026_06_08\07_future\07_rust_project_goals_2026_matrix.md`
+  - `docs\archive\c_class_audit_2026_06_08\07_project\07_project_critical_evaluation_report_2026_02.md`
+  - `docs\archive\c_class_audit_2026_06_08\10_project_structure.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\16-program-semantics\EXPANSION_SUMMARY.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\COMPLETION_REPORT_V3.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\COMPLETION_ROADMAP_2026_Q1.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\COMPLETION_SYNTHESIS_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\CONTENT_UPDATE_SUMMARY_2026_03_12.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\DOCUMENT_INDEX_MASTER.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\FINAL_COMPLETE_STATUS_100_PERCENT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\FINAL_COMPLETION_CERTIFICATION_2026_03_13.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\FINAL_EXECUTIVE_SUMMARY_V2.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\LEARNING_ROADMAP_DETAILED.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\MASTER_INDEX_AUTO.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\PHASE2_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\PROOF_STRATEGIES.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\READING_GUIDE.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_100%_COMPLETE_FINAL.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_100_PERCENT_COMPLETION_FINAL.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_100_PERCENT_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_ALIGNMENT_FINAL_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_ALIGNMENT_PROGRESS.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_ALIGNMENT_SUMMARY_2026_03_12.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_FINAL_100_PERCENT_SUMMARY.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_FINAL_COMPLETION.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_FINAL_SUMMARY.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_PO_100_PERCENT_FINAL.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_TRUE_100_PERCENT_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\SEMANTIC_EXPANSION_ROADMAP.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\TECHNICAL_DEBT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\ULTIMATE_COMPREHENSIVE_GUIDE.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\VERSION_ANNOTATION_GUIDELINE.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-06_100_PERCENT_COMPLETION_FINAL_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-06_TRUE_100_PERCENT_COMPLETION_CERTIFICATION.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-07_ADMIT_CLEARANCE_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-07_FINAL_100_PERCENT_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-07_SEMANTIC_EXPANSION_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-07_SEMANTIC_MODELS_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-09_CONTINUOUS_IMPROVEMENT_REPORT.md`
+  - `docs\archive\duplicate_content_2026_06_08\10_tree_borrows_authoritative_guide.md`
+  - `docs\content\academic\10_tree_borrows_guide.md`
+  - `docs\content\representations\10_knowledge_representation_matrix.md`
+  - `docs\research_notes\10_research_notes_organization.md`
+  - `docs\research_notes\10_safe_unsafe_comprehensive_analysis.md`
+  - `docs\research_notes\10_theorem_rust_example_mapping.md`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+  - `docs\research_notes\formal_methods\10_variance_concept_mindmap.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\00_crate_architecture_master_index.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\01_serde_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\02_tower_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\04_clap_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_sqlx_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_tonic_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_reqwest_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_wasm_bindgen_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\12_actix_web_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\13_rayon_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\14_nalgebra_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\15_sqlx_advanced_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\18_tracing_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\19_crossbeam_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\20_ratatui_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\21_mio_architecture.md`
+  - `docs\research_notes\type_theory\10_lifetime_formalization.md`
+  - `docs\research_notes\type_theory\10_variance_theory.md`
+  - `docs\rust-formal-engineering-system\00_master_index.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\11_benchmark_minimal_guide.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-01-linear-logic.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-03-separation-logic-deep.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-03-separation-logic.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-04-theory-connections.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-01-ownership-rules.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-02-borrowing-system.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-04-runtime-vs-compile-time.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\borrowing-in-depth.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\interior-mutability.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\lifetimes-mastery.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\ownership-deep-dive.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\polonius-borrow-checker.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\trait-system.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\ownership-counterexamples.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\short-concepts\borrowing-concept-card.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\short-concepts\lifetime-concept-card.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview-deep.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-02-creusot-deep-dive.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-03-miri-deep-dive.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-06-verus-guide.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-07-refinedrust-deep-dive.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-08-gillian-rust.md`
+  - `docs\rust-ownership-decidability\04-decidability-analysis\04-01-type-inference.md`
+  - `docs\rust-ownership-decidability\04-decidability-analysis\04-02-borrow-checking.md`
+  - `docs\rust-ownership-decidability\05-comparative-study\05-01-linear-vs-affine.md`
+  - `docs\rust-ownership-decidability\05-comparative-study\05-04-rust-vs-java.md`
+  - `docs\rust-ownership-decidability\05-comparative-study\05-05-rust-vs-swift.md`
+  - `docs\rust-ownership-decidability\06-visualizations\06-01-concept-matrix.md`
+  - `docs\rust-ownership-decidability\06-visualizations\06-02-decision-trees.md`
+  - `docs\rust-ownership-decidability\06-visualizations\06-03-architecture-diagrams.md`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+  - `docs\rust-ownership-decidability\07-references\bibliography.md`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `docs\rust-ownership-decidability\08-advanced-topics\08-01-const-generics.md`
+  - `docs\rust-ownership-decidability\08-advanced-topics\data-layout.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-01-future-directions.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-02-type-system-extensions.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-03-verification-advancements.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-04-ownership-variations.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-05-ai-integration.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-07-std-verification-initiative.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\rust-1.93-features-analysis.md`
+  - `docs\rust-ownership-decidability\100_PERCENT_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\11-02-idiomatic-patterns.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\11-03-type-state-pattern.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\behavioral\command.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\creational\builder.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\creational\factory.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\structural\decorator.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-03-message-passing-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-05-async-patterns-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-05-async-patterns.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-07-distributed-patterns.md`
+  - `docs\rust-ownership-decidability\13-architecture-patterns\clean-architecture.md`
+  - `docs\rust-ownership-decidability\14-distributed-systems\13-01-distributed-patterns.md`
+  - `docs\rust-ownership-decidability\14-distributed-systems\consensus-patterns.md`
+  - `docs\rust-ownership-decidability\15-application-domains\data-engineering.md`
+  - `docs\rust-ownership-decidability\15-application-domains\systems-programming.md`
+  - `docs\rust-ownership-decidability\15-application-domains\web-development.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00a-lambda-calculus.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00b-type-theory-basics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00c-operational-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00d-denotational-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00e-axiomatic-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-semantic-framework.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-workflow-patterns-master-index.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\08-workflow-patterns-index.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\09-workflow-ownership-analysis.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\COMPREHENSIVE_ANALYSIS_AND_ROADMAP.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\TOPIC_COVERAGE_MATRIX.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\01-message-passing-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\02-rpc-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\03-event-driven-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\04-service-discovery-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\consistency\01-cap-theorem.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\consistency\02-consensus-algorithms.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\consistency\03-eventual-consistency.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\consistency\05-distributed-locks.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\fault-tolerance\01-failure-models.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\fault-tolerance\04-timeout-patterns.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\microservices\05-bulkhead-pattern.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\01-thread-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\02-lock-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\03-condition-variable-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\04-semaphore-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\05-barrier-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\06-memory-ordering-deep.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\01-reborrow-trait-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\02-coerceshared-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\03-const-generics-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\04-precise-capturing-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\06-array-windows-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\01-sequence.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\02-parallel-split.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\03-synchronization.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\04-exclusive-choice.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\05-simple-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\06-multi-choice.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\07-sync-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\08-multi-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\09-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\10-arbitrary-cycles.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\11-implicit-termination.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\12-mi-without-sync.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\13-mi-with-design-time-knowledge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\13-mi-with-sync.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\14-deferred-choice.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\14-mi-with-runtime-knowledge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\15-interleaved-routing.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\16-milestone.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\17-critical-section.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\18-cancel-activity.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\20-cancel-case.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\22-recursion.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\23-transient-trigger.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\24-persistent-trigger.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\25-cancel-region.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\26-cancel-multiple-instance-activity.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\27-complete-multiple-instance-activity.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\28-blocking-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\29-cancelling-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\30-structured-partial-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\31-blocking-partial-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\32-cancelling-partial-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\33-generalised-and-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\37-local-synchronizing-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\38-general-synchronizing-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\40-interleaved-routing.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\41-thread-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\42-thread-split.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\43-explicit-termination.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\02-raw-pointers.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\03-unsafe-functions.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\04-extern-ffi.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\05-uninitialized-memory.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\06-maybe-uninit.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\07-drop-flags.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\08-aliasing.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\09-atomics.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\10-inline-asm.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\11-impl-vec.md`
+  - `docs\rust-ownership-decidability\AUDIT_REPORTS_INDEX.md`
+  - `docs\rust-ownership-decidability\COMPARATIVE_ANALYSIS.md`
+  - `docs\rust-ownership-decidability\COMPILATION_VERIFICATION_REPORT.md`
+  - `docs\rust-ownership-decidability\COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md`
+  - `docs\rust-ownership-decidability\COMPREHENSIVE_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\COMPREHENSIVE_FAQ.md`
+  - `docs\rust-ownership-decidability\COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md`
+  - `docs\rust-ownership-decidability\CONCEPT_MAP.md`
+  - `docs\rust-ownership-decidability\CONTENT_ASSOCIATION_ANALYSIS.md`
+  - `docs\rust-ownership-decidability\CONTENT_TEMPLATE_L2.md`
+  - `docs\rust-ownership-decidability\CONTINUOUS_IMPROVEMENT_ACTION_PLAN.md`
+  - `docs\rust-ownership-decidability\CROSS_REFERENCE_VERIFICATION_SUMMARY.md`
+  - `docs\rust-ownership-decidability\ERROR_DIAGNOSTICS_GUIDE.md`
+  - `docs\rust-ownership-decidability\EXECUTIVE_SUMMARY_AND_RECOMMENDATIONS.md`
+  - `docs\rust-ownership-decidability\FAQ_COMPREHENSIVE.md`
+  - `docs\rust-ownership-decidability\FINAL_100_PERCENT_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\FINAL_ASSOCIATION_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\FINAL_COMPLETION_CERTIFICATE.md`
+  - `docs\rust-ownership-decidability\FINAL_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\FINAL_DOCUMENTATION.md`
+  - `docs\rust-ownership-decidability\FINAL_EXECUTIVE_SUMMARY.md`
+  - `docs\rust-ownership-decidability\FINAL_MASTER_INDEX.md`
+  - `docs\rust-ownership-decidability\FINAL_ULTIMATE_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\FINAL_VERIFICATION_100_PERCENT.md`
+  - `docs\rust-ownership-decidability\FOUNDATIONS_TO_PRACTICE_BRIDGE.md`
+  - `docs\rust-ownership-decidability\FRAMEWORK_ANALYSIS_AND_GAP_REPORT.md`
+  - `docs\rust-ownership-decidability\FRAMEWORK_COMPLETION_SUMMARY.md`
+  - `docs\rust-ownership-decidability\HISTORICAL_EVOLUTION.md`
+  - `docs\rust-ownership-decidability\HORIZONTAL_CONNECTIONS.md`
+  - `docs\rust-ownership-decidability\INITIAL_PHASE_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\INTERACTIVE_LEARNING_GUIDE.md`
+  - `docs\rust-ownership-decidability\MASTER_COMPREHENSIVE_ANALYSIS.md`
+  - `docs\rust-ownership-decidability\NATURAL_LANGUAGE_ARGUMENTATION_INDEX.md`
+  - `docs\rust-ownership-decidability\NATURAL_LANGUAGE_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\OVERVIEW_AND_INTUITION.md`
+  - `docs\rust-ownership-decidability\PROJECT_COMPREHENSIVE_AUDIT_REPORT.md`
+  - `docs\rust-ownership-decidability\PROJECT_STRUCTURE.md`
+  - `docs\rust-ownership-decidability\QUICK_REFERENCE_CARD.md`
+  - `docs\rust-ownership-decidability\RESEARCH_TRACKING_SYSTEM.md`
+  - `docs\rust-ownership-decidability\RUST_194_ALIGNMENT_PLAN.md`
+  - `docs\rust-ownership-decidability\RUST_194_VS_193_COMPARISON.md`
+  - `docs\rust-ownership-decidability\RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md`
+  - `docs\rust-ownership-decidability\THEOREM_DEPENDENCY_GRAPH.md`
+  - `docs\rust-ownership-decidability\THEOREM_INTUITIONS.md`
+  - `docs\rust-ownership-decidability\THEOREM_TO_COMPILER_BRIDGE.md`
+  - `docs\rust-ownership-decidability\THEORY_TO_PATTERN_BRIDGE.md`
+  - `docs\rust-ownership-decidability\UNIFIED_THEORETICAL_FRAMEWORK.md`
+  - `docs\rust-ownership-decidability\VISUAL_THINKING_GUIDE.md`
+  - `docs\rust-ownership-decidability\actor-specialty\ACTOR_MODEL_DEEP_DIVE.md`
+  - `docs\rust-ownership-decidability\actor-specialty\COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\actor-specialty\case-studies\actix-web-production.md`
+  - `docs\rust-ownership-decidability\actor-specialty\decision-trees\actor-framework-selection.md`
+  - `docs\rust-ownership-decidability\actor-specialty\distributed\distributed-actors-formal.md`
+  - `docs\rust-ownership-decidability\actor-specialty\examples\chat-system-example.md`
+  - `docs\rust-ownership-decidability\actor-specialty\formal-proofs\actor-safety-theorems.md`
+  - `docs\rust-ownership-decidability\actor-specialty\matrices\actor-framework-matrix.md`
+  - `docs\rust-ownership-decidability\actor-specialty\patterns\actor-design-patterns-expanded.md`
+  - `docs\rust-ownership-decidability\actor-specialty\patterns\actor-design-patterns.md`
+  - `docs\rust-ownership-decidability\actor-specialty\scenario-trees\actor-application-domains.md`
+  - `docs\rust-ownership-decidability\actor-specialty\theory\actor-model-foundation.md`
+  - `docs\rust-ownership-decidability\async-specialty\ASYNC_ECOSYSTEM_COMPLETE.md`
+  - `docs\rust-ownership-decidability\async-specialty\COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\async-specialty\authoritative\tokio-deep-dive.md`
+  - `docs\rust-ownership-decidability\async-specialty\ecosystem\IO_URING_DEEP_DIVE.md`
+  - `docs\rust-ownership-decidability\async-specialty\ecosystem\async-ecosystem-landscape.md`
+  - `docs\rust-ownership-decidability\async-specialty\embedded\embassy-guide.md`
+  - `docs\rust-ownership-decidability\async-specialty\network\http-server-patterns.md`
+  - `docs\rust-ownership-decidability\audit_reports\CONTENT_QUALITY_AUDIT.md`
+  - `docs\rust-ownership-decidability\audit_reports\FINAL_COMPLETE_ANALYSIS_REPORT.md`
+  - `docs\rust-ownership-decidability\audit_reports\FINAL_COMPLETION_REPORT_V3.md`
+  - `docs\rust-ownership-decidability\audit_reports\FORMALIZATION_FRAMEWORK.md`
+  - `docs\rust-ownership-decidability\audit_reports\LIBRARY_ANALYSIS_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\audit_reports\PHASE3_LIBRARY_ANALYSIS_REPORT.md`
+  - `docs\rust-ownership-decidability\case-studies\COMPLETE_DOMAIN_COVERAGE_INDEX.md`
+  - `docs\rust-ownership-decidability\case-studies\MODERN_CRATES_EXPANSION_REPORT.md`
+  - `docs\rust-ownership-decidability\case-studies\MODERN_CRATES_FINAL_REPORT.md`
+  - `docs\rust-ownership-decidability\case-studies\MODERN_CRATES_ROUND2_REPORT.md`
+  - `docs\rust-ownership-decidability\case-studies\actix-web-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\alloc-cortex-m-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\anyhow-thiserror-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\async-std-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bevy-ecs-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bytemuck-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bytes-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\chrono-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\clap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\dashmap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\defmt-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\diesel-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\diesel-orm-type-safety.md`
+  - `docs\rust-ownership-decidability\case-studies\embassy-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-graphics-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-storage-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\figment-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\frunk-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\futures-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\generic-array-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\hyper-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\industrial-verification-aws-meta.md`
+  - `docs\rust-ownership-decidability\case-studies\littlefs2-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\nrf-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\ouroboros-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\panic-probe-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\parking_lot-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\pin-project-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\postcard-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\pyo3-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rand-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rayon-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rayon-parallelism.md`
+  - `docs\rust-ownership-decidability\case-studies\reqwest-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rkyv-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rtic-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-formal-analysis-deep.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\smoltcp-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\sqlx-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-future-stream-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-hashmap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-iterator-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-option-result-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-pin-unpin-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-smart-pointers-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-sync-primitives-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-trait-semantics-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\stm32f4xx-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\thiserror-anyhow-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-deep.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-stream-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tonic-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tonic-grpc-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tower-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tracing-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\typenum-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\usb-device-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\wasm-bindgen-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\web-server-architecture.md`
+  - `docs\rust-ownership-decidability\case-studies\zerocopy-formal-analysis.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\async-concurrency-comparison.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\memory-management-comparison.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\refinedrust-vs-rustbelt.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-cpp.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-go.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-java.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-python.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\authoritative-sources\academic-papers.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\case-studies\embassy-embedded-analysis.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\case-studies\tokio-runtime-analysis.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\decision-trees\concurrency-model-selection.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\decision-trees\pattern-selection.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\design-patterns-comprehensive.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\extensions\advanced-ownership-patterns.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\extensions\performance-optimization.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\formal-framework\definitions.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\matrices\safety-analysis-matrix.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\open-source-analysis.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\proofs\memory-safety-proof.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\scenario-trees\application-domain-tree.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\scenario-trees\real-time-systems-tree.md`
+  - `docs\rust-ownership-decidability\exercises\09-01-practice-problems.md`
+  - `docs\rust-ownership-decidability\exercises\ADVANCED_OWNERSHIP_WORKSHOP.md`
+  - `docs\rust-ownership-decidability\extensions\ffi-interoperability.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-01-rustbelt.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-02-ownership-types.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-03-borrow-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-04-lifetime-logic.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-05-move-analysis.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\drop-elaboration-formal.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\executable-semantics-comparison.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\refinedrust-type-system.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\relaxed-memory-model.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\symbolic-borrow-checking.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\tree-borrows-comprehensive.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\ASYNC_ANALYSIS_COMPLETE_INDEX.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\PROOF_PATTERNS.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\affine-logic-decidability.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\async-execution-examples.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\async-execution-model-formal.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\decidability-theorem.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\memory-safety-proof.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\rustbelt-formalization.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\separation-logic-soundness.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\type-ownership-unified-theory.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\logical-relations.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\mechanized-proofs.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\memory-model-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\operational-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\semantics-equivalence-proof.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\type-system-formalization.md`
+  - `docs\rust-ownership-decidability\meta-model\01_abstract_syntax.md`
+  - `docs\rust-ownership-decidability\meta-model\02_semantic_domains.md`
+  - `docs\rust-ownership-decidability\meta-model\03_judgments.md`
+  - `docs\rust-ownership-decidability\meta-model\RUST_194_COMPREHENSIVE_GUIDE.md`
+  - `docs\rust-ownership-decidability\meta-model\rust-194-alignment.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-05_initial_setup.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-06_FORMAL_ANALYSIS_PROGRESS.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-06_week1_progress.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-07_CONTENT_CREATION_BATCH_1.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-07_FINAL_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-08_weekend_sprint.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-09_50_PERCENT_MILESTONE.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-09_phase1_completion.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-10_MILESTONE_75_PERCENT.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-11_MILESTONE_90_PERCENT.md`
+  - `docs\rust-ownership-decidability\progress\COMPREHENSIVE_STATUS_REPORT.md`
+  - `docs\rust-ownership-decidability\progress\FINAL_100_PERCENT_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\progress\FINAL_COMPLETION_REPORT_40_PERCENT.md`
+  - `docs\rust-ownership-decidability\progress\PROGRESS_TRACKING.md`
+  - `docs\rust-ownership-decidability\ref.md`
+  - `docs\rust-ownership-decidability\theorems\decidability_theorems.md`
+  - `docs\rust-ownership-decidability\visualizations\KNOWLEDGE_GRAPH_MINDMAP.md`
+  - `docs\rust-ownership-decidability\visualizations\concept-matrix.md`
+  - `docs\rust-ownership-decidability\visualizations\decision-trees\type-selection-decision-tree.md`
+  - `docs\rust-ownership-decidability\visualizations\ownership-comprehensive-mindmap.md`
+  - `docs\templates\10_versioned_doc_template.md`
+  - `knowledge\00_start\01_hello_world.md`
+  - `knowledge\00_start\02_installation.md`
+  - `knowledge\00_start\03_learning_roadmap.md`
+  - `knowledge\00_start\04_rust_philosophy.md`
+  - `knowledge\01_fundamentals\02_iterators.md`
+  - `knowledge\02_intermediate\README.md`
+  - `knowledge\02_intermediate\control_flow\02_let_chains.md`
+  - `knowledge\02_intermediate\macros\01_cfg_select.md`
+  - `knowledge\02_intermediate\type_system\01_core_range.md`
+  - `knowledge\03_advanced\async\01_async_closures_2024.md`
+  - `knowledge\03_advanced\macros\README.md`
+  - `knowledge\03_advanced\unsafe\03_maybe_uninit.md`
+  - `knowledge\04_expert\academic\01_coq_formalization_guide.md`
+  - `knowledge\04_expert\academic\02_tree_borrows_authoritative_guide.md`
+  - `knowledge\04_expert\safety_critical\01_completion_report_100_percent.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\01_academic_research_landscape.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\03_rust_194_195_features_deep_dive.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\01_comprehensive_language_comparison_matrix.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\02_rust_multi_dimensional_matrix.md`
+  - `knowledge\04_expert\safety_critical\02_rust_safety_critical_ecosystem_master_index.md`
+  - `knowledge\04_expert\safety_critical\03_decision_trees\01_rust_decision_trees.md`
+  - `knowledge\04_expert\safety_critical\03_decision_trees\02_safety_integrity_level_selection_guide.md`
+  - `knowledge\04_expert\safety_critical\03_readme_rust_safety_critical_ecosystem.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\03_sustainable_roadmap_and_plans.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\04_technology_watch_and_emerging_trends.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\01_case_study_01_ferrocene_certification.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\02_case_study_02_nasa_cfs_rust.md`
+  - `knowledge\04_expert\safety_critical\08_training\01_assessment_and_certification.md`
+  - `knowledge\04_expert\safety_critical\08_training\02_certification_prep_guide.md`
+  - `knowledge\04_expert\safety_critical\08_training\04_interactive_learning_resources.md`
+  - `knowledge\04_expert\safety_critical\09_reference\01_api_design_guidelines.md`
+  - `knowledge\04_expert\safety_critical\09_reference\04_comprehensive_international_alignment_completion_report.md`
+  - `knowledge\04_expert\safety_critical\09_reference\05_deployment_and_maintenance_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\07_ffi_integration_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\08_glossary_and_definitions.md`
+  - `knowledge\04_expert\safety_critical\09_reference\09_metrics_and_measurement_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\10_performance_optimization_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\13_rust_safety_critical_coding_guidelines.md`
+  - `knowledge\04_expert\safety_critical\09_reference\15_security_audit_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\16_supply_chain_security_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\17_toolchain_setup_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\18_tools_configuration_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\19_troubleshooting_and_debugging_guide.md`
+  - `knowledge\04_expert\safety_critical\10_standards\02_iec_61508_rust_implementation_guide.md`
+  - `knowledge\04_expert\safety_critical\10_standards\03_iso_26262_rust_implementation_guide.md`
+  - `knowledge\04_expert\safety_critical\10_standards\04_misra_c_2025_addendum_6_guide.md`
+  - `knowledge\04_expert\safety_critical\10_standards\05_regulatory_landscape_and_approvals.md`
+  - `knowledge\05_reference\02_math_constants.md`
+  - `knowledge\05_reference\guides\01_ai_assisted_rust_programming_guide_2025.md`
+  - `knowledge\06_ecosystem\README.md`
+  - `knowledge\06_ecosystem\deployment\01_kubernetes_deployment_guide.md`
+  - `knowledge\06_ecosystem\emerging\05_rust_1_96.md`
+- `https://nnethercote.github.io/perf-book/concurrency.html`
+  - `concept\02_intermediate\12_smart_pointers.md`
+- `https://docs.rs/nom/latest/nom/`
+  - `concept\02_intermediate\13_dsl_and_embedding.md`
+- `https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/`
+  - `concept\02_intermediate\13_dsl_and_embedding.md`
+  - `concept\02_intermediate\14_newtype_and_wrapper.md`
+  - `concept\06_ecosystem\19_security_practices.md`
+- `https://github.com/rust-unofficial/awesome-rust`
+  - `concept\02_intermediate\13_dsl_and_embedding.md`
+  - `knowledge\00_start\03_learning_roadmap.md`
+- `https://github.com/dtolnay/proc-macro-workshop`
+  - `concept\02_intermediate\13_dsl_and_embedding.md`
+  - `concept\02_intermediate\17_macro_patterns.md`
+  - `concept\02_intermediate\21_metaprogramming.md`
+  - `concept\03_advanced\07_proc_macro.md`
+  - `knowledge\03_advanced\macros\02_procedural.md`
+- `https://rust-unofficial.github.io/patterns/patterns/behavioural/newtype.html`
+  - `concept\02_intermediate\14_newtype_and_wrapper.md`
+- `https://docs.rs/uom/latest/uom/`
+  - `concept\02_intermediate\14_newtype_and_wrapper.md`
+- `https://docs.rs/derive_more/latest/derive_more/`
+  - `concept\02_intermediate\14_newtype_and_wrapper.md`
+- `https://github.com/rust-lang/project-error-handling`
+  - `concept\02_intermediate\15_error_handling_deep_dive.md`
+- `https://docs.rs/itertools/latest/itertools/`
+  - `concept\02_intermediate\16_iterator_patterns.md`
+- `https://users.rust-lang.org/t/iterator-mistakes/`
+  - `concept\02_intermediate\16_iterator_patterns.md`
+- `https://docs.rs/serde_derive/latest/serde_derive/`
+  - `concept\02_intermediate\17_macro_patterns.md`
+- `https://docs.rs/paste/latest/paste/`
+  - `concept\02_intermediate\17_macro_patterns.md`
+- `https://docs.rs/syn/latest/syn/`
+  - `concept\02_intermediate\21_metaprogramming.md`
+  - `concept\03_advanced\04_macros.md`
+  - `concept\03_advanced\07_proc_macro.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\04_clap_architecture.md`
+  - `knowledge\03_advanced\macros\02_procedural.md`
+- `https://docs.rs/quote/latest/quote/`
+  - `concept\02_intermediate\21_metaprogramming.md`
+  - `concept\03_advanced\04_macros.md`
+  - `concept\03_advanced\07_proc_macro.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\04_clap_architecture.md`
+  - `knowledge\03_advanced\macros\02_procedural.md`
+- `https://docs.rs/proc-macro2/latest/proc_macro2/`
+  - `concept\02_intermediate\21_metaprogramming.md`
+  - `concept\03_advanced\04_macros.md`
+  - `concept\03_advanced\07_proc_macro.md`
+- `https://github.com/rust-lang/rfcs/blob/master/text/0911-const-fn.md`
+  - `concept\02_intermediate\21_metaprogramming.md`
+- `https://rust-analyzer.github.io/manual.html#macro-expansion`
+  - `concept\02_intermediate\21_metaprogramming.md`
+- `https://github.com/serde-rs/serde`
+  - `concept\02_intermediate\21_metaprogramming.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `knowledge\03_advanced\macros\02_procedural.md`
+- `https://google.github.io/comprehensive-rust/idiomatic/foundations-api-design/predictable-api.html`
+  - `concept\02_intermediate\22_api_naming_conventions.md`
+- `https://quinedot.github.io/rust-learning/dyn-any.html`
+  - `concept\02_intermediate\25_rtti_and_dynamic_typing.md`
+- `https://rust-how-to.org/patterns/dynamic-typing.html`
+  - `concept\02_intermediate\25_rtti_and_dynamic_typing.md`
+- `https://en.cppreference.com/w/cpp/language/typeid`
+  - `concept\02_intermediate\25_rtti_and_dynamic_typing.md`
+  - `concept\05_comparative\16_cpp_rust_surface_features.md`
+- `https://en.cppreference.com/w/cpp/language/dynamic_cast`
+  - `concept\02_intermediate\25_rtti_and_dynamic_typing.md`
+  - `concept\05_comparative\16_cpp_rust_surface_features.md`
+- `https://en.cppreference.com/w/c/preprocessor`
+  - `concept\02_intermediate\26_c_preprocessor_vs_rust_macros.md`
+- `https://google.github.io/comprehensive-rust/android/interoperability/cpp/cpp-exception.html`
+  - `concept\02_intermediate\27_exception_safety_rust_cpp.md`
+- `https://en.cppreference.com/w/cpp/language/exceptions`
+  - `concept\02_intermediate\27_exception_safety_rust_cpp.md`
+- `https://en.cppreference.com/w/cpp/language/noexcept`
+  - `concept\02_intermediate\27_exception_safety_rust_cpp.md`
+- `https://en.cppreference.com/w/cpp/language/exceptions#Exception_safety`
+  - `concept\02_intermediate\27_exception_safety_rust_cpp.md`
+- `https://en.cppreference.com/w/cpp/language/constructor`
+  - `concept\02_intermediate\28_construction_and_initialization.md`
+  - `concept\05_comparative\16_cpp_rust_surface_features.md`
+- `https://en.cppreference.com/w/cpp/language/default_constructor`
+  - `concept\02_intermediate\28_construction_and_initialization.md`
+- `https://en.cppreference.com/w/cpp/language/copy_constructor`
+  - `concept\02_intermediate\28_construction_and_initialization.md`
+- `https://en.cppreference.com/w/cpp/language/friend`
+  - `concept\02_intermediate\29_friend_vs_module_privacy.md`
+  - `concept\05_comparative\16_cpp_rust_surface_features.md`
+- `https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-member`
+  - `concept\02_intermediate\29_friend_vs_module_privacy.md`
+- `https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-class`
+  - `concept\02_intermediate\29_friend_vs_module_privacy.md`
+- `https://doi.org/10.1145/3735592`
+  - `concept\03_advanced\00_before_formal.md`
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\10_authoritative_sources_and_citations.md`
+  - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
+- `https://docs.rs/`
+  - `concept\03_advanced\01_concurrency.md`
+  - `concept\07_future\archive\01_ai_integration_original.md`
+  - `concept\archive\01_foundation_03_lifetimes_original.md`
+  - `concept\archive\01_foundation_11_numeric_types_deprecated.md`
+  - `concept\archive\03_advanced_02_async_original.md`
+  - `docs\01_cargo_build_optimization.md`
+  - `docs\01_core\01_ownership_borrowing_lifetimes.md`
+  - `docs\01_learning\01_cross_module_learning_roadmap_2025_10_25.md`
+  - `docs\01_learning\01_cross_module_navigation.md`
+  - `docs\01_learning\01_learning_path_guide_2025_10_24.md`
+  - `docs\01_learning\01_learning_path_planning.md`
+  - `docs\01_learning\01_lfrs_certification_mapping.md`
+  - `docs\01_learning\01_mdbook_quiz_guide.md`
+  - `docs\02_reference\02_cross_language_comparison.md`
+  - `docs\02_reference\02_edge_cases_and_special_cases.md`
+  - `docs\02_reference\ALIGNMENT_GUIDE.md`
+  - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_algorithms_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_assert_matches_guide.md`
+  - `docs\02_reference\quick_reference\02_async_patterns.md`
+  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_control_flow_functions_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_error_handling_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_generics_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_network_programming_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_process_management_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_rust_196_features_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_smart_pointers_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_strings_formatting_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_type_system.md`
+  - `docs\02_reference\quick_reference\02_wasm_cheatsheet.md`
+  - `docs\03_guides\03_async_closures_deep_dive.md`
+  - `docs\03_guides\03_cxx_interop_guide.md`
+  - `docs\03_guides\03_embassy_deep_dive.md`
+  - `docs\03_guides\03_embedded_rust_guide.md`
+  - `docs\03_guides\03_fuzzing_guide.md`
+  - `docs\03_guides\03_io_uring_guide.md`
+  - `docs\03_guides\03_let_chains_guide.md`
+  - `docs\03_guides\03_libp2p_guide.md`
+  - `docs\03_guides\03_miri_guide.md`
+  - `docs\03_guides\03_quic_http3_guide.md`
+  - `docs\03_guides\03_rust_2024_edition_future_in_prelude.md`
+  - `docs\03_guides\03_rust_2024_edition_rpit_migration.md`
+  - `docs\03_guides\03_semver_checks.md`
+  - `docs\03_guides\03_test_coverage.md`
+  - `docs\03_practice\03_project_01_cli_tool.md`
+  - `docs\04_research\04_cranelift_backend.md`
+  - `docs\04_research\04_llm_c_to_rust_migration.md`
+  - `docs\04_research\04_next_generation_trait_solver.md`
+  - `docs\04_research\04_ng_trait_solver.md`
+  - `docs\04_research\04_polonius_next_gen_borrow_checker.md`
+  - `docs\04_research\04_polonius_tracking.md`
+  - `docs\04_research\04_rust_for_linux.md`
+  - `docs\04_research\04_rust_formal_verification.md`
+  - `docs\04_research\04_safety_critical_alignment_2026.md`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+  - `docs\04_thinking\04_applications_analysis_view.md`
+  - `docs\04_thinking\04_thinking_representation_methods.md`
+  - `docs\05_guides\05_advanced_topics_deep_dive.md`
+  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
+  - `docs\05_guides\05_cli_applications_guide.md`
+  - `docs\05_guides\05_embedded_rust_guide.md`
+  - `docs\05_guides\05_inline_assembly_guide.md`
+  - `docs\05_guides\05_performance_tuning_guide.md`
+  - `docs\05_guides\05_pragmatic_guidelines_checklist.md`
+  - `docs\05_guides\05_troubleshooting_guide.md`
+  - `docs\05_guides\05_wasm_usage_guide.md`
+  - `docs\05_guides\BEST_PRACTICES.md`
+  - `docs\05_miri_integration_summary.md`
+  - `docs\06_docker_guide.md`
+  - `docs\06_toolchain\01_compiler_features.md`
+  - `docs\06_toolchain\03_rustdoc_advanced.md`
+  - `docs\06_toolchain\06_05_rust_1_93_vs_1_92_comparison.md`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+  - `docs\06_toolchain\06_14_rust_1_95_nightly_preview.md`
+  - `docs\06_toolchain\06_parallel_frontend.md`
+  - `docs\06_toolchain\06_toml_v11_cargo_guide.md`
+  - `docs\07_project\07_extension_deepening_plan_2026.md`
+  - `docs\07_project\07_hierarchy_mapping_master.md`
+  - `docs\07_project\07_knowledge_structure_framework.md`
+  - `docs\07_project\07_project_architecture_guide.md`
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\10_api_guide.md`
+  - `docs\10_architecture.md`
+  - `docs\10_authoritative_sources_and_citations.md`
+  - `docs\10_dependency_graph.md`
+  - `docs\10_miri_guide.md`
+  - `docs\10_sccache_setup.md`
+  - `docs\10_terminology_standard.md`
+  - `docs\archive\c_class_audit_2026_06_08\00_master_index.md`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_google_rust_mapping.md`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+  - `docs\archive\c_class_audit_2026_06_08\02_reference\02_platform_support_matrix.md`
+  - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
+  - `docs\archive\c_class_audit_2026_06_08\04_thinking\04_multi_dimensional_concept_matrix.md`
+  - `docs\archive\c_class_audit_2026_06_08\05_guides\05_final_documentation_completion_guide.md`
+  - `docs\archive\c_class_audit_2026_06_08\05_guides\05_performance_testing_report.md`
+  - `docs\archive\c_class_audit_2026_06_08\05_guides\05_rust_196_guides_index.md`
+  - `docs\archive\c_class_audit_2026_06_08\07_future\07_rust_project_goals_2026_matrix.md`
+  - `docs\archive\c_class_audit_2026_06_08\07_project\07_project_critical_evaluation_report_2026_02.md`
+  - `docs\archive\c_class_audit_2026_06_08\10_project_structure.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\COMPLETION_REPORT_V3.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\COMPLETION_ROADMAP_2026_Q1.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\COMPLETION_SYNTHESIS_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\CONTENT_UPDATE_SUMMARY_2026_03_12.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\DOCUMENT_INDEX_MASTER.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\FINAL_COMPLETE_STATUS_100_PERCENT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\FINAL_COMPLETION_CERTIFICATION_2026_03_13.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\FINAL_EXECUTIVE_SUMMARY_V2.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\LEARNING_ROADMAP_DETAILED.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\MASTER_INDEX_AUTO.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\PHASE2_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\PROOF_STRATEGIES.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\READING_GUIDE.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_100%_COMPLETE_FINAL.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_100_PERCENT_COMPLETION_FINAL.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_100_PERCENT_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_ALIGNMENT_FINAL_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_ALIGNMENT_PROGRESS.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_ALIGNMENT_SUMMARY_2026_03_12.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_FINAL_100_PERCENT_SUMMARY.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_FINAL_COMPLETION.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_FINAL_SUMMARY.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_PO_100_PERCENT_FINAL.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_TRUE_100_PERCENT_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\SEMANTIC_EXPANSION_ROADMAP.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\TECHNICAL_DEBT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\ULTIMATE_COMPREHENSIVE_GUIDE.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\VERSION_ANNOTATION_GUIDELINE.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-06_100_PERCENT_COMPLETION_FINAL_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-06_TRUE_100_PERCENT_COMPLETION_CERTIFICATION.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-07_ADMIT_CLEARANCE_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-07_FINAL_100_PERCENT_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-07_SEMANTIC_EXPANSION_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-07_SEMANTIC_MODELS_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-09_CONTINUOUS_IMPROVEMENT_REPORT.md`
+  - `docs\archive\duplicate_content_2026_06_08\10_tree_borrows_authoritative_guide.md`
+  - `docs\content\academic\10_tree_borrows_guide.md`
+  - `docs\content\representations\10_knowledge_representation_matrix.md`
+  - `docs\research_notes\10_research_notes_organization.md`
+  - `docs\research_notes\10_safe_unsafe_comprehensive_analysis.md`
+  - `docs\research_notes\10_theorem_rust_example_mapping.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\00_crate_architecture_master_index.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\01_serde_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\02_tower_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\03_diesel_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\04_clap_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_sqlx_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_tonic_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_reqwest_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_wasm_bindgen_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\11_wgpu_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\12_actix_web_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\13_rayon_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\14_nalgebra_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\15_sqlx_advanced_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\18_tracing_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\19_crossbeam_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\20_ratatui_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\21_mio_architecture.md`
+  - `docs\research_notes\type_theory\10_lifetime_formalization.md`
+  - `docs\research_notes\type_theory\10_variance_theory.md`
+  - `docs\rust-formal-engineering-system\00_master_index.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\11_benchmark_minimal_guide.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-01-linear-logic.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-03-separation-logic-deep.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-03-separation-logic.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-04-theory-connections.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-01-ownership-rules.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-02-borrowing-system.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-04-runtime-vs-compile-time.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\borrowing-in-depth.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\interior-mutability.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\lifetimes-mastery.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\ownership-deep-dive.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\polonius-borrow-checker.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\trait-system.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\ownership-counterexamples.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\short-concepts\borrowing-concept-card.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\short-concepts\lifetime-concept-card.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview-deep.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-02-creusot-deep-dive.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-03-miri-deep-dive.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-06-verus-guide.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-07-refinedrust-deep-dive.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-08-gillian-rust.md`
+  - `docs\rust-ownership-decidability\04-decidability-analysis\04-01-type-inference.md`
+  - `docs\rust-ownership-decidability\04-decidability-analysis\04-02-borrow-checking.md`
+  - `docs\rust-ownership-decidability\05-comparative-study\05-01-linear-vs-affine.md`
+  - `docs\rust-ownership-decidability\05-comparative-study\05-04-rust-vs-java.md`
+  - `docs\rust-ownership-decidability\05-comparative-study\05-05-rust-vs-swift.md`
+  - `docs\rust-ownership-decidability\06-visualizations\06-01-concept-matrix.md`
+  - `docs\rust-ownership-decidability\06-visualizations\06-02-decision-trees.md`
+  - `docs\rust-ownership-decidability\06-visualizations\06-03-architecture-diagrams.md`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `docs\rust-ownership-decidability\08-advanced-topics\08-01-const-generics.md`
+  - `docs\rust-ownership-decidability\08-advanced-topics\data-layout.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-01-future-directions.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-02-type-system-extensions.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-03-verification-advancements.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-04-ownership-variations.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-05-ai-integration.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-07-std-verification-initiative.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\rust-1.93-features-analysis.md`
+  - `docs\rust-ownership-decidability\100_PERCENT_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\11-02-idiomatic-patterns.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\11-03-type-state-pattern.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\creational\builder.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\creational\factory.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\structural\decorator.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-03-message-passing-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-05-async-patterns.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-07-distributed-patterns.md`
+  - `docs\rust-ownership-decidability\13-architecture-patterns\clean-architecture.md`
+  - `docs\rust-ownership-decidability\14-distributed-systems\13-01-distributed-patterns.md`
+  - `docs\rust-ownership-decidability\14-distributed-systems\consensus-patterns.md`
+  - `docs\rust-ownership-decidability\15-application-domains\data-engineering.md`
+  - `docs\rust-ownership-decidability\15-application-domains\systems-programming.md`
+  - `docs\rust-ownership-decidability\15-application-domains\web-development.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00a-lambda-calculus.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00b-type-theory-basics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00c-operational-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00d-denotational-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00e-axiomatic-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-semantic-framework.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-workflow-patterns-master-index.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\08-workflow-patterns-index.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\09-workflow-ownership-analysis.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\COMPREHENSIVE_ANALYSIS_AND_ROADMAP.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\TOPIC_COVERAGE_MATRIX.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\01-message-passing-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\02-rpc-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\03-event-driven-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\04-service-discovery-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\consistency\01-cap-theorem.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\consistency\02-consensus-algorithms.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\consistency\03-eventual-consistency.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\consistency\05-distributed-locks.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\fault-tolerance\01-failure-models.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\microservices\05-bulkhead-pattern.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\01-thread-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\02-lock-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\03-condition-variable-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\04-semaphore-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\05-barrier-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\06-memory-ordering-deep.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\01-reborrow-trait-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\02-coerceshared-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\03-const-generics-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\04-precise-capturing-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\06-array-windows-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\01-sequence.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\02-parallel-split.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\03-synchronization.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\04-exclusive-choice.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\05-simple-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\06-multi-choice.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\07-sync-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\09-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\10-arbitrary-cycles.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\11-implicit-termination.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\12-mi-without-sync.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\13-mi-with-design-time-knowledge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\13-mi-with-sync.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\14-deferred-choice.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\14-mi-with-runtime-knowledge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\15-interleaved-routing.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\16-milestone.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\17-critical-section.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\20-cancel-case.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\22-recursion.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\23-transient-trigger.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\24-persistent-trigger.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\25-cancel-region.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\26-cancel-multiple-instance-activity.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\27-complete-multiple-instance-activity.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\28-blocking-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\29-cancelling-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\30-structured-partial-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\31-blocking-partial-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\32-cancelling-partial-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\33-generalised-and-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\37-local-synchronizing-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\40-interleaved-routing.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\41-thread-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\42-thread-split.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\43-explicit-termination.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\02-raw-pointers.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\03-unsafe-functions.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\04-extern-ffi.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\05-uninitialized-memory.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\06-maybe-uninit.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\07-drop-flags.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\08-aliasing.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\09-atomics.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\10-inline-asm.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\11-impl-vec.md`
+  - `docs\rust-ownership-decidability\AUDIT_REPORTS_INDEX.md`
+  - `docs\rust-ownership-decidability\COMPARATIVE_ANALYSIS.md`
+  - `docs\rust-ownership-decidability\COMPILATION_VERIFICATION_REPORT.md`
+  - `docs\rust-ownership-decidability\COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md`
+  - `docs\rust-ownership-decidability\COMPREHENSIVE_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\COMPREHENSIVE_FAQ.md`
+  - `docs\rust-ownership-decidability\COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md`
+  - `docs\rust-ownership-decidability\CONCEPT_MAP.md`
+  - `docs\rust-ownership-decidability\CONTENT_ASSOCIATION_ANALYSIS.md`
+  - `docs\rust-ownership-decidability\CONTENT_TEMPLATE_L2.md`
+  - `docs\rust-ownership-decidability\CONTINUOUS_IMPROVEMENT_ACTION_PLAN.md`
+  - `docs\rust-ownership-decidability\CROSS_REFERENCE_VERIFICATION_SUMMARY.md`
+  - `docs\rust-ownership-decidability\ERROR_DIAGNOSTICS_GUIDE.md`
+  - `docs\rust-ownership-decidability\EXECUTIVE_SUMMARY_AND_RECOMMENDATIONS.md`
+  - `docs\rust-ownership-decidability\FAQ_COMPREHENSIVE.md`
+  - `docs\rust-ownership-decidability\FINAL_100_PERCENT_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\FINAL_ASSOCIATION_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\FINAL_COMPLETION_CERTIFICATE.md`
+  - `docs\rust-ownership-decidability\FINAL_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\FINAL_DOCUMENTATION.md`
+  - `docs\rust-ownership-decidability\FINAL_EXECUTIVE_SUMMARY.md`
+  - `docs\rust-ownership-decidability\FINAL_MASTER_INDEX.md`
+  - `docs\rust-ownership-decidability\FINAL_ULTIMATE_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\FINAL_VERIFICATION_100_PERCENT.md`
+  - `docs\rust-ownership-decidability\FOUNDATIONS_TO_PRACTICE_BRIDGE.md`
+  - `docs\rust-ownership-decidability\FRAMEWORK_ANALYSIS_AND_GAP_REPORT.md`
+  - `docs\rust-ownership-decidability\FRAMEWORK_COMPLETION_SUMMARY.md`
+  - `docs\rust-ownership-decidability\HISTORICAL_EVOLUTION.md`
+  - `docs\rust-ownership-decidability\HORIZONTAL_CONNECTIONS.md`
+  - `docs\rust-ownership-decidability\INITIAL_PHASE_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\INTERACTIVE_LEARNING_GUIDE.md`
+  - `docs\rust-ownership-decidability\MASTER_COMPREHENSIVE_ANALYSIS.md`
+  - `docs\rust-ownership-decidability\NATURAL_LANGUAGE_ARGUMENTATION_INDEX.md`
+  - `docs\rust-ownership-decidability\NATURAL_LANGUAGE_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\OVERVIEW_AND_INTUITION.md`
+  - `docs\rust-ownership-decidability\PROJECT_COMPREHENSIVE_AUDIT_REPORT.md`
+  - `docs\rust-ownership-decidability\PROJECT_STRUCTURE.md`
+  - `docs\rust-ownership-decidability\QUICK_REFERENCE_CARD.md`
+  - `docs\rust-ownership-decidability\RESEARCH_TRACKING_SYSTEM.md`
+  - `docs\rust-ownership-decidability\RUST_194_ALIGNMENT_PLAN.md`
+  - `docs\rust-ownership-decidability\RUST_194_VS_193_COMPARISON.md`
+  - `docs\rust-ownership-decidability\RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md`
+  - `docs\rust-ownership-decidability\THEOREM_DEPENDENCY_GRAPH.md`
+  - `docs\rust-ownership-decidability\THEOREM_INTUITIONS.md`
+  - `docs\rust-ownership-decidability\THEOREM_TO_COMPILER_BRIDGE.md`
+  - `docs\rust-ownership-decidability\THEORY_TO_PATTERN_BRIDGE.md`
+  - `docs\rust-ownership-decidability\UNIFIED_THEORETICAL_FRAMEWORK.md`
+  - `docs\rust-ownership-decidability\VISUAL_THINKING_GUIDE.md`
+  - `docs\rust-ownership-decidability\actor-specialty\ACTOR_MODEL_DEEP_DIVE.md`
+  - `docs\rust-ownership-decidability\actor-specialty\COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\actor-specialty\case-studies\actix-web-production.md`
+  - `docs\rust-ownership-decidability\actor-specialty\decision-trees\actor-framework-selection.md`
+  - `docs\rust-ownership-decidability\actor-specialty\distributed\distributed-actors-formal.md`
+  - `docs\rust-ownership-decidability\actor-specialty\examples\chat-system-example.md`
+  - `docs\rust-ownership-decidability\actor-specialty\formal-proofs\actor-safety-theorems.md`
+  - `docs\rust-ownership-decidability\actor-specialty\patterns\actor-design-patterns-expanded.md`
+  - `docs\rust-ownership-decidability\actor-specialty\patterns\actor-design-patterns.md`
+  - `docs\rust-ownership-decidability\actor-specialty\scenario-trees\actor-application-domains.md`
+  - `docs\rust-ownership-decidability\actor-specialty\theory\actor-model-foundation.md`
+  - `docs\rust-ownership-decidability\async-specialty\ASYNC_ECOSYSTEM_COMPLETE.md`
+  - `docs\rust-ownership-decidability\async-specialty\COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\async-specialty\authoritative\tokio-deep-dive.md`
+  - `docs\rust-ownership-decidability\async-specialty\ecosystem\IO_URING_DEEP_DIVE.md`
+  - `docs\rust-ownership-decidability\async-specialty\ecosystem\async-ecosystem-landscape.md`
+  - `docs\rust-ownership-decidability\async-specialty\embedded\embassy-guide.md`
+  - `docs\rust-ownership-decidability\async-specialty\network\http-server-patterns.md`
+  - `docs\rust-ownership-decidability\audit_reports\CONTENT_QUALITY_AUDIT.md`
+  - `docs\rust-ownership-decidability\audit_reports\FINAL_COMPLETE_ANALYSIS_REPORT.md`
+  - `docs\rust-ownership-decidability\audit_reports\FINAL_COMPLETION_REPORT_V3.md`
+  - `docs\rust-ownership-decidability\audit_reports\FORMALIZATION_FRAMEWORK.md`
+  - `docs\rust-ownership-decidability\audit_reports\LIBRARY_ANALYSIS_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\audit_reports\PHASE3_LIBRARY_ANALYSIS_REPORT.md`
+  - `docs\rust-ownership-decidability\case-studies\COMPLETE_DOMAIN_COVERAGE_INDEX.md`
+  - `docs\rust-ownership-decidability\case-studies\MODERN_CRATES_FINAL_REPORT.md`
+  - `docs\rust-ownership-decidability\case-studies\MODERN_CRATES_ROUND2_REPORT.md`
+  - `docs\rust-ownership-decidability\case-studies\actix-web-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\alloc-cortex-m-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\anyhow-thiserror-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\async-std-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bevy-ecs-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bytemuck-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bytes-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\chrono-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\clap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\dashmap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\defmt-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\diesel-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\diesel-orm-type-safety.md`
+  - `docs\rust-ownership-decidability\case-studies\embassy-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-graphics-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-storage-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\figment-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\frunk-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\generic-array-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\hyper-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\industrial-verification-aws-meta.md`
+  - `docs\rust-ownership-decidability\case-studies\littlefs2-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\nrf-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\ouroboros-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\panic-probe-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\parking_lot-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\pin-project-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\postcard-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\pyo3-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rand-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rayon-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rayon-parallelism.md`
+  - `docs\rust-ownership-decidability\case-studies\reqwest-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rkyv-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rtic-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-formal-analysis-deep.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\smoltcp-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\sqlx-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-future-stream-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-hashmap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-iterator-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-option-result-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-pin-unpin-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-smart-pointers-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-sync-primitives-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-trait-semantics-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\stm32f4xx-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\thiserror-anyhow-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-deep.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-stream-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tonic-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tonic-grpc-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tower-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tracing-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\typenum-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\usb-device-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\wasm-bindgen-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\web-server-architecture.md`
+  - `docs\rust-ownership-decidability\case-studies\zerocopy-formal-analysis.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\async-concurrency-comparison.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\memory-management-comparison.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\refinedrust-vs-rustbelt.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-cpp.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-go.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-java.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-python.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\authoritative-sources\academic-papers.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\case-studies\embassy-embedded-analysis.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\case-studies\tokio-runtime-analysis.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\decision-trees\concurrency-model-selection.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\design-patterns-comprehensive.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\extensions\advanced-ownership-patterns.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\extensions\performance-optimization.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\formal-framework\definitions.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\open-source-analysis.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\proofs\memory-safety-proof.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\scenario-trees\application-domain-tree.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\scenario-trees\real-time-systems-tree.md`
+  - `docs\rust-ownership-decidability\exercises\09-01-practice-problems.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-01-rustbelt.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-02-ownership-types.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-03-borrow-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-04-lifetime-logic.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-05-move-analysis.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\drop-elaboration-formal.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\executable-semantics-comparison.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\refinedrust-type-system.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\relaxed-memory-model.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\symbolic-borrow-checking.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\tree-borrows-comprehensive.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\ASYNC_ANALYSIS_COMPLETE_INDEX.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\PROOF_PATTERNS.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\affine-logic-decidability.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\async-execution-examples.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\async-execution-model-formal.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\decidability-theorem.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\rustbelt-formalization.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\separation-logic-soundness.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\type-ownership-unified-theory.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\logical-relations.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\mechanized-proofs.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\memory-model-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\operational-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\semantics-equivalence-proof.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\type-system-formalization.md`
+  - `docs\rust-ownership-decidability\meta-model\01_abstract_syntax.md`
+  - `docs\rust-ownership-decidability\meta-model\02_semantic_domains.md`
+  - `docs\rust-ownership-decidability\meta-model\03_judgments.md`
+  - `docs\rust-ownership-decidability\meta-model\RUST_194_COMPREHENSIVE_GUIDE.md`
+  - `docs\rust-ownership-decidability\meta-model\rust-194-alignment.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-05_initial_setup.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-06_FORMAL_ANALYSIS_PROGRESS.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-06_week1_progress.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-07_FINAL_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-08_weekend_sprint.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-10_MILESTONE_75_PERCENT.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-11_MILESTONE_90_PERCENT.md`
+  - `docs\rust-ownership-decidability\progress\COMPREHENSIVE_STATUS_REPORT.md`
+  - `docs\rust-ownership-decidability\progress\FINAL_100_PERCENT_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\progress\FINAL_COMPLETION_REPORT_40_PERCENT.md`
+  - `docs\rust-ownership-decidability\ref.md`
+  - `docs\rust-ownership-decidability\theorems\decidability_theorems.md`
+  - `docs\rust-ownership-decidability\visualizations\KNOWLEDGE_GRAPH_MINDMAP.md`
+  - `docs\rust-ownership-decidability\visualizations\concept-matrix.md`
+  - `docs\rust-ownership-decidability\visualizations\decision-trees\type-selection-decision-tree.md`
+  - `docs\templates\10_versioned_doc_template.md`
+  - `knowledge\00_start\01_hello_world.md`
+  - `knowledge\00_start\02_installation.md`
+  - `knowledge\00_start\03_learning_roadmap.md`
+  - `knowledge\00_start\04_rust_philosophy.md`
+  - `knowledge\01_fundamentals\02_iterators.md`
+  - `knowledge\02_intermediate\control_flow\02_let_chains.md`
+  - `knowledge\02_intermediate\macros\01_cfg_select.md`
+  - `knowledge\02_intermediate\type_system\01_core_range.md`
+  - `knowledge\03_advanced\async\01_async_closures_2024.md`
+  - `knowledge\03_advanced\unsafe\03_maybe_uninit.md`
+  - `knowledge\04_expert\safety_critical\01_completion_report_100_percent.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\01_academic_research_landscape.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\03_rust_194_195_features_deep_dive.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\01_comprehensive_language_comparison_matrix.md`
+  - `knowledge\04_expert\safety_critical\02_rust_safety_critical_ecosystem_master_index.md`
+  - `knowledge\04_expert\safety_critical\03_decision_trees\01_rust_decision_trees.md`
+  - `knowledge\04_expert\safety_critical\03_readme_rust_safety_critical_ecosystem.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\03_sustainable_roadmap_and_plans.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\04_technology_watch_and_emerging_trends.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\01_case_study_01_ferrocene_certification.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\02_case_study_02_nasa_cfs_rust.md`
+  - `knowledge\04_expert\safety_critical\08_training\01_assessment_and_certification.md`
+  - `knowledge\04_expert\safety_critical\08_training\02_certification_prep_guide.md`
+  - `knowledge\04_expert\safety_critical\08_training\04_interactive_learning_resources.md`
+  - `knowledge\04_expert\safety_critical\09_reference\04_comprehensive_international_alignment_completion_report.md`
+  - `knowledge\04_expert\safety_critical\09_reference\08_glossary_and_definitions.md`
+  - `knowledge\04_expert\safety_critical\09_reference\09_metrics_and_measurement_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\10_performance_optimization_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\16_supply_chain_security_guide.md`
+  - `knowledge\04_expert\safety_critical\10_standards\04_misra_c_2025_addendum_6_guide.md`
+  - `knowledge\04_expert\safety_critical\10_standards\05_regulatory_landscape_and_approvals.md`
+  - `knowledge\05_reference\02_math_constants.md`
+  - `knowledge\06_ecosystem\README.md`
+  - `knowledge\06_ecosystem\emerging\05_rust_1_96.md`
+- `https://docs.rs/parking_lot/`
+  - `concept\03_advanced\01_concurrency.md`
+  - `docs\rust-ownership-decidability\case-studies\parking_lot-formal-analysis.md`
+- `https://docs.rs/crossbeam-channel/`
+  - `concept\03_advanced\01_concurrency.md`
+- `https://github.com/rust-lang/rfcs/pull/2592`
+  - `concept\03_advanced\02_async.md`
+  - `concept\03_advanced\02_async_advanced.md`
+  - `concept\03_advanced\06_pin_unpin.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-deep.md`
+- `https://docs.rs/async-trait/latest/async_trait/`
+  - `concept\03_advanced\02_async.md`
+- `https://docs.rs/tokio/`
+  - `concept\03_advanced\02_async_advanced.md`
+  - `concept\03_advanced\02_async_patterns.md`
+  - `concept\03_advanced\18_network_programming.md`
+  - `concept\03_advanced\20_stream_processing_semantics.md`
+  - `concept\05_comparative\11_rust_vs_kotlin.md`
+  - `concept\05_comparative\12_rust_vs_scala.md`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+  - `concept\06_ecosystem\03_core_crates.md`
+  - `concept\06_ecosystem\04_application_domains.md`
+  - `concept\06_ecosystem\12_testing_strategies.md`
+  - `concept\06_ecosystem\18_distributed_systems.md`
+  - `concept\06_ecosystem\24_cloud_native.md`
+  - `concept\06_ecosystem\30_system_composability.md`
+  - `concept\06_ecosystem\32_event_driven_architecture.md`
+  - `concept\06_ecosystem\36_stream_processing_ecosystem.md`
+  - `concept\06_ecosystem\38_network_protocols.md`
+  - `concept\06_ecosystem\40_reactive_programming.md`
+  - `concept\07_future\18_async_drop_preview.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\08-workflow-patterns-index.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\21-structured-loop.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\25-cancel-region.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\41-thread-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\42-thread-split.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\43-explicit-termination.md`
+  - `docs\rust-ownership-decidability\async-specialty\README.md`
+  - `docs\rust-ownership-decidability\case-studies\bytes-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-future-stream-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-deep.md`
+- `https://docs.rs/futures/`
+  - `concept\03_advanced\02_async_advanced.md`
+  - `concept\03_advanced\02_async_patterns.md`
+  - `concept\03_advanced\20_stream_processing_semantics.md`
+  - `concept\06_ecosystem\36_stream_processing_ecosystem.md`
+  - `concept\06_ecosystem\40_reactive_programming.md`
+  - `docs\rust-ownership-decidability\case-studies\futures-crate-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-pin-unpin-formal-analysis.md`
+- `https://docs.rs/tokio/latest/tokio/macro.select.html`
+  - `concept\03_advanced\02_async_patterns.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
+- `https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html`
+  - `concept\03_advanced\02_async_patterns.md`
+  - `concept\06_ecosystem\40_reactive_programming.md`
+  - `concept\06_ecosystem\48_data_engineering.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
+- `https://docs.rs/loom`
+  - `concept\03_advanced\03_unsafe.md`
+- `https://github.com/model-checking/kani`
+  - `concept\03_advanced\03_unsafe.md`
+  - `concept\04_formal\05_verification_toolchain.md`
+  - `concept\04_formal\13_formal_methods.md`
+  - `concept\04_formal\32_kani.md`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+  - `concept\07_future\02_formal_methods.md`
+  - `docs\04_research\04_llm_c_to_rust_migration.md`
+  - `docs\05_guides\05_kani_practical_guide.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\ULTIMATE_COMPREHENSIVE_GUIDE.md`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+  - `docs\archive\rust-ownership-chinese\rust_ownership_semantics_complete_analysis.md`
+  - `docs\archive\rust-ownership-chinese\rust_ownership_semantics_complete_analysis_v2.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-08-gillian-rust.md`
+  - `docs\rust-ownership-decidability\07-references\README.md`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-07-std-verification-initiative.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+  - `docs\rust-ownership-decidability\case-studies\industrial-verification-aws-meta.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\mechanized-proofs.md`
+- `https://github.com/rust-lang/rfcs/pull/1184`
+  - `concept\03_advanced\03_unsafe.md`
+- `https://docs.rs/proc-macro-error2/latest/proc_macro_error2/`
+  - `concept\03_advanced\04_macros.md`
+- `https://github.com/rust-lang/rfcs/pull/2564`
+  - `concept\03_advanced\04_macros.md`
+- `https://github.com/mozilla/cbindgen`
+  - `concept\03_advanced\05_rust_ffi.md`
+  - `concept\03_advanced\09_ffi_advanced.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\04-extern-ffi.md`
+- `https://docs.rs/libc/latest/libc/`
+  - `concept\03_advanced\05_rust_ffi.md`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://github.com/rust-lang/rfcs/pull/2349`
+  - `concept\03_advanced\06_pin_unpin.md`
+- `https://github.com/rust-lang/rust/issues/55766`
+  - `concept\03_advanced\06_pin_unpin.md`
+- `https://docs.rs/pin-project/latest/pin_project/`
+  - `concept\03_advanced\06_pin_unpin.md`
+  - `concept\03_advanced\18_network_programming.md`
+- `https://github.com/rust-lang/rfcs/pull/1566`
+  - `concept\03_advanced\07_proc_macro.md`
+- `https://github.com/serde-rs/serde/tree/master/serde_derive`
+  - `concept\03_advanced\07_proc_macro.md`
+- `https://github.com/rust-lang/polonius`
+  - `concept\03_advanced\08_nll_and_polonius.md`
+  - `concept\04_formal\03_ownership_formal.md`
+  - `concept\04_formal\28_borrow_checking_decidability.md`
+  - `concept\07_future\03_evolution.md`
+  - `docs\04_research\04_polonius_next_gen_borrow_checker.md`
+  - `docs\research_notes\type_theory\10_lifetime_formalization.md`
+  - `docs\rust-ownership-decidability\RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md`
+  - `docs\rust-ownership-decidability\formal-foundations\RUST_FORMAL_SEMANTICS_DEEP.md`
+- `https://github.com/rust-lang/polonius/blob/master/README.md`
+  - `concept\03_advanced\08_nll_and_polonius.md`
+- `https://github.com/rust-lang/rust/issues/43234`
+  - `concept\03_advanced\08_nll_and_polonius.md`
+- `https://docs.rs/crossbeam/latest/crossbeam/`
+  - `concept\03_advanced\10_concurrency_patterns.md`
+  - `concept\03_advanced\11_atomics_and_memory_ordering.md`
+  - `concept\03_advanced\16_lock_free.md`
+  - `concept\06_ecosystem\03_core_crates.md`
+  - `docs\03_practice\03_project_06_concurrent_downloader.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\19_crossbeam_architecture.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-03-message-passing-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-05-async-patterns-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\README.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\02-concurrency-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\01-thread-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\41-thread-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\42-thread-split.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\decision-trees\concurrency-model-selection.md`
+- `https://docs.rs/tokio/latest/tokio/sync/index.html`
+  - `concept\03_advanced\10_concurrency_patterns.md`
+- `https://docs.rs/crossbeam/latest/crossbeam/channel/index.html`
+  - `concept\03_advanced\10_concurrency_patterns.md`
+- `https://docs.rs/crossbeam/latest/crossbeam/epoch/index.html`
+  - `concept\03_advanced\10_concurrency_patterns.md`
+  - `concept\03_advanced\11_atomics_and_memory_ordering.md`
+- `https://rust-unofficial.github.io/too-many-lists/`
+  - `concept\03_advanced\10_concurrency_patterns.md`
+- `https://en.cppreference.com/w/cpp/atomic/memory_order`
+  - `concept\03_advanced\11_atomics_and_memory_ordering.md`
+  - `concept\03_advanced\16_lock_free.md`
+- `https://domino.research.ibm.com/library/cyberdig.nsf/papers/58319A2ED2B17A64852570C30061D166/$File/r5116.pdf`
+  - `concept\03_advanced\11_atomics_and_memory_ordering.md`
+- `https://docs.rs/crossbeam/latest/crossbeam/atomic/index.html`
+  - `concept\03_advanced\11_atomics_and_memory_ordering.md`
+- `https://docs.rs/loom/latest/loom/`
+  - `concept\03_advanced\11_atomics_and_memory_ordering.md`
+  - `concept\04_formal\13_formal_methods.md`
+  - `concept\06_ecosystem\16_testing.md`
+- `https://github.com/rust-lang/rust/pull/150551`
+  - `concept\03_advanced\13_inline_assembly.md`
+- `https://github.com/microsoft/mimalloc`
+  - `concept\03_advanced\14_custom_allocators.md`
+- `https://docs.rs/bumpalo/latest/bumpalo/`
+  - `concept\03_advanced\14_custom_allocators.md`
+- `https://docs.rs/typed-arena/latest/typed_arena/`
+  - `concept\03_advanced\14_custom_allocators.md`
+- `https://docs.rs/bytes/latest/bytes/`
+  - `concept\03_advanced\15_zero_copy_parsing.md`
+- `https://docs.rs/bytes/latest/bytes/struct.Bytes.html`
+  - `concept\03_advanced\15_zero_copy_parsing.md`
+- `https://docs.rs/zerocopy/latest/zerocopy/`
+  - `concept\03_advanced\15_zero_copy_parsing.md`
+- `https://docs.rs/memmap2/latest/memmap2/`
+  - `concept\03_advanced\15_zero_copy_parsing.md`
+- `https://docs.rs/rkyv/latest/rkyv/`
+  - `concept\03_advanced\15_zero_copy_parsing.md`
+- `https://google.github.io/flatbuffers/`
+  - `concept\03_advanced\15_zero_copy_parsing.md`
+- `https://docs.rs/crossbeam-epoch/latest/crossbeam_epoch/`
+  - `concept\03_advanced\16_lock_free.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\19_crossbeam_architecture.md`
+- `https://dominoweb.draco.res.ibm.com/reports/rc19889.pdf`
+  - `concept\03_advanced\16_lock_free.md`
+- `https://docs.rs/lockfree/latest/lockfree/`
+  - `concept\03_advanced\16_lock_free.md`
+- `https://docs.rs/tokio/latest/tokio/`
+  - `concept\03_advanced\18_network_programming.md`
+  - `concept\07_future\18_async_drop_preview.md`
+  - `concept\archive\03_advanced_02_async_original.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\12_actix_web_architecture.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-05-async-patterns.md`
+  - `docs\rust-ownership-decidability\15-application-domains\web-development.md`
+  - `docs\rust-ownership-decidability\async-specialty\ASYNC_ECOSYSTEM_COMPLETE.md`
+  - `docs\rust-ownership-decidability\async-specialty\COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\async-specialty\authoritative\tokio-deep-dive.md`
+  - `docs\rust-ownership-decidability\async-specialty\ecosystem\IO_URING_DEEP_DIVE.md`
+  - `docs\rust-ownership-decidability\async-specialty\ecosystem\async-ecosystem-landscape.md`
+  - `docs\rust-ownership-decidability\async-specialty\embedded\embassy-guide.md`
+  - `docs\rust-ownership-decidability\async-specialty\network\http-server-patterns.md`
+  - `docs\rust-ownership-decidability\case-studies\actix-web-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\async-graphql-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\async-std-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\jsonwebtoken-formal-analysis.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\async-concurrency-comparison.md`
+  - `knowledge\03_advanced\async\01_async_await.md`
+  - `knowledge\03_advanced\async\01_async_closures_2024.md`
+  - `knowledge\03_advanced\async\02_async_closure.md`
+  - `knowledge\06_ecosystem\deep_dives\02_tokio_deep_dive.md`
+  - `knowledge\06_ecosystem\emerging\01_async_closures.md`
+- `https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html`
+  - `concept\03_advanced\18_network_programming.md`
+- `https://docs.rs/tokio/latest/tokio/net/struct.UdpSocket.html`
+  - `concept\03_advanced\18_network_programming.md`
+- `https://docs.rs/tower/latest/tower/trait.Service.html`
+  - `concept\03_advanced\18_network_programming.md`
+  - `concept\06_ecosystem\31_microservice_patterns.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\02_tower_architecture.md`
+- `https://docs.rs/tower/latest/tower/`
+  - `concept\03_advanced\18_network_programming.md`
+  - `concept\06_ecosystem\27_web_frameworks.md`
+  - `concept\06_ecosystem\31_microservice_patterns.md`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\02_tower_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_tonic_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\18_tracing_architecture.md`
+  - `knowledge\06_ecosystem\deep_dives\01_axum_deep_dive.md`
+- `https://github.com/rust-lang/rfcs/pull/793`
+  - `concept\03_advanced\18_network_programming.md`
+- `https://github.com/rust-lang/rfcs/pull/768`
+  - `concept\03_advanced\18_network_programming.md`
+- `https://docs.rs/tower/latest/tower/struct.ServiceBuilder.html`
+  - `concept\03_advanced\18_network_programming.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\02_tower_architecture.md`
+- `https://docs.rs/rayon/`
+  - `concept\03_advanced\19_parallel_distributed_pattern_spectrum.md`
+  - `concept\06_ecosystem\03_core_crates.md`
+  - `concept\06_ecosystem\30_system_composability.md`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\README.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\02-concurrency-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\42-thread-split.md`
+  - `docs\rust-ownership-decidability\case-studies\rayon-parallelism.md`
+- `https://mitpress.mit.edu/books/distributed-algorithms`
+  - `concept\03_advanced\19_parallel_distributed_pattern_spectrum.md`
+- `https://raft.github.io/raft.pdf`
+  - `concept\03_advanced\19_parallel_distributed_pattern_spectrum.md`
+  - `concept\06_ecosystem\18_distributed_systems.md`
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+  - `docs\rust-ownership-decidability\14-distributed-systems\consensus-patterns.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\README.md`
+- `https://dl.acm.org/doi/10.1145/2517349.2522738`
+  - `concept\03_advanced\20_stream_processing_semantics.md`
+- `https://dl.acm.org/doi/10.1145/2452376.2452396`
+  - `concept\03_advanced\20_stream_processing_semantics.md`
+- `https://docs.rs/tokio-stream/`
+  - `concept\03_advanced\20_stream_processing_semantics.md`
+  - `concept\06_ecosystem\36_stream_processing_ecosystem.md`
+- `https://github.com/rust-lang/rust/issues/133882`
+  - `concept\03_advanced\24_async_closures.md`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+- `https://github.com/rust-lang/rust/issues/126494`
+  - `concept\03_advanced\24_async_closures.md`
+- `https://github.com/verus-lang/verus`
+  - `concept\04_formal\01_linear_logic.md`
+  - `concept\04_formal\02_type_theory.md`
+  - `concept\04_formal\03_ownership_formal.md`
+  - `concept\04_formal\04_rustbelt.md`
+  - `concept\04_formal\05_verification_toolchain.md`
+  - `concept\04_formal\06_subtype_variance.md`
+  - `concept\04_formal\08_type_inference.md`
+  - `concept\04_formal\09_linear_logic_applications.md`
+  - `concept\04_formal\10_category_theory.md`
+  - `concept\04_formal\11_separation_logic.md`
+  - `concept\04_formal\12_denotational_semantics.md`
+  - `concept\04_formal\13_formal_methods.md`
+  - `concept\04_formal\14_lambda_calculus.md`
+  - `concept\04_formal\15_hoare_logic.md`
+  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
+  - `concept\04_formal\17_operational_semantics.md`
+  - `concept\04_formal\18_evaluation_strategies.md`
+  - `concept\04_formal\20_axiomatic_semantics.md`
+  - `concept\04_formal\21_type_semantics.md`
+  - `concept\04_formal\22_modern_verification_tools.md`
+  - `concept\04_formal\23_programming_language_foundations.md`
+  - `concept\04_formal\24_autoverus.md`
+  - `concept\04_formal\29_type_inference_complexity.md`
+  - `concept\04_formal\README.md`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+  - `concept\07_future\22_std_autodiff_preview.md`
+  - `concept\07_future\33_autoverus_preview.md`
+  - `docs\04_research\04_verusbelt_pldi_2026.md`
+  - `docs\05_guides\05_verus_practical_guide.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\CONTENT_UPDATE_SUMMARY_2026_03_12.md`
+  - `docs\archive\rust-ownership-chinese\rust_ownership_semantics_complete_analysis.md`
+  - `docs\archive\rust-ownership-chinese\rust_ownership_semantics_complete_analysis_v2.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-06-verus-guide.md`
+  - `docs\rust-ownership-decidability\07-references\README.md`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+  - `docs\rust-ownership-decidability\07-references\bibliography.md`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-07-std-verification-initiative.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+  - `docs\rust-ownership-decidability\RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md`
+  - `docs\rust-ownership-decidability\case-studies\industrial-verification-aws-meta.md`
+- `https://doi.org/10.1145/3158154`
+  - `concept\04_formal\01_linear_logic.md`
+  - `concept\04_formal\03_ownership_formal.md`
+  - `concept\04_formal\04_rustbelt.md`
+  - `concept\04_formal\11_separation_logic.md`
+  - `concept\04_formal\12_denotational_semantics.md`
+  - `concept\04_formal\15_hoare_logic.md`
+  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
+  - `concept\04_formal\17_operational_semantics.md`
+  - `concept\06_ecosystem\05_formal_ecosystem_tower.md`
+- `https://doi.org/10.1016/0304-3975(87)90045-4`
+  - `concept\04_formal\01_linear_logic.md`
+- `https://doi.org/10.1007/3-540-52377-7_30`
+  - `concept\04_formal\01_linear_logic.md`
+- `https://dl.acm.org/doi/10.1145/3290380`
+  - `concept\04_formal\01_linear_logic.md`
+  - `concept\04_formal\02_type_theory.md`
+  - `concept\04_formal\03_ownership_formal.md`
+- `https://dl.acm.org/doi/10.1145/3158154`
+  - `concept\04_formal\01_linear_logic.md`
+  - `concept\04_formal\02_type_theory.md`
+  - `concept\04_formal\03_ownership_formal.md`
+- `https://arxiv.org/abs/2604.15290`
+  - `concept\04_formal\01_linear_logic.md`
+- `https://doi.org/10.1145/3656425`
+  - `concept\04_formal\03_ownership_formal.md`
+- `https://doi.org/10.1145/3290343`
+  - `concept\04_formal\03_ownership_formal.md`
+- `https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md`
+  - `concept\04_formal\03_ownership_formal.md`
+- `https://creusot.github.io/creusot/`
+  - `concept\04_formal\04_rustbelt.md`
+  - `concept\04_formal\05_verification_toolchain.md`
+- `https://github.com/AeneasVerif/aeneas`
+  - `concept\04_formal\04_rustbelt.md`
+  - `concept\04_formal\05_verification_toolchain.md`
+  - `concept\04_formal\13_formal_methods.md`
+  - `concept\04_formal\30_aeneas_symbolic_semantics.md`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\CONTENT_UPDATE_SUMMARY_2026_03_12.md`
+  - `docs\archive\deprecated\AENEAS_INTEGRATION_PLAN.md`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+  - `docs\archive\rust-ownership-chinese\papers\aeneas-functional-translation.md`
+  - `docs\archive\rust-ownership-chinese\rust_ownership_semantics_complete_analysis_v2.md`
+  - `docs\content\academic\README.md`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+  - `docs\rust-ownership-decidability\07-references\README.md`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+  - `docs\rust-ownership-decidability\RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\mechanized-proofs.md`
+  - `knowledge\04_expert\academic\03_ownership_model_comprehensive.md`
+  - `knowledge\04_expert\academic\README.md`
+- `https://rustlantis.github.io/`
+  - `concept\04_formal\05_verification_toolchain.md`
+- `https://pl.ethz.ch/`
+  - `concept\04_formal\05_verification_toolchain.md`
+- `https://arxiv.org/abs/2503.23985`
+  - `concept\04_formal\05_verification_toolchain.md`
+- `https://github.com/diffblue/cbmc`
+  - `concept\04_formal\05_verification_toolchain.md`
+  - `concept\04_formal\32_kani.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://alastairreid.github.io/rust-verification-tools/`
+  - `concept\04_formal\05_verification_toolchain.md`
+  - `concept\04_formal\11_separation_logic.md`
+  - `concept\04_formal\13_formal_methods.md`
+  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
+  - `concept\06_ecosystem\05_formal_ecosystem_tower.md`
+  - `concept\07_future\02_formal_methods.md`
+- `https://doi.org/10.1093/comjnl/12.2.166`
+  - `concept\04_formal\08_type_inference.md`
+- `https://doi.org/10.1016/0022-0000(78)90014-4`
+  - `concept\04_formal\08_type_inference.md`
+  - `concept\04_formal\29_type_inference_complexity.md`
+- `https://github.com/rust-lang/rfcs/pull/438`
+  - `concept\04_formal\08_type_inference.md`
+- `https://arxiv.org/abs/2304.00000`
+  - `concept\04_formal\08_type_inference.md`
+- `https://github.com/rust-lang/rfcs/issues/1815`
+  - `concept\04_formal\10_category_theory.md`
+- `https://www.cs.ucl.ac.uk/staff/p.ohearn/papers/localreasoning.pdf`
+  - `concept\04_formal\11_separation_logic.md`
+- `https://www.cl.cam.ac.uk/~gw104/Semantics.pdf`
+  - `concept\04_formal\12_denotational_semantics.md`
+- `https://www.cl.cam.ac.uk/teaching/2021/Semantics/`
+  - `concept\04_formal\12_denotational_semantics.md`
+- `https://github.com/creusot-rs/creusot`
+  - `concept\04_formal\13_formal_methods.md`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+  - `docs\archive\rust-ownership-chinese\guides\creusot-tutorial.md`
+  - `docs\content\academic\README.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-02-creusot-deep-dive.md`
+  - `docs\rust-ownership-decidability\07-references\README.md`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+  - `docs\rust-ownership-decidability\07-references\bibliography.md`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-07-std-verification-initiative.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+  - `docs\rust-ownership-decidability\RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md`
+  - `docs\rust-ownership-decidability\archive\MASTER_INDEX.md`
+  - `docs\rust-ownership-decidability\exercises\09-01-practice-problems.md`
+- `https://arxiv.org/abs/2305.02275`
+  - `concept\04_formal\13_formal_methods.md`
+  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
+- `https://docs.rs/contracts/`
+  - `concept\04_formal\13_formal_methods.md`
+- `https://doi.org/10.1093/comjnl/12.4.576`
+  - `concept\04_formal\15_hoare_logic.md`
+- `https://dl.acm.org/doi/book/10.5555/1243380`
+  - `concept\04_formal\15_hoare_logic.md`
+- `https://doi.org/10.1007/978-94-011-1793-7_4`
+  - `concept\04_formal\15_hoare_logic.md`
+- `https://www.verifythis.org/`
+  - `concept\04_formal\15_hoare_logic.md`
+- `https://arxiv.org/abs/1409.7643`
+  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
+- `https://doi.org/10.1007/978-3-031-15077-8_26`
+  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
+- `https://docs.rs/no-panic/`
+  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
+  - `concept\07_future\08_safety_tags_preview.md`
+- `https://doi.org/10.1145/263690.263803`
+  - `concept\04_formal\17_operational_semantics.md`
+- `https://doi.org/10.1017/S0956796800001368`
+  - `concept\04_formal\17_operational_semantics.md`
+- `https://doi.org/10.1145/3371106`
+  - `concept\04_formal\17_operational_semantics.md`
+- `https://github.com/rust-lang/a-mir-formality`
+  - `concept\04_formal\17_operational_semantics.md`
+  - `concept\07_future\04_effects_system.md`
+  - `knowledge\03_advanced\01_compiler_internals.md`
+  - `knowledge\04_expert\academic\02_tree_borrows_authoritative_guide.md`
+  - `knowledge\04_expert\safety_critical\04_axiomatic_reasoning\01_formal_verification_practical_guide.md`
+- `https://rust-formal-methods.github.io/`
+  - `concept\04_formal\17_operational_semantics.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\CONTENT_UPDATE_SUMMARY_2026_03_12.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-02-creusot-deep-dive.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-08-gillian-rust.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+  - `docs\rust-ownership-decidability\RESEARCH_TRACKING_SYSTEM.md`
+  - `docs\rust-ownership-decidability\case-studies\industrial-verification-aws-meta.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\tree-borrows-comprehensive.md`
+  - `knowledge\04_expert\academic\README.md`
+- `https://dl.acm.org/doi/10.1145/3689738`
+  - `concept\04_formal\17_operational_semantics.md`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+  - `knowledge\04_expert\academic\02_tree_borrows_authoritative_guide.md`
+  - `knowledge\04_expert\safety_critical\01_completion_report_100_percent.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\01_academic_research_landscape.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\02_rust_ecosystem_mind_map.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\03_rust_194_195_features_deep_dive.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\01_comprehensive_language_comparison_matrix.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\02_rust_multi_dimensional_matrix.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\04_toolchain_evaluation_matrix.md`
+  - `knowledge\04_expert\safety_critical\02_rust_safety_critical_ecosystem_master_index.md`
+  - `knowledge\04_expert\safety_critical\03_decision_trees\01_rust_decision_trees.md`
+  - `knowledge\04_expert\safety_critical\03_decision_trees\02_safety_integrity_level_selection_guide.md`
+  - `knowledge\04_expert\safety_critical\03_readme_rust_safety_critical_ecosystem.md`
+  - `knowledge\04_expert\safety_critical\04_axiomatic_reasoning\01_formal_verification_practical_guide.md`
+  - `knowledge\04_expert\safety_critical\04_axiomatic_reasoning\02_rust_axiomatic_reasoning_trees.md`
+  - `knowledge\04_expert\safety_critical\05_strategic_guidance\01_adoption_strategy_and_roi_analysis.md`
+  - `knowledge\04_expert\safety_critical\05_strategic_guidance\02_comprehensive_recommendations_and_opinions.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\04_technology_watch_and_emerging_trends.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\01_case_study_01_ferrocene_certification.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\02_case_study_02_nasa_cfs_rust.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\03_case_study_03_automotive_ecus.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\04_case_study_04_medical_devices.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\05_case_study_05_railway_signaling.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\06_case_study_06_autonomous_driving.md`
+  - `knowledge\04_expert\safety_critical\08_training\01_assessment_and_certification.md`
+  - `knowledge\04_expert\safety_critical\08_training\02_certification_prep_guide.md`
+  - `knowledge\04_expert\safety_critical\08_training\03_hands_on_lab_exercises.md`
+  - `knowledge\04_expert\safety_critical\08_training\04_interactive_learning_resources.md`
+  - `knowledge\04_expert\safety_critical\09_reference\01_api_design_guidelines.md`
+  - `knowledge\04_expert\safety_critical\09_reference\02_checklists_and_templates.md`
+  - `knowledge\04_expert\safety_critical\09_reference\03_community_and_contributing.md`
+  - `knowledge\04_expert\safety_critical\09_reference\04_comprehensive_international_alignment_completion_report.md`
+  - `knowledge\04_expert\safety_critical\09_reference\06_faq_and_troubleshooting.md`
+  - `knowledge\04_expert\safety_critical\09_reference\09_metrics_and_measurement_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\11_project_templates.md`
+  - `knowledge\04_expert\safety_critical\09_reference\13_rust_safety_critical_coding_guidelines.md`
+  - `knowledge\04_expert\safety_critical\09_reference\14_safety_critical_checklists.md`
+  - `knowledge\04_expert\safety_critical\09_reference\17_toolchain_setup_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\18_tools_configuration_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\19_troubleshooting_and_debugging_guide.md`
+  - `knowledge\04_expert\safety_critical\10_standards\01_do_178c_rust_compliance_pathway.md`
+  - `knowledge\04_expert\safety_critical\10_standards\02_iec_61508_rust_implementation_guide.md`
+  - `knowledge\04_expert\safety_critical\10_standards\03_iso_26262_rust_implementation_guide.md`
+  - `knowledge\04_expert\safety_critical\10_standards\05_regulatory_landscape_and_approvals.md`
+- `https://gillianplatform.github.io/`
+  - `concept\04_formal\17_operational_semantics.md`
+- `https://doi.org/10.1093/comjnl/27.2.115`
+  - `concept\04_formal\18_evaluation_strategies.md`
+- `https://www.cl.cam.ac.uk/~na482/pdfs/`
+  - `concept\04_formal\18_evaluation_strategies.md`
+- `https://salsa-rs.github.io/salsa/`
+  - `concept\04_formal\19_rustc_query_system.md`
+  - `concept\07_future\09_parallel_frontend_preview.md`
+- `https://doi.org/10.1145/360933.360975`
+  - `concept\04_formal\20_axiomatic_semantics.md`
+- `https://creusot-rs.github.io/creusot/`
+  - `concept\04_formal\20_axiomatic_semantics.md`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+  - `docs\archive\rust-ownership-chinese\guides\creusot-tutorial.md`
+- `https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md`
+  - `concept\04_formal\21_type_semantics.md`
+  - `concept\07_future\04_effects_system.md`
+- `https://github.com/rust-lang/keyword-generics-initiative`
+  - `concept\04_formal\21_type_semantics.md`
+  - `concept\07_future\04_effects_system.md`
+- `https://github.com/rust-lang/rfcs/pull/3842`
+  - `concept\04_formal\22_modern_verification_tools.md`
+  - `concept\04_formal\22_safety_tags.md`
+  - `concept\07_future\31_safety_tags_preview.md`
+- `https://arxiv.org/abs/2502.xxxxx`
+  - `concept\04_formal\22_modern_verification_tools.md`
+- `https://github.com/esbmc/esbmc`
+  - `concept\04_formal\22_modern_verification_tools.md`
+- `https://arxiv.org/`
+  - `concept\04_formal\22_modern_verification_tools.md`
+  - `concept\07_future\01_ai_integration.md`
+  - `concept\07_future\02_formal_methods.md`
+- `https://doi.org/10.1145/512950.512973`
+  - `concept\04_formal\22_modern_verification_tools.md`
+- `https://github.com/safer-rust/safety-tags`
+  - `concept\04_formal\22_safety_tags.md`
+- `https://os-checker.github.io/slides/safety-tags`
+  - `concept\04_formal\22_safety_tags.md`
+  - `concept\07_future\31_safety_tags_preview.md`
+- `https://github.com/rust-lang/rust-project-goals/issues/624`
+  - `concept\04_formal\23_borrow_sanitizer.md`
+  - `concept\07_future\32_borrow_sanitizer_preview.md`
+- `https://stanford-cs242.github.io/f19/`
+  - `concept\04_formal\23_programming_language_foundations.md`
+- `https://doi.org/10.1145/3763174`
+  - `concept\04_formal\24_autoverus.md`
+  - `concept\07_future\33_autoverus_preview.md`
+- `https://arxiv.org/abs/2409.13082`
+  - `concept\04_formal\24_autoverus.md`
+  - `concept\07_future\33_autoverus_preview.md`
+- `https://github.com/rust-lang/miri/blob/master/borrow_stacked/README.md`
+  - `concept\04_formal\25_tree_borrows_deep_dive.md`
+- `https://doi.org/10.1017/S0956796811000098`
+  - `concept\04_formal\29_type_inference_complexity.md`
+- `https://doi.org/10.1145/321250.321253`
+  - `concept\04_formal\29_type_inference_complexity.md`
+- `https://doi.org/10.1145/3571192`
+  - `concept\04_formal\30_aeneas_symbolic_semantics.md`
+- `https://doi.org/10.1145/3547627`
+  - `concept\04_formal\30_aeneas_symbolic_semantics.md`
+- `https://model-checking.github.io/kani/tutorial-intro.html`
+  - `concept\04_formal\32_kani.md`
+- `https://isocpp.org/`
+  - `concept\05_comparative\01_rust_vs_cpp.md`
+  - `concept\06_ecosystem\02_patterns.md`
+  - `concept\06_ecosystem\04_application_domains.md`
+- `https://github.com/rust-lang/rfcs/pull/2945`
+  - `concept\05_comparative\04_safety_boundaries.md`
+- `https://github.com/rust-secure-code/wg`
+  - `concept\05_comparative\04_safety_boundaries.md`
+  - `concept\06_ecosystem\03_core_crates.md`
+  - `concept\07_future\08_safety_tags_preview.md`
+  - `knowledge\04_expert\02_unsafe_audit.md`
+- `https://doi.org/10.1145/359576.359585`
+  - `concept\05_comparative\05_execution_model_isomorphism.md`
+- `https://doi.org/10.1145/1624775.1624804`
+  - `concept\05_comparative\05_execution_model_isomorphism.md`
+- `https://doi.org/10.1145/1375581.1375595`
+  - `concept\05_comparative\05_execution_model_isomorphism.md`
+- `https://doi.org/10.1145/324133.324234`
+  - `concept\05_comparative\05_execution_model_isomorphism.md`
+- `https://google.github.io/styleguide/pyguide.html`
+  - `concept\05_comparative\07_rust_vs_python.md`
+- `https://webassembly.github.io/spec/`
+  - `concept\05_comparative\08_rust_vs_javascript.md`
+  - `concept\05_comparative\15_rust_vs_typescript.md`
+  - `concept\06_ecosystem\11_webassembly.md`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+  - `concept\07_future\24_wasm_target_evolution.md`
+  - `concept\07_future\28_rust_for_webassembly.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_wasm_bindgen_architecture.md`
+- `https://webassembly.github.io/spec/core/syntax/modules.html#memories`
+  - `concept\05_comparative\08_rust_vs_javascript.md`
+- `https://rustwasm.github.io/docs/wasm-bindgen/`
+  - `concept\05_comparative\08_rust_vs_javascript.md`
+  - `concept\05_comparative\15_rust_vs_typescript.md`
+  - `concept\06_ecosystem\11_webassembly.md`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+  - `concept\07_future\28_rust_for_webassembly.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_wasm_bindgen_architecture.md`
+- `https://github.com/WebAssembly/proposals`
+  - `concept\05_comparative\08_rust_vs_javascript.md`
+  - `concept\06_ecosystem\11_webassembly.md`
+- `https://rustwasm.github.io/docs/wasm-bindgen/contributing/design/index.html`
+  - `concept\05_comparative\08_rust_vs_javascript.md`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://rust-learning.github.io/`
+  - `concept\05_comparative\08_rust_vs_ruby.md`
+- `https://github.com/apple/swift/blob/main/docs/OwnershipManifesto.md`
+  - `concept\05_comparative\09_rust_vs_swift.md`
+- `https://news.ycombinator.com/item?id=27608507`
+  - `concept\05_comparative\10_rust_vs_zig.md`
+- `https://github.com/dotnet/performance`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://github.com/rusterlium/rustler`
+  - `concept\05_comparative\14_rust_vs_elixir.md`
+- `https://docs.rs/ts-rs/latest/ts_rs/`
+  - `concept\05_comparative\15_rust_vs_typescript.md`
+- `https://github.com/microsoft/TypeScript/wiki/TypeScript-Design-Goals`
+  - `concept\05_comparative\15_rust_vs_typescript.md`
+- `https://github.com/type-challenges/type-challenges`
+  - `concept\05_comparative\15_rust_vs_typescript.md`
+- `https://github.com/rust-lang/rustup/blob/main/CHANGELOG.md`
+  - `concept\06_ecosystem\01_toolchain.md`
+- `https://github.com/pksunkara/cargo-workspaces`
+  - `concept\06_ecosystem\01_toolchain.md`
+- `https://github.com/rust-lang/wg-cargo-std-aware`
+  - `concept\06_ecosystem\01_toolchain.md`
+- `https://rust-unofficial.github.io/patterns/anti_patterns/index.html`
+  - `concept\06_ecosystem\02_patterns.md`
+- `https://dl.acm.org/doi/10.1145/1640089.1640095`
+  - `concept\06_ecosystem\02_patterns.md`
+- `https://rust-unofficial.github.io/patterns/print.html#builder`
+  - `concept\06_ecosystem\02_patterns.md`
+- `https://crates.io`
+  - `concept\06_ecosystem\03_core_crates.md`
+  - `concept\06_ecosystem\05_formal_ecosystem_tower.md`
+- `https://lib.rs/`
+  - `concept\06_ecosystem\03_core_crates.md`
+  - `concept\06_ecosystem\04_application_domains.md`
+  - `concept\06_ecosystem\05_formal_ecosystem_tower.md`
+  - `concept\06_ecosystem\06_blockchain.md`
+  - `concept\06_ecosystem\10_public_private_deps.md`
+  - `docs\content\ecosystem\README.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `knowledge\06_ecosystem\README.md`
+- `https://github.com/rust-secure-code/cargo-geiger`
+  - `concept\06_ecosystem\03_core_crates.md`
+  - `concept\06_ecosystem\19_security_practices.md`
+  - `concept\06_ecosystem\20_licensing_and_compliance.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `knowledge\04_expert\02_unsafe_audit.md`
+- `https://clap.rs/`
+  - `concept\06_ecosystem\03_core_crates.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\04_clap_architecture.md`
+  - `docs\rust-ownership-decidability\case-studies\cli\README.md`
+- `https://docs.rs/Tokio/`
+  - `concept\06_ecosystem\03_core_crates.md`
+  - `concept\06_ecosystem\24_cloud_native.md`
+- `https://docs.rs/thiserror/`
+  - `concept\06_ecosystem\03_core_crates.md`
+  - `knowledge\02_intermediate\02_error_handling.md`
+- `https://docs.rs/anyhow/`
+  - `concept\06_ecosystem\03_core_crates.md`
+  - `knowledge\02_intermediate\02_error_handling.md`
+- `https://rust-unofficial.github.io/patterns/idioms/`
+  - `concept\06_ecosystem\03_idioms_spectrum.md`
+- `https://docs.rs/crate/sqlx/latest/source/CHANGELOG.md`
+  - `concept\06_ecosystem\04_application_domains.md`
+- `https://github.com/tokio-rs/tokio/releases`
+  - `concept\06_ecosystem\04_application_domains.md`
+- `https://github.com/seanmonstar/reqwest/releases`
+  - `concept\06_ecosystem\04_application_domains.md`
+- `https://github.com/apache/arrow-rs/releases`
+  - `concept\06_ecosystem\04_application_domains.md`
+- `https://github.com/`
+  - `concept\06_ecosystem\04_application_domains.md`
+- `https://github.com/bevyengine/bevy/releases`
+  - `concept\06_ecosystem\04_application_domains.md`
+- `https://docs.rs/actix-web/`
+  - `concept\06_ecosystem\04_application_domains.md`
+  - `concept\06_ecosystem\27_web_frameworks.md`
+- `https://mozilla.github.io/cargo-vet/`
+  - `concept\06_ecosystem\05_formal_ecosystem_tower.md`
+  - `concept\06_ecosystem\19_security_practices.md`
+  - `concept\06_ecosystem\20_licensing_and_compliance.md`
+  - `concept\06_ecosystem\28_devops_and_ci_cd.md`
+- `https://doi.org/10.6028/NIST.SP.800-207`
+  - `concept\06_ecosystem\05_system_design_principles.md`
+- `https://doi.org/10.1109/MC.2012.37`
+  - `concept\06_ecosystem\05_system_design_principles.md`
+- `https://doi.org/10.1145/3335772.3335939`
+  - `concept\06_ecosystem\05_system_design_principles.md`
+- `https://doi.org/10.1145/2364527.2364568`
+  - `concept\06_ecosystem\05_system_design_principles.md`
+- `https://docs.rs/subtle/`
+  - `concept\06_ecosystem\06_blockchain.md`
+- `https://rust-in-blockchain.github.io/`
+  - `concept\06_ecosystem\06_blockchain.md`
+- `https://docs.rs/secp256k1/`
+  - `concept\06_ecosystem\06_blockchain.md`
+- `https://github.com/rustcrypto/`
+  - `concept\06_ecosystem\06_blockchain.md`
+  - `concept\06_ecosystem\19_security_practices.md`
+- `https://docs.rs/sha2/`
+  - `concept\06_ecosystem\06_blockchain.md`
+- `https://docs.rs/bevy/`
+  - `concept\06_ecosystem\07_game_ecs.md`
+  - `concept\06_ecosystem\21_game_development.md`
+  - `concept\06_ecosystem\26_game_development.md`
+- `https://docs.rs/bevy_ecs/`
+  - `concept\06_ecosystem\07_game_ecs.md`
+  - `concept\06_ecosystem\26_game_development.md`
+- `https://github.com/bytecodealliance/wit-bindgen`
+  - `concept\06_ecosystem\08_wasi.md`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+  - `concept\07_future\28_rust_for_webassembly.md`
+- `https://github.com/rust-lang/rfcs/pull/3502`
+  - `concept\06_ecosystem\09_cargo_script.md`
+  - `docs\06_toolchain\06_cargo_script_guide.md`
+- `https://github.com/rust-lang/rfcs/pull/3503`
+  - `concept\06_ecosystem\09_cargo_script.md`
+- `https://github.com/rust-lang/cargo/issues/12207`
+  - `concept\06_ecosystem\09_cargo_script.md`
+- `https://github.com/rust-lang/rust/issues/136889`
+  - `concept\06_ecosystem\09_cargo_script.md`
+- `https://github.com/rust-lang/cargo/blob/master/src/cargo/util/toml/embedded.rs`
+  - `concept\06_ecosystem\09_cargo_script.md`
+- `https://github.com/rust-lang/rust/issues/141367`
+  - `concept\06_ecosystem\09_cargo_script.md`
+- `https://github.com/fornwall/rust-script`
+  - `concept\06_ecosystem\09_cargo_script.md`
+- `https://github.com/rust-lang/rfcs/pull/3516`
+  - `concept\06_ecosystem\10_public_private_deps.md`
+  - `concept\07_future\24_roadmap.md`
+- `https://github.com/rust-lang/cargo/issues/9094`
+  - `concept\06_ecosystem\10_public_private_deps.md`
+- `https://docs.rs/cargo-semver-checks`
+  - `concept\06_ecosystem\10_public_private_deps.md`
+- `https://www.w3.org/wasm/`
+  - `concept\06_ecosystem\11_webassembly.md`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+  - `concept\07_future\28_rust_for_webassembly.md`
+- `https://webassembly.github.io/spec/core/appendix/security.html`
+  - `concept\06_ecosystem\11_webassembly.md`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://rustwasm.github.io/book/why-rust-and-webassembly.html`
+  - `concept\06_ecosystem\11_webassembly.md`
+- `https://rustwasm.github.io/docs/wasm-bindgen/reference/`
+  - `concept\06_ecosystem\11_webassembly.md`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://github.com/emilk/egui`
+  - `concept\06_ecosystem\11_webassembly.md`
+- `https://github.com/wasm3/wasm3`
+  - `concept\06_ecosystem\11_webassembly.md`
+- `https://rustwasm.github.io/book/reference/tools.html`
+  - `concept\06_ecosystem\11_webassembly.md`
+- `https://github.com/rustwasm/console_error_panic_hook`
+  - `concept\06_ecosystem\11_webassembly.md`
+- `https://altsysrq.github.io/proptest-book/intro.html`
+  - `concept\06_ecosystem\12_testing_strategies.md`
+- `https://github.com/rust-fuzz/cargo-fuzz`
+  - `concept\06_ecosystem\12_testing_strategies.md`
+  - `concept\06_ecosystem\16_testing.md`
+  - `docs\03_guides\03_fuzzing_guide.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `knowledge\04_expert\02_unsafe_audit.md`
+- `https://github.com/actions-rs`
+  - `concept\06_ecosystem\12_testing_strategies.md`
+- `https://docs.rs/serial_test/`
+  - `concept\06_ecosystem\12_testing_strategies.md`
+- `https://docs.rs/mockall/`
+  - `concept\06_ecosystem\12_testing_strategies.md`
+  - `concept\06_ecosystem\16_testing.md`
+- `https://proptest-rs.github.io/proptest/intro.html`
+  - `concept\06_ecosystem\12_testing_strategies.md`
+- `https://doi.org/10.1145/263690.263804`
+  - `concept\06_ecosystem\12_testing_strategies.md`
+- `https://docs.rs/log/`
+  - `concept\06_ecosystem\13_logging_observability.md`
+- `https://docs.rs/tracing/`
+  - `concept\06_ecosystem\13_logging_observability.md`
+  - `docs\rust-ownership-decidability\case-studies\tracing-formal-analysis.md`
+- `https://github.com/open-telemetry/opentelemetry-rust`
+  - `concept\06_ecosystem\13_logging_observability.md`
+- `https://github.com/tokio-rs/tracing`
+  - `concept\06_ecosystem\13_logging_observability.md`
+  - `docs\rust-ownership-decidability\case-studies\cli\README.md`
+- `https://github.com/prometheus/client_rust`
+  - `concept\06_ecosystem\13_logging_observability.md`
+- `https://docs.rs/tracing/latest/tracing/#performance`
+  - `concept\06_ecosystem\13_logging_observability.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\18_tracing_architecture.md`
+- `https://docs.rs/metrics/latest/metrics/`
+  - `concept\06_ecosystem\13_logging_observability.md`
+- `https://docs.rs/tracing/latest/tracing/trait.Instrument.html`
+  - `concept\06_ecosystem\13_logging_observability.md`
+- `https://docs.rs/opentelemetry/`
+  - `concept\06_ecosystem\13_logging_observability.md`
+- `https://github.com/rust-lang/rfcs/pull/1574`
+  - `concept\06_ecosystem\14_documentation.md`
+- `https://github.com/rust-lang/rfcs/pull/1946`
+  - `concept\06_ecosystem\14_documentation.md`
+- `https://docs.rs/about`
+  - `concept\06_ecosystem\14_documentation.md`
+- `https://docs.rs/about/builds`
+  - `concept\06_ecosystem\14_documentation.md`
+- `https://github.com/flamegraph-rs/flamegraph`
+  - `concept\06_ecosystem\15_performance_optimization.md`
+  - `docs\05_guides\05_performance_tuning_guide.md`
+- `https://github.com/gnzlbg/cargo-asm`
+  - `concept\06_ecosystem\15_performance_optimization.md`
+- `https://github.com/pacak/cargo-show-asm`
+  - `concept\06_ecosystem\15_performance_optimization.md`
+- `https://bokeh.github.io/criterion.rs/book/`
+  - `concept\06_ecosystem\15_performance_optimization.md`
+- `https://nnethercote.github.io/perf-book/unsafe-rust.html`
+  - `concept\06_ecosystem\15_performance_optimization.md`
+- `https://nnethercote.github.io/perf-book/pitfalls.html`
+  - `concept\06_ecosystem\15_performance_optimization.md`
+- `https://dl.acm.org/doi/10.1145/356635.356640`
+  - `concept\06_ecosystem\15_performance_optimization.md`
+- `https://github.com/dtolnay/cargo-llvm-lines`
+  - `concept\06_ecosystem\15_performance_optimization.md`
+- `https://nnethercote.github.io/perf-book/inlining.html`
+  - `concept\06_ecosystem\15_performance_optimization.md`
+- `https://docs.rs/mockall/latest/mockall/`
+  - `concept\06_ecosystem\16_testing.md`
+- `https://docs.rs/proptest/latest/proptest/`
+  - `concept\06_ecosystem\16_testing.md`
+- `https://github.com/rust-lang/rfcs/pull/2318`
+  - `concept\06_ecosystem\16_testing.md`
+- `https://github.com/rust-lang/rfcs/pull/131`
+  - `concept\06_ecosystem\17_cross_compilation.md`
+- `https://docs.rs/tower/`
+  - `concept\06_ecosystem\18_distributed_systems.md`
+  - `concept\06_ecosystem\27_web_frameworks.md`
+  - `concept\06_ecosystem\30_system_composability.md`
+  - `concept\06_ecosystem\31_microservice_patterns.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\02_tower_architecture.md`
+- `https://docs.rs/tonic/`
+  - `concept\06_ecosystem\18_distributed_systems.md`
+  - `concept\06_ecosystem\31_microservice_patterns.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+  - `docs\rust-ownership-decidability\case-studies\tonic-grpc-formal-analysis.md`
+- `https://docs.rs/tonic/latest/tonic/`
+  - `concept\06_ecosystem\18_distributed_systems.md`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_tonic_architecture.md`
+- `https://github.com/tikv/raft-rs`
+  - `concept\06_ecosystem\18_distributed_systems.md`
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+- `https://github.com/rust-lang-cn`
+  - `concept\06_ecosystem\18_distributed_systems.md`
+- `https://docs.rs/openraft/`
+  - `concept\06_ecosystem\18_distributed_systems.md`
+- `https://rust-secure-code.github.io/`
+  - `concept\06_ecosystem\19_security_practices.md`
+- `https://anssi-fr.github.io/rust-guide/`
+  - `concept\06_ecosystem\19_security_practices.md`
+- `https://anssi-fr.github.io/rust-guide/05_unchecked.html`
+  - `concept\06_ecosystem\19_security_practices.md`
+- `https://docs.rs/ring/latest/ring/`
+  - `concept\06_ecosystem\19_security_practices.md`
+- `https://anssi-fr.github.io/rust-guide/04_language.html`
+  - `concept\06_ecosystem\19_security_practices.md`
+- `https://github.com/rust-lang/rust/releases/tag/1.94.1`
+  - `concept\06_ecosystem\19_security_practices.md`
+- `https://secure-code-guidelines.rust-lang.org/`
+  - `concept\06_ecosystem\19_security_practices.md`
+- `https://docs.rs/zeroize/`
+  - `concept\06_ecosystem\19_security_practices.md`
+- `https://crates.io/policies`
+  - `concept\06_ecosystem\19_security_practices.md`
+  - `concept\06_ecosystem\62_cargo_registries_and_publishing.md`
+- `https://docs.rs/secrecy/`
+  - `concept\06_ecosystem\19_security_practices.md`
+- `https://github.com/EmbarkStudios/cargo-deny`
+  - `concept\06_ecosystem\20_licensing_and_compliance.md`
+  - `concept\06_ecosystem\28_devops_and_ci_cd.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://embarkstudios.github.io/cargo-deny/`
+  - `concept\06_ecosystem\20_licensing_and_compliance.md`
+  - `concept\06_ecosystem\28_devops_and_ci_cd.md`
+- `https://github.com/rust-lang/rfcs/pull/7`
+  - `concept\06_ecosystem\20_licensing_and_compliance.md`
+- `https://spdx.github.io/spdx-spec/`
+  - `concept\06_ecosystem\20_licensing_and_compliance.md`
+- `https://github.com/EmbarkStudios/cargo-about`
+  - `concept\06_ecosystem\20_licensing_and_compliance.md`
+- `https://docs.rs/wgpu/`
+  - `concept\06_ecosystem\21_game_development.md`
+  - `concept\06_ecosystem\26_game_development.md`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://www.w3.org/TR/webgpu/`
+  - `concept\06_ecosystem\21_game_development.md`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\11_wgpu_architecture.md`
+- `https://github.com/EmbarkStudios/rust-gpu`
+  - `concept\06_ecosystem\21_game_development.md`
+- `https://github.com/RustAudio/rodio`
+  - `concept\06_ecosystem\21_game_development.md`
+  - `concept\06_ecosystem\26_game_development.md`
+  - `concept\archive\06_ecosystem_26_game_development_deprecated.md`
+- `https://github.com/RustAudio/cpal`
+  - `concept\06_ecosystem\21_game_development.md`
+- `https://github.com/rust-embedded/wg`
+  - `concept\06_ecosystem\22_embedded_systems.md`
+  - `concept\06_ecosystem\52_robotics.md`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+  - `concept\07_future\18_field_projections_preview.md`
+  - `concept\07_future\26_rust_in_space.md`
+  - `docs\03_guides\03_embassy_deep_dive.md`
+  - `docs\03_guides\03_embedded_rust_guide.md`
+  - `docs\rust-ownership-decidability\15-application-domains\systems-programming.md`
+  - `docs\rust-ownership-decidability\extensions\README.md`
+- `https://docs.rs/svd2rust/latest/svd2rust/`
+  - `concept\06_ecosystem\22_embedded_systems.md`
+  - `docs\03_guides\03_embassy_deep_dive.md`
+- `https://docs.rs/embedded-hal/latest/embedded_hal/`
+  - `concept\06_ecosystem\22_embedded_systems.md`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+  - `docs\03_guides\03_embassy_deep_dive.md`
+- `https://docs.rs/embedded-hal-async/latest/embedded_hal_async/`
+  - `concept\06_ecosystem\22_embedded_systems.md`
+- `https://github.com/ariel-os/ariel-os`
+  - `concept\06_ecosystem\22_embedded_systems.md`
+- `https://ariel-os.dev/`
+  - `concept\06_ecosystem\22_embedded_systems.md`
+- `https://docs.rs/embedded-hal/latest/`
+  - `concept\06_ecosystem\22_embedded_systems.md`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.rs/diesel/`
+  - `concept\06_ecosystem\23_database_access.md`
+  - `concept\06_ecosystem\37_database_systems.md`
+- `https://docs.rs/sqlx/`
+  - `concept\06_ecosystem\23_database_access.md`
+  - `concept\06_ecosystem\37_database_systems.md`
+  - `docs\rust-ownership-decidability\case-studies\sqlx-formal-analysis.md`
+- `https://docs.rs/tokio-postgres/`
+  - `concept\06_ecosystem\23_database_access.md`
+- `https://github.com/launchbadge/sqlx`
+  - `concept\06_ecosystem\23_database_access.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\03_diesel_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\15_sqlx_advanced_architecture.md`
+  - `knowledge\06_ecosystem\databases\02_sqlx_deep_dive.md`
+  - `knowledge\06_ecosystem\databases\README.md`
+- `https://rust-lang-nursery.github.io/rust-cookbook/database.html`
+  - `concept\06_ecosystem\23_database_access.md`
+- `https://github.com/tokio-rs/toasty`
+  - `concept\06_ecosystem\23_database_access.md`
+- `https://crates.io/crates/toasty`
+  - `concept\06_ecosystem\23_database_access.md`
+- `https://docs.rs/sqlx/latest/sqlx/macro.query.html`
+  - `concept\06_ecosystem\23_database_access.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_sqlx_architecture.md`
+- `https://docs.rs/sqlx/latest/sqlx/pool/struct.Pool.html`
+  - `concept\06_ecosystem\23_database_access.md`
+- `https://docs.rs/sqlx/latest/sqlx/struct.Transaction.html`
+  - `concept\06_ecosystem\23_database_access.md`
+- `https://docs.rs/sqlx/latest/sqlx/`
+  - `concept\06_ecosystem\23_database_access.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_sqlx_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\15_sqlx_advanced_architecture.md`
+  - `knowledge\06_ecosystem\databases\01_sea_orm_deep_dive.md`
+  - `knowledge\06_ecosystem\databases\02_sqlx_deep_dive.md`
+- `https://docs.rs/deadpool/latest/deadpool/`
+  - `concept\06_ecosystem\23_database_access.md`
+- `https://docs.rs/deadpool/`
+  - `concept\06_ecosystem\23_database_access.md`
+- `https://docs.rs/kube/`
+  - `concept\06_ecosystem\24_cloud_native.md`
+  - `docs\rust-ownership-decidability\case-studies\cloud\README.md`
+- `https://github.com/tokio-rs/axum`
+  - `concept\06_ecosystem\24_cloud_native.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md`
+- `https://rust-cloud-native.github.io/`
+  - `concept\06_ecosystem\24_cloud_native.md`
+  - `docs\rust-ownership-decidability\case-studies\cloud\README.md`
+- `https://github.com/cncf/toc/blob/main/DEFINITION.md`
+  - `concept\06_ecosystem\24_cloud_native.md`
+- `https://firecracker-microvm.github.io/`
+  - `concept\06_ecosystem\24_cloud_native.md`
+  - `concept\06_ecosystem\48_industrial_case_studies.md`
+- `https://docs.rs/clap/`
+  - `concept\06_ecosystem\25_cli_development.md`
+- `https://rust-cli.github.io/book/index.html`
+  - `concept\06_ecosystem\25_cli_development.md`
+- `https://docs.rs/clap/latest/clap/_derive/index.html`
+  - `concept\06_ecosystem\25_cli_development.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\04_clap_architecture.md`
+- `https://docs.rs/indicatif/latest/indicatif/`
+  - `concept\06_ecosystem\25_cli_development.md`
+- `https://docs.rs/dialoguer/latest/dialoguer/`
+  - `concept\06_ecosystem\25_cli_development.md`
+- `https://docs.rs/config/latest/config/`
+  - `concept\06_ecosystem\25_cli_development.md`
+- `https://rust-cli.github.io/book/tutorial/packaging.html`
+  - `concept\06_ecosystem\25_cli_development.md`
+- `https://github.com/cargo-bins/cargo-binstall`
+  - `concept\06_ecosystem\25_cli_development.md`
+- `https://docs.rs/clap_complete/latest/clap_complete/`
+  - `concept\06_ecosystem\25_cli_development.md`
+- `https://docs.rs/clap_mangen/latest/clap_mangen/`
+  - `concept\06_ecosystem\25_cli_development.md`
+- `https://rust-cli.github.io/book/tutorial/testing.html`
+  - `concept\06_ecosystem\25_cli_development.md`
+- `https://docs.rs/assert_cmd/latest/assert_cmd/`
+  - `concept\06_ecosystem\25_cli_development.md`
+- `https://docs.rs/signal-hook/`
+  - `concept\06_ecosystem\25_cli_development.md`
+- `https://no-color.org/），这是跨语言的行业标准。未遵守导致：1`
+  - `concept\06_ecosystem\25_cli_development.md`
+- `https://no-color.org/`
+  - `concept\06_ecosystem\25_cli_development.md`
+- `https://docs.rs/anstyle/`
+  - `concept\06_ecosystem\25_cli_development.md`
+- `https://docs.rs/anstream/`
+  - `concept\06_ecosystem\25_cli_development.md`
+- `https://docs.rs/axum/`
+  - `concept\06_ecosystem\27_web_frameworks.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\02_tower_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md`
+- `https://docs.rs/axum/latest/axum/`
+  - `concept\06_ecosystem\27_web_frameworks.md`
+  - `concept\06_ecosystem\31_microservice_patterns.md`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+  - `concept\06_ecosystem\48_data_engineering.md`
+  - `docs\03_guides\03_async_closures_deep_dive.md`
+  - `docs\03_practice\03_project_11_web_server.md`
+  - `docs\content\scenarios\10_web_application_scenarios.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\12_actix_web_architecture.md`
+  - `docs\rust-ownership-decidability\15-application-domains\web-development.md`
+  - `docs\rust-ownership-decidability\actor-specialty\case-studies\actix-web-production.md`
+  - `docs\rust-ownership-decidability\case-studies\actix-web-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\jsonwebtoken-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\web-server-architecture.md`
+  - `knowledge\06_ecosystem\deep_dives\01_axum_deep_dive.md`
+  - `knowledge\06_ecosystem\deep_dives\README.md`
+- `https://docs.rs/poem/latest/poem/`
+  - `concept\06_ecosystem\27_web_frameworks.md`
+- `https://docs.rs/hyper/latest/hyper/`
+  - `concept\06_ecosystem\27_web_frameworks.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\02_tower_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_tonic_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_reqwest_architecture.md`
+  - `knowledge\06_ecosystem\deep_dives\01_axum_deep_dive.md`
+- `https://github.com/crate-ci/cargo-release`
+  - `concept\06_ecosystem\28_devops_and_ci_cd.md`
+- `https://github.com/GoogleContainerTools/distroless`
+  - `concept\06_ecosystem\28_devops_and_ci_cd.md`
+  - `knowledge\06_ecosystem\deployment\01_kubernetes_deployment_guide.md`
+- `https://github.com/rust-cross/cargo-zigbuild`
+  - `concept\06_ecosystem\28_devops_and_ci_cd.md`
+- `https://github.com/Swatinem/rust-cache`
+  - `concept\06_ecosystem\28_devops_and_ci_cd.md`
+- `https://github.com/crate-ci/cargo-release/blob/master/docs/reference.md`
+  - `concept\06_ecosystem\28_devops_and_ci_cd.md`
+- `https://github.com/axodotdev/cargo-dist`
+  - `concept\06_ecosystem\28_devops_and_ci_cd.md`
+- `https://github.com/dtolnay/rust-toolchain`
+  - `concept\06_ecosystem\28_devops_and_ci_cd.md`
+- `https://github.com/rust-lang/rfcs/pull/3560`
+  - `concept\06_ecosystem\28_devops_and_ci_cd.md`
+- `https://github.com/TheAlgorithms/Rust`
+  - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
+- `https://arxiv.org/abs/2026.05.08`
+  - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
+- `https://docs.rs/rayon`
+  - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism-deep.md`
+  - `docs\rust-ownership-decidability\case-studies\rayon-formal-analysis.md`
+- `https://leetcode.com/problems/coin-change/`
+  - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
+- `https://leetcode.com/problems/partition-equal-subset-sum/`
+  - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
+- `https://leetcode.com/problems/implement-trie-prefix-tree/`
+  - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
+- `https://github.com/namanlp/rustp`
+  - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
+- `https://leetcode.com/problems/number-of-1-bits/`
+  - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
+- `https://leetcode.com/problemset/`
+  - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
+- `https://docs.rs/failsafe/`
+  - `concept\06_ecosystem\31_microservice_patterns.md`
+- `https://docs.rs/failsafe/latest/failsafe/`
+  - `concept\06_ecosystem\31_microservice_patterns.md`
+- `https://docs.rs/tower/latest/tower/discover/index.html`
+  - `concept\06_ecosystem\31_microservice_patterns.md`
+- `https://docs.rs/axum/latest/axum/middleware/index.html`
+  - `concept\06_ecosystem\31_microservice_patterns.md`
+- `https://github.com/linkerd/linkerd2-proxy`
+  - `concept\06_ecosystem\31_microservice_patterns.md`
+  - `docs\rust-ownership-decidability\case-studies\cloud\README.md`
+- `https://github.com/tokio-rs/axum/tree/main/examples`
+  - `concept\06_ecosystem\31_microservice_patterns.md`
+  - `knowledge\06_ecosystem\deep_dives\01_axum_deep_dive.md`
+- `https://docs.rs/lapin/`
+  - `concept\06_ecosystem\32_event_driven_architecture.md`
+- `https://docs.rs/rdkafka/`
+  - `concept\06_ecosystem\32_event_driven_architecture.md`
+  - `concept\06_ecosystem\36_stream_processing_ecosystem.md`
+- `https://docs.rs/tokio/latest/tokio/sync/broadcast/index.html`
+  - `concept\06_ecosystem\32_event_driven_architecture.md`
+  - `concept\06_ecosystem\40_reactive_programming.md`
+- `https://docs.rs/lapin/latest/lapin/`
+  - `concept\06_ecosystem\32_event_driven_architecture.md`
+- `https://docs.rs/rdkafka/latest/rdkafka/`
+  - `concept\06_ecosystem\32_event_driven_architecture.md`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://docs.rs/nats/latest/nats/`
+  - `concept\06_ecosystem\32_event_driven_architecture.md`
+- `https://docs.rs/bus/latest/bus/`
+  - `concept\06_ecosystem\32_event_driven_architecture.md`
+- `https://docs.rs/bloom/latest/bloom/`
+  - `concept\06_ecosystem\32_event_driven_architecture.md`
+- `https://docs.rs/rust_fsm/latest/rust_fsm/`
+  - `concept\06_ecosystem\32_event_driven_architecture.md`
+- `https://docs.rs/tokio-stream/latest/tokio_stream/`
+  - `concept\06_ecosystem\32_event_driven_architecture.md`
+  - `concept\06_ecosystem\40_reactive_programming.md`
+- `https://github.com/fede1024/rust-rdkafka/tree/master/examples`
+  - `concept\06_ecosystem\32_event_driven_architecture.md`
+- `https://docs.rs/eventstore/`
+  - `concept\06_ecosystem\33_cqrs_event_sourcing.md`
+- `https://docs.rs/cqrs-es/`
+  - `concept\06_ecosystem\33_cqrs_event_sourcing.md`
+- `https://github.com/awslabs/aws-lambda-rust-runtime`
+  - `concept\06_ecosystem\35_architecture_patterns.md`
+  - `docs\rust-ownership-decidability\case-studies\cloud\README.md`
+- `https://docs.rs/fluvio/`
+  - `concept\06_ecosystem\36_stream_processing_ecosystem.md`
+- `https://github.com/TimelyDataflow/timely-dataflow`
+  - `concept\06_ecosystem\36_stream_processing_ecosystem.md`
+- `https://github.com/TimelyDataflow/differential-dataflow`
+  - `concept\06_ecosystem\36_stream_processing_ecosystem.md`
+- `https://docs.rs/async-stream/`
+  - `concept\06_ecosystem\36_stream_processing_ecosystem.md`
+- `https://github.com/tikv/tikv`
+  - `concept\06_ecosystem\37_database_systems.md`
+- `https://github.com/quickwit-oss/tantivy`
+  - `concept\06_ecosystem\37_database_systems.md`
+- `https://github.com/surrealdb/surrealdb`
+  - `concept\06_ecosystem\37_database_systems.md`
+- `https://docs.rs/quinn/`
+  - `concept\06_ecosystem\38_network_protocols.md`
+- `https://docs.rs/rustls/`
+  - `concept\06_ecosystem\38_network_protocols.md`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://docs.rs/h3/`
+  - `concept\06_ecosystem\38_network_protocols.md`
+- `https://docs.rs/tokio-net/`
+  - `concept\06_ecosystem\38_network_protocols.md`
+- `https://github.com/rust-lang/rfcs/pull/9204`
+  - `concept\06_ecosystem\38_network_protocols.md`
+- `https://github.com/rust-lang/rfcs/pull/9000`
+  - `concept\06_ecosystem\38_network_protocols.md`
+  - `docs\03_guides\03_quic_http3_guide.md`
+- `https://github.com/rust-lang/rfcs/pull/9114`
+  - `concept\06_ecosystem\38_network_protocols.md`
+  - `docs\03_guides\03_quic_http3_guide.md`
+- `https://gitlab.redox-os.org/redox-os/redox`
+  - `concept\06_ecosystem\39_os_kernel.md`
+- `https://theseus-os.github.io/Theseus/`
+  - `concept\06_ecosystem\39_os_kernel.md`
+- `https://wiki.osdev.org/Rust`
+  - `concept\06_ecosystem\39_os_kernel.md`
+  - `docs\rust-ownership-decidability\15-application-domains\systems-programming.md`
+- `https://theseus-os.github.io/Theseus/book/`
+  - `concept\06_ecosystem\39_os_kernel.md`
+- `https://docs.rs/rxrust/`
+  - `concept\06_ecosystem\40_reactive_programming.md`
+- `https://haskell.cs.yale.edu/wp-content/uploads/2011/02/frp.pdf`
+  - `concept\06_ecosystem\40_reactive_programming.md`
+- `https://conal.net/papers/push-pull-frp/push-pull-frp.pdf`
+  - `concept\06_ecosystem\40_reactive_programming.md`
+- `https://docs.rs/rxrust/latest/rxrust/`
+  - `concept\06_ecosystem\40_reactive_programming.md`
+- `https://github.com/reactive-streams/reactive-streams-jvm`
+  - `concept\06_ecosystem\40_reactive_programming.md`
+- `https://docs.rs/futures-signals/latest/futures_signals/`
+  - `concept\06_ecosystem\40_reactive_programming.md`
+- `https://docs.rs/futures/latest/futures/stream/trait.StreamExt.html`
+  - `concept\06_ecosystem\40_reactive_programming.md`
+- `https://docs.rs/tokio-stream/latest/tokio_stream/trait.StreamExt.html`
+  - `concept\06_ecosystem\40_reactive_programming.md`
+- `https://github.com/rust-unofficial/awesome-rust#frp`
+  - `concept\06_ecosystem\40_reactive_programming.md`
+- `https://docs.rs/futures/latest/futures/stream/index.html`
+  - `concept\06_ecosystem\40_reactive_programming.md`
+- `https://docs.rs/async-stream/latest/async_stream/`
+  - `concept\06_ecosystem\40_reactive_programming.md`
+- `https://dl.acm.org/doi/10.1145/567446.567462`
+  - `concept\06_ecosystem\41_workflow_theory.md`
+- `http://www.workflowpatterns.com/`
+  - `concept\06_ecosystem\41_workflow_theory.md`
+- `https://www.researchgate.net/publication/220659968_Semantics_and_analysis_of_business_process_models_in_BPMN`
+  - `concept\06_ecosystem\41_workflow_theory.md`
+- `https://doi.org/10.1007/978-3-540-89743-1_8`
+  - `concept\06_ecosystem\41_workflow_theory.md`
+- `http://www.workflowpatterns.com/patterns/control/`
+  - `concept\06_ecosystem\41_workflow_theory.md`
+- `http://www.workflowpatterns.com/patterns/state/`
+  - `concept\06_ecosystem\41_workflow_theory.md`
+- `https://mitpress.mit.edu/9780262731034/the-formal-semantics-of-programming-languages/`
+  - `concept\06_ecosystem\41_workflow_theory.md`
+- `https://docs.rs/tokio/latest/tokio/macro.join.html`
+  - `concept\06_ecosystem\41_workflow_theory.md`
+- `https://www.researchgate.net/publication/220440051_The_Application_of_Petri_Nets_to_Workflow_Management`
+  - `concept\06_ecosystem\41_workflow_theory.md`
+- `https://dl.acm.org/doi/10.1109/TSE.1982.235252`
+  - `concept\06_ecosystem\41_workflow_theory.md`
+- `https://mitpress.mit.edu/9780262032704/model-checking/`
+  - `concept\06_ecosystem\41_workflow_theory.md`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://docs.rs/async-graphql/latest/async_graphql/`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://docs.rs/tower-http/latest/tower_http/`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://docs.rs/validator/latest/validator/`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://docs.rs/garde/latest/garde/`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://docs.rs/utoipa/latest/utoipa/`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://github.com/graphql/dataloader`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://docs.rs/async-graphql/latest/async_graphql/dataloader/index.html`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://docs.rs/async-graphql/latest/async_graphql/attr.Subscription.html`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://docs.rs/tonic/latest/tonic/codec/`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://docs.rs/tonic/latest/tonic/service/interceptor/index.html`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://docs.rs/ring/`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://github.com/RustCrypto`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+  - `docs\rust-ownership-decidability\case-studies\blockchain\README.md`
+- `https://docs.rs/rustls/latest/rustls/`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://docs.rs/ed25519-dalek/latest/ed25519_dalek/`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://docs.rs/aes-gcm/latest/aes_gcm/`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://docs.rs/chacha20poly1305/latest/chacha20poly1305/`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://docs.rs/x25519-dalek/latest/x25519_dalek/`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://docs.rs/sha2/latest/sha2/`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://docs.rs/blake3/latest/blake3/`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://docs.rs/hmac/latest/hmac/`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://docs.rs/argon2/latest/argon2/`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://docs.rs/hkdf/latest/hkdf/`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://docs.rs/rustls/latest/rustls/manual/index.html`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://github.com/dalek-cryptography`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://docs.rs/curve25519-dalek/latest/curve25519_dalek/`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://docs.rs/subtle/latest/subtle/`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/ir.md`
+  - `concept\06_ecosystem\45_compiler_internals.md`
+  - `concept\07_future\16_cranelift_backend_preview.md`
+- `https://github.com/rust-lang/miri/blob/master/src/borrow_tracker/tree_borrows/mod.rs`
+  - `concept\06_ecosystem\45_compiler_internals.md`
+- `https://docs.rs/candle-core/`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `https://docs.rs/burn/`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `https://docs.rs/tch/`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `https://github.com/huggingface/candle`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+  - `concept\07_future\21_rust_in_ai.md`
+  - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
+  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
+  - `docs\rust-ownership-decidability\case-studies\ml-ai\README.md`
+- `https://github.com/LaurentMazare/tch-rs`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+  - `concept\07_future\21_rust_in_ai.md`
+- `https://github.com/pykeio/ort`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+  - `concept\07_future\21_rust_in_ai.md`
+- `https://github.com/rust-ml/linfa`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+  - `concept\06_ecosystem\55_rust_for_data_science.md`
+- `https://github.com/rust-ml`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+  - `docs\rust-ownership-decidability\case-studies\ml-ai\README.md`
+- `https://github.com/vaaaaanquish/Awesome-Rust-MachineLearning`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+  - `docs\rust-ownership-decidability\case-studies\ml-ai\README.md`
+- `https://github.com/tracel-ai/burn`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+  - `concept\07_future\21_rust_in_ai.md`
+- `https://github.com/pola-rs/polars`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `https://docs.rs/candle-core/latest/candle_core/`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `https://github.com/LaurentMazare/tch-rs/tree/main/examples`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `https://docs.rs/ort/latest/ort/`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+  - `concept\06_ecosystem\55_rust_for_data_science.md`
+- `https://docs.rs/linfa/latest/linfa/`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+  - `concept\06_ecosystem\55_rust_for_data_science.md`
+- `https://github.com/smartcorelib/smartcore`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `https://docs.rs/smartcore/latest/smartcore/`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `https://h2oai.github.io/db-benchmark/`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+  - `concept\06_ecosystem\55_rust_for_data_science.md`
+- `https://github.com/ggerganov/ggml`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `https://arxiv.org/abs/2103.13630`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `https://docs.rs/candle-core/latest/candle_core/quantized/`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `https://github.com/torch2424/wasm-by-example`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `https://matklad.github.io/2023/03/26/rust-myths-and-vegetables.html`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `https://github.com/huggingface/candle#performance`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `https://docs.rs/candle-core/latest/candle_core/struct.Tensor.html`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `https://arxiv.org/abs/2101.11080`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `https://github.com/rust-lang/rfcs/pull/3873`
+  - `concept\06_ecosystem\47_compiler_infrastructure.md`
+- `https://github.com/liquid-rust/flux`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/hacspec/hax`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `https://github.com/model-checking/verify-rust-std`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `https://www.cis.upenn.edu/~lee/09cis500/lectures/verification.pdf`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `https://github.com/rust-lang`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `https://github.com/model-checking/kani/releases`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `https://diffblue.github.io/cbmc/`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+  - `docs\05_guides\05_kani_practical_guide.md`
+- `https://viperproject.github.io/prusti-dev/user-guide/`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+  - `docs\archive\rust-ownership-chinese\guides\prusti-tutorial.md`
+- `https://doi.org/10.1007/s001650200018`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `http://why3.lri.fr/`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+  - `docs\archive\rust-ownership-chinese\guides\creusot-tutorial.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://creusot-rs.github.io/creusot/guide/pearlite.html`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `https://github.com/Z3Prover/z3`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+  - `docs\05_guides\05_verus_practical_guide.md`
+  - `docs\archive\rust-ownership-chinese\guides\creusot-tutorial.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-06-verus-guide.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://ranjitjhala.github.io/static/flux-pldi23.pdf`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `https://arxiv.org/abs/2010.07763`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `https://dl.acm.org/doi/10.1145/3704886`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `https://github.com/AeneasVerif/charon`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `https://model-checking.github.io/kani/tutorial-kani-rustc.html`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `https://verus-lang.github.io/verus/guide/compare.html`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `https://model-checking.github.io/kani/publications.html`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `https://github.com/verus-lang/verus/blob/main/README.md`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `https://model-checking.github.io/kani/limitations.html`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+  - `docs\05_guides\05_kani_practical_guide.md`
+- `https://github.com/rust-lang/miri#miri-is-slow`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `https://model-checking.github.io/kani/tutorial-first-steps.html`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `https://model-checking.github.io/kani/coverage-report.html`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `https://docs.rs/polars/`
+  - `concept\06_ecosystem\48_data_engineering.md`
+  - `concept\06_ecosystem\55_rust_for_data_science.md`
+- `https://docs.rs/arrow/`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://docs.rs/datafusion/`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://docs.rs/object_store/latest/object_store/`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://github.com/apache/arrow-datafusion`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://rust-unofficial.github.io/patterns/patterns/creational/builder.html`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://docs.rs/tokio/latest/tokio/task/index.html`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://docs.rs/parquet/latest/parquet/`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://github.com/delta-io/delta/blob/master/PROTOCOL.md`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://github.com/delta-io/delta-rs`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://docs.rs/moka/latest/moka/`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://docs.rs/object_store/latest/object_store/trait.ObjectStore.html#method.get`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://docs.rs/tokio/latest/tokio/io/index.html`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://github.com/rustls/rustls`
+  - `concept\06_ecosystem\48_industrial_case_studies.md`
+- `https://docs.rs/rodio/latest/rodio/`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://docs.rs/wgpu/latest/wgpu/`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\11_wgpu_architecture.md`
+- `https://docs.rs/bevy/latest/bevy/`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://docs.rs/bevy_ecs/latest/bevy_ecs/`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://paroj.github.io/gltut/`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://sotrh.github.io/learn-wgpu/`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://github.com/gfx-rs/gfx`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://cse442-17f.github.io/Gilbert-Johnson-Keerthi-Distance-Algorithm/`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://docs.rs/cpal/latest/cpal/`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://github.com/pdeljanov/Symphonia`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://docs.rs/tokio/latest/tokio/fs/index.html`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://docs.rs/notify/latest/notify/`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://github.com/pond3r/ggpo`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://docs.rs/wgpu/latest/wgpu/struct.CommandEncoder.html`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://github.com/gfx-rs/wgpu/wiki/Encoders,-Command-Buffers,-and-Queues`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://docs.rs/nalgebra/latest/nalgebra/`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+  - `concept\06_ecosystem\55_rust_for_data_science.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\14_nalgebra_architecture.md`
+- `https://docs.rs/winit/latest/winit/`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://docs.rs/gilrs/latest/gilrs/`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://docs.rs/hecs/latest/hecs/`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://docs.rs/raft/`
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+- `https://docs.rs/hotstuff-rs/`
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+- `https://arxiv.org/abs/1803.05069`
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+- `https://dl.acm.org/doi/10.1145/3149.214121`
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+- `https://dl.acm.org/doi/10.1145/357172.357176`
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+- `https://raft.github.io/`
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+  - `docs\rust-ownership-decidability\14-distributed-systems\13-01-distributed-patterns.md`
+- `https://docs.rs/raft/latest/raft/`
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+- `https://github.com/etcd-io/raft`
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+- `https://arxiv.org/abs/1807.04938`
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+- `https://arxiv.org/abs/1904.04098`
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+- `https://decentralizedthoughts.github.io/2019-12-20-hotsuff/`
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+- `https://github.com/informalsystems/tendermint-rs`
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+- `https://github.com/cosmos/cosmos-rust`
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+- `https://crates.io/crates/roqoqo`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://github.com/renmusxd/rustqip`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://crates.io/crates/q1tsim`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://github.com/delapuente/qasmsim`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://github.com/rustpq/pqcrypto`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://crates.io/crates/rustls-post-quantum`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://docs.rs/roqoqo/`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://hqsquantumsimulations.github.io/qoqo/`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://github.com/HQSquantumsimulations/qoqo-quest`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://crates.io/crates/qip`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://docs.rs/qip/`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://arewequantumyet.github.io/`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://github.com/HQSquantumsimulations/qoqo-qiskit`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://arxiv.org/abs/2512.23183`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://crates.io/crates/qforge`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://crates.io/crates/quantrs2`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://arxiv.org/abs/2301.02619`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://arxiv.org/abs/1905.01330`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://github.com/rust-lang/rfcs/pull/2948`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://github.com/open-quantum-safe/liboqs-rust`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://github.com/PQClean/PQClean`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://docs.rs/pqcrypto-kyber/`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://github.com/rustls/rustls/tree/main/rustls-post-quantum`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://arxiv.org/abs/1304.3061`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://arxiv.org/abs/1411.4028`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://arxiv.org/abs/quant-ph/9508027`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://arxiv.org/abs/1801.00862`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://arxiv.org/abs/2302.14043`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://doi.org/10.1016/0375-9601(82)90084-6`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `https://docs.rs/rclrs/`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://github.com/ros2-rust/ros2_rust`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://github.com/tier4/safe_drive`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://github.com/openrr/openrr`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://docs.rs/nalgebra/`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://doi.org/10.1109/IROS.2016.7758091`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://doi.org/10.1109/LRA.2020.2967328`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://www.iso.org/standard/68383.html`
+  - `concept\06_ecosystem\52_robotics.md`
+  - `concept\07_future\07_mcdc_coverage_preview.md`
+  - `concept\07_future\14_ferrocene_preview.md`
+  - `knowledge\04_expert\safety_critical\01_completion_report_100_percent.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\01_academic_research_landscape.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\02_rust_ecosystem_mind_map.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\01_comprehensive_language_comparison_matrix.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\02_rust_multi_dimensional_matrix.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\03_rust_ownership_memory_model_matrix.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\04_toolchain_evaluation_matrix.md`
+  - `knowledge\04_expert\safety_critical\02_rust_safety_critical_ecosystem_master_index.md`
+  - `knowledge\04_expert\safety_critical\03_decision_trees\01_rust_decision_trees.md`
+  - `knowledge\04_expert\safety_critical\03_decision_trees\02_safety_integrity_level_selection_guide.md`
+  - `knowledge\04_expert\safety_critical\03_readme_rust_safety_critical_ecosystem.md`
+  - `knowledge\04_expert\safety_critical\04_axiomatic_reasoning\01_formal_verification_practical_guide.md`
+  - `knowledge\04_expert\safety_critical\04_axiomatic_reasoning\02_rust_axiomatic_reasoning_trees.md`
+  - `knowledge\04_expert\safety_critical\05_strategic_guidance\01_adoption_strategy_and_roi_analysis.md`
+  - `knowledge\04_expert\safety_critical\05_strategic_guidance\02_comprehensive_recommendations_and_opinions.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\01_education_and_training_roadmap.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\02_rust_2026_2030_roadmap_forecast.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\03_sustainable_roadmap_and_plans.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\04_technology_watch_and_emerging_trends.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\01_case_study_01_ferrocene_certification.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\02_case_study_02_nasa_cfs_rust.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\03_case_study_03_automotive_ecus.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\04_case_study_04_medical_devices.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\05_case_study_05_railway_signaling.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\06_case_study_06_autonomous_driving.md`
+  - `knowledge\04_expert\safety_critical\08_training\01_assessment_and_certification.md`
+  - `knowledge\04_expert\safety_critical\08_training\02_certification_prep_guide.md`
+  - `knowledge\04_expert\safety_critical\08_training\03_hands_on_lab_exercises.md`
+  - `knowledge\04_expert\safety_critical\08_training\04_interactive_learning_resources.md`
+  - `knowledge\04_expert\safety_critical\09_reference\01_api_design_guidelines.md`
+  - `knowledge\04_expert\safety_critical\09_reference\02_checklists_and_templates.md`
+  - `knowledge\04_expert\safety_critical\09_reference\03_community_and_contributing.md`
+  - `knowledge\04_expert\safety_critical\09_reference\04_comprehensive_international_alignment_completion_report.md`
+  - `knowledge\04_expert\safety_critical\09_reference\05_deployment_and_maintenance_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\06_faq_and_troubleshooting.md`
+  - `knowledge\04_expert\safety_critical\09_reference\07_ffi_integration_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\08_glossary_and_definitions.md`
+  - `knowledge\04_expert\safety_critical\09_reference\09_metrics_and_measurement_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\10_performance_optimization_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\11_project_templates.md`
+  - `knowledge\04_expert\safety_critical\09_reference\12_quick_reference_card.md`
+  - `knowledge\04_expert\safety_critical\09_reference\13_rust_safety_critical_coding_guidelines.md`
+  - `knowledge\04_expert\safety_critical\09_reference\14_safety_critical_checklists.md`
+  - `knowledge\04_expert\safety_critical\09_reference\15_security_audit_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\16_supply_chain_security_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\17_toolchain_setup_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\18_tools_configuration_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\19_troubleshooting_and_debugging_guide.md`
+  - `knowledge\04_expert\safety_critical\10_standards\01_do_178c_rust_compliance_pathway.md`
+  - `knowledge\04_expert\safety_critical\10_standards\02_iec_61508_rust_implementation_guide.md`
+  - `knowledge\04_expert\safety_critical\10_standards\03_iso_26262_rust_implementation_guide.md`
+  - `knowledge\04_expert\safety_critical\10_standards\04_misra_c_2025_addendum_6_guide.md`
+  - `knowledge\04_expert\safety_critical\10_standards\05_regulatory_landscape_and_approvals.md`
+- `https://docs.rs/rclrs/latest/rclrs/`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://github.com/ros2-rust/examples`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://tier4.github.io/safe_drive/`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://docs.rs/r2r/latest/r2r/`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://github.com/eclipse-cyclonedds/cyclonedds-rust`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://github.com/s2e-systems/dust-dds`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://ros-real-time.github.io/`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://github.com/ros2/examples/tree/master/rclcpp/executors`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://github.com/rust-cv/nshare`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://docs.rs/ndarray/latest/ndarray/`
+  - `concept\06_ecosystem\52_robotics.md`
+  - `concept\06_ecosystem\55_rust_for_data_science.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\14_nalgebra_architecture.md`
+- `https://openrr.github.io/`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://docs.rs/k/latest/k/`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://docs.rs/pathfinding/latest/pathfinding/`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://doi.org/10.1109/TRO.2016.2624754`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://docs.rs/osqp/latest/osqp/`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://oxfordcontrol.github.io/ClarabelDocs/`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://docs.rs/pathfinding/`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://docs.rs/embedded-graphics/`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.rs/lvgl/`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.rs/embedded-graphics/latest/embedded_graphics/index.html`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.rs/embedded-graphics/latest/embedded_graphics/pixelcolor/index.html`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.rs/embedded-graphics/latest/embedded_graphics/`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://github.com/embedded-graphics/embedded-graphics#supported-displays`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://github.com/rust-embedded/awesome-embedded-rust#display`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.rs/embedded-graphics/latest/embedded_graphics/draw_target/trait.DrawTarget.html`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.rs/embedded-graphics/latest/embedded_graphics/mock_display/struct.MockDisplay.html`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://github.com/embedded-graphics/examples`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://github.com/lvgl/lv_binding_rust`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.rs/lvgl/latest/lvgl/`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.rs/egui/latest/egui/`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.rs/egui/latest/egui/#immediate-mode`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://github.com/emilk/egui/tree/master/crates/egui_demo_app`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://github.com/emilk/egui/discussions/categories/embedded`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.rs/cortex-m/latest/cortex_m/macro.singleton.html`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.rs/embassy-stm32/latest/embassy_stm32/dma/`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.rs/embedded-graphics/latest/embedded_graphics/mono_font/index.html`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.rs/embedded-fonts/latest/embedded_fonts/`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.rs/ttf-parser/latest/ttf_parser/`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.rs/ab_glyph/latest/ab_glyph/`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://harfbuzz.github.io/`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.rs/embedded-hal/latest/embedded_hal/digital/trait.InputPin.html`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.rs/micromath/latest/micromath/`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.rs/embedded-graphics/latest/`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.rs/egui/latest/`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.rs/ttf-parser/latest/`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.rs/cortex-m/latest/cortex_m/peripheral/struct.SCB.html`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://github.com/stm32-rs/stm32f4xx-hal`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.rs/wasm-bindgen/`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://webassembly.github.io/spec/core/`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://rustwasm.github.io/docs/wasm-bindgen/reference/js-promises-and-rust-futures.html`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://rustwasm.github.io/docs/wasm-pack/`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+  - `concept\07_future\28_rust_for_webassembly.md`
+- `https://rustwasm.github.io/docs/wasm-pack/commands/build.html`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://github.com/thedodd/trunk`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://github.com/bytecodealliance/cargo-component`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://github.com/bytecodealliance/cargo-component/blob/main/README.md`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://github.com/bytecodealliance/wit-bindgen#language-support`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://github.com/WebAssembly/wasi-filesystem`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://docs.rs/wasi/`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://github.com/WebAssembly/simd`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://github.com/WebAssembly/simd/blob/main/proposals/simd/SIMD.md`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://github.com/WebAssembly/binaryen/blob/main/src/tools/wasm-opt.cpp`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://github.com/rustwasm/twiggy`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://github.com/bytecodealliance/wasmtime/blob/main/docs/security.md`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://rustwasm.github.io/docs/wasm-bindgen/reference/types.html`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://rustwasm.github.io/docs/wasm-bindgen/reference/types/exported-rust-types.html`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://rustwasm.github.io/docs/wasm-bindgen/reference/receiving-js-closures-in-rust.html`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://rustwasm.github.io/book/game-of-life/setup.html`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://github.com/bytecodealliance/cargo-component#motivation`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://docs.rs/ndarray/`
+  - `concept\06_ecosystem\55_rust_for_data_science.md`
+  - `concept\07_future\01_ai_integration.md`
+- `https://docs.rs/plotters/`
+  - `concept\06_ecosystem\55_rust_for_data_science.md`
+- `https://github.com/apache/datafusion`
+  - `concept\06_ecosystem\55_rust_for_data_science.md`
+- `https://docs.rs/statrs/latest/statrs/`
+  - `concept\06_ecosystem\55_rust_for_data_science.md`
+- `https://docs.rs/ndarray/latest/ndarray/doc/ndarray_for_numpy_users/index.html`
+  - `concept\06_ecosystem\55_rust_for_data_science.md`
+- `https://docs.rs/plotters/latest/plotters/`
+  - `concept\06_ecosystem\55_rust_for_data_science.md`
+- `https://github.com/plotters-rs/plotters`
+  - `concept\06_ecosystem\55_rust_for_data_science.md`
+- `https://docs.rs/egui-plot/latest/egui_plot/`
+  - `concept\06_ecosystem\55_rust_for_data_science.md`
+- `https://github.com/evcxr/evcxr/blob/main/evcxr_jupyter/README.md`
+  - `concept\06_ecosystem\55_rust_for_data_science.md`
+- `https://github.com/evcxr/evcxr`
+  - `concept\06_ecosystem\55_rust_for_data_science.md`
+- `https://github.com/astral-sh/ruff`
+  - `concept\06_ecosystem\55_rust_for_data_science.md`
+- `https://docs.rs/bindgen/`
+  - `concept\06_ecosystem\56_c_to_rust_translation.md`
+- `https://arxiv.org/abs/2604.17261`
+  - `concept\06_ecosystem\56_c_to_rust_translation.md`
+- `https://arxiv.org/abs/2412.15042`
+  - `concept\06_ecosystem\56_c_to_rust_translation.md`
+- `https://arxiv.org/abs/2603.02617`
+  - `concept\06_ecosystem\56_c_to_rust_translation.md`
+- `https://github.com/Cpp2Rust/cpp2rust`
+  - `concept\06_ecosystem\56_c_to_rust_translation.md`
+- `https://github.com/UW-HARVEST/Hayroll`
+  - `concept\06_ecosystem\56_c_to_rust_translation.md`
+- `https://arxiv.org/abs/2305.02287`
+  - `concept\06_ecosystem\56_c_to_rust_translation.md`
+- `https://arxiv.org/abs/2504.15254`
+  - `concept\06_ecosystem\56_c_to_rust_translation.md`
+- `https://github.com/anirudhkhatry/CRUST-bench`
+  - `concept\06_ecosystem\56_c_to_rust_translation.md`
+- `https://doi.org/10.1145/3656406`
+  - `concept\06_ecosystem\56_c_to_rust_translation.md`
+- `https://doi.org/10.1145/3691620.3694985`
+  - `concept\06_ecosystem\56_c_to_rust_translation.md`
+- `https://arxiv.org/abs/2103.15450`
+  - `concept\06_ecosystem\56_c_to_rust_translation.md`
+- `https://google.github.io/comprehensive-rust/chromium.html`
+  - `concept\06_ecosystem\58_platform_rust_integration.md`
+- `https://google.github.io/comprehensive-rust/bare-metal.html`
+  - `concept\06_ecosystem\58_platform_rust_integration.md`
+  - `docs\05_guides\05_embedded_rust_guide.md`
+- `https://google.github.io/comprehensive-rust/android.html`
+  - `concept\06_ecosystem\58_platform_rust_integration.md`
+- `https://github.com/rust-embedded/awesome-embedded-rust`
+  - `concept\06_ecosystem\58_platform_rust_integration.md`
+  - `docs\03_guides\03_embedded_rust_guide.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded\README.md`
+- `https://docs.rs/cc`
+  - `concept\06_ecosystem\59_cargo_build_scripts.md`
+- `https://github.com/rust-lang/cargo/issues/9930`
+  - `concept\06_ecosystem\60_cargo_dependency_resolution.md`
+- `https://crates.io/crates/cargo-local-registry`
+  - `concept\06_ecosystem\61_cargo_source_replacement.md`
+- `https://github.com/tokio-rs/tokio`
+  - `concept\06_ecosystem\64_cargo_manifest_reference.md`
+  - `docs\rust-ownership-decidability\async-specialty\authoritative\tokio-deep-dive.md`
+- `https://github.com/rust-lang/project-stable-mir`
+  - `concept\06_ecosystem\68_rustc_driver_and_stable_mir.md`
+- `https://github.com/rust-lang/rust/labels/F-roadmap`
+  - `concept\07_future\01_ai_integration.md`
+  - `concept\07_future\02_formal_methods.md`
+  - `concept\07_future\03_evolution.md`
+  - `concept\07_future\04_effects_system.md`
+  - `concept\07_future\11_stable_abi_preview.md`
+  - `concept\07_future\12_inline_const_pattern_preview.md`
+  - `concept\07_future\13_must_not_suspend_preview.md`
+  - `concept\07_future\14_lifetime_capture_preview.md`
+  - `concept\07_future\15_rpitit_preview.md`
+  - `concept\07_future\16_type_alias_impl_trait_preview.md`
+  - `concept\07_future\17_arbitrary_self_types_preview.md`
+  - `concept\07_future\17_const_trait_preview.md`
+  - `concept\07_future\18_field_projections_preview.md`
+  - `concept\07_future\22_gen_blocks_preview.md`
+  - `concept\07_future\22_std_autodiff_preview.md`
+  - `concept\07_future\24_wasm_target_evolution.md`
+  - `concept\07_future\29_ebpf_rust.md`
+  - `concept\07_future\archive\01_ai_integration_original.md`
+  - `concept\07_future\rust_1_97_preview.md`
+  - `concept\07_future\rust_1_98_preview.md`
+- `https://github.com/features/copilot`
+  - `concept\07_future\01_ai_integration.md`
+  - `concept\07_future\archive\01_ai_integration_original.md`
+- `https://github.com/rust-lang/crater`
+  - `concept\07_future\02_formal_methods.md`
+  - `concept\07_future\24_roadmap.md`
+- `https://github.com/rust-lang/crater/tree/master/docs`
+  - `concept\07_future\02_formal_methods.md`
+- `https://model-checking.github.io/kani/ci.html`
+  - `concept\07_future\02_formal_methods.md`
+- `https://p-org.github.io/P/`
+  - `concept\07_future\02_formal_methods.md`
+- `https://github.com/tlaplus/Examples`
+  - `concept\07_future\02_formal_methods.md`
+- `https://github.com/apalache-mc/apalache`
+  - `concept\07_future\02_formal_methods.md`
+- `https://docs.rs/stateright`
+  - `concept\07_future\02_formal_methods.md`
+- `https://marketplace.visualstudio.com/items?itemName=alygin.vscode-tlaplus`
+  - `concept\07_future\02_formal_methods.md`
+- `https://verus-lang.github.io/`
+  - `concept\07_future\02_formal_methods.md`
+- `https://github.com/rust-lang/rfcs/pull/3936`
+  - `concept\07_future\03_evolution.md`
+- `https://github.com/rust-lang/rfcs/pull/3962`
+  - `concept\07_future\03_evolution.md`
+- `https://github.com/rust-lang/rust/labels/C-tracking-issue`
+  - `concept\07_future\03_evolution.md`
+- `https://github.com/tiif`
+  - `concept\07_future\03_evolution.md`
+- `https://github.com/josh-project/josh`
+  - `concept\07_future\03_evolution.md`
+- `https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md`
+  - `concept\07_future\03_evolution.md`
+  - `concept\07_future\rust_1_97_preview.md`
+- `https://koka-lang.github.io/`
+  - `concept\07_future\04_effects_system.md`
+- `https://github.com/rust-lang/rfcs/pull/2582`
+  - `concept\07_future\05_rust_version_tracking.md`
+- `https://github.com/rust-lang/rfcs/pull/3484`
+  - `concept\07_future\05_rust_version_tracking.md`
+- `https://github.com/rust-lang/rfcs/pull/2822`
+  - `concept\07_future\05_rust_version_tracking.md`
+- `https://github.com/rust-lang/rust/issues/124656`
+  - `concept\07_future\07_mcdc_coverage_preview.md`
+- `https://github.com/mozilla/grcov`
+  - `concept\07_future\07_mcdc_coverage_preview.md`
+- `https://github.com/taiki-e/cargo-llvm-cov`
+  - `concept\07_future\07_mcdc_coverage_preview.md`
+  - `docs\03_guides\03_test_coverage.md`
+- `https://github.com/rust-lang/rfcs/pull/`
+  - `concept\07_future\08_safety_tags_preview.md`
+  - `concept\07_future\24_roadmap.md`
+  - `concept\07_future\25_open_enums_preview.md`
+- `https://vgatherps.github.io/`
+  - `concept\07_future\08_safety_tags_preview.md`
+- `https://github.com/rust-lang/compiler-team/issues/`
+  - `concept\07_future\09_parallel_frontend_preview.md`
+  - `concept\07_future\16_cranelift_backend_preview.md`
+  - `concept\07_future\17_rust_specification_preview.md`
+- `https://github.com/rust-lang/rust/issues/`
+  - `concept\07_future\09_parallel_frontend_preview.md`
+- `https://github.com/rust-lang/compiler-team/`
+  - `concept\07_future\09_parallel_frontend_preview.md`
+  - `concept\07_future\16_cranelift_backend_preview.md`
+  - `concept\07_future\17_rust_specification_preview.md`
+- `https://github.com/rust-lang/rfcs/pull/3621`
+  - `concept\07_future\10_derive_coerce_pointee_preview.md`
+- `https://github.com/rust-lang/rust/issues/123430`
+  - `concept\07_future\10_derive_coerce_pointee_preview.md`
+- `https://github.com/rust-lang/rfcs/pull/2632`
+  - `concept\07_future\11_const_trait_impl_preview.md`
+- `https://github.com/rust-lang/rust/issues/67792`
+  - `concept\07_future\11_const_trait_impl_preview.md`
+  - `concept\07_future\17_const_trait_preview.md`
+- `https://github.com/rust-lang/const-eval`
+  - `concept\07_future\11_const_trait_impl_preview.md`
+- `https://github.com/rust-lang/rust/issues/109417`
+  - `concept\07_future\12_return_type_notation_preview.md`
+- `https://github.com/rust-lang/rust/issues/83310`
+  - `concept\07_future\13_must_not_suspend_preview.md`
+- `https://github.com/rust-lang/rfcs/pull/3458`
+  - `concept\07_future\13_unsafe_fields_preview.md`
+- `https://github.com/rust-lang/rust/issues/132922`
+  - `concept\07_future\13_unsafe_fields_preview.md`
+- `https://github.com/rust-lang/rfcs/`
+  - `concept\07_future\13_unsafe_fields_preview.md`
+  - `concept\07_future\25_open_enums_preview.md`
+  - `concept\07_future\27_compile_time_execution.md`
+- `https://github.com/rustfoundation/safety-critical-rust-consortium/tree/main/subcommittee/coding-guidelines`
+  - `concept\07_future\14_ferrocene_preview.md`
+- `https://github.com/rustfoundation/safety-critical-rust-consortium`
+  - `concept\07_future\14_ferrocene_preview.md`
+- `https://github.com/rust-lang/rfcs/pull/3513`
+  - `concept\07_future\15_gen_blocks_preview.md`
+- `https://github.com/rust-lang/rust/issues/117078`
+  - `concept\07_future\15_gen_blocks_preview.md`
+  - `concept\07_future\22_gen_blocks_preview.md`
+- `https://github.com/rust-lang/rust/issues/93132`
+  - `concept\07_future\15_gen_blocks_preview.md`
+- `https://github.com/rust-lang/rfcs/labels/T-libs-api`
+  - `concept\07_future\15_gen_blocks_preview.md`
+- `https://github.com/rust-lang/rfcs/issues/3709`
+  - `concept\07_future\15_pin_ergonomics_preview.md`
+- `https://github.com/rust-lang/rfcs/pull/3627`
+  - `concept\07_future\15_pin_ergonomics_preview.md`
+- `https://github.com/bytecodealliance/wasmtime/tree/main/cranelift/docs`
+  - `concept\07_future\16_cranelift_backend_preview.md`
+- `https://github.com/rust-lang/rustc_codegen_cranelift`
+  - `concept\07_future\16_cranelift_backend_preview.md`
+- `https://github.com/rust-lang/rustc_codegen_cranelift/issues/...`
+  - `concept\07_future\16_cranelift_backend_preview.md`
+- `https://github.com/bytecodealliance/wasmtime/issues/...`
+  - `concept\07_future\16_cranelift_backend_preview.md`
+- `https://github.com/rust-lang/rust/issues/63063`
+  - `concept\07_future\16_type_alias_impl_trait_preview.md`
+- `https://github.com/rust-lang/rust/issues/44874`
+  - `concept\07_future\17_arbitrary_self_types_preview.md`
+- `https://github.com/rust-lang/rust-project-goals/issues/107`
+  - `concept\07_future\17_ergonomic_ref_counting_preview.md`
+- `https://github.com/rust-lang/rfcs/pull/3355`
+  - `concept\07_future\17_rust_specification_preview.md`
+- `https://rust-gcc.github.io/2026/04/13/2026-03-monthly-report.html`
+  - `concept\07_future\17_rust_specification_preview.md`
+- `https://github.com/rust-lang/spec/`
+  - `concept\07_future\17_rust_specification_preview.md`
+- `https://github.com/rust-lang/spec`
+  - `concept\07_future\17_rust_specification_preview.md`
+- `https://github.com/rust-lang/rust/issues/126482`
+  - `concept\07_future\18_async_drop_preview.md`
+  - `docs\06_toolchain\06_14_rust_1_95_nightly_preview.md`
+- `https://internals.rust-lang.org/t/asynchronous-destructors/11127`
+  - `concept\07_future\18_async_drop_preview.md`
+- `https://docs.rs/tokio/latest/tokio/runtime/struct.Runtime.html#method.shutdown_timeout`
+  - `concept\07_future\18_async_drop_preview.md`
+- `https://github.com/rust-lang/rust/issues/145383`
+  - `concept\07_future\18_field_projections_preview.md`
+- `https://github.com/rust-lang/rust/pull/152730`
+  - `concept\07_future\18_field_projections_preview.md`
+- `https://github.com/Rust-for-Linux/linux/tree/rust/samples/rust`
+  - `concept\07_future\19_rust_for_linux.md`
+- `https://github.com/google/sanitizers/wiki/AddressSanitizer`
+  - `concept\07_future\20_borrowsanitizer_preview.md`
+- `https://github.com/google/sanitizers/wiki`
+  - `concept\07_future\20_borrowsanitizer_preview.md`
+- `https://github.com/rust-lang/miri/`
+  - `concept\07_future\20_borrowsanitizer_preview.md`
+- `https://huggingface.github.io/candle/`
+  - `concept\07_future\21_rust_in_ai.md`
+- `https://github.com/huggingface/candle/tree/main/candle-examples`
+  - `concept\07_future\21_rust_in_ai.md`
+  - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
+- `https://github.com/rust-lang/rust/issues/43122`
+  - `concept\07_future\22_gen_blocks_preview.md`
+- `https://github.com/rust-lang/rust/issues/124509`
+  - `concept\07_future\22_std_autodiff_preview.md`
+- `https://github.com/obi1kenobi/cargo-semver-checks`
+  - `concept\07_future\24_cargo_semver_checks_preview.md`
+  - `docs\03_guides\03_semver_checks.md`
+- `https://github.com/rust-lang/google-summer-of-code`
+  - `concept\07_future\24_cargo_semver_checks_preview.md`
+- `https://github.com/rust-lang/rfcs/pull/3086`
+  - `concept\07_future\24_roadmap.md`
+- `https://github.com/rust-lang/rfcs/pull/1398`
+  - `concept\07_future\24_roadmap.md`
+- `https://github.com/rust-lang/rfcs/pull/3185`
+  - `concept\07_future\24_roadmap.md`
+- `https://github.com/rust-lang/rfcs/pull/2515`
+  - `concept\07_future\24_roadmap.md`
+- `https://github.com/rust-lang/rust/issues/86656`
+  - `concept\07_future\24_roadmap.md`
+- `https://github.com/rust-lang/rust/issues/126534`
+  - `concept\07_future\24_roadmap.md`
+- `https://github.com/rust-lang/rust/issues/32838`
+  - `concept\07_future\24_roadmap.md`
+- `https://github.com/rust-lang/rfcs/pull/2008`
+  - `concept\07_future\24_roadmap.md`
+  - `concept\07_future\25_open_enums_preview.md`
+- `https://github.com/rust-lang/lang-team/`
+  - `concept\07_future\24_roadmap.md`
+- `https://github.com/WebAssembly/WASI/blob/main/specifications/wasi-0.2.4/Overview.md`
+  - `concept\07_future\24_wasm_target_evolution.md`
+- `https://github.com/rust-lang/rust/issues/145052`
+  - `concept\07_future\25_aarch64_sve_sme_preview.md`
+- `https://github.com/rust-lang/rfcs/pull/3838`
+  - `concept\07_future\25_aarch64_sve_sme_preview.md`
+- `https://github.com/rust-lang/rust-project-goals/issues/270`
+  - `concept\07_future\25_aarch64_sve_sme_preview.md`
+- `https://github.com/rust-lang/rust/issues/157110`
+  - `concept\07_future\25_aarch64_sve_sme_preview.md`
+- `https://github.com/rust-lang/rfcs/pull/3518`
+  - `concept\07_future\25_open_enums_preview.md`
+- `https://github.com/rust-lang/rust/issues/156628`
+  - `concept\07_future\25_open_enums_preview.md`
+  - `concept\07_future\rust_1_97_preview.md`
+- `https://github.com/rust-lang/chalk`
+  - `concept\07_future\26_specialization_preview.md`
+  - `docs\research_notes\type_theory\10_lifetime_formalization.md`
+  - `docs\research_notes\type_theory\10_variance_theory.md`
+  - `knowledge\04_expert\academic\05_type_system_foundations_guide.md`
+- `https://docs.rs/syn/`
+  - `concept\07_future\27_compile_time_execution.md`
+  - `knowledge\03_advanced\macros\02_procedural.md`
+- `https://docs.rs/wee_alloc/`
+  - `concept\07_future\28_rust_for_webassembly.md`
+- `https://rustwasm.github.io/book/reference/code-size.html`
+  - `concept\07_future\28_rust_for_webassembly.md`
+- `https://github.com/WebAssembly/WASI/tree/main/specifications/wasi-0.2.4`
+  - `concept\07_future\28_rust_for_webassembly.md`
+- `https://docs.rs/aya/`
+  - `concept\07_future\29_ebpf_rust.md`
+- `https://docs.rs/aya-ebpf/`
+  - `concept\07_future\29_ebpf_rust.md`
+- `https://github.com/rex-rs/rex`
+  - `concept\07_future\29_ebpf_rust.md`
+- `https://facebookmicrosites.github.io/bpf/blog/2020/02/19/bpf-portability-and-co-re.html`
+  - `concept\07_future\29_ebpf_rust.md`
+- `https://github.com/rust-lang/compiler-team/issues/958`
+  - `concept\07_future\borrow_sanitizer.md`
+- `https://github.com/rust-lang/rust/issues/126567`
+  - `concept\07_future\borrow_sanitizer.md`
+  - `concept\07_future\rust_1_97_preview.md`
+- `https://github.com/rust-lang/rust/issues/125153`
+  - `concept\07_future\rust_1_97_preview.md`
+- `https://github.com/microsoft/verus-proof-synthesis`
+  - `concept\07_future\rust_1_97_preview.md`
+- `https://github.com/rust-lang/rust/pull/155147`
+  - `concept\07_future\rust_1_97_preview.md`
+- `https://github.com/rust-lang/rust/pull/155131`
+  - `concept\07_future\rust_1_97_preview.md`
+- `https://github.com/rust-lang/rust/pull/155528`
+  - `concept\07_future\rust_1_97_preview.md`
+- `https://github.com/rust-lang/rust/issues/136468`
+  - `concept\07_future\rust_1_97_preview.md`
+- `https://github.com/rust-lang/rust/pull/136457`
+  - `concept\07_future\rust_1_97_preview.md`
+- `https://github.com/rust-lang/rust/issues/130494`
+  - `concept\07_future\rust_1_98_preview.md`
+- `https://github.com/rust-lang/rust/pull/157029`
+  - `concept\07_future\rust_1_98_preview.md`
+- `https://github.com/rust-lang/rust/pull/152544`
+  - `concept\07_future\rust_1_98_preview.md`
+- `https://github.com/rust-lang/rust/pull/156629`
+  - `concept\07_future\rust_1_98_preview.md`
+- `https://github.com/rust-lang/rust/pull/157877`
+  - `concept\07_future\rust_1_98_preview.md`
+- `https://github.com/rust-lang/rustfmt/pull/6935`
+  - `concept\07_future\rust_1_98_preview.md`
+- `https://github.com/rust-lang/rust/pull/157734`
+  - `concept\07_future\rust_1_98_preview.md`
+- `https://github.com/rust-lang/rfcs/pull/3382`
+  - `concept\sources\RFC_INDEX.md`
+- `https://github.com/rust-lang/rfcs/pull/1053`
+  - `concept\sources\RFC_INDEX.md`
+- `https://github.com/rust-lang/rfcs/pull/2581`
+  - `concept\sources\RFC_INDEX.md`
+- `https://github.com/rust-lang/rfcs/pull/2753`
+  - `concept\sources\RFC_INDEX.md`
+- `https://github.com/rust-lang/rfcs/pull/2807`
+  - `concept\sources\RFC_INDEX.md`
+- `https://github.com/rust-lang/rfcs/pull/1299`
+  - `concept\sources\RFC_INDEX.md`
+- `https://github.com/rust-lang/rfcs/pull/2010`
+  - `concept\sources\RFC_INDEX.md`
+- `https://github.com/rust-lang/rustlings`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\README.md`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `knowledge\00_start\01_hello_world.md`
+  - `knowledge\00_start\02_installation.md`
+  - `knowledge\00_start\03_learning_roadmap.md`
+  - `knowledge\00_start\README.md`
+  - `knowledge\01_fundamentals\01_borrowing.md`
+  - `knowledge\01_fundamentals\README.md`
+  - `knowledge\03_advanced\unsafe\03_maybe_uninit.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\03_rust_ownership_memory_model_matrix.md`
+  - `knowledge\06_ecosystem\deep_dives\01_axum_deep_dive.md`
+  - `knowledge\README.md`
+- `https://en.cppreference.com/w/cpp/language/reference`
+  - `knowledge\01_fundamentals\01_borrowing.md`
+- `https://matklad.github.io/`
+  - `knowledge\02_intermediate\01_collections.md`
+- `https://github.com/dtolnay/anyhow`
+  - `docs\rust-ownership-decidability\case-studies\cli\README.md`
+  - `knowledge\02_intermediate\02_error_handling.md`
+- `https://jackh726.github.io/posts/2021/04/const-generics-and-gats/`
+  - `knowledge\02_intermediate\03_generics.md`
+- `https://en.cppreference.com/w/cpp/language/templates`
+  - `knowledge\02_intermediate\03_generics.md`
+- `https://github.com/rust-lang/rust/tree/master/library/alloc/src/rc.rs`
+  - `knowledge\02_intermediate\04_smart_pointers.md`
+- `https://dl.acm.org/doi/10.1145/75277.75283`
+  - `knowledge\02_intermediate\06_traits.md`
+- `https://en.cppreference.com/w/cpp/language/constraints`
+  - `knowledge\02_intermediate\06_traits.md`
+- `https://crates.io/crates/derive_more`
+  - `knowledge\02_intermediate\07_type_conversions.md`
+- `https://rust-lang-nursery.github.io/rust-cookbook/conversions.html`
+  - `knowledge\02_intermediate\07_type_conversions.md`
+- `https://github.com/rust-lang/rust/pull/131038`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+  - `knowledge\02_intermediate\macros\01_cfg_select.md`
+- `https://github.com/rust-lang/rustc-reading-club`
+  - `knowledge\03_advanced\01_compiler_internals.md`
+- `https://docs.rs/libc/`
+  - `knowledge\03_advanced\02_ffi.md`
+- `https://mozilla.github.io/cbindgen/`
+  - `knowledge\03_advanced\02_ffi.md`
+  - `knowledge\04_expert\safety_critical\09_reference\07_ffi_integration_guide.md`
+- `https://github.com/rust-lang/rust/issues/109737`
+  - `knowledge\03_advanced\04_lazy_initialization.md`
+- `https://github.com/Kobzol/cargo-pgo`
+  - `knowledge\03_advanced\05_performance_optimization.md`
+- `https://dl.acm.org/doi/10.1145/949305.949332`
+  - `knowledge\03_advanced\06_type_driven_correctness.md`
+- `https://doi.org/10.1145/949305.949332`
+  - `knowledge\03_advanced\06_type_driven_correctness.md`
+- `https://dl.acm.org/doi/10.1145/143165.143526`
+  - `knowledge\03_advanced\06_type_driven_correctness.md`
+- `https://github.com/smol-rs/smol`
+  - `knowledge\03_advanced\async\README.md`
+  - `knowledge\06_ecosystem\emerging\01_async_closures.md`
+- `https://github.com/Amanieu/parking_lot`
+  - `knowledge\03_advanced\concurrency\02_synchronization.md`
+- `https://github.com/crossbeam-rs/crossbeam`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\README.md`
+  - `knowledge\03_advanced\concurrency\README.md`
+- `https://rust-lang-nursery.github.io/rust-cookbook/concurrency.html`
+  - `knowledge\03_advanced\concurrency\README.md`
+- `https://danielkeep.github.io/tlborm/book/index.html`
+  - `knowledge\03_advanced\macros\01_declarative.md`
+- `https://docs.rs/quote/`
+  - `knowledge\03_advanced\macros\02_procedural.md`
+- `https://docs.rs/proc-macro2/`
+  - `knowledge\03_advanced\macros\02_procedural.md`
+- `https://itanium-cxx-abi.github.io/cxx-abi/abi.html`
+  - `knowledge\03_advanced\unsafe\01_ffi.md`
+- `https://github.com/eqrion/cbindgen`
+  - `knowledge\03_advanced\unsafe\01_ffi.md`
+- `https://gankra.github.io/blah/tower-of-weakenings/`
+  - `knowledge\03_advanced\unsafe\04_unsafe_rust.md`
+- `https://github.com/rust-secure-code`
+  - `knowledge\04_expert\02_unsafe_audit.md`
+- `https://github.com/RustSec/cargo-audit`
+  - `knowledge\04_expert\02_unsafe_audit.md`
+- `https://github.com/rust-secure-code/safety-dance`
+  - `knowledge\04_expert\02_unsafe_audit.md`
+- `https://github.com/rust-crate/cargo-geiger`
+  - `knowledge\04_expert\02_unsafe_audit.md`
+- `https://dblp.org/db/conf/pldi/index.html`
+  - `docs\rust-formal-engineering-system\00_master_index.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\11_benchmark_minimal_guide.md`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+  - `docs\rust-ownership-decidability\case-studies\actix-web-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\alloc-cortex-m-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\anyhow-thiserror-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\async-graphql-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\async-std-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bevy-ecs-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bindgen-cbindgen-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bytemuck-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\criterion-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\cxx-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\dashmap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\deadpool-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\defmt-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\diesel-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embassy-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-storage-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\figment-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\flate2-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\frunk-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\futures-crate-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\futures-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\generic-array-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\image-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\indexmap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\jsonwebtoken-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\lapin-rdkafka-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\littlefs2-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\nom-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\nrf-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\once_cell-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\opentelemetry-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\ouroboros-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\panic-probe-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\parking_lot-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\pin-project-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\postcard-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\prometheus-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\proptest-quickcheck-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\pyo3-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rand-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rayon-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\regex-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\reqwest-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rustls-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-formal-analysis-deep.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-json-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\slog-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\smoltcp-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\socket2-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\sqlx-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-future-stream-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-hashmap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-trait-semantics-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\stm32f4xx-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tantivy-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tarpc-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\thiserror-anyhow-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-process-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-stream-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-util-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tonic-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tonic-grpc-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tower-formal-analysis.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\authoritative-sources\academic-papers.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\drop-elaboration-formal.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\refinedrust-type-system.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\tree-borrows-comprehensive.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\separation-logic-soundness.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\type-ownership-unified-theory.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\logical-relations.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\memory-model-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\operational-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\semantics-equivalence-proof.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-06_FORMAL_ANALYSIS_PROGRESS.md`
+  - `knowledge\04_expert\academic\01_coq_formalization_guide.md`
+  - `knowledge\04_expert\academic\02_tree_borrows_authoritative_guide.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\01_academic_research_landscape.md`
+  - `knowledge\04_expert\safety_critical\04_axiomatic_reasoning\01_formal_verification_practical_guide.md`
+- `https://github.com/rust-lang/unsafe-code-guidelines`
+  - `docs\archive\duplicate_content_2026_06_08\10_tree_borrows_authoritative_guide.md`
+  - `knowledge\04_expert\academic\02_tree_borrows_authoritative_guide.md`
+- `https://arxiv.org/abs/2206.07185`
+  - `docs\archive\rust-ownership-chinese\README.md`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+  - `docs\archive\rust-ownership-chinese\papers\aeneas-functional-translation.md`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+  - `knowledge\04_expert\academic\03_ownership_model_comprehensive.md`
+- `https://dl.acm.org/`
+  - `docs\00_meta\00_annual_review_template.md`
+  - `docs\00_meta\00_content_reconstruction_plan_2026.md`
+  - `docs\00_meta\00_docs_reorganization_complete.md`
+  - `docs\00_meta\00_documentation_division_of_labor.md`
+  - `docs\00_meta\00_documentation_lifecycle.md`
+  - `docs\00_meta\00_formal_content_master_index.md`
+  - `docs\00_meta\00_improvement_plan_execution_complete.md`
+  - `docs\00_meta\00_pdca_template.md`
+  - `docs\00_meta\00_project_health_dashboard.md`
+  - `docs\00_meta\00_quarterly_sync_checklist.md`
+  - `docs\00_meta\00_reorganization_complete.md`
+  - `docs\00_meta\00_rust_feature_tracking_template.md`
+  - `docs\00_meta\00_rust_version_alignment_checklist.md`
+  - `docs\00_meta\00_template_concept_doc.md`
+  - `docs\00_meta\00_template_decision_tree.md`
+  - `docs\00_meta\analysis\00_rust_2026_project_goals_monthly_tracking.md`
+  - `docs\00_meta\history\00_2026_reorganization.md`
+  - `docs\01_cargo_build_optimization.md`
+  - `docs\01_core\01_ownership_borrowing_lifetimes.md`
+  - `docs\01_core\README.md`
+  - `docs\01_learning\01_cross_module_learning_roadmap_2025_10_25.md`
+  - `docs\01_learning\01_cross_module_navigation.md`
+  - `docs\01_learning\01_learning_path_guide_2025_10_24.md`
+  - `docs\01_learning\01_learning_path_planning.md`
+  - `docs\01_learning\01_lfrs_certification_mapping.md`
+  - `docs\01_learning\01_mdbook_quiz_guide.md`
+  - `docs\02_reference\02_cross_language_comparison.md`
+  - `docs\02_reference\02_edge_cases_and_special_cases.md`
+  - `docs\02_reference\02_error_code_mapping.md`
+  - `docs\02_reference\02_rustnomicon_alignment.md`
+  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
+  - `docs\02_reference\ALIGNMENT_GUIDE.md`
+  - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_algorithm_decision_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_algorithms_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_assert_matches_guide.md`
+  - `docs\02_reference\quick_reference\02_async_patterns.md`
+  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_closures_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_control_flow_functions_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_error_handling_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_generics_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_network_programming_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_ownership_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_pin_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_process_management_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_rust_195_features_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_rust_196_features_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_smart_pointers_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_strings_formatting_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_testing_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_type_system.md`
+  - `docs\02_reference\quick_reference\02_wasm_cheatsheet.md`
+  - `docs\02_reference\quick_reference\README.md`
+  - `docs\03_guides\03_async_closures_deep_dive.md`
+  - `docs\03_guides\03_cxx_interop_guide.md`
+  - `docs\03_guides\03_embedded_rust_guide.md`
+  - `docs\03_guides\03_fuzzing_guide.md`
+  - `docs\03_guides\03_io_uring_guide.md`
+  - `docs\03_guides\03_let_chains_guide.md`
+  - `docs\03_guides\03_miri_guide.md`
+  - `docs\03_guides\03_quic_http3_guide.md`
+  - `docs\03_guides\03_rust_2024_edition_future_in_prelude.md`
+  - `docs\03_guides\03_rust_2024_edition_rpit_migration.md`
+  - `docs\03_guides\03_semver_checks.md`
+  - `docs\03_practice\03_cross_module_practical_projects_2025_10_25.md`
+  - `docs\03_practice\03_project_01_cli_tool.md`
+  - `docs\03_practice\03_project_02_file_processor.md`
+  - `docs\03_practice\03_project_03_calculator.md`
+  - `docs\03_practice\03_project_04_password_generator.md`
+  - `docs\03_practice\03_project_05_text_statistics.md`
+  - `docs\03_practice\03_project_06_concurrent_downloader.md`
+  - `docs\03_practice\03_project_07_chat_server.md`
+  - `docs\03_practice\03_project_08_cache_system.md`
+  - `docs\03_practice\03_project_09_log_parser.md`
+  - `docs\03_practice\03_project_10_data_pipeline.md`
+  - `docs\03_practice\03_project_12_wasm_app.md`
+  - `docs\03_practice\03_project_13_database_engine.md`
+  - `docs\03_practice\03_project_15_distributed_system.md`
+  - `docs\03_practice\README.md`
+  - `docs\04_research\04_cranelift_backend.md`
+  - `docs\04_research\04_endangered_by_language_saved_by_compiler_popl_2026.md`
+  - `docs\04_research\04_llm_c_to_rust_migration.md`
+  - `docs\04_research\04_next_generation_trait_solver.md`
+  - `docs\04_research\04_ng_trait_solver.md`
+  - `docs\04_research\04_polonius_next_gen_borrow_checker.md`
+  - `docs\04_research\04_polonius_tracking.md`
+  - `docs\04_research\04_rust_for_linux.md`
+  - `docs\04_research\04_rust_for_linux_2026.md`
+  - `docs\04_research\04_rust_formal_verification.md`
+  - `docs\04_research\04_safety_critical_alignment_2026.md`
+  - `docs\04_research\04_verusbelt_pldi_2026.md`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+  - `docs\04_thinking\04_applications_analysis_view.md`
+  - `docs\04_thinking\04_decision_graph_network.md`
+  - `docs\04_thinking\04_mind_map_collection.md`
+  - `docs\04_thinking\04_proof_graph_network.md`
+  - `docs\04_thinking\04_thinking_representation_methods.md`
+  - `docs\05_guides\05_advanced_topics_deep_dive.md`
+  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
+  - `docs\05_guides\05_algorithms_usage_guide.md`
+  - `docs\05_guides\05_async_programming_usage_guide.md`
+  - `docs\05_guides\05_cli_applications_guide.md`
+  - `docs\05_guides\05_control_flow_functions_usage_guide.md`
+  - `docs\05_guides\05_cross_module_integration_examples.md`
+  - `docs\05_guides\05_cxx_rust_interop_evaluation.md`
+  - `docs\05_guides\05_design_patterns_usage_guide.md`
+  - `docs\05_guides\05_embedded_rust_guide.md`
+  - `docs\05_guides\05_formal_verification_integration_guide.md`
+  - `docs\05_guides\05_inline_assembly_guide.md`
+  - `docs\05_guides\05_macro_system_usage_guide.md`
+  - `docs\05_guides\05_miri_practical_guide.md`
+  - `docs\05_guides\05_performance_tuning_guide.md`
+  - `docs\05_guides\05_pragmatic_guidelines_checklist.md`
+  - `docs\05_guides\05_safety_tags_guide.md`
+  - `docs\05_guides\05_threads_concurrency_usage_guide.md`
+  - `docs\05_guides\05_troubleshooting_guide.md`
+  - `docs\05_guides\05_type_system_usage_guide.md`
+  - `docs\05_guides\05_wasm_usage_guide.md`
+  - `docs\05_guides\BEST_PRACTICES.md`
+  - `docs\05_guides\workflow\01_workflow_theory.md`
+  - `docs\06_docker_guide.md`
+  - `docs\06_toolchain\01_compiler_features.md`
+  - `docs\06_toolchain\03_rustdoc_advanced.md`
+  - `docs\06_toolchain\06_05_rust_1_93_vs_1_92_comparison.md`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+  - `docs\06_toolchain\06_09_rust_1_93_compatibility_deep_dive.md`
+  - `docs\06_toolchain\06_11_rust_1_93_cargo_rustdoc_changes.md`
+  - `docs\06_toolchain\06_14_rust_1_95_nightly_preview.md`
+  - `docs\06_toolchain\06_cargo_script_guide.md`
+  - `docs\06_toolchain\06_cranelift_backend_guide.md`
+  - `docs\06_toolchain\06_parallel_frontend.md`
+  - `docs\06_toolchain\06_toml_v11_cargo_guide.md`
+  - `docs\06_toolchain\README.md`
+  - `docs\07_project\07_completion_status.md`
+  - `docs\07_project\07_documentation_cross_reference_guide.md`
+  - `docs\07_project\07_extension_deepening_plan_2026.md`
+  - `docs\07_project\07_hierarchy_mapping_master.md`
+  - `docs\07_project\07_knowledge_structure_framework.md`
+  - `docs\07_project\07_module_knowledge_structure_guide.md`
+  - `docs\07_project\07_project_architecture_guide.md`
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\10_api_guide.md`
+  - `docs\10_architecture.md`
+  - `docs\10_authoritative_sources_and_citations.md`
+  - `docs\10_dependency_graph.md`
+  - `docs\10_migration_guide_2026.md`
+  - `docs\10_miri_guide.md`
+  - `docs\10_sccache_setup.md`
+  - `docs\10_terminology_standard.md`
+  - `docs\content\10_content_crates_mapping.md`
+  - `docs\content\academic\10_tree_borrows_guide.md`
+  - `docs\content\academic\README.md`
+  - `docs\content\ecosystem\README.md`
+  - `docs\content\emerging\README.md`
+  - `docs\content\production\README.md`
+  - `docs\content\representations\10_knowledge_representation_matrix.md`
+  - `docs\research_notes\10_research_notes_organization.md`
+  - `docs\research_notes\10_safe_unsafe_comprehensive_analysis.md`
+  - `docs\research_notes\10_theorem_rust_example_mapping.md`
+  - `docs\research_notes\INDEX.md`
+  - `docs\research_notes\README.md`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+  - `docs\research_notes\formal_methods\10_variance_concept_mindmap.md`
+  - `docs\research_notes\type_theory\10_lifetime_formalization.md`
+  - `docs\research_notes\type_theory\10_variance_theory.md`
+  - `docs\research_notes\type_theory\README.md`
+  - `docs\rust-formal-engineering-system\00_master_index.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\01_type_system\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\02_memory_safety\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\02_ownership_system\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\05_trait_system\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\06_lifetime_management\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\README.md`
+  - `docs\rust-formal-engineering-system\02_practical_applications\README.md`
+  - `docs\rust-formal-engineering-system\02_practical_applications\memory\README.md`
+  - `docs\rust-formal-engineering-system\02_practical_applications\performance\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\01_synchronous\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\09_actor_model\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\11_benchmark_minimal_guide.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\README.md`
+  - `docs\rust-formal-engineering-system\03_compiler_theory\README.md`
+  - `docs\rust-formal-engineering-system\03_design_patterns\04_concurrent\README.md`
+  - `docs\rust-formal-engineering-system\03_design_patterns\README.md`
+  - `docs\rust-formal-engineering-system\05_software_engineering\07_testing\README.md`
+  - `docs\rust-formal-engineering-system\05_software_engineering\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\01_compiler\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\02_package_manager\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\03_build_tools\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\README.md`
+  - `docs\rust-formal-engineering-system\09_research_agenda\04_research_methods\README.md`
+  - `docs\rust-formal-engineering-system\10_quality_assurance\README.md`
+  - `docs\rust-formal-engineering-system\README.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-01-linear-logic-deep.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-01-linear-logic.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-03-separation-logic-deep.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-03-separation-logic.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-01-ownership-rules-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-02-borrowing-system-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-04-runtime-vs-compile-time.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\borrowing-in-depth.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\interior-mutability.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\lifetimes-mastery.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\ownership-deep-dive.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\trait-system.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\short-concepts\lifetime-concept-card.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview-deep.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-02-creusot-deep-dive.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-03-miri-deep-dive.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-06-verus-guide.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-07-refinedrust-deep-dive.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-08-gillian-rust.md`
+  - `docs\rust-ownership-decidability\04-decidability-analysis\04-01-type-inference.md`
+  - `docs\rust-ownership-decidability\05-comparative-study\05-03-rust-vs-go.md`
+  - `docs\rust-ownership-decidability\05-comparative-study\05-04-rust-vs-java.md`
+  - `docs\rust-ownership-decidability\05-comparative-study\05-05-rust-vs-swift.md`
+  - `docs\rust-ownership-decidability\08-advanced-topics\08-01-const-generics.md`
+  - `docs\rust-ownership-decidability\08-advanced-topics\README.md`
+  - `docs\rust-ownership-decidability\08-advanced-topics\data-layout.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-01-future-directions.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-02-type-system-extensions.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-03-verification-advancements.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-04-ownership-variations.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-05-ai-integration.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-06-formal-verification.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-07-std-verification-initiative.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\11-02-idiomatic-patterns.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\11-03-type-state-pattern.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\behavioral\command.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\behavioral\observer.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\behavioral\strategy.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\creational\builder.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\creational\factory.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\rust-specific\newtype.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\rust-specific\raii-guard.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\structural\adapter.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\structural\decorator.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\structural\proxy.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-02-thread-safety-patterns.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-03-message-passing-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-04-lock-free-patterns.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-05-async-patterns-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-05-async-patterns.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-07-distributed-patterns.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\README.md`
+  - `docs\rust-ownership-decidability\13-architecture-patterns\clean-architecture.md`
+  - `docs\rust-ownership-decidability\14-distributed-systems\13-01-distributed-patterns.md`
+  - `docs\rust-ownership-decidability\14-distributed-systems\consensus-patterns.md`
+  - `docs\rust-ownership-decidability\15-application-domains\data-engineering.md`
+  - `docs\rust-ownership-decidability\15-application-domains\systems-programming.md`
+  - `docs\rust-ownership-decidability\15-application-domains\web-development.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-semantic-framework.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\01-design-patterns-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\02-concurrency-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\03-async-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\04-control-data-flow.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\08-workflow-patterns.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\09-workflow-ownership-analysis.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\README.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\01-message-passing-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\02-rpc-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\03-event-driven-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\04-service-discovery-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\consistency\01-cap-theorem.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\consistency\02-consensus-algorithms.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\consistency\03-eventual-consistency.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\consistency\05-distributed-locks.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\fault-tolerance\01-failure-models.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\fault-tolerance\03-retry-patterns.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\fault-tolerance\04-timeout-patterns.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\microservices\05-bulkhead-pattern.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\01-thread-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\03-condition-variable-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\04-semaphore-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\06-memory-ordering-deep.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\01-reborrow-trait-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\02-coerceshared-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\03-const-generics-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\01-sequence.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\02-parallel-split.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\03-synchronization.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\04-exclusive-choice.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\05-simple-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\06-multi-choice.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\07-sync-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\09-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\10-arbitrary-cycles.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\11-implicit-termination.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\12-mi-without-sync.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\13-mi-with-sync.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\14-deferred-choice.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\15-interleaved-routing.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\16-milestone.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\17-critical-section.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\18-cancel-activity.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\22-recursion.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\23-transient-trigger.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\24-persistent-trigger.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\26-cancel-multiple-instance-activity.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\27-complete-multiple-instance-activity.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\28-blocking-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\29-cancelling-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\30-structured-partial-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\31-blocking-partial-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\32-cancelling-partial-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\33-generalised-and-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\37-local-synchronizing-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\40-interleaved-routing.md`
+  - `docs\rust-ownership-decidability\COMPARATIVE_ANALYSIS.md`
+  - `docs\rust-ownership-decidability\COMPREHENSIVE_COUNTEREXAMPLES_HANDBOOK.md`
+  - `docs\rust-ownership-decidability\COMPREHENSIVE_FAQ.md`
+  - `docs\rust-ownership-decidability\CONTENT_ASSOCIATION_ANALYSIS.md`
+  - `docs\rust-ownership-decidability\CROSS_REFERENCE_VERIFICATION_REPORT.md`
+  - `docs\rust-ownership-decidability\CROSS_REFERENCE_VERIFICATION_SUMMARY.md`
+  - `docs\rust-ownership-decidability\FAQ_COMPREHENSIVE.md`
+  - `docs\rust-ownership-decidability\FINAL_VERIFICATION_100_PERCENT.md`
+  - `docs\rust-ownership-decidability\FRAMEWORK_ANALYSIS_AND_GAP_REPORT.md`
+  - `docs\rust-ownership-decidability\FRAMEWORK_COMPLETION_SUMMARY.md`
+  - `docs\rust-ownership-decidability\HISTORICAL_EVOLUTION.md`
+  - `docs\rust-ownership-decidability\HORIZONTAL_CONNECTIONS.md`
+  - `docs\rust-ownership-decidability\INTERACTIVE_LEARNING_GUIDE.md`
+  - `docs\rust-ownership-decidability\MASTER_COMPREHENSIVE_ANALYSIS.md`
+  - `docs\rust-ownership-decidability\NATURAL_LANGUAGE_ARGUMENTATION_INDEX.md`
+  - `docs\rust-ownership-decidability\OVERVIEW_AND_INTUITION.md`
+  - `docs\rust-ownership-decidability\RUST_194_VS_193_COMPARISON.md`
+  - `docs\rust-ownership-decidability\THEOREM_INTUITIONS.md`
+  - `docs\rust-ownership-decidability\THEOREM_TO_COMPILER_BRIDGE.md`
+  - `docs\rust-ownership-decidability\THEORY_TO_PATTERN_BRIDGE.md`
+  - `docs\rust-ownership-decidability\UNIFIED_THEORETICAL_FRAMEWORK.md`
+  - `docs\rust-ownership-decidability\actor-specialty\ACTOR_MODEL_DEEP_DIVE.md`
+  - `docs\rust-ownership-decidability\actor-specialty\distributed\distributed-actors-formal.md`
+  - `docs\rust-ownership-decidability\actor-specialty\formal-proofs\actor-safety-theorems.md`
+  - `docs\rust-ownership-decidability\actor-specialty\patterns\actor-design-patterns-expanded.md`
+  - `docs\rust-ownership-decidability\actor-specialty\patterns\actor-design-patterns.md`
+  - `docs\rust-ownership-decidability\actor-specialty\scenario-trees\actor-application-domains.md`
+  - `docs\rust-ownership-decidability\async-specialty\embedded\embassy-guide.md`
+  - `docs\rust-ownership-decidability\case-studies\COMPLETE_DOMAIN_COVERAGE_INDEX.md`
+  - `docs\rust-ownership-decidability\case-studies\actix-web-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\alloc-cortex-m-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\arc-swap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\backoff-retry-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bevy-ecs-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bindgen-cbindgen-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\blockchain\README.md`
+  - `docs\rust-ownership-decidability\case-studies\bytemuck-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bytes-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\chrono-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\clap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\cli\README.md`
+  - `docs\rust-ownership-decidability\case-studies\cloud\README.md`
+  - `docs\rust-ownership-decidability\case-studies\config-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\const-gen-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\cortex-m-rt-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\criterion-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\cxx-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\dashmap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\database\README.md`
+  - `docs\rust-ownership-decidability\case-studies\deadpool-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\defmt-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\derive-more-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\diesel-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\diesel-orm-type-safety.md`
+  - `docs\rust-ownership-decidability\case-studies\embassy-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded\README.md`
+  - `docs\rust-ownership-decidability\case-studies\figment-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\flate2-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\frunk-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\futures-crate-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\futures-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\gamedev\README.md`
+  - `docs\rust-ownership-decidability\case-studies\generic-array-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\governor-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\heim-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\hyper-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\image-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\indexmap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\industrial-verification-aws-meta.md`
+  - `docs\rust-ownership-decidability\case-studies\insta-snapshot-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\lapin-rdkafka-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\littlefs2-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\loom-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\lru-cached-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\ml-ai\README.md`
+  - `docs\rust-ownership-decidability\case-studies\moka-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\ndarray-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\nom-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\notify-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\nrf-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\once_cell-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\opentelemetry-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\ouroboros-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\panic-probe-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\parking_lot-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\pin-project-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\postcard-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\prometheus-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\pulldown-cmark-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\pyo3-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\quinn-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rand-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rayon-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rayon-parallelism.md`
+  - `docs\rust-ownership-decidability\case-studies\ref-cast-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\regex-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\reqwest-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rkyv-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rtic-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rustls-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\security\README.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-formal-analysis-deep.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-json-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\shuttle-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\slog-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\smoltcp-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\socket2-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\sqlx-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\static-assertions-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-future-stream-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-hashmap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-option-result-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-pin-unpin-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-smart-pointers-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-sync-primitives-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-trait-semantics-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\stm32f4xx-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tantivy-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tarpc-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tera-askama-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-graceful-shutdown-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-process-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-deep.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-stream-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-util-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tonic-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tonic-grpc-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tonic-health-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tower-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tracing-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\typenum-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\usb-device-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\validator-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\walkdir-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\wasm-bindgen-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\wasm\README.md`
+  - `docs\rust-ownership-decidability\case-studies\wgpu-glium-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\zerocopy-formal-analysis.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\async-concurrency-comparison.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\memory-management-comparison.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-cpp.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-go.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-java.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-python.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\decision-trees\concurrency-model-selection.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\decision-trees\pattern-selection.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\design-patterns-comprehensive.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\extensions\advanced-ownership-patterns.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\extensions\performance-optimization.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\formal-framework\definitions.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\scenario-trees\application-domain-tree.md`
+  - `docs\rust-ownership-decidability\exercises\ADVANCED_OWNERSHIP_WORKSHOP.md`
+  - `docs\rust-ownership-decidability\extensions\ffi-interoperability.md`
+  - `docs\rust-ownership-decidability\extensions\no-std-development.md`
+  - `docs\rust-ownership-decidability\formal-foundations\README.md`
+  - `docs\rust-ownership-decidability\formal-foundations\RUST_FORMAL_SEMANTICS_DEEP.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-01-rustbelt.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-02-ownership-types.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-03-borrow-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\drop-elaboration-formal.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\executable-semantics-comparison.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\refinedrust-type-system.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\relaxed-memory-model.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\tree-borrows-comprehensive.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\PROOF_PATTERNS.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\affine-logic-decidability.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\async-execution-examples.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\async-execution-model-formal.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\decidability-theorem.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\memory-safety-proof.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\rustbelt-formalization.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\separation-logic-soundness.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\type-ownership-unified-theory.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\logical-relations.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\mechanized-proofs.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\memory-model-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\operational-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\semantics-equivalence-proof.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\type-system-formalization.md`
+  - `docs\rust-ownership-decidability\meta-model\02_semantic_domains.md`
+  - `docs\rust-ownership-decidability\meta-model\RUST_194_COMPREHENSIVE_GUIDE.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-06_FORMAL_ANALYSIS_PROGRESS.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-07_daily_update.md`
+  - `docs\templates\10_versioned_doc_template.md`
+  - `knowledge\04_expert\academic\03_ownership_model_comprehensive.md`
+- `https://github.com/rust-lang/miri/blob/master/CHANGELOG.md`
+  - `knowledge\04_expert\miri\01_tree_borrows.md`
+- `https://github.com/rust-safety-critical/wg`
+  - `knowledge\04_expert\safety_critical\01_completion_report_100_percent.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\01_academic_research_landscape.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\02_rust_ecosystem_mind_map.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\01_comprehensive_language_comparison_matrix.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\02_rust_multi_dimensional_matrix.md`
+  - `knowledge\04_expert\safety_critical\02_rust_safety_critical_ecosystem_master_index.md`
+  - `knowledge\04_expert\safety_critical\03_decision_trees\01_rust_decision_trees.md`
+  - `knowledge\04_expert\safety_critical\03_decision_trees\02_safety_integrity_level_selection_guide.md`
+  - `knowledge\04_expert\safety_critical\03_readme_rust_safety_critical_ecosystem.md`
+  - `knowledge\04_expert\safety_critical\04_axiomatic_reasoning\02_rust_axiomatic_reasoning_trees.md`
+  - `knowledge\04_expert\safety_critical\05_strategic_guidance\01_adoption_strategy_and_roi_analysis.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\01_education_and_training_roadmap.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\02_rust_2026_2030_roadmap_forecast.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\03_sustainable_roadmap_and_plans.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\04_technology_watch_and_emerging_trends.md`
+  - `knowledge\04_expert\safety_critical\08_training\01_assessment_and_certification.md`
+  - `knowledge\04_expert\safety_critical\08_training\02_certification_prep_guide.md`
+  - `knowledge\04_expert\safety_critical\08_training\03_hands_on_lab_exercises.md`
+  - `knowledge\04_expert\safety_critical\08_training\05_rust_safety_critical_training_program.md`
+  - `knowledge\04_expert\safety_critical\09_reference\04_comprehensive_international_alignment_completion_report.md`
+  - `knowledge\04_expert\safety_critical\09_reference\05_deployment_and_maintenance_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\10_performance_optimization_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\13_rust_safety_critical_coding_guidelines.md`
+  - `knowledge\04_expert\safety_critical\09_reference\14_safety_critical_checklists.md`
+  - `knowledge\04_expert\safety_critical\README.md`
+- `https://github.com/rust-lang/rust/releases/tag/1.94.0`
+  - `docs\archive\2026_05_historical_docs\RUST_194_195_FEATURES_DEEP_DIVE.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\03_rust_194_195_features_deep_dive.md`
+- `https://github.com/nasa/cFS`
+  - `knowledge\04_expert\safety_critical\07_case_studies\02_case_study_02_nasa_cfs_rust.md`
+- `https://github.com/CubeSat`
+  - `knowledge\04_expert\safety_critical\07_case_studies\02_case_study_02_nasa_cfs_rust.md`
+- `https://github.com/rust-embedded`
+  - `knowledge\04_expert\safety_critical\07_case_studies\02_case_study_02_nasa_cfs_rust.md`
+- `https://github.com/rust-spac`
+  - `knowledge\04_expert\safety_critical\07_case_studies\02_case_study_02_nasa_cfs_rust.md`
+- `https://github.com/autosar-rs`
+  - `knowledge\04_expert\safety_critical\07_case_studies\03_case_study_03_automotive_ecus.md`
+- `https://users.rust-lang.org`
+  - `knowledge\04_expert\safety_critical\09_reference\06_faq_and_troubleshooting.md`
+- `https://github.com/RustSec/rustsec`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `knowledge\04_expert\safety_critical\09_reference\15_security_audit_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\16_supply_chain_security_guide.md`
+- `https://github.com/ossf/scorecard`
+  - `knowledge\04_expert\safety_critical\09_reference\15_security_audit_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\16_supply_chain_security_guide.md`
+- `https://github.com/SeaQL/sea-orm`
+  - `knowledge\06_ecosystem\databases\01_sea_orm_deep_dive.md`
+- `https://github.com/SeaQL/sea-orm/tree/master/examples`
+  - `knowledge\06_ecosystem\databases\01_sea_orm_deep_dive.md`
+- `https://github.com/tokio-rs/axum/tree/main/examples/sqlx-postgres`
+  - `knowledge\06_ecosystem\databases\01_sea_orm_deep_dive.md`
+  - `knowledge\06_ecosystem\databases\02_sqlx_deep_dive.md`
+- `https://github.com/launchbadge/sqlx/tree/main/examples`
+  - `knowledge\06_ecosystem\databases\02_sqlx_deep_dive.md`
+- `https://github.com/rust-db`
+  - `knowledge\06_ecosystem\databases\README.md`
+- `https://crates.io/categories/database`
+  - `knowledge\06_ecosystem\databases\README.md`
+- `https://github.com/rust-lang/rust/pull/132706`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+  - `knowledge\06_ecosystem\emerging\01_async_closures.md`
+- `https://github.com/rust-lang/rust/issues/136098`
+  - `knowledge\06_ecosystem\emerging\03_rust_1_95.md`
+- `https://github.com/rust-lang/rust/issues/115585`
+  - `knowledge\06_ecosystem\emerging\03_rust_1_95.md`
+- `https://matklad.github.io/2021/09/04/fast-rust-builds.html`
+  - `docs\01_cargo_build_optimization.md`
+- `https://github.com/rust-lang/rust/pull/136562`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+- `https://github.com/rust-lang/rust/pull/136431`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+- `https://github.com/rust-lang/rust/pull/136271`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+- `https://github.com/rust-lang/rust/pull/135345`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+- `https://github.com/rust-lang/rust/pull/127909`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+- `https://github.com/rust-lang/rust/pull/135294`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+- `https://github.com/rust-lang/rust/pull/134229`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+- `https://github.com/Rust-for-Linux/linux`
+  - `docs\04_research\04_rust_for_linux.md`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+- `https://github.com/aya-rs/aya`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+- `https://github.com/rust-lang/rust/pull/134395`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+- `https://github.com/rust-lang/rust/blob/master/RELEASES.md`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+  - `docs\06_toolchain\06_20_rustdoc_196_improvements.md`
+  - `docs\rust-ownership-decidability\HISTORICAL_EVOLUTION.md`
+- `https://rust-analyzer.github.io/`
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+- `https://arxiv.org/abs/2206.00986`
+  - `docs\10_miri_guide.md`
+- `https://github.com/mozilla/sccache/releases`
+  - `docs\10_sccache_setup.md`
+- `https://github.com/awslabs/aws-sdk-rust/releases`
+  - `docs\00_meta\00_quarterly_sync_checklist.md`
+- `https://github.com/rust-lang/rust`
+  - `docs\00_meta\00_rust_feature_tracking_template.md`
+- `https://github.com/rust-lang/rust/releases`
+  - `docs\00_meta\00_rust_version_alignment_checklist.md`
+- `https://github.com/rust-lang/rust-project-goals`
+  - `docs\00_meta\analysis\00_rust_2026_project_goals_monthly_tracking.md`
+  - `docs\05_guides\05_unsafe_fields_preview.md`
+  - `docs\06_toolchain\06_cranelift_backend_guide.md`
+- `https://users.rust-lang.org/`
+  - `docs\01_learning\01_learning_path_planning.md`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+  - `docs\rust-ownership-decidability\07-references\README.md`
+  - `docs\rust-ownership-decidability\08-advanced-topics\README.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+  - `docs\rust-ownership-decidability\FAQ_COMPREHENSIVE.md`
+- `https://kaisery.github.io/trpl-zh-cn/`
+  - `docs\01_learning\01_learning_path_planning.md`
+- `https://github.com/willcrichton/mdbook-quiz`
+  - `docs\01_learning\01_mdbook_quiz_guide.md`
+- `https://isocpp.org/std/the-standard`
+  - `docs\02_reference\02_cross_language_comparison.md`
+  - `docs\03_guides\03_cxx_interop_guide.md`
+- `https://www.iso.org/standard/83626.html`
+  - `docs\02_reference\02_cross_language_comparison.md`
+- `https://github.com/rust-lang/rust/pull/135634`
+  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+- `https://github.com/rust-lang/rust/pull/145628`
+  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+- `https://github.com/rust-lang/rust/pull/145665`
+  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+- `https://docs.rs/llm`
+  - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
+  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
+- `https://github.com/rust-ml/llm/tree/main/examples`
+  - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
+- `https://docs.rs/tch/latest/tch/`
+  - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
+  - `docs\03_guides\03_let_chains_guide.md`
+  - `docs\04_research\04_next_generation_trait_solver.md`
+  - `docs\04_research\04_ng_trait_solver.md`
+  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
+  - `docs\06_toolchain\01_compiler_features.md`
+  - `docs\06_toolchain\03_rustdoc_advanced.md`
+  - `docs\06_toolchain\06_05_rust_1_93_vs_1_92_comparison.md`
+  - `docs\06_toolchain\06_09_rust_1_93_compatibility_deep_dive.md`
+  - `docs\06_toolchain\06_11_rust_1_93_cargo_rustdoc_changes.md`
+  - `docs\06_toolchain\06_14_rust_1_95_nightly_preview.md`
+  - `docs\06_toolchain\06_cranelift_backend_guide.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\05_trait_system\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\03_build_tools\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\README.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\borrowing-in-depth.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\interior-mutability.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\lifetimes-mastery.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\ownership-deep-dive.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\trait-system.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-05-ai-integration.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\rust-specific\raii-guard.md`
+  - `docs\rust-ownership-decidability\15-application-domains\data-engineering.md`
+  - `docs\rust-ownership-decidability\15-application-domains\systems-programming.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\fault-tolerance\01-failure-models.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\01-reborrow-trait-semantics.md`
+  - `docs\rust-ownership-decidability\actor-specialty\scenario-trees\actor-application-domains.md`
+  - `docs\rust-ownership-decidability\case-studies\COMPLETE_DOMAIN_COVERAGE_INDEX.md`
+  - `docs\rust-ownership-decidability\case-studies\blockchain\README.md`
+  - `docs\rust-ownership-decidability\case-studies\ml-ai\README.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\scenario-trees\application-domain-tree.md`
+  - `docs\rust-ownership-decidability\meta-model\02_semantic_domains.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-07_daily_update.md`
+- `https://github.com/rust-lang/rust/issues/108099`
+  - `docs\02_reference\quick_reference\02_assert_matches_guide.md`
+- `https://github.com/rust-lang/rust/releases/tag/1.97.0`
+  - `docs\02_reference\quick_reference\02_rust_197_features_cheatsheet.md`
+- `https://rustwasm.github.io/wasm-bindgen/`
+  - `docs\02_reference\quick_reference\02_wasm_cheatsheet.md`
+  - `docs\05_guides\05_wasm_usage_guide.md`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+- `https://rustwasm.github.io/wasm-pack/`
+  - `docs\02_reference\quick_reference\02_wasm_cheatsheet.md`
+- `https://docs.rs/axum/latest/axum/handler/index.html`
+  - `docs\03_guides\03_async_closures_deep_dive.md`
+- `https://docs.rs/tokio/latest/tokio/task/fn.spawn.html`
+  - `docs\03_guides\03_async_closures_deep_dive.md`
+- `https://github.com/embassy-rs/embassy`
+  - `docs\03_guides\03_embassy_deep_dive.md`
+- `https://docs.rs/embassy-embedded-hal/latest/embassy_embedded_hal/`
+  - `docs\03_guides\03_embassy_deep_dive.md`
+- `https://github.com/rust-embedded/embedded-hal`
+  - `docs\03_guides\03_embassy_deep_dive.md`
+- `https://rtic-rs.github.io/book/`
+  - `docs\03_guides\03_embassy_deep_dive.md`
+  - `docs\03_guides\03_embedded_rust_guide.md`
+- `https://github.com/embassy-rs/embassy/tree/main/examples`
+  - `docs\03_guides\03_embassy_deep_dive.md`
+  - `docs\rust-ownership-decidability\async-specialty\embedded\embassy-guide.md`
+- `https://github.com/embassy-rs/embassy/tree/main/examples/stm32f4`
+  - `docs\03_guides\03_embassy_deep_dive.md`
+- `https://docs.rs/embassy-stm32/latest/embassy_stm32/usart/`
+  - `docs\03_guides\03_embassy_deep_dive.md`
+- `https://docs.rs/embassy-stm32/latest/embassy_stm32/spi/`
+  - `docs\03_guides\03_embassy_deep_dive.md`
+- `https://docs.rs/esp-wifi/latest/esp_wifi/`
+  - `docs\03_guides\03_embassy_deep_dive.md`
+- `https://github.com/embassy-rs/embassy/tree/main/examples/esp32`
+  - `docs\03_guides\03_embassy_deep_dive.md`
+- `https://docs.rs/embedded-hal/`
+  - `docs\03_guides\03_embassy_deep_dive.md`
+- `https://docs.rs/svd2rust/`
+  - `docs\03_guides\03_embassy_deep_dive.md`
+- `https://rust-embedded.github.io/book/`
+  - `docs\03_guides\03_embedded_rust_guide.md`
+  - `docs\05_guides\05_embedded_rust_guide.md`
+  - `docs\rust-ownership-decidability\async-specialty\embedded\embassy-guide.md`
+  - `docs\rust-ownership-decidability\case-studies\defmt-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embassy-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-graphics-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-storage-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded\EMBEDDED_CRATES_INDEX.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded\README.md`
+  - `docs\rust-ownership-decidability\case-studies\littlefs2-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\panic-probe-formal-analysis.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\case-studies\embassy-embedded-analysis.md`
+- `https://google.github.io/oss-fuzz/`
+  - `docs\03_guides\03_fuzzing_guide.md`
+- `https://github.com/tokio-rs/tokio-uring`
+  - `docs\03_guides\03_io_uring_guide.md`
+- `https://docs.rs/io-uring/`
+  - `docs\03_guides\03_io_uring_guide.md`
+- `https://github.com/libp2p/rust-libp2p`
+  - `docs\03_guides\03_libp2p_guide.md`
+- `https://github.com/quinn-rs/quinn`
+  - `docs\03_guides\03_quic_http3_guide.md`
+- `https://github.com/rust-lang/rfcs/pull/2645`
+  - `docs\03_guides\03_rust_2024_edition_future_in_prelude.md`
+- `https://github.com/xd009642/tarpaulin`
+  - `docs\03_guides\03_test_coverage.md`
+- `https://github.com/bjorn3/rustc_codegen_cranelift`
+  - `docs\04_research\04_cranelift_backend.md`
+  - `docs\06_toolchain\06_cranelift_backend_guide.md`
+- `https://docs.rs/cranelift-codegen/latest/cranelift_codegen/ir/index.html`
+  - `docs\04_research\04_cranelift_backend.md`
+- `https://github.com/Vanille-N/tree-borrows`
+  - `docs\04_research\04_endangered_by_language_saved_by_compiler_popl_2026.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-03-miri-deep-dive.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\08-aliasing.md`
+- `https://github.com/immunant/c2rust`
+  - `docs\04_research\04_llm_c_to_rust_migration.md`
+- `https://doi.org/10.1145/3510003.3510149`
+  - `docs\04_research\04_llm_c_to_rust_migration.md`
+- `https://github.com/rust-lang/datafrog`
+  - `docs\04_research\04_polonius_next_gen_borrow_checker.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\polonius-borrow-checker.md`
+- `https://doi.org/10.1145/3009837.3009844`
+  - `docs\04_research\04_rust_formal_verification.md`
+- `https://doi.org/10.1145/3418295`
+  - `docs\04_research\04_rust_formal_verification.md`
+- `https://docs.rs/crate/tch`
+  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
+- `https://github.com/rust-cli/book`
+  - `docs\05_guides\05_cli_applications_guide.md`
+- `https://model-checking.github.io/kani/install-guide.html`
+  - `docs\05_guides\05_kani_practical_guide.md`
+- `https://model-checking.github.io/kani/tutorial-proofs.html`
+  - `docs\05_guides\05_kani_practical_guide.md`
+- `https://model-checking.github.io/kani/tutorial-nondeterministic-variables.html`
+  - `docs\05_guides\05_kani_practical_guide.md`
+- `https://model-checking.github.io/kani/tutorial-loop-unwinding.html`
+  - `docs\05_guides\05_kani_practical_guide.md`
+- `https://github.com/model-checking/kani/tree/main/tests`
+  - `docs\05_guides\05_kani_practical_guide.md`
+- `https://model-checking.github.io/kani/tutorial-comparison.html`
+  - `docs\05_guides\05_kani_practical_guide.md`
+- `https://github.com/bheisler/criterion.rs`
+  - `docs\05_guides\05_performance_tuning_guide.md`
+  - `docs\archive\c_class_audit_2026_06_08\05_guides\05_performance_testing_report.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://verus-lang.github.io/verus/guide/install.html`
+  - `docs\05_guides\05_verus_practical_guide.md`
+- `https://verus-lang.github.io/verus/guide/spec.html`
+  - `docs\05_guides\05_verus_practical_guide.md`
+- `https://verus-lang.github.io/verus/guide/loops.html`
+  - `docs\05_guides\05_verus_practical_guide.md`
+- `https://verus-lang.github.io/verus/guide/ghost.html`
+  - `docs\05_guides\05_verus_practical_guide.md`
+- `https://dl.acm.org/doi/10.1145/3591285`
+  - `docs\05_guides\05_verus_practical_guide.md`
+- `https://verus-lang.github.io/verus/guide/mut-ref.html`
+  - `docs\05_guides\05_verus_practical_guide.md`
+- `https://verus-lang.github.io/verus/guide/concurrency.html`
+  - `docs\05_guides\05_verus_practical_guide.md`
+- `https://verus-lang.github.io/verus/guide/limitations.html`
+  - `docs\05_guides\05_verus_practical_guide.md`
+- `https://github.com/verus-lang/verus/tree/main/source/rust_verify/example`
+  - `docs\05_guides\05_verus_practical_guide.md`
+- `https://github.com/microsoft/IronFleet`
+  - `docs\05_guides\05_verus_practical_guide.md`
+- `https://example.com`
+  - `docs\06_toolchain\03_rustdoc_advanced.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\11-01-rust-design-patterns.md`
+- `https://example.com/image.png`
+  - `docs\06_toolchain\03_rustdoc_advanced.md`
+- `https://docs.rs/tokio`
+  - `docs\06_toolchain\03_rustdoc_advanced.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\26-cancel-multiple-instance-activity.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\27-complete-multiple-instance-activity.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\28-blocking-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\29-cancelling-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\30-structured-partial-join.md`
+  - `docs\rust-ownership-decidability\async-specialty\README.md`
+- `https://docs.example.com/my-crate/`
+  - `docs\06_toolchain\03_rustdoc_advanced.md`
+- `https://play.rust-lang.org/`
+  - `docs\06_toolchain\03_rustdoc_advanced.md`
+  - `docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md`
+- `https://example.com/favicon.ico`
+  - `docs\06_toolchain\03_rustdoc_advanced.md`
+- `https://example.com/logo.svg`
+  - `docs\06_toolchain\03_rustdoc_advanced.md`
+- `https://example.com/logo.png`
+  - `docs\06_toolchain\03_rustdoc_advanced.md`
+- `https://docs.rs/my-crate/`
+  - `docs\06_toolchain\03_rustdoc_advanced.md`
+- `https://arxiv.org/abs/2211.13898`
+  - `docs\06_toolchain\03_rustdoc_advanced.md`
+- `https://github.com/rust-lang/libc/pull/2935`
+  - `docs\06_toolchain\06_05_rust_1_93_vs_1_92_comparison.md`
+- `https://github.com/rust-lang/rust/pull/145656`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+- `https://github.com/rust-lang/rust/pull/145954`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+- `https://github.com/rust-lang/rust/pull/146978`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+- `https://github.com/rust-lang/rust/pull/147736`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+- `https://github.com/rust-lang/rust/pull/148259`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+- `https://github.com/rust-lang/rust/pull/148602`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+- `https://github.com/rust-lang/rust/pull/148746`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+- `https://github.com/rust-lang/rust/pull/148407`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+- `https://github.com/rust-lang/rust/pull/141470`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+- `https://github.com/rust-lang/rust/pull/145974`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+- `https://github.com/rust-lang/rust/pull/148435`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+- `https://github.com/rust-lang/cargo/pull/16160`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+- `https://github.com/rust-lang/cargo/pull/16204`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+  - `docs\06_toolchain\06_11_rust_1_93_cargo_rustdoc_changes.md`
+- `https://github.com/rust-lang/cargo/pull/16263`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+  - `docs\06_toolchain\06_11_rust_1_93_cargo_rustdoc_changes.md`
+- `https://github.com/rust-lang/rust/pull/146495`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+  - `docs\06_toolchain\06_11_rust_1_93_cargo_rustdoc_changes.md`
+- `https://github.com/rust-lang/rust/pull/148176`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+  - `docs\06_toolchain\06_11_rust_1_93_cargo_rustdoc_changes.md`
+- `https://github.com/rust-lang/rust/pull/148301`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+  - `docs\06_toolchain\06_11_rust_1_93_cargo_rustdoc_changes.md`
+- `https://github.com/rust-lang/rust/pull/149197`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+  - `docs\06_toolchain\06_11_rust_1_93_cargo_rustdoc_changes.md`
+- `https://github.com/rust-lang/rust/pull/139751`
+  - `docs\06_toolchain\06_09_rust_1_93_compatibility_deep_dive.md`
+- `https://github.com/rust-lang/rust/pull/147224`
+  - `docs\06_toolchain\06_09_rust_1_93_compatibility_deep_dive.md`
+- `https://github.com/rust-lang/rust/pull/147841`
+  - `docs\06_toolchain\06_09_rust_1_93_compatibility_deep_dive.md`
+- `https://github.com/rust-lang/rust/issues/150465`
+  - `docs\06_toolchain\06_09_rust_1_93_compatibility_deep_dive.md`
+- `https://github.com/rust-lang/rust/pull/148122`
+  - `docs\06_toolchain\06_09_rust_1_93_compatibility_deep_dive.md`
+- `https://github.com/rust-lang/rust/pull/143619`
+  - `docs\06_toolchain\06_09_rust_1_93_compatibility_deep_dive.md`
+- `https://github.com/rust-lang/rust/pull/147017`
+  - `docs\06_toolchain\06_09_rust_1_93_compatibility_deep_dive.md`
+- `https://github.com/rust-lang/rust/pull/147185`
+  - `docs\06_toolchain\06_09_rust_1_93_compatibility_deep_dive.md`
+- `https://github.com/rust-lang/rust/issues/150646#issuecomment-3718964342`
+  - `docs\06_toolchain\06_11_rust_1_93_cargo_rustdoc_changes.md`
+- `https://github.com/rust-lang/trait-system-refactor-initiative`
+  - `docs\06_toolchain\06_14_rust_1_95_nightly_preview.md`
+- `https://github.com/rust-lang/rust/releases/tag/1.95.0`
+  - `docs\06_toolchain\06_19_rust_1_96_features.md`
+- `https://github.com/rust-lang/rust/pull/148605`
+  - `docs\06_toolchain\06_cargo_script_guide.md`
+- `https://github.com/rust-lang/compiler-team`
+  - `docs\06_toolchain\06_parallel_frontend.md`
+- `https://github.com/rust-lang/rust/issues/107374`
+  - `docs\06_toolchain\06_parallel_frontend.md`
+- `https://github.com/toml-lang/toml`
+  - `docs\06_toolchain\06_toml_v11_cargo_guide.md`
+- `https://docs.rs/toml_edit`
+  - `docs\06_toolchain\06_toml_v11_cargo_guide.md`
+- `https://docs.rs`
+  - `docs\06_toolchain\rustdoc_196_improvements.md`
+- `https://github.com/rust-lang/rust-lang-learning`
+  - `docs\archive\2026_03_reorganization\FINAL_CHECK_SUMMARY.md`
+  - `docs\archive\2026_03_reorganization\PROJECT_CORE_DOCUMENTATION.md`
+- `https://github.com/rust-lang/rust/issues`
+  - `docs\archive\c_class_audit_2026_06_08\00_meta\analysis\00_rust_global_alignment_symmetric_difference_analysis_2026_05_29.md`
+- `https://github.com/nikomatsakis/featherweight-rust`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\ULTIMATE_COMPREHENSIVE_GUIDE.md`
+- `https://github.com/xldenis/creusot`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\ULTIMATE_COMPREHENSIVE_GUIDE.md`
+  - `docs\archive\rust-ownership-chinese\Rust所有权与可判定性：全面形式语义分析与论证.md`
+  - `docs\archive\rust-ownership-chinese\rust_ownership_semantics_complete_analysis.md`
+  - `docs\archive\rust-ownership-chinese\rust_ownership_semantics_complete_analysis_v2.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\mechanized-proofs.md`
+- `https://dl.acm.org/doi/10.1145/1624775.1624804`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\actor-specialty\README.md`
+- `https://dl.acm.org/doi/book/10.5555/7920`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\actor-specialty\README.md`
+- `https://bastion-rs.github.io/`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\actor-specialty\README.md`
+  - `docs\rust-ownership-decidability\actor-specialty\ACTOR_MODEL_DEEP_DIVE.md`
+- `https://github.com/alexburkov/coerce`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\actor-specialty\README.md`
+- `https://rustwasm.github.io/docs/book/`
+  - `docs\archive\reports\CARGO_WORKSPACE_PROFILE_GUIDE.md`
+- `https://arxiv.org/abs/1804.10806`
+  - `docs\archive\reports\formal_system_reports\FORMAL_PROOFS_2025_11_11.md`
+  - `docs\archive\reports\formal_system_reports\KNOWLEDGE_GRAPH_2025_11_11.md`
+- `https://github.com/rust-lang/rust/tree/master/src/test/ui`
+  - `docs\archive\reports\formal_system_reports\FORMAL_PROOFS_2025_11_11.md`
+- `https://arxiv.org/abs/2503.16922`
+  - `docs\archive\reports\formal_system_reports\KNOWLEDGE_GRAPH_2025_11_11.md`
+- `https://arxiv.org/abs/2301.10943`
+  - `docs\archive\reports\formal_system_reports\KNOWLEDGE_GRAPH_2025_11_11.md`
+- `https://arxiv.org/abs/2510.25270`
+  - `docs\archive\reports\formal_system_reports\KNOWLEDGE_GRAPH_2025_11_11.md`
+- `https://github.com/rust-lang/miri#tree-borrows`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+- `https://github.com/viperproject/prusti-dev`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+  - `docs\rust-ownership-decidability\RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md`
+- `https://github.com/AeneasVerif/aeneas-tutorial`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+  - `docs\archive\rust-ownership-chinese\papers\aeneas-functional-translation.md`
+- `https://github.com/flux-rs/flux`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+  - `docs\archive\rust-ownership-chinese\rust_ownership_semantics_complete_analysis_v2.md`
+- `https://stackoverflow.com/questions/tagged/rust`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+  - `docs\rust-ownership-decidability\07-references\README.md`
+  - `docs\rust-ownership-decidability\FAQ_COMPREHENSIVE.md`
+- `https://github.com/rust-lang/rust-clippy`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://en.cppreference.com/w/cpp/26`
+  - `docs\archive\rust-ownership-chinese\rust_go_cpp_c_comprehensive_comparison.md`
+- `https://en.cppreference.com/w/c/23`
+  - `docs\archive\rust-ownership-chinese\rust_go_cpp_c_comprehensive_comparison.md`
+- `https://github.com/hopv/rusthorn`
+  - `docs\archive\rust-ownership-chinese\Rust所有权与可判定性：全面形式语义分析与论证.md`
+  - `docs\archive\rust-ownership-chinese\rust_ownership_semantics_complete_analysis.md`
+  - `docs\archive\rust-ownership-chinese\rust_ownership_semantics_complete_analysis_v2.md`
+- `https://github.com/temporalio/sdk-core`
+  - `docs\archive\rust-ownership-chinese\rust_vs_go_comprehensive_analysis.md`
+- `https://github.com/temporalio/sdk-go`
+  - `docs\archive\rust-ownership-chinese\rust_vs_go_comprehensive_analysis.md`
+- `https://arxiv.org/abs/2306.08903`
+  - `docs\archive\rust-ownership-chinese\guides\creusot-tutorial.md`
+- `https://docs.rs/pin-project/`
+  - `docs\archive\rust-ownership-chinese\guides\pin-unpin-deep-dive.md`
+- `https://github.com/viperproject/prusti`
+  - `docs\archive\rust-ownership-chinese\guides\prusti-tutorial.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+- `https://plfa.github.io/`
+  - `docs\content\academic\README.md`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `https://dl.acm.org/doi/pdf/10.1145/3735592`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+- `https://github.com/rust-lang/rust/tree/master/compiler/rustc_borrowck`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+- `https://docs.rs/serde/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\01_serde_architecture.md`
+- `https://github.com/serde-rs/json`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\01_serde_architecture.md`
+- `https://docs.rs/bytemuck/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\01_serde_architecture.md`
+- `https://docs.rs/tower/latest/tower/trait.Layer.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\02_tower_architecture.md`
+- `https://github.com/tower-rs/tower`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\02_tower_architecture.md`
+- `https://github.com/tower-rs/tower/tree/master/tower/examples`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\02_tower_architecture.md`
+- `https://docs.rs/hyper/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\02_tower_architecture.md`
+- `https://docs.rs/diesel/latest/diesel/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\03_diesel_architecture.md`
+- `https://github.com/diesel-rs/diesel`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\03_diesel_architecture.md`
+- `https://github.com/clap-rs/clap`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\04_clap_architecture.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `docs\rust-ownership-decidability\case-studies\cli\README.md`
+- `https://docs.rs/bevy/0.15.0/bevy/ecs/system/struct.Query.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
+- `https://github.com/bevyengine/bevy/blob/main/crates/bevy_ecs/src/archetype.rs`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
+- `https://docs.rs/bevy_reflect/latest/bevy_reflect/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
+- `https://github.com/bevyengine/bevy/blob/main/crates/bevy_ecs/src/event.rs`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
+- `https://docs.rs/tokio/latest/tokio/runtime/struct.Builder.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
+- `https://github.com/tokio-rs/tokio/blob/master/tokio/src/runtime/scheduler/multi_thread/queue.rs`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
+- `https://docs.rs/mio/latest/mio/struct.Poll.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\21_mio_architecture.md`
+- `https://docs.rs/tokio/latest/tokio/io/unix/struct.AsyncFd.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
+- `https://docs.rs/tokio/latest/tokio/time/index.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
+- `https://github.com/tokio-rs/tokio/blob/master/tokio/src/runtime/time/mod.rs`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
+- `https://docs.rs/tokio/latest/tokio/sync/struct.Semaphore.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
+- `https://docs.rs/tokio/latest/tokio/sync/struct.RwLock.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
+- `https://docs.rs/axum/0.7/axum/routing/struct.Router.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md`
+- `https://docs.rs/tower-service/0.3/tower_service/trait.Service.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://docs.rs/axum/0.7/axum/handler/trait.Handler.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md`
+- `https://github.com/tokio-rs/axum/blob/main/axum/src/handler/mod.rs`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md`
+- `https://docs.rs/axum/0.7/axum/extract/index.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md`
+- `https://github.com/tokio-rs/axum/blob/main/axum/src/extract/json.rs`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md`
+- `https://docs.rs/axum/0.7/axum/routing/index.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md`
+- `https://docs.rs/matchit/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md`
+- `https://github.com/tokio-rs/axum/blob/main/axum/src/routing/mod.rs`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md`
+- `https://docs.rs/hyper/1.0/hyper/service/index.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://github.com/tokio-rs/axum/blob/main/axum/src/serve.rs`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md`
+- `https://docs.rs/axum/0.7/axum/extract/struct.State.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md`
+- `https://docs.rs/axum/0.7/axum/response/trait.IntoResponse.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md`
+- `https://docs.rs/axum/0.7/axum/response/index.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md`
+- `https://docs.rs/tower/0.4/tower/trait.Layer.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md`
+- `https://docs.rs/tower-http/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\07_axum_architecture.md`
+- `https://github.com/hyperium/hyper`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://docs.rs/http-body/1.0/http_body/trait.Body.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://docs.rs/hyper/1.0/hyper/body/index.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://docs.rs/http/1.0/http/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://docs.rs/hyper/1.0/hyper/body/struct.Incoming.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://docs.rs/hyper/1.0/hyper/client/index.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://docs.rs/h2/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://docs.rs/h2/latest/h2/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://docs.rs/tower/0.4/tower/struct.ServiceBuilder.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://docs.rs/httparse/1.8/httparse/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://github.com/seanmonstar/httparse`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://docs.rs/http/1.0/http/header/struct.HeaderMap.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://docs.rs/h2/latest/h2/struct.FlowControl.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://github.com/hyperium/hyper/security`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://docs.rs/tokio/1/tokio/task/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://docs.rs/hyper/1.0/hyper/server/conn/index.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://docs.rs/http-body-util/0.1/http_body_util/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://docs.rs/reqwest/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+  - `docs\rust-ownership-decidability\case-studies\reqwest-formal-analysis.md`
+- `https://docs.rs/sqlx/latest/sqlx/struct.Pool.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_sqlx_architecture.md`
+- `https://docs.rs/sqlx-cli/latest/sqlx_cli/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_sqlx_architecture.md`
+- `https://docs.rs/sqlx/latest/sqlx/trait.FromRow.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_sqlx_architecture.md`
+- `https://github.com/launchbadge/sqlx/tree/main/sqlx-core/src/pool`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_sqlx_architecture.md`
+- `https://github.com/hyperium/tonic]`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_tonic_architecture.md`
+- `https://github.com/grpc/grpc-web]`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_tonic_architecture.md`
+- `https://github.com/hyperium/tonic`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_tonic_architecture.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\README.md`
+- `https://docs.rs/prost/latest/prost/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_tonic_architecture.md`
+- `https://docs.rs/reqwest/latest/reqwest/struct.ClientBuilder.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_reqwest_architecture.md`
+- `https://docs.rs/reqwest-middleware/latest/reqwest_middleware/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_reqwest_architecture.md`
+- `https://docs.rs/reqwest/latest/reqwest/blocking/index.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_reqwest_architecture.md`
+- `https://docs.rs/hyper/latest/hyper/client/index.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_reqwest_architecture.md`
+- `https://docs.rs/serde/latest/serde/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_reqwest_architecture.md`
+- `https://rustwasm.github.io/docs/wasm-bindgen/]`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_wasm_bindgen_architecture.md`
+- `https://webassembly.github.io/spec/]`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_wasm_bindgen_architecture.md`
+- `https://rustwasm.github.io/docs/wasm-bindgen/contributing/design/index.html]`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_wasm_bindgen_architecture.md`
+- `https://rustwasm.github.io/docs/wasm-bindgen/reference/types.html]`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_wasm_bindgen_architecture.md`
+- `https://rustwasm.github.io/docs/wasm-bindgen/reference/types/number-slices.html]`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_wasm_bindgen_architecture.md`
+- `https://rustwasm.github.io/docs/wasm-bindgen/contributing/design/describe.html]`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_wasm_bindgen_architecture.md`
+- `https://docs.rs/wasm-bindgen/latest/wasm_bindgen/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_wasm_bindgen_architecture.md`
+- `https://docs.rs/web-sys/latest/web_sys/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_wasm_bindgen_architecture.md`
+- `https://docs.rs/js-sys/latest/js_sys/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_wasm_bindgen_architecture.md`
+- `https://www.w3.org/TR/webgpu/#adapters`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\11_wgpu_architecture.md`
+- `https://docs.rs/naga/latest/naga/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\11_wgpu_architecture.md`
+- `https://www.w3.org/TR/webgpu/#resource-usages`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\11_wgpu_architecture.md`
+- `https://github.com/gfx-rs/wgpu/wiki`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\11_wgpu_architecture.md`
+- `https://github.com/gfx-rs/wgpu/tree/trunk/wgpu-core`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\11_wgpu_architecture.md`
+- `https://www.w3.org/TR/webgpu/#compute-passes`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\11_wgpu_architecture.md`
+- `https://docs.rs/axum/latest/axum/#comparison-with-other-frameworks`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\12_actix_web_architecture.md`
+- `https://docs.rs/actix-web/latest/actix_web/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\12_actix_web_architecture.md`
+- `https://github.com/rayon-rs/rayon`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\13_rayon_architecture.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\README.md`
+- `https://docs.rs/rayon/latest/rayon/fn.join.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\13_rayon_architecture.md`
+- `https://docs.rs/rayon/latest/rayon/struct.ThreadPool.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\13_rayon_architecture.md`
+- `https://docs.rs/rayon/latest/rayon/slice/trait.ParallelSliceMut.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\13_rayon_architecture.md`
+- `https://docs.rs/rayon/latest/rayon/fn.scope.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\13_rayon_architecture.md`
+- `https://docs.rs/rayon/latest/rayon/struct.ThreadPoolBuilder.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\13_rayon_architecture.md`
+- `https://dl.acm.org/doi/10.1145/324133.324234`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\13_rayon_architecture.md`
+- `https://docs.rs/ndarray/latest/ndarray/struct.ArrayBase.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\14_nalgebra_architecture.md`
+- `https://docs.rs/nalgebra/latest/nalgebra/base/dimension/struct.Const.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\14_nalgebra_architecture.md`
+- `https://docs.rs/ndarray/latest/src/ndarray/lib.rs.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\14_nalgebra_architecture.md`
+- `https://docs.rs/ndarray/latest/ndarray/trait.Dimension.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\14_nalgebra_architecture.md`
+- `https://docs.rs/ndarray/latest/ndarray/doc/ndarray/struct.ArrayBase.html#broadcasting`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\14_nalgebra_architecture.md`
+- `https://docs.rs/ndarray-linalg/latest/ndarray_linalg/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\14_nalgebra_architecture.md`
+- `https://docs.rs/ndarray/latest/ndarray/doc/ndarray/struct.ArrayBase.html#blas-integration`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\14_nalgebra_architecture.md`
+- `https://github.com/tokio-rs/tracing/tree/master/examples`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\18_tracing_architecture.md`
+- `https://docs.rs/tracing-subscriber/latest/tracing_subscriber/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\18_tracing_architecture.md`
+- `https://docs.rs/tracing/latest/tracing/span/struct.Span.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\18_tracing_architecture.md`
+- `https://docs.rs/tracing-core/latest/tracing_core/field/trait.Value.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\18_tracing_architecture.md`
+- `https://docs.rs/tracing/latest/tracing/attr.instrument.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\18_tracing_architecture.md`
+- `https://docs.rs/tracing-subscriber/latest/tracing_subscriber/layer/trait.Layer.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\18_tracing_architecture.md`
+- `https://docs.rs/tracing-core/latest/tracing_core/metadata/struct.Metadata.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\18_tracing_architecture.md`
+- `https://docs.rs/opentelemetry/latest/opentelemetry/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\18_tracing_architecture.md`
+- `https://docs.rs/tracing-opentelemetry/latest/tracing_opentelemetry/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\18_tracing_architecture.md`
+- `https://github.com/tokio-rs/tracing/tree/master/tracing/benches`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\18_tracing_architecture.md`
+- `https://github.com/crossbeam-rs/crossbeam/tree/master/crossbeam-channel/examples`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\19_crossbeam_architecture.md`
+- `https://docs.rs/crossbeam-epoch/latest/crossbeam_epoch/struct.Guard.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\19_crossbeam_architecture.md`
+- `https://docs.rs/crossbeam-queue/latest/crossbeam_queue/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\19_crossbeam_architecture.md`
+- `https://docs.rs/crossbeam-utils/latest/crossbeam_utils/thread/struct.Scope.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\19_crossbeam_architecture.md`
+- `https://docs.rs/crossbeam-queue/latest/crossbeam_queue/struct.ArrayQueue.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\19_crossbeam_architecture.md`
+- `https://docs.rs/crossbeam-queue/latest/crossbeam_queue/struct.SegQueue.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\19_crossbeam_architecture.md`
+- `https://docs.rs/crossbeam/latest/crossbeam/#comparison-with-the-standard-library`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\19_crossbeam_architecture.md`
+- `https://github.com/tokio-rs/tokio/blob/master/tokio/Cargo.toml`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\19_crossbeam_architecture.md`
+- `https://github.com/rayon-rs/rayon/blob/master/Cargo.toml`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\19_crossbeam_architecture.md`
+- `https://github.com/ratatui/ratatui`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\20_ratatui_architecture.md`
+- `https://docs.rs/ratatui/latest/ratatui/buffer/struct.Buffer.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\20_ratatui_architecture.md`
+- `https://docs.rs/ratatui/latest/ratatui/widgets/trait.Widget.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\20_ratatui_architecture.md`
+- `https://docs.rs/ratatui/latest/ratatui/widgets/trait.StatefulWidget.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\20_ratatui_architecture.md`
+- `https://docs.rs/ratatui/latest/ratatui/terminal/struct.Terminal.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\20_ratatui_architecture.md`
+- `https://docs.rs/ratatui/latest/ratatui/backend/trait.Backend.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\20_ratatui_architecture.md`
+- `https://github.com/tokio-rs/mio/tree/master/examples`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\21_mio_architecture.md`
+- `https://docs.rs/mio/latest/mio/struct.Poll.html#platform-specific-notes`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\21_mio_architecture.md`
+- `https://docs.rs/mio/latest/mio/struct.Token.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\21_mio_architecture.md`
+- `https://docs.rs/mio/latest/mio/struct.Interest.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\21_mio_architecture.md`
+- `https://docs.rs/mio/latest/mio/struct.Registry.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\21_mio_architecture.md`
+- `https://docs.rs/mio/latest/mio/struct.Waker.html`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\21_mio_architecture.md`
+- `https://github.com/tokio-rs/tokio/blob/master/tokio/src/runtime/waker.rs`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\21_mio_architecture.md`
+- `https://github.com/aatxe/oxide`
+  - `docs\rust-ownership-decidability\RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md`
+- `https://api.example.com/users`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-01-ownership-rules-deep.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\11-01-rust-design-patterns.md`
+- `https://github.com/rust-lang/rfcs/pull/1156`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability-deep.md`
+- `https://github.com/rust-lang/rfcs/pull/255`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\trait-system.md`
+- `https://verus-lang.github.io/verus/vstd/`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-06-verus-guide.md`
+- `https://github.com/GillianPlatform/Gillian`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-08-gillian-rust.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://dl.acm.org/doi/10.1145/158511.158633`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/503502.503505`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/174675.176927`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/195687.195739`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/582419.582434`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/263699.263748`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/317636.317648`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/1190315.1190320`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://arxiv.org/abs/1812.08766`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://ucsd-progsys.github.io/liquidhaskell-blog/`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/263244.263273`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/345099.345100`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/249291.249293`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/174651.174656`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/174651.174657`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://www.researchgate.net/publication/220885179_Linear_Types_Can_Change_the_World`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/512529.512532`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/292540.292555`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/268946.268975`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/289423.289429`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/503272.503288`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://arxiv.org/abs/1904.02323`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://github.com/VilleKaut/tree-borrows`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://arxiv.org/abs/2211.13014`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://arxiv.org/abs/2404.02680`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/2435377.2435381`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/3462205`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/3563334`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/286936.286947`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/1081706.1081753`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/286936.286976`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/2951913.2951943`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/2509136.2509532`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/2594291.2594323`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/3110265`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/3428202`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://github.com/facebookexperimental/MIRAI`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `docs\rust-ownership-decidability\case-studies\industrial-verification-aws-meta.md`
+- `https://dl.acm.org/doi/10.1145/3377811.3380327`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://github.com/sslab-gatech/Rudra`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+- `https://github.com/wcventure/MirChecker`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://dl.acm.org/doi/10.1145/3485511`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://arxiv.org/abs/2303.05491`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/1965724.1965740`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/1040305.1040336`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/2676726.2676985`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/3009837.3009850`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/3062341.3062352`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/2983990.2983997`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://arxiv.org/abs/1207.5868`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/3331554.3342600`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/3473579`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/359576.359585`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/2500365.2500582`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/512950.512973`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/567752.567778`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/567088.567093`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/1375657.1375676`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://dl.acm.org/doi/10.1145/2931037.2931056`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `https://lborb.github.io/book/`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `https://mitpress.mit.edu/9780262162098/types-and-programming-languages/`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `https://mitpress.mit.edu/9780262162289/advanced-topics-in-types-and-programming-languages/`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `https://mitpress.mit.edu/9780262731033/the-formal-semantics-of-programming-languages/`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `https://mitpress.mit.edu/9780262062794/essentials-of-programming-languages/`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `https://mitpress.mit.edu/9780262220699/concepts-techniques-and-models-of-computer-programming/`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `https://mitpress.mit.edu/9780262536430/the-little-typer/`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `https://mitpress.mit.edu/9780262527957/the-little-prover/`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `https://mitpress.mit.edu/9780262026659/certified-programming-with-dependent-types/`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `https://mitpress.mit.edu/9780262026499/principles-of-model-checking/`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `https://math-comp.github.io/mcb/`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `https://mitpress.mit.edu/9780262510875/structure-and-interpretation-of-computer-programs/`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `https://github.com/hmemcpy/milewski-ctfp-pdf`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `https://pfalcon.github.io/ssabook/latest/`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `https://leanprover.github.io/logic_and_proof/`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `https://dtolnay.github.io/rust-quiz/`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `https://github.com/kandelvijaya/NLP-CS224n`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `https://github.com/tweedegolf/101-rs`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `https://github.com/GaloisInc/crucible`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/smackers/smack`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/secure-foundations/veri-datalog`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/sakste/rusthorn`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/BurtonQin/lockbud`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/paulgessinger/ptanalysis`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/tlaplus/tlaplus`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/cvc5/cvc5`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/Boolector/boolector`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/OCamlPro/alt-ergo`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/dafny-lang/dafny`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/boogie-org/boogie`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/verifast/verifast`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/est31/cargo-udeps`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/facebook/infer`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://pmd.github.io/`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://spotbugs.github.io/`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/PyCQA/bandit`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/PyCQA/pylint`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/rems-project/cerberus`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://project-everest.github.io/`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/mit-plv/fiat-crypto`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://vprover.github.io/`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/gilith/metis`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/math-comp/math-comp`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/leanprover-community/mathlib4`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/rust-lang/rust-analyzer`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://marketplace.visualstudio.com/items?itemName=rust-lang.rust`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/ejgallego/coq-lsp`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/coq-community/vscoq`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://marketplace.visualstudio.com/items?itemName=leanprover.lean4`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/makarius/vscode-isabelle`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/watchexec/cargo-watch`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/AltSysrq/proptest`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/BurntSushi/quickcheck`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/asomers/mockall`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/cksac/fake-rs`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/rust-fuzz/afl.rs`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/rust-fuzz/honggfuzz-rs`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/camshaft/bolero`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/AFLplusplus/LibAFL`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/klee/klee`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/angr/angr`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/JonathanSalwan/Triton`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/S2E/s2e`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/trailofbits/manticore`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/rust-lang/mdBook`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/rust-lang/rust-bindgen`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\04-extern-ffi.md`
+- `https://github.com/tokio-rs/prost`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://github.com/TeXitoi/structopt`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://dl.acm.org/journal/toplas`
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+- `https://dl.acm.org/toc/pacmpl/2024`
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+- `https://arxiv.org/list/cs.PL/recent`
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+- `https://dblp.org/search?q=rust+programming+language`
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+- `https://github.com/ferrocene/ferrocene`
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+- `https://github.com/loup-vl/refined-rust`
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+- `https://github.com/rust-lang/rust/discussions`
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+- `https://rust-unofficial.github.io/patterns/patterns/behavioural/type-state.html`
+  - `docs\rust-ownership-decidability\11-design-patterns\11-03-type-state-pattern.md`
+- `https://docs.rs/crossbeam/`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\README.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\02-concurrency-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\41-thread-merge.md`
+- `https://docs.rs/loom/`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
+- `https://docs.rs/tokio/latest/tokio/sync/mpsc/`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-03-message-passing-deep.md`
+- `https://docs.rs/crossbeam/latest/crossbeam/channel/`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-03-message-passing-deep.md`
+- `https://github.com/tokio-rs/loom`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\README.md`
+- `https://github.com/rust-lang/rfcs/pull/7230`
+  - `docs\rust-ownership-decidability\15-application-domains\web-development.md`
+- `https://github.com/rust-lang/rfcs/pull/9113`
+  - `docs\rust-ownership-decidability\15-application-domains\web-development.md`
+- `https://www.workflowpatterns.com/`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-workflow-patterns-master-index.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\08-workflow-patterns-index.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\09-workflow-ownership-analysis.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\01-sequence.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\02-parallel-split.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\03-synchronization.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\13-mi-with-design-time-knowledge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\14-mi-with-runtime-knowledge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\20-cancel-case.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\25-cancel-region.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\41-thread-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\42-thread-split.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\43-explicit-termination.md`
+- `https://docs.rs/tokio/latest/tokio/sync/`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-workflow-patterns-master-index.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\08-workflow-patterns-index.md`
+- `https://www.workflowpatterns.com`
+  - `docs\rust-ownership-decidability\16-program-semantics\08-workflow-patterns-index.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\09-workflow-ownership-analysis.md`
+- `https://github.com/rust-lang/rust/issues/75027`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\06-array-windows-semantics.md`
+- `https://docs.rs/tokio-util/`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\25-cancel-region.md`
+- `https://github.com/rust-lang/rfcs/pull/6749`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\41-thread-merge.md`
+- `https://github.com/rust-lang/rfcs/pull/458`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\42-thread-split.md`
+- `https://docs.rs/tower-service/`
+  - `docs\rust-ownership-decidability\async-specialty\README.md`
+- `https://github.com/rust-lang/wg-async`
+  - `docs\rust-ownership-decidability\async-specialty\README.md`
+- `https://github.com/tokio-rs/awesome-tokio`
+  - `docs\rust-ownership-decidability\async-specialty\README.md`
+- `https://docs.rs/async-std`
+  - `docs\rust-ownership-decidability\case-studies\async-std-formal-analysis.md`
+- `https://docs.rs/bytes/`
+  - `docs\rust-ownership-decidability\case-studies\bytes-formal-analysis.md`
+- `https://docs.rs/chrono`
+  - `docs\rust-ownership-decidability\case-studies\chrono-formal-analysis.md`
+- `https://docs.rs/clap`
+  - `docs\rust-ownership-decidability\case-studies\clap-formal-analysis.md`
+- `https://docs.rs/dashmap`
+  - `docs\rust-ownership-decidability\case-studies\dashmap-formal-analysis.md`
+- `https://github.com/embedded-graphics/embedded-graphics`
+  - `docs\rust-ownership-decidability\case-studies\embedded-graphics-formal-analysis.md`
+- `https://github.com/firecracker-microvm/firecracker`
+  - `docs\rust-ownership-decidability\case-studies\industrial-verification-aws-meta.md`
+- `https://github.com/aws/s2n-quic`
+  - `docs\rust-ownership-decidability\case-studies\industrial-verification-aws-meta.md`
+- `https://github.com/diem/diem`
+  - `docs\rust-ownership-decidability\case-studies\industrial-verification-aws-meta.md`
+- `https://github.com/move-language/move`
+  - `docs\rust-ownership-decidability\case-studies\industrial-verification-aws-meta.md`
+- `https://github.com/risc0/risc0`
+  - `docs\rust-ownership-decidability\case-studies\industrial-verification-aws-meta.md`
+- `https://github.com/nrf-rs/nrf-hal`
+  - `docs\rust-ownership-decidability\case-studies\nrf-hal-formal-analysis.md`
+- `https://docs.rs/ouroboros`
+  - `docs\rust-ownership-decidability\case-studies\ouroboros-formal-analysis.md`
+- `https://docs.rs/ouroboros_macro`
+  - `docs\rust-ownership-decidability\case-studies\ouroboros-formal-analysis.md`
+- `https://docs.rs/pin-project`
+  - `docs\rust-ownership-decidability\case-studies\ouroboros-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\pin-project-formal-analysis.md`
+- `https://docs.rs/postcard`
+  - `docs\rust-ownership-decidability\case-studies\postcard-formal-analysis.md`
+- `https://docs.rs/rand/`
+  - `docs\rust-ownership-decidability\case-studies\rand-formal-analysis.md`
+- `https://github.com/rust-lang/rfcs/pull/8259`
+  - `docs\rust-ownership-decidability\case-studies\serde-formal-analysis-deep.md`
+- `https://github.com/rust-lang/rfcs/pull/0019`
+  - `docs\rust-ownership-decidability\case-studies\serde-formal-analysis-deep.md`
+- `https://github.com/smoltcp-rs/smoltcp`
+  - `docs\rust-ownership-decidability\case-studies\smoltcp-formal-analysis.md`
+- `https://docs.rs/tokio-stream`
+  - `docs\rust-ownership-decidability\case-studies\tokio-stream-formal-analysis.md`
+- `https://docs.rs/tonic`
+  - `docs\rust-ownership-decidability\case-studies\tonic-formal-analysis.md`
+- `https://docs.rs/tower`
+  - `docs\rust-ownership-decidability\case-studies\tower-formal-analysis.md`
+- `https://rustwasm.github.io/wasm-bindgen`
+  - `docs\rust-ownership-decidability\case-studies\wasm-bindgen-formal-analysis.md`
+- `https://github.com/parasyte/pixels`
+  - `docs\rust-ownership-decidability\case-studies\blockchain\README.md`
+- `https://github.com/crossterm-rs/crossterm`
+  - `docs\rust-ownership-decidability\case-studies\cli\README.md`
+- `https://github.com/ratatui-org/ratatui`
+  - `docs\rust-ownership-decidability\case-studies\cli\README.md`
+- `https://github.com/console-rs/indicatif`
+  - `docs\rust-ownership-decidability\case-studies\cli\README.md`
+- `https://github.com/BurntSushi/walkdir`
+  - `docs\rust-ownership-decidability\case-studies\cli\README.md`
+- `https://github.com/BurntSushi/ripgrep/tree/master/crates/ignore`
+  - `docs\rust-ownership-decidability\case-studies\cli\README.md`
+- `https://github.com/eyre-rs/eyre`
+  - `docs\rust-ownership-decidability\case-studies\cli\README.md`
+- `https://github.com/containers/youki`
+  - `docs\rust-ownership-decidability\case-studies\cloud\README.md`
+- `https://rtic-rs.github.io/rtic/`
+  - `docs\rust-ownership-decidability\case-studies\embedded\README.md`
+- `https://bevy-cheatbook.github.io/`
+  - `docs\rust-ownership-decidability\case-studies\gamedev\README.md`
+- `https://github.com/bevyengine/awesome-bevy`
+  - `docs\rust-ownership-decidability\case-studies\gamedev\README.md`
+- `https://github.com/bevyengine/bevy/tree/main/examples`
+  - `docs\rust-ownership-decidability\case-studies\gamedev\README.md`
+- `https://docs.rs/linfa`
+  - `docs\rust-ownership-decidability\case-studies\ml-ai\README.md`
+- `https://docs.rs/ndarray`
+  - `docs\rust-ownership-decidability\case-studies\ml-ai\README.md`
+- `https://github.com/rust-lang/rfcs/pull/1414`
+  - `docs\rust-ownership-decidability\formal-foundations\RUST_FORMAL_SEMANTICS_DEEP.md`
+- `https://leanprover.github.io/`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\mechanized-proofs.md`
+
+## 重定向链接
+
+- `https://www.jetbrains.com/lp/devecosystem-2025/` → `https://devecosystem-2025.jetbrains.com/`
+  - `concept\00_meta\career_landscape.md`
+- `https://www.rust-lang.org/tools/install` → `https://rust-lang.org/tools/install/`
+  - `concept\01_foundation\00_start.md`
+  - `knowledge\00_start\01_hello_world.md`
+  - `knowledge\00_start\02_installation.md`
+  - `knowledge\00_start\03_learning_roadmap.md`
+  - `knowledge\00_start\README.md`
+  - `knowledge\01_fundamentals\04_ownership.md`
+- `https://www.rust-lang.org/learn` → `https://rust-lang.org/learn/`
+  - `concept\00_meta\03_bloom_taxonomy.md`
+- `https://tools.ietf.org/html/rfc3629` → `https://datatracker.ietf.org/doc/html/rfc3629`
+  - `concept\01_foundation\18_strings_and_encoding.md`
+- `https://basic-formal-ontology.org/` → `https://bfo-ontology.github.io/`
+  - `concept\00_meta\kg_tlo_alignment.md`
+- `https://www.roberthalf.com/salary-guide` → `https://www.roberthalf.com/us/en/insights/salary-guide?utm_medium=sales-support&utm_source=print-collateral&utm_campaign=v2_client_thought-leadership_salary-guide-2026_all`
+  - `concept\00_meta\career_landscape.md`
+- `https://tools.ietf.org/html/rfc768` → `https://datatracker.ietf.org/doc/html/rfc768`
+  - `concept\03_advanced\18_network_programming.md`
+- `https://tools.ietf.org/html/rfc793` → `https://datatracker.ietf.org/doc/html/rfc793`
+  - `concept\03_advanced\18_network_programming.md`
+- `https://cft.vanderbilt.edu/guides-sub-pages/blooms-taxonomy/` → `https://www.vanderbilt.edu/advanced-institute/`
+  - `concept\00_meta\03_bloom_taxonomy.md`
+- `https://cs.brown.edu/~sk/Publications/Books/ProgLangs/2007-04-26/plai-2007-04-26.pdf` → `https://cs.brown.edu/people/sk/Publications/Books/ProgLangs/2007-04-26/plai-2007-04-26.pdf`
+  - `concept\00_meta\pl_foundations_roadmap.md`
+- `https://www.ibm.com/docs/en/zos/2.5.0?topic=operations-vector-instructions` → `https://www.ibm.com/docs/en/zos/2.5.0`
+  - `concept\03_advanced\13_inline_assembly.md`
+- `http://pages.cs.wisc.edu/~remzi/OSTEP/` → `https://pages.cs.wisc.edu/~remzi/OSTEP/`
+  - `concept\03_advanced\01_concurrency.md`
+- `http://www.adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html` → `https://www.adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html`
+  - `concept\04_formal\10_category_theory.md`
+- `https://cs.cmu.edu/~rwh/pfpl/` → `https://www.cs.cmu.edu/~rwh/pfpl/`
+  - `concept\00_meta\pl_foundations_roadmap.md`
+- `https://marabos.nl/atomics/` → `https://mara.nl/atomics/`
+  - `concept\03_advanced\10_concurrency_patterns.md`
+  - `concept\03_advanced\11_atomics_and_memory_ordering.md`
+  - `concept\03_advanced\19_parallel_distributed_pattern_spectrum.md`
+  - `concept\03_advanced\21_quiz_concurrency_async.md`
+  - `docs\02_reference\02_rustnomicon_alignment.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\02-concurrency-semantics.md`
+  - `knowledge\03_advanced\04_lazy_initialization.md`
+  - `knowledge\03_advanced\concurrency\01_atomics.md`
+  - `knowledge\03_advanced\concurrency\02_synchronization.md`
+- `https://coq.inria.fr/` → `https://rocq-prover.org/`
+  - `concept\04_formal\01_linear_logic.md`
+  - `concept\04_formal\02_type_theory.md`
+  - `concept\04_formal\03_ownership_formal.md`
+  - `concept\04_formal\04_rustbelt.md`
+  - `concept\04_formal\05_verification_toolchain.md`
+  - `concept\04_formal\06_subtype_variance.md`
+  - `concept\04_formal\08_type_inference.md`
+  - `concept\04_formal\09_linear_logic_applications.md`
+  - `concept\04_formal\10_category_theory.md`
+  - `concept\04_formal\11_separation_logic.md`
+  - `concept\04_formal\12_denotational_semantics.md`
+  - `concept\04_formal\13_formal_methods.md`
+  - `concept\04_formal\14_lambda_calculus.md`
+  - `concept\04_formal\15_hoare_logic.md`
+  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
+  - `concept\04_formal\17_operational_semantics.md`
+  - `concept\04_formal\18_evaluation_strategies.md`
+  - `concept\04_formal\20_axiomatic_semantics.md`
+  - `concept\04_formal\21_type_semantics.md`
+  - `concept\04_formal\22_modern_verification_tools.md`
+  - `concept\04_formal\23_programming_language_foundations.md`
+  - `concept\04_formal\29_type_inference_complexity.md`
+  - `concept\04_formal\30_aeneas_symbolic_semantics.md`
+  - `concept\04_formal\README.md`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+  - `concept\07_future\22_std_autodiff_preview.md`
+  - `docs\content\academic\README.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-03-separation-logic-deep.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-07-refinedrust-deep-dive.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\mechanized-proofs.md`
+  - `knowledge\04_expert\academic\01_coq_formalization_guide.md`
+- `https://marabos.nl/atomics/memory-ordering.html` → `https://mara.nl/atomics/memory-ordering.html`
+  - `concept\03_advanced\11_atomics_and_memory_ordering.md`
+- `https://ferrous-systems.com/ferrocene/` → `https://ferrocene.dev/en`
+  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
+  - `concept\06_ecosystem\05_formal_ecosystem_tower.md`
+  - `concept\07_future\17_rust_specification_preview.md`
+  - `knowledge\04_expert\safety_critical\01_completion_report_100_percent.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\01_academic_research_landscape.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\02_rust_ecosystem_mind_map.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\01_comprehensive_language_comparison_matrix.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\02_rust_multi_dimensional_matrix.md`
+  - `knowledge\04_expert\safety_critical\02_rust_safety_critical_ecosystem_master_index.md`
+  - `knowledge\04_expert\safety_critical\03_decision_trees\01_rust_decision_trees.md`
+  - `knowledge\04_expert\safety_critical\03_decision_trees\02_safety_integrity_level_selection_guide.md`
+  - `knowledge\04_expert\safety_critical\03_readme_rust_safety_critical_ecosystem.md`
+  - `knowledge\04_expert\safety_critical\04_axiomatic_reasoning\02_rust_axiomatic_reasoning_trees.md`
+  - `knowledge\04_expert\safety_critical\05_strategic_guidance\01_adoption_strategy_and_roi_analysis.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\01_education_and_training_roadmap.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\02_rust_2026_2030_roadmap_forecast.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\03_sustainable_roadmap_and_plans.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\04_technology_watch_and_emerging_trends.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\01_case_study_01_ferrocene_certification.md`
+  - `knowledge\04_expert\safety_critical\08_training\01_assessment_and_certification.md`
+  - `knowledge\04_expert\safety_critical\08_training\02_certification_prep_guide.md`
+  - `knowledge\04_expert\safety_critical\08_training\03_hands_on_lab_exercises.md`
+  - `knowledge\04_expert\safety_critical\08_training\05_rust_safety_critical_training_program.md`
+  - `knowledge\04_expert\safety_critical\09_reference\04_comprehensive_international_alignment_completion_report.md`
+  - `knowledge\04_expert\safety_critical\09_reference\05_deployment_and_maintenance_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\10_performance_optimization_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\13_rust_safety_critical_coding_guidelines.md`
+  - `knowledge\04_expert\safety_critical\09_reference\14_safety_critical_checklists.md`
+  - `knowledge\04_expert\safety_critical\10_standards\01_do_178c_rust_compliance_pathway.md`
+  - `knowledge\04_expert\safety_critical\10_standards\02_iec_61508_rust_implementation_guide.md`
+  - `knowledge\04_expert\safety_critical\README.md`
+- `https://pyo3.rs/` → `https://pyo3.rs/v0.29.0/`
+  - `concept\05_comparative\07_rust_vs_python.md`
+  - `concept\06_ecosystem\03_core_crates.md`
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+  - `docs\rust-ownership-decidability\extensions\README.md`
+- `https://trust-in-soft.com/` → `https://www.trust-in-soft.com/`
+  - `concept\04_formal\22_modern_verification_tools.md`
+- `https://standards.ieee.org/standard/754-2019.html` → `https://standards.ieee.org/ieee/754/6210/`
+  - `concept\01_foundation\05_reference_semantics.md`
+- `https://golang.org/doc/faq#nil_error` → `https://go.dev/doc/faq`
+  - `concept\05_comparative\02_rust_vs_go.md`
+- `https://mypy.readthedocs.io/` → `https://mypy.readthedocs.io/en/stable/`
+  - `concept\05_comparative\07_rust_vs_python.md`
+- `https://www.microsoft.com/en-us/research/publication/verus/` → `https://www.microsoft.com/en-us/research/publication/verus-a-practical-foundation-for-systems-verification/`
+  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/` → `https://learn.microsoft.com/en-us/dotnet/csharp/`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://www.adacore.com/about-spark` → `https://www.adacore.com/languages/spark`
+  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
+- `https://www.rust-lang.org/` → `https://rust-lang.org/`
+  - `concept\05_comparative\07_rust_vs_python.md`
+  - `concept\05_comparative\08_rust_vs_ruby.md`
+  - `concept\05_comparative\09_rust_vs_swift.md`
+  - `concept\05_comparative\14_rust_vs_elixir.md`
+  - `concept\06_ecosystem\02_patterns.md`
+  - `concept\06_ecosystem\04_application_domains.md`
+  - `concept\06_ecosystem\48_industrial_case_studies.md`
+  - `concept\07_future\01_ai_integration.md`
+  - `concept\07_future\02_formal_methods.md`
+  - `concept\07_future\03_evolution.md`
+  - `concept\07_future\04_effects_system.md`
+  - `concept\07_future\11_stable_abi_preview.md`
+  - `concept\07_future\12_inline_const_pattern_preview.md`
+  - `concept\07_future\13_must_not_suspend_preview.md`
+  - `concept\07_future\14_lifetime_capture_preview.md`
+  - `concept\07_future\15_rpitit_preview.md`
+  - `concept\07_future\16_type_alias_impl_trait_preview.md`
+  - `concept\07_future\17_arbitrary_self_types_preview.md`
+  - `concept\07_future\17_const_trait_preview.md`
+  - `concept\07_future\18_field_projections_preview.md`
+  - `concept\07_future\22_gen_blocks_preview.md`
+  - `concept\07_future\22_std_autodiff_preview.md`
+  - `concept\07_future\24_roadmap.md`
+  - `concept\07_future\24_wasm_target_evolution.md`
+  - `concept\07_future\29_ebpf_rust.md`
+  - `concept\07_future\archive\01_ai_integration_original.md`
+  - `concept\07_future\rust_1_97_preview.md`
+  - `concept\07_future\rust_1_98_preview.md`
+  - `docs\rust-ownership-decidability\archive\MASTER_INDEX.md`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/exceptions/` → `https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/exceptions/`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/` → `https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/async-scenarios`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://docs.oracle.com/javase/9/docs/api/java/lang/ref/Finalizer.html` → `https://docs.oracle.com/en/java/javase/26/`
+  - `concept\05_comparative\06_rust_vs_java.md`
+- `https://docs.microsoft.com/en-us/dotnet/core/tools/` → `https://learn.microsoft.com/en-us/dotnet/core/tools/`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://hexdocs.pm/elixir/GenServer.html` → `https://elixir.hexdocs.pm/GenServer.html`
+  - `concept\05_comparative\14_rust_vs_elixir.md`
+- `https://www.misra.org.uk/` → `https://misra.org.uk/`
+  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
+  - `knowledge\04_expert\safety_critical\README.md`
+- `https://www.rtca.org/product/do-178c/` → `https://www.rtca.org/products/do-178c-electronic/`
+  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
+  - `concept\07_future\07_mcdc_coverage_preview.md`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/interop/` → `https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/interop/`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://www.erlang.org/doc/reference_manual/processes.html` → `https://www.erlang.org/doc/system/ref_man_processes.html`
+  - `concept\05_comparative\14_rust_vs_elixir.md`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/language#asyncmain` → `https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/language`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://doc.akka.io/docs/akka/current/typed/actors.html` → `https://doc.akka.io/libraries/akka-core/current/typed/actors.html`
+  - `concept\05_comparative\12_rust_vs_scala.md`
+- `https://www.erlang.org/doc/tutorial/nif.html` → `https://www.erlang.org/doc/system/nif.html`
+  - `concept\05_comparative\14_rust_vs_elixir.md`
+- `https://basarat.gitbook.io/typescript/` → `https://basarat.gitbook.io/typescript`
+  - `concept\05_comparative\15_rust_vs_typescript.md`
+- `https://bevyengine.org/learn/book/` → `https://bevy.org/learn/book/`
+  - `concept\06_ecosystem\07_game_ecs.md`
+  - `concept\06_ecosystem\21_game_development.md`
+  - `concept\06_ecosystem\26_game_development.md`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+  - `concept\archive\06_ecosystem_26_game_development_deprecated.md`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/` → `https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://docs.substrate.io/build/` → `https://docs.polkadot.com/`
+  - `concept\06_ecosystem\06_blockchain.md`
+- `https://docs.substrate.io/` → `https://docs.polkadot.com/`
+  - `concept\06_ecosystem\06_blockchain.md`
+  - `docs\rust-ownership-decidability\case-studies\blockchain\README.md`
+- `https://foundation.rust-lang.org/` → `https://rustfoundation.org/`
+  - `concept\05_comparative\README.md`
+  - `concept\06_ecosystem\02_patterns.md`
+  - `concept\06_ecosystem\04_application_domains.md`
+  - `concept\06_ecosystem\48_industrial_case_studies.md`
+  - `concept\07_future\24_roadmap.md`
+  - `docs\00_meta\analysis\00_rust_2026_project_goals_monthly_tracking.md`
+  - `docs\04_research\04_rust_for_linux.md`
+  - `docs\04_research\04_rust_for_linux_2026.md`
+  - `knowledge\04_expert\safety_critical\README.md`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/functional/pattern-matching` → `https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/functional/pattern-matching`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://www.rfc-editor.org/info/rfc9000` → `https://www.rfc-editor.org/info/rfc9000/`
+  - `concept\06_ecosystem\04_application_domains.md`
+  - `concept\06_ecosystem\38_network_protocols.md`
+- `https://webassembly.org/docs/modules/#linear-memory` → `https://webassembly.github.io/spec/core/syntax/modules.html`
+  - `concept\06_ecosystem\11_webassembly.md`
+  - `concept\07_future\28_rust_for_webassembly.md`
+- `https://polkadot.network/` → `https://polkadot.com/`
+  - `concept\06_ecosystem\11_webassembly.md`
+- `https://near.org/` → `https://www.near.org/`
+  - `concept\06_ecosystem\11_webassembly.md`
+- `https://www.rust-lang.org/policies/security` → `https://rust-lang.org/policies/security/`
+  - `concept\06_ecosystem\19_security_practices.md`
+  - `concept\07_future\05_rust_version_tracking.md`
+- `https://hexdocs.pm/elixir/typespecs.html` → `https://elixir.hexdocs.pm/typespecs.html`
+  - `concept\05_comparative\14_rust_vs_elixir.md`
+- `https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=rust` → `https://www.cve.org/CVERecord/SearchResults?query=rust`
+  - `concept\06_ecosystem\19_security_practices.md`
+  - `concept\07_future\19_rust_for_linux.md`
+- `https://www.rust-lang.org/policies/licenses` → `https://rust-lang.org/policies/licenses/`
+  - `concept\06_ecosystem\20_licensing_and_compliance.md`
+- `https://bevyengine.org/` → `https://bevy.org/`
+  - `concept\06_ecosystem\21_game_development.md`
+  - `concept\06_ecosystem\26_game_development.md`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+  - `concept\archive\06_ecosystem_26_game_development_deprecated.md`
+  - `docs\rust-ownership-decidability\case-studies\gamedev\README.md`
+- `https://bevyengine.org/learn/book/introduction/` → `https://bevy.org/learn/book/introduction/`
+  - `concept\06_ecosystem\26_game_development.md`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+  - `concept\archive\06_ecosystem_26_game_development_deprecated.md`
+- `https://opensource.org/licenses/MIT` → `https://opensource.org/license/MIT`
+  - `concept\06_ecosystem\20_licensing_and_compliance.md`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/` → `https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/reflection-and-attributes/`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://developers.eventstore.com/server/v24.10/` → `https://docs.kurrent.io/server/v24.10/`
+  - `concept\06_ecosystem\31_microservice_patterns.md`
+  - `concept\06_ecosystem\33_cqrs_event_sourcing.md`
+- `https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/` → `https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html` → `https://specifications.freedesktop.org/basedir/basedir-spec-latest.html`
+  - `concept\06_ecosystem\25_cli_development.md`
+  - `docs\rust-ownership-decidability\case-studies\cli\README.md`
+- `https://www.consul.io/` → `https://developer.hashicorp.com/consul`
+  - `concept\06_ecosystem\18_distributed_systems.md`
+- `https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions` → `https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax`
+  - `concept\06_ecosystem\28_devops_and_ci_cd.md`
+- `https://developers.eventstore.com/` → `https://docs.kurrent.io/`
+  - `concept\06_ecosystem\31_microservice_patterns.md`
+- `https://bevyengine.org/learn/` → `https://bevy.org/learn/`
+  - `concept\06_ecosystem\21_game_development.md`
+  - `docs\rust-ownership-decidability\case-studies\bevy-ecs-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\gamedev\README.md`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/unsafe-code` → `https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/unsafe-code`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://cqrs.files.wordpress.com/2010/11/cqrs_documents.pdf` → `https://cqrs.wordpress.com/wp-content/uploads/2010/11/cqrs_documents.pdf`
+  - `concept\06_ecosystem\33_cqrs_event_sourcing.md`
+- `https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows` → `https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching`
+  - `concept\06_ecosystem\28_devops_and_ci_cd.md`
+- `https://jeffreypalermo.com/blog/the-onion-architecture-part-1/` → `https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/`
+  - `concept\06_ecosystem\35_architecture_patterns.md`
+- `https://redis.io/docs/manual/pubsub/` → `https://redis.io/docs/latest/manual/pubsub/`
+  - `concept\06_ecosystem\32_event_driven_architecture.md`
+- `https://docs.microsoft.com/en-us/azure/azure-functions/` → `https://learn.microsoft.com/en-us/azure/azure-functions/`
+  - `concept\06_ecosystem\35_architecture_patterns.md`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/` → `https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/generics`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://www.springer.com/gp/book/9783662498507` → `https://link.springer.com/book/9783662498507`
+  - `concept\06_ecosystem\41_workflow_theory.md`
+- `https://docs.temporal.io/clusters` → `https://docs.temporal.io/temporal-service`
+  - `concept\06_ecosystem\41_workflow_theory.md`
+- `https://jeffreypalermo.com/blog/the-onion-architecture-part-3/` → `https://jeffreypalermo.com/2008/08/the-onion-architecture-part-3/`
+  - `concept\06_ecosystem\35_architecture_patterns.md`
+- `https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/saga/saga` → `https://learn.microsoft.com/en-us/azure/architecture/patterns/saga`
+  - `concept\06_ecosystem\41_workflow_theory.md`
+- `https://docs.risingwave.com/` → `https://docs.risingwave.com/get-started/intro`
+  - `concept\06_ecosystem\36_stream_processing_ecosystem.md`
+- `https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)` → `https://learn.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)`
+  - `concept\06_ecosystem\33_cqrs_event_sourcing.md`
+- `https://tools.ietf.org/html/rfc7540` → `https://datatracker.ietf.org/doc/html/rfc7540`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://tikv.org/docs/` → `https://tikv.org/docs/7.1/concepts/overview/`
+  - `concept\06_ecosystem\37_database_systems.md`
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+- `https://www.springer.com/gp/book/9783540761942` → `https://link.springer.com/book/9783540761942`
+  - `concept\06_ecosystem\41_workflow_theory.md`
+- `https://www.meilisearch.com/docs` → `https://www.meilisearch.com/docs/getting_started/overview`
+  - `concept\06_ecosystem\37_database_systems.md`
+- `https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design` → `https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://tools.ietf.org/html/rfc7231` → `https://datatracker.ietf.org/doc/html/rfc7231`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://developers.google.com/protocol-buffers` → `https://protobuf.dev/`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://tools.ietf.org/html/rfc7807` → `https://datatracker.ietf.org/doc/html/rfc7807`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://docs.microsoft.com/en-us/azure/architecture/microservices/design/gateway` → `https://learn.microsoft.com/en-us/azure/architecture/microservices/design/gateway`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://docs.konghq.com/` → `https://developer.konghq.com/`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://www.apollographql.com/docs/apollo-server/` → `https://www.apollographql.com/docs/apollo-server`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://briansmith.org/rustdoc/ring/` → `https://docs.rs/ring/latest/ring/`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://tools.ietf.org/html/rfc8439` → `https://datatracker.ietf.org/doc/html/rfc8439`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://tools.ietf.org/html/rfc9106` → `https://datatracker.ietf.org/doc/html/rfc9106`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://developers.google.com/protocol-buffers/docs/proto3` → `https://protobuf.dev/programming-guides/proto3/`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://tools.ietf.org/html/rfc8446` → `https://datatracker.ietf.org/doc/html/rfc8446`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://www.rfc-editor.org/info/rfc8032` → `https://www.rfc-editor.org/info/rfc8032/`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://tools.ietf.org/html/rfc7748` → `https://datatracker.ietf.org/doc/html/rfc7748`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://csrc.nist.gov/publications/detail/fips/197/final` → `https://csrc.nist.gov/pubs/fips/197/final`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://csrc.nist.gov/publications/detail/fips/180/4/final` → `https://csrc.nist.gov/pubs/fips/180-4/upd1/final`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://csrc.nist.gov/publications/detail/sp/800-57-part-1/rev-5/final` → `https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://tools.ietf.org/html/rfc2104` → `https://datatracker.ietf.org/doc/html/rfc2104`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://arrow.apache.org/ballista/` → `https://datafusion.apache.org/ballista/`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `https://tools.ietf.org/html/rfc5869` → `https://datatracker.ietf.org/doc/html/rfc5869`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://stripe.com/docs/api/versioning` → `https://docs.stripe.com/api/versioning`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://arrow.apache.org/datafusion/` → `https://datafusion.apache.org/`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+  - `concept\06_ecosystem\48_data_engineering.md`
+  - `concept\06_ecosystem\55_rust_for_data_science.md`
+- `https://blake3.io/blake3.pdf` → `https://github.com/BLAKE3-team/BLAKE3/`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://csrc.nist.gov/publications/detail/fips/186/5/final` → `https://csrc.nist.gov/pubs/fips/186-5/final`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://www.wfmc.org/standards/xpdl` → `https://wfmc.org/wp-content/uploads/2022/09/xpdl.jpeg`
+  - `concept\06_ecosystem\41_workflow_theory.md`
+- `https://arrow.apache.org/datafusion/user-guide/sql/index.html` → `https://datafusion.apache.org/user-guide/sql/index.html`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://arrow.apache.org/datafusion/user-guide/introduction.html` → `https://datafusion.apache.org/user-guide/introduction.html`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+  - `concept\06_ecosystem\55_rust_for_data_science.md`
+- `https://arrow.apache.org/datafusion/user-guide/example-usage.html` → `https://datafusion.apache.org/user-guide/example-usage.html`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://tools.ietf.org/html/rfc8032` → `https://datatracker.ietf.org/doc/html/rfc8032`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://pola.rs/benchmarks.html` → `https://pola.rs/benchmarks/`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+  - `concept\06_ecosystem\48_data_engineering.md`
+  - `concept\06_ecosystem\55_rust_for_data_science.md`
+- `https://docs.delta.io/latest/index.html` → `https://docs.delta.io/index.html`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://research.google/pubs/pub36632/` → `https://research.google/pubs/dremel-interactive-analysis-of-web-scale-datasets-2/`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://csrc.nist.gov/publications/detail/sp/800-38d/final` → `https://csrc.nist.gov/pubs/sp/800/38/d/final`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://docs.aws.amazon.com/whitepapers/latest/s3-optimizing-performance-best-practices/introduction.html` → `https://docs.aws.amazon.com/AmazonS3/latest/userguide/`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://docs.godotengine.org/` → `https://docs.godotengine.org/en/stable/`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://www.confluent.io/learn/batch-vs-real-time-data-processing/` → `https://www.confluent.io/learn/batch-processing/`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://rapier.rs/docs/user_guides/rust/getting_started` → `https://rapier.rs:443/docs/user_guides/rust/getting_started/`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://rapier.rs/docs/user_guides/rust/getting_started#benchmarks` → `https://rapier.rs:443/docs/user_guides/rust/getting_started/`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://developer.valvesoftware.com/wiki/Source_Multiplayer_Networking` → `https://developer.valvesoftware.com/.within.website/?redir=https://developer.valvesoftware.com/wiki/Source_Multiplayer_Networking`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://www.gamedeveloper.com/programming/oop-is-dead-long-live-ecs` → `https://www.gamedeveloper.com/programming`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://www.pearson.com/en-us/subject-catalog/p/real-time-systems/P200000005792` → `https://www.pearson.com/en-us/search/All-results?aq=real%20time%20systems`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://rapier.rs/docs/user_guides/rust/common_mistakes#using-a-variable-timestep` → `https://rapier.rs:443/docs/user_guides/rust/common_mistakes/`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://rapier.rs/docs/user_guides/rust/advanced_collision_detection#continuous-collision-detection` → `https://rapier.rs:443/docs/user_guides/rust/advanced_collision_detection/`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://fast-dds.docs.eprosima.com/` → `https://fast-dds.docs.eprosima.com/en/latest/`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://docs.delta.io/latest/delta-batch.html#schema-enforcement` → `https://docs.delta.io/delta-batch/`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://docs.lvgl.io/master/intro/index.html` → `https://lvgl.io/docs/open/introduction`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://www.pearson.com/en-us/subject-catalog/p/modern-control-engineering/P200000005828` → `https://www.pearson.com/en-us/search/All-results?aq=modern%20control%20engineering`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://docs.lvgl.io/latest/en/html/index.html` → `https://lvgl.io/docs/open`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://slint-ui.com/` → `https://slint.dev/`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://www.cypress.com/file/46266/download` → `https://sso.infineon.com/as/authorization.oauth2?scope=email+openid+profile+address+ifxScope&response_type=code&redirect_uri=https%3A%2F%2Fwww.infineon.com%2Fauth%2Fcallback&state=JHGX_GrFECzrqn5xubuKBj-5QlwCEBtDALV8uaFu1l0%3AoriginURL%3D%2Fcontent%2Fdam%2Finfineon%2Frow%2Fpublic%2Fdocuments%2F10%2F42%2Finfineon-an89659-interfacing-spi-f-ram-with-psoc-4-applicationnotes-ja.pdf%26action%3Dlg_gd%26ui_locales%3Dnull&code_challenge_method=S256&nonce=vRUb3Z5-0OY38n5TVV6-7tIlni6iuP-CbvnGl3bJlWc&client_id=ifxWebUser&code_challenge=dd750WilACJ2fkXvxchetsMpefBBI_gZM3j-fCXGbCU&ui_locales=EN`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.github.com/en/billing/managing-billing-for-github-actions` → `https://docs.github.com/en/billing/concepts/product-billing/github-actions`
+  - `concept\07_future\02_formal_methods.md`
+- `https://security.googleblog.com/` → `https://blog.google/security/`
+  - `concept\06_ecosystem\58_platform_rust_integration.md`
+- `https://slint-ui.com/docs/slint/` → `https://docs.slint.dev/latest/docs/slint/`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://docs.docker.com/desktop/wasm/` → `https://docs.docker.com/desktop/features/wasm/`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `https://slint-ui.com/docs/rust/slint/platform/trait.Platform.html` → `https://docs.slint.dev/latest/docs/rust/slint/platform/trait.Platform`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://www.rust-lang.org/governance/wgs` → `https://rust-lang.org/governance/wgs/`
+  - `concept\07_future\08_safety_tags_preview.md`
+- `https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-31431` → `https://www.cve.org/CVERecord?id=CVE-2026-31431`
+  - `concept\07_future\05_rust_version_tracking.md`
+- `https://spec.ferrocene.dev/` → `https://rust-lang.github.io/fls/`
+  - `concept\07_future\14_ferrocene_preview.md`
+  - `concept\07_future\17_rust_specification_preview.md`
+  - `docs\04_research\04_safety_critical_alignment_2026.md`
+  - `docs\06_toolchain\03_rustdoc_advanced.md`
+  - `docs\06_toolchain\06_05_rust_1_93_vs_1_92_comparison.md`
+  - `docs\10_terminology_standard.md`
+  - `docs\archive\2026_05_historical_docs\08_rust_version_evolution_1.89_to_1.93.md`
+  - `docs\archive\2026_05_historical_docs\10_rust_1.89_to_1.93_cumulative_features_overview.md`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+  - `knowledge\04_expert\academic\03_ownership_model_comprehensive.md`
+- `https://doc.rust-lang.org/` → `https://doc.rust-lang.org/stable/`
+  - `concept\07_future\19_rust_for_linux.md`
+  - `docs\00_meta\00_annual_review_template.md`
+  - `docs\00_meta\00_content_reconstruction_plan_2026.md`
+  - `docs\00_meta\00_docs_reorganization_complete.md`
+  - `docs\00_meta\00_documentation_division_of_labor.md`
+  - `docs\00_meta\00_documentation_lifecycle.md`
+  - `docs\00_meta\00_formal_content_master_index.md`
+  - `docs\00_meta\00_improvement_plan_execution_complete.md`
+  - `docs\00_meta\00_pdca_template.md`
+  - `docs\00_meta\00_project_health_dashboard.md`
+  - `docs\00_meta\00_quarterly_sync_checklist.md`
+  - `docs\00_meta\00_reorganization_complete.md`
+  - `docs\00_meta\00_rust_feature_tracking_template.md`
+  - `docs\00_meta\00_rust_version_alignment_checklist.md`
+  - `docs\00_meta\00_template_concept_doc.md`
+  - `docs\00_meta\00_template_decision_tree.md`
+  - `docs\00_meta\analysis\00_rust_2026_project_goals_monthly_tracking.md`
+  - `docs\00_meta\history\00_2026_reorganization.md`
+  - `docs\01_cargo_build_optimization.md`
+  - `docs\01_core\01_ownership_borrowing_lifetimes.md`
+  - `docs\01_core\README.md`
+  - `docs\01_learning\01_cross_module_learning_roadmap_2025_10_25.md`
+  - `docs\01_learning\01_cross_module_navigation.md`
+  - `docs\01_learning\01_learning_path_guide_2025_10_24.md`
+  - `docs\01_learning\01_learning_path_planning.md`
+  - `docs\01_learning\01_lfrs_certification_mapping.md`
+  - `docs\01_learning\01_mdbook_quiz_guide.md`
+  - `docs\01_nix_setup.md`
+  - `docs\02_reference\02_edge_cases_and_special_cases.md`
+  - `docs\02_reference\02_error_code_mapping.md`
+  - `docs\02_reference\02_rustnomicon_alignment.md`
+  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
+  - `docs\02_reference\ALIGNMENT_GUIDE.md`
+  - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_algorithm_decision_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_algorithms_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_async_patterns.md`
+  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_closures_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_control_flow_functions_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_error_handling_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_generics_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_network_programming_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_ownership_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_pin_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_process_management_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_rust_190_to_193_features_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_rust_194_features_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_rust_195_features_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_rust_196_features_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_smart_pointers_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_strings_formatting_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_testing_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_type_system.md`
+  - `docs\02_reference\quick_reference\02_wasm_cheatsheet.md`
+  - `docs\02_reference\quick_reference\README.md`
+  - `docs\03_guides\03_async_closures_deep_dive.md`
+  - `docs\03_guides\03_cxx_interop_guide.md`
+  - `docs\03_guides\03_fuzzing_guide.md`
+  - `docs\03_guides\03_io_uring_guide.md`
+  - `docs\03_guides\03_let_chains_guide.md`
+  - `docs\03_guides\03_miri_guide.md`
+  - `docs\03_guides\03_rust_2024_edition_future_in_prelude.md`
+  - `docs\03_guides\03_rust_2024_edition_rpit_migration.md`
+  - `docs\03_guides\03_semver_checks.md`
+  - `docs\03_guides\03_test_coverage.md`
+  - `docs\03_practice\03_cross_module_practical_projects_2025_10_25.md`
+  - `docs\03_practice\03_project_01_cli_tool.md`
+  - `docs\03_practice\03_project_02_file_processor.md`
+  - `docs\03_practice\03_project_03_calculator.md`
+  - `docs\03_practice\03_project_04_password_generator.md`
+  - `docs\03_practice\03_project_05_text_statistics.md`
+  - `docs\03_practice\03_project_06_concurrent_downloader.md`
+  - `docs\03_practice\03_project_07_chat_server.md`
+  - `docs\03_practice\03_project_08_cache_system.md`
+  - `docs\03_practice\03_project_09_log_parser.md`
+  - `docs\03_practice\03_project_10_data_pipeline.md`
+  - `docs\03_practice\03_project_11_web_server.md`
+  - `docs\03_practice\03_project_12_wasm_app.md`
+  - `docs\03_practice\03_project_13_database_engine.md`
+  - `docs\03_practice\03_project_14_async_runtime.md`
+  - `docs\03_practice\03_project_15_distributed_system.md`
+  - `docs\03_practice\README.md`
+  - `docs\04_research\04_cranelift_backend.md`
+  - `docs\04_research\04_endangered_by_language_saved_by_compiler_popl_2026.md`
+  - `docs\04_research\04_llm_c_to_rust_migration.md`
+  - `docs\04_research\04_next_generation_trait_solver.md`
+  - `docs\04_research\04_ng_trait_solver.md`
+  - `docs\04_research\04_polonius_next_gen_borrow_checker.md`
+  - `docs\04_research\04_polonius_tracking.md`
+  - `docs\04_research\04_rust_for_linux.md`
+  - `docs\04_research\04_rust_for_linux_2026.md`
+  - `docs\04_research\04_rust_formal_verification.md`
+  - `docs\04_research\04_safety_critical_alignment_2026.md`
+  - `docs\04_research\04_verusbelt_pldi_2026.md`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+  - `docs\04_thinking\04_applications_analysis_view.md`
+  - `docs\04_thinking\04_decision_graph_network.md`
+  - `docs\04_thinking\04_mind_map_collection.md`
+  - `docs\04_thinking\04_proof_graph_network.md`
+  - `docs\04_thinking\04_thinking_representation_methods.md`
+  - `docs\05_guides\05_advanced_topics_deep_dive.md`
+  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
+  - `docs\05_guides\05_algorithms_usage_guide.md`
+  - `docs\05_guides\05_async_programming_usage_guide.md`
+  - `docs\05_guides\05_cli_applications_guide.md`
+  - `docs\05_guides\05_control_flow_functions_usage_guide.md`
+  - `docs\05_guides\05_cross_module_integration_examples.md`
+  - `docs\05_guides\05_cxx_rust_interop_evaluation.md`
+  - `docs\05_guides\05_design_patterns_usage_guide.md`
+  - `docs\05_guides\05_embedded_rust_guide.md`
+  - `docs\05_guides\05_formal_verification_integration_guide.md`
+  - `docs\05_guides\05_inline_assembly_guide.md`
+  - `docs\05_guides\05_macro_system_usage_guide.md`
+  - `docs\05_guides\05_miri_practical_guide.md`
+  - `docs\05_guides\05_performance_tuning_guide.md`
+  - `docs\05_guides\05_pragmatic_guidelines_checklist.md`
+  - `docs\05_guides\05_testing_coverage_guide.md`
+  - `docs\05_guides\05_threads_concurrency_usage_guide.md`
+  - `docs\05_guides\05_troubleshooting_guide.md`
+  - `docs\05_guides\05_type_system_usage_guide.md`
+  - `docs\05_guides\05_unsafe_fields_preview.md`
+  - `docs\05_guides\05_wasm_usage_guide.md`
+  - `docs\05_guides\BEST_PRACTICES.md`
+  - `docs\05_guides\workflow\01_workflow_theory.md`
+  - `docs\05_miri_integration_summary.md`
+  - `docs\06_docker_guide.md`
+  - `docs\06_toolchain\01_compiler_features.md`
+  - `docs\06_toolchain\03_rustdoc_advanced.md`
+  - `docs\06_toolchain\06_05_rust_1_93_vs_1_92_comparison.md`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+  - `docs\06_toolchain\06_09_rust_1_93_compatibility_deep_dive.md`
+  - `docs\06_toolchain\06_11_rust_1_93_cargo_rustdoc_changes.md`
+  - `docs\06_toolchain\06_14_rust_1_95_nightly_preview.md`
+  - `docs\06_toolchain\06_cargo_script_guide.md`
+  - `docs\06_toolchain\06_cranelift_backend_guide.md`
+  - `docs\06_toolchain\06_toml_v11_cargo_guide.md`
+  - `docs\06_toolchain\README.md`
+  - `docs\07_project\07_completion_status.md`
+  - `docs\07_project\07_documentation_cross_reference_guide.md`
+  - `docs\07_project\07_extension_deepening_plan_2026.md`
+  - `docs\07_project\07_knowledge_structure_framework.md`
+  - `docs\07_project\07_module_knowledge_structure_guide.md`
+  - `docs\07_project\07_project_architecture_guide.md`
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\10_api_guide.md`
+  - `docs\10_architecture.md`
+  - `docs\10_authoritative_sources_and_citations.md`
+  - `docs\10_dependency_graph.md`
+  - `docs\10_deployment.md`
+  - `docs\10_migration_guide_2026.md`
+  - `docs\10_miri_guide.md`
+  - `docs\10_sccache_setup.md`
+  - `docs\10_terminology_standard.md`
+  - `docs\content\10_content_crates_mapping.md`
+  - `docs\content\academic\10_tree_borrows_guide.md`
+  - `docs\content\academic\README.md`
+  - `docs\content\ecosystem\README.md`
+  - `docs\content\emerging\README.md`
+  - `docs\content\production\README.md`
+  - `docs\content\representations\10_knowledge_representation_matrix.md`
+  - `docs\content\scenarios\10_web_application_scenarios.md`
+  - `docs\research_notes\10_research_notes_organization.md`
+  - `docs\research_notes\10_safe_unsafe_comprehensive_analysis.md`
+  - `docs\research_notes\10_theorem_rust_example_mapping.md`
+  - `docs\research_notes\INDEX.md`
+  - `docs\research_notes\README.md`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+  - `docs\research_notes\formal_methods\10_variance_concept_mindmap.md`
+  - `docs\research_notes\type_theory\10_lifetime_formalization.md`
+  - `docs\research_notes\type_theory\10_variance_theory.md`
+  - `docs\research_notes\type_theory\README.md`
+  - `docs\rust-formal-engineering-system\00_master_index.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\01_type_system\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\02_memory_safety\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\02_ownership_system\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\03_ownership_borrowing\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\05_trait_system\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\06_lifetime_management\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\README.md`
+  - `docs\rust-formal-engineering-system\02_practical_applications\README.md`
+  - `docs\rust-formal-engineering-system\02_practical_applications\memory\README.md`
+  - `docs\rust-formal-engineering-system\02_practical_applications\performance\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\01_synchronous\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\02_async\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\09_actor_model\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\11_benchmark_minimal_guide.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\README.md`
+  - `docs\rust-formal-engineering-system\03_compiler_theory\README.md`
+  - `docs\rust-formal-engineering-system\03_design_patterns\04_concurrent\README.md`
+  - `docs\rust-formal-engineering-system\03_design_patterns\README.md`
+  - `docs\rust-formal-engineering-system\05_software_engineering\07_testing\README.md`
+  - `docs\rust-formal-engineering-system\05_software_engineering\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\01_compiler\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\02_package_manager\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\03_build_tools\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\README.md`
+  - `docs\rust-formal-engineering-system\09_research_agenda\04_research_methods\README.md`
+  - `docs\rust-formal-engineering-system\10_quality_assurance\README.md`
+  - `docs\rust-formal-engineering-system\README.md`
+  - `docs\rust-ownership-decidability\06-visualizations\README.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\README.md`
+  - `docs\rust-ownership-decidability\visualizations\README.md`
+  - `docs\templates\10_versioned_doc_template.md`
+  - `knowledge\99_archive\01_completion_report_2026_03_1_94.md`
+  - `knowledge\99_archive\02_version_tracking.md`
+  - `knowledge\99_archive\03_case_studies.md`
+  - `knowledge\99_archive\04_exercises.md`
+- `https://git.kernel.org/linus/8aebac82933f` → `https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=8aebac82933f`
+  - `concept\07_future\19_rust_for_linux.md`
+- `https://foundation.rust-lang.org/news/` → `https://rustfoundation.org/media/`
+  - `concept\07_future\24_roadmap.md`
+  - `docs\00_meta\00_quarterly_sync_checklist.md`
+  - `docs\04_research\04_rust_for_linux.md`
+  - `knowledge\00_start\04_rust_philosophy.md`
+- `https://codeium.com` → `https://devin.ai/desktop`
+  - `concept\07_future\archive\01_ai_integration_original.md`
+- `https://www.rtca.org/product/do-178c` → `https://www.rtca.org/products/do-178c-electronic/`
+  - `concept\07_future\14_ferrocene_preview.md`
+- `https://rustfoundation.org/media/expanding-the-rust-formal-verification-ecosystem-welcoming-esbmc` → `https://rustfoundation.org/media/expanding-the-rust-formal-verification-ecosystem-welcoming-esbmc/`
+  - `concept\07_future\rust_1_97_preview.md`
+- `https://ocaml.org/manual/polyvariant.html` → `https://ocaml.org/manual/5.5/polyvariant.html`
+  - `concept\07_future\25_open_enums_preview.md`
+- `https://ebpf.io/projects/#aya` → `https://ebpf.io/applications/`
+  - `concept\07_future\29_ebpf_rust.md`
+- `https://131002.net/siphash/` → `https://www.aumasson.jp/`
+  - `knowledge\02_intermediate\01_collections.md`
+- `https://tokio.rs/blog/` → `https://tokio.rs/blog`
+  - `knowledge\03_advanced\async\01_async_await.md`
+- `https://rust-lang.org/governance` → `https://rust-lang.org/governance/`
+  - `knowledge\04_expert\safety_critical\05_strategic_guidance\02_comprehensive_recommendations_and_opinions.md`
+  - `knowledge\04_expert\safety_critical\09_reference\12_quick_reference_card.md`
+- `https://www.elsevier.com/books/the-art-of-multiprocessor-programming/herlihy/978-0-12-415950-1` → `https://shop.elsevier.com/books/the-art-of-multiprocessor-programming/herlihy/978-0-12-415950-1`
+  - `knowledge\03_advanced\concurrency\01_atomics.md`
+  - `knowledge\03_advanced\concurrency\02_synchronization.md`
+- `https://www.rust-lang.org` → `https://rust-lang.org/`
+  - `knowledge\04_expert\safety_critical\03_readme_rust_safety_critical_ecosystem.md`
+- `https://www.easa.europa.eu/` → `https://www.easa.europa.eu/en`
+  - `knowledge\04_expert\safety_critical\10_standards\05_regulatory_landscape_and_approvals.md`
+- `https://ferrous-systems.com/ferrocene` → `https://ferrocene.dev/en`
+  - `knowledge\04_expert\safety_critical\07_case_studies\01_case_study_01_ferrocene_certification.md`
+- `https://www.shuttle.rs/` → `https://www.shuttle.dev/`
+  - `knowledge\06_ecosystem\deployment\README.md`
+- `https://nixos.org/download.html` → `https://nixos.org/download/`
+  - `docs\01_nix_setup.md`
+- `https://kubernetes.io/docs/` → `https://kubernetes.io/docs/home/`
+  - `knowledge\06_ecosystem\deployment\01_kubernetes_deployment_guide.md`
+- `https://docs.docker.com/get-docker/` → `https://docs.docker.com/get-started/get-docker/`
+  - `docs\06_docker_guide.md`
+- `https://cve.mitre.org/` → `https://www.cve.org/`
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+- `https://marabos.nl/` → `https://mara.nl/`
+  - `knowledge\04_expert\02_unsafe_audit.md`
+- `https://adacore.com` → `https://www.adacore.com/`
+  - `knowledge\04_expert\safety_critical\05_strategic_guidance\02_comprehensive_recommendations_and_opinions.md`
+- `https://www.infoworld.com/article/4141483/` → `https://www.infoworld.com/article/4141483`
+  - `docs\10_authoritative_sources_and_citations.md`
+- `https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-68260` → `https://www.cve.org/CVERecord?id=CVE-2025-68260`
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
+- `https://coq.inria.fr/documentation` → `https://rocq-prover.org/docs`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\READING_GUIDE.md`
+  - `knowledge\04_expert\academic\01_coq_formalization_guide.md`
+- `https://www.cenelec.eu/` → `https://www.cencenelec.eu/`
+  - `knowledge\04_expert\safety_critical\07_case_studies\05_case_study_05_railway_signaling.md`
+- `https://cfs.gsfc.nasa.gov/` → `https://etd.gsfc.nasa.gov/capabilities/core-flight-system/`
+  - `knowledge\04_expert\safety_critical\07_case_studies\02_case_study_02_nasa_cfs_rust.md`
+- `https://blog.rust-lang.org/2026/01/22/Rust-1.93.0` → `https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/`
+  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
+  - `docs\archive\version_reports\RUST_192_COMPREHENSIVE_MIND_REPRESENTATIONS.md`
+  - `docs\archive\version_reports\RUST_192_FEATURES_ALIGNMENT.md`
+- `https://webassembly.org/docs/semantics/` → `https://webassembly.github.io/spec/core/exec/index.html`
+  - `docs\02_reference\ALIGNMENT_GUIDE.md`
+- `https://defmt.ferrous-systems.com/filtering.html` → `https://defmt.ferrous-systems.com/filtering`
+  - `docs\03_guides\03_embassy_deep_dive.md`
+- `https://spec.ferrocene.dev/functions.html` → `https://rust-lang.github.io/fls/functions.html`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+- `https://coq.inria.fr/doc/` → `https://rocq-prover.org/docs`
+  - `docs\00_meta\00_formal_content_master_index.md`
+  - `docs\04_research\04_rust_formal_verification.md`
+  - `docs\05_guides\05_formal_verification_integration_guide.md`
+  - `docs\research_notes\formal_methods\10_variance_concept_mindmap.md`
+  - `docs\rust-formal-engineering-system\00_master_index.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\01_type_system\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\02_memory_safety\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\02_ownership_system\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\06_lifetime_management\README.md`
+  - `docs\rust-formal-engineering-system\02_practical_applications\performance\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\01_synchronous\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\11_benchmark_minimal_guide.md`
+  - `docs\rust-formal-engineering-system\05_software_engineering\07_testing\README.md`
+  - `docs\rust-formal-engineering-system\09_research_agenda\04_research_methods\README.md`
+  - `docs\rust-formal-engineering-system\10_quality_assurance\README.md`
+  - `docs\rust-formal-engineering-system\README.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview-deep.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-02-creusot-deep-dive.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-06-verus-guide.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-07-refinedrust-deep-dive.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-08-gillian-rust.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-03-verification-advancements.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-06-formal-verification.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-07-std-verification-initiative.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-semantic-framework.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\03-async-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\04-control-data-flow.md`
+  - `docs\rust-ownership-decidability\CROSS_REFERENCE_VERIFICATION_REPORT.md`
+  - `docs\rust-ownership-decidability\CROSS_REFERENCE_VERIFICATION_SUMMARY.md`
+  - `docs\rust-ownership-decidability\FINAL_VERIFICATION_100_PERCENT.md`
+  - `docs\rust-ownership-decidability\actor-specialty\distributed\distributed-actors-formal.md`
+  - `docs\rust-ownership-decidability\actor-specialty\formal-proofs\actor-safety-theorems.md`
+  - `docs\rust-ownership-decidability\case-studies\alloc-cortex-m-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\arc-swap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\backoff-retry-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bevy-ecs-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bindgen-cbindgen-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bytes-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\chrono-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\clap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\config-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\const-gen-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\criterion-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\cxx-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\dashmap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\deadpool-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\derive-more-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\diesel-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\flate2-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\futures-crate-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\futures-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\governor-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\heim-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\image-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\indexmap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\industrial-verification-aws-meta.md`
+  - `docs\rust-ownership-decidability\case-studies\insta-snapshot-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\lapin-rdkafka-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\loom-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\lru-cached-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\moka-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\ndarray-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\nom-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\notify-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\nrf-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\once_cell-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\opentelemetry-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\pin-project-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\postcard-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\prometheus-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\pulldown-cmark-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\pyo3-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\quinn-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rand-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rayon-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\ref-cast-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\regex-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\reqwest-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rtic-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rustls-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-formal-analysis-deep.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-json-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\shuttle-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\slog-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\smoltcp-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\socket2-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\sqlx-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\static-assertions-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-future-stream-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-hashmap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-smart-pointers-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-trait-semantics-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\stm32f4xx-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tantivy-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tarpc-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tera-askama-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-graceful-shutdown-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-process-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-stream-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-util-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tonic-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tonic-grpc-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tonic-health-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tower-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tracing-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\typenum-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\usb-device-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\validator-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\walkdir-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\wasm-bindgen-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\wgpu-glium-formal-analysis.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\formal-framework\definitions.md`
+  - `docs\rust-ownership-decidability\formal-foundations\README.md`
+  - `docs\rust-ownership-decidability\formal-foundations\RUST_FORMAL_SEMANTICS_DEEP.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-01-rustbelt.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\drop-elaboration-formal.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\executable-semantics-comparison.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\refinedrust-type-system.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\affine-logic-decidability.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\separation-logic-soundness.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\logical-relations.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\mechanized-proofs.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\memory-model-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\operational-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\semantics-equivalence-proof.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-06_FORMAL_ANALYSIS_PROGRESS.md`
+- `https://spec.ferrocene.dev/patterns.html` → `https://rust-lang.github.io/fls/patterns.html`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+- `https://spec.ferrocene.dev/exceptions-and-errors.html` → `https://rust-lang.github.io/fls/exceptions-and-errors.html`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+- `https://spec.ferrocene.dev/concurrency.html` → `https://rust-lang.github.io/fls/concurrency.html`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+- `https://spec.ferrocene.dev/unsafety.html` → `https://rust-lang.github.io/fls/unsafety.html`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+- `https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html` → `https://research.google/blog/extra-extra-read-all-about-it-nearly-all-binary-searches-and-mergesorts-are-broken/`
+  - `docs\05_guides\05_kani_practical_guide.md`
+- `https://spec.ferrocene.dev/undefined-behavior.html` → `https://rust-lang.github.io/fls/undefined-behavior.html`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+- `https://spec.ferrocene.dev/inline-assembly.html` → `https://rust-lang.github.io/fls/inline-assembly.html`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+- `https://spec.ferrocene.dev/ownership-and-deconstruction.html` → `https://rust-lang.github.io/fls/ownership-and-deconstruction.html`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+- `https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing` → `https://rust-lang.github.io/fls/ownership-and-deconstruction.html`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+- `https://docs.microsoft.com/en-us/azure/devops/pipelines/test/codecoverage-for-pullrequests` → `https://learn.microsoft.com/en-us/azure/devops/pipelines/test/review-code-coverage-results?view=azure-devops`
+  - `docs\03_guides\03_test_coverage.md`
+- `https://discord.gg/rust-lang-community` → `https://discord.com/invite/rust-lang-community`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+- `https://spec.ferrocene.dev/ffi.html` → `https://rust-lang.github.io/fls/ffi.html`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+- `https://rustnationuk.com/` → `https://www.rustnationuk.com/`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+- `http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3587.pdf` → `https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3587.pdf`
+  - `docs\archive\rust-ownership-chinese\guides\zero-cost-abstraction-proof.md`
+- `https://discord.gg/rust-lang` → `https://discord.com/invite/rust-lang`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+  - `docs\rust-ownership-decidability\08-advanced-topics\README.md`
+- `https://www.ibm.com/docs/en/zos/2.4.0?topic=instructions-vector-instructions` → `https://www.ibm.com/docs/en/zos/2.4.0`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+- `https://bevyengine.org/news/bevy-0-6/` → `https://bevy.org/news/bevy-0-6/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
+- `https://bevyengine.org/learn/quick-start/getting-started/ecs/` → `https://bevy.org/learn/quick-start/getting-started/ecs/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
+- `https://tools.ietf.org/html/rfc7230` → `https://datatracker.ietf.org/doc/html/rfc7230`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://bevyengine.org/learn/quick-start/getting-started/resources/` → `https://bevy.org/learn/quick-start/getting-started/resources/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
+- `https://tools.ietf.org/html/rfc7540#section-5.2` → `https://datatracker.ietf.org/doc/html/rfc7540`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://linearlogic.com/` → `https://www.linearlogic.com/`
+  - `docs\rust-ownership-decidability\00-foundations\00-01-linear-logic-deep.md`
+- `https://docs.oracle.com/javase/` → `https://docs.oracle.com/en/java/javase/26/`
+  - `docs\rust-ownership-decidability\05-comparative-study\05-04-rust-vs-java.md`
+- `https://www.zero2prod.com/` → `https://www.zero2prod.com/index.html?country=Hong%20Kong&discount_code=SEA60`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `http://adam.chlipala.net/frap/` → `https://adam.chlipala.net/frap/`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `https://www.elsevier.com/books/engineering-a-compiler/cooper/978-0-12-815412-0` → `https://shop.elsevier.com/books/engineering-a-compiler/cooper/978-0-12-815412-0`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `https://store.doverpublications.com/0486478831.html` → `https://store.doverpublications.com/products/9780486478838`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `https://www.pearson.com/en-us/subject-catalog/p/introduction-to-automata-theory-languages-and-computation/P200000005792` → `https://www.pearson.com/en-us/search/All-results?aq=introduction%20to%20automata%20theory%20languages%20and%20computation`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `https://cs242.stanford.edu/` → `https://web.stanford.edu/class/cs242/`
+  - `docs\rust-ownership-decidability\07-references\bibliography.md`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `https://www.pearson.com/en-us/subject-catalog/p/compilers-principles-techniques-and-tools/P200000005663` → `https://www.pearson.com/en-us/search/All-results?aq=compilers%20principles%20techniques%20and%20tools`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `https://www.elsevier.com/books/optimizing-compilers-for-modern-architectures/allen/978-1-55860-286-1` → `https://shop.elsevier.com/books/optimizing-compilers-for-modern-architectures/allen/978-0-08-051324-9`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `http://adam.chlipala.net/cpdt/` → `https://adam.chlipala.net/cpdt/`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `https://docs.microsoft.com/en-us/learn/paths/rust-first-steps/` → `https://learn.microsoft.com/en-us/training/browse/`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `https://courses.engr.illinois.edu/cs421/` → `https://courses.grainger.illinois.edu/cs421/su2026/`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `https://www.rustlab.it/` → `https://rustlab.it/`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `http://www.deepspec.org/` → `https://deepspec.org/main`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `https://www.cs.uoregon.edu/research/summerschool/` → `https://www.cs.uoregon.edu/research/summerschool/summer26/`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `https://rustfest.eu/` → `https://rustfest.global/`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `http://twelf.org/` → `https://twelf.org/`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `http://nusmv.fbk.eu/` → `https://nusmv.fbk.eu/`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://www.sonarqube.org/` → `https://www.sonarsource.com/products/sonarqube/`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://www.synopsys.com/software-integrity/security-testing/static-analysis-sast.html` → `https://www.blackduck.com/`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `http://www.nuprl.org/` → `https://nuprl.org/`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://agda.readthedocs.io/` → `https://agda.readthedocs.io/en/v2.8.0-r3/`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://www.idris-lang.org/` → `https://idris-lang.org/`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://moves.rwth-aachen.de/teaching/ss-18/model-checking/` → `https://moves.rwth-aachen.de/teaching/ws-20-21/model-checking/`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `https://www.ndcconferences.com/` → `https://ndcconferences.com/`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `https://redis.io/docs/manual/patterns/distributed-locks/` → `https://redis.io/docs/latest/manual/patterns/distributed-locks/`
+  - `docs\rust-ownership-decidability\14-distributed-systems\13-01-distributed-patterns.md`
+- `https://actix.rs/docs` → `https://actix.rs/docs/`
+  - `docs\rust-ownership-decidability\case-studies\actix-web-formal-analysis.md`
+- `https://www.wfmc.org/` → `https://wfmc.org/`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\13-mi-with-design-time-knowledge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\14-mi-with-runtime-knowledge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\20-cancel-case.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\25-cancel-region.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\41-thread-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\42-thread-split.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\43-explicit-termination.md`
+- `https://pyo3.rs` → `https://pyo3.rs/v0.29.0/`
+  - `docs\rust-ownership-decidability\case-studies\pyo3-formal-analysis.md`
+- `https://ink.substrate.io/` → `https://use.ink/`
+  - `docs\rust-ownership-decidability\case-studies\blockchain\README.md`
+- `http://codecapsule.com/2013/11/11/robin-hood-hashing/` → `https://codecapsule.com/2013/11/11/robin-hood-hashing/`
+  - `docs\rust-ownership-decidability\case-studies\std-hashmap-formal-analysis.md`
+- `https://morestina.net/blog/1868/self-referential-structs-in-rust` → `https://morestina.net/1868/self-referential-types-for-fun-and-profit`
+  - `docs\rust-ownership-decidability\case-studies\ouroboros-formal-analysis.md`
+
+## 失效或异常链接
+
+- `[403] https://web.mit.edu/rust-lang/` — Forbidden
+  - `concept\00_meta\sources.md`
+- `[404] https://en.wikipedia.org/wiki/Ownership_types` — Not Found
+  - `concept\00_meta\sources.md`
+  - `concept\01_foundation\01_ownership.md`
+- `[404] https://iris-project.org/tutorial.html]` — Not Found
+  - `concept\00_meta\rustbelt_predicate_map.md`
+- `[404] https://en.wikipedia.org/wiki/Ownership_(programming)` — Not Found
+  - `concept\01_foundation\README.md`
+- `[404] https://en.wikipedia.org/wiki/Trait-based_programming` — Not Found
+  - `concept\02_intermediate\README.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\trait-system.md`
+- `[404] https://cel.cs.brown.edu/crp/idioms/copy_move_constructors.html` — Not Found
+  - `concept\01_foundation\23_move_semantics.md`
+  - `concept\02_intermediate\28_construction_and_initialization.md`
+- `[404] https://cel.cs.brown.edu/crp/idioms/rtti_dynamic_cast.html` — Not Found
+  - `concept\02_intermediate\25_rtti_and_dynamic_typing.md`
+- `[404] https://blog.google/technology/developers/comprehensive-rust/` — Not Found
+  - `concept\00_meta\comprehensive_rust_mapping.md`
+- `[404] https://tokio.rs/tokio/topics/runtime` — Not Found
+  - `concept\03_advanced\02_async.md`
+  - `concept\03_advanced\02_async_patterns.md`
+  - `concept\03_advanced\18_network_programming.md`
+  - `concept\archive\03_advanced_02_async_original.md`
+- `[404] https://www.stroustrup.com/FSM/0cost.pdf` — Not Found
+  - `concept\00_meta\terminology_glossary.md`
+- `[404] https://www.stroustrup.com/new_value-terminology.pdf` — Not Found
+  - `concept\01_foundation\19_value_vs_reference_semantics.md`
+- `[404] https://www.stroustrup.com/ETAPS-corrected.pdf` — Not Found
+  - `concept\01_foundation\06_zero_cost_abstractions.md`
+- `[404] https://llvm.org/docs/SystemZ.html` — Not Found
+  - `concept\03_advanced\13_inline_assembly.md`
+- `[404] https://en.wikipedia.org/wiki/Fractional_permissions` — Not Found
+  - `concept\04_formal\03_ownership_formal.md`
+- `[404] https://www.cs.bgu.ac.il/~hendlerd/papers/HP.pdf` — Not Found
+  - `concept\03_advanced\16_lock_free.md`
+- `[404] https://www.jaist.ac.jp/~sgonda/paper/2020_scico.html` — Not Found
+  - `concept\04_formal\09_linear_logic_applications.md`
+- `[404] https://en.wikipedia.org/wiki/Phase_semantics` — Not Found
+  - `concept\04_formal\01_linear_logic.md`
+- `[404] https://www.microsoft.com/en-us/research/publication/practical-type-inference-arbitrary-rank-types/` — Not Found
+  - `concept\04_formal\08_type_inference.md`
+- `[404] https://www.levels.fyi/t/rust-engineer/salaries/` — Not Found
+  - `concept\00_meta\career_landscape.md`
+- `[404] https://homepages.inf.ed.ac.uk/wadler/papers/linearsubtypes/linearsubtypes.pdf` — Not Found
+  - `concept\04_formal\09_linear_logic_applications.md`
+- `[404] https://www.cs.cmu.edu/~fp/courses/15816-s12/lectures/01-linlogic.pdf` — Not Found
+  - `concept\04_formal\09_linear_logic_applications.md`
+- `[404] https://marabos.nl/atomics/happens-before.html` — Not Found
+  - `concept\03_advanced\11_atomics_and_memory_ordering.md`
+- `[404] https://www.hillelwayne.com/post/limitations-of-formal/` — Not Found
+  - `concept\04_formal\11_separation_logic.md`
+- `[404] https://www.cs.ox.ac.uk/people/samson.abramsky/dt.ps` — Not Found
+  - `concept\04_formal\12_denotational_semantics.md`
+- `[404] https://en.wikipedia.org/wiki/Viper_(verification_infrastructure)` — Not Found
+  - `concept\04_formal\05_verification_toolchain.md`
+- `[404] https://www.ralfj.de/blog/2023/01/07/tree-borrows.html` — Not Found
+  - `concept\04_formal\31_miri.md`
+  - `docs\05_guides\05_miri_practical_guide.md`
+- `[404] https://www.ralfj.de/blog/2023/01-31_tree-borrows.html` — Not Found
+  - `concept\04_formal\17_operational_semantics.md`
+  - `concept\07_future\17_rust_specification_preview.md`
+  - `concept\07_future\20_borrowsanitizer_preview.md`
+- `[404] https://marabos.nl/atomics/when-to-use.html` — Not Found
+  - `concept\03_advanced\10_concurrency_patterns.md`
+  - `concept\03_advanced\11_atomics_and_memory_ordering.md`
+- `[404] https://socket.dev/blog/trapdoor-supply-chain-attack` — Not Found
+  - `concept\05_comparative\04_safety_boundaries.md`
+- `[404] https://www.cs.brown.edu/~mph/HerlihyShavit/` — Not Found
+  - `concept\03_advanced\19_parallel_distributed_pattern_spectrum.md`
+- `[404] https://v8.dev/blog/jit` — Not Found
+  - `concept\05_comparative\08_rust_vs_javascript.md`
+- `[404] https://www.ben-morris.com/swift-vs-rust/` — Not Found
+  - `concept\05_comparative\09_rust_vs_swift.md`
+- `[404] https://en.wikipedia.org/wiki/Trust_(social)` — Not Found
+  - `concept\05_comparative\04_safety_boundaries.md`
+- `[404] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Type_coercion` — Not Found
+  - `concept\05_comparative\08_rust_vs_javascript.md`
+- `[404] https://docs.scala-lang.org/scala3/book/types-intro.html` — Not Found
+  - `concept\05_comparative\12_rust_vs_scala.md`
+- `[404] https://tenderlovemaking.com/tags/gc.html` — Not Found
+  - `concept\05_comparative\08_rust_vs_ruby.md`
+- `[404] https://docs.scala-lang.org/scala3/book/types-inference.html` — Not Found
+  - `concept\05_comparative\12_rust_vs_scala.md`
+- `[404] https://docs.scala-lang.org/topic/implicit-conversions.html` — Not Found
+  - `concept\05_comparative\12_rust_vs_scala.md`
+- `[404] https://docs.scala-lang.org/scala3/book/interop.html` — Not Found
+  - `concept\05_comparative\12_rust_vs_scala.md`
+- `[404] https://shopify.engineering/rust-at-shopify` — Not Found
+  - `concept\05_comparative\08_rust_vs_ruby.md`
+- `[404] https://www.cs.nott.ac.uk/~pszgmh/psem.html` — Not Found
+  - `concept\04_formal\18_evaluation_strategies.md`
+- `[404] https://hexdocs.pm/mix/Mix.Tasks.Deploy.html` — 
+  - `concept\05_comparative\14_rust_vs_elixir.md`
+- `[403] https://en.wikipedia.org/` — Too Many Reqs (1862a4b)
+  - `concept\06_ecosystem\02_patterns.md`
+  - `concept\06_ecosystem\04_application_domains.md`
+- `[404] https://en.wikipedia.org/wiki/Design_pattern%3B_Wikipedia_%E2%80%94_RAII%3B_Wikipedia_%E2%80%94_Typestate_analysis` — Not Found
+  - `concept\06_ecosystem\02_patterns.md`
+- `[404] https://en.wikipedia.org/wiki/Design_pattern%3B_Wikipedia_%E2%80%94_RAII%3B_Wikipedia_%E2%80%94_Typestate` — Not Found
+  - `concept\06_ecosystem\02_patterns.md`
+- `[404] https://webassembly.org/docs/portability-and-performance/` — Not Found
+  - `concept\06_ecosystem\11_webassembly.md`
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `[ERR] https://arewe distributedyet.org/` — Tunnel connection failed: 400 Invalid header received from client
+  - `concept\06_ecosystem\18_distributed_systems.md`
+- `[404] https://rustsec.org/advisories/rss.xml` — Not Found
+  - `concept\06_ecosystem\19_security_practices.md`
+- `[404] https://en.wikipedia.org/wiki/Entity_component_system%3B_Richard_Fabian_%E2%80%94_Data_Oriented_Design%3B_Niko_Matsakis_Blog` — Not Found
+  - `concept\06_ecosystem\07_game_ecs.md`
+- `[404] https://www.pingcap.com/blog/why-rust/` — Not Found
+  - `concept\06_ecosystem\18_distributed_systems.md`
+  - `concept\06_ecosystem\31_microservice_patterns.md`
+- `[404] https://diesel.rs/guides/migrations.html` — Not Found
+  - `concept\06_ecosystem\23_database_access.md`
+- `[404] https://www.linuxfoundation.org/press/press-release/sustaining-package-registries-working-group` — Not Found
+  - `concept\06_ecosystem\19_security_practices.md`
+- `[404] https://docs.aws.amazon.com/wellarchitected/latest/health-safety-pillar/welcome.html` — Not Found
+  - `concept\06_ecosystem\24_cloud_native.md`
+- `[404] https://nodejs.org/en/docs/guides/dont-block-the-event-loop` — Not Found
+  - `concept\05_comparative\15_rust_vs_typescript.md`
+- `[404] https://www.rtca.org/product/do-178c-software-considerations-in-airborne-systems-and-equipment-certification` — Not Found
+  - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
+  - `concept\07_future\14_ferrocene_preview.md`
+- `[404] https://microservices.io/book/` — Not Found
+  - `concept\06_ecosystem\31_microservice_patterns.md`
+  - `concept\06_ecosystem\32_event_driven_architecture.md`
+- `[404] https://martinfowler.com/bliki/OverEngineering.html` — Not Found
+  - `concept\06_ecosystem\35_architecture_patterns.md`
+- `[404] https://www.ssi.gouv.fr/en/guide/rust-secure-development-guide/` — Not Found
+  - `concept\06_ecosystem\19_security_practices.md`
+- `[404] https://www.rfc-editor.org/rfc/rfc9114.html` — Not Found
+  - `concept\06_ecosystem\38_network_protocols.md`
+  - `docs\rust-ownership-decidability\case-studies\reqwest-formal-analysis.md`
+- `[404] https://aws.amazon.com/blogs/opensource/rust-microservices/` — 
+  - `concept\06_ecosystem\31_microservice_patterns.md`
+- `[404] https://www.rfc-editor.org/rfc/rfc9000.html` — Not Found
+  - `concept\06_ecosystem\38_network_protocols.md`
+- `[404] https://tokio.rs/tokio/topics/internals` — Not Found
+  - `concept\06_ecosystem\40_reactive_programming.md`
+- `[ERR] https://sqs` — [Errno 11001] getaddrinfo failed
+  - `concept\06_ecosystem\35_architecture_patterns.md`
+- `[404] https://homepages.inf.ed.ac.uk/gdp/publications/Structural_Operational_Semantics.pdf` — Not Found
+  - `concept\06_ecosystem\41_workflow_theory.md`
+- `[404] https://www.wfmc.org/standards/reference-model` — Not Found
+  - `concept\06_ecosystem\41_workflow_theory.md`
+- `[404] https://www.cs.cmu.edu/~wing/publications/Milner92.pdf` — Not Found
+  - `concept\06_ecosystem\41_workflow_theory.md`
+- `[404] https://graphql.org/blog/2015/10/16/subscriptions/` — Not Found
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `[404] https://datatracker.ietf.org/wg/cfrg/documents/` — Not Found
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `[404] https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-versioning` — Not Found
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `[404] https://www.wfmc.org/standards/terminology` — Not Found
+  - `concept\06_ecosystem\41_workflow_theory.md`
+- `[404] https://letsencrypt.org/docs/rustls/` — Not Found
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `[404] https://burn.dev/book/` — Not Found
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `[404] https://burn.dev/book/building-blocks/backend.html` — Not Found
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `[404] https://burn.dev/blog/why-rust-for-deep-learning.html` — Not Found
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `[404] https://pola.rs/posts/polars-pandas-xlsxwriter/` — Not Found
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `[404] https://smallcultfollowing.com/babysteps/blog/2019/01/21/polonius-and-region-errors/` — Not Found
+  - `concept\06_ecosystem\45_compiler_internals.md`
+- `[404] https://burn.dev/book/building-blocks/tensor.html` — Not Found
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `[404] https://docs.pola.rs/user-guide/transformations/time-series/windows/` — Not Found
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `[ERR] https://cybersecurity-news.com/hax-rust-verification/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `[404] https://docs.getdbt.com/docs/build/about-sql-reference` — Not Found
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `[404] https://goto.ucsd.edu/~rjhala/papers/liquid_types_pldi08.pdf` — Not Found
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `[404] https://pola.rs/posts/rust-for-data/` — Not Found
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `[404] https://www.hillelwayne.com/post/formally-verifying/` — Not Found
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `[404] https://parquet.apache.org/docs/file-format/schema-evolution/` — Not Found
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `[404] https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers22.pdf` — Not found (filtered)
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `[404] https://docs.pola.rs/user-guide/concepts/data-structures/#dataframe` — Not Found
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `[404] https://www.onehouse.ai/blog/the-ultimate-guide-to-apache-parquet` — Not Found
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `[403] https://www.realtimerendering.com/` — Forbidden
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `[404] https://arrow.apache.org/datafusion/user-guide/caching.html` — Not Found
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `[ERR] https://pmg.csail.mit.edu/papers/osdi99.pdf` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+- `[404] https://parquet.apache.org/docs/file-format/config/` — Not Found
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `[403] https://www.khronos.org/registry/vulkan/specs/1.3/html/vkspec.html` — Forbidden
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `[403] https://qiskit.org/textbook/ch-states/introduction.html` — Forbidden
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `[403] https://qiskit.org/textbook/` — Forbidden
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `[404] https://docs.unity3d.com/Manual/UnityArchitecture.html` — Not Found
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `[403] https://journals.aps.org/pr/abstract/10.1103/PhysRev.47.777` — Forbidden
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `[403] https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.70.1895` — Forbidden
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `[403] https://qiskit.org/textbook/ch-gates/introduction.html` — Forbidden
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `[403] https://www.nsa.gov/Press-Room/Fact-Sheets/Article/3215798/nsa-releases-cnsa-20/` — Forbidden
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `[404] https://dept-info.labri.fr/~denise/Algorithmes/Consensus/` — Not Found
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+- `[403] https://learning.quantum.ibm.com/` — Forbidden
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `[404] https://www.crcpress.com/Game-Audio-Programming-Principles-and-Practices/DeMan-Larkin/p/book/9781138731499` — Not Found
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `[403] https://wiki.linuxfoundation.org/realtime/start` — Forbidden
+  - `concept\06_ecosystem\52_robotics.md`
+- `[404] https://www.microsoft.com/en-us/research/publication/paxos-made-live-an-engineering-perspective/` — Not Found
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+- `[403] https://qiskit.org/textbook/ch-states/single-qubit-gates.html` — Forbidden
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `[ERR] https://navigation.ros.org/behavior_trees/index.html` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `concept\06_ecosystem\52_robotics.md`
+- `[403] https://qiskit.org/` — Forbidden
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `[403] https://qiskit.org/textbook/ch-applications/vqe-molecules.html` — Forbidden
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `[ERR] https://navigation.ros.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `concept\06_ecosystem\52_robotics.md`
+- `[404] https://docs.cosmos.network/main/` — Not Found
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+- `[ERR] https://www.nalgebra.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `concept\06_ecosystem\52_robotics.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\14_nalgebra_architecture.md`
+- `[ERR] https://www.nalgebra.org/benchmarks/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `concept\06_ecosystem\52_robotics.md`
+- `[404] https://design.ros2.org/articles/rosidl.html` — Not Found
+  - `concept\06_ecosystem\52_robotics.md`
+- `[ERR] https://www.focaltech-systems.com/` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.focaltech-systems.com'. (_ssl.c:1016)
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[404] https://grobotronics.com/xpt2046-touch-screen-controller.html` — Not Found
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[404] https://docs.pennylane.ai/en/stable/code/api/pennylane.qaoa.html` — Not Found
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `[404] https://docs.lvgl.io/latest/en/html/overview/perf.html` — Not Found
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[404] https://docs.pennylane.ai/en/stable/introduction/gradients.html` — Not Found
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `[ERR] https://www.displayfuture.com/Display/datasheet/controller/ST7789.pdf` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[404] https://osqp.org/docs/papers/` — Not Found
+  - `concept\06_ecosystem\52_robotics.md`
+- `[403] https://developer.arm.com/documentation/dai0298/a/` — Forbidden
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[404] https://docs.lvgl.io/latest/en/html/porting/index.html` — Not Found
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[404] https://docs.lvgl.io/latest/en/html/porting/mem.html` — Not Found
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[404] https://docs.lvgl.io/latest/en/html/overview/indev.html#gestures` — Not Found
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[404] https://slint-ui.com/docs/architecture/` — Not Found
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[403] https://developer.arm.com/documentation/den0013/d/Caches/Cache-coherency` — Forbidden
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[404] https://docs.lvgl.io/latest/en/html/overview/indev.html` — Not Found
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[403] https://developer.arm.com/documentation/100240/latest/` — Forbidden
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[403] https://trunkrs.dev/` — Forbidden
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `[ERR] https://www.nalgebra.org/decompositions-and-lapack/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `concept\06_ecosystem\52_robotics.md`
+- `[404] https://component-model.bytecodealliance.org/design/types.html` — Not Found
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `[404] https://docs.lvgl.io/latest/en/html/porting/display.html` — Not Found
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[404] https://docs.lvgl.io/latest/en/html/overview/memory.html` — Not Found
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[404] https://pyo3.rs/v0.21.2/concurrency.html` — Not Found
+  - `concept\06_ecosystem\55_rust_for_data_science.md`
+- `[404] https://slint-ui.com/docs/rust/` — Not Found
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[404] https://component-model.bytecodealliance.org/design/composition.html` — Not Found
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `[404] https://v8.dev/blog/stackoverflow` — Not Found
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `[ERR] https://c2rust.com/` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1016)
+  - `concept\06_ecosystem\56_c_to_rust_translation.md`
+  - `docs\04_research\04_llm_c_to_rust_migration.md`
+- `[404] https://aws.amazon.com/blogs/opensource/verify-rust-programs-using-kani/` — 
+  - `concept\07_future\02_formal_methods.md`
+- `[404] https://rustfoundation.org/media/2025-annual-report/` — Not Found
+  - `concept\07_future\03_evolution.md`
+- `[404] https://rustfoundation.org/media/2026-2028-strategy/` — Not Found
+  - `concept\07_future\03_evolution.md`
+- `[404] https://slint-ui.com/docs/rust/slint/theming.html` — Not Found
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[404] https://en.wikipedia.org/wiki/Model_Checking` — Not Found
+  - `concept\07_future\02_formal_methods.md`
+  - `docs\rust-formal-engineering-system\02_practical_applications\memory\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\01_compiler\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\02_package_manager\README.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview-deep.md`
+  - `docs\rust-ownership-decidability\case-studies\shuttle-formal-analysis.md`
+- `[404] https://www.microsoft.com/en-us/research/project/verus/` — Not Found
+  - `concept\07_future\02_formal_methods.md`
+  - `docs\05_guides\05_verus_practical_guide.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-06-verus-guide.md`
+- `[404] https://slint-ui.com/docs/embedded/` — Not Found
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[404] https://chromium.googlesource.com/chromium/src/+/main/docs/rust.md` — Not Found
+  - `concept\06_ecosystem\58_platform_rust_integration.md`
+- `[404] https://without.boats/blog/pin-and-suffering/` — Not Found
+  - `concept\07_future\15_pin_ergonomics_preview.md`
+- `[403] https://docs.adacore.com/gnatcoverage-docs/html/gnatcoverage.html` — Forbidden
+  - `concept\07_future\07_mcdc_coverage_preview.md`
+- `[ERR] https://spec.rust-lang.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `concept\07_future\17_rust_specification_preview.md`
+- `[404] https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers21.pdf` — Not found (filtered)
+  - `concept\07_future\08_safety_tags_preview.md`
+- `[403] https://www.linuxtoday.com/blog/linux-kernel-7-0-officially-released-this-is-whats-new/` — Forbidden
+  - `concept\07_future\19_rust_for_linux.md`
+- `[404] https://www.datadoghq.com/blog/datadog-open-source-program/` — Not Found
+  - `concept\07_future\03_evolution.md`
+- `[404] https://lwn.net/Articles/...` — Not Found
+  - `concept\07_future\19_rust_for_linux.md`
+- `[403] https://developer.arm.com/documentation/100986/latest` — Forbidden
+  - `concept\07_future\25_aarch64_sve_sme_preview.md`
+- `[404] https://www.faa.gov/aircraft/air_cert/design_approvals/criteria/software` — Not Found
+  - `concept\07_future\07_mcdc_coverage_preview.md`
+- `[404] https://www.pingcap.com/article/rust-in-ai/` — Not Found
+  - `concept\07_future\21_rust_in_ai.md`
+- `[404] https://www.infoworld.com/article/why-rust-for-machine-learning.html` — Not Found
+  - `concept\07_future\21_rust_in_ai.md`
+- `[403] https://developer.arm.com/documentation/109540/latest` — Forbidden
+  - `concept\07_future\25_aarch64_sve_sme_preview.md`
+- `[403] https://developer.arm.com/documentation/102476/latest` — Forbidden
+  - `concept\07_future\25_aarch64_sve_sme_preview.md`
+- `[ERR] https://docs.kernel.org/bpf/]。` — UnicodeEncodeError('ascii', 'HEAD /bpf/]。 HTTP/1.1', 11, 12, 'ordinal not in range(128)')
+  - `concept\07_future\29_ebpf_rust.md`
+- `[404] https://www.nextplatform.com/2021/08/24/why-sve2-is-important-and-why-armv9-is-more-than-sve2/` — Not Found
+  - `concept\07_future\25_aarch64_sve_sme_preview.md`
+- `[404] https://wiki.haskell.org/Open_data_type` — Not Found
+  - `concept\07_future\25_open_enums_preview.md`
+- `[404] https://www.ralfj.de/blog/2023/01/31/tree-borrows.html` — Not Found
+  - `concept\07_future\17_rust_specification_preview.md`
+  - `concept\07_future\20_borrowsanitizer_preview.md`
+- `[403] https://developer.arm.com/documentation/109246/latest` — Forbidden
+  - `concept\07_future\25_aarch64_sve_sme_preview.md`
+- `[404] https://www.aboutamazon.com/news/aws/kiro` — Not Found
+  - `concept\07_future\archive\01_ai_integration_original.md`
+- `[404] https://smallcultfollowing.com/babysteps/blog/2024/01/05/two-interpretations-of-borrowing/` — Not Found
+  - `knowledge\01_fundamentals\01_borrowing.md`
+- `[404] https://tokio.rs/tokio/topics/cancellation` — Not Found
+  - `concept\archive\03_advanced_02_async_original.md`
+- `[404] https://www.rust-lang.org/faq` — Not Found
+  - `knowledge\00_start\04_rust_philosophy.md`
+- `[404] https://rust-lang.github.io/rfcs/1414-lifetime-elision.html` — Not Found
+  - `knowledge\01_fundamentals\03_lifetimes.md`
+- `[404] https://doc.rust-lang.org/reference/ownership.html` — Not Found
+  - `docs\01_core\01_ownership_borrowing_lifetimes.md`
+  - `docs\06_toolchain\03_rustdoc_advanced.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
+  - `knowledge\01_fundamentals\04_ownership.md`
+  - `knowledge\04_expert\academic\03_ownership_model_comprehensive.md`
+- `[ERR] https://gitlab.mpi-sws.org/lgaeher/refinedrust` — TimeoutError('The read operation timed out')
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+  - `docs\04_research\04_rust_formal_verification.md`
+- `[404] https://rust-lang.github.io/rfcs/3382-pin.html` — Not Found
+  - `knowledge\02_intermediate\04_smart_pointers.md`
+- `[404] https://doc.rust-lang.org/nomicon/interior-mutability.html` — Not Found
+  - `knowledge\02_intermediate\04_smart_pointers.md`
+- `[404] https://rust-lang.github.io/rfcs/0596-ownership-and-moves.html` — Not Found
+  - `knowledge\02_intermediate\05_strings.md`
+- `[404] https://without.boats/blog/implied-bounds-and-perfect-derive/` — Not Found
+  - `knowledge\02_intermediate\06_traits.md`
+  - `knowledge\03_advanced\06_type_driven_correctness.md`
+- `[404] https://rust-lang.github.io/rfcs/3058-let-chains.html` — Not Found
+  - `knowledge\02_intermediate\02_error_handling.md`
+- `[404] https://plv.mpi-sws.org/rustbelt/tree-borrows/` — Not Found
+  - `docs\04_research\04_rust_formal_verification.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\LEARNING_ROADMAP_DETAILED.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\MASTER_INDEX_AUTO.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\PHASE2_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\PROOF_STRATEGIES.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_100%_COMPLETE_FINAL.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_100_PERCENT_COMPLETION_FINAL.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_100_PERCENT_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_ALIGNMENT_FINAL_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_ALIGNMENT_PROGRESS.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_ALIGNMENT_SUMMARY_2026_03_12.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_FINAL_100_PERCENT_SUMMARY.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_FINAL_COMPLETION.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_FINAL_SUMMARY.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_PO_100_PERCENT_FINAL.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\RUST_194_TRUE_100_PERCENT_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\TECHNICAL_DEBT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\ULTIMATE_COMPREHENSIVE_GUIDE.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\VERSION_ANNOTATION_GUIDELINE.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-06_100_PERCENT_COMPLETION_FINAL_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-06_TRUE_100_PERCENT_COMPLETION_CERTIFICATION.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-07_ADMIT_CLEARANCE_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-07_DESIGN_PATTERNS_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-07_FINAL_100_PERCENT_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-07_SEMANTIC_EXPANSION_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-07_SEMANTIC_MODELS_COMPLETION_REPORT.md`
+  - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\progress\2026-03-09_CONTINUOUS_IMPROVEMENT_REPORT.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-04-runtime-vs-compile-time.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\ownership-counterexamples.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview-deep.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-02-creusot-deep-dive.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-03-miri-deep-dive.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-06-verus-guide.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-07-refinedrust-deep-dive.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-08-gillian-rust.md`
+  - `docs\rust-ownership-decidability\04-decidability-analysis\04-01-type-inference.md`
+  - `docs\rust-ownership-decidability\05-comparative-study\05-01-linear-vs-affine.md`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-05-ai-integration.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-07-std-verification-initiative.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\rust-1.93-features-analysis.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\11-02-idiomatic-patterns.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\11-03-type-state-pattern.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\behavioral\command.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\behavioral\observer.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\creational\factory.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\structural\adapter.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\structural\decorator.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\structural\proxy.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-05-async-patterns.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-07-distributed-patterns.md`
+  - `docs\rust-ownership-decidability\13-architecture-patterns\clean-architecture.md`
+  - `docs\rust-ownership-decidability\15-application-domains\web-development.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00a-lambda-calculus.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00b-type-theory-basics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00c-operational-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00d-denotational-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-workflow-patterns-master-index.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\08-workflow-patterns-index.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\09-workflow-ownership-analysis.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\01-message-passing-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\04-service-discovery-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\01-thread-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\02-lock-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\03-condition-variable-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\04-semaphore-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\05-barrier-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\06-memory-ordering-deep.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\01-sequence.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\02-parallel-split.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\03-synchronization.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\04-exclusive-choice.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\05-simple-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\06-multi-choice.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\07-sync-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\09-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\10-arbitrary-cycles.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\11-implicit-termination.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\14-mi-with-runtime-knowledge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\15-interleaved-routing.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\16-milestone.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\17-critical-section.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\21-structured-loop.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\22-recursion.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\26-cancel-multiple-instance-activity.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\27-complete-multiple-instance-activity.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\28-blocking-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\29-cancelling-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\30-structured-partial-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\31-blocking-partial-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\32-cancelling-partial-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\33-generalised-and-join.md`
+  - `docs\rust-ownership-decidability\CONTINUOUS_IMPROVEMENT_ACTION_PLAN.md`
+  - `docs\rust-ownership-decidability\CROSS_REFERENCE_VERIFICATION_SUMMARY.md`
+  - `docs\rust-ownership-decidability\ERROR_DIAGNOSTICS_GUIDE.md`
+  - `docs\rust-ownership-decidability\FINAL_COMPLETION_CERTIFICATE.md`
+  - `docs\rust-ownership-decidability\FINAL_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\FINAL_DOCUMENTATION.md`
+  - `docs\rust-ownership-decidability\FINAL_EXECUTIVE_SUMMARY.md`
+  - `docs\rust-ownership-decidability\FINAL_MASTER_INDEX.md`
+  - `docs\rust-ownership-decidability\FINAL_ULTIMATE_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\FINAL_VERIFICATION_100_PERCENT.md`
+  - `docs\rust-ownership-decidability\FOUNDATIONS_TO_PRACTICE_BRIDGE.md`
+  - `docs\rust-ownership-decidability\FRAMEWORK_ANALYSIS_AND_GAP_REPORT.md`
+  - `docs\rust-ownership-decidability\FRAMEWORK_COMPLETION_SUMMARY.md`
+  - `docs\rust-ownership-decidability\HORIZONTAL_CONNECTIONS.md`
+  - `docs\rust-ownership-decidability\INITIAL_PHASE_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\MASTER_COMPREHENSIVE_ANALYSIS.md`
+  - `docs\rust-ownership-decidability\NATURAL_LANGUAGE_ARGUMENTATION_INDEX.md`
+  - `docs\rust-ownership-decidability\NATURAL_LANGUAGE_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\OVERVIEW_AND_INTUITION.md`
+  - `docs\rust-ownership-decidability\PROJECT_COMPREHENSIVE_AUDIT_REPORT.md`
+  - `docs\rust-ownership-decidability\PROJECT_STRUCTURE.md`
+  - `docs\rust-ownership-decidability\QUICK_REFERENCE_CARD.md`
+  - `docs\rust-ownership-decidability\RESEARCH_TRACKING_SYSTEM.md`
+  - `docs\rust-ownership-decidability\RUST_194_ALIGNMENT_PLAN.md`
+  - `docs\rust-ownership-decidability\RUST_194_VS_193_COMPARISON.md`
+  - `docs\rust-ownership-decidability\RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md`
+  - `docs\rust-ownership-decidability\THEOREM_DEPENDENCY_GRAPH.md`
+  - `docs\rust-ownership-decidability\THEORY_TO_PATTERN_BRIDGE.md`
+  - `docs\rust-ownership-decidability\UNIFIED_THEORETICAL_FRAMEWORK.md`
+  - `docs\rust-ownership-decidability\VISUAL_THINKING_GUIDE.md`
+  - `docs\rust-ownership-decidability\actor-specialty\ACTOR_MODEL_DEEP_DIVE.md`
+  - `docs\rust-ownership-decidability\actor-specialty\COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\async-specialty\ASYNC_ECOSYSTEM_COMPLETE.md`
+  - `docs\rust-ownership-decidability\async-specialty\COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\async-specialty\authoritative\tokio-deep-dive.md`
+  - `docs\rust-ownership-decidability\async-specialty\ecosystem\IO_URING_DEEP_DIVE.md`
+  - `docs\rust-ownership-decidability\async-specialty\ecosystem\async-ecosystem-landscape.md`
+  - `docs\rust-ownership-decidability\async-specialty\embedded\embassy-guide.md`
+  - `docs\rust-ownership-decidability\async-specialty\network\http-server-patterns.md`
+  - `docs\rust-ownership-decidability\audit_reports\FINAL_COMPLETE_ANALYSIS_REPORT.md`
+  - `docs\rust-ownership-decidability\audit_reports\FINAL_COMPLETION_REPORT_V3.md`
+  - `docs\rust-ownership-decidability\audit_reports\LIBRARY_ANALYSIS_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\audit_reports\PHASE3_LIBRARY_ANALYSIS_REPORT.md`
+  - `docs\rust-ownership-decidability\case-studies\COMPLETE_DOMAIN_COVERAGE_INDEX.md`
+  - `docs\rust-ownership-decidability\case-studies\MODERN_CRATES_EXPANSION_REPORT.md`
+  - `docs\rust-ownership-decidability\case-studies\MODERN_CRATES_FINAL_REPORT.md`
+  - `docs\rust-ownership-decidability\case-studies\MODERN_CRATES_INDEX.md`
+  - `docs\rust-ownership-decidability\case-studies\MODERN_CRATES_ROUND2_REPORT.md`
+  - `docs\rust-ownership-decidability\case-studies\actix-web-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\alloc-cortex-m-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\anyhow-thiserror-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\async-graphql-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\async-std-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bevy-ecs-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bindgen-cbindgen-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bytemuck-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\criterion-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\cxx-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\dashmap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\deadpool-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\defmt-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\diesel-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\diesel-orm-type-safety.md`
+  - `docs\rust-ownership-decidability\case-studies\embassy-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-storage-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\figment-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\flate2-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\frunk-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\futures-crate-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\futures-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\generic-array-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\image-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\indexmap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\industrial-verification-aws-meta.md`
+  - `docs\rust-ownership-decidability\case-studies\jsonwebtoken-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\lapin-rdkafka-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\littlefs2-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\nom-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\nrf-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\once_cell-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\opentelemetry-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\ouroboros-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\panic-probe-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\parking_lot-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\pin-project-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\postcard-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\prometheus-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\proptest-quickcheck-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\pyo3-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rand-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rayon-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rayon-parallelism.md`
+  - `docs\rust-ownership-decidability\case-studies\regex-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\reqwest-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rustls-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-formal-analysis-deep.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-json-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\slog-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\smoltcp-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\socket2-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\sqlx-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-future-stream-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-hashmap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-trait-semantics-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\stm32f4xx-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tantivy-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tarpc-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\thiserror-anyhow-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-process-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-stream-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-util-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tonic-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tonic-grpc-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tower-formal-analysis.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\async-concurrency-comparison.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-python.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\authoritative-sources\academic-papers.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\case-studies\tokio-runtime-analysis.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\decision-trees\concurrency-model-selection.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\design-patterns-comprehensive.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\open-source-analysis.md`
+  - `docs\rust-ownership-decidability\exercises\09-01-practice-problems.md`
+  - `docs\rust-ownership-decidability\extensions\ffi-interoperability.md`
+  - `docs\rust-ownership-decidability\extensions\no-std-development.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\drop-elaboration-formal.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\refinedrust-type-system.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\tree-borrows-comprehensive.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\separation-logic-soundness.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\type-ownership-unified-theory.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\logical-relations.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\memory-model-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\operational-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\semantics-equivalence-proof.md`
+  - `docs\rust-ownership-decidability\meta-model\RUST_194_COMPREHENSIVE_GUIDE.md`
+  - `docs\rust-ownership-decidability\meta-model\rust-194-alignment.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-05_initial_setup.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-06_FORMAL_ANALYSIS_PROGRESS.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-06_week1_progress.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-07_CONTENT_CREATION_BATCH_1.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-07_CONTENT_CREATION_BATCH_2.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-07_CONTENT_CREATION_BATCH_3.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-07_FINAL_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-07_daily_update.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-08_weekend_sprint.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-09_50_PERCENT_MILESTONE.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-09_phase1_completion.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-10_MILESTONE_75_PERCENT.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-11_MILESTONE_90_PERCENT.md`
+  - `docs\rust-ownership-decidability\progress\COMPREHENSIVE_STATUS_REPORT.md`
+  - `docs\rust-ownership-decidability\progress\FINAL_100_PERCENT_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\progress\FINAL_COMPLETION_REPORT_40_PERCENT.md`
+  - `docs\rust-ownership-decidability\progress\PROGRESS_TRACKING.md`
+  - `docs\rust-ownership-decidability\ref.md`
+  - `docs\rust-ownership-decidability\visualizations\concept-matrix.md`
+  - `docs\rust-ownership-decidability\visualizations\decision-trees\type-selection-decision-tree.md`
+  - `knowledge\01_fundamentals\01_borrowing.md`
+  - `knowledge\03_advanced\unsafe\04_unsafe_rust.md`
+  - `knowledge\04_expert\academic\02_tree_borrows_authoritative_guide.md`
+  - `knowledge\04_expert\miri\01_tree_borrows.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\03_rust_ownership_memory_model_matrix.md`
+- `[404] https://rust-lang.github.io/rfcs/2484-tryfrom-tryinto.html` — Not Found
+  - `knowledge\02_intermediate\07_type_conversions.md`
+- `[404] https://rust-lang.github.io/rfcs/2289-associated-type-constructors.html` — Not Found
+  - `docs\04_research\04_next_generation_trait_solver.md`
+  - `knowledge\02_intermediate\03_generics.md`
+- `[404] https://without.boats/blog/6-weeks-of-tokio/` — Not Found
+  - `knowledge\03_advanced\async\01_async_await.md`
+- `[404] https://homepages.inf.ed.ac.uk/wadler/papers/free/theorems_for_free.pdf` — Not Found
+  - `docs\02_reference\02_cross_language_comparison.md`
+  - `knowledge\02_intermediate\03_generics.md`
+- `[404] https://doc.rust-lang.org/edition-guide/rust-2024/let-else.html` — Not Found
+  - `knowledge\02_intermediate\control_flow\02_let_chains.md`
+- `[404] https://rust-lang.github.io/rfcs/2484-trait-from-tryfrom.html` — Not Found
+  - `knowledge\02_intermediate\07_type_conversions.md`
+- `[404] https://smallcultfollowing.com/babysteps/blog/2019/10/14/awaiting-sustainability/` — Not Found
+  - `knowledge\03_advanced\async\01_async_await.md`
+  - `knowledge\03_advanced\async\02_async_closure.md`
+- `[404] https://rust-lang.github.io/rfcs/3668-async-fn.html` — Not Found
+  - `knowledge\03_advanced\async\01_async_closures_2024.md`
+- `[404] https://doc.rust-lang.org/nightly/unstable-book/language-features/asm.html` — Not Found
+  - `knowledge\03_advanced\03_inline_asm.md`
+- `[ERR] https://www.eprosima.com/index.php/products-all/eprosima-fast-dds` — TimeoutError('The read operation timed out')
+  - `concept\06_ecosystem\52_robotics.md`
+- `[404] https://rust-lang.github.io/rfcs/3550-rangeful.html` — Not Found
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+  - `knowledge\02_intermediate\type_system\01_core_range.md`
+- `[404] https://rust-lang.github.io/rfcs/2484-trait-based-exception-handling.html` — Not Found
+  - `knowledge\02_intermediate\07_type_conversions.md`
+- `[404] https://tokio.rs/tokio/topics/shared-state` — Not Found
+  - `knowledge\03_advanced\concurrency\02_synchronization.md`
+- `[404] https://rust-lang.github.io/rfcs/2788-lazy-cell.html` — Not Found
+  - `knowledge\03_advanced\04_lazy_initialization.md`
+- `[404] https://tmandry.gitlab.io/blog/posts/2021-12-21-why-async-rust/` — Not Found
+  - `knowledge\03_advanced\async\01_async_await.md`
+- `[404] https://rust-lang.github.io/rfcs/1228-specialization.html` — Not Found
+  - `knowledge\03_advanced\06_type_driven_correctness.md`
+- `[404] https://smallcultfollowing.com/babysteps/blog/2013/06/11/the-problem-with-safe-concurrency/` — Not Found
+  - `knowledge\03_advanced\concurrency\03_threads.md`
+- `[ERR] https://www.st.com/resource/en/reference_manual/rm0090-stm32f405415-stm32f407417-stm32f427437-and-stm32f429439-advanced-armbased-32bit-mcus-stmicroelectronics.pdf` — TimeoutError('The read operation timed out')
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[ERR] https://www.darpa.mil/research/programs/translating-all-c-to-rust` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `concept\06_ecosystem\56_c_to_rust_translation.md`
+- `[404] https://without.boats/blog/async-closures/` — Not Found
+  - `knowledge\03_advanced\async\02_async_closure.md`
+- `[404] https://tmandry.gitlab.io/blog/posts/2023-03-02-why-async-fn/` — Not Found
+  - `knowledge\03_advanced\async\02_async_closure.md`
+- `[404] https://blog.rust-lang.org/2026/01/15/Rust-1.85.0/` — Not Found
+  - `knowledge\03_advanced\async\01_async_closures_2024.md`
+- `[404] https://iris-project.org/tutorial.html` — Not Found
+  - `knowledge\04_expert\academic\01_coq_formalization_guide.md`
+- `[ERR] https://www.intel.com/content/www/us/en/developer/articles/technical/introduction-to-avx512-programming.html` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)
+  - `docs\archive\2026_05_historical_docs\RUST_194_195_FEATURES_DEEP_DIVE.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\03_rust_194_195_features_deep_dive.md`
+- `[ERR] https://rust-safety-critical.com/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `knowledge\04_expert\safety_critical\01_completion_report_100_percent.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\01_academic_research_landscape.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\02_rust_ecosystem_mind_map.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\03_rust_194_195_features_deep_dive.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\01_comprehensive_language_comparison_matrix.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\02_rust_multi_dimensional_matrix.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\04_toolchain_evaluation_matrix.md`
+  - `knowledge\04_expert\safety_critical\02_rust_safety_critical_ecosystem_master_index.md`
+  - `knowledge\04_expert\safety_critical\03_decision_trees\01_rust_decision_trees.md`
+  - `knowledge\04_expert\safety_critical\03_decision_trees\02_safety_integrity_level_selection_guide.md`
+  - `knowledge\04_expert\safety_critical\03_readme_rust_safety_critical_ecosystem.md`
+  - `knowledge\04_expert\safety_critical\04_axiomatic_reasoning\02_rust_axiomatic_reasoning_trees.md`
+  - `knowledge\04_expert\safety_critical\05_strategic_guidance\01_adoption_strategy_and_roi_analysis.md`
+  - `knowledge\04_expert\safety_critical\05_strategic_guidance\02_comprehensive_recommendations_and_opinions.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\04_technology_watch_and_emerging_trends.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\01_case_study_01_ferrocene_certification.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\02_case_study_02_nasa_cfs_rust.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\03_case_study_03_automotive_ecus.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\04_case_study_04_medical_devices.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\05_case_study_05_railway_signaling.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\06_case_study_06_autonomous_driving.md`
+  - `knowledge\04_expert\safety_critical\08_training\01_assessment_and_certification.md`
+  - `knowledge\04_expert\safety_critical\08_training\02_certification_prep_guide.md`
+  - `knowledge\04_expert\safety_critical\08_training\03_hands_on_lab_exercises.md`
+  - `knowledge\04_expert\safety_critical\08_training\04_interactive_learning_resources.md`
+  - `knowledge\04_expert\safety_critical\09_reference\01_api_design_guidelines.md`
+  - `knowledge\04_expert\safety_critical\09_reference\02_checklists_and_templates.md`
+  - `knowledge\04_expert\safety_critical\09_reference\03_community_and_contributing.md`
+  - `knowledge\04_expert\safety_critical\09_reference\04_comprehensive_international_alignment_completion_report.md`
+  - `knowledge\04_expert\safety_critical\09_reference\06_faq_and_troubleshooting.md`
+  - `knowledge\04_expert\safety_critical\09_reference\09_metrics_and_measurement_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\11_project_templates.md`
+  - `knowledge\04_expert\safety_critical\09_reference\13_rust_safety_critical_coding_guidelines.md`
+  - `knowledge\04_expert\safety_critical\09_reference\14_safety_critical_checklists.md`
+  - `knowledge\04_expert\safety_critical\09_reference\17_toolchain_setup_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\18_tools_configuration_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\19_troubleshooting_and_debugging_guide.md`
+  - `knowledge\04_expert\safety_critical\10_standards\01_do_178c_rust_compliance_pathway.md`
+  - `knowledge\04_expert\safety_critical\10_standards\02_iec_61508_rust_implementation_guide.md`
+  - `knowledge\04_expert\safety_critical\10_standards\03_iso_26262_rust_implementation_guide.md`
+  - `knowledge\04_expert\safety_critical\10_standards\05_regulatory_landscape_and_approvals.md`
+- `[404] https://blog.m-ou.se/unsafe-rust/` — Not Found
+  - `knowledge\03_advanced\unsafe\04_unsafe_rust.md`
+- `[ERR] https://yaah.dev/send-sync-magic` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `knowledge\03_advanced\concurrency\03_threads.md`
+- `[ERR] https://rrsa.rs/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `knowledge\04_expert\02_unsafe_audit.md`
+- `[404] https://doc.rust-lang.org/nomicon/memory.html` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\06-memory-ordering-deep.md`
+  - `docs\rust-ownership-decidability\case-studies\alloc-cortex-m-formal-analysis.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\memory-model-semantics.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\03_rust_ownership_memory_model_matrix.md`
+- `[ERR] https://www.st.com/resource/en/application_note/an4031-using-the-stm32f2-stm32f4-and-stm32f7-series-dma-controllers-stmicroelectronics.pdf` — TimeoutError('The read operation timed out')
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[404] https://rust-lang.github.io/rfcs/1892-maybe-uninit.html` — Not Found
+  - `knowledge\03_advanced\unsafe\03_maybe_uninit.md`
+- `[404] https://rustc-dev-guide.rust-lang.org/traits.html` — Not Found
+  - `knowledge\04_expert\academic\05_type_system_foundations_guide.md`
+- `[404] https://doc.rust-lang.org/nomicon/uninit.html` — Not Found
+  - `knowledge\03_advanced\unsafe\03_maybe_uninit.md`
+- `[ERR] https://www.autosar.org/` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)
+  - `knowledge\04_expert\safety_critical\07_case_studies\03_case_study_03_automotive_ecus.md`
+- `[404] https://www.rust-lang.org/governance/wgs/wg-security-response` — Not Found
+  - `knowledge\04_expert\safety_critical\09_reference\15_security_audit_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\16_supply_chain_security_guide.md`
+- `[404] https://rust-lang.github.io/rfcs/2121-cargo-workspace.html` — Not Found
+  - `knowledge\06_ecosystem\01_cargo_basics.md`
+- `[ERR] https://rust-safety-critical.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `knowledge\04_expert\safety_critical\README.md`
+- `[404] https://www.fda.gov/` — Not Found
+  - `knowledge\04_expert\safety_critical\07_case_studies\04_case_study_04_medical_devices.md`
+  - `knowledge\04_expert\safety_critical\10_standards\05_regulatory_landscape_and_approvals.md`
+- `[ERR] https://www.tuvsud.com/` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1016)
+  - `knowledge\04_expert\safety_critical\07_case_studies\01_case_study_01_ferrocene_certification.md`
+- `[ERR] https://www.areweadyet.org/topics/database/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_sqlx_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\15_sqlx_advanced_architecture.md`
+  - `docs\rust-ownership-decidability\case-studies\sqlx-formal-analysis.md`
+  - `knowledge\06_ecosystem\databases\01_sea_orm_deep_dive.md`
+  - `knowledge\06_ecosystem\databases\02_sqlx_deep_dive.md`
+- `[404] https://render.com/docs/rust` — Not Found
+  - `knowledge\06_ecosystem\deployment\README.md`
+- `[ERR] https://opensource.axo.dev/cargo-dist/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `knowledge\04_expert\safety_critical\09_reference\05_deployment_and_maintenance_guide.md`
+  - `knowledge\06_ecosystem\deployment\01_kubernetes_deployment_guide.md`
+- `[ERR] https://www.st.com/` — TimeoutError('The read operation timed out')
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[404] https://en.wikipedia.org/wiki/Memory_Safety` — Not Found
+  - `docs\00_meta\00_annual_review_template.md`
+  - `docs\00_meta\00_improvement_plan_execution_complete.md`
+  - `docs\00_meta\00_template_concept_doc.md`
+  - `docs\00_meta\analysis\00_rust_2026_project_goals_monthly_tracking.md`
+  - `docs\01_cargo_build_optimization.md`
+  - `docs\01_core\01_ownership_borrowing_lifetimes.md`
+  - `docs\01_learning\01_learning_path_planning.md`
+  - `docs\01_learning\01_mdbook_quiz_guide.md`
+  - `docs\02_reference\02_cross_language_comparison.md`
+  - `docs\02_reference\02_error_code_mapping.md`
+  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
+  - `docs\02_reference\quick_reference\02_ai_ml_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_algorithms_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_assert_matches_guide.md`
+  - `docs\02_reference\quick_reference\02_async_patterns.md`
+  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_control_flow_functions_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_error_handling_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_generics_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_ownership_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_process_management_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_rust_195_features_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_smart_pointers_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_strings_formatting_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_testing_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md`
+  - `docs\02_reference\quick_reference\02_type_system.md`
+  - `docs\02_reference\quick_reference\02_wasm_cheatsheet.md`
+  - `docs\02_reference\quick_reference\README.md`
+  - `docs\03_guides\03_let_chains_guide.md`
+  - `docs\03_guides\03_miri_guide.md`
+  - `docs\03_guides\03_test_coverage.md`
+  - `docs\03_practice\03_project_01_cli_tool.md`
+  - `docs\04_research\04_endangered_by_language_saved_by_compiler_popl_2026.md`
+  - `docs\04_research\04_llm_c_to_rust_migration.md`
+  - `docs\04_research\04_next_generation_trait_solver.md`
+  - `docs\04_research\04_rust_for_linux_2026.md`
+  - `docs\04_research\04_rust_formal_verification.md`
+  - `docs\04_research\04_safety_critical_alignment_2026.md`
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+  - `docs\04_thinking\04_applications_analysis_view.md`
+  - `docs\04_thinking\04_decision_graph_network.md`
+  - `docs\04_thinking\04_mind_map_collection.md`
+  - `docs\04_thinking\04_proof_graph_network.md`
+  - `docs\04_thinking\04_thinking_representation_methods.md`
+  - `docs\05_guides\05_advanced_topics_deep_dive.md`
+  - `docs\05_guides\05_ai_rust_ecosystem_guide.md`
+  - `docs\05_guides\05_async_programming_usage_guide.md`
+  - `docs\05_guides\05_cli_applications_guide.md`
+  - `docs\05_guides\05_cross_module_integration_examples.md`
+  - `docs\05_guides\05_cxx_rust_interop_evaluation.md`
+  - `docs\05_guides\05_design_patterns_usage_guide.md`
+  - `docs\05_guides\05_embedded_rust_guide.md`
+  - `docs\05_guides\05_formal_verification_integration_guide.md`
+  - `docs\05_guides\05_inline_assembly_guide.md`
+  - `docs\05_guides\05_macro_system_usage_guide.md`
+  - `docs\05_guides\05_miri_practical_guide.md`
+  - `docs\05_guides\05_performance_tuning_guide.md`
+  - `docs\05_guides\05_testing_coverage_guide.md`
+  - `docs\05_guides\05_threads_concurrency_usage_guide.md`
+  - `docs\05_guides\05_unsafe_fields_preview.md`
+  - `docs\05_guides\05_wasm_usage_guide.md`
+  - `docs\05_guides\BEST_PRACTICES.md`
+  - `docs\05_guides\workflow\01_workflow_theory.md`
+  - `docs\06_toolchain\01_compiler_features.md`
+  - `docs\06_toolchain\06_05_rust_1_93_vs_1_92_comparison.md`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+  - `docs\06_toolchain\06_09_rust_1_93_compatibility_deep_dive.md`
+  - `docs\06_toolchain\06_11_rust_1_93_cargo_rustdoc_changes.md`
+  - `docs\06_toolchain\06_cargo_script_guide.md`
+  - `docs\06_toolchain\06_cranelift_backend_guide.md`
+  - `docs\06_toolchain\README.md`
+  - `docs\07_project\07_extension_deepening_plan_2026.md`
+  - `docs\07_project\07_knowledge_structure_framework.md`
+  - `docs\07_project\07_module_knowledge_structure_guide.md`
+  - `docs\07_project\07_project_architecture_guide.md`
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\10_authoritative_sources_and_citations.md`
+  - `docs\10_migration_guide_2026.md`
+  - `docs\10_miri_guide.md`
+  - `docs\content\academic\README.md`
+  - `docs\content\production\README.md`
+  - `docs\content\scenarios\10_web_application_scenarios.md`
+  - `docs\research_notes\10_safe_unsafe_comprehensive_analysis.md`
+  - `docs\research_notes\10_theorem_rust_example_mapping.md`
+  - `docs\research_notes\INDEX.md`
+  - `docs\research_notes\README.md`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+  - `docs\research_notes\formal_methods\10_variance_concept_mindmap.md`
+  - `docs\research_notes\type_theory\10_variance_theory.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\02_ownership_system\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\03_ownership_borrowing\README.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\05_trait_system\README.md`
+  - `docs\rust-formal-engineering-system\02_practical_applications\memory\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\02_async\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\09_actor_model\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\11_benchmark_minimal_guide.md`
+  - `docs\rust-formal-engineering-system\03_compiler_theory\README.md`
+  - `docs\rust-formal-engineering-system\03_design_patterns\04_concurrent\README.md`
+  - `docs\rust-formal-engineering-system\03_design_patterns\README.md`
+  - `docs\rust-formal-engineering-system\05_software_engineering\07_testing\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\01_compiler\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\03_build_tools\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\README.md`
+  - `docs\rust-formal-engineering-system\09_research_agenda\04_research_methods\README.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-01-linear-logic-deep.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-01-linear-logic.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-02-affine-types.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-03-separation-logic-deep.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-03-separation-logic.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-04-theory-connections.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-01-ownership-rules-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-01-ownership-rules.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-02-borrowing-system-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-02-borrowing-system.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-04-runtime-vs-compile-time.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\borrowing-in-depth.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\interior-mutability.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\lifetimes-mastery.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\ownership-deep-dive.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\polonius-borrow-checker.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\trait-system.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\ownership-counterexamples.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\short-concepts\borrowing-concept-card.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\short-concepts\lifetime-concept-card.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\short-concepts\ownership-concept-card.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview-deep.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-02-creusot-deep-dive.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-03-miri-deep-dive.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-06-verus-guide.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-07-refinedrust-deep-dive.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-08-gillian-rust.md`
+  - `docs\rust-ownership-decidability\04-decidability-analysis\04-01-type-inference.md`
+  - `docs\rust-ownership-decidability\04-decidability-analysis\04-02-borrow-checking.md`
+  - `docs\rust-ownership-decidability\05-comparative-study\05-01-linear-vs-affine.md`
+  - `docs\rust-ownership-decidability\05-comparative-study\05-03-rust-vs-go.md`
+  - `docs\rust-ownership-decidability\05-comparative-study\05-04-rust-vs-java.md`
+  - `docs\rust-ownership-decidability\05-comparative-study\05-05-rust-vs-swift.md`
+  - `docs\rust-ownership-decidability\06-visualizations\06-01-concept-matrix.md`
+  - `docs\rust-ownership-decidability\06-visualizations\06-02-decision-trees.md`
+  - `docs\rust-ownership-decidability\06-visualizations\06-03-architecture-diagrams.md`
+  - `docs\rust-ownership-decidability\06-visualizations\README.md`
+  - `docs\rust-ownership-decidability\07-references\README.md`
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+  - `docs\rust-ownership-decidability\07-references\bibliography.md`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `docs\rust-ownership-decidability\08-advanced-topics\08-01-const-generics.md`
+  - `docs\rust-ownership-decidability\08-advanced-topics\README.md`
+  - `docs\rust-ownership-decidability\08-advanced-topics\data-layout.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-01-future-directions.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-02-type-system-extensions.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-03-verification-advancements.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-04-ownership-variations.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-05-ai-integration.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-06-formal-verification.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-07-std-verification-initiative.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\rust-1.93-features-analysis.md`
+  - `docs\rust-ownership-decidability\100_PERCENT_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\11-02-idiomatic-patterns.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\11-03-type-state-pattern.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\behavioral\command.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\behavioral\observer.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\behavioral\strategy.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\creational\builder.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\creational\factory.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\rust-specific\newtype.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\rust-specific\raii-guard.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\structural\adapter.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\structural\decorator.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\structural\proxy.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-02-thread-safety-patterns.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-03-message-passing-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-04-lock-free-patterns.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-05-async-patterns-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-05-async-patterns.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-07-distributed-patterns.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\README.md`
+  - `docs\rust-ownership-decidability\13-architecture-patterns\clean-architecture.md`
+  - `docs\rust-ownership-decidability\14-distributed-systems\13-01-distributed-patterns.md`
+  - `docs\rust-ownership-decidability\14-distributed-systems\consensus-patterns.md`
+  - `docs\rust-ownership-decidability\15-application-domains\data-engineering.md`
+  - `docs\rust-ownership-decidability\15-application-domains\systems-programming.md`
+  - `docs\rust-ownership-decidability\15-application-domains\web-development.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00a-lambda-calculus.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00b-type-theory-basics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00c-operational-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00d-denotational-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\00e-axiomatic-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-foundations\README.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-semantic-framework.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\01-design-patterns-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\02-concurrency-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\03-async-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\04-control-data-flow.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\08-workflow-patterns.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\COMPLETION_STATUS_2026_03_08.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\COMPREHENSIVE_ANALYSIS_AND_ROADMAP.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\README.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\TOPIC_COVERAGE_MATRIX.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\README.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\01-message-passing-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\02-rpc-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\03-event-driven-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\communication\04-service-discovery-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\consistency\01-cap-theorem.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\consistency\02-consensus-algorithms.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\consistency\03-eventual-consistency.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\consistency\05-distributed-locks.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\fault-tolerance\01-failure-models.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\fault-tolerance\03-retry-patterns.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\fault-tolerance\04-timeout-patterns.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\distributed-patterns\microservices\05-bulkhead-pattern.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\01-thread-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\02-lock-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\03-condition-variable-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\04-semaphore-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\05-barrier-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\06-memory-ordering-deep.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\01-reborrow-trait-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\02-coerceshared-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\03-const-generics-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\04-precise-capturing-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\06-array-windows-semantics.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\01-sequence.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\02-parallel-split.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\03-synchronization.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\04-exclusive-choice.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\05-simple-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\06-multi-choice.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\07-sync-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\08-multi-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\09-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\10-arbitrary-cycles.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\11-implicit-termination.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\12-mi-without-sync.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\13-mi-with-sync.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\14-deferred-choice.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\15-interleaved-routing.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\16-milestone.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\17-critical-section.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\18-cancel-activity.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\22-recursion.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\23-transient-trigger.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\24-persistent-trigger.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\26-cancel-multiple-instance-activity.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\27-complete-multiple-instance-activity.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\28-blocking-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\29-cancelling-discriminator.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\30-structured-partial-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\31-blocking-partial-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\32-cancelling-partial-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\33-generalised-and-join.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\37-local-synchronizing-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\38-general-synchronizing-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\40-interleaved-routing.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\02-raw-pointers.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\03-unsafe-functions.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\04-extern-ffi.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\05-uninitialized-memory.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\06-maybe-uninit.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\07-drop-flags.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\08-aliasing.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\09-atomics.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\10-inline-asm.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\11-impl-vec.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\README.md`
+  - `docs\rust-ownership-decidability\AUDIT_REPORTS_INDEX.md`
+  - `docs\rust-ownership-decidability\BATCH_4_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md`
+  - `docs\rust-ownership-decidability\COMPLETE_KNOWLEDGE_MATRIX.md`
+  - `docs\rust-ownership-decidability\COMPLETION_100_PERCENT_SUMMARY.md`
+  - `docs\rust-ownership-decidability\COMPREHENSIVE_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\COMPREHENSIVE_COUNTEREXAMPLES_HANDBOOK.md`
+  - `docs\rust-ownership-decidability\COMPREHENSIVE_FAQ.md`
+  - `docs\rust-ownership-decidability\COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md`
+  - `docs\rust-ownership-decidability\CONCEPT_MAP.md`
+  - `docs\rust-ownership-decidability\CONTENT_ASSOCIATION_ANALYSIS.md`
+  - `docs\rust-ownership-decidability\CONTENT_TEMPLATE_L2.md`
+  - `docs\rust-ownership-decidability\CONTINUOUS_IMPROVEMENT_ACTION_PLAN.md`
+  - `docs\rust-ownership-decidability\CROSS_REFERENCE_VERIFICATION_REPORT.md`
+  - `docs\rust-ownership-decidability\CROSS_REFERENCE_VERIFICATION_SUMMARY.md`
+  - `docs\rust-ownership-decidability\DESIGN_RATIONALE.md`
+  - `docs\rust-ownership-decidability\ERROR_DIAGNOSTICS_GUIDE.md`
+  - `docs\rust-ownership-decidability\EXECUTIVE_SUMMARY_AND_RECOMMENDATIONS.md`
+  - `docs\rust-ownership-decidability\FAQ_COMPREHENSIVE.md`
+  - `docs\rust-ownership-decidability\FINAL_100_PERCENT_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\FINAL_ASSOCIATION_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\FINAL_COMPLETION_CERTIFICATE.md`
+  - `docs\rust-ownership-decidability\FINAL_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\FINAL_DOCUMENTATION.md`
+  - `docs\rust-ownership-decidability\FINAL_EXECUTIVE_SUMMARY.md`
+  - `docs\rust-ownership-decidability\FINAL_MASTER_INDEX.md`
+  - `docs\rust-ownership-decidability\FINAL_ULTIMATE_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\FINAL_VERIFICATION_100_PERCENT.md`
+  - `docs\rust-ownership-decidability\FOUNDATIONS_TO_PRACTICE_BRIDGE.md`
+  - `docs\rust-ownership-decidability\FRAMEWORK_ANALYSIS_AND_GAP_REPORT.md`
+  - `docs\rust-ownership-decidability\FRAMEWORK_COMPLETION_SUMMARY.md`
+  - `docs\rust-ownership-decidability\HISTORICAL_EVOLUTION.md`
+  - `docs\rust-ownership-decidability\HORIZONTAL_CONNECTIONS.md`
+  - `docs\rust-ownership-decidability\INITIAL_PHASE_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\INTERACTIVE_LEARNING_GUIDE.md`
+  - `docs\rust-ownership-decidability\MASTER_COMPREHENSIVE_ANALYSIS.md`
+  - `docs\rust-ownership-decidability\NATURAL_LANGUAGE_ARGUMENTATION_INDEX.md`
+  - `docs\rust-ownership-decidability\NATURAL_LANGUAGE_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\OVERVIEW_AND_INTUITION.md`
+  - `docs\rust-ownership-decidability\PROJECT_COMPREHENSIVE_AUDIT_REPORT.md`
+  - `docs\rust-ownership-decidability\PROJECT_STRUCTURE.md`
+  - `docs\rust-ownership-decidability\QUICK_REFERENCE_CARD.md`
+  - `docs\rust-ownership-decidability\RESEARCH_TRACKING_SYSTEM.md`
+  - `docs\rust-ownership-decidability\RUST_194_ALIGNMENT_PLAN.md`
+  - `docs\rust-ownership-decidability\RUST_194_VS_193_COMPARISON.md`
+  - `docs\rust-ownership-decidability\RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md`
+  - `docs\rust-ownership-decidability\THEOREM_DEPENDENCY_GRAPH.md`
+  - `docs\rust-ownership-decidability\THEOREM_INTUITIONS.md`
+  - `docs\rust-ownership-decidability\THEOREM_TO_COMPILER_BRIDGE.md`
+  - `docs\rust-ownership-decidability\THEORY_TO_PATTERN_BRIDGE.md`
+  - `docs\rust-ownership-decidability\UNIFIED_THEORETICAL_FRAMEWORK.md`
+  - `docs\rust-ownership-decidability\VISUAL_THINKING_GUIDE.md`
+  - `docs\rust-ownership-decidability\actor-specialty\ACTOR_MODEL_DEEP_DIVE.md`
+  - `docs\rust-ownership-decidability\actor-specialty\COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\actor-specialty\case-studies\actix-web-production.md`
+  - `docs\rust-ownership-decidability\actor-specialty\decision-trees\actor-framework-selection.md`
+  - `docs\rust-ownership-decidability\actor-specialty\distributed\distributed-actors-formal.md`
+  - `docs\rust-ownership-decidability\actor-specialty\examples\chat-system-example.md`
+  - `docs\rust-ownership-decidability\actor-specialty\formal-proofs\actor-safety-theorems.md`
+  - `docs\rust-ownership-decidability\actor-specialty\matrices\actor-framework-matrix.md`
+  - `docs\rust-ownership-decidability\actor-specialty\mindmaps\actor-model-mindmap.md`
+  - `docs\rust-ownership-decidability\actor-specialty\patterns\actor-design-patterns-expanded.md`
+  - `docs\rust-ownership-decidability\actor-specialty\patterns\actor-design-patterns.md`
+  - `docs\rust-ownership-decidability\actor-specialty\scenario-trees\actor-application-domains.md`
+  - `docs\rust-ownership-decidability\actor-specialty\theory\actor-model-foundation.md`
+  - `docs\rust-ownership-decidability\async-specialty\ASYNC_ECOSYSTEM_COMPLETE.md`
+  - `docs\rust-ownership-decidability\async-specialty\README.md`
+  - `docs\rust-ownership-decidability\async-specialty\authoritative\tokio-deep-dive.md`
+  - `docs\rust-ownership-decidability\async-specialty\ecosystem\IO_URING_DEEP_DIVE.md`
+  - `docs\rust-ownership-decidability\async-specialty\ecosystem\async-ecosystem-landscape.md`
+  - `docs\rust-ownership-decidability\async-specialty\embedded\embassy-guide.md`
+  - `docs\rust-ownership-decidability\async-specialty\network\http-server-patterns.md`
+  - `docs\rust-ownership-decidability\audit_reports\FINAL_COMPLETE_ANALYSIS_REPORT.md`
+  - `docs\rust-ownership-decidability\audit_reports\FINAL_COMPLETION_REPORT_V3.md`
+  - `docs\rust-ownership-decidability\audit_reports\LIBRARY_ANALYSIS_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\audit_reports\PHASE3_LIBRARY_ANALYSIS_REPORT.md`
+  - `docs\rust-ownership-decidability\case-studies\COMPLETE_DOMAIN_COVERAGE_INDEX.md`
+  - `docs\rust-ownership-decidability\case-studies\MODERN_CRATES_EXPANSION_REPORT.md`
+  - `docs\rust-ownership-decidability\case-studies\MODERN_CRATES_FINAL_REPORT.md`
+  - `docs\rust-ownership-decidability\case-studies\MODERN_CRATES_INDEX.md`
+  - `docs\rust-ownership-decidability\case-studies\MODERN_CRATES_ROUND2_REPORT.md`
+  - `docs\rust-ownership-decidability\case-studies\README.md`
+  - `docs\rust-ownership-decidability\case-studies\actix-web-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\alloc-cortex-m-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\anyhow-thiserror-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\arc-swap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\async-graphql-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\async-std-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\backoff-retry-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bevy-ecs-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bindgen-cbindgen-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\blockchain\README.md`
+  - `docs\rust-ownership-decidability\case-studies\bytemuck-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\bytes-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\chrono-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\clap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\cli\README.md`
+  - `docs\rust-ownership-decidability\case-studies\cloud\README.md`
+  - `docs\rust-ownership-decidability\case-studies\compile-time-macros-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\config-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\const-gen-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\cortex-m-rt-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\criterion-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\crossbeam-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\cxx-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\dashmap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\database\README.md`
+  - `docs\rust-ownership-decidability\case-studies\deadpool-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\defmt-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\derive-more-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\diesel-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\diesel-orm-type-safety.md`
+  - `docs\rust-ownership-decidability\case-studies\embassy-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-graphics-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-storage-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded\EMBEDDED_CRATES_INDEX.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded\README.md`
+  - `docs\rust-ownership-decidability\case-studies\figment-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\flate2-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\frunk-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\futures-crate-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\futures-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\gamedev\README.md`
+  - `docs\rust-ownership-decidability\case-studies\generic-array-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\governor-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\heapless-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\heim-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\hyper-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\image-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\indexmap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\industrial-verification-aws-meta.md`
+  - `docs\rust-ownership-decidability\case-studies\insta-snapshot-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\jsonwebtoken-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\lapin-rdkafka-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\littlefs2-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\loom-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\lru-cached-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\media\README.md`
+  - `docs\rust-ownership-decidability\case-studies\ml-ai\README.md`
+  - `docs\rust-ownership-decidability\case-studies\moka-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\ndarray-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\nom-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\notify-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\nrf-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\once_cell-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\opentelemetry-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\ouroboros-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\panic-probe-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\parking_lot-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\pin-project-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\postcard-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\prometheus-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\proptest-quickcheck-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\pulldown-cmark-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\pyo3-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\quinn-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rand-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rayon-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rayon-parallelism.md`
+  - `docs\rust-ownership-decidability\case-studies\ref-cast-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\regex-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\reqwest-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rkyv-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rtic-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\rustls-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\security\README.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-formal-analysis-deep.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\serde-json-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\shuttle-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\slog-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\smoltcp-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\socket2-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\sqlx-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\static-assertions-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-future-stream-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-hashmap-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-iterator-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-option-result-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-pin-unpin-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-smart-pointers-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-string-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-sync-primitives-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\std-trait-semantics-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\stm32f4xx-hal-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tantivy-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tarpc-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tera-askama-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\thiserror-anyhow-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-graceful-shutdown-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-process-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-deep.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-stream-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-util-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tonic-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tonic-grpc-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tonic-health-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tower-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\tracing-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\typenum-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\usb-device-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\validator-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\walkdir-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\wasm-bindgen-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\wasm\README.md`
+  - `docs\rust-ownership-decidability\case-studies\web-server-architecture.md`
+  - `docs\rust-ownership-decidability\case-studies\wgpu-glium-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\zerocopy-formal-analysis.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\README.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\async-concurrency-comparison.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\memory-management-comparison.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\refinedrust-vs-rustbelt.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-cpp.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-go.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-java.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-python.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\authoritative-sources\academic-papers.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\case-studies\embassy-embedded-analysis.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\decision-trees\concurrency-model-selection.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\decision-trees\pattern-selection.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\design-patterns-comprehensive.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\extensions\advanced-ownership-patterns.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\extensions\performance-optimization.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\formal-framework\definitions.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\matrices\comprehensive-comparison-matrix.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\matrices\safety-analysis-matrix.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\mindmaps\borrowing-system-mindmap.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\mindmaps\ownership-system-mindmap.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\open-source-analysis.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\proofs\memory-safety-proof.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\scenario-trees\application-domain-tree.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\scenario-trees\real-time-systems-tree.md`
+  - `docs\rust-ownership-decidability\exercises\09-01-practice-problems.md`
+  - `docs\rust-ownership-decidability\exercises\ADVANCED_OWNERSHIP_WORKSHOP.md`
+  - `docs\rust-ownership-decidability\exercises\ownership-basics.md`
+  - `docs\rust-ownership-decidability\extensions\README.md`
+  - `docs\rust-ownership-decidability\extensions\ffi-interoperability.md`
+  - `docs\rust-ownership-decidability\extensions\no-std-development.md`
+  - `docs\rust-ownership-decidability\formal-foundations\README.md`
+  - `docs\rust-ownership-decidability\formal-foundations\RUST_FORMAL_SEMANTICS_DEEP.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-01-rustbelt.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-02-ownership-types.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-03-borrow-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-04-lifetime-logic.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\02-05-move-analysis.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\drop-elaboration-formal.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\executable-semantics-comparison.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\refinedrust-type-system.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\relaxed-memory-model.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\symbolic-borrow-checking.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\tree-borrows-comprehensive.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\ASYNC_ANALYSIS_COMPLETE_INDEX.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\PROOF_PATTERNS.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\affine-logic-decidability.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\async-execution-examples.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\async-execution-model-formal.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\decidability-theorem.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\memory-safety-proof.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\rustbelt-formalization.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\separation-logic-soundness.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\type-ownership-unified-theory.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\logical-relations.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\mechanized-proofs.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\memory-model-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\operational-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\semantics-equivalence-proof.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\type-system-formalization.md`
+  - `docs\rust-ownership-decidability\meta-model\01_abstract_syntax.md`
+  - `docs\rust-ownership-decidability\meta-model\02_semantic_domains.md`
+  - `docs\rust-ownership-decidability\meta-model\03_judgments.md`
+  - `docs\rust-ownership-decidability\meta-model\RUST_194_COMPREHENSIVE_GUIDE.md`
+  - `docs\rust-ownership-decidability\meta-model\rust-194-alignment.md`
+  - `docs\rust-ownership-decidability\practical-examples\comprehensive-code-collection.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-05_initial_setup.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-06_FORMAL_ANALYSIS_PROGRESS.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-06_week1_progress.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-07_CONTENT_CREATION_BATCH_1.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-07_CONTENT_CREATION_BATCH_2.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-07_CONTENT_CREATION_BATCH_3.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-07_FINAL_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-07_daily_update.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-08_weekend_sprint.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-09_50_PERCENT_MILESTONE.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-09_phase1_completion.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-10_MILESTONE_75_PERCENT.md`
+  - `docs\rust-ownership-decidability\progress\2026-03-11_MILESTONE_90_PERCENT.md`
+  - `docs\rust-ownership-decidability\progress\COMPREHENSIVE_STATUS_REPORT.md`
+  - `docs\rust-ownership-decidability\progress\FINAL_100_PERCENT_COMPLETION_REPORT.md`
+  - `docs\rust-ownership-decidability\progress\FINAL_COMPLETION_REPORT_40_PERCENT.md`
+  - `docs\rust-ownership-decidability\progress\PROGRESS_TRACKING.md`
+  - `docs\rust-ownership-decidability\ref.md`
+  - `docs\rust-ownership-decidability\theorems\README.md`
+  - `docs\rust-ownership-decidability\theorems\decidability_theorems.md`
+  - `docs\rust-ownership-decidability\visualizations\KNOWLEDGE_GRAPH_MINDMAP.md`
+  - `docs\rust-ownership-decidability\visualizations\README.md`
+  - `docs\rust-ownership-decidability\visualizations\concept-matrix.md`
+  - `docs\rust-ownership-decidability\visualizations\decision-trees\type-selection-decision-tree.md`
+  - `docs\rust-ownership-decidability\visualizations\matrices\rust-safety-mechanisms-matrix.md`
+  - `docs\rust-ownership-decidability\visualizations\ownership-comprehensive-mindmap.md`
+  - `docs\rust-ownership-decidability\visualizations\ownership-mindmap.md`
+  - `docs\rust-ownership-decidability\visualizations\scenario-tree.md`
+- `[404] https://en.wikipedia.org/wiki/Program_Optimization` — Not Found
+  - `docs\01_cargo_build_optimization.md`
+  - `docs\05_guides\05_performance_tuning_guide.md`
+  - `docs\rust-formal-engineering-system\02_practical_applications\performance\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\11_benchmark_minimal_guide.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\extensions\performance-optimization.md`
+- `[404] https://doc.rust-lang.org/std/assert_matches/macro.assert_matches.html` — Not Found
+  - `knowledge\06_ecosystem\emerging\05_rust_1_96.md`
+- `[404] https://en.wikipedia.org/wiki/Language_Evolution` — Not Found
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+- `[ERR] https://www.autosar.org` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)
+  - `knowledge\04_expert\safety_critical\07_case_studies\03_case_study_03_automotive_ecus.md`
+- `[404] https://rust-lang.github.io/rfcs/2121-private-dependency.html` — Not Found
+  - `knowledge\06_ecosystem\01_cargo_basics.md`
+- `[404] https://en.wikipedia.org/wiki/Undefined_Behavior` — Not Found
+  - `docs\03_guides\03_miri_guide.md`
+  - `docs\05_guides\05_miri_practical_guide.md`
+  - `docs\05_miri_integration_summary.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-03-miri-deep-dive.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\02-raw-pointers.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\03-unsafe-functions.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\04-extern-ffi.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\05-uninitialized-memory.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\06-maybe-uninit.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\07-drop-flags.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\08-aliasing.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\09-atomics.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\10-inline-asm.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\11-impl-vec.md`
+  - `docs\rust-ownership-decidability\17-unsafe-rust\README.md`
+  - `docs\rust-ownership-decidability\COMPREHENSIVE_COUNTEREXAMPLES_HANDBOOK.md`
+- `[403] https://www.phoronix.com/news/Rust-1.94-Released` — Forbidden
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
+- `[404] https://rust-lang.github.io/rfcs/XXXX-edition-2024.html` — Not Found
+  - `knowledge\06_ecosystem\02_edition_2024.md`
+- `[404] https://rust-lang.github.io/rfcs/3560-static-mut-references.html` — Not Found
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+- `[404] https://en.wikipedia.org/wiki/Programming_Language_Features` — Not Found
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+- `[403] https://hothardware.com/news/amd-confirms-zen6-avx512-fp16` — Forbidden
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
+- `[404] https://rust-lang.github.io/rfcs/3637-if-let-guards.html` — Not Found
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
+- `[404] https://doc.rust-lang.org/nightly/unstable-book/language-features/const-eval.html` — Not Found
+  - `knowledge\06_ecosystem\emerging\02_generic_const_exprs.md`
+- `[404] https://en.wikipedia.org/wiki/Learning_Path` — Not Found
+  - `docs\01_learning\01_cross_module_learning_roadmap_2025_10_25.md`
+- `[404] https://www.microsoft.com/en-us/security/blog/2025/01/28/rust-in-the-windows-kernel/` — Not Found
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
+- `[404] https://en.wikipedia.org/wiki/Curriculum_Design` — Not Found
+  - `docs\01_learning\01_cross_module_learning_roadmap_2025_10_25.md`
+- `[404] https://aws.amazon.com/blogs/opensource/why-aws-loves-rust/` — 
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
+- `[404] https://devclass.com/development/2025/12/15/rust-boosted-by-permanent-adoption-for-linux-kernel-code/` — Not Found
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
+- `[404] https://devblogs.microsoft.com/rust/` — Not Found
+  - `docs\00_meta\00_quarterly_sync_checklist.md`
+- `[404] https://en.wikipedia.org/wiki/Compiler_Construction` — Not Found
+  - `docs\02_reference\02_error_code_mapping.md`
+  - `docs\04_research\04_endangered_by_language_saved_by_compiler_popl_2026.md`
+  - `docs\06_toolchain\01_compiler_features.md`
+  - `docs\06_toolchain\03_rustdoc_advanced.md`
+  - `docs\06_toolchain\06_05_rust_1_93_vs_1_92_comparison.md`
+  - `docs\06_toolchain\06_cargo_script_guide.md`
+  - `docs\06_toolchain\06_cranelift_backend_guide.md`
+  - `docs\06_toolchain\06_parallel_frontend.md`
+  - `docs\06_toolchain\06_toml_v11_cargo_guide.md`
+  - `docs\rust-formal-engineering-system\03_compiler_theory\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\03_build_tools\README.md`
+  - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\README.md`
+  - `docs\rust-ownership-decidability\THEOREM_TO_COMPILER_BRIDGE.md`
+- `[404] https://www.linuxfoundation.org/certification/linux-foundation-certified-rust-programmer` — Not Found
+  - `docs\01_learning\01_lfrs_certification_mapping.md`
+- `[404] https://forge.rust-lang.org/js/index.html` — Not Found
+  - `docs\00_meta\analysis\00_rust_2026_project_goals_monthly_tracking.md`
+- `[403] https://nostarch.com/rust-programming-language-2nd-edition` — Forbidden
+  - `docs\TRPL_3RD_ED_DIFF.md`
+- `[404] https://en.wikipedia.org/wiki/Zero-overhead_principle` — Not Found
+  - `docs\01_core\README.md`
+- `[404] https://en.wikipedia.org/wiki/Compiler_Cache` — Not Found
+  - `docs\10_sccache_setup.md`
+- `[404] https://en.wikipedia.org/wiki/Future/Promise` — Not Found
+  - `docs\02_reference\quick_reference\02_async_patterns.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-05-async-patterns-deep.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\03-async-semantics.md`
+- `[404] https://en.wikipedia.org/wiki/Spiral_Curriculum` — Not Found
+  - `docs\01_learning\01_learning_path_guide_2025_10_24.md`
+- `[404] https://rust-lang.github.io/rfcs/2504-try-trait.html` — Not Found
+  - `docs\02_reference\quick_reference\02_error_handling_cheatsheet.md`
+  - `docs\rust-ownership-decidability\ERROR_DIAGNOSTICS_GUIDE.md`
+  - `docs\rust-ownership-decidability\case-studies\anyhow-thiserror-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\thiserror-anyhow-formal-analysis.md`
+- `[404] https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html` — Not Found
+  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
+  - `docs\06_toolchain\06_22_rust_1_96_features.md`
+- `[404] https://en.wikipedia.org/wiki/Exception_Handling` — Not Found
+  - `docs\02_reference\quick_reference\02_error_handling_cheatsheet.md`
+  - `docs\rust-ownership-decidability\ERROR_DIAGNOSTICS_GUIDE.md`
+  - `docs\rust-ownership-decidability\case-studies\anyhow-thiserror-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\thiserror-anyhow-formal-analysis.md`
+- `[404] https://doc.rust-lang.org/cargo/book/` — Not Found
+  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
+- `[404] https://www.ralfj.de/blog/2021/04/14/memory-safety.html` — Not Found
+  - `docs\02_reference\02_cross_language_comparison.md`
+- `[404] https://doc.rust-lang.org/reference/items/collections.html` — Not Found
+  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
+- `[404] https://doc.rust-lang.org/book/ch13-00-functional-features-of-rust.html` — Not Found
+  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\21-structured-loop.md`
+  - `docs\rust-ownership-decidability\case-studies\std-iterator-formal-analysis.md`
+- `[404] https://www.coursera.org/learn/programming-in-rust` — Not Found
+  - `docs\01_learning\01_learning_path_planning.md`
+  - `docs\05_guides\BEST_PRACTICES.md`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\README.md`
+- `[404] https://en.wikipedia.org/wiki/Type_Inference` — Not Found
+  - `docs\02_reference\quick_reference\02_type_system.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\lifetimes-mastery.md`
+- `[404] https://blog.rust-lang.org/2026/01/xx/Rust-1.93.0/` — Not Found
+  - `docs\02_reference\quick_reference\02_rust_190_to_193_features_cheatsheet.md`
+- `[404] https://blog.rust-lang.org/2024/12/19/Rust-1.92.0.html` — Not Found
+  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
+- `[404] https://blog.rust-lang.org/2026/05/14/Rust-1.95.0.html` — Not Found
+  - `docs\03_guides\03_let_chains_guide.md`
+- `[404] https://doc.rust-lang.org/book/ch16-00-fearless-concurrency.html` — Not Found
+  - `docs\02_reference\quick_reference\02_async_patterns.md`
+  - `docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md`
+- `[404] https://embassy.dev/book/dev/runtime.html` — Not Found
+  - `docs\03_guides\03_embassy_deep_dive.md`
+- `[404] https://rustcc.cn/` — Not Found
+  - `docs\01_learning\01_learning_path_planning.md`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+  - `docs\rust-ownership-decidability\07-references\README.md`
+- `[403] https://en.wikipedia.org/wiki/io_uring` — Too Many Reqs (1862a4b)
+  - `docs\03_guides\03_io_uring_guide.md`
+- `[404] https://blog.cloudflare.com/fuzzing-rust/` — Not Found
+  - `docs\03_guides\03_fuzzing_guide.md`
+- `[ERR] https://specs.libp2p.io/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `docs\03_guides\03_libp2p_guide.md`
+- `[404] https://en.wikipedia.org/wiki/Software_Component` — Not Found
+  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
+- `[404] https://en.wikipedia.org/wiki/Hindley_Milner_Type_System` — Not Found
+  - `docs\02_reference\quick_reference\02_type_system.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes-deep.md`
+- `[404] https://smallcultfollowing.com/babysteps/blog/2019/01/17/polonius/` — Not Found
+  - `docs\04_research\04_polonius_next_gen_borrow_checker.md`
+- `[404] https://docs.codecov.com/docs/rust` — Not Found
+  - `docs\03_guides\03_test_coverage.md`
+- `[404] https://blog.rust-lang.org/2017/06/27/Rust-1.18.html` — Not Found
+  - `docs\04_research\04_next_generation_trait_solver.md`
+- `[404] https://doc.rust-lang.org/nightly/std/ops/trait.Iterator.html` — Not Found
+  - `docs\02_reference\quick_reference\02_rust_198_nightly_preview_cheatsheet.md`
+- `[404] https://rtic.rs/book/` — Not Found
+  - `docs\03_guides\03_embedded_rust_guide.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-graphics-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded-storage-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\embedded\EMBEDDED_CRATES_INDEX.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\case-studies\embassy-embedded-analysis.md`
+- `[404] https://embassy.dev/book/dev/time.html` — Not Found
+  - `docs\03_guides\03_embassy_deep_dive.md`
+- `[404] https://foundation.rust-lang.org/security/` — Not Found
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
+- `[404] https://rust-lang.github.io/rfcs/2616-http.html` — Not Found
+  - `docs\03_practice\03_project_11_web_server.md`
+  - `docs\content\scenarios\10_web_application_scenarios.md`
+  - `docs\rust-ownership-decidability\15-application-domains\web-development.md`
+  - `docs\rust-ownership-decidability\actor-specialty\case-studies\actix-web-production.md`
+  - `docs\rust-ownership-decidability\case-studies\actix-web-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\jsonwebtoken-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\web-server-architecture.md`
+- `[404] https://en.wikipedia.org/wiki/Software_Versioning` — Not Found
+  - `docs\03_guides\03_semver_checks.md`
+- `[404] https://rust-lang.github.io/rust-project-goals/2026/flagships.html` — Not Found
+  - `docs\04_research\04_safety_critical_alignment_2026.md`
+  - `docs\05_guides\05_safety_tags_guide.md`
+  - `docs\06_toolchain\06_cargo_script_guide.md`
+  - `docs\archive\c_class_audit_2026_06_08\07_future\07_rust_project_goals_2026_matrix.md`
+- `[404] https://docs.rust-embedded.org/faq.html` — Not Found
+  - `docs\05_guides\05_embedded_rust_guide.md`
+- `[404] https://doc.rust-lang.org/rustc/mir/index.html` — Not Found
+  - `docs\05_guides\05_kani_practical_guide.md`
+- `[404] https://en.wikipedia.org/wiki/Cooperative_Multitasking` — Not Found
+  - `docs\05_guides\05_async_programming_usage_guide.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\03-async-semantics.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-deep.md`
+- `[404] https://en.wikipedia.org/wiki/Software_Design_Pattern` — Not Found
+  - `docs\05_guides\05_design_patterns_usage_guide.md`
+  - `docs\rust-ownership-decidability\11-design-patterns\11-01-rust-design-patterns.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\01-design-patterns-semantics.md`
+- `[404] https://en.wikipedia.org/wiki/Software_Development_Best_Practices` — Not Found
+  - `docs\05_guides\BEST_PRACTICES.md`
+- `[404] https://rust-lang.github.io/compiler-team/minutes/design-meeting/2021-03-17-next-generation-trait-solver.html` — Not Found
+  - `docs\04_research\04_next_generation_trait_solver.md`
+- `[404] https://en.wikipedia.org/wiki/Code_Review` — Not Found
+  - `docs\05_guides\BEST_PRACTICES.md`
+- `[404] https://rust-lang.github.io/rfcs/3550-rangext.html` — Not Found
+  - `docs\06_toolchain\06_22_rust_1_96_features.md`
+- `[404] https://en.wikipedia.org/wiki/Formal_Verification` — Not Found
+  - `docs\05_guides\05_formal_verification_integration_guide.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview-deep.md`
+  - `docs\rust-ownership-decidability\03-verification-tools\03-06-verus-guide.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-03-verification-advancements.md`
+  - `docs\rust-ownership-decidability\COMPREHENSIVE_COUNTEREXAMPLES_HANDBOOK.md`
+- `[404] https://doc.rust-lang.org/edition-guide/rust-2024/future-in-prelude.html` — Not Found
+  - `docs\03_guides\03_rust_2024_edition_future_in_prelude.md`
+- `[404] https://doc.rust-lang.org/rust-by-example/async.html` — Not Found
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+- `[404] https://spec.ferrocene.dev/constants-and-statics.html` — Not Found
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+- `[404] https://www.cs.utah.edu/pldi23/` — Not Found
+  - `docs\05_guides\05_verus_practical_guide.md`
+- `[404] https://ralfj.de/blog/2017/01/20/the-rustbelt-paper.html` — Not Found
+  - `docs\04_research\04_rust_formal_verification.md`
+- `[ERR] https://saw.galois.com/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `docs\04_research\04_llm_c_to_rust_migration.md`
+- `[404] https://en.wikipedia.org/wiki/Branch_Table` — Not Found
+  - `docs\06_toolchain\06_jump_tables_guide.md`
+- `[404] https://en.wikipedia.org/wiki/Compiler_Optimization` — Not Found
+  - `docs\06_toolchain\06_parallel_frontend.md`
+- `[404] https://doc.rust-lang.org/reference/attributes/documentation.html` — Not Found
+  - `docs\06_toolchain\06_11_rust_1_93_cargo_rustdoc_changes.md`
+- `[404] https://doc.rust-lang.org/reference/items/coroutines.html` — Not Found
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+- `[404] https://doc.rust-lang.org/rust-by-example/std_misc/net.html` — Not Found
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+- `[404] https://www.edx.org/learn/rust/the-linux-foundation-rust-for-developers` — Not Found
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\README.md`
+- `[404] https://www.edx.org/learn/rust/w3cx-programming-with-rust` — Not Found
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\README.md`
+- `[404] https://blog.rust-lang.org/2026/04/16/Rust-1.95.0.html` — Not Found
+  - `docs\archive\c_class_audit_2026_06_08\00_meta\analysis\00_rust_global_alignment_symmetric_difference_analysis_2026_05.md`
+- `[404] https://without.boats/blog/the-soul-of-rust/` — Not Found
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+- `[404] https://www.youtube.com/@RustLangTV` — Not Found
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+- `[404] https://rust-lang.github.io/rust-project-goals/2026/stabilizations.html` — Not Found
+  - `docs\archive\c_class_audit_2026_06_08\07_future\07_rust_project_goals_2026_matrix.md`
+- `[404] https://rust-lang.github.io/rust-project-goals/2026/rfc.html` — Not Found
+  - `docs\archive\c_class_audit_2026_06_08\07_future\07_rust_project_goals_2026_matrix.md`
+- `[404] https://rustc-dev-guide.rust-lang.org/optimizations.html` — Not Found
+  - `docs\archive\rust-ownership-chinese\guides\zero-cost-abstraction-proof.md`
+- `[404] https://www.edx.org/learn/rust/microsoft-introduction-to-rust-programming` — Not Found
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\README.md`
+- `[404] https://fasterthanli.me/articles/thoughts-on-rust-in-2023` — Not Found
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+- `[404] https://cliffle.com/blog/on-rust/` — Not Found
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+- `[404] https://blog.rust-lang.org/2025/10/30/Rust-1.91.0.html` — Not Found
+  - `docs\archive\reports\formal_system_reports\KNOWLEDGE_GRAPH_2025_11_11.md`
+- `[404] https://en.wikipedia.org/wiki/Borrow_Checker` — Not Found
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+  - `docs\rust-ownership-decidability\case-studies\ouroboros-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Ownership_Semantics` — Not Found
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+- `[403] https://www.reddit.com/r/rust/` — Blocked
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+  - `docs\rust-ownership-decidability\07-references\README.md`
+- `[403] https://cacm.acm.org/magazines/2021/4/251364-safe-systems-programming-in-rust/` — Forbidden
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+- `[404] https://www.coursera.org/learn/type-theory` — Not Found
+  - `docs\content\academic\README.md`
+- `[404] https://en.wikipedia.org/wiki/Alias_Analysis` — Not Found
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-02-borrowing-system-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\borrowing-in-depth.md`
+- `[404] https://iris-project.org/pdfs/2025-pldi-tree-borrows.pdf` — Not Found
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+- `[404] https://foundation.rust-lang.org/security/](#26-the-update-framework-tuf-cratesio-tuf-integration-rust-foundation-2026-httpsfoundationrust-langorgsecurity)` — Not Found
+  - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
+- `[404] https://tokio.rs/tokio/topics/backpressure` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\02_tower_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
+- `[404] https://rkyv.org/performance.html]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\01_serde_architecture.md`
+- `[404] https://diesel.rs/guides/schema-in-depth.html]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\03_diesel_architecture.md`
+- `[404] https://doc.rust-lang.org/std/borrow/enum.Cow.html]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\01_serde_architecture.md`
+- `[404] https://diesel.rs/guides/all-about-inserts.html]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\03_diesel_architecture.md`
+- `[404] https://diesel.rs/guides/comparison-to-other-orms.html]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\03_diesel_architecture.md`
+- `[404] https://rust-lang.github.io/rfcs/1238-non-lexical-lifetimes.html` — Not Found
+  - `docs\archive\rust-ownership-chinese\guides\drop-check-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Ownership_Type` — Not Found
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\ownership-deep-dive.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\type-ownership-unified-theory.md`
+- `[404] https://en.wikipedia.org/wiki/Substructural_Type_System` — Not Found
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-01-linear-logic-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-01-ownership-rules-deep.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\type-ownership-unified-theory.md`
+- `[404] https://tokio.rs/tokio/topics/runtime-internals` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\21_mio_architecture.md`
+- `[404] https://doc.rust-lang.org/book/ch10-00-generics.html]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\01_serde_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\03_diesel_architecture.md`
+- `[404] https://doc.rust-lang.org/book/ch19-06-macros.html]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\04_clap_architecture.md`
+- `[404] https://diesel.rs/guides/getting-started]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\03_diesel_architecture.md`
+- `[404] https://plv.mpi-sws.org/rustbis/stacked-borrows/` — Not Found
+  - `docs\archive\rust-ownership-chinese\README.md`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+  - `docs\archive\rust-ownership-chinese\papers\rustbelt-deep-dive.md`
+  - `docs\archive\rust-ownership-chinese\papers\stacked-tree-borrows-analysis.md`
+- `[404] https://doc.rust-lang.org/nomicon/ffi.html]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\01_serde_architecture.md`
+- `[404] https://www.cs.cmu.edu/~15-799/` — Not Found
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+- `[404] https://doc.rust-lang.org/book/ch17-03-std-futures.html` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
+- `[404] https://protobuf.dev/programming-guides/proto3/]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_tonic_architecture.md`
+- `[ERR] https://www.prusti.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+- `[404] https://actix.rs/actix/` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\12_actix_web_architecture.md`
+- `[404] https://web.dev/performance-wasm/]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_wasm_bindgen_architecture.md`
+- `[404] https://tokio.rs/tokio/topics/io` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
+- `[404] https://actix.rs/actix/actix/trait.Actor.html` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\12_actix_web_architecture.md`
+- `[404] https://bevyengine.org/learn/advanced-concepts/component-storage/` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
+- `[404] https://bevyengine.org/learn/quick-start/getting-started/systems/` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
+- `[404] https://ratatui.rs/concepts/testing/` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\20_ratatui_architecture.md`
+- `[ERR] https://prusti.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+- `[404] https://blog.rust-lang.org/2026/01/22/Rust-1.93.0.html` — Not Found
+  - `docs\rust-ownership-decidability\RUST_194_VS_193_COMPARISON.md`
+- `[404] https://www.rust-lang.org/faq.html` — Not Found
+  - `docs\rust-ownership-decidability\FAQ_COMPREHENSIVE.md`
+- `[404] https://en.wikipedia.org/wiki/Mathematical_Theorem` — Not Found
+  - `docs\rust-ownership-decidability\THEOREM_INTUITIONS.md`
+- `[404] https://en.wikipedia.org/wiki/Operational_Semantics` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\00-semantic-framework.md`
+  - `docs\rust-ownership-decidability\UNIFIED_THEORETICAL_FRAMEWORK.md`
+  - `docs\rust-ownership-decidability\formal-foundations\RUST_FORMAL_SEMANTICS_DEEP.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\semantics-equivalence-proof.md`
+- `[404] https://blog.rust-lang.org/2026/03/05/Rust-1.94.0.html` — Not Found
+  - `docs\rust-ownership-decidability\RUST_194_VS_193_COMPARISON.md`
+- `[404] https://doc.rust-lang.org/book/ch17-01-futures-and-async.html` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_sqlx_architecture.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_reqwest_architecture.md`
+- `[404] https://grpc.io/docs/what-is-grpc/core-concepts/]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_tonic_architecture.md`
+- `[404] https://grpc.io/docs/what-is-grpc/introduction/]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_tonic_architecture.md`
+- `[404] https://en.wikipedia.org/wiki/Substructural_Logic` — Not Found
+  - `docs\rust-ownership-decidability\00-foundations\00-01-linear-logic-deep.md`
+- `[404] https://ratatui.rs/tutorials/hello-world/` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\20_ratatui_architecture.md`
+- `[404] https://en.wikipedia.org/wiki/Variable_Scope` — Not Found
+  - `docs\research_notes\type_theory\10_lifetime_formalization.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\06_lifetime_management\README.md`
+- `[404] https://en.wikipedia.org/wiki/Covariance_and_Contravariance` — Not Found
+  - `docs\research_notes\type_theory\10_variance_theory.md`
+- `[404] https://en.wikipedia.org/wiki/Formal_Grammar` — Not Found
+  - `docs\rust-formal-engineering-system\03_compiler_theory\README.md`
+- `[404] https://en.wikipedia.org/wiki/Programming_Language_Theory` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\00-semantic-framework.md`
+  - `docs\rust-ownership-decidability\UNIFIED_THEORETICAL_FRAMEWORK.md`
+- `[404] https://en.wikipedia.org/wiki/Borrowing_(computer_science)` — Not Found
+  - `docs\rust-ownership-decidability\01-core-concepts\01-02-borrowing-system-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\borrowing-in-depth.md`
+- `[404] https://en.wikipedia.org/wiki/Mutual_Exclusion` — Not Found
+  - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\interior-mutability.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-02-thread-safety-patterns.md`
+- `[404] https://en.wikipedia.org/wiki/Read_Copy_Update` — Not Found
+  - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\interior-mutability.md`
+- `[404] https://en.wikipedia.org/wiki/Proof_Theory` — Not Found
+  - `docs\rust-ownership-decidability\00-foundations\00-01-linear-logic-deep.md`
+- `[404] https://diesel.rs/guides/getting-started.html]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\15_sqlx_advanced_architecture.md`
+- `[404] https://bevyengine.org/learn/quick-start/getting-started/states/` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
+- `[404] https://developer.mozilla.org/en-US/docs/WebAssembly]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_wasm_bindgen_architecture.md`
+- `[404] https://en.wikipedia.org/wiki/Program_Verification` — Not Found
+  - `docs\rust-ownership-decidability\00-foundations\00-03-separation-logic-deep.md`
+- `[404] https://en.wikipedia.org/wiki/Memory_Management` — Not Found
+  - `docs\rust-ownership-decidability\05-comparative-study\05-04-rust-vs-java.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\06-memory-ordering-deep.md`
+  - `docs\rust-ownership-decidability\comparative-analysis\memory-management-comparison.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\proofs\memory-safety-proof.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\relaxed-memory-model.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\memory-safety-proof.md`
+- `[404] https://en.wikipedia.org/wiki/Linear_Type` — Not Found
+  - `docs\rust-ownership-decidability\01-core-concepts\01-01-ownership-rules-deep.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-04-ownership-variations.md`
+- `[404] https://en.wikipedia.org/wiki/Interior_Pointer` — Not Found
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\interior-mutability.md`
+- `[404] https://en.wikipedia.org/wiki/Region_based_Memory_Management` — Not Found
+  - `docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes-deep.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-04-ownership-variations.md`
+  - `docs\rust-ownership-decidability\formal-foundations\RUST_FORMAL_SEMANTICS_DEEP.md`
+- `[404] https://supertech.csail.mit.edu/papers/steal.pdf` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
+- `[403] https://www.sciencedirect.com/science/article/pii/0304397587900454` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[403] https://www.sciencedirect.com/science/article/pii/S0890540100922840` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[404] https://en.wikipedia.org/wiki/Concurrent_Computing` — Not Found
+  - `docs\rust-ownership-decidability\05-comparative-study\05-03-rust-vs-go.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-semantic-framework.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\02-concurrency-semantics.md`
+- `[404] https://en.wikipedia.org/wiki/Hoare_Logic` — Not Found
+  - `docs\rust-ownership-decidability\00-foundations\00-03-separation-logic-deep.md`
+- `[ERR] https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.32.5374` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[404] https://gcc.gnu.org/pipermail/gcc-patches/2025-March/619453.html` — Not Found
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\polonius-borrow-checker.md`
+- `[403] https://www.sciencedirect.com/science/article/pii/S0890540185710426` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[404] https://en.wikipedia.org/wiki/Abstract_Interpretation` — Not Found
+  - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview-deep.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-semantic-framework.md`
+- `[403] https://www.sciencedirect.com/science/article/pii/016800729290075B` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[403] https://www.sciencedirect.com/science/article/pii/0022000078900144` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[404] https://web.cs.dal.ca/~whidden/DM82.pdf` — Not Found
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[403] https://www.sciencedirect.com/science/article/pii/016800729290027H` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[429] https://dspace.mit.edu/handle/1721.1/41162` — Too Many Requests
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[404] https://en.wikipedia.org/wiki/Interior_Mutability` — Not Found
+  - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\interior-mutability.md`
+- `[404] https://en.wikipedia.org/wiki/Region_Based_Memory_Management` — Not Found
+  - `docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\lifetimes-mastery.md`
+- `[403] https://www.sciencedirect.com/science/article/pii/0304397593900679` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[403] https://www.sciencedirect.com/science/article/pii/S0890540102000125` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[403] https://www.sciencedirect.com/science/article/pii/030439759290086S` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[403] https://www.sciencedirect.com/science/article/pii/S0890540183710435` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[500] https://www.cambridge.org/core/journals/journal-of-functional-programming/article/efficient-and-insightful-generalization/6A79A3C6E8D8B8E8E8B7E8E8E8E8E8E8` — Internal Server Error
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[403] https://www.sciencedirect.com/science/article/pii/S0304397599002029` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[500] https://www.cambridge.org/core/journals/journal-of-functional-programming/article/monadic-regions/E632A218E84E00B2D597B02ACCBD8B7B` — Internal Server Error
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[404] https://ocaml.org/workshops/modular-implicits` — Not Found
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[404] https://en.wikipedia.org/wiki/Atomic_Operation` — Not Found
+  - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability-deep.md`
+- `[404] https://www.usenix.org/legacy/publications/library/proceedings/otec02/jim.html` — Not Found
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[403] https://www.sciencedirect.com/science/article/pii/S0304397596003025` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[403] https://www.packtpub.com/product/network-programming-with-rust/9781788624893` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[403] https://www.packtpub.com/product/mastering-rust-second-edition/9781789346572` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[403] https://www.packtpub.com/product/rust-high-performance/9781788399487` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[403] https://www.sciencedirect.com/science/article/pii/S1571066112000563` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[404] https://blog.rust-lang.org/inside-rust/2023/02/15/polonius-update.html` — Not Found
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[403] https://www.sciencedirect.com/bookseries/studies-in-logic-and-the-foundations-of-mathematics/vol/103` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[500] https://www.cambridge.org/core/books/lambdacalculus-and-combinators/3453DA0B29AF2541E60D6C0ECA5E3E08` — Internal Server Error
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[ERR] https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.30.4599` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[403] https://www.sciencedirect.com/bookseries/studies-in-logic-and-the-foundations-of-mathematics/vol/149` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[500] https://www.cambridge.org/core/books/proofs-and-types/EBBEFDA77BE67DAB17AEFD98BD69CC97` — Internal Server Error
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[404] https://www.cambridge.org/core/books/proof-theory-and-automated-reasoning/9780511815170` — Not Found
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[500] https://www.cambridge.org/core/books/practical-foundations-for-programming-languages/99EA2D82D9D29667350B2BA24790B56B` — Internal Server Error
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[404] https://www.cambridge.org/core/books/separation-logic/...` — Not Found
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[404] https://blog.adacore.com/deductive-verification-of-rust-programs` — Not Found
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[404] https://www.cambridge.org/core/books/program-logics-for-certified-compilers/...` — Not Found
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[404] https://www.cambridge.org/core/books/logic-in-computer-science/...` — Not Found
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[404] https://www.cambridge.org/core/books/handbook-of-practical-logic-and-automated-reasoning/...` — Not Found
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[404] https://www.cambridge.org/core/books/purely-functional-data-structures/...` — Not Found
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[500] https://www.cambridge.org/core/books/basic-proof-theory/0F8A98667AAB0C3F359779168C075113` — Internal Server Error
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[403] https://math.jhu.edu/~eriehl/context/` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[500] https://www.cambridge.org/core/books/type-theory-and-formal-proof/0474C94D13653A6A3F8F6B12C4E5A12A` — Internal Server Error
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[500] https://www.cambridge.org/core/books/linear-logic/1E0E0F0F0F0F0F0F0F0F0F0F0F0F0F0F` — Internal Server Error
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[404] https://www.cambridge.org/core/books/modern-compiler-implementation-in-java/...` — Not Found
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[403] https://www.packtpub.com/product/rust-web-programming/9781800560813` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[404] https://www.cambridge.org/core/books/modern-compiler-implementation-in-ml/...` — Not Found
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[500] http://book.realworldhaskell.org/` — Internal Privoxy Error
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[404] https://www.cambridge.org/core/books/thinking-functionally-with-haskell/...` — Not Found
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[404] https://www.cambridge.org/core/books/basic-category-theory/...` — Not Found
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[403] https://nostarch.com/Rust` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[ERR] https://readrust.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[404] https://www.cambridge.org/core/books/how-to-prove-it/...` — Not Found
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[404] https://www.elsevier.com/books/advanced-compiler-design-and-implementation/muchnick/978-1-55860-320-2` — Not Found
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[404] https://www.coursera.org/learn/compilers` — Not Found
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `[404] https://www.cs.purdue.edu/homes/suresh/330-Spring2023/` — Not Found
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `[403] https://www.udemy.com/` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `[404] https://cs.brown.edu/~bthom/papers/patina-draft.pdf` — Not Found
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[ERR] https://itp-conference.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `[ERR] https://isabelle.in.tum.de/doc/prog-prove.pdf` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `[500] http://concrete-semantics.org/` — Internal Privoxy Error
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `[404] https://www.cs.cmu.edu/~rwh/courses/ttf/` — Not Found
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `[404] https://www.cs.utexas.edu/~eberdou/cs439/` — Not Found
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `[404] https://www.youtube.com/c/RustLabConference` — Not Found
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `[404] https://homotopytypetheory.org/2019/12/07/hott-2019/` — Not Found
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `[404] https://www.doc.ic.ac.uk/~jv/verification/` — Not Found
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `[404] https://www21.in.tum.de/teaching/progver/WS22/` — Not Found
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `[404] https://www.cs.cmu.edu/~rwh/courses/ppl/` — Not Found
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `[404] https://www.cs.cmu.edu/~emc/15414-f20/` — Not Found
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `[404] https://www.diku.dk/~torbenm/PA/PA-toc.html` — Not Found
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[ERR] https://web.stanford.edu/class/cs259/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `[ERR] https://oopsla24.sigplan.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `[403] https://www.sciencedirect.com/journal/science-of-computer-programming` — Forbidden
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+- `[403] https://scholar.google.com/scholar?q=rust+formal+verification` — Forbidden
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+- `[404] https://en.wikipedia.org/wiki/Programming_Idiom` — Not Found
+  - `docs\rust-ownership-decidability\11-design-patterns\11-02-idiomatic-patterns.md`
+- `[404] https://en.wikipedia.org/wiki/Dependent_Type` — Not Found
+  - `docs\rust-ownership-decidability\08-advanced-topics\08-01-const-generics.md`
+- `[404] https://en.wikipedia.org/wiki/Advanced_Programming_Language_Features` — Not Found
+  - `docs\rust-ownership-decidability\08-advanced-topics\README.md`
+- `[404] https://en.wikipedia.org/wiki/Memory_Ordering` — Not Found
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
+- `[ERR] https://www.i-cav.org/2024/` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1016)
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+- `[404] https://en.wikipedia.org/wiki/Thread_Pool` — Not Found
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-deep.md`
+- `[404] https://en.wikipedia.org/wiki/Work_Stealing` — Not Found
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
+- `[ERR] https://sosp2024.postech.ac.kr/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+- `[404] https://en.wikipedia.org/wiki/Compare_and_Swap` — Not Found
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-04-lock-free-patterns.md`
+- `[ERR] https://isabelle.in.tum.de/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\mechanized-proofs.md`
+- `[404] https://en.wikipedia.org/wiki/Structured_Concurrency` — Not Found
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-05-async-patterns-deep.md`
+- `[500] http://compcert.inria.fr/` — Internal Privoxy Error
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `[404] https://en.wikipedia.org/wiki/GPU_Computing` — Not Found
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism-deep.md`
+  - `docs\rust-ownership-decidability\case-studies\ml-ai\README.md`
+- `[404] https://en.wikipedia.org/wiki/Finite_state_Machine` — Not Found
+  - `docs\rust-ownership-decidability\11-design-patterns\11-03-type-state-pattern.md`
+- `[ERR] https://yices.csl.sri.com/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `[404] https://en.wikipedia.org/wiki/Denotational_Semantics` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\00-semantic-framework.md`
+  - `docs\rust-ownership-decidability\formal-foundations\RUST_FORMAL_SEMANTICS_DEEP.md`
+- `[404] https://en.wikipedia.org/wiki/Computer_Multitasking` — Not Found
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
+- `[404] https://en.wikipedia.org/wiki/Self_referential_Struct` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\03-async-semantics.md`
+  - `docs\rust-ownership-decidability\case-studies\ouroboros-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Lock_Free_Data_Structure` — Not Found
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
+- `[404] https://en.wikipedia.org/wiki/Control_Flow` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\04-control-data-flow.md`
+- `[404] https://en.wikipedia.org/wiki/Control_flow_Graph` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\04-control-data-flow.md`
+- `[404] https://en.wikipedia.org/wiki/Actor_Model` — Not Found
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-03-message-passing-deep.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-05-async-patterns-deep.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-semantic-framework.md`
+  - `docs\rust-ownership-decidability\actor-specialty\ACTOR_MODEL_DEEP_DIVE.md`
+- `[404] https://en.wikipedia.org/wiki/Lock_free_Data_Structure` — Not Found
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-04-lock-free-patterns.md`
+- `[404] https://en.wikipedia.org/wiki/Communication_and_Concurrency` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\13-mi-with-design-time-knowledge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\14-mi-with-runtime-knowledge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\20-cancel-case.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\41-thread-merge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\42-thread-split.md`
+- `[404] https://en.wikipedia.org/wiki/Data_Engineering` — Not Found
+  - `docs\rust-ownership-decidability\15-application-domains\data-engineering.md`
+- `[404] https://en.wikipedia.org/wiki/Memory_Model` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\02-concurrency-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\tree-borrows-comprehensive.md`
+- `[404] https://doc.rust-lang.org/nomicon/threads.html` — Not Found
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism-deep.md`
+- `[404] https://en.wikipedia.org/wiki/Reactor_Pattern` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\03-async-semantics.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-deep.md`
+- `[404] https://en.wikipedia.org/wiki/Green_Thread` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\03-async-semantics.md`
+- `[404] https://en.wikipedia.org/wiki/Control_Flow_Graph` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\04-control-data-flow.md`
+- `[404] https://en.wikipedia.org/wiki/Data_flow_Analysis` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\04-control-data-flow.md`
+- `[404] https://en.wikipedia.org/wiki/Memory_Alignment` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\bytemuck-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\zerocopy-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Workflow_Pattern` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\08-workflow-patterns.md`
+- `[404] https://en.wikipedia.org/wiki/ARM_Cortex_M` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\cortex-m-rt-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Embedded_Operating_System` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\embassy-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/UML_Activity_Diagram` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\13-mi-with-design-time-knowledge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\14-mi-with-runtime-knowledge.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\20-cancel-case.md`
+- `[404] https://blog.rust-lang.org/2026/03/06/Rust-1.94.0.html` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\06-array-windows-semantics.md`
+- `[404] https://en.wikipedia.org/wiki/Environment_Variable` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\figment-formal-analysis.md`
+- `[ERR] https://www.cs.unm.edu/~mccune/prover9/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `[404] https://en.wikipedia.org/wiki/Heterogeneous_Data_Structure` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\frunk-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Real_time_Computing` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\heapless-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Stack_based_Memory_Allocation` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\heapless-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Stack_Based_Memory_Allocation` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\heapless-formal-analysis.md`
+- `[ERR] https://gitlab.mpi-sws.org/FP/rustbelt` — TimeoutError('The read operation timed out')
+  - `docs\rust-ownership-decidability\RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\mechanized-proofs.md`
+- `[404] https://en.wikipedia.org/wiki/Wear_Leveling` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\littlefs2-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Fixed_Size_Data_Structure` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\heapless-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Self_Referential_Data_Structure` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\ouroboros-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Binary_Protocol` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\postcard-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Zero_Copy_Serialization` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\rkyv-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Schema_Evolution` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\serde-formal-analysis-deep.md`
+- `[404] https://doc.rust-lang.org/nomicon/pointers.html` — Not Found
+  - `docs\rust-ownership-decidability\17-unsafe-rust\02-raw-pointers.md`
+- `[404] https://en.wikipedia.org/wiki/Type_Punning` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\bytemuck-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Event_Loop` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-deep.md`
+- `[404] https://en.wikipedia.org/wiki/Load_Balancing` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-deep.md`
+- `[404] https://plv.mpi-sws.org/rustbib/` — Not Found
+  - `docs\rust-ownership-decidability\17-unsafe-rust\08-aliasing.md`
+- `[404] https://en.wikipedia.org/wiki/Type_Casting` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\bytemuck-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Union_Type` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\bytemuck-formal-analysis.md`
+- `[ERR] https://book.defmt.ferrous-systems.com/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `docs\rust-ownership-decidability\case-studies\defmt-formal-analysis.md`
+- `[404] https://rust-lang.github.io/wg-cli/` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\cli\README.md`
+- `[404] https://en.wikipedia.org/wiki/Type_Level_Programming` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\generic-array-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\typenum-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Journaling_File_System` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\littlefs2-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Command_line_Interface` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\cli\README.md`
+- `[404] https://en.wikipedia.org/wiki/Service_Mesh` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\cloud\README.md`
+- `[404] https://tokio.rs/docs` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-analysis.md`
+- `[404] https://rust-lang.github.io/async-book/04_pinning/` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\std-pin-unpin-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Physics_Engine` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\gamedev\README.md`
+- `[404] https://en.wikipedia.org/wiki/Entity_Component_System` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\gamedev\README.md`
+- `[404] https://en.wikipedia.org/wiki/Memory_Mapping` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\zerocopy-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Zero_Copy` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\zerocopy-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Distributed_Database` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\database\README.md`
+- `[404] https://en.wikipedia.org/wiki/Concurrency_Bug` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\shuttle-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Container_Runtime` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\cloud\README.md`
+- `[404] https://en.wikipedia.org/wiki/Bare_Metal_Programming` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\embedded\README.md`
+  - `docs\rust-ownership-decidability\extensions\no-std-development.md`
+- `[404] https://en.wikipedia.org/wiki/Lock_Free_Data_Structures` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-deep.md`
+- `[404] https://en.wikipedia.org/wiki/Proof_Assistant` — Not Found
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\PROOF_PATTERNS.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\type-ownership-unified-theory.md`
+- `[404] https://en.wikipedia.org/wiki/Real_Time_Rendering` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\gamedev\README.md`
+- `[404] https://en.wikipedia.org/wiki/Game_Audio` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\gamedev\README.md`
+- `[404] https://en.wikipedia.org/wiki/Input_Device` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\gamedev\README.md`
+- `[404] https://en.wikipedia.org/wiki/Pointer_Aliasing` — Not Found
+  - `docs\rust-ownership-decidability\formal-foundations\models\tree-borrows-comprehensive.md`
+- `[404] https://en.wikipedia.org/wiki/Dynamic_Typing` — Not Found
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-python.md`

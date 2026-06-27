@@ -272,7 +272,7 @@ impl ServiceDiscovery {
 
 ### 负载均衡
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -458,7 +458,7 @@ where
 
 ### Saga模式
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 use std::future::Future;

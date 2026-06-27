@@ -84,7 +84,7 @@ fn move_semantics() {
 
 ### 1.2 Move vs Copy
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
@@ -202,7 +202,7 @@ Copy:
 
 ### 2.3 路径跟踪
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **路径表达式**:
 

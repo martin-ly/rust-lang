@@ -85,7 +85,7 @@
 
 ### 2.1 类型定义
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ### 定义 2.1 (Option类型)
 
@@ -327,7 +327,7 @@ fn either_to_result<T, E>(e: Either<E, T>) -> Result<T, E> {
 
 ### 定理 3.2 (错误类型转换的组合性)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 > `map_err` 允许在保持成功值的同时转换错误类型。
 

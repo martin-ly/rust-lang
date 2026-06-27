@@ -471,7 +471,7 @@ fn partial_move_example() {
 
 ### Theorem MOVE-IS-LINEAR (移动线性性定理)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **定理陈述**:
 

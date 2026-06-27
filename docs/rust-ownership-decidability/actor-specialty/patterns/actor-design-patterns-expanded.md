@@ -106,7 +106,7 @@ Ask模式 (Request-Response):
 
 ### 1.2 定理 ASK-TELL-SAFETY
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```text
 定理 ASK-TELL-SAFETY-1: Ask模式不会导致Actor状态不一致

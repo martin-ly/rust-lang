@@ -75,7 +75,7 @@ fn main() {
 
 ### 1. 基本类型系统
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -304,7 +304,7 @@ fn robust_operation() -> Result<(), ContextualError> {
 
 ## 权威来源索引
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 > **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)**
 > **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
 > **来源: [ACM - Type Systems](https://dl.acm.org/)**

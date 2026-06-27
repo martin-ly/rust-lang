@@ -343,7 +343,7 @@ fn evil(mut r: &mut &'a str) {
 
 ### 反例 2：函数参数若协变则悬垂
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **假设**：若 `fn(T) -> R` 在参数 $T$ 上协变（错误假设）。
 
@@ -781,7 +781,7 @@ fn use_contravariant_callback() {
 > **来源: [IEEE](https://standards.ieee.org/)**
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 > **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)**
 > **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
 > **来源: [ACM - Type Systems](https://dl.acm.org/)**

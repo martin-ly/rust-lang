@@ -9,7 +9,7 @@
 > **对齐日期**: 2026-05-12
 > **难度**: 中高级
 > **学习目标**: 掌握Rust类型系统最强大的应用，实现编译时状态验证
-> **来源: [Rust Reference - Types](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)** · **来源: [Rust Design Patterns Book](https://rust-unofficial.github.io/patterns/)** · **来源: [Wikipedia - Finite-state Machine](https://en.wikipedia.org/wiki/Finite_state_Machine)** · **来源: [TRPL Ch. 10](https://doc.rust-lang.org/book/ch10-00-generics.html)** · **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+> **来源: [Rust Reference - Types](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)** · **来源: [Rust Design Patterns Book](https://rust-unofficial.github.io/patterns/)** · **来源: [Wikipedia - Finite-state Machine](https://en.wikipedia.org/wiki/Finite_state_Machine)** · **来源: [TRPL Ch. 10](https://doc.rust-lang.org/book/ch10-00-generics.html)** · **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
 ---
 
@@ -563,7 +563,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 案例2：HTTP请求构建器
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use std::marker::PhantomData;
@@ -1404,7 +1404,7 @@ pub struct Connection<State> { ... }
 
 ### C++
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 C++可以使用模板实现类似模式，但缺乏Rust的所有权系统：
 

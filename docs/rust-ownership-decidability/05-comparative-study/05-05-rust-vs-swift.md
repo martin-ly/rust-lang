@@ -177,7 +177,7 @@
 
 ### 2.2 所有权 vs ARC
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **Swift ARC 示例:**
 
@@ -930,7 +930,7 @@ fn process(name: Option<String>) -> Option<usize> {
 
 ### 5.1 并发安全模型
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐

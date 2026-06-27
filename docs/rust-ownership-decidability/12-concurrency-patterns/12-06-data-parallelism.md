@@ -33,7 +33,6 @@
     - [3.1 便携式SIMD](#31-便携式simd)
     - [3.2 向量操作](#32-向量操作)
     - [3.3 矩阵运算](#33-矩阵运算)
-<a id="继续"></a>
   - [（继续...）](#继续)
   - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引-1)
@@ -664,7 +663,7 @@ pub fn parallel_dedup<T: Eq + Send + Clone>(data: &mut Vec<T>) {
 
 ### 2.4 自定义分区策略
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use rayon::iter::plumbing::{Consumer, Producer, ProducerCallback, UnindexedConsumer};

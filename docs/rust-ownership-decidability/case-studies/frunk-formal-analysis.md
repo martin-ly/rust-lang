@@ -17,7 +17,7 @@
 
 ## 目录
 >
-> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Wikipedia - Heterogeneous Data Structure](https://en.wikipedia.org/wiki/Heterogeneous_Data_Structure)** · **来源: [Wikipedia - Generic Programming](https://en.wikipedia.org/wiki/Generic_Programming)** · **[来源: ACM - Functional Data Structure Design]** · **[来源: IEEE - Type-Safe Generic Collections]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Wikipedia - Heterogeneous Data Structure](https://en.wikipedia.org/wiki/Heterogeneous_Data_Structure)** · **来源: [Wikipedia - Generic Programming](https://en.wikipedia.org/wiki/Generic_programming)** · **[来源: ACM - Functional Data Structure Design]** · **[来源: IEEE - Type-Safe Generic Collections]**
 
 - [Frunk 函数式编程库形式化分析](#frunk-函数式编程库形式化分析)
   - [目录](#目录)
@@ -166,7 +166,7 @@ Frunk 大量使用类型级递归来实现复杂操作：
 
 ### 2.4 Coproduct（余积类型）
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 Coproduct 是 HList 的对偶概念，表示"可能是这些类型中的某一个"：
 
@@ -240,7 +240,7 @@ pub trait Generic {
 
 ### 3.3 标签字段系统
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 标签字段系统允许基于名称的操作：
 

@@ -376,7 +376,7 @@ unsafe impl GlobalAlloc for PoolAllocator {
 
 ### 代码组织
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 // 模块组织示例

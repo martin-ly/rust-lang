@@ -47,7 +47,7 @@
 
 ### 1. `cfg_select!` 宏
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -79,7 +79,7 @@ let arch_str = cfg_select! {
 
 ### 2. `if let` guards on match arms
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -220,7 +220,7 @@ let m: &mut String = unsafe { mut_ptr.as_mut_unchecked() };
 
 ### 布局计算 — `Layout` 新 API
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 > 📎 可运行示例: [`crates/c01_ownership_borrow_scope/examples/layout_api_demo.rs`](../../../crates/c01_ownership_borrow_scope/examples/layout_api_demo.rs)
 

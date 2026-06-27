@@ -351,7 +351,7 @@ fn error_handler() {
 
 ### 3.1 自定义错误类型
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **✅ 最佳实践**: 实现 Error + Display、thiserror 等
 
@@ -794,7 +794,7 @@ async fn cpu_intensive_task(data: Vec<u8>) -> Vec<u8> {
 
 ### 8.2 错误处理
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **✅ 最佳实践**: Result 传播、`Box<dyn Error>`
 
@@ -1161,7 +1161,7 @@ let config = Config::builder()
 
 ### 13.3 状态机模式
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 // 状态标记类型
@@ -1310,7 +1310,7 @@ println!("运行时长: {:?}", stopped.duration());
 
 ### 在线课程 (Coursera)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 - [Rust Programming Specialization](https://www.coursera.org/specializations/rust-programming) (Duke University) - Rust基础、数据结构、并发编程
 - [Programming in Rust](https://www.coursera.org/learn/programming-in-rust) (University of Colorado Boulder) - Rust编程基础
@@ -1551,7 +1551,7 @@ impl<T> LocalCache<T> {
 
 #### 使用标准库常量的好处
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 // ✅ 推荐：使用 Rust 1.96 标准库常量

@@ -123,7 +123,7 @@ $$
 
 ### 定义 2.2 (PSPACE完全)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 问题 $L$ 是**PSPACE完全**的当且仅当:
 
@@ -171,7 +171,7 @@ $$
 
 ### 定义 3.1 (Rust类型推断问题)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **输入**:
 

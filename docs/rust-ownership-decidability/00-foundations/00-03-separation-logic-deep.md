@@ -7,7 +7,7 @@
 
 ## Table of Contents
 >
-> **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_Logic)** · **来源: [Wikipedia - Hoare Logic](https://en.wikipedia.org/wiki/Hoare_Logic)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **[来源: Reynolds 2002 - Separation Logic]** · **来源: [Iris Project - iris-project.org](https://iris-project.org/)** · **[来源: O'Hearn 2019 - Incorrectness Logic]** · **来源: [Wikipedia - Program Verification](https://en.wikipedia.org/wiki/Program_Verification)** · **[来源: ACM - Separation Logic Tutorial]** · **[来源: IEEE - Deductive Verification Methods]**
+> **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)** · **来源: [Wikipedia - Hoare Logic](https://en.wikipedia.org/wiki/Hoare_Logic)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **[来源: Reynolds 2002 - Separation Logic]** · **来源: [Iris Project - iris-project.org](https://iris-project.org/)** · **[来源: O'Hearn 2019 - Incorrectness Logic]** · **来源: [Wikipedia - Program Verification](https://en.wikipedia.org/wiki/Program_Verification)** · **[来源: ACM - Separation Logic Tutorial]** · **[来源: IEEE - Deductive Verification Methods]**
 
 - [Separation Logic: A Comprehensive Deep Dive](#separation-logic-a-comprehensive-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -142,7 +142,7 @@ Separation Logic (SL) is a logical framework for reasoning about programs that m
 
 ### 1.1 Historical Context
 
-> **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_Logic)**
+> **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)**
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -303,7 +303,7 @@ Thus the result satisfies Q* R.
 
 ### 2.3 Separating Implication (-*)
 
-> **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_Logic)**
+> **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)**
 
 The magic wand P -* Q (read as "P wand Q") asserts that if we add a heap satisfying P to the current heap, we get a heap satisfying Q.
 
@@ -429,7 +429,7 @@ More generally, with frame:
 
 #### 3.3.2 Allocation Rule
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```
 {emp} x := alloc() {x |-> _}
@@ -499,7 +499,7 @@ Thus the result satisfies Q* R.
 
 ### 3.5 Theorem: Locality
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **Theorem 3.2 (Locality)**:
 If {P} C {Q} and the execution of C from a state satisfying P * R is safe, then:
@@ -999,7 +999,7 @@ After `drop(x)`, we have `emp` - no heap ownership. Dereferencing `raw` (which e
 
 ### 6.4 Counter-Example 4: Use After Free
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **The Error**: Similar to dangling pointer, but with explicit heap manipulation.
 
@@ -1359,7 +1359,7 @@ If two threads have compatible rely/guarantee conditions, they can execute in pa
 
 ### 7.2 Higher-Order Protocols
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 7.2.1 Ghost State Protocols
 
@@ -1912,7 +1912,7 @@ The sequence of elements after operations matches the expected mathematical oper
 
 ### 10.2 Iris and RustBelt
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 1. **Jung, R., et al.** (2018). "Iris from the Ground Up: A Modular Foundation for Higher-Order Concurrent Separation Logic." *Journal of Functional Programming*.
    - Comprehensive description of the Iris framework.
@@ -2099,7 +2099,7 @@ P * Q |= P' * Q'    if P|=P', Q|=Q' (MONO)
 
 ## 权威来源索引
 
-> **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_Logic)**
+> **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)**
 
 > **来源: [Wikipedia - Hoare Logic](https://en.wikipedia.org/wiki/Hoare_Logic)**
 

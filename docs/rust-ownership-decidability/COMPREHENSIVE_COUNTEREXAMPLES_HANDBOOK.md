@@ -309,7 +309,7 @@ fn sequential_borrows() {
 
 #### EDB.2 Lifetime Elision Rules
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 Rust has rules for inferring lifetimes:
 
@@ -765,7 +765,7 @@ You tried to create two mutable borrows simultaneously.
 
 ### E0502: Mixed Borrow
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **Full Error:**
 

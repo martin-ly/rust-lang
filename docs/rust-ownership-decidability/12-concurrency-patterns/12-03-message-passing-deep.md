@@ -70,7 +70,6 @@
     - [Core Documentation](#core-documentation)
     - [Academic Papers](#academic-papers)
     - [Related Patterns](#related-patterns)
-<a id="document-version-100"></a>
   - [**Document Version**: 1.0.0](#document-version-100)
   - [权威来源索引](#权威来源索引)
 
@@ -1660,7 +1659,7 @@ impl<T: Send + 'static> FairPriorityChannel<T> {
 
 ### 5.1 Sender/Receiver Disconnection
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 Channels can disconnect when one end is dropped, and proper handling is essential for robust applications.
 
@@ -2592,7 +2591,7 @@ type LargeChannel<T> = SizedChannel<T, 1000>;
 
 ### Core Documentation
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 1. **The Rust Programming Language - Chapter 16: Concurrency**
    - Official documentation on channels and message passing
@@ -2676,7 +2675,7 @@ type LargeChannel<T> = SizedChannel<T, 1000>;
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -2690,7 +2689,7 @@ type LargeChannel<T> = SizedChannel<T, 1000>;
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**

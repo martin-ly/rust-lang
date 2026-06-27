@@ -188,7 +188,7 @@ Base Case: 基准情形变迁
 
 ### 3.1 BPMN 表示
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 BPMN 2.0 中，递归通常使用**子流程** (Sub-Process) 的递归调用来表示：
 
@@ -232,7 +232,7 @@ Base Case: 基准情形变迁
 
 ### 3.2 UML 活动图
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 UML 中，递归使用**调用行为动作** (Call Behavior Action) 调用同一活动：
 

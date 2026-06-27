@@ -332,7 +332,7 @@
 
 ### 实际应用
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -606,7 +606,7 @@
 
 ### 性能优化
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 - [性能基准测试](../../archive/research_notes_2026_06_25/experiments/10_performance_benchmarks.md)
 - [内存分析](../../archive/research_notes_2026_06_25/experiments/10_memory_analysis.md)

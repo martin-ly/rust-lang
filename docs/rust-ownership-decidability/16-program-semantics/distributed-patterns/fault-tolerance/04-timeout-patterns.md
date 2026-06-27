@@ -80,7 +80,7 @@
 
 ### 2.2 形式化定义
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```
 超时形式化语义:

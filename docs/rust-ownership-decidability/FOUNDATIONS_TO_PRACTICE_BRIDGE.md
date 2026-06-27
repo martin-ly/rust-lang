@@ -137,7 +137,7 @@ fn move_example() {
 
 ### 1.4 形式化对应
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```coq
 (* 线性逻辑 → Coq → Rust *)
@@ -266,7 +266,7 @@ Definition borrow_valid (mode: borrow_mode) (active: list borrow_mode) : bool :=
 
 ### 3.1 理论概念
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **区域类型 (Region Types)**:
 

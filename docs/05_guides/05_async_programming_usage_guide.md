@@ -459,7 +459,7 @@ async fn main() {
 
 ### 3. 背压处理
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use tokio::sync::mpsc;
@@ -521,7 +521,7 @@ pub enum ControlFlow<B, C = ()> {
 
 #### 为什么使用 ControlFlow？
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 | 场景 | `Result<T, E>` | `ControlFlow<B, C>` |
 |------|---------------|---------------------|
@@ -1548,7 +1548,7 @@ async fn blocking_operation() -> String {
 
 ### 问题 2: Future 必须 Send
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 // ❌ 非 Send 类型跨线程使用
@@ -1923,7 +1923,7 @@ graph TD
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**

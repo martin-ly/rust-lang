@@ -222,7 +222,7 @@ $$
 
 ### 定理 2.3 (Arc内存序正确性)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 > Arc使用Release-Acquire序确保数据可见性。
 

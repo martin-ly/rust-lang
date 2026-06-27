@@ -213,7 +213,7 @@ graph LR
 
 ### BPMN 表示
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 BPMN 2.0 中，简单合并使用**排他网关** (Exclusive Gateway) 的合并语义表示，图形符号与 XOR-Split 相同，但用作汇聚节点：
 
@@ -240,7 +240,7 @@ graph LR
 
 ### UML 活动图
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 UML 活动图中，简单合并使用**合并节点** (Merge Node) 表示：
 

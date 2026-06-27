@@ -57,7 +57,6 @@
     - [Formal Semantics](#formal-semantics)
     - [Rust 1.94 Features](#rust-194-features)
     - [Related Patterns](#related-patterns)
-<a id="this-document-is-part-of-the-rust-ownership--decidability-documentation-series-for-questions-or-contributions-refer-to-the-project-repository"></a>
   - [*This document is part of the Rust Ownership \& Decidability documentation series. For questions or contributions, refer to the project repository.*](#this-document-is-part-of-the-rust-ownership--decidability-documentation-series-for-questions-or-contributions-refer-to-the-project-repository)
   - [权威来源索引](#权威来源索引)
 
@@ -3874,7 +3873,7 @@ async fn update_db_safe(state: &AppState) {
 
 ### Core Documentation
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 1. **The Rust Async Book** - Official async programming guide
    - <https://rust-lang.github.io/async-book/>

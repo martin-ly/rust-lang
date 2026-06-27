@@ -489,7 +489,7 @@ pub async fn discriminator_select<T>(
 
 ### 带超时处理的鉴别器
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use tokio::time::{timeout, Duration};

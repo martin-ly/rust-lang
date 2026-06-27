@@ -645,7 +645,7 @@ let result = "42"
 
 ### 模式匹配与解构
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 // if let 解构

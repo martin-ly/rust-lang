@@ -146,7 +146,7 @@ fn cell_basics() {
 
 ### 2.2 限制：只能用于 Copy 类型
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 use std::cell::Cell;
@@ -251,7 +251,7 @@ RefCell 的借用规则（运行时强制执行）：
 
 ### 3.3 运行时 Panic 示例
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 use std::cell::RefCell;

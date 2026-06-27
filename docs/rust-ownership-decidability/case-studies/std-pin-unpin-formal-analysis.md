@@ -197,7 +197,7 @@ $$
 
 ### 定义 3.2 (固定不变式)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 如果 `T: !Unpin`，则:
 

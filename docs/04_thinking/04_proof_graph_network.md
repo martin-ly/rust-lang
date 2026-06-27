@@ -454,7 +454,7 @@ graph TD
 
 ### 无数据竞争证明
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```mermaid
 graph TD
@@ -1096,7 +1096,7 @@ graph TD
 
 ### 示例 1: MaybeUninit 安全性证明实现
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 use std::mem::MaybeUninit;

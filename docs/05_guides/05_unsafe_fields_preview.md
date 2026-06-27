@@ -83,7 +83,7 @@ Unsafe Fields 模型:
 
 ### 问题：当前 `unsafe` 的粒度太粗
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -272,7 +272,7 @@ Unsafe Fields 特性的一个重要推动力来自 **Rust for Linux** 项目。
 
 ### Linux 内核的需求
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```text
 内核编程的典型场景:

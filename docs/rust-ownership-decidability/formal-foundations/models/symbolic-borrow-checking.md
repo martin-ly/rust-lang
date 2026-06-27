@@ -133,7 +133,7 @@ y ↦ α + 1  (符号表达式)
 
 ### 2.2 符号化状态
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```
 符号状态 Σ ::= (M, P, B, L)

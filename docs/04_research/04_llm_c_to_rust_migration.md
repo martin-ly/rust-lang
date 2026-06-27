@@ -170,7 +170,7 @@ pub unsafe extern "C" fn create_array(n: libc::c_int) -> *mut libc::c_int {
 
 ### 3.1 论文信息
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -292,7 +292,7 @@ SafeNet 架构:
 
 ### 4.4 局限
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 - 训练数据局限于相对简单的 C 程序
 - 大型项目仍需人工介入

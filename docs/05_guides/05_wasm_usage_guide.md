@@ -224,7 +224,7 @@ pub async fn fetch_data(url: &str) -> Result<JsValue, JsValue> {
 
 ### 1. Cargo.toml
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```toml
 [package]
@@ -363,7 +363,7 @@ strip = true
 
 ### 2. 使用 wasm-opt
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```bash
 # 安装 wasm-opt

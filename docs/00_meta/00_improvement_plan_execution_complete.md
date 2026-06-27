@@ -234,7 +234,7 @@ docs/Rust所有权与可判定性/            (82 files)
 
 ### 短期（本周）
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 - [ ] 运行所有测试验证通过
 - [ ] 更新文档索引

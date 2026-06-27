@@ -721,7 +721,7 @@ pub enum FileType {
 
 ### 3.4 Read/Write Trait详解
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 IO traits提供基本读写：
 
@@ -1603,7 +1603,7 @@ fs.open_file_with_options_and_then(
 
 ### 6.4 多文件数据管理
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use littlefs2::fs::{Filesystem, File, Dir, OpenOptions};

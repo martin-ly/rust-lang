@@ -334,7 +334,7 @@ fn dfs(node: &Rc<Node>) {
 
 ### 3.1 RefCell 的形式化定义
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **定义 3.1** (`RefCell<T>`): `RefCell<T>` 提供运行时借用检查的内部可变性，允许在单线程环境中获取可变或不可变引用。
 

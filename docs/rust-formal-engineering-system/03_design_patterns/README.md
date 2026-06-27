@@ -505,4 +505,4 @@ fn newtype_demo() {
 > **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**

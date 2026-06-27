@@ -715,7 +715,7 @@ impl<K: Eq + std::hash::Hash + Clone, V: Clone> FastConcurrentCache<K, V> {
 
 ### 3.4 延迟初始化模式 (Rust 1.94)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 Rust 1.94 为 `LazyLock` 和 `LazyCell` 引入了新的访问方法，简化了线程安全延迟初始化：
 

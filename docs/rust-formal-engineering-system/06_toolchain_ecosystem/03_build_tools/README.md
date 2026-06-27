@@ -322,7 +322,7 @@ mod sync_impl {
 > **来源: [Wikipedia - Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_Intelligence)**
 > **来源: [tch-rs Documentation](https://docs.rs/tch/latest/tch/)**
 > **来源: [ACM - AI Systems](https://dl.acm.org/)**
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**

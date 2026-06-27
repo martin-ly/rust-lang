@@ -252,7 +252,7 @@ MIR (Mid-level Intermediate Representation) 的验证是编译器验证的关键
 
 ### 2.1 GhostCell 与运行时借用检查
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 GhostCell 是 2021 年发表的一种创新技术，正在被进一步研究和扩展：
 

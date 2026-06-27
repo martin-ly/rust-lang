@@ -44,7 +44,7 @@ Tree Borrows 是 Rust 内存模型的最新研究成果，旨在替代 Stacked B
 
 ### 核心改进
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 

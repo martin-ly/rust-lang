@@ -912,7 +912,7 @@ fn ui(f: &mut Frame, app: &App) {
 
 ### 3.3 进度条（indicatif）
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 [indicatif](https://github.com/console-rs/indicatif) 提供了美观的进度条和旋转指示器。
 
@@ -1995,7 +1995,7 @@ fn format_error(e: &anyhow::Error) -> String {
 
 ### 6.3 错误链
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use anyhow::{Context, Result, Chain};
@@ -3425,7 +3425,7 @@ sudo cp myapp.1 /usr/local/share/man/man1/
 
 ### 10.3 别名支持
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 #[derive(Parser)]

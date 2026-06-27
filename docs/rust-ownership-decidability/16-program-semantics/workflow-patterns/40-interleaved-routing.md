@@ -178,7 +178,7 @@ End: 完成位置
 
 ### 3.1 BPMN 表示
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 BPMN 2.0 中，交错路由使用**复杂网关** (Complex Gateway) 配合互斥语义表示：
 
@@ -221,7 +221,7 @@ End: 完成位置
 
 ### 3.2 UML 活动图
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 UML 中，交错路由使用**结构化活动节点**配合互斥约束：
 

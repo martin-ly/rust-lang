@@ -332,7 +332,7 @@ impl BigEndianU32 {
 
 ### 3.1 Pod Trait 详解
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 Pod trait是Bytemuck的核心安全边界：
 
@@ -872,7 +872,7 @@ let value = u32::read_from(bytes)?;
 
 ### 5.2 与Transmute的对比
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 `std::mem::transmute`是最危险的转换方式：
 
@@ -1585,7 +1585,7 @@ fn detailed_check<T: Pod>(data: &[u8]) -> Result<&T, ConversionError> {
 
 ### 8.4 调试与验证
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 #[cfg(test)]

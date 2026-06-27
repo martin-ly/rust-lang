@@ -220,7 +220,7 @@ fn get_counter() -> u32 {
 
 ### 5. 内存管理技巧
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -656,6 +656,6 @@ fn median_filter(a: u8, b: u8, c: u8) -> u8 {
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ---

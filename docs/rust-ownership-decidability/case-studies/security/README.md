@@ -269,7 +269,7 @@ fn derive_key_argon2id(
 
 ### 3.1 端口扫描器
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use tokio::net::TcpStream;
@@ -927,7 +927,7 @@ pub mod input_validation {
 
 ### 9.2 错误处理
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use thiserror::Error;

@@ -947,7 +947,7 @@ catch_unwind_semantics();
 
 ### 3.1 值的数据流
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 3.1.1 创建-使用-销毁流程
 
@@ -2196,7 +2196,7 @@ fn partial_struct_use() {
 
 #### 6.2.3 数组初始化
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 fn array_initialization() {
@@ -2369,7 +2369,7 @@ fn constant_folding_optimized() {
 
 ### 7.1 线程间数据流
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 7.1.1 Send 数据流边界
 
@@ -3723,7 +3723,7 @@ where
 
 ### 11.1 编译器分析
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 11.1.1 MIR 数据流分析
 

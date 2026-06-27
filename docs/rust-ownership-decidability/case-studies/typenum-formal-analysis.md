@@ -231,7 +231,7 @@ U5 = UInt<UInt<UInt<UTerm, B1>, B0>, B1>  // 101
 
 ### 3.1 无符号整数
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 无符号整数使用二进制表示：
 
@@ -801,7 +801,7 @@ fn add_velocities(a: Quantity<f64, P1, Z0, N1>, b: Quantity<f64, P1, Z0, N1>)
 
 ### 9.1 维度分析
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use typenum::*;

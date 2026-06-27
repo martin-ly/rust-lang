@@ -338,7 +338,7 @@ impl DataWithSlice {
 
 ### 4.1 with_*方法设计原理
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 Ouroboros 使用闭包 API 来安全地访问自引用字段，这是其核心设计模式：
 

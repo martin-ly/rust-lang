@@ -473,7 +473,7 @@ class NeuralNet(torch.nn.Module):
 
 ### Rust AI/ML 生态
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 Rust 的 ML 生态正在快速发展：
 
@@ -730,7 +730,7 @@ def process_data(file_path: str) -> pd.DataFrame:
 
 #### Rust (Polars API)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use polars::prelude::*;

@@ -180,7 +180,7 @@ Process: 处理信号
 
 ### 3.1 BPMN 表示
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 BPMN 2.0 中，持久触发器使用**信号中间事件** (Signal Intermediate Event) 或**消息中间事件**配合持久化存储表示：
 
@@ -227,7 +227,7 @@ Process: 处理信号
 
 ### 3.2 UML 活动图
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 UML 中，持久触发器使用**接受事件动作**配合状态机：
 

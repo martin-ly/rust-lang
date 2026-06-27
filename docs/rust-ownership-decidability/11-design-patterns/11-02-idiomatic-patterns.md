@@ -296,7 +296,7 @@ fn process_user_input(input: &str) -> Result<String, String> {
 
 ### 3.1 ?操作符
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 `?`操作符是Rust错误处理的核心，在Err时提前返回，Ok时解包。
 
@@ -472,7 +472,7 @@ fn read_config(path: &str) -> Result<String, ContextualError> {
 
 ### 4.1 AsRef模式
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 `AsRef<T>`用于泛化地接受借用。
 

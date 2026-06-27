@@ -425,7 +425,7 @@ fn theorem_pi1_pin_safety() {
 
 ### T-SG1: Saga 最终一致性定理
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 // 定理: Saga 最终达到 Completed 或 Compensated 状态

@@ -73,7 +73,7 @@
 
 ### 2.1 合成性 (Compositionality)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 指称语义的核心原则是**合成性**：复合表达式的意义由其组成部分的意义合成。
 

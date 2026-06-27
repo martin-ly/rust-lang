@@ -186,7 +186,7 @@ $$
 
 ### 定理 3.1 (spawn安全性)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 > 如果 $F: \text{Send}$，则spawn操作不会导致数据竞争。
 

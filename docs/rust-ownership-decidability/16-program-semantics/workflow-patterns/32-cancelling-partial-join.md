@@ -176,7 +176,7 @@ Cancel: 取消剩余分支（发送终止信号）
 
 ### 3.1 BPMN 表示
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 BPMN 2.0 中，取消部分合并可以通过**终止结束事件** (Terminate End Event) 和**复杂网关**组合实现：
 
@@ -193,7 +193,7 @@ Cancel: 取消剩余分支（发送终止信号）
 
 ### 3.2 UML 活动图
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 UML 中，取消部分合并使用**中断区域** (Interruptible Region)：
 

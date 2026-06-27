@@ -440,7 +440,7 @@ impl<T> BranchHandle<T> {
 
 ### 基于 Barrier 的实现
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use tokio::sync::Barrier;

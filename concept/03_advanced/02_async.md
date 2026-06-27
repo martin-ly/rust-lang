@@ -2614,10 +2614,10 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 
 **关键限制**: `gen` block 是**同步的**。异步生成器（`Stream`，支持 `.await` + `yield`）仍在 RFC 讨论中。
 
-> **来源**: [RFC 2394 §3: Generator transform](https://rust-lang.github.io/rfcs/2394-async_await.html) · [rust-lang/rust #117078] · [Rust 1.95 Release Notes](https://releases.rs/1.95.0/)
+> **来源**: [RFC 2394 §3: Generator transform](https://rust-lang.github.io/rfcs/2394-async_await.html) · [rust-lang/rust #117078] · [Rust 1.95 Release Notes](https://releases.rs/)
 
 > **[来源: rust-lang/rust #117078]** Gen blocks tracking issue.
-> **来源: [Rust 1.95 Release Notes](https://releases.rs/1.95.0/)** `gen` blocks stabilized with feature gate.
+> **来源: [Rust 1.95 Release Notes](https://releases.rs/)** `gen` blocks stabilized with feature gate.
 
 ---
 

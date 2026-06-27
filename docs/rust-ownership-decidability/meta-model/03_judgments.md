@@ -95,7 +95,7 @@
 
 ### 2.2 所有权安全判断 (Ownership Safety)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```
 Δ; Γ; Θ ⊢ω p ⇒ {ω'p'}

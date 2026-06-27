@@ -238,7 +238,7 @@ fn type_safety() {
 
 ## 权威来源索引
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 > **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)**
 

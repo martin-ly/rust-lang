@@ -216,7 +216,7 @@ $$
 
 ### 4.1 子类型关系
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **子类型规则** (T-Sub):
 
@@ -351,7 +351,7 @@ $$
 
 ### 5.3 安全强制转换
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **定义 5.3** (安全强制转换)：
 

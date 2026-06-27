@@ -1,7 +1,7 @@
 # 权威来源清单与知识来源关系分析
 >
 > **EN**: Sources
-> **Summary**: Sources. Core Rust concept.
+> **Summary**: Curated authoritative sources and citations for Rust concepts.
 > **受众**: [进阶]
 > **内容分级**: [研究者级]
 > **Bloom 层级**: 应用
@@ -165,7 +165,7 @@ graph TD
 | 词条 | URL | 用途 | 引用格式 |
 |:---|:---|:---|:---|
 | Rust (programming language) | <https://en.wikipedia.org/wiki/Rust_(programming_language)> | 语言概览、历史、特性 | `[Wikipedia: Rust]` |
-| Ownership type | <https://en.wikipedia.org/wiki/Ownership_type> | 所有权类型系统 | `[Wikipedia: Ownership type]` |
+| Ownership type | <https://en.wikipedia.org/wiki/Ownership_types> | 所有权类型系统 | `[Wikipedia: Ownership type]` |
 | Linear logic | <https://en.wikipedia.org/wiki/Linear_logic> | 线性逻辑 | `[Wikipedia: Linear logic]` |
 | Affine logic | <https://en.wikipedia.org/wiki/Affine_logic> | 仿射逻辑 | `[Wikipedia: Affine logic]` |
 | Region-based memory management | <https://en.wikipedia.org/wiki/Region-based_memory_management> | 区域类型/生命周期 | `[Wikipedia: Region-based memory management]` |

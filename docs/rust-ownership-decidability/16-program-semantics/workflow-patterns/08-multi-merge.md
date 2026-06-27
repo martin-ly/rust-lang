@@ -55,7 +55,7 @@ $$
 
 ### 触发计数语义
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 多路合并的关键特性是**触发计数（Trigger Count）**：
 

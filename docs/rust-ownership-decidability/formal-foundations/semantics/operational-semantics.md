@@ -211,7 +211,7 @@ State ::= Running | Panic(msg) | Terminated(v)
 
 #### 2.2.2 算术运算
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **加法（左参数先求值）**：
 
@@ -397,7 +397,7 @@ f = λ(x₁: τ₁, ..., xₙ: τₙ). e_body
 
 ### 2.7 块表达式
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 2.7.1 顺序执行
 

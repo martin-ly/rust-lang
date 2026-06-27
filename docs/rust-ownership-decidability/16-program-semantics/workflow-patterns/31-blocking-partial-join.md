@@ -174,7 +174,7 @@ Count=M: 当所有分支完成时进行清理
 
 ### 3.1 BPMN 表示
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 BPMN 2.0 中，阻塞部分合并没有直接的原生支持，但可以通过**复杂网关** (Complex Gateway) 结合事件实现：
 
@@ -190,7 +190,7 @@ Count=M: 当所有分支完成时进行清理
 
 ### 3.2 UML 活动图
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 UML 中，阻塞部分合并使用**汇合节点**配合守卫条件：
 

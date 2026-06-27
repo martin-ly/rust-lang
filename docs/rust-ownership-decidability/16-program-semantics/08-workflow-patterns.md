@@ -426,7 +426,7 @@ impl<Q: Eq + Hash + Clone, E: Eq + Hash + Clone> WorkflowFSM<Q, E> {
 
 #### 2.1.2 活动（Activity）语义
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 活动是工作流的基本执行单元，其语义包括：
 

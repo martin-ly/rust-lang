@@ -10,7 +10,7 @@
 > **形式化框架**: typenum + 零成本抽象 + 内存安全
 >
 > **参考**: generic-array 0.14.x, typenum 1.17+, Rust 1.51+ Const Generics
-> **[来源: generic-array Documentation - docs.rs/generic-array]** · **[来源: typenum Documentation - docs.rs/typenum]** · **来源: [Rust Reference - Const Generics](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Generic Programming](https://en.wikipedia.org/wiki/Generic_Programming)** · **来源: [RFC 2000 - Const Generics](https://github.com/rust-lang/rfcs/pull/2000)** · **来源: [TRPL Ch. 19](https://doc.rust-lang.org/book/ch19-00-advanced-features.html)** · **[来源: ACM - Type-Level Computation]** · **[来源: IEEE - Dependent Types in Practice]**
+> **[来源: generic-array Documentation - docs.rs/generic-array]** · **[来源: typenum Documentation - docs.rs/typenum]** · **来源: [Rust Reference - Const Generics](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Generic Programming](https://en.wikipedia.org/wiki/Generic_programming)** · **来源: [RFC 2000 - Const Generics](https://github.com/rust-lang/rfcs/pull/2000)** · **来源: [TRPL Ch. 19](https://doc.rust-lang.org/book/ch19-00-advanced-features.html)** · **[来源: ACM - Type-Level Computation]** · **[来源: IEEE - Dependent Types in Practice]**
 >
 > **分析版本**: 2.0.0 - 完整技术深度分析
 
@@ -215,7 +215,7 @@ use typenum::consts::U5;  // 等同于上面
 
 ### 2.3 类型级运算
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 typenum 支持丰富的编译时运算：
 
@@ -906,7 +906,7 @@ fn performance_notes() {
 
 ### 8.1 与 SHA-2 集成
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 generic-array 是 RustCrypto 生态的核心依赖：
 
@@ -1374,7 +1374,7 @@ fn matrix_example() {
 
 ### 12.2 固定大小缓冲区
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use generic_array::{GenericArray, ArrayLength};
@@ -1659,7 +1659,7 @@ GenericArray 是 Rust 类型级编程的经典案例，它：
 
 ## 权威来源索引
 
-> **来源: [Wikipedia - Generic Programming](https://en.wikipedia.org/wiki/Generic_Programming)**
+> **来源: [Wikipedia - Generic Programming](https://en.wikipedia.org/wiki/Generic_programming)**
 
 > **来源: [Wikipedia - Type-Level Programming](https://en.wikipedia.org/wiki/Type_Level_Programming)**
 
@@ -1692,7 +1692,7 @@ GenericArray 是 Rust 类型级编程的经典案例，它：
 > **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
-> **来源: [Wikipedia - Generic Programming](https://en.wikipedia.org/wiki/Generic_Programming)**
+> **来源: [Wikipedia - Generic Programming](https://en.wikipedia.org/wiki/Generic_programming)**
 > **来源: [TRPL Ch. 10 - Generics](https://doc.rust-lang.org/book/ch10-00-generics.html)**
 > **来源: [Rust Reference - Generics](https://doc.rust-lang.org/reference/)**
 > **来源: [Wikipedia - Parametric Polymorphism](https://en.wikipedia.org/wiki/Parametric_Polymorphism)**

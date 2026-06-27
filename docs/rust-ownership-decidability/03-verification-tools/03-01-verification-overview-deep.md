@@ -512,7 +512,7 @@ fn double_free_bug() {
 
 #### Counter-Example 2.7: Invalid VTable
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 trait MyTrait {
@@ -638,7 +638,7 @@ mod tests {
 
 ### 3.3 Counter-Examples: Bugs Caught by Loom
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### Counter-Example 3.1: Missed Atomic Ordering
 
@@ -1544,7 +1544,7 @@ fn truncate_fixed(s: &str, max_len: usize) -> &str {
 
 ### 6.3 Coverage-Guided Fuzzing with cargo-fuzz
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 // fuzz/fuzz_targets/my_target.rs
@@ -1900,7 +1900,7 @@ jobs:
 
 ### 9.2 Incremental Verification Strategy
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **Phase 1: Base Testing**
 

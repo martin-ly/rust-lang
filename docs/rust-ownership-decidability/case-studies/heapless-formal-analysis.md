@@ -196,7 +196,7 @@ $$
 
 ### 2.3 栈分配与堆分配的语义差异
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ### 定义 2.3 (内存分配语义)
 

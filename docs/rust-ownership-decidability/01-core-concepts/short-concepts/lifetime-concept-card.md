@@ -213,7 +213,7 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> &'a str
 
 ### 3.2 典型标注模式
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **模式1: 输入输出相同**
 

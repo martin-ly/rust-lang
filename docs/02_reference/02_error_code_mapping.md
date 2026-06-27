@@ -596,7 +596,7 @@ fn main() {
 
 ### E0507 - 从借用内容中移出
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **错误信息**: `cannot move out of borrowed content`
 
@@ -1146,7 +1146,7 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> Either<'a, 'b> {
 
 ### E0381 - 使用未初始化变量
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **错误信息**: `use of possibly-uninitialized variable`
 

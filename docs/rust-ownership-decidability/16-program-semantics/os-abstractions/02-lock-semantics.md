@@ -246,7 +246,7 @@ RwLock<T> 的状态机:
 
 ### 4.3 Rust 代码示例
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 use std::sync::{Arc, RwLock};

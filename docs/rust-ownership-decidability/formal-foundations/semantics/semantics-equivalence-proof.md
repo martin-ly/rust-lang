@@ -297,7 +297,7 @@ Theorem big_step_equiv_small_step :
 
 ### 4.1 大步 ⇒ 小步 (→方向)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 4.1.1 证明策略
 
@@ -309,7 +309,7 @@ Theorem big_step_equiv_small_step :
 
 #### 4.1.2 归纳基础
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **情况 E_Const：**
 

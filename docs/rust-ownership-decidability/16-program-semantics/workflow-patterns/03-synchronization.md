@@ -200,7 +200,7 @@ flowchart LR
 
 ### 3.1 BPMN 表示
 >
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 BPMN 2.0 中，同步模式使用**并行网关** (Parallel Gateway) 的汇聚形式表示：
 
@@ -225,7 +225,7 @@ flowchart LR
 
 ### 3.2 UML 活动图
 >
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 UML 中，同步模式使用**汇合节点** (Join Node) 表示：
 

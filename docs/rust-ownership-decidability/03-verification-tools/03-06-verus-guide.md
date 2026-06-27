@@ -354,7 +354,7 @@ fn divide(numerator: int, denominator: int) -> (result: int)
 
 ### 5.2 ensures、requires、invariant
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 verus! {

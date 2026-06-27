@@ -1391,7 +1391,7 @@ fn foo<T>() where T: Display + Clone { }  // where 子句（复杂约束）
 
 **核心问题**: "Rust 泛型和 Java/C++ 泛型有什么区别？"
 
-**过渡解释**: 语法熟练后，学习者需要理解不同语言泛型实现的本质差异。Rust 的单态化（为每个具体类型生成专用代码）与 Java 的类型擦除（编译为 Object + 转换）、C++ 的模板（文本替换）形成鲜明对比。这一步是认知的关键跃迁——理解"零成本抽象（Zero-Cost Abstraction）"的工程含义：不是魔法，是编译期工作量换运行时零开销。从 Step 3 到 Step 4 的过渡由性能问题驱动：当二进制体积膨胀时，学习者需要理解为什么泛型"免费"的代价在哪里。来源: [Wikipedia: Generic programming / TRPL: Ch10.1](https://en.wikipedia.org/wiki/Generic_programming_/_TRPL%3A_Ch10.1)
+**过渡解释**: 语法熟练后，学习者需要理解不同语言泛型实现的本质差异。Rust 的单态化（为每个具体类型生成专用代码）与 Java 的类型擦除（编译为 Object + 转换）、C++ 的模板（文本替换）形成鲜明对比。这一步是认知的关键跃迁——理解"零成本抽象（Zero-Cost Abstraction）"的工程含义：不是魔法，是编译期工作量换运行时零开销。从 Step 3 到 Step 4 的过渡由性能问题驱动：当二进制体积膨胀时，学习者需要理解为什么泛型"免费"的代价在哪里。来源: [Wikipedia: Generic programming](https://en.wikipedia.org/wiki/Generic_programming) · [TRPL: Ch10.1](https://doc.rust-lang.org/book/ch10-01-syntax.html)
 
 ```text
 三语言对比:

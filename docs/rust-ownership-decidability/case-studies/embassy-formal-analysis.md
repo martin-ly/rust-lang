@@ -378,7 +378,7 @@ impl TimerQueue {
 
 ### 2.5 中断集成
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use embassy_sync::signal::Signal;
@@ -911,7 +911,7 @@ async fn core1_main_task() {
 
 ### 5.2 与裸机轮询的对比
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 | 特性 | Embassy | 裸机轮询 |
 |-----|---------|---------|

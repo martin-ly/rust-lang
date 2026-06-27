@@ -203,7 +203,7 @@ let max_value = knapsack_01(weights, values, capacity);
 
 ### 栈和队列
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -700,7 +700,7 @@ let result = a.checked_add(b)?;
 
 ### 反例 1: 对未排序切片 binary_search
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **错误示例**:
 

@@ -323,7 +323,7 @@ let value = counter.load(Ordering::SeqCst);
 
 ### 内存顺序
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use std::sync::atomic::Ordering;
@@ -758,7 +758,7 @@ thread::spawn(move || {
 
 ### 反例 4: 在持有锁时进行阻塞操作
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **错误示例**:
 

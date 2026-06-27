@@ -653,7 +653,7 @@ fn type_checked_nn() {
 
 ### 3.4 tch-rs (PyTorch绑定)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 tch-rs提供Rust绑定的PyTorch C++ API：
 
@@ -1283,7 +1283,7 @@ fn relu(x: f32) -> f32 {
 
 ### 7.1 Tokenization
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use tokenizers::Tokenizer;
@@ -2384,7 +2384,7 @@ fn load_model(path: &str, num_classes: usize, device: &Device) -> anyhow::Result
 
 ### 10.1 并行计算
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use rayon::prelude::*;

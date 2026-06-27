@@ -468,7 +468,7 @@ let (mut tx, mut rx) = serial.split();
 
 ### 4.3 驱动实现模式
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 基于串口实现Modbus RTU协议的示例:
 
@@ -888,7 +888,7 @@ impl<PIN: Channel<Adc, ID = u8>> TemperatureSensor<PIN> {
 
 ### 8.2 DAC输出
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 数模转换:
 

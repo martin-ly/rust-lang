@@ -305,7 +305,7 @@ let value = map["key"];
 
 ### 删除
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 let mut map = HashMap::new();
@@ -557,7 +557,7 @@ for item in vec.into_iter() {
 
 ### 手动迭代
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 let mut iter = vec![1, 2, 3].into_iter();
@@ -786,7 +786,7 @@ let result: Result<i32, _> = vec.iter()
 
 ### 其他消费者
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 let vec = vec![1, 2, 3, 4, 5];

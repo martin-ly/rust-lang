@@ -458,7 +458,7 @@ type SafeNode struct {
 
 ### 4.1 并发哲学
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -1366,7 +1366,7 @@ fn load_app_anyhow() -> Result<()> {
 
 ### 7.1 静态 vs 动态类型
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 | 特性 | Rust | Go |
 |-----|------|-----|

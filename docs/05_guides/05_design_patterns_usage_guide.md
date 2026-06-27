@@ -2111,7 +2111,7 @@ impl ShapeCollection {
 
 ## 🦀 Rust 特有模式
 
-> **来源: [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)** · **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)** · **来源: [Rust Design Patterns Book](https://rust-unofficial.github.io/patterns/)**
+> **来源: [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)** · **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)** · **来源: [Rust Design Patterns Book](https://rust-unofficial.github.io/patterns/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -2136,7 +2136,7 @@ fn process_order(id: OrderId) { /* ... */ }
 
 ### 2. RAII 模式
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 struct FileGuard {

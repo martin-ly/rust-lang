@@ -3279,7 +3279,7 @@ async fn buffer_management_semantics() {
 
 #### 7.3.3 慢消费者处理
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **慢消费者**的处理策略：
 
@@ -3728,7 +3728,7 @@ async fn prevent_resource_leaks() {
 
 ### 8.3 超时语义
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 8.3.1 timeout 组合子语义
 
@@ -4137,7 +4137,7 @@ async fn some_async_op() {
 
 #### 9.2.2 异步 RwLock 语义
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **异步 RwLock** 的语义：
 
@@ -4784,7 +4784,7 @@ async fn runtime_isolation() {
 
 #### 11.1.1 Send/Sync 验证
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **Send/Sync** 的异步语义：
 
@@ -5278,7 +5278,7 @@ async fn boxed_large_future() {
 
 ### 与其他语言的对比
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 | 特性 | Rust | Go | JavaScript | C# |
 |-----|------|-----|-----------|-----|
@@ -5406,7 +5406,7 @@ $$
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**

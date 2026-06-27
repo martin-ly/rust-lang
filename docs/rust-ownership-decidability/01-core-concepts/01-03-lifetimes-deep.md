@@ -266,7 +266,7 @@ C ::= 'a: 'b | C₁ ∧ C₂ | true | false
 
 #### 1.2.3 约束生成规则
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```
 规则 1.1 (借用约束生成)
@@ -303,7 +303,7 @@ fn example<'a>(x: &'a i32) -> &'a i32 {
 
 ### 1.3 生命周期推断
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 1.3.1 约束收集算法
 
@@ -794,7 +794,7 @@ fn main() {
 
 #### 3.2.1 HRTB 语法与语义
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 // 高阶 trait 约束：适用于所有生命周期
@@ -1029,7 +1029,7 @@ fn trait_object_lifetime_bound<'a>() {
 
 ### 反例 5：自引用生命周期
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 /// 错误：尝试创建自引用结构体
@@ -1654,7 +1654,7 @@ struct BadResource<T> {
 
 ### 5.2 自引用类型
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 5.2.1 Pin 基础
 
@@ -2095,7 +2095,7 @@ async fn async_with_bounds<'a, T: 'a>(value: T) -> T {
 
 #### 7.1.1 Arena 模式概述
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 /// Arena 分配器：批量分配，统一释放
@@ -2833,7 +2833,7 @@ Rust 编译器推导的变型保证类型安全。
 
 ### 定理 8.5：逆变函数参数安全性 (CONTRAVARIANT-FN)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```
 ─────────────────────────────────────────

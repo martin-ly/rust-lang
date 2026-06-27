@@ -178,7 +178,7 @@ Linearizable(Γ) =>
 
 ### 2.1 定理陈述
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```coq
 Theorem preservation :
@@ -590,7 +590,7 @@ Theorem rust_type_system_decidable :
 
 ### 5.3 为什么这个定理重要？
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **实际意义**：
 

@@ -178,7 +178,7 @@ Lost: 信号丢失
 
 ### 3.1 BPMN 表示
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 BPMN 2.0 中，瞬态触发器使用**消息中间抛出事件** (Throwing Message Intermediate Event) 配合**消息中间捕获事件** (Catching Message Intermediate Event) 表示：
 
@@ -219,7 +219,7 @@ Lost: 信号丢失
 
 ### 3.2 UML 活动图
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 UML 中，瞬态触发器使用**发送信号动作** (Send Signal Action) 和**接受事件动作** (Accept Event Action)：
 

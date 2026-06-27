@@ -192,7 +192,7 @@ pub trait Provider {
 
 ### 2.2 内置 Provider 类型
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 Figment 内置了多种常用 Provider：
 
@@ -606,7 +606,7 @@ let figment = Figment::new()
 
 ### 7.1 JSON/YAML/TOML 解析
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 Figment 原生支持三种主流配置格式：
 
@@ -1926,7 +1926,7 @@ PREFIX_KEY__SUBKEY__VALUE → {"key": {"subkey": {"value": ...}}}
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ---
 

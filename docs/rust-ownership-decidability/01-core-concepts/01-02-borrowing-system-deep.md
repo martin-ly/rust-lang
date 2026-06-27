@@ -15,7 +15,7 @@
 
 > **来源: [Rust Reference - Borrow Checker](https://doc.rust-lang.org/reference/)**
 >
-> **来源: [Rust Reference - Borrowing](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon - docs.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [TRPL Ch. 4](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)** · **来源: [Wikipedia - Resource Acquisition Is Initialization](https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)** · **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)** · **[来源: IEEE - Software Reliability Engineering]** · **[来源: ACM Computing Surveys - Memory Management]**
+> **来源: [Rust Reference - Borrowing](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon - docs.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [TRPL Ch. 4](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)** · **来源: [Wikipedia - Resource Acquisition Is Initialization](https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)** · **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)** · **[来源: IEEE - Software Reliability Engineering]** · **[来源: ACM Computing Surveys - Memory Management]**
 
 - [01-02: The Rust Borrowing System - A Formal Deep Dive](#01-02-the-rust-borrowing-system---a-formal-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -215,7 +215,7 @@ Rust's innovation was combining these theoretical foundations with practical usa
 
 ### 1.3 Chapter Roadmap
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 This chapter proceeds as follows:
 
@@ -439,7 +439,7 @@ Ownership O ::= Path → {owned, borrowed(shared, n), borrowed(mut), moved}
 
 #### 2.5.2 Variance Rules
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```text
 Type                Variance in 'a        Variance in T
@@ -702,7 +702,7 @@ A lifetime `'a` is a set of program points:
 
 #### 4.1.2 Program Points
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```text
 p ::=
@@ -727,7 +727,7 @@ lifetime(x) = {p | p is between def(x) and last_use(x)} ∪ {drop(x)}
 
 ### 4.2 Lifetime Inclusion
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 4.2.1 Definition
 
@@ -1348,7 +1348,7 @@ trait Container {
 
 ### 5.9 Counter-Example 9: GAT Lifetime Constraints
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **Problem**: Generic Associated Types with incorrect lifetime constraints.
 
@@ -1747,7 +1747,7 @@ NLL uses dataflow analysis to determine when borrows actually end.
 
 #### 6.2.2 Dataflow Analysis
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 // Borrow set computation
@@ -1953,7 +1953,7 @@ Polonius represents the next generation of Rust's borrow checker, using a fundam
 
 ### 7.1 Origins vs Scopes
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 7.1.1 NLL Approach (Scopes)
 
@@ -2437,7 +2437,7 @@ impl<K, V, S> HashMap<K, V, S> {
 
 ### 9.2 Iterator Types
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 pub struct IterMut<'a, K, V> {
@@ -2721,7 +2721,7 @@ The borrowing system is the cornerstone of Rust's memory safety guarantees, enab
 
 > **来源: [Wikipedia - Alias Analysis](https://en.wikipedia.org/wiki/Alias_Analysis)**
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 > **[来源: IEEE - Software Reliability Engineering]**
 

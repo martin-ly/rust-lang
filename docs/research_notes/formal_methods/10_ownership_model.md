@@ -344,7 +344,7 @@
 
 ### 预期成果
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -703,7 +703,7 @@ move s s'  (* s ↦_0 ⊥ * s' ↦_1 "hello" *)
 
 #### SMACK for Rust
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 - **工具**: SMACK
 - **类型**: LLVM位码验证
@@ -721,7 +721,7 @@ move s s'  (* s ↦_0 ⊥ * s' ↦_1 "hello" *)
 
 ### Aeneas 核心概念
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 1. Characteristic Prophecy Variables (CPV)
 
@@ -1224,7 +1224,7 @@ CMU 15-799 教授的分离逻辑是 Rust 所有权系统的理论基础。
 
 #### Separation Logic 在 Rust 中的体现
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **核心操作符对应**:
 
@@ -1272,7 +1272,7 @@ $$\frac{\{P\} C \{Q\}}{\{P * R\} C \{Q * R\}}$$
 
 ### Ferrocene Language Specification (FLS) 对齐
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **FLS链接**: <https://spec.ferrocene.dev/>
 
@@ -1973,7 +1973,7 @@ $$\text{Program} \in \text{Safe Rust} \rightarrow \text{SpatialSafe} \land \text
 
 #### **引理 6.4 (借用与所有权的代数性质)**
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 借用操作满足以下代数性质：
 
@@ -2415,7 +2415,7 @@ fn safe_concurrent_access() {
 
 ### 概念定义-属性关系-解释论证 层次汇总
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
@@ -2709,7 +2709,7 @@ fn main() {
 
 ### 学术论文（国际权威）
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 1. **RustBelt: Securing the Foundations of the Rust Programming Language** (POPL 2018)
    - 作者: Ralf Jung, Jacques-Henri Jourdan, Robbert Krebbers, Derek Dreyer
@@ -2807,7 +2807,7 @@ fn main() {
 
 #### 示例 7: 所有权转移与函数参数
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 fn take_ownership(s: String) {
@@ -3040,7 +3040,7 @@ Rustonomicon 内存布局。
 
 ### 本文档的Rust 1.94更新要点
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 

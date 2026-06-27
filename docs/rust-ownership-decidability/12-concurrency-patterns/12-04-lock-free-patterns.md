@@ -37,7 +37,6 @@
   - [4. 无锁数据结构](#4-无锁数据结构)
     - [4.1 无锁栈](#41-无锁栈)
     - [4.2 无锁队列](#42-无锁队列)
-<a id="继续"></a>
   - [（继续...）](#继续)
   - [权威来源索引](#权威来源索引)
 
@@ -224,7 +223,7 @@ fn seq_cst_example() {
 
 ### 2.1 原子类型
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use std::sync::atomic::{
@@ -1427,7 +1426,7 @@ impl<T> CountedMSQueue<T> {
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**

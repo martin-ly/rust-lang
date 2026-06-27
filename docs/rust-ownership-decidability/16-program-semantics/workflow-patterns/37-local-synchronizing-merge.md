@@ -169,7 +169,7 @@ n 在局部上下文中确定
 
 ### 3.1 BPMN 表示
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 BPMN 2.0 中，局部同步合并使用**并行网关** (Parallel Gateway)：
 
@@ -186,7 +186,7 @@ n 在局部上下文中确定
 
 ### 3.2 UML 活动图
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 UML 中，局部同步合并使用**分叉/汇合节点**：
 

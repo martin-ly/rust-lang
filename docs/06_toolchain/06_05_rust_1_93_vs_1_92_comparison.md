@@ -125,7 +125,7 @@ Rust 1.93 版本相比 1.92 的改进：
 
 #### 改进说明
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -253,7 +253,7 @@ assert_eq!(squares, [0, 1, 4, 9, 16]);
 
 #### String 和 Vec 原始部分访问
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 // ✅ 1.93 新增：获取 String 的原始部分
@@ -290,7 +290,7 @@ if let Some(value) = deque.pop_back_if(|&x| x < 5) {
 
 ### 整数操作增强
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **Rust 1.93** 稳定了多个未检查的整数操作方法：
 
@@ -619,7 +619,7 @@ fn main() {
 
 ### asm! 中的 cfg 属性（1.93）
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 // Rust 1.93 允许在 asm! 的单个语句上使用 cfg

@@ -49,7 +49,6 @@
     - [2.2 BTreeMap::append 行为变更](#22-btreemapappend-行为变更)
   - [3. 性能影响分析](#3-性能影响分析)
   - [4. 安全强化总结](#4-安全强化总结)
-<a id="对齐版本-rust-1931"></a>
   - [**对齐版本**: Rust 1.93.1](#对齐版本-rust-1931)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -146,7 +145,7 @@ fn resolve_large_dns_record() -> std::io::Result<Vec<std::net::SocketAddr>> {
 
 ### 1.2 全局分配器线程本地存储支持
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 形式化定义
 
@@ -435,7 +434,7 @@ pub unsafe extern "C" fn string_from_raw(parts: *mut StringParts) -> String {
 
 ### 1.6 无检查整数操作
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 定理 UNCHECKED-ARITHMETIC-1
 

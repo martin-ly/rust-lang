@@ -1,7 +1,7 @@
 # Rust 知识体系全景导航（Navigation Hub）
 >
 > **EN**: Navigation
-> **Summary**: Navigation. Core Rust concept.
+> **Summary**: Navigation hub and learning-path index for the concept map.
 > **受众**: [初学者]
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)

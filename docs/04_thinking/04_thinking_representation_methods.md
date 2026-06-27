@@ -451,7 +451,7 @@ mindmap
 
 ### 1.8 异步编程完整思维导图
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -1186,7 +1186,7 @@ flowchart TD
 
 #### 3.9.4 泛型约束转换树
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```mermaid
 flowchart TD

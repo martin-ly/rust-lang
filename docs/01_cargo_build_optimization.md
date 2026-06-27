@@ -63,7 +63,7 @@ chmod +x ./scripts/cargo-build-optimized.sh
 
 ### 2. 使用优化脚本编译
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 

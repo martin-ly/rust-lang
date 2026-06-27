@@ -135,7 +135,7 @@ fn print_value(b: Box<i32>) {
 
 ### 使用场景
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -447,7 +447,7 @@ println!("Result: {}", *counter.lock().unwrap());
 
 ### 使用场景
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 // 多线程共享可变数据
@@ -752,7 +752,7 @@ println!("{:?}", vec.borrow()); // [1, 2, 3, 4, 5]
 
 ### 示例 1: 实现链表
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 use std::rc::Rc;

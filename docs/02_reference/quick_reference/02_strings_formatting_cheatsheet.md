@@ -167,7 +167,7 @@ let s4 = String::from_utf8(bytes.to_vec()).unwrap();
 
 ### 追加内容
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -456,7 +456,7 @@ writeln!(s, "Line 2").unwrap();
 
 ### 对齐和填充
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 > **扩展**: 内存对齐见 [ALIGNMENT_GUIDE](../ALIGNMENT_GUIDE.md)；此处为**格式化**对齐（文本排版）。
 
 ```rust
@@ -535,7 +535,7 @@ println!("{:10.2}", f);        // "      3.14"
 
 ### 字符串格式化
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 let s = "hello";
@@ -973,7 +973,7 @@ let s: String = (0..1000).map(|i| i.to_string()).collect();
 
 ### 反例 2: 按字节索引切片 UTF-8
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **错误示例**:
 

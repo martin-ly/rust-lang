@@ -462,7 +462,7 @@ impl<'a> Location<'a> {
 
 ### 3.2 PanicHandler特性
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 // Panic处理器trait（概念性）
@@ -1053,7 +1053,7 @@ async fn main(_spawner: Spawner) {
 
 ### 6.2 自定义Panic处理器
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 // src/panic_handler.rs
@@ -1733,7 +1733,7 @@ fn panic(info: &PanicInfo) -> ! {
 
 ### 9.1 Panic不返回定理
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **定理 9.1** (Panic Handler Divergence)
 

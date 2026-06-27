@@ -51,7 +51,7 @@ Rust 1.95.0 稳定了 **let chains** 和 **if let guards**，允许在 `if`、`w
 
 本指南覆盖 let chains 的全部语法、语义、适用场景和常见陷阱。
 
-来源: [Rust 1.95 Release Notes](https://releases.rs/1.95.0/) / RFC
+来源: [Rust 1.95 Release Notes](https://releases.rs/) / RFC
 
 ---
 
@@ -183,7 +183,7 @@ if let Some(a) = opt_a || let Some(b) = opt_b {
 
 ### 3.2 match guard vs let chains
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 // 写法 A: match arm guard（推荐在模式匹配场景）

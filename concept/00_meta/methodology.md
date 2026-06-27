@@ -1,7 +1,7 @@
 # 方法论：思维表征与知识结构规范
 >
 > **EN**: Methodology
-> **Summary**: Methodology. Core Rust concept.
+> **Summary**: Methodology for organizing, maintaining, and evolving the Rust knowledge base.
 >
 > **受众**: [研究者]
 >

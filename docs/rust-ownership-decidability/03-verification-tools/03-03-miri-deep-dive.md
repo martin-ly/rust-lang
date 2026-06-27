@@ -340,7 +340,7 @@ fn partial_init() {
 
 ### 5.2 悬垂指针解引用
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **错误示例：**
 

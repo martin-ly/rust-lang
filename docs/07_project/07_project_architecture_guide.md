@@ -636,7 +636,7 @@ C03 (控制流) ──┘                     ├──> C04 (泛型) ──┐
 
 #### Tier 2: 指南文档（Guides）
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 - 快速入门指南
 - 实践指南

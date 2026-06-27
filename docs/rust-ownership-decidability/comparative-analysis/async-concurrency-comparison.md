@@ -230,7 +230,7 @@ $$
 
 ### 3.2 Rust Future对比
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 // Future组合子

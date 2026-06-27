@@ -96,7 +96,7 @@
 ## 📋 目录
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)** ·
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)** ·
 > **来源: [Wikipedia - Type Inference](https://en.wikipedia.org/wiki/Type_Inference)** ·
 > **来源: [ACM - Advanced Type System Features](https://dl.acm.org/)** ·
 > **来源: [IEEE - Type Safety Verification](https://standards.ieee.org/)**
@@ -356,7 +356,7 @@ let my: MyType = 42.into();
 
 ### TryFrom/TryInto（可失败转换）
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use std::convert::TryFrom;
@@ -748,7 +748,7 @@ impl EmailBuilder<Set<String>, Set<String>> {
 
 ### 单态化（Monomorphization）
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 // 泛型函数会为每个具体类型生成一份代码
@@ -1362,7 +1362,7 @@ Rust 1.95+ 重要更新：
 
 ## 权威来源索引
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 > **来源: [Wikipedia - Type Theory](https://en.wikipedia.org/wiki/Type_Theory)**
 > **来源: [Wikipedia - Hindley-Milner Type System](https://en.wikipedia.org/wiki/Hindley_Milner_Type_System)**
 > **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
@@ -1378,7 +1378,7 @@ Rust 1.95+ 重要更新：
 > **来源: [IEEE](https://standards.ieee.org/)**
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 > **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)**
 > **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
 > **来源: [ACM - Type Systems](https://dl.acm.org/)**

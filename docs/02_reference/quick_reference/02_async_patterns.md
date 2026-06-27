@@ -693,7 +693,7 @@ async fn good() {
 
 ### 陷阱 2: 持有 MutexGuard 跨 await
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 // ❌ 错误

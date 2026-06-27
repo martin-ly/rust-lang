@@ -209,7 +209,7 @@ ELet : mutability -> var -> ty -> expr -> expr -> expr
 
 ### 2.2 类型语法的选择
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **设计**：
 

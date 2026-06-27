@@ -112,7 +112,7 @@
 
 ### 2.1 语法映射
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 | 线性逻辑 | 分离逻辑 | 含义 | Rust概念 |
 |---------|---------|------|---------|

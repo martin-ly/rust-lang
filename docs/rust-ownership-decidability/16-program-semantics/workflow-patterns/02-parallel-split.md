@@ -195,7 +195,7 @@ flowchart LR
 
 ### 3.1 BPMN 表示
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 BPMN 2.0 中，并行分裂使用**并行网关** (Parallel Gateway) 表示：
 
@@ -220,7 +220,7 @@ flowchart LR
 
 ### 3.2 UML 活动图
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 UML 中，并行分裂使用**分叉节点** (Fork Node) 表示：
 

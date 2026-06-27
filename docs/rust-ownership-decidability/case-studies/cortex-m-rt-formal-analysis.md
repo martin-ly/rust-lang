@@ -309,7 +309,7 @@ $$
 
 ### 3.1 Reset Handler的形式化定义
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 定义 3.1 (Reset Handler)
 
@@ -388,7 +388,7 @@ $$
 
 #### 定义 3.2 (初始化序列)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 初始化序列 $\mathcal{I}$ 是一系列状态转换函数的组合：
 
@@ -970,7 +970,7 @@ $$
 
 #### 定理 5.3 (NVIC优先级排序)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 > NVIC保证：
 >

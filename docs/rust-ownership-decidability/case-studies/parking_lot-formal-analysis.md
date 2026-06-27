@@ -317,7 +317,7 @@ fn read(&self) -> RwLockReadGuard<T> {
 
 ### 3.2 写者优先策略
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ### 定义 3.2 (公平性策略)
 

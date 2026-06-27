@@ -144,7 +144,7 @@
 
 ### 路径 B：Rust 构建 AI（先 Rust 后 AI）
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -470,7 +470,7 @@ fn batch_inference(model: &dyn Model, inputs: &[Tensor]) -> Vec<Tensor> {
 
 ### 6.3 错误处理
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use thiserror::Error;

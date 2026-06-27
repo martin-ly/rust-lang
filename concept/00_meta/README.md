@@ -1,7 +1,7 @@
 # Concept 元层
 >
 > **EN**: Readme
-> **Summary**: Readme. Core Rust concept.
+> **Summary**: Overview and entry point for the concept documentation structure.
 > **受众**: [初学者]
 > 本目录包含学习工具、质量基础设施和元数据。
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链

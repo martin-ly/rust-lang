@@ -83,7 +83,7 @@ Rust 项目中「对齐」一词在不同语境下有不同含义：
 
 ### 2.0 为何要对齐（Why Alignment Matters）
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -191,7 +191,7 @@ struct Good { b: u64; a: u8; c: u8; } // 16 bytes
 
 ### 2.5 对齐计算（Rust 1.92+）
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 

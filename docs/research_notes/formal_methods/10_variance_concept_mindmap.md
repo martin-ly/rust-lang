@@ -177,7 +177,7 @@ let f: fn(&'a str) = handler;  // 可能错误，具体取决于'a
 
 ### 1.3 不变 (Invariant) =
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -432,7 +432,7 @@ let local = String::from("local");
 
 #### 代码示例更新
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 本文档中的所有Rust代码示例均已：
 

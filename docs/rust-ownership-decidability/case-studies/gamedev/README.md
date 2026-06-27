@@ -2249,7 +2249,7 @@ struct LevelLoading {
 
 ### 5.2 热重载
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use bevy::prelude::*;
@@ -3997,7 +3997,7 @@ fn rotate_collectibles(
 
 ### 9.2 玩家控制
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 // player.rs

@@ -159,7 +159,7 @@ extern "system" {
 
 ### const 含 mutable ref 到 static
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -394,7 +394,7 @@ cargo clean --workspace
 
 ### 内存模型形式化
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 - [Rust Memory Model](https://doc.rust-lang.org/reference/memory-model.html)
 - [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) - Rust 别名模型

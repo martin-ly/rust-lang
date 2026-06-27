@@ -514,7 +514,7 @@ impl ProcessMonitor {
 
 ### 形式化定理
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **定理 PROC-T1（进程资源安全）**: 若进程句柄正确实现 Drop trait，则进程资源不会泄漏。
 

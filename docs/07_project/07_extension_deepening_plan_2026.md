@@ -159,7 +159,7 @@
 
 ### 2.1 需要创建的证明树
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 基于现有证明内容，创建 Mermaid 可视化图表：
 

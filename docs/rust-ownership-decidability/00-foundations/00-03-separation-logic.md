@@ -113,7 +113,7 @@ P * Q  表示: P和Q分别在不同的、不相交的内存区域成立
 
 ### 2.1 基本断言
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 | 断言 | 符号 | 含义 | Rust对应 | 示例 |
 |------|------|------|---------|------|
@@ -435,7 +435,7 @@ proof fn increment(counter: &mut Counter)
 
 ### 5.3 Iris中的所有权谓词
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```text
 RustBelt在Iris中的类型解释:

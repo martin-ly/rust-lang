@@ -11,7 +11,7 @@
 
 ## 目录
 >
-> **来源: [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)** · **来源: [Wikipedia - Trait-based Programming](https://en.wikipedia.org/wiki/Trait_based_Programming)** · **来源: [RFC 255 - Trait Aliases](https://github.com/rust-lang/rfcs/pull/255)** · **来源: [TRPL Ch. 10](https://doc.rust-lang.org/book/ch10-00-generics.html)** · **来源: [Wikipedia - Type Class](https://en.wikipedia.org/wiki/Type_Class)** · **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** · **来源: [Wikipedia - Trait (computer programming)](https://en.wikipedia.org/wiki/Trait_(computer_programming))** · **来源: [Wikipedia - Polymorphism](https://en.wikipedia.org/wiki/Polymorphism)** · **[来源: ACM - Trait-Based Language Design]** · **[来源: IEEE - Interface Specification Standards]**
+> **来源: [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)** · **来源: [Wikipedia - Trait-based Programming](https://en.wikipedia.org/wiki/Trait-based_programming)** · **来源: [RFC 255 - Trait Aliases](https://github.com/rust-lang/rfcs/pull/255)** · **来源: [TRPL Ch. 10](https://doc.rust-lang.org/book/ch10-00-generics.html)** · **来源: [Wikipedia - Type Class](https://en.wikipedia.org/wiki/Type_Class)** · **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** · **来源: [Wikipedia - Trait (computer programming)](https://en.wikipedia.org/wiki/Trait_(computer_programming))** · **来源: [Wikipedia - Polymorphism](https://en.wikipedia.org/wiki/Polymorphism)** · **[来源: ACM - Trait-Based Language Design]** · **[来源: IEEE - Interface Specification Standards]**
 
 - [Trait 系统详解](#trait-系统详解)
   - [目录](#目录)
@@ -456,7 +456,7 @@ trait ObjectSafe {
 
 ### 4.4 动态分发的使用场景
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 // 场景 1: 异构集合

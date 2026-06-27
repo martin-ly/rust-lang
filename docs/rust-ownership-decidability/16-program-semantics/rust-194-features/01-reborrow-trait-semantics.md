@@ -142,7 +142,7 @@ $$
 
 ### 3.2 小步操作语义 (Small-Step Semantics)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **Reborrow 规约规则** (S-Reborrow):
 

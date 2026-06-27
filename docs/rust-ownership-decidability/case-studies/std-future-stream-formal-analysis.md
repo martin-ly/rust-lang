@@ -117,7 +117,7 @@ $$
 
 ### 2.2 Poll语义
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ### 定理 2.1 (Poll契约)
 

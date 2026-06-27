@@ -2898,7 +2898,7 @@ fn heap_allocation_semantics() {
 
 #### 7.1.3 内存回收语义（RAII/Drop）
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 RAII（资源获取即初始化）是 Rust 的核心内存管理策略：
 
@@ -3731,7 +3731,7 @@ fn non_lexical_lifetimes() {
 
 #### 9.1.2 模式匹配穷尽性语义
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 Rust 编译器检查模式匹配是否穷尽：
 

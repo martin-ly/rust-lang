@@ -302,7 +302,7 @@ let stats = data.iter().fold(
 
 ### 2. 避免不必要的克隆
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 // ❌ 不好：不必要的克隆

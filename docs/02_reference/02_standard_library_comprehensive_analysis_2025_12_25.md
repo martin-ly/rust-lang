@@ -219,7 +219,7 @@ let slice = &vec[..];  // 不可变借用
 
 #### 1.2.3 显式错误处理 (Explicit Error Handling)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -519,7 +519,7 @@ target.append(&mut source);
 
 #### 1.5.3 vec::IntoIter RefUnwindSafe 放宽
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **变更**：`vec::IntoIter<T>` 不再要求 `T: RefUnwindSafe` 即可实现 `UnwindSafe`。
 
@@ -878,7 +878,7 @@ println!("Thread returned: {}", result);
 
 ### 2.5 进程类型 (std::process)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 2.5.1 Command
 
@@ -1306,7 +1306,7 @@ println!("{}", String::from_utf8(output.stdout)?);
 
 ### 5.3 标准库使用最佳实践
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 实践 1: 优先使用标准库
 

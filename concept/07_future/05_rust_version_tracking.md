@@ -176,7 +176,7 @@ graph TD
 - 穷尽性检查（Exhaustiveness Checking）的判定算法需显式排除 guard arm
 - 与 `let chains`（1.88）形成对偶：`let chains` 用于 `if` 条件的逻辑合取，`if let` guards 用于 match arm 的条件细化
 
-> **来源: [Rust 1.95 Release Notes](https://releases.rs/1.95.0/)** `if let` guards stabilize the ability to refine match arms with nested pattern bindings.
+> **来源: [Rust 1.95 Release Notes](https://releases.rs/)** `if let` guards stabilize the ability to refine match arms with nested pattern bindings.
 
 ---
 
@@ -407,7 +407,7 @@ unsafe extern "C" {
 - 原始指针（Raw Pointer）（`*const T`）到引用（`&T`）的转换，此前需 `unsafe { &*ptr }`，现在有更清晰的 API
 - 对应形式化：内存模型中的"有效性（validity）"假设——调用者必须保证指针满足引用的所有不变量（对齐、非空、生命周期合法）
 
-> **来源: [Rust 1.95 Release Notes](https://releases.rs/1.95.0/)** Pointer `as_ref_unchecked` / `as_mut_unchecked` stabilized.
+> **来源: [Rust 1.95 Release Notes](https://releases.rs/)** Pointer `as_ref_unchecked` / `as_mut_unchecked` stabilized.
 
 ---
 
@@ -441,7 +441,7 @@ unsafe extern "C" {
 
 **形式化意义**: **性能语义的可表达性扩展**。向编译器传达路径冷热信息，帮助优化代码布局。虽然不改变语义，但扩展了程序员对编译器优化的**显式控制能力**。
 
-> **来源: [Rust 1.95 Release Notes](https://releases.rs/1.95.0/)** `cold_path` hint stabilized.
+> **来源: [Rust 1.95 Release Notes](https://releases.rs/)** `cold_path` hint stabilized.
 
 ---
 

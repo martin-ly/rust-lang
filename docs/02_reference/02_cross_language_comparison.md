@@ -630,7 +630,7 @@ $ python -m pytest
 
 #### Haskell（二级来源，Trait / 类型系统对标）
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 - [GHC User Guide: LinearTypes](https://downloads.haskell.org/ghc/latest/docs/users_guide/exts/linear_types.html) —— GHC 9.0+ 线性类型扩展
 - [Typeclassopedia](https://wiki.haskell.org/Typeclassopedia) —— Type Classes 与 Rust Trait 的理论同源

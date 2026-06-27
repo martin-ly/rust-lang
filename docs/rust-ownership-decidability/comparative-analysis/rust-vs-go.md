@@ -407,7 +407,7 @@ func init() {
 
 ### Rust 运行时
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 Rust 标准库最小化运行时：
 
@@ -503,7 +503,7 @@ Rust (Axum)     : 135,000 req/sec, 2.5ms p99 延迟
 
 ### Go 垃圾回收
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```go
 // Go 自动管理内存

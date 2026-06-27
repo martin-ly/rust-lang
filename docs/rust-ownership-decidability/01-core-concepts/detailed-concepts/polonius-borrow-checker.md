@@ -88,7 +88,7 @@
 
 ### 1.3 与当前借用检查器的区别
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```
 借用检查器演进:

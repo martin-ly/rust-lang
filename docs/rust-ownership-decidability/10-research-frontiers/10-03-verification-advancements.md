@@ -219,7 +219,7 @@ MIRI 2024 年的诊断改进：
 
 ### 2.1 Prusti 架构演进
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 Prusti 是基于 Viper 验证框架的 Rust 验证工具，使用分离逻辑进行验证。
 
@@ -808,7 +808,7 @@ impl<T> Vec<T> {
 
 ### 5.3 标准库验证进展
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 Creusot 的标准库验证覆盖情况（2024）：
 

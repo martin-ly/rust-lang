@@ -269,7 +269,7 @@
 
 ### 4.2 更新操作流程
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```text
 步骤 1: 对比官方 2026 goals 页面，提取新增、变更、标记为完成的目标

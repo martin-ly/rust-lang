@@ -565,7 +565,7 @@ mindmap
 
 #### 文本思维导图
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```text
 Rust 核心概念

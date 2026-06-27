@@ -249,7 +249,7 @@ let r3 = &mut data;  ───────────────────�
 
 ### 2.4 可变借用的"降级"
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 可变借用可以"降级"为共享借用：
 

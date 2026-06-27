@@ -119,7 +119,7 @@ fn absurd() -> ! {
 
 ### 3.1 参数多态 (System F)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **定义 3.1** (全称类型)
 

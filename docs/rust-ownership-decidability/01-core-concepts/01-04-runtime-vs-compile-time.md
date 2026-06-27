@@ -204,7 +204,7 @@ fn lexical_scope() {
 
 ### 3.3 借用检查
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 // 编译时确定借用合法性

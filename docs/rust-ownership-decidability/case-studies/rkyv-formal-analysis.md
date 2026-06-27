@@ -157,7 +157,7 @@ pub trait Deserialize<D: Fallible>: Archive {
 
 ### 2.1 绝对指针 vs 相对指针
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **绝对指针的问题**:
 
@@ -574,7 +574,7 @@ struct MyStruct {
 
 ### 4.3 边界验证详解
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use rkyv::Archived;
@@ -985,7 +985,7 @@ mod v2 {
 
 ### 定理 7.1 (跨平台定理)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 > **定理**: 在以下条件下，rkyv 存档可以在不同平台间安全传输：
 >

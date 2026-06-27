@@ -192,7 +192,7 @@
 
 > **[Wikipedia: Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism)** Ad hoc polymorphism is a kind of polymorphism in which polymorphic functions can be applied to arguments of different types, because a polymorphic function can denote a number of distinct and potentially heterogeneous implementations depending on the type of the argument(s). Rust traits provide this through explicit implementation.
 
-> **来源: [Wikipedia: Type class; Wikipedia: Trait (computer programming); Wikipedia: Ad hoc polymorphism](https://en.wikipedia.org/wiki/Type_class%3B_Wikipedia%3A_Trait_(computer_programming)%3B_Wikipedia%3A_Ad_hoc_polymorphism)** Rust traits 直接受 Haskell type classes 启发，通过显式 `impl` 实现 ad hoc 多态，区别于 C++ 模板重载和 Java 接口继承。
+> **来源: [Wikipedia: Type class](https://en.wikipedia.org/wiki/Type_class) · [Wikipedia: Trait (computer programming)](https://en.wikipedia.org/wiki/Trait_(computer_programming)) · [Wikipedia: Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism)** Rust traits 直接受 Haskell type classes 启发，通过显式 `impl` 实现 ad hoc 多态，区别于 C++ 模板重载和 Java 接口继承。
 
 ### 1.2 TRPL 与 RFC 官方定义
 

@@ -369,7 +369,7 @@ Sequent 是线性逻辑中表达**可推导性**的基本形式：
 
 #### 2.1.2 直觉主义 vs 经典线性逻辑
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **经典线性逻辑 (CLL)**:
 
@@ -832,7 +832,7 @@ let with_unit: (String, ()) = (String::from("hello"), ());
 
 #### 3.1.5 Bottom (⊥) - 乘法对偶单位元
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **定义**: ⊥ 是 ⅋ 的单位元。
 
@@ -1011,7 +1011,7 @@ fn absurd(x: Void) -> A {
 
 ### 3.3 指数连接词 (!, ?)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 指数连接词允许受控的"经典"行为——复制和丢弃资源。
 
@@ -1261,7 +1261,7 @@ t ::= x                    (变量)
 
 #### 4.2.2 类型规则
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **变量规则**:
 
@@ -1610,7 +1610,7 @@ Rust 是仿射的：
 
 ### 6.5 !A 未实现
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **反例 5：Copy trait 缺失**
 
@@ -2056,7 +2056,7 @@ EX(π) = Σ (路径)
 
 ### 8.1 微分算子
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 微分线性逻辑（Differential Linear Logic, DiLL）由 Ehrhard 和 Regnier 引入，为线性逻辑添加了**微分算子**。
 
@@ -2569,7 +2569,7 @@ Rust 生命周期 vs LTL:
 
 ### 11.3 多焦点逻辑
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 11.3.1 聚焦的扩展
 
@@ -2884,7 +2884,7 @@ list reverse(list x);
 
 ### B. 定理索引
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 | 定理 | 章节 | 内容概要 |
 |------|------|----------|

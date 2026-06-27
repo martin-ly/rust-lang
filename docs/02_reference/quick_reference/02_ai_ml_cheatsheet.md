@@ -352,7 +352,7 @@ fn llm_inference() -> anyhow::Result<()> {
 
 ### 框架选型表
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 | 库 | 用途 | 适用场景 |
 | :--- | :--- | :--- |
@@ -719,7 +719,7 @@ pub fn batch_classify(images: Vec<Vec<f32>>) -> Vec<Vec<f32>> {
 
 ### ControlFlow 在训练管道中的应用
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use std::ops::ControlFlow;

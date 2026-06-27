@@ -114,7 +114,7 @@ flowchart TD
 
 ### 3.1 Rust 的所有权系统：编译期消除运行时错误
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -188,7 +188,7 @@ free(p);
 
 ### 4.2 C++ 的 `std::unique_ptr`
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 C++11 引入的 `std::unique_ptr` 是一个中间案例：
 

@@ -441,8 +441,8 @@ graph TD
 | **[Aeneas: ICFP 2022]** | MIR → 纯函数式翻译 | 验证替代路径 |
 | **[RefinedRust: PLDI 2024]** | 自动化分离逻辑验证 | 工业验证 |
 | **[Reed 2009]** | 混合逻辑框架、线性资源模型 | L1↔L4 资源视角理论基础 |
-| **[Wikipedia: Separation Logic](https://en.wikipedia.org/wiki/Separation_Logic)** | 局部推理、分离合取 | 分离逻辑断言 |
-| **[Wikipedia: Affine Logic](https://en.wikipedia.org/wiki/Affine_Logic)** | 弱化而非收缩 | Rust 仿射类型语义 |
+| **[Wikipedia: Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)** | 局部推理、分离合取 | 分离逻辑断言 |
+| **[Wikipedia: Affine Logic](https://en.wikipedia.org/wiki/Affine_logic)** | 弱化而非收缩 | Rust 仿射类型语义 |
 
 ### 6.4 Pin 与自引用结构的形式化语义
 

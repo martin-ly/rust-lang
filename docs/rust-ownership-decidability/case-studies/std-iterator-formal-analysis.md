@@ -239,7 +239,7 @@ impl<I: Iterator, F: FnMut(I::Item) -> B> Iterator for Map<I, F> {
 
 ### 定理 3.1 (Map的Functor定律)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 > Iterator::map 满足Functor定律。
 

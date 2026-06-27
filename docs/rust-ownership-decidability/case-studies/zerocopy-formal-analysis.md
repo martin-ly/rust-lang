@@ -504,7 +504,7 @@ unsafe impl AsBytes for Point {
 
 ### 3.5 类型约束的组合
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 复杂的trait约束组合：
 
@@ -1432,7 +1432,7 @@ fn load_device_config(flash_data: &[u8]) -> Result<FullConfig, ConfigError> {
 
 ### 6.3 内存映射文件访问
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 use zerocopy::{FromBytes, AsBytes};
@@ -2060,7 +2060,7 @@ $$
 
 ### 9.2 AsBytes安全定理
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **定理 9.2** (AsBytes安全性)
 

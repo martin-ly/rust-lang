@@ -7,7 +7,7 @@
 
 ## 目录
 >
-> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)** · **来源: [Wikipedia - Type Theory](https://en.wikipedia.org/wiki/Type_Theory)** · **[来源: ACM - Type System Formalization]** · **[来源: IEEE - Type Safety Proofs]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)** · **来源: [Wikipedia - Type Theory](https://en.wikipedia.org/wiki/Type_Theory)** · **[来源: ACM - Type System Formalization]** · **[来源: IEEE - Type Safety Proofs]**
 
 - [Rust 类型系统形式化理论](#rust-类型系统形式化理论)
   - [目录](#目录)
@@ -218,7 +218,7 @@ Let 绑定规则引入了多态类型，通过泛化操作 Gen 将类型变量�
 
 ### 2.3 泛化与实例化
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 2.3.1 自由类型变量
 
@@ -245,7 +245,7 @@ Gen(Γ, τ) = ∀α₁...∀αₙ.τ
 
 #### 2.3.3 实例化关系 (Instantiation)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```
 τ[α₁ ↦ τ₁, ..., αₙ ↦ τₙ] ≺ ∀α₁...∀αₙ.τ

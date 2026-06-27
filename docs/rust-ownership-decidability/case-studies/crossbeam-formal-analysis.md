@@ -186,7 +186,7 @@ where F: FnOnce() + Send
 
 ### 2.3 安全延迟证明
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ### 定理 2.1 (EBR安全性)
 

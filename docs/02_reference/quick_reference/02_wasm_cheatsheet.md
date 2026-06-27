@@ -121,7 +121,7 @@ impl Person {
 
 ### 异步函数
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -296,7 +296,7 @@ for i in 0..10000 {
 
 ### 项目内部文档
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 - [完整文档](../../../crates/c12_wasm/README.md)
 - [WASM 使用指南](../../05_guides/05_wasm_usage_guide.md)

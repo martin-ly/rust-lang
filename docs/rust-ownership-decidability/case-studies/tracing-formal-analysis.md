@@ -120,7 +120,7 @@ $$
 
 ### 定理 2.1 (RAII进入退出)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 > Span的 `enter()` 返回的guard在drop时自动退出span。
 

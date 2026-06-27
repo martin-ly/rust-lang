@@ -119,7 +119,7 @@ fn valid_reference(s: &String) -> &str {
 
 ### 2.1 区域的形式化定义
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **区域作为控制流图的子集**:
 

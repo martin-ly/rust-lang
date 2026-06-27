@@ -119,7 +119,7 @@
 
 ### 2.1 结构归纳法
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **适用场景**: 对表达式/类型/值等归纳定义的结构进行归纳
 

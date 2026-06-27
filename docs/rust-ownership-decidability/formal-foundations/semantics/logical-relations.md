@@ -238,7 +238,7 @@ Context C ::= □ | C e | v C | λx.C | ...
 
 #### 2.3.3 上下文等价与逻辑等价
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **定理 2.3**：
 逻辑等价与上下文等价一致：
@@ -288,7 +288,7 @@ Context C ::= □ | C e | v C | λx.C | ...
 
 ### 3.3 单调性
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 3.3.1 关系单调性
 

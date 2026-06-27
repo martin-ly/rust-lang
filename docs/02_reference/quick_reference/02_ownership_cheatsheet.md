@@ -351,7 +351,7 @@ fn no_dangle2<'a>(input: &'a String) -> &'a String {
 
 ### 错误 3: 循环中的借用
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 // ❌ 错误
@@ -438,7 +438,7 @@ let m = Mutex::new(5);
 
 ### 基本语法
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {

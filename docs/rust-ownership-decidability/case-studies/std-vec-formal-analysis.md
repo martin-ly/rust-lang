@@ -87,7 +87,7 @@
 
 ### 2.1 内存表示
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ### 定义 2.1 (Vec内存布局)
 

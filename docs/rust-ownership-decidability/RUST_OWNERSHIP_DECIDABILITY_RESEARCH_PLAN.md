@@ -198,7 +198,7 @@ G6: 机械化证明
 
 #### 3.1.1 抽象语法 (Abstract Syntax)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```coq
 (* 示例: Coq 归纳定义 *)

@@ -183,7 +183,7 @@ impl Handler<SendMessage> for UserActor {
 
 ### 2.2 房间Actor (群聊)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 pub struct RoomActor {

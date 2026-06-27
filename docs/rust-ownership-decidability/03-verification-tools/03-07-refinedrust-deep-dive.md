@@ -130,7 +130,7 @@ fn box_add_42(r: Box<i32>) -> Box<i32> {
 
 ### 2.2 分离逻辑与 Iris
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 RefinedRust 在 **Iris 分离逻辑框架**中构建语义模型:
 
@@ -515,7 +515,7 @@ unsafe fn get_unchecked_mut<'a, T>(
 
 ### 7.2 与 RustBelt 的关系
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **RustBelt** (Jung et al., POPL 2018):
 

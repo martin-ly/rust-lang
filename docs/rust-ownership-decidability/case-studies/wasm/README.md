@@ -208,7 +208,7 @@ cd my-wasm-project
 
 ### 3.2 Cargo.toml配置
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```toml
 [package]
@@ -473,7 +473,7 @@ wee_alloc = "0.4.5"
 
 ### 6.2 减少WASM体积
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```bash
 # 使用wasm-opt优化

@@ -109,7 +109,7 @@ assert_matches!(
 
 ### 1. `Result` 断言
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 #[test]

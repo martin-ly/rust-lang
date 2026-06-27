@@ -675,7 +675,7 @@ Rust HRTB:       ∀'a.τ  where 'a ∈ Lifetime (Region)
 
 ## 十之一、补充：Dependent Type、Const Generics 与 HKT workaround
 
-> **[Wikipedia: Dependent type](https://en.wikipedia.org/wiki/Dependent_type)** · **[Wikipedia: Higher-kinded type](https://en.wikipedia.org/wiki/Higher_kinded_type)** · **[RFC 2000: Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html)** · **[Rust Reference: Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics)** 本节补充 Rust 类型系统与更高级类型论概念的关系，以及 Rust 在表达力边界上的工程妥协。✅ [来源: [POPL 2018 — RustBelt](https://dl.acm.org/doi/10.1145/3158154)]
+> **[Wikipedia: Dependent type](https://en.wikipedia.org/wiki/Dependent_type)** · **[Wikipedia: Higher-kinded type](https://en.wikipedia.org/wiki/Higher-kinded_type)** · **[RFC 2000: Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html)** · **[Rust Reference: Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics)** 本节补充 Rust 类型系统与更高级类型论概念的关系，以及 Rust 在表达力边界上的工程妥协。✅ [来源: [POPL 2018 — RustBelt](https://dl.acm.org/doi/10.1145/3158154)]
 
 ### 10.1 Dependent Type 与 Const Generics 的关系
 
@@ -826,7 +826,7 @@ impl<T> Result<T, E> { fn map<U>(self, f: impl FnOnce(T) -> U) -> Result<U, E> {
 ```
 
 > **形式化视角**: HKT 需要 **System F_ω**（允许类型抽象的类型构造器）。Rust 的类型系统接近 System F_ω + 区域类型，但出于**单态化实现的复杂性**和**类型推断的实用性**，HKT 尚未加入语言。GATs 提供了约 80% 的 HKT 表达能力，剩余 20%（高阶类型抽象）需通过宏（Macro）或显式实例化弥补。
-> **来源**: [Wikipedia: Higher-kinded type](https://en.wikipedia.org/wiki/Higher_kinded_type) · [TAPL Ch.29] · [Rust Internals: HKT Discussion] · [RFC 1598: GATs](https://github.com/rust-lang/rfcs/pull/1598)
+> **来源**: [Wikipedia: Higher-kinded type](https://en.wikipedia.org/wiki/Higher-kinded_type) · [TAPL Ch.29] · [Rust Internals: HKT Discussion] · [RFC 1598: GATs](https://github.com/rust-lang/rfcs/pull/1598)
 
 ### 10.3 线性逻辑与所有权类型的 Curry-Howard 对应
 

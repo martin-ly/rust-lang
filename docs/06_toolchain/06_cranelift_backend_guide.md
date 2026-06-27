@@ -297,7 +297,7 @@ Cranelift 后端是 Rust 2026 年 **"开发者体验优化"** 项目目标的关
 
 ### ✅ 推荐使用 Cranelift
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 | 场景 | 原因 |
 |------|------|

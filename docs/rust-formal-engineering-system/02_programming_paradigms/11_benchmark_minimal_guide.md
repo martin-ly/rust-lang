@@ -365,7 +365,7 @@ fn bench2(c: &mut Criterion) {
 
 ### 使用 perf 分析
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```bash
 # 编译并运行基准测试

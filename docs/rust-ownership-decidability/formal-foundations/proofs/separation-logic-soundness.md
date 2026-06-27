@@ -396,7 +396,7 @@ tree(x) ::= x = null ∧ emp
 
 #### 5.2.3 内存分配 (Alloc)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **规则**:
 

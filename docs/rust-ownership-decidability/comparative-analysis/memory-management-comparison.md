@@ -668,7 +668,7 @@ fn refcell_example() {
 
 ### 原理
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 基于作用域（区域）管理内存，离开区域自动释放。
 

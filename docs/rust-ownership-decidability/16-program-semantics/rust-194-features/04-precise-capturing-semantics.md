@@ -176,7 +176,7 @@ $$
 
 ### 3.2 生命周期包含关系
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **捕获集有效性** (CS-Valid):
 
@@ -367,7 +367,7 @@ $$
 
 ### 6.1 生命周期安全定理
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **定理 6.1** (精确捕获生命周期安全)：
 

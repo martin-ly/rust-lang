@@ -396,7 +396,7 @@ use std::collections::HashMap;
 
 ### 单文件模块
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```text
 src/

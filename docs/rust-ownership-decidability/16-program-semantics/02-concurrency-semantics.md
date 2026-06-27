@@ -102,7 +102,6 @@
       - [7.3.3 资源清理语义](#733-资源清理语义)
   - [8. 并发数据流语义](#8-并发数据流语义)
     - [8.1 共享状态数据流](#81-共享状态数据流)
-<a id="811-arcmutex-语义"></a>
       - [8.1.1 Arc\<Mutex\> 语义](#811-arcmutex-语义)
       - [8.1.2 读写分离语义](#812-读写分离语义)
       - [8.1.3 复制-on-写入语义](#813-复制-on-写入语义)
@@ -910,7 +909,7 @@ fn guard_semantics() {
 
 ### 3.2 读写锁语义 (RwLock)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 3.2.1 读锁共享语义
 
@@ -1177,7 +1176,7 @@ impl<T> BlockingQueue<T> {
 
 #### 3.4.1 同步点语义
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 屏障用于同步多个线程到达某点：
 
@@ -1798,7 +1797,7 @@ fn hazard_pointer_example() {
 
 #### 5.1.1 par_iter 语义
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 Rayon 的 `par_iter` 提供声明式的数据并行：
 
@@ -2295,7 +2294,7 @@ fn scoped_thread_panic() {
 
 ### 7.2 超时语义
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 7.2.1 锁超时语义
 

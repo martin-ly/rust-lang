@@ -136,7 +136,7 @@ make LLVM=1 -j$(nproc)
 
 ### 3.2 最小示例：内核模块
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 

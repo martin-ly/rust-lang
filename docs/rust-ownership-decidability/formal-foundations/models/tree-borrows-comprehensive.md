@@ -122,7 +122,7 @@ Stacked Borrows (SB) 作为 Rust 的第一个正式别名模型，为理解 Rust
 
 #### 1.1.1 两阶段借用问题
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 // Vec::push 的典型调用
@@ -433,7 +433,7 @@ let c = x;        // OK, r 仍保持 Frozen
 
 ### 4.2 可变引用状态
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 4.2.1 Reserved 状态详解
 

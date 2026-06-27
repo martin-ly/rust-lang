@@ -107,7 +107,7 @@ $$
 
 ### CTL 表示
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **计算树逻辑（CTL）**用于描述里程碑的分支时序性质：
 

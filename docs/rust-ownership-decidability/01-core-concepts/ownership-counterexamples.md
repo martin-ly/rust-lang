@@ -176,7 +176,7 @@ fn wrong_early_release() {
 
 ### 2.1 XOR原则反例: 可变+共享借用共存
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 // 反例: 同时存在可变和共享借用

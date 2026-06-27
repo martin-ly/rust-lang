@@ -163,7 +163,7 @@ pub fn route(attr: TokenStream, item: TokenStream) -> TokenStream {
 
 ### 编译期计算
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 // const 函数

@@ -444,7 +444,7 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
 
 ### 形式化方法
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 

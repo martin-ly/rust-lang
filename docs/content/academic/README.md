@@ -271,7 +271,7 @@ error(Loan, Point) :-
 
 ### 与当前借用检查器对比
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 // 当前借用检查器: 拒绝

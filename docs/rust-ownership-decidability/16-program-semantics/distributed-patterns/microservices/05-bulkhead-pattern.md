@@ -187,7 +187,7 @@
 
 ### 3.2 容量规划模型
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```
 最优容量计算:

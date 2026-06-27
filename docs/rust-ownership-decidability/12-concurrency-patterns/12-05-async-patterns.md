@@ -32,7 +32,6 @@
     - [3.2 异步 Channel](#32-异步-channel)
     - [Rust 1.94 Peekable::next\_if\_map 在异步流中的应用](#rust-194-peekablenext_if_map-在异步流中的应用)
     - [异步延迟初始化 (Rust 1.94)](#异步延迟初始化-rust-194)
-<a id="继续"></a>
   - [（继续...）](#继续)
   - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引-1)
@@ -733,7 +732,7 @@ impl<K: Eq + std::hash::Hash + Clone, V: Clone> Cache<K, V> {
 
 ### Rust 1.94 Peekable::next_if_map 在异步流中的应用
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 Rust 1.94 引入了 `Peekable::next_if_map` 方法，在处理异步流时特别有用，可以实现条件消费和转换：
 

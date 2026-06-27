@@ -466,7 +466,7 @@ fn main() {
 
 #### 模板
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```markdown
 ### 属性特征

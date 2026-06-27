@@ -17,7 +17,7 @@
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** ·
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** ·
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** ·
-> **来源: [Wikipedia - Generic Programming](https://en.wikipedia.org/wiki/Generic_Programming)** ·
+> **来源: [Wikipedia - Generic Programming](https://en.wikipedia.org/wiki/Generic_programming)** ·
 > **来源: [Wikipedia - Dependent Type](https://en.wikipedia.org/wiki/Dependent_Type)** ·
 > **[来源: ACM - Const Generic Programming]** ·
 > **[来源: IEEE - Parameterized Type Systems]**
@@ -162,7 +162,7 @@ type Vector3 = Point<3>;
 
 ### 2.2 函数中的常量泛型
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 // 泛型函数
@@ -375,7 +375,7 @@ where
 
 ### 4.4 实践中的限制
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 // 好的：简单表达式
@@ -1002,7 +1002,7 @@ trait Container {
 > **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
-> **来源: [Wikipedia - Generic Programming](https://en.wikipedia.org/wiki/Generic_Programming)**
+> **来源: [Wikipedia - Generic Programming](https://en.wikipedia.org/wiki/Generic_programming)**
 > **来源: [TRPL Ch. 10 - Generics](https://doc.rust-lang.org/book/ch10-00-generics.html)**
 > **来源: [Rust Reference - Generics](https://doc.rust-lang.org/reference/)**
 > **来源: [Wikipedia - Parametric Polymorphism](https://en.wikipedia.org/wiki/Parametric_Polymorphism)**

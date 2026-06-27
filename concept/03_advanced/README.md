@@ -13,7 +13,7 @@
 # L3 高级概念层（Advanced）
 >
 > **EN**: Readme
-> **Summary**: Readme. Core Rust concept.
+> **Summary**: Advanced concepts: async, unsafe, macros, and niche optimizations.
 > **受众**: [专家]
 > **定位**：Rust 的高级特性，涉及并发、异步（Async）、Unsafe 和元编程。本层是 L1-L2 概念在**复杂场景**中的组合应用与边界突破。
 > **Bloom 层级**: 应用 → 分析 → 评价

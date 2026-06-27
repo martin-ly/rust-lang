@@ -222,7 +222,7 @@ async fn serve_connection<I, S>(
 
 ### 定义 3.1 (Service Trait)
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 trait Service<Request> {

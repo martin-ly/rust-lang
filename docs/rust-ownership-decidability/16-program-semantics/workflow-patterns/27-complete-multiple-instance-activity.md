@@ -180,7 +180,7 @@ $$
 
 ### 3.1 BPMN 表示
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 BPMN 2.0 中，强制完成多实例活动使用**多实例活动**配合**边界信号事件**表示：
 
@@ -216,7 +216,7 @@ $$
 
 ### 3.2 UML 活动图
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 在 UML 中，强制完成使用**扩展区域** (Expansion Region) 配合中断：
 

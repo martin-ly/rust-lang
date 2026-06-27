@@ -181,7 +181,7 @@ fn cas_loop(counter: &AtomicUsize) {
 
 ### 12-02: 线程安全模式
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **核心主题**:
 
@@ -683,7 +683,7 @@ cargo build --features parking_lot/deadlock_detection
 
 ### 陷阱 1: 在异步代码中阻塞
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 // ❌ 错误

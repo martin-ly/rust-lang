@@ -154,7 +154,7 @@ fn main() {
 
 ### 1.2 Interior Mutability: The Solution Pattern
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 Interior mutability is the pattern of allowing mutation through an immutable reference. It achieves this by moving the borrow checking from **compile time** to **runtime**:
 
@@ -731,7 +731,7 @@ let _ref = cell.borrow(); // PANIC: already mutably borrowed
 
 ### 3.5 RefCell Memory Layout
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -1135,7 +1135,7 @@ thread::scope(|s| {
 
 ### 5.5 Compare-And-Swap (CAS) Loops
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -1512,7 +1512,7 @@ cvar.notify_one();
 
 ### Counter-Example 12: OnceCell Reinitialization Attempt
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust
 use std::sync::OnceLock;
@@ -1769,7 +1769,7 @@ fn main() {
 
 ### 7.3 Lock-Free Patterns with Crossbeam
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```rust,ignore
 // Using crossbeam for lock-free data structures

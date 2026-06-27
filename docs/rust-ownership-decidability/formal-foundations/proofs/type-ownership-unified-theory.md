@@ -7,7 +7,7 @@
 
 ## Type-Ownership Unified Theory
 >
-> **来源: [Wikipedia - Type Theory](https://en.wikipedia.org/wiki/Type_Theory)** · **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_Logic)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Iris Project - iris-project.org](https://iris-project.org/)** · **来源: [Wikipedia - Proof Assistant](https://en.wikipedia.org/wiki/Proof_Assistant)** · **[来源: ACM - Unified Type-Ownership Theory]** · **[来源: IEEE - Formal Proof Methods]**
+> **来源: [Wikipedia - Type Theory](https://en.wikipedia.org/wiki/Type_Theory)** · **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Iris Project - iris-project.org](https://iris-project.org/)** · **来源: [Wikipedia - Proof Assistant](https://en.wikipedia.org/wiki/Proof_Assistant)** · **[来源: ACM - Unified Type-Ownership Theory]** · **[来源: IEEE - Formal Proof Methods]**
 
 > **文档性质**: 形式化理论核心证明文档
 > **版本**: 1.0.0
@@ -206,7 +206,7 @@
 
 ### 2.1 类型系统回顾
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 2.1.1 类型判断 has_type
 
@@ -268,7 +268,7 @@ $$
 
 #### 2.2.1 所有权判断 ownership_safe
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **定义 2.3** (所有权安全判断):
 
@@ -606,7 +606,7 @@ $$
 
 #### 3.2.6 耦合规则汇总
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 | 规则 | 核心类型前提 | 核心所有权前提 |
 |------|-------------|---------------|
@@ -1250,7 +1250,7 @@ fn get<'a, T>(v: &'a Vec<T>, i: usize) -> &'a T
 
 ### 6.2 String 的所有权模型
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 #### 6.2.1 类型定义
 
