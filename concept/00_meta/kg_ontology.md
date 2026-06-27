@@ -9,7 +9,6 @@
 > **Bloom 层级**: 元（Meta）
 > **定位**: 本文件定义 `concept/` 知识体系的**显式关系类型本体**，将现有隐式交叉链接升级为 W3C RDF/OWL 风格的知识图谱。每个概念节点之间的边标注明确的关系类型（依赖、蕴含、互斥、细化、等价、反例），支持机器可解析的语义推理。
 > **对齐来源**: [W3C RDF/OWL 标准] · [Stanford CS520 — 知识图谱定义] · [Collins & Quillian (1969) — 层次语义网络] · [Bordes et al. (2013) — TransE 知识图谱嵌入]
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
@@ -362,9 +361,7 @@ ex:Borrowing rdf:type ex:Concept ;
 | Kg Ontology 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |
 
 > **过渡**: 利用本文件的导航结构，读者可以从当前位置快速跃迁到任意概念层级，实现非线性学习。
-
 > **过渡**: Rust 知识体系知识图谱本体规范（Knowledge Graph Ontology） 的维护需要与概念内容同步更新，确保元数据与实际知识体系的一致性。
-
 > **过渡**: 将 Rust 知识体系知识图谱本体规范（Knowledge Graph Ontology） 作为学习起点或复习锚点，有助于建立全局视野，避免陷入局部细节而忽视整体架构。
 
 ### 反命题与边界

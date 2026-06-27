@@ -1,7 +1,6 @@
 # BorrowSanitizer：动态别名规则验证工具
 
 > **代码状态**: [综述级 — 待补充代码]
-
 > **EN**: BorrowSanitizer (BSan) — Dynamic aliasing rule verification for Rust
 > **Summary**: BorrowSanitizer (BSan) — Dynamic aliasing rule verification for Rust: emerging Rust language feature or ecosystem trend.
 > **来源**: [BorrowSanitizer MCP](https://github.com/rust-lang/compiler-team/issues/958) · [Rust Project Goals 2026 — BorrowSanitizer](https://rust-lang.github.io/rust-project-goals/2026/borrowsanitizer.html) · [BorrowSanitizer 官方站点](https://borrowsanitizer.com/)

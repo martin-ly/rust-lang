@@ -1,7 +1,7 @@
-> **内容分级**: [综述级]
-
+> **内容分级**:
+>
+> [综述级]
 > **代码状态**: ✅ 含可编译示例
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # 算法与竞赛编程 (Algorithms & Competitive Programming)
@@ -10,7 +10,6 @@
 > **Summary**: Algorithms Competitive Programming: Rust ecosystem tools, crates, and engineering practices.
 >
 > **受众**: [进阶]
-
 > **层级**: L6 应用主题
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用算法和竞赛编程模式

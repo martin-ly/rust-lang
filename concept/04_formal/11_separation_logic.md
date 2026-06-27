@@ -11,7 +11,6 @@
 > **定位**: 深入讲解**分离逻辑（Separation Logic）**——从霍尔逻辑到分离合取、框架规则，揭示 Rust 所有权系统如何建立在严格的数学基础之上，并连接形式化验证工具如 Iris 和 Viper。
 > **前置概念**: [Linear Logic](./01_linear_logic.md) · [Ownership Formalization](./03_ownership_formal.md) · [RustBelt](./04_rustbelt.md)
 > **后置概念**: [Verification Toolchain](./05_verification_toolchain.md) · [Type Theory](./02_type_theory.md)
-
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---

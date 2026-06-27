@@ -3,7 +3,6 @@
 # Lifetimes（生命周期）
 >
 > **EN**: Foundation 03 Lifetimes Original
-
 > **受众**: [归档]
 > **层级**: L1 基础概念
 > **A/S/P 标记**: **S+A** — Structure + Application

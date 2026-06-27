@@ -15,7 +15,6 @@
 > **主要来源**: [AWS Kani] · [Microsoft Verus] · [Creusot](https://creusot.github.io/creusot/) · [Miri Book](https://github.com/rust-lang/miri) · [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) · [Aeneas](https://github.com/AeneasVerif/aeneas) · [RefinedRust] · [a-mir-formality]
 > **Bloom 层级**: 评价 → 应用
 > **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** · **[来源: SOSP 2024 Verus]** · **[来源: PLDI 2024 RefinedRust]** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** ✅
-
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---

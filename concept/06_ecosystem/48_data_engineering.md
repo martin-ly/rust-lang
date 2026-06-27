@@ -1,7 +1,7 @@
-> **内容分级**: [综述级]
-
+> **内容分级**:
+>
+> [综述级]
 > **代码状态**: ✅ 含可编译示例
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Data Engineering（数据工程）
@@ -10,13 +10,11 @@
 > **Summary**: Data Engineering. Guide to 48 Data Engineering.
 >
 > **受众**: [进阶]
-
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Ana — 分析 Rust 数据工程生态的技术选型与工程权衡
 > **前置依赖**: [类型系统](../01_foundation/04_type_system.md) · [泛型](../02_intermediate/02_generics.md) · [Async/Await](../03_advanced/02_async.md) · [Machine Learning Ecosystem](./46_machine_learning_ecosystem.md)
 > **后置延伸**: [流处理生态](./36_stream_processing_ecosystem.md) · [云原生](./24_cloud_native.md) · [性能优化](./15_performance_optimization.md)
-
 >
 > **来源**: [polars](https://docs.rs/polars/) · [arrow-rs](https://docs.rs/arrow/) · [datafusion](https://docs.rs/datafusion/)
 ---
@@ -938,9 +936,7 @@ Apache Arrow 的 Rust 实现，提供列式内存格式标准。`polars`、`data
 | Data Engineering（数据工程） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Data Engineering（数据工程） 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Data Engineering（数据工程） 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Data Engineering（数据工程） 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

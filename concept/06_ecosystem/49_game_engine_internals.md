@@ -1,7 +1,7 @@
-> **内容分级**: [专家级]
-
+> **内容分级**:
+>
+> [专家级]
 > **代码状态**: ✅ 含可编译示例
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Game Engine Internals（游戏引擎内部原理）
@@ -10,7 +10,6 @@
 > **Summary**: Game Engine Internals. Guide to 49 Game Engine Internals.
 >
 > **受众**: [进阶]
-
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价 Rust 游戏引擎核心系统的架构设计与实现权衡
@@ -29,11 +28,8 @@
 > [Real-Time Rendering — Tomas Akenine-Möller](https://www.realtimerendering.com/) ·
 > [Vulkan Specification](https://www.khronos.org/registry/vulkan/specs/1.3/html/vkspec.html) ·
 > [WGPU Documentation](https://docs.rs/wgpu/latest/wgpu/)
-
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录
@@ -1129,9 +1125,7 @@ SPIR-V 是 Vulkan 的标准中间着色器语言。Rust 的 `rust-gpu` 项目允
 | Game Engine Internals（游戏引擎内部原理） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 > **过渡**: 掌握 Game Engine Internals（游戏引擎内部原理） 的基础概念后，建议通过实际案例与源码阅读加深理解，建立从理论到实践的桥梁。
-
 > **过渡**: 在工程实践中应用 Game Engine Internals（游戏引擎内部原理） 时，务必评估生态成熟度、社区支持与长期维护风险，避免过度依赖实验性技术。
-
 > **过渡**: Game Engine Internals（游戏引擎内部原理） 反映了 Rust 生态系统的演进趋势与语言设计哲学，理解这些趋势有助于预判未来发展方向并做出前瞻性技术决策。
 
 ### 反命题与边界

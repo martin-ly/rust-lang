@@ -1,4 +1,6 @@
-> **内容分级**: [专家级]
+> **内容分级**:
+>
+> [专家级]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 
@@ -6,7 +8,6 @@
 >
 > **EN**: C++ Abi Object Model
 > **Summary**: C++ Abi Object Model: comparative analysis with Rust across type systems, memory safety, and concurrency.
-
 > **受众**: [进阶]
 > **层级**: L5 对比分析 — 系统编程工程实践
 > **A/S/P 标记**: **A+S** — Application + Structure

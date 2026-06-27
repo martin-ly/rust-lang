@@ -1,7 +1,6 @@
 # Generator Blocks（gen）预览
 
 > **代码状态**: [综述级 — 待补充代码]
-
 >
 > **EN**: Generator Blocks (gen) Preview
 > **Summary**: Preview of generator blocks as a language-level lazy iteration construct.

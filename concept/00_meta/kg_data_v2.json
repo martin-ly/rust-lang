@@ -1,0 +1,970 @@
+{
+  "@context": {
+    "ex": "https://rust-lang-knowledge-graph.org/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "prov": "http://www.w3.org/ns/prov#"
+  },
+  "metadata": {
+    "version": "2.0",
+    "generated": "2026-06-27",
+    "rust_version": "1.96.0+",
+    "source": "concept/00_meta/kg_ontology_v2.md",
+    "previous_version": "concept/00_meta/kg_data.json",
+    "alignment": "RDF 1.2 / RDF-star / SKOS / JSON-LD 1.1 / SHACL"
+  },
+  "classes": [
+    {
+      "@id": "ex:Concept",
+      "@type": [
+        "rdfs:Class",
+        "owl:Class"
+      ],
+      "rdfs:subClassOf": "skos:Concept",
+      "skos:prefLabel": [
+        {
+          "@value": "Concept",
+          "@language": "en"
+        },
+        {
+          "@value": "概念",
+          "@language": "zh"
+        }
+      ]
+    },
+    {
+      "@id": "ex:Theory",
+      "@type": [
+        "rdfs:Class",
+        "owl:Class"
+      ],
+      "rdfs:subClassOf": "skos:Concept",
+      "skos:prefLabel": [
+        {
+          "@value": "Theory",
+          "@language": "en"
+        },
+        {
+          "@value": "理论",
+          "@language": "zh"
+        }
+      ]
+    },
+    {
+      "@id": "ex:Model",
+      "@type": [
+        "rdfs:Class",
+        "owl:Class"
+      ],
+      "rdfs:subClassOf": "skos:Concept",
+      "skos:prefLabel": [
+        {
+          "@value": "Model",
+          "@language": "en"
+        },
+        {
+          "@value": "模型",
+          "@language": "zh"
+        }
+      ]
+    },
+    {
+      "@id": "ex:Property",
+      "@type": [
+        "rdfs:Class",
+        "owl:Class"
+      ],
+      "rdfs:subClassOf": "skos:Concept",
+      "skos:prefLabel": [
+        {
+          "@value": "Property",
+          "@language": "en"
+        },
+        {
+          "@value": "属性",
+          "@language": "zh"
+        }
+      ]
+    },
+    {
+      "@id": "ex:Rule",
+      "@type": [
+        "rdfs:Class",
+        "owl:Class"
+      ],
+      "rdfs:subClassOf": "skos:Concept",
+      "skos:prefLabel": [
+        {
+          "@value": "Rule",
+          "@language": "en"
+        },
+        {
+          "@value": "规则",
+          "@language": "zh"
+        }
+      ]
+    },
+    {
+      "@id": "ex:Primitive",
+      "@type": [
+        "rdfs:Class",
+        "owl:Class"
+      ],
+      "rdfs:subClassOf": "skos:Concept",
+      "skos:prefLabel": [
+        {
+          "@value": "Primitive",
+          "@language": "en"
+        },
+        {
+          "@value": "原语",
+          "@language": "zh"
+        }
+      ]
+    }
+  ],
+  "properties": [
+    {
+      "@id": "ex:dependsOn",
+      "@type": [
+        "owl:ObjectProperty",
+        "owl:TransitiveProperty"
+      ],
+      "owl:inverseOf": "ex:enables",
+      "rdfs:label": [
+        {
+          "@value": "depends on",
+          "@language": "en"
+        },
+        {
+          "@value": "依赖于",
+          "@language": "zh"
+        }
+      ]
+    },
+    {
+      "@id": "ex:entails",
+      "@type": [
+        "owl:ObjectProperty",
+        "owl:TransitiveProperty"
+      ],
+      "owl:inverseOf": "ex:impliedBy",
+      "rdfs:label": [
+        {
+          "@value": "entails",
+          "@language": "en"
+        },
+        {
+          "@value": "蕴含",
+          "@language": "zh"
+        }
+      ]
+    },
+    {
+      "@id": "ex:mutexWith",
+      "@type": [
+        "owl:ObjectProperty",
+        "owl:SymmetricProperty",
+        "owl:IrreflexiveProperty"
+      ],
+      "rdfs:label": [
+        {
+          "@value": "mutex with",
+          "@language": "en"
+        },
+        {
+          "@value": "互斥于",
+          "@language": "zh"
+        }
+      ]
+    },
+    {
+      "@id": "ex:refines",
+      "@type": [
+        "owl:ObjectProperty",
+        "owl:TransitiveProperty"
+      ],
+      "owl:inverseOf": "ex:refinedBy",
+      "rdfs:label": [
+        {
+          "@value": "refines",
+          "@language": "en"
+        },
+        {
+          "@value": "细化于",
+          "@language": "zh"
+        }
+      ]
+    },
+    {
+      "@id": "ex:equivalentTo",
+      "@type": [
+        "owl:ObjectProperty",
+        "owl:SymmetricProperty",
+        "owl:TransitiveProperty",
+        "owl:ReflexiveProperty"
+      ],
+      "rdfs:label": [
+        {
+          "@value": "equivalent to",
+          "@language": "en"
+        },
+        {
+          "@value": "等价于",
+          "@language": "zh"
+        }
+      ]
+    },
+    {
+      "@id": "ex:counterExample",
+      "@type": "owl:ObjectProperty",
+      "owl:inverseOf": "ex:refutedBy",
+      "rdfs:label": [
+        {
+          "@value": "counter example",
+          "@language": "en"
+        },
+        {
+          "@value": "反例",
+          "@language": "zh"
+        }
+      ]
+    },
+    {
+      "@id": "ex:instanceOf",
+      "@type": "owl:ObjectProperty",
+      "owl:inverseOf": "ex:hasInstance",
+      "rdfs:label": [
+        {
+          "@value": "instance of",
+          "@language": "en"
+        },
+        {
+          "@value": "实例于",
+          "@language": "zh"
+        }
+      ]
+    },
+    {
+      "@id": "ex:appliesTo",
+      "@type": "owl:ObjectProperty",
+      "owl:inverseOf": "ex:governedBy",
+      "rdfs:label": [
+        {
+          "@value": "applies to",
+          "@language": "en"
+        },
+        {
+          "@value": "适用于",
+          "@language": "zh"
+        }
+      ]
+    }
+  ],
+  "entities": {
+    "concepts": [
+      {
+        "@id": "ex:Ownership",
+        "@type": "ex:Concept",
+        "skos:prefLabel": [
+          {
+            "@value": "Ownership",
+            "@language": "en"
+          },
+          {
+            "@value": "所有权",
+            "@language": "zh"
+          }
+        ],
+        "skos:altLabel": [
+          {
+            "@value": "Owner",
+            "@language": "en"
+          },
+          {
+            "@value": "拥有权",
+            "@language": "zh"
+          }
+        ],
+        "skos:definition": [
+          {
+            "@value": "Rust's compile-time resource management mechanism ensuring each value has a unique owner.",
+            "@language": "en"
+          },
+          {
+            "@value": "Rust 编译期资源管理机制，确保每个值有唯一所有者。",
+            "@language": "zh"
+          }
+        ],
+        "ex:layer": "L1",
+        "ex:bloom": "Understand",
+        "ex:asp": "S"
+      },
+      {
+        "@id": "ex:Borrowing",
+        "@type": "ex:Concept",
+        "skos:prefLabel": [
+          {
+            "@value": "Borrowing",
+            "@language": "en"
+          },
+          {
+            "@value": "借用",
+            "@language": "zh"
+          }
+        ],
+        "skos:definition": [
+          {
+            "@value": "Temporary, non-owning access to a value governed by the borrow checker.",
+            "@language": "en"
+          },
+          {
+            "@value": "由借用检查器管控的对值的临时、非所有权访问。",
+            "@language": "zh"
+          }
+        ],
+        "ex:layer": "L1",
+        "ex:bloom": "Understand",
+        "ex:asp": "S"
+      },
+      {
+        "@id": "ex:Lifetimes",
+        "@type": "ex:Concept",
+        "skos:prefLabel": [
+          {
+            "@value": "Lifetimes",
+            "@language": "en"
+          },
+          {
+            "@value": "生命周期",
+            "@language": "zh"
+          }
+        ],
+        "skos:definition": [
+          {
+            "@value": "Compile-time tracked scopes for which references are valid.",
+            "@language": "en"
+          },
+          {
+            "@value": "编译期追踪引用有效范围的作用域。",
+            "@language": "zh"
+          }
+        ],
+        "ex:layer": "L1",
+        "ex:bloom": "Apply",
+        "ex:asp": "S+A"
+      },
+      {
+        "@id": "ex:TypeSystem",
+        "@type": "ex:Concept",
+        "skos:prefLabel": [
+          {
+            "@value": "Type System",
+            "@language": "en"
+          },
+          {
+            "@value": "类型系统",
+            "@language": "zh"
+          }
+        ],
+        "skos:definition": [
+          {
+            "@value": "The set of rules that assign and check types in Rust.",
+            "@language": "en"
+          },
+          {
+            "@value": "Rust 中分配和检查类型的一套规则。",
+            "@language": "zh"
+          }
+        ],
+        "ex:layer": "L1",
+        "ex:bloom": "Understand",
+        "ex:asp": "S"
+      },
+      {
+        "@id": "ex:Trait",
+        "@type": "ex:Concept",
+        "skos:prefLabel": [
+          {
+            "@value": "Trait",
+            "@language": "en"
+          },
+          {
+            "@value": "Trait",
+            "@language": "zh"
+          }
+        ],
+        "skos:definition": [
+          {
+            "@value": "Interface-like abstraction defining shared behavior.",
+            "@language": "en"
+          },
+          {
+            "@value": "定义共享行为的类接口抽象。",
+            "@language": "zh"
+          }
+        ],
+        "ex:layer": "L2",
+        "ex:bloom": "Analyze",
+        "ex:asp": "S"
+      },
+      {
+        "@id": "ex:Generics",
+        "@type": "ex:Concept",
+        "skos:prefLabel": [
+          {
+            "@value": "Generics",
+            "@language": "en"
+          },
+          {
+            "@value": "泛型",
+            "@language": "zh"
+          }
+        ],
+        "skos:definition": [
+          {
+            "@value": "Parametric polymorphism enabling code reuse across types.",
+            "@language": "en"
+          },
+          {
+            "@value": "参数化多态，实现跨类型代码复用。",
+            "@language": "zh"
+          }
+        ],
+        "ex:layer": "L2",
+        "ex:bloom": "Apply",
+        "ex:asp": "A+S"
+      },
+      {
+        "@id": "ex:Concurrency",
+        "@type": "ex:Concept",
+        "skos:prefLabel": [
+          {
+            "@value": "Concurrency",
+            "@language": "en"
+          },
+          {
+            "@value": "并发",
+            "@language": "zh"
+          }
+        ],
+        "skos:definition": [
+          {
+            "@value": "Execution of multiple tasks that overlap in time.",
+            "@language": "en"
+          },
+          {
+            "@value": "多个任务在时间上重叠执行。",
+            "@language": "zh"
+          }
+        ],
+        "ex:layer": "L3",
+        "ex:bloom": "Analyze",
+        "ex:asp": "S+P"
+      },
+      {
+        "@id": "ex:AsyncAwait",
+        "@type": "ex:Concept",
+        "skos:prefLabel": [
+          {
+            "@value": "Async/Await",
+            "@language": "en"
+          },
+          {
+            "@value": "异步",
+            "@language": "zh"
+          }
+        ],
+        "skos:definition": [
+          {
+            "@value": "Syntactic sugar for composing lazy Futures.",
+            "@language": "en"
+          },
+          {
+            "@value": "组合惰性 Future 的语法糖。",
+            "@language": "zh"
+          }
+        ],
+        "ex:layer": "L3",
+        "ex:bloom": "Analyze",
+        "ex:asp": "S+P"
+      },
+      {
+        "@id": "ex:LinearLogic",
+        "@type": "ex:Theory",
+        "skos:prefLabel": [
+          {
+            "@value": "Linear Logic",
+            "@language": "en"
+          },
+          {
+            "@value": "线性逻辑",
+            "@language": "zh"
+          }
+        ],
+        "skos:definition": [
+          {
+            "@value": "A substructural logic where resources must be used exactly once.",
+            "@language": "en"
+          },
+          {
+            "@value": "一种子结构逻辑，资源必须恰好使用一次。",
+            "@language": "zh"
+          }
+        ],
+        "ex:layer": "L4",
+        "ex:bloom": "Evaluate",
+        "ex:asp": "S"
+      },
+      {
+        "@id": "ex:TypeTheory",
+        "@type": "ex:Theory",
+        "skos:prefLabel": [
+          {
+            "@value": "Type Theory",
+            "@language": "en"
+          },
+          {
+            "@value": "类型论",
+            "@language": "zh"
+          }
+        ],
+        "skos:definition": [
+          {
+            "@value": "Formal study of type systems and their inference rules.",
+            "@language": "en"
+          },
+          {
+            "@value": "类型系统及其推理规则的形式化研究。",
+            "@language": "zh"
+          }
+        ],
+        "ex:layer": "L4",
+        "ex:bloom": "Analyze",
+        "ex:asp": "S"
+      }
+    ],
+    "theories": [
+      {
+        "@id": "ex:AffineLogic",
+        "@type": "ex:Theory",
+        "skos:prefLabel": [
+          {
+            "@value": "Affine Logic",
+            "@language": "en"
+          },
+          {
+            "@value": "仿射逻辑",
+            "@language": "zh"
+          }
+        ],
+        "skos:definition": [
+          {
+            "@value": "A substructural logic where every premise may be used at most once.",
+            "@language": "en"
+          },
+          {
+            "@value": "一种子结构逻辑，每个前提最多使用一次。",
+            "@language": "zh"
+          }
+        ]
+      },
+      {
+        "@id": "ex:SeparationLogic",
+        "@type": "ex:Theory",
+        "skos:prefLabel": [
+          {
+            "@value": "Separation Logic",
+            "@language": "en"
+          },
+          {
+            "@value": "分离逻辑",
+            "@language": "zh"
+          }
+        ],
+        "skos:definition": [
+          {
+            "@value": "Logic for reasoning about mutable shared state via separating conjunction.",
+            "@language": "en"
+          },
+          {
+            "@value": "通过分离合取推理可变共享状态的逻辑。",
+            "@language": "zh"
+          }
+        ]
+      },
+      {
+        "@id": "ex:RegionTypes",
+        "@type": "ex:Theory",
+        "skos:prefLabel": [
+          {
+            "@value": "Region Types",
+            "@language": "en"
+          },
+          {
+            "@value": "区域类型",
+            "@language": "zh"
+          }
+        ],
+        "skos:definition": [
+          {
+            "@value": "Type system tracking the lexical or dynamic scope of references.",
+            "@language": "en"
+          },
+          {
+            "@value": "追踪引用词法或动态作用域的类型系统。",
+            "@language": "zh"
+          }
+        ]
+      },
+      {
+        "@id": "ex:SystemF",
+        "@type": "ex:Theory",
+        "skos:prefLabel": [
+          {
+            "@value": "System F",
+            "@language": "en"
+          },
+          {
+            "@value": "System F",
+            "@language": "zh"
+          }
+        ],
+        "skos:definition": [
+          {
+            "@value": "The polymorphic lambda calculus underlying parametric polymorphism.",
+            "@language": "en"
+          },
+          {
+            "@value": "参数化多态背后的多态 lambda 演算。",
+            "@language": "zh"
+          }
+        ]
+      }
+    ],
+    "properties": [
+      {
+        "@id": "ex:Send",
+        "@type": "ex:Property",
+        "skos:prefLabel": [
+          {
+            "@value": "Send",
+            "@language": "en"
+          },
+          {
+            "@value": "Send",
+            "@language": "zh"
+          }
+        ],
+        "skos:definition": [
+          {
+            "@value": "A type is Send if ownership can be transferred across threads.",
+            "@language": "en"
+          },
+          {
+            "@value": "如果类型的所有权可以跨线程转移，则它是 Send。",
+            "@language": "zh"
+          }
+        ]
+      },
+      {
+        "@id": "ex:Sync",
+        "@type": "ex:Property",
+        "skos:prefLabel": [
+          {
+            "@value": "Sync",
+            "@language": "en"
+          },
+          {
+            "@value": "Sync",
+            "@language": "zh"
+          }
+        ],
+        "skos:definition": [
+          {
+            "@value": "A type is Sync if references to it can be shared across threads.",
+            "@language": "en"
+          },
+          {
+            "@value": "如果类型的引用可以跨线程共享，则它是 Sync。",
+            "@language": "zh"
+          }
+        ]
+      },
+      {
+        "@id": "ex:Copy",
+        "@type": "ex:Property",
+        "skos:prefLabel": [
+          {
+            "@value": "Copy",
+            "@language": "en"
+          },
+          {
+            "@value": "Copy",
+            "@language": "zh"
+          }
+        ],
+        "skos:definition": [
+          {
+            "@value": "A type is Copy if bitwise copy preserves semantics.",
+            "@language": "en"
+          },
+          {
+            "@value": "如果按位拷贝能保持语义，则类型是 Copy。",
+            "@language": "zh"
+          }
+        ]
+      },
+      {
+        "@id": "ex:Sized",
+        "@type": "ex:Property",
+        "skos:prefLabel": [
+          {
+            "@value": "Sized",
+            "@language": "en"
+          },
+          {
+            "@value": "Sized",
+            "@language": "zh"
+          }
+        ],
+        "skos:definition": [
+          {
+            "@value": "A type is Sized if its size is known at compile time.",
+            "@language": "en"
+          },
+          {
+            "@value": "如果类型大小在编译期已知，则它是 Sized。",
+            "@language": "zh"
+          }
+        ]
+      }
+    ],
+    "rules": [
+      {
+        "@id": "ex:AXM",
+        "@type": "ex:Rule",
+        "skos:prefLabel": [
+          {
+            "@value": "Alias-XOR-Mutation Rule",
+            "@language": "en"
+          },
+          {
+            "@value": "AXM 规则",
+            "@language": "zh"
+          }
+        ],
+        "skos:altLabel": [
+          {
+            "@value": "Alias XOR Mutation",
+            "@language": "en"
+          },
+          {
+            "@value": "别名异或可变",
+            "@language": "zh"
+          }
+        ],
+        "skos:definition": [
+          {
+            "@value": "At any moment, a value may have either multiple immutable aliases or one mutable alias, but not both.",
+            "@language": "en"
+          },
+          {
+            "@value": "任一时刻，一个值可以有多个不可变别名或一个可变别名，但不能同时两者兼具。",
+            "@language": "zh"
+          }
+        ]
+      },
+      {
+        "@id": "ex:OrphanRule",
+        "@type": "ex:Rule",
+        "skos:prefLabel": [
+          {
+            "@value": "Orphan Rule",
+            "@language": "en"
+          },
+          {
+            "@value": "孤儿规则",
+            "@language": "zh"
+          }
+        ],
+        "skos:definition": [
+          {
+            "@value": "An impl must involve a local type or trait to ensure coherence.",
+            "@language": "en"
+          },
+          {
+            "@value": "一个 impl 必须涉及本地类型或 trait，以保证一致性。",
+            "@language": "zh"
+          }
+        ]
+      },
+      {
+        "@id": "ex:Elision",
+        "@type": "ex:Rule",
+        "skos:prefLabel": [
+          {
+            "@value": "Lifetime Elision",
+            "@language": "en"
+          },
+          {
+            "@value": "生命周期省略",
+            "@language": "zh"
+          }
+        ],
+        "skos:definition": [
+          {
+            "@value": "Syntactic rules allowing omitted lifetime annotations in common cases.",
+            "@language": "en"
+          },
+          {
+            "@value": "允许在常见情况下省略生命周期标注的语法规则。",
+            "@language": "zh"
+          }
+        ]
+      }
+    ]
+  },
+  "relations": [
+    {
+      "@id": "_:rel1",
+      "@type": "ex:RelationAnnotation",
+      "ex:subject": "ex:Ownership",
+      "ex:predicate": "ex:dependsOn",
+      "ex:object": "ex:TypeSystem",
+      "ex:source": "TRPL Ch. 3-4",
+      "ex:confidence": 1.0,
+      "ex:version": "1.96.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-06-27",
+      "prov:wasDerivedFrom": "https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html"
+    },
+    {
+      "@id": "_:rel2",
+      "@type": "ex:RelationAnnotation",
+      "ex:subject": "ex:Borrowing",
+      "ex:predicate": "ex:dependsOn",
+      "ex:object": "ex:Ownership",
+      "ex:source": "TRPL Ch. 4",
+      "ex:confidence": 1.0,
+      "ex:version": "1.96.0",
+      "ex:reviewed": true
+    },
+    {
+      "@id": "_:rel3",
+      "@type": "ex:RelationAnnotation",
+      "ex:subject": "ex:Lifetimes",
+      "ex:predicate": "ex:dependsOn",
+      "ex:object": "ex:Borrowing",
+      "ex:source": "TRPL Ch. 10",
+      "ex:confidence": 1.0,
+      "ex:version": "1.96.0",
+      "ex:reviewed": true
+    },
+    {
+      "@id": "_:rel4",
+      "@type": "ex:RelationAnnotation",
+      "ex:subject": "ex:Ownership",
+      "ex:predicate": "ex:equivalentTo",
+      "ex:object": "ex:AffineLogic",
+      "ex:source": "concept/04_formal/01_linear_logic.md",
+      "ex:confidence": 0.95,
+      "ex:version": "1.96.0",
+      "ex:reviewed": true
+    },
+    {
+      "@id": "_:rel5",
+      "@type": "ex:RelationAnnotation",
+      "ex:subject": "ex:Borrowing",
+      "ex:predicate": "ex:equivalentTo",
+      "ex:object": "ex:SeparationLogic",
+      "ex:source": "concept/04_formal/11_separation_logic.md",
+      "ex:confidence": 0.95,
+      "ex:version": "1.96.0",
+      "ex:reviewed": true
+    },
+    {
+      "@id": "_:rel6",
+      "@type": "ex:RelationAnnotation",
+      "ex:subject": "ex:Lifetimes",
+      "ex:predicate": "ex:equivalentTo",
+      "ex:object": "ex:RegionTypes",
+      "ex:source": "concept/04_formal/03_ownership_formal.md",
+      "ex:confidence": 0.95,
+      "ex:version": "1.96.0",
+      "ex:reviewed": true
+    },
+    {
+      "@id": "_:rel7",
+      "@type": "ex:RelationAnnotation",
+      "ex:subject": "ex:Generics",
+      "ex:predicate": "ex:equivalentTo",
+      "ex:object": "ex:SystemF",
+      "ex:source": "concept/04_formal/02_type_theory.md",
+      "ex:confidence": 0.9,
+      "ex:version": "1.96.0",
+      "ex:reviewed": true
+    },
+    {
+      "@id": "_:rel8",
+      "@type": "ex:RelationAnnotation",
+      "ex:subject": "ex:AXM",
+      "ex:predicate": "ex:appliesTo",
+      "ex:object": "ex:Borrowing",
+      "ex:source": "TRPL Ch. 4",
+      "ex:confidence": 1.0,
+      "ex:version": "1.96.0",
+      "ex:reviewed": true
+    },
+    {
+      "@id": "_:rel9",
+      "@type": "ex:RelationAnnotation",
+      "ex:subject": "ex:OrphanRule",
+      "ex:predicate": "ex:appliesTo",
+      "ex:object": "ex:Trait",
+      "ex:source": "Rust Reference — Orphan Rules",
+      "ex:confidence": 1.0,
+      "ex:version": "1.96.0",
+      "ex:reviewed": true
+    },
+    {
+      "@id": "_:rel10",
+      "@type": "ex:RelationAnnotation",
+      "ex:subject": "ex:AsyncAwait",
+      "ex:predicate": "ex:dependsOn",
+      "ex:object": "ex:Generics",
+      "ex:source": "TRPL Ch. 17",
+      "ex:confidence": 1.0,
+      "ex:version": "1.96.0",
+      "ex:reviewed": true
+    }
+  ],
+  "decision_trees": [
+    {
+      "concept": "ex:Ownership",
+      "tree": "concept_definition_decision_forest.md#二所有权判定树"
+    },
+    {
+      "concept": "ex:Borrowing",
+      "tree": "concept_definition_decision_forest.md#三借用判定树"
+    },
+    {
+      "concept": "ex:Lifetimes",
+      "tree": "concept_definition_decision_forest.md#四生命周期判定树"
+    }
+  ],
+  "fault_trees": [
+    {
+      "top_event": "内存安全失效",
+      "tree": "fault_tree_analysis_collection.md#二内存安全失效树"
+    },
+    {
+      "top_event": "并发安全失效",
+      "tree": "fault_tree_analysis_collection.md#三并发安全失效树"
+    }
+  ]
+}

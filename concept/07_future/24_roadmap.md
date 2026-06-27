@@ -1,7 +1,6 @@
 # Rust 2027 Edition 及未来路线图
 
 > **代码状态**: ✅ 含可编译示例
-
 >
 > **EN**: Roadmap
 > **Summary**: Roadmap: emerging Rust language feature or ecosystem trend.

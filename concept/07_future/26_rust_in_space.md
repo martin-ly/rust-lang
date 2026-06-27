@@ -1,7 +1,6 @@
 # Rust in Space Preview
 
 > **代码状态**: [综述级 — 待补充代码]
-
 >
 > **EN**: Rust In Space
 > **Summary**: Rust In Space: emerging Rust language feature or ecosystem trend.

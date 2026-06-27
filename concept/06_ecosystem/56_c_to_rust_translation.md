@@ -1,7 +1,7 @@
-> **内容分级**: [综述级]
-
+> **内容分级**:
+>
+> [综述级]
 > **代码状态**: ✅ 含可编译示例
-
 >
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
@@ -22,7 +22,6 @@
 > **Bloom 层级**: 分析 → 评价
 >
 > **主要来源**: [DARPA TRACTOR] · [C2Rust] · [Scylla (OOPSLA 2026)] · [&inator (PLDI 2026)] · [His2Trans]
-
 >
 > **来源**: [Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) · [bindgen](https://docs.rs/bindgen/)
 ---

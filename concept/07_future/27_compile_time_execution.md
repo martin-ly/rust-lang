@@ -1,7 +1,6 @@
 # 编译期执行与常量求值
 
 > **代码状态**: ✅ 含可编译示例
-
 >
 > **EN**: Compile Time Execution
 > **Summary**: Compile Time Execution: emerging Rust language feature or ecosystem trend.

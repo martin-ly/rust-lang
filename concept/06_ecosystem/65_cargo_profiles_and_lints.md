@@ -1,5 +1,6 @@
-> **内容分级**: [综述级]
-
+> **内容分级**:
+>
+> [综述级]
 > **本节关键术语**: Profile · `opt-level` · LTO · `codegen-units` · Custom Profile · Build Override · Cargo Lint · Lint Group · `[lints]` — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Cargo Profiles 与 Lints

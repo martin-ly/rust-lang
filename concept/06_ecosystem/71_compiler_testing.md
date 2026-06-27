@@ -1,5 +1,6 @@
-> **内容分级**: [综述级]
-
+> **内容分级**:
+>
+> [综述级]
 > **本节关键术语**: Compiletest · UI Test · Package Test · Tidy · Crater · rustc-perf · Miri · `distcheck` — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # rustc 编译器测试体系

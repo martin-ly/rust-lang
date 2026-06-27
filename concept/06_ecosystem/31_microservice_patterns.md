@@ -1,8 +1,7 @@
-> **内容分级**: [专家级]
-
-> **代码状态**: ✅ 含可编译示例
-
+> **内容分级**:
 >
+> [专家级]
+> **代码状态**: ✅ 含可编译示例
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # 微服务架构模式 (Microservice Architecture Patterns)
@@ -11,14 +10,12 @@
 > **Summary**: Microservice Patterns: Rust ecosystem tools, crates, and engineering practices.
 >
 > **受众**: [进阶]
-
 > **Bloom 层级**: 应用 → 创造
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计微服务架构
 > **定位**: 从系统架构视角梳理 Rust 在微服务场景中的核心模式——服务发现、熔断、Saga、CQRS、事件溯源——揭示 Rust 的类型安全与零成本抽象如何支撑高可靠分布式系统。
 > **前置概念**: [Async](../03_advanced/02_async.md) · [分布式系统](./18_distributed_systems.md) · [错误处理](../02_intermediate/04_error_handling.md)
 > **后置概念**: [事件驱动架构](./32_event_driven_architecture.md) · [云原生](./24_cloud_native.md)
-
 >
 > **来源**: [tower](https://docs.rs/tower/) · [tonic](https://docs.rs/tonic/) · [failsafe](https://docs.rs/failsafe/)
 ---

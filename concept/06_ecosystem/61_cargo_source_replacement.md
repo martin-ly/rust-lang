@@ -1,5 +1,6 @@
-> **内容分级**: [综述级]
-
+> **内容分级**:
+>
+> [综述级]
 > **本节关键术语**: Source Replacement · `[source]` · `replace-with` · Vendoring · `cargo vendor` · Local Registry · Directory Source · Offline Mode — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Cargo Source Replacement 与 Vendoring

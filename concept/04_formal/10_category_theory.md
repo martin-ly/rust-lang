@@ -277,7 +277,12 @@ fn fixed() {
 }
 ```
 
-> **修正**: `Option` 和 `Result` 在范畴论中是 **monad**，满足三个定律：左单位元（left identity）、右单位元（right identity）和结合律（associativity）。Rust 的 `and_then` 对应 monad 的 `bind`（`>>=`）操作，`Some`/`Ok` 对应 `return`（unit）。`map` 对应 functor 的 `fmap`，不扁平化嵌套结构。Rust 的显式扁平化（`and_then` 而非自动 `join`）保持了类型系统的显式性，但增加了与 Haskell 等语言的认知差异。[来源: [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)]
+> **修正**:
+>
+> `Option` 和 `Result` 在范畴论中是 **monad**，满足三个定律：左单位元（left identity）、右单位元（right identity）和结合律（associativity）。
+> Rust 的 `and_then` 对应 monad 的 `bind`（`>>=`）操作，`Some`/`Ok` 对应 `return`（unit）。
+> `map` 对应 functor 的 `fmap`，不扁平化嵌套结构。Rust 的显式扁平化（`and_then` 而非自动 `join`）保持了类型系统的显式性，但增加了与 Haskell 等语言的认知差异。
+> [来源: [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)]
 
 ### 10.2 边界测试：`Iterator` 的 functor 映射与所有权（编译错误）
 

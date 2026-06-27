@@ -1,7 +1,6 @@
 # Safety Tags 概念预研：Unsafe 契约的机器可读标注
 
 > **代码状态**: ✅ 含可编译示例
-
 >
 > **EN**: Safety Tags Preview
 > **Summary**: Preview of safety tags for annotating and propagating unsafe preconditions in Rust.

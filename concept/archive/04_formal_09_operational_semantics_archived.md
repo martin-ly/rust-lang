@@ -13,7 +13,6 @@
 > **后置概念**: [Comparative Studies](../05_comparative/01_rust_vs_cpp.md)
 > **前置依赖**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
 > **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md)
-
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 
 ## 认知路径

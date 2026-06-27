@@ -1,7 +1,7 @@
-> **内容分级**: [专家级]
-
+> **内容分级**:
+>
+> [专家级]
 > **代码状态**: ✅ 含可编译示例
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Distributed Consensus（分布式共识）
@@ -10,13 +10,11 @@
 > **Summary**: Distributed Consensus. Guide to 50 Distributed Consensus.
 >
 > **受众**: [进阶]
-
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价分布式共识算法的安全性、活性与工程实现权衡
 > **前置依赖**: [分布式系统](./18_distributed_systems.md) · [并发编程](../03_advanced/01_concurrency.md) · [网络协议](./38_network_protocols.md) · [类型系统](../01_foundation/04_type_system.md)
 > **后置延伸**: [区块链](./06_blockchain.md) · [云原生](./24_cloud_native.md) · [微服务架构](./31_microservice_patterns.md)
-
 >
 > **来源**: [raft-rs](https://docs.rs/raft/) · [hotstuff-rs](https://docs.rs/hotstuff-rs/)
 ---

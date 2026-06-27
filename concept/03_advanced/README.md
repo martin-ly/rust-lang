@@ -1,4 +1,6 @@
-> **生态状态提示**：本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
+> **生态状态提示**：
+>
+> 本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
 >
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
@@ -14,7 +16,13 @@
 > **定位**：Rust 的高级特性，涉及并发、异步（Async）、Unsafe 和元编程。本层是 L1-L2 概念在**复杂场景**中的组合应用与边界突破。
 > **Bloom 层级**: 应用 → 分析 → 评价
 > **对应 L4 形式化**: 并发分离逻辑 · 线性时序逻辑 · 效果系统 · 元类型论
-> **来源: [Rust Reference - Concurrency](https://doc.rust-lang.org/reference/)** · **来源: [Rustonomicon - docs.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)** · **来源: [Wikipedia - Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming)**
+> **来源:
+>
+> [Rust Reference - Concurrency](https://doc.rust-lang.org/reference/)** ·
+> **来源: [Rustonomicon - docs.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)** ·
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)** ·
+> **来源: [Wikipedia - Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming)**
+>
 
 ---
 

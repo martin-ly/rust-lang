@@ -1,5 +1,6 @@
-> **内容分级**: [综述级]
-
+> **内容分级**:
+>
+> [综述级]
 > **本节关键术语**: Custom Subcommand · `cargo-<name>` · `cargo metadata` · `--message-format=json` · Cargo Plugin · `cargo-expand` · `cargo-audit` · `cargo-semver-checks` — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Cargo 子命令与插件生态

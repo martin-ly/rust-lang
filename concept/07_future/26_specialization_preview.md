@@ -1,7 +1,6 @@
 # Specialization：Trait 实现的精确化与重叠解析
 
 > **代码状态**: [综述级 — 待补充代码]
-
 >
 > **EN**: Specialization Preview
 > **Summary**: Preview of trait specialization: allowing overlapping impls with a default/fallback.

@@ -3,15 +3,10 @@
 > **EN**: Industrial Rust Adoption Case Studies
 > **Summary**: Industrial Case Studies: Rust ecosystem tools, crates, and engineering practices.
 > **内容分级**: [专家级]
-
 > **代码状态**: [综述级 — 待补充代码]
-
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-
 > **来源**: [Rust in Production](https://www.rust-lang.org/) · [Rust Foundation](https://foundation.rust-lang.org/)
 
 ## 一、案例总览矩阵

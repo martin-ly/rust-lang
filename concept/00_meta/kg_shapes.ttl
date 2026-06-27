@@ -1,0 +1,195 @@
+@prefix ex: <https://rust-lang-knowledge-graph.org/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+# ============================================================
+# Rust 知识体系知识图谱 — SHACL 数据形状
+# 用途：验证 kg_data.json / Turtle 数据的质量与一致性
+# 标准：W3C SHACL
+# ============================================================
+
+ex:KnowledgeGraphShape
+    a sh:NodeShape ;
+    sh:targetClass ex:KnowledgeGraph ;
+    sh:property [
+        sh:path dcterms:modified ;
+        sh:datatype xsd:date ;
+        sh:maxCount 1 ;
+        sh:name "modified date" ;
+    ] ;
+    sh:property [
+        sh:path ex:rustVersion ;
+        sh:datatype xsd:string ;
+        sh:pattern "^\\d+\\.\\d+\\.\\d+\\+?$" ;
+        sh:maxCount 1 ;
+        sh:name "Rust version" ;
+    ] .
+
+# ------------------------------------------------------------
+# 实体通用形状
+# ------------------------------------------------------------
+ex:EntityShape
+    a sh:NodeShape ;
+    sh:targetObjectsOf rdf:type ;  # 作用于所有 rdf:type 的宾语
+    sh:or (
+        [ sh:class ex:Concept ]
+        [ sh:class ex:Theory ]
+        [ sh:class ex:Model ]
+        [ sh:class ex:Property ]
+        [ sh:class ex:Rule ]
+        [ sh:class ex:Primitive ]
+    ) ;
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 2 ;  # 至少 en + zh
+        sh:uniqueLang true ;  # 每种语言一个首选标签
+        sh:name "preferred label" ;
+        sh:message "每个实体必须至少提供英文和中文的 skos:prefLabel。"@zh ;
+    ] ;
+    sh:property [
+        sh:path skos:definition ;
+        sh:datatype rdf:langString ;
+        sh:minCount 1 ;
+        sh:name "definition" ;
+    ] .
+
+# ------------------------------------------------------------
+# Concept 专用形状
+# ------------------------------------------------------------
+ex:ConceptShape
+    a sh:NodeShape ;
+    sh:targetClass ex:Concept ;
+    sh:property [
+        sh:path ex:layer ;
+        sh:datatype xsd:string ;
+        sh:in ( "L0" "L1" "L2" "L3" "L4" "L5" "L6" "L7" ) ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "cognitive layer" ;
+    ] ;
+    sh:property [
+        sh:path ex:bloom ;
+        sh:datatype xsd:string ;
+        sh:in ( "Remember" "Understand" "Apply" "Analyze" "Evaluate" "Create" ) ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "Bloom level" ;
+    ] ;
+    sh:property [
+        sh:path ex:asp ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[ASP+]+$" ;
+        sh:maxCount 1 ;
+        sh:name "A/S/P marking" ;
+    ] .
+
+# ------------------------------------------------------------
+# 关系类型合法性形状
+# ------------------------------------------------------------
+ex:RelationShape
+    a sh:NodeShape ;
+    sh:targetSubjectsOf ex:dependsOn, ex:entails, ex:mutexWith,
+                         ex:refines, ex:equivalentTo, ex:counterExample,
+                         ex:instanceOf, ex:appliesTo ;
+    sh:property [
+        sh:path [ sh:alternativePath (
+            ex:dependsOn ex:entails ex:mutexWith ex:refines
+            ex:equivalentTo ex:counterExample ex:instanceOf ex:appliesTo
+        ) ] ;
+        sh:nodeKind sh:IRI ;
+        sh:name "relation target" ;
+        sh:message "关系目标必须是 IRI（知识图谱中的实体）。"@zh ;
+    ] .
+
+# ------------------------------------------------------------
+# RDF-star 注解形状
+# ------------------------------------------------------------
+ex:AnnotationShape
+    a sh:NodeShape ;
+    sh:targetClass ex:RelationAnnotation ;
+    sh:property [
+        sh:path ex:source ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "relation source" ;
+    ] ;
+    sh:property [
+        sh:path ex:confidence ;
+        sh:datatype xsd:float ;
+        sh:minInclusive 0.0 ;
+        sh:maxInclusive 1.0 ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "confidence score" ;
+    ] ;
+    sh:property [
+        sh:path ex:version ;
+        sh:datatype xsd:string ;
+        sh:pattern "^\\d+\\.\\d+\\.\\d+\\+?$" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "Rust version" ;
+    ] ;
+    sh:property [
+        sh:path ex:reviewed ;
+        sh:datatype xsd:boolean ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "reviewed flag" ;
+    ] ;
+    sh:property [
+        sh:path dcterms:created ;
+        sh:datatype xsd:date ;
+        sh:maxCount 1 ;
+        sh:name "creation date" ;
+    ] ;
+    sh:property [
+        sh:path prov:wasDerivedFrom ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+        sh:name "derived from URL" ;
+    ] .
+
+# ------------------------------------------------------------
+# OWL 属性约束（一致性检查）
+# ------------------------------------------------------------
+ex:dependsOn a owl:ObjectProperty, owl:TransitiveProperty ;
+    rdfs:label "depends on"@en, "依赖于"@zh ;
+    owl:inverseOf ex:enables .
+
+ex:entails a owl:ObjectProperty, owl:TransitiveProperty ;
+    rdfs:label "entails"@en, "蕴含"@zh ;
+    owl:inverseOf ex:impliedBy .
+
+ex:mutexWith a owl:ObjectProperty,
+        owl:SymmetricProperty,
+        owl:IrreflexiveProperty ;
+    rdfs:label "mutex with"@en, "互斥于"@zh .
+
+ex:refines a owl:ObjectProperty, owl:TransitiveProperty ;
+    rdfs:label "refines"@en, "细化于"@zh ;
+    owl:inverseOf ex:refinedBy .
+
+ex:equivalentTo a owl:ObjectProperty,
+        owl:SymmetricProperty,
+        owl:TransitiveProperty,
+        owl:ReflexiveProperty ;
+    rdfs:label "equivalent to"@en, "等价于"@zh .
+
+ex:counterExample a owl:ObjectProperty ;
+    rdfs:label "counter example"@en, "反例"@zh ;
+    owl:inverseOf ex:refutedBy .
+
+ex:instanceOf a owl:ObjectProperty ;
+    rdfs:label "instance of"@en, "实例于"@zh ;
+    owl:inverseOf ex:hasInstance .
+
+ex:appliesTo a owl:ObjectProperty ;
+    rdfs:label "applies to"@en, "适用于"@zh ;
+    owl:inverseOf ex:governedBy .

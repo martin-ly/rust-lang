@@ -4,7 +4,6 @@
 >
 > **EN**: Quiz Rust Vs Systems
 > **Summary**: Quiz Rust Vs Systems. Core Rust concept.
-
 > **受众**: [进阶]
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)

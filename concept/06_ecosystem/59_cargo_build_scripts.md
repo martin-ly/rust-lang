@@ -1,5 +1,6 @@
-> **内容分级**: [综述级]
-
+> **内容分级**:
+>
+> [综述级]
 > **本节关键术语**: Build Script · `build.rs` · `OUT_DIR` · `rerun-if-changed` · `links` · Native Dependency · `build-dependencies` — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Cargo Build Scripts（`build.rs`）

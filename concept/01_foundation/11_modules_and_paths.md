@@ -1,4 +1,7 @@
-> **内容分级**: [综述级]
+> **内容分级**:
+>
+> [综述级]
+>
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **本节关键术语**: 模块 (Module) · 路径 (Path) · use · pub · crate — [完整对照表](../00_meta/terminology_glossary.md)
 >

@@ -6,7 +6,6 @@
 >
 > **EN**: Type System
 > **Summary**: Quiz Type System. Core Rust concept.
-
 > **受众**: [初学者]
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)

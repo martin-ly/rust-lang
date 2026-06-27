@@ -1,4 +1,6 @@
-> **内容分级**: [综述级]
+> **内容分级**:
+>
+> [综述级]
 >
 > **本节关键术语**: 类型系统 (Type System) · 结构体 (Struct) · 枚举 (Enum) · 模式匹配 (Pattern Matching) · 泛型 (Generic) · Trait — [完整对照表](../00_meta/terminology_glossary.md)
 
@@ -1028,7 +1030,10 @@ fn max<T: Ord>(a: T, b: T) -> T { if a > b { a } else { b } }
 
 ### 11.1 补充：`!` (Never type) 的形式化分析
 
-> **[Rust Reference: Never type](https://doc.rust-lang.org/reference/types.html#never-type)** · **[Wikipedia: Bottom type](https://en.wikipedia.org/wiki/Bottom_type)** · **[TAPL Ch.11]** `!` 是 Rust 的 **bottom type**（底类型），表示"永无返回"。它在类型论中是**所有类型的子类型**（`! <: T` 对任意 `T`），在控制流分析中扮演关键角色。✅
+> **[Rust Reference: Never type](https://doc.rust-lang.org/reference/types.html#never-type)** ·
+> **[Wikipedia: Bottom type](https://en.wikipedia.org/wiki/Bottom_type)** ·
+> **[TAPL Ch.11]** `!` 是 Rust 的 **bottom type**（底类型），表示"永无返回"。
+> 它在类型论中是**所有类型的子类型**（`! <: T` 对任意 `T`），在控制流分析中扮演关键角色。✅
 
 #### 形式化定义
 
@@ -1072,11 +1077,18 @@ let s = infallible_op()?;  // ? 不会返回，因为 Err(!) 无法构造
 | `Option<!>` | 无值类型 | 等价于 `()`，但语义更精确 |
 | `match` 统一 | `!` 作为缺失分支的类型 | 允许 match 分支类型不一致时通过子类型统一 |
 
-> **来源**: [Rust Reference: Diverging functions](https://doc.rust-lang.org/reference/) · [Wikipedia: Bottom type](https://en.wikipedia.org/wiki/Bottom_type) · [TAPL Ch.11: Subtyping] · [RFC 1216: Never type](https://github.com/rust-lang/rfcs/pull/1216)
+> **来源**:
+> [Rust Reference: Diverging functions](https://doc.rust-lang.org/reference/) ·
+> [Wikipedia: Bottom type](https://en.wikipedia.org/wiki/Bottom_type) ·
+> [TAPL Ch.11: Subtyping] ·
+> [RFC 1216: Never type](https://github.com/rust-lang/rfcs/pull/1216)
 
 ### 11.2 补充：Zero-Sized Types (ZST) 与 `PhantomData`
 
-> **[Rust Reference: Zero-sized types](https://doc.rust-lang.org/reference/)** · **[Rust Reference: PhantomData](https://doc.rust-lang.org/reference/special-types-and-traits.html)** ZST 是**运行时大小为 0 字节**的类型，在类型论中是**单元类型（unit type）**的泛化。`PhantomData<T>` 是 ZST 的代表，用于**在类型系统中携带编译期信息**，而不产生运行时开销。✅
+> **[Rust Reference: Zero-sized types](https://doc.rust-lang.org/reference/)** ·
+> **[Rust Reference: PhantomData](https://doc.rust-lang.org/reference/special-types-and-traits.html)**
+> ZST 是**运行时大小为 0 字节**的类型，在类型论中是**单元类型（unit type）**的泛化。
+> `PhantomData<T>` 是 ZST 的代表，用于**在类型系统中携带编译期信息**，而不产生运行时开销。✅
 
 #### ZST 的类型论意义
 
@@ -1135,8 +1147,19 @@ struct Invariant<T>(PhantomData<*mut T>);    // T 不变
 | `PhantomData<*mut T>` | 不变（invariant） |
 | `PhantomData<fn() -> T>` | 协变（covariant） |
 
-> **关键洞察**: `PhantomData` 是 Rust 类型系统的"幽灵字段"——它在运行时完全不存在，但在编译期决定了：1) 类型的自动 trait 推导（Send/Sync）；2) 泛型参数的 variance；3) drop check 的行为。这是"零成本抽象（Zero-Cost Abstraction）"的极致体现。
-> **来源**: [Rust Reference: PhantomData](https://doc.rust-lang.org/reference/special-types-and-traits.html) · [Rust Reference: Variance](https://doc.rust-lang.org/reference/) · [Rustonomicon: PhantomData](https://doc.rust-lang.org/nomicon/) · [Wikipedia: Unit type](https://en.wikipedia.org/wiki/Unit_type)
+> **关键洞察**:
+>
+> `PhantomData` 是 Rust 类型系统的"幽灵字段"——它在运行时完全不存在，但在编译期决定了：
+>
+> 1) 类型的自动 trait 推导（Send/Sync）；
+> 2) 泛型参数的 variance；
+> 3) drop check 的行为。
+> 这是"零成本抽象（Zero-Cost Abstraction）"的极致体现。
+>
+> **来源**: [Rust Reference: PhantomData](https://doc.rust-lang.org/reference/special-types-and-traits.html) ·
+> [Rust Reference: Variance](https://doc.rust-lang.org/reference/) ·
+> [Rustonomicon: PhantomData](https://doc.rust-lang.org/nomicon/) ·
+> [Wikipedia: Unit type](https://en.wikipedia.org/wiki/Unit_type)
 
 ---
 
@@ -1158,13 +1181,24 @@ let b: Array<i32, 5> = Array { data: [1, 2, 3, 4, 5] };
 
 **与 Dependent Type 的关系**：Const Generics 是**受限的依赖类型**（Dependent Type）——值（`N`）可以出现在类型中，但值的计算必须是编译期可求值的常量表达式。
 
-> **来源**: [RFC 2000: Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html) · [Rust Reference: Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics) · [Wikipedia: Dependent type](https://en.wikipedia.org/wiki/Dependent_type)
+> **来源**:
+>
+> [RFC 2000: Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html) ·
+> [Rust Reference: Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics) ·
+> [Wikipedia: Dependent type](https://en.wikipedia.org/wiki/Dependent_type)
 
 ### 11.4 Type Inference：HM 算法完整规则
 
 > **Bloom 层级**: 分析 → 评价
-> Rust 的类型推断基于 **Hindley-Milner (HM) 算法**，这是函数式编程语言（ML、Haskell）的基石。HM 算法的核心特性是 **Principal Type Property**：对无显式类型约束的表达式，存在唯一的最一般类型（principal type），编译器可自动推导。本节从 HM 核心规则出发，逐步扩展到 Rust 的 trait bounds、生命周期与关联类型，建立类型推断的完整形式化图景。
-> **交叉链接**: [L1 生命周期: Elision 规则](./03_lifetimes.md) · [L2 泛型: 约束推导](../02_intermediate/02_generics.md) · [L4 类型论: 系统 F](../04_formal/02_type_theory.md)
+> Rust 的类型推断基于 **Hindley-Milner (HM) 算法**，这是函数式编程语言（ML、Haskell）的基石。
+> HM 算法的核心特性是 **Principal Type Property**：对无显式类型约束的表达式，存在唯一的最一般类型（principal type），编译器可自动推导。
+> 本节从 HM 核心规则出发，逐步扩展到 Rust 的 trait bounds、生命周期与关联类型，建立类型推断的完整形式化图景。
+>
+> **交叉链接**:
+>
+> [L1 生命周期: Elision 规则](./03_lifetimes.md) ·
+> [L2 泛型: 约束推导](../02_intermediate/02_generics.md) ·
+> [L4 类型论: 系统 F](../04_formal/02_type_theory.md)
 
 #### 11.4.1 HM 核心规则（Var、App、Abs、Let）
 
@@ -1828,7 +1862,9 @@ struct Vector2D { x: f64, y: f64 }
 // Rust 不支持 { x: f64, y: f64 } 作为独立类型
 ```
 
-> **[来源: [RFC 2584](https://github.com/rust-lang/rfcs/pull/2584): Structural Records (closed)]** Centril 提出的 Structural Records RFC 试图为 Rust 引入匿名记录类型 `{ x: f64, y: f64 }`，但该 RFC 已被关闭（postponed/closed）。这意味着 Rust 设计者**刻意保留了记录结构体的名义性**——记录字段的命名是类型身份的一部分，不可通过结构等价绕过。✅
+> **[来源: [RFC 2584](https://github.com/rust-lang/rfcs/pull/2584): Structural Records (closed)]**
+> Centril 提出的 Structural Records RFC 试图为 Rust 引入匿名记录类型 `{ x: f64, y: f64 }`，但该 RFC 已被关闭（postponed/closed）。
+> 这意味着 Rust 设计者**刻意保留了记录结构体的名义性**——记录字段的命名是类型身份的一部分，不可通过结构等价绕过。✅
 
 **关键洞察**：单元类型 `()` 和元组类型 `(T, U)` 既有名义包装（`struct Unit;`、`struct T(A, B)`）又有结构原型（`()`、`(A, B)`），但**记录结构体 `struct T { a: A }` 只有名义形式**。这种不对称性反映了 Rust 的设计哲学：
 

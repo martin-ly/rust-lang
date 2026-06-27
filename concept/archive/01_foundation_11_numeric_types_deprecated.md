@@ -3,7 +3,6 @@
 # Rust 数值类型与运算
 >
 > **EN**: Foundation 11 Numeric Types Deprecated
-
 > **受众**: [归档]
 > **Bloom 层级**: 理解 → 应用
 > **定位**: 系统讲解 Rust 的**数值类型**——从整数、浮点到 wrapping/saturating 运算，分析类型安全如何防止数值错误。

@@ -890,7 +890,11 @@ fn complex_lifetime_fixed<'a, 'b>(a: &'a str, b: &'b str, _c: &str) -> (&'a str,
 }
 ```
 
-> **修正**: 生命周期省略规则仅适用于简单情况（单输入引用 → 单输出引用）。当函数签名涉及多个输入引用和多个输出引用时，编译器无法自动推断生命周期关系，必须显式标注。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**:
+>
+> 生命周期省略规则仅适用于简单情况（单输入引用 → 单输出引用）。
+> 当函数签名涉及多个输入引用和多个输出引用时，编译器无法自动推断生命周期关系，必须显式标注。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 8.6 边界测试：生命周期与所有权转移的交互（编译错误）
 
@@ -914,7 +918,12 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 的所有权转移（move）与借用是互斥的。若变量已被借用（无论是共享借用 `&T` 还是可变借用 `&mut T`），在借用释放前不能转移其所有权。这与 C++ 的移动语义不同——C++ 允许从被引用对象移动（可能导致悬垂引用），而 Rust 在编译期阻止这种危险模式。此外，Rust 禁止读取未初始化变量（uninitialized），`let x: i32;` 声明后若未赋值就使用，编译器报错。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
+> **修正**:
+>
+> Rust 的所有权转移（move）与借用是互斥的。若变量已被借用（无论是共享借用 `&T` 还是可变借用 `&mut T`），在借用释放前不能转移其所有权。
+> 这与 C++ 的移动语义不同——C++ 允许从被引用对象移动（可能导致悬垂引用），而 Rust 在编译期阻止这种危险模式。
+> 此外，Rust 禁止读取未初始化变量（uninitialized），`let x: i32;` 声明后若未赋值就使用，编译器报错。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
 
 ---
 
@@ -940,7 +949,19 @@ fn main() {
 }
 ```
 
-> **修正**: 生命周期**省略规则**（lifetime elision）的三条规则：1) 每个引用参数获得独立生命周期参数；2) 若只有一个输入生命周期，它赋给所有输出生命周期；3) 若有多个输入生命周期且一个是 `&self`/`&mut self`，`self` 的生命周期赋给输出。`longest` 有两个输入引用且无 `self`，规则不适用，必须显式标注：`fn longest<'a>(x: &'a str, y: &'a str) -> &'a str`。省略规则的设计：减少常见情况（方法、单参数函数）的噪音，强制显式标注模糊情况。这与 C++ 的引用（无生命周期概念）或 Java 的引用（无生命周期概念）不同——Rust 的生命周期标注是编译期检查的工具，省略规则是可用性优化。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)] · [来源: [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html)]
+> **修正**:
+>
+> 生命周期**省略规则**（lifetime elision）的三条规则：
+>
+> 1) 每个引用参数获得独立生命周期参数；
+> 2) 若只有一个输入生命周期，它赋给所有输出生命周期；
+> 3) 若有多个输入生命周期且一个是 `&self`/`&mut self`，`self` 的生命周期赋给输出。
+> `longest` 有两个输入引用且无 `self`，规则不适用，必须显式标注：`fn longest<'a>(x: &'a str, y: &'a str) -> &'a str`。
+>
+> 省略规则的设计：减少常见情况（方法、单参数函数）的噪音，强制显式标注模糊情况。
+> 这与 C++ 的引用（无生命周期概念）或 Java 的引用（无生命周期概念）不同——Rust 的生命周期标注是编译期检查的工具，省略规则是可用性优化。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)] ·
+> [来源: [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html)]
 
 ### 10.6 边界测试：静态生命周期 `'static` 的滥用与字符串字面量（编译错误）
 
@@ -954,7 +975,27 @@ fn main() {
 }
 ```
 
-> **修正**: `'static` 是 Rust 中最长的生命周期：程序整个运行期间。`&'static str` 通常来自字符串字面量（`"hello"`，编译期嵌入二进制）或泄漏的内存（`Box::leak`）。常见滥用：1) 将局部变量引用标注为 `'static`；2) 在 trait bound 中过度使用 `'static`（排除所有非静态引用）；3) 线程闭包要求 `'static`，但试图捕获局部引用。`'static` 的正确使用：1) 全局常量；2) 字符串字面量；3) 泄漏的 Box（`Box::leak(Box::new(...))`）；4) `lazy_static` / `once_cell`。这与 C 的 `static` 关键字（存储期，非生命周期概念）或 Java 的 `static` 字段（类级别，与 Rust 的 `'static` 部分相似）不同——Rust 的 `'static` 是生命周期标注，非存储类说明符。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)] · [来源: [Rust Reference — 'static](https://doc.rust-lang.org/reference/lifetime-elision.html#the-static-lifetime)]
+> **修正**:
+>
+> `'static` 是 Rust 中最长的生命周期：程序整个运行期间。
+> `&'static str` 通常来自字符串字面量（`"hello"`，编译期嵌入二进制）或泄漏的内存（`Box::leak`）。
+> 常见滥用：
+>
+> 1) 将局部变量引用标注为 `'static`；
+> 2) 在 trait bound 中过度使用 `'static`（排除所有非静态引用）；
+> 3) 线程闭包要求 `'static`，但试图捕获局部引用。
+>
+> `'static` 的正确使用：
+>
+> 1) 全局常量；
+> 2) 字符串字面量；
+> 3) 泄漏的 Box（`Box::leak(Box::new(...))`）；
+> 4) `lazy_static` / `once_cell`。
+>
+> 这与 C 的 `static` 关键字（存储期，非生命周期概念）或 Java 的 `static` 字段（类级别，与 Rust 的 `'static` 部分相似）不同——Rust 的 `'static` 是生命周期标注，非存储类说明符。
+>
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)] ·
+> [来源: [Rust Reference — 'static](https://doc.rust-lang.org/reference/lifetime-elision.html#the-static-lifetime)]
 
 ## 嵌入式测验
 

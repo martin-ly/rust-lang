@@ -14,7 +14,17 @@
 > **双维定位**: P×Eva — 评判 unsafe 契约的充分性
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Memory Management](../02_intermediate/03_memory_management.md) · [Concurrency](../03_advanced/01_concurrency.md)
 > **后置概念**: [FFI] · [Embedded] · [Custom Allocators]
-> **主要来源**: [TRPL: Ch19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) · [Rust Reference: Unsafe Rust](https://doc.rust-lang.org/reference/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [RFC 2585](https://rust-lang.github.io/rfcs/2585-unsafe-block-in-unsafe-fn.html) · [RFC 3325](https://rust-lang.github.io/rfcs/3325-unsafe-attributes.html) · [RFC 3484](https://rust-lang.github.io/rfcs/3484-unsafe-extern-blocks.html) · [Rust Edition Guide 2024 — unsafe_op_in_unsafe_fn](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html) · [Rust Edition Guide 2024 — unsafe extern blocks](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-extern.html) · [Rust Edition Guide 2024 — unsafe attributes](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-attributes.html)
+> **主要来源**:
+> [TRPL: Ch19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) ·
+> [Rust Reference: Unsafe Rust](https://doc.rust-lang.org/reference/) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+> [RFC 2585](https://rust-lang.github.io/rfcs/2585-unsafe-block-in-unsafe-fn.html) ·
+> [RFC 3325](https://rust-lang.github.io/rfcs/3325-unsafe-attributes.html) ·
+> [RFC 3484](https://rust-lang.github.io/rfcs/3484-unsafe-extern-blocks.html) ·
+> [Rust Edition Guide 2024 — unsafe_op_in_unsafe_fn](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html) ·
+> [Rust Edition Guide 2024 — unsafe extern blocks](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-extern.html) ·
+> [Rust Edition Guide 2024 — unsafe attributes](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-attributes.html)
+>
 
 ---
 

@@ -11,7 +11,6 @@
 > **定位**: 探讨 Rust 的**指称语义**（Denotational Semantics）基础——从 Scott-Strachey 方法到完备偏序（CPO）、不动点理论，分析 Rust 类型如何通过数学对象赋予意义。
 > **前置概念**: [Type Theory](./02_type_theory.md) · [Operational Semantics](./17_operational_semantics.md) · [Linear Logic](./01_linear_logic.md)
 > **后置概念**: [Category Theory](./10_category_theory.md) · [RustBelt](./04_rustbelt.md)
-
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---

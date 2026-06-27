@@ -390,7 +390,12 @@ let process = async |items: Vec<i32>| -> i32 {
 
 ---
 
-> **权威来源**: [RFC 3668](https://rust-lang.github.io/rfcs/3668-async-closures.html), [Rust Reference](https://doc.rust-lang.org/reference/expressions/closure-expr.html#async-closures), [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html), [Rust 1.85.0 Release Notes](https://blog.rust-lang.org/2025/02/20/Rust-1.85.0.html)
+> **权威来源**:
+>
+> [RFC 3668](https://rust-lang.github.io/rfcs/3668-async-closures.html),
+> [Rust Reference](https://doc.rust-lang.org/reference/expressions/closure-expr.html#async-closures),
+> [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html),
+> [Rust 1.85.0 Release Notes](https://blog.rust-lang.org/2025/02/20/Rust-1.85.0.html)
 >
 > **文档版本**: 2.0
 > **对应 Rust 版本**: 1.85.0+ (Edition 2024 / 2021)

@@ -1,7 +1,7 @@
-> **内容分级**: [综述级]
-
+> **内容分级**:
+>
+> [综述级]
 > **代码状态**: ✅ 含可编译示例
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态）
@@ -21,7 +21,6 @@
 > [性能优化](./15_performance_optimization.md) ·
 > [机器学习生态](./46_machine_learning_ecosystem.md) ·
 > [形式化验证工具](./47_formal_verification_tools.md)
-
 >
 > **来源**: [rclrs](https://docs.rs/rclrs/) · [ROS2 Rust](https://github.com/ros2-rust/ros2_rust)
 ---
@@ -40,11 +39,8 @@
 > [ROS2 Executor Paper — Casini et al. 2019](https://doi.org/10.1109/LRA.2020.2967328) ·
 > [PREEMPT_RT Wiki](https://wiki.linuxfoundation.org/realtime/start) ·
 > [Rust Embedded Book](https://docs.rust-embedded.org/book/)
-
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录

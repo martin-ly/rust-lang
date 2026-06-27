@@ -1,4 +1,6 @@
-> **内容分级**: [综述级]
+> **内容分级**:
+>
+> [综述级]
 
 > **本节关键术语**: assert_matches! · 模式匹配断言 (Pattern Match Assertion) · debug_assert_matches! · 测试断言 (Test Assertion) — [完整对照表](../00_meta/terminology_glossary.md)
 >
@@ -16,8 +18,11 @@
 
 ---
 
-> **来源**: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) ·
-> [Rust 1.96 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) · [releases.rs 1.96.0](https://releases.rs/docs/1.96.0/) · [std::assert_matches](https://doc.rust-lang.org/std/macro.assert_matches.html) ·
+> **来源**:
+> [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) ·
+> [Rust 1.96 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) ·
+> [releases.rs 1.96.0](https://releases.rs/docs/1.96.0/) ·
+> [std::assert_matches](https://doc.rust-lang.org/std/macro.assert_matches.html) ·
 > [RFC 2005 — `matches!`](https://github.com/rust-lang/rfcs/pull/2005) ·
 > [std::matches](https://doc.rust-lang.org/std/macro.matches.html)
 

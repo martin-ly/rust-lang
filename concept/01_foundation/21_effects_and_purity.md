@@ -1,6 +1,7 @@
 > **内容分级**:
 >
 > [综述级]
+>
 > **本节关键术语**: 副作用 (Side Effect) · 纯函数 (Pure Function) · 引用透明 (Referential Transparency) · 效果系统 (Effect System) · IO — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 副作用与纯度：从引用透明到 Rust 的所有权效果

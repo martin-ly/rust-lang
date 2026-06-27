@@ -1,7 +1,6 @@
 # Rust Edition 机制与迁移指南
 
 > **代码状态**: ✅ 含可编译示例
-
 >
 > **EN**: Rust Edition Guide
 > **Summary**: Rust Edition Guide: emerging Rust language feature or ecosystem trend.

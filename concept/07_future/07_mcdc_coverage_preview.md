@@ -1,7 +1,6 @@
 # MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证
 
 > **代码状态**: ✅ 含可编译示例
-
 >
 > **EN**: MC/DC Coverage Preview
 > **Summary**: Preview of modified condition/decision coverage (MC/DC) support in Rust's coverage tooling.

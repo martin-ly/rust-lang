@@ -1,7 +1,6 @@
 # `std::autodiff`：Rust 官方自动微分前沿追踪
 
 > **代码状态**: [综述级 — 待补充代码]
-
 >
 > **EN**: Std Autodiff Preview
 > **Summary**: Std Autodiff Preview: emerging Rust language feature or ecosystem trend.

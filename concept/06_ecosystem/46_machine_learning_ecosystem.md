@@ -19,7 +19,16 @@
 > **来源**: [candle](https://docs.rs/candle-core/) · [burn](https://docs.rs/burn/) · [tch-rs](https://docs.rs/tch/)
 ---
 
-> **来源**: [candle — Hugging Face](https://github.com/huggingface/candle) · [burn — Deep Learning Framework](https://burn.dev/) · [tch-rs — PyTorch Rust Bindings](https://github.com/LaurentMazare/tch-rs) · [ort — ONNX Runtime Rust](https://github.com/pykeio/ort) · [linfa — ML Algorithms](https://github.com/rust-ml/linfa) · [polars — DataFrame Library](https://pola.rs/) · [Apache Arrow Rust](https://arrow.apache.org/rust/) · [DataFusion — Query Engine](https://arrow.apache.org/datafusion/)
+> **来源**:
+>
+> [candle — Hugging Face](https://github.com/huggingface/candle) ·
+> [burn — Deep Learning Framework](https://burn.dev/) ·
+> [tch-rs — PyTorch Rust Bindings](https://github.com/LaurentMazare/tch-rs) ·
+> [ort — ONNX Runtime Rust](https://github.com/pykeio/ort) ·
+> [linfa — ML Algorithms](https://github.com/rust-ml/linfa) ·
+> [polars — DataFrame Library](https://pola.rs/) ·
+> [Apache Arrow Rust](https://arrow.apache.org/rust/) ·
+> [DataFusion — Query Engine](https://arrow.apache.org/datafusion/)
 
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)

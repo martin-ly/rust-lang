@@ -753,7 +753,11 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 > | Rust Async Book | [rust-lang.github.io/async-book](https://rust-lang.github.io/async-book/) |
 > | Cargo Book | [doc.rust-lang.org/cargo](https://doc.rust-lang.org/cargo/) |
 > | Wikipedia — PL Comparison | [en.wikipedia.org/wiki/Comparison_of_programming_languages](https://en.wikipedia.org/wiki/Comparison_of_programming_languages) |
-> **权威来源对齐变更日志**: 2026-05-22 批量补充来源标注（Rust Reference、TRPL、Rustonomicon、标准库、Wikipedia 等）
+>
+> **权威来源对齐变更日志**:
+>
+> 2026-05-22 批量补充来源标注（Rust Reference、TRPL、Rustonomicon、标准库、Wikipedia 等）
+>
 > [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1

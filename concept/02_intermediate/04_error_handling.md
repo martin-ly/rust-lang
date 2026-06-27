@@ -1,4 +1,6 @@
-> **内容分级**: [综述级]
+> **内容分级**:
+>
+> [综述级]
 
 > **本节关键术语**: 错误处理 (Error Handling) · Result · Option · ? 运算符 · 自定义错误类型 · thiserror — [完整对照表](../00_meta/terminology_glossary.md)
 >

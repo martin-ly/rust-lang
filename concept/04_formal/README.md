@@ -10,7 +10,6 @@
 > **Bloom 层级**: 分析 → 评价
 > **核心功能**: 为上层概念提供**形式化直觉**与**教学类比**的安全性解释；指向可机械验证证明的权威来源（RustBelt、Iris、Coq）
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** · **来源: [Wikipedia - Separation Logic](https://en.wikipedia.org/wiki/Separation_Logic)** · **来源: [Wikipedia - Linear Logic](https://en.wikipedia.org/wiki/Linear_Logic)** · **来源: [Iris Project - iris-project.org](https://iris-project.org/)**
-
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---

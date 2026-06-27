@@ -1,7 +1,6 @@
 # 派生 CoercePointee 预研：智能指针的自动类型强制
 
 > **代码状态**: [综述级 — 待补充代码]
-
 >
 > **EN**: Derive CoercePointee Preview
 > **Summary**: Preview of the `CoercePointee` derive for custom smart-pointer types.

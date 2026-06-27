@@ -1,16 +1,26 @@
 #!/usr/bin/env python3
-"""为 concept/01_foundation、02_intermediate、03_advanced 中的 Markdown 文件
-添加关键术语中英双语标注（首次出现且未标注时）。
+"""为 concept/ 中的 Markdown 文件添加关键术语中英双语标注，并支持国际化元数据检查。
 
-规则：
-- 跳过代码块、行内代码、Markdown 链接和图片。
-- 跳过标题行（# ...）。
-- 仅当同一行没有明显英文对照时才标注。
-- 每文件每个术语只标注第一次出现。
+模式:
+- 默认模式: 扫描并自动标注 01_foundation / 02_intermediate / 03_advanced。
+- enforce 模式: 覆盖全部 concept/ 目录，对缺失 EN/Summary 或未标注术语报错，不修改文件。
+- check-only 模式: 只检查不修改，输出未覆盖术语清单。
+
+用法:
+    python scripts/add_bilingual_annotations.py
+    python scripts/add_bilingual_annotations.py --mode enforce
+    python scripts/add_bilingual_annotations.py --mode check-only --dir concept/06_ecosystem
 """
 
-from pathlib import Path
+from __future__ import annotations
+
+import argparse
+import json
 import re
+import sys
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Iterable
 
 TERMS = [
     ("所有权", "Ownership"),
@@ -55,21 +65,42 @@ TERMS = [
     ("Cargo", "Cargo"),
     ("零成本抽象", "Zero-Cost Abstraction"),
     ("RAII", "RAII"),
+    ("类型系统", "Type System"),
+    ("类型推断", "Type Inference"),
+    ("内存安全", "Memory Safety"),
+    ("并发安全", "Concurrency Safety"),
+    ("Send", "Send"),
+    ("Sync", "Sync"),
+    ("unsafe", "Unsafe"),
+    ("Pin", "Pin"),
+    ("生命周期省略", "Lifetime Elision"),
+    ("孤儿规则", "Orphan Rule"),
+    ("一致性", "Coherence"),
+    ("单态化", "Monomorphization"),
 ]
 
-DIRS = [
+DEFAULT_DIRS = [
     Path("concept/01_foundation"),
     Path("concept/02_intermediate"),
     Path("concept/03_advanced"),
 ]
 
-# 占位符模板
+ALL_CONCEPT_DIRS = [Path("concept")]
+
 LINK_PLACEHOLDER = "\x00LINK\x00"
 CODE_PLACEHOLDER = "\x00CODE\x00"
 
 
+@dataclass
+class FileReport:
+    path: Path
+    missing_en: bool = False
+    missing_summary: bool = False
+    uncovered_terms: list[str] = field(default_factory=list)
+    annotated_terms: list[str] = field(default_factory=list)
+
+
 def mask_links_and_code(line: str) -> tuple[str, list[str], list[str]]:
-    """屏蔽 Markdown 链接、行内代码，返回处理后的行及占位符列表。"""
     links: list[str] = []
     codes: list[str] = []
 
@@ -81,15 +112,12 @@ def mask_links_and_code(line: str) -> tuple[str, list[str], list[str]]:
         codes.append(m.group(0))
         return CODE_PLACEHOLDER
 
-    # 先屏蔽行内代码，避免代码中的 [ 被误识别
     line = re.sub(r"`[^`]+`", code_repl, line)
-    # 屏蔽 Markdown 链接 [text](url) 和 ![alt](url)
     line = re.sub(r"!?\[[^\]]*\]\([^)]+\)", link_repl, line)
     return line, links, codes
 
 
 def unmask(line: str, links: list[str], codes: list[str]) -> str:
-    """恢复链接和代码占位符。"""
     parts = line.split(LINK_PLACEHOLDER)
     out = ""
     link_idx = 0
@@ -110,34 +138,39 @@ def unmask(line: str, links: list[str], codes: list[str]) -> str:
     return out
 
 
+def has_bilingual_annotation(text: str, cn: str, en: str) -> bool:
+    """检查文本中该术语是否已有双语标注。"""
+    # 1. 中文后紧跟英文括号
+    if re.search(rf"{re.escape(cn)}\s*[（(]{re.escape(en)}[）)]", text):
+        return True
+    # 2. 同一行已包含英文术语（简化判断）
+    if re.search(rf"\b{re.escape(en)}\b", text, re.IGNORECASE):
+        return True
+    return False
+
+
 def annotate_line(line: str, seen_terms: set[str]) -> tuple[str, bool]:
-    """对单行文本进行术语标注，返回新行和是否修改。"""
     masked, links, codes = mask_links_and_code(line)
     original_masked = masked
 
     for cn, en in TERMS:
         if cn in seen_terms:
             continue
-        # 跳过标题行
         if masked.lstrip().startswith("#"):
             continue
-        # 如果本行已包含对应英文术语，则不标注
         if re.search(rf"\b{re.escape(en)}\b", masked, re.IGNORECASE):
             continue
-        # 如果该术语后已紧跟英文括号标注，跳过
         if re.search(rf"{re.escape(cn)}\s*[\(（][A-Za-z]", masked):
             continue
-        # 查找首次出现且后面不紧跟英文括号的位置
+
         pattern = re.compile(
             rf"(?<![A-Za-z0-9_\u4e00-\u9fff])({re.escape(cn)})(?![A-Za-z0-9_\u4e00-\u9fff])"
         )
 
         def repl(m: re.Match) -> str:
-            # 检查后面紧跟的括号里是否已有英文
             tail = masked[m.end() : m.end() + 30]
             if re.match(r"[\(（][A-Za-z]", tail):
                 return m.group(1)
-            # 避免在纯中文括号内嵌套英文括号，如“（生命周期）”
             before = masked[m.start() - 1] if m.start() > 0 else ""
             after = masked[m.end()] if m.end() < len(masked) else ""
             if before in "（(" and after in "）)":
@@ -154,11 +187,59 @@ def annotate_line(line: str, seen_terms: set[str]) -> tuple[str, bool]:
     return unmask(masked, links, codes), True
 
 
-def process_file(path: Path) -> bool:
+def collect_text_blocks(content: str) -> str:
+    """收集 Markdown 中所有非代码块文本（用于检查术语覆盖）。"""
+    blocks = []
+    in_code = False
+    for line in content.splitlines():
+        if line.lstrip().startswith("```"):
+            in_code = not in_code
+            continue
+        if in_code:
+            continue
+        blocks.append(line)
+    return "\n".join(blocks)
+
+
+def check_metadata(content: str, path: Path) -> FileReport:
+    """检查文件头元数据。"""
+    report = FileReport(path=path)
+    if "**EN**" not in content:
+        report.missing_en = True
+    if "**Summary**" not in content:
+        report.missing_summary = True
+    return report
+
+
+def check_term_coverage(content: str, path: Path) -> FileReport:
+    """检查术语覆盖情况（不修改文件）。"""
+    report = FileReport(path=path)
+    text = collect_text_blocks(content)
+
+    for cn, en in TERMS:
+        # 仅对确实出现的术语检查是否已标注
+        if cn in text and not has_bilingual_annotation(text, cn, en):
+            report.uncovered_terms.append(cn)
+        elif cn in text:
+            report.annotated_terms.append(cn)
+
+    return report
+
+
+def process_file(path: Path, mode: str) -> FileReport | None:
     raw = path.read_bytes()
     has_bom = raw.startswith(b"\xef\xbb\xbf")
     original = raw.decode("utf-8-sig")
 
+    report = check_metadata(original, path)
+    coverage = check_term_coverage(original, path)
+    report.uncovered_terms = coverage.uncovered_terms
+    report.annotated_terms = coverage.annotated_terms
+
+    if mode in ("enforce", "check-only"):
+        return report
+
+    # 默认模式：自动标注
     parts = []
     in_code = False
     seen_terms: set[str] = set()
@@ -169,7 +250,6 @@ def process_file(path: Path) -> bool:
             in_code = not in_code
             parts.append(line)
             continue
-
         if in_code:
             parts.append(line)
             continue
@@ -185,19 +265,93 @@ def process_file(path: Path) -> bool:
         if has_bom:
             data = b"\xef\xbb\xbf" + data
         path.write_bytes(data)
-    return changed
+
+    return report
 
 
-def main() -> int:
-    modified = 0
-    for directory in DIRS:
+def iter_md_files(dirs: Iterable[Path]) -> Iterable[Path]:
+    for directory in dirs:
         if not directory.exists():
             continue
-        for path in sorted(directory.rglob("*.md")):
-            if process_file(path):
-                print(f"+ {path}")
-                modified += 1
-    print(f"\n共修改 {modified} 个文件")
+        if directory.is_file() and directory.suffix == ".md":
+            yield directory
+            continue
+        yield from sorted(directory.rglob("*.md"))
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="中英双语标注与国际化元数据检查")
+    parser.add_argument(
+        "--mode",
+        choices=["annotate", "enforce", "check-only"],
+        default="annotate",
+        help="annotate=自动标注; enforce=强制检查全部 concept/ 并报错; check-only=只检查不修改",
+    )
+    parser.add_argument("--dir", nargs="+", type=Path, help="指定目录（可多次）")
+    parser.add_argument("--output-uncovered", type=Path, help="输出未覆盖术语清单 JSON")
+    args = parser.parse_args(argv)
+
+    if args.dir:
+        dirs = args.dir
+    elif args.mode in ("enforce", "check-only"):
+        dirs = ALL_CONCEPT_DIRS
+    else:
+        dirs = DEFAULT_DIRS
+
+    reports: list[FileReport] = []
+    modified = 0
+
+    for path in iter_md_files(dirs):
+        # 跳过元目录自身的模板文件
+        if "00_meta" in path.parts and path.name != "BILINGUAL_TEMPLATE.md":
+            continue
+        report = process_file(path, args.mode)
+        if report is None:
+            continue
+        reports.append(report)
+        if args.mode == "annotate" and (report.annotated_terms or report.uncovered_terms):
+            # 默认模式下只要有检查到术语就打印，已修改的额外标记
+            print(f"{'+ ' if report.uncovered_terms else '  '}{path}")
+            modified += 1
+
+    # 汇总
+    total_missing_en = sum(1 for r in reports if r.missing_en)
+    total_missing_summary = sum(1 for r in reports if r.missing_summary)
+    total_uncovered = {term for r in reports for term in r.uncovered_terms}
+
+    print(f"\n扫描文件数: {len(reports)}")
+    if args.mode in ("enforce", "check-only"):
+        print(f"缺少 EN 字段: {total_missing_en}")
+        print(f"缺少 Summary 字段: {total_missing_summary}")
+        print(f"未覆盖术语种类: {len(total_uncovered)}")
+
+    if args.output_uncovered:
+        uncovered_by_term: dict[str, list[str]] = {}
+        for r in reports:
+            for term in r.uncovered_terms:
+                uncovered_by_term.setdefault(term, []).append(str(r.path))
+        args.output_uncovered.write_text(
+            json.dumps(uncovered_by_term, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+        print(f"未覆盖术语清单已保存: {args.output_uncovered}")
+
+    if args.mode == "enforce":
+        has_error = total_missing_en or total_missing_summary or total_uncovered
+        if has_error:
+            print("\n❌ 强制检查失败，请修复以下问题:")
+            if total_missing_en:
+                print(f"  - {total_missing_en} 个文件缺少 EN 字段")
+            if total_missing_summary:
+                print(f"  - {total_missing_summary} 个文件缺少 Summary 字段")
+            if total_uncovered:
+                print(f"  - {len(total_uncovered)} 种术语未覆盖: {', '.join(sorted(total_uncovered))}")
+            return 1
+        print("\n✅ 强制检查通过")
+        return 0
+
+    if args.mode == "annotate":
+        print(f"共处理 {len(reports)} 个文件，修改 {modified} 个")
     return 0
 
 

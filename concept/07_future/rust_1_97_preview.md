@@ -1,7 +1,6 @@
 # Rust 1.97 前沿特性预览
 
 > **代码状态**: [实现级 — 代码已补充]
-
 >
 > **EN**: Rust 1 97 Preview
 > **Summary**: Rust 1 97 Preview: emerging Rust language feature or ecosystem trend.

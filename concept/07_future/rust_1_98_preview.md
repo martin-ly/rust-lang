@@ -253,7 +253,13 @@ fn demo_198_apis() {
 }
 ```
 
-**代码实现**: [`demo_float_algebraic()`](../../../crates/c08_algorithms/src/rust_197_features.rs) · [`demo_int_format_into()`](../../../crates/c08_algorithms/src/rust_197_features.rs) · [`demo_core_range_completion()`](../../../crates/c08_algorithms/src/rust_197_features.rs) · [`demo_nonzero_from_str_radix()`](../../../crates/c08_algorithms/src/rust_197_features.rs) · [`demo_box_as_ptr()`](../../../crates/c08_algorithms/src/rust_197_features.rs)
+**代码实现**:
+
+[`demo_float_algebraic()`](../../../crates/c08_algorithms/src/rust_197_features.rs) ·
+[`demo_int_format_into()`](../../../crates/c08_algorithms/src/rust_197_features.rs) ·
+[`demo_core_range_completion()`](../../../crates/c08_algorithms/src/rust_197_features.rs) ·
+[`demo_nonzero_from_str_radix()`](../../../crates/c08_algorithms/src/rust_197_features.rs) ·
+[`demo_box_as_ptr()`](../../../crates/c08_algorithms/src/rust_197_features.rs)
 
 ---
 

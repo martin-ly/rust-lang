@@ -280,7 +280,8 @@ Ferrocene 证据包构成:
 
 ### 3.2 Safety-Critical Rust Consortium
 
-**[Rust Foundation / Rust Blog, 2024-06 / 2025-12 / 2026-01]** Rust Foundation 与 AdaCore、Arm、Ferrous Systems、HighTec、Lynx Software Technologies、OxidOS、TECHFUND、TrustInSoft、Veecle、Woven by Toyota 于 2024 年 6 月共同发起 [Safety-Critical Rust Consortium（SCRC）](https://rustfoundation.org/safety-critical-rust-consortium/)，目标是支持 Rust 在安全关键软件中的负责任使用。
+**[Rust Foundation / Rust Blog, 2024-06 / 2025-12 / 2026-01]**
+Rust Foundation 与 AdaCore、Arm、Ferrous Systems、HighTec、Lynx Software Technologies、OxidOS、TECHFUND、TrustInSoft、Veecle、Woven by Toyota 于 2024 年 6 月共同发起 [Safety-Critical Rust Consortium（SCRC）](https://rustfoundation.org/safety-critical-rust-consortium/)，目标是支持 Rust 在安全关键软件中的负责任使用。
 
 **治理与参与模式**：
 
@@ -305,7 +306,12 @@ Ferrocene 证据包构成:
 - 两者共同构成 Rust 进入汽车/航空/医疗/工业安全关键市场的“工具链 + 行业治理”双支柱
 
 > **关键洞察**: 安全关键 Rust 的成熟不能仅靠单个产品（Ferrocene）或单个组织完成。SCRC 通过免费会员、子委员会分工和公开会议，把行业需求聚合为 Rust Project 可执行的目标，这是开源语言进入受监管行业的制度创新。
-> **来源**: [Safety-Critical Rust Consortium](https://rustfoundation.org/safety-critical-rust-consortium/) · [GitHub — rustfoundation/safety-critical-rust-consortium](https://github.com/rustfoundation/safety-critical-rust-consortium) · [Rust Blog — What does it take to ship Rust in safety-critical?](https://blog.rust-lang.org/) · 可信度: ✅
+> **来源**:
+>
+> [Safety-Critical Rust Consortium](https://rustfoundation.org/safety-critical-rust-consortium/) ·
+> [GitHub — rustfoundation/safety-critical-rust-consortium](https://github.com/rustfoundation/safety-critical-rust-consortium) ·
+> [Rust Blog — What does it take to ship Rust in safety-critical?](https://blog.rust-lang.org/) · 可信度: ✅
+>
 
 ---
 

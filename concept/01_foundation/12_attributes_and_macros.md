@@ -1,4 +1,7 @@
-> **内容分级**: [综述级]
+> **内容分级**:
+>
+> [综述级]
+>
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **本节关键术语**: 属性 (Attribute) · 宏 (Macro) · 声明宏 (Declarative Macro) · 过程宏 (Procedural Macro) · derive — [完整对照表](../00_meta/terminology_glossary.md)
 >

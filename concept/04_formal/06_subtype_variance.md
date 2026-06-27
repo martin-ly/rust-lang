@@ -20,7 +20,6 @@
 > [Rustonomicon — Variance](https://doc.rust-lang.org/nomicon/subtyping.html) ·
 > [Wikipedia — Covariance and Contravariance](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)) ·
 > [TAPL — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
-
 > **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md)
 
 ## 📑 目录

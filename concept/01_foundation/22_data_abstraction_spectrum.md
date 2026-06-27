@@ -1,7 +1,10 @@
 > **内容分级**:
 >
 > [综述级]
-> **本节关键术语**: 数据抽象 (Data Abstraction) · 封装 (Encapsulation) · 信息隐藏 (Information Hiding) · 模块边界 (Module Boundary) · API 设计 — [完整对照表](../00_meta/terminology_glossary.md)
+>
+> **本节关键术语**:
+>
+> 数据抽象 (Data Abstraction) · 封装 (Encapsulation) · 信息隐藏 (Information Hiding) · 模块边界 (Module Boundary) · API 设计 — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # 数据抽象谱系：从 C struct 到 Rust enum + trait
 >

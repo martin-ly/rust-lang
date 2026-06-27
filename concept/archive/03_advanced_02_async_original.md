@@ -13,7 +13,6 @@
 # Async/Await（异步 [来源: [Async Rust](https://rust-lang.github.io/async-book/)]编程）
 >
 > **EN**: Advanced 02 Async Original
-
 > **受众**: [归档]
 > **层次定位**: L3 高级概念 / 异步子域
 > **A/S/P 标记**: **S+P** — Structure + Procedure
@@ -183,13 +182,11 @@ Step 6: "什么时候会阻塞？"
 ## 一、权威定义（Definition）
 >
 > [来源: [Rust Async Book]]
-
 > **章节过渡**：在深入 Rust 的 async/await 之前，需先建立跨语言的语义坐标系。以下定义从 Wikipedia 的通用概念出发，收敛到 Rust 官方文档的精确语义，最终形式化为状态机与 trait 系统。三层定义形成"宽泛→精确→可执行"的漏斗。
 
 ### 1.1 Wikipedia 权威定义
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 > **[Wikipedia: Asynchronous programming]** Asynchronous programming is a means of parallel programming in which a unit of work runs separately from the main application thread and notifies the calling thread of its completion, failure or progress. It is a programming paradigm that enables non-blocking operations.
 
 > **[Wikipedia: Coroutine]** Coroutines are computer program components that generalize subroutines for non-preemptive multitasking, by allowing execution to be suspended and resumed. Coroutines are well-suited for implementing familiar program components such as cooperative tasks, exceptions, event loops, iterators, infinite lists and pipes.
@@ -199,15 +196,11 @@ Step 6: "什么时候会阻塞？"
 ### 1.2 官方文档定义
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html)]**
-
 > **[Async Book]** Asynchronous code allows us to run multiple tasks concurrently on the same OS thread. In Rust, asynchronous code is lazy: it does nothing until it is actively executed by calling `.await`.
-
 > **[TRPL: Ch17]** A future is an asynchronous computation that can produce a value. `async fn` returns a future. When you call an `async fn`, it returns a future that is a suspended computation, not the result. Futures are lazy: they don't do any work until you await them.
-
 > **[Rust Reference: Async await]** `async fn` 被编译器转换为返回 `impl Future<Output = T>` 的函数，`.await` 被转换为对 `Future::poll` 的循环调用。✅ 已验证
 >
 > **[RFC 2394]** async/await 语法糖的设计基于生成器（generator）状态机转换，语义等价于显式 Future 组合。 ✅ 已验证
-
 > **[RFC 2592: Futures 0.3]** The `Future` trait and `async/await` syntax were stabilized based on [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html), with the `Pin` type introduced in [RFC 2349](https://rust-lang.github.io/rfcs//2349-pin.html) to support self-referential async state machines. ✅ 已验证
 
 ### 1.3 形式化定义
@@ -1572,7 +1565,6 @@ impl UringReactor {
 ```
 
 > **[来源: tokio-rs/tokio-uring 设计文档]** io_uring 的 `user_data` 字段天然适合存储 Waker 标识，避免了 epoll 的 fd→Waker HashMap 查找开销。但 io_uring 的共享环设计对线程安全提出更高要求——Waker 的 `wake` 需是线程安全的（`Send + Sync`），因为完成事件可能在任意 CPU 核心上产生。
-
 > **Bloom 层级**: 分析 —— 理解 Waker 与 OS 的交互边界，是手写 Future 和自定义运行时的必要知识。
 
 ---
@@ -1580,13 +1572,11 @@ impl UringReactor {
 ### 8.10 `Stream` / `Sink` trait 完整分析
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **章节过渡**：Future 表示单个异步计算，但许多场景需要处理异步序列（如网络数据包流、消息队列）。`Stream` 将异步能力扩展到迭代器领域，`Sink` 则提供异步生产者抽象。理解它们与 `Iterator`、`Future` 的关系，是构建异步管道的关键。
 
 **`Stream`：异步迭代器**
 
 > **[futures-rs 文档]** `Stream` 是异步版的 `Iterator`，其核心方法为 `poll_next`，返回 `Poll<Option<Self::Item>>`。每次 `poll_next` 可能返回 `Pending`，表示下一个元素尚未就绪。✅ 已验证
-
 > **[Rust Async Book]** `Stream` 允许在 `await` 循环中逐个消费异步产生的元素，是 `Iterator` 在异步世界的直接对应物。✅ 已验证
 
 ```rust,ignore

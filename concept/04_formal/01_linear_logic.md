@@ -1,4 +1,6 @@
-> **内容分级**: [专家级]
+> **内容分级**:
+>
+> [专家级]
 
 # Linear Logic & Affine Logic（线性逻辑与仿射逻辑）
 >
@@ -13,7 +15,12 @@
 > **双维定位**: C×Ana — 分析线性逻辑到 Rust 的映射
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md) [来源: [TAPL — Pierce 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 > **后置概念**: [Ownership Formalization](./03_ownership_formal.md) · [RustBelt](./04_rustbelt.md)
-> **主要来源**: [Wikipedia: Linear logic](https://en.wikipedia.org/wiki/Linear_logic) · [Wikipedia: Affine logic](https://en.wikipedia.org/wiki/Affine_logic) · [Girard 1987] · [Pierce 2002, TAPL §15] · [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) · [Utrecht: Ownership Types]
+> **主要来源**:
+> [Wikipedia: Linear logic](https://en.wikipedia.org/wiki/Linear_logic) ·
+> [Wikipedia: Affine logic](https://en.wikipedia.org/wiki/Affine_logic) ·
+> [Girard 1987] · [Pierce 2002, TAPL §15] ·
+> [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) ·
+> [Utrecht: Ownership Types]
 
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)

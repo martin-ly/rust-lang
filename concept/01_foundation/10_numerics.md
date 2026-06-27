@@ -1,4 +1,7 @@
-> **内容分级**: [综述级]
+> **内容分级**:
+>
+> [综述级]
+>
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **本节关键术语**: 数值类型 (Numeric Types) · 整数溢出 (Integer Overflow) · 浮点数 (Floating Point) · 类型转换 (Type Conversion) · 字面值后缀 (Literal Suffix) — [完整对照表](../00_meta/terminology_glossary.md)
 >

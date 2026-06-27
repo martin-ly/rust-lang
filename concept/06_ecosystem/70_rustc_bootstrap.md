@@ -1,5 +1,6 @@
-> **内容分级**: [综述级]
-
+> **内容分级**:
+>
+> [综述级]
 > **本节关键术语**: Bootstrap · `x.py` · `x` · Stage0 · Stage1 · Stage2 · `bootstrap.toml` · `cfg(bootstrap)` · `RUSTC_BOOTSTRAP` — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # rustc 自举（Bootstrap）

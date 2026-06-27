@@ -1,7 +1,7 @@
-> **内容分级**: [专家级]
-
+> **内容分级**:
+>
+> [专家级]
 > **代码状态**: ✅ 含可编译示例
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # CQRS & Event Sourcing（命令查询职责分离与事件溯源）
@@ -10,13 +10,11 @@
 > **Summary**: CQRS & Event Sourcing. Guide to 33 Cqrs Event Sourcing.
 >
 > **受众**: [进阶]
-
 > **Bloom 层级**: 分析 → 创造
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Cre — 设计高可靠分布式系统的数据持久化模式
 > **前置依赖**: [Async](../03_advanced/02_async.md) · [事件驱动架构](./32_event_driven_architecture.md) · [泛型](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md)
 > **后置延伸**: [分布式系统](./18_distributed_systems.md) · [微服务架构模式](./31_microservice_patterns.md) · [云原生](./24_cloud_native.md)
-
 >
 > **来源**: [eventstore-rs](https://docs.rs/eventstore/) · [cqrs-es](https://docs.rs/cqrs-es/)
 ---
@@ -31,11 +29,8 @@
 > [来源: [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))]
 > [来源: [Young — CQRS Documents](https://cqrs.files.wordpress.com/2010/11/cqrs_documents.pdf)] ·
 > [来源: [Axon Framework](https://docs.axoniq.io/reference-guide/)]
-
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录
@@ -86,7 +81,6 @@
 
 > **Bloom 层级**: 分析 → 评价
 **变更日志**:
-
 > **来源**: [EventStoreDB](https://developers.eventstore.com/server/v24.10/) · [Microsoft CQRS](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
 
 - v1.0 (2026-05-25): 初始创建——CQRS+ES 合并专题，覆盖命令端/查询端分离、事件溯源、Saga 编排、Outbox 模式、Rust 实现骨架
@@ -98,8 +92,8 @@
 
 ### 1.1 CQRS：命令与查询的分离
 >
-
-> **[Martin Fowler — CQRS](https://martinfowler.com/bliki/CQRS.html)** CQRS（Command Query Responsibility Segregation）是一种将**命令**（改变系统状态的操作）与**查询**（读取系统状态的操作）分离到不同模型中的架构模式。这一概念最初由 Bertrand Meyer 在 Eiffel 语言中提出（CQS — Command Query Separation），后被 Greg Young 扩展为系统级的架构模式。
+> **[Martin Fowler — CQRS](https://martinfowler.com/bliki/CQRS.html)** CQRS（Command Query Responsibility Segregation）是一种将**命令**（改变系统状态的操作）与**查询**（读取系统状态的操作）分离到不同模型中的架构模式。
+> 这一概念最初由 Bertrand Meyer 在 Eiffel 语言中提出（CQS — Command Query Separation），后被 Greg Young 扩展为系统级的架构模式。
 
 CQRS 的核心原则源自 **CQS**（Command Query Separation）：
 
@@ -137,11 +131,14 @@ fn bad_example(state: &mut OrderState) -> OrderSummary {
 }
 ```
 
-> **关键洞察**: CQRS 不是"必须分离数据库"——物理分离是**可选的优化**，而非模式的本质。在简单场景中，CQRS 可以只在应用层分离读写模型，共享同一个关系数据库。只有在读写负载特征显著不同时（写频繁且复杂，读频繁且简单），才需要物理分离到不同的存储。[来源: [Fowler — CQRS](https://martinfowler.com/bliki/CQRS.html)] · [来源: [Young — CQRS Documents](https://cqrs.files.wordpress.com/2010/11/cqrs_documents.pdf)]
+> **关键洞察**:
+> CQRS 不是"必须分离数据库"——物理分离是**可选的优化**，而非模式的本质。
+> 在简单场景中，CQRS 可以只在应用层分离读写模型，共享同一个关系数据库。只有在读写负载特征显著不同时（写频繁且复杂，读频繁且简单），才需要物理分离到不同的存储。
+> [来源: [Fowler — CQRS](https://martinfowler.com/bliki/CQRS.html)] · [来源: [Young — CQRS Documents](https://cqrs.files.wordpress.com/2010/11/cqrs_documents.pdf)]
 
 ### 1.2 事件溯源：不可变事件流
->
 
+>
 > **[Martin Fowler — Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html)** 事件溯源是一种将应用程序的所有状态变化存储为**不可变事件序列**的持久化策略，而非仅存储当前状态快照。系统状态可以在任何时候通过重放事件流来重建。
 
 事件溯源的核心语义：

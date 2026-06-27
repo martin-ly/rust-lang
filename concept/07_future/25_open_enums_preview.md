@@ -1,7 +1,6 @@
 # Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举
 
 > **代码状态**: ✅ 含可编译示例
-
 >
 > **EN**: Open Enums Preview
 > **Summary**: Open Enums Preview: emerging Rust language feature or ecosystem trend.

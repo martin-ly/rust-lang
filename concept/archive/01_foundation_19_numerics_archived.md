@@ -10,13 +10,10 @@
 > 原文件保留用于历史追溯。请勿独立编辑本文件。
 > **归档原因**: 与 `10_numerics.md` 内容高度重叠（>85%），且 `10` 版本结构更完整、边界测试覆盖更广。
 > **状态**: 已归档（2026-05-30 重复文件清理）
-
 > **本节关键术语**: 数值运算 (Numeric Operations) · 饱和运算 (Saturating) · 包装运算 (Wrapping) ·  checked 运算 · 类型提升 (Promotion) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 > **后置概念**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
-
 > **前置概念**: [Numeric Types](../01_foundation/11_numeric_types.md)
-
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
 
 ## 认知路径

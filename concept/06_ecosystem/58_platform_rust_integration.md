@@ -13,14 +13,17 @@
 > **定位**: 系统对比 Android AOSP、Chromium、Bare Metal 三个典型场景中 Rust 的集成方式、构建系统、互操作模式与常见陷阱。
 > **前置概念**: [Cross Compilation](./17_cross_compilation.md) · [Embedded Systems](./22_embedded_systems.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · [FFI](../03_advanced/05_rust_ffi.md)
 > **后置概念**: [Industrial Case Studies](./48_industrial_case_studies.md) · [OS Kernel](./39_os_kernel.md)
-
-> **来源**: [Android Rust](https://security.googleblog.com/2021/05/integrating-rust-into-android-open.html) · [Chromium Rust](https://www.chromium.org/chromium-os/developer-library/guides/rust/rust-on-cros/) · [Rust for Linux](https://rust-for-linux.com/)
+> **来源**:
+>
+> [Android Rust](https://security.googleblog.com/2021/05/integrating-rust-into-android-open.html) ·
+> [Chromium Rust](https://www.chromium.org/chromium-os/developer-library/guides/rust/rust-on-cros/) ·
+> [Rust for Linux](https://rust-for-linux.com/)
 > [Google Comprehensive Rust — Chromium](https://google.github.io/comprehensive-rust/chromium.html) ·
 > [Google Comprehensive Rust — Bare Metal](https://google.github.io/comprehensive-rust/bare-metal.html) ·
 > [AOSP Rust](https://security.googleblog.com/2021/05/integrating-rust-into-android-open.html) ·
 > [Chromium Rust](https://chromium.googlesource.com/chromium/src/+/main/docs/rust.md) ·
 > [The Embedded Rust Book](https://docs.rust-embedded.org/book/)
-
+>
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 
 ---
