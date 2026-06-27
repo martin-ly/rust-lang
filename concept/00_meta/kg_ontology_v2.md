@@ -17,17 +17,19 @@
 
 ## 📑 目录
 
-- [一、升级动机与目标](#一升级动机与目标)
-- [二、命名空间与词汇复用](#二命名空间与词汇复用)
-- [三、实体类型（Node Types）](#三实体类型node-types)
-- [四、关系类型（Edge Types）](#四关系类型edge-types)
-  - [4.1 关系属性特征](#41-关系属性特征)
-  - [4.2 RDF-star 元数据注解](#42-rdf-star-元数据注解)
-- [五、SKOS 多语言概念方案](#五skos-多语言概念方案)
-- [六、Turtle 示例](#六turtle-示例)
-- [七、JSON-LD 1.1 示例](#七json-ld-11-示例)
-- [八、与 v1 的兼容性](#八与-v1-的兼容性)
-- [九、SHACL 验证入口](#九shacl-验证入口)
+- [Rust 知识体系知识图谱本体规范 v2.0（RDF 1.2 / RDF-star / SKOS 对齐版）](#rust-知识体系知识图谱本体规范-v20rdf-12--rdf-star--skos-对齐版)
+  - [📑 目录](#-目录)
+  - [一、升级动机与目标](#一升级动机与目标)
+  - [二、命名空间与词汇复用](#二命名空间与词汇复用)
+  - [三、实体类型（Node Types）](#三实体类型node-types)
+  - [四、关系类型（Edge Types）](#四关系类型edge-types)
+    - [4.1 关系属性特征](#41-关系属性特征)
+    - [4.2 RDF-star 元数据注解](#42-rdf-star-元数据注解)
+  - [五、SKOS 多语言概念方案](#五skos-多语言概念方案)
+  - [六、Turtle 示例](#六turtle-示例)
+  - [七、JSON-LD 1.1 示例](#七json-ld-11-示例)
+  - [八、与 v1 的兼容性](#八与-v1-的兼容性)
+  - [九、SHACL 验证入口](#九shacl-验证入口)
 
 ---
 
@@ -73,6 +75,7 @@ v2 在 v1 六类实体基础上，显式声明其为 `rdfs:Class` 或 `skos:Conc
 | `Primitive` | `ex:Primitive rdfs:subClassOf skos:Concept` | `skos:Concept` | `ex:Struct` |
 
 **设计原则**：
+
 - 所有实体均为 `skos:Concept`，便于复用 SKOS 的标签、注释、关系词汇。
 - 用 `rdf:type` 区分子类，保留 v1 的六类语义。
 - 每个实体必须至少有一个 `skos:prefLabel`（zh 和 en）。
