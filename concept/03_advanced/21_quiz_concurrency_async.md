@@ -265,7 +265,7 @@ future.await;             // 执行异步操作，可能让出线程
 
 **Future 状态机**：编译器将 `async fn` 转换为状态机，`.await` 处为状态切换点。
 
-**知识点**：Rust 的 async/await 是**零成本抽象（Zero-Cost Abstraction）**——没有运行时（Runtime）分配，状态机在栈上展开。[→ Async/Await 详解](LINK_PLACEHOLDER)
+**知识点**：Rust 的 async/await 是**零成本抽象（Zero-Cost Abstraction）**——没有运行时（Runtime）分配，状态机在栈上展开。→ Async/Await 详解
 
 </details>
 
@@ -383,7 +383,7 @@ async fn main() {
 | 内存开销 | ~1-2 MB 栈 | ~几 KB |
 | 适用场景 | CPU 密集型 | IO 密集型 |
 
-**知识点**：`tokio::spawn` 要求 Future 是 `'static`，因此不能借用（Borrowing）局部变量，必须转移所有权或使用 `Arc`。[→ Async 模式详解](LINK_PLACEHOLDER)
+**知识点**：`tokio::spawn` 要求 Future 是 `'static`，因此不能借用（Borrowing）局部变量，必须转移所有权或使用 `Arc`。→ Async 模式详解
 
 </details>
 
@@ -512,7 +512,7 @@ let s = String::from("hello");
 thread::spawn(|| { println!("{}", &s); });
 ```
 
-**知识点**：`'static` 不等于"程序全局存活"，而是"不借用（Borrowing）任何非 `'static` 数据"。理解这一点是掌握 Rust 并发闭包的关键。[→ 生命周期（Lifetimes）详解](LINK_PLACEHOLDER)
+**知识点**：`'static` 不等于"程序全局存活"，而是"不借用（Borrowing）任何非 `'static` 数据"。理解这一点是掌握 Rust 并发闭包的关键。→ 生命周期（Lifetimes）详解
 
 </details>
 

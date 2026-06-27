@@ -12,8 +12,8 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Str — 结构型类型系统（Type System）
 > **定位**: 系统讲解 Rust 中 `!` (never type) 的形式语义、类型推导规则、控制流应用和穷尽性检查机制。
-> **前置概念**: [类型系统（Type System）](LINK_PLACEHOLDER) · [所有权（Ownership）](LINK_PLACEHOLDER) · [错误处理（Error Handling）](LINK_PLACEHOLDER)
-> **后置概念**: [泛型（Generics）](LINK_PLACEHOLDER) · [Async](LINK_PLACEHOLDER) · [形式方法](LINK_PLACEHOLDER)
+> **前置概念**: [类型系统（Type System）](04_type_system.md) · [所有权（Ownership）](01_ownership.md) · [错误处理（Error Handling）](10_error_handling_basics.md)
+> **后置概念**: [泛型（Generics）](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · 形式方法
 
 ---
 
@@ -44,7 +44,7 @@
     - [2.3 `Option<!>` — 不可能存在](#23-option--不可能存在)
   - [三、穷尽性检查](#三穷尽性检查)
     - [3.1 Match 臂完备性](#31-match-臂完备性)
-    - [3.2 与空枚举（Enum）的对比](LINK_PLACEHOLDER)
+    - [3.2 与空枚举的对比](#32-与空枚举的对比)
   - [四、Never Type 稳定化进展](#四never-type-稳定化进展)
     - [4.1 完整稳定化仍在进行中](#41-完整稳定化仍在进行中)
     - [4.2 Rust 1.92：deny-by-default 的 future-compatibility lint](#42-rust-192deny-by-default-的-future-compatibility-lint)
@@ -58,8 +58,8 @@
     - [6.2 边界测试：`Some(!)` 不可构造（编译错误）](#62-边界测试some-不可构造编译错误)
     - [6.3 边界测试：忘记处理 `Ok` 分支（编译错误）](#63-边界测试忘记处理-ok-分支编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：`!`（never type）在 Rust 类型系统（Type System）中被称为底类型。它有一个特殊性质：它是任何类型的子类型。请问，`Result<i32, !>` 的 `Err` 分支在 match 中需要处理吗？（理解层）](#测验-1never-type在-rust-类型系统中被称为底类型它有一个特殊性质它是任何类型的子类型请问resulti32--的-err-分支在-match-中需要处理吗理解层)
-    - [测验 2：以下代码是否合法？`let x: String = panic!("abort");`。如果合法，运行时（Runtime）会发生什么？（理解层）](LINK_PLACEHOLDER)
+    - [测验 1：`!`（never type）在 Rust 类型系统中被称为底类型。它有一个特殊性质：它是任何类型的子类型。请问，`Result<i32, !>` 的 `Err` 分支在 match 中需要处理吗？（理解层）](#测验-1never-type在-rust-类型系统中被称为底类型它有一个特殊性质它是任何类型的子类型请问resulti32--的-err-分支在-match-中需要处理吗理解层)
+    - [测验 2：以下代码是否合法？`let x: String = panic!("abort");`。如果合法，运行时会发生什么？（理解层）](#测验-2以下代码是否合法let-x-string--panicabort如果合法运行时会发生什么理解层)
     - [测验 3：`continue`、`break`（带值除外）、`return` 和 `panic!` 有什么共同类型特征？（理解层）](#测验-3continuebreak带值除外return-和-panic-有什么共同类型特征理解层)
     - [测验 4：函数签名 `fn foo() -> !` 表示什么含义？这种函数可以正常返回吗？（理解层）](#测验-4函数签名-fn-foo----表示什么含义这种函数可以正常返回吗理解层)
     - [测验 5：为什么 `match` 一个类型为 `!` 的值时，可以写零个分支？这与 Rust 的穷尽性检查矛盾吗？（理解层）](#测验-5为什么-match-一个类型为--的值时可以写零个分支这与-rust-的穷尽性检查矛盾吗理解层)

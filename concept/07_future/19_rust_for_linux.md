@@ -27,7 +27,7 @@
 
 ## 📑 目录
 
-- [Rust for Linux ：操作系统内核中的内存安全（Memory Safety）](LINK_PLACEHOLDER)
+- [Rust for Linux ：操作系统内核中的内存安全（Memory Safety）](19_rust_for_linux.md)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 为什么内核需要 Rust](#11-为什么内核需要-rust)
@@ -49,10 +49,10 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Rust for Linux 的编译错误](#十边界测试rust-for-linux-的编译错误)
-    - [10.1 边界测试：内核模块（Module）的 `no_std` 与标准库缺失（编译错误）](LINK_PLACEHOLDER)
+    - 10.1 边界测试：内核模块（Module）的 `no_std` 与标准库缺失（编译错误）
     - [10.2 边界测试：内核锁的原子顺序与 `unsafe` 封装（编译错误）](#102-边界测试内核锁的原子顺序与-unsafe-封装编译错误)
     - [10.3 边界测试：内核模块的 `no_std` 与 `alloc` 的谨慎使用（编译错误）](#103-边界测试内核模块的-no_std-与-alloc-的谨慎使用编译错误)
-    - [10.4 边界测试：内核锁的 `spinlock` 与睡眠的互斥（运行时（Runtime）死锁）](LINK_PLACEHOLDER)
+    - 10.4 边界测试：内核锁的 `spinlock` 与睡眠的互斥（运行时（Runtime）死锁）
     - [10.3 边界测试：内核模块的 `no_std` 与 alloc 限制（编译错误）](#103-边界测试内核模块的-no_std-与-alloc-限制编译错误)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)

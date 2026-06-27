@@ -20,16 +20,16 @@
 
 ## 📑 目录
 
-- [Rust vs Scala：类型系统（Type System）的两种哲学](LINK_PLACEHOLDER)
+- Rust vs Scala：类型系统（Type System）的两种哲学
   - [📑 目录](#-目录)
   - [一、核心对比](#一核心对比)
     - [1.1 类型系统](#11-类型系统)
-    - [1.2 模式匹配（Pattern Matching）](LINK_PLACEHOLDER)
+    - 1.2 模式匹配（Pattern Matching）
     - [1.3 并发模型](#13-并发模型)
   - [二、语言特性差异](#二语言特性差异)
-    - [2.1 类型推断（Type Inference）](LINK_PLACEHOLDER)
+    - 2.1 类型推断（Type Inference）
     - [2.2 隐式与 Trait](#22-隐式与-trait)
-    - [2.3 宏（Macro）系统](LINK_PLACEHOLDER)
+    - 2.3 宏（Macro）系统
   - [三、工程实践差异](#三工程实践差异)
     - [3.1 构建系统](#31-构建系统)
     - [3.2 互操作性](#32-互操作性)
@@ -44,7 +44,7 @@
     - [10.1 边界测试：Scala 的隐式转换与 Rust 的显式 trait（编译错误）](#101-边界测试scala-的隐式转换与-rust-的显式-trait编译错误)
     - [10.2 边界测试：Scala 的 null 与 Rust 的 Option（编译错误）](#102-边界测试scala-的-null-与-rust-的-option编译错误)
     - [10.3 边界测试：Scala 的隐式转换与 Rust 的显式 `From`/`Into`（编译错误）](#103-边界测试scala-的隐式转换与-rust-的显式-frominto编译错误)
-    - [10.4 边界测试：Scala 的 actor 模型与 Rust 的 async/channel 的并发模型差异（运行时（Runtime）死锁）](LINK_PLACEHOLDER)
+    - 10.4 边界测试：Scala 的 actor 模型与 Rust 的 async/channel 的并发模型差异（运行时（Runtime）死锁）
     - [10.3 边界测试：Scala 的隐式转换与 Rust 的显式类型安全（编译错误）](#103-边界测试scala-的隐式转换与-rust-的显式类型安全编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Scala 的"混合面向对象与函数式"与 Rust 的" mostly 函数式"有什么设计哲学差异？（理解层）](#测验-1scala-的混合面向对象与函数式与-rust-的-mostly-函数式有什么设计哲学差异理解层)

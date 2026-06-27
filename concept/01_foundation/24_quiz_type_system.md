@@ -93,7 +93,7 @@ fn main() {
 - 通过索引访问：`tup.0`、`tup.1`
 - 空元组 `()` 是单元类型（unit type），表示"无返回值"
 
-**知识点**：元组是 Rust 中最轻量的"匿名结构体（Struct）"，广泛用于函数多返回值。[→ 类型系统（Type System）详解](LINK_PLACEHOLDER)
+**知识点**：元组是 Rust 中最轻量的"匿名结构体（Struct）"，广泛用于函数多返回值。→ 类型系统（Type System）详解
 
 </details>
 
@@ -338,7 +338,7 @@ let s: &str = "hello";       // ✅ 字符串切片
 let s = "hello";              // ✅ 类型推断为 &str
 ```
 
-**知识点**：`&str` 是"借用（Borrowing）"，`String` 是"拥有"。Rust 字符串设计的核心是明确所有权（Ownership）边界。[→ 字符串详解](LINK_PLACEHOLDER)
+**知识点**：`&str` 是"借用（Borrowing）"，`String` 是"拥有"。Rust 字符串设计的核心是明确所有权（Ownership）边界。→ 字符串详解
 
 </details>
 
@@ -446,7 +446,7 @@ Rectangle {
 
 | 得分 | 评价 | 建议 |
 |:---:|:---|:---|
-| 10/10 | 🏆 类型系统（Type System）已内化 | 进阶至 [L2 Trait/泛型（Generics）](LINK_PLACEHOLDER) |
+| 10/10 | 🏆 类型系统（Type System）已内化 | 进阶至 L2 Trait/泛型（Generics） |
 | 7–9/10 | ✅ 核心概念掌握 | 强化 [L1 类型练习](../../exercises/src/type_system/)，关注错题 |
 | 4–6/10 | 🔄 需巩固基础 | 重读 [Type System](./04_type_system.md)，完成 rustlings 对应章节 |
 | 0–3/10 | 📚 建议重新开始 | 从 [Type System](./04_type_system.md) 逐节阅读，配合 [crates/c02_type_system](../../crates/c02_type_system/) 示例 |

@@ -6,7 +6,7 @@
 > **Summary**: Authoritative guide to procedural macros: derive, attribute, and function-like macros.
 > **📎 交叉引用（Reference）**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[过程宏（Procedural Macro）](LINK_PLACEHOLDER)
+> 本主题在 knowledge 中有系统化的知识索引：过程宏（Procedural Macro）
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 深入分析 Rust **过程宏（Procedural Macros）**的三种类型（derive、attribute、function-like）——它们的编译期执行模型、TokenStream 操作、卫生性（hygiene）保证，以及与 `macro_rules!` 的本质差异。
@@ -27,7 +27,7 @@
 
 ## 📑 目录
 
-- [过程宏（Macro）：编译期代码生成的元编程工具](LINK_PLACEHOLDER)
+- 过程宏（Macro）：编译期代码生成的元编程工具
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 过程宏（Procedural Macro） vs macro\_rules](#11-过程宏-vs-macro_rules)
@@ -50,7 +50,7 @@
     - [10.5 边界测试：过程宏的 `Span` 与错误定位精度（编译错误/调试困难）](#105-边界测试过程宏的-span-与错误定位精度编译错误调试困难)
     - [10.3 边界测试：过程宏的 hygiene 与路径解析（编译错误）](#103-边界测试过程宏的-hygiene-与路径解析编译错误)
     - [10.4 边界测试：proc\_macro 的 TokenStream 与 hygiene 标识符生成（编译错误）](#104-边界测试proc_macro-的-tokenstream-与-hygiene-标识符生成编译错误)
-    - [10.6 边界测试：不可变借用（Mutable Borrow）与可变借用的冲突](LINK_PLACEHOLDER)
+    - 10.6 边界测试：不可变借用（Mutable Borrow）与可变借用的冲突
   - [参考来源](#参考来源)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：过程宏的类型（理解层）](#测验-1过程宏的类型理解层)

@@ -24,7 +24,7 @@
 | 前置能力 | 验证标准 | 学习资源 |
 |:---|:---|:---|
 | 所有权（Ownership）直觉 | 能向新手解释"为什么 `&mut` 不能别名" | [L1 所有权](../01_foundation/01_ownership.md) |
-| 借用（Borrowing）规则 | 能独立标注含 3+ 引用（Reference）的函数签名 | [L2 生命周期（Lifetimes）](LINK_PLACEHOLDER) |
+| 借用（Borrowing）规则 | 能独立标注含 3+ 引用（Reference）的函数签名 | L2 生命周期（Lifetimes） |
 | 类型系统（Type System） | 理解 `enum`/`struct`/`trait` 的语义区别 | [L1 类型系统](../01_foundation/04_type_system.md) |
 | 并发原语 | 能解释 `Send`/`Sync` 为什么需要 `unsafe impl` | [L3 并发](../03_advanced/01_concurrency.md) |
 | 逻辑基础 | 了解命题逻辑（与/或/蕴含）的基本概念 | [L4 Hoare 逻辑](./15_hoare_logic.md)（可先读） |
@@ -204,7 +204,7 @@ graph TB
 - [航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)](./16_aerospace_certification_formal_methods.md)
 - [现代 Rust 验证工具生态（2025-2026）](./22_modern_verification_tools.md)
 - [借用检查可判定性](./28_borrow_checking_decidability.md)
-- [类型推断（Type Inference）复杂度](LINK_PLACEHOLDER)
+- 类型推断（Type Inference）复杂度
 - [Aeneas 符号化语义](./30_aeneas_symbolic_semantics.md)
 - [通用程序语言理论基础：Rust 的 PL 基座](./23_programming_language_foundations.md)
 - [测验：形式化方法概念（嵌入式互动试点）](./24_quiz_formal_methods.md)

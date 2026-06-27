@@ -38,7 +38,7 @@
 
 ## 📑 目录
 
-- [BorrowSanitizer 概念预研：运行时（Runtime）借用（Borrowing）检查工业化](LINK_PLACEHOLDER)
+- BorrowSanitizer 概念预研：运行时（Runtime）借用（Borrowing）检查工业化
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 问题定义：编译期检查的边界](#11-问题定义编译期检查的边界)
@@ -47,7 +47,7 @@
     - [1.4 Shadow Stack 与 Lock-and-Key 策略](#14-shadow-stack-与-lock-and-key-策略)
   - [二、与现有工具的对比矩阵](#二与现有工具的对比矩阵)
   - [三、形式化语义](#三形式化语义)
-    - [3.1 借用标签的生命周期（Lifetimes）](LINK_PLACEHOLDER)
+    - 3.1 借用标签的生命周期（Lifetimes）
     - [3.2 从 Tree Borrows 到运行时检测](#32-从-tree-borrows-到运行时检测)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -346,7 +346,7 @@ fn main() {
 - [Ownership](../01_foundation/01_ownership.md) — 所有权系统的形式化根基
 - [Borrowing](../01_foundation/02_borrowing.md) — 借用检查的核心机制
 - [Formal Methods](./02_formal_methods.md) — 形式化验证工具链
-- [RustBelt](LINK_PLACEHOLDER) — 所有权（Ownership）的形式化证明
+- RustBelt — 所有权（Ownership）的形式化证明
 - [Version Tracking](./05_rust_version_tracking.md) — Rust 版本特性演进
 
 ---

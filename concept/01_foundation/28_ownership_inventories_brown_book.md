@@ -45,9 +45,9 @@
 
 | Inventory | 完成时机 | Brown Book 链接 | 本项目对应 |
 |:---|:---|:---|:---|
-| **Inventory #1** | 学完所有权（Ownership）、借用（Borrowing）、枚举（Enum）后 | [Ch 6.4](LINK_PLACEHOLDER) | `01_ownership.md` · `02_borrowing.md` |
+| **Inventory #1** | 学完所有权（Ownership）、借用（Borrowing）、枚举（Enum）后 | Ch 6.4 | `01_ownership.md` · `02_borrowing.md` |
 | **Inventory #2** | 学完集合类型后 | [Ch 8.4](https://rust-book.cs.brown.edu/ch08-04-inventory.html) | `08_collections.md` |
-| **Inventory #3** | 学完泛型（Generics）、trait、生命周期（Lifetimes）后 | [Ch 10.4](LINK_PLACEHOLDER) | `03_lifetimes.md` |
+| **Inventory #3** | 学完泛型（Generics）、trait、生命周期（Lifetimes）后 | Ch 10.4 | `03_lifetimes.md` |
 | **Inventory #4** | 学完智能指针（Smart Pointer）后 | [Ch 18.4](https://rust-book.cs.brown.edu/ch18-04-inventory.html) | 智能指针相关章节 |
 
 > **提示**: Brown Book 提供浏览器内 IDE（基于 rust-analyzer WASM）和 Aquascope 可视化，推荐在 PC 端 Chrome/Firefox 体验。
@@ -169,11 +169,11 @@ fn main() {
 ## 四、与本地练习的衔接
 
 - 完成本样题后，可继续：
-  - [`23_quiz_ownership_borrowing.md`](LINK_PLACEHOLDER) — 更多所有权/借用（Borrowing）选择题
+  - `23_quiz_ownership_borrowing.md` — 更多所有权/借用（Borrowing）选择题
   - [`exercises/src/ownership_borrowing/`](../../exercises/src/ownership_borrowing/) — 可编译的修复练习
     - [`ex06_string_replace_chain.rs`](../../exercises/src/ownership_borrowing/ex06_string_replace_chain.rs) — 字符串替换链（对应 Inventory #1）
     - [`ex07_vec_slice_borrow.rs`](../../exercises/src/ownership_borrowing/ex07_vec_slice_borrow.rs) — Vec 与切片（Slice）借用（Borrowing）冲突（对应 Inventory #2）
-    - [`ex08_dangling_reference.rs`](LINK_PLACEHOLDER) — 避免悬垂引用（Reference）（对应 Inventory #3）
+    - `ex08_dangling_reference.rs` — 避免悬垂引用（Reference）（对应 Inventory #3）
     - [`ex09_dangling_stack_reference.rs`](../../exercises/src/ownership_borrowing/ex09_dangling_stack_reference.rs) — 悬垂栈引用（Reference）
     - [`ex10_vec_reallocation.rs`](../../exercises/src/ownership_borrowing/ex10_vec_reallocation.rs) — Vec 重新分配与引用失效
     - [`ex11_hashmap_borrow.rs`](../../exercises/src/ownership_borrowing/ex11_hashmap_borrow.rs) — HashMap 借用冲突

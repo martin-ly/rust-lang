@@ -33,12 +33,12 @@
 
 ## 📑 目录
 
-- [Gen Blocks 预研：超越异步（Async）的泛化生成器](LINK_PLACEHOLDER)
+- Gen Blocks 预研：超越异步（Async）的泛化生成器
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 从 async 到 gen 的泛化](#11-从-async-到-gen-的泛化)
     - [1.2 Gen Blocks 语法与语义](#12-gen-blocks-语法与语义)
-    - [1.3 与现有迭代器（Iterator）生态的关系](LINK_PLACEHOLDER)
+    - 1.3 与现有迭代器（Iterator）生态的关系
   - [二、技术细节](#二技术细节)
     - [2.1 生成器状态机](#21-生成器状态机)
     - [2.2 与 Stream 的协同](#22-与-stream-的协同)
@@ -53,7 +53,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Gen Blocks 预览的编译错误](#十边界测试gen-blocks-预览的编译错误)
     - [10.1 边界测试：`gen` 块与 `Iterator` trait 的自动实现（编译错误）](#101-边界测试gen-块与-iterator-trait-的自动实现编译错误)
-    - [10.2 边界测试：`gen` 块与借用（Borrowing）生命周期（Lifetimes）的冲突（编译错误）](LINK_PLACEHOLDER)
+    - 10.2 边界测试：`gen` 块与借用（Borrowing）生命周期（Lifetimes）的冲突（编译错误）
     - [10.3 边界测试：gen 块与 `Pin` 的隐式需求（编译错误）](#103-边界测试gen-块与-pin-的隐式需求编译错误)
     - [10.4 边界测试：gen 块与异常控制流（`return`、`break`）的语义（编译错误）](#104-边界测试gen-块与异常控制流returnbreak的语义编译错误)
     - [补充定理链](#补充定理链)

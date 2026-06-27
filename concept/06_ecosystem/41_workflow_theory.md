@@ -14,7 +14,7 @@
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Eva — 评价工作流模型的形式化正确性
 > **前置依赖**: [Async/Await](../03_advanced/02_async.md) ·
-> [异步（Async）状态机](LINK_PLACEHOLDER) ·
+> 异步（Async）状态机 ·
 > [公理语义](../04_formal/20_axiomatic_semantics.md) ·
 > [类型语义](../04_formal/21_type_semantics.md)
 > **后置延伸**: [CQRS & Event Sourcing](./33_cqrs_event_sourcing.md) ·

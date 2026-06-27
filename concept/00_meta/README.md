@@ -20,6 +20,7 @@
 - [模式语义空间索引](./pattern_semantic_space_index.md) — 设计模式在概念体系中的坐标
 - [C/C++ → Rust 工程层对比路线图](./cpp_rust_engineering_roadmap.md) — C++ 迁移者的主题簇地图
 - [通用 PL 基座路线图](./pl_foundations_roadmap.md) — 通用 PL 机制与 Rust 的对应关系
+- [基础知识缺口补全总索引](./foundations_gap_closure_index.md) — Phase A/B/C 补全状态追踪
 
 ## 嵌入式测验（Embedded Quiz）
 

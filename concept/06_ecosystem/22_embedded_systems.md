@@ -45,7 +45,7 @@
   - [三、实时系统](#三实时系统)
     - [3.1 实时约束](#31-实时约束)
     - [3.2 RTIC 框架](#32-rtic-框架)
-    - [3.3 Embassy：嵌入式异步（Async）运行时（Runtime）](LINK_PLACEHOLDER)
+    - [3.3 Embassy：嵌入式异步运行时](#33-embassy嵌入式异步运行时)
     - [3.4 embedded-hal-async：异步硬件抽象](#34-embedded-hal-async异步硬件抽象)
     - [3.5 Ariel OS：安全 IoT Library OS](#35-ariel-os安全-iot-library-os)
   - [四、反命题与边界分析](#四反命题与边界分析)

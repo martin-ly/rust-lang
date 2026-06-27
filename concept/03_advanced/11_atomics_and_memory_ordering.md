@@ -6,7 +6,7 @@
 > **Summary**: Concurrency. Core Rust concept covering mental model building, mechanism analysis, in-depth analysis.
 > **📎 交叉引用（Reference）**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[原子操作（Atomic Operations）](LINK_PLACEHOLDER)
+> 本主题在 knowledge 中有系统化的知识索引：原子操作（Atomic Operations）
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S+P** — Structure + Procedure
@@ -30,7 +30,7 @@
 
 ## 📑 目录
 
-- [原子操作（Atomic Operations）与内存序：无锁并发的精确控制](#原子操作与内存序无锁并发的精确控制)
+- [原子操作与内存序：无锁并发的精确控制](#原子操作与内存序无锁并发的精确控制)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 原子类型全景](#11-原子类型全景)
@@ -46,13 +46,13 @@
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
     - [编译错误示例](#编译错误示例)
-    - [4.4 边界测试：原子操作与非原子操作混用（数据竞争 / 运行时（Runtime） UB）](LINK_PLACEHOLDER)
+    - [4.4 边界测试：原子操作与非原子操作混用（数据竞争 / 运行时 UB）](#44-边界测试原子操作与非原子操作混用数据竞争--运行时-ub)
     - [4.5 边界测试：`Ordering::Relaxed` 导致逻辑错误（编译通过但语义错误）](#45-边界测试orderingrelaxed-导致逻辑错误编译通过但语义错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
-    - [10.5 边界测试：`AtomicPtr` 的 `compare_exchange` ABA 问题（运行时（Runtime）逻辑错误）](#105-边界测试atomicptr-的-compare_exchange-aba-问题运行时逻辑错误)
+    - [10.5 边界测试：`AtomicPtr` 的 `compare_exchange` ABA 问题（运行时逻辑错误）](#105-边界测试atomicptr-的-compare_exchange-aba-问题运行时逻辑错误)
     - [10.3 边界测试：`Relaxed` 顺序与 happens-before 缺失（逻辑错误/UB）](#103-边界测试relaxed-顺序与-happens-before-缺失逻辑错误ub)
     - [10.9 边界测试：match 分支返回类型不一致](#109-边界测试match-分支返回类型不一致)
   - [参考来源](#参考来源)

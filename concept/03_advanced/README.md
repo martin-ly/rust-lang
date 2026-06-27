@@ -183,7 +183,7 @@ graph TB
 | [03_unsafe.md](./03_unsafe.md) | Unsafe Rust | 裸指针、FFI、UB 边界、Safety 契约、Miri | ✅ v1.0 | 所有 L1-L2 概念 | RustBelt (unsafe 验证), C++ 对比 |
 | [04_macros.md](./04_macros.md) | 宏系统 | `macro_rules!`、过程宏（Procedural Macro）、DSL、卫生宏 | ✅ v1.0 | Type System + Trait | 生态 (代码生成), AI (模板生成) |
 | [05_rust_ffi.md](./05_rust_ffi.md) | FFI 跨语言 | extern 块、ABI 兼容、类型映射、bindgen、回调封装 | ✅ v1.0 | Type System + Unsafe | 生态 (跨语言), C++ 对比 |
-| [06_pin_unpin.md](LINK_PLACEHOLDER) | Pin 与 Unpin | 自引用（Reference）类型、PhantomPinned、async 状态机、Pin API 契约 | ✅ v1.0 | Ownership + Generics | Async, Gen Blocks |
+| 06_pin_unpin.md | Pin 与 Unpin | 自引用（Reference）类型、PhantomPinned、async 状态机、Pin API 契约 | ✅ v1.0 | Ownership + Generics | Async, Gen Blocks |
 | [07_proc_macro.md](./07_proc_macro.md) | 过程宏（Procedural Macro） | Derive/Attribute/Function-like、TokenStream、syn/quote | ✅ v1.0 | Trait + Type System | 生态 (代码生成), DSL |
 | [08_nll_and_polonius.md](./08_nll_and_polonius.md) | NLL 与 Polonius | 非词法生命周期、数据流分析、Origin 模型、借用检查演进 | ✅ v1.0 | Borrowing, Lifetimes | RustBelt, Pin |
 | [19_parallel_distributed_pattern_spectrum.md](./19_parallel_distributed_pattern_spectrum.md) | 并行-分布式谱系 | 线程池→工作窃取→Actor→CSP→数据流→共识的连续体 | ✅ v1.0 | Concurrency, Async | Distributed Systems |
@@ -198,9 +198,9 @@ graph TB
 - [Async Closures（异步闭包）](./24_async_closures.md)
 - [FFI 高级主题：跨语言边界的安全与性能](./09_ffi_advanced.md)
 - [并发 模式：从消息 传递到锁自由的数据结构](./10_concurrency_patterns.md)
-- [原子操作（Atomic Operations）与内存序：无锁并发的精确控制](LINK_PLACEHOLDER)
+- 原子操作（Atomic Operations）与内存序：无锁并发的精确控制
 - [Unsafe Rust 模式：安全抽象的核心技术](./12_unsafe_rust_patterns.md)
-- [内联汇编（Inline Assembly）：`asm!` 宏（Macro）与跨平台 SIMD](LINK_PLACEHOLDER)
+- 内联汇编（Inline Assembly）：`asm!` 宏（Macro）与跨平台 SIMD
 - [自定义分配器与内存布局优化](./14_custom_allocators.md)
 - [零拷贝解析与序列化优化](./15_zero_copy_parsing.md)
 - [无锁编程与内存模型](./16_lock_free.md)

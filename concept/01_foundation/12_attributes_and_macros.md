@@ -11,7 +11,7 @@
 > **Summary**: Macros. Core Rust concept covering practical examples, design patterns, metaprogramming techniques.
 > **📎 交叉引用（Reference）**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[属性与宏（Macro）](LINK_PLACEHOLDER)
+> 本主题在 knowledge 中有系统化的知识索引：属性与宏（Macro）
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **A+S** — Application + Structure
@@ -30,14 +30,14 @@
 
 ## 📑 目录
 
-- [属性与声明宏（Declarative Macro）：编译期元编程基础](LINK_PLACEHOLDER)
+- [属性与声明宏（Declarative Macro）：编译期元编程基础](12_attributes_and_macros.md)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 属性系统全景](#11-属性系统全景)
     - [1.2 声明宏（Declarative Macro）基础](#12-声明宏基础)
     - [1.3 宏（Macro）的卫生性](#13-宏的卫生性)
   - [二、技术细节](#二技术细节)
-    - [2.1 模式匹配（Pattern Matching）与重复](LINK_PLACEHOLDER)
+    - 2.1 模式匹配（Pattern Matching）与重复
     - [2.2 递归宏](#22-递归宏)
     - [2.3 常见属性详解](#23-常见属性详解)
   - [三、设计模式矩阵](#三设计模式矩阵)
@@ -51,7 +51,7 @@
   - [十二、边界测试：属性与宏的编译错误](#十二边界测试属性与宏的编译错误)
     - [12.1 边界测试：`derive` 宏的 trait 冲突（编译错误）](#121-边界测试derive-宏的-trait-冲突编译错误)
     - [12.2 边界测试：宏递归展开溢出（编译错误）](#122-边界测试宏递归展开溢出编译错误)
-    - [10.3 边界测试：过程宏（Procedural Macro）的 hygiene 与标识符捕获（编译错误）](LINK_PLACEHOLDER)
+    - 10.3 边界测试：过程宏（Procedural Macro）的 hygiene 与标识符捕获（编译错误）
     - [10.4 边界测试：`cfg` 条件编译的互斥性（编译错误/逻辑错误）](#104-边界测试cfg-条件编译的互斥性编译错误逻辑错误)
     - [10.3 边界测试：`cfg` 条件编译的互斥性（编译错误/逻辑错误）](#103-边界测试cfg-条件编译的互斥性编译错误逻辑错误)
     - [10.7 边界测试：match 分支返回类型不一致](#107-边界测试match-分支返回类型不一致)

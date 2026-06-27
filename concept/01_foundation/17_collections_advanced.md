@@ -59,10 +59,10 @@
   - [十二、边界测试：高级集合的编译错误](#十二边界测试高级集合的编译错误)
     - [12.1 边界测试：`BTreeMap` 键未实现 `Ord`（编译错误）](#121-边界测试btreemap-键未实现-ord编译错误)
     - [12.2 边界测试：`VecDeque` 容量与索引的环绕（逻辑错误）](#122-边界测试vecdeque-容量与索引的环绕逻辑错误)
-    - [10.3 边界测试：`HashMap` 的 `Entry` API 与借用（Borrowing）冲突（编译错误）](LINK_PLACEHOLDER)
+    - [10.3 边界测试：`HashMap` 的 `Entry` API 与借用冲突（编译错误）](#103-边界测试hashmap-的-entry-api-与借用冲突编译错误)
     - [10.4 边界测试：`BTreeMap` 的 range 查询与可变遍历（编译错误）](#104-边界测试btreemap-的-range-查询与可变遍历编译错误)
-    - [10.5 边界测试：`HashSet` 的自定义哈希与 `Hash` 一致性（Coherence）（运行时（Runtime）逻辑错误）](LINK_PLACEHOLDER)
-    - [10.5 边界测试：`HashMap` 的 `Entry` API 与借用（Borrowing）冲突（编译错误）](#105-边界测试hashmap-的-entry-api-与借用冲突编译错误)
+    - [10.5 边界测试：`HashSet` 的自定义哈希与 `Hash` 一致性（运行时逻辑错误）](#105-边界测试hashset-的自定义哈希与-hash-一致性运行时逻辑错误)
+    - [10.5 边界测试：`HashMap` 的 `Entry` API 与借用冲突（编译错误）](#105-边界测试hashmap-的-entry-api-与借用冲突编译错误)
     - [10.6 边界测试：`BTreeMap` 的键修改与排序不变性破坏（逻辑错误/UB）](#106-边界测试btreemap-的键修改与排序不变性破坏逻辑错误ub)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`BTreeMap` 与 `HashMap` 在键的遍历顺序上有什么本质区别？（理解层）](#测验-1btreemap-与-hashmap-在键的遍历顺序上有什么本质区别理解层)
@@ -775,7 +775,7 @@ fn main() {
 }
 ```
 
-> **修正**: `HashMap::entry` 需要 `&mut self`，因为 `or_insert` 可能修改 map（插入新键）。若同时持有 `get` 返回的 `&V`，则存在 `&mut self` 与 `&V` 的借用（Borrowing）冲突——即使 `entry` 的键与 `get` 的键不同，编译器也无法证明不重叠。解决方案：1) 先 `clone` 需要的值，再调用 `entry`；2) 使用 `HashMap::get_mut` 获取 `&mut V`，直接修改；3) 用 `if let Some(v) = map.get_mut("key")` 替代 `entry` API。这与 Java 的 `Map::compute`（无借用检查，可并发修改）或 C++ 的 `std::unordered_map`（迭代器（Iterator）失效规则）不同——Rust 的借用检查在编译期阻止"读的同时写"，即使逻辑上安全。[来源: [The Rust Programming Language](LINK_PLACEHOLDER)] · [来源: [Rust Standard Library](LINK_PLACEHOLDER)]
+> **修正**: `HashMap::entry` 需要 `&mut self`，因为 `or_insert` 可能修改 map（插入新键）。若同时持有 `get` 返回的 `&V`，则存在 `&mut self` 与 `&V` 的借用（Borrowing）冲突——即使 `entry` 的键与 `get` 的键不同，编译器也无法证明不重叠。解决方案：1) 先 `clone` 需要的值，再调用 `entry`；2) 使用 `HashMap::get_mut` 获取 `&mut V`，直接修改；3) 用 `if let Some(v) = map.get_mut("key")` 替代 `entry` API。这与 Java 的 `Map::compute`（无借用检查，可并发修改）或 C++ 的 `std::unordered_map`（迭代器（Iterator）失效规则）不同——Rust 的借用检查在编译期阻止"读的同时写"，即使逻辑上安全。来源: [The Rust Programming Language] · 来源: [Rust Standard Library]
 
 ### 10.4 边界测试：`BTreeMap` 的 range 查询与可变遍历（编译错误）
 

@@ -10,7 +10,7 @@
 > **Summary**: Error Handling. Guide to 04 Error Handling.
 > **📎 交叉引用（Reference）**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[错误处理（Error Handling）](LINK_PLACEHOLDER)
+> 本主题在 knowledge 中有系统化的知识索引：[错误处理（Error Handling）](../01_foundation/10_error_handling_basics.md)
 > **受众**: [进阶]
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: **A+S** — Application + Structure
@@ -45,7 +45,7 @@
     - [1.2 TRPL 官方定义](#12-trpl-官方定义)
     - [1.3 形式化定义](#13-形式化定义)
   - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attribute-matrix)
-    - [2.1 错误处理（Error Handling）机制矩阵](#21-错误处理机制矩阵)
+    - [2.1 错误处理机制矩阵](#21-错误处理机制矩阵)
     - [2.2 Rust vs 其他语言错误处理对比](#22-rust-vs-其他语言错误处理对比)
     - [2.3 `Result` 组合子矩阵](#23-result-组合子矩阵)
   - [三、思维导图（Mind Map）](#三思维导图mind-map)
@@ -54,16 +54,16 @@
     - [4.2 定理：? 运算符 ⟹ 错误传播自动化](#42-定理-运算符--错误传播自动化)
     - [4.3 推论：panic ⟹ 不可恢复错误的显式边界](#43-推论panic--不可恢复错误的显式边界)
     - [4.4 类型安全错误处理](#44-类型安全错误处理)
-    - [4.5 定理一致性（Coherence）矩阵](LINK_PLACEHOLDER)
+    - [4.5 定理一致性矩阵](#45-定理一致性矩阵)
   - [五、示例与反例（Examples \& Counter-examples）](#五示例与反例examples--counter-examples)
     - [5.1 正确示例：`?` 运算符链式传播](#51-正确示例-运算符链式传播)
     - [5.2 正确示例：自定义错误类型](#52-正确示例自定义错误类型)
     - [5.3 反例：`?` 在错误返回类型中不匹配](#53-反例-在错误返回类型中不匹配)
     - [5.4 反例：忽略 Result 导致 bug](#54-反例忽略-result-导致-bug)
     - [5.5 边界示例：`Option` 与 `Result` 互转](#55-边界示例option-与-result-互转)
-    - [5.5 补充：异步（Async）错误处理与 `poll_fn` / `TryFuture` 模式](LINK_PLACEHOLDER)
-      - [`poll_fn`：将闭包（Closures）提升为 Future](LINK_PLACEHOLDER)
-      - [`TryFuture` 与 `?` 运算符的异步（Async）扩展](#tryfuture-与--运算符的异步扩展)
+    - [5.5 补充：异步错误处理与 `poll_fn` / `TryFuture` 模式](#55-补充异步错误处理与-poll_fn--tryfuture-模式)
+      - [`poll_fn`：将闭包提升为 Future](#poll_fn将闭包提升为-future)
+      - [`TryFuture` 与 `?` 运算符的异步扩展](#tryfuture-与--运算符的异步扩展)
       - [取消安全（Cancellation Safety）与错误处理](#取消安全cancellation-safety与错误处理)
   - [六、反命题与边界分析（Counter-proposition \& Boundary Analysis）](#六反命题与边界分析counter-proposition--boundary-analysis)
     - [6.1 反命题 1: "Result 消除了所有错误"](#61-反命题-1-result-消除了所有错误)
@@ -71,7 +71,7 @@
     - [6.3 反命题 3: "panic 只应在完全不可能时发生"](#63-反命题-3-panic-只应在完全不可能时发生)
     - [6.4 反命题 4: "Option 完全替代 null"](#64-反命题-4-option-完全替代-null)
   - [七、边界极限测试代码（Boundary Limit Tests）](#七边界极限测试代码boundary-limit-tests)
-    - [7.1 测试 1: ? 运算符在闭包（Closures）中的限制](#71-测试-1--运算符在闭包中的限制)
+    - [7.1 测试 1: ? 运算符在闭包中的限制](#71-测试-1--运算符在闭包中的限制)
     - [7.2 测试 2: From 转换链的边界](#72-测试-2-from-转换链的边界)
     - [7.3 测试 3: panic 边界与 catch\_unwind](#73-测试-3-panic-边界与-catch_unwind)
     - [7.4 测试 4: Result 与 Option 的组合边界](#74-测试-4-result-与-option-的组合边界)
@@ -123,7 +123,7 @@
     - [11.1 边界测试：? 运算符在错误类型不匹配时使用（编译错误）](#111-边界测试-运算符在错误类型不匹配时使用编译错误)
     - [11.2 边界测试：panic 在 const fn 中（编译错误）](#112-边界测试panic-在-const-fn-中编译错误)
     - [11.3 边界测试：`Result` 未处理（编译错误）](#113-边界测试result-未处理编译错误)
-    - [11.4 边界测试：`?` 在闭包中的类型推断（Type Inference）失败（编译错误）](LINK_PLACEHOLDER)
+    - [11.4 边界测试：`?` 在闭包中的类型推断失败（编译错误）](#114-边界测试-在闭包中的类型推断失败编译错误)
     - [11.5 边界测试：自定义 Error 未实现 `std::error::Error`（编译错误）](#115-边界测试自定义-error-未实现-stderrorerror编译错误)
     - [11.6 边界测试：`Result` 与 `Option` 混用（编译错误）](#116-边界测试result-与-option-混用编译错误)
     - [11.7 边界测试：`panic!` 在 `const fn` 中的限制（编译错误）](#117-边界测试panic-在-const-fn-中的限制编译错误)
@@ -2028,7 +2028,7 @@ fn compute() -> Maybe<i32> {
 |:---|:---|:---|
 | Trait 系统 | [01_traits.md](./01_traits.md) | Error/From trait 的实现基础 |
 | 泛型（Generics）系统 | [02_generics.md](./02_generics.md) | Result<T, E> 的泛型参数约束 |
-| 所有权（Ownership）与生命周期（Lifetimes） | [01_foundation/01_ownership.md](LINK_PLACEHOLDER) | panic 时的资源清理 |
+| 所有权（Ownership）与生命周期（Lifetimes） | 01_foundation/01_ownership.md | panic 时的资源清理 |
 | 类型系统（Type System）基础 | [01_foundation/04_type_system.md](../01_foundation/04_type_system.md) | 和类型的理论基础 |
 | 并发与 Send/Sync | [03_advanced/01_concurrency.md](../03_advanced/01_concurrency.md) | 跨线程错误传播 |
 | 异步与 Future | [03_advanced/02_async.md](../03_advanced/02_async.md) | async 中的 ? 运算符 |

@@ -10,7 +10,7 @@
 > **层次定位**: L4 形式化理论 / RustBelt 子域 [来源: [TAPL — Pierce 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价安全性定理的假设边界
-> **前置依赖**: [L4 所有权（Ownership）形式化](LINK_PLACEHOLDER) · [L4 类型论](LINK_PLACEHOLDER) · [L4 线性逻辑](LINK_PLACEHOLDER)
+> **前置依赖**: [L4 所有权（Ownership）形式化](03_ownership_formal.md) · L4 类型论 · L4 线性逻辑
 > **后置延伸**: [L7 形式化方法](../07_future/02_formal_methods.md) · [L6 验证工具](../06_ecosystem/01_toolchain.md)
 > **跨层映射**: L4→L7 机械证明 → 自动化验证 | L4→L6 逻辑规则 → 工具实现
 > **定理链编号**: T-110 Iris 逻辑可靠性 → T-111 高阶幽灵状态 → T-112 类型系统（Type System） soundness
@@ -89,7 +89,7 @@
     - [7.6 RefinedRust：自动化分离逻辑推导](#76-refinedrust自动化分离逻辑推导)
     - [7.7 RustHornBelt：Horn 子句验证与 CHC 求解](#77-rusthornbelthorn-子句验证与-chc-求解)
     - [7.8 CSL 中 `RwLock` 与 `Condvar` 的 Iris 建模](#78-csl-中-rwlock-与-condvar-的-iris-建模)
-    - [7.9 `Vec` 重新分配：借用（Borrowing）与重分配的形式化处理](LINK_PLACEHOLDER)
+    - [7.9 `Vec` 重新分配：借用与重分配的形式化处理](#79-vec-重新分配借用与重分配的形式化处理)
   - [十三、待补充与演进方向（TODOs）](#十三待补充与演进方向todos)
   - [十四、Wikipedia 概念对齐](#十四wikipedia-概念对齐)
   - [权威来源索引](#权威来源索引)
@@ -97,10 +97,10 @@
     - [11.1 边界测试：违反唯一所有权（编译错误）](#111-边界测试违反唯一所有权编译错误)
     - [11.2 边界测试：Send/Sync 自动推导失败（编译错误）](#112-边界测试sendsync-自动推导失败编译错误)
     - [11.3 边界测试：drop 后使用（编译错误）](#113-边界测试drop-后使用编译错误)
-    - [11.4 边界测试：共享借用期间可变借用（Mutable Borrow）（编译错误）](LINK_PLACEHOLDER)
+    - [11.4 边界测试：共享借用期间可变借用（编译错误）](#114-边界测试共享借用期间可变借用编译错误)
     - [11.5 边界测试：形式化谓词与 `Cell<T>` 的冲突（编译错误）](#115-边界测试形式化谓词与-cellt-的冲突编译错误)
     - [11.6 边界测试：`mem::forget` 与所有权谓词泄漏（编译错误）](#116-边界测试memforget-与所有权谓词泄漏编译错误)
-    - [10.3 边界测试：unsafe 代码契约的形式化验证盲区（运行时（Runtime） UB）](LINK_PLACEHOLDER)
+    - [10.3 边界测试：unsafe 代码契约的形式化验证盲区（运行时 UB）](#103-边界测试unsafe-代码契约的形式化验证盲区运行时-ub)
 
 ## 一、权威定义（Definition）
 

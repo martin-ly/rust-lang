@@ -13,7 +13,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价分布式共识算法的安全性、活性与工程实现权衡
-> **前置依赖**: [分布式系统](LINK_PLACEHOLDER) · [并发编程](LINK_PLACEHOLDER) · [网络协议](LINK_PLACEHOLDER) · [类型系统（Type System）](LINK_PLACEHOLDER)
+> **前置依赖**: 分布式系统 · [并发编程](../03_advanced/01_concurrency.md) · 网络协议 · [类型系统（Type System）](../01_foundation/04_type_system.md)
 > **后置延伸**: [区块链](./06_blockchain.md) · [云原生](./24_cloud_native.md) · [微服务架构](./31_microservice_patterns.md)
 >
 > **来源**: [raft-rs](https://docs.rs/raft/) · [hotstuff-rs](https://docs.rs/hotstuff-rs/)
@@ -111,7 +111,7 @@
 
 ### 1.2 FLP 不可能结果
 
-> **[FLP — Fischer, Lynch, Paterson, JACM 1985](LINK_PLACEHOLDER)** 在**纯异步（Async）系统**（消息延迟无上界）中，即使只有一个进程可能崩溃（Crash-Stop），也不存在确定性的共识算法能同时满足安全性和终止性。
+> **FLP — Fischer, Lynch, Paterson, JACM 1985** 在**纯异步（Async）系统**（消息延迟无上界）中，即使只有一个进程可能崩溃（Crash-Stop），也不存在确定性的共识算法能同时满足安全性和终止性。
 
 ```text
 FLP 不可能性的直观解释:

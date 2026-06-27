@@ -9,7 +9,7 @@
 > **双维定位**: C×Ana
 > **前置概念**: [Variable Model](../01_foundation/20_variable_model.md) · [Type System](../01_foundation/04_type_system.md) · [Ownership](../01_foundation/01_ownership.md)
 > **后置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md) · [C++ Surface Features](../05_comparative/16_cpp_rust_surface_features.md)
-> **主要来源**: [TRPL Ch 5 — Using Structs] · [The C++ Programming Language, Stroustrup] · [cppreference — Constructors]
+> **主要来源**: [TRPL Ch 5 — Using Structs](https://doc.rust-lang.org/book/ch05-00-structs.html) · [Rust Reference — const fn](https://doc.rust-lang.org/reference/const_eval.html#const-functions) · [cppreference — Constructors](https://en.cppreference.com/w/cpp/language/constructor) · [cppreference — Default constructor](https://en.cppreference.com/w/cpp/language/default_constructor) · [cppreference — Copy constructor](https://en.cppreference.com/w/cpp/language/copy_constructor) · [cppreference — Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor) · [Brown CRP — Copy and Move Constructors](https://cel.cs.brown.edu/crp/idioms/copy_move_constructors.html) · [Stroustrup — The C++ Programming Language, 4th ed.](https://www.stroustrup.com/4th.html)
 ---
 
 > **Bloom 层级**: 理解 → 分析
@@ -189,13 +189,11 @@ Point::new(x, y) = Point { x, y }
 
 ---
 
-## 七、L1 / L2 / L3 总结
+## 七、总结
 
-| 层级 | 要点 |
-|:---|:---|
-| **L1** | Rust 没有 C++ 的构造函数，用结构体字面量和关联函数（如 `new`）创建对象。 |
-| **L2** | Rust 的 `Default`、`Clone`、`Copy`、`Drop` trait 替代了 C++ 的默认/拷贝/移动构造函数和析构函数；不需要 Rule of Three/Five。 |
-| **L3** | Rust 去语法化的构造模型让所有对象创建行为都受类型系统和所有权规则约束，消除了 C++ 中因构造函数特权语法导致的隐式转换、未初始化、异常安全等复杂问题。 |
+- **L1**：Rust 没有 C++ 的构造函数，用结构体字面量和关联函数（如 `new`）创建对象。
+- **L2**：Rust 的 `Default`、`Clone`、`Copy`、`Drop` trait 替代了 C++ 的默认/拷贝/移动构造函数和析构函数；不需要 Rule of Three/Five。
+- **L3**：Rust 去语法化的构造模型让所有对象创建行为都受类型系统和所有权规则约束，消除了 C++ 中因构造函数特权语法导致的隐式转换、未初始化、异常安全等复杂问题。
 
 ---
 
@@ -203,9 +201,11 @@ Point::new(x, y) = Point { x, y }
 
 - [TRPL: Using Structs](https://doc.rust-lang.org/book/ch05-00-structs.html)
 - [Rust Reference: Struct Expressions](https://doc.rust-lang.org/reference/expressions/struct-expr.html)
+- [Rust Reference: const fn](https://doc.rust-lang.org/reference/const_eval.html#const-functions)
+- [std::default::Default](https://doc.rust-lang.org/std/default/trait.Default.html)
 - [cppreference: Constructors](https://en.cppreference.com/w/cpp/language/constructor)
-- [The C++ Programming Language, Stroustrup, Ch. 17]
-
----
-
-> **Checklist**: 已覆盖 C++ 构造函数 / Rust 结构体字面量 / `new` 约定 / `Default` / `const fn` / 三/五/零法则对比 / 形式化视角。
+- [cppreference: Default constructor](https://en.cppreference.com/w/cpp/language/default_constructor)
+- [cppreference: Copy constructor](https://en.cppreference.com/w/cpp/language/copy_constructor)
+- [cppreference: Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor)
+- [Brown CRP: Copy and Move Constructors](https://cel.cs.brown.edu/crp/idioms/copy_move_constructors.html)
+- [Stroustrup — The C++ Programming Language, 4th ed.](https://www.stroustrup.com/4th.html)

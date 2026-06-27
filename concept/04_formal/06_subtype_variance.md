@@ -24,15 +24,15 @@
 
 ## 📑 目录
 
-- [子类型与变型：Rust 类型系统（Type System）中的协变、逆变与不变](LINK_PLACEHOLDER)
+- 子类型与变型：Rust 类型系统（Type System）中的协变、逆变与不变
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 子类型关系：'static 是 'a 的子类型](#11-子类型关系static-是-a-的子类型)
     - [1.2 变型三态：协变、逆变、不变](#12-变型三态协变逆变不变)
     - [1.3 Rust 中的变型规则](#13-rust-中的变型规则)
   - [二、技术细节](#二技术细节)
-    - [2.1 生命周期（Lifetimes）位置的变型推导](LINK_PLACEHOLDER)
-    - [2.2 结构体（Struct）与枚举（Enum）的变型](LINK_PLACEHOLDER)
+    - 2.1 生命周期（Lifetimes）位置的变型推导
+    - 2.2 结构体（Struct）与枚举（Enum）的变型
     - [2.3 函数指针的变型](#23-函数指针的变型)
   - [三、形式化分析](#三形式化分析)
   - [四、反命题与边界分析](#四反命题与边界分析)
@@ -46,7 +46,7 @@
     - [10.1 边界测试：协变与逆变的生命周期误用（编译错误）](#101-边界测试协变与逆变的生命周期误用编译错误)
     - [10.2 边界测试：`UnsafeCell` 的不变性（编译错误）](#102-边界测试unsafecell-的不变性编译错误)
     - [10.3 边界测试：逆变与 `fn` 参数的不变性（编译错误）](#103-边界测试逆变与-fn-参数的不变性编译错误)
-    - [10.4 边界测试：`UnsafeCell` 的不变性（编译错误/运行时（Runtime） UB）](LINK_PLACEHOLDER)
+    - 10.4 边界测试：`UnsafeCell` 的不变性（编译错误/运行时（Runtime） UB）
     - [10.3 边界测试：逆变（contravariant）与函数参数的生命周期（编译错误）](#103-边界测试逆变contravariant与函数参数的生命周期编译错误)
     - [10.4 边界测试：协变/逆变与生命周期子类型的错误转换（编译错误）](#104-边界测试协变逆变与生命周期子类型的错误转换编译错误)
     - [10.4 边界测试：函数重复定义](#104-边界测试函数重复定义)
@@ -473,7 +473,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: `UnsafeCell<T>` 对 `T` 是**不变**（invariant）的——不允许任何生命周期缩短或延长。这是因为 `UnsafeCell` 提供内部可变性，若允许协变，可能将短生命周期引用（Reference）存储在期望长生命周期的上下文中，导致悬垂引用。`&mut T` 对 `T` 也是不变的，`Box<T>` 对 `T` 是协变的，`*const T` 对 `T` 是协变的，`*mut T` 对 `T` 是不变的。变异性的选择是 Rust 类型系统安全性的关键设计。[来源: [Rustonomicon](LINK_PLACEHOLDER)]
+> **修正**: `UnsafeCell<T>` 对 `T` 是**不变**（invariant）的——不允许任何生命周期缩短或延长。这是因为 `UnsafeCell` 提供内部可变性，若允许协变，可能将短生命周期引用（Reference）存储在期望长生命周期的上下文中，导致悬垂引用。`&mut T` 对 `T` 也是不变的，`Box<T>` 对 `T` 是协变的，`*const T` 对 `T` 是协变的，`*mut T` 对 `T` 是不变的。变异性的选择是 Rust 类型系统安全性的关键设计。来源: [Rustonomicon]
 
 ### 10.3 边界测试：逆变与 `fn` 参数的不变性（编译错误）
 
@@ -492,7 +492,7 @@ fn main() {
 }
 ```
 
-> **修正**: 函数指针 `fn(T) -> U` 的**变异性**（variance）：`T` 位置是**逆变**（contravariant），`U` 位置是**协变**（covariant）。逆变意味着：若 `A` 是 `B` 的子类型，则 `fn(B)` 是 `fn(A)` 的子类型。对生命周期而言，`&'static str` 比 `&'a str` 长（`'static: 'a`），因此 `&'static str` 是 `&'a str` 的子类型。逆变的参数位置意味着 `fn(&'a str)` 是 `fn(&'static str)` 的子类型——接受短引用的函数可以接受长引用（能力更强），反之不行。这与 Java 的泛型（Generics）（默认不变，`? super T` 逆变，`? extends T` 协变）或 Scala 的变型注解（`+T` 协变，`-T` 逆变）类似——Rust 的变异性是隐式的，由类型构造器的位置决定，开发者通常不直接操作，但在高级泛型代码中理解变异性至关重要。[来源: [Rust Reference — Variance](LINK_PLACEHOLDER)] · [来源: [The Rustonomicon](LINK_PLACEHOLDER)]
+> **修正**: 函数指针 `fn(T) -> U` 的**变异性**（variance）：`T` 位置是**逆变**（contravariant），`U` 位置是**协变**（covariant）。逆变意味着：若 `A` 是 `B` 的子类型，则 `fn(B)` 是 `fn(A)` 的子类型。对生命周期而言，`&'static str` 比 `&'a str` 长（`'static: 'a`），因此 `&'static str` 是 `&'a str` 的子类型。逆变的参数位置意味着 `fn(&'a str)` 是 `fn(&'static str)` 的子类型——接受短引用的函数可以接受长引用（能力更强），反之不行。这与 Java 的泛型（Generics）（默认不变，`? super T` 逆变，`? extends T` 协变）或 Scala 的变型注解（`+T` 协变，`-T` 逆变）类似——Rust 的变异性是隐式的，由类型构造器的位置决定，开发者通常不直接操作，但在高级泛型代码中理解变异性至关重要。来源: [Rust Reference — Variance] · 来源: [The Rustonomicon]
 
 ### 10.4 边界测试：`UnsafeCell` 的不变性（编译错误/运行时 UB）
 

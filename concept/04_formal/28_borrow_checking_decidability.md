@@ -9,7 +9,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **F+P** — Formal + Procedure
 > **双维定位**: F×Algo — 形式化方法与算法可判定性
-> **前置依赖**: [L1 借用（Borrowing）](LINK_PLACEHOLDER) · [L3 NLL 与 Polonius](LINK_PLACEHOLDER) · [L4 所有权（Ownership）形式化](LINK_PLACEHOLDER)
+> **前置依赖**: [L1 借用（Borrowing）](../01_foundation/02_borrowing.md) · L3 NLL 与 Polonius · [L4 所有权（Ownership）形式化](03_ownership_formal.md)
 > **后置延伸**: [L4 RustBelt](./04_rustbelt.md) · [L4 类型检查与推断](./27_type_checking_and_inference.md) · [L4 树借用](./25_tree_borrows_deep_dive.md)
 
 > 本文内容来自已归档的 `docs/rust-ownership-decidability/04-decidability-analysis/04-02-borrow-checking.md`，经提炼后迁移。

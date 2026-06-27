@@ -33,11 +33,11 @@
   - [📑 目录](#-目录)
   - [一、核心对比](#一核心对比)
     - [1.1 内存管理](#11-内存管理)
-    - [1.2 泛型（Generics）系统](LINK_PLACEHOLDER)
-    - [1.3 异步（Async）模型](LINK_PLACEHOLDER)
+    - [1.2 泛型系统](#12-泛型系统)
+    - [1.3 异步模型](#13-异步模型)
   - [二、语言特性差异](#二语言特性差异)
-    - [2.1 模式匹配（Pattern Matching）](LINK_PLACEHOLDER)
-    - [2.2 错误处理（Error Handling）](LINK_PLACEHOLDER)
+    - [2.1 模式匹配](#21-模式匹配)
+    - [2.2 错误处理](#22-错误处理)
     - [2.3 unsafe 与不安全代码](#23-unsafe-与不安全代码)
   - [三、工程实践差异](#三工程实践差异)
     - [3.1 构建系统](#31-构建系统)
@@ -51,10 +51,10 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Rust 与 C# 的编译错误对比](#十边界测试rust-与-c-的编译错误对比)
     - [10.1 边界测试：C# 的 async/await 与 Rust 的 Future（编译错误）](#101-边界测试c-的-asyncawait-与-rust-的-future编译错误)
-    - [10.2 边界测试：C# 的 LINQ 与 Rust 的迭代器（Iterator）（编译错误）](LINK_PLACEHOLDER)
+    - [10.2 边界测试：C# 的 LINQ 与 Rust 的迭代器（编译错误）](#102-边界测试c-的-linq-与-rust-的迭代器编译错误)
     - [10.3 边界测试：C# 的 async/await 与 Rust 的 `?` 在 async 中的交互（编译错误）](#103-边界测试c-的-asyncawait-与-rust-的--在-async-中的交互编译错误)
-    - [10.4 边界测试：C# 的属性与 Rust 的派生宏（Macro）的编译期差异（编译错误）](LINK_PLACEHOLDER)
-    - [10.3 边界测试：C# 的 async/await 与 Rust 的 Future 语义差异（运行时（Runtime）行为差异）](LINK_PLACEHOLDER)
+    - [10.4 边界测试：C# 的属性与 Rust 的派生宏的编译期差异（编译错误）](#104-边界测试c-的属性与-rust-的派生宏的编译期差异编译错误)
+    - [10.3 边界测试：C# 的 async/await 与 Rust 的 Future 语义差异（运行时行为差异）](#103-边界测试c-的-asyncawait-与-rust-的-future-语义差异运行时行为差异)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：C# 的 async/await 与 Rust 的 async/await 在运行时模型上有什么根本区别？（理解层）](#测验-1c-的-asyncawait-与-rust-的-asyncawait-在运行时模型上有什么根本区别理解层)
     - [测验 2：C# 的 LINQ 与 Rust 的迭代器适配器（`Iterator` trait）在功能上有什么对应关系？（理解层）](#测验-2c-的-linq-与-rust-的迭代器适配器iterator-trait在功能上有什么对应关系理解层)
@@ -656,7 +656,7 @@ fn main() {
 }
 ```
 
-> **C# 对比**: C# 的 LINQ 提供查询表达式语法（`from x in data where x > 1 select x * 2`），编译器转换为方法调用。Rust 只有方法链（`filter().map().collect()`），没有查询表达式。LINQ 的延迟执行与 Rust 的惰性迭代器（Iterator）相同，但 C# 的 `IEnumerable` 有运行时（Runtime）开销（虚方法调用），Rust 的迭代器通过单态化（Monomorphization）实现零成本。Rust 的迭代器是更底层的抽象，性能更优，但可读性不如 LINQ 查询表达式。[来源: [Rust Standard Library](LINK_PLACEHOLDER)]
+> **C# 对比**: C# 的 LINQ 提供查询表达式语法（`from x in data where x > 1 select x * 2`），编译器转换为方法调用。Rust 只有方法链（`filter().map().collect()`），没有查询表达式。LINQ 的延迟执行与 Rust 的惰性迭代器（Iterator）相同，但 C# 的 `IEnumerable` 有运行时（Runtime）开销（虚方法调用），Rust 的迭代器通过单态化（Monomorphization）实现零成本。Rust 的迭代器是更底层的抽象，性能更优，但可读性不如 LINQ 查询表达式。来源: [Rust Standard Library]
 
 ### 10.3 边界测试：C# 的 async/await 与 Rust 的 `?` 在 async 中的交互（编译错误）
 

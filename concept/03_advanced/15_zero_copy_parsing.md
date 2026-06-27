@@ -30,7 +30,7 @@
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 零拷贝原理](#11-零拷贝原理)
-    - [1.2 生命周期（Lifetimes）约束](LINK_PLACEHOLDER)
+    - [1.2 生命周期约束](#12-生命周期约束)
   - [二、关键技术](#二关键技术)
     - [2.1 bytes crate](#21-bytes-crate)
     - [2.2 zerocopy crate](#22-zerocopy-crate)
@@ -48,13 +48,13 @@
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：零拷贝解析的编译错误](#十边界测试零拷贝解析的编译错误)
-    - [10.1 边界测试：`mem::transmute` 的字节对齐假设（运行时（Runtime） UB）](LINK_PLACEHOLDER)
-    - [10.2 边界测试：生命周期（Lifetimes）过短的零拷贝视图（编译错误）](#102-边界测试生命周期过短的零拷贝视图编译错误)
+    - [10.1 边界测试：`mem::transmute` 的字节对齐假设（运行时 UB）](#101-边界测试memtransmute-的字节对齐假设运行时-ub)
+    - [10.2 边界测试：生命周期过短的零拷贝视图（编译错误）](#102-边界测试生命周期过短的零拷贝视图编译错误)
     - [10.3 边界测试：`nom` 解析器的生命周期传播（编译错误）](#103-边界测试nom-解析器的生命周期传播编译错误)
-    - [10.4 边界测试：零拷贝与字节序的字节对齐（运行时（Runtime） UB）](#104-边界测试零拷贝与字节序的字节对齐运行时-ub)
+    - [10.4 边界测试：零拷贝与字节序的字节对齐（运行时 UB）](#104-边界测试零拷贝与字节序的字节对齐运行时-ub)
     - [10.5 边界测试：零拷贝解析的生命周期与输入缓冲区释放（运行时悬垂）](#105-边界测试零拷贝解析的生命周期与输入缓冲区释放运行时悬垂)
     - [10.3 边界测试：`std::mem::transmute` 的大小不匹配（编译错误/UB）](#103-边界测试stdmemtransmute-的大小不匹配编译错误ub)
-    - [10.4 边界测试：零拷贝解析的生命周期依赖与所有权（Ownership）转移（编译错误）](LINK_PLACEHOLDER)
+    - [10.4 边界测试：零拷贝解析的生命周期依赖与所有权转移（编译错误）](#104-边界测试零拷贝解析的生命周期依赖与所有权转移编译错误)
     - [10.4 边界测试：类型不匹配的基础错误](#104-边界测试类型不匹配的基础错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：零拷贝的核心思想（理解层）](#测验-1零拷贝的核心思想理解层)
@@ -690,7 +690,7 @@ fn main() {
 }
 ```
 
-> **修正**: `std::mem::transmute` 是**按位重新解释**类型，要求源和目标类型**大小相同**（`size_of::<Src>() == size_of::<Dst>()`）。编译期检查：大小不同 → 编译错误。但大小相同不代表语义安全：`transmute::<&mut T, &mut U>()` 是 UB（可能违反借用（Borrowing）规则），`transmute::<bool, u8>(2)` 是 UB（bool 只能是 0 或 1）。安全替代：1) `as` 转换（数值类型，有定义行为）；2) `From`/`Into`（类型安全转换）；3) `bytemuck` crate（运行时（Runtime）检查 transmute 合法性）。零拷贝解析（如 `zerocopy` crate）使用 `transmute` 将字节切片转为 struct，但需 `#[repr(C)]` 和对齐保证。这与 C 的指针强制转换（`(u64*)(&x)`，无大小检查）或 Go 的 `unsafe.Pointer`（类似但无编译期检查）不同——Rust 的 `transmute` 至少保证大小匹配，其他风险需开发者承担。[来源: [Rust Standard Library](LINK_PLACEHOLDER)] · [来源: [The Rustonomicon](LINK_PLACEHOLDER)]
+> **修正**: `std::mem::transmute` 是**按位重新解释**类型，要求源和目标类型**大小相同**（`size_of::<Src>() == size_of::<Dst>()`）。编译期检查：大小不同 → 编译错误。但大小相同不代表语义安全：`transmute::<&mut T, &mut U>()` 是 UB（可能违反借用（Borrowing）规则），`transmute::<bool, u8>(2)` 是 UB（bool 只能是 0 或 1）。安全替代：1) `as` 转换（数值类型，有定义行为）；2) `From`/`Into`（类型安全转换）；3) `bytemuck` crate（运行时（Runtime）检查 transmute 合法性）。零拷贝解析（如 `zerocopy` crate）使用 `transmute` 将字节切片转为 struct，但需 `#[repr(C)]` 和对齐保证。这与 C 的指针强制转换（`(u64*)(&x)`，无大小检查）或 Go 的 `unsafe.Pointer`（类似但无编译期检查）不同——Rust 的 `transmute` 至少保证大小匹配，其他风险需开发者承担。来源: [Rust Standard Library] · 来源: [The Rustonomicon]
 
 ### 10.4 边界测试：零拷贝解析的生命周期依赖与所有权转移（编译错误）
 

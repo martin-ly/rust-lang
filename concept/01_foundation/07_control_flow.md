@@ -28,7 +28,7 @@
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 表达式 vs 语句](#11-表达式-vs-语句)
-    - [1.2 match：穷尽性模式匹配（Pattern Matching）](#12-match穷尽性模式匹配)
+    - [1.2 match：穷尽性模式匹配](#12-match穷尽性模式匹配)
     - [1.3 if let / while let：简化的模式匹配](#13-if-let--while-let简化的模式匹配)
   - [二、技术细节](#二技术细节)
     - [2.1 loop 与值返回](#21-loop-与值返回)
@@ -45,9 +45,9 @@
   - [十二、边界测试：控制流的编译错误](#十二边界测试控制流的编译错误)
     - [12.1 边界测试：`loop` 返回值类型不匹配（编译错误）](#121-边界测试loop-返回值类型不匹配编译错误)
     - [12.2 边界测试：`if let` 与 `while let` 的变量遮蔽（编译错误）](#122-边界测试if-let-与-while-let-的变量遮蔽编译错误)
-    - [10.3 边界测试：`loop` 表达式的类型推断（Type Inference）（编译错误）](LINK_PLACEHOLDER)
+    - [10.3 边界测试：`loop` 表达式的类型推断（编译错误）](#103-边界测试loop-表达式的类型推断编译错误)
     - [10.4 边界测试：`?` 运算符在 `main` 中的返回类型（编译错误）](#104-边界测试-运算符在-main-中的返回类型编译错误)
-    - [10.5 边界测试：`loop` 返回值与 `break` 的类型一致性（Coherence）（编译错误）](LINK_PLACEHOLDER)
+    - [10.5 边界测试：`loop` 返回值与 `break` 的类型一致性（编译错误）](#105-边界测试loop-返回值与-break-的类型一致性编译错误)
     - [10.6 边界测试：`match` 臂中的变量绑定与模式守卫（编译错误）](#106-边界测试match-臂中的变量绑定与模式守卫编译错误)
   - [实践](#实践)
   - [参考来源](#参考来源)
@@ -61,11 +61,37 @@
     - [测验 4：`if let` 语法（应用层）](#测验-4if-let-语法应用层)
     - [测验 5：`break` 标签（分析层）](#测验-5break-标签分析层)
   - [补充章节：控制流理论深化（P1-4）](#补充章节控制流理论深化p1-4)
-    - [7.1 结构化程序定理（Böhm–Jacopini）](#71-结构化程序定理böhmjacopini)
+    - [7.1 结构化程序定理（Böhm–Jacopini 定理）](#71-结构化程序定理böhmjacopini-定理)
+      - [形式化定义](#形式化定义)
+      - [三种结构化构造的 ASCII 示意图](#三种结构化构造的-ascii-示意图)
+      - [与 Rust 的对应](#与-rust-的对应)
+      - [代码示例：仅用三种结构实现欧几里得算法](#代码示例仅用三种结构实现欧几里得算法)
     - [7.2 Continuation / `call/cc` / CPS 变换 / Delimited Continuation](#72-continuation--callcc--cps-变换--delimited-continuation)
+      - [形式化定义](#形式化定义-1)
+      - [Rust 关联](#rust-关联)
+      - [`async/await` 作为显式 Continuation 的 Mermaid 示意图](#asyncawait-作为显式-continuation-的-mermaid-示意图)
+      - [代码示例](#代码示例)
+      - [Delimited Continuation 与 `async` 的类比](#delimited-continuation-与-async-的类比)
     - [7.3 控制流图（CFG）、基本块、边与支配树](#73-控制流图cfg基本块边与支配树)
+      - [形式化定义](#形式化定义-2)
+      - [`if-else` 的 CFG 与支配树 Mermaid 图](#if-else-的-cfg-与支配树-mermaid-图)
+      - [与编译器优化的关系](#与编译器优化的关系)
+      - [Rust 关联](#rust-关联-1)
+      - [代码示例：一个极小 CFG 与迭代式支配集计算](#代码示例一个极小-cfg-与迭代式支配集计算)
     - [7.4 循环不变量：与 Hoare 逻辑的衔接](#74-循环不变量与-hoare-逻辑的衔接)
-    - [7.5 `goto` 的消除与恢复：C `goto` / C++ `co_await` / Rust `?` / `break 'label`](#75-goto-的消除与恢复c-goto--c-co_await--rust---break-label)
+      - [形式化定义](#形式化定义-3)
+      - [部分正确性与完全正确性](#部分正确性与完全正确性)
+      - [Rust 关联](#rust-关联-2)
+      - [代码示例 1：二分查找的循环不变量](#代码示例-1二分查找的循环不变量)
+      - [代码示例 2：带不变量的简单累加](#代码示例-2带不变量的简单累加)
+    - [7.5 `goto` 的消除与恢复：C `goto` / C++ `co_await` / Rust `?` / `break 'label` 的控制流本质](#75-goto-的消除与恢复c-goto--c-co_await--rust---break-label-的控制流本质)
+      - [形式化定义](#形式化定义-4)
+      - [C `goto`：自由但危险](#c-goto自由但危险)
+      - [C++ `co_await`：协程的恢复式控制流](#c-co_await协程的恢复式控制流)
+      - [Rust `break 'label` 与 `?`：结构化跳转的两种受限形式](#rust-break-label-与-结构化跳转的两种受限形式)
+      - [四种机制的跳转范围对比 Mermaid 图](#四种机制的跳转范围对比-mermaid-图)
+      - [对比表](#对比表)
+      - [从 `goto` 到结构化控制的恢复路径](#从-goto-到结构化控制的恢复路径)
 
 ---
 
@@ -1052,11 +1078,13 @@ fn main() {
 **CPS 变换（Continuation-Passing Style）** 是一种程序变换：把每个函数扩展一个额外参数 `k`，函数不再直接返回结果，而是把结果传递给 `k`。经过 CPS 变换后，所有函数调用都变成**尾调用（tail call）**，控制流完全显式化。
 
 直接风格：
+
 ```text
 f(x) = E[f(g(y))]
 ```
 
 CPS 风格：
+
 ```text
 f(x, k) = g(y, λr. k(E[r]))
 ```

@@ -27,16 +27,16 @@
 >
 >
 
-- [Rust vs Java：系统编程与托管运行时（Runtime）的范式对比](LINK_PLACEHOLDER)
+- Rust vs Java：系统编程与托管运行时（Runtime）的范式对比
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 内存管理：所有权（Ownership） vs GC](LINK_PLACEHOLDER)
-    - [1.2 类型系统（Type System）：静态显式 vs 静态推断](LINK_PLACEHOLDER)
+    - 1.1 内存管理：所有权（Ownership） vs GC
+    - 1.2 类型系统（Type System）：静态显式 vs 静态推断
     - [1.3 并发模型：所有权约束 vs JMM](#13-并发模型所有权约束-vs-jmm)
   - [二、技术细节](#二技术细节)
     - [2.1 运行时架构对比](#21-运行时架构对比)
     - [2.2 异常处理哲学](#22-异常处理哲学)
-    - [2.3 泛型（Generics）实现：单态化（Monomorphization） vs 擦除](LINK_PLACEHOLDER)
+    - 2.3 泛型（Generics）实现：单态化（Monomorphization） vs 擦除
   - [三、场景适用矩阵](#三场景适用矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)

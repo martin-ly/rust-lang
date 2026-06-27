@@ -13,7 +13,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Ana — 分析 Rust ML 生态的技术选型与工程权衡
-> **前置依赖**: [类型系统（Type System）](LINK_PLACEHOLDER) · [泛型（Generics）](LINK_PLACEHOLDER) · [Trait](LINK_PLACEHOLDER) · [Unsafe Rust](LINK_PLACEHOLDER)
+> **前置依赖**: [类型系统（Type System）](../01_foundation/04_type_system.md) · [泛型（Generics）](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
 > **后置延伸**: [嵌入式系统](./22_embedded_systems.md) · [性能优化](./15_performance_optimization.md) · [并发编程](../03_advanced/01_concurrency.md)
 >
 > **来源**: [candle](https://docs.rs/candle-core/) · [burn](https://docs.rs/burn/) · [tch-rs](https://docs.rs/tch/)

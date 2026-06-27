@@ -1,0 +1,136 @@
+# 测验：通用 PL 基座
+>
+> **EN**: Quiz: General PL Foundations
+> **Summary**: Embedded quiz for the general programming-language mechanism files: variable model, evaluation strategies, effects and purity, control flow, and data abstraction spectrum.
+>
+> **受众**: [初学者]
+> **层级**: L1 基础概念
+> **A/S/P 标记**: S — Structure
+> **双维定位**: C×Eva
+> **前置概念**: [Variable Model](./20_variable_model.md) · [Evaluation Strategies](../04_formal/18_evaluation_strategies.md) · [Effects and Purity](./21_effects_and_purity.md) · [Control Flow](./07_control_flow.md) · [Data Abstraction Spectrum](./22_data_abstraction_spectrum.md)
+> **后置概念**: N/A
+---
+
+> **Bloom 层级**: 理解 → 应用
+
+## 一、变量模型
+
+### 问题 1：在通用 PL 的"环境-存储"模型中，Rust 的所有权系统主要约束的是哪一层？
+
+- A. 环境层（Environment）
+- B. 存储层（Store）
+- C. 语法层（Syntax）
+- D. 类型层（Type）
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**答案：B**
+
+环境层将变量名映射到资源标识符；存储层管理资源本身及其所有权状态。Rust 的所有权约束主要作用于存储层，确保每个资源在任意时刻只有一个所有者。
+
+</details>
+
+---
+
+## 二、求值策略
+
+### 问题 2：Rust 默认使用哪种求值策略？`&T` 和 `&mut T` 在求值策略上分别对应什么？
+
+- A. CBV；`&T` 对应 CBN，`&mut T` 对应 CBR
+- B. CBN；`&T` 对应 CBV，`&mut T` 对应 CBR
+- C. CBV；`&T` 和 `&mut T` 都是受限的 CBR
+- D. CBR；`&T` 和 `&mut T` 都是 CBV
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**答案：C**
+
+Rust 是严格求值语言，默认参数传递是 Call-by-Value（对于 `Copy` 类型是复制值，对于非 `Copy` 类型是转移所有权）。`&T` 和 `&mut T` 提供受限的 Call-by-Reference 能力，允许函数访问或修改调用者的数据而不转移所有权。
+
+</details>
+
+---
+
+## 三、副作用与纯度
+
+### 问题 3：在 Rust 中，`&mut T` 可以被建模为什么样的效果？
+
+- A. Read effect
+- B. Write effect
+- C. Exception effect
+- D. Nondeterminism effect
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**答案：B**
+
+`&mut T` 允许修改被引用的数据，因此可以被建模为 write effect。Rust 通过借用检查器限制 write effect 的别名，从而防止数据竞争和不一致状态。
+
+</details>
+
+---
+
+## 四、控制流
+
+### 问题 4：结构化程序定理（Böhm–Jacopini 定理）指出，任何可计算函数都可以用哪些控制结构表达？
+
+- A. `goto`、`if`、`while`
+- B. sequence、selection、iteration
+- C. recursion、pattern matching、exception
+- D. continuation、monad、generator
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**答案：B**
+
+结构化程序定理指出：任何可计算函数都可以仅用 sequence（顺序）、selection（选择）、iteration（迭代）三种控制结构表达，无需 `goto`。
+
+</details>
+
+---
+
+## 五、数据抽象谱系
+
+### 问题 5：从数据抽象谱系看，Rust 的 `enum` + `match` 最接近以下哪种传统抽象？
+
+- A. C struct
+- B. C++ class with inheritance
+- C. Haskell ADT（代数数据类型）
+- D. Java interface
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**答案：C**
+
+Rust 的 `enum` 可以携带数据，结合 `match` 进行穷尽性模式匹配，这与 Haskell 的代数数据类型（ADT）最为接近。它比 C struct 更抽象，比 C++ class 继承更轻量，比 Java interface 更注重数据与行为的统一。
+
+</details>
+
+---
+
+## 六、综合应用
+
+### 问题 6：为什么 Rust 能在不使用垃圾回收器的情况下保证内存安全？
+
+- A. 因为 Rust 使用引用计数管理所有内存
+- B. 因为 Rust 的所有权系统在编译期跟踪资源生命周期
+- C. 因为 Rust 不允许使用堆内存
+- D. 因为 Rust 的运行时会自动回收内存
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**答案：B**
+
+Rust 通过所有权、借用和生命周期规则在编译期跟踪资源的生命周期。当所有者离开作用域时，`Drop` trait 自动释放资源，无需垃圾回收器或手动释放。
+
+</details>
+
+---
+
+> **Checklist**: 已覆盖变量模型 / 求值策略 / 副作用 / 控制流 / 数据抽象 / 综合应用，共 6 题。

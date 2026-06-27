@@ -25,17 +25,17 @@
 
 ## 📑 目录
 
-- [异步（Async）模式：从 Future 到生产级并发](LINK_PLACEHOLDER)
+- 异步（Async）模式：从 Future 到生产级并发
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 Future 与状态机](#11-future-与状态机)
-    - [1.2 Pin 与自引用（Reference）](LINK_PLACEHOLDER)
+    - 1.2 Pin 与自引用（Reference）
     - [1.3 Waker 与执行器](#13-waker-与执行器)
   - [二、技术细节](#二技术细节)
     - [2.1 并发执行模式](#21-并发执行模式)
     - [2.2 取消与超时](#22-取消与超时)
   - [十、边界测试：异步（Async）模式的编译错误](#十边界测试异步模式的编译错误)
-    - [10.1 边界测试：`Stream` 与 `Future` 的所有权（Ownership）混淆（编译错误）](LINK_PLACEHOLDER)
+    - 10.1 边界测试：`Stream` 与 `Future` 的所有权（Ownership）混淆（编译错误）
     - [10.2 边界测试：取消安全（Cancellation Safety）违反（逻辑错误）](#102-边界测试取消安全cancellation-safety违反逻辑错误)
     - [2.3 背压与流控制](#23-背压与流控制)
   - [三、异步模式矩阵](#三异步模式矩阵)
@@ -47,11 +47,11 @@
   - [相关概念文件](#相关概念文件)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
-    - [10.3 边界测试：取消安全性（Cancellation Safety）的违反（运行时（Runtime）行为）](LINK_PLACEHOLDER)
+    - 10.3 边界测试：取消安全性（Cancellation Safety）的违反（运行时（Runtime）行为）
     - [10.4 边界测试：`tokio::spawn` 的 `Send` 约束与 `Rc`（编译错误）](#104-边界测试tokiospawn-的-send-约束与-rc编译错误)
     - [10.5 边界测试：`Stream` 的 `fuse` 与 `select_next_some` 的交互（运行时（Runtime） panic）](#105-边界测试stream-的-fuse-与-select_next_some-的交互运行时-panic)
     - [10.3 边界测试：`Stream` 的背压与缓冲区溢出（运行时内存增长）](#103-边界测试stream-的背压与缓冲区溢出运行时内存增长)
-    - [10.4 边界测试：async fn 在 trait 中的生命周期（Lifetimes）推断与实现约束（编译错误）](LINK_PLACEHOLDER)
+    - 10.4 边界测试：async fn 在 trait 中的生命周期（Lifetimes）推断与实现约束（编译错误）
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)

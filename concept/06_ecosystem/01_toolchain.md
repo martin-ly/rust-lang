@@ -97,7 +97,7 @@
     - [编译验证：Edition 机制与向后兼容性](#编译验证edition-机制与向后兼容性)
     - [13.1 `cargo-fuzz`：模糊测试集成](#131-cargo-fuzz模糊测试集成)
     - [13.2 `sccache`：分布式编译缓存](#132-sccache分布式编译缓存)
-  - [十五、定理一致性（Coherence）矩阵（工具链保证层）](LINK_PLACEHOLDER)
+  - [十五、定理一致性矩阵（工具链保证层）](#十五定理一致性矩阵工具链保证层)
   - [十六、待补充与演进方向（TODOs）](#十六待补充与演进方向todos)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：工具链的编译错误](#十边界测试工具链的编译错误)
@@ -1082,7 +1082,7 @@ cargo install repotoire
 repotoire analyze --path ./src --format json
 ```
 
-> **repotoire 洞察**: **repotoire 代表了 Rust 在开发者工具链中的新前沿**——利用 Rust 的性能和内存安全（Memory Safety）构建大规模代码分析基础设施。其图驱动的架构（代码即图）与 Rust 的所有权（Ownership）模型天然契合：图节点的生命周期（Lifetimes）由分析引擎精确管理，避免传统 C/C++ 代码分析工具中常见的内存泄漏和悬垂指针问题。[来源: [repotoire GitHub](LINK_PLACEHOLDER)] · 可信度: 🟡（项目早期，快速发展中）
+> **repotoire 洞察**: **repotoire 代表了 Rust 在开发者工具链中的新前沿**——利用 Rust 的性能和内存安全（Memory Safety）构建大规模代码分析基础设施。其图驱动的架构（代码即图）与 Rust 的所有权（Ownership）模型天然契合：图节点的生命周期（Lifetimes）由分析引擎精确管理，避免传统 C/C++ 代码分析工具中常见的内存泄漏和悬垂指针问题。来源: [repotoire GitHub] · 可信度: 🟡（项目早期，快速发展中）
 
 ### 5.7 Rust 调试生态与 2026 调试体验调查
 
@@ -1745,7 +1745,7 @@ fn main() {
 }
 ```
 
-> **修正**: Cargo feature 是**累加**的：依赖树中任何 crate 启用 feature，该 feature 对整棵树生效。互斥 feature 的设计：1) `cfg_mutually_exclusive!`（第三方宏（Macro））；2) 运行时检查（`panic!("feat-a and feat-b are mutually exclusive")`）；3) 文档明确说明（但不强制）。Cargo 的 feature resolver v2（2021+）改进了特性解析：dev-dependencies 不激活 features，弱依赖（`dep-name?/feature-name`）按需启用。feature 滥用是 Rust 生态的常见问题：1) 过多 feature 导致测试矩阵爆炸；2) 隐式 feature 依赖（`tokio/rt` 启用 `tokio/rt-multi-thread`）；3) 编译时间增加（每个 feature 组合可能触发重新编译）。这与 npm 的 `optionalDependencies` 或 Python 的 `extras_require` 类似——Rust 的 feature 系统是编译期的条件编译，影响代码包含和依赖解析。[来源: [The Cargo Book](LINK_PLACEHOLDER)] · [来源: [RFC 2957 — Weak Dependencies](LINK_PLACEHOLDER)]
+> **修正**: Cargo feature 是**累加**的：依赖树中任何 crate 启用 feature，该 feature 对整棵树生效。互斥 feature 的设计：1) `cfg_mutually_exclusive!`（第三方宏（Macro））；2) 运行时检查（`panic!("feat-a and feat-b are mutually exclusive")`）；3) 文档明确说明（但不强制）。Cargo 的 feature resolver v2（2021+）改进了特性解析：dev-dependencies 不激活 features，弱依赖（`dep-name?/feature-name`）按需启用。feature 滥用是 Rust 生态的常见问题：1) 过多 feature 导致测试矩阵爆炸；2) 隐式 feature 依赖（`tokio/rt` 启用 `tokio/rt-multi-thread`）；3) 编译时间增加（每个 feature 组合可能触发重新编译）。这与 npm 的 `optionalDependencies` 或 Python 的 `extras_require` 类似——Rust 的 feature 系统是编译期的条件编译，影响代码包含和依赖解析。来源: [The Cargo Book] · 来源: [RFC 2957 — Weak Dependencies]
 
 ## 嵌入式测验（Embedded Quiz）
 

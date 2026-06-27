@@ -50,7 +50,7 @@
   - [快速开始：工具安装与运行](#快速开始工具安装与运行)
     - [Miri（Rust 官方动态分析器）](#mirirust-官方动态分析器)
     - [Kani（AWS 有界模型检查器）](#kaniaws-有界模型检查器)
-    - [BorrowSanitizer（运行时（Runtime）借用（Borrowing）检查 Sanitizer）](LINK_PLACEHOLDER)
+    - [BorrowSanitizer（运行时借用检查 Sanitizer）](#borrowsanitizer运行时借用检查-sanitizer)
     - [Verus（Microsoft 演绎验证器）](#verusmicrosoft-演绎验证器)
   - [嵌入式测验](#嵌入式测验)
   - [认知路径](#认知路径)

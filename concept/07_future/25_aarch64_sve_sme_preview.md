@@ -30,7 +30,7 @@
 >
 > [SIMD / 向量化](../01_foundation/06_zero_cost_abstractions.md) ·
 > [Unsafe Rust](../03_advanced/03_unsafe.md) ·
-> [内联汇编（Inline Assembly）](LINK_PLACEHOLDER)
+> 内联汇编（Inline Assembly）
 
 ---
 

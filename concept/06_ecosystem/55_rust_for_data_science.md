@@ -512,7 +512,7 @@ fn robust_csv_read() -> Result<DataFrame, PolarsError> {
 - [WebAssembly](./11_webassembly.md) — 浏览器内数据分析、跨平台部署
 - [云原生](./24_cloud_native.md) — 容器化数据服务、对象存储
 - [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、Rayon 并行
-- [类型系统（Type System）](LINK_PLACEHOLDER) — 泛型（Generics）、Trait、零成本抽象（Zero-Cost Abstraction）
+- [类型系统（Type System）](../01_foundation/04_type_system.md) — 泛型（Generics）、Trait、零成本抽象（Zero-Cost Abstraction）
 - [量子计算](./51_quantum_computing_rust.md) — 量子模拟、量子机器学习
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)

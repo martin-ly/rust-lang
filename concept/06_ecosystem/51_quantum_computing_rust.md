@@ -804,8 +804,8 @@ fn main() {
 - [安全与密码学](./43_security_cryptography.md) — 对称/非对称加密、TLS、侧信道防护
 - [性能优化](./15_performance_optimization.md) — SIMD、缓存优化、内存布局、零拷贝
 - [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、多线程并行、内存模型
-- [类型系统（Type System）](LINK_PLACEHOLDER) — 泛型（Generics）、Trait、类型状态模式
-- [泛型（Generics）](LINK_PLACEHOLDER) — 零成本抽象（Zero-Cost Abstraction）、类型参数化
+- [类型系统（Type System）](../01_foundation/04_type_system.md) — 泛型（Generics）、Trait、类型状态模式
+- [泛型（Generics）](../02_intermediate/02_generics.md) — 零成本抽象（Zero-Cost Abstraction）、类型参数化
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — FFI 绑定、C 库交互（QuEST、PQClean）
 - [机器学习生态](./46_machine_learning_ecosystem.md) — 优化算法、自动微分、张量运算
 - [分布式系统](./18_distributed_systems.md) — 分布式模拟、MPI、集群计算

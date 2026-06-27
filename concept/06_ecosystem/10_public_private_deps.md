@@ -381,7 +381,7 @@ internal = { path = "crates/internal", public = false } # 实现细节 crate
 
 - [工具链总览](./01_toolchain.md) — SemVer 兼容性与 Cargo 工作空间
 - [核心 Crate 选型](./03_core_crates.md) — 依赖可见性对 API 设计的影响
-- [L2 泛型（Generics）与 Trait](LINK_PLACEHOLDER) — Trait 实现与依赖类型的边界控制
+- L2 泛型（Generics）与 Trait — Trait 实现与依赖类型的边界控制
 
 ---
 

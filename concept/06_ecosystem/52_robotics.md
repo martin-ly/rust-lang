@@ -897,13 +897,13 @@ impl GoodNode {
 
 - [嵌入式系统](./22_embedded_systems.md) — `no_std`、硬件抽象层、交叉编译
 - [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、Mutex、线程池
-- [Async/Await](LINK_PLACEHOLDER) — 异步（Async）运行时（Runtime）、非阻塞 I/O
+- Async/Await — 异步（Async）运行时（Runtime）、非阻塞 I/O
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — FFI、裸指针、内存模型
 - [网络协议](./38_network_protocols.md) — UDP/TCP、序列化、gRPC/QUIC
 - [操作系统内核](./39_os_kernel.md) — 调度器、中断、内存管理
 - [性能优化](./15_performance_optimization.md) — SIMD、缓存、零拷贝
 - [内存管理](../02_intermediate/03_memory_management.md) — 分配器、生命周期（Lifetimes）、RAII
-- [类型系统（Type System）](LINK_PLACEHOLDER) — 泛型（Generics）、trait、类型状态
+- [类型系统（Type System）](../01_foundation/04_type_system.md) — 泛型（Generics）、trait、类型状态
 - [机器学习生态](./46_machine_learning_ecosystem.md) — 感知算法、神经网络推理
 - [形式化验证工具](./47_formal_verification_tools.md) — 模型检查、定理证明、Kani
 - [分布式共识](./50_distributed_consensus.md) — 多机器人协同、一致性（Coherence）

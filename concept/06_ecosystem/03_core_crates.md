@@ -1282,7 +1282,7 @@ fn main() {
 }
 ```
 
-> **修正**: `thiserror` 用于库（定义结构化错误类型），`anyhow` 用于应用（快速错误处理（Error Handling））。`anyhow::Result<T>` 是 `Result<T, anyhow::Error>` 的别名，`anyhow::Error` 可自动包裹任何实现 `std::error::Error` 的类型。`may_fail` 中 `?` 从 `std::io::Error` 转换为 `anyhow::Error` 是自动的（通过 `From`），但若函数签名是 `Result<T, AppError>`，`anyhow::Error` 不能自动转换。解决方案：1) 库函数返回 `thiserror` 类型，应用层用 `anyhow` 包裹；2) 统一使用 `anyhow`（牺牲结构化错误）；3) 统一使用 `thiserror`（增加样板）。这与 Go 的 `error` 接口（统一，无结构化）或 Java 的异常层次（结构化，但繁琐）不同——Rust 的错误生态提供分层选择，而非一刀切。[来源: [thiserror Documentation](LINK_PLACEHOLDER)] · [来源: [anyhow Documentation](LINK_PLACEHOLDER)]
+> **修正**: `thiserror` 用于库（定义结构化错误类型），`anyhow` 用于应用（快速错误处理（Error Handling））。`anyhow::Result<T>` 是 `Result<T, anyhow::Error>` 的别名，`anyhow::Error` 可自动包裹任何实现 `std::error::Error` 的类型。`may_fail` 中 `?` 从 `std::io::Error` 转换为 `anyhow::Error` 是自动的（通过 `From`），但若函数签名是 `Result<T, AppError>`，`anyhow::Error` 不能自动转换。解决方案：1) 库函数返回 `thiserror` 类型，应用层用 `anyhow` 包裹；2) 统一使用 `anyhow`（牺牲结构化错误）；3) 统一使用 `thiserror`（增加样板）。这与 Go 的 `error` 接口（统一，无结构化）或 Java 的异常层次（结构化，但繁琐）不同——Rust 的错误生态提供分层选择，而非一刀切。来源: [thiserror Documentation] · 来源: [anyhow Documentation]
 
 ### 10.4 边界测试：`tokio` 与 `Tokio` 的 channel 不兼容（编译错误）
 

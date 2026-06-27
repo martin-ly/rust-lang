@@ -329,7 +329,7 @@ graph TD
 >
 ## 六、定理推理链（Theorem Chain）
 
-> **来源: Wadler 1990, *Linear Types can Change the World*; [RustBelt — POPL 2018](LINK_PLACEHOLDER), Jung et al.; Pierce TAPL §15.3** 仿射类型系统（Type System）通过资源唯一性保证内存安全（Memory Safety）。本节引入 ⟹ 符号表示定理间的**逻辑依赖方向**——若 A ⟹ B，则 A 是 B 的必要前提或逻辑前驱。
+> **来源: Wadler 1990, *Linear Types can Change the World*; RustBelt — POPL 2018, Jung et al.; Pierce TAPL §15.3** 仿射类型系统（Type System）通过资源唯一性保证内存安全（Memory Safety）。本节引入 ⟹ 符号表示定理间的**逻辑依赖方向**——若 A ⟹ B，则 A 是 B 的必要前提或逻辑前驱。
 
 ```text
 核心推理链:
@@ -794,7 +794,7 @@ h x = ...  -- m 是重数变量
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** Rust 的所有权系统可理解为嵌入在更大语言中的**仿射类型系统**，核心资源纪律在编译期强制执行。 ✅
 > **[来源: Bernardy et al. 2017, *Linear Haskell*]** Linear Haskell 通过重数（multiplicity）在现有类型系统中嵌入线性约束，是严格线性类型系统的工业级实验。 ✅
 > **[来源: C++ Reference: Smart pointers]** C++ 无内置线性/仿射类型系统；`unique_ptr` 提供运行时（Runtime）所有权管理，但编译器不检查 use-after-move。 ✅
-> **来源: [Go Spec: Memory Model](LINK_PLACEHOLDER)** Go 无线性/仿射类型概念，内存安全完全依赖 GC，引用（Reference）有效性无编译期检查。 ✅
+> **来源: Go Spec: Memory Model** Go 无线性/仿射类型概念，内存安全完全依赖 GC，引用（Reference）有效性无编译期检查。 ✅
 
 > **核心区别**: Rust 是**仿射类型系统**（允许 weakening，即资源可丢弃），而 Linear Haskell 是**严格线性类型系统**（weakening 不成立，资源必须精确使用一次）。C++ 和 Go 不在线性逻辑谱系中——C++ 依赖运行时（Runtime） RAII 和程序员自律，Go 依赖 GC。这使得 Rust 和 Linear Haskell 在"编译期资源安全"维度上形成独特阵营，而 C++ 和 Go 选择运行时方案。
 
@@ -1020,7 +1020,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: 线性逻辑的 **multiplicative conjunction**（`⊗`）对应 Rust 的元组/结构体（Struct）所有权分割，**additive conjunction**（`&`）对应共享借用。Rust 的借用规则是线性逻辑 **ILL**（Intuitionistic Linear Logic）的实用化变体：独占资源（`own`）可分割为共享权限（`shr`）和独占权限（`own ∗ shr`），但共享权限不能升级为独占权限。这保证了"读取者-写入者"互斥——多个读者或单个写者，永不会同时存在。[来源: [RustBelt Paper](LINK_PLACEHOLDER)]
+> **修正**: 线性逻辑的 **multiplicative conjunction**（`⊗`）对应 Rust 的元组/结构体（Struct）所有权分割，**additive conjunction**（`&`）对应共享借用。Rust 的借用规则是线性逻辑 **ILL**（Intuitionistic Linear Logic）的实用化变体：独占资源（`own`）可分割为共享权限（`shr`）和独占权限（`own ∗ shr`），但共享权限不能升级为独占权限。这保证了"读取者-写入者"互斥——多个读者或单个写者，永不会同时存在。来源: [RustBelt Paper]
 
 ### 10.3 边界测试：所有权转移与线性逻辑的析取（编译错误）
 

@@ -9,7 +9,7 @@
 > **Summary**: Closures. Core Rust concept covering type system mechanics, ownership and borrowing, AI/ML integration patterns.
 > **📎 交叉引用（Reference）**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[闭包（Closures）](LINK_PLACEHOLDER)
+> 本主题在 knowledge 中有系统化的知识索引：闭包（Closures）
 > **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **A+S** — Application + Structure
@@ -28,15 +28,15 @@
 
 ## 📑 目录
 
-- [闭包（Closures）基础：捕获环境与匿名函数](#闭包基础捕获环境与匿名函数)
+- [闭包基础：捕获环境与匿名函数](#闭包基础捕获环境与匿名函数)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 闭包的语法与捕获](#11-闭包的语法与捕获)
     - [1.2 Fn / FnMut / FnOnce](#12-fn--fnmut--fnonce)
-    - [1.3 闭包与所有权（Ownership）](LINK_PLACEHOLDER)
+    - [1.3 闭包与所有权](#13-闭包与所有权)
   - [二、技术细节](#二技术细节)
     - [2.1 闭包作为函数参数](#21-闭包作为函数参数)
-    - [2.2 闭包与类型推断（Type Inference）](LINK_PLACEHOLDER)
+    - [2.2 闭包与类型推断](#22-闭包与类型推断)
     - [2.3 move 闭包](#23-move-闭包)
   - [三、闭包模式矩阵](#三闭包模式矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
@@ -61,7 +61,7 @@
     - [测验 1：闭包捕获模式（理解层）](#测验-1闭包捕获模式理解层)
     - [测验 2：`move` 关键字（应用层）](#测验-2move-关键字应用层)
     - [测验 3：Fn/FnMut/FnOnce（分析层）](#测验-3fnfnmutfnonce分析层)
-    - [测验 4：闭包与生命周期（Lifetimes）（分析层）](LINK_PLACEHOLDER)
+    - [测验 4：闭包与生命周期（分析层）](#测验-4闭包与生命周期分析层)
 
 ---
 

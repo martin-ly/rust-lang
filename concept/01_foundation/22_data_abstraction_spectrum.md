@@ -20,9 +20,9 @@
 > **后置概念**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type Erasure](../03_advanced/17_type_erasure.md)
 > **主要来源**:
 >
-> [Pierce TAPL, §18-§24] · [Cardelli & Wegner 1985 — On Understanding Types, Data Abstraction, and Polymorphism] ·
+> [Pierce — TAPL, §18-§24](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Cardelli & Wegner 1985 — On Understanding Types, Data Abstraction, and Polymorphism](https://doi.org/10.1145/6041.6042) ·
 > [Wikipedia: Abstract data type](https://en.wikipedia.org/wiki/Abstract_data_type) ·
-> [Rust Reference — §4.2 Types](https://doc.rust-lang.org/reference/)
+> [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) · [TRPL Ch 5 — Using Structs](https://doc.rust-lang.org/book/ch05-00-structs.html) · [TRPL Ch 6 — Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html) · [TRPL Ch 10 — Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html)
 >
 > **来源**: [TRPL — Structs](https://doc.rust-lang.org/book/ch05-00-structs.html) ·
 > [TRPL — Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html) ·
@@ -701,24 +701,24 @@ ZST 不占用内存，可用于类型级标记（phantom types）、空迭代器
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 
+## 权威来源对照
+
+| 来源 | 与本节对应的核心论点 |
+|:---|:---|
+| [Pierce — TAPL, §18-§24](https://www.cis.upenn.edu/~bcpierce/tapl/) | 抽象数据类型、存在类型与模块系统的形式化 |
+| [Cardelli & Wegner 1985](https://doi.org/10.1145/6041.6042) | 类型、数据抽象与多态性的统一框架 |
+| [Wikipedia: Abstract data type](https://en.wikipedia.org/wiki/Abstract_data_type) | ADT 与 OOP 类类型的区分 |
+| [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) | Rust 类型系统的语法与语义定义 |
+| [TRPL Ch 5 — Using Structs](https://doc.rust-lang.org/book/ch05-00-structs.html) | Rust struct 与 impl 块的封装实践 |
+| [TRPL Ch 6 — Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html) | `enum` + `match` 的穷尽性检查 |
+| [TRPL Ch 10 — Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html) | trait 作为行为抽象与泛型约束 |
+
 ## 认知路径
 
 > **认知路径**: 从 L0 基础概念出发，经由本节的 **数据抽象谱系：从 C struct 到 Rust enum + trait** 核心原理，通向 L2 进阶模式与 L3 工程实践。
 
-### 核心推理链
+### 总结
 
-| 定理 | 前提 | 结论 | 置信度 |
-| :--- | :--- | :--- | :--- |
-| 数据抽象谱系：从 C struct 到 Rust enum + trait 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 数据抽象谱系：从 C struct 到 Rust enum + trait 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
-| 数据抽象谱系：从 C struct 到 Rust enum + trait 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
-
-> API 稳定性 ⟸ 封装边界清晰 ⟸ pub/private 分层
-> 零成本抽象（Zero-Cost Abstraction） ⟸ 泛型（Generics）与 trait ⟸ 编译期分发
-> **过渡**: 掌握 数据抽象谱系：从 C struct 到 Rust enum + trait 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-> **过渡**: 在实践中应用 数据抽象谱系：从 C struct 到 Rust enum + trait 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: 数据抽象谱系：从 C struct 到 Rust enum + trait 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
-
-### 反命题与边界
-
-> **反命题**: "数据抽象谱系：从 C struct 到 Rust enum + trait 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+- **L1**：数据抽象从 C struct 到 C++ class 再到 Rust enum + trait，逐步引入封装、类型安全与行为抽象。
+- **L2**：Rust 用 `pub`/`priv`、trait bound 和泛型实现零成本抽象；不需要继承即可获得多态与代码复用。
+- **L3**：抽象机制的选择是表达力与可预测性之间的权衡；Rust 倾向于显式约束，使抽象边界成为编译期可检查的合同。

@@ -9,7 +9,7 @@
 > **双维定位**: C×Ana
 > **前置概念**: [Module System](./10_module_system.md) · [Ownership](../01_foundation/01_ownership.md) · [Traits](./01_traits.md)
 > **后置概念**: [C++ Surface Features](../05_comparative/16_cpp_rust_surface_features.md) · [API Design Patterns](../06_ecosystem/42_api_design_patterns.md)
-> **主要来源**: [TRPL Ch 7 — Modules] · [Rust Reference — Visibility and Privacy] · [cppreference — Friend]
+> **主要来源**: [TRPL Ch 7 — Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) · [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html) · [Rust by Example — Visibility](https://doc.rust-lang.org/rust-by-example/mod/visibility.html) · [cppreference — Friend](https://en.cppreference.com/w/cpp/language/friend) · [C++ Core Guidelines — C.182: Use anonymous namespaces to limit visibility](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-member)
 ---
 
 > **Bloom 层级**: 理解 → 分析
@@ -180,22 +180,18 @@ access(item, module) = visible  iff  item 在 module 的可见范围内
 
 ---
 
-## 七、L1 / L2 / L3 总结
+## 七、总结
 
-| 层级 | 要点 |
-|:---|:---|
-| **L1** | C++ 用 `friend` 开放私有访问；Rust 没有 `friend`，用模块可见性控制访问范围。 |
-| **L2** | Rust 的 `pub(crate)` / `pub(super)` / `pub(in path)` 可以覆盖大部分 C++ `friend` 的使用场景，同时保持封装。 |
-| **L3** | C++ `friend` 是封装规则的例外机制，增加了耦合和审计难度；Rust 模块可见性是封装规则的结构化表达，使边界成为代码组织的一部分。 |
+- **L1**：C++ 用 `friend` 开放私有访问；Rust 没有 `friend`，用模块可见性控制访问范围。
+- **L2**：Rust 的 `pub(crate)` / `pub(super)` / `pub(in path)` 可以覆盖大部分 C++ `friend` 的使用场景，同时保持封装。
+- **L3**：C++ `friend` 是封装规则的例外机制，增加了耦合和审计难度；Rust 模块可见性是封装规则的结构化表达，使边界成为代码组织的一部分。
 
 ---
 
 ## 八、延伸阅读
 
-- [TRPL: Modules](https://doc.rust-lang.org/book/ch07-00-modules.html)
+- [TRPL: Packages, Crates, and Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)
+- [Rust by Example: Visibility](https://doc.rust-lang.org/rust-by-example/mod/visibility.html)
 - [Rust Reference: Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html)
 - [cppreference: Friend](https://en.cppreference.com/w/cpp/language/friend)
-
----
-
-> **Checklist**: 已覆盖 C++ `friend` / Rust 模块可见性 / 核心对比 / 模拟场景 / 形式化视角。
+- [C++ Core Guidelines: Prefer minimal encapsulation](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-class)

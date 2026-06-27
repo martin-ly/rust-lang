@@ -12,7 +12,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Str
-> **前置依赖**: [Unsafe Rust](LINK_PLACEHOLDER) · [所有权（Ownership）形式化](LINK_PLACEHOLDER) · [Miri](LINK_PLACEHOLDER)
+> **前置依赖**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [所有权（Ownership）形式化](03_ownership_formal.md) · [Miri](31_miri.md)
 > **后置延伸**: [BorrowSanitizer](23_borrow_sanitizer.md)
 >
 > **来源**: [Tree Borrows 论文 (PLDI 2023)](https://pldi23.sigplan.org/) · [Miri 文档 — Tree Borrows](https://github.com/rust-lang/miri/blob/master/borrow_stacked/README.md) · [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)

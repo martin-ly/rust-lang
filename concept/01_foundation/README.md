@@ -162,15 +162,17 @@ Type System（理解"类型即证明"）
 | [02_borrowing.md](./02_borrowing.md) | 借用（Borrowing） | `&T`/`&mut T`、AXM 规则、Reborrow、NLL | ✅ v1.0 | Ownership | Lifetimes, Concurrency |
 | [03_lifetimes.md](./03_lifetimes.md) | 生命周期（Lifetimes） | 标注、Elision、NLL、`'static`、HRTB、Variance | ✅ v1.0 | Borrowing | Generics, Async |
 | [04_type_system.md](./04_type_system.md) | 类型系统基础 | 标量/复合/ADT、impl/dyn Trait、类型推断（Type Inference） | ✅ v1.0 | Ownership | Trait, Generics, Macros |
-| [05_reference_semantics.md](LINK_PLACEHOLDER) | 引用（Reference）语义 | Deref/DerefMut、自动解引用、智能指针（Smart Pointer）接口 | ✅ v1.0 | Borrowing, Type System | Pin, FFI |
+| 05_reference_semantics.md | 引用（Reference）语义 | Deref/DerefMut、自动解引用、智能指针（Smart Pointer）接口 | ✅ v1.0 | Borrowing, Type System | Pin, FFI |
 | [06_zero_cost_abstractions.md](./06_zero_cost_abstractions.md) | 零成本抽象（Zero-Cost Abstraction） | 单态化（Monomorphization）、内联、迭代器（Iterator）零成本、编译期优化 | ✅ v1.0 | Type System, Generics | Ecosystem Patterns |
 | [07_control_flow.md](./07_control_flow.md) | 控制流 | match/if let/loop、表达式导向、穷尽性检查 | ✅ v1.0 | Ownership, Type System | Iterator, Async |
 | [08_collections.md](./08_collections.md) | 集合类型 | Vec/HashMap/BTreeMap/HashSet、Entry API、容量管理 | ✅ v1.0 | Ownership, Generics | Smart Pointers, Ecosystem |
 | [09_strings_and_text.md](./09_strings_and_text.md) | 字符串与文本 | String/str、UTF-8、格式化、OS 字符串、C 字符串 | ✅ v1.0 | Ownership, Type System | Collections, FFI |
 | [10_numerics.md](./10_numerics.md) | 数值类型与运算 | 整数、浮点、溢出、饱和运算、类型转换 | ✅ v1.0 | Type System | Zero Cost, Collections |
+| [19_value_vs_reference_semantics.md](./19_value_vs_reference_semantics.md) | 值语义 vs 引用语义 | C++/Java/Python/Rust 对比、Rust 所有权作为值语义极致 | ✅ v1.0 | Ownership, Variable Model | Rust vs C++ |
 | [20_variable_model.md](./20_variable_model.md) | 变量模型（PL 通用） | 环境/存储、绑定语义、值语义 vs 引用（Reference）语义、lvalue/rvalue | ✅ v1.0 | Type System, Ownership | Evaluation Strategies |
 | [21_effects_and_purity.md](./21_effects_and_purity.md) | 副作用与纯度 | 引用透明、效果系统、Rust const/unsafe/async 作为效果 | ✅ v1.0 | Ownership, Type System | Formal Methods |
 | [22_data_abstraction_spectrum.md](./22_data_abstraction_spectrum.md) | 数据抽象谱系 | C→C++→Java→Haskell→Rust 的抽象演进、Trait 统一性 | ✅ v1.0 | Type System, Trait | Comparative |
+| [23_move_semantics.md](./23_move_semantics.md) | Move 语义 | C++ vs Rust 资源转移模型、Copy/Clone、RVO | ✅ v1.0 | Ownership, Variable Model | Rust vs C++ |
 
 ---
 
@@ -179,21 +181,22 @@ Type System（理解"类型即证明"）
 - [编程语言理论基础（PL Prerequisites）](./00_pl_prerequisites.md)
 - [Lifetimes 高级主题](./03_lifetimes_advanced.md)
 - [Never Type (`!`)：底类型与穷尽性](./05_never_type.md)
-- [Rust 错误处理（Error Handling）基础](LINK_PLACEHOLDER)
-- [模块（Module）系统与路径：Rust 的代码组织哲学](LINK_PLACEHOLDER)
+- Rust 错误处理（Error Handling）基础
+- 模块（Module）系统与路径：Rust 的代码组织哲学
 - [Rust 数值类型与运算](./11_numeric_types.md)
-- [属性与声明宏（Declarative Macro）：编译期元编程基础](LINK_PLACEHOLDER)
+- [属性与声明宏（Declarative Macro）：编译期元编程基础](12_attributes_and_macros.md)
 - [Panic 与 Abort：不可恢复错误的处理机制](./13_panic_and_abort.md)
 - [类型强制与转换：显式与隐式的边界](./14_coercion_and_casting.md)
-- [闭包（Closures）基础：捕获环境与匿名函数](LINK_PLACEHOLDER)
+- [闭包（Closures）基础：捕获环境与匿名函数](15_closure_basics.md)
 - [测试基础：从单元测试到集成测试](./16_testing_basics.md)
 - [高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析](./17_collections_advanced.md)
 - [字符串与编码：Rust 的文本处理类型系统](./18_strings_and_encoding.md)
-- [测验：所有权（Ownership）、借用（Borrowing）与生命周期（Lifetimes）（嵌入式互动试点）](LINK_PLACEHOLDER)
+- 测验：所有权（Ownership）、借用（Borrowing）与生命周期（Lifetimes）（嵌入式互动试点）
 - [测验：类型系统（嵌入式互动试点）](./24_quiz_type_system.md)
 - [测验：错误处理（Error Handling）（嵌入式互动试点）](./25_quiz_error_handling.md)
 - [测验：模块（Module）系统与测试（嵌入式互动试点）](./26_quiz_modules_testing.md)
-- [测验：闭包（Closures）与迭代器（Iterator）（嵌入式互动试点）](LINK_PLACEHOLDER)
+- 测验：闭包（Closures）与迭代器（Iterator）（嵌入式互动试点）
+- [测验：通用 PL 基座](./29_quiz_pl_foundations.md)
 
 ## 三、课程对齐路径
 

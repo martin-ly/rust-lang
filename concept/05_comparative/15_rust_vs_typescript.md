@@ -23,17 +23,17 @@
 ## 📑 目录
 >
 
-- [Rust vs TypeScript：静态类型系统（Type System）的两种哲学 —— 编译期证明与渐进式工程](LINK_PLACEHOLDER)
+- Rust vs TypeScript：静态类型系统（Type System）的两种哲学 —— 编译期证明与渐进式工程
   - [📑 目录](#-目录)
   - [一、权威定义与核心概念](#一权威定义与核心概念)
     - [1.1 TypeScript 权威定义](#11-typescript-权威定义)
     - [1.2 类型系统哲学对比](#12-类型系统哲学对比)
     - [1.3 编译模型差异](#13-编译模型差异)
-    - [1.4 内存模型：所有权（Ownership） vs GC](LINK_PLACEHOLDER)
+    - 1.4 内存模型：所有权（Ownership） vs GC
   - [二、技术细节](#二技术细节)
     - [2.1 类型系统对比矩阵](#21-类型系统对比矩阵)
-    - [2.2 异步（Async）模型对比](LINK_PLACEHOLDER)
-    - [2.3 错误处理（Error Handling）：Result vs Throw](LINK_PLACEHOLDER)
+    - 2.2 异步（Async）模型对比
+    - 2.3 错误处理（Error Handling）：Result vs Throw
     - [2.4 WASM 互操作](#24-wasm-互操作)
   - [三、选型决策矩阵](#三选型决策矩阵)
   - [四、思维导图（Mermaid）](#四思维导图mermaid)
@@ -50,7 +50,7 @@
     - [10.1 边界测试：TypeScript 的 any 与 Rust 的显式类型（编译错误）](#101-边界测试typescript-的-any-与-rust-的显式类型编译错误)
     - [10.2 边界测试：TypeScript 的可选属性与 Rust 的 Option（编译错误）](#102-边界测试typescript-的可选属性与-rust-的-option编译错误)
     - [10.3 边界测试：TypeScript 的结构类型与 Rust 的名义类型的互操作（编译错误）](#103-边界测试typescript-的结构类型与-rust-的名义类型的互操作编译错误)
-    - [10.4 边界测试：TypeScript 的 `any` 与 Rust 的 `unsafe` 的语义鸿沟（编译错误/运行时（Runtime） UB）](LINK_PLACEHOLDER)
+    - 10.4 边界测试：TypeScript 的 `any` 与 Rust 的 `unsafe` 的语义鸿沟（编译错误/运行时（Runtime） UB）
     - [10.3 边界测试：TypeScript 的结构性类型与 Rust 的名义类型（编译错误）](#103-边界测试typescript-的结构性类型与-rust-的名义类型编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 和 TypeScript 的静态类型检查最根本的区别是什么？（理解层）](#测验-1rust-和-typescript-的静态类型检查最根本的区别是什么理解层)

@@ -34,12 +34,12 @@
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 元编程的抽象层次](#11-元编程的抽象层次)
-    - [1.2 声明宏（Declarative Macro）：模式匹配（Pattern Matching）驱动](LINK_PLACEHOLDER)
-    - [1.3 过程宏（Procedural Macro）：语法树操作](LINK_PLACEHOLDER)
+    - [1.2 声明宏：模式匹配驱动](#12-声明宏模式匹配驱动)
+    - [1.3 过程宏：语法树操作](#13-过程宏语法树操作)
   - [二、技术细节](#二技术细节)
     - [2.1 syn/quote/proc-macro2 工具体系](#21-synquoteproc-macro2-工具体系)
-    - [2.2 Derive 宏（Macro）的实现机制](LINK_PLACEHOLDER)
-    - [2.3 宏（Macro）卫生性的形式化](#23-宏卫生性的形式化)
+    - [2.2 Derive 宏的实现机制](#22-derive-宏的实现机制)
+    - [2.3 宏卫生性的形式化](#23-宏卫生性的形式化)
   - [三、元编程技术矩阵](#三元编程技术矩阵)
     - [3.1 元编程技术选型矩阵](#31-元编程技术选型矩阵)
     - [3.2 宏与 const eval 的演进趋势](#32-宏与-const-eval-的演进趋势)
@@ -52,14 +52,14 @@
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：元编程的编译错误](#十边界测试元编程的编译错误)
-    - [10.1 边界测试：过程宏（Procedural Macro）的 TokenStream 解析失败（编译错误）](#101-边界测试过程宏的-tokenstream-解析失败编译错误)
-    - [10.2 边界测试：常量泛型（Generics）的非常量表达式（编译错误）](LINK_PLACEHOLDER)
-    - [10.3 边界测试：常量泛型（Generics）的表达式复杂度（编译错误）](#103-边界测试常量泛型的表达式复杂度编译错误)
+    - [10.1 边界测试：过程宏的 TokenStream 解析失败（编译错误）](#101-边界测试过程宏的-tokenstream-解析失败编译错误)
+    - [10.2 边界测试：常量泛型的非常量表达式（编译错误）](#102-边界测试常量泛型的非常量表达式编译错误)
+    - [10.3 边界测试：常量泛型的表达式复杂度（编译错误）](#103-边界测试常量泛型的表达式复杂度编译错误)
     - [10.4 边界测试：`TypeId` 的跨 crate 稳定性（逻辑错误）](#104-边界测试typeid-的跨-crate-稳定性逻辑错误)
     - [10.4 边界测试：编译期递归深度限制（编译错误）](#104-边界测试编译期递归深度限制编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`macro_rules!` 与过程宏（proc macro）在元编程中的根本区别是什么？（理解层）](#测验-1macro_rules-与过程宏proc-macro在元编程中的根本区别是什么理解层)
-    - [测验 2：声明宏（Declarative Macro）的"卫生性"（hygiene）意味着什么？（理解层）](#测验-2声明宏的卫生性hygiene意味着什么理解层)
+    - [测验 2：声明宏的"卫生性"（hygiene）意味着什么？（理解层）](#测验-2声明宏的卫生性hygiene意味着什么理解层)
     - [测验 3：`compile_error!("msg")` 宏的作用是什么？（理解层）](#测验-3compile_errormsg-宏的作用是什么理解层)
     - [测验 4：`concat!` 和 `stringify!` 宏分别做什么？（理解层）](#测验-4concat-和-stringify-宏分别做什么理解层)
     - [测验 5：为什么过程宏必须放在独立的 crate 中，而不能与使用它的代码在同一 crate？（理解层）](#测验-5为什么过程宏必须放在独立的-crate-中而不能与使用它的代码在同一-crate理解层)
@@ -699,7 +699,7 @@ fn main() {
 }
 ```
 
-> **修正**: `TypeId` 是 Rust 运行时（Runtime）的类型标识符，用于 `Any` trait 的向下转型（`downcast_ref`）。`TypeId` 在**同一编译会话**内是确定且可比较的，但不保证跨编译会话、跨 crate 版本、跨编译器版本的一致性（Coherence）。其内部表示是编译器生成的哈希值，可能随编译器版本变化。因此 `TypeId` 不能：1) 序列化到持久存储；2) 通过网络传递；3) 作为长期缓存的键。安全替代：使用自定义类型标签（`enum TypeTag { String, Int, ... }`）或字符串类型名（`std::any::type_name`，不稳定）。这与 Java 的 `Class.getName()`（跨 JVM 稳定）或 C++ 的 `typeid`（同一程序内稳定，跨程序不保证）类似——运行期类型信息的设计受限于编译器实现细节。[来源: [Rust Standard Library](LINK_PLACEHOLDER)] · [来源: [The Rust Programming Language](LINK_PLACEHOLDER)]
+> **修正**: `TypeId` 是 Rust 运行时（Runtime）的类型标识符，用于 `Any` trait 的向下转型（`downcast_ref`）。`TypeId` 在**同一编译会话**内是确定且可比较的，但不保证跨编译会话、跨 crate 版本、跨编译器版本的一致性（Coherence）。其内部表示是编译器生成的哈希值，可能随编译器版本变化。因此 `TypeId` 不能：1) 序列化到持久存储；2) 通过网络传递；3) 作为长期缓存的键。安全替代：使用自定义类型标签（`enum TypeTag { String, Int, ... }`）或字符串类型名（`std::any::type_name`，不稳定）。这与 Java 的 `Class.getName()`（跨 JVM 稳定）或 C++ 的 `typeid`（同一程序内稳定，跨程序不保证）类似——运行期类型信息的设计受限于编译器实现细节。来源: [Rust Standard Library] · 来源: [The Rust Programming Language]
 
 ### 10.4 边界测试：编译期递归深度限制（编译错误）
 

@@ -1160,7 +1160,7 @@ struct ChildOf {
 | 借用检查 | [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md) | System 调度冲突检测同构 |
 | 生命周期 | [`../01_foundation/03_lifetimes.md`](../01_foundation/03_lifetimes.md) | Entity 引用跨 System 有效性 |
 | Trait 系统 | [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) | `Component` / `SystemParam` derive |
-| 泛型 | [`../02_intermediate/02_generics.md`](LINK_PLACEHOLDER) | `Query<Q>` 的零成本抽象（Zero-Cost Abstraction） |
+| 泛型 | `../02_intermediate/02_generics.md` | `Query<Q>` 的零成本抽象（Zero-Cost Abstraction） |
 | 并发 | [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) | `Send`/`Sync` 在多线程循环中的保证 |
 | Unsafe | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | SIMD / GPU 底层边界 |
 | 线性逻辑 | [`../04_formal/01_linear_logic.md`](../04_formal/01_linear_logic.md) | 消耗性资源的形式化对应 |
@@ -1247,7 +1247,7 @@ fn fixed_system(mut query: Query<&mut Health>) {
 }
 ```
 
-> **修正**: Bevy 的系统函数在编译期检查 Query 的兼容性——两个返回相同组件可变引用（Mutable Reference）的 Query 不能同时存在。`ParamSet` 允许顺序访问冲突的 Query，确保运行时不会同时持有同一组件的多个可变引用。这是 Rust 借用检查器在 ECS 架构中的延伸——编译期保证无数据竞争，即使在高并发游戏循环中。[来源: [Bevy Documentation](LINK_PLACEHOLDER)]
+> **修正**: Bevy 的系统函数在编译期检查 Query 的兼容性——两个返回相同组件可变引用（Mutable Reference）的 Query 不能同时存在。`ParamSet` 允许顺序访问冲突的 Query，确保运行时不会同时持有同一组件的多个可变引用。这是 Rust 借用检查器在 ECS 架构中的延伸——编译期保证无数据竞争，即使在高并发游戏循环中。来源: [Bevy Documentation]
 
 ### 10.3 边界测试：ECS 的 archetype 变更与引用失效（运行时 panic）
 

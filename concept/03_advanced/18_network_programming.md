@@ -40,7 +40,7 @@
 
 ## 📑 目录
 
-- [Rust 网络编程：Tokio TCP/UDP、异步（Async） IO 与 Tower 服务抽象](LINK_PLACEHOLDER)
+- Rust 网络编程：Tokio TCP/UDP、异步（Async） IO 与 Tower 服务抽象
   - [📑 目录](#-目录)
   - [一、权威定义与核心概念](#一权威定义与核心概念)
     - [1.1 异步（Async）网络 IO 模型](#11-异步网络-io-模型)
@@ -67,11 +67,11 @@
   - [相关概念文件](#相关概念文件)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
-    - [10.3 边界测试：异步 TCP 的 `split` 与 `reunite` 的所有权（Ownership）（编译错误）](LINK_PLACEHOLDER)
-    - [10.4 边界测试：缓冲区大小与 MTU 的匹配（运行时（Runtime）性能问题）](LINK_PLACEHOLDER)
+    - 10.3 边界测试：异步 TCP 的 `split` 与 `reunite` 的所有权（Ownership）（编译错误）
+    - 10.4 边界测试：缓冲区大小与 MTU 的匹配（运行时（Runtime）性能问题）
     - [10.3 边界测试：`TcpStream` 的 `set_nonblocking` 与 async 混用（运行时（Runtime）错误）](#103-边界测试tcpstream-的-set_nonblocking-与-async-混用运行时错误)
     - [10.4 边界测试：TcpStream 的同步读写与 async 混用（编译错误/运行时死锁）](#104-边界测试tcpstream-的同步读写与-async-混用编译错误运行时死锁)
-    - [10.7 边界测试：不可变借用（Mutable Borrow）与可变借用的冲突](LINK_PLACEHOLDER)
+    - 10.7 边界测试：不可变借用（Mutable Borrow）与可变借用的冲突
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`tokio::net::TcpListener::bind(...).await` 与 `std::net::TcpListener::bind(...)` 在阻塞行为上有什么区别？（理解层）](#测验-1tokionettcplistenerbindawait-与-stdnettcplistenerbind-在阻塞行为上有什么区别理解层)
     - [测验 2：在 async 函数中直接调用 `std::thread::sleep` 会有什么后果？（理解层）](#测验-2在-async-函数中直接调用-stdthreadsleep-会有什么后果理解层)
@@ -731,7 +731,7 @@ graph LR
 | [Hyper](https://hyper.rs/) | ✅ 二级 | Rust HTTP 实现，基于 Tokio |
 | [Linux socket man pages](https://man7.org/linux/man-pages/man2/socket.2.html) | ✅ 三级 | Linux socket 系统调用手册 |
 | [AFIT（async fn in trait，Rust 1.75.0+ 稳定） crate](<https://docs.rs/AFIT（async> fn in trait，Rust 1.75.0+ 稳定）/latest/async_trait/) | ✅ 三级 | trait 中 async fn 的过渡方案 |
-| [pin-project crate](LINK_PLACEHOLDER) | ✅ 三级 | 自引用（Reference）结构体（Struct）的 Pin 投影 |
+| pin-project crate | ✅ 三级 | 自引用（Reference）结构体（Struct）的 Pin 投影 |
 | [Tokio TCP Docs](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html) | ✅ 一级 | TcpListener API 文档 |
 | [Tokio UDP Docs](https://docs.rs/tokio/latest/tokio/net/struct.UdpSocket.html) | ✅ 一级 | UdpSocket API 文档 |
 
@@ -801,7 +801,7 @@ async fn echo(stream: TcpStream) {
 }
 ```
 
-> **修正**: `TcpStream::split` 将双向流拆分为独立的读半和写半，允许并发读写（如一个任务读，一个任务写）。`split` 消耗 `TcpStream`，返回的 `ReadHalf` 和 `WriteHalf` 是独立的类型，不可复制。`reunite` 在两者都未 drop 时恢复原始的 `TcpStream`。这与 `TcpStream::into_split`（返回 `OwnedReadHalf` 和 `OwnedWriteHalf`，可发送到不同任务）或标准库的 `std::net::TcpStream`（`try_clone` 复制文件描述符）不同——tokio 的 `split` 是零成本的借用（Borrowing）拆分，`into_split` 是引用计数的所有权（Ownership）拆分。选择取决于并发模型：单任务内并发用 `split`，跨任务用 `into_split`。[来源: [Tokio Documentation](LINK_PLACEHOLDER)] · [来源: [The Rust Programming Language](LINK_PLACEHOLDER)]
+> **修正**: `TcpStream::split` 将双向流拆分为独立的读半和写半，允许并发读写（如一个任务读，一个任务写）。`split` 消耗 `TcpStream`，返回的 `ReadHalf` 和 `WriteHalf` 是独立的类型，不可复制。`reunite` 在两者都未 drop 时恢复原始的 `TcpStream`。这与 `TcpStream::into_split`（返回 `OwnedReadHalf` 和 `OwnedWriteHalf`，可发送到不同任务）或标准库的 `std::net::TcpStream`（`try_clone` 复制文件描述符）不同——tokio 的 `split` 是零成本的借用（Borrowing）拆分，`into_split` 是引用计数的所有权（Ownership）拆分。选择取决于并发模型：单任务内并发用 `split`，跨任务用 `into_split`。来源: [Tokio Documentation] · 来源: [The Rust Programming Language]
 
 ### 10.4 边界测试：缓冲区大小与 MTU 的匹配（运行时性能问题）
 

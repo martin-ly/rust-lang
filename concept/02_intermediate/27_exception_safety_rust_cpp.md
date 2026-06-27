@@ -9,7 +9,7 @@
 > **双维定位**: C×Ana
 > **前置概念**: [Error Handling](./04_error_handling.md) · [Error Handling Basics](../01_foundation/10_error_handling_basics.md) · [Ownership](../01_foundation/01_ownership.md)
 > **后置概念**: [Error Handling Deep Dive](./15_error_handling_deep_dive.md) · [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
-> **主要来源**: [Brown University CRP — Exceptions] · [Google Comprehensive Rust — C++ Exception] · [TRPL Ch 9 — Error Handling]
+> **主要来源**: [Brown University CRP — Exceptions](https://cel.cs.brown.edu/crp/idioms/exceptions.html) · [Google Comprehensive Rust — C++ Exception](https://google.github.io/comprehensive-rust/android/interoperability/cpp/cpp-exception.html) · [TRPL Ch 9 — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [cppreference — Exceptions](https://en.cppreference.com/w/cpp/language/exceptions) · [cppreference — noexcept](https://en.cppreference.com/w/cpp/language/noexcept)
 ---
 
 > **Bloom 层级**: 分析 → 评价
@@ -26,7 +26,7 @@
 
 ### 2.1 三种异常保证
 
-C++ 标准库和工程中常用以下分类描述函数在异常发生时的行为：
+C++ 标准库和工程中常用以下分类描述函数在异常发生时的行为（cppreference: [Exception safety guarantees](https://en.cppreference.com/w/cpp/language/exceptions#Exception_safety)）：
 
 | 保证级别 | 定义 | 工程含义 |
 |:---|:---|:---|
@@ -84,7 +84,7 @@ fn main() {
 }
 ```
 
-Rust 将可恢复错误编码进返回类型。调用者必须显式处理 `Err` 分支，不存在"异常未被捕获就向上传播"的情况。
+Rust 将可恢复错误编码进返回类型（TRPL: [Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)）。调用者必须显式处理 `Err` 分支，不存在"异常未被捕获就向上传播"的情况。
 
 ### 3.2 传播运算符 `?`
 
@@ -105,7 +105,7 @@ fn main() {
 }
 ```
 
-Rust 的 panic 用于不可恢复错误。默认情况下会展开栈并调用析构函数，但也可以配置为立即 abort。panic 不应用于常规错误处理。
+Rust 的 panic 用于不可恢复错误（Rust Reference: [Macro std::panic](https://doc.rust-lang.org/std/macro.panic.html)）。默认情况下会展开栈并调用析构函数，但也可以配置为立即 abort。panic 不应用于常规错误处理。
 
 ---
 
@@ -184,23 +184,20 @@ f: S -> Result<S', E>
 
 ---
 
-## 八、L1 / L2 / L3 总结
+## 八、总结
 
-| 层级 | 要点 |
-|:---|:---|
-| **L1** | C++ 用异常处理错误，需要 strong/basic/no-throw 保证；Rust 用 `Result` 显式编码错误，`panic` 用于不可恢复错误。 |
-| **L2** | Rust 的 `Drop` 不可失败，消除了 C++ 析构函数抛异常导致 `std::terminate` 的问题；`?` 运算符提供类似异常传播的便利但受类型约束。 |
-| **L3** | C++ 异常安全是关于"状态不变量"的运行时/约定保证；Rust 将错误处理转化为类型系统的分支显式化，使异常安全从"约定"变为"可静态检查的结构"。 |
+- **L1**：C++ 用异常处理错误，需要 strong/basic/no-throw 保证；Rust 用 `Result` 显式编码错误，`panic` 用于不可恢复错误。
+- **L2**：Rust 的 `Drop` 不可失败，消除了 C++ 析构函数抛异常导致 `std::terminate` 的问题；`?` 运算符提供类似异常传播的便利但受类型约束。
+- **L3**：C++ 异常安全是关于"状态不变量"的运行时/约定保证；Rust 将错误处理转化为类型系统的分支显式化，使异常安全从"约定"变为"可静态检查的结构"。
 
 ---
 
 ## 九、延伸阅读
 
 - [TRPL: Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
+- [Rust Reference: panic! macro](https://doc.rust-lang.org/std/macro.panic.html)
 - [Brown University CRP — Exceptions](https://cel.cs.brown.edu/crp/idioms/exceptions.html)
 - [Google Comprehensive Rust — C++ Exception](https://google.github.io/comprehensive-rust/android/interoperability/cpp/cpp-exception.html)
-- [cppreference: Exception Safety](https://en.cppreference.com/w/cpp/language/exceptions)
-
----
-
-> **Checklist**: 已覆盖 C++ 异常保证 / Rust Result+panic / Drop 不可失败 / std::expected vs Result / 形式化对比。
+- [cppreference: Exceptions](https://en.cppreference.com/w/cpp/language/exceptions)
+- [cppreference: noexcept specifier](https://en.cppreference.com/w/cpp/language/noexcept)
+- [cppreference: Exception safety guarantees](https://en.cppreference.com/w/cpp/language/exceptions#Exception_safety)

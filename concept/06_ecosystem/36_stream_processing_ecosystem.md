@@ -363,7 +363,7 @@ async fn kafka_consumer() {
 | **redpanda** | C++ | Kafka API 兼容、无 ZooKeeper | Kafka 替代、云原生部署 |
 | **fluvio** | 纯 Rust | Kafka API 子集、轻量级 | 边缘计算、IoT |
 
-> **与 Reactive Programming 的关系**: Kafka Consumer 的 `Stream` 接口与 `40_reactive_programming.md` 中的 `Stream` trait 概念一致——都是拉模型（pull-based）的异步（Async）数据流抽象。Kafka 的 consumer lag 指标是应用层背压的信号。[来源: [rdkafka crate](LINK_PLACEHOLDER)] · [Apache Kafka Documentation](LINK_PLACEHOLDER)
+> **与 Reactive Programming 的关系**: Kafka Consumer 的 `Stream` 接口与 `40_reactive_programming.md` 中的 `Stream` trait 概念一致——都是拉模型（pull-based）的异步（Async）数据流抽象。Kafka 的 consumer lag 指标是应用层背压的信号。来源: [rdkafka crate] · Apache Kafka Documentation
 
 ---
 
@@ -481,7 +481,7 @@ fn windowed_sum(events: Stream<Event>) -> Stream<WindowResult> {
 }
 ```
 
-> **修正**: 流处理的**窗口操作**（windowing）将无界流划分为有界块（时间窗口、计数窗口）。窗口的触发和清理需要**watermark**：一个时间戳，表示"小于此时间戳的数据都已到达"。无 watermark 时：1) 窗口永不关闭（内存泄漏）；2) 延迟数据被错误处理（Error Handling）（分配到已关闭窗口）。Rust 的流处理库（`timely-dataflow`、`differential-dataflow`）提供 watermark 支持，但 API 复杂。这与 Apache Flink 的 `WatermarkStrategy`、Spark Streaming 的 `Watermark` 或 Kafka Streams 的 `suppress` 类似——窗口和 watermark 是流处理的核心概念，语言层面的类型系统（Type System）难以完全自动化，需开发者根据业务逻辑配置。[来源: [Timely Dataflow](LINK_PLACEHOLDER)] · [来源: [Streaming Systems Book](LINK_PLACEHOLDER)]
+> **修正**: 流处理的**窗口操作**（windowing）将无界流划分为有界块（时间窗口、计数窗口）。窗口的触发和清理需要**watermark**：一个时间戳，表示"小于此时间戳的数据都已到达"。无 watermark 时：1) 窗口永不关闭（内存泄漏）；2) 延迟数据被错误处理（Error Handling）（分配到已关闭窗口）。Rust 的流处理库（`timely-dataflow`、`differential-dataflow`）提供 watermark 支持，但 API 复杂。这与 Apache Flink 的 `WatermarkStrategy`、Spark Streaming 的 `Watermark` 或 Kafka Streams 的 `suppress` 类似——窗口和 watermark 是流处理的核心概念，语言层面的类型系统（Type System）难以完全自动化，需开发者根据业务逻辑配置。来源: [Timely Dataflow] · 来源: [Streaming Systems Book]
 > **过渡**: 流处理生态：Rust 实现与工业系统全景 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 流处理生态：Rust 实现与工业系统全景 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 流处理生态：Rust 实现与工业系统全景 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

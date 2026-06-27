@@ -19,7 +19,7 @@
 > **双维定位**: C×Und — 理解副作用在编程语言中的本质与 Rust 的控制机制
 > **前置概念**: [Variable Model](./20_variable_model.md) · [Evaluation Strategies](../04_formal/18_evaluation_strategies.md) · [Ownership](./01_ownership.md)
 > **后置概念**: [Borrowing](./02_borrowing.md) · [Effects System](../07_future/04_effects_system.md) · [Async](../03_advanced/02_async.md)
-> **主要来源**: [Haskell Wiki — Referential Transparency] · [Pierce TAPL, §13] · [Moggi 1989 — Computational Lambda-Calculus and Monads] · [Wadler 1992 — The Essence of Functional Programming]
+> **主要来源**: [Haskell Wiki — Referential Transparency](https://wiki.haskell.org/Referential_transparency) · [Pierce — TAPL, §13](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Moggi 1989 — Computational Lambda-Calculus and Monads](https://doi.org/10.1109/LICS.1989.39155) · [Wadler 1992 — The Essence of Functional Programming](https://doi.org/10.1145/143165.143169) · [Wadler 1995 — Monads for Functional Programming](https://doi.org/10.1007/3-540-59451-5_2)
 >
 > **来源**: [Reference — Constant Evaluation](https://doc.rust-lang.org/reference/const_eval.html) · [Rust Project Goals — const traits](https://rust-lang.github.io/rust-project-goals/2025h1/const-trait.html)
 ---
@@ -642,24 +642,24 @@ fn main() {
 > [Rust RFCs](https://rust-lang.github.io/rfcs/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 
+## 权威来源对照
+
+| 来源 | 与本节对应的核心论点 |
+|:---|:---|
+| [Haskell Wiki — Referential Transparency](https://wiki.haskell.org/Referential_transparency) | 引用透明性的定义与函数式编程实践 |
+| [Pierce — TAPL, §13](https://www.cis.upenn.edu/~bcpierce/tapl/) | 引用类型与副作用的类型系统形式化 |
+| [Moggi 1989 — Computational Lambda-Calculus and Monads](https://doi.org/10.1109/LICS.1989.39155) | 通过 monad 结构化计算效果的奠基工作 |
+| [Wadler 1992 — The Essence of Functional Programming](https://doi.org/10.1145/143165.143169) | 将 monad 引入函数式编程以处理 IO 与状态 |
+| [Wadler 1995 — Monads for Functional Programming](https://doi.org/10.1007/3-540-59451-5_2) | monad 作为“可组合效果”的教学推导 |
+| [Rust Reference — Constant Evaluation](https://doc.rust-lang.org/reference/const_eval.html) | Rust `const` 上下文的求值限制 |
+| [Rust Project Goals — const traits](https://rust-lang.github.io/rust-project-goals/2025h1/const-trait.html) | Rust 效果系统向编译期扩展的路线 |
+
 ## 认知路径
 
 > **认知路径**: 从 L0 基础概念出发，经由本节的 **副作用与纯度：从引用透明到 Rust 的所有权效果** 核心原理，通向 L2 进阶模式与 L3 工程实践。
 
-### 核心推理链
+### 总结
 
-| 定理 | 前提 | 结论 | 置信度 |
-|:---|:---|:---|:---|
-| 副作用与纯度：从引用透明到 Rust 的所有权效果 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 副作用与纯度：从引用透明到 Rust 的所有权效果 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
-| 副作用与纯度：从引用透明到 Rust 的所有权效果 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
-
-> 副作用可追踪 ⟸ 纯函数标记 ⟸ 效果系统
-> 编译期优化 ⟸ const 求值 ⟸ 无副作用保证
-> **过渡**: 掌握 副作用与纯度：从引用透明到 Rust 的所有权效果 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-> **过渡**: 在实践中应用 副作用与纯度：从引用透明到 Rust 的所有权效果 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: 副作用与纯度：从引用透明到 Rust 的所有权效果 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
-
-### 反命题与边界
-
-> **反命题**: "副作用与纯度：从引用透明到 Rust 的所有权效果 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+- **L1**：副作用改变程序状态或产生可观察的 IO；纯函数满足引用透明，可被安全替换为结果。
+- **L2**：Rust 通过 `const`、`unsafe` 边界和所有权系统，把效果限制在显式标记的区域内；`const fn` 是无副作用计算的核心工具。
+- **L3**：效果系统（effect system）是类型安全与编译期优化的共同基础；Rust 的 `const` 泛化和未来 effect 特性正在把“无副作用”从约定推向类型系统的一部分。

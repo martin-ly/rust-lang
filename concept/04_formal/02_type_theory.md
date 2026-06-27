@@ -475,7 +475,7 @@ Rust 类型系统 = λ→ + System F + HM + λ<: + 线性类型 + 约束类型
 | **L4 形式化概念** | **L1 基础文件** | **映射精度** | **标注** |
 |:---|:---|:---|:---|
 | L1: λ→ 简单类型 | [`../01_foundation/04_type_system.md`](../01_foundation/04_type_system.md) §4.5 T3 | **精确** | L1 的 T3 类型安全定理依赖 L4 的 λ→ 基础 |
-| T5: HM 推断完备性 | [`../01_foundation/04_type_system.md`](LINK_PLACEHOLDER) §4.4 T2 | **精确** | L1 T2（类型推断（Type Inference）完备性）是 T5 的工程实例 |
+| T5: HM 推断完备性 | `../01_foundation/04_type_system.md` §4.4 T2 | **精确** | L1 T2（类型推断（Type Inference）完备性）是 T5 的工程实例 |
 | T1: 进展+保持=类型安全 | [`../01_foundation/04_type_system.md`](../01_foundation/04_type_system.md) §4.5 T3 | **精确** | L1 T3 是 T1 在 Rust 中的受限形式 |
 | L3: 线性/所有权类型 | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) | **精确** | L1 所有权规则是 L3 线性类型的工程化 |
 
@@ -483,7 +483,7 @@ Rust 类型系统 = λ→ + System F + HM + λ<: + 线性类型 + 约束类型
 
 | **L4 形式化概念** | **L2 进阶文件** | **映射精度** | **标注** |
 |:---|:---|:---|:---|
-| L2: System F 参数多态 | [`../02_intermediate/02_generics.md`](LINK_PLACEHOLDER) §4.1 | **精确** | L2 泛型形式化 = System F 的单态化（Monomorphization）实现 |
+| L2: System F 参数多态 | `../02_intermediate/02_generics.md` §4.1 | **精确** | L2 泛型形式化 = System F 的单态化（Monomorphization）实现 |
 | T3: 约束可满足性 | [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) §4.4 | **精确** | L2 约束多态是 T3 的工程语法 |
 | C2: 高阶类型/GATs | [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) §2.3 | **精确** | L2 GATs 是 C2 的 Rust 语法 |
 | T2: 子类型传递性 | [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) §4.3 | **近似** | L2 Supertrait 传递依赖 T2 子类型理论 |
@@ -948,7 +948,7 @@ fn invariant<'a>(x: &'a mut String) -> &'a mut str {
 
 > **过渡: L4 → L3**
 > 类型论中的全称量词 `∀α.τ` 在 Rust 中就是 `fn foo<T>(x: T)`，存在量词 `∃α.τ` 就是 `impl Trait`。类型论不是抽象数学——它是编译器类型检查算法的理论基础。理解 HM 算法如何推导 `let x = 5` 的类型，就是理解 `rustc` 如何处理 90% 的日常代码。
-> 编译器实现见 [`../03_advanced/04_macros.md`](LINK_PLACEHOLDER)（宏（Macro）扩展与类型检查交互）与 [`../06_ecosystem/01_toolchain.md`](LINK_PLACEHOLDER)（编译流程）。
+> 编译器实现见 `../03_advanced/04_macros.md`（宏（Macro）扩展与类型检查交互）与 `../06_ecosystem/01_toolchain.md`（编译流程）。
 
 > **过渡: L4 → L7**
 > Rust 的类型系统正在向更丰富的方向发展：Effects System 将副作用编码为类型约束、Generic Const Items 允许常量作为类型参数、Type Alias Impl Trait 简化存在类型的表达。这些演进不是偶然——它们都是类型论中已有概念的工程化落地。

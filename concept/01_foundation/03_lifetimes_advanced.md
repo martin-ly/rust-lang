@@ -184,7 +184,7 @@
 > **来源: [Rust Reference: Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)** Rust 生命周期是类型系统的核心特征，通过编译期区域推断保证引用有效性，零运行时（Runtime）开销。 ✅
 > **[来源: C++ Reference: unique_ptr]** C++ 智能指针（Smart Pointer）管理所有权（Ownership）生命周期，但无编译期引用有效性检查，悬垂引用为未定义行为。 ✅
 > **[来源: Haskell GHC User Guide: LinearTypes]** Haskell LinearTypes 扩展允许显式线性类型约束（`a %1 -> b`），与 Rust 生命周期在类型论上同源，但为可选扩展。 ✅
-> **来源: [Go Spec: Memory Model](LINK_PLACEHOLDER)** Go 无生命周期或借用（Borrowing）概念，内存安全（Memory Safety）完全依赖垃圾回收器，引用有效性无编译期检查。 ✅
+> **来源: Go Spec: Memory Model** Go 无生命周期或借用（Borrowing）概念，内存安全（Memory Safety）完全依赖垃圾回收器，引用有效性无编译期检查。 ✅
 
 **关键洞察**: Rust 是唯一将生命周期作为**显式、强制、核心类型系统特征**的工业级主流语言。C++ 依赖运行时 RAII 和程序员自律；Haskell LinearTypes 提供了类似的编译期保证但尚未成为主流实践；Go 完全依赖 GC。
 
@@ -1198,7 +1198,7 @@ where
 }
 ```
 
-> **修正**: 高阶 trait bound（HRTB）`for<'a>` 要求实现对所有可能的生命周期 `'a` 有效。当 trait 方法接受引用参数时，默认的生命周期省略可能不足以表达"对所有生命周期有效"的语义。HRTB 在回调函数、比较器、迭代器（Iterator）适配器等场景中至关重要。[来源: [Rust Reference](LINK_PLACEHOLDER)]
+> **修正**: 高阶 trait bound（HRTB）`for<'a>` 要求实现对所有可能的生命周期 `'a` 有效。当 trait 方法接受引用参数时，默认的生命周期省略可能不足以表达"对所有生命周期有效"的语义。HRTB 在回调函数、比较器、迭代器（Iterator）适配器等场景中至关重要。来源: [Rust Reference]
 
 ### 10.2 边界测试：自引用结构体的生命周期标注（编译错误）
 

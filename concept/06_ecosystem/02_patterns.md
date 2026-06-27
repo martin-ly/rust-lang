@@ -1081,7 +1081,7 @@ impl Transport {
 
 > **Bloom 层级**: 应用
 
-**定义**：使用字符串替代强类型来表示结构化数据或枚举（Enum）状态，丧失编译期检查能力。来源: [Rust API Guidelines](LINK_PLACEHOLDER)
+**定义**：使用字符串替代强类型来表示结构化数据或枚举（Enum）状态，丧失编译期检查能力。来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
 **Rust 表现**：
 
@@ -1174,7 +1174,7 @@ async fn handler(db: &DatabaseLayer, sessions: &SessionLayer) { /* ... */ }
 - 利用所有权系统将状态分散到不同模块，通过消息传递（channel）或 Actor 模式通信。
 - 对跨线程共享状态，优先使用 `tokio::sync::mpsc` 而非 `Arc<Mutex<GlobalState>>`，将共享可变转化为消息传递。
 
-**与 L1-L4 的关联**：上帝对象的 `Mutex<GlobalState>` 模式违背了 [L1 所有权](LINK_PLACEHOLDER) 的核心理念——"单一所有者决定生命周期"。通过 Actor / Channel 模型将状态拆分，正是 [L3 并发](LINK_PLACEHOLDER) 中"共享状态转化为消息传递"原则的实践。参见 [L1 借用（Borrowing）](LINK_PLACEHOLDER) §内部可变性、[L3 并发](LINK_PLACEHOLDER) §Actor 模型。
+**与 L1-L4 的关联**：上帝对象的 `Mutex<GlobalState>` 模式违背了 L1 所有权 的核心理念——"单一所有者决定生命周期"。通过 Actor / Channel 模型将状态拆分，正是 L3 并发 中"共享状态转化为消息传递"原则的实践。参见 [L1 借用（Borrowing）](../01_foundation/02_borrowing.md) §内部可变性、L3 并发 §Actor 模型。
 
 > **来源**: [Rust API Guidelines — Structs](https://rust-lang.github.io/api-guidelines//predictability.html) · [Rust Design Patterns — Anti-patterns](https://rust-unofficial.github.io/patterns/anti_patterns/index.html) · 可信度: ✅
 
@@ -1230,7 +1230,7 @@ fn process_items(mut items: Vec<Item>) -> Vec<Processed> {
 | `unsafe` 散布于业务代码 | FFI 封装不完整 | 集中 `unsafe` 到最小封装层，外层 API 全安全 |
 | 生命周期标注 >3 个嵌套 | 自引用或过度借用 | 考虑 `Pin<&mut Self>` 或所有权重新分配 |
 
-**与 L1-L4 的关联**：Spaghetti Code 在 Rust 中最危险的变体是生命周期意大利面——过度复杂的生命周期标注往往意味着违背了 [L1 所有权](LINK_PLACEHOLDER) 的"单一所有者"原则，或需要 [L3 异步（Async）](LINK_PLACEHOLDER) 中的 `Pin` 来安全表达自引用。`Rc<RefCell<...>>` 的滥用则是 [L2 内存管理](LINK_PLACEHOLDER) 中内部可变性机制的误用，参见该文件 §`RefCell<T>` 边界。
+**与 L1-L4 的关联**：Spaghetti Code 在 Rust 中最危险的变体是生命周期意大利面——过度复杂的生命周期标注往往意味着违背了 L1 所有权 的"单一所有者"原则，或需要 L3 异步（Async） 中的 `Pin` 来安全表达自引用。`Rc<RefCell<...>>` 的滥用则是 L2 内存管理 中内部可变性机制的误用，参见该文件 §`RefCell<T>` 边界。
 
 > **来源**: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines//type-safety.html) · [Rust Design Patterns — Anti-patterns](https://rust-unofficial.github.io/patterns/anti_patterns/index.html) · [TRPL — Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Wikipedia — Spaghetti code](https://en.wikipedia.org/wiki/Spaghetti_code) · 可信度: ✅
 

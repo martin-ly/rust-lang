@@ -13,7 +13,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Ana — 分析 Rust 数据工程生态的技术选型与工程权衡
-> **前置依赖**: [类型系统（Type System）](LINK_PLACEHOLDER) · [泛型（Generics）](LINK_PLACEHOLDER) · [Async/Await](LINK_PLACEHOLDER) · [Machine Learning Ecosystem](LINK_PLACEHOLDER)
+> **前置依赖**: [类型系统（Type System）](../01_foundation/04_type_system.md) · [泛型（Generics）](../02_intermediate/02_generics.md) · Async/Await · Machine Learning Ecosystem
 > **后置延伸**: [流处理生态](./36_stream_processing_ecosystem.md) · [云原生](./24_cloud_native.md) · [性能优化](./15_performance_optimization.md)
 >
 > **来源**: [polars](https://docs.rs/polars/) · [arrow-rs](https://docs.rs/arrow/) · [datafusion](https://docs.rs/datafusion/)
@@ -844,7 +844,7 @@ fn good_csv_parse() -> PolarsResult<DataFrame> {
 - [云原生](./24_cloud_native.md) — 容器化、对象存储、微服务部署
 - [性能优化](./15_performance_optimization.md) — SIMD、缓存优化、内存布局
 - [API Design Patterns](./42_api_design_patterns.md) — REST/gRPC 数据服务
-- [并发编程](LINK_PLACEHOLDER) — Send/Sync、异步（Async）并行
+- [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、异步（Async）并行
 - [数据库系统](./37_database_systems.md) — 存储引擎、事务、索引
 - [网络协议](./38_network_protocols.md) — HTTP/2、gRPC、对象存储协议
 - [安全与密码学](./43_security_cryptography.md) — 数据加密、合规性

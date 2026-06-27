@@ -457,7 +457,7 @@ MIRI（MIR Interpreter）:
 ### 7.1 NLL（Non-Lexical Lifetimes）
 >
 
-> **[Niko Matsakis — Rust Blog](LINK_PLACEHOLDER)** NLL 是 Rust 2018 Edition 引入的借用检查改进，核心洞察：**引用（Reference）的有效性应基于实际使用位置，而非词法作用域**。
+> **Niko Matsakis — Rust Blog** NLL 是 Rust 2018 Edition 引入的借用检查改进，核心洞察：**引用（Reference）的有效性应基于实际使用位置，而非词法作用域**。
 
 ```text
 NLL 之前的词法生命周期:
@@ -739,7 +739,7 @@ fn undefined_behavior() {
 
 - [类型系统](../01_foundation/04_type_system.md) — 类型论基础
 - [泛型](../02_intermediate/02_generics.md) — 单态化（Monomorphization）、Trait bound
-- [生命周期（Lifetimes）](LINK_PLACEHOLDER) — 借用规则、NLL
+- [生命周期（Lifetimes）](../01_foundation/03_lifetimes.md) — 借用规则、NLL
 - [Trait](../02_intermediate/01_traits.md) — 多态、Trait 解析
 - [Async/Await](../03_advanced/02_async.md) — 状态机转换、MIR 生成
 - [宏系统](../03_advanced/07_proc_macro.md) — 宏展开、 hygiene

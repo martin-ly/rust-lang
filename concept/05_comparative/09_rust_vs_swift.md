@@ -30,8 +30,8 @@
   - [📑 目录](#-目录)
   - [一、核心对比](#一核心对比)
     - [1.1 内存管理模型](#11-内存管理模型)
-    - [1.2 类型系统（Type System）与安全性](LINK_PLACEHOLDER)
-    - [1.3 所有权（Ownership）与借用（Borrowing）](LINK_PLACEHOLDER)
+    - [1.2 类型系统与安全性](#12-类型系统与安全性)
+    - [1.3 所有权与借用](#13-所有权与借用)
   - [二、工程实践差异](#二工程实践差异)
     - [2.1 平台与生态](#21-平台与生态)
     - [2.2 互操作与 FFI](#22-互操作与-ffi)
@@ -47,7 +47,7 @@
   - [十、边界测试：Rust 与 Swift 的编译错误对比](#十边界测试rust-与-swift-的编译错误对比)
     - [10.1 边界测试：Swift 的 ARC 与 Rust 的所有权（编译错误）](#101-边界测试swift-的-arc-与-rust-的所有权编译错误)
     - [10.2 边界测试：Swift 的 Optional 链与 Rust 的 `?` 运算符（编译错误）](#102-边界测试swift-的-optional-链与-rust-的--运算符编译错误)
-    - [10.3 边界测试：Swift 的 ARC 与 Rust 的所有权的循环引用（Reference）差异（运行时（Runtime）内存泄漏）](LINK_PLACEHOLDER)
+    - [10.3 边界测试：Swift 的 ARC 与 Rust 的所有权的循环引用差异（运行时内存泄漏）](#103-边界测试swift-的-arc-与-rust-的所有权的循环引用差异运行时内存泄漏)
     - [10.4 边界测试：Swift 的 Optional 链与 Rust 的 `?` 运算符（编译错误）](#104-边界测试swift-的-optional-链与-rust-的--运算符编译错误)
     - [10.3 边界测试：Swift 的 ARC 与 Rust 的所有权内存管理对比（运行时差异）](#103-边界测试swift-的-arc-与-rust-的所有权内存管理对比运行时差异)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -644,7 +644,7 @@ fn main() {
 }
 ```
 
-> **修正**: Swift 的 **ARC**（Automatic Reference Counting）在运行时管理内存：赋值时引用计数 +1，超出作用域时 -1，为 0 时释放。循环引用用 `weak`（可 nil）或 `unowned`（不可 nil，但可能悬垂）打破。Rust 的**所有权系统**在编译期跟踪：1) `let s2 = s` 是 move（无运行时开销，只是指针复制）；2) 编译器保证无双重释放和 use-after-free；3) `Rc`/`Arc` 是显式的运行时引用计数（可选）。性能对比：Swift ARC 有原子操作（Atomic Operations）开销（线程安全），Rust 的 move 是零成本。Swift 的优势：与 Objective-C 互操作、更灵活的引用语义；Rust 的优势：编译期保证、零成本抽象（Zero-Cost Abstraction）、无循环引用风险（`Box` 无循环，`Rc` 循环需 `Weak` 打破，但编译器不强制）。这与 Python 的 GC（引用计数 + 循环检测）或 C++ 的 `shared_ptr`（类似 ARC）不同——Rust 的所有权是编译期机制，非运行时。[来源: [The Rust Programming Language](LINK_PLACEHOLDER)] · [来源: [Swift ARC](LINK_PLACEHOLDER)]
+> **修正**: Swift 的 **ARC**（Automatic Reference Counting）在运行时管理内存：赋值时引用计数 +1，超出作用域时 -1，为 0 时释放。循环引用用 `weak`（可 nil）或 `unowned`（不可 nil，但可能悬垂）打破。Rust 的**所有权系统**在编译期跟踪：1) `let s2 = s` 是 move（无运行时开销，只是指针复制）；2) 编译器保证无双重释放和 use-after-free；3) `Rc`/`Arc` 是显式的运行时引用计数（可选）。性能对比：Swift ARC 有原子操作（Atomic Operations）开销（线程安全），Rust 的 move 是零成本。Swift 的优势：与 Objective-C 互操作、更灵活的引用语义；Rust 的优势：编译期保证、零成本抽象（Zero-Cost Abstraction）、无循环引用风险（`Box` 无循环，`Rc` 循环需 `Weak` 打破，但编译器不强制）。这与 Python 的 GC（引用计数 + 循环检测）或 C++ 的 `shared_ptr`（类似 ARC）不同——Rust 的所有权是编译期机制，非运行时。来源: [The Rust Programming Language] · 来源: [Swift ARC]
 
 ## 嵌入式测验（Embedded Quiz）
 

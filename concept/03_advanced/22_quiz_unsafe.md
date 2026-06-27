@@ -225,7 +225,7 @@ fn main() {
 }
 ```
 
-**知识点**：`Vec::from_raw_parts` 和 `mem::forget` 是构建自定义集合的核心工具，但也是 UB 高发区。每次使用都必须确保内存生命周期（Lifetimes）正确。[→ Unsafe 模式详解](LINK_PLACEHOLDER)
+**知识点**：`Vec::from_raw_parts` 和 `mem::forget` 是构建自定义集合的核心工具，但也是 UB 高发区。每次使用都必须确保内存生命周期（Lifetimes）正确。→ Unsafe 模式详解
 
 </details>
 

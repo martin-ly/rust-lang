@@ -16,7 +16,7 @@
 > **双维定位**: C×App — 应用字符串处理和编码知识
 > **定位**:
 > 系统分析 Rust **字符串类型**的设计——String [来源: [Rust String](https://doc.rust-lang.org/std/string/struct.String.html)] 与
-> str [来源: [Rust str](LINK_PLACEHOLDER)] 的所有权（Ownership）语义、
+> str 来源: [Rust str] 的所有权（Ownership）语义、
 > UTF-8 [来源: [UTF-8](https://en.wikipedia.org/wiki/UTF-8)]
 > [来源: [UTF-8 Wikipedia](https://en.wikipedia.org/wiki/UTF-8)]
 > 编码约束、格式化宏（format!/write!）的类型安全设计，以及与 C 字符串、OS 字符串的互操作。
@@ -37,11 +37,11 @@
 - [字符串与文本：Rust 的 Unicode 处理与格式化系统](#字符串与文本rust-的-unicode-处理与格式化系统)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 String vs str：所有权（Ownership）谱系](#11-string-vs-str所有权谱系)
+    - [1.1 String vs str：所有权谱系](#11-string-vs-str所有权谱系)
     - [1.2 UTF-8：Rust 的编码选择](#12-utf-8rust-的编码选择)
     - [1.3 格式化系统的类型安全](#13-格式化系统的类型安全)
   - [二、技术细节](#二技术细节)
-    - [2.1 字符串切片（String Slice）与索引](LINK_PLACEHOLDER)
+    - [2.1 字符串切片与索引](#21-字符串切片与索引)
     - [2.2 OS 字符串与路径](#22-os-字符串与路径)
     - [2.3 与 C 字符串的互操作](#23-与-c-字符串的互操作)
   - [三、选型决策矩阵](#三选型决策矩阵)
@@ -53,12 +53,12 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十二、边界测试：字符串与文本的编译错误](#十二边界测试字符串与文本的编译错误)
-    - [12.1 边界测试：`String` 与 `&str` 的生命周期（Lifetimes）不匹配（编译错误）](LINK_PLACEHOLDER)
+    - [12.1 边界测试：`String` 与 `&str` 的生命周期不匹配（编译错误）](#121-边界测试string-与-str-的生命周期不匹配编译错误)
     - [12.2 边界测试：字符串索引操作（编译错误）](#122-边界测试字符串索引操作编译错误)
     - [10.3 边界测试：`str::split` 与模式类型的不匹配（编译错误）](#103-边界测试strsplit-与模式类型的不匹配编译错误)
     - [10.4 边界测试：字符串拼接的 `+` 运算符消耗左操作数（编译错误）](#104-边界测试字符串拼接的--运算符消耗左操作数编译错误)
     - [10.5 边界测试：字符串索引与 UTF-8 编码边界（编译错误）](#105-边界测试字符串索引与-utf-8-编码边界编译错误)
-    - [10.6 边界测试：`String::from_utf8` 的无效序列与损失转换（运行时（Runtime） panic）](LINK_PLACEHOLDER)
+    - [10.6 边界测试：`String::from_utf8` 的无效序列与损失转换（运行时 panic）](#106-边界测试stringfrom_utf8-的无效序列与损失转换运行时-panic)
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -67,8 +67,8 @@
     - [测验 1：String vs \&str（理解层）](#测验-1string-vs-str理解层)
     - [测验 2：UTF-8 索引（应用层）](#测验-2utf-8-索引应用层)
     - [测验 3：String 修改（应用层）](#测验-3string-修改应用层)
-    - [测验 4：format! 宏（Macro）（应用层）](LINK_PLACEHOLDER)
-    - [测验 5：字符串切片（Slice）边界（分析层）](LINK_PLACEHOLDER)
+    - [测验 4：format! 宏（应用层）](#测验-4format-宏应用层)
+    - [测验 5：字符串切片边界（分析层）](#测验-5字符串切片边界分析层)
 
 ---
 
@@ -481,7 +481,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-storing-utf-8-encoded-text-with-strings.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 
@@ -534,7 +534,7 @@ fn get_static() -> &'static str {
 > 返回 `&str` 意味着返回一个引用（Reference），但被引用的 `String` 在函数返回时释放。
 > 这与悬垂引用（Reference）问题相同——生命周期（Lifetimes）系统阻止返回指向局部 `String` 的 `&str`。
 > 正确做法是返回 `String`（转移所有权）或返回 `'static str`（字符串字面量）。
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-storing-utf-8-encoded-text-with-strings.html)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)]
 
 ### 12.2 边界测试：字符串索引操作（编译错误）
 
@@ -587,7 +587,7 @@ fn main() {
 > 3) 使用 `regex` crate 处理复杂分割模式。
 > 这与 Python 的 `str.split`（接受 `str` 或 `None`）或 JavaScript 的 `String.prototype.split`（接受字符串或正则）不同——Rust 的 `split` 参数类型在编译期严格检查，但灵活性较低。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.str.html)] ·
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-storing-utf-8-encoded-text-with-strings.html)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)]
 
 ### 10.4 边界测试：字符串拼接的 `+` 运算符消耗左操作数（编译错误）
 

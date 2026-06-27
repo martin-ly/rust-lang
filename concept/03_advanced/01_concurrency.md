@@ -12,7 +12,7 @@
 > **层次定位**: L3 高级概念 / 并发子域
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价并发设计的安全性
-> **前置依赖**: [L1 所有权（Ownership）](LINK_PLACEHOLDER) · [L1 借用（Borrowing）](LINK_PLACEHOLDER) · [L2 Trait](LINK_PLACEHOLDER)
+> **前置依赖**: [L1 所有权（Ownership）](../01_foundation/01_ownership.md) · [L1 借用（Borrowing）](../01_foundation/02_borrowing.md) · [L2 Trait](../02_intermediate/01_traits.md)
 > **后置延伸**: [L4 RustBelt](../04_formal/04_rustbelt.md) · [L6 Tokio 生态](../06_ecosystem/03_core_crates.md) · [L7 AI 并发](../07_future/01_ai_integration.md)
 > **跨层映射**: L3→L4 Send/Sync ↔ 分离逻辑资源分片 | L3→L6 并发模式 → 工程实现
 > **定理链编号**: T-040 Send 类型安全 → T-041 Sync 数据竞争自由 → T-042 死锁不可判定但可检测
@@ -25,7 +25,7 @@
 > **所有权（Ownership）语义对齐**: 并发编程中的所有权遵循 Rust 核心原则——每个值有**唯一所有者**（单一所有权，资源唯一性），
 > owner 离开**作用域**时自动**drop/释放**（RAII），
 > 值通过**move/转移**传递所有权（Ownership）（赋值、传参后原变量变为 uninitialized）
-> 来源: [Rust Reference — Ownership / 2025; RustBelt — 所有权类型系统（Type System）的 Iris 形式化 / POPL 2018](LINK_PLACEHOLDER)
+> 来源: Rust Reference — Ownership / 2025; RustBelt — 所有权类型系统（Type System）的 Iris 形式化 / POPL 2018
 > **后置概念**: [Async/Await](./02_async.md) ·
 > [Unsafe Rust](./03_unsafe.md)
 > **unsafe 语义对齐**: 当本文件提及 `unsafe impl Send/Sync` 时，遵循核心语义——`unsafe` 不是关闭检查器，而是将全局线程
@@ -61,7 +61,7 @@
     - [第 2 步：多线程哪里变了？](#第-2-步多线程哪里变了)
     - [第 3 步：为什么数据会竞争？](#第-3-步为什么数据会竞争)
     - [第 4 步：编译器怎么预防？](#第-4-步编译器怎么预防)
-    - [第 5 步：运行时（Runtime）还有什么风险？](LINK_PLACEHOLDER)
+    - [第 5 步：运行时还有什么风险？](#第-5-步运行时还有什么风险)
     - [第 6 步：怎么验证正确性？](#第-6-步怎么验证正确性)
   - [一、权威定义（Definition） \[来源: Rust 并发基于所有权系统——每个值有唯一所有者（单一所有权，资源唯一性），所有权通过 move/转移在线程间传递（赋值、传参），owner 离开作用域时自动 drop/释放\]](#一权威定义definition-来源-rust-并发基于所有权系统每个值有唯一所有者单一所有权资源唯一性所有权通过-move转移在线程间传递赋值传参owner-离开作用域时自动-drop释放)
     - [1.1 Wikipedia 权威定义](#11-wikipedia-权威定义)
@@ -92,9 +92,9 @@
   - [六、定理推理链（Theorem Chain）](#六定理推理链theorem-chain)
     - [6.1 所有权 + Send/Sync ⇒ 无数据竞争](#61-所有权--sendsync--无数据竞争)
     - [6.2 `Mutex<T>` 的内部可变性定理](#62-mutext-的内部可变性定理)
-    - [6.3 定理一致性（Coherence）矩阵](LINK_PLACEHOLDER)
+    - [6.3 定理一致性矩阵](#63-定理一致性矩阵)
   - [七、示例与反例（Examples \& Counter-examples）](#七示例与反例examples--counter-examples)
-    - [7.1 正确示例：spawn + move 闭包（Closures）](LINK_PLACEHOLDER)
+    - [7.1 正确示例：spawn + move 闭包](#71-正确示例spawn--move-闭包)
     - [7.2 正确示例：Mutex 共享状态](#72-正确示例mutex-共享状态)
     - [7.3 正确示例：Channel 消息传递](#73-正确示例channel-消息传递)
     - [7.4 反例：跨线程共享 Rc（E0277）](#74-反例跨线程共享-rce0277)
@@ -113,7 +113,7 @@
     - [12.3 无背压的风险](#123-无背压的风险)
   - [十三、边界测试：并发规则的编译错误](#十三边界测试并发规则的编译错误)
     - [13.1 边界测试：`Send` 不满足时跨线程移动（编译错误）](#131-边界测试send-不满足时跨线程移动编译错误)
-    - [13.2 边界测试：死锁——嵌套锁顺序不一致（运行时（Runtime）错误 / 逻辑错误）](#132-边界测试死锁嵌套锁顺序不一致运行时错误--逻辑错误)
+    - [13.2 边界测试：死锁——嵌套锁顺序不一致（运行时错误 / 逻辑错误）](#132-边界测试死锁嵌套锁顺序不一致运行时错误--逻辑错误)
     - [10.3 边界测试：`Mutex` 的毒化（poisoning）与错误恢复（运行时 panic）](#103-边界测试mutex-的毒化poisoning与错误恢复运行时-panic)
     - [10.4 边界测试：`std::sync::mpsc` 的多生产者单消费者限制（编译错误）](#104-边界测试stdsyncmpsc-的多生产者单消费者限制编译错误)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
@@ -767,7 +767,7 @@ graph TD
 ## 六、定理推理链（Theorem Chain）
 
 > **[RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** 定理：Safe Rust 的并发程序无数据竞争。前提为所有权规则 + Send/Sync 约束，结论由形式化逻辑推导保证。✅ 已验证
-> **[TRPL Ch16](LINK_PLACEHOLDER)** 推论：编译器已证明所有可能的交错执行都是安全的，程序员无需手动枚举（Enum）每种时序。✅ 已验证
+> **TRPL Ch16** 推论：编译器已证明所有可能的交错执行都是安全的，程序员无需手动枚举（Enum）每种时序。✅ 已验证
 
 ### 6.1 所有权 + Send/Sync ⇒ 无数据竞争
 

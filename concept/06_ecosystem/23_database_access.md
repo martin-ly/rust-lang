@@ -31,7 +31,7 @@
   - [一、核心概念](#一核心概念)
     - [1.1 SQLx — 编译期检查](#11-sqlx--编译期检查)
     - [1.2 Diesel — 类型安全 ORM](#12-diesel--类型安全-orm)
-    - [1.3 SeaORM — 异步（Async） ORM](LINK_PLACEHOLDER)
+    - [1.3 SeaORM — 异步 ORM](#13-seaorm--异步-orm)
     - [1.4 Toasty — Tokio 团队的异步 ORM](#14-toasty--tokio-团队的异步-orm)
   - [二、查询模式](#二查询模式)
     - [2.1 原始 SQL](#21-原始-sql)
@@ -50,14 +50,14 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：数据库访问的编译错误](#十边界测试数据库访问的编译错误)
     - [10.1 边界测试：SQLx 的编译期查询验证（编译错误）](#101-边界测试sqlx-的编译期查询验证编译错误)
-    - [10.2 边界测试：连接池的生命周期（Lifetimes）管理（编译错误）](LINK_PLACEHOLDER)
-    - [10.6 边界测试：连接池的 `deadlock` 与异步等待（运行时（Runtime）死锁）](LINK_PLACEHOLDER)
+    - [10.2 边界测试：连接池的生命周期管理（编译错误）](#102-边界测试连接池的生命周期管理编译错误)
+    - [10.6 边界测试：连接池的 `deadlock` 与异步等待（运行时死锁）](#106-边界测试连接池的-deadlock-与异步等待运行时死锁)
     - [10.5 边界测试：连接池耗尽与异步等待超时（运行时超时/崩溃）](#105-边界测试连接池耗尽与异步等待超时运行时超时崩溃)
     - [10.3 边界测试：连接池的 `deadpool` 与 async 生命周期（运行时超时/崩溃）](#103-边界测试连接池的-deadpool-与-async-生命周期运行时超时崩溃)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`sqlx` 与 `diesel` 在 Rust 数据库访问中各有什么特点？（理解层）](#测验-1sqlx-与-diesel-在-rust-数据库访问中各有什么特点理解层)
-    - [测验 2：`sqlx` 的 `query!` 宏（Macro）如何在编译期验证 SQL 语句？（理解层）](LINK_PLACEHOLDER)
+    - [测验 2：`sqlx` 的 `query!` 宏如何在编译期验证 SQL 语句？（理解层）](#测验-2sqlx-的-query-宏如何在编译期验证-sql-语句理解层)
     - [测验 3：Rust 的数据库连接池（如 `deadpool`、`bb8`）解决了什么问题？（理解层）](#测验-3rust-的数据库连接池如-deadpoolbb8解决了什么问题理解层)
     - [测验 4：ORM 的"N+1 查询问题"在 Rust 中如何缓解？（理解层）](#测验-4orm-的n1-查询问题在-rust-中如何缓解理解层)
     - [测验 5：为什么 Rust 的数据库驱动通常比 Node.js/Python 的驱动有更高的吞吐和更低的延迟？（理解层）](#测验-5为什么-rust-的数据库驱动通常比-nodejspython-的驱动有更高的吞吐和更低的延迟理解层)
@@ -652,7 +652,7 @@ async fn good_query(pool: &sqlx::SqlitePool) -> Result<(), sqlx::Error> {
 }
 ```
 
-> **修正**: SQLx 的宏（Macro）（`query!`、`query_as!`）在编译期解析 SQL 并验证返回类型与数据库 schema 的一致性（Coherence）。若类型不匹配，编译错误而非运行时 panic。这是 Rust"将错误提前到编译期"哲学在数据库访问层的典型应用。与 Go/Java 的运行时反射映射相比，SQLx 提供零开销、类型安全的查询接口。编译期验证要求开发时数据库可访问（或使用 `sqlx-data.json` 离线模式），这是类型安全的代价。[来源: [SQLx Documentation](LINK_PLACEHOLDER)]
+> **修正**: SQLx 的宏（Macro）（`query!`、`query_as!`）在编译期解析 SQL 并验证返回类型与数据库 schema 的一致性（Coherence）。若类型不匹配，编译错误而非运行时 panic。这是 Rust"将错误提前到编译期"哲学在数据库访问层的典型应用。与 Go/Java 的运行时反射映射相比，SQLx 提供零开销、类型安全的查询接口。编译期验证要求开发时数据库可访问（或使用 `sqlx-data.json` 离线模式），这是类型安全的代价。来源: [SQLx Documentation]
 
 ### 10.2 边界测试：连接池的生命周期管理（编译错误）
 
@@ -670,7 +670,7 @@ async fn fetch_data(pool: &SqlitePool) -> Result<String, sqlx::Error> {
 }
 ```
 
-> **修正**: 数据库查询返回的行数据通常引用（Reference）连接池内部缓冲区。在 Rust 中，这些引用不能逃离异步函数——它们的生命周期（Lifetimes）与连接租用期绑定。正确做法是返回拥有所有权（Ownership）的值（`String`、`Vec<u8>`），而非引用。这与 Go 的 `sql.Rows.Scan`（复制到变量）或 Java 的 `ResultSet.getString`（返回新字符串）类似，但 Rust 的类型系统（Type System）显式追踪生命周期，阻止悬垂引用。连接池的租用-归还模式通过 RAII 自动管理，防止连接泄漏。[来源: [SQLx Documentation](LINK_PLACEHOLDER)]
+> **修正**: 数据库查询返回的行数据通常引用（Reference）连接池内部缓冲区。在 Rust 中，这些引用不能逃离异步函数——它们的生命周期（Lifetimes）与连接租用期绑定。正确做法是返回拥有所有权（Ownership）的值（`String`、`Vec<u8>`），而非引用。这与 Go 的 `sql.Rows.Scan`（复制到变量）或 Java 的 `ResultSet.getString`（返回新字符串）类似，但 Rust 的类型系统（Type System）显式追踪生命周期，阻止悬垂引用。连接池的租用-归还模式通过 RAII 自动管理，防止连接泄漏。来源: [SQLx Documentation]
 
 ### 10.6 边界测试：连接池的 `deadlock` 与异步等待（运行时死锁）
 

@@ -25,7 +25,7 @@
 
 ## 📑 目录
 
-- [迭代器（Iterator）模式：Rust 的惰性计算与零成本抽象（Zero-Cost Abstraction）](LINK_PLACEHOLDER)
+- [迭代器（Iterator）模式：Rust 的惰性计算与零成本抽象（Zero-Cost Abstraction）](16_iterator_patterns.md)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 Iterator Trait 的设计](#11-iterator-trait-的设计)
@@ -46,11 +46,11 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：迭代器模式的编译错误](#十边界测试迭代器模式的编译错误)
     - [10.1 边界测试：`Iterator::zip` 长度不匹配（逻辑错误）](#101-边界测试iteratorzip-长度不匹配逻辑错误)
-    - [10.2 边界测试：`flat_map` 与嵌套迭代器的所有权（Ownership）（编译错误）](LINK_PLACEHOLDER)
+    - 10.2 边界测试：`flat_map` 与嵌套迭代器的所有权（Ownership）（编译错误）
   - [十二、边界测试：迭代器模式的编译错误（续）](#十二边界测试迭代器模式的编译错误续)
     - [12.1 边界测试：`enumerate` 与索引类型（逻辑错误）](#121-边界测试enumerate-与索引类型逻辑错误)
     - [12.2 边界测试：`partition` 与所有权（Ownership）分割（编译错误）](#122-边界测试partition-与所有权分割编译错误)
-    - [10.5 边界测试：`Iterator::fold` 的初始值类型与闭包（Closures）返回类型不匹配（编译错误）](LINK_PLACEHOLDER)
+    - 10.5 边界测试：`Iterator::fold` 的初始值类型与闭包（Closures）返回类型不匹配（编译错误）
     - [10.5 边界测试：`ChunksExact` 的剩余元素处理（逻辑错误）](#105-边界测试chunksexact-的剩余元素处理逻辑错误)
     - [10.2 边界测试：`flat_map` 与嵌套迭代器的类型匹配（编译错误）](#102-边界测试flat_map-与嵌套迭代器的类型匹配编译错误)
     - [10.9 边界测试：const fn 中的非编译期操作](#109-边界测试const-fn-中的非编译期操作)

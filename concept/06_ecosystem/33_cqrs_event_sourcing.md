@@ -13,7 +13,7 @@
 > **Bloom 层级**: 分析 → 创造
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Cre — 设计高可靠分布式系统的数据持久化模式
-> **前置依赖**: [Async](LINK_PLACEHOLDER) · [事件驱动架构](LINK_PLACEHOLDER) · [泛型（Generics）](LINK_PLACEHOLDER) · [Trait](LINK_PLACEHOLDER)
+> **前置依赖**: [Async](../03_advanced/02_async.md) · 事件驱动架构 · [泛型（Generics）](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md)
 > **后置延伸**: [分布式系统](./18_distributed_systems.md) · [微服务架构模式](./31_microservice_patterns.md) · [云原生](./24_cloud_native.md)
 >
 > **来源**: [eventstore-rs](https://docs.rs/eventstore/) · [cqrs-es](https://docs.rs/cqrs-es/)

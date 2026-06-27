@@ -7,7 +7,7 @@
 > **来源**: [TRPL — Ch19.5 Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) · [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html) · [Rust By Example — Macros](https://doc.rust-lang.org/rust-by-example/macros.html)
 > **📎 交叉引用（Reference）**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[宏（Macro）系统](LINK_PLACEHOLDER)
+> 本主题在 knowledge 中有系统化的知识索引：宏（Macro）系统
 > **受众**: [专家]
 > **层级**: L3 高级概念
 > **A/S/P 标记**: **S+P** — Structure + Procedure
@@ -61,7 +61,7 @@
 > **[TRPL Ch19.5](https://doc.rust-lang.org/book/ch19-05-advanced-functions-and-closures.html)** Macros are a way of writing code that writes other code, which is known as metaprogramming. In Appendix C, we discuss the derive attribute, which generates an implementation of various traits for you. We've also used the `println!` and `vec!` macros throughout the book. All of these macros expand to produce more code than the code you've written manually.
 
 > **[TRPL Ch19.5](https://doc.rust-lang.org/book/ch19-05-advanced-functions-and-closures.html)** 宏是编写生成其他代码的代码的方式，即元编程。macro_rules! 在语法树层面进行模式匹配（Pattern Matching），过程宏（Procedural Macro）操作完整 TokenStream。✅ 已验证
-> **[Rust Reference: Macros](LINK_PLACEHOLDER)** Rust 宏在编译期展开，展开后的代码再进行类型检查，因此宏本身不感知类型，但生成代码受类型系统（Type System）约束。✅ 已验证
+> **Rust Reference: Macros** Rust 宏在编译期展开，展开后的代码再进行类型检查，因此宏本身不感知类型，但生成代码受类型系统（Type System）约束。✅ 已验证
 
 ### 1.3 形式化定义
 

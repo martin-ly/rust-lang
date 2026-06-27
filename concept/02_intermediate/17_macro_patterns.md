@@ -9,7 +9,7 @@
 >
 > **📎 交叉引用（Reference）**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[宏（Macro）模式](LINK_PLACEHOLDER)
+> 本主题在 knowledge 中有系统化的知识索引：宏（Macro）模式
 >
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
@@ -27,11 +27,11 @@
 
 ## 📑 目录
 
-- [宏（Macro）模式：编译期代码生成的工程实践](#宏模式编译期代码生成的工程实践)
+- [宏模式：编译期代码生成的工程实践](#宏模式编译期代码生成的工程实践)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 宏的工程价值](#11-宏的工程价值)
-    - [1.2 声明宏（Declarative Macro） vs 过程宏（Procedural Macro）](LINK_PLACEHOLDER)
+    - [1.2 声明宏 vs 过程宏](#12-声明宏-vs-过程宏)
     - [1.3 宏的卫生性工程](#13-宏的卫生性工程)
   - [二、技术细节](#二技术细节)
     - [2.1 DRY 代码生成](#21-dry-代码生成)
@@ -55,10 +55,10 @@
     - [10.4 边界测试：宏中的 `tt` 与 `expr` 的匹配差异（编译错误）](#104-边界测试宏中的-tt-与-expr-的匹配差异编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`macro_rules!` 中的 `$x:expr` 与 `$x:tt` 有什么区别？（理解层）](#测验-1macro_rules-中的-xexpr-与-xtt-有什么区别理解层)
-    - [测验 2：声明宏（Declarative Macro）的"卫生性"（hygiene）主要解决什么问题？（理解层）](#测验-2声明宏的卫生性hygiene主要解决什么问题理解层)
+    - [测验 2：声明宏的"卫生性"（hygiene）主要解决什么问题？（理解层）](#测验-2声明宏的卫生性hygiene主要解决什么问题理解层)
     - [测验 3：`macro_rules!` 宏可以递归调用自身吗？有什么限制？（理解层）](#测验-3macro_rules-宏可以递归调用自身吗有什么限制理解层)
     - [测验 4：过程宏（proc macro）分为哪三类？它们分别用于什么场景？（理解层）](#测验-4过程宏proc-macro分为哪三类它们分别用于什么场景理解层)
-    - [测验 5：`macro_rules!` 与过程宏（Procedural Macro）的主要区别是什么？（理解层）](#测验-5macro_rules-与过程宏的主要区别是什么理解层)
+    - [测验 5：`macro_rules!` 与过程宏的主要区别是什么？（理解层）](#测验-5macro_rules-与过程宏的主要区别是什么理解层)
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -681,7 +681,7 @@ fn main() {
 }
 ```
 
-> **修正**: 宏生成的 `unsafe` 块的可见性取决于宏设计。`unsafe_op!` 在展开代码中创建 `unsafe` 块，因此调用者不需要额外的 `unsafe`——这**隐藏了 unsafe 边界**，是危险的做法。Rust 社区的最佳实践：unsafe 操作应在调用点可见，即 `unsafe { unsafe_op!(...) }`，让代码审查者一眼看到 unsafe。`std` 中的某些宏（如 `vec!`）内部使用 unsafe，但经过了严格审计。自定义宏应避免隐藏 unsafe，或使用 `unsafe` 关键字要求调用者显式标记。这与 C 的宏（常隐藏 `*` 解引用（Reference）、指针运算等 unsafe 操作）或 C++ 的模板（unsafe 在模板内部，调用点不可见）不同——Rust 的 unsafe 块是语法层面的，宏展开后仍保留，可通过源码映射追踪。[来源: [The Rust Programming Language](LINK_PLACEHOLDER)] · [来源: [Rustonomicon](LINK_PLACEHOLDER)]
+> **修正**: 宏生成的 `unsafe` 块的可见性取决于宏设计。`unsafe_op!` 在展开代码中创建 `unsafe` 块，因此调用者不需要额外的 `unsafe`——这**隐藏了 unsafe 边界**，是危险的做法。Rust 社区的最佳实践：unsafe 操作应在调用点可见，即 `unsafe { unsafe_op!(...) }`，让代码审查者一眼看到 unsafe。`std` 中的某些宏（如 `vec!`）内部使用 unsafe，但经过了严格审计。自定义宏应避免隐藏 unsafe，或使用 `unsafe` 关键字要求调用者显式标记。这与 C 的宏（常隐藏 `*` 解引用（Reference）、指针运算等 unsafe 操作）或 C++ 的模板（unsafe 在模板内部，调用点不可见）不同——Rust 的 unsafe 块是语法层面的，宏展开后仍保留，可通过源码映射追踪。来源: [The Rust Programming Language] · 来源: [Rustonomicon]
 
 ### 10.2 边界测试：宏递归深度限制（编译错误）
 

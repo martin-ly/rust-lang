@@ -35,11 +35,11 @@
   - [零、TL;DR —— 系统设计原则速查](#零tldr--系统设计原则速查)
   - [一、权威来源与设计原则分类学](#一权威来源与设计原则分类学)
   - [二、七项核心设计原则](#二七项核心设计原则)
-    - [2.1 内存安全（Memory Safety）：Capability-Based Security](LINK_PLACEHOLDER)
-    - [2.2 并发安全（Concurrency Safety）：Session Types 编译期编码](LINK_PLACEHOLDER)
-    - [2.3 零成本抽象（Zero-Cost Abstraction）：Stroustrup 原则](LINK_PLACEHOLDER)
+    - [2.1 内存安全：Capability-Based Security](#21-内存安全capability-based-security)
+    - [2.2 并发安全：Session Types 编译期编码](#22-并发安全session-types-编译期编码)
+    - [2.3 零成本抽象：Stroustrup 原则](#23-零成本抽象stroustrup-原则)
     - [2.4 组件组合：范畴论态射复合](#24-组件组合范畴论态射复合)
-    - [2.5 分布式一致性（Coherence）：从所有权（Ownership）到共识的隐喻](LINK_PLACEHOLDER)
+    - [2.5 分布式一致性：从所有权到共识的隐喻](#25-分布式一致性从所有权到共识的隐喻)
     - [2.6 安全边界：Zero Trust + WASI 能力安全](#26-安全边界zero-trust--wasi-能力安全)
     - [2.7 容错设计：Error Kernel + Let It Crash](#27-容错设计error-kernel--let-it-crash)
   - [三、系统设计决策矩阵](#三系统设计决策矩阵)
@@ -60,15 +60,15 @@
   - [十、边界测试：系统设计原则的编译错误](#十边界测试系统设计原则的编译错误)
     - [10.1 边界测试：Send/Sync 违反导致跨线程共享状态（编译错误）](#101-边界测试sendsync-违反导致跨线程共享状态编译错误)
     - [10.2 边界测试：trait 对象的安全性约束（编译错误）](#102-边界测试trait-对象的安全性约束编译错误)
-    - [10.5 边界测试：依赖注入与 trait object 的性能权衡（运行时（Runtime）开销）](LINK_PLACEHOLDER)
+    - [10.5 边界测试：依赖注入与 trait object 的性能权衡（运行时开销）](#105-边界测试依赖注入与-trait-object-的性能权衡运行时开销)
     - [10.5 边界测试：过度工程化的类型状态机（编译复杂度爆炸）](#105-边界测试过度工程化的类型状态机编译复杂度爆炸)
-    - [10.3 边界测试：过度泛型（Generics）化导致的单态化（Monomorphization）膨胀（编译后体积爆炸）](LINK_PLACEHOLDER)
+    - [10.3 边界测试：过度泛型化导致的单态化膨胀（编译后体积爆炸）](#103-边界测试过度泛型化导致的单态化膨胀编译后体积爆炸)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 中"零成本抽象"（Zero-Cost Abstractions）对系统架构设计意味着什么？（理解层）](#测验-1rust-中零成本抽象zero-cost-abstractions对系统架构设计意味着什么理解层)
     - [测验 2：在 Rust 微服务架构中，为什么选择 `tokio` 而非多线程模型？（理解层）](#测验-2在-rust-微服务架构中为什么选择-tokio-而非多线程模型理解层)
-    - [测验 3：Rust 的 `trait` 系统在解耦模块（Module）时有什么优势？（理解层）](LINK_PLACEHOLDER)
-    - [测验 4：什么是"错误即类型"（Errors as Values）？Rust 如何通过类型系统（Type System）实现它？（理解层）](LINK_PLACEHOLDER)
+    - [测验 3：Rust 的 `trait` 系统在解耦模块时有什么优势？（理解层）](#测验-3rust-的-trait-系统在解耦模块时有什么优势理解层)
+    - [测验 4：什么是"错误即类型"（Errors as Values）？Rust 如何通过类型系统实现它？（理解层）](#测验-4什么是错误即类型errors-as-valuesrust-如何通过类型系统实现它理解层)
     - [测验 5：在设计高可用 Rust 系统时，`Arc<Mutex<T>>` 与消息传递（channel）各适合什么场景？（理解层）](#测验-5在设计高可用-rust-系统时arcmutext-与消息传递channel各适合什么场景理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -605,7 +605,7 @@ impl Service {
 }
 ```
 
-> **修正**: 依赖注入（DI）在 Rust 中通常通过**泛型**（静态分发）或 **trait object**（动态分发）实现。泛型无运行时开销，但代码膨胀；trait object 有 vtable 间接开销（约 1-2 个指针解引用（Reference）），但二进制更小。上述代码使用 `Box<dyn Repository>` 实现 DI，每次 `find` 调用有虚函数开销。在性能关键路径上，应使用泛型：`struct Service<R: Repository> { repo: R }`。Rust 的类型系统允许在编译期选择：开发时使用 trait object（快速迭代），发布时重构为泛型（性能优化）。这与 Java 的接口（总是动态分发，JIT 可能内联）或 C++ 的模板（总是静态分发）不同——Rust 提供了两种机制，让开发者根据场景选择。[来源: [The Rust Programming Language](LINK_PLACEHOLDER)] · [来源: [Rust Performance Book](LINK_PLACEHOLDER)]
+> **修正**: 依赖注入（DI）在 Rust 中通常通过**泛型**（静态分发）或 **trait object**（动态分发）实现。泛型无运行时开销，但代码膨胀；trait object 有 vtable 间接开销（约 1-2 个指针解引用（Reference）），但二进制更小。上述代码使用 `Box<dyn Repository>` 实现 DI，每次 `find` 调用有虚函数开销。在性能关键路径上，应使用泛型：`struct Service<R: Repository> { repo: R }`。Rust 的类型系统允许在编译期选择：开发时使用 trait object（快速迭代），发布时重构为泛型（性能优化）。这与 Java 的接口（总是动态分发，JIT 可能内联）或 C++ 的模板（总是静态分发）不同——Rust 提供了两种机制，让开发者根据场景选择。来源: [The Rust Programming Language] · 来源: [Rust Performance Book]
 
 ### 10.5 边界测试：过度工程化的类型状态机（编译复杂度爆炸）
 
@@ -630,7 +630,7 @@ impl HttpRequest<Unsent> {
 // 若有 5 个状态和 10 个转换，需 50 个 impl 块
 ```
 
-> **修正**: 类型状态（Typestate）模式将运行时状态检查移至编译期，但**状态机复杂度**随状态数指数增长。5 个状态 × 10 个转换 = 50 个 `impl` 块，维护困难。替代方案：1) 简化状态空间（合并相似状态）；2) 使用枚举（Enum）状态 + 运行时检查（`match` + `panic!`），适用于复杂状态机；3) 使用宏（Macro）生成重复实现（`macro_rules!`）。设计原则：类型状态用于**关键路径**（如 `File<Open>` vs `File<Closed>`），普通状态机用枚举。这与 Rust 的"零成本抽象"哲学一致——编译期检查的代价是编译时间增加，而非运行时。这与 Haskell 的 GADT 类型状态或 Idris 的依赖类型状态机类似——Rust 的 PhantomData 是轻量类型状态实现，但复杂度限制在工业规模系统中需权衡。[来源: [Typestate Pattern in Rust](LINK_PLACEHOLDER)] · [来源: [Rust Design Patterns](LINK_PLACEHOLDER)]
+> **修正**: 类型状态（Typestate）模式将运行时状态检查移至编译期，但**状态机复杂度**随状态数指数增长。5 个状态 × 10 个转换 = 50 个 `impl` 块，维护困难。替代方案：1) 简化状态空间（合并相似状态）；2) 使用枚举（Enum）状态 + 运行时检查（`match` + `panic!`），适用于复杂状态机；3) 使用宏（Macro）生成重复实现（`macro_rules!`）。设计原则：类型状态用于**关键路径**（如 `File<Open>` vs `File<Closed>`），普通状态机用枚举。这与 Rust 的"零成本抽象"哲学一致——编译期检查的代价是编译时间增加，而非运行时。这与 Haskell 的 GADT 类型状态或 Idris 的依赖类型状态机类似——Rust 的 PhantomData 是轻量类型状态实现，但复杂度限制在工业规模系统中需权衡。来源: [Typestate Pattern in Rust] · 来源: [Rust Design Patterns]
 
 ### 10.3 边界测试：过度泛型化导致的单态化膨胀（编译后体积爆炸）
 

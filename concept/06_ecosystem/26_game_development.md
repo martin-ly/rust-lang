@@ -42,10 +42,10 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：游戏开发的编译错误](#十边界测试游戏开发的编译错误)
-    - [10.1 边界测试：ECS 系统的组件借用（Borrowing）冲突（编译错误）](LINK_PLACEHOLDER)
-    - [10.2 边界测试：图形渲染的生命周期（Lifetimes）与 `Send` 约束（编译错误）](LINK_PLACEHOLDER)
-    - [10.6 边界测试：游戏状态序列化的循环引用（Reference）（运行时（Runtime）栈溢出）](LINK_PLACEHOLDER)
-    - [10.5 边界测试：ECS 的 archetype 变更与迭代器（Iterator）失效（运行时 panic/UB）](LINK_PLACEHOLDER)
+    - [10.1 边界测试：ECS 系统的组件借用冲突（编译错误）](#101-边界测试ecs-系统的组件借用冲突编译错误)
+    - [10.2 边界测试：图形渲染的生命周期与 `Send` 约束（编译错误）](#102-边界测试图形渲染的生命周期与-send-约束编译错误)
+    - [10.6 边界测试：游戏状态序列化的循环引用（运行时栈溢出）](#106-边界测试游戏状态序列化的循环引用运行时栈溢出)
+    - [10.5 边界测试：ECS 的 archetype 变更与迭代器失效（运行时 panic/UB）](#105-边界测试ecs-的-archetype-变更与迭代器失效运行时-panicub)
     - [10.3 边界测试：Bevy ECS 的 system 参数顺序与冲突（编译错误）](#103-边界测试bevy-ecs-的-system-参数顺序与冲突编译错误)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -611,7 +611,7 @@ fn main() {
 // }
 ```
 
-> **修正**: Bevy 的 ECS 使用 **archetype** 存储：实体按 component 组合分组（如 `(Transform, Velocity)` 是一个 archetype）。添加/移除 component 导致实体**迁移**到新 archetype。在 `Query::iter_mut()` 期间修改 archetype：1) 当前迭代器（Iterator）引用的内存可能被移动 → use-after-free；2) Bevy 检测到后 panic（"cannot mutate entity during iteration"）。解决方案：1) 使用 `Commands` 延迟执行（`commands.entity(e).remove::<C>()` 在阶段末执行）；2) 使用 `Query::iter()` 收集实体 ID，迭代结束后再修改；3) 使用 `RemovedComponents` 事件监听。这与 Unity 的 ECS（类似 archetype 概念，但允许延迟修改）或 flecs（C ECS 库，类似限制）不同——Bevy 的安全模型强制延迟修改，避免内存不安全。这与 Rust 的所有权（Ownership）哲学一致：编译期无法检测的运行时问题，通过 API 设计（`Commands` 缓冲）避免。[来源: [Bevy ECS Documentation](LINK_PLACEHOLDER)] · [来源: [Bevy Query](LINK_PLACEHOLDER)]
+> **修正**: Bevy 的 ECS 使用 **archetype** 存储：实体按 component 组合分组（如 `(Transform, Velocity)` 是一个 archetype）。添加/移除 component 导致实体**迁移**到新 archetype。在 `Query::iter_mut()` 期间修改 archetype：1) 当前迭代器（Iterator）引用的内存可能被移动 → use-after-free；2) Bevy 检测到后 panic（"cannot mutate entity during iteration"）。解决方案：1) 使用 `Commands` 延迟执行（`commands.entity(e).remove::<C>()` 在阶段末执行）；2) 使用 `Query::iter()` 收集实体 ID，迭代结束后再修改；3) 使用 `RemovedComponents` 事件监听。这与 Unity 的 ECS（类似 archetype 概念，但允许延迟修改）或 flecs（C ECS 库，类似限制）不同——Bevy 的安全模型强制延迟修改，避免内存不安全。这与 Rust 的所有权（Ownership）哲学一致：编译期无法检测的运行时问题，通过 API 设计（`Commands` 缓冲）避免。来源: [Bevy ECS Documentation] · 来源: [Bevy Query]
 
 ### 10.3 边界测试：Bevy ECS 的 system 参数顺序与冲突（编译错误）
 

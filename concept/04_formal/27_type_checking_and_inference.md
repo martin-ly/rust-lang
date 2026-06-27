@@ -23,7 +23,7 @@
 
 ## 📑 目录
 
-- [rustc 类型检查与类型推断（Type Inference）](LINK_PLACEHOLDER)
+- rustc 类型检查与类型推断（Type Inference）
   - [📑 目录](#-目录)
   - [一、类型检查在编译流水线中的位置](#一类型检查在编译流水线中的位置)
   - [二、`Ty<'tcx>`：rustc 内部类型表示](#二tytcxrustc-内部类型表示)

@@ -341,7 +341,7 @@ cargo check -W rust-2024-compatibility
 **关键洞察**：
 Rust 2024 的核心主题是**显式化 Unsafe 边界**与**生命周期精确控制**。
 `unsafe extern` 块、`unsafe` 属性、`unsafe_op_in_unsafe_fn` 三重变化共同强化了 Rust 的安全契约——"unsafe 的边界必须肉眼可见"。
-而 RPIT `use<>` 则填补了 `impl Trait` 在生命周期表达上的长期模糊地带，与 [`../02_intermediate/02_generics.md`](LINK_PLACEHOLDER) 中的泛型（Generics）约束理论直接相关。
+而 RPIT `use<>` 则填补了 `impl Trait` 在生命周期表达上的长期模糊地带，与 `../02_intermediate/02_generics.md` 中的泛型（Generics）约束理论直接相关。
 
 ---
 

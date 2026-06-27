@@ -77,7 +77,7 @@
 | 过程宏（Procedural Macro） `derive` | 后期（AST） | AST | AST |
 | 过程宏（Procedural Macro） `proc_macro` | 后期（token 流） | token 流 | token 流 |
 
-**知识点**：声明宏（Declarative Macro）是 Rust 中最早的宏形式，适合简单的代码生成和 DSL。复杂场景（如 derive）应使用过程宏（Procedural Macro）。[→ 宏系统详解](LINK_PLACEHOLDER)
+**知识点**：声明宏（Declarative Macro）是 Rust 中最早的宏形式，适合简单的代码生成和 DSL。复杂场景（如 derive）应使用过程宏（Procedural Macro）。→ 宏系统详解
 
 </details>
 

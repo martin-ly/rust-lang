@@ -15,8 +15,8 @@
 > **层次定位**: L2 进阶概念 / Trait 子域
 > **A/S/P 标记**: **S** — Structure（心智模型）
 > **双维定位**: C×Ana — 分析 Orphan Rule 的设计意图
-> **前置依赖**: [L1 类型系统（Type System）](LINK_PLACEHOLDER) ·
-> [L1 所有权（Ownership）](LINK_PLACEHOLDER)
+> **前置依赖**: L1 类型系统（Type System） ·
+> [L1 所有权（Ownership）](../01_foundation/01_ownership.md)
 > **后置延伸**: [L3 并发](../03_advanced/01_concurrency.md) ·
 > [L4 类型论](../04_formal/02_type_theory.md) ·
 > [L6 设计模式](../06_ecosystem/02_patterns.md)
@@ -81,8 +81,8 @@
       - [定义与语法](#定义与语法)
       - [自动推导规则](#自动推导规则)
       - [`unsafe impl` 的例外情况](#unsafe-impl-的例外情况)
-    - [4.4 Trait + 泛型（Generics） ⟹ 零成本抽象（Zero-Cost Abstraction）](LINK_PLACEHOLDER)
-    - [4.5 定理一致性（Coherence）矩阵](LINK_PLACEHOLDER)
+    - [4.4 Trait + 泛型 ⟹ 零成本抽象](#44-trait--泛型--零成本抽象)
+    - [4.5 定理一致性矩阵](#45-定理一致性矩阵)
   - [五、示例与反例（Examples \& Counter-examples）](#五示例与反例examples--counter-examples)
     - [5.1 正确示例：Trait 定义与实现](#51-正确示例trait-定义与实现)
     - [5.2 正确示例：关联类型](#52-正确示例关联类型)
@@ -93,7 +93,7 @@
       - [语法与动机](#语法与动机)
       - [与 HKT（Higher-Kinded Types）的关系](#与-hkthigher-kinded-types的关系)
       - [Lending Iterator 示例](#lending-iterator-示例)
-      - [为什么 GATs 解决了关联类型不能泛型（Generics）的问题](#为什么-gats-解决了关联类型不能泛型的问题)
+      - [为什么 GATs 解决了关联类型不能泛型的问题](#为什么-gats-解决了关联类型不能泛型的问题)
     - [5.7 正确示例：Specialization（特化）的语义与边界](#57-正确示例specialization特化的语义与边界)
       - [问题与默认实现](#问题与默认实现)
       - [特化实现：为具体类型提供更优路径](#特化实现为具体类型提供更优路径)
@@ -101,14 +101,18 @@
       - [与 C++ 模板特化的对比](#与-c-模板特化的对比)
       - [编译错误：非法重叠](#编译错误非法重叠)
     - [5.8 C++ SFINAE / Concepts 与 Rust Trait Bounds 对照](#58-c-sfinae--concepts-与-rust-trait-bounds-对照)
-      - [5.8.1 SFINAE 工作原理](#581-sfinae-工作原理)
+      - [5.8.1 SFINAE 工作原理（`enable_if`、`void_t`、`decltype`）](#581-sfinae-工作原理enable_ifvoid_tdecltype)
+      - [C++ 示例](#c-示例)
+      - [Rust 的等价表达](#rust-的等价表达)
       - [5.8.2 SFINAE-friendly 设计与 Trait Bounds 错误信息对比](#582-sfinae-friendly-设计与-trait-bounds-错误信息对比)
-      - [5.8.3 C++ 模板特化 vs Rust Orphan Rule](#583-c-模板特化-vs-rust-orphan-rule)
-      - [5.8.4 C++ `constexpr` / 模板元编程 vs Rust `const fn`](#584-c-constexpr--模板元编程-vs-rust-const-fn)
+      - [Rust 的错误信息优势](#rust-的错误信息优势)
+      - [5.8.3 C++ 模板特化（全/偏） vs Rust Orphan Rule](#583-c-模板特化全偏-vs-rust-orphan-rule)
+      - [Rust 示例](#rust-示例)
+      - [5.8.4 C++ `constexpr` / 模板元编程 vs Rust `const fn` / 类型级状态机](#584-c-constexpr--模板元编程-vs-rust-const-fn--类型级状态机)
+      - [Rust 示例](#rust-示例-1)
       - [5.8.5 C++20 Concepts 与 Rust Trait Bounds 一一对照表](#585-c20-concepts-与-rust-trait-bounds-一一对照表)
-      - [5.8.6 C++20 标准 Concept 与 Rust 标准 Trait 的精细映射](#586-c20-标准-concept-与-rust-标准-trait-的精细映射)
-      - [5.8.7 Rust 的错误信息与编译时间优势](#587-rust-的错误信息与编译时间优势)
-      - [5.8.8 完整侧写：同一约束的 C++20 / Rust 双版本](#588-完整侧写同一约束的-c20--rust-双版本)
+      - [Rust 示例：实现 C++20 `Addable` Concept 的 Trait 版本](#rust-示例实现-c20-addable-concept-的-trait-版本)
+      - [一一对照表](#一一对照表)
   - [六、反命题与边界分析（Counter-proposition \& Boundary Analysis）](#六反命题与边界分析counter-proposition--boundary-analysis)
     - [6.1 反命题 1: "Trait 实现总是无冲突的"](#61-反命题-1-trait-实现总是无冲突的)
     - [6.2 反命题 2: "Blanket impl 覆盖所有类型"](#62-反命题-2-blanket-impl-覆盖所有类型)
@@ -134,7 +138,7 @@
       - [编译器如何处理 `impl Trait` 返回](#编译器如何处理-impl-trait-返回)
       - [限制：不能用于 trait object](#限制不能用于-trait-object)
       - [形式化语义：存在类型 vs 全称类型](#形式化语义存在类型-vs-全称类型)
-      - [高阶边界：RPITIT 与 HRTB / 生命周期（Lifetimes）参数](LINK_PLACEHOLDER)
+      - [高阶边界：RPITIT 与 HRTB / 生命周期参数](#高阶边界rpitit-与-hrtb--生命周期参数)
     - [补充章节：Const Trait 与 `~const` 实验特性](#补充章节const-trait-与-const-实验特性)
       - [问题背景：const fn 中的 Trait Bound 限制](#问题背景const-fn-中的-trait-bound-限制)
       - [`~const` 语法与 `#[const_trait]`](#const-语法与-const_trait)
@@ -143,7 +147,7 @@
       - [`impl const Trait` 与 `~const` 的区别](#impl-const-trait-与-const-的区别)
       - [替代方案：当前稳定 Rust 的 workaround](#替代方案当前稳定-rust-的-workaround)
     - [补充章节：`#[fundamental]` Attribute 与 Orphan Rule 例外](#补充章节fundamental-attribute-与-orphan-rule-例外)
-      - [目的：为智能指针（Smart Pointer）和引用（Reference）打开 impl 空间](LINK_PLACEHOLDER)
+      - [目的：为智能指针和引用打开 impl 空间](#目的为智能指针和引用打开-impl-空间)
       - [哪些类型是 fundamental](#哪些类型是-fundamental)
       - [为什么这些类型是 fundamental：对下游 crate 的"透明性"](#为什么这些类型是-fundamental对下游-crate-的透明性)
       - [与 `#[non_exhaustive]` 的对比](#与-non_exhaustive-的对比)
@@ -161,7 +165,7 @@
     - [12.4 迁移准备](#124-迁移准备)
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
   - [权威来源索引](#权威来源索引)
-    - [10.5 边界测试：trait 的孤儿规则（Orphan Rule）与 blanket impl 冲突（编译错误）](LINK_PLACEHOLDER)
+    - [10.5 边界测试：trait 的孤儿规则与 blanket impl 冲突（编译错误）](#105-边界测试trait-的孤儿规则与-blanket-impl-冲突编译错误)
     - [10.6 边界测试：关联常量与泛型参数的交互（编译错误）](#106-边界测试关联常量与泛型参数的交互编译错误)
   - [实践](#实践)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
@@ -1646,7 +1650,7 @@ fn notify<T: Summary>(item: &T) { ... }
 | 所有权与生命周期 | [01_foundation/01_ownership.md](../01_foundation/01_ownership.md) | Trait 方法签名的基础约束 |
 | 类型系统基础 | [01_foundation/04_type_system.md](../01_foundation/04_type_system.md) | Trait 的理论前提 |
 | 并发与 Send/Sync | [03_advanced/01_concurrency.md](../03_advanced/01_concurrency.md) | Auto Trait 的核心应用 |
-| 异步（Async）与 Future | [03_advanced/02_async.md](LINK_PLACEHOLDER) | 关联类型 Trait 的典型场景 |
+| 异步（Async）与 Future | 03_advanced/02_async.md | 关联类型 Trait 的典型场景 |
 | 形式化验证 | [04_formal/04_rustbelt.md](../04_formal/04_rustbelt.md) | Trait 系统的逻辑基础 |
 
 > **过渡到待补充方向**: 相关概念链接描绘了 Trait 在知识体系中的坐标，但任何文档都有演进空间。最后一节记录已识别的待补充项和优先级，为后续迭代提供明确的路线图。

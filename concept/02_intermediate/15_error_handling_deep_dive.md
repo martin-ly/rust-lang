@@ -24,7 +24,7 @@
 
 ## 📑 目录
 
-- [错误处理（Error Handling）深入：从 Result 到自定义错误生态](LINK_PLACEHOLDER)
+- 错误处理（Error Handling）深入：从 Result 到自定义错误生态
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 Result 与 Option 的组合代数](#11-result-与-option-的组合代数)
@@ -48,7 +48,7 @@
     - [10.2 边界测试：`Result` 嵌套与 `?` 的传播限制（编译错误）](#102-边界测试result-嵌套与--的传播限制编译错误)
     - [10.5 边界测试：`thiserror` 的 `#[from]` 与类型歧义（编译错误）](#105-边界测试thiserror-的-from-与类型歧义编译错误)
     - [10.6 边界测试：`eyre` 与 `anyhow` 的混用导致上下文丢失（编译错误）](#106-边界测试eyre-与-anyhow-的混用导致上下文丢失编译错误)
-    - [10.4 边界测试：错误类型的 `source()` 链与 `Display` 的循环（运行时（Runtime）栈溢出）](LINK_PLACEHOLDER)
+    - 10.4 边界测试：错误类型的 `source()` 链与 `Display` 的循环（运行时（Runtime）栈溢出）
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`?` 运算符可以自动进行错误类型转换，它依赖哪个 trait？（理解层）](#测验-1-运算符可以自动进行错误类型转换它依赖哪个-trait理解层)
     - [测验 2：`thiserror` 和 `anyhow` 在错误处理中各自适合什么场景？（理解层）](#测验-2thiserror-和-anyhow-在错误处理中各自适合什么场景理解层)

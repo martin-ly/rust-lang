@@ -329,7 +329,7 @@ async fn fixed_udp2(socket: &UdpSocket) {
 }
 ```
 
-> **修正**: Tokio 的 `UdpSocket` 严格区分"已连接"和"未连接"模式。`connect` 后必须使用 `send`/`recv`（无需地址），未连接时必须使用 `send_to`/`recv_from`（需显式地址）。这是操作系统 UDP socket API 的 Rust 类型安全封装——编译器通过 API 设计阻止非法调用，而非运行时（Runtime）返回错误。[来源: [Tokio Documentation](LINK_PLACEHOLDER)]
+> **修正**: Tokio 的 `UdpSocket` 严格区分"已连接"和"未连接"模式。`connect` 后必须使用 `send`/`recv`（无需地址），未连接时必须使用 `send_to`/`recv_from`（需显式地址）。这是操作系统 UDP socket API 的 Rust 类型安全封装——编译器通过 API 设计阻止非法调用，而非运行时（Runtime）返回错误。来源: [Tokio Documentation]
 
 ---
 > **过渡**: 网络协议：QUIC/HTTP-3 与 Rust 实现 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

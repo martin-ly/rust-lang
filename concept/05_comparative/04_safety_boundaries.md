@@ -517,7 +517,7 @@ graph LR
 |:---|:---|
 | 所有权泄漏边界 | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) §7.1 反命题与边界分析 |
 | 借用规则突破 | [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md) §7.1 反命题与边界分析 |
-| 生命周期（Lifetimes）陷阱 | [`../01_foundation/03_lifetimes.md`](LINK_PLACEHOLDER) §7.1 反命题与边界分析 |
+| 生命周期（Lifetimes）陷阱 | `../01_foundation/03_lifetimes.md` §7.1 反命题与边界分析 |
 | 类型系统绕过 | [`../01_foundation/04_type_system.md`](../01_foundation/04_type_system.md) §7.1 反命题与边界分析 |
 | Rc/RefCell 循环 | [`../02_intermediate/03_memory_management.md`](../02_intermediate/03_memory_management.md) §7.1 反命题与边界分析 |
 | 并发死锁 | [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) §7.1 反命题与边界分析 |

@@ -311,7 +311,7 @@ fn open_resource_fixed(url: &str) -> Result<Resource, Error> {
 }
 ```
 
-> **修正**: Redox OS 将所有资源抽象为 URL，通过 Scheme（类似于文件系统驱动）提供统一访问接口。Redox 的安全模型基于 capability——进程只能访问其拥有 capability 的资源。试图绕过 URL/Scheme 抽象直接操作底层资源违反设计原则，虽然在纯 Rust 代码中可能编译通过，但在 Redox 的运行时（Runtime）环境中会被 capability 系统拒绝。[来源: [Redox OS Documentation](LINK_PLACEHOLDER)]
+> **修正**: Redox OS 将所有资源抽象为 URL，通过 Scheme（类似于文件系统驱动）提供统一访问接口。Redox 的安全模型基于 capability——进程只能访问其拥有 capability 的资源。试图绕过 URL/Scheme 抽象直接操作底层资源违反设计原则，虽然在纯 Rust 代码中可能编译通过，但在 Redox 的运行时（Runtime）环境中会被 capability 系统拒绝。来源: [Redox OS Documentation]
 
 > [来源: [Redox OS Book](https://doc.redox-os.org/book/)]
 > [来源: [seL4 Reference Manual](https://sel4.systems/Info/Docs/seL4-manual-latest.pdf)]

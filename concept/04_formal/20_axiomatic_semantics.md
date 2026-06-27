@@ -40,7 +40,7 @@ Hoare 逻辑的核心公理包括：
 | **条件规则** | \(\frac{\{P \land B\}C_1\{Q\},\ \{P \land \neg B\}C_2\{Q\}}{\{P\}\text{if }B\text{ then }C_1\text{ else }C_2\{Q\}}\) | `if` / `match` 表达式 |
 | **循环规则** | \(\frac{\{I \land B\}C\{I\}}{\{I\}\text{while }B\text{ do }C\{I \land \neg B\}}\) | `while` / `loop`（需循环不变式） |
 
-> **关键洞察**: Hoare 逻辑的**赋值公理**假设变量是无别名的（aliasing-free）。在 Rust 中，这一假设由**所有权（Ownership）系统**在编译期保证——`&mut T` 的独占性确保了赋值操作的公理化不会受到别名干扰。这与 C/C++ 形成鲜明对比：C 中任意指针可能别名同一内存，导致赋值公理失效，需要更复杂的分离逻辑来恢复。[来源: [Hoare 1969](LINK_PLACEHOLDER)] · [来源: [Separation Logic — Reynolds 2002](LINK_PLACEHOLDER)]
+> **关键洞察**: Hoare 逻辑的**赋值公理**假设变量是无别名的（aliasing-free）。在 Rust 中，这一假设由**所有权（Ownership）系统**在编译期保证——`&mut T` 的独占性确保了赋值操作的公理化不会受到别名干扰。这与 C/C++ 形成鲜明对比：C 中任意指针可能别名同一内存，导致赋值公理失效，需要更复杂的分离逻辑来恢复。来源: [Hoare 1969] · 来源: [Separation Logic — Reynolds 2002]
 
 ### 1.2 最弱前置条件（Weakest Precondition）
 >
@@ -315,7 +315,7 @@ unsafe fn dereference_raw<T>(ptr: *const T) -> T {
 ### 4.1 Prusti：Viper 后端的契约推导
 >
 
-> **[Prusti — Viper-based Verification Tool](LINK_PLACEHOLDER)** Prusti 是 ETH Zurich 开发的 Rust 验证工具，基于 Viper 验证基础设施。它将 Rust 程序翻译为 Viper 中间语言，利用分离逻辑自动验证内存安全（Memory Safety）和用户提供的函数契约。
+> **Prusti — Viper-based Verification Tool** Prusti 是 ETH Zurich 开发的 Rust 验证工具，基于 Viper 验证基础设施。它将 Rust 程序翻译为 Viper 中间语言，利用分离逻辑自动验证内存安全（Memory Safety）和用户提供的函数契约。
 
 Prusti 的核心公理语义能力：
 
@@ -795,7 +795,7 @@ fn generic_trait_issue<T: PartialOrd + Copy>(x: T) -> T {
 // 无法直接处理高阶量化。
 ```
 
-> **修正**: 泛型（Generics）代码的公理验证需要**参数化规约**（parametric specifications）。当前工业工具的通用策略是**单态化**（monomorphization）——将泛型代码实例化为具体类型后分别验证。这与 Rust 编译器的策略一致（rustc 在 MIR 层进行单态化），但代价是验证时间随实例化数量线性增长。未来方向：利用**参数化多态的语义**（Reynolds' relational parametricity）一次性验证所有实例。[来源: [Reynolds 1983 — Types, Abstraction and Parametric Polymorphism](LINK_PLACEHOLDER)] · [来源: [Prusti GitHub Issues](LINK_PLACEHOLDER)]
+> **修正**: 泛型（Generics）代码的公理验证需要**参数化规约**（parametric specifications）。当前工业工具的通用策略是**单态化**（monomorphization）——将泛型代码实例化为具体类型后分别验证。这与 Rust 编译器的策略一致（rustc 在 MIR 层进行单态化），但代价是验证时间随实例化数量线性增长。未来方向：利用**参数化多态的语义**（Reynolds' relational parametricity）一次性验证所有实例。来源: [Reynolds 1983 — Types, Abstraction and Parametric Polymorphism] · 来源: [Prusti GitHub Issues]
 
 ### 10.5 边界测试：Kani 的路径爆炸与有界验证
 

@@ -11,9 +11,9 @@
 >
 > **权威来源**:
 >
-> - [Announcing Rust 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html)
+> - [Announcing Rust 1.96.0](https://releases.rs/docs/1.96.0/)
 > - [releases.rs — 1.96.0](https://releases.rs/docs/1.96.0/)
-> - [RFC 3550](https://rust-lang.github.io/rfcs/3550-rangext.html)
+> - [RFC 3550](https://github.com/rust-lang/rfcs/pull/3550)
 
 ---
 
@@ -162,4 +162,4 @@ my-crate = { version = "1.2", registry = "internal", git = "https://github.com/m
 
 ---
 
-> **权威来源**: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html), [releases.rs 1.96.0](https://releases.rs/docs/1.96.0/)
+> **权威来源**: [Rust 1.96.0 Release Notes](https://releases.rs/docs/1.96.0/), [releases.rs 1.96.0](https://releases.rs/docs/1.96.0/)

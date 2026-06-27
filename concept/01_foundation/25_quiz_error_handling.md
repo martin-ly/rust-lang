@@ -68,7 +68,7 @@ fn main() {
 | `unwrap()` | `-> T` | `Ok(v)` → `v`，`Err(_)` → **panic** |
 | `expect(msg)` | `-> T` | 同 `unwrap`，但带自定义 panic 消息 |
 
-**知识点**：`Result` 是 Rust 错误处理（Error Handling）的核心类型，强迫调用者显式处理错误路径。[→ 错误处理基础详解](LINK_PLACEHOLDER)
+**知识点**：`Result` 是 Rust 错误处理（Error Handling）的核心类型，强迫调用者显式处理错误路径。→ 错误处理基础详解
 
 </details>
 
@@ -492,7 +492,7 @@ let all_ok: Result<Vec<i32>, _> = vec![s1, s2, s3]
     .collect(); // Result 实现了 FromIterator
 ```
 
-**知识点**：`Result` 实现了 `FromIterator`，允许 `collect()` 将 `Vec<Result<T, E>>` 转换为 `Result<Vec<T>, E>`（第一个错误即整体失败）。[→ 迭代器（Iterator）详解](LINK_PLACEHOLDER)
+**知识点**：`Result` 实现了 `FromIterator`，允许 `collect()` 将 `Vec<Result<T, E>>` 转换为 `Result<Vec<T>, E>`（第一个错误即整体失败）。→ 迭代器（Iterator）详解
 
 </details>
 

@@ -13,7 +13,7 @@
 > **双维定位**: F×Und — 形式化理解程序执行的求值规则
 > **前置概念**: [Lambda Calculus](./14_lambda_calculus.md) · [Variable Model](../01_foundation/20_variable_model.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Ownership Formalization](./03_ownership_formal.md) · [Control Flow](../01_foundation/07_control_flow.md)
-> **主要来源**: [Pierce TAPL, §5-§11] · [Harper PFPL, Part III] · [Wadler 1984 — Why Calculating is Better than Scheming] · [Wikipedia: Evaluation strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)
+> **主要来源**: [Pierce — TAPL, §5-§11](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Harper — PFPL, Part III](https://www.cs.cmu.edu/~rwh/pfpl/) · [Wadler 1984 — Why Calculating is Better than Scheming](https://doi.org/10.1093/comjnl/27.2.115) · [Plotkin 1975 — Call-by-Name, Call-by-Value and the λ-Calculus](https://doi.org/10.1016/0304-3975(75)90017-1) · [Cambridge — OptComp 2025, Lambda Lifting & Evaluation Strategies](https://www.cl.cam.ac.uk/~na482/pdfs/) · [Nottingham — PL Semantics, Evaluation Strategies](https://www.cs.nott.ac.uk/~pszgmh/psem.html) · [Wikipedia: Evaluation strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)
 
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
@@ -37,6 +37,8 @@
 | **严格求值（Strict / Eager）** | 函数参数在函数体执行前求值 | C、C++、Rust、Java、Python |
 | **非严格求值（Non-strict / Lazy）** | 函数参数按需求值 | Haskell、Miranda、Lazy K |
 
+> 严格与非严格的区分是 λ 演算语义的基础之一。Pierce 在 *TAPL* §5 中将 CBV 与 CBN 作为两种核心归约策略讨论；Harper 在 *PFPL* 中则用结构化操作语义（SOS）给出其形式化定义。
+
 **关键差异示例**:
 
 ```rust,ignore
@@ -57,6 +59,8 @@ Call-by-Value (CBV)     → 参数求值后再传递（值拷贝/移动）
 Call-by-Name (CBN)      → 参数表达式直接代入函数体，每次使用都重新求值
 Call-by-Need (CBV-need) → CBN + 记忆化（第一次求值后缓存结果）
 Call-by-Reference (CBR) → 传递参数的地址/引用
+
+Plotkin (1975) 的经典论文证明了 CBV 与 CBN 可通过 continuation-passing style (CPS) 相互转换，并奠定了这两种策略在形式语义中的对偶地位。
 ```
 
 **形式化对比**:
@@ -74,7 +78,7 @@ Call-by-Reference (CBR) → 传递参数的地址/引用
 
 ### 3.1 默认策略：Call-by-Value + 严格求值
 
-Rust 默认采用**严格 Call-by-Value**：函数参数在调用前求值，然后以值的形式传递。
+Rust 默认采用**严格 Call-by-Value**：函数参数在调用前求值，然后以值的形式传递（Rust Reference: [Moved and Copied Types](https://doc.rust-lang.org/reference/expressions.html#moved-and-copied-types)）。
 
 ```rust
 fn call_by_value(x: i32) {
@@ -574,22 +578,20 @@ Rust 的惰性是局部的（仅在迭代器适配器链中），最终必须通
 严格求值的求值时机和顺序是显式的（调用时立即执行），便于分析时间/空间复杂度。惰性求值可能因延迟链过长导致空间泄漏（space leak），性能分析更困难。
 </details>
 
-## 认知路径
+## 权威来源对照
 
-> **认知路径**: 从 L0 基础概念出发，经由本节的 **求值策略：Call-by-Value, Call-by-Name, Call-by-Need** 核心原理，通向 L2 进阶模式与 L3 工程实践。
+| 来源 | 与本节对应的核心论点 |
+|:---|:---|
+| [Pierce — TAPL, §5-§11](https://www.cis.upenn.edu/~bcpierce/tapl/) | 类型化 λ 演算中的求值策略、类型安全与归约语义 |
+| [Harper — PFPL, Part III](https://www.cs.cmu.edu/~rwh/pfpl/) | 结构化操作语义与求值上下文的形式化定义 |
+| [Plotkin 1975 — Call-by-Name, Call-by-Value and the λ-Calculus](https://doi.org/10.1016/0304-3975(75)90017-1) | CPS 转换与两种求值策略的等价性 |
+| [Wadler 1984 — Why Calculating is Better than Scheming](https://doi.org/10.1093/comjnl/27.2.115) | 惰性求值与等式推理的教学对比 |
+| [Cambridge — OptComp 2025, Lambda Lifting & Evaluation Strategies](https://www.cl.cam.ac.uk/~na482/pdfs/) | 编译优化视角下的求值顺序与 lambda lifting |
+| [Nottingham — PL Semantics, Evaluation Strategies](https://www.cs.nott.ac.uk/~pszgmh/psem.html) | 函数式语言语义课程中的求值策略谱系 |
+| [Wikipedia: Evaluation strategy](https://en.wikipedia.org/wiki/Evaluation_strategy) | 求值策略术语与跨语言速查 |
 
-### 核心推理链
+## 总结
 
-| 定理 | 前提 | 结论 | 置信度 |
-|:---|:---|:---|:---|
-| 求值策略：Call-by-Value, Call-by-Name, Call-by-Need 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 求值策略：Call-by-Value, Call-by-Name, Call-by-Need 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
-| 求值策略：Call-by-Value, Call-by-Name, Call-by-Need 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
-
-> **过渡**: 掌握 求值策略：Call-by-Value, Call-by-Name, Call-by-Need 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
-> **过渡**: 在实践中应用 求值策略：Call-by-Value, Call-by-Name, Call-by-Need 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-> **过渡**: 求值策略：Call-by-Value, Call-by-Name, Call-by-Need 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
-
-### 反命题与边界
-
-> **反命题**: "求值策略：Call-by-Value, Call-by-Name, Call-by-Need 在所有场景下都是最佳选择" —— 错误。需要根据具体上下文权衡性能、可读性与安全性，某些场景下显式替代方案可能更优。
+- **L1**：求值策略决定表达式何时、如何被计算；Rust 默认严格 Call-by-Value，`Copy` 类型按位拷贝、`!Copy` 类型转移所有权。
+- **L2**：Rust 通过显式借用 `&T`/`&mut T` 提供受限的 Call-by-Reference；`&&`/`||` 短路、`Future` 惰性构造、`lazy_static` 等是非严格求值的局部工程表达。
+- **L3**：Rust 的求值策略选择是性能可预测性与表达力之间的权衡；理解 CBV/CBN/CPS 对形式化验证（如 RustBelt、Kani）和编译优化都有直接影响。

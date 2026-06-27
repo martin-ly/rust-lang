@@ -14,7 +14,7 @@
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Eva — 评价密码学实现的安全性
-> **前置依赖**: [Unsafe Rust](LINK_PLACEHOLDER) · [Trait](LINK_PLACEHOLDER) · [类型系统（Type System）](LINK_PLACEHOLDER) · [安全实践](LINK_PLACEHOLDER)
+> **前置依赖**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Trait](../02_intermediate/01_traits.md) · [类型系统（Type System）](../01_foundation/04_type_system.md) · 安全实践
 > **后置延伸**: [区块链与智能合约安全](./06_blockchain.md) · [网络协议](./38_network_protocols.md) · [TLS/QUIC](38_network_protocols.md)
 
 >

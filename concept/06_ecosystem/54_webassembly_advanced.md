@@ -749,8 +749,8 @@ fn main() {
 - [跨编译](./17_cross_compilation.md) — 目标三元组、条件编译与平台抽象
 - [FFI](../03_advanced/05_rust_ffi.md) — 跨语言边界、ABI 兼容与 unsafe 封装
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — 原始指针（Raw Pointer）、FFI 边界与 UB 规避
-- [并发编程](LINK_PLACEHOLDER) — Send/Sync、线程模型与异步（Async）运行时
-- [类型系统（Type System）](LINK_PLACEHOLDER) — 泛型（Generics）、Trait 与零成本抽象（Zero-Cost Abstraction）
+- [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、线程模型与异步（Async）运行时
+- [类型系统（Type System）](../01_foundation/04_type_system.md) — 泛型（Generics）、Trait 与零成本抽象（Zero-Cost Abstraction）
 
 ---
 

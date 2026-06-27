@@ -12,7 +12,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价 Rust 形式化验证工具的技术能力与适用边界
-> **前置依赖**: [类型系统（Type System）](LINK_PLACEHOLDER) · [Unsafe Rust](LINK_PLACEHOLDER) · [形式化验证](LINK_PLACEHOLDER) · [生命周期（Lifetimes）](LINK_PLACEHOLDER)
+> **前置依赖**: [类型系统（Type System）](../01_foundation/04_type_system.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · 形式化验证 · [生命周期（Lifetimes）](../01_foundation/03_lifetimes.md)
 > **后置延伸**: [编译器内部原理](./45_compiler_internals.md) · [安全与密码学](./43_security_cryptography.md) · [嵌入式系统](./22_embedded_systems.md)
 >
 > **来源**: [Kani](https://model-checking.github.io/kani/) · [Creusot](https://creusot.rs/) · [Verus](https://verus-lang.github.io/verus/)
@@ -635,7 +635,7 @@ Iris 分离逻辑公式
 
 ### 7.2 RustBelt 验证框架
 
-> **[RustBelt](LINK_PLACEHOLDER)** 是 MPI-SWS 的奠基性工作（POPL 2018），首次在数学上证明了 Rust 类型系统的**语义正确性**：如果程序通过借用检查器，则它确实是内存安全（Memory Safety）的。RustBelt 使用 **Iris** 分离逻辑在 Coq 中形式化了 Rust 核心语言（包括生命周期、借用（Borrowing）、共享/独占引用（Reference））。[来源: [RustBelt Paper — POPL 2018](LINK_PLACEHOLDER)]
+> **RustBelt** 是 MPI-SWS 的奠基性工作（POPL 2018），首次在数学上证明了 Rust 类型系统的**语义正确性**：如果程序通过借用检查器，则它确实是内存安全（Memory Safety）的。RustBelt 使用 **Iris** 分离逻辑在 Coq 中形式化了 Rust 核心语言（包括生命周期、借用（Borrowing）、共享/独占引用（Reference））。来源: [RustBelt Paper — POPL 2018]
 
 ```text
 RustBelt 的核心定理:
@@ -840,7 +840,7 @@ fn caller() {
 
 ## 相关概念文件
 
-- [编译器内部原理](LINK_PLACEHOLDER) — rustc 管线、MIR、借用（Borrowing）检查器
+- 编译器内部原理 — rustc 管线、MIR、借用（Borrowing）检查器
 - [安全与密码学](./43_security_cryptography.md) — 侧信道防护、常量时间操作
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — Miri、UB、别名模型
 - [形式化验证](../04_formal/05_verification_toolchain.md) — 定理证明器、SMT、分离逻辑

@@ -436,7 +436,7 @@ Dropping a
 
 **注意**：不能显式调用 `value.drop()`，必须通过 `drop(value)` 函数或让值离开作用域。
 
-**知识点**：`Drop` 是 Rust RAII（Resource Acquisition Is Initialization）模式的核心。资源释放与生命周期（Lifetimes）绑定，消除了 C 的手动释放和 Java 的 GC 不确定性。[→ 内存管理详解](LINK_PLACEHOLDER)
+**知识点**：`Drop` 是 Rust RAII（Resource Acquisition Is Initialization）模式的核心。资源释放与生命周期（Lifetimes）绑定，消除了 C 的手动释放和 Java 的 GC 不确定性。→ 内存管理详解
 
 </details>
 

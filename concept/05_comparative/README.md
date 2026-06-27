@@ -134,7 +134,7 @@ L1-L4 知识                L5 综合                L6-L7 决策
 |:---|:---|:---|:---|:---|:---|
 | [01_rust_vs_cpp.md](./01_rust_vs_cpp.md) | Rust vs C++ | 形式系统模型 vs 机制工程模型、多维矩阵、决策树、AI时代分析 | ✅ v1.0（原 01.md） | L1 Ownership, L3 Unsafe, L4 Linear Logic | 系统编程选型、C++ 迁移 |
 | [02_rust_vs_go.md](./02_rust_vs_go.md) | Rust vs Go | CSP vs 所有权并发、服务编排语义、确定性对比 | ✅ v1.0 | L3 Concurrency, L1 Ownership | 微服务选型、云原生架构 |
-| [03_paradigm_matrix.md](LINK_PLACEHOLDER) | 范式矩阵 | 多语言形式化对比、类型系统（Type System）谱系、设计哲学 | ✅ v1.0 | L1-L4 所有概念 | 语言教学、研究定位 |
+| 03_paradigm_matrix.md | 范式矩阵 | 多语言形式化对比、类型系统（Type System）谱系、设计哲学 | ✅ v1.0 | L1-L4 所有概念 | 语言教学、研究定位 |
 | [06_rust_vs_java.md](./06_rust_vs_java.md) | Rust vs Java | 所有权 vs GC、并发模型、运行时（Runtime）架构、场景矩阵 | ✅ v1.0 | L1 Ownership, L3 Concurrency | JVM 迁移、企业系统选型 |
 | [07_rust_vs_python.md](./07_rust_vs_python.md) | Rust vs Python | 静态 vs 动态类型、所有权 vs GC、 fearless vs GIL、元编程 | ✅ v1.0 | L1 Ownership, L1 Type System | 性能瓶颈、混合架构选型 |
 | [08_rust_vs_javascript.md](./08_rust_vs_javascript.md) | Rust vs JavaScript | 编译 vs 解释、所有权 vs GC、Future vs Promise、WASM | ✅ v1.0 | L1 Ownership, L3 Async | Web 性能、WASM 集成 |
@@ -145,7 +145,7 @@ L1-L4 知识                L5 综合                L6-L7 决策
 ### 补充文件索引
 
 - [Rust 安全保证的边界条件全景（Safety Boundary Panorama）](./04_safety_boundaries.md)
-- [Rust 执行模型同构性矩阵：同步 · 异步（Async） · 并发 · 并行](LINK_PLACEHOLDER)
+- Rust 执行模型同构性矩阵：同步 · 异步（Async） · 并发 · 并行
 - [C++ vs Rust：构造、运算符、RTTI、友元](./16_cpp_rust_surface_features.md)
 - [Rust vs Ruby：性能与表达力的两极](./08_rust_vs_ruby.md)
 - [Rust vs Swift：现代系统语言的两种路径](./09_rust_vs_swift.md)

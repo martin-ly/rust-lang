@@ -15,7 +15,7 @@
 > **双维定位**: P×Cre — 设计类型安全的 REST/GraphQL/gRPC API
 > **前置依赖**: [Async/Await](../03_advanced/02_async.md) ·
 > [Trait](../02_intermediate/01_traits.md) ·
-> [错误处理（Error Handling）](LINK_PLACEHOLDER) ·
+> [错误处理（Error Handling）](../01_foundation/10_error_handling_basics.md) ·
 > [架构设计模式](./35_architecture_patterns.md)
 > **后置延伸**: [微服务架构模式](./31_microservice_patterns.md) ·
 > [事件驱动架构](./32_event_driven_architecture.md) ·

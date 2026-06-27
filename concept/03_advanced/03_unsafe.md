@@ -55,7 +55,7 @@
     - [2.2 UB（未定义行为）分类矩阵](#22-ub未定义行为分类矩阵)
     - [2.2b Unsafe Code Guidelines 完整 UB 分类](#22b-unsafe-code-guidelines-完整-ub-分类)
       - [内存访问类 UB](#内存访问类-ub)
-      - [类型系统（Type System）类 UB](LINK_PLACEHOLDER)
+      - [类型系统类 UB](#类型系统类-ub)
       - [并发与同步类 UB](#并发与同步类-ub)
       - [其他 UB](#其他-ub)
       - [UB 检测的不可判定性边界](#ub-检测的不可判定性边界)
@@ -80,7 +80,7 @@
     - [6.3 反命题决策树](#63-反命题决策树)
       - [反命题 1: "unsafe 块内没有安全检查"](#反命题-1-unsafe-块内没有安全检查)
       - [反命题 2: "只要用了 unsafe 就会触发 UB"](#反命题-2-只要用了-unsafe-就会触发-ub)
-      - [反命题 3: "raw pointer 和引用（Reference）等价"](LINK_PLACEHOLDER)
+      - [反命题 3: "raw pointer 和引用等价"](#反命题-3-raw-pointer-和引用等价)
       - [反命题 4: "FFI 调用总是安全的"](#反命题-4-ffi-调用总是安全的)
   - [七、定理推理链（Theorem Chain）](#七定理推理链theorem-chain)
     - [7.1 安全抽象定理](#71-安全抽象定理)
@@ -89,13 +89,13 @@
       - [Miri 检测的核心算法](#miri-检测的核心算法)
       - [Miri 与编译器优化的关系](#miri-与编译器优化的关系)
       - [MIRIFLAGS 完整选项速查](#miriflags-完整选项速查)
-    - [7.3 定理一致性（Coherence）矩阵（⟹ 推理链）](#73-定理一致性矩阵-推理链)
+    - [7.3 定理一致性矩阵（⟹ 推理链）](#73-定理一致性矩阵-推理链)
   - [八、示例与反例（Examples \& Counter-examples）](#八示例与反例examples--counter-examples)
     - [8.1 正确示例：安全封装裸指针（Vec 简化版）](#81-正确示例安全封装裸指针vec-简化版)
     - [8.2 正确示例：手动实现 Send/Sync](#82-正确示例手动实现-sendsync)
     - [8.3 反例：悬垂裸指针（UB）](#83-反例悬垂裸指针ub)
     - [8.4 反例：transmute 滥用（UB）](#84-反例transmute-滥用ub)
-    - [8.5 反例：无效枚举（Enum）值（UB）](LINK_PLACEHOLDER)
+    - [8.5 反例：无效枚举值（UB）](#85-反例无效枚举值ub)
     - [8.6 边界极限测试](#86-边界极限测试)
       - [命题: "unsafe 代码可以安全地封装"](#命题-unsafe-代码可以安全地封装)
       - [命题: "Miri 可以检测所有 UB"](#命题-miri-可以检测所有-ub)
@@ -116,7 +116,7 @@
       - [反例：Miri 无法检测的逻辑错误](#反例miri-无法检测的逻辑错误)
       - [Miri 常用标志详解](#miri-常用标志详解)
       - [Miri 与 Valgrind / ASan / TSan 的对比](#miri-与-valgrind--asan--tsan-的对比)
-    - [补充章节：`std::ptr::read/write` vs `*ptr` 解引用（Reference）的语义差异](#补充章节stdptrreadwrite-vs-ptr-解引用的语义差异)
+    - [补充章节：`std::ptr::read/write` vs `*ptr` 解引用的语义差异](#补充章节stdptrreadwrite-vs-ptr-解引用的语义差异)
       - [语义精确定义](#语义精确定义)
         - [`std::ptr::read<T>(src: *const T) -> T`](#stdptrreadtsrc-const-t---t)
         - [`std::ptr::write<T>(dst: *mut T, src: T)`](#stdptrwritetdst-mut-t-src-t)
@@ -150,7 +150,7 @@
   - [九、Unsafe/FFI 2024：权限分离与显式契约](#九unsafeffi-2024权限分离与显式契约)
     - [9.1 问题：权限的混淆](#91-问题权限的混淆)
     - [9.2 2024 Edition 的权限分离](#92-2024-edition-的权限分离)
-    - [9.3 形式化模型：权限的模块（Module）化](LINK_PLACEHOLDER)
+    - [9.3 形式化模型：权限的模块化](#93-形式化模型权限的模块化)
     - [9.4 与 `unsafe extern` + `safe` 的关系](#94-与-unsafe-extern--safe-的关系)
     - [9.5 `unsafe extern` blocks：FFI 边界的显式 unsafe（Rust 2024）](#95-unsafe-extern-blocksffi-边界的显式-unsaferust-2024)
       - [9.5.1 问题：谁为 FFI 签名负责？](#951-问题谁为-ffi-签名负责)
@@ -174,10 +174,10 @@
       - [Tree Borrows（PLDI 2023）](#tree-borrowspldi-2023)
       - [Provenance（PLDI 2022）](#provenancepldi-2022)
     - [15.5 跨语言内存模型对比矩阵](#155-跨语言内存模型对比矩阵)
-  - [十六、边界测试：Unsafe 代码的编译错误与运行时（Runtime）灾难](LINK_PLACEHOLDER)
+  - [十六、边界测试：Unsafe 代码的编译错误与运行时灾难](#十六边界测试unsafe-代码的编译错误与运行时灾难)
     - [16.1 边界测试：裸指针解引用前的空检查（编译错误）](#161-边界测试裸指针解引用前的空检查编译错误)
     - [16.2 边界测试：将 \&T 转换为 \&mut T（编译错误）](#162-边界测试将-t-转换为-mut-t编译错误)
-    - [16.3 边界测试：无效 UTF-8 的 str::from\_utf8\_unchecked（运行时（Runtime） UB）](#163-边界测试无效-utf-8-的-strfrom_utf8_unchecked运行时-ub)
+    - [16.3 边界测试：无效 UTF-8 的 str::from\_utf8\_unchecked（运行时 UB）](#163-边界测试无效-utf-8-的-strfrom_utf8_unchecked运行时-ub)
     - [16.4 边界测试：通过 `&T` 获取 `&mut T`（编译错误）](#164-边界测试通过-t-获取-mut-t编译错误)
     - [16.5 边界测试：裸指针算术越界（运行时 UB）](#165-边界测试裸指针算术越界运行时-ub)
     - [16.6 边界测试：`std::mem::transmute` 类型大小不匹配（编译错误）](#166-边界测试stdmemtransmute-类型大小不匹配编译错误)
@@ -1059,7 +1059,7 @@ Miri 解释执行循环:
 
 > **[Rustonomicon](https://doc.rust-lang.org/nomicon/)** 一致性说明: unsafe 领域的定理不依赖 L4 形式化——它们处于证明范围之外。Miri 提供动态检测作为近似验证手段。RustBelt 正在扩展以覆盖部分 unsafe 模式。✅ 已验证
 > **[🔍 待验证]** RustBelt 对 unsafe 的完整形式化覆盖仍在活跃研究中，目前仅覆盖部分常见模式（如 Vec、Rc、Arc 等）。
-> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](LINK_PLACEHOLDER) §4.1 "内存安全（Memory Safety）完备性" · §6.1 "形式化保证失效条件"
+> **跨层映射**: 本文件定理 ↔ `00_meta/inter_layer_map.md` §4.1 "内存安全（Memory Safety）完备性" · §6.1 "形式化保证失效条件"
 > **新增跨层映射**: `L3::别名模型` ↔ [`L1::所有权`](../01_foundation/01_ownership.md) 运行时动态验证 · [`L4::RustBelt`](../04_formal/04_rustbelt.md) 操作语义实例与逻辑关系
 
 ---
@@ -3254,7 +3254,7 @@ fn main() {
 | **Destructors / Drop** | [destructors](https://doc.rust-lang.org/nomicon/destructors.html) | § UB 案例 8 不恰当的 Drop |
 | **Exception Safety** | [exception-safety](https://doc.rust-lang.org/nomicon/exception-safety.html) | [EDGE_CASES_AND_SPECIAL_CASES](../../docs/02_reference/02_edge_cases_and_special_cases.md) |
 | **Concurrency / Send and Sync** | [send-and-sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) | § 示例 3 实现 Send/Sync、[threads_concurrency_cheatsheet](../../docs/02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) |
-| **Implementing Vec** | [vec](LINK_PLACEHOLDER) | § 示例 1 原始指针（Raw Pointer）、§ 示例 6 自定义智能指针（Smart Pointer） |
+| **Implementing Vec** | vec | § 示例 1 原始指针（Raw Pointer）、§ 示例 6 自定义智能指针（Smart Pointer） |
 | **Implementing Arc** | [arc](https://doc.rust-lang.org/nomicon/arc-mutex/arc.html) | [smart_pointers_cheatsheet](../../docs/02_reference/quick_reference/02_smart_pointers_cheatsheet.md) |
 | **FFI** | [ffi](https://doc.rust-lang.org/nomicon/ffi.html) | § 示例 2 调用外部函数 |
 

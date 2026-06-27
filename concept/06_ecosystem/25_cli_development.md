@@ -47,9 +47,9 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：CLI 开发的编译错误](#十边界测试cli-开发的编译错误)
-    - [10.1 边界测试：`clap` 派生宏（Macro）的字段类型约束（编译错误）](LINK_PLACEHOLDER)
-    - [10.2 边界测试：信号处理与异步（Async）代码的交互（编译错误）](LINK_PLACEHOLDER)
-    - [10.6 边界测试：终端颜色检测与 `NO_COLOR` 标准（运行时（Runtime）显示问题）](LINK_PLACEHOLDER)
+    - [10.1 边界测试：`clap` 派生宏的字段类型约束（编译错误）](#101-边界测试clap-派生宏的字段类型约束编译错误)
+    - [10.2 边界测试：信号处理与异步代码的交互（编译错误）](#102-边界测试信号处理与异步代码的交互编译错误)
+    - [10.6 边界测试：终端颜色检测与 `NO_COLOR` 标准（运行时显示问题）](#106-边界测试终端颜色检测与-no_color-标准运行时显示问题)
     - [10.7 边界测试：ANSI 颜色代码与 Windows 旧版控制台兼容性问题（运行时显示异常）](#107-边界测试ansi-颜色代码与-windows-旧版控制台兼容性问题运行时显示异常)
     - [10.3 边界测试：`clap` 的 derive 宏与字段类型不匹配（编译错误）](#103-边界测试clap-的-derive-宏与字段类型不匹配编译错误)
     - [补充定理链](#补充定理链)
@@ -697,7 +697,7 @@ fn main() {
 }
 ```
 
-> **修正**: `clap` 的 derive 宏（Macro）（`#[derive(Parser)]`）自动生成命令行解析器。类型安全：1) `u16` 字段只接受有效整数，`--port abc` → 自动错误消息；2) `bool` 字段是 flag（`--verbose` 存在为 true）；3) `Option<T>` 表示可选参数；4) `Vec<T>` 表示重复参数。`clap` v4 的改进：1) 更清晰的错误消息；2) 原生支持 `--help` 生成；3) `ValueEnum` derive 支持枚举（Enum）参数。其他 CLI crate：`structopt`（已合并到 clap v3）、`argh`（Google 的轻量替代）、`bpaf`（组合子风格）。这与 Python 的 `argparse` 或 Go 的 `flag` 包类似——Rust 的 `clap` 通过类型系统（Type System）在编译期保证参数解析的正确性。[来源: [clap Documentation](LINK_PLACEHOLDER)] · [来源: [Rust CLI Guidelines](LINK_PLACEHOLDER)]
+> **修正**: `clap` 的 derive 宏（Macro）（`#[derive(Parser)]`）自动生成命令行解析器。类型安全：1) `u16` 字段只接受有效整数，`--port abc` → 自动错误消息；2) `bool` 字段是 flag（`--verbose` 存在为 true）；3) `Option<T>` 表示可选参数；4) `Vec<T>` 表示重复参数。`clap` v4 的改进：1) 更清晰的错误消息；2) 原生支持 `--help` 生成；3) `ValueEnum` derive 支持枚举（Enum）参数。其他 CLI crate：`structopt`（已合并到 clap v3）、`argh`（Google 的轻量替代）、`bpaf`（组合子风格）。这与 Python 的 `argparse` 或 Go 的 `flag` 包类似——Rust 的 `clap` 通过类型系统（Type System）在编译期保证参数解析的正确性。来源: [clap Documentation] · 来源: [Rust CLI Guidelines]
 > **过渡**: Rust CLI 开发生态 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust CLI 开发生态 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust CLI 开发生态 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

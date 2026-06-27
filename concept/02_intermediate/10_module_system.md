@@ -23,7 +23,7 @@
 
 ## 📑 目录
 
-- [模块（Module）系统：Rust 的代码组织与可见性规则](LINK_PLACEHOLDER)
+- 模块（Module）系统：Rust 的代码组织与可见性规则
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 Crate、Module、Package 的三层结构](#11-cratemodulepackage-的三层结构)
@@ -96,7 +96,7 @@ graph TB
 
 > **认知功能**: 此图展示 Rust **代码组织的三层结构**。
 > Package 是 Cargo 的构建单元（对应一个 Cargo.toml），Crate 是编译单元（一个 lib.rs 或 main.rs），Module 是命名空间单元（文件或内联模块）。
-> [来源: [TRPL](https://doc.rust-lang.org/book/ch07-00-packages-crates-and-modules.html)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)]
 > **使用建议**: 理解这三者的区别是掌握 Rust 模块系统的基础——Package 管理依赖，Crate 管理编译，Module 管理命名空间。
 > **关键洞察**: 一个 Package 可包含**多个 Crate**（1 个 lib + 多个 bin + tests + examples + benches），但每个 Crate 是独立编译的单元。
 > [来源: [TRPL Ch7 — Packages and Crates](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html)]
@@ -434,12 +434,12 @@ fn main() {
 ## 相关概念文件
 
 - [Cargo Toolchain](../06_ecosystem/01_toolchain.md) — Cargo 与 Workspace
-- [Macros](LINK_PLACEHOLDER) — 宏（Macro）与模块交互
+- Macros — 宏（Macro）与模块交互
 - [Traits](./01_traits.md) — Trait 的可见性设计
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-00-packages-crates-and-modules.html), [Cargo Book](https://doc.rust-lang.org/cargo/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html), [Cargo Book](https://doc.rust-lang.org/cargo/)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 

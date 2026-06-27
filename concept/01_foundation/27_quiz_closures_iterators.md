@@ -188,7 +188,7 @@ move |y| x + y
 - 闭包需要比捕获变量存活更久（如 `thread::spawn`、`tokio::spawn`）
 - 强制闭包获取所有权（避免生命周期（Lifetimes）问题）
 
-**知识点**：`move` 闭包是异步（Async）编程和多线程中的常见模式。它将环境变量的所有权转移到闭包内部，解决生命周期（Lifetimes）不匹配问题。[→ 闭包详解](LINK_PLACEHOLDER)
+**知识点**：`move` 闭包是异步（Async）编程和多线程中的常见模式。它将环境变量的所有权转移到闭包内部，解决生命周期（Lifetimes）不匹配问题。→ 闭包详解
 
 </details>
 

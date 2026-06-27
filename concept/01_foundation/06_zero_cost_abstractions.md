@@ -25,16 +25,16 @@
 
 ## 📑 目录
 
-- [零成本抽象（Zero-Cost Abstraction）：Rust 的性能哲学](LINK_PLACEHOLDER)
+- [零成本抽象（Zero-Cost Abstraction）：Rust 的性能哲学](06_zero_cost_abstractions.md)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 零成本抽象（Zero-Cost Abstraction）的定义](#11-零成本抽象的定义)
-    - [1.2 单态化（Monomorphization）：泛型（Generics）的零成本实现](LINK_PLACEHOLDER)
-    - [1.3 迭代器（Iterator）与循环消除](LINK_PLACEHOLDER)
+    - 1.2 单态化（Monomorphization）：泛型（Generics）的零成本实现
+    - 1.3 迭代器（Iterator）与循环消除
   - [二、技术细节](#二技术细节)
     - [2.1 编译期优化管道](#21-编译期优化管道)
-    - [2.2 Trait 对象的运行时（Runtime）开销](LINK_PLACEHOLDER)
-    - [2.3 闭包（Closures）的零成本实现](LINK_PLACEHOLDER)
+    - 2.2 Trait 对象的运行时（Runtime）开销
+    - 2.3 闭包（Closures）的零成本实现
   - [三、抽象层次分析](#三抽象层次分析)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -51,7 +51,7 @@
     - [10.3 边界测试：泛型单态化导致的代码膨胀（编译错误/链接错误）](#103-边界测试泛型单态化导致的代码膨胀编译错误链接错误)
     - [10.4 边界测试：`async` 状态机的 `Pin` 开销（编译错误/运行时（Runtime）行为）](#104-边界测试async-状态机的-pin-开销编译错误运行时行为)
     - [10.3 边界测试：零大小类型的布局陷阱（编译错误/UB）](#103-边界测试零大小类型的布局陷阱编译错误ub)
-    - [10.3 边界测试：所有权（Ownership）移动后的再次使用](LINK_PLACEHOLDER)
+    - 10.3 边界测试：所有权（Ownership）移动后的再次使用
   - [实践](#实践)
   - [参考来源](#参考来源)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)

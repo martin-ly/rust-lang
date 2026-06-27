@@ -14,7 +14,7 @@
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计微服务架构
 > **定位**: 从系统架构视角梳理 Rust 在微服务场景中的核心模式——服务发现、熔断、Saga、CQRS、事件溯源——揭示 Rust 的类型安全与零成本抽象（Zero-Cost Abstraction）如何支撑高可靠分布式系统。
-> **前置概念**: [Async](LINK_PLACEHOLDER) · [分布式系统](LINK_PLACEHOLDER) · [错误处理（Error Handling）](LINK_PLACEHOLDER)
+> **前置概念**: [Async](../03_advanced/02_async.md) · 分布式系统 · [错误处理（Error Handling）](../01_foundation/10_error_handling_basics.md)
 > **后置概念**: [事件驱动架构](./32_event_driven_architecture.md) · [云原生](./24_cloud_native.md)
 >
 > **来源**: [tower](https://docs.rs/tower/) · [tonic](https://docs.rs/tonic/) · [failsafe](https://docs.rs/failsafe/)
@@ -48,9 +48,9 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：微服务模式的编译错误](#十边界测试微服务模式的编译错误)
-    - [10.1 边界测试：配置注入的生命周期（Lifetimes）（编译错误）](LINK_PLACEHOLDER)
+    - [10.1 边界测试：配置注入的生命周期（编译错误）](#101-边界测试配置注入的生命周期编译错误)
     - [10.2 边界测试：gRPC trait 对象与序列化（编译错误）](#102-边界测试grpc-trait-对象与序列化编译错误)
-    - [10.5 边界测试：断路器模式的半开状态竞态条件（运行时（Runtime）雪崩）](LINK_PLACEHOLDER)
+    - [10.5 边界测试：断路器模式的半开状态竞态条件（运行时雪崩）](#105-边界测试断路器模式的半开状态竞态条件运行时雪崩)
     - [10.3 边界测试：断路器模式的半开状态竞态条件（运行时雪崩）](#103-边界测试断路器模式的半开状态竞态条件运行时雪崩)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -880,7 +880,7 @@ struct CircuitBreaker {
 fn main() {}
 ```
 
-> **修正**: 断路器（Circuit Breaker）的三个状态：1) **Closed**：正常服务，记录失败率；2) **Open**：失败率超阈值，快速失败，避免雪崩；3) **HalfOpen**：超时后允许**单个**请求试探，成功则关闭，失败则重新打开。关键：**半开状态的并发控制**。若半开时多个请求通过：1) 服务仍可能过载；2) 全部失败后断路器重新打开，恢复时间延长。Rust 实现（`backon`、`rust-circuit-breaker`）：使用原子操作（Atomic Operations）或锁确保半开状态单请求通过。这与 Hystrix（Java，原始实现）、Polly（C#）或 Go 的 `gobreaker` 类似——断路器的可靠性取决于状态转换的原子性。服务网格（Istio、Linkerd）的断路器在 sidecar 层实现，语言无关，但粒度粗（服务级别 vs 方法级别）。[来源: [Circuit Breaker Pattern](LINK_PLACEHOLDER)] · [来源: [Release It!](LINK_PLACEHOLDER)]
+> **修正**: 断路器（Circuit Breaker）的三个状态：1) **Closed**：正常服务，记录失败率；2) **Open**：失败率超阈值，快速失败，避免雪崩；3) **HalfOpen**：超时后允许**单个**请求试探，成功则关闭，失败则重新打开。关键：**半开状态的并发控制**。若半开时多个请求通过：1) 服务仍可能过载；2) 全部失败后断路器重新打开，恢复时间延长。Rust 实现（`backon`、`rust-circuit-breaker`）：使用原子操作（Atomic Operations）或锁确保半开状态单请求通过。这与 Hystrix（Java，原始实现）、Polly（C#）或 Go 的 `gobreaker` 类似——断路器的可靠性取决于状态转换的原子性。服务网格（Istio、Linkerd）的断路器在 sidecar 层实现，语言无关，但粒度粗（服务级别 vs 方法级别）。来源: [Circuit Breaker Pattern] · 来源: [Release It!]
 > **过渡**: 微服务架构模式 (Microservice Architecture Patterns) 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 微服务架构模式 (Microservice Architecture Patterns) 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 微服务架构模式 (Microservice Architecture Patterns) 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

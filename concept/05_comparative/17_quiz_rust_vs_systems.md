@@ -85,7 +85,7 @@ fn greet() -> &str {
 | 检测时机 | 运行期 segfault（或更糟） | 编译期拒绝 |
 | 修复成本 | 调试困难 | 编译器直接指出问题 |
 
-**知识点**：Rust 的所有权（Ownership）系统在编译期消除了整类 C 语言内存错误。返回局部变量引用是最常见的 C bug 之一，在 Rust 中完全不可能。[→ Rust vs C++ 详解](LINK_PLACEHOLDER)
+**知识点**：Rust 的所有权（Ownership）系统在编译期消除了整类 C 语言内存错误。返回局部变量引用是最常见的 C bug 之一，在 Rust 中完全不可能。→ Rust vs C++ 详解
 
 </details>
 
@@ -233,7 +233,7 @@ fn main() {
 | 检测 | ThreadSanitizer（运行时） | 编译器借用（Borrowing）检查（编译期） |
 | 性能开销 | 零（若代码正确） | 零（检查在编译期完成） |
 
-**知识点**：Rust 的"无畏并发"不是口号——编译器通过 `Send`/`Sync` trait 和借用（Borrowing）检查器在编译期阻止所有数据竞争。[→ 并发模型详解](LINK_PLACEHOLDER)
+**知识点**：Rust 的"无畏并发"不是口号——编译器通过 `Send`/`Sync` trait 和借用（Borrowing）检查器在编译期阻止所有数据竞争。→ 并发模型详解
 
 </details>
 
@@ -352,7 +352,7 @@ fn main() {
 | 错误传播 | 手动 `if (err) return err` | `?` 运算符自动传播 |
 | 资源释放 | 手动（易泄漏） | RAII：`File` 在作用域结束自动关闭 |
 
-**知识点**：Rust 的 `Result` 类型将错误处理（Error Handling）从"约定"提升为"类型系统（Type System）强制"。`?` 运算符消除了 Go 的 `if err != nil` 冗余和 C 的嵌套错误检查。[→ 错误处理详解](LINK_PLACEHOLDER)
+**知识点**：Rust 的 `Result` 类型将错误处理（Error Handling）从"约定"提升为"类型系统（Type System）强制"。`?` 运算符消除了 Go 的 `if err != nil` 冗余和 C 的嵌套错误检查。→ 错误处理详解
 
 </details>
 
@@ -409,7 +409,7 @@ fn add_generic<T: Add>(a: T, b: T) -> T { a + b }
 | Go | 接口（interface{}） | 类型断言、间接调用 |
 | C# | 运行时泛型（Generics） | 少量（JIT 优化后接近零） |
 
-**知识点**：Rust 的零成本抽象（Zero-Cost Abstraction）意味着你可以使用高阶概念（迭代器（Iterator）、闭包（Closures）、泛型）而不牺牲性能——编译器生成的代码与手写底层代码一样高效。[→ 零成本抽象详解](LINK_PLACEHOLDER)
+**知识点**：Rust 的零成本抽象（Zero-Cost Abstraction）意味着你可以使用高阶概念（迭代器（Iterator）、闭包（Closures）、泛型）而不牺牲性能——编译器生成的代码与手写底层代码一样高效。→ 零成本抽象详解
 
 </details>
 

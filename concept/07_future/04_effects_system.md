@@ -1670,7 +1670,7 @@ trait Generator<R> {
 
 ## 权威来源索引
 
-> **相关文件**: [异步（Async）](LINK_PLACEHOLDER) · [类型论](LINK_PLACEHOLDER) · [问题图谱](LINK_PLACEHOLDER)
+> **相关文件**: 异步（Async） · 类型论 · 问题图谱
 > **过渡**: Effects System: Concept Pre-study（效果系统：概念预研） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Effects System: Concept Pre-study（效果系统：概念预研） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Effects System: Concept Pre-study（效果系统：概念预研） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

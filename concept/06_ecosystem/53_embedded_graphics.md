@@ -950,7 +950,7 @@ unsafe extern "C" fn touch_isr() {
 }
 ```
 
-> **修正**: **中断服务程序（ISR）必须尽可能短**——在 Cortex-M 中，硬实时要求 ISR 执行时间在微秒级。阻塞 SPI 传输需要数百个时钟周期，若在中断中执行，将延迟所有同级和更低优先级中断。**解决方案**: 1) ISR 中仅设置原子标志；2) 主循环检测到标志后执行 SPI 通信；3) 使用 SPI + DMA，ISR 中启动 DMA，在 DMA 完成中断中处理数据。embassy 框架的 `async` 模型通过 `Future` 和 `Waker` 将中断安全桥接到异步（Async）任务。这与 C 的 ISR 尽量短原则一致，但 Rust 的类型系统（Type System）可帮助确保共享状态的安全访问。[来源: [RTIC Documentation](LINK_PLACEHOLDER)] · [来源: [embassy Interrupts](LINK_PLACEHOLDER)] · [来源: [ARM Cortex-M Interrupt Handling](LINK_PLACEHOLDER)] · [来源: [Ferrous Systems — Real-Time](LINK_PLACEHOLDER)]
+> **修正**: **中断服务程序（ISR）必须尽可能短**——在 Cortex-M 中，硬实时要求 ISR 执行时间在微秒级。阻塞 SPI 传输需要数百个时钟周期，若在中断中执行，将延迟所有同级和更低优先级中断。**解决方案**: 1) ISR 中仅设置原子标志；2) 主循环检测到标志后执行 SPI 通信；3) 使用 SPI + DMA，ISR 中启动 DMA，在 DMA 完成中断中处理数据。embassy 框架的 `async` 模型通过 `Future` 和 `Waker` 将中断安全桥接到异步（Async）任务。这与 C 的 ISR 尽量短原则一致，但 Rust 的类型系统（Type System）可帮助确保共享状态的安全访问。来源: [RTIC Documentation] · 来源: [embassy Interrupts] · 来源: [ARM Cortex-M Interrupt Handling] · 来源: [Ferrous Systems — Real-Time]
 > **过渡**: Rust 嵌入式图形系统开发 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 嵌入式图形系统开发 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 嵌入式图形系统开发 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

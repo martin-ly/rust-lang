@@ -22,7 +22,7 @@
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 内嵌 DSL vs 外部 DSL](#11-内嵌-dsl-vs-外部-dsl)
-    - [1.2 宏（Macro）驱动的内嵌 DSL](LINK_PLACEHOLDER)
+    - [1.2 宏驱动的内嵌 DSL](#12-宏驱动的内嵌-dsl)
     - [1.3 Builder 模式作为 DSL](#13-builder-模式作为-dsl)
   - [二、技术细节](#二技术细节)
     - [2.1 Parser Combinators](#21-parser-combinators)
@@ -38,16 +38,16 @@
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：DSL 与嵌入的编译错误](#十边界测试dsl-与嵌入的编译错误)
-    - [10.1 边界测试：构建器模式的链式调用与所有权（Ownership）（编译错误）](LINK_PLACEHOLDER)
+    - [10.1 边界测试：构建器模式的链式调用与所有权（编译错误）](#101-边界测试构建器模式的链式调用与所有权编译错误)
     - [10.2 边界测试：状态机 DSL 的非法状态转换（编译错误）](#102-边界测试状态机-dsl-的非法状态转换编译错误)
-    - [10.3 边界测试：宏（Macro）递归深度限制（编译错误）](#103-边界测试宏递归深度限制编译错误)
-    - [10.4 边界测试：DSL 的类型安全与运行时（Runtime）错误（运行时 panic）](LINK_PLACEHOLDER)
+    - [10.3 边界测试：宏递归深度限制（编译错误）](#103-边界测试宏递归深度限制编译错误)
+    - [10.4 边界测试：DSL 的类型安全与运行时错误（运行时 panic）](#104-边界测试dsl-的类型安全与运行时错误运行时-panic)
     - [10.3 边界测试：DSL 宏的优先级与歧义解析（编译错误）](#103-边界测试dsl-宏的优先级与歧义解析编译错误)
     - [10.4 边界测试：DSL 宏的优先级与运算符结合性（编译错误）](#104-边界测试dsl-宏的优先级与运算符结合性编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：在 Rust 中嵌入 DSL 的常见技术有哪些？（理解层）](#测验-1在-rust-中嵌入-dsl-的常见技术有哪些理解层)
     - [测验 2：Builder 模式在 Rust 中为什么特别受欢迎？与构造函数相比有什么优势？（理解层）](#测验-2builder-模式在-rust-中为什么特别受欢迎与构造函数相比有什么优势理解层)
-    - [测验 3：过程宏（proc macro）与声明宏（Declarative Macro）（`macro_rules!`）在 DSL 设计上各有什么优劣？（理解层）](LINK_PLACEHOLDER)
+    - [测验 3：过程宏（proc macro）与声明宏（`macro_rules!`）在 DSL 设计上各有什么优劣？（理解层）](#测验-3过程宏proc-macro与声明宏macro_rules在-dsl-设计上各有什么优劣理解层)
     - [测验 4：类型状态模式（Type State Pattern）如何实现"编译期状态机"？（理解层）](#测验-4类型状态模式type-state-pattern如何实现编译期状态机理解层)
     - [测验 5：Rust 的 `?` 运算符可以被看作一种小型 DSL 吗？为什么？（理解层）](#测验-5rust-的--运算符可以被看作一种小型-dsl-吗为什么理解层)
   - [实践](#实践)
@@ -689,7 +689,7 @@ fn main() {
 }
 ```
 
-> **修正**: `macro_rules!` 的**规则顺序**：从上到下依次尝试匹配，第一个匹配的规则被使用。长模式（含 WHERE）应放在短模式之前，否则短模式提前匹配导致错误。`macro_rules!` 的限制：1) 无优先级/结合性控制（不像 yacc/bison）；2) 无左递归（规则不能自引用（Reference）左部）；3) 模式是 token 树（`tt`），不是完整表达式。复杂 DSL 建议：1) 过程宏（Procedural Macro）（`proc_macro`）解析完整语法；2) `syn` crate 解析 Rust 表达式；3) 外部 DSL parser（`nom`、`pest`）。这与 Lisp 的宏（代码即数据，无模式匹配（Pattern Matching）限制）或 Template Haskell（编译期元编程，类型安全）不同——Rust 的 `macro_rules!` 是受限但高效的文本替换机制。[来源: [The Little Book of Rust Macros](LINK_PLACEHOLDER)] · [来源: [Rust Reference — Macros](LINK_PLACEHOLDER)]
+> **修正**: `macro_rules!` 的**规则顺序**：从上到下依次尝试匹配，第一个匹配的规则被使用。长模式（含 WHERE）应放在短模式之前，否则短模式提前匹配导致错误。`macro_rules!` 的限制：1) 无优先级/结合性控制（不像 yacc/bison）；2) 无左递归（规则不能自引用（Reference）左部）；3) 模式是 token 树（`tt`），不是完整表达式。复杂 DSL 建议：1) 过程宏（Procedural Macro）（`proc_macro`）解析完整语法；2) `syn` crate 解析 Rust 表达式；3) 外部 DSL parser（`nom`、`pest`）。这与 Lisp 的宏（代码即数据，无模式匹配（Pattern Matching）限制）或 Template Haskell（编译期元编程，类型安全）不同——Rust 的 `macro_rules!` 是受限但高效的文本替换机制。来源: [The Little Book of Rust Macros] · 来源: [Rust Reference — Macros]
 
 ## 嵌入式测验（Embedded Quiz）
 

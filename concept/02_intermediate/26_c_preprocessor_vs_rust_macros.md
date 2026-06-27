@@ -9,7 +9,7 @@
 > **双维定位**: C×Ana
 > **前置概念**: [Macros](../03_advanced/04_macros.md) · [Generics](./02_generics.md) · [Traits](./01_traits.md)
 > **后置概念**: [Proc Macro](../03_advanced/07_proc_macro.md) · [DSL and Embedding](./13_dsl_and_embedding.md)
-> **主要来源**: [TRPL Ch 19.5 — Macros] · [The Little Book of Rust Macros] · [C Preprocessor (cppreference)]
+> **主要来源**: [TRPL Ch 19.5 — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) · [Rust Reference — macro_rules!](https://doc.rust-lang.org/reference/macros-by-example.html) · [The Little Book of Rust Macros](https://veykril.github.io/tlborm/) · [C Preprocessor (cppreference)](https://en.cppreference.com/w/c/preprocessor) · [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)
 ---
 
 > **Bloom 层级**: 理解 → 分析
@@ -169,7 +169,7 @@ C 预处理器的语义可以形式化为**文本重写系统**：
 M(t)  ⟶  E[x/t]
 ```
 
-Rust `macro_rules!` 的语义可以形式化为** hygienic 树重写系统**：
+Rust `macro_rules!` 的语义可以形式化为**hygienic 树重写系统**：
 
 ```text
 macro_rules! M($x:expr) => { E };
@@ -180,24 +180,19 @@ M!(t)  ⟶  E[x := α(t)]
 
 ---
 
-## 七、L1 / L2 / L3 总结
+## 七、总结
 
-| 层级 | 要点 |
-|:---|:---|
-| **L1** | C 预处理器做文本替换；Rust 宏在语法树层面操作，更安全。 |
-| **L2** | Rust 用 `macro_rules!`、过程宏和 `#[cfg]` 分别替代 C 的 `#define`、模板代码生成和 `#ifdef`。 |
-| **L3** | Rust 宏的 hygiene 和类型检查使其成为一种"受限但安全"的元编程工具，而 C 预处理器是一种无约束的文本预处理。 |
+- **L1**：C 预处理器做文本替换；Rust 宏在语法树层面操作，更安全。
+- **L2**：Rust 用 `macro_rules!`、过程宏和 `#[cfg]` 分别替代 C 的 `#define`、模板代码生成和 `#ifdef`。
+- **L3**：Rust 宏的 hygiene 和类型检查使其成为一种"受限但安全"的元编程工具，而 C 预处理器是一种无约束的文本预处理。
 
 ---
 
 ## 八、延伸阅读
 
 - [TRPL: Macros](https://doc.rust-lang.org/book/ch19-06-macros.html)
-- [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)
-- [Rust Reference: Macros](https://doc.rust-lang.org/reference/macros.html)
+- [Rust Reference: Macros by Example](https://doc.rust-lang.org/reference/macros-by-example.html)
+- [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)
 - [Rust Reference: Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)
 - [cppreference: C preprocessor](https://en.cppreference.com/w/c/preprocessor)
-
----
-
-> **Checklist**: 已覆盖 C 预处理器文本替换 / Rust 宏语法树操作 / 卫生性 / 条件编译 / 迁移思维 / 形式化对比。
+- [rustify.rs: Glossary — Macro hygiene](https://rustify.rs/glossary)

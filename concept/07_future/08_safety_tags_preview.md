@@ -350,7 +350,7 @@ graph TD
 ## 相关概念文件
 
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — Unsafe 边界与借用（Borrowing）规则
-- [BorrowSanitizer](LINK_PLACEHOLDER) — 运行时（Runtime）借用（Borrowing）检查验证
+- BorrowSanitizer — 运行时（Runtime）借用（Borrowing）检查验证
 - [Formal Methods](./02_formal_methods.md) — 形式化验证工具链
 - [AI Integration](./01_ai_integration.md) — AI 生成代码的安全边界
 - [Version Tracking](./05_rust_version_tracking.md) — Rust 版本特性演进

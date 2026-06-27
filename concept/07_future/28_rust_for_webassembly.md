@@ -64,7 +64,7 @@
     - [2.3 框架选型矩阵](#23-框架选型矩阵)
   - [三、性能特征与 Wasm 内存模型](#三性能特征与-wasm-内存模型)
     - [3.1 Rust Wasm vs JavaScript 性能边界](#31-rust-wasm-vs-javascript-性能边界)
-    - [3.2 线性内存模型与所有权（Ownership）映射](LINK_PLACEHOLDER)
+    - [3.2 线性内存模型与所有权映射](#32-线性内存模型与所有权映射)
     - [3.3 JS ↔ Wasm 互操作开销分析](#33-js--wasm-互操作开销分析)
   - [四、工具链与工程实践](#四工具链与工程实践)
     - [4.1 目标三元组与编译配置](#41-目标三元组与编译配置)
@@ -77,9 +77,9 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：WebAssembly 的编译错误](#十边界测试webassembly-的编译错误)
-    - [10.1 边界测试：WASI 的文件系统权限（运行时（Runtime）错误）](LINK_PLACEHOLDER)
+    - [10.1 边界测试：WASI 的文件系统权限（运行时错误）](#101-边界测试wasi-的文件系统权限运行时错误)
     - [10.2 边界测试：`wasm-bindgen` 的类型不匹配（编译错误）](#102-边界测试wasm-bindgen-的类型不匹配编译错误)
-    - [10.3 边界测试：WASM 模块（Module）的大小限制与 `wee_alloc`（运行时错误）](LINK_PLACEHOLDER)
+    - [10.3 边界测试：WASM 模块的大小限制与 `wee_alloc`（运行时错误）](#103-边界测试wasm-模块的大小限制与-wee_alloc运行时错误)
     - [10.3 边界测试：WASM 组件模型（Component Model）的类型映射（编译错误）](#103-边界测试wasm-组件模型component-model的类型映射编译错误)
     - [10.4 边界测试：WASI Preview 2 的功能性权限（运行时错误）](#104-边界测试wasi-preview-2-的功能性权限运行时错误)
     - [10.3 边界测试：WASM 模块的线性内存与 Rust 的 Vec 增长策略（运行时 OOM）](#103-边界测试wasm-模块的线性内存与-rust-的-vec-增长策略运行时-oom)
@@ -273,7 +273,7 @@ fn Counter() -> Html {
 }
 ```
 
-> **架构特征**: Yew 使用 `html!` 宏（Macro）在编译期将 JSX-like 语法转换为 Rust 代码，依赖 VDOM diff 算法更新 UI。这与 React 的运行时 diff 策略一致，适合从 React 生态迁移的开发者。[来源: [Yew Framework](LINK_PLACEHOLDER)]
+> **架构特征**: Yew 使用 `html!` 宏（Macro）在编译期将 JSX-like 语法转换为 Rust 代码，依赖 VDOM diff 算法更新 UI。这与 React 的运行时 diff 策略一致，适合从 React 生态迁移的开发者。来源: [Yew Framework]
 
 ---
 

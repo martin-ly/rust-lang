@@ -62,7 +62,7 @@ fn main() {
 
 **解析**：`String` 未实现 `Copy` trait，赋值 `let s2 = s1` 会**移动（move）**所有权（Ownership）。`s1` 在移动后变为未初始化状态，不能再使用。
 
-**知识点**：Rust 中每个值有且只有一个所有者。当所有者离开作用域，值被自动丢弃（drop）。[→ 所有权（Ownership）规则详解](LINK_PLACEHOLDER)
+**知识点**：Rust 中每个值有且只有一个所有者。当所有者离开作用域，值被自动丢弃（drop）。→ 所有权（Ownership）规则详解
 
 </details>
 
@@ -109,7 +109,7 @@ take_ownership(s.clone());
 println!("{s}");
 ```
 
-**知识点**：通过引用（Reference）借用（Borrowing）可以避免所有权（Ownership）转移。[→ 借用详解](LINK_PLACEHOLDER)
+**知识点**：通过引用（Reference）借用（Borrowing）可以避免所有权（Ownership）转移。→ 借用详解
 
 </details>
 
@@ -131,7 +131,7 @@ println!("{s}");
 
 `String` 包含堆内存的指针，若按位复制会导致**双重释放（double free）**。Rust 禁止为管理堆内存的类型自动实现 `Copy`。
 
-**知识点**：`Copy` trait 标记"按位复制安全"的类型。自定义类型可通过 `#[derive(Copy, Clone)]` 显式实现（前提是所有字段都实现 `Copy`）。[→ 类型系统（Type System）详解](LINK_PLACEHOLDER)
+**知识点**：`Copy` trait 标记"按位复制安全"的类型。自定义类型可通过 `#[derive(Copy, Clone)]` 显式实现（前提是所有字段都实现 `Copy`）。→ 类型系统（Type System）详解
 
 </details>
 
@@ -279,7 +279,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 **语义**：返回的引用生命周期（Lifetimes）至少与 `x` 和 `y` 中**较短的那个**一样长。
 
-**知识点**：生命周期标注不改变运行时（Runtime）代码，仅向编译器提供**借用关系约束**。[→ 生命周期语法](LINK_PLACEHOLDER)
+**知识点**：生命周期标注不改变运行时（Runtime）代码，仅向编译器提供**借用关系约束**。→ 生命周期语法
 
 </details>
 
@@ -403,7 +403,7 @@ shared shared
 
 **限制**：`Rc` 不提供内部可变性。如需修改共享数据，需配合 `RefCell<T>` 或 `Mutex<T>`。
 
-**知识点**：`Rc` 是 Rust 所有权系统的**补充**而非替代——它通过运行时（Runtime）引用计数允许有限的共享所有权，代价是只能用于单线程场景。[→ 智能指针（Smart Pointer）详解](LINK_PLACEHOLDER)
+**知识点**：`Rc` 是 Rust 所有权系统的**补充**而非替代——它通过运行时（Runtime）引用计数允许有限的共享所有权，代价是只能用于单线程场景。→ 智能指针（Smart Pointer）详解
 
 </details>
 

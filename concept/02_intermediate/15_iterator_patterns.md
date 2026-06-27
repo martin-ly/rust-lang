@@ -9,7 +9,7 @@
 >
 > **📎 交叉引用（Reference）**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[迭代器（Iterator）](LINK_PLACEHOLDER)
+> 本主题在 knowledge 中有系统化的知识索引：迭代器（Iterator）
 
 >
 > **受众**: [进阶]
@@ -27,7 +27,7 @@
 
 ## 📑 目录
 
-- [Rust 迭代器（Iterator）模式](#rust-迭代器模式)
+- [Rust 迭代器模式](#rust-迭代器模式)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 Iterator Trait](#11-iterator-trait)
@@ -50,11 +50,11 @@
     - [10.2 边界测试：迭代器适配器的惰性求值陷阱（逻辑错误）](#102-边界测试迭代器适配器的惰性求值陷阱逻辑错误)
   - [十二、边界测试：迭代器模式的编译错误（续）](#十二边界测试迭代器模式的编译错误续)
     - [12.1 边界测试：`skip_while` 与 `take_while` 的互斥性（逻辑错误）](#121-边界测试skip_while-与-take_while-的互斥性逻辑错误)
-    - [12.2 边界测试：`cycle` 与无限迭代器（运行时（Runtime）死循环）](LINK_PLACEHOLDER)
+    - [12.2 边界测试：`cycle` 与无限迭代器（运行时死循环）](#122-边界测试cycle-与无限迭代器运行时死循环)
     - [10.3 边界测试：`Iterator::zip` 的长度不一致（逻辑错误）](#103-边界测试iteratorzip-的长度不一致逻辑错误)
     - [10.4 边界测试：消耗型适配器与双重迭代（编译错误）](#104-边界测试消耗型适配器与双重迭代编译错误)
     - [10.6 边界测试：`Iterator::fuse` 后的重复消费（逻辑错误）](#106-边界测试iteratorfuse-后的重复消费逻辑错误)
-    - [10.2 边界测试：`Iterator::collect` 的目标类型推断（Type Inference）失败（编译错误）](LINK_PLACEHOLDER)
+    - [10.2 边界测试：`Iterator::collect` 的目标类型推断失败（编译错误）](#102-边界测试iteratorcollect-的目标类型推断失败编译错误)
     - [10.8 边界测试：match 分支返回类型不一致](#108-边界测试match-分支返回类型不一致)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`Iterator::map` 和 `Iterator::filter` 返回的是新迭代器还是立即执行计算？（理解层）](#测验-1iteratormap-和-iteratorfilter-返回的是新迭代器还是立即执行计算理解层)
@@ -593,7 +593,7 @@ fn main() {
 }
 ```
 
-> **修正**: 迭代器是**一次性**的——`collect`、`fold`、`for_each` 等消耗型方法获取迭代器所有权（Ownership），调用后迭代器失效。这与 C++ 的 `std::istream_iterator`（同样一次性）或 Java 的 `Iterator`（同样 `hasNext`/`next` 消耗）类似。Rust 的所有权系统显式追踪迭代器的消耗：调用 `into_iter()` 转移 `Vec` 所有权到迭代器，`collect` 转移迭代器所有权到 `Vec`。若需多次遍历，应 `clone` 底层集合（`data.clone().into_iter()`），或使用非消耗型迭代（`data.iter()` 借用（Borrowing））。`Iterator` trait 的 `by_ref()` 方法可借出迭代器引用（Reference），允许部分消耗后继续使用——高级但有用。[来源: [The Rust Programming Language](LINK_PLACEHOLDER)] · [来源: [Rust Standard Library](LINK_PLACEHOLDER)]
+> **修正**: 迭代器是**一次性**的——`collect`、`fold`、`for_each` 等消耗型方法获取迭代器所有权（Ownership），调用后迭代器失效。这与 C++ 的 `std::istream_iterator`（同样一次性）或 Java 的 `Iterator`（同样 `hasNext`/`next` 消耗）类似。Rust 的所有权系统显式追踪迭代器的消耗：调用 `into_iter()` 转移 `Vec` 所有权到迭代器，`collect` 转移迭代器所有权到 `Vec`。若需多次遍历，应 `clone` 底层集合（`data.clone().into_iter()`），或使用非消耗型迭代（`data.iter()` 借用（Borrowing））。`Iterator` trait 的 `by_ref()` 方法可借出迭代器引用（Reference），允许部分消耗后继续使用——高级但有用。来源: [The Rust Programming Language] · 来源: [Rust Standard Library]
 
 ### 10.6 边界测试：`Iterator::fuse` 后的重复消费（逻辑错误）
 

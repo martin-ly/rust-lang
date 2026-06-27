@@ -355,7 +355,7 @@ PSPACE-完全。Rehman et al. (2023) 给出 Rust 类型推断复杂度的 PSPACE
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
 | Rehman et al. 2023 | ✅ 一级 | Rust 类型推断（Type Inference） PSPACE 完全性分析 |
-| [Vytiniotis et al. 2011](LINK_PLACEHOLDER) | ✅ 一级 | OutsideIn(X)：带局部假设的模块（Module）化类型推断 |
+| Vytiniotis et al. 2011 | ✅ 一级 | OutsideIn(X)：带局部假设的模块（Module）化类型推断 |
 | [Robinson 1965](https://doi.org/10.1145/321250.321253) | ✅ 一级 | Robinson 合一算法奠基论文 |
 | [Milner 1978](https://doi.org/10.1016/0022-0000(78)90014-4) | ✅ 一级 | HM 多态类型理论奠基 |
 | [Rustc Dev Guide — Type Inference](https://rustc-dev-guide.rust-lang.org/type-inference.html) | ✅ 一级 | rustc 类型推断实现官方文档 |

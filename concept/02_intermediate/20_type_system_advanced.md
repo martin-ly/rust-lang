@@ -30,12 +30,12 @@
 
 ## 📑 目录
 
-- [高级类型系统（Type System）：从关联类型到类型级编程](#高级类型系统从关联类型到类型级编程)
+- [高级类型系统：从关联类型到类型级编程](#高级类型系统从关联类型到类型级编程)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 impl Trait 的演进](#11-impl-trait-的演进)
     - [1.2 Const Generics](#12-const-generics)
-    - [1.3 类型推断（Type Inference）与约束求解](LINK_PLACEHOLDER)
+    - [1.3 类型推断与约束求解](#13-类型推断与约束求解)
   - [二、技术细节](#二技术细节)
     - [2.1 impl Trait 在参数位置](#21-impl-trait-在参数位置)
     - [2.2 Const Generics 实战](#22-const-generics-实战)
@@ -53,7 +53,7 @@
     - [7.3 重载决议 vs Trait 解析](#73-重载决议-vs-trait-解析)
     - [编译错误示例](#编译错误示例)
     - [4.4 边界测试：高阶 trait bound（HRTB）误用（编译错误）](#44-边界测试高阶-trait-boundhrtb误用编译错误)
-    - [4.5 边界测试：关联类型与泛型（Generics）参数冲突（编译错误）](LINK_PLACEHOLDER)
+    - [4.5 边界测试：关联类型与泛型参数冲突（编译错误）](#45-边界测试关联类型与泛型参数冲突编译错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
@@ -62,7 +62,7 @@
     - [10.4 边界测试：关联类型的默认实现与具体化冲突（编译错误）](#104-边界测试关联类型的默认实现与具体化冲突编译错误)
     - [10.2 边界测试：函数重复定义](#102-边界测试函数重复定义)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：关联类型（Associated Type）与泛型（Generics）参数的区别是什么？什么时候更适合用关联类型？（理解层）](#测验-1关联类型associated-type与泛型参数的区别是什么什么时候更适合用关联类型理解层)
+    - [测验 1：关联类型（Associated Type）与泛型参数的区别是什么？什么时候更适合用关联类型？（理解层）](#测验-1关联类型associated-type与泛型参数的区别是什么什么时候更适合用关联类型理解层)
     - [测验 2：`type Output = i32;` 这种语法出现在哪里？它有什么约束？（理解层）](#测验-2type-output--i32-这种语法出现在哪里它有什么约束理解层)
     - [测验 3：Higher-Ranked Trait Bounds（HRTB）`for<'a>` 的用途是什么？（理解层）](#测验-3higher-ranked-trait-boundshrtbfora-的用途是什么理解层)
     - [测验 4：类型级编程（Type-Level Programming）在 Rust 中主要通过什么机制实现？（理解层）](#测验-4类型级编程type-level-programming在-rust-中主要通过什么机制实现理解层)

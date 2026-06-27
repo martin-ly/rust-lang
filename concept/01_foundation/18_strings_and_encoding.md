@@ -27,14 +27,14 @@
 
 ## 📑 目录
 
-- [字符串与编码：Rust 的文本处理类型系统（Type System）](LINK_PLACEHOLDER)
+- 字符串与编码：Rust 的文本处理类型系统（Type System）
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 String vs \&str：所有权（Ownership）谱系](LINK_PLACEHOLDER)
+    - 1.1 String vs \&str：所有权（Ownership）谱系
     - [1.2 UTF-8：Rust 的编码选择](#12-utf-8rust-的编码选择)
     - [1.3 平台字符串：OsString 与 CString](#13-平台字符串osstring-与-cstring)
   - [二、技术细节](#二技术细节)
-    - [2.1 字符串切片（String Slice）与字符边界](LINK_PLACEHOLDER)
+    - 2.1 字符串切片（String Slice）与字符边界
     - [2.2 Grapheme Clusters 与文本分割](#22-grapheme-clusters-与文本分割)
     - [2.3 Unicode Normalization](#23-unicode-normalization)
   - [三、选型决策矩阵](#三选型决策矩阵)
@@ -48,7 +48,7 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十二、边界测试：字符串编码的编译错误](#十二边界测试字符串编码的编译错误)
-    - [12.1 边界测试：无效 UTF-8 的字节切片（Slice）转 `str`（运行时（Runtime） panic）](LINK_PLACEHOLDER)
+    - 12.1 边界测试：无效 UTF-8 的字节切片（Slice）转 `str`（运行时（Runtime） panic）
     - [12.2 边界测试：`OsStr` 与 `str` 的跨平台差异（编译错误）](#122-边界测试osstr-与-str-的跨平台差异编译错误)
     - [10.3 边界测试：`String` 与 `OsString` 的编码差异（编译错误）](#103-边界测试string-与-osstring-的编码差异编译错误)
     - [10.4 边界测试：字符串切片（String Slice）的字符边界（运行时（Runtime） panic）](#104-边界测试字符串切片的字符边界运行时-panic)
@@ -103,7 +103,7 @@ Rust 字符串类型的所有权谱系:
 ```
 
 ```rust
-// 所有权转换示例 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-storing-utf-8-encoded-text-with-strings.html)
+// 所有权转换示例 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)
 fn main() {
     let s1 = String::from("hello");     // 拥有的 String
     let s2 = &s1;                        // 借用为 &str
@@ -553,7 +553,7 @@ classDiagram
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-storing-utf-8-encoded-text-with-strings.html), [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
 

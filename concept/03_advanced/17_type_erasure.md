@@ -50,11 +50,11 @@
   - [十、边界测试：类型擦除的编译错误](#十边界测试类型擦除的编译错误)
     - [10.1 边界测试：`dyn Trait` 的大小未知（编译错误）](#101-边界测试dyn-trait-的大小未知编译错误)
     - [10.2 边界测试：trait object 的方法返回 `Self`（编译错误）](#102-边界测试trait-object-的方法返回-self编译错误)
-    - [10.3 边界测试：`Any` 的 `downcast_ref` 与生命周期（Lifetimes）（编译错误）](LINK_PLACEHOLDER)
+    - [10.3 边界测试：`Any` 的 `downcast_ref` 与生命周期（编译错误）](#103-边界测试any-的-downcast_ref-与生命周期编译错误)
     - [10.4 边界测试：vtable 与对象安全的隐性约束（编译错误）](#104-边界测试vtable-与对象安全的隐性约束编译错误)
     - [10.3 边界测试：`dyn Trait` 与 `Sized` 边界的冲突（编译错误）](#103-边界测试dyn-trait-与-sized-边界的冲突编译错误)
-    - [10.4 边界测试：dyn Trait 的 Sized 要求与泛型（Generics）约束（编译错误）](LINK_PLACEHOLDER)
-    - [10.6 边界测试：所有权（Ownership）移动后的再次使用](LINK_PLACEHOLDER)
+    - [10.4 边界测试：dyn Trait 的 Sized 要求与泛型约束（编译错误）](#104-边界测试dyn-trait-的-sized-要求与泛型约束编译错误)
+    - [10.6 边界测试：所有权移动后的再次使用](#106-边界测试所有权移动后的再次使用)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`dyn Trait` 的大小为什么在编译时未知？它如何被实际使用？（理解层）](#测验-1dyn-trait-的大小为什么在编译时未知它如何被实际使用理解层)
     - [测验 2：`&dyn Trait` 在内存中的布局是什么？（理解层）](#测验-2dyn-trait-在内存中的布局是什么理解层)
@@ -723,7 +723,7 @@ fn main() {
 }
 ```
 
-> **修正**: `dyn Trait` 是**动态分发**类型，大小不固定（`!Sized`），因为不同实现的大小不同。`Box<dyn Trait>` 和 `&dyn Trait` 是**胖指针**（数据指针 + vtable 指针），本身是 `Sized` 的。若函数要求 `P: Processor`（隐式 `P: Sized`），不能传入 `dyn Processor`。修复：1) `fn use_processor(p: &dyn Processor)`（接受引用）；2) `fn use_processor(p: Box<dyn Processor>)`（接受 Box）；3) `fn use_processor<P: Processor + ?Sized>(p: &P)`（放宽 Sized 约束）。类型擦除与单态化（Monomorphization）的权衡：`dyn Trait` 减少代码膨胀（一个函数处理所有类型），但有虚函数调用开销。这与 C++ 的虚函数（类似机制，但无显式 `dyn` 标记）或 Go 的 interface（类似 fat pointer，但隐式实现）不同——Rust 的 `dyn` 显式标记动态分发，编译器在类型层面区分静态和动态多态。[来源: [Rust Reference — Trait Objects](LINK_PLACEHOLDER)] · [来源: [The Rust Programming Language](LINK_PLACEHOLDER)]
+> **修正**: `dyn Trait` 是**动态分发**类型，大小不固定（`!Sized`），因为不同实现的大小不同。`Box<dyn Trait>` 和 `&dyn Trait` 是**胖指针**（数据指针 + vtable 指针），本身是 `Sized` 的。若函数要求 `P: Processor`（隐式 `P: Sized`），不能传入 `dyn Processor`。修复：1) `fn use_processor(p: &dyn Processor)`（接受引用）；2) `fn use_processor(p: Box<dyn Processor>)`（接受 Box）；3) `fn use_processor<P: Processor + ?Sized>(p: &P)`（放宽 Sized 约束）。类型擦除与单态化（Monomorphization）的权衡：`dyn Trait` 减少代码膨胀（一个函数处理所有类型），但有虚函数调用开销。这与 C++ 的虚函数（类似机制，但无显式 `dyn` 标记）或 Go 的 interface（类似 fat pointer，但隐式实现）不同——Rust 的 `dyn` 显式标记动态分发，编译器在类型层面区分静态和动态多态。来源: [Rust Reference — Trait Objects] · 来源: [The Rust Programming Language]
 
 ### 10.4 边界测试：dyn Trait 的 Sized 要求与泛型约束（编译错误）
 
@@ -744,7 +744,7 @@ fn erased(item: dyn Process) {
 fn main() {}
 ```
 
-> **修正**: **`dyn Trait`** 是 **DST**（Dynamically Sized Type）：1) 编译时大小未知（vtable 指针 + 数据指针）；2) 必须 behind 指针：`&dyn Trait`、`Box<dyn Trait>`、`Arc<dyn Trait>`；3) 不能直接按值传递、不能作为泛型参数（除非 `T: ?Sized`）。`dyn Trait` 的限制：1) 只能 object-safe trait（方法无泛型、返回类型非 `Self`）；2) 方法调用有 vtable 间接开销；3) 不能从 `dyn Trait` 反向转为具体类型（除非 `Any` downcast）。零大小类型：`dyn Trait` 的 vtable 可能有零大小数据（`()`），但指针仍有 2 个 usize。这与 C++ 的虚函数（对象内含 vptr，大小固定）或 Java 的接口引用（Reference）（始终是引用，类似 `&dyn`）不同——Rust 的 `dyn` 是显式的 DST，有明确的 object safety 规则。[来源: [Trait Objects](LINK_PLACEHOLDER)] · [来源: [Object Safety](LINK_PLACEHOLDER)]
+> **修正**: **`dyn Trait`** 是 **DST**（Dynamically Sized Type）：1) 编译时大小未知（vtable 指针 + 数据指针）；2) 必须 behind 指针：`&dyn Trait`、`Box<dyn Trait>`、`Arc<dyn Trait>`；3) 不能直接按值传递、不能作为泛型参数（除非 `T: ?Sized`）。`dyn Trait` 的限制：1) 只能 object-safe trait（方法无泛型、返回类型非 `Self`）；2) 方法调用有 vtable 间接开销；3) 不能从 `dyn Trait` 反向转为具体类型（除非 `Any` downcast）。零大小类型：`dyn Trait` 的 vtable 可能有零大小数据（`()`），但指针仍有 2 个 usize。这与 C++ 的虚函数（对象内含 vptr，大小固定）或 Java 的接口引用（Reference）（始终是引用，类似 `&dyn`）不同——Rust 的 `dyn` 是显式的 DST，有明确的 object safety 规则。来源: [Trait Objects] · 来源: [Object Safety]
 
 ### 10.6 边界测试：所有权移动后的再次使用
 

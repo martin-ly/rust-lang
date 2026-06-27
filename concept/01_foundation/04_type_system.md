@@ -11,7 +11,7 @@
 >
 > **📎 交叉引用（Reference）**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[类型系统（Type System）](LINK_PLACEHOLDER)
+> 本主题在 knowledge 中有系统化的知识索引：[类型系统（Type System）](04_type_system.md)
 >
 > **受众**: [初学者]
 >
@@ -56,18 +56,18 @@
     - [1.3 形式化定义](#13-形式化定义)
   - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attribute-matrix)
     - [2.1 类型分类矩阵](#21-类型分类矩阵)
-    - [2.2 Rust 类型系统（Type System）特征矩阵](#22-rust-类型系统特征矩阵)
+    - [2.2 Rust 类型系统特征矩阵](#22-rust-类型系统特征矩阵)
   - [三、思维导图（Mind Map）](#三思维导图mind-map)
   - [四、定理推理链（Theorem Chain）](#四定理推理链theorem-chain)
-    - [4.1 引理：ADT（枚举（Enum） + 结构体（Struct））⟹ 代数数据类型完备性](LINK_PLACEHOLDER)
+    - [4.1 引理：ADT（枚举 + 结构体）⟹ 代数数据类型完备性](#41-引理adt枚举--结构体-代数数据类型完备性)
     - [4.2 引理：NPO 零成本空值优化 ⟹ Option\<\&T\> 的内存同构于 \&T](#42-引理npo-零成本空值优化--optiont-的内存同构于-t)
     - [4.3 定理：match 穷尽性检查 ⟹ 无未处理变体](#43-定理match-穷尽性检查--无未处理变体)
-    - [4.4 定理：类型推断（Type Inference）完备性 ⟹ Principal type property](LINK_PLACEHOLDER)
-    - [4.5 定理：类型一致性（Progress + Preservation）⟹ 运行时（Runtime）无类型错误](LINK_PLACEHOLDER)
+    - [4.4 定理：类型推断完备性 ⟹ Principal type property](#44-定理类型推断完备性--principal-type-property)
+    - [4.5 定理：类型一致性（Progress + Preservation）⟹ 运行时无类型错误](#45-定理类型一致性progress--preservation-运行时无类型错误)
     - [4.6 推论：`Option<T>` ⟹ 空指针在类型层面消除](#46-推论optiont--空指针在类型层面消除)
     - [4.7 推论：Result\<T, E\> ⟹ 错误在类型层面强制处理](#47-推论resultt-e--错误在类型层面强制处理)
     - [4.8 推论：! (Never type) ⟹ 发散类型的逻辑完备性](#48-推论-never-type--发散类型的逻辑完备性)
-    - [4.9 定理一致性（Coherence）矩阵](LINK_PLACEHOLDER)
+    - [4.9 定理一致性矩阵](#49-定理一致性矩阵)
   - [五、示例与反例（Examples \& Counter-examples）](#五示例与反例examples--counter-examples)
     - [5.1 正确示例：ADT + Pattern Matching](#51-正确示例adt--pattern-matching)
     - [5.2 正确示例：Option 消除空值](#52-正确示例option-消除空值)
@@ -76,7 +76,7 @@
   - [六、反命题与边界分析（Inverse Propositions \& Boundary Analysis）](#六反命题与边界分析inverse-propositions--boundary-analysis)
     - [6.1 命题: "Rust 类型系统总是安全的"](#61-命题-rust-类型系统总是安全的)
     - [6.2 命题: "enum match 强制穷尽"](#62-命题-enum-match-强制穷尽)
-    - [6.3 命题: "类型推断（Type Inference）总是完备的"](#63-命题-类型推断总是完备的)
+    - [6.3 命题: "类型推断总是完备的"](#63-命题-类型推断总是完备的)
   - [七、边界极限测试代码（Boundary Stress Tests）](#七边界极限测试代码boundary-stress-tests)
     - [7.1 边界：unsafe 绕过类型系统后的行为](#71-边界unsafe-绕过类型系统后的行为)
     - [7.2 边界：#\[non\_exhaustive\] 对穷尽性的削弱](#72-边界non_exhaustive-对穷尽性的削弱)
@@ -93,7 +93,7 @@
   - [十一、相关概念链接](#十一相关概念链接)
     - [补充章节：`impl Trait` 与 `dyn Trait` 的类型论差异](#补充章节impl-trait-与-dyn-trait-的类型论差异)
       - [存在类型 vs 全称类型](#存在类型-vs-全称类型)
-      - [单态化（Monomorphization） vs 动态分发：性能对比](LINK_PLACEHOLDER)
+      - [单态化 vs 动态分发：性能对比](#单态化-vs-动态分发性能对比)
       - [vtable 内存开销](#vtable-内存开销)
       - [选择决策树](#选择决策树)
     - [11.1 补充：`!` (Never type) 的形式化分析](#111-补充-never-type-的形式化分析)
@@ -114,7 +114,7 @@
       - [11.4.6 与 Haskell、ML 的类型推断对比](#1146-与-haskellml-的类型推断对比)
     - [11.5 Discriminant 与 Enum 内存布局](#115-discriminant-与-enum-内存布局)
       - [11.5.1 Discriminant 的基本概念与 `std::mem::discriminant`](#1151-discriminant-的基本概念与-stdmemdiscriminant)
-      - [11.5.2 枚举（Enum）的内存布局：Tagged Union 模型](#1152-枚举的内存布局tagged-union-模型)
+      - [11.5.2 枚举的内存布局：Tagged Union 模型](#1152-枚举的内存布局tagged-union-模型)
       - [11.5.3 Niche Optimization 与 Null Pointer Optimization（NPO）](#1153-niche-optimization-与-null-pointer-optimizationnpo)
       - [11.5.4 `#[repr]` 对 Discriminant 与布局的影响](#1154-repr-对-discriminant-与布局的影响)
       - [11.5.5 `std::mem::Discriminant<T>` 与 `DiscriminantKind`](#1155-stdmemdiscriminantt-与-discriminantkind)
@@ -124,37 +124,45 @@
     - [11.7 名义类型与结构类型（Nominal vs Structural Typing）](#117-名义类型与结构类型nominal-vs-structural-typing)
       - [11.7.1 定义与形式化区分](#1171-定义与形式化区分)
       - [11.7.2 Rust 的类型二元性：名义与结构并存](#1172-rust-的类型二元性名义与结构并存)
-      - [11.7.3 内部二元性：生命周期（Lifetimes）子类型化的结构本质](LINK_PLACEHOLDER)
-      - [11.7.4 幻影类型与新类型惯用法：名义类型的零成本抽象（Zero-Cost Abstraction）](LINK_PLACEHOLDER)
-      - [11.7.5 一致性（Coherence）规则与名义类型的深层绑定](#1175-一致性规则与名义类型的深层绑定)
+      - [11.7.3 内部二元性：生命周期子类型化的结构本质](#1173-内部二元性生命周期子类型化的结构本质)
+      - [11.7.4 幻影类型与新类型惯用法：名义类型的零成本抽象](#1174-幻影类型与新类型惯用法名义类型的零成本抽象)
+      - [11.7.5 一致性规则与名义类型的深层绑定](#1175-一致性规则与名义类型的深层绑定)
       - [11.7.6 FFI 翻译中的类型范式冲突](#1176-ffi-翻译中的类型范式冲突)
       - [11.7.7 跨语言对比表](#1177-跨语言对比表)
       - [11.7.8 反命题与边界分析](#1178-反命题与边界分析)
         - [命题 1: "名义类型阻止了所有非预期的类型等价"](#命题-1-名义类型阻止了所有非预期的类型等价)
         - [命题 2: "结构类型系统可以解决孤儿规则（Orphan Rule）的问题"](#命题-2-结构类型系统可以解决孤儿规则orphan-rule的问题)
-        - [命题 3: "新类型模式（Newtype）具有零运行时（Runtime）成本"](#命题-3-新类型模式newtype具有零运行时成本)
+        - [命题 3: "新类型模式（Newtype）具有零运行时成本"](#命题-3-新类型模式newtype具有零运行时成本)
       - [11.7.9 认知路径：何时名义、何时结构](#1179-认知路径何时名义何时结构)
-    - [11.7.10 与多级引用（Reference）语义的交叉：引用的名义与结构行为](LINK_PLACEHOLDER)
+    - [11.7.10 与多级引用语义的交叉：引用的名义与结构行为](#11710-与多级引用语义的交叉引用的名义与结构行为)
   - [十二、待补充与演进方向（TODOs）](#十二待补充与演进方向todos)
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
   - [权威来源索引](#权威来源索引)
   - [十二、边界测试：类型系统的编译错误](#十二边界测试类型系统的编译错误)
     - [12.1 边界测试：类型不匹配（编译错误）](#121-边界测试类型不匹配编译错误)
-    - [12.2 边界测试：泛型（Generics）约束不满足（编译错误）](LINK_PLACEHOLDER)
+    - [12.2 边界测试：泛型约束不满足（编译错误）](#122-边界测试泛型约束不满足编译错误)
     - [12.3 边界测试：match 非穷尽（编译错误）](#123-边界测试match-非穷尽编译错误)
     - [12.4 边界测试：impl Trait 在参数位置与返回位置的差异（编译错误）](#124-边界测试impl-trait-在参数位置与返回位置的差异编译错误)
-    - [12.5 边界测试：生命周期（Lifetimes）省略（Lifetime Elision）规则失效（编译错误）](LINK_PLACEHOLDER)
+    - [12.5 边界测试：生命周期省略规则失效（编译错误）](#125-边界测试生命周期省略规则失效编译错误)
     - [10.1 边界测试：类型不匹配的基础错误](#101-边界测试类型不匹配的基础错误)
   - [实践](#实践)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
   - [Never 类型元组强制（Rust 1.96）](#never-类型元组强制rust-196)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：结构体（Struct）与元组结构体（理解层）](#测验-1结构体与元组结构体理解层)
-    - [测验 2：枚举与模式匹配（Pattern Matching）穷尽性（应用层）](LINK_PLACEHOLDER)
+    - [测验 1：结构体与元组结构体（理解层）](#测验-1结构体与元组结构体理解层)
+    - [测验 2：枚举与模式匹配穷尽性（应用层）](#测验-2枚举与模式匹配穷尽性应用层)
     - [测验 3：Option 与 unwrap（分析层）](#测验-3option-与-unwrap分析层)
     - [测验 4：类型推断边界（应用层）](#测验-4类型推断边界应用层)
     - [测验 5：类型转换与 as（分析层）](#测验-5类型转换与-as分析层)
+  - [十二、补充：运算符重载（Operator Overloading）](#十二补充运算符重载operator-overloading)
+    - [12.1 核心命题](#121-核心命题)
+    - [12.2 C++ 自由运算符重载](#122-c-自由运算符重载)
+    - [12.3 Rust 的 `std::ops` Trait 约束](#123-rust-的-stdops-trait-约束)
+    - [12.4 常用 `std::ops` trait](#124-常用-stdops-trait)
+    - [12.5 形式化视角](#125-形式化视角)
+    - [12.6 边界与反例](#126-边界与反例)
+    - [12.7 权威来源](#127-权威来源)
 
 ## 一、权威定义（Definition）
 
@@ -493,7 +501,7 @@ Rust 类型系统的安全性保障同样由引理、定理与推论构成严密
   ⟹ 异常隐藏控制流的问题被消除，所有错误路径在类型上显式且不可遗漏
 ```
 
-> **来源: [TRPL Ch9](LINK_PLACEHOLDER)** Result<T, E> 强制显式错误处理（Error Handling），避免异常带来的隐藏控制流。✅
+> **来源: TRPL Ch9** Result<T, E> 强制显式错误处理（Error Handling），避免异常带来的隐藏控制流。✅
 
 ### 4.8 推论：! (Never type) ⟹ 发散类型的逻辑完备性
 
@@ -1833,7 +1841,7 @@ Rust 并非纯粹的名义类型系统，也非纯粹的结构类型系统。
 | `fn(T) -> U` | **结构** | 函数指针类型由参数与返回类型决定 |
 | 生命周期 `'a` | **结构** | 子类型关系由生命周期区域的包含关系决定 |
 
-> **来源: [Rust Reference: Types](LINK_PLACEHOLDER)** Rust 的 `struct`、`enum`、`trait` 均为名义类型构造；元组、数组、函数指针、切片（Slice）为结构类型构造。✅
+> **来源: Rust Reference: Types** Rust 的 `struct`、`enum`、`trait` 均为名义类型构造；元组、数组、函数指针、切片（Slice）为结构类型构造。✅
 
 **不对称性：名义包装与结构原型的共存**:
 
@@ -2327,7 +2335,7 @@ let p: &Point = &Point(1, 2);
 
 > **分析**: 这一交叉点揭示了 Rust 类型系统的**层次化设计**：外层构造（引用、生命周期、泛型参数）倾向于结构规则以提供灵活性；内层原子类型（struct、enum、trait）倾向于名义规则以提供安全性与一致性。
 > [来源: [Rust Reference: Types](https://doc.rust-lang.org/reference/types.html) · [Rust Reference: Subtyping](https://doc.rust-lang.org/reference/subtyping.html) · [Rust Reference: Type Coercions](https://doc.rust-lang.org/reference/)]（一级来源）
-> **与多级引用语义的关联**: 详见 [`05_reference_semantics.md` §七](LINK_PLACEHOLDER) 对 `&mut &T`、`&&mut T` 及 partial reborrow 的深度分析——其中外层引用的可变性遵循结构规则，而内层引用的目标类型遵循名义或结构规则，两者的交互决定了复杂借用（Borrowing）场景的类型检查行为。
+> **与多级引用语义的关联**: 详见 `05_reference_semantics.md` §七 对 `&mut &T`、`&&mut T` 及 partial reborrow 的深度分析——其中外层引用的可变性遵循结构规则，而内层引用的目标类型遵循名义或结构规则，两者的交互决定了复杂借用（Borrowing）场景的类型检查行为。
 
 ---
 
@@ -2708,6 +2716,7 @@ fn main() {
 
 > **运算符重载不是语法糖，而是类型系统能力的显式化。
 > C++ 允许为任意类型自由重载 `+`、`-`、`*`、`/` 等运算符；Rust 将运算符重载限制在 `std::ops` trait 体系内，从而保证：
+>
 > 1. 重载行为必须显式实现；
 > 2. 编译器可以静态检查运算符两侧类型是否匹配；
 > 3. 不会出现 C++ 中"意外重载导致语义漂移"的问题。**
@@ -2728,6 +2737,7 @@ Vector2 operator+(const Vector2& a, const Vector2& b) {
 ```
 
 **C++ 的问题**：
+
 - 运算符语义完全由程序员定义，可能与自然直觉相悖。
 - 无法静态保证 `a + b` 的两边类型兼容。
 - 重载决策可能涉及隐式转换，导致意外行为。
@@ -2819,6 +2829,8 @@ error[E0369]: cannot add `Foo` to `Foo`
 ### 12.7 权威来源
 
 - [Rust Reference — Operator Expressions](https://doc.rust-lang.org/reference/expressions/operator-expr.html)
+- [Rust Reference — Trait Implementations](https://doc.rust-lang.org/reference/items/implementations.html#trait-implementations)
 - [std::ops](https://doc.rust-lang.org/std/ops/index.html)
-- Stroustrup, B. *The C++ Programming Language*, 4th Ed., Ch. 18
-
+- [TRPL — Advanced Features](https://doc.rust-lang.org/book/ch19-00-advanced-features.html)
+- [cppreference — Operator overloading](https://en.cppreference.com/w/cpp/language/operators)
+- [Stroustrup — The C++ Programming Language, 4th ed.](https://www.stroustrup.com/4th.html)

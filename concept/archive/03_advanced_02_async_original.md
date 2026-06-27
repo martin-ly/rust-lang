@@ -17,8 +17,8 @@
 > **层次定位**: L3 高级概念 / 异步（Async）子域
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Ana — 分析 Pin 与状态机的交互
-> **前置依赖**: [L2 泛型（Generics）](LINK_PLACEHOLDER) · [L2 Trait](LINK_PLACEHOLDER) · [L1 生命周期（Lifetimes）](LINK_PLACEHOLDER)
-> **后置延伸**: [L4 异步（Async）语义形式化](LINK_PLACEHOLDER) · [L6 Tokio](LINK_PLACEHOLDER) · [L7 效果系统](LINK_PLACEHOLDER)
+> **前置依赖**: [L2 泛型（Generics）](../02_intermediate/02_generics.md) · [L2 Trait](../02_intermediate/01_traits.md) · L1 生命周期（Lifetimes）
+> **后置延伸**: L4 异步（Async）语义形式化 · L6 Tokio · L7 效果系统
 > **跨层映射**: L3→L4 Future [来源: [std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html)] ↔  continuation monad | L3→L7 async effects → algebraic effects
 > **定理链编号**: T-050 Pin 安全性 → T-051 轮询一致性（Coherence） → T-052 async/await 转换正确性
 > **层级**: L3 高级概念
@@ -58,7 +58,7 @@
   - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attribute-matrix)
     - [2.1 异步 vs 并发 vs 并行对比矩阵](#21-异步-vs-并发-vs-并行对比矩阵)
     - [2.2 Future 组合子矩阵](#22-future-组合子矩阵)
-    - [2.3 运行时（Runtime）对比矩阵](LINK_PLACEHOLDER)
+    - [2.3 运行时对比矩阵](#23-运行时对比矩阵)
   - [三、形式化理论根基（Formal Foundation）](#三形式化理论根基formal-foundation)
     - [3.1 async fn 作为状态机：精确推导](#31-async-fn-作为状态机精确推导)
     - [3.1b 状态机操作语义（Operational Semantics）](#31b-状态机操作语义operational-semantics)
@@ -90,7 +90,7 @@
     - [8.2 正确示例：并发执行](#82-正确示例并发执行)
     - [8.3 正确示例：Stream 异步迭代](#83-正确示例stream-异步迭代)
     - [8.4 反例：在 async 中阻塞线程](#84-反例在-async-中阻塞线程)
-    - [8.5 反例：未 Pin 的自引用（Reference） Future](LINK_PLACEHOLDER)
+    - [8.5 反例：未 Pin 的自引用 Future](#85-反例未-pin-的自引用-future)
     - [8.6 边界极限测试：跨越 await 的 Send 约束](#86-边界极限测试跨越-await-的-send-约束)
     - [8.7 边界极限测试：取消安全系统分析](#87-边界极限测试取消安全系统分析)
     - [8.8 Waker 契约与活性](#88-waker-契约与活性)
@@ -98,7 +98,7 @@
     - [8.10 `Stream` / `Sink` trait 完整分析](#810-stream--sink-trait-完整分析)
     - [8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异](#811-pinboxdyn-future-vs-impl-future-的性能差异)
     - [8.12 `loom` 并发模型检测工具](#812-loom-并发模型检测工具)
-    - [8.13 Miri 动态验证：async 状态机的内存安全（Memory Safety）检测](LINK_PLACEHOLDER)
+    - [8.13 Miri 动态验证：async 状态机的内存安全检测](#813-miri-动态验证async-状态机的内存安全检测)
       - [场景 1：悬垂指针检测（使用已释放的 Box）](#场景-1悬垂指针检测使用已释放的-box)
       - [场景 2：无效值检测（非法 bool 构造）](#场景-2无效值检测非法-bool-构造)
       - [场景 3：async 状态机中的未初始化内存](#场景-3async-状态机中的未初始化内存)
@@ -111,7 +111,7 @@
       - [限制与注意事项](#限制与注意事项)
       - [生命周期陷阱](#生命周期陷阱)
   - [十一、国际课程与论文对齐](#十一国际课程与论文对齐)
-  - [十二、`AsyncFn` Trait 家族：异步闭包（Closures）的类型化（1.85 stable，RFC 3668）](LINK_PLACEHOLDER)
+  - [十二、`AsyncFn` Trait 家族：异步闭包的类型化（1.85 stable，RFC 3668）](#十二asyncfn-trait-家族异步闭包的类型化185-stablerfc-3668)
     - [12.1 问题：异步闭包的类型真空](#121-问题异步闭包的类型真空)
     - [12.2 `AsyncFn` 家族层级](#122-asyncfn-家族层级)
     - [12.3 关键形式化特性：可重入性限制](#123-关键形式化特性可重入性限制)
@@ -2712,7 +2712,7 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| 所有权（Ownership） | [](LINK_PLACEHOLDER) | Pin 根基 |
+| 所有权（Ownership） | [](../00_meta/placeholders/placeholder-generic.md) | Pin 根基 |
 | 生命周期 | [](../01_foundation/03_lifetimes.md) | async fn 捕获规则 |
 | Traits | [](../02_intermediate/01_traits.md) | Future trait 定义 |
 | 并发 | [](../03_advanced/01_concurrency.md) | 并行与并发对比 |

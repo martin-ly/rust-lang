@@ -238,7 +238,7 @@ Option<&str>   // 编译期生成另一个版本
 
 对比 C++ 模板：Rust 泛型在类型检查阶段就验证约束，错误信息更清晰。
 
-**知识点**：泛型通过单态化（Monomorphization）实现零成本抽象（Zero-Cost Abstraction）——运行时（Runtime）没有类型擦除或虚函数调用的开销。[→ 泛型详解](LINK_PLACEHOLDER)
+**知识点**：泛型通过单态化（Monomorphization）实现零成本抽象（Zero-Cost Abstraction）——运行时（Runtime）没有类型擦除或虚函数调用的开销。→ 泛型详解
 
 </details>
 

@@ -11,13 +11,13 @@
 >
 > **📎 交叉引用（Reference）**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[借用（Borrowing）](LINK_PLACEHOLDER)
+> 本主题在 knowledge 中有系统化的知识索引：[借用（Borrowing）](02_borrowing.md)
 > **受众**: [初学者]
 >
 > **层次定位**: L1 基础概念 / 借用（Borrowing）子域
 > **A/S/P 标记**: **S** — Structure（心智模型）
 > **双维定位**: C×Und — AXM 规则的结构化推理
-> **前置依赖**: [L1 所有权（Ownership）](LINK_PLACEHOLDER)
+> **前置依赖**: [L1 所有权（Ownership）](01_ownership.md)
 > **后置延伸**: [L2 Trait](../02_intermediate/01_traits.md) · [L4 分离逻辑](../04_formal/01_linear_logic.md) · [L3 并发](../03_advanced/01_concurrency.md)
 > **跨层映射**: L1→L4 借用规则 ↔ 线性逻辑 !A 规则 | L1→L3 借用（Borrowing） → Send/Sync
 > **定理链编号**: T-010 借用（Borrowing）唯一性 → T-011 生命周期（Lifetimes）包含 → T-012 悬垂引用 [来源: [Rust Reference — References](https://doc.rust-lang.org/reference/types/pointer.html)]不可达
@@ -74,17 +74,17 @@
   - [六、定理推理链（Theorem Chain）](#六定理推理链theorem-chain)
     - [6.1 借用 ⇒ 无数据竞争](#61-借用--无数据竞争)
     - [6.2 借用有效性定理](#62-借用有效性定理)
-    - [6.3 定理一致性（Coherence）矩阵](LINK_PLACEHOLDER)
+    - [6.3 定理一致性矩阵](#63-定理一致性矩阵)
   - [七、示例与反例（Examples \& Counter-examples）](#七示例与反例examples--counter-examples)
-    - [7.1 正确示例：不可变借用（Mutable Borrow）共存](LINK_PLACEHOLDER)
-    - [7.2 正确示例：可变借用（Mutable Borrow）的独占性](#72-正确示例可变借用的独占性)
-    - [7.3 反例：可变 + 不可变借用（Immutable Borrow）共存（E0502）](LINK_PLACEHOLDER)
+    - [7.1 正确示例：不可变借用共存](#71-正确示例不可变借用共存)
+    - [7.2 正确示例：可变借用的独占性](#72-正确示例可变借用的独占性)
+    - [7.3 反例：可变 + 不可变借用共存（E0502）](#73-反例可变--不可变借用共存e0502)
     - [7.4 反例：多个可变借用（E0499）](#74-反例多个可变借用e0499)
     - [7.5 边界示例：Two-Phase Borrows](#75-边界示例two-phase-borrows)
     - [7.6 反命题与边界分析](#76-反命题与边界分析)
       - [命题 1: "借用规则保证无数据竞争"](#命题-1-借用规则保证无数据竞争)
       - [命题 2: "\&mut T 保证独占访问"](#命题-2-mut-t-保证独占访问)
-      - [命题 3: "共享引用（Reference） \&T 总是安全的"](LINK_PLACEHOLDER)
+      - [命题 3: "共享引用 \&T 总是安全的"](#命题-3-共享引用-t-总是安全的)
     - [7.7 边界极限测试代码](#77-边界极限测试代码)
   - [八、认知路径（Cognitive Path）](#八认知路径cognitive-path)
     - [8.1 六步递进框架](#81-六步递进框架)
@@ -92,14 +92,14 @@
     - [7.7 国际课程与论文对齐](#77-国际课程与论文对齐)
   - [九、借用检查器错误修复模式（Fixing Ownership Errors）](#九借用检查器错误修复模式fixing-ownership-errors)
     - [9.1 诊断流程](#91-诊断流程)
-    - [9.2 模式 1：返回栈上引用（Reference）](#92-模式-1返回栈上引用)
+    - [9.2 模式 1：返回栈上引用](#92-模式-1返回栈上引用)
     - [9.3 模式 2：对只读引用尝试可变操作](#93-模式-2对只读引用尝试可变操作)
     - [9.4 模式 3：别名与可变操作重叠](#94-模式-3别名与可变操作重叠)
     - [9.5 模式 4：从集合中移出非 Copy 元素](#95-模式-4从集合中移出非-copy-元素)
     - [9.6 模式 5：借用检查器的过度保守](#96-模式-5借用检查器的过度保守)
   - [十、知识来源关系（Provenance）](#十知识来源关系provenance)
   - [十一、相关概念链接](#十一相关概念链接)
-    - [11.1 补充：`Cow<T>`（Clone on Write）的借用-所有权（Ownership）混合模式](#111-补充cowtclone-on-write的借用-所有权混合模式)
+    - [11.1 补充：`Cow<T>`（Clone on Write）的借用-所有权混合模式](#111-补充cowtclone-on-write的借用-所有权混合模式)
       - [类型定义与两种状态](#类型定义与两种状态)
       - [自动解引用与写时复制](#自动解引用与写时复制)
       - [与 `Deref` 和 `ToOwned` 的关系](#与-deref-和-toowned-的关系)
@@ -115,7 +115,7 @@
       - [三种内部可变性机制对比矩阵](#三种内部可变性机制对比矩阵)
       - [为什么 "绕过" 借用规则仍是安全的](#为什么-绕过-借用规则仍是安全的)
       - [panic vs 编译错误：工程权衡](#panic-vs-编译错误工程权衡)
-  - [十三、`let chains`：模式匹配（Pattern Matching）的逻辑合取扩展（1.88 stable，RFC 2497）](LINK_PLACEHOLDER)
+  - [十三、`let chains`：模式匹配的逻辑合取扩展（1.88 stable，RFC 2497）](#十三let-chains模式匹配的逻辑合取扩展188-stablerfc-2497)
     - [13.1 语法与语义](#131-语法与语义)
     - [13.2 形式化视角：逻辑合取的绑定作用域](#132-形式化视角逻辑合取的绑定作用域)
     - [13.3 与 `if let` guards 的对比](#133-与-if-let-guards-的对比)
@@ -124,16 +124,16 @@
   - [权威来源索引](#权威来源索引)
   - [十四、边界测试：借用规则的编译错误](#十四边界测试借用规则的编译错误)
     - [14.1 边界测试：可变借用与共享借用冲突（编译错误）](#141-边界测试可变借用与共享借用冲突编译错误)
-    - [14.2 边界测试：生命周期（Lifetimes）不匹配（编译错误）](LINK_PLACEHOLDER)
+    - [14.2 边界测试：生命周期不匹配（编译错误）](#142-边界测试生命周期不匹配编译错误)
     - [14.3 边界测试：悬垂引用（编译错误）](#143-边界测试悬垂引用编译错误)
-    - [14.4 边界测试：迭代器（Iterator）借用期间修改集合（编译错误）](LINK_PLACEHOLDER)
+    - [14.4 边界测试：迭代器借用期间修改集合（编译错误）](#144-边界测试迭代器借用期间修改集合编译错误)
     - [14.5 边界测试：`&mut` 别名规则违反（编译错误）](#145-边界测试mut-别名规则违反编译错误)
     - [10.5 边界测试：可变借用的嵌套与重新借用链（编译错误）](#105-边界测试可变借用的嵌套与重新借用链编译错误)
-    - [10.6 边界测试：slice 模式匹配（Pattern Matching）与借用冲突（编译错误）](#106-边界测试slice-模式匹配与借用冲突编译错误)
+    - [10.6 边界测试：slice 模式匹配与借用冲突（编译错误）](#106-边界测试slice-模式匹配与借用冲突编译错误)
   - [嵌入式测验](#嵌入式测验)
   - [实践](#实践)
   - [🎯 嵌入式测验](#-嵌入式测验)
-    - [Q1: 可变引用（Mutable Reference）和不可变引用（Immutable Reference）的共存规则是什么？](LINK_PLACEHOLDER)
+    - [Q1: 可变引用和不可变引用的共存规则是什么？](#q1-可变引用和不可变引用的共存规则是什么)
     - [Q2: 以下代码为什么报错？](#q2-以下代码为什么报错)
     - [Q3: 什么是悬垂引用（Dangling Reference）？](#q3-什么是悬垂引用dangling-reference)
     - [Q4: 何时应该使用 `clone()` 而非借用？](#q4-何时应该使用-clone-而非借用)
@@ -1055,7 +1055,7 @@ b.push_str(" world");  // ✅ 自动解引用: &mut MyBox<String> → &mut Strin
 
 ### 11.3 补充：`AsRef` / `AsMut` 的借用语义差异
 
-> **[Rust Reference: AsRef](LINK_PLACEHOLDER)** · **[Rust Reference: AsMut](LINK_PLACEHOLDER)** `AsRef<T>` 和 `AsMut<T>` 提供**廉价的引用转换**，但与 `Deref` 有本质区别：`Deref` 是"我是 T 的智能指针（Smart Pointer）/包装器"，`AsRef` 是"我可以被看作 T"。✅
+> **Rust Reference: AsRef** · **Rust Reference: AsMut** `AsRef<T>` 和 `AsMut<T>` 提供**廉价的引用转换**，但与 `Deref` 有本质区别：`Deref` 是"我是 T 的智能指针（Smart Pointer）/包装器"，`AsRef` 是"我可以被看作 T"。✅
 
 #### 核心差异
 

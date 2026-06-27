@@ -10,7 +10,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 系统讲解 **DO-178C 航空软件标准** 与 **DO-333 形式化方法补充** 的 Rust 映射——从软件等级 A~E 到定理证明、模型检查、抽象解释三类形式化方法在 Rust 生态中的工具链映射，分析 Rust 所有权（Ownership）系统在航空航天安全关键软件中的独特形式化优势。
 > **前置概念**: [形式化方法](./13_formal_methods.md) · [Hoare 逻辑](./15_hoare_logic.md) · [RustBelt](./04_rustbelt.md)
-> **后置概念**: [Unsafe](LINK_PLACEHOLDER) · [并发安全（Concurrency Safety）](LINK_PLACEHOLDER) · [验证工具链](LINK_PLACEHOLDER)
+> **后置概念**: Unsafe · 并发安全（Concurrency Safety） · 验证工具链
 
 ---
 
@@ -64,7 +64,7 @@
     - [测验 2：Ferrocene 是什么？它在 Rust 航空航天认证中解决了什么问题？（理解层）](#测验-2ferrocene-是什么它在-rust-航空航天认证中解决了什么问题理解层)
     - [测验 3：为什么航空航天领域特别需要形式化验证，而普通 Web 应用通常不需要？（理解层）](#测验-3为什么航空航天领域特别需要形式化验证而普通-web-应用通常不需要理解层)
     - [测验 4：MISRA C 和 Rust 在安全性保证上有什么根本区别？（理解层）](#测验-4misra-c-和-rust-在安全性保证上有什么根本区别理解层)
-    - [测验 5：Rust 的所有权（Ownership）系统如何帮助满足 DO-178C 的"数据耦合"和"控制耦合"要求？（理解层）](LINK_PLACEHOLDER)
+    - [测验 5：Rust 的所有权系统如何帮助满足 DO-178C 的"数据耦合"和"控制耦合"要求？（理解层）](#测验-5rust-的所有权系统如何帮助满足-do-178c-的数据耦合和控制耦合要求理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -812,7 +812,7 @@ Unsafe Rust 的形式化缺口:
 | [DO-333 - Formal Methods Supplement](https://www.rtca.org/) | ✅ 一级 | 形式化方法认证路径 |
 | [DO-330 - Tool Qualification](https://www.rtca.org/) | ✅ 一级 | 工具鉴定标准 |
 | [Ferrocene](https://ferrocene.dev/) | ✅ 一级 | 合格 Rust 编译器；ISO 26262 ASIL D / IEC 61508 SIL 3 / IEC 62304 Class C |
-| [RustBelt - POPL 2018](LINK_PLACEHOLDER) | ✅ 一级 | Rust 类型系统（Type System）形式化证明 |
+| RustBelt - POPL 2018 | ✅ 一级 | Rust 类型系统（Type System）形式化证明 |
 | [Verus - SOSP 2023](https://www.microsoft.com/en-us/research/publication/verus/) | ✅ 一级 | Rust SMT 验证 |
 | [Creusot - FM 2022](https://doi.org/10.1007/978-3-031-15077-8_26) | ✅ 一级 | Rust Why3 验证 |
 | [Kani](https://model-checking.github.io/kani/) | ✅ 一级 | Rust 模型检查 |
@@ -948,7 +948,7 @@ fn main() {
 }
 ```
 
-> **修正**: 航空航天系统要求**确定性执行**——相同输入总是产生相同输出，无未定义行为，无外部状态依赖。`const fn` 限制函数只能执行编译期可求值的操作（算术、控制流、调用其他 const fn），禁止 I/O、堆分配、可变静态变量。这与 SPARK/Ada 的 pure function 或 C 的 `constexpr` 类似，但 Rust 的 `const fn` 与类型系统集成更紧密——const 值可用于类型参数（数组大小、常量泛型（Generics））。形式化验证中，const fn 对应于"全函数"（total function）——对所有输入都终止并返回结果。[来源: [Rust Reference](LINK_PLACEHOLDER)]
+> **修正**: 航空航天系统要求**确定性执行**——相同输入总是产生相同输出，无未定义行为，无外部状态依赖。`const fn` 限制函数只能执行编译期可求值的操作（算术、控制流、调用其他 const fn），禁止 I/O、堆分配、可变静态变量。这与 SPARK/Ada 的 pure function 或 C 的 `constexpr` 类似，但 Rust 的 `const fn` 与类型系统集成更紧密——const 值可用于类型参数（数组大小、常量泛型（Generics））。形式化验证中，const fn 对应于"全函数"（total function）——对所有输入都终止并返回结果。来源: [Rust Reference]
 
 ### 10.3 边界测试：SPARK 模式的 Rust 近似与 `no_panic`（编译错误）
 

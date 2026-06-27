@@ -12,7 +12,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva
-> **前置依赖**: [Unsafe Rust](LINK_PLACEHOLDER) · [Miri](LINK_PLACEHOLDER) · [所有权（Ownership）形式化](LINK_PLACEHOLDER) · [Tree Borrows](LINK_PLACEHOLDER)
+> **前置依赖**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Miri](31_miri.md) · [所有权（Ownership）形式化](03_ownership_formal.md) · Tree Borrows
 > **后置延伸**: [Safety Tags](22_safety_tags.md) · [AutoVerus](24_autoverus.md)
 >
 > **来源**: [BorrowSanitizer 项目主页](https://borrowsanitizer.com/) · [Rust Project Goal #624](https://github.com/rust-lang/rust-project-goals/issues/624) · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/borrowsanitizer.html)

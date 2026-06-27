@@ -183,7 +183,7 @@ Trait Bounds 是 L2 的"枢纽概念"：
 | [04_error_handling.md](./04_error_handling.md) | 错误处理（Error Handling） | Result/Option、`?`、Custom Error、Error trait | ✅ v1.0 | Type System (enum), Trait | Async (异步错误传播) |
 | [05_assert_matches.md](./05_assert_matches.md) | 模式匹配（Pattern Matching）断言 | `matches!`、`assert_matches!`、模式断言语义 | ✅ v1.0 | Type System (Pattern), Error Handling | Macros |
 | [06_range_types.md](./06_range_types.md) | 范围类型语义 | `std::ops::Range` → `core::range`、`IntoIterator` 设计 | ✅ v1.0 | Type System, Generics | Version Tracking |
-| [07_closure_types.md](LINK_PLACEHOLDER) | 闭包类型系统（Type System） | 捕获模式、Fn/FnMut/FnOnce、move 闭包（Closures）、生命周期（Lifetimes）擦除 | ✅ v1.0 | Ownership, Borrowing | Async, Iterator |
+| 07_closure_types.md | 闭包类型系统（Type System） | 捕获模式、Fn/FnMut/FnOnce、move 闭包（Closures）、生命周期（Lifetimes）擦除 | ✅ v1.0 | Ownership, Borrowing | Async, Iterator |
 | [08_interior_mutability.md](./08_interior_mutability.md) | 内部可变性 | Cell/RefCell/UnsafeCell、Mutex/RwLock、原子类型 | ✅ v1.0 | Ownership, Borrowing | Concurrency, Unsafe |
 | [09_serde_patterns.md](./09_serde_patterns.md) | Serde 序列化 | Serialize/Deserialize、自定义 Visitor、性能优化 | ✅ v1.0 | Trait, Generics | Application Domains |
 | [10_module_system.md](./10_module_system.md) | 模块系统 | Crate/Module/Package、可见性、use 声明、Workspace | ✅ v1.0 | Ownership, Type System | Macros, Toolchain |
@@ -197,15 +197,16 @@ Trait Bounds 是 L2 的"枢纽概念"：
 ### 补充文件索引
 
 - [错误处理（Error Handling）深入：从 Result 到自定义错误生态](./15_error_handling_deep_dive.md)
-- [Rust 迭代器（Iterator）模式](LINK_PLACEHOLDER)
-- [迭代器（Iterator）模式：Rust 的惰性计算与零成本抽象（Zero-Cost Abstraction）](LINK_PLACEHOLDER)
-- [宏（Macro）模式：编译期代码生成的工程实践](LINK_PLACEHOLDER)
+- Rust 迭代器（Iterator）模式
+- [迭代器（Iterator）模式：Rust 的惰性计算与零成本抽象（Zero-Cost Abstraction）](16_iterator_patterns.md)
+- 宏（Macro）模式：编译期代码生成的工程实践
 - [RTTI 与动态类型识别：从 C++ 到 Rust](./25_rtti_and_dynamic_typing.md)
 - [C 预处理器 vs Rust 宏：从文本替换到语法树](./26_c_preprocessor_vs_rust_macros.md)
 - [异常安全：C++ 与 Rust 的错误处理哲学](./27_exception_safety_rust_cpp.md)
 - [构造与初始化：C++ 的构造函数 vs Rust 的结构体字面量](./28_construction_and_initialization.md)
 - [友元 vs 模块可见性：C++ 的 `friend` 与 Rust 的隐私边界](./29_friend_vs_module_privacy.md)
-- [生命周期（Lifetimes）高级主题：从 HRTB 到自引用（Reference）类型](LINK_PLACEHOLDER)
+- [测验：C/C++ → Rust 基础知识对比](./30_quiz_cpp_rust_foundations.md)
+- [生命周期（Lifetimes）高级主题：从 HRTB 到自引用（Reference）类型](18_lifetimes_advanced.md)
 - [高级 Trait 主题：从关联类型到特化](./19_advanced_traits.md)
 - [高级类型系统（Type System）：从关联类型到类型级编程](./20_type_system_advanced.md)
 - [元编程：Rust 的编译期代码生成与变换](./21_metaprogramming.md)

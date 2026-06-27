@@ -79,7 +79,7 @@ hello/
 
 ## 下一步
 
-完成安装后，进入 [所有权（Ownership）与移动语义](LINK_PLACEHOLDER)——Rust 最核心的概念。
+完成安装后，进入 所有权（Ownership）与移动语义——Rust 最核心的概念。
 
 ## 嵌入式测验（Embedded Quiz）
 

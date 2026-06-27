@@ -33,7 +33,7 @@
   - [一、核心概念](#一核心概念)
     - [1.1 无类型 Lambda 演算](#11-无类型-lambda-演算)
     - [1.2 类型化 Lambda 演算](#12-类型化-lambda-演算)
-    - [1.3 Rust 闭包（Closures）与 Lambda](LINK_PLACEHOLDER)
+    - [1.3 Rust 闭包与 Lambda](#13-rust-闭包与-lambda)
   - [二、计算能力](#二计算能力)
     - [2.1 Church 编码](#21-church-编码)
     - [2.2 Y 组合子](#22-y-组合子)
@@ -47,7 +47,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：lambda 演算的编译错误](#十边界测试lambda-演算的编译错误)
     - [10.1 边界测试：Y 组合子与递归类型（编译错误）](#101-边界测试y-组合子与递归类型编译错误)
-    - [10.2 边界测试：高阶函数的类型推断（Type Inference）（编译错误）](LINK_PLACEHOLDER)
+    - [10.2 边界测试：高阶函数的类型推断（编译错误）](#102-边界测试高阶函数的类型推断编译错误)
     - [10.3 边界测试：Y 组合子在 Rust 中的实现（编译错误）](#103-边界测试y-组合子在-rust-中的实现编译错误)
     - [10.4 边界测试：λ 演算中的变量捕获与闭包（编译错误）](#104-边界测试λ-演算中的变量捕获与闭包编译错误)
     - [10.3 边界测试：Y 组合子在 Rust 中的不可表达性（编译错误）](#103-边界测试y-组合子在-rust-中的不可表达性编译错误)
@@ -56,7 +56,7 @@
     - [测验 2：Rust 闭包的捕获模式（应用层）](#测验-2rust-闭包的捕获模式应用层)
     - [测验 3：Church 编码（应用层）](#测验-3church-编码应用层)
     - [测验 4：Y 组合子在 Rust 中的限制（分析层）](#测验-4y-组合子在-rust-中的限制分析层)
-    - [测验 5：类型化 Lambda 演算 ↔ Rust 类型系统（Type System）（评价层）](LINK_PLACEHOLDER)
+    - [测验 5：类型化 Lambda 演算 ↔ Rust 类型系统（评价层）](#测验-5类型化-lambda-演算--rust-类型系统评价层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
     - [反命题与边界](#反命题与边界)
@@ -525,7 +525,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: 高阶函数（HOF）在 lambda 演算中是核心构造。Rust 的闭包类型推断对高阶函数支持有限——多参数闭包的类型推断需要显式标注或使用泛型（Generics）函数。`impl Fn(A) -> C` 返回类型（RPIT）在 Rust 1.75+ 中支持，但闭包本身的类型是匿名的，不能显式写出。这与 Haskell 的自动类型推断（Hindley-Milner）形成对比——Rust 的推断更保守，要求关键位置显式标注，以换取更清晰的错误信息。[来源: [The Rust Programming Language](LINK_PLACEHOLDER)]
+> **修正**: 高阶函数（HOF）在 lambda 演算中是核心构造。Rust 的闭包类型推断对高阶函数支持有限——多参数闭包的类型推断需要显式标注或使用泛型（Generics）函数。`impl Fn(A) -> C` 返回类型（RPIT）在 Rust 1.75+ 中支持，但闭包本身的类型是匿名的，不能显式写出。这与 Haskell 的自动类型推断（Hindley-Milner）形成对比——Rust 的推断更保守，要求关键位置显式标注，以换取更清晰的错误信息。来源: [The Rust Programming Language]
 
 ### 10.3 边界测试：Y 组合子在 Rust 中的实现（编译错误）
 
@@ -541,7 +541,7 @@ where
 }
 ```
 
-> **修正**: Y 组合子是 λ 演算中的不动点组合子，允许递归函数的定义而不显式自引用（Reference）。Y 组合子需要**无限类型**（`T = T -> T`），Rust 的类型系统拒绝无限大小类型。间接实现：1) 使用 `Box` 打破循环（`Fn(Box<dyn Fn()>) -> Box<dyn Fn()>`）；2) 使用 trait object 延迟类型解析；3) 使用 `std::recursion`（不存在，需手动实现）。Rust 不支持 general recursion 的显式组合子，因为递归通过函数名直接自引用实现——这是设计的简化，而非限制。这与 Haskell 的 `fix`（`Data.Function.fix`，利用惰性求值实现 Y 组合子）或 Scheme 的 `letrec`（显式递归绑定）不同——Rust 的递归是直接的，无组合子抽象，但编译器可优化尾递归（虽不保证）。[来源: [Fixed-Point Combinator](LINK_PLACEHOLDER)] · [来源: [The Rust Programming Language](LINK_PLACEHOLDER)]
+> **修正**: Y 组合子是 λ 演算中的不动点组合子，允许递归函数的定义而不显式自引用（Reference）。Y 组合子需要**无限类型**（`T = T -> T`），Rust 的类型系统拒绝无限大小类型。间接实现：1) 使用 `Box` 打破循环（`Fn(Box<dyn Fn()>) -> Box<dyn Fn()>`）；2) 使用 trait object 延迟类型解析；3) 使用 `std::recursion`（不存在，需手动实现）。Rust 不支持 general recursion 的显式组合子，因为递归通过函数名直接自引用实现——这是设计的简化，而非限制。这与 Haskell 的 `fix`（`Data.Function.fix`，利用惰性求值实现 Y 组合子）或 Scheme 的 `letrec`（显式递归绑定）不同——Rust 的递归是直接的，无组合子抽象，但编译器可优化尾递归（虽不保证）。来源: [Fixed-Point Combinator] · 来源: [The Rust Programming Language]
 
 ### 10.4 边界测试：λ 演算中的变量捕获与闭包（编译错误）
 

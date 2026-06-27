@@ -20,15 +20,15 @@
 
 ## 📑 目录
 
-- [Newtype 与包装器模式：类型安全的零成本抽象（Zero-Cost Abstraction）](LINK_PLACEHOLDER)
+- Newtype 与包装器模式：类型安全的零成本抽象（Zero-Cost Abstraction）
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 Newtype 模式的本质](#11-newtype-模式的本质)
     - [1.2 单位类型与物理量](#12-单位类型与物理量)
     - [1.3 与类型别名（type alias）的区别](#13-与类型别名type-alias的区别)
   - [二、技术细节](#二技术细节)
-    - [2.1 Deref 与自动解引用（Reference）](LINK_PLACEHOLDER)
-    - [2.2 孤儿规则（Orphan Rule）与 Newtype](LINK_PLACEHOLDER)
+    - 2.1 Deref 与自动解引用（Reference）
+    - 2.2 孤儿规则（Orphan Rule）与 Newtype
     - [2.3 包装器类型谱系](#23-包装器类型谱系)
   - [三、设计模式矩阵](#三设计模式矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
@@ -41,7 +41,7 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Newtype 与包装器的编译错误](#十边界测试newtype-与包装器的编译错误)
     - [10.1 边界测试：Newtype 不继承原类型的 trait（编译错误）](#101-边界测试newtype-不继承原类型的-trait编译错误)
-    - [10.2 边界测试：PhantomData 的协变/逆变误用（编译错误 / 运行时（Runtime） UB）](LINK_PLACEHOLDER)
+    - 10.2 边界测试：PhantomData 的协变/逆变误用（编译错误 / 运行时（Runtime） UB）
     - [10.3 边界测试：newtype 的 derive 限制（编译错误）](#103-边界测试newtype-的-derive-限制编译错误)
     - [10.4 边界测试：`Deref` 滥用导致的隐式转换陷阱（编译错误/逻辑错误）](#104-边界测试deref-滥用导致的隐式转换陷阱编译错误逻辑错误)
     - [10.5 边界测试：newtype 的 `Deref` 过度使用导致的方法名冲突（编译错误/逻辑错误）](#105-边界测试newtype-的-deref-过度使用导致的方法名冲突编译错误逻辑错误)

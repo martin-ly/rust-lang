@@ -37,7 +37,7 @@
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 Rust 在分布式系统中的定位](#11-rust-在分布式系统中的定位)
-    - [1.2 异步（Async）运行时（Runtime）作为分布式基础](LINK_PLACEHOLDER)
+    - [1.2 异步运行时作为分布式基础](#12-异步运行时作为分布式基础)
     - [1.3 服务发现与负载均衡](#13-服务发现与负载均衡)
   - [二、技术细节](#二技术细节)
     - [2.1 gRPC 与 Protocol Buffers](#21-grpc-与-protocol-buffers)
@@ -56,7 +56,7 @@
     - [10.2 边界测试：分布式事务的 `Send` 约束（编译错误）](#102-边界测试分布式事务的-send-约束编译错误)
     - [10.3 边界测试：序列化消息的大小限制（运行时错误）](#103-边界测试序列化消息的大小限制运行时错误)
     - [10.4 边界测试：分布式共识的时钟偏差（逻辑错误）](#104-边界测试分布式共识的时钟偏差逻辑错误)
-    - [10.5 边界测试：Raft 共识中的网络分区与脑裂（运行时一致性（Coherence）破坏）](LINK_PLACEHOLDER)
+    - [10.5 边界测试：Raft 共识中的网络分区与脑裂（运行时一致性破坏）](#105-边界测试raft-共识中的网络分区与脑裂运行时一致性破坏)
     - [10.3 边界测试：Raft 的日志不一致与快照安装（运行时一致性风险）](#103-边界测试raft-的日志不一致与快照安装运行时一致性风险)
     - [补充定理链](#补充定理链)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -623,7 +623,7 @@ fn send(msg: &LargeMessage) {
 }
 ```
 
-> **修正**: 分布式系统中，消息大小直接影响延迟、吞吐和可靠性。大消息导致：1) 网络分片（IP 分片、TCP 流式传输），增加丢包重传成本；2) 内存压力（反序列化时分配大缓冲区）；3) 序列化/反序列化 CPU 开销。Rust 的序列化生态（`serde` + `bincode`/`postcard`/`protobuf`）在编译期验证结构可序列化，但不限制大小。安全模式：1) 应用层限制消息大小（`MAX_MESSAGE_SIZE`）；2) 使用流式序列化（`serde_json::to_writer` 到网络流）；3) 分块传输（chunked transfer）。这与 gRPC 的 `max_message_size` 配置或 Kafka 的 `max.request.size` 类似——大小限制是协议设计的一部分，Rust 的类型系统（Type System）不自动处理，但允许零成本的紧凑序列化（`postcard` 比 JSON 小 50%+）。[来源: [serde Documentation](LINK_PLACEHOLDER)] · [来源: [Cap'n Proto Rust](LINK_PLACEHOLDER)]
+> **修正**: 分布式系统中，消息大小直接影响延迟、吞吐和可靠性。大消息导致：1) 网络分片（IP 分片、TCP 流式传输），增加丢包重传成本；2) 内存压力（反序列化时分配大缓冲区）；3) 序列化/反序列化 CPU 开销。Rust 的序列化生态（`serde` + `bincode`/`postcard`/`protobuf`）在编译期验证结构可序列化，但不限制大小。安全模式：1) 应用层限制消息大小（`MAX_MESSAGE_SIZE`）；2) 使用流式序列化（`serde_json::to_writer` 到网络流）；3) 分块传输（chunked transfer）。这与 gRPC 的 `max_message_size` 配置或 Kafka 的 `max.request.size` 类似——大小限制是协议设计的一部分，Rust 的类型系统（Type System）不自动处理，但允许零成本的紧凑序列化（`postcard` 比 JSON 小 50%+）。来源: [serde Documentation] · 来源: [Cap'n Proto Rust]
 
 ### 10.4 边界测试：分布式共识的时钟偏差（逻辑错误）
 

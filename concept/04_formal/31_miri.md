@@ -20,7 +20,7 @@
 > **来源**: [Miri 官方 README](https://github.com/rust-lang/miri) ·
 > [Rustonomicon — Undefined Behavior](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) ·
 > [Tree Borrows Paper](https://www.ralfj.de/blog/2023/01/07/tree-borrows.html) ·
-> [Stacked Borrows Paper](https://plv.mpi-sws.org/rust-stacked-borrows/)
+> [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
 
 ## 📑 目录
 
@@ -169,7 +169,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 | Crate / 文件 | 覆盖主题 | 运行命令 |
 |:---|:---|:---|
 | [`crates/c02_type_system/src/miri_tests.rs`](../../crates/c02_type_system/src/miri_tests.rs) | `MaybeUninit`、`NonNull`、`ManuallyDrop`、裸指针别名 | `cargo miri test --package c02_type_system miri_tests` |
-| [`crates/c06_async/src/miri_tests.rs`](LINK_PLACEHOLDER) | 异步（Async）运行时（Runtime）内存安全（Memory Safety） | `cargo miri test --package c06_async miri_tests` |
+| `crates/c06_async/src/miri_tests.rs` | 异步（Async）运行时（Runtime）内存安全（Memory Safety） | `cargo miri test --package c06_async miri_tests` |
 | [`crates/c08_algorithms/src/miri_tests.rs`](../../crates/c08_algorithms/src/miri_tests.rs) | 排序、链表、数据结构 | `cargo miri test --package c08_algorithms miri_tests` |
 | [`exercises/src/unsafe_rust/ex05_miri_validation.rs`](../../exercises/src/unsafe_rust/ex05_miri_validation.rs) | UB 识别与修复练习 | `cargo miri test --package exercises ex05_miri_validation` |
 
@@ -257,7 +257,7 @@ graph TD
 |:---|:---:|:---|
 | [Miri GitHub](https://github.com/rust-lang/miri) | ✅ 一级 | 官方仓库，安装与使用文档 |
 | [Rust Reference — UB](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) | ✅ 一级 | Rust 官方未定义行为列表 |
-| [Stacked Borrows Paper](https://plv.mpi-sws.org/rust-stacked-borrows/) | ✅ 二级 | 学术形式化模型 |
+| [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) | ✅ 二级 | 学术形式化模型 |
 | [Tree Borrows Blog](https://www.ralfj.de/blog/2023/01/07/tree-borrows.html) | ✅ 二级 | Tree Borrows 设计说明 |
 | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | ✅ 二级 | unsafe Rust 实践指南 |
 
