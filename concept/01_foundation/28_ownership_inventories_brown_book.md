@@ -82,7 +82,7 @@ fn main() {
 
 **解析**:
 
-- `make_exciting` 接收 `&str`，不获取 `s` 的所有权，因此调用后 `s` 仍可用。
+- `make_exciting` 接收 `&str`，不获取 `s` 的所有权（Ownership），因此调用后 `s` 仍可用。
 - `s.replace(...)` 返回新的 `String`，其所有权在函数内部通过 `s2` → `s3` 传递，最终返回给调用者。
 - `out` 拥有返回的 `String`，`s` 仍拥有自己的 `String`，两者独立。
 
@@ -149,7 +149,7 @@ fn main() {
 
 **解析**:
 
-- `first_word(&s)` 返回的 `&str` 生命周期不能超过 `s`。
+- `first_word(&s)` 返回的 `&str` 生命周期（Lifetimes）不能超过 `s`。
 - `s` 在内部块结束时被释放，但 `result` 仍指向它。
 - 修复方案：将 `result` 的创建和使用限制在 `s` 的有效作用域内，或返回 `String` 而非引用（Reference）。
 
@@ -172,9 +172,9 @@ fn main() {
   - [`23_quiz_ownership_borrowing.md`](LINK_PLACEHOLDER) — 更多所有权/借用（Borrowing）选择题
   - [`exercises/src/ownership_borrowing/`](../../exercises/src/ownership_borrowing/) — 可编译的修复练习
     - [`ex06_string_replace_chain.rs`](../../exercises/src/ownership_borrowing/ex06_string_replace_chain.rs) — 字符串替换链（对应 Inventory #1）
-    - [`ex07_vec_slice_borrow.rs`](../../exercises/src/ownership_borrowing/ex07_vec_slice_borrow.rs) — Vec 与切片（Slice）借用冲突（对应 Inventory #2）
+    - [`ex07_vec_slice_borrow.rs`](../../exercises/src/ownership_borrowing/ex07_vec_slice_borrow.rs) — Vec 与切片（Slice）借用（Borrowing）冲突（对应 Inventory #2）
     - [`ex08_dangling_reference.rs`](LINK_PLACEHOLDER) — 避免悬垂引用（Reference）（对应 Inventory #3）
-    - [`ex09_dangling_stack_reference.rs`](../../exercises/src/ownership_borrowing/ex09_dangling_stack_reference.rs) — 悬垂栈引用
+    - [`ex09_dangling_stack_reference.rs`](../../exercises/src/ownership_borrowing/ex09_dangling_stack_reference.rs) — 悬垂栈引用（Reference）
     - [`ex10_vec_reallocation.rs`](../../exercises/src/ownership_borrowing/ex10_vec_reallocation.rs) — Vec 重新分配与引用失效
     - [`ex11_hashmap_borrow.rs`](../../exercises/src/ownership_borrowing/ex11_hashmap_borrow.rs) — HashMap 借用冲突
     - [`ex12_string_in_loop.rs`](../../exercises/src/ownership_borrowing/ex12_string_in_loop.rs) — 循环中的所有权

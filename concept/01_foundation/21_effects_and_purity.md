@@ -10,7 +10,7 @@
 > **Summary**: Tracking side effects and purity in Rust functions, const contexts, and unsafe boundaries.
 > 一个表达式是**引用（Reference）透明**的，当且仅当：在程序的任何位置，该表达式都可以被其计算结果替换，而不改变程序的行为。
 > ```text 引用透明: expr ≡ value_of(expr) 在任何上下文中成立```
-> **引用透明的表达式**:- 纯数学函数：`2 + 3` ≡ `5` - 无副作用的函数：`square(4)` ≡ `16`
+> **引用（Reference）透明的表达式**:- 纯数学函数：`2 + 3` ≡ `5` - 无副作用的函数：`square(4)` ≡ `16`
 > **非引用透明的表达式**: - `rand()` — 每次调用结果不同 - `println!("hello")` — 有 IO 副作用 - `x += 1` — 修改存储状态 | 特性 | 引用透明代码 | 非引用透明代码 |
 > |:---|:---|:
 > **受众**: [初学者]
@@ -119,7 +119,7 @@ fn process_unsafe(ptr: *mut i32) {  // unsafe 块表示未定义效果
 }
 ```
 
-> **形式化命题** [Tier 3]: Rust 的类型系统是一种**效果系统（Effect System）的原型**——`&mut T` = write effect, `unsafe` = undefined effect, `async` = async effect, `Result<T, E>` = exception effect。
+> **形式化命题** [Tier 3]: Rust 的类型系统（Type System）是一种**效果系统（Effect System）的原型**——`&mut T` = write effect, `unsafe` = undefined effect, `async` = async effect, `Result<T, E>` = exception effect。
 >
 > **论证**:
 > 虽然 Rust 目前没有显式的效果类型（如 Koka 的 `fn f(): <io, state> T`），但其类型签名通过参数和返回类型**隐式编码**了效果信息。
@@ -421,7 +421,7 @@ fn closure_effect() {
 | **Haskell** | `State` Monad | `IO` Monad | `Either` / `Maybe` | `IO` / `STM` | Monad + 惰性 |
 | **Rust** | `&mut T` / `Cell` / `RefCell` | 普通函数（无特殊标记） | `Result<T, E>` | `async` / `Send`/`Sync` | 所有权（Ownership） + 借用（Borrowing） |
 
-> **关键洞察**: Haskell 通过**Monad 组合子**将副作用完全显式化；Rust 通过**所有权约束**在类型层面部分显式化副作用。两者殊途同归——目标都是让副作用"可见、可追踪、可组合"。Rust 的选择更适合系统编程：零运行时（Runtime）开销、与命令式代码无缝集成。[来源: 💡 原创分析]
+> **关键洞察**: Haskell 通过**Monad 组合子**将副作用完全显式化；Rust 通过**所有权（Ownership）约束**在类型层面部分显式化副作用。两者殊途同归——目标都是让副作用"可见、可追踪、可组合"。Rust 的选择更适合系统编程：零运行时（Runtime）开销、与命令式代码无缝集成。[来源: 💡 原创分析]
 
 ---
 
@@ -651,7 +651,7 @@ fn main() {
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | 副作用与纯度：从引用透明到 Rust 的所有权效果 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 副作用与纯度：从引用透明到 Rust 的所有权效果 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 副作用与纯度：从引用透明到 Rust 的所有权效果 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 副作用与纯度：从引用透明到 Rust 的所有权效果 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 副作用可追踪 ⟸ 纯函数标记 ⟸ 效果系统

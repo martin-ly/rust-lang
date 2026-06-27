@@ -9,6 +9,8 @@
 > **状态**: 活跃维护
 >
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 ## 一、归档政策

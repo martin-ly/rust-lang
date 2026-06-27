@@ -14,7 +14,6 @@
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
-
 > **后置概念**: [Borrowing](./02_borrowing.md)
 ---
 
@@ -110,7 +109,7 @@ take_ownership(s.clone());
 println!("{s}");
 ```
 
-**知识点**：通过引用（Reference）借用（Borrowing）可以避免所有权转移。[→ 借用详解](LINK_PLACEHOLDER)
+**知识点**：通过引用（Reference）借用（Borrowing）可以避免所有权（Ownership）转移。[→ 借用详解](LINK_PLACEHOLDER)
 
 </details>
 
@@ -174,7 +173,7 @@ fn main() {
 }
 ```
 
-**知识点**：Rust 借用检查器通过作用域分析（而非运行时（Runtime）锁）保证内存安全（Memory Safety）。[→ 借用规则详解](./02_borrowing.md)
+**知识点**：Rust 借用（Borrowing）检查器通过作用域分析（而非运行时（Runtime）锁）保证内存安全（Memory Safety）。[→ 借用规则详解](./02_borrowing.md)
 
 </details>
 
@@ -214,7 +213,7 @@ fn main() {
 }
 ```
 
-**知识点**：Rust 使用**非词法生命周期（NLL）**分析引用的实际使用位置，而非仅依赖词法作用域。[→ NLL 与 Polonius](../03_advanced/08_nll_and_polonius.md)
+**知识点**：Rust 使用**非词法生命周期（NLL）**分析引用（Reference）的实际使用位置，而非仅依赖词法作用域。[→ NLL 与 Polonius](../03_advanced/08_nll_and_polonius.md)
 
 </details>
 
@@ -278,7 +277,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 }
 ```
 
-**语义**：返回的引用生命周期至少与 `x` 和 `y` 中**较短的那个**一样长。
+**语义**：返回的引用生命周期（Lifetimes）至少与 `x` 和 `y` 中**较短的那个**一样长。
 
 **知识点**：生命周期标注不改变运行时（Runtime）代码，仅向编译器提供**借用关系约束**。[→ 生命周期语法](LINK_PLACEHOLDER)
 
@@ -404,7 +403,7 @@ shared shared
 
 **限制**：`Rc` 不提供内部可变性。如需修改共享数据，需配合 `RefCell<T>` 或 `Mutex<T>`。
 
-**知识点**：`Rc` 是 Rust 所有权系统的**补充**而非替代——它通过运行时引用计数允许有限的共享所有权，代价是只能用于单线程场景。[→ 智能指针（Smart Pointer）详解](LINK_PLACEHOLDER)
+**知识点**：`Rc` 是 Rust 所有权系统的**补充**而非替代——它通过运行时（Runtime）引用计数允许有限的共享所有权，代价是只能用于单线程场景。[→ 智能指针（Smart Pointer）详解](LINK_PLACEHOLDER)
 
 </details>
 
@@ -414,7 +413,7 @@ shared shared
 
 | 得分 | 评价 | 建议 |
 |:---:|:---|:---|
-| 10/10 | 🏆 所有权系统已内化 | 直接进阶至 [L2 智能指针](../02_intermediate/03_memory_management.md) |
+| 10/10 | 🏆 所有权系统已内化 | 直接进阶至 [L2 智能指针（Smart Pointer）](../02_intermediate/03_memory_management.md) |
 | 7–9/10 | ✅ 核心概念掌握 | 强化 [L1 练习](../../exercises/src/ownership_borrowing/)，关注错题对应的概念文件 |
 | 4–6/10 | 🔄 需巩固基础 | 重读 [Ownership](./01_ownership.md) · [Borrowing](./02_borrowing.md) · [Lifetimes](./03_lifetimes.md)，完成 rustlings 对应章节 |
 | 0–3/10 | 📚 建议重新开始 | 从 [Ownership](./01_ownership.md) 逐节阅读，配合 [crates/c01_ownership_borrow_scope](../../crates/c01_ownership_borrow_scope/) 可编译示例 |

@@ -9,6 +9,8 @@
 > **核心问题**：Rust 的类型系统（Type System）是否构成效应系统？其边界在哪里？与代数效应、能力系统、所有权（Ownership）系统的本质差异为何？
 >
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 ## 目录

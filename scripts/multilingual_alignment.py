@@ -3,7 +3,12 @@
 多语言 KG 对齐漂移检测（P2-2 / i18n-6）
 
 读取 concept/00_meta/kg_data_v2.json 中的中英 skos:prefLabel 对，
-使用 LaBSE 计算跨语言语义相似度，对低于阈值的术语对生成审校清单。
+使用 sentence-transformers 计算跨语言语义相似度，对低于阈值的术语对生成审校清单。
+
+优先使用 LaBSE/XLM-R 类模型；若本地未缓存，则回退到已缓存的 all-MiniLM-L6-v2
+并提示用户。可通过环境变量覆盖模型：
+
+    ALIGNMENT_MODEL=sentence-transformers/LaBSE python scripts/multilingual_alignment.py
 
 用法：
     cd e:\_src\rust-lang
@@ -40,12 +45,38 @@ def _ensure_venv() -> None:
 _ensure_venv()
 
 from sentence_transformers import SentenceTransformer  # noqa: E402
+from huggingface_hub import try_to_load_from_cache  # noqa: E402
 import numpy as np  # noqa: E402
 
 KG_PATH = ROOT / "concept" / "00_meta" / "kg_data_v2.json"
 REPORT_PATH = ROOT / "reports" / "MULTILINGUAL_ALIGNMENT_DRIFT_2026_06_27.md"
-MODEL_NAME = "sentence-transformers/LaBSE"
+
+# Preferred cross-lingual models in order. The first one locally cached is used.
+PREFERRED_MODELS = [
+    "sentence-transformers/LaBSE",
+    "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "sentence-transformers/paraphrase-multilingual-mpnet-base-v2",
+]
+FALLBACK_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 THRESHOLD = 0.7
+
+
+def _is_cached(repo_id: str) -> bool:
+    """Check whether a sentence-transformers model has its config cached."""
+    try:
+        return try_to_load_from_cache(repo_id=repo_id, filename="config.json") is not None
+    except Exception:
+        return False
+
+
+def choose_model(env_model: str | None) -> tuple[str, bool]:
+    """Return (model_name, is_cross_lingual)."""
+    if env_model:
+        return env_model, "multilingual" in env_model.lower() or "LaBSE" in env_model
+    for model in PREFERRED_MODELS:
+        if _is_cached(model):
+            return model, True
+    return FALLBACK_MODEL, False
 
 
 def load_kg(path: Path) -> dict[str, Any]:
@@ -80,6 +111,9 @@ def normalise(vec: np.ndarray) -> np.ndarray:
 
 
 def main() -> int:
+    env_model = os.environ.get("ALIGNMENT_MODEL")
+    model_name, is_cross_lingual = choose_model(env_model)
+
     print(f"[multilingual_alignment] Loading KG from {KG_PATH}", file=sys.stderr)
     kg = load_kg(KG_PATH)
     entities = iter_entities(kg)
@@ -94,8 +128,14 @@ def main() -> int:
         else:
             missing.append((entity, "en" if not en else "zh"))
 
-    print(f"[multilingual_alignment] Loading model {MODEL_NAME} ...", file=sys.stderr)
-    model = SentenceTransformer(MODEL_NAME)
+    print(f"[multilingual_alignment] Loading model {model_name} ...", file=sys.stderr)
+    if not is_cross_lingual:
+        print(
+            "[multilingual_alignment] WARNING: preferred multilingual models are not cached; "
+            f"falling back to {model_name}. Set ALIGNMENT_MODEL to LaBSE/XLM-R for true cross-lingual scores.",
+            file=sys.stderr,
+        )
+    model = SentenceTransformer(model_name)
 
     en_texts = [p[1] for p in pairs]
     zh_texts = [p[2] for p in pairs]
@@ -122,13 +162,21 @@ def main() -> int:
     min_sim = float(np.min(sims)) if len(sims) else 0.0
     max_sim = float(np.max(sims)) if len(sims) else 0.0
 
+    cross_lingual_note = (
+        "✅ 当前使用的是真正的跨语言模型。"
+        if is_cross_lingual
+        else "⚠️ 当前使用的模型未针对中英跨语言训练，分数仅作参考；"
+          "建议设置 `ALIGNMENT_MODEL=sentence-transformers/LaBSE` 重新运行。"
+    )
+
     report = [
         "# 多语言术语对齐漂移检测报告",
         "",
         f"- 生成时间：{datetime.now().isoformat(timespec='seconds')}",
         f"- 知识图谱：{KG_PATH}",
-        f"- 对齐模型：{MODEL_NAME}",
+        f"- 对齐模型：`{model_name}`",
         f"- 漂移阈值：{THRESHOLD}",
+        f"- {cross_lingual_note}",
         "",
         "## 摘要",
         "",
@@ -172,9 +220,10 @@ def main() -> int:
         "",
         "## 统计方法",
         "",
-        "1. 使用 LaBSE 分别编码每对实体的英文和中文 `skos:prefLabel`。",
+        "1. 使用 sentence-transformers 分别编码每对实体的英文和中文 `skos:prefLabel`。",
         "2. 对 embedding 做 L2 归一化，计算余弦相似度。",
         "3. 相似度低于阈值 `0.7` 的术语对标记为漂移，需人工审校。",
+        "4. 推荐模型：`sentence-transformers/LaBSE` 或 XLM-R 系列。",
         "",
     ])
 

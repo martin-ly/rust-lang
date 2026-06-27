@@ -12,6 +12,8 @@
 > **状态**: v1.1（2026-05-13 重构索引）
 >
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 # Rust vs C++：形式系统模型 vs 机制工程模型 —— 核心论点索引

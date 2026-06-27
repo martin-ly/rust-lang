@@ -113,7 +113,7 @@ let val = match may_fail() {
 
 **转换能力**：`?` 会自动调用 `.into()` 进行错误类型转换（要求目标错误类型实现 `From<SourceError>`）。
 
-**知识点**：`?` 运算符消除了 Go/Java 中冗长的 `if err != nil` 或 `try-catch` 样板代码，同时保持显式错误传播。[→ 错误处理基础详解](./10_error_handling_basics.md)
+**知识点**：`?` 运算符消除了 Go/Java 中冗长的 `if err != nil` 或 `try-catch` 样板代码，同时保持显式错误传播。[→ 错误处理（Error Handling）基础详解](./10_error_handling_basics.md)
 
 </details>
 

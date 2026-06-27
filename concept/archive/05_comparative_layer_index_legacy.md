@@ -16,6 +16,8 @@
 > **[来源: Wikipedia - Programming Paradigm]** · **[来源: Wikipedia - Type System]** · **[来源: PLDI 2023 - Comparative Language Studies]** · **[来源: IEEE Software - Rust Adoption Surveys]**
 >
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 ## 📑 目录

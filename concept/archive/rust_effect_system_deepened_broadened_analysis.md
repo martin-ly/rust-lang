@@ -8,6 +8,8 @@
 > **表征方式**：思维导图 · 多维矩阵热力图 · 定理推理判定树 · 边界语义空间决策树 · 历史演进时间线 · 编译器 lowering 路径图 · 形式化验证生态图谱 · 范畴论三元对比图 · unsafe 形式化模型图 · 工程决策雷达图 · 综合架构全景图
 >
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 ## 目录

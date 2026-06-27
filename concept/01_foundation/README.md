@@ -29,7 +29,7 @@
     - [补充文件索引](#补充文件索引)
   - [三、课程对齐路径](#三课程对齐路径)
   - [四、形式化层级定位（理论-模型-实践）](#四形式化层级定位理论-模型-实践)
-  - [五、本层定理一致性（Coherence）概览](LINK_PLACEHOLDER)
+  - [五、本层定理一致性（Coherence）概览](#五本层定理一致性概览)
   - [六、认知路径（从直觉到形式化）](#六认知路径从直觉到形式化)
   - [七、待创建内容](#七待创建内容)
   - [八、跨层出口](#八跨层出口)
@@ -116,7 +116,7 @@ graph TB
     style TS fill:#ff9,stroke:#333
 ```
 
-> **认知功能**: 此图是 L1 层的**概念关系拓扑图**，展示四概念之间的「递进依赖」与「循环强化」双重结构。==> 实线箭头表示严格的学习依赖顺序（所有权（Ownership） → 借用（Borrowing） → 生命周期（Lifetimes）），-.-> 虚线箭头表示概念间的反馈循环（类型系统影响所有权语义，生命周期验证借用）。四种颜色编码帮助快速区分概念域。关键认知：L1 不是四个孤立文件的集合，而是一个**有机系统**——每个概念既依赖前面的概念，又反过来强化整个系统的保证。建议读者在学习过程中定期回到此图，确认自己理解了「当前概念与相邻概念的交互关系」。 [来源: 💡 原创分析]
+> **认知功能**: 此图是 L1 层的**概念关系拓扑图**，展示四概念之间的「递进依赖」与「循环强化」双重结构。==> 实线箭头表示严格的学习依赖顺序（所有权（Ownership） → 借用（Borrowing） → 生命周期（Lifetimes）），-.-> 虚线箭头表示概念间的反馈循环（类型系统（Type System）影响所有权语义，生命周期验证借用）。四种颜色编码帮助快速区分概念域。关键认知：L1 不是四个孤立文件的集合，而是一个**有机系统**——每个概念既依赖前面的概念，又反过来强化整个系统的保证。建议读者在学习过程中定期回到此图，确认自己理解了「当前概念与相邻概念的交互关系」。 [来源: 💡 原创分析]
 
 ### 1.1 概念间语义链接
 
@@ -168,7 +168,7 @@ Type System（理解"类型即证明"）
 | [08_collections.md](./08_collections.md) | 集合类型 | Vec/HashMap/BTreeMap/HashSet、Entry API、容量管理 | ✅ v1.0 | Ownership, Generics | Smart Pointers, Ecosystem |
 | [09_strings_and_text.md](./09_strings_and_text.md) | 字符串与文本 | String/str、UTF-8、格式化、OS 字符串、C 字符串 | ✅ v1.0 | Ownership, Type System | Collections, FFI |
 | [10_numerics.md](./10_numerics.md) | 数值类型与运算 | 整数、浮点、溢出、饱和运算、类型转换 | ✅ v1.0 | Type System | Zero Cost, Collections |
-| [20_variable_model.md](./20_variable_model.md) | 变量模型（PL 通用） | 环境/存储、绑定语义、值语义 vs 引用语义、lvalue/rvalue | ✅ v1.0 | Type System, Ownership | Evaluation Strategies |
+| [20_variable_model.md](./20_variable_model.md) | 变量模型（PL 通用） | 环境/存储、绑定语义、值语义 vs 引用（Reference）语义、lvalue/rvalue | ✅ v1.0 | Type System, Ownership | Evaluation Strategies |
 | [21_effects_and_purity.md](./21_effects_and_purity.md) | 副作用与纯度 | 引用透明、效果系统、Rust const/unsafe/async 作为效果 | ✅ v1.0 | Ownership, Type System | Formal Methods |
 | [22_data_abstraction_spectrum.md](./22_data_abstraction_spectrum.md) | 数据抽象谱系 | C→C++→Java→Haskell→Rust 的抽象演进、Trait 统一性 | ✅ v1.0 | Type System, Trait | Comparative |
 
@@ -191,9 +191,9 @@ Type System（理解"类型即证明"）
 - [字符串与编码：Rust 的文本处理类型系统](./18_strings_and_encoding.md)
 - [测验：所有权（Ownership）、借用（Borrowing）与生命周期（Lifetimes）（嵌入式互动试点）](LINK_PLACEHOLDER)
 - [测验：类型系统（嵌入式互动试点）](./24_quiz_type_system.md)
-- [测验：错误处理（嵌入式互动试点）](./25_quiz_error_handling.md)
-- [测验：模块系统与测试（嵌入式互动试点）](./26_quiz_modules_testing.md)
-- [测验：闭包与迭代器（Iterator）（嵌入式互动试点）](LINK_PLACEHOLDER)
+- [测验：错误处理（Error Handling）（嵌入式互动试点）](./25_quiz_error_handling.md)
+- [测验：模块（Module）系统与测试（嵌入式互动试点）](./26_quiz_modules_testing.md)
+- [测验：闭包（Closures）与迭代器（Iterator）（嵌入式互动试点）](LINK_PLACEHOLDER)
 
 ## 三、课程对齐路径
 
@@ -201,7 +201,7 @@ Type System（理解"类型即证明"）
 |:---|:---|:---|:---|:---|
 | 所有权 | Ch 4.1 | Week 1-2 基础 | Lecture: Ownership | 记忆 → 理解 |
 | 借用 | Ch 4.2 | Week 1-2 基础 | Lecture: Borrowing | 理解 |
-| 生命周期 | Ch 10.3 | Week 3 | Lecture: Lifetime Elision | 理解 → 应用 |
+| 生命周期（Lifetimes） | Ch 10.3 | Week 3 | Lecture: Lifetime Elision | 理解 → 应用 |
 | 类型系统（Type System） | Ch 3, 6, 8 | Week 1 | Lecture: ADT & Pattern Matching | 记忆 → 理解 |
 
 ---
@@ -212,8 +212,8 @@ Type System（理解"类型即证明"）
 
 | 概念 | 理论层 (Why) | 模型层 (What) | 实践层 (How) | L4 形式化对应 |
 |:---|:---|:---|:---|:---|
-| **所有权** | 线性/仿射逻辑：资源不可复制 | 所有权状态机：有主/无主 | `move`、`Copy`、`Drop`、RAII | Linear Logic ⊗ · Affine weakening |
-| **借用** | 分离逻辑：分数权限 | 借用检查器算法 | `&T`、`&mut T`、编译错误 E0382/E0502 | Fractional Permissions · Separation Logic |
+| **所有权（Ownership）** | 线性/仿射逻辑：资源不可复制 | 所有权状态机：有主/无主 | `move`、`Copy`、`Drop`、RAII | Linear Logic ⊗ · Affine weakening |
+| **借用（Borrowing）** | 分离逻辑：分数权限 | 借用检查器算法 | `&T`、`&mut T`、编译错误 E0382/E0502 | Fractional Permissions · Separation Logic |
 | **生命周期** | 区域类型系统：偏序约束 | 约束图、偏序求解 | 标注、`'a`、Elision、NLL | Region Types (Tofte & Talpin 1994) |
 | **类型系统** | 类型论、范畴论：和/积类型 | HM 推断 + 所有权约束 | `enum`、`struct`、`match`、类型标注 | Algebraic Type Theory · Hindley-Milner |
 

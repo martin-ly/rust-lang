@@ -2,8 +2,9 @@
 # Rust / Cargo
 # =============================================================================
 
-# Cargo build output (shared target directory)
-target/
+# Cargo build output (shared target directory and nested crate targets)
+/target/
+**/target/
 
 # Root Cargo.lock is tracked for this workspace (contains binaries and examples)
 # Sub-directory Cargo.lock files should be ignored
@@ -72,8 +73,8 @@ Desktop.ini
 # Project-specific
 # =============================================================================
 
-# mdBook build output
-book/book/
+# mdBook build output (generated HTML site, keep source markdown in src/ if any)
+/book/
 
 # Local cargo artifacts override
 /cargo-artifacts
@@ -82,12 +83,34 @@ book/book/
 __pycache__/
 *.pyc
 *.pyo
+*.py[cod]
+*$py.class
 
-# Temporary directories
-temp/
-tmp/
+# Temporary directories and files
+/temp/
+/tmp/
 *.tmp
+*.temp
+*.bak
+*.orig
+*.swp
 
 # Log files
 *.log
-book/
+/logs/
+
+# Local agent plans and cache
+.kimi/plans/
+.kimi/cache/
+
+# Environment and secrets
+.env
+.env.local
+
+# Coverage and test artifacts
+coverage/
+*.profraw
+*.profdata
+
+# Documentation build artifacts
+docs/_build/

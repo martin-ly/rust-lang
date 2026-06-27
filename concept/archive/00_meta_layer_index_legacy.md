@@ -11,6 +11,8 @@
 > **状态**: v1.1（2026-05-13 重构索引）
 >
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 # L0 元信息层索引（Meta Layer Index）

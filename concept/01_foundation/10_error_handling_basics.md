@@ -30,7 +30,7 @@
 
 ## 📑 目录
 
-- [Rust 错误处理基础](#rust-错误处理基础)
+- [Rust 错误处理（Error Handling）基础](#rust-错误处理基础)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 Result 类型](#11-result-类型)
@@ -55,7 +55,7 @@
     - [12.2 边界测试：`?` 在返回 `()` 的函数中使用（编译错误）](#122-边界测试-在返回--的函数中使用编译错误)
     - [10.3 边界测试：`Result` 与 `Option` 的混用（编译错误）](#103-边界测试result-与-option-的混用编译错误)
     - [10.4 边界测试：`catch_unwind` 与 `UnwindSafe`（编译错误）](#104-边界测试catch_unwind-与-unwindsafe编译错误)
-    - [10.5 边界测试：`Result` 的 `unwrap_unchecked` 与 release 模式（运行时 UB）](#105-边界测试result-的-unwrap_unchecked-与-release-模式运行时-ub)
+    - [10.5 边界测试：`Result` 的 `unwrap_unchecked` 与 release 模式（运行时（Runtime） UB）](#105-边界测试result-的-unwrap_unchecked-与-release-模式运行时-ub)
     - [10.5 边界测试：生命周期（Lifetimes）参数的不匹配返回](LINK_PLACEHOLDER)
   - [实践](#实践)
   - [认知路径](#认知路径)
@@ -773,7 +773,7 @@ fn main() {}
 >
 > 1) `&'a str` 表示引用（Reference）至少存活 `'a`；
 > 2) 返回 `'a` 要求数据存活至少 `'a`；
-> 3) `y` 的 lifetime `'b` 可能短于 `'a`，返回会导致悬垂引用。
+> 3) `y` 的 lifetime `'b` 可能短于 `'a`，返回会导致悬垂引用（Reference）。
 >
 > **权威来源**:
 >
@@ -812,7 +812,7 @@ fn main() {}
 
 > 错误传播安全 ⟸ ? 运算符自动转换 ⟸ Try trait
 > 错误类型精确 ⟸ thiserror/anyhow 分层 ⟸ 错误架构
-> **过渡**: 掌握 Rust 错误处理基础 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 Rust 错误处理基础 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 Rust 错误处理基础 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 > **过渡**: Rust 错误处理基础 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 

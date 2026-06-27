@@ -62,7 +62,7 @@
     - [10.3 边界测试：`HashMap` 的 `Entry` API 与借用（Borrowing）冲突（编译错误）](LINK_PLACEHOLDER)
     - [10.4 边界测试：`BTreeMap` 的 range 查询与可变遍历（编译错误）](#104-边界测试btreemap-的-range-查询与可变遍历编译错误)
     - [10.5 边界测试：`HashSet` 的自定义哈希与 `Hash` 一致性（Coherence）（运行时（Runtime）逻辑错误）](LINK_PLACEHOLDER)
-    - [10.5 边界测试：`HashMap` 的 `Entry` API 与借用冲突（编译错误）](#105-边界测试hashmap-的-entry-api-与借用冲突编译错误)
+    - [10.5 边界测试：`HashMap` 的 `Entry` API 与借用（Borrowing）冲突（编译错误）](#105-边界测试hashmap-的-entry-api-与借用冲突编译错误)
     - [10.6 边界测试：`BTreeMap` 的键修改与排序不变性破坏（逻辑错误/UB）](#106-边界测试btreemap-的键修改与排序不变性破坏逻辑错误ub)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`BTreeMap` 与 `HashMap` 在键的遍历顺序上有什么本质区别？（理解层）](#测验-1btreemap-与-hashmap-在键的遍历顺序上有什么本质区别理解层)
@@ -797,7 +797,7 @@ fn main() {
 
 > **修正**:
 >
-> `BTreeMap::range` 返回不可变迭代器，因为遍历过程中修改树结构会破坏迭代器状态（节点指针悬垂）。
+> `BTreeMap::range` 返回不可变迭代器（Iterator），因为遍历过程中修改树结构会破坏迭代器状态（节点指针悬垂）。
 > 这与 C++ 的 `std::map` 相同（遍历中 `insert` 可能使迭代器失效），但 Rust 在编译期阻止。`BTreeMap` 的 sorted 性质使其适合范围查询，但修改必须在遍历前或遍历后完成。
 > 安全模式：
 >
@@ -839,7 +839,7 @@ fn main() {
 > **修正**:
 >
 > `Hash` trait 的实现必须满足**一致性（Coherence）**：若 `a == b`，则 `hash(a) == hash(b)`，且同一对象的哈希值在对象不变时应恒定。
-> 违反一致性导致 `HashMap`/`HashSet` 行为异常：插入后查找不到、重复元素、内存泄漏。
+> 违反一致性（Coherence）导致 `HashMap`/`HashSet` 行为异常：插入后查找不到、重复元素、内存泄漏。
 > 常见错误：
 >
 > 1) 哈希中包含随机数或时间戳；
@@ -988,7 +988,7 @@ fn main() {
 
 > 内存安全（Memory Safety）数据结构 ⟸ 所有权（Ownership）自动管理 ⟸ Vec/HashMap 实现
 > 迭代器安全 ⟸ 借用检查器验证 ⟸ 集合 API 设计
-> **过渡**: 掌握 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 > **过渡**: 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 

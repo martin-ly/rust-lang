@@ -38,7 +38,7 @@
     - [Step 5: 代码验证（Code Verification）](#step-5-代码验证code-verification)
     - [Step 6: 边界测试（Boundary Testing）](#step-6-边界测试boundary-testing)
   - [九、国际课程与论文对齐](#九国际课程与论文对齐)
-  - [九·补充：跨语言生命周期机制对比](#九补充跨语言生命周期机制对比)
+  - [九·补充：跨语言生命周期（Lifetimes）机制对比](#九补充跨语言生命周期机制对比)
   - [十、知识来源关系（Provenance）](#十知识来源关系provenance)
   - [十一、相关概念链接](#十一相关概念链接)
   - [十二、Polonius：下一代 Borrow Checker](#十二polonius下一代-borrow-checker)
@@ -50,7 +50,7 @@
     - [12.6 工程实践](#126-工程实践)
   - [十三、Lifetime Elision 的完整形式化描述](#十三lifetime-elision-的完整形式化描述)
     - [13.1 三条规则的形式化表述](#131-三条规则的形式化表述)
-      - [13.1.1 Rule 1：每个输入引用（Reference）获得独立生命周期](LINK_PLACEHOLDER)
+      - [13.1.1 Rule 1：每个输入引用（Reference）获得独立生命周期](#1311-rule-1每个输入引用获得独立生命周期)
       - [13.1.2 Rule 2：单输入时输出等于输入生命周期](#1312-rule-2单输入时输出等于输入生命周期)
       - [13.1.3 Rule 3：方法有 `&self` / `&mut self` 时输出优先](#1313-rule-3方法有-self--mut-self-时输出优先)
     - [13.2 为什么 Elision 是 Sound 的](#132-为什么-elision-是-sound-的)
@@ -75,14 +75,14 @@
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：高级生命周期的编译错误](#十边界测试高级生命周期的编译错误)
     - [10.1 边界测试：`for<'a>` HRTB 在 trait bound 中的误用（编译错误）](#101-边界测试fora-hrtb-在-trait-bound-中的误用编译错误)
-    - [10.2 边界测试：自引用结构体（Struct）的生命周期标注（编译错误）](LINK_PLACEHOLDER)
+    - [10.2 边界测试：自引用结构体（Struct）的生命周期标注（编译错误）](#102-边界测试自引用结构体的生命周期标注编译错误)
     - [10.3 边界测试：HRTB（高阶 trait bound）的推导失败（编译错误）](#103-边界测试hrtb高阶-trait-bound的推导失败编译错误)
     - [10.4 边界测试：NLL（非词法生命周期）的边界（编译错误）](#104-边界测试nll非词法生命周期的边界编译错误)
-    - [10.3 边界测试：HRTB 与闭包（Closures）生命周期不匹配（编译错误）](LINK_PLACEHOLDER)
+    - [10.3 边界测试：HRTB 与闭包（Closures）生命周期不匹配（编译错误）](#103-边界测试hrtb-与闭包生命周期不匹配编译错误)
   - [定理链补充](#定理链补充)
   - [反命题与边界](#反命题与边界)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：生命周期省略（Lifetime Elision）的边界（理解层）](LINK_PLACEHOLDER)
+    - [测验 1：生命周期省略（Lifetime Elision）的边界（理解层）](#测验-1生命周期省略的边界理解层)
     - [测验 2：HRTB 的适用场景（应用层）](#测验-2hrtb-的适用场景应用层)
     - [测验 3：自引用结构（分析层）](#测验-3自引用结构分析层)
     - [测验 4：生命周期子类型（分析层）](#测验-4生命周期子类型分析层)
@@ -162,7 +162,7 @@
 | **[CMU 17-350: Safe Systems Programming]** | 生命周期在系统编程中的应用 | 工程实践 |
 | **[Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region_based_memory_management)** | 区域类型通用概念 | 权威定义 §1.2 |
 | **[Wikipedia: Subtyping](https://en.wikipedia.org/wiki/Subtyping)** | 子类型、协变/逆变 | Variance §4.5 |
-| **[Tofte & Talpin 1994](https://en.wikipedia.org/wiki/Region-based_memory_management)** | 区域类型系统 | 形式化根基 §4.1–4.2 |
+| **[Tofte & Talpin 1994](https://en.wikipedia.org/wiki/Region-based_memory_management)** | 区域类型系统（Type System） | 形式化根基 §4.1–4.2 |
 | **[RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** | 生命周期逻辑 | 形式化验证 §4.1 |
 | **[Niko Matsakis: NLL Blog]** | Non-Lexical Lifetimes 设计 | NLL §4.4 |
 | **[TRPL Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)** | 生命周期语法与省略规则 | Elision §2.3、§4.3 |
@@ -181,7 +181,7 @@
 | **形式化基础** | 区域类型 (Tofte-Talpin) + 分离逻辑 (RustBelt) | 无统一形式化 | 范畴论 + 线性逻辑 | 无 |
 | **表达能力** | 高（HRTB、Variance、Elision） | 中 | 高（但 LinearTypes 为可选扩展） | 低 |
 
-> **来源: [Rust Reference: Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)** Rust 生命周期是类型系统的核心特征，通过编译期区域推断保证引用有效性，零运行时开销。 ✅
+> **来源: [Rust Reference: Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)** Rust 生命周期是类型系统的核心特征，通过编译期区域推断保证引用有效性，零运行时（Runtime）开销。 ✅
 > **[来源: C++ Reference: unique_ptr]** C++ 智能指针（Smart Pointer）管理所有权（Ownership）生命周期，但无编译期引用有效性检查，悬垂引用为未定义行为。 ✅
 > **[来源: Haskell GHC User Guide: LinearTypes]** Haskell LinearTypes 扩展允许显式线性类型约束（`a %1 -> b`），与 Rust 生命周期在类型论上同源，但为可选扩展。 ✅
 > **来源: [Go Spec: Memory Model](LINK_PLACEHOLDER)** Go 无生命周期或借用（Borrowing）概念，内存安全（Memory Safety）完全依赖垃圾回收器，引用有效性无编译期检查。 ✅
@@ -220,7 +220,7 @@
 
 ## 十二、Polonius：下一代 Borrow Checker
 
-> **定位**：Polonius 是 Rust 的下一代借用检查器，以 **Datalog 约束求解** 替代当前的基于集合的区域推断，能编译更多当前系统拒绝的**合法程序**。
+> **定位**：Polonius 是 Rust 的下一代借用（Borrowing）检查器，以 **Datalog 约束求解** 替代当前的基于集合的区域推断，能编译更多当前系统拒绝的**合法程序**。
 > **状态**：`-Zpolonius` 可在 nightly 启用；尚未默认，但设计已稳定。
 
 ### 12.1 为什么需要 Polonius？
@@ -634,7 +634,7 @@ fn bad_static(s: &str) -> impl Display + 'static {
 
 ### 14.3 `impl Trait` 参数位置（APIT）的生命周期推断差异
 
-在函数参数位置使用 `impl Trait`（APIT, Argument Position Impl Trait）时，其生命周期推断与 RPIT 存在本质差异。APIT 是**泛型参数的语法糖**，每个 `impl Trait` 参数对应一个隐式的泛型类型参数。
+在函数参数位置使用 `impl Trait`（APIT, Argument Position Impl Trait）时，其生命周期推断与 RPIT 存在本质差异。APIT 是**泛型（Generics）参数的语法糖**，每个 `impl Trait` 参数对应一个隐式的泛型类型参数。
 
 **形式化差异**。
 

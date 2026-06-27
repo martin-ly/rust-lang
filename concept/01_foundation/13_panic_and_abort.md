@@ -48,7 +48,7 @@
     - [10.1 边界测试：`catch_unwind` 捕获非 `UnwindSafe` 类型（编译错误）](#101-边界测试catch_unwind-捕获非-unwindsafe-类型编译错误)
     - [10.2 边界测试：在 `Drop` 中 panic 导致双重 panic（运行时（Runtime） abort）](LINK_PLACEHOLDER)
     - [10.3 边界测试：`panic=abort` 与 `catch_unwind` 的冲突（编译错误/链接错误）](#103-边界测试panicabort-与-catch_unwind-的冲突编译错误链接错误)
-    - [10.4 边界测试：双重 panic（Panic）导致 abort（运行时行为）](LINK_PLACEHOLDER)
+    - [10.4 边界测试：双重 panic（Panic）导致 abort（运行时（Runtime）行为）](LINK_PLACEHOLDER)
     - [10.5 边界测试：`panic=abort` 与 `Drop` 的补偿动作缺失（运行时资源泄漏）](#105-边界测试panicabort-与-drop-的补偿动作缺失运行时资源泄漏)
     - [10.6 边界测试：`catch_unwind` 与 FFI 的不可恢复性（运行时 UB）](#106-边界测试catch_unwind-与-ffi-的不可恢复性运行时-ub)
     - [10.7 边界测试：`core::intrinsics::abort` 与 `std::process::abort` 的差异（运行时行为）](#107-边界测试coreintrinsicsabort-与-stdprocessabort-的差异运行时行为)
@@ -745,7 +745,7 @@ fn main() {
 
 > **修正**:
 >
-> `catch_unwind` 捕获 panic 并返回 `Result`，但要求闭包实现 `UnwindSafe`——保证 panic 不会破坏共享状态的不变性。
+> `catch_unwind` 捕获 panic 并返回 `Result`，但要求闭包（Closures）实现 `UnwindSafe`——保证 panic 不会破坏共享状态的不变性。
 > `&mut T` 不实现 `UnwindSafe`，因为 panic 可能在状态更新中途发生，留下不一致数据。
 > 修复：
 >

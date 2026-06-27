@@ -48,9 +48,9 @@
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：静态类型检查与动态类型检查的核心区别是什么？Rust 属于哪一类？（理解层）](#测验-1静态类型检查与动态类型检查的核心区别是什么rust-属于哪一类理解层)
     - [测验 2：什么是"语法"（Syntax）和"语义"（Semantics）？编译错误通常属于哪一类问题？（理解层）](#测验-2什么是语法syntax和语义semantics编译错误通常属于哪一类问题理解层)
-    - [测验 3："引用（Reference）透明"（Referential Transparency）对程序优化有什么意义？（理解层）](LINK_PLACEHOLDER)
+    - [测验 3："引用（Reference）透明"（Referential Transparency）对程序优化有什么意义？（理解层）](#测验-3引用透明referential-transparency对程序优化有什么意义理解层)
     - [测验 4：什么是"副作用"（Side Effect）？为什么副作用使程序推理更困难？（理解层）](#测验-4什么是副作用side-effect为什么副作用使程序推理更困难理解层)
-    - [测验 5：类型系统（Type System）的主要目标是什么？Rust 的类型系统额外提供了什么保证？（理解层）](LINK_PLACEHOLDER)
+    - [测验 5：类型系统（Type System）的主要目标是什么？Rust 的类型系统额外提供了什么保证？（理解层）](#测验-5类型系统的主要目标是什么rust-的类型系统额外提供了什么保证理解层)
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -146,7 +146,7 @@ fn increment() -> i32 {
 
 ### 2.2 副作用与并发的关系
 
-为什么 Rust 能" fearless concurrency"？因为**所有权系统本质上是一种副作用控制机制**：
+为什么 Rust 能" fearless concurrency"？因为**所有权（Ownership）系统本质上是一种副作用控制机制**：
 
 | 副作用类型 | Rust 的控制方式 | 为什么安全 |
 |:---|:---|:---|
@@ -467,7 +467,7 @@ unsafe {
 <details>
 <summary>✅ 答案与解析</summary>
 
-主要目标是防止运行时类型错误、提供抽象。Rust 额外通过所有权和生命周期（Lifetimes）系统保证内存安全（Memory Safety）（无悬垂指针、无数据竞争）无需垃圾回收。
+主要目标是防止运行时（Runtime）类型错误、提供抽象。Rust 额外通过所有权和生命周期（Lifetimes）系统保证内存安全（Memory Safety）（无悬垂指针、无数据竞争）无需垃圾回收。
 </details>
 
 ## 实践

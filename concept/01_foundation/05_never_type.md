@@ -58,7 +58,7 @@
     - [6.2 边界测试：`Some(!)` 不可构造（编译错误）](#62-边界测试some-不可构造编译错误)
     - [6.3 边界测试：忘记处理 `Ok` 分支（编译错误）](#63-边界测试忘记处理-ok-分支编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：`!`（never type）在 Rust 类型系统中被称为底类型。它有一个特殊性质：它是任何类型的子类型。请问，`Result<i32, !>` 的 `Err` 分支在 match 中需要处理吗？（理解层）](#测验-1never-type在-rust-类型系统中被称为底类型它有一个特殊性质它是任何类型的子类型请问resulti32--的-err-分支在-match-中需要处理吗理解层)
+    - [测验 1：`!`（never type）在 Rust 类型系统（Type System）中被称为底类型。它有一个特殊性质：它是任何类型的子类型。请问，`Result<i32, !>` 的 `Err` 分支在 match 中需要处理吗？（理解层）](#测验-1never-type在-rust-类型系统中被称为底类型它有一个特殊性质它是任何类型的子类型请问resulti32--的-err-分支在-match-中需要处理吗理解层)
     - [测验 2：以下代码是否合法？`let x: String = panic!("abort");`。如果合法，运行时（Runtime）会发生什么？（理解层）](LINK_PLACEHOLDER)
     - [测验 3：`continue`、`break`（带值除外）、`return` 和 `panic!` 有什么共同类型特征？（理解层）](#测验-3continuebreak带值除外return-和-panic-有什么共同类型特征理解层)
     - [测验 4：函数签名 `fn foo() -> !` 表示什么含义？这种函数可以正常返回吗？（理解层）](#测验-4函数签名-fn-foo----表示什么含义这种函数可以正常返回吗理解层)
@@ -266,7 +266,7 @@ pub fn handle_events(event: Event<i32, !>) -> Option<i32> {
 
 > **[来源: 💡 原创分析]**
 
-| 特性 | `!` (never type) | `enum Void {}` (空枚举) |
+| 特性 | `!` (never type) | `enum Void {}` (空枚举（Enum）) |
 |------|------------------|------------------------|
 | 标准库支持 | ✅ 原生支持 | ❌ 需自定义 |
 | `Result<T, !>` | ✅ 直接可用 | ❌ 需 `Result<T, Void>` |
@@ -475,7 +475,7 @@ fn incomplete_match(result: Result<i32, !>) -> i32 {
 
 ### 测验 2：以下代码是否合法？`let x: String = panic!("abort");`。如果合法，运行时会发生什么？（理解层）
 
-**题目**: 以下代码是否合法？`let x: String = panic!("abort");`。如果合法，运行时会发生什么？
+**题目**: 以下代码是否合法？`let x: String = panic!("abort");`。如果合法，运行时（Runtime）会发生什么？
 
 <details>
 <summary>✅ 答案与解析</summary>

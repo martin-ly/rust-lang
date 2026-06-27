@@ -56,7 +56,7 @@
     - [1.3 形式化定义](#13-形式化定义)
   - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attribute-matrix)
     - [2.1 类型分类矩阵](#21-类型分类矩阵)
-    - [2.2 Rust 类型系统特征矩阵](#22-rust-类型系统特征矩阵)
+    - [2.2 Rust 类型系统（Type System）特征矩阵](#22-rust-类型系统特征矩阵)
   - [三、思维导图（Mind Map）](#三思维导图mind-map)
   - [四、定理推理链（Theorem Chain）](#四定理推理链theorem-chain)
     - [4.1 引理：ADT（枚举（Enum） + 结构体（Struct））⟹ 代数数据类型完备性](LINK_PLACEHOLDER)
@@ -76,7 +76,7 @@
   - [六、反命题与边界分析（Inverse Propositions \& Boundary Analysis）](#六反命题与边界分析inverse-propositions--boundary-analysis)
     - [6.1 命题: "Rust 类型系统总是安全的"](#61-命题-rust-类型系统总是安全的)
     - [6.2 命题: "enum match 强制穷尽"](#62-命题-enum-match-强制穷尽)
-    - [6.3 命题: "类型推断总是完备的"](#63-命题-类型推断总是完备的)
+    - [6.3 命题: "类型推断（Type Inference）总是完备的"](#63-命题-类型推断总是完备的)
   - [七、边界极限测试代码（Boundary Stress Tests）](#七边界极限测试代码boundary-stress-tests)
     - [7.1 边界：unsafe 绕过类型系统后的行为](#71-边界unsafe-绕过类型系统后的行为)
     - [7.2 边界：#\[non\_exhaustive\] 对穷尽性的削弱](#72-边界non_exhaustive-对穷尽性的削弱)
@@ -114,7 +114,7 @@
       - [11.4.6 与 Haskell、ML 的类型推断对比](#1146-与-haskellml-的类型推断对比)
     - [11.5 Discriminant 与 Enum 内存布局](#115-discriminant-与-enum-内存布局)
       - [11.5.1 Discriminant 的基本概念与 `std::mem::discriminant`](#1151-discriminant-的基本概念与-stdmemdiscriminant)
-      - [11.5.2 枚举的内存布局：Tagged Union 模型](#1152-枚举的内存布局tagged-union-模型)
+      - [11.5.2 枚举（Enum）的内存布局：Tagged Union 模型](#1152-枚举的内存布局tagged-union-模型)
       - [11.5.3 Niche Optimization 与 Null Pointer Optimization（NPO）](#1153-niche-optimization-与-null-pointer-optimizationnpo)
       - [11.5.4 `#[repr]` 对 Discriminant 与布局的影响](#1154-repr-对-discriminant-与布局的影响)
       - [11.5.5 `std::mem::Discriminant<T>` 与 `DiscriminantKind`](#1155-stdmemdiscriminantt-与-discriminantkind)
@@ -126,13 +126,13 @@
       - [11.7.2 Rust 的类型二元性：名义与结构并存](#1172-rust-的类型二元性名义与结构并存)
       - [11.7.3 内部二元性：生命周期（Lifetimes）子类型化的结构本质](LINK_PLACEHOLDER)
       - [11.7.4 幻影类型与新类型惯用法：名义类型的零成本抽象（Zero-Cost Abstraction）](LINK_PLACEHOLDER)
-      - [11.7.5 一致性规则与名义类型的深层绑定](#1175-一致性规则与名义类型的深层绑定)
+      - [11.7.5 一致性（Coherence）规则与名义类型的深层绑定](#1175-一致性规则与名义类型的深层绑定)
       - [11.7.6 FFI 翻译中的类型范式冲突](#1176-ffi-翻译中的类型范式冲突)
       - [11.7.7 跨语言对比表](#1177-跨语言对比表)
       - [11.7.8 反命题与边界分析](#1178-反命题与边界分析)
         - [命题 1: "名义类型阻止了所有非预期的类型等价"](#命题-1-名义类型阻止了所有非预期的类型等价)
         - [命题 2: "结构类型系统可以解决孤儿规则（Orphan Rule）的问题"](#命题-2-结构类型系统可以解决孤儿规则orphan-rule的问题)
-        - [命题 3: "新类型模式（Newtype）具有零运行时成本"](#命题-3-新类型模式newtype具有零运行时成本)
+        - [命题 3: "新类型模式（Newtype）具有零运行时（Runtime）成本"](#命题-3-新类型模式newtype具有零运行时成本)
       - [11.7.9 认知路径：何时名义、何时结构](#1179-认知路径何时名义何时结构)
     - [11.7.10 与多级引用（Reference）语义的交叉：引用的名义与结构行为](LINK_PLACEHOLDER)
   - [十二、待补充与演进方向（TODOs）](#十二待补充与演进方向todos)
@@ -143,14 +143,14 @@
     - [12.2 边界测试：泛型（Generics）约束不满足（编译错误）](LINK_PLACEHOLDER)
     - [12.3 边界测试：match 非穷尽（编译错误）](#123-边界测试match-非穷尽编译错误)
     - [12.4 边界测试：impl Trait 在参数位置与返回位置的差异（编译错误）](#124-边界测试impl-trait-在参数位置与返回位置的差异编译错误)
-    - [12.5 边界测试：生命周期省略（Lifetime Elision）规则失效（编译错误）](LINK_PLACEHOLDER)
+    - [12.5 边界测试：生命周期（Lifetimes）省略（Lifetime Elision）规则失效（编译错误）](LINK_PLACEHOLDER)
     - [10.1 边界测试：类型不匹配的基础错误](#101-边界测试类型不匹配的基础错误)
   - [实践](#实践)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [参考来源](#参考来源)
   - [Never 类型元组强制（Rust 1.96）](#never-类型元组强制rust-196)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：结构体与元组结构体（理解层）](#测验-1结构体与元组结构体理解层)
+    - [测验 1：结构体（Struct）与元组结构体（理解层）](#测验-1结构体与元组结构体理解层)
     - [测验 2：枚举与模式匹配（Pattern Matching）穷尽性（应用层）](LINK_PLACEHOLDER)
     - [测验 3：Option 与 unwrap（分析层）](#测验-3option-与-unwrap分析层)
     - [测验 4：类型推断边界（应用层）](#测验-4类型推断边界应用层)
@@ -239,7 +239,7 @@ Rust 扩展:
 | **错误处理（Error Handling）类型** | ✅ `Result<T,E>` | ✅ `Either` | ❌ 异常 | ⚠️ 异常/Optional | ⚠️ 多返回值 |
 | **泛型（Generics）** | ✅ 单态化（Monomorphization） | ✅ | ✅ 模板 | ⚠️ 类型擦除 | ✅ 无约束 |
 | **Trait/类型类** | ✅ | ✅ 类型类 | ⚠️ Concepts (C++20) | ✅ 接口 | ✅ 接口 |
-| **线性/所有权类型** | ✅ | ⚠️ 线性类型扩展 | ❌ | ❌ | ❌ |
+| **线性/所有权（Ownership）类型** | ✅ | ⚠️ 线性类型扩展 | ❌ | ❌ | ❌ |
 
 ---
 
@@ -341,7 +341,7 @@ graph TD
 
 > **认知功能**:
 > 此层次图从**数据构造**视角（而非 trait 能力视角）组织 Rust 全部类型。
-> 读者面对一个不熟悉的类型时，可按图定位它属于哪一类——标量（简单值）、复合（多值组合）、ADT（代数构造）、引用（内存别名）、特殊（类型系统元机制）。
+> 读者面对一个不熟悉的类型时，可按图定位它属于哪一类——标量（简单值）、复合（多值组合）、ADT（代数构造）、引用（Reference）（内存别名）、特殊（类型系统元机制）。
 > 关键认知：Rust 的类型系统不是平铺的清单，而是有层次的taxonomy（分类学）。
 > enum/struct 对应「和类型/积类型」的代数结构，impl Trait/dyn Trait 对应「存在类型/动态分发」的类型论概念。
 > 建议将此图与上方的 classDiagram 对照阅读，建立「数据构造 × 能力接口」的二维认知模型。
@@ -744,7 +744,7 @@ graph TD
 
 > **认知功能**:
 > 此图将类型推断的「边界情况」系统化。
-> 关键认知：HM 推断在「纯局部、无歧义」场景是完备的（两个绿色节点），但在三种场景下需要人工干预——公共 API（工程契约，非推断不能）、泛型多态（信息不足，需显式消歧）、字面量歧义（语法层面的多重解释）。
+> 关键认知：HM 推断在「纯局部、无歧义」场景是完备的（两个绿色节点），但在三种场景下需要人工干预——公共 API（工程契约，非推断不能）、泛型（Generics）多态（信息不足，需显式消歧）、字面量歧义（语法层面的多重解释）。
 > 这帮助读者理解「为什么有时编译器要求我写类型标注」——不是因为推断算法弱，而是因为**信息论上的不可能**（多解）或**工程上的需求**（文档契约）。 [来源: 💡 原创分析]
 
 ---
@@ -899,7 +899,7 @@ fn main() {
 | **[Wright & Felleisen 1994]** | Progress + Preservation | T3 类型安全定理 |
 | **[Category Theory for Programmers]** | 积、余积、初始对象、终对象 | L1 ADT 完备性 |
 | **[TRPL Ch3.2](https://doc.rust-lang.org/book/ch03-02-data-types.html)** | 静态类型与类型推断 | 权威定义 §1.2 |
-| **[TRPL Ch6](https://doc.rust-lang.org/book/ch06-00-enums.html)** | enum 与模式匹配 | T1 match 穷尽性 |
+| **[TRPL Ch6](https://doc.rust-lang.org/book/ch06-00-enums.html)** | enum 与模式匹配（Pattern Matching） | T1 match 穷尽性 |
 | **[TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html)** | Result<T, E> 错误处理（Error Handling） | 推论 C2 |
 
 ---
@@ -912,7 +912,7 @@ fn main() {
 | 编译器通常可推断类型 | [TRPL Ch3.2](https://doc.rust-lang.org/book/ch03-02-data-types.html) | ✅ |
 | enum 类似函数式语言的 ADT | [TRPL Ch6](https://doc.rust-lang.org/book/ch06-00-enums.html) | ✅ |
 | `Option<T>` 消除空指针 | [TRPL Ch6.1](https://doc.rust-lang.org/book/title-page.html) · [Wikipedia: Null pointer](https://en.wikipedia.org/wiki/Null_pointer) | ✅ |
-| `Result<T, E>` 强制错误处理 | [TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) | ✅ |
+| `Result<T, E>` 强制错误处理（Error Handling） | [TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) | ✅ |
 | NPO 优化 Option<&T> | [Rust Reference: Enums](https://doc.rust-lang.org/reference/items/enumerations.html) | ✅ |
 | ADT 对应积与余积 | [Category Theory for Programmers] | ✅ |
 | match 穷尽性检查 | [Rust Reference: Patterns](https://doc.rust-lang.org/reference/patterns.html) | ✅ |
@@ -925,7 +925,7 @@ fn main() {
 
 ## 十一、相关概念链接
 
-- [Ownership](./01_ownership.md) — 类型系统与所有权规则共同构成 Safe Rust 的内存安全基础
+- [Ownership](./01_ownership.md) — 类型系统与所有权规则共同构成 Safe Rust 的内存安全（Memory Safety）基础
 - [Borrowing](./02_borrowing.md) — 引用类型 `&T`、`&mut T` 是类型系统对内存别名的约束表达
 - [Lifetimes](./03_lifetimes.md) — 生命周期（Lifetimes）是类型系统的参数化扩展，将时间维度引入类型
 - [Traits](../02_intermediate/01_traits.md) — Trait 将行为抽象引入类型系统，对应 Haskell Type Class

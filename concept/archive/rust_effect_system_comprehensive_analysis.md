@@ -10,6 +10,8 @@
 > **表征方式**：思维导图 · 多维矩阵 · 定理推理判定树 · 边界语义空间决策树 · 结构化论证表格
 >
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 ## 目录

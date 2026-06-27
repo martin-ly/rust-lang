@@ -15,6 +15,8 @@
 > **[来源: Wikipedia - Linear Logic]** · **[来源: Wikipedia - Type Theory]** · **[来源: POPL 2018 - RustBelt: Securing the Foundations of the Rust Programming Language]** · **[来源: Iris Project - iris-project.org]**
 >
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 ## 📑 目录

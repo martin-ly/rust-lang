@@ -10,6 +10,8 @@
 > **目标**：在 `concept/` 文件夹内构建全面、权威、国际化的 Rust 概念知识体系，形成可持续演进的内容生产机制。
 >
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 ## 一、总体目标

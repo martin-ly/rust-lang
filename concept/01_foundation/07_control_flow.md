@@ -28,7 +28,7 @@
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 表达式 vs 语句](#11-表达式-vs-语句)
-    - [1.2 match：穷尽性模式匹配](#12-match穷尽性模式匹配)
+    - [1.2 match：穷尽性模式匹配（Pattern Matching）](#12-match穷尽性模式匹配)
     - [1.3 if let / while let：简化的模式匹配](#13-if-let--while-let简化的模式匹配)
   - [二、技术细节](#二技术细节)
     - [2.1 loop 与值返回](#21-loop-与值返回)
@@ -512,7 +512,7 @@ graph TD
   ✅ 确保 let else 的 else 块发散（return/panic/break）
 ```
 
-> **陷阱总结**: 控制流的陷阱主要与**类型一致性**、**穷尽性**、**尾部值规则**和**作用域**相关。
+> **陷阱总结**: 控制流的陷阱主要与**类型一致性（Coherence）**、**穷尽性**、**尾部值规则**和**作用域**相关。
 > [来源: [Rust Compiler Error E0308](https://doc.rust-lang.org/error_codes/E0308.html)]
 
 ---
@@ -611,7 +611,7 @@ fn fixed() {
 
 > **修正**: `if let` 和 `while let` 通过模式匹配解构值。
 > 若模式不使用 `ref` 或 `ref mut`，则发生所有权（Ownership）移动（对非 `Copy` 类型）。
-> 使用 `ref` 绑定创建引用（Reference）而非获取所有权，允许在匹配后继续使用原值。
+> 使用 `ref` 绑定创建引用（Reference）而非获取所有权（Ownership），允许在匹配后继续使用原值。
 > 这是 Rust 模式匹配与所有权系统的关键交互点。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-05-control-flow.html)]
 
@@ -751,7 +751,7 @@ fn main() {
 
 > 程序行为可预测 ⟸ 控制流结构化 ⟸ match/loop/if 穷尽性
 > 无未定义行为 ⟸ 穷尽性匹配强制 ⟸ 类型系统（Type System）约束
-> **过渡**: 掌握 控制流：表达式导向的流程控制 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
+> **过渡**: 掌握 控制流：表达式导向的流程控制 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 控制流：表达式导向的流程控制 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 > **过渡**: 控制流：表达式导向的流程控制 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
@@ -945,7 +945,7 @@ after outer, count=3
 
 ## 补充章节：控制流理论深化（P1-4）
 
-本章节从**程序语言理论**视角深化对 Rust 控制流的理解：结构化程序定理说明为何 Rust 摒弃 `goto` 仍保持图灵完备；Continuation 与 CPS 变换解释 `async/await` 与 `?` 的本质；控制流图、基本块与支配树是理解 MIR 与借用检查器的基础；循环不变量与 Hoare 逻辑为编写可信的循环提供证明框架；最后对比 `goto`、`break 'label` 与 `?` 三种非局部控制转移机制。
+本章节从**程序语言理论**视角深化对 Rust 控制流的理解：结构化程序定理说明为何 Rust 摒弃 `goto` 仍保持图灵完备；Continuation 与 CPS 变换解释 `async/await` 与 `?` 的本质；控制流图、基本块与支配树是理解 MIR 与借用（Borrowing）检查器的基础；循环不变量与 Hoare 逻辑为编写可信的循环提供证明框架；最后对比 `goto`、`break 'label` 与 `?` 三种非局部控制转移机制。
 
 ---
 
@@ -1180,7 +1180,7 @@ fn main() {
 
 #### Rust 关联
 
-Rust 的类型系统已经在编译期保证了许多不变量（如引用合法性、变量初始化），但数值/逻辑不变量仍需要程序员维护。Rust 通过 `assert!` / `debug_assert!` 可以在运行时（Runtime）检查不变量；在关键循环中显式写出不变量注释，是提高代码可信度的有效手段。
+Rust 的类型系统已经在编译期保证了许多不变量（如引用（Reference）合法性、变量初始化），但数值/逻辑不变量仍需要程序员维护。Rust 通过 `assert!` / `debug_assert!` 可以在运行时（Runtime）检查不变量；在关键循环中显式写出不变量注释，是提高代码可信度的有效手段。
 
 #### 代码示例
 
@@ -1277,7 +1277,7 @@ fn main() {
 }
 ```
 
-**关键洞察**：`break 'label` 与 `?` 都是 Rust 在结构化程序定理框架内提供的受限"跳转"机制——前者处理循环嵌套，后者处理错误路径；二者都不会破坏资源的安全释放，也不会像 `goto` 那样导致不可达代码或生命周期混乱。
+**关键洞察**：`break 'label` 与 `?` 都是 Rust 在结构化程序定理框架内提供的受限"跳转"机制——前者处理循环嵌套，后者处理错误路径；二者都不会破坏资源的安全释放，也不会像 `goto` 那样导致不可达代码或生命周期（Lifetimes）混乱。
 
 > **关联章节**: [Error Handling Basics](./10_error_handling_basics.md) · [Async Control Flow](../03_advanced/02_async.md) · [Panic and Abort](./13_panic_and_abort.md)
 

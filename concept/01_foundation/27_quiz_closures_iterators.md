@@ -76,7 +76,7 @@ let add_f64 = |a: f64, b: f64| a + b;
 
 **闭包（Closures）的匿名结构**：
 
-Rust 闭包编译后实际上是匿名结构体（Struct）：
+Rust 闭包（Closures）编译后实际上是匿名结构体（Struct）：
 
 ```rust,ignore
 // let f = |x| x + 1;
@@ -244,7 +244,7 @@ iter.for_each(|x| ...); // 驱动整个链
 | 类型 | 示例 | 行为 |
 |:---|:---|:---|
 | 适配器 | `map`、`filter`、`take`、`skip` | 返回新迭代器（Iterator），惰性执行 |
-| 消费者 | `collect`、`sum`、`for_each`、`find` | 驱动迭代器执行，返回非迭代器值 |
+| 消费者 | `collect`、`sum`、`for_each`、`find` | 驱动迭代器（Iterator）执行，返回非迭代器值 |
 
 **性能优势**：惰性求值允许编译器优化整个迭代器链，消除中间分配：
 
@@ -308,7 +308,7 @@ impl IntoIterator for Counter {
 }
 ```
 
-**或更简单**：为 `Counter` 的引用实现 `IntoIterator`：
+**或更简单**：为 `Counter` 的引用（Reference）实现 `IntoIterator`：
 
 ```rust,ignore
 fn main() {
@@ -616,7 +616,7 @@ fn main() {
 
 **注意**：修复后闭包参数从 `&i32` 改为 `i32`，因此需要使用 `into_iter()` 或调整闭包签名。
 
-**更通用的修复**——使用引用 + 显式生命周期：
+**更通用的修复**——使用引用 + 显式生命周期（Lifetimes）：
 
 ```rust
 fn make_filter(min: i32) -> impl Fn(&i32) -> bool {

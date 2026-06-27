@@ -255,6 +255,8 @@ Lifetime('a) × Lifetime('b) where 'a > 'b → ❌ 生命周期不足 E0597
 
 预计工作量：1-2 轮会话（核心文件）+ 1 轮会话（映射标注）
 
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

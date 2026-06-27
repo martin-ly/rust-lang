@@ -37,7 +37,7 @@
 - [字符串与文本：Rust 的 Unicode 处理与格式化系统](#字符串与文本rust-的-unicode-处理与格式化系统)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 String vs str：所有权谱系](#11-string-vs-str所有权谱系)
+    - [1.1 String vs str：所有权（Ownership）谱系](#11-string-vs-str所有权谱系)
     - [1.2 UTF-8：Rust 的编码选择](#12-utf-8rust-的编码选择)
     - [1.3 格式化系统的类型安全](#13-格式化系统的类型安全)
   - [二、技术细节](#二技术细节)
@@ -532,7 +532,7 @@ fn get_static() -> &'static str {
 > **修正**:
 > `String` 拥有堆分配的 UTF-8 字节数组，`&str` 是对其内部数据的借用（Borrowing）。
 > 返回 `&str` 意味着返回一个引用（Reference），但被引用的 `String` 在函数返回时释放。
-> 这与悬垂引用问题相同——生命周期（Lifetimes）系统阻止返回指向局部 `String` 的 `&str`。
+> 这与悬垂引用（Reference）问题相同——生命周期（Lifetimes）系统阻止返回指向局部 `String` 的 `&str`。
 > 正确做法是返回 `String`（转移所有权）或返回 `'static str`（字符串字面量）。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-storing-utf-8-encoded-text-with-strings.html)]
 
@@ -679,10 +679,10 @@ fn main() {
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | 字符串与文本：Rust 的 Unicode 处理与格式化系统 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 字符串与文本：Rust 的 Unicode 处理与格式化系统 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 字符串与文本：Rust 的 Unicode 处理与格式化系统 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 字符串与文本：Rust 的 Unicode 处理与格式化系统 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
-> UTF-8 安全性 ⟸ String/str 边界检查 ⟸ 所有权与借用
+> UTF-8 安全性 ⟸ String/str 边界检查 ⟸ 所有权与借用（Borrowing）
 > 文本处理正确性 ⟸ 编码一致性（Coherence）保证 ⟸ 类型系统（Type System）约束
 > **过渡**: 掌握 字符串与文本：Rust 的 Unicode 处理与格式化系统 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 字符串与文本：Rust 的 Unicode 处理与格式化系统 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
@@ -840,5 +840,5 @@ fn main() {
 thread 'main' panicked at 'byte index 10 is out of bounds of `hello`'
 ```
 
-字符串切片使用字节索引而非字符索引。对于 ASCII 字符串，两者相同；对于多字节 UTF-8 字符，需要特别小心。
+字符串切片（String Slice）使用字节索引而非字符索引。对于 ASCII 字符串，两者相同；对于多字节 UTF-8 字符，需要特别小心。
 </details>

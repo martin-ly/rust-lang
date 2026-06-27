@@ -219,7 +219,7 @@ match some_number {
 
 **相关语法**：`while let` 用于在模式匹配（Pattern Matching）成功时循环
 
-**知识点**：`if let` / `while let` 是 Rust "**只想处理一个模式**"场景下的惯用写法。[→ 模式匹配详解](./04_type_system.md)
+**知识点**：`if let` / `while let` 是 Rust "**只想处理一个模式**"场景下的惯用写法。[→ 模式匹配（Pattern Matching）详解](./04_type_system.md)
 
 </details>
 
@@ -253,7 +253,7 @@ fn main() {
 
 `(3, 5, 7)` 不匹配前两个模式（第一个不是 0，最后一个不是 0），匹配第三个，捕获 `x = 3`、`z = 7`。
 
-**注意**：`..` 只能在元组/结构体模式中使用**一次**（不能歧义），数组切片（Slice）模式除外。
+**注意**：`..` 只能在元组/结构体（Struct）模式中使用**一次**（不能歧义），数组切片（Slice）模式除外。
 
 **知识点**：`_` 忽略单个值，`..` 忽略剩余部分，两者是 Rust 模式匹配中减少 boilerplate 的关键工具。[→ 模式匹配详解](./04_type_system.md)
 
@@ -376,7 +376,7 @@ None
 | 调用 | 返回值 | 说明 |
 |:---|:---|:---|
 | 第 1 次 | `Some(1)` | 指向第一个元素的引用（Reference） |
-| 第 2 次 | `Some(2)` | 指向第二个元素的引用 |
+| 第 2 次 | `Some(2)` | 指向第二个元素的引用（Reference） |
 | 第 3 次 | `Some(3)` | 指向第三个元素的引用 |
 | 第 4 次 | `None` | 迭代器（Iterator）已耗尽 |
 
@@ -446,7 +446,7 @@ Rectangle {
 
 | 得分 | 评价 | 建议 |
 |:---:|:---|:---|
-| 10/10 | 🏆 类型系统已内化 | 进阶至 [L2 Trait/泛型（Generics）](LINK_PLACEHOLDER) |
+| 10/10 | 🏆 类型系统（Type System）已内化 | 进阶至 [L2 Trait/泛型（Generics）](LINK_PLACEHOLDER) |
 | 7–9/10 | ✅ 核心概念掌握 | 强化 [L1 类型练习](../../exercises/src/type_system/)，关注错题 |
 | 4–6/10 | 🔄 需巩固基础 | 重读 [Type System](./04_type_system.md)，完成 rustlings 对应章节 |
 | 0–3/10 | 📚 建议重新开始 | 从 [Type System](./04_type_system.md) 逐节阅读，配合 [crates/c02_type_system](../../crates/c02_type_system/) 示例 |

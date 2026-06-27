@@ -43,7 +43,7 @@
   - [三、模型检验工具](#三模型检验工具)
     - [3.1 Kani：基于 CBMC 的 Rust 验证器](#31-kani基于-cbmc-的-rust-验证器)
       - [Kani 0.66 新特性（2026-05 发布）](#kani-066-新特性2026-05-发布)
-    - [3.2 MIRI：运行时（Runtime） UB 检测器](LINK_PLACEHOLDER)
+    - [3.2 MIRI：运行时 UB 检测器](#32-miri运行时-ub-检测器)
   - [四、演绎验证工具](#四演绎验证工具)
     - [4.1 Prusti：Viper 分离逻辑验证器](#41-prustiviper-分离逻辑验证器)
     - [4.2 Creusot：Why3/WhyML 验证器](#42-creusotwhy3whyml-验证器)

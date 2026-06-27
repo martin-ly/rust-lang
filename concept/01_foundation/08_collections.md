@@ -66,7 +66,7 @@
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Vec 与容量（理解层）](#测验-1vec-与容量理解层)
     - [测验 2：HashMap 所有权（Ownership）（应用层）](LINK_PLACEHOLDER)
-    - [测验 3：迭代器与借用（Borrowing）（分析层）](LINK_PLACEHOLDER)
+    - [测验 3：迭代器（Iterator）与借用（Borrowing）（分析层）](LINK_PLACEHOLDER)
     - [测验 4：BTreeMap vs HashMap（评价层）](#测验-4btreemap-vs-hashmap评价层)
     - [测验 5： draining 与内存（应用层）](#测验-5-draining-与内存应用层)
   - [十二、延伸阅读与自测](#十二延伸阅读与自测)
@@ -110,7 +110,7 @@ graph TD
 > **认知功能**: 此图展示 Rust 标准库集合的**分类谱系**。每种集合类型针对特定的访问模式和排序需求设计。
 > [来源: [TRPL](https://doc.rust-lang.org/book/ch08-00-common-collections.html)]
 > **使用建议**: 默认使用 Vec 和 HashMap；需要排序时使用 BTreeMap；需要双端操作时使用 VecDeque。
-> **关键洞察**: Rust 的集合类型与 C++ STL 对应，但**所有权语义更严格**——插入操作是 move，访问需要借用（Borrowing）。
+> **关键洞察**: Rust 的集合类型与 C++ STL 对应，但**所有权（Ownership）语义更严格**——插入操作是 move，访问需要借用（Borrowing）。
 > [来源: [std::collections](https://doc.rust-lang.org/std/collections/index.html)]
 
 ---
@@ -668,7 +668,7 @@ fn main() {
 }
 ```
 
-> **修正**: **借用规则**：1) 任意数量的 `&T` 或一个 `&mut T`；2) 不能同时存在；3) NLL 使借用仅在**使用点**检查，非作用域结束。
+> **修正**: **借用（Borrowing）规则**：1) 任意数量的 `&T` 或一个 `&mut T`；2) 不能同时存在；3) NLL 使借用仅在**使用点**检查，非作用域结束。
 
 ## 实践
 
@@ -695,7 +695,7 @@ fn main() {
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | 集合类型：Rust 标准库的数据结构谱系 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 集合类型：Rust 标准库的数据结构谱系 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 集合类型：Rust 标准库的数据结构谱系 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 集合类型：Rust 标准库的数据结构谱系 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 内存安全（Memory Safety）数据结构 ⟸ 所有权自动管理 ⟸ Vec/HashMap 实现

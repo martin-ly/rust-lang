@@ -541,9 +541,9 @@ fn main() {
 
 > **修正**:
 > 零大小类型（ZST，如 `()`、`PhantomData<T>`、空 struct）的大小为 0，不占用内存。
-> `Box<ZST>` 的 `into_raw` 返回的指针不指向有效堆内存——它是悬垂指针（dangling pointer），但对 ZST 解引用是安全的（不读取任何字节）。
+> `Box<ZST>` 的 `into_raw` 返回的指针不指向有效堆内存——它是悬垂指针（dangling pointer），但对 ZST 解引用（Reference）是安全的（不读取任何字节）。
 > 这是 Rust 类型系统（Type System）的边缘情况：内存安全（Memory Safety）保证不依赖指针的有效性，而依赖访问的字节数。`Box::new(ZeroSized)` 可能不调用分配器（优化为无操作），`Box::from_raw(ptr)` 可能不调用 deallocator。
-> 这与 C 的 `malloc(0)`（实现定义行为，可能返回 NULL 或有效指针）不同——Rust 的 ZST 处理是类型系统层面的，不依赖分配器行为。
+> 这与 C 的 `malloc(0)`（实现定义行为，可能返回 NULL 或有效指针）不同——Rust 的 ZST 处理是类型系统（Type System）层面的，不依赖分配器行为。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-04-advanced-types.html)] ·
 > [来源: [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html)]
 
@@ -573,7 +573,7 @@ fn main() {
 >
 > 风险：忘记显式 `drop` 导致内存泄漏——不是 UB，但资源浪费。
 > Rust 的类型系统不阻止内存泄漏（`Rc` 循环引用、`Mem::forget`、`ManuallyDrop` 都是安全的），但工具（`cargo leak`）和模式（`scopeguard::defer`）可帮助检测。
-> 这与 C++ 的 `std::unique_ptr`（必须释放，否则泄漏）或 Java 的 GC（自动回收循环引用... eventually）不同——Rust 的所有权系统通常防止泄漏，但显式控制时责任回归开发者。
+> 这与 C++ 的 `std::unique_ptr`（必须释放，否则泄漏）或 Java 的 GC（自动回收循环引用... eventually）不同——Rust 的所有权（Ownership）系统通常防止泄漏，但显式控制时责任回归开发者。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)] ·
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/struct.ManuallyDrop.html)]
 
@@ -710,7 +710,7 @@ ZST 不占用内存，可用于类型级标记（phantom types）、空迭代器
 | 定理 | 前提 | 结论 | 置信度 |
 | :--- | :--- | :--- | :--- |
 | 数据抽象谱系：从 C struct 到 Rust enum + trait 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |
-| 数据抽象谱系：从 C struct 到 Rust enum + trait 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时 bug | 高 |
+| 数据抽象谱系：从 C struct 到 Rust enum + trait 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |
 | 数据抽象谱系：从 C struct 到 Rust enum + trait 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > API 稳定性 ⟸ 封装边界清晰 ⟸ pub/private 分层

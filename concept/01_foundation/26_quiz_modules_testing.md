@@ -70,7 +70,7 @@ mod front_of_house; // 查找 src/front_of_house.rs 或 src/front_of_house/mod.r
 
 | 修饰符 | 可见范围 |
 |:---|:---|
-| （默认） | 当前模块及其子模块 |
+| （默认） | 当前模块（Module）及其子模块 |
 | `pub` | 任何地方 |
 | `pub(crate)` | 当前 crate 内 |
 | `pub(super)` | 父模块 |

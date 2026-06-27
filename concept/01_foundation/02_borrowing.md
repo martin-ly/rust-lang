@@ -20,7 +20,7 @@
 > **前置依赖**: [L1 所有权（Ownership）](LINK_PLACEHOLDER)
 > **后置延伸**: [L2 Trait](../02_intermediate/01_traits.md) · [L4 分离逻辑](../04_formal/01_linear_logic.md) · [L3 并发](../03_advanced/01_concurrency.md)
 > **跨层映射**: L1→L4 借用规则 ↔ 线性逻辑 !A 规则 | L1→L3 借用（Borrowing） → Send/Sync
-> **定理链编号**: T-010 借用唯一性 → T-011 生命周期（Lifetimes）包含 → T-012 悬垂引用 [来源: [Rust Reference — References](https://doc.rust-lang.org/reference/types/pointer.html)]不可达
+> **定理链编号**: T-010 借用（Borrowing）唯一性 → T-011 生命周期（Lifetimes）包含 → T-012 悬垂引用 [来源: [Rust Reference — References](https://doc.rust-lang.org/reference/types/pointer.html)]不可达
 > **层级**: L1 基础概念
 > **前置概念**:
 >
@@ -77,7 +77,7 @@
     - [6.3 定理一致性（Coherence）矩阵](LINK_PLACEHOLDER)
   - [七、示例与反例（Examples \& Counter-examples）](#七示例与反例examples--counter-examples)
     - [7.1 正确示例：不可变借用（Mutable Borrow）共存](LINK_PLACEHOLDER)
-    - [7.2 正确示例：可变借用的独占性](#72-正确示例可变借用的独占性)
+    - [7.2 正确示例：可变借用（Mutable Borrow）的独占性](#72-正确示例可变借用的独占性)
     - [7.3 反例：可变 + 不可变借用（Immutable Borrow）共存（E0502）](LINK_PLACEHOLDER)
     - [7.4 反例：多个可变借用（E0499）](#74-反例多个可变借用e0499)
     - [7.5 边界示例：Two-Phase Borrows](#75-边界示例two-phase-borrows)
@@ -92,14 +92,14 @@
     - [7.7 国际课程与论文对齐](#77-国际课程与论文对齐)
   - [九、借用检查器错误修复模式（Fixing Ownership Errors）](#九借用检查器错误修复模式fixing-ownership-errors)
     - [9.1 诊断流程](#91-诊断流程)
-    - [9.2 模式 1：返回栈上引用](#92-模式-1返回栈上引用)
+    - [9.2 模式 1：返回栈上引用（Reference）](#92-模式-1返回栈上引用)
     - [9.3 模式 2：对只读引用尝试可变操作](#93-模式-2对只读引用尝试可变操作)
     - [9.4 模式 3：别名与可变操作重叠](#94-模式-3别名与可变操作重叠)
     - [9.5 模式 4：从集合中移出非 Copy 元素](#95-模式-4从集合中移出非-copy-元素)
     - [9.6 模式 5：借用检查器的过度保守](#96-模式-5借用检查器的过度保守)
   - [十、知识来源关系（Provenance）](#十知识来源关系provenance)
   - [十一、相关概念链接](#十一相关概念链接)
-    - [11.1 补充：`Cow<T>`（Clone on Write）的借用-所有权混合模式](#111-补充cowtclone-on-write的借用-所有权混合模式)
+    - [11.1 补充：`Cow<T>`（Clone on Write）的借用-所有权（Ownership）混合模式](#111-补充cowtclone-on-write的借用-所有权混合模式)
       - [类型定义与两种状态](#类型定义与两种状态)
       - [自动解引用与写时复制](#自动解引用与写时复制)
       - [与 `Deref` 和 `ToOwned` 的关系](#与-deref-和-toowned-的关系)
@@ -129,7 +129,7 @@
     - [14.4 边界测试：迭代器（Iterator）借用期间修改集合（编译错误）](LINK_PLACEHOLDER)
     - [14.5 边界测试：`&mut` 别名规则违反（编译错误）](#145-边界测试mut-别名规则违反编译错误)
     - [10.5 边界测试：可变借用的嵌套与重新借用链（编译错误）](#105-边界测试可变借用的嵌套与重新借用链编译错误)
-    - [10.6 边界测试：slice 模式匹配与借用冲突（编译错误）](#106-边界测试slice-模式匹配与借用冲突编译错误)
+    - [10.6 边界测试：slice 模式匹配（Pattern Matching）与借用冲突（编译错误）](#106-边界测试slice-模式匹配与借用冲突编译错误)
   - [嵌入式测验](#嵌入式测验)
   - [实践](#实践)
   - [🎯 嵌入式测验](#-嵌入式测验)
@@ -216,7 +216,7 @@
 > **[来源: [Rust Reference: References](https://doc.rust-lang.org/reference/types.html#reference-types)]** Rust 引用分 `&T`（共享只读）和 `&mut T`（独占可写），由编译器在类型检查和借用检查阶段强制执行。 ✅
 > **[来源: C++ Reference: Reference]** C++ 引用 `T&` 语义上为别名，编译器不检查别名-可变冲突，use-after-free 和 data race 为未定义行为 (UB)。 ✅
 > **[来源: Haskell GHC User Guide: ST]** Haskell `ST` monad 通过类型系统（Type System）封装可变状态（`STRef`），但同一 `STRef` 的别名访问不触发编译错误，依赖纯函数隔离保证安全。 ✅
-> **[来源: Go Spec: Pointers]** Go 指针 `*T` 允许任意别名和可变访问，内存安全（Memory Safety）由 GC 保证，但 data race 需依赖运行时 race detector 检测。 ✅
+> **[来源: Go Spec: Pointers]** Go 指针 `*T` 允许任意别名和可变访问，内存安全（Memory Safety）由 GC 保证，但 data race 需依赖运行时（Runtime） race detector 检测。 ✅
 
 ### 2.3 借用状态转换矩阵
 >
@@ -269,7 +269,7 @@ Rust 借用的核心定理：
 这是 Rust 消除数据竞争的**充分条件**。
 
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** Alias-XOR-Mutation 是 Rust 消除数据竞争的充分条件，基于分离逻辑中的分数权限 (fractional permissions)。 ✅
-> **来源: [Wikipedia: Alias analysis](https://en.wikipedia.org/wiki/Alias_analysis)** 别名分析中"可变与别名互斥"是内存安全的核心条件。 ✅
+> **来源: [Wikipedia: Alias analysis](https://en.wikipedia.org/wiki/Alias_analysis)** 别名分析中"可变与别名互斥"是内存安全（Memory Safety）的核心条件。 ✅
 
 ### 3.3 内存模型演进：Stacked Borrows → Tree Borrows
 
@@ -407,7 +407,7 @@ graph TD
     B8 -->|编译期| R1[更短的实际生命周期<br/>减少借用冲突]
 ```
 
-> **认知功能**: 此图是借用冲突的**错误诊断速查表**。当编译器报错 E0502/E0499/E0503 时，读者可对照此图定位冲突根源：是不可变借用（Mutable Borrow）阻碍了可变借用？还是可变借用阻碍了新的借用？还是可变借用期间试图直接使用原变量？底部的 NLL 对比节点特别重要——它提醒读者在 NLL 后，引用的实际生命周期可能比你想象的更短，某些「看似冲突」的代码实际上是合法的。 [来源: 💡 原创分析]
+> **认知功能**: 此图是借用冲突的**错误诊断速查表**。当编译器报错 E0502/E0499/E0503 时，读者可对照此图定位冲突根源：是不可变借用（Mutable Borrow）阻碍了可变借用？还是可变借用阻碍了新的借用？还是可变借用期间试图直接使用原变量？底部的 NLL 对比节点特别重要——它提醒读者在 NLL 后，引用的实际生命周期（Lifetimes）可能比你想象的更短，某些「看似冲突」的代码实际上是合法的。 [来源: 💡 原创分析]
 > **过渡**: 决策树回答"怎么做"的问题，而定理推理链回答"为什么能这么做"——通过引理、定理、推论的层层演绎，建立借用系统的形式化保证，特别是分数权限的数学基础。
 
 ---
@@ -517,7 +517,7 @@ fn main() {
 
 **错误分析**：
 
-- `r1 = &s` 创建了一个不可变借用
+- `r1 = &s` 创建了一个不可变借用（Immutable Borrow）
 - `r2 = &mut s` 试图创建可变借用
 - 根据借用规则，不可变借用存在时禁止可变借用
 
@@ -965,7 +965,7 @@ fn main() {
 
 ### 11.1 补充：`Cow<T>`（Clone on Write）的借用-所有权混合模式
 
-> **[Rust Reference: std::borrow::Cow](https://doc.rust-lang.org/reference/)** · **[TRPL Ch15.4](https://doc.rust-lang.org/book/ch15-04-rc.html)** `Cow<T>`（Clone on Write）是 Rust 标准库中**借用与所有权的桥接类型**。它允许代码在**不需要修改时零成本借用**，在**需要修改时才克隆获得所有权**。这是"延迟付费（pay-as-you-go）"策略在类型系统中的体现。✅
+> **[Rust Reference: std::borrow::Cow](https://doc.rust-lang.org/reference/)** · **[TRPL Ch15.4](https://doc.rust-lang.org/book/ch15-04-rc.html)** `Cow<T>`（Clone on Write）是 Rust 标准库中**借用与所有权的桥接类型**。它允许代码在**不需要修改时零成本借用**，在**需要修改时才克隆获得所有权**。这是"延迟付费（pay-as-you-go）"策略在类型系统（Type System）中的体现。✅
 
 #### 类型定义与两种状态
 
@@ -1095,7 +1095,7 @@ fn_exists(p.as_ref() as &Path);      // 作为路径
 fn_starts_with(p.as_ref() as &OsStr); // 作为 OS 字符串
 ```
 
-> **关键洞察**: `Deref` 是"继承"（智能指针继承被包装类型的接口），`AsRef` 是"转换"（一个类型在不同语境下被看作不同视图）。`String` 实现 `Deref<Target = str>`（它是 str 的拥有形式），同时也实现 `AsRef<str>`、`AsRef<[u8]>`、`AsRef<Path>`（它在不同语境下可被看作不同东西）。
+> **关键洞察**: `Deref` 是"继承"（智能指针（Smart Pointer）继承被包装类型的接口），`AsRef` 是"转换"（一个类型在不同语境下被看作不同视图）。`String` 实现 `Deref<Target = str>`（它是 str 的拥有形式），同时也实现 `AsRef<str>`、`AsRef<[u8]>`、`AsRef<Path>`（它在不同语境下可被看作不同东西）。
 > **来源**: [Rust Reference: Deref](https://doc.rust-lang.org/reference/items/traits.html) · [Rust Reference: AsRef](https://doc.rust-lang.org/reference/items/traits.html) · [TRPL Ch15.2](https://doc.rust-lang.org/book/ch15-02-deref.html) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
 ---
@@ -1452,7 +1452,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 编译器不允许两个可变引用同时指向同一数据（别名规则）。对于数组/切片（Slice），使用 `split_at_mut()` 或 `split_first_mut()` 获取不重叠的可变引用，满足编译器的别名分析。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: Rust 编译器不允许两个可变引用（Mutable Reference）同时指向同一数据（别名规则）。对于数组/切片（Slice），使用 `split_at_mut()` 或 `split_first_mut()` 获取不重叠的可变引用，满足编译器的别名分析。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **相关判定树**: [借用判定树](../00_meta/concept_definition_decision_forest.md#三借用判定树) · [内存安全 FTA](../00_meta/fault_tree_analysis_collection.md#二内存安全失效树)
 > **相关谓词映射**: [shr(κ, ℓ) 谓词](../00_meta/rustbelt_predicate_map.md#三共享谓词-shrκ-ℓ-映射)
 
@@ -1623,7 +1623,7 @@ fn main() {
 | 多个 `&mut T` | ❌ | 数据竞争风险 |
 | `&T` + `&mut T` | ❌ | 读写冲突风险 |
 
-> **核心规则**: 要么多个不可变引用，要么一个可变引用，不能同时存在。
+> **核心规则**: 要么多个不可变引用（Immutable Reference），要么一个可变引用，不能同时存在。
 > **来源**: [TRPL — References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)
 
 </details>

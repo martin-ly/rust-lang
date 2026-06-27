@@ -8,6 +8,8 @@
 > **状态**: 内容已整合至标准层级文件，原始文件保留供历史追溯
 >
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Rust Blog](https://blog.rust-lang.org/)
+> **前置概念**: N/A
+> **后置概念**: N/A
 ---
 
 ## 归档文件清单
