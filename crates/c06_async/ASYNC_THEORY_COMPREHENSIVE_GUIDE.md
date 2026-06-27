@@ -36,7 +36,6 @@
   - [🤝 贡献指南](#-贡献指南)
   - [📄 许可证](#-许可证)
   - [📧 联系方式](#-联系方式)
-  - [**维护状态**: ✅ 活跃维护中](#维护状态--活跃维护中)
 
 ## 📚 文档概述
 
@@ -485,6 +484,7 @@ cargo bench
 **最后更新**: 2025-10-02
 **Rust 版本**: 1.90
 **维护状态**: ✅ 活跃维护中
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -53,7 +53,6 @@
   - [🤝 社区支持](#-社区支持)
     - [获取帮助](#获取帮助)
     - [贡献方式](#贡献方式)
-  - [_本模块专注于 Rust WASM 的学习，提供系统性的学习路径和实践示例。如有任何问题或建议，欢迎反馈。_](#本模块专注于-rust-wasm-的学习提供系统性的学习路径和实践示例如有任何问题或建议欢迎反馈)
 
 ---
 
@@ -499,6 +498,7 @@ npm start
 ---
 
 _本模块专注于 Rust WASM 的学习，提供系统性的学习路径和实践示例。如有任何问题或建议，欢迎反馈。_
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

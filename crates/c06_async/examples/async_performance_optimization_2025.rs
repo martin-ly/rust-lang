@@ -541,8 +541,7 @@ impl SimdHasher {
         let mut hash: u64 = 0;
 
         // 处理 8 字节对齐的块（编译器可能自动向量化此循环）
-        let chunks = data.chunks_exact(8);
-        let remainder = chunks.remainder();
+        let (chunks, remainder) = data.as_chunks::<8>();
 
         for chunk in chunks {
             for &byte in chunk {

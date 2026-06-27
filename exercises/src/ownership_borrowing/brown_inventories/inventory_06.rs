@@ -19,14 +19,14 @@
 /// Finds the first even number, doubles it in place, and returns the original value.
 ///
 /// TODO: 修复借用冲突，使代码编译并通过测试。
-pub fn double_first_even(numbers: &mut Vec<i32>) -> Option<i32> {
+pub fn double_first_even(numbers: &mut [i32]) -> Option<i32> {
     // 需要先不可变地查找第一个偶数的位置或值
     let first_even = numbers.iter().copied().find(|&n| n % 2 == 0);
 
     // TODO: 如果存在偶数，需要可变地修改它。这里不能直接写 &mut numbers[...]
     // 因为 first_even 可能借用了 numbers。
     // 提示：使用 if let Some(value) = first_even 后再获取可变借用，
-       // 或者使用索引 + 重新查找。
+    // 或者使用索引 + 重新查找。
     if let Some(value) = first_even {
         // 重新查找索引，然后修改
         if let Some(idx) = numbers.iter().position(|&n| n == value) {

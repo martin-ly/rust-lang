@@ -25,7 +25,6 @@
     - [短期建议](#短期建议)
     - [长期建议](#长期建议)
   - [🏆 修复总结](#-修复总结)
-  - [**下一步**: 运行完整的基准测试套件进行性能验证](#下一步-运行完整的基准测试套件进行性能验证)
 
 ## 🔧 修复概述
 
@@ -236,6 +235,7 @@ std::hint::black_box(result)  // 替代 criterion::black_box
 
 **修复完成时间**: 2025年9月28日
 **下一步**: 运行完整的基准测试套件进行性能验证
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

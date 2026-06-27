@@ -45,7 +45,6 @@
     - [今天就开始](#今天就开始)
     - [制定学习计划](#制定学习计划)
   - [🎉 祝你学习愉快](#-祝你学习愉快)
-  - [**维护者**: Rust 异步编程研究组](#维护者-rust-异步编程研究组)
 
 -Quick Start Guide for Rust Async Programming 2025
 
@@ -509,6 +508,7 @@ cargo run --example ultimate_async_theory_practice_2025
 
 **最后更新**: 2025-12-11
 **维护者**: Rust 异步编程研究组
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

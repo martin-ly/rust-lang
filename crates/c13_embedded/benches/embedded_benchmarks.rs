@@ -3,7 +3,7 @@
 //! 由于真实硬件环境不可用，这些基准测试主要用于验证算法逻辑的正确性和相对性能。
 //! real hardware environment ，benchmark main algorithm and to performance 。
 
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 
 /// 模拟 MMIO 寄存器访问性能
 /// MMIO performance

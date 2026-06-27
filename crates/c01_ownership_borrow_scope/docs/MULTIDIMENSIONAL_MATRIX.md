@@ -44,7 +44,6 @@
   - [📊 综合评估矩阵](#-综合评估矩阵)
     - [11.1 设计权衡矩阵](#111-设计权衡矩阵)
   - [🔗 参考文档链接](#-参考文档链接)
-  - [**更新频率**: 随 Rust 版本更新和社区最佳实践演进持续更新](#更新频率-随-rust-版本更新和社区最佳实践演进持续更新)
 
 **版本**: 2.0
 **Rust 版本**: 1.93.0+
@@ -372,6 +371,7 @@
 ---
 
 **更新频率**: 随 Rust 版本更新和社区最佳实践演进持续更新
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

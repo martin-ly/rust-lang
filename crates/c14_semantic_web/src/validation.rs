@@ -146,14 +146,14 @@ impl Validator {
                 });
             }
 
-            if let Some(bloom) = &entity.bloom {
-                if !VALID_BLOOM.contains(&bloom.as_str()) {
-                    report.issues.push(ValidationIssue {
-                        severity: Severity::Error,
-                        target: entity.id.clone(),
-                        message: format!("无效的 ex:bloom: {}", bloom),
-                    });
-                }
+            if let Some(bloom) = &entity.bloom
+                && !VALID_BLOOM.contains(&bloom.as_str())
+            {
+                report.issues.push(ValidationIssue {
+                    severity: Severity::Error,
+                    target: entity.id.clone(),
+                    message: format!("无效的 ex:bloom: {}", bloom),
+                });
             }
         }
     }
@@ -202,14 +202,14 @@ impl Validator {
                 });
             }
 
-            if let Some(c) = relation.meta.confidence {
-                if !(0.0..=1.0).contains(&c) {
-                    report.issues.push(ValidationIssue {
-                        severity: Severity::Error,
-                        target: target.clone(),
-                        message: format!("ex:confidence 越界: {}", c),
-                    });
-                }
+            if let Some(c) = relation.meta.confidence
+                && !(0.0..=1.0).contains(&c)
+            {
+                report.issues.push(ValidationIssue {
+                    severity: Severity::Error,
+                    target: target.clone(),
+                    message: format!("ex:confidence 越界: {}", c),
+                });
             }
         }
     }

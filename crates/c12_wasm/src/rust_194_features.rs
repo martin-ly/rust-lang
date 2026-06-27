@@ -56,7 +56,9 @@ impl<'a> WasmMemoryView<'a> {
     /// Rust 1.94.0: chunks_exact(4) Read 4 （）
     pub fn read_all_i32_le(&self) -> impl Iterator<Item = i32> + '_ {
         self.data
-            .chunks_exact(4)
+            .as_chunks::<4>()
+            .0
+            .iter()
             .map(|chunk| i32::from_le_bytes([chunk[0], chunk[1], chunk[2], chunk[3]]))
     }
 
@@ -1068,8 +1070,7 @@ impl WasmBase64 {
 
     pub fn encode(data: &[u8]) -> String {
         let mut result = String::with_capacity(data.len().div_ceil(3) * 4);
-        let chunks = data.chunks_exact(3);
-        let remainder = chunks.remainder();
+        let (chunks, remainder) = data.as_chunks::<3>();
 
         for chunk in chunks {
             let n = ((chunk[0] as u32) << 16) | ((chunk[1] as u32) << 8) | (chunk[2] as u32);

@@ -14,10 +14,10 @@
 //! 2. 将其实现为 `get_longest_good`，通过返回 owned String 避免悬垂引用。
 //! 3. 什么时候返回 `&str` 是安全的？（提示：输入参数的生命周期）
 
-/// 错误版本：返回局部变量的引用，导致悬垂引用。
-/// Broken version: returns a reference to a local variable, creating a dangling reference.
-///
-/// TODO: 取消注释并观察编译错误，然后实现下方的正确版本。
+// 错误版本：返回局部变量的引用，导致悬垂引用。
+// Broken version: returns a reference to a local variable, creating a dangling reference.
+//
+// TODO: 取消注释并观察编译错误，然后实现下方的正确版本。
 // pub fn get_longest_bad(a: &str, b: &str) -> &str {
 //     let longest = if a.len() > b.len() { a } else { b };
 //     longest

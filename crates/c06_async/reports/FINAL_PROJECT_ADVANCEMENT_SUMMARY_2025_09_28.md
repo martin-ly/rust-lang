@@ -1,4 +1,6 @@
-> **⚠️ 历史文档提示**：本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
+> **⚠️ 历史文档提示**：
+>
+> 本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
 > 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
 > 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
 >
@@ -51,7 +53,6 @@
   - [🎉 总结](#-总结)
     - [主要成就](#主要成就)
     - [最终评价](#最终评价)
-  - [**Rust 1.90集成**: ✅ 完全集成和优化](#rust-190集成--完全集成和优化)
 
 ## 🎯 项目推进概览
 
@@ -347,6 +348,7 @@ tokio_exp01 示例运行成功:
 **技术等级**: 🏆 生产级别和企业级应用
 **项目评级**: ⭐⭐⭐⭐⭐ 五星级项目
 **Rust 1.90集成**: ✅ 完全集成和优化
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
