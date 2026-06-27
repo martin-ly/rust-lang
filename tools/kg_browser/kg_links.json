@@ -1,0 +1,23 @@
+{
+  "ex:Ownership": "concept/01_foundation/01_ownership.md",
+  "ex:Borrowing": "concept/01_foundation/02_borrowing.md",
+  "ex:Lifetimes": "concept/01_foundation/03_lifetimes.md",
+  "ex:TypeSystem": "concept/01_foundation/04_type_system.md",
+  "ex:Trait": "concept/02_intermediate/01_traits.md",
+  "ex:Generics": "concept/02_intermediate/02_generics.md",
+  "ex:Concurrency": "concept/03_advanced/01_concurrency.md",
+  "ex:AsyncAwait": "concept/03_advanced/02_async.md",
+  "ex:LinearLogic": "concept/04_formal/01_linear_logic.md",
+  "ex:TypeTheory": "concept/04_formal/02_type_theory.md",
+  "ex:AffineLogic": "concept/04_formal/01_linear_logic.md",
+  "ex:SeparationLogic": "concept/04_formal/11_separation_logic.md",
+  "ex:RegionTypes": "concept/04_formal/03_ownership_formal.md",
+  "ex:SystemF": "concept/04_formal/02_type_theory.md",
+  "ex:Send": null,
+  "ex:Sync": null,
+  "ex:Copy": null,
+  "ex:Sized": null,
+  "ex:AXM": "concept/04_formal/11_separation_logic.md",
+  "ex:OrphanRule": "concept/02_intermediate/01_traits.md",
+  "ex:Elision": "concept/01_foundation/03_lifetimes.md"
+}

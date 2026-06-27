@@ -60,6 +60,12 @@
     - [测验 3：`loop` 返回值（应用层）](#测验-3loop-返回值应用层)
     - [测验 4：`if let` 语法（应用层）](#测验-4if-let-语法应用层)
     - [测验 5：`break` 标签（分析层）](#测验-5break-标签分析层)
+  - [补充章节：控制流理论深化（P1-4）](#补充章节控制流理论深化p1-4)
+    - [7.1 结构化程序定理（Böhm–Jacopini）](#71-结构化程序定理böhmjacopini)
+    - [7.2 Continuation / `call/cc` / CPS 变换 / Delimited Continuation](#72-continuation--callcc--cps-变换--delimited-continuation)
+    - [7.3 控制流图（CFG）、基本块、边与支配树](#73-控制流图cfg基本块边与支配树)
+    - [7.4 循环不变量：与 Hoare 逻辑的衔接](#74-循环不变量与-hoare-逻辑的衔接)
+    - [7.5 `goto` 的消除与恢复：C `goto` / C++ `co_await` / Rust `?` / `break 'label`](#75-goto-的消除与恢复c-goto--c-co_await--rust---break-label)
 
 ---
 
@@ -945,32 +951,50 @@ after outer, count=3
 
 ## 补充章节：控制流理论深化（P1-4）
 
-本章节从**程序语言理论**视角深化对 Rust 控制流的理解：结构化程序定理说明为何 Rust 摒弃 `goto` 仍保持图灵完备；Continuation 与 CPS 变换解释 `async/await` 与 `?` 的本质；控制流图、基本块与支配树是理解 MIR 与借用（Borrowing）检查器的基础；循环不变量与 Hoare 逻辑为编写可信的循环提供证明框架；最后对比 `goto`、`break 'label` 与 `?` 三种非局部控制转移机制。
+本章节从**程序语言理论**视角深化对 Rust 控制流的理解：结构化程序定理说明为何 Rust 摒弃 `goto` 仍保持图灵完备；Continuation 与 CPS 变换解释 `async/await` 与 `?` 的本质；控制流图、基本块与支配树是理解 MIR 与借用（Borrowing）检查器的基础；循环不变量与 Hoare 逻辑为编写可信的循环提供证明框架；最后对比 `goto`、`co_await`、`break 'label` 与 `?` 四种非局部控制转移机制。
 
 ---
 
-### 7.1 结构化程序定理（Böhm–Jacopini）
+### 7.1 结构化程序定理（Böhm–Jacopini 定理）
 
-**定义**：结构化程序定理（Böhm & Jacopini, 1966）指出，任何可计算函数都可以由仅包含三种控制结构的程序实现：
+#### 形式化定义
 
-1. **顺序（Sequence）**：语句按先后顺序执行。
-2. **选择（Selection）**：根据条件选择分支（`if`）。
-3. **迭代（Iteration）**：在条件满足时重复执行（`while`）。
+结构化程序定理（Böhm & Jacopini, 1966）指出：对于任意一个可计算函数，存在一个**单入口/单出口（single-entry/single-exit）**的程序来计算它，且该程序仅由以下三种控制结构复合而成：
 
-该定理的重要意义在于：**无需无限制的 `goto`，单入口/单出口的结构化程序已足以表达全部可计算性**。这也为现代高级语言放弃 `goto` 提供了理论依据。
+1. **顺序（Sequence）**：`S1; S2` —— 语句按先后顺序执行。
+2. **选择（Selection）**：`if B then S1 else S2` —— 根据条件选择分支。
+3. **迭代（Iteration）**：`while B do S` —— 在条件满足时重复执行。
 
-#### Rust 关联
+形式化地，若程序设计语言提供顺序、选择、迭代三种组合子，并允许任意嵌套，则该语言已足以表达所有可计算函数。这也意味着：**无限制的 `goto` 并非可计算性的必要条件**。
+
+> **直觉解释**：任何复杂控制流都可以被"拉直"成由这三种积木搭建的结构。`goto` 只是让这些积木可以任意拼接的"捷径"，但捷径会破坏整体结构的可读性与可验证性。
+
+#### 三种结构化构造的 ASCII 示意图
+
+```text
+顺序 (Sequence)          选择 (Selection)              迭代 (Iteration)
+┌───────────┐            ┌───────────┐                  ┌───────────┐
+│   S1      │            │  条件 B?  │                  │  条件 B?  │──否──► 退出
+│   S2      │            │  /      \ │                  │  /      \ │
+│   ...     │            是        否                  是        否
+│   Sn      │            ▼          ▼                  ▼          │
+└───────────┘         ┌────┐    ┌────┐              ┌────┐       │
+                      │ S1 │    │ S2 │              │ S  │───────┘
+                      └────┘    └────┘              └────┘
+```
+
+#### 与 Rust 的对应
 
 Rust 的核心控制流——`if`/`match`/`loop`/`while`/`for`——正是结构化程序定理的工程实现：
 
-- `if` 与 `match` 提供选择；
-- `loop`/`while`/`for` 提供迭代；
-- 表达式块 `{}` 提供顺序组合；
+- `if` 与 `match` 提供**选择**；
+- `loop`/`while`/`for` 提供**迭代**；
+- 表达式块 `{}` 提供**顺序组合**；
 - 即使是 `break 'label`，也仍然受限于**退出命名循环**这一结构化操作，不会破坏单入口/单出口性质。
 
 Rust 没有 `goto`，因此任何 Rust 程序在控制流层面都是结构化的，这直接提升了代码的可推理性与可维护性。
 
-#### 代码示例
+#### 代码示例：仅用三种结构实现欧几里得算法
 
 以下用 Rust 实现欧几里得算法，它仅使用顺序、选择、迭代三种结构，展示了结构化控制流的充分性：
 
@@ -991,15 +1015,63 @@ fn main() {
 }
 ```
 
+> **关键洞察**：Böhm–Jacopini 定理不是说 `goto` 没有用处，而是说**它不是表达能力的必需品**。Rust 的设计师据此剔除了 `goto`，同时通过 `break 'label` 和 `?` 保留了两类最常见的受控跳转需求。
+
 > **关联章节**: [Error Handling Basics](./10_error_handling_basics.md) · [Async Control Flow](../03_advanced/02_async.md)
 
 ---
 
-### 7.2 Continuation / call/cc / CPS 变换
+### 7.2 Continuation / `call/cc` / CPS 变换 / Delimited Continuation
 
-**定义**：Continuation（续延）是"计算的剩余部分"。形式上，若表达式 `e` 在当前上下文 `C[·]` 中求值，则该上下文的语义函数 `κ(v) = C[v]` 就是 `e` 的 continuation。`call/cc`（call-with-current-continuation）是 Scheme 等语言提供的操作，它捕获当前 continuation 并作为普通函数暴露给调用者。
+#### 形式化定义
 
-**CPS 变换（Continuation-Passing Style）** 是一种程序变换：把每个函数扩展一个额外参数 `k`，函数不再直接返回结果，而是把结果传递给 `k`。经过 CPS 变换后，所有函数调用都变成**尾调用**，控制流完全显式化。
+**Continuation（续延）** 是"计算的剩余部分"。形式上，若表达式 `e` 在当前上下文 `C[·]` 中求值，则该上下文的语义函数 `κ(v) = C[v]` 就是 `e` 的 continuation。一个 continuation 接收当前子表达式的值，并返回整个程序的剩余结果。
+
+```text
+完整程序: C[e]
+          │
+          ▼
+       子表达式 e
+          │ 求值得到 v
+          ▼
+   continuation κ(v) = C[v]
+          │ 继续执行
+          ▼
+        最终结果
+```
+
+**`call/cc`**（call-with-current-continuation，Scheme 等语言提供）捕获当前 continuation 并作为普通函数暴露给调用者。调用该函数会抛弃当前调用栈，回到捕获点继续执行。
+
+```scheme
+(call/cc (lambda (k)
+  (if (some-condition?)
+      (k 42)        ; 立即回到 call/cc 调用点，返回 42
+      0)))          ; 正常返回 0
+```
+
+**CPS 变换（Continuation-Passing Style）** 是一种程序变换：把每个函数扩展一个额外参数 `k`，函数不再直接返回结果，而是把结果传递给 `k`。经过 CPS 变换后，所有函数调用都变成**尾调用（tail call）**，控制流完全显式化。
+
+直接风格：
+```text
+f(x) = E[f(g(y))]
+```
+
+CPS 风格：
+```text
+f(x, k) = g(y, λr. k(E[r]))
+```
+
+**Delimited Continuation（有界续延）** 是对全栈 continuation 的裁剪，只捕获到某个"控制分隔符"为止的剩余计算。典型算子为 `reset`（设定边界）与 `shift`（捕获到边界的 continuation）。它与 `async/await` 中的挂起边界非常相似。
+
+```text
+reset {              // 边界
+  ...
+  shift { k =>       // k 是 reset 内剩余计算的续延
+    ... k(v) ...     // 可在未来某时刻恢复
+  }
+  ...                // 这段代码被 k 捕获
+}
+```
 
 #### Rust 关联
 
@@ -1010,6 +1082,18 @@ Rust **没有** `call/cc`，原因与所有权模型密切相关：`call/cc` 会
 - **`async/await`**：`Future` 本质上是一个可以挂起和恢复的**显式 continuation**；`await` 点将后续代码打包为状态机的下一个状态。
 - **`?` 运算符**：`expr?` 在错误时提前返回当前函数的 continuation（即把 `Err(e)` 交给调用者），等价于一种受限的"错误 continuation"。
 - **回调/闭包（Closures）**：高阶函数可以把后续计算作为闭包参数传递，这是手写的 CPS。
+
+#### `async/await` 作为显式 Continuation 的 Mermaid 示意图
+
+```mermaid
+stateDiagram-v2
+    [*] --> State0: poll Future
+    State0 --> State1: await point A
+    State1 --> State2: await point B
+    State2 --> [*]: Future ready
+    State1 --> State0: pending (continuation saved)
+    State2 --> State1: pending (continuation saved)
+```
 
 #### 代码示例
 
@@ -1052,27 +1136,84 @@ fn main() {
 }
 ```
 
-**关键洞察**：CPS 把隐式的"返回"变成显式的函数调用，使控制流成为可编程对象；Rust 通过 `Future` 和 `?` 在保留所有权安全的前提下，提供了两种受限但工程上更可控的 continuation 形式。
+#### Delimited Continuation 与 `async` 的类比
+
+```text
+直接 call/cc: 捕获"从当前点到程序结束"的全部计算
+              ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+              ▲────── 捕获点                              ▲ 程序结束
+
+delimited (reset/shift): 只捕获到指定边界内的计算
+              [━━━━ 边界 reset ━━━━]
+              ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+              ▲────── shift 捕获点   ▲ 边界
+
+async/await:  每个 await 点把当前 Future 的"剩余代码"作为状态机续延
+              Future::poll 的边界就是一次 poll 调用
+```
+
+> **关键洞察**：CPS 把隐式的"返回"变成显式的函数调用，使控制流成为可编程对象；Rust 通过 `Future` 和 `?` 在保留所有权安全的前提下，提供了两种受限但工程上更可控的 continuation 形式。
 
 > **关联章节**: [Async](../03_advanced/02_async.md) · [Closures](./15_closure_basics.md) · [Error Handling](./10_error_handling_basics.md)
 
 ---
 
-### 7.3 控制流图（CFG）、基本块与支配树
+### 7.3 控制流图（CFG）、基本块、边与支配树
 
-**定义**：
+#### 形式化定义
 
-- **控制流图（Control Flow Graph, CFG）** 是有向图 `G = (B, E, entry)`，其中节点 `B` 是**基本块（Basic Block）**——一段顺序执行、只能从第一条指令进入、只能从最后一条指令离开的指令序列；边 `E` 表示基本块之间的可能转移。
-- **支配（Dominator）**：若从入口到节点 `n` 的每条路径都经过节点 `d`，则称 `d` 支配 `n`（记为 `d dom n`）。
-- **直接支配者（Immediate Dominator, idom）**：严格支配 `n` 且不被 `n` 的任何其他严格支配者所支配的节点，唯一存在（除入口外）。所有节点的 `idom` 构成**支配树（Dominator Tree）**。
+- **基本块（Basic Block, BB）**：一个最大连续指令序列，满足：
+  1. 只能从第一条指令进入；
+  2. 只能从最后一条指令离开；
+  3. 内部无分支、无跳转目标（除入口外）。
+
+- **控制流图（Control Flow Graph, CFG）**：有向图 `G = (B, E, entry, exit)`，其中节点 `B` 为基本块集合，边 `E ⊆ B × B` 表示基本块之间的可能转移，`entry` 为唯一入口，`exit` 为唯一出口。
+
+- **支配（Dominator）**：若从 `entry` 到节点 `n` 的每条路径都经过节点 `d`，则称 `d` 支配 `n`（记为 `d dom n`）。每个节点都支配自身。
+
+- **直接支配者（Immediate Dominator, idom）**：严格支配 `n` 且不被 `n` 的任何其他严格支配者所支配的节点；除 `entry` 外唯一存在。所有节点的 `idom` 构成**支配树（Dominator Tree）**。
+
+#### `if-else` 的 CFG 与支配树 Mermaid 图
+
+```mermaid
+graph TD
+    Entry["BB0: entry<br/>x = ..."] -->|x > 0| Then["BB1: then<br/>return 1"]
+    Entry -->|else| Else["BB2: else<br/>return 2"]
+    Then --> Exit["BB3: exit"]
+    Else --> Exit
+
+    style Entry fill:#e3f2fd
+    style Exit fill:#fff3e0
+```
+
+对应支配树：
+
+```mermaid
+graph TD
+    Root["BB0"] --> BB1["BB1"]
+    Root --> BB2["BB2"]
+    Root --> BB3["BB3"]
+
+    style Root fill:#e3f2fd
+```
+
+#### 与编译器优化的关系
+
+CFG 与支配树是许多编译器优化的基础数据结构：
+
+| 优化 | 依赖的结构 | 说明 |
+|:---|:---|:---|
+| **常量传播** | CFG + 数据流方程 | 在基本块入口/出口传播常量值 |
+| **死代码消除** | CFG 可达性 | 不可达基本块可直接删除 |
+| **SSA 形式** | 支配边界 | 确定在哪里插入 φ 函数 |
+| **循环不变量外提** | 支配树 + 回边 | 识别循环并判断表达式是否在每次迭代中不变 |
+| **借用检查** | CFG + 生命周期 | Rust 的 borrowck 在 MIR CFG 上分析值的活跃区间 |
 
 #### Rust 关联
 
 Rust 编译器在生成 MIR（Mid-level IR）时会构建函数的 CFG；借用检查器（borrowck）利用支配关系判断值的生命周期（Lifetimes）、借用是否合法以及 `&mut` 是否唯一。例如，变量的定义必须**支配**其使用点，否则会出现 use-before-init 错误。
 
-#### 代码示例
-
-以下用 Rust 实现一个极小的 CFG 与迭代式支配集计算：
+#### 代码示例：一个极小 CFG 与迭代式支配集计算
 
 ```rust
 use std::collections::{HashMap, HashSet};
@@ -1166,23 +1307,50 @@ fn main() {
 
 **输出解释**：`BB0`（入口）支配所有块；`BB1` 与 `BB2` 只被 `BB0` 和自身支配。支配树中 `BB0` 是 `BB1`、`BB2` 的父节点。
 
+> **关键洞察**：Rust 编译器内部把你的 `if`/`match`/`loop` 都转化为 MIR 的基本块与边。理解 CFG 与支配树，有助于阅读编译器错误信息（如 borrow checker 报错中的"use of possibly-uninitialized variable"）并优化性能敏感代码。
+
 > **关联章节**: [Borrowing](./02_borrowing.md) · [Lifetimes](./03_lifetimes.md) · [Formal Type Theory](../04_formal/02_type_theory.md)
 
 ---
 
-### 7.4 循环不变量与 Hoare 逻辑衔接
+### 7.4 循环不变量：与 Hoare 逻辑的衔接
 
-**定义**：Hoare 三元组 `{P} S {Q}` 表示：若程序状态满足前置条件 `P`，执行语句 `S` 后，状态满足后置条件 `Q`。对于循环 `while C do S`，**循环不变量（Loop Invariant）** `I` 是满足以下条件的断言：
+#### 形式化定义
 
-1. **初始化**：进入循环前 `I` 成立；
-2. **保持**：若 `I ∧ C` 成立，执行循环体 `S` 后 `I` 仍然成立；
-3. **终止**：当 `I ∧ ¬C` 成立时，可推出循环后置条件 `Q`。
+**Hoare 三元组** `{P} S {Q}` 表示：若程序状态满足前置条件 `P`，执行语句 `S` 后，状态满足后置条件 `Q`。
+
+对于循环 `while C do S`，**循环不变量（Loop Invariant）** `I` 是满足以下条件的断言：
+
+1. **初始化（Init）**：`P ⇒ I`，进入循环前 `I` 成立；
+2. **保持（Preserve）**：`{I ∧ C} S {I}`，若 `I` 与循环条件同时成立，执行循环体后 `I` 仍然成立；
+3. **终止（Post）**：`I ∧ ¬C ⇒ Q`，当 `I` 成立而循环条件不成立时，可推出循环后置条件 `Q`。
+
+```text
+        P
+        │ init
+        ▼
+   ┌──── I ────┐
+   │     │     │
+   │     ▼     │
+   │   C ? ────┼── 否 ──► Q
+   │  是       │
+   │   ▼       │
+   │   S       │
+   │   │       │
+   └──►┘       │
+       preserve
+```
+
+#### 部分正确性与完全正确性
+
+- **部分正确性（Partial Correctness）**：只要程序终止，结果就满足规范。Hoare 逻辑中的 `while` 规则本身只保证部分正确性。
+- **完全正确性（Total Correctness）**：程序不仅正确，而且**必然终止**。需要额外证明一个**变体函数（Variant Function）**——每次迭代严格递减、且有下界的量。Rust 的类型系统通常不直接证明终止，但 `const fn` 的求值步数限制是编译器对终止性的一个工程近似。
 
 #### Rust 关联
 
 Rust 的类型系统已经在编译期保证了许多不变量（如引用（Reference）合法性、变量初始化），但数值/逻辑不变量仍需要程序员维护。Rust 通过 `assert!` / `debug_assert!` 可以在运行时（Runtime）检查不变量；在关键循环中显式写出不变量注释，是提高代码可信度的有效手段。
 
-#### 代码示例
+#### 代码示例 1：二分查找的循环不变量
 
 以下二分查找实现了清晰的循环不变量：
 
@@ -1219,34 +1387,89 @@ fn main() {
 }
 ```
 
-**关键洞察**：循环不变量是连接"代码如何运行"与"代码为何正确"的桥梁。Rust 的穷尽性 `match` 与强类型系统进一步减少了需要显式维护的不变量数量。
+#### 代码示例 2：带不变量的简单累加
+
+```rust
+fn sum_to(n: u32) -> u32 {
+    let mut i = 0u32;
+    let mut acc = 0u32;
+
+    // 循环不变量：acc == sum(0..i) 且 0 <= i <= n
+    while i < n {
+        acc += i;
+        i += 1;
+        // 保持：acc == sum(0..i)
+        debug_assert!(acc == (0..i).sum::<u32>());
+    }
+
+    // 终止：i == n，因此 acc == sum(0..n)
+    acc
+}
+
+fn main() {
+    println!("sum_to(10) = {}", sum_to(10));
+}
+```
+
+> **关键洞察**：循环不变量是连接"代码如何运行"与"代码为何正确"的桥梁。Rust 的穷尽性 `match` 与强类型系统进一步减少了需要显式维护的不变量数量。
 
 > **关联章节**: [Assert & Matches](../02_intermediate/05_assert_matches.md) · [Range Types](../02_intermediate/06_range_types.md)
 
 ---
 
-### 7.5 `goto` / `break 'label` / `?` 的本质对比
+### 7.5 `goto` 的消除与恢复：C `goto` / C++ `co_await` / Rust `?` / `break 'label` 的控制流本质
 
-**定义**：
+#### 形式化定义
 
-- **`goto`**：任意跳转指令，可从函数内任意位置跳转到任意标签，破坏结构化控制流。
-- **`break 'label`**：Rust 提供的命名循环退出机制，只能从循环内部跳到该循环的结束点，保持单入口/单出口。
-- **`?`**：错误传播运算符，把 `Result`/`Option` 的错误/空值路径转换为从当前函数提前返回，等价于一种受限的"错误 continuation"。
+控制流本质上是一组**程序计数器（Program Counter, PC）**的转移规则。不同语言机制对这种转移施加了不同约束：
 
-#### Rust 关联
+| 机制 | 转移规则 | 约束 |
+|:---|:---|:---|
+| **`goto`** | `PC → 任意标签` | 无约束，可前跳、后跳、跳入/跳出作用域 |
+| **`break 'label`** | `PC → 命名循环结束点` | 只能向上跳出循环，保持结构化 |
+| **`?`** | `PC → 当前函数返回点` | 仅沿错误路径返回，正常路径顺序执行 |
+| **`co_await`** | `PC → 挂起点 / 恢复点` | 只能在协程边界挂起，恢复时回到挂起点 |
 
-Rust 明确拒绝 `goto`， because it makes data-flow and lifetime analysis intractable. `break 'label` 是 Rust 对嵌套循环控制的唯一"非局部跳转"机制，且只能向上跳出循环，不能跳入循环或跳转到任意标签。`?` 则通过 `Try` trait 把错误处理（Error Handling）控制流从正常路径中分离，使代码保持线性阅读体验。
+#### C `goto`：自由但危险
 
-#### 对比表
+C 的 `goto` 可以从函数内任意位置跳转到任意标签。它常用于错误清理、跳出深层嵌套，但也容易破坏变量初始化分析与资源释放：
 
-| 特性 | `goto`（C/汇编） | `break 'label`（Rust） | `?`（Rust） |
-|:---|:---|:---|:---|
-| **跳转目标** | 任意标签 | 仅命名循环的结束点 | 当前函数调用者 |
-| **结构化程度** | 非结构化 | 结构化（单入口/单出口） | 结构化（限于错误返回） |
-| **与所有权交互** | 难以追踪资源释放 | 编译器保证 Drop | 编译器保证 Drop + 错误路径 |
-| **典型用途** | 早期优化/状态机 | 多层循环提前退出 | 错误传播 |
+```c
+int process(FILE *f) {
+    char *buf = malloc(1024);
+    if (!buf) goto err_buf;
 
-#### 代码示例
+    if (fread(buf, 1, 1024, f) < 0) goto err_read;
+
+    // ... 使用 buf ...
+    free(buf);
+    return 0;
+
+err_read:
+    free(buf);
+err_buf:
+    return -1;
+}
+```
+
+上述代码中，`goto` 的错误路径需要人工保证 `free(buf)` 被调用。一旦分支增多，维护成本指数上升。这正是 Rust 通过 RAII + `?` 想要避免的问题。
+
+#### C++ `co_await`：协程的恢复式控制流
+
+C++20 引入的 `co_await` 允许协程在 `await` 点挂起，把"恢复执行"的续延交给调用者或调度器：
+
+```cpp
+task<int> fetch_and_double() {
+    int x = co_await fetch();   // 挂起，保存当前状态，返回控制流
+    co_return x * 2;            // 恢复后从这里继续
+}
+```
+
+`co_await` 与 Rust 的 `await` 本质相同：都是**delimited continuation** 的工程实现——把当前函数剩余代码打包成一个可在未来恢复的状态。区别在于 Rust 的 `Future` 是零成本、手动 poll 驱动的；C++ 的协程框架更依赖编译器生成的状态机与 promise 类型。
+
+#### Rust `break 'label` 与 `?`：结构化跳转的两种受限形式
+
+Rust 明确拒绝 `goto`，因为无限制跳转会使数据流与生命周期分析变得不可行。`break 'label` 是 Rust 对嵌套循环控制的唯一"非局部跳转"机制，且只能向上跳出循环，不能跳入循环或跳转到任意标签。`?` 则通过 `Try` trait 把错误处理（Error Handling）控制流从正常路径中分离，使代码保持线性阅读体验。
 
 ```rust
 fn find_pair_sum(target: i32, matrix: &[Vec<i32>]) -> Option<(usize, usize)> {
@@ -1269,18 +1492,64 @@ fn read_config(path: &str) -> Result<String, std::io::Error> {
     let content = std::fs::read_to_string(path)?;
     Ok(content.trim().to_string())
 }
-
-fn main() {
-    let m = vec![vec![1, 2], vec![3, 4]];
-    println!("{:?}", find_pair_sum(3, &m));
-    println!("{:?}", read_config("nonexistent.txt"));
-}
 ```
 
-**关键洞察**：`break 'label` 与 `?` 都是 Rust 在结构化程序定理框架内提供的受限"跳转"机制——前者处理循环嵌套，后者处理错误路径；二者都不会破坏资源的安全释放，也不会像 `goto` 那样导致不可达代码或生命周期（Lifetimes）混乱。
+#### 四种机制的跳转范围对比 Mermaid 图
+
+```mermaid
+graph LR
+    subgraph "C goto"
+        A["任意点"] -->|跳转| B["任意标签"]
+    end
+
+    subgraph "C++ co_await"
+        C["挂起点"] -.->|恢复| D["挂起点之后"]
+    end
+
+    subgraph "Rust break 'label"
+        E["循环内部"] -->|跳出| F["命名循环末尾"]
+    end
+
+    subgraph "Rust ?"
+        G["当前函数内部"] -->|错误路径| H["调用者"]
+    end
+```
+
+#### 对比表
+
+| 特性 | `goto`（C/汇编） | `break 'label`（Rust） | `?`（Rust） | `co_await`（C++20 / Rust `await`） |
+|:---|:---|:---|:---|:---|
+| **跳转目标** | 任意标签 | 仅命名循环的结束点 | 当前函数调用者 | 协程挂起点之后 |
+| **结构化程度** | 非结构化 | 结构化（单入口/单出口） | 结构化（限于错误返回） | 结构化（限于协程边界） |
+| **与所有权交互** | 难以追踪资源释放 | 编译器保证 Drop | 编译器保证 Drop + 错误路径 | 编译器生成状态机保存/恢复 |
+| **典型用途** | 早期优化/状态机/错误清理 | 多层循环提前退出 | 错误传播 | 异步 I/O、生成器 |
+| **continuation 类型** | 无 | 隐式（循环出口） | 隐式（错误返回） | 显式（promise/Future） |
+
+#### 从 `goto` 到结构化控制的恢复路径
+
+```text
+goto 的错误清理模式
+        │
+        ▼
+  ┌─────────────┐
+  │  RAII + ?   │  Rust 首选：资源自动释放，错误路径线性传播
+  └─────────────┘
+        │
+        ▼
+  ┌─────────────┐
+  │ break 'label │ 处理深层嵌套循环的结构化退出
+  └─────────────┘
+        │
+        ▼
+  ┌─────────────┐
+  │ async/await │ 处理"先挂起、后恢复"的 delimited continuation
+  └─────────────┘
+```
+
+> **关键洞察**：`break 'label`、`?` 与 `async/await` 都是 Rust 在结构化程序定理框架内提供的受限"跳转"机制——分别处理循环嵌套、错误路径与异步挂起；二者都不会破坏资源的安全释放，也不会像 `goto` 那样导致不可达代码或生命周期（Lifetimes）混乱。C++ 的 `co_await` 则在另一套类型系统约束下解决了同一类问题。
 
 > **关联章节**: [Error Handling Basics](./10_error_handling_basics.md) · [Async Control Flow](../03_advanced/02_async.md) · [Panic and Abort](./13_panic_and_abort.md)
 
 ---
 
-> **补充说明**：以上五个小节共同说明，Rust 的控制流设计并非随意删减 `goto`，而是在结构化程序定理、continuation 理论与编译器实现需求之间取得的工程平衡。
+> **补充说明**：以上五个小节共同说明，Rust 的控制流设计并非随意删减 `goto`，而是在结构化程序定理、continuation 理论与编译器实现需求之间取得的工程平衡。理解这些理论背景，有助于把 Rust 的语法选择从"风格偏好"提升为"有理论依据的工程决策"。

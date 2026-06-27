@@ -100,7 +100,15 @@
       - [编译器如何裁决重叠 impl](#编译器如何裁决重叠-impl)
       - [与 C++ 模板特化的对比](#与-c-模板特化的对比)
       - [编译错误：非法重叠](#编译错误非法重叠)
-    - [5.8 SFINAE 与 Trait Bounds 的深度对比](#58-sfinae-与-trait-bounds-的深度对比)
+    - [5.8 C++ SFINAE / Concepts 与 Rust Trait Bounds 对照](#58-c-sfinae--concepts-与-rust-trait-bounds-对照)
+      - [5.8.1 SFINAE 工作原理](#581-sfinae-工作原理)
+      - [5.8.2 SFINAE-friendly 设计与 Trait Bounds 错误信息对比](#582-sfinae-friendly-设计与-trait-bounds-错误信息对比)
+      - [5.8.3 C++ 模板特化 vs Rust Orphan Rule](#583-c-模板特化-vs-rust-orphan-rule)
+      - [5.8.4 C++ `constexpr` / 模板元编程 vs Rust `const fn`](#584-c-constexpr--模板元编程-vs-rust-const-fn)
+      - [5.8.5 C++20 Concepts 与 Rust Trait Bounds 一一对照表](#585-c20-concepts-与-rust-trait-bounds-一一对照表)
+      - [5.8.6 C++20 标准 Concept 与 Rust 标准 Trait 的精细映射](#586-c20-标准-concept-与-rust-标准-trait-的精细映射)
+      - [5.8.7 Rust 的错误信息与编译时间优势](#587-rust-的错误信息与编译时间优势)
+      - [5.8.8 完整侧写：同一约束的 C++20 / Rust 双版本](#588-完整侧写同一约束的-c20--rust-双版本)
   - [六、反命题与边界分析（Counter-proposition \& Boundary Analysis）](#六反命题与边界分析counter-proposition--boundary-analysis)
     - [6.1 反命题 1: "Trait 实现总是无冲突的"](#61-反命题-1-trait-实现总是无冲突的)
     - [6.2 反命题 2: "Blanket impl 覆盖所有类型"](#62-反命题-2-blanket-impl-覆盖所有类型)
@@ -853,7 +861,7 @@ impl Foo for Vec<u8> { fn foo() {} }       // ⚠️ 更特化
 
 ---
 
-### 5.8 SFINAE / C++20 Concepts 与 Rust Trait Bounds 的深度对比
+### 5.8 C++ SFINAE / Concepts 与 Rust Trait Bounds 对照
 
 本节从 C++ 模板元编程的核心机制 **SFINAE** 出发，逐步深入到 **C++20 Concepts**，并与 Rust 的 **Trait Bounds** 进行系统对照。理解这组对比有助于解释 Rust 为何将"约束机制"与"实现机制"统一在 Trait 中，以及为何 Rust 不需要 `enable_if`、`void_t` 等晦涩技巧。
 

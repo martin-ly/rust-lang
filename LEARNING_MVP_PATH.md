@@ -365,6 +365,37 @@ fn main() -> Result<(), Box<dyn Error>> {
 
 ---
 
+## TRPL 3rd Edition 对照表
+
+| TRPL 章节 | 本章主题 | 本项目对应文件 | 覆盖状态 | 差异说明 |
+|:---|:---|:---|:---:|:---|
+| Ch 1 | Getting Started | [concept/01_foundation/00_start.md](./concept/01_foundation/00_start.md) | ✅ | 安装、Cargo、Hello World 均覆盖 |
+| Ch 2 | Programming a Guessing Game | [concept/01_foundation/07_control_flow.md](./concept/01_foundation/07_control_flow.md) | 🔄 | 控制流、随机数、循环有覆盖，但缺少完整猜数游戏项目 |
+| Ch 3 | Common Programming Concepts | [concept/01_foundation/04_type_system.md](./concept/01_foundation/04_type_system.md) | ✅ | 变量、类型、函数、控制流全覆盖 |
+| Ch 4 | Understanding Ownership | [concept/01_foundation/01_ownership.md](./concept/01_foundation/01_ownership.md) | ✅ | 所有权三规则、移动、Clone、Copy、Drop 全覆盖 |
+| Ch 5 | Using Structs to Structure Related Data | [concept/01_foundation/04_type_system.md](./concept/01_foundation/04_type_system.md) | ✅ | struct、tuple struct、unit-like struct、方法语法均覆盖 |
+| Ch 6 | Enums and Pattern Matching | [concept/01_foundation/04_type_system.md](./concept/01_foundation/04_type_system.md) | ✅ | enum、match、if let、Option 全覆盖 |
+| Ch 7 | Managing Growing Projects with Packages, Crates, and Modules | [concept/02_intermediate/10_module_system.md](./concept/02_intermediate/10_module_system.md) | ✅ | package/crate/module/use/pub 全覆盖 |
+| Ch 8 | Common Collections | [concept/01_foundation/08_collections.md](./concept/01_foundation/08_collections.md) | ✅ | Vec、String、HashMap 基础全覆盖 |
+| Ch 9 | Error Handling with Result and Option | [concept/01_foundation/10_error_handling_basics.md](./concept/01_foundation/10_error_handling_basics.md) | ✅ | panic、Result、?、自定义错误全覆盖 |
+| Ch 10 | Generic Types, Traits, and Lifetimes | [concept/02_intermediate/01_traits.md](./concept/02_intermediate/01_traits.md)<br>[concept/02_intermediate/02_generics.md](./concept/02_intermediate/02_generics.md)<br>[concept/01_foundation/03_lifetimes.md](./concept/01_foundation/03_lifetimes.md) | ✅ | 泛型、trait、生命周期基础全覆盖 |
+| Ch 11 | Writing Automated Tests | [concept/01_foundation/16_testing_basics.md](./concept/01_foundation/16_testing_basics.md) | ✅ | 单元测试、集成测试、assert 宏全覆盖 |
+| Ch 12 | An I/O Project: Building a Command Line Program | [LEARNING_MVP_PATH.md](./LEARNING_MVP_PATH.md)（Week 2 综合项目） | 🔄 | texttool/fastwc 项目覆盖 I/O 与 CLI，但非 TRPL 原文的 grep-like 项目 |
+| Ch 13 | Functional Language Features: Iterators and Closures | [concept/01_foundation/15_closure_basics.md](./concept/01_foundation/15_closure_basics.md)<br>[concept/02_intermediate/15_iterator_patterns.md](./concept/02_intermediate/15_iterator_patterns.md) | ✅ | 闭包、迭代器、Iterator trait 全覆盖 |
+| Ch 14 | More about Cargo and Crates.io | [concept/06_ecosystem/01_toolchain.md](./concept/06_ecosystem/01_toolchain.md)<br>[concept/06_ecosystem/62_cargo_registries_and_publishing.md](./concept/06_ecosystem/62_cargo_registries_and_publishing.md) | ✅ | Cargo 高级特性、发布、工作区均有覆盖 |
+| Ch 15 | Smart Pointers | [concept/02_intermediate/12_smart_pointers.md](./concept/02_intermediate/12_smart_pointers.md) | ✅ | Box、Rc、RefCell、Arc 全覆盖 |
+| Ch 16 | Fearless Concurrency | [concept/03_advanced/01_concurrency.md](./concept/03_advanced/01_concurrency.md) | ✅ | 线程、消息传递、共享状态、Send/Sync 全覆盖 |
+| Ch 17 | Object-Oriented Programming Features of Rust | [concept/02_intermediate/19_advanced_traits.md](./concept/02_intermediate/19_advanced_traits.md) | 🔄 | trait 对象、封装、多态有覆盖，但 OOP 对比讨论较分散 |
+| Ch 18 | Patterns and Matching | [concept/02_intermediate/05_assert_matches.md](./concept/02_intermediate/05_assert_matches.md) | 🔄 | match 模式已覆盖，但 destructuring、refutable/irrefutable 模式专题较少 |
+| Ch 19 | Advanced Features | [concept/03_advanced/03_unsafe.md](./concept/03_advanced/03_unsafe.md)<br>[concept/02_intermediate/18_lifetimes_advanced.md](./concept/02_intermediate/18_lifetimes_advanced.md)<br>[concept/02_intermediate/20_type_system_advanced.md](./concept/02_intermediate/20_type_system_advanced.md) | ✅ | unsafe、高级 trait、高级生命周期、高级类型全覆盖 |
+| Ch 20 | Final Project: Building a Multithreaded Web Server | [concept/03_advanced/18_network_programming.md](./concept/03_advanced/18_network_programming.md) | 🔄 | 网络编程与并发均有专题，但缺少 TRPL 原文的完整 web server 逐步项目 |
+| Ch 21 | Appendix | [concept/00_meta/terminology_glossary.md](./concept/00_meta/terminology_glossary.md)<br>[concept/06_ecosystem/01_toolchain.md](./concept/06_ecosystem/01_toolchain.md) | 🔄 | 关键字、运算符、可派生 trait、工具链文档分散在各处，缺少统一附录索引 |
+
+> **覆盖统计**：共 21 章，其中 ✅ 直接覆盖 17 章，🔄 部分覆盖 4 章，⬜ 未覆盖 0 章。
+> **使用建议**：🔄 章节建议结合 TRPL 原文项目代码对照学习，以补齐项目式体验的差距。
+
+---
+
 ## 扩展路径详细任务
 
 > 以下任务为 `[选修]` 内容，完成 MVP 路径后根据个人兴趣选择。

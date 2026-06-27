@@ -28,3 +28,4 @@ pub mod ex09_dangling_stack_reference;
 pub mod ex10_vec_reallocation;
 pub mod ex11_hashmap_borrow;
 pub mod ex12_string_in_loop;
+pub mod brown_inventories;
