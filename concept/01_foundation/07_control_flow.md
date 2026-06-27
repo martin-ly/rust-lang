@@ -1022,11 +1022,12 @@ fn factorial_direct(n: u64) -> u64 {
 }
 
 // CPS 风格：显式传递 continuation
-fn factorial_cps<F: FnOnce(u64)>(n: u64, k: F) {
+// 使用 Box<dyn FnOnce> 擦除递归生成的闭包类型，避免编译期单态化无限展开
+fn factorial_cps(n: u64, k: Box<dyn FnOnce(u64)>) {
     if n == 0 {
         k(1);
     } else {
-        factorial_cps(n - 1, move |r| k(n * r));
+        factorial_cps(n - 1, Box::new(move |r| k(n * r)));
     }
 }
 
@@ -1046,7 +1047,7 @@ fn sum_checked(a: i32, b: i32) -> Result<i32, &'static str> {
 
 fn main() {
     println!("direct: {}", factorial_direct(5));
-    factorial_cps(5, |r| println!("cps: {}", r));
+    factorial_cps(5, Box::new(|r| println!("cps: {}", r)));
     println!("checked: {:?}", sum_checked(3, -1));
 }
 ```
@@ -1249,16 +1250,18 @@ Rust 明确拒绝 `goto`， because it makes data-flow and lifetime analysis int
 
 ```rust
 fn find_pair_sum(target: i32, matrix: &[Vec<i32>]) -> Option<(usize, usize)> {
-    'outer: for (i, row) in matrix.iter().enumerate() {
-        for (j, &val) in row.iter().enumerate() {
-            if val == target {
-                // break 'label：结构化地跳出外层循环
-                break 'outer Some((i, j));
+    // break 'label 可用于带标签的块，以结构化方式返回值
+    let result: Option<(usize, usize)> = 'outer: {
+        for (i, row) in matrix.iter().enumerate() {
+            for (j, &val) in row.iter().enumerate() {
+                if val == target {
+                    break 'outer Some((i, j));
+                }
             }
         }
-    }
-    // 上面的 break 'outer 已经返回，此处兜底
-    None
+        None
+    };
+    result
 }
 
 fn read_config(path: &str) -> Result<String, std::io::Error> {

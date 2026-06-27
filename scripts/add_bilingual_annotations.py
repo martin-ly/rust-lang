@@ -106,7 +106,7 @@ def mask_links_and_code(line: str) -> tuple[str, list[str], list[str]]:
 
     def link_repl(m: re.Match) -> str:
         links.append(m.group(0))
-        return "](LINK_PLACEHOLDER)"
+        return LINK_PLACEHOLDER
 
     def code_repl(m: re.Match) -> str:
         codes.append(m.group(0))
