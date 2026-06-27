@@ -11,7 +11,6 @@
 > **Summary**: Security Practices. Guide to 43 Security Cryptography.
 >
 > **受众**: [进阶]
-
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Eva — 评价密码学实现的安全性

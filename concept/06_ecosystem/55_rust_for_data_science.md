@@ -59,7 +59,11 @@
 
 ### 1.1 数据科学的 Rust 定位
 
-> **[来源: [Are We Learning Yet?](https://www.arewelearningyet.com/)]** Rust 在数据科学领域的定位是**高性能基础设施层**，而非直接替代 Python 的交互式探索。核心优势：零成本抽象（Zero-Cost Abstraction）（比 Python 快 10-100x）、内存安全（Memory Safety）（避免 pandas 中常见的 copy-on-write 陷阱）、 fearless concurrency（多核 DataFrame 操作）。劣势：交互式 REPL 体验差、Jupyter 生态不成熟、ML 模型训练库稀缺。[来源: [Are We Learning Yet?](https://www.arewelearningyet.com/)]
+> **[来源: [Are We Learning Yet?](https://www.arewelearningyet.com/)]**
+> Rust 在数据科学领域的定位是**高性能基础设施层**，而非直接替代 Python 的交互式探索。
+> 核心优势：零成本抽象（Zero-Cost Abstraction）（比 Python 快 10-100x）、内存安全（Memory Safety）（避免 pandas 中常见的 copy-on-write 陷阱）、 fearless concurrency（多核 DataFrame 操作）。
+> 劣势：交互式 REPL 体验差、Jupyter 生态不成熟、ML 模型训练库稀缺。
+> [来源: [Are We Learning Yet?](https://www.arewelearningyet.com/)]
 
 ```text
 Rust 数据科学栈分层:
@@ -117,7 +121,10 @@ Python 的不可撼动地位：交互探索、可视化、ML 模型生态
 
 ### 3.1 Polars：DataFrame 引擎
 
-> **[来源: [Polars User Guide](https://docs.pola.rs/)]** Polars 是用 Rust 编写的高性能 DataFrame 库，通过 PyO3 提供 Python 绑定（PyPolars）。核心设计：Lazy API（查询优化）、Apache Arrow 列式内存格式、SIMD 向量化、真多线程（无 GIL）。基准测试显示比 pandas 快 10-50 倍，内存占用低 5-10 倍。[来源: [Polars Documentation](https://docs.pola.rs/)]
+> **[来源: [Polars User Guide](https://docs.pola.rs/)]** Polars 是用 Rust 编写的高性能 DataFrame 库，通过 PyO3 提供 Python 绑定（PyPolars）。
+> 核心设计：Lazy API（查询优化）、Apache Arrow 列式内存格式、SIMD 向量化、真多线程（无 GIL）。
+> 基准测试显示比 pandas 快 10-50 倍，内存占用低 5-10 倍。
+> [来源: [Polars Documentation](https://docs.pola.rs/)]
 
 ```rust,ignore
 use polars::prelude::*;
@@ -163,7 +170,10 @@ Rust API 独特优势:
 
 ### 3.2 DataFusion：查询执行
 
-> **[来源: [Apache DataFusion](https://arrow.apache.org/datafusion/)]** DataFusion 是 Apache Arrow 生态的内存中查询执行引擎，用 Rust 编写。定位：嵌入到应用中的 SQL/ DataFrame 引擎（类似 DuckDB 但用 Rust）。支持标准 SQL、自定义 UDF/UDAF、Parquet/CSV/JSON 数据源。被 InfluxDB IOx、Ballista（分布式）等项目使用。[来源: [DataFusion Documentation](https://arrow.apache.org/datafusion/)]
+> **[来源: [Apache DataFusion](https://arrow.apache.org/datafusion/)]** DataFusion 是 Apache Arrow 生态的内存中查询执行引擎，用 Rust 编写。
+> 定位：嵌入到应用中的 SQL/ DataFrame 引擎（类似 DuckDB 但用 Rust）。
+> 支持标准 SQL、自定义 UDF/UDAF、Parquet/CSV/JSON 数据源。被 InfluxDB IOx、Ballista（分布式）等项目使用。
+> [来源: [DataFusion Documentation](https://arrow.apache.org/datafusion/)]
 
 ```rust,ignore
 use datafusion::prelude::*;
@@ -196,7 +206,12 @@ async fn datafusion_query() -> Result<(), DataFusionError> {
 
 ### 4.1 统计生态
 
-> **[来源: [statrs Crate](https://docs.rs/statrs/latest/statrs/)]** Rust 的统计计算生态以 `statrs`（概率分布、假设检验）、`rand`（随机数生成）、`nalgebra`（线性代数）为核心。与 Python 的 scipy/statsmodels 相比，功能覆盖率低但类型安全且高性能。`linfa` 是 Rust 的机器学习框架（对标 scikit-learn），支持聚类、降维、线性回归等算法。[来源: [statrs Documentation](https://docs.rs/statrs/latest/statrs/)] · [linfa GitHub](https://github.com/rust-ml/linfa)]
+> **[来源: [statrs Crate](https://docs.rs/statrs/latest/statrs/)]**
+> Rust 的统计计算生态以 `statrs`（概率分布、假设检验）、`rand`（随机数生成）、`nalgebra`（线性代数）为核心。
+> 与 Python 的 scipy/statsmodels 相比，功能覆盖率低但类型安全且高性能。
+> `linfa` 是 Rust 的机器学习框架（对标 scikit-learn），支持聚类、降维、线性回归等算法。
+> [来源: [statrs Documentation](https://docs.rs/statrs/latest/statrs/)] ·
+> [linfa GitHub](https://github.com/rust-ml/linfa)]
 
 | **领域** | **Rust Crate** | **对标 Python** | **成熟度** |
 |:---|:---|:---|:---:|
@@ -213,7 +228,12 @@ async fn datafusion_query() -> Result<(), DataFusionError> {
 
 ### 4.2 线性代数
 
-> **[来源: [nalgebra Documentation](https://docs.rs/nalgebra/latest/nalgebra/)]** `nalgebra` 是 Rust 的通用线性代数库，提供矩阵、向量、变换（旋转/平移/缩放）和数值求解。特色：编译期维度检查（避免运行时（Runtime）矩阵维度不匹配）、与几何计算深度集成。`ndarray` 提供 N 维数组（对标 numpy ndarray），是 Rust 数值计算的基础。[来源: [nalgebra](https://docs.rs/nalgebra/latest/nalgebra/)] · [ndarray](https://docs.rs/ndarray/latest/ndarray/)]
+> **[来源: [nalgebra Documentation](https://docs.rs/nalgebra/latest/nalgebra/)]** `nalgebra` 是 Rust 的通用线性代数库，提供矩阵、向量、变换（旋转/平移/缩放）和数值求解。
+> 特色：编译期维度检查（避免运行时（Runtime）矩阵维度不匹配）、与几何计算深度集成。
+> `ndarray` 提供 N 维数组（对标 numpy ndarray），是 Rust 数值计算的基础。
+> [来源: [nalgebra](https://docs.rs/nalgebra/latest/nalgebra/)] ·
+> [ndarray](https://docs.rs/ndarray/latest/ndarray/)]
+>
 
 ```rust,ignore
 use nalgebra::{DMatrix, DVector};

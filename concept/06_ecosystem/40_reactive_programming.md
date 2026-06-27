@@ -10,7 +10,6 @@
 > **Summary**: Reactive Programming & FRP. Guide to 40 Reactive Programming.
 >
 > **受众**: [进阶]
-
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: C×Ana — 分析异步（Async）数据流的声明式组合模式
@@ -33,7 +32,6 @@
 > [Tokio Streams](https://docs.rs/tokio-stream/latest/tokio_stream/) ·
 > [futures-rs Stream](https://docs.rs/futures/latest/futures/stream/trait.Stream.html) ·
 > [RxRust](https://docs.rs/rxrust/latest/rxrust/)
-
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
 
 ## 📑 目录

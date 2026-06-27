@@ -27,11 +27,8 @@
 > [FLP Result — Fischer, Lynch, Paterson 1985](https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf) ·
 > [Paxos Made Simple — Lamport 2001](https://lamport.azurewebsites.net/pubs/paxos-simple.pdf) ·
 > [Tendermint BFT](https://docs.tendermint.com/master/introduction/what-is-tendermint.html)
-
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
-
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录

@@ -8,7 +8,13 @@
 >
 > **EN**: Authority Source Index
 > **Summary**: Index of authoritative sources used throughout the concept knowledge system.
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/) · [RFCs](https://rust-lang.github.io/rfcs/)
+> **来源**:
+>
+> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+> [Rust By Example](https://doc.rust-lang.org/rust-by-example/) ·
+> [RFCs](https://rust-lang.github.io/rfcs/)
 >
 > | 标识符 | 全称 | 根 URL | 更新频率 | 建议引用（Reference）格式 |
 > | :--- | :--- | :--- | :--- | :--- |
@@ -19,7 +25,6 @@
 > **定位**: 本项目所有 `[来源: ...]` 标注的**单一真相源（Single Source of Truth）**。
 > **原则**: 每个来源必须指向**具体章节或锚点**，禁止仅使用根 URL。
 > **维护**: 新增来源必须先在此索引注册，获取唯一标识符，然后在概念文件中引用（Reference）。
-
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---

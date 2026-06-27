@@ -17,7 +17,6 @@
 > **定位**: 覆盖对 Rust 语言语义、类型系统（Type System）、内存模型、并发和生态有结构性影响的 RFC。
 > **状态标注**: ✅ Implemented | 🚧 Accepted (未实现) | ⚠️ Deprecated | 🔍 Draft | ❌ Rejected
 > **维护**: 每 6 周扫描 RFC 仓库更新状态。
-
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
 > **前置概念**: N/A

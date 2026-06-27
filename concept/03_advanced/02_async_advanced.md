@@ -1,4 +1,6 @@
-> **内容分级**: [专家级]
+> **内容分级**:
+>
+> [专家级]
 
 # Async/Await 高级主题
 >
@@ -1134,7 +1136,6 @@ error: Undefined Behavior: constructing invalid value of type bool:
 ```
 
 > **关键洞察**: Rust 编译器假设 `bool` 只能是 `0x00` 或 `0x01`，并基于此做分支优化（如将 `if b` 编译为跳转表）。无效 `bool` 值会导致控制流跳转到任意位置。async 状态机的 discriminant（状态标签）同理——若通过 unsafe 构造无效状态标签，恢复执行时会进入不存在的状态分支。
-
 >
 #### 场景 3：async 状态机中的未初始化内存
 

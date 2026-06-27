@@ -2,7 +2,6 @@
 >
 > **EN**: Formal Methods
 > **Summary**: Readme. Core Rust concept.
-
 > **受众**: [研究者]
 > ⚠️ **声明**: 本层使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >

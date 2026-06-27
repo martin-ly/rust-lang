@@ -59,15 +59,16 @@
 > **变更日志**:
 >
 > - v1.0 (2026-05-26): 初始创建——覆盖量子计算权威定义、Rust 量子生态（roqoqo/rustqip/q1tsim）、经典模拟性能、NIST PQC 标准与 rustls 集成、量子-经典混合工作流、反命题树与边界测试
-
 > **前置概念**: N/A
+>
 ---
 
 ## 一、权威定义（Definition）
 
 ### 1.1 量子比特与量子态
 
-> **[Nielsen & Chuang](https://www.cambridge.org/highereducation/books/quantum-computation-and-quantum-information/01E10196D0A682A6AEFFEA52D53BE9AE)** 量子计算的基本信息单元是**量子比特**（qubit），与经典比特只能处于 0 或 1 不同，qubit 可以处于这两个基态的任意线性组合。一个单量子比特的纯态可表示为：
+> **[Nielsen & Chuang](https://www.cambridge.org/highereducation/books/quantum-computation-and-quantum-information/01E10196D0A682A6AEFFEA52D53BE9AE)** 量子计算的基本信息单元是**量子比特**（qubit），与经典比特只能处于 0 或 1 不同，qubit 可以处于这两个基态的任意线性组合。
+> 一个单量子比特的纯态可表示为：
 >
 > $$|\psi\rangle = \alpha|0\rangle + \beta|1\rangle, \quad \alpha, \beta \in \mathbb{C}, \quad |\alpha|^2 + |\beta|^2 = 1$$
 >
