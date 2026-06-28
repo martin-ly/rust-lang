@@ -54,14 +54,14 @@
 
 ## G3 修复最明显的代码/文档不一致
 
-- [ ] 为 `crates/c14_semantic_web/` 创建顶层 `README.md`
-  - 内容基于 `crates/c14_semantic_web/docs/README.md` 或模板
+- [x] 为 `crates/c14_semantic_web/` 创建顶层 `README.md`
+  - 内容基于 `crates/c14_semantic_web/docs/README.md` 整理
   - 版本号与 workspace 一致（3.1.0）
-- [ ] 重写 `crates/c11_macro_system_proc/src/lib.rs` 顶部文档注释
+- [x] 重写 `crates/c11_macro_system_proc/src/lib.rs` 顶部文档注释
   - 去除中英混杂、机器翻译痕迹
-  - 统一为中文说明，必要时提供英文标题
-- [ ] 检查并修复其他 crate 顶层 README 的版本号一致性
-- [ ] 提交变更
+  - 统一为中文说明
+- [ ] 检查并修复其他 crate 顶层 README 的版本号一致性（待专门 pass 处理，避免破坏内部锚点）
+- [x] 提交变更（c14/c11 修改已合入 commit `592a26951`）
 
 ---
 
