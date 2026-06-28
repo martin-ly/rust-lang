@@ -19,14 +19,14 @@
 
 > **前置概念**:
 >
-> [Rust 版本跟踪](./05_rust_version_tracking.md) ·
+> [Rust 版本跟踪](05_rust_version_tracking.md) ·
 > [Ranges](../02_intermediate/09_iterator_patterns.md) ·
 > [Panic 与 unwind](../02_intermediate/04_error_handling.md)
 >
 > **后置概念**:
 >
-> [Rust 1.97 前沿特性预览](./rust_1_97_preview.md) ·
-> [Rust 1.98+ 前沿特性预览](./rust_1_98_preview.md)
+> [Rust 1.97 前沿特性预览](rust_1_97_preview.md) ·
+> [Rust 1.98+ 前沿特性预览](rust_1_98_preview.md)
 >
 
 ---

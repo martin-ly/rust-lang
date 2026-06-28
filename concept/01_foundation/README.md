@@ -19,24 +19,24 @@
 
 ## 📑 目录
 
-- [L1 基础概念层（Foundation）](#l1-基础概念层foundation)
-  - [📑 目录](#-目录)
-    - [〇、L1 认知入口](#〇l1-认知入口)
-  - [一、本层概念关系图（完整版）](#一本层概念关系图完整版)
-    - [1.1 概念间语义链接](#11-概念间语义链接)
-    - [1.2 学习路径的严格依赖](#12-学习路径的严格依赖)
-  - [二、文件索引与关系](#二文件索引与关系)
-    - [补充文件索引](#补充文件索引)
-  - [三、课程对齐路径](#三课程对齐路径)
-  - [四、形式化层级定位（理论-模型-实践）](#四形式化层级定位理论-模型-实践)
-  - [五、本层定理一致性概览](#五本层定理一致性概览)
-  - [六、认知路径（从直觉到形式化）](#六认知路径从直觉到形式化)
-  - [七、待创建内容](#七待创建内容)
-  - [八、跨层出口](#八跨层出口)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：《L1 基础概念层（Foundation）》在本知识体系中扮演什么角色？（理解层）](#测验-1l1-基础概念层foundation在本知识体系中扮演什么角色理解层)
-    - [测验 2：使用本索引文件时，最有效的学习策略是什么？（理解层）](#测验-2使用本索引文件时最有效的学习策略是什么理解层)
-    - [测验 3：索引文档能否替代具体概念文件的学习？（理解层）](#测验-3索引文档能否替代具体概念文件的学习理解层)
+- [L1 基础概念层（Foundation）](.#l1-基础概念层foundation)
+  - [📑 目录](.#-目录)
+    - [〇、L1 认知入口](.#〇l1-认知入口)
+  - [一、本层概念关系图（完整版）](.#一本层概念关系图完整版)
+    - [1.1 概念间语义链接](.#11-概念间语义链接)
+    - [1.2 学习路径的严格依赖](.#12-学习路径的严格依赖)
+  - [二、文件索引与关系](.#二文件索引与关系)
+    - [补充文件索引](.#补充文件索引)
+  - [三、课程对齐路径](.#三课程对齐路径)
+  - [四、形式化层级定位（理论-模型-实践）](.#四形式化层级定位理论-模型-实践)
+  - [五、本层定理一致性概览](.#五本层定理一致性概览)
+  - [六、认知路径（从直觉到形式化）](.#六认知路径从直觉到形式化)
+  - [七、待创建内容](.#七待创建内容)
+  - [八、跨层出口](.#八跨层出口)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：《L1 基础概念层（Foundation）》在本知识体系中扮演什么角色？（理解层）](.#测验-1l1-基础概念层foundation在本知识体系中扮演什么角色理解层)
+    - [测验 2：使用本索引文件时，最有效的学习策略是什么？（理解层）](.#测验-2使用本索引文件时最有效的学习策略是什么理解层)
+    - [测验 3：索引文档能否替代具体概念文件的学习？（理解层）](.#测验-3索引文档能否替代具体概念文件的学习理解层)
 
 ### 〇、L1 认知入口
 
@@ -158,45 +158,45 @@ Type System（理解"类型即证明"）
 
 | 文件 | 概念 | 核心内容 | 状态 | 前置 | 后置 |
 |:---|:---|:---|:---|:---|:---|
-| [01_ownership.md](./01_ownership.md) | 所有权（Ownership） | 唯一所有权、Move/Copy/Drop、线性/仿射逻辑、RAII | ✅ v1.0 | 无（L1 入口） | Borrowing, Type System |
-| [02_borrowing.md](./02_borrowing.md) | 借用（Borrowing） | `&T`/`&mut T`、AXM 规则、Reborrow、NLL | ✅ v1.0 | Ownership | Lifetimes, Concurrency |
-| [03_lifetimes.md](./03_lifetimes.md) | 生命周期（Lifetimes） | 标注、Elision、NLL、`'static`、HRTB、Variance | ✅ v1.0 | Borrowing | Generics, Async |
-| [04_type_system.md](./04_type_system.md) | 类型系统基础 | 标量/复合/ADT、impl/dyn Trait、类型推断（Type Inference） | ✅ v1.0 | Ownership | Trait, Generics, Macros |
+| [01_ownership.md](01_ownership.md) | 所有权（Ownership） | 唯一所有权、Move/Copy/Drop、线性/仿射逻辑、RAII | ✅ v1.0 | 无（L1 入口） | Borrowing, Type System |
+| [02_borrowing.md](02_borrowing.md) | 借用（Borrowing） | `&T`/`&mut T`、AXM 规则、Reborrow、NLL | ✅ v1.0 | Ownership | Lifetimes, Concurrency |
+| [03_lifetimes.md](03_lifetimes.md) | 生命周期（Lifetimes） | 标注、Elision、NLL、`'static`、HRTB、Variance | ✅ v1.0 | Borrowing | Generics, Async |
+| [04_type_system.md](04_type_system.md) | 类型系统基础 | 标量/复合/ADT、impl/dyn Trait、类型推断（Type Inference） | ✅ v1.0 | Ownership | Trait, Generics, Macros |
 | 05_reference_semantics.md | 引用（Reference）语义 | Deref/DerefMut、自动解引用、智能指针（Smart Pointer）接口 | ✅ v1.0 | Borrowing, Type System | Pin, FFI |
-| [06_zero_cost_abstractions.md](./06_zero_cost_abstractions.md) | 零成本抽象（Zero-Cost Abstraction） | 单态化（Monomorphization）、内联、迭代器（Iterator）零成本、编译期优化 | ✅ v1.0 | Type System, Generics | Ecosystem Patterns |
-| [07_control_flow.md](./07_control_flow.md) | 控制流 | match/if let/loop、表达式导向、穷尽性检查 | ✅ v1.0 | Ownership, Type System | Iterator, Async |
-| [08_collections.md](./08_collections.md) | 集合类型 | Vec/HashMap/BTreeMap/HashSet、Entry API、容量管理 | ✅ v1.0 | Ownership, Generics | Smart Pointers, Ecosystem |
-| [09_strings_and_text.md](./09_strings_and_text.md) | 字符串与文本 | String/str、UTF-8、格式化、OS 字符串、C 字符串 | ✅ v1.0 | Ownership, Type System | Collections, FFI |
-| [10_numerics.md](./10_numerics.md) | 数值类型与运算 | 整数、浮点、溢出、饱和运算、类型转换 | ✅ v1.0 | Type System | Zero Cost, Collections |
-| [19_value_vs_reference_semantics.md](./19_value_vs_reference_semantics.md) | 值语义 vs 引用语义 | C++/Java/Python/Rust 对比、Rust 所有权作为值语义极致 | ✅ v1.0 | Ownership, Variable Model | Rust vs C++ |
-| [20_variable_model.md](./20_variable_model.md) | 变量模型（PL 通用） | 环境/存储、绑定语义、值语义 vs 引用（Reference）语义、lvalue/rvalue | ✅ v1.0 | Type System, Ownership | Evaluation Strategies |
-| [21_effects_and_purity.md](./21_effects_and_purity.md) | 副作用与纯度 | 引用透明、效果系统、Rust const/unsafe/async 作为效果 | ✅ v1.0 | Ownership, Type System | Formal Methods |
-| [22_data_abstraction_spectrum.md](./22_data_abstraction_spectrum.md) | 数据抽象谱系 | C→C++→Java→Haskell→Rust 的抽象演进、Trait 统一性 | ✅ v1.0 | Type System, Trait | Comparative |
-| [23_move_semantics.md](./23_move_semantics.md) | Move 语义 | C++ vs Rust 资源转移模型、Copy/Clone、RVO | ✅ v1.0 | Ownership, Variable Model | Rust vs C++ |
+| [06_zero_cost_abstractions.md](06_zero_cost_abstractions.md) | 零成本抽象（Zero-Cost Abstraction） | 单态化（Monomorphization）、内联、迭代器（Iterator）零成本、编译期优化 | ✅ v1.0 | Type System, Generics | Ecosystem Patterns |
+| [07_control_flow.md](07_control_flow.md) | 控制流 | match/if let/loop、表达式导向、穷尽性检查 | ✅ v1.0 | Ownership, Type System | Iterator, Async |
+| [08_collections.md](08_collections.md) | 集合类型 | Vec/HashMap/BTreeMap/HashSet、Entry API、容量管理 | ✅ v1.0 | Ownership, Generics | Smart Pointers, Ecosystem |
+| [09_strings_and_text.md](09_strings_and_text.md) | 字符串与文本 | String/str、UTF-8、格式化、OS 字符串、C 字符串 | ✅ v1.0 | Ownership, Type System | Collections, FFI |
+| [10_numerics.md](10_numerics.md) | 数值类型与运算 | 整数、浮点、溢出、饱和运算、类型转换 | ✅ v1.0 | Type System | Zero Cost, Collections |
+| [19_value_vs_reference_semantics.md](19_value_vs_reference_semantics.md) | 值语义 vs 引用语义 | C++/Java/Python/Rust 对比、Rust 所有权作为值语义极致 | ✅ v1.0 | Ownership, Variable Model | Rust vs C++ |
+| [20_variable_model.md](20_variable_model.md) | 变量模型（PL 通用） | 环境/存储、绑定语义、值语义 vs 引用（Reference）语义、lvalue/rvalue | ✅ v1.0 | Type System, Ownership | Evaluation Strategies |
+| [21_effects_and_purity.md](21_effects_and_purity.md) | 副作用与纯度 | 引用透明、效果系统、Rust const/unsafe/async 作为效果 | ✅ v1.0 | Ownership, Type System | Formal Methods |
+| [22_data_abstraction_spectrum.md](22_data_abstraction_spectrum.md) | 数据抽象谱系 | C→C++→Java→Haskell→Rust 的抽象演进、Trait 统一性 | ✅ v1.0 | Type System, Trait | Comparative |
+| [23_move_semantics.md](23_move_semantics.md) | Move 语义 | C++ vs Rust 资源转移模型、Copy/Clone、RVO | ✅ v1.0 | Ownership, Variable Model | Rust vs C++ |
 
 ---
 
 ### 补充文件索引
 
-- [编程语言理论基础（PL Prerequisites）](./00_pl_prerequisites.md)
-- [Lifetimes 高级主题](./03_lifetimes_advanced.md)
-- [Never Type (`!`)：底类型与穷尽性](./05_never_type.md)
+- [编程语言理论基础（PL Prerequisites）](00_pl_prerequisites.md)
+- [Lifetimes 高级主题](03_lifetimes_advanced.md)
+- [Never Type (`!`)：底类型与穷尽性](05_never_type.md)
 - Rust 错误处理（Error Handling）基础
 - 模块（Module）系统与路径：Rust 的代码组织哲学
-- [数值类型与运算：从整数到浮点的完整图景](./10_numerics.md)
+- [数值类型与运算：从整数到浮点的完整图景](10_numerics.md)
 - [属性与声明宏（Declarative Macro）：编译期元编程基础](12_attributes_and_macros.md)
-- [Panic 与 Abort：不可恢复错误的处理机制](./13_panic_and_abort.md)
-- [类型强制与转换：显式与隐式的边界](./14_coercion_and_casting.md)
+- [Panic 与 Abort：不可恢复错误的处理机制](13_panic_and_abort.md)
+- [类型强制与转换：显式与隐式的边界](14_coercion_and_casting.md)
 - [闭包（Closures）基础：捕获环境与匿名函数](15_closure_basics.md)
-- [测试基础：从单元测试到集成测试](./16_testing_basics.md)
-- [高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析](./17_collections_advanced.md)
-- [字符串与编码：Rust 的文本处理类型系统](./18_strings_and_encoding.md)
+- [测试基础：从单元测试到集成测试](16_testing_basics.md)
+- [高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析](17_collections_advanced.md)
+- [字符串与编码：Rust 的文本处理类型系统](18_strings_and_encoding.md)
 - 测验：所有权（Ownership）、借用（Borrowing）与生命周期（Lifetimes）（嵌入式互动试点）
-- [测验：类型系统（嵌入式互动试点）](./24_quiz_type_system.md)
-- [测验：错误处理（Error Handling）（嵌入式互动试点）](./25_quiz_error_handling.md)
-- [测验：模块（Module）系统与测试（嵌入式互动试点）](./26_quiz_modules_testing.md)
+- [测验：类型系统（嵌入式互动试点）](24_quiz_type_system.md)
+- [测验：错误处理（Error Handling）（嵌入式互动试点）](25_quiz_error_handling.md)
+- [测验：模块（Module）系统与测试（嵌入式互动试点）](26_quiz_modules_testing.md)
 - 测验：闭包（Closures）与迭代器（Iterator）（嵌入式互动试点）
-- [测验：通用 PL 基座](./29_quiz_pl_foundations.md)
+- [测验：通用 PL 基座](29_quiz_pl_foundations.md)
 
 ## 三、课程对齐路径
 

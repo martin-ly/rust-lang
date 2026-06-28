@@ -205,7 +205,7 @@ Rust 在 AI/ML 领域的生态持续演进：
 
 ## 7. 相关文档
 
-- [guides/README.md](./README.md) - 指南入口
+- [guides/README.md](README.md) - 指南入口
 - [对称差分析报告 v2.0](../reports/RUST_195_EVOLUTION_SYMMETRIC_DIFFERENCE_ANALYSIS_2026_05_08.md) - 项目全局视图
 - [Async Closures 深度指南](../crates/c06_async/docs/ASYNC_CLOSURES_GUIDE.md) - 异步闭包权威参考
 - [Cargo Script 指南](../docs/06_toolchain/cargo_script_guide.md) - 脚本化 Rust

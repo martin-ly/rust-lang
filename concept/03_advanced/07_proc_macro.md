@@ -10,7 +10,7 @@
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 深入分析 Rust **过程宏（Procedural Macros）**的三种类型（derive、attribute、function-like）——它们的编译期执行模型、TokenStream 操作、卫生性（hygiene）保证，以及与 `macro_rules!` 的本质差异。
-> **前置概念**: [Macros](./04_macros.md) · [Trait](./../02_intermediate/01_traits.md) · [Type System](../01_foundation/04_type_system.md)
+> **前置概念**: [Macros](04_macros.md) · [Trait](../02_intermediate/01_traits.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Serde Patterns](../02_intermediate/09_serde_patterns.md) · [Builder Pattern](../06_ecosystem/02_patterns.md)
 
 ---
@@ -22,49 +22,49 @@
 > [quote crate](https://docs.rs/quote/latest/quote/) ·
 > [RFC 1566 — Proc Macro](https://github.com/rust-lang/rfcs/pull/1566)
 
-> **对应 Crate**: [`c11_macro_system_proc`](../../crates/c11_macro_system_proc/)
-> **对应练习**: [`exercises/src/macros/`](../../exercises/src/macros/)
+> **对应 Crate**: [`c11_macro_system_proc`](../../crates/c11_macro_system_proc)
+> **对应练习**: [`exercises/src/macros/`](../../exercises/src/macros)
 
 ## 📑 目录
 
 - 过程宏（Macro）：编译期代码生成的元编程工具
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 过程宏（Procedural Macro） vs macro\_rules](#11-过程宏-vs-macro_rules)
-    - [1.2 三种过程宏（Macro）类型](#12-三种过程宏类型)
-    - [1.3 编译期执行模型](#13-编译期执行模型)
-  - [二、技术细节](#二技术细节)
-    - [2.1 TokenStream 操作](#21-tokenstream-操作)
-    - [2.2 syn + quote 工作流](#22-syn--quote-工作流)
-    - [2.3 卫生性与 Span](#23-卫生性与-span)
-  - [三、常见模式](#三常见模式)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、常见陷阱](#五常见陷阱)
-    - [编译错误示例](#编译错误示例)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
-  - [权威来源索引](#权威来源索引)
-    - [10.5 边界测试：过程宏的 `Span` 与错误定位精度（编译错误/调试困难）](#105-边界测试过程宏的-span-与错误定位精度编译错误调试困难)
-    - [10.3 边界测试：过程宏的 hygiene 与路径解析（编译错误）](#103-边界测试过程宏的-hygiene-与路径解析编译错误)
-    - [10.4 边界测试：proc\_macro 的 TokenStream 与 hygiene 标识符生成（编译错误）](#104-边界测试proc_macro-的-tokenstream-与-hygiene-标识符生成编译错误)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 过程宏（Procedural Macro） vs macro\_rules](.#11-过程宏-vs-macro_rules)
+    - [1.2 三种过程宏（Macro）类型](.#12-三种过程宏类型)
+    - [1.3 编译期执行模型](.#13-编译期执行模型)
+  - [二、技术细节](.#二技术细节)
+    - [2.1 TokenStream 操作](.#21-tokenstream-操作)
+    - [2.2 syn + quote 工作流](.#22-syn--quote-工作流)
+    - [2.3 卫生性与 Span](.#23-卫生性与-span)
+  - [三、常见模式](.#三常见模式)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、常见陷阱](.#五常见陷阱)
+    - [编译错误示例](.#编译错误示例)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [逆向推理链（Backward Reasoning）](.#逆向推理链backward-reasoning)
+  - [权威来源索引](.#权威来源索引)
+    - [10.5 边界测试：过程宏的 `Span` 与错误定位精度（编译错误/调试困难）](.#105-边界测试过程宏的-span-与错误定位精度编译错误调试困难)
+    - [10.3 边界测试：过程宏的 hygiene 与路径解析（编译错误）](.#103-边界测试过程宏的-hygiene-与路径解析编译错误)
+    - [10.4 边界测试：proc\_macro 的 TokenStream 与 hygiene 标识符生成（编译错误）](.#104-边界测试proc_macro-的-tokenstream-与-hygiene-标识符生成编译错误)
     - 10.6 边界测试：不可变借用（Mutable Borrow）与可变借用的冲突
-  - [参考来源](#参考来源)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：过程宏的类型（理解层）](#测验-1过程宏的类型理解层)
-    - [测验 2：过程宏的执行时机（应用层）](#测验-2过程宏的执行时机应用层)
-    - [测验 3：syn + quote 工作流（应用层）](#测验-3syn--quote-工作流应用层)
-    - [测验 4：卫生性（Hygiene）（分析层）](#测验-4卫生性hygiene分析层)
-    - [测验 5：Derive 宏的限制（分析层）](#测验-5derive-宏的限制分析层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
-  - [实践](#实践)
-    - [对应代码示例](#对应代码示例)
-    - [建议练习](#建议练习)
-  - [导航：下一步去哪？](#导航下一步去哪)
+  - [参考来源](.#参考来源)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：过程宏的类型（理解层）](.#测验-1过程宏的类型理解层)
+    - [测验 2：过程宏的执行时机（应用层）](.#测验-2过程宏的执行时机应用层)
+    - [测验 3：syn + quote 工作流（应用层）](.#测验-3syn--quote-工作流应用层)
+    - [测验 4：卫生性（Hygiene）（分析层）](.#测验-4卫生性hygiene分析层)
+    - [测验 5：Derive 宏的限制（分析层）](.#测验-5derive-宏的限制分析层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
+  - [实践](.#实践)
+    - [对应代码示例](.#对应代码示例)
+    - [建议练习](.#建议练习)
+  - [导航：下一步去哪？](.#导航下一步去哪)
 
 ---
 
@@ -537,7 +537,7 @@ pub fn my_macro(input: String) -> String {
 
 ## 相关概念文件
 
-- [Macros](./04_macros.md) — macro_rules! 声明式宏
+- [Macros](04_macros.md) — macro_rules! 声明式宏
 - [Trait](../02_intermediate/01_traits.md) — Trait 系统（Derive 的目标）
 - [Serde Patterns](../02_intermediate/09_serde_patterns.md) — Serde 的 derive 实现
 
@@ -893,7 +893,7 @@ Derive 宏不是"魔法"——它只是自动编写你本来可以手写的 `imp
 
 | 选择 | 条件 | 目标 |
 | :--- | :--- | :--- |
-| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate/) 或 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) |
-| 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
+| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate) 或 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) |
+| 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../06_ecosystem/README.md) |

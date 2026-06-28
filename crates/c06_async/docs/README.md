@@ -12,7 +12,7 @@
 
 > **文档定位**: C06异步编程模块主入口，提供快速开始指南、核心概念介绍和完整的学习资源导航
 > **先修知识**: [C01 所有权](../../c01_ownership_borrow_scope/docs/README.md) | [C05 线程](../../c05_threads/docs/README.md)
-> **相关文档**: [主索引](./00_MASTER_INDEX.md) | [FAQ](./FAQ.md) | [Glossary](./Glossary.md)
+> **相关文档**: [主索引](00_MASTER_INDEX.md) | [FAQ](FAQ.md) | [Glossary](Glossary.md)
 
 **最后更新**: 2026-02-12
 **适用版本**: Rust 1.75+ (推荐 1.93.0+)
@@ -91,20 +91,20 @@ cargo bench
 
 **🎯 快速入门** (3-5天):
 
-1. [tier_02_guides/01_异步编程快速入门](./tier_02_guides/01_异步编程快速入门.md) - 基础概念和第一个程序
-2. [core/01_introduction_and_philosophy.md](./core/01_introduction_and_philosophy.md) - 理解异步哲学
-3. [tier_02_guides/02_Future与Executor机制](./tier_02_guides/02_Future与Executor机制.md) - 掌握基础机制
+1. [tier_02_guides/01_异步编程快速入门](tier_02_guides/01_异步编程快速入门.md) - 基础概念和第一个程序
+2. [core/01_introduction_and_philosophy.md](core/01_introduction_and_philosophy.md) - 理解异步哲学
+3. [tier_02_guides/02_Future与Executor机制](tier_02_guides/02_Future与Executor机制.md) - 掌握基础机制
 
 **📚 系统学习** (2-3周):
 
-1. 核心系列 [core/](./core/) - 深入理解
-2. [runtimes/01_comparison_2025.md](./runtimes/01_comparison_2025.md) - 选择合适的运行时
-3. [tier_02_guides/04_异步设计模式实践](./tier_02_guides/04_异步设计模式实践.md) - 编写高质量代码
+1. 核心系列 [core/](core) - 深入理解
+2. [runtimes/01_comparison_2025.md](runtimes/01_comparison_2025.md) - 选择合适的运行时
+3. [tier_02_guides/04_异步设计模式实践](tier_02_guides/04_异步设计模式实践.md) - 编写高质量代码
 
 **🚀 专家进阶** (持续):
 
-1. [comprehensive/comprehensive_guide_2025.md](./comprehensive/comprehensive_guide_2025.md) - 2025综合指南
-2. [performance/01_optimization_guide.md](./performance/01_optimization_guide.md) - 性能优化
+1. [comprehensive/comprehensive_guide_2025.md](comprehensive/comprehensive_guide_2025.md) - 2025综合指南
+2. [performance/01_optimization_guide.md](performance/01_optimization_guide.md) - 性能优化
 3. 实际项目开发
 
 ---
@@ -289,13 +289,13 @@ while let Some(item) = stream.next().await {
 
 **突破传统的示例列举方式，采用知识工程方法！**
 
-- 🎓 **[知识体系概览](./knowledge_system/README.md)** - 从示例到知识工程 ⭐⭐⭐⭐⭐
-- 📘 **[概念本体](./knowledge_system/01_concept_ontology.md)** - 200+概念的形式化定义
-- 🕸️ **[关系网络](./knowledge_system/02_relationship_network.md)** - 7种关系类型的语义网络
-- 📊 **[属性空间](./knowledge_system/03_property_space.md)** - 9维度的多维分析
-- 🔬 **[运行时对比矩阵](./knowledge_system/10_runtime_comparison_matrix.md)** - 量化对比Tokio/Smol
-- 🧠 **[核心概念思维导图](./knowledge_system/20_core_concepts_mindmap.md)** - 7大支柱层次结构
-- 📐 **[形式语义](./knowledge_system/30_formal_semantics.md)** - 数学模型和理论基础
+- 🎓 **[知识体系概览](knowledge_system/README.md)** - 从示例到知识工程 ⭐⭐⭐⭐⭐
+- 📘 **[概念本体](knowledge_system/01_concept_ontology.md)** - 200+概念的形式化定义
+- 🕸️ **[关系网络](knowledge_system/02_relationship_network.md)** - 7种关系类型的语义网络
+- 📊 **[属性空间](knowledge_system/03_property_space.md)** - 9维度的多维分析
+- 🔬 **[运行时对比矩阵](knowledge_system/10_runtime_comparison_matrix.md)** - 量化对比Tokio/Smol
+- 🧠 **[核心概念思维导图](knowledge_system/20_core_concepts_mindmap.md)** - 7大支柱层次结构
+- 📐 **[形式语义](knowledge_system/30_formal_semantics.md)** - 数学模型和理论基础
 
 **核心价值**:
 
@@ -309,18 +309,18 @@ while let Some(item) = stream.next().await {
 
 ### 本模块资源
 
-- 📋 **[主索引](./00_MASTER_INDEX.md)** - 完整文档导航（必看）
-- ❓ **[FAQ](./FAQ.md)** - 常见问题解答
-- 📚 **[Glossary](./Glossary.md)** - 核心术语表
-- 📖 **[核心系列](./core/)** - 01-06系统学习
-- 📚 **[学习指南](./tier_02_guides/README.md)** - 实践导向教程
-- 🚀 **[综合指南](./comprehensive/)** - 2025最新全面分析
+- 📋 **[主索引](00_MASTER_INDEX.md)** - 完整文档导航（必看）
+- ❓ **[FAQ](FAQ.md)** - 常见问题解答
+- 📚 **[Glossary](Glossary.md)** - 核心术语表
+- 📖 **[核心系列](core)** - 01-06系统学习
+- 📚 **[学习指南](tier_02_guides/README.md)** - 实践导向教程
+- 🚀 **[综合指南](comprehensive)** - 2025最新全面分析
 
 ### 代码资源
 
 - 📁 **[../examples/](../examples/README.md)** - 89个完整示例
-- 🧪 **[../tests/](../tests/)** - 测试用例
-- ⚡ **[../benches/](../benches/)** - 性能基准
+- 🧪 **[../tests/](../tests)** - 测试用例
+- ⚡ **[../benches/](../benches)** - 性能基准
 
 ### 外部资源
 
@@ -418,25 +418,25 @@ async-trait = "0.1"
 
 ### 按学习阶段
 
-- **第1天**: [01_异步编程快速入门](./tier_02_guides/01_异步编程快速入门.md) → [01_项目概览](./tier_01_foundations/01_项目概览.md)
-- **第2-3天**: [02_Future与Executor机制](./tier_02_guides/02_Future与Executor机制.md) → [02_主索引导航](./tier_01_foundations/02_主索引导航.md)
-- **第4-5天**: [core/03_pinning](./core/03_pinning_and_unsafe_foundations.md) → [core/04_streams](./core/04_streams_and_sinks.md)
-- **第2周**: [core/05_traits](./core/05_async_in_traits_and_ecosystem.md) → [runtimes/01_comparison](./runtimes/01_comparison_2025.md)
-- **第3周**: [04_异步设计模式实践](./tier_02_guides/04_异步设计模式实践.md) → [05_异步性能优化指南](./tier_02_guides/05_异步性能优化指南.md)
+- **第1天**: [01_异步编程快速入门](tier_02_guides/01_异步编程快速入门.md) → [01_项目概览](tier_01_foundations/01_项目概览.md)
+- **第2-3天**: [02_Future与Executor机制](tier_02_guides/02_Future与Executor机制.md) → [02_主索引导航](tier_01_foundations/02_主索引导航.md)
+- **第4-5天**: [core/03_pinning](core/03_pinning_and_unsafe_foundations.md) → [core/04_streams](core/04_streams_and_sinks.md)
+- **第2周**: [core/05_traits](core/05_async_in_traits_and_ecosystem.md) → [runtimes/01_comparison](runtimes/01_comparison_2025.md)
+- **第3周**: [04_异步设计模式实践](tier_02_guides/04_异步设计模式实践.md) → [05_异步性能优化指南](tier_02_guides/05_异步性能优化指南.md)
 
 ### 按问题类型
 
-- **如何选择运行时?** → [runtimes/01_comparison](./runtimes/01_comparison_2025.md)
-- **Pin是什么?** → [core/03_pinning](./core/03_pinning_and_unsafe_foundations.md)
-- **async vs 线程?** → [FAQ](./FAQ.md)
-- **常见陷阱?** → [patterns/02_patterns_and_pitfalls](./patterns/02_patterns_and_pitfalls.md)
-- **性能优化?** → [performance/01_optimization](./performance/01_optimization_guide.md)
+- **如何选择运行时?** → [runtimes/01_comparison](runtimes/01_comparison_2025.md)
+- **Pin是什么?** → [core/03_pinning](core/03_pinning_and_unsafe_foundations.md)
+- **async vs 线程?** → [FAQ](FAQ.md)
+- **常见陷阱?** → [patterns/02_patterns_and_pitfalls](patterns/02_patterns_and_pitfalls.md)
+- **性能优化?** → [performance/01_optimization](performance/01_optimization_guide.md)
 
 ### 按技术栈
 
-- **Tokio** → [runtimes/02_tokio_best_practices](./runtimes/02_tokio_best_practices.md)
-- **async-std [已归档]** → [runtimes/04_cookbook](./runtimes/04_cookbook.md)
-- **Smol** → [runtimes/03_smol_best_practices](./runtimes/03_smol_best_practices.md)
+- **Tokio** → [runtimes/02_tokio_best_practices](runtimes/02_tokio_best_practices.md)
+- **async-std [已归档]** → [runtimes/04_cookbook](runtimes/04_cookbook.md)
+- **Smol** → [runtimes/03_smol_best_practices](runtimes/03_smol_best_practices.md)
 
 ---
 
@@ -444,13 +444,13 @@ async-trait = "0.1"
 
 准备好了吗？选择你的路径：
 
-1. **🚀 快速体验** → [01_异步编程快速入门](./tier_02_guides/01_异步编程快速入门.md)
-2. **📚 系统学习** → [core/01_introduction_and_philosophy.md](./core/01_introduction_and_philosophy.md)
-3. **🔍 查找文档** → [00_MASTER_INDEX.md](./00_MASTER_INDEX.md) ⭐ 推荐先看
-4. **❓ 解决问题** → [FAQ.md](./FAQ.md)
-5. **💡 查询术语** → [Glossary.md](./Glossary.md)
+1. **🚀 快速体验** → [01_异步编程快速入门](tier_02_guides/01_异步编程快速入门.md)
+2. **📚 系统学习** → [core/01_introduction_and_philosophy.md](core/01_introduction_and_philosophy.md)
+3. **🔍 查找文档** → [00_MASTER_INDEX.md](00_MASTER_INDEX.md) ⭐ 推荐先看
+4. **❓ 解决问题** → [FAQ.md](FAQ.md)
+5. **💡 查询术语** → [Glossary.md](Glossary.md)
 
-📋 **重要提示**: 文档已重组！请先查看 [00_MASTER_INDEX.md](./00_MASTER_INDEX.md) 了解新结构
+📋 **重要提示**: 文档已重组！请先查看 [00_MASTER_INDEX.md](00_MASTER_INDEX.md) 了解新结构
 
 ---
 

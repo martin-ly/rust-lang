@@ -7,8 +7,8 @@
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: C+A — Comparison + Application
 > **双维定位**: C×Ana
-> **前置概念**: [Error Handling](./04_error_handling.md) · [Error Handling Basics](../01_foundation/10_error_handling_basics.md) · [Ownership](../01_foundation/01_ownership.md)
-> **后置概念**: [Error Handling Deep Dive](./15_error_handling_deep_dive.md) · [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+> **前置概念**: [Error Handling](04_error_handling.md) · [Error Handling Basics](../01_foundation/10_error_handling_basics.md) · [Ownership](../01_foundation/01_ownership.md)
+> **后置概念**: [Error Handling Deep Dive](15_error_handling_deep_dive.md) · [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **主要来源**: [Brown University CRP — Exceptions](https://cel.cs.brown.edu/crp/idioms/exceptions.html) · [Google Comprehensive Rust — C++ Exception](https://google.github.io/comprehensive-rust/android/interoperability/cpp/cpp-exception.html) · [TRPL Ch 9 — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [cppreference — Exceptions](https://en.cppreference.com/w/cpp/language/exceptions) · [cppreference — noexcept](https://en.cppreference.com/w/cpp/language/noexcept)
 ---
 

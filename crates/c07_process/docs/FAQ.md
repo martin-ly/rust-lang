@@ -2,19 +2,19 @@
 
 > **文档定位**: 进程管理常见问题快速解答，涵盖进程生命周期、IPC通信、跨平台等核心疑问
 > **使用方式**: 通过问题索引快速定位问题，获取详细答案和示例
-> **相关文档**: [主索引](./00_MASTER_INDEX.md) | [README](./README.md) | [Glossary](./Glossary.md)
+> **相关文档**: [主索引](00_MASTER_INDEX.md) | [README](README.md) | [Glossary](Glossary.md)
 
 ## 📊 目录
 
-- [C07 进程管理: 常见问题解答 (FAQ)](#c07-进程管理-常见问题解答-faq)
-  - [📊 目录](#-目录)
-  - [问答详解](#问答详解)
-    - [Q1: 如何创建和管理子进程？](#q1-如何创建和管理子进程)
-    - [Q2: 进程间如何通信？最好的方式是什么？](#q2-进程间如何通信最好的方式是什么)
-    - [Q3: 如何实现跨平台的进程管理？](#q3-如何实现跨平台的进程管理)
-    - [Q4: 如何避免和处理僵尸进程？](#q4-如何避免和处理僵尸进程)
-    - [Q5: 什么时候应该使用异步进程管理？](#q5-什么时候应该使用异步进程管理)
-  - [📚 延伸阅读](#-延伸阅读)
+- [C07 进程管理: 常见问题解答 (FAQ)](.#c07-进程管理-常见问题解答-faq)
+  - [📊 目录](.#-目录)
+  - [问答详解](.#问答详解)
+    - [Q1: 如何创建和管理子进程？](.#q1-如何创建和管理子进程)
+    - [Q2: 进程间如何通信？最好的方式是什么？](.#q2-进程间如何通信最好的方式是什么)
+    - [Q3: 如何实现跨平台的进程管理？](.#q3-如何实现跨平台的进程管理)
+    - [Q4: 如何避免和处理僵尸进程？](.#q4-如何避免和处理僵尸进程)
+    - [Q5: 什么时候应该使用异步进程管理？](.#q5-什么时候应该使用异步进程管理)
+  - [📚 延伸阅读](.#-延伸阅读)
 
 **最后更新**: 2025-12-25
 **适用版本**: Rust 1.92.0+ (Edition 2024)
@@ -50,7 +50,7 @@ println!("stdout: {}", String::from_utf8_lossy(&output.stdout));
 - `status()` - 只获取退出状态
 - `stdin()`/`stdout()`/`stderr()` - 配置标准I/O
 
-**相关**: [01_process_model_and_lifecycle](./01_process_model_and_lifecycle.md)
+**相关**: [01_process_model_and_lifecycle](01_process_model_and_lifecycle.md)
 
 ---
 
@@ -97,7 +97,7 @@ let (tx, rx) = channel();
 - **灵活性**: Socket
 - **跨网络**: TCP/IP
 
-**相关**: [02_ipc_mechanisms](./02_ipc_mechanisms.md) | [13_ipc_communication_advanced](./11_practical_examples/13_ipc_communication_advanced.md)
+**相关**: [02_ipc_mechanisms](02_ipc_mechanisms.md) | [13_ipc_communication_advanced](11_practical_examples/13_ipc_communication_advanced.md)
 
 ---
 
@@ -146,7 +146,7 @@ let mut cmd = Command::new("my_app");
 - `winapi` - Windows API封装
 - `tokio` - 异步跨平台进程管理
 
-**相关**: [06_cross_platform_process_management](./06_cross_platform_process_management.md) | [10_cross_platform_guide](./10_cross_platform_guide.md)
+**相关**: [06_cross_platform_process_management](06_cross_platform_process_management.md) | [10_cross_platform_guide](10_cross_platform_guide.md)
 
 ---
 
@@ -205,7 +205,7 @@ loop {
 - ✅ 在`Drop`实现中kill和wait
 - ⚠️ 注意信号处理(Unix)
 
-**相关**: [01_process_model_and_lifecycle](./01_process_model_and_lifecycle.md)
+**相关**: [01_process_model_and_lifecycle](01_process_model_and_lifecycle.md)
 
 ---
 
@@ -270,17 +270,17 @@ async fn run_process(name: &str) -> Result<(), Box<dyn std::error::Error>> {
 - ❌ CPU密集型任务
 - ❌ 需要实时保证的场景
 
-**相关**: [05_async_process_management](./05_async_process_management.md)
+**相关**: [05_async_process_management](05_async_process_management.md)
 
 ---
 
 ## 📚 延伸阅读
 
-- [01_process_model_and_lifecycle](./01_process_model_and_lifecycle.md) - 进程模型基础
-- [02_ipc_mechanisms](./02_ipc_mechanisms.md) - IPC通信机制
-- [05_async_process_management](./05_async_process_management.md) - 异步进程管理
-- [06_cross_platform_process_management](./06_cross_platform_process_management.md) - 跨平台实现
-- [主索引](./00_MASTER_INDEX.md) - 返回主索引
+- [01_process_model_and_lifecycle](01_process_model_and_lifecycle.md) - 进程模型基础
+- [02_ipc_mechanisms](02_ipc_mechanisms.md) - IPC通信机制
+- [05_async_process_management](05_async_process_management.md) - 异步进程管理
+- [06_cross_platform_process_management](06_cross_platform_process_management.md) - 跨平台实现
+- [主索引](00_MASTER_INDEX.md) - 返回主索引
 
 ---
 

@@ -13,7 +13,7 @@
 > **双维定位**: F×Inf — 编译器后端基础设施
 > **定位**: 把“MIR 之后发生了什么”讲清楚：从 LLVM IR 生成、代码优化到目标文件与链接，覆盖 rustc 代码生成层的核心机制。
 > **前置概念**: [Rustc Query System](../04_formal/19_rustc_query_system.md) · [Name Resolution and HIR](../04_formal/35_name_resolution_and_hir.md) · [Trait Solver in rustc](../04_formal/26_trait_solver_in_rustc.md)
-> **后置概念**: [Rustc Driver and Stable MIR](./68_rustc_driver_and_stable_mir.md) · [Compiler Infrastructure](./47_compiler_infrastructure.md)
+> **后置概念**: [Rustc Driver and Stable MIR](68_rustc_driver_and_stable_mir.md) · [Compiler Infrastructure](47_compiler_infrastructure.md)
 
 ---
 
@@ -24,24 +24,24 @@
 
 ## 📑 目录
 
-- [Rust 编译器的 LLVM 后端与代码生成](#rust-编译器的-llvm-后端与代码生成)
-  - [📑 目录](#-目录)
-  - [一、代码生成在编译流水线中的位置](#一代码生成在编译流水线中的位置)
-  - [二、LLVM 是什么](#二llvm-是什么)
-  - [三、从 MIR 到 LLVM IR](#三从-mir-到-llvm-ir)
-  - [四、Codegen Units](#四codegen-units)
-  - [五、目标平台与 Target Spec](#五目标平台与-target-spec)
-  - [六、链接与 LTO](#六链接与-lto)
-    - [6.1 链接](#61-链接)
-    - [6.2 LTO（Link Time Optimization）](#62-ltolink-time-optimization)
-  - [七、替代后端：Cranelift 与 GCC](#七替代后端cranelift-与-gcc)
-  - [八、如何观察 LLVM IR](#八如何观察-llvm-ir)
-  - [嵌入式测验](#嵌入式测验)
-    - [测验 1：`rustc` 默认使用哪个后端生成机器码？](#测验-1rustc-默认使用哪个后端生成机器码)
-    - [测验 2：Codegen unit 的作用是什么？](#测验-2codegen-unit-的作用是什么)
-    - [测验 3：Fat LTO 和 Thin LTO 的主要权衡是什么？](#测验-3fat-lto-和-thin-lto-的主要权衡是什么)
-    - [测验 4：Cranelift 后端适合什么场景？](#测验-4cranelift-后端适合什么场景)
-  - [权威来源索引](#权威来源索引)
+- [Rust 编译器的 LLVM 后端与代码生成](.#rust-编译器的-llvm-后端与代码生成)
+  - [📑 目录](.#-目录)
+  - [一、代码生成在编译流水线中的位置](.#一代码生成在编译流水线中的位置)
+  - [二、LLVM 是什么](.#二llvm-是什么)
+  - [三、从 MIR 到 LLVM IR](.#三从-mir-到-llvm-ir)
+  - [四、Codegen Units](.#四codegen-units)
+  - [五、目标平台与 Target Spec](.#五目标平台与-target-spec)
+  - [六、链接与 LTO](.#六链接与-lto)
+    - [6.1 链接](.#61-链接)
+    - [6.2 LTO（Link Time Optimization）](.#62-ltolink-time-optimization)
+  - [七、替代后端：Cranelift 与 GCC](.#七替代后端cranelift-与-gcc)
+  - [八、如何观察 LLVM IR](.#八如何观察-llvm-ir)
+  - [嵌入式测验](.#嵌入式测验)
+    - [测验 1：`rustc` 默认使用哪个后端生成机器码？](.#测验-1rustc-默认使用哪个后端生成机器码)
+    - [测验 2：Codegen unit 的作用是什么？](.#测验-2codegen-unit-的作用是什么)
+    - [测验 3：Fat LTO 和 Thin LTO 的主要权衡是什么？](.#测验-3fat-lto-和-thin-lto-的主要权衡是什么)
+    - [测验 4：Cranelift 后端适合什么场景？](.#测验-4cranelift-后端适合什么场景)
+  - [权威来源索引](.#权威来源索引)
 
 ---
 

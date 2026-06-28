@@ -15,31 +15,31 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [常量求值形式化](#常量求值形式化)
-  - [📑 目录](#-目录)
-  - [1. 常量求值概述](#1-常量求值概述)
-  - [2. 形式化定义](#2-形式化定义)
-    - [Def CE-1: 常量上下文](#def-ce-1-常量上下文)
-    - [Def CE-2: 常量求值器](#def-ce-2-常量求值器)
-  - [3. 常量函数 (const fn)](#3-常量函数-const-fn)
-    - [Def CE-3: const fn 约束](#def-ce-3-const-fn-约束)
-    - [Def CE-4: 禁止的 const fn 操作](#def-ce-4-禁止的-const-fn-操作)
-  - [4. 定理](#4-定理)
-    - [Thm CE-1: 常量求值终止性](#thm-ce-1-常量求值终止性)
-    - [Thm CE-2: 常量求值确定性](#thm-ce-2-常量求值确定性)
-  - [5. MIR 常量求值](#5-mir-常量求值)
-  - [6. 高级特性](#6-高级特性)
-    - [const\_eval\_select (不稳定)](#const_eval_select-不稳定)
-  - [🆕 Rust 1.94 研究更新](#-rust-194-研究更新)
-    - [核心研究点](#核心研究点)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [常量求值形式化](.#常量求值形式化)
+  - [📑 目录](.#-目录)
+  - [1. 常量求值概述](.#1-常量求值概述)
+  - [2. 形式化定义](.#2-形式化定义)
+    - [Def CE-1: 常量上下文](.#def-ce-1-常量上下文)
+    - [Def CE-2: 常量求值器](.#def-ce-2-常量求值器)
+  - [3. 常量函数 (const fn)](.#3-常量函数-const-fn)
+    - [Def CE-3: const fn 约束](.#def-ce-3-const-fn-约束)
+    - [Def CE-4: 禁止的 const fn 操作](.#def-ce-4-禁止的-const-fn-操作)
+  - [4. 定理](.#4-定理)
+    - [Thm CE-1: 常量求值终止性](.#thm-ce-1-常量求值终止性)
+    - [Thm CE-2: 常量求值确定性](.#thm-ce-2-常量求值确定性)
+  - [5. MIR 常量求值](.#5-mir-常量求值)
+  - [6. 高级特性](.#6-高级特性)
+    - [const\_eval\_select (不稳定)](.#const_eval_select-不稳定)
+  - [🆕 Rust 1.94 研究更新](.#-rust-194-研究更新)
+    - [核心研究点](.#核心研究点)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 1. 常量求值概述
 >
@@ -229,7 +229,7 @@ const fn with_const_eval_select<T>(x: T) -> T {
 - LazyCell/LazyLock 的延迟语义
 - 与现有理论框架的集成
 
-详见 [RUST_194_RESEARCH_UPDATE](../../archive/research_notes_2026_06_25/10_rust_194_research_update.md)
+详见 [RUST_194_RESEARCH_UPDATE](10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 
@@ -292,7 +292,7 @@ const fn with_const_eval_select<T>(x: T) -> T {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

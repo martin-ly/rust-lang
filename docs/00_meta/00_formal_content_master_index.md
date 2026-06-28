@@ -12,21 +12,21 @@
 
 ## 📑 目录
 
-- [形式化内容总索引](#形式化内容总索引)
-  - [📑 目录](#-目录)
-  - [1. 索引说明](#1-索引说明)
-  - [2. 按主题索引](#2-按主题索引)
-    - [2.1 所有权与借用形式化](#21-所有权与借用形式化)
-    - [2.2 类型理论](#22-类型理论)
-    - [2.3 并发与异步形式化](#23-并发与异步形式化)
-    - [2.4 设计模式形式化](#24-设计模式形式化)
-    - [2.5 验证工具](#25-验证工具)
-    - [2.6 案例研究](#26-案例研究)
-  - [3. 快速决策树](#3-快速决策树)
-  - [4. 维护记录](#4-维护记录)
-  - [5. 相关文档](#5-相关文档)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [形式化内容总索引](.#形式化内容总索引)
+  - [📑 目录](.#-目录)
+  - [1. 索引说明](.#1-索引说明)
+  - [2. 按主题索引](.#2-按主题索引)
+    - [2.1 所有权与借用形式化](.#21-所有权与借用形式化)
+    - [2.2 类型理论](.#22-类型理论)
+    - [2.3 并发与异步形式化](.#23-并发与异步形式化)
+    - [2.4 设计模式形式化](.#24-设计模式形式化)
+    - [2.5 验证工具](.#25-验证工具)
+    - [2.6 案例研究](.#26-案例研究)
+  - [3. 快速决策树](.#3-快速决策树)
+  - [4. 维护记录](.#4-维护记录)
+  - [5. 相关文档](.#5-相关文档)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 1. 索引说明
 >
@@ -51,8 +51,8 @@
 
 | 深度 | 位置 | 说明 |
 |------|------|------|
-| ⭐⭐⭐ 完整理论 | [`rust-ownership-decidability/01-core-concepts/`](../rust-ownership-decidability/01-core-concepts/) | 所有权规则、借用系统、生命周期、内部可变性 |
-| ⭐⭐⭐ Coq 证明 | [`rust-ownership-decidability/formal-foundations/proofs/`](../rust-ownership-decidability/formal-foundations/proofs/) | 类型安全、进展性、保持性、可判定性 |
+| ⭐⭐⭐ 完整理论 | [`rust-ownership-decidability/01-core-concepts/`](../../archive/rust-ownership-decidability/01-core-concepts) | 所有权规则、借用系统、生命周期、内部可变性 |
+| ⭐⭐⭐ Coq 证明 | [`rust-ownership-decidability/formal-foundations/proofs/`](../../archive/rust-ownership-decidability/formal-foundations/proofs) | 类型安全、进展性、保持性、可判定性 |
 | ⭐⭐ 研究笔记 | [`research_notes/formal_methods/10_ownership_model.md`](../research_notes/formal_methods/10_ownership_model.md) | 所有权模型概述 |
 | ⭐⭐ 研究笔记 | [`research_notes/formal_methods/10_borrow_checker_proof.md`](../research_notes/formal_methods/10_borrow_checker_proof.md) | 借用检查器证明 |
 
@@ -62,9 +62,9 @@
 
 | 深度 | 位置 | 说明 |
 |------|------|------|
-| ⭐⭐ 通用基础 | [`research_notes/type_theory/`](../research_notes/type_theory/) | 类型系统基础、方差、常量求值 |
-| ⭐⭐⭐ Rust 特定 | [`rust-ownership-decidability/01-core-concepts/`](../rust-ownership-decidability/01-core-concepts/) | Rust 类型系统的形式化语义 |
-| ⭐⭐⭐ 前沿特性 | [`rust-ownership-decidability/08-advanced-topics/`](../rust-ownership-decidability/08-advanced-topics/) | 常量泛型、异步 Rust、过程宏 |
+| ⭐⭐ 通用基础 | [`research_notes/type_theory/`](../research_notes/type_theory) | 类型系统基础、方差、常量求值 |
+| ⭐⭐⭐ Rust 特定 | [`rust-ownership-decidability/01-core-concepts/`](../../archive/rust-ownership-decidability/01-core-concepts) | Rust 类型系统的形式化语义 |
+| ⭐⭐⭐ 前沿特性 | [`rust-ownership-decidability/08-advanced-topics/`](../../archive/rust-ownership-decidability/08-advanced-topics) | 常量泛型、异步 Rust、过程宏 |
 
 **建议**: 类型理论通用基础读 `research_notes/`，Rust 特定深入读 `rust-ownership-decidability/`。
 
@@ -72,8 +72,8 @@
 
 | 深度 | 位置 | 说明 |
 |------|------|------|
-| ⭐⭐⭐ 并发模式 | [`rust-ownership-decidability/12-concurrency-patterns/`](../rust-ownership-decidability/12-concurrency-patterns/) | 并发架构、消息传递、数据并行、锁自由模式 |
-| ⭐⭐⭐ Actor 模型 | [`rust-ownership-decidability/actor-specialty/`](../rust-ownership-decidability/actor-specialty/) | Actor 框架、分布式 Actor |
+| ⭐⭐⭐ 并发模式 | [`rust-ownership-decidability/12-concurrency-patterns/`](../../archive/rust-ownership-decidability/12-concurrency-patterns) | 并发架构、消息传递、数据并行、锁自由模式 |
+| ⭐⭐⭐ Actor 模型 | [`rust-ownership-decidability/actor-specialty/`](../../archive/rust-ownership-decidability/actor-specialty) | Actor 框架、分布式 Actor |
 | ⭐⭐ 异步状态机 | [`research_notes/formal_methods/10_async_state_machine.md`](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) | 异步状态机形式化 |
 | ⭐⭐ Send/Sync | [`research_notes/formal_methods/10_send_sync_formalization.md`](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | Send/Sync 形式化 |
 
@@ -81,15 +81,15 @@
 
 | 深度 | 位置 | 说明 |
 |------|------|------|
-| ⭐⭐⭐ Rust 特定 | [`rust-ownership-decidability/11-design-patterns/`](../rust-ownership-decidability/11-design-patterns/) | Rust 设计模式深度分析 |
-| ⭐⭐ 通用形式化 | [`research_notes/software_design_theory/01_design_patterns_formal/`](../research_notes/software_design_theory/01_design_patterns_formal/) | 23 种设计模式形式化 |
-| ⭐⭐ 工作流引擎 | [`research_notes/software_design_theory/02_workflow/`](../research_notes/software_design_theory/02_workflow/) | 工作流状态机、补偿链、长事务 |
+| ⭐⭐⭐ Rust 特定 | [`rust-ownership-decidability/11-design-patterns/`](../../archive/rust-ownership-decidability/11-design-patterns) | Rust 设计模式深度分析 |
+| ⭐⭐ 通用形式化 | [`research_notes/software_design_theory/01_design_patterns_formal/`](../research_notes/software_design_theory/01_design_patterns_formal) | 23 种设计模式形式化 |
+| ⭐⭐ 工作流引擎 | [`research_notes/software_design_theory/02_workflow/`](../research_notes/software_design_theory/02_workflow) | 工作流状态机、补偿链、长事务 |
 
 ### 2.5 验证工具
 
 | 工具 | 位置 | 状态 |
 |------|------|------|
-| Coq 形式化 | [`rust-ownership-decidability/coq-formalization/`](../rust-ownership-decidability/coq-formalization/) | 11,980+ 行，300+ Qed |
+| Coq 形式化 | [`rust-ownership-decidability/coq-formalization/`](../../archive/rust-ownership-decidability/coq-formalization) | 11,980+ 行，300+ Qed |
 | Miri | `research_notes/formal_methods/MIRI_EXECUTION_MODEL.md` | 执行模型分析 |
 | Tree Borrows | `research_notes/formal_methods/tree_borrows_analysis.md` | 别名模型 |
 
@@ -97,15 +97,15 @@
 
 | 领域 | 位置 |
 |------|------|
-| 游戏开发 | [`rust-ownership-decidability/case-studies/gamedev/`](../rust-ownership-decidability/case-studies/gamedev/) |
-| 区块链 | [`rust-ownership-decidability/case-studies/blockchain/`](../rust-ownership-decidability/case-studies/blockchain/) |
-| 云原生 | [`rust-ownership-decidability/case-studies/cloud/`](../rust-ownership-decidability/case-studies/cloud/) |
-| CLI 工具 | [`rust-ownership-decidability/case-studies/cli/`](../rust-ownership-decidability/case-studies/cli/) |
-| 数据库 | [`rust-ownership-decidability/case-studies/database/`](../rust-ownership-decidability/case-studies/database/) |
-| 嵌入式 | [`rust-ownership-decidability/case-studies/embedded/`](../rust-ownership-decidability/case-studies/embedded/) |
-| ML/AI | [`rust-ownership-decidability/case-studies/ml-ai/`](../rust-ownership-decidability/case-studies/ml-ai/) |
-| Serde | [`rust-ownership-decidability/case-studies/serde-formal-analysis-deep.md`](../rust-ownership-decidability/case-studies/serde-formal-analysis-deep.md) |
-| Tokio | [`rust-ownership-decidability/case-studies/tokio-runtime-deep.md`](../rust-ownership-decidability/case-studies/tokio-runtime-deep.md) |
+| 游戏开发 | [`rust-ownership-decidability/case-studies/gamedev/`](../../archive/rust-ownership-decidability/case-studies/gamedev) |
+| 区块链 | [`rust-ownership-decidability/case-studies/blockchain/`](../../archive/rust-ownership-decidability/case-studies/blockchain) |
+| 云原生 | [`rust-ownership-decidability/case-studies/cloud/`](../../archive/rust-ownership-decidability/case-studies/cloud) |
+| CLI 工具 | [`rust-ownership-decidability/case-studies/cli/`](../../archive/rust-ownership-decidability/case-studies/cli) |
+| 数据库 | [`rust-ownership-decidability/case-studies/database/`](../../archive/rust-ownership-decidability/case-studies/database) |
+| 嵌入式 | [`rust-ownership-decidability/case-studies/embedded/`](../../archive/rust-ownership-decidability/case-studies/embedded) |
+| ML/AI | [`rust-ownership-decidability/case-studies/ml-ai/`](../../archive/rust-ownership-decidability/case-studies/ml-ai) |
+| Serde | [`rust-ownership-decidability/case-studies/serde-formal-analysis-deep.md`](../../archive/rust-ownership-decidability/case-studies/serde-formal-analysis-deep.md) |
+| Tokio | [`rust-ownership-decidability/case-studies/tokio-runtime-deep.md`](../../archive/rust-ownership-decidability/case-studies/tokio-runtime-deep.md) |
 
 ---
 
@@ -142,9 +142,9 @@
 
 ## 5. 相关文档
 
-- [`00_rust_ownership_decidability_integration_plan.md`](./00_rust_ownership_decidability_integration_plan.md) — 整合计划详情
-- [`00_documentation_division_of_labor.md`](./00_documentation_division_of_labor.md) — 文档体系分工协议
-- [`rust-ownership-decidability/README.md`](../rust-ownership-decidability/README.md) — 所有权知识库入口
+- [`00_rust_ownership_decidability_integration_plan.md`](00_rust_ownership_decidability_integration_plan.md) — 整合计划详情
+- [`00_documentation_division_of_labor.md`](00_documentation_division_of_labor.md) — 文档体系分工协议
+- [`rust-ownership-decidability/README.md`](../../archive/rust-ownership-decidability/README.md) — 所有权知识库入口
 - [`research_notes/README.md`](../research_notes/README.md) — 研究笔记入口
 
 ---

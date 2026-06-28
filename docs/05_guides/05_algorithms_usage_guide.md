@@ -20,24 +20,24 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [算法使用指南](#算法使用指南)
-  - [📑 目录](#-目录)
-  - [📋 概述](#-概述)
-  - [🚀 快速开始](#-快速开始)
-  - [📊 核心功能](#-核心功能)
-    - [1. 排序算法](#1-排序算法)
-    - [2. 搜索算法](#2-搜索算法)
-    - [3. 图算法](#3-图算法)
-    - [4. 动态规划](#4-动态规划)
-    - [5. 数据结构](#5-数据结构)
-    - [6. 机器学习算法](#6-机器学习算法)
-    - [7. LeetCode 分类实现](#7-leetcode-分类实现)
-  - [⚡ 并行与异步执行](#-并行与异步执行)
-  - [🔧 形式化验证](#-形式化验证)
-  - [🐛 常见问题与解决方案](#-常见问题与解决方案)
-  - [🔗 相关文档](#-相关文档)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [算法使用指南](.#算法使用指南)
+  - [📑 目录](.#-目录)
+  - [📋 概述](.#-概述)
+  - [🚀 快速开始](.#-快速开始)
+  - [📊 核心功能](.#-核心功能)
+    - [1. 排序算法](.#1-排序算法)
+    - [2. 搜索算法](.#2-搜索算法)
+    - [3. 图算法](.#3-图算法)
+    - [4. 动态规划](.#4-动态规划)
+    - [5. 数据结构](.#5-数据结构)
+    - [6. 机器学习算法](.#6-机器学习算法)
+    - [7. LeetCode 分类实现](.#7-leetcode-分类实现)
+  - [⚡ 并行与异步执行](.#-并行与异步执行)
+  - [🔧 形式化验证](.#-形式化验证)
+  - [🐛 常见问题与解决方案](.#-常见问题与解决方案)
+  - [🔗 相关文档](.#-相关文档)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 📋 概述
 >
@@ -45,7 +45,7 @@
 
 本指南对应 `crates/c08_algorithms`，提供 Rust 中各类算法的完整实现，包括排序、搜索、图算法、动态规划、数据结构、机器学习算法以及 LeetCode 分类题解。所有实现支持同步、并行和异步三种执行模式。
 
-**前置知识**: [knowledge/02_intermediate/](../../knowledge/02_intermediate/) 集合与迭代器
+**前置知识**: [knowledge/02_intermediate/](../../knowledge/02_intermediate) 集合与迭代器
 **速查卡**: [02_algorithms_cheatsheet.md](../02_reference/quick_reference/02_algorithms_cheatsheet.md)
 
 ---
@@ -322,8 +322,8 @@ fn verified_algorithms() {
 
 - **速查卡**: [02_algorithms_cheatsheet.md](../02_reference/quick_reference/02_algorithms_cheatsheet.md)
 - **算法决策树**: [algorithm_decision_trees.md](../../crates/c08_algorithms/src/algorithm_decision_trees.rs)
-- **性能优化**: [05_performance_tuning_guide.md](./05_performance_tuning_guide.md)
-- **源码**: [crates/c08_algorithms/](../../crates/c08_algorithms/)
+- **性能优化**: [05_performance_tuning_guide.md](05_performance_tuning_guide.md)
+- **源码**: [crates/c08_algorithms/](../../crates/c08_algorithms)
 
 ---
 
@@ -342,7 +342,7 @@ fn verified_algorithms() {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [05_guides 目录](./README.md)
+- [05_guides 目录](README.md)
 - [docs 索引](../README.md)
 
 ---

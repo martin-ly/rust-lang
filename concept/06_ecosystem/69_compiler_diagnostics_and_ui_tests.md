@@ -12,8 +12,8 @@
 > **A/S/P 标记**: **F** — Formal
 > **双维定位**: F×Inf — 编译器基础设施
 > **定位**: 把“rustc 的错误信息是怎么构造的、如何测试错误输出”讲清楚，为贡献 rustc 或编写自定义 lint 打下基础。
-> **前置概念**: [Rustc Query System](../04_formal/19_rustc_query_system.md) · [Rustc Driver and Stable MIR](./68_rustc_driver_and_stable_mir.md)
-> **后置概念**: [Rustc Bootstrap](./70_rustc_bootstrap.md) · [Compiler Infrastructure](./47_compiler_infrastructure.md)
+> **前置概念**: [Rustc Query System](../04_formal/19_rustc_query_system.md) · [Rustc Driver and Stable MIR](68_rustc_driver_and_stable_mir.md)
+> **后置概念**: [Rustc Bootstrap](70_rustc_bootstrap.md) · [Compiler Infrastructure](47_compiler_infrastructure.md)
 
 ---
 
@@ -24,24 +24,24 @@
 
 ## 📑 目录
 
-- [rustc 编译器诊断与 UI Tests](#rustc-编译器诊断与-ui-tests)
-  - [📑 目录](#-目录)
-  - [一、诊断的组成部分](#一诊断的组成部分)
-  - [二、`Diag` 与诊断等级](#二diag-与诊断等级)
-  - [三、Span 与建议（Suggestions）](#三span-与建议suggestions)
-  - [四、Lint 与 Lint Pass](#四lint-与-lint-pass)
-    - [Lint 定义](#lint-定义)
-    - [Lint Pass](#lint-pass)
-  - [五、Error Codes 与 `--explain`](#五error-codes-与---explain)
-  - [六、UI Tests 与 `--bless`](#六ui-tests-与---bless)
-    - [UI Test 是什么](#ui-test-是什么)
-    - [`--bless`](#--bless)
-  - [嵌入式测验](#嵌入式测验)
-    - [测验 1：一条 rustc 诊断至少包含哪三个核心部分？](#测验-1一条-rustc-诊断至少包含哪三个核心部分)
-    - [测验 2：`Applicability::MachineApplicable` 表示什么？](#测验-2applicabilitymachineapplicable-表示什么)
-    - [测验 3：Late lint pass 相比 Early lint pass 的主要优势是什么？](#测验-3late-lint-pass-相比-early-lint-pass-的主要优势是什么)
-    - [测验 4：`--bless` 在 UI testing 中的作用是什么？](#测验-4--bless-在-ui-testing-中的作用是什么)
-  - [权威来源索引](#权威来源索引)
+- [rustc 编译器诊断与 UI Tests](.#rustc-编译器诊断与-ui-tests)
+  - [📑 目录](.#-目录)
+  - [一、诊断的组成部分](.#一诊断的组成部分)
+  - [二、`Diag` 与诊断等级](.#二diag-与诊断等级)
+  - [三、Span 与建议（Suggestions）](.#三span-与建议suggestions)
+  - [四、Lint 与 Lint Pass](.#四lint-与-lint-pass)
+    - [Lint 定义](.#lint-定义)
+    - [Lint Pass](.#lint-pass)
+  - [五、Error Codes 与 `--explain`](.#五error-codes-与---explain)
+  - [六、UI Tests 与 `--bless`](.#六ui-tests-与---bless)
+    - [UI Test 是什么](.#ui-test-是什么)
+    - [`--bless`](.#--bless)
+  - [嵌入式测验](.#嵌入式测验)
+    - [测验 1：一条 rustc 诊断至少包含哪三个核心部分？](.#测验-1一条-rustc-诊断至少包含哪三个核心部分)
+    - [测验 2：`Applicability::MachineApplicable` 表示什么？](.#测验-2applicabilitymachineapplicable-表示什么)
+    - [测验 3：Late lint pass 相比 Early lint pass 的主要优势是什么？](.#测验-3late-lint-pass-相比-early-lint-pass-的主要优势是什么)
+    - [测验 4：`--bless` 在 UI testing 中的作用是什么？](.#测验-4--bless-在-ui-testing-中的作用是什么)
+  - [权威来源索引](.#权威来源索引)
 
 ---
 

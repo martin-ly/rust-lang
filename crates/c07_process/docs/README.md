@@ -2,7 +2,7 @@
 
 > **文档定位**: C07进程管理模块主入口，提供快速开始指南、IPC通信机制介绍和完整的学习资源导航
 > **先修知识**: [C01 所有权](../../c01_ownership_borrow_scope/docs/README.md) | [C05 线程](../../c05_threads/docs/README.md)
-> **相关文档**: [主索引](./00_MASTER_INDEX.md) | [FAQ](./FAQ.md) | [Glossary](./Glossary.md)
+> **相关文档**: [主索引](00_MASTER_INDEX.md) | [FAQ](FAQ.md) | [Glossary](Glossary.md)
 
 **最后更新**: 2025-12-25
 **适用版本**: Rust 1.93.0+ (Edition 2024)
@@ -79,21 +79,21 @@ cargo bench
 
 **🎯 快速入门** (3-5天):
 
-1. [01_process_model_and_lifecycle](./01_process_model_and_lifecycle.md) - 进程基础
-2. [02_ipc_mechanisms](./02_ipc_mechanisms.md) - IPC通信
-3. [实践示例](./11_practical_examples/11_practical_examples.md) - 动手实践
+1. [01_process_model_and_lifecycle](01_process_model_and_lifecycle.md) - 进程基础
+2. [02_ipc_mechanisms](02_ipc_mechanisms.md) - IPC通信
+3. [实践示例](11_practical_examples/11_practical_examples.md) - 动手实践
 
 **📚 系统学习** (2-3周):
 
 1. 核心系列01-10 - 深入理解
-2. [跨平台指南](./10_cross_platform_guide.md) - 跨平台实现
-3. [性能优化](./07_performance_optimization.md) - 优化技巧
+2. [跨平台指南](10_cross_platform_guide.md) - 跨平台实现
+3. [性能优化](07_performance_optimization.md) - 优化技巧
 
 **🚀 专家进阶** (持续):
 
-1. [高级进程管理](./04_advanced_process_management.md)
-2. [安全和沙箱](./08_security_and_sandboxing.md)
-3. [异步进程管理](./05_async_process_management.md)
+1. [高级进程管理](04_advanced_process_management.md)
+2. [安全和沙箱](08_security_and_sandboxing.md)
+3. [异步进程管理](05_async_process_management.md)
 
 ---
 
@@ -233,18 +233,18 @@ let output = Command::new("app")
 
 ### 本模块资源
 
-- 📋 **[主索引](./00_MASTER_INDEX.md)** - 完整文档导航
-- ❓ **[FAQ](./FAQ.md)** - 5个核心问答
-- 📚 **[Glossary](./Glossary.md)** - 13个核心术语
-- 📖 **[核心系列01-10](./01_process_model_and_lifecycle.md)** - 系统学习
-- 🔬 **[实践系列11-18](./11_practical_examples/11_practical_examples.md)** - 实战指南
+- 📋 **[主索引](00_MASTER_INDEX.md)** - 完整文档导航
+- ❓ **[FAQ](FAQ.md)** - 5个核心问答
+- 📚 **[Glossary](Glossary.md)** - 13个核心术语
+- 📖 **[核心系列01-10](01_process_model_and_lifecycle.md)** - 系统学习
+- 🔬 **[实践系列11-18](11_practical_examples/11_practical_examples.md)** - 实战指南
 
 ### 代码资源
 
-- 📁 **[../src/](../src/)** - 模块源代码
-- 🎯 **[../src/bin/](../src/bin/)** - 可执行示例
-- 🧪 **[../tests/](../tests/)** - 测试用例
-- ⚡ **[../benches/](../benches/)** - 性能基准
+- 📁 **[../src/](../src)** - 模块源代码
+- 🎯 **[../src/bin/](../src/bin)** - 可执行示例
+- 🧪 **[../tests/](../tests)** - 测试用例
+- ⚡ **[../benches/](../benches)** - 性能基准
 
 ### 外部资源
 
@@ -336,23 +336,23 @@ winapi = "0.3"  # Windows API
 
 ### 按学习阶段
 
-- **第1天**: [01_process_model](./01_process_model_and_lifecycle.md) → [FAQ](./FAQ.md)
-- **第2-3天**: [02_ipc](./02_ipc_mechanisms.md) → [12_std_process](./11_practical_examples/12_std_process_deep_dive.md)
-- **第4-5天**: [实践示例](./11_practical_examples/11_practical_examples.md) → 运行所有bin示例
-- **第2周**: [跨平台](./10_cross_platform_guide.md) → [性能优化](./07_performance_optimization.md)
+- **第1天**: [01_process_model](01_process_model_and_lifecycle.md) → [FAQ](FAQ.md)
+- **第2-3天**: [02_ipc](02_ipc_mechanisms.md) → [12_std_process](11_practical_examples/12_std_process_deep_dive.md)
+- **第4-5天**: [实践示例](11_practical_examples/11_practical_examples.md) → 运行所有bin示例
+- **第2周**: [跨平台](10_cross_platform_guide.md) → [性能优化](07_performance_optimization.md)
 
 ### 按问题类型
 
-- **如何创建进程?** → [FAQ Q1](./FAQ.md#q1) | [01_process_model](./01_process_model_and_lifecycle.md)
-- **进程间通信?** → [FAQ Q2](./FAQ.md#q2) | [02_ipc](./02_ipc_mechanisms.md)
-- **跨平台实现?** → [FAQ Q3](./FAQ.md#q3) | [10_cross_platform](./10_cross_platform_guide.md)
-- **僵尸进程?** → [FAQ Q4](./FAQ.md#q4)
+- **如何创建进程?** → [FAQ Q1](FAQ.md#q1) | [01_process_model](01_process_model_and_lifecycle.md)
+- **进程间通信?** → [FAQ Q2](FAQ.md#q2) | [02_ipc](02_ipc_mechanisms.md)
+- **跨平台实现?** → [FAQ Q3](FAQ.md#q3) | [10_cross_platform](10_cross_platform_guide.md)
+- **僵尸进程?** → [FAQ Q4](FAQ.md#q4)
 
 ### 按IPC机制
 
-- **管道** → [02_ipc](./02_ipc_mechanisms.md)
-- **共享内存** → [13_ipc_advanced](./11_practical_examples/13_ipc_communication_advanced.md)
-- **Socket** → [02_ipc](./02_ipc_mechanisms.md)
+- **管道** → [02_ipc](02_ipc_mechanisms.md)
+- **共享内存** → [13_ipc_advanced](11_practical_examples/13_ipc_communication_advanced.md)
+- **Socket** → [02_ipc](02_ipc_mechanisms.md)
 
 ---
 
@@ -361,10 +361,10 @@ winapi = "0.3"  # Windows API
 准备好了吗？选择你的路径：
 
 1. **🚀 快速体验** → 运行上面的示例代码
-2. **📚 系统学习** → [01_process_model_and_lifecycle.md](./01_process_model_and_lifecycle.md)
-3. **🔍 查找文档** → [00_MASTER_INDEX.md](./00_MASTER_INDEX.md)
-4. **❓ 解决问题** → [FAQ.md](./FAQ.md)
-5. **💡 查询术语** → [Glossary.md](./Glossary.md)
+2. **📚 系统学习** → [01_process_model_and_lifecycle.md](01_process_model_and_lifecycle.md)
+3. **🔍 查找文档** → [00_MASTER_INDEX.md](00_MASTER_INDEX.md)
+4. **❓ 解决问题** → [FAQ.md](FAQ.md)
+5. **💡 查询术语** → [Glossary.md](Glossary.md)
 
 ---
 

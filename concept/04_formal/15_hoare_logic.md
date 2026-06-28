@@ -9,8 +9,8 @@
 >
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 系统讲解 **Hoare 逻辑（霍尔逻辑）**——从前置条件、后置条件、循环不变量的经典形式化，到最弱前置条件演算，揭示 Hoare 逻辑如何为 Rust 的 unsafe 代码契约、内部不变量和形式化验证工具提供理论基础。
-> **前置概念**: [Ownership Formalization](./03_ownership_formal.md) · [Verification Toolchain](./05_verification_toolchain.md)
-> **后置概念**: [Separation Logic](./11_separation_logic.md) · [RustBelt](./04_rustbelt.md)
+> **前置概念**: [Ownership Formalization](03_ownership_formal.md) · [Verification Toolchain](05_verification_toolchain.md)
+> **后置概念**: [Separation Logic](11_separation_logic.md) · [RustBelt](04_rustbelt.md)
 
 ---
 
@@ -26,42 +26,42 @@
 
 ## 📑 目录
 
-- [Hoare 逻辑：程序验证的形式化基础与 Rust 契约](#hoare-逻辑程序验证的形式化基础与-rust-契约)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 Hoare 三元组](#11-hoare-三元组)
-    - [1.2 最弱前置条件（Weakest Precondition）](#12-最弱前置条件weakest-precondition)
-    - [1.3 循环不变量](#13-循环不变量)
-  - [二、技术细节](#二技术细节)
-    - [2.1 Hoare 逻辑推理规则](#21-hoare-逻辑推理规则)
-    - [2.2 从 Hoare 逻辑到分离逻辑](#22-从-hoare-逻辑到分离逻辑)
-    - [2.3 Rust unsafe 契约的 Hoare 视角](#23-rust-unsafe-契约的-hoare-视角)
-  - [三、形式化方法矩阵](#三形式化方法矩阵)
-    - [3.1 验证工具的形式化基础](#31-验证工具的形式化基础)
-    - [3.2 规格表达能力的递进](#32-规格表达能力的递进)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、常见陷阱](#五常见陷阱)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：Hoare 逻辑的编译错误](#十边界测试hoare-逻辑的编译错误)
-    - [10.1 边界测试：前置条件与后置条件的类型编码（编译错误）](#101-边界测试前置条件与后置条件的类型编码编译错误)
-    - [10.2 边界测试：循环不变量的违反（逻辑错误）](#102-边界测试循环不变量的违反逻辑错误)
-    - [10.3 边界测试：霍尔逻辑的不变量与 Rust 的 `while let`（编译错误）](#103-边界测试霍尔逻辑的不变量与-rust-的-while-let编译错误)
-    - [10.4 边界测试： weakest precondition 与 `unsafe` 代码的规范缺口（编译错误/验证失败）](#104-边界测试-weakest-precondition-与-unsafe-代码的规范缺口编译错误验证失败)
-    - [10.5 边界测试：循环不变量的发现与人工介入（验证失败）](#105-边界测试循环不变量的发现与人工介入验证失败)
-    - [10.9 边界测试：生命周期参数的不匹配返回](#109-边界测试生命周期参数的不匹配返回)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：Hoare 三元组（理解层）](#测验-1hoare-三元组理解层)
-    - [测验 2：最弱前置条件（Weakest Precondition）（应用层）](#测验-2最弱前置条件weakest-precondition应用层)
-    - [测验 3：循环不变量（应用层）](#测验-3循环不变量应用层)
-    - [测验 4：Rust 类型系统对 Hoare 逻辑的编码（分析层）](#测验-4rust-类型系统对-hoare-逻辑的编码分析层)
-    - [测验 5：Hoare 逻辑的局限性与 Rust 扩展（评价层）](#测验-5hoare-逻辑的局限性与-rust-扩展评价层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Hoare 逻辑：程序验证的形式化基础与 Rust 契约](.#hoare-逻辑程序验证的形式化基础与-rust-契约)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 Hoare 三元组](.#11-hoare-三元组)
+    - [1.2 最弱前置条件（Weakest Precondition）](.#12-最弱前置条件weakest-precondition)
+    - [1.3 循环不变量](.#13-循环不变量)
+  - [二、技术细节](.#二技术细节)
+    - [2.1 Hoare 逻辑推理规则](.#21-hoare-逻辑推理规则)
+    - [2.2 从 Hoare 逻辑到分离逻辑](.#22-从-hoare-逻辑到分离逻辑)
+    - [2.3 Rust unsafe 契约的 Hoare 视角](.#23-rust-unsafe-契约的-hoare-视角)
+  - [三、形式化方法矩阵](.#三形式化方法矩阵)
+    - [3.1 验证工具的形式化基础](.#31-验证工具的形式化基础)
+    - [3.2 规格表达能力的递进](.#32-规格表达能力的递进)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、常见陷阱](.#五常见陷阱)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：Hoare 逻辑的编译错误](.#十边界测试hoare-逻辑的编译错误)
+    - [10.1 边界测试：前置条件与后置条件的类型编码（编译错误）](.#101-边界测试前置条件与后置条件的类型编码编译错误)
+    - [10.2 边界测试：循环不变量的违反（逻辑错误）](.#102-边界测试循环不变量的违反逻辑错误)
+    - [10.3 边界测试：霍尔逻辑的不变量与 Rust 的 `while let`（编译错误）](.#103-边界测试霍尔逻辑的不变量与-rust-的-while-let编译错误)
+    - [10.4 边界测试： weakest precondition 与 `unsafe` 代码的规范缺口（编译错误/验证失败）](.#104-边界测试-weakest-precondition-与-unsafe-代码的规范缺口编译错误验证失败)
+    - [10.5 边界测试：循环不变量的发现与人工介入（验证失败）](.#105-边界测试循环不变量的发现与人工介入验证失败)
+    - [10.9 边界测试：生命周期参数的不匹配返回](.#109-边界测试生命周期参数的不匹配返回)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：Hoare 三元组（理解层）](.#测验-1hoare-三元组理解层)
+    - [测验 2：最弱前置条件（Weakest Precondition）（应用层）](.#测验-2最弱前置条件weakest-precondition应用层)
+    - [测验 3：循环不变量（应用层）](.#测验-3循环不变量应用层)
+    - [测验 4：Rust 类型系统对 Hoare 逻辑的编码（分析层）](.#测验-4rust-类型系统对-hoare-逻辑的编码分析层)
+    - [测验 5：Hoare 逻辑的局限性与 Rust 扩展（评价层）](.#测验-5hoare-逻辑的局限性与-rust-扩展评价层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -369,7 +369,7 @@ Rust unsafe 代码的 Hoare 三元组视角:
 ```
 
 > **认知功能**: 形式化验证的**成本-精度权衡**——完全自动化但能力受限（类型系统），到表达能力无限但需人工证明（Coq），中间存在连续光谱，工具选择取决于安全关键程度和时间预算。
-> [来源: [Verification Toolchain Selection Guide](./05_verification_toolchain.md)]
+> [来源: [Verification Toolchain Selection Guide](05_verification_toolchain.md)]
 
 ---
 
@@ -538,11 +538,11 @@ graph TD
 
 ## 相关概念文件
 
-- [Ownership Formalization](./03_ownership_formal.md) — 所有权形式化理论
-- [Verification Toolchain](./05_verification_toolchain.md) — 验证工具链选型
-- [Separation Logic](./11_separation_logic.md) — 分离逻辑与 Rust 内存模型
-- [RustBelt](./04_rustbelt.md) — Rust 类型系统的 Iris 形式化证明
-- [Linear Logic](./01_linear_logic.md) — 线性逻辑基础
+- [Ownership Formalization](03_ownership_formal.md) — 所有权形式化理论
+- [Verification Toolchain](05_verification_toolchain.md) — 验证工具链选型
+- [Separation Logic](11_separation_logic.md) — 分离逻辑与 Rust 内存模型
+- [RustBelt](04_rustbelt.md) — Rust 类型系统的 Iris 形式化证明
+- [Linear Logic](01_linear_logic.md) — 线性逻辑基础
 
 ---
 

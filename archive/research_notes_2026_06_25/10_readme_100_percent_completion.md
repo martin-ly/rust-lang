@@ -16,43 +16,43 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Research Notes 100% 完成计划 - 总览与入口](#research-notes-100-完成计划---总览与入口)
-  - [📑 目录](#-目录)
-  - [快速导航](#快速导航)
-  - [项目总览](#项目总览)
-    - [当前完成度](#当前完成度)
-    - [核心缺口](#核心缺口)
-  - [已创建文档清单](#已创建文档清单)
-    - [计划文档](#计划文档)
-    - [现有核心文档（需完善）](#现有核心文档需完善)
-  - [实施路线图](#实施路线图)
-    - [Phase 1: 基础补全 (Week 1-8)](#phase-1-基础补全-week-1-8)
-    - [Phase 2: 深度证明 (Week 9-16)](#phase-2-深度证明-week-9-16)
-    - [Phase 3: 工具对接 (Week 17-24)](#phase-3-工具对接-week-17-24)
-  - [思维表征完善清单](#思维表征完善清单)
-    - [思维导图 (目标15个，当前8个)](#思维导图-目标15个当前8个)
-    - [多维矩阵 (目标12个，当前6个)](#多维矩阵-目标12个当前6个)
-    - [证明树 (目标10个，当前3个)](#证明树-目标10个当前3个)
-    - [决策树 (目标10个，当前5个)](#决策树-目标10个当前5个)
-    - [应用树 (目标8个，当前1个)](#应用树-目标8个当前1个)
-  - [验收标准](#验收标准)
-    - [100%完成标准](#100完成标准)
-  - [贡献指南](#贡献指南)
-    - [如何参与](#如何参与)
-    - [任务认领](#任务认领)
-  - [资源索引](#资源索引)
-    - [国际权威资源](#国际权威资源)
-    - [本体系核心文档](#本体系核心文档)
-  - [变更日志](#变更日志)
-  - [思维导图：100%完成全貌](#思维导图100完成全貌)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [Research Notes 100% 完成计划 - 总览与入口](.#research-notes-100-完成计划---总览与入口)
+  - [📑 目录](.#-目录)
+  - [快速导航](.#快速导航)
+  - [项目总览](.#项目总览)
+    - [当前完成度](.#当前完成度)
+    - [核心缺口](.#核心缺口)
+  - [已创建文档清单](.#已创建文档清单)
+    - [计划文档](.#计划文档)
+    - [现有核心文档（需完善）](.#现有核心文档需完善)
+  - [实施路线图](.#实施路线图)
+    - [Phase 1: 基础补全 (Week 1-8)](.#phase-1-基础补全-week-1-8)
+    - [Phase 2: 深度证明 (Week 9-16)](.#phase-2-深度证明-week-9-16)
+    - [Phase 3: 工具对接 (Week 17-24)](.#phase-3-工具对接-week-17-24)
+  - [思维表征完善清单](.#思维表征完善清单)
+    - [思维导图 (目标15个，当前8个)](.#思维导图-目标15个当前8个)
+    - [多维矩阵 (目标12个，当前6个)](.#多维矩阵-目标12个当前6个)
+    - [证明树 (目标10个，当前3个)](.#证明树-目标10个当前3个)
+    - [决策树 (目标10个，当前5个)](.#决策树-目标10个当前5个)
+    - [应用树 (目标8个，当前1个)](.#应用树-目标8个当前1个)
+  - [验收标准](.#验收标准)
+    - [100%完成标准](.#100完成标准)
+  - [贡献指南](.#贡献指南)
+    - [如何参与](.#如何参与)
+    - [任务认领](.#任务认领)
+  - [资源索引](.#资源索引)
+    - [国际权威资源](.#国际权威资源)
+    - [本体系核心文档](.#本体系核心文档)
+  - [变更日志](.#变更日志)
+  - [思维导图：100%完成全貌](.#思维导图100完成全貌)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 快速导航
 >
@@ -61,11 +61,11 @@
 | 目标 | 入口文档 |
 | :--- | :--- |
 | **全面梳理与计划总览** | 本文档 |
-| **详细100%完成计划** | [COMPREHENSIVE_SYSTEMATIC_REVIEW_AND_100_PERCENT_PLAN](./10_comprehensive_systematic_review_and_100_percent_plan.md) |
+| **详细100%完成计划** | [COMPREHENSIVE_SYSTEMATIC_REVIEW_AND_100_PERCENT_PLAN](10_comprehensive_systematic_review_and_100_percent_plan.md) |
 | **思维表征完善计划** | MIND_REPRESENTATION_COMPLETION_PLAN |
-| **L3机器证明实施指南** | [L3_MACHINE_PROOF_GUIDE](./10_l3_machine_proof_guide.md) |
-| **核心定理完整证明** | [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) |
-| **论证缺口索引** | [ARGUMENTATION_GAP_INDEX](./10_argumentation_gap_index.md) |
+| **L3机器证明实施指南** | [L3_MACHINE_PROOF_GUIDE](10_l3_machine_proof_guide.md) |
+| **核心定理完整证明** | [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) |
+| **论证缺口索引** | [ARGUMENTATION_GAP_INDEX](10_argumentation_gap_index.md) |
 
 ---
 
@@ -337,10 +337,10 @@ Week 21-24: 国际对标
 
 | 文档 | 用途 |
 | :--- | :--- |
-| [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md) | 顶层框架 |
-| [UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md) | 统一索引 |
-| [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) | 核心定理L2证明 |
-| [PROOF_INDEX](./10_proof_index.md) | 证明索引 |
+| [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](10_theoretical_and_argumentation_system_architecture.md) | 顶层框架 |
+| [UNIFIED_SYSTEMATIC_FRAMEWORK](10_unified_systematic_framework.md) | 统一索引 |
+| [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) | 核心定理L2证明 |
+| [PROOF_INDEX](10_proof_index.md) | 证明索引 |
 
 ---
 
@@ -437,7 +437,7 @@ Week 21-24: 国际对标
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

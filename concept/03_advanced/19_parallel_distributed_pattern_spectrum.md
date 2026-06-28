@@ -9,9 +9,9 @@
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×Ana — 分析并行与分布式模式的演进谱系与统一框架
 > **前置概念**:
-> [Concurrency](./01_concurrency.md) ·
-> [Async](./02_async.md) ·
-> [Lock-free](../03_advanced/16_lock_free.md) ·
+> [Concurrency](01_concurrency.md) ·
+> [Async](02_async.md) ·
+> [Lock-free](16_lock_free.md) ·
 > [Distributed Systems](../06_ecosystem/18_distributed_systems.md)
 > **后置概念**:
 > [Pattern Composition Algebra](../06_ecosystem/35_pattern_composition_algebra.md) ·
@@ -27,60 +27,60 @@
 
 > **Bloom 层级**: 分析 → 评价 → 创造
 
-> **对应 Crate**: [`c05_threads`](../../crates/c05_threads/)
-> **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency/)
+> **对应 Crate**: [`c05_threads`](../../crates/c05_threads)
+> **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency)
 
 ## 📑 目录
 
-- [并行与分布式模式谱系：从线程池到共识算法](#并行与分布式模式谱系从线程池到共识算法)
-  - [📑 目录](#-目录)
-  - [一、核心命题](#一核心命题)
-  - [二、并行/分布式模式的统一谱系](#二并行分布式模式的统一谱系)
-    - [2.1 谱系总览](#21-谱系总览)
-    - [2.2 统一分析框架](#22-统一分析框架)
-  - [三、L1 单机共享内存模式](#三l1-单机共享内存模式)
-    - [3.1 线程池模式](#31-线程池模式)
-    - [3.2 Fork-Join 模式](#32-fork-join-模式)
-    - [3.3 无锁数据结构](#33-无锁数据结构)
-  - [四、L2 单机消息传递模式](#四l2-单机消息传递模式)
-    - [4.1 Actor 模型](#41-actor-模型)
-    - [4.2 CSP（Communicating Sequential Processes）](#42-cspcommunicating-sequential-processes)
-    - [4.3 数据流与背压（Backpressure）](#43-数据流与背压backpressure)
-  - [五、L3 多机分布式模式](#五l3-多机分布式模式)
-    - [5.1 共识算法：Raft](#51-共识算法raft)
-    - [5.2 Gossip 协议](#52-gossip-协议)
-    - [5.3 CRDT（Conflict-free Replicated Data Types）](#53-crdtconflict-free-replicated-data-types)
-  - [六、模式谱系的统一理论视角](#六模式谱系的统一理论视角)
-    - [6.1 从并发到分布式的统一连续体](#61-从并发到分布式的统一连续体)
-    - [6.2 一致性谱系](#62-一致性谱系)
-  - [七、Rust 生态的并发/分布式工具谱系](#七rust-生态的并发分布式工具谱系)
-  - [八、反例与边界测试](#八反例与边界测试)
-    - [8.1 反例：在 Actor 中使用共享可变状态](#81-反例在-actor-中使用共享可变状态)
-    - [8.2 边界测试：`!Send` 类型跨线程（编译错误）](#82-边界测试send-类型跨线程编译错误)
-    - [8.3 边界测试：Raft 在网络分区下的行为](#83-边界测试raft-在网络分区下的行为)
-    - [8.3 边界测试：CRDT 的合并顺序独立性](#83-边界测试crdt-的合并顺序独立性)
-  - [九、知识来源关系](#九知识来源关系)
-  - [十、边界测试：并行与分布式模式的编译错误](#十边界测试并行与分布式模式的编译错误)
-    - [10.1 边界测试：`rayon::join` 闭包返回值生命周期（编译错误）](#101-边界测试rayonjoin-闭包返回值生命周期编译错误)
-    - [10.2 边界测试：分布式 Actor 的消息类型未实现 `Serialize`（编译错误）](#102-边界测试分布式-actor-的消息类型未实现-serialize编译错误)
-    - [10.3 边界测试：`rayon` 的线程池饥饿与任务粒度（运行时性能下降）](#103-边界测试rayon-的线程池饥饿与任务粒度运行时性能下降)
-    - [10.4 边界测试：rayon 的并行迭代与顺序依赖（运行时逻辑错误）](#104-边界测试rayon-的并行迭代与顺序依赖运行时逻辑错误)
-    - [10.8 边界测试：生命周期参数的不匹配返回](#108-边界测试生命周期参数的不匹配返回)
-  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
-  - [参考来源](#参考来源)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：`std::thread::spawn` 与 `tokio::spawn` 创建的"任务"有什么本质区别？（理解层）](#测验-1stdthreadspawn-与-tokiospawn-创建的任务有什么本质区别理解层)
-    - [测验 2：Rayon 的 `par_iter()` 与标准库的 `iter()` 在 API 使用上有什么区别？（理解层）](#测验-2rayon-的-par_iter-与标准库的-iter-在-api-使用上有什么区别理解层)
-    - [测验 3：Actor 模型在 Rust 中的典型实现方式是什么？（理解层）](#测验-3actor-模型在-rust-中的典型实现方式是什么理解层)
-    - [测验 4：分布式系统中，Rust 的 Serde + 强类型系统在消息序列化上有什么优势？（理解层）](#测验-4分布式系统中rust-的-serde--强类型系统在消息序列化上有什么优势理解层)
-    - [测验 5：`crossbeam::channel` 与 `std::sync::mpsc` 的主要改进是什么？（理解层）](#测验-5crossbeamchannel-与-stdsyncmpsc-的主要改进是什么理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
-  - [实践](#实践)
-    - [对应代码示例](#对应代码示例)
-    - [建议练习](#建议练习)
-  - [导航：下一步去哪？](#导航下一步去哪)
+- [并行与分布式模式谱系：从线程池到共识算法](.#并行与分布式模式谱系从线程池到共识算法)
+  - [📑 目录](.#-目录)
+  - [一、核心命题](.#一核心命题)
+  - [二、并行/分布式模式的统一谱系](.#二并行分布式模式的统一谱系)
+    - [2.1 谱系总览](.#21-谱系总览)
+    - [2.2 统一分析框架](.#22-统一分析框架)
+  - [三、L1 单机共享内存模式](.#三l1-单机共享内存模式)
+    - [3.1 线程池模式](.#31-线程池模式)
+    - [3.2 Fork-Join 模式](.#32-fork-join-模式)
+    - [3.3 无锁数据结构](.#33-无锁数据结构)
+  - [四、L2 单机消息传递模式](.#四l2-单机消息传递模式)
+    - [4.1 Actor 模型](.#41-actor-模型)
+    - [4.2 CSP（Communicating Sequential Processes）](.#42-cspcommunicating-sequential-processes)
+    - [4.3 数据流与背压（Backpressure）](.#43-数据流与背压backpressure)
+  - [五、L3 多机分布式模式](.#五l3-多机分布式模式)
+    - [5.1 共识算法：Raft](.#51-共识算法raft)
+    - [5.2 Gossip 协议](.#52-gossip-协议)
+    - [5.3 CRDT（Conflict-free Replicated Data Types）](.#53-crdtconflict-free-replicated-data-types)
+  - [六、模式谱系的统一理论视角](.#六模式谱系的统一理论视角)
+    - [6.1 从并发到分布式的统一连续体](.#61-从并发到分布式的统一连续体)
+    - [6.2 一致性谱系](.#62-一致性谱系)
+  - [七、Rust 生态的并发/分布式工具谱系](.#七rust-生态的并发分布式工具谱系)
+  - [八、反例与边界测试](.#八反例与边界测试)
+    - [8.1 反例：在 Actor 中使用共享可变状态](.#81-反例在-actor-中使用共享可变状态)
+    - [8.2 边界测试：`!Send` 类型跨线程（编译错误）](.#82-边界测试send-类型跨线程编译错误)
+    - [8.3 边界测试：Raft 在网络分区下的行为](.#83-边界测试raft-在网络分区下的行为)
+    - [8.3 边界测试：CRDT 的合并顺序独立性](.#83-边界测试crdt-的合并顺序独立性)
+  - [九、知识来源关系](.#九知识来源关系)
+  - [十、边界测试：并行与分布式模式的编译错误](.#十边界测试并行与分布式模式的编译错误)
+    - [10.1 边界测试：`rayon::join` 闭包返回值生命周期（编译错误）](.#101-边界测试rayonjoin-闭包返回值生命周期编译错误)
+    - [10.2 边界测试：分布式 Actor 的消息类型未实现 `Serialize`（编译错误）](.#102-边界测试分布式-actor-的消息类型未实现-serialize编译错误)
+    - [10.3 边界测试：`rayon` 的线程池饥饿与任务粒度（运行时性能下降）](.#103-边界测试rayon-的线程池饥饿与任务粒度运行时性能下降)
+    - [10.4 边界测试：rayon 的并行迭代与顺序依赖（运行时逻辑错误）](.#104-边界测试rayon-的并行迭代与顺序依赖运行时逻辑错误)
+    - [10.8 边界测试：生命周期参数的不匹配返回](.#108-边界测试生命周期参数的不匹配返回)
+  - [逆向推理链（Backward Reasoning）](.#逆向推理链backward-reasoning)
+  - [参考来源](.#参考来源)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：`std::thread::spawn` 与 `tokio::spawn` 创建的"任务"有什么本质区别？（理解层）](.#测验-1stdthreadspawn-与-tokiospawn-创建的任务有什么本质区别理解层)
+    - [测验 2：Rayon 的 `par_iter()` 与标准库的 `iter()` 在 API 使用上有什么区别？（理解层）](.#测验-2rayon-的-par_iter-与标准库的-iter-在-api-使用上有什么区别理解层)
+    - [测验 3：Actor 模型在 Rust 中的典型实现方式是什么？（理解层）](.#测验-3actor-模型在-rust-中的典型实现方式是什么理解层)
+    - [测验 4：分布式系统中，Rust 的 Serde + 强类型系统在消息序列化上有什么优势？（理解层）](.#测验-4分布式系统中rust-的-serde--强类型系统在消息序列化上有什么优势理解层)
+    - [测验 5：`crossbeam::channel` 与 `std::sync::mpsc` 的主要改进是什么？（理解层）](.#测验-5crossbeamchannel-与-stdsyncmpsc-的主要改进是什么理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
+  - [实践](.#实践)
+    - [对应代码示例](.#对应代码示例)
+    - [建议练习](.#建议练习)
+  - [导航：下一步去哪？](.#导航下一步去哪)
 
 ## 一、核心命题
 
@@ -891,7 +891,7 @@ API 几乎相同（得益于相同的 `Iterator`/`ParallelIterator` 接口），
 
 | 选择 | 条件 | 目标 |
 |:---|:---|:---|
-| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate/) 或 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) |
-| 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
+| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate) 或 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) |
+| 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../06_ecosystem/README.md) |

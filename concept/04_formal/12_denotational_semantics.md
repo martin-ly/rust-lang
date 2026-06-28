@@ -9,8 +9,8 @@
 >
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 探讨 Rust 的**指称语义**（Denotational Semantics）基础——从 Scott-Strachey 方法到完备偏序（CPO）、不动点理论，分析 Rust 类型如何通过数学对象赋予意义。
-> **前置概念**: [Type Theory](./02_type_theory.md) · [Operational Semantics](./17_operational_semantics.md) · [Linear Logic](./01_linear_logic.md)
-> **后置概念**: [Category Theory](./10_category_theory.md) · [RustBelt](./04_rustbelt.md)
+> **前置概念**: [Type Theory](02_type_theory.md) · [Operational Semantics](17_operational_semantics.md) · [Linear Logic](01_linear_logic.md)
+> **后置概念**: [Category Theory](10_category_theory.md) · [RustBelt](04_rustbelt.md)
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
@@ -31,43 +31,43 @@
 >
 > 本文档包含大量形式化符号（⊗, ⊸, λ, ∀, ∃ 等）和纯数学推导，属于 **[研究者级]** 内容。
 > **99.9% 的 Rust 开发者不需要理解这些内容即可编写生产级代码。**
-> 如果你只想学习 Rust 工程实践，请直接跳过本文，前往 [L5 生态层](../06_ecosystem/) 或 [L3 高级层](../03_advanced/)。
+> 如果你只想学习 Rust 工程实践，请直接跳过本文，前往 [L5 生态层](../06_ecosystem) 或 [L3 高级层](../03_advanced)。
 > 本文的数学内容仅服务于：PL 研究者、编译器开发者、形式化验证工程师。
 
 ## 📑 目录
 
-- [指称语义与领域理论](#指称语义与领域理论)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 指称语义原理](#11-指称语义原理)
-    - [1.2 完备偏序（CPO）](#12-完备偏序cpo)
-    - [1.3 不动点定理](#13-不动点定理)
-  - [二、Rust 的指称解释](#二rust-的指称解释)
-    - [2.1 类型即域](#21-类型即域)
-  - [十、边界测试：指称语义的编译错误](#十边界测试指称语义的编译错误)
-    - [10.1 边界测试：非终止计算与 `loop {}` 的类型（编译错误）](#101-边界测试非终止计算与-loop--的类型编译错误)
-    - [10.2 边界测试：`panic!` 的指称与 `Result` 的指称分离（编译错误）](#102-边界测试panic-的指称与-result-的指称分离编译错误)
-    - [2.2 所有权即线性性](#22-所有权即线性性)
-    - [2.3 生命周期即区域](#23-生命周期即区域)
-  - [三、反命题与边界分析](#三反命题与边界分析)
-    - [3.1 反命题树](#31-反命题树)
-    - [3.2 边界极限](#32-边界极限)
-  - [四、常见陷阱](#四常见陷阱)
-  - [五、来源与延伸阅读](#五来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-    - [10.3 边界测试：发散函数（`!`）的指称语义（编译错误）](#103-边界测试发散函数的指称语义编译错误)
-    - [10.4 边界测试：`unsafe` 代码的语义鸿沟（运行时 UB）](#104-边界测试unsafe-代码的语义鸿沟运行时-ub)
-    - [10.3 边界测试：不动点语义与递归类型的无限展开（编译错误）](#103-边界测试不动点语义与递归类型的无限展开编译错误)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：指称语义（Denotational Semantics）的核心思想是什么？与操作语义有什么区别？（理解层）](#测验-1指称语义denotational-semantics的核心思想是什么与操作语义有什么区别理解层)
-    - [测验 2：什么是"域"（Domain）？为什么需要引入 ⊥（bottom）元素？（理解层）](#测验-2什么是域domain为什么需要引入-bottom元素理解层)
-    - [测验 3：Rust 的严格求值（strict/eager evaluation）在指称语义中如何体现？（理解层）](#测验-3rust-的严格求值stricteager-evaluation在指称语义中如何体现理解层)
-    - [测验 4：不动点定理（Knaster-Tarski）在递归函数语义中起什么作用？（理解层）](#测验-4不动点定理knaster-tarski在递归函数语义中起什么作用理解层)
-    - [测验 5：为什么 Rust 不允许直接递归类型（如 `struct List { head: i32, tail: List }`）？这与指称语义中的域有什么关系？（理解层）](#测验-5为什么-rust-不允许直接递归类型如-struct-list--head-i32-tail-list-这与指称语义中的域有什么关系理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [指称语义与领域理论](.#指称语义与领域理论)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 指称语义原理](.#11-指称语义原理)
+    - [1.2 完备偏序（CPO）](.#12-完备偏序cpo)
+    - [1.3 不动点定理](.#13-不动点定理)
+  - [二、Rust 的指称解释](.#二rust-的指称解释)
+    - [2.1 类型即域](.#21-类型即域)
+  - [十、边界测试：指称语义的编译错误](.#十边界测试指称语义的编译错误)
+    - [10.1 边界测试：非终止计算与 `loop {}` 的类型（编译错误）](.#101-边界测试非终止计算与-loop--的类型编译错误)
+    - [10.2 边界测试：`panic!` 的指称与 `Result` 的指称分离（编译错误）](.#102-边界测试panic-的指称与-result-的指称分离编译错误)
+    - [2.2 所有权即线性性](.#22-所有权即线性性)
+    - [2.3 生命周期即区域](.#23-生命周期即区域)
+  - [三、反命题与边界分析](.#三反命题与边界分析)
+    - [3.1 反命题树](.#31-反命题树)
+    - [3.2 边界极限](.#32-边界极限)
+  - [四、常见陷阱](.#四常见陷阱)
+  - [五、来源与延伸阅读](.#五来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [权威来源索引](.#权威来源索引)
+    - [10.3 边界测试：发散函数（`!`）的指称语义（编译错误）](.#103-边界测试发散函数的指称语义编译错误)
+    - [10.4 边界测试：`unsafe` 代码的语义鸿沟（运行时 UB）](.#104-边界测试unsafe-代码的语义鸿沟运行时-ub)
+    - [10.3 边界测试：不动点语义与递归类型的无限展开（编译错误）](.#103-边界测试不动点语义与递归类型的无限展开编译错误)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：指称语义（Denotational Semantics）的核心思想是什么？与操作语义有什么区别？（理解层）](.#测验-1指称语义denotational-semantics的核心思想是什么与操作语义有什么区别理解层)
+    - [测验 2：什么是"域"（Domain）？为什么需要引入 ⊥（bottom）元素？（理解层）](.#测验-2什么是域domain为什么需要引入-bottom元素理解层)
+    - [测验 3：Rust 的严格求值（strict/eager evaluation）在指称语义中如何体现？（理解层）](.#测验-3rust-的严格求值stricteager-evaluation在指称语义中如何体现理解层)
+    - [测验 4：不动点定理（Knaster-Tarski）在递归函数语义中起什么作用？（理解层）](.#测验-4不动点定理knaster-tarski在递归函数语义中起什么作用理解层)
+    - [测验 5：为什么 Rust 不允许直接递归类型（如 `struct List { head: i32, tail: List }`）？这与指称语义中的域有什么关系？（理解层）](.#测验-5为什么-rust-不允许直接递归类型如-struct-list--head-i32-tail-list-这与指称语义中的域有什么关系理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -451,11 +451,11 @@ fn main() {
 
 ## 相关概念文件
 
-- [Type Theory](./02_type_theory.md) — 类型论
-- [Operational Semantics](./17_operational_semantics.md) — 操作语义
-- [Linear Logic](./01_linear_logic.md) — 线性逻辑
-- [Category Theory](./10_category_theory.md) — 范畴论
-- [RustBelt](./04_rustbelt.md) — RustBelt
+- [Type Theory](02_type_theory.md) — 类型论
+- [Operational Semantics](17_operational_semantics.md) — 操作语义
+- [Linear Logic](01_linear_logic.md) — 线性逻辑
+- [Category Theory](10_category_theory.md) — 范畴论
+- [RustBelt](04_rustbelt.md) — RustBelt
 
 ---
 

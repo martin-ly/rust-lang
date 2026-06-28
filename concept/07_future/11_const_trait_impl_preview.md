@@ -14,7 +14,7 @@
 > Yoshua Wuyts（Rust Effects Initiative 核心维护者）在 2026 年的设计提案中已明确将 `~const` 视为过渡方案，未来可能被 `eff`/`with` 统一效果语法取代。
 > 但 `const` 作为**效果语义**（编译期可求值）将持续演进。
 > [来源: [Yoshua Wuyts — "An Effect Notation Based on With-Clauses and Blocks" (2026-03)](https://blog.yoshuawuyts.com/a-with-based-effect-notation/)] ·
-> [来源: [Rust Effects System 预研](./04_effects_system.md)]
+> [来源: [Rust Effects System 预研](04_effects_system.md)]
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
@@ -23,7 +23,7 @@
 > **双维定位**: C×Ana — 分析 Const Trait Impl 预览特性
 > **定位**: 探讨 Rust 在**常量上下文**（`const fn`）中支持 Trait 调用的演进，分析其对泛型（Generics）编程、`const fn` 表达能力以及编译期计算的影响。
 > **前置概念**: [Generics](../02_intermediate/02_generics.md) · [Traits](../02_intermediate/01_traits.md) · [Type System](../01_foundation/04_type_system.md)
-> **后置概念**: [Evolution](./03_evolution.md)
+> **后置概念**: [Evolution](03_evolution.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -37,41 +37,41 @@
 
 ## 📑 目录
 
-- [Const Trait Impl 预研：常量上下文中的 Trait 泛化](#const-trait-impl-预研常量上下文中的-trait-泛化)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 问题：常量上下文中的 Trait 鸿沟](#11-问题常量上下文中的-trait-鸿沟)
-    - [1.2 `const impl` 方案概览](#12-const-impl-方案概览)
-    - [1.3 `~const` 限定与效果系统](#13-const-限定与效果系统)
-  - [二、技术细节](#二技术细节)
-    - [2.1 常量 Trait 的约束继承](#21-常量-trait-的约束继承)
-    - [2.2 与现有 Const 特性的交互](#22-与现有-const-特性的交互)
-    - [2.3 编译器实现挑战](#23-编译器实现挑战)
-  - [三、使用模式](#三使用模式)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、演进路线](#五演进路线)
-    - [5.1 当前路线图（基于 `~const` 语法）](#51-当前路线图基于-const-语法)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：const trait impl 的编译错误](#十边界测试const-trait-impl-的编译错误)
-    - [10.1 边界测试：const 上下文中调用非 const 方法（编译错误）](#101-边界测试const-上下文中调用非-const-方法编译错误)
-    - [10.2 边界测试：trait bound 的 const 兼容性（编译错误）](#102-边界测试trait-bound-的-const-兼容性编译错误)
-    - [10.6 边界测试：`~const` bound 与默认实现的交互（编译错误）](#106-边界测试const-bound-与默认实现的交互编译错误)
-    - [10.5 边界测试：const trait 的默认实现与泛型约束（编译错误）](#105-边界测试const-trait-的默认实现与泛型约束编译错误)
-    - [10.3 边界测试：`~const` 边界的语法演进与兼容性（编译错误）](#103-边界测试const-边界的语法演进与兼容性编译错误)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：`const trait` 与 `const fn` 有什么区别？（理解层）](#测验-1const-trait-与-const-fn-有什么区别理解层)
-    - [测验 2：为什么 `Vec::new()` 在 Rust 1.96 中还不是 `const fn`？（理解层）](#测验-2为什么-vecnew-在-rust-196-中还不是-const-fn理解层)
-    - [测验 3：`~const Trait` 语法是什么意思？（理解层）](#测验-3const-trait-语法是什么意思理解层)
-    - [测验 4：`const trait` 对嵌入式开发有什么意义？（理解层）](#测验-4const-trait-对嵌入式开发有什么意义理解层)
-    - [测验 5：`const trait` 的实现目前有什么限制？（理解层）](#测验-5const-trait-的实现目前有什么限制理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Const Trait Impl 预研：常量上下文中的 Trait 泛化](.#const-trait-impl-预研常量上下文中的-trait-泛化)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 问题：常量上下文中的 Trait 鸿沟](.#11-问题常量上下文中的-trait-鸿沟)
+    - [1.2 `const impl` 方案概览](.#12-const-impl-方案概览)
+    - [1.3 `~const` 限定与效果系统](.#13-const-限定与效果系统)
+  - [二、技术细节](.#二技术细节)
+    - [2.1 常量 Trait 的约束继承](.#21-常量-trait-的约束继承)
+    - [2.2 与现有 Const 特性的交互](.#22-与现有-const-特性的交互)
+    - [2.3 编译器实现挑战](.#23-编译器实现挑战)
+  - [三、使用模式](.#三使用模式)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、演进路线](.#五演进路线)
+    - [5.1 当前路线图（基于 `~const` 语法）](.#51-当前路线图基于-const-语法)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：const trait impl 的编译错误](.#十边界测试const-trait-impl-的编译错误)
+    - [10.1 边界测试：const 上下文中调用非 const 方法（编译错误）](.#101-边界测试const-上下文中调用非-const-方法编译错误)
+    - [10.2 边界测试：trait bound 的 const 兼容性（编译错误）](.#102-边界测试trait-bound-的-const-兼容性编译错误)
+    - [10.6 边界测试：`~const` bound 与默认实现的交互（编译错误）](.#106-边界测试const-bound-与默认实现的交互编译错误)
+    - [10.5 边界测试：const trait 的默认实现与泛型约束（编译错误）](.#105-边界测试const-trait-的默认实现与泛型约束编译错误)
+    - [10.3 边界测试：`~const` 边界的语法演进与兼容性（编译错误）](.#103-边界测试const-边界的语法演进与兼容性编译错误)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：`const trait` 与 `const fn` 有什么区别？（理解层）](.#测验-1const-trait-与-const-fn-有什么区别理解层)
+    - [测验 2：为什么 `Vec::new()` 在 Rust 1.96 中还不是 `const fn`？（理解层）](.#测验-2为什么-vecnew-在-rust-196-中还不是-const-fn理解层)
+    - [测验 3：`~const Trait` 语法是什么意思？（理解层）](.#测验-3const-trait-语法是什么意思理解层)
+    - [测验 4：`const trait` 对嵌入式开发有什么意义？（理解层）](.#测验-4const-trait-对嵌入式开发有什么意义理解层)
+    - [测验 5：`const trait` 的实现目前有什么限制？（理解层）](.#测验-5const-trait-的实现目前有什么限制理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -155,7 +155,7 @@ graph TD
 ```
 
 > **效果系统视角**: `~const` 是 Rust 向**显式效果追踪**迈出的第一步。未来可能扩展为 `~async`、`~unsafe` 等更通用的效果限定。
-> [来源: [Effects System Preview](./04_effects_system.md)]
+> [来源: [Effects System Preview](04_effects_system.md)]
 
 ---
 
@@ -197,7 +197,7 @@ graph TD
 | `const_trait_impl` | 🟡 nightly | 本 RFC 核心，允许 `const impl Trait for Type` |
 
 > **协同效应**: Const Trait Impl 与 Const Generics 共同构成 Rust 的**编译期编程**能力矩阵。Const Generics 提供值级抽象，Const Trait 提供类型级抽象。
-> [来源: [Rust Version Tracking](./05_rust_version_tracking.md)]
+> [来源: [Rust Version Tracking](05_rust_version_tracking.md)]
 
 ---
 
@@ -337,7 +337,7 @@ graph TD
 | [Tracking Issue #67792](https://github.com/rust-lang/rust/issues/67792) | ✅ 一级 | 实现跟踪 |
 | [Rust Reference — Const Eval](https://doc.rust-lang.org/reference/const_eval.html) | ✅ 一级 | 常量求值规则 |
 | [Const Eval Working Group](https://github.com/rust-lang/const-eval) | ✅ 一级 | 工作组文档 |
-| [Effects System Preview](./04_effects_system.md) | ✅ 一级 | 效果系统关联概念 |
+| [Effects System Preview](04_effects_system.md) | ✅ 一级 | 效果系统关联概念 |
 | [Rust Internals Forum](https://internals.rust-lang.org/) | ⚠️ 二级 | 设计讨论 |
 
 ---
@@ -347,9 +347,9 @@ graph TD
 - [Generics](../02_intermediate/02_generics.md) — 泛型与参数多态
 - [Traits](../02_intermediate/01_traits.md) — Trait 系统与接口抽象
 - [Type System](../01_foundation/04_type_system.md) — Rust 类型系统（Type System）基础
-- [Evolution](./03_evolution.md) — 语言演进机制
-- [Effects System](./04_effects_system.md) — 效果系统预研
-- [Version Tracking](./05_rust_version_tracking.md) — Rust 版本特性演进
+- [Evolution](03_evolution.md) — 语言演进机制
+- [Effects System](04_effects_system.md) — 效果系统预研
+- [Version Tracking](05_rust_version_tracking.md) — Rust 版本特性演进
 
 ---
 

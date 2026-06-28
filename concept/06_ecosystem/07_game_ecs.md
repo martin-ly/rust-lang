@@ -22,8 +22,8 @@
 >
 > **后置概念**:
 >
-> [Application Domains](./04_application_domains.md) ·
-> [Formal Ecosystem Tower](./05_formal_ecosystem_tower.md)
+> [Application Domains](04_application_domains.md) ·
+> [Formal Ecosystem Tower](05_formal_ecosystem_tower.md)
 > **主要来源**:
 >
 > [Bevy Book] · [Bevy ECS Docs] · [Fyrox Docs] · [wgpu Documentation] ·
@@ -1164,8 +1164,8 @@ struct ChildOf {
 | 并发 | [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) | `Send`/`Sync` 在多线程循环中的保证 |
 | Unsafe | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | SIMD / GPU 底层边界 |
 | 线性逻辑 | [`../04_formal/01_linear_logic.md`](../04_formal/01_linear_logic.md) | 消耗性资源的形式化对应 |
-| 核心库谱系 | [`./03_core_crates.md`](./03_core_crates.md) | `bevy`、`wgpu`、`rapier` 等 crate |
-| 应用领域 | [`./04_application_domains.md`](./04_application_domains.md) | 游戏作为 L6 应用域 |
+| 核心库谱系 | [`./03_core_crates.md`](03_core_crates.md) | `bevy`、`wgpu`、`rapier` 等 crate |
+| 应用领域 | [`./04_application_domains.md`](04_application_domains.md) | 游戏作为 L6 应用域 |
 
 > **[来源: Bevy Book; Bevy ECS Docs; Fyrox Docs; wgpu Documentation; Data-Oriented Design Book]** 游戏开发分析基于官方引擎文档和 DOD 研究。✅
 

@@ -8,7 +8,7 @@
 > **Summary**: Async Advanced: advanced Rust topics, performance/runtime considerations, and ecosystem patterns.
 > **受众**: [专家]
 > **层次定位**: L3 高级概念 / 异步（Async）子域 — 高级主题
-> **前置依赖**: [Async/Await 基础](./02_async.md)
+> **前置依赖**: [Async/Await 基础](02_async.md)
 > **定理链编号**: T-053 Waker 活性 ⟹ T-054 Stream 安全性
 >
 > **来源**: [Async Book](https://rust-lang.github.io/async-book/) · [TRPL — Async/Await](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html)
@@ -16,43 +16,43 @@
 ---
 
 > **后置概念**: [Formal Verification](../04_formal/03_ownership_formal.md)
-> **对应 Crate**: [`c06_async`](../../crates/c06_async/)
-> **对应练习**: [`exercises/src/async_programming/`](../../exercises/src/async_programming/)
+> **对应 Crate**: [`c06_async`](../../crates/c06_async)
+> **对应练习**: [`exercises/src/async_programming/`](../../exercises/src/async_programming)
 
 ## 📑 目录
 
-- [Async/Await 高级主题](#asyncawait-高级主题)
-  - [📑 目录](#-目录)
-    - [8.8 Waker 契约与活性](#88-waker-契约与活性)
-    - [8.9 Waker/Context 的底层机制](#89-wakercontext-的底层机制)
-    - [8.10 `Stream` / `Sink` trait 完整分析](#810-stream--sink-trait-完整分析)
-    - [8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异](#811-pinboxdyn-future-vs-impl-future-的性能差异)
-    - [8.12 `loom` 并发模型检测工具](#812-loom-并发模型检测工具)
-    - [8.13 Miri 动态验证：async 状态机的内存安全检测](#813-miri-动态验证async-状态机的内存安全检测)
-      - [场景 1：悬垂指针检测（使用已释放的 Box）](#场景-1悬垂指针检测使用已释放的-box)
-      - [场景 2：无效值检测（非法 bool 构造）](#场景-2无效值检测非法-bool-构造)
-      - [场景 3：async 状态机中的未初始化内存](#场景-3async-状态机中的未初始化内存)
-      - [Miri 与 async 状态机的特殊关联](#miri-与-async-状态机的特殊关联)
-  - [九、知识来源关系（Provenance）](#九知识来源关系provenance)
-  - [十、边界测试：高级异步模式的编译错误](#十边界测试高级异步模式的编译错误)
-    - [10.1 边界测试：`select!` 宏中分支完成后的变量使用（编译错误）](#101-边界测试select-宏中分支完成后的变量使用编译错误)
-    - [10.2 边界测试：`Stream::next()` 与所有权冲突（编译错误）](#102-边界测试streamnext-与所有权冲突编译错误)
-    - [10.5 边界测试：`Pin` 与 `Unpin` 的自动实现冲突（编译错误）](#105-边界测试pin-与-unpin-的自动实现冲突编译错误)
-    - [10.3 边界测试：类型不匹配的基础错误](#103-边界测试类型不匹配的基础错误)
-  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
-  - [参考来源](#参考来源)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
-  - [实践](#实践)
-    - [对应代码示例](#对应代码示例)
-    - [建议练习](#建议练习)
-  - [导航：下一步去哪？](#导航下一步去哪)
-  - [嵌入式测验](#嵌入式测验)
-    - [测验 1：async fn in trait（记忆层）](#测验-1async-fn-in-trait记忆层)
-    - [测验 2：Stream trait（理解层）](#测验-2stream-trait理解层)
-    - [测验 3：spawn\_blocking 的使用场景（应用层）](#测验-3spawn_blocking-的使用场景应用层)
-    - [测验 4：async 递归（分析层）](#测验-4async-递归分析层)
+- [Async/Await 高级主题](.#asyncawait-高级主题)
+  - [📑 目录](.#-目录)
+    - [8.8 Waker 契约与活性](.#88-waker-契约与活性)
+    - [8.9 Waker/Context 的底层机制](.#89-wakercontext-的底层机制)
+    - [8.10 `Stream` / `Sink` trait 完整分析](.#810-stream--sink-trait-完整分析)
+    - [8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异](.#811-pinboxdyn-future-vs-impl-future-的性能差异)
+    - [8.12 `loom` 并发模型检测工具](.#812-loom-并发模型检测工具)
+    - [8.13 Miri 动态验证：async 状态机的内存安全检测](.#813-miri-动态验证async-状态机的内存安全检测)
+      - [场景 1：悬垂指针检测（使用已释放的 Box）](.#场景-1悬垂指针检测使用已释放的-box)
+      - [场景 2：无效值检测（非法 bool 构造）](.#场景-2无效值检测非法-bool-构造)
+      - [场景 3：async 状态机中的未初始化内存](.#场景-3async-状态机中的未初始化内存)
+      - [Miri 与 async 状态机的特殊关联](.#miri-与-async-状态机的特殊关联)
+  - [九、知识来源关系（Provenance）](.#九知识来源关系provenance)
+  - [十、边界测试：高级异步模式的编译错误](.#十边界测试高级异步模式的编译错误)
+    - [10.1 边界测试：`select!` 宏中分支完成后的变量使用（编译错误）](.#101-边界测试select-宏中分支完成后的变量使用编译错误)
+    - [10.2 边界测试：`Stream::next()` 与所有权冲突（编译错误）](.#102-边界测试streamnext-与所有权冲突编译错误)
+    - [10.5 边界测试：`Pin` 与 `Unpin` 的自动实现冲突（编译错误）](.#105-边界测试pin-与-unpin-的自动实现冲突编译错误)
+    - [10.3 边界测试：类型不匹配的基础错误](.#103-边界测试类型不匹配的基础错误)
+  - [逆向推理链（Backward Reasoning）](.#逆向推理链backward-reasoning)
+  - [参考来源](.#参考来源)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
+  - [实践](.#实践)
+    - [对应代码示例](.#对应代码示例)
+    - [建议练习](.#建议练习)
+  - [导航：下一步去哪？](.#导航下一步去哪)
+  - [嵌入式测验](.#嵌入式测验)
+    - [测验 1：async fn in trait（记忆层）](.#测验-1async-fn-in-trait记忆层)
+    - [测验 2：Stream trait（理解层）](.#测验-2stream-trait理解层)
+    - [测验 3：spawn\_blocking 的使用场景（应用层）](.#测验-3spawn_blocking-的使用场景应用层)
+    - [测验 4：async 递归（分析层）](.#测验-4async-递归分析层)
 
 ### 8.8 Waker 契约与活性
 
@@ -1068,7 +1068,7 @@ mod tests {
 
 > **Bloom 层级**: 应用 —— 使用 loom 验证并发原语是生产级 Rust 并发编程的标准实践。
 
-> **交叉链接**: 内存序模型见 [../02_intermediate/01_traits.md](../02_intermediate/01_traits.md) §5.4（`Atomic*` 与内存序）；unsafe 边界见 [../03_advanced/03_unsafe.md](../03_advanced/03_unsafe.md) §2（`UnsafeCell` 与内部可变性）。
+> **交叉链接**: 内存序模型见 [../02_intermediate/01_traits.md](../02_intermediate/01_traits.md) §5.4（`Atomic*` 与内存序）；unsafe 边界见 [../03_advanced/03_unsafe.md](03_unsafe.md) §2（`UnsafeCell` 与内部可变性）。
 
 ### 8.13 Miri 动态验证：async 状态机的内存安全检测
 
@@ -1405,8 +1405,8 @@ fn main() {
 
 | 选择 | 条件 | 目标 |
 |:---|:---|:---|
-| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate/) 或 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) |
-| 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
+| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate) 或 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) |
+| 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../06_ecosystem/README.md) |
 

@@ -8,12 +8,12 @@
 
 ### 文档
 
-- [所有权与借用检查器练习](./exercises/01_borrow_checker.md)
-- [docs/04_thinking/](../docs/04_thinking/) - 思维导图和决策树
+- [所有权与借用检查器练习](exercises/01_borrow_checker.md)
+- [docs/04_thinking/](../docs/04_thinking) - 思维导图和决策树
 
 ### 相关 Crate
 
-- [c01_ownership_borrow_scope](../c01_ownership_borrow_scope/) - 详细的借用和作用域分析
+- [c01_ownership_borrow_scope](../c01_ownership_borrow_scope) - 详细的借用和作用域分析
 
 ---
 
@@ -42,7 +42,7 @@
 |------|----------|------------|
 | 借用检查 | [CROSS_MODULE_NAVIGATION.md](../docs/CROSS_MODULE_NAVIGATION.md) | c01_ownership_borrow_scope |
 | 智能指针 | [docs/05_guides/BEST_PRACTICES.md](../docs/05_guides/BEST_PRACTICES.md) | c04_generic |
-| 生命周期 | [docs/04_thinking/](../docs/04_thinking/) | c02_type_system |
+| 生命周期 | [docs/04_thinking/](../docs/04_thinking) | c02_type_system |
 
 ---
 

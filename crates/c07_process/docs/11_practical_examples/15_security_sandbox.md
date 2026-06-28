@@ -7,7 +7,7 @@
 
 **内容已整合至**：[08_security_and_sandboxing](../08_security_and_sandboxing.md) | [02_安全与沙箱](../tier_04_advanced/02_安全与沙箱.md)
 
-**相关**: [11_practical_examples](./11_practical_examples.md)
+**相关**: [11_practical_examples](11_practical_examples.md)
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

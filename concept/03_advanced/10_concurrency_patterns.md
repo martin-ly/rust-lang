@@ -10,8 +10,8 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Ana — 分析并发模式的设计意图
 > **定位**: 深入分析 Rust **并发编程的高级模式**——从 Actor 模型、通道模式到无锁数据结构和内存序，揭示 Rust 所有权（Ownership）系统如何为并发安全（Concurrency Safety）提供编译期保证。
-> **前置概念**: [Concurrency](./01_concurrency.md) · [Async](./02_async.md) · [Type System](../01_foundation/04_type_system.md)
-> **后置概念**: [Distributed Systems](../06_ecosystem/18_distributed_systems.md) · [Lockfree](../03_advanced/01_concurrency.md)
+> **前置概念**: [Concurrency](01_concurrency.md) · [Async](02_async.md) · [Type System](../01_foundation/04_type_system.md)
+> **后置概念**: [Distributed Systems](../06_ecosystem/18_distributed_systems.md) · [Lockfree](01_concurrency.md)
 
 ---
 
@@ -20,48 +20,48 @@
 > [crossbeam crate](https://docs.rs/crossbeam/latest/crossbeam/) ·
 > [tokio::sync](https://docs.rs/tokio/latest/tokio/sync/index.html) ·
 > [Wikipedia — Non-blocking Algorithm](https://en.wikipedia.org/wiki/Non-blocking_algorithm)
-> **对应 Crate**: [`c05_threads`](../../crates/c05_threads/)
-> **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency/)
+> **对应 Crate**: [`c05_threads`](../../crates/c05_threads)
+> **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency)
 
 ## 📑 目录
 
-- [并发 模式：从消息 传递到锁自由的数据结构](#并发-模式从消息-传递到锁自由的数据结构)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 所有权与并发的统一](#11-所有权与并发的统一)
-    - [1.2 Send 与 Sync：编译期并发安全](#12-send-与-sync编译期并发安全)
-    - [1.3 共享状态 vs 消息传递](#13-共享状态-vs-消息传递)
-  - [二、技术细节](#二技术细节)
-    - [2.1 通道模式](#21-通道模式)
-    - [2.2 无锁数据结构](#22-无锁数据结构)
-    - [2.3 内存顺序](#23-内存顺序)
-  - [三、并发模式矩阵](#三并发模式矩阵)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、常见陷阱](#五常见陷阱)
-    - [编译错误示例](#编译错误示例)
-    - [4.4 边界测试：`ScopedThread` 中引用逃逸（编译错误）](#44-边界测试scopedthread-中引用逃逸编译错误)
-    - [4.5 边界测试：`Condvar` 虚假唤醒未处理（逻辑错误）](#45-边界测试condvar-虚假唤醒未处理逻辑错误)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
-  - [权威来源索引](#权威来源索引)
-    - [10.3 边界测试：`crossbeam::channel` 的关闭检测与迭代终止（逻辑错误）](#103-边界测试crossbeamchannel-的关闭检测与迭代终止逻辑错误)
-    - [10.4 边界测试：Send/Sync 的 auto trait 边界与线程安全（编译错误）](#104-边界测试sendsync-的-auto-trait-边界与线程安全编译错误)
-  - [参考来源](#参考来源)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
-  - [实践](#实践)
-    - [对应代码示例](#对应代码示例)
-    - [建议练习](#建议练习)
-  - [导航：下一步去哪？](#导航下一步去哪)
-  - [嵌入式测验](#嵌入式测验)
-    - [测验 1：并发模式识别（记忆层）](#测验-1并发模式识别记忆层)
-    - [测验 2：Arc 引用计数（理解层）](#测验-2arc-引用计数理解层)
-    - [测验 3：工作窃取模式（应用层）](#测验-3工作窃取模式应用层)
-    - [测验 4：死锁预防（分析层）](#测验-4死锁预防分析层)
+- [并发 模式：从消息 传递到锁自由的数据结构](.#并发-模式从消息-传递到锁自由的数据结构)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 所有权与并发的统一](.#11-所有权与并发的统一)
+    - [1.2 Send 与 Sync：编译期并发安全](.#12-send-与-sync编译期并发安全)
+    - [1.3 共享状态 vs 消息传递](.#13-共享状态-vs-消息传递)
+  - [二、技术细节](.#二技术细节)
+    - [2.1 通道模式](.#21-通道模式)
+    - [2.2 无锁数据结构](.#22-无锁数据结构)
+    - [2.3 内存顺序](.#23-内存顺序)
+  - [三、并发模式矩阵](.#三并发模式矩阵)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、常见陷阱](.#五常见陷阱)
+    - [编译错误示例](.#编译错误示例)
+    - [4.4 边界测试：`ScopedThread` 中引用逃逸（编译错误）](.#44-边界测试scopedthread-中引用逃逸编译错误)
+    - [4.5 边界测试：`Condvar` 虚假唤醒未处理（逻辑错误）](.#45-边界测试condvar-虚假唤醒未处理逻辑错误)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [逆向推理链（Backward Reasoning）](.#逆向推理链backward-reasoning)
+  - [权威来源索引](.#权威来源索引)
+    - [10.3 边界测试：`crossbeam::channel` 的关闭检测与迭代终止（逻辑错误）](.#103-边界测试crossbeamchannel-的关闭检测与迭代终止逻辑错误)
+    - [10.4 边界测试：Send/Sync 的 auto trait 边界与线程安全（编译错误）](.#104-边界测试sendsync-的-auto-trait-边界与线程安全编译错误)
+  - [参考来源](.#参考来源)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
+  - [实践](.#实践)
+    - [对应代码示例](.#对应代码示例)
+    - [建议练习](.#建议练习)
+  - [导航：下一步去哪？](.#导航下一步去哪)
+  - [嵌入式测验](.#嵌入式测验)
+    - [测验 1：并发模式识别（记忆层）](.#测验-1并发模式识别记忆层)
+    - [测验 2：Arc 引用计数（理解层）](.#测验-2arc-引用计数理解层)
+    - [测验 3：工作窃取模式（应用层）](.#测验-3工作窃取模式应用层)
+    - [测验 4：死锁预防（分析层）](.#测验-4死锁预防分析层)
 
 ---
 
@@ -642,8 +642,8 @@ fn fixed() {
 
 ## 相关概念文件
 
-- [Concurrency](./01_concurrency.md) — 并发基础
-- [Async](./02_async.md) — 异步编程
+- [Concurrency](01_concurrency.md) — 并发基础
+- [Async](02_async.md) — 异步编程
 - [Distributed Systems](../06_ecosystem/18_distributed_systems.md) — 分布式系统
 
 ---
@@ -807,8 +807,8 @@ fn main() {
 
 | 选择 | 条件 | 目标 |
 |:---|:---|:---|
-| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate/) 或 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) |
-| 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
+| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate) 或 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) |
+| 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../06_ecosystem/README.md) |
 

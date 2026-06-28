@@ -2,7 +2,7 @@
 
 > **文档定位**: 理解线程基础和Rust所有权系统如何保证线程安全
 > **先修知识**: Rust所有权基础
-> **相关文档**: [01_basic_threading](./01_basic_threading.md) | [02_message_passing](./02_message_passing.md) | [主索引](./00_MASTER_INDEX.md)
+> **相关文档**: [01_basic_threading](01_basic_threading.md) | [02_message_passing](02_message_passing.md) | [主索引](00_MASTER_INDEX.md)
 
 **最后更新**: 2025-10-19
 **适用版本**: Rust 1.0+
@@ -21,11 +21,11 @@
 
 ## 目录
 
-- [01. 线程与所有权 (Threads and Ownership)](#01-线程与所有权-threads-and-ownership)
-  - [📋 本文内容](#-本文内容)
-  - [目录](#目录)
-  - [1.1. 创建新线程: `thread::spawn`](#11-创建新线程-threadspawn)
-  - [1.2. `move` 闭包与所有权](#12-move-闭包与所有权)
+- [01. 线程与所有权 (Threads and Ownership)](.#01-线程与所有权-threads-and-ownership)
+  - [📋 本文内容](.#-本文内容)
+  - [目录](.#目录)
+  - [1.1. 创建新线程: `thread::spawn`](.#11-创建新线程-threadspawn)
+  - [1.2. `move` 闭包与所有权](.#12-move-闭包与所有权)
 
 ## 1.1. 创建新线程: `thread::spawn`
 

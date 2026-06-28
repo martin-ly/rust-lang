@@ -39,7 +39,7 @@
 | `[The Rust Programming Language](https://doc.rust-lang.org/book/)` | `[TRPL: Ch4.1](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)` |
 | `来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)` | `来源: [RustBelt: POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)` |
 | `[来源: Wikipedia: Linear logic]` | `来源: [Wikipedia: Linear logic](https://en.wikipedia.org/wiki/Linear_logic)` |
-| `来源: [Rust Reference; TRPL; Rust RFCs; Academic Papers](https://doc.rust-lang.org/reference/)` | `来源: [Rust Reference](...); [TRPL](...); [Rust RFCs](...); Academic Papers` |
+| `来源: [Rust Reference; TRPL; Rust RFCs; Academic Papers](https://doc.rust-lang.org/reference/)` | `来源: [Rust Reference](.); [TRPL](.); [Rust RFCs](.); Academic Papers` |
 | `来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)` | `来源: [POPL 2018 - RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)` |
 
 ## 遗留与下一步

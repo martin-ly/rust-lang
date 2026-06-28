@@ -9,38 +9,38 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Rust 1.92.0 研究更新报告（历史记录）](#rust-1920-研究更新报告历史记录)
-  - [📑 目录](#-目录)
-  - [📋 概述](#-概述)
-  - [🎯 Rust 1.92.0 主要改进](#-rust-1920-主要改进)
-    - [语言特性改进](#语言特性改进)
-  - [💻 代码示例与研究场景](#-代码示例与研究场景)
-    - [场景 1：`MaybeUninit` 安全使用模式](#场景-1maybeuninit-安全使用模式)
-    - [场景 2：联合体原始引用访问](#场景-2联合体原始引用访问)
-    - [场景 3：自动特征与 Sized 边界](#场景-3自动特征与-sized-边界)
-    - [场景 4：高阶生命周期处理](#场景-4高阶生命周期处理)
-    - [场景 5：关联项多边界](#场景-5关联项多边界)
-  - [📊 标准库 API 稳定化](#-标准库-api-稳定化)
-  - [📊 性能优化](#-性能优化)
-  - [📝 研究笔记系统更新](#-研究笔记系统更新)
-    - [已更新的文档](#已更新的文档)
-    - [需要关注的研究方向](#需要关注的研究方向)
-  - [🔗 相关资源](#-相关资源)
-    - [外部链接](#外部链接)
-    - [内部代码](#内部代码)
-    - [形式化文档](#形式化文档)
-    - [核心定理](#核心定理)
-    - [Coq 证明骨架](#coq-证明骨架)
-    - [相关研究笔记](#相关研究笔记)
-    - [项目文档](#项目文档)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [Rust 1.92.0 研究更新报告（历史记录）](.#rust-1920-研究更新报告历史记录)
+  - [📑 目录](.#-目录)
+  - [📋 概述](.#-概述)
+  - [🎯 Rust 1.92.0 主要改进](.#-rust-1920-主要改进)
+    - [语言特性改进](.#语言特性改进)
+  - [💻 代码示例与研究场景](.#-代码示例与研究场景)
+    - [场景 1：`MaybeUninit` 安全使用模式](.#场景-1maybeuninit-安全使用模式)
+    - [场景 2：联合体原始引用访问](.#场景-2联合体原始引用访问)
+    - [场景 3：自动特征与 Sized 边界](.#场景-3自动特征与-sized-边界)
+    - [场景 4：高阶生命周期处理](.#场景-4高阶生命周期处理)
+    - [场景 5：关联项多边界](.#场景-5关联项多边界)
+  - [📊 标准库 API 稳定化](.#-标准库-api-稳定化)
+  - [📊 性能优化](.#-性能优化)
+  - [📝 研究笔记系统更新](.#-研究笔记系统更新)
+    - [已更新的文档](.#已更新的文档)
+    - [需要关注的研究方向](.#需要关注的研究方向)
+  - [🔗 相关资源](.#-相关资源)
+    - [外部链接](.#外部链接)
+    - [内部代码](.#内部代码)
+    - [形式化文档](.#形式化文档)
+    - [核心定理](.#核心定理)
+    - [Coq 证明骨架](.#coq-证明骨架)
+    - [相关研究笔记](.#相关研究笔记)
+    - [项目文档](.#项目文档)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 **创建日期**: 2025-12-11
 > **最后更新**: 2026-02-28
@@ -371,10 +371,10 @@ fn api_stabilization_examples() {
 
 | 特性 | 形式化文档 | 相关定义 |
 | :--- | :--- | :--- |
-| MaybeUninit | [10_safe_unsafe_comprehensive_analysis.md](./10_safe_unsafe_comprehensive_analysis.md) | unsafe 契约矩阵 |
-| 联合体 | [10_formal_proof_system_guide.md](./10_formal_proof_system_guide.md) | UB 分类 |
-| 自动特征 | [10_trait_system_formalization.md](./type_theory/10_trait_system_formalization.md) | Trait 解析 |
-| 高阶生命周期 | [10_lifetime_formalization.md](./type_theory/10_lifetime_formalization.md) | 生命周期形式化 |
+| MaybeUninit | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md) | unsafe 契约矩阵 |
+| 联合体 | [10_formal_proof_system_guide.md](10_formal_proof_system_guide.md) | UB 分类 |
+| 自动特征 | [10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | Trait 解析 |
+| 高阶生命周期 | [10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md) | 生命周期形式化 |
 
 ### 核心定理
 
@@ -382,9 +382,9 @@ fn api_stabilization_examples() {
 
 | 定理 | 文档 | 说明 |
 | :--- | :--- | :--- |
-| T-OW2 | [10_core_theorems_full_proofs.md](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) | 所有权唯一性 |
-| T-BR1 | [10_core_theorems_full_proofs.md](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) | 数据竞争自由 |
-| T-TY3 | [10_core_theorems_full_proofs.md](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) | 类型安全 |
+| T-OW2 | [10_core_theorems_full_proofs.md](10_core_theorems_full_proofs.md) | 所有权唯一性 |
+| T-BR1 | [10_core_theorems_full_proofs.md](10_core_theorems_full_proofs.md) | 数据竞争自由 |
+| T-TY3 | [10_core_theorems_full_proofs.md](10_core_theorems_full_proofs.md) | 类型安全 |
 
 ### Coq 证明骨架
 
@@ -392,9 +392,9 @@ fn api_stabilization_examples() {
 
 | 定理 | Coq 文件 | 状态 |
 | :--- | :--- | :--- |
-| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../../archive/deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 骨架已创建 |
-| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](../../archive/deprecated/coq_skeleton/BORROW_DATARACE_FREE.v) | 骨架已创建 |
-| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](../../archive/deprecated/coq_skeleton/TYPE_SAFETY.v) | 骨架已创建 |
+| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 骨架已创建 |
+| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](../deprecated/coq_skeleton/BORROW_DATARACE_FREE.v) | 骨架已创建 |
+| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](../deprecated/coq_skeleton/TYPE_SAFETY.v) | 骨架已创建 |
 
 ### 相关研究笔记
 >
@@ -402,12 +402,12 @@ fn api_stabilization_examples() {
 
 | 类别 | 文档 | 链接 |
 | :--- | :--- | :--- |
-| 形式化方法 | 所有权模型 | [formal_methods/10_ownership_model.md](./formal_methods/10_ownership_model.md) |
-| 形式化方法 | 借用检查器 | [formal_methods/10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md) |
-| 类型理论 | 类型系统基础 | [type_theory/10_type_system_foundations.md](./type_theory/10_type_system_foundations.md) |
-| 类型理论 | Trait 系统 | [type_theory/10_trait_system_formalization.md](./type_theory/10_trait_system_formalization.md) |
-| 类型理论 | 生命周期形式化 | [type_theory/10_lifetime_formalization.md](./type_theory/10_lifetime_formalization.md) |
-| 实验研究 | 性能基准测试 | [experiments/10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md) |
+| 形式化方法 | 所有权模型 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) |
+| 形式化方法 | 借用检查器 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) |
+| 类型理论 | 类型系统基础 | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) |
+| 类型理论 | Trait 系统 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) |
+| 类型理论 | 生命周期形式化 | [type_theory/10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md) |
+| 实验研究 | 性能基准测试 | [experiments/10_performance_benchmarks.md](experiments/10_performance_benchmarks.md) |
 
 ### 项目文档
 >
@@ -415,9 +415,9 @@ fn api_stabilization_examples() {
 
 | 文档 | 链接 | 内容 |
 | :--- | :--- | :--- |
-| 系统总结 | [10_system_summary.md](./10_system_summary.md) | 研究笔记系统总结 |
-| 理论体系 | [10_theoretical_and_argumentation_system_architecture.md](./10_theoretical_and_argumentation_system_architecture.md) | 理论体系架构 |
-| 证明索引 | [10_proof_index.md](../../archive/research_notes_2026_06_25/10_proof_index.md) | 形式化证明索引 |
+| 系统总结 | [10_system_summary.md](10_system_summary.md) | 研究笔记系统总结 |
+| 理论体系 | [10_theoretical_and_argumentation_system_architecture.md](10_theoretical_and_argumentation_system_architecture.md) | 理论体系架构 |
+| 证明索引 | [10_proof_index.md](10_proof_index.md) | 形式化证明索引 |
 
 ---
 
@@ -484,7 +484,7 @@ fn api_stabilization_examples() {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

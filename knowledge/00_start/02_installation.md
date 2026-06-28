@@ -256,7 +256,7 @@ rustup default stable  # 切回稳定版
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [Hello World](./01_hello_world.md)
+- [Hello World](01_hello_world.md)
 
 - [Hello, World](01_hello_world.md)
 - [Rust 学习路线图](03_learning_roadmap.md)

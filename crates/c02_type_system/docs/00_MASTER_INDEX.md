@@ -3,21 +3,21 @@
 > **学习导航**: C02 类型系统模块的完整学习路径和资源导航
 > **最后更新**: 2026-03-13
 > **适用版本**: Rust 1.94.0+
-> **English**: [00_MASTER_INDEX.en.md](./00_MASTER_INDEX.en.md)
+> **English**: [00_MASTER_INDEX.en.md](00_MASTER_INDEX.en.md)
 
 ---
 
 ## 📋 目录
 
-- [C02 类型系统 - 主索引](#c02-类型系统---主索引)
-  - [📋 目录](#-目录)
-  - [📚 官方资源映射](#-官方资源映射)
-  - [🎯 快速开始](#-快速开始)
-  - [📚 Tier 1-4 分层导航](#-tier-1-4-分层导航)
-  - [📦 Cargo 包管理专题](#-cargo-包管理专题)
-  - [🆕 Rust 版本特性](#-rust-版本特性)
-  - [💻 代码示例](#-代码示例)
-  - [🔗 相关文档](#-相关文档)
+- [C02 类型系统 - 主索引](.#c02-类型系统---主索引)
+  - [📋 目录](.#-目录)
+  - [📚 官方资源映射](.#-官方资源映射)
+  - [🎯 快速开始](.#-快速开始)
+  - [📚 Tier 1-4 分层导航](.#-tier-1-4-分层导航)
+  - [📦 Cargo 包管理专题](.#-cargo-包管理专题)
+  - [🆕 Rust 版本特性](.#-rust-版本特性)
+  - [💻 代码示例](.#-代码示例)
+  - [🔗 相关文档](.#-相关文档)
 
 ---
 
@@ -32,7 +32,7 @@
 
 **Rust 1.93 兼容性**: [兼容性注意事项](../../../docs/06_toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../../docs/06_toolchain/09_rust_1.93_compatibility_deep_dive.md)
 
-**一页纸总结**: [ONE_PAGE_SUMMARY.md](./ONE_PAGE_SUMMARY.md) — 核心概念、常见坑、速选表
+**一页纸总结**: [ONE_PAGE_SUMMARY.md](ONE_PAGE_SUMMARY.md) — 核心概念、常见坑、速选表
 
 ---
 
@@ -62,8 +62,8 @@
 
 | Tier | 层级名称 | 文档数 | 适合人群 | 入口 |
 | :--- | :--- | :--- | :--- | :--- || **Tier 1** | 基础层 | 4 个 | 初学者 | [tier_01_foundations/](tier_01_foundations/README.md) |
-| **Tier 2** | 核心指南层 | 多篇 | 进阶学习者 | [tier_02_guides/](tier_02_guides/) |
-| **Tier 3** | 参考层 | 多篇 | 高级开发者 | [tier_03_references/](tier_03_references/) |
+| **Tier 2** | 核心指南层 | 多篇 | 进阶学习者 | [tier_02_guides/](tier_02_guides) |
+| **Tier 3** | 参考层 | 多篇 | 高级开发者 | [tier_03_references/](tier_03_references) |
 | **Tier 4** | 高级层 | 5 篇 | 专家/研究者 | [tier_04_advanced/](tier_04_advanced/README.md) |
 
 ---

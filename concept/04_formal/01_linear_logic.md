@@ -14,7 +14,7 @@
 > **A/S/P 标记**: **S** — Structure（心智模型）
 > **双维定位**: C×Ana — 分析线性逻辑到 Rust 的映射
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md) [来源: [TAPL — Pierce 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)]
-> **后置概念**: [Ownership Formalization](./03_ownership_formal.md) · [RustBelt](./04_rustbelt.md)
+> **后置概念**: [Ownership Formalization](03_ownership_formal.md) · [RustBelt](04_rustbelt.md)
 > **主要来源**:
 > [Wikipedia: Linear logic](https://en.wikipedia.org/wiki/Linear_logic) ·
 > [Wikipedia: Affine logic](https://en.wikipedia.org/wiki/Affine_logic) ·
@@ -40,7 +40,7 @@
 >
 > 本文档包含大量形式化符号（⊗, ⊸, λ, ∀, ∃ 等）和纯数学推导，属于 **[研究者级]** 内容。
 > **99.9% 的 Rust 开发者不需要理解这些内容即可编写生产级代码。**
-> 如果你只想学习 Rust 工程实践，请直接跳过本文，前往 [L5 生态层](../06_ecosystem/) 或 [L3 高级层](../03_advanced/)。
+> 如果你只想学习 Rust 工程实践，请直接跳过本文，前往 [L5 生态层](../06_ecosystem) 或 [L3 高级层](../03_advanced)。
 > 本文的数学内容仅服务于：PL 研究者、编译器开发者、形式化验证工程师。
 
 ## 一、权威定义（Definition）
@@ -651,9 +651,9 @@ fn session_demo() {
 |:---|:---|:---|
 | 所有权 | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) | 线性逻辑的应用（L1 精确对应标注于全文） |
 | 借用（Borrowing） | [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md) | 分离逻辑的应用（L1 §5） |
-| 类型论 | [`./02_type_theory.md`](./02_type_theory.md) | 形式化同层；TAPL 引用（Reference）交叉 |
-| 所有权形式化 | [`./03_ownership_formal.md`](./03_ownership_formal.md) | 线性逻辑的扩展；RustBelt 细节 |
-| RustBelt | [`./04_rustbelt.md`](./04_rustbelt.md) | 验证实现；Iris 分离逻辑 |
+| 类型论 | [`./02_type_theory.md`](02_type_theory.md) | 形式化同层；TAPL 引用（Reference）交叉 |
+| 所有权形式化 | [`./03_ownership_formal.md`](03_ownership_formal.md) | 线性逻辑的扩展；RustBelt 细节 |
+| RustBelt | [`./04_rustbelt.md`](04_rustbelt.md) | 验证实现；Iris 分离逻辑 |
 | Rust vs C++ | [`../05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) | 对比映射；所有权语义差异 |
 | 安全边界 | [`../05_comparative/04_safety_boundaries.md`](../05_comparative/04_safety_boundaries.md) | 边界分析；unsafe 逃逸口 |
 

@@ -8,7 +8,7 @@
 > **A/S/P 标记**: S+A — Structure + Application
 > **双维定位**: C×Ana / C×Eva
 > **前置概念**: [Patterns](../06_ecosystem/02_patterns.md) · [Type System](../01_foundation/04_type_system.md)
-> **后置概念**: [Pattern Composition Algebra](../06_ecosystem/35_pattern_composition_algebra.md) · [Algorithm-Pattern Semantic Bridge](./semantic_bridge_algorithms_patterns.md)
+> **后置概念**: [Pattern Composition Algebra](../06_ecosystem/35_pattern_composition_algebra.md) · [Algorithm-Pattern Semantic Bridge](semantic_bridge_algorithms_patterns.md)
 > **主要来源**: [GoF — Design Patterns] · [POSA] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 ---
 
@@ -28,7 +28,7 @@
 | 问题域 | 代表文件 | 核心模式族 |
 |:---|:---|:---|
 | **通用基础** | [Patterns](../06_ecosystem/02_patterns.md) | GoF  creational / structural / behavioral 模式全集 |
-| **算法-模式桥接** | [Algorithm-Pattern Semantic Bridge](./semantic_bridge_algorithms_patterns.md) | 算法策略 ↔ 设计模式的映射关系 |
+| **算法-模式桥接** | [Algorithm-Pattern Semantic Bridge](semantic_bridge_algorithms_patterns.md) | 算法策略 ↔ 设计模式的映射关系 |
 | **并发与并行** | [Concurrency Patterns](../03_advanced/10_concurrency_patterns.md) | Actor、CSP、Fork-Join、Pipeline、Work Stealing |
 | **分布式系统** | [Parallel Distributed Pattern Spectrum](../03_advanced/19_parallel_distributed_pattern_spectrum.md) | Circuit Breaker、Bulkhead、Retry、Saga、Leader Election |
 | **架构风格** | [Architecture Patterns](../06_ecosystem/35_architecture_patterns.md) | Layered、Hexagonal、Microkernel、Event-Driven |
@@ -54,7 +54,7 @@
 | 目标 | 文件 | 任务示例 |
 |:---|:---|:---|
 | **理解（Understand）** | [Patterns](../06_ecosystem/02_patterns.md) | 解释 Strategy 与 Template Method 的区别 |
-| **分析（Analyze）** | [Algorithm-Pattern Semantic Bridge](./semantic_bridge_algorithms_patterns.md) | 分析为什么某个算法适合用 Strategy 表达 |
+| **分析（Analyze）** | [Algorithm-Pattern Semantic Bridge](semantic_bridge_algorithms_patterns.md) | 分析为什么某个算法适合用 Strategy 表达 |
 | **评价（Evaluate）** | [Pattern Composition Algebra](../06_ecosystem/35_pattern_composition_algebra.md) | 判断 Observer + Factory + Typestate 是否适合当前问题 |
 | **创造（Create）** | [System Composability](../06_ecosystem/30_system_composability.md) | 设计一个新的模式组合以解决领域问题 |
 
@@ -126,7 +126,7 @@ Pattern Composition Algebra (L6)
 - [GoF — Design Patterns: Elements of Reusable Object-Oriented Software]
 - [POSA — Pattern-Oriented Software Architecture]
 - [Pattern Composition Algebra](../06_ecosystem/35_pattern_composition_algebra.md)
-- [Algorithm-Pattern Semantic Bridge](./semantic_bridge_algorithms_patterns.md)
+- [Algorithm-Pattern Semantic Bridge](semantic_bridge_algorithms_patterns.md)
 
 ---
 

@@ -10,7 +10,7 @@
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 单一文档勾勒 ownership + borrow + lifetime + type + trait + async + pin 的**统一形式系统**，含公理列表、定理依赖 DAG、与各子文档的映射
-> **上位文档**: [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](10_formal_proof_critical_analysis_and_plan_2026_02.md)、[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md)
+> **上位文档**: [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](10_formal_proof_critical_analysis_and_plan_2026_02.md)、[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](10_theoretical_and_argumentation_system_architecture.md)
 
 ---
 
@@ -18,29 +18,29 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Rust 形式化全模型：统一形式系统入口](#rust-形式化全模型统一形式系统入口)
-  - [📑 目录](#-目录)
-  - [一、统一形式系统总览](#一统一形式系统总览)
-    - [1.1 核心机制与公理层](#11-核心机制与公理层)
-    - [1.2 定理依赖 DAG（简化）](#12-定理依赖-dag简化)
-    - [1.3 域间定理推导链（显式）](#13-域间定理推导链显式)
-    - [1.4 公理→组合定理 DAG（支柱 1+3 衔接）](#14-公理组合定理-dag支柱-13-衔接)
-  - [二、公理列表（统一编号）](#二公理列表统一编号)
-    - [2.1 内存与所有权](#21-内存与所有权)
-    - [2.2 生命周期与类型](#22-生命周期与类型)
-    - [2.3 控制流与变量](#23-控制流与变量)
-    - [2.4 异步与 Pin](#24-异步与-pin)
-  - [三、与各子文档的映射](#三与各子文档的映射)
-  - [四、抽象层次对应](#四抽象层次对应)
-  - [五、相关文档](#五相关文档)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [Rust 形式化全模型：统一形式系统入口](.#rust-形式化全模型统一形式系统入口)
+  - [📑 目录](.#-目录)
+  - [一、统一形式系统总览](.#一统一形式系统总览)
+    - [1.1 核心机制与公理层](.#11-核心机制与公理层)
+    - [1.2 定理依赖 DAG（简化）](.#12-定理依赖-dag简化)
+    - [1.3 域间定理推导链（显式）](.#13-域间定理推导链显式)
+    - [1.4 公理→组合定理 DAG（支柱 1+3 衔接）](.#14-公理组合定理-dag支柱-13-衔接)
+  - [二、公理列表（统一编号）](.#二公理列表统一编号)
+    - [2.1 内存与所有权](.#21-内存与所有权)
+    - [2.2 生命周期与类型](.#22-生命周期与类型)
+    - [2.3 控制流与变量](.#23-控制流与变量)
+    - [2.4 异步与 Pin](.#24-异步与-pin)
+  - [三、与各子文档的映射](.#三与各子文档的映射)
+  - [四、抽象层次对应](.#四抽象层次对应)
+  - [五、相关文档](.#五相关文档)
+  - [🆕 Rust 1.94 更新](.#-rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 一、统一形式系统总览
 >
@@ -54,17 +54,17 @@
 
 | 机制 | 公理/定义 | 子文档 |
 | :--- | :--- | :--- |
-| **所有权** | 规则 1–3：唯一所有者、移动转移、作用域结束释放 | [ownership_model](./formal_methods/10_ownership_model.md) |
-| **借用** | 规则 5–8：共享借用、可变借用、互斥、作用域 | [borrow_checker_proof](./formal_methods/10_borrow_checker_proof.md) |
+| **所有权** | 规则 1–3：唯一所有者、移动转移、作用域结束释放 | [ownership_model](formal_methods/10_ownership_model.md) |
+| **借用** | 规则 5–8：共享借用、可变借用、互斥、作用域 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) |
 | **生命周期** | Axiom LF1–LF2、Def 1.4、$\ell \subseteq \text{lft}$ | lifetime_formalization |
-| **类型系统** | 进展性、保持性、typing rules | [type_system_foundations](./type_theory/10_type_system_foundations.md) |
-| **型变** | Def 1.1–3.1（协变、逆变、不变） | [variance_theory](./type_theory/10_variance_theory.md) |
-| **Trait** | Axiom COH1/COH2、对象安全、impl 解析 | [trait_system_formalization](./type_theory/10_trait_system_formalization.md) |
-| **异步** | Def 4.1–5.2（Future、Poll、Ready/Pending） | [async_state_machine](./formal_methods/10_async_state_machine.md) |
-| **Pin** | Def 1.1–2.2（位置稳定、自引用） | [pin_self_referential](./formal_methods/10_pin_self_referential.md) |
-| **Send/Sync** | Def SEND1/SYNC1、SYNC-L1（$T:\text{Sync} \Leftrightarrow \&T:\text{Send}$）；SEND-T1/SYNC-T1 | [send_sync_formalization](./formal_methods/10_send_sync_formalization.md) |
-| **控制流** | A-CF1：控制流归约保持类型与所有权 | [formal_methods/README](./formal_methods/README.md#控制流形式化) |
-| **变量** | Def 1.4 绑定、Def 1.5 遮蔽 | [ownership_model](./formal_methods/10_ownership_model.md) |
+| **类型系统** | 进展性、保持性、typing rules | [type_system_foundations](type_theory/10_type_system_foundations.md) |
+| **型变** | Def 1.1–3.1（协变、逆变、不变） | [variance_theory](type_theory/10_variance_theory.md) |
+| **Trait** | Axiom COH1/COH2、对象安全、impl 解析 | [trait_system_formalization](type_theory/10_trait_system_formalization.md) |
+| **异步** | Def 4.1–5.2（Future、Poll、Ready/Pending） | [async_state_machine](formal_methods/10_async_state_machine.md) |
+| **Pin** | Def 1.1–2.2（位置稳定、自引用） | [pin_self_referential](formal_methods/10_pin_self_referential.md) |
+| **Send/Sync** | Def SEND1/SYNC1、SYNC-L1（$T:\text{Sync} \Leftrightarrow \&T:\text{Send}$）；SEND-T1/SYNC-T1 | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) |
+| **控制流** | A-CF1：控制流归约保持类型与所有权 | [formal_methods/README](formal_methods/README.md#控制流形式化) |
+| **变量** | Def 1.4 绑定、Def 1.5 遮蔽 | [ownership_model](formal_methods/10_ownership_model.md) |
 
 ### 1.2 定理依赖 DAG（简化）
 
@@ -203,16 +203,16 @@
 
 | 子文档 | 本模型对应 | 定理编号 |
 | :--- | :--- | :--- |
-| [ownership_model](./formal_methods/10_ownership_model.md) | §2.1 内存与所有权、§2.3 A-BIND1/SHADOW1 | T2, T3, Def 1.4/1.5, RC-T1, … |
-| [borrow_checker_proof](./formal_methods/10_borrow_checker_proof.md) | §2.1 A-BR1–4 | T1, T2, CHAN-T1, MUTEX-T1, … |
+| [ownership_model](formal_methods/10_ownership_model.md) | §2.1 内存与所有权、§2.3 A-BIND1/SHADOW1 | T2, T3, Def 1.4/1.5, RC-T1, … |
+| [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) | §2.1 A-BR1–4 | T1, T2, CHAN-T1, MUTEX-T1, … |
 | lifetime_formalization | §2.2 A-LF1–2 | LF-T1, LF-T2, LF-T3 |
-| [type_system_foundations](./type_theory/10_type_system_foundations.md) | §2.2 A-TY1–2 | T1–T5, LUB-T1, … |
-| [variance_theory](./type_theory/10_variance_theory.md) | §2.2 A-VAR1–3 | T1–T4, VAR-COM-T1 |
-| [trait_system_formalization](./type_theory/10_trait_system_formalization.md) | - | T1–T3, COH-T1, RPIT-T1, … |
-| [async_state_machine](./formal_methods/10_async_state_machine.md) | §2.4 A-AS1–2 | T6.1–T6.3, SPAWN-T1 |
-| [pin_self_referential](./formal_methods/10_pin_self_referential.md) | §2.4 A-PIN1–2 | T1–T3 |
-| [04_compositional_engineering](./software_design_theory/04_compositional_engineering/README.md) | 组合层 | CE-T1–T3, CE-L1, CE-C1 |
-| [UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md) | 顶层 | USF-T1, USF-C1 |
+| [type_system_foundations](type_theory/10_type_system_foundations.md) | §2.2 A-TY1–2 | T1–T5, LUB-T1, … |
+| [variance_theory](type_theory/10_variance_theory.md) | §2.2 A-VAR1–3 | T1–T4, VAR-COM-T1 |
+| [trait_system_formalization](type_theory/10_trait_system_formalization.md) | - | T1–T3, COH-T1, RPIT-T1, … |
+| [async_state_machine](formal_methods/10_async_state_machine.md) | §2.4 A-AS1–2 | T6.1–T6.3, SPAWN-T1 |
+| [pin_self_referential](formal_methods/10_pin_self_referential.md) | §2.4 A-PIN1–2 | T1–T3 |
+| [04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md) | 组合层 | CE-T1–T3, CE-L1, CE-C1 |
+| [UNIFIED_SYSTEMATIC_FRAMEWORK](10_unified_systematic_framework.md) | 顶层 | USF-T1, USF-C1 |
 
 ---
 
@@ -232,11 +232,11 @@
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [CORE_THEOREMS_FULL_PROOFS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) — 核心定理 T-OW2、T-BR1、T-TY3 完整证明（L2）
+- [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) — 核心定理 T-OW2、T-BR1、T-TY3 完整证明（L2）
 - [FORMAL_LANGUAGE_AND_PROOFS](10_formal_language_and_proofs.md) — 形式语言与形式证明（推理规则、操作语义、判定形式）
-- [FORMAL_FULL_MODEL_EN_SUMMARY](./10_formal_full_model_en_summary.md) — 英文摘要
-- [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) — 105+ 证明索引、按深度导航
-- [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./10_international_formal_verification_index.md) — 国际对标
+- [FORMAL_FULL_MODEL_EN_SUMMARY](10_formal_full_model_en_summary.md) — 英文摘要
+- [PROOF_INDEX](10_proof_index.md) — 105+ 证明索引、按深度导航
+- [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](10_international_formal_verification_index.md) — 国际对标
 - [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](10_formal_proof_critical_analysis_and_plan_2026_02.md) — 批判性分析与推进计划
 
 ---
@@ -252,7 +252,7 @@
 
 > **适用版本**: Rust 1.96.0+
 
-详见 [RUST_194_RESEARCH_UPDATE](../../archive/research_notes_2026_06_25/10_rust_194_research_update.md)
+详见 [RUST_194_RESEARCH_UPDATE](10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 
@@ -318,7 +318,7 @@
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

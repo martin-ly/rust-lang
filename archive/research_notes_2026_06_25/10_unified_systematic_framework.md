@@ -9,44 +9,44 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Rust 研究笔记：全局统一系统化框架](#rust-研究笔记全局统一系统化框架)
-  - [📑 目录](#-目录)
-  - [🎯 框架宗旨 {#-框架宗旨}](#-框架宗旨--框架宗旨)
-    - [核心问题响应](#核心问题响应)
-  - [形式化论证（框架一致性）](#形式化论证框架一致性)
-  - [🕸️ 全局思维导图：Rust 形式化知识全景 {#️-全局思维导图rust-形式化知识全景}](#️-全局思维导图rust-形式化知识全景-️-全局思维导图rust-形式化知识全景)
-    - [按论证结构展开的思维导图](#按论证结构展开的思维导图)
-  - [📐 多维概念对比矩阵总览 {#-多维概念对比矩阵总览}](#-多维概念对比矩阵总览--多维概念对比矩阵总览)
-    - [1. 概念-公理-定理-证明方法-反例 五维矩阵](#1-概念-公理-定理-证明方法-反例-五维矩阵)
-    - [2. 语义范式 vs 概念族 矩阵](#2-语义范式-vs-概念族-矩阵)
-    - [3. 证明完成度 vs 论证缺口 矩阵](#3-证明完成度-vs-论证缺口-矩阵)
-  - [🌳 公理-定理-证明全链路逻辑推进图 {#-公理-定理-证明全链路逻辑推进图}](#-公理-定理-证明全链路逻辑推进图--公理-定理-证明全链路逻辑推进图)
-    - [证明依赖 DAG（简化）](#证明依赖-dag简化)
-  - [🌲 决策树总览：论证与选型 {#-决策树总览论证与选型}](#-决策树总览论证与选型--决策树总览论证与选型)
-    - [1. 论证缺口决策树](#1-论证缺口决策树)
-    - [2. 表达能力边界决策树](#2-表达能力边界决策树)
-    - [3. 思维表征选型决策树](#3-思维表征选型决策树)
-  - [⚠️ 反例总索引 {#️-反例总索引}](#️-反例总索引-️-反例总索引)
-  - [🧬 语义归纳与概念族谱统一 {#-语义归纳与概念族谱统一}](#-语义归纳与概念族谱统一--语义归纳与概念族谱统一)
-    - [语义归纳表（一句话总结）](#语义归纳表一句话总结)
-    - [概念族依赖关系](#概念族依赖关系)
-  - [🔗 全局一致性校验矩阵 {#-全局一致性校验矩阵}](#-全局一致性校验矩阵--全局一致性校验矩阵)
-    - [术语一致性](#术语一致性)
-    - [公理编号一致性](#公理编号一致性)
-  - [📑 按特性族/类型族/执行模型子索引 {#-按特性族类型族执行模型子索引}](#-按特性族类型族执行模型子索引--按特性族类型族执行模型子索引)
-    - [按特性族](#按特性族)
-    - [按类型族](#按类型族)
-    - [按执行模型](#按执行模型)
-    - [设计模式表征与组件构建](#设计模式表征与组件构建)
-  - [📚 文档交叉引用总索引 {#-文档交叉引用总索引}](#-文档交叉引用总索引--文档交叉引用总索引)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [Rust 研究笔记：全局统一系统化框架](.#rust-研究笔记全局统一系统化框架)
+  - [📑 目录](.#-目录)
+  - [🎯 框架宗旨 {#-框架宗旨}](.#-框架宗旨--框架宗旨)
+    - [核心问题响应](.#核心问题响应)
+  - [形式化论证（框架一致性）](.#形式化论证框架一致性)
+  - [🕸️ 全局思维导图：Rust 形式化知识全景 {#️-全局思维导图rust-形式化知识全景}](.#️-全局思维导图rust-形式化知识全景-️-全局思维导图rust-形式化知识全景)
+    - [按论证结构展开的思维导图](.#按论证结构展开的思维导图)
+  - [📐 多维概念对比矩阵总览 {#-多维概念对比矩阵总览}](.#-多维概念对比矩阵总览--多维概念对比矩阵总览)
+    - [1. 概念-公理-定理-证明方法-反例 五维矩阵](.#1-概念-公理-定理-证明方法-反例-五维矩阵)
+    - [2. 语义范式 vs 概念族 矩阵](.#2-语义范式-vs-概念族-矩阵)
+    - [3. 证明完成度 vs 论证缺口 矩阵](.#3-证明完成度-vs-论证缺口-矩阵)
+  - [🌳 公理-定理-证明全链路逻辑推进图 {#-公理-定理-证明全链路逻辑推进图}](.#-公理-定理-证明全链路逻辑推进图--公理-定理-证明全链路逻辑推进图)
+    - [证明依赖 DAG（简化）](.#证明依赖-dag简化)
+  - [🌲 决策树总览：论证与选型 {#-决策树总览论证与选型}](.#-决策树总览论证与选型--决策树总览论证与选型)
+    - [1. 论证缺口决策树](.#1-论证缺口决策树)
+    - [2. 表达能力边界决策树](.#2-表达能力边界决策树)
+    - [3. 思维表征选型决策树](.#3-思维表征选型决策树)
+  - [⚠️ 反例总索引 {#️-反例总索引}](.#️-反例总索引-️-反例总索引)
+  - [🧬 语义归纳与概念族谱统一 {#-语义归纳与概念族谱统一}](.#-语义归纳与概念族谱统一--语义归纳与概念族谱统一)
+    - [语义归纳表（一句话总结）](.#语义归纳表一句话总结)
+    - [概念族依赖关系](.#概念族依赖关系)
+  - [🔗 全局一致性校验矩阵 {#-全局一致性校验矩阵}](.#-全局一致性校验矩阵--全局一致性校验矩阵)
+    - [术语一致性](.#术语一致性)
+    - [公理编号一致性](.#公理编号一致性)
+  - [📑 按特性族/类型族/执行模型子索引 {#-按特性族类型族执行模型子索引}](.#-按特性族类型族执行模型子索引--按特性族类型族执行模型子索引)
+    - [按特性族](.#按特性族)
+    - [按类型族](.#按类型族)
+    - [按执行模型](.#按执行模型)
+    - [设计模式表征与组件构建](.#设计模式表征与组件构建)
+  - [📚 文档交叉引用总索引 {#-文档交叉引用总索引}](.#-文档交叉引用总索引--文档交叉引用总索引)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -60,7 +60,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**上位文档**：[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md) —— 理论体系四层架构、论证体系五层结构、安全与非安全全面论证（顶层框架）。
+**上位文档**：[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](10_theoretical_and_argumentation_system_architecture.md) —— 理论体系四层架构、论证体系五层结构、安全与非安全全面论证（顶层框架）。
 
 ### 核心问题响应
 
@@ -76,7 +76,7 @@
 | 无全局一致性 | 全局一致性校验矩阵 + 术语对照 |
 | 语义归纳缺失 | 概念族谱 + 一句话语义归纳 |
 | 思维表征分散 | 思维导图、矩阵、证明树、决策树、反例统一索引 |
-| 缺少编程语言构造性语义 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) |
+| 缺少编程语言构造性语义 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](10_language_semantics_expressiveness.md) |
 | 缺少表达能力边界论证 | 同上 + 本框架 § 表达能力边界决策树 |
 
 ---
@@ -91,7 +91,7 @@
 
 **定理 USF-T1（框架一致性）**：若 $d_1, d_2 \in \mathcal{F}$ 均引用同一概念 $C$，则 $d_1$ 与 $d_2$ 对 $C$ 的形式化定义或引用一致。
 
-*证明*：由 [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md) 全局一致性矩阵；术语、公理编号、定义链已校验。∎
+*证明*：由 [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](10_comprehensive_systematic_overview.md) 全局一致性矩阵；术语、公理编号、定义链已校验。∎
 
 **推论 USF-C1**：反例索引与各模块反例一一对应；违反任一模块定理的代码在反例索引中可查。
 
@@ -203,7 +203,7 @@
 | 操作语义 | 归约保持所有权 | 保持性 T2 | 数据竞争自由 | 规则即边界 |
 | 指称语义 | - | 类型=命题 | - | 构造性限制 |
 | 公理语义 | 分离逻辑 | Hoare | unsafe 契约 | 前置/后置 |
-| 设计机制 | Pin 堆/栈、Send/Sync、Trait 对象 | 动机→决策→论证→反例 | [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) |
+| 设计机制 | Pin 堆/栈、Send/Sync、Trait 对象 | 动机→决策→论证→反例 | [DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md) |
 
 ### 3. 证明完成度 vs 论证缺口 矩阵
 
@@ -366,11 +366,11 @@
 | Pin | 移动未 Pin 自引用 | 位置稳定 | [pin_self_referential](formal_methods/10_pin_self_referential.md) |
 | Trait | 对象安全违规 | vtable 约束 | [trait_system_formalization](type_theory/10_trait_system_formalization.md) |
 | 类型系统 | 类型不匹配 | 类型安全 | [type_system_foundations](type_theory/10_type_system_foundations.md) |
-| 设计模式 | Singleton 全局可变未同步 | 数据竞争 | [singleton](../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/01_creational/10_singleton.md) |
-| 设计模式 | Observer 共享可变无 Mutex | 数据竞争 | [observer](../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/03_behavioral/10_observer.md) |
-| 设计模式 | Composite 循环引用 | 所有权无法表达 | [composite](../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/02_structural/10_composite.md) |
-| 设计模式 | Builder 必填未设 | 不变式违反 | [builder](../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/01_creational/10_builder.md) |
-| 设计模式 | Memento 恢复非法状态 | 不变式违反 | [memento](../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/03_behavioral/10_memento.md) |
+| 设计模式 | Singleton 全局可变未同步 | 数据竞争 | [singleton](software_design_theory/01_design_patterns_formal/01_creational/10_singleton.md) |
+| 设计模式 | Observer 共享可变无 Mutex | 数据竞争 | [observer](software_design_theory/01_design_patterns_formal/03_behavioral/10_observer.md) |
+| 设计模式 | Composite 循环引用 | 所有权无法表达 | [composite](software_design_theory/01_design_patterns_formal/02_structural/10_composite.md) |
+| 设计模式 | Builder 必填未设 | 不变式违反 | [builder](software_design_theory/01_design_patterns_formal/01_creational/10_builder.md) |
+| 设计模式 | Memento 恢复非法状态 | 不变式违反 | [memento](software_design_theory/01_design_patterns_formal/03_behavioral/10_memento.md) |
 
 ---
 
@@ -393,7 +393,7 @@
 | Pin | 非 Unpin 被 Pin 后位置不变，自引用安全 | pin_self_referential |
 | Trait 对象 | vtable 动态分发、对象安全约束、解析正确 | trait_system_formalization |
 | 操作语义 | 程序通过归约/求值执行，保持类型与所有权 | type_system, ownership |
-| 指称语义 | 类型=命题，程序=证明，Result/! 对应 ∨/⊥ | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) |
+| 指称语义 | 类型=命题，程序=证明，Result/! 对应 ∨/⊥ | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](10_language_semantics_expressiveness.md) |
 | 公理语义 | 前置/后置条件刻画 unsafe 契约 | 同上 |
 
 ### 概念族依赖关系
@@ -460,12 +460,12 @@ Pin ──→ 自引用安全
 
 | 特性族 | 矩阵 | 决策树 | 完整链 |
 | :--- | :--- | :--- | :--- |
-| **Rust 1.93 全特性** | [RUST_193_FEATURE_MATRIX](../../archive/research_notes_2026_06_25/10_rust_193_feature_matrix.md) 五维矩阵 | RUST_193 特性覆盖 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md) |
-| **内存与所有权** | 五维矩阵 § 所有权/借用 | 表达能力边界决策树 § 内存管理 | [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) 所有权/借用 |
+| **Rust 1.93 全特性** | [RUST_193_FEATURE_MATRIX](10_rust_193_feature_matrix.md) 五维矩阵 | RUST_193 特性覆盖 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](10_rust_193_language_features_comprehensive_analysis.md) |
+| **内存与所有权** | 五维矩阵 § 所有权/借用 | 表达能力边界决策树 § 内存管理 | [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md) 所有权/借用 |
 | **类型系统** | 五维矩阵 § 类型安全/协变 | 表达能力边界决策树 § 类型多态 | [construction_capability](type_theory/10_construction_capability.md) |
-| **Trait 与多态** | 五维矩阵 § Trait 对象 | 思维表征选型 | [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) Trait/泛型 |
-| **控制流** | - | - | [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) match/for/? |
-| **并发与异步** | 五维矩阵 § Future/Pin | 表达能力边界决策树 § 并发/异步 | [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) Send/Sync/Future |
+| **Trait 与多态** | 五维矩阵 § Trait 对象 | 思维表征选型 | [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md) Trait/泛型 |
+| **控制流** | - | - | [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md) match/for/? |
+| **并发与异步** | 五维矩阵 § Future/Pin | 表达能力边界决策树 § 并发/异步 | [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md) Send/Sync/Future |
 
 ### 按类型族
 >
@@ -506,22 +506,22 @@ Pin ──→ 自引用安全
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文档 | 用途 |
-| [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md) | **顶层框架**：理论体系、论证体系、安全与非安全 |
-| [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./10_safe_unsafe_comprehensive_analysis.md) | 安全与非安全全面论证、契约、UB、安全抽象 |
-| [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md) | 全面系统化梳理总览、语义归纳、概念族谱 |
-| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) | 构造性语义形式化、表达能力边界 |
-| [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) | 论证缺口、概念-公理-定理映射、反例索引 |
-| [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) | 形式化证明索引、公理编号规范 |
-| [INDEX](./INDEX.md) | 研究笔记完整索引 |
+| [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](10_theoretical_and_argumentation_system_architecture.md) | **顶层框架**：理论体系、论证体系、安全与非安全 |
+| [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](10_safe_unsafe_comprehensive_analysis.md) | 安全与非安全全面论证、契约、UB、安全抽象 |
+| [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](10_comprehensive_systematic_overview.md) | 全面系统化梳理总览、语义归纳、概念族谱 |
+| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](10_language_semantics_expressiveness.md) | 构造性语义形式化、表达能力边界 |
+| [FORMAL_PROOF_SYSTEM_GUIDE](10_formal_proof_system_guide.md) | 论证缺口、概念-公理-定理映射、反例索引 |
+| [PROOF_INDEX](10_proof_index.md) | 形式化证明索引、公理编号规范 |
+| [INDEX](INDEX.md) | 研究笔记完整索引 |
 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/04_multi_dimensional_concept_matrix.md) | 多维概念矩阵 |
 | [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) | 思维导图集合 |
 | [DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md) | 决策树 |
 | [PROOF_GRAPH_NETWORK](../04_thinking/04_proof_graph_network.md) | 证明图网 |
 | [KNOWLEDGE_STRUCTURE_FRAMEWORK](../07_project/07_knowledge_structure_framework.md) | 知识结构、概念定义、思维表征 |
 | [software_design_theory](software_design_theory/README.md) | **软件设计理论**：设计模式形式化、23/43 模型、执行模型、组合工程 |
-| [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) | 13 项核心特性完整链 |
-| [FEATURE_TEMPLATE](../../archive/research_notes_2026_06_25/10_feature_template.md) | 79 项特性精简模板 |
-| [INCREMENTAL_UPDATE_FLOW](./10_incremental_update_flow.md) | 版本增量更新流程 |
+| [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md) | 13 项核心特性完整链 |
+| [FEATURE_TEMPLATE](10_feature_template.md) | 79 项特性精简模板 |
+| [INCREMENTAL_UPDATE_FLOW](10_incremental_update_flow.md) | 版本增量更新流程 |
 
 ---
 
@@ -588,7 +588,7 @@ Pin ──→ 自引用安全
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

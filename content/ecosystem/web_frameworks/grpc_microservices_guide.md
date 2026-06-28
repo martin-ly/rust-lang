@@ -8,18 +8,18 @@
 
 ## 📋 目录
 
-- [gRPC 微服务实战指南](#grpc-微服务实战指南)
-  - [📋 目录](#-目录)
-  - [🎯 为什么选择 gRPC](#-为什么选择-grpc)
-  - [⚡ 快速开始](#-快速开始)
-    - [1. 定义 Protocol Buffers](#1-定义-protocol-buffers)
-    - [2. 生成 Rust 代码](#2-生成-rust-代码)
-    - [3. 实现服务端](#3-实现服务端)
-    - [4. 实现客户端](#4-实现客户端)
-  - [🔐 TLS 安全传输](#-tls-安全传输)
-  - [🔄 流式通信](#-流式通信)
-  - [📊 与 REST 对比](#-与-rest-对比)
-  - [🔗 参考资源](#-参考资源)
+- [gRPC 微服务实战指南](.#grpc-微服务实战指南)
+  - [📋 目录](.#-目录)
+  - [🎯 为什么选择 gRPC](.#-为什么选择-grpc)
+  - [⚡ 快速开始](.#-快速开始)
+    - [1. 定义 Protocol Buffers](.#1-定义-protocol-buffers)
+    - [2. 生成 Rust 代码](.#2-生成-rust-代码)
+    - [3. 实现服务端](.#3-实现服务端)
+    - [4. 实现客户端](.#4-实现客户端)
+  - [🔐 TLS 安全传输](.#-tls-安全传输)
+  - [🔄 流式通信](.#-流式通信)
+  - [📊 与 REST 对比](.#-与-rest-对比)
+  - [🔗 参考资源](.#-参考资源)
 
 ---
 
@@ -253,7 +253,7 @@ impl EchoService for EchoServiceImpl {
 - [Tonic 文档](https://docs.rs/tonic)
 - [Protobuf 指南](https://protobuf.dev/)
 - [gRPC 官方文档](https://grpc.io/docs/)
-- [项目 C10 网络模块](../../crates/c10_networks/)
+- [项目 C10 网络模块](../../crates/c10_networks)
 
 ---
 

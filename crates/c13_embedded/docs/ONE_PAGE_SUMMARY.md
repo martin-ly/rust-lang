@@ -1,7 +1,7 @@
 # C13 嵌入式系统 - 一页纸总结
 
 > **用途**: 快速回顾核心概念与学习路径
-> **完整文档**: [00_MASTER_INDEX](./00_MASTER_INDEX.md)
+> **完整文档**: [00_MASTER_INDEX](00_MASTER_INDEX.md)
 
 ---
 

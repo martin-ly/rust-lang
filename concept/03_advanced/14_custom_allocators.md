@@ -7,7 +7,7 @@
 > **受众**: [专家]
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 深入探讨 Rust 的**自定义分配器**机制——从 `GlobalAlloc` Trait 到 `allocator_api` 不稳定特性，分析内存布局对齐、分配策略与性能优化。
-> **前置概念**: [Memory Management](../02_intermediate/03_memory_management.md) · [Type System](../01_foundation/04_type_system.md) · [Unsafe Rust](./03_unsafe.md)
+> **前置概念**: [Memory Management](../02_intermediate/03_memory_management.md) · [Type System](../01_foundation/04_type_system.md) · [Unsafe Rust](03_unsafe.md)
 > **后置概念**: [Performance Optimization](../06_ecosystem/15_performance_optimization.md) · [Embedded](../06_ecosystem/04_application_domains.md)
 
 ---
@@ -20,49 +20,49 @@
 
 ## 📑 目录
 
-- [自定义分配器与内存布局优化](#自定义分配器与内存布局优化)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 GlobalAlloc Trait](#11-globalalloc-trait)
-    - [1.2 分配器属性](#12-分配器属性)
-  - [二、实践模式](#二实践模式)
-    - [2.1 bumpalo — Bump 分配器](#21-bumpalo--bump-分配器)
-    - [2.2 jemalloc / mimalloc](#22-jemalloc--mimalloc)
-    - [2.3 arena 分配器](#23-arena-分配器)
-  - [三、内存布局与对齐](#三内存布局与对齐)
-    - [3.1 Layout](#31-layout)
-    - [3.2 对齐约束](#32-对齐约束)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、常见陷阱](#五常见陷阱)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-    - [编译验证示例](#编译验证示例)
-  - [相关概念文件](#相关概念文件)
-  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：自定义分配器的编译错误](#十边界测试自定义分配器的编译错误)
-    - [10.1 边界测试：分配器布局不匹配（运行时 UB）](#101-边界测试分配器布局不匹配运行时-ub)
-    - [10.2 边界测试：`Vec` 自定义分配器的泛型参数（编译错误）](#102-边界测试vec-自定义分配器的泛型参数编译错误)
+- [自定义分配器与内存布局优化](.#自定义分配器与内存布局优化)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 GlobalAlloc Trait](.#11-globalalloc-trait)
+    - [1.2 分配器属性](.#12-分配器属性)
+  - [二、实践模式](.#二实践模式)
+    - [2.1 bumpalo — Bump 分配器](.#21-bumpalo--bump-分配器)
+    - [2.2 jemalloc / mimalloc](.#22-jemalloc--mimalloc)
+    - [2.3 arena 分配器](.#23-arena-分配器)
+  - [三、内存布局与对齐](.#三内存布局与对齐)
+    - [3.1 Layout](.#31-layout)
+    - [3.2 对齐约束](.#32-对齐约束)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、常见陷阱](.#五常见陷阱)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+    - [编译验证示例](.#编译验证示例)
+  - [相关概念文件](.#相关概念文件)
+  - [逆向推理链（Backward Reasoning）](.#逆向推理链backward-reasoning)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：自定义分配器的编译错误](.#十边界测试自定义分配器的编译错误)
+    - [10.1 边界测试：分配器布局不匹配（运行时 UB）](.#101-边界测试分配器布局不匹配运行时-ub)
+    - [10.2 边界测试：`Vec` 自定义分配器的泛型参数（编译错误）](.#102-边界测试vec-自定义分配器的泛型参数编译错误)
     - [10.3 边界测试：全局分配器的 `#[global_allocator]` 重复定义（编译错误）](#103-边界测试全局分配器的-global_allocator-重复定义编译错误)
-    - [10.4 边界测试：自定义分配器的 `Layout` 对齐要求（运行时 UB）](#104-边界测试自定义分配器的-layout-对齐要求运行时-ub)
-    - [10.5 边界测试：分配器的 `dealloc` 与 `alloc` 的布局不匹配（运行时 UB）](#105-边界测试分配器的-dealloc-与-alloc-的布局不匹配运行时-ub)
+    - [10.4 边界测试：自定义分配器的 `Layout` 对齐要求（运行时 UB）](.#104-边界测试自定义分配器的-layout-对齐要求运行时-ub)
+    - [10.5 边界测试：分配器的 `dealloc` 与 `alloc` 的布局不匹配（运行时 UB）](.#105-边界测试分配器的-dealloc-与-alloc-的布局不匹配运行时-ub)
     - [10.3 边界测试：全局分配器与 `#[global_allocator]` 重复定义（编译错误）](#103-边界测试全局分配器与-global_allocator-重复定义编译错误)
-    - [10.4 边界测试：自定义分配器的 Layout 不匹配与内存安全（运行时 UB）](#104-边界测试自定义分配器的-layout-不匹配与内存安全运行时-ub)
-    - [10.3 边界测试：函数重复定义](#103-边界测试函数重复定义)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：`GlobalAlloc` trait 需要实现哪两个核心方法？（理解层）](#测验-1globalalloc-trait-需要实现哪两个核心方法理解层)
+    - [10.4 边界测试：自定义分配器的 Layout 不匹配与内存安全（运行时 UB）](.#104-边界测试自定义分配器的-layout-不匹配与内存安全运行时-ub)
+    - [10.3 边界测试：函数重复定义](.#103-边界测试函数重复定义)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：`GlobalAlloc` trait 需要实现哪两个核心方法？（理解层）](.#测验-1globalalloc-trait-需要实现哪两个核心方法理解层)
     - [测验 2：`#[global_allocator]` 属性的作用是什么？使用时有什么限制？（理解层）](#测验-2global_allocator-属性的作用是什么使用时有什么限制理解层)
-    - [测验 3：`Layout` 结构体描述内存分配的哪些属性？（理解层）](#测验-3layout-结构体描述内存分配的哪些属性理解层)
-    - [测验 4：`Allocator` trait 与 `GlobalAlloc` trait 的主要区别是什么？（理解层）](#测验-4allocator-trait-与-globalalloc-trait-的主要区别是什么理解层)
-    - [测验 5：自定义分配器在释放内存时若传入了错误的 `Layout` 可能导致什么问题？（理解层）](#测验-5自定义分配器在释放内存时若传入了错误的-layout-可能导致什么问题理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
-  - [实践](#实践)
-    - [对应代码示例](#对应代码示例)
-    - [建议练习](#建议练习)
-  - [导航：下一步去哪？](#导航下一步去哪)
+    - [测验 3：`Layout` 结构体描述内存分配的哪些属性？（理解层）](.#测验-3layout-结构体描述内存分配的哪些属性理解层)
+    - [测验 4：`Allocator` trait 与 `GlobalAlloc` trait 的主要区别是什么？（理解层）](.#测验-4allocator-trait-与-globalalloc-trait-的主要区别是什么理解层)
+    - [测验 5：自定义分配器在释放内存时若传入了错误的 `Layout` 可能导致什么问题？（理解层）](.#测验-5自定义分配器在释放内存时若传入了错误的-layout-可能导致什么问题理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
+  - [实践](.#实践)
+    - [对应代码示例](.#对应代码示例)
+    - [建议练习](.#建议练习)
+  - [导航：下一步去哪？](.#导航下一步去哪)
 
 ---
 
@@ -488,7 +488,7 @@ fn main() {
 ## 相关概念文件
 
 - [Memory Management](../02_intermediate/03_memory_management.md) — 内存管理基础
-- [Unsafe Rust](./03_unsafe.md) — unsafe Rust 基础
+- [Unsafe Rust](03_unsafe.md) — unsafe Rust 基础
 - [Type System](../01_foundation/04_type_system.md) — 类型系统（Type System）
 - [Performance Optimization](../06_ecosystem/15_performance_optimization.md) — 性能优化
 
@@ -859,7 +859,7 @@ fn main() {}
 
 | 选择 | 条件 | 目标 |
 |:---|:---|:---|
-| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate/) 或 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) |
-| 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
+| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate) 或 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) |
+| 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../06_ecosystem/README.md) |

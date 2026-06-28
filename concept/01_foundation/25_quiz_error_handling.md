@@ -19,12 +19,12 @@
 > [The Rust Programming Language — Ch18 Patterns](https://doc.rust-lang.org/book/ch18-00-patterns.html)
 >
 > **前置概念**:
-> [Error Handling Basics](./10_error_handling_basics.md) ·
-> [Type System](./04_type_system.md) ·
-> [Ownership](./01_ownership.md)
+> [Error Handling Basics](10_error_handling_basics.md) ·
+> [Type System](04_type_system.md) ·
+> [Ownership](01_ownership.md)
 >
 > **对应练习**:
-> [`exercises/src/error_handling/`](../../exercises/src/error_handling/)
+> [`exercises/src/error_handling/`](../../exercises/src/error_handling)
 
 ---
 
@@ -112,7 +112,7 @@ let val = match may_fail() {
 
 **转换能力**：`?` 会自动调用 `.into()` 进行错误类型转换（要求目标错误类型实现 `From<SourceError>`）。
 
-**知识点**：`?` 运算符消除了 Go/Java 中冗长的 `if err != nil` 或 `try-catch` 样板代码，同时保持显式错误传播。[→ 错误处理（Error Handling）基础详解](./10_error_handling_basics.md)
+**知识点**：`?` 运算符消除了 Go/Java 中冗长的 `if err != nil` 或 `try-catch` 样板代码，同时保持显式错误传播。[→ 错误处理（Error Handling）基础详解](10_error_handling_basics.md)
 
 </details>
 
@@ -166,7 +166,7 @@ let m = bad.parse().unwrap_or_default(); // 失败时用类型默认值
 let m = bad.parse()?;                    // 传播错误
 ```
 
-**知识点**：`unwrap` 是 Rust 中最常见的 panic 来源之一。生产代码应尽量避免，或用 `unwrap_or` / `unwrap_or_else` 替代。[→ 错误处理基础详解](./10_error_handling_basics.md)
+**知识点**：`unwrap` 是 Rust 中最常见的 panic 来源之一。生产代码应尽量避免，或用 `unwrap_or` / `unwrap_or_else` 替代。[→ 错误处理基础详解](10_error_handling_basics.md)
 
 </details>
 
@@ -220,7 +220,7 @@ Some(6)
 | `unwrap_or(def)` | `v` | `def` | 提取值或默认 |
 | `unwrap_or_else(f)` | `v` | `f()` | 惰性默认值 |
 
-**知识点**：`Option` 组合子允许在不展开值的情况下进行链式操作，避免嵌套 `match`。[→ 集合类型详解](./08_collections.md)
+**知识点**：`Option` 组合子允许在不展开值的情况下进行链式操作，避免嵌套 `match`。[→ 集合类型详解](08_collections.md)
 
 </details>
 
@@ -273,7 +273,7 @@ let Some(mode) = config else {
 println!("Mode: {mode}");
 ```
 
-**知识点**：Rust 提供多种 Option 解构语法，选择取决于"需要处理多少种情况"和"是否需要提前返回"。[→ 控制流详解](./07_control_flow.md)
+**知识点**：Rust 提供多种 Option 解构语法，选择取决于"需要处理多少种情况"和"是否需要提前返回"。[→ 控制流详解](07_control_flow.md)
 
 </details>
 
@@ -318,7 +318,7 @@ if let Some(val) = v.get(idx) {
 }
 ```
 
-**知识点**：Rust 区分"可恢复错误"（`Result`）和"不可恢复错误"（`panic`）。选择正确的错误处理策略是健壮程序的基础。[→ Panic 详解](./13_panic_and_abort.md)
+**知识点**：Rust 区分"可恢复错误"（`Result`）和"不可恢复错误"（`panic`）。选择正确的错误处理策略是健壮程序的基础。[→ Panic 详解](13_panic_and_abort.md)
 
 </details>
 
@@ -363,7 +363,7 @@ fn main() {
 3. `.filter(...)` → `None`（短路）
 4. `.unwrap_or(0.0)` → `0.0`
 
-**知识点**：`Option` 组合子的链式调用是 Rust 函数式编程风格的典型表现，每个操作都是"失败即短路"。[→ 错误处理基础详解](./10_error_handling_basics.md)
+**知识点**：`Option` 组合子的链式调用是 Rust 函数式编程风格的典型表现，每个操作都是"失败即短路"。[→ 错误处理基础详解](10_error_handling_basics.md)
 
 </details>
 
@@ -549,7 +549,7 @@ result
     .and_then(|v| v.validate())
 ```
 
-**知识点**：`map` / `map_err` 是 `Result` 的"端点转换"工具，允许在不展开的情况下修改成功值或错误值。[→ 错误处理基础详解](./10_error_handling_basics.md)
+**知识点**：`map` / `map_err` 是 `Result` 的"端点转换"工具，允许在不展开的情况下修改成功值或错误值。[→ 错误处理基础详解](10_error_handling_basics.md)
 
 </details>
 
@@ -560,13 +560,13 @@ result
 | 得分 | 评价 | 建议 |
 |:---:|:---|:---|
 | 10/10 | 🏆 错误处理已内化 | 进阶至 [L2 错误处理深度](../02_intermediate/04_error_handling.md) 或 `anyhow`/`thiserror` 生态 |
-| 7–9/10 | ✅ 核心概念掌握 | 强化 [L1 错误处理练习](../../exercises/src/error_handling/)，关注错题 |
-| 4–6/10 | 🔄 需巩固基础 | 重读 [Error Handling Basics](./10_error_handling_basics.md)，完成 rustlings 对应章节 |
-| 0–3/10 | 📚 建议重新开始 | 从 [Error Handling Basics](./10_error_handling_basics.md) 逐节阅读，配合 `exercises/src/error_handling/` 示例 |
+| 7–9/10 | ✅ 核心概念掌握 | 强化 [L1 错误处理练习](../../exercises/src/error_handling)，关注错题 |
+| 4–6/10 | 🔄 需巩固基础 | 重读 [Error Handling Basics](10_error_handling_basics.md)，完成 rustlings 对应章节 |
+| 0–3/10 | 📚 建议重新开始 | 从 [Error Handling Basics](10_error_handling_basics.md) 逐节阅读，配合 `exercises/src/error_handling/` 示例 |
 
 ---
 
-> **对应练习**: [`exercises/src/error_handling/`](../../exercises/src/error_handling/)
+> **对应练习**: [`exercises/src/error_handling/`](../../exercises/src/error_handling)
 
 ---
 

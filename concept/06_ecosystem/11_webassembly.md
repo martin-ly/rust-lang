@@ -15,8 +15,8 @@
 > 探讨 `wasm32-unknown-unknown` / `wasm32-wasip1` 或 `wasm32-wasip2` 目标、
 > `wasm-bindgen [来源: [wasm-bindgen](https://github.com/rustwasm/wasm-bindgen)]`、
 > 组件模型以及 Rust 作为 Wasm 首选语言的工程原因。
-> **前置概念**: [Toolchain](./01_toolchain.md) · [FFI](../03_advanced/05_rust_ffi.md) · [Type System](../01_foundation/04_type_system.md)
-> **后置概念**: [WASI](./08_wasi.md)
+> **前置概念**: [Toolchain](01_toolchain.md) · [FFI](../03_advanced/05_rust_ffi.md) · [Type System](../01_foundation/04_type_system.md)
+> **后置概念**: [WASI](08_wasi.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -30,39 +30,39 @@
 ## 📑 目录
 
 - WebAssembly 生态：Rust 的浏览器外运行时（Runtime）
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 WebAssembly 的设计哲学](#11-webassembly-的设计哲学)
-    - [1.2 Rust → Wasm 的编译模型](#12-rust--wasm-的编译模型)
-    - [1.3 为什么 Rust 是 Wasm 的首选语言](#13-为什么-rust-是-wasm-的首选语言)
-  - [二、技术细节](#二技术细节)
-    - [2.1 wasm32 目标三元组](#21-wasm32-目标三元组)
-    - [2.2 wasm-bindgen 与 JS 互操作](#22-wasm-bindgen-与-js-互操作)
-    - [2.3 Wasm 组件模型](#23-wasm-组件模型)
-    - [2.4 Rust 1.96 链接器行为变更：`--allow-undefined` 默认移除](#24-rust-196-链接器行为变更--allow-undefined-默认移除)
-  - [三、应用场景分析](#三应用场景分析)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、工具链与运行时](#五工具链与运行时)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：WebAssembly 的编译错误](#十边界测试webassembly-的编译错误)
-    - [10.1 边界测试：`wasm32` 目标的标准库限制（编译错误）](#101-边界测试wasm32-目标的标准库限制编译错误)
-    - [10.2 边界测试：`wasm-bindgen` 的类型映射（编译错误）](#102-边界测试wasm-bindgen-的类型映射编译错误)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 WebAssembly 的设计哲学](.#11-webassembly-的设计哲学)
+    - [1.2 Rust → Wasm 的编译模型](.#12-rust--wasm-的编译模型)
+    - [1.3 为什么 Rust 是 Wasm 的首选语言](.#13-为什么-rust-是-wasm-的首选语言)
+  - [二、技术细节](.#二技术细节)
+    - [2.1 wasm32 目标三元组](.#21-wasm32-目标三元组)
+    - [2.2 wasm-bindgen 与 JS 互操作](.#22-wasm-bindgen-与-js-互操作)
+    - [2.3 Wasm 组件模型](.#23-wasm-组件模型)
+    - [2.4 Rust 1.96 链接器行为变更：`--allow-undefined` 默认移除](.#24-rust-196-链接器行为变更--allow-undefined-默认移除)
+  - [三、应用场景分析](.#三应用场景分析)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、工具链与运行时](.#五工具链与运行时)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：WebAssembly 的编译错误](.#十边界测试webassembly-的编译错误)
+    - [10.1 边界测试：`wasm32` 目标的标准库限制（编译错误）](.#101-边界测试wasm32-目标的标准库限制编译错误)
+    - [10.2 边界测试：`wasm-bindgen` 的类型映射（编译错误）](.#102-边界测试wasm-bindgen-的类型映射编译错误)
     - 10.3 边界测试：WASM 的线性内存与 Rust 引用（Reference）的不兼容性（编译错误）
-    - [10.4 边界测试：`wasm32-unknown-unknown` 的 panic 处理（编译错误/运行时陷阱）](#104-边界测试wasm32-unknown-unknown-的-panic-处理编译错误运行时陷阱)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：WebAssembly（WASM）相比 JavaScript 在性能上的主要优势是什么？（理解层）](#测验-1webassemblywasm相比-javascript-在性能上的主要优势是什么理解层)
-    - [测验 2：Rust 编译为 WASM 时，为什么需要 `wasm-bindgen`？（理解层）](#测验-2rust-编译为-wasm-时为什么需要-wasm-bindgen理解层)
-    - [测验 3：`wasm-pack` 在 Rust/WASM 工作流中扮演什么角色？（理解层）](#测验-3wasm-pack-在-rustwasm-工作流中扮演什么角色理解层)
+    - [10.4 边界测试：`wasm32-unknown-unknown` 的 panic 处理（编译错误/运行时陷阱）](.#104-边界测试wasm32-unknown-unknown-的-panic-处理编译错误运行时陷阱)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：WebAssembly（WASM）相比 JavaScript 在性能上的主要优势是什么？（理解层）](.#测验-1webassemblywasm相比-javascript-在性能上的主要优势是什么理解层)
+    - [测验 2：Rust 编译为 WASM 时，为什么需要 `wasm-bindgen`？（理解层）](.#测验-2rust-编译为-wasm-时为什么需要-wasm-bindgen理解层)
+    - [测验 3：`wasm-pack` 在 Rust/WASM 工作流中扮演什么角色？（理解层）](.#测验-3wasm-pack-在-rustwasm-工作流中扮演什么角色理解层)
     - 测验 4：WASM 的线性内存（Linear Memory）模型是什么意思？Rust 的所有权（Ownership）系统如何与之交互？（理解层）
-    - [测验 5：WASM 目前有哪些主要限制，使得它还不能完全替代原生应用？（理解层）](#测验-5wasm-目前有哪些主要限制使得它还不能完全替代原生应用理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+    - [测验 5：WASM 目前有哪些主要限制，使得它还不能完全替代原生应用？（理解层）](.#测验-5wasm-目前有哪些主要限制使得它还不能完全替代原生应用理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -448,10 +448,10 @@ Rust Wasm 工具链:
 
 ## 相关概念文件
 
-- [Toolchain](./01_toolchain.md) — Rust 工具链
-- [WASI](./08_wasi.md) — WebAssembly System Interface
+- [Toolchain](01_toolchain.md) — Rust 工具链
+- [WASI](08_wasi.md) — WebAssembly System Interface
 - [FFI](../03_advanced/05_rust_ffi.md) — FFI 跨语言交互
-- [Application Domains](./04_application_domains.md) — 应用领域分析
+- [Application Domains](04_application_domains.md) — 应用领域分析
 
 ---
 

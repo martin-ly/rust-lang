@@ -15,51 +15,51 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [研究路线图](#研究路线图)
-  - [📑 目录](#-目录)
-  - [🎯 路线图概览 {#-路线图概览}](#-路线图概览--路线图概览)
-  - [📚 阶段一：基础理论研究 {#-阶段一基础理论研究}](#-阶段一基础理论研究--阶段一基础理论研究)
-    - [1.1 类型系统基础](#11-类型系统基础)
-    - [1.2 Trait 系统](#12-trait-系统)
-    - [1.3 型变理论](#13-型变理论)
-    - [1.4 类型理论完备性缺口（已完成）](#14-类型理论完备性缺口已完成)
-  - [📚 阶段二：形式化验证 {#-阶段二形式化验证}](#-阶段二形式化验证--阶段二形式化验证)
-    - [2.1 所有权系统](#21-所有权系统)
-    - [2.2 借用检查器](#22-借用检查器)
-    - [2.3 异步系统](#23-异步系统)
-    - [2.4 生命周期系统](#24-生命周期系统)
-    - [2.5 形式化方法完备性缺口](#25-形式化方法完备性缺口)
-    - [2.6 形式化证明批判性分析与推进计划（2026-02-14 完成）](#26-形式化证明批判性分析与推进计划2026-02-14-完成)
-  - [📚 阶段三：实验研究 {#-阶段三实验研究}](#-阶段三实验研究--阶段三实验研究)
-    - [3.1 性能研究](#31-性能研究)
-    - [3.2 内存研究](#32-内存研究)
-    - [3.3 并发研究](#33-并发研究)
-    - [3.4 宏系统研究](#34-宏系统研究)
-  - [📚 阶段四：综合应用 {#-阶段四综合应用}](#-阶段四综合应用--阶段四综合应用)
-    - [4.1 实际应用案例](#41-实际应用案例)
-    - [4.2 研究方法论](#42-研究方法论)
-    - [4.3 高级主题](#43-高级主题)
-  - [🔄 研究优先级 {#-研究优先级}](#-研究优先级--研究优先级)
-    - [高优先级 🔴 {#高优先级-}](#高优先级--高优先级-)
-    - [中优先级 🟡 {#中优先级-}](#中优先级--中优先级-)
-    - [低优先级 🟢 {#低优先级-}](#低优先级--低优先级-)
-  - [📅 时间规划 {#-时间规划}](#-时间规划--时间规划)
-    - [短期目标 (1-3 个月) ✅ {#短期目标-1-3-个月-}](#短期目标-1-3-个月--短期目标-1-3-个月-)
-    - [中期目标 (3-6 个月) ✅ {#中期目标-3-6-个月-}](#中期目标-3-6-个月--中期目标-3-6-个月-)
-    - [长期目标 (6-12 个月) ✅ {#长期目标-6-12-个月-}](#长期目标-6-12-个月--长期目标-6-12-个月-)
-  - [🎯 成功标准 {#-成功标准}](#-成功标准--成功标准)
-    - [理论研究](#理论研究)
-    - [实验研究](#实验研究)
-    - [综合应用](#综合应用)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [研究路线图](.#研究路线图)
+  - [📑 目录](.#-目录)
+  - [🎯 路线图概览 {#-路线图概览}](.#-路线图概览--路线图概览)
+  - [📚 阶段一：基础理论研究 {#-阶段一基础理论研究}](.#-阶段一基础理论研究--阶段一基础理论研究)
+    - [1.1 类型系统基础](.#11-类型系统基础)
+    - [1.2 Trait 系统](.#12-trait-系统)
+    - [1.3 型变理论](.#13-型变理论)
+    - [1.4 类型理论完备性缺口（已完成）](.#14-类型理论完备性缺口已完成)
+  - [📚 阶段二：形式化验证 {#-阶段二形式化验证}](.#-阶段二形式化验证--阶段二形式化验证)
+    - [2.1 所有权系统](.#21-所有权系统)
+    - [2.2 借用检查器](.#22-借用检查器)
+    - [2.3 异步系统](.#23-异步系统)
+    - [2.4 生命周期系统](.#24-生命周期系统)
+    - [2.5 形式化方法完备性缺口](.#25-形式化方法完备性缺口)
+    - [2.6 形式化证明批判性分析与推进计划（2026-02-14 完成）](.#26-形式化证明批判性分析与推进计划2026-02-14-完成)
+  - [📚 阶段三：实验研究 {#-阶段三实验研究}](.#-阶段三实验研究--阶段三实验研究)
+    - [3.1 性能研究](.#31-性能研究)
+    - [3.2 内存研究](.#32-内存研究)
+    - [3.3 并发研究](.#33-并发研究)
+    - [3.4 宏系统研究](.#34-宏系统研究)
+  - [📚 阶段四：综合应用 {#-阶段四综合应用}](.#-阶段四综合应用--阶段四综合应用)
+    - [4.1 实际应用案例](.#41-实际应用案例)
+    - [4.2 研究方法论](.#42-研究方法论)
+    - [4.3 高级主题](.#43-高级主题)
+  - [🔄 研究优先级 {#-研究优先级}](.#-研究优先级--研究优先级)
+    - [高优先级 🔴 {#高优先级-}](.#高优先级--高优先级-)
+    - [中优先级 🟡 {#中优先级-}](.#中优先级--中优先级-)
+    - [低优先级 🟢 {#低优先级-}](.#低优先级--低优先级-)
+  - [📅 时间规划 {#-时间规划}](.#-时间规划--时间规划)
+    - [短期目标 (1-3 个月) ✅ {#短期目标-1-3-个月-}](.#短期目标-1-3-个月--短期目标-1-3-个月-)
+    - [中期目标 (3-6 个月) ✅ {#中期目标-3-6-个月-}](.#中期目标-3-6-个月--中期目标-3-6-个月-)
+    - [长期目标 (6-12 个月) ✅ {#长期目标-6-12-个月-}](.#长期目标-6-12-个月--长期目标-6-12-个月-)
+  - [🎯 成功标准 {#-成功标准}](.#-成功标准--成功标准)
+    - [理论研究](.#理论研究)
+    - [实验研究](.#实验研究)
+    - [综合应用](.#综合应用)
+  - [🔗 相关资源 {#-相关资源}](.#-相关资源--相关资源)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 🎯 路线图概览 {#-路线图概览}
 >
@@ -86,7 +86,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [x] [类型系统基础](./type_theory/10_type_system_foundations.md) ✅ 100%
+- [x] [类型系统基础](type_theory/10_type_system_foundations.md) ✅ 100%
   - 类型环境与类型判断
   - 基本类型规则
   - 类型安全证明
@@ -99,7 +99,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [x] [Trait 系统形式化](./type_theory/10_trait_system_formalization.md) ✅ 100%
+- [x] [Trait 系统形式化](type_theory/10_trait_system_formalization.md) ✅ 100%
   - Trait 的形式化定义
   - Trait 对象语义
   - 泛型 Trait
@@ -112,7 +112,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [x] [型变理论](./type_theory/10_variance_theory.md) ✅ 100%
+- [x] [型变理论](type_theory/10_variance_theory.md) ✅ 100%
   - 协变、逆变、不变
   - 型变规则推导
   - 型变与内存安全
@@ -125,13 +125,13 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [x] [完备性缺口](../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md) ✅ 阶段 1–7 已补全
+- [x] [完备性缺口](formal_methods/00_completeness_gaps.md) ✅ 阶段 1–7 已补全
   - LUB coercion、Copy 与 specialization（LUB-T1、COP-T1）— type_system_foundations 已补全
   - RPITIT、async fn in trait、coherence 定理（COH-T1、RPIT-T1、ASYNC-T1）— 已补全
   - 组合法则、三元（VAR-COM-T1）、impl/dyn 边界（DYN-T1）、const 求值失败（CONST-EVAL-T1）— 已补全
   - 低优先级扩展（offset_of!、never_type、type ascription、newtype 等）— Def 占位已补全
 
-**预期成果**: 缺口补全路线图见 [00_completeness_gaps](../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md)；全部缺口均有 Def 占位。
+**预期成果**: 缺口补全路线图见 [00_completeness_gaps](formal_methods/00_completeness_gaps.md)；全部缺口均有 Def 占位。
 
 ---
 
@@ -147,7 +147,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [x] [所有权模型形式化](./formal_methods/10_ownership_model.md) ✅ 100%
+- [x] [所有权模型形式化](formal_methods/10_ownership_model.md) ✅ 100%
   - 所有权规则形式化
   - 内存安全证明
   - 所有权转移语义
@@ -160,7 +160,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [x] [借用检查器证明](./formal_methods/10_borrow_checker_proof.md) ✅ 100%
+- [x] [借用检查器证明](formal_methods/10_borrow_checker_proof.md) ✅ 100%
   - 借用规则形式化
   - 数据竞争自由证明
   - 借用检查算法
@@ -173,7 +173,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [x] [异步状态机形式化](./formal_methods/10_async_state_machine.md) ✅ 100%
+- [x] [异步状态机形式化](formal_methods/10_async_state_machine.md) ✅ 100%
   - Future/Poll 状态机
   - 并发安全证明
   - async/await 语义
@@ -195,7 +195,7 @@
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-- [x] [formal_methods 完备性缺口](../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md) ✅ 100%
+- [x] [formal_methods 完备性缺口](formal_methods/00_completeness_gaps.md) ✅ 100%
   - Phase 1–6 全部补全（RC/ARC/CELL/REFCELL/BOX、CHAN/MUTEX/RAW、UNSAFE、MATCH/FOR、MAYBEUNINIT/ATOMIC/UNION/TRANSMUTE、EXTERN/CVARIADIC/QUERY、DROP/DEREF/REPR/CONST_MUT_STATIC、SPAWN）
   - 无剩余缺口
 
@@ -205,7 +205,7 @@
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
-- [x] [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./10_formal_proof_critical_analysis_and_plan_2026_02.md) ✅ 阶段 1–3 100%
+- [x] [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](10_formal_proof_critical_analysis_and_plan_2026_02.md) ✅ 阶段 1–3 100%
   - 阶段 1：国际对标索引、证明深度、全模型入口、层次化导航
   - 阶段 2：核心定理完整证明（CORE_THEOREMS_FULL_PROOFS）、RUSTBELT_ALIGNMENT、EXECUTABLE_SEMANTICS_ROADMAP
   - 阶段 3：coq_skeleton（T-OW2）、COQ_ISABELLE_PROOF_SCAFFOLDING、AENEAS/COQ_OF_RUST 对接计划
@@ -224,12 +224,12 @@
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
-- [x] [性能基准测试](./experiments/10_performance_benchmarks.md) ✅ 100%
+- [x] [性能基准测试](experiments/10_performance_benchmarks.md) ✅ 100%
   - 基准测试框架
   - 性能数据收集
   - 性能分析
 
-- [x] [编译器优化](./experiments/10_compiler_optimizations.md) ✅ 100%
+- [x] [编译器优化](experiments/10_compiler_optimizations.md) ✅ 100%
   - 优化效果评估
   - 优化策略分析
   - 编写建议
@@ -240,7 +240,7 @@
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
-- [x] [内存分析](./experiments/10_memory_analysis.md) ✅ 100%
+- [x] [内存分析](experiments/10_memory_analysis.md) ✅ 100%
   - 内存使用模式
   - 内存优化策略
   - 内存泄漏检测
@@ -251,7 +251,7 @@
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-- [x] [并发性能](./experiments/10_concurrency_performance.md) ✅ 100%
+- [x] [并发性能](experiments/10_concurrency_performance.md) ✅ 100%
   - 并发模型对比
   - 同步原语性能
   - 并发优化策略
@@ -262,7 +262,7 @@
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
-- [x] [宏展开性能](./experiments/10_macro_expansion_performance.md) ✅ 100%
+- [x] [宏展开性能](experiments/10_macro_expansion_performance.md) ✅ 100%
   - 宏展开时间分析
   - 编译时间影响
   - 宏优化策略
@@ -281,7 +281,7 @@
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-- [x] [实际应用案例研究](./10_practical_applications.md) ✅ 100%
+- [x] [实际应用案例研究](10_practical_applications.md) ✅ 100%
   - 系统编程案例
   - 网络应用案例
   - 并发系统案例
@@ -293,7 +293,7 @@
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
-- [x] [研究方法论](./10_research_methodology.md) ✅ 100%
+- [x] [研究方法论](10_research_methodology.md) ✅ 100%
   - 研究方法框架
   - 工具使用指南
   - 质量评估标准
@@ -304,12 +304,12 @@
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [x] [高级类型特性](./type_theory/10_advanced_types.md) ✅ 100%
+- [x] [高级类型特性](type_theory/10_advanced_types.md) ✅ 100%
   - GATs 深入分析
   - const 泛型影响
   - 依赖类型关系
 
-- [x] [Pin 和自引用类型](./formal_methods/10_pin_self_referential.md) ✅ 100%
+- [x] [Pin 和自引用类型](formal_methods/10_pin_self_referential.md) ✅ 100%
   - Pin 类型形式化
   - 自引用类型安全
   - Pin 保证证明
@@ -412,9 +412,9 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [主索引](./README.md) - 完整的研究笔记索引
-- [快速参考](../../archive/research_notes_2026_06_25/10_quick_reference.md) - 快速查找指南
-- [研究方法论](./10_research_methodology.md) - 研究方法指导
+- [主索引](README.md) - 完整的研究笔记索引
+- [快速参考](10_quick_reference.md) - 快速查找指南
+- [研究方法论](10_research_methodology.md) - 研究方法指导
 
 ---
 
@@ -481,7 +481,7 @@
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

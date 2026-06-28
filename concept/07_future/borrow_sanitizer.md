@@ -27,12 +27,12 @@
 >
 > **前置概念**:
 > [Unsafe](../03_advanced/03_unsafe.md) ·
-> [Miri](../04_expert/miri/...) ·
+> [Miri](../04_expert/miri) ·
 > [Tree Borrows](../04_formal/03_ownership_formal.md)
 >
 > **后置概念**:
-> [Formal Methods](./02_formal_methods.md) ·
-> [Safety Tags Preview](./08_safety_tags_preview.md)
+> [Formal Methods](02_formal_methods.md) ·
+> [Safety Tags Preview](08_safety_tags_preview.md)
 >
 > **定理链**: N/A — 描述性/综述性/工具链文档
 

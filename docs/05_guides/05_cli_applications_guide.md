@@ -16,38 +16,38 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [CLI 应用开发指南](#cli-应用开发指南)
-  - [📑 目录](#-目录)
-  - [文档定位](#文档定位)
-  - [官方 CLI Book 入口](#官方-cli-book-入口)
-  - [本项目对应模块](#本项目对应模块)
-  - [快速开始示例](#快速开始示例)
-    - [1. 最小 CLI 应用](#1-最小-cli-应用)
-    - [2. 使用 clap 构建专业 CLI](#2-使用-clap-构建专业-cli)
-    - [3. 异步 CLI 示例](#3-异步-cli-示例)
-    - [4. 带进度条的 CLI](#4-带进度条的-cli)
-    - [5. 错误处理最佳实践](#5-错误处理最佳实践)
-  - [推荐学习路径](#推荐学习路径)
-  - [常用 crate 推荐](#常用-crate-推荐)
-  - [最佳实践](#最佳实践)
-    - [1. 使用 `?` 操作符传播错误](#1-使用--操作符传播错误)
-    - [2. 提供有意义的错误信息](#2-提供有意义的错误信息)
-    - [3. 使用 exit codes](#3-使用-exit-codes)
-  - [使用场景](#使用场景)
-    - [场景1: 简单命令行工具](#场景1-简单命令行工具)
-    - [场景2: 专业级 CLI 应用](#场景2-专业级-cli-应用)
-    - [场景3: 异步 CLI 工具](#场景3-异步-cli-工具)
-    - [场景4: TUI 应用](#场景4-tui-应用)
-  - [形式化链接](#形式化链接)
-  - [相关文档](#相关文档)
-  - [Rust 1.95+ 在 CLI 开发中的应用](#rust-195-在-cli-开发中的应用)
-    - [array\_windows 在参数解析中的应用](#array_windows-在参数解析中的应用)
-    - [ControlFlow 在验证管道中的应用](#controlflow-在验证管道中的应用)
-    - [LazyLock 在配置管理中的应用](#lazylock-在配置管理中的应用)
+- [CLI 应用开发指南](.#cli-应用开发指南)
+  - [📑 目录](.#-目录)
+  - [文档定位](.#文档定位)
+  - [官方 CLI Book 入口](.#官方-cli-book-入口)
+  - [本项目对应模块](.#本项目对应模块)
+  - [快速开始示例](.#快速开始示例)
+    - [1. 最小 CLI 应用](.#1-最小-cli-应用)
+    - [2. 使用 clap 构建专业 CLI](.#2-使用-clap-构建专业-cli)
+    - [3. 异步 CLI 示例](.#3-异步-cli-示例)
+    - [4. 带进度条的 CLI](.#4-带进度条的-cli)
+    - [5. 错误处理最佳实践](.#5-错误处理最佳实践)
+  - [推荐学习路径](.#推荐学习路径)
+  - [常用 crate 推荐](.#常用-crate-推荐)
+  - [最佳实践](.#最佳实践)
+    - [1. 使用 `?` 操作符传播错误](.#1-使用--操作符传播错误)
+    - [2. 提供有意义的错误信息](.#2-提供有意义的错误信息)
+    - [3. 使用 exit codes](.#3-使用-exit-codes)
+  - [使用场景](.#使用场景)
+    - [场景1: 简单命令行工具](.#场景1-简单命令行工具)
+    - [场景2: 专业级 CLI 应用](.#场景2-专业级-cli-应用)
+    - [场景3: 异步 CLI 工具](.#场景3-异步-cli-工具)
+    - [场景4: TUI 应用](.#场景4-tui-应用)
+  - [形式化链接](.#形式化链接)
+  - [相关文档](.#相关文档)
+  - [Rust 1.95+ 在 CLI 开发中的应用](.#rust-195-在-cli-开发中的应用)
+    - [array\_windows 在参数解析中的应用](.#array_windows-在参数解析中的应用)
+    - [ControlFlow 在验证管道中的应用](.#controlflow-在验证管道中的应用)
+    - [LazyLock 在配置管理中的应用](.#lazylock-在配置管理中的应用)
 <a id="状态--深度整合完成"></a>
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+  - [**状态**: ✅ 深度整合完成](.#状态--深度整合完成)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 文档定位
 >
@@ -379,9 +379,9 @@ fn main() -> ExitCode {
 
 构建类似 `cargo` 或 `rg` 的专业工具：
 
-- 使用 [clap](#2-使用-clap-构建专业-cli) 定义复杂子命令
-- 添加 [进度条](#4-带进度条的-cli) 提升用户体验
-- 实现 [彩色输出](#2-提供有意义的错误信息)
+- 使用 [clap](.#2-使用-clap-构建专业-cli) 定义复杂子命令
+- 添加 [进度条](.#4-带进度条的-cli) 提升用户体验
+- 实现 [彩色输出](.#2-提供有意义的错误信息)
 
 ### 场景3: 异步 CLI 工具
 >
@@ -389,7 +389,7 @@ fn main() -> ExitCode {
 
 构建网络相关的 CLI 工具：
 
-- 使用 [tokio](#3-异步-cli-示例) 处理并发请求
+- 使用 [tokio](.#3-异步-cli-示例) 处理并发请求
 - 实现 超时处理
 - 参考 C06 异步 深入学习
 
@@ -417,7 +417,7 @@ fn main() -> ExitCode {
 | **异步编程** | C06 异步 |
 | :--- | :--- |
 | **Cargo 工具** | [cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md) |
-| **相关指南** | [05_troubleshooting_guide.md](./05_troubleshooting_guide.md) |
+| **相关指南** | [05_troubleshooting_guide.md](05_troubleshooting_guide.md) |
 | :--- | :--- |
 
 ---
@@ -427,7 +427,7 @@ fn main() -> ExitCode {
 > **[来源: [crates.io](https://crates.io/)]**
 
 - C07 进程管理
-- [故障排查指南](./05_troubleshooting_guide.md)
+- [故障排查指南](05_troubleshooting_guide.md)
 - [cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md)
 - [官方 Command Line Book](https://rust-cli.github.io/book/)
 - C03 控制流
@@ -515,7 +515,7 @@ pub fn get_config() -> Option<&'static CliConfig> {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [05_guides 目录](./README.md)
+- [05_guides 目录](README.md)
 - [docs 索引](../README.md)
 
 ---

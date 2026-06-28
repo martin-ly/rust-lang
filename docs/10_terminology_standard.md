@@ -24,25 +24,25 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [Rust 术语标准化文档](#rust-术语标准化文档)
-  - [📋 目录](#-目录)
-  - [简介](#简介)
-    - [术语表使用说明](#术语表使用说明)
-  - [所有权相关术语](#所有权相关术语)
-  - [类型系统术语](#类型系统术语)
-  - [并发相关术语](#并发相关术语)
-  - [异步相关术语](#异步相关术语)
-  - [宏系统术语](#宏系统术语)
-  - [FFI/Unsafe 术语](#ffiunsafe-术语)
-  - [生命周期术语](#生命周期术语)
-  - [版本演进术语](#版本演进术语)
-  - [参考资源](#参考资源)
-    - [官方文档引用格式说明](#官方文档引用格式说明)
-    - [相关文档](#相关文档)
-    - [Ferrocene FLS 标准对照](#ferrocene-fls-标准对照)
-  - [更新历史](#更新历史)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [Rust 术语标准化文档](.#rust-术语标准化文档)
+  - [📋 目录](.#-目录)
+  - [简介](.#简介)
+    - [术语表使用说明](.#术语表使用说明)
+  - [所有权相关术语](.#所有权相关术语)
+  - [类型系统术语](.#类型系统术语)
+  - [并发相关术语](.#并发相关术语)
+  - [异步相关术语](.#异步相关术语)
+  - [宏系统术语](.#宏系统术语)
+  - [FFI/Unsafe 术语](.#ffiunsafe-术语)
+  - [生命周期术语](.#生命周期术语)
+  - [版本演进术语](.#版本演进术语)
+  - [参考资源](.#参考资源)
+    - [官方文档引用格式说明](.#官方文档引用格式说明)
+    - [相关文档](.#相关文档)
+    - [Ferrocene FLS 标准对照](.#ferrocene-fls-标准对照)
+  - [更新历史](.#更新历史)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ---
 
@@ -351,9 +351,9 @@
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [研究笔记术语表](../archive/research_notes_2026_06_25/10_glossary.md) - 形式化方法和研究相关术语
-- [所有权速查卡](./02_reference/quick_reference/02_ownership_cheatsheet.md) - 所有权系统快速参考
-- [类型系统速查卡](./02_reference/quick_reference/02_type_system.md) - 类型系统快速参考
-- [错误码映射](./02_reference/02_error_code_mapping.md) - 编译器错误码详解
+- [所有权速查卡](02_reference/quick_reference/02_ownership_cheatsheet.md) - 所有权系统快速参考
+- [类型系统速查卡](02_reference/quick_reference/02_type_system.md) - 类型系统快速参考
+- [错误码映射](02_reference/02_error_code_mapping.md) - 编译器错误码详解
 
 ### Ferrocene FLS 标准对照
 >
@@ -397,7 +397,7 @@
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [docs 目录](./README.md)
+- [docs 目录](README.md)
 
 ---
 

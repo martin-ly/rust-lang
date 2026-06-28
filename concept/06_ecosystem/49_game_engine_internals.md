@@ -13,8 +13,8 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价 Rust 游戏引擎核心系统的架构设计与实现权衡
-> **前置依赖**: [ECS 架构](./07_game_ecs.md) · [游戏开发](./21_game_development.md) · [并发编程](../03_advanced/01_concurrency.md) · [Async/Await](../03_advanced/02_async.md)
-> **后置延伸**: [性能优化](./15_performance_optimization.md) · [嵌入式系统](./22_embedded_systems.md) · [内存管理](../02_intermediate/03_memory_management.md)
+> **前置依赖**: [ECS 架构](07_game_ecs.md) · [游戏开发](21_game_development.md) · [并发编程](../03_advanced/01_concurrency.md) · [Async/Await](../03_advanced/02_async.md)
+> **后置延伸**: [性能优化](15_performance_optimization.md) · [嵌入式系统](22_embedded_systems.md) · [内存管理](../02_intermediate/03_memory_management.md)
 
 >
 > **来源**: [Bevy Engine](https://bevyengine.org/) · [wgpu](https://docs.rs/wgpu/)
@@ -35,50 +35,50 @@
 
 ## 📑 目录
 
-- [Game Engine Internals（游戏引擎内部原理）](#game-engine-internals游戏引擎内部原理)
-  - [📑 目录](#-目录)
-  - [一、权威定义（Definition）](#一权威定义definition)
-    - [1.1 游戏引擎的定义与边界](#11-游戏引擎的定义与边界)
-    - [1.2 游戏引擎核心子系统](#12-游戏引擎核心子系统)
-  - [二、概念属性矩阵](#二概念属性矩阵)
-  - [三、引擎架构模式](#三引擎架构模式)
-    - [3.1 主循环与更新阶段](#31-主循环与更新阶段)
-    - [3.2 子系统管理](#32-子系统管理)
-    - [3.3 Rust 中的引擎骨架](#33-rust-中的引擎骨架)
-  - [四、渲染管线](#四渲染管线)
-    - [4.1 现代图形 API 演进](#41-现代图形-api-演进)
-    - [4.2 wgpu：安全的跨平台 GPU 抽象](#42-wgpu安全的跨平台-gpu-抽象)
-    - [4.3 渲染管线阶段](#43-渲染管线阶段)
-  - [五、物理引擎集成](#五物理引擎集成)
-    - [5.1 Rapier：纯 Rust 物理引擎](#51-rapier纯-rust-物理引擎)
-    - [5.2 物理与渲染的同步](#52-物理与渲染的同步)
-  - [六、音频系统](#六音频系统)
-    - [6.1 音频管线](#61-音频管线)
-    - [6.2 Rust 音频生态](#62-rust-音频生态)
-  - [七、资源管理](#七资源管理)
-    - [7.1 异步资源加载](#71-异步资源加载)
-    - [7.2 热重载与版本控制](#72-热重载与版本控制)
-  - [八、网络同步](#八网络同步)
-    - [8.1 状态同步 vs 输入同步](#81-状态同步-vs-输入同步)
-    - [8.2 预测与回滚](#82-预测与回滚)
-  - [九、反命题与边界](#九反命题与边界)
-    - [9.1 反命题树](#91-反命题树)
-    - [9.2 边界极限](#92-边界极限)
-  - [十、边界测试](#十边界测试)
-    - [10.1 边界测试：渲染命令队列跨线程发送违反 Send（编译错误）](#101-边界测试渲染命令队列跨线程发送违反-send编译错误)
-    - [10.2 边界测试：物理固定步长与渲染可变帧率解耦失败（时间抖动）](#102-边界测试物理固定步长与渲染可变帧率解耦失败时间抖动)
-    - [10.3 边界测试：资源加载 panic 导致游戏状态不一致（运行时错误）](#103-边界测试资源加载-panic-导致游戏状态不一致运行时错误)
-  - [相关概念文件](#相关概念文件)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：游戏引擎的"渲染管线"（Render Pipeline）通常分为哪几个阶段？（理解层）](#测验-1游戏引擎的渲染管线render-pipeline通常分为哪几个阶段理解层)
-    - [测验 2：`wgpu` 的渲染通道（Render Pass）概念与 Vulkan 的有什么对应关系？（理解层）](#测验-2wgpu-的渲染通道render-pass概念与-vulkan-的有什么对应关系理解层)
-    - [测验 3：为什么游戏引擎中的"实体变换层级"（Transform Hierarchy）通常使用扁平数组而非树结构？（理解层）](#测验-3为什么游戏引擎中的实体变换层级transform-hierarchy通常使用扁平数组而非树结构理解层)
-    - [测验 4：Rust 的所有权如何影响游戏引擎中的"资源管理"（Asset Management）？（理解层）](#测验-4rust-的所有权如何影响游戏引擎中的资源管理asset-management理解层)
-    - [测验 5：`SPIR-V` 在 Rust 图形管线中扮演什么角色？（理解层）](#测验-5spir-v-在-rust-图形管线中扮演什么角色理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Game Engine Internals（游戏引擎内部原理）](.#game-engine-internals游戏引擎内部原理)
+  - [📑 目录](.#-目录)
+  - [一、权威定义（Definition）](.#一权威定义definition)
+    - [1.1 游戏引擎的定义与边界](.#11-游戏引擎的定义与边界)
+    - [1.2 游戏引擎核心子系统](.#12-游戏引擎核心子系统)
+  - [二、概念属性矩阵](.#二概念属性矩阵)
+  - [三、引擎架构模式](.#三引擎架构模式)
+    - [3.1 主循环与更新阶段](.#31-主循环与更新阶段)
+    - [3.2 子系统管理](.#32-子系统管理)
+    - [3.3 Rust 中的引擎骨架](.#33-rust-中的引擎骨架)
+  - [四、渲染管线](.#四渲染管线)
+    - [4.1 现代图形 API 演进](.#41-现代图形-api-演进)
+    - [4.2 wgpu：安全的跨平台 GPU 抽象](.#42-wgpu安全的跨平台-gpu-抽象)
+    - [4.3 渲染管线阶段](.#43-渲染管线阶段)
+  - [五、物理引擎集成](.#五物理引擎集成)
+    - [5.1 Rapier：纯 Rust 物理引擎](.#51-rapier纯-rust-物理引擎)
+    - [5.2 物理与渲染的同步](.#52-物理与渲染的同步)
+  - [六、音频系统](.#六音频系统)
+    - [6.1 音频管线](.#61-音频管线)
+    - [6.2 Rust 音频生态](.#62-rust-音频生态)
+  - [七、资源管理](.#七资源管理)
+    - [7.1 异步资源加载](.#71-异步资源加载)
+    - [7.2 热重载与版本控制](.#72-热重载与版本控制)
+  - [八、网络同步](.#八网络同步)
+    - [8.1 状态同步 vs 输入同步](.#81-状态同步-vs-输入同步)
+    - [8.2 预测与回滚](.#82-预测与回滚)
+  - [九、反命题与边界](.#九反命题与边界)
+    - [9.1 反命题树](.#91-反命题树)
+    - [9.2 边界极限](.#92-边界极限)
+  - [十、边界测试](.#十边界测试)
+    - [10.1 边界测试：渲染命令队列跨线程发送违反 Send（编译错误）](.#101-边界测试渲染命令队列跨线程发送违反-send编译错误)
+    - [10.2 边界测试：物理固定步长与渲染可变帧率解耦失败（时间抖动）](.#102-边界测试物理固定步长与渲染可变帧率解耦失败时间抖动)
+    - [10.3 边界测试：资源加载 panic 导致游戏状态不一致（运行时错误）](.#103-边界测试资源加载-panic-导致游戏状态不一致运行时错误)
+  - [相关概念文件](.#相关概念文件)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：游戏引擎的"渲染管线"（Render Pipeline）通常分为哪几个阶段？（理解层）](.#测验-1游戏引擎的渲染管线render-pipeline通常分为哪几个阶段理解层)
+    - [测验 2：`wgpu` 的渲染通道（Render Pass）概念与 Vulkan 的有什么对应关系？（理解层）](.#测验-2wgpu-的渲染通道render-pass概念与-vulkan-的有什么对应关系理解层)
+    - [测验 3：为什么游戏引擎中的"实体变换层级"（Transform Hierarchy）通常使用扁平数组而非树结构？（理解层）](.#测验-3为什么游戏引擎中的实体变换层级transform-hierarchy通常使用扁平数组而非树结构理解层)
+    - [测验 4：Rust 的所有权如何影响游戏引擎中的"资源管理"（Asset Management）？（理解层）](.#测验-4rust-的所有权如何影响游戏引擎中的资源管理asset-management理解层)
+    - [测验 5：`SPIR-V` 在 Rust 图形管线中扮演什么角色？（理解层）](.#测验-5spir-v-在-rust-图形管线中扮演什么角色理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 > **Bloom 层级**: 分析 → 评价
 > **变更日志**:
@@ -1030,16 +1030,16 @@ enum AssetState {
 
 ## 相关概念文件
 
-- [ECS 架构](./07_game_ecs.md) — Entity-Component-System 设计模式
-- [游戏开发](./21_game_development.md) — 游戏开发概述与工具链
+- [ECS 架构](07_game_ecs.md) — Entity-Component-System 设计模式
+- [游戏开发](21_game_development.md) — 游戏开发概述与工具链
 - [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、多线程并行
 - [Async/Await](../03_advanced/02_async.md) — 异步资源加载、网络
-- [性能优化](./15_performance_optimization.md) — SIMD、缓存优化、内存布局
+- [性能优化](15_performance_optimization.md) — SIMD、缓存优化、内存布局
 - [内存管理](../02_intermediate/03_memory_management.md) — Arena/Pool 分配器
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — GPU FFI、图形 API 绑定
-- [网络协议](./38_network_protocols.md) — QUIC、UDP、序列化
-- [嵌入式系统](./22_embedded_systems.md) — `#![no_std]`、资源受限
-- [架构设计模式](./35_architecture_patterns.md) — 分层/六边形架构
+- [网络协议](38_network_protocols.md) — QUIC、UDP、序列化
+- [嵌入式系统](22_embedded_systems.md) — `#![no_std]`、资源受限
+- [架构设计模式](35_architecture_patterns.md) — 分层/六边形架构
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

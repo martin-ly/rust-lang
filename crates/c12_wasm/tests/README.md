@@ -5,10 +5,10 @@
 ## 📚 测试文件列表
 
 | 测试文件                                                   | 描述                 | 测试数量 | 运行环境 |
-| :--- | :--- | :--- | :--- || [basic_tests.rs](./basic_tests.rs)                         | 基础功能测试         | 30+      | Native   |
-| [wasi_tests.rs](./wasi_tests.rs)                           | WASI 功能测试        | 15+      | WASI     |
-| [design_patterns_tests.rs](./design_patterns_tests.rs)     | 设计模式测试         | 12+      | Native   |
-| [rust_192_features_tests.rs](./rust_192_features_tests.rs) | Rust 1.92.0 特性测试 | 10+      | Native   |
+| :--- | :--- | :--- | :--- || [basic_tests.rs](basic_tests.rs)                         | 基础功能测试         | 30+      | Native   |
+| [wasi_tests.rs](wasi_tests.rs)                           | WASI 功能测试        | 15+      | WASI     |
+| [design_patterns_tests.rs](design_patterns_tests.rs)     | 设计模式测试         | 12+      | Native   |
+| [rust_192_features_tests.rs](rust_192_features_tests.rs) | Rust 1.92.0 特性测试 | 10+      | Native   |
 
 ## 🚀 运行测试
 

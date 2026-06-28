@@ -16,8 +16,8 @@
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: F×App — 标准集合 API 的应用
 > **定位**: 系统分析 Rust **标准库集合类型**的设计——从 Vec/VecDeque 的顺序容器，到 HashMap/BTreeMap 的关联容器，再到 HashSet/BTreeSet 的集合类型，揭示每种数据结构的所有权（Ownership）语义、性能特征和选型策略。
-> **前置概念**: [Ownership](./01_ownership.md) ·
-> [Borrowing](./02_borrowing.md) ·
+> **前置概念**: [Ownership](01_ownership.md) ·
+> [Borrowing](02_borrowing.md) ·
 > [Generics](../02_intermediate/02_generics.md)
 > **后置概念**: [Smart Pointers](../02_intermediate/12_smart_pointers.md) ·
 > [Smart Pointers](../02_intermediate/12_smart_pointers.md)
@@ -32,44 +32,44 @@
 
 ## 📑 目录
 
-- [集合类型：Rust 标准库的数据结构谱系](#集合类型rust-标准库的数据结构谱系)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 集合类型谱系](#11-集合类型谱系)
-    - [1.2 Vec：动态数组](#12-vec动态数组)
-    - [1.3 HashMap vs BTreeMap](#13-hashmap-vs-btreemap)
-  - [二、技术细节](#二技术细节)
-    - [2.1 容量管理与重新分配](#21-容量管理与重新分配)
-    - [2.2 Entry API](#22-entry-api)
-    - [2.3 Drain 与保留模式](#23-drain-与保留模式)
-    - [2.4 `FromIterator`/`Extend` for Tuples (Rust 1.85+)](#24-fromiteratorextend-for-tuples-rust-185)
-  - [三、选型决策矩阵](#三选型决策矩阵)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、常见陷阱](#五常见陷阱)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十四、边界测试：集合的编译错误](#十四边界测试集合的编译错误)
-    - [14.1 边界测试：`HashMap` 键未实现 `Hash` + `Eq`（编译错误）](#141-边界测试hashmap-键未实现-hash--eq编译错误)
-    - [14.2 边界测试：迭代器消费后重复使用（编译错误）](#142-边界测试迭代器消费后重复使用编译错误)
-    - [10.3 边界测试：`Vec::drain` 的范围越界（运行时 panic）](#103-边界测试vecdrain-的范围越界运行时-panic)
-    - [10.4 边界测试：`HashMap` 的自定义哈希器与 `BuildHasherDefault`（编译错误）](#104-边界测试hashmap-的自定义哈希器与-buildhasherdefault编译错误)
-    - [10.3 边界测试：`Vec::drain` 后继续使用原 Vec（编译错误）](#103-边界测试vecdrain-后继续使用原-vec编译错误)
-    - [10.4 边界测试：不可变借用与可变借用的冲突](#104-边界测试不可变借用与可变借用的冲突)
-  - [实践](#实践)
-  - [参考来源](#参考来源)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：Vec 与容量（理解层）](#测验-1vec-与容量理解层)
-    - [测验 2：HashMap 所有权（应用层）](#测验-2hashmap-所有权应用层)
-    - [测验 3：迭代器与借用（分析层）](#测验-3迭代器与借用分析层)
-    - [测验 4：BTreeMap vs HashMap（评价层）](#测验-4btreemap-vs-hashmap评价层)
-    - [测验 5： draining 与内存（应用层）](#测验-5-draining-与内存应用层)
-  - [十二、延伸阅读与自测](#十二延伸阅读与自测)
+- [集合类型：Rust 标准库的数据结构谱系](.#集合类型rust-标准库的数据结构谱系)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 集合类型谱系](.#11-集合类型谱系)
+    - [1.2 Vec：动态数组](.#12-vec动态数组)
+    - [1.3 HashMap vs BTreeMap](.#13-hashmap-vs-btreemap)
+  - [二、技术细节](.#二技术细节)
+    - [2.1 容量管理与重新分配](.#21-容量管理与重新分配)
+    - [2.2 Entry API](.#22-entry-api)
+    - [2.3 Drain 与保留模式](.#23-drain-与保留模式)
+    - [2.4 `FromIterator`/`Extend` for Tuples (Rust 1.85+)](.#24-fromiteratorextend-for-tuples-rust-185)
+  - [三、选型决策矩阵](.#三选型决策矩阵)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、常见陷阱](.#五常见陷阱)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [权威来源索引](.#权威来源索引)
+  - [十四、边界测试：集合的编译错误](.#十四边界测试集合的编译错误)
+    - [14.1 边界测试：`HashMap` 键未实现 `Hash` + `Eq`（编译错误）](.#141-边界测试hashmap-键未实现-hash--eq编译错误)
+    - [14.2 边界测试：迭代器消费后重复使用（编译错误）](.#142-边界测试迭代器消费后重复使用编译错误)
+    - [10.3 边界测试：`Vec::drain` 的范围越界（运行时 panic）](.#103-边界测试vecdrain-的范围越界运行时-panic)
+    - [10.4 边界测试：`HashMap` 的自定义哈希器与 `BuildHasherDefault`（编译错误）](.#104-边界测试hashmap-的自定义哈希器与-buildhasherdefault编译错误)
+    - [10.3 边界测试：`Vec::drain` 后继续使用原 Vec（编译错误）](.#103-边界测试vecdrain-后继续使用原-vec编译错误)
+    - [10.4 边界测试：不可变借用与可变借用的冲突](.#104-边界测试不可变借用与可变借用的冲突)
+  - [实践](.#实践)
+  - [参考来源](.#参考来源)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：Vec 与容量（理解层）](.#测验-1vec-与容量理解层)
+    - [测验 2：HashMap 所有权（应用层）](.#测验-2hashmap-所有权应用层)
+    - [测验 3：迭代器与借用（分析层）](.#测验-3迭代器与借用分析层)
+    - [测验 4：BTreeMap vs HashMap（评价层）](.#测验-4btreemap-vs-hashmap评价层)
+    - [测验 5： draining 与内存（应用层）](.#测验-5-draining-与内存应用层)
+  - [十二、延伸阅读与自测](.#十二延伸阅读与自测)
 
 ---
 
@@ -483,8 +483,8 @@ graph TD
 
 ## 相关概念文件
 
-- [Ownership](./01_ownership.md) — 所有权模型
-- [Borrowing](./02_borrowing.md) — 借用规则
+- [Ownership](01_ownership.md) — 所有权模型
+- [Borrowing](02_borrowing.md) — 借用规则
 - [Generics](../02_intermediate/02_generics.md) — 泛型（Generics）系统
 - [Smart Pointers](../02_intermediate/12_smart_pointers.md) — 智能指针（Smart Pointer）
 
@@ -674,8 +674,8 @@ fn main() {
 
 > **相关资源**:
 >
-> - [crates/ 示例代码](../crates/) — 与本文概念对应的可编译示例
-> - [exercises/ 练习](../exercises/) — 动手编程挑战
+> - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../exercises) — 动手编程挑战
 > - [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
@@ -861,5 +861,5 @@ fn main() {
 
 > 学完常见集合后，建议通过 **Ownership Inventory #2** 检验对「Vec/String/HashMap 与所有权、借用（Borrowing）、迭代器（Iterator）」的理解：
 >
-> - 本地映射与样题：[所有权清单自测：Brown University Ownership Inventory](./28_ownership_inventories_brown_book.md)
+> - 本地映射与样题：[所有权清单自测：Brown University Ownership Inventory](28_ownership_inventories_brown_book.md)
 > - Brown Book 交互式题目：[Ownership Inventory #2](https://rust-book.cs.brown.edu/ch08-04-inventory.html)

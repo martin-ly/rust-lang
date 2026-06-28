@@ -16,7 +16,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 TAIT 的类型系统（Type System）影响
 > **前置依赖**: [Generics](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md)
-> **后置延伸**: [RPITIT](./15_rpitit_preview.md)
+> **后置延伸**: [RPITIT](15_rpitit_preview.md)
 > **来源**: [Rust Reference — Type Aliases](https://doc.rust-lang.org/reference/items/type-aliases.html) · [RFC 2515](https://rust-lang.github.io/rfcs//2515-type_alias_impl_trait.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >

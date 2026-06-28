@@ -27,7 +27,7 @@
 | 借用（Borrowing）规则 | 能独立标注含 3+ 引用（Reference）的函数签名 | L2 生命周期（Lifetimes） |
 | 类型系统（Type System） | 理解 `enum`/`struct`/`trait` 的语义区别 | [L1 类型系统](../01_foundation/04_type_system.md) |
 | 并发原语 | 能解释 `Send`/`Sync` 为什么需要 `unsafe impl` | [L3 并发](../03_advanced/01_concurrency.md) |
-| 逻辑基础 | 了解命题逻辑（与/或/蕴含）的基本概念 | [L4 Hoare 逻辑](./15_hoare_logic.md)（可先读） |
+| 逻辑基础 | 了解命题逻辑（与/或/蕴含）的基本概念 | [L4 Hoare 逻辑](15_hoare_logic.md)（可先读） |
 
 > ⚠️ **警告**：如果你尚未掌握 L1-L3 的工程概念，直接学习 L4 会陷入"符号能读但直觉缺失"的困境。建议先完成 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md)，再返回 L4。
 
@@ -176,38 +176,38 @@ graph TB
 
 | 文件 | 概念 | 核心内容 | 状态 | 映射的上层概念 | 工具化输出 |
 |:---|:---|:---|:---|:---|:---|
-| [01_linear_logic.md](./01_linear_logic.md) | 线性/仿射逻辑 [教学类比] | 资源敏感逻辑、⊗/⅋/⊸、Girard 1987、 weakening | ✅ v1.0 | L1 Ownership (唯一性), L1 Move/Copy | — |
-| [02_type_theory.md](./02_type_theory.md) | 类型论基础 [教学类比] | ADT、HM 推断、子类型、Variance、System F | ✅ v1.0 | L1 Type System, L2 Generics | L6 编译器类型检查 |
-| [03_ownership_formal.md](./03_ownership_formal.md) | 所有权形式化 | COR、区域类型、分数权限、操作语义 | ✅ v1.0 | L1 Ownership + Borrowing + Lifetimes | — |
-| [04_rustbelt.md](./04_rustbelt.md) | RustBelt 与验证 | Iris 分离逻辑、验证工具链、工业应用 | ✅ v1.0 | L3 Concurrency + Unsafe | L7 Creusot/Verus/Kani |
-| [05_verification_toolchain.md](./05_verification_toolchain.md) | 验证工具链选型 | ROI 分析、决策树、a-mir-formality、分层验证策略 | ✅ v1.2 | L3-L6 验证实践 | L7 a-mir-formality |
-| [06_subtype_variance.md](./06_subtype_variance.md) | 子类型与变型 | 协变/逆变/不变、生命周期子类型、类型安全边界 | ✅ v1.0 | L2 Generics, L1 Lifetimes | 编译器类型检查 |
-| [11_separation_logic.md](./11_separation_logic.md) | 分离逻辑 | * 算子、帧规则、CSL、Iris、RustBelt 应用映射 | ✅ v1.0 | L3 Concurrency, L1 Ownership | 形式化验证工具 |
-| [08_type_inference.md](./08_type_inference.md) | 类型推断（Type Inference） | HM 算法、统一、Rust 扩展、Trait 约束推断 | ✅ v1.0 | L2 Generics, L2 Trait | 编译器类型检查 |
-| [28_borrow_checking_decidability.md](./28_borrow_checking_decidability.md) | 借用检查可判定性 [ROD 迁移] | NLL/Polonius、区域约束、P-完全、与 rustc borrowck 映射 | ✅ 已迁移 | L1 Borrowing, L3 Unsafe | rustc_borrowck |
-| [29_type_inference_complexity.md](./29_type_inference_complexity.md) | 类型推断（Type Inference）复杂度 [ROD 迁移] | HM 扩展、约束生成、PSPACE-完全、与 rustc typeck 映射 | ✅ 已迁移 | L2 Trait, L2 Generics | rustc_typeck |
-| [30_aeneas_symbolic_semantics.md](./30_aeneas_symbolic_semantics.md) | Aeneas 符号化语义 [ROD 迁移] | LLBC、HLPL、符号执行、模拟关系、Aeneas 工具链 | ✅ 已迁移 | L3 Unsafe, L7 Formal Methods | Aeneas, Miri |
-| [17_operational_semantics.md](./17_operational_semantics.md) | 操作语义 [教学类比] | 小步/大步语义、求值上下文、Rust 形式化 | ✅ v1.0 | L1 Ownership, L3 Unsafe | RustBelt, Miri |
-| [20_axiomatic_semantics.md](./20_axiomatic_semantics.md) | 公理语义 [教学类比] | Hoare 逻辑、wp/sp 计算、Rust 所有权公理化 | ✅ v1.0 | L4 形式化理论, L3 Unsafe | Prusti, Creusot, Kani |
-| [21_type_semantics.md](./21_type_semantics.md) | 类型语义 [教学类比] | 进步/保持定理、Rust 特有类型语义、子类型与变型 | ✅ v1.0 | L2 Type System, L4 形式化理论 | Pierce TAPL, RustBelt |
-| [18_evaluation_strategies.md](./18_evaluation_strategies.md) | 求值策略 [教学类比] | CBV/CBN/CBR、归约策略、Rust 的 CBV+Move 定位 | ✅ v1.0 | L1 Type System, L2 Generics | Lambda Calculus |
+| [01_linear_logic.md](01_linear_logic.md) | 线性/仿射逻辑 [教学类比] | 资源敏感逻辑、⊗/⅋/⊸、Girard 1987、 weakening | ✅ v1.0 | L1 Ownership (唯一性), L1 Move/Copy | — |
+| [02_type_theory.md](02_type_theory.md) | 类型论基础 [教学类比] | ADT、HM 推断、子类型、Variance、System F | ✅ v1.0 | L1 Type System, L2 Generics | L6 编译器类型检查 |
+| [03_ownership_formal.md](03_ownership_formal.md) | 所有权形式化 | COR、区域类型、分数权限、操作语义 | ✅ v1.0 | L1 Ownership + Borrowing + Lifetimes | — |
+| [04_rustbelt.md](04_rustbelt.md) | RustBelt 与验证 | Iris 分离逻辑、验证工具链、工业应用 | ✅ v1.0 | L3 Concurrency + Unsafe | L7 Creusot/Verus/Kani |
+| [05_verification_toolchain.md](05_verification_toolchain.md) | 验证工具链选型 | ROI 分析、决策树、a-mir-formality、分层验证策略 | ✅ v1.2 | L3-L6 验证实践 | L7 a-mir-formality |
+| [06_subtype_variance.md](06_subtype_variance.md) | 子类型与变型 | 协变/逆变/不变、生命周期子类型、类型安全边界 | ✅ v1.0 | L2 Generics, L1 Lifetimes | 编译器类型检查 |
+| [11_separation_logic.md](11_separation_logic.md) | 分离逻辑 | * 算子、帧规则、CSL、Iris、RustBelt 应用映射 | ✅ v1.0 | L3 Concurrency, L1 Ownership | 形式化验证工具 |
+| [08_type_inference.md](08_type_inference.md) | 类型推断（Type Inference） | HM 算法、统一、Rust 扩展、Trait 约束推断 | ✅ v1.0 | L2 Generics, L2 Trait | 编译器类型检查 |
+| [28_borrow_checking_decidability.md](28_borrow_checking_decidability.md) | 借用检查可判定性 [ROD 迁移] | NLL/Polonius、区域约束、P-完全、与 rustc borrowck 映射 | ✅ 已迁移 | L1 Borrowing, L3 Unsafe | rustc_borrowck |
+| [29_type_inference_complexity.md](29_type_inference_complexity.md) | 类型推断（Type Inference）复杂度 [ROD 迁移] | HM 扩展、约束生成、PSPACE-完全、与 rustc typeck 映射 | ✅ 已迁移 | L2 Trait, L2 Generics | rustc_typeck |
+| [30_aeneas_symbolic_semantics.md](30_aeneas_symbolic_semantics.md) | Aeneas 符号化语义 [ROD 迁移] | LLBC、HLPL、符号执行、模拟关系、Aeneas 工具链 | ✅ 已迁移 | L3 Unsafe, L7 Formal Methods | Aeneas, Miri |
+| [17_operational_semantics.md](17_operational_semantics.md) | 操作语义 [教学类比] | 小步/大步语义、求值上下文、Rust 形式化 | ✅ v1.0 | L1 Ownership, L3 Unsafe | RustBelt, Miri |
+| [20_axiomatic_semantics.md](20_axiomatic_semantics.md) | 公理语义 [教学类比] | Hoare 逻辑、wp/sp 计算、Rust 所有权公理化 | ✅ v1.0 | L4 形式化理论, L3 Unsafe | Prusti, Creusot, Kani |
+| [21_type_semantics.md](21_type_semantics.md) | 类型语义 [教学类比] | 进步/保持定理、Rust 特有类型语义、子类型与变型 | ✅ v1.0 | L2 Type System, L4 形式化理论 | Pierce TAPL, RustBelt |
+| [18_evaluation_strategies.md](18_evaluation_strategies.md) | 求值策略 [教学类比] | CBV/CBN/CBR、归约策略、Rust 的 CBV+Move 定位 | ✅ v1.0 | L1 Type System, L2 Generics | Lambda Calculus |
 
 ---
 
 ### 补充文件索引
 
-- [线性逻辑在 Rust 中的工程应用](./09_linear_logic_applications.md)
-- [范畴论与 Rust：从函子到单子](./10_category_theory.md)
-- [指称语义与领域理论](./12_denotational_semantics.md)
-- [形式化方法在 Rust 中的应用](./13_formal_methods.md)
-- [Lambda 演算与 Rust 计算模型](./14_lambda_calculus.md)
-- [航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)](./16_aerospace_certification_formal_methods.md)
-- [现代 Rust 验证工具生态（2025-2026）](./22_modern_verification_tools.md)
-- [借用检查可判定性](./28_borrow_checking_decidability.md)
+- [线性逻辑在 Rust 中的工程应用](09_linear_logic_applications.md)
+- [范畴论与 Rust：从函子到单子](10_category_theory.md)
+- [指称语义与领域理论](12_denotational_semantics.md)
+- [形式化方法在 Rust 中的应用](13_formal_methods.md)
+- [Lambda 演算与 Rust 计算模型](14_lambda_calculus.md)
+- [航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)](16_aerospace_certification_formal_methods.md)
+- [现代 Rust 验证工具生态（2025-2026）](22_modern_verification_tools.md)
+- [借用检查可判定性](28_borrow_checking_decidability.md)
 - 类型推断（Type Inference）复杂度
-- [Aeneas 符号化语义](./30_aeneas_symbolic_semantics.md)
-- [通用程序语言理论基础：Rust 的 PL 基座](./23_programming_language_foundations.md)
-- [测验：形式化方法概念（嵌入式互动试点）](./24_quiz_formal_methods.md)
+- [Aeneas 符号化语义](30_aeneas_symbolic_semantics.md)
+- [通用程序语言理论基础：Rust 的 PL 基座](23_programming_language_foundations.md)
+- [测验：形式化方法概念（嵌入式互动试点）](24_quiz_formal_methods.md)
 
 ## 三、与上层概念的严格映射
 

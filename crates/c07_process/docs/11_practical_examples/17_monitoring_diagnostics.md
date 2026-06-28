@@ -7,7 +7,7 @@
 
 **内容已整合至**：[05_进程监控与诊断](../tier_02_guides/05_进程监控与诊断.md)
 
-**相关**: [11_practical_examples](./11_practical_examples.md)
+**相关**: [11_practical_examples](11_practical_examples.md)
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

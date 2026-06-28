@@ -3,11 +3,11 @@
 > **EN**: Ecosystem 33 Idioms Spectrum Archived
 > **Summary**: Ecosystem 33 Idioms Spectrum Archived. Core Rust concept.
 > **内容分级**: [综述级]
-> **归档说明**: 本文件已归档，内容已迁移至 [`03_idioms_spectrum.md`](./03_idioms_spectrum.md)。
+> **归档说明**: 本文件已归档，内容已迁移至 [`03_idioms_spectrum.md`](03_idioms_spectrum.md)。
 > **受众**: [进阶]
 > **Bloom 层级**: 应用
 > **状态**: 已归档（内容已迁移至主文件）
-> **归档声明**: 本文件内容已合并至 [`03_idioms_spectrum.md`](./03_idioms_spectrum.md)。
+> **归档声明**: 本文件内容已合并至 [`03_idioms_spectrum.md`](03_idioms_spectrum.md)。
 > 原文件保留用于历史追溯。请勿独立编辑本文件。
 > **归档原因**: 与 `03_idioms_spectrum.md` 内容高度重叠（>90%），且 `03` 版本为 SUMMARY.md 引用（Reference）主文件、内容更完整。
 > **状态**: 已归档（2026-05-30 重复文件清理）

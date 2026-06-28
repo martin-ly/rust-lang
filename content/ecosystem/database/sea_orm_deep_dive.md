@@ -8,20 +8,20 @@
 
 ## 📋 目录
 
-- [Sea-ORM 深度解析](#sea-orm-深度解析)
-  - [📋 目录](#-目录)
-  - [🎯 架构概览](#-架构概览)
-  - [⚙️ 核心概念](#️-核心概念)
-    - [1. Entity (实体)](#1-entity-实体)
-    - [2. Model (模型)](#2-model-模型)
-    - [3. ActiveModel (活跃模型)](#3-activemodel-活跃模型)
-    - [4. Relation (关系)](#4-relation-关系)
-  - [🔧 查询构建器](#-查询构建器)
-    - [类型安全查询](#类型安全查询)
-    - [原始 SQL（逃生舱）](#原始-sql逃生舱)
-  - [🔄 迁移系统](#-迁移系统)
-  - [📊 与 SQLx 对比](#-与-sqlx-对比)
-  - [🔗 参考资源](#-参考资源)
+- [Sea-ORM 深度解析](.#sea-orm-深度解析)
+  - [📋 目录](.#-目录)
+  - [🎯 架构概览](.#-架构概览)
+  - [⚙️ 核心概念](.#️-核心概念)
+    - [1. Entity (实体)](.#1-entity-实体)
+    - [2. Model (模型)](.#2-model-模型)
+    - [3. ActiveModel (活跃模型)](.#3-activemodel-活跃模型)
+    - [4. Relation (关系)](.#4-relation-关系)
+  - [🔧 查询构建器](.#-查询构建器)
+    - [类型安全查询](.#类型安全查询)
+    - [原始 SQL（逃生舱）](.#原始-sql逃生舱)
+  - [🔄 迁移系统](.#-迁移系统)
+  - [📊 与 SQLx 对比](.#-与-sqlx-对比)
+  - [🔗 参考资源](.#-参考资源)
 
 ---
 
@@ -258,8 +258,8 @@ Migrator::down(&db, Some(1)).await?;  // 回退 1 步
 
 - [Sea-ORM 官方文档](https://www.sea-ql.org/SeaORM/)
 - [Sea-ORM Cookbook](https://www.sea-ql.org/sea-orm-cookbook/)
-- [项目 C10 网络模块](../../crates/c10_networks/)
-- [SQLx 深度解析](./sqlx_deep_dive.md)
+- [项目 C10 网络模块](../../crates/c10_networks)
+- [SQLx 深度解析](sqlx_deep_dive.md)
 
 ---
 

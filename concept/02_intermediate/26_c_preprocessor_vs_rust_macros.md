@@ -7,8 +7,8 @@
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: C+S — Comparison + Structure
 > **双维定位**: C×Ana
-> **前置概念**: [Macros](../03_advanced/04_macros.md) · [Generics](./02_generics.md) · [Traits](./01_traits.md)
-> **后置概念**: [Proc Macro](../03_advanced/07_proc_macro.md) · [DSL and Embedding](./13_dsl_and_embedding.md)
+> **前置概念**: [Macros](../03_advanced/04_macros.md) · [Generics](02_generics.md) · [Traits](01_traits.md)
+> **后置概念**: [Proc Macro](../03_advanced/07_proc_macro.md) · [DSL and Embedding](13_dsl_and_embedding.md)
 > **主要来源**: [TRPL Ch 19.5 — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) · [Rust Reference — macro_rules!](https://doc.rust-lang.org/reference/macros-by-example.html) · [The Little Book of Rust Macros](https://veykril.github.io/tlborm/) · [C Preprocessor (cppreference)](https://en.cppreference.com/w/c/preprocessor) · [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)
 ---
 

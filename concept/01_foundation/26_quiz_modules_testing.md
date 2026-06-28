@@ -18,8 +18,8 @@
 > [The Rust Programming Language — Ch11 Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)
 >
 > **前置概念**:
-> [Modules and Paths](./11_modules_and_paths.md) ·
-> [Testing Basics](./16_testing_basics.md)
+> [Modules and Paths](11_modules_and_paths.md) ·
+> [Testing Basics](16_testing_basics.md)
 
 ---
 
@@ -75,7 +75,7 @@ mod front_of_house; // 查找 src/front_of_house.rs 或 src/front_of_house/mod.r
 | `pub(super)` | 父模块 |
 | `pub(in path)` | 指定路径内 |
 
-**知识点**：Rust 的模块系统是"基于文件系统的显式树"，与 Python/JavaScript 的隐式模块不同。[→ 模块系统详解](./11_modules_and_paths.md)
+**知识点**：Rust 的模块系统是"基于文件系统的显式树"，与 Python/JavaScript 的隐式模块不同。[→ 模块系统详解](11_modules_and_paths.md)
 
 </details>
 
@@ -132,7 +132,7 @@ use super::foo;           // 引用父模块的 foo
 use crate::utils::helper; // 引用 crate 根的 utils
 ```
 
-**知识点**：`super` 常用于测试模块访问被测代码的私有项（测试通常放在 `super` 模块中）。[→ 模块系统详解](./11_modules_and_paths.md)
+**知识点**：`super` 常用于测试模块访问被测代码的私有项（测试通常放在 `super` 模块中）。[→ 模块系统详解](11_modules_and_paths.md)
 
 </details>
 
@@ -191,7 +191,7 @@ use std::collections::*;          // 导入所有公共项
 pub use shapes::circle; // 外部用户可通过 crate::circle 访问
 ```
 
-**知识点**：`use` 只是创建别名，不复制代码。`pub use` 是构建 crate 公共 API 的常用技巧。[→ 模块系统详解](./11_modules_and_paths.md)
+**知识点**：`use` 只是创建别名，不复制代码。`pub use` 是构建 crate 公共 API 的常用技巧。[→ 模块系统详解](11_modules_and_paths.md)
 
 </details>
 
@@ -262,7 +262,7 @@ assert_ne!(left, right);
 assert!(result.is_ok(), "Expected Ok, got {:?}", result);
 ```
 
-**知识点**：`#[cfg(test)]` 确保测试代码不会编译进最终产物。集成测试放在 `tests/` 目录下，每个文件是一个独立的二进制。[→ 测试详解](./16_testing_basics.md)
+**知识点**：`#[cfg(test)]` 确保测试代码不会编译进最终产物。集成测试放在 `tests/` 目录下，每个文件是一个独立的二进制。[→ 测试详解](16_testing_basics.md)
 
 </details>
 
@@ -316,7 +316,7 @@ mod common;
 use common::setup;
 ```
 
-**知识点**：集成测试验证 crate 的公共 API 契约。它们不能访问 `pub(crate)` 或私有项，这强制开发者从用户视角验证设计。[→ 测试详解](./16_testing_basics.md)
+**知识点**：集成测试验证 crate 的公共 API 契约。它们不能访问 `pub(crate)` 或私有项，这强制开发者从用户视角验证设计。[→ 测试详解](16_testing_basics.md)
 
 </details>
 
@@ -389,7 +389,7 @@ assert_eq!(result.unwrap(), expected);
 assert_eq!(result.unwrap_err(), expected_err);
 ```
 
-**知识点**：返回 `Result` 的测试函数使错误处理（Error Handling）测试更简洁，是 Rust 测试的惯用模式。[→ 测试详解](./16_testing_basics.md)
+**知识点**：返回 `Result` 的测试函数使错误处理（Error Handling）测试更简洁，是 Rust 测试的惯用模式。[→ 测试详解](16_testing_basics.md)
 
 </details>
 
@@ -452,7 +452,7 @@ src/
     └── tool2.rs
 ```
 
-**知识点**：理解 package/crate/module 的层级关系是管理 Rust 项目结构的基础。[→ 模块系统详解](./11_modules_and_paths.md)
+**知识点**：理解 package/crate/module 的层级关系是管理 Rust 项目结构的基础。[→ 模块系统详解](11_modules_and_paths.md)
 
 </details>
 
@@ -511,7 +511,7 @@ mod database {
 }
 ```
 
-**知识点**：限制可见性是封装的核心。Rust 鼓励使用最严格的可见性（默认私有 → `pub(super)` → `pub(crate)` → `pub`）。[→ 模块系统详解](./11_modules_and_paths.md)
+**知识点**：限制可见性是封装的核心。Rust 鼓励使用最严格的可见性（默认私有 → `pub(super)` → `pub(crate)` → `pub`）。[→ 模块系统详解](11_modules_and_paths.md)
 
 </details>
 
@@ -578,7 +578,7 @@ fn generate_id() -> u64 {
 }
 ```
 
-**知识点**：自定义断言消息极大提升了测试失败时的调试效率。`assert_ne!` 在验证唯一性、非退化场景时特别有用。[→ 测试详解](./16_testing_basics.md)
+**知识点**：自定义断言消息极大提升了测试失败时的调试效率。`assert_ne!` 在验证唯一性、非退化场景时特别有用。[→ 测试详解](16_testing_basics.md)
 
 </details>
 
@@ -638,7 +638,7 @@ cargo test -- --nocapture    # 显示 println! 输出
 cargo test -- --test-threads=1  # 单线程运行测试
 ```
 
-**知识点**：`#[ignore]` 是管理"已知问题"测试的标准方式。`should_panic` 测试确保代码在错误条件下确实失败，而非静默继续。[→ 测试详解](./16_testing_basics.md)
+**知识点**：`#[ignore]` 是管理"已知问题"测试的标准方式。`should_panic` 测试确保代码在错误条件下确实失败，而非静默继续。[→ 测试详解](16_testing_basics.md)
 
 </details>
 
@@ -650,8 +650,8 @@ cargo test -- --test-threads=1  # 单线程运行测试
 |:---:|:---|:---|
 | 10/10 | 🏆 模块与测试已内化 | 在项目中实践 Workspace + 集成测试 + CI 集成 |
 | 7–9/10 | ✅ 核心概念掌握 | 为本工作区的 crates/ 编写集成测试 |
-| 4–6/10 | 🔄 需巩固基础 | 重读 [Modules](./11_modules_and_paths.md) · [Testing](./16_testing_basics.md) |
-| 0–3/10 | 📚 建议重新开始 | 从 [Modules](./11_modules_and_paths.md) 逐节阅读，拆分小项目练习 |
+| 4–6/10 | 🔄 需巩固基础 | 重读 [Modules](11_modules_and_paths.md) · [Testing](16_testing_basics.md) |
+| 0–3/10 | 📚 建议重新开始 | 从 [Modules](11_modules_and_paths.md) 逐节阅读，拆分小项目练习 |
 
 ---
 

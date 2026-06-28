@@ -15,28 +15,28 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [CQRS 模式形式化定义](#cqrs-模式形式化定义)
-  - [📑 目录](#-目录)
-  - [1. 概念定义 (Def)](#1-概念定义-def)
-    - [Def CQ1: CQRS (Command Query Responsibility Segregation)](#def-cq1-cqrs-command-query-responsibility-segregation)
-    - [Def CQ2: 命令与查询的分离](#def-cq2-命令与查询的分离)
-    - [Def CQ3: 最终一致性边界](#def-cq3-最终一致性边界)
-  - [2. 基本假设 (Axiom)](#2-基本假设-axiom)
-    - [Axiom CQ1: 命令不可重复](#axiom-cq1-命令不可重复)
-    - [Axiom CQ2: 投影单调性](#axiom-cq2-投影单调性)
-    - [Axiom CQ3: 查询一致性级别](#axiom-cq3-查询一致性级别)
-  - [3. 定理 (Theorem)](#3-定理-theorem)
-    - [Theorem CQ1: 读写无冲突](#theorem-cq1-读写无冲突)
-    - [Theorem CQ2: 查询可扩展性](#theorem-cq2-查询可扩展性)
-  - [4. Rust 实现示例](#4-rust-实现示例)
-  - [5. 与其他模式的关系](#5-与其他模式的关系)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [CQRS 模式形式化定义](.#cqrs-模式形式化定义)
+  - [📑 目录](.#-目录)
+  - [1. 概念定义 (Def)](.#1-概念定义-def)
+    - [Def CQ1: CQRS (Command Query Responsibility Segregation)](.#def-cq1-cqrs-command-query-responsibility-segregation)
+    - [Def CQ2: 命令与查询的分离](.#def-cq2-命令与查询的分离)
+    - [Def CQ3: 最终一致性边界](.#def-cq3-最终一致性边界)
+  - [2. 基本假设 (Axiom)](.#2-基本假设-axiom)
+    - [Axiom CQ1: 命令不可重复](.#axiom-cq1-命令不可重复)
+    - [Axiom CQ2: 投影单调性](.#axiom-cq2-投影单调性)
+    - [Axiom CQ3: 查询一致性级别](.#axiom-cq3-查询一致性级别)
+  - [3. 定理 (Theorem)](.#3-定理-theorem)
+    - [Theorem CQ1: 读写无冲突](.#theorem-cq1-读写无冲突)
+    - [Theorem CQ2: 查询可扩展性](.#theorem-cq2-查询可扩展性)
+  - [4. Rust 实现示例](.#4-rust-实现示例)
+  - [5. 与其他模式的关系](.#5-与其他模式的关系)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 1. 概念定义 (Def)
 >
@@ -299,7 +299,7 @@ impl<E, S> ProjectionSync<E, S> {
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [05_distributed 目录](./README.md)
+- [05_distributed 目录](README.md)
 - [上级目录](../README.md)
 
 ---

@@ -8,22 +8,22 @@
 
 ## 📋 目录
 
-- [SQLx 深度解析](#sqlx-深度解析)
-  - [📋 目录](#-目录)
-  - [🎯 编译时查询检查原理](#-编译时查询检查原理)
-    - [宏展开流程](#宏展开流程)
-    - [离线模式 (Offline Mode)](#离线模式-offline-mode)
-  - [⚙️ query! / query\_as! 宏用法](#️-query--query_as-宏用法)
-    - [query! 匿名结果](#query-匿名结果)
-    - [query\_as! 映射结构体](#query_as-映射结构体)
-    - [query\_scalar! 单列查询](#query_scalar-单列查询)
-  - [🔌 连接池配置](#-连接池配置)
-  - [🔄 事务处理](#-事务处理)
-    - [基本事务](#基本事务)
-    - [嵌套事务与保存点](#嵌套事务与保存点)
-  - [🗃️ 迁移系统 (sqlx-cli)](#️-迁移系统-sqlx-cli)
-  - [📊 与 Sea-ORM / Diesel 对比](#-与-sea-orm--diesel-对比)
-  - [🔗 参考资源](#-参考资源)
+- [SQLx 深度解析](.#sqlx-深度解析)
+  - [📋 目录](.#-目录)
+  - [🎯 编译时查询检查原理](.#-编译时查询检查原理)
+    - [宏展开流程](.#宏展开流程)
+    - [离线模式 (Offline Mode)](.#离线模式-offline-mode)
+  - [⚙️ query! / query\_as! 宏用法](.#️-query--query_as-宏用法)
+    - [query! 匿名结果](.#query-匿名结果)
+    - [query\_as! 映射结构体](.#query_as-映射结构体)
+    - [query\_scalar! 单列查询](.#query_scalar-单列查询)
+  - [🔌 连接池配置](.#-连接池配置)
+  - [🔄 事务处理](.#-事务处理)
+    - [基本事务](.#基本事务)
+    - [嵌套事务与保存点](.#嵌套事务与保存点)
+  - [🗃️ 迁移系统 (sqlx-cli)](.#️-迁移系统-sqlx-cli)
+  - [📊 与 Sea-ORM / Diesel 对比](.#-与-sea-orm--diesel-对比)
+  - [🔗 参考资源](.#-参考资源)
 
 ---
 
@@ -409,8 +409,8 @@ async fn run_migrations(pool: &PgPool) -> Result<(), sqlx::migrate::MigrateError
 - [SQLx 官方文档](https://docs.rs/sqlx/latest/sqlx/)
 - [SQLx GitHub](https://github.com/launchbadge/sqlx)
 - [sqlx-cli 迁移指南](https://github.com/launchbadge/sqlx/blob/main/sqlx-cli/README.md)
-- [Sea-ORM 深度解析](./sea_orm_deep_dive.md)
-- [项目 C02 类型系统模块](../../crates/c02_type_system/)
+- [Sea-ORM 深度解析](sea_orm_deep_dive.md)
+- [项目 C02 类型系统模块](../../crates/c02_type_system)
 
 ---
 

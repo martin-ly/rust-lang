@@ -11,7 +11,7 @@
 > **A/S/P 标记**: **F** — Formal
 > **双维定位**: F×Type — 类型系统（Type System）与形式化方法
 > **定位**: 把“编译器如何知道 `Vec<&str>` 并对未标注类型做推断”还原为约束生成、统一与区域求解的完整算法。
-> **前置概念**: [Name Resolution and HIR](./35_name_resolution_and_hir.md) · [Trait Solver in rustc](./26_trait_solver_in_rustc.md) · [Type Inference](./08_type_inference.md)
+> **前置概念**: [Name Resolution and HIR](35_name_resolution_and_hir.md) · [Trait Solver in rustc](26_trait_solver_in_rustc.md) · [Type Inference](08_type_inference.md)
 > **后置概念**: [NLL 与 Polonius](../03_advanced/08_nll_and_polonius.md) · [LLVM Backend and Codegen](../06_ecosystem/67_llvm_backend_and_codegen.md)
 
 ---
@@ -24,26 +24,26 @@
 ## 📑 目录
 
 - rustc 类型检查与类型推断（Type Inference）
-  - [📑 目录](#-目录)
-  - [一、类型检查在编译流水线中的位置](#一类型检查在编译流水线中的位置)
-  - [二、`Ty<'tcx>`：rustc 内部类型表示](#二tytcxrustc-内部类型表示)
-  - [三、`typeck` Query 与 `InferCtxt`](#三typeck-query-与-inferctxt)
-    - [3.1 `typeck` query](#31-typeck-query)
-    - [3.2 `InferCtxt`](#32-inferctxt)
-  - [四、推断变量与统一](#四推断变量与统一)
-  - [五、相等约束与子类型约束](#五相等约束与子类型约束)
-    - [5.1 相等约束](#51-相等约束)
-    - [5.2 子类型约束](#52-子类型约束)
-  - [六、区域约束与求解](#六区域约束与求解)
-    - [6.1 收集约束](#61-收集约束)
-    - [6.2 求解时机](#62-求解时机)
-  - [七、Snapshots 与回滚](#七snapshots-与回滚)
-  - [嵌入式测验](#嵌入式测验)
-    - [测验 1：`typeck` query 的主要输出是什么？](#测验-1typeck-query-的主要输出是什么)
-    - [测验 2：整数推断变量 `{integer}` 最终如何变成具体类型？](#测验-2整数推断变量-integer-最终如何变成具体类型)
-    - [测验 3：Rust 的子类型关系主要体现在哪里？](#测验-3rust-的子类型关系主要体现在哪里)
-    - [测验 4：为什么区域约束要延迟到最后才求解？](#测验-4为什么区域约束要延迟到最后才求解)
-  - [权威来源索引](#权威来源索引)
+  - [📑 目录](.#-目录)
+  - [一、类型检查在编译流水线中的位置](.#一类型检查在编译流水线中的位置)
+  - [二、`Ty<'tcx>`：rustc 内部类型表示](.#二tytcxrustc-内部类型表示)
+  - [三、`typeck` Query 与 `InferCtxt`](.#三typeck-query-与-inferctxt)
+    - [3.1 `typeck` query](.#31-typeck-query)
+    - [3.2 `InferCtxt`](.#32-inferctxt)
+  - [四、推断变量与统一](.#四推断变量与统一)
+  - [五、相等约束与子类型约束](.#五相等约束与子类型约束)
+    - [5.1 相等约束](.#51-相等约束)
+    - [5.2 子类型约束](.#52-子类型约束)
+  - [六、区域约束与求解](.#六区域约束与求解)
+    - [6.1 收集约束](.#61-收集约束)
+    - [6.2 求解时机](.#62-求解时机)
+  - [七、Snapshots 与回滚](.#七snapshots-与回滚)
+  - [嵌入式测验](.#嵌入式测验)
+    - [测验 1：`typeck` query 的主要输出是什么？](.#测验-1typeck-query-的主要输出是什么)
+    - [测验 2：整数推断变量 `{integer}` 最终如何变成具体类型？](.#测验-2整数推断变量-integer-最终如何变成具体类型)
+    - [测验 3：Rust 的子类型关系主要体现在哪里？](.#测验-3rust-的子类型关系主要体现在哪里)
+    - [测验 4：为什么区域约束要延迟到最后才求解？](.#测验-4为什么区域约束要延迟到最后才求解)
+  - [权威来源索引](.#权威来源索引)
 
 ---
 

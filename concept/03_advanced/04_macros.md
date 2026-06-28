@@ -45,8 +45,8 @@
 
 <!-- 层级一致性（Coherence）: L3 理论根基 → L2 概念对比 → L1 工程实践 -->
 
-> **对应 Crate**: [`c11_macro_system`](../../crates/c11_macro_system/)
-> **对应练习**: [`exercises/src/macros/`](../../exercises/src/macros/)
+> **对应 Crate**: [`c11_macro_system`](../../crates/c11_macro_system)
+> **对应练习**: [`exercises/src/macros/`](../../exercises/src/macros)
 
 ## 一、权威定义（Definition）
 
@@ -2120,7 +2120,7 @@ mod internal {
 | 类型系统（Type System） | [](../01_foundation/04_type_system.md) | 宏与类型交互 |
 | 形式化方法 | [](../07_future/02_formal_methods.md) | 宏安全验证 |
 | 语言演进 | [](../07_future/03_evolution.md) | 宏系统演进 |
-| 编译期计算 | [](../03_advanced/03_const_generics.md) | const fn 替代宏的趋势 |
+| 编译期计算 | [](03_const_generics.md) | const fn 替代宏的趋势 |
 
 ---
 
@@ -2259,7 +2259,7 @@ macro_rules! conditional_feature {
 1. 阅读 `crates/c11_macro_system/` 中与"声明宏与过程宏"相关的源码和示例
 2. 运行 `cargo test -p c11_macro_system` 验证理解
 3. 完成 `exercises/src/macros/` 中的练习任务
-4. 完成 [L3 宏系统测验](./23_quiz_macros.md) 验证理解程度
+4. 完成 [L3 宏系统测验](23_quiz_macros.md) 验证理解程度
 
 ---
 
@@ -2269,8 +2269,8 @@ macro_rules! conditional_feature {
 
 | 选择 | 条件 | 目标 |
 |:---|:---|:---|
-| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate/) 或 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) |
-| 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
+| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate) 或 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) |
+| 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../06_ecosystem/README.md) |
 

@@ -20,32 +20,32 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Unsafe Rust 安全证明树](#unsafe-rust-安全证明树)
-  - [📑 目录](#-目录)
-  - [🎯 证明目标](#-证明目标)
-  - [🌲 安全证明树](#-安全证明树)
-  - [📐 公理系统](#-公理系统)
-    - [公理 UNSAFE-A1 (裸指针有效性)](#公理-unsafe-a1-裸指针有效性)
-    - [公理 UNSAFE-A2 (类型转换)](#公理-unsafe-a2-类型转换)
-    - [公理 UNSAFE-A3 (外部函数契约)](#公理-unsafe-a3-外部函数契约)
-  - [🔄 证明规则](#-证明规则)
-    - [规则 UNSAFE-R1 (借用转换)](#规则-unsafe-r1-借用转换)
-    - [规则 UNSAFE-R2 (MaybeUninit)](#规则-unsafe-r2-maybeuninit)
-    - [规则 UNSAFE-R3 (切片操作)](#规则-unsafe-r3-切片操作)
-  - [🔍 反例分析](#-反例分析)
-    - [反例 1: 悬垂指针](#反例-1-悬垂指针)
-    - [反例 2: 类型混淆](#反例-2-类型混淆)
-    - [反例 3: 数据竞争](#反例-3-数据竞争)
-  - [✅ 安全模式证明](#-安全模式证明)
-    - [模式 1: 初始化检查](#模式-1-初始化检查)
-    - [模式 2: 引用保证](#模式-2-引用保证)
-    - [模式 3: 所有权转移](#模式-3-所有权转移)
-  - [📊 安全检查清单](#-安全检查清单)
-    - [编写 Unsafe 代码前](#编写-unsafe-代码前)
-    - [代码审查清单](#代码审查清单)
-  - [🔗 相关文档](#-相关文档)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [Unsafe Rust 安全证明树](.#unsafe-rust-安全证明树)
+  - [📑 目录](.#-目录)
+  - [🎯 证明目标](.#-证明目标)
+  - [🌲 安全证明树](.#-安全证明树)
+  - [📐 公理系统](.#-公理系统)
+    - [公理 UNSAFE-A1 (裸指针有效性)](.#公理-unsafe-a1-裸指针有效性)
+    - [公理 UNSAFE-A2 (类型转换)](.#公理-unsafe-a2-类型转换)
+    - [公理 UNSAFE-A3 (外部函数契约)](.#公理-unsafe-a3-外部函数契约)
+  - [🔄 证明规则](.#-证明规则)
+    - [规则 UNSAFE-R1 (借用转换)](.#规则-unsafe-r1-借用转换)
+    - [规则 UNSAFE-R2 (MaybeUninit)](.#规则-unsafe-r2-maybeuninit)
+    - [规则 UNSAFE-R3 (切片操作)](.#规则-unsafe-r3-切片操作)
+  - [🔍 反例分析](.#-反例分析)
+    - [反例 1: 悬垂指针](.#反例-1-悬垂指针)
+    - [反例 2: 类型混淆](.#反例-2-类型混淆)
+    - [反例 3: 数据竞争](.#反例-3-数据竞争)
+  - [✅ 安全模式证明](.#-安全模式证明)
+    - [模式 1: 初始化检查](.#模式-1-初始化检查)
+    - [模式 2: 引用保证](.#模式-2-引用保证)
+    - [模式 3: 所有权转移](.#模式-3-所有权转移)
+  - [📊 安全检查清单](.#-安全检查清单)
+    - [编写 Unsafe 代码前](.#编写-unsafe-代码前)
+    - [代码审查清单](.#代码审查清单)
+  - [🔗 相关文档](.#-相关文档)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 🎯 证明目标
 >
@@ -439,7 +439,7 @@ impl<T> Drop for UniquePtr<T> {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [Unsafe Rust 指南](../../../docs/05_guides/05_unsafe_rust_guide.md)
+- [Unsafe Rust 指南](../../05_guides/05_unsafe_rust_guide.md)
 - [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 - [Miri 工具](https://github.com/rust-lang/miri)
 
@@ -466,7 +466,7 @@ impl<T> Drop for UniquePtr<T> {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [formal_methods 目录](./README.md)
+- [formal_methods 目录](README.md)
 - [上级目录](../README.md)
 
 ---

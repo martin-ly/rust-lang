@@ -29,8 +29,8 @@
 |------|------|------|
 | [cargo_basics.md](01_cargo_basics.md) | Cargo 基础与工作空间 | ⭐⭐ |
 | [edition_2024.md](02_edition_2024.md) | Edition 2024 迁移指南 | ⭐⭐⭐ |
-| [emerging/rust_1_95.md](./emerging/03_rust_1_95.md) | Rust 1.95 新特性 | ⭐⭐⭐ |
-| [emerging/rust_1_96.md](./emerging/05_rust_1_96.md) | Rust 1.96 稳定特性 | ⭐⭐⭐ |
+| [emerging/rust_1_95.md](emerging/03_rust_1_95.md) | Rust 1.95 新特性 | ⭐⭐⭐ |
+| [emerging/rust_1_96.md](emerging/05_rust_1_96.md) | Rust 1.96 稳定特性 | ⭐⭐⭐ |
 
 ### 深度解析
 >
@@ -38,11 +38,11 @@
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [deep_dives/tokio_deep_dive.md](./deep_dives/02_tokio_deep_dive.md) | Tokio 运行时深度解析 | ⭐⭐⭐⭐ |
-| [deep_dives/axum_deep_dive.md](./deep_dives/01_axum_deep_dive.md) | Axum Web 框架深度解析 | ⭐⭐⭐⭐ |
-| [databases/sqlx_deep_dive.md](./databases/02_sqlx_deep_dive.md) | SQLx 数据库访问 | ⭐⭐⭐ |
-| [databases/sea_orm_deep_dive.md](./databases/01_sea_orm_deep_dive.md) | SeaORM ORM 框架 | ⭐⭐⭐ |
-| [deployment/kubernetes_deployment_guide.md](./deployment/01_kubernetes_deployment_guide.md) | Kubernetes 部署指南 | ⭐⭐⭐⭐ |
+| [deep_dives/tokio_deep_dive.md](deep_dives/02_tokio_deep_dive.md) | Tokio 运行时深度解析 | ⭐⭐⭐⭐ |
+| [deep_dives/axum_deep_dive.md](deep_dives/01_axum_deep_dive.md) | Axum Web 框架深度解析 | ⭐⭐⭐⭐ |
+| [databases/sqlx_deep_dive.md](databases/02_sqlx_deep_dive.md) | SQLx 数据库访问 | ⭐⭐⭐ |
+| [databases/sea_orm_deep_dive.md](databases/01_sea_orm_deep_dive.md) | SeaORM ORM 框架 | ⭐⭐⭐ |
+| [deployment/kubernetes_deployment_guide.md](deployment/01_kubernetes_deployment_guide.md) | Kubernetes 部署指南 | ⭐⭐⭐⭐ |
 
 ### 前沿特性
 >
@@ -50,9 +50,9 @@
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [emerging/generic_const_exprs.md](./emerging/02_generic_const_exprs.md) | 泛型常量表达式 | ⭐⭐⭐⭐ |
-| [emerging/async_closures.md](./emerging/01_async_closures.md) | 异步闭包 | ⭐⭐⭐⭐ |
-| [emerging/rust_1_95.md](./emerging/03_rust_1_95.md) | Rust 1.95 新特性 | ⭐⭐⭐ |
+| [emerging/generic_const_exprs.md](emerging/02_generic_const_exprs.md) | 泛型常量表达式 | ⭐⭐⭐⭐ |
+| [emerging/async_closures.md](emerging/01_async_closures.md) | 异步闭包 | ⭐⭐⭐⭐ |
+| [emerging/rust_1_95.md](emerging/03_rust_1_95.md) | Rust 1.95 新特性 | ⭐⭐⭐ |
 
 ## ⏱️ 预计时间
 
@@ -64,8 +64,8 @@
 
 ## 🎓 前置要求
 
-- [02_intermediate/](../02_intermediate/) 的 Trait、泛型、错误处理
-- [03_advanced/](../03_advanced/) 的 async/await、线程、unsafe
+- [02_intermediate/](../02_intermediate) 的 Trait、泛型、错误处理
+- [03_advanced/](../03_advanced) 的 async/await、线程、unsafe
 
 ## ✅ 完成检查清单
 
@@ -76,8 +76,8 @@
 
 ## 🚀 下一步
 
-- 深入 [04_expert/](../04_expert/) 的专家级主题
-- 查阅 [05_reference/](../05_reference/) 的速查资料
+- 深入 [04_expert/](../04_expert) 的专家级主题
+- 查阅 [05_reference/](../05_reference) 的速查资料
 - 结合实际项目应用所学
 
 ---

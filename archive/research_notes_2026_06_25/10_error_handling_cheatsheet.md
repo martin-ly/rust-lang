@@ -13,24 +13,24 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [错误处理速查卡](#错误处理速查卡)
-  - [📑 目录](#-目录)
-  - [Result与Option](#result与option)
-  - [常用方法](#常用方法)
-    - [Option](#option)
-    - [Result](#result)
-  - [?操作符](#操作符)
-  - [错误转换](#错误转换)
-  - [panic vs Result](#panic-vs-result)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [错误处理速查卡](.#错误处理速查卡)
+  - [📑 目录](.#-目录)
+  - [Result与Option](.#result与option)
+  - [常用方法](.#常用方法)
+    - [Option](.#option)
+    - [Result](.#result)
+  - [?操作符](.#操作符)
+  - [错误转换](.#错误转换)
+  - [panic vs Result](.#panic-vs-result)
+  - [🆕 Rust 1.94 更新](.#-rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## Result与Option
 >
@@ -129,7 +129,7 @@ let file = File::open("file")?;  // IOError自动转为MyError
 
 > **适用版本**: Rust 1.96.0+
 
-详见 [RUST_194_RESEARCH_UPDATE](../../archive/research_notes_2026_06_25/10_rust_194_research_update.md)
+详见 [RUST_194_RESEARCH_UPDATE](10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 
@@ -194,7 +194,7 @@ let file = File::open("file")?;  // IOError自动转为MyError
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

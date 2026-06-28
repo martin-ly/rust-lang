@@ -28,39 +28,39 @@
 >
 
 - Rust vs Java：系统编程与托管运行时（Runtime）的范式对比
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
     - 1.1 内存管理：所有权（Ownership） vs GC
     - 1.2 类型系统（Type System）：静态显式 vs 静态推断
-    - [1.3 并发模型：所有权约束 vs JMM](#13-并发模型所有权约束-vs-jmm)
-  - [二、技术细节](#二技术细节)
-    - [2.1 运行时架构对比](#21-运行时架构对比)
-    - [2.2 异常处理哲学](#22-异常处理哲学)
+    - [1.3 并发模型：所有权约束 vs JMM](.#13-并发模型所有权约束-vs-jmm)
+  - [二、技术细节](.#二技术细节)
+    - [2.1 运行时架构对比](.#21-运行时架构对比)
+    - [2.2 异常处理哲学](.#22-异常处理哲学)
     - 2.3 泛型（Generics）实现：单态化（Monomorphization） vs 擦除
-  - [三、场景适用矩阵](#三场景适用矩阵)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、迁移路径](#五迁移路径)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：Rust 与 Java 的编译错误对比](#十边界测试rust-与-java-的编译错误对比)
-    - [10.1 边界测试：Java 的泛型擦除 vs Rust 的单态化（编译错误）](#101-边界测试java-的泛型擦除-vs-rust-的单态化编译错误)
-    - [10.2 边界测试：Java 的 null 与 Rust 的 `Option`（编译错误）](#102-边界测试java-的-null-与-rust-的-option编译错误)
-    - [10.3 边界测试：Java 的泛型擦除与 Rust 的单态化（编译错误）](#103-边界测试java-的泛型擦除与-rust-的单态化编译错误)
-    - [10.4 边界测试：Java 的 GC 与 Rust 的所有权的资源管理差异（编译错误）](#104-边界测试java-的-gc-与-rust-的所有权的资源管理差异编译错误)
-    - [10.3 边界测试：Java 的泛型擦除与 Rust 的单态化（编译后差异）](#103-边界测试java-的泛型擦除与-rust-的单态化编译后差异)
-    - [10.4 边界测试：Java 的 null 安全与 Rust 的 Option 编译期检查（编译错误）](#104-边界测试java-的-null-安全与-rust-的-option-编译期检查编译错误)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：Rust 和 Java 在内存管理上的最根本区别是什么？（理解层）](#测验-1rust-和-java-在内存管理上的最根本区别是什么理解层)
-    - [测验 2：Java 的泛型（Generics）使用类型擦除，Rust 的泛型使用单态化。这对运行时性能和类型安全有什么影响？（理解层）](#测验-2java-的泛型generics使用类型擦除rust-的泛型使用单态化这对运行时性能和类型安全有什么影响理解层)
-    - [测验 3：为什么 Rust 没有 Java 那样的"受检异常"（Checked Exceptions）？Rust 如何处理错误？（理解层）](#测验-3为什么-rust-没有-java-那样的受检异常checked-exceptionsrust-如何处理错误理解层)
-    - [测验 4：Rust 的 `async/await` 与 Java 的 `CompletableFuture`/`Virtual Threads` 在并发模型上有什么区别？（理解层）](#测验-4rust-的-asyncawait-与-java-的-completablefuturevirtual-threads-在并发模型上有什么区别理解层)
-    - [测验 5：在需要与大量现有 Java 生态集成的场景下，Rust 通常如何与 Java 交互？（理解层）](#测验-5在需要与大量现有-java-生态集成的场景下rust-通常如何与-java-交互理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+  - [三、场景适用矩阵](.#三场景适用矩阵)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、迁移路径](.#五迁移路径)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：Rust 与 Java 的编译错误对比](.#十边界测试rust-与-java-的编译错误对比)
+    - [10.1 边界测试：Java 的泛型擦除 vs Rust 的单态化（编译错误）](.#101-边界测试java-的泛型擦除-vs-rust-的单态化编译错误)
+    - [10.2 边界测试：Java 的 null 与 Rust 的 `Option`（编译错误）](.#102-边界测试java-的-null-与-rust-的-option编译错误)
+    - [10.3 边界测试：Java 的泛型擦除与 Rust 的单态化（编译错误）](.#103-边界测试java-的泛型擦除与-rust-的单态化编译错误)
+    - [10.4 边界测试：Java 的 GC 与 Rust 的所有权的资源管理差异（编译错误）](.#104-边界测试java-的-gc-与-rust-的所有权的资源管理差异编译错误)
+    - [10.3 边界测试：Java 的泛型擦除与 Rust 的单态化（编译后差异）](.#103-边界测试java-的泛型擦除与-rust-的单态化编译后差异)
+    - [10.4 边界测试：Java 的 null 安全与 Rust 的 Option 编译期检查（编译错误）](.#104-边界测试java-的-null-安全与-rust-的-option-编译期检查编译错误)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 和 Java 在内存管理上的最根本区别是什么？（理解层）](.#测验-1rust-和-java-在内存管理上的最根本区别是什么理解层)
+    - [测验 2：Java 的泛型（Generics）使用类型擦除，Rust 的泛型使用单态化。这对运行时性能和类型安全有什么影响？（理解层）](.#测验-2java-的泛型generics使用类型擦除rust-的泛型使用单态化这对运行时性能和类型安全有什么影响理解层)
+    - [测验 3：为什么 Rust 没有 Java 那样的"受检异常"（Checked Exceptions）？Rust 如何处理错误？（理解层）](.#测验-3为什么-rust-没有-java-那样的受检异常checked-exceptionsrust-如何处理错误理解层)
+    - [测验 4：Rust 的 `async/await` 与 Java 的 `CompletableFuture`/`Virtual Threads` 在并发模型上有什么区别？（理解层）](.#测验-4rust-的-asyncawait-与-java-的-completablefuturevirtual-threads-在并发模型上有什么区别理解层)
+    - [测验 5：在需要与大量现有 Java 生态集成的场景下，Rust 通常如何与 Java 交互？（理解层）](.#测验-5在需要与大量现有-java-生态集成的场景下rust-通常如何与-java-交互理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -358,8 +358,8 @@ Java → Rust 的渐进迁移策略:
 
 ## 相关概念文件
 
-- [Rust vs C++](./01_rust_vs_cpp.md) — Rust 与 C++ 的对比
-- [Rust vs Go](./02_rust_vs_go.md) — Rust 与 Go 的对比
+- [Rust vs C++](01_rust_vs_cpp.md) — Rust 与 C++ 的对比
+- [Rust vs Go](02_rust_vs_go.md) — Rust 与 Go 的对比
 - [Ownership](../01_foundation/01_ownership.md) — Rust 所有权（Ownership）模型
 - [Concurrency](../03_advanced/01_concurrency.md) — Rust 并发模型
 - [Application Domains](../06_ecosystem/04_application_domains.md) — 应用领域分析

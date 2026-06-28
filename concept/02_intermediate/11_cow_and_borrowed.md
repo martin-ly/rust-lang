@@ -11,8 +11,8 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价写时复制的性能权衡
 > **定位**: 深入分析 Rust 中 **Cow（Clone [来源: [std::clone::Clone](https://doc.rust-lang.org/std/clone/trait.Clone.html)] on Write）**类型的设计——如何在**借用（Borrowing）**（零拷贝）和**拥有**（必要时克隆）之间自动切换，以及它在 API 设计中的广泛应用。
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Trait](./01_traits.md)
-> **后置概念**: [String Patterns](./09_serde_patterns.md) · [Zero Cost Abstractions](../01_foundation/06_zero_cost_abstractions.md)
+> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Trait](01_traits.md)
+> **后置概念**: [String Patterns](09_serde_patterns.md) · [Zero Cost Abstractions](../01_foundation/06_zero_cost_abstractions.md)
 
 ---
 
@@ -24,42 +24,42 @@
 
 ## 📑 目录
 
-- [Cow：写时克隆与零拷贝抽象](#cow写时克隆与零拷贝抽象)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 问题：借用与拥有的选择困境](#11-问题借用与拥有的选择困境)
-    - [1.2 Cow 的设计：延迟克隆](#12-cow-的设计延迟克隆)
-    - [1.3 两种变体：Borrowed vs Owned](#13-两种变体borrowed-vs-owned)
-  - [二、技术细节](#二技术细节)
-    - [2.1 Cow 的核心操作](#21-cow-的核心操作)
-    - [2.2 常见使用模式](#22-常见使用模式)
-    - [2.3 与 AsRef/ToOwned 的关系](#23-与-asreftoowned-的关系)
-  - [三、性能分析](#三性能分析)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、常见陷阱](#五常见陷阱)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：Cow 与借用的编译错误](#十边界测试cow-与借用的编译错误)
-    - [10.1 边界测试：`Cow` 的写时复制与借用冲突（编译错误）](#101-边界测试cow-的写时复制与借用冲突编译错误)
-    - [10.2 边界测试：`Borrow` trait 与 `AsRef` 的误用（编译错误）](#102-边界测试borrow-trait-与-asref-的误用编译错误)
-    - [10.3 边界测试：`Cow` 的 `ToOwned` 约束（编译错误）](#103-边界测试cow-的-toowned-约束编译错误)
-    - [10.4 边界测试：`Cow` 在 `match` 中的所有权转移（编译错误）](#104-边界测试cow-在-match-中的所有权转移编译错误)
-    - [10.2 边界测试：`Cow` 的生命周期与所有权转换（编译错误）](#102-边界测试cow-的生命周期与所有权转换编译错误)
-    - [10.4 边界测试：Cow 的生命周期与泛型约束不匹配（编译错误）](#104-边界测试cow-的生命周期与泛型约束不匹配编译错误)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：`Cow<'a, str>` 的两种变体是什么？各自代表什么语义？（理解层）](#测验-1cowa-str-的两种变体是什么各自代表什么语义理解层)
-    - [测验 2：`Cow::Borrowed(s).to_mut()` 在什么情况下会触发克隆？（理解层）](#测验-2cowborrowedsto_mut-在什么情况下会触发克隆理解层)
-    - [测验 3：函数签名 `fn greet<'a>(s: Cow<'a, str>) -> Cow<'a, str>` 有什么设计优势？（理解层）](#测验-3函数签名-fn-greetas-cowa-str---cowa-str-有什么设计优势理解层)
-    - [测验 4：`Cow` 适合解决什么场景的问题？（理解层）](#测验-4cow-适合解决什么场景的问题理解层)
-    - [测验 5：为什么不能将 `Cow<'a, str>` 直接赋值给需要 `Cow<'static, str>` 的地方？（理解层）](#测验-5为什么不能将-cowa-str-直接赋值给需要-cowstatic-str-的地方理解层)
-  - [实践](#实践)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Cow：写时克隆与零拷贝抽象](.#cow写时克隆与零拷贝抽象)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 问题：借用与拥有的选择困境](.#11-问题借用与拥有的选择困境)
+    - [1.2 Cow 的设计：延迟克隆](.#12-cow-的设计延迟克隆)
+    - [1.3 两种变体：Borrowed vs Owned](.#13-两种变体borrowed-vs-owned)
+  - [二、技术细节](.#二技术细节)
+    - [2.1 Cow 的核心操作](.#21-cow-的核心操作)
+    - [2.2 常见使用模式](.#22-常见使用模式)
+    - [2.3 与 AsRef/ToOwned 的关系](.#23-与-asreftoowned-的关系)
+  - [三、性能分析](.#三性能分析)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、常见陷阱](.#五常见陷阱)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [逆向推理链（Backward Reasoning）](.#逆向推理链backward-reasoning)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：Cow 与借用的编译错误](.#十边界测试cow-与借用的编译错误)
+    - [10.1 边界测试：`Cow` 的写时复制与借用冲突（编译错误）](.#101-边界测试cow-的写时复制与借用冲突编译错误)
+    - [10.2 边界测试：`Borrow` trait 与 `AsRef` 的误用（编译错误）](.#102-边界测试borrow-trait-与-asref-的误用编译错误)
+    - [10.3 边界测试：`Cow` 的 `ToOwned` 约束（编译错误）](.#103-边界测试cow-的-toowned-约束编译错误)
+    - [10.4 边界测试：`Cow` 在 `match` 中的所有权转移（编译错误）](.#104-边界测试cow-在-match-中的所有权转移编译错误)
+    - [10.2 边界测试：`Cow` 的生命周期与所有权转换（编译错误）](.#102-边界测试cow-的生命周期与所有权转换编译错误)
+    - [10.4 边界测试：Cow 的生命周期与泛型约束不匹配（编译错误）](.#104-边界测试cow-的生命周期与泛型约束不匹配编译错误)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：`Cow<'a, str>` 的两种变体是什么？各自代表什么语义？（理解层）](.#测验-1cowa-str-的两种变体是什么各自代表什么语义理解层)
+    - [测验 2：`Cow::Borrowed(s).to_mut()` 在什么情况下会触发克隆？（理解层）](.#测验-2cowborrowedsto_mut-在什么情况下会触发克隆理解层)
+    - [测验 3：函数签名 `fn greet<'a>(s: Cow<'a, str>) -> Cow<'a, str>` 有什么设计优势？（理解层）](.#测验-3函数签名-fn-greetas-cowa-str---cowa-str-有什么设计优势理解层)
+    - [测验 4：`Cow` 适合解决什么场景的问题？（理解层）](.#测验-4cow-适合解决什么场景的问题理解层)
+    - [测验 5：为什么不能将 `Cow<'a, str>` 直接赋值给需要 `Cow<'static, str>` 的地方？（理解层）](.#测验-5为什么不能将-cowa-str-直接赋值给需要-cowstatic-str-的地方理解层)
+  - [实践](.#实践)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -461,7 +461,7 @@ graph TD
 
 - [Ownership](../01_foundation/01_ownership.md) — 所有权模型
 - [Borrowing](../01_foundation/02_borrowing.md) — 借用规则
-- [Trait](./01_traits.md) — Trait 系统
+- [Trait](01_traits.md) — Trait 系统
 - [Zero Cost Abstractions](../01_foundation/06_zero_cost_abstractions.md) — 零成本抽象（Zero-Cost Abstraction）
 
 ---
@@ -733,8 +733,8 @@ fn main() {}
 
 > **相关资源**:
 >
-> - [crates/ 示例代码](../crates/) — 与本文概念对应的可编译示例
-> - [exercises/ 练习](../exercises/) — 动手编程挑战
+> - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../exercises) — 动手编程挑战
 > - [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

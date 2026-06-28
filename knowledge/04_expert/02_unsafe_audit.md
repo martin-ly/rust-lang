@@ -39,7 +39,7 @@
 在开始学习本章之前，请确保你已掌握：
 
 - [Unsafe Rust](../03_advanced/unsafe/04_unsafe_rust.md) - 深入理解 `unsafe` 块、裸指针、FFI
-- [内存模型与 Tree Borrows](../04_expert/miri/01_tree_borrows.md) - 理解 Rust 的内存模型
+- [内存模型与 Tree Borrows](miri/01_tree_borrows.md) - 理解 Rust 的内存模型
 - [FFI 与外部调用](../03_advanced/unsafe/01_ffi.md) - 了解 C 互操作基础
 - [生命周期与借用检查](../01_fundamentals/03_lifetimes.md) - 掌握生命周期系统
 

@@ -17,9 +17,9 @@
 > 异步（Async）状态机 ·
 > [公理语义](../04_formal/20_axiomatic_semantics.md) ·
 > [类型语义](../04_formal/21_type_semantics.md)
-> **后置延伸**: [CQRS & Event Sourcing](./33_cqrs_event_sourcing.md) ·
-> [Reactive Programming](./40_reactive_programming.md) ·
-> [分布式系统](./18_distributed_systems.md)
+> **后置延伸**: [CQRS & Event Sourcing](33_cqrs_event_sourcing.md) ·
+> [Reactive Programming](40_reactive_programming.md) ·
+> [分布式系统](18_distributed_systems.md)
 >
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Cargo Book](https://doc.rust-lang.org/cargo/)
 > **前置概念**: N/A
@@ -42,47 +42,47 @@
 
 ## 📑 目录
 
-- [Workflow Theory \& Formalization（工作流理论与形式化）](#workflow-theory--formalization工作流理论与形式化)
-  - [📑 目录](#-目录)
-  - [一、权威定义（Definition）](#一权威定义definition)
-    - [1.1 工作流管理联盟（WfMC）定义](#11-工作流管理联盟wfmc定义)
-    - [1.2 工作流模型分类](#12-工作流模型分类)
-    - [1.3 BPMN 与形式化语义](#13-bpmn-与形式化语义)
-  - [二、概念属性矩阵](#二概念属性矩阵)
-  - [三、形式化表示](#三形式化表示)
-    - [3.1 工作流图](#31-工作流图)
-    - [3.2 状态机语义](#32-状态机语义)
-    - [3.3 执行语义](#33-执行语义)
-  - [四、Rust 中的工作流实现](#四rust-中的工作流实现)
-    - [4.1 异步机制与工作流同构性](#41-异步机制与工作流同构性)
-    - [4.2 类型系统映射](#42-类型系统映射)
-    - [4.3 状态机转换](#43-状态机转换)
-  - [五、形式化验证](#五形式化验证)
-    - [5.1 Petri 网模型](#51-petri-网模型)
-    - [5.2 π 演算](#52-π-演算)
-    - [5.3 时态逻辑（CTL/LTL）](#53-时态逻辑ctlltl)
-  - [六、工作流实现架构](#六工作流实现架构)
-    - [6.1 核心组件](#61-核心组件)
-    - [6.2 分布式执行模型](#62-分布式执行模型)
-    - [6.3 故障恢复](#63-故障恢复)
-  - [七、反命题与边界](#七反命题与边界)
-    - [7.1 反命题树](#71-反命题树)
-    - [7.2 边界极限](#72-边界极限)
-  - [八、边界测试](#八边界测试)
-    - [8.1 边界测试：状态机转换遗漏导致死代码（编译/逻辑错误）](#81-边界测试状态机转换遗漏导致死代码编译逻辑错误)
-    - [8.2 边界测试：Petri 网可达性分析的 state explosion（运行时性能）](#82-边界测试petri-网可达性分析的-state-explosion运行时性能)
-    - [8.3 边界测试：工作流循环缺乏终止条件导致无限执行（运行时错误）](#83-边界测试工作流循环缺乏终止条件导致无限执行运行时错误)
-  - [相关概念文件](#相关概念文件)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：工作流编排（Workflow Orchestration）与事件驱动架构（EDA）有什么区别？（理解层）](#测验-1工作流编排workflow-orchestration与事件驱动架构eda有什么区别理解层)
-    - [测验 2：Rust 中实现状态机工作流时，`enum` 和 `match` 有什么优势？（理解层）](#测验-2rust-中实现状态机工作流时enum-和-match-有什么优势理解层)
-    - [测验 3：什么是" Saga 模式"的补偿事务（Compensating Transaction）？（理解层）](#测验-3什么是-saga-模式的补偿事务compensating-transaction理解层)
-    - [测验 4：在 Rust 中，`tokio::task::JoinSet` 如何帮助实现并行工作流步骤？（理解层）](#测验-4在-rust-中tokiotaskjoinset-如何帮助实现并行工作流步骤理解层)
-    - [测验 5：为什么长时间运行的工作流需要"持久化状态"（Durable State）？（理解层）](#测验-5为什么长时间运行的工作流需要持久化状态durable-state理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Workflow Theory \& Formalization（工作流理论与形式化）](.#workflow-theory--formalization工作流理论与形式化)
+  - [📑 目录](.#-目录)
+  - [一、权威定义（Definition）](.#一权威定义definition)
+    - [1.1 工作流管理联盟（WfMC）定义](.#11-工作流管理联盟wfmc定义)
+    - [1.2 工作流模型分类](.#12-工作流模型分类)
+    - [1.3 BPMN 与形式化语义](.#13-bpmn-与形式化语义)
+  - [二、概念属性矩阵](.#二概念属性矩阵)
+  - [三、形式化表示](.#三形式化表示)
+    - [3.1 工作流图](.#31-工作流图)
+    - [3.2 状态机语义](.#32-状态机语义)
+    - [3.3 执行语义](.#33-执行语义)
+  - [四、Rust 中的工作流实现](.#四rust-中的工作流实现)
+    - [4.1 异步机制与工作流同构性](.#41-异步机制与工作流同构性)
+    - [4.2 类型系统映射](.#42-类型系统映射)
+    - [4.3 状态机转换](.#43-状态机转换)
+  - [五、形式化验证](.#五形式化验证)
+    - [5.1 Petri 网模型](.#51-petri-网模型)
+    - [5.2 π 演算](.#52-π-演算)
+    - [5.3 时态逻辑（CTL/LTL）](.#53-时态逻辑ctlltl)
+  - [六、工作流实现架构](.#六工作流实现架构)
+    - [6.1 核心组件](.#61-核心组件)
+    - [6.2 分布式执行模型](.#62-分布式执行模型)
+    - [6.3 故障恢复](.#63-故障恢复)
+  - [七、反命题与边界](.#七反命题与边界)
+    - [7.1 反命题树](.#71-反命题树)
+    - [7.2 边界极限](.#72-边界极限)
+  - [八、边界测试](.#八边界测试)
+    - [8.1 边界测试：状态机转换遗漏导致死代码（编译/逻辑错误）](.#81-边界测试状态机转换遗漏导致死代码编译逻辑错误)
+    - [8.2 边界测试：Petri 网可达性分析的 state explosion（运行时性能）](.#82-边界测试petri-网可达性分析的-state-explosion运行时性能)
+    - [8.3 边界测试：工作流循环缺乏终止条件导致无限执行（运行时错误）](.#83-边界测试工作流循环缺乏终止条件导致无限执行运行时错误)
+  - [相关概念文件](.#相关概念文件)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：工作流编排（Workflow Orchestration）与事件驱动架构（EDA）有什么区别？（理解层）](.#测验-1工作流编排workflow-orchestration与事件驱动架构eda有什么区别理解层)
+    - [测验 2：Rust 中实现状态机工作流时，`enum` 和 `match` 有什么优势？（理解层）](.#测验-2rust-中实现状态机工作流时enum-和-match-有什么优势理解层)
+    - [测验 3：什么是" Saga 模式"的补偿事务（Compensating Transaction）？（理解层）](.#测验-3什么是-saga-模式的补偿事务compensating-transaction理解层)
+    - [测验 4：在 Rust 中，`tokio::task::JoinSet` 如何帮助实现并行工作流步骤？（理解层）](.#测验-4在-rust-中tokiotaskjoinset-如何帮助实现并行工作流步骤理解层)
+    - [测验 5：为什么长时间运行的工作流需要"持久化状态"（Durable State）？（理解层）](.#测验-5为什么长时间运行的工作流需要持久化状态durable-state理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 > **Bloom 层级**: 分析 → 评价
 **变更日志**:
@@ -1296,11 +1296,11 @@ async fn unbounded_backoff() -> Result<Output> {
 
 ## 相关概念文件
 
-- [CQRS & Event Sourcing](./33_cqrs_event_sourcing.md) — 事件溯源持久化、Saga 编排
-- [Reactive Programming](./40_reactive_programming.md) — Stream、背压、数据流
-- [分布式系统](./18_distributed_systems.md) — gRPC、Raft、Actor、服务发现
-- [架构设计模式](./35_architecture_patterns.md) — 分层/六边形/洋葱/整洁架构
-- [微服务架构模式](./31_microservice_patterns.md) — 服务发现、熔断、Saga
+- [CQRS & Event Sourcing](33_cqrs_event_sourcing.md) — 事件溯源持久化、Saga 编排
+- [Reactive Programming](40_reactive_programming.md) — Stream、背压、数据流
+- [分布式系统](18_distributed_systems.md) — gRPC、Raft、Actor、服务发现
+- [架构设计模式](35_architecture_patterns.md) — 分层/六边形/洋葱/整洁架构
+- [微服务架构模式](31_microservice_patterns.md) — 服务发现、熔断、Saga
 - [Async/Await](../03_advanced/02_async.md) — 异步编程基础
 - [异步状态机](../03_advanced/02_async.md) — async/await 状态机转换
 - [公理语义](../04_formal/20_axiomatic_semantics.md) — Hoare 逻辑、正确性证明

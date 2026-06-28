@@ -116,11 +116,11 @@ ACF 引入的第七层级（在传统 L6-L7 之上），指定管理双模式切
 
 ## 相关概念文件
 
-- [概念索引](./README.md) — 知识体系总览与导航
-- [学习指南](./learning_guide.md) — 分层学习路径建议
-- [语义空间坐标系](./semantic_space.md) — 概念三维定位方法论
-- [概念审计指南](./08_concept_audit_guide.md) — 质量检查与维护规范
-- [交叉引用矩阵](./05_cross_reference_matrix.md) — 概念间关联映射
+- [概念索引](README.md) — 知识体系总览与导航
+- [学习指南](learning_guide.md) — 分层学习路径建议
+- [语义空间坐标系](semantic_space.md) — 概念三维定位方法论
+- [概念审计指南](08_concept_audit_guide.md) — 质量检查与维护规范
+- [交叉引用矩阵](05_cross_reference_matrix.md) — 概念间关联映射
 
 ## 认知路径
 

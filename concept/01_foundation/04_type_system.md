@@ -18,7 +18,7 @@
 > **层级**: L1 基础概念
 > **A/S/P 标记**: **S** — Structure（心智模型）
 > **双维定位**: C×Und — 理解 ADT 的代数结构
-> **前置概念**: [Ownership](./01_ownership.md)
+> **前置概念**: [Ownership](01_ownership.md)
 > **后置概念**:
 > [Traits](../02_intermediate/01_traits.md) ·
 > [Generics](../02_intermediate/02_generics.md) ·
@@ -933,9 +933,9 @@ fn main() {
 
 ## 十一、相关概念链接
 
-- [Ownership](./01_ownership.md) — 类型系统与所有权规则共同构成 Safe Rust 的内存安全（Memory Safety）基础
-- [Borrowing](./02_borrowing.md) — 引用类型 `&T`、`&mut T` 是类型系统对内存别名的约束表达
-- [Lifetimes](./03_lifetimes.md) — 生命周期（Lifetimes）是类型系统的参数化扩展，将时间维度引入类型
+- [Ownership](01_ownership.md) — 类型系统与所有权规则共同构成 Safe Rust 的内存安全（Memory Safety）基础
+- [Borrowing](02_borrowing.md) — 引用类型 `&T`、`&mut T` 是类型系统对内存别名的约束表达
+- [Lifetimes](03_lifetimes.md) — 生命周期（Lifetimes）是类型系统的参数化扩展，将时间维度引入类型
 - [Traits](../02_intermediate/01_traits.md) — Trait 将行为抽象引入类型系统，对应 Haskell Type Class
 - [Generics](../02_intermediate/02_generics.md) — 泛型参数化使 ADT 具备多态表达能力
 - [00_meta/inter_layer_map.md](../00_meta/inter_layer_map.md) — 跨层定理映射 §4.2 "类型系统一致性"
@@ -1204,7 +1204,7 @@ let b: Array<i32, 5> = Array { data: [1, 2, 3, 4, 5] };
 >
 > **交叉链接**:
 >
-> [L1 生命周期: Elision 规则](./03_lifetimes.md) ·
+> [L1 生命周期: Elision 规则](03_lifetimes.md) ·
 > [L2 泛型: 约束推导](../02_intermediate/02_generics.md) ·
 > [L4 类型论: 系统 F](../04_formal/02_type_theory.md)
 
@@ -2494,8 +2494,8 @@ fn main() {
 
 ## 实践
 
-> **对应 Crate**: [`c02_type_system`](../crates/c02_type_system/)
-> **对应练习**: [`exercises/src/type_system/`](../exercises/src/type_system/)
+> **对应 Crate**: [`c02_type_system`](../crates/c02_type_system)
+> **对应练习**: [`exercises/src/type_system/`](../exercises/src/type_system)
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。
 

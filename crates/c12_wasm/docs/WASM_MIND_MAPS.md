@@ -9,22 +9,22 @@
 
 ## 📋 目录
 
-- [WASM 思维导图集合](#wasm-思维导图集合)
-  - [📋 目录](#-目录)
-  - [🎯 文档概述](#-文档概述)
-  - [🗺️ 核心概念思维导图](#️-核心概念思维导图)
-    - [1. WebAssembly 核心架构思维导图](#1-webassembly-核心架构思维导图)
-    - [2. Rust WASM 编译流程思维导图](#2-rust-wasm-编译流程思维导图)
-    - [3. WASM 内存模型思维导图](#3-wasm-内存模型思维导图)
-    - [4. JavaScript 互操作思维导图](#4-javascript-互操作思维导图)
-    - [5. WASM 性能优化思维导图](#5-wasm-性能优化思维导图)
-  - [📊 技术栈思维导图](#-技术栈思维导图)
-    - [1. wasm-bindgen 生态思维导图](#1-wasm-bindgen-生态思维导图)
-    - [2. WASI 系统接口思维导图](#2-wasi-系统接口思维导图)
-    - [3. Rust 1.92.0 WASM 特性思维导图](#3-rust-1920-wasm-特性思维导图)
-  - [🔗 知识关联思维导图](#-知识关联思维导图)
-  - [📚 相关文档](#-相关文档)
-  - [**维护者**: C12 WASM 文档团队](#维护者-c12-wasm-文档团队)
+- [WASM 思维导图集合](.#wasm-思维导图集合)
+  - [📋 目录](.#-目录)
+  - [🎯 文档概述](.#-文档概述)
+  - [🗺️ 核心概念思维导图](.#️-核心概念思维导图)
+    - [1. WebAssembly 核心架构思维导图](.#1-webassembly-核心架构思维导图)
+    - [2. Rust WASM 编译流程思维导图](.#2-rust-wasm-编译流程思维导图)
+    - [3. WASM 内存模型思维导图](.#3-wasm-内存模型思维导图)
+    - [4. JavaScript 互操作思维导图](.#4-javascript-互操作思维导图)
+    - [5. WASM 性能优化思维导图](.#5-wasm-性能优化思维导图)
+  - [📊 技术栈思维导图](.#-技术栈思维导图)
+    - [1. wasm-bindgen 生态思维导图](.#1-wasm-bindgen-生态思维导图)
+    - [2. WASI 系统接口思维导图](.#2-wasi-系统接口思维导图)
+    - [3. Rust 1.92.0 WASM 特性思维导图](.#3-rust-1920-wasm-特性思维导图)
+  - [🔗 知识关联思维导图](.#-知识关联思维导图)
+  - [📚 相关文档](.#-相关文档)
+  - [**维护者**: C12 WASM 文档团队](.#维护者-c12-wasm-文档团队)
 
 ---
 
@@ -652,11 +652,11 @@ WASM 知识关联
 
 ## 📚 相关文档
 
-- [项目概览](./tier_01_foundations/01_项目概览.md)
-- [Rust 1.92.0 WASM 改进文档](./RUST_192_WASM_IMPROVEMENTS.md)
-- [WASM 多维概念对比矩阵](./WASM_CONCEPT_MATRIX.md)
-- [WASM 决策树图](./WASM_DECISION_TREE.md)
-- [WASM 证明树图](./WASM_PROOF_TREE.md)
+- [项目概览](tier_01_foundations/01_项目概览.md)
+- [Rust 1.92.0 WASM 改进文档](RUST_192_WASM_IMPROVEMENTS.md)
+- [WASM 多维概念对比矩阵](WASM_CONCEPT_MATRIX.md)
+- [WASM 决策树图](WASM_DECISION_TREE.md)
+- [WASM 证明树图](WASM_PROOF_TREE.md)
 
 ---
 

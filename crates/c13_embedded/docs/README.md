@@ -6,11 +6,11 @@
 
 ## 快速导航
 
-- [裸机基础指南](./BARE_METAL_GUIDE.md)
-- [build-std 与自定义目标](./BUILD_STD_GUIDE.md)
-- [embedded-hal 1.0 迁移指南](./EMBEDDED_HAL_1_0_MIGRATION.md)
-- [一页纸总结](./ONE_PAGE_SUMMARY.md)
-- [完整索引](./00_MASTER_INDEX.md)
+- [裸机基础指南](BARE_METAL_GUIDE.md)
+- [build-std 与自定义目标](BUILD_STD_GUIDE.md)
+- [embedded-hal 1.0 迁移指南](EMBEDDED_HAL_1_0_MIGRATION.md)
+- [一页纸总结](ONE_PAGE_SUMMARY.md)
+- [完整索引](00_MASTER_INDEX.md)
 
 ## 编译说明
 

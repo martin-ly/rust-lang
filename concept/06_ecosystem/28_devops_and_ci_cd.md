@@ -16,8 +16,8 @@
 > **A/S/P 标记**: **A+P** — ApplicationProcedure
 > **双维定位**: P×App — 实施 DevOps 和 CI/CD
 > **定位**: 系统分析 Rust **DevOps 工程实践**——从 GitHub Actions 工作流设计、cargo-release 发布自动化、交叉编译 CI 集成，到 Docker 镜像优化、构建缓存策略、CI 测试矩阵与安全审计（cargo-audit、cargo-deny），揭示 Rust 项目如何从代码提交到生产部署实现高可靠持续交付。
-> **前置概念**: [Toolchain](./01_toolchain.md) · [Cross Compilation](./17_cross_compilation.md)
-> **后置概念**: [Cloud Native](./24_cloud_native.md) · [Security Practices](./19_security_practices.md)
+> **前置概念**: [Toolchain](01_toolchain.md) · [Cross Compilation](17_cross_compilation.md)
+> **后置概念**: [Cloud Native](24_cloud_native.md) · [Security Practices](19_security_practices.md)
 
 ---
 
@@ -37,42 +37,42 @@
 
 ## 📑 目录
 
-- [DevOps 与 CI/CD：Rust 的持续交付工程实践](#devops-与-cicdrust-的持续交付工程实践)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 CI/CD 管道与 Rust 构建特性](#11-cicd-管道与-rust-构建特性)
-    - [1.3 安全审计在 DevOps 中的定位](#13-安全审计在-devops-中的定位)
-  - [二、技术细节](#二技术细节)
-    - [2.1 GitHub Actions 工作流设计](#21-github-actions-工作流设计)
-    - [2.2 Docker 多阶段构建优化](#22-docker-多阶段构建优化)
-    - [2.3 交叉编译 CI 集成](#23-交叉编译-ci-集成)
-    - [2.4 缓存策略与增量构建](#24-缓存策略与增量构建)
-  - [三、DevOps 决策矩阵](#三devops-决策矩阵)
-    - [3.1 发布自动化决策](#31-发布自动化决策)
-    - [3.2 安全策略矩阵](#32-安全策略矩阵)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、常见陷阱](#五常见陷阱)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：DevOps 与 CI/CD 的编译错误](#十边界测试devops-与-cicd-的编译错误)
-    - [10.1 边界测试：Docker 多阶段构建的 musl 目标链接错误（编译错误）](#101-边界测试docker-多阶段构建的-musl-目标链接错误编译错误)
-    - [10.2 边界测试：测试隔离的 `static mut` 数据竞争（编译错误）](#102-边界测试测试隔离的-static-mut-数据竞争编译错误)
-    - [10.6 边界测试：Docker 多阶段构建的缓存失效（编译时间膨胀）](#106-边界测试docker-多阶段构建的缓存失效编译时间膨胀)
-    - [10.7 边界测试：缓存键未包含 Cargo.lock 导致的不一致构建（CI 非确定性）](#107-边界测试缓存键未包含-cargolock-导致的不一致构建ci-非确定性)
-    - [10.3 边界测试：CI 缓存键不匹配导致的依赖重建（构建时间回归）](#103-边界测试ci-缓存键不匹配导致的依赖重建构建时间回归)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：为什么 Rust 项目的 CI 构建时间通常比 Go/Node.js 长？（理解层）](#测验-1为什么-rust-项目的-ci-构建时间通常比-gonodejs-长理解层)
-    - [测验 2：`sccache` 在 Rust CI 中的作用是什么？（理解层）](#测验-2sccache-在-rust-ci-中的作用是什么理解层)
-    - [测验 3：Rust 的 `cross` 工具如何简化 CI 中的交叉编译？（理解层）](#测验-3rust-的-cross-工具如何简化-ci-中的交叉编译理解层)
-    - [测验 4：在 Rust 项目的 CI 中，为什么建议同时运行 `clippy`、`rustfmt` 和 `cargo test`？（理解层）](#测验-4在-rust-项目的-ci-中为什么建议同时运行-clippyrustfmt-和-cargo-test理解层)
-    - [测验 5：`cargo-release` 或 `release-plz` 在 Rust 发布工作流中有什么作用？（理解层）](#测验-5cargo-release-或-release-plz-在-rust-发布工作流中有什么作用理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [DevOps 与 CI/CD：Rust 的持续交付工程实践](.#devops-与-cicdrust-的持续交付工程实践)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 CI/CD 管道与 Rust 构建特性](.#11-cicd-管道与-rust-构建特性)
+    - [1.3 安全审计在 DevOps 中的定位](.#13-安全审计在-devops-中的定位)
+  - [二、技术细节](.#二技术细节)
+    - [2.1 GitHub Actions 工作流设计](.#21-github-actions-工作流设计)
+    - [2.2 Docker 多阶段构建优化](.#22-docker-多阶段构建优化)
+    - [2.3 交叉编译 CI 集成](.#23-交叉编译-ci-集成)
+    - [2.4 缓存策略与增量构建](.#24-缓存策略与增量构建)
+  - [三、DevOps 决策矩阵](.#三devops-决策矩阵)
+    - [3.1 发布自动化决策](.#31-发布自动化决策)
+    - [3.2 安全策略矩阵](.#32-安全策略矩阵)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、常见陷阱](.#五常见陷阱)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：DevOps 与 CI/CD 的编译错误](.#十边界测试devops-与-cicd-的编译错误)
+    - [10.1 边界测试：Docker 多阶段构建的 musl 目标链接错误（编译错误）](.#101-边界测试docker-多阶段构建的-musl-目标链接错误编译错误)
+    - [10.2 边界测试：测试隔离的 `static mut` 数据竞争（编译错误）](.#102-边界测试测试隔离的-static-mut-数据竞争编译错误)
+    - [10.6 边界测试：Docker 多阶段构建的缓存失效（编译时间膨胀）](.#106-边界测试docker-多阶段构建的缓存失效编译时间膨胀)
+    - [10.7 边界测试：缓存键未包含 Cargo.lock 导致的不一致构建（CI 非确定性）](.#107-边界测试缓存键未包含-cargolock-导致的不一致构建ci-非确定性)
+    - [10.3 边界测试：CI 缓存键不匹配导致的依赖重建（构建时间回归）](.#103-边界测试ci-缓存键不匹配导致的依赖重建构建时间回归)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：为什么 Rust 项目的 CI 构建时间通常比 Go/Node.js 长？（理解层）](.#测验-1为什么-rust-项目的-ci-构建时间通常比-gonodejs-长理解层)
+    - [测验 2：`sccache` 在 Rust CI 中的作用是什么？（理解层）](.#测验-2sccache-在-rust-ci-中的作用是什么理解层)
+    - [测验 3：Rust 的 `cross` 工具如何简化 CI 中的交叉编译？（理解层）](.#测验-3rust-的-cross-工具如何简化-ci-中的交叉编译理解层)
+    - [测验 4：在 Rust 项目的 CI 中，为什么建议同时运行 `clippy`、`rustfmt` 和 `cargo test`？（理解层）](.#测验-4在-rust-项目的-ci-中为什么建议同时运行-clippyrustfmt-和-cargo-test理解层)
+    - [测验 5：`cargo-release` 或 `release-plz` 在 Rust 发布工作流中有什么作用？（理解层）](.#测验-5cargo-release-或-release-plz-在-rust-发布工作流中有什么作用理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -658,11 +658,11 @@ fn main() {
 
 ## 相关概念文件
 
-- [Toolchain](./01_toolchain.md) — Cargo 与 Rust 工具链
-- [Cross Compilation](./17_cross_compilation.md) — 交叉编译技术
-- [Cloud Native](./24_cloud_native.md) — 云原生部署
-- [Security Practices](./19_security_practices.md) — 安全开发实践
-- [Testing Strategies](./12_testing_strategies.md) — 测试策略
+- [Toolchain](01_toolchain.md) — Cargo 与 Rust 工具链
+- [Cross Compilation](17_cross_compilation.md) — 交叉编译技术
+- [Cloud Native](24_cloud_native.md) — 云原生部署
+- [Security Practices](19_security_practices.md) — 安全开发实践
+- [Testing Strategies](12_testing_strategies.md) — 测试策略
 
 ---
 

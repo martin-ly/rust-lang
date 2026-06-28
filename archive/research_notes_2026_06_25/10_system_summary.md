@@ -15,58 +15,58 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [研究笔记系统总结](#研究笔记系统总结)
-  - [📑 目录](#-目录)
-  - [🎯 系统概览 {#-系统概览}](#-系统概览--系统概览)
-    - [系统目标](#系统目标)
-    - [系统结构](#系统结构)
-  - [📚 文档统计 {#-文档统计}](#-文档统计--文档统计)
-    - [总体统计](#总体统计)
-    - [核心文档详情](#核心文档详情)
-    - [研究笔记详情](#研究笔记详情)
-      - [形式化方法研究 (5个)](#形式化方法研究-5个)
-      - [类型理论研究 (5个)](#类型理论研究-5个)
-      - [实验研究 (5个)](#实验研究-5个)
-      - [综合研究 (2个)](#综合研究-2个)
-  - [🔬 研究主题覆盖 {#-研究主题覆盖}](#-研究主题覆盖--研究主题覆盖)
-    - [形式化方法领域](#形式化方法领域)
-    - [类型理论领域](#类型理论领域)
-    - [实验研究领域](#实验研究领域)
-    - [综合应用领域](#综合应用领域)
-  - [✅ 系统特点 {#-系统特点}](#-系统特点--系统特点)
-    - [1. 完整性](#1-完整性)
-    - [2. 规范性](#2-规范性)
-    - [3. 可扩展性](#3-可扩展性)
-    - [4. 实用性](#4-实用性)
-  - [🚀 使用指南 {#-使用指南}](#-使用指南--使用指南)
-    - [新用户入门](#新用户入门)
-    - [开始研究](#开始研究)
-    - [贡献研究](#贡献研究)
-  - [📈 未来规划 {#-未来规划}](#-未来规划--未来规划)
-    - [短期目标 (1-3 个月)](#短期目标-1-3-个月)
-    - [中期目标 (3-6 个月)](#中期目标-3-6-个月)
-    - [长期目标 (6-12 个月)](#长期目标-6-12-个月)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
-    - [核心文档](#核心文档)
-    - [贡献和质量](#贡献和质量)
-    - [外部资源](#外部资源)
-  - [💻 代码示例](#-代码示例)
-    - [示例 1: 研究笔记系统导航代码](#示例-1-研究笔记系统导航代码)
-    - [示例 2: 研究进度跟踪代码](#示例-2-研究进度跟踪代码)
-  - [🔗 形式化链接](#-形式化链接)
-    - [核心定理索引](#核心定理索引)
-    - [Coq 证明骨架](#coq-证明骨架)
-    - [系统集成文档](#系统集成文档)
-  - [📊 系统评估 {#-系统评估}](#-系统评估--系统评估)
-    - [完成度](#完成度)
-    - [质量评级](#质量评级)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [研究笔记系统总结](.#研究笔记系统总结)
+  - [📑 目录](.#-目录)
+  - [🎯 系统概览 {#-系统概览}](.#-系统概览--系统概览)
+    - [系统目标](.#系统目标)
+    - [系统结构](.#系统结构)
+  - [📚 文档统计 {#-文档统计}](.#-文档统计--文档统计)
+    - [总体统计](.#总体统计)
+    - [核心文档详情](.#核心文档详情)
+    - [研究笔记详情](.#研究笔记详情)
+      - [形式化方法研究 (5个)](.#形式化方法研究-5个)
+      - [类型理论研究 (5个)](.#类型理论研究-5个)
+      - [实验研究 (5个)](.#实验研究-5个)
+      - [综合研究 (2个)](.#综合研究-2个)
+  - [🔬 研究主题覆盖 {#-研究主题覆盖}](.#-研究主题覆盖--研究主题覆盖)
+    - [形式化方法领域](.#形式化方法领域)
+    - [类型理论领域](.#类型理论领域)
+    - [实验研究领域](.#实验研究领域)
+    - [综合应用领域](.#综合应用领域)
+  - [✅ 系统特点 {#-系统特点}](.#-系统特点--系统特点)
+    - [1. 完整性](.#1-完整性)
+    - [2. 规范性](.#2-规范性)
+    - [3. 可扩展性](.#3-可扩展性)
+    - [4. 实用性](.#4-实用性)
+  - [🚀 使用指南 {#-使用指南}](.#-使用指南--使用指南)
+    - [新用户入门](.#新用户入门)
+    - [开始研究](.#开始研究)
+    - [贡献研究](.#贡献研究)
+  - [📈 未来规划 {#-未来规划}](.#-未来规划--未来规划)
+    - [短期目标 (1-3 个月)](.#短期目标-1-3-个月)
+    - [中期目标 (3-6 个月)](.#中期目标-3-6-个月)
+    - [长期目标 (6-12 个月)](.#长期目标-6-12-个月)
+  - [🔗 相关资源 {#-相关资源}](.#-相关资源--相关资源)
+    - [核心文档](.#核心文档)
+    - [贡献和质量](.#贡献和质量)
+    - [外部资源](.#外部资源)
+  - [💻 代码示例](.#-代码示例)
+    - [示例 1: 研究笔记系统导航代码](.#示例-1-研究笔记系统导航代码)
+    - [示例 2: 研究进度跟踪代码](.#示例-2-研究进度跟踪代码)
+  - [🔗 形式化链接](.#-形式化链接)
+    - [核心定理索引](.#核心定理索引)
+    - [Coq 证明骨架](.#coq-证明骨架)
+    - [系统集成文档](.#系统集成文档)
+  - [📊 系统评估 {#-系统评估}](.#-系统评估--系统评估)
+    - [完成度](.#完成度)
+    - [质量评级](.#质量评级)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 🎯 系统概览 {#-系统概览}
 >
@@ -167,11 +167,11 @@ research_notes/
 
 | 文档 | 链接 | 关键定理 |
 | :--- | :--- | :--- |
-| 10_ownership_model.md | [formal_methods/10_ownership_model.md](./formal_methods/10_ownership_model.md) | T-OW1, T-OW2, T-OW3 |
-| 10_borrow_checker_proof.md | [formal_methods/10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md) | T-BR1 |
-| 10_async_state_machine.md | [formal_methods/10_async_state_machine.md](./formal_methods/10_async_state_machine.md) | T6.1, T6.2, T6.3 |
+| 10_ownership_model.md | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) | T-OW1, T-OW2, T-OW3 |
+| 10_borrow_checker_proof.md | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | T-BR1 |
+| 10_async_state_machine.md | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | T6.1, T6.2, T6.3 |
 | 10_lifetime_formalization.md | formal_methods/10_lifetime_formalization.md | T-LT1, T-LT2 |
-| 10_pin_self_referential.md | [formal_methods/10_pin_self_referential.md](./formal_methods/10_pin_self_referential.md) | T-PN1, T-PN2, T-PN3 |
+| 10_pin_self_referential.md | [formal_methods/10_pin_self_referential.md](formal_methods/10_pin_self_referential.md) | T-PN1, T-PN2, T-PN3 |
 
 #### 类型理论研究 (5个)
 
@@ -181,11 +181,11 @@ research_notes/
 
 | 文档 | 链接 | 关键定义 |
 | :--- | :--- | :--- |
-| 10_type_system_foundations.md | [type_theory/10_type_system_foundations.md](./type_theory/10_type_system_foundations.md) | Def 1.1-3.3, T-TY1, T-TY2, T-TY3 |
-| 10_trait_system_formalization.md | [type_theory/10_trait_system_formalization.md](./type_theory/10_trait_system_formalization.md) | Def TR1-TR5 |
-| 10_lifetime_formalization.md | [type_theory/10_lifetime_formalization.md](./type_theory/10_lifetime_formalization.md) | Def L1-L3 |
-| 10_advanced_types.md | [type_theory/10_advanced_types.md](./type_theory/10_advanced_types.md) | Def 1.1-3.2, AT-T1, AT-T2, AT-T3 |
-| 10_variance_theory.md | [type_theory/10_variance_theory.md](./type_theory/10_variance_theory.md) | Def 1.1-3.1, T1-T4 |
+| 10_type_system_foundations.md | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) | Def 1.1-3.3, T-TY1, T-TY2, T-TY3 |
+| 10_trait_system_formalization.md | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | Def TR1-TR5 |
+| 10_lifetime_formalization.md | [type_theory/10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md) | Def L1-L3 |
+| 10_advanced_types.md | [type_theory/10_advanced_types.md](type_theory/10_advanced_types.md) | Def 1.1-3.2, AT-T1, AT-T2, AT-T3 |
+| 10_variance_theory.md | [type_theory/10_variance_theory.md](type_theory/10_variance_theory.md) | Def 1.1-3.1, T1-T4 |
 
 #### 实验研究 (5个)
 
@@ -195,11 +195,11 @@ research_notes/
 
 | 文档 | 链接 | 实验类型 |
 | :--- | :--- | :--- |
-| 10_performance_benchmarks.md | [experiments/10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md) | 性能基准测试 |
-| 10_memory_analysis.md | [experiments/10_memory_analysis.md](./experiments/10_memory_analysis.md) | 内存分析 |
-| 10_compiler_optimizations.md | [experiments/10_compiler_optimizations.md](./experiments/10_compiler_optimizations.md) | 编译器优化 |
-| 10_concurrency_performance.md | [experiments/10_concurrency_performance.md](./experiments/10_concurrency_performance.md) | 并发性能 |
-| 10_macro_expansion_performance.md | [experiments/10_macro_expansion_performance.md](./experiments/10_macro_expansion_performance.md) | 宏展开性能 |
+| 10_performance_benchmarks.md | [experiments/10_performance_benchmarks.md](experiments/10_performance_benchmarks.md) | 性能基准测试 |
+| 10_memory_analysis.md | [experiments/10_memory_analysis.md](experiments/10_memory_analysis.md) | 内存分析 |
+| 10_compiler_optimizations.md | [experiments/10_compiler_optimizations.md](experiments/10_compiler_optimizations.md) | 编译器优化 |
+| 10_concurrency_performance.md | [experiments/10_concurrency_performance.md](experiments/10_concurrency_performance.md) | 并发性能 |
+| 10_macro_expansion_performance.md | [experiments/10_macro_expansion_performance.md](experiments/10_macro_expansion_performance.md) | 宏展开性能 |
 
 #### 综合研究 (2个)
 
@@ -207,8 +207,8 @@ research_notes/
 
 | 文档 | 链接 | 内容 |
 | :--- | :--- | :--- |
-| 10_practical_applications.md | [10_practical_applications.md](./10_practical_applications.md) | 实际应用案例研究 |
-| 10_research_methodology.md | [10_research_methodology.md](./10_research_methodology.md) | 研究方法论 |
+| 10_practical_applications.md | [10_practical_applications.md](10_practical_applications.md) | 实际应用案例研究 |
+| 10_research_methodology.md | [10_research_methodology.md](10_research_methodology.md) | 研究方法论 |
 
 ---
 
@@ -301,23 +301,23 @@ research_notes/
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-1. 阅读 [主索引](./README.md) 了解系统结构
-2. 查看 [快速参考](../../archive/research_notes_2026_06_25/10_quick_reference.md) 查找感兴趣的主题
-3. 参考 [研究路线图](./10_research_roadmap.md) 了解研究计划
+1. 阅读 [主索引](README.md) 了解系统结构
+2. 查看 [快速参考](10_quick_reference.md) 查找感兴趣的主题
+3. 参考 [研究路线图](10_research_roadmap.md) 了解研究计划
 
 ### 开始研究
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-1. 使用 [研究笔记模板](../../archive/research_notes_2026_06_25/10_template.md) 创建新笔记
-2. 遵循 [研究笔记规范](./README.md#研究笔记规范)
-3. 使用 [质量检查清单](../../archive/research_notes_2026_06_25/10_quality_checklist.md) 确保质量
+1. 使用 [研究笔记模板](10_template.md) 创建新笔记
+2. 遵循 [研究笔记规范](README.md#研究笔记规范)
+3. 使用 [质量检查清单](10_quality_checklist.md) 确保质量
 
 ### 贡献研究
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-1. 阅读 [贡献指南](../../archive/research_notes_2026_06_25/10_contributing.md) 了解贡献流程
+1. 阅读 [贡献指南](10_contributing.md) 了解贡献流程
 2. 选择合适的贡献类型
 3. 遵循质量标准和检查清单
 
@@ -368,14 +368,14 @@ research_notes/
 
 | 文档 | 链接 | 用途 |
 | :--- | :--- | :--- |
-| 主索引 | [README.md](./README.md) | 系统入口 |
-| 完整索引 | [INDEX.md](./INDEX.md) | 所有文档索引 |
-| 快速参考 | [10_quick_reference.md](../../archive/research_notes_2026_06_25/10_quick_reference.md) | 快速查找 |
-| 研究路线图 | [10_research_roadmap.md](./10_research_roadmap.md) | 研究计划 |
-| 工具使用指南 | [10_tools_guide.md](./10_tools_guide.md) | 工具指南 |
-| 更新日志 | [10_changelog.md](./10_changelog.md) | 版本历史 |
-| 快速入门指南 | [10_getting_started.md](../../archive/research_notes_2026_06_25/10_getting_started.md) | 入门指南 |
-| 常见问题解答 | [10_faq.md](./10_faq.md) | FAQ |
+| 主索引 | [README.md](README.md) | 系统入口 |
+| 完整索引 | [INDEX.md](INDEX.md) | 所有文档索引 |
+| 快速参考 | [10_quick_reference.md](10_quick_reference.md) | 快速查找 |
+| 研究路线图 | [10_research_roadmap.md](10_research_roadmap.md) | 研究计划 |
+| 工具使用指南 | [10_tools_guide.md](10_tools_guide.md) | 工具指南 |
+| 更新日志 | [10_changelog.md](10_changelog.md) | 版本历史 |
+| 快速入门指南 | [10_getting_started.md](10_getting_started.md) | 入门指南 |
+| 常见问题解答 | [10_faq.md](10_faq.md) | FAQ |
 
 ### 贡献和质量
 >
@@ -383,9 +383,9 @@ research_notes/
 
 | 文档 | 链接 | 用途 |
 | :--- | :--- | :--- |
-| 贡献指南 | [10_contributing.md](../../archive/research_notes_2026_06_25/10_contributing.md) | 贡献流程 |
-| 质量检查清单 | [10_quality_checklist.md](../../archive/research_notes_2026_06_25/10_quality_checklist.md) | 质量标准 |
-| 研究笔记模板 | [10_template.md](../../archive/research_notes_2026_06_25/10_template.md) | 创建模板 |
+| 贡献指南 | [10_contributing.md](10_contributing.md) | 贡献流程 |
+| 质量检查清单 | [10_quality_checklist.md](10_quality_checklist.md) | 质量标准 |
+| 研究笔记模板 | [10_template.md](10_template.md) | 创建模板 |
 
 ### 外部资源
 >
@@ -518,12 +518,12 @@ fn main() {
 
 | 定理 | 文档 | 研究笔记 |
 | :--- | :--- | :--- |
-| T-OW1, T-OW2, T-OW3 | [CORE_THEOREMS_FULL_PROOFS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) | 10_ownership_model.md |
-| T-BR1 | [CORE_THEOREMS_FULL_PROOFS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) | 10_borrow_checker_proof.md |
-| T-TY1, T-TY2, T-TY3 | [CORE_THEOREMS_FULL_PROOFS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) | 10_type_system_foundations.md |
-| T-LT1, T-LT2 | [CORE_THEOREMS_FULL_PROOFS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) | 10_lifetime_formalization.md |
-| T6.1, T6.2, T6.3 | [CORE_THEOREMS_FULL_PROOFS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) | 10_async_state_machine.md |
-| T-PN1, T-PN2, T-PN3 | [CORE_THEOREMS_FULL_PROOFS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) | 10_pin_self_referential.md |
+| T-OW1, T-OW2, T-OW3 | [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) | 10_ownership_model.md |
+| T-BR1 | [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) | 10_borrow_checker_proof.md |
+| T-TY1, T-TY2, T-TY3 | [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) | 10_type_system_foundations.md |
+| T-LT1, T-LT2 | [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) | 10_lifetime_formalization.md |
+| T6.1, T6.2, T6.3 | [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) | 10_async_state_machine.md |
+| T-PN1, T-PN2, T-PN3 | [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) | 10_pin_self_referential.md |
 
 ### Coq 证明骨架
 >
@@ -531,9 +531,9 @@ fn main() {
 
 | 定理 | Coq 文件 | 状态 |
 | :--- | :--- | :--- |
-| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../../archive/deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 骨架已创建 |
-| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](../../archive/deprecated/coq_skeleton/BORROW_DATARACE_FREE.v) | 骨架已创建 |
-| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](../../archive/deprecated/coq_skeleton/TYPE_SAFETY.v) | 骨架已创建 |
+| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 骨架已创建 |
+| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](../deprecated/coq_skeleton/BORROW_DATARACE_FREE.v) | 骨架已创建 |
+| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](../deprecated/coq_skeleton/TYPE_SAFETY.v) | 骨架已创建 |
 
 ### 系统集成文档
 >
@@ -541,10 +541,10 @@ fn main() {
 
 | 文档 | 内容 | 链接 |
 | :--- | :--- | :--- |
-| 完整总结 | 项目全貌与知识地图 | [00_COMPREHENSIVE_SUMMARY](../../archive/research_notes_2026_06_25/10_00_comprehensive_summary.md) |
-| 理论体系 | 四层理论体系结构 | [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md) |
-| 安全分析 | 安全与非安全边界 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./10_safe_unsafe_comprehensive_analysis.md) |
-| 证明索引 | 26个证明索引 | [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) |
+| 完整总结 | 项目全貌与知识地图 | [00_COMPREHENSIVE_SUMMARY](10_00_comprehensive_summary.md) |
+| 理论体系 | 四层理论体系结构 | [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](10_theoretical_and_argumentation_system_architecture.md) |
+| 安全分析 | 安全与非安全边界 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](10_safe_unsafe_comprehensive_analysis.md) |
+| 证明索引 | 26个证明索引 | [PROOF_INDEX](10_proof_index.md) |
 
 ---
 
@@ -668,7 +668,7 @@ fn main() {
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

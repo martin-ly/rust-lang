@@ -14,7 +14,7 @@
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
-> **后置概念**: [Borrowing](./02_borrowing.md)
+> **后置概念**: [Borrowing](02_borrowing.md)
 ---
 
 > **来源**:
@@ -23,12 +23,12 @@
 > [The Rust Programming Language — Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
 >
 > **前置概念**:
-> [Ownership](./01_ownership.md) ·
-> [Borrowing](./02_borrowing.md) ·
-> [Lifetimes](./03_lifetimes.md)
+> [Ownership](01_ownership.md) ·
+> [Borrowing](02_borrowing.md) ·
+> [Lifetimes](03_lifetimes.md)
 >
 > **对应练习**:
-> [`exercises/src/ownership_borrowing/`](../../exercises/src/ownership_borrowing/) ·
+> [`exercises/src/ownership_borrowing/`](../../exercises/src/ownership_borrowing) ·
 > [`exercises/rustlings_style/ex01_borrow_fix`](../../exercises/rustlings_style/ex01_borrow_fix)
 
 ---
@@ -173,7 +173,7 @@ fn main() {
 }
 ```
 
-**知识点**：Rust 借用（Borrowing）检查器通过作用域分析（而非运行时（Runtime）锁）保证内存安全（Memory Safety）。[→ 借用规则详解](./02_borrowing.md)
+**知识点**：Rust 借用（Borrowing）检查器通过作用域分析（而非运行时（Runtime）锁）保证内存安全（Memory Safety）。[→ 借用规则详解](02_borrowing.md)
 
 </details>
 
@@ -246,7 +246,7 @@ fn no_dangle() -> String {
 }
 ```
 
-**知识点**：Rust 通过**生命周期（lifetime）**系统跟踪引用的有效范围，确保引用永不超出被引用数据的生命周期。[→ 生命周期详解](./03_lifetimes.md)
+**知识点**：Rust 通过**生命周期（lifetime）**系统跟踪引用的有效范围，确保引用永不超出被引用数据的生命周期。[→ 生命周期详解](03_lifetimes.md)
 
 </details>
 
@@ -325,7 +325,7 @@ fn main() {
 }
 ```
 
-**知识点**：生命周期约束遵循"**最小公约数**"原则——返回引用的有效期不超过任何输入引用的有效期。[→ 生命周期详解](./03_lifetimes.md)
+**知识点**：生命周期约束遵循"**最小公约数**"原则——返回引用的有效期不超过任何输入引用的有效期。[→ 生命周期详解](03_lifetimes.md)
 
 </details>
 
@@ -364,7 +364,7 @@ fn main() {
 }
 ```
 
-**知识点**：`Vec::push` 可能触发重新分配，因此 Rust 禁止在存在元素引用时修改 `Vec`。[→ 集合类型详解](./08_collections.md)
+**知识点**：`Vec::push` 可能触发重新分配，因此 Rust 禁止在存在元素引用时修改 `Vec`。[→ 集合类型详解](08_collections.md)
 
 </details>
 
@@ -414,9 +414,9 @@ shared shared
 | 得分 | 评价 | 建议 |
 |:---:|:---|:---|
 | 10/10 | 🏆 所有权系统已内化 | 直接进阶至 [L2 智能指针（Smart Pointer）](../02_intermediate/03_memory_management.md) |
-| 7–9/10 | ✅ 核心概念掌握 | 强化 [L1 练习](../../exercises/src/ownership_borrowing/)，关注错题对应的概念文件 |
-| 4–6/10 | 🔄 需巩固基础 | 重读 [Ownership](./01_ownership.md) · [Borrowing](./02_borrowing.md) · [Lifetimes](./03_lifetimes.md)，完成 rustlings 对应章节 |
-| 0–3/10 | 📚 建议重新开始 | 从 [Ownership](./01_ownership.md) 逐节阅读，配合 [crates/c01_ownership_borrow_scope](../../crates/c01_ownership_borrow_scope/) 可编译示例 |
+| 7–9/10 | ✅ 核心概念掌握 | 强化 [L1 练习](../../exercises/src/ownership_borrowing)，关注错题对应的概念文件 |
+| 4–6/10 | 🔄 需巩固基础 | 重读 [Ownership](01_ownership.md) · [Borrowing](02_borrowing.md) · [Lifetimes](03_lifetimes.md)，完成 rustlings 对应章节 |
+| 0–3/10 | 📚 建议重新开始 | 从 [Ownership](01_ownership.md) 逐节阅读，配合 [crates/c01_ownership_borrow_scope](../../crates/c01_ownership_borrow_scope) 可编译示例 |
 
 ---
 
@@ -436,8 +436,8 @@ shared shared
 
 ---
 
-> **对应 Crate**: [`c01_ownership_borrow_scope`](../../crates/c01_ownership_borrow_scope/)
-> **对应练习**: [`exercises/src/ownership_borrowing/`](../../exercises/src/ownership_borrowing/) · [`exercises/rustlings_style/ex01_borrow_fix`](../../exercises/rustlings_style/ex01_borrow_fix)
+> **对应 Crate**: [`c01_ownership_borrow_scope`](../../crates/c01_ownership_borrow_scope)
+> **对应练习**: [`exercises/src/ownership_borrowing/`](../../exercises/src/ownership_borrowing) · [`exercises/rustlings_style/ex01_borrow_fix`](../../exercises/rustlings_style/ex01_borrow_fix)
 
 ---
 

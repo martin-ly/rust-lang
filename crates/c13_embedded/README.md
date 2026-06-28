@@ -31,8 +31,8 @@
 
 ## 文档
 
-- [完整索引](./docs/00_MASTER_INDEX.md)
-- [RTIC 实时框架示例](./src/rtic_framework.rs)
-- [HAL 设计模式](./src/hal_design_patterns.rs)
+- [完整索引](docs/00_MASTER_INDEX.md)
+- [RTIC 实时框架示例](src/rtic_framework.rs)
+- [HAL 设计模式](src/hal_design_patterns.rs)
 
 ## [来源: The Embedded Rust Book / Rust Embedded Working Group](https://docs.rust-embedded.org/book/)

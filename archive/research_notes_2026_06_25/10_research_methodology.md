@@ -9,55 +9,55 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [研究方法论](#研究方法论)
-  - [📑 目录](#-目录)
-  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
-    - [核心问题](#核心问题)
-    - [预期成果](#预期成果)
-  - [形式化论证汇总](#形式化论证汇总)
-  - [📚 研究方法 {#-研究方法}](#-研究方法--研究方法)
-    - [1. 形式化研究方法](#1-形式化研究方法)
-    - [2. 实验研究方法](#2-实验研究方法)
-    - [3. 实证研究方法](#3-实证研究方法)
-    - [1.1 形式化研究方法详解](#11-形式化研究方法详解)
-    - [相关概念](#相关概念)
-    - [理论背景](#理论背景)
-    - [4. 理论研究方法](#4-理论研究方法)
-    - [2.1 实验研究方法要点](#21-实验研究方法要点)
-    - [3.1 实证研究方法要点](#31-实证研究方法要点)
-    - [4.1 理论研究方法要点](#41-理论研究方法要点)
-  - [🔬 研究工具 {#-研究工具}](#-研究工具--研究工具)
-    - [分析工具](#分析工具)
-    - [验证工具](#验证工具)
-    - [实验工具](#实验工具)
-    - [数据收集工具](#数据收集工具)
-  - [💻 实践指南 {#-实践指南}](#-实践指南--实践指南)
-    - [研究设计](#研究设计)
-    - [数据收集](#数据收集)
-    - [结果分析](#结果分析)
-    - [报告撰写](#报告撰写)
-  - [📐 质量评估标准与研究模板 {#-质量评估标准与研究模板}](#-质量评估标准与研究模板--质量评估标准与研究模板)
-    - [质量评估标准](#质量评估标准)
-    - [研究模板](#研究模板)
-  - [🔗 工具集成与案例研究索引 {#-工具集成与案例研究索引}](#-工具集成与案例研究索引--工具集成与案例研究索引)
-    - [工具集成](#工具集成)
-    - [工具使用要点](#工具使用要点)
-    - [案例研究索引](#案例研究索引)
-  - [📖 参考文献 {#-参考文献}](#-参考文献--参考文献)
-    - [方法论文献](#方法论文献)
-    - [工具文档](#工具文档)
-    - [最佳实践](#最佳实践)
-  - [🔄 研究进展 {#-研究进展}](#-研究进展--研究进展)
-    - [已完成 ✅ {#已完成-}](#已完成--已完成-)
-    - [进行中 🔄（已完成）](#进行中-已完成)
-    - [计划中 📋（已完成）](#计划中-已完成)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [权威来源索引](#权威来源索引)
+- [研究方法论](.#研究方法论)
+  - [📑 目录](.#-目录)
+  - [🎯 研究目标 {#-研究目标}](.#-研究目标--研究目标)
+    - [核心问题](.#核心问题)
+    - [预期成果](.#预期成果)
+  - [形式化论证汇总](.#形式化论证汇总)
+  - [📚 研究方法 {#-研究方法}](.#-研究方法--研究方法)
+    - [1. 形式化研究方法](.#1-形式化研究方法)
+    - [2. 实验研究方法](.#2-实验研究方法)
+    - [3. 实证研究方法](.#3-实证研究方法)
+    - [1.1 形式化研究方法详解](.#11-形式化研究方法详解)
+    - [相关概念](.#相关概念)
+    - [理论背景](.#理论背景)
+    - [4. 理论研究方法](.#4-理论研究方法)
+    - [2.1 实验研究方法要点](.#21-实验研究方法要点)
+    - [3.1 实证研究方法要点](.#31-实证研究方法要点)
+    - [4.1 理论研究方法要点](.#41-理论研究方法要点)
+  - [🔬 研究工具 {#-研究工具}](.#-研究工具--研究工具)
+    - [分析工具](.#分析工具)
+    - [验证工具](.#验证工具)
+    - [实验工具](.#实验工具)
+    - [数据收集工具](.#数据收集工具)
+  - [💻 实践指南 {#-实践指南}](.#-实践指南--实践指南)
+    - [研究设计](.#研究设计)
+    - [数据收集](.#数据收集)
+    - [结果分析](.#结果分析)
+    - [报告撰写](.#报告撰写)
+  - [📐 质量评估标准与研究模板 {#-质量评估标准与研究模板}](.#-质量评估标准与研究模板--质量评估标准与研究模板)
+    - [质量评估标准](.#质量评估标准)
+    - [研究模板](.#研究模板)
+  - [🔗 工具集成与案例研究索引 {#-工具集成与案例研究索引}](.#-工具集成与案例研究索引--工具集成与案例研究索引)
+    - [工具集成](.#工具集成)
+    - [工具使用要点](.#工具使用要点)
+    - [案例研究索引](.#案例研究索引)
+  - [📖 参考文献 {#-参考文献}](.#-参考文献--参考文献)
+    - [方法论文献](.#方法论文献)
+    - [工具文档](.#工具文档)
+    - [最佳实践](.#最佳实践)
+  - [🔄 研究进展 {#-研究进展}](.#-研究进展--研究进展)
+    - [已完成 ✅ {#已完成-}](.#已完成--已完成-)
+    - [进行中 🔄（已完成）](.#进行中-已完成)
+    - [计划中 📋（已完成）](.#计划中-已完成)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [权威来源索引](.#权威来源索引)
 
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-28
@@ -102,7 +102,7 @@
 
 **Axiom RM1**：形式化证明保证正确性；实验验证提供经验支持；二者互补，不可相互替代。见 [experiments/README](experiments/README.md) 推论 EX-C1。
 
-**定理 RM-T1（方法衔接）**：若研究 $Q$ 的形式化定理 $T$ 有证明，且实验 $E$ 验证 $T$，则 $Q$ 的结果可追溯至 [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) 与 [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) 的论证链。
+**定理 RM-T1（方法衔接）**：若研究 $Q$ 的形式化定理 $T$ 有证明，且实验 $E$ 验证 $T$，则 $Q$ 的结果可追溯至 [PROOF_INDEX](10_proof_index.md) 与 [FORMAL_PROOF_SYSTEM_GUIDE](10_formal_proof_system_guide.md) 的论证链。
 
 *证明*：由 [experiments/README](experiments/README.md) 定理 EX-T1；实验验证与定理结论一致；形式化证明在 PROOF_INDEX 可查。∎
 
@@ -304,7 +304,7 @@ Qed.
 - **假设**：明确、可测（如「opt-level=2 比 -O0 快 ≥2x」）。
 - **控制变量**：固定 Rust 版本、CPU、内存、`opt-level`、`codegen-units` 等；仅变化目标因素。
 - **可重复**：`cargo bench`、`criterion`、`--save-baseline`；记录环境与命令。
-- **详见**：[10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md) 的「数据收集执行指南」与「结果分析模板」。
+- **详见**：[10_performance_benchmarks.md](experiments/10_performance_benchmarks.md) 的「数据收集执行指南」与「结果分析模板」。
 
 ### 3.1 实证研究方法要点
 
@@ -313,7 +313,7 @@ Qed.
 - **案例选择**：有公开代码、文档或论文；能对应到形式化/类型/实验中的至少一类问题。
 - **数据**：代码片段、性能数据、 issue/PR、社区讨论。
 - **模式**：归纳「所有权/借用/并发/异步」等在项目中的用法与坑点。
-- **详见**：[10_practical_applications.md](./10_practical_applications.md) 的「案例报告模板」与「案例快速索引」。
+- **详见**：[10_practical_applications.md](10_practical_applications.md) 的「案例报告模板」与「案例快速索引」。
 
 ### 4.1 理论研究方法要点
 
@@ -322,7 +322,7 @@ Qed.
 - **问题**：类型安全、型变、生命周期、Trait 解析等；需可形式化。
 - **模型**：语法、类型规则、操作语义、性质（进展性、保持性、安全）。
 - **推导**：归纳、反证、辅助定理；可借助 Coq/Lean/Isabelle。
-- **详见**： [10_type_system_foundations.md](./type_theory/10_type_system_foundations.md)、[10_trait_system_formalization.md](./type_theory/10_trait_system_formalization.md)、[10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)。
+- **详见**： [10_type_system_foundations.md](type_theory/10_type_system_foundations.md)、[10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md)、[10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md)。
 
 ---
 
@@ -421,7 +421,7 @@ Qed.
 - **可重复性**：环境、命令、版本可复现；实验类需「数据收集执行指南」+「结果分析模板」。
 - **逻辑一致**：形式化研究中的定义、定理、证明与代码示例一致；类型/借用规则与实现对应。
 - **可验证**：形式化可用 Coq/Lean/Prusti 等验证；实验可用 `cargo bench`/`cargo test`/Valgrind 等复现。
-- **交叉引用**：与 [formal_methods](../../archive/research_notes_2026_06_25/formal_methods/README.md)、[type_theory](./type_theory/README.md)、[experiments](./experiments/README.md)、[practical_applications](./10_practical_applications.md) 的关联明确。
+- **交叉引用**：与 [formal_methods](formal_methods/README.md)、[type_theory](type_theory/README.md)、[experiments](experiments/README.md)、[practical_applications](10_practical_applications.md) 的关联明确。
 - **时效性**：注明 Rust 版本（如 1.93.1+）；若依赖未稳定特性，需标出。
 
 ### 研究模板
@@ -444,12 +444,12 @@ Qed.
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- **与 [10_tools_guide.md](./10_tools_guide.md)**：本「研究工具」中的 Clippy、Miri、Criterion、Valgrind、perf 等，安装、常用参数与样例见 TOOLS_GUIDE。
-- **与各实验**： [performance_benchmarks](./experiments/10_performance_benchmarks.md)、
-- [memory_analysis](./experiments/10_memory_analysis.md)、
-- [compiler_optimizations](./experiments/10_compiler_optimizations.md)、
-- [concurrency_performance](./experiments/10_concurrency_performance.md)、
-- [macro_expansion_performance](./experiments/10_macro_expansion_performance.md) 的「数据收集执行指南」即工具在具体研究中的集成方式；
+- **与 [10_tools_guide.md](10_tools_guide.md)**：本「研究工具」中的 Clippy、Miri、Criterion、Valgrind、perf 等，安装、常用参数与样例见 TOOLS_GUIDE。
+- **与各实验**： [performance_benchmarks](experiments/10_performance_benchmarks.md)、
+- [memory_analysis](experiments/10_memory_analysis.md)、
+- [compiler_optimizations](experiments/10_compiler_optimizations.md)、
+- [concurrency_performance](experiments/10_concurrency_performance.md)、
+- [macro_expansion_performance](experiments/10_macro_expansion_performance.md) 的「数据收集执行指南」即工具在具体研究中的集成方式；
 - 可统一用 `cargo bench`、`cargo bloat`、`cargo expand`、`time cargo build`、Valgrind/Miri 等。
 - **与形式化**：Prusti、Creusot、Kani 的用法见各形式化文档的「工具验证」；Coq/Lean 示例见「1.1 形式化研究方法详解」。
 
@@ -461,7 +461,7 @@ Qed.
 - **Criterion**：`cargo bench`、`--save-baseline`、`BenchmarkId` 区分维度；结果见 `target/criterion/`。
 - **Valgrind**：`--leak-check=full --show-leak-kinds=all`；配合 `--error-limit=no` 做回归。
 - **Miri**：`cargo miri test`；`-Zmiri-tag-raw-pointers` 等见 Miri 文档。
-- **cargo expand / bloat**：宏展开与二进制体积分析；见 [macro_expansion_performance](./experiments/10_macro_expansion_performance.md)。
+- **cargo expand / bloat**：宏展开与二进制体积分析；见 [macro_expansion_performance](experiments/10_macro_expansion_performance.md)。
 
 ### 案例研究索引
 >
@@ -469,10 +469,10 @@ Qed.
 
 | 类型 | 文档 | 说明 |
 | :--- | :--- | :--- |
-| 形式化 | [ownership_model](./formal_methods/10_ownership_model.md), [borrow_checker_proof](./formal_methods/10_borrow_checker_proof.md), [async_state_machine](./formal_methods/10_async_state_machine.md), lifetime_formalization, [pin_self_referential](./formal_methods/10_pin_self_referential.md) | 形式化方法 + 证明/定理 + 系统集成 |
-| 类型理论 | [type_system_foundations](./type_theory/10_type_system_foundations.md), [trait_system_formalization](./type_theory/10_trait_system_formalization.md), [lifetime_formalization](./type_theory/10_lifetime_formalization.md), [advanced_types](./type_theory/10_advanced_types.md), [variance_theory](./type_theory/10_variance_theory.md) | 类型、Trait、生命周期、型变 |
-| 实验 | [performance_benchmarks](./experiments/10_performance_benchmarks.md), [memory_analysis](./experiments/10_memory_analysis.md), [compiler_optimizations](./experiments/10_compiler_optimizations.md), [concurrency_performance](./experiments/10_concurrency_performance.md), [macro_expansion_performance](./experiments/10_macro_expansion_performance.md) | 数据收集指南 + 结果分析模板 |
-| 实证 | [practical_applications](./10_practical_applications.md) | 案例报告模板 + 案例快速索引 + 最佳实践 |
+| 形式化 | [ownership_model](formal_methods/10_ownership_model.md), [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md), [async_state_machine](formal_methods/10_async_state_machine.md), lifetime_formalization, [pin_self_referential](formal_methods/10_pin_self_referential.md) | 形式化方法 + 证明/定理 + 系统集成 |
+| 类型理论 | [type_system_foundations](type_theory/10_type_system_foundations.md), [trait_system_formalization](type_theory/10_trait_system_formalization.md), [lifetime_formalization](type_theory/10_lifetime_formalization.md), [advanced_types](type_theory/10_advanced_types.md), [variance_theory](type_theory/10_variance_theory.md) | 类型、Trait、生命周期、型变 |
+| 实验 | [performance_benchmarks](experiments/10_performance_benchmarks.md), [memory_analysis](experiments/10_memory_analysis.md), [compiler_optimizations](experiments/10_compiler_optimizations.md), [concurrency_performance](experiments/10_concurrency_performance.md), [macro_expansion_performance](experiments/10_macro_expansion_performance.md) | 数据收集指南 + 结果分析模板 |
+| 实证 | [practical_applications](10_practical_applications.md) | 案例报告模板 + 案例快速索引 + 最佳实践 |
 
 ---
 
@@ -491,7 +491,7 @@ Qed.
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [研究工具使用指南](./10_tools_guide.md) - 详细的工具安装和使用方法
+- [研究工具使用指南](10_tools_guide.md) - 详细的工具安装和使用方法
 - Criterion.rs 文档
 - [Miri 文档](https://github.com/rust-lang/miri)
 - Prusti 文档

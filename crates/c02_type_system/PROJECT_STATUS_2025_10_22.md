@@ -8,24 +8,24 @@
 
 ## 📊 目录
 
-- [C02 Type System - 项目状态](#c02-type-system---项目状态)
-  - [📊 目录](#-目录)
-  - [🎊 项目完成公告](#-项目完成公告)
-  - [📊 核心数据](#-核心数据)
-  - [📁 文档结构](#-文档结构)
-  - [🚀 快速入口](#-快速入口)
-    - [📌 主要文档](#-主要文档)
-    - [📋 重要报告](#-重要报告)
-  - [✅ Phase 完成情况](#-phase-完成情况)
-  - [🎯 核心成就](#-核心成就)
-  - [📖 如何使用](#-如何使用)
-    - [初学者](#初学者)
-    - [开发者](#开发者)
-    - [架构师](#架构师)
-    - [研究者](#研究者)
-  - [🔧 维护状态](#-维护状态)
-  - [📞 联系方式](#-联系方式)
-  - [**🦀 Rust Type System Documentation - 优质资源，随时可用！** ✨](#-rust-type-system-documentation---优质资源随时可用-)
+- [C02 Type System - 项目状态](.#c02-type-system---项目状态)
+  - [📊 目录](.#-目录)
+  - [🎊 项目完成公告](.#-项目完成公告)
+  - [📊 核心数据](.#-核心数据)
+  - [📁 文档结构](.#-文档结构)
+  - [🚀 快速入口](.#-快速入口)
+    - [📌 主要文档](.#-主要文档)
+    - [📋 重要报告](.#-重要报告)
+  - [✅ Phase 完成情况](.#-phase-完成情况)
+  - [🎯 核心成就](.#-核心成就)
+  - [📖 如何使用](.#-如何使用)
+    - [初学者](.#初学者)
+    - [开发者](.#开发者)
+    - [架构师](.#架构师)
+    - [研究者](.#研究者)
+  - [🔧 维护状态](.#-维护状态)
+  - [📞 联系方式](.#-联系方式)
+  - [**🦀 Rust Type System Documentation - 优质资源，随时可用！** ✨](.#-rust-type-system-documentation---优质资源随时可用-)
 
 ## 🎊 项目完成公告
 
@@ -66,15 +66,15 @@ c02_type_system/docs/
 
 ### 📌 主要文档
 
-1. **[README.md](./README.md)** - 项目首页 ⭐⭐⭐
-2. **[主索引导航](./docs/tier_01_foundations/02_主索引导航.md)** - 918行完整导航 ⭐⭐⭐
-3. **[项目概览](./docs/tier_01_foundations/01_项目概览.md)** - 完整介绍
+1. **[README.md](README.md)** - 项目首页 ⭐⭐⭐
+2. **[主索引导航](docs/tier_01_foundations/02_主索引导航.md)** - 918行完整导航 ⭐⭐⭐
+3. **[项目概览](docs/tier_01_foundations/01_项目概览.md)** - 完整介绍
 
 ### 📋 重要报告
 
-1. **[最终完成报告](./docs/reports/FINAL_COMPREHENSIVE_COMPLETION_REPORT_2025_10_22.md)**
-2. **[后续行动指南](./docs/reports/C02_NEXT_ACTIONS_AND_MAINTENANCE_2025_10_22.md)**
-3. **[项目完成确认](./docs/reports/PROJECT_COMPLETION_CONFIRMATION_2025_10_22.md)**
+1. **[最终完成报告](docs/reports/FINAL_COMPREHENSIVE_COMPLETION_REPORT_2025_10_22.md)**
+2. **[后续行动指南](docs/reports/C02_NEXT_ACTIONS_AND_MAINTENANCE_2025_10_22.md)**
+3. **[项目完成确认](docs/reports/PROJECT_COMPLETION_CONFIRMATION_2025_10_22.md)**
 
 ---
 

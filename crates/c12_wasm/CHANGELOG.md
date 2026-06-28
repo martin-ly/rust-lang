@@ -88,30 +88,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### Tier 1: 基础层
 
-- 📖 [项目概览](./docs/tier_01_foundations/01_项目概览.md)
-- 📖 [主索引导航](./docs/tier_01_foundations/02_主索引导航.md)
-- 📖 [术语表](./docs/tier_01_foundations/03_术语表.md)
-- 📖 [常见问题](./docs/tier_01_foundations/04_常见问题.md)
+- 📖 [项目概览](docs/tier_01_foundations/01_项目概览.md)
+- 📖 [主索引导航](docs/tier_01_foundations/02_主索引导航.md)
+- 📖 [术语表](docs/tier_01_foundations/03_术语表.md)
+- 📖 [常见问题](docs/tier_01_foundations/04_常见问题.md)
 
 #### Tier 2: 实践层
 
-- 📖 [WASM 基础指南](./docs/tier_02_guides/01_wasm_基础指南.md)
-- 📖 [Rust 编译 WASM](./docs/tier_02_guides/02_rust_编译_wasm.md)
-- 📖 [JavaScript 互操作](./docs/tier_02_guides/03_javascript_互操作.md)
-- 📖 [性能优化指南](./docs/tier_02_guides/04_性能优化指南.md)
+- 📖 [WASM 基础指南](docs/tier_02_guides/01_wasm_基础指南.md)
+- 📖 [Rust 编译 WASM](docs/tier_02_guides/02_rust_编译_wasm.md)
+- 📖 [JavaScript 互操作](docs/tier_02_guides/03_javascript_互操作.md)
+- 📖 [性能优化指南](docs/tier_02_guides/04_性能优化指南.md)
 
 #### Tier 3: 参考层
 
-- 📖 [API 参考](./docs/tier_03_references/01_api_参考.md)
-- 📖 [工具链参考](./docs/tier_03_references/02_工具链参考.md)
-- 📖 [最佳实践](./docs/tier_03_references/03_最佳实践.md)
+- 📖 [API 参考](docs/tier_03_references/01_api_参考.md)
+- 📖 [工具链参考](docs/tier_03_references/02_工具链参考.md)
+- 📖 [最佳实践](docs/tier_03_references/03_最佳实践.md)
 
 #### Tier 4: 高级层
 
-- 📖 [WASI 深入](./docs/tier_04_advanced/01_wasi_深入.md)
-- 📖 [性能分析与优化](./docs/tier_04_advanced/02_性能分析与优化.md)
-- 📖 [生产级部署](./docs/tier_04_advanced/03_生产级部署.md)
-- 📖 [WasmEdge 与新技术](./docs/tier_04_advanced/05_wasmedge_与新技术深入.md)
+- 📖 [WASI 深入](docs/tier_04_advanced/01_wasi_深入.md)
+- 📖 [性能分析与优化](docs/tier_04_advanced/02_性能分析与优化.md)
+- 📖 [生产级部署](docs/tier_04_advanced/03_生产级部署.md)
+- 📖 [WasmEdge 与新技术](docs/tier_04_advanced/05_wasmedge_与新技术深入.md)
 
 ### Technical Details
 

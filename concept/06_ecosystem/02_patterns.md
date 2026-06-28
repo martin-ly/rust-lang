@@ -1457,7 +1457,7 @@ fn main() {
 | 泛型 | [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) | 零成本抽象 |
 | 内存管理 | [`../02_intermediate/03_memory_management.md`](../02_intermediate/03_memory_management.md) | 智能指针模式 |
 | 错误处理（Error Handling） | [`../02_intermediate/04_error_handling.md`](../02_intermediate/04_error_handling.md) | Result 模式 |
-| 工具链 | [`./01_toolchain.md`](./01_toolchain.md) | 工程支撑 |
+| 工具链 | [`./01_toolchain.md`](01_toolchain.md) | 工程支撑 |
 | 设计模式对比 | [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md) | 范式定位 |
 | 并发 / 异步（Async） | [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) · [`../03_advanced/02_async.md`](../03_advanced/02_async.md) | Observer 异步实现基础 |
 

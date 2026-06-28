@@ -3,7 +3,7 @@
 > **分级**: [B]
 >
 > **层次定位**: L5-L7 对比-前沿 / 安全关键生态对齐
-> **前置依赖**: [concept L5 安全边界](../../concept/05_comparative/04_safety_boundaries.md) · [docs Rust for Linux](./04_rust_for_linux.md)
+> **前置依赖**: [concept L5 安全边界](../../concept/05_comparative/04_safety_boundaries.md) · [docs Rust for Linux](04_rust_for_linux.md)
 > **后置延伸**: [docs 设计模式](../05_guides/05_design_patterns_usage_guide.md) · [concept L7 形式化方法](../../concept/07_future/02_formal_methods.md)
 > **跨层映射**: L5→L7 标准驱动映射 | 合规→演进
 > **定理链编号**: T-110 RustBelt soundness → ISO 26262 合规
@@ -12,27 +12,27 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [Safety-Critical Rust 官方路线对齐（2026）](#safety-critical-rust-官方路线对齐2026)
-  - [📑 目录](#-目录)
-  - [一、Safety-Critical Rust 生态全景](#一safety-critical-rust-生态全景)
-  - [二、官方路线时间线](#二官方路线时间线)
-  - [三、FLS (Ferrocene Language Specification) 与项目映射](#三fls-ferrocene-language-specification-与项目映射)
-    - [3.1 FLS 限制类别](#31-fls-限制类别)
-    - [3.2 `unsafe` 的 FLS 例外](#32-unsafe-的-fls-例外)
-  - [四、MISRA Rust Guidelines 映射](#四misra-rust-guidelines-映射)
-    - [4.1 规则分类矩阵](#41-规则分类矩阵)
-    - [4.2 关键规则示例](#42-关键规则示例)
-  - [五、MC/DC Coverage（完全缺失项）](#五mcdc-coverage完全缺失项)
-    - [5.1 什么是 MC/DC？](#51-什么是-mcdc)
-    - [5.2 Rust 中的 MC/DC 现状](#52-rust-中的-mcdc-现状)
-    - [5.3 MC/DC 示例](#53-mcdc-示例)
-  - [六、Safety-Critical Lints 矩阵](#六safety-critical-lints-矩阵)
-    - [6.1 提议 Lint 清单](#61-提议-lint-清单)
-  - [七、与项目知识体系的交叉引用](#七与项目知识体系的交叉引用)
-  - [八、行动清单](#八行动清单)
-  - [思维导图：Safety-Critical Rust 生态](#思维导图safety-critical-rust-生态)
-  - [决策树：安全关键项目合规路径](#决策树安全关键项目合规路径)
-  - [权威来源索引](#权威来源索引)
+- [Safety-Critical Rust 官方路线对齐（2026）](.#safety-critical-rust-官方路线对齐2026)
+  - [📑 目录](.#-目录)
+  - [一、Safety-Critical Rust 生态全景](.#一safety-critical-rust-生态全景)
+  - [二、官方路线时间线](.#二官方路线时间线)
+  - [三、FLS (Ferrocene Language Specification) 与项目映射](.#三fls-ferrocene-language-specification-与项目映射)
+    - [3.1 FLS 限制类别](.#31-fls-限制类别)
+    - [3.2 `unsafe` 的 FLS 例外](.#32-unsafe-的-fls-例外)
+  - [四、MISRA Rust Guidelines 映射](.#四misra-rust-guidelines-映射)
+    - [4.1 规则分类矩阵](.#41-规则分类矩阵)
+    - [4.2 关键规则示例](.#42-关键规则示例)
+  - [五、MC/DC Coverage（完全缺失项）](.#五mcdc-coverage完全缺失项)
+    - [5.1 什么是 MC/DC？](.#51-什么是-mcdc)
+    - [5.2 Rust 中的 MC/DC 现状](.#52-rust-中的-mcdc-现状)
+    - [5.3 MC/DC 示例](.#53-mcdc-示例)
+  - [六、Safety-Critical Lints 矩阵](.#六safety-critical-lints-矩阵)
+    - [6.1 提议 Lint 清单](.#61-提议-lint-清单)
+  - [七、与项目知识体系的交叉引用](.#七与项目知识体系的交叉引用)
+  - [八、行动清单](.#八行动清单)
+  - [思维导图：Safety-Critical Rust 生态](.#思维导图safety-critical-rust-生态)
+  - [决策树：安全关键项目合规路径](.#决策树安全关键项目合规路径)
+  - [权威来源索引](.#权威来源索引)
 
 > **文档定位**: 对齐 Rust 官方 Safety-Critical 路线与项目知识体系
 > **覆盖版本**: Rust 1.96.0+ / FLS (Ferrocene Language Specification) 24.11 / Ferrocene 26.02.0

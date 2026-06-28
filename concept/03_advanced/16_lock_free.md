@@ -8,11 +8,11 @@
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 深入探讨 Rust 中的**无锁编程**——从原子操作（Atomic Operations）到内存序，分析 lock-free 算法的内存安全（Memory Safety）保证与性能优势。
 > **前置概念**:
-> [Concurrency](../03_advanced/01_concurrency.md) ·
-> [Atomics](./11_atomics_and_memory_ordering.md) ·
-> [Unsafe](../03_advanced/03_unsafe.md)
+> [Concurrency](01_concurrency.md) ·
+> [Atomics](11_atomics_and_memory_ordering.md) ·
+> [Unsafe](03_unsafe.md)
 > **后置概念**:
-> [Concurrent Patterns](./10_concurrency_patterns.md) ·
+> [Concurrent Patterns](10_concurrency_patterns.md) ·
 > [Performance](../06_ecosystem/15_performance_optimization.md)
 
 ---
@@ -27,50 +27,50 @@
 
 > **前置依赖**: [Traits](../02_intermediate/01_traits.md)
 
-> **对应 Crate**: [`c05_threads`](../../crates/c05_threads/)
-> **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency/)
+> **对应 Crate**: [`c05_threads`](../../crates/c05_threads)
+> **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency)
 
 ## 📑 目录
 
-- [无锁编程与内存模型](#无锁编程与内存模型)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 无锁 vs 无等待](#11-无锁-vs-无等待)
-    - [1.2 ABA 问题](#12-aba-问题)
-    - [1.3 内存序选择](#13-内存序选择)
-  - [二、关键数据结构](#二关键数据结构)
-    - [2.1 Treiber Stack](#21-treiber-stack)
-    - [2.2 Michael-Scott Queue](#22-michael-scott-queue)
-    - [2.3 Hazard Pointer](#23-hazard-pointer)
-  - [三、Rust 无锁生态](#三rust-无锁生态)
-    - [3.1 crossbeam](#31-crossbeam)
-    - [3.2 lockfree](#32-lockfree)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、常见陷阱](#五常见陷阱)
-    - [编译错误示例](#编译错误示例)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-    - [编译验证示例](#编译验证示例)
-  - [相关概念文件](#相关概念文件)
-  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
-  - [权威来源索引](#权威来源索引)
-    - [10.5 边界测试：内存序的 `Release`/`Acquire` 与数据依赖（运行时可见性问题）](#105-边界测试内存序的-releaseacquire-与数据依赖运行时可见性问题)
-    - [10.3 边界测试：ABA 问题与无锁栈的内存安全（运行时 UB）](#103-边界测试aba-问题与无锁栈的内存安全运行时-ub)
-    - [10.5 边界测试：返回局部变量的悬垂引用](#105-边界测试返回局部变量的悬垂引用)
-  - [参考来源](#参考来源)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
-  - [实践](#实践)
-    - [对应代码示例](#对应代码示例)
-    - [建议练习](#建议练习)
-  - [导航：下一步去哪？](#导航下一步去哪)
-  - [嵌入式测验](#嵌入式测验)
-    - [测验 1：CAS 循环（记忆层）](#测验-1cas-循环记忆层)
-    - [测验 2：ABA 问题（理解层）](#测验-2aba-问题理解层)
-    - [测验 3：Treiber Stack 实现（应用层）](#测验-3treiber-stack-实现应用层)
-    - [测验 4：Hazard Pointer vs Epoch-Based（分析层）](#测验-4hazard-pointer-vs-epoch-based分析层)
+- [无锁编程与内存模型](.#无锁编程与内存模型)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 无锁 vs 无等待](.#11-无锁-vs-无等待)
+    - [1.2 ABA 问题](.#12-aba-问题)
+    - [1.3 内存序选择](.#13-内存序选择)
+  - [二、关键数据结构](.#二关键数据结构)
+    - [2.1 Treiber Stack](.#21-treiber-stack)
+    - [2.2 Michael-Scott Queue](.#22-michael-scott-queue)
+    - [2.3 Hazard Pointer](.#23-hazard-pointer)
+  - [三、Rust 无锁生态](.#三rust-无锁生态)
+    - [3.1 crossbeam](.#31-crossbeam)
+    - [3.2 lockfree](.#32-lockfree)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、常见陷阱](.#五常见陷阱)
+    - [编译错误示例](.#编译错误示例)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+    - [编译验证示例](.#编译验证示例)
+  - [相关概念文件](.#相关概念文件)
+  - [逆向推理链（Backward Reasoning）](.#逆向推理链backward-reasoning)
+  - [权威来源索引](.#权威来源索引)
+    - [10.5 边界测试：内存序的 `Release`/`Acquire` 与数据依赖（运行时可见性问题）](.#105-边界测试内存序的-releaseacquire-与数据依赖运行时可见性问题)
+    - [10.3 边界测试：ABA 问题与无锁栈的内存安全（运行时 UB）](.#103-边界测试aba-问题与无锁栈的内存安全运行时-ub)
+    - [10.5 边界测试：返回局部变量的悬垂引用](.#105-边界测试返回局部变量的悬垂引用)
+  - [参考来源](.#参考来源)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
+  - [实践](.#实践)
+    - [对应代码示例](.#对应代码示例)
+    - [建议练习](.#建议练习)
+  - [导航：下一步去哪？](.#导航下一步去哪)
+  - [嵌入式测验](.#嵌入式测验)
+    - [测验 1：CAS 循环（记忆层）](.#测验-1cas-循环记忆层)
+    - [测验 2：ABA 问题（理解层）](.#测验-2aba-问题理解层)
+    - [测验 3：Treiber Stack 实现（应用层）](.#测验-3treiber-stack-实现应用层)
+    - [测验 4：Hazard Pointer vs Epoch-Based（分析层）](.#测验-4hazard-pointer-vs-epoch-based分析层)
 
 ---
 
@@ -613,10 +613,10 @@ fn main() {
 
 ## 相关概念文件
 
-- [Concurrency](../03_advanced/01_concurrency.md) — 并发
-- [Atomics](./11_atomics_and_memory_ordering.md) — 原子操作（Atomic Operations）
-- [Unsafe](../03_advanced/03_unsafe.md) — unsafe Rust
-- [Concurrent Patterns](./10_concurrency_patterns.md) — 并发模式
+- [Concurrency](01_concurrency.md) — 并发
+- [Atomics](11_atomics_and_memory_ordering.md) — 原子操作（Atomic Operations）
+- [Unsafe](03_unsafe.md) — unsafe Rust
+- [Concurrent Patterns](10_concurrency_patterns.md) — 并发模式
 
 ---
 
@@ -804,8 +804,8 @@ fn main() {}
 
 | 选择 | 条件 | 目标 |
 |:---|:---|:---|
-| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate/) 或 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) |
-| 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
+| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate) 或 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) |
+| 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../06_ecosystem/README.md) |
 

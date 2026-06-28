@@ -14,7 +14,7 @@
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Cre — 设计高可靠分布式系统的数据持久化模式
 > **前置依赖**: [Async](../03_advanced/02_async.md) · 事件驱动架构 · [泛型（Generics）](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md)
-> **后置延伸**: [分布式系统](./18_distributed_systems.md) · [微服务架构模式](./31_microservice_patterns.md) · [云原生](./24_cloud_native.md)
+> **后置延伸**: [分布式系统](18_distributed_systems.md) · [微服务架构模式](31_microservice_patterns.md) · [云原生](24_cloud_native.md)
 >
 > **来源**: [eventstore-rs](https://docs.rs/eventstore/) · [cqrs-es](https://docs.rs/cqrs-es/)
 > **前置概念**: N/A
@@ -36,49 +36,49 @@
 
 ## 📑 目录
 
-- [CQRS \& Event Sourcing（命令查询职责分离与事件溯源）](#cqrs--event-sourcing命令查询职责分离与事件溯源)
-  - [📑 目录](#-目录)
-  - [一、权威定义（Definition）](#一权威定义definition)
-    - [1.1 CQRS：命令与查询的分离](#11-cqrs命令与查询的分离)
-    - [1.2 事件溯源：不可变事件流](#12-事件溯源不可变事件流)
-    - [1.3 CQRS+ES 的协同关系](#13-cqrses-的协同关系)
-  - [二、概念属性矩阵](#二概念属性矩阵)
-    - [2.1 CQRS+ES 模式对比矩阵](#21-cqrses-模式对比矩阵)
-  - [三、CQRS 核心](#三cqrs-核心)
-    - [3.1 命令端：写模型优化](#31-命令端写模型优化)
-    - [3.2 查询端：读模型优化](#32-查询端读模型优化)
-    - [3.3 读写分离的物理实现](#33-读写分离的物理实现)
-  - [四、事件溯源核心](#四事件溯源核心)
-    - [4.1 事件不可变性与追加模型](#41-事件不可变性与追加模型)
-    - [4.2 快照策略与版本化](#42-快照策略与版本化)
-    - [4.3 事件升级（Event Upcasting）](#43-事件升级event-upcasting)
-  - [五、CQRS+ES 协同模式](#五cqrses-协同模式)
-    - [5.1 Saga / Process Manager 编排](#51-saga--process-manager-编排)
-    - [5.2 Outbox 模式：保证事件发布](#52-outbox-模式保证事件发布)
-    - [5.3 读模型的最终一致性](#53-读模型的最终一致性)
-  - [六、Rust 实现](#六rust-实现)
-    - [6.1 事件定义与序列化](#61-事件定义与序列化)
-    - [6.2 命令处理器](#62-命令处理器)
-    - [6.3 事件存储与投影](#63-事件存储与投影)
-    - [6.4 完整 CQRS+ES 微服务骨架](#64-完整-cqrses-微服务骨架)
-  - [七、反命题与边界分析](#七反命题与边界分析)
-    - [7.1 反命题树](#71-反命题树)
-    - [7.2 边界极限](#72-边界极限)
-  - [十、边界测试](#十边界测试)
-    - [10.1 边界测试：无快照的查询退化（运行时性能）](#101-边界测试无快照的查询退化运行时性能)
-    - [10.2 边界测试：双写不一致导致数据丢失（逻辑错误）](#102-边界测试双写不一致导致数据丢失逻辑错误)
-    - [10.3 边界测试：事件模式演化破坏反序列化（编译/运行时错误）](#103-边界测试事件模式演化破坏反序列化编译运行时错误)
-  - [相关概念文件](#相关概念文件)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：CQRS（命令查询职责分离）的核心思想是什么？与传统 CRUD 架构有什么区别？（理解层）](#测验-1cqrs命令查询职责分离的核心思想是什么与传统-crud-架构有什么区别理解层)
-    - [测验 2：Event Sourcing（事件溯源）中，系统状态如何重建？（理解层）](#测验-2event-sourcing事件溯源中系统状态如何重建理解层)
-    - [测验 3：Rust 的强类型系统对实现 CQRS/Event Sourcing 有什么帮助？（理解层）](#测验-3rust-的强类型系统对实现-cqrsevent-sourcing-有什么帮助理解层)
-    - [测验 4：在 Event Sourcing 中，如何处理"事件 schema 演进"（Event Schema Evolution）？（理解层）](#测验-4在-event-sourcing-中如何处理事件-schema-演进event-schema-evolution理解层)
-    - [测验 5：CQRS + Event Sourcing 相比传统架构增加了什么复杂度？什么场景下不值得使用？（理解层）](#测验-5cqrs--event-sourcing-相比传统架构增加了什么复杂度什么场景下不值得使用理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [CQRS \& Event Sourcing（命令查询职责分离与事件溯源）](.#cqrs--event-sourcing命令查询职责分离与事件溯源)
+  - [📑 目录](.#-目录)
+  - [一、权威定义（Definition）](.#一权威定义definition)
+    - [1.1 CQRS：命令与查询的分离](.#11-cqrs命令与查询的分离)
+    - [1.2 事件溯源：不可变事件流](.#12-事件溯源不可变事件流)
+    - [1.3 CQRS+ES 的协同关系](.#13-cqrses-的协同关系)
+  - [二、概念属性矩阵](.#二概念属性矩阵)
+    - [2.1 CQRS+ES 模式对比矩阵](.#21-cqrses-模式对比矩阵)
+  - [三、CQRS 核心](.#三cqrs-核心)
+    - [3.1 命令端：写模型优化](.#31-命令端写模型优化)
+    - [3.2 查询端：读模型优化](.#32-查询端读模型优化)
+    - [3.3 读写分离的物理实现](.#33-读写分离的物理实现)
+  - [四、事件溯源核心](.#四事件溯源核心)
+    - [4.1 事件不可变性与追加模型](.#41-事件不可变性与追加模型)
+    - [4.2 快照策略与版本化](.#42-快照策略与版本化)
+    - [4.3 事件升级（Event Upcasting）](.#43-事件升级event-upcasting)
+  - [五、CQRS+ES 协同模式](.#五cqrses-协同模式)
+    - [5.1 Saga / Process Manager 编排](.#51-saga--process-manager-编排)
+    - [5.2 Outbox 模式：保证事件发布](.#52-outbox-模式保证事件发布)
+    - [5.3 读模型的最终一致性](.#53-读模型的最终一致性)
+  - [六、Rust 实现](.#六rust-实现)
+    - [6.1 事件定义与序列化](.#61-事件定义与序列化)
+    - [6.2 命令处理器](.#62-命令处理器)
+    - [6.3 事件存储与投影](.#63-事件存储与投影)
+    - [6.4 完整 CQRS+ES 微服务骨架](.#64-完整-cqrses-微服务骨架)
+  - [七、反命题与边界分析](.#七反命题与边界分析)
+    - [7.1 反命题树](.#71-反命题树)
+    - [7.2 边界极限](.#72-边界极限)
+  - [十、边界测试](.#十边界测试)
+    - [10.1 边界测试：无快照的查询退化（运行时性能）](.#101-边界测试无快照的查询退化运行时性能)
+    - [10.2 边界测试：双写不一致导致数据丢失（逻辑错误）](.#102-边界测试双写不一致导致数据丢失逻辑错误)
+    - [10.3 边界测试：事件模式演化破坏反序列化（编译/运行时错误）](.#103-边界测试事件模式演化破坏反序列化编译运行时错误)
+  - [相关概念文件](.#相关概念文件)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：CQRS（命令查询职责分离）的核心思想是什么？与传统 CRUD 架构有什么区别？（理解层）](.#测验-1cqrs命令查询职责分离的核心思想是什么与传统-crud-架构有什么区别理解层)
+    - [测验 2：Event Sourcing（事件溯源）中，系统状态如何重建？（理解层）](.#测验-2event-sourcing事件溯源中系统状态如何重建理解层)
+    - [测验 3：Rust 的强类型系统对实现 CQRS/Event Sourcing 有什么帮助？（理解层）](.#测验-3rust-的强类型系统对实现-cqrsevent-sourcing-有什么帮助理解层)
+    - [测验 4：在 Event Sourcing 中，如何处理"事件 schema 演进"（Event Schema Evolution）？（理解层）](.#测验-4在-event-sourcing-中如何处理事件-schema-演进event-schema-evolution理解层)
+    - [测验 5：CQRS + Event Sourcing 相比传统架构增加了什么复杂度？什么场景下不值得使用？（理解层）](.#测验-5cqrs--event-sourcing-相比传统架构增加了什么复杂度什么场景下不值得使用理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 > **Bloom 层级**: 分析 → 评价
 **变更日志**:
@@ -1364,11 +1364,11 @@ fn good_deserialization() {
 
 ## 相关概念文件
 
-- [微服务架构模式](./31_microservice_patterns.md) — 服务发现、熔断、Saga
-- [事件驱动架构](./32_event_driven_architecture.md) — 发布-订阅、消息队列、Reactive Streams
-- [分布式系统](./18_distributed_systems.md) — gRPC、Raft、Actor、消息队列
-- [云原生](./24_cloud_native.md) — Kubernetes、容器化、可观测性
-- [架构设计模式](./35_architecture_patterns.md) — 分层/六边形/洋葱/整洁架构
+- [微服务架构模式](31_microservice_patterns.md) — 服务发现、熔断、Saga
+- [事件驱动架构](32_event_driven_architecture.md) — 发布-订阅、消息队列、Reactive Streams
+- [分布式系统](18_distributed_systems.md) — gRPC、Raft、Actor、消息队列
+- [云原生](24_cloud_native.md) — Kubernetes、容器化、可观测性
+- [架构设计模式](35_architecture_patterns.md) — 分层/六边形/洋葱/整洁架构
 - [Async/Await](../03_advanced/02_async.md) — 异步编程基础
 - [公理语义](../04_formal/20_axiomatic_semantics.md) — Hoare 逻辑、wp 计算
 

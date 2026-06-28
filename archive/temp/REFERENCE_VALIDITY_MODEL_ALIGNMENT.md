@@ -378,8 +378,8 @@
 #### 关键修改点
 
 ```markdown
-   - [🛡️ 资源安全理论](./01_theory/04_memory_safety_theory.md) - 资源安全保证理论（编译期逻辑证明）
-   - [🛡️ 资源安全保证](./04_safety/01_memory_safety.md) - 资源安全保证（编译期逻辑证明） ⭐⭐⭐
+   - [🛡️ 资源安全理论](01_theory/04_memory_safety_theory.md) - 资源安全保证理论（编译期逻辑证明）
+   - [🛡️ 资源安全保证](04_safety/01_memory_safety.md) - 资源安全保证（编译期逻辑证明） ⭐⭐⭐
 ```
 
 ### 20. 高级生命周期模式 (`crates/c01_ownership_borrow_scope/docs/tier_04_advanced/01_高级生命周期模式.md`)

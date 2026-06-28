@@ -17,12 +17,12 @@
 > [Rust Reference — Unsafe Operations](https://doc.rust-lang.org/reference/unsafe-blocks.html)
 >
 > **前置概念**:
-> [Unsafe Rust](./03_unsafe.md) ·
+> [Unsafe Rust](03_unsafe.md) ·
 > [Ownership](../01_foundation/01_ownership.md) ·
 > [Borrowing](../01_foundation/02_borrowing.md)
 >
 > **对应练习**:
-> [`exercises/src/unsafe_rust/`](../../exercises/src/unsafe_rust/)
+> [`exercises/src/unsafe_rust/`](../../exercises/src/unsafe_rust)
 
 ---
 
@@ -80,7 +80,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri run
 
 **关键原则**：`unsafe` 不关闭借用（Borrowing）检查器——它允许你执行编译器无法验证的操作，但**你**必须保证安全性。
 
-**知识点**：`unsafe` 是"信任程序员"的契约，不是"关闭检查器"。每个 `unsafe` 块都应附带安全不变量的注释。[→ Unsafe 详解](./03_unsafe.md)
+**知识点**：`unsafe` 是"信任程序员"的契约，不是"关闭检查器"。每个 `unsafe` 块都应附带安全不变量的注释。[→ Unsafe 详解](03_unsafe.md)
 
 </details>
 
@@ -131,7 +131,7 @@ fn main() {
 
 **最佳实践**：`unsafe fn` 的文档必须明确说明**调用者必须保证的不变量**。
 
-**知识点**：`unsafe fn` 将安全责任**转移给调用者**。调用方必须在 `unsafe` 块中显式承担这一责任。[→ Unsafe 详解](./03_unsafe.md)
+**知识点**：`unsafe fn` 将安全责任**转移给调用者**。调用方必须在 `unsafe` 块中显式承担这一责任。[→ Unsafe 详解](03_unsafe.md)
 
 </details>
 
@@ -174,7 +174,7 @@ let num = 5;
 let r1 = &num as *const i32;  // 从有效引用创建
 ```
 
-**知识点**：原始指针的主要用途是与 C 代码交互（FFI）和构建安全抽象（如 `Vec`、`Box` 的内部实现）。[→ Unsafe 详解](./03_unsafe.md)
+**知识点**：原始指针的主要用途是与 C 代码交互（FFI）和构建安全抽象（如 `Vec`、`Box` 的内部实现）。[→ Unsafe 详解](03_unsafe.md)
 
 </details>
 
@@ -278,7 +278,7 @@ struct MyType {
 
 **关键原则**：`unsafe impl Send/Sync` 是最危险的 `unsafe` 操作之一——它允许编译器相信一个类型的线程安全性，若保证错误则会导致整个程序的并发安全（Concurrency Safety）崩溃。
 
-**知识点**：永远不要为包含非线程安全内部可变性的类型 `unsafe impl Sync`。[→ 并发模型详解](./01_concurrency.md)
+**知识点**：永远不要为包含非线程安全内部可变性的类型 `unsafe impl Sync`。[→ 并发模型详解](01_concurrency.md)
 
 </details>
 
@@ -325,7 +325,7 @@ fn main() {
 
 **Rust 1.82+ 改进**：`unsafe extern "C" fn` 和 `safe` 关键字允许更细粒度的 FFI 安全边界控制。
 
-**知识点**：FFI 是 Rust 与外部世界交互的边界，也是 UB 的主要来源。精确的签名声明和边界测试是必须的。[→ FFI 详解](./05_rust_ffi.md)
+**知识点**：FFI 是 Rust 与外部世界交互的边界，也是 UB 的主要来源。精确的签名声明和边界测试是必须的。[→ FFI 详解](05_rust_ffi.md)
 
 </details>
 
@@ -382,7 +382,7 @@ unsafe {
 - 实现 `Vec::with_capacity`（分配内存但延迟初始化）
 - 构建自定义集合类型
 
-**知识点**：`MaybeUninit` 是 Rust 1.36+ 替代 `std::mem::uninitialized` 的安全工具。后者已废弃，因为可能实例化无效值。[→ Unsafe 详解](./03_unsafe.md)
+**知识点**：`MaybeUninit` 是 Rust 1.36+ 替代 `std::mem::uninitialized` 的安全工具。后者已废弃，因为可能实例化无效值。[→ Unsafe 详解](03_unsafe.md)
 
 </details>
 
@@ -443,7 +443,7 @@ unsafe {
 }
 ```
 
-**知识点**：`ptr::read` / `ptr::write` 是 Rust 标准库内部实现的核心原语，也是手动内存管理的起点。[→ Unsafe 模式详解](./12_unsafe_rust_patterns.md)
+**知识点**：`ptr::read` / `ptr::write` 是 Rust 标准库内部实现的核心原语，也是手动内存管理的起点。[→ Unsafe 模式详解](12_unsafe_rust_patterns.md)
 
 </details>
 
@@ -490,7 +490,7 @@ unsafe fn raw_add(a: *const i32, b: *const i32) -> i32 {
 
 分离两者使代码更清晰——读者可以一眼看出函数体内**具体哪些操作**需要额外关注。
 
-**知识点**：Rust 2024 Edition 的 `unsafe_op_in_unsafe_fn` 是 Unsafe Rust 可用性的重要改进，已在项目中通过 `.cargo/config.toml` 的 `edition = "2024"` 启用。[→ Unsafe 详解](./03_unsafe.md)
+**知识点**：Rust 2024 Edition 的 `unsafe_op_in_unsafe_fn` 是 Unsafe Rust 可用性的重要改进，已在项目中通过 `.cargo/config.toml` 的 `edition = "2024"` 启用。[→ Unsafe 详解](03_unsafe.md)
 
 </details>
 
@@ -541,7 +541,7 @@ fn main() {
 
 **注意**：即使使用 `write_unaligned`，若 `data` 的地址不是 4 字节对齐的，某些架构（如 ARM）可能产生硬件异常。x86/x86_64 支持非对齐访问，但性能较低。
 
-**知识点**：原始指针的类型转换不等于合法访问。Rust 的别名模型（Stacked Borrows / Tree Borrows）对指针的类型和权限有严格要求。[→ Unsafe 详解](./03_unsafe.md)
+**知识点**：原始指针的类型转换不等于合法访问。Rust 的别名模型（Stacked Borrows / Tree Borrows）对指针的类型和权限有严格要求。[→ Unsafe 详解](03_unsafe.md)
 
 </details>
 
@@ -551,14 +551,14 @@ fn main() {
 
 | 得分 | 评价 | 建议 |
 |:---:|:---|:---|
-| 10/10 | 🏆 Unsafe 边界已内化 | 进阶至 [Unsafe Patterns](./12_unsafe_rust_patterns.md) 或尝试为 crates/ 编写 unsafe 抽象 |
-| 7–9/10 | ✅ 核心概念掌握 | 强化 [Unsafe 练习](../../exercises/src/unsafe_rust/)，用 Miri 验证所有代码 |
-| 4–6/10 | 🔄 需巩固基础 | 重读 [Unsafe Rust](./03_unsafe.md) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) |
+| 10/10 | 🏆 Unsafe 边界已内化 | 进阶至 [Unsafe Patterns](12_unsafe_rust_patterns.md) 或尝试为 crates/ 编写 unsafe 抽象 |
+| 7–9/10 | ✅ 核心概念掌握 | 强化 [Unsafe 练习](../../exercises/src/unsafe_rust)，用 Miri 验证所有代码 |
+| 4–6/10 | 🔄 需巩固基础 | 重读 [Unsafe Rust](03_unsafe.md) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) |
 | 0–3/10 | 📚 建议重新开始 | 从 [Ownership](../01_foundation/01_ownership.md) 确认基础，再读 Unsafe 章节 |
 
 ---
 
-> **对应练习**: [`exercises/src/unsafe_rust/`](../../exercises/src/unsafe_rust/)
+> **对应练习**: [`exercises/src/unsafe_rust/`](../../exercises/src/unsafe_rust)
 
 ---
 

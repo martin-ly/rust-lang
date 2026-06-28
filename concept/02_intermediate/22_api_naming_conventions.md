@@ -11,7 +11,7 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×App — 将社区约定应用于实际 API 设计
 > **定位**: 系统整理 Rust 标准库与生态中反复出现的命名模式，帮助学习者写出“看起来就像 Rust”的 API。
-> **前置概念**: [Traits](./01_traits.md) · [Generics](./02_generics.md) · [Common Traits](./07_common_traits.md)
+> **前置概念**: [Traits](01_traits.md) · [Generics](02_generics.md) · [Common Traits](07_common_traits.md)
 > **后置概念**: [Design Patterns](../03_advanced/07_design_patterns.md) · [Type System Patterns](../03_advanced/06_type_system_patterns.md)
 > **来源**: [Google Comprehensive Rust — Predictable API](https://google.github.io/comprehensive-rust/idiomatic/foundations-api-design/predictable-api.html) ·
 > [Rust API Guidelines — Naming](https://rust-lang.github.io/api-guidelines//naming.html) ·
@@ -22,31 +22,31 @@
 
 ## 📑 目录
 
-- [Rust API 命名约定](#rust-api-命名约定)
-  - [📑 目录](#-目录)
-  - [一、为什么命名约定重要](#一为什么命名约定重要)
-  - [二、构造函数](#二构造函数)
-    - [2.1 `new`](#21-new)
-    - [2.2 `with_`](#22-with_)
-    - [2.3 `from_` / `into_`](#23-from_--into_)
-    - [2.4 `try_`](#24-try_)
-  - [三、谓词与查询](#三谓词与查询)
-    - [3.1 `is_`](#31-is_)
-    - [3.2 `as_` / `to_`](#32-as_--to_)
-  - [四、可变访问](#四可变访问)
-    - [4.1 `mut_`](#41-mut_)
-  - [五、转换与构造](#五转换与构造)
-    - [5.1 `to_`](#51-to_)
-    - [5.2 `as_`](#52-as_)
-    - [5.3 `into_`](#53-into_)
-    - [5.4 `from`](#54-from)
-  - [六、动作与回调](#六动作与回调)
-    - [6.1 `by`](#61-by)
-    - [6.2 `with` 闭包形式](#62-with-闭包形式)
-  - [七、常见陷阱](#七常见陷阱)
-  - [八、快速对照表](#八快速对照表)
-  - [九、练习题](#九练习题)
-    - [练习 1：为 `Config` 设计 API](#练习-1为-config-设计-api)
+- [Rust API 命名约定](.#rust-api-命名约定)
+  - [📑 目录](.#-目录)
+  - [一、为什么命名约定重要](.#一为什么命名约定重要)
+  - [二、构造函数](.#二构造函数)
+    - [2.1 `new`](.#21-new)
+    - [2.2 `with_`](.#22-with_)
+    - [2.3 `from_` / `into_`](.#23-from_--into_)
+    - [2.4 `try_`](.#24-try_)
+  - [三、谓词与查询](.#三谓词与查询)
+    - [3.1 `is_`](.#31-is_)
+    - [3.2 `as_` / `to_`](.#32-as_--to_)
+  - [四、可变访问](.#四可变访问)
+    - [4.1 `mut_`](.#41-mut_)
+  - [五、转换与构造](.#五转换与构造)
+    - [5.1 `to_`](.#51-to_)
+    - [5.2 `as_`](.#52-as_)
+    - [5.3 `into_`](.#53-into_)
+    - [5.4 `from`](.#54-from)
+  - [六、动作与回调](.#六动作与回调)
+    - [6.1 `by`](.#61-by)
+    - [6.2 `with` 闭包形式](.#62-with-闭包形式)
+  - [七、常见陷阱](.#七常见陷阱)
+  - [八、快速对照表](.#八快速对照表)
+  - [九、练习题](.#九练习题)
+    - [练习 1：为 `Config` 设计 API](.#练习-1为-config-设计-api)
 
 ---
 

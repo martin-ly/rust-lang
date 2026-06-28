@@ -44,9 +44,9 @@
 | **Ch 16: Fearless Concurrency** | [01_concurrency.md](../concept/03_advanced/01_concurrency.md) | ✅ | 线程、Mutex、Arc、Channel 完全覆盖；concept/ 额外包含内存顺序 |
 | **Ch 17: OOP Features** | [01_traits.md](../concept/02_intermediate/01_traits.md) · [01_rust_vs_cpp.md](../concept/05_comparative/01_rust_vs_cpp.md) | ⚠️ | TRPL 以 trait 对象讲解动态分发；concept/ 强调无继承设计哲学 |
 | **Ch 18: Patterns and Matching** | [07_control_flow.md](../concept/01_foundation/07_control_flow.md) · [12_attributes_and_macros.md](../concept/01_foundation/12_attributes_and_macros.md) · [15_iterator_patterns.md](../concept/02_intermediate/15_iterator_patterns.md) | ✅ | `match`/`if let` 模式语法完全覆盖；concept/ 额外包含守卫条件、@ 绑定与迭代器模式 |
-| **Ch 19: Advanced Features** | [03_advanced/](../concept/03_advanced/) 整层 | 🆕 | TRPL 单章覆盖；concept/ L3 拆分为 20+ 独立文件，深度远超 TRPL |
+| **Ch 19: Advanced Features** | [03_advanced/](../concept/03_advanced) 整层 | 🆕 | TRPL 单章覆盖；concept/ L3 拆分为 20+ 独立文件，深度远超 TRPL |
 | **Ch 20: Multithreaded Web Server** | [18_network_programming.md](../concept/03_advanced/18_network_programming.md) · [comprehensive_web_server.rs](../examples/comprehensive_web_server.rs) | ⚠️ | TRPL 渐进式项目教学；concept/ 有示例但缺少同步逐步教程 |
-| **Ch 21: Appendix** | [02_reference/](../docs/02_reference/) | ✅ | 关键字、运算符、可派生 trait、宏等参考内容完全覆盖 |
+| **Ch 21: Appendix** | [02_reference/](02_reference) | ✅ | 关键字、运算符、可派生 trait、宏等参考内容完全覆盖 |
 
 ---
 

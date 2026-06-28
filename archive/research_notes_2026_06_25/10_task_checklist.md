@@ -13,71 +13,71 @@
 
 ## 📑 目录
 
-- [研究任务清单](#研究任务清单)
-  - [📑 目录](#-目录)
-  - [🎯 清单说明 {#-清单说明}](#-清单说明--清单说明)
-  - [📚 高优先级任务 {#-高优先级任务}](#-高优先级任务--高优先级任务)
-    - [所有权模型形式化](#所有权模型形式化)
-      - [理论基础完善](#理论基础完善)
-      - [形式化定义](#形式化定义)
-      - [代码示例](#代码示例)
-      - [证明工作](#证明工作)
-    - [借用检查器证明](#借用检查器证明)
-      - [理论基础完善 {#理论基础完善-1}](#理论基础完善-理论基础完善-1)
-      - [形式化定义 {#形式化定义-1}](#形式化定义-形式化定义-1)
-      - [代码示例 {#代码示例-1}](#代码示例-代码示例-1)
-      - [证明工作 {#证明工作-1}](#证明工作-证明工作-1)
-    - [生命周期形式化](#生命周期形式化)
-      - [理论基础完善 {#理论基础完善-2}](#理论基础完善-理论基础完善-2)
-      - [形式化定义 {#形式化定义-2}](#形式化定义-形式化定义-2)
-      - [代码示例 {#代码示例-2}](#代码示例-代码示例-2)
-      - [证明工作 {#证明工作-2}](#证明工作-证明工作-2)
-    - [类型系统基础](#类型系统基础)
-      - [理论基础完善 {#理论基础完善-3}](#理论基础完善-理论基础完善-3)
-      - [形式化定义 {#形式化定义-3}](#形式化定义-形式化定义-3)
-      - [代码示例 {#代码示例-3}](#代码示例-代码示例-3)
-      - [证明工作 {#证明工作-3}](#证明工作-证明工作-3)
-  - [🟡 中优先级任务 {#-中优先级任务}](#-中优先级任务--中优先级任务)
-    - [异步状态机形式化](#异步状态机形式化)
-      - [理论基础完善 {#理论基础完善-4}](#理论基础完善-理论基础完善-4)
-      - [形式化定义 {#形式化定义-4}](#形式化定义-形式化定义-4)
-      - [代码示例 {#代码示例-4}](#代码示例-代码示例-4)
-      - [证明工作 {#证明工作-4}](#证明工作-证明工作-4)
-    - [Trait 系统形式化](#trait-系统形式化)
-      - [理论基础完善 {#理论基础完善-5}](#理论基础完善-理论基础完善-5)
-      - [形式化定义 {#形式化定义-5}](#形式化定义-形式化定义-5)
-      - [代码示例 {#代码示例-5}](#代码示例-代码示例-5)
-      - [证明工作 {#证明工作-5}](#证明工作-证明工作-5)
-    - [性能基准测试](#性能基准测试)
-      - [实验设计 {#实验设计-}](#实验设计-实验设计-)
-      - [实验实现 {#实验实现-}](#实验实现-实验实现-)
-      - [数据收集 ✅ {#数据收集-}](#数据收集--数据收集-)
-      - [结果分析 ✅ {#结果分析-}](#结果分析--结果分析-)
-  - [🟢 低优先级任务 {#-低优先级任务}](#-低优先级任务--低优先级任务)
-    - [高级类型特性](#高级类型特性)
-      - [GATs 研究 ✅ {#gats-研究-}](#gats-研究--gats-研究-)
-      - [Const 泛型研究 ✅ {#const-泛型研究-}](#const-泛型研究--const-泛型研究-)
-      - [依赖类型研究 ✅ {#依赖类型研究-}](#依赖类型研究--依赖类型研究-)
-    - [宏展开性能分析](#宏展开性能分析)
-      - [实验设计 ✅](#实验设计-)
-      - [实验实现 ✅](#实验实现-)
-      - [数据收集 ✅ {#数据收集--1}](#数据收集--数据收集--1)
-      - [结果分析 ✅ {#结果分析--1}](#结果分析--结果分析--1)
-  - [📈 任务统计 {#-任务统计}](#-任务统计--任务统计)
-    - [按优先级统计](#按优先级统计)
-    - [按任务类型统计](#按任务类型统计)
-    - [按研究领域统计](#按研究领域统计)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
-    - [核心文档](#核心文档)
-    - [贡献和质量](#贡献和质量)
-    - [工具和资源](#工具和资源)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [研究任务清单](.#研究任务清单)
+  - [📑 目录](.#-目录)
+  - [🎯 清单说明 {#-清单说明}](.#-清单说明--清单说明)
+  - [📚 高优先级任务 {#-高优先级任务}](.#-高优先级任务--高优先级任务)
+    - [所有权模型形式化](.#所有权模型形式化)
+      - [理论基础完善](.#理论基础完善)
+      - [形式化定义](.#形式化定义)
+      - [代码示例](.#代码示例)
+      - [证明工作](.#证明工作)
+    - [借用检查器证明](.#借用检查器证明)
+      - [理论基础完善 {#理论基础完善-1}](.#理论基础完善-理论基础完善-1)
+      - [形式化定义 {#形式化定义-1}](.#形式化定义-形式化定义-1)
+      - [代码示例 {#代码示例-1}](.#代码示例-代码示例-1)
+      - [证明工作 {#证明工作-1}](.#证明工作-证明工作-1)
+    - [生命周期形式化](.#生命周期形式化)
+      - [理论基础完善 {#理论基础完善-2}](.#理论基础完善-理论基础完善-2)
+      - [形式化定义 {#形式化定义-2}](.#形式化定义-形式化定义-2)
+      - [代码示例 {#代码示例-2}](.#代码示例-代码示例-2)
+      - [证明工作 {#证明工作-2}](.#证明工作-证明工作-2)
+    - [类型系统基础](.#类型系统基础)
+      - [理论基础完善 {#理论基础完善-3}](.#理论基础完善-理论基础完善-3)
+      - [形式化定义 {#形式化定义-3}](.#形式化定义-形式化定义-3)
+      - [代码示例 {#代码示例-3}](.#代码示例-代码示例-3)
+      - [证明工作 {#证明工作-3}](.#证明工作-证明工作-3)
+  - [🟡 中优先级任务 {#-中优先级任务}](.#-中优先级任务--中优先级任务)
+    - [异步状态机形式化](.#异步状态机形式化)
+      - [理论基础完善 {#理论基础完善-4}](.#理论基础完善-理论基础完善-4)
+      - [形式化定义 {#形式化定义-4}](.#形式化定义-形式化定义-4)
+      - [代码示例 {#代码示例-4}](.#代码示例-代码示例-4)
+      - [证明工作 {#证明工作-4}](.#证明工作-证明工作-4)
+    - [Trait 系统形式化](.#trait-系统形式化)
+      - [理论基础完善 {#理论基础完善-5}](.#理论基础完善-理论基础完善-5)
+      - [形式化定义 {#形式化定义-5}](.#形式化定义-形式化定义-5)
+      - [代码示例 {#代码示例-5}](.#代码示例-代码示例-5)
+      - [证明工作 {#证明工作-5}](.#证明工作-证明工作-5)
+    - [性能基准测试](.#性能基准测试)
+      - [实验设计 {#实验设计-}](.#实验设计-实验设计-)
+      - [实验实现 {#实验实现-}](.#实验实现-实验实现-)
+      - [数据收集 ✅ {#数据收集-}](.#数据收集--数据收集-)
+      - [结果分析 ✅ {#结果分析-}](.#结果分析--结果分析-)
+  - [🟢 低优先级任务 {#-低优先级任务}](.#-低优先级任务--低优先级任务)
+    - [高级类型特性](.#高级类型特性)
+      - [GATs 研究 ✅ {#gats-研究-}](.#gats-研究--gats-研究-)
+      - [Const 泛型研究 ✅ {#const-泛型研究-}](.#const-泛型研究--const-泛型研究-)
+      - [依赖类型研究 ✅ {#依赖类型研究-}](.#依赖类型研究--依赖类型研究-)
+    - [宏展开性能分析](.#宏展开性能分析)
+      - [实验设计 ✅](.#实验设计-)
+      - [实验实现 ✅](.#实验实现-)
+      - [数据收集 ✅ {#数据收集--1}](.#数据收集--数据收集--1)
+      - [结果分析 ✅ {#结果分析--1}](.#结果分析--结果分析--1)
+  - [📈 任务统计 {#-任务统计}](.#-任务统计--任务统计)
+    - [按优先级统计](.#按优先级统计)
+    - [按任务类型统计](.#按任务类型统计)
+    - [按研究领域统计](.#按研究领域统计)
+  - [🔗 相关资源 {#-相关资源}](.#-相关资源--相关资源)
+    - [核心文档](.#核心文档)
+    - [贡献和质量](.#贡献和质量)
+    - [工具和资源](.#工具和资源)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 🎯 清单说明 {#-清单说明}
 >
@@ -110,7 +110,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**文档**: [10_ownership_model.md](./formal_methods/10_ownership_model.md)
+**文档**: [10_ownership_model.md](formal_methods/10_ownership_model.md)
 **优先级**: 🔴 高
 **预计完成时间**: 2-3 周
 
@@ -155,8 +155,8 @@
 
 - [x] 完成内存安全的形式化证明 ✅
 - [x] 完成所有权唯一性的证明 ✅
-- [x] 使用形式化工具验证（如 Coq）- 指南已就绪 ✅（[10_formal_verification_guide.md](../../archive/research_notes_2026_06_25/10_formal_verification_guide.md)）
-- [x] 编写证明文档 ✅（[10_proof_index.md](../../archive/research_notes_2026_06_25/10_proof_index.md)）
+- [x] 使用形式化工具验证（如 Coq）- 指南已就绪 ✅（[10_formal_verification_guide.md](10_formal_verification_guide.md)）
+- [x] 编写证明文档 ✅（[10_proof_index.md](10_proof_index.md)）
 
 ---
 
@@ -166,7 +166,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**文档**: [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)
+**文档**: [10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md)
 **优先级**: 🔴 高
 **预计完成时间**: 2-3 周
 
@@ -207,8 +207,8 @@
 
 - [x] 完成数据竞争自由的证明 ✅
 - [x] 完成借用规则正确性的证明 ✅
-- [x] 使用形式化工具验证 - 指南已就绪 ✅（[10_formal_verification_guide.md](../../archive/research_notes_2026_06_25/10_formal_verification_guide.md)）
-- [x] 编写证明文档 ✅（[10_proof_index.md](../../archive/research_notes_2026_06_25/10_proof_index.md)）
+- [x] 使用形式化工具验证 - 指南已就绪 ✅（[10_formal_verification_guide.md](10_formal_verification_guide.md)）
+- [x] 编写证明文档 ✅（[10_proof_index.md](10_proof_index.md)）
 
 ---
 
@@ -245,8 +245,8 @@
 
 - [x] 完成引用有效性的形式化证明 ✅
 - [x] 完成生命周期推断算法的正确性证明 ✅
-- [x] 使用形式化工具验证 - 指南已就绪 ✅（[10_formal_verification_guide.md](../../archive/research_notes_2026_06_25/10_formal_verification_guide.md)）
-- [x] 编写证明文档 ✅（[10_proof_index.md](../../archive/research_notes_2026_06_25/10_proof_index.md)）
+- [x] 使用形式化工具验证 - 指南已就绪 ✅（[10_formal_verification_guide.md](10_formal_verification_guide.md)）
+- [x] 编写证明文档 ✅（[10_proof_index.md](10_proof_index.md)）
 
 ---
 
@@ -254,7 +254,7 @@
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
-**文档**: [10_type_system_foundations.md](./type_theory/10_type_system_foundations.md)
+**文档**: [10_type_system_foundations.md](type_theory/10_type_system_foundations.md)
 **优先级**: 🔴 高
 **预计完成时间**: 2-3 周
 
@@ -283,8 +283,8 @@
 
 - [x] 完成类型安全的形式化证明 ✅（进展性、保持性、类型安全）
 - [x] 完成类型推导算法的正确性证明 ✅（类型推导正确性、算法正确性）
-- [x] 使用形式化工具验证 - 指南已就绪 ✅（[10_formal_verification_guide.md](../../archive/research_notes_2026_06_25/10_formal_verification_guide.md)）
-- [x] 编写证明文档 ✅（[10_proof_index.md](../../archive/research_notes_2026_06_25/10_proof_index.md)）
+- [x] 使用形式化工具验证 - 指南已就绪 ✅（[10_formal_verification_guide.md](10_formal_verification_guide.md)）
+- [x] 编写证明文档 ✅（[10_proof_index.md](10_proof_index.md)）
 
 ---
 
@@ -296,7 +296,7 @@
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-**文档**: [10_async_state_machine.md](./formal_methods/10_async_state_machine.md)
+**文档**: [10_async_state_machine.md](formal_methods/10_async_state_machine.md)
 **优先级**: 🟡 中
 **预计完成时间**: 3-4 周
 
@@ -325,7 +325,7 @@
 
 - [x] 完成并发安全的形式化证明 ✅
 - [x] 完成状态机正确性的证明 ✅
-- [x] 使用形式化工具验证 - 指南已就绪 ✅（[10_formal_verification_guide.md](../../archive/research_notes_2026_06_25/10_formal_verification_guide.md)）
+- [x] 使用形式化工具验证 - 指南已就绪 ✅（[10_formal_verification_guide.md](10_formal_verification_guide.md)）
 - [x] 编写证明文档 ✅
 
 ---
@@ -334,7 +334,7 @@
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
-**文档**: [10_trait_system_formalization.md](./type_theory/10_trait_system_formalization.md)
+**文档**: [10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md)
 **优先级**: 🟡 中
 **预计完成时间**: 3-4 周
 
@@ -363,7 +363,7 @@
 
 - [x] 完成 Trait 系统的正确性证明 ✅
 - [x] 完成 Trait 对象语义的证明 ✅
-- [x] 使用形式化工具验证 - 指南已就绪 ✅（[10_formal_verification_guide.md](../../archive/research_notes_2026_06_25/10_formal_verification_guide.md)）
+- [x] 使用形式化工具验证 - 指南已就绪 ✅（[10_formal_verification_guide.md](10_formal_verification_guide.md)）
 - [x] 编写证明文档 ✅
 
 ---
@@ -372,7 +372,7 @@
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
-**文档**: [10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md)
+**文档**: [10_performance_benchmarks.md](experiments/10_performance_benchmarks.md)
 **优先级**: 🟡 中
 **预计完成时间**: 2-3 周
 
@@ -414,7 +414,7 @@
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-**文档**: [10_advanced_types.md](./type_theory/10_advanced_types.md)
+**文档**: [10_advanced_types.md](type_theory/10_advanced_types.md)
 **优先级**: 🟢 低
 **预计完成时间**: 4-6 周
 
@@ -445,7 +445,7 @@
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-**文档**: [10_macro_expansion_performance.md](./experiments/10_macro_expansion_performance.md)
+**文档**: [10_macro_expansion_performance.md](experiments/10_macro_expansion_performance.md)
 **优先级**: 🟢 低
 **预计完成时间**: 2-3 周
 
@@ -525,26 +525,26 @@
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [研究笔记主索引](./README.md)
-- [研究进展跟踪](./10_progress_tracking.md)
-- [研究路线图](./10_research_roadmap.md)
-- [系统总结](./10_system_summary.md)
+- [研究笔记主索引](README.md)
+- [研究进展跟踪](10_progress_tracking.md)
+- [研究路线图](10_research_roadmap.md)
+- [系统总结](10_system_summary.md)
 
 ### 贡献和质量
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [贡献指南](./10_contributing.md)
-- [质量检查清单](./10_quality_checklist.md)
-- [研究笔记模板](./10_template.md)
+- [贡献指南](10_contributing.md)
+- [质量检查清单](10_quality_checklist.md)
+- [研究笔记模板](10_template.md)
 
 ### 工具和资源
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [研究工具使用指南](./10_tools_guide.md)
-- [研究方法论](./10_research_methodology.md)
-- [实际应用案例](./10_practical_applications.md)
+- [研究工具使用指南](10_tools_guide.md)
+- [研究方法论](10_research_methodology.md)
+- [实际应用案例](10_practical_applications.md)
 
 ---
 
@@ -617,7 +617,7 @@
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

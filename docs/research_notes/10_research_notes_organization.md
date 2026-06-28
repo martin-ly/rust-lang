@@ -16,25 +16,25 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [research\_notes 全面梳理](#research_notes-全面梳理)
-  - [📑 目录](#-目录)
-  - [一、梳理目标](#一梳理目标)
-  - [二、实际目录结构（当前）](#二实际目录结构当前)
-  - [三、归档约定](#三归档约定)
-  - [四、入口与索引关系](#四入口与索引关系)
-  - [五、版本与元数据约定](#五版本与元数据约定)
-  - [六、formal\_methods 文件清单（概览）](#六formal_methods-文件清单概览)
-  - [七、维护检查清单](#七维护检查清单)
-  - [八、100% 完成检查项（2026-02-28）](#八100-完成检查项2026-02-28)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
+- [research\_notes 全面梳理](.#research_notes-全面梳理)
+  - [📑 目录](.#-目录)
+  - [一、梳理目标](.#一梳理目标)
+  - [二、实际目录结构（当前）](.#二实际目录结构当前)
+  - [三、归档约定](.#三归档约定)
+  - [四、入口与索引关系](.#四入口与索引关系)
+  - [五、版本与元数据约定](.#五版本与元数据约定)
+  - [六、formal\_methods 文件清单（概览）](.#六formal_methods-文件清单概览)
+  - [七、维护检查清单](.#七维护检查清单)
+  - [八、100% 完成检查项（2026-02-28）](.#八100-完成检查项2026-02-28)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
 <a id="最后更新-2026-03-14-rust-194-深度整合"></a>
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 一、梳理目标
 >
@@ -43,7 +43,7 @@
 1. **结构透明**：实际目录与文件清单与 README/INDEX 一致
 2. **归档清晰**：已归档项（Aeneas、coq-of-rust、coq_skeleton）入口统一指向 archive
 3. **版本统一**：全目录元数据默认 Rust 1.93.1+ (Edition 2024)
-4. **单入口**：首次使用从 [00_ORGANIZATION_AND_NAVIGATION](../../archive/research_notes_2026_06_25/10_00_organization_and_navigation.md) 或 [README](./README.md) 进入
+4. **单入口**：首次使用从 [00_ORGANIZATION_AND_NAVIGATION](../../archive/research_notes_2026_06_25/10_00_organization_and_navigation.md) 或 [README](README.md) 进入
 
 ---
 
@@ -127,8 +127,8 @@ research_notes/
 | :--- | :--- | :--- |
 | 10_aeneas_integration_plan.md | archive/deprecated/10_aeneas_integration_plan.md | Aeneas 对接计划 |
 | 10_coq_of_rust_integration_plan.md | archive/deprecated/10_coq_of_rust_integration_plan.md | coq-of-rust 对接计划 |
-| 10_coq_isabelle_proof_scaffolding.md | [archive/deprecated/](../archive/deprecated/README.md) | Coq/Isabelle 骨架说明 |
-| coq_skeleton/（.v 等） | [archive/deprecated/coq_skeleton/](../archive/deprecated/coq_skeleton/README.md) | Coq 证明骨架；本目录仅保留 [coq_skeleton/README.md](../../archive/deprecated/coq_skeleton/README.md) 重定向 |
+| 10_coq_isabelle_proof_scaffolding.md | [archive/deprecated/](../../archive/docs/deprecated/README.md) | Coq/Isabelle 骨架说明 |
+| coq_skeleton/（.v 等） | [archive/deprecated/coq_skeleton/](../../archive/docs/deprecated/coq_skeleton/README.md) | Coq 证明骨架；本目录仅保留 [coq_skeleton/README.md](../../archive/deprecated/coq_skeleton/README.md) 重定向 |
 
 **引用建议**：新文档中提及 Aeneas、coq-of-rust、Coq 骨架时，链接至上述 `archive/deprecated/` 路径；INDEX/README 中已统一标注「已归档」。
 
@@ -141,8 +141,8 @@ research_notes/
 | 文档 | 角色 | 何时用 |
 | :--- | :--- | :--- |
 | [00_ORGANIZATION_AND_NAVIGATION](../../archive/research_notes_2026_06_25/10_00_organization_and_navigation.md) | 按目标选路径、三大支柱、层级 | 首次使用、不知道从哪看 |
-| [README](./README.md) | 主入口、研究方向、规范、目录树 | 总览、规范 |
-| [INDEX](./INDEX.md) | 完整列表、按领域/主题/证明 | 查具体文档、证明索引 |
+| [README](README.md) | 主入口、研究方向、规范、目录树 | 总览、规范 |
+| [INDEX](INDEX.md) | 完整列表、按领域/主题/证明 | 查具体文档、证明索引 |
 | [QUICK_FIND](../../archive/research_notes_2026_06_25/10_quick_find.md) | 关键词/领域/目标 | 快速定位 |
 | [QUICK_REFERENCE](../../archive/research_notes_2026_06_25/10_quick_reference.md) | 按主题快速参考 | 按主题查 |
 | [HIERARCHICAL_MAPPING_AND_SUMMARY](../../archive/research_notes_2026_06_25/10_hierarchical_mapping_and_summary.md) | 文档树、概念↔定理、文档↔思维表征 | 层次化检索、双向追溯 |
@@ -274,7 +274,7 @@ research_notes/
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

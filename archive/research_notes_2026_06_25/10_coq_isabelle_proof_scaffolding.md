@@ -14,26 +14,26 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Coq/Isabelle 证明脚手架](#coqisabelle-证明脚手架)
-  - [📑 目录](#-目录)
-  - [概述](#概述)
-  - [Coq 脚手架](#coq-脚手架)
-    - [所有权模型](#所有权模型)
-    - [借用规则](#借用规则)
-  - [Isabelle 脚手架](#isabelle-脚手架)
-    - [类型系统](#类型系统)
-  - [证明策略](#证明策略)
-    - [所有权证明策略](#所有权证明策略)
-    - [借用检查策略](#借用检查策略)
-  - [相关文档](#相关文档)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档-1)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [Coq/Isabelle 证明脚手架](.#coqisabelle-证明脚手架)
+  - [📑 目录](.#-目录)
+  - [概述](.#概述)
+  - [Coq 脚手架](.#coq-脚手架)
+    - [所有权模型](.#所有权模型)
+    - [借用规则](.#借用规则)
+  - [Isabelle 脚手架](.#isabelle-脚手架)
+    - [类型系统](.#类型系统)
+  - [证明策略](.#证明策略)
+    - [所有权证明策略](.#所有权证明策略)
+    - [借用检查策略](.#借用检查策略)
+  - [相关文档](.#相关文档)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档-1)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 概述
 >
@@ -142,9 +142,9 @@ Ltac check_borrow :=
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [形式化方法概述](../../archive/research_notes_2026_06_25/formal_methods/README.md)
-- [证明索引](../../archive/research_notes_2026_06_25/10_proof_index.md)
-- [Coq 骨架](../../archive/deprecated/coq_skeleton/README.md)
+- [形式化方法概述](formal_methods/README.md)
+- [证明索引](10_proof_index.md)
+- [Coq 骨架](../deprecated/coq_skeleton/README.md)
 
 ---
 
@@ -205,7 +205,7 @@ Ltac check_borrow :=
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

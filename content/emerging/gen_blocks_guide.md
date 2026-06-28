@@ -8,19 +8,19 @@
 
 ## 📋 目录
 
-- [`gen` Blocks 与 `yield` 表达式指南](#gen-blocks-与-yield-表达式指南)
-  - [📋 目录](#-目录)
-  - [🎯 什么是生成器](#-什么是生成器)
-  - [⚡ 基础语法](#-基础语法)
-  - [🔀 与 Iterators 对比](#-与-iterators-对比)
-    - [传统 Iterator](#传统-iterator)
-    - [生成器版本](#生成器版本)
-  - [📊 与 Async 对比](#-与-async-对比)
-  - [🔄 实际用例](#-实际用例)
-    - [文件行过滤流](#文件行过滤流)
-    - [组合生成器](#组合生成器)
-  - [⚠️ 当前限制](#️-当前限制)
-  - [🔗 参考资源](#-参考资源)
+- [`gen` Blocks 与 `yield` 表达式指南](.#gen-blocks-与-yield-表达式指南)
+  - [📋 目录](.#-目录)
+  - [🎯 什么是生成器](.#-什么是生成器)
+  - [⚡ 基础语法](.#-基础语法)
+  - [🔀 与 Iterators 对比](.#-与-iterators-对比)
+    - [传统 Iterator](.#传统-iterator)
+    - [生成器版本](.#生成器版本)
+  - [📊 与 Async 对比](.#-与-async-对比)
+  - [🔄 实际用例](.#-实际用例)
+    - [文件行过滤流](.#文件行过滤流)
+    - [组合生成器](.#组合生成器)
+  - [⚠️ 当前限制](.#️-当前限制)
+  - [🔗 参考资源](.#-参考资源)
 
 ---
 
@@ -198,7 +198,7 @@ fn flatten_nested<T>(nested: Vec<Vec<T>>) -> impl Iterator<Item = T> {
 ## 🔗 参考资源
 
 - [RFC 3513: Gen Blocks](https://github.com/rust-lang/rfcs/pull/3513)
-- [项目 C08 算法模块](../../crates/c08_algorithms/)
+- [项目 C08 算法模块](../../crates/c08_algorithms)
 - [Rust Nightly 文档](https://doc.rust-lang.org/nightly/unstable-book/)
 
 ---

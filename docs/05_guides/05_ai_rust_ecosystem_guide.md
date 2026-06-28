@@ -17,47 +17,47 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [AI + Rust 生态指南](#ai--rust-生态指南)
-  - [📑 目录](#-目录)
-  - [文档定位](#文档定位)
-  - [一、AI 辅助 Rust 开发](#一ai-辅助-rust-开发)
-  - [二、Rust 构建 AI/ML 应用](#二rust-构建-aiml-应用)
-    - [2.1 深度学习框架](#21-深度学习框架)
-    - [2.2 LLM 推理](#22-llm-推理)
-    - [2.3 与 C01–C12 的关联](#23-与-c01c12-的关联)
-  - [三、推荐学习路径](#三推荐学习路径)
-    - [路径 A：AI 辅助学 Rust（先 AI 后 Rust）](#路径-aai-辅助学-rust先-ai-后-rust)
-    - [路径 B：Rust 构建 AI（先 Rust 后 AI）](#路径-brust-构建-ai先-rust-后-ai)
-    - [路径 C：AI + Rust 双轨](#路径-cai--rust-双轨)
-  - [四、入门示例](#四入门示例)
-    - [4.1 Candle 最小示例](#41-candle-最小示例)
-    - [4.2 Candle 神经网络推理](#42-candle-神经网络推理)
-    - [4.3 Burn 最小示例](#43-burn-最小示例)
-    - [4.4 使用 Candle 加载预训练模型](#44-使用-candle-加载预训练模型)
-    - [4.5 本地 LLM 推理 (llm crate)](#45-本地-llm-推理-llm-crate)
-    - [4.6 并发数据加载器](#46-并发数据加载器)
-  - [五、RAG 索引建议](#五rag-索引建议)
-  - [六、最佳实践](#六最佳实践)
-    - [6.1 内存管理](#61-内存管理)
-    - [6.2 批量处理](#62-批量处理)
-    - [6.3 错误处理](#63-错误处理)
-  - [七、后续计划（扩展方向）](#七后续计划扩展方向)
-  - [八、使用场景](#八使用场景)
-    - [场景1: AI 辅助 Rust 学习](#场景1-ai-辅助-rust-学习)
-    - [场景2: 本地 LLM 推理服务](#场景2-本地-llm-推理服务)
-    - [场景3: 嵌入式 AI 推理](#场景3-嵌入式-ai-推理)
-    - [场景4: 生产级 ML Pipeline](#场景4-生产级-ml-pipeline)
-  - [九、形式化链接](#九形式化链接)
-  - [十、相关文档](#十相关文档)
-  - [Rust 1.95+ 在 AI/ML 开发中的应用](#rust-195-在-aiml-开发中的应用)
-    - [array\_windows 在特征工程中的应用](#array_windows-在特征工程中的应用)
-    - [LazyLock 在模型缓存中的应用](#lazylock-在模型缓存中的应用)
-    - [ControlFlow 在数据处理管道中的应用](#controlflow-在数据处理管道中的应用)
-    - [数学常量在算法优化中的应用](#数学常量在算法优化中的应用)
+- [AI + Rust 生态指南](.#ai--rust-生态指南)
+  - [📑 目录](.#-目录)
+  - [文档定位](.#文档定位)
+  - [一、AI 辅助 Rust 开发](.#一ai-辅助-rust-开发)
+  - [二、Rust 构建 AI/ML 应用](.#二rust-构建-aiml-应用)
+    - [2.1 深度学习框架](.#21-深度学习框架)
+    - [2.2 LLM 推理](.#22-llm-推理)
+    - [2.3 与 C01–C12 的关联](.#23-与-c01c12-的关联)
+  - [三、推荐学习路径](.#三推荐学习路径)
+    - [路径 A：AI 辅助学 Rust（先 AI 后 Rust）](.#路径-aai-辅助学-rust先-ai-后-rust)
+    - [路径 B：Rust 构建 AI（先 Rust 后 AI）](.#路径-brust-构建-ai先-rust-后-ai)
+    - [路径 C：AI + Rust 双轨](.#路径-cai--rust-双轨)
+  - [四、入门示例](.#四入门示例)
+    - [4.1 Candle 最小示例](.#41-candle-最小示例)
+    - [4.2 Candle 神经网络推理](.#42-candle-神经网络推理)
+    - [4.3 Burn 最小示例](.#43-burn-最小示例)
+    - [4.4 使用 Candle 加载预训练模型](.#44-使用-candle-加载预训练模型)
+    - [4.5 本地 LLM 推理 (llm crate)](.#45-本地-llm-推理-llm-crate)
+    - [4.6 并发数据加载器](.#46-并发数据加载器)
+  - [五、RAG 索引建议](.#五rag-索引建议)
+  - [六、最佳实践](.#六最佳实践)
+    - [6.1 内存管理](.#61-内存管理)
+    - [6.2 批量处理](.#62-批量处理)
+    - [6.3 错误处理](.#63-错误处理)
+  - [七、后续计划（扩展方向）](.#七后续计划扩展方向)
+  - [八、使用场景](.#八使用场景)
+    - [场景1: AI 辅助 Rust 学习](.#场景1-ai-辅助-rust-学习)
+    - [场景2: 本地 LLM 推理服务](.#场景2-本地-llm-推理服务)
+    - [场景3: 嵌入式 AI 推理](.#场景3-嵌入式-ai-推理)
+    - [场景4: 生产级 ML Pipeline](.#场景4-生产级-ml-pipeline)
+  - [九、形式化链接](.#九形式化链接)
+  - [十、相关文档](.#十相关文档)
+  - [Rust 1.95+ 在 AI/ML 开发中的应用](.#rust-195-在-aiml-开发中的应用)
+    - [array\_windows 在特征工程中的应用](.#array_windows-在特征工程中的应用)
+    - [LazyLock 在模型缓存中的应用](.#lazylock-在模型缓存中的应用)
+    - [ControlFlow 在数据处理管道中的应用](.#controlflow-在数据处理管道中的应用)
+    - [数学常量在算法优化中的应用](.#数学常量在算法优化中的应用)
 <a id="状态--深度整合完成"></a>
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+  - [**状态**: ✅ 深度整合完成](.#状态--深度整合完成)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 文档定位
 >
@@ -537,7 +537,7 @@ type Result<T> = std::result::Result<T, AIError>;
 在资源受限设备运行 AI 模型：
 
 - 使用 Candle 的轻量级特性
-- 结合 [嵌入式 Rust 指南](./05_embedded_rust_guide.md) 进行边缘部署
+- 结合 [嵌入式 Rust 指南](05_embedded_rust_guide.md) 进行边缘部署
 
 ### 场景4: 生产级 ML Pipeline
 
@@ -560,7 +560,7 @@ type Result<T> = std::result::Result<T, AIError>;
 | **前置知识** | C01 所有权 |
 | :--- | :--- |
 | :--- | :--- |
-| **进阶主题** | [05_performance_tuning_guide.md](./05_performance_tuning_guide.md) |
+| **进阶主题** | [05_performance_tuning_guide.md](05_performance_tuning_guide.md) |
 | :--- | :--- |
 | **相关指南** | [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md) |
 | :--- | :--- |
@@ -578,7 +578,7 @@ type Result<T> = std::result::Result<T, AIError>;
 - [官方资源映射](../01_learning/01_official_resources_mapping.md)
 - [Burn](https://burn.dev/) | [Candle](https://github.com/huggingface/candle) | [llm](https://docs.rs/llm)
 - 10_best_practices.md
-- [05_performance_tuning_guide.md](./05_performance_tuning_guide.md)
+- [05_performance_tuning_guide.md](05_performance_tuning_guide.md)
 
 ---
 
@@ -725,7 +725,7 @@ pub fn golden_ratio_search_lr(
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [05_guides 目录](./README.md)
+- [05_guides 目录](README.md)
 - [docs 索引](../README.md)
 
 ---

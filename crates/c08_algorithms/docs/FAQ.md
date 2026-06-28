@@ -2,19 +2,19 @@
 
 > **文档定位**: 算法常见问题快速解答，涵盖算法选择、复杂度分析、异步算法等核心疑问
 > **使用方式**: 通过问题索引快速定位问题，获取详细答案和示例
-> **相关文档**: [主索引](./00_MASTER_INDEX.md) | [README](./README.md) | [Glossary](./Glossary.md)
+> **相关文档**: [主索引](00_MASTER_INDEX.md) | [README](README.md) | [Glossary](Glossary.md)
 
 ## 📊 目录
 
-- [C08 算法: 常见问题解答 (FAQ)](#c08-算法-常见问题解答-faq)
-  - [📊 目录](#-目录)
-  - [问答详解](#问答详解)
-    - [Q1: 如何选择合适的算法？](#q1-如何选择合适的算法)
-    - [Q2: 如何分析算法复杂度？](#q2-如何分析算法复杂度)
-    - [Q3: Rust中如何实现异步算法？](#q3-rust中如何实现异步算法)
-    - [Q4: 如何优化算法性能？](#q4-如何优化算法性能)
-    - [Q5: 数据结构该如何选择？](#q5-数据结构该如何选择)
-  - [📚 延伸阅读](#-延伸阅读)
+- [C08 算法: 常见问题解答 (FAQ)](.#c08-算法-常见问题解答-faq)
+  - [📊 目录](.#-目录)
+  - [问答详解](.#问答详解)
+    - [Q1: 如何选择合适的算法？](.#q1-如何选择合适的算法)
+    - [Q2: 如何分析算法复杂度？](.#q2-如何分析算法复杂度)
+    - [Q3: Rust中如何实现异步算法？](.#q3-rust中如何实现异步算法)
+    - [Q4: 如何优化算法性能？](.#q4-如何优化算法性能)
+    - [Q5: 数据结构该如何选择？](.#q5-数据结构该如何选择)
+  - [📚 延伸阅读](.#-延伸阅读)
 
 **最后更新**: 2025-10-19
 **适用版本**: Rust 1.75+
@@ -69,7 +69,7 @@ fn merge_sort<T: Ord + Clone>(arr: &mut [T]) {
 5. 编写基准测试验证
 ```
 
-**相关**: [algorithm_index](./tier_03_references/01_算法分类参考.md) | [algorithm_complexity](./tier_02_guides/03_算法复杂度分析.md)
+**相关**: [algorithm_index](tier_03_references/01_算法分类参考.md) | [algorithm_complexity](tier_02_guides/03_算法复杂度分析.md)
 
 ---
 
@@ -148,7 +148,7 @@ fn binary_search_recursive<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
 - ✅ 考虑最坏情况
 - ✅ 使用递归树分析递归算法
 
-**相关**: [algorithm_complexity](./algorithm_complexity.md)
+**相关**: [algorithm_complexity](algorithm_complexity.md)
 
 ---
 
@@ -237,7 +237,7 @@ async fn async_fibonacci(n: u64) -> u64 {
 - ⚠️ 异步开销可能超过收益
 - ⚠️ 使用`spawn_blocking`处理阻塞操作
 
-**相关**: [并行与异步算法](./tier_02_guides/05_并行与异步算法.md) | [ASYNC_RECURSION_ANALYSIS](../../c09_design_pattern/docs/ASYNC_RECURSION_ANALYSIS.md)
+**相关**: [并行与异步算法](tier_02_guides/05_并行与异步算法.md) | [ASYNC_RECURSION_ANALYSIS](../../c09_design_pattern/docs/ASYNC_RECURSION_ANALYSIS.md)
 
 ---
 
@@ -336,7 +336,7 @@ fn fib_optimal(n: u64) -> u64 {
 4. 验证 (再次测量)
 ```
 
-**相关**: [性能优化实践](./tier_02_guides/04_性能优化实践.md) | [算法性能参考](./tier_03_references/04_算法性能参考.md)
+**相关**: [性能优化实践](tier_02_guides/04_性能优化实践.md) | [算法性能参考](tier_03_references/04_算法性能参考.md)
 
 ---
 
@@ -419,18 +419,18 @@ lru.get(&key);  // O(1)
 4. **需要优先级**: BinaryHeap
 5. **特殊需求**: 自定义实现
 
-**相关**: [data_structures](./data_structures.md)
+**相关**: [data_structures](data_structures.md)
 
 ---
 
 ## 📚 延伸阅读
 
-- [algorithm_index](./algorithm_index.md) - 算法索引
-- [algorithm_complexity](./algorithm_complexity.md) - 复杂度分析
-- [async_algorithms](./async_algorithms.md) - 异步算法
-- [performance_optimization](./performance_optimization.md) - 性能优化
-- [data_structures](./data_structures.md) - 数据结构
-- [主索引](./00_MASTER_INDEX.md) - 返回主索引
+- [algorithm_index](algorithm_index.md) - 算法索引
+- [algorithm_complexity](algorithm_complexity.md) - 复杂度分析
+- [async_algorithms](async_algorithms.md) - 异步算法
+- [performance_optimization](performance_optimization.md) - 性能优化
+- [data_structures](data_structures.md) - 数据结构
+- [主索引](00_MASTER_INDEX.md) - 返回主索引
 
 ---
 

@@ -12,8 +12,8 @@
 > **A/S/P 标记**: **S** — Security
 > **双维定位**: S×Ops — 供应链安全与运维实践
 > **定位**: 帮助开发者理解 Rust 1.96.0 中 Cargo 的两个 CVE，建立“升级 + 审计 + 验证”的供应链安全习惯。
-> **前置概念**: [Toolchain](./01_toolchain.md) · [Public/Private Dependencies](./10_public_private_deps.md) · [Security Practices](./19_security_practices.md)
-> **后置概念**: [Cross Compilation](./17_cross_compilation.md) · [DevOps and CI/CD](./28_devops_and_ci_cd.md)
+> **前置概念**: [Toolchain](01_toolchain.md) · [Public/Private Dependencies](10_public_private_deps.md) · [Security Practices](19_security_practices.md)
+> **后置概念**: [Cross Compilation](17_cross_compilation.md) · [DevOps and CI/CD](28_devops_and_ci_cd.md)
 
 ---
 
@@ -26,46 +26,46 @@
 
 ## 📑 目录
 
-- [Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223](#cargo-安全公告cve-2026-5222-与-cve-2026-5223)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 影响范围：仅第三方 registry](#11-影响范围仅第三方-registry)
-    - [1.2 CVE-2026-5222：URL 规范化导致的凭证泄露](#12-cve-2026-5222url-规范化导致的凭证泄露)
-      - [漏洞机理](#漏洞机理)
-      - [攻击条件](#攻击条件)
-      - [修复行为](#修复行为)
-    - [1.3 CVE-2026-5223：tarball 符号链接越界提取](#13-cve-2026-5223tarball-符号链接越界提取)
-      - [漏洞机理](#漏洞机理-1)
-      - [攻击后果](#攻击后果)
-      - [修复行为](#修复行为-1)
-    - [1.4 Rust 1.96.0 的修复行为](#14-rust-1960-的修复行为)
-  - [二、缓解措施与安全实践](#二缓解措施与安全实践)
-    - [2.1 立即升级工具链](#21-立即升级工具链)
-    - [2.2 审计 registry 来源](#22-审计-registry-来源)
-    - [2.3 验证 crate tarball](#23-验证-crate-tarball)
-    - [2.4 安全的 Cargo.toml 与 registry 配置](#24-安全的-cargotoml-与-registry-配置)
-      - [示例 1：限制依赖来源，避免意外引入第三方 registry](#示例-1限制依赖来源避免意外引入第三方-registry)
-      - [示例 2：配置私有 registry 并使用 source replacement](#示例-2配置私有-registry-并使用-source-replacement)
-      - [示例 3：CI 中集成安全扫描](#示例-3ci-中集成安全扫描)
-  - [三、反命题与边界分析](#三反命题与边界分析)
-    - [3.1 反命题树](#31-反命题树)
-    - [3.2 边界极限](#32-边界极限)
-  - [四、来源与延伸阅读](#四来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [十、安全边界与常见错误](#十安全边界与常见错误)
-    - [10.1 常见错误：误以为 crates.io 用户也受影响](#101-常见错误误以为-cratesio-用户也受影响)
-    - [10.2 常见错误：在旧版本 Cargo 上仅做服务端限制](#102-常见错误在旧版本-cargo-上仅做服务端限制)
-    - [10.3 常见错误：把 `.git` 后缀当作同一 registry](#103-常见错误把-git-后缀当作同一-registry)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：这两个 CVE 是否影响只使用 crates.io 的开发者？（理解层）](#测验-1这两个-cve-是否影响只使用-cratesio-的开发者理解层)
-    - [测验 2：CVE-2026-5222 的核心问题是什么？（理解层）](#测验-2cve-2026-5222-的核心问题是什么理解层)
-    - [测验 3：CVE-2026-5223 能造成什么后果？（理解层）](#测验-3cve-2026-5223-能造成什么后果理解层)
-    - [测验 4：Rust 1.96.0 对 CVE-2026-5223 的修复行为是什么？（应用层）](#测验-4rust-1960-对-cve-2026-5223-的修复行为是什么应用层)
-    - [测验 5：如何设计一个相对安全的第三方 registry 使用流程？（应用层）](#测验-5如何设计一个相对安全的第三方-registry-使用流程应用层)
-  - [实践](#实践)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223](.#cargo-安全公告cve-2026-5222-与-cve-2026-5223)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 影响范围：仅第三方 registry](.#11-影响范围仅第三方-registry)
+    - [1.2 CVE-2026-5222：URL 规范化导致的凭证泄露](.#12-cve-2026-5222url-规范化导致的凭证泄露)
+      - [漏洞机理](.#漏洞机理)
+      - [攻击条件](.#攻击条件)
+      - [修复行为](.#修复行为)
+    - [1.3 CVE-2026-5223：tarball 符号链接越界提取](.#13-cve-2026-5223tarball-符号链接越界提取)
+      - [漏洞机理](.#漏洞机理-1)
+      - [攻击后果](.#攻击后果)
+      - [修复行为](.#修复行为-1)
+    - [1.4 Rust 1.96.0 的修复行为](.#14-rust-1960-的修复行为)
+  - [二、缓解措施与安全实践](.#二缓解措施与安全实践)
+    - [2.1 立即升级工具链](.#21-立即升级工具链)
+    - [2.2 审计 registry 来源](.#22-审计-registry-来源)
+    - [2.3 验证 crate tarball](.#23-验证-crate-tarball)
+    - [2.4 安全的 Cargo.toml 与 registry 配置](.#24-安全的-cargotoml-与-registry-配置)
+      - [示例 1：限制依赖来源，避免意外引入第三方 registry](.#示例-1限制依赖来源避免意外引入第三方-registry)
+      - [示例 2：配置私有 registry 并使用 source replacement](.#示例-2配置私有-registry-并使用-source-replacement)
+      - [示例 3：CI 中集成安全扫描](.#示例-3ci-中集成安全扫描)
+  - [三、反命题与边界分析](.#三反命题与边界分析)
+    - [3.1 反命题树](.#31-反命题树)
+    - [3.2 边界极限](.#32-边界极限)
+  - [四、来源与延伸阅读](.#四来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [十、安全边界与常见错误](.#十安全边界与常见错误)
+    - [10.1 常见错误：误以为 crates.io 用户也受影响](.#101-常见错误误以为-cratesio-用户也受影响)
+    - [10.2 常见错误：在旧版本 Cargo 上仅做服务端限制](.#102-常见错误在旧版本-cargo-上仅做服务端限制)
+    - [10.3 常见错误：把 `.git` 后缀当作同一 registry](.#103-常见错误把-git-后缀当作同一-registry)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：这两个 CVE 是否影响只使用 crates.io 的开发者？（理解层）](.#测验-1这两个-cve-是否影响只使用-cratesio-的开发者理解层)
+    - [测验 2：CVE-2026-5222 的核心问题是什么？（理解层）](.#测验-2cve-2026-5222-的核心问题是什么理解层)
+    - [测验 3：CVE-2026-5223 能造成什么后果？（理解层）](.#测验-3cve-2026-5223-能造成什么后果理解层)
+    - [测验 4：Rust 1.96.0 对 CVE-2026-5223 的修复行为是什么？（应用层）](.#测验-4rust-1960-对-cve-2026-5223-的修复行为是什么应用层)
+    - [测验 5：如何设计一个相对安全的第三方 registry 使用流程？（应用层）](.#测验-5如何设计一个相对安全的第三方-registry-使用流程应用层)
+  - [实践](.#实践)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -338,11 +338,11 @@ graph TD
 
 ## 相关概念文件
 
-- [Toolchain](./01_toolchain.md) — Rust 工具链与 rustup
-- [Public/Private Dependencies](./10_public_private_deps.md) — 依赖可见性与 registry 选择
-- [Security Practices](./19_security_practices.md) — Rust 安全开发生命周期（Lifetimes）
-- [DevOps and CI/CD](./28_devops_and_ci_cd.md) — CI 安全扫描实践
-- [Cross Compilation](./17_cross_compilation.md) — 在隔离环境中构建与审计
+- [Toolchain](01_toolchain.md) — Rust 工具链与 rustup
+- [Public/Private Dependencies](10_public_private_deps.md) — 依赖可见性与 registry 选择
+- [Security Practices](19_security_practices.md) — Rust 安全开发生命周期（Lifetimes）
+- [DevOps and CI/CD](28_devops_and_ci_cd.md) — CI 安全扫描实践
+- [Cross Compilation](17_cross_compilation.md) — 在隔离环境中构建与审计
 
 ---
 
@@ -439,8 +439,8 @@ Cargo 会**拒绝解压任何包含符号链接的 crate tarball**，无论 tarb
 
 > **相关资源**:
 >
-> - [crates/ 示例代码](../crates/) — 与本文概念对应的可编译示例
-> - [exercises/ 练习](../exercises/) — 动手编程挑战
+> - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../exercises) — 动手编程挑战
 > - [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md)
 >
 > **建议**: 在一个测试项目中执行 `rustup update stable` 并验证 `cargo --version >= 1.96.0`；使用 `cargo metadata` 检查是否存在非 crates.io registry 来源；尝试 `cargo vendor` 并观察 vendor 目录结构。
@@ -460,7 +460,7 @@ Cargo 会**拒绝解压任何包含符号链接的 crate tarball**，无论 tarb
 | crates.io 禁止 symlink / 不满足域名前提 ⟹ 免疫 | 官方公告明确 | 仅使用 crates.io 的开发者无直接暴露 | 高 |
 | CI 集成 cargo-audit + vendor ⟹ 可持续监控 | 已知 CVE 数据库更新 | 能及时响应未来供应链漏洞 | 高 |
 
-> **过渡**: 理解 CVE 修复后，应结合 [DevOps and CI/CD](./28_devops_and_ci_cd.md) 把 `cargo audit`、`cargo vendor`、registry 白名单纳入流水线。
+> **过渡**: 理解 CVE 修复后，应结合 [DevOps and CI/CD](28_devops_and_ci_cd.md) 把 `cargo audit`、`cargo vendor`、registry 白名单纳入流水线。
 
 ### 反命题与边界
 

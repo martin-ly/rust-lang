@@ -9,33 +9,33 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Rust 1.93 特性族多维概念矩阵](#rust-193-特性族多维概念矩阵)
-  - [📑 目录](#-目录)
-  - [1. 内存与所有权族](#1-内存与所有权族)
-  - [2. 类型系统族](#2-类型系统族)
-  - [3. Trait 与多态族](#3-trait-与多态族)
-  - [4. 控制流与模式匹配族](#4-控制流与模式匹配族)
-  - [5. 并发与异步族](#5-并发与异步族)
-  - [6. 宏与元编程族](#6-宏与元编程族)
-  - [7. 模块与可见性族](#7-模块与可见性族)
-  - [8. 常量与编译期族](#8-常量与编译期族)
-  - [9. FFI 与不安全族](#9-ffi-与不安全族)
-  - [10. Rust 1.93 新增/变更族](#10-rust-193-新增变更族)
-  - [相关文档](#相关文档)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档-1)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [Rust 1.93 特性族多维概念矩阵](.#rust-193-特性族多维概念矩阵)
+  - [📑 目录](.#-目录)
+  - [1. 内存与所有权族](.#1-内存与所有权族)
+  - [2. 类型系统族](.#2-类型系统族)
+  - [3. Trait 与多态族](.#3-trait-与多态族)
+  - [4. 控制流与模式匹配族](.#4-控制流与模式匹配族)
+  - [5. 并发与异步族](.#5-并发与异步族)
+  - [6. 宏与元编程族](.#6-宏与元编程族)
+  - [7. 模块与可见性族](.#7-模块与可见性族)
+  - [8. 常量与编译期族](.#8-常量与编译期族)
+  - [9. FFI 与不安全族](.#9-ffi-与不安全族)
+  - [10. Rust 1.93 新增/变更族](.#10-rust-193-新增变更族)
+  - [相关文档](.#相关文档)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档-1)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 > **创建日期**: 2026-02-13
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **目标**: 按特性族展开「概念-公理-定理-证明方法-反例」五维矩阵，便于逐特性查找
-> **上位文档**: [UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md)、[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md)
+> **上位文档**: [UNIFIED_SYSTEMATIC_FRAMEWORK](10_unified_systematic_framework.md)、[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](10_rust_193_language_features_comprehensive_analysis.md)
 
 ---
 
@@ -220,9 +220,9 @@
 
 | 文档 | 用途 |
 | :--- | :--- |
-| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md) | 92 项特性完整分析 |
-| [UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md) | 全局统一框架、五维矩阵总览 |
-| [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) | 形式化证明索引 |
+| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](10_rust_193_language_features_comprehensive_analysis.md) | 92 项特性完整分析 |
+| [UNIFIED_SYSTEMATIC_FRAMEWORK](10_unified_systematic_framework.md) | 全局统一框架、五维矩阵总览 |
+| [PROOF_INDEX](10_proof_index.md) | 形式化证明索引 |
 | [toolchain/07_rust_1.93_full_changelog](../06_toolchain/06_07_rust_1_93_full_changelog.md) | Rust 1.93 完整变更清单 |
 
 ---
@@ -291,7 +291,7 @@
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

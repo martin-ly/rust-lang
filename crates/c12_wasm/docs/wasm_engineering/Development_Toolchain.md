@@ -3,7 +3,7 @@
 > **文档类型**: 工程实践 - 开发工具链
 > **文档定位**: WASM 开发全流程工具链配置和使用指南
 > **项目状态**: ✅ 完整完成
-> **相关文档**: [测试策略](./09.2_Testing_Strategies.md) | [调试技术](./09.3_Debugging_Techniques.md)
+> **相关文档**: [测试策略](09.2_Testing_Strategies.md) | [调试技术](09.3_Debugging_Techniques.md)
 
 **最后更新**: 2025-12-11
 **适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2
@@ -12,55 +12,55 @@
 
 ## 📋 目录
 
-- [C12 WASM - 开发工具链完整指南](#c12-wasm---开发工具链完整指南)
-  - [📋 目录](#-目录)
-  - [🎯 概述](#-概述)
-  - [🔧 编译器工具链](#-编译器工具链)
-    - [Rust 工具链 (推荐)](#rust-工具链-推荐)
-      - [目标平台](#目标平台)
-      - [wasm-bindgen 集成](#wasm-bindgen-集成)
-      - [构建优化](#构建优化)
-    - [Emscripten (C/C++)](#emscripten-cc)
-      - [编译选项](#编译选项)
-      - [优化级别对比](#优化级别对比)
-      - [核心特性](#核心特性)
-    - [AssemblyScript](#assemblyscript)
-  - [🐛 调试工具](#-调试工具)
-    - [Chrome DevTools](#chrome-devtools)
-      - [Source Maps 配置](#source-maps-配置)
-      - [调试功能](#调试功能)
-    - [WABT 工具套件](#wabt-工具套件)
-    - [wasm-opt 优化器](#wasm-opt-优化器)
-  - [📊 性能分析工具](#-性能分析工具)
-    - [Chrome Performance Profiler](#chrome-performance-profiler)
-      - [使用流程](#使用流程)
-    - [自定义性能分析](#自定义性能分析)
-      - [插桩方案](#插桩方案)
-  - [📦 包管理工具](#-包管理工具)
-    - [wasm-pack](#wasm-pack)
-    - [wapm](#wapm)
-  - [🏗️ 构建系统集成](#️-构建系统集成)
-    - [Cargo + wasm-bindgen](#cargo--wasm-bindgen)
-    - [CMake + Emscripten](#cmake--emscripten)
-  - [💻 开发环境配置](#-开发环境配置)
-    - [VS Code 配置](#vs-code-配置)
-      - [推荐扩展](#推荐扩展)
-      - [launch.json 配置](#launchjson-配置)
-      - [tasks.json 配置](#tasksjson-配置)
-    - [Docker 开发环境](#docker-开发环境)
-  - [✅ 质量保证工具](#-质量保证工具)
-    - [wasm-validate](#wasm-validate)
-    - [静态分析](#静态分析)
-  - [🎯 最佳实践](#-最佳实践)
-    - [开发工作流](#开发工作流)
-    - [大小优化检查清单](#大小优化检查清单)
-    - [性能优化检查清单](#性能优化检查清单)
-    - [调试技巧](#调试技巧)
-  - [📚 参考资源](#-参考资源)
-    - [官方文档](#官方文档)
-    - [工具文档](#工具文档)
-    - [相关文档](#相关文档)
-  - [**最后更新**: 2025-12-11](#最后更新-2025-12-11)
+- [C12 WASM - 开发工具链完整指南](.#c12-wasm---开发工具链完整指南)
+  - [📋 目录](.#-目录)
+  - [🎯 概述](.#-概述)
+  - [🔧 编译器工具链](.#-编译器工具链)
+    - [Rust 工具链 (推荐)](.#rust-工具链-推荐)
+      - [目标平台](.#目标平台)
+      - [wasm-bindgen 集成](.#wasm-bindgen-集成)
+      - [构建优化](.#构建优化)
+    - [Emscripten (C/C++)](.#emscripten-cc)
+      - [编译选项](.#编译选项)
+      - [优化级别对比](.#优化级别对比)
+      - [核心特性](.#核心特性)
+    - [AssemblyScript](.#assemblyscript)
+  - [🐛 调试工具](.#-调试工具)
+    - [Chrome DevTools](.#chrome-devtools)
+      - [Source Maps 配置](.#source-maps-配置)
+      - [调试功能](.#调试功能)
+    - [WABT 工具套件](.#wabt-工具套件)
+    - [wasm-opt 优化器](.#wasm-opt-优化器)
+  - [📊 性能分析工具](.#-性能分析工具)
+    - [Chrome Performance Profiler](.#chrome-performance-profiler)
+      - [使用流程](.#使用流程)
+    - [自定义性能分析](.#自定义性能分析)
+      - [插桩方案](.#插桩方案)
+  - [📦 包管理工具](.#-包管理工具)
+    - [wasm-pack](.#wasm-pack)
+    - [wapm](.#wapm)
+  - [🏗️ 构建系统集成](.#️-构建系统集成)
+    - [Cargo + wasm-bindgen](.#cargo--wasm-bindgen)
+    - [CMake + Emscripten](.#cmake--emscripten)
+  - [💻 开发环境配置](.#-开发环境配置)
+    - [VS Code 配置](.#vs-code-配置)
+      - [推荐扩展](.#推荐扩展)
+      - [launch.json 配置](.#launchjson-配置)
+      - [tasks.json 配置](.#tasksjson-配置)
+    - [Docker 开发环境](.#docker-开发环境)
+  - [✅ 质量保证工具](.#-质量保证工具)
+    - [wasm-validate](.#wasm-validate)
+    - [静态分析](.#静态分析)
+  - [🎯 最佳实践](.#-最佳实践)
+    - [开发工作流](.#开发工作流)
+    - [大小优化检查清单](.#大小优化检查清单)
+    - [性能优化检查清单](.#性能优化检查清单)
+    - [调试技巧](.#调试技巧)
+  - [📚 参考资源](.#-参考资源)
+    - [官方文档](.#官方文档)
+    - [工具文档](.#工具文档)
+    - [相关文档](.#相关文档)
+  - [**最后更新**: 2025-12-11](.#最后更新-2025-12-11)
 
 ---
 
@@ -968,10 +968,10 @@ console.log("Memory growth:", memoryAfter - memoryBefore, "bytes")
 
 ### 相关文档
 
-- 📄 [测试策略](./09.2_Testing_Strategies.md) - 单元测试与集成测试
-- 📄 [调试技术](./09.3_Debugging_Techniques.md) - 深入调试技巧
-- 📄 [CI/CD 集成](./09.4_CICD_Integration.md) - 持续集成部署
-- 📄 [实战案例](./09.5_Real_World_Case_Studies.md) - 真实项目案例
+- 📄 [测试策略](09.2_Testing_Strategies.md) - 单元测试与集成测试
+- 📄 [调试技术](09.3_Debugging_Techniques.md) - 深入调试技巧
+- 📄 [CI/CD 集成](09.4_CICD_Integration.md) - 持续集成部署
+- 📄 [实战案例](09.5_Real_World_Case_Studies.md) - 真实项目案例
 
 ---
 

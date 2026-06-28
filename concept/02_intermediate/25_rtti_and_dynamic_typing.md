@@ -7,8 +7,8 @@
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: S+A
 > **双维定位**: C×Ana
-> **前置概念**: [Type Erasure](../03_advanced/17_type_erasure.md) · [Type System](../01_foundation/04_type_system.md) · [Generics](./02_generics.md)
-> **后置概念**: [Error Handling Deep Dive](./15_error_handling_deep_dive.md) · [Advanced Traits](./19_advanced_traits.md)
+> **前置概念**: [Type Erasure](../03_advanced/17_type_erasure.md) · [Type System](../01_foundation/04_type_system.md) · [Generics](02_generics.md)
+> **后置概念**: [Error Handling Deep Dive](15_error_handling_deep_dive.md) · [Advanced Traits](19_advanced_traits.md)
 > **主要来源**: [TRPL Ch 17 — OOP Features of Rust](https://doc.rust-lang.org/book/ch17-02-trait-objects.html) · [Rust std::any](https://doc.rust-lang.org/std/any/index.html) · [Rust Reference — TypeId](https://doc.rust-lang.org/std/any/struct.TypeId.html) · [quinedot — The `dyn Any` Guide](https://quinedot.github.io/rust-learning/dyn-any.html) · [Rust How-to Book — Dynamic Typing](https://rust-how-to.org/patterns/dynamic-typing.html) · [C++ Reference — typeid](https://en.cppreference.com/w/cpp/language/typeid) · [C++ Reference — dynamic_cast](https://en.cppreference.com/w/cpp/language/dynamic_cast) · [Brown CRP — RTTI and dynamic_cast](https://cel.cs.brown.edu/crp/idioms/rtti_dynamic_cast.html)
 ---
 

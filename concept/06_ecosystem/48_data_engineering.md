@@ -14,7 +14,7 @@
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Ana — 分析 Rust 数据工程生态的技术选型与工程权衡
 > **前置依赖**: [类型系统（Type System）](../01_foundation/04_type_system.md) · [泛型（Generics）](../02_intermediate/02_generics.md) · Async/Await · Machine Learning Ecosystem
-> **后置延伸**: [流处理生态](./36_stream_processing_ecosystem.md) · [云原生](./24_cloud_native.md) · [性能优化](./15_performance_optimization.md)
+> **后置延伸**: [流处理生态](36_stream_processing_ecosystem.md) · [云原生](24_cloud_native.md) · [性能优化](15_performance_optimization.md)
 >
 > **来源**: [polars](https://docs.rs/polars/) · [arrow-rs](https://docs.rs/arrow/) · [datafusion](https://docs.rs/datafusion/)
 > **前置概念**: N/A
@@ -33,46 +33,46 @@
 
 ## 📑 目录
 
-- [Data Engineering（数据工程）](#data-engineering数据工程)
-  - [📑 目录](#-目录)
-  - [一、权威定义（Definition）](#一权威定义definition)
-    - [1.1 数据工程的分层架构](#11-数据工程的分层架构)
-    - [1.2 ETL 与 ELT 范式](#12-etl-与-elt-范式)
-  - [二、概念属性矩阵](#二概念属性矩阵)
-  - [三、数据摄取层（Ingestion）](#三数据摄取层ingestion)
-    - [3.1 批处理摄取](#31-批处理摄取)
-    - [3.2 流处理摄取](#32-流处理摄取)
-    - [3.3 变更数据捕获（CDC）](#33-变更数据捕获cdc)
-  - [四、数据转换层（Transformation）](#四数据转换层transformation)
-    - [4.1 DataFrame 转换](#41-dataframe-转换)
-    - [4.2 SQL 查询引擎](#42-sql-查询引擎)
-    - [4.3 Rust 中的 ETL 管道骨架](#43-rust-中的-etl-管道骨架)
-  - [五、数据存储层（Storage）](#五数据存储层storage)
-    - [5.1 列式存储：Parquet](#51-列式存储parquet)
-    - [5.2 对象存储抽象](#52-对象存储抽象)
-    - [5.3 数据湖与 Delta Lake](#53-数据湖与-delta-lake)
-  - [六、数据服务层（Serving）](#六数据服务层serving)
-    - [6.1 查询加速](#61-查询加速)
-    - [6.2 数据 API](#62-数据-api)
-  - [七、Rust 数据工程的技术优势](#七rust-数据工程的技术优势)
-  - [八、反命题与边界](#八反命题与边界)
-    - [8.1 反命题树](#81-反命题树)
-    - [8.2 边界极限](#82-边界极限)
-  - [九、边界测试](#九边界测试)
-    - [9.1 边界测试：Parquet 写入时 schema 演化导致读取失败（兼容性错误）](#91-边界测试parquet-写入时-schema-演化导致读取失败兼容性错误)
-    - [9.2 边界测试：对象存储流式下载内存溢出（运行时错误）](#92-边界测试对象存储流式下载内存溢出运行时错误)
-    - [9.3 边界测试：ETL 管道中类型推断失败导致运行时 panic（类型错误）](#93-边界测试etl-管道中类型推断失败导致运行时-panic类型错误)
-  - [相关概念文件](#相关概念文件)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：`polars` 在 Rust 数据工程中与 `pandas` 有什么对应关系？（理解层）](#测验-1polars-在-rust-数据工程中与-pandas-有什么对应关系理解层)
-    - [测验 2：`arrow-rs` 在数据生态中扮演什么角色？（理解层）](#测验-2arrow-rs-在数据生态中扮演什么角色理解层)
-    - [测验 3：为什么列式存储（Columnar Storage）比行式存储更适合分析查询？（理解层）](#测验-3为什么列式存储columnar-storage比行式存储更适合分析查询理解层)
-    - [测验 4：`datafusion` 在 Rust 中提供什么功能？（理解层）](#测验-4datafusion-在-rust-中提供什么功能理解层)
-    - [测验 5：Rust 的内存安全如何帮助数据管道避免生产事故？（理解层）](#测验-5rust-的内存安全如何帮助数据管道避免生产事故理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Data Engineering（数据工程）](.#data-engineering数据工程)
+  - [📑 目录](.#-目录)
+  - [一、权威定义（Definition）](.#一权威定义definition)
+    - [1.1 数据工程的分层架构](.#11-数据工程的分层架构)
+    - [1.2 ETL 与 ELT 范式](.#12-etl-与-elt-范式)
+  - [二、概念属性矩阵](.#二概念属性矩阵)
+  - [三、数据摄取层（Ingestion）](.#三数据摄取层ingestion)
+    - [3.1 批处理摄取](.#31-批处理摄取)
+    - [3.2 流处理摄取](.#32-流处理摄取)
+    - [3.3 变更数据捕获（CDC）](.#33-变更数据捕获cdc)
+  - [四、数据转换层（Transformation）](.#四数据转换层transformation)
+    - [4.1 DataFrame 转换](.#41-dataframe-转换)
+    - [4.2 SQL 查询引擎](.#42-sql-查询引擎)
+    - [4.3 Rust 中的 ETL 管道骨架](.#43-rust-中的-etl-管道骨架)
+  - [五、数据存储层（Storage）](.#五数据存储层storage)
+    - [5.1 列式存储：Parquet](.#51-列式存储parquet)
+    - [5.2 对象存储抽象](.#52-对象存储抽象)
+    - [5.3 数据湖与 Delta Lake](.#53-数据湖与-delta-lake)
+  - [六、数据服务层（Serving）](.#六数据服务层serving)
+    - [6.1 查询加速](.#61-查询加速)
+    - [6.2 数据 API](.#62-数据-api)
+  - [七、Rust 数据工程的技术优势](.#七rust-数据工程的技术优势)
+  - [八、反命题与边界](.#八反命题与边界)
+    - [8.1 反命题树](.#81-反命题树)
+    - [8.2 边界极限](.#82-边界极限)
+  - [九、边界测试](.#九边界测试)
+    - [9.1 边界测试：Parquet 写入时 schema 演化导致读取失败（兼容性错误）](.#91-边界测试parquet-写入时-schema-演化导致读取失败兼容性错误)
+    - [9.2 边界测试：对象存储流式下载内存溢出（运行时错误）](.#92-边界测试对象存储流式下载内存溢出运行时错误)
+    - [9.3 边界测试：ETL 管道中类型推断失败导致运行时 panic（类型错误）](.#93-边界测试etl-管道中类型推断失败导致运行时-panic类型错误)
+  - [相关概念文件](.#相关概念文件)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：`polars` 在 Rust 数据工程中与 `pandas` 有什么对应关系？（理解层）](.#测验-1polars-在-rust-数据工程中与-pandas-有什么对应关系理解层)
+    - [测验 2：`arrow-rs` 在数据生态中扮演什么角色？（理解层）](.#测验-2arrow-rs-在数据生态中扮演什么角色理解层)
+    - [测验 3：为什么列式存储（Columnar Storage）比行式存储更适合分析查询？（理解层）](.#测验-3为什么列式存储columnar-storage比行式存储更适合分析查询理解层)
+    - [测验 4：`datafusion` 在 Rust 中提供什么功能？（理解层）](.#测验-4datafusion-在-rust-中提供什么功能理解层)
+    - [测验 5：Rust 的内存安全如何帮助数据管道避免生产事故？（理解层）](.#测验-5rust-的内存安全如何帮助数据管道避免生产事故理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 > **Bloom 层级**: 应用 → 分析
 > **变更日志**:
@@ -839,15 +839,15 @@ fn good_csv_parse() -> PolarsResult<DataFrame> {
 
 ## 相关概念文件
 
-- [Machine Learning Ecosystem](./46_machine_learning_ecosystem.md) — polars、arrow、DataFusion、candle
-- [流处理生态](./36_stream_processing_ecosystem.md) — Kafka、Timely Dataflow、实时计算
-- [云原生](./24_cloud_native.md) — 容器化、对象存储、微服务部署
-- [性能优化](./15_performance_optimization.md) — SIMD、缓存优化、内存布局
-- [API Design Patterns](./42_api_design_patterns.md) — REST/gRPC 数据服务
+- [Machine Learning Ecosystem](46_machine_learning_ecosystem.md) — polars、arrow、DataFusion、candle
+- [流处理生态](36_stream_processing_ecosystem.md) — Kafka、Timely Dataflow、实时计算
+- [云原生](24_cloud_native.md) — 容器化、对象存储、微服务部署
+- [性能优化](15_performance_optimization.md) — SIMD、缓存优化、内存布局
+- [API Design Patterns](42_api_design_patterns.md) — REST/gRPC 数据服务
 - [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、异步（Async）并行
-- [数据库系统](./37_database_systems.md) — 存储引擎、事务、索引
-- [网络协议](./38_network_protocols.md) — HTTP/2、gRPC、对象存储协议
-- [安全与密码学](./43_security_cryptography.md) — 数据加密、合规性
+- [数据库系统](37_database_systems.md) — 存储引擎、事务、索引
+- [网络协议](38_network_protocols.md) — HTTP/2、gRPC、对象存储协议
+- [安全与密码学](43_security_cryptography.md) — 数据加密、合规性
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

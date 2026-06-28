@@ -86,7 +86,7 @@
 | [RFC 3501](https://rust-lang.github.io/rfcs//3501-edition-2024.html) | Edition 2024 | Accepted | 1.85 |
 | [RFC 3627](https://rust-lang.github.io/rfcs//3627-match-ergonomics-2024.html) | Return type notation (RTN) | Accepted | nightly |
 
-> **完整 RFC 索引**: 见 [./RFC_INDEX.md](./RFC_INDEX.md)（建设中，目标覆盖 50+ 关键 RFC）
+> **完整 RFC 索引**: 见 [./RFC_INDEX.md](RFC_INDEX.md)（建设中，目标覆盖 50+ 关键 RFC）
 
 ---
 

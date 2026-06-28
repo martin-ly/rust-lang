@@ -20,11 +20,11 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [抽象工厂](./10_abstract_factory.md)
-- [建造者](./10_builder.md)
-- [工厂方法](./10_factory_method.md)
-- [原型](./10_prototype.md)
-- [单例](./10_singleton.md)
+- [抽象工厂](10_abstract_factory.md)
+- [建造者](10_builder.md)
+- [工厂方法](10_factory_method.md)
+- [原型](10_prototype.md)
+- [单例](10_singleton.md)
 
 ## 相关链接
 >

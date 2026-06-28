@@ -26,11 +26,11 @@
 
 | 文档 | 来源 | 状态 | 输出 |
 | :--- | :--- | :--- | :--- |
-| Rust 1.93.0 公告 | blog.rust-lang.org | ✅ | [07_rust_1.93_full_changelog](./06_toolchain/07_rust_1.93_full_changelog.md) |
-| Rust 1.93.1 公告 | blog.rust-lang.org | ✅ | [12_rust_1.93.1_vs_1.93.0](./06_toolchain/12_rust_1.93.1_vs_1.93.0_comparison.md) |
-| Rust 1.94 Beta | releases.rs | ✅ | [13_rust_1.94_preview](./06_toolchain/13_rust_1.94_preview.md) |
-| Rust 1.95 Nightly | releases.rs | ✅ | [14_rust_1.95_nightly_preview](./06_toolchain/14_rust_1.95_nightly_preview.md) |
-| Cargo 1.93 更新 | Inside Rust Blog | ✅ | [11_rust_1.93_cargo_rustdoc_changes](./06_toolchain/11_rust_1.93_cargo_rustdoc_changes.md) |
+| Rust 1.93.0 公告 | blog.rust-lang.org | ✅ | [07_rust_1.93_full_changelog](06_toolchain/07_rust_1.93_full_changelog.md) |
+| Rust 1.93.1 公告 | blog.rust-lang.org | ✅ | [12_rust_1.93.1_vs_1.93.0](06_toolchain/12_rust_1.93.1_vs_1.93.0_comparison.md) |
+| Rust 1.94 Beta | releases.rs | ✅ | [13_rust_1.94_preview](06_toolchain/13_rust_1.94_preview.md) |
+| Rust 1.95 Nightly | releases.rs | ✅ | [14_rust_1.95_nightly_preview](06_toolchain/14_rust_1.95_nightly_preview.md) |
+| Cargo 1.93 更新 | Inside Rust Blog | ✅ | [11_rust_1.93_cargo_rustdoc_changes](06_toolchain/11_rust_1.93_cargo_rustdoc_changes.md) |
 
 ### 2. 新特性追踪
 
@@ -46,10 +46,10 @@
 
 | 特性 | 类别 | 形式化文档更新 |
 | :--- | :--- | :--- |
-| `control_flow_ok` | 标准库 | [type_system_foundations](./research_notes/type_theory/type_system_foundations.md) |
-| `int_format_into` | 标准库 | [ownership_model](./research_notes/formal_methods/ownership_model.md) |
-| `RangeToInclusive` | 语言 | [type_system_foundations](./research_notes/type_theory/type_system_foundations.md) |
-| `refcell_try_map` | 标准库 | [ownership_model](./research_notes/formal_methods/ownership_model.md) |
+| `control_flow_ok` | 标准库 | [type_system_foundations](research_notes/type_theory/type_system_foundations.md) |
+| `int_format_into` | 标准库 | [ownership_model](research_notes/formal_methods/ownership_model.md) |
+| `RangeToInclusive` | 语言 | [type_system_foundations](research_notes/type_theory/type_system_foundations.md) |
+| `refcell_try_map` | 标准库 | [ownership_model](research_notes/formal_methods/ownership_model.md) |
 | rustdoc `--merge` | 工具链 | - |
 
 #### Rust 1.95 (Nightly)
@@ -66,11 +66,11 @@
 
 | 目标 | 优先级 | 对齐文档 |
 | :--- | :--- | :--- |
-| 异步编程改进 | 旗舰 | [async_state_machine](./research_notes/formal_methods/async_state_machine.md) |
-| Pin 人体工学 | 高 | [pin_self_referential](./research_notes/formal_methods/pin_self_referential.md) |
-| 就地初始化 | 高 | [ownership_model](./research_notes/formal_methods/ownership_model.md) |
-| build-std | 中 | [06_toolchain](./06_toolchain/README.md) |
-| 下一代 trait 求解器 | 高 | [type_system_foundations](./research_notes/type_theory/type_system_foundations.md) |
+| 异步编程改进 | 旗舰 | [async_state_machine](research_notes/formal_methods/async_state_machine.md) |
+| Pin 人体工学 | 高 | [pin_self_referential](research_notes/formal_methods/pin_self_referential.md) |
+| 就地初始化 | 高 | [ownership_model](research_notes/formal_methods/ownership_model.md) |
+| build-std | 中 | [06_toolchain](06_toolchain/README.md) |
+| 下一代 trait 求解器 | 高 | [type_system_foundations](research_notes/type_theory/type_system_foundations.md) |
 
 ---
 
@@ -80,10 +80,10 @@
 
 | 定义 | 文档 | 描述 |
 | :--- | :--- | :--- |
-| Def 1.94-1 | [RUST_194_195_FEATURE_MATRIX](./research_notes/RUST_194_195_FEATURE_MATRIX.md) | RangeToInclusive 类型 |
-| Def 1.94-2 | [RUST_194_195_FEATURE_MATRIX](./research_notes/RUST_194_195_FEATURE_MATRIX.md) | ControlFlow::ok 转换 |
-| Def 1.94-3 | [RUST_194_195_FEATURE_MATRIX](./research_notes/RUST_194_195_FEATURE_MATRIX.md) | RefCell::try_map |
-| Def 1.95-1 | [RUST_194_195_FEATURE_MATRIX](./research_notes/RUST_194_195_FEATURE_MATRIX.md) | 生成器状态机 |
+| Def 1.94-1 | [RUST_194_195_FEATURE_MATRIX](research_notes/RUST_194_195_FEATURE_MATRIX.md) | RangeToInclusive 类型 |
+| Def 1.94-2 | [RUST_194_195_FEATURE_MATRIX](research_notes/RUST_194_195_FEATURE_MATRIX.md) | ControlFlow::ok 转换 |
+| Def 1.94-3 | [RUST_194_195_FEATURE_MATRIX](research_notes/RUST_194_195_FEATURE_MATRIX.md) | RefCell::try_map |
+| Def 1.95-1 | [RUST_194_195_FEATURE_MATRIX](research_notes/RUST_194_195_FEATURE_MATRIX.md) | 生成器状态机 |
 
 ### 定理更新
 
@@ -130,9 +130,9 @@
 
 | 文档路径 | 描述 | 字数 |
 | :--- | :--- | :---: |
-| [06_toolchain/13_rust_1.94_preview.md](./06_toolchain/13_rust_1.94_preview.md) | 1.94 Beta 预览 | 7,800+ |
-| [06_toolchain/14_rust_1.95_nightly_preview.md](./06_toolchain/14_rust_1.95_nightly_preview.md) | 1.95 Nightly 预览 | 7,600+ |
-| [research_notes/RUST_194_195_FEATURE_MATRIX.md](./research_notes/RUST_194_195_FEATURE_MATRIX.md) | 特性矩阵与形式化 | 6,800+ |
+| [06_toolchain/13_rust_1.94_preview.md](06_toolchain/13_rust_1.94_preview.md) | 1.94 Beta 预览 | 7,800+ |
+| [06_toolchain/14_rust_1.95_nightly_preview.md](06_toolchain/14_rust_1.95_nightly_preview.md) | 1.95 Nightly 预览 | 7,600+ |
+| [research_notes/RUST_194_195_FEATURE_MATRIX.md](research_notes/RUST_194_195_FEATURE_MATRIX.md) | 特性矩阵与形式化 | 6,800+ |
 | **总计** | **3 个新文档** | **22,000+** |
 
 ---

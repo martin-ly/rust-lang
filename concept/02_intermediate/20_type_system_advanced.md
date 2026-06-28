@@ -17,7 +17,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析高级类型系统（Type System）特性的形式化边界
 > **定位**: 深入分析 Rust **类型系统（Type System）的高级特性**——从 GATs、impl Trait 到类型级计算和 const generics，揭示 Rust 如何在保持编译期安全的同时提供强大的抽象能力。
-> **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Generics](./02_generics.md) · [Traits](./01_traits.md)
+> **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Generics](02_generics.md) · [Traits](01_traits.md)
 > **后置概念**: [RustBelt](../04_formal/04_rustbelt.md) · [Category Theory](../04_formal/10_category_theory.md)
 
 ---
@@ -30,47 +30,47 @@
 
 ## 📑 目录
 
-- [高级类型系统：从关联类型到类型级编程](#高级类型系统从关联类型到类型级编程)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 impl Trait 的演进](#11-impl-trait-的演进)
-    - [1.2 Const Generics](#12-const-generics)
-    - [1.3 类型推断与约束求解](#13-类型推断与约束求解)
-  - [二、技术细节](#二技术细节)
-    - [2.1 impl Trait 在参数位置](#21-impl-trait-在参数位置)
-    - [2.2 Const Generics 实战](#22-const-generics-实战)
-    - [2.3 类型别名与类型族](#23-类型别名与类型族)
-  - [三、类型系统模式矩阵](#三类型系统模式矩阵)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、常见陷阱](#五常见陷阱)
-  - [七、C++ 运算符重载/类型转换 vs Rust Trait 系统](#七c-运算符重载类型转换-vs-rust-trait-系统)
-    - [7.1 运算符重载机制对比](#71-运算符重载机制对比)
-    - [7.2 关键差异分析](#72-关键差异分析)
-      - [C++ 的 `operator*` 歧义](#c-的-operator-歧义)
-      - [C++ 的隐式类型转换 vs Rust 的显式 Trait](#c-的隐式类型转换-vs-rust-的显式-trait)
-    - [7.3 重载决议 vs Trait 解析](#73-重载决议-vs-trait-解析)
-    - [编译错误示例](#编译错误示例)
-    - [4.4 边界测试：高阶 trait bound（HRTB）误用（编译错误）](#44-边界测试高阶-trait-boundhrtb误用编译错误)
-    - [4.5 边界测试：关联类型与泛型参数冲突（编译错误）](#45-边界测试关联类型与泛型参数冲突编译错误)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
-  - [权威来源索引](#权威来源索引)
-    - [10.3 边界测试：impl Trait 的自动 trait 捕获规则（编译错误）](#103-边界测试impl-trait-的自动-trait-捕获规则编译错误)
-    - [10.4 边界测试：关联类型的默认实现与具体化冲突（编译错误）](#104-边界测试关联类型的默认实现与具体化冲突编译错误)
-    - [10.2 边界测试：函数重复定义](#102-边界测试函数重复定义)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：关联类型（Associated Type）与泛型参数的区别是什么？什么时候更适合用关联类型？（理解层）](#测验-1关联类型associated-type与泛型参数的区别是什么什么时候更适合用关联类型理解层)
-    - [测验 2：`type Output = i32;` 这种语法出现在哪里？它有什么约束？（理解层）](#测验-2type-output--i32-这种语法出现在哪里它有什么约束理解层)
-    - [测验 3：Higher-Ranked Trait Bounds（HRTB）`for<'a>` 的用途是什么？（理解层）](#测验-3higher-ranked-trait-boundshrtbfora-的用途是什么理解层)
-    - [测验 4：类型级编程（Type-Level Programming）在 Rust 中主要通过什么机制实现？（理解层）](#测验-4类型级编程type-level-programming在-rust-中主要通过什么机制实现理解层)
-    - [测验 5：`impl Trait` 在函数参数位置和返回位置各有什么语义？（理解层）](#测验-5impl-trait-在函数参数位置和返回位置各有什么语义理解层)
-  - [实践](#实践)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [高级类型系统：从关联类型到类型级编程](.#高级类型系统从关联类型到类型级编程)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 impl Trait 的演进](.#11-impl-trait-的演进)
+    - [1.2 Const Generics](.#12-const-generics)
+    - [1.3 类型推断与约束求解](.#13-类型推断与约束求解)
+  - [二、技术细节](.#二技术细节)
+    - [2.1 impl Trait 在参数位置](.#21-impl-trait-在参数位置)
+    - [2.2 Const Generics 实战](.#22-const-generics-实战)
+    - [2.3 类型别名与类型族](.#23-类型别名与类型族)
+  - [三、类型系统模式矩阵](.#三类型系统模式矩阵)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、常见陷阱](.#五常见陷阱)
+  - [七、C++ 运算符重载/类型转换 vs Rust Trait 系统](.#七c-运算符重载类型转换-vs-rust-trait-系统)
+    - [7.1 运算符重载机制对比](.#71-运算符重载机制对比)
+    - [7.2 关键差异分析](.#72-关键差异分析)
+      - [C++ 的 `operator*` 歧义](.#c-的-operator-歧义)
+      - [C++ 的隐式类型转换 vs Rust 的显式 Trait](.#c-的隐式类型转换-vs-rust-的显式-trait)
+    - [7.3 重载决议 vs Trait 解析](.#73-重载决议-vs-trait-解析)
+    - [编译错误示例](.#编译错误示例)
+    - [4.4 边界测试：高阶 trait bound（HRTB）误用（编译错误）](.#44-边界测试高阶-trait-boundhrtb误用编译错误)
+    - [4.5 边界测试：关联类型与泛型参数冲突（编译错误）](.#45-边界测试关联类型与泛型参数冲突编译错误)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [逆向推理链（Backward Reasoning）](.#逆向推理链backward-reasoning)
+  - [权威来源索引](.#权威来源索引)
+    - [10.3 边界测试：impl Trait 的自动 trait 捕获规则（编译错误）](.#103-边界测试impl-trait-的自动-trait-捕获规则编译错误)
+    - [10.4 边界测试：关联类型的默认实现与具体化冲突（编译错误）](.#104-边界测试关联类型的默认实现与具体化冲突编译错误)
+    - [10.2 边界测试：函数重复定义](.#102-边界测试函数重复定义)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：关联类型（Associated Type）与泛型参数的区别是什么？什么时候更适合用关联类型？（理解层）](.#测验-1关联类型associated-type与泛型参数的区别是什么什么时候更适合用关联类型理解层)
+    - [测验 2：`type Output = i32;` 这种语法出现在哪里？它有什么约束？（理解层）](.#测验-2type-output--i32-这种语法出现在哪里它有什么约束理解层)
+    - [测验 3：Higher-Ranked Trait Bounds（HRTB）`for<'a>` 的用途是什么？（理解层）](.#测验-3higher-ranked-trait-boundshrtbfora-的用途是什么理解层)
+    - [测验 4：类型级编程（Type-Level Programming）在 Rust 中主要通过什么机制实现？（理解层）](.#测验-4类型级编程type-level-programming在-rust-中主要通过什么机制实现理解层)
+    - [测验 5：`impl Trait` 在函数参数位置和返回位置各有什么语义？（理解层）](.#测验-5impl-trait-在函数参数位置和返回位置各有什么语义理解层)
+  - [实践](.#实践)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -759,8 +759,8 @@ impl Container for BadWrapper {
 ## 相关概念文件
 
 - [Type System](../01_foundation/04_type_system.md) — 类型系统基础
-- [Generics](./02_generics.md) — 泛型系统
-- [Traits](./01_traits.md) — Trait 系统
+- [Generics](02_generics.md) — 泛型系统
+- [Traits](01_traits.md) — Trait 系统
 - [RustBelt](../04_formal/04_rustbelt.md) — 形式化验证
 
 ---
@@ -947,8 +947,8 @@ fn main() {}
 
 > **相关资源**:
 >
-> - [crates/ 示例代码](../crates/) — 与本文概念对应的可编译示例
-> - [exercises/ 练习](../exercises/) — 动手编程挑战
+> - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../exercises) — 动手编程挑战
 > - [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

@@ -2,39 +2,39 @@
 
 > **文档定位**: 设计模式学习和实践中的常见问题快速解答
 > **使用方式**: 遇到问题时快速查找解决方案和最佳实践
-> **相关文档**: [主索引](./00_MASTER_INDEX.md) | [README](./README.md) | [Glossary](./Glossary.md)
+> **相关文档**: [主索引](00_MASTER_INDEX.md) | [README](README.md) | [Glossary](Glossary.md)
 
 ## 📊 目录
 
-- [C09 设计模式: 常见问题解答 (FAQ)](#c09-设计模式-常见问题解答-faq)
-  - [📊 目录](#-目录)
-  - [📋 问题索引](#-问题索引)
-  - [基础概念](#基础概念)
-    - [Q1: 什么时候应该使用设计模式？](#q1-什么时候应该使用设计模式)
-    - [Q2: Rust 中的设计模式与其他语言有什么不同？](#q2-rust-中的设计模式与其他语言有什么不同)
-    - [Q3: 如何选择合适的设计模式？](#q3-如何选择合适的设计模式)
-  - [创建型模式](#创建型模式)
-    - [Q4: Rust 中如何实现线程安全的单例模式？](#q4-rust-中如何实现线程安全的单例模式)
-    - [Q5: 建造者模式如何保证必填字段？](#q5-建造者模式如何保证必填字段)
-  - [结构型模式](#结构型模式)
-    - [Q6: 适配器模式 vs 桥接模式，有什么区别？](#q6-适配器模式-vs-桥接模式有什么区别)
-    - [Q7: 何时使用装饰器模式 vs 代理模式？](#q7-何时使用装饰器模式-vs-代理模式)
-  - [行为型模式](#行为型模式)
-    - [Q8: 观察者模式如何避免借用检查问题？](#q8-观察者模式如何避免借用检查问题)
-    - [Q9: 状态模式 vs 策略模式？](#q9-状态模式-vs-策略模式)
-  - [并发与异步](#并发与异步)
-    - [Q10: async/await vs 线程，如何选择？](#q10-asyncawait-vs-线程如何选择)
-    - [Q11: Actor 模式 vs Reactor 模式？](#q11-actor-模式-vs-reactor-模式)
-    - [Q12: 如何处理异步递归？](#q12-如何处理异步递归)
-  - [性能优化](#性能优化)
-    - [Q13: 设计模式会影响性能吗？](#q13-设计模式会影响性能吗)
-    - [Q14: 如何测量设计模式的性能？](#q14-如何测量设计模式的性能)
-  - [Rust特性](#rust特性)
-    - [Q15: Rust 1.92.0 有哪些与设计模式相关的新特性？](#q15-rust-1920-有哪些与设计模式相关的新特性)
-  - [实践问题](#实践问题)
-    - [Q16: 如何在实际项目中应用设计模式？](#q16-如何在实际项目中应用设计模式)
-    - [Q17: 团队如何统一设计模式的使用？](#q17-团队如何统一设计模式的使用)
-  - [📚 延伸阅读](#-延伸阅读)
+- [C09 设计模式: 常见问题解答 (FAQ)](.#c09-设计模式-常见问题解答-faq)
+  - [📊 目录](.#-目录)
+  - [📋 问题索引](.#-问题索引)
+  - [基础概念](.#基础概念)
+    - [Q1: 什么时候应该使用设计模式？](.#q1-什么时候应该使用设计模式)
+    - [Q2: Rust 中的设计模式与其他语言有什么不同？](.#q2-rust-中的设计模式与其他语言有什么不同)
+    - [Q3: 如何选择合适的设计模式？](.#q3-如何选择合适的设计模式)
+  - [创建型模式](.#创建型模式)
+    - [Q4: Rust 中如何实现线程安全的单例模式？](.#q4-rust-中如何实现线程安全的单例模式)
+    - [Q5: 建造者模式如何保证必填字段？](.#q5-建造者模式如何保证必填字段)
+  - [结构型模式](.#结构型模式)
+    - [Q6: 适配器模式 vs 桥接模式，有什么区别？](.#q6-适配器模式-vs-桥接模式有什么区别)
+    - [Q7: 何时使用装饰器模式 vs 代理模式？](.#q7-何时使用装饰器模式-vs-代理模式)
+  - [行为型模式](.#行为型模式)
+    - [Q8: 观察者模式如何避免借用检查问题？](.#q8-观察者模式如何避免借用检查问题)
+    - [Q9: 状态模式 vs 策略模式？](.#q9-状态模式-vs-策略模式)
+  - [并发与异步](.#并发与异步)
+    - [Q10: async/await vs 线程，如何选择？](.#q10-asyncawait-vs-线程如何选择)
+    - [Q11: Actor 模式 vs Reactor 模式？](.#q11-actor-模式-vs-reactor-模式)
+    - [Q12: 如何处理异步递归？](.#q12-如何处理异步递归)
+  - [性能优化](.#性能优化)
+    - [Q13: 设计模式会影响性能吗？](.#q13-设计模式会影响性能吗)
+    - [Q14: 如何测量设计模式的性能？](.#q14-如何测量设计模式的性能)
+  - [Rust特性](.#rust特性)
+    - [Q15: Rust 1.92.0 有哪些与设计模式相关的新特性？](.#q15-rust-1920-有哪些与设计模式相关的新特性)
+  - [实践问题](.#实践问题)
+    - [Q16: 如何在实际项目中应用设计模式？](.#q16-如何在实际项目中应用设计模式)
+    - [Q17: 团队如何统一设计模式的使用？](.#q17-团队如何统一设计模式的使用)
+  - [📚 延伸阅读](.#-延伸阅读)
 
 **最后更新**: 2025-12-25
 **适用版本**: Rust 1.92.0+ (Edition 2024)
@@ -46,35 +46,35 @@
 
 **快速跳转**:
 
-- [C09 设计模式: 常见问题解答 (FAQ)](#c09-设计模式-常见问题解答-faq)
-  - [📊 目录](#-目录)
-  - [📋 问题索引](#-问题索引)
-  - [基础概念](#基础概念)
-    - [Q1: 什么时候应该使用设计模式？](#q1-什么时候应该使用设计模式)
-    - [Q2: Rust 中的设计模式与其他语言有什么不同？](#q2-rust-中的设计模式与其他语言有什么不同)
-    - [Q3: 如何选择合适的设计模式？](#q3-如何选择合适的设计模式)
-  - [创建型模式](#创建型模式)
-    - [Q4: Rust 中如何实现线程安全的单例模式？](#q4-rust-中如何实现线程安全的单例模式)
-    - [Q5: 建造者模式如何保证必填字段？](#q5-建造者模式如何保证必填字段)
-  - [结构型模式](#结构型模式)
-    - [Q6: 适配器模式 vs 桥接模式，有什么区别？](#q6-适配器模式-vs-桥接模式有什么区别)
-    - [Q7: 何时使用装饰器模式 vs 代理模式？](#q7-何时使用装饰器模式-vs-代理模式)
-  - [行为型模式](#行为型模式)
-    - [Q8: 观察者模式如何避免借用检查问题？](#q8-观察者模式如何避免借用检查问题)
-    - [Q9: 状态模式 vs 策略模式？](#q9-状态模式-vs-策略模式)
-  - [并发与异步](#并发与异步)
-    - [Q10: async/await vs 线程，如何选择？](#q10-asyncawait-vs-线程如何选择)
-    - [Q11: Actor 模式 vs Reactor 模式？](#q11-actor-模式-vs-reactor-模式)
-    - [Q12: 如何处理异步递归？](#q12-如何处理异步递归)
-  - [性能优化](#性能优化)
-    - [Q13: 设计模式会影响性能吗？](#q13-设计模式会影响性能吗)
-    - [Q14: 如何测量设计模式的性能？](#q14-如何测量设计模式的性能)
-  - [Rust特性](#rust特性)
-    - [Q15: Rust 1.92.0 有哪些与设计模式相关的新特性？](#q15-rust-1920-有哪些与设计模式相关的新特性)
-  - [实践问题](#实践问题)
-    - [Q16: 如何在实际项目中应用设计模式？](#q16-如何在实际项目中应用设计模式)
-    - [Q17: 团队如何统一设计模式的使用？](#q17-团队如何统一设计模式的使用)
-  - [📚 延伸阅读](#-延伸阅读)
+- [C09 设计模式: 常见问题解答 (FAQ)](.#c09-设计模式-常见问题解答-faq)
+  - [📊 目录](.#-目录)
+  - [📋 问题索引](.#-问题索引)
+  - [基础概念](.#基础概念)
+    - [Q1: 什么时候应该使用设计模式？](.#q1-什么时候应该使用设计模式)
+    - [Q2: Rust 中的设计模式与其他语言有什么不同？](.#q2-rust-中的设计模式与其他语言有什么不同)
+    - [Q3: 如何选择合适的设计模式？](.#q3-如何选择合适的设计模式)
+  - [创建型模式](.#创建型模式)
+    - [Q4: Rust 中如何实现线程安全的单例模式？](.#q4-rust-中如何实现线程安全的单例模式)
+    - [Q5: 建造者模式如何保证必填字段？](.#q5-建造者模式如何保证必填字段)
+  - [结构型模式](.#结构型模式)
+    - [Q6: 适配器模式 vs 桥接模式，有什么区别？](.#q6-适配器模式-vs-桥接模式有什么区别)
+    - [Q7: 何时使用装饰器模式 vs 代理模式？](.#q7-何时使用装饰器模式-vs-代理模式)
+  - [行为型模式](.#行为型模式)
+    - [Q8: 观察者模式如何避免借用检查问题？](.#q8-观察者模式如何避免借用检查问题)
+    - [Q9: 状态模式 vs 策略模式？](.#q9-状态模式-vs-策略模式)
+  - [并发与异步](.#并发与异步)
+    - [Q10: async/await vs 线程，如何选择？](.#q10-asyncawait-vs-线程如何选择)
+    - [Q11: Actor 模式 vs Reactor 模式？](.#q11-actor-模式-vs-reactor-模式)
+    - [Q12: 如何处理异步递归？](.#q12-如何处理异步递归)
+  - [性能优化](.#性能优化)
+    - [Q13: 设计模式会影响性能吗？](.#q13-设计模式会影响性能吗)
+    - [Q14: 如何测量设计模式的性能？](.#q14-如何测量设计模式的性能)
+  - [Rust特性](.#rust特性)
+    - [Q15: Rust 1.92.0 有哪些与设计模式相关的新特性？](.#q15-rust-1920-有哪些与设计模式相关的新特性)
+  - [实践问题](.#实践问题)
+    - [Q16: 如何在实际项目中应用设计模式？](.#q16-如何在实际项目中应用设计模式)
+    - [Q17: 团队如何统一设计模式的使用？](.#q17-团队如何统一设计模式的使用)
+  - [📚 延伸阅读](.#-延伸阅读)
 
 ---
 
@@ -111,7 +111,7 @@ use std::sync::OnceLock;
 static CONNECTION_POOL: OnceLock<Pool> = OnceLock::new();
 ```
 
-**相关**: [OVERVIEW.md](./OVERVIEW.md)
+**相关**: [OVERVIEW.md](OVERVIEW.md)
 
 ---
 
@@ -154,7 +154,7 @@ fn use_strategy<S: Strategy>(strategy: &S) {
 }
 ```
 
-**相关**: [Glossary.md](./Glossary.md#零成本抽象-zero-cost-abstraction)
+**相关**: [Glossary.md](Glossary.md#零成本抽象-zero-cost-abstraction)
 
 ---
 
@@ -190,7 +190,7 @@ fn use_strategy<S: Strategy>(strategy: &S) {
    └─ 异步IO → async/await
 ```
 
-**相关**: [00_MASTER_INDEX.md](./00_MASTER_INDEX.md#按场景导航)
+**相关**: [00_MASTER_INDEX.md](00_MASTER_INDEX.md#按场景导航)
 
 ---
 
@@ -233,7 +233,7 @@ pub fn get_config() -> &'static Config {
 - `OnceLock`: 零成本，标准库支持
 - `lazy_static`: 需要外部依赖，但兼容性好
 
-**相关**: [src/creational/singleton/](../src/creational/singleton/)
+**相关**: [src/creational/singleton/](../src/creational/singleton)
 
 ---
 
@@ -305,7 +305,7 @@ impl Builder<Set, Set> {
 
 **优点**: 编译时保证，零运行时开销
 
-**相关**: [src/creational/builder/](../src/creational/builder/)
+**相关**: [src/creational/builder/](../src/creational/builder)
 
 ---
 
@@ -366,7 +366,7 @@ impl<R: Renderer> Shape<R> {
 }
 ```
 
-**相关**: [src/structural/adapter/](../src/structural/adapter/), [src/structural/bridge/](../src/structural/bridge/)
+**相关**: [src/structural/adapter/](../src/structural/adapter), [src/structural/bridge/](../src/structural/bridge)
 
 ---
 
@@ -421,7 +421,7 @@ impl<T: Component> Proxy<T> {
 }
 ```
 
-**相关**: [src/structural/decorator/](../src/structural/decorator/), [src/structural/proxy/](../src/structural/proxy/)
+**相关**: [src/structural/decorator/](../src/structural/decorator), [src/structural/proxy/](../src/structural/proxy)
 
 ---
 
@@ -489,7 +489,7 @@ impl Subject {
 }
 ```
 
-**相关**: [src/behavioral/observer/](../src/behavioral/observer/), [examples/gats_observer_demo.rs](../examples/gats_observer_demo.rs)
+**相关**: [src/behavioral/observer/](../src/behavioral/observer), [examples/gats_observer_demo.rs](../examples/gats_observer_demo.rs)
 
 ---
 
@@ -542,7 +542,7 @@ fn sort_data<S: SortStrategy>(strategy: &S, data: &mut [i32]) {
 }
 ```
 
-**相关**: [src/behavioral/state/](../src/behavioral/state/), [src/behavioral/strategy/](../src/behavioral/strategy/)
+**相关**: [src/behavioral/state/](../src/behavioral/state), [src/behavioral/strategy/](../src/behavioral/strategy)
 
 ---
 
@@ -589,7 +589,7 @@ async fn handle_request() {
 - async/await: 单线程可处理数万并发
 - 线程: 每线程 ~2MB 栈空间，数千并发已是极限
 
-**相关**: [docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md](./ASYNC_SYNC_EQUIVALENCE_THEORY.md)
+**相关**: [docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md](ASYNC_SYNC_EQUIVALENCE_THEORY.md)
 
 ---
 
@@ -649,7 +649,7 @@ impl Reactor {
 - Tokio 基于 Reactor 模式
 - Actor 可以在 Tokio 上实现
 
-**相关**: [docs/ACTOR_REACTOR_PATTERNS.md](./ACTOR_REACTOR_PATTERNS.md)
+**相关**: [docs/ACTOR_REACTOR_PATTERNS.md](ACTOR_REACTOR_PATTERNS.md)
 
 ---
 
@@ -703,7 +703,7 @@ async fn factorial(n: u64) -> u64 {
 
 **性能**: 尾递归 > Box::pin > async-recursion
 
-**相关**: [docs/ASYNC_RECURSION_ANALYSIS.md](./ASYNC_RECURSION_ANALYSIS.md)
+**相关**: [docs/ASYNC_RECURSION_ANALYSIS.md](ASYNC_RECURSION_ANALYSIS.md)
 
 ---
 
@@ -748,7 +748,7 @@ fn process(handler: &dyn Handler, data: Data) {
 3. 使用 `#[inline]` 提示编译器
 4. 运行 benchmark 验证
 
-**相关**: [benches/](../benches/)
+**相关**: [benches/](../benches)
 
 ---
 
@@ -910,7 +910,7 @@ fn get_config() -> &'static Config {
 - ❌ 为了模式而模式
 - ❌ 忽略简单解决方案
 
-**相关**: [OVERVIEW.md](./OVERVIEW.md)
+**相关**: [OVERVIEW.md](OVERVIEW.md)
 
 ---
 
@@ -954,22 +954,22 @@ enum-variant-names-threshold = 3
 
 ## 📚 延伸阅读
 
-- [主索引](./00_MASTER_INDEX.md) - 完整文档导航
-- [README](./README.md) - 项目概述
-- [Glossary](./Glossary.md) - 术语表（完整版）
-- [Tier 1 基础层](./tier_01_foundations/README.md) - 快速入门和基础参考
-- [Tier 1 术语表](./tier_01_foundations/03_术语表.md) - 核心术语快速参考
-- [Tier 1 常见问题](./tier_01_foundations/04_常见问题.md) - 新手常见问题解答
-- [综合指南](./COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) - 深度学习
-- [OVERVIEW](./OVERVIEW.md) - 文档概览
+- [主索引](00_MASTER_INDEX.md) - 完整文档导航
+- [README](README.md) - 项目概述
+- [Glossary](Glossary.md) - 术语表（完整版）
+- [Tier 1 基础层](tier_01_foundations/README.md) - 快速入门和基础参考
+- [Tier 1 术语表](tier_01_foundations/03_术语表.md) - 核心术语快速参考
+- [Tier 1 常见问题](tier_01_foundations/04_常见问题.md) - 新手常见问题解答
+- [综合指南](COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) - 深度学习
+- [OVERVIEW](OVERVIEW.md) - 文档概览
 
 ---
 
 **需要更多帮助？**
 
 - 查看 [示例代码](../examples/README.md)
-- 运行 [测试用例](../tests/)
-- 阅读 [源码实现](../src/)
+- 运行 [测试用例](../tests)
+- 阅读 [源码实现](../src)
 
 ---
 

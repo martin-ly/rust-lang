@@ -13,7 +13,7 @@
 > **双维定位**: P×Eva — 评估 Rust 在 AI 领域的应用
 > **定位**: 分析 Rust 在**AI/ML 基础设施**中的新兴应用——从张量运算、推理引擎到 ML 管道编排，揭示 Rust 如何在高性能 AI 系统中提供内存安全（Memory Safety）和低延迟优势。
 > **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [Concurrency](../03_advanced/01_concurrency.md) · [WebAssembly](../06_ecosystem/11_webassembly.md)
-> **后置概念**: [AI Integration](./01_ai_integration.md) · [Evolution](./03_evolution.md)
+> **后置概念**: [AI Integration](01_ai_integration.md) · [Evolution](03_evolution.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/) · [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
@@ -28,41 +28,41 @@
 
 ## 📑 目录
 
-- [Rust 在 AI 与机器学习中的新兴角色](#rust-在-ai-与机器学习中的新兴角色)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 为什么 AI 需要 Rust](#11-为什么-ai-需要-rust)
-    - [1.2 Rust ML 生态概览](#12-rust-ml-生态概览)
-    - [1.3 推理 vs 训练](#13-推理-vs-训练)
-  - [二、技术细节](#二技术细节)
-    - [2.1 Candle：纯 Rust ML 框架](#21-candle纯-rust-ml-框架)
-    - [2.2 ONNX Runtime 集成](#22-onnx-runtime-集成)
-    - [2.3 WebAssembly 推理](#23-webassembly-推理)
-    - [2.4 NVIDIA GPU 目标基线提升（Rust 1.97）](#24-nvidia-gpu-目标基线提升rust-197)
-  - [三、应用场景矩阵](#三应用场景矩阵)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、常见陷阱](#五常见陷阱)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：Rust in AI 的编译错误](#十边界测试rust-in-ai-的编译错误)
-    - [10.1 边界测试：`candle` 的张量形状不匹配（编译错误/运行时 panic）](#101-边界测试candle-的张量形状不匹配编译错误运行时-panic)
-    - [10.2 边界测试：`unsafe` 与 SIMD 的内在函数约束（编译错误）](#102-边界测试unsafe-与-simd-的内在函数约束编译错误)
-    - [10.6 边界测试：AI 模型的序列化与版本兼容性（运行时加载失败）](#106-边界测试ai-模型的序列化与版本兼容性运行时加载失败)
-    - [10.5 边界测试：Rust AI 推理框架的张量生命周期与 GPU 内存管理（运行时 OOM）](#105-边界测试rust-ai-推理框架的张量生命周期与-gpu-内存管理运行时-oom)
-    - [10.3 边界测试：Rust AI 框架的张量维度不匹配（运行时 panic）](#103-边界测试rust-ai-框架的张量维度不匹配运行时-panic)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：Rust 在 AI 生态中目前主要扮演什么角色？（理解层）](#测验-1rust-在-ai-生态中目前主要扮演什么角色理解层)
-    - [测验 2：为什么 AI 推理服务特别需要 Rust 的性能和安全性？（理解层）](#测验-2为什么-ai-推理服务特别需要-rust-的性能和安全性理解层)
-    - [测验 3：`candle` 与 `PyTorch` 在部署上有什么区别？（理解层）](#测验-3candle-与-pytorch-在部署上有什么区别理解层)
-    - [测验 4：Rust 如何通过 `ort` 与 ONNX 生态集成？（理解层）](#测验-4rust-如何通过-ort-与-onnx-生态集成理解层)
-    - [测验 5：Rust 在 AI 领域取代 Python 的主要障碍是什么？（理解层）](#测验-5rust-在-ai-领域取代-python-的主要障碍是什么理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Rust 在 AI 与机器学习中的新兴角色](.#rust-在-ai-与机器学习中的新兴角色)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 为什么 AI 需要 Rust](.#11-为什么-ai-需要-rust)
+    - [1.2 Rust ML 生态概览](.#12-rust-ml-生态概览)
+    - [1.3 推理 vs 训练](.#13-推理-vs-训练)
+  - [二、技术细节](.#二技术细节)
+    - [2.1 Candle：纯 Rust ML 框架](.#21-candle纯-rust-ml-框架)
+    - [2.2 ONNX Runtime 集成](.#22-onnx-runtime-集成)
+    - [2.3 WebAssembly 推理](.#23-webassembly-推理)
+    - [2.4 NVIDIA GPU 目标基线提升（Rust 1.97）](.#24-nvidia-gpu-目标基线提升rust-197)
+  - [三、应用场景矩阵](.#三应用场景矩阵)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、常见陷阱](.#五常见陷阱)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：Rust in AI 的编译错误](.#十边界测试rust-in-ai-的编译错误)
+    - [10.1 边界测试：`candle` 的张量形状不匹配（编译错误/运行时 panic）](.#101-边界测试candle-的张量形状不匹配编译错误运行时-panic)
+    - [10.2 边界测试：`unsafe` 与 SIMD 的内在函数约束（编译错误）](.#102-边界测试unsafe-与-simd-的内在函数约束编译错误)
+    - [10.6 边界测试：AI 模型的序列化与版本兼容性（运行时加载失败）](.#106-边界测试ai-模型的序列化与版本兼容性运行时加载失败)
+    - [10.5 边界测试：Rust AI 推理框架的张量生命周期与 GPU 内存管理（运行时 OOM）](.#105-边界测试rust-ai-推理框架的张量生命周期与-gpu-内存管理运行时-oom)
+    - [10.3 边界测试：Rust AI 框架的张量维度不匹配（运行时 panic）](.#103-边界测试rust-ai-框架的张量维度不匹配运行时-panic)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 在 AI 生态中目前主要扮演什么角色？（理解层）](.#测验-1rust-在-ai-生态中目前主要扮演什么角色理解层)
+    - [测验 2：为什么 AI 推理服务特别需要 Rust 的性能和安全性？（理解层）](.#测验-2为什么-ai-推理服务特别需要-rust-的性能和安全性理解层)
+    - [测验 3：`candle` 与 `PyTorch` 在部署上有什么区别？（理解层）](.#测验-3candle-与-pytorch-在部署上有什么区别理解层)
+    - [测验 4：Rust 如何通过 `ort` 与 ONNX 生态集成？（理解层）](.#测验-4rust-如何通过-ort-与-onnx-生态集成理解层)
+    - [测验 5：Rust 在 AI 领域取代 Python 的主要障碍是什么？（理解层）](.#测验-5rust-在-ai-领域取代-python-的主要障碍是什么理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -498,7 +498,7 @@ graph TD
 
 ## 相关概念文件
 
-- [AI Integration](./01_ai_integration.md) — AI 集成
+- [AI Integration](01_ai_integration.md) — AI 集成
 - [WebAssembly](../06_ecosystem/11_webassembly.md) — WebAssembly
 - [Concurrency](../03_advanced/01_concurrency.md) — 并发编程
 - [Unsafe](../03_advanced/03_unsafe.md) — 不安全代码

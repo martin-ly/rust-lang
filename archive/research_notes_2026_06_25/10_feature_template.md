@@ -16,30 +16,30 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Rust 特性精简模板](#rust-特性精简模板)
-  - [📑 目录](#-目录)
-  - [模板结构](#模板结构)
-  - [模板应用示例](#模板应用示例)
-    - [示例 1：if/else（控制流族）](#示例-1ifelse控制流族)
-    - [示例 2：声明宏（宏族）](#示例-2声明宏宏族)
-    - [示例 3：mod（模块族）](#示例-3mod模块族)
-    - [示例 4：const（常量族）](#示例-4const常量族)
-  - [与 RUST\_193 的对应](#与-rust_193-的对应)
-  - [索引](#索引)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [Rust 特性精简模板](.#rust-特性精简模板)
+  - [📑 目录](.#-目录)
+  - [模板结构](.#模板结构)
+  - [模板应用示例](.#模板应用示例)
+    - [示例 1：if/else（控制流族）](.#示例-1ifelse控制流族)
+    - [示例 2：声明宏（宏族）](.#示例-2声明宏宏族)
+    - [示例 3：mod（模块族）](.#示例-3mod模块族)
+    - [示例 4：const（常量族）](.#示例-4const常量族)
+  - [与 RUST\_193 的对应](.#与-rust_193-的对应)
+  - [索引](.#索引)
+  - [🆕 Rust 1.94 更新](.#-rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 模板结构
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-除 [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) 所列 13 项核心特性外，其余特性采用以下**精简模板**：
+除 [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md) 所列 13 项核心特性外，其余特性采用以下**精简模板**：
 
 | 列 | 必填 | 说明 |
 | :--- | :--- | :--- |
@@ -93,15 +93,15 @@
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md) 中 92 项特性的表格列「动机」「设计决策」「形式化」「反例」与本模板一致：
+[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](10_rust_193_language_features_comprehensive_analysis.md) 中 92 项特性的表格列「动机」「设计决策」「形式化」「反例」与本模板一致：
 
 - **概念** ← 动机 + 设计决策（合并为一句话）
 - **形式化引用** ← 形式化列
 - **反例** ← 反例列
 
-**核心特性**（13 项）采用完整链，见 [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md)。
+**核心特性**（13 项）采用完整链，见 [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md)。
 
-**其余特性**（79 项）采用本精简模板，数据见 [RUST_193](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md) 各表。
+**其余特性**（79 项）采用本精简模板，数据见 [RUST_193](10_rust_193_language_features_comprehensive_analysis.md) 各表。
 
 ---
 
@@ -111,8 +111,8 @@
 
 | 文档 | 用途 |
 | :--- | :--- |
-| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md) | 92 项特性完整表格 |
-| [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) | 13 项核心特性完整链 |
+| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](10_rust_193_language_features_comprehensive_analysis.md) | 92 项特性完整表格 |
+| [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md) | 13 项核心特性完整链 |
 
 ---
 
@@ -127,7 +127,7 @@
 
 > **适用版本**: Rust 1.96.0+
 
-详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
+详见 [RUST_194_RESEARCH_UPDATE](10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 
@@ -191,7 +191,7 @@
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

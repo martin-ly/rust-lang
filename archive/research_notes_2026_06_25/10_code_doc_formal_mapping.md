@@ -9,58 +9,58 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [代码-文档-形式化完整映射](#代码-文档-形式化完整映射)
-  - [📑 目录](#-目录)
-  - [1. 代码到概念的映射](#1-代码到概念的映射)
-    - [1.1 所有权与移动语义](#11-所有权与移动语义)
-    - [1.2 借用与引用](#12-借用与引用)
-    - [1.3 生命周期](#13-生命周期)
-    - [1.4 Trait 与泛型](#14-trait-与泛型)
-    - [1.5 并发与同步](#15-并发与同步)
-    - [1.6 错误处理](#16-错误处理)
-  - [2. 代码到文档的映射](#2-代码到文档的映射)
-    - [2.1 所有权系统文档映射](#21-所有权系统文档映射)
-    - [2.2 生命周期文档映射](#22-生命周期文档映射)
-    - [2.3 泛型与 Trait 文档映射](#23-泛型与-trait-文档映射)
-    - [2.4 并发文档映射](#24-并发文档映射)
-    - [2.5 标准库 API 文档映射](#25-标准库-api-文档映射)
-  - [3. 代码到形式化的映射](#3-代码到形式化的映射)
-    - [3.1 所有权转移的形式化](#31-所有权转移的形式化)
-    - [3.2 借用的形式化](#32-借用的形式化)
-    - [3.3 生命周期的形式化](#33-生命周期的形式化)
-    - [3.4 类型系统的形式化](#34-类型系统的形式化)
-    - [3.5 并发的形式化](#35-并发的形式化)
-    - [3.6 异步的形式化](#36-异步的形式化)
-  - [4. 错误代码映射](#4-错误代码映射)
-    - [4.1 所有权错误 (E03xx)](#41-所有权错误-e03xx)
-    - [4.2 借用错误 (E04xx, E05xx)](#42-借用错误-e04xx-e05xx)
-    - [4.3 生命周期错误 (E05xx)](#43-生命周期错误-e05xx)
-    - [4.4 类型系统错误 (E02xx, E03xx)](#44-类型系统错误-e02xx-e03xx)
-    - [4.5 并发错误 (E0xxx)](#45-并发错误-e0xxx)
-    - [4.6 错误码快速修复索引](#46-错误码快速修复索引)
-  - [5. API映射](#5-api映射)
-    - [5.1 所有权相关 API](#51-所有权相关-api)
-    - [5.2 借用相关 API](#52-借用相关-api)
-    - [5.3 集合 API](#53-集合-api)
-    - [5.4 并发 API](#54-并发-api)
-    - [5.5 异步 API](#55-异步-api)
-    - [5.6 I/O API](#56-io-api)
-  - [6. 快速查找索引](#6-快速查找索引)
-    - [6.1 按代码模式查找](#61-按代码模式查找)
-    - [6.2 按错误码查找](#62-按错误码查找)
-    - [6.3 按文档类型查找](#63-按文档类型查找)
-    - [6.4 按形式化主题查找](#64-按形式化主题查找)
-  - [相关文档](#相关文档)
-    - [项目内部文档](#项目内部文档)
-    - [形式化文档](#形式化文档)
-    - [外部资源](#外部资源)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档-1)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [代码-文档-形式化完整映射](.#代码-文档-形式化完整映射)
+  - [📑 目录](.#-目录)
+  - [1. 代码到概念的映射](.#1-代码到概念的映射)
+    - [1.1 所有权与移动语义](.#11-所有权与移动语义)
+    - [1.2 借用与引用](.#12-借用与引用)
+    - [1.3 生命周期](.#13-生命周期)
+    - [1.4 Trait 与泛型](.#14-trait-与泛型)
+    - [1.5 并发与同步](.#15-并发与同步)
+    - [1.6 错误处理](.#16-错误处理)
+  - [2. 代码到文档的映射](.#2-代码到文档的映射)
+    - [2.1 所有权系统文档映射](.#21-所有权系统文档映射)
+    - [2.2 生命周期文档映射](.#22-生命周期文档映射)
+    - [2.3 泛型与 Trait 文档映射](.#23-泛型与-trait-文档映射)
+    - [2.4 并发文档映射](.#24-并发文档映射)
+    - [2.5 标准库 API 文档映射](.#25-标准库-api-文档映射)
+  - [3. 代码到形式化的映射](.#3-代码到形式化的映射)
+    - [3.1 所有权转移的形式化](.#31-所有权转移的形式化)
+    - [3.2 借用的形式化](.#32-借用的形式化)
+    - [3.3 生命周期的形式化](.#33-生命周期的形式化)
+    - [3.4 类型系统的形式化](.#34-类型系统的形式化)
+    - [3.5 并发的形式化](.#35-并发的形式化)
+    - [3.6 异步的形式化](.#36-异步的形式化)
+  - [4. 错误代码映射](.#4-错误代码映射)
+    - [4.1 所有权错误 (E03xx)](.#41-所有权错误-e03xx)
+    - [4.2 借用错误 (E04xx, E05xx)](.#42-借用错误-e04xx-e05xx)
+    - [4.3 生命周期错误 (E05xx)](.#43-生命周期错误-e05xx)
+    - [4.4 类型系统错误 (E02xx, E03xx)](.#44-类型系统错误-e02xx-e03xx)
+    - [4.5 并发错误 (E0xxx)](.#45-并发错误-e0xxx)
+    - [4.6 错误码快速修复索引](.#46-错误码快速修复索引)
+  - [5. API映射](.#5-api映射)
+    - [5.1 所有权相关 API](.#51-所有权相关-api)
+    - [5.2 借用相关 API](.#52-借用相关-api)
+    - [5.3 集合 API](.#53-集合-api)
+    - [5.4 并发 API](.#54-并发-api)
+    - [5.5 异步 API](.#55-异步-api)
+    - [5.6 I/O API](.#56-io-api)
+  - [6. 快速查找索引](.#6-快速查找索引)
+    - [6.1 按代码模式查找](.#61-按代码模式查找)
+    - [6.2 按错误码查找](.#62-按错误码查找)
+    - [6.3 按文档类型查找](.#63-按文档类型查找)
+    - [6.4 按形式化主题查找](.#64-按形式化主题查找)
+  - [相关文档](.#相关文档)
+    - [项目内部文档](.#项目内部文档)
+    - [形式化文档](.#形式化文档)
+    - [外部资源](.#外部资源)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档-1)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-02-28
@@ -241,9 +241,9 @@
 
 | 代码 | 形式化定义 | 相关定理/证明 |
 | :--- | :--- | :--- |
-| `let s2 = s1;` | move(s1, s2) -> Omega(s1) = Moved && Omega(s2) = Owned | [定理 2 - 所有权唯一性](./formal_methods/10_ownership_model.md) |
-| `drop(s);` | drop(s) -> Omega(s) = Freed | [引理 1 - 资源释放](./formal_methods/10_ownership_model.md) |
-| `let x = 5; let y = x;` | Copy(T) -> forall x: T, assign(x, y) => Omega(x) = Omega(y) = Owned | [定理 3 - Copy 语义](./formal_methods/10_ownership_model.md) |
+| `let s2 = s1;` | move(s1, s2) -> Omega(s1) = Moved && Omega(s2) = Owned | [定理 2 - 所有权唯一性](formal_methods/10_ownership_model.md) |
+| `drop(s);` | drop(s) -> Omega(s) = Freed | [引理 1 - 资源释放](formal_methods/10_ownership_model.md) |
+| `let x = 5; let y = x;` | Copy(T) -> forall x: T, assign(x, y) => Omega(x) = Omega(y) = Owned | [定理 3 - Copy 语义](formal_methods/10_ownership_model.md) |
 
 ### 3.2 借用的形式化
 
@@ -251,9 +251,9 @@
 
 | 代码 | 形式化定义 | 相关定理/证明 |
 | :--- | :--- | :--- |
-| `let r = &s;` | Borrow(r, s, Immutable) -> type(r) = &T && valid(r) subset lifetime(s) | [规则 1 - 借用规则](./formal_methods/10_borrow_checker_proof.md) |
-| `let r = &mut s;` | Borrow(r, s, Mutable) -> type(r) = &mut T && forall r' != r: !aliased(r, r') | [定理 1 - 数据竞争自由](./formal_methods/10_borrow_checker_proof.md) |
-| `&s[0..5]` | Slice(r, s, i, j) -> r = {s_k | i <= k < j} && valid(r) subset valid(s) | [引理 2 - 切片有效性](./formal_methods/10_borrow_checker_proof.md) |
+| `let r = &s;` | Borrow(r, s, Immutable) -> type(r) = &T && valid(r) subset lifetime(s) | [规则 1 - 借用规则](formal_methods/10_borrow_checker_proof.md) |
+| `let r = &mut s;` | Borrow(r, s, Mutable) -> type(r) = &mut T && forall r' != r: !aliased(r, r') | [定理 1 - 数据竞争自由](formal_methods/10_borrow_checker_proof.md) |
+| `&s[0..5]` | Slice(r, s, i, j) -> r = {s_k | i <= k < j} && valid(r) subset valid(s) | [引理 2 - 切片有效性](formal_methods/10_borrow_checker_proof.md) |
 
 ### 3.3 生命周期的形式化
 
@@ -271,9 +271,9 @@
 
 | 代码 | 形式化定义 | 相关定理/证明 |
 | :--- | :--- | :--- |
-| `fn foo<T: Display>(x: T)` | Gamma |- T: Display => forall x: T. displayable(x) | [类型规则 - Trait Bound](./type_theory/10_type_system_foundations.md) |
-| `impl Clone for MyType` | Gamma |- MyType: Clone <=> exists clone: MyType -> MyType | [类型规则 - Trait 实现](./type_theory/10_type_system_foundations.md) |
-| `dyn Trait` | dyn Trait = exists T. T: Trait && vtable(T) | [类型规则 - Trait 对象](./type_theory/10_type_system_foundations.md) |
+| `fn foo<T: Display>(x: T)` | Gamma |- T: Display => forall x: T. displayable(x) | [类型规则 - Trait Bound](type_theory/10_type_system_foundations.md) |
+| `impl Clone for MyType` | Gamma |- MyType: Clone <=> exists clone: MyType -> MyType | [类型规则 - Trait 实现](type_theory/10_type_system_foundations.md) |
+| `dyn Trait` | dyn Trait = exists T. T: Trait && vtable(T) | [类型规则 - Trait 对象](type_theory/10_type_system_foundations.md) |
 
 ### 3.5 并发的形式化
 >
@@ -281,11 +281,11 @@
 
 | 代码 | 形式化定义 | 相关定理/证明 |
 | :--- | :--- | :--- |
-| `Arc::new(data)` | Arc(T) = T x AtomicUsize && Send(T) && Sync(T) | [定理 C-T1 - Arc 安全](./formal_methods/10_send_sync_formalization.md) |
-| `Mutex::new(data)` | Mutex(T) = T x Lock && invariant(lock -> exclusive(T)) | [定理 C-T2 - Mutex 互斥](./formal_methods/10_send_sync_formalization.md) |
-| `RwLock::new(data)` | RwLock(T) = T x RWLock && (n_r > 0 -> !w) && (w -> n_r = 0) | [定理 C-T3 - 读写锁](./formal_methods/10_send_sync_formalization.md) |
-| `Send` trait | Send(T) <=> forall t1, t2: Thread. safe_transfer(T, t1, t2) | [定义 - Send](./formal_methods/10_send_sync_formalization.md) |
-| `Sync` trait | Sync(T) <=> forall r: &T. Send(r) | [定义 - Sync](./formal_methods/10_send_sync_formalization.md) |
+| `Arc::new(data)` | Arc(T) = T x AtomicUsize && Send(T) && Sync(T) | [定理 C-T1 - Arc 安全](formal_methods/10_send_sync_formalization.md) |
+| `Mutex::new(data)` | Mutex(T) = T x Lock && invariant(lock -> exclusive(T)) | [定理 C-T2 - Mutex 互斥](formal_methods/10_send_sync_formalization.md) |
+| `RwLock::new(data)` | RwLock(T) = T x RWLock && (n_r > 0 -> !w) && (w -> n_r = 0) | [定理 C-T3 - 读写锁](formal_methods/10_send_sync_formalization.md) |
+| `Send` trait | Send(T) <=> forall t1, t2: Thread. safe_transfer(T, t1, t2) | [定义 - Send](formal_methods/10_send_sync_formalization.md) |
+| `Sync` trait | Sync(T) <=> forall r: &T. Send(r) | [定义 - Sync](formal_methods/10_send_sync_formalization.md) |
 
 ### 3.6 异步的形式化
 >
@@ -293,9 +293,9 @@
 
 | 代码 | 形式化定义 | 相关定理/证明 |
 | :--- | :--- | :--- |
-| `async fn foo() -> T` | Async(f) = Future && Output(f) = T && poll: Context -> Poll(T) | [定义 - 异步函数](./formal_methods/10_async_state_machine.md) |
-| `f.await` | Await(f) = poll(f) until Ready(v) then v | [定理 A-T1 - Await 正确性](./formal_methods/10_async_state_machine.md) |
-| `Pin<Box<dyn Future>>` | Pin(F) = F && immovable(F) && drop(F) -> cleanup | [定理 A-T2 - Pin 安全性](./formal_methods/10_async_state_machine.md) |
+| `async fn foo() -> T` | Async(f) = Future && Output(f) = T && poll: Context -> Poll(T) | [定义 - 异步函数](formal_methods/10_async_state_machine.md) |
+| `f.await` | Await(f) = poll(f) until Ready(v) then v | [定理 A-T1 - Await 正确性](formal_methods/10_async_state_machine.md) |
+| `Pin<Box<dyn Future>>` | Pin(F) = F && immovable(F) && drop(F) -> cleanup | [定理 A-T2 - Pin 安全性](formal_methods/10_async_state_machine.md) |
 
 ---
 
@@ -540,12 +540,12 @@ Trait Bound      -> 1.4, E0277
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [10_ownership_model.md](./formal_methods/10_ownership_model.md) - 所有权模型形式化
-- [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md) - 借用检查器证明
+- [10_ownership_model.md](formal_methods/10_ownership_model.md) - 所有权模型形式化
+- [10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) - 借用检查器证明
 - 10_lifetime_formalization.md - 生命周期形式化
-- [10_send_sync_formalization.md](./formal_methods/10_send_sync_formalization.md) - 并发模型
-- [10_async_state_machine.md](./formal_methods/10_async_state_machine.md) - 异步形式化
-- [10_type_system_foundations.md](./type_theory/10_type_system_foundations.md) - 类型理论基础
+- [10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) - 并发模型
+- [10_async_state_machine.md](formal_methods/10_async_state_machine.md) - 异步形式化
+- [10_type_system_foundations.md](type_theory/10_type_system_foundations.md) - 类型理论基础
 
 ### 外部资源
 >
@@ -614,7 +614,7 @@ Trait Bound      -> 1.4, E0277
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

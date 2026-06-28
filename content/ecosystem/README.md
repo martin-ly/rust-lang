@@ -9,27 +9,27 @@
 
 ## 📋 目录
 
-- [Rust 生态系统深度解析](#rust-生态系统深度解析)
-  - [📋 目录](#-目录)
-  - [🎯 目标](#-目标)
-  - [📊 生态覆盖矩阵](#-生态覆盖矩阵)
-  - [🌐 Web 框架](#-web-框架)
-    - [Axum](#axum)
-    - [Actix-web](#actix-web)
-    - [Rocket](#rocket)
-  - [🗄️ 数据库](#️-数据库)
-    - [SQLx](#sqlx)
-    - [Diesel](#diesel)
-    - [Sea-ORM](#sea-orm)
-  - [⚡ 异步运行时](#-异步运行时)
-    - [Tokio](#tokio)
-  - [📦 序列化](#-序列化)
-    - [Serde](#serde)
-  - [🧪 测试工具](#-测试工具)
-    - [测试栈推荐](#测试栈推荐)
-  - [📈 监控与可观测性](#-监控与可观测性)
-    - [Tracing 生态系统](#tracing-生态系统)
-  - [🔗 参考资源](#-参考资源)
+- [Rust 生态系统深度解析](.#rust-生态系统深度解析)
+  - [📋 目录](.#-目录)
+  - [🎯 目标](.#-目标)
+  - [📊 生态覆盖矩阵](.#-生态覆盖矩阵)
+  - [🌐 Web 框架](.#-web-框架)
+    - [Axum](.#axum)
+    - [Actix-web](.#actix-web)
+    - [Rocket](.#rocket)
+  - [🗄️ 数据库](.#️-数据库)
+    - [SQLx](.#sqlx)
+    - [Diesel](.#diesel)
+    - [Sea-ORM](.#sea-orm)
+  - [⚡ 异步运行时](.#-异步运行时)
+    - [Tokio](.#tokio)
+  - [📦 序列化](.#-序列化)
+    - [Serde](.#serde)
+  - [🧪 测试工具](.#-测试工具)
+    - [测试栈推荐](.#测试栈推荐)
+  - [📈 监控与可观测性](.#-监控与可观测性)
+    - [Tracing 生态系统](.#tracing-生态系统)
+  - [🔗 参考资源](.#-参考资源)
 
 ---
 
@@ -337,7 +337,7 @@ fn create_user(conn: &mut PgConnection, name: &str, email: &str) -> QueryResult<
 
 **定位**: 异步动态的 ORM，面向现代 Rust
 
-[→ Sea-ORM 深度解析](./database/sea_orm_deep_dive.md)
+[→ Sea-ORM 深度解析](database/sea_orm_deep_dive.md)
 
 ```rust
 use sea_orm::{entity::*, query::*, DatabaseConnection};

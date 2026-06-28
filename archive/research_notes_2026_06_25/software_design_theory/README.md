@@ -31,13 +31,13 @@
 
 | 层次 | 内容 | 入口 |
 | :--- | :--- | :--- |
-| **L1 入门** | 设计模式形式化（Factory Method、Strategy、Adapter）、Rust Idioms（RAII、Newtype） | [01_design_patterns_formal](01_design_patterns_formal/README.md)、[06_rust_idioms](./06_rust_idioms.md) |
+| **L1 入门** | 设计模式形式化（Factory Method、Strategy、Adapter）、Rust Idioms（RAII、Newtype） | [01_design_patterns_formal](01_design_patterns_formal/README.md)、[06_rust_idioms](06_rust_idioms.md) |
 | **L2 进阶** | 23 安全/43 完全、语义边界图、三维边界矩阵 | [02_workflow_safe_complete_models](02_workflow_safe_complete_models/README.md)、[05_boundary_system](05_boundary_system/README.md) |
-| **L3 深入** | 执行模型、组合工程、扩展模式代码、反模式与规避 | [03_execution_models](03_execution_models/README.md)、[04_compositional_engineering](04_compositional_engineering/README.md)、[07_anti_patterns](./07_anti_patterns.md) |
+| **L3 深入** | 执行模型、组合工程、扩展模式代码、反模式与规避 | [03_execution_models](03_execution_models/README.md)、[04_compositional_engineering](04_compositional_engineering/README.md)、[07_anti_patterns](07_anti_patterns.md) |
 
 **实操入口**：执行模型 + 设计模式可运行示例见 [03_execution_models 可运行示例](03_execution_models/README.md#可运行示例层次推进)；语义边界 Safe 决策 3 例见 03_semantic_boundary_map 场景 7–9。
 
-**全面论证推进**：设计模式、分布式模式、工作流模式论证深化见 [COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](./10_comprehensive_argumentation_gap_analysis_and_plan.md)。
+**全面论证推进**：设计模式、分布式模式、工作流模式论证深化见 [COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](10_comprehensive_argumentation_gap_analysis_and_plan.md)。
 
 ---
 
@@ -67,8 +67,8 @@
 | [03_execution_models](03_execution_models/README.md) | 同步/异步/并发/并行/分布式 |
 | [04_compositional_engineering](04_compositional_engineering/README.md) | 组合软件工程有效性形式论证 |
 | [05_boundary_system](05_boundary_system/README.md) | 边界体系统一分析 |
-| [06_rust_idioms](./06_rust_idioms.md) | Rust 惯用模式（RAII、Newtype、类型状态） |
-| [07_anti_patterns](./07_anti_patterns.md) | 反模式与边界、13 反例索引 |
+| [06_rust_idioms](06_rust_idioms.md) | Rust 惯用模式（RAII、Newtype、类型状态） |
+| [07_anti_patterns](07_anti_patterns.md) | 反模式与边界、13 反例索引 |
 
 ---
 
@@ -145,10 +145,10 @@
 
 | 层次 | 入口 | 实质内容 |
 | :--- | :--- | :--- |
-| **L1 入门** | [01_design_patterns_formal](01_design_patterns_formal/README.md)、[06_rust_idioms](./06_rust_idioms.md) | 每模式 Def/定理/代码/典型场景/反例；RAII/Newtype/类型状态完整示例 |
+| **L1 入门** | [01_design_patterns_formal](01_design_patterns_formal/README.md)、[06_rust_idioms](06_rust_idioms.md) | 每模式 Def/定理/代码/典型场景/反例；RAII/Newtype/类型状态完整示例 |
 | **L2 选型** | `02_workflow 03_semantic_boundary_map`、[05_boundary_system](05_boundary_system/README.md) | 5 个模式选取完整示例；三维边界决策树；**场景化 Safe 决策 3 例**（全局配置、跨线程缓存、FFI） |
 | **L3 组合** | [04_compositional_engineering](04_compositional_engineering/README.md)、[03_execution_models](03_execution_models/README.md) | Builder+Factory、Repository+Service+DTO 完整代码；**验证工作流、组合反例详解、三层架构示例**；**执行模型 + 设计模式组合 4 例**（批处理、异步、并行、分布式） |
-| **L4 实践** | [07_anti_patterns](./07_anti_patterns.md)、[01_safe_23 常见陷阱](02_workflow_safe_complete_models/02_complete_43_catalog.md) | 13 反例索引；5 个场景→反模式→正确写法；23 模式陷阱与规避 |
+| **L4 实践** | [07_anti_patterns](07_anti_patterns.md)、[01_safe_23 常见陷阱](02_workflow_safe_complete_models/02_complete_43_catalog.md) | 13 反例索引；5 个场景→反模式→正确写法；23 模式陷阱与规避 |
 
 ---
 

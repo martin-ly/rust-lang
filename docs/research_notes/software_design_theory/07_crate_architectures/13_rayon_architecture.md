@@ -420,7 +420,7 @@ pool.install(|| {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [Bevy 游戏引擎架构](./05_bevy_architecture.md)
+- [Bevy 游戏引擎架构](05_bevy_architecture.md)
 - [并发编程模型](../../../../concept/03_advanced/01_concurrency.md)
 
 ---

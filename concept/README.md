@@ -124,7 +124,7 @@
 
 ## 六、演进计划
 
-历史演进计划参见 [`archive/PLAN_concept_knowledge_system_v2.md`](./archive/PLAN_concept_knowledge_system_v2.md)。
+历史演进计划参见 [`archive/PLAN_concept_knowledge_system_v2.md`](archive/PLAN_concept_knowledge_system_v2.md)。
 
 ---
 

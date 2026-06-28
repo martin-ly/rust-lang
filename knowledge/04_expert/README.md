@@ -25,9 +25,9 @@
 |------|------|------|
 | [compiler_internals.md](01_compiler_internals.md) | 编译器内部机制 | ⭐⭐⭐⭐⭐ |
 | [unsafe_audit.md](02_unsafe_audit.md) | Unsafe 代码审计方法论 | ⭐⭐⭐⭐⭐ |
-| [miri/tree_borrows.md](./miri/01_tree_borrows.md) | Tree Borrows 别名模型 | ⭐⭐⭐⭐⭐ |
-| [academic/tree_borrows_authoritative_guide.md](./academic/02_tree_borrows_authoritative_guide.md) | Tree Borrows 权威指南 | ⭐⭐⭐⭐⭐ |
-| [academic/coq_formalization_guide.md](./academic/01_coq_formalization_guide.md) | Coq 形式化验证实战 | ⭐⭐⭐⭐⭐ |
+| [miri/tree_borrows.md](miri/01_tree_borrows.md) | Tree Borrows 别名模型 | ⭐⭐⭐⭐⭐ |
+| [academic/tree_borrows_authoritative_guide.md](academic/02_tree_borrows_authoritative_guide.md) | Tree Borrows 权威指南 | ⭐⭐⭐⭐⭐ |
+| [academic/coq_formalization_guide.md](academic/01_coq_formalization_guide.md) | Coq 形式化验证实战 | ⭐⭐⭐⭐⭐ |
 
 ## ⏱️ 预计时间
 >
@@ -43,7 +43,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [03_advanced/](../03_advanced/) 的全部内容
+- [03_advanced/](../03_advanced) 的全部内容
 - 对操作系统、编译原理有基本了解
 - 形式化验证文档需要离散数学和逻辑基础
 
@@ -58,9 +58,9 @@
 
 ## 🚀 下一步
 
-- 深入 [safety_critical/](safety_critical/) 安全关键系统生态
-- 返回 [05_reference/](../05_reference/) 查阅参考资料
-- 探索 [06_ecosystem/](../06_ecosystem/) 实际项目开发
+- 深入 [safety_critical/](safety_critical) 安全关键系统生态
+- 返回 [05_reference/](../05_reference) 查阅参考资料
+- 探索 [06_ecosystem/](../06_ecosystem) 实际项目开发
 
 ---
 

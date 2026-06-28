@@ -371,10 +371,10 @@ pub fn sql(input: TokenStream) -> TokenStream {
 
 ### 分层文档
 
-- [Tier 1: 基础层](../docs/tier_01_foundations/) - 宏理论基础
-- [Tier 2: 实践层](../docs/tier_02_guides/) - 声明宏+过程宏实践
-- [Tier 3: 参考层](../docs/tier_03_references/) - 最佳实践参考
-- [Tier 4: 高级层](../docs/tier_04_advanced/) - DSL/调试/优化
+- [Tier 1: 基础层](../docs/tier_01_foundations) - 宏理论基础
+- [Tier 2: 实践层](../docs/tier_02_guides) - 声明宏+过程宏实践
+- [Tier 3: 参考层](../docs/tier_03_references) - 最佳实践参考
+- [Tier 4: 高级层](../docs/tier_04_advanced) - DSL/调试/优化
 
 ### 外部资源
 

@@ -9,28 +9,28 @@
 
 ## 📋 目录
 
-- [WebAssembly 高级主题](#webassembly-高级主题)
-  - [📋 目录](#-目录)
-  - [🎯 概述](#-概述)
-  - [🏗️ WASI Preview 2 与组件模型](#️-wasi-preview-2-与组件模型)
-    - [核心概念](#核心概念)
-    - [WIT 接口定义](#wit-接口定义)
-    - [wit-bindgen 绑定生成](#wit-bindgen-绑定生成)
-  - [🧬 WASM GC](#-wasm-gc)
-    - [语言互操作](#语言互操作)
-    - [Rust 注意事项](#rust-注意事项)
-  - [🧵 WASM 线程](#-wasm-线程)
-    - [共享线性内存](#共享线性内存)
-    - [Rust 中的 WASM 线程](#rust-中的-wasm-线程)
-  - [⚡ 性能优化技巧](#-性能优化技巧)
-    - [编译优化](#编译优化)
-    - [运行时优化](#运行时优化)
-  - [🔧 Rust → WASM 构建工具链](#-rust--wasm-构建工具链)
-    - [wasm-pack](#wasm-pack)
-    - [wasm-bindgen](#wasm-bindgen)
-    - [wasm-tools](#wasm-tools)
-    - [工具链对比](#工具链对比)
-  - [🔗 参考资源](#-参考资源)
+- [WebAssembly 高级主题](.#webassembly-高级主题)
+  - [📋 目录](.#-目录)
+  - [🎯 概述](.#-概述)
+  - [🏗️ WASI Preview 2 与组件模型](.#️-wasi-preview-2-与组件模型)
+    - [核心概念](.#核心概念)
+    - [WIT 接口定义](.#wit-接口定义)
+    - [wit-bindgen 绑定生成](.#wit-bindgen-绑定生成)
+  - [🧬 WASM GC](.#-wasm-gc)
+    - [语言互操作](.#语言互操作)
+    - [Rust 注意事项](.#rust-注意事项)
+  - [🧵 WASM 线程](.#-wasm-线程)
+    - [共享线性内存](.#共享线性内存)
+    - [Rust 中的 WASM 线程](.#rust-中的-wasm-线程)
+  - [⚡ 性能优化技巧](.#-性能优化技巧)
+    - [编译优化](.#编译优化)
+    - [运行时优化](.#运行时优化)
+  - [🔧 Rust → WASM 构建工具链](.#-rust--wasm-构建工具链)
+    - [wasm-pack](.#wasm-pack)
+    - [wasm-bindgen](.#wasm-bindgen)
+    - [wasm-tools](.#wasm-tools)
+    - [工具链对比](.#工具链对比)
+  - [🔗 参考资源](.#-参考资源)
 
 ---
 
@@ -59,7 +59,7 @@ WASM 1.0 (2017)
 ```
 
 > 项目内相关代码请见 [`crates/c12_wasm/src/component_model.rs`](../../crates/c12_wasm/src/component_model.rs)
-> 和 [`content/ecosystem/web_frameworks/`](../../content/ecosystem/web_frameworks/)。
+> 和 [`content/ecosystem/web_frameworks/`](../ecosystem/web_frameworks)。
 
 ---
 
@@ -423,7 +423,7 @@ Rust 源码
 - [wasm-pack 文档](https://rustwasm.github.io/wasm-pack/)
 - [Bytecode Alliance 工具链](https://bytecodealliance.org/)
 - [项目内 component_model.rs](../../crates/c12_wasm/src/component_model.rs)
-- [项目内 web_frameworks 文档](../../content/ecosystem/web_frameworks/)
+- [项目内 web_frameworks 文档](../ecosystem/web_frameworks)
 
 ---
 

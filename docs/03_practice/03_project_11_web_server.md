@@ -13,15 +13,15 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [实践项目 11: HTTP Web服务器](#实践项目-11-http-web服务器)
-  - [📑 目录](#-目录)
-  - [项目目标](#项目目标)
-  - [功能需求](#功能需求)
-  - [学习要点](#学习要点)
-    - [HTTP解析](#http解析)
-  - [参考实现](#参考实现)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [实践项目 11: HTTP Web服务器](.#实践项目-11-http-web服务器)
+  - [📑 目录](.#-目录)
+  - [项目目标](.#项目目标)
+  - [功能需求](.#功能需求)
+  - [学习要点](.#学习要点)
+    - [HTTP解析](.#http解析)
+  - [参考实现](.#参考实现)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 项目目标
 >
@@ -86,7 +86,7 @@ async fn handle_request(stream: &mut tokio::net::TcpStream) {
 
 ---
 
-- [README](./README.md)
+- [README](README.md)
 
 ---
 
@@ -94,7 +94,7 @@ async fn handle_request(stream: &mut tokio::net::TcpStream) {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [03_practice 目录](./README.md)
+- [03_practice 目录](README.md)
 - [docs 索引](../README.md)
 
 ---

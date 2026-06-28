@@ -14,29 +14,29 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [超时模式形式化定义](#超时模式形式化定义)
-  - [📑 目录](#-目录)
-  - [1. 概念定义 (Def)](#1-概念定义-def)
-    - [Def TO1: Timeout](#def-to1-timeout)
-    - [Def TO2: 操作结果](#def-to2-操作结果)
-    - [Def TO3: 超时类型](#def-to3-超时类型)
-  - [2. 基本假设 (Axiom)](#2-基本假设-axiom)
-    - [Axiom TO1: 超时确定性](#axiom-to1-超时确定性)
-    - [Axiom TO2: 时钟单调性](#axiom-to2-时钟单调性)
-    - [Axiom TO3: 资源释放](#axiom-to3-资源释放)
-  - [3. 定理 (Theorem)](#3-定理-theorem)
-    - [Theorem TO1: 资源占用有界](#theorem-to1-资源占用有界)
-    - [Theorem TO2: 系统活性](#theorem-to2-系统活性)
-  - [4. Rust 实现示例](#4-rust-实现示例)
-  - [5. 超时配置建议](#5-超时配置建议)
-  - [6. 与重试模式的关系](#6-与重试模式的关系)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [超时模式形式化定义](.#超时模式形式化定义)
+  - [📑 目录](.#-目录)
+  - [1. 概念定义 (Def)](.#1-概念定义-def)
+    - [Def TO1: Timeout](.#def-to1-timeout)
+    - [Def TO2: 操作结果](.#def-to2-操作结果)
+    - [Def TO3: 超时类型](.#def-to3-超时类型)
+  - [2. 基本假设 (Axiom)](.#2-基本假设-axiom)
+    - [Axiom TO1: 超时确定性](.#axiom-to1-超时确定性)
+    - [Axiom TO2: 时钟单调性](.#axiom-to2-时钟单调性)
+    - [Axiom TO3: 资源释放](.#axiom-to3-资源释放)
+  - [3. 定理 (Theorem)](.#3-定理-theorem)
+    - [Theorem TO1: 资源占用有界](.#theorem-to1-资源占用有界)
+    - [Theorem TO2: 系统活性](.#theorem-to2-系统活性)
+  - [4. Rust 实现示例](.#4-rust-实现示例)
+  - [5. 超时配置建议](.#5-超时配置建议)
+  - [6. 与重试模式的关系](.#6-与重试模式的关系)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 1. 概念定义 (Def)
 >
@@ -270,8 +270,8 @@ impl TimeoutHttpClient {
 
 **相关阅读**:
 
-- [Circuit Breaker](./03_circuit_breaker.md)
-- [重试模式](./07_retry_pattern.md)
+- [Circuit Breaker](03_circuit_breaker.md)
+- [重试模式](07_retry_pattern.md)
 
 ---
 
@@ -332,7 +332,7 @@ impl TimeoutHttpClient {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [05_distributed 目录](./README.md)
+- [05_distributed 目录](README.md)
 - [上级目录](../README.md)
 
 ---

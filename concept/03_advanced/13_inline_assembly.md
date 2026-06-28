@@ -9,7 +9,7 @@
 > **A/S/P 标记**: **P** — Process / Platform
 > **双维定位**: C×Ana — 分析跨平台内联汇编（Inline Assembly）的语义差异与安全边界
 > **定位**: 深入分析 Rust `asm!` 宏（Macro）的语法、约束系统、寄存器管理，以及 x86_64、aarch64、RISC-V、s390x 四大平台的差异，重点覆盖 Rust 1.96 为 s390x 引入的向量寄存器支持。
-> **前置概念**: [Unsafe Rust](./03_unsafe.md) · [FFI](./05_rust_ffi.md) · [Platform Support](../06_ecosystem/17_cross_compilation.md)
+> **前置概念**: [Unsafe Rust](03_unsafe.md) · [FFI](05_rust_ffi.md) · [Platform Support](../06_ecosystem/17_cross_compilation.md)
 > **后置概念**: [Rust for Linux](../07_future/19_rust_for_linux.md) · [Kernel Development](../07_future/19_rust_for_linux.md)
 
 ---
@@ -19,38 +19,38 @@
 > [Rust By Example — Inline Assembly](https://doc.rust-lang.org/rust-by-example/unsafe/asm.html) ·
 > [s390x Vector Support PR](https://github.com/rust-lang/rust/pull/150551) ·
 > [LLVM SystemZ Backend](https://llvm.org/docs/SystemZ.html)
-> **前置依赖**: [Unsafe Rust](./03_unsafe.md)
-> **对应 Crate**: [`c03_control_fn`](../../crates/c03_control_fn/) (底层控制流)
+> **前置依赖**: [Unsafe Rust](03_unsafe.md)
+> **对应 Crate**: [`c03_control_fn`](../../crates/c03_control_fn) (底层控制流)
 
 ## 📑 目录
 
-- [内联汇编 (Inline Assembly)](#内联汇编-inline-assembly)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 为什么需要内联汇编](#11-为什么需要内联汇编)
-    - [1.2 `asm!` 宏基础语法](#12-asm-宏基础语法)
-    - [1.3 约束系统 (Constraints)](#13-约束系统-constraints)
-    - [1.4 Clobber 与 Options](#14-clobber-与-options)
-  - [二、平台差异矩阵](#二平台差异矩阵)
-    - [2.1 x86\_64](#21-x86_64)
-    - [2.2 aarch64](#22-aarch64)
-    - [2.3 RISC-V](#23-risc-v)
-    - [2.4 s390x (IBM Z / LinuxONE)](#24-s390x-ibm-z--linuxone)
-  - [三、s390x 向量寄存器 (Rust 1.96+)](#三s390x-向量寄存器-rust-196)
-    - [3.1 背景：IBM Z 向量扩展](#31-背景ibm-z-向量扩展)
-    - [3.2 Rust 1.96 的变更](#32-rust-196-的变更)
-    - [3.3 代码示例](#33-代码示例)
-    - [3.4 与 x86\_64 SIMD 的对比](#34-与-x86_64-simd-的对比)
-  - [四、安全边界与常见陷阱](#四安全边界与常见陷阱)
-    - [4.1 编译器无法验证的契约](#41-编译器无法验证的契约)
-    - [4.2 常见错误模式](#42-常见错误模式)
-  - [五、来源与延伸阅读](#五来源与延伸阅读)
-  - [权威来源索引](#权威来源索引)
-  - [嵌入式测验](#嵌入式测验)
-    - [测验 1：asm! 宏基本语法（记忆层）](#测验-1asm-宏基本语法记忆层)
-    - [测验 2：操作数约束（理解层）](#测验-2操作数约束理解层)
-    - [测验 3：用内联汇编实现原子操作（应用层）](#测验-3用内联汇编实现原子操作应用层)
-    - [测验 4：clobber 与内存屏障（分析层）](#测验-4clobber-与内存屏障分析层)
+- [内联汇编 (Inline Assembly)](.#内联汇编-inline-assembly)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 为什么需要内联汇编](.#11-为什么需要内联汇编)
+    - [1.2 `asm!` 宏基础语法](.#12-asm-宏基础语法)
+    - [1.3 约束系统 (Constraints)](.#13-约束系统-constraints)
+    - [1.4 Clobber 与 Options](.#14-clobber-与-options)
+  - [二、平台差异矩阵](.#二平台差异矩阵)
+    - [2.1 x86\_64](.#21-x86_64)
+    - [2.2 aarch64](.#22-aarch64)
+    - [2.3 RISC-V](.#23-risc-v)
+    - [2.4 s390x (IBM Z / LinuxONE)](.#24-s390x-ibm-z--linuxone)
+  - [三、s390x 向量寄存器 (Rust 1.96+)](.#三s390x-向量寄存器-rust-196)
+    - [3.1 背景：IBM Z 向量扩展](.#31-背景ibm-z-向量扩展)
+    - [3.2 Rust 1.96 的变更](.#32-rust-196-的变更)
+    - [3.3 代码示例](.#33-代码示例)
+    - [3.4 与 x86\_64 SIMD 的对比](.#34-与-x86_64-simd-的对比)
+  - [四、安全边界与常见陷阱](.#四安全边界与常见陷阱)
+    - [4.1 编译器无法验证的契约](.#41-编译器无法验证的契约)
+    - [4.2 常见错误模式](.#42-常见错误模式)
+  - [五、来源与延伸阅读](.#五来源与延伸阅读)
+  - [权威来源索引](.#权威来源索引)
+  - [嵌入式测验](.#嵌入式测验)
+    - [测验 1：asm! 宏基本语法（记忆层）](.#测验-1asm-宏基本语法记忆层)
+    - [测验 2：操作数约束（理解层）](.#测验-2操作数约束理解层)
+    - [测验 3：用内联汇编实现原子操作（应用层）](.#测验-3用内联汇编实现原子操作应用层)
+    - [测验 4：clobber 与内存屏障（分析层）](.#测验-4clobber-与内存屏障分析层)
 
 ---
 

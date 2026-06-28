@@ -11,7 +11,7 @@
 >
 # Rust安全关键生态系统文档集 - 完成报告 ✅
 
-> **相关文档**: 请参阅 [docs/rust-ownership-decidability/audit_reports/LIBRARY_ANALYSIS_COMPLETION_REPORT.md](../../../docs/rust-ownership-decidability/audit_reports/LIBRARY_ANALYSIS_COMPLETION_REPORT.md)
+> **相关文档**: 请参阅 [docs/rust-ownership-decidability/audit_reports/LIBRARY_ANALYSIS_COMPLETION_REPORT.md](../../../archive/rust-ownership-decidability/audit_reports/LIBRARY_ANALYSIS_COMPLETION_REPORT.md)
 > **Bloom 层级**: 理解
 
 ## 执行摘要

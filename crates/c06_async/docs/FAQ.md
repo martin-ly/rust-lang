@@ -11,20 +11,20 @@
 
 > **文档定位**: 异步编程常见问题快速解答，涵盖运行时选择、Pin机制、函数颜色等核心疑问
 > **使用方式**: 通过问题索引快速定位问题，获取详细答案和示例
-> **相关文档**: [主索引](./00_MASTER_INDEX.md) | [README](./README.md) | [Glossary](./Glossary.md)
+> **相关文档**: [主索引](00_MASTER_INDEX.md) | [README](README.md) | [Glossary](Glossary.md)
 
 ## 📊 目录
 
-- [C06 异步编程: 常见问题解答 (FAQ)](#c06-异步编程-常见问题解答-faq)
-  - [📊 目录](#-目录)
-  - [📋 问题索引](#-问题索引)
-  - [问答详解](#问答详解)
-    - [Q1:`async/await`和普通的线程有什么区别？我应该用哪个？](#q1asyncawait和普通的线程有什么区别我应该用哪个)
-    - [Q2: 为什么我需要 `Pin`？它看起来非常复杂](#q2-为什么我需要-pin它看起来非常复杂)
+- [C06 异步编程: 常见问题解答 (FAQ)](.#c06-异步编程-常见问题解答-faq)
+  - [📊 目录](.#-目录)
+  - [📋 问题索引](.#-问题索引)
+  - [问答详解](.#问答详解)
+    - [Q1:`async/await`和普通的线程有什么区别？我应该用哪个？](.#q1asyncawait和普通的线程有什么区别我应该用哪个)
+    - [Q2: 为什么我需要 `Pin`？它看起来非常复杂](.#q2-为什么我需要-pin它看起来非常复杂)
     - [Q3: 我可以在 `tokio` 运行时中使用 `async-std [已归档]` 的库吗？反之亦然？](#q3-我可以在-tokio-运行时中使用-async-std-已归档-的库吗反之亦然)
-    - [Q4: 什么是"函数颜色"问题？它在实践中对我有什么影响？](#q4-什么是函数颜色问题它在实践中对我有什么影响)
-    - [Q5: `async-trait` crate 是做什么的？我总是需要它吗？](#q5-async-trait-crate-是做什么的我总是需要它吗)
-  - [📚 延伸阅读](#-延伸阅读)
+    - [Q4: 什么是"函数颜色"问题？它在实践中对我有什么影响？](.#q4-什么是函数颜色问题它在实践中对我有什么影响)
+    - [Q5: `async-trait` crate 是做什么的？我总是需要它吗？](.#q5-async-trait-crate-是做什么的我总是需要它吗)
+  - [📚 延伸阅读](.#-延伸阅读)
 
 **最后更新**: 2025-10-19
 **适用版本**: Rust 1.75+
@@ -34,16 +34,16 @@
 
 ## 📋 问题索引
 
-- [C06 异步编程: 常见问题解答 (FAQ)](#c06-异步编程-常见问题解答-faq)
-  - [📊 目录](#-目录)
-  - [📋 问题索引](#-问题索引)
-  - [问答详解](#问答详解)
-    - [Q1:`async/await`和普通的线程有什么区别？我应该用哪个？](#q1asyncawait和普通的线程有什么区别我应该用哪个)
-    - [Q2: 为什么我需要 `Pin`？它看起来非常复杂](#q2-为什么我需要-pin它看起来非常复杂)
+- [C06 异步编程: 常见问题解答 (FAQ)](.#c06-异步编程-常见问题解答-faq)
+  - [📊 目录](.#-目录)
+  - [📋 问题索引](.#-问题索引)
+  - [问答详解](.#问答详解)
+    - [Q1:`async/await`和普通的线程有什么区别？我应该用哪个？](.#q1asyncawait和普通的线程有什么区别我应该用哪个)
+    - [Q2: 为什么我需要 `Pin`？它看起来非常复杂](.#q2-为什么我需要-pin它看起来非常复杂)
     - [Q3: 我可以在 `tokio` 运行时中使用 `async-std [已归档]` 的库吗？反之亦然？](#q3-我可以在-tokio-运行时中使用-async-std-已归档-的库吗反之亦然)
-    - [Q4: 什么是"函数颜色"问题？它在实践中对我有什么影响？](#q4-什么是函数颜色问题它在实践中对我有什么影响)
-    - [Q5: `async-trait` crate 是做什么的？我总是需要它吗？](#q5-async-trait-crate-是做什么的我总是需要它吗)
-  - [📚 延伸阅读](#-延伸阅读)
+    - [Q4: 什么是"函数颜色"问题？它在实践中对我有什么影响？](.#q4-什么是函数颜色问题它在实践中对我有什么影响)
+    - [Q5: `async-trait` crate 是做什么的？我总是需要它吗？](.#q5-async-trait-crate-是做什么的我总是需要它吗)
+  - [📚 延伸阅读](.#-延伸阅读)
 
 ---
 
@@ -108,11 +108,11 @@
 
 ## 📚 延伸阅读
 
-- [01_introduction_and_philosophy](./01_introduction_and_philosophy.md) - 异步编程哲学
-- [02_runtime_and_execution_model](./02_runtime_and_execution_model.md) - 运行时模型
-- [03_pinning_and_unsafe_foundations](./03_pinning_and_unsafe_foundations.md) - Pin和Unsafe
-- [ASYNC_RUNTIME_COMPARISON_2025](./ASYNC_RUNTIME_COMPARISON_2025.md) - 运行时对比
-- [主索引](./00_MASTER_INDEX.md) - 返回主索引
+- [01_introduction_and_philosophy](01_introduction_and_philosophy.md) - 异步编程哲学
+- [02_runtime_and_execution_model](02_runtime_and_execution_model.md) - 运行时模型
+- [03_pinning_and_unsafe_foundations](03_pinning_and_unsafe_foundations.md) - Pin和Unsafe
+- [ASYNC_RUNTIME_COMPARISON_2025](ASYNC_RUNTIME_COMPARISON_2025.md) - 运行时对比
+- [主索引](00_MASTER_INDEX.md) - 返回主索引
 
 ---
 

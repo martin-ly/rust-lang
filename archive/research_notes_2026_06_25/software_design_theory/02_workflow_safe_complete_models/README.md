@@ -15,28 +15,28 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [工作流：23 安全 vs 43 完全模型](#工作流23-安全-vs-43-完全模型)
-  - [📊 目录 {#-目录}](#-目录--目录)
-  - [宗旨](#宗旨)
-  - [定义](#定义)
-  - [文档索引](#文档索引)
-  - [核心关系](#核心关系)
-  - [使用流程](#使用流程)
-  - [快速参考](#快速参考)
-  - [层次推进阅读路径](#层次推进阅读路径)
-  - [23 vs 43 选型指南（实质内容）](#23-vs-43-选型指南实质内容)
-  - [场景→模式→代码完整链条（实质内容）](#场景模式代码完整链条实质内容)
-    - [链条 1：Web API 分层](#链条-1web-api-分层)
-    - [链条 2：可撤销编辑器](#链条-2可撤销编辑器)
-  - [工作流引擎表达力（状态机、补偿、Temporal 式）](#工作流引擎表达力状态机补偿temporal-式)
-  - [权威对标](#权威对标)
-  - [23/43 与工作流关系（D3.4）](#2343-与工作流关系d34)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [权威来源索引](#权威来源索引)
+- [工作流：23 安全 vs 43 完全模型](.#工作流23-安全-vs-43-完全模型)
+  - [📊 目录 {#-目录}](.#-目录--目录)
+  - [宗旨](.#宗旨)
+  - [定义](.#定义)
+  - [文档索引](.#文档索引)
+  - [核心关系](.#核心关系)
+  - [使用流程](.#使用流程)
+  - [快速参考](.#快速参考)
+  - [层次推进阅读路径](.#层次推进阅读路径)
+  - [23 vs 43 选型指南（实质内容）](.#23-vs-43-选型指南实质内容)
+  - [场景→模式→代码完整链条（实质内容）](.#场景模式代码完整链条实质内容)
+    - [链条 1：Web API 分层](.#链条-1web-api-分层)
+    - [链条 2：可撤销编辑器](.#链条-2可撤销编辑器)
+  - [工作流引擎表达力（状态机、补偿、Temporal 式）](.#工作流引擎表达力状态机补偿temporal-式)
+  - [权威对标](.#权威对标)
+  - [23/43 与工作流关系（D3.4）](.#2343-与工作流关系d34)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [权威来源索引](.#权威来源索引)
 
 ## 宗旨
 >
@@ -64,9 +64,9 @@
 | 文档 | 内容 |
 | :--- | :--- |
 | `01_safe_23_catalog` | 23 种安全设计模型索引 |
-| [02_complete_43_catalog](./02_complete_43_catalog.md) | 43 种完全模型索引 |
+| [02_complete_43_catalog](02_complete_43_catalog.md) | 43 种完全模型索引 |
 | `03_semantic_boundary_map` | 语义边界图 |
-| [04_expressiveness_boundary](./04_expressiveness_boundary.md) | 充分表达 vs 非充分表达论证 |
+| [04_expressiveness_boundary](04_expressiveness_boundary.md) | 充分表达 vs 非充分表达论证 |
 
 ---
 
@@ -84,9 +84,9 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **查 23 安全**：模式是否纯 Safe → `01_safe_23_catalog`
-2. **查 43 完全**：扩展模式（Repository、DTO 等）→ [02_complete_43_catalog](./02_complete_43_catalog.md)
+2. **查 43 完全**：扩展模式（Repository、DTO 等）→ [02_complete_43_catalog](02_complete_43_catalog.md)
 3. **查语义边界**：选模式 → `03_semantic_boundary_map`
-4. **查表达边界**：等价 vs 近似 → [04_expressiveness_boundary](./04_expressiveness_boundary.md)
+4. **查表达边界**：等价 vs 近似 → [04_expressiveness_boundary](04_expressiveness_boundary.md)
 
 ---
 
@@ -123,12 +123,12 @@
 | 场景 | 推荐 | 理由 |
 | :--- | :--- | :--- |
 | 纯业务逻辑、无持久化 | 23 安全 | GoF 足够；Factory、Strategy、State |
-| 需持久化抽象 | 43 完全 → Repository | 见 [02_complete_43_catalog](./02_complete_43_catalog.md) |
+| 需持久化抽象 | 43 完全 → Repository | 见 [02_complete_43_catalog](02_complete_43_catalog.md) |
 | 需用例编排、事务 | 43 完全 → Service Layer | 见 02_complete_43_catalog |
 | 需跨边界传输 | 43 完全 → DTO | 见 02_complete_43_catalog |
 | 需外部系统集成 | 43 完全 → Gateway | 需 FFI 时可能 unsafe |
 
-**扩展模式深入**：20 种扩展模式均有 Rust 实现、核心意图、与 23 安全的关系；见 [02_complete_43_catalog](./02_complete_43_catalog.md) 扩展模式选型决策树。
+**扩展模式深入**：20 种扩展模式均有 Rust 实现、核心意图、与 23 安全的关系；见 [02_complete_43_catalog](02_complete_43_catalog.md) 扩展模式选型决策树。
 
 ---
 
@@ -217,7 +217,7 @@ impl OrderService {
 
 **选型流程**：需求 → 选 23/43 模式（如 Repository、Service Layer、Event Sourcing）→ 选执行模型（如分布式）→ 选编排（状态机 / Saga 补偿 / Temporal）。
 
-**引用**：[03_execution_models](../03_execution_models/README.md)、[04_expressiveness_boundary](./04_expressiveness_boundary.md) 工作流引擎表达力、[COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](../10_comprehensive_argumentation_gap_analysis_and_plan.md)。
+**引用**：[03_execution_models](../03_execution_models/README.md)、[04_expressiveness_boundary](04_expressiveness_boundary.md) 工作流引擎表达力、[COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](../10_comprehensive_argumentation_gap_analysis_and_plan.md)。
 
 ---
 

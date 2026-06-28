@@ -17,7 +17,7 @@
 > [Traits](../02_intermediate/01_traits.md)
 > [来源: [Wikipedia — Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)]
 > **后置概念**:
-> [Ownership Formalization](./03_ownership_formal.md) · [RustBelt](./04_rustbelt.md)
+> [Ownership Formalization](03_ownership_formal.md) · [RustBelt](04_rustbelt.md)
 > **主要来源**:
 > [Wikipedia: Type theory](https://en.wikipedia.org/wiki/Type_theory) ·
 > [Pierce 2002, *Types and Programming Languages*](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
@@ -39,7 +39,7 @@
 >
 > 本文档包含大量形式化符号（⊗, ⊸, λ, ∀, ∃ 等）和纯数学推导，属于 **[研究者级]** 内容。
 > **99.9% 的 Rust 开发者不需要理解这些内容即可编写生产级代码。**
-> 如果你只想学习 Rust 工程实践，请直接跳过本文，前往 [L5 生态层](../06_ecosystem/) 或 [L3 高级层](../03_advanced/)。
+> 如果你只想学习 Rust 工程实践，请直接跳过本文，前往 [L5 生态层](../06_ecosystem) 或 [L3 高级层](../03_advanced)。
 > 本文的数学内容仅服务于：PL 研究者、编译器开发者、形式化验证工程师。
 
 ## 一、权威定义（Definition）
@@ -666,9 +666,9 @@ Rust HRTB:       ∀'a.τ  where 'a ∈ Lifetime (Region)
 | 类型系统 | [`../01_foundation/04_type_system.md`](../01_foundation/04_type_system.md) | 类型论的应用（L1 映射） |
 | 泛型 | [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) | 参数多态的应用（L2 映射） |
 | Trait | [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) | Type Class 的应用（L2 映射） |
-| 线性逻辑 | [`./01_linear_logic.md`](./01_linear_logic.md) | 形式化同层（所有权理论来源） |
-| 所有权形式化 | [`./03_ownership_formal.md`](./03_ownership_formal.md) | 类型规则的扩展 |
-| RustBelt | [`./04_rustbelt.md`](./04_rustbelt.md) | 验证框架 |
+| 线性逻辑 | [`./01_linear_logic.md`](01_linear_logic.md) | 形式化同层（所有权理论来源） |
+| 所有权形式化 | [`./03_ownership_formal.md`](03_ownership_formal.md) | 类型规则的扩展 |
+| RustBelt | [`./04_rustbelt.md`](04_rustbelt.md) | 验证框架 |
 | 范式矩阵 | [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md) | 类型系统谱系 |
 
 ---

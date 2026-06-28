@@ -12,8 +12,8 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Pin 不动性对自引用（Reference）的必要性
 > **定位**: 深入分析 Rust 中 **Pin<&mut T>** 和 **Unpin** 的设计动机——解决自引用（Reference）类型（self-referential structs）在内存移动时的安全问题，探讨 Pin 与 Future、Generator 的交互，以及 async/await 的状态机实现。
-> **前置概念**: [Async](./02_async.md) · [Ownership](../01_foundation/01_ownership.md) · [Generics](../02_intermediate/02_generics.md)
-> **后置概念**: [Unsafe](./03_unsafe.md) · [Gen Blocks](../07_future/15_gen_blocks_preview.md)
+> **前置概念**: [Async](02_async.md) · [Ownership](../01_foundation/01_ownership.md) · [Generics](../02_intermediate/02_generics.md)
+> **后置概念**: [Unsafe](03_unsafe.md) · [Gen Blocks](../07_future/15_gen_blocks_preview.md)
 
 ---
 
@@ -23,48 +23,48 @@
 > [RFC 2349 — Pin](https://github.com/rust-lang/rfcs/pull/2349) ·
 > [Tracking Issue #55766](https://github.com/rust-lang/rust/issues/55766)
 
-> **对应 Crate**: [`c06_async`](../../crates/c06_async/)
-> **对应练习**: [`exercises/src/async_programming/`](../../exercises/src/async_programming/)
+> **对应 Crate**: [`c06_async`](../../crates/c06_async)
+> **对应练习**: [`exercises/src/async_programming/`](../../exercises/src/async_programming)
 
 ## 📑 目录
 >
 
-- [Pin 与 Unpin：自引用类型的不动性保证](#pin-与-unpin自引用类型的不动性保证)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 问题：自引用类型的移动陷阱](#11-问题自引用类型的移动陷阱)
-    - [1.2 Pin 的设计：承诺不再移动](#12-pin-的设计承诺不再移动)
-    - [1.3 Unpin：大多数类型的默认](#13-unpin大多数类型的默认)
-  - [二、技术细节](#二技术细节)
-    - [2.1 Pin API 的契约](#21-pin-api-的契约)
-    - [2.2 自引用结构体的安全构建](#22-自引用结构体的安全构建)
-    - [2.3 与 async/await 的关系](#23-与-asyncawait-的关系)
-  - [三、使用模式](#三使用模式)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、常见陷阱](#五常见陷阱)
-    - [编译错误示例](#编译错误示例)
-    - [4.4 边界测试：`Pin` 固定栈值后离开作用域（编译错误）](#44-边界测试pin-固定栈值后离开作用域编译错误)
-    - [4.5 边界测试：手动实现 `Unpin` 破坏自引用保证（unsafe 逻辑错误）](#45-边界测试手动实现-unpin-破坏自引用保证unsafe-逻辑错误)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
-  - [权威来源索引](#权威来源索引)
-    - [10.3 边界测试：`Pin<&mut Self>` 与自引用结构的移动（编译错误）](#103-边界测试pinmut-self-与自引用结构的移动编译错误)
-    - [10.4 边界测试：Pin 与 Unpin 的自动实现冲突（编译错误）](#104-边界测试pin-与-unpin-的自动实现冲突编译错误)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
-  - [实践](#实践)
-    - [对应代码示例](#对应代码示例)
-    - [建议练习](#建议练习)
-  - [导航：下一步去哪？](#导航下一步去哪)
-  - [嵌入式测验](#嵌入式测验)
-    - [测验 1：Pin 的设计动机（记忆层）](#测验-1pin-的设计动机记忆层)
-    - [测验 2：Unpin 自动实现（理解层）](#测验-2unpin-自动实现理解层)
-    - [测验 3：Pin::new 的使用限制（应用层）](#测验-3pinnew-的使用限制应用层)
-    - [测验 4：async/await 与 Pin（分析层）](#测验-4asyncawait-与-pin分析层)
+- [Pin 与 Unpin：自引用类型的不动性保证](.#pin-与-unpin自引用类型的不动性保证)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 问题：自引用类型的移动陷阱](.#11-问题自引用类型的移动陷阱)
+    - [1.2 Pin 的设计：承诺不再移动](.#12-pin-的设计承诺不再移动)
+    - [1.3 Unpin：大多数类型的默认](.#13-unpin大多数类型的默认)
+  - [二、技术细节](.#二技术细节)
+    - [2.1 Pin API 的契约](.#21-pin-api-的契约)
+    - [2.2 自引用结构体的安全构建](.#22-自引用结构体的安全构建)
+    - [2.3 与 async/await 的关系](.#23-与-asyncawait-的关系)
+  - [三、使用模式](.#三使用模式)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、常见陷阱](.#五常见陷阱)
+    - [编译错误示例](.#编译错误示例)
+    - [4.4 边界测试：`Pin` 固定栈值后离开作用域（编译错误）](.#44-边界测试pin-固定栈值后离开作用域编译错误)
+    - [4.5 边界测试：手动实现 `Unpin` 破坏自引用保证（unsafe 逻辑错误）](.#45-边界测试手动实现-unpin-破坏自引用保证unsafe-逻辑错误)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [逆向推理链（Backward Reasoning）](.#逆向推理链backward-reasoning)
+  - [权威来源索引](.#权威来源索引)
+    - [10.3 边界测试：`Pin<&mut Self>` 与自引用结构的移动（编译错误）](.#103-边界测试pinmut-self-与自引用结构的移动编译错误)
+    - [10.4 边界测试：Pin 与 Unpin 的自动实现冲突（编译错误）](.#104-边界测试pin-与-unpin-的自动实现冲突编译错误)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
+  - [实践](.#实践)
+    - [对应代码示例](.#对应代码示例)
+    - [建议练习](.#建议练习)
+  - [导航：下一步去哪？](.#导航下一步去哪)
+  - [嵌入式测验](.#嵌入式测验)
+    - [测验 1：Pin 的设计动机（记忆层）](.#测验-1pin-的设计动机记忆层)
+    - [测验 2：Unpin 自动实现（理解层）](.#测验-2unpin-自动实现理解层)
+    - [测验 3：Pin::new 的使用限制（应用层）](.#测验-3pinnew-的使用限制应用层)
+    - [测验 4：async/await 与 Pin（分析层）](.#测验-4asyncawait-与-pin分析层)
 
 ---
 
@@ -541,8 +541,8 @@ fn main() {
 
 ## 相关概念文件
 
-- [Async](./02_async.md) — 异步（Async）编程（Pin 的核心用例）
-- [Unsafe](./03_unsafe.md) — unsafe Rust
+- [Async](02_async.md) — 异步（Async）编程（Pin 的核心用例）
+- [Unsafe](03_unsafe.md) — unsafe Rust
 - [Ownership](../01_foundation/01_ownership.md) — 所有权（Ownership）模型
 - [Gen Blocks](../07_future/15_gen_blocks_preview.md) — 生成器（也是 !Unpin）
 
@@ -695,8 +695,8 @@ fn main() {
 
 | 选择 | 条件 | 目标 |
 |:---|:---|:---|
-| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate/) 或 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) |
-| 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
+| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate) 或 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) |
+| 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../06_ecosystem/README.md) |
 

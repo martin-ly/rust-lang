@@ -22,13 +22,13 @@
 | 目标 | 入口 |
 | :--- | :--- |
 | 理解形式化证明 | [FORMAL_FULL_MODEL_OVERVIEW](../../archive/research_notes_2026_06_25/10_formal_full_model_overview.md) → [CORE_THEOREMS_FULL_PROOFS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) |
-| Rust 所有权系统深度形式化 | [`rust-ownership-decidability/`](../rust-ownership-decidability/) — 600K+ 字完整知识库 |
+| Rust 所有权系统深度形式化 | [`rust-ownership-decidability/`](../../archive/rust-ownership-decidability) — 600K+ 字完整知识库 |
 | 查概念/证明 | [QUICK_FIND](../../archive/research_notes_2026_06_25/10_quick_find.md) |
 | 选设计模式/并发模型 | [software_design_theory/00_MASTER_INDEX](../../archive/research_notes_2026_06_25/software_design_theory/10_00_master_index.md) |
 | 理解三大支柱 | [AUTHORITATIVE_ALIGNMENT_GUIDE](../../archive/research_notes_2026_06_25/10_authoritative_alignment_guide.md)（原 RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN 已归档） |
 | 完整总结与论证脉络 | [00_COMPREHENSIVE_SUMMARY](../../archive/research_notes_2026_06_25/10_00_comprehensive_summary.md) → [ARGUMENTATION_CHAIN_AND_FLOW](../../archive/research_notes_2026_06_25/10_argumentation_chain_and_flow.md) |
 | 批判性意见与改进计划 | RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN |
-| **结构梳理与归档约定** | **[RESEARCH_NOTES_ORGANIZATION](./10_research_notes_organization.md)** — 实际目录、归档说明、入口与索引 |
+| **结构梳理与归档约定** | **[RESEARCH_NOTES_ORGANIZATION](10_research_notes_organization.md)** — 实际目录、归档说明、入口与索引 |
 | 格式统一与内容/Rust 1.93 对齐计划 | FORMAT_AND_CONTENT_ALIGNMENT_PLAN |
 | 层次化映射（文档树/概念↔定理/文档↔思维表征） | [HIERARCHICAL_MAPPING_AND_SUMMARY](../../archive/research_notes_2026_06_25/10_hierarchical_mapping_and_summary.md) |
 | **docs 全结构梳理**（100% 覆盖） | DOCS_STRUCTURE_OVERVIEW |
@@ -40,7 +40,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**详细梳理**（实际文件清单、归档约定、formal_methods 概览）：见 **[10_research_notes_organization.md](./10_research_notes_organization.md)**。
+**详细梳理**（实际文件清单、归档约定、formal_methods 概览）：见 **[10_research_notes_organization.md](10_research_notes_organization.md)**。
 
 ```text
 research_notes/
@@ -110,10 +110,10 @@ research_notes/
 ├── 10_executable_semantics_roadmap.md  # 可执行语义路线图 🆕
 ├── 10_core_theorems_full_proofs.md  # 核心定理完整证明（L2 级，数学风格）🆕
 ├── 10_theorem_rust_example_mapping.md  # 定理↔Rust 示例映射 🆕
-├── 10_aeneas_integration_plan.md  # 已归档 → [archive/deprecated/](../archive/deprecated/README.md)
-├── 10_coq_of_rust_integration_plan.md  # 已归档 → [archive/deprecated/](../archive/deprecated/README.md)
-├── 10_coq_isabelle_proof_scaffolding.md  # 已归档 → [archive/deprecated/](../archive/deprecated/README.md)
-├── coq_skeleton/  # 已归档 → [archive/deprecated/coq_skeleton/](../archive/deprecated/coq_skeleton/README.md)
+├── 10_aeneas_integration_plan.md  # 已归档 → [archive/deprecated/](../../archive/docs/deprecated/README.md)
+├── 10_coq_of_rust_integration_plan.md  # 已归档 → [archive/deprecated/](../../archive/docs/deprecated/README.md)
+├── 10_coq_isabelle_proof_scaffolding.md  # 已归档 → [archive/deprecated/](../../archive/docs/deprecated/README.md)
+├── coq_skeleton/  # 已归档 → [archive/deprecated/coq_skeleton/](../../archive/docs/deprecated/coq_skeleton/README.md)
 ├── 10_content_enhancement.md      # 内容完善指南（含层次推进、实质内容自检表）🆕
 ├── 10_classification.md           # 文档分类体系（按角色/层次/主题域）🆕
 ├── 10_writing_guide.md            # 研究笔记写作指南
@@ -194,7 +194,7 @@ research_notes/
 
 **理论体系与论证体系结构**（顶层框架）: [10_theoretical_and_argumentation_system_architecture.md](../../archive/research_notes_2026_06_25/10_theoretical_and_argumentation_system_architecture.md) - 四层理论架构、五层论证结构、安全与非安全全面论证
 
-**安全与非安全全面论证**: [10_safe_unsafe_comprehensive_analysis.md](./10_safe_unsafe_comprehensive_analysis.md) - 边界、契约、UB 分类、安全抽象
+**安全与非安全全面论证**: [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md) - 边界、契约、UB 分类、安全抽象
 
 **Rust 1.93 语言特性全面分析**: [10_rust_193_language_features_comprehensive_analysis.md](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md) - 92 项语言特性全覆盖、设计论证
 
@@ -282,7 +282,7 @@ research_notes/
 
 - [形式化工程系统](../rust-formal-engineering-system/README.md)
 - [研究议程](../rust-formal-engineering-system/09_research_agenda/04_research_methods/README.md) - 形式化工程系统研究方法
-- [个人索引](../archive/temp/README.md) - 归档目录（历史文档）
+- [个人索引](../../archive/docs/temp/README.md) - 归档目录（历史文档）
 
 ### 代码实现
 
@@ -394,8 +394,8 @@ research_notes/
 
 **形式化方法研究** (5个):
 
-- [x] [所有权模型形式化](./formal_methods/10_ownership_model.md) - ✅ 已完成 (100%)
-- [x] [借用检查器证明](./formal_methods/10_borrow_checker_proof.md) - ✅ 已完成 (100%)
+- [x] [所有权模型形式化](formal_methods/10_ownership_model.md) - ✅ 已完成 (100%)
+- [x] [借用检查器证明](formal_methods/10_borrow_checker_proof.md) - ✅ 已完成 (100%)
 - [x] [异步状态机形式化](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) - ✅ 已完成 (100%)
 - x] [生命周期形式化 - ✅ 已完成 (100%)
 - [x] [Pin 和自引用类型形式化](../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md) - ✅ 已完成 (100%)
@@ -404,9 +404,9 @@ research_notes/
 
 - [x] [类型系统基础](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) - ✅ 已完成 (100%)
 - [x] [Trait 系统形式化](../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) - ✅ 已完成 (100%)
-- [x] [生命周期形式化](./type_theory/10_lifetime_formalization.md) - ✅ 已完成 (100%)
+- [x] [生命周期形式化](type_theory/10_lifetime_formalization.md) - ✅ 已完成 (100%)
 - [x] [高级类型特性](../../archive/research_notes_2026_06_25/type_theory/10_advanced_types.md) - ✅ 已完成 (100%)
-- [x] [型变理论](./type_theory/10_variance_theory.md) - ✅ 已完成 (100%)
+- [x] [型变理论](type_theory/10_variance_theory.md) - ✅ 已完成 (100%)
 
 **实验研究** (5个):
 
@@ -537,7 +537,7 @@ research_notes/
 - [系统总结](../../archive/research_notes_2026_06_25/10_system_summary.md) - 系统概览和统计信息
 - [工具使用指南](../../archive/research_notes_2026_06_25/10_tools_guide.md) - 研究工具安装和使用方法
 - [更新日志](../../archive/research_notes_2026_06_25/10_changelog.md) - 系统变更历史记录
-- [完整索引](./INDEX.md) - 所有研究笔记的详细索引
+- [完整索引](INDEX.md) - 所有研究笔记的详细索引
 - [快速入门指南](../../archive/research_notes_2026_06_25/10_getting_started.md) - 新用户入门指南
 - [常见问题解答](../../archive/research_notes_2026_06_25/10_faq.md) - 常见问题解答
 - [维护指南](../../archive/research_notes_2026_06_25/10_maintenance_guide.md) - 系统维护指南
@@ -582,7 +582,7 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 **Rust 版本**: 1.93.1+
 **状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记全部完成）
 
-**全面梳理**：[RESEARCH_NOTES_ORGANIZATION](./10_research_notes_organization.md) — 实际结构、归档约定、入口与索引关系
+**全面梳理**：[RESEARCH_NOTES_ORGANIZATION](10_research_notes_organization.md) — 实际结构、归档约定、入口与索引关系
 
 ---
 

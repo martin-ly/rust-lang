@@ -15,39 +15,39 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [五维概念矩阵](#五维概念矩阵)
-  - [📑 目录](#-目录)
-  - [概述](#概述)
-  - [维度一：所有权维度 (Ownership)](#维度一所有权维度-ownership)
-    - [所有权状态转移](#所有权状态转移)
-  - [维度二：借用维度 (Borrowing)](#维度二借用维度-borrowing)
-    - [借用规则矩阵](#借用规则矩阵)
-  - [维度三：生命周期维度 (Lifetime)](#维度三生命周期维度-lifetime)
-    - [生命周期关系图](#生命周期关系图)
-  - [维度四：类型系统维度 (Type System)](#维度四类型系统维度-type-system)
-    - [型变矩阵 (Variance)](#型变矩阵-variance)
-  - [维度五：并发维度 (Concurrency)](#维度五并发维度-concurrency)
-    - [Send/Sync 推导矩阵](#sendsync-推导矩阵)
-  - [五维交叉分析](#五维交叉分析)
-    - [所有权 × 借用](#所有权--借用)
-    - [生命周期 × 类型系统](#生命周期--类型系统)
-    - [并发 × 所有权](#并发--所有权)
-  - [综合决策矩阵](#综合决策矩阵)
-  - [五维与核心定理对应](#五维与核心定理对应)
-  - [与Rust 1.93对应](#与rust-193对应)
-  - [扩展阅读](#扩展阅读)
-  - [矩阵结构](#矩阵结构)
-  - [概念-公理对应](#概念-公理对应)
-  - [定理-证明映射](#定理-证明映射)
-  - [反例汇编](#反例汇编)
-  - [学习路径](#学习路径)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [五维概念矩阵](.#五维概念矩阵)
+  - [📑 目录](.#-目录)
+  - [概述](.#概述)
+  - [维度一：所有权维度 (Ownership)](.#维度一所有权维度-ownership)
+    - [所有权状态转移](.#所有权状态转移)
+  - [维度二：借用维度 (Borrowing)](.#维度二借用维度-borrowing)
+    - [借用规则矩阵](.#借用规则矩阵)
+  - [维度三：生命周期维度 (Lifetime)](.#维度三生命周期维度-lifetime)
+    - [生命周期关系图](.#生命周期关系图)
+  - [维度四：类型系统维度 (Type System)](.#维度四类型系统维度-type-system)
+    - [型变矩阵 (Variance)](.#型变矩阵-variance)
+  - [维度五：并发维度 (Concurrency)](.#维度五并发维度-concurrency)
+    - [Send/Sync 推导矩阵](.#sendsync-推导矩阵)
+  - [五维交叉分析](.#五维交叉分析)
+    - [所有权 × 借用](.#所有权--借用)
+    - [生命周期 × 类型系统](.#生命周期--类型系统)
+    - [并发 × 所有权](.#并发--所有权)
+  - [综合决策矩阵](.#综合决策矩阵)
+  - [五维与核心定理对应](.#五维与核心定理对应)
+  - [与Rust 1.93对应](.#与rust-193对应)
+  - [扩展阅读](.#扩展阅读)
+  - [矩阵结构](.#矩阵结构)
+  - [概念-公理对应](.#概念-公理对应)
+  - [定理-证明映射](.#定理-证明映射)
+  - [反例汇编](.#反例汇编)
+  - [学习路径](.#学习路径)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 概述
 >
@@ -310,9 +310,9 @@
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [CONCEPT_AXIOM_THEOREM_MATRIX](../10_concept_axiom_theorem_matrix.md) - 概念-公理-定理映射
-- [PROOF_COMPLETION_MATRIX](./10_proof_completion_matrix.md) - 证明完成度矩阵
+- [PROOF_COMPLETION_MATRIX](10_proof_completion_matrix.md) - 证明完成度矩阵
 - [type_system_foundations](../type_theory/10_type_system_foundations.md) - 类型系统基础
-- [ownership_model](./10_ownership_model.md) - 所有权模型
+- [ownership_model](10_ownership_model.md) - 所有权模型
 
 ---
 
@@ -458,7 +458,7 @@
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [formal_methods 目录](./README.md)
+- [formal_methods 目录](README.md)
 - [上级目录](../README.md)
 
 ---

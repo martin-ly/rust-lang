@@ -9,50 +9,50 @@
 
 ## 📋 本文档目录
 
-- [C04 泛型编程 - Trait 系统指南](#c04-泛型编程---trait-系统指南)
-  - [📋 本文档目录](#-本文档目录)
-  - [🎯 学习目标](#-学习目标)
-  - [📚 前置知识](#-前置知识)
-  - [1. Trait 基础](#1-trait-基础)
-    - [1.1 什么是 Trait?](#11-什么是-trait)
-    - [1.2 定义 Trait](#12-定义-trait)
-    - [1.3 实现 Trait](#13-实现-trait)
-    - [1.4 默认实现](#14-默认实现)
-  - [2. Trait 作为参数](#2-trait-作为参数)
-    - [2.1 Trait Bound 语法](#21-trait-bound-语法)
-    - [2.2 impl Trait 语法](#22-impl-trait-语法)
-    - [2.3 多个 Trait Bound](#23-多个-trait-bound)
-  - [3. Trait 作为返回值](#3-trait-作为返回值)
-    - [3.1 返回 impl Trait](#31-返回-impl-trait)
-    - [3.2 限制与注意事项](#32-限制与注意事项)
-  - [4. Trait Object](#4-trait-object)
-    - [4.1 什么是 Trait Object?](#41-什么是-trait-object)
-    - [4.2 创建 Trait Object](#42-创建-trait-object)
-    - [4.3 对象安全 (Object Safety)](#43-对象安全-object-safety)
-  - [5. 标记 Trait (Marker Traits)](#5-标记-trait-marker-traits)
-    - [5.1 常见的标记 Trait](#51-常见的标记-trait)
-    - [5.2 自定义标记 Trait](#52-自定义标记-trait)
-  - [6. Supertraits](#6-supertraits)
-    - [6.1 基础语法](#61-基础语法)
-    - [6.2 实战案例](#62-实战案例)
-  - [7. Blanket Implementations](#7-blanket-implementations)
-    - [7.1 什么是 Blanket Implementations?](#71-什么是-blanket-implementations)
-    - [7.2 实战案例](#72-实战案例)
-  - [8. 孤儿规则与新类型模式](#8-孤儿规则与新类型模式)
-    - [8.1 孤儿规则 (Orphan Rule)](#81-孤儿规则-orphan-rule)
-    - [8.2 新类型模式 (Newtype Pattern)](#82-新类型模式-newtype-pattern)
-  - [9. Trait 的高级用法](#9-trait-的高级用法)
-    - [9.1 条件实现](#91-条件实现)
-    - [9.2 关联函数](#92-关联函数)
-  - [10. 实战综合案例](#10-实战综合案例)
-    - [10.1 案例 1：插件系统](#101-案例-1插件系统)
-    - [10.2 案例 2：类型转换系统](#102-案例-2类型转换系统)
-  - [11. 常见陷阱与最佳实践](#11-常见陷阱与最佳实践)
-    - [11.1 常见错误](#111-常见错误)
-    - [11.2 最佳实践](#112-最佳实践)
-  - [📚 延伸阅读](#-延伸阅读)
-  - [🎯 练习题](#-练习题)
-  - [📝 小结](#-小结)
+- [C04 泛型编程 - Trait 系统指南](.#c04-泛型编程---trait-系统指南)
+  - [📋 本文档目录](.#-本文档目录)
+  - [🎯 学习目标](.#-学习目标)
+  - [📚 前置知识](.#-前置知识)
+  - [1. Trait 基础](.#1-trait-基础)
+    - [1.1 什么是 Trait?](.#11-什么是-trait)
+    - [1.2 定义 Trait](.#12-定义-trait)
+    - [1.3 实现 Trait](.#13-实现-trait)
+    - [1.4 默认实现](.#14-默认实现)
+  - [2. Trait 作为参数](.#2-trait-作为参数)
+    - [2.1 Trait Bound 语法](.#21-trait-bound-语法)
+    - [2.2 impl Trait 语法](.#22-impl-trait-语法)
+    - [2.3 多个 Trait Bound](.#23-多个-trait-bound)
+  - [3. Trait 作为返回值](.#3-trait-作为返回值)
+    - [3.1 返回 impl Trait](.#31-返回-impl-trait)
+    - [3.2 限制与注意事项](.#32-限制与注意事项)
+  - [4. Trait Object](.#4-trait-object)
+    - [4.1 什么是 Trait Object?](.#41-什么是-trait-object)
+    - [4.2 创建 Trait Object](.#42-创建-trait-object)
+    - [4.3 对象安全 (Object Safety)](.#43-对象安全-object-safety)
+  - [5. 标记 Trait (Marker Traits)](.#5-标记-trait-marker-traits)
+    - [5.1 常见的标记 Trait](.#51-常见的标记-trait)
+    - [5.2 自定义标记 Trait](.#52-自定义标记-trait)
+  - [6. Supertraits](.#6-supertraits)
+    - [6.1 基础语法](.#61-基础语法)
+    - [6.2 实战案例](.#62-实战案例)
+  - [7. Blanket Implementations](.#7-blanket-implementations)
+    - [7.1 什么是 Blanket Implementations?](.#71-什么是-blanket-implementations)
+    - [7.2 实战案例](.#72-实战案例)
+  - [8. 孤儿规则与新类型模式](.#8-孤儿规则与新类型模式)
+    - [8.1 孤儿规则 (Orphan Rule)](.#81-孤儿规则-orphan-rule)
+    - [8.2 新类型模式 (Newtype Pattern)](.#82-新类型模式-newtype-pattern)
+  - [9. Trait 的高级用法](.#9-trait-的高级用法)
+    - [9.1 条件实现](.#91-条件实现)
+    - [9.2 关联函数](.#92-关联函数)
+  - [10. 实战综合案例](.#10-实战综合案例)
+    - [10.1 案例 1：插件系统](.#101-案例-1插件系统)
+    - [10.2 案例 2：类型转换系统](.#102-案例-2类型转换系统)
+  - [11. 常见陷阱与最佳实践](.#11-常见陷阱与最佳实践)
+    - [11.1 常见错误](.#111-常见错误)
+    - [11.2 最佳实践](.#112-最佳实践)
+  - [📚 延伸阅读](.#-延伸阅读)
+  - [🎯 练习题](.#-练习题)
+  - [📝 小结](.#-小结)
 
 ---
 
@@ -75,7 +75,7 @@
 
 在学习本指南之前，你应该掌握：
 
-- ✅ [01\_泛型基础指南.md](./01_泛型基础指南.md) - 泛型的基础知识
+- ✅ [01\_泛型基础指南.md](01_泛型基础指南.md) - 泛型的基础知识
 - ✅ Rust 基础语法
 - ✅ 结构体和枚举
 - ✅ 方法和关联函数
@@ -1088,7 +1088,7 @@ trait ObjectSafe {
 
 ## 📚 延伸阅读
 
-- [03\_关联类型指南.md](./03_关联类型指南.md) - 学习关联类型
+- [03\_关联类型指南.md](03_关联类型指南.md) - 学习关联类型
 - [../tier_03_references/02_Trait系统参考.md](../tier_03_references/02_Trait系统参考.md) - 完整 trait 参考
 - [../tier_04_advanced/02_泛型与生命周期.md](../tier_04_advanced/02_泛型与生命周期.md) - trait 与生命周期
 - [../tier_01_foundations/03_术语表.md](../tier_01_foundations/03_术语表.md) - Trait 相关术语
@@ -1134,9 +1134,9 @@ impl Compare for i32 {
 
 **下一步学习**:
 
-1. [03\_关联类型指南.md](./03_关联类型指南.md) - 深入学习关联类型
-2. [04\_类型推断指南.md](./04_类型推断指南.md) - 理解类型推断
-3. [05\_实战模式指南.md](./05_实战模式指南.md) - 学习设计模式
+1. [03\_关联类型指南.md](03_关联类型指南.md) - 深入学习关联类型
+2. [04\_类型推断指南.md](04_类型推断指南.md) - 理解类型推断
+3. [05\_实战模式指南.md](05_实战模式指南.md) - 学习设计模式
 
 ---
 

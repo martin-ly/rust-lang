@@ -16,7 +16,7 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价 const trait 的设计权衡
 > **前置依赖**: [Trait](../02_intermediate/01_traits.md) · [Const Generics](../02_intermediate/02_generics.md)
-> **后置延伸**: [Const Trait Impl](./11_const_trait_impl_preview.md)
+> **后置延伸**: [Const Trait Impl](11_const_trait_impl_preview.md)
 > **来源**: [Rust Reference — Const Eval](https://doc.rust-lang.org/reference/const_eval.html) · [RFC 2632](https://github.com/rust-lang/rust/issues/67792)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >

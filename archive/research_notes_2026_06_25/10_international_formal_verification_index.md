@@ -9,29 +9,29 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [国际 Rust 形式化验证成果对标索引](#国际-rust-形式化验证成果对标索引)
-  - [📑 目录](#-目录)
-  - [一、国际权威成果总览](#一国际权威成果总览)
-  - [二、逐项对标与差距](#二逐项对标与差距)
-    - [2.1 RustBelt](#21-rustbelt)
-    - [2.2 RustBelt Meets Relaxed Memory (POPL 2020)](#22-rustbelt-meets-relaxed-memory-popl-2020)
-    - [2.3 RustSEM (K-Framework, 2024)](#23-rustsem-k-framework-2024)
-    - [2.4 Aeneas](#24-aeneas)
-    - [2.5 coq-of-rust](#25-coq-of-rust)
-    - [2.6 Crux-MIR](#26-crux-mir)
-    - [2.7 AutoVerus](#27-autoverus)
-    - [2.8 Tree Borrows (PLDI 2025)](#28-tree-borrows-pldi-2025)
-  - [三、POPL/PLDI/ICFP 论文对齐](#三poplpldiicfp-论文对齐)
-  - [四、与本项目 PROOF\_INDEX 的映射](#四与本项目-proof_index-的映射)
-  - [五、季度更新记录](#五季度更新记录)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [国际 Rust 形式化验证成果对标索引](.#国际-rust-形式化验证成果对标索引)
+  - [📑 目录](.#-目录)
+  - [一、国际权威成果总览](.#一国际权威成果总览)
+  - [二、逐项对标与差距](.#二逐项对标与差距)
+    - [2.1 RustBelt](.#21-rustbelt)
+    - [2.2 RustBelt Meets Relaxed Memory (POPL 2020)](.#22-rustbelt-meets-relaxed-memory-popl-2020)
+    - [2.3 RustSEM (K-Framework, 2024)](.#23-rustsem-k-framework-2024)
+    - [2.4 Aeneas](.#24-aeneas)
+    - [2.5 coq-of-rust](.#25-coq-of-rust)
+    - [2.6 Crux-MIR](.#26-crux-mir)
+    - [2.7 AutoVerus](.#27-autoverus)
+    - [2.8 Tree Borrows (PLDI 2025)](.#28-tree-borrows-pldi-2025)
+  - [三、POPL/PLDI/ICFP 论文对齐](.#三poplpldiicfp-论文对齐)
+  - [四、与本项目 PROOF\_INDEX 的映射](.#四与本项目-proof_index-的映射)
+  - [五、季度更新记录](.#五季度更新记录)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 > **创建日期**: 2026-02-14
 > **最后更新**: 2026-02-28
@@ -48,11 +48,11 @@
 
 | 成果 | 机构/作者 | 年份 | 形式化范围 | 证明助手/工具 | 与本项目对应 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **RustBelt** | MPI-SWS (Jung et al.) | 2018 | 所有权、借用、MIR 级 | Iris (Coq) | ownership_model, borrow_checker_proof, [coq_skeleton](../../archive/deprecated/coq_skeleton/README.md)（T-OW2/BR1/TY3 骨架） |
+| **RustBelt** | MPI-SWS (Jung et al.) | 2018 | 所有权、借用、MIR 级 | Iris (Coq) | ownership_model, borrow_checker_proof, [coq_skeleton](../deprecated/coq_skeleton/README.md)（T-OW2/BR1/TY3 骨架） |
 | **Tree Borrows** | ETH (PLDI 2025) | 2025 | 借用模型、树结构、54% 更少拒绝 | Iris (Coq)、Rocq | borrow_checker_proof 演进；Distinguished Paper |
 | **RustBelt Meets Relaxed Memory** | MPI-SWS | 2020 | 松弛内存、Arc、原子操作 | Iris (Coq) | formal_methods Phase 4（部分） |
 | **Rust Distilled** | DBLP | - | 高层所有权、无生命周期 | - | ownership_model（高层部分） |
-| **Aeneas** | INRIA 等 | 2023+ | Safe Rust → Coq/F*/HOL4/Lean | 多后端 | [AENEAS_INTEGRATION_PLAN](../../archive/research_notes_2026_06_25/10_aeneas_integration_plan.md) |
+| **Aeneas** | INRIA 等 | 2023+ | Safe Rust → Coq/F*/HOL4/Lean | 多后端 | [AENEAS_INTEGRATION_PLAN](10_aeneas_integration_plan.md) |
 | **coq-of-rust** | - | 2023+ | THIR → Rocq，借用与 effect | Rocq (Coq) | 无直接对应 |
 | **Crux-MIR** | Galois | 2024 | 比特级精确、密码学验证 | Crux | 无直接对应 |
 | **RustSEM** | 2024 (FMSD) | 2024 | 内存级 OBS、可执行语义、700+ 测试 | K-Framework | 无直接对应 |
@@ -73,7 +73,7 @@
 - **论文**: RustBelt: Logical Foundations for the Future of Safe Systems Programming
 - **形式化**: λ Rust 模型、分离逻辑、MIR 级语义
 - **本项目对应**: `formal_methods/10_ownership_model.md`, `formal_methods/10_borrow_checker_proof.md`
-- **差距**: 无 Iris 分离逻辑形式化；无 MIR 级建模；**Coq 骨架已创建**（[coq_skeleton/OWNERSHIP_UNIQUENESS.v](../../archive/deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v)），证明 Admitted 待补全
+- **差距**: 无 Iris 分离逻辑形式化；无 MIR 级建模；**Coq 骨架已创建**（[coq_skeleton/OWNERSHIP_UNIQUENESS.v](../deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v)），证明 Admitted 待补全
 
 ### 2.2 RustBelt Meets Relaxed Memory (POPL 2020)
 
@@ -98,7 +98,7 @@
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - **形式化**: Safe Rust 翻译到 Coq、F*、HOL4、Lean
-- **本项目对应**: [AENEAS_INTEGRATION_PLAN](../../archive/research_notes_2026_06_25/10_aeneas_integration_plan.md)（对接方案已制定）
+- **本项目对应**: [AENEAS_INTEGRATION_PLAN](10_aeneas_integration_plan.md)（对接方案已制定）
 - **差距**: 无证明助手翻译；无多后端验证
 - **对接状态**: 📋 计划中 — 示例选取、环境搭建、翻译验证待实施
 
@@ -240,7 +240,7 @@
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

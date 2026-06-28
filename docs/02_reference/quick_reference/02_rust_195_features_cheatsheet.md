@@ -14,32 +14,32 @@
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [Rust 1.95.0 特性与 API 速查表](#rust-1950-特性与-api-速查表)
-  - [📑 目录](#-目录)
-  - [一、语言特性](#一语言特性)
-    - [1. `cfg_select!` 宏](#1-cfg_select-宏)
-    - [2. `if let` guards on match arms](#2-if-let-guards-on-match-arms)
-    - [3. 路径段关键字重命名导入](#3-路径段关键字重命名导入)
+- [Rust 1.95.0 特性与 API 速查表](.#rust-1950-特性与-api-速查表)
+  - [📑 目录](.#-目录)
+  - [一、语言特性](.#一语言特性)
+    - [1. `cfg_select!` 宏](.#1-cfg_select-宏)
+    - [2. `if let` guards on match arms](.#2-if-let-guards-on-match-arms)
+    - [3. 路径段关键字重命名导入](.#3-路径段关键字重命名导入)
 <a id="--remap-path-scope-稳定化"></a>
-    - [4. PowerPC/PowerPC64 内联汇编稳定化](#4-powerpcpowerpc64-内联汇编稳定化)
-  - [二、标准库新 API](#二标准库新-api)
-    - [`core::range` 模块](#corerange-模块)
-    - [原子操作 — `update` / `try_update`](#原子操作--update--try_update)
-    - [集合 — 获取可变引用的插入操作](#集合--获取可变引用的插入操作)
-    - [裸指针 — 不安全转引用](#裸指针--不安全转引用)
-    - [布局计算 — `Layout` 新 API](#布局计算--layout-新-api)
-    - [提示 — `cold_path`](#提示--cold_path)
-    - [布尔转换 — `TryFrom<{integer}>`](#布尔转换--tryfrominteger)
-    - [`MaybeUninit` 数组互转](#maybeuninit-数组互转)
-    - [`Cell` 数组引用](#cell-数组引用)
-  - [三、编译器与平台](#三编译器与平台)
-    - [`--remap-path-scope` 稳定化](#--remap-path-scope-稳定化)
-    - [平台支持提升](#平台支持提升)
-    - [重要兼容性变更](#重要兼容性变更)
-  - [四、Const 上下文新稳定 API](#四const-上下文新稳定-api)
-  - [五、与 Rust 2024 Edition 的关联](#五与-rust-2024-edition-的关联)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+    - [4. PowerPC/PowerPC64 内联汇编稳定化](.#4-powerpcpowerpc64-内联汇编稳定化)
+  - [二、标准库新 API](.#二标准库新-api)
+    - [`core::range` 模块](.#corerange-模块)
+    - [原子操作 — `update` / `try_update`](.#原子操作--update--try_update)
+    - [集合 — 获取可变引用的插入操作](.#集合--获取可变引用的插入操作)
+    - [裸指针 — 不安全转引用](.#裸指针--不安全转引用)
+    - [布局计算 — `Layout` 新 API](.#布局计算--layout-新-api)
+    - [提示 — `cold_path`](.#提示--cold_path)
+    - [布尔转换 — `TryFrom<{integer}>`](.#布尔转换--tryfrominteger)
+    - [`MaybeUninit` 数组互转](.#maybeuninit-数组互转)
+    - [`Cell` 数组引用](.#cell-数组引用)
+  - [三、编译器与平台](.#三编译器与平台)
+    - [`--remap-path-scope` 稳定化](.#--remap-path-scope-稳定化)
+    - [平台支持提升](.#平台支持提升)
+    - [重要兼容性变更](.#重要兼容性变更)
+  - [四、Const 上下文新稳定 API](.#四const-上下文新稳定-api)
+  - [五、与 Rust 2024 Edition 的关联](.#五与-rust-2024-edition-的关联)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 一、语言特性
 >
@@ -392,8 +392,8 @@ Rust 1.95.0 发布时，Rust 2024 Edition 已稳定 3 个月（自 1.85.0）。1
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [quick_reference 目录](./README.md)
-- [速查表索引](./README.md)
+- [quick_reference 目录](README.md)
+- [速查表索引](README.md)
 
 ---
 

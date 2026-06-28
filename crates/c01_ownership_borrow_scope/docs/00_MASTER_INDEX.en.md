@@ -1,7 +1,7 @@
 # Rust Ownership System - Master Index (English)
 
 > **Version**: 5.0 | **Rust**: 1.93.0+ | **Last Update**: 2026-02-13
-> **Full Chinese version**: [00_MASTER_INDEX.md](./00_MASTER_INDEX.md)
+> **Full Chinese version**: [00_MASTER_INDEX.md](00_MASTER_INDEX.md)
 
 ---
 

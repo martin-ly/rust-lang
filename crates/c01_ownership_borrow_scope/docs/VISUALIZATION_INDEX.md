@@ -2,71 +2,71 @@
 
 ## 📊 目录
 
-- [Rust 所有权系统可视化文档导航](#rust-所有权系统可视化文档导航)
-  - [📊 目录](#-目录)
-  - [📊 文档概述](#-文档概述)
-  - [🎯 可视化文档体系](#-可视化文档体系)
-    - [四大核心可视化文档](#四大核心可视化文档)
-  - [📖 文档详细介绍](#-文档详细介绍)
-    - [1. 知识图谱 (Knowledge Graph)](#1-知识图谱-knowledge-graph)
-      - [📋 内容概要](#-内容概要)
-      - [🎯 适用场景](#-适用场景)
-      - [📊 核心图表](#-核心图表)
-      - [🔗 相关章节](#-相关章节)
-    - [2. 多维矩阵对比 (Multi-dimensional Matrix)](#2-多维矩阵对比-multi-dimensional-matrix)
-      - [📋 内容概要2](#-内容概要2)
-      - [🎯 适用场景2](#-适用场景2)
-      - [📊 核心矩阵](#-核心矩阵)
-      - [💡 特色内容](#-特色内容)
-      - [🔗 相关章节2](#-相关章节2)
-    - [3. 思维导图 (Mind Map)](#3-思维导图-mind-map)
-      - [📋 内容概要3](#-内容概要3)
-      - [🎯 适用场景3](#-适用场景3)
-      - [📊 核心导图](#-核心导图)
-      - [💡 特色内容3](#-特色内容3)
-      - [🔗 相关章节3](#-相关章节3)
-    - [4. 概念关系网络 (Concept Relationship Network)](#4-概念关系网络-concept-relationship-network)
-      - [📋 内容概要4](#-内容概要4)
-      - [🎯 适用场景4](#-适用场景4)
-      - [📊 核心网络图](#-核心网络图)
-      - [💡 特色内容4](#-特色内容4)
-      - [🔗 相关章节4](#-相关章节4)
-  - [🗺️ 使用指南](#️-使用指南)
-    - [按学习阶段使用](#按学习阶段使用)
-      - [🟢 初学者阶段（0-3个月）](#-初学者阶段0-3个月)
-      - [🟡 进阶阶段（3-12个月）](#-进阶阶段3-12个月)
-      - [🔴 专家阶段（1年+）](#-专家阶段1年)
-    - [按使用目的选择](#按使用目的选择)
-      - [📚 学习与理解](#-学习与理解)
-      - [🛠️ 实践与应用](#️-实践与应用)
-      - [🔍 问题诊断与解决](#-问题诊断与解决)
-      - [💡 设计与架构](#-设计与架构)
-  - [📊 可视化技术说明](#-可视化技术说明)
-    - [Mermaid 图表](#mermaid-图表)
-    - [查看方式](#查看方式)
-      - [在线查看](#在线查看)
-      - [本地查看](#本地查看)
-      - [导出为图片](#导出为图片)
-  - [🔗 与核心文档的关联](#-与核心文档的关联)
-    - [理论基础文档](#理论基础文档)
-    - [核心概念文档](#核心概念文档)
-    - [高级特性文档](#高级特性文档)
-    - [实践应用文档](#实践应用文档)
-  - [📈 学习建议](#-学习建议)
-    - [系统学习建议](#系统学习建议)
-    - [实践学习建议](#实践学习建议)
-    - [定期复习建议](#定期复习建议)
-  - [🎯 下一步行动](#-下一步行动)
-    - [初学者](#初学者)
-    - [进阶者](#进阶者)
-    - [专家](#专家)
-  - [📚 参考资料](#-参考资料)
-    - [官方资源](#官方资源)
-    - [项目文档](#项目文档)
-    - [版本特性](#版本特性)
-  - [🤝 反馈与贡献](#-反馈与贡献)
-    - [反馈方式](#反馈方式)
-    - [贡献指南](#贡献指南)
+- [Rust 所有权系统可视化文档导航](.#rust-所有权系统可视化文档导航)
+  - [📊 目录](.#-目录)
+  - [📊 文档概述](.#-文档概述)
+  - [🎯 可视化文档体系](.#-可视化文档体系)
+    - [四大核心可视化文档](.#四大核心可视化文档)
+  - [📖 文档详细介绍](.#-文档详细介绍)
+    - [1. 知识图谱 (Knowledge Graph)](.#1-知识图谱-knowledge-graph)
+      - [📋 内容概要](.#-内容概要)
+      - [🎯 适用场景](.#-适用场景)
+      - [📊 核心图表](.#-核心图表)
+      - [🔗 相关章节](.#-相关章节)
+    - [2. 多维矩阵对比 (Multi-dimensional Matrix)](.#2-多维矩阵对比-multi-dimensional-matrix)
+      - [📋 内容概要2](.#-内容概要2)
+      - [🎯 适用场景2](.#-适用场景2)
+      - [📊 核心矩阵](.#-核心矩阵)
+      - [💡 特色内容](.#-特色内容)
+      - [🔗 相关章节2](.#-相关章节2)
+    - [3. 思维导图 (Mind Map)](.#3-思维导图-mind-map)
+      - [📋 内容概要3](.#-内容概要3)
+      - [🎯 适用场景3](.#-适用场景3)
+      - [📊 核心导图](.#-核心导图)
+      - [💡 特色内容3](.#-特色内容3)
+      - [🔗 相关章节3](.#-相关章节3)
+    - [4. 概念关系网络 (Concept Relationship Network)](.#4-概念关系网络-concept-relationship-network)
+      - [📋 内容概要4](.#-内容概要4)
+      - [🎯 适用场景4](.#-适用场景4)
+      - [📊 核心网络图](.#-核心网络图)
+      - [💡 特色内容4](.#-特色内容4)
+      - [🔗 相关章节4](.#-相关章节4)
+  - [🗺️ 使用指南](.#️-使用指南)
+    - [按学习阶段使用](.#按学习阶段使用)
+      - [🟢 初学者阶段（0-3个月）](.#-初学者阶段0-3个月)
+      - [🟡 进阶阶段（3-12个月）](.#-进阶阶段3-12个月)
+      - [🔴 专家阶段（1年+）](.#-专家阶段1年)
+    - [按使用目的选择](.#按使用目的选择)
+      - [📚 学习与理解](.#-学习与理解)
+      - [🛠️ 实践与应用](.#️-实践与应用)
+      - [🔍 问题诊断与解决](.#-问题诊断与解决)
+      - [💡 设计与架构](.#-设计与架构)
+  - [📊 可视化技术说明](.#-可视化技术说明)
+    - [Mermaid 图表](.#mermaid-图表)
+    - [查看方式](.#查看方式)
+      - [在线查看](.#在线查看)
+      - [本地查看](.#本地查看)
+      - [导出为图片](.#导出为图片)
+  - [🔗 与核心文档的关联](.#-与核心文档的关联)
+    - [理论基础文档](.#理论基础文档)
+    - [核心概念文档](.#核心概念文档)
+    - [高级特性文档](.#高级特性文档)
+    - [实践应用文档](.#实践应用文档)
+  - [📈 学习建议](.#-学习建议)
+    - [系统学习建议](.#系统学习建议)
+    - [实践学习建议](.#实践学习建议)
+    - [定期复习建议](.#定期复习建议)
+  - [🎯 下一步行动](.#-下一步行动)
+    - [初学者](.#初学者)
+    - [进阶者](.#进阶者)
+    - [专家](.#专家)
+  - [📚 参考资料](.#-参考资料)
+    - [官方资源](.#官方资源)
+    - [项目文档](.#项目文档)
+    - [版本特性](.#版本特性)
+  - [🤝 反馈与贡献](.#-反馈与贡献)
+    - [反馈方式](.#反馈方式)
+    - [贡献指南](.#贡献指南)
 
 **版本**: 1.0
 **Rust 版本**: 1.90+
@@ -110,7 +110,7 @@ graph TB
 
 ### 1. 知识图谱 (Knowledge Graph)
 
-**文档**: [KNOWLEDGE_GRAPH.md](./KNOWLEDGE_GRAPH.md)
+**文档**: [KNOWLEDGE_GRAPH.md](KNOWLEDGE_GRAPH.md)
 
 #### 📋 内容概要
 
@@ -142,15 +142,15 @@ graph TB
 
 #### 🔗 相关章节
 
-- [所有权理论](./tier_04_advanced/01_ownership_theory.md)
-- [借用理论](./tier_04_advanced/02_borrowing_theory.md)
-- [生命周期理论](./tier_04_advanced/03_lifetime_theory.md)
+- [所有权理论](tier_04_advanced/01_ownership_theory.md)
+- [借用理论](tier_04_advanced/02_borrowing_theory.md)
+- [生命周期理论](tier_04_advanced/03_lifetime_theory.md)
 
 ---
 
 ### 2. 多维矩阵对比 (Multi-dimensional Matrix)
 
-**文档**: [MULTIDIMENSIONAL_MATRIX.md](./MULTIDIMENSIONAL_MATRIX.md)
+**文档**: [MULTIDIMENSIONAL_MATRIX.md](MULTIDIMENSIONAL_MATRIX.md)
 
 #### 📋 内容概要2
 
@@ -189,15 +189,15 @@ graph TB
 
 #### 🔗 相关章节2
 
-- [所有权基础](./tier_02_guides/01_ownership_fundamentals.md)
-- [借用系统](./tier_02_guides/02_borrowing_system.md)
-- [智能指针](./tier_03_references/04_smart_pointers.md)
+- [所有权基础](tier_02_guides/01_ownership_fundamentals.md)
+- [借用系统](tier_02_guides/02_borrowing_system.md)
+- [智能指针](tier_03_references/04_smart_pointers.md)
 
 ---
 
 ### 3. 思维导图 (Mind Map)
 
-**文档**: [MIND_MAP.md](./MIND_MAP.md)
+**文档**: [MIND_MAP.md](MIND_MAP.md)
 
 #### 📋 内容概要3
 
@@ -242,15 +242,15 @@ graph TB
 
 #### 🔗 相关章节3
 
-- [最佳实践](./tier_01_foundations/04_常见问题.md)
-- [常见陷阱](./tier_01_foundations/04_常见问题.md)
-- [性能调优](./tier_03_references/09_性能优化参考.md)
+- [最佳实践](tier_01_foundations/04_常见问题.md)
+- [常见陷阱](tier_01_foundations/04_常见问题.md)
+- [性能调优](tier_03_references/09_性能优化参考.md)
 
 ---
 
 ### 4. 概念关系网络 (Concept Relationship Network)
 
-**文档**: [CONCEPT_RELATIONSHIP_NETWORK.md](./CONCEPT_RELATIONSHIP_NETWORK.md)
+**文档**: [CONCEPT_RELATIONSHIP_NETWORK.md](CONCEPT_RELATIONSHIP_NETWORK.md)
 
 #### 📋 内容概要4
 
@@ -296,9 +296,9 @@ graph TB
 
 #### 🔗 相关章节4
 
-- [高级所有权](./tier_03_references/01_advanced_ownership.md)
-- [高级借用](./tier_03_references/02_advanced_borrowing.md)
-- [高级生命周期](./tier_03_references/03_生命周期参考.md)
+- [高级所有权](tier_03_references/01_advanced_ownership.md)
+- [高级借用](tier_03_references/02_advanced_borrowing.md)
+- [高级生命周期](tier_03_references/03_生命周期参考.md)
 
 ---
 
@@ -310,9 +310,9 @@ graph TB
 
 **推荐阅读顺序**:
 
-1. **先看**: [思维导图](./MIND_MAP.md) - 初学者学习路径
-2. **然后**: [知识图谱](./KNOWLEDGE_GRAPH.md) - 核心概念层次结构
-3. **参考**: [多维矩阵](./MULTIDIMENSIONAL_MATRIX.md) - 基础概念对比
+1. **先看**: [思维导图](MIND_MAP.md) - 初学者学习路径
+2. **然后**: [知识图谱](KNOWLEDGE_GRAPH.md) - 核心概念层次结构
+3. **参考**: [多维矩阵](MULTIDIMENSIONAL_MATRIX.md) - 基础概念对比
 
 **重点关注**:
 
@@ -325,9 +325,9 @@ graph TB
 
 **推荐阅读顺序**:
 
-1. **先看**: [思维导图](./MIND_MAP.md) - 进阶学习路径
-2. **深入**: [概念关系网络](./CONCEPT_RELATIONSHIP_NETWORK.md) - 核心机制
-3. **对比**: [多维矩阵](./MULTIDIMENSIONAL_MATRIX.md) - 智能指针/并发原语选择
+1. **先看**: [思维导图](MIND_MAP.md) - 进阶学习路径
+2. **深入**: [概念关系网络](CONCEPT_RELATIONSHIP_NETWORK.md) - 核心机制
+3. **对比**: [多维矩阵](MULTIDIMENSIONAL_MATRIX.md) - 智能指针/并发原语选择
 
 **重点关注**:
 
@@ -340,9 +340,9 @@ graph TB
 
 **推荐阅读顺序**:
 
-1. **系统学习**: [概念关系网络](./CONCEPT_RELATIONSHIP_NETWORK.md) - 完整关系网
-2. **深度对比**: [多维矩阵](./MULTIDIMENSIONAL_MATRIX.md) - 跨语言对比
-3. **全局视图**: [知识图谱](./KNOWLEDGE_GRAPH.md) - 完整知识网络
+1. **系统学习**: [概念关系网络](CONCEPT_RELATIONSHIP_NETWORK.md) - 完整关系网
+2. **深度对比**: [多维矩阵](MULTIDIMENSIONAL_MATRIX.md) - 跨语言对比
+3. **全局视图**: [知识图谱](KNOWLEDGE_GRAPH.md) - 完整知识网络
 
 **重点关注**:
 
@@ -434,46 +434,46 @@ mmdc -i CONCEPT_RELATIONSHIP_NETWORK.md -o network.png
 
 | 理论文档                                               | 对应可视化章节              |
 | :--- | :--- |
-| [所有权理论](./tier_04_advanced/01_ownership_theory.md)       | 知识图谱-所有权系统完整图谱 |
-| [借用理论](./tier_04_advanced/02_borrowing_theory.md)         | 知识图谱-借用系统完整图谱   |
-| [生命周期理论](./tier_04_advanced/03_lifetime_theory.md)      | 概念关系网络-生命周期关系网 |
-| [内存安全理论](./tier_04_advanced/04_memory_safety_theory.md) | 概念关系网络-内存安全保证网 |
+| [所有权理论](tier_04_advanced/01_ownership_theory.md)       | 知识图谱-所有权系统完整图谱 |
+| [借用理论](tier_04_advanced/02_borrowing_theory.md)         | 知识图谱-借用系统完整图谱   |
+| [生命周期理论](tier_04_advanced/03_lifetime_theory.md)      | 概念关系网络-生命周期关系网 |
+| [内存安全理论](tier_04_advanced/04_memory_safety_theory.md) | 概念关系网络-内存安全保证网 |
 
 ### 核心概念文档
 
 | 核心文档                                             | 对应可视化章节          |
 | :--- | :--- |
-| [所有权基础](./tier_02_guides/01_ownership_fundamentals.md) | 多维矩阵-所有权概念对比 |
-| [借用系统](./tier_02_guides/02_borrowing_system.md)         | 多维矩阵-借用模式对比   |
-| [生命周期注解](./tier_02_guides/03_lifetime_annotations.md) | 多维矩阵-生命周期对比   |
-| [作用域管理](./tier_02_guides/04_scope_management.md)       | 知识图谱-作用域系统     |
+| [所有权基础](tier_02_guides/01_ownership_fundamentals.md) | 多维矩阵-所有权概念对比 |
+| [借用系统](tier_02_guides/02_borrowing_system.md)         | 多维矩阵-借用模式对比   |
+| [生命周期注解](tier_02_guides/03_lifetime_annotations.md) | 多维矩阵-生命周期对比   |
+| [作用域管理](tier_02_guides/04_scope_management.md)       | 知识图谱-作用域系统     |
 
 ### 高级特性文档
 
 | 高级文档                                               | 对应可视化章节              |
 | :--- | :--- |
-| [高级所有权](./tier_03_references/01_advanced_ownership.md)   | 概念关系网络-所有权核心关系 |
-| [高级借用](./tier_03_references/02_advanced_borrowing.md)     | 概念关系网络-借用检查器网络 |
-| [高级生命周期](./tier_03_references/03_生命周期参考.md) | 概念关系网络-生命周期关系网 |
-| [智能指针](./tier_03_references/04_smart_pointers.md)         | 思维导图-智能指针生态树     |
+| [高级所有权](tier_03_references/01_advanced_ownership.md)   | 概念关系网络-所有权核心关系 |
+| [高级借用](tier_03_references/02_advanced_borrowing.md)     | 概念关系网络-借用检查器网络 |
+| [高级生命周期](tier_03_references/03_生命周期参考.md) | 概念关系网络-生命周期关系网 |
+| [智能指针](tier_03_references/04_smart_pointers.md)         | 思维导图-智能指针生态树     |
 
 ### 实践应用文档
 
 | 实践文档                                           | 对应可视化章节            |
 | :--- | :--- |
-| [设计模式](./tier_02_guides/07_实战项目集.md)    | 知识图谱-设计模式与所有权 |
-| [最佳实践](./tier_01_foundations/04_常见问题.md)     | 多维矩阵-最佳实践决策树   |
-| [常见陷阱](./tier_01_foundations/04_常见问题.md)    | 思维导图-常见错误诊断树   |
-| [性能调优](./tier_03_references/09_性能优化参考.md) | 概念关系网络-性能优化网络 |
+| [设计模式](tier_02_guides/07_实战项目集.md)    | 知识图谱-设计模式与所有权 |
+| [最佳实践](tier_01_foundations/04_常见问题.md)     | 多维矩阵-最佳实践决策树   |
+| [常见陷阱](tier_01_foundations/04_常见问题.md)    | 思维导图-常见错误诊断树   |
+| [性能调优](tier_03_references/09_性能优化参考.md) | 概念关系网络-性能优化网络 |
 
 ## 📈 学习建议
 
 ### 系统学习建议
 
-1. **第一遍**: 通读[思维导图](./MIND_MAP.md)，建立整体印象
-2. **第二遍**: 结合[知识图谱](./KNOWLEDGE_GRAPH.md)，理解概念关系
-3. **第三遍**: 参考[多维矩阵](./MULTIDIMENSIONAL_MATRIX.md)，深入对比
-4. **第四遍**: 研读[概念关系网络](./CONCEPT_RELATIONSHIP_NETWORK.md)，掌握深层机制
+1. **第一遍**: 通读[思维导图](MIND_MAP.md)，建立整体印象
+2. **第二遍**: 结合[知识图谱](KNOWLEDGE_GRAPH.md)，理解概念关系
+3. **第三遍**: 参考[多维矩阵](MULTIDIMENSIONAL_MATRIX.md)，深入对比
+4. **第四遍**: 研读[概念关系网络](CONCEPT_RELATIONSHIP_NETWORK.md)，掌握深层机制
 
 ### 实践学习建议
 
@@ -493,23 +493,23 @@ mmdc -i CONCEPT_RELATIONSHIP_NETWORK.md -o network.png
 
 ### 初学者
 
-1. ✅ 阅读 [思维导图-初学者路径](./MIND_MAP.md#初学者学习路径0-3个月)
-2. ✅ 学习 [知识图谱-核心层](./KNOWLEDGE_GRAPH.md#核心层知识图谱)
-3. ✅ 实践 [所有权基础](./tier_02_guides/01_ownership_fundamentals.md)
-4. ✅ 练习 [借用系统](./tier_02_guides/02_borrowing_system.md)
+1. ✅ 阅读 [思维导图-初学者路径](MIND_MAP.md#初学者学习路径0-3个月)
+2. ✅ 学习 [知识图谱-核心层](KNOWLEDGE_GRAPH.md#核心层知识图谱)
+3. ✅ 实践 [所有权基础](tier_02_guides/01_ownership_fundamentals.md)
+4. ✅ 练习 [借用系统](tier_02_guides/02_borrowing_system.md)
 
 ### 进阶者
 
-1. ✅ 阅读 [思维导图-进阶路径](./MIND_MAP.md#进阶学习路径3-12个月)
-2. ✅ 研究 [概念关系网络-智能指针](./CONCEPT_RELATIONSHIP_NETWORK.md#智能指针关系网络)
-3. ✅ 应用 [多维矩阵-智能指针选择](./MULTIDIMENSIONAL_MATRIX.md#智能指针选择决策矩阵)
-4. ✅ 掌握 [高级所有权模式](./tier_03_references/01_advanced_ownership.md)
+1. ✅ 阅读 [思维导图-进阶路径](MIND_MAP.md#进阶学习路径3-12个月)
+2. ✅ 研究 [概念关系网络-智能指针](CONCEPT_RELATIONSHIP_NETWORK.md#智能指针关系网络)
+3. ✅ 应用 [多维矩阵-智能指针选择](MULTIDIMENSIONAL_MATRIX.md#智能指针选择决策矩阵)
+4. ✅ 掌握 [高级所有权模式](tier_03_references/01_advanced_ownership.md)
 
 ### 专家
 
-1. ✅ 深入 [概念关系网络-完整网络](./CONCEPT_RELATIONSHIP_NETWORK.md)
-2. ✅ 对比 [多维矩阵-跨语言对比](./MULTIDIMENSIONAL_MATRIX.md#跨语言对比)
-3. ✅ 研究 [Rust 1.90 特性](./RUST_190_COMPREHENSIVE_MINDMAP.md)
+1. ✅ 深入 [概念关系网络-完整网络](CONCEPT_RELATIONSHIP_NETWORK.md)
+2. ✅ 对比 [多维矩阵-跨语言对比](MULTIDIMENSIONAL_MATRIX.md#跨语言对比)
+3. ✅ 研究 [Rust 1.90 特性](RUST_190_COMPREHENSIVE_MINDMAP.md)
 4. ✅ 贡献开源项目
 
 ## 📚 参考资料
@@ -523,15 +523,15 @@ mmdc -i CONCEPT_RELATIONSHIP_NETWORK.md -o network.png
 
 ### 项目文档
 
-- [主索引](./00_MASTER_INDEX.md)
-- [完整文档索引](./COMPREHENSIVE_DOCUMENTATION_INDEX.md)
-- [README](./README.md)
+- [主索引](00_MASTER_INDEX.md)
+- [完整文档索引](COMPREHENSIVE_DOCUMENTATION_INDEX.md)
+- [README](README.md)
 
 ### 版本特性
 
-- [Rust 1.90 全面指南](./RUST_190_COMPREHENSIVE_MINDMAP.md)
-- [Rust 1.90 特性分析](./RUST_190_EXAMPLES_COLLECTION.md)
-- [Rust 1.89 特性分析](./RUST_190_COMPREHENSIVE_MINDMAP.md)
+- [Rust 1.90 全面指南](RUST_190_COMPREHENSIVE_MINDMAP.md)
+- [Rust 1.90 特性分析](RUST_190_EXAMPLES_COLLECTION.md)
+- [Rust 1.89 特性分析](RUST_190_COMPREHENSIVE_MINDMAP.md)
 
 ## 🤝 反馈与贡献
 

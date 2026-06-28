@@ -21,7 +21,7 @@
 > [Rustfmt Documentation](https://github.com/rust-lang/rustfmt)
 >
 > **前置概念**:
-> [Toolchain](./01_toolchain.md) ·
+> [Toolchain](01_toolchain.md) ·
 > Cargo Workspaces
 
 ---
@@ -62,7 +62,7 @@ regex = "=1.10.2"
 - `cargo update` 应用兼容更新（PATCH 和 MINOR），不应用 MAJOR 更新
 - `cargo.lock` 锁定实际解析的版本，确保可复现构建
 
-**知识点**：版本约束直接影响供应链安全。过于宽泛（`^1`）可能引入破坏变更，过于严格（`=x.y.z`）可能错过安全补丁。[→ Cargo 工具链详解](./01_toolchain.md)
+**知识点**：版本约束直接影响供应链安全。过于宽泛（`^1`）可能引入破坏变更，过于严格（`=x.y.z`）可能错过安全补丁。[→ Cargo 工具链详解](01_toolchain.md)
 
 </details>
 
@@ -98,7 +98,7 @@ cargo test --all-targets
 
 **注意**：`cargo check` 不运行代码生成和链接，因此无法检测链接错误。
 
-**知识点**：`cargo check` 是日常开发最高效的命令。Clippy 是 Rust 的"高级 linter"，可捕获逻辑错误而不仅是语法错误。[→ 工具链详解](./01_toolchain.md)
+**知识点**：`cargo check` 是日常开发最高效的命令。Clippy 是 Rust 的"高级 linter"，可捕获逻辑错误而不仅是语法错误。[→ 工具链详解](01_toolchain.md)
 
 </details>
 
@@ -200,7 +200,7 @@ fn main() {
 #![deny(clippy::correctness)]     // 将 correctness 提升为错误
 ```
 
-**知识点**：Clippy 拥有 600+ lint，是 Rust 代码质量的第一道防线。`cargo clippy --fix` 可自动修复部分警告。[→ Clippy 详解](./01_toolchain.md)
+**知识点**：Clippy 拥有 600+ lint，是 Rust 代码质量的第一道防线。`cargo clippy --fix` 可自动修复部分警告。[→ Clippy 详解](01_toolchain.md)
 
 </details>
 
@@ -307,7 +307,7 @@ opt-level = 3       # 最高优化级别
 strip = true        # 移除 debug 符号
 ```
 
-**知识点**：`.cargo/config.toml` 是项目级构建配置，`.cargo/config.toml`（无点）是用户级全局配置。合理配置可显著改善编译性能和产物体积。[→ Cargo 工具链详解](./01_toolchain.md)
+**知识点**：`.cargo/config.toml` 是项目级构建配置，`.cargo/config.toml`（无点）是用户级全局配置。合理配置可显著改善编译性能和产物体积。[→ Cargo 工具链详解](01_toolchain.md)
 
 </details>
 
@@ -361,7 +361,7 @@ pub fn add(a: i32, b: i32) -> i32 {
 /// [`ModuleName`](crate::module::ModuleName) — 内部链接
 ```
 
-**知识点**：文档测试是 Rust 独特的质量保证机制——确保文档中的示例代码始终可编译、可通过。[→ 工具链详解](./01_toolchain.md)
+**知识点**：文档测试是 Rust 独特的质量保证机制——确保文档中的示例代码始终可编译、可通过。[→ 工具链详解](01_toolchain.md)
 
 </details>
 
@@ -401,7 +401,7 @@ cargo publish
 - 最多 10 个 crate 所有者
 - yank（撤回）不会阻止已锁定版本的下载
 
-**知识点**：crates.io 是 Rust 生态的中心枢纽。谨慎的版本管理和发布流程是维护 crate 信誉的基础。[→ 生态安全实践](./19_security_practices.md)
+**知识点**：crates.io 是 Rust 生态的中心枢纽。谨慎的版本管理和发布流程是维护 crate 信誉的基础。[→ 生态安全实践](19_security_practices.md)
 
 </details>
 
@@ -448,7 +448,7 @@ panic = "abort"
 | "s" | 体积优化 | 嵌入式/WASM |
 | "z" | 极致体积优化 | 极端资源受限 |
 
-**知识点**：`codegen-units = 1 + lto = "fat"` 是追求极致性能的标准组合，但编译时间可能增加 2-5 倍。[→ Cargo 工具链详解](./01_toolchain.md)
+**知识点**：`codegen-units = 1 + lto = "fat"` 是追求极致性能的标准组合，但编译时间可能增加 2-5 倍。[→ Cargo 工具链详解](01_toolchain.md)
 
 </details>
 
@@ -486,7 +486,7 @@ RUST_BACKTRACE=1 cargo run
 | 安全漏洞 | `cargo audit`、`cargo deny` |
 | 许可证合规 | `cargo deny`、`cargo-license` |
 
-**知识点**：Rust 的工具链生态非常完善。掌握诊断工具是高效开发和维护 Rust 项目的核心能力。[→ 工具链详解](./01_toolchain.md)
+**知识点**：Rust 的工具链生态非常完善。掌握诊断工具是高效开发和维护 Rust 项目的核心能力。[→ 工具链详解](01_toolchain.md)
 
 </details>
 
@@ -498,7 +498,7 @@ RUST_BACKTRACE=1 cargo run
 |:---:|:---|:---|
 | 10/10 | 🏆 工具链已内化 | 探索 `cargo-make`、`cargo-xtask`、`cargo-bloat` 等高级工具 |
 | 7–9/10 | ✅ 核心概念掌握 | 在 CI 中集成 `cargo clippy -- -D warnings` + `cargo audit` |
-| 4–6/10 | 🔄 需巩固基础 | 重读 [Toolchain](./01_toolchain.md)，实践 Workspace 配置 |
+| 4–6/10 | 🔄 需巩固基础 | 重读 [Toolchain](01_toolchain.md)，实践 Workspace 配置 |
 | 0–3/10 | 📚 建议重新开始 | 从 [Cargo Book](https://doc.rust-lang.org/cargo/) 官方文档开始 |
 
 ---

@@ -1176,8 +1176,8 @@ Q4: 与现有生态的兼容性？
 | `AsyncFn` Trait | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) §12 | 效果多态的工程原型 |
 | `gen` blocks | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) §13 | 另一种计算效果的实验 |
 | 类型论基础 | [`../04_formal/02_type_theory.md`](../04_formal/02_type_theory.md) | 效果系统的类型论根基 |
-| Rust 版本跟踪 | [`./05_rust_version_tracking.md`](./05_rust_version_tracking.md) | 效果相关语言特性状态 |
-| 语言演进 | [`./03_evolution.md`](./03_evolution.md) §2.1, §2.3.1 | 效果系统在长程演进中的定位 |
+| Rust 版本跟踪 | [`./05_rust_version_tracking.md`](05_rust_version_tracking.md) | 效果相关语言特性状态 |
+| 语言演进 | [`./03_evolution.md`](03_evolution.md) §2.1, §2.3.1 | 效果系统在长程演进中的定位 |
 
 ---
 

@@ -22,7 +22,7 @@
 
 #### 🔬 形式化理论
 
-- **[所有权形式化理论](../../rust-formal-engineering-system/01_theoretical_foundations/03_ownership_borrowing/)**
+- **[所有权形式化理论](../../rust-formal-engineering-system/01_theoretical_foundations/03_ownership_borrowing)**
   - 所有权语义的形式化定义
   - 借用规则的类型系统证明
   - 生命周期推断的形式化模型
@@ -48,7 +48,7 @@
 
 #### 🔬 形式化理论
 
-- **[类型系统形式化理论](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/)**
+- **[类型系统形式化理论](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system)**
   - 类型系统的数学定义
   - 类型推断的形式化算法
   - 子类型和型变的形式化规则
@@ -74,7 +74,7 @@
 
 #### 🔬 形式化理论
 
-- **[并发模型形式化理论](../../rust-formal-engineering-system/01_theoretical_foundations/04_concurrency_models/)**
+- **[并发模型形式化理论](../../rust-formal-engineering-system/01_theoretical_foundations/04_concurrency_models)**
   - 并发系统的形式化定义
   - 数据竞争预防的类型系统证明
   - 同步原语的形式化模型
@@ -104,7 +104,7 @@
 
 #### 🔬 形式化理论
 
-- **[异步编程范式理论](../../rust-formal-engineering-system/02_programming_paradigms/02_async/)**
+- **[异步编程范式理论](../../rust-formal-engineering-system/02_programming_paradigms/02_async)**
   - Future 的形式化语义
   - Async/Await 的状态机模型
   - 并发模型的形式化描述
@@ -131,7 +131,7 @@
 
 #### 🔬 形式化理论
 
-- **[设计模式形式化理论](../../rust-formal-engineering-system/03_design_patterns/)**
+- **[设计模式形式化理论](../../rust-formal-engineering-system/03_design_patterns)**
   - 设计模式的类型系统定义
   - 模式的形式化验证方法
   - 并发模式的形式化描述
@@ -159,7 +159,7 @@
 
 #### 🔬 形式化理论
 
-- **[宏系统形式化理论](../../rust-formal-engineering-system/01_theoretical_foundations/08_macro_system/)**
+- **[宏系统形式化理论](../../rust-formal-engineering-system/01_theoretical_foundations/08_macro_system)**
   - 宏系统的形式化定义
   - 宏展开的形式化规则
   - 卫生宏的理论基础
@@ -185,7 +185,7 @@
 
 #### 🔬 形式化理论
 
-- **[同步编程范式理论](../../rust-formal-engineering-system/02_programming_paradigms/01_synchronous/)**
+- **[同步编程范式理论](../../rust-formal-engineering-system/02_programming_paradigms/01_synchronous)**
   - 同步执行模型的形式化描述
   - 控制流结构的数学定义
   - 类型系统在控制流中的应用
@@ -211,7 +211,7 @@
 
 #### 🔬 形式化理论
 
-- **[工具链生态形式化理论](../../rust-formal-engineering-system/06_toolchain_ecosystem/)**
+- **[工具链生态形式化理论](../../rust-formal-engineering-system/06_toolchain_ecosystem)**
   - 工具链生态系统的形式化描述
   - 编译器架构的形式化模型
   - 包管理的形式化定义
@@ -220,7 +220,7 @@
 
 #### 💻 实际文档
 
-- **[工具链实用文档](../../06_toolchain/)** - 完整的工具链使用指南
+- **[工具链实用文档](../../06_toolchain)** - 完整的工具链使用指南
   - [编译器特性与优化](../../06_toolchain/01_compiler_features.md) - 编译器优化深入指南（935行）
   - [Cargo 工作空间指南](../../06_toolchain/02_cargo_workspace_guide.md) - Workspace 和依赖管理（1013行）
   - [Rustdoc 高级功能](../../06_toolchain/03_rustdoc_advanced.md) - 文档生成高级技巧（1004行）
@@ -238,7 +238,7 @@
 
 #### 🔬 形式化理论
 
-- **[泛型系统形式化理论](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/generics/)**
+- **[泛型系统形式化理论](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/generics)**
   - System F 和有界量化理论
   - 参数多态的形式化定义
   - Trait 约束的形式化模型

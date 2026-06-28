@@ -25,7 +25,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [04_expert/academic/](../academic/) - 形式化验证与学术深度解析
+- [04_expert/academic/](../academic) - 形式化验证与学术深度解析
 
 ---
 

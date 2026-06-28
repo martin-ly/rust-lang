@@ -26,5 +26,5 @@
 
 ## 相关指南
 
-- [性能调优完整指南](./05_performance_tuning_guide.md)
-- [测试与覆盖率指南](./05_testing_coverage_guide.md)
+- [性能调优完整指南](05_performance_tuning_guide.md)
+- [测试与覆盖率指南](05_testing_coverage_guide.md)

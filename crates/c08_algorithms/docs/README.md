@@ -14,7 +14,7 @@
 
 ### 📍 主索引
 
-**[→ 查看主索引 (00_MASTER_INDEX.md)](./00_MASTER_INDEX.md)**
+**[→ 查看主索引 (00_MASTER_INDEX.md)](00_MASTER_INDEX.md)**
 
 主索引提供完整的文档导航、分类浏览和学习路径，是您探索本文档体系的最佳起点。
 
@@ -23,16 +23,16 @@
 如果您是第一次使用，建议按以下顺序阅读：
 
 1. **[主 README](../README.md)** - 了解项目概览和安装方法
-2. **[本文档](#-文档体系结构)** - 理解文档组织方式
-3. **[算法快速入门](./tier_02_guides/01_算法快速入门.md)** - 学习基础知识
-4. **[主索引](./00_MASTER_INDEX.md)** - 开始系统学习
+2. **[本文档](.#-文档体系结构)** - 理解文档组织方式
+3. **[算法快速入门](tier_02_guides/01_算法快速入门.md)** - 学习基础知识
+4. **[主索引](00_MASTER_INDEX.md)** - 开始系统学习
 
 ### ⚡ 快速查找
 
-- **找算法** → [01_算法分类参考](./tier_03_references/01_算法分类参考.md)
-- **学基础** → [tier_02_guides/](./tier_02_guides/README.md)
-- **看理论** → [tier_04_advanced/](./tier_04_advanced/README.md)
-- **查特性** → [RUST_192_ALGORITHMS_IMPROVEMENTS](./RUST_192_ALGORITHMS_IMPROVEMENTS.md)
+- **找算法** → [01_算法分类参考](tier_03_references/01_算法分类参考.md)
+- **学基础** → [tier_02_guides/](tier_02_guides/README.md)
+- **看理论** → [tier_04_advanced/](tier_04_advanced/README.md)
+- **查特性** → [RUST_192_ALGORITHMS_IMPROVEMENTS](RUST_192_ALGORITHMS_IMPROVEMENTS.md)
 
 ---
 
@@ -47,13 +47,13 @@
 
 包含算法复杂度、数据结构、异步编程、性能优化等实用指南。
 
-- [03_算法复杂度分析](./tier_02_guides/03_算法复杂度分析.md) - 复杂度分析
-- [02_数据结构实践](./tier_02_guides/02_数据结构实践.md) - 数据结构
-- [05_并行与异步算法](./tier_02_guides/05_并行与异步算法.md) - 异步算法
-- [04_性能优化实践](./tier_02_guides/04_性能优化实践.md) - 性能优化
-- [04_算法性能参考](./tier_03_references/04_算法性能参考.md) - 基准测试
+- [03_算法复杂度分析](tier_02_guides/03_算法复杂度分析.md) - 复杂度分析
+- [02_数据结构实践](tier_02_guides/02_数据结构实践.md) - 数据结构
+- [05_并行与异步算法](tier_02_guides/05_并行与异步算法.md) - 异步算法
+- [04_性能优化实践](tier_02_guides/04_性能优化实践.md) - 性能优化
+- [04_算法性能参考](tier_03_references/04_算法性能参考.md) - 基准测试
 
-**[→ 查看完整指南目录](./tier_02_guides/README.md)**
+**[→ 查看完整指南目录](tier_02_guides/README.md)**
 
 ### 2. 🔬 理论文档 (tier_04_advanced/)
 
@@ -68,7 +68,7 @@
 - Actor/Reactor/CSP 模式
 - 设计模式语义映射
 
-**[→ 查看完整理论目录](./tier_04_advanced/README.md)**
+**[→ 查看完整理论目录](tier_04_advanced/README.md)**
 
 ### 3. 🚀 高级专题 (tier_04_advanced/)
 
@@ -83,7 +83,7 @@
 - 优化技术、形式化验证
 - 分布式算法、机器学习、算法工程
 
-**[→ 查看 tier_04_advanced](./tier_04_advanced/README.md)**
+**[→ 查看 tier_04_advanced](tier_04_advanced/README.md)**
 
 ### 4. ✨ Rust 特性
 
@@ -97,7 +97,7 @@
 - Edition 2024 新语法
 - 特性应用指南
 
-**[→ RUST_192_ALGORITHMS_IMPROVEMENTS](./RUST_192_ALGORITHMS_IMPROVEMENTS.md)**
+**[→ RUST_192_ALGORITHMS_IMPROVEMENTS](RUST_192_ALGORITHMS_IMPROVEMENTS.md)**
 
 ### 5. 📚 参考资料 (tier_03_references/)
 
@@ -110,13 +110,13 @@
 - Rust 1.89 算法索引（历史版本）
 - 算法与数据结构基础
 
-**[→ 查看 tier_03_references](./tier_03_references/README.md)**
+**[→ 查看 tier_03_references](tier_03_references/README.md)**
 
 ### 6. 📦 归档文档 (archive/)
 
 已被新版本替代的旧文档，保留用于历史参考。
 
-**[→ 查看归档目录](./archive/README.md)**
+**[→ 查看归档目录](archive/README.md)**
 
 ---
 
@@ -175,7 +175,7 @@
 
 ### 按主题查找
 
-查看 **[主索引](./00_MASTER_INDEX.md)** 的"按主题查找"部分。
+查看 **[主索引](00_MASTER_INDEX.md)** 的"按主题查找"部分。
 
 ### 按难度查找
 
@@ -197,21 +197,21 @@
 ### 📚 系统学习
 
 1. 从 **tier_02_guides/01_算法快速入门.md** 开始
-2. 按 **[学习路径](#-学习路径推荐)** 逐步学习
+2. 按 **[学习路径](.#-学习路径推荐)** 逐步学习
 3. 结合 **源代码** 和 **示例** 实践
 4. 完成 **练习** 巩固知识
 
 ### 🔍 快速查阅
 
-1. 使用 **[01_算法分类参考](./tier_03_references/01_算法分类参考.md)** 查找算法
+1. 使用 **[01_算法分类参考](tier_03_references/01_算法分类参考.md)** 查找算法
 2. 查看对应的源码实现
 3. 运行相关示例
 4. 参考文档了解细节
 
 ### 🎯 问题解决
 
-1. 查看 **[FAQ.md](./FAQ.md)** 常见问题
-2. 查阅 **[Glossary.md](./Glossary.md)** 术语表
+1. 查看 **[FAQ.md](FAQ.md)** 常见问题
+2. 查阅 **[Glossary.md](Glossary.md)** 术语表
 3. 搜索相关文档
 4. 查看源码和测试
 
@@ -251,8 +251,8 @@
 - **[主 README](../README.md)** - 项目主页
 - **[源代码](../src/README.md)** - 算法实现
 - **[示例](../examples/README.md)** - 完整示例
-- **[测试](../tests/)** - 测试用例
-- **[基准测试](../benches/)** - 性能测试
+- **[测试](../tests)** - 测试用例
+- **[基准测试](../benches)** - 性能测试
 
 ### 外部资源
 
@@ -266,11 +266,11 @@
 
 ### 常见问题
 
-查看 **[FAQ.md](./FAQ.md)** 获取常见问题的解答。
+查看 **[FAQ.md](FAQ.md)** 获取常见问题的解答。
 
 ### 术语查询
 
-查看 **[Glossary.md](./Glossary.md)** 了解专业术语。
+查看 **[Glossary.md](Glossary.md)** 了解专业术语。
 
 ### 问题反馈
 
@@ -303,7 +303,7 @@
 
 ---
 
-**开始探索**: [→ 查看主索引](./00_MASTER_INDEX.md)
+**开始探索**: [→ 查看主索引](00_MASTER_INDEX.md)
 
 🚀 **祝您学习愉快！**
 ---

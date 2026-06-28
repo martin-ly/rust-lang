@@ -9,7 +9,7 @@
 > **层级**: L5 对比分析
 > **A/S/P 标记**: **S** — Structure（心智模型）
 > **双维定位**: C×Ana — 分析多语言类型系统（Type System）谱系
-> **前置概念**: [Rust vs C++](./01_rust_vs_cpp.md) · [Rust vs Go](./02_rust_vs_go.md) · [Type Theory](../04_formal/02_type_theory.md)
+> **前置概念**: [Rust vs C++](01_rust_vs_cpp.md) · [Rust vs Go](02_rust_vs_go.md) · [Type Theory](../04_formal/02_type_theory.md)
 > **后置概念**: [Future Evolution](../07_future/03_evolution.md)
 > **主要来源**: [Wikipedia: Comparison of programming languages](https://en.wikipedia.org/wiki/Comparison_of_programming_languages) · [Wikipedia: Programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm) · [Wikipedia: Type system](https://en.wikipedia.org/wiki/Type_system) · [PL Papers]
 
@@ -724,13 +724,13 @@ fn process(data: Vec<String>) -> Vec<String> {
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| Rust vs C++ | [`./01_rust_vs_cpp.md`](./01_rust_vs_cpp.md) | 核心对比 |
-| Rust vs Go | [`./02_rust_vs_go.md`](./02_rust_vs_go.md) | 并发对比 |
+| Rust vs C++ | [`./01_rust_vs_cpp.md`](01_rust_vs_cpp.md) | 核心对比 |
+| Rust vs Go | [`./02_rust_vs_go.md`](02_rust_vs_go.md) | 并发对比 |
 | 线性逻辑 | [`../04_formal/01_linear_logic.md`](../04_formal/01_linear_logic.md) | 形式化根基 |
 | 类型论 | [`../04_formal/02_type_theory.md`](../04_formal/02_type_theory.md) | 类型系统谱系 |
 | RustBelt | [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md) | 验证能力 |
 | 语言演进 | [`../07_future/03_evolution.md`](../07_future/03_evolution.md) | 演进方向 |
-| 安全边界 | [`./04_safety_boundaries.md`](./04_safety_boundaries.md) | 能力边界 |
+| 安全边界 | [`./04_safety_boundaries.md`](04_safety_boundaries.md) | 能力边界 |
 
 ---
 
@@ -770,7 +770,7 @@ fn process(data: Vec<String>) -> Vec<String> {
 
 ---
 
-> **相关文件**: [范式转换矩阵](../00_meta/paradigm_transition_matrix.md) · [执行模型同构](./05_execution_model_isomorphism.md) · [类型论](../04_formal/02_type_theory.md)
+> **相关文件**: [范式转换矩阵](../00_meta/paradigm_transition_matrix.md) · [执行模型同构](05_execution_model_isomorphism.md) · [类型论](../04_formal/02_type_theory.md)
 
 ## 十、边界测试：范式矩阵中的编译错误
 

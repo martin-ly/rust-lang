@@ -11,8 +11,8 @@
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价 Rust 在不同平台约束下的工程实践
 > **定位**: 系统对比 Android AOSP、Chromium、Bare Metal 三个典型场景中 Rust 的集成方式、构建系统、互操作模式与常见陷阱。
-> **前置概念**: [Cross Compilation](./17_cross_compilation.md) · [Embedded Systems](./22_embedded_systems.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · [FFI](../03_advanced/05_rust_ffi.md)
-> **后置概念**: [Industrial Case Studies](./48_industrial_case_studies.md) · [OS Kernel](./39_os_kernel.md)
+> **前置概念**: [Cross Compilation](17_cross_compilation.md) · [Embedded Systems](22_embedded_systems.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · [FFI](../03_advanced/05_rust_ffi.md)
+> **后置概念**: [Industrial Case Studies](48_industrial_case_studies.md) · [OS Kernel](39_os_kernel.md)
 > **来源**:
 >
 > [Android Rust](https://security.googleblog.com/2021/05/integrating-rust-into-android-open.html) ·
@@ -30,25 +30,25 @@
 
 ## 📑 目录
 
-- [将 Rust 集成到现有平台](#将-rust-集成到现有平台)
-  - [📑 目录](#-目录)
-  - [一、三种平台约束对比](#一三种平台约束对比)
-  - [二、Android AOSP](#二android-aosp)
-    - [2.1 AOSP 为什么选择 Rust](#21-aosp-为什么选择-rust)
-    - [2.2 构建规则：Android.bp](#22-构建规则androidbp)
-    - [2.3 AIDL 与 Binder IPC](#23-aidl-与-binder-ipc)
-    - [2.4 C / C++ / Java 互操作](#24-c--c--java-互操作)
-  - [三、Chromium](#三chromium)
-    - [3.1 Chromium 的 Rust 策略](#31-chromium-的-rust-策略)
-    - [3.2 GN 构建与 CXX](#32-gn-构建与-cxx)
-    - [3.3 引入第三方 crate](#33-引入第三方-crate)
-  - [四、Bare Metal](#四bare-metal)
-    - [4.1 no\_std 与 alloc](#41-no_std-与-alloc)
-    - [4.2 微控制器：PAC → HAL → Board Support](#42-微控制器pac--hal--board-support)
-    - [4.3 应用处理器与 UART 驱动](#43-应用处理器与-uart-驱动)
-  - [五、选型决策树](#五选型决策树)
-  - [六、常见陷阱](#六常见陷阱)
-  - [七、来源与延伸阅读](#七来源与延伸阅读)
+- [将 Rust 集成到现有平台](.#将-rust-集成到现有平台)
+  - [📑 目录](.#-目录)
+  - [一、三种平台约束对比](.#一三种平台约束对比)
+  - [二、Android AOSP](.#二android-aosp)
+    - [2.1 AOSP 为什么选择 Rust](.#21-aosp-为什么选择-rust)
+    - [2.2 构建规则：Android.bp](.#22-构建规则androidbp)
+    - [2.3 AIDL 与 Binder IPC](.#23-aidl-与-binder-ipc)
+    - [2.4 C / C++ / Java 互操作](.#24-c--c--java-互操作)
+  - [三、Chromium](.#三chromium)
+    - [3.1 Chromium 的 Rust 策略](.#31-chromium-的-rust-策略)
+    - [3.2 GN 构建与 CXX](.#32-gn-构建与-cxx)
+    - [3.3 引入第三方 crate](.#33-引入第三方-crate)
+  - [四、Bare Metal](.#四bare-metal)
+    - [4.1 no\_std 与 alloc](.#41-no_std-与-alloc)
+    - [4.2 微控制器：PAC → HAL → Board Support](.#42-微控制器pac--hal--board-support)
+    - [4.3 应用处理器与 UART 驱动](.#43-应用处理器与-uart-驱动)
+  - [五、选型决策树](.#五选型决策树)
+  - [六、常见陷阱](.#六常见陷阱)
+  - [七、来源与延伸阅读](.#七来源与延伸阅读)
 
 ---
 
@@ -285,4 +285,4 @@ unsafe fn uart_putc(c: u8) {
 
 ---
 
-> **过渡**: 掌握平台集成后，可进一步阅读 [Industrial Case Studies](./48_industrial_case_studies.md) 中的 Google Pixel 基带 Rust 集成、FSE 2026 AOSP 实证分析等案例，建立从理论到大规模工程实践的桥梁。
+> **过渡**: 掌握平台集成后，可进一步阅读 [Industrial Case Studies](48_industrial_case_studies.md) 中的 Google Pixel 基带 Rust 集成、FSE 2026 AOSP 实证分析等案例，建立从理论到大规模工程实践的桥梁。

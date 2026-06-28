@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: P×Eva — 评估原子操作（Atomic Operations）内存序的选型
 > **定位**: 深入分析 Rust **原子类型（Atomic）**和**内存排序（Memory Ordering [来源: [Atomic Ordering](https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html)]）**——从基本的 load/store 到 compare-and-swap 和释放-获取语义，揭示无锁编程中硬件内存模型的精确控制。
-> **前置概念**: [Concurrency](./01_concurrency.md) · [Unsafe](./03_unsafe.md) · [Type System](../01_foundation/04_type_system.md)
+> **前置概念**: [Concurrency](01_concurrency.md) · [Unsafe](03_unsafe.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Lockfree Data Structures](https://en.wikipedia.org/wiki/Non-blocking_algorithm) · [Distributed Systems](../06_ecosystem/18_distributed_systems.md)
 
 ---
@@ -25,49 +25,49 @@
 > [Wikipedia — Memory Ordering](https://en.wikipedia.org/wiki/Memory_ordering)
 > **前置依赖**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md)
 > **前置依赖**: [Traits](../02_intermediate/01_traits.md)
-> **对应 Crate**: [`c05_threads`](../../crates/c05_threads/)
-> **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency/)
+> **对应 Crate**: [`c05_threads`](../../crates/c05_threads)
+> **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency)
 
 ## 📑 目录
 
-- [原子操作与内存序：无锁并发的精确控制](#原子操作与内存序无锁并发的精确控制)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 原子类型全景](#11-原子类型全景)
-    - [1.2 内存序的层次](#12-内存序的层次)
-    - [1.3 Happens-Before 关系](#13-happens-before-关系)
-  - [二、技术细节](#二技术细节)
-    - [2.1 原子操作详解](#21-原子操作详解)
-    - [2.2 内存序选择指南](#22-内存序选择指南)
-    - [2.3 无锁算法基础](#23-无锁算法基础)
-  - [三、原子模式矩阵](#三原子模式矩阵)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、常见陷阱](#五常见陷阱)
-    - [编译错误示例](#编译错误示例)
-    - [4.4 边界测试：原子操作与非原子操作混用（数据竞争 / 运行时 UB）](#44-边界测试原子操作与非原子操作混用数据竞争--运行时-ub)
-    - [4.5 边界测试：`Ordering::Relaxed` 导致逻辑错误（编译通过但语义错误）](#45-边界测试orderingrelaxed-导致逻辑错误编译通过但语义错误)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
-  - [权威来源索引](#权威来源索引)
-    - [10.5 边界测试：`AtomicPtr` 的 `compare_exchange` ABA 问题（运行时逻辑错误）](#105-边界测试atomicptr-的-compare_exchange-aba-问题运行时逻辑错误)
-    - [10.3 边界测试：`Relaxed` 顺序与 happens-before 缺失（逻辑错误/UB）](#103-边界测试relaxed-顺序与-happens-before-缺失逻辑错误ub)
-    - [10.9 边界测试：match 分支返回类型不一致](#109-边界测试match-分支返回类型不一致)
-  - [参考来源](#参考来源)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
-  - [实践](#实践)
-    - [对应代码示例](#对应代码示例)
-    - [建议练习](#建议练习)
-  - [导航：下一步去哪？](#导航下一步去哪)
-  - [嵌入式测验](#嵌入式测验)
-    - [测验 1：原子操作基础（记忆层）](#测验-1原子操作基础记忆层)
-    - [测验 2：内存序（理解层）](#测验-2内存序理解层)
-    - [测验 3：自旋锁实现（应用层）](#测验-3自旋锁实现应用层)
-    - [测验 4：SeqCst 的必要性（分析层）](#测验-4seqcst-的必要性分析层)
+- [原子操作与内存序：无锁并发的精确控制](.#原子操作与内存序无锁并发的精确控制)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 原子类型全景](.#11-原子类型全景)
+    - [1.2 内存序的层次](.#12-内存序的层次)
+    - [1.3 Happens-Before 关系](.#13-happens-before-关系)
+  - [二、技术细节](.#二技术细节)
+    - [2.1 原子操作详解](.#21-原子操作详解)
+    - [2.2 内存序选择指南](.#22-内存序选择指南)
+    - [2.3 无锁算法基础](.#23-无锁算法基础)
+  - [三、原子模式矩阵](.#三原子模式矩阵)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、常见陷阱](.#五常见陷阱)
+    - [编译错误示例](.#编译错误示例)
+    - [4.4 边界测试：原子操作与非原子操作混用（数据竞争 / 运行时 UB）](.#44-边界测试原子操作与非原子操作混用数据竞争--运行时-ub)
+    - [4.5 边界测试：`Ordering::Relaxed` 导致逻辑错误（编译通过但语义错误）](.#45-边界测试orderingrelaxed-导致逻辑错误编译通过但语义错误)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [逆向推理链（Backward Reasoning）](.#逆向推理链backward-reasoning)
+  - [权威来源索引](.#权威来源索引)
+    - [10.5 边界测试：`AtomicPtr` 的 `compare_exchange` ABA 问题（运行时逻辑错误）](.#105-边界测试atomicptr-的-compare_exchange-aba-问题运行时逻辑错误)
+    - [10.3 边界测试：`Relaxed` 顺序与 happens-before 缺失（逻辑错误/UB）](.#103-边界测试relaxed-顺序与-happens-before-缺失逻辑错误ub)
+    - [10.9 边界测试：match 分支返回类型不一致](.#109-边界测试match-分支返回类型不一致)
+  - [参考来源](.#参考来源)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
+  - [实践](.#实践)
+    - [对应代码示例](.#对应代码示例)
+    - [建议练习](.#建议练习)
+  - [导航：下一步去哪？](.#导航下一步去哪)
+  - [嵌入式测验](.#嵌入式测验)
+    - [测验 1：原子操作基础（记忆层）](.#测验-1原子操作基础记忆层)
+    - [测验 2：内存序（理解层）](.#测验-2内存序理解层)
+    - [测验 3：自旋锁实现（应用层）](.#测验-3自旋锁实现应用层)
+    - [测验 4：SeqCst 的必要性（分析层）](.#测验-4seqcst-的必要性分析层)
 
 ---
 
@@ -685,9 +685,9 @@ fn fixed() {
 
 ## 相关概念文件
 
-- [Concurrency](./01_concurrency.md) — 并发基础
-- [Unsafe](./03_unsafe.md) — 不安全代码
-- [Concurrency Patterns](./10_concurrency_patterns.md) — 并发模式
+- [Concurrency](01_concurrency.md) — 并发基础
+- [Unsafe](03_unsafe.md) — 不安全代码
+- [Concurrency Patterns](10_concurrency_patterns.md) — 并发模式
 - [Distributed Systems](../06_ecosystem/18_distributed_systems.md) — 分布式系统
 
 ---
@@ -865,8 +865,8 @@ fn main() {
 
 | 选择 | 条件 | 目标 |
 |:---|:---|:---|
-| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate/) 或 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) |
-| 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
+| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate) 或 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) |
+| 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../06_ecosystem/README.md) |
 

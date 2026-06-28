@@ -1,7 +1,7 @@
 # C12 WebAssembly - 一页纸总结
 
 > **用途**: 快速回顾核心概念、常见坑、学习路径
-> **完整文档**: [tier_01_foundations/02_主索引导航](./tier_01_foundations/02_主索引导航.md)
+> **完整文档**: [tier_01_foundations/02_主索引导航](tier_01_foundations/02_主索引导航.md)
 
 ---
 

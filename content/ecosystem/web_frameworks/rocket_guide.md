@@ -8,21 +8,21 @@
 
 ## 📋 目录
 
-- [Rocket 框架指南](#rocket-框架指南)
-  - [📋 目录](#-目录)
-  - [🎯 核心概念](#-核心概念)
-    - [路由 (Route)](#路由-route)
-    - [守卫 (Guard)](#守卫-guard)
-    - [公平器 (Fairing)](#公平器-fairing)
-  - [🚀 宏驱动的声明式路由](#-宏驱动的声明式路由)
-    - [动态参数](#动态参数)
-    - [请求方法](#请求方法)
-    - [数据获取](#数据获取)
-  - [📝 表单验证](#-表单验证)
-  - [🗄️ 状态管理](#️-状态管理)
-  - [📊 与 Axum / Actix-web 对比](#-与-axum--actix-web-对比)
-  - [📐 选择决策树](#-选择决策树)
-  - [🔗 参考资源](#-参考资源)
+- [Rocket 框架指南](.#rocket-框架指南)
+  - [📋 目录](.#-目录)
+  - [🎯 核心概念](.#-核心概念)
+    - [路由 (Route)](.#路由-route)
+    - [守卫 (Guard)](.#守卫-guard)
+    - [公平器 (Fairing)](.#公平器-fairing)
+  - [🚀 宏驱动的声明式路由](.#-宏驱动的声明式路由)
+    - [动态参数](.#动态参数)
+    - [请求方法](.#请求方法)
+    - [数据获取](.#数据获取)
+  - [📝 表单验证](.#-表单验证)
+  - [🗄️ 状态管理](.#️-状态管理)
+  - [📊 与 Axum / Actix-web 对比](.#-与-axum--actix-web-对比)
+  - [📐 选择决策树](.#-选择决策树)
+  - [🔗 参考资源](.#-参考资源)
 
 ---
 
@@ -393,8 +393,8 @@ async fn rocket() -> _ {
 - [Rocket 官方文档](https://rocket.rs/)
 - [Rocket GitHub](https://github.com/SergioBenitez/Rocket)
 - [Rocket 指南 - 状态管理](https://rocket.rs/guide/v0.5/state/)
-- [Actix-web vs Axum 对比](./actix_web_vs_axum.md)
-- [项目 C10 网络模块](../../crates/c10_networks/)
+- [Actix-web vs Axum 对比](actix_web_vs_axum.md)
+- [项目 C10 网络模块](../../crates/c10_networks)
 
 ---
 

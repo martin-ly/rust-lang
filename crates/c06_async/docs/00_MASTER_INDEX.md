@@ -22,7 +22,7 @@
 | **Rust Reference** | [Async blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#async-blocks) | async 规范 |
 | **Tokio** | [Tokio Tutorial](https://tokio.rs/tokio/tutorial) | 主流异步运行时 |
 
-**一页纸总结**: [ONE_PAGE_SUMMARY.md](./ONE_PAGE_SUMMARY.md) — 核心概念、常见坑、速选表
+**一页纸总结**: [ONE_PAGE_SUMMARY.md](ONE_PAGE_SUMMARY.md) — 核心概念、常见坑、速选表
 
 ## 📂 目录详解
 
@@ -39,7 +39,7 @@
 | 05_style_guide     | ⭐⭐⭐   | 参考  | 代码风格 |
 | 06_run_guide       | ⭐       | 15min | 运行指南 |
 
-**查看详情**: [tier_02_guides/README.md](./tier_02_guides/README.md)
+**查看详情**: [tier_02_guides/README.md](tier_02_guides/README.md)
 
 ---
 
@@ -56,7 +56,7 @@
 | 05_async_in_traits_and_ecosystem         | ⭐⭐⭐     | ⭐⭐⭐⭐   | Trait支持 |
 | 06_critical_analysis_and_advanced_topics | ⭐⭐⭐⭐⭐ | ⭐⭐⭐     | 深度分析  |
 
-**查看详情**: [core/README.md](./core/README.md)
+**查看详情**: [core/README.md](core/README.md)
 
 ---
 
@@ -69,7 +69,7 @@
 - **03_smol_best_practices.md** - Smol轻量方案 ⭐⭐⭐
 - **04_cookbook.md** - 实战代码手册 ⭐⭐⭐⭐
 
-**查看详情**: [runtimes/README.md](./runtimes/README.md)
+**查看详情**: [runtimes/README.md](runtimes/README.md)
 
 ---
 
@@ -81,7 +81,7 @@
 - **02_patterns_and_pitfalls.md** - 常见陷阱与解决方案 ⭐⭐⭐⭐⭐
 - **03_advanced_patterns.md** - 高级模式
 
-**查看详情**: [patterns/README.md](./patterns/README.md)
+**查看详情**: [patterns/README.md](patterns/README.md)
 
 ---
 
@@ -93,7 +93,7 @@
 - **02_benchmark_analysis.md** - 基准测试方法
 - **03_benchmark_results.md** - 测试结果数据
 
-**查看详情**: [performance/README.md](./performance/README.md)
+**查看详情**: [performance/README.md](performance/README.md)
 
 ---
 
@@ -105,7 +105,7 @@
 - **02_language_features_192.md** - Rust 1.92.0+特性
 - **03_formal_methods.md** - 形式化方法
 
-**查看详情**: [ecosystem/README.md](./ecosystem/README.md)
+**查看详情**: [ecosystem/README.md](ecosystem/README.md)
 
 ---
 
@@ -117,7 +117,7 @@
 - **utils_reference.md** - 工具函数
 - **msrv_and_compatibility.md** - 版本兼容性
 
-**查看详情**: [references/README.md](./references/README.md)
+**查看详情**: [references/README.md](references/README.md)
 
 ---
 
@@ -128,7 +128,7 @@
 - **comprehensive_guide_2025.md** - 2025综合指南 (1200+行) ⭐⭐⭐⭐⭐
 - **ultimate_guide_cn.md** - 终极中文指南 ⭐⭐⭐⭐⭐
 
-**查看详情**: [comprehensive/README.md](./comprehensive/README.md)
+**查看详情**: [comprehensive/README.md](comprehensive/README.md)
 
 ---
 
@@ -139,7 +139,7 @@
 - **basic/** - 14个基础视角分析
 - **specialized/** - 6个专题视角（async/sync对比、CPU/GPU异步等）
 
-**查看详情**: [views/README.md](./views/README.md)
+**查看详情**: [views/README.md](views/README.md)
 
 ---
 
@@ -150,7 +150,7 @@
 - **tokio_console_tracing.md** - 调试监控工具
 - **dashboards/** - Grafana监控面板配置
 
-**查看详情**: [tools/README.md](./tools/README.md)
+**查看详情**: [tools/README.md](tools/README.md)
 
 ---
 
@@ -164,7 +164,7 @@
 
 ⚠️ **注意**: 归档文档可能过时，优先查阅主文档
 
-**查看详情**: [archives/README.md](./archives/README.md)
+**查看详情**: [archives/README.md](archives/README.md)
 
 ---
 
@@ -176,20 +176,20 @@
 
 **Day 1-2**: 基础入门
 
-- [README.md](./README.md)
-- [tier_02_guides/01_异步编程快速入门.md](./tier_02_guides/01_异步编程快速入门.md)
-- [tier_02_guides/02_Future与Executor机制.md](./tier_02_guides/02_Future与Executor机制.md)
+- [README.md](README.md)
+- [tier_02_guides/01_异步编程快速入门.md](tier_02_guides/01_异步编程快速入门.md)
+- [tier_02_guides/02_Future与Executor机制.md](tier_02_guides/02_Future与Executor机制.md)
 
 **Day 3-4**: 运行时实践
 
-- [runtimes/01_comparison_2025.md](./runtimes/01_comparison_2025.md)
-- [runtimes/02_tokio_best_practices.md](./runtimes/02_tokio_best_practices.md)
+- [runtimes/01_comparison_2025.md](runtimes/01_comparison_2025.md)
+- [runtimes/02_tokio_best_practices.md](runtimes/02_tokio_best_practices.md)
 - 运行示例代码
 
 **Day 5**: 巩固练习
 
 - 完成5-10个示例
-- 阅读 [FAQ.md](./FAQ.md)
+- 阅读 [FAQ.md](FAQ.md)
 
 ---
 
@@ -199,19 +199,19 @@
 
 **第1周**: 核心概念
 
-- [core/](./core/) 全部6个文档
-- [tier_02_guides/03_异步运行时选择指南.md](./tier_02_guides/03_异步运行时选择指南.md)
+- [core/](core) 全部6个文档
+- [tier_02_guides/03_异步运行时选择指南.md](tier_02_guides/03_异步运行时选择指南.md)
 
 **第2周**: 实践应用
 
-- [patterns/](./patterns/) 设计模式
-- [performance/](./performance/) 性能优化
-- [tier_02_guides/04_异步设计模式实践.md](./tier_02_guides/04_异步设计模式实践.md)
+- [patterns/](patterns) 设计模式
+- [performance/](performance) 性能优化
+- [tier_02_guides/04_异步设计模式实践.md](tier_02_guides/04_异步设计模式实践.md)
 
 **第3周**: 深入研究
 
-- [comprehensive/comprehensive_guide_2025.md](./comprehensive/comprehensive_guide_2025.md)
-- [ecosystem/01_ecosystem_analysis_2025.md](./ecosystem/01_ecosystem_analysis_2025.md)
+- [comprehensive/comprehensive_guide_2025.md](comprehensive/comprehensive_guide_2025.md)
+- [ecosystem/01_ecosystem_analysis_2025.md](ecosystem/01_ecosystem_analysis_2025.md)
 - 实际项目实践
 
 ---
@@ -274,19 +274,19 @@
 
 ### 按学习阶段
 
-- **入门新手** → [01_异步编程快速入门](./tier_02_guides/01_异步编程快速入门.md)
-- **初级学习** → [02_Future与Executor机制](./tier_02_guides/02_Future与Executor机制.md)
-- **中级进阶** → [core/](./core/) + [patterns/](./patterns/)
-- **高级深入** → [comprehensive/](./comprehensive/) + [views/](./views/)
-- **专家级别** → [core/06_critical_analysis...](./core/06_critical_analysis_and_advanced_topics.md)
+- **入门新手** → [01_异步编程快速入门](tier_02_guides/01_异步编程快速入门.md)
+- **初级学习** → [02_Future与Executor机制](tier_02_guides/02_Future与Executor机制.md)
+- **中级进阶** → [core/](core) + [patterns/](patterns)
+- **高级深入** → [comprehensive/](comprehensive) + [views/](views)
+- **专家级别** → [core/06_critical_analysis...](core/06_critical_analysis_and_advanced_topics.md)
 
 ### 按问题类型
 
-- **怎么选运行时？** → [runtimes/01_comparison_2025.md](./runtimes/01_comparison_2025.md)
-- **Pin是什么？** → [core/03_pinning_and_unsafe_foundations.md](./core/03_pinning_and_unsafe_foundations.md)
-- **有哪些陷阱？** → [patterns/02_patterns_and_pitfalls.md](./patterns/02_patterns_and_pitfalls.md)
-- **怎么优化性能？** → [performance/01_optimization_guide.md](./performance/01_optimization_guide.md)
-- **最新特性？** → [ecosystem/02_language_features_190.md](./ecosystem/02_language_features_190.md)
+- **怎么选运行时？** → [runtimes/01_comparison_2025.md](runtimes/01_comparison_2025.md)
+- **Pin是什么？** → [core/03_pinning_and_unsafe_foundations.md](core/03_pinning_and_unsafe_foundations.md)
+- **有哪些陷阱？** → [patterns/02_patterns_and_pitfalls.md](patterns/02_patterns_and_pitfalls.md)
+- **怎么优化性能？** → [performance/01_optimization_guide.md](performance/01_optimization_guide.md)
+- **最新特性？** → [ecosystem/02_language_features_190.md](ecosystem/02_language_features_190.md)
 
 ### 按使用场景
 
@@ -303,8 +303,8 @@
 ### 本模块资源
 
 - **代码示例**: [../examples/](../examples/README.md) - 89个完整示例
-- **测试代码**: [../tests/](../tests/) - 单元和集成测试
-- **性能测试**: [../benches/](../benches/) - 性能基准
+- **测试代码**: [../tests/](../tests) - 单元和集成测试
+- **性能测试**: [../benches/](../benches) - 性能基准
 - **项目配置**: [../Cargo.toml](../Cargo.toml) - 依赖配置
 
 ### 相关模块

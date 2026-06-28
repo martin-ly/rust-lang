@@ -11,8 +11,8 @@
 > **A/S/P 标记**: **F** — Formal
 > **双维定位**: F×Type — 类型系统（Type System）与形式化方法
 > **定位**: 把“这个类型是否实现了某 trait”这一核心问题，还原为候选装配、筛选、确认与约束求解的完整算法。
-> **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Traits](../02_intermediate/01_traits.md) · [Type Inference](./08_type_inference.md) · [Name Resolution and HIR](./35_name_resolution_and_hir.md)
-> **后置概念**: [Rustc Query System](./19_rustc_query_system.md) · [Ownership Formal](./03_ownership_formal.md)
+> **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Traits](../02_intermediate/01_traits.md) · [Type Inference](08_type_inference.md) · [Name Resolution and HIR](35_name_resolution_and_hir.md)
+> **后置概念**: [Rustc Query System](19_rustc_query_system.md) · [Ownership Formal](03_ownership_formal.md)
 
 ---
 
@@ -23,24 +23,24 @@
 
 ## 📑 目录
 
-- [rustc 中的 Trait Solver](#rustc-中的-trait-solver)
-  - [📑 目录](#-目录)
-  - [一、问题定义：Obligation](#一问题定义obligation)
-  - [二、三大核心操作](#二三大核心操作)
-  - [三、Selection：候选装配与筛选](#三selection候选装配与筛选)
-    - [3.1 Candidate Assembly（候选装配）](#31-candidate-assembly候选装配)
-    - [3.2 Winnowing（筛选）](#32-winnowing筛选)
-    - [3.3 Confirmation（确认）](#33-confirmation确认)
-  - [四、Fulfillment：约束求解工作队列](#四fulfillment约束求解工作队列)
-  - [五、Evaluation：不约束推断变量的判断](#五evaluation不约束推断变量的判断)
-  - [六、新一代 Trait Solver](#六新一代-trait-solver)
-  - [七、Coinduction 与递归 Trait](#七coinduction-与递归-trait)
-  - [嵌入式测验](#嵌入式测验)
-    - [测验 1：什么是 obligation？](#测验-1什么是-obligation)
-    - [测验 2：Selection 和 Evaluation 的主要区别是什么？](#测验-2selection-和-evaluation-的主要区别是什么)
-    - [测验 3：Winnowing 解决什么问题？](#测验-3winnowing-解决什么问题)
-    - [测验 4：新一代 trait solver 与旧 solver 相比，主要优势是什么？](#测验-4新一代-trait-solver-与旧-solver-相比主要优势是什么)
-  - [权威来源索引](#权威来源索引)
+- [rustc 中的 Trait Solver](.#rustc-中的-trait-solver)
+  - [📑 目录](.#-目录)
+  - [一、问题定义：Obligation](.#一问题定义obligation)
+  - [二、三大核心操作](.#二三大核心操作)
+  - [三、Selection：候选装配与筛选](.#三selection候选装配与筛选)
+    - [3.1 Candidate Assembly（候选装配）](.#31-candidate-assembly候选装配)
+    - [3.2 Winnowing（筛选）](.#32-winnowing筛选)
+    - [3.3 Confirmation（确认）](.#33-confirmation确认)
+  - [四、Fulfillment：约束求解工作队列](.#四fulfillment约束求解工作队列)
+  - [五、Evaluation：不约束推断变量的判断](.#五evaluation不约束推断变量的判断)
+  - [六、新一代 Trait Solver](.#六新一代-trait-solver)
+  - [七、Coinduction 与递归 Trait](.#七coinduction-与递归-trait)
+  - [嵌入式测验](.#嵌入式测验)
+    - [测验 1：什么是 obligation？](.#测验-1什么是-obligation)
+    - [测验 2：Selection 和 Evaluation 的主要区别是什么？](.#测验-2selection-和-evaluation-的主要区别是什么)
+    - [测验 3：Winnowing 解决什么问题？](.#测验-3winnowing-解决什么问题)
+    - [测验 4：新一代 trait solver 与旧 solver 相比，主要优势是什么？](.#测验-4新一代-trait-solver-与旧-solver-相比主要优势是什么)
+  - [权威来源索引](.#权威来源索引)
 
 ---
 

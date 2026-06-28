@@ -234,10 +234,10 @@ docs/
 
 ### 新用户如何开始
 
-1. **首次访问**: 阅读 [README.md](./README.md)
-2. **了解结构**: 查看 [00_MASTER_INDEX.md](./00_MASTER_INDEX.md)
-3. **开始学习**: 前往 [tier_02_guides/01_异步编程快速入门.md](./tier_02_guides/01_异步编程快速入门.md)
-4. **遇到问题**: 查询 [FAQ.md](./FAQ.md)
+1. **首次访问**: 阅读 [README.md](README.md)
+2. **了解结构**: 查看 [00_MASTER_INDEX.md](00_MASTER_INDEX.md)
+3. **开始学习**: 前往 [tier_02_guides/01_异步编程快速入门.md](tier_02_guides/01_异步编程快速入门.md)
+4. **遇到问题**: 查询 [FAQ.md](FAQ.md)
 
 ### 快速查找
 
@@ -316,9 +316,9 @@ docs/
 
 重组完成！现在你可以：
 
-1. 📖 查看新的 [README.md](./README.md)
-2. 📋 浏览 [00_MASTER_INDEX.md](./00_MASTER_INDEX.md)
-3. 🚀 开始学习 [01_异步编程快速入门](./tier_02_guides/01_异步编程快速入门.md)
+1. 📖 查看新的 [README.md](README.md)
+2. 📋 浏览 [00_MASTER_INDEX.md](00_MASTER_INDEX.md)
+3. 🚀 开始学习 [01_异步编程快速入门](tier_02_guides/01_异步编程快速入门.md)
 
 **祝学习愉快！**
 

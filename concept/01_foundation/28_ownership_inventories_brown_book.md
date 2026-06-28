@@ -23,13 +23,13 @@
 > [Crichton et al., OOPSLA 2023](https://doi.org/10.1145/3622841)
 >
 > **前置概念**:
-> [Ownership](./01_ownership.md) ·
-> [Borrowing](./02_borrowing.md) ·
-> [Lifetimes](./03_lifetimes.md)
+> [Ownership](01_ownership.md) ·
+> [Borrowing](02_borrowing.md) ·
+> [Lifetimes](03_lifetimes.md)
 >
 > **对应练习**:
-> [`exercises/src/ownership_borrowing/`](../../exercises/src/ownership_borrowing/) ·
-> [`23_quiz_ownership_borrowing.md`](./23_quiz_ownership_borrowing.md)
+> [`exercises/src/ownership_borrowing/`](../../exercises/src/ownership_borrowing) ·
+> [`23_quiz_ownership_borrowing.md`](23_quiz_ownership_borrowing.md)
 
 ---
 
@@ -170,7 +170,7 @@ fn main() {
 
 - 完成本样题后，可继续：
   - `23_quiz_ownership_borrowing.md` — 更多所有权/借用（Borrowing）选择题
-  - [`exercises/src/ownership_borrowing/`](../../exercises/src/ownership_borrowing/) — 可编译的修复练习
+  - [`exercises/src/ownership_borrowing/`](../../exercises/src/ownership_borrowing) — 可编译的修复练习
     - [`ex06_string_replace_chain.rs`](../../exercises/src/ownership_borrowing/ex06_string_replace_chain.rs) — 字符串替换链（对应 Inventory #1）
     - [`ex07_vec_slice_borrow.rs`](../../exercises/src/ownership_borrowing/ex07_vec_slice_borrow.rs) — Vec 与切片（Slice）借用（Borrowing）冲突（对应 Inventory #2）
     - `ex08_dangling_reference.rs` — 避免悬垂引用（Reference）（对应 Inventory #3）
@@ -178,4 +178,4 @@ fn main() {
     - [`ex10_vec_reallocation.rs`](../../exercises/src/ownership_borrowing/ex10_vec_reallocation.rs) — Vec 重新分配与引用失效
     - [`ex11_hashmap_borrow.rs`](../../exercises/src/ownership_borrowing/ex11_hashmap_borrow.rs) — HashMap 借用冲突
     - [`ex12_string_in_loop.rs`](../../exercises/src/ownership_borrowing/ex12_string_in_loop.rs) — 循环中的所有权
-  - [`02_borrowing.md`](./02_borrowing.md) — 系统学习「Fixing Ownership Errors」的 5 种常见模式
+  - [`02_borrowing.md`](02_borrowing.md) — 系统学习「Fixing Ownership Errors」的 5 种常见模式

@@ -16,10 +16,10 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Open Enums 预览特性
 > **定位**: 探讨 Rust 枚举（Enum）类型在 API 演进与跨 crate 兼容性维度的**开放性语义**，从现有 `#[non_exhaustive]` 机制延伸到语言级开放枚举的设计空间。
-> **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Traits](../02_intermediate/01_traits.md) · [Error Handling](../02_intermediate/04_error_handling.md) · [Evolution](./03_evolution.md)
+> **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Traits](../02_intermediate/01_traits.md) · [Error Handling](../02_intermediate/04_error_handling.md) · [Evolution](03_evolution.md)
 > **后置概念**:
-> [Version Tracking](./05_rust_version_tracking.md) ·
-> [Effects System](./04_effects_system.md)
+> [Version Tracking](05_rust_version_tracking.md) ·
+> [Effects System](04_effects_system.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -36,48 +36,48 @@
 
 ## 📑 目录
 
-- [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举（Enum）](#)
-  - [📑 目录](#-目录)
-  - [一、核心概念：封闭 vs 开放枚举](#一核心概念封闭-vs-开放枚举)
-    - [1.1 封闭枚举（Closed Enums）](#11-封闭枚举closed-enums)
+- [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](#open-enums-概念预研从-non_exhaustive-到可扩展枚举)
+  - [📑 目录](.#-目录)
+  - [一、核心概念：封闭 vs 开放枚举](.#一核心概念封闭-vs-开放枚举)
+    - [1.1 封闭枚举（Closed Enums）](.#11-封闭枚举closed-enums)
     - [1.2 `#[non_exhaustive]`：兼容性层面的开放](#12-non_exhaustive兼容性层面的开放)
-    - [1.3 开放枚举（Open Enums）的设计空间](#13-开放枚举open-enums的设计空间)
+    - [1.3 开放枚举（Open Enums）的设计空间](.#13-开放枚举open-enums的设计空间)
   - [二、`#[non_exhaustive]` 的形式化语义](#二non_exhaustive-的形式化语义)
-    - [2.1 编译期影响：穷尽性检查的弱化](#21-编译期影响穷尽性检查的弱化)
-    - 2.2 运行时（Runtime）语义：无变化
-    - 2.3 与模式匹配（Pattern Matching）的交互
-  - [三、跨语言对比：开放枚举的多种形态](#三跨语言对比开放枚举的多种形态)
-    - [3.1 Scala：Sealed Traits + 子类](#31-scalasealed-traits--子类)
-    - [3.2 Haskell：Open Data Types](#32-haskellopen-data-types)
-    - [3.3 OCaml：Polymorphic Variants](#33-ocamlpolymorphic-variants)
+    - [2.1 编译期影响：穷尽性检查的弱化](.#21-编译期影响穷尽性检查的弱化)
+    - [2.2 运行时语义：无变化](.#22-运行时语义无变化)
+    - [2.3 与模式匹配的交互](.#23-与模式匹配的交互)
+  - [三、跨语言对比：开放枚举的多种形态](.#三跨语言对比开放枚举的多种形态)
+    - [3.1 Scala：Sealed Traits + 子类](.#31-scalasealed-traits--子类)
+    - [3.2 Haskell：Open Data Types](.#32-haskellopen-data-types)
+    - [3.3 OCaml：Polymorphic Variants](.#33-ocamlpolymorphic-variants)
     - [3.4 Rust 当前方案：`#[non_exhaustive]` + 新变体](#34-rust-当前方案non_exhaustive--新变体)
-  - [四、API 设计中的开放枚举模式](#四api-设计中的开放枚举模式)
-    - [4.1 错误码枚举](#41-错误码枚举)
-    - [4.2 事件/消息类型](#42-事件消息类型)
-    - [4.3 配置/选项枚举](#43-配置选项枚举)
-  - [五、反命题与边界分析](#五反命题与边界分析)
-    - [5.1 反命题树](#51-反命题树)
-    - [5.2 边界极限](#52-边界极限)
-  - [六、演进路线与预测](#六演进路线与预测)
-  - [七、来源与延伸阅读](#七来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：Open Enums 预览的编译错误](#十边界测试open-enums-预览的编译错误)
-    - [10.1 边界测试：开放枚举的穷尽匹配失效（编译错误）](#101-边界测试开放枚举的穷尽匹配失效编译错误)
-    - [10.2 边界测试：开放枚举的整数转换安全（编译错误/运行时 panic）](#102-边界测试开放枚举的整数转换安全编译错误运行时-panic)
-    - [10.3 边界测试：open enum 的 match 穷尽性检查松弛（编译错误）](#103-边界测试open-enum-的-match-穷尽性检查松弛编译错误)
-    - [10.4 边界测试：open enum 的整数转换与有效性检查（运行时 panic）](#104-边界测试open-enum-的整数转换与有效性检查运行时-panic)
-    - [10.3 边界测试：open enum 的穷尽匹配与未知变体（编译错误/运行时 panic）](#103-边界测试open-enum-的穷尽匹配与未知变体编译错误运行时-panic)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：什么是"开放枚举"（Open Enums）？它解决了 Rust 当前枚举的什么问题？（理解层）](#测验-1什么是开放枚举open-enums它解决了-rust-当前枚举的什么问题理解层)
+  - [四、API 设计中的开放枚举模式](.#四api-设计中的开放枚举模式)
+    - [4.1 错误码枚举](.#41-错误码枚举)
+    - [4.2 事件/消息类型](.#42-事件消息类型)
+    - [4.3 配置/选项枚举](.#43-配置选项枚举)
+  - [五、反命题与边界分析](.#五反命题与边界分析)
+    - [5.1 反命题树](.#51-反命题树)
+    - [5.2 边界极限](.#52-边界极限)
+  - [六、演进路线与预测](.#六演进路线与预测)
+  - [七、来源与延伸阅读](.#七来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：Open Enums 预览的编译错误](.#十边界测试open-enums-预览的编译错误)
+    - [10.1 边界测试：开放枚举的穷尽匹配失效（编译错误）](.#101-边界测试开放枚举的穷尽匹配失效编译错误)
+    - [10.2 边界测试：开放枚举的整数转换安全（编译错误/运行时 panic）](.#102-边界测试开放枚举的整数转换安全编译错误运行时-panic)
+    - [10.3 边界测试：open enum 的 match 穷尽性检查松弛（编译错误）](.#103-边界测试open-enum-的-match-穷尽性检查松弛编译错误)
+    - [10.4 边界测试：open enum 的整数转换与有效性检查（运行时 panic）](.#104-边界测试open-enum-的整数转换与有效性检查运行时-panic)
+    - [10.3 边界测试：open enum 的穷尽匹配与未知变体（编译错误/运行时 panic）](.#103-边界测试open-enum-的穷尽匹配与未知变体编译错误运行时-panic)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：什么是"开放枚举"（Open Enums）？它解决了 Rust 当前枚举的什么问题？（理解层）](.#测验-1什么是开放枚举open-enums它解决了-rust-当前枚举的什么问题理解层)
     - [测验 2：开放枚举与 `#[non_exhaustive]` 属性有什么关系？（理解层）](#测验-2开放枚举与-non_exhaustive-属性有什么关系理解层)
-    - [测验 3：开放枚举对库作者和库用户分别有什么影响？（理解层）](#测验-3开放枚举对库作者和库用户分别有什么影响理解层)
-    - [测验 4：这个特性对 C FFI 中的枚举映射有什么帮助？（理解层）](#测验-4这个特性对-c-ffi-中的枚举映射有什么帮助理解层)
-    - [测验 5：开放枚举目前的反对意见主要是什么？（理解层）](#测验-5开放枚举目前的反对意见主要是什么理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+    - [测验 3：开放枚举对库作者和库用户分别有什么影响？（理解层）](.#测验-3开放枚举对库作者和库用户分别有什么影响理解层)
+    - [测验 4：这个特性对 C FFI 中的枚举映射有什么帮助？（理解层）](.#测验-4这个特性对-c-ffi-中的枚举映射有什么帮助理解层)
+    - [测验 5：开放枚举目前的反对意见主要是什么？（理解层）](.#测验-5开放枚举目前的反对意见主要是什么理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -518,8 +518,8 @@ pub enum ConstExample {
 - [Type System](../01_foundation/04_type_system.md) — 枚举类型的形式化根基
 - [Traits](../02_intermediate/01_traits.md) — Sealed Traits 与开放/封闭设计
 - [Error Handling](../02_intermediate/04_error_handling.md) — `ErrorKind` 实践案例
-- [Evolution](./03_evolution.md) — 语言演进机制与向后兼容
-- [Version Tracking](./05_rust_version_tracking.md) — Rust 版本特性演进跟踪
+- [Evolution](03_evolution.md) — 语言演进机制与向后兼容
+- [Version Tracking](05_rust_version_tracking.md) — Rust 版本特性演进跟踪
 
 ---
 

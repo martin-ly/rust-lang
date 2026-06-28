@@ -17,22 +17,22 @@
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [research\_notes 组织架构与导航](#research_notes-组织架构与导航)
-  - [📑 目录](#-目录)
-  - [一、从这里开始（单入口）](#一从这里开始单入口)
-  - [二、按三大支柱组织（核心架构）](#二按三大支柱组织核心架构)
-  - [三、目录层级（简化视图）](#三目录层级简化视图)
-  - [四、文档角色速查](#四文档角色速查)
-  - [五、常见困惑与解答](#五常见困惑与解答)
-  - [六、权威来源与版本约定](#六权威来源与版本约定)
-  - [七、与顶层 docs 的衔接](#七与顶层-docs-的衔接)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [research\_notes 组织架构与导航](.#research_notes-组织架构与导航)
+  - [📑 目录](.#-目录)
+  - [一、从这里开始（单入口）](.#一从这里开始单入口)
+  - [二、按三大支柱组织（核心架构）](.#二按三大支柱组织核心架构)
+  - [三、目录层级（简化视图）](.#三目录层级简化视图)
+  - [四、文档角色速查](.#四文档角色速查)
+  - [五、常见困惑与解答](.#五常见困惑与解答)
+  - [六、权威来源与版本约定](.#六权威来源与版本约定)
+  - [七、与顶层 docs 的衔接](.#七与顶层-docs-的衔接)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 一、从这里开始（单入口）
 >
@@ -42,20 +42,20 @@
 
 | 我的目标 | 入口 | 预计时间 |
 | :--- | :--- | :--- |
-| **我想理解 Rust 形式化证明** | [FORMAL_FULL_MODEL_OVERVIEW](./10_formal_full_model_overview.md) → [CORE_THEOREMS_FULL_PROOFS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) | 30min |
-| **我想查某个概念的证明/定义** | [QUICK_FIND](./10_quick_find.md)（按关键词） | 2min |
-| **我想选设计模式/并发模型** | [software_design_theory/00_MASTER_INDEX](./software_design_theory/10_00_master_index.md) → 03_semantic_boundary_map、06_boundary_analysis | 15min |
-| **我想理解权威对齐体系** | [AUTHORITATIVE_ALIGNMENT_GUIDE](./10_authoritative_alignment_guide.md) | 10min |
-| **三大支柱** | [AUTHORITATIVE_ALIGNMENT_GUIDE](./10_authoritative_alignment_guide.md)（原 RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN 已归档） | 10min |
-| **我想看完整总结与论证脉络** | [00_COMPREHENSIVE_SUMMARY](../../archive/research_notes_2026_06_25/10_00_comprehensive_summary.md) → [ARGUMENTATION_CHAIN_AND_FLOW](10_argumentation_chain_and_flow.md) | 15min |
+| **我想理解 Rust 形式化证明** | [FORMAL_FULL_MODEL_OVERVIEW](10_formal_full_model_overview.md) → [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) | 30min |
+| **我想查某个概念的证明/定义** | [QUICK_FIND](10_quick_find.md)（按关键词） | 2min |
+| **我想选设计模式/并发模型** | [software_design_theory/00_MASTER_INDEX](software_design_theory/10_00_master_index.md) → 03_semantic_boundary_map、06_boundary_analysis | 15min |
+| **我想理解权威对齐体系** | [AUTHORITATIVE_ALIGNMENT_GUIDE](10_authoritative_alignment_guide.md) | 10min |
+| **三大支柱** | [AUTHORITATIVE_ALIGNMENT_GUIDE](10_authoritative_alignment_guide.md)（原 RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN 已归档） | 10min |
+| **我想看完整总结与论证脉络** | [00_COMPREHENSIVE_SUMMARY](10_00_comprehensive_summary.md) → [ARGUMENTATION_CHAIN_AND_FLOW](10_argumentation_chain_and_flow.md) | 15min |
 | **我想看批判性意见与改进计划** | RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN | 15min |
 | **我想看格式统一与 Rust 1.93 对齐计划** | FORMAT_AND_CONTENT_ALIGNMENT_PLAN (归档) | 10min |
-| **我想看目录缺失与内容深化计划** | [00_COMPREHENSIVE_SUMMARY](../../archive/research_notes_2026_06_25/10_00_comprehensive_summary.md) | 10min |
-| **我想查层次化映射（文档树/概念↔定理/文档↔思维表征）** | [HIERARCHICAL_MAPPING_AND_SUMMARY](../../archive/research_notes_2026_06_25/10_hierarchical_mapping_and_summary.md) | 5min |
-| **我想看 research_notes 全面梳理（结构、归档、维护）** | [RESEARCH_NOTES_ORGANIZATION](./10_research_notes_organization.md) | 5min |
-| **我想查 Send/Sync 或安全可判定机制** | [send_sync_formalization](./formal_methods/10_send_sync_formalization.md) → [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md) | 5min |
-| **我想查 formal_methods 完备性（六篇×六维）** | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](../../archive/research_notes_2026_06_25/formal_methods/10_formal_methods_completeness_checklist.md) | 2min |
-| **我想贡献/维护** | [CONTRIBUTING](../../archive/research_notes_2026_06_25/10_contributing.md) → [QUALITY_CHECKLIST](../../archive/research_notes_2026_06_25/10_quality_checklist.md) | 5min |
+| **我想看目录缺失与内容深化计划** | [00_COMPREHENSIVE_SUMMARY](10_00_comprehensive_summary.md) | 10min |
+| **我想查层次化映射（文档树/概念↔定理/文档↔思维表征）** | [HIERARCHICAL_MAPPING_AND_SUMMARY](10_hierarchical_mapping_and_summary.md) | 5min |
+| **我想看 research_notes 全面梳理（结构、归档、维护）** | [RESEARCH_NOTES_ORGANIZATION](10_research_notes_organization.md) | 5min |
+| **我想查 Send/Sync 或安全可判定机制** | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) → [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](10_safe_decidable_mechanisms_overview.md) | 5min |
+| **我想查 formal_methods 完备性（六篇×六维）** | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](formal_methods/10_formal_methods_completeness_checklist.md) | 2min |
+| **我想贡献/维护** | [CONTRIBUTING](10_contributing.md) → [QUALITY_CHECKLIST](10_quality_checklist.md) | 5min |
 
 ---
 
@@ -63,7 +63,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-本目录围绕 [AUTHORITATIVE_ALIGNMENT_GUIDE](./10_authoritative_alignment_guide.md) 所述的三大支柱组织，现推荐参考 [AUTHORITATIVE_ALIGNMENT_GUIDE](./10_authoritative_alignment_guide.md)：
+本目录围绕 [AUTHORITATIVE_ALIGNMENT_GUIDE](10_authoritative_alignment_guide.md) 所述的三大支柱组织，现推荐参考 [AUTHORITATIVE_ALIGNMENT_GUIDE](10_authoritative_alignment_guide.md)：
 
 ```text
 支柱 1：公理判定系统（形式系统）
@@ -119,7 +119,7 @@ research_notes/
 └── 【导航/框架/指南】（按需查阅）
     ├── 10_00_comprehensive_summary.md      ← 完整总结综合、知识地图、论证总览
     ├── ARGUMENTATION_CHAIN_AND_FLOW.md  ← 论证思路、论证脉络关系、文档依赖
-    ├── [AUTHORITATIVE_ALIGNMENT_GUIDE](./10_authoritative_alignment_guide.md) - 权威对齐指南、技术决策参考
+    ├── [AUTHORITATIVE_ALIGNMENT_GUIDE](10_authoritative_alignment_guide.md) - 权威对齐指南、技术决策参考
     ├── 10_classification.md                ← 按角色/层次/主题分类
     ├── RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md  ← 批判性分析、层次化/矩阵/思维表征缺口、可持续改进计划
     ├── 10_hierarchical_mapping_and_summary.md                      ← 文档树、概念↔文档↔Def/定理、文档↔思维表征映射
@@ -174,7 +174,7 @@ research_notes/
 | **Ferrocene FLS** | [spec.ferrocene.dev](https://spec.ferrocene.dev/)；当前覆盖 **Rust 2021 + rustc 1.93** | 形式化规范引用 |
 | **本项目** | **Rust 1.96.0+ (Edition 2024)** | 所有 research_notes 元信息与示例默认版本 |
 
-新文档引用 FLS 或 releases 时可直接引用本小节；详见 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md) § 权威来源对齐。
+新文档引用 FLS 或 releases 时可直接引用本小节；详见 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](10_rust_193_language_features_comprehensive_analysis.md) § 权威来源对齐。
 
 ---
 
@@ -259,7 +259,7 @@ research_notes/
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

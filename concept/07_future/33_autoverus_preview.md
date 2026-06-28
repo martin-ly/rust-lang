@@ -13,7 +13,7 @@
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×Eva
 > **前置依赖**: [形式化验证](../04_formal/05_verification_toolchain.md) · [形式化验证工具生态](../06_ecosystem/47_formal_verification_tools.md)
-> **后置延伸**: [Safety Tags](./31_safety_tags_preview.md) · [BorrowSanitizer](./32_borrow_sanitizer_preview.md)
+> **后置延伸**: [Safety Tags](31_safety_tags_preview.md) · [BorrowSanitizer](32_borrow_sanitizer_preview.md)
 >
 > **来源**: [Verus GitHub](https://github.com/verus-lang/verus) · [Verus 文档](https://verus-lang.github.io/verus/) · [AutoVerus 论文 (OOPSLA 2025)](https://doi.org/10.1145/3763174) · [arXiv 版本](https://arxiv.org/abs/2409.13082)
 
@@ -169,5 +169,5 @@ B
 - [形式化验证](../04_formal/05_verification_toolchain.md)
 - [形式化验证工具生态](../06_ecosystem/47_formal_verification_tools.md)
 - [AutoVerus/Verus 深度](../04_formal/24_autoverus.md)
-- [Safety Tags 预览](./31_safety_tags_preview.md) · [深度](../04_formal/33_safety_tags_in_formal.md)
-- [BorrowSanitizer 预览](./32_borrow_sanitizer_preview.md) · [深度](../04_formal/34_borrow_sanitizer_in_formal.md)
+- [Safety Tags 预览](31_safety_tags_preview.md) · [深度](../04_formal/33_safety_tags_in_formal.md)
+- [BorrowSanitizer 预览](32_borrow_sanitizer_preview.md) · [深度](../04_formal/34_borrow_sanitizer_in_formal.md)

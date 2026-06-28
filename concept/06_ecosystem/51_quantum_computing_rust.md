@@ -10,50 +10,50 @@
 
 ## 📑 目录
 
-- [Rust 量子计算生态](#rust-量子计算生态)
-  - [📑 目录](#-目录)
-  - [一、权威定义（Definition）](#一权威定义definition)
-    - [1.1 量子比特与量子态](#11-量子比特与量子态)
-    - [1.2 量子叠加与测量](#12-量子叠加与测量)
-    - [1.3 量子纠缠与贝尔态](#13-量子纠缠与贝尔态)
-    - [1.4 量子门与量子电路](#14-量子门与量子电路)
-  - [二、概念属性矩阵](#二概念属性矩阵)
-  - [三、Rust 量子计算生态](#三rust-量子计算生态)
-    - [3.1 roqoqo / qoqo：量子电路表示工具包](#31-roqoqo--qoqo量子电路表示工具包)
-    - [3.2 rustqip：图构建式量子模拟](#32-rustqip图构建式量子模拟)
-    - [3.3 q1tsim、qasmsim、rusq 等模拟器](#33-q1tsimqasmsimrusq-等模拟器)
-    - [3.4 与 Python 量子生态的交互](#34-与-python-量子生态的交互)
-    - [3.5 新兴研究原型](#35-新兴研究原型)
-  - [四、经典硬件上的量子模拟](#四经典硬件上的量子模拟)
-    - [4.1 态向量模拟](#41-态向量模拟)
-    - [4.2 张量网络收缩](#42-张量网络收缩)
-    - [4.3 Rust 性能优势：SIMD 与并行化](#43-rust-性能优势simd-与并行化)
-  - [五、量子安全密码学](#五量子安全密码学)
-    - [5.1 NIST PQC 标准与迁移时间线](#51-nist-pqc-标准与迁移时间线)
-    - [5.2 CRYSTALS-Kyber / Dilithium 原理](#52-crystals-kyber--dilithium-原理)
-    - [5.3 pqclean-rust、pqcrypto、liboqs-rust](#53-pqclean-rustpqcryptoliboqs-rust)
-    - [5.4 rustls 的后量子 TLS 实践](#54-rustls-的后量子-tls-实践)
-  - [六、量子-经典混合工作流](#六量子-经典混合工作流)
-    - [6.1 变分量子算法（VQE / QAOA）](#61-变分量子算法vqe--qaoa)
-    - [6.2 参数移位与梯度计算](#62-参数移位与梯度计算)
-  - [七、反命题与边界](#七反命题与边界)
-    - [7.1 反命题树](#71-反命题树)
-    - [7.2 边界极限](#72-边界极限)
-  - [八、边界测试](#八边界测试)
-    - [8.1 边界测试：尝试克隆量子态（不可克隆定理违反）](#81-边界测试尝试克隆量子态不可克隆定理违反)
-    - [8.2 边界测试：在笔记本上模拟 30 量子比特（内存爆炸）](#82-边界测试在笔记本上模拟-30-量子比特内存爆炸)
-    - [8.3 边界测试：使用非厄米算符进行量子演化（类型/逻辑错误）](#83-边界测试使用非厄米算符进行量子演化类型逻辑错误)
-  - [相关概念文件](#相关概念文件)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：量子计算中的"量子比特"（Qubit）与经典比特有什么根本区别？（理解层）](#测验-1量子计算中的量子比特qubit与经典比特有什么根本区别理解层)
-    - [测验 2：Rust 在量子计算生态中目前主要扮演什么角色？（理解层）](#测验-2rust-在量子计算生态中目前主要扮演什么角色理解层)
-    - [测验 3：什么是"量子纠错"（Quantum Error Correction）？为什么它对大规模量子计算至关重要？（理解层）](#测验-3什么是量子纠错quantum-error-correction为什么它对大规模量子计算至关重要理解层)
-    - [测验 4：QIR（Quantum Intermediate Representation）是什么？Rust 如何生成 QIR？（理解层）](#测验-4qirquantum-intermediate-representation是什么rust-如何生成-qir理解层)
-    - [测验 5：为什么量子模拟器（Simulator）需要高性能计算，Rust 在这方面的优势是什么？（理解层）](#测验-5为什么量子模拟器simulator需要高性能计算rust-在这方面的优势是什么理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Rust 量子计算生态](.#rust-量子计算生态)
+  - [📑 目录](.#-目录)
+  - [一、权威定义（Definition）](.#一权威定义definition)
+    - [1.1 量子比特与量子态](.#11-量子比特与量子态)
+    - [1.2 量子叠加与测量](.#12-量子叠加与测量)
+    - [1.3 量子纠缠与贝尔态](.#13-量子纠缠与贝尔态)
+    - [1.4 量子门与量子电路](.#14-量子门与量子电路)
+  - [二、概念属性矩阵](.#二概念属性矩阵)
+  - [三、Rust 量子计算生态](.#三rust-量子计算生态)
+    - [3.1 roqoqo / qoqo：量子电路表示工具包](.#31-roqoqo--qoqo量子电路表示工具包)
+    - [3.2 rustqip：图构建式量子模拟](.#32-rustqip图构建式量子模拟)
+    - [3.3 q1tsim、qasmsim、rusq 等模拟器](.#33-q1tsimqasmsimrusq-等模拟器)
+    - [3.4 与 Python 量子生态的交互](.#34-与-python-量子生态的交互)
+    - [3.5 新兴研究原型](.#35-新兴研究原型)
+  - [四、经典硬件上的量子模拟](.#四经典硬件上的量子模拟)
+    - [4.1 态向量模拟](.#41-态向量模拟)
+    - [4.2 张量网络收缩](.#42-张量网络收缩)
+    - [4.3 Rust 性能优势：SIMD 与并行化](.#43-rust-性能优势simd-与并行化)
+  - [五、量子安全密码学](.#五量子安全密码学)
+    - [5.1 NIST PQC 标准与迁移时间线](.#51-nist-pqc-标准与迁移时间线)
+    - [5.2 CRYSTALS-Kyber / Dilithium 原理](.#52-crystals-kyber--dilithium-原理)
+    - [5.3 pqclean-rust、pqcrypto、liboqs-rust](.#53-pqclean-rustpqcryptoliboqs-rust)
+    - [5.4 rustls 的后量子 TLS 实践](.#54-rustls-的后量子-tls-实践)
+  - [六、量子-经典混合工作流](.#六量子-经典混合工作流)
+    - [6.1 变分量子算法（VQE / QAOA）](.#61-变分量子算法vqe--qaoa)
+    - [6.2 参数移位与梯度计算](.#62-参数移位与梯度计算)
+  - [七、反命题与边界](.#七反命题与边界)
+    - [7.1 反命题树](.#71-反命题树)
+    - [7.2 边界极限](.#72-边界极限)
+  - [八、边界测试](.#八边界测试)
+    - [8.1 边界测试：尝试克隆量子态（不可克隆定理违反）](.#81-边界测试尝试克隆量子态不可克隆定理违反)
+    - [8.2 边界测试：在笔记本上模拟 30 量子比特（内存爆炸）](.#82-边界测试在笔记本上模拟-30-量子比特内存爆炸)
+    - [8.3 边界测试：使用非厄米算符进行量子演化（类型/逻辑错误）](.#83-边界测试使用非厄米算符进行量子演化类型逻辑错误)
+  - [相关概念文件](.#相关概念文件)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：量子计算中的"量子比特"（Qubit）与经典比特有什么根本区别？（理解层）](.#测验-1量子计算中的量子比特qubit与经典比特有什么根本区别理解层)
+    - [测验 2：Rust 在量子计算生态中目前主要扮演什么角色？（理解层）](.#测验-2rust-在量子计算生态中目前主要扮演什么角色理解层)
+    - [测验 3：什么是"量子纠错"（Quantum Error Correction）？为什么它对大规模量子计算至关重要？（理解层）](.#测验-3什么是量子纠错quantum-error-correction为什么它对大规模量子计算至关重要理解层)
+    - [测验 4：QIR（Quantum Intermediate Representation）是什么？Rust 如何生成 QIR？（理解层）](.#测验-4qirquantum-intermediate-representation是什么rust-如何生成-qir理解层)
+    - [测验 5：为什么量子模拟器（Simulator）需要高性能计算，Rust 在这方面的优势是什么？（理解层）](.#测验-5为什么量子模拟器simulator需要高性能计算rust-在这方面的优势是什么理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 > **Bloom 层级**: 分析 → 评价
 > **变更日志**:
@@ -801,16 +801,16 @@ fn main() {
 
 ## 相关概念文件
 
-- [安全与密码学](./43_security_cryptography.md) — 对称/非对称加密、TLS、侧信道防护
-- [性能优化](./15_performance_optimization.md) — SIMD、缓存优化、内存布局、零拷贝
+- [安全与密码学](43_security_cryptography.md) — 对称/非对称加密、TLS、侧信道防护
+- [性能优化](15_performance_optimization.md) — SIMD、缓存优化、内存布局、零拷贝
 - [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、多线程并行、内存模型
 - [类型系统（Type System）](../01_foundation/04_type_system.md) — 泛型（Generics）、Trait、类型状态模式
 - [泛型（Generics）](../02_intermediate/02_generics.md) — 零成本抽象（Zero-Cost Abstraction）、类型参数化
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — FFI 绑定、C 库交互（QuEST、PQClean）
-- [机器学习生态](./46_machine_learning_ecosystem.md) — 优化算法、自动微分、张量运算
-- [分布式系统](./18_distributed_systems.md) — 分布式模拟、MPI、集群计算
+- [机器学习生态](46_machine_learning_ecosystem.md) — 优化算法、自动微分、张量运算
+- [分布式系统](18_distributed_systems.md) — 分布式模拟、MPI、集群计算
 - [形式化验证](../04_formal/05_verification_toolchain.md) — 密码学实现的形式化证明、常量时间验证
-- [WebAssembly](./11_webassembly.md) — 浏览器内量子模拟、跨平台部署
+- [WebAssembly](11_webassembly.md) — 浏览器内量子模拟、跨平台部署
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

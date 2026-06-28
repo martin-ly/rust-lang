@@ -7,14 +7,14 @@
 
 ## 📊 目录
 
-- [Tier 3: Drop 与 RAII 参考](#tier-3-drop-与-raii-参考)
-  - [📊 目录](#-目录)
-  - [Drop trait](#drop-trait)
-    - [基本使用](#基本使用)
-  - [RAII 模式](#raii-模式)
-    - [文件 RAII](#文件-raii)
-    - [锁 RAII](#锁-raii)
-  - [Drop 顺序](#drop-顺序)
+- [Tier 3: Drop 与 RAII 参考](.#tier-3-drop-与-raii-参考)
+  - [📊 目录](.#-目录)
+  - [Drop trait](.#drop-trait)
+    - [基本使用](.#基本使用)
+  - [RAII 模式](.#raii-模式)
+    - [文件 RAII](.#文件-raii)
+    - [锁 RAII](.#锁-raii)
+  - [Drop 顺序](.#drop-顺序)
 
 ## Drop trait
 

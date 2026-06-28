@@ -7,15 +7,15 @@
 ## 目录导航
 
 - 版本与特性对齐
-  - [RUST_189_FEATURES_SUMMARY.md](./RUST_189_FEATURES_SUMMARY.md)
-  - [RUST_189_ENHANCED_FEATURES.md](./RUST_189_ENHANCED_FEATURES.md)
-  - [RUST_189_COMPREHENSIVE_FEATURES.md](./RUST_189_COMPREHENSIVE_FEATURES.md)
-  - [RUST_189_MIGRATION_GUIDE.md](./RUST_189_MIGRATION_GUIDE.md)
-  - [RUST_189_PRACTICAL_GUIDE.md](./RUST_189_PRACTICAL_GUIDE.md)
+  - [RUST_189_FEATURES_SUMMARY.md](RUST_189_FEATURES_SUMMARY.md)
+  - [RUST_189_ENHANCED_FEATURES.md](RUST_189_ENHANCED_FEATURES.md)
+  - [RUST_189_COMPREHENSIVE_FEATURES.md](RUST_189_COMPREHENSIVE_FEATURES.md)
+  - [RUST_189_MIGRATION_GUIDE.md](RUST_189_MIGRATION_GUIDE.md)
+  - [RUST_189_PRACTICAL_GUIDE.md](RUST_189_PRACTICAL_GUIDE.md)
 
 - 控制流视图
-  - [view01.md](./view01.md)
-  - [view02.md](./view02.md)
+  - [view01.md](view01.md)
+  - [view02.md](view02.md)
   - 片段示例：`snippets/async_control_flow_example.rs`
 
 - 专题：所有权与访问控制
@@ -33,7 +33,7 @@
 
 ### 待完善
 
-详见 [PENDING_ITEMS.md](./PENDING_ITEMS.md)。主要项：
+详见 [PENDING_ITEMS.md](PENDING_ITEMS.md)。主要项：
 
 - 增补错误处理与 `Result`/`?` 的边界案例与最佳实践
 - 增补迭代器与闭包在控制流中的协同示例

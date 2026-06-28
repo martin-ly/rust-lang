@@ -15,7 +15,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 深入探讨 Rust 迭代器（Iterator）模式——从适配器链到自定义迭代器，分析惰性求值、性能特征和最佳实践。
-> **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Generics](../02_intermediate/02_generics.md) · [Closures](../01_foundation/15_closure_basics.md)
+> **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Generics](02_generics.md) · [Closures](../01_foundation/15_closure_basics.md)
 > **后置概念**: [Concurrency](../03_advanced/01_concurrency.md) · [Performance](../06_ecosystem/15_performance_optimization.md)
 
 ---
@@ -28,57 +28,57 @@
 
 ## 📑 目录
 
-- [Rust 迭代器模式](#rust-迭代器模式)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 Iterator Trait](#11-iterator-trait)
-    - [1.2 适配器链](#12-适配器链)
-    - [1.3 惰性求值](#13-惰性求值)
-    - [1.4 消费者与适配器](#14-消费者与适配器)
-  - [二、常用模式](#二常用模式)
-    - [2.1 map-filter-collect](#21-map-filter-collect)
-    - [2.2 fold 与归约](#22-fold-与归约)
-    - [2.3 zip 与并行迭代](#23-zip-与并行迭代)
-    - [2.4 IntoIterator 与 for 循环](#24-intoiterator-与-for-循环)
-    - [2.5 迭代器模式矩阵](#25-迭代器模式矩阵)
-  - [三、自定义迭代器](#三自定义迭代器)
-  - [四、性能权衡](#四性能权衡)
-  - [五、反命题与边界分析](#五反命题与边界分析)
-  - [六、常见陷阱](#六常见陷阱)
-  - [七、来源与延伸阅读](#七来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：迭代器模式的编译错误](#十边界测试迭代器模式的编译错误)
-    - [10.1 边界测试：`Iterator::collect` 的目标类型歧义（编译错误）](#101-边界测试iteratorcollect-的目标类型歧义编译错误)
-    - [10.2 边界测试：迭代器适配器的惰性求值陷阱（逻辑错误）](#102-边界测试迭代器适配器的惰性求值陷阱逻辑错误)
-    - [10.3 边界测试：`Iterator::zip` 的长度不一致（逻辑错误）](#103-边界测试iteratorzip-的长度不一致逻辑错误)
-    - [10.4 边界测试：消耗型适配器与双重迭代（编译错误）](#104-边界测试消耗型适配器与双重迭代编译错误)
-    - [10.5 边界测试：`flat_map` 与嵌套迭代器的所有权（编译错误）](#105-边界测试flat_map-与嵌套迭代器的所有权编译错误)
-    - [10.6 边界测试：`Iterator::fold` 的初始值类型不匹配（编译错误）](#106-边界测试iteratorfold-的初始值类型不匹配编译错误)
-    - [10.7 边界测试：`Iterator::fuse` 后的重复消费（逻辑错误）](#107-边界测试iteratorfuse-后的重复消费逻辑错误)
-  - [十二、边界测试：迭代器模式的编译错误（续）](#十二边界测试迭代器模式的编译错误续)
-    - [12.1 边界测试：`skip_while` 与 `take_while` 的互斥性（逻辑错误）](#121-边界测试skip_while-与-take_while-的互斥性逻辑错误)
-    - [12.2 边界测试：`cycle` 与无限迭代器（运行时死循环）](#122-边界测试cycle-与无限迭代器运行时死循环)
-    - [12.3 边界测试：`enumerate` 与索引类型（逻辑错误）](#123-边界测试enumerate-与索引类型逻辑错误)
-    - [12.4 边界测试：`partition` 与所有权分割（编译错误）](#124-边界测试partition-与所有权分割编译错误)
-    - [12.5 边界测试：`ChunksExact` 的剩余元素处理（逻辑错误）](#125-边界测试chunksexact-的剩余元素处理逻辑错误)
-    - [12.6 边界测试：const fn 中的非编译期操作](#126-边界测试const-fn-中的非编译期操作)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：`Iterator::map` 和 `Iterator::filter` 返回的是新迭代器还是立即执行计算？（理解层）](#测验-1iteratormap-和-iteratorfilter-返回的是新迭代器还是立即执行计算理解层)
-    - [测验 2：`iter.next()` 返回 `Option<Self::Item>`。`None` 表示什么？（理解层）](#测验-2iternext-返回-optionselfitemnone-表示什么理解层)
-    - [测验 3：`Iterator::fold` 与 `Iterator::reduce` 的主要区别是什么？（理解层）](#测验-3iteratorfold-与-iteratorreduce-的主要区别是什么理解层)
-    - [测验 4：如何实现自定义迭代器？至少需要实现哪个方法？（理解层）](#测验-4如何实现自定义迭代器至少需要实现哪个方法理解层)
-    - [测验 5：`iter.take(n)` 和 `iter.skip(n)` 分别对迭代器做什么？（理解层）](#测验-5itertaken-和-iterskipn-分别对迭代器做什么理解层)
-    - [测验 6：`Iterator::fuse()` 的作用是什么？在什么场景下需要使用它？（理解层）](#测验-6iteratorfuse-的作用是什么在什么场景下需要使用它理解层)
-    - [测验 7：`peekable()` 迭代器与标准迭代器的主要区别是什么？（理解层）](#测验-7peekable-迭代器与标准迭代器的主要区别是什么理解层)
-    - [测验 8：`iter.cycle()` 对迭代器有什么要求？如果原始迭代器为空会发生什么？（理解层）](#测验-8itercycle-对迭代器有什么要求如果原始迭代器为空会发生什么理解层)
-    - [测验 9：`flat_map` 与 `map` 后接 `flatten` 有什么区别？（理解层）](#测验-9flat_map-与-map-后接-flatten-有什么区别理解层)
-    - [测验 10：`by_ref()` 在迭代器链中的作用是什么？（理解层）](#测验-10by_ref-在迭代器链中的作用是什么理解层)
-  - [实践](#实践)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Rust 迭代器模式](.#rust-迭代器模式)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 Iterator Trait](.#11-iterator-trait)
+    - [1.2 适配器链](.#12-适配器链)
+    - [1.3 惰性求值](.#13-惰性求值)
+    - [1.4 消费者与适配器](.#14-消费者与适配器)
+  - [二、常用模式](.#二常用模式)
+    - [2.1 map-filter-collect](.#21-map-filter-collect)
+    - [2.2 fold 与归约](.#22-fold-与归约)
+    - [2.3 zip 与并行迭代](.#23-zip-与并行迭代)
+    - [2.4 IntoIterator 与 for 循环](.#24-intoiterator-与-for-循环)
+    - [2.5 迭代器模式矩阵](.#25-迭代器模式矩阵)
+  - [三、自定义迭代器](.#三自定义迭代器)
+  - [四、性能权衡](.#四性能权衡)
+  - [五、反命题与边界分析](.#五反命题与边界分析)
+  - [六、常见陷阱](.#六常见陷阱)
+  - [七、来源与延伸阅读](.#七来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [逆向推理链（Backward Reasoning）](.#逆向推理链backward-reasoning)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：迭代器模式的编译错误](.#十边界测试迭代器模式的编译错误)
+    - [10.1 边界测试：`Iterator::collect` 的目标类型歧义（编译错误）](.#101-边界测试iteratorcollect-的目标类型歧义编译错误)
+    - [10.2 边界测试：迭代器适配器的惰性求值陷阱（逻辑错误）](.#102-边界测试迭代器适配器的惰性求值陷阱逻辑错误)
+    - [10.3 边界测试：`Iterator::zip` 的长度不一致（逻辑错误）](.#103-边界测试iteratorzip-的长度不一致逻辑错误)
+    - [10.4 边界测试：消耗型适配器与双重迭代（编译错误）](.#104-边界测试消耗型适配器与双重迭代编译错误)
+    - [10.5 边界测试：`flat_map` 与嵌套迭代器的所有权（编译错误）](.#105-边界测试flat_map-与嵌套迭代器的所有权编译错误)
+    - [10.6 边界测试：`Iterator::fold` 的初始值类型不匹配（编译错误）](.#106-边界测试iteratorfold-的初始值类型不匹配编译错误)
+    - [10.7 边界测试：`Iterator::fuse` 后的重复消费（逻辑错误）](.#107-边界测试iteratorfuse-后的重复消费逻辑错误)
+  - [十二、边界测试：迭代器模式的编译错误（续）](.#十二边界测试迭代器模式的编译错误续)
+    - [12.1 边界测试：`skip_while` 与 `take_while` 的互斥性（逻辑错误）](.#121-边界测试skip_while-与-take_while-的互斥性逻辑错误)
+    - [12.2 边界测试：`cycle` 与无限迭代器（运行时死循环）](.#122-边界测试cycle-与无限迭代器运行时死循环)
+    - [12.3 边界测试：`enumerate` 与索引类型（逻辑错误）](.#123-边界测试enumerate-与索引类型逻辑错误)
+    - [12.4 边界测试：`partition` 与所有权分割（编译错误）](.#124-边界测试partition-与所有权分割编译错误)
+    - [12.5 边界测试：`ChunksExact` 的剩余元素处理（逻辑错误）](.#125-边界测试chunksexact-的剩余元素处理逻辑错误)
+    - [12.6 边界测试：const fn 中的非编译期操作](.#126-边界测试const-fn-中的非编译期操作)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：`Iterator::map` 和 `Iterator::filter` 返回的是新迭代器还是立即执行计算？（理解层）](.#测验-1iteratormap-和-iteratorfilter-返回的是新迭代器还是立即执行计算理解层)
+    - [测验 2：`iter.next()` 返回 `Option<Self::Item>`。`None` 表示什么？（理解层）](.#测验-2iternext-返回-optionselfitemnone-表示什么理解层)
+    - [测验 3：`Iterator::fold` 与 `Iterator::reduce` 的主要区别是什么？（理解层）](.#测验-3iteratorfold-与-iteratorreduce-的主要区别是什么理解层)
+    - [测验 4：如何实现自定义迭代器？至少需要实现哪个方法？（理解层）](.#测验-4如何实现自定义迭代器至少需要实现哪个方法理解层)
+    - [测验 5：`iter.take(n)` 和 `iter.skip(n)` 分别对迭代器做什么？（理解层）](.#测验-5itertaken-和-iterskipn-分别对迭代器做什么理解层)
+    - [测验 6：`Iterator::fuse()` 的作用是什么？在什么场景下需要使用它？（理解层）](.#测验-6iteratorfuse-的作用是什么在什么场景下需要使用它理解层)
+    - [测验 7：`peekable()` 迭代器与标准迭代器的主要区别是什么？（理解层）](.#测验-7peekable-迭代器与标准迭代器的主要区别是什么理解层)
+    - [测验 8：`iter.cycle()` 对迭代器有什么要求？如果原始迭代器为空会发生什么？（理解层）](.#测验-8itercycle-对迭代器有什么要求如果原始迭代器为空会发生什么理解层)
+    - [测验 9：`flat_map` 与 `map` 后接 `flatten` 有什么区别？（理解层）](.#测验-9flat_map-与-map-后接-flatten-有什么区别理解层)
+    - [测验 10：`by_ref()` 在迭代器链中的作用是什么？（理解层）](.#测验-10by_ref-在迭代器链中的作用是什么理解层)
+  - [实践](.#实践)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -818,9 +818,9 @@ fn main() {
 ## 相关概念文件
 
 - [Type System](../01_foundation/04_type_system.md) — 类型系统（Type System）
-- [Generics](../02_intermediate/02_generics.md) — 泛型（Generics）
+- [Generics](02_generics.md) — 泛型（Generics）
 - [Closures](../01_foundation/15_closure_basics.md) — 闭包（Closures）
-- [Trait](./01_traits.md) — Trait 系统
+- [Trait](01_traits.md) — Trait 系统
 - [Zero Cost](../01_foundation/06_zero_cost_abstractions.md) — 零成本抽象（Zero-Cost Abstraction）
 - [Async](../03_advanced/02_async.md) — 异步（Async）编程
 - [Concurrency](../03_advanced/01_concurrency.md) — 并发
@@ -1241,8 +1241,8 @@ fn main() {}
 
 > **相关资源**:
 >
-> - [crates/ 示例代码](../crates/) — 与本文概念对应的可编译示例
-> - [exercises/ 练习](../exercises/) — 动手编程挑战
+> - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../exercises) — 动手编程挑战
 > - [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

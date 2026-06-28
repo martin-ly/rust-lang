@@ -10,27 +10,27 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [部署指南](#部署指南)
-  - [目录](#目录)
-  - [Docker 部署](#docker-部署)
-    - [单机部署](#单机部署)
-    - [使用 Docker Compose](#使用-docker-compose)
-  - [Kubernetes 部署](#kubernetes-部署)
-    - [前置要求](#前置要求)
-    - [部署步骤](#部署步骤)
-    - [扩展副本](#扩展副本)
-    - [更新镜像](#更新镜像)
-    - [查看日志](#查看日志)
-  - [Nix 部署](#nix-部署)
-    - [使用 Nix 构建](#使用-nix-构建)
-    - [运行 Nix 开发 Shell](#运行-nix-开发-shell)
-  - [环境配置](#环境配置)
-    - [生产环境变量](#生产环境变量)
-  - [健康检查](#健康检查)
-  - [监控](#监控)
-  - [安全建议](#安全建议)
-  - [参考](#参考)
-  - [权威来源索引](#权威来源索引)
+- [部署指南](.#部署指南)
+  - [目录](.#目录)
+  - [Docker 部署](.#docker-部署)
+    - [单机部署](.#单机部署)
+    - [使用 Docker Compose](.#使用-docker-compose)
+  - [Kubernetes 部署](.#kubernetes-部署)
+    - [前置要求](.#前置要求)
+    - [部署步骤](.#部署步骤)
+    - [扩展副本](.#扩展副本)
+    - [更新镜像](.#更新镜像)
+    - [查看日志](.#查看日志)
+  - [Nix 部署](.#nix-部署)
+    - [使用 Nix 构建](.#使用-nix-构建)
+    - [运行 Nix 开发 Shell](.#运行-nix-开发-shell)
+  - [环境配置](.#环境配置)
+    - [生产环境变量](.#生产环境变量)
+  - [健康检查](.#健康检查)
+  - [监控](.#监控)
+  - [安全建议](.#安全建议)
+  - [参考](.#参考)
+  - [权威来源索引](.#权威来源索引)
 
 ## Docker 部署
 >
@@ -60,7 +60,7 @@ docker-compose up -d
 docker-compose ps
 ```
 
-更多详情参见 [06_docker_guide.md](./06_docker_guide.md)
+更多详情参见 [06_docker_guide.md](06_docker_guide.md)
 
 ## Kubernetes 部署
 >
@@ -146,7 +146,7 @@ nix build
 nix develop
 ```
 
-更多详情参见 [01_nix_setup.md](./01_nix_setup.md)
+更多详情参见 [01_nix_setup.md](01_nix_setup.md)
 
 ## 环境配置
 >

@@ -12,7 +12,7 @@
 > **双维定位**: C×App — 应用 Rust Edition 指南
 > **定位**: 深入探讨 Rust 的 **Edition 机制**——从 2015 到 2024，分析 Edition 如何实现语言演进而不破坏兼容性，以及迁移策略。
 > **前置概念**: [Toolchain](../06_ecosystem/01_toolchain.md) · [Macros](../03_advanced/04_macros.md) · [Type System](../01_foundation/04_type_system.md)
-> **后置概念**: [Evolution](./03_evolution.md) · [Version Tracking](./05_rust_version_tracking.md)
+> **后置概念**: [Evolution](03_evolution.md) · [Version Tracking](05_rust_version_tracking.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -24,38 +24,38 @@
 
 ## 📑 目录
 
-- [Rust Edition 机制与迁移指南](#rust-edition-机制与迁移指南)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 Edition 机制](#11-edition-机制)
-    - [1.2 版本兼容性](#12-版本兼容性)
-    - [1.3 2024 Edition 关键变更](#13-2024-edition-关键变更)
-  - [二、迁移策略](#二迁移策略)
-    - [2.1 cargo fix](#21-cargo-fix)
-    - [2.2 手动迁移](#22-手动迁移)
-  - [三、反命题与边界分析](#三反命题与边界分析)
-    - [3.1 反命题树](#31-反命题树)
-    - [3.2 边界极限](#32-边界极限)
-  - [四、常见陷阱](#四常见陷阱)
-  - [五、来源与延伸阅读](#五来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：Rust Edition Guide 的编译错误](#十边界测试rust-edition-guide-的编译错误)
-    - [10.1 边界测试：`impl Trait` 在静态项中的生命周期捕获（编译错误）](#101-边界测试impl-trait-在静态项中的生命周期捕获编译错误)
-    - [10.2 边界测试：Edition 迁移的宏展开差异（编译错误）](#102-边界测试edition-迁移的宏展开差异编译错误)
-    - [10.6 边界测试：Edition 2024 的 `gen` 关键字保留与现有标识符冲突（编译错误）](#106-边界测试edition-2024-的-gen-关键字保留与现有标识符冲突编译错误)
-    - [10.5 边界测试：多 Edition workspace 的依赖解析冲突（编译错误）](#105-边界测试多-edition-workspace-的依赖解析冲突编译错误)
-    - [10.3 边界测试：多 Edition workspace 的 resolver 冲突（编译错误）](#103-边界测试多-edition-workspace-的-resolver-冲突编译错误)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：`cargo-semver-checks` 在 Rust 生态中解决什么问题？（理解层）](#测验-1cargo-semver-checks-在-rust-生态中解决什么问题理解层)
-    - [测验 2：为什么 SemVer 在 Rust 中特别重要？（理解层）](#测验-2为什么-semver-在-rust-中特别重要理解层)
-    - [测验 3：`cargo-semver-checks` 与手动审查 API 变更相比有什么优势？（理解层）](#测验-3cargo-semver-checks-与手动审查-api-变更相比有什么优势理解层)
-    - [测验 4：`cargo-public-api` 与 `cargo-semver-checks` 有什么区别？（理解层）](#测验-4cargo-public-api-与-cargo-semver-checks-有什么区别理解层)
-    - [测验 5：这些工具对 Rust 生态系统稳定性的意义是什么？（理解层）](#测验-5这些工具对-rust-生态系统稳定性的意义是什么理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Rust Edition 机制与迁移指南](.#rust-edition-机制与迁移指南)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 Edition 机制](.#11-edition-机制)
+    - [1.2 版本兼容性](.#12-版本兼容性)
+    - [1.3 2024 Edition 关键变更](.#13-2024-edition-关键变更)
+  - [二、迁移策略](.#二迁移策略)
+    - [2.1 cargo fix](.#21-cargo-fix)
+    - [2.2 手动迁移](.#22-手动迁移)
+  - [三、反命题与边界分析](.#三反命题与边界分析)
+    - [3.1 反命题树](.#31-反命题树)
+    - [3.2 边界极限](.#32-边界极限)
+  - [四、常见陷阱](.#四常见陷阱)
+  - [五、来源与延伸阅读](.#五来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：Rust Edition Guide 的编译错误](.#十边界测试rust-edition-guide-的编译错误)
+    - [10.1 边界测试：`impl Trait` 在静态项中的生命周期捕获（编译错误）](.#101-边界测试impl-trait-在静态项中的生命周期捕获编译错误)
+    - [10.2 边界测试：Edition 迁移的宏展开差异（编译错误）](.#102-边界测试edition-迁移的宏展开差异编译错误)
+    - [10.6 边界测试：Edition 2024 的 `gen` 关键字保留与现有标识符冲突（编译错误）](.#106-边界测试edition-2024-的-gen-关键字保留与现有标识符冲突编译错误)
+    - [10.5 边界测试：多 Edition workspace 的依赖解析冲突（编译错误）](.#105-边界测试多-edition-workspace-的依赖解析冲突编译错误)
+    - [10.3 边界测试：多 Edition workspace 的 resolver 冲突（编译错误）](.#103-边界测试多-edition-workspace-的-resolver-冲突编译错误)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：`cargo-semver-checks` 在 Rust 生态中解决什么问题？（理解层）](.#测验-1cargo-semver-checks-在-rust-生态中解决什么问题理解层)
+    - [测验 2：为什么 SemVer 在 Rust 中特别重要？（理解层）](.#测验-2为什么-semver-在-rust-中特别重要理解层)
+    - [测验 3：`cargo-semver-checks` 与手动审查 API 变更相比有什么优势？（理解层）](.#测验-3cargo-semver-checks-与手动审查-api-变更相比有什么优势理解层)
+    - [测验 4：`cargo-public-api` 与 `cargo-semver-checks` 有什么区别？（理解层）](.#测验-4cargo-public-api-与-cargo-semver-checks-有什么区别理解层)
+    - [测验 5：这些工具对 Rust 生态系统稳定性的意义是什么？（理解层）](.#测验-5这些工具对-rust-生态系统稳定性的意义是什么理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -365,8 +365,8 @@ fn main() {
 ## 相关概念文件
 
 - [Toolchain](../06_ecosystem/01_toolchain.md) — 工具链
-- [Evolution](./03_evolution.md) — 语言演进
-- [Version Tracking](./05_rust_version_tracking.md) — 版本跟踪
+- [Evolution](03_evolution.md) — 语言演进
+- [Version Tracking](05_rust_version_tracking.md) — 版本跟踪
 - [Macros](../03_advanced/04_macros.md) — 宏（Macro）系统
 
 ---

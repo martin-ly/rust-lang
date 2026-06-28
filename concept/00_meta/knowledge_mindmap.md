@@ -21,19 +21,19 @@
 
 ## 📑 目录
 
-- [Rust 知识体系全局思维导图（Knowledge Mindmap）](#rust-知识体系全局思维导图knowledge-mindmap)
-  - [📑 目录](#-目录)
-  - [一、L0-L7 全局知识体系 Mindmap](#一l0-l7-全局知识体系-mindmap)
-  - [二、五维主线 Mindmap](#二五维主线-mindmap)
-  - [三、Mindmap 与四层关系图谱的关联](#三mindmap-与四层关系图谱的关联)
-  - [四、相关概念链接](#四相关概念链接)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：本文档《Rust 知识体系全局思维导图（Knowledge Mindmap）》在 Rust 知识体系中属于哪一层级的元数据？（理解层）](#测验-1本文档rust-知识体系全局思维导图knowledge-mindmap在-rust-知识体系中属于哪一层级的元数据理解层)
-    - [测验 2：《Rust 知识体系全局思维导图（Knowledge Mindmap）》的主要用途是什么？（理解层）](#测验-2rust-知识体系全局思维导图knowledge-mindmap的主要用途是什么理解层)
-    - [测验 3：元数据层文档能否替代 L1-L7 的核心概念学习？（理解层）](#测验-3元数据层文档能否替代-l1-l7-的核心概念学习理解层)
+- [Rust 知识体系全局思维导图（Knowledge Mindmap）](.#rust-知识体系全局思维导图knowledge-mindmap)
+  - [📑 目录](.#-目录)
+  - [一、L0-L7 全局知识体系 Mindmap](.#一l0-l7-全局知识体系-mindmap)
+  - [二、五维主线 Mindmap](.#二五维主线-mindmap)
+  - [三、Mindmap 与四层关系图谱的关联](.#三mindmap-与四层关系图谱的关联)
+  - [四、相关概念链接](.#四相关概念链接)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：本文档《Rust 知识体系全局思维导图（Knowledge Mindmap）》在 Rust 知识体系中属于哪一层级的元数据？（理解层）](.#测验-1本文档rust-知识体系全局思维导图knowledge-mindmap在-rust-知识体系中属于哪一层级的元数据理解层)
+    - [测验 2：《Rust 知识体系全局思维导图（Knowledge Mindmap）》的主要用途是什么？（理解层）](.#测验-2rust-知识体系全局思维导图knowledge-mindmap的主要用途是什么理解层)
+    - [测验 3：元数据层文档能否替代 L1-L7 的核心概念学习？（理解层）](.#测验-3元数据层文档能否替代-l1-l7-的核心概念学习理解层)
 
 ## 一、L0-L7 全局知识体系 Mindmap
 
@@ -219,12 +219,12 @@ mindmap
 >
 >
 
-- [跨层依赖拓扑](./inter_layer_topology.md) —— L0-L7 纵向导航
-- [层内模型映射](./intra_layer_model_map.md) —— 同层模型横向选择
-- [定理推理森林](./theorem_inference_forest.md) —— 公理→定理深度验证
-- [边界扩展树](./boundary_extension_tree.md) —— 安全边界风险评估
-- [可判定性谱系](./decidability_spectrum.md) —— 编译期判定边界
-- [表达力多视角](./expressiveness_multiview.md) —— 七视角表达力分析
+- [跨层依赖拓扑](inter_layer_topology.md) —— L0-L7 纵向导航
+- [层内模型映射](intra_layer_model_map.md) —— 同层模型横向选择
+- [定理推理森林](theorem_inference_forest.md) —— 公理→定理深度验证
+- [边界扩展树](boundary_extension_tree.md) —— 安全边界风险评估
+- [可判定性谱系](decidability_spectrum.md) —— 编译期判定边界
+- [表达力多视角](expressiveness_multiview.md) —— 七视角表达力分析
 - [L1 所有权](../01_foundation/01_ownership.md) —— 所有权唯一性
 - [L3 异步](../03_advanced/02_async.md) —— async/await 状态机
 - [表达力多视角](expressiveness_multiview.md) —— 七视角表达力分析

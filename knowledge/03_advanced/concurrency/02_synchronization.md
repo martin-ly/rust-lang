@@ -1270,7 +1270,7 @@ fn consumer(queue: Arc<(Mutex<Vec<i32>>, Condvar)>) {
 
 - [Rust 内存模型与原子操作](01_atomics.md)
 - [异步编程与并发](../async/01_async_await.md)
-- [线程基础](../concurrency/03_threads.md)
+- [线程基础](03_threads.md)
 
 ---
 

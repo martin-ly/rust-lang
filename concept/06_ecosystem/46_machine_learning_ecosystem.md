@@ -14,7 +14,7 @@
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: P×Ana — 分析 Rust ML 生态的技术选型与工程权衡
 > **前置依赖**: [类型系统（Type System）](../01_foundation/04_type_system.md) · [泛型（Generics）](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
-> **后置延伸**: [嵌入式系统](./22_embedded_systems.md) · [性能优化](./15_performance_optimization.md) · [并发编程](../03_advanced/01_concurrency.md)
+> **后置延伸**: [嵌入式系统](22_embedded_systems.md) · [性能优化](15_performance_optimization.md) · [并发编程](../03_advanced/01_concurrency.md)
 >
 > **来源**: [candle](https://docs.rs/candle-core/) · [burn](https://docs.rs/burn/) · [tch-rs](https://docs.rs/tch/)
 > **前置概念**: N/A
@@ -37,48 +37,48 @@
 
 ## 📑 目录
 
-- [Machine Learning Ecosystem（机器学习生态）](#machine-learning-ecosystem机器学习生态)
-  - [📑 目录](#-目录)
-  - [一、权威定义（Definition）](#一权威定义definition)
-    - [1.1 Rust ML 生态定位](#11-rust-ml-生态定位)
-    - [1.2 数据科学生态分层](#12-数据科学生态分层)
-  - [二、概念属性矩阵](#二概念属性矩阵)
-  - [三、深度学习框架](#三深度学习框架)
-    - [3.1 candle：纯 Rust 推理引擎](#31-candle纯-rust-推理引擎)
-    - [3.2 burn：可移植深度学习框架](#32-burn可移植深度学习框架)
-    - [3.3 tch-rs：PyTorch C++ API 绑定](#33-tch-rspytorch-c-api-绑定)
-    - [3.4 ort：ONNX Runtime 绑定](#34-ortonnx-runtime-绑定)
-  - [四、传统机器学习](#四传统机器学习)
-    - [4.1 linfa：scikit-learn 风格算法库](#41-linfascikit-learn-风格算法库)
-    - [4.2 smartcore：无标准库 ML](#42-smartcore无标准库-ml)
-  - [五、数据科学生态](#五数据科学生态)
-    - [5.1 polars：高性能 DataFrame](#51-polars高性能-dataframe)
-    - [5.2 Apache Arrow：列式内存格式](#52-apache-arrow列式内存格式)
-    - [5.3 DataFusion：查询执行引擎](#53-datafusion查询执行引擎)
-  - [六、模型部署与推理优化](#六模型部署与推理优化)
-    - [6.1 量化与压缩](#61-量化与压缩)
-    - [6.2 边缘部署](#62-边缘部署)
-  - [七、Rust ML 的技术优势与限制](#七rust-ml-的技术优势与限制)
-    - [7.1 优势分析](#71-优势分析)
-    - [7.2 限制分析](#72-限制分析)
-  - [八、反命题与边界](#八反命题与边界)
-    - [8.1 反命题树](#81-反命题树)
-    - [8.2 边界极限](#82-边界极限)
-  - [九、边界测试](#九边界测试)
-    - [9.1 边界测试：未初始化张量内存导致信息泄露（安全漏洞）](#91-边界测试未初始化张量内存导致信息泄露安全漏洞)
-    - [9.2 边界测试：单线程 DataFrame 操作在并发场景下竞争（运行时错误）](#92-边界测试单线程-dataframe-操作在并发场景下竞争运行时错误)
-    - [9.3 边界测试：模型输入维度不匹配导致 panic（逻辑错误）](#93-边界测试模型输入维度不匹配导致-panic逻辑错误)
-  - [相关概念文件](#相关概念文件)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：Rust 在机器学习领域目前的主要定位是什么？（理解层）](#测验-1rust-在机器学习领域目前的主要定位是什么理解层)
-    - [测验 2：`candle`（Hugging Face）与 `PyTorch` 在设计哲学上有什么区别？（理解层）](#测验-2candlehugging-face与-pytorch-在设计哲学上有什么区别理解层)
-    - [测验 3：为什么 ML 推理引擎常用 Rust 重写（如 `llama.cpp` 的 Rust 绑定、`mistral.rs`）？（理解层）](#测验-3为什么-ml-推理引擎常用-rust-重写如-llamacpp-的-rust-绑定mistralrs理解层)
-    - [测验 4：`ndarray` 在 Rust ML 生态中扮演什么角色？（理解层）](#测验-4ndarray-在-rust-ml-生态中扮演什么角色理解层)
-    - [测验 5：`ort`（ONNX Runtime Rust bindings）在模型部署中有什么优势？（理解层）](#测验-5ortonnx-runtime-rust-bindings在模型部署中有什么优势理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Machine Learning Ecosystem（机器学习生态）](.#machine-learning-ecosystem机器学习生态)
+  - [📑 目录](.#-目录)
+  - [一、权威定义（Definition）](.#一权威定义definition)
+    - [1.1 Rust ML 生态定位](.#11-rust-ml-生态定位)
+    - [1.2 数据科学生态分层](.#12-数据科学生态分层)
+  - [二、概念属性矩阵](.#二概念属性矩阵)
+  - [三、深度学习框架](.#三深度学习框架)
+    - [3.1 candle：纯 Rust 推理引擎](.#31-candle纯-rust-推理引擎)
+    - [3.2 burn：可移植深度学习框架](.#32-burn可移植深度学习框架)
+    - [3.3 tch-rs：PyTorch C++ API 绑定](.#33-tch-rspytorch-c-api-绑定)
+    - [3.4 ort：ONNX Runtime 绑定](.#34-ortonnx-runtime-绑定)
+  - [四、传统机器学习](.#四传统机器学习)
+    - [4.1 linfa：scikit-learn 风格算法库](.#41-linfascikit-learn-风格算法库)
+    - [4.2 smartcore：无标准库 ML](.#42-smartcore无标准库-ml)
+  - [五、数据科学生态](.#五数据科学生态)
+    - [5.1 polars：高性能 DataFrame](.#51-polars高性能-dataframe)
+    - [5.2 Apache Arrow：列式内存格式](.#52-apache-arrow列式内存格式)
+    - [5.3 DataFusion：查询执行引擎](.#53-datafusion查询执行引擎)
+  - [六、模型部署与推理优化](.#六模型部署与推理优化)
+    - [6.1 量化与压缩](.#61-量化与压缩)
+    - [6.2 边缘部署](.#62-边缘部署)
+  - [七、Rust ML 的技术优势与限制](.#七rust-ml-的技术优势与限制)
+    - [7.1 优势分析](.#71-优势分析)
+    - [7.2 限制分析](.#72-限制分析)
+  - [八、反命题与边界](.#八反命题与边界)
+    - [8.1 反命题树](.#81-反命题树)
+    - [8.2 边界极限](.#82-边界极限)
+  - [九、边界测试](.#九边界测试)
+    - [9.1 边界测试：未初始化张量内存导致信息泄露（安全漏洞）](.#91-边界测试未初始化张量内存导致信息泄露安全漏洞)
+    - [9.2 边界测试：单线程 DataFrame 操作在并发场景下竞争（运行时错误）](.#92-边界测试单线程-dataframe-操作在并发场景下竞争运行时错误)
+    - [9.3 边界测试：模型输入维度不匹配导致 panic（逻辑错误）](.#93-边界测试模型输入维度不匹配导致-panic逻辑错误)
+  - [相关概念文件](.#相关概念文件)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 在机器学习领域目前的主要定位是什么？（理解层）](.#测验-1rust-在机器学习领域目前的主要定位是什么理解层)
+    - [测验 2：`candle`（Hugging Face）与 `PyTorch` 在设计哲学上有什么区别？（理解层）](.#测验-2candlehugging-face与-pytorch-在设计哲学上有什么区别理解层)
+    - [测验 3：为什么 ML 推理引擎常用 Rust 重写（如 `llama.cpp` 的 Rust 绑定、`mistral.rs`）？（理解层）](.#测验-3为什么-ml-推理引擎常用-rust-重写如-llamacpp-的-rust-绑定mistralrs理解层)
+    - [测验 4：`ndarray` 在 Rust ML 生态中扮演什么角色？（理解层）](.#测验-4ndarray-在-rust-ml-生态中扮演什么角色理解层)
+    - [测验 5：`ort`（ONNX Runtime Rust bindings）在模型部署中有什么优势？（理解层）](.#测验-5ortonnx-runtime-rust-bindings在模型部署中有什么优势理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 > **Bloom 层级**: 应用 → 分析
 > **变更日志**:
@@ -843,14 +843,14 @@ fn safe_inference(model: &impl Module<B>, input: Tensor<B, 2>) {
 
 ## 相关概念文件
 
-- [性能优化](./15_performance_optimization.md) — SIMD、缓存优化、内存布局
-- [嵌入式系统](./22_embedded_systems.md) — `#![no_std]`、资源受限环境
+- [性能优化](15_performance_optimization.md) — SIMD、缓存优化、内存布局
+- [嵌入式系统](22_embedded_systems.md) — `#![no_std]`、资源受限环境
 - [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、多线程并行
 - [类型系统](../01_foundation/04_type_system.md) — 泛型（Generics）、Trait、类型安全
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — FFI 绑定、C 库交互
-- [网络协议](./38_network_protocols.md) — gRPC、HTTP/2、序列化
-- [云原生](./24_cloud_native.md) — 容器化部署、微服务
-- [WebAssembly](./11_webassembly.md) — WASM 目标、浏览器内推理
+- [网络协议](38_network_protocols.md) — gRPC、HTTP/2、序列化
+- [云原生](24_cloud_native.md) — 容器化部署、微服务
+- [WebAssembly](11_webassembly.md) — WASM 目标、浏览器内推理
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

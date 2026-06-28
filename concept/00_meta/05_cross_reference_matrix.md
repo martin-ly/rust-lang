@@ -13,11 +13,11 @@
 
 ## 相关概念文件
 
-- [概念索引](./README.md) — 知识体系总览
-- [Bloom 分类法](./03_bloom_taxonomy.md) — 认知层级标注标准
-- [学习指南](./learning_guide.md) — 学习路径规划
-- [概念审计指南](./08_concept_audit_guide.md) — 质量检查规范
-- [语义空间坐标系](./semantic_space.md) — 概念定位方法
+- [概念索引](README.md) — 知识体系总览
+- [Bloom 分类法](03_bloom_taxonomy.md) — 认知层级标注标准
+- [学习指南](learning_guide.md) — 学习路径规划
+- [概念审计指南](08_concept_audit_guide.md) — 质量检查规范
+- [语义空间坐标系](semantic_space.md) — 概念定位方法
 
 ## 认知路径
 

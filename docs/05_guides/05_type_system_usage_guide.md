@@ -18,23 +18,23 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [类型系统使用指南](#类型系统使用指南)
-  - [📑 目录](#-目录)
-  - [📋 概述](#-概述)
-  - [🚀 快速开始](#-快速开始)
-  - [📊 核心功能](#-核心功能)
-    - [1. 基本类型系统](#1-基本类型系统)
-    - [2. 泛型与 Trait](#2-泛型与-trait)
-    - [3. 型变 (Variance)](#3-型变-variance)
-    - [4. 高级模式匹配](#4-高级模式匹配)
-    - [5. 精确捕获 (Precise Capturing)](#5-精确捕获-precise-capturing)
-    - [6. Rust 1.95 类型系统增强](#6-rust-195-类型系统增强)
-  - [⚡ 性能优化](#-性能优化)
-  - [🔧 错误处理](#-错误处理)
-  - [🐛 常见问题与解决方案](#-常见问题与解决方案)
-  - [🔗 相关文档](#-相关文档)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [类型系统使用指南](.#类型系统使用指南)
+  - [📑 目录](.#-目录)
+  - [📋 概述](.#-概述)
+  - [🚀 快速开始](.#-快速开始)
+  - [📊 核心功能](.#-核心功能)
+    - [1. 基本类型系统](.#1-基本类型系统)
+    - [2. 泛型与 Trait](.#2-泛型与-trait)
+    - [3. 型变 (Variance)](.#3-型变-variance)
+    - [4. 高级模式匹配](.#4-高级模式匹配)
+    - [5. 精确捕获 (Precise Capturing)](.#5-精确捕获-precise-capturing)
+    - [6. Rust 1.95 类型系统增强](.#6-rust-195-类型系统增强)
+  - [⚡ 性能优化](.#-性能优化)
+  - [🔧 错误处理](.#-错误处理)
+  - [🐛 常见问题与解决方案](.#-常见问题与解决方案)
+  - [🔗 相关文档](.#-相关文档)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 📋 概述
 >
@@ -42,7 +42,7 @@
 
 本指南对应 `crates/c02_type_system`，涵盖 Rust 类型系统的核心概念与高级特性，包括基本类型、泛型、Trait、型变、模式匹配以及 Rust 1.95.0 的 `if let guards` 和 `use<..>` 精确捕获。
 
-**前置知识**: [knowledge/01_fundamentals/](../../knowledge/01_fundamentals/) 基础语法
+**前置知识**: [knowledge/01_fundamentals/](../../knowledge/01_fundamentals) 基础语法
 **速查卡**: [02_type_system.md](../02_reference/quick_reference/02_type_system.md)
 
 ---
@@ -276,9 +276,9 @@ fn robust_operation() -> Result<(), ContextualError> {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - **速查卡**: [02_type_system.md](../02_reference/quick_reference/02_type_system.md)
-- **学习教程**: [knowledge/02_intermediate/](../../knowledge/02_intermediate/)
-- **形式化理论**: [research_notes/type_theory/](../research_notes/type_theory/)
-- **源码**: [crates/c02_type_system/](../../crates/c02_type_system/)
+- **学习教程**: [knowledge/02_intermediate/](../../knowledge/02_intermediate)
+- **形式化理论**: [research_notes/type_theory/](../research_notes/type_theory)
+- **源码**: [crates/c02_type_system/](../../crates/c02_type_system)
 
 ---
 
@@ -297,7 +297,7 @@ fn robust_operation() -> Result<(), ContextualError> {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [05_guides 目录](./README.md)
+- [05_guides 目录](README.md)
 - [docs 索引](../README.md)
 
 ---

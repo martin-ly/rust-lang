@@ -16,8 +16,8 @@
 > **受众**: [专家]
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 系统分析 Rust **网络编程**的核心范式——从 Tokio 运行时（Runtime）下的 TCP/UDP 异步（Async） IO，到 socket 编程的底层细节，再到 Tower 服务抽象的设计哲学，建立从"怎么写"到"为什么这样设计"的完整认知框架。
-> **前置概念**: [Async/Await](./02_async.md) · [Concurrency](./01_concurrency.md) · [Traits](../02_intermediate/01_traits.md)
-> **后置概念**: [Web Frameworks](../06_ecosystem/27_web_frameworks.md) · [Lock-free](./16_lock_free.md)
+> **前置概念**: [Async/Await](02_async.md) · [Concurrency](01_concurrency.md) · [Traits](../02_intermediate/01_traits.md)
+> **后置概念**: [Web Frameworks](../06_ecosystem/27_web_frameworks.md) · [Lock-free](16_lock_free.md)
 
 ---
 
@@ -41,49 +41,49 @@
 ## 📑 目录
 
 - Rust 网络编程：Tokio TCP/UDP、异步（Async） IO 与 Tower 服务抽象
-  - [📑 目录](#-目录)
-  - [一、权威定义与核心概念](#一权威定义与核心概念)
-    - [1.1 异步（Async）网络 IO 模型](#11-异步网络-io-模型)
-    - [1.2 Tokio Runtime 架构](#12-tokio-runtime-架构)
-    - [1.3 TCP vs UDP 语义差异](#13-tcp-vs-udp-语义差异)
-    - [1.4 Tower Service 抽象](#14-tower-service-抽象)
-  - [十、边界测试：网络编程的编译错误](#十边界测试网络编程的编译错误)
-    - [10.1 边界测试：`TcpStream` 的 `move` 与分裂（编译错误）](#101-边界测试tcpstream-的-move-与分裂编译错误)
-    - [10.2 边界测试：套接字地址类型不匹配（编译错误）](#102-边界测试套接字地址类型不匹配编译错误)
-  - [二、技术细节](#二技术细节)
-    - [2.1 Tokio TCP 服务端实现](#21-tokio-tcp-服务端实现)
-    - [2.2 Tokio UDP 编程模型](#22-tokio-udp-编程模型)
-    - [2.3 Socket 选项与调优](#23-socket-选项与调优)
-    - [2.4 Tower 中间件栈](#24-tower-中间件栈)
-  - [三、选型决策矩阵](#三选型决策矩阵)
-  - [四、思维导图（Mermaid）](#四思维导图mermaid)
-    - [4.1 Tokio 网络 IO 架构图](#41-tokio-网络-io-架构图)
-    - [4.2 Tower Service 中间件栈](#42-tower-service-中间件栈)
-  - [五、反命题与边界分析](#五反命题与边界分析)
-    - [5.1 反命题树](#51-反命题树)
-    - [5.2 边界极限](#52-边界极限)
-  - [六、常见陷阱](#六常见陷阱)
-  - [七、来源与延伸阅读](#七来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
-  - [权威来源索引](#权威来源索引)
+  - [📑 目录](.#-目录)
+  - [一、权威定义与核心概念](.#一权威定义与核心概念)
+    - [1.1 异步（Async）网络 IO 模型](.#11-异步网络-io-模型)
+    - [1.2 Tokio Runtime 架构](.#12-tokio-runtime-架构)
+    - [1.3 TCP vs UDP 语义差异](.#13-tcp-vs-udp-语义差异)
+    - [1.4 Tower Service 抽象](.#14-tower-service-抽象)
+  - [十、边界测试：网络编程的编译错误](.#十边界测试网络编程的编译错误)
+    - [10.1 边界测试：`TcpStream` 的 `move` 与分裂（编译错误）](.#101-边界测试tcpstream-的-move-与分裂编译错误)
+    - [10.2 边界测试：套接字地址类型不匹配（编译错误）](.#102-边界测试套接字地址类型不匹配编译错误)
+  - [二、技术细节](.#二技术细节)
+    - [2.1 Tokio TCP 服务端实现](.#21-tokio-tcp-服务端实现)
+    - [2.2 Tokio UDP 编程模型](.#22-tokio-udp-编程模型)
+    - [2.3 Socket 选项与调优](.#23-socket-选项与调优)
+    - [2.4 Tower 中间件栈](.#24-tower-中间件栈)
+  - [三、选型决策矩阵](.#三选型决策矩阵)
+  - [四、思维导图（Mermaid）](.#四思维导图mermaid)
+    - [4.1 Tokio 网络 IO 架构图](.#41-tokio-网络-io-架构图)
+    - [4.2 Tower Service 中间件栈](.#42-tower-service-中间件栈)
+  - [五、反命题与边界分析](.#五反命题与边界分析)
+    - [5.1 反命题树](.#51-反命题树)
+    - [5.2 边界极限](.#52-边界极限)
+  - [六、常见陷阱](.#六常见陷阱)
+  - [七、来源与延伸阅读](.#七来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [逆向推理链（Backward Reasoning）](.#逆向推理链backward-reasoning)
+  - [权威来源索引](.#权威来源索引)
     - 10.3 边界测试：异步 TCP 的 `split` 与 `reunite` 的所有权（Ownership）（编译错误）
     - 10.4 边界测试：缓冲区大小与 MTU 的匹配（运行时（Runtime）性能问题）
-    - [10.3 边界测试：`TcpStream` 的 `set_nonblocking` 与 async 混用（运行时（Runtime）错误）](#103-边界测试tcpstream-的-set_nonblocking-与-async-混用运行时错误)
-    - [10.4 边界测试：TcpStream 的同步读写与 async 混用（编译错误/运行时死锁）](#104-边界测试tcpstream-的同步读写与-async-混用编译错误运行时死锁)
+    - [10.3 边界测试：`TcpStream` 的 `set_nonblocking` 与 async 混用（运行时（Runtime）错误）](.#103-边界测试tcpstream-的-set_nonblocking-与-async-混用运行时错误)
+    - [10.4 边界测试：TcpStream 的同步读写与 async 混用（编译错误/运行时死锁）](.#104-边界测试tcpstream-的同步读写与-async-混用编译错误运行时死锁)
     - 10.7 边界测试：不可变借用（Mutable Borrow）与可变借用的冲突
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：`tokio::net::TcpListener::bind(...).await` 与 `std::net::TcpListener::bind(...)` 在阻塞行为上有什么区别？（理解层）](#测验-1tokionettcplistenerbindawait-与-stdnettcplistenerbind-在阻塞行为上有什么区别理解层)
-    - [测验 2：在 async 函数中直接调用 `std::thread::sleep` 会有什么后果？（理解层）](#测验-2在-async-函数中直接调用-stdthreadsleep-会有什么后果理解层)
-    - [测验 3：`tokio::spawn` 返回什么？任务返回值如何获取？（理解层）](#测验-3tokiospawn-返回什么任务返回值如何获取理解层)
-    - [测验 4：`async fn` 与同步函数在返回类型上有什么本质区别？（理解层）](#测验-4async-fn-与同步函数在返回类型上有什么本质区别理解层)
-    - [测验 5：Tower 的 `Service` trait 抽象了什么样的网络组件？（理解层）](#测验-5tower-的-service-trait-抽象了什么样的网络组件理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
-  - [实践](#实践)
-    - [对应代码示例](#对应代码示例)
-    - [建议练习](#建议练习)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：`tokio::net::TcpListener::bind(...).await` 与 `std::net::TcpListener::bind(...)` 在阻塞行为上有什么区别？（理解层）](.#测验-1tokionettcplistenerbindawait-与-stdnettcplistenerbind-在阻塞行为上有什么区别理解层)
+    - [测验 2：在 async 函数中直接调用 `std::thread::sleep` 会有什么后果？（理解层）](.#测验-2在-async-函数中直接调用-stdthreadsleep-会有什么后果理解层)
+    - [测验 3：`tokio::spawn` 返回什么？任务返回值如何获取？（理解层）](.#测验-3tokiospawn-返回什么任务返回值如何获取理解层)
+    - [测验 4：`async fn` 与同步函数在返回类型上有什么本质区别？（理解层）](.#测验-4async-fn-与同步函数在返回类型上有什么本质区别理解层)
+    - [测验 5：Tower 的 `Service` trait 抽象了什么样的网络组件？（理解层）](.#测验-5tower-的-service-trait-抽象了什么样的网络组件理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
+  - [实践](.#实践)
+    - [对应代码示例](.#对应代码示例)
+    - [建议练习](.#建议练习)
 
 ---
 
@@ -740,12 +740,12 @@ graph LR
 ## 相关概念文件
 >
 
-- [Async/Await](./02_async.md) — 异步编程基础
-- [Concurrency](./01_concurrency.md) — 并发模型与同步原语
+- [Async/Await](02_async.md) — 异步编程基础
+- [Concurrency](01_concurrency.md) — 并发模型与同步原语
 - [Web Frameworks](../06_ecosystem/27_web_frameworks.md) — Web 框架选型
-- [Lock-free](./16_lock_free.md) — 无锁并发数据结构
-- [Unsafe Rust](./03_unsafe.md) — 底层内存操作
-- [Pin/Unpin](./06_pin_unpin.md) — 自引用（Reference）类型安全
+- [Lock-free](16_lock_free.md) — 无锁并发数据结构
+- [Unsafe Rust](03_unsafe.md) — 底层内存操作
+- [Pin/Unpin](06_pin_unpin.md) — 自引用（Reference）类型安全
 
 ---
 

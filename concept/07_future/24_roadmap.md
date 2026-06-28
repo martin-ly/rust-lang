@@ -11,8 +11,8 @@
 > **A/S/P 标记**: **S+P** — StructureProcedure
 > **双维定位**: C×Eva — 评价 Rust 技术路线图
 > **定位**: 分析 Rust **2027 Edition 及更远期**的潜在特性集合——从 gen/kw、特化稳定化、可移植 SIMD、自定义分配器到异步（Async） Trait、TAIT 等前沿议题，评价其技术成熟度与生态影响。
-> **前置概念**: [Edition Guide](23_rust_edition_guide.md) · [Version Tracking](./05_rust_version_tracking.md) · [Evolution](./03_evolution.md)
-> **后置概念**: [Formal Methods](./02_formal_methods.md) · [Rust in AI](./21_rust_in_ai.md)
+> **前置概念**: [Edition Guide](23_rust_edition_guide.md) · [Version Tracking](05_rust_version_tracking.md) · [Evolution](03_evolution.md)
+> **后置概念**: [Formal Methods](02_formal_methods.md) · [Rust in AI](21_rust_in_ai.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -41,52 +41,52 @@
 >
 >
 
-- [Rust 2027 Edition 及未来路线图](#rust-2027-edition-及未来路线图)
-  - [📑 目录](#-目录)
-  - [一、核心概念：Edition 2027 的设计空间](#一核心概念edition-2027-的设计空间)
-    - [1.1 Edition 演进节奏与政策](#11-edition-演进节奏与政策)
-    - [1.2 候选特性概览](#12-候选特性概览)
-    - [1.3 特性依赖与 Edition 2027 关联图](#13-特性依赖与-edition-2027-关联图)
-  - [二、类型系统前沿](#二类型系统前沿)
-    - [2.1 Specialization 稳定化](#21-specialization-稳定化)
-    - [2.2 Type Alias Impl Trait (TAIT)](#22-type-alias-impl-trait-tait)
-    - [2.3 可移植 SIMD (std::simd)](#23-可移植-simd-stdsimd)
-  - [三、异步与执行模型](#三异步与执行模型)
-    - [3.1 Async Traits 与静态分发](#31-async-traits-与静态分发)
-    - [3.2 Async Drop 与生命周期](#32-async-drop-与生命周期)
-    - [3.3 Custom Allocators 稳定化](#33-custom-allocators-稳定化)
-  - [四、语言级语法演进](#四语言级语法演进)
-    - [4.1 gen/kw：生成器关键字扩展](#41-genkw生成器关键字扩展)
-    - [4.2 Open Enums 与可扩展枚举](#42-open-enums-与可扩展枚举)
-    - [4.3 Effects System 与关键字泛型](#43-effects-system-与关键字泛型)
-  - [五、工具链与生态基础设施](#五工具链与生态基础设施)
-    - [5.1 BorrowSanitizer 工业化](#51-borrowsanitizer-工业化)
-    - [5.2 Cranelift 后端与编译速度](#52-cranelift-后端与编译速度)
-    - [5.3 Rust 规范文档化](#53-rust-规范文档化)
-  - [六、反命题与边界分析](#六反命题与边界分析)
-    - [6.1 反命题树](#61-反命题树)
-    - [6.2 边界极限](#62-边界极限)
-  - [七、常见陷阱](#七常见陷阱)
-  - [八、来源与延伸阅读](#八来源与延伸阅读)
-    - [编译验证示例](#编译验证示例)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：Rust 路线图的编译错误](#十边界测试rust-路线图的编译错误)
-    - [10.1 边界测试：`never_type` (`!`) 的降级与类型推断（编译错误）](#101-边界测试never_type--的降级与类型推断编译错误)
-    - [10.2 边界测试：GAT（泛型关联类型）的递归约束（编译错误）](#102-边界测试gat泛型关联类型的递归约束编译错误)
-    - [10.6 边界测试：`impl Trait` 在 `let` 绑定中的类型推断限制（编译错误）](#106-边界测试impl-trait-在-let-绑定中的类型推断限制编译错误)
-    - [10.5 边界测试：语言特性稳定化的时间预估偏差（工程规划风险）](#105-边界测试语言特性稳定化的时间预估偏差工程规划风险)
-    - [10.3 边界测试：nightly 特性在 production 中的不可预测性（编译中断）](#103-边界测试nightly-特性在-production-中的不可预测性编译中断)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：Rust 2026-2028 年的核心发展主题是什么？（理解层）](#测验-1rust-2026-2028-年的核心发展主题是什么理解层)
-    - [测验 2：为什么 Rust 将重点从"新特性"转向"成熟度和体验"？（理解层）](#测验-2为什么-rust-将重点从新特性转向成熟度和体验理解层)
-    - [测验 3：Rust Project Goals 的制定流程是什么？（理解层）](#测验-3rust-project-goals-的制定流程是什么理解层)
-    - [测验 4：`rust-lang/rfcs` 仓库在语言演进中扮演什么角色？（理解层）](#测验-4rust-langrfcs-仓库在语言演进中扮演什么角色理解层)
-    - [测验 5：普通 Rust 开发者如何参与语言演进？（理解层）](#测验-5普通-rust-开发者如何参与语言演进理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Rust 2027 Edition 及未来路线图](.#rust-2027-edition-及未来路线图)
+  - [📑 目录](.#-目录)
+  - [一、核心概念：Edition 2027 的设计空间](.#一核心概念edition-2027-的设计空间)
+    - [1.1 Edition 演进节奏与政策](.#11-edition-演进节奏与政策)
+    - [1.2 候选特性概览](.#12-候选特性概览)
+    - [1.3 特性依赖与 Edition 2027 关联图](.#13-特性依赖与-edition-2027-关联图)
+  - [二、类型系统前沿](.#二类型系统前沿)
+    - [2.1 Specialization 稳定化](.#21-specialization-稳定化)
+    - [2.2 Type Alias Impl Trait (TAIT)](.#22-type-alias-impl-trait-tait)
+    - [2.3 可移植 SIMD (std::simd)](.#23-可移植-simd-stdsimd)
+  - [三、异步与执行模型](.#三异步与执行模型)
+    - [3.1 Async Traits 与静态分发](.#31-async-traits-与静态分发)
+    - [3.2 Async Drop 与生命周期](.#32-async-drop-与生命周期)
+    - [3.3 Custom Allocators 稳定化](.#33-custom-allocators-稳定化)
+  - [四、语言级语法演进](.#四语言级语法演进)
+    - [4.1 gen/kw：生成器关键字扩展](.#41-genkw生成器关键字扩展)
+    - [4.2 Open Enums 与可扩展枚举](.#42-open-enums-与可扩展枚举)
+    - [4.3 Effects System 与关键字泛型](.#43-effects-system-与关键字泛型)
+  - [五、工具链与生态基础设施](.#五工具链与生态基础设施)
+    - [5.1 BorrowSanitizer 工业化](.#51-borrowsanitizer-工业化)
+    - [5.2 Cranelift 后端与编译速度](.#52-cranelift-后端与编译速度)
+    - [5.3 Rust 规范文档化](.#53-rust-规范文档化)
+  - [六、反命题与边界分析](.#六反命题与边界分析)
+    - [6.1 反命题树](.#61-反命题树)
+    - [6.2 边界极限](.#62-边界极限)
+  - [七、常见陷阱](.#七常见陷阱)
+  - [八、来源与延伸阅读](.#八来源与延伸阅读)
+    - [编译验证示例](.#编译验证示例)
+  - [相关概念文件](.#相关概念文件)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：Rust 路线图的编译错误](.#十边界测试rust-路线图的编译错误)
+    - [10.1 边界测试：`never_type` (`!`) 的降级与类型推断（编译错误）](.#101-边界测试never_type--的降级与类型推断编译错误)
+    - [10.2 边界测试：GAT（泛型关联类型）的递归约束（编译错误）](.#102-边界测试gat泛型关联类型的递归约束编译错误)
+    - [10.6 边界测试：`impl Trait` 在 `let` 绑定中的类型推断限制（编译错误）](.#106-边界测试impl-trait-在-let-绑定中的类型推断限制编译错误)
+    - [10.5 边界测试：语言特性稳定化的时间预估偏差（工程规划风险）](.#105-边界测试语言特性稳定化的时间预估偏差工程规划风险)
+    - [10.3 边界测试：nightly 特性在 production 中的不可预测性（编译中断）](.#103-边界测试nightly-特性在-production-中的不可预测性编译中断)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 2026-2028 年的核心发展主题是什么？（理解层）](.#测验-1rust-2026-2028-年的核心发展主题是什么理解层)
+    - [测验 2：为什么 Rust 将重点从"新特性"转向"成熟度和体验"？（理解层）](.#测验-2为什么-rust-将重点从新特性转向成熟度和体验理解层)
+    - [测验 3：Rust Project Goals 的制定流程是什么？（理解层）](.#测验-3rust-project-goals-的制定流程是什么理解层)
+    - [测验 4：`rust-lang/rfcs` 仓库在语言演进中扮演什么角色？（理解层）](.#测验-4rust-langrfcs-仓库在语言演进中扮演什么角色理解层)
+    - [测验 5：普通 Rust 开发者如何参与语言演进？（理解层）](.#测验-5普通-rust-开发者如何参与语言演进理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -764,9 +764,9 @@ fn main() {
 - [BorrowSanitizer Preview](20_borrowsanitizer_preview.md) — 运行时（Runtime）借用（Borrowing）检查工业化路径
 - [Specialization Preview](26_specialization_preview.md) — Trait 特化机制深度分析
 - [Open Enums Preview](25_open_enums_preview.md) — 可扩展枚举的设计空间
-- [Version Tracking](./05_rust_version_tracking.md) — 版本特性演进跟踪
-- [Evolution](./03_evolution.md) — 语言演进机制
-- [Formal Methods](./02_formal_methods.md) — 形式化验证工具链
+- [Version Tracking](05_rust_version_tracking.md) — 版本特性演进跟踪
+- [Evolution](03_evolution.md) — 语言演进机制
+- [Formal Methods](02_formal_methods.md) — 形式化验证工具链
 
 ---
 

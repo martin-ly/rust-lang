@@ -12,7 +12,7 @@
 > **双维定位**: C×Ana — 分析 Async Drop 预览特性
 > **定位**: 分析 Rust 中 **异步（Async）资源销毁**的设计挑战——`Drop::drop` 是同步的，但异步资源（如数据库连接、网络流）需要 await 才能正确关闭。探讨 `AsyncDrop` trait 的提案（[Async Drop Initiative](https://github.com/rust-lang/rust/issues/126482)）、设计约束与当前 nightly 实现状态。
 > **前置概念**: [Async](../03_advanced/02_async.md) · [Pin](../03_advanced/06_pin_unpin.md)
-> **后置概念**: [Gen Blocks](./15_gen_blocks_preview.md) · [Async Closures](../03_advanced/24_async_closures.md)
+> **后置概念**: [Gen Blocks](15_gen_blocks_preview.md) · [Async Closures](../03_advanced/24_async_closures.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 > **状态**: 🧪 Nightly 实验性
@@ -29,40 +29,40 @@
 
 ## 📑 目录
 
-- [Async Drop：异步资源的优雅销毁](#async-drop异步资源的优雅销毁)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 问题：同步 Drop 与异步资源的冲突](#11-问题同步-drop-与异步资源的冲突)
-    - [1.2 AsyncDrop Trait 设计](#12-asyncdrop-trait-设计)
-    - [1.3 与 Pin 的交互](#13-与-pin-的交互)
-  - [二、技术细节](#二技术细节)
-    - [2.1 当前 Workaround 模式](#21-当前-workaround-模式)
-    - [2.2 AsyncDrop 的实现挑战](#22-asyncdrop-的实现挑战)
-    - [2.3 与 Drop 的兼容性](#23-与-drop-的兼容性)
-  - [三、设计决策矩阵](#三设计决策矩阵)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、常见陷阱](#五常见陷阱)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：async drop 的编译错误](#十边界测试async-drop-的编译错误)
-    - [10.1 边界测试：异步析构的 `.await` 位置约束（编译错误）](#101-边界测试异步析构的-await-位置约束编译错误)
-    - [10.2 边界测试：异步析构与 panic 的交互（运行时 UB）](#102-边界测试异步析构与-panic-的交互运行时-ub)
-    - [10.3 边界测试：async drop 与 `std::mem::forget` 的交互（内存泄漏）](#103-边界测试async-drop-与-stdmemforget-的交互内存泄漏)
-    - [10.4 边界测试：async drop 在 panic 时的双重取消（运行时 UB）](#104-边界测试async-drop-在-panic-时的双重取消运行时-ub)
-    - [10.3 边界测试：async drop 与同步 Drop 的语义冲突（编译错误/设计问题）](#103-边界测试async-drop-与同步-drop-的语义冲突编译错误设计问题)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：`async_drop` 解决的是什么问题？（理解层）](#测验-1async_drop-解决的是什么问题理解层)
-    - [测验 2：为什么不能在 `Drop::drop` 中直接调用 `.await`？（理解层）](#测验-2为什么不能在-dropdrop-中直接调用-await理解层)
-    - [测验 3：`async_drop` 的设计挑战是什么？（理解层）](#测验-3async_drop-的设计挑战是什么理解层)
-    - [测验 4：`pin` 与 `async_drop` 有什么关系？（理解层）](#测验-4pin-与-async_drop-有什么关系理解层)
-    - [测验 5：目前有什么 workaround 可以在没有 `async_drop` 的情况下执行异步清理？（理解层）](#测验-5目前有什么-workaround-可以在没有-async_drop-的情况下执行异步清理理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Async Drop：异步资源的优雅销毁](.#async-drop异步资源的优雅销毁)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 问题：同步 Drop 与异步资源的冲突](.#11-问题同步-drop-与异步资源的冲突)
+    - [1.2 AsyncDrop Trait 设计](.#12-asyncdrop-trait-设计)
+    - [1.3 与 Pin 的交互](.#13-与-pin-的交互)
+  - [二、技术细节](.#二技术细节)
+    - [2.1 当前 Workaround 模式](.#21-当前-workaround-模式)
+    - [2.2 AsyncDrop 的实现挑战](.#22-asyncdrop-的实现挑战)
+    - [2.3 与 Drop 的兼容性](.#23-与-drop-的兼容性)
+  - [三、设计决策矩阵](.#三设计决策矩阵)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、常见陷阱](.#五常见陷阱)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：async drop 的编译错误](.#十边界测试async-drop-的编译错误)
+    - [10.1 边界测试：异步析构的 `.await` 位置约束（编译错误）](.#101-边界测试异步析构的-await-位置约束编译错误)
+    - [10.2 边界测试：异步析构与 panic 的交互（运行时 UB）](.#102-边界测试异步析构与-panic-的交互运行时-ub)
+    - [10.3 边界测试：async drop 与 `std::mem::forget` 的交互（内存泄漏）](.#103-边界测试async-drop-与-stdmemforget-的交互内存泄漏)
+    - [10.4 边界测试：async drop 在 panic 时的双重取消（运行时 UB）](.#104-边界测试async-drop-在-panic-时的双重取消运行时-ub)
+    - [10.3 边界测试：async drop 与同步 Drop 的语义冲突（编译错误/设计问题）](.#103-边界测试async-drop-与同步-drop-的语义冲突编译错误设计问题)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：`async_drop` 解决的是什么问题？（理解层）](.#测验-1async_drop-解决的是什么问题理解层)
+    - [测验 2：为什么不能在 `Drop::drop` 中直接调用 `.await`？（理解层）](.#测验-2为什么不能在-dropdrop-中直接调用-await理解层)
+    - [测验 3：`async_drop` 的设计挑战是什么？（理解层）](.#测验-3async_drop-的设计挑战是什么理解层)
+    - [测验 4：`pin` 与 `async_drop` 有什么关系？（理解层）](.#测验-4pin-与-async_drop-有什么关系理解层)
+    - [测验 5：目前有什么 workaround 可以在没有 `async_drop` 的情况下执行异步清理？（理解层）](.#测验-5目前有什么-workaround-可以在没有-async_drop-的情况下执行异步清理理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -463,7 +463,7 @@ graph TD
 
 - [Async](../03_advanced/02_async.md) — 异步编程
 - [Pin](../03_advanced/06_pin_unpin.md) — Pin 不动性
-- [Gen Blocks](./15_gen_blocks_preview.md) — 生成器
+- [Gen Blocks](15_gen_blocks_preview.md) — 生成器
 
 ---
 

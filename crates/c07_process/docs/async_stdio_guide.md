@@ -440,8 +440,8 @@ async fn main() -> Result<()> {
 ## 🔗 相关文档
 
 - [C07 Process README](../README.md) - 主模块文档
-- [异步进程管理文档](./05_async_process_management.md) - 异步进程管理详细文档
-- [错误处理指南](../docs/error_handling.md) - 错误处理最佳实践
+- [异步进程管理文档](05_async_process_management.md) - 异步进程管理详细文档
+- [错误处理指南](error_handling.md) - 错误处理最佳实践
 
 ---
 

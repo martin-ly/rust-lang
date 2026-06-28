@@ -16,7 +16,7 @@
 > **双维定位**: C×Syn — 综合流处理生态的工程实践与选型决策
 > **定位**: 系统梳理 Rust 流处理生态（timely/differential dataflow、tokio-stream、fluvio）与工业级系统（Flink、Materialize、RisingWave）的架构、语义差异与选型策略。
 > **前置概念**: [Stream Processing Semantics](../03_advanced/20_stream_processing_semantics.md) · [Async/Await](../03_advanced/02_async.md) · [Concurrency](../03_advanced/01_concurrency.md)
-> **后置概念**: [Distributed Systems](./18_distributed_systems.md) · [Distributed Systems](./18_distributed_systems.md)
+> **后置概念**: [Distributed Systems](18_distributed_systems.md) · [Distributed Systems](18_distributed_systems.md)
 
 >
 > **来源**: [tokio-stream](https://docs.rs/tokio-stream/) · [futures](https://docs.rs/futures/) · [fluvio](https://docs.rs/fluvio/)

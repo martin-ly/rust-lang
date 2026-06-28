@@ -15,44 +15,44 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [常见问题解答 (FAQ)](#常见问题解答-faq)
-  - [📊 目录 {#-目录}](#-目录--目录)
-  - [🎯 如何使用本 FAQ {#-如何使用本-faq}](#-如何使用本-faq--如何使用本-faq)
-    - [快速查找](#快速查找)
-    - [问题标记](#问题标记)
-  - [📚 系统使用问题 {#-系统使用问题}](#-系统使用问题--系统使用问题)
-    - [Q1: 我应该从哪里开始？🔵](#q1-我应该从哪里开始)
-    - [Q2: 如何查找特定的研究主题？🔵](#q2-如何查找特定的研究主题)
-    - [Q2.5: 如何判断研究笔记是否有实质内容？🔵](#q25-如何判断研究笔记是否有实质内容)
-    - [Q3: 研究笔记的状态是什么意思？🟢](#q3-研究笔记的状态是什么意思)
-  - [🔬 研究相关问题 {#-研究相关问题}](#-研究相关问题--研究相关问题)
-    - [Q4: 我应该选择哪个研究方向？🟢](#q4-我应该选择哪个研究方向)
-    - [Q5: 如何开始形式化研究？🟡](#q5-如何开始形式化研究)
-    - [Q6: 如何设计实验研究？🟢](#q6-如何设计实验研究)
-  - [✍️ 贡献相关问题 {#️-贡献相关问题}](#️-贡献相关问题-️-贡献相关问题)
-    - [Q7: 我可以贡献哪些内容？🔵](#q7-我可以贡献哪些内容)
-    - [Q8: 如何确保我的贡献质量？🟢](#q8-如何确保我的贡献质量)
-    - [Q9: 如何更新索引文件？🟢](#q9-如何更新索引文件)
-  - [🛠️ 工具使用问题 {#️-工具使用问题}](#️-工具使用问题-️-工具使用问题)
-    - [Q10: 我应该使用哪些研究工具？🟢](#q10-我应该使用哪些研究工具)
-    - [Q11: 如何安装和使用 Coq？🟡](#q11-如何安装和使用-coq)
-    - [Q12: 如何使用 Criterion.rs 进行基准测试？🟢](#q12-如何使用-criterionrs-进行基准测试)
-  - [📖 文档相关问题 {#-文档相关问题}](#-文档相关问题--文档相关问题)
-    - [Q13: 研究笔记的格式要求是什么？🔵](#q13-研究笔记的格式要求是什么)
-    - [Q14: 如何编写形式化定义？🟡](#q14-如何编写形式化定义)
-    - [Q15: 代码示例有什么要求？🟢](#q15-代码示例有什么要求)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
-    - [核心文档](#核心文档)
-    - [获取帮助](#获取帮助)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [常见问题解答 (FAQ)](.#常见问题解答-faq)
+  - [📊 目录 {#-目录}](.#-目录--目录)
+  - [🎯 如何使用本 FAQ {#-如何使用本-faq}](.#-如何使用本-faq--如何使用本-faq)
+    - [快速查找](.#快速查找)
+    - [问题标记](.#问题标记)
+  - [📚 系统使用问题 {#-系统使用问题}](.#-系统使用问题--系统使用问题)
+    - [Q1: 我应该从哪里开始？🔵](.#q1-我应该从哪里开始)
+    - [Q2: 如何查找特定的研究主题？🔵](.#q2-如何查找特定的研究主题)
+    - [Q2.5: 如何判断研究笔记是否有实质内容？🔵](.#q25-如何判断研究笔记是否有实质内容)
+    - [Q3: 研究笔记的状态是什么意思？🟢](.#q3-研究笔记的状态是什么意思)
+  - [🔬 研究相关问题 {#-研究相关问题}](.#-研究相关问题--研究相关问题)
+    - [Q4: 我应该选择哪个研究方向？🟢](.#q4-我应该选择哪个研究方向)
+    - [Q5: 如何开始形式化研究？🟡](.#q5-如何开始形式化研究)
+    - [Q6: 如何设计实验研究？🟢](.#q6-如何设计实验研究)
+  - [✍️ 贡献相关问题 {#️-贡献相关问题}](.#️-贡献相关问题-️-贡献相关问题)
+    - [Q7: 我可以贡献哪些内容？🔵](.#q7-我可以贡献哪些内容)
+    - [Q8: 如何确保我的贡献质量？🟢](.#q8-如何确保我的贡献质量)
+    - [Q9: 如何更新索引文件？🟢](.#q9-如何更新索引文件)
+  - [🛠️ 工具使用问题 {#️-工具使用问题}](.#️-工具使用问题-️-工具使用问题)
+    - [Q10: 我应该使用哪些研究工具？🟢](.#q10-我应该使用哪些研究工具)
+    - [Q11: 如何安装和使用 Coq？🟡](.#q11-如何安装和使用-coq)
+    - [Q12: 如何使用 Criterion.rs 进行基准测试？🟢](.#q12-如何使用-criterionrs-进行基准测试)
+  - [📖 文档相关问题 {#-文档相关问题}](.#-文档相关问题--文档相关问题)
+    - [Q13: 研究笔记的格式要求是什么？🔵](.#q13-研究笔记的格式要求是什么)
+    - [Q14: 如何编写形式化定义？🟡](.#q14-如何编写形式化定义)
+    - [Q15: 代码示例有什么要求？🟢](.#q15-代码示例有什么要求)
+  - [🔗 相关资源 {#-相关资源}](.#-相关资源--相关资源)
+    - [核心文档](.#核心文档)
+    - [获取帮助](.#获取帮助)
+  - [🆕 Rust 1.94 更新](.#-rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ---
 
@@ -93,19 +93,19 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**简短回答**: 从 [快速入门指南](../../archive/research_notes_2026_06_25/10_getting_started.md) 开始。
+**简短回答**: 从 [快速入门指南](10_getting_started.md) 开始。
 
 **详细说明**:
 
-1. 阅读 [主索引](./README.md) 了解系统结构
-2. 查看 [系统总结](./10_system_summary.md) 了解系统概览
-3. 浏览 [快速参考](../../archive/research_notes_2026_06_25/10_quick_reference.md) 查找感兴趣的主题
+1. 阅读 [主索引](README.md) 了解系统结构
+2. 查看 [系统总结](10_system_summary.md) 了解系统概览
+3. 浏览 [快速参考](10_quick_reference.md) 查找感兴趣的主题
 
 **相关资源**:
 
-- [快速入门指南](../../archive/research_notes_2026_06_25/10_getting_started.md)
-- [主索引](./README.md)
-- [系统总结](./10_system_summary.md)
+- [快速入门指南](10_getting_started.md)
+- [主索引](README.md)
+- [系统总结](10_system_summary.md)
 
 ---
 
@@ -115,7 +115,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**简短回答**: 使用 [快速参考](../../archive/research_notes_2026_06_25/10_quick_reference.md) 或 [完整索引](./INDEX.md)。
+**简短回答**: 使用 [快速参考](10_quick_reference.md) 或 [完整索引](INDEX.md)。
 
 **详细说明**:
 
@@ -125,9 +125,9 @@
 
 **相关资源**:
 
-- [快速参考](../../archive/research_notes_2026_06_25/10_quick_reference.md)
-- [完整索引](./INDEX.md)
-- [快速查找](./10_quick_find.md)（按「我想理解…」查找）
+- [快速参考](10_quick_reference.md)
+- [完整索引](INDEX.md)
+- [快速查找](10_quick_find.md)（按「我想理解…」查找）
 
 ---
 
@@ -137,15 +137,15 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**简短回答**：按 [CONTENT_ENHANCEMENT](./10_content_enhancement.md) 的实质内容检查清单：形式化（Def/定理）、代码、场景、反例、衔接。
+**简短回答**：按 [CONTENT_ENHANCEMENT](10_content_enhancement.md) 的实质内容检查清单：形式化（Def/定理）、代码、场景、反例、衔接。
 
 **详细说明**：
 
 - **形式化**：含 Def、Axiom、定理及证明或证明思路
-- **代码**：可运行 Rust 示例，对应某定理（如所有权移动对应 [ownership_model](./formal_methods/10_ownership_model.md) T2）
-- **衔接**：与 [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md)、[formal_methods](../../archive/research_notes_2026_06_25/formal_methods/README.md) 有交叉引用
+- **代码**：可运行 Rust 示例，对应某定理（如所有权移动对应 [ownership_model](formal_methods/10_ownership_model.md) T2）
+- **衔接**：与 [PROOF_INDEX](10_proof_index.md)、[formal_methods](formal_methods/README.md) 有交叉引用
 
-**相关资源**：[BEST_PRACTICES](./10_best_practices.md) Def BP2、实践对照表、[PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md)
+**相关资源**：[BEST_PRACTICES](10_best_practices.md) Def BP2、实践对照表、[PROOF_INDEX](10_proof_index.md)
 
 ---
 
@@ -165,8 +165,8 @@
 
 **相关资源**:
 
-- [研究路线图](./10_research_roadmap.md)
-- [系统总结](./10_system_summary.md)
+- [研究路线图](10_research_roadmap.md)
+- [系统总结](10_system_summary.md)
 
 ---
 
@@ -191,8 +191,8 @@
 
 **相关资源**:
 
-- [研究路线图](./10_research_roadmap.md)
-- [研究方法论](./10_research_methodology.md)
+- [研究路线图](10_research_roadmap.md)
+- [研究方法论](10_research_methodology.md)
 
 ---
 
@@ -211,9 +211,9 @@
 
 **相关资源**:
 
-- [工具使用指南](./10_tools_guide.md)
-- [形式化方法索引](../../archive/research_notes_2026_06_25/formal_methods/README.md)
-- [研究笔记模板](../../archive/research_notes_2026_06_25/10_template.md)
+- [工具使用指南](10_tools_guide.md)
+- [形式化方法索引](formal_methods/README.md)
+- [研究笔记模板](10_template.md)
 
 ---
 
@@ -232,9 +232,9 @@
 
 **相关资源**:
 
-- [研究方法论](./10_research_methodology.md)
-- [实验研究索引](./experiments/README.md)
-- [工具使用指南](./10_tools_guide.md)
+- [研究方法论](10_research_methodology.md)
+- [实验研究索引](experiments/README.md)
+- [工具使用指南](10_tools_guide.md)
 
 ---
 
@@ -257,8 +257,8 @@
 
 **相关资源**:
 
-- [贡献指南](../../archive/research_notes_2026_06_25/10_contributing.md)
-- [研究笔记模板](../../archive/research_notes_2026_06_25/10_template.md)
+- [贡献指南](10_contributing.md)
+- [研究笔记模板](10_template.md)
 
 ---
 
@@ -270,15 +270,15 @@
 
 **详细说明**:
 
-1. 使用 [研究笔记模板](../../archive/research_notes_2026_06_25/10_template.md) 创建文件
-2. 遵循 [研究笔记规范](./README.md#研究笔记规范)
-3. 使用 [质量检查清单](../../archive/research_notes_2026_06_25/10_quality_checklist.md) 检查质量
+1. 使用 [研究笔记模板](10_template.md) 创建文件
+2. 遵循 [研究笔记规范](README.md#研究笔记规范)
+3. 使用 [质量检查清单](10_quality_checklist.md) 检查质量
 4. 请他人审查
 
 **相关资源**:
 
-- [质量检查清单](../../archive/research_notes_2026_06_25/10_quality_checklist.md)
-- [贡献指南](../../archive/research_notes_2026_06_25/10_contributing.md)
+- [质量检查清单](10_quality_checklist.md)
+- [贡献指南](10_contributing.md)
 
 ---
 
@@ -291,14 +291,14 @@
 **详细说明**:
 
 1. 更新相应目录的 README.md（添加新笔记链接）
-2. 更新 [主索引](./README.md)（如需要）
-3. 更新 [完整索引](./INDEX.md)（如需要）
-4. 更新 [快速参考](../../archive/research_notes_2026_06_25/10_quick_reference.md)（如需要）
+2. 更新 [主索引](README.md)（如需要）
+3. 更新 [完整索引](INDEX.md)（如需要）
+4. 更新 [快速参考](10_quick_reference.md)（如需要）
 
 **相关资源**:
 
-- [贡献指南](../../archive/research_notes_2026_06_25/10_contributing.md)
-- [主索引](./README.md)
+- [贡献指南](10_contributing.md)
+- [主索引](README.md)
 
 ---
 
@@ -321,8 +321,8 @@
 
 **相关资源**:
 
-- [工具使用指南](./10_tools_guide.md)
-- [研究方法论](./10_research_methodology.md)
+- [工具使用指南](10_tools_guide.md)
+- [研究方法论](10_research_methodology.md)
 
 ---
 
@@ -330,7 +330,7 @@
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-**简短回答**: 查看 [工具使用指南](./10_tools_guide.md) 中的 Coq 部分。
+**简短回答**: 查看 [工具使用指南](10_tools_guide.md) 中的 Coq 部分。
 
 **详细说明**:
 
@@ -341,7 +341,7 @@
 
 **相关资源**:
 
-- [工具使用指南 - Coq](./10_tools_guide.md)
+- [工具使用指南 - Coq](10_tools_guide.md)
 - [Coq 官网](https://coq.inria.fr/)
 
 ---
@@ -350,7 +350,7 @@
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
-**简短回答**: 查看 [工具使用指南](./10_tools_guide.md) 中的 Criterion.rs 部分。
+**简短回答**: 查看 [工具使用指南](10_tools_guide.md) 中的 Criterion.rs 部分。
 
 **详细说明**:
 
@@ -361,8 +361,8 @@
 
 **相关资源**:
 
-- [工具使用指南 - Criterion.rs](./10_tools_guide.md#criterionrs)
-- [性能基准测试](./experiments/10_performance_benchmarks.md)
+- [工具使用指南 - Criterion.rs](10_tools_guide.md#criterionrs)
+- [性能基准测试](experiments/10_performance_benchmarks.md)
 
 ---
 
@@ -374,7 +374,7 @@
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-**简短回答**: 遵循 [研究笔记规范](./README.md#研究笔记规范)。
+**简短回答**: 遵循 [研究笔记规范](README.md#研究笔记规范)。
 
 **详细说明**:
 每个研究笔记应包含：
@@ -388,8 +388,8 @@
 
 **相关资源**:
 
-- [研究笔记规范](./README.md#研究笔记规范)
-- [研究笔记模板](../../archive/research_notes_2026_06_25/10_template.md)
+- [研究笔记规范](README.md#研究笔记规范)
+- [研究笔记模板](10_template.md)
 
 ---
 
@@ -408,8 +408,8 @@
 
 **相关资源**:
 
-- [形式化方法研究](../../archive/research_notes_2026_06_25/formal_methods/README.md)
-- [研究方法论](./10_research_methodology.md)
+- [形式化方法研究](formal_methods/README.md)
+- [研究方法论](10_research_methodology.md)
 
 ---
 
@@ -427,8 +427,8 @@
 
 **相关资源**:
 
-- [质量检查清单](../../archive/research_notes_2026_06_25/10_quality_checklist.md)
-- [贡献指南](../../archive/research_notes_2026_06_25/10_contributing.md)
+- [质量检查清单](10_quality_checklist.md)
+- [贡献指南](10_contributing.md)
 
 ---
 
@@ -440,10 +440,10 @@
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
-- [快速入门指南](../../archive/research_notes_2026_06_25/10_getting_started.md) - 新用户入门指南
-- [主索引](./README.md) - 完整的研究笔记索引
-- [快速参考](../../archive/research_notes_2026_06_25/10_quick_reference.md) - 快速查找指南
-- [贡献指南](../../archive/research_notes_2026_06_25/10_contributing.md) - 贡献流程和规范
+- [快速入门指南](10_getting_started.md) - 新用户入门指南
+- [主索引](README.md) - 完整的研究笔记索引
+- [快速参考](10_quick_reference.md) - 快速查找指南
+- [贡献指南](10_contributing.md) - 贡献流程和规范
 
 ### 获取帮助
 
@@ -467,7 +467,7 @@
 
 > **适用版本**: Rust 1.96.0+
 
-详见 [RUST_194_RESEARCH_UPDATE](../../archive/research_notes_2026_06_25/10_rust_194_research_update.md)
+详见 [RUST_194_RESEARCH_UPDATE](10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 
@@ -530,7 +530,7 @@
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

@@ -11,7 +11,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 对比分析 **Rust**（编译型、强类型、内存安全（Memory Safety））与 **Python**（解释型、动态类型、开发效率优先）在语言设计哲学、类型系统（Type System）、内存模型、并发模型和工程实践五个维度的深层差异。
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md)
-> **后置概念**: [Rust vs Go](./02_rust_vs_go.md) · [Rust vs Java](./06_rust_vs_java.md)
+> **后置概念**: [Rust vs Go](02_rust_vs_go.md) · [Rust vs Java](06_rust_vs_java.md)
 
 ---
 
@@ -25,40 +25,40 @@
 
 ## 📑 目录
 
-- [Rust vs Python：系统编程与动态脚本的对照分析](#rust-vs-python系统编程与动态脚本的对照分析)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 设计哲学对比](#11-设计哲学对比)
-    - [1.2 类型系统：静态 vs 动态](#12-类型系统静态-vs-动态)
-    - [1.3 内存模型：所有权 vs GC](#13-内存模型所有权-vs-gc)
-  - [二、技术细节](#二技术细节)
-    - [2.1 错误处理：Result vs Exception](#21-错误处理result-vs-exception)
-    - [2.2 并发模型：fearless vs GIL](#22-并发模型fearless-vs-gil)
-    - [2.3 元编程：宏 vs 装饰器/元类](#23-元编程宏-vs-装饰器元类)
-  - [三、选型决策矩阵](#三选型决策矩阵)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、常见陷阱](#五常见陷阱)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：Rust 与 Python 的编译错误对比](#十边界测试rust-与-python-的编译错误对比)
-    - [10.1 边界测试：Python 的动态类型 vs Rust 的静态类型（编译错误）](#101-边界测试python-的动态类型-vs-rust-的静态类型编译错误)
-  - [十、边界测试：Rust 与 Python 的编译错误对比](#十边界测试rust-与-python-的编译错误对比-1)
-    - [10.1 边界测试：Python 的动态类型 vs Rust 的静态类型（编译错误）](#101-边界测试python-的动态类型-vs-rust-的静态类型编译错误-1)
-    - [10.2 边界测试：Python 的 GIL 与 Rust 的所有权并发（编译错误）](#102-边界测试python-的-gil-与-rust-的所有权并发编译错误)
-    - [10.5 边界测试：Python 的 GIL 与 Rust 的 `Arc<Mutex<T>>` 的性能对比（运行时开销）](#105-边界测试python-的-gil-与-rust-的-arcmutext-的性能对比运行时开销)
-    - [10.3 边界测试：Python 式动态类型在 Rust 中的不可表达（编译错误）](#103-边界测试python-式动态类型在-rust-中的不可表达编译错误)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：Rust 和 Python 在类型系统上的核心区别是什么？（理解层）](#测验-1rust-和-python-在类型系统上的核心区别是什么理解层)
-    - [测验 2：Python 的 GIL（全局解释器锁）对并发有什么限制？Rust 有类似限制吗？（理解层）](#测验-2python-的-gil全局解释器锁对并发有什么限制rust-有类似限制吗理解层)
-    - [测验 3：为什么 Rust 常被用来重写 Python 的性能瓶颈模块（如 `numpy`、`cryptography`）？（理解层）](#测验-3为什么-rust-常被用来重写-python-的性能瓶颈模块如-numpycryptography理解层)
-    - [测验 4：Python 的"鸭子类型"（Duck Typing）与 Rust 的 Trait 系统有什么异同？（理解层）](#测验-4python-的鸭子类型duck-typing与-rust-的-trait-系统有什么异同理解层)
-    - [测验 5：在数据科学/ML 领域，Rust 目前为什么还不能完全替代 Python？（理解层）](#测验-5在数据科学ml-领域rust-目前为什么还不能完全替代-python理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Rust vs Python：系统编程与动态脚本的对照分析](.#rust-vs-python系统编程与动态脚本的对照分析)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 设计哲学对比](.#11-设计哲学对比)
+    - [1.2 类型系统：静态 vs 动态](.#12-类型系统静态-vs-动态)
+    - [1.3 内存模型：所有权 vs GC](.#13-内存模型所有权-vs-gc)
+  - [二、技术细节](.#二技术细节)
+    - [2.1 错误处理：Result vs Exception](.#21-错误处理result-vs-exception)
+    - [2.2 并发模型：fearless vs GIL](.#22-并发模型fearless-vs-gil)
+    - [2.3 元编程：宏 vs 装饰器/元类](.#23-元编程宏-vs-装饰器元类)
+  - [三、选型决策矩阵](.#三选型决策矩阵)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、常见陷阱](.#五常见陷阱)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：Rust 与 Python 的编译错误对比](.#十边界测试rust-与-python-的编译错误对比)
+    - [10.1 边界测试：Python 的动态类型 vs Rust 的静态类型（编译错误）](.#101-边界测试python-的动态类型-vs-rust-的静态类型编译错误)
+  - [十、边界测试：Rust 与 Python 的编译错误对比](.#十边界测试rust-与-python-的编译错误对比-1)
+    - [10.1 边界测试：Python 的动态类型 vs Rust 的静态类型（编译错误）](.#101-边界测试python-的动态类型-vs-rust-的静态类型编译错误-1)
+    - [10.2 边界测试：Python 的 GIL 与 Rust 的所有权并发（编译错误）](.#102-边界测试python-的-gil-与-rust-的所有权并发编译错误)
+    - [10.5 边界测试：Python 的 GIL 与 Rust 的 `Arc<Mutex<T>>` 的性能对比（运行时开销）](.#105-边界测试python-的-gil-与-rust-的-arcmutext-的性能对比运行时开销)
+    - [10.3 边界测试：Python 式动态类型在 Rust 中的不可表达（编译错误）](.#103-边界测试python-式动态类型在-rust-中的不可表达编译错误)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 和 Python 在类型系统上的核心区别是什么？（理解层）](.#测验-1rust-和-python-在类型系统上的核心区别是什么理解层)
+    - [测验 2：Python 的 GIL（全局解释器锁）对并发有什么限制？Rust 有类似限制吗？（理解层）](.#测验-2python-的-gil全局解释器锁对并发有什么限制rust-有类似限制吗理解层)
+    - [测验 3：为什么 Rust 常被用来重写 Python 的性能瓶颈模块（如 `numpy`、`cryptography`）？（理解层）](.#测验-3为什么-rust-常被用来重写-python-的性能瓶颈模块如-numpycryptography理解层)
+    - [测验 4：Python 的"鸭子类型"（Duck Typing）与 Rust 的 Trait 系统有什么异同？（理解层）](.#测验-4python-的鸭子类型duck-typing与-rust-的-trait-系统有什么异同理解层)
+    - [测验 5：在数据科学/ML 领域，Rust 目前为什么还不能完全替代 Python？（理解层）](.#测验-5在数据科学ml-领域rust-目前为什么还不能完全替代-python理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -452,8 +452,8 @@ graph TD
 
 ## 相关概念文件
 
-- [Rust vs Go](./02_rust_vs_go.md) — Rust vs Go 对比
-- [Rust vs Java](./06_rust_vs_java.md) — Rust vs Java 对比
+- [Rust vs Go](02_rust_vs_go.md) — Rust vs Go 对比
+- [Rust vs Java](06_rust_vs_java.md) — Rust vs Java 对比
 - [Ownership](../01_foundation/01_ownership.md) — 所有权模型
 - [Type System](../01_foundation/04_type_system.md) — 类型系统
 

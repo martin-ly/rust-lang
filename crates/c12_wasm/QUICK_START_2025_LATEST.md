@@ -10,19 +10,19 @@
 
 ### 🆕 最新文档（3篇）
 
-1. **[WASI 0.2 组件模型深度指南](./docs/tier_04_advanced/09_WASI_0.2_组件模型深度指南.md)**
+1. **[WASI 0.2 组件模型深度指南](docs/tier_04_advanced/09_WASI_0.2_组件模型深度指南.md)**
    - 📖 18,000 字深度技术文档
    - ✅ 组件模型核心概念
    - ✅ WIT 接口完整语法
    - ✅ 迁移指南和最佳实践
 
-2. **[WasmEdge 插件系统开发指南](./docs/tier_04_advanced/10_WasmEdge_插件系统开发指南.md)**
+2. **[WasmEdge 插件系统开发指南](docs/tier_04_advanced/10_WasmEdge_插件系统开发指南.md)**
    - 📖 16,000 字专家级指南
    - ✅ WASI-NN AI 推理
    - ✅ WASI-Crypto 加密操作
    - ✅ 自定义插件开发
 
-3. **[性能优化深度指南](./docs/tier_04_advanced/11_性能优化深度指南.md)**
+3. **[性能优化深度指南](docs/tier_04_advanced/11_性能优化深度指南.md)**
    - 📖 14,000 字性能优化宝典
    - ✅ AOT 编译 (3.5x 性能提升)
    - ✅ 零拷贝技术 (5x 传输加速)
@@ -30,15 +30,15 @@
 
 ### 🆕 最新示例（3个）
 
-1. **[WASI 0.2 组件示例](./examples/09_wasi_02_component_example.rs)**
+1. **[WASI 0.2 组件示例](examples/09_wasi_02_component_example.rs)**
    - 💻 450 行生产级代码
    - 展示 WASI 0.2 标准接口
 
-2. **[AI 推理示例](./examples/10_ai_inference_wasinn.rs)**
+2. **[AI 推理示例](examples/10_ai_inference_wasinn.rs)**
    - 💻 550 行 AI/ML 代码
    - 支持 PyTorch、TensorFlow、GGML
 
-3. **[加密操作示例](./examples/11_crypto_operations.rs)**
+3. **[加密操作示例](examples/11_crypto_operations.rs)**
    - 💻 600 行密码学代码
    - 完整的加密通信流程
 
@@ -168,29 +168,29 @@ wasmedge target/wasm32-wasip1/release/examples/11_crypto_operations.wasm
 
 ### Tier 1: 基础层 (2-4小时)
 
-- [项目概览](./docs/tier_01_foundations/01_项目概览.md)
-- [主索引导航](./docs/tier_01_foundations/02_主索引导航.md)
+- [项目概览](docs/tier_01_foundations/01_项目概览.md)
+- [主索引导航](docs/tier_01_foundations/02_主索引导航.md)
 
 ### Tier 2: 实践层 (10-20小时)
 
-- [WASM 基础指南](./docs/tier_02_guides/01_wasm_基础指南.md)
-- [Rust 编译 WASM](./docs/tier_02_guides/02_rust_编译_wasm.md)
+- [WASM 基础指南](docs/tier_02_guides/01_wasm_基础指南.md)
+- [Rust 编译 WASM](docs/tier_02_guides/02_rust_编译_wasm.md)
 
 ### Tier 3: 参考层 (按需查阅)
 
-- [API 参考](./docs/tier_03_references/01_api_参考.md)
-- [工具链参考](./docs/tier_03_references/02_工具链参考.md)
+- [API 参考](docs/tier_03_references/01_api_参考.md)
+- [工具链参考](docs/tier_03_references/02_工具链参考.md)
 
 ### Tier 4: 高级层 (20-30小时) ⭐ 重点
 
-- [WASI 深入](./docs/tier_04_advanced/01_wasi_深入.md)
-- [性能分析与优化](./docs/tier_04_advanced/02_性能分析与优化.md)
-- [容器技术深度集成](./docs/tier_04_advanced/06_容器技术深度集成.md)
-- [云原生CI/CD实践](./docs/tier_04_advanced/07_云原生CI_CD实践.md)
-- [监控与可观测性实践](./docs/tier_04_advanced/08_监控与可观测性实践.md)
-- 🆕 [WASI 0.2 组件模型深度指南](./docs/tier_04_advanced/09_WASI_0.2_组件模型深度指南.md)
-- 🆕 [WasmEdge 插件系统开发指南](./docs/tier_04_advanced/10_WasmEdge_插件系统开发指南.md)
-- 🆕 [性能优化深度指南](./docs/tier_04_advanced/11_性能优化深度指南.md)
+- [WASI 深入](docs/tier_04_advanced/01_wasi_深入.md)
+- [性能分析与优化](docs/tier_04_advanced/02_性能分析与优化.md)
+- [容器技术深度集成](docs/tier_04_advanced/06_容器技术深度集成.md)
+- [云原生CI/CD实践](docs/tier_04_advanced/07_云原生CI_CD实践.md)
+- [监控与可观测性实践](docs/tier_04_advanced/08_监控与可观测性实践.md)
+- 🆕 [WASI 0.2 组件模型深度指南](docs/tier_04_advanced/09_WASI_0.2_组件模型深度指南.md)
+- 🆕 [WasmEdge 插件系统开发指南](docs/tier_04_advanced/10_WasmEdge_插件系统开发指南.md)
+- 🆕 [性能优化深度指南](docs/tier_04_advanced/11_性能优化深度指南.md)
 
 ---
 
@@ -288,11 +288,11 @@ wasmedgec --optimize 3 input.wasm output.so
 
 ## 🔗 相关资源
 
-- 📊 [项目推进报告](./PROJECT_ADVANCEMENT_2025_10_30.md)
-- 📖 [WasmEdge 2025 快速开始](./WASMEDGE_2025_QUICK_START.md)
-- 💻 [完整示例代码](./examples/README.md)
-- 🔧 [部署配置](./deployment/)
-- 📚 [完整文档](./docs/README.md)
+- 📊 [项目推进报告](PROJECT_ADVANCEMENT_2025_10_30.md)
+- 📖 [WasmEdge 2025 快速开始](WASMEDGE_2025_QUICK_START.md)
+- 💻 [完整示例代码](examples/README.md)
+- 🔧 [部署配置](deployment)
+- 📚 [完整文档](docs/README.md)
 
 ---
 

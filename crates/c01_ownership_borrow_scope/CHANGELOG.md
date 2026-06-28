@@ -353,13 +353,13 @@
 
 ## 贡献指南
 
-查看 [CONTRIBUTING.md](./CONTRIBUTING.md) 了解如何为本项目做出贡献。
+查看 [CONTRIBUTING.md](CONTRIBUTING.md) 了解如何为本项目做出贡献。
 
 ---
 
 ## 许可证
 
-本项目采用 [MIT License](./LICENSE)。
+本项目采用 [MIT License](LICENSE)。
 
 ---
 

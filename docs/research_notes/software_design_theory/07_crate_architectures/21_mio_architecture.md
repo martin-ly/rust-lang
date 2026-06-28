@@ -389,8 +389,8 @@ graph BT
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [Tokio 异步运行时架构](./06_tokio_architecture.md)
-- [Crossbeam 无锁并发架构](./19_crossbeam_architecture.md)
+- [Tokio 异步运行时架构](06_tokio_architecture.md)
+- [Crossbeam 无锁并发架构](19_crossbeam_architecture.md)
 - [并发编程模型](../../../../concept/03_advanced/01_concurrency.md)
 - [异步编程模型](../../../../concept/03_advanced/02_async.md)
 - [网络编程](../../../../concept/03_advanced/18_network_programming.md)

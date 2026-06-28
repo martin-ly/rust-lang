@@ -26,8 +26,8 @@
 
 ## 5. 下一步学习
 
-- [00_MASTER_INDEX.md](./00_MASTER_INDEX.md)
-- 返回 [README.md](./README.md)
+- [00_MASTER_INDEX.md](00_MASTER_INDEX.md)
+- 返回 [README.md](README.md)
 
 ---
 

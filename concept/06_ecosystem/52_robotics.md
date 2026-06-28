@@ -12,15 +12,15 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价 Rust 在机器人全栈中的适用性、实时约束满足度与 ROS2 集成成熟度
-> **前置依赖**: [嵌入式系统](./22_embedded_systems.md) ·
+> **前置依赖**: [嵌入式系统](22_embedded_systems.md) ·
 > [并发编程](../03_advanced/01_concurrency.md) ·
 > [Async/Await](../03_advanced/02_async.md) ·
-> [网络协议](./38_network_protocols.md) ·
+> [网络协议](38_network_protocols.md) ·
 > [Unsafe Rust](../03_advanced/03_unsafe.md)
-> **后置延伸**: [操作系统内核](./39_os_kernel.md) ·
-> [性能优化](./15_performance_optimization.md) ·
-> [机器学习生态](./46_machine_learning_ecosystem.md) ·
-> [形式化验证工具](./47_formal_verification_tools.md)
+> **后置延伸**: [操作系统内核](39_os_kernel.md) ·
+> [性能优化](15_performance_optimization.md) ·
+> [机器学习生态](46_machine_learning_ecosystem.md) ·
+> [形式化验证工具](47_formal_verification_tools.md)
 >
 > **来源**: [rclrs](https://docs.rs/rclrs/) · [ROS2 Rust](https://github.com/ros2-rust/ros2_rust)
 > **前置概念**: N/A
@@ -46,46 +46,46 @@
 
 ## 📑 目录
 
-- [Robotics \& ROS2 in Rust（机器人学与 ROS2 Rust 生态）](#robotics--ros2-in-rust机器人学与-ros2-rust-生态)
-  - [📑 目录](#-目录)
-  - [一、权威定义（Definition）](#一权威定义definition)
-    - [1.1 机器人软件栈](#11-机器人软件栈)
-    - [1.2 实时约束与确定性](#12-实时约束与确定性)
-    - [1.3 ROS2 架构](#13-ros2-架构)
-  - [二、概念属性矩阵](#二概念属性矩阵)
-  - [三、ROS2 Rust 生态](#三ros2-rust-生态)
-    - [3.1 rclrs：官方 Rust 客户端库](#31-rclrs官方-rust-客户端库)
-    - [3.2 ros2\_rust 社区与 safe\_drive](#32-ros2_rust-社区与-safe_drive)
-    - [3.3 DDS 绑定](#33-dds-绑定)
-  - [四、实时机器人系统](#四实时机器人系统)
-    - [4.1 ROS2 执行器模型](#41-ros2-执行器模型)
-    - [4.2 优先级继承与 PREEMPT\_RT](#42-优先级继承与-preempt_rt)
-    - [4.3 no\_std + RTOS 集成](#43-no_std--rtos-集成)
-  - [五、传感器融合与 SLAM](#五传感器融合与-slam)
-    - [5.1 点云处理与线性代数](#51-点云处理与线性代数)
-    - [5.2 OpenRR 框架](#52-openrr-框架)
-    - [5.3 导航栈](#53-导航栈)
-  - [六、控制理论](#六控制理论)
-    - [6.1 PID、MPC 与 LQR](#61-pidmpc-与-lqr)
-    - [6.2 状态空间与优化](#62-状态空间与优化)
-  - [七、反命题与边界](#七反命题与边界)
-    - [7.1 反命题树](#71-反命题树)
-    - [7.2 边界极限](#72-边界极限)
-  - [八、边界测试](#八边界测试)
-    - [8.1 边界测试：DDS 消息序列化无模式校验（类型混淆）](#81-边界测试dds-消息序列化无模式校验类型混淆)
-    - [8.2 边界测试：ROS2 回调阻塞执行器（实时性违反）](#82-边界测试ros2-回调阻塞执行器实时性违反)
-    - [8.3 边界测试：多线程 ROS2 节点共享可变状态（数据竞争）](#83-边界测试多线程-ros2-节点共享可变状态数据竞争)
-  - [相关概念文件](#相关概念文件)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：为什么 Rust 在机器人学（Robotics）领域越来越受关注？（理解层）](#测验-1为什么-rust-在机器人学robotics领域越来越受关注理解层)
-    - [测验 2：`ROS 2`（机器人操作系统）对 Rust 的支持现状如何？（理解层）](#测验-2ros-2机器人操作系统对-rust-的支持现状如何理解层)
-    - [测验 3：实时系统（Real-Time）中，为什么 Rust 比 Python/Java 更适合？（理解层）](#测验-3实时系统real-time中为什么-rust-比-pythonjava-更适合理解层)
-    - [测验 4：`nalgebra` 和 `nphysics` 在 Rust 机器人学中分别提供什么功能？（理解层）](#测验-4nalgebra-和-nphysics-在-rust-机器人学中分别提供什么功能理解层)
-    - [测验 5：机器人学中的"传感器融合"（Sensor Fusion）在 Rust 中通常如何实现？（理解层）](#测验-5机器人学中的传感器融合sensor-fusion在-rust-中通常如何实现理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Robotics \& ROS2 in Rust（机器人学与 ROS2 Rust 生态）](.#robotics--ros2-in-rust机器人学与-ros2-rust-生态)
+  - [📑 目录](.#-目录)
+  - [一、权威定义（Definition）](.#一权威定义definition)
+    - [1.1 机器人软件栈](.#11-机器人软件栈)
+    - [1.2 实时约束与确定性](.#12-实时约束与确定性)
+    - [1.3 ROS2 架构](.#13-ros2-架构)
+  - [二、概念属性矩阵](.#二概念属性矩阵)
+  - [三、ROS2 Rust 生态](.#三ros2-rust-生态)
+    - [3.1 rclrs：官方 Rust 客户端库](.#31-rclrs官方-rust-客户端库)
+    - [3.2 ros2\_rust 社区与 safe\_drive](.#32-ros2_rust-社区与-safe_drive)
+    - [3.3 DDS 绑定](.#33-dds-绑定)
+  - [四、实时机器人系统](.#四实时机器人系统)
+    - [4.1 ROS2 执行器模型](.#41-ros2-执行器模型)
+    - [4.2 优先级继承与 PREEMPT\_RT](.#42-优先级继承与-preempt_rt)
+    - [4.3 no\_std + RTOS 集成](.#43-no_std--rtos-集成)
+  - [五、传感器融合与 SLAM](.#五传感器融合与-slam)
+    - [5.1 点云处理与线性代数](.#51-点云处理与线性代数)
+    - [5.2 OpenRR 框架](.#52-openrr-框架)
+    - [5.3 导航栈](.#53-导航栈)
+  - [六、控制理论](.#六控制理论)
+    - [6.1 PID、MPC 与 LQR](.#61-pidmpc-与-lqr)
+    - [6.2 状态空间与优化](.#62-状态空间与优化)
+  - [七、反命题与边界](.#七反命题与边界)
+    - [7.1 反命题树](.#71-反命题树)
+    - [7.2 边界极限](.#72-边界极限)
+  - [八、边界测试](.#八边界测试)
+    - [8.1 边界测试：DDS 消息序列化无模式校验（类型混淆）](.#81-边界测试dds-消息序列化无模式校验类型混淆)
+    - [8.2 边界测试：ROS2 回调阻塞执行器（实时性违反）](.#82-边界测试ros2-回调阻塞执行器实时性违反)
+    - [8.3 边界测试：多线程 ROS2 节点共享可变状态（数据竞争）](.#83-边界测试多线程-ros2-节点共享可变状态数据竞争)
+  - [相关概念文件](.#相关概念文件)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：为什么 Rust 在机器人学（Robotics）领域越来越受关注？（理解层）](.#测验-1为什么-rust-在机器人学robotics领域越来越受关注理解层)
+    - [测验 2：`ROS 2`（机器人操作系统）对 Rust 的支持现状如何？（理解层）](.#测验-2ros-2机器人操作系统对-rust-的支持现状如何理解层)
+    - [测验 3：实时系统（Real-Time）中，为什么 Rust 比 Python/Java 更适合？（理解层）](.#测验-3实时系统real-time中为什么-rust-比-pythonjava-更适合理解层)
+    - [测验 4：`nalgebra` 和 `nphysics` 在 Rust 机器人学中分别提供什么功能？（理解层）](.#测验-4nalgebra-和-nphysics-在-rust-机器人学中分别提供什么功能理解层)
+    - [测验 5：机器人学中的"传感器融合"（Sensor Fusion）在 Rust 中通常如何实现？（理解层）](.#测验-5机器人学中的传感器融合sensor-fusion在-rust-中通常如何实现理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 > **Bloom 层级**: 分析 → 评价
 > **变更日志**:
@@ -895,18 +895,18 @@ impl GoodNode {
 
 ## 相关概念文件
 
-- [嵌入式系统](./22_embedded_systems.md) — `no_std`、硬件抽象层、交叉编译
+- [嵌入式系统](22_embedded_systems.md) — `no_std`、硬件抽象层、交叉编译
 - [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、Mutex、线程池
 - Async/Await — 异步（Async）运行时（Runtime）、非阻塞 I/O
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — FFI、裸指针、内存模型
-- [网络协议](./38_network_protocols.md) — UDP/TCP、序列化、gRPC/QUIC
-- [操作系统内核](./39_os_kernel.md) — 调度器、中断、内存管理
-- [性能优化](./15_performance_optimization.md) — SIMD、缓存、零拷贝
+- [网络协议](38_network_protocols.md) — UDP/TCP、序列化、gRPC/QUIC
+- [操作系统内核](39_os_kernel.md) — 调度器、中断、内存管理
+- [性能优化](15_performance_optimization.md) — SIMD、缓存、零拷贝
 - [内存管理](../02_intermediate/03_memory_management.md) — 分配器、生命周期（Lifetimes）、RAII
 - [类型系统（Type System）](../01_foundation/04_type_system.md) — 泛型（Generics）、trait、类型状态
-- [机器学习生态](./46_machine_learning_ecosystem.md) — 感知算法、神经网络推理
-- [形式化验证工具](./47_formal_verification_tools.md) — 模型检查、定理证明、Kani
-- [分布式共识](./50_distributed_consensus.md) — 多机器人协同、一致性（Coherence）
+- [机器学习生态](46_machine_learning_ecosystem.md) — 感知算法、神经网络推理
+- [形式化验证工具](47_formal_verification_tools.md) — 模型检查、定理证明、Kani
+- [分布式共识](50_distributed_consensus.md) — 多机器人协同、一致性（Coherence）
 
 > **过渡**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

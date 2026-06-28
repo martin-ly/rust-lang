@@ -15,42 +15,42 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [研究工具使用指南](#研究工具使用指南)
-  - [📑 目录](#-目录)
-  - [🎯 工具分类 {#-工具分类}](#-工具分类--工具分类)
-  - [🔬 形式化验证工具 {#-形式化验证工具}](#-形式化验证工具--形式化验证工具)
-    - [Prusti](#prusti)
-    - [Kani](#kani)
-    - [可选进阶：Coq/Lean](#可选进阶coqlean)
-  - [⚡ 性能分析工具 {#-性能分析工具}](#-性能分析工具--性能分析工具)
-    - [Criterion.rs](#criterionrs)
-    - [perf](#perf)
-    - [flamegraph](#flamegraph)
-  - [🔍 内存分析工具 {#-内存分析工具}](#-内存分析工具--内存分析工具)
-    - [Miri](#miri)
-    - [Valgrind](#valgrind)
-    - [heaptrack](#heaptrack)
-  - [🧪 测试工具 {#-测试工具}](#-测试工具--测试工具)
-    - [cargo test](#cargo-test)
-    - [proptest](#proptest)
-    - [loom](#loom)
-  - [📚 代码分析工具 {#-代码分析工具}](#-代码分析工具--代码分析工具)
-    - [Clippy](#clippy)
-    - [rust-analyzer](#rust-analyzer)
-    - [cargo-expand](#cargo-expand)
-  - [💡 使用建议 {#-使用建议}](#-使用建议--使用建议)
-    - [工具选择](#工具选择)
-    - [工具组合](#工具组合)
-    - [最佳实践](#最佳实践)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [研究工具使用指南](.#研究工具使用指南)
+  - [📑 目录](.#-目录)
+  - [🎯 工具分类 {#-工具分类}](.#-工具分类--工具分类)
+  - [🔬 形式化验证工具 {#-形式化验证工具}](.#-形式化验证工具--形式化验证工具)
+    - [Prusti](.#prusti)
+    - [Kani](.#kani)
+    - [可选进阶：Coq/Lean](.#可选进阶coqlean)
+  - [⚡ 性能分析工具 {#-性能分析工具}](.#-性能分析工具--性能分析工具)
+    - [Criterion.rs](.#criterionrs)
+    - [perf](.#perf)
+    - [flamegraph](.#flamegraph)
+  - [🔍 内存分析工具 {#-内存分析工具}](.#-内存分析工具--内存分析工具)
+    - [Miri](.#miri)
+    - [Valgrind](.#valgrind)
+    - [heaptrack](.#heaptrack)
+  - [🧪 测试工具 {#-测试工具}](.#-测试工具--测试工具)
+    - [cargo test](.#cargo-test)
+    - [proptest](.#proptest)
+    - [loom](.#loom)
+  - [📚 代码分析工具 {#-代码分析工具}](.#-代码分析工具--代码分析工具)
+    - [Clippy](.#clippy)
+    - [rust-analyzer](.#rust-analyzer)
+    - [cargo-expand](.#cargo-expand)
+  - [💡 使用建议 {#-使用建议}](.#-使用建议--使用建议)
+    - [工具选择](.#工具选择)
+    - [工具组合](.#工具组合)
+    - [最佳实践](.#最佳实践)
+  - [🔗 相关资源 {#-相关资源}](.#-相关资源--相关资源)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 🎯 工具分类 {#-工具分类}
 >
@@ -189,8 +189,8 @@ cargo kani --function test_abs
 
 **说明**：Coq、Lean 为专业形式化证明语言，需额外学习成本。
 本项目已归档 Coq 骨架与 Aeneas 对接计划至 [archive/deprecated/](../archive/deprecated/README.md)。
-主路径聚焦 **数学风格形式化论证 + Rust 示例**（见 [CORE_THEOREMS_FULL_PROOFS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md)）。
-若需机器可检查证明，可参考 Prusti/Kani 或国际对标 [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./10_international_formal_verification_index.md)。
+主路径聚焦 **数学风格形式化论证 + Rust 示例**（见 [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md)）。
+若需机器可检查证明，可参考 Prusti/Kani 或国际对标 [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](10_international_formal_verification_index.md)。
 
 ---
 
@@ -362,7 +362,7 @@ cargo miri test --test my_test
 ```
 
 **与形式化衔接**：Miri 检测违反 [ownership_model](formal_methods/10_ownership_model.md)、[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) 的 UB；
-与 [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./10_safe_unsafe_comprehensive_analysis.md) 契约体系对应。
+与 [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](10_safe_unsafe_comprehensive_analysis.md) 契约体系对应。
 
 **相关资源**:
 
@@ -690,9 +690,9 @@ cargo expand > expanded.rs
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [研究方法论](./10_research_methodology.md) - 研究方法概述
-- [实验研究索引](./experiments/README.md) - 实验研究工具
-- [形式化方法索引](../../archive/research_notes_2026_06_25/formal_methods/README.md) - 形式化工具
+- [研究方法论](10_research_methodology.md) - 研究方法概述
+- [实验研究索引](experiments/README.md) - 实验研究工具
+- [形式化方法索引](formal_methods/README.md) - 形式化工具
 
 ---
 
@@ -765,7 +765,7 @@ cargo expand > expanded.rs
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

@@ -14,25 +14,25 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [类型安全证明树 (Proof Tree: Type Safety)](#类型安全证明树-proof-tree-type-safety)
-  - [📑 目录](#-目录)
-  - [🌳 定理陈述](#-定理陈述)
-  - [🌿 证明树结构](#-证明树结构)
-  - [📋 关键引理](#-关键引理)
-    - [Lemma 1: 替换保持类型 (Substitution)](#lemma-1-替换保持类型-substitution)
-    - [Lemma 2: 模式匹配保持类型](#lemma-2-模式匹配保持类型)
-  - [🎯 Rust 代码验证](#-rust-代码验证)
-  - [📊 类型系统规则](#-类型系统规则)
-  - [📊 证明复杂度](#-证明复杂度)
-  - [🔗 相关证明](#-相关证明)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [类型安全证明树 (Proof Tree: Type Safety)](.#类型安全证明树-proof-tree-type-safety)
+  - [📑 目录](.#-目录)
+  - [🌳 定理陈述](.#-定理陈述)
+  - [🌿 证明树结构](.#-证明树结构)
+  - [📋 关键引理](.#-关键引理)
+    - [Lemma 1: 替换保持类型 (Substitution)](.#lemma-1-替换保持类型-substitution)
+    - [Lemma 2: 模式匹配保持类型](.#lemma-2-模式匹配保持类型)
+  - [🎯 Rust 代码验证](.#-rust-代码验证)
+  - [📊 类型系统规则](.#-类型系统规则)
+  - [📊 证明复杂度](.#-证明复杂度)
+  - [🔗 相关证明](.#-相关证明)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 🌳 定理陈述
 >
@@ -223,9 +223,9 @@ fn type_safety_theorem() {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [所有权证明树](./10_proof_tree_ownership.md)
-- [借用证明树](./10_proof_tree_borrow.md)
-- [类型系统基础](./type_theory/10_type_system_foundations.md)
+- [所有权证明树](10_proof_tree_ownership.md)
+- [借用证明树](10_proof_tree_borrow.md)
+- [类型系统基础](type_theory/10_type_system_foundations.md)
 
 ---
 
@@ -288,7 +288,7 @@ fn type_safety_theorem() {
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

@@ -89,7 +89,7 @@ rustlings watch
 
 ## 相关文档
 
-- [exercises/README.md](./README.md) - 交互式练习入口
+- [exercises/README.md](README.md) - 交互式练习入口
 - [OFFICIAL_RESOURCES_MAPPING](../docs/01_learning/OFFICIAL_RESOURCES_MAPPING.md) - 官方资源映射
 - [Rustlings 官方](https://github.com/rust-lang/rustlings)
 - [Rust by Example](https://doc.rust-lang.org/rust-by-example/)

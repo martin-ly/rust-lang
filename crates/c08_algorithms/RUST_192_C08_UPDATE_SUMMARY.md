@@ -88,8 +88,8 @@
 ## 📚 相关资源
 
 - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
-- [C08 算法模块主索引](./docs/00_MASTER_INDEX.md)
-- [交互式学习指南](./docs/INTERACTIVE_LEARNING_GUIDE.md)
+- [C08 算法模块主索引](docs/00_MASTER_INDEX.md)
+- [交互式学习指南](docs/INTERACTIVE_LEARNING_GUIDE.md)
 
 ---
 

@@ -23,7 +23,7 @@ content/ecosystem/serialization/
 | **`serde_json`** | JSON | 最常用，人类可读 |
 | **`toml`** | TOML | 配置文件首选 |
 | **`bincode`** | 二进制 | 紧凑、高效，适合 RPC/缓存 |
-| **` postcard`** | 二进制 | 为 `no_std` 和嵌入式优化 |
+| **`postcard`** | 二进制 | 为 `no_std` 和嵌入式优化 |
 | **`prost`** | Protocol Buffers | gRPC 服务 |
 | **`rkyv`** | 零拷贝归档 | 高性能反序列化，适合游戏/数据分析 |
 

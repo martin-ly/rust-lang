@@ -13,17 +13,17 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [The Rustonomicon 内容对齐](#the-rustonomicon-内容对齐)
-  - [📑 目录](#-目录)
-  - [已覆盖内容](#已覆盖内容)
-  - [新增补齐内容](#新增补齐内容)
-    - [c01: 布局保证 (align, size)](#c01-布局保证-align-size)
-    - [c12: FFI 高级用法](#c12-ffi-高级用法)
-    - [c13: 裸指针、volatile、内联汇编](#c13-裸指针volatile内联汇编)
-  - [待补充内容](#待补充内容)
-  - [参考资源](#参考资源)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [The Rustonomicon 内容对齐](.#the-rustonomicon-内容对齐)
+  - [📑 目录](.#-目录)
+  - [已覆盖内容](.#已覆盖内容)
+  - [新增补齐内容](.#新增补齐内容)
+    - [c01: 布局保证 (align, size)](.#c01-布局保证-align-size)
+    - [c12: FFI 高级用法](.#c12-ffi-高级用法)
+    - [c13: 裸指针、volatile、内联汇编](.#c13-裸指针volatile内联汇编)
+  - [待补充内容](.#待补充内容)
+  - [参考资源](.#参考资源)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 已覆盖内容
 >
@@ -107,13 +107,13 @@
 
 ---
 
-- [README](./README.md)
+- [README](README.md)
 
 ---
 
 ## 相关概念
 
-- [02_reference 目录](./README.md)
+- [02_reference 目录](README.md)
 - [上级目录](../README.md)
 
 ---

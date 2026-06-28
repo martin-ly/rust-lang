@@ -13,7 +13,7 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
 
-> **后置概念**: [Async/Await](./AsyncAwait.md)
+> **后置概念**: [Async/Await](AsyncAwait.md)
 ---
 
 > **来源**:
@@ -22,12 +22,12 @@
 > [Rust Reference — Generic Parameters](https://doc.rust-lang.org/reference/items/generics.html)
 >
 > **前置概念**:
-> [Traits](./01_traits.md) ·
-> [Generics](./02_generics.md) ·
+> [Traits](01_traits.md) ·
+> [Generics](02_generics.md) ·
 > [Type System](../01_foundation/04_type_system.md)
 >
 > **对应练习**:
-> [`exercises/src/generics_traits/`](../../exercises/src/generics_traits/)
+> [`exercises/src/generics_traits/`](../../exercises/src/generics_traits)
 
 ---
 
@@ -79,7 +79,7 @@ impl Summary for Article {
 - **孤儿规则（Orphan Rule）**：trait 或类型至少有一个必须在当前 crate 中，才能写 `impl`
 - 与 Go interface 的区别：Rust trait 实现是显式的，Go interface 是隐式的
 
-**知识点**：trait 是 Rust 多态的核心机制，编译期通过单态化（monomorphization）实现零成本抽象（Zero-Cost Abstraction）。[→ Trait 详解](./01_traits.md)
+**知识点**：trait 是 Rust 多态的核心机制，编译期通过单态化（monomorphization）实现零成本抽象（Zero-Cost Abstraction）。[→ Trait 详解](01_traits.md)
 
 </details>
 
@@ -135,7 +135,7 @@ Tweet content
 
 **限制**：默认实现中**不能**调用同一 trait 中未提供默认实现的方法（否则递归不确定）。
 
-**知识点**：默认实现是 trait 演进的关键——可以在不破坏现有代码的情况下扩展 trait。[→ Trait 详解](./01_traits.md)
+**知识点**：默认实现是 trait 演进的关键——可以在不破坏现有代码的情况下扩展 trait。[→ Trait 详解](01_traits.md)
 
 </details>
 
@@ -188,7 +188,7 @@ where
 
 **where 子句的优势**：约束与函数签名分离，可读性更好，支持更复杂的约束组合。
 
-**知识点**：trait bound 是 Rust 泛型（Generics）的"类型类约束"，编译器通过它进行单态化（Monomorphization）生成具体代码。[→ 泛型详解](./02_generics.md)
+**知识点**：trait bound 是 Rust 泛型（Generics）的"类型类约束"，编译器通过它进行单态化（Monomorphization）生成具体代码。[→ 泛型详解](02_generics.md)
 
 </details>
 
@@ -294,7 +294,7 @@ fn main() {
 - `Iterator` 用关联类型：每个集合类型只有一种迭代元素类型
 - `Add` 用泛型参数：一个类型可以与多种类型相加（`i32 + i32`、`i32 + f64`）
 
-**知识点**：关联类型减少泛型参数的冗余，使 trait 方法签名更简洁。[→ 高级 Trait 详解](./19_advanced_traits.md)
+**知识点**：关联类型减少泛型参数的冗余，使 trait 方法签名更简洁。[→ 高级 Trait 详解](19_advanced_traits.md)
 
 </details>
 
@@ -356,7 +356,7 @@ Square
 
 **注意**：`dyn Trait` 必须 behind a pointer（`&dyn`、`Box<dyn>`、`Rc<dyn>`），因为编译期不知道具体大小。
 
-**知识点**：trait 对象是实现运行时多态的 Rust 方式，与 Java interface 的引用（Reference）类型类似，但显式标注 `dyn`。[→ Trait 对象详解](./01_traits.md)
+**知识点**：trait 对象是实现运行时多态的 Rust 方式，与 Java interface 的引用（Reference）类型类似，但显式标注 `dyn`。[→ Trait 对象详解](01_traits.md)
 
 </details>
 
@@ -418,7 +418,7 @@ fn print_it<T: ?Sized>(t: &T) {
 }
 ```
 
-**知识点**：`?Sized` 是 Rust 中少有的 "opt-out" 约束，用于处理编译期大小未知的类型（DST）。[→ 泛型详解](./02_generics.md)
+**知识点**：`?Sized` 是 Rust 中少有的 "opt-out" 约束，用于处理编译期大小未知的类型（DST）。[→ 泛型详解](02_generics.md)
 
 </details>
 
@@ -487,7 +487,7 @@ fn random_animal(n: i32) -> Box<dyn Animal> {
 | 函数参数 | ✅（简化签名） | — |
 | 需要递归或复杂控制流 | ❌ | 用显式泛型或 trait 对象 |
 
-**知识点**：`impl Trait` 是语法糖，编译器在编译期确定具体类型。它不提供运行时多态能力。[→ 泛型详解](./02_generics.md)
+**知识点**：`impl Trait` 是语法糖，编译器在编译期确定具体类型。它不提供运行时多态能力。[→ 泛型详解](02_generics.md)
 
 </details>
 
@@ -553,7 +553,7 @@ impl Point<f32> {
 }
 ```
 
-**知识点**：Rust 允许为泛型结构体（Struct）的特定实例类型提供额外方法，这是零成本抽象（Zero-Cost Abstraction）的典型案例。[→ 泛型详解](./02_generics.md)
+**知识点**：Rust 允许为泛型结构体（Struct）的特定实例类型提供额外方法，这是零成本抽象（Zero-Cost Abstraction）的典型案例。[→ 泛型详解](02_generics.md)
 
 </details>
 
@@ -610,14 +610,14 @@ fn main() {
 | 得分 | 评价 | 建议 |
 |:---:|:---|:---|
 | 10/10 | 🏆 Trait/泛型已内化 | 进阶至 [L3 高级泛型](../03_advanced/03_unsafe.md) 或 [L4 类型理论](../04_formal/02_type_theory.md) |
-| 7–9/10 | ✅ 核心概念掌握 | 强化 [L2 练习](../../exercises/src/generics_traits/)，关注错题对应的概念文件 |
-| 4–6/10 | 🔄 需巩固基础 | 重读 [Traits](./01_traits.md) · [Generics](./02_generics.md)，完成 rustlings 对应章节 |
-| 0–3/10 | 📚 建议重新开始 | 从 [Traits](./01_traits.md) 逐节阅读，配合 [crates/c04_generic](../../crates/c04_generic/) 示例 |
+| 7–9/10 | ✅ 核心概念掌握 | 强化 [L2 练习](../../exercises/src/generics_traits)，关注错题对应的概念文件 |
+| 4–6/10 | 🔄 需巩固基础 | 重读 [Traits](01_traits.md) · [Generics](02_generics.md)，完成 rustlings 对应章节 |
+| 0–3/10 | 📚 建议重新开始 | 从 [Traits](01_traits.md) 逐节阅读，配合 [crates/c04_generic](../../crates/c04_generic) 示例 |
 
 ---
 
-> **对应 Crate**: [`c04_generic`](../../crates/c04_generic/)
-> **对应练习**: [`exercises/src/generics_traits/`](../../exercises/src/generics_traits/)
+> **对应 Crate**: [`c04_generic`](../../crates/c04_generic)
+> **对应练习**: [`exercises/src/generics_traits/`](../../exercises/src/generics_traits)
 
 ---
 

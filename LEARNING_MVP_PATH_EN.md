@@ -44,7 +44,7 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 | Configure IDE (rust-analyzer) | 15m | Auto-completion works for `Vec::` |
 | Read [concept/01_foundation/00_hello_world.md](concept/01_foundation/00_hello_world.md) | 30m | Can explain `fn main()`, `println!` |
 | Write a temperature converter | 30m | `cargo run` produces correct output |
-| Complete [exercises/src/ownership_borrowing/](exercises/src/ownership_borrowing/) intro | 30m | `cargo test` passes first 3 tests |
+| Complete [exercises/src/ownership_borrowing/](exercises/src/ownership_borrowing) intro | 30m | `cargo test` passes first 3 tests |
 
 **Key Concepts**: `rustc`, `cargo`, `fn`, `let`, mutability, macros.
 
@@ -232,10 +232,10 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 | Source | Location | Count |
 |:---|:---|:---:|
-| rustlings-style exercises | [exercises/src/](exercises/src/) | 100+ |
-| Crate examples | [crates/](crates/) | 17 crates |
-| Embedded quizzes | [concept/](concept/) | 14 files with quizzes |
-| Runnable quiz tests | [exercises/tests/](exercises/tests/) | 39 tests |
+| rustlings-style exercises | [exercises/src/](exercises/src) | 100+ |
+| Crate examples | [crates/](crates) | 17 crates |
+| Embedded quizzes | [concept/](concept) | 14 files with quizzes |
+| Runnable quiz tests | [exercises/tests/](exercises/tests) | 39 tests |
 
 ---
 
@@ -253,8 +253,8 @@ After completing this path, you should be able to:
 
 **Next Steps**:
 
-- **Systems Programming**: [concept/03_advanced/13_inline_assembly.md](concept/03_advanced/13_inline_assembly.md) + [crates/c13_embedded/](crates/c13_embedded/)
-- **Web Backend**: [concept/03_advanced/02_async.md](concept/03_advanced/02_async.md) + [crates/c10_networks/](crates/c10_networks/)
+- **Systems Programming**: [concept/03_advanced/13_inline_assembly.md](concept/03_advanced/13_inline_assembly.md) + [crates/c13_embedded/](crates/c13_embedded)
+- **Web Backend**: [concept/03_advanced/02_async.md](concept/03_advanced/02_async.md) + [crates/c10_networks/](crates/c10_networks)
 - **Formal Verification**: [concept/04_formal/03_ownership_formal.md](concept/04_formal/03_ownership_formal.md) + [concept/04_formal/05_verification_toolchain.md](concept/04_formal/05_verification_toolchain.md)
 
 ---

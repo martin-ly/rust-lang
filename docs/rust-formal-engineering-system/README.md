@@ -6,7 +6,7 @@
 > **最后更新**: 2026-06-25（已按 Rust 1.96.0 复审）
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成
-> **说明**: 本目录为**单一索引层**，形式化理论内容已整合至 [研究笔记](../research_notes/README.md) 及各 crates。子目录 README 仅为占位重定向，请以 [00_master_index.md](./00_master_index.md) 为完整导航入口。
+> **说明**: 本目录为**单一索引层**，形式化理论内容已整合至 [研究笔记](../research_notes/README.md) 及各 crates。子目录 README 仅为占位重定向，请以 [00_master_index.md](00_master_index.md) 为完整导航入口。
 > **docs 全结构**: DOCS_STRUCTURE_OVERVIEW § 2.9
 
 ---
@@ -27,7 +27,7 @@
 | :--- | :--- | :--- |
 | **形式化方法** | [research_notes/formal_methods/](../../archive/research_notes_2026_06_25/formal_methods/README.md) | 所有权模型、借用检查器、生命周期、Pin、异步状态机 |
 | **类型理论** | [research_notes/type_theory/](../research_notes/type_theory/README.md) | 类型系统基础、Trait 形式化、型变理论、生命周期 |
-| **主索引** | [00_master_index.md](./00_master_index.md) | 完整模块映射与导航 |
+| **主索引** | [00_master_index.md](00_master_index.md) | 完整模块映射与导航 |
 
 ### 快速跳转
 

@@ -12,8 +12,8 @@
 > **双维定位**: C×App — 应用 Edition 指南
 > **定位**: 全面讲解 Rust **Edition 2024** 的新特性——从 gen blocks、async closures 到 never type 和 lifetime captures，揭示 Edition 机制如何在不破坏兼容性的前提下推进语言演进。
 > **注意**: Rust 2024 Edition 已在 **Rust 1.85.0** 稳定；`gen {}` blocks / `gen fn` 仍为 nightly（feature `gen_blocks`，跟踪 issue #117078），本文档将其作为前瞻特性介绍。
-> **前置概念**: [Rust Version Tracking](./05_rust_version_tracking.md) · [Async](../03_advanced/02_async.md) · [Generics](../02_intermediate/02_generics.md)
-> **后置概念**: [Evolution](./03_evolution.md) · [NLL](../03_advanced/08_nll_and_polonius.md)
+> **前置概念**: [Rust Version Tracking](05_rust_version_tracking.md) · [Async](../03_advanced/02_async.md) · [Generics](../02_intermediate/02_generics.md)
+> **后置概念**: [Evolution](03_evolution.md) · [NLL](../03_advanced/08_nll_and_polonius.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -28,41 +28,41 @@
 
 ## 📑 目录
 
-- [Edition 2024 完全指南：新特性与迁移策略](#edition-2024-完全指南新特性与迁移策略)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 Edition 机制回顾](#11-edition-机制回顾)
-    - [1.2 Edition 2024 主要特性](#12-edition-2024-主要特性)
-    - [1.3 迁移策略](#13-迁移策略)
-  - [二、技术细节](#二技术细节)
-    - [2.1 Gen Blocks](#21-gen-blocks)
-    - [2.2 Async Closures](#22-async-closures)
-    - [2.3 Lifetime 捕获](#23-lifetime-捕获)
-    - [2.4 `if let` 临时作用域收窄](#24-if-let-临时作用域收窄)
-  - [三、新特性矩阵](#三新特性矩阵)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、常见陷阱](#五常见陷阱)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：Edition Guide 的编译错误](#十边界测试edition-guide-的编译错误)
-    - [10.1 边界测试：Edition 2024 的尾表达式模式变更（编译错误）](#101-边界测试edition-2024-的尾表达式模式变更编译错误)
-    - [10.2 边界测试：`gen` 关键字保留与宏解析冲突（编译错误）](#102-边界测试gen-关键字保留与宏解析冲突编译错误)
-    - [10.6 边界测试：Edition 迁移后的 `cargo fix` 残留问题（编译错误）](#106-边界测试edition-迁移后的-cargo-fix-残留问题编译错误)
-    - [10.7 边界测试：Edition 迁移的自动修复遗漏（编译中断/语义变更）](#107-边界测试edition-迁移的自动修复遗漏编译中断语义变更)
-    - [10.3 边界测试：Edition 迁移中的宏 hygiene 变更（编译错误）](#103-边界测试edition-迁移中的宏-hygiene-变更编译错误)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：什么是 Rust 的"Edition"？它与语义版本（SemVer）有什么关系？（理解层）](#测验-1什么是-rust-的edition它与语义版本semver有什么关系理解层)
-    - [测验 2：Rust 2024 Edition 引入了哪些主要变化？（理解层）](#测验-2rust-2024-edition-引入了哪些主要变化理解层)
-    - [测验 3：为什么 Rust 可以同时支持多个 Edition？（理解层）](#测验-3为什么-rust-可以同时支持多个-edition理解层)
-    - [测验 4：Edition 迁移工具 `cargo fix --edition` 的作用是什么？（理解层）](#测验-4edition-迁移工具-cargo-fix---edition-的作用是什么理解层)
-    - [测验 5：预计下一个 Edition（2027/2028）可能包含什么特性？（理解层）](#测验-5预计下一个-edition20272028可能包含什么特性理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Edition 2024 完全指南：新特性与迁移策略](.#edition-2024-完全指南新特性与迁移策略)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 Edition 机制回顾](.#11-edition-机制回顾)
+    - [1.2 Edition 2024 主要特性](.#12-edition-2024-主要特性)
+    - [1.3 迁移策略](.#13-迁移策略)
+  - [二、技术细节](.#二技术细节)
+    - [2.1 Gen Blocks](.#21-gen-blocks)
+    - [2.2 Async Closures](.#22-async-closures)
+    - [2.3 Lifetime 捕获](.#23-lifetime-捕获)
+    - [2.4 `if let` 临时作用域收窄](.#24-if-let-临时作用域收窄)
+  - [三、新特性矩阵](.#三新特性矩阵)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、常见陷阱](.#五常见陷阱)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：Edition Guide 的编译错误](.#十边界测试edition-guide-的编译错误)
+    - [10.1 边界测试：Edition 2024 的尾表达式模式变更（编译错误）](.#101-边界测试edition-2024-的尾表达式模式变更编译错误)
+    - [10.2 边界测试：`gen` 关键字保留与宏解析冲突（编译错误）](.#102-边界测试gen-关键字保留与宏解析冲突编译错误)
+    - [10.6 边界测试：Edition 迁移后的 `cargo fix` 残留问题（编译错误）](.#106-边界测试edition-迁移后的-cargo-fix-残留问题编译错误)
+    - [10.7 边界测试：Edition 迁移的自动修复遗漏（编译中断/语义变更）](.#107-边界测试edition-迁移的自动修复遗漏编译中断语义变更)
+    - [10.3 边界测试：Edition 迁移中的宏 hygiene 变更（编译错误）](.#103-边界测试edition-迁移中的宏-hygiene-变更编译错误)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：什么是 Rust 的"Edition"？它与语义版本（SemVer）有什么关系？（理解层）](.#测验-1什么是-rust-的edition它与语义版本semver有什么关系理解层)
+    - [测验 2：Rust 2024 Edition 引入了哪些主要变化？（理解层）](.#测验-2rust-2024-edition-引入了哪些主要变化理解层)
+    - [测验 3：为什么 Rust 可以同时支持多个 Edition？（理解层）](.#测验-3为什么-rust-可以同时支持多个-edition理解层)
+    - [测验 4：Edition 迁移工具 `cargo fix --edition` 的作用是什么？（理解层）](.#测验-4edition-迁移工具-cargo-fix---edition-的作用是什么理解层)
+    - [测验 5：预计下一个 Edition（2027/2028）可能包含什么特性？（理解层）](.#测验-5预计下一个-edition20272028可能包含什么特性理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -492,8 +492,8 @@ graph TD
 
 ## 相关概念文件
 
-- [Rust Version Tracking](./05_rust_version_tracking.md) — 版本跟踪
-- [Evolution](./03_evolution.md) — 语言演进
+- [Rust Version Tracking](05_rust_version_tracking.md) — 版本跟踪
+- [Evolution](03_evolution.md) — 语言演进
 - [Async](../03_advanced/02_async.md) — 异步编程
 - [Generics](../02_intermediate/02_generics.md) — 泛型（Generics）系统
 

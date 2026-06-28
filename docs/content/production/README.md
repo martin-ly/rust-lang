@@ -48,12 +48,10 @@
     - [内存优化](#内存优化)
       - [内存分析工具](#内存分析工具)
       - [优化技巧](#优化技巧)
-  - [🛡️ 可靠性](#可靠性)
+  - [🛡️ 可靠性](#️-可靠性)
     - [熔断器模式](#熔断器模式)
     - [优雅降级](#优雅降级)
   - [🔗 参考资源](#-参考资源)
-<a id="状态--持续完善中"></a>
-  - [**状态**: 🔄 持续完善中](#状态--持续完善中)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -688,6 +686,7 @@ impl Service {
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-05-08
 **状态**: 🔄 持续完善中
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -711,17 +710,10 @@ impl Service {
 ## 权威来源索引
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**

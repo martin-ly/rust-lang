@@ -44,5 +44,5 @@
 
 ## 说明
 
-- 仅对官方域名进行了可访问性检查；生态 crate 文档（docs.rs）、研究项目站点（plv.mpi-sws.org、rust-book.cs.brown.edu 等）的扩展检查见 [`i18n_source_link_health_extended_report.md`](./i18n_source_link_health_extended_report.md)。
+- 仅对官方域名进行了可访问性检查；生态 crate 文档（docs.rs）、研究项目站点（plv.mpi-sws.org、rust-book.cs.brown.edu 等）的扩展检查见 [`i18n_source_link_health_extended_report.md`](i18n_source_link_health_extended_report.md)。
 - 修复后所有官方来源链接均返回 200，无 404。

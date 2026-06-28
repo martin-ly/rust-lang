@@ -15,28 +15,28 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Saga 模式形式化定义](#saga-模式形式化定义)
-  - [📑 目录](#-目录)
-  - [1. 概念定义 (Def)](#1-概念定义-def)
-    - [Def S1: Saga](#def-s1-saga)
-    - [Def S2: Saga 执行状态](#def-s2-saga-执行状态)
-    - [Def S3: 补偿正确性](#def-s3-补偿正确性)
-  - [2. 基本假设 (Axiom)](#2-基本假设-axiom)
-    - [Axiom S1: 补偿幂等性](#axiom-s1-补偿幂等性)
-    - [Axiom S2: 偏序无环性](#axiom-s2-偏序无环性)
-    - [Axiom S3: 最终一致性](#axiom-s3-最终一致性)
-  - [3. 定理 (Theorem)](#3-定理-theorem)
-    - [Theorem S1: Saga 原子性](#theorem-s1-saga-原子性)
-    - [Theorem S2: 补偿终止性](#theorem-s2-补偿终止性)
-  - [4. Rust 实现示例](#4-rust-实现示例)
-  - [5. 与其他模式的关系](#5-与其他模式的关系)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [Saga 模式形式化定义](.#saga-模式形式化定义)
+  - [📑 目录](.#-目录)
+  - [1. 概念定义 (Def)](.#1-概念定义-def)
+    - [Def S1: Saga](.#def-s1-saga)
+    - [Def S2: Saga 执行状态](.#def-s2-saga-执行状态)
+    - [Def S3: 补偿正确性](.#def-s3-补偿正确性)
+  - [2. 基本假设 (Axiom)](.#2-基本假设-axiom)
+    - [Axiom S1: 补偿幂等性](.#axiom-s1-补偿幂等性)
+    - [Axiom S2: 偏序无环性](.#axiom-s2-偏序无环性)
+    - [Axiom S3: 最终一致性](.#axiom-s3-最终一致性)
+  - [3. 定理 (Theorem)](.#3-定理-theorem)
+    - [Theorem S1: Saga 原子性](.#theorem-s1-saga-原子性)
+    - [Theorem S2: 补偿终止性](.#theorem-s2-补偿终止性)
+  - [4. Rust 实现示例](.#4-rust-实现示例)
+  - [5. 与其他模式的关系](.#5-与其他模式的关系)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 1. 概念定义 (Def)
 >
@@ -284,7 +284,7 @@ impl<S, E> SagaExecutor<S, E> {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [05_distributed 目录](./README.md)
+- [05_distributed 目录](README.md)
 - [上级目录](../README.md)
 
 ---

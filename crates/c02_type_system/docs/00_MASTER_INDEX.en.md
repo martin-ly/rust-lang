@@ -1,7 +1,7 @@
 # C02 Type System - Master Index (English)
 
 > **Version**: 1.0 | **Rust**: 1.93.0+ | **Last Update**: 2026-02-13
-> **Full Chinese version**: [00_MASTER_INDEX.md](./00_MASTER_INDEX.md)
+> **Full Chinese version**: [00_MASTER_INDEX.md](00_MASTER_INDEX.md)
 
 ---
 
@@ -31,8 +31,8 @@
 | Tier | Name | Entry |
 | :--- | :--- | :--- |
 | **Tier 1** | Foundation | [tier_01_foundations/](tier_01_foundations/README.md) |
-| **Tier 2** | Core Guides | [tier_02_guides/](tier_02_guides/) |
-| **Tier 3** | References | [tier_03_references/](tier_03_references/) |
+| **Tier 2** | Core Guides | [tier_02_guides/](tier_02_guides) |
+| **Tier 3** | References | [tier_03_references/](tier_03_references) |
 | **Tier 4** | Advanced | [tier_04_advanced/](tier_04_advanced/README.md) |
 
 ---

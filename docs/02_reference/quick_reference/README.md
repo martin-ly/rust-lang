@@ -18,65 +18,65 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [Rust 快速参考指南 {#-rust-快速参考指南}](#rust-快速参考指南--rust-快速参考指南)
-  - [📋 目录 {#-目录}](#-目录--目录)
-  - [🎯 快速参考概述 {#-快速参考概述}](#-快速参考概述--快速参考概述)
-    - [适用场景](#适用场景)
-  - [📖 速查卡列表 {#-速查卡列表}](#-速查卡列表--速查卡列表)
-    - [1. 类型系统速查卡](#1-类型系统速查卡)
-    - [2. 所有权系统速查卡](#2-所有权系统速查卡)
-    - [3. 异步编程速查卡](#3-异步编程速查卡)
-    - [4. 泛型编程速查卡](#4-泛型编程速查卡)
-    - [5. 错误处理速查卡](#5-错误处理速查卡)
-    - [6. 线程与并发速查卡](#6-线程与并发速查卡)
-    - [7. 宏系统速查卡](#7-宏系统速查卡)
-    - [8. 测试速查卡](#8-测试速查卡)
-    - [9. 控制流与函数速查卡](#9-控制流与函数速查卡)
-    - [10. 集合与迭代器速查卡](#10-集合与迭代器速查卡)
-    - [11. 智能指针速查卡](#11-智能指针速查卡)
-    - [12. 模块系统速查卡](#12-模块系统速查卡)
-    - [13. 字符串与格式化速查卡](#13-字符串与格式化速查卡)
-    - [14. Cargo 速查卡](#14-cargo-速查卡)
-    - [15. 进程管理速查卡 ⭐ NEW](#15-进程管理速查卡--new)
-    - [16. 网络编程速查卡 ⭐ NEW](#16-网络编程速查卡--new)
-    - [17. 算法与数据结构速查卡 ⭐ NEW](#17-算法与数据结构速查卡--new)
-    - [18. 设计模式速查卡 ⭐ NEW](#18-设计模式速查卡--new)
-    - [19. WASM 速查卡 ⭐ NEW](#19-wasm-速查卡--new)
-    - [20. AI/ML 速查卡 ⭐ NEW](#20-aiml-速查卡--new)
+- [Rust 快速参考指南 {#-rust-快速参考指南}](.#rust-快速参考指南--rust-快速参考指南)
+  - [📋 目录 {#-目录}](.#-目录--目录)
+  - [🎯 快速参考概述 {#-快速参考概述}](.#-快速参考概述--快速参考概述)
+    - [适用场景](.#适用场景)
+  - [📖 速查卡列表 {#-速查卡列表}](.#-速查卡列表--速查卡列表)
+    - [1. 类型系统速查卡](.#1-类型系统速查卡)
+    - [2. 所有权系统速查卡](.#2-所有权系统速查卡)
+    - [3. 异步编程速查卡](.#3-异步编程速查卡)
+    - [4. 泛型编程速查卡](.#4-泛型编程速查卡)
+    - [5. 错误处理速查卡](.#5-错误处理速查卡)
+    - [6. 线程与并发速查卡](.#6-线程与并发速查卡)
+    - [7. 宏系统速查卡](.#7-宏系统速查卡)
+    - [8. 测试速查卡](.#8-测试速查卡)
+    - [9. 控制流与函数速查卡](.#9-控制流与函数速查卡)
+    - [10. 集合与迭代器速查卡](.#10-集合与迭代器速查卡)
+    - [11. 智能指针速查卡](.#11-智能指针速查卡)
+    - [12. 模块系统速查卡](.#12-模块系统速查卡)
+    - [13. 字符串与格式化速查卡](.#13-字符串与格式化速查卡)
+    - [14. Cargo 速查卡](.#14-cargo-速查卡)
+    - [15. 进程管理速查卡 ⭐ NEW](.#15-进程管理速查卡--new)
+    - [16. 网络编程速查卡 ⭐ NEW](.#16-网络编程速查卡--new)
+    - [17. 算法与数据结构速查卡 ⭐ NEW](.#17-算法与数据结构速查卡--new)
+    - [18. 设计模式速查卡 ⭐ NEW](.#18-设计模式速查卡--new)
+    - [19. WASM 速查卡 ⭐ NEW](.#19-wasm-速查卡--new)
+    - [20. AI/ML 速查卡 ⭐ NEW](.#20-aiml-速查卡--new)
 <a id="21-rust-190193-特性速查卡-"></a>
-    - [21. Rust 1.90–1.93 特性速查卡 🆕](#21-rust-190193-特性速查卡-)
+    - [21. Rust 1.90–1.93 特性速查卡 🆕](.#21-rust-190193-特性速查卡-)
 <a id="22-rust-194-特性速查卡-"></a>
-    - [22. Rust 1.94 特性速查卡 🆕](#22-rust-194-特性速查卡-)
+    - [22. Rust 1.94 特性速查卡 🆕](.#22-rust-194-特性速查卡-)
 <a id="23-rust-195-特性速查卡-"></a>
-    - [23. Rust 1.95 特性速查卡 🆕](#23-rust-195-特性速查卡-)
+    - [23. Rust 1.95 特性速查卡 🆕](.#23-rust-195-特性速查卡-)
 <a id="24-rust-196-特性速查卡-"></a>
-    - [24. Rust 1.96 特性速查卡 🆕](#24-rust-196-特性速查卡-)
+    - [24. Rust 1.96 特性速查卡 🆕](.#24-rust-196-特性速查卡-)
 <a id="25-rust-197-特性速查卡-"></a>
-    - [25. Rust 1.97 特性速查卡 🆕](#25-rust-197-特性速查卡-)
-  - [🔍 快速查找 {#-快速查找}](#-快速查找--快速查找)
-    - [按主题查找](#按主题查找)
-    - [按场景查找](#按场景查找)
-  - [🚀 快速开始 {#-快速开始}](#-快速开始--快速开始)
-    - [推荐阅读顺序](#推荐阅读顺序)
-    - [使用建议](#使用建议)
-    - [速查卡统计](#速查卡统计)
-  - [📚 相关资源 {#-相关资源}](#-相关资源--相关资源)
-    - [完整文档](#完整文档)
-    - [代码示例](#代码示例)
-    - [研究笔记](#研究笔记)
-  - [🔄 更新日志 {#-更新日志}](#-更新日志--更新日志)
-    - [2026-05-29](#2026-05-29)
-    - [2026-02-12](#2026-02-12)
-    - [2026-01-27](#2026-01-27)
-    - [2026-01-26 🆕 {#2026-01-26-}](#2026-01-26--2026-01-26-)
-    - [2025-12-11](#2025-12-11)
-    - [2025-11-15](#2025-11-15)
-    - [2025-10-30](#2025-10-30)
-  - [🆕 Rust 1.95 特性整合](#-rust-195-特性整合)
-    - [核心特性速查](#核心特性速查)
+    - [25. Rust 1.97 特性速查卡 🆕](.#25-rust-197-特性速查卡-)
+  - [🔍 快速查找 {#-快速查找}](.#-快速查找--快速查找)
+    - [按主题查找](.#按主题查找)
+    - [按场景查找](.#按场景查找)
+  - [🚀 快速开始 {#-快速开始}](.#-快速开始--快速开始)
+    - [推荐阅读顺序](.#推荐阅读顺序)
+    - [使用建议](.#使用建议)
+    - [速查卡统计](.#速查卡统计)
+  - [📚 相关资源 {#-相关资源}](.#-相关资源--相关资源)
+    - [完整文档](.#完整文档)
+    - [代码示例](.#代码示例)
+    - [研究笔记](.#研究笔记)
+  - [🔄 更新日志 {#-更新日志}](.#-更新日志--更新日志)
+    - [2026-05-29](.#2026-05-29)
+    - [2026-02-12](.#2026-02-12)
+    - [2026-01-27](.#2026-01-27)
+    - [2026-01-26 🆕 {#2026-01-26-}](.#2026-01-26--2026-01-26-)
+    - [2025-12-11](.#2025-12-11)
+    - [2025-11-15](.#2025-11-15)
+    - [2025-10-30](.#2025-10-30)
+  - [🆕 Rust 1.95 特性整合](.#-rust-195-特性整合)
+    - [核心特性速查](.#核心特性速查)
 <a id="状态--深度整合完成"></a>
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
-  - [权威来源索引](#权威来源索引)
+  - [**状态**: ✅ 深度整合完成](.#状态--深度整合完成)
+  - [权威来源索引](.#权威来源索引)
 
 ---
 
@@ -109,7 +109,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**文件**: [02_type_system.md](./02_type_system.md)
+**文件**: [02_type_system.md](02_type_system.md)
 
 **内容**:
 
@@ -130,7 +130,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**文件**: [02_ownership_cheatsheet.md](./02_ownership_cheatsheet.md)
+**文件**: [02_ownership_cheatsheet.md](02_ownership_cheatsheet.md)
 
 **内容**:
 
@@ -150,7 +150,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**文件**: [02_async_patterns.md](./02_async_patterns.md)
+**文件**: [02_async_patterns.md](02_async_patterns.md)
 
 **内容**:
 
@@ -170,7 +170,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**文件**: [02_generics_cheatsheet.md](./02_generics_cheatsheet.md)
+**文件**: [02_generics_cheatsheet.md](02_generics_cheatsheet.md)
 
 **内容**:
 
@@ -189,7 +189,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**文件**: [02_error_handling_cheatsheet.md](./02_error_handling_cheatsheet.md)
+**文件**: [02_error_handling_cheatsheet.md](02_error_handling_cheatsheet.md)
 
 **内容**:
 
@@ -208,7 +208,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**文件**: [02_threads_concurrency_cheatsheet.md](./02_threads_concurrency_cheatsheet.md)
+**文件**: [02_threads_concurrency_cheatsheet.md](02_threads_concurrency_cheatsheet.md)
 
 **内容**:
 
@@ -244,7 +244,7 @@
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
-**文件**: [02_testing_cheatsheet.md](./02_testing_cheatsheet.md)
+**文件**: [02_testing_cheatsheet.md](02_testing_cheatsheet.md)
 
 **内容**:
 
@@ -263,7 +263,7 @@
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-**文件**: [02_control_flow_functions_cheatsheet.md](./02_control_flow_functions_cheatsheet.md)
+**文件**: [02_control_flow_functions_cheatsheet.md](02_control_flow_functions_cheatsheet.md)
 
 **内容**:
 
@@ -281,7 +281,7 @@
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-**文件**: [02_collections_iterators_cheatsheet.md](./02_collections_iterators_cheatsheet.md)
+**文件**: [02_collections_iterators_cheatsheet.md](02_collections_iterators_cheatsheet.md)
 
 **内容**:
 
@@ -300,7 +300,7 @@
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
-**文件**: [02_smart_pointers_cheatsheet.md](./02_smart_pointers_cheatsheet.md)
+**文件**: [02_smart_pointers_cheatsheet.md](02_smart_pointers_cheatsheet.md)
 
 **内容**:
 
@@ -318,7 +318,7 @@
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
-**文件**: [02_modules_cheatsheet.md](./02_modules_cheatsheet.md)
+**文件**: [02_modules_cheatsheet.md](02_modules_cheatsheet.md)
 
 **内容**:
 
@@ -337,7 +337,7 @@
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-**文件**: [02_strings_formatting_cheatsheet.md](./02_strings_formatting_cheatsheet.md)
+**文件**: [02_strings_formatting_cheatsheet.md](02_strings_formatting_cheatsheet.md)
 
 **内容**:
 
@@ -355,7 +355,7 @@
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
-**文件**: [02_cargo_cheatsheet.md](./02_cargo_cheatsheet.md)
+**文件**: [02_cargo_cheatsheet.md](02_cargo_cheatsheet.md)
 
 **内容**:
 
@@ -375,7 +375,7 @@
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
-**文件**: [02_process_management_cheatsheet.md](./02_process_management_cheatsheet.md)
+**文件**: [02_process_management_cheatsheet.md](02_process_management_cheatsheet.md)
 
 **内容**:
 
@@ -394,7 +394,7 @@
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
-**文件**: [02_network_programming_cheatsheet.md](./02_network_programming_cheatsheet.md)
+**文件**: [02_network_programming_cheatsheet.md](02_network_programming_cheatsheet.md)
 
 **内容**:
 
@@ -413,7 +413,7 @@
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-**文件**: [02_algorithms_cheatsheet.md](./02_algorithms_cheatsheet.md)
+**文件**: [02_algorithms_cheatsheet.md](02_algorithms_cheatsheet.md)
 
 **内容**:
 
@@ -447,7 +447,7 @@
 
 ### 19. WASM 速查卡 ⭐ NEW
 
-**文件**: [02_wasm_cheatsheet.md](./02_wasm_cheatsheet.md)
+**文件**: [02_wasm_cheatsheet.md](02_wasm_cheatsheet.md)
 
 **内容**:
 
@@ -462,7 +462,7 @@
 
 ### 20. AI/ML 速查卡 ⭐ NEW
 
-**文件**: [02_ai_ml_cheatsheet.md](./02_ai_ml_cheatsheet.md)
+**文件**: [02_ai_ml_cheatsheet.md](02_ai_ml_cheatsheet.md)
 
 **内容**:
 
@@ -477,7 +477,7 @@
 
 ### 21. Rust 1.90–1.93 特性速查卡 🆕
 
-**文件**: [02_rust_190_to_193_features_cheatsheet.md](./02_rust_190_to_193_features_cheatsheet.md)
+**文件**: [02_rust_190_to_193_features_cheatsheet.md](02_rust_190_to_193_features_cheatsheet.md)
 
 **内容**:
 
@@ -492,7 +492,7 @@
 
 ### 22. Rust 1.94 特性速查卡 🆕
 
-**文件**: [02_rust_194_features_cheatsheet.md](./02_rust_194_features_cheatsheet.md)
+**文件**: [02_rust_194_features_cheatsheet.md](02_rust_194_features_cheatsheet.md)
 
 **内容**:
 
@@ -508,7 +508,7 @@
 
 ### 23. Rust 1.95 特性速查卡 🆕
 
-**文件**: [02_rust_195_features_cheatsheet.md](./02_rust_195_features_cheatsheet.md)
+**文件**: [02_rust_195_features_cheatsheet.md](02_rust_195_features_cheatsheet.md)
 
 **内容**:
 
@@ -524,7 +524,7 @@
 
 ### 24. Rust 1.96 特性速查卡 🆕
 
-**文件**: [02_rust_196_features_cheatsheet.md](./02_rust_196_features_cheatsheet.md)
+**文件**: [02_rust_196_features_cheatsheet.md](02_rust_196_features_cheatsheet.md)
 
 **内容**:
 
@@ -539,7 +539,7 @@
 
 ### 25. Rust 1.97 特性速查卡 🆕
 
-**文件**: [02_rust_197_features_cheatsheet.md](./02_rust_197_features_cheatsheet.md)
+**文件**: [02_rust_197_features_cheatsheet.md](02_rust_197_features_cheatsheet.md)
 
 **内容**:
 
@@ -551,7 +551,7 @@
 
 **适用对象**: 版本跟踪、前沿特性预览
 
-**文件**: [02_ai_ml_cheatsheet.md](./02_ai_ml_cheatsheet.md)
+**文件**: [02_ai_ml_cheatsheet.md](02_ai_ml_cheatsheet.md)
 
 **内容**:
 
@@ -789,7 +789,7 @@ use std::hint::cold_path;
 if let Some(msg) = e { cold_path(); eprintln!("error: {}", msg); }
 ```
 
-**完整速查表**: [`02_rust_195_features_cheatsheet.md`](./02_rust_195_features_cheatsheet.md) — 包含所有 1.95 新 API 与示例链接
+**完整速查表**: [`02_rust_195_features_cheatsheet.md`](02_rust_195_features_cheatsheet.md) — 包含所有 1.95 新 API 与示例链接
 
 **性能提升**: `cold_path` 优化冷分支预测, `Atomic*::update` 减少 CAS 循环样板, `push_mut` 消除二次查找。
 

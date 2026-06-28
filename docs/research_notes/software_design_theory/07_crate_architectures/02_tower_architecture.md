@@ -519,8 +519,8 @@ Tower 处于"抽象 sweet spot"——足够底层以支持任意请求-响应协
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [Tokio 异步运行时架构](./06_tokio_architecture.md)
-- [Axum Web 框架架构](./07_axum_architecture.md)
+- [Tokio 异步运行时架构](06_tokio_architecture.md)
+- [Axum Web 框架架构](07_axum_architecture.md)
 - [系统可组合性设计模式](../../../../concept/06_ecosystem/30_system_composability.md)
 
 ---

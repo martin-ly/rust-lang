@@ -1,7 +1,7 @@
 # C04 Generic Programming - Master Index (English)
 
 > **Version**: 1.0 | **Rust**: 1.93.0+ | **Last Update**: 2026-02-14
-> **Full Chinese version**: [00_MASTER_INDEX.md](./00_MASTER_INDEX.md)
+> **Full Chinese version**: [00_MASTER_INDEX.md](00_MASTER_INDEX.md)
 
 ---
 
@@ -21,7 +21,7 @@
 
 ### By Role
 
-- **Beginner**: [README](./README.md) | [Generics Basics Guide](tier_02_guides/01_泛型基础指南.md) | [Trait System Guide](tier_02_guides/02_Trait系统指南.md)
+- **Beginner**: [README](README.md) | [Generics Basics Guide](tier_02_guides/01_泛型基础指南.md) | [Trait System Guide](tier_02_guides/02_Trait系统指南.md)
 - **Intermediate**: [Code Examples](tier_02_guides/06_代码示例集合.md) | [Associated Types](tier_02_guides/03_关联类型指南.md) | [Type Erasure](tier_02_guides/04_类型擦除指南.md)
 - **Advanced**: [tier_03_references/](tier_03_references/README.md) | [tier_04_advanced/](tier_04_advanced/README.md)
 
@@ -29,8 +29,8 @@
 
 | Tier | Name | Entry |
 | :--- | :--- | :--- |
-| **Tier 1** | Foundation | [tier_01_foundations/](tier_01_foundations/) |
-| **Tier 2** | Core Guides | [tier_02_guides/](tier_02_guides/) |
+| **Tier 1** | Foundation | [tier_01_foundations/](tier_01_foundations) |
+| **Tier 2** | Core Guides | [tier_02_guides/](tier_02_guides) |
 | **Tier 3** | References | [tier_03_references/](tier_03_references/README.md) |
 | **Tier 4** | Advanced | [tier_04_advanced/](tier_04_advanced/README.md) |
 

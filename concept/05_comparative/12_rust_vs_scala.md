@@ -10,7 +10,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 对比分析 **Rust** 与 **Scala** 的设计哲学——从类型推断（Type Inference）、模式匹配（Pattern Matching）到并发模型，揭示两种语言如何在类型表达力和运行时（Runtime）表示之间做出选择。
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md) · [Generics](../02_intermediate/02_generics.md)
-> **后置概念**: [JVM Ecosystem](../06_ecosystem/03_core_crates.md) · [Functional Programming](../05_comparative/03_paradigm_matrix.md)
+> **后置概念**: [JVM Ecosystem](../06_ecosystem/03_core_crates.md) · [Functional Programming](03_paradigm_matrix.md)
 
 ---
 
@@ -21,40 +21,40 @@
 ## 📑 目录
 
 - Rust vs Scala：类型系统（Type System）的两种哲学
-  - [📑 目录](#-目录)
-  - [一、核心对比](#一核心对比)
-    - [1.1 类型系统](#11-类型系统)
+  - [📑 目录](.#-目录)
+  - [一、核心对比](.#一核心对比)
+    - [1.1 类型系统](.#11-类型系统)
     - 1.2 模式匹配（Pattern Matching）
-    - [1.3 并发模型](#13-并发模型)
-  - [二、语言特性差异](#二语言特性差异)
+    - [1.3 并发模型](.#13-并发模型)
+  - [二、语言特性差异](.#二语言特性差异)
     - 2.1 类型推断（Type Inference）
-    - [2.2 隐式与 Trait](#22-隐式与-trait)
+    - [2.2 隐式与 Trait](.#22-隐式与-trait)
     - 2.3 宏（Macro）系统
-  - [三、工程实践差异](#三工程实践差异)
-    - [3.1 构建系统](#31-构建系统)
-    - [3.2 互操作性](#32-互操作性)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、常见陷阱](#五常见陷阱)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：Rust 与 Scala 的编译错误对比](#十边界测试rust-与-scala-的编译错误对比)
-    - [10.1 边界测试：Scala 的隐式转换与 Rust 的显式 trait（编译错误）](#101-边界测试scala-的隐式转换与-rust-的显式-trait编译错误)
-    - [10.2 边界测试：Scala 的 null 与 Rust 的 Option（编译错误）](#102-边界测试scala-的-null-与-rust-的-option编译错误)
-    - [10.3 边界测试：Scala 的隐式转换与 Rust 的显式 `From`/`Into`（编译错误）](#103-边界测试scala-的隐式转换与-rust-的显式-frominto编译错误)
+  - [三、工程实践差异](.#三工程实践差异)
+    - [3.1 构建系统](.#31-构建系统)
+    - [3.2 互操作性](.#32-互操作性)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、常见陷阱](.#五常见陷阱)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：Rust 与 Scala 的编译错误对比](.#十边界测试rust-与-scala-的编译错误对比)
+    - [10.1 边界测试：Scala 的隐式转换与 Rust 的显式 trait（编译错误）](.#101-边界测试scala-的隐式转换与-rust-的显式-trait编译错误)
+    - [10.2 边界测试：Scala 的 null 与 Rust 的 Option（编译错误）](.#102-边界测试scala-的-null-与-rust-的-option编译错误)
+    - [10.3 边界测试：Scala 的隐式转换与 Rust 的显式 `From`/`Into`（编译错误）](.#103-边界测试scala-的隐式转换与-rust-的显式-frominto编译错误)
     - 10.4 边界测试：Scala 的 actor 模型与 Rust 的 async/channel 的并发模型差异（运行时（Runtime）死锁）
-    - [10.3 边界测试：Scala 的隐式转换与 Rust 的显式类型安全（编译错误）](#103-边界测试scala-的隐式转换与-rust-的显式类型安全编译错误)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：Scala 的"混合面向对象与函数式"与 Rust 的" mostly 函数式"有什么设计哲学差异？（理解层）](#测验-1scala-的混合面向对象与函数式与-rust-的-mostly-函数式有什么设计哲学差异理解层)
-    - [测验 2：Scala 的隐式参数（Implicits）与 Rust 的 trait bounds 在类型类机制上有什么区别？（理解层）](#测验-2scala-的隐式参数implicits与-rust-的-trait-bounds-在类型类机制上有什么区别理解层)
-    - [测验 3：Scala 运行在 JVM 上，Rust 编译为原生。这对 GC 和实时性有什么影响？（理解层）](#测验-3scala-运行在-jvm-上rust-编译为原生这对-gc-和实时性有什么影响理解层)
+    - [10.3 边界测试：Scala 的隐式转换与 Rust 的显式类型安全（编译错误）](.#103-边界测试scala-的隐式转换与-rust-的显式类型安全编译错误)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：Scala 的"混合面向对象与函数式"与 Rust 的" mostly 函数式"有什么设计哲学差异？（理解层）](.#测验-1scala-的混合面向对象与函数式与-rust-的-mostly-函数式有什么设计哲学差异理解层)
+    - [测验 2：Scala 的隐式参数（Implicits）与 Rust 的 trait bounds 在类型类机制上有什么区别？（理解层）](.#测验-2scala-的隐式参数implicits与-rust-的-trait-bounds-在类型类机制上有什么区别理解层)
+    - [测验 3：Scala 运行在 JVM 上，Rust 编译为原生。这对 GC 和实时性有什么影响？（理解层）](.#测验-3scala-运行在-jvm-上rust-编译为原生这对-gc-和实时性有什么影响理解层)
     - [测验 4：Scala 的 case class 与 Rust 的 `#[derive(Debug, Clone)]` struct 有什么对应关系？（理解层）](#测验-4scala-的-case-class-与-rust-的-derivedebug-clone-struct-有什么对应关系理解层)
-    - [测验 5：为什么 Rust 的类型推断比 Scala 更保守？（理解层）](#测验-5为什么-rust-的类型推断比-scala-更保守理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+    - [测验 5：为什么 Rust 的类型推断比 Scala 更保守？（理解层）](.#测验-5为什么-rust-的类型推断比-scala-更保守理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 

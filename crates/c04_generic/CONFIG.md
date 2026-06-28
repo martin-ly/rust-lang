@@ -2,22 +2,22 @@
 
 ## 📊 目录
 
-- [项目配置文件说明](#项目配置文件说明)
-  - [📊 目录](#-目录)
-  - [配置文件列表](#配置文件列表)
-    - [1. Cargo.toml](#1-cargotoml)
-    - [2. .gitignore](#2-gitignore)
-    - [3. rustfmt.toml](#3-rustfmttoml)
-    - [4. .clippy.toml](#4-clippytoml)
-    - [5. build.bat (Windows)](#5-buildbat-windows)
-    - [6. build.sh (Linux/macOS)](#6-buildsh-linuxmacos)
-  - [使用说明](#使用说明)
-    - [Windows 用户](#windows-用户)
-    - [Linux/macOS 用户](#linuxmacos-用户)
-  - [配置说明](#配置说明)
-    - [代码格式化 (rustfmt.toml)](#代码格式化-rustfmttoml)
-    - [代码质量 (.clippy.toml)](#代码质量-clippytoml)
-  - [最佳实践](#最佳实践)
+- [项目配置文件说明](.#项目配置文件说明)
+  - [📊 目录](.#-目录)
+  - [配置文件列表](.#配置文件列表)
+    - [1. Cargo.toml](.#1-cargotoml)
+    - [2. .gitignore](.#2-gitignore)
+    - [3. rustfmt.toml](.#3-rustfmttoml)
+    - [4. .clippy.toml](.#4-clippytoml)
+    - [5. build.bat (Windows)](.#5-buildbat-windows)
+    - [6. build.sh (Linux/macOS)](.#6-buildsh-linuxmacos)
+  - [使用说明](.#使用说明)
+    - [Windows 用户](.#windows-用户)
+    - [Linux/macOS 用户](.#linuxmacos-用户)
+  - [配置说明](.#配置说明)
+    - [代码格式化 (rustfmt.toml)](.#代码格式化-rustfmttoml)
+    - [代码质量 (.clippy.toml)](.#代码质量-clippytoml)
+  - [最佳实践](.#最佳实践)
 
 ## 配置文件列表
 

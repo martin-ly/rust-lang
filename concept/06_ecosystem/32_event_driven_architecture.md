@@ -15,11 +15,11 @@
 > **双维定位**: P×Cre — 设计事件驱动架构
 > **定位**: 从系统架构视角分析 Rust 实现事件驱动架构的核心模式——类型安全事件总线、消息队列集成、幂等处理、背压传播——揭示所有权（Ownership）系统与不可变事件流的深层契合。
 > **前置概念**: [Async](../03_advanced/02_async.md) ·
-> [微服务架构模式](./31_microservice_patterns.md) ·
+> [微服务架构模式](31_microservice_patterns.md) ·
 > [泛型（Generics）](../02_intermediate/02_generics.md) ·
 > [Trait](../02_intermediate/01_traits.md)
-> **后置概念**: [分布式系统](./18_distributed_systems.md) ·
-> [云原生](./24_cloud_native.md)
+> **后置概念**: [分布式系统](18_distributed_systems.md) ·
+> [云原生](24_cloud_native.md)
 >
 > **来源**: [tokio](https://docs.rs/tokio/) · [lapin](https://docs.rs/lapin/) · [rdkafka](https://docs.rs/rdkafka/)
 ---
@@ -33,48 +33,48 @@
 
 ## 📑 目录
 
-- [事件驱动架构 (Event-Driven Architecture)](#事件驱动架构-event-driven-architecture)
-  - [📑 目录](#-目录)
-  - [一、引言](#一引言)
-  - [二、发布-订阅](#二发布-订阅)
-    - [2.1 tokio::sync::broadcast](#21-tokiosyncbroadcast)
-    - [2.2 bus crate](#22-bus-crate)
-    - [2.3 Redis Pub/Sub](#23-redis-pubsub)
-  - [三、事件总线](#三事件总线)
-  - [四、消息队列](#四消息队列)
-    - [4.1 lapin (AMQP/RabbitMQ)](#41-lapin-amqprabbitmq)
-    - [4.2 rdkafka (Apache Kafka)](#42-rdkafka-apache-kafka)
-    - [4.3 nats](#43-nats)
-    - [4.4 消息保证对比](#44-消息保证对比)
-  - [五、事件处理器](#五事件处理器)
-    - [5.1 幂等性保证](#51-幂等性保证)
-    - [5.2 至少一次与恰好一次语义](#52-至少一次与恰好一次语义)
-    - [5.3 去重机制](#53-去重机制)
-  - [六、Saga 编排器](#六saga-编排器)
-  - [七、Reactive Streams](#七reactive-streams)
-  - [八、综合示例](#八综合示例)
-  - [九、所有权交互](#九所有权交互)
-  - [十、反命题与边界](#十反命题与边界)
-  - [十一、常见陷阱](#十一常见陷阱)
-  - [十二、来源](#十二来源)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：事件驱动架构的编译错误](#十边界测试事件驱动架构的编译错误)
-    - [10.1 边界测试：事件类型的反序列化安全（运行时错误）](#101-边界测试事件类型的反序列化安全运行时错误)
-    - [10.2 边界测试：事件处理器的 `Send` 约束（编译错误）](#102-边界测试事件处理器的-send-约束编译错误)
-    - [10.3 边界测试：事件总线的类型擦除与向下转型失败（运行时 panic）](#103-边界测试事件总线的类型擦除与向下转型失败运行时-panic)
-    - [10.4 边界测试：事件处理顺序与生命周期管理（运行时悬垂引用）](#104-边界测试事件处理顺序与生命周期管理运行时悬垂引用)
-    - [10.3 边界测试：事件溯源的序列化版本兼容（运行时反序列化失败）](#103-边界测试事件溯源的序列化版本兼容运行时反序列化失败)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：事件驱动架构（EDA）与请求-响应架构的核心区别是什么？（理解层）](#测验-1事件驱动架构eda与请求-响应架构的核心区别是什么理解层)
-    - [测验 2：`tokio::sync::broadcast` 与 `tokio::sync::mpsc` 在事件分发上有什么区别？（理解层）](#测验-2tokiosyncbroadcast-与-tokiosyncmpsc-在事件分发上有什么区别理解层)
-    - [测验 3：事件溯源（Event Sourcing）与 CQRS 有什么关系？（理解层）](#测验-3事件溯源event-sourcing与-cqrs-有什么关系理解层)
-    - [测验 4：在 Rust 中实现 Saga 模式时，如何补偿（compensate）已完成的本地事务？（理解层）](#测验-4在-rust-中实现-saga-模式时如何补偿compensate已完成的本地事务理解层)
-    - [测验 5：为什么事件驱动系统中需要"事件 schema 治理"（Schema Governance）？（理解层）](#测验-5为什么事件驱动系统中需要事件-schema-治理schema-governance理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [事件驱动架构 (Event-Driven Architecture)](.#事件驱动架构-event-driven-architecture)
+  - [📑 目录](.#-目录)
+  - [一、引言](.#一引言)
+  - [二、发布-订阅](.#二发布-订阅)
+    - [2.1 tokio::sync::broadcast](.#21-tokiosyncbroadcast)
+    - [2.2 bus crate](.#22-bus-crate)
+    - [2.3 Redis Pub/Sub](.#23-redis-pubsub)
+  - [三、事件总线](.#三事件总线)
+  - [四、消息队列](.#四消息队列)
+    - [4.1 lapin (AMQP/RabbitMQ)](.#41-lapin-amqprabbitmq)
+    - [4.2 rdkafka (Apache Kafka)](.#42-rdkafka-apache-kafka)
+    - [4.3 nats](.#43-nats)
+    - [4.4 消息保证对比](.#44-消息保证对比)
+  - [五、事件处理器](.#五事件处理器)
+    - [5.1 幂等性保证](.#51-幂等性保证)
+    - [5.2 至少一次与恰好一次语义](.#52-至少一次与恰好一次语义)
+    - [5.3 去重机制](.#53-去重机制)
+  - [六、Saga 编排器](.#六saga-编排器)
+  - [七、Reactive Streams](.#七reactive-streams)
+  - [八、综合示例](.#八综合示例)
+  - [九、所有权交互](.#九所有权交互)
+  - [十、反命题与边界](.#十反命题与边界)
+  - [十一、常见陷阱](.#十一常见陷阱)
+  - [十二、来源](.#十二来源)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：事件驱动架构的编译错误](.#十边界测试事件驱动架构的编译错误)
+    - [10.1 边界测试：事件类型的反序列化安全（运行时错误）](.#101-边界测试事件类型的反序列化安全运行时错误)
+    - [10.2 边界测试：事件处理器的 `Send` 约束（编译错误）](.#102-边界测试事件处理器的-send-约束编译错误)
+    - [10.3 边界测试：事件总线的类型擦除与向下转型失败（运行时 panic）](.#103-边界测试事件总线的类型擦除与向下转型失败运行时-panic)
+    - [10.4 边界测试：事件处理顺序与生命周期管理（运行时悬垂引用）](.#104-边界测试事件处理顺序与生命周期管理运行时悬垂引用)
+    - [10.3 边界测试：事件溯源的序列化版本兼容（运行时反序列化失败）](.#103-边界测试事件溯源的序列化版本兼容运行时反序列化失败)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：事件驱动架构（EDA）与请求-响应架构的核心区别是什么？（理解层）](.#测验-1事件驱动架构eda与请求-响应架构的核心区别是什么理解层)
+    - [测验 2：`tokio::sync::broadcast` 与 `tokio::sync::mpsc` 在事件分发上有什么区别？（理解层）](.#测验-2tokiosyncbroadcast-与-tokiosyncmpsc-在事件分发上有什么区别理解层)
+    - [测验 3：事件溯源（Event Sourcing）与 CQRS 有什么关系？（理解层）](.#测验-3事件溯源event-sourcing与-cqrs-有什么关系理解层)
+    - [测验 4：在 Rust 中实现 Saga 模式时，如何补偿（compensate）已完成的本地事务？（理解层）](.#测验-4在-rust-中实现-saga-模式时如何补偿compensate已完成的本地事务理解层)
+    - [测验 5：为什么事件驱动系统中需要"事件 schema 治理"（Schema Governance）？（理解层）](.#测验-5为什么事件驱动系统中需要事件-schema-治理schema-governance理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -736,10 +736,10 @@ async fn broadcast_with_arc(event: DomainEvent, subscribers: Vec<mpsc::Sender<Ar
 
 ## 相关概念
 
-- [微服务架构模式](./31_microservice_patterns.md) — Saga、CQRS、熔断器、API 网关
-- [分布式系统](./18_distributed_systems.md) — gRPC、Raft、Actor 模型
-- [云原生](./24_cloud_native.md) — Kubernetes、容器化、可观测性
-- [系统设计原则](./05_system_design_principles.md) — 安全-性能-可维护性帕累托前沿
+- [微服务架构模式](31_microservice_patterns.md) — Saga、CQRS、熔断器、API 网关
+- [分布式系统](18_distributed_systems.md) — gRPC、Raft、Actor 模型
+- [云原生](24_cloud_native.md) — Kubernetes、容器化、可观测性
+- [系统设计原则](05_system_design_principles.md) — 安全-性能-可维护性帕累托前沿
 - [Async](../03_advanced/02_async.md) — async/await、并发模型
 - [泛型](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md) — 类型组合、抽象机制
 

@@ -31,7 +31,7 @@
 > [Ownership](../01_foundation/01_ownership.md) ·
 > [Type System](../01_foundation/04_type_system.md)
 >
-> **后置概念**: [Safety Tags](./08_safety_tags_preview.md)
+> **后置概念**: [Safety Tags](08_safety_tags_preview.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -45,39 +45,39 @@
 
 ## 📑 目录
 
-- [Unsafe Fields 预研：字段级安全边界的精确标注](#unsafe-fields-预研字段级安全边界的精确标注)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 问题：unsafe 块的过度扩张](#11-问题unsafe-块的过度扩张)
-    - [1.2 `unsafe` 字段提案](#12-unsafe-字段提案)
-    - [1.3 与现有 unsafe 模型的对比](#13-与现有-unsafe-模型的对比)
-  - [二、技术细节](#二技术细节)
-    - [2.1 语法与语义](#21-语法与语义)
-    - [2.2 不变量契约](#22-不变量契约)
-    - [2.3 与 Safety Tags 的协同](#23-与-safety-tags-的协同)
-  - [三、使用模式](#三使用模式)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、演进路线](#五演进路线)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：Unsafe Fields 预览的编译错误](#十边界测试unsafe-fields-预览的编译错误)
-    - [10.1 边界测试：unsafe 字段的显式访问要求（编译错误）](#101-边界测试unsafe-字段的显式访问要求编译错误)
-    - [10.2 边界测试：unsafe 字段与 Drop 的交互（运行时 UB）](#102-边界测试unsafe-字段与-drop-的交互运行时-ub)
+- [Unsafe Fields 预研：字段级安全边界的精确标注](.#unsafe-fields-预研字段级安全边界的精确标注)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 问题：unsafe 块的过度扩张](.#11-问题unsafe-块的过度扩张)
+    - [1.2 `unsafe` 字段提案](.#12-unsafe-字段提案)
+    - [1.3 与现有 unsafe 模型的对比](.#13-与现有-unsafe-模型的对比)
+  - [二、技术细节](.#二技术细节)
+    - [2.1 语法与语义](.#21-语法与语义)
+    - [2.2 不变量契约](.#22-不变量契约)
+    - [2.3 与 Safety Tags 的协同](.#23-与-safety-tags-的协同)
+  - [三、使用模式](.#三使用模式)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、演进路线](.#五演进路线)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：Unsafe Fields 预览的编译错误](.#十边界测试unsafe-fields-预览的编译错误)
+    - [10.1 边界测试：unsafe 字段的显式访问要求（编译错误）](.#101-边界测试unsafe-字段的显式访问要求编译错误)
+    - [10.2 边界测试：unsafe 字段与 Drop 的交互（运行时 UB）](.#102-边界测试unsafe-字段与-drop-的交互运行时-ub)
     - [10.3 边界测试：unsafe 字段与 `#[repr(C)]` 的交互（编译错误）](#103-边界测试unsafe-字段与-reprc-的交互编译错误)
-    - [10.4 边界测试：unsafe 字段与不变式的文档化（逻辑错误）](#104-边界测试unsafe-字段与不变式的文档化逻辑错误)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：`unsafe` 字段提案解决的是什么问题？（理解层）](#测验-1unsafe-字段提案解决的是什么问题理解层)
-    - [测验 2：`unsafe` 字段与 `unsafe` 函数在语义上有什么相似之处？（理解层）](#测验-2unsafe-字段与-unsafe-函数在语义上有什么相似之处理解层)
-    - [测验 3：这个特性如何帮助封装 unsafe 代码？（理解层）](#测验-3这个特性如何帮助封装-unsafe-代码理解层)
-    - [测验 4：`unsafe` 字段与 `unsafe impl` 有什么关系？（理解层）](#测验-4unsafe-字段与-unsafe-impl-有什么关系理解层)
-    - [测验 5：目前这个特性的主要反对意见是什么？（理解层）](#测验-5目前这个特性的主要反对意见是什么理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+    - [10.4 边界测试：unsafe 字段与不变式的文档化（逻辑错误）](.#104-边界测试unsafe-字段与不变式的文档化逻辑错误)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：`unsafe` 字段提案解决的是什么问题？（理解层）](.#测验-1unsafe-字段提案解决的是什么问题理解层)
+    - [测验 2：`unsafe` 字段与 `unsafe` 函数在语义上有什么相似之处？（理解层）](.#测验-2unsafe-字段与-unsafe-函数在语义上有什么相似之处理解层)
+    - [测验 3：这个特性如何帮助封装 unsafe 代码？（理解层）](.#测验-3这个特性如何帮助封装-unsafe-代码理解层)
+    - [测验 4：`unsafe` 字段与 `unsafe impl` 有什么关系？（理解层）](.#测验-4unsafe-字段与-unsafe-impl-有什么关系理解层)
+    - [测验 5：目前这个特性的主要反对意见是什么？（理解层）](.#测验-5目前这个特性的主要反对意见是什么理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -251,7 +251,7 @@ graph LR
 
 > **认知功能**: 此图展示 unsafe fields 与 Safety Tags 的**互补关系**——unsafe fields 解决"哪些代码需要审查"的问题，Safety Tags 解决"如何自动验证"的问题。
 > **关键洞察**: unsafe fields 是 Safety Tags 的**前置基础设施**——没有字段级标记，自动化工具难以精确关联契约与代码位置。
-> [来源: [Safety Tags Preview](./08_safety_tags_preview.md)]
+> [来源: [Safety Tags Preview](08_safety_tags_preview.md)]
 
 ---
 
@@ -389,7 +389,7 @@ graph TD
 | [Rust RFC 3458](https://github.com/rust-lang/rfcs/pull/3458) | ✅ 一级 | 官方 RFC，unsafe fields 设计 |
 | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | ✅ 一级 | unsafe Rust 权威指南 |
 | [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) | ✅ 一级 | unsafe 代码规范 |
-| [Safety Tags Preview](./08_safety_tags_preview.md) | ✅ 一级 | 关联概念：机器可读安全契约 |
+| [Safety Tags Preview](08_safety_tags_preview.md) | ✅ 一级 | 关联概念：机器可读安全契约 |
 | [Rust Internals Forum](https://internals.rust-lang.org/) | ⚠️ 二级 | 设计讨论 |
 
 ---
@@ -399,8 +399,8 @@ graph TD
 - [Unsafe](../03_advanced/03_unsafe.md) — unsafe Rust 与内存安全（Memory Safety）
 - [Ownership](../01_foundation/01_ownership.md) — 所有权（Ownership）与借用（Borrowing）
 - [Type System](../01_foundation/04_type_system.md) — Rust 类型系统（Type System）
-- [Safety Tags](./08_safety_tags_preview.md) — 安全契约机器可读标注
-- [Version Tracking](./05_rust_version_tracking.md) — Rust 版本特性演进
+- [Safety Tags](08_safety_tags_preview.md) — 安全契约机器可读标注
+- [Version Tracking](05_rust_version_tracking.md) — Rust 版本特性演进
 
 ---
 

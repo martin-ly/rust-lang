@@ -18,40 +18,40 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [🔬 类型理论研究 {#-类型理论研究}](#-类型理论研究--类型理论研究)
-  - [📊 目录 {#-目录}](#-目录--目录)
-  - [完备性声明](#完备性声明)
-  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
-  - [📚 研究主题 {#-研究主题}](#-研究主题--研究主题)
-    - [1. 类型系统基础](#1-类型系统基础)
-    - [1b. 类型构造能力](#1b-类型构造能力)
-    - [2. Trait 系统形式化](#2-trait-系统形式化)
-    - [3. 生命周期形式化](#3-生命周期形式化)
-    - [4. 高级类型特性](#4-高级类型特性)
-    - [5. 型变理论](#5-型变理论)
-  - [形式化论证汇总](#形式化论证汇总)
-  - [公理-定理形式化索引](#公理-定理形式化索引)
-  - [📝 研究笔记 {#-研究笔记}](#-研究笔记--研究笔记)
-    - [已完成 ✅ {#已完成-}](#已完成--已完成-)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
-    - [核心文档](#核心文档)
-    - [代码实现](#代码实现)
-    - [学术资源](#学术资源)
-  - [📖 研究方法 {#-研究方法}](#-研究方法--研究方法)
-    - [类型理论工具](#类型理论工具)
-    - [类型理论方法](#类型理论方法)
-    - [证明策略](#证明策略)
-  - [🚀 快速开始 {#-快速开始}](#-快速开始--快速开始)
-    - [创建新的研究笔记](#创建新的研究笔记)
-    - [研究流程](#研究流程)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
+- [🔬 类型理论研究 {#-类型理论研究}](.#-类型理论研究--类型理论研究)
+  - [📊 目录 {#-目录}](.#-目录--目录)
+  - [完备性声明](.#完备性声明)
+  - [🎯 研究目标 {#-研究目标}](.#-研究目标--研究目标)
+  - [📚 研究主题 {#-研究主题}](.#-研究主题--研究主题)
+    - [1. 类型系统基础](.#1-类型系统基础)
+    - [1b. 类型构造能力](.#1b-类型构造能力)
+    - [2. Trait 系统形式化](.#2-trait-系统形式化)
+    - [3. 生命周期形式化](.#3-生命周期形式化)
+    - [4. 高级类型特性](.#4-高级类型特性)
+    - [5. 型变理论](.#5-型变理论)
+  - [形式化论证汇总](.#形式化论证汇总)
+  - [公理-定理形式化索引](.#公理-定理形式化索引)
+  - [📝 研究笔记 {#-研究笔记}](.#-研究笔记--研究笔记)
+    - [已完成 ✅ {#已完成-}](.#已完成--已完成-)
+  - [🔗 相关资源 {#-相关资源}](.#-相关资源--相关资源)
+    - [核心文档](.#核心文档)
+    - [代码实现](.#代码实现)
+    - [学术资源](.#学术资源)
+  - [📖 研究方法 {#-研究方法}](.#-研究方法--研究方法)
+    - [类型理论工具](.#类型理论工具)
+    - [类型理论方法](.#类型理论方法)
+    - [证明策略](.#证明策略)
+  - [🚀 快速开始 {#-快速开始}](.#-快速开始--快速开始)
+    - [创建新的研究笔记](.#创建新的研究笔记)
+    - [研究流程](.#研究流程)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
 <a id="最后更新-2026-03-14-rust-194-深度整合"></a>
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [权威来源索引](#权威来源索引)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [权威来源索引](.#权威来源索引)
 
 ---
 
@@ -143,7 +143,7 @@
 - 生命周期推断算法如何形式化？
 - 生命周期与类型系统的关系如何？
 
-**相关笔记**: [10_lifetime_formalization.md](./10_lifetime_formalization.md)
+**相关笔记**: [10_lifetime_formalization.md](10_lifetime_formalization.md)
 
 **状态**: ✅ 已完成 (100%)
 
@@ -175,7 +175,7 @@
 - Rust 的型变规则如何推导？
 - 型变如何保证类型安全？
 
-**相关笔记**: [10_variance_theory.md](./10_variance_theory.md)
+**相关笔记**: [10_variance_theory.md](10_variance_theory.md)
 
 **状态**: ✅ 已完成 (100%)
 
@@ -211,9 +211,9 @@
 | [type_system_foundations](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | T1–T5、LUB-T1、COP-T1、OFFSET-T1、ASC-T1、BOT-T1、NEWTYPE-T1、DEREF-NULL1 | 良型不卡住、求值保型 | 类型推断歧义 |
 | [construction_capability](../../../archive/research_notes_2026_06_25/type_theory/10_construction_capability.md) | Def TCON1、TCON-T1、TCON-L1、TCON-C1 | 类型构造能力、确定性判定树 | - |
 | [trait_system_formalization](../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) | 对象安全、impl 解析、COH-T1、RPIT-T1、ASYNC-T1、NEG-T1、DYN-T1、TRAIT-GAT1、SPEC-T1 | dyn | 孤儿放宽（倡议） |
-| [lifetime_formalization](./10_lifetime_formalization.md) | outlives、T2 引用有效性 | 区域类型、见 formal_methods | 与型变组合 |
+| [lifetime_formalization](10_lifetime_formalization.md) | outlives、T2 引用有效性 | 区域类型、见 formal_methods | 与型变组合 |
 | [advanced_types](../../../archive/research_notes_2026_06_25/type_theory/10_advanced_types.md) | GAT、const 泛型、PhantomData、CONST-EVAL-T1、CONST-MUT1、EXIST1 | 关联类型、类型级常量 | existential 完整规则 |
-| [variance_theory](./10_variance_theory.md) | T1–T4、VAR-COM-T1/C1 | 协变/逆变/不变、组合传递 | 三元组合已补全 |
+| [variance_theory](10_variance_theory.md) | T1–T4、VAR-COM-T1/C1 | 协变/逆变/不变、组合传递 | 三元组合已补全 |
 
 本索引与 [FORMAL_PROOF_SYSTEM_GUIDE](../../../archive/research_notes_2026_06_25/10_formal_proof_system_guide.md)、[PROOF_INDEX](../../../archive/research_notes_2026_06_25/10_proof_index.md) 衔接。
 
@@ -230,9 +230,9 @@
 - [x] [类型系统基础](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) - 100%
 - [x] [类型构造能力](../../../archive/research_notes_2026_06_25/type_theory/10_construction_capability.md) - Def TCON1、矩阵、决策树
 - [x] [Trait 系统形式化](../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) - 100%
-- [x] [生命周期形式化](./10_lifetime_formalization.md) - 100%
+- [x] [生命周期形式化](10_lifetime_formalization.md) - 100%
 - [x] [高级类型特性](../../../archive/research_notes_2026_06_25/type_theory/10_advanced_types.md) - 100%
-- [x] [型变理论](./10_variance_theory.md) - 100%
+- [x] [型变理论](10_variance_theory.md) - 100%
 
 ---
 

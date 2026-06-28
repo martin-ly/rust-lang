@@ -10,34 +10,34 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [Miri 使用指南](#miri-使用指南)
-  - [目录](#目录)
-  - [什么是 Miri](#什么是-miri)
-  - [安装 Miri](#安装-miri)
-  - [运行 Miri 测试](#运行-miri-测试)
-    - [使用脚本运行](#使用脚本运行)
-    - [手动运行](#手动运行)
-  - [Tree Borrows vs Stacked Borrows](#tree-borrows-vs-stacked-borrows)
-    - [Stacked Borrows (默认)](#stacked-borrows-默认)
-    - [Tree Borrows (推荐)](#tree-borrows-推荐)
-    - [关键区别示例](#关键区别示例)
-  - [配置 Miri](#配置-miri)
-    - [项目配置](#项目配置)
-    - [Miri 环境变量](#miri-环境变量)
-    - [常用 Miri 选项](#常用-miri-选项)
-  - [常见错误类型](#常见错误类型)
-    - [Use-after-free](#use-after-free)
-    - [数据竞争](#数据竞争)
-    - [越界访问](#越界访问)
-    - [未初始化内存](#未初始化内存)
-  - [Miri 测试结构](#miri-测试结构)
-    - [测试文件位置](#测试文件位置)
-    - [测试模块声明](#测试模块声明)
-    - [测试组织](#测试组织)
-    - [标记 Miri 专用测试](#标记-miri-专用测试)
-  - [最佳实践](#最佳实践)
-  - [更多资源](#更多资源)
-  - [权威来源索引](#权威来源索引)
+- [Miri 使用指南](.#miri-使用指南)
+  - [目录](.#目录)
+  - [什么是 Miri](.#什么是-miri)
+  - [安装 Miri](.#安装-miri)
+  - [运行 Miri 测试](.#运行-miri-测试)
+    - [使用脚本运行](.#使用脚本运行)
+    - [手动运行](.#手动运行)
+  - [Tree Borrows vs Stacked Borrows](.#tree-borrows-vs-stacked-borrows)
+    - [Stacked Borrows (默认)](.#stacked-borrows-默认)
+    - [Tree Borrows (推荐)](.#tree-borrows-推荐)
+    - [关键区别示例](.#关键区别示例)
+  - [配置 Miri](.#配置-miri)
+    - [项目配置](.#项目配置)
+    - [Miri 环境变量](.#miri-环境变量)
+    - [常用 Miri 选项](.#常用-miri-选项)
+  - [常见错误类型](.#常见错误类型)
+    - [Use-after-free](.#use-after-free)
+    - [数据竞争](.#数据竞争)
+    - [越界访问](.#越界访问)
+    - [未初始化内存](.#未初始化内存)
+  - [Miri 测试结构](.#miri-测试结构)
+    - [测试文件位置](.#测试文件位置)
+    - [测试模块声明](.#测试模块声明)
+    - [测试组织](.#测试组织)
+    - [标记 Miri 专用测试](.#标记-miri-专用测试)
+  - [最佳实践](.#最佳实践)
+  - [更多资源](.#更多资源)
+  - [权威来源索引](.#权威来源索引)
 
 ## 什么是 Miri
 >
@@ -409,7 +409,7 @@ mod non_miri_tests {
 
 ---
 
-- [README](./README.md)
+- [README](README.md)
 
 ---
 

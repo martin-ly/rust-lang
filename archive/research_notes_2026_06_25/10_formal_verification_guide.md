@@ -16,46 +16,46 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [形式化工具验证指南](#形式化工具验证指南)
-  - [📑 目录](#-目录)
-  - [🎯 概述 {#-概述}](#-概述--概述)
-    - [验证目标](#验证目标)
-  - [形式化论证（验证框架）](#形式化论证验证框架)
-  - [🛠️ 工具选择 {#️-工具选择}](#️-工具选择-️-工具选择)
-    - [Coq](#coq)
-    - [Isabelle/HOL](#isabellehol)
-  - [📚 验证准备工作 {#-验证准备工作}](#-验证准备工作--验证准备工作)
-    - [1. 环境准备](#1-环境准备)
-    - [2. 理论准备](#2-理论准备)
-    - [3. 验证框架设计](#3-验证框架设计)
-  - [🔬 验证实施步骤 {#-验证实施步骤}](#-验证实施步骤--验证实施步骤)
-    - [步骤 1: 所有权模型验证](#步骤-1-所有权模型验证)
-    - [步骤 2: 借用检查器验证](#步骤-2-借用检查器验证)
-    - [步骤 3: 生命周期验证](#步骤-3-生命周期验证)
-    - [步骤 4: 类型系统验证](#步骤-4-类型系统验证)
-    - [步骤 5: 异步状态机验证](#步骤-5-异步状态机验证)
-    - [步骤 6: Pin 与自引用验证](#步骤-6-pin-与自引用验证)
-  - [📋 验证任务清单 {#-验证任务清单}](#-验证任务清单--验证任务清单)
-    - [所有权模型验证](#所有权模型验证)
-    - [借用检查器验证](#借用检查器验证)
-    - [生命周期验证](#生命周期验证)
-    - [类型系统验证](#类型系统验证)
-    - [异步状态机验证](#异步状态机验证)
-    - [Pin 与自引用验证](#pin-与自引用验证)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
-    - [学习资源](#学习资源)
-    - [相关项目](#相关项目)
-    - [工具链扩展任务（Rust → 证明助手）](#工具链扩展任务rust--证明助手)
-    - [工具资源](#工具资源)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [形式化工具验证指南](.#形式化工具验证指南)
+  - [📑 目录](.#-目录)
+  - [🎯 概述 {#-概述}](.#-概述--概述)
+    - [验证目标](.#验证目标)
+  - [形式化论证（验证框架）](.#形式化论证验证框架)
+  - [🛠️ 工具选择 {#️-工具选择}](.#️-工具选择-️-工具选择)
+    - [Coq](.#coq)
+    - [Isabelle/HOL](.#isabellehol)
+  - [📚 验证准备工作 {#-验证准备工作}](.#-验证准备工作--验证准备工作)
+    - [1. 环境准备](.#1-环境准备)
+    - [2. 理论准备](.#2-理论准备)
+    - [3. 验证框架设计](.#3-验证框架设计)
+  - [🔬 验证实施步骤 {#-验证实施步骤}](.#-验证实施步骤--验证实施步骤)
+    - [步骤 1: 所有权模型验证](.#步骤-1-所有权模型验证)
+    - [步骤 2: 借用检查器验证](.#步骤-2-借用检查器验证)
+    - [步骤 3: 生命周期验证](.#步骤-3-生命周期验证)
+    - [步骤 4: 类型系统验证](.#步骤-4-类型系统验证)
+    - [步骤 5: 异步状态机验证](.#步骤-5-异步状态机验证)
+    - [步骤 6: Pin 与自引用验证](.#步骤-6-pin-与自引用验证)
+  - [📋 验证任务清单 {#-验证任务清单}](.#-验证任务清单--验证任务清单)
+    - [所有权模型验证](.#所有权模型验证)
+    - [借用检查器验证](.#借用检查器验证)
+    - [生命周期验证](.#生命周期验证)
+    - [类型系统验证](.#类型系统验证)
+    - [异步状态机验证](.#异步状态机验证)
+    - [Pin 与自引用验证](.#pin-与自引用验证)
+  - [🔗 相关资源 {#-相关资源}](.#-相关资源--相关资源)
+    - [学习资源](.#学习资源)
+    - [相关项目](.#相关项目)
+    - [工具链扩展任务（Rust → 证明助手）](.#工具链扩展任务rust--证明助手)
+    - [工具资源](.#工具资源)
+  - [🆕 Rust 1.94 更新](.#-rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 🎯 概述 {#-概述}
 >
@@ -65,7 +65,7 @@
 
 **文档状态**：本指南结构与全部六类验证的 Coq/Isabelle 框架、任务清单已完整；验证任务清单中的方框供实施时勾选。
 
-**Coq 证明骨架**：所有权唯一性（T-OW2）的 Coq 定理骨架已创建，见 [coq_skeleton/OWNERSHIP_UNIQUENESS.v](./coq_skeleton/OWNERSHIP_UNIQUENESS.v)、[COQ_ISABELLE_PROOF_SCAFFOLDING](./10_coq_isabelle_proof_scaffolding.md)。
+**Coq 证明骨架**：所有权唯一性（T-OW2）的 Coq 定理骨架已创建，见 [coq_skeleton/OWNERSHIP_UNIQUENESS.v](coq_skeleton/OWNERSHIP_UNIQUENESS.v)、[COQ_ISABELLE_PROOF_SCAFFOLDING](10_coq_isabelle_proof_scaffolding.md)。
 
 ### 验证目标
 
@@ -90,7 +90,7 @@
 
 **Axiom FV1**：形式化验证不能替代定理正确性论证，但可排除证明中的隐含错误；验证通过 ⇒ 证明无语法/逻辑遗漏。
 
-**定理 FV-T1（验证与定理衔接）**：若 $V$ 验证 $T$，则 $T$ 的证明在验证工具的逻辑框架内成立；与 [PROOF_INDEX](./10_proof_index.md) 的手工证明互为补充。
+**定理 FV-T1（验证与定理衔接）**：若 $V$ 验证 $T$，则 $T$ 的证明在验证工具的逻辑框架内成立；与 [PROOF_INDEX](10_proof_index.md) 的手工证明互为补充。
 
 *证明*：由 Def FV1；机器验证保证证明结构正确；手工证明提供直觉与文档；二者一致则论证完备。∎
 
@@ -98,7 +98,7 @@
 
 *证明*：由 Def FV1 与验证目标；六类对应 ownership_model、borrow_checker_proof、lifetime_formalization、type_system_foundations、async_state_machine、pin_self_referential。∎
 
-**推论 FV-C1**：验证任务清单完成 ⇔ 六类均有机器可检查证明；与 [ARGUMENTATION_GAP_INDEX](./10_argumentation_gap_index.md) 论证缺口追踪衔接。
+**推论 FV-C1**：验证任务清单完成 ⇔ 六类均有机器可检查证明；与 [ARGUMENTATION_GAP_INDEX](10_argumentation_gap_index.md) 论证缺口追踪衔接。
 
 ---
 
@@ -219,8 +219,8 @@ end
 - [ ] 借用检查器的形式化定义
 - [ ] 生命周期的形式化定义
 - [ ] 类型系统的形式化定义
-- [ ] 异步状态机的形式化定义（参见 [10_async_state_machine.md](./formal_methods/10_async_state_machine.md)）
-- [ ] Pin 与自引用类型的形式化定义（参见 [10_pin_self_referential.md](./formal_methods/10_pin_self_referential.md)）
+- [ ] 异步状态机的形式化定义（参见 [10_async_state_machine.md](formal_methods/10_async_state_machine.md)）
+- [ ] Pin 与自引用类型的形式化定义（参见 [10_pin_self_referential.md](formal_methods/10_pin_self_referential.md)）
 
 ### 3. 验证框架设计
 
@@ -410,7 +410,7 @@ Admitted.
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
-**目标**：验证 Future 状态一致性、并发安全与进度保证（参见 [10_async_state_machine.md](./formal_methods/10_async_state_machine.md)）
+**目标**：验证 Future 状态一致性、并发安全与进度保证（参见 [10_async_state_machine.md](formal_methods/10_async_state_machine.md)）
 
 **Coq 实现框架**：
 
@@ -444,7 +444,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-**目标**：验证 Pin 保证、自引用类型安全与 Pin 投影安全（参见 [10_pin_self_referential.md](./formal_methods/10_pin_self_referential.md)）
+**目标**：验证 Pin 保证、自引用类型安全与 Pin 投影安全（参见 [10_pin_self_referential.md](formal_methods/10_pin_self_referential.md)）
 
 **Coq 实现框架**：
 
@@ -565,10 +565,10 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 | 工具 | 输入 | 输出 | 对接状态 | 任务入口 |
 | :--- | :--- | :--- | :--- | :--- |
-| **Aeneas** | Safe Rust (MIR/THIR) | Coq/F*/HOL4/Lean | 📋 计划中 | [AENEAS_INTEGRATION_PLAN](./10_aeneas_integration_plan.md) |
-| **coq-of-rust** | THIR | Rocq (Coq) | 📋 计划中 | [COQ_OF_RUST_INTEGRATION_PLAN](./10_coq_of_rust_integration_plan.md) |
+| **Aeneas** | Safe Rust (MIR/THIR) | Coq/F*/HOL4/Lean | 📋 计划中 | [AENEAS_INTEGRATION_PLAN](10_aeneas_integration_plan.md) |
+| **coq-of-rust** | THIR | Rocq (Coq) | 📋 计划中 | [COQ_OF_RUST_INTEGRATION_PLAN](10_coq_of_rust_integration_plan.md) |
 
-完成 Aeneas/coq-of-rust 对接后，在 [PROOF_INDEX](./10_proof_index.md) 中标注对应定理为 L3（机器可检查）。
+完成 Aeneas/coq-of-rust 对接后，在 [PROOF_INDEX](10_proof_index.md) 中标注对应定理为 L3（机器可检查）。
 
 ### 工具资源
 
@@ -592,7 +592,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 > **适用版本**: Rust 1.96.0+
 
-详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
+详见 [RUST_194_RESEARCH_UPDATE](10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 
@@ -655,7 +655,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

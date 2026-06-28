@@ -232,25 +232,25 @@ c12_wasm/
 
 ### Week 1: 基础（2-4 小时）
 
-1. 阅读 [项目概览](./docs/tier_01_foundations/01_项目概览.md)
+1. 阅读 [项目概览](docs/tier_01_foundations/01_项目概览.md)
 2. 运行示例 `examples/01_basic_add.rs`
 3. 查看演示页面 `demo/index.html`
 
 ### Week 2: 实践（10-20 小时）
 
-1. 学习 [Rust 编译 WASM](./docs/tier_02_guides/02_rust_编译_wasm.md)
+1. 学习 [Rust 编译 WASM](docs/tier_02_guides/02_rust_编译_wasm.md)
 2. 完成 `examples/02_string_operations.rs`
 3. 实践 JavaScript 互操作
 
 ### Week 3-4: 进阶（20-30 小时）
 
-1. 学习 [性能优化](./docs/tier_02_guides/04_性能优化指南.md)
+1. 学习 [性能优化](docs/tier_02_guides/04_性能优化指南.md)
 2. 研究设计模式 `examples/07_design_patterns.rs`
 3. 学习 WASI 应用开发
 
 ### Week 5+: 高级
 
-1. 深入 [WasmEdge](./docs/tier_04_advanced/05_wasmedge_与新技术深入.md)
+1. 深入 [WasmEdge](docs/tier_04_advanced/05_wasmedge_与新技术深入.md)
 2. 创建自己的项目
 3. 性能优化实践
 
@@ -351,30 +351,30 @@ du -h pkg/c12_wasm_bg.wasm
 
 ### 文档
 
-- 📖 [完整文档](./docs/README.md)
-- 📝 [API 参考](./docs/tier_03_references/01_api_参考.md)
-- 🎯 [最佳实践](./docs/tier_03_references/03_最佳实践.md)
+- 📖 [完整文档](docs/README.md)
+- 📝 [API 参考](docs/tier_03_references/01_api_参考.md)
+- 🎯 [最佳实践](docs/tier_03_references/03_最佳实践.md)
 
 ### 示例
 
-- 💻 [示例代码](./examples/README.md)
-- 🌐 [演示页面](./demo/README.md)
-- 🧪 [测试代码](./tests/README.md)
+- 💻 [示例代码](examples/README.md)
+- 🌐 [演示页面](demo/README.md)
+- 🧪 [测试代码](tests/README.md)
 
 ### 工具
 
-- 🛠️ [贡献指南](./CONTRIBUTING.md)
-- 📋 [更新日志](./CHANGELOG.md)
-- 📊 [项目状态](./PROJECT_STATUS.md)
+- 🛠️ [贡献指南](CONTRIBUTING.md)
+- 📋 [更新日志](CHANGELOG.md)
+- 📊 [项目状态](PROJECT_STATUS.md)
 
 ---
 
 ## 🤝 获取帮助
 
-1. **查看文档**: 先查看[常见问题](./docs/tier_01_foundations/04_常见问题.md)
+1. **查看文档**: 先查看[常见问题](docs/tier_01_foundations/04_常见问题.md)
 2. **搜索 Issues**: 在 GitHub 上搜索类似问题
 3. **提问**: 在 GitHub Discussions 中提问
-4. **贡献**: 查看[贡献指南](./CONTRIBUTING.md)
+4. **贡献**: 查看[贡献指南](CONTRIBUTING.md)
 
 ---
 
@@ -383,7 +383,7 @@ du -h pkg/c12_wasm_bg.wasm
 选择最适合你的方式开始：
 
 - 🚀 **快速体验**: 直接打开 `demo/index.html`
-- 📖 **系统学习**: 从 [Tier 1 文档](./docs/tier_01_foundations/README.md) 开始
+- 📖 **系统学习**: 从 [Tier 1 文档](docs/tier_01_foundations/README.md) 开始
 - 💻 **动手实践**: 运行 `examples/` 中的示例
 - 🧪 **深入研究**: 查看 `tests/` 和 `benches/`
 

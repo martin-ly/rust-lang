@@ -7,7 +7,7 @@
 
 **内容已整合至**：[14_testing_benchmarking_guide](../14_testing_benchmarking_guide.md) | [04_测试与基准](../tier_04_advanced/04_测试与基准.md)
 
-**相关**: [11_practical_examples](./11_practical_examples.md)
+**相关**: [11_practical_examples](11_practical_examples.md)
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

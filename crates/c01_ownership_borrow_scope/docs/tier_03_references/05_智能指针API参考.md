@@ -7,13 +7,13 @@
 
 ## 📊 目录
 
-- [Tier 3: 智能指针 API 完整参考](#tier-3-智能指针-api-完整参考)
-  - [📊 目录](#-目录)
-  - [`Box<T>` API](#boxt-api)
-  - [`Rc<T>` API](#rct-api)
-  - [`Arc<T>` API](#arct-api)
-  - [`RefCell<T>` API](#refcellt-api)
-  - [`Weak<T>` API](#weakt-api)
+- [Tier 3: 智能指针 API 完整参考](.#tier-3-智能指针-api-完整参考)
+  - [📊 目录](.#-目录)
+  - [`Box<T>` API](.#boxt-api)
+  - [`Rc<T>` API](.#rct-api)
+  - [`Arc<T>` API](.#arct-api)
+  - [`RefCell<T>` API](.#refcellt-api)
+  - [`Weak<T>` API](.#weakt-api)
 
 ## `Box<T>` API
 

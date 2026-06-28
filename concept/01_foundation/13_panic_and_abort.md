@@ -13,7 +13,7 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价 panic 与 abort 的策略选择
 > **定位**: 系统讲解 Rust **panic** 机制——从 panic 与 Result 的哲学分野、panic 传播、到自定义 panic 处理和 abort 模式，揭示 Rust 如何在"优雅失败"与"快速崩溃"之间做出设计选择。
-> **前置概念**: [Error Handling](../02_intermediate/15_error_handling_deep_dive.md) · [Ownership](./01_ownership.md)
+> **前置概念**: [Error Handling](../02_intermediate/15_error_handling_deep_dive.md) · [Ownership](01_ownership.md)
 > **后置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [FFI](../03_advanced/05_rust_ffi.md)
 
 ---
@@ -26,44 +26,44 @@
 
 ## 📑 目录
 
-- [Panic 与 Abort：不可恢复错误的处理机制](#panic-与-abort不可恢复错误的处理机制)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 Panic 的语义](#11-panic-的语义)
-    - [1.2 Panic vs Result](#12-panic-vs-result)
-    - [1.3 Panic 传播与栈展开](#13-panic-传播与栈展开)
-  - [二、技术细节](#二技术细节)
-    - [2.1 自定义 Panic 处理](#21-自定义-panic-处理)
-    - [2.2 Panic 钩子与日志](#22-panic-钩子与日志)
-    - [2.3 Abort 模式](#23-abort-模式)
-  - [三、设计模式矩阵](#三设计模式矩阵)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、常见陷阱](#五常见陷阱)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：Panic 与 Abort 的编译错误](#十边界测试panic-与-abort-的编译错误)
-    - [10.1 边界测试：`catch_unwind` 捕获非 `UnwindSafe` 类型（编译错误）](#101-边界测试catch_unwind-捕获非-unwindsafe-类型编译错误)
-    - [10.2 边界测试：在 `Drop` 中 panic 导致双重 panic（运行时 abort）](#102-边界测试在-drop-中-panic-导致双重-panic运行时-abort)
-    - [10.3 边界测试：`panic=abort` 与 `catch_unwind` 的冲突（编译错误/链接错误）](#103-边界测试panicabort-与-catch_unwind-的冲突编译错误链接错误)
-    - [10.4 边界测试：双重 panic导致 abort（运行时行为）](#104-边界测试双重-panic导致-abort运行时行为)
-    - [10.5 边界测试：`panic=abort` 与 `Drop` 的补偿动作缺失（运行时资源泄漏）](#105-边界测试panicabort-与-drop-的补偿动作缺失运行时资源泄漏)
-    - [10.6 边界测试：`catch_unwind` 与 FFI 的不可恢复性（运行时 UB）](#106-边界测试catch_unwind-与-ffi-的不可恢复性运行时-ub)
-    - [10.7 边界测试：`core::intrinsics::abort` 与 `std::process::abort` 的差异（运行时行为）](#107-边界测试coreintrinsicsabort-与-stdprocessabort-的差异运行时行为)
-    - [10.5 边界测试：`catch_unwind` 与 `UnwindSafe` 边界（编译错误）](#105-边界测试catch_unwind-与-unwindsafe-边界编译错误)
-    - [10.6 边界测试：`panic!` 与 `assert!` 的消息格式化开销（运行时性能）](#106-边界测试panic-与-assert-的消息格式化开销运行时性能)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：Panic vs Result（理解层）](#测验-1panic-vs-result理解层)
-    - [测验 2：panic=unwind vs panic=abort（应用层）](#测验-2panicunwind-vs-panicabort应用层)
-    - [测验 3：catch\_unwind 的边界（应用层）](#测验-3catch_unwind-的边界应用层)
-    - [测验 4：Drop 中 panic 的危险性（分析层）](#测验-4drop-中-panic-的危险性分析层)
-    - [测验 5：UnwindSafe 与 AssertUnwindSafe（分析层）](#测验-5unwindsafe-与-assertunwindsafe分析层)
-  - [实践](#实践)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Panic 与 Abort：不可恢复错误的处理机制](.#panic-与-abort不可恢复错误的处理机制)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 Panic 的语义](.#11-panic-的语义)
+    - [1.2 Panic vs Result](.#12-panic-vs-result)
+    - [1.3 Panic 传播与栈展开](.#13-panic-传播与栈展开)
+  - [二、技术细节](.#二技术细节)
+    - [2.1 自定义 Panic 处理](.#21-自定义-panic-处理)
+    - [2.2 Panic 钩子与日志](.#22-panic-钩子与日志)
+    - [2.3 Abort 模式](.#23-abort-模式)
+  - [三、设计模式矩阵](.#三设计模式矩阵)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、常见陷阱](.#五常见陷阱)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：Panic 与 Abort 的编译错误](.#十边界测试panic-与-abort-的编译错误)
+    - [10.1 边界测试：`catch_unwind` 捕获非 `UnwindSafe` 类型（编译错误）](.#101-边界测试catch_unwind-捕获非-unwindsafe-类型编译错误)
+    - [10.2 边界测试：在 `Drop` 中 panic 导致双重 panic（运行时 abort）](.#102-边界测试在-drop-中-panic-导致双重-panic运行时-abort)
+    - [10.3 边界测试：`panic=abort` 与 `catch_unwind` 的冲突（编译错误/链接错误）](.#103-边界测试panicabort-与-catch_unwind-的冲突编译错误链接错误)
+    - [10.4 边界测试：双重 panic导致 abort（运行时行为）](.#104-边界测试双重-panic导致-abort运行时行为)
+    - [10.5 边界测试：`panic=abort` 与 `Drop` 的补偿动作缺失（运行时资源泄漏）](.#105-边界测试panicabort-与-drop-的补偿动作缺失运行时资源泄漏)
+    - [10.6 边界测试：`catch_unwind` 与 FFI 的不可恢复性（运行时 UB）](.#106-边界测试catch_unwind-与-ffi-的不可恢复性运行时-ub)
+    - [10.7 边界测试：`core::intrinsics::abort` 与 `std::process::abort` 的差异（运行时行为）](.#107-边界测试coreintrinsicsabort-与-stdprocessabort-的差异运行时行为)
+    - [10.5 边界测试：`catch_unwind` 与 `UnwindSafe` 边界（编译错误）](.#105-边界测试catch_unwind-与-unwindsafe-边界编译错误)
+    - [10.6 边界测试：`panic!` 与 `assert!` 的消息格式化开销（运行时性能）](.#106-边界测试panic-与-assert-的消息格式化开销运行时性能)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：Panic vs Result（理解层）](.#测验-1panic-vs-result理解层)
+    - [测验 2：panic=unwind vs panic=abort（应用层）](.#测验-2panicunwind-vs-panicabort应用层)
+    - [测验 3：catch\_unwind 的边界（应用层）](.#测验-3catch_unwind-的边界应用层)
+    - [测验 4：Drop 中 panic 的危险性（分析层）](.#测验-4drop-中-panic-的危险性分析层)
+    - [测验 5：UnwindSafe 与 AssertUnwindSafe（分析层）](.#测验-5unwindsafe-与-assertunwindsafe分析层)
+  - [实践](.#实践)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -910,8 +910,8 @@ catch_unwind(AssertUnwindSafe(|| {
 
 > **相关资源**:
 >
-> - [crates/ 示例代码](../crates/) — 与本文概念对应的可编译示例
-> - [exercises/ 练习](../exercises/) — 动手编程挑战
+> - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../exercises) — 动手编程挑战
 > - [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

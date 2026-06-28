@@ -12,8 +12,8 @@
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: T×Fml — 工具链与形式化验证
 > **定位**: 将 Kani 从"AWS 内部工具"还原为日常安全关键代码审查与教学的标准模型检查器。
-> **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Ownership](../01_foundation/01_ownership.md) · [现代验证工具生态](./22_modern_verification_tools.md)
-> **后置概念**: [Miri](./31_miri.md) · [BorrowSanitizer](./34_borrow_sanitizer_in_formal.md)
+> **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Ownership](../01_foundation/01_ownership.md) · [现代验证工具生态](22_modern_verification_tools.md)
+> **后置概念**: [Miri](31_miri.md) · [BorrowSanitizer](34_borrow_sanitizer_in_formal.md)
 
 ---
 
@@ -24,29 +24,29 @@
 
 ## 📑 目录
 
-- [Kani：Rust 有界模型检查器](#kanirust-有界模型检查器)
-  - [📑 目录](#-目录)
-  - [一、Kani 是什么](#一kani-是什么)
-    - [与测试、Miri、Verus 的定位差异](#与测试miriverus-的定位差异)
-  - [二、安装与基本用法](#二安装与基本用法)
-    - [安装](#安装)
-    - [验证单个 harness](#验证单个-harness)
-    - [验证整个 crate](#验证整个-crate)
-  - [三、核心概念](#三核心概念)
+- [Kani：Rust 有界模型检查器](.#kanirust-有界模型检查器)
+  - [📑 目录](.#-目录)
+  - [一、Kani 是什么](.#一kani-是什么)
+    - [与测试、Miri、Verus 的定位差异](.#与测试miriverus-的定位差异)
+  - [二、安装与基本用法](.#二安装与基本用法)
+    - [安装](.#安装)
+    - [验证单个 harness](.#验证单个-harness)
+    - [验证整个 crate](.#验证整个-crate)
+  - [三、核心概念](.#三核心概念)
     - [Harness：`#[kani::proof]`](#harnesskaniproof)
-    - [非确定性输入：`kani::any()`](#非确定性输入kaniany)
-    - [假设与断言：`kani::assume` / `assert!`](#假设与断言kaniassume--assert)
+    - [非确定性输入：`kani::any()`](.#非确定性输入kaniany)
+    - [假设与断言：`kani::assume` / `assert!`](.#假设与断言kaniassume--assert)
     - [函数合约：`#[kani::requires]` / `#[kani::ensures]`](#函数合约kanirequires--kaniensures)
     - [循环合约：`#[kani::loop_invariant]`](#循环合约kaniloop_invariant)
     - [循环展开：`#[kani::unwind(...)]`](#循环展开kaniunwind)
-    - [Autoharness](#autoharness)
-  - [四、可运行示例](#四可运行示例)
-    - [示例 1：简单函数安全证明](#示例-1简单函数安全证明)
-    - [示例 2：循环与循环合约](#示例-2循环与循环合约)
-    - [示例 3：数据结构边界条件](#示例-3数据结构边界条件)
-  - [五、项目内已有 Kani 示例导航](#五项目内已有-kani-示例导航)
-  - [六、常见限制](#六常见限制)
-  - [七、权威来源索引](#七权威来源索引)
+    - [Autoharness](.#autoharness)
+  - [四、可运行示例](.#四可运行示例)
+    - [示例 1：简单函数安全证明](.#示例-1简单函数安全证明)
+    - [示例 2：循环与循环合约](.#示例-2循环与循环合约)
+    - [示例 3：数据结构边界条件](.#示例-3数据结构边界条件)
+  - [五、项目内已有 Kani 示例导航](.#五项目内已有-kani-示例导航)
+  - [六、常见限制](.#六常见限制)
+  - [七、权威来源索引](.#七权威来源索引)
 
 ---
 
@@ -317,7 +317,7 @@ fn verify_vec_push_safety() {
 | [Kani 教程](https://model-checking.github.io/kani/tutorial-intro.html) | ✅ 一级 | 从零开始的 harness 编写 |
 | [CBMC GitHub](https://github.com/diffblue/cbmc) | ✅ 二级 | Kani 底层模型检查引擎 |
 | [AWS Kani Blog](https://aws.amazon.com/blogs/aws/) | ✅ 二级 | 工业应用案例 |
-| [Rust 形式化验证工具对比](./22_modern_verification_tools.md) | ✅ 二级 | 项目内 Kani/Miri/Verus 对比 |
+| [Rust 形式化验证工具对比](22_modern_verification_tools.md) | ✅ 二级 | 项目内 Kani/Miri/Verus 对比 |
 
 ---
 

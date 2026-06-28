@@ -489,9 +489,9 @@ gRPC Stream 有协议开销（HTTP/2 HEADERS + DATA 帧）。
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [Tokio 异步运行时架构](./06_tokio_architecture.md)
-- [Hyper HTTP/2 实现架构](./08_hyper_architecture.md)
-- [Tower 中间件组合架构](./02_tower_architecture.md)
+- [Tokio 异步运行时架构](06_tokio_architecture.md)
+- [Hyper HTTP/2 实现架构](08_hyper_architecture.md)
+- [Tower 中间件组合架构](02_tower_architecture.md)
 
 ---
 

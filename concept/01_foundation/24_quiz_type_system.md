@@ -10,7 +10,7 @@
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
-> **后置概念**: [Ownership](./23_quiz_ownership_borrowing.md)
+> **后置概念**: [Ownership](23_quiz_ownership_borrowing.md)
 ---
 
 > **来源**:
@@ -19,12 +19,12 @@
 > [The Rust Programming Language — Ch18 Patterns](https://doc.rust-lang.org/book/ch18-00-patterns.html)
 >
 > **前置概念**:
-> [Type System](./04_type_system.md) ·
-> [Collections](./08_collections.md) ·
-> [Strings and Text](./09_strings_and_text.md)
+> [Type System](04_type_system.md) ·
+> [Collections](08_collections.md) ·
+> [Strings and Text](09_strings_and_text.md)
 >
 > **对应练习**:
-> [`exercises/src/type_system/`](../../exercises/src/type_system/)
+> [`exercises/src/type_system/`](../../exercises/src/type_system)
 
 ---
 
@@ -63,7 +63,7 @@ fn main() {
 | `.checked_add(n)` | 返回 `Option` | `None` |
 | `.overflowing_add(n)` | 返回 (结果, 是否溢出) | `(0, true)` |
 
-**知识点**：Rust 数值运算提供多种溢出处理策略，默认行为在 debug/release 间不一致是常见陷阱。[→ 数值类型详解](./10_numerics.md)
+**知识点**：Rust 数值运算提供多种溢出处理策略，默认行为在 debug/release 间不一致是常见陷阱。[→ 数值类型详解](10_numerics.md)
 
 </details>
 
@@ -128,7 +128,7 @@ match element {
 }
 ```
 
-**知识点**：`[]` 索引访问在越界时 panic，`.get()` 返回 `Option` 提供安全替代。[→ 集合类型详解](./08_collections.md)
+**知识点**：`[]` 索引访问在越界时 panic，`.get()` 返回 `Option` 提供安全替代。[→ 集合类型详解](08_collections.md)
 
 </details>
 
@@ -170,7 +170,7 @@ fn main() {
 - `Quit`（无数据）、`Move { x, y }`（匿名结构体（Struct））、`Write(String)`（单个值）、`ChangeColor(i32, i32, i32)`（元组）
 - 对比 C/Java 的 enum：Rust enum 是**代数数据类型（ADT）**，远不止是常量标签
 
-**知识点**：Rust 的 enum + match 组合是语言核心特性，替代了其他语言中的 nullable 类型、union 和异常。[→ 枚举详解](./04_type_system.md)
+**知识点**：Rust 的 enum + match 组合是语言核心特性，替代了其他语言中的 nullable 类型、union 和异常。[→ 枚举详解](04_type_system.md)
 
 </details>
 
@@ -218,7 +218,7 @@ match some_number {
 
 **相关语法**：`while let` 用于在模式匹配（Pattern Matching）成功时循环
 
-**知识点**：`if let` / `while let` 是 Rust "**只想处理一个模式**"场景下的惯用写法。[→ 模式匹配（Pattern Matching）详解](./04_type_system.md)
+**知识点**：`if let` / `while let` 是 Rust "**只想处理一个模式**"场景下的惯用写法。[→ 模式匹配（Pattern Matching）详解](04_type_system.md)
 
 </details>
 
@@ -254,7 +254,7 @@ fn main() {
 
 **注意**：`..` 只能在元组/结构体（Struct）模式中使用**一次**（不能歧义），数组切片（Slice）模式除外。
 
-**知识点**：`_` 忽略单个值，`..` 忽略剩余部分，两者是 Rust 模式匹配中减少 boilerplate 的关键工具。[→ 模式匹配详解](./04_type_system.md)
+**知识点**：`_` 忽略单个值，`..` 忽略剩余部分，两者是 Rust 模式匹配中减少 boilerplate 的关键工具。[→ 模式匹配详解](04_type_system.md)
 
 </details>
 
@@ -294,7 +294,7 @@ let b: u64 = a as u64; // 显式类型转换
 | 指针转换 | `&x as *const T` | 允许 |
 | 引用（Reference）转指针 | `&x as *const T as usize` | 两步转换 |
 
-**知识点**：Rust 的"无隐式转换"原则消除了 C 家族语言中大量隐蔽的类型转换 bug。[→ 类型强制与转换详解](./14_coercion_and_casting.md)
+**知识点**：Rust 的"无隐式转换"原则消除了 C 家族语言中大量隐蔽的类型转换 bug。[→ 类型强制与转换详解](14_coercion_and_casting.md)
 
 </details>
 
@@ -435,7 +435,7 @@ Rectangle {
 | `Eq` | 全序相等 | `PartialEq` + reflexive |
 | `PartialOrd` | 部分排序 | 所有字段实现 `PartialOrd` |
 
-**知识点**：`derive` 宏（Macro）通过编译期代码生成减少 boilerplate，是 Rust 元编程的入门工具。[→ 属性与宏详解](./12_attributes_and_macros.md)
+**知识点**：`derive` 宏（Macro）通过编译期代码生成减少 boilerplate，是 Rust 元编程的入门工具。[→ 属性与宏详解](12_attributes_and_macros.md)
 
 </details>
 
@@ -446,14 +446,14 @@ Rectangle {
 | 得分 | 评价 | 建议 |
 |:---:|:---|:---|
 | 10/10 | 🏆 类型系统（Type System）已内化 | 进阶至 L2 Trait/泛型（Generics） |
-| 7–9/10 | ✅ 核心概念掌握 | 强化 [L1 类型练习](../../exercises/src/type_system/)，关注错题 |
-| 4–6/10 | 🔄 需巩固基础 | 重读 [Type System](./04_type_system.md)，完成 rustlings 对应章节 |
-| 0–3/10 | 📚 建议重新开始 | 从 [Type System](./04_type_system.md) 逐节阅读，配合 [crates/c02_type_system](../../crates/c02_type_system/) 示例 |
+| 7–9/10 | ✅ 核心概念掌握 | 强化 [L1 类型练习](../../exercises/src/type_system)，关注错题 |
+| 4–6/10 | 🔄 需巩固基础 | 重读 [Type System](04_type_system.md)，完成 rustlings 对应章节 |
+| 0–3/10 | 📚 建议重新开始 | 从 [Type System](04_type_system.md) 逐节阅读，配合 [crates/c02_type_system](../../crates/c02_type_system) 示例 |
 
 ---
 
-> **对应 Crate**: [`c02_type_system`](../../crates/c02_type_system/)
-> **对应练习**: [`exercises/src/type_system/`](../../exercises/src/type_system/)
+> **对应 Crate**: [`c02_type_system`](../../crates/c02_type_system)
+> **对应练习**: [`exercises/src/type_system/`](../../exercises/src/type_system)
 
 ---
 

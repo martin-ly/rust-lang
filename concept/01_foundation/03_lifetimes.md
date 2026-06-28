@@ -17,7 +17,7 @@
 > **层级**: L1 基础概念
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×App — 在复杂场景下正确标注生命周期（Lifetimes）
-> **前置概念**: [Ownership](./01_ownership.md) · [Borrowing](./02_borrowing.md)
+> **前置概念**: [Ownership](01_ownership.md) · [Borrowing](02_borrowing.md)
 > **后置概念**: [Advanced Generics](../02_intermediate/02_generics.md) · [Async/Await](../03_advanced/02_async.md) · [Pin](../03_advanced/02_async.md)
 > **主要来源**: [TRPL: Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) · [Wikipedia: Region-based memory management](https://en.wikipedia.org/wiki/Region-based_memory_management) · [Rust Reference: Lifetime elision](https://doc.rust-lang.org/reference/lifetime-elision.html) · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch10-03-lifetime-syntax.html)
 
@@ -1079,7 +1079,7 @@ fn print_it<T: Display + 'static>(t: T) { ... }
 
 ## 实践
 
-> **对应 Crate**: [`c01_ownership_borrow_scope`](../crates/c01_ownership_borrow_scope/)
+> **对应 Crate**: [`c01_ownership_borrow_scope`](../crates/c01_ownership_borrow_scope)
 > **对应练习**: [`exercises/rustlings_style/ex05_struct_lifetime.rs`](../exercises/rustlings_style/ex05_struct_lifetime.rs)
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。
@@ -1422,5 +1422,5 @@ Rust 1.31 引入的 **Non-Lexical Lifetimes (NLL)** 使借用的有效期基于*
 
 > 学完生命周期后，建议通过 **Ownership Inventory #3** 检验对「引用有效期、函数签名生命周期、结构体生命周期」的理解：
 >
-> - 本地映射与样题：[所有权清单自测：Brown University Ownership Inventory](./28_ownership_inventories_brown_book.md)
+> - 本地映射与样题：[所有权清单自测：Brown University Ownership Inventory](28_ownership_inventories_brown_book.md)
 > - Brown Book 交互式题目：[Ownership Inventory #3](https://rust-book.cs.brown.edu/ch10-04-inventory.html)

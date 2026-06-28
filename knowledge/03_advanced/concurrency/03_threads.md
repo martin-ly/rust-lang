@@ -123,14 +123,14 @@ fn demo_not_send() {
 
 推导规则（直觉上的"代数"）：
 
-```
+```text
 Send(T)  ↔  T 的所有权可以安全地从一个线程转移到另一个线程
 Sync(T)  ↔  ∀x: T. Send(&x)   [即 &T 是 Send]
 ```
 
 关键等价关系（在 RustBelt 中可证明）：
 
-```
+```text
 Sync(T) ⟺ &T: Send
 ```
 
@@ -174,7 +174,8 @@ Rust 如何通过 `Send`/`Sync` 在编译期消除数据竞争：
 
 1. **推论 1（&mut T 的 Send 蕴含）**: `&mut T: Send` 当且仅当 `T: Send`。因为 `&mut T` 可以 move 到另一线程，然后解引用获取 `T` 的所有权。
 2. **推论 2（Sync 的闭包性）**: 若 `T: Sync` 且 `U: Sync`，则 `(T, U): Sync` 且 `[T; N]: Sync`。这允许安全地共享复合不可变状态。
-3. **推论 3（内部可变性的边界）**: `RefCell<T>` 是 `Send`（若 `T: Send`）但**不是 `Sync`**。因为 `RefCell` 使用运行时借用检查，若跨线程共享 `&RefCell<T>`，两个线程可能同时调用 `borrow_mut()`，导致运行时 panic 而非编译期错误。`Mutex<T>` 解决了这个问题：它是 `Sync`（若 `T: Send`），因为 `Mutex` 使用 OS 原语保证串行化访问。
+3. **推论 3（内部可变性的边界）**: `RefCell<T>` 是 `Send`（若 `T: Send`）但**不是 `Sync`**。因为 `RefCell` 使用运行时借用检查，若跨线程共享 `&RefCell<T>`，两个线程可能同时调用 `borrow_mut()`，导致运行时 panic 而非编译期错误。
+`Mutex<T>` 解决了这个问题：它是 `Sync`（若 `T: Send`），因为 `Mutex` 使用 OS 原语保证串行化访问。
 
 ---
 
@@ -206,7 +207,7 @@ graph TD
 
 | 前置概念 | 所在文档 | 本章中使用的具体点 |
 |----------|----------|-------------------|
-| **所有权转移** | `01_fundamentals/ownership.md` | `thread::spawn(move || ...)` 的 `move` 将所有权转入新线程 |
+| **所有权转移** | `01_fundamentals/ownership.md` | `thread::spawn(move \|\| ...)` 的 `move` 将所有权转入新线程 |
 | **生命周期** | `01_fundamentals/lifetimes.md` | `scoped threads` 允许闭包借用局部变量，由编译器保证引用不超过线程生命周期 |
 | **Auto Trait** | `02_intermediate/traits.md` | `Send`/`Sync` 的自动推导规则（结构体继承字段属性） |
 | **智能指针** | `02_intermediate/smart_pointers.md` | `Arc` 用于跨线程共享所有权，`Mutex` 用于跨线程共享可变访问 |

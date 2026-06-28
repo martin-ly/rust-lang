@@ -7,8 +7,8 @@
 > **层级**: L0 元信息
 > **A/S/P 标记**: M — Meta
 > **双维定位**: M×Aud — Audit / Quality Assurance
-> **前置概念**: [Navigation Hub](./navigation.md) · [Terminology Glossary](./terminology_glossary.md)
-> **后置概念**: [Foundations Gap Closure Index](./foundations_gap_closure_index.md)
+> **前置概念**: [Navigation Hub](navigation.md) · [Terminology Glossary](terminology_glossary.md)
+> **后置概念**: [Foundations Gap Closure Index](foundations_gap_closure_index.md)
 ---
 
 ## 一、结构一致性
@@ -52,4 +52,4 @@
 
 ---
 
-> **Checklist**: 本清单用于审计单个 concept 文件的质量。项目级审计请参阅 [Quality Dashboard](./quality_dashboard_v2.md)。
+> **Checklist**: 本清单用于审计单个 concept 文件的质量。项目级审计请参阅 [Quality Dashboard](quality_dashboard_v2.md)。

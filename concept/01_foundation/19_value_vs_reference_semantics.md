@@ -7,8 +7,8 @@
 > **层级**: L1 基础概念
 > **A/S/P 标记**: C+S — Comparison + Structure
 > **双维定位**: C×Ana
-> **前置概念**: [Ownership](./01_ownership.md) · [Variable Model](./20_variable_model.md)
-> **后置概念**: [Move Semantics](./23_move_semantics.md) · [Borrowing](./02_borrowing.md)
+> **前置概念**: [Ownership](01_ownership.md) · [Variable Model](20_variable_model.md)
+> **后置概念**: [Move Semantics](23_move_semantics.md) · [Borrowing](02_borrowing.md)
 > **主要来源**: [Pierce — TAPL, §13](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Cardelli & Wegner 1985 — On Understanding Types, Data Abstraction, and Polymorphism](https://doi.org/10.1145/6041.6042) · [TRPL Ch 4 — What is Ownership?](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) · [cppreference — Value categories](https://en.cppreference.com/w/cpp/language/value_category) · [Bjarne Stroustrup — New Value Terminology](https://www.stroustrup.com/new_value-terminology.pdf) · [CppCon 2023 — Mateusz Pusz, Value Categories](https://www.youtube.com/watch?v=U7xx6gyaiio)
 ---
 

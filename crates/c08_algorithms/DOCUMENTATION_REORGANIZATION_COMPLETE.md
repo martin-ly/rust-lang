@@ -308,23 +308,23 @@ c08_algorithms/
 
 ### 主要入口
 
-- [主 README](./README.md) - 项目主页
-- [docs/00_MASTER_INDEX.md](./docs/00_MASTER_INDEX.md) - 文档主索引
-- [docs/README.md](./docs/README.md) - 文档体系入口
+- [主 README](README.md) - 项目主页
+- [docs/00_MASTER_INDEX.md](docs/00_MASTER_INDEX.md) - 文档主索引
+- [docs/README.md](docs/README.md) - 文档体系入口
 
 ### 子目录导航
 
-- [docs/guides/README.md](./docs/guides/README.md) - 实用指南导航
-- [docs/theory/README.md](./docs/theory/README.md) - 理论文档导航
-- [docs/advanced/README.md](./docs/advanced/README.md) - 高级专题导航
-- [docs/rust-features/README.md](./docs/rust-features/README.md) - Rust 特性导航
-- [docs/references/README.md](./docs/references/README.md) - 参考资料导航
+- [docs/guides/README.md](docs/guides/README.md) - 实用指南导航
+- [docs/theory/README.md](docs/theory/README.md) - 理论文档导航
+- [docs/advanced/README.md](docs/advanced/README.md) - 高级专题导航
+- [docs/rust-features/README.md](docs/rust-features/README.md) - Rust 特性导航
+- [docs/references/README.md](docs/references/README.md) - 参考资料导航
 
 ### 辅助文档
 
-- [docs/FAQ.md](./docs/FAQ.md) - 常见问题
-- [docs/Glossary.md](./docs/Glossary.md) - 术语表
-- [reports/README.md](./reports/README.md) - 报告归档
+- [docs/FAQ.md](docs/FAQ.md) - 常见问题
+- [docs/Glossary.md](docs/Glossary.md) - 术语表
+- [reports/README.md](reports/README.md) - 报告归档
 
 ---
 
@@ -387,7 +387,7 @@ c08_algorithms/
 如果您对文档重组有任何建议或发现问题，请：
 
 - 提交 Issue
-- 查看 [CONTRIBUTING.md](./CONTRIBUTING.md)
+- 查看 [CONTRIBUTING.md](CONTRIBUTING.md)
 - 参与讨论
 
 ---

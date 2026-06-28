@@ -19,13 +19,13 @@
 > [Rust Atomics and Locks](https://marabos.nl/atomics/)
 >
 > **前置概念**:
-> [Concurrency](./01_concurrency.md) ·
-> [Async/Await](./02_async.md) ·
+> [Concurrency](01_concurrency.md) ·
+> [Async/Await](02_async.md) ·
 > [Ownership](../01_foundation/01_ownership.md)
 >
 > **对应练习**:
-> [`exercises/src/concurrency/`](../../exercises/src/concurrency/) ·
-> [`exercises/src/async_programming/`](../../exercises/src/async_programming/)
+> [`exercises/src/concurrency/`](../../exercises/src/concurrency) ·
+> [`exercises/src/async_programming/`](../../exercises/src/async_programming)
 
 ---
 
@@ -94,7 +94,7 @@ fn main() {
 | `Cell<T>` | ✅ | ❌ | 内部可变性，非同步 |
 | `RefCell<T>` | ✅ | ❌ | 运行时（Runtime）借用（Borrowing）检查，非同步 |
 
-**知识点**：`Send` 和 `Sync` 是 Rust 并发安全（Concurrency Safety）的编译期保证。编译器自动为大多数类型推导实现，但 `unsafe impl` 可用于自定义类型。[→ 并发模型详解](./01_concurrency.md)
+**知识点**：`Send` 和 `Sync` 是 Rust 并发安全（Concurrency Safety）的编译期保证。编译器自动为大多数类型推导实现，但 `unsafe impl` 可用于自定义类型。[→ 并发模型详解](01_concurrency.md)
 
 </details>
 
@@ -162,7 +162,7 @@ fn main() {
 }
 ```
 
-**知识点**：`Arc` 提供共享所有权（Ownership），`Mutex` 提供互斥访问。组合是 Rust 中多线程共享可变状态的标准模式。[→ 并发模式详解](./10_concurrency_patterns.md)
+**知识点**：`Arc` 提供共享所有权（Ownership），`Mutex` 提供互斥访问。组合是 Rust 中多线程共享可变状态的标准模式。[→ 并发模式详解](10_concurrency_patterns.md)
 
 </details>
 
@@ -214,7 +214,7 @@ Got: 3
 | `mpsc::sync_channel(n)` | 多 | 单 | 有界（n） | 背压控制 |
 | `crossbeam::channel` | 多 | 多 | 有界/无界 | 更强大的生态替代 |
 
-**知识点**：Channel 是 Rust 中"消息传递"并发模型的核心工具，与"共享状态"模型互补。[→ 并发模型详解](./01_concurrency.md)
+**知识点**：Channel 是 Rust 中"消息传递"并发模型的核心工具，与"共享状态"模型互补。[→ 并发模型详解](01_concurrency.md)
 
 </details>
 
@@ -325,7 +325,7 @@ async fn example() {
 | 大多数类型 | 自动实现 `Unpin` | — |
 | 自引用类型（async 状态机） | `!Unpin` | 必须 `Pin` |
 
-**知识点**：`Pin` 不是日常需要直接使用的类型，但理解其"承诺不移动"的语义对理解 async 安全性至关重要。[→ Pin/Unpin 详解](./06_pin_unpin.md)
+**知识点**：`Pin` 不是日常需要直接使用的类型，但理解其"承诺不移动"的语义对理解 async 安全性至关重要。[→ Pin/Unpin 详解](06_pin_unpin.md)
 
 </details>
 
@@ -458,7 +458,7 @@ Result: 3
 | `tokio::select!` | 并发，等待任一完成 | 竞争条件，超时处理 |
 | `futures::future::join` | 并发（非 Tokio 专属） | 通用生态 |
 
-**知识点**：`await` 本身不创建并发，只是暂停当前任务。真正的并发需要 `join!`、`select!` 或 `spawn`。[→ Async 模式详解](./02_async.md)
+**知识点**：`await` 本身不创建并发，只是暂停当前任务。真正的并发需要 `join!`、`select!` 或 `spawn`。[→ Async 模式详解](02_async.md)
 
 </details>
 
@@ -569,7 +569,7 @@ Final: 6
 | 读写均衡或写多 | `Mutex`（更简单，某些实现更快） |
 | 高并发读 | `crossbeam` 的 lock-free 结构 |
 
-**知识点**：`RwLock` 适合读多写少的场景，但实现复杂度和平台差异较大。`Mutex` 是更保守、更通用的选择。[→ 并发模式详解](./10_concurrency_patterns.md)
+**知识点**：`RwLock` 适合读多写少的场景，但实现复杂度和平台差异较大。`Mutex` 是更保守、更通用的选择。[→ 并发模式详解](10_concurrency_patterns.md)
 
 </details>
 
@@ -636,7 +636,7 @@ fn main() {
 println!("Result: {}", *counter.lock().unwrap());
 ```
 
-**知识点**：`Arc<Mutex<T>>` 是 Rust 多线程共享可变状态的**三板斧**——原子引用计数 + 互斥锁 + 显式 join 同步。[→ 并发模式详解](./10_concurrency_patterns.md)
+**知识点**：`Arc<Mutex<T>>` 是 Rust 多线程共享可变状态的**三板斧**——原子引用计数 + 互斥锁 + 显式 join 同步。[→ 并发模式详解](10_concurrency_patterns.md)
 
 </details>
 
@@ -646,15 +646,15 @@ println!("Result: {}", *counter.lock().unwrap());
 
 | 得分 | 评价 | 建议 |
 |:---:|:---|:---|
-| 10/10 | 🏆 并发/异步已内化 | 进阶至 [Lock-Free](./16_lock_free.md) 或 [Stream Processing](./20_stream_processing_semantics.md) |
-| 7–9/10 | ✅ 核心概念掌握 | 强化 [并发练习](../../exercises/src/concurrency/) 和 [异步练习](../../exercises/src/async_programming/) |
-| 4–6/10 | 🔄 需巩固基础 | 重读 [Concurrency](./01_concurrency.md) · [Async](./02_async.md) |
+| 10/10 | 🏆 并发/异步已内化 | 进阶至 [Lock-Free](16_lock_free.md) 或 [Stream Processing](20_stream_processing_semantics.md) |
+| 7–9/10 | ✅ 核心概念掌握 | 强化 [并发练习](../../exercises/src/concurrency) 和 [异步练习](../../exercises/src/async_programming) |
+| 4–6/10 | 🔄 需巩固基础 | 重读 [Concurrency](01_concurrency.md) · [Async](02_async.md) |
 | 0–3/10 | 📚 建议重新开始 | 从 [Ownership](../01_foundation/01_ownership.md) 确认 Send/Sync 基础，再读并发章节 |
 
 ---
 
-> **对应 Crate**: [`c05_threads`](../../crates/c05_threads/) · [`c06_async`](../../crates/c06_async/)
-> **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency/) · [`exercises/src/async_programming/`](../../exercises/src/async_programming/)
+> **对应 Crate**: [`c05_threads`](../../crates/c05_threads) · [`c06_async`](../../crates/c06_async)
+> **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency) · [`exercises/src/async_programming/`](../../exercises/src/async_programming)
 
 ---
 

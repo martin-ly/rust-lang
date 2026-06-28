@@ -16,44 +16,44 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [🧭 Rust 研究笔记：全面系统化梳理总览 {#-rust-研究笔记全面系统化梳理总览}](#-rust-研究笔记全面系统化梳理总览--rust-研究笔记全面系统化梳理总览)
-  - [📑 目录](#-目录)
-  - [🎯 文档宗旨与问题导向 {#-文档宗旨与问题导向}](#-文档宗旨与问题导向--文档宗旨与问题导向)
-    - [核心问题（用户反馈）](#核心问题用户反馈)
-    - [设计原则](#设计原则)
-  - [📐 五大梳理维度 {#-五大梳理维度}](#-五大梳理维度--五大梳理维度)
-  - [🧬 语义归纳与概念族谱 {#-语义归纳与概念族谱}](#-语义归纳与概念族谱--语义归纳与概念族谱)
-    - [1. 语义归纳表：Rust 核心概念族](#1-语义归纳表rust-核心概念族)
-    - [2. 概念族之间的依赖关系](#2-概念族之间的依赖关系)
-    - [3. 语义归纳：核心命题一句话总结](#3-语义归纳核心命题一句话总结)
-  - [🔗 全局一致性矩阵 {#-全局一致性矩阵}](#-全局一致性矩阵--全局一致性矩阵)
-    - [1. 跨模块术语一致性](#1-跨模块术语一致性)
-    - [2. 公理编号全局一致性](#2-公理编号全局一致性)
-    - [3. 证明依赖链一致性](#3-证明依赖链一致性)
-  - [📊 论证缺口详细追踪 {#-论证缺口详细追踪}](#-论证缺口详细追踪--论证缺口详细追踪)
-    - [缺口类型定义（沿用 FORMAL\_PROOF\_SYSTEM\_GUIDE）](#缺口类型定义沿用-formal_proof_system_guide)
-    - [各模块缺口详细追踪](#各模块缺口详细追踪)
-    - [证明完成度评分（1–5）](#证明完成度评分15)
-  - [🗺️ 思维表征方式全索引 {#️-思维表征方式全索引}](#️-思维表征方式全索引-️-思维表征方式全索引)
-    - [按表征类型索引](#按表征类型索引)
-    - [按研究领域索引](#按研究领域索引)
-    - [形式化理论概念对比矩阵（快速参考）](#形式化理论概念对比矩阵快速参考)
-    - [决策树快速导航](#决策树快速导航)
-  - [🌳 公理-定理-证明全链路图 {#-公理-定理-证明全链路图}](#-公理-定理-证明全链路图--公理-定理-证明全链路图)
-  - [📚 实施路线图与完成度 {#-实施路线图与完成度}](#-实施路线图与完成度--实施路线图与完成度)
-    - [阶段总览](#阶段总览)
-    - [剩余工作清单（达成 100%）](#剩余工作清单达成-100)
-    - [完成度仪表盘](#完成度仪表盘)
-  - [📂 相关文档快速导航 {#-相关文档快速导航}](#-相关文档快速导航--相关文档快速导航)
-  - [🆕 Rust 1.94 研究更新](#-rust-194-研究更新)
-    - [核心研究点](#核心研究点)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [🧭 Rust 研究笔记：全面系统化梳理总览 {#-rust-研究笔记全面系统化梳理总览}](.#-rust-研究笔记全面系统化梳理总览--rust-研究笔记全面系统化梳理总览)
+  - [📑 目录](.#-目录)
+  - [🎯 文档宗旨与问题导向 {#-文档宗旨与问题导向}](.#-文档宗旨与问题导向--文档宗旨与问题导向)
+    - [核心问题（用户反馈）](.#核心问题用户反馈)
+    - [设计原则](.#设计原则)
+  - [📐 五大梳理维度 {#-五大梳理维度}](.#-五大梳理维度--五大梳理维度)
+  - [🧬 语义归纳与概念族谱 {#-语义归纳与概念族谱}](.#-语义归纳与概念族谱--语义归纳与概念族谱)
+    - [1. 语义归纳表：Rust 核心概念族](.#1-语义归纳表rust-核心概念族)
+    - [2. 概念族之间的依赖关系](.#2-概念族之间的依赖关系)
+    - [3. 语义归纳：核心命题一句话总结](.#3-语义归纳核心命题一句话总结)
+  - [🔗 全局一致性矩阵 {#-全局一致性矩阵}](.#-全局一致性矩阵--全局一致性矩阵)
+    - [1. 跨模块术语一致性](.#1-跨模块术语一致性)
+    - [2. 公理编号全局一致性](.#2-公理编号全局一致性)
+    - [3. 证明依赖链一致性](.#3-证明依赖链一致性)
+  - [📊 论证缺口详细追踪 {#-论证缺口详细追踪}](.#-论证缺口详细追踪--论证缺口详细追踪)
+    - [缺口类型定义（沿用 FORMAL\_PROOF\_SYSTEM\_GUIDE）](.#缺口类型定义沿用-formal_proof_system_guide)
+    - [各模块缺口详细追踪](.#各模块缺口详细追踪)
+    - [证明完成度评分（1–5）](.#证明完成度评分15)
+  - [🗺️ 思维表征方式全索引 {#️-思维表征方式全索引}](.#️-思维表征方式全索引-️-思维表征方式全索引)
+    - [按表征类型索引](.#按表征类型索引)
+    - [按研究领域索引](.#按研究领域索引)
+    - [形式化理论概念对比矩阵（快速参考）](.#形式化理论概念对比矩阵快速参考)
+    - [决策树快速导航](.#决策树快速导航)
+  - [🌳 公理-定理-证明全链路图 {#-公理-定理-证明全链路图}](.#-公理-定理-证明全链路图--公理-定理-证明全链路图)
+  - [📚 实施路线图与完成度 {#-实施路线图与完成度}](.#-实施路线图与完成度--实施路线图与完成度)
+    - [阶段总览](.#阶段总览)
+    - [剩余工作清单（达成 100%）](.#剩余工作清单达成-100)
+    - [完成度仪表盘](.#完成度仪表盘)
+  - [📂 相关文档快速导航 {#-相关文档快速导航}](.#-相关文档快速导航--相关文档快速导航)
+  - [🆕 Rust 1.94 研究更新](.#-rust-194-研究更新)
+    - [核心研究点](.#核心研究点)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 🎯 文档宗旨与问题导向 {#-文档宗旨与问题导向}
 >
@@ -72,9 +72,9 @@
 | **无全局一致性** | 跨模块术语、依赖、公理链不一致 | 全局一致性矩阵、交叉引用校验 |
 | **语义归纳缺失** | 概念语义未归纳、总结未结构化 | 概念族谱、语义归纳表 |
 | **思维表征分散** | 思维导图、矩阵、证明树、决策树、反例分散 | 思维表征方式全索引 |
-| **缺少构造性语义** | 编程语言表达式的语义形式化、求值/存储/类型 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) |
+| **缺少构造性语义** | 编程语言表达式的语义形式化、求值/存储/类型 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](10_language_semantics_expressiveness.md) |
 | **缺少表达能力边界** | 何者可表达、何者不可表达、边界论证 | 同上 + 多维能力边界矩阵 |
-| **设计机制缺乏理由** | 如 Pin 堆/栈区分、 ownership 为何移动语义等无充分论证 | [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) |
+| **设计机制缺乏理由** | 如 Pin 堆/栈区分、 ownership 为何移动语义等无充分论证 | [DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md) |
 
 ### 设计原则
 
@@ -120,10 +120,10 @@
 | **2. 属性关系** | 公理、引理、定理、推论、属性矩阵 | 概念-公理-定理映射表（FORMAL_PROOF_SYSTEM_GUIDE） |
 | **3. 解释论证** | 推导过程、引用链、论证结构 | [论证要素规范](10_formal_proof_system_guide.md) |
 | **4. 形式化证明** | 完整证明/证明思路、反例、证明树 | PROOF_INDEX](./10_proof_index.md)、[反例索引 |
-| **5. 思维表征** | 思维导图、矩阵、证明树、决策树、反例 | [思维表征方式全索引](#思维表征方式全索引) |
-| **6. 构造性语义** | 操作/指称/公理语义、表达能力边界 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) |
-| **7. 全局统一框架** | 全景思维导图、多维矩阵、全链路图 | [UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md) |
-| **8. 设计机制论证** | 动机、设计决策、堆/栈区分、决策树、反例 | [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) |
+| **5. 思维表征** | 思维导图、矩阵、证明树、决策树、反例 | [思维表征方式全索引](.#思维表征方式全索引) |
+| **6. 构造性语义** | 操作/指称/公理语义、表达能力边界 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](10_language_semantics_expressiveness.md) |
+| **7. 全局统一框架** | 全景思维导图、多维矩阵、全链路图 | [UNIFIED_SYSTEMATIC_FRAMEWORK](10_unified_systematic_framework.md) |
+| **8. 设计机制论证** | 动机、设计决策、堆/栈区分、决策树、反例 | [DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md) |
 
 ---
 
@@ -191,7 +191,7 @@ Rust 语义族谱（顶层归纳）
 
 *证明*：由概念族依赖表；所有权、借用、生命周期为上游；型变、异步、Pin 依赖类型与所有权；依赖图无环。∎
 
-**推论 CSO-C1**：若 $P$ 违反任一族定理，则 $P$ 非 Safe 或非良型；反例见 [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) 反例索引。
+**推论 CSO-C1**：若 $P$ 违反任一族定理，则 $P$ 非 Safe 或非良型；反例见 [FORMAL_PROOF_SYSTEM_GUIDE](10_formal_proof_system_guide.md) 反例索引。
 
 *证明*：由 CSO-T1 逆否；违反 ⇒ 不满足全部定理 ⇒ 非 Safe 或非良型。∎
 
@@ -209,7 +209,7 @@ Rust 语义族谱（顶层归纳）
 | 类型安全 | 良型程序不会出现类型错误（进展+保持） | type_system_foundations |
 | 型变 | 协变同向、逆变反向、不变无子类型；违反则悬垂 | variance_theory |
 | 异步状态机 | Future 状态转换合法、Send/Sync 则并发安全、有限则终将 Ready | async_state_machine |
-| Pin | 非 Unpin 被 Pin 后位置不变，自引用安全；堆固定可任意类型，栈固定仅 Unpin | pin_self_referential, [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) |
+| Pin | 非 Unpin 被 Pin 后位置不变，自引用安全；堆固定可任意类型，栈固定仅 Unpin | pin_self_referential, [DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md) |
 | Trait 对象 | vtable 动态分发、对象安全约束、解析正确 | trait_system_formalization |
 
 ---
@@ -508,7 +508,7 @@ Axiom/规则层
 ├── 设计机制论证:   ████████████████████ 100%
 ├── 软件设计理论:   ████████████████████ 100%  (设计模式、23/43、执行模型、组合工程)
 ├── Rust 1.93 特性: ████████████████████ 100%  (92 项全覆盖)
-└── type_theory 缺口: 已声明；COH-T1 已补全；见 [00_completeness_gaps](../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md)
+└── type_theory 缺口: 已声明；COH-T1 已补全；见 [00_completeness_gaps](formal_methods/00_completeness_gaps.md)
 ```
 
 ---
@@ -519,18 +519,18 @@ Axiom/规则层
 
 | 文档 | 用途 |
 | :--- | :--- |
-| [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md) | **🏛️ 理论体系与论证体系结构**：四层理论架构、五层论证结构、安全与非安全全面论证 |
+| [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](10_theoretical_and_argumentation_system_architecture.md) | **🏛️ 理论体系与论证体系结构**：四层理论架构、五层论证结构、安全与非安全全面论证 |
 | [software_design_theory](software_design_theory/README.md) | **软件设计理论体系**：设计模式形式化、23/43 模型、执行模型、组合工程有效性 |
-| [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./10_safe_unsafe_comprehensive_analysis.md) | **安全与非安全全面论证**：边界、契约、UB 分类、安全抽象 |
-| [UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md) | **全局统一系统化框架**：全景思维导图、多维矩阵、全链路图、反例总索引 |
-| [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) | **设计机制论证**：Pin 堆/栈区分、所有权、借用、型变等理由与完整论证 |
-| [ARGUMENTATION_GAP_INDEX](./10_argumentation_gap_index.md) | **论证缺口与设计理由综合索引**：缺口追踪、设计理由矩阵、思维表征覆盖 |
-| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md) | **Rust 1.93 语言特性全面分析**：92 项特性全覆盖、设计论证 |
-| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) | **构造性语义与表达能力边界**：操作/指称/公理语义、表达能力边界论证 |
-| [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) | 论证缺口、概念-公理-定理映射、反例索引 |
-| [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) | 形式化证明索引、公理编号规范 |
-| [INDEX](./INDEX.md) | 研究笔记完整索引 |
-| [README](./README.md) | 研究笔记主入口 |
+| [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](10_safe_unsafe_comprehensive_analysis.md) | **安全与非安全全面论证**：边界、契约、UB 分类、安全抽象 |
+| [UNIFIED_SYSTEMATIC_FRAMEWORK](10_unified_systematic_framework.md) | **全局统一系统化框架**：全景思维导图、多维矩阵、全链路图、反例总索引 |
+| [DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md) | **设计机制论证**：Pin 堆/栈区分、所有权、借用、型变等理由与完整论证 |
+| [ARGUMENTATION_GAP_INDEX](10_argumentation_gap_index.md) | **论证缺口与设计理由综合索引**：缺口追踪、设计理由矩阵、思维表征覆盖 |
+| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](10_rust_193_language_features_comprehensive_analysis.md) | **Rust 1.93 语言特性全面分析**：92 项特性全覆盖、设计论证 |
+| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](10_language_semantics_expressiveness.md) | **构造性语义与表达能力边界**：操作/指称/公理语义、表达能力边界论证 |
+| [FORMAL_PROOF_SYSTEM_GUIDE](10_formal_proof_system_guide.md) | 论证缺口、概念-公理-定理映射、反例索引 |
+| [PROOF_INDEX](10_proof_index.md) | 形式化证明索引、公理编号规范 |
+| [INDEX](INDEX.md) | 研究笔记完整索引 |
+| [README](README.md) | 研究笔记主入口 |
 | [KNOWLEDGE_STRUCTURE_FRAMEWORK](../07_project/07_knowledge_structure_framework.md) | 知识结构、概念定义、思维表征 |
 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/04_multi_dimensional_concept_matrix.md) | 多维概念矩阵、形式化理论对比 |
 | [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) | 思维导图集合 |
@@ -561,7 +561,7 @@ Axiom/规则层
 - LazyCell/LazyLock 的延迟语义
 - 与现有理论框架的集成
 
-详见 [RUST_194_RESEARCH_UPDATE](../../archive/research_notes_2026_06_25/10_rust_194_research_update.md)
+详见 [RUST_194_RESEARCH_UPDATE](10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 
@@ -625,7 +625,7 @@ Axiom/规则层
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

@@ -13,7 +13,7 @@
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: F×App — 断言和模式匹配（Pattern Matching）语法应用
 > **定位**: 将 Rust 的**模式匹配（Pattern Matching）**能力从"表达式求值"扩展到"测试断言"的工程机制，实现编译期模式检查与运行时（Runtime）断言的统一。
-> **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Error Handling](./04_error_handling.md)
+> **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Error Handling](04_error_handling.md)
 > **后置概念**: [Macros](../03_advanced/04_macros.md) · [Version Tracking](../07_future/05_rust_version_tracking.md)
 
 ---
@@ -28,43 +28,43 @@
 
 ## 📑 目录
 
-- [`assert_matches!`：模式匹配断言的形式化语义](#assert_matches模式匹配断言的形式化语义)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 `matches!`：模式匹配的布尔化](#11-matches模式匹配的布尔化)
-    - [1.2 `assert_matches!`：从判断到断言](#12-assert_matches从判断到断言)
-    - [1.3 `debug_assert_matches!`：编译期条件断言](#13-debug_assert_matches编译期条件断言)
-  - [二、形式化语义](#二形式化语义)
-    - [2.1 与 `assert!` / `assert_eq!` 的对比](#21-与-assert--assert_eq-的对比)
-    - [2.2 绑定捕获与作用域](#22-绑定捕获与作用域)
-  - [三、使用场景与最佳实践](#三使用场景与最佳实践)
-    - [3.1 测试中的 Result/Option 断言](#31-测试中的-resultoption-断言)
-    - [3.2 复杂枚举变体验证](#32-复杂枚举变体验证)
-    - [3.3 与 `if let` 的互补关系](#33-与-if-let-的互补关系)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、来源与延伸阅读](#五来源与延伸阅读)
-    - [编译验证示例](#编译验证示例)
-  - [相关概念文件](#相关概念文件)
-  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：assert\_matches 的编译错误](#十边界测试assert_matches-的编译错误)
-    - [10.1 边界测试：`assert_matches!` 在非 Option/Result 上使用（编译错误）](#101-边界测试assert_matches-在非-optionresult-上使用编译错误)
-    - [10.2 边界测试：嵌套模式匹配中的绑定冲突（编译错误）](#102-边界测试嵌套模式匹配中的绑定冲突编译错误)
-    - [10.3 边界测试：`assert_matches!` 与嵌套模式的绑定（编译错误）](#103-边界测试assert_matches-与嵌套模式的绑定编译错误)
-    - [10.4 边界测试：自定义断言失败消息的类型约束（编译错误）](#104-边界测试自定义断言失败消息的类型约束编译错误)
-    - [10.4 边界测试：所有权移动后的再次使用](#104-边界测试所有权移动后的再次使用)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：`assert_matches!(value, pattern)` 的主要用途是什么？与 `assert!(matches!(value, pattern))` 相比有什么优势？（理解层）](#测验-1assert_matchesvalue-pattern-的主要用途是什么与-assertmatchesvalue-pattern-相比有什么优势理解层)
-    - [测验 2：`assert_matches!` 是否可以在模式中绑定变量？绑定后的变量在测试体中可用吗？（理解层）](#测验-2assert_matches-是否可以在模式中绑定变量绑定后的变量在测试体中可用吗理解层)
-    - [测验 3：如果 `assert_matches!` 在你的 stable Rust 版本中不可用，最简单的替代方案是什么？（理解层）](#测验-3如果-assert_matches-在你的-stable-rust-版本中不可用最简单的替代方案是什么理解层)
-    - [测验 4：`assert_matches!(x, Some(_))` 与 `assert!(x.is_some())` 在语义上有区别吗？（理解层）](#测验-4assert_matchesx-some_-与-assertxis_some-在语义上有区别吗理解层)
-    - [测验 5：`assert_matches!` 对测试枚举变体有什么特别便利之处？（理解层）](#测验-5assert_matches-对测试枚举变体有什么特别便利之处理解层)
-  - [实践](#实践)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [`assert_matches!`：模式匹配断言的形式化语义](.#assert_matches模式匹配断言的形式化语义)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 `matches!`：模式匹配的布尔化](.#11-matches模式匹配的布尔化)
+    - [1.2 `assert_matches!`：从判断到断言](.#12-assert_matches从判断到断言)
+    - [1.3 `debug_assert_matches!`：编译期条件断言](.#13-debug_assert_matches编译期条件断言)
+  - [二、形式化语义](.#二形式化语义)
+    - [2.1 与 `assert!` / `assert_eq!` 的对比](.#21-与-assert--assert_eq-的对比)
+    - [2.2 绑定捕获与作用域](.#22-绑定捕获与作用域)
+  - [三、使用场景与最佳实践](.#三使用场景与最佳实践)
+    - [3.1 测试中的 Result/Option 断言](.#31-测试中的-resultoption-断言)
+    - [3.2 复杂枚举变体验证](.#32-复杂枚举变体验证)
+    - [3.3 与 `if let` 的互补关系](.#33-与-if-let-的互补关系)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、来源与延伸阅读](.#五来源与延伸阅读)
+    - [编译验证示例](.#编译验证示例)
+  - [相关概念文件](.#相关概念文件)
+  - [逆向推理链（Backward Reasoning）](.#逆向推理链backward-reasoning)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：assert\_matches 的编译错误](.#十边界测试assert_matches-的编译错误)
+    - [10.1 边界测试：`assert_matches!` 在非 Option/Result 上使用（编译错误）](.#101-边界测试assert_matches-在非-optionresult-上使用编译错误)
+    - [10.2 边界测试：嵌套模式匹配中的绑定冲突（编译错误）](.#102-边界测试嵌套模式匹配中的绑定冲突编译错误)
+    - [10.3 边界测试：`assert_matches!` 与嵌套模式的绑定（编译错误）](.#103-边界测试assert_matches-与嵌套模式的绑定编译错误)
+    - [10.4 边界测试：自定义断言失败消息的类型约束（编译错误）](.#104-边界测试自定义断言失败消息的类型约束编译错误)
+    - [10.4 边界测试：所有权移动后的再次使用](.#104-边界测试所有权移动后的再次使用)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：`assert_matches!(value, pattern)` 的主要用途是什么？与 `assert!(matches!(value, pattern))` 相比有什么优势？（理解层）](.#测验-1assert_matchesvalue-pattern-的主要用途是什么与-assertmatchesvalue-pattern-相比有什么优势理解层)
+    - [测验 2：`assert_matches!` 是否可以在模式中绑定变量？绑定后的变量在测试体中可用吗？（理解层）](.#测验-2assert_matches-是否可以在模式中绑定变量绑定后的变量在测试体中可用吗理解层)
+    - [测验 3：如果 `assert_matches!` 在你的 stable Rust 版本中不可用，最简单的替代方案是什么？（理解层）](.#测验-3如果-assert_matches-在你的-stable-rust-版本中不可用最简单的替代方案是什么理解层)
+    - [测验 4：`assert_matches!(x, Some(_))` 与 `assert!(x.is_some())` 在语义上有区别吗？（理解层）](.#测验-4assert_matchesx-some_-与-assertxis_some-在语义上有区别吗理解层)
+    - [测验 5：`assert_matches!` 对测试枚举变体有什么特别便利之处？（理解层）](.#测验-5assert_matches-对测试枚举变体有什么特别便利之处理解层)
+  - [实践](.#实践)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -442,7 +442,7 @@ fn main() {
 ## 相关概念文件
 
 - [Type System](../01_foundation/04_type_system.md) — 模式匹配的形式化根基
-- [Error Handling](./04_error_handling.md) — Result/Option 测试断言实践
+- [Error Handling](04_error_handling.md) — Result/Option 测试断言实践
 - [Macros](../03_advanced/04_macros.md) — 宏系统的语法糖机制
 - [Version Tracking](../07_future/05_rust_version_tracking.md) — Rust 1.96 特性演进
 
@@ -655,8 +655,8 @@ fn main() {
 
 > **相关资源**:
 >
-> - [crates/ 示例代码](../crates/) — 与本文概念对应的可编译示例
-> - [exercises/ 练习](../exercises/) — 动手编程挑战
+> - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../exercises) — 动手编程挑战
 > - [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

@@ -14,7 +14,7 @@
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×Cre — 分析系统架构层级与依赖关系设计
 > **前置依赖**: [泛型（Generics）](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md) · [生命周期（Lifetimes）](../01_foundation/03_lifetimes.md) · 设计模式
-> **后置延伸**: [CQRS & Event Sourcing](./33_cqrs_event_sourcing.md) · [微服务架构模式](./31_microservice_patterns.md) · [事件驱动架构](./32_event_driven_architecture.md)
+> **后置延伸**: [CQRS & Event Sourcing](33_cqrs_event_sourcing.md) · [微服务架构模式](31_microservice_patterns.md) · [事件驱动架构](32_event_driven_architecture.md)
 >
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 > **前置概念**: N/A
@@ -34,54 +34,54 @@
 
 ## 📑 目录
 
-- [Architecture Patterns（架构设计模式）](#architecture-patterns架构设计模式)
-  - [📑 目录](#-目录)
-  - [一、权威定义（Definition）](#一权威定义definition)
-    - [1.1 分层架构（Layered Architecture）](#11-分层架构layered-architecture)
-    - [1.2 六边形架构 / 端口与适配器（Hexagonal / Ports \& Adapters）](#12-六边形架构--端口与适配器hexagonal--ports--adapters)
-    - [1.3 洋葱架构（Onion Architecture）](#13-洋葱架构onion-architecture)
-    - [1.4 整洁架构（Clean Architecture）](#14-整洁架构clean-architecture)
-    - [1.5 Serverless / FaaS（无服务器/函数即服务）](#15-serverless--faas无服务器函数即服务)
-  - [二、概念属性矩阵](#二概念属性矩阵)
-  - [三、分层架构](#三分层架构)
-    - [3.1 经典四层模型](#31-经典四层模型)
-    - [3.2 依赖规则](#32-依赖规则)
-  - [四、六边形架构](#四六边形架构)
-    - [4.1 端口（Ports）](#41-端口ports)
-    - [4.2 适配器（Adapters）](#42-适配器adapters)
-    - [4.3 Rust 实现](#43-rust-实现)
-  - [五、洋葱架构](#五洋葱架构)
-    - [5.1 层次结构](#51-层次结构)
-    - [5.2 依赖方向](#52-依赖方向)
-  - [六、整洁架构](#六整洁架构)
-    - [6.1 同心圆模型](#61-同心圆模型)
-    - [6.2 依赖规则](#62-依赖规则)
-    - [6.3 与六边形/洋葱的关系](#63-与六边形洋葱的关系)
-  - [七、Serverless / FaaS](#七serverless--faas)
-    - [7.1 架构特征](#71-架构特征)
-    - [7.2 Rust 在 Serverless 中的实践](#72-rust-在-serverless-中的实践)
-    - [7.3 冷启动与性能优化](#73-冷启动与性能优化)
-  - [八、对比矩阵](#八对比矩阵)
-    - [8.1 架构模式决策矩阵](#81-架构模式决策矩阵)
-    - [8.2 架构模式适用场景](#82-架构模式适用场景)
-  - [九、反命题与边界](#九反命题与边界)
-    - [9.1 反命题树](#91-反命题树)
-    - [9.2 边界极限](#92-边界极限)
-  - [十、边界测试](#十边界测试)
-    - [10.1 边界测试：适配器绕过端口直接依赖核心（编译错误）](#101-边界测试适配器绕过端口直接依赖核心编译错误)
-    - [10.2 边界测试：跨层依赖导致循环依赖（编译错误）](#102-边界测试跨层依赖导致循环依赖编译错误)
-    - [10.3 边界测试：Serverless 超时导致状态不一致（运行时错误）](#103-边界测试serverless-超时导致状态不一致运行时错误)
-  - [相关概念文件](#相关概念文件)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：Rust 中常用的分层架构（Layered Architecture）如何划分？（理解层）](#测验-1rust-中常用的分层架构layered-architecture如何划分理解层)
-    - [测验 2：六边形架构（Hexagonal Architecture / Ports and Adapters）在 Rust 中如何体现？（理解层）](#测验-2六边形架构hexagonal-architecture--ports-and-adapters在-rust-中如何体现理解层)
-    - [测验 3：Rust 的强类型系统对洋葱架构（Onion Architecture）有什么天然支持？（理解层）](#测验-3rust-的强类型系统对洋葱架构onion-architecture有什么天然支持理解层)
-    - [测验 4：什么是"依赖倒置原则"（DIP）？Rust 的 trait 如何帮助实现它？（理解层）](#测验-4什么是依赖倒置原则diprust-的-trait-如何帮助实现它理解层)
-    - [测验 5：在 Rust 中，为什么 Repository 模式比直接在 Service 中调用 SQL 更受推荐？（理解层）](#测验-5在-rust-中为什么-repository-模式比直接在-service-中调用-sql-更受推荐理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Architecture Patterns（架构设计模式）](.#architecture-patterns架构设计模式)
+  - [📑 目录](.#-目录)
+  - [一、权威定义（Definition）](.#一权威定义definition)
+    - [1.1 分层架构（Layered Architecture）](.#11-分层架构layered-architecture)
+    - [1.2 六边形架构 / 端口与适配器（Hexagonal / Ports \& Adapters）](.#12-六边形架构--端口与适配器hexagonal--ports--adapters)
+    - [1.3 洋葱架构（Onion Architecture）](.#13-洋葱架构onion-architecture)
+    - [1.4 整洁架构（Clean Architecture）](.#14-整洁架构clean-architecture)
+    - [1.5 Serverless / FaaS（无服务器/函数即服务）](.#15-serverless--faas无服务器函数即服务)
+  - [二、概念属性矩阵](.#二概念属性矩阵)
+  - [三、分层架构](.#三分层架构)
+    - [3.1 经典四层模型](.#31-经典四层模型)
+    - [3.2 依赖规则](.#32-依赖规则)
+  - [四、六边形架构](.#四六边形架构)
+    - [4.1 端口（Ports）](.#41-端口ports)
+    - [4.2 适配器（Adapters）](.#42-适配器adapters)
+    - [4.3 Rust 实现](.#43-rust-实现)
+  - [五、洋葱架构](.#五洋葱架构)
+    - [5.1 层次结构](.#51-层次结构)
+    - [5.2 依赖方向](.#52-依赖方向)
+  - [六、整洁架构](.#六整洁架构)
+    - [6.1 同心圆模型](.#61-同心圆模型)
+    - [6.2 依赖规则](.#62-依赖规则)
+    - [6.3 与六边形/洋葱的关系](.#63-与六边形洋葱的关系)
+  - [七、Serverless / FaaS](.#七serverless--faas)
+    - [7.1 架构特征](.#71-架构特征)
+    - [7.2 Rust 在 Serverless 中的实践](.#72-rust-在-serverless-中的实践)
+    - [7.3 冷启动与性能优化](.#73-冷启动与性能优化)
+  - [八、对比矩阵](.#八对比矩阵)
+    - [8.1 架构模式决策矩阵](.#81-架构模式决策矩阵)
+    - [8.2 架构模式适用场景](.#82-架构模式适用场景)
+  - [九、反命题与边界](.#九反命题与边界)
+    - [9.1 反命题树](.#91-反命题树)
+    - [9.2 边界极限](.#92-边界极限)
+  - [十、边界测试](.#十边界测试)
+    - [10.1 边界测试：适配器绕过端口直接依赖核心（编译错误）](.#101-边界测试适配器绕过端口直接依赖核心编译错误)
+    - [10.2 边界测试：跨层依赖导致循环依赖（编译错误）](.#102-边界测试跨层依赖导致循环依赖编译错误)
+    - [10.3 边界测试：Serverless 超时导致状态不一致（运行时错误）](.#103-边界测试serverless-超时导致状态不一致运行时错误)
+  - [相关概念文件](.#相关概念文件)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 中常用的分层架构（Layered Architecture）如何划分？（理解层）](.#测验-1rust-中常用的分层架构layered-architecture如何划分理解层)
+    - [测验 2：六边形架构（Hexagonal Architecture / Ports and Adapters）在 Rust 中如何体现？（理解层）](.#测验-2六边形架构hexagonal-architecture--ports-and-adapters在-rust-中如何体现理解层)
+    - [测验 3：Rust 的强类型系统对洋葱架构（Onion Architecture）有什么天然支持？（理解层）](.#测验-3rust-的强类型系统对洋葱架构onion-architecture有什么天然支持理解层)
+    - [测验 4：什么是"依赖倒置原则"（DIP）？Rust 的 trait 如何帮助实现它？（理解层）](.#测验-4什么是依赖倒置原则diprust-的-trait-如何帮助实现它理解层)
+    - [测验 5：在 Rust 中，为什么 Repository 模式比直接在 Service 中调用 SQL 更受推荐？（理解层）](.#测验-5在-rust-中为什么-repository-模式比直接在-service-中调用-sql-更受推荐理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 > **Bloom 层级**: 分析 → 评价
 **变更日志**:
@@ -1111,12 +1111,12 @@ async fn risky_handler(event: LambdaEvent<OrderRequest>) -> Result<Value, Error>
 
 ## 相关概念文件
 
-- [CQRS & Event Sourcing](./33_cqrs_event_sourcing.md) — 命令查询分离、事件溯源、Saga
-- [微服务架构模式](./31_microservice_patterns.md) — 服务发现、熔断、Saga
-- [事件驱动架构](./32_event_driven_architecture.md) — 发布-订阅、消息队列、Reactive Streams
-- [设计模式](./02_patterns.md) — GoF 模式、Rust 特有模式（RAII、Typestate）
-- [分布式系统](./18_distributed_systems.md) — gRPC、Raft、Actor
-- [云原生](./24_cloud_native.md) — Kubernetes、容器化、可观测性
+- [CQRS & Event Sourcing](33_cqrs_event_sourcing.md) — 命令查询分离、事件溯源、Saga
+- [微服务架构模式](31_microservice_patterns.md) — 服务发现、熔断、Saga
+- [事件驱动架构](32_event_driven_architecture.md) — 发布-订阅、消息队列、Reactive Streams
+- [设计模式](02_patterns.md) — GoF 模式、Rust 特有模式（RAII、Typestate）
+- [分布式系统](18_distributed_systems.md) — gRPC、Raft、Actor
+- [云原生](24_cloud_native.md) — Kubernetes、容器化、可观测性
 - [公理语义](../04_formal/20_axiomatic_semantics.md) — Hoare 逻辑、正确性证明
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)

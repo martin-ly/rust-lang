@@ -14,13 +14,13 @@
 
 | 路径 | 内容 | 适合人群 |
 |------|------|----------|
-| [00_start/](00_start/) | 入门指南、环境搭建、Hello World | 零基础 |
-| [01_fundamentals/](01_fundamentals/) | 所有权、借用、生命周期、基础语法 | 初学者 |
-| [02_intermediate/](02_intermediate/) | 泛型、trait、错误处理、集合 | 有基础者 |
-| [03_advanced/](03_advanced/) | 异步、并发、宏、unsafe | 进阶学习者 |
-| [04_expert/](04_expert/) | 设计模式、性能优化、架构 | 高级开发者 |
-| [05_reference/](05_reference/) | 速查表、术语、标准库 | 全阶段参考 |
-| [06_ecosystem/](06_ecosystem/) | 工具链、生态库、最佳实践 | 工程实践 |
+| [00_start/](00_start) | 入门指南、环境搭建、Hello World | 零基础 |
+| [01_fundamentals/](01_fundamentals) | 所有权、借用、生命周期、基础语法 | 初学者 |
+| [02_intermediate/](02_intermediate) | 泛型、trait、错误处理、集合 | 有基础者 |
+| [03_advanced/](03_advanced) | 异步、并发、宏、unsafe | 进阶学习者 |
+| [04_expert/](04_expert) | 设计模式、性能优化、架构 | 高级开发者 |
+| [05_reference/](05_reference) | 速查表、术语、标准库 | 全阶段参考 |
+| [06_ecosystem/](06_ecosystem) | 工具链、生态库、最佳实践 | 工程实践 |
 
 ## 📚 学习路径
 >
@@ -61,9 +61,9 @@
 >
 > **[来源: Rust Official Docs]**
 
-1. **新手**: 从 [00_start/](00_start/) 开始，按顺序学习
+1. **新手**: 从 [00_start/](00_start) 开始，按顺序学习
 2. **有基础**: 查看 [INDEX.md](INDEX.md) 找到感兴趣的主题
-3. **查询参考**: 使用 [05_reference/](05_reference/) 速查
+3. **查询参考**: 使用 [05_reference/](05_reference) 速查
 4. **跟进更新**: 关注本页面的版本更新记录
 
 ## 🤝 贡献
@@ -91,7 +91,7 @@
 
 ## 相关概念
 
-- [知识库索引](./INDEX.md)
+- [知识库索引](INDEX.md)
 
 ## 📚 模块 8: 国际化对齐
 

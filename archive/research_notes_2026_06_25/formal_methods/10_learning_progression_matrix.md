@@ -15,55 +15,55 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [学习进阶矩阵](#学习进阶矩阵)
-  - [📑 目录](#-目录)
-  - [概述](#概述)
-  - [学习阶段总览](#学习阶段总览)
-  - [Level 1: 入门 (2-4周)](#level-1-入门-2-4周)
-    - [目标](#目标)
-    - [学习资源](#学习资源)
-    - [检查清单](#检查清单)
-  - [Level 2: 进阶 (4-6周)](#level-2-进阶-4-6周)
-    - [目标](#目标-1)
-    - [学习资源](#学习资源-1)
-    - [检查清单](#检查清单-1)
-  - [Level 3: 熟练 (4-6周)](#level-3-熟练-4-6周)
-    - [目标](#目标-2)
-    - [学习资源](#学习资源-2)
-    - [检查清单](#检查清单-2)
-  - [Level 4: 专家 (6-8周)](#level-4-专家-6-8周)
-    - [目标](#目标-3)
-    - [学习资源](#学习资源-3)
-    - [检查清单](#检查清单-3)
-  - [Level 5: 大师 (持续)](#level-5-大师-持续)
-    - [目标](#目标-4)
-    - [学习资源](#学习资源-4)
-    - [检查清单](#检查清单-4)
-  - [专题学习路径](#专题学习路径)
-    - [路径A: 系统编程](#路径a-系统编程)
-    - [路径B: Web后端](#路径b-web后端)
-    - [路径C: 区块链](#路径c-区块链)
-    - [路径D: 形式化验证](#路径d-形式化验证)
-  - [学习评估](#学习评估)
-    - [自我测试](#自我测试)
-    - [项目里程碑](#项目里程碑)
-  - [资源推荐](#资源推荐)
-    - [书籍](#书籍)
-    - [在线资源](#在线资源)
-  - [常见障碍与突破](#常见障碍与突破)
-  - [能力进阶矩阵](#能力进阶矩阵)
-  - [知识点覆盖矩阵](#知识点覆盖矩阵)
-  - [时间投入估算](#时间投入估算)
-  - [推荐路径](#推荐路径)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+- [学习进阶矩阵](.#学习进阶矩阵)
+  - [📑 目录](.#-目录)
+  - [概述](.#概述)
+  - [学习阶段总览](.#学习阶段总览)
+  - [Level 1: 入门 (2-4周)](.#level-1-入门-2-4周)
+    - [目标](.#目标)
+    - [学习资源](.#学习资源)
+    - [检查清单](.#检查清单)
+  - [Level 2: 进阶 (4-6周)](.#level-2-进阶-4-6周)
+    - [目标](.#目标-1)
+    - [学习资源](.#学习资源-1)
+    - [检查清单](.#检查清单-1)
+  - [Level 3: 熟练 (4-6周)](.#level-3-熟练-4-6周)
+    - [目标](.#目标-2)
+    - [学习资源](.#学习资源-2)
+    - [检查清单](.#检查清单-2)
+  - [Level 4: 专家 (6-8周)](.#level-4-专家-6-8周)
+    - [目标](.#目标-3)
+    - [学习资源](.#学习资源-3)
+    - [检查清单](.#检查清单-3)
+  - [Level 5: 大师 (持续)](.#level-5-大师-持续)
+    - [目标](.#目标-4)
+    - [学习资源](.#学习资源-4)
+    - [检查清单](.#检查清单-4)
+  - [专题学习路径](.#专题学习路径)
+    - [路径A: 系统编程](.#路径a-系统编程)
+    - [路径B: Web后端](.#路径b-web后端)
+    - [路径C: 区块链](.#路径c-区块链)
+    - [路径D: 形式化验证](.#路径d-形式化验证)
+  - [学习评估](.#学习评估)
+    - [自我测试](.#自我测试)
+    - [项目里程碑](.#项目里程碑)
+  - [资源推荐](.#资源推荐)
+    - [书籍](.#书籍)
+    - [在线资源](.#在线资源)
+  - [常见障碍与突破](.#常见障碍与突破)
+  - [能力进阶矩阵](.#能力进阶矩阵)
+  - [知识点覆盖矩阵](.#知识点覆盖矩阵)
+  - [时间投入估算](.#时间投入估算)
+  - [推荐路径](.#推荐路径)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
+  - [权威来源索引](.#权威来源索引-1)
 
 ## 概述
 >
@@ -158,8 +158,8 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 
 | 主题 | 资源 | 预计时间 |
 | :--- | :--- | :--- |
-| 所有权深入 | [ownership_model](./10_ownership_model.md) | 1周 |
-| 借用检查器 | [borrow_checker_proof](./10_borrow_checker_proof.md) §1-3 | 1周 |
+| 所有权深入 | [ownership_model](10_ownership_model.md) | 1周 |
+| 借用检查器 | [borrow_checker_proof](10_borrow_checker_proof.md) §1-3 | 1周 |
 | 引用与切片 | TUTORIAL_OWNERSHIP_SAFETY §5-7 | 3天 |
 | 结构体方法 | 10_trait_system_formalization.md | 2天 |
 | 泛型基础 | [variance_theory](../type_theory/10_variance_theory.md) §1 | 3天 |
@@ -246,12 +246,12 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 | 主题 | 资源 | 预计时间 |
 | :--- | :--- | :--- |
 | 线程基础 | 10_tutorial_concurrency_models.md | 3天 |
-| Send/Sync | [send_sync_formalization](./10_send_sync_formalization.md) | 1周 |
+| Send/Sync | [send_sync_formalization](10_send_sync_formalization.md) | 1周 |
 | 共享状态 | 10_concurrency_safety_matrix.md | 3天 |
-| 消息传递 | [CONCURRENCY_CONCEPT_MINDMAP](./10_concurrency_concept_mindmap.md) | 2天 |
-| 异步基础 | [ASYNC_CONCEPT_MINDMAP](./10_async_concept_mindmap.md) §1-2 | 3天 |
-| async/await | [async_state_machine](./10_async_state_machine.md) §1-3 | 1周 |
-| Pin | [pin_self_referential](./10_pin_self_referential.md) | 1周 |
+| 消息传递 | [CONCURRENCY_CONCEPT_MINDMAP](10_concurrency_concept_mindmap.md) | 2天 |
+| 异步基础 | [ASYNC_CONCEPT_MINDMAP](10_async_concept_mindmap.md) §1-2 | 3天 |
+| async/await | [async_state_machine](10_async_state_machine.md) §1-3 | 1周 |
+| Pin | [pin_self_referential](10_pin_self_referential.md) | 1周 |
 | Future | 10_async_state_machine.md §4-5 | 1周 |
 | 设计模式 | software_design_theory/01_design_patterns_formal/ | 2周 |
 
@@ -562,7 +562,7 @@ Level 1 ──> Level 2 ──> Level 3 ──> 证明技术 ──> Coq ──>
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [formal_methods 目录](./README.md)
+- [formal_methods 目录](README.md)
 - [上级目录](../README.md)
 
 ---

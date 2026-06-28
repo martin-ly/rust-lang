@@ -41,4 +41,4 @@
 
 - 扩展权威域名包含 `docs.rs`、`crates.io`、`github.com`、`rustwasm.github.io`、`source.android.com`、`www.chromium.org`、`plv.mpi-sws.org` 等；这些来源在各自领域内被视为权威引用。
 - 修复后官方与扩展权威来源链接均返回 200，无 404。
-- 进一步将扫描范围扩大到 `concept/` 下**全部 Markdown 链接**（不限于 `来源:` 块），结果见 [`concept_links_health_report.md`](./concept_links_health_report.md)。
+- 进一步将扫描范围扩大到 `concept/` 下**全部 Markdown 链接**（不限于 `来源:` 块），结果见 [`concept_links_health_report.md`](concept_links_health_report.md)。

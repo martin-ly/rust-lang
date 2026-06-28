@@ -21,7 +21,7 @@
 
 ### 📖 完整文档索引
 
-**👉 [查看完整文档索引](./DOCUMENTATION_INDEX.md)**
+**👉 [查看完整文档索引](DOCUMENTATION_INDEX.md)**
 包含所有文档的详细分类、难度标记、学习建议
 
 ### 🎯 选择你的学习路径
@@ -65,10 +65,10 @@
 为了更好地帮助理解控制流与函数系统的概念关系，我们提供了四种可视化文档：
 
 | 可视化类型       | 文档                                                                 | 适用场景               | 难度       |
-| :--- | :--- | :--- | :--- || **知识图谱**     | [KNOWLEDGE_GRAPH.md](./KNOWLEDGE_GRAPH.md)                           | 理解概念间的关系和依赖 | ⭐⭐⭐     |
-| **多维矩阵**     | [MULTIDIMENSIONAL_MATRIX.md](./MULTIDIMENSIONAL_MATRIX.md)           | 多维度对比不同概念     | ⭐⭐⭐⭐   |
-| **思维导图**     | [MIND_MAP.md](./MIND_MAP.md)                                         | 规划学习路径           | ⭐⭐       |
-| **概念关系网络** | [CONCEPT_RELATIONSHIP_NETWORK.md](./CONCEPT_RELATIONSHIP_NETWORK.md) | 深度理解概念交互       | ⭐⭐⭐⭐⭐ |
+| :--- | :--- | :--- | :--- || **知识图谱**     | [KNOWLEDGE_GRAPH.md](KNOWLEDGE_GRAPH.md)                           | 理解概念间的关系和依赖 | ⭐⭐⭐     |
+| **多维矩阵**     | [MULTIDIMENSIONAL_MATRIX.md](MULTIDIMENSIONAL_MATRIX.md)           | 多维度对比不同概念     | ⭐⭐⭐⭐   |
+| **思维导图**     | [MIND_MAP.md](MIND_MAP.md)                                         | 规划学习路径           | ⭐⭐       |
+| **概念关系网络** | [CONCEPT_RELATIONSHIP_NETWORK.md](CONCEPT_RELATIONSHIP_NETWORK.md) | 深度理解概念交互       | ⭐⭐⭐⭐⭐ |
 
 **推荐使用顺序**：思维导图（规划路径）→ 知识图谱（建立框架）→ 多维矩阵（深入对比）→ 概念关系网络（系统理解）
 
@@ -162,7 +162,7 @@ docs/
 3. **📌 [性能优化](tier_04_advanced/05_性能优化.md)**
    性能优化技巧，让你的代码更快
 
-4. **📌 [完整文档索引](./DOCUMENTATION_INDEX.md)**
+4. **📌 [完整文档索引](DOCUMENTATION_INDEX.md)**
    所有文档的完整导航和学习建议
 
 ### 🆕 Rust 1.93.0 新特性
@@ -171,7 +171,7 @@ docs/
 
 **⭐ 完整特性总结（推荐首选）**:
 
-- [Rust 1.92 验证总结](../../../docs/archive/version_reports/RUST_192_VERIFICATION_SUMMARY.md) ⭐ NEW
+- [Rust 1.92 验证总结](../../../archive/docs/version_reports/RUST_192_VERIFICATION_SUMMARY.md) ⭐ NEW
   - 所有新特性一览、性能数据、迁移指南、最佳实践
 
 **快速参考**:
@@ -195,11 +195,11 @@ docs/
 
 ### 相关模块
 
-- [c06_async 异步编程](../../c06_async/README.md) - async/await 与控制流的协同（详见 [PENDING_ITEMS.md](./PENDING_ITEMS.md)）
+- [c06_async 异步编程](../../c06_async/README.md) - async/await 与控制流的协同（详见 [PENDING_ITEMS.md](PENDING_ITEMS.md)）
 
 ### 历史文档
 
-- [历史定义文档](back/) - 早期设计文档，供参考
+- [历史定义文档](back) - 早期设计文档，供参考
 
 ## 💻 实践练习
 
@@ -399,7 +399,7 @@ cargo doc --open --package c03_control_fn
 
 ---
 
-**📌 下一步**：查看 [完整文档索引](./DOCUMENTATION_INDEX.md) 开始你的学习之旅！
+**📌 下一步**：查看 [完整文档索引](DOCUMENTATION_INDEX.md) 开始你的学习之旅！
 
 ---
 

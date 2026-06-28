@@ -3,29 +3,29 @@
 > **定位**: Rust 生态中主要形式化验证工具的系统性对比与选型指南
 > **覆盖**: Prusti、Kani、Miri、RustBelt 及其理论基础
 > **适用**: 安全关键系统开发、算法正确性证明、学术研究
-> **前置阅读**: [Prusti 验证教程](./prusti_verification_tutorial.md)
+> **前置阅读**: [Prusti 验证教程](prusti_verification_tutorial.md)
 
 ---
 
 ## 📋 目录
 
-- [Rust 形式化验证工具全景](#rust-形式化验证工具全景)
-  - [📋 目录](#-目录)
-  - [🎯 概述](#-概述)
-  - [🔬 工具深度解析](#-工具深度解析)
-    - [Prusti (ETH Zürich / Viper)](#prusti-eth-zürich--viper)
-    - [Kani (AWS / CBMC)](#kani-aws--cbmc)
-    - [Miri (Rust 官方 / 内存模型)](#miri-rust-官方--内存模型)
-    - [RustBelt (MPI-SWS / Iris)](#rustbelt-mpi-sws--iris)
-  - [📊 适用场景对比矩阵](#-适用场景对比矩阵)
-  - [🔄 工具协作工作流](#-工具协作工作流)
-  - [🎓 学术研究路径推荐](#-学术研究路径推荐)
-    - [工程师入门路径](#工程师入门路径)
-    - [研究者深入路径](#研究者深入路径)
-  - [🔗 参考资源](#-参考资源)
-    - [官方文档](#官方文档)
-    - [学术论文](#学术论文)
-    - [教程与课程](#教程与课程)
+- [Rust 形式化验证工具全景](.#rust-形式化验证工具全景)
+  - [📋 目录](.#-目录)
+  - [🎯 概述](.#-概述)
+  - [🔬 工具深度解析](.#-工具深度解析)
+    - [Prusti (ETH Zürich / Viper)](.#prusti-eth-zürich--viper)
+    - [Kani (AWS / CBMC)](.#kani-aws--cbmc)
+    - [Miri (Rust 官方 / 内存模型)](.#miri-rust-官方--内存模型)
+    - [RustBelt (MPI-SWS / Iris)](.#rustbelt-mpi-sws--iris)
+  - [📊 适用场景对比矩阵](.#-适用场景对比矩阵)
+  - [🔄 工具协作工作流](.#-工具协作工作流)
+  - [🎓 学术研究路径推荐](.#-学术研究路径推荐)
+    - [工程师入门路径](.#工程师入门路径)
+    - [研究者深入路径](.#研究者深入路径)
+  - [🔗 参考资源](.#-参考资源)
+    - [官方文档](.#官方文档)
+    - [学术论文](.#学术论文)
+    - [教程与课程](.#教程与课程)
 
 ---
 
@@ -305,7 +305,7 @@ RustBelt 理论框架:
 
 **与 Prusti 教程的呼应**:
 
-本项目 [Prusti 验证教程](./prusti_verification_tutorial.md) 提供了从入门到二分查找完整规范的实践路径。本全景文档则帮助读者理解：
+本项目 [Prusti 验证教程](prusti_verification_tutorial.md) 提供了从入门到二分查找完整规范的实践路径。本全景文档则帮助读者理解：
 
 - **何时选择 Prusti**（需数学级保证、愿意投入规范成本）
 - **何时搭配 Kani**（`unsafe` 代码、无需手写规范）
@@ -321,7 +321,7 @@ RustBelt 理论框架:
 阶段 1: 工具使用 (2-4 周)
 ├─ Miri 集成到 CI 流程
 ├─ Kani 验证简单属性 (溢出、边界)
-└─ 阅读 [Prusti 验证教程](./prusti_verification_tutorial.md)
+└─ 阅读 [Prusti 验证教程](prusti_verification_tutorial.md)
 
 阶段 2: 规范编写 (1-2 月)
 ├─ 为核心数据结构写 Prusti 规范
@@ -382,7 +382,7 @@ RustBelt 理论框架:
 
 ### 教程与课程
 
-- [项目 Prusti 验证教程](./prusti_verification_tutorial.md)
+- [项目 Prusti 验证教程](prusti_verification_tutorial.md)
 - [Iris 教程](https://iris-project.org/tutorial-pdfs/iris-lecture-notes.pdf)
 - [Software Foundations](https://softwarefoundations.cis.upenn.edu/)
 - [The Formal Semantics of Rust](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_middle/mir/)

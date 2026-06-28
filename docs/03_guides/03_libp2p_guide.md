@@ -3,7 +3,7 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
 > **层级**: L6 生态工具 / L3 高级网络
-> **前置概念**: [Async](../../concept/03_advanced/02_async.md) · [Network Programming](../../crates/c10_networks/)
+> **前置概念**: [Async](../../concept/03_advanced/02_async.md) · [Network Programming](../../crates/c10_networks)
 > **Bloom 层级**: 应用 → 分析
 > **[来源: libp2p Specification]** · **[来源: rust-libp2p crate]** · **[来源: Protocol Labs - libp2p]** · **来源: [Wikipedia - Peer-to-Peer](https://en.wikipedia.org/wiki/Peer_to_Peer)** ✅
 >
@@ -16,24 +16,24 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [libp2p 指南](#libp2p-指南)
-  - [📑 目录](#-目录)
-  - [概述](#概述)
-  - [核心概念](#核心概念)
-    - [Multiaddr —— 统一的地址格式](#multiaddr--统一的地址格式)
-    - [PeerId —— 去中心化身份](#peerid--去中心化身份)
-    - [核心协议](#核心协议)
-  - [决策树](#决策树)
-  - [代码示例](#代码示例)
-    - [基础节点（rust-libp2p）](#基础节点rust-libp2p)
-    - [GossipSub 发布/订阅](#gossipsub-发布订阅)
-    - [Kademlia DHT 内容路由](#kademlia-dht-内容路由)
-  - [与中心化方案的对比](#与中心化方案的对比)
-  - [Rust 生态状态](#rust-生态状态)
-  - [限制](#限制)
-  - [参考](#参考)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [libp2p 指南](.#libp2p-指南)
+  - [📑 目录](.#-目录)
+  - [概述](.#概述)
+  - [核心概念](.#核心概念)
+    - [Multiaddr —— 统一的地址格式](.#multiaddr--统一的地址格式)
+    - [PeerId —— 去中心化身份](.#peerid--去中心化身份)
+    - [核心协议](.#核心协议)
+  - [决策树](.#决策树)
+  - [代码示例](.#代码示例)
+    - [基础节点（rust-libp2p）](.#基础节点rust-libp2p)
+    - [GossipSub 发布/订阅](.#gossipsub-发布订阅)
+    - [Kademlia DHT 内容路由](.#kademlia-dht-内容路由)
+  - [与中心化方案的对比](.#与中心化方案的对比)
+  - [Rust 生态状态](.#rust-生态状态)
+  - [限制](.#限制)
+  - [参考](.#参考)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 概述
 

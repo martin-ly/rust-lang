@@ -57,7 +57,7 @@
 
 ## 🚀 下一步
 
-完成本模块后，进入 [01_fundamentals/](../01_fundamentals/) 学习 Rust 基础。
+完成本模块后，进入 [01_fundamentals/](../01_fundamentals) 学习 Rust 基础。
 
 ---
 
@@ -78,7 +78,7 @@
 
 ## 相关概念
 
-- [安装 Rust](./02_installation.md)
+- [安装 Rust](02_installation.md)
 
 ## 📚 模块 8: 国际化对齐
 

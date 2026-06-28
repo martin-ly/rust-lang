@@ -7,8 +7,8 @@
 > **层级**: L0 元信息
 > **A/S/P 标记**: M — Meta
 > **双维定位**: M×Eva — Evaluation / Quality
-> **前置概念**: [Bilingual Template](./BILINGUAL_TEMPLATE.md) · [Concept Consistency Audit Checklist](./concept_consistency_audit_checklist.md)
-> **后置概念**: [Quality Dashboard](./quality_dashboard_v2.md)
+> **前置概念**: [Bilingual Template](BILINGUAL_TEMPLATE.md) · [Concept Consistency Audit Checklist](concept_consistency_audit_checklist.md)
+> **后置概念**: [Quality Dashboard](quality_dashboard_v2.md)
 ---
 
 ## 一、目标
@@ -28,9 +28,9 @@
 | 文件头元数据（EN/Summary/受众/层级/A/S/P/双维定位/前置后置概念/主要来源） | **保留** | 这是概念导航和国际化检索的基础 |
 | 核心命题 | **保留** | 每个概念文件必须有的一句话定位 |
 | L1 / L2 / L3 总结 | **选择性保留** | 如果文件本身已有清晰分层，保留；否则合并为一段 |
-| 认知路径 + 核心推理链 + 反命题与边界 | **删除或迁移** | 集中迁移到 [Learning Guide](./learning_guide.md) 或本指南的附录 |
+| 认知路径 + 核心推理链 + 反命题与边界 | **删除或迁移** | 集中迁移到 [Learning Guide](learning_guide.md) 或本指南的附录 |
 | 实践 / 延伸阅读 | **精简** | 只列出与本主题直接相关的 3-7 个来源/练习 |
-| 文末 `> **Checklist**` | **删除** | 由 [Concept Consistency Audit Checklist](./concept_consistency_audit_checklist.md) 统一承担 |
+| 文末 `> **Checklist**` | **删除** | 由 [Concept Consistency Audit Checklist](concept_consistency_audit_checklist.md) 统一承担 |
 
 ## 三、实施步骤
 
@@ -53,8 +53,8 @@
 
 ## 延伸阅读
 
-- [来源 A](...)
-- [来源 B](...)
+- [来源 A](.)
+- [来源 B](.)
 ```
 
 ## 五、禁止事项

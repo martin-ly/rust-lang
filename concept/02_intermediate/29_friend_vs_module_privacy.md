@@ -7,7 +7,7 @@
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: C+S — Comparison + Structure
 > **双维定位**: C×Ana
-> **前置概念**: [Module System](./10_module_system.md) · [Ownership](../01_foundation/01_ownership.md) · [Traits](./01_traits.md)
+> **前置概念**: [Module System](10_module_system.md) · [Ownership](../01_foundation/01_ownership.md) · [Traits](01_traits.md)
 > **后置概念**: [C++ Surface Features](../05_comparative/16_cpp_rust_surface_features.md) · [API Design Patterns](../06_ecosystem/42_api_design_patterns.md)
 > **主要来源**: [TRPL Ch 7 — Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) · [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html) · [Rust by Example — Visibility](https://doc.rust-lang.org/rust-by-example/mod/visibility.html) · [cppreference — Friend](https://en.cppreference.com/w/cpp/language/friend) · [C++ Core Guidelines — C.182: Use anonymous namespaces to limit visibility](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-member)
 ---

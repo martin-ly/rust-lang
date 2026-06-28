@@ -664,9 +664,9 @@ graph TB
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [Axum Web 框架架构](./07_axum_architecture.md)
-- [Hyper HTTP 实现架构](./08_hyper_architecture.md)
-- [Tower 中间件组合架构](./02_tower_architecture.md)
+- [Axum Web 框架架构](07_axum_architecture.md)
+- [Hyper HTTP 实现架构](08_hyper_architecture.md)
+- [Tower 中间件组合架构](02_tower_architecture.md)
 - [异步编程模型](../../../../concept/03_advanced/02_async.md)
 
 ---

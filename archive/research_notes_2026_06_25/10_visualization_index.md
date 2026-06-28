@@ -9,40 +9,40 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [可视化文档索引](#可视化文档索引)
-  - [📑 目录](#-目录)
-  - [🎯 概述 {#-概述}](#-概述--概述)
-  - [🧠 思维导图 {#-思维导图}](#-思维导图--思维导图)
-    - [1. 任务关系网络图](#1-任务关系网络图)
-  - [📊 概念对比矩阵 {#-概念对比矩阵}](#-概念对比矩阵--概念对比矩阵)
-    - [1. 任务类型对比矩阵](#1-任务类型对比矩阵)
-    - [2. 任务完成策略对比矩阵](#2-任务完成策略对比矩阵)
-    - [3. 工具选择对比矩阵](#3-工具选择对比矩阵)
-  - [🌳 决策树 {#-决策树}](#-决策树--决策树)
-    - [1. 任务优先级决策树](#1-任务优先级决策树)
-  - [📈 进度可视化 {#-进度可视化}](#-进度可视化--进度可视化)
-    - [1. 周进度跟踪表](#1-周进度跟踪表)
-    - [2. 任务完成度热力图](#2-任务完成度热力图)
-  - [🔗 相关文档 {#-相关文档}](#-相关文档--相关文档)
-    - [核心文档](#核心文档)
-    - [工具资源](#工具资源)
-  - [💻 可视化代码示例](#-可视化代码示例)
-    - [示例 1: Mermaid 思维导图代码](#示例-1-mermaid-思维导图代码)
-    - [示例 2: 概念对比矩阵代码](#示例-2-概念对比矩阵代码)
-    - [示例 3: 决策树代码](#示例-3-决策树代码)
-    - [示例 4: Rust 可视化代码](#示例-4-rust-可视化代码)
-  - [🔗 形式化链接](#-形式化链接)
-    - [可视化文档索引](#可视化文档索引-1)
-    - [研究笔记链接](#研究笔记链接)
-    - [形式化定理链接](#形式化定理链接)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [可视化文档索引](.#可视化文档索引)
+  - [📑 目录](.#-目录)
+  - [🎯 概述 {#-概述}](.#-概述--概述)
+  - [🧠 思维导图 {#-思维导图}](.#-思维导图--思维导图)
+    - [1. 任务关系网络图](.#1-任务关系网络图)
+  - [📊 概念对比矩阵 {#-概念对比矩阵}](.#-概念对比矩阵--概念对比矩阵)
+    - [1. 任务类型对比矩阵](.#1-任务类型对比矩阵)
+    - [2. 任务完成策略对比矩阵](.#2-任务完成策略对比矩阵)
+    - [3. 工具选择对比矩阵](.#3-工具选择对比矩阵)
+  - [🌳 决策树 {#-决策树}](.#-决策树--决策树)
+    - [1. 任务优先级决策树](.#1-任务优先级决策树)
+  - [📈 进度可视化 {#-进度可视化}](.#-进度可视化--进度可视化)
+    - [1. 周进度跟踪表](.#1-周进度跟踪表)
+    - [2. 任务完成度热力图](.#2-任务完成度热力图)
+  - [🔗 相关文档 {#-相关文档}](.#-相关文档--相关文档)
+    - [核心文档](.#核心文档)
+    - [工具资源](.#工具资源)
+  - [💻 可视化代码示例](.#-可视化代码示例)
+    - [示例 1: Mermaid 思维导图代码](.#示例-1-mermaid-思维导图代码)
+    - [示例 2: 概念对比矩阵代码](.#示例-2-概念对比矩阵代码)
+    - [示例 3: 决策树代码](.#示例-3-决策树代码)
+    - [示例 4: Rust 可视化代码](.#示例-4-rust-可视化代码)
+  - [🔗 形式化链接](.#-形式化链接)
+    - [可视化文档索引](.#可视化文档索引-1)
+    - [研究笔记链接](.#研究笔记链接)
+    - [形式化定理链接](.#形式化定理链接)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 > **创建日期**: 2025-12-25
 > **最后更新**: 2026-02-28
@@ -239,8 +239,8 @@
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - 任务编排与执行计划 - 包含所有可视化内容
-- [任务清单](../../archive/research_notes_2026_06_25/10_task_checklist.md) - 详细任务列表
-- [进度跟踪](../../archive/research_notes_2026_06_25/10_progress_tracking.md) - 详细进度跟踪
+- [任务清单](10_task_checklist.md) - 详细任务列表
+- [进度跟踪](10_progress_tracking.md) - 详细进度跟踪
 
 ### 工具资源
 
@@ -372,7 +372,7 @@ fn main() {
 | 思维导图 | [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) | 知识结构化思维导图 |
 | 概念矩阵 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/04_multi_dimensional_concept_matrix.md) | 多维概念对比矩阵 |
 | 决策树 | [DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md) | 决策图网络 |
-| 证明树 | [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) | 证明树结构 |
+| 证明树 | [PROOF_INDEX](10_proof_index.md) | 证明树结构 |
 
 ### 研究笔记链接
 >
@@ -380,9 +380,9 @@ fn main() {
 
 | 类别 | 文档 | 可视化内容 |
 | :--- | :--- | :--- |
-| 形式化方法 | [formal_methods/10_ownership_model.md](./formal_methods/10_ownership_model.md) | 所有权状态图 |
-| 类型理论 | [type_theory/10_type_system_foundations.md](./type_theory/10_type_system_foundations.md) | 类型推导树 |
-| 实验研究 | [experiments/10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md) | 性能图表 |
+| 形式化方法 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) | 所有权状态图 |
+| 类型理论 | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) | 类型推导树 |
+| 实验研究 | [experiments/10_performance_benchmarks.md](experiments/10_performance_benchmarks.md) | 性能图表 |
 
 ### 形式化定理链接
 >
@@ -390,9 +390,9 @@ fn main() {
 
 | 定理 | 可视化表示 | 代码示例位置 |
 | :--- | :--- | :--- |
-| T-OW2 | 所有权状态转换图 | [10_coq_isabelle_proof_scaffolding.md](../../archive/research_notes_2026_06_25/10_coq_isabelle_proof_scaffolding.md) |
-| T-BR1 | 借用生命周期图 | [10_coq_isabelle_proof_scaffolding.md](../../archive/research_notes_2026_06_25/10_coq_isabelle_proof_scaffolding.md) |
-| T-TY3 | 类型推导树 | [10_coq_isabelle_proof_scaffolding.md](../../archive/research_notes_2026_06_25/10_coq_isabelle_proof_scaffolding.md) |
+| T-OW2 | 所有权状态转换图 | [10_coq_isabelle_proof_scaffolding.md](10_coq_isabelle_proof_scaffolding.md) |
+| T-BR1 | 借用生命周期图 | [10_coq_isabelle_proof_scaffolding.md](10_coq_isabelle_proof_scaffolding.md) |
+| T-TY3 | 类型推导树 | [10_coq_isabelle_proof_scaffolding.md](10_coq_isabelle_proof_scaffolding.md) |
 
 ---
 
@@ -459,7 +459,7 @@ fn main() {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

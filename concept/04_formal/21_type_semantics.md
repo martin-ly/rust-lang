@@ -10,8 +10,8 @@
 > **层次定位**: L4 形式化理论 / 类型语义子域 [来源: [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 > **A/S/P 标记**: **S** — Structure（心智模型）
 > **双维定位**: C×Ana — 分析 Rust 类型系统（Type System）的语义表达能力
-> **前置依赖**: [Type Theory](./02_type_theory.md) · [Ownership Formalization](./03_ownership_formal.md)
-> **后置延伸**: [Axiomatic Semantics](./20_axiomatic_semantics.md) · [RustBelt](./04_rustbelt.md) · [Effects System](../07_future/04_effects_system.md)
+> **前置依赖**: [Type Theory](02_type_theory.md) · [Ownership Formalization](03_ownership_formal.md)
+> **后置延伸**: [Axiomatic Semantics](20_axiomatic_semantics.md) · [RustBelt](04_rustbelt.md) · [Effects System](../07_future/04_effects_system.md)
 > **跨层映射**: L4→L1 类型语义 ↔ 类型直觉 | L4→L2 Trait 系统 ↔ 存在/全称类型
 > **定理链编号**: T-130 进步定理 → T-131 保持定理 → T-132 类型安全完备性
 
@@ -815,14 +815,14 @@ fn pinned_self_ref() {
 
 ## 相关概念文件
 
-- [类型论基础](./02_type_theory.md) — HM 类型系统（Type System）、System F、多态
-- [所有权形式化](./03_ownership_formal.md) — COR、RustBelt、权限系统
-- [公理语义：霍尔逻辑与 wp 计算](./20_axiomatic_semantics.md) — Hoare 三元组、谓词转换器
-- [操作语义：程序行为的形式化定义](./17_operational_semantics.md) — 小步/大步语义
-- [指称语义：CPO 与不动点](./12_denotational_semantics.md) — Scott-Strachey 语义
+- [类型论基础](02_type_theory.md) — HM 类型系统（Type System）、System F、多态
+- [所有权形式化](03_ownership_formal.md) — COR、RustBelt、权限系统
+- [公理语义：霍尔逻辑与 wp 计算](20_axiomatic_semantics.md) — Hoare 三元组、谓词转换器
+- [操作语义：程序行为的形式化定义](17_operational_semantics.md) — 小步/大步语义
+- [指称语义：CPO 与不动点](12_denotational_semantics.md) — Scott-Strachey 语义
 - [Trait 系统](../02_intermediate/01_traits.md) — 类型类的 Rust 表达
 - 泛型（Generics）系统 — 参数多态与约束
-- [RustBelt 与验证工具链](./04_rustbelt.md) — 高阶幽灵状态、验证工具生态
+- [RustBelt 与验证工具链](04_rustbelt.md) — 高阶幽灵状态、验证工具生态
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

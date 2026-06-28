@@ -429,7 +429,7 @@ TROUBLESHOOTING_AND_DEBUGGING_GUIDE.md
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [安全关键系统 README](./README.md)
+- [安全关键系统 README](README.md)
 
 ---
 

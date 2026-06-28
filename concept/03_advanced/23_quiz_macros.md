@@ -23,12 +23,12 @@
 > [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)
 >
 > **前置概念**:
-> [Macros](./04_macros.md) ·
-> [Proc Macros](./07_proc_macro.md) ·
+> [Macros](04_macros.md) ·
+> [Proc Macros](07_proc_macro.md) ·
 > [Type System](../01_foundation/04_type_system.md)
 >
 > **对应练习**:
-> [`exercises/src/macros/`](../../exercises/src/macros/)
+> [`exercises/src/macros/`](../../exercises/src/macros)
 
 ---
 
@@ -144,7 +144,7 @@ fn main() {
 
 **注意**：`sum!()` 匹配零次，展开为 `temp = 0`，返回 0。
 
-**知识点**：重复模式是声明宏（Declarative Macro）最强大的特性，允许处理任意数量的参数。分隔符的选择影响宏的调用语法。[→ 宏系统详解](./04_macros.md)
+**知识点**：重复模式是声明宏（Declarative Macro）最强大的特性，允许处理任意数量的参数。分隔符的选择影响宏的调用语法。[→ 宏系统详解](04_macros.md)
 
 </details>
 
@@ -202,7 +202,7 @@ fn main() {
 
 Rust 的卫生性避免了这种经典宏陷阱。
 
-**知识点**：卫生性是 Rust 宏相对于 C 预处理器的关键优势，但理解"哪些标识符在何处解析"对调试宏仍然重要。[→ 宏系统详解](./04_macros.md)
+**知识点**：卫生性是 Rust 宏相对于 C 预处理器的关键优势，但理解"哪些标识符在何处解析"对调试宏仍然重要。[→ 宏系统详解](04_macros.md)
 
 </details>
 
@@ -262,7 +262,7 @@ impl PartialEq for Point {
 
 **自定义 derive**：通过 `proc_macro_derive` 创建自己的 derive 宏（Macro）。
 
-**知识点**：derive 宏是最常用的过程宏（Procedural Macro），消除了大量 boilerplate。理解其生成的代码有助于调试复杂的 trait 约束问题。[→ 过程宏详解](./07_proc_macro.md)
+**知识点**：derive 宏是最常用的过程宏（Procedural Macro），消除了大量 boilerplate。理解其生成的代码有助于调试复杂的 trait 约束问题。[→ 过程宏详解](07_proc_macro.md)
 
 </details>
 
@@ -315,7 +315,7 @@ fn add(a: i32, b: i32) -> i32 {
 - 属性宏：**修改**已有 AST 节点（函数、结构体（Struct）等）
 - 函数宏（`proc_macro`）：**生成**新代码，通过 `!` 调用
 
-**知识点**：属性宏是构建编译期 AOP（面向切面编程）和代码生成工具的核心机制。`tokio::main`、`test`、`derive` 都是属性宏。[→ 过程宏详解](./07_proc_macro.md)
+**知识点**：属性宏是构建编译期 AOP（面向切面编程）和代码生成工具的核心机制。`tokio::main`、`test`、`derive` 都是属性宏。[→ 过程宏详解](07_proc_macro.md)
 
 </details>
 
@@ -377,7 +377,7 @@ Value: 10
 - 需要最大灵活性 → 用 `tt`（但可能匹配不期望的内容）
 - 需要类型检查 → 用 `ty`
 
-**知识点**：fragment specifier 的选择直接影响宏的健壮性和错误信息质量。过于宽泛的 `tt` 会导致难以调试的展开错误。[→ 宏系统详解](./04_macros.md)
+**知识点**：fragment specifier 的选择直接影响宏的健壮性和错误信息质量。过于宽泛的 `tt` 会导致难以调试的展开错误。[→ 宏系统详解](04_macros.md)
 
 </details>
 
@@ -432,7 +432,7 @@ recursion limit reached while expanding macro
 
 **尾递归优化**：宏展开没有尾递归优化，每次递归都会增加展开深度。
 
-**知识点**：递归宏是实现编译期计算（如类型列表长度、位掩码生成）的强大工具，但受限于编译器的递归深度。[→ 宏系统详解](./04_macros.md)
+**知识点**：递归宏是实现编译期计算（如类型列表长度、位掩码生成）的强大工具，但受限于编译器的递归深度。[→ 宏系统详解](04_macros.md)
 
 </details>
 
@@ -485,7 +485,7 @@ macro_rules! make_fn {
 make_fn!(foo); // 生成 fn foo() { ... }
 ```
 
-**知识点**：内置宏（built-in macros）是 Rust 编译器提供的特殊宏，在标准库中声明但实际由编译器直接处理。[→ 宏系统详解](./04_macros.md)
+**知识点**：内置宏（built-in macros）是 Rust 编译器提供的特殊宏，在标准库中声明但实际由编译器直接处理。[→ 宏系统详解](04_macros.md)
 
 </details>
 
@@ -540,7 +540,7 @@ macro_rules! good {
 
 **注意**：`$(...),*` 在匹配时允许**末尾逗号**（trailing comma），但展开时不会生成末尾逗号。
 
-**知识点**：分隔符在宏定义和展开中必须一致。常见的错误是匹配时用了逗号分隔，但展开时忘了添加分隔符。[→ 宏系统详解](./04_macros.md)
+**知识点**：分隔符在宏定义和展开中必须一致。常见的错误是匹配时用了逗号分隔，但展开时忘了添加分隔符。[→ 宏系统详解](04_macros.md)
 
 </details>
 
@@ -603,7 +603,7 @@ macro_rules! make_vec {
 2. 如果宏在库 crate 中定义并引用自己的类型，使用 `$crate`
 3. 避免在宏中生成 `use` 语句，直接写全路径
 
-**知识点**：宏的展开位置影响路径解析。这是宏从"原型"走向"生产级"时必须处理的问题。[→ 宏系统详解](./04_macros.md)
+**知识点**：宏的展开位置影响路径解析。这是宏从"原型"走向"生产级"时必须处理的问题。[→ 宏系统详解](04_macros.md)
 
 </details>
 
@@ -614,14 +614,14 @@ macro_rules! make_vec {
 | 得分 | 评价 | 建议 |
 |:---:|:---|:---|
 | 10/10 | 🏆 宏系统已内化 | 尝试为 crates/ 编写自定义 derive 或属性宏 |
-| 7–9/10 | ✅ 核心概念掌握 | 强化 [宏练习](../../exercises/src/macros/)，阅读 `vec!` 等标准宏的源码 |
-| 4–6/10 | 🔄 需巩固基础 | 重读 [Macros](./04_macros.md) · [Proc Macros](./07_proc_macro.md) |
+| 7–9/10 | ✅ 核心概念掌握 | 强化 [宏练习](../../exercises/src/macros)，阅读 `vec!` 等标准宏的源码 |
+| 4–6/10 | 🔄 需巩固基础 | 重读 [Macros](04_macros.md) · [Proc Macros](07_proc_macro.md) |
 | 0–3/10 | 📚 建议重新开始 | 从 [宏基础](../01_foundation/12_attributes_and_macros.md) 开始，配合 [TLBoRM](https://danielkeep.github.io/tlborm/book/) |
 
 ---
 
-> **对应 Crate**: [`c11_macro_system`](../../crates/c11_macro_system/) · [`c11_macro_system_proc`](../../crates/c11_macro_system_proc/)
-> **对应练习**: [`exercises/src/macros/`](../../exercises/src/macros/)
+> **对应 Crate**: [`c11_macro_system`](../../crates/c11_macro_system) · [`c11_macro_system_proc`](../../crates/c11_macro_system_proc)
+> **对应练习**: [`exercises/src/macros/`](../../exercises/src/macros)
 
 ---
 

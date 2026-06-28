@@ -28,7 +28,7 @@
 > **前置概念**: N/A
 ---
 
-> **后置概念**: [Rust 1.97 稳定特性](./rust_1_97_preview.md) · [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
+> **后置概念**: [Rust 1.97 稳定特性](rust_1_97_preview.md) · [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md) · [Toolchain](../06_ecosystem/01_toolchain.md)
 
 ---
@@ -282,7 +282,7 @@ fn demo_198_apis() {
 
 ### 2.3 Nightly 探测结果（2026-06-28）
 
-> 探测脚本: [`scripts/probe_rust_198_apis.rs`](../../../scripts/probe_rust_198_apis.rs)  
+> 探测脚本: [`scripts/probe_rust_198_apis.rs`](../../../scripts/probe_rust_198_apis.rs)
 > 完整报告: [`reports/RUST_198_NIGHTLY_PROBE_2026_06_28.md`](../../../reports/RUST_198_NIGHTLY_PROBE_2026_06_28.md)
 
 使用 `rustc 1.98.0-nightly (2026-06-26)` 对 17 项候选 API 进行无 feature gate 编译探测：
@@ -525,7 +525,7 @@ serde = { version = "1.0", public = true }
 
 ### 7.3 关联文档
 
-- [Rust 1.97 稳定特性](./rust_1_97_preview.md)
+- [Rust 1.97 稳定特性](rust_1_97_preview.md)
 - [Pin Ergonomics 预览](15_pin_ergonomics_preview.md)
 - [Return Type Notation 预览](12_return_type_notation_preview.md)
 - [Async Drop 预览](18_async_drop_preview.md)

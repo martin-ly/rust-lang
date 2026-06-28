@@ -2,40 +2,40 @@
 
 > **文档定位**: 设计模式核心术语快速参考，涵盖模式、并发、形式化等关键概念
 > **使用方式**: 通过术语索引快速查找定义，理解设计模式核心概念
-> **相关文档**: [主索引](./00_MASTER_INDEX.md) | [README](./README.md) | [FAQ](./FAQ.md)
+> **相关文档**: [主索引](00_MASTER_INDEX.md) | [README](README.md) | [FAQ](FAQ.md)
 
 ## 📊 目录
 
-- [C09 设计模式: 术语表 (Glossary)](#c09-设计模式-术语表-glossary)
-  - [📊 目录](#-目录)
-  - [📋 术语索引](#-术语索引)
-  - [设计模式基础](#设计模式基础)
-    - [设计模式 (Design Pattern)](#设计模式-design-pattern)
-    - [GoF (Gang of Four)](#gof-gang-of-four)
-    - [单例模式 (Singleton)](#单例模式-singleton)
-    - [观察者模式 (Observer)](#观察者模式-observer)
-    - [策略模式 (Strategy)](#策略模式-strategy)
-    - [建造者模式 (Builder)](#建造者模式-builder)
-    - [类型状态模式 (Typestate Pattern)](#类型状态模式-typestate-pattern)
-  - [并发与异步](#并发与异步)
-    - [Actor 模式](#actor-模式)
-    - [Reactor 模式](#reactor-模式)
-    - [CSP (Communicating Sequential Processes)](#csp-communicating-sequential-processes)
-    - [Future](#future)
-    - [async/await](#asyncawait)
-  - [Rust 特性](#rust-特性)
-    - [Trait 对象](#trait-对象)
-    - [零成本抽象 (Zero-Cost Abstraction)](#零成本抽象-zero-cost-abstraction)
-    - [GATs (Generic Associated Types)](#gats-generic-associated-types)
-    - [RPITIT (Return Position Impl Trait in Trait)](#rpitit-return-position-impl-trait-in-trait)
-    - [OnceLock](#oncelock)
-  - [形式化理论](#形式化理论)
-    - [CPS 变换](#cps-变换)
-    - [Monad](#monad)
-    - [状态机 (State Machine)](#状态机-state-machine)
-    - [语义等价 (Semantic Equivalence)](#语义等价-semantic-equivalence)
-    - [Pin](#pin)
-  - [📚 延伸阅读](#-延伸阅读)
+- [C09 设计模式: 术语表 (Glossary)](.#c09-设计模式-术语表-glossary)
+  - [📊 目录](.#-目录)
+  - [📋 术语索引](.#-术语索引)
+  - [设计模式基础](.#设计模式基础)
+    - [设计模式 (Design Pattern)](.#设计模式-design-pattern)
+    - [GoF (Gang of Four)](.#gof-gang-of-four)
+    - [单例模式 (Singleton)](.#单例模式-singleton)
+    - [观察者模式 (Observer)](.#观察者模式-observer)
+    - [策略模式 (Strategy)](.#策略模式-strategy)
+    - [建造者模式 (Builder)](.#建造者模式-builder)
+    - [类型状态模式 (Typestate Pattern)](.#类型状态模式-typestate-pattern)
+  - [并发与异步](.#并发与异步)
+    - [Actor 模式](.#actor-模式)
+    - [Reactor 模式](.#reactor-模式)
+    - [CSP (Communicating Sequential Processes)](.#csp-communicating-sequential-processes)
+    - [Future](.#future)
+    - [async/await](.#asyncawait)
+  - [Rust 特性](.#rust-特性)
+    - [Trait 对象](.#trait-对象)
+    - [零成本抽象 (Zero-Cost Abstraction)](.#零成本抽象-zero-cost-abstraction)
+    - [GATs (Generic Associated Types)](.#gats-generic-associated-types)
+    - [RPITIT (Return Position Impl Trait in Trait)](.#rpitit-return-position-impl-trait-in-trait)
+    - [OnceLock](.#oncelock)
+  - [形式化理论](.#形式化理论)
+    - [CPS 变换](.#cps-变换)
+    - [Monad](.#monad)
+    - [状态机 (State Machine)](.#状态机-state-machine)
+    - [语义等价 (Semantic Equivalence)](.#语义等价-semantic-equivalence)
+    - [Pin](.#pin)
+  - [📚 延伸阅读](.#-延伸阅读)
 
 **最后更新**: 2025-12-25
 **适用版本**: Rust 1.92.0+ (Edition 2024)
@@ -45,14 +45,14 @@
 
 ## 📋 术语索引
 
-[A](#actor-模式) | [C](#cps-变换) | [D](#设计模式-design-pattern) | [F](#future) | [G](#gats-generic-associated-types) | [M](#monad) | [R](#reactor-模式) | [T](#trait-对象) | [Z](#零成本抽象-zero-cost-abstraction)
+[A](.#actor-模式) | [C](.#cps-变换) | [D](.#设计模式-design-pattern) | [F](.#future) | [G](.#gats-generic-associated-types) | [M](.#monad) | [R](.#reactor-模式) | [T](.#trait-对象) | [Z](.#零成本抽象-zero-cost-abstraction)
 
 **快速跳转**:
 
-- [设计模式基础](#设计模式基础)
-- [并发与异步](#并发与异步)
-- [Rust 特性](#rust-特性)
-- [形式化理论](#形式化理论)
+- [设计模式基础](.#设计模式基础)
+- [并发与异步](.#并发与异步)
+- [Rust 特性](.#rust-特性)
+- [形式化理论](.#形式化理论)
 
 ---
 
@@ -70,7 +70,7 @@
 
 **Rust 特点**: 需要考虑所有权、借用、生命周期
 
-**相关**: [00_MASTER_INDEX.md](./00_MASTER_INDEX.md)
+**相关**: [00_MASTER_INDEX.md](00_MASTER_INDEX.md)
 
 ---
 
@@ -84,7 +84,7 @@
 - 结构型 (7): 适配器、桥接、组合、装饰器、外观、享元、代理
 - 行为型 (11): 责任链、命令、解释器、迭代器、中介者、备忘录、观察者、状态、策略、模板方法、访问者
 
-**相关**: [COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md](./COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md)
+**相关**: [COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md](COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md)
 
 ---
 
@@ -106,7 +106,7 @@ pub fn get_instance() -> &'static Config {
 }
 ```
 
-**相关**: [src/creational/singleton/](../src/creational/singleton/)
+**相关**: [src/creational/singleton/](../src/creational/singleton)
 
 ---
 
@@ -134,7 +134,7 @@ impl Subject {
 }
 ```
 
-**相关**: [src/behavioral/observer/](../src/behavioral/observer/), [examples/gats_observer_demo.rs](../examples/gats_observer_demo.rs)
+**相关**: [src/behavioral/observer/](../src/behavioral/observer), [examples/gats_observer_demo.rs](../examples/gats_observer_demo.rs)
 
 ---
 
@@ -162,7 +162,7 @@ fn sort_data_dynamic(strategy: &dyn SortStrategy, data: &mut [i32]) {
 }
 ```
 
-**相关**: [src/behavioral/strategy/](../src/behavioral/strategy/)
+**相关**: [src/behavioral/strategy/](../src/behavioral/strategy)
 
 ---
 
@@ -204,7 +204,7 @@ impl PersonBuilder {
 }
 ```
 
-**相关**: [src/creational/builder/](../src/creational/builder/)
+**相关**: [src/creational/builder/](../src/creational/builder)
 
 ---
 
@@ -253,7 +253,7 @@ impl Document<Published> {
 }
 ```
 
-**相关**: [src/behavioral/state/](../src/behavioral/state/)
+**相关**: [src/behavioral/state/](../src/behavioral/state)
 
 ---
 
@@ -291,7 +291,7 @@ impl Actor {
 }
 ```
 
-**相关**: [docs/ACTOR_REACTOR_PATTERNS.md](./ACTOR_REACTOR_PATTERNS.md)
+**相关**: [docs/ACTOR_REACTOR_PATTERNS.md](ACTOR_REACTOR_PATTERNS.md)
 
 ---
 
@@ -307,7 +307,7 @@ impl Actor {
 
 **Rust 中**: Tokio 运行时基于 Reactor 模式
 
-**相关**: [docs/ACTOR_REACTOR_PATTERNS.md](./ACTOR_REACTOR_PATTERNS.md)
+**相关**: [docs/ACTOR_REACTOR_PATTERNS.md](ACTOR_REACTOR_PATTERNS.md)
 
 ---
 
@@ -335,7 +335,7 @@ std::thread::spawn(move || {
 let value = rx.recv().unwrap();
 ```
 
-**相关**: [docs/CSP_VS_ASYNC_ANALYSIS.md](./CSP_VS_ASYNC_ANALYSIS.md)
+**相关**: [docs/CSP_VS_ASYNC_ANALYSIS.md](CSP_VS_ASYNC_ANALYSIS.md)
 
 ---
 
@@ -354,7 +354,7 @@ pub trait Future {
 
 **状态机**: async/await 编译为状态机
 
-**相关**: [src/concurrency/asynchronous/](../src/concurrency/asynchronous/)
+**相关**: [src/concurrency/asynchronous/](../src/concurrency/asynchronous)
 
 ---
 
@@ -374,7 +374,7 @@ async fn fetch_data() -> Result<Data> {
 }
 ```
 
-**相关**: [docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md](./ASYNC_SYNC_EQUIVALENCE_THEORY.md)
+**相关**: [docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md](ASYNC_SYNC_EQUIVALENCE_THEORY.md)
 
 ---
 
@@ -402,7 +402,7 @@ fn process(handler: &dyn Handler) {
 }
 ```
 
-**相关**: [FAQ.md](./FAQ.md#q13-设计模式会影响性能吗)
+**相关**: [FAQ.md](FAQ.md#q13-设计模式会影响性能吗)
 
 ---
 
@@ -459,7 +459,7 @@ impl Observer for StringObserver {
 }
 ```
 
-**相关**: [src/behavioral/observer/](../src/behavioral/observer/), [examples/gats_observer_demo.rs](../examples/gats_observer_demo.rs)
+**相关**: [src/behavioral/observer/](../src/behavioral/observer), [examples/gats_observer_demo.rs](../examples/gats_observer_demo.rs)
 
 ---
 
@@ -517,7 +517,7 @@ fn get_config() -> &'static Config {
 
 **vs lazy_static**: 标准库支持，无需外部依赖
 
-**相关**: [src/creational/singleton/](../src/creational/singleton/)
+**相关**: [src/creational/singleton/](../src/creational/singleton)
 
 ---
 
@@ -552,7 +552,7 @@ where
 }
 ```
 
-**相关**: [docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md](./ASYNC_SYNC_EQUIVALENCE_THEORY.md)
+**相关**: [docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md](ASYNC_SYNC_EQUIVALENCE_THEORY.md)
 
 ---
 
@@ -581,7 +581,7 @@ fn chain<T, U>(opt: Option<T>, f: impl FnOnce(T) -> Option<U>) -> Option<U> {
 }
 ```
 
-**相关**: [docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md](./ASYNC_SYNC_EQUIVALENCE_THEORY.md)
+**相关**: [docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md](ASYNC_SYNC_EQUIVALENCE_THEORY.md)
 
 ---
 
@@ -616,7 +616,7 @@ impl Future for ExampleStateMachine {
 }
 ```
 
-**相关**: [docs/ASYNC_RECURSION_ANALYSIS.md](./ASYNC_RECURSION_ANALYSIS.md)
+**相关**: [docs/ASYNC_RECURSION_ANALYSIS.md](ASYNC_RECURSION_ANALYSIS.md)
 
 ---
 
@@ -646,7 +646,7 @@ async fn async_version() -> i32 {
 
 **证明方法**: CPS 变换、Monad 同态
 
-**相关**: [docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md](./ASYNC_SYNC_EQUIVALENCE_THEORY.md)
+**相关**: [docs/ASYNC_SYNC_EQUIVALENCE_THEORY.md](ASYNC_SYNC_EQUIVALENCE_THEORY.md)
 
 ---
 
@@ -671,28 +671,28 @@ fn use_pinned(pinned: Pin<&mut SelfReferential>) {
 }
 ```
 
-**相关**: [docs/ASYNC_RECURSION_ANALYSIS.md](./ASYNC_RECURSION_ANALYSIS.md)
+**相关**: [docs/ASYNC_RECURSION_ANALYSIS.md](ASYNC_RECURSION_ANALYSIS.md)
 
 ---
 
 ## 📚 延伸阅读
 
-- [主索引](./00_MASTER_INDEX.md) - 完整文档导航
-- [FAQ](./FAQ.md) - 常见问题解答（完整版）
-- [Tier 1 基础层](./tier_01_foundations/README.md) - 快速入门和基础参考
-- [Tier 1 术语表](./tier_01_foundations/03_术语表.md) - 核心术语快速参考
-- [Tier 1 常见问题](./tier_01_foundations/04_常见问题.md) - 新手常见问题解答
-- [README](./README.md) - 项目概述
-- [综合指南](./COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) - 深度学习
-- [形式化理论文档](./ASYNC_SYNC_EQUIVALENCE_THEORY.md) - 理论基础
+- [主索引](00_MASTER_INDEX.md) - 完整文档导航
+- [FAQ](FAQ.md) - 常见问题解答（完整版）
+- [Tier 1 基础层](tier_01_foundations/README.md) - 快速入门和基础参考
+- [Tier 1 术语表](tier_01_foundations/03_术语表.md) - 核心术语快速参考
+- [Tier 1 常见问题](tier_01_foundations/04_常见问题.md) - 新手常见问题解答
+- [README](README.md) - 项目概述
+- [综合指南](COMPREHENSIVE_DESIGN_PATTERNS_GUIDE.md) - 深度学习
+- [形式化理论文档](ASYNC_SYNC_EQUIVALENCE_THEORY.md) - 理论基础
 
 ---
 
 **需要更多帮助？**
 
 - 查看 [示例代码](../examples/README.md)
-- 运行 [测试用例](../tests/)
-- 阅读 [源码实现](../src/)
+- 运行 [测试用例](../tests)
+- 阅读 [源码实现](../src)
 
 ---
 

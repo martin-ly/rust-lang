@@ -1,7 +1,7 @@
 # C03 Control Flow and Functions - Master Index (English)
 
 > **Version**: 1.0 | **Rust**: 1.93.0+ | **Last Update**: 2026-02-14
-> **Full Chinese version**: [00_MASTER_INDEX.md](./00_MASTER_INDEX.md)
+> **Full Chinese version**: [00_MASTER_INDEX.md](00_MASTER_INDEX.md)
 
 ---
 

@@ -12,40 +12,40 @@
 
 ## 📑 目录
 
-- [Rust 数据科学与科学计算](#rust-数据科学与科学计算)
-  - [📑 目录](#-目录)
-  - [一、权威定义（Definition）](#一权威定义definition)
-    - [1.1 数据科学的 Rust 定位](#11-数据科学的-rust-定位)
-    - [1.2 核心矛盾：Python 生态 vs Rust 性能](#12-核心矛盾python-生态-vs-rust-性能)
-  - [二、概念属性矩阵](#二概念属性矩阵)
-  - [三、数据处理与 ETL](#三数据处理与-etl)
-    - [3.1 Polars：DataFrame 引擎](#31-polarsdataframe-引擎)
-    - [3.2 DataFusion：查询执行](#32-datafusion查询执行)
-  - [四、统计分析与数值计算](#四统计分析与数值计算)
-    - [4.1 统计生态](#41-统计生态)
-    - [4.2 线性代数](#42-线性代数)
-  - [五、可视化与交互](#五可视化与交互)
-    - [5.1 绘图生态](#51-绘图生态)
-    - [5.2 Jupyter 内核](#52-jupyter-内核)
-  - [六、Python 互操作](#六python-互操作)
-  - [七、反命题与边界](#七反命题与边界)
-    - [7.1 反命题树](#71-反命题树)
-    - [7.2 边界极限](#72-边界极限)
-  - [八、边界测试](#八边界测试)
-    - [8.1 边界测试：Polars Lazy API 中过早 collect 导致内存溢出](#81-边界测试polars-lazy-api-中过早-collect-导致内存溢出)
-    - [8.2 边界测试：PyO3 GIL 死锁](#82-边界测试pyo3-gil-死锁)
-    - [8.3 边界测试：未处理 CSV 解析中的畸形数据](#83-边界测试未处理-csv-解析中的畸形数据)
-  - [相关概念文件](#相关概念文件)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：Rust 在数据科学领域的定位与 Python 有什么不同？（理解层）](#测验-1rust-在数据科学领域的定位与-python-有什么不同理解层)
-    - [测验 2：`polars` 相比 `pandas` 在性能上的主要优势来源是什么？（理解层）](#测验-2polars-相比-pandas-在性能上的主要优势来源是什么理解层)
-    - [测验 3：为什么数据科学工作流中的 ETL 步骤特别适合用 Rust 重写？（理解层）](#测验-3为什么数据科学工作流中的-etl-步骤特别适合用-rust-重写理解层)
-    - [测验 4：`plotters` 在 Rust 数据可视化中与 Python 的 `matplotlib` 有什么对应关系？（理解层）](#测验-4plotters-在-rust-数据可视化中与-python-的-matplotlib-有什么对应关系理解层)
-    - [测验 5：Rust 如何通过 Arrow FFI 与 Python 的 `pyarrow` / `pandas` 零拷贝交换数据？（理解层）](#测验-5rust-如何通过-arrow-ffi-与-python-的-pyarrow--pandas-零拷贝交换数据理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Rust 数据科学与科学计算](.#rust-数据科学与科学计算)
+  - [📑 目录](.#-目录)
+  - [一、权威定义（Definition）](.#一权威定义definition)
+    - [1.1 数据科学的 Rust 定位](.#11-数据科学的-rust-定位)
+    - [1.2 核心矛盾：Python 生态 vs Rust 性能](.#12-核心矛盾python-生态-vs-rust-性能)
+  - [二、概念属性矩阵](.#二概念属性矩阵)
+  - [三、数据处理与 ETL](.#三数据处理与-etl)
+    - [3.1 Polars：DataFrame 引擎](.#31-polarsdataframe-引擎)
+    - [3.2 DataFusion：查询执行](.#32-datafusion查询执行)
+  - [四、统计分析与数值计算](.#四统计分析与数值计算)
+    - [4.1 统计生态](.#41-统计生态)
+    - [4.2 线性代数](.#42-线性代数)
+  - [五、可视化与交互](.#五可视化与交互)
+    - [5.1 绘图生态](.#51-绘图生态)
+    - [5.2 Jupyter 内核](.#52-jupyter-内核)
+  - [六、Python 互操作](.#六python-互操作)
+  - [七、反命题与边界](.#七反命题与边界)
+    - [7.1 反命题树](.#71-反命题树)
+    - [7.2 边界极限](.#72-边界极限)
+  - [八、边界测试](.#八边界测试)
+    - [8.1 边界测试：Polars Lazy API 中过早 collect 导致内存溢出](.#81-边界测试polars-lazy-api-中过早-collect-导致内存溢出)
+    - [8.2 边界测试：PyO3 GIL 死锁](.#82-边界测试pyo3-gil-死锁)
+    - [8.3 边界测试：未处理 CSV 解析中的畸形数据](.#83-边界测试未处理-csv-解析中的畸形数据)
+  - [相关概念文件](.#相关概念文件)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 在数据科学领域的定位与 Python 有什么不同？（理解层）](.#测验-1rust-在数据科学领域的定位与-python-有什么不同理解层)
+    - [测验 2：`polars` 相比 `pandas` 在性能上的主要优势来源是什么？（理解层）](.#测验-2polars-相比-pandas-在性能上的主要优势来源是什么理解层)
+    - [测验 3：为什么数据科学工作流中的 ETL 步骤特别适合用 Rust 重写？（理解层）](.#测验-3为什么数据科学工作流中的-etl-步骤特别适合用-rust-重写理解层)
+    - [测验 4：`plotters` 在 Rust 数据可视化中与 Python 的 `matplotlib` 有什么对应关系？（理解层）](.#测验-4plotters-在-rust-数据可视化中与-python-的-matplotlib-有什么对应关系理解层)
+    - [测验 5：Rust 如何通过 Arrow FFI 与 Python 的 `pyarrow` / `pandas` 零拷贝交换数据？（理解层）](.#测验-5rust-如何通过-arrow-ffi-与-python-的-pyarrow--pandas-零拷贝交换数据理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 > **Bloom 层级**: 分析 → 评价
 > **变更日志**:
@@ -506,14 +506,14 @@ fn robust_csv_read() -> Result<DataFrame, PolarsError> {
 
 ## 相关概念文件
 
-- [数据工程](./48_data_engineering.md) — ETL/ELT、Delta Lake、CDC
-- [机器学习生态](./46_machine_learning_ecosystem.md) — candle、burn、tch-rs、linfa
-- [性能优化](./15_performance_optimization.md) — SIMD、缓存、内存布局
-- [WebAssembly](./11_webassembly.md) — 浏览器内数据分析、跨平台部署
-- [云原生](./24_cloud_native.md) — 容器化数据服务、对象存储
+- [数据工程](48_data_engineering.md) — ETL/ELT、Delta Lake、CDC
+- [机器学习生态](46_machine_learning_ecosystem.md) — candle、burn、tch-rs、linfa
+- [性能优化](15_performance_optimization.md) — SIMD、缓存、内存布局
+- [WebAssembly](11_webassembly.md) — 浏览器内数据分析、跨平台部署
+- [云原生](24_cloud_native.md) — 容器化数据服务、对象存储
 - [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、Rayon 并行
 - [类型系统（Type System）](../01_foundation/04_type_system.md) — 泛型（Generics）、Trait、零成本抽象（Zero-Cost Abstraction）
-- [量子计算](./51_quantum_computing_rust.md) — 量子模拟、量子机器学习
+- [量子计算](51_quantum_computing_rust.md) — 量子模拟、量子机器学习
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

@@ -20,7 +20,7 @@
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: P×Eva — 评估生态 crate 的安全性和可维护性
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md) [来源: [Rust FFI Guidelines](https://doc.rust-lang.org/nomicon/ffi.html)]
-> **后置概念**: [Application Domains](./04_application_domains.md)
+> **后置概念**: [Application Domains](04_application_domains.md)
 > **主要来源**: [crates.io](https://crates.io) · [lib.rs](https:/lib.rs) · [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
@@ -704,9 +704,9 @@ graph TD
 | 异步编程 | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) | tokio/axum 根基 |
 | Unsafe | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | FFI/密码学边界 |
 | 宏系统 | [`../03_advanced/04_macros.md`](../03_advanced/04_macros.md) | serde/clap derive |
-| 工具链 | [`./01_toolchain.md`](./01_toolchain.md) | Cargo/crates.io 支撑 |
-| 设计模式 | [`./02_patterns.md`](./02_patterns.md) | Builder/Typestate 模式 |
-| 应用领域 | [`./04_application_domains.md`](./04_application_domains.md) | crate 的工程落地 |
+| 工具链 | [`./01_toolchain.md`](01_toolchain.md) | Cargo/crates.io 支撑 |
+| 设计模式 | [`./02_patterns.md`](02_patterns.md) | Builder/Typestate 模式 |
+| 应用领域 | [`./04_application_domains.md`](04_application_domains.md) | crate 的工程落地 |
 | 安全边界 | [`../05_comparative/04_safety_boundaries.md`](../05_comparative/04_safety_boundaries.md) | unsafe crate 审计 |
 | 形式化方法 | [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) | crate 安全验证 |
 | 语言演进 | [`../07_future/03_evolution.md`](../07_future/03_evolution.md) | async/AFIT 影响生态 |

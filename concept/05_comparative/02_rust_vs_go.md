@@ -11,7 +11,7 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价并发模型的设计差异
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Memory Management](../02_intermediate/03_memory_management.md)
-> **后置概念**: [Paradigm Matrix](./03_paradigm_matrix.md)
+> **后置概念**: [Paradigm Matrix](03_paradigm_matrix.md)
 > **主要来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Effective Go] · [Wikipedia: Communicating sequential processes](https://en.wikipedia.org/wiki/Communicating_sequential_processes) · [Wikipedia: Go](https://en.wikipedia.org/wiki/Go)
 
 >
@@ -735,9 +735,9 @@ func ParseJSON(input string) string {
 | 并发 | [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) | Rust 并发模型 |
 | 内存管理 | [`../02_intermediate/03_memory_management.md`](../02_intermediate/03_memory_management.md) | Rust 所有权 vs Go GC |
 | 错误处理 | [`../02_intermediate/04_error_handling.md`](../02_intermediate/04_error_handling.md) | Result vs 多返回值 |
-| Rust vs C++ | [`./01_rust_vs_cpp.md`](./01_rust_vs_cpp.md) | 同层对比 |
-| 范式矩阵 | [`./03_paradigm_matrix.md`](./03_paradigm_matrix.md) | 定位参考 |
-| 安全边界 | [`./04_safety_boundaries.md`](./04_safety_boundaries.md) | 安全保证对比 |
+| Rust vs C++ | [`./01_rust_vs_cpp.md`](01_rust_vs_cpp.md) | 同层对比 |
+| 范式矩阵 | [`./03_paradigm_matrix.md`](03_paradigm_matrix.md) | 定位参考 |
+| 安全边界 | [`./04_safety_boundaries.md`](04_safety_boundaries.md) | 安全保证对比 |
 | 形式化方法 | [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) | 验证能力对比 |
 
 > **推理链**: Rust 的所有权系统 ⟹ 编译期消除数据竞争 ⟹ 零运行时 GC 开销 ⟹ 适合系统编程与高性能服务。
@@ -787,7 +787,7 @@ func ParseJSON(input string) string {
 
 ---
 
-> **相关文件**: [Rust vs C++](./01_rust_vs_cpp.md) · [范式矩阵](./03_paradigm_matrix.md) · [问题图谱](../00_meta/problem_graph.md#三并发系统设计问题树)
+> **相关文件**: [Rust vs C++](01_rust_vs_cpp.md) · [范式矩阵](03_paradigm_matrix.md) · [问题图谱](../00_meta/problem_graph.md#三并发系统设计问题树)
 
 ## 十、边界测试：Rust 与 Go 的编译错误对比
 

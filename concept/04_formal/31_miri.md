@@ -13,7 +13,7 @@
 > **双维定位**: T×Fml — 工具链与形式化验证
 > **定位**: 将 Miri 从“nightly 玩具”还原为日常 unsafe 代码审查与教学的标准工具。
 > **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Ownership](../01_foundation/01_ownership.md)
-> **后置概念**: [Tree Borrows](./36_tree_borrows_deep_dive.md) · [BorrowSanitizer](./34_borrow_sanitizer_in_formal.md) · [Kani](./22_modern_verification_tools.md)
+> **后置概念**: [Tree Borrows](36_tree_borrows_deep_dive.md) · [BorrowSanitizer](34_borrow_sanitizer_in_formal.md) · [Kani](22_modern_verification_tools.md)
 
 ---
 
@@ -24,27 +24,27 @@
 
 ## 📑 目录
 
-- [Miri：Rust 未定义行为动态检测器](#mirirust-未定义行为动态检测器)
-  - [📑 目录](#-目录)
-  - [一、Miri 是什么](#一miri-是什么)
-    - [与测试/Clippy 的区别](#与测试clippy-的区别)
-  - [二、能检测哪些未定义行为](#二能检测哪些未定义行为)
-  - [三、安装与基本用法](#三安装与基本用法)
-    - [安装](#安装)
-    - [运行测试](#运行测试)
-    - [运行单个示例或二进制](#运行单个示例或二进制)
-    - [常用 Miri 环境变量](#常用-miri-环境变量)
-  - [四、Stacked Borrows vs Tree Borrows](#四stacked-borrows-vs-tree-borrows)
-    - [Stacked Borrows（SB）](#stacked-borrowssb)
-    - [Tree Borrows（TB）](#tree-borrowstb)
-    - [选择建议](#选择建议)
-  - [五、项目内可运行示例](#五项目内可运行示例)
-    - [最小可运行示例](#最小可运行示例)
-  - [六、常见错误与修复模式](#六常见错误与修复模式)
-  - [七、反命题与边界](#七反命题与边界)
-    - [7.1 反命题树](#71-反命题树)
-    - [7.2 边界极限](#72-边界极限)
-  - [八、权威来源索引](#八权威来源索引)
+- [Miri：Rust 未定义行为动态检测器](.#mirirust-未定义行为动态检测器)
+  - [📑 目录](.#-目录)
+  - [一、Miri 是什么](.#一miri-是什么)
+    - [与测试/Clippy 的区别](.#与测试clippy-的区别)
+  - [二、能检测哪些未定义行为](.#二能检测哪些未定义行为)
+  - [三、安装与基本用法](.#三安装与基本用法)
+    - [安装](.#安装)
+    - [运行测试](.#运行测试)
+    - [运行单个示例或二进制](.#运行单个示例或二进制)
+    - [常用 Miri 环境变量](.#常用-miri-环境变量)
+  - [四、Stacked Borrows vs Tree Borrows](.#四stacked-borrows-vs-tree-borrows)
+    - [Stacked Borrows（SB）](.#stacked-borrowssb)
+    - [Tree Borrows（TB）](.#tree-borrowstb)
+    - [选择建议](.#选择建议)
+  - [五、项目内可运行示例](.#五项目内可运行示例)
+    - [最小可运行示例](.#最小可运行示例)
+  - [六、常见错误与修复模式](.#六常见错误与修复模式)
+  - [七、反命题与边界](.#七反命题与边界)
+    - [7.1 反命题树](.#71-反命题树)
+    - [7.2 边界极限](.#72-边界极限)
+  - [八、权威来源索引](.#八权威来源索引)
 
 ---
 
@@ -158,7 +158,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 # 除非能证明该模式在官方内存模型中会被接受。
 ```
 
-> **深度文档**: [Tree Borrows 深度解析](./36_tree_borrows_deep_dive.md)
+> **深度文档**: [Tree Borrows 深度解析](36_tree_borrows_deep_dive.md)
 
 ---
 

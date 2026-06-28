@@ -5,14 +5,14 @@
 > **Rust 版本**: 1.96.0+
 > **状态**: 🚧 文档建设中
 >
-> 本目录存放 `integration_tests` 的学习参考文档。主要入口为 [00_MASTER_INDEX.md](./00_MASTER_INDEX.md)。
+> 本目录存放 `integration_tests` 的学习参考文档。主要入口为 [00_MASTER_INDEX.md](00_MASTER_INDEX.md)。
 
 ---
 
 ## 🎯 快速开始
 
-1. 查看 [主索引](./00_MASTER_INDEX.md) 了解本 crate 的完整文档结构。
-2. 查看 [单页总结](./ONE_PAGE_SUMMARY.md) 获取核心概念速览。
+1. 查看 [主索引](00_MASTER_INDEX.md) 了解本 crate 的完整文档结构。
+2. 查看 [单页总结](ONE_PAGE_SUMMARY.md) 获取核心概念速览。
 3. 运行示例：`cargo run -p integration_tests --example <example_name>`。
 
 ## 📚 文档结构

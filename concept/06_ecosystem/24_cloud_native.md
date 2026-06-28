@@ -23,8 +23,8 @@
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计云原生架构
 > **定位**: 分析 Rust 在云原生领域的应用——从微服务框架到容器化部署，探讨 Rust 的内存安全（Memory Safety）与性能优势如何重塑云基础设施。
-> **前置概念**: [Async](../03_advanced/02_async.md) · [Network](../06_ecosystem/18_distributed_systems.md) · [Performance](../06_ecosystem/15_performance_optimization.md)
-> **后置概念**: [WebAssembly](../06_ecosystem/11_webassembly.md) · [Distributed Systems](18_distributed_systems.md)
+> **前置概念**: [Async](../03_advanced/02_async.md) · [Network](18_distributed_systems.md) · [Performance](15_performance_optimization.md)
+> **后置概念**: [WebAssembly](11_webassembly.md) · [Distributed Systems](18_distributed_systems.md)
 
 ---
 
@@ -39,42 +39,42 @@
 
 ## 📑 目录
 
-- [Rust 云原生生态](#rust-云原生生态)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 云原生定义](#11-云原生定义)
-    - [1.2 Rust 优势](#12-rust-优势)
-  - [二、Web 框架](#二web-框架)
-    - [2.1 Axum](#21-axum)
-    - [2.2 Actix-web](#22-actix-web)
-  - [三、基础设施](#三基础设施)
-    - [3.1 服务网格](#31-服务网格)
-    - [3.2 容器运行时](#32-容器运行时)
-    - [3.3 可观测性](#33-可观测性)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、常见陷阱](#五常见陷阱)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-    - [编译验证示例](#编译验证示例)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：云原生开发的编译错误](#十边界测试云原生开发的编译错误)
-    - [10.1 边界测试：异步运行时混用（编译错误）](#101-边界测试异步运行时混用编译错误)
-    - [10.2 边界测试：配置结构的反序列化生命周期（编译错误）](#102-边界测试配置结构的反序列化生命周期编译错误)
-    - [10.6 边界测试：Kubernetes 的优雅关闭与 `SIGTERM` 处理（运行时数据丢失）](#106-边界测试kubernetes-的优雅关闭与-sigterm-处理运行时数据丢失)
-    - [10.5 边界测试：Kubernetes 探针配置不当导致的级联重启（运行时可用性下降）](#105-边界测试kubernetes-探针配置不当导致的级联重启运行时可用性下降)
-    - [10.3 边界测试：Kubernetes 的 readiness 与 liveness 探针混淆（运行时可用性下降）](#103-边界测试kubernetes-的-readiness-与-liveness-探针混淆运行时可用性下降)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：为什么 Rust 特别适合构建容器化和云原生应用？（理解层）](#测验-1为什么-rust-特别适合构建容器化和云原生应用理解层)
-    - [测验 2：Rust 的 `tokio` runtime 与 Go 的 goroutine 在构建微服务时各有什么优劣？（理解层）](#测验-2rust-的-tokio-runtime-与-go-的-goroutine-在构建微服务时各有什么优劣理解层)
-    - [测验 3：`kube-rs` 在 Rust Kubernetes 生态中提供什么功能？（理解层）](#测验-3kube-rs-在-rust-kubernetes-生态中提供什么功能理解层)
-    - [测验 4：在 Serverless（如 AWS Lambda）环境中，Rust 相比 Python/Node.js 有什么优势和劣势？（理解层）](#测验-4在-serverless如-aws-lambda环境中rust-相比-pythonnodejs-有什么优势和劣势理解层)
-    - [测验 5：Service Mesh（如 Linkerd）为什么选择用 Rust 实现数据平面？（理解层）](#测验-5service-mesh如-linkerd为什么选择用-rust-实现数据平面理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Rust 云原生生态](.#rust-云原生生态)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 云原生定义](.#11-云原生定义)
+    - [1.2 Rust 优势](.#12-rust-优势)
+  - [二、Web 框架](.#二web-框架)
+    - [2.1 Axum](.#21-axum)
+    - [2.2 Actix-web](.#22-actix-web)
+  - [三、基础设施](.#三基础设施)
+    - [3.1 服务网格](.#31-服务网格)
+    - [3.2 容器运行时](.#32-容器运行时)
+    - [3.3 可观测性](.#33-可观测性)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、常见陷阱](.#五常见陷阱)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+    - [编译验证示例](.#编译验证示例)
+  - [相关概念文件](.#相关概念文件)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：云原生开发的编译错误](.#十边界测试云原生开发的编译错误)
+    - [10.1 边界测试：异步运行时混用（编译错误）](.#101-边界测试异步运行时混用编译错误)
+    - [10.2 边界测试：配置结构的反序列化生命周期（编译错误）](.#102-边界测试配置结构的反序列化生命周期编译错误)
+    - [10.6 边界测试：Kubernetes 的优雅关闭与 `SIGTERM` 处理（运行时数据丢失）](.#106-边界测试kubernetes-的优雅关闭与-sigterm-处理运行时数据丢失)
+    - [10.5 边界测试：Kubernetes 探针配置不当导致的级联重启（运行时可用性下降）](.#105-边界测试kubernetes-探针配置不当导致的级联重启运行时可用性下降)
+    - [10.3 边界测试：Kubernetes 的 readiness 与 liveness 探针混淆（运行时可用性下降）](.#103-边界测试kubernetes-的-readiness-与-liveness-探针混淆运行时可用性下降)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：为什么 Rust 特别适合构建容器化和云原生应用？（理解层）](.#测验-1为什么-rust-特别适合构建容器化和云原生应用理解层)
+    - [测验 2：Rust 的 `tokio` runtime 与 Go 的 goroutine 在构建微服务时各有什么优劣？（理解层）](.#测验-2rust-的-tokio-runtime-与-go-的-goroutine-在构建微服务时各有什么优劣理解层)
+    - [测验 3：`kube-rs` 在 Rust Kubernetes 生态中提供什么功能？（理解层）](.#测验-3kube-rs-在-rust-kubernetes-生态中提供什么功能理解层)
+    - [测验 4：在 Serverless（如 AWS Lambda）环境中，Rust 相比 Python/Node.js 有什么优势和劣势？（理解层）](.#测验-4在-serverless如-aws-lambda环境中rust-相比-pythonnodejs-有什么优势和劣势理解层)
+    - [测验 5：Service Mesh（如 Linkerd）为什么选择用 Rust 实现数据平面？（理解层）](.#测验-5service-mesh如-linkerd为什么选择用-rust-实现数据平面理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -506,9 +506,9 @@ fn main() {
 ## 相关概念文件
 
 - [Async](../03_advanced/02_async.md) — 异步编程
-- [Network](../06_ecosystem/18_distributed_systems.md) — 网络
+- [Network](18_distributed_systems.md) — 网络
 - [Performance](15_performance_optimization.md) — 性能优化
-- [WebAssembly](../06_ecosystem/11_webassembly.md) — WebAssembly
+- [WebAssembly](11_webassembly.md) — WebAssembly
 
 ---
 

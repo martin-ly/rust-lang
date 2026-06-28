@@ -8,52 +8,52 @@
 
 ## 目录
 
-- [🦀 Rust 算法与数据结构 - Rust 1.93.0 学习模块](#-rust-算法与数据结构---rust-1930-学习模块)
-  - [目录](#目录)
-  - [🎯 最新更新 (2025-11-15) ✨](#-最新更新-2025-11-15-)
-    - [📖 新版文档导航](#-新版文档导航)
-  - [🌟 2025-10-20 核心增强更新](#-2025-10-20-核心增强更新)
-  - [🚀 项目概述](#-项目概述)
-  - [✨ Rust 1.93.0 / Edition 2024 特性支持（稳定）](#-rust-1930--edition-2024-特性支持稳定)
-    - [🆕 2025-11-01 LeetCode 分类集成](#-2025-11-01-leetcode-分类集成)
-    - [🔄 异步编程特性](#-异步编程特性)
-    - [🧬 类型系统特性](#-类型系统特性)
-  - [📚 核心模块](#-核心模块)
-    - [1. 基础数据结构](#1-基础数据结构)
-    - [2. 核心算法](#2-核心算法)
-    - [3. 高级算法](#3-高级算法)
-    - [4. 并行与异步（实践指引）](#4-并行与异步实践指引)
-  - [🧭 模块一览（同步/并行/异步接口速览）](#-模块一览同步并行异步接口速览)
-  - [🛠️ 快速开始](#️-快速开始)
-    - [安装依赖](#安装依赖)
-    - [基础用法（对齐新接口）](#基础用法对齐新接口)
-    - [可选特性与成熟库对照](#可选特性与成熟库对照)
-  - [🔬 性能基准](#-性能基准)
-    - [运行测试与基准](#运行测试与基准)
-  - [📖 文档体系](#-文档体系)
-    - [📍 文档导航 (2025-10-22 更新)](#-文档导航-2025-10-22-更新)
-    - [🆕 新增学习资源 (2025-10-19)](#-新增学习资源-2025-10-19)
-    - [📚 文档分类](#-文档分类)
-      - [1. 📖 实用指南 (tier\_02\_guides/) - ⭐~⭐⭐](#1--实用指南-tier_02_guides---)
-      - [2. 🔬 理论文档 (tier\_04\_advanced/) - ⭐⭐⭐](#2--理论文档-tier_04_advanced---)
-      - [3. 🚀 高级专题 (tier\_04\_advanced/) - ⭐⭐~⭐⭐⭐](#3--高级专题-tier_04_advanced---)
-      - [4. ✨ Rust 特性 (tier\_03\_references/) - ⭐⭐](#4--rust-特性-tier_03_references---)
-      - [5. 📚 参考资料 (tier\_03\_references/) - ⭐~⭐⭐](#5--参考资料-tier_03_references---)
-    - [🎓 学习路径](#-学习路径)
-    - [🔥 推荐文档](#-推荐文档)
-    - [测试覆盖率](#测试覆盖率)
-  - [🚀 贡献指南](#-贡献指南)
-  - [占位实现说明](#占位实现说明)
-    - [贡献类型](#贡献类型)
-  - [📚 知识结构文档](#-知识结构文档)
-    - [知识结构体系](#知识结构体系)
-    - [使用指南](#使用指南)
-  - [📄 许可证](#-许可证)
-  - [🙏 致谢](#-致谢)
-  - [📚 相关资源](#-相关资源)
-    - [使用指南](#使用指南-1)
-    - [项目文档](#项目文档)
-  - [📞 联系方式](#-联系方式)
+- [🦀 Rust 算法与数据结构 - Rust 1.93.0 学习模块](.#-rust-算法与数据结构---rust-1930-学习模块)
+  - [目录](.#目录)
+  - [🎯 最新更新 (2025-11-15) ✨](.#-最新更新-2025-11-15-)
+    - [📖 新版文档导航](.#-新版文档导航)
+  - [🌟 2025-10-20 核心增强更新](.#-2025-10-20-核心增强更新)
+  - [🚀 项目概述](.#-项目概述)
+  - [✨ Rust 1.93.0 / Edition 2024 特性支持（稳定）](.#-rust-1930--edition-2024-特性支持稳定)
+    - [🆕 2025-11-01 LeetCode 分类集成](.#-2025-11-01-leetcode-分类集成)
+    - [🔄 异步编程特性](.#-异步编程特性)
+    - [🧬 类型系统特性](.#-类型系统特性)
+  - [📚 核心模块](.#-核心模块)
+    - [1. 基础数据结构](.#1-基础数据结构)
+    - [2. 核心算法](.#2-核心算法)
+    - [3. 高级算法](.#3-高级算法)
+    - [4. 并行与异步（实践指引）](.#4-并行与异步实践指引)
+  - [🧭 模块一览（同步/并行/异步接口速览）](.#-模块一览同步并行异步接口速览)
+  - [🛠️ 快速开始](.#️-快速开始)
+    - [安装依赖](.#安装依赖)
+    - [基础用法（对齐新接口）](.#基础用法对齐新接口)
+    - [可选特性与成熟库对照](.#可选特性与成熟库对照)
+  - [🔬 性能基准](.#-性能基准)
+    - [运行测试与基准](.#运行测试与基准)
+  - [📖 文档体系](.#-文档体系)
+    - [📍 文档导航 (2025-10-22 更新)](.#-文档导航-2025-10-22-更新)
+    - [🆕 新增学习资源 (2025-10-19)](.#-新增学习资源-2025-10-19)
+    - [📚 文档分类](.#-文档分类)
+      - [1. 📖 实用指南 (tier\_02\_guides/) - ⭐~⭐⭐](.#1--实用指南-tier_02_guides---)
+      - [2. 🔬 理论文档 (tier\_04\_advanced/) - ⭐⭐⭐](.#2--理论文档-tier_04_advanced---)
+      - [3. 🚀 高级专题 (tier\_04\_advanced/) - ⭐⭐~⭐⭐⭐](.#3--高级专题-tier_04_advanced---)
+      - [4. ✨ Rust 特性 (tier\_03\_references/) - ⭐⭐](.#4--rust-特性-tier_03_references---)
+      - [5. 📚 参考资料 (tier\_03\_references/) - ⭐~⭐⭐](.#5--参考资料-tier_03_references---)
+    - [🎓 学习路径](.#-学习路径)
+    - [🔥 推荐文档](.#-推荐文档)
+    - [测试覆盖率](.#测试覆盖率)
+  - [🚀 贡献指南](.#-贡献指南)
+  - [占位实现说明](.#占位实现说明)
+    - [贡献类型](.#贡献类型)
+  - [📚 知识结构文档](.#-知识结构文档)
+    - [知识结构体系](.#知识结构体系)
+    - [使用指南](.#使用指南)
+  - [📄 许可证](.#-许可证)
+  - [🙏 致谢](.#-致谢)
+  - [📚 相关资源](.#-相关资源)
+    - [使用指南](.#使用指南-1)
+    - [项目文档](.#项目文档)
+  - [📞 联系方式](.#-联系方式)
 
 ## 🎯 最新更新 (2025-11-15) ✨
 
@@ -67,19 +67,19 @@
 
 **从这里开始学习** ⭐:
 
-- 🎯 [项目概览](./docs/tier_01_foundations/01_项目概览.md) - 15分钟快速了解
-- 🗺️ [主索引导航](./docs/tier_01_foundations/02_主索引导航.md) - 找到适合你的学习路径
-- 📖 [术语表](./docs/tier_01_foundations/03_术语表.md) - 核心术语速查
-- ❓ [常见问题](./docs/tier_01_foundations/04_常见问题.md) - 解决常见疑问
+- 🎯 [项目概览](docs/tier_01_foundations/01_项目概览.md) - 15分钟快速了解
+- 🗺️ [主索引导航](docs/tier_01_foundations/02_主索引导航.md) - 找到适合你的学习路径
+- 📖 [术语表](docs/tier_01_foundations/03_术语表.md) - 核心术语速查
+- ❓ [常见问题](docs/tier_01_foundations/04_常见问题.md) - 解决常见疑问
 
 **文档层级结构**:
 
-- 📚 [Tier 1: 基础层](./docs/tier_01_foundations/README.md) - 快速入门 (2-4小时)
-- 📝 [Tier 2: 实践层](./docs/tier_02_guides/README.md) - 实战指南 (10-15小时)
-- 📖 [Tier 3: 参考层](./docs/tier_03_references/README.md) - 技术参考 (按需查阅)
-- 🚀 [Tier 4: 高级层](./docs/tier_04_advanced/README.md) - 理论深入 (20-30小时)
+- 📚 [Tier 1: 基础层](docs/tier_01_foundations/README.md) - 快速入门 (2-4小时)
+- 📝 [Tier 2: 实践层](docs/tier_02_guides/README.md) - 实战指南 (10-15小时)
+- 📖 [Tier 3: 参考层](docs/tier_03_references/README.md) - 技术参考 (按需查阅)
+- 🚀 [Tier 4: 高级层](docs/tier_04_advanced/README.md) - 理论深入 (20-30小时)
 
-**标准化报告**: [C08_FINAL_COMPLETION_REPORT_2025_10_22.md](./docs/reports/C08_FINAL_COMPLETION_REPORT_2025_10_22.md)
+**标准化报告**: [C08_FINAL_COMPLETION_REPORT_2025_10_22.md](docs/reports/C08_FINAL_COMPLETION_REPORT_2025_10_22.md)
 
 **Rust 1.93 示例**: `cargo run -p c08_algorithms --example rust_193_features_demo` - VecDeque pop_*_if、BTreeMap::append、slice::as_array、Duration::from_nanos_u128
 
@@ -87,14 +87,14 @@
 
 ## 🌟 2025-10-20 核心增强更新
 
-- **📊 [知识图谱与概念关系](./docs/KNOWLEDGE_GRAPH.md)** - 算法与数据结构完整体系
-- **📐 [多维矩阵对比分析](./docs/MULTIDIMENSIONAL_MATRIX_COMPARISON.md)** - 算法/数据结构全面对比
-- **🗺️ [Rust 1.93.0 算法思维导图](./docs/MIND_MAP.md)** ⭐
+- **📊 [知识图谱与概念关系](docs/KNOWLEDGE_GRAPH.md)** - 算法与数据结构完整体系
+- **📐 [多维矩阵对比分析](docs/MULTIDIMENSIONAL_MATRIX_COMPARISON.md)** - 算法/数据结构全面对比
+- **🗺️ [Rust 1.93.0 算法思维导图](docs/MIND_MAP.md)** ⭐
   - ASCII艺术图表 | 数据结构/算法分类/并发算法完整体系
   - 算法选择决策树 | 排序/搜索/图算法/并发选择指南
   - 3级学习路径(2-16周) | 问题诊断树
   - 时间空间复杂度对比 | Rayon并行算法实践
-- **💻 [Rust 1.93.0 实战示例集](./docs/RUST_190_EXAMPLES_COLLECTION.md)** ⭐
+- **💻 [Rust 1.93.0 实战示例集](docs/RUST_190_EXAMPLES_COLLECTION.md)** ⭐
   - 850+行可运行代码 | LRU缓存/Trie树/图算法完整实现
   - Rust 1.93.0特性 | 泛型/所有权/并发算法最佳实践
   - Rayon并行算法 | 并行排序/Map-Reduce实战
@@ -150,7 +150,7 @@
   - **总计**: 132+ 题目，124 个测试用例，**100% 测试通过率**
   - 更多分类和题目实现中...
 
-详细文档请查看: [docs/leetcode_with_rust191.md](./docs/leetcode_with_rust191.md)
+详细文档请查看: [docs/leetcode_with_rust191.md](docs/leetcode_with_rust191.md)
 
 ---
 
@@ -354,10 +354,10 @@ cargo run -p c08_algorithms --bin bench_report > report.csv
 
 **🎯 新版4-Tier导航** (推荐):
 
-- [Tier 1: 基础层](./docs/tier_01_foundations/README.md) - 快速入门 ⭐ **推荐起点**
-- [Tier 2: 实践层](./docs/tier_02_guides/README.md) - 实战指南
-- [Tier 3: 参考层](./docs/tier_03_references/README.md) - 技术参考
-- [Tier 4: 高级层](./docs/tier_04_advanced/README.md) - 理论深入
+- [Tier 1: 基础层](docs/tier_01_foundations/README.md) - 快速入门 ⭐ **推荐起点**
+- [Tier 2: 实践层](docs/tier_02_guides/README.md) - 实战指南
+- [Tier 3: 参考层](docs/tier_03_references/README.md) - 技术参考
+- [Tier 4: 高级层](docs/tier_04_advanced/README.md) - 理论深入
 
 **📚 传统文档索引** (保留):
 
@@ -470,7 +470,7 @@ cargo llvm-cov test --workspace --html
 
 | 题目 | 说明 |
 | :--- | :--- || 142. Linked List Cycle II | 占位实现，待完整实现 |
-| 其他 | 详见 [LEETCODE_IMPLEMENTATION_COMPLETE.md](./LEETCODE_IMPLEMENTATION_COMPLETE.md) |
+| 其他 | 详见 [LEETCODE_IMPLEMENTATION_COMPLETE.md](LEETCODE_IMPLEMENTATION_COMPLETE.md) |
 
 ---
 

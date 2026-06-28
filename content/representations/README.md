@@ -31,6 +31,6 @@ content/representations/
 
 ## 与主轨的关系
 
-- `concept/` 提供概念的** canonical 定义**。
+- `concept/` 提供概念的**canonical 定义**。
 - `knowledge/` 提供按难度组织的**学习路径**。
 - `content/representations/` 提供概念的**多模态、多粒度表示**，用于教学设计、评估和知识图谱构建。

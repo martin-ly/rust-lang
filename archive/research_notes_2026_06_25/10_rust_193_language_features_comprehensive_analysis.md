@@ -17,32 +17,32 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Rust 1.93 语言特性全面分析：设计论证与形式化](#rust-193-语言特性全面分析设计论证与形式化)
-  - [📑 目录](#-目录)
-  - [📚 权威来源对齐 {#-权威来源对齐}](#-权威来源对齐--权威来源对齐)
-  - [📋 目录 {#-目录}](#-目录--目录)
-  - [🎯 文档宗旨 {#-文档宗旨}](#-文档宗旨--文档宗旨)
-  - [📐 特性覆盖矩阵总览 {#-特性覆盖矩阵总览}](#-特性覆盖矩阵总览--特性覆盖矩阵总览)
-  - [特性→Def/Axiom/Theorem 映射表（兼 92 项→推荐落点文档）](#特性defaxiomtheorem-映射表兼-92-项推荐落点文档)
-  - [1. 内存与所有权族](#1-内存与所有权族)
-  - [2. 类型系统族](#2-类型系统族)
-  - [3. Trait 与多态族](#3-trait-与多态族)
-  - [4. 控制流与模式匹配族](#4-控制流与模式匹配族)
-  - [5. 并发与异步族](#5-并发与异步族)
-  - [6. 宏与元编程族](#6-宏与元编程族)
-  - [7. 模块与可见性族](#7-模块与可见性族)
-  - [8. 常量与编译期族](#8-常量与编译期族)
-  - [9. FFI 与不安全族](#9-ffi-与不安全族)
-  - [10. Rust 1.93 新增/变更特性](#10-rust-193-新增变更特性)
-  - [📚 相关文档 {#-相关文档}](#-相关文档--相关文档)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [Rust 1.93 语言特性全面分析：设计论证与形式化](.#rust-193-语言特性全面分析设计论证与形式化)
+  - [📑 目录](.#-目录)
+  - [📚 权威来源对齐 {#-权威来源对齐}](.#-权威来源对齐--权威来源对齐)
+  - [📋 目录 {#-目录}](.#-目录--目录)
+  - [🎯 文档宗旨 {#-文档宗旨}](.#-文档宗旨--文档宗旨)
+  - [📐 特性覆盖矩阵总览 {#-特性覆盖矩阵总览}](.#-特性覆盖矩阵总览--特性覆盖矩阵总览)
+  - [特性→Def/Axiom/Theorem 映射表（兼 92 项→推荐落点文档）](.#特性defaxiomtheorem-映射表兼-92-项推荐落点文档)
+  - [1. 内存与所有权族](.#1-内存与所有权族)
+  - [2. 类型系统族](.#2-类型系统族)
+  - [3. Trait 与多态族](.#3-trait-与多态族)
+  - [4. 控制流与模式匹配族](.#4-控制流与模式匹配族)
+  - [5. 并发与异步族](.#5-并发与异步族)
+  - [6. 宏与元编程族](.#6-宏与元编程族)
+  - [7. 模块与可见性族](.#7-模块与可见性族)
+  - [8. 常量与编译期族](.#8-常量与编译期族)
+  - [9. FFI 与不安全族](.#9-ffi-与不安全族)
+  - [10. Rust 1.93 新增/变更特性](.#10-rust-193-新增变更特性)
+  - [📚 相关文档 {#-相关文档}](.#-相关文档--相关文档)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 📚 权威来源对齐<a id="权威来源对齐"></a> {#-权威来源对齐}
 >
@@ -65,32 +65,32 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 <!-- markdownlint-disable MD051 -->
-- [Rust 1.93 语言特性全面分析：设计论证与形式化](#rust-193-语言特性全面分析设计论证与形式化)
-  - [📑 目录](#-目录)
-  - [📚 权威来源对齐 {#-权威来源对齐}](#-权威来源对齐--权威来源对齐)
-  - [📋 目录 {#-目录}](#-目录--目录)
-  - [🎯 文档宗旨 {#-文档宗旨}](#-文档宗旨--文档宗旨)
-  - [📐 特性覆盖矩阵总览 {#-特性覆盖矩阵总览}](#-特性覆盖矩阵总览--特性覆盖矩阵总览)
-  - [特性→Def/Axiom/Theorem 映射表（兼 92 项→推荐落点文档）](#特性defaxiomtheorem-映射表兼-92-项推荐落点文档)
-  - [1. 内存与所有权族](#1-内存与所有权族)
-  - [2. 类型系统族](#2-类型系统族)
-  - [3. Trait 与多态族](#3-trait-与多态族)
-  - [4. 控制流与模式匹配族](#4-控制流与模式匹配族)
-  - [5. 并发与异步族](#5-并发与异步族)
-  - [6. 宏与元编程族](#6-宏与元编程族)
-  - [7. 模块与可见性族](#7-模块与可见性族)
-  - [8. 常量与编译期族](#8-常量与编译期族)
-  - [9. FFI 与不安全族](#9-ffi-与不安全族)
-  - [10. Rust 1.93 新增/变更特性](#10-rust-193-新增变更特性)
-  - [📚 相关文档 {#-相关文档}](#-相关文档--相关文档)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [Rust 1.93 语言特性全面分析：设计论证与形式化](.#rust-193-语言特性全面分析设计论证与形式化)
+  - [📑 目录](.#-目录)
+  - [📚 权威来源对齐 {#-权威来源对齐}](.#-权威来源对齐--权威来源对齐)
+  - [📋 目录 {#-目录}](.#-目录--目录)
+  - [🎯 文档宗旨 {#-文档宗旨}](.#-文档宗旨--文档宗旨)
+  - [📐 特性覆盖矩阵总览 {#-特性覆盖矩阵总览}](.#-特性覆盖矩阵总览--特性覆盖矩阵总览)
+  - [特性→Def/Axiom/Theorem 映射表（兼 92 项→推荐落点文档）](.#特性defaxiomtheorem-映射表兼-92-项推荐落点文档)
+  - [1. 内存与所有权族](.#1-内存与所有权族)
+  - [2. 类型系统族](.#2-类型系统族)
+  - [3. Trait 与多态族](.#3-trait-与多态族)
+  - [4. 控制流与模式匹配族](.#4-控制流与模式匹配族)
+  - [5. 并发与异步族](.#5-并发与异步族)
+  - [6. 宏与元编程族](.#6-宏与元编程族)
+  - [7. 模块与可见性族](.#7-模块与可见性族)
+  - [8. 常量与编译期族](.#8-常量与编译期族)
+  - [9. FFI 与不安全族](.#9-ffi-与不安全族)
+  - [10. Rust 1.93 新增/变更特性](.#10-rust-193-新增变更特性)
+  - [📚 相关文档 {#-相关文档}](.#-相关文档--相关文档)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 <!-- markdownlint-enable MD051 -->
 
 ---
@@ -131,7 +131,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-本表将 92 项特性与形式化文档中的 Def、Axiom、Theorem 建立一一对应，**最后一列「文档」即该特性的推荐落点文档**；与 FORMAT_AND_CONTENT_ALIGNMENT_PLAN F3.1 对齐。详见 [PROOF_INDEX](./10_proof_index.md)。
+本表将 92 项特性与形式化文档中的 Def、Axiom、Theorem 建立一一对应，**最后一列「文档」即该特性的推荐落点文档**；与 FORMAT_AND_CONTENT_ALIGNMENT_PLAN F3.1 对齐。详见 [PROOF_INDEX](10_proof_index.md)。
 
 | 特性族 | 特性 | Def | Axiom | Theorem | 文档 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -206,7 +206,7 @@
 | **基本类型** | 机器字、数值、布尔 | i32、u64、bool、char 等 | [type_system_foundations](type_theory/10_type_system_foundations.md) | 溢出（debug panic） |
 | **结构体** | 命名字段聚合 | struct、元组结构体、单元结构体 | type_system | - |
 | **枚举** | tagged union、模式匹配 | enum、Option、Result | type_system | - |
-| **Never (!)** | 不可达、发散 | 无构造子、对应 ⊥ | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) | 1.92 Lint 严格化 |
+| **Never (!)** | 不可达、发散 | 无构造子、对应 ⊥ | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](10_language_semantics_expressiveness.md) | 1.92 Lint 严格化 |
 | **Option/Result** | 可选值、错误处理 | 构造性、无 null | LANGUAGE_SEMANTICS | unwrap 空值 |
 | **型变** | 子类型在泛型中的传递 | 协变/逆变/不变 | [variance_theory](type_theory/10_variance_theory.md) | &mut 协变 |
 | **类型推断** | 减少注解 | 局部推断、约束传播 | type_system | 歧义时报错 |
@@ -366,13 +366,13 @@
 
 | 文档 | 用途 |
 | :--- | :--- |
-| [RUST_193_FEATURE_MATRIX](./10_rust_193_feature_matrix.md) | 按特性族展开的五维矩阵（概念-公理-定理-证明方法-反例） |
+| [RUST_193_FEATURE_MATRIX](10_rust_193_feature_matrix.md) | 按特性族展开的五维矩阵（概念-公理-定理-证明方法-反例） |
 | [releases.rs 1.93.0](https://releases.rs/docs/1.93.0/) | 权威变更清单 |
 | [Ferrocene FLS](https://spec.ferrocene.dev/) | Rust 1.93 形式化规范 |
-| [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) | 13 项核心特性完整链（Def→示例→论证→证明） |
-| [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) | 核心机制设计论证（Pin、所有权、借用等） |
-| [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md) | 全面系统化梳理、语义归纳 |
-| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) | 构造性语义、表达能力边界 |
+| [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md) | 13 项核心特性完整链（Def→示例→论证→证明） |
+| [DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md) | 核心机制设计论证（Pin、所有权、借用等） |
+| [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](10_comprehensive_systematic_overview.md) | 全面系统化梳理、语义归纳 |
+| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](10_language_semantics_expressiveness.md) | 构造性语义、表达能力边界 |
 | [toolchain/07_rust_1.93_full_changelog](../06_toolchain/06_07_rust_1_93_full_changelog.md) | Rust 1.93 完整变更清单 |
 | [toolchain/09_rust_1.93_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md) | Rust 1.93 兼容性深度解析 |
 | [toolchain/10_rust_1.89_to_1.93_cumulative_features_overview](../archive/2026_05_historical_docs/10_rust_1.89_to_1.93_cumulative_features_overview.md) | 1.89→1.93 累积特性总览 |
@@ -442,7 +442,7 @@
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

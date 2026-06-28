@@ -16,7 +16,7 @@
 > **双维定位**: C×Syn — 综合网络协议的工程实现与选型
 > **定位**: 深入分析 QUIC/HTTP-3、TCP 栈和 eBPF 的 Rust 实现，揭示 Rust 的所有权（Ownership）模型如何映射到网络协议的状态机和包处理。
 > **前置概念**: [Async/Await](../03_advanced/02_async.md) · [Ownership](../01_foundation/01_ownership.md) · [Unsafe](../03_advanced/03_unsafe.md)
-> **后置概念**: [Stream Processing Ecosystem](./36_stream_processing_ecosystem.md) · [Distributed Systems](./18_distributed_systems.md)
+> **后置概念**: [Stream Processing Ecosystem](36_stream_processing_ecosystem.md) · [Distributed Systems](18_distributed_systems.md)
 
 >
 > **来源**: [tokio](https://docs.rs/tokio/) · [quinn](https://docs.rs/quinn/) · [rustls](https://docs.rs/rustls/)

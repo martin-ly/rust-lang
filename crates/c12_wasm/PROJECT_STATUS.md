@@ -269,21 +269,21 @@ python -m http.server 8080
 
 ### 从这里开始
 
-1. 📖 [README.md](./README.md) - 项目介绍
-2. 🎯 [项目概览](./docs/tier_01_foundations/01_项目概览.md)
-3. 🗺️ [主索引导航](./docs/tier_01_foundations/02_主索引导航.md)
+1. 📖 [README.md](README.md) - 项目介绍
+2. 🎯 [项目概览](docs/tier_01_foundations/01_项目概览.md)
+3. 🗺️ [主索引导航](docs/tier_01_foundations/02_主索引导航.md)
 
 ### 实践指南
 
-- [WASM 基础指南](./docs/tier_02_guides/01_wasm_基础指南.md)
-- [Rust 编译 WASM](./docs/tier_02_guides/02_rust_编译_wasm.md)
-- [JavaScript 互操作](./docs/tier_02_guides/03_javascript_互操作.md)
+- [WASM 基础指南](docs/tier_02_guides/01_wasm_基础指南.md)
+- [Rust 编译 WASM](docs/tier_02_guides/02_rust_编译_wasm.md)
+- [JavaScript 互操作](docs/tier_02_guides/03_javascript_互操作.md)
 
 ### 代码示例
 
-- [代码示例索引](./docs/代码示例索引.md)
-- [Examples 目录](./examples/README.md)
-- [演示页面](./demo/index.html)
+- [代码示例索引](docs/代码示例索引.md)
+- [Examples 目录](examples/README.md)
+- [演示页面](demo/index.html)
 
 ---
 

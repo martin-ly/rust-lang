@@ -16,48 +16,48 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [研究笔记完整索引](#研究笔记完整索引)
-  - [📊 目录 {#-目录}](#-目录--目录)
-  - [📐 文档分类体系 {#-文档分类体系}](#-文档分类体系--文档分类体系)
-  - [📚 核心文档索引 {#-核心文档索引}](#-核心文档索引--核心文档索引)
-    - [导航和索引](#导航和索引)
-    - [进展跟踪](#进展跟踪)
-    - [方法论和指南](#方法论和指南)
-    - [实际应用](#实际应用)
-    - [贡献和质量](#贡献和质量)
-  - [🔬 研究笔记索引 {#-研究笔记索引}](#-研究笔记索引--研究笔记索引)
-    - [形式化方法研究](#形式化方法研究)
-    - [类型理论研究](#类型理论研究)
-    - [实验研究](#实验研究)
-    - [软件设计理论研究](#软件设计理论研究)
-    - [综合研究](#综合研究)
-  - [🔍 按主题分类 {#-按主题分类}](#-按主题分类--按主题分类)
-    - [所有权和借用](#所有权和借用)
-    - [类型系统](#类型系统)
-    - [生命周期](#生命周期)
-    - [异步和并发](#异步和并发)
-    - [安全与 unsafe](#安全与-unsafe)
-    - [设计模式与工程](#设计模式与工程)
-    - [性能优化](#性能优化)
-    - [实际应用 {#实际应用-1}](#实际应用-实际应用-1)
-    - [版本与特性](#版本与特性)
-  - [📈 统计信息 {#-统计信息}](#-统计信息--统计信息)
-    - [文档统计](#文档统计)
-    - [研究领域统计](#研究领域统计)
-    - [状态统计](#状态统计)
-    - [覆盖主题](#覆盖主题)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
-    - [核心文档](#核心文档)
-    - [目录索引](#目录索引)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
+- [研究笔记完整索引](.#研究笔记完整索引)
+  - [📊 目录 {#-目录}](.#-目录--目录)
+  - [📐 文档分类体系 {#-文档分类体系}](.#-文档分类体系--文档分类体系)
+  - [📚 核心文档索引 {#-核心文档索引}](.#-核心文档索引--核心文档索引)
+    - [导航和索引](.#导航和索引)
+    - [进展跟踪](.#进展跟踪)
+    - [方法论和指南](.#方法论和指南)
+    - [实际应用](.#实际应用)
+    - [贡献和质量](.#贡献和质量)
+  - [🔬 研究笔记索引 {#-研究笔记索引}](.#-研究笔记索引--研究笔记索引)
+    - [形式化方法研究](.#形式化方法研究)
+    - [类型理论研究](.#类型理论研究)
+    - [实验研究](.#实验研究)
+    - [软件设计理论研究](.#软件设计理论研究)
+    - [综合研究](.#综合研究)
+  - [🔍 按主题分类 {#-按主题分类}](.#-按主题分类--按主题分类)
+    - [所有权和借用](.#所有权和借用)
+    - [类型系统](.#类型系统)
+    - [生命周期](.#生命周期)
+    - [异步和并发](.#异步和并发)
+    - [安全与 unsafe](.#安全与-unsafe)
+    - [设计模式与工程](.#设计模式与工程)
+    - [性能优化](.#性能优化)
+    - [实际应用 {#实际应用-1}](.#实际应用-实际应用-1)
+    - [版本与特性](.#版本与特性)
+  - [📈 统计信息 {#-统计信息}](.#-统计信息--统计信息)
+    - [文档统计](.#文档统计)
+    - [研究领域统计](.#研究领域统计)
+    - [状态统计](.#状态统计)
+    - [覆盖主题](.#覆盖主题)
+  - [🔗 相关资源 {#-相关资源}](.#-相关资源--相关资源)
+    - [核心文档](.#核心文档)
+    - [目录索引](.#目录索引)
+  - [🆕 Rust 1.94 更新](.#-rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
 <a id="最后更新-2026-03-14-rust-194-深度整合"></a>
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [权威来源索引](#权威来源索引)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [权威来源索引](.#权威来源索引)
 
 ---
 
@@ -117,7 +117,7 @@
 - 概念族↔文档↔Def/Axiom/定理 映射表（支柱 1/2/3）
 - 文档↔思维表征 映射表（思维导图/矩阵/证明树/决策树）、文档依赖简表
 
-1. **[README.md](./README.md)** - 主索引和导航中心
+1. **[README.md](README.md)** - 主索引和导航中心
    - 系统概述
    - 研究方向
    - 研究笔记规范
@@ -185,8 +185,8 @@
 - ownership T2、borrow T1、type T3 完整证明
 - 辅助引理显式编号、证明依赖 DAG、反例形式化否定
 
-7l. **[COQ_ISABELLE_PROOF_SCAFFOLDING](../archive/deprecated/README.md)** - Coq/Isabelle 证明骨架与 L3 实施指南（已归档）
-7m. **[coq_skeleton](../archive/deprecated/coq_skeleton/README.md)** - Coq 证明骨架（T-OW2/T-BR1/T-TY3）；本目录仅保留 [coq_skeleton/README.md](../../archive/deprecated/coq_skeleton/README.md) 重定向（已归档）
+7l. **[COQ_ISABELLE_PROOF_SCAFFOLDING](../../archive/docs/deprecated/README.md)** - Coq/Isabelle 证明骨架与 L3 实施指南（已归档）
+7m. **[coq_skeleton](../../archive/docs/deprecated/coq_skeleton/README.md)** - Coq 证明骨架（T-OW2/T-BR1/T-TY3）；本目录仅保留 [coq_skeleton/README.md](../../archive/deprecated/coq_skeleton/README.md) 重定向（已归档）
 
 1. **[10_comprehensive_systematic_overview.md](../../archive/research_notes_2026_06_25/10_comprehensive_systematic_overview.md)** - 全面系统化梳理总览
    - 五大梳理维度（概念定义、属性关系、解释论证、形式化证明、思维表征）
@@ -224,7 +224,7 @@
 - 论证体系五层结构（概念→属性→论证→证明→表征）
 - 安全与非安全全面论证
 
-1. **[10_safe_unsafe_comprehensive_analysis.md](./10_safe_unsafe_comprehensive_analysis.md)** - 安全与非安全全面论证与分析 🆕
+1. **[10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md)** - 安全与非安全全面论证与分析 🆕
 
 - 安全/unsafe 定义与边界、契约体系、UB 分类、安全抽象
 
@@ -384,12 +384,12 @@
 
 **目录**: [formal_methods/](../../archive/research_notes_2026_06_25/formal_methods/README.md)
 
-1. **[10_ownership_model.md](./formal_methods/10_ownership_model.md)** - 所有权模型形式化
+1. **[10_ownership_model.md](formal_methods/10_ownership_model.md)** - 所有权模型形式化
    - 研究目标: 形式化定义所有权系统，证明内存安全
    - 状态: ✅ 已完成 (100%)
    - 关键词: 所有权、内存安全、形式化定义
 
-2. **[10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)** - 借用检查器证明
+2. **[10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md)** - 借用检查器证明
    - 研究目标: 形式化定义借用检查器，证明数据竞争自由
    - 状态: ✅ 已完成 (100%)
    - 关键词: 借用检查器、数据竞争、形式化证明
@@ -437,7 +437,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**目录**: [type_theory/](./type_theory/README.md)
+**目录**: [type_theory/](type_theory/README.md)
 
 1. **[00_completeness_gaps.md](../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md)** - 类型理论完备性缺口
    - 研究目标: 形式化论证不充分声明；LUB、Copy、RPITIT、组合法则等缺口索引
@@ -454,7 +454,7 @@
    - 状态: ✅ 已完成 (100%)
    - 关键词: Trait、类型类、存在类型
 
-4. **[10_lifetime_formalization.md](./type_theory/10_lifetime_formalization.md)** - 生命周期形式化
+4. **[10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md)** - 生命周期形式化
    - 研究目标: 形式化定义生命周期系统，理解类型理论解释
    - 状态: ✅ 已完成 (100%)
    - 关键词: 生命周期、区域类型、约束求解
@@ -464,7 +464,7 @@
    - 状态: ✅ 已完成 (100%)
    - 关键词: GATs、const 泛型、依赖类型、类型族
 
-6. **[10_variance_theory.md](./type_theory/10_variance_theory.md)** - 型变理论
+6. **[10_variance_theory.md](type_theory/10_variance_theory.md)** - 型变理论
    - 研究目标: 深入理解型变理论，形式化定义型变规则
    - 状态: ✅ 已完成 (100%)
    - 关键词: 型变、协变、逆变、不变、子类型
@@ -558,8 +558,8 @@
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
-- [所有权模型形式化](./formal_methods/10_ownership_model.md)
-- [借用检查器证明](./formal_methods/10_borrow_checker_proof.md)
+- [所有权模型形式化](formal_methods/10_ownership_model.md)
+- [借用检查器证明](formal_methods/10_borrow_checker_proof.md)
 - [Pin 和自引用类型形式化](../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md)
 
 ### 类型系统
@@ -570,14 +570,14 @@
 - [类型系统基础](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)
 - [Trait 系统形式化](../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md)
 - [高级类型特性](../../archive/research_notes_2026_06_25/type_theory/10_advanced_types.md)
-- [型变理论](./type_theory/10_variance_theory.md)
+- [型变理论](type_theory/10_variance_theory.md)
 
 ### 生命周期
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - 生命周期形式化（形式化方法）
-- [生命周期形式化（类型理论）](./type_theory/10_lifetime_formalization.md)
+- [生命周期形式化（类型理论）](type_theory/10_lifetime_formalization.md)
 
 ### 异步和并发
 
@@ -591,7 +591,7 @@
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
-- [安全与非安全全面论证](./10_safe_unsafe_comprehensive_analysis.md)
+- [安全与非安全全面论证](10_safe_unsafe_comprehensive_analysis.md)
 - [05_boundary_system 三维边界](../../archive/research_notes_2026_06_25/software_design_theory/05_boundary_system/README.md)
 - [07_anti_patterns 反模式](../../archive/research_notes_2026_06_25/software_design_theory/07_anti_patterns.md)
 
@@ -673,7 +673,7 @@
 
 ### 核心文档
 
-- [主索引](./README.md)
+- [主索引](README.md)
 - [快速参考](../../archive/research_notes_2026_06_25/10_quick_reference.md)
 - [研究路线图](../../archive/research_notes_2026_06_25/10_research_roadmap.md)
 - [系统总结](../../archive/research_notes_2026_06_25/10_system_summary.md)
@@ -681,7 +681,7 @@
 ### 目录索引
 
 - [形式化方法索引](../../archive/research_notes_2026_06_25/formal_methods/README.md)
-- [类型理论索引](./type_theory/README.md)
+- [类型理论索引](type_theory/README.md)
 - [实验研究索引](../../archive/research_notes_2026_06_25/experiments/README.md)
 
 ---

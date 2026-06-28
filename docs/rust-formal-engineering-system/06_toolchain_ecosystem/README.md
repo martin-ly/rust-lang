@@ -351,9 +351,9 @@ mindmap
 | 本README | research_notes/10_tools_guide.md | 索引/重定向 |
 
 [返回主索引](../00_master_index.md) |
-[编译器理论](./01_compiler/README.md) |
-[包管理器理论](./02_package_manager/README.md) |
-[构建工具理论](./03_build_tools/README.md)
+[编译器理论](01_compiler/README.md) |
+[包管理器理论](02_package_manager/README.md) |
+[构建工具理论](03_build_tools/README.md)
 
 ---
 

@@ -17,18 +17,18 @@
 
 **从这里开始学习** ⭐:
 
-- 🗺️ [完整索引](./docs/00_MASTER_INDEX.md)
-- 📖 [术语表](./docs/Glossary.md)
-- ❓ [常见问题](./docs/FAQ.md)
+- 🗺️ [完整索引](docs/00_MASTER_INDEX.md)
+- 📖 [术语表](docs/Glossary.md)
+- ❓ [常见问题](docs/FAQ.md)
 
 **文档层级结构**:
 
-- 📚 [Tier 1: 基础层](./docs/tier_01_foundations/README.md) - 宏理论
-- 📝 [Tier 2: 实践层](./docs/tier_02_guides/README.md) - 声明宏+过程宏
-- 📖 [Tier 3: 参考层](./docs/tier_03_references/README.md) - 最佳实践
-- 🚀 [Tier 4: 高级层](./docs/tier_04_advanced/README.md) - DSL/调试/优化
+- 📚 [Tier 1: 基础层](docs/tier_01_foundations/README.md) - 宏理论
+- 📝 [Tier 2: 实践层](docs/tier_02_guides/README.md) - 声明宏+过程宏
+- 📖 [Tier 3: 参考层](docs/tier_03_references/README.md) - 最佳实践
+- 🚀 [Tier 4: 高级层](docs/tier_04_advanced/README.md) - DSL/调试/优化
 
-**标准化报告**: [C11_STANDARDIZATION_FINAL_2025_10_22.md](./docs/reports/C11_STANDARDIZATION_FINAL_2025_10_22.md)
+**标准化报告**: [C11_STANDARDIZATION_FINAL_2025_10_22.md](docs/reports/C11_STANDARDIZATION_FINAL_2025_10_22.md)
 
 ---
 
@@ -186,10 +186,10 @@ C11_macro_system/
   - 编译时间减少 10-20%
   - 实现位置: `src/rust_191_features.rs`
 
-- 📚 **新增文档**: [Rust 1.93.0 宏系统改进文档](./docs/RUST_192_MACRO_IMPROVEMENTS.md) ⭐ NEW!
-- 📚 **历史文档**: [Rust 1.91 宏系统改进文档](./docs/RUST_191_MACRO_IMPROVEMENTS.md) (历史参考)
-- 💻 **新增示例**: [Rust 1.93.0 特性演示示例](./examples/rust_192_features_demo.rs) ⭐ NEW!
-- 💻 **历史示例**: [Rust 1.91 特性演示示例](./examples/rust_191_features_demo.rs) (历史参考)
+- 📚 **新增文档**: [Rust 1.93.0 宏系统改进文档](docs/RUST_192_MACRO_IMPROVEMENTS.md) ⭐ NEW!
+- 📚 **历史文档**: [Rust 1.91 宏系统改进文档](docs/RUST_191_MACRO_IMPROVEMENTS.md) (历史参考)
+- 💻 **新增示例**: [Rust 1.93.0 特性演示示例](examples/rust_192_features_demo.rs) ⭐ NEW!
+- 💻 **历史示例**: [Rust 1.91 特性演示示例](examples/rust_191_features_demo.rs) (历史参考)
 
 ---
 
@@ -350,9 +350,9 @@ trace_macros!(true);
 
 ### 本模块文档
 
-- [主索引](./docs/00_MASTER_INDEX.md) - 完整学习导航
-- [FAQ](./docs/FAQ.md) - 常见问题解答
-- [术语表](./docs/Glossary.md) - 核心概念定义
+- [主索引](docs/00_MASTER_INDEX.md) - 完整学习导航
+- [FAQ](docs/FAQ.md) - 常见问题解答
+- [术语表](docs/Glossary.md) - 核心概念定义
 
 ### 实用工具
 
@@ -424,10 +424,10 @@ macro_rules! count {
 
 深入学习宏系统的形式化理论基础：
 
-- 📐 **[宏系统形式化理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/08_macro_system/)** - 宏系统的形式化定义和展开规则
+- 📐 **[宏系统形式化理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/08_macro_system)** - 宏系统的形式化定义和展开规则
 - 🎯 **[类型系统理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)** - 宏中的类型操作和约束
-- 🔬 **[形式化验证理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/09_formal_verification/)** - 宏展开的正确性验证
-- 🧮 **[数学基础](../../docs/rust-formal-engineering-system/01_theoretical_foundations/10_mathematical_foundations/)** - 元编程的数学基础
+- 🔬 **[形式化验证理论](../../docs/rust-formal-engineering-system/01_theoretical_foundations/09_formal_verification)** - 宏展开的正确性验证
+- 🧮 **[数学基础](../../docs/rust-formal-engineering-system/01_theoretical_foundations/10_mathematical_foundations)** - 元编程的数学基础
 
 **学习路径**: 实践代码 → 形式化理论 → 深入理解
 
@@ -435,7 +435,7 @@ macro_rules! count {
 
 **开始你的宏学习之旅！** 🚀
 
-从 [主索引](./docs/00_MASTER_INDEX.md) 开始，或直接运行第一个示例。
+从 [主索引](docs/00_MASTER_INDEX.md) 开始，或直接运行第一个示例。
 
 **最后更新**: 2025-12-11
 **维护者**: Rust学习社区

@@ -129,7 +129,7 @@ Rust 新版本发布
 
 - [Rust 1.94 特性分析](../docs/research_notes/RUST_194_COMPREHENSIVE_ANALYSIS.md) (待创建)
 - [版本化文档模板](../docs/templates/versioned_doc_template.md) (待创建)
-- [项目路线图](./CRITICAL_ANALYSIS_AND_ROADMAP_2026_03_12.md)
+- [项目路线图](CRITICAL_ANALYSIS_AND_ROADMAP_2026_03_12.md)
 
 ---
 

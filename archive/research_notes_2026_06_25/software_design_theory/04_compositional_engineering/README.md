@@ -16,38 +16,38 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [组合软件工程有效性形式论证](#组合软件工程有效性形式论证)
-  - [📊 目录 {#-目录}](#-目录--目录)
-  - [宗旨](#宗旨)
-  - [设计模式组合示例（实质内容）](#设计模式组合示例实质内容)
-  - [组合完整代码示例（层次推进）](#组合完整代码示例层次推进)
-    - [示例 1：Builder + Factory Method](#示例-1builder--factory-method)
-    - [示例 2：Repository + Service Layer + DTO（完整链条）](#示例-2repository--service-layer--dto完整链条)
-    - [实例推导：CE-T1–T3 作用于模式组合（R1-01 最小交付）](#实例推导ce-t1t3-作用于模式组合r1-01-最小交付)
-  - [文档索引](#文档索引)
-  - [核心问题](#核心问题)
-  - [形式化论证汇总](#形式化论证汇总)
-    - [组合法则依赖链（Def → Axiom → Lemma → Theorem → Corollary）](#组合法则依赖链def--axiom--lemma--theorem--corollary)
-  - [组件成熟度与构建能力确定性](#组件成熟度与构建能力确定性)
-  - [L3/L4 验证手段细化](#l3l4-验证手段细化)
-    - [L3/L4 验证工具索引](#l3l4-验证工具索引)
-  - [架构模式→成熟度层级映射](#架构模式成熟度层级映射)
-  - [构建能力确定性判定树](#构建能力确定性判定树)
-  - [表达力×组合联合判定树（支柱 2+3）](#表达力组合联合判定树支柱-23)
-  - [组件构建能力形式化树图（与 43 模式联合）](#组件构建能力形式化树图与-43-模式联合)
-    - [Mermaid 形式化树图](#mermaid-形式化树图)
-    - [ASCII 形式化树图（模块→crate→进程→网络）](#ascii-形式化树图模块crate进程网络)
-  - [定理速查](#定理速查)
-  - [实践要点](#实践要点)
-  - [组合选型决策树（层次推进）](#组合选型决策树层次推进)
-  - [组合反例（层次推进）](#组合反例层次推进)
-  - [组合反例→编译错误映射（CE-T1/T2/T3）](#组合反例编译错误映射ce-t1t2t3)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [权威来源索引](#权威来源索引)
+- [组合软件工程有效性形式论证](.#组合软件工程有效性形式论证)
+  - [📊 目录 {#-目录}](.#-目录--目录)
+  - [宗旨](.#宗旨)
+  - [设计模式组合示例（实质内容）](.#设计模式组合示例实质内容)
+  - [组合完整代码示例（层次推进）](.#组合完整代码示例层次推进)
+    - [示例 1：Builder + Factory Method](.#示例-1builder--factory-method)
+    - [示例 2：Repository + Service Layer + DTO（完整链条）](.#示例-2repository--service-layer--dto完整链条)
+    - [实例推导：CE-T1–T3 作用于模式组合（R1-01 最小交付）](.#实例推导ce-t1t3-作用于模式组合r1-01-最小交付)
+  - [文档索引](.#文档索引)
+  - [核心问题](.#核心问题)
+  - [形式化论证汇总](.#形式化论证汇总)
+    - [组合法则依赖链（Def → Axiom → Lemma → Theorem → Corollary）](.#组合法则依赖链def--axiom--lemma--theorem--corollary)
+  - [组件成熟度与构建能力确定性](.#组件成熟度与构建能力确定性)
+  - [L3/L4 验证手段细化](.#l3l4-验证手段细化)
+    - [L3/L4 验证工具索引](.#l3l4-验证工具索引)
+  - [架构模式→成熟度层级映射](.#架构模式成熟度层级映射)
+  - [构建能力确定性判定树](.#构建能力确定性判定树)
+  - [表达力×组合联合判定树（支柱 2+3）](.#表达力组合联合判定树支柱-23)
+  - [组件构建能力形式化树图（与 43 模式联合）](.#组件构建能力形式化树图与-43-模式联合)
+    - [Mermaid 形式化树图](.#mermaid-形式化树图)
+    - [ASCII 形式化树图（模块→crate→进程→网络）](.#ascii-形式化树图模块crate进程网络)
+  - [定理速查](.#定理速查)
+  - [实践要点](.#实践要点)
+  - [组合选型决策树（层次推进）](.#组合选型决策树层次推进)
+  - [组合反例（层次推进）](.#组合反例层次推进)
+  - [组合反例→编译错误映射（CE-T1/T2/T3）](.#组合反例编译错误映射ce-t1t2t3)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [权威来源索引](.#权威来源索引)
 
 ---
 
@@ -69,8 +69,8 @@
 | Decorator + Strategy | 装饰器持 `impl Strategy` | CE-T2（无共享可变） |
 | Observer + Command | channel 传 `Box<dyn Command>` | CE-T2（Send 约束） |
 | Composite + Visitor | `match` 遍历 + `Visitor` trait | CE-T1、CE-T3 |
-| Repository + Service Layer | 模块依赖、trait 组合 | [03_integration_theory](./03_integration_theory.md) IT-T1 |
-| Builder + Factory + Repository | 订单创建→工厂选择→持久化完整链条 | [03_integration_theory](./03_integration_theory.md) § 完整多模式组合链条 |
+| Repository + Service Layer | 模块依赖、trait 组合 | [03_integration_theory](03_integration_theory.md) IT-T1 |
+| Builder + Factory + Repository | 订单创建→工厂选择→持久化完整链条 | [03_integration_theory](03_integration_theory.md) § 完整多模式组合链条 |
 
 ---
 
@@ -168,9 +168,9 @@ impl<R: OrderRepository> OrderService<R> {
 
 | 文档 | 内容 |
 | :--- | :--- |
-| [01_formal_composition](./01_formal_composition.md) | 组合的形式化定义 |
-| [02_effectiveness_proofs](./02_effectiveness_proofs.md) | 有效性定理与证明 |
-| [03_integration_theory](./03_integration_theory.md) | 与 ownership/borrow/trait 的衔接 |
+| [01_formal_composition](01_formal_composition.md) | 组合的形式化定义 |
+| [02_effectiveness_proofs](02_effectiveness_proofs.md) | 有效性定理与证明 |
+| [03_integration_theory](03_integration_theory.md) | 与 ownership/borrow/trait 的衔接 |
 
 ---
 
@@ -192,7 +192,7 @@ impl<R: OrderRepository> OrderService<R> {
 
 **Axiom CE1**：组合无循环依赖；`pub` 边界为模块间唯一接口；跨模块调用保持类型与所有权 semantics。
 
-**定理 CE-T1–T3**：见 [01_formal_composition](./01_formal_composition.md)、[02_effectiveness_proofs](./02_effectiveness_proofs.md)；组合保持内存安全、数据竞争自由、类型安全。
+**定理 CE-T1–T3**：见 [01_formal_composition](01_formal_composition.md)、[02_effectiveness_proofs](02_effectiveness_proofs.md)；组合保持内存安全、数据竞争自由、类型安全。
 
 **推论 CE-C1**：若各 $M_i$ 为 Safe 且良型，则有效组合 $C$ 为 Safe 且良型。*证明*：由 CE-T1、CE-T2、CE-T3 直接。∎
 
@@ -245,7 +245,7 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 
 **定理 CE-MAT-T1（构建能力确定性）**：若 $C$ 为 L1 或 L2，则 $C$ 的有效性（CE-T1–T3）可**静态判定**（`cargo check`、clippy）；若 $C$ 为 L3 或 L4，则需额外运行时验证或集成测试。
 
-*证明*：由 [01_formal_composition](./01_formal_composition.md) Def 1.3 无环、接口一致；L1/L2 的依赖图与类型在编译时完全可知；L3/L4 涉及 crate 版本、跨进程通信，需集成测试或契约验证。∎
+*证明*：由 [01_formal_composition](01_formal_composition.md) Def 1.3 无环、接口一致；L1/L2 的依赖图与类型在编译时完全可知；L3/L4 涉及 crate 版本、跨进程通信，需集成测试或契约验证。∎
 
 **推论 CE-MAT-C1**：目标架构 → 依赖图 → 有效性检查（CE-T1–T3）形成**构建能力确定性判定**；L1/L2 可判定为有效或无效；L3/L4 可判定为「需进一步验证」。
 
@@ -451,7 +451,7 @@ L4 跨进程/跨网络（分布式、微服务）
 | CE-T3 | 组合保持类型安全 |
 
 组合时所有权传递、借用规则、Send/Sync 在模块边界不变。
-详见 [02_effectiveness_proofs](./02_effectiveness_proofs.md)。
+详见 [02_effectiveness_proofs](02_effectiveness_proofs.md)。
 
 ---
 

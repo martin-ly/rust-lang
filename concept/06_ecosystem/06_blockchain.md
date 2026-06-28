@@ -18,8 +18,8 @@
 > [Linear Logic](../04_formal/01_linear_logic.md)
 > [来源: [Rust by Example](https://doc.rust-lang.org/rust-by-example/)]
 > **后置概念**:
-> [Formal Ecosystem Tower](./05_formal_ecosystem_tower.md) ·
-> [Application Domains](./04_application_domains.md)
+> [Formal Ecosystem Tower](05_formal_ecosystem_tower.md) ·
+> [Application Domains](04_application_domains.md)
 > **主要来源**: [Solana Docs] · [Polkadot Substrate Docs] · [Near Protocol Docs] · [Kani Verification Blog] · [Rust in Blockchain Report] · [Wikipedia: Blockchain](https://en.wikipedia.org/wiki/Blockchain) · [Wikipedia: Smart contract](https://en.wikipedia.org/wiki/Smart_contract)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
@@ -677,8 +677,8 @@ Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，
 | Unsafe | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | VM 运行时底层边界 |
 | 线性逻辑 | [`../04_formal/01_linear_logic.md`](../04_formal/01_linear_logic.md) | 代币作为线性资源的形式化 |
 | 形式化验证工具链 | [`../04_formal/05_verification_toolchain.md`](../04_formal/05_verification_toolchain.md) | Kani / Verus 的验证理论 |
-| 核心库谱系 | [`./03_core_crates.md`](./03_core_crates.md) | `solana-program`、`ink` 等 crate 定位 |
-| 应用领域 | [`./04_application_domains.md`](./04_application_domains.md) | 区块链作为 L6 应用域 |
+| 核心库谱系 | [`./03_core_crates.md`](03_core_crates.md) | `solana-program`、`ink` 等 crate 定位 |
+| 应用领域 | [`./04_application_domains.md`](04_application_domains.md) | 区块链作为 L6 应用域 |
 
 > **[来源: Solana Docs; Polkadot Substrate Docs; Near Protocol Docs; Kani Verification Blog; Rust in Blockchain Report]** 区块链分析基于官方协议文档和形式化验证研究。✅
 > **[来源: Smart Contract Security Research; Reentrancy Attack Analysis; The DAO Post-Mortem]** 合约安全分析基于已公开的安全事件和研究文献。✅

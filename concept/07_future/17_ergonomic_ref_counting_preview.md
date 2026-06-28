@@ -25,7 +25,7 @@
 > [Ownership](../01_foundation/01_ownership.md) ·
 > [Smart Pointers](../02_intermediate/12_smart_pointers.md) ·
 > [Unsafe](../03_advanced/03_unsafe.md)
-> **后置概念**: [Rust for Linux](./19_rust_for_linux.md)
+> **后置概念**: [Rust for Linux](19_rust_for_linux.md)
 
 ## 一、核心概念
 
@@ -167,8 +167,8 @@ Ergonomic ref-counting 可显著降低内核绑定的样板代码量，提升可
 
 - [Smart Pointers](../02_intermediate/12_smart_pointers.md) — `Rc`/`Arc`/`Weak` 详解
 - [Ownership](../01_foundation/01_ownership.md) — 所有权模型基础
-- [Rust for Linux](./19_rust_for_linux.md) — 内核开发跟踪
-- [Version Tracking](./05_rust_version_tracking.md) — 版本特性演进
+- [Rust for Linux](19_rust_for_linux.md) — 内核开发跟踪
+- [Version Tracking](05_rust_version_tracking.md) — 版本特性演进
 
 ---
 

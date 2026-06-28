@@ -3,7 +3,7 @@
 > **适用版本**: Rust 1.94.0+
 > **最后更新**: 2026-03-13
 
-📄 **一页纸总结**: [ONE_PAGE_SUMMARY](./ONE_PAGE_SUMMARY.md) - 核心概念、常见坑、速选表、学习路径
+📄 **一页纸总结**: [ONE_PAGE_SUMMARY](ONE_PAGE_SUMMARY.md) - 核心概念、常见坑、速选表、学习路径
 
 ## 📚 官方资源映射
 
@@ -60,11 +60,11 @@ docs/
 
 | 文档  | 主要内容 | 适合人群 |
 | :--- | :--- | :--- |
-| [03_算法复杂度分析](./tier_02_guides/03_算法复杂度分析.md)         | 时间/空间复杂度、Big-O、主定理、摊还分析 | 初学者、面试准备 |
-| [02_数据结构实践](./tier_02_guides/02_数据结构实践.md)             | 线性表、树、图、高级数据结构             | 所有开发者       |
-| [05_并行与异步算法](./tier_02_guides/05_并行与异步算法.md)         | 异步算法设计、Tokio、Futures             | 异步编程学习者   |
-| [04_性能优化实践](./tier_02_guides/04_性能优化实践.md)             | 编译期优化、运行时优化、SIMD             | 性能优化工程师   |
-| [04_算法性能参考](./tier_03_references/04_算法性能参考.md)         | Criterion、性能测试、对比分析            | 性能调优人员     |
+| [03_算法复杂度分析](tier_02_guides/03_算法复杂度分析.md)         | 时间/空间复杂度、Big-O、主定理、摊还分析 | 初学者、面试准备 |
+| [02_数据结构实践](tier_02_guides/02_数据结构实践.md)             | 线性表、树、图、高级数据结构             | 所有开发者       |
+| [05_并行与异步算法](tier_02_guides/05_并行与异步算法.md)         | 异步算法设计、Tokio、Futures             | 异步编程学习者   |
+| [04_性能优化实践](tier_02_guides/04_性能优化实践.md)             | 编译期优化、运行时优化、SIMD             | 性能优化工程师   |
+| [04_算法性能参考](tier_03_references/04_算法性能参考.md)         | Criterion、性能测试、对比分析            | 性能调优人员     |
 
 **学习路径**: 03_算法复杂度分析 → 02_数据结构实践 → 05_并行与异步算法 → 04_性能优化实践
 
@@ -74,17 +74,17 @@ docs/
 
 | 文档  | 主要内容 | 难度   |
 | :--- | :--- | :--- |
-| [01_形式化算法理论](./tier_04_advanced/01_形式化算法理论.md)           | 算法分类、形式化定义、计算模型 | ⭐⭐⭐ |
-| [02_并发算法模式](./tier_04_advanced/02_并发算法模式.md)               | Actor、Reactor、CSP          | ⭐⭐⭐ |
-| [03_分布式算法](./tier_04_advanced/03_分布式算法.md)                  | 分布式系统算法               | ⭐⭐⭐ |
-| [04_算法工程实践](./tier_04_advanced/04_算法工程实践.md)              | 工程应用最佳实践             | ⭐⭐⭐ |
-| [05_前沿算法技术](./tier_04_advanced/05_前沿算法技术.md)              | 机器学习与前沿研究           | ⭐⭐⭐ |
+| [01_形式化算法理论](tier_04_advanced/01_形式化算法理论.md)           | 算法分类、形式化定义、计算模型 | ⭐⭐⭐ |
+| [02_并发算法模式](tier_04_advanced/02_并发算法模式.md)               | Actor、Reactor、CSP          | ⭐⭐⭐ |
+| [03_分布式算法](tier_04_advanced/03_分布式算法.md)                  | 分布式系统算法               | ⭐⭐⭐ |
+| [04_算法工程实践](tier_04_advanced/04_算法工程实践.md)              | 工程应用最佳实践             | ⭐⭐⭐ |
+| [05_前沿算法技术](tier_04_advanced/05_前沿算法技术.md)              | 机器学习与前沿研究           | ⭐⭐⭐ |
 
 **学习路径**: 01_形式化算法理论 → 02_并发算法模式 → 03_分布式算法
 
 ### 3. 高级专题 (tier_04_advanced/)
 
-详见 [tier_04_advanced/README.md](./tier_04_advanced/README.md)
+详见 [tier_04_advanced/README.md](tier_04_advanced/README.md)
 
 **按兴趣选择**:
 
@@ -97,16 +97,16 @@ docs/
 
 | 文档  | 版本 | 主要内容 |
 | :--- | :--- | :--- |
-| [03_Rust190特性参考](./tier_03_references/03_Rust190特性参考.md) | 1.90 | 特性应用     |
-| [RUST_192_ALGORITHMS_IMPROVEMENTS](./RUST_192_ALGORITHMS_IMPROVEMENTS.md) | 1.93 | 算法特性 ⭐  |
+| [03_Rust190特性参考](tier_03_references/03_Rust190特性参考.md) | 1.90 | 特性应用     |
+| [RUST_192_ALGORITHMS_IMPROVEMENTS](RUST_192_ALGORITHMS_IMPROVEMENTS.md) | 1.93 | 算法特性 ⭐  |
 
 ### 5. 参考资料 (tier_03_references/)
 
 | 文档  | 用途  | 适合场景  |
 | :--- | :--- | :--- |
-| [01_算法分类参考](./tier_03_references/01_算法分类参考.md)       | 算法索引      | 快速查找算法 |
-| [02_数据结构参考](./tier_03_references/02_数据结构参考.md)        | 数据结构 API  | 技术参考     |
-| [04_算法性能参考](./tier_03_references/04_算法性能参考.md)       | 性能基准      | 性能调优     |
+| [01_算法分类参考](tier_03_references/01_算法分类参考.md)       | 算法索引      | 快速查找算法 |
+| [02_数据结构参考](tier_03_references/02_数据结构参考.md)        | 数据结构 API  | 技术参考     |
+| [04_算法性能参考](tier_03_references/04_算法性能参考.md)       | 性能基准      | 性能调优     |
 
 ---
 
@@ -245,8 +245,8 @@ Week 4: 实战项目
 
 ### 测试与基准
 
-- **[tests/](../tests/)** - 集成测试
-- **[benches/](../benches/)** - 性能基准测试
+- **[tests/](../tests)** - 集成测试
+- **[benches/](../benches)** - 性能基准测试
 
 ---
 
@@ -303,11 +303,11 @@ Week 4: 实战项目
 
 ### 常见问题
 
-查看 [FAQ.md](./FAQ.md) 获取常见问题的解答。
+查看 [FAQ.md](FAQ.md) 获取常见问题的解答。
 
 ### 术语查询
 
-查看 [Glossary.md](./Glossary.md) 了解专业术语。
+查看 [Glossary.md](Glossary.md) 了解专业术语。
 
 ### 问题反馈
 

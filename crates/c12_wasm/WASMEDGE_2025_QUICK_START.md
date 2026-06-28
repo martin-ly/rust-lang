@@ -20,9 +20,9 @@
 
 | 文档                                                                       | 内容                           | 难度       | 时长     |
 | :--- | :--- | :--- | :--- |
-| [06\_容器技术深度集成](./docs/tier_04_advanced/06_容器技术深度集成.md)     | Docker/K8s/containerd 完整集成 | ⭐⭐⭐⭐⭐ | 2-3 小时 |
-| [07\_云原生CI_CD实践](./docs/tier_04_advanced/07_云原生CI_CD实践.md)       | GitHub Actions/GitLab CI 流程  | ⭐⭐⭐⭐⭐ | 1-2 小时 |
-| [08\_监控与可观测性实践](./docs/tier_04_advanced/08_监控与可观测性实践.md) | Prometheus/Grafana/Loki/Jaeger | ⭐⭐⭐⭐⭐ | 2-3 小时 |
+| [06\_容器技术深度集成](docs/tier_04_advanced/06_容器技术深度集成.md)     | Docker/K8s/containerd 完整集成 | ⭐⭐⭐⭐⭐ | 2-3 小时 |
+| [07\_云原生CI_CD实践](docs/tier_04_advanced/07_云原生CI_CD实践.md)       | GitHub Actions/GitLab CI 流程  | ⭐⭐⭐⭐⭐ | 1-2 小时 |
+| [08\_监控与可观测性实践](docs/tier_04_advanced/08_监控与可观测性实践.md) | Prometheus/Grafana/Loki/Jaeger | ⭐⭐⭐⭐⭐ | 2-3 小时 |
 
 ---
 
@@ -323,15 +323,15 @@ kubectl describe pod/wasm-microservice-xxx -n wasm-prod
 
 ### 文档
 
-- 📖 [完整文档](./docs/README.md)
-- 🚀 [快速开始](./QUICK_START.md)
-- 📋 [项目状态](./PROJECT_STATUS.md)
-- 📝 [完成报告](./WASMEDGE_2025_ADVANCEMENT_REPORT.md)
+- 📖 [完整文档](docs/README.md)
+- 🚀 [快速开始](QUICK_START.md)
+- 📋 [项目状态](PROJECT_STATUS.md)
+- 📝 [完成报告](WASMEDGE_2025_ADVANCEMENT_REPORT.md)
 
 ### 代码示例
 
-- 💻 [示例代码](./examples/README.md)
-- 📦 [部署配置](./deployment/)
+- 💻 [示例代码](examples/README.md)
+- 📦 [部署配置](deployment)
 
 ### 社区
 

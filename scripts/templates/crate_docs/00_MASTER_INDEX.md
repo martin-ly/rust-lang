@@ -6,17 +6,17 @@
 
 ## 必读入口
 
-- [README.md](./README.md) — 项目概览与快速开始
-- [ONE_PAGE_SUMMARY.md](./ONE_PAGE_SUMMARY.md) — 单页核心总结
+- [README.md](README.md) — 项目概览与快速开始
+- [ONE_PAGE_SUMMARY.md](ONE_PAGE_SUMMARY.md) — 单页核心总结
 
 ## 文档目录
 
 | 类别 | 文件 |
 |---|---|
-| 术语 | [Glossary.md](./Glossary.md) |
-| 常见问题 | [FAQ.md](./FAQ.md) |
-| 待办 | [PENDING_ITEMS.md](./PENDING_ITEMS.md) |
-| 知识地图 | [MIND_MAP.md](./MIND_MAP.md) |
+| 术语 | [Glossary.md](Glossary.md) |
+| 常见问题 | [FAQ.md](FAQ.md) |
+| 待办 | [PENDING_ITEMS.md](PENDING_ITEMS.md) |
+| 知识地图 | [MIND_MAP.md](MIND_MAP.md) |
 
 ## 子目录导航
 

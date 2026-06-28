@@ -14,26 +14,26 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [闭包速查卡 (Closures Cheatsheet)](#闭包速查卡-closures-cheatsheet)
-  - [📑 目录](#-目录)
-  - [闭包基础](#闭包基础)
-    - [定义闭包](#定义闭包)
-    - [捕获环境](#捕获环境)
-  - [闭包 Trait](#闭包-trait)
-    - [Trait 使用示例](#trait-使用示例)
-  - [常见用法](#常见用法)
-    - [迭代器方法](#迭代器方法)
-    - [高阶函数](#高阶函数)
-  - [相关文档](#相关文档)
-  - [Rust 1.95+ 在闭包与函数式编程中的深度应用](#rust-195-在闭包与函数式编程中的深度应用)
-    - [ControlFlow 在函数式控制流中的应用](#controlflow-在函数式控制流中的应用)
-    - [LazyLock 在闭包工厂中的应用](#lazylock-在闭包工厂中的应用)
-    - [array\_windows 在函数式数据处理中的应用](#array_windows-在函数式数据处理中的应用)
-    - [数学常量在函数式数值计算中的应用](#数学常量在函数式数值计算中的应用)
-    - [生产场景：事件处理系统](#生产场景事件处理系统)
-    - [总结](#总结)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [闭包速查卡 (Closures Cheatsheet)](.#闭包速查卡-closures-cheatsheet)
+  - [📑 目录](.#-目录)
+  - [闭包基础](.#闭包基础)
+    - [定义闭包](.#定义闭包)
+    - [捕获环境](.#捕获环境)
+  - [闭包 Trait](.#闭包-trait)
+    - [Trait 使用示例](.#trait-使用示例)
+  - [常见用法](.#常见用法)
+    - [迭代器方法](.#迭代器方法)
+    - [高阶函数](.#高阶函数)
+  - [相关文档](.#相关文档)
+  - [Rust 1.95+ 在闭包与函数式编程中的深度应用](.#rust-195-在闭包与函数式编程中的深度应用)
+    - [ControlFlow 在函数式控制流中的应用](.#controlflow-在函数式控制流中的应用)
+    - [LazyLock 在闭包工厂中的应用](.#lazylock-在闭包工厂中的应用)
+    - [array\_windows 在函数式数据处理中的应用](.#array_windows-在函数式数据处理中的应用)
+    - [数学常量在函数式数值计算中的应用](.#数学常量在函数式数值计算中的应用)
+    - [生产场景：事件处理系统](.#生产场景事件处理系统)
+    - [总结](.#总结)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 闭包基础
 >
@@ -173,9 +173,9 @@ where
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [控制流与函数速查卡](./02_control_flow_functions_cheatsheet.md)
-- [迭代器速查卡](./02_collections_iterators_cheatsheet.md)
-- [类型系统速查卡](./02_type_system.md)
+- [控制流与函数速查卡](02_control_flow_functions_cheatsheet.md)
+- [迭代器速查卡](02_collections_iterators_cheatsheet.md)
+- [类型系统速查卡](02_type_system.md)
 
 ---
 
@@ -631,8 +631,8 @@ pub fn setup_processor() -> EventProcessor {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [quick_reference 目录](./README.md)
-- [速查表索引](./README.md)
+- [quick_reference 目录](README.md)
+- [速查表索引](README.md)
 
 ---
 

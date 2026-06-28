@@ -9,57 +9,57 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [实际应用案例研究](#实际应用案例研究)
-  - [📑 目录](#-目录)
-  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
-    - [核心问题](#核心问题)
-    - [预期成果](#预期成果)
-  - [形式化论证与案例衔接](#形式化论证与案例衔接)
-  - [📚 案例分类 {#-案例分类}](#-案例分类--案例分类)
-    - [1. 系统编程案例](#1-系统编程案例)
-      - [案例 1.1：Redox OS](#案例-11redox-os)
-      - [案例 1.2：Tokio 异步运行时](#案例-12tokio-异步运行时)
-    - [2. 网络应用案例](#2-网络应用案例)
-      - [案例 2.1：Actix-web 高性能 Web 框架](#案例-21actix-web-高性能-web-框架)
-      - [案例 2.2：Linkerd 服务网格](#案例-22linkerd-服务网格)
-    - [3. 并发系统案例](#3-并发系统案例)
-      - [案例 3.1：TiKV 分布式键值存储](#案例-31tikv-分布式键值存储)
-      - [案例 3.2：ScyllaDB Rust 驱动](#案例-32scylladb-rust-驱动)
-    - [4. 嵌入式系统案例](#4-嵌入式系统案例)
-      - [案例 4.1：Tock 嵌入式操作系统](#案例-41tock-嵌入式操作系统)
-      - [案例 4.2：Drone 实时操作系统](#案例-42drone-实时操作系统)
-  - [💻 案例示例 {#-案例示例}](#-案例示例--案例示例)
-    - [案例 1：高性能 Web 服务器](#案例-1高性能-web-服务器)
-    - [案例 2：并发数据处理系统](#案例-2并发数据处理系统)
-    - [案例 3：内存安全的数据结构](#案例-3内存安全的数据结构)
-      - [案例 1.3：Firecracker 微虚拟机](#案例-13firecracker-微虚拟机)
-  - [📊 案例分析 {#-案例分析}](#-案例分析--案例分析)
-    - [性能分析](#性能分析)
-    - [最佳实践总结 {#-最佳实践总结}](#最佳实践总结--最佳实践总结)
-  - [📊 最佳实践总结](#-最佳实践总结)
-    - [系统编程最佳实践](#系统编程最佳实践)
-    - [网络应用最佳实践](#网络应用最佳实践)
-    - [并发系统最佳实践](#并发系统最佳实践)
-    - [嵌入式系统最佳实践](#嵌入式系统最佳实践)
-  - [📋 案例报告与应用指南 {#-案例报告与应用指南}](#-案例报告与应用指南--案例报告与应用指南)
-    - [案例报告模板](#案例报告模板)
-    - [应用指南](#应用指南)
-  - [🔗 系统集成与案例索引 {#-系统集成与案例索引}](#-系统集成与案例索引--系统集成与案例索引)
-    - [与形式化方法的关联](#与形式化方法的关联)
-    - [与类型理论、实验研究的关联](#与类型理论实验研究的关联)
-    - [案例快速索引](#案例快速索引)
-    - [与形式化衔接的案例索引（层次推进）](#与形式化衔接的案例索引层次推进)
-  - [📖 参考文献 {#-参考文献}](#-参考文献--参考文献)
-    - [实际项目](#实际项目)
-    - [相关文档](#相关文档)
-    - [工具资源](#工具资源)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档-1)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [实际应用案例研究](.#实际应用案例研究)
+  - [📑 目录](.#-目录)
+  - [🎯 研究目标 {#-研究目标}](.#-研究目标--研究目标)
+    - [核心问题](.#核心问题)
+    - [预期成果](.#预期成果)
+  - [形式化论证与案例衔接](.#形式化论证与案例衔接)
+  - [📚 案例分类 {#-案例分类}](.#-案例分类--案例分类)
+    - [1. 系统编程案例](.#1-系统编程案例)
+      - [案例 1.1：Redox OS](.#案例-11redox-os)
+      - [案例 1.2：Tokio 异步运行时](.#案例-12tokio-异步运行时)
+    - [2. 网络应用案例](.#2-网络应用案例)
+      - [案例 2.1：Actix-web 高性能 Web 框架](.#案例-21actix-web-高性能-web-框架)
+      - [案例 2.2：Linkerd 服务网格](.#案例-22linkerd-服务网格)
+    - [3. 并发系统案例](.#3-并发系统案例)
+      - [案例 3.1：TiKV 分布式键值存储](.#案例-31tikv-分布式键值存储)
+      - [案例 3.2：ScyllaDB Rust 驱动](.#案例-32scylladb-rust-驱动)
+    - [4. 嵌入式系统案例](.#4-嵌入式系统案例)
+      - [案例 4.1：Tock 嵌入式操作系统](.#案例-41tock-嵌入式操作系统)
+      - [案例 4.2：Drone 实时操作系统](.#案例-42drone-实时操作系统)
+  - [💻 案例示例 {#-案例示例}](.#-案例示例--案例示例)
+    - [案例 1：高性能 Web 服务器](.#案例-1高性能-web-服务器)
+    - [案例 2：并发数据处理系统](.#案例-2并发数据处理系统)
+    - [案例 3：内存安全的数据结构](.#案例-3内存安全的数据结构)
+      - [案例 1.3：Firecracker 微虚拟机](.#案例-13firecracker-微虚拟机)
+  - [📊 案例分析 {#-案例分析}](.#-案例分析--案例分析)
+    - [性能分析](.#性能分析)
+    - [最佳实践总结 {#-最佳实践总结}](.#最佳实践总结--最佳实践总结)
+  - [📊 最佳实践总结](.#-最佳实践总结)
+    - [系统编程最佳实践](.#系统编程最佳实践)
+    - [网络应用最佳实践](.#网络应用最佳实践)
+    - [并发系统最佳实践](.#并发系统最佳实践)
+    - [嵌入式系统最佳实践](.#嵌入式系统最佳实践)
+  - [📋 案例报告与应用指南 {#-案例报告与应用指南}](.#-案例报告与应用指南--案例报告与应用指南)
+    - [案例报告模板](.#案例报告模板)
+    - [应用指南](.#应用指南)
+  - [🔗 系统集成与案例索引 {#-系统集成与案例索引}](.#-系统集成与案例索引--系统集成与案例索引)
+    - [与形式化方法的关联](.#与形式化方法的关联)
+    - [与类型理论、实验研究的关联](.#与类型理论实验研究的关联)
+    - [案例快速索引](.#案例快速索引)
+    - [与形式化衔接的案例索引（层次推进）](.#与形式化衔接的案例索引层次推进)
+  - [📖 参考文献 {#-参考文献}](.#-参考文献--参考文献)
+    - [实际项目](.#实际项目)
+    - [相关文档](.#相关文档)
+    - [工具资源](.#工具资源)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档-1)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-28
@@ -115,13 +115,13 @@
 [async_state_machine](formal_methods/10_async_state_machine.md) T6.2 一致，则 $C$ 为 Safe 且满足形式化保证。
 
 *证明*：由各定理陈述；案例实现满足定理结论即一致；
-组合见 [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md) CSO-T1。∎
+组合见 [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](10_comprehensive_systematic_overview.md) CSO-T1。∎
 
-**引理 PA-L1（unsafe 案例边界）**：若案例 $C$ 含 `unsafe` 块，则 $C$ 与定理一致 ⟺ $C$ 的 unsafe 使用满足 [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./10_safe_unsafe_comprehensive_analysis.md) 契约；安全抽象对外 API 为 Safe。
+**引理 PA-L1（unsafe 案例边界）**：若案例 $C$ 含 `unsafe` 块，则 $C$ 与定理一致 ⟺ $C$ 的 unsafe 使用满足 [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](10_safe_unsafe_comprehensive_analysis.md) 契约；安全抽象对外 API 为 Safe。
 
 *证明*：由 Def PA1；unsafe 块引入契约；安全抽象将 unsafe 封装，对外满足 Safe 规则；契约满足则与定理一致。∎
 
-**推论 PA-C1**：案例分析可引用 [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) 与 [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) 的论证链，建立与实际项目的追溯关系。
+**推论 PA-C1**：案例分析可引用 [PROOF_INDEX](10_proof_index.md) 与 [FORMAL_PROOF_SYSTEM_GUIDE](10_formal_proof_system_guide.md) 的论证链，建立与实际项目的追溯关系。
 
 ---
 
@@ -1024,7 +1024,7 @@ impl<T> Drop for SafeVec<T> {
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 - **选型**：系统编程、网络、并发、嵌入式可分别从「案例分类」中选取对标项目；性能与安全诉求可参考「案例分析」与各实验的基准。
-- **落地**：按「最佳实践总结」的四个领域逐条对照；异步、错误处理、并发原语选型可结合 [async_state_machine](./formal_methods/10_async_state_machine.md)、[concurrency_performance](./experiments/10_concurrency_performance.md)。
+- **落地**：按「最佳实践总结」的四个领域逐条对照；异步、错误处理、并发原语选型可结合 [async_state_machine](formal_methods/10_async_state_machine.md)、[concurrency_performance](experiments/10_concurrency_performance.md)。
 - **扩展**：新案例可按「案例报告模板」录入，并纳入下方「系统集成与案例索引」。
 
 ---
@@ -1037,17 +1037,17 @@ impl<T> Drop for SafeVec<T> {
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
-- **所有权模型** [10_ownership_model.md](./formal_methods/10_ownership_model.md)：Redox、Tock、Firecracker、SafeVec 等案例中的资源管理与 `unsafe` 边界，可对照所有权规则做形式化抽查。
-- **借用检查器** [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)：TiKV、Actix、Linkerd 等并发与迭代场景，可对照借用规则验证无数据竞争。
-- **异步状态机** [10_async_state_machine.md](./formal_methods/10_async_state_machine.md)：Tokio、Actix、ScyllaDB 驱动、案例 1–2 的 async 设计，可对应 Future/Poll/Waker 形式化。
+- **所有权模型** [10_ownership_model.md](formal_methods/10_ownership_model.md)：Redox、Tock、Firecracker、SafeVec 等案例中的资源管理与 `unsafe` 边界，可对照所有权规则做形式化抽查。
+- **借用检查器** [10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md)：TiKV、Actix、Linkerd 等并发与迭代场景，可对照借用规则验证无数据竞争。
+- **异步状态机** [10_async_state_machine.md](formal_methods/10_async_state_machine.md)：Tokio、Actix、ScyllaDB 驱动、案例 1–2 的 async 设计，可对应 Future/Poll/Waker 形式化。
 
 ### 与类型理论、实验研究的关联
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-- **类型系统 / Trait** [10_type_system_foundations.md](./type_theory/10_type_system_foundations.md)、[10_trait_system_formalization.md](./type_theory/10_trait_system_formalization.md)：各案例中的泛型、`impl Trait`、派生与 Trait 对象，可作类型论与 Trait 形式化的实例。
-- **性能基准** [10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md)、**并发性能** [10_concurrency_performance.md](./experiments/10_concurrency_performance.md)：案例 1–2 的吞吐、延迟、并发模式可与实验的「结果分析模板」对照，用于选型与调优。
-- **内存分析** [10_memory_analysis.md](./experiments/10_memory_analysis.md)、**编译器优化** [10_compiler_optimizations.md](./experiments/10_compiler_optimizations.md)：案例中的分配策略、`-O2`/LTO 等可与实验指南结合，做上线前检查。
+- **类型系统 / Trait** [10_type_system_foundations.md](type_theory/10_type_system_foundations.md)、[10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md)：各案例中的泛型、`impl Trait`、派生与 Trait 对象，可作类型论与 Trait 形式化的实例。
+- **性能基准** [10_performance_benchmarks.md](experiments/10_performance_benchmarks.md)、**并发性能** [10_concurrency_performance.md](experiments/10_concurrency_performance.md)：案例 1–2 的吞吐、延迟、并发模式可与实验的「结果分析模板」对照，用于选型与调优。
+- **内存分析** [10_memory_analysis.md](experiments/10_memory_analysis.md)、**编译器优化** [10_compiler_optimizations.md](experiments/10_compiler_optimizations.md)：案例中的分配策略、`-O2`/LTO 等可与实验指南结合，做上线前检查。
 
 ### 案例快速索引
 
@@ -1075,9 +1075,9 @@ impl<T> Drop for SafeVec<T> {
 | **案例 3** SafeVec/内存安全 | ownership T2/T3、REFCELL-T1 |  interior mutability、RAII |
 | 所有案例 | [type_system_foundations](type_theory/10_type_system_foundations.md) T1–T3 | 良型、进展性、保持性 |
 | 组合案例 | [04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md) CE-T1–T3 | 模块组合、CE-T1/T2/T3 |
-| unsafe 案例 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./10_safe_unsafe_comprehensive_analysis.md)、PA-L1 | 安全抽象、契约 |
+| unsafe 案例 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](10_safe_unsafe_comprehensive_analysis.md)、PA-L1 | 安全抽象、契约 |
 
-**引用**：案例分析可引用 [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) 建立与形式化定理的追溯关系；见 PA-T1、PA-L1、PA-C1。
+**引用**：案例分析可引用 [PROOF_INDEX](10_proof_index.md) 建立与形式化定理的追溯关系；见 PA-T1、PA-L1、PA-C1。
 
 ---
 
@@ -1177,7 +1177,7 @@ impl<T> Drop for SafeVec<T> {
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

@@ -13,7 +13,7 @@
 > **文档定位**: 文档规划与索引
 > **最后更新**: 2025-12-25
 > **Rust版本**: 1.92.0+ (Edition 2024)
-> **相关文档**: [主索引](./00_MASTER_INDEX.md) | [README](./README.md)
+> **相关文档**: [主索引](00_MASTER_INDEX.md) | [README](README.md)
 
 ## 📚 完整目录结构
 

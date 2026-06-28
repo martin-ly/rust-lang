@@ -13,8 +13,8 @@ Compiler Internals. Core Rust concept covering mechanism analysis, parallel prog
 > **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 系统梳理 Rust 编译器（rustc）的核心基础设施——并行前端、Cranelift 后端、build-std、Sanitizer——分析其对编译速度、目标平台和开发体验的影响。
-> **前置概念**: [Toolchain](./01_toolchain.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
-> **后置延伸**: [Rust 1.97 Preview](../07_future/rust_1_97_preview.md) · [Performance Optimization](./15_performance_optimization.md)
+> **前置概念**: [Toolchain](01_toolchain.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
+> **后置延伸**: [Rust 1.97 Preview](../07_future/rust_1_97_preview.md) · [Performance Optimization](15_performance_optimization.md)
 
 ---
 

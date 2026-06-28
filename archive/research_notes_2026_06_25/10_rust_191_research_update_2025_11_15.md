@@ -9,34 +9,34 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Rust 1.91.1 研究更新报告](#rust-1911-研究更新报告)
-  - [📑 目录](#-目录)
-  - [📋 概述](#-概述)
-  - [🎯 Rust 1.91.1 主要改进](#-rust-1911-主要改进)
-    - [1. 异步迭代器改进](#1-异步迭代器改进)
-    - [2. const 上下文增强](#2-const-上下文增强)
-    - [3. JIT 编译器优化](#3-jit-编译器优化)
-    - [4. 内存分配优化](#4-内存分配优化)
-  - [📝 需要更新的研究笔记](#-需要更新的研究笔记)
-    - [高优先级](#高优先级)
-    - [中优先级](#中优先级)
-  - [🔄 更新计划](#-更新计划)
-    - [第一阶段（本周）](#第一阶段本周)
-    - [第二阶段（下周）](#第二阶段下周)
-  - [📚 相关资源](#-相关资源)
-    - [外部资源](#外部资源)
-    - [内部文档](#内部文档)
-    - [形式化链接](#形式化链接)
-    - [核心定理](#核心定理)
-    - [Coq 证明骨架](#coq-证明骨架)
-    - [相关研究笔记](#相关研究笔记)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [Rust 1.91.1 研究更新报告](.#rust-1911-研究更新报告)
+  - [📑 目录](.#-目录)
+  - [📋 概述](.#-概述)
+  - [🎯 Rust 1.91.1 主要改进](.#-rust-1911-主要改进)
+    - [1. 异步迭代器改进](.#1-异步迭代器改进)
+    - [2. const 上下文增强](.#2-const-上下文增强)
+    - [3. JIT 编译器优化](.#3-jit-编译器优化)
+    - [4. 内存分配优化](.#4-内存分配优化)
+  - [📝 需要更新的研究笔记](.#-需要更新的研究笔记)
+    - [高优先级](.#高优先级)
+    - [中优先级](.#中优先级)
+  - [🔄 更新计划](.#-更新计划)
+    - [第一阶段（本周）](.#第一阶段本周)
+    - [第二阶段（下周）](.#第二阶段下周)
+  - [📚 相关资源](.#-相关资源)
+    - [外部资源](.#外部资源)
+    - [内部文档](.#内部文档)
+    - [形式化链接](.#形式化链接)
+    - [核心定理](.#核心定理)
+    - [Coq 证明骨架](.#coq-证明骨架)
+    - [相关研究笔记](.#相关研究笔记)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 > **创建日期**: 2025-11-15
 > **最后更新**: 2026-02-28
@@ -73,8 +73,8 @@
 
 **相关研究笔记**:
 
-- [异步状态机形式化](./formal_methods/10_async_state_machine.md)
-- [并发性能研究](./experiments/10_concurrency_performance.md)
+- [异步状态机形式化](formal_methods/10_async_state_machine.md)
+- [并发性能研究](experiments/10_concurrency_performance.md)
 
 **代码示例**:
 
@@ -117,8 +117,8 @@ fn process(n: i32) -> impl Future<Output = ()> {
 
 **相关研究笔记**:
 
-- [类型系统基础](./type_theory/10_type_system_foundations.md)
-- [高级类型特性](./type_theory/10_advanced_types.md)
+- [类型系统基础](type_theory/10_type_system_foundations.md)
+- [高级类型特性](type_theory/10_advanced_types.md)
 
 **代码示例**:
 
@@ -160,8 +160,8 @@ const fn with_static_ref() -> &'static mut i32 {
 
 **相关研究笔记**:
 
-- [编译器优化](./experiments/10_compiler_optimizations.md)
-- [性能基准测试](./experiments/10_performance_benchmarks.md)
+- [编译器优化](experiments/10_compiler_optimizations.md)
+- [性能基准测试](experiments/10_performance_benchmarks.md)
 
 **代码示例**:
 
@@ -200,8 +200,8 @@ async fn jit_optimized_async() -> i32 {
 
 **相关研究笔记**:
 
-- [内存分析](./experiments/10_memory_analysis.md)
-- [性能基准测试](./experiments/10_performance_benchmarks.md)
+- [内存分析](experiments/10_memory_analysis.md)
+- [性能基准测试](experiments/10_performance_benchmarks.md)
 
 **代码示例**:
 
@@ -310,10 +310,10 @@ fn small_object_allocation() {
 | :--- | :--- | :--- |
 | 异步编程完整文档 | [../../crates/c06_async/README.md](../../crates/c06_async/README.md) | C06 异步编程模块 |
 | 类型系统完整文档 | [../../crates/c02_type_system/README.md](../../crates/c02_type_system/README.md) | C02 类型系统模块 |
-| 所有权模型形式化 | [./formal_methods/10_ownership_model.md](./formal_methods/10_ownership_model.md) | 所有权形式化 |
-| 借用检查器证明 | [./formal_methods/10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md) | 借用检查器形式化 |
-| 性能基准测试 | [./experiments/10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md) | 性能实验 |
-| 内存分析 | [./experiments/10_memory_analysis.md](./experiments/10_memory_analysis.md) | 内存实验 |
+| 所有权模型形式化 | [./formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) | 所有权形式化 |
+| 借用检查器证明 | [./formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | 借用检查器形式化 |
+| 性能基准测试 | [./experiments/10_performance_benchmarks.md](experiments/10_performance_benchmarks.md) | 性能实验 |
+| 内存分析 | [./experiments/10_memory_analysis.md](experiments/10_memory_analysis.md) | 内存实验 |
 
 ### 形式化链接
 >
@@ -321,9 +321,9 @@ fn small_object_allocation() {
 
 | 特性 | 形式化文档 | 定理/定义 |
 | :--- | :--- | :--- |
-| 异步迭代器 | [10_async_state_machine.md](./formal_methods/10_async_state_machine.md) | T6.1-T6.3 |
-| const 上下文 | [10_advanced_types.md](./type_theory/10_advanced_types.md) | Def CONST-MUT1 |
-| 内存分配 | [10_ownership_model.md](./formal_methods/10_ownership_model.md) | Axiom A1-A8 |
+| 异步迭代器 | [10_async_state_machine.md](formal_methods/10_async_state_machine.md) | T6.1-T6.3 |
+| const 上下文 | [10_advanced_types.md](type_theory/10_advanced_types.md) | Def CONST-MUT1 |
+| 内存分配 | [10_ownership_model.md](formal_methods/10_ownership_model.md) | Axiom A1-A8 |
 
 ### 核心定理
 >
@@ -331,9 +331,9 @@ fn small_object_allocation() {
 
 | 定理 | 文档 | 说明 |
 | :--- | :--- | :--- |
-| T-OW2 | [10_core_theorems_full_proofs.md](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) | 所有权唯一性 |
-| T-BR1 | [10_core_theorems_full_proofs.md](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) | 数据竞争自由 |
-| T-TY3 | [10_core_theorems_full_proofs.md](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) | 类型安全 |
+| T-OW2 | [10_core_theorems_full_proofs.md](10_core_theorems_full_proofs.md) | 所有权唯一性 |
+| T-BR1 | [10_core_theorems_full_proofs.md](10_core_theorems_full_proofs.md) | 数据竞争自由 |
+| T-TY3 | [10_core_theorems_full_proofs.md](10_core_theorems_full_proofs.md) | 类型安全 |
 
 ### Coq 证明骨架
 >
@@ -341,9 +341,9 @@ fn small_object_allocation() {
 
 | 定理 | Coq 文件 | 状态 |
 | :--- | :--- | :--- |
-| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../../archive/deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 骨架已创建 |
-| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](../../archive/deprecated/coq_skeleton/BORROW_DATARACE_FREE.v) | 骨架已创建 |
-| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](../../archive/deprecated/coq_skeleton/TYPE_SAFETY.v) | 骨架已创建 |
+| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 骨架已创建 |
+| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](../deprecated/coq_skeleton/BORROW_DATARACE_FREE.v) | 骨架已创建 |
+| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](../deprecated/coq_skeleton/TYPE_SAFETY.v) | 骨架已创建 |
 
 ### 相关研究笔记
 >
@@ -351,12 +351,12 @@ fn small_object_allocation() {
 
 | 类别 | 文档 | 链接 |
 | :--- | :--- | :--- |
-| 形式化方法 | 所有权模型 | [formal_methods/10_ownership_model.md](./formal_methods/10_ownership_model.md) |
-| 形式化方法 | 借用检查器 | [formal_methods/10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md) |
-| 类型理论 | 类型系统基础 | [type_theory/10_type_system_foundations.md](./type_theory/10_type_system_foundations.md) |
-| 类型理论 | 高级类型特性 | [type_theory/10_advanced_types.md](./type_theory/10_advanced_types.md) |
-| 实验研究 | 性能基准测试 | [experiments/10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md) |
-| 实验研究 | 内存分析 | [experiments/10_memory_analysis.md](./experiments/10_memory_analysis.md) |
+| 形式化方法 | 所有权模型 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) |
+| 形式化方法 | 借用检查器 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) |
+| 类型理论 | 类型系统基础 | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) |
+| 类型理论 | 高级类型特性 | [type_theory/10_advanced_types.md](type_theory/10_advanced_types.md) |
+| 实验研究 | 性能基准测试 | [experiments/10_performance_benchmarks.md](experiments/10_performance_benchmarks.md) |
+| 实验研究 | 内存分析 | [experiments/10_memory_analysis.md](experiments/10_memory_analysis.md) |
 
 ---
 
@@ -423,7 +423,7 @@ fn small_object_allocation() {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

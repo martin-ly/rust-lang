@@ -10,8 +10,8 @@
 > **层次定位**: L4 形式化理论 / 公理语义子域 [来源: [Winskel 1993 — The Formal Semantics of Programming Languages](https://mitpress.mit.edu/9780262731034)]
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价形式化规约的完备性
-> **前置依赖**: [Type Theory](./02_type_theory.md) · [Ownership Formalization](./03_ownership_formal.md) · [Operational Semantics](./17_operational_semantics.md)
-> **后置延伸**: [RustBelt](./04_rustbelt.md) · [Separation Logic](./11_separation_logic.md) · [Verification Toolchain](./05_verification_toolchain.md)
+> **前置依赖**: [Type Theory](02_type_theory.md) · [Ownership Formalization](03_ownership_formal.md) · [Operational Semantics](17_operational_semantics.md)
+> **后置延伸**: [RustBelt](04_rustbelt.md) · [Separation Logic](11_separation_logic.md) · [Verification Toolchain](05_verification_toolchain.md)
 > **跨层映射**: L4→L1 公理规约 ↔ 工程直觉 | L4→L3 Unsafe 边界 ↔ 公理失效区域
 > **定理链编号**: T-120 霍尔三元组可判定性 → T-121 wp 计算完备性 → T-122 所有权（Ownership）不变式可验证性
 
@@ -880,14 +880,14 @@ fn factorial(n: Int) -> Int {
 
 ## 相关概念文件
 
-- [操作语义：程序行为的形式化定义](./17_operational_semantics.md) — 小步/大步语义、求值上下文
-- [指称语义：CPO 与不动点](./12_denotational_semantics.md) — Scott-Strachey 语义
-- [类型论基础](./02_type_theory.md) — HM 类型系统、System F、Rust 类型扩展
-- [所有权形式化](./03_ownership_formal.md) — COR、RustBelt、权限系统
-- [分离逻辑：Rust 所有权的形式化根基](./11_separation_logic.md) — 框架规则、Iris、CSL
-- [RustBelt 与验证工具链](./04_rustbelt.md) — 高阶幽灵状态、验证工具生态
-- [验证工具链选择指南](./05_verification_toolchain.md) — Prusti/Creusot/Kani/Miri 选型
-- [线性逻辑与仿射逻辑](./01_linear_logic.md) — 资源敏感性基础
+- [操作语义：程序行为的形式化定义](17_operational_semantics.md) — 小步/大步语义、求值上下文
+- [指称语义：CPO 与不动点](12_denotational_semantics.md) — Scott-Strachey 语义
+- [类型论基础](02_type_theory.md) — HM 类型系统、System F、Rust 类型扩展
+- [所有权形式化](03_ownership_formal.md) — COR、RustBelt、权限系统
+- [分离逻辑：Rust 所有权的形式化根基](11_separation_logic.md) — 框架规则、Iris、CSL
+- [RustBelt 与验证工具链](04_rustbelt.md) — 高阶幽灵状态、验证工具生态
+- [验证工具链选择指南](05_verification_toolchain.md) — Prusti/Creusot/Kani/Miri 选型
+- [线性逻辑与仿射逻辑](01_linear_logic.md) — 资源敏感性基础
 
 > **过渡**: Axiomatic Semantics（公理语义） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Axiomatic Semantics（公理语义） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

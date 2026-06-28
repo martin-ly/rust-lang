@@ -3,7 +3,7 @@
 > **文档定位**: 模块概览
 > **最后更新**: 2025-12-25
 > **Rust版本**: 1.92.0+ (Edition 2024)
-> **相关文档**: [主索引](./00_MASTER_INDEX.md) | [README](./README.md) | [FAQ](./FAQ.md)
+> **相关文档**: [主索引](00_MASTER_INDEX.md) | [README](README.md) | [FAQ](FAQ.md)
 
 本模块聚焦进程创建与管理、IO/管道、环境变量、退出码、子进程与进程间通信等，涵盖实战与最佳实践。
 
@@ -12,11 +12,11 @@
 ## 📋 目录导航
 
 - 视图与专题
-  - [view01.md](./view01.md)
-  - [view02.md](./view02.md)
-  - [view03.md](./view03.md)
-  - [view04.md](./view04.md)
-  - [view05.md](./view05.md)
+  - [view01.md](view01.md)
+  - [view02.md](view02.md)
+  - [view03.md](view03.md)
+  - [view04.md](view04.md)
+  - [view05.md](view05.md)
 
 - 关联文档
   - 顶层说明：`README.md`

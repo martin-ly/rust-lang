@@ -11,9 +11,9 @@
 > **状态**: ✅ 已完成
 > **用途**: 为 ownership T2、borrow T1、type T3 提供 L2 级完整证明，含归纳基/归纳步形式化陈述、辅助引理显式编号、证明依赖 DAG
 > **证明深度**: L2（完整证明，非机器可检查）
-> **上位文档**: [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./10_formal_proof_critical_analysis_and_plan_2026_02.md)、[PROOF_INDEX](./10_proof_index.md)
+> **上位文档**: [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](10_formal_proof_critical_analysis_and_plan_2026_02.md)、[PROOF_INDEX](10_proof_index.md)
 
-**形式语言与形式证明**：本文档的定理同时以**形式语言**（推理规则、操作语义、判定形式）表达，见 [FORMAL_LANGUAGE_AND_PROOFS](./10_formal_language_and_proofs.md)。形式语言为数学规范层。Rust 示例衔接见 [THEOREM_RUST_EXAMPLE_MAPPING](./10_theorem_rust_example_mapping.md)。
+**形式语言与形式证明**：本文档的定理同时以**形式语言**（推理规则、操作语义、判定形式）表达，见 [FORMAL_LANGUAGE_AND_PROOFS](10_formal_language_and_proofs.md)。形式语言为数学规范层。Rust 示例衔接见 [THEOREM_RUST_EXAMPLE_MAPPING](10_theorem_rust_example_mapping.md)。
 
 ---
 
@@ -21,34 +21,34 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [核心定理完整证明（L2 级）](#核心定理完整证明l2-级)
-  - [📑 目录](#-目录)
-  - [〇、证明结构规范（A→L→T→C 链）](#〇证明结构规范altc-链)
-  - [一、证明依赖 DAG](#一证明依赖-dag)
-  - [二、所有权定理 T-OW2（所有权唯一性）](#二所有权定理-t-ow2所有权唯一性)
-    - [2.1 辅助引理](#21-辅助引理)
-    - [2.2 归纳证明](#22-归纳证明)
-    - [2.3 反例的形式化否定](#23-反例的形式化否定)
-  - [三、借用定理 T-BR1（数据竞争自由）](#三借用定理-t-br1数据竞争自由)
-    - [3.1 辅助引理](#31-辅助引理)
-    - [3.2 主证明](#32-主证明)
-    - [3.3 归纳细化（对执行步骤）](#33-归纳细化对执行步骤)
-  - [四、类型定理 T-TY3（类型安全）](#四类型定理-t-ty3类型安全)
-    - [4.1 依赖定理](#41-依赖定理)
-    - [4.2 辅助引理](#42-辅助引理)
-    - [4.3 主证明](#43-主证明)
-  - [五、引理与定理编号汇总](#五引理与定理编号汇总)
-  - [六、与子文档的对应](#六与子文档的对应)
-  - [七、形式语言与英文摘要](#七形式语言与英文摘要)
-  - [八、Rust 示例衔接](#八rust-示例衔接)
-  - [四、Send/Sync 定理（形式化专篇）](#四sendsync-定理形式化专篇)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [核心定理完整证明（L2 级）](.#核心定理完整证明l2-级)
+  - [📑 目录](.#-目录)
+  - [〇、证明结构规范（A→L→T→C 链）](.#〇证明结构规范altc-链)
+  - [一、证明依赖 DAG](.#一证明依赖-dag)
+  - [二、所有权定理 T-OW2（所有权唯一性）](.#二所有权定理-t-ow2所有权唯一性)
+    - [2.1 辅助引理](.#21-辅助引理)
+    - [2.2 归纳证明](.#22-归纳证明)
+    - [2.3 反例的形式化否定](.#23-反例的形式化否定)
+  - [三、借用定理 T-BR1（数据竞争自由）](.#三借用定理-t-br1数据竞争自由)
+    - [3.1 辅助引理](.#31-辅助引理)
+    - [3.2 主证明](.#32-主证明)
+    - [3.3 归纳细化（对执行步骤）](.#33-归纳细化对执行步骤)
+  - [四、类型定理 T-TY3（类型安全）](.#四类型定理-t-ty3类型安全)
+    - [4.1 依赖定理](.#41-依赖定理)
+    - [4.2 辅助引理](.#42-辅助引理)
+    - [4.3 主证明](.#43-主证明)
+  - [五、引理与定理编号汇总](.#五引理与定理编号汇总)
+  - [六、与子文档的对应](.#六与子文档的对应)
+  - [七、形式语言与英文摘要](.#七形式语言与英文摘要)
+  - [八、Rust 示例衔接](.#八rust-示例衔接)
+  - [四、Send/Sync 定理（形式化专篇）](.#四sendsync-定理形式化专篇)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 〇、证明结构规范（A→L→T→C 链）
 >
@@ -63,7 +63,7 @@
 | **Theorem** | T-OW2, T-BR1 | 主要结论 | T-OW2 所有权唯一性 |
 | **Corollary** | C-OW1 | 由 Theorem 直接推论 | 推论 |
 
-**引用规范**：每个 Theorem 应显式列出依赖的 Axiom/Lemma；Lemma 引用 Axiom；Corollary 引用 Theorem。详见 [formal_methods/README](formal_methods/README.md)、[PROOF_INDEX](./10_proof_index.md)。
+**引用规范**：每个 Theorem 应显式列出依赖的 Axiom/Lemma；Lemma 引用 Axiom；Corollary 引用 Theorem。详见 [formal_methods/README](formal_methods/README.md)、[PROOF_INDEX](10_proof_index.md)。
 
 ---
 
@@ -279,8 +279,8 @@
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [FORMAL_LANGUAGE_AND_PROOFS](./10_formal_language_and_proofs.md) — 形式语言（推理规则、操作语义、判定形式）、形式证明推导树
-- [CORE_THEOREMS_EN_SUMMARY](./10_core_theorems_en_summary.md) — English summary
+- [FORMAL_LANGUAGE_AND_PROOFS](10_formal_language_and_proofs.md) — 形式语言（推理规则、操作语义、判定形式）、形式证明推导树
+- [CORE_THEOREMS_EN_SUMMARY](10_core_theorems_en_summary.md) — English summary
 
 ---
 
@@ -294,7 +294,7 @@
 | T-BR1 | c01_ownership_borrow_scope/examples/ | 借用规则、数据竞争自由 |
 | T-TY3 | c02_type_system/examples/ | 类型安全、进展性、保持性 |
 
-详见 [THEOREM_RUST_EXAMPLE_MAPPING](./10_theorem_rust_example_mapping.md)。
+详见 [THEOREM_RUST_EXAMPLE_MAPPING](10_theorem_rust_example_mapping.md)。
 
 ---
 
@@ -314,13 +314,13 @@
 
 ---
 
-**扩展路径**：国际对标见 [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./10_international_formal_verification_index.md)。Prusti/Kani 验证见 [TOOLS_GUIDE](./10_tools_guide.md)。
+**扩展路径**：国际对标见 [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](10_international_formal_verification_index.md)。Prusti/Kani 验证见 [TOOLS_GUIDE](10_tools_guide.md)。
 
 ---
 
 **维护者**: Rust Formal Methods Research Team
 **最后更新**: 2026-02-26
-**证明深度**: L2（数学风格完整证明；Rust 示例见 [THEOREM_RUST_EXAMPLE_MAPPING](./10_theorem_rust_example_mapping.md)）
+**证明深度**: L2（数学风格完整证明；Rust 示例见 [THEOREM_RUST_EXAMPLE_MAPPING](10_theorem_rust_example_mapping.md)）
 
 ---
 
@@ -381,7 +381,7 @@
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

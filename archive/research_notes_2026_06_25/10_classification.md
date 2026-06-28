@@ -9,27 +9,27 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [研究笔记分类体系](#研究笔记分类体系)
-  - [📑 目录](#-目录)
-  - [宗旨](#宗旨)
-  - [一、按文档角色分类](#一按文档角色分类)
-  - [二、按知识层次分类](#二按知识层次分类)
-  - [三、按主题域分类](#三按主题域分类)
-  - [四、按研究领域分类（扩展）](#四按研究领域分类扩展)
-  - [五、扩展路线](#五扩展路线)
-    - [5.1 内容扩展](#51-内容扩展)
-    - [5.2 分类扩展](#52-分类扩展)
-    - [5.3 索引扩展](#53-索引扩展)
-  - [六、快速查找指引](#六快速查找指引)
-  - [引用](#引用)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [研究笔记分类体系](.#研究笔记分类体系)
+  - [📑 目录](.#-目录)
+  - [宗旨](.#宗旨)
+  - [一、按文档角色分类](.#一按文档角色分类)
+  - [二、按知识层次分类](.#二按知识层次分类)
+  - [三、按主题域分类](.#三按主题域分类)
+  - [四、按研究领域分类（扩展）](.#四按研究领域分类扩展)
+  - [五、扩展路线](.#五扩展路线)
+    - [5.1 内容扩展](.#51-内容扩展)
+    - [5.2 分类扩展](.#52-分类扩展)
+    - [5.3 索引扩展](.#53-索引扩展)
+  - [六、快速查找指引](.#六快速查找指引)
+  - [引用](.#引用)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -52,15 +52,15 @@
 
 | 角色 | 文档 | 用途 |
 | :--- | :--- | :--- |
-| **导航** | [README](./README.md)、[00_ORGANIZATION_AND_NAVIGATION](./10_00_organization_and_navigation.md)、[INDEX](./INDEX.md)、[QUICK_REFERENCE](../../archive/research_notes_2026_06_25/10_quick_reference.md)、[QUICK_FIND](./10_quick_find.md) | 入口、按目标导航、索引、快速查找 |
-| **总结与论证脉络** | [00_COMPREHENSIVE_SUMMARY](../../archive/research_notes_2026_06_25/10_00_comprehensive_summary.md)、[ARGUMENTATION_CHAIN_AND_FLOW](./10_argumentation_chain_and_flow.md) | 完整总结综合、知识地图、论证思路与脉络关系 |
-| **证明索引** | [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md)、[ARGUMENTATION_GAP_INDEX](./10_argumentation_gap_index.md) | 公理-定理映射、缺口追踪 |
-| **框架** | [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md)、[UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md)、[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md) | 全局一致性、概念族谱、理论/论证架构 |
-| **分析** | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md)、[DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md)、[SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./10_safe_unsafe_comprehensive_analysis.md)、[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md) | 语义、设计理由、安全边界、92 特性 |
-| **指南** | [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md)、[FORMAL_VERIFICATION_GUIDE](../../archive/research_notes_2026_06_25/10_formal_verification_guide.md)、[BEST_PRACTICES](./10_best_practices.md)、[CONTENT_ENHANCEMENT](./10_content_enhancement.md)、[WRITING_GUIDE](../../archive/research_notes_2026_06_25/10_writing_guide.md) | 论证规范、验证流程、实质内容自检 |
-| **运维** | [CONTRIBUTING](../../archive/research_notes_2026_06_25/10_contributing.md)、[MAINTENANCE_GUIDE](../../archive/research_notes_2026_06_25/10_maintenance_guide.md)、[CHANGELOG](./10_changelog.md)、[STATISTICS](../../archive/research_notes_2026_06_25/10_statistics.md)、[QUALITY_CHECKLIST](../../archive/research_notes_2026_06_25/10_quality_checklist.md) | 贡献、维护、统计、质量 |
-| **参考** | [GLOSSARY](./10_glossary.md)、[RESOURCES](./10_resources.md)、[FAQ](./10_faq.md)、[EXAMPLE](../../archive/research_notes_2026_06_25/10_example.md)、[GETTING_STARTED](../../archive/research_notes_2026_06_25/10_getting_started.md) | 术语、资源、示例、入门 |
-| **规划** | [RESEARCH_ROADMAP](./10_research_roadmap.md)、[TASK_CHECKLIST](../../archive/research_notes_2026_06_25/10_task_checklist.md)、[PROGRESS_TRACKING](../../archive/research_notes_2026_06_25/10_progress_tracking.md)、TASK_ORCHESTRATION_AND_EXECUTION_PLAN | 路线图、任务、进展 |
+| **导航** | [README](README.md)、[00_ORGANIZATION_AND_NAVIGATION](10_00_organization_and_navigation.md)、[INDEX](INDEX.md)、[QUICK_REFERENCE](10_quick_reference.md)、[QUICK_FIND](10_quick_find.md) | 入口、按目标导航、索引、快速查找 |
+| **总结与论证脉络** | [00_COMPREHENSIVE_SUMMARY](10_00_comprehensive_summary.md)、[ARGUMENTATION_CHAIN_AND_FLOW](10_argumentation_chain_and_flow.md) | 完整总结综合、知识地图、论证思路与脉络关系 |
+| **证明索引** | [PROOF_INDEX](10_proof_index.md)、[ARGUMENTATION_GAP_INDEX](10_argumentation_gap_index.md) | 公理-定理映射、缺口追踪 |
+| **框架** | [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](10_comprehensive_systematic_overview.md)、[UNIFIED_SYSTEMATIC_FRAMEWORK](10_unified_systematic_framework.md)、[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](10_theoretical_and_argumentation_system_architecture.md) | 全局一致性、概念族谱、理论/论证架构 |
+| **分析** | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](10_language_semantics_expressiveness.md)、[DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md)、[SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](10_safe_unsafe_comprehensive_analysis.md)、[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](10_rust_193_language_features_comprehensive_analysis.md) | 语义、设计理由、安全边界、92 特性 |
+| **指南** | [FORMAL_PROOF_SYSTEM_GUIDE](10_formal_proof_system_guide.md)、[FORMAL_VERIFICATION_GUIDE](10_formal_verification_guide.md)、[BEST_PRACTICES](10_best_practices.md)、[CONTENT_ENHANCEMENT](10_content_enhancement.md)、[WRITING_GUIDE](10_writing_guide.md) | 论证规范、验证流程、实质内容自检 |
+| **运维** | [CONTRIBUTING](10_contributing.md)、[MAINTENANCE_GUIDE](10_maintenance_guide.md)、[CHANGELOG](10_changelog.md)、[STATISTICS](10_statistics.md)、[QUALITY_CHECKLIST](10_quality_checklist.md) | 贡献、维护、统计、质量 |
+| **参考** | [GLOSSARY](10_glossary.md)、[RESOURCES](10_resources.md)、[FAQ](10_faq.md)、[EXAMPLE](10_example.md)、[GETTING_STARTED](10_getting_started.md) | 术语、资源、示例、入门 |
+| **规划** | [RESEARCH_ROADMAP](10_research_roadmap.md)、[TASK_CHECKLIST](10_task_checklist.md)、[PROGRESS_TRACKING](10_progress_tracking.md)、TASK_ORCHESTRATION_AND_EXECUTION_PLAN | 路线图、任务、进展 |
 | **内容** | formal_methods/、type_theory/、software_design_theory/、experiments/、practical_applications、research_methodology | 核心研究笔记 |
 
 ---
@@ -153,13 +153,13 @@
 
 | 我想… | 入口 |
 | :--- | :--- |
-| **首次使用、按目标选路径** | [00_ORGANIZATION_AND_NAVIGATION](./10_00_organization_and_navigation.md) |
-| 快速定位文档 | [QUICK_REFERENCE](../../archive/research_notes_2026_06_25/10_quick_reference.md)、[QUICK_FIND](./10_quick_find.md) |
+| **首次使用、按目标选路径** | [00_ORGANIZATION_AND_NAVIGATION](10_00_organization_and_navigation.md) |
+| 快速定位文档 | [QUICK_REFERENCE](10_quick_reference.md)、[QUICK_FIND](10_quick_find.md) |
 | 理解文档角色 | 本表 § 一 |
 | 按主题查 | [INDEX § 按主题分类](INDEX.md) |
-| 查证明与缺口 | [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md)、[ARGUMENTATION_GAP_INDEX](./10_argumentation_gap_index.md) |
-| 查设计理由 | [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) |
-| 查 Rust 1.93 特性 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md) |
+| 查证明与缺口 | [PROOF_INDEX](10_proof_index.md)、[ARGUMENTATION_GAP_INDEX](10_argumentation_gap_index.md) |
+| 查设计理由 | [DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md) |
+| 查 Rust 1.93 特性 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](10_rust_193_language_features_comprehensive_analysis.md) |
 | 查设计模式与反模式 | [software_design_theory](software_design_theory/README.md)、[07_anti_patterns](software_design_theory/07_anti_patterns.md) |
 
 ---
@@ -168,9 +168,9 @@
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [INDEX](./INDEX.md) — 完整索引
-- [README](./README.md) — 主入口
-- [ARGUMENTATION_GAP_INDEX](./10_argumentation_gap_index.md) — 论证缺口
+- [INDEX](INDEX.md) — 完整索引
+- [README](README.md) — 主入口
+- [ARGUMENTATION_GAP_INDEX](10_argumentation_gap_index.md) — 论证缺口
 
 ---
 
@@ -231,7 +231,7 @@
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

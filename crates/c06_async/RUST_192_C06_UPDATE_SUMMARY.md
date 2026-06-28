@@ -104,8 +104,8 @@
 
 - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
 - [异步编程指南](https://rust-lang.github.io/async-book/)
-- [C06 异步模块主索引](./docs/00_MASTER_INDEX.md)
-- [Rust 1.92.0 异步改进文档](./docs/RUST_192_ASYNC_IMPROVEMENTS.md)
+- [C06 异步模块主索引](docs/00_MASTER_INDEX.md)
+- [Rust 1.92.0 异步改进文档](docs/RUST_192_ASYNC_IMPROVEMENTS.md)
 
 ---
 

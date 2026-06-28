@@ -5,7 +5,7 @@
 > 本主题在 concept 中有深度的概念分析：[Unsafe Rust](../../../concept/03_advanced/03_unsafe.md)
 > **层次定位**: L3 高级概念 / Unsafe 子域索引
 > **前置依赖**: [knowledge 所有权](../../01_fundamentals/04_ownership.md) · [knowledge 借用](../../01_fundamentals/01_borrowing.md)
-> **后置延伸**: [knowledge 专家层](../../04_expert/) · [concept L3 Unsafe](../../../concept/03_advanced/03_unsafe.md)
+> **后置延伸**: [knowledge 专家层](../../04_expert) · [concept L3 Unsafe](../../../concept/03_advanced/03_unsafe.md)
 > **跨层映射**: knowledge→concept 直觉映射 | L3 底层控制
 > **定理链编号**: T-060 unsafe 块 ↔ safe 抽象层可靠性
 >
@@ -14,16 +14,16 @@
 
 ## 📑 目录
 
-- [Unsafe Rust](#unsafe-rust)
-  - [📑 目录](#-目录)
-  - [📚 内容](#-内容)
-  - [🎯 学习路径](#-学习路径)
-  - [⚠️ 安全提醒](#️-安全提醒)
-  - [🚀 相关层](#-相关层)
-  - [📚 模块 8: 国际化对齐](#-模块-8-国际化对齐)
-    - [8.1 官方来源](#81-官方来源)
-    - [8.2 学术/工业来源](#82-学术工业来源)
-    - [8.3 社区资源](#83-社区资源)
+- [Unsafe Rust](.#unsafe-rust)
+  - [📑 目录](.#-目录)
+  - [📚 内容](.#-内容)
+  - [🎯 学习路径](.#-学习路径)
+  - [⚠️ 安全提醒](.#️-安全提醒)
+  - [🚀 相关层](.#-相关层)
+  - [📚 模块 8: 国际化对齐](.#-模块-8-国际化对齐)
+    - [8.1 官方来源](.#81-官方来源)
+    - [8.2 学术/工业来源](.#82-学术工业来源)
+    - [8.3 社区资源](.#83-社区资源)
 
 > **Bloom 层级**: 理解
 > **Unsafe Rust：原始指针、FFI、内联汇编、MaybeUninit**

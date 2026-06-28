@@ -11,7 +11,7 @@
 > **双维定位**: C×App — 应用 Rust Edition 指南
 > **定位**: 深入探讨 Rust 的 **Edition 机制**——从 2015 到 2024，分析 Edition 如何实现语言演进而不破坏兼容性，以及迁移策略。
 > **前置概念**: [Toolchain](../06_ecosystem/01_toolchain.md) · [Macros](../03_advanced/04_macros.md) · [Type System](../01_foundation/04_type_system.md)
-> **后置概念**: [Evolution](./03_evolution.md) · [Version Tracking](./05_rust_version_tracking.md)
+> **后置概念**: [Evolution](03_evolution.md) · [Version Tracking](05_rust_version_tracking.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -24,26 +24,26 @@
 
 ## 📑 目录
 
-- [Rust Edition 机制与迁移指南](#rust-edition-机制与迁移指南)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 Edition 机制](#11-edition-机制)
-    - [1.2 版本兼容性](#12-版本兼容性)
-    - [1.3 2024 Edition 关键变更](#13-2024-edition-关键变更)
-  - [二、迁移策略](#二迁移策略)
-    - [2.1 cargo fix](#21-cargo-fix)
-    - [2.2 手动迁移](#22-手动迁移)
-  - [三、反命题与边界分析](#三反命题与边界分析)
-    - [3.1 反命题树](#31-反命题树)
-    - [3.2 边界极限](#32-边界极限)
-  - [四、常见陷阱](#四常见陷阱)
-  - [五、来源与延伸阅读](#五来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：《Rust Edition 机制与迁移指南》是一份归档文件。归档文件在知识体系中有什么作用？（理解层）](#测验-1rust-edition-机制与迁移指南是一份归档文件归档文件在知识体系中有什么作用理解层)
-    - [测验 2：阅读归档文件时应该注意什么？（理解层）](#测验-2阅读归档文件时应该注意什么理解层)
-    - [测验 3：归档文件与活跃概念文件的主要区别是什么？（理解层）](#测验-3归档文件与活跃概念文件的主要区别是什么理解层)
+- [Rust Edition 机制与迁移指南](.#rust-edition-机制与迁移指南)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 Edition 机制](.#11-edition-机制)
+    - [1.2 版本兼容性](.#12-版本兼容性)
+    - [1.3 2024 Edition 关键变更](.#13-2024-edition-关键变更)
+  - [二、迁移策略](.#二迁移策略)
+    - [2.1 cargo fix](.#21-cargo-fix)
+    - [2.2 手动迁移](.#22-手动迁移)
+  - [三、反命题与边界分析](.#三反命题与边界分析)
+    - [3.1 反命题树](.#31-反命题树)
+    - [3.2 边界极限](.#32-边界极限)
+  - [四、常见陷阱](.#四常见陷阱)
+  - [五、来源与延伸阅读](.#五来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [权威来源索引](.#权威来源索引)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：《Rust Edition 机制与迁移指南》是一份归档文件。归档文件在知识体系中有什么作用？（理解层）](.#测验-1rust-edition-机制与迁移指南是一份归档文件归档文件在知识体系中有什么作用理解层)
+    - [测验 2：阅读归档文件时应该注意什么？（理解层）](.#测验-2阅读归档文件时应该注意什么理解层)
+    - [测验 3：归档文件与活跃概念文件的主要区别是什么？（理解层）](.#测验-3归档文件与活跃概念文件的主要区别是什么理解层)
 
 ---
 
@@ -387,8 +387,8 @@ fn main() {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Toolchain](../06_ecosystem/01_toolchain.md) — 工具链
-- [Evolution](./03_evolution.md) — 语言演进
-- [Version Tracking](./05_rust_version_tracking.md) — 版本跟踪
+- [Evolution](03_evolution.md) — 语言演进
+- [Version Tracking](05_rust_version_tracking.md) — 版本跟踪
 - [Macros](../03_advanced/04_macros.md) — 宏（Macro）系统
 
 ---

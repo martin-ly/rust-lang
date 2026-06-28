@@ -14,7 +14,7 @@
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) ·
 > [Type System](../01_foundation/04_type_system.md) ·
 > [Traits](../02_intermediate/01_traits.md) ·
-> [Formal Methods](./02_formal_methods.md)
+> [Formal Methods](02_formal_methods.md)
 > **主要来源**: [AI Coding Trends 2025-2026] · [Rust AI Ecosystem] · [Verus](https://verus-lang.github.io/verus/) / Creusot + LLM · [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 

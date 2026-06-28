@@ -10,7 +10,7 @@
 
 ## 子目录
 
-- [quick_reference/](quick_reference/) — API 速查表（20+ 张 cheatsheet）
+- [quick_reference/](quick_reference) — API 速查表（20+ 张 cheatsheet）
 
 ## 说明
 

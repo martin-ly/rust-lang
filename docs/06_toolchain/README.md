@@ -110,7 +110,7 @@ lto = true
 
 **适用场景**: 理解 2024 Edition 对学习的影响；从 2021 迁移
 
-#### 1. [编译器特性与优化](./01_compiler_features.md)
+#### 1. [编译器特性与优化](01_compiler_features.md)
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -155,7 +155,7 @@ lto = true
 - 大型项目架构
 - CI/CD 集成
 
-#### 3. [Rustdoc 高级功能](./03_rustdoc_advanced.md)
+#### 3. [Rustdoc 高级功能](03_rustdoc_advanced.md)
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -177,7 +177,7 @@ lto = true
 - 文档质量提升
 - 文档部署
 
-#### 4. [Rust 1.96.0 稳定特性综述](./06_22_rust_1_96_features.md) 🆕
+#### 4. [Rust 1.96.0 稳定特性综述](06_22_rust_1_96_features.md) 🆕
 
 > **来源: [Rust Blog](https://blog.rust-lang.org/)**
 >
@@ -211,7 +211,7 @@ lto = true
 - ✅ **新的 lint（1.91）**：`dangling_pointers_from_locals`（warn-by-default）
 - ✅ **验证建议**：工作区 `check/test/doc-test` 的最小验证命令集
 
-#### 6. [Rust 1.93 vs 1.92 全面对比分析](./06_05_rust_1_93_vs_1_92_comparison.md) 🆕
+#### 6. [Rust 1.93 vs 1.92 全面对比分析](06_05_rust_1_93_vs_1_92_comparison.md) 🆕
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -247,10 +247,10 @@ lto = true
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
-- [编译器优化](./01_compiler_features.md#3-优化级别)
-- [LTO](./01_compiler_features.md#4-link-time-optimization-lto)
-- [PGO](./01_compiler_features.md#5-profile-guided-optimization-pgo)
-- [代码生成优化](./01_compiler_features.md#6-代码生成选项)
+- [编译器优化](01_compiler_features.md#3-优化级别)
+- [LTO](01_compiler_features.md#4-link-time-optimization-lto)
+- [PGO](01_compiler_features.md#5-profile-guided-optimization-pgo)
+- [代码生成优化](01_compiler_features.md#6-代码生成选项)
 
 #### 构建系统
 
@@ -265,10 +265,10 @@ lto = true
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
-- [文档注释](./03_rustdoc_advanced.md#2-文档注释语法)
-- [文档测试](./03_rustdoc_advanced.md#3-文档测试-doc-tests)
-- [文档链接](./03_rustdoc_advanced.md#4-文档链接)
-- [文档定制](./03_rustdoc_advanced.md#7-主题与定制)
+- [文档注释](03_rustdoc_advanced.md#2-文档注释语法)
+- [文档测试](03_rustdoc_advanced.md#3-文档测试-doc-tests)
+- [文档链接](03_rustdoc_advanced.md#4-文档链接)
+- [文档定制](03_rustdoc_advanced.md#7-主题与定制)
 
 ---
 
@@ -288,7 +288,7 @@ lto = true
 - **大量 API 稳定化**: MaybeUninit、String、Vec、整数操作、VecDeque、Duration、char、fmt 等
 - **平台支持**: 以 rustc 平台支持页与 GitHub release tag 为准（release post 未将平台 tier 变更作为重点列出）
 
-**文档**: [06_05_rust_1_93_vs_1_92_comparison.md](./06_05_rust_1_93_vs_1_92_comparison.md)
+**文档**: [06_05_rust_1_93_vs_1_92_comparison.md](06_05_rust_1_93_vs_1_92_comparison.md)
 
 #### 6. Rust 1.93 兼容性注意事项 🆕
 
@@ -306,7 +306,7 @@ lto = true
 - 升级到 Rust 1.93 前的兼容性检查
 - 迁移问题排查
 
-#### 7. [Rust 1.93 兼容性深度解析](./06_09_rust_1_93_compatibility_deep_dive.md) 🆕
+#### 7. [Rust 1.93 兼容性深度解析](06_09_rust_1_93_compatibility_deep_dive.md) 🆕
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -383,7 +383,7 @@ lto = true
 - 构建缓存自动管理
 - 无需额外配置
 
-**文档**: [01_compiler_features.md#2-增量编译](./01_compiler_features.md#2-增量编译-rust-154)
+**文档**: [01_compiler_features.md#2-增量编译](01_compiler_features.md#2-增量编译-rust-154)
 
 ---
 
@@ -399,7 +399,7 @@ lto = true
 - API 索引生成
 - 文档分析
 
-**文档**: [03_rustdoc_advanced.md#6-json-输出](./03_rustdoc_advanced.md#6-json-输出-rust-154)
+**文档**: [03_rustdoc_advanced.md#6-json-输出](03_rustdoc_advanced.md#6-json-输出-rust-154)
 
 ---
 
@@ -419,7 +419,7 @@ panic = "abort"
 strip = true
 ```
 
-**详细指南**: [01_compiler_features.md#12.1](./01_compiler_features.md#121-生产环境优化配置)
+**详细指南**: [01_compiler_features.md#12.1](01_compiler_features.md#121-生产环境优化配置)
 
 ---
 
@@ -468,7 +468,7 @@ pub fn function(a: i32, b: i32) -> i32 {
 }
 ````
 
-**详细指南**: [03_rustdoc_advanced.md#2](./03_rustdoc_advanced.md#2-文档注释语法)
+**详细指南**: [03_rustdoc_advanced.md#2](03_rustdoc_advanced.md#2-文档注释语法)
 
 ---
 
@@ -494,23 +494,23 @@ pub fn function(a: i32, b: i32) -> i32 {
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - Rust 2024 Edition 学习影响 🆕
-- [编译器特性](./01_compiler_features.md)
+- [编译器特性](01_compiler_features.md)
 - Cargo 工作空间
-- [Rustdoc 高级](./03_rustdoc_advanced.md)
+- [Rustdoc 高级](03_rustdoc_advanced.md)
 - Rust 1.91 vs 1.90 对比分析（对齐官方发布说明）
-- [Rust 1.93 vs 1.92 对比分析](./06_05_rust_1_93_vs_1_92_comparison.md) 🆕
+- [Rust 1.93 vs 1.92 对比分析](06_05_rust_1_93_vs_1_92_comparison.md) 🆕
 - Rust 1.93 兼容性注意事项 🆕
-- [Rust 1.93 完整变更清单](./06_07_rust_1_93_full_changelog.md) 🆕
-- [Rust 版本演进链 1.89–1.93](../archive/2026_05_historical_docs/08_rust_version_evolution_1.89_to_1.93.md)（已归档）
-- [Rust 1.93 兼容性深度解析](./06_09_rust_1_93_compatibility_deep_dive.md) 🆕
-- [Rust 1.89→1.93 累积特性总览](../archive/2026_05_historical_docs/10_rust_1.89_to_1.93_cumulative_features_overview.md)（已归档）
-- [Rust 1.93 Cargo 与 Rustdoc 变更详解](./06_11_rust_1_93_cargo_rustdoc_changes.md) 🆕
+- [Rust 1.93 完整变更清单](06_07_rust_1_93_full_changelog.md) 🆕
+- [Rust 版本演进链 1.89–1.93](../../archive/docs/2026_05_historical_docs/08_rust_version_evolution_1.89_to_1.93.md)（已归档）
+- [Rust 1.93 兼容性深度解析](06_09_rust_1_93_compatibility_deep_dive.md) 🆕
+- [Rust 1.89→1.93 累积特性总览](../../archive/docs/2026_05_historical_docs/10_rust_1.89_to_1.93_cumulative_features_overview.md)（已归档）
+- [Rust 1.93 Cargo 与 Rustdoc 变更详解](06_11_rust_1_93_cargo_rustdoc_changes.md) 🆕
 - [Rust 1.93 语言特性全面分析（92 项设计论证）](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md) 🆕
 
 - [Rust 1.94 研究笔记](../../archive/research_notes_2026_06_25/10_rust_194_research_update.md) 🆕
 
-- [Cranelift 后端指南](./06_cranelift_backend_guide.md) ⭐ (Rust 1.96+)
-- [TOML v1.1 Cargo 指南](./06_toml_v11_cargo_guide.md) ⭐ (Cargo 1.96+)
+- [Cranelift 后端指南](06_cranelift_backend_guide.md) ⭐ (Rust 1.96+)
+- [TOML v1.1 Cargo 指南](06_toml_v11_cargo_guide.md) ⭐ (Cargo 1.96+)
 
 ### 官方资源
 
@@ -573,7 +573,7 @@ resolver = "2"  # 使用 Resolver 2
 - CI 环境使用 `lto = "thin"`
 - 生产环境使用 `lto = "fat"`
 
-**参考**: [01_compiler_features.md#4.3](./01_compiler_features.md#43-性能权衡)
+**参考**: [01_compiler_features.md#4.3](01_compiler_features.md#43-性能权衡)
 
 ---
 
@@ -598,7 +598,7 @@ tokio = { version = "1.0", features = ["full"] }
 
 **解决**: 使用 `cargo rustdoc -- -D rustdoc::broken-intra-doc-links` 检查
 
-**参考**: [03_rustdoc_advanced.md#14](./03_rustdoc_advanced.md#14-故障排查)
+**参考**: [03_rustdoc_advanced.md#14](03_rustdoc_advanced.md#14-故障排查)
 
 ---
 
@@ -612,7 +612,7 @@ tokio = { version = "1.0", features = ["full"] }
 | Release + LTO  | 60s      | 30s      | 最大优化 |
 | Release + PGO  | 80s      | -        | 极致性能 |
 
-**数据来源**: [01_compiler_features.md#13](./01_compiler_features.md#13-性能基准)
+**数据来源**: [01_compiler_features.md#13](01_compiler_features.md#13-性能基准)
 
 ---
 

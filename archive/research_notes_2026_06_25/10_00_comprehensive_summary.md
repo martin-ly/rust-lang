@@ -10,7 +10,7 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 单一入口的完整总结、全项目知识地图、论证脉络总览；解决「无完整总结综合、无论证脉络关系」的缺口
-> **上位文档**: [00_ORGANIZATION_AND_NAVIGATION](./10_00_organization_and_navigation.md)、[AUTHORITATIVE_ALIGNMENT_GUIDE](./10_authoritative_alignment_guide.md)
+> **上位文档**: [00_ORGANIZATION_AND_NAVIGATION](10_00_organization_and_navigation.md)、[AUTHORITATIVE_ALIGNMENT_GUIDE](10_authoritative_alignment_guide.md)
 > **docs 全结构**: DOCS_STRUCTURE_OVERVIEW（按本格式 100% 覆盖 docs）
 
 ---
@@ -19,25 +19,25 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Rust 研究笔记：完整总结综合](#rust-研究笔记完整总结综合)
-  - [📑 目录](#-目录)
-  - [一、项目全貌（一句话）](#一项目全貌一句话)
-  - [二、三大支柱概览](#二三大支柱概览)
-  - [三、全项目知识地图](#三全项目知识地图)
-    - [3.1 按领域一句话](#31-按领域一句话)
-  - [四、论证脉络关系总览](#四论证脉络关系总览)
-  - [五、各文档职责与定位](#五各文档职责与定位)
-  - [六、推荐阅读路径](#六推荐阅读路径)
-  - [七、完成度与缺口](#七完成度与缺口)
-  - [🆕 Rust 1.94 研究更新](#-rust-194-研究更新)
-    - [核心研究点](#核心研究点)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [Rust 研究笔记：完整总结综合](.#rust-研究笔记完整总结综合)
+  - [📑 目录](.#-目录)
+  - [一、项目全貌（一句话）](.#一项目全貌一句话)
+  - [二、三大支柱概览](.#二三大支柱概览)
+  - [三、全项目知识地图](.#三全项目知识地图)
+    - [3.1 按领域一句话](.#31-按领域一句话)
+  - [四、论证脉络关系总览](.#四论证脉络关系总览)
+  - [五、各文档职责与定位](.#五各文档职责与定位)
+  - [六、推荐阅读路径](.#六推荐阅读路径)
+  - [七、完成度与缺口](.#七完成度与缺口)
+  - [🆕 Rust 1.94 研究更新](.#-rust-194-研究更新)
+    - [核心研究点](.#核心研究点)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 一、项目全貌（一句话）
 >
@@ -57,7 +57,7 @@
 
 | 支柱 | 核心问题 | 确定性判定目标 | 核心文档 |
 | :--- | :--- | :--- | :--- |
-| **支柱 1：公理判定系统** | 类型、控制流、变量、Send/Sync 等全面形式化推理与证明 | 公理→定理的形式化推理链可追溯 | FORMAL_FULL_MODEL_OVERVIEW、CORE_THEOREMS_FULL_PROOFS、PROOF_INDEX、[send_sync_formalization](formal_methods/10_send_sync_formalization.md)、[SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md) |
+| **支柱 1：公理判定系统** | 类型、控制流、变量、Send/Sync 等全面形式化推理与证明 | 公理→定理的形式化推理链可追溯 | FORMAL_FULL_MODEL_OVERVIEW、CORE_THEOREMS_FULL_PROOFS、PROOF_INDEX、[send_sync_formalization](formal_methods/10_send_sync_formalization.md)、[SAFE_DECIDABLE_MECHANISMS_OVERVIEW](10_safe_decidable_mechanisms_overview.md) |
 | **支柱 2：语言表达力** | 设计模式、并发/分布式、工作流 | 何者可表达、何者不可表达、边界在哪 | software_design_theory、04_expressiveness_boundary、06_boundary_analysis |
 | **支柱 3：组件组合法则** | 结合 1、2 的组件组合 | 组合有效性 CE-T1–T3、构建能力 CE-MAT1 | 04_compositional_engineering |
 
@@ -108,7 +108,7 @@
 | **异步** | Future、Poll、状态机；T6.1–T6.3 | async_state_machine |
 | **Pin** | 位置稳定、自引用；T1–T3 | pin_self_referential |
 | **Send/Sync** | 跨线程转移/共享安全；SEND-T1、SYNC-T1、SYNC-L1 | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) |
-| **安全可判定机制** | 每机制概念定义·属性关系·形式证明·反例；并发/Trait 族四维表 | [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md) |
+| **安全可判定机制** | 每机制概念定义·属性关系·形式证明·反例；并发/Trait 族四维表 | [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](10_safe_decidable_mechanisms_overview.md) |
 | **设计模式** | GoF 23、扩展 43；Def/Axiom/定理、证明思路、反例 | 01_design_patterns_formal |
 | **工作流** | 23 安全 vs 43 完全；语义边界图、表达边界 | 02_workflow_safe_complete_models |
 | **并发选型** | Actor/channel/async/Mutex 决策树 | 06_boundary_analysis |
@@ -125,7 +125,7 @@
 **完备性自检**：formal_methods 六篇 × 六维（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类）
 见 [FORMAL_METHODS_COMPLETENESS_CHECKLIST](formal_methods/10_formal_methods_completeness_checklist.md)。
 
-**论证流向**（详见 [ARGUMENTATION_CHAIN_AND_FLOW](./10_argumentation_chain_and_flow.md)）：
+**论证流向**（详见 [ARGUMENTATION_CHAIN_AND_FLOW](10_argumentation_chain_and_flow.md)）：
 
 ```text
 概念定义 ──→ 属性关系 ──→ 解释论证 ──→ 形式化证明 ──→ 思维表征
@@ -188,7 +188,7 @@
 | 论证脉络关系 | ✅ 已建立（ARGUMENTATION_CHAIN_AND_FLOW） |
 | 完整总结综合 | ✅ 本文件 |
 | **层次化/矩阵/思维表征** | ✅ 阶段 1–4 全部完成：层次化规范、HIERARCHICAL_MAPPING、23 模式/执行模型/**六篇并表**、矩阵双向链接规范、思维表征-文档块、选型决策树交叉链接、文档依赖与维护机制；见 RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN |
-| **格式统一与 Rust 1.93 对齐** | ✅ 100%：元信息全库补全、92 项→落点文档、[RUST_193_COUNTEREXAMPLES_INDEX](./10_rust_193_counterexamples_index.md)、权威来源约定、CONTRIBUTING/MAINTENANCE_GUIDE 门禁与季度复核；见 FORMAT_AND_CONTENT_ALIGNMENT_PLAN |
+| **格式统一与 Rust 1.93 对齐** | ✅ 100%：元信息全库补全、92 项→落点文档、[RUST_193_COUNTEREXAMPLES_INDEX](10_rust_193_counterexamples_index.md)、权威来源约定、CONTRIBUTING/MAINTENANCE_GUIDE 门禁与季度复核；见 FORMAT_AND_CONTENT_ALIGNMENT_PLAN |
 | **docs 全结构梳理** | ✅ 100%：DOCS_STRUCTURE_OVERVIEW 按本格式 100% 覆盖 docs；各子目录 README 元信息、双向链接、验证清单完整 |
 | **设计模式/分布式/工作流全面论证** | ✅ 100%：[COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](software_design_theory/10_comprehensive_argumentation_gap_analysis_and_plan.md) D1–D3 全部交付；CE-PAT1、EB-DET1、反例映射、模式 DAG、分布式模式形式化、工作流形式化 |
 | L3 机器证明 | 📦 已归档（[archive/deprecated/](../archive/deprecated/README.md)）；聚焦 L2 数学风格 + Rust 示例 |
@@ -216,7 +216,7 @@
 - LazyCell/LazyLock 的延迟语义
 - 与现有理论框架的集成
 
-详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
+详见 [RUST_194_RESEARCH_UPDATE](10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 
@@ -282,7 +282,7 @@
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

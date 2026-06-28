@@ -1380,8 +1380,8 @@ fn main() {
 | 所有权形式化 | [`../04_formal/03_ownership_formal.md`](../04_formal/03_ownership_formal.md) | 验证对象（L4） |
 | Unsafe | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | 验证边界（L3） |
 | 工具链 | [`../06_ecosystem/01_toolchain.md`](../06_ecosystem/01_toolchain.md) | CI 集成 |
-| AI × Rust | [`./01_ai_integration.md`](./01_ai_integration.md) | 协同趋势 |
-| 语言演进 | [`./03_evolution.md`](./03_evolution.md) | 验证需求驱动 |
+| AI × Rust | [`./01_ai_integration.md`](01_ai_integration.md) | 协同趋势 |
+| 语言演进 | [`./03_evolution.md`](03_evolution.md) | 验证需求驱动 |
 | 安全边界 | [`../05_comparative/04_safety_boundaries.md`](../05_comparative/04_safety_boundaries.md) | 验证目标 |
 
 ## 断言一致性矩阵（Assertion Consistency Matrix）

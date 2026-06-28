@@ -10,7 +10,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: 理解 → 分析
 > **定位**: 探讨 Rust 范围类型从**运行时（Runtime）迭代器（Iterator）**到**编译期可复制的值类型**的语义演进，以及 `IntoIterator` vs `Iterator` 的设计权衡。
-> **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Generics](./02_generics.md)
+> **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Generics](02_generics.md)
 > **后置概念**: [Version Tracking](../07_future/05_rust_version_tracking.md)
 
 ---
@@ -25,44 +25,44 @@
 
 ## 📑 目录
 
-- [Rust 范围类型语义：`std::ops::Range` → `core::range`](#rust-范围类型语义stdopsrange--corerange)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 范围类型的数学语义](#11-范围类型的数学语义)
-    - [1.2 `std::ops::Range`：运行时迭代器语义](#12-stdopsrange运行时迭代器语义)
-    - [1.3 `core::range`：编译期值语义](#13-corerange编译期值语义)
-    - [1.4 `IntoIterator` vs `Iterator`：设计权衡](#14-intoiterator-vs-iterator设计权衡)
-  - [二、形式化语义](#二形式化语义)
-    - [2.1 `Copy` 的语义影响](#21-copy-的语义影响)
-    - [2.2 与 `for` 循环的交互](#22-与-for-循环的交互)
-  - [三、跨语言对比](#三跨语言对比)
-    - [3.1 Python：`range()` 函数](#31-pythonrange-函数)
-    - [3.2 C++20：`std::ranges`](#32-c20stdranges)
-    - [3.3 Rust：`core::range::Range`](#33-rustcorerangerange)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、来源与延伸阅读](#五来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：范围类型的编译错误](#十边界测试范围类型的编译错误)
-    - [10.1 边界测试：范围模式在非 match 中使用（编译错误）](#101-边界测试范围模式在非-match-中使用编译错误)
-    - [10.2 边界测试：`Range` 与 `RangeInclusive` 的类型不匹配（编译错误）](#102-边界测试range-与-rangeinclusive-的类型不匹配编译错误)
-    - [10.3 边界测试：`RangeInclusive` 的 `Copy` 缺失（编译错误）](#103-边界测试rangeinclusive-的-copy-缺失编译错误)
-    - [10.4 边界测试：`Iterator::size_hint` 与无限范围（逻辑错误）](#104-边界测试iteratorsize_hint-与无限范围逻辑错误)
-    - [10.3 边界测试：范围模式的穷尽性检查（编译错误）](#103-边界测试范围模式的穷尽性检查编译错误)
-    - [10.5 边界测试：不可变借用与可变借用的冲突](#105-边界测试不可变借用与可变借用的冲突)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：`1..5` 与 `1..=5` 的类型和范围有什么区别？（理解层）](#测验-115-与-15-的类型和范围有什么区别理解层)
-    - [测验 2：`Range` 类型本身是否实现了 `Iterator`？可以直接 `for i in 0..10` 吗？（理解层）](#测验-2range-类型本身是否实现了-iterator可以直接-for-i-in-010-吗理解层)
-    - [测验 3：`..` 在 Rust 中有哪些常见用法？它可以单独使用吗？（理解层）](#测验-3-在-rust-中有哪些常见用法它可以单独使用吗理解层)
-    - [测验 4：当使用 `Range` 作为切片索引超出范围时会发生什么？（理解层）](#测验-4当使用-range-作为切片索引超出范围时会发生什么理解层)
-    - [测验 5：`RangeInclusive` 相比 `Range` 在迭代结束时有什么不同？为什么？（理解层）](#测验-5rangeinclusive-相比-range-在迭代结束时有什么不同为什么理解层)
-  - [实践](#实践)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Rust 范围类型语义：`std::ops::Range` → `core::range`](.#rust-范围类型语义stdopsrange--corerange)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 范围类型的数学语义](.#11-范围类型的数学语义)
+    - [1.2 `std::ops::Range`：运行时迭代器语义](.#12-stdopsrange运行时迭代器语义)
+    - [1.3 `core::range`：编译期值语义](.#13-corerange编译期值语义)
+    - [1.4 `IntoIterator` vs `Iterator`：设计权衡](.#14-intoiterator-vs-iterator设计权衡)
+  - [二、形式化语义](.#二形式化语义)
+    - [2.1 `Copy` 的语义影响](.#21-copy-的语义影响)
+    - [2.2 与 `for` 循环的交互](.#22-与-for-循环的交互)
+  - [三、跨语言对比](.#三跨语言对比)
+    - [3.1 Python：`range()` 函数](.#31-pythonrange-函数)
+    - [3.2 C++20：`std::ranges`](.#32-c20stdranges)
+    - [3.3 Rust：`core::range::Range`](.#33-rustcorerangerange)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、来源与延伸阅读](.#五来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [逆向推理链（Backward Reasoning）](.#逆向推理链backward-reasoning)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：范围类型的编译错误](.#十边界测试范围类型的编译错误)
+    - [10.1 边界测试：范围模式在非 match 中使用（编译错误）](.#101-边界测试范围模式在非-match-中使用编译错误)
+    - [10.2 边界测试：`Range` 与 `RangeInclusive` 的类型不匹配（编译错误）](.#102-边界测试range-与-rangeinclusive-的类型不匹配编译错误)
+    - [10.3 边界测试：`RangeInclusive` 的 `Copy` 缺失（编译错误）](.#103-边界测试rangeinclusive-的-copy-缺失编译错误)
+    - [10.4 边界测试：`Iterator::size_hint` 与无限范围（逻辑错误）](.#104-边界测试iteratorsize_hint-与无限范围逻辑错误)
+    - [10.3 边界测试：范围模式的穷尽性检查（编译错误）](.#103-边界测试范围模式的穷尽性检查编译错误)
+    - [10.5 边界测试：不可变借用与可变借用的冲突](.#105-边界测试不可变借用与可变借用的冲突)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：`1..5` 与 `1..=5` 的类型和范围有什么区别？（理解层）](.#测验-115-与-15-的类型和范围有什么区别理解层)
+    - [测验 2：`Range` 类型本身是否实现了 `Iterator`？可以直接 `for i in 0..10` 吗？（理解层）](.#测验-2range-类型本身是否实现了-iterator可以直接-for-i-in-010-吗理解层)
+    - [测验 3：`..` 在 Rust 中有哪些常见用法？它可以单独使用吗？（理解层）](.#测验-3-在-rust-中有哪些常见用法它可以单独使用吗理解层)
+    - [测验 4：当使用 `Range` 作为切片索引超出范围时会发生什么？（理解层）](.#测验-4当使用-range-作为切片索引超出范围时会发生什么理解层)
+    - [测验 5：`RangeInclusive` 相比 `Range` 在迭代结束时有什么不同？为什么？（理解层）](.#测验-5rangeinclusive-相比-range-在迭代结束时有什么不同为什么理解层)
+  - [实践](.#实践)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -344,7 +344,7 @@ let rev = 10..0;
 ## 相关概念文件
 
 - [Type System](../01_foundation/04_type_system.md) — 类型系统（Type System）的形式化根基
-- [Generics](./02_generics.md) — 泛型（Generics）与 trait bound
+- [Generics](02_generics.md) — 泛型（Generics）与 trait bound
 - [Version Tracking](../07_future/05_rust_version_tracking.md) — Rust 版本特性演进
 
 ---
@@ -598,8 +598,8 @@ fn main() {
 
 > **相关资源**:
 >
-> - [crates/ 示例代码](../crates/) — 与本文概念对应的可编译示例
-> - [exercises/ 练习](../exercises/) — 动手编程挑战
+> - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../exercises) — 动手编程挑战
 > - [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

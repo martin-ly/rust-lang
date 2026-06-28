@@ -16,36 +16,36 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Rust 版本增量更新流程](#rust-版本增量更新流程)
-  - [📑 目录](#-目录)
-  - [触发条件](#触发条件)
-  - [增量更新步骤](#增量更新步骤)
-    - [1. 收集变更](#1-收集变更)
-    - [2. 更新文档](#2-更新文档)
-    - [3. 对齐权威](#3-对齐权威)
-    - [4. 兼容性](#4-兼容性)
-  - [检查清单](#检查清单)
-    - [版本发布后](#版本发布后)
-    - [季度复核](#季度复核)
-  - [研究场景与代码示例](#研究场景与代码示例)
-    - [场景 1：新语言特性研究](#场景-1新语言特性研究)
-    - [场景 2：性能改进验证](#场景-2性能改进验证)
-    - [场景 3：API 稳定化跟踪](#场景-3api-稳定化跟踪)
-  - [相关文档](#相关文档)
-    - [核心流程文档](#核心流程文档)
-    - [形式化方法文档](#形式化方法文档)
-    - [更新记录文档](#更新记录文档)
-    - [形式化证明文档](#形式化证明文档)
-    - [研究笔记索引](#研究笔记索引)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档-1)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [Rust 版本增量更新流程](.#rust-版本增量更新流程)
+  - [📑 目录](.#-目录)
+  - [触发条件](.#触发条件)
+  - [增量更新步骤](.#增量更新步骤)
+    - [1. 收集变更](.#1-收集变更)
+    - [2. 更新文档](.#2-更新文档)
+    - [3. 对齐权威](.#3-对齐权威)
+    - [4. 兼容性](.#4-兼容性)
+  - [检查清单](.#检查清单)
+    - [版本发布后](.#版本发布后)
+    - [季度复核](.#季度复核)
+  - [研究场景与代码示例](.#研究场景与代码示例)
+    - [场景 1：新语言特性研究](.#场景-1新语言特性研究)
+    - [场景 2：性能改进验证](.#场景-2性能改进验证)
+    - [场景 3：API 稳定化跟踪](.#场景-3api-稳定化跟踪)
+  - [相关文档](.#相关文档)
+    - [核心流程文档](.#核心流程文档)
+    - [形式化方法文档](.#形式化方法文档)
+    - [更新记录文档](.#更新记录文档)
+    - [形式化证明文档](.#形式化证明文档)
+    - [研究笔记索引](.#研究笔记索引)
+  - [🆕 Rust 1.94 更新](.#-rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档-1)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 触发条件
 >
@@ -79,11 +79,11 @@
 
 | 步骤 | 文档 | 操作 |
 | :--- | :--- | :--- |
-| 2.1 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md) | 新增「Rust X.Y 新增/变更」表；更新特性总数 |
+| 2.1 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](10_rust_193_language_features_comprehensive_analysis.md) | 新增「Rust X.Y 新增/变更」表；更新特性总数 |
 | 2.2 | [06_toolchain/](../06_toolchain/README.md) | 新建 `07_rust_X.Y_full_changelog.md`、`05_rust_X.Y_vs_X.Y-1_comparison.md` |
-| 2.3 | [formal_methods](../../archive/research_notes_2026_06_25/formal_methods/README.md)、[type_theory](type_theory/README.md) | 若有新形式化相关特性，更新 00_completeness_gaps |
-| 2.4 | [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) | 若核心特性有变更，更新对应链 |
-| 2.5 | [INDEX](./INDEX.md)、[README](./README.md) | 更新版本号、链接、统计 |
+| 2.3 | [formal_methods](formal_methods/README.md)、[type_theory](type_theory/README.md) | 若有新形式化相关特性，更新 00_completeness_gaps |
+| 2.4 | [CORE_FEATURES_FULL_CHAIN](10_core_features_full_chain.md) | 若核心特性有变更，更新对应链 |
+| 2.5 | [INDEX](INDEX.md)、[README](README.md) | 更新版本号、链接、统计 |
 
 ### 3. 对齐权威
 
@@ -239,9 +239,9 @@ fn api_stabilization_example() {
 
 | 文档 | 用途 | 链接 |
 | :--- | :--- | :--- |
-| MAINTENANCE_GUIDE | 维护计划、质量检查 | [10_maintenance_guide.md](../../archive/research_notes_2026_06_25/10_maintenance_guide.md) |
-| RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | 特性分析主文档 | [10_rust_193_language_features_comprehensive_analysis.md](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md) |
-| FEATURE_TEMPLATE | 新特性精简模板 | [10_feature_template.md](../../archive/research_notes_2026_06_25/10_feature_template.md) |
+| MAINTENANCE_GUIDE | 维护计划、质量检查 | [10_maintenance_guide.md](10_maintenance_guide.md) |
+| RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | 特性分析主文档 | [10_rust_193_language_features_comprehensive_analysis.md](10_rust_193_language_features_comprehensive_analysis.md) |
+| FEATURE_TEMPLATE | 新特性精简模板 | [10_feature_template.md](10_feature_template.md) |
 
 ### 形式化方法文档
 >
@@ -249,8 +249,8 @@ fn api_stabilization_example() {
 
 | 文档 | 用途 | 链接 |
 | :--- | :--- | :--- |
-| formal_methods/00_completeness_gaps | 形式化缺口 | [formal_methods/00_completeness_gaps.md](../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md) |
-| type_theory/00_completeness_gaps | 类型理论缺口 | [formal_methods/00_completeness_gaps.md](../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md) |
+| formal_methods/00_completeness_gaps | 形式化缺口 | [formal_methods/00_completeness_gaps.md](formal_methods/00_completeness_gaps.md) |
+| type_theory/00_completeness_gaps | 类型理论缺口 | [formal_methods/00_completeness_gaps.md](formal_methods/00_completeness_gaps.md) |
 
 ### 更新记录文档
 >
@@ -258,9 +258,9 @@ fn api_stabilization_example() {
 
 | 文档 | 用途 | 链接 |
 | :--- | :--- | :--- |
-| RUST_191_RESEARCH_UPDATE | 1.91.1 更新记录 | [10_rust_191_research_update_2025_11_15.md](../../archive/research_notes_2026_06_25/10_rust_191_research_update_2025_11_15.md) |
-| RUST_192_RESEARCH_UPDATE | 1.92.0 更新记录 | [10_rust_192_research_update_2025_12_11.md](../../archive/research_notes_2026_06_25/10_rust_192_research_update_2025_12_11.md) |
-| CHANGELOG | 更新日志 | [10_changelog.md](./10_changelog.md) |
+| RUST_191_RESEARCH_UPDATE | 1.91.1 更新记录 | [10_rust_191_research_update_2025_11_15.md](10_rust_191_research_update_2025_11_15.md) |
+| RUST_192_RESEARCH_UPDATE | 1.92.0 更新记录 | [10_rust_192_research_update_2025_12_11.md](10_rust_192_research_update_2025_12_11.md) |
+| CHANGELOG | 更新日志 | [10_changelog.md](10_changelog.md) |
 
 ### 形式化证明文档
 >
@@ -268,10 +268,10 @@ fn api_stabilization_example() {
 
 | 文档 | 用途 | 链接 |
 | :--- | :--- | :--- |
-| CORE_THEOREMS_FULL_PROOFS | 核心定理完整证明 | [10_core_theorems_full_proofs.md](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) |
-| COQ_ISABELLE_PROOF_SCAFFOLDING | Coq 证明骨架 | [10_coq_isabelle_proof_scaffolding.md](../../archive/research_notes_2026_06_25/10_coq_isabelle_proof_scaffolding.md) |
-| PROOF_INDEX | 证明索引 | [10_proof_index.md](../../archive/research_notes_2026_06_25/10_proof_index.md) |
-| SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS | 安全分析 | [10_safe_unsafe_comprehensive_analysis.md](./10_safe_unsafe_comprehensive_analysis.md) |
+| CORE_THEOREMS_FULL_PROOFS | 核心定理完整证明 | [10_core_theorems_full_proofs.md](10_core_theorems_full_proofs.md) |
+| COQ_ISABELLE_PROOF_SCAFFOLDING | Coq 证明骨架 | [10_coq_isabelle_proof_scaffolding.md](10_coq_isabelle_proof_scaffolding.md) |
+| PROOF_INDEX | 证明索引 | [10_proof_index.md](10_proof_index.md) |
+| SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS | 安全分析 | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md) |
 
 ### 研究笔记索引
 >
@@ -279,10 +279,10 @@ fn api_stabilization_example() {
 
 | 类别 | 文档 | 链接 |
 | :--- | :--- | :--- |
-| 形式化方法 | 所有权模型 | [formal_methods/10_ownership_model.md](./formal_methods/10_ownership_model.md) |
-| 形式化方法 | 借用检查器 | [formal_methods/10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md) |
-| 类型理论 | 类型系统基础 | [type_theory/10_type_system_foundations.md](./type_theory/10_type_system_foundations.md) |
-| 实验研究 | 性能基准测试 | [experiments/10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md) |
+| 形式化方法 | 所有权模型 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) |
+| 形式化方法 | 借用检查器 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) |
+| 类型理论 | 类型系统基础 | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) |
+| 实验研究 | 性能基准测试 | [experiments/10_performance_benchmarks.md](experiments/10_performance_benchmarks.md) |
 
 ---
 
@@ -297,7 +297,7 @@ fn api_stabilization_example() {
 
 > **适用版本**: Rust 1.96.0+
 
-详见 [RUST_194_RESEARCH_UPDATE](../../archive/research_notes_2026_06_25/10_rust_194_research_update.md)
+详见 [RUST_194_RESEARCH_UPDATE](10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 
@@ -360,7 +360,7 @@ fn api_stabilization_example() {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

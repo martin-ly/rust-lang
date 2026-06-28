@@ -535,8 +535,8 @@ SQLx 的宏在编译期绑定特定数据库类型。如果同一套代码需要
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [Diesel ORM 架构](./03_diesel_architecture.md)
-- [SQLx 主架构分析](./09_sqlx_architecture.md)
+- [Diesel ORM 架构](03_diesel_architecture.md)
+- [SQLx 主架构分析](09_sqlx_architecture.md)
 - 类型系统与所有权
 
 ---

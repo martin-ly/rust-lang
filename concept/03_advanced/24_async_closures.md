@@ -383,8 +383,8 @@ let process = async |items: Vec<i32>| -> i32 {
 
 ## 10. 相关概念
 
-- [Async/Await（异步编程）](./02_async.md)
-- [Pin 与 Unpin](./06_pin_unpin.md)
+- [Async/Await（异步编程）](02_async.md)
+- [Pin 与 Unpin](06_pin_unpin.md)
 - [L2 闭包类型](../02_intermediate/07_closure_types.md)
 - [Rust 2024 Edition](../../knowledge/06_ecosystem/02_edition_2024.md)
 

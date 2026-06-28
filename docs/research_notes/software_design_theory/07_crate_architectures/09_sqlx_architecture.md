@@ -475,8 +475,8 @@ tx.commit().await?;
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [Diesel ORM 架构](./03_diesel_architecture.md)
-- [Reqwest HTTP 客户端架构](./10_reqwest_architecture.md)
+- [Diesel ORM 架构](03_diesel_architecture.md)
+- [Reqwest HTTP 客户端架构](10_reqwest_architecture.md)
 - 类型系统与所有权
 
 ---

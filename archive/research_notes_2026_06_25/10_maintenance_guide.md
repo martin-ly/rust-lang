@@ -15,62 +15,62 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [研究笔记系统维护指南](#研究笔记系统维护指南)
-  - [📑 目录](#-目录)
-  - [📋 维护概览 {#-维护概览}](#-维护概览--维护概览)
-    - [维护范围](#维护范围)
-  - [🎯 维护目标 {#-维护目标}](#-维护目标--维护目标)
-    - [1. 内容质量保证](#1-内容质量保证)
-    - [2. 结构组织优化](#2-结构组织优化)
-    - [3. 用户体验提升](#3-用户体验提升)
-  - [📅 维护计划 {#-维护计划}](#-维护计划--维护计划)
-    - [日常维护 (每日)](#日常维护-每日)
-    - [周度维护 (每周)](#周度维护-每周)
-    - [月度维护 (每月)](#月度维护-每月)
-    - [季度维护 (每季度)](#季度维护-每季度)
-    - [年度维护 (每年)](#年度维护-每年)
-  - [🔍 质量检查 {#-质量检查}](#-质量检查--质量检查)
-    - [内容质量检查](#内容质量检查)
-    - [格式质量检查](#格式质量检查)
-    - [格式统一检查清单（research\_notes 专用）](#格式统一检查清单research_notes-专用)
-    - [链接质量检查](#链接质量检查)
-    - [结构质量检查](#结构质量检查)
-  - [🔄 更新流程 {#-更新流程}](#-更新流程--更新流程)
-    - [更新研究笔记](#更新研究笔记)
-    - [更新核心文档](#更新核心文档)
-  - [🚨 问题处理 {#-问题处理}](#-问题处理--问题处理)
-    - [问题发现](#问题发现)
-    - [问题分类](#问题分类)
-    - [问题处理](#问题处理)
-    - [问题跟踪](#问题跟踪)
-  - [📈 持续改进 {#-持续改进}](#-持续改进--持续改进)
-    - [用户反馈收集](#用户反馈收集)
-    - [技术栈更新](#技术栈更新)
-    - [社区建设](#社区建设)
-    - [质量提升](#质量提升)
-  - [🛠️ 维护工具 {#️-维护工具}](#️-维护工具-️-维护工具)
-    - [链接检查](#链接检查)
-    - [格式检查](#格式检查)
-    - [代码验证](#代码验证)
-    - [统计信息](#统计信息)
-  - [📋 维护检查清单 {#-维护检查清单}](#-维护检查清单--维护检查清单)
-    - [日常检查清单](#日常检查清单)
-    - [周度检查清单](#周度检查清单)
-    - [月度检查清单](#月度检查清单)
-    - [季度检查清单](#季度检查清单)
-    - [年度检查清单](#年度检查清单)
-  - [📦 Rust 版本增量更新 {#-rust-版本增量更新}](#-rust-版本增量更新--rust-版本增量更新)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
-    - [核心文档](#核心文档)
-    - [维护相关](#维护相关)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [研究笔记系统维护指南](.#研究笔记系统维护指南)
+  - [📑 目录](.#-目录)
+  - [📋 维护概览 {#-维护概览}](.#-维护概览--维护概览)
+    - [维护范围](.#维护范围)
+  - [🎯 维护目标 {#-维护目标}](.#-维护目标--维护目标)
+    - [1. 内容质量保证](.#1-内容质量保证)
+    - [2. 结构组织优化](.#2-结构组织优化)
+    - [3. 用户体验提升](.#3-用户体验提升)
+  - [📅 维护计划 {#-维护计划}](.#-维护计划--维护计划)
+    - [日常维护 (每日)](.#日常维护-每日)
+    - [周度维护 (每周)](.#周度维护-每周)
+    - [月度维护 (每月)](.#月度维护-每月)
+    - [季度维护 (每季度)](.#季度维护-每季度)
+    - [年度维护 (每年)](.#年度维护-每年)
+  - [🔍 质量检查 {#-质量检查}](.#-质量检查--质量检查)
+    - [内容质量检查](.#内容质量检查)
+    - [格式质量检查](.#格式质量检查)
+    - [格式统一检查清单（research\_notes 专用）](.#格式统一检查清单research_notes-专用)
+    - [链接质量检查](.#链接质量检查)
+    - [结构质量检查](.#结构质量检查)
+  - [🔄 更新流程 {#-更新流程}](.#-更新流程--更新流程)
+    - [更新研究笔记](.#更新研究笔记)
+    - [更新核心文档](.#更新核心文档)
+  - [🚨 问题处理 {#-问题处理}](.#-问题处理--问题处理)
+    - [问题发现](.#问题发现)
+    - [问题分类](.#问题分类)
+    - [问题处理](.#问题处理)
+    - [问题跟踪](.#问题跟踪)
+  - [📈 持续改进 {#-持续改进}](.#-持续改进--持续改进)
+    - [用户反馈收集](.#用户反馈收集)
+    - [技术栈更新](.#技术栈更新)
+    - [社区建设](.#社区建设)
+    - [质量提升](.#质量提升)
+  - [🛠️ 维护工具 {#️-维护工具}](.#️-维护工具-️-维护工具)
+    - [链接检查](.#链接检查)
+    - [格式检查](.#格式检查)
+    - [代码验证](.#代码验证)
+    - [统计信息](.#统计信息)
+  - [📋 维护检查清单 {#-维护检查清单}](.#-维护检查清单--维护检查清单)
+    - [日常检查清单](.#日常检查清单)
+    - [周度检查清单](.#周度检查清单)
+    - [月度检查清单](.#月度检查清单)
+    - [季度检查清单](.#季度检查清单)
+    - [年度检查清单](.#年度检查清单)
+  - [📦 Rust 版本增量更新 {#-rust-版本增量更新}](.#-rust-版本增量更新--rust-版本增量更新)
+  - [🔗 相关资源 {#-相关资源}](.#-相关资源--相关资源)
+    - [核心文档](.#核心文档)
+    - [维护相关](.#维护相关)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 📋 维护概览 {#-维护概览}
 >
@@ -178,10 +178,10 @@
 - [ ] 更新研究优先级
 - [ ] 优化导航系统
 - [ ] 生成质量报告
-- [ ] **层次化与矩阵**：核对 [HIERARCHICAL_MAPPING_AND_SUMMARY](../../archive/research_notes_2026_06_25/10_hierarchical_mapping_and_summary.md) 与最新文档一致；
+- [ ] **层次化与矩阵**：核对 [HIERARCHICAL_MAPPING_AND_SUMMARY](10_hierarchical_mapping_and_summary.md) 与最新文档一致；
 - [ ] 23 模式矩阵、执行模型矩阵、formal_methods 六篇并表与各子文档双向链接完整（见 RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN）
 - [ ] **格式与内容与 1.93 对齐**：按 FORMAT_AND_CONTENT_ALIGNMENT_PLAN 执行季度抽查：元信息/目录/文末块统一；实质内容五维自检抽样；
-- [ ] 92 项落点与 [RUST_193_COUNTEREXAMPLES_INDEX](./10_rust_193_counterexamples_index.md) 反例索引更新
+- [ ] 92 项落点与 [RUST_193_COUNTEREXAMPLES_INDEX](10_rust_193_counterexamples_index.md) 反例索引更新
 
 ### 年度维护 (每年)
 
@@ -221,7 +221,7 @@
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
-与 FORMAT_AND_CONTENT_ALIGNMENT_PLAN、[QUALITY_CHECKLIST](./10_quality_checklist.md) § 元信息统一模板 一致：
+与 FORMAT_AND_CONTENT_ALIGNMENT_PLAN、[QUALITY_CHECKLIST](10_quality_checklist.md) § 元信息统一模板 一致：
 
 - [ ] **元信息**：每篇含 `创建日期`、`最后更新`、`Rust 版本`: 1.93.1+ (Edition 2024)、`状态`
 - [ ] **目录块**：有目录的文档统一使用「## 📊 目录」；同类文档二级标题风格一致
@@ -259,25 +259,25 @@
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 1. **选择研究主题**
-   - 查看 [研究路线图](./10_research_roadmap.md)
+   - 查看 [研究路线图](10_research_roadmap.md)
    - 选择合适的研究主题
 
 2. **创建或更新文件**
-   - 使用 [研究笔记模板](./10_template.md)
-   - 遵循 [研究笔记规范](./README.md#研究笔记规范)
+   - 使用 [研究笔记模板](10_template.md)
+   - 遵循 [研究笔记规范](README.md#研究笔记规范)
 
 3. **质量检查**
-   - 使用 [质量检查清单](./10_quality_checklist.md)
+   - 使用 [质量检查清单](10_quality_checklist.md)
    - 确保代码示例可运行
 
 4. **更新索引**
    - 更新相应目录的 README.md
-   - 更新 [主索引](./README.md)
-   - 更新 [完整索引](./INDEX.md)
-   - 更新 [快速参考](../../archive/research_notes_2026_06_25/10_quick_reference.md)
+   - 更新 [主索引](README.md)
+   - 更新 [完整索引](INDEX.md)
+   - 更新 [快速参考](10_quick_reference.md)
 
 5. **更新日志**
-   - 更新 [更新日志](./10_changelog.md)
+   - 更新 [更新日志](10_changelog.md)
    - 更新文档元信息（日期、版本）
 
 ### 更新核心文档
@@ -291,8 +291,8 @@
 2. **执行更新**
    - 更新文档内容
    - 保持格式一致性
-   - 若涉及概念/定理/文档结构变更：视情况更新 [HIERARCHICAL_MAPPING_AND_SUMMARY](../../archive/research_notes_2026_06_25/10_hierarchical_mapping_and_summary.md)、
-   - 相关多维矩阵（23 模式、执行模型、formal_methods 六篇并表）及子文档中的「矩阵行/列」标注（见 [CONTENT_ENHANCEMENT](./10_content_enhancement.md) § 矩阵与文档双向链接规范）
+   - 若涉及概念/定理/文档结构变更：视情况更新 [HIERARCHICAL_MAPPING_AND_SUMMARY](10_hierarchical_mapping_and_summary.md)、
+   - 相关多维矩阵（23 模式、执行模型、formal_methods 六篇并表）及子文档中的「矩阵行/列」标注（见 [CONTENT_ENHANCEMENT](10_content_enhancement.md) § 矩阵与文档双向链接规范）
    - 更新相关链接
 
 3. **验证更新**
@@ -301,7 +301,7 @@
    - 确保内容一致性
 
 4. **记录变更**
-   - 更新 [更新日志](./10_changelog.md)
+   - 更新 [更新日志](10_changelog.md)
    - 更新文档元信息
 
 ---
@@ -503,14 +503,14 @@ find docs/research_notes -name "*.md" -exec wc -l {} + | tail -1
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-**每 Rust 新版本发布后**，按 [INCREMENTAL_UPDATE_FLOW](./10_incremental_update_flow.md) 执行：
+**每 Rust 新版本发布后**，按 [INCREMENTAL_UPDATE_FLOW](10_incremental_update_flow.md) 执行：
 
 1. 收集 releases.rs、Blog 变更
 2. 更新 RUST_XXX、toolchain 文档
 3. 评估 formal_methods、type_theory 缺口
 4. 更新 INDEX、README、CHANGELOG
 
-详见 [INCREMENTAL_UPDATE_FLOW](./10_incremental_update_flow.md)。
+详见 [INCREMENTAL_UPDATE_FLOW](10_incremental_update_flow.md)。
 
 ---
 
@@ -522,18 +522,18 @@ find docs/research_notes -name "*.md" -exec wc -l {} + | tail -1
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [主索引](./README.md) - 完整的研究笔记索引
-- [系统总结](./10_system_summary.md) - 系统概览和统计
-- [贡献指南](./10_contributing.md) - 贡献流程和规范
-- [质量检查清单](./10_quality_checklist.md) - 质量检查标准
+- [主索引](README.md) - 完整的研究笔记索引
+- [系统总结](10_system_summary.md) - 系统概览和统计
+- [贡献指南](10_contributing.md) - 贡献流程和规范
+- [质量检查清单](10_quality_checklist.md) - 质量检查标准
 
 ### 维护相关
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [更新日志](./10_changelog.md) - 系统变更历史
-- [研究路线图](./10_research_roadmap.md) - 研究计划
-- [快速参考](../../archive/research_notes_2026_06_25/10_quick_reference.md) - 快速查找指南
+- [更新日志](10_changelog.md) - 系统变更历史
+- [研究路线图](10_research_roadmap.md) - 研究计划
+- [快速参考](10_quick_reference.md) - 快速查找指南
 
 ---
 
@@ -600,7 +600,7 @@ find docs/research_notes -name "*.md" -exec wc -l {} + | tail -1
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

@@ -15,28 +15,28 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [形式化方法完备性缺口：形式化论证不充分声明](#形式化方法完备性缺口形式化论证不充分声明)
-  - [📑 目录](#-目录)
-  - [宗旨](#宗旨)
-  - [形式化定义（完备性缺口）](#形式化定义完备性缺口)
-  - [1. 内存与所有权族缺口](#1-内存与所有权族缺口)
-  - [2. 并发与异步族缺口](#2-并发与异步族缺口)
-  - [3. FFI 与不安全族缺口](#3-ffi-与不安全族缺口)
-  - [4. 控制流与模式匹配族缺口](#4-控制流与模式匹配族缺口)
-  - [5. Rust 1.93 新增/变更与 formal\_methods 衔接缺口](#5-rust-193-新增变更与-formal_methods-衔接缺口)
-  - [6. 缺口汇总与优先级](#6-缺口汇总与优先级)
-  - [7. 与已有文档的衔接](#7-与已有文档的衔接)
-  - [8. 补全路线图](#8-补全路线图)
-  - [9. 国际权威对标](#9-国际权威对标)
-  - [10. 国际对标缺口（与阶段 1 交付物联动）](#10-国际对标缺口与阶段-1-交付物联动)
-  - [引用](#引用)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [形式化方法完备性缺口：形式化论证不充分声明](.#形式化方法完备性缺口形式化论证不充分声明)
+  - [📑 目录](.#-目录)
+  - [宗旨](.#宗旨)
+  - [形式化定义（完备性缺口）](.#形式化定义完备性缺口)
+  - [1. 内存与所有权族缺口](.#1-内存与所有权族缺口)
+  - [2. 并发与异步族缺口](.#2-并发与异步族缺口)
+  - [3. FFI 与不安全族缺口](.#3-ffi-与不安全族缺口)
+  - [4. 控制流与模式匹配族缺口](.#4-控制流与模式匹配族缺口)
+  - [5. Rust 1.93 新增/变更与 formal\_methods 衔接缺口](.#5-rust-193-新增变更与-formal_methods-衔接缺口)
+  - [6. 缺口汇总与优先级](.#6-缺口汇总与优先级)
+  - [7. 与已有文档的衔接](.#7-与已有文档的衔接)
+  - [8. 补全路线图](.#8-补全路线图)
+  - [9. 国际权威对标](.#9-国际权威对标)
+  - [10. 国际对标缺口（与阶段 1 交付物联动）](.#10-国际对标缺口与阶段-1-交付物联动)
+  - [引用](.#引用)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 宗旨
 >
@@ -67,7 +67,7 @@ $
 $
 对 Rust 1.93 语言特性**已完备**；Phase 1–6 全部补全，无剩余缺口。
 
-*证明*：由 [8. 补全路线图](#8-补全路线图) 阶段 1–6 状态；每项均有 Def/定理。∎
+*证明*：由 [8. 补全路线图](.#8-补全路线图) 阶段 1–6 状态；每项均有 Def/定理。∎
 
 ---
 
@@ -161,11 +161,11 @@ $
 
 | 文档 | 已覆盖 | 备注 |
 | :--- | :--- | :--- |
-| [ownership_model](./10_ownership_model.md) | 所有权规则 1–3、T2/T3、Box/Rc/Arc/Cell/RefCell、MaybeUninit、ATOMIC/UNION/TRANSMUTE、DROP/DEREF/REPR/CONST_MUT_STATIC | 100% |
-| [borrow_checker_proof](./10_borrow_checker_proof.md) | 借用规则、T1、CHAN/MUTEX/RAW、UNSAFE、MATCH/FOR、EXTERN/CVARIADIC/QUERY | 100% |
+| [ownership_model](10_ownership_model.md) | 所有权规则 1–3、T2/T3、Box/Rc/Arc/Cell/RefCell、MaybeUninit、ATOMIC/UNION/TRANSMUTE、DROP/DEREF/REPR/CONST_MUT_STATIC | 100% |
+| [borrow_checker_proof](10_borrow_checker_proof.md) | 借用规则、T1、CHAN/MUTEX/RAW、UNSAFE、MATCH/FOR、EXTERN/CVARIADIC/QUERY | 100% |
 | lifetime_formalization | outlives、T2 引用有效性 | 与型变、泛型组合 |
-| [async_state_machine](./10_async_state_machine.md) | T6.1–T6.3 Future、Send/Sync、SPAWN、1.93 变更 | 100% |
-| [pin_self_referential](./10_pin_self_referential.md) | Pin T1–T3 | 100% |
+| [async_state_machine](10_async_state_machine.md) | T6.1–T6.3 Future、Send/Sync、SPAWN、1.93 变更 | 100% |
+| [pin_self_referential](10_pin_self_referential.md) | Pin T1–T3 | 100% |
 
 ---
 
@@ -184,10 +184,10 @@ $
 
 **状态**：✅ **100% 完成**，无剩余缺口。
 
-**后续可持续推进**：✅ 阶段 A–D 已完成：Send/Sync 独立形式化 [send_sync_formalization](./10_send_sync_formalization.md)、
+**后续可持续推进**：✅ 阶段 A–D 已完成：Send/Sync 独立形式化 [send_sync_formalization](10_send_sync_formalization.md)、
 安全可判定机制总览 [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../10_safe_decidable_mechanisms_overview.md)、
 并发+Trait 族四维表、思维表征四类绑定（HIERARCHICAL_MAPPING、六篇并表）。
-详见 [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](./10_safe_decidable_mechanisms_and_formal_methods_plan.md)。
+详见 [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](10_safe_decidable_mechanisms_and_formal_methods_plan.md)。
 
 ---
 
@@ -302,7 +302,7 @@ $
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [formal_methods 目录](./README.md)
+- [formal_methods 目录](README.md)
 - [上级目录](../README.md)
 
 ---

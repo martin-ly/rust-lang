@@ -10,7 +10,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 对比分析 **Rust** 与 **Ruby** 的设计哲学——从动态类型的极致表达力到静态类型的编译期安全，揭示两种语言在Web开发、脚本编写和系统编程中的互补定位。
-> **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Ownership](../01_foundation/01_ownership.md) · [Rust vs Python](./07_rust_vs_python.md)
+> **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Ownership](../01_foundation/01_ownership.md) · [Rust vs Python](07_rust_vs_python.md)
 > **后置概念**: [Web Development](../06_ecosystem/04_application_domains.md) · [Scripting](../06_ecosystem/03_core_crates.md)
 
 ---
@@ -26,40 +26,40 @@
 
 ## 📑 目录
 
-- [Rust vs Ruby：性能与表达力的两极](#rust-vs-ruby性能与表达力的两极)
-  - [📑 目录](#-目录)
-  - [一、核心对比](#一核心对比)
-    - [1.1 类型系统对比](#11-类型系统对比)
-    - [1.2 内存管理对比](#12-内存管理对比)
-    - [1.3 元编程与 DSL](#13-元编程与-dsl)
-  - [二、工程实践差异](#二工程实践差异)
-    - [2.1 Web 开发生态](#21-web-开发生态)
-    - [2.2 性能基准](#22-性能基准)
-    - [2.3 开发速度权衡](#23-开发速度权衡)
-  - [三、互补使用场景](#三互补使用场景)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、常见陷阱](#五常见陷阱)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-    - [编译验证示例](#编译验证示例)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：Rust 与 Ruby 的编译错误对比](#十边界测试rust-与-ruby-的编译错误对比)
-    - [10.1 边界测试：Ruby 的 duck typing vs Rust 的 trait bound（编译错误）](#101-边界测试ruby-的-duck-typing-vs-rust-的-trait-bound编译错误)
-    - [10.2 边界测试：Ruby 的 open classes 与 Rust 的孤儿规则（编译错误）](#102-边界测试ruby-的-open-classes-与-rust-的孤儿规则编译错误)
-    - [10.3 边界测试：Ruby 的 duck typing 与 Rust 的 trait bound（编译错误）](#103-边界测试ruby-的-duck-typing-与-rust-的-trait-bound编译错误)
-    - [10.4 边界测试：Ruby 的 open classes 与 Rust 的孤儿规则（编译错误）](#104-边界测试ruby-的-open-classes-与-rust-的孤儿规则编译错误)
-    - [10.3 边界测试：Ruby 的开放类与 Rust 的孤儿规则冲突（编译错误）](#103-边界测试ruby-的开放类与-rust-的孤儿规则冲突编译错误)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：Ruby 的"鸭子类型"与 Rust 的 trait 系统在运行时行为上有什么不同？（理解层）](#测验-1ruby-的鸭子类型与-rust-的-trait-系统在运行时行为上有什么不同理解层)
-    - [测验 2：Ruby 的 GIL（全局解释器锁）与 Rust 的并发模型有什么根本区别？（理解层）](#测验-2ruby-的-gil全局解释器锁与-rust-的并发模型有什么根本区别理解层)
-    - [测验 3：Ruby on Rails 的"约定优于配置"与 Rust 的显式哲学有什么对比？（理解层）](#测验-3ruby-on-rails-的约定优于配置与-rust-的显式哲学有什么对比理解层)
-    - [测验 4：为什么 Ruby 适合快速原型，而 Rust 更适合长期维护的基础设施？（理解层）](#测验-4为什么-ruby-适合快速原型而-rust-更适合长期维护的基础设施理解层)
-    - [测验 5：Rust 如何通过 `rutie` 或 `helix` 与 Ruby 互操作？（理解层）](#测验-5rust-如何通过-rutie-或-helix-与-ruby-互操作理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Rust vs Ruby：性能与表达力的两极](.#rust-vs-ruby性能与表达力的两极)
+  - [📑 目录](.#-目录)
+  - [一、核心对比](.#一核心对比)
+    - [1.1 类型系统对比](.#11-类型系统对比)
+    - [1.2 内存管理对比](.#12-内存管理对比)
+    - [1.3 元编程与 DSL](.#13-元编程与-dsl)
+  - [二、工程实践差异](.#二工程实践差异)
+    - [2.1 Web 开发生态](.#21-web-开发生态)
+    - [2.2 性能基准](.#22-性能基准)
+    - [2.3 开发速度权衡](.#23-开发速度权衡)
+  - [三、互补使用场景](.#三互补使用场景)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、常见陷阱](.#五常见陷阱)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+    - [编译验证示例](.#编译验证示例)
+  - [相关概念文件](.#相关概念文件)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：Rust 与 Ruby 的编译错误对比](.#十边界测试rust-与-ruby-的编译错误对比)
+    - [10.1 边界测试：Ruby 的 duck typing vs Rust 的 trait bound（编译错误）](.#101-边界测试ruby-的-duck-typing-vs-rust-的-trait-bound编译错误)
+    - [10.2 边界测试：Ruby 的 open classes 与 Rust 的孤儿规则（编译错误）](.#102-边界测试ruby-的-open-classes-与-rust-的孤儿规则编译错误)
+    - [10.3 边界测试：Ruby 的 duck typing 与 Rust 的 trait bound（编译错误）](.#103-边界测试ruby-的-duck-typing-与-rust-的-trait-bound编译错误)
+    - [10.4 边界测试：Ruby 的 open classes 与 Rust 的孤儿规则（编译错误）](.#104-边界测试ruby-的-open-classes-与-rust-的孤儿规则编译错误)
+    - [10.3 边界测试：Ruby 的开放类与 Rust 的孤儿规则冲突（编译错误）](.#103-边界测试ruby-的开放类与-rust-的孤儿规则冲突编译错误)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：Ruby 的"鸭子类型"与 Rust 的 trait 系统在运行时行为上有什么不同？（理解层）](.#测验-1ruby-的鸭子类型与-rust-的-trait-系统在运行时行为上有什么不同理解层)
+    - [测验 2：Ruby 的 GIL（全局解释器锁）与 Rust 的并发模型有什么根本区别？（理解层）](.#测验-2ruby-的-gil全局解释器锁与-rust-的并发模型有什么根本区别理解层)
+    - [测验 3：Ruby on Rails 的"约定优于配置"与 Rust 的显式哲学有什么对比？（理解层）](.#测验-3ruby-on-rails-的约定优于配置与-rust-的显式哲学有什么对比理解层)
+    - [测验 4：为什么 Ruby 适合快速原型，而 Rust 更适合长期维护的基础设施？（理解层）](.#测验-4为什么-ruby-适合快速原型而-rust-更适合长期维护的基础设施理解层)
+    - [测验 5：Rust 如何通过 `rutie` 或 `helix` 与 Ruby 互操作？（理解层）](.#测验-5rust-如何通过-rutie-或-helix-与-ruby-互操作理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -514,7 +514,7 @@ fn main() {
 ## 相关概念文件
 
 - [Type System](../01_foundation/04_type_system.md) — 类型系统（Type System）
-- [Rust vs Python](./07_rust_vs_python.md) — Rust vs Python
+- [Rust vs Python](07_rust_vs_python.md) — Rust vs Python
 - [Web Development](../06_ecosystem/04_application_domains.md) — Web 开发
 - [Application Domains](../06_ecosystem/04_application_domains.md) — 应用领域
 

@@ -19,9 +19,9 @@
 > [Rust Reference — Closures](https://doc.rust-lang.org/reference/expressions/closure-expr.html)
 >
 > **前置概念**:
-> [Closure Basics](./15_closure_basics.md) ·
-> [Collections](./08_collections.md) ·
-> [Ownership](./01_ownership.md)
+> [Closure Basics](15_closure_basics.md) ·
+> [Collections](08_collections.md) ·
+> [Ownership](01_ownership.md)
 
 ---
 
@@ -84,7 +84,7 @@ struct Closure { /* 捕获的环境 */ }
 impl Fn(i32) -> i32 for Closure { ... }
 ```
 
-**知识点**：闭包不是函数指针，而是实现了 `Fn`/`FnMut`/`FnOnce` trait 的匿名类型。每个闭包都有唯一的、不可命名的类型。[→ 闭包详解](./15_closure_basics.md)
+**知识点**：闭包不是函数指针，而是实现了 `Fn`/`FnMut`/`FnOnce` trait 的匿名类型。每个闭包都有唯一的、不可命名的类型。[→ 闭包详解](15_closure_basics.md)
 
 </details>
 
@@ -138,7 +138,7 @@ fn main() {
 
 **层次关系**：`Fn` <: `FnMut` <: `FnOnce`（所有实现 `Fn` 的闭包也自动实现 `FnMut` 和 `FnOnce`）
 
-**知识点**：Rust 编译器自动推断闭包的最小捕获方式。理解三种 `Fn` trait 是使用高阶函数（如 `map`、`filter`）的基础。[→ 闭包详解](./15_closure_basics.md)
+**知识点**：Rust 编译器自动推断闭包的最小捕获方式。理解三种 `Fn` trait 是使用高阶函数（如 `map`、`filter`）的基础。[→ 闭包详解](15_closure_basics.md)
 
 </details>
 
@@ -624,7 +624,7 @@ fn make_filter(min: i32) -> impl Fn(&i32) -> bool {
 }
 ```
 
-**知识点**：返回闭包时几乎总是需要 `move`，否则闭包捕获的局部变量引用会在函数返回后悬垂。[→ 闭包详解](./15_closure_basics.md)
+**知识点**：返回闭包时几乎总是需要 `move`，否则闭包捕获的局部变量引用会在函数返回后悬垂。[→ 闭包详解](15_closure_basics.md)
 
 </details>
 
@@ -636,12 +636,12 @@ fn make_filter(min: i32) -> impl Fn(&i32) -> bool {
 |:---:|:---|:---|
 | 10/10 | 🏆 闭包与迭代器已内化 | 实现自定义迭代器（如斐波那契数列生成器） |
 | 7–9/10 | ✅ 核心概念掌握 | 用迭代器链重写显式 for 循环，对比性能 |
-| 4–6/10 | 🔄 需巩固基础 | 重读 [Closure Basics](./15_closure_basics.md)，练习 `fold`/`filter`/`map` 组合 |
-| 0–3/10 | 📚 建议重新开始 | 从 [Collections](./08_collections.md) 开始，理解 `iter`/`iter_mut`/`into_iter` |
+| 4–6/10 | 🔄 需巩固基础 | 重读 [Closure Basics](15_closure_basics.md)，练习 `fold`/`filter`/`map` 组合 |
+| 0–3/10 | 📚 建议重新开始 | 从 [Collections](08_collections.md) 开始，理解 `iter`/`iter_mut`/`into_iter` |
 
 ---
 
-> **对应练习**: 建议用迭代器链重写 [exercises/src/type_system/](../../exercises/src/type_system/) 中的显式循环
+> **对应练习**: 建议用迭代器链重写 [exercises/src/type_system/](../../exercises/src/type_system) 中的显式循环
 
 ---
 

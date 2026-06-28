@@ -9,67 +9,67 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [高级类型特性](#高级类型特性)
-  - [📑 目录](#-目录)
-  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
-    - [核心问题](#核心问题)
-    - [预期成果](#预期成果)
-  - [📚 理论基础 {#-理论基础}](#-理论基础--理论基础)
-    - [GATs (Generic Associated Types)](#gats-generic-associated-types)
-    - [const 泛型](#const-泛型)
-    - [依赖类型](#依赖类型)
-    - [相关概念](#相关概念)
-    - [理论背景](#理论背景)
-    - [GATs 的理论基础](#gats-的理论基础)
-    - [const 泛型的理论基础](#const-泛型的理论基础)
-    - [依赖类型的理论基础](#依赖类型的理论基础)
-    - [相关学术论文的详细分析](#相关学术论文的详细分析)
-      - [1. Generic Associated Types in Rust](#1-generic-associated-types-in-rust)
-      - [2. Const Generics in Rust](#2-const-generics-in-rust)
-      - [3. Dependent Types and Rust](#3-dependent-types-and-rust)
-  - [🔬 形式化定义 {#-形式化定义}](#-形式化定义--形式化定义)
-    - [定义依赖链（前置概念）](#定义依赖链前置概念)
-    - [1. GATs 形式化](#1-gats-形式化)
-    - [2. const 泛型形式化](#2-const-泛型形式化)
-    - [3. 依赖类型关系](#3-依赖类型关系)
-    - [4. 类型系统扩展](#4-类型系统扩展)
-  - [⚠️ 反例：违反高级类型规则 {#️-反例违反高级类型规则}](#️-反例违反高级类型规则-️-反例违反高级类型规则)
-  - [🌳 公理-定理证明树 {#-公理-定理证明树}](#-公理-定理证明树--公理-定理证明树)
-  - [✅ 证明目标 {#-证明目标}](#-证明目标--证明目标)
-    - [待证明的性质](#待证明的性质)
-    - [证明方法](#证明方法)
-  - [💻 代码示例与实践 {#-代码示例与实践}](#-代码示例与实践--代码示例与实践)
-    - [示例 1: GATs 基础](#示例-1-gats-基础)
-    - [示例 2: const 泛型](#示例-2-const-泛型)
-    - [示例 3: 类型族](#示例-3-类型族)
-    - [示例 4: const 泛型与数组](#示例-4-const-泛型与数组)
-    - [示例 5: GATs 与迭代器](#示例-5-gats-与迭代器)
-    - [示例 6: GATs 与类型级函数](#示例-6-gats-与类型级函数)
-    - [示例 7: const 泛型与矩阵](#示例-7-const-泛型与矩阵)
-    - [示例 8: GATs 与异步编程](#示例-8-gats-与异步编程)
-  - [📖 参考文献 {#-参考文献}](#-参考文献--参考文献)
-    - [学术论文](#学术论文)
-    - [官方文档](#官方文档)
-    - [相关代码](#相关代码)
-    - [工具资源](#工具资源)
-  - [🔄 研究进展 {#-研究进展}](#-研究进展--研究进展)
-    - [已完成 ✅ {#已完成-}](#已完成--已完成-)
-    - [进行中 🔄（已完成）](#进行中-已完成)
-    - [计划中 📋（已完成）](#计划中-已完成)
-  - [🔗 系统集成与实际应用 {#-系统集成与实际应用}](#-系统集成与实际应用--系统集成与实际应用)
-    - [与类型系统、Trait 的集成](#与类型系统trait-的集成)
-    - [实际应用案例](#实际应用案例)
-  - [🆕 Rust 1.93.0 更新内容 {#-rust-1930-更新内容}](#-rust-1930-更新内容--rust-1930-更新内容)
-    - [MaybeUninit 与高级类型](#maybeuninit-与高级类型)
-    - [const 上下文增强（Rust 1.91.1+）](#const-上下文增强rust-1911)
-    - [const 泛型改进](#const-泛型改进)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [权威来源索引](#权威来源索引)
+- [高级类型特性](.#高级类型特性)
+  - [📑 目录](.#-目录)
+  - [🎯 研究目标 {#-研究目标}](.#-研究目标--研究目标)
+    - [核心问题](.#核心问题)
+    - [预期成果](.#预期成果)
+  - [📚 理论基础 {#-理论基础}](.#-理论基础--理论基础)
+    - [GATs (Generic Associated Types)](.#gats-generic-associated-types)
+    - [const 泛型](.#const-泛型)
+    - [依赖类型](.#依赖类型)
+    - [相关概念](.#相关概念)
+    - [理论背景](.#理论背景)
+    - [GATs 的理论基础](.#gats-的理论基础)
+    - [const 泛型的理论基础](.#const-泛型的理论基础)
+    - [依赖类型的理论基础](.#依赖类型的理论基础)
+    - [相关学术论文的详细分析](.#相关学术论文的详细分析)
+      - [1. Generic Associated Types in Rust](.#1-generic-associated-types-in-rust)
+      - [2. Const Generics in Rust](.#2-const-generics-in-rust)
+      - [3. Dependent Types and Rust](.#3-dependent-types-and-rust)
+  - [🔬 形式化定义 {#-形式化定义}](.#-形式化定义--形式化定义)
+    - [定义依赖链（前置概念）](.#定义依赖链前置概念)
+    - [1. GATs 形式化](.#1-gats-形式化)
+    - [2. const 泛型形式化](.#2-const-泛型形式化)
+    - [3. 依赖类型关系](.#3-依赖类型关系)
+    - [4. 类型系统扩展](.#4-类型系统扩展)
+  - [⚠️ 反例：违反高级类型规则 {#️-反例违反高级类型规则}](.#️-反例违反高级类型规则-️-反例违反高级类型规则)
+  - [🌳 公理-定理证明树 {#-公理-定理证明树}](.#-公理-定理证明树--公理-定理证明树)
+  - [✅ 证明目标 {#-证明目标}](.#-证明目标--证明目标)
+    - [待证明的性质](.#待证明的性质)
+    - [证明方法](.#证明方法)
+  - [💻 代码示例与实践 {#-代码示例与实践}](.#-代码示例与实践--代码示例与实践)
+    - [示例 1: GATs 基础](.#示例-1-gats-基础)
+    - [示例 2: const 泛型](.#示例-2-const-泛型)
+    - [示例 3: 类型族](.#示例-3-类型族)
+    - [示例 4: const 泛型与数组](.#示例-4-const-泛型与数组)
+    - [示例 5: GATs 与迭代器](.#示例-5-gats-与迭代器)
+    - [示例 6: GATs 与类型级函数](.#示例-6-gats-与类型级函数)
+    - [示例 7: const 泛型与矩阵](.#示例-7-const-泛型与矩阵)
+    - [示例 8: GATs 与异步编程](.#示例-8-gats-与异步编程)
+  - [📖 参考文献 {#-参考文献}](.#-参考文献--参考文献)
+    - [学术论文](.#学术论文)
+    - [官方文档](.#官方文档)
+    - [相关代码](.#相关代码)
+    - [工具资源](.#工具资源)
+  - [🔄 研究进展 {#-研究进展}](.#-研究进展--研究进展)
+    - [已完成 ✅ {#已完成-}](.#已完成--已完成-)
+    - [进行中 🔄（已完成）](.#进行中-已完成)
+    - [计划中 📋（已完成）](.#计划中-已完成)
+  - [🔗 系统集成与实际应用 {#-系统集成与实际应用}](.#-系统集成与实际应用--系统集成与实际应用)
+    - [与类型系统、Trait 的集成](.#与类型系统trait-的集成)
+    - [实际应用案例](.#实际应用案例)
+  - [🆕 Rust 1.93.0 更新内容 {#-rust-1930-更新内容}](.#-rust-1930-更新内容--rust-1930-更新内容)
+    - [MaybeUninit 与高级类型](.#maybeuninit-与高级类型)
+    - [const 上下文增强（Rust 1.91.1+）](.#const-上下文增强rust-1911)
+    - [const 泛型改进](.#const-泛型改进)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [权威来源索引](.#权威来源索引)
 
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-28
@@ -339,7 +339,7 @@ $$\text{DependentType}[\tau, v] = \text{Type} \text{ where } v : \text{Const}$$
 
 > **来源: [ACM](https://dl.acm.org/)**
 
-以下定义依赖 [type_system_foundations](./10_type_system_foundations.md) 与 [trait_system_formalization](./10_trait_system_formalization.md) 中的基础概念：
+以下定义依赖 [type_system_foundations](10_type_system_foundations.md) 与 [trait_system_formalization](10_trait_system_formalization.md) 中的基础概念：
 
 | 前置概念 | 来源 | 在本文档中的使用 |
 | :--- | :--- | :--- |
@@ -388,13 +388,13 @@ $$\text{TypeFamily} : \text{Param} \to \text{Type}$$
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
-**Axiom AT1**：GAT 类型推导规则与 [type_system_foundations](./10_type_system_foundations.md) 定理 4、5 一致；约束违反则编译错误。
+**Axiom AT1**：GAT 类型推导规则与 [type_system_foundations](10_type_system_foundations.md) 定理 4、5 一致；约束违反则编译错误。
 
 **Axiom AT2**：const 泛型参数必须为编译时常量；运行时常量不能作为类型参数；违反则编译错误。
 
 **定理 AT-T1 (GAT 类型安全)**：若 GAT $A[P]$ 的类型推导正确，则 GAT 的使用是类型安全的。
 
-*证明*：由 Def 1.1–1.3；GAT 约束 $A[P] : B[P]$ 在类型推导时检查；[type_system_foundations](./10_type_system_foundations.md) 定理 4、5 保证推导正确性；违反则编译错误。依 Axiom AT1。∎
+*证明*：由 Def 1.1–1.3；GAT 约束 $A[P] : B[P]$ 在类型推导时检查；[type_system_foundations](10_type_system_foundations.md) 定理 4、5 保证推导正确性；违反则编译错误。依 Axiom AT1。∎
 
 **定理 AT-T2 (const 泛型类型安全)**：若 const 泛型类型 $T[N]$ 的 const 参数 $N$ 为编译时常量，则类型安全。
 
@@ -410,7 +410,7 @@ $$\text{TypeFamily} : \text{Param} \to \text{Type}$$
 
 *证明*：由 Def 3.1–3.2；依赖仅限于编译时常量；类型检查在编译时完成；由 AT-T1、AT-T2 组合。∎
 
-**引理 AT-L1 (GAT 与 trait 衔接)**：GAT 约束 $A[P] : B[P]$ 在 `impl` 解析时检查；满足 [trait_system_formalization](./10_trait_system_formalization.md) 解析正确性。
+**引理 AT-L1 (GAT 与 trait 衔接)**：GAT 约束 $A[P] : B[P]$ 在 `impl` 解析时检查；满足 [trait_system_formalization](10_trait_system_formalization.md) 解析正确性。
 
 *证明*：由 Def 1.3；GAT 为 trait 关联类型扩展；impl 解析在类型检查阶段；约束违反则编译错误。∎
 
@@ -825,7 +825,7 @@ fn use_family<F: Family>() -> F::Member<i32> {
 
 - GATs RFC
 - const 泛型 RFC
-- [高级类型与 GATs（本篇）](./10_advanced_types.md)
+- [高级类型与 GATs（本篇）](10_advanced_types.md)
 
 ### 相关代码
 
@@ -887,7 +887,7 @@ fn use_family<F: Family>() -> F::Member<i32> {
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
-GATs 扩展 Trait 的关联类型为类型级函数；const 泛型参与类型与值层面的推导；与 [type_system_foundations](./10_type_system_foundations.md)、[trait_system_formalization](./10_trait_system_formalization.md) 在扩展后的类型规则下一致。
+GATs 扩展 Trait 的关联类型为类型级函数；const 泛型参与类型与值层面的推导；与 [type_system_foundations](10_type_system_foundations.md)、[trait_system_formalization](10_trait_system_formalization.md) 在扩展后的类型规则下一致。
 
 ### 实际应用案例
 

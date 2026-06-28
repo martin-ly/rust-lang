@@ -18,7 +18,7 @@
 
 > **[来源: Rust Official Docs]**
 
-- [06_ecosystem/deep_dives/](../deep_dives/) - 框架使用
+- [06_ecosystem/deep_dives/](../deep_dives) - 框架使用
 - [06_ecosystem/cargo_basics.md](../01_cargo_basics.md) - Cargo 构建配置
 
 ---

@@ -15,47 +15,47 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Research Notes: 形式化方法主索引](#research-notes-形式化方法主索引)
-  - [📑 目录](#-目录)
-  - [快速导航](#快速导航)
-    - [核心形式化文档](#核心形式化文档)
-    - [思维表征文档](#思维表征文档)
-    - [决策树文档](#决策树文档)
-    - [应用树文档](#应用树文档)
-  - [文档统计](#文档统计)
-    - [按类型统计](#按类型统计)
-    - [完成度统计](#完成度统计)
-  - [概念覆盖地图](#概念覆盖地图)
-    - [理论基础层](#理论基础层)
-    - [工程应用层](#工程应用层)
-  - [证明索引](#证明索引)
-    - [L3机器证明 (Coq)](#l3机器证明-coq)
-    - [L2完整证明 (Markdown)](#l2完整证明-markdown)
-  - [思维表征索引](#思维表征索引)
-    - [思维导图 (11/15)](#思维导图-1115)
-    - [矩阵系统 (9/12)](#矩阵系统-912)
-    - [决策树 (9/10)](#决策树-910)
-    - [应用树 (8/8) ✅ 完成](#应用树-88--完成)
-  - [使用指南](#使用指南)
-    - [研究者路径](#研究者路径)
-    - [工程师路径](#工程师路径)
-  - [质量保证](#质量保证)
-    - [文档标准检查清单](#文档标准检查清单)
-    - [代码标准检查清单](#代码标准检查清单)
-  - [贡献指南](#贡献指南)
-    - [如何贡献](#如何贡献)
-    - [贡献流程](#贡献流程)
-  - [变更日志](#变更日志)
-  - [附录：思维导图全貌](#附录思维导图全貌)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [Research Notes: 形式化方法主索引](.#research-notes-形式化方法主索引)
+  - [📑 目录](.#-目录)
+  - [快速导航](.#快速导航)
+    - [核心形式化文档](.#核心形式化文档)
+    - [思维表征文档](.#思维表征文档)
+    - [决策树文档](.#决策树文档)
+    - [应用树文档](.#应用树文档)
+  - [文档统计](.#文档统计)
+    - [按类型统计](.#按类型统计)
+    - [完成度统计](.#完成度统计)
+  - [概念覆盖地图](.#概念覆盖地图)
+    - [理论基础层](.#理论基础层)
+    - [工程应用层](.#工程应用层)
+  - [证明索引](.#证明索引)
+    - [L3机器证明 (Coq)](.#l3机器证明-coq)
+    - [L2完整证明 (Markdown)](.#l2完整证明-markdown)
+  - [思维表征索引](.#思维表征索引)
+    - [思维导图 (11/15)](.#思维导图-1115)
+    - [矩阵系统 (9/12)](.#矩阵系统-912)
+    - [决策树 (9/10)](.#决策树-910)
+    - [应用树 (8/8) ✅ 完成](.#应用树-88--完成)
+  - [使用指南](.#使用指南)
+    - [研究者路径](.#研究者路径)
+    - [工程师路径](.#工程师路径)
+  - [质量保证](.#质量保证)
+    - [文档标准检查清单](.#文档标准检查清单)
+    - [代码标准检查清单](.#代码标准检查清单)
+  - [贡献指南](.#贡献指南)
+    - [如何贡献](.#如何贡献)
+    - [贡献流程](.#贡献流程)
+  - [变更日志](.#变更日志)
+  - [附录：思维导图全貌](.#附录思维导图全貌)
+  - [🆕 Rust 1.94 更新](.#-rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 快速导航
 >
@@ -69,11 +69,11 @@
 
 | 文档 | 类型 | 描述 | 状态 |
 | :--- | :--- | :--- | :--- |
-| [OWNERSHIP_UNIQUENESS.v](./coq_skeleton/OWNERSHIP_UNIQUENESS.v) | Coq | 所有权唯一性定理 T-OW2 | ✅ L3骨架 |
-| [BORROW_DATARACE_FREE.v](./coq_skeleton/BORROW_DATARACE_FREE.v) | Coq | 数据竞争自由定理 T-BR1 | ✅ L3骨架 |
-| [TYPE_SAFETY.v](./coq_skeleton/TYPE_SAFETY.v) | Coq | 类型安全定理 T-TY3 | ✅ L3骨架 |
-| [DISTRIBUTED_PATTERNS.v](./coq_skeleton/DISTRIBUTED_PATTERNS.v) | Coq | 分布式模式形式化 | 🆕 完整 |
-| [WORKFLOW_FORMALIZATION.v](./coq_skeleton/WORKFLOW_FORMALIZATION.v) | Coq | 工作流形式化 | 🆕 完整 |
+| [OWNERSHIP_UNIQUENESS.v](coq_skeleton/OWNERSHIP_UNIQUENESS.v) | Coq | 所有权唯一性定理 T-OW2 | ✅ L3骨架 |
+| [BORROW_DATARACE_FREE.v](coq_skeleton/BORROW_DATARACE_FREE.v) | Coq | 数据竞争自由定理 T-BR1 | ✅ L3骨架 |
+| [TYPE_SAFETY.v](coq_skeleton/TYPE_SAFETY.v) | Coq | 类型安全定理 T-TY3 | ✅ L3骨架 |
+| [DISTRIBUTED_PATTERNS.v](coq_skeleton/DISTRIBUTED_PATTERNS.v) | Coq | 分布式模式形式化 | 🆕 完整 |
+| [WORKFLOW_FORMALIZATION.v](coq_skeleton/WORKFLOW_FORMALIZATION.v) | Coq | 工作流形式化 | 🆕 完整 |
 
 ### 思维表征文档
 
@@ -83,11 +83,11 @@
 
 | 文档 | 类型 | 描述 | 状态 |
 | :--- | :--- | :--- | :--- |
-| [PROOF_TECHNIQUES_MINDMAP](./10_proof_techniques_mindmap.md) | 导图 | 证明技术概念族 | 🆕 完整 |
-| [DISTRIBUTED_CONCEPT_MINDMAP](./10_distributed_concept_mindmap.md) | 导图 | 分布式模式概念族 | 🆕 完整 |
-| [WORKFLOW_CONCEPT_MINDMAP](./10_workflow_concept_mindmap.md) | 导图 | 工作流概念族 | 🆕 完整 |
-| [CONCEPT_AXIOM_THEOREM_MATRIX](./10_concept_axiom_theorem_matrix.md) | 矩阵 | 五维矩阵 | 🆕 完整 |
-| [VERIFICATION_TOOLS_MATRIX](./10_verification_tools_matrix.md) | 矩阵 | 验证工具对比 | 🆕 完整 |
+| [PROOF_TECHNIQUES_MINDMAP](10_proof_techniques_mindmap.md) | 导图 | 证明技术概念族 | 🆕 完整 |
+| [DISTRIBUTED_CONCEPT_MINDMAP](10_distributed_concept_mindmap.md) | 导图 | 分布式模式概念族 | 🆕 完整 |
+| [WORKFLOW_CONCEPT_MINDMAP](10_workflow_concept_mindmap.md) | 导图 | 工作流概念族 | 🆕 完整 |
+| [CONCEPT_AXIOM_THEOREM_MATRIX](10_concept_axiom_theorem_matrix.md) | 矩阵 | 五维矩阵 | 🆕 完整 |
+| [VERIFICATION_TOOLS_MATRIX](10_verification_tools_matrix.md) | 矩阵 | 验证工具对比 | 🆕 完整 |
 | DESIGN_PATTERNS_BOUNDARY_MATRIX | 矩阵 | 设计模式边界 | 🆕 完整 |
 
 ### 决策树文档
@@ -98,10 +98,10 @@
 
 | 文档 | 描述 | 状态 |
 | :--- | :--- | :--- |
-| [DISTRIBUTED_ARCHITECTURE_DECISION_TREE](./10_distributed_architecture_decision_tree.md) | 分布式架构选型 | 🆕 完整 |
-| [ASYNC_RUNTIME_DECISION_TREE](./formal_methods/10_async_runtime_decision_tree.md) | 异步运行时选型 | 🆕 完整 |
-| [ERROR_HANDLING_DECISION_TREE](./formal_methods/10_error_handling_decision_tree.md) | 错误处理策略 | 🆕 完整 |
-| [TESTING_STRATEGY_DECISION_TREE](./formal_methods/10_testing_strategy_decision_tree.md) | 测试策略 | 🆕 完整 |
+| [DISTRIBUTED_ARCHITECTURE_DECISION_TREE](10_distributed_architecture_decision_tree.md) | 分布式架构选型 | 🆕 完整 |
+| [ASYNC_RUNTIME_DECISION_TREE](formal_methods/10_async_runtime_decision_tree.md) | 异步运行时选型 | 🆕 完整 |
+| [ERROR_HANDLING_DECISION_TREE](formal_methods/10_error_handling_decision_tree.md) | 错误处理策略 | 🆕 完整 |
+| [TESTING_STRATEGY_DECISION_TREE](formal_methods/10_testing_strategy_decision_tree.md) | 测试策略 | 🆕 完整 |
 
 ### 应用树文档
 
@@ -111,7 +111,7 @@
 
 | 文档 | 描述 | 状态 |
 | :--- | :--- | :--- |
-| [APPLICATION_TREES](./10_application_trees.md) | 8大应用场景映射树 | 🆕 完整 |
+| [APPLICATION_TREES](10_application_trees.md) | 8大应用场景映射树 | 🆕 完整 |
 
 ---
 
@@ -479,7 +479,7 @@ TODO    和相关定义    命名规范  Rust测试  填写描述
 - Cargo.toml 多行内联表
 - 配置文件 include 支持
 
-详见 [Rust 1.94 研究更新](./10_rust_194_research_update.md)
+详见 [Rust 1.94 研究更新](10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 
@@ -542,7 +542,7 @@ TODO    和相关定义    命名规范  Rust测试  填写描述
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

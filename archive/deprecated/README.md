@@ -10,10 +10,10 @@
 
 | 路径 | 说明 |
 | :--- | :--- |
-| [coq_skeleton/](./coq_skeleton/) | Coq .v 证明骨架（T-OW2、T-BR1、T-TY3） |
-| [AENEAS_INTEGRATION_PLAN.md](./AENEAS_INTEGRATION_PLAN.md) | Aeneas 对接调研 |
-| [COQ_OF_RUST_INTEGRATION_PLAN.md](./COQ_OF_RUST_INTEGRATION_PLAN.md) | coq-of-rust 对接调研 |
-| [COQ_ISABELLE_PROOF_SCAFFOLDING.md](./COQ_ISABELLE_PROOF_SCAFFOLDING.md) | Coq/Isabelle L3 实施指南 |
+| [coq_skeleton/](coq_skeleton) | Coq .v 证明骨架（T-OW2、T-BR1、T-TY3） |
+| [AENEAS_INTEGRATION_PLAN.md](AENEAS_INTEGRATION_PLAN.md) | Aeneas 对接调研 |
+| [COQ_OF_RUST_INTEGRATION_PLAN.md](COQ_OF_RUST_INTEGRATION_PLAN.md) | coq-of-rust 对接调研 |
+| [COQ_ISABELLE_PROOF_SCAFFOLDING.md](COQ_ISABELLE_PROOF_SCAFFOLDING.md) | Coq/Isabelle L3 实施指南 |
 
 ---
 

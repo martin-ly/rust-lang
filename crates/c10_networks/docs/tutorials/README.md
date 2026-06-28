@@ -95,7 +95,7 @@
 
 **目标**: 成为网络编程专家，能够解决复杂问题
 
-1. **理论深入**: 阅读 [../theory/](../theory/) 所有文档
+1. **理论深入**: 阅读 [../theory/](../theory) 所有文档
 2. **源码分析**: 深入研究核心实现
 3. **创新实践**: 改进现有实现或设计新协议
 4. **知识分享**: 撰写技术博客或教程
@@ -106,8 +106,8 @@
 
 1. **顺序学习**: 按照学习路径顺序进行
 2. **动手实践**: 每学一个概念都要写代码验证
-3. **查阅参考**: 遇到问题查看 [../references/](../references/)
-4. **深入理解**: 想要深入理解原理查看 [../theory/](../theory/)
+3. **查阅参考**: 遇到问题查看 [../references/](../references)
+4. **深入理解**: 想要深入理解原理查看 [../theory/](../theory)
 
 ### 示例代码位置
 
@@ -129,9 +129,9 @@ cargo run --example dns_lookup
 
 ### 配套资源
 
-- **实践指南**: [../guides/](../guides/) - 详细的使用指南
+- **实践指南**: [../guides/](../guides) - 详细的使用指南
 - **API参考**: [../references/API_DOCUMENTATION.md](../references/API_DOCUMENTATION.md)
-- **理论基础**: [../theory/](../theory/) - 深入理解原理
+- **理论基础**: [../theory/](../theory) - 深入理解原理
 
 ## 🧪 练习项目建议
 
@@ -159,7 +159,7 @@ cargo run --example dns_lookup
 
 1. **查看FAQ**: [../references/FAQ.md](../references/FAQ.md)
 2. **查看术语表**: [../references/Glossary.md](../references/Glossary.md)
-3. **查看实践指南**: [../guides/](../guides/)
+3. **查看实践指南**: [../guides/](../guides)
 4. **提交Issue**: GitHub Issues
 
 ---

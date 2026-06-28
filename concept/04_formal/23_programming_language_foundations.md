@@ -10,7 +10,7 @@
 >
 > **Bloom 层级**: 评价 → 创造
 > **定位**: 从通用程序语言（PL）理论视角审视 Rust 的设计根基，建立从 λ 演算到 Rust 类型系统（Type System）的概念桥梁。
-> **前置概念**: [Type Theory](./02_type_theory.md) · [Linear Logic](./01_linear_logic.md) · [Ownership Formal](./03_ownership_formal.md)
+> **前置概念**: [Type Theory](02_type_theory.md) · [Linear Logic](01_linear_logic.md) · [Ownership Formal](03_ownership_formal.md)
 > **后置延伸**: [Effects System](../07_future/04_effects_system.md) · [Evolution](../07_future/03_evolution.md)
 
 >

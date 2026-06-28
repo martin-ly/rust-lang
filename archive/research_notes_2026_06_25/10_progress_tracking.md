@@ -9,66 +9,66 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [研究进展跟踪](#研究进展跟踪)
-  - [📑 目录](#-目录)
-  - [🎯 跟踪概览 {#-跟踪概览}](#-跟踪概览--跟踪概览)
-  - [📚 形式化方法研究进展 {#-形式化方法研究进展}](#-形式化方法研究进展--形式化方法研究进展)
-    - [所有权模型形式化](#所有权模型形式化)
-      - [已完成 ✅ {#已完成-}](#已完成--已完成-)
-    - [借用检查器证明](#借用检查器证明)
-      - [已完成 ✅ {#已完成--1}](#已完成--已完成--1)
-    - [异步状态机形式化](#异步状态机形式化)
-      - [已完成 ✅ {#已完成--2}](#已完成--已完成--2)
-    - [生命周期形式化](#生命周期形式化)
-      - [已完成 ✅ {#已完成--3}](#已完成--已完成--3)
-    - [Pin 和自引用类型形式化](#pin-和自引用类型形式化)
-      - [已完成 ✅ {#已完成--4}](#已完成--已完成--4)
-  - [🔬 类型理论研究进展 {#-类型理论研究进展}](#-类型理论研究进展--类型理论研究进展)
-    - [类型系统基础](#类型系统基础)
-      - [已完成 ✅ {#已完成--5}](#已完成--已完成--5)
-    - [Trait 系统形式化](#trait-系统形式化)
-      - [已完成 ✅ {#已完成--6}](#已完成--已完成--6)
-    - [生命周期形式化（类型理论）](#生命周期形式化类型理论)
-      - [已完成 ✅ {#已完成--7}](#已完成--已完成--7)
-    - [高级类型特性](#高级类型特性)
-      - [已完成 ✅ {#已完成--8}](#已完成--已完成--8)
-    - [型变理论](#型变理论)
-      - [已完成 ✅ {#已完成--9}](#已完成--已完成--9)
-  - [⚡ 实验研究进展 {#-实验研究进展}](#-实验研究进展--实验研究进展)
-    - [性能基准测试](#性能基准测试)
-      - [已完成 ✅ {#已完成--10}](#已完成--已完成--10)
-    - [内存分析](#内存分析)
-      - [已完成 ✅ {#已完成--11}](#已完成--已完成--11)
-    - [编译器优化](#编译器优化)
-      - [已完成 ✅ {#已完成--12}](#已完成--已完成--12)
-    - [并发性能研究](#并发性能研究)
-      - [已完成 ✅ {#已完成--13}](#已完成--已完成--13)
-    - [宏展开性能分析](#宏展开性能分析)
-      - [已完成 ✅ {#已完成--14}](#已完成--已完成--14)
-  - [🌐 综合研究进展 {#-综合研究进展}](#-综合研究进展--综合研究进展)
-    - [实际应用案例研究](#实际应用案例研究)
-      - [已完成 ✅ {#已完成--15}](#已完成--已完成--15)
-    - [研究方法论](#研究方法论)
-      - [已完成 ✅ {#已完成--16}](#已完成--已完成--16)
-  - [📈 总体进展统计 {#-总体进展统计}](#-总体进展统计--总体进展统计)
-    - [按研究领域统计](#按研究领域统计)
-    - [按优先级统计](#按优先级统计)
-    - [按任务状态统计](#按任务状态统计)
-  - [🎯 下一步计划 {#-下一步计划}](#-下一步计划--下一步计划)
-    - [短期目标 (1-2 周)](#短期目标-1-2-周)
-    - [中期目标 (1-3 个月)](#中期目标-1-3-个月)
-    - [长期目标 (3-6 个月)](#长期目标-3-6-个月)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
-    - [核心文档](#核心文档)
-    - [贡献和质量](#贡献和质量)
-    - [工具和资源](#工具和资源)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [研究进展跟踪](.#研究进展跟踪)
+  - [📑 目录](.#-目录)
+  - [🎯 跟踪概览 {#-跟踪概览}](.#-跟踪概览--跟踪概览)
+  - [📚 形式化方法研究进展 {#-形式化方法研究进展}](.#-形式化方法研究进展--形式化方法研究进展)
+    - [所有权模型形式化](.#所有权模型形式化)
+      - [已完成 ✅ {#已完成-}](.#已完成--已完成-)
+    - [借用检查器证明](.#借用检查器证明)
+      - [已完成 ✅ {#已完成--1}](.#已完成--已完成--1)
+    - [异步状态机形式化](.#异步状态机形式化)
+      - [已完成 ✅ {#已完成--2}](.#已完成--已完成--2)
+    - [生命周期形式化](.#生命周期形式化)
+      - [已完成 ✅ {#已完成--3}](.#已完成--已完成--3)
+    - [Pin 和自引用类型形式化](.#pin-和自引用类型形式化)
+      - [已完成 ✅ {#已完成--4}](.#已完成--已完成--4)
+  - [🔬 类型理论研究进展 {#-类型理论研究进展}](.#-类型理论研究进展--类型理论研究进展)
+    - [类型系统基础](.#类型系统基础)
+      - [已完成 ✅ {#已完成--5}](.#已完成--已完成--5)
+    - [Trait 系统形式化](.#trait-系统形式化)
+      - [已完成 ✅ {#已完成--6}](.#已完成--已完成--6)
+    - [生命周期形式化（类型理论）](.#生命周期形式化类型理论)
+      - [已完成 ✅ {#已完成--7}](.#已完成--已完成--7)
+    - [高级类型特性](.#高级类型特性)
+      - [已完成 ✅ {#已完成--8}](.#已完成--已完成--8)
+    - [型变理论](.#型变理论)
+      - [已完成 ✅ {#已完成--9}](.#已完成--已完成--9)
+  - [⚡ 实验研究进展 {#-实验研究进展}](.#-实验研究进展--实验研究进展)
+    - [性能基准测试](.#性能基准测试)
+      - [已完成 ✅ {#已完成--10}](.#已完成--已完成--10)
+    - [内存分析](.#内存分析)
+      - [已完成 ✅ {#已完成--11}](.#已完成--已完成--11)
+    - [编译器优化](.#编译器优化)
+      - [已完成 ✅ {#已完成--12}](.#已完成--已完成--12)
+    - [并发性能研究](.#并发性能研究)
+      - [已完成 ✅ {#已完成--13}](.#已完成--已完成--13)
+    - [宏展开性能分析](.#宏展开性能分析)
+      - [已完成 ✅ {#已完成--14}](.#已完成--已完成--14)
+  - [🌐 综合研究进展 {#-综合研究进展}](.#-综合研究进展--综合研究进展)
+    - [实际应用案例研究](.#实际应用案例研究)
+      - [已完成 ✅ {#已完成--15}](.#已完成--已完成--15)
+    - [研究方法论](.#研究方法论)
+      - [已完成 ✅ {#已完成--16}](.#已完成--已完成--16)
+  - [📈 总体进展统计 {#-总体进展统计}](.#-总体进展统计--总体进展统计)
+    - [按研究领域统计](.#按研究领域统计)
+    - [按优先级统计](.#按优先级统计)
+    - [按任务状态统计](.#按任务状态统计)
+  - [🎯 下一步计划 {#-下一步计划}](.#-下一步计划--下一步计划)
+    - [短期目标 (1-2 周)](.#短期目标-1-2-周)
+    - [中期目标 (1-3 个月)](.#中期目标-1-3-个月)
+    - [长期目标 (3-6 个月)](.#长期目标-3-6-个月)
+  - [🔗 相关资源 {#-相关资源}](.#-相关资源--相关资源)
+    - [核心文档](.#核心文档)
+    - [贡献和质量](.#贡献和质量)
+    - [工具和资源](.#工具和资源)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-28
@@ -102,7 +102,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**文档**: [10_ownership_model.md](./formal_methods/10_ownership_model.md)
+**文档**: [10_ownership_model.md](formal_methods/10_ownership_model.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
 
@@ -127,7 +127,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**文档**: [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)
+**文档**: [10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
 
@@ -151,7 +151,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**文档**: [10_async_state_machine.md](./formal_methods/10_async_state_machine.md)
+**文档**: [10_async_state_machine.md](formal_methods/10_async_state_machine.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
 
@@ -197,7 +197,7 @@
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
-**文档**: [10_pin_self_referential.md](./formal_methods/10_pin_self_referential.md)
+**文档**: [10_pin_self_referential.md](formal_methods/10_pin_self_referential.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
 
@@ -221,7 +221,7 @@
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-**文档**: [10_type_system_foundations.md](./type_theory/10_type_system_foundations.md)
+**文档**: [10_type_system_foundations.md](type_theory/10_type_system_foundations.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
 
@@ -241,7 +241,7 @@
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
-**文档**: [10_trait_system_formalization.md](./type_theory/10_trait_system_formalization.md)
+**文档**: [10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
 
@@ -268,7 +268,7 @@
 
 > **来源: [ACM](https://dl.acm.org/)**
 
-**文档**: [10_lifetime_formalization.md](./type_theory/10_lifetime_formalization.md)
+**文档**: [10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
 
@@ -288,7 +288,7 @@
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
-**文档**: [10_advanced_types.md](./type_theory/10_advanced_types.md)
+**文档**: [10_advanced_types.md](type_theory/10_advanced_types.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
 
@@ -308,7 +308,7 @@
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-**文档**: [10_variance_theory.md](./type_theory/10_variance_theory.md)
+**文档**: [10_variance_theory.md](type_theory/10_variance_theory.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
 
@@ -332,7 +332,7 @@
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-**文档**: [10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md)
+**文档**: [10_performance_benchmarks.md](experiments/10_performance_benchmarks.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
 
@@ -355,7 +355,7 @@
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-**文档**: [10_memory_analysis.md](./experiments/10_memory_analysis.md)
+**文档**: [10_memory_analysis.md](experiments/10_memory_analysis.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
 
@@ -376,7 +376,7 @@
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-**文档**: [10_compiler_optimizations.md](./experiments/10_compiler_optimizations.md)
+**文档**: [10_compiler_optimizations.md](experiments/10_compiler_optimizations.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
 
@@ -397,7 +397,7 @@
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-**文档**: [10_concurrency_performance.md](./experiments/10_concurrency_performance.md)
+**文档**: [10_concurrency_performance.md](experiments/10_concurrency_performance.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
 
@@ -418,7 +418,7 @@
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-**文档**: [10_macro_expansion_performance.md](./experiments/10_macro_expansion_performance.md)
+**文档**: [10_macro_expansion_performance.md](experiments/10_macro_expansion_performance.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
 
@@ -443,7 +443,7 @@
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-**文档**: [10_practical_applications.md](./10_practical_applications.md)
+**文档**: [10_practical_applications.md](10_practical_applications.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
 
@@ -464,7 +464,7 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-**文档**: [10_research_methodology.md](./10_research_methodology.md)
+**文档**: [10_research_methodology.md](10_research_methodology.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
 
@@ -553,27 +553,27 @@
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [研究笔记主索引](./README.md)
-- [研究路线图](./10_research_roadmap.md)
-- [系统总结](./10_system_summary.md)
-- [快速参考](../../archive/research_notes_2026_06_25/10_quick_reference.md)
+- [研究笔记主索引](README.md)
+- [研究路线图](10_research_roadmap.md)
+- [系统总结](10_system_summary.md)
+- [快速参考](10_quick_reference.md)
 
 ### 贡献和质量
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [贡献指南](./10_contributing.md)
-- [质量检查清单](./10_quality_checklist.md)
-- [研究笔记模板](./10_template.md)
+- [贡献指南](10_contributing.md)
+- [质量检查清单](10_quality_checklist.md)
+- [研究笔记模板](10_template.md)
 
 ### 工具和资源
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [研究工具使用指南](./10_tools_guide.md)
-- [形式化工具验证指南](../../archive/research_notes_2026_06_25/10_formal_verification_guide.md)（✅ 指南 100% 完成）
-- [研究方法论](./10_research_methodology.md)
-- [实际应用案例](./10_practical_applications.md)
+- [研究工具使用指南](10_tools_guide.md)
+- [形式化工具验证指南](10_formal_verification_guide.md)（✅ 指南 100% 完成）
+- [研究方法论](10_research_methodology.md)
+- [实际应用案例](10_practical_applications.md)
 
 ---
 
@@ -649,7 +649,7 @@
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

@@ -10,7 +10,7 @@
 > **层级**: L4 形式化理论 → L6 工业实践
 > **A/S/P 标记**: **P** — Procedure
 > **双维定位**: P×Eva — 评估验证工具的 ROI 和适用性
-> **前置概念**: [RustBelt](./04_rustbelt.md) · [Ownership Formalization](./03_ownership_formal.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
+> **前置概念**: [RustBelt](04_rustbelt.md) · [Ownership Formalization](03_ownership_formal.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
 > **后置概念**: [Formal Methods](../07_future/02_formal_methods.md)
 > **主要来源**: [AWS Kani] · [Microsoft Verus] · [Creusot](https://creusot.github.io/creusot/) · [Miri Book](https://github.com/rust-lang/miri) · [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) · [Aeneas](https://github.com/AeneasVerif/aeneas) · [RefinedRust] · [a-mir-formality]
 > **Bloom 层级**: 评价 → 应用
@@ -31,71 +31,71 @@
 
 ## 📑 目录
 
-- [Verification Toolchain Selection Guide（验证工具链选择指南）](#verification-toolchain-selection-guide验证工具链选择指南)
-  - [📑 目录](#-目录)
-  - [零、TL;DR —— 30 秒选型](#零tldr--30-秒选型)
-  - [一、工具链全景矩阵（选型版）](#一工具链全景矩阵选型版)
-    - [1.1 八维选型矩阵](#11-八维选型矩阵)
-    - [1.2 覆盖强度光谱](#12-覆盖强度光谱)
-    - [1.3 验证工具层次类图](#13-验证工具层次类图)
-  - [二、Wikipedia 概念对齐](#二wikipedia-概念对齐)
-    - [2.1 验证工具 ↔ 形式化基础映射图](#21-验证工具--形式化基础映射图)
-  - [三、a-mir-formality：Rust 类型系统规范](#三a-mir-formalityrust-类型系统规范)
-    - [3.1 为什么需要类型系统规范？](#31-为什么需要类型系统规范)
-    - [3.2 技术架构](#32-技术架构)
-    - [3.3 与验证工具链的关系](#33-与验证工具链的关系)
-    - [3.4 当前状态（2026-05）](#34-当前状态2026-05)
-  - [四、ROI 分析框架](#四roi-分析框架)
-    - [4.1 ROI 公式](#41-roi-公式)
-    - [4.2 场景化 ROI 评估](#42-场景化-roi-评估)
-      - [场景 A: 安全关键网络协议（如 TLS/QUIC 实现）](#场景-a-安全关键网络协议如-tlsquic-实现)
-      - [场景 B: 操作系统内核页表管理](#场景-b-操作系统内核页表管理)
-      - [场景 C: 日常 Web 服务业务逻辑](#场景-c-日常-web-服务业务逻辑)
-      - [场景 D: 新并发算法研究](#场景-d-新并发算法研究)
-    - [4.3 决策阈值](#43-决策阈值)
-  - [五、分层验证策略](#五分层验证策略)
-    - [5.1 五层防御模型](#51-五层防御模型)
-    - [5.2 组合策略：AWS s2n-quic 实践](#52-组合策略aws-s2n-quic-实践)
-    - [5.3 分层验证流程时序图](#53-分层验证流程时序图)
-  - [六、工具选择决策树](#六工具选择决策树)
-  - [七、2026 工具状态更新](#七2026-工具状态更新)
-  - [八、工业案例速查](#八工业案例速查)
-  - [九、常见误区与反模式](#九常见误区与反模式)
-    - [误区一："验证工具可以互相替代"](#误区一验证工具可以互相替代)
-    - [误区二："形式化验证是一次性投入"](#误区二形式化验证是一次性投入)
-    - [误区三："零标注工具 = 零成本"](#误区三零标注工具--零成本)
-  - [十、相关概念链接](#十相关概念链接)
-  - [七、验证工具深度原理分析](#七验证工具深度原理分析)
-    - [7.1 Prusti：基于 Viper 的分离逻辑验证](#71-prusti基于-viper-的分离逻辑验证)
-    - [7.2 Kani：基于 CBMC 的有界模型检测](#72-kani基于-cbmc-的有界模型检测)
-    - [7.3 Miri：基于 Tree Borrows 的动态 UB 检测](#73-miri基于-tree-borrows-的动态-ub-检测)
-    - [7.3 Verus：基于 Z3 的演绎验证](#73-verus基于-z3-的演绎验证)
-    - [7.4 Creusot：基于 Why3 的契约验证](#74-creusot基于-why3-的契约验证)
-    - [7.5 Aeneas：基于借用的函数式翻译](#75-aeneas基于借用的函数式翻译)
-    - [7.6 验证工具对比矩阵（深度版）](#76-验证工具对比矩阵深度版)
-    - [7.7 RefinedRust：基于 Liquid Types 的自动分离逻辑验证](#77-refinedrust基于-liquid-types-的自动分离逻辑验证)
-    - [7.8 Rustlantis：随机程序生成的编译器差分测试](#78-rustlantis随机程序生成的编译器差分测试)
-    - [7.9 rustc Bug 实证研究：Rust 特有编译器缺陷分析（OOPSLA 2025）](#79-rustc-bug-实证研究rust-特有编译器缺陷分析oopsla-2025)
-    - [7.11 Rusted Types：Rust 类型混淆漏洞的静态检测（ICSE 2026）](#711-rusted-typesrust-类型混淆漏洞的静态检测icse-2026)
-    - [7.10 Ravencheck：Rust 的有效命题推理（SOAP 2026）](#710-ravencheckrust-的有效命题推理soap-2026)
-  - [八、验证边界：编译错误示例](#八验证边界编译错误示例)
-    - [编译错误 1：Safe Rust 中直接解引用裸指针](#编译错误-1safe-rust-中直接解引用裸指针)
-    - [编译错误 2：`unsafe impl Send` 错误应用](#编译错误-2unsafe-impl-send-错误应用)
-    - [编译错误 3：`const fn` 中调用非 const 操作](#编译错误-3const-fn-中调用非-const-操作)
-    - [编译错误 4：生命周期不匹配导致悬垂引用](#编译错误-4生命周期不匹配导致悬垂引用)
-    - [编译错误 5：`move` 闭包捕获引用后外部继续使用](#编译错误-5move-闭包捕获引用后外部继续使用)
-  - [权威来源索引](#权威来源索引)
-    - [10.3 边界测试：Kani 的循环展开限制与验证失败（验证失败/超时）](#103-边界测试kani-的循环展开限制与验证失败验证失败超时)
-    - [10.4 边界测试：Kani 的假设与 Rust 代码的验证边界（验证失败）](#104-边界测试kani-的假设与-rust-代码的验证边界验证失败)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：验证工具分类（理解层）](#测验-1验证工具分类理解层)
-    - [测验 2：Miri 的检测范围（应用层）](#测验-2miri-的检测范围应用层)
-    - [测验 3：验证 ROI 决策（评价层）](#测验-3验证-roi-决策评价层)
-    - [测验 4：a-mir-formality 的作用（理解层）](#测验-4a-mir-formality-的作用理解层)
-    - [测验 5：验证工具互斥性（分析层）](#测验-5验证工具互斥性分析层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Verification Toolchain Selection Guide（验证工具链选择指南）](.#verification-toolchain-selection-guide验证工具链选择指南)
+  - [📑 目录](.#-目录)
+  - [零、TL;DR —— 30 秒选型](.#零tldr--30-秒选型)
+  - [一、工具链全景矩阵（选型版）](.#一工具链全景矩阵选型版)
+    - [1.1 八维选型矩阵](.#11-八维选型矩阵)
+    - [1.2 覆盖强度光谱](.#12-覆盖强度光谱)
+    - [1.3 验证工具层次类图](.#13-验证工具层次类图)
+  - [二、Wikipedia 概念对齐](.#二wikipedia-概念对齐)
+    - [2.1 验证工具 ↔ 形式化基础映射图](.#21-验证工具--形式化基础映射图)
+  - [三、a-mir-formality：Rust 类型系统规范](.#三a-mir-formalityrust-类型系统规范)
+    - [3.1 为什么需要类型系统规范？](.#31-为什么需要类型系统规范)
+    - [3.2 技术架构](.#32-技术架构)
+    - [3.3 与验证工具链的关系](.#33-与验证工具链的关系)
+    - [3.4 当前状态（2026-05）](.#34-当前状态2026-05)
+  - [四、ROI 分析框架](.#四roi-分析框架)
+    - [4.1 ROI 公式](.#41-roi-公式)
+    - [4.2 场景化 ROI 评估](.#42-场景化-roi-评估)
+      - [场景 A: 安全关键网络协议（如 TLS/QUIC 实现）](.#场景-a-安全关键网络协议如-tlsquic-实现)
+      - [场景 B: 操作系统内核页表管理](.#场景-b-操作系统内核页表管理)
+      - [场景 C: 日常 Web 服务业务逻辑](.#场景-c-日常-web-服务业务逻辑)
+      - [场景 D: 新并发算法研究](.#场景-d-新并发算法研究)
+    - [4.3 决策阈值](.#43-决策阈值)
+  - [五、分层验证策略](.#五分层验证策略)
+    - [5.1 五层防御模型](.#51-五层防御模型)
+    - [5.2 组合策略：AWS s2n-quic 实践](.#52-组合策略aws-s2n-quic-实践)
+    - [5.3 分层验证流程时序图](.#53-分层验证流程时序图)
+  - [六、工具选择决策树](.#六工具选择决策树)
+  - [七、2026 工具状态更新](.#七2026-工具状态更新)
+  - [八、工业案例速查](.#八工业案例速查)
+  - [九、常见误区与反模式](.#九常见误区与反模式)
+    - [误区一："验证工具可以互相替代"](.#误区一验证工具可以互相替代)
+    - [误区二："形式化验证是一次性投入"](.#误区二形式化验证是一次性投入)
+    - [误区三："零标注工具 = 零成本"](.#误区三零标注工具--零成本)
+  - [十、相关概念链接](.#十相关概念链接)
+  - [七、验证工具深度原理分析](.#七验证工具深度原理分析)
+    - [7.1 Prusti：基于 Viper 的分离逻辑验证](.#71-prusti基于-viper-的分离逻辑验证)
+    - [7.2 Kani：基于 CBMC 的有界模型检测](.#72-kani基于-cbmc-的有界模型检测)
+    - [7.3 Miri：基于 Tree Borrows 的动态 UB 检测](.#73-miri基于-tree-borrows-的动态-ub-检测)
+    - [7.3 Verus：基于 Z3 的演绎验证](.#73-verus基于-z3-的演绎验证)
+    - [7.4 Creusot：基于 Why3 的契约验证](.#74-creusot基于-why3-的契约验证)
+    - [7.5 Aeneas：基于借用的函数式翻译](.#75-aeneas基于借用的函数式翻译)
+    - [7.6 验证工具对比矩阵（深度版）](.#76-验证工具对比矩阵深度版)
+    - [7.7 RefinedRust：基于 Liquid Types 的自动分离逻辑验证](.#77-refinedrust基于-liquid-types-的自动分离逻辑验证)
+    - [7.8 Rustlantis：随机程序生成的编译器差分测试](.#78-rustlantis随机程序生成的编译器差分测试)
+    - [7.9 rustc Bug 实证研究：Rust 特有编译器缺陷分析（OOPSLA 2025）](.#79-rustc-bug-实证研究rust-特有编译器缺陷分析oopsla-2025)
+    - [7.11 Rusted Types：Rust 类型混淆漏洞的静态检测（ICSE 2026）](.#711-rusted-typesrust-类型混淆漏洞的静态检测icse-2026)
+    - [7.10 Ravencheck：Rust 的有效命题推理（SOAP 2026）](.#710-ravencheckrust-的有效命题推理soap-2026)
+  - [八、验证边界：编译错误示例](.#八验证边界编译错误示例)
+    - [编译错误 1：Safe Rust 中直接解引用裸指针](.#编译错误-1safe-rust-中直接解引用裸指针)
+    - [编译错误 2：`unsafe impl Send` 错误应用](.#编译错误-2unsafe-impl-send-错误应用)
+    - [编译错误 3：`const fn` 中调用非 const 操作](.#编译错误-3const-fn-中调用非-const-操作)
+    - [编译错误 4：生命周期不匹配导致悬垂引用](.#编译错误-4生命周期不匹配导致悬垂引用)
+    - [编译错误 5：`move` 闭包捕获引用后外部继续使用](.#编译错误-5move-闭包捕获引用后外部继续使用)
+  - [权威来源索引](.#权威来源索引)
+    - [10.3 边界测试：Kani 的循环展开限制与验证失败（验证失败/超时）](.#103-边界测试kani-的循环展开限制与验证失败验证失败超时)
+    - [10.4 边界测试：Kani 的假设与 Rust 代码的验证边界（验证失败）](.#104-边界测试kani-的假设与-rust-代码的验证边界验证失败)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：验证工具分类（理解层）](.#测验-1验证工具分类理解层)
+    - [测验 2：Miri 的检测范围（应用层）](.#测验-2miri-的检测范围应用层)
+    - [测验 3：验证 ROI 决策（评价层）](.#测验-3验证-roi-决策评价层)
+    - [测验 4：a-mir-formality 的作用（理解层）](.#测验-4a-mir-formality-的作用理解层)
+    - [测验 5：验证工具互斥性（分析层）](.#测验-5验证工具互斥性分析层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ## 零、TL;DR —— 30 秒选型
 >
@@ -120,7 +120,7 @@
 ## 一、工具链全景矩阵（选型版）
 
 > **来源: 各工具官方文档; AWS Kani Blog 2023; SOSP 2024 Verus; PLDI 2024 RefinedRust; [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** 以下矩阵聚焦于"选择维度"，而非工具内部原理。
-> 内部原理见 [`04_rustbelt.md`](./04_rustbelt.md) §7–§8。
+> 内部原理见 [`04_rustbelt.md`](04_rustbelt.md) §7–§8。
 
 ### 1.1 八维选型矩阵
 
@@ -716,10 +716,10 @@ flowchart TD
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| RustBelt 理论基础 | [`./04_rustbelt.md`](./04_rustbelt.md) | 验证工具的数学根基 |
-| 所有权（Ownership）形式化 | [`./03_ownership_formal.md`](./03_ownership_formal.md) | 别名模型与 Miri 检测 |
-| 线性逻辑 | [`./01_linear_logic.md`](./01_linear_logic.md) | 分离逻辑的理论基础 |
-| 类型论 | [`./02_type_theory.md`](./02_type_theory.md) | a-mir-formality 的理论基础 |
+| RustBelt 理论基础 | [`./04_rustbelt.md`](04_rustbelt.md) | 验证工具的数学根基 |
+| 所有权（Ownership）形式化 | [`./03_ownership_formal.md`](03_ownership_formal.md) | 别名模型与 Miri 检测 |
+| 线性逻辑 | [`./01_linear_logic.md`](01_linear_logic.md) | 分离逻辑的理论基础 |
+| 类型论 | [`./02_type_theory.md`](02_type_theory.md) | a-mir-formality 的理论基础 |
 | Unsafe 边界 | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | 验证对象的定义 |
 | 形式化方法工业化 | [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) | L7 演进趋势 |
 | Rust 版本跟踪 | [`../07_future/05_rust_version_tracking.md`](../07_future/05_rust_version_tracking.md) | 工具链对新语言特性的支持状态 |

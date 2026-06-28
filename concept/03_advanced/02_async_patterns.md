@@ -9,7 +9,7 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Ana — 分析异步（Async）模式的状态机变换
 > **定位**: 深入分析 Rust **异步编程的高级模式**——从 Future 状态机、Pin 保证到并发执行和取消传播，揭示 Rust async/await 如何在零运行时（Runtime）开销下实现高效并发。
-> **前置概念**: [Async](./02_async.md) · [Pin](./06_pin_unpin.md) · [Concurrency](./01_concurrency.md)
+> **前置概念**: [Async](02_async.md) · [Pin](06_pin_unpin.md) · [Concurrency](01_concurrency.md)
 > **后置概念**: [Distributed Systems](../06_ecosystem/18_distributed_systems.md) · [Tokio](https://tokio.rs/)
 
 ---
@@ -20,50 +20,50 @@
 > [tokio.rs](https://tokio.rs/) ·
 > [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs//2394-async_await.html) ·
 > [Wikipedia — Futures and Promises](https://en.wikipedia.org/wiki/Futures_and_promises)
-> **对应 Crate**: [`c06_async`](../../crates/c06_async/)
-> **对应练习**: [`exercises/src/async_programming/`](../../exercises/src/async_programming/)
+> **对应 Crate**: [`c06_async`](../../crates/c06_async)
+> **对应练习**: [`exercises/src/async_programming/`](../../exercises/src/async_programming)
 
 ## 📑 目录
 
 - 异步（Async）模式：从 Future 到生产级并发
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 Future 与状态机](#11-future-与状态机)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 Future 与状态机](.#11-future-与状态机)
     - 1.2 Pin 与自引用（Reference）
-    - [1.3 Waker 与执行器](#13-waker-与执行器)
-  - [二、技术细节](#二技术细节)
-    - [2.1 并发执行模式](#21-并发执行模式)
-    - [2.2 取消与超时](#22-取消与超时)
-  - [十、边界测试：异步（Async）模式的编译错误](#十边界测试异步模式的编译错误)
+    - [1.3 Waker 与执行器](.#13-waker-与执行器)
+  - [二、技术细节](.#二技术细节)
+    - [2.1 并发执行模式](.#21-并发执行模式)
+    - [2.2 取消与超时](.#22-取消与超时)
+  - [十、边界测试：异步（Async）模式的编译错误](.#十边界测试异步模式的编译错误)
     - 10.1 边界测试：`Stream` 与 `Future` 的所有权（Ownership）混淆（编译错误）
-    - [10.2 边界测试：取消安全（Cancellation Safety）违反（逻辑错误）](#102-边界测试取消安全cancellation-safety违反逻辑错误)
-    - [2.3 背压与流控制](#23-背压与流控制)
-  - [三、异步模式矩阵](#三异步模式矩阵)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、常见陷阱](#五常见陷阱)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
-  - [权威来源索引](#权威来源索引)
+    - [10.2 边界测试：取消安全（Cancellation Safety）违反（逻辑错误）](.#102-边界测试取消安全cancellation-safety违反逻辑错误)
+    - [2.3 背压与流控制](.#23-背压与流控制)
+  - [三、异步模式矩阵](.#三异步模式矩阵)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、常见陷阱](.#五常见陷阱)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [逆向推理链（Backward Reasoning）](.#逆向推理链backward-reasoning)
+  - [权威来源索引](.#权威来源索引)
     - 10.3 边界测试：取消安全性（Cancellation Safety）的违反（运行时（Runtime）行为）
-    - [10.4 边界测试：`tokio::spawn` 的 `Send` 约束与 `Rc`（编译错误）](#104-边界测试tokiospawn-的-send-约束与-rc编译错误)
-    - [10.5 边界测试：`Stream` 的 `fuse` 与 `select_next_some` 的交互（运行时（Runtime） panic）](#105-边界测试stream-的-fuse-与-select_next_some-的交互运行时-panic)
-    - [10.3 边界测试：`Stream` 的背压与缓冲区溢出（运行时内存增长）](#103-边界测试stream-的背压与缓冲区溢出运行时内存增长)
+    - [10.4 边界测试：`tokio::spawn` 的 `Send` 约束与 `Rc`（编译错误）](.#104-边界测试tokiospawn-的-send-约束与-rc编译错误)
+    - [10.5 边界测试：`Stream` 的 `fuse` 与 `select_next_some` 的交互（运行时（Runtime） panic）](.#105-边界测试stream-的-fuse-与-select_next_some-的交互运行时-panic)
+    - [10.3 边界测试：`Stream` 的背压与缓冲区溢出（运行时内存增长）](.#103-边界测试stream-的背压与缓冲区溢出运行时内存增长)
     - 10.4 边界测试：async fn 在 trait 中的生命周期（Lifetimes）推断与实现约束（编译错误）
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
-  - [实践](#实践)
-    - [对应代码示例](#对应代码示例)
-    - [建议练习](#建议练习)
-  - [导航：下一步去哪？](#导航下一步去哪)
-  - [嵌入式测验](#嵌入式测验)
-    - [测验 1：tokio::select!（记忆层）](#测验-1tokioselect记忆层)
-    - [测验 2：Backpressure（理解层）](#测验-2backpressure理解层)
-    - [测验 3：Actor 模式（应用层）](#测验-3actor-模式应用层)
-    - [测验 4：取消安全（分析层）](#测验-4取消安全分析层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
+  - [实践](.#实践)
+    - [对应代码示例](.#对应代码示例)
+    - [建议练习](.#建议练习)
+  - [导航：下一步去哪？](.#导航下一步去哪)
+  - [嵌入式测验](.#嵌入式测验)
+    - [测验 1：tokio::select!（记忆层）](.#测验-1tokioselect记忆层)
+    - [测验 2：Backpressure（理解层）](.#测验-2backpressure理解层)
+    - [测验 3：Actor 模式（应用层）](.#测验-3actor-模式应用层)
+    - [测验 4：取消安全（分析层）](.#测验-4取消安全分析层)
 
 ---
 
@@ -648,9 +648,9 @@ graph TD
 
 ## 相关概念文件
 
-- [Async](./02_async.md) — 异步基础
-- [Pin](./06_pin_unpin.md) — Pin 与 Unpin
-- [Concurrency](./01_concurrency.md) — 并发基础
+- [Async](02_async.md) — 异步基础
+- [Pin](06_pin_unpin.md) — Pin 与 Unpin
+- [Concurrency](01_concurrency.md) — 并发基础
 - [Distributed Systems](../06_ecosystem/18_distributed_systems.md) — 分布式系统
 
 ---
@@ -862,8 +862,8 @@ fn main() {}
 
 | 选择 | 条件 | 目标 |
 |:---|:---|:---|
-| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate/) 或 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) |
-| 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](./README.md) 选择其他主题 |
+| 🔙 巩固基础 | 仍有模糊概念 | 回到 [L2 对应主题](../02_intermediate) 或 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) |
+| 🔜 深入 L3 其他主题 | 想扩展高级技能 | [L3 README](README.md) 选择其他主题 |
 | 🎓 进入 L4 形式化 | 想理解"为什么"的数学证明 | [L4 形式化](../04_formal/README.md) |
 | 🏗️ 进入 L6 生态 | 想掌握生产工具链 | [L6 生态](../06_ecosystem/README.md) |
 

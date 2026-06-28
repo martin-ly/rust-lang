@@ -1,6 +1,6 @@
 > **⚠️ 已更新**:
 >
-> 本文件的深度内容已迁移至 [borrow_sanitizer.md](./borrow_sanitizer.md)（2026-06-08 新建，2026-06-19 已同步 April 2026 更新）。本文件保留为历史参考，不再主动维护。
+> 本文件的深度内容已迁移至 [borrow_sanitizer.md](borrow_sanitizer.md)（2026-06-08 新建，2026-06-19 已同步 April 2026 更新）。本文件保留为历史参考，不再主动维护。
 > **代码状态**: ✅ 含可编译示例
 
 # BorrowSanitizer 概念预研：运行时借用检查工业化
@@ -19,8 +19,8 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 BorrowSanitizer 预览特性
 > **定位**: 探讨 BorrowSanitizer 作为 Rust **运行时（Runtime）借用（Borrowing）检查**工具的工业化路径，从 Miri 的纯解释执行扩展到编译后二进制检测的设计空间。
-> **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Version Tracking](./05_rust_version_tracking.md)
-> **后置概念**: [Formal Methods](./02_formal_methods.md) · [RustBelt](../04_formal/04_rustbelt.md)
+> **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Version Tracking](05_rust_version_tracking.md)
+> **后置概念**: [Formal Methods](02_formal_methods.md) · [RustBelt](../04_formal/04_rustbelt.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/) · [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
@@ -39,40 +39,40 @@
 ## 📑 目录
 
 - BorrowSanitizer 概念预研：运行时（Runtime）借用（Borrowing）检查工业化
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 问题定义：编译期检查的边界](#11-问题定义编译期检查的边界)
-    - [1.2 Miri：解释执行的 UB 检测](#12-miri解释执行的-ub-检测)
-    - [1.3 BorrowSanitizer 的设计目标](#13-borrowsanitizer-的设计目标)
-    - [1.4 Shadow Stack 与 Lock-and-Key 策略](#14-shadow-stack-与-lock-and-key-策略)
-  - [二、与现有工具的对比矩阵](#二与现有工具的对比矩阵)
-  - [三、形式化语义](#三形式化语义)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 问题定义：编译期检查的边界](.#11-问题定义编译期检查的边界)
+    - [1.2 Miri：解释执行的 UB 检测](.#12-miri解释执行的-ub-检测)
+    - [1.3 BorrowSanitizer 的设计目标](.#13-borrowsanitizer-的设计目标)
+    - [1.4 Shadow Stack 与 Lock-and-Key 策略](.#14-shadow-stack-与-lock-and-key-策略)
+  - [二、与现有工具的对比矩阵](.#二与现有工具的对比矩阵)
+  - [三、形式化语义](.#三形式化语义)
     - 3.1 借用标签的生命周期（Lifetimes）
-    - [3.2 从 Tree Borrows 到运行时检测](#32-从-tree-borrows-到运行时检测)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、演进路线与预测](#五演进路线与预测)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：BorrowSanitizer 预览的编译错误](#十边界测试borrowsanitizer-预览的编译错误)
-    - [10.1 边界测试：BorrowSanitizer 的别名分析误报（编译错误/运行时检测）](#101-边界测试borrowsanitizer-的别名分析误报编译错误运行时检测)
-    - [10.2 边界测试：Sanitizer 与优化的交互（运行时检测丢失）](#102-边界测试sanitizer-与优化的交互运行时检测丢失)
-    - [10.3 边界测试：BorrowSanitizer 与 FFI 的交互盲区（运行时漏报）](#103-边界测试borrowsanitizer-与-ffi-的交互盲区运行时漏报)
-    - [10.6 边界测试：BorrowSanitizer 与 `unsafe` 块内的合法别名（运行时误报）](#106-边界测试borrowsanitizer-与-unsafe-块内的合法别名运行时误报)
-    - [10.5 边界测试：BorrowSanitizer 与 Miri 的检测范围差异（UB 漏检）](#105-边界测试borrowsanitizer-与-miri-的检测范围差异ub-漏检)
-    - [10.3 边界测试：BorrowSanitizer 的插桩盲区与优化代码（UB 漏检）](#103-边界测试borrowsanitizer-的插桩盲区与优化代码ub-漏检)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：BorrowSanitizer 是什么？它与 Miri 有什么区别？（理解层）](#测验-1borrowsanitizer-是什么它与-miri-有什么区别理解层)
-    - [测验 2：BorrowSanitizer 基于什么技术实现？（理解层）](#测验-2borrowsanitizer-基于什么技术实现理解层)
-    - [测验 3：BorrowSanitizer 对生产环境代码有什么意义？（理解层）](#测验-3borrowsanitizer-对生产环境代码有什么意义理解层)
-    - [测验 4：为什么需要 BorrowSanitizer 而不是仅依赖编译器的借用检查器？（理解层）](#测验-4为什么需要-borrowsanitizer-而不是仅依赖编译器的借用检查器理解层)
-    - [测验 5：BorrowSanitizer 预计何时可用？（理解层）](#测验-5borrowsanitizer-预计何时可用理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+    - [3.2 从 Tree Borrows 到运行时检测](.#32-从-tree-borrows-到运行时检测)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、演进路线与预测](.#五演进路线与预测)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：BorrowSanitizer 预览的编译错误](.#十边界测试borrowsanitizer-预览的编译错误)
+    - [10.1 边界测试：BorrowSanitizer 的别名分析误报（编译错误/运行时检测）](.#101-边界测试borrowsanitizer-的别名分析误报编译错误运行时检测)
+    - [10.2 边界测试：Sanitizer 与优化的交互（运行时检测丢失）](.#102-边界测试sanitizer-与优化的交互运行时检测丢失)
+    - [10.3 边界测试：BorrowSanitizer 与 FFI 的交互盲区（运行时漏报）](.#103-边界测试borrowsanitizer-与-ffi-的交互盲区运行时漏报)
+    - [10.6 边界测试：BorrowSanitizer 与 `unsafe` 块内的合法别名（运行时误报）](.#106-边界测试borrowsanitizer-与-unsafe-块内的合法别名运行时误报)
+    - [10.5 边界测试：BorrowSanitizer 与 Miri 的检测范围差异（UB 漏检）](.#105-边界测试borrowsanitizer-与-miri-的检测范围差异ub-漏检)
+    - [10.3 边界测试：BorrowSanitizer 的插桩盲区与优化代码（UB 漏检）](.#103-边界测试borrowsanitizer-的插桩盲区与优化代码ub-漏检)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：BorrowSanitizer 是什么？它与 Miri 有什么区别？（理解层）](.#测验-1borrowsanitizer-是什么它与-miri-有什么区别理解层)
+    - [测验 2：BorrowSanitizer 基于什么技术实现？（理解层）](.#测验-2borrowsanitizer-基于什么技术实现理解层)
+    - [测验 3：BorrowSanitizer 对生产环境代码有什么意义？（理解层）](.#测验-3borrowsanitizer-对生产环境代码有什么意义理解层)
+    - [测验 4：为什么需要 BorrowSanitizer 而不是仅依赖编译器的借用检查器？（理解层）](.#测验-4为什么需要-borrowsanitizer-而不是仅依赖编译器的借用检查器理解层)
+    - [测验 5：BorrowSanitizer 预计何时可用？（理解层）](.#测验-5borrowsanitizer-预计何时可用理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -345,9 +345,9 @@ fn main() {
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — Unsafe 边界与借用规则
 - [Ownership](../01_foundation/01_ownership.md) — 所有权系统的形式化根基
 - [Borrowing](../01_foundation/02_borrowing.md) — 借用检查的核心机制
-- [Formal Methods](./02_formal_methods.md) — 形式化验证工具链
+- [Formal Methods](02_formal_methods.md) — 形式化验证工具链
 - RustBelt — 所有权（Ownership）的形式化证明
-- [Version Tracking](./05_rust_version_tracking.md) — Rust 版本特性演进
+- [Version Tracking](05_rust_version_tracking.md) — Rust 版本特性演进
 
 ---
 

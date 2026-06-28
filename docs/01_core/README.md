@@ -4,7 +4,7 @@
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **层次定位**: L1-L2 基础-进阶 / 核心概念总览
 > **前置依赖**: 无（入门入口）
-> **后置延伸**: [docs 指南](../03_guides/) · [docs 参考](../02_reference/) · [concept L1-L2](../../concept/)
+> **后置延伸**: [docs 指南](../03_guides) · [docs 参考](../02_reference) · [concept L1-L2](../../concept)
 > **跨层映射**: docs→concept 工程映射 | L1-L2 概念索引
 > **定理链编号**: T-001 → T-010 → T-020 → T-030
 >
@@ -24,33 +24,33 @@
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [Rust 核心概念 (Core Concepts)](#rust-核心概念-core-concepts)
-  - [目录](#目录)
-  - [1. 所有权 (Ownership)](#1-所有权-ownership)
-    - [概念定义](#概念定义)
-    - [所有权规则](#所有权规则)
-    - [移动语义 (Move Semantics)](#移动语义-move-semantics)
-    - [Copy 类型](#copy-类型)
-  - [2. 借用与引用 (Borrowing \& References)](#2-借用与引用-borrowing--references)
-    - [概念定义](#概念定义-1)
-    - [借用规则](#借用规则)
-    - [悬垂引用防护](#悬垂引用防护)
-  - [3. 生命周期 (Lifetimes)](#3-生命周期-lifetimes)
-    - [概念定义](#概念定义-2)
-    - [生命周期省略规则 (Elision Rules)](#生命周期省略规则-elision-rules)
-    - [`'static` 生命周期](#static-生命周期)
-  - [4. 类型系统基础 (Type System Basics)](#4-类型系统基础-type-system-basics)
-    - [核心类型分类](#核心类型分类)
-    - [泛型与 Trait](#泛型与-trait)
-    - [Rust 2024 Edition 类型系统增强](#rust-2024-edition-类型系统增强)
-  - [5. 内存安全保证 (Memory Safety Guarantees)](#5-内存安全保证-memory-safety-guarantees)
-    - [Rust 消除的内存错误类别](#rust-消除的内存错误类别)
-    - [unsafe Rust](#unsafe-rust)
-  - [6. 与 Wikipedia 概念对齐](#6-与-wikipedia-概念对齐)
-  - [学习路径](#学习路径)
-  - [相关链接](#相关链接)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [Rust 核心概念 (Core Concepts)](.#rust-核心概念-core-concepts)
+  - [目录](.#目录)
+  - [1. 所有权 (Ownership)](.#1-所有权-ownership)
+    - [概念定义](.#概念定义)
+    - [所有权规则](.#所有权规则)
+    - [移动语义 (Move Semantics)](.#移动语义-move-semantics)
+    - [Copy 类型](.#copy-类型)
+  - [2. 借用与引用 (Borrowing \& References)](.#2-借用与引用-borrowing--references)
+    - [概念定义](.#概念定义-1)
+    - [借用规则](.#借用规则)
+    - [悬垂引用防护](.#悬垂引用防护)
+  - [3. 生命周期 (Lifetimes)](.#3-生命周期-lifetimes)
+    - [概念定义](.#概念定义-2)
+    - [生命周期省略规则 (Elision Rules)](.#生命周期省略规则-elision-rules)
+    - [`'static` 生命周期](.#static-生命周期)
+  - [4. 类型系统基础 (Type System Basics)](.#4-类型系统基础-type-system-basics)
+    - [核心类型分类](.#核心类型分类)
+    - [泛型与 Trait](.#泛型与-trait)
+    - [Rust 2024 Edition 类型系统增强](.#rust-2024-edition-类型系统增强)
+  - [5. 内存安全保证 (Memory Safety Guarantees)](.#5-内存安全保证-memory-safety-guarantees)
+    - [Rust 消除的内存错误类别](.#rust-消除的内存错误类别)
+    - [unsafe Rust](.#unsafe-rust)
+  - [6. 与 Wikipedia 概念对齐](.#6-与-wikipedia-概念对齐)
+  - [学习路径](.#学习路径)
+  - [相关链接](.#相关链接)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ---
 
@@ -319,9 +319,9 @@ unsafe {
 
 ## 相关链接
 
-- [c01_ownership_borrow_scope](../../crates/c01_ownership_borrow_scope/) - 所有权 crate 深度示例
-- [c02_type_system](../../crates/c02_type_system/) - 类型系统 crate
-- [c03_control_fn](../../crates/c03_control_fn/) - 控制流与函数
+- [c01_ownership_borrow_scope](../../crates/c01_ownership_borrow_scope) - 所有权 crate 深度示例
+- [c02_type_system](../../crates/c02_type_system) - 类型系统 crate
+- [c03_control_fn](../../crates/c03_control_fn) - 控制流与函数
 - [The Rust Book - Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
 - [The Rustonomicon](https://doc.rust-lang.org/nomicon/)
 - [Rust Reference - Lifetimes](https://doc.rust-lang.org/reference/items/generics.html#lifetime-parameters)
@@ -337,7 +337,7 @@ unsafe {
 
 ## 相关概念
 
-- [所有权、借用与生命周期详解](./01_ownership_borrowing_lifetimes.md)
+- [所有权、借用与生命周期详解](01_ownership_borrowing_lifetimes.md)
 
 ---
 

@@ -23,8 +23,8 @@
 > **文档定位**: 全面覆盖 Rust 中「对齐」相关的各类知识
 > **关联**:
 >
-> [02_type_system.md](./quick_reference/02_type_system.md) |
-> [02_strings_formatting_cheatsheet.md](./quick_reference/02_strings_formatting_cheatsheet.md)
+> [02_type_system.md](quick_reference/02_type_system.md) |
+> [02_strings_formatting_cheatsheet.md](quick_reference/02_strings_formatting_cheatsheet.md)
 
 ---
 
@@ -32,36 +32,36 @@
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [Rust 对齐知识综合指南](#rust-对齐知识综合指南)
-  - [📑 目录](#-目录)
-  - [一、概念分类](#一概念分类)
-  - [二、内存对齐（核心）](#二内存对齐核心)
-    - [2.0 为何要对齐（Why Alignment Matters）](#20-为何要对齐why-alignment-matters)
-    - [2.1 基本概念](#21-基本概念)
-    - [2.2 常用 API](#22-常用-api)
-    - [2.3 repr 与对齐（完整谱系）](#23-repr-与对齐完整谱系)
-    - [2.4 字段重排序优化](#24-字段重排序优化)
-    - [2.5 对齐计算（Rust 1.92+）](#25-对齐计算rust-192)
-    - [2.6 Layout API（自定义分配）](#26-layout-api自定义分配)
-    - [2.7 平台差异](#27-平台差异)
-  - [三、格式化对齐](#三格式化对齐)
-  - [四、unsafe 与对齐](#四unsafe-与对齐)
-    - [4.1 裸指针解引用前提与 UB 情形](#41-裸指针解引用前提与-ub-情形)
-    - [4.2 未对齐访问](#42-未对齐访问)
-    - [4.3 transmute 对齐约束](#43-transmute-对齐约束)
-  - [五、缓存行对齐与并发](#五缓存行对齐与并发)
-    - [5.1 伪共享（False Sharing）](#51-伪共享false-sharing)
-    - [5.2 数据局部性：AoS vs SoA](#52-数据局部性aos-vs-soa)
-    - [5.3 工具验证与量化数据](#53-工具验证与量化数据)
-  - [六、权威来源（非技术对齐）](#六权威来源非技术对齐)
-  - [七、对齐选型决策树](#七对齐选型决策树)
-  - [八、相关文档与示例](#八相关文档与示例)
-    - [项目内文档](#项目内文档)
-    - [代码示例](#代码示例)
-    - [研究笔记](#研究笔记)
-  - [Rust 1.95+ 更新](#rust-195-更新)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [Rust 对齐知识综合指南](.#rust-对齐知识综合指南)
+  - [📑 目录](.#-目录)
+  - [一、概念分类](.#一概念分类)
+  - [二、内存对齐（核心）](.#二内存对齐核心)
+    - [2.0 为何要对齐（Why Alignment Matters）](.#20-为何要对齐why-alignment-matters)
+    - [2.1 基本概念](.#21-基本概念)
+    - [2.2 常用 API](.#22-常用-api)
+    - [2.3 repr 与对齐（完整谱系）](.#23-repr-与对齐完整谱系)
+    - [2.4 字段重排序优化](.#24-字段重排序优化)
+    - [2.5 对齐计算（Rust 1.92+）](.#25-对齐计算rust-192)
+    - [2.6 Layout API（自定义分配）](.#26-layout-api自定义分配)
+    - [2.7 平台差异](.#27-平台差异)
+  - [三、格式化对齐](.#三格式化对齐)
+  - [四、unsafe 与对齐](.#四unsafe-与对齐)
+    - [4.1 裸指针解引用前提与 UB 情形](.#41-裸指针解引用前提与-ub-情形)
+    - [4.2 未对齐访问](.#42-未对齐访问)
+    - [4.3 transmute 对齐约束](.#43-transmute-对齐约束)
+  - [五、缓存行对齐与并发](.#五缓存行对齐与并发)
+    - [5.1 伪共享（False Sharing）](.#51-伪共享false-sharing)
+    - [5.2 数据局部性：AoS vs SoA](.#52-数据局部性aos-vs-soa)
+    - [5.3 工具验证与量化数据](.#53-工具验证与量化数据)
+  - [六、权威来源（非技术对齐）](.#六权威来源非技术对齐)
+  - [七、对齐选型决策树](.#七对齐选型决策树)
+  - [八、相关文档与示例](.#八相关文档与示例)
+    - [项目内文档](.#项目内文档)
+    - [代码示例](.#代码示例)
+    - [研究笔记](.#研究笔记)
+  - [Rust 1.95+ 更新](.#rust-195-更新)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 一、概念分类
 >
@@ -251,7 +251,7 @@ let aligned = layout.align_to(Layout::new::<u64>().align()).unwrap();
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-输出文本的左右/居中排版，详见 [02_strings_formatting_cheatsheet.md](./quick_reference/02_strings_formatting_cheatsheet.md#对齐和填充)。
+输出文本的左右/居中排版，详见 [02_strings_formatting_cheatsheet.md](quick_reference/02_strings_formatting_cheatsheet.md#对齐和填充)。
 
 ```rust
 let x = 42;
@@ -416,7 +416,7 @@ struct CacheLinePadded {
 | 内存安全参考 | [c01/tier_03/08_内存安全参考](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/08_内存安全参考.md) |
 | 缓存行对齐 | [c05/02_系统编程优化](../../crates/c05_threads/docs/tier_04_advanced/02_系统编程优化.md#51-缓存行对齐) |
 | 无锁编程 | [c05/04_lock_free_programming](../../crates/c05_threads/docs/04_lock_free_programming.md) |
-| 格式化对齐 | [strings_formatting_cheatsheet](./quick_reference/02_strings_formatting_cheatsheet.md) |
+| 格式化对齐 | [strings_formatting_cheatsheet](quick_reference/02_strings_formatting_cheatsheet.md) |
 
 ### 代码示例
 >
@@ -460,7 +460,7 @@ struct CacheLinePadded {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [02_reference 目录](./README.md)
+- [02_reference 目录](README.md)
 - [上级目录](../README.md)
 
 ---

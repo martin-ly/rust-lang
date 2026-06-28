@@ -38,8 +38,8 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [04_expert/](../04_expert/) - 深入理解编译器和形式化验证
-- [06_ecosystem/](../06_ecosystem/) - 实际项目和框架使用
+- [04_expert/](../04_expert) - 深入理解编译器和形式化验证
+- [06_ecosystem/](../06_ecosystem) - 实际项目和框架使用
 
 ---
 

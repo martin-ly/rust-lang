@@ -30,7 +30,7 @@
 > **前置概念**: N/A
 ---
 
-> **后置概念**: [Rust 1.98+ 前沿特性预览](./rust_1_98_preview.md) · [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
+> **后置概念**: [Rust 1.98+ 前沿特性预览](rust_1_98_preview.md) · [Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
 

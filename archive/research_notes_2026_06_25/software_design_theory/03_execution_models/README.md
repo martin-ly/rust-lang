@@ -24,32 +24,32 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [执行模型形式化框架](#执行模型形式化框架)
-  - [📊 目录 {#-目录}](#-目录--目录)
-  - [宗旨](#宗旨)
-  - [执行模型分类](#执行模型分类)
-  - [执行模型多维对比矩阵](#执行模型多维对比矩阵)
-  - [依赖引用](#依赖引用)
-  - [边界分析](#边界分析)
-  - [模型选型决策（实质内容）](#模型选型决策实质内容)
-  - [模型选择速查](#模型选择速查)
-  - [典型场景与设计模式组合（实质内容）](#典型场景与设计模式组合实质内容)
-    - [场景 1：批处理流水线（同步 + 策略）](#场景-1批处理流水线同步--策略)
-    - [场景 2：高并发 Web 服务（异步 + Observer + 通道）](#场景-2高并发-web-服务异步--observer--通道)
-    - [场景 3：图像处理（并行 + Iterator）](#场景-3图像处理并行--iterator)
-    - [场景 4：多服务编排（分布式 + Proxy + DTO）](#场景-4多服务编排分布式--proxy--dto)
-    - [选型决策流程（层次推进）](#选型决策流程层次推进)
-  - [常见陷阱与规避（执行模型）](#常见陷阱与规避执行模型)
-  - [可运行示例（层次推进）](#可运行示例层次推进)
-    - [示例 1：批处理 + Strategy（同步）](#示例-1批处理--strategy同步)
-    - [示例 2：并发 + Observer（std::thread + mpsc）](#示例-2并发--observerstdthread--mpsc)
-    - [示例 3：并行 + Strategy（rayon，需 `cargo add rayon`）](#示例-3并行--strategyrayon需-cargo-add-rayon)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [权威来源索引](#权威来源索引)
+- [执行模型形式化框架](.#执行模型形式化框架)
+  - [📊 目录 {#-目录}](.#-目录--目录)
+  - [宗旨](.#宗旨)
+  - [执行模型分类](.#执行模型分类)
+  - [执行模型多维对比矩阵](.#执行模型多维对比矩阵)
+  - [依赖引用](.#依赖引用)
+  - [边界分析](.#边界分析)
+  - [模型选型决策（实质内容）](.#模型选型决策实质内容)
+  - [模型选择速查](.#模型选择速查)
+  - [典型场景与设计模式组合（实质内容）](.#典型场景与设计模式组合实质内容)
+    - [场景 1：批处理流水线（同步 + 策略）](.#场景-1批处理流水线同步--策略)
+    - [场景 2：高并发 Web 服务（异步 + Observer + 通道）](.#场景-2高并发-web-服务异步--observer--通道)
+    - [场景 3：图像处理（并行 + Iterator）](.#场景-3图像处理并行--iterator)
+    - [场景 4：多服务编排（分布式 + Proxy + DTO）](.#场景-4多服务编排分布式--proxy--dto)
+    - [选型决策流程（层次推进）](.#选型决策流程层次推进)
+  - [常见陷阱与规避（执行模型）](.#常见陷阱与规避执行模型)
+  - [可运行示例（层次推进）](.#可运行示例层次推进)
+    - [示例 1：批处理 + Strategy（同步）](.#示例-1批处理--strategy同步)
+    - [示例 2：并发 + Observer（std::thread + mpsc）](.#示例-2并发--observerstdthread--mpsc)
+    - [示例 3：并行 + Strategy（rayon，需 `cargo add rayon`）](.#示例-3并行--strategyrayon需-cargo-add-rayon)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [权威来源索引](.#权威来源索引)
 
 ---
 
@@ -67,11 +67,11 @@
 
 | 模型 | 定义 | 形式化文档 |
 | :--- | :--- | :--- |
-| 同步 | 顺序执行，单线程 | [01_synchronous](./01_synchronous.md) |
-| 异步 | Future、async/await、单线程协作式多任务 | [02_async](./02_async.md) |
-| 并发 | 多线程、Send/Sync、消息传递/共享状态 | [03_concurrent](./03_concurrent.md) |
-| 并行 | 数据并行、任务并行 | [04_parallel](./04_parallel.md) |
-| 分布式 | 跨进程/跨节点、Actor、RPC | [05_distributed](./05_distributed.md) |
+| 同步 | 顺序执行，单线程 | [01_synchronous](01_synchronous.md) |
+| 异步 | Future、async/await、单线程协作式多任务 | [02_async](02_async.md) |
+| 并发 | 多线程、Send/Sync、消息传递/共享状态 | [03_concurrent](03_concurrent.md) |
+| 并行 | 数据并行、任务并行 | [04_parallel](04_parallel.md) |
+| 分布式 | 跨进程/跨节点、Actor、RPC | [05_distributed](05_distributed.md) |
 
 ---
 
@@ -79,17 +79,17 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-下表为同步/异步/并发/并行/分布式的**概念定义/属性关系/选型**多维对比；与 [HIERARCHICAL_MAPPING_AND_SUMMARY](../../../../archive/research_notes_2026_06_25/10_hierarchical_mapping_and_summary.md) 文档↔思维表征映射衔接。各子文档在本矩阵中的位置见「形式化文档」列。
+下表为同步/异步/并发/并行/分布式的**概念定义/属性关系/选型**多维对比；与 [HIERARCHICAL_MAPPING_AND_SUMMARY](../../10_hierarchical_mapping_and_summary.md) 文档↔思维表征映射衔接。各子文档在本矩阵中的位置见「形式化文档」列。
 
 | 模型 | 确定性 | 数据竞争 | 表达力/典型用途 | 选型条件 | 形式化文档 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **同步** | 顺序确定 | 单线程无竞争 | 顺序执行、批处理、脚本 | 单线程、无 I/O 等待 | [01_synchronous](./01_synchronous.md) |
-| **异步** | 单线程交错确定 | 单线程无竞争 | I/O 多路复用、高并发连接 | 多 I/O、高并发连接 | [02_async](./02_async.md) |
-| **并发** | 交错非确定 | Send/Sync 保证无数据竞争 | 多线程、消息传递、共享状态 | 多线程、生产者-消费者 | [03_concurrent](./03_concurrent.md) |
-| **并行** | 数据/任务并行 | 无共享或同步 | CPU 密集、批量计算 | CPU 密集、rayon 风格 | [04_parallel](./04_parallel.md) |
-| **分布式** | 跨节点、最终一致 | 跨进程无共享内存 | 跨节点通信、Actor、RPC | 跨节点、微服务 | [05_distributed](./05_distributed.md) |
+| **同步** | 顺序确定 | 单线程无竞争 | 顺序执行、批处理、脚本 | 单线程、无 I/O 等待 | [01_synchronous](01_synchronous.md) |
+| **异步** | 单线程交错确定 | 单线程无竞争 | I/O 多路复用、高并发连接 | 多 I/O、高并发连接 | [02_async](02_async.md) |
+| **并发** | 交错非确定 | Send/Sync 保证无数据竞争 | 多线程、消息传递、共享状态 | 多线程、生产者-消费者 | [03_concurrent](03_concurrent.md) |
+| **并行** | 数据/任务并行 | 无共享或同步 | CPU 密集、批量计算 | CPU 密集、rayon 风格 | [04_parallel](04_parallel.md) |
+| **分布式** | 跨节点、最终一致 | 跨进程无共享内存 | 跨节点通信、Actor、RPC | 跨节点、微服务 | [05_distributed](05_distributed.md) |
 
-**边界与选型决策树**：[06_boundary_analysis](./06_boundary_analysis.md) 含并发选型决策树（Actor/channel/async/Mutex）及与本矩阵的衔接。
+**边界与选型决策树**：[06_boundary_analysis](06_boundary_analysis.md) 含并发选型决策树（Actor/channel/async/Mutex）及与本矩阵的衔接。
 
 **分布式模式扩展**：Event Sourcing、Saga、CQRS、Circuit Breaker、Bulkhead、CAP/BASE 形式化见 [05_distributed § 分布式专用模式形式化](05_distributed.md#分布式专用模式形式化d21-扩展)。
 
@@ -114,7 +114,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-[06_boundary_analysis](./06_boundary_analysis.md)：各模型的安全/支持/表达边界。
+[06_boundary_analysis](06_boundary_analysis.md)：各模型的安全/支持/表达边界。
 
 ---
 
@@ -130,7 +130,7 @@
 | CPU 密集、批量计算 | 并行 | 图像处理、数据分析、rayon |
 | 跨节点通信 | 分布式 | tonic、actix、RPC |
 
-**与设计模式映射**：同步—全部 23；异步—Observer、Command、State；并发—Singleton、Observer、Mediator；并行—Strategy、Iterator；分布式—Proxy、Gateway、DTO。详见 [06_boundary_analysis](./06_boundary_analysis.md)。
+**与设计模式映射**：同步—全部 23；异步—Observer、Command、State；并发—Singleton、Observer、Mediator；并行—Strategy、Iterator；分布式—Proxy、Gateway、DTO。详见 [06_boundary_analysis](06_boundary_analysis.md)。
 
 ---
 

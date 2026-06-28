@@ -12,8 +12,8 @@
 > **归档原因**: 内容碎片化（< 40 行），已被主文件覆盖。
 > **状态**: 已归档
 >
-> - `03_unsafe_rust.md` → 整合至 [`03_unsafe.md`](./03_unsafe.md)
-> - `05_macros.md` → 整合至 [`04_macros.md`](./04_macros.md) 和 [`07_proc_macro.md`](./07_proc_macro.md)
+> - `03_unsafe_rust.md` → 整合至 [`03_unsafe.md`](03_unsafe.md)
+> - `05_macros.md` → 整合至 [`04_macros.md`](04_macros.md) 和 [`07_proc_macro.md`](07_proc_macro.md)
 > - `08_zero_cost_abstractions.md` → 整合至 [`06_zero_cost_abstractions.md`](../01_foundation/06_zero_cost_abstractions.md)
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
@@ -36,9 +36,7 @@
 | 核心概念 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > **过渡**: 掌握 核心概念 的基础语法后，下一步需要理解其在类型系统（Type System）中的位置与与其他概念的交互关系。
-
 > **过渡**: 在实践中应用 核心概念 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
-
 > **过渡**: 核心概念 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界

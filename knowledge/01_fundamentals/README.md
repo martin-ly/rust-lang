@@ -42,7 +42,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [00_start/](../00_start/) 的安装和基础概念
+- [00_start/](../00_start) 的安装和基础概念
 - 基本的编程经验（变量、函数、控制流）
 
 ## ✅ 完成检查清单
@@ -56,7 +56,7 @@
 
 ## 🚀 下一步
 
-完成本模块后，进入 [02_intermediate/](../02_intermediate/) 学习泛型、Trait、错误处理等中级主题。
+完成本模块后，进入 [02_intermediate/](../02_intermediate) 学习泛型、Trait、错误处理等中级主题。
 
 ---
 

@@ -12,8 +12,8 @@
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 把“如何扩展 Cargo”讲清楚：从自定义子命令约定到常用插件选型，覆盖 Cargo 的工具集成接口。
-> **前置概念**: [Cargo Toolchain](./01_toolchain.md) · [Cargo Manifest Reference](./64_cargo_manifest_reference.md)
-> **后置概念**: [Cargo Security CVEs](./25_cargo_security_cves.md) · [DevOps and CI/CD](./28_devops_and_ci_cd.md)
+> **前置概念**: [Cargo Toolchain](01_toolchain.md) · [Cargo Manifest Reference](64_cargo_manifest_reference.md)
+> **后置概念**: [Cargo Security CVEs](25_cargo_security_cves.md) · [DevOps and CI/CD](28_devops_and_ci_cd.md)
 
 ---
 
@@ -23,24 +23,24 @@
 
 ## 📑 目录
 
-- [Cargo 子命令与插件生态](#cargo-子命令与插件生态)
-  - [📑 目录](#-目录)
-  - [一、Cargo 的可扩展性设计](#一cargo-的可扩展性设计)
-  - [二、自定义子命令](#二自定义子命令)
-    - [命名约定](#命名约定)
-    - [安装方式](#安装方式)
-    - [别名](#别名)
-  - [三、`cargo metadata` 与 JSON 消息](#三cargo-metadata-与-json-消息)
-    - [`cargo metadata`](#cargo-metadata)
-    - [`--message-format=json`](#--message-formatjson)
-  - [四、常用插件速览](#四常用插件速览)
-  - [五、编写自定义子命令的最佳实践](#五编写自定义子命令的最佳实践)
-  - [嵌入式测验](#嵌入式测验)
-    - [测验 1：自定义 Cargo 子命令的可执行文件命名规则是什么？](#测验-1自定义-cargo-子命令的可执行文件命名规则是什么)
-    - [测验 2：`cargo metadata` 的输出格式是什么？](#测验-2cargo-metadata-的输出格式是什么)
-    - [测验 3：`--message-format=json` 适合哪些工具集成场景？](#测验-3--message-formatjson-适合哪些工具集成场景)
-    - [测验 4：为什么官方建议自定义子命令使用 CLI 而不是链接 `cargo` crate？](#测验-4为什么官方建议自定义子命令使用-cli-而不是链接-cargo-crate)
-  - [权威来源索引](#权威来源索引)
+- [Cargo 子命令与插件生态](.#cargo-子命令与插件生态)
+  - [📑 目录](.#-目录)
+  - [一、Cargo 的可扩展性设计](.#一cargo-的可扩展性设计)
+  - [二、自定义子命令](.#二自定义子命令)
+    - [命名约定](.#命名约定)
+    - [安装方式](.#安装方式)
+    - [别名](.#别名)
+  - [三、`cargo metadata` 与 JSON 消息](.#三cargo-metadata-与-json-消息)
+    - [`cargo metadata`](.#cargo-metadata)
+    - [`--message-format=json`](.#--message-formatjson)
+  - [四、常用插件速览](.#四常用插件速览)
+  - [五、编写自定义子命令的最佳实践](.#五编写自定义子命令的最佳实践)
+  - [嵌入式测验](.#嵌入式测验)
+    - [测验 1：自定义 Cargo 子命令的可执行文件命名规则是什么？](.#测验-1自定义-cargo-子命令的可执行文件命名规则是什么)
+    - [测验 2：`cargo metadata` 的输出格式是什么？](.#测验-2cargo-metadata-的输出格式是什么)
+    - [测验 3：`--message-format=json` 适合哪些工具集成场景？](.#测验-3--message-formatjson-适合哪些工具集成场景)
+    - [测验 4：为什么官方建议自定义子命令使用 CLI 而不是链接 `cargo` crate？](.#测验-4为什么官方建议自定义子命令使用-cli-而不是链接-cargo-crate)
+  - [权威来源索引](.#权威来源索引)
 
 ---
 

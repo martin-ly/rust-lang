@@ -649,8 +649,8 @@ graph TD
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [Rayon 数据并行架构](./13_rayon_architecture.md)
-- [Wgpu GPU 图形架构](./11_wgpu_architecture.md)
+- [Rayon 数据并行架构](13_rayon_architecture.md)
+- [Wgpu GPU 图形架构](11_wgpu_architecture.md)
 - [并发编程模型](../../../../concept/03_advanced/01_concurrency.md)
 
 ---

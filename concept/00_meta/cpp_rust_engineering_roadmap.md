@@ -8,7 +8,7 @@
 > **A/S/P 标记**: C+S — Comparison + Structure
 > **双维定位**: C×Ana / C×Eva
 > **前置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md) · [Variable Model](../01_foundation/20_variable_model.md)
-> **后置概念**: [Pattern Semantic Space Index](./pattern_semantic_space_index.md) · [C++ ABI Object Model](../05_comparative/02_cpp_abi_object_model.md)
+> **后置概念**: [Pattern Semantic Space Index](pattern_semantic_space_index.md) · [C++ ABI Object Model](../05_comparative/02_cpp_abi_object_model.md)
 > **主要来源**: [Rust Foundation Interop Initiative] · [Brown University CRP Phrasebook] · [simplifycpp.org C++_Rust.pdf]
 ---
 

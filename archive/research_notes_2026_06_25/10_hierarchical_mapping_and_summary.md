@@ -9,7 +9,7 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 映射完成
 > **用途**: 按三大支柱的文档树、概念族↔文档↔Def/Axiom/定理映射、文档↔思维表征映射；支撑层次化检索与双向追溯
-> **上位文档**: [00_COMPREHENSIVE_SUMMARY](./10_00_comprehensive_summary.md)、RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN
+> **上位文档**: [00_COMPREHENSIVE_SUMMARY](10_00_comprehensive_summary.md)、RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN
 
 ---
 
@@ -17,27 +17,27 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [research\_notes 层次化梳理与映射总结](#research_notes-层次化梳理与映射总结)
-  - [📑 目录](#-目录)
-  - [一、按三大支柱的文档树](#一按三大支柱的文档树)
-  - [二、概念族 ↔ 文档 ↔ Def/Axiom/定理 映射表](#二概念族--文档--defaxiom定理-映射表)
-    - [2.1 支柱 1（公理判定）](#21-支柱-1公理判定)
-    - [2.2 支柱 2（语言表达力）](#22-支柱-2语言表达力)
-    - [2.3 支柱 3（组件组合）](#23-支柱-3组件组合)
-  - [三、文档 ↔ 思维表征 映射表](#三文档--思维表征-映射表)
-    - [3.1 按文档 → 思维表征](#31-按文档--思维表征)
-    - [3.2 按思维表征 → 文档（入口）](#32-按思维表征--文档入口)
-  - [四、文档依赖关系（简表）](#四文档依赖关系简表)
-  - [五、使用说明](#五使用说明)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [research\_notes 层次化梳理与映射总结](.#research_notes-层次化梳理与映射总结)
+  - [📑 目录](.#-目录)
+  - [一、按三大支柱的文档树](.#一按三大支柱的文档树)
+  - [二、概念族 ↔ 文档 ↔ Def/Axiom/定理 映射表](.#二概念族--文档--defaxiom定理-映射表)
+    - [2.1 支柱 1（公理判定）](.#21-支柱-1公理判定)
+    - [2.2 支柱 2（语言表达力）](.#22-支柱-2语言表达力)
+    - [2.3 支柱 3（组件组合）](.#23-支柱-3组件组合)
+  - [三、文档 ↔ 思维表征 映射表](.#三文档--思维表征-映射表)
+    - [3.1 按文档 → 思维表征](.#31-按文档--思维表征)
+    - [3.2 按思维表征 → 文档（入口）](.#32-按思维表征--文档入口)
+  - [四、文档依赖关系（简表）](.#四文档依赖关系简表)
+  - [五、使用说明](.#五使用说明)
+  - [🆕 Rust 1.94 更新](.#-rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 一、按三大支柱的文档树
 >
@@ -167,7 +167,7 @@ research_notes/
 | 01_design_patterns_formal | software_design_theory | [04_boundary_matrix](software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)、[README §23 模式多维对比矩阵](software_design_theory/01_design_patterns_formal/README.md#23-模式多维对比矩阵) | 各模式「证明思路」 | 03_semantic_boundary_map 需求→模式 |
 | 06_boundary_analysis | - | [03_execution_models README §执行模型多维对比矩阵](software_design_theory/03_execution_models/README.md#执行模型多维对比矩阵) | async §6.2 | 文档内并发选型决策树 |
 | 04_compositional_engineering | - | UNIFIED_SYSTEMATIC_FRAMEWORK 组合相关 | CE-T1–T3 证明思路 | 组合决策树、L1–L4 |
-| 安全可判定机制总览 | MIND_MAP、本表 | [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md) §二、§六 | PROOF_INDEX、各篇证明树 | 06_boundary、DESIGN_MECHANISM |
+| 安全可判定机制总览 | MIND_MAP、本表 | [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](10_safe_decidable_mechanisms_overview.md) §二、§六 | PROOF_INDEX、各篇证明树 | 06_boundary、DESIGN_MECHANISM |
 | ownership_model / borrow / lifetime / async / pin / send_sync | MIND_MAP、各文档「相关思维表征」 | [formal_methods/README §六篇并表](formal_methods/README.md#formal_methods-六篇并表) | 各文档内证明树、PROOF_INDEX | 06_boundary、DESIGN_MECHANISM |
 
 ### 3.2 按思维表征 → 文档（入口）
@@ -181,9 +181,9 @@ research_notes/
 | [PROOF_GRAPH_NETWORK](../04_thinking/04_proof_graph_network.md) | MaybeUninit、借用、生命周期、联合体、迭代器 | PROOF_INDEX、各 formal_methods/type_theory 文档 |
 | [DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md) | 所有权、类型、异步、性能、安全 | 06_boundary_analysis、DESIGN_MECHANISM_RATIONALE、03_semantic_boundary_map |
 | [THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) | 1.93 特性、证明树、决策树 | RUST_193、各模块证明树/决策树小节 |
-| [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md) | 安全可判定机制、四类思维表征入口 | §四 思维表征入口、§六 并发+Trait 族四维表；formal_methods 六篇、06_boundary、DESIGN_MECHANISM |
+| [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](10_safe_decidable_mechanisms_overview.md) | 安全可判定机制、四类思维表征入口 | §四 思维表征入口、§六 并发+Trait 族四维表；formal_methods 六篇、06_boundary、DESIGN_MECHANISM |
 
-*更细的「按研究领域索引」见 [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md) § 思维表征方式全索引。*
+*更细的「按研究领域索引」见 [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](10_comprehensive_systematic_overview.md) § 思维表征方式全索引。*
 
 ---
 
@@ -199,7 +199,7 @@ research_notes/
 | CORE_THEOREMS_FULL_PROOFS | 证明引用 | ownership_model, borrow_checker_proof, type_system_foundations |
 | 06_boundary_analysis | 衔接 | 04_expressiveness_boundary, formal_methods |
 
-*完整论证依赖见 [ARGUMENTATION_CHAIN_AND_FLOW](./10_argumentation_chain_and_flow.md) § 文档间论证关系。*
+*完整论证依赖见 [ARGUMENTATION_CHAIN_AND_FLOW](10_argumentation_chain_and_flow.md) § 文档间论证关系。*
 
 ---
 
@@ -227,7 +227,7 @@ research_notes/
 
 > **适用版本**: Rust 1.96.0+
 
-详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
+详见 [RUST_194_RESEARCH_UPDATE](10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 
@@ -292,7 +292,7 @@ research_notes/
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

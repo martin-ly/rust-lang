@@ -506,8 +506,8 @@ tokio::select! {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [Axum Web 框架架构](./07_axum_architecture.md)
-- [Tokio 异步运行时架构](./06_tokio_architecture.md)
+- [Axum Web 框架架构](07_axum_architecture.md)
+- [Tokio 异步运行时架构](06_tokio_architecture.md)
 - [并发编程模型](../../../../concept/03_advanced/01_concurrency.md)
 
 ---

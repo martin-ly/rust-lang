@@ -11,8 +11,8 @@
 > **A/S/P 标记**: **F** — Formal
 > **双维定位**: F×Type — 类型系统（Type System）复杂度与可判定性
 > **定位**: 解释 Rust 类型推断（Type Inference）为什么从 HM 的 $O(n^3)$ 跃迁到 PSPACE-完全，以及这一理论结论如何在 rustc 的约束求解器中得到工程化实现。
-> **前置依赖**: [Type Theory](./02_type_theory.md) · [Type Inference](./08_type_inference.md) · [Trait Solver in rustc](./26_trait_solver_in_rustc.md)
-> **后置延伸**: [Type Checking and Inference in rustc](./27_type_checking_and_inference.md) · [Subtype Variance](./06_subtype_variance.md)
+> **前置依赖**: [Type Theory](02_type_theory.md) · [Type Inference](08_type_inference.md) · [Trait Solver in rustc](26_trait_solver_in_rustc.md)
+> **后置延伸**: [Type Checking and Inference in rustc](27_type_checking_and_inference.md) · [Subtype Variance](06_subtype_variance.md)
 > **来源**: Rehman et al. (2023) — Rust type inference complexity · [Vytiniotis et al. 2011 — OutsideIn(X): Modular Type Inference with Local Assumptions](https://doi.org/10.1017/S0956796811000098) · [Rustc Dev Guide — Type Inference](https://rustc-dev-guide.rust-lang.org/type-inference.html) · [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/types.html)
 
 > **前置概念**: N/A
@@ -23,31 +23,31 @@
 
 ## 📑 目录
 
-- [Type Inference Complexity（类型推断复杂度）](#type-inference-complexity类型推断复杂度)
-  - [📑 目录](#-目录)
-  - [一、HM：类型推断的黄金标准](#一hm类型推断的黄金标准)
-  - [二、Rust 的四项复杂度放大器](#二rust-的四项复杂度放大器)
-  - [三、约束生成与 Robinson 合一](#三约束生成与-robinson-合一)
-    - [3.1 约束生成（Constraint Generation）](#31-约束生成constraint-generation)
-    - [3.2 Robinson 合一（Robinson Unification）](#32-robinson-合一robinson-unification)
-  - [四、泛化与 let-多态性](#四泛化与-let-多态性)
-  - [五、Trait 约束求解：Chalk 风格直觉](#五trait-约束求解chalk-风格直觉)
-  - [六、可判定性：生成与求解都会终止](#六可判定性生成与求解都会终止)
-  - [七、复杂度：为什么是 PSPACE](#七复杂度为什么是-pspace)
-    - [7.1 PSPACE 上界](#71-pspace-上界)
-    - [7.2 PSPACE 下界](#72-pspace-下界)
-    - [7.3 PSPACE-完全性](#73-pspace-完全性)
-  - [八、从理论到 rustc 实现](#八从理论到-rustc-实现)
-  - [九、边界示例：何时需要显式标注](#九边界示例何时需要显式标注)
-    - [9.1 `collect()` 目标类型歧义](#91-collect-目标类型歧义)
-    - [9.2 高阶 trait bound 需要显式量词](#92-高阶-trait-bound-需要显式量词)
-    - [9.3 关联类型投影需要足够上下文](#93-关联类型投影需要足够上下文)
-  - [十、认知路径](#十认知路径)
-  - [嵌入式测验](#嵌入式测验)
-    - [测验 1：HM 类型推断为什么能保持多项式时间？](#测验-1hm-类型推断为什么能保持多项式时间)
-    - [测验 2：Rust 类型推断最坏情况下的复杂度类是什么？依据哪些来源？](#测验-2rust-类型推断最坏情况下的复杂度类是什么依据哪些来源)
-    - [测验 3：`rustc` 中哪个结构负责保存推断变量与待求解约束？](#测验-3rustc-中哪个结构负责保存推断变量与待求解约束)
-  - [权威来源索引](#权威来源索引)
+- [Type Inference Complexity（类型推断复杂度）](.#type-inference-complexity类型推断复杂度)
+  - [📑 目录](.#-目录)
+  - [一、HM：类型推断的黄金标准](.#一hm类型推断的黄金标准)
+  - [二、Rust 的四项复杂度放大器](.#二rust-的四项复杂度放大器)
+  - [三、约束生成与 Robinson 合一](.#三约束生成与-robinson-合一)
+    - [3.1 约束生成（Constraint Generation）](.#31-约束生成constraint-generation)
+    - [3.2 Robinson 合一（Robinson Unification）](.#32-robinson-合一robinson-unification)
+  - [四、泛化与 let-多态性](.#四泛化与-let-多态性)
+  - [五、Trait 约束求解：Chalk 风格直觉](.#五trait-约束求解chalk-风格直觉)
+  - [六、可判定性：生成与求解都会终止](.#六可判定性生成与求解都会终止)
+  - [七、复杂度：为什么是 PSPACE](.#七复杂度为什么是-pspace)
+    - [7.1 PSPACE 上界](.#71-pspace-上界)
+    - [7.2 PSPACE 下界](.#72-pspace-下界)
+    - [7.3 PSPACE-完全性](.#73-pspace-完全性)
+  - [八、从理论到 rustc 实现](.#八从理论到-rustc-实现)
+  - [九、边界示例：何时需要显式标注](.#九边界示例何时需要显式标注)
+    - [9.1 `collect()` 目标类型歧义](.#91-collect-目标类型歧义)
+    - [9.2 高阶 trait bound 需要显式量词](.#92-高阶-trait-bound-需要显式量词)
+    - [9.3 关联类型投影需要足够上下文](.#93-关联类型投影需要足够上下文)
+  - [十、认知路径](.#十认知路径)
+  - [嵌入式测验](.#嵌入式测验)
+    - [测验 1：HM 类型推断为什么能保持多项式时间？](.#测验-1hm-类型推断为什么能保持多项式时间)
+    - [测验 2：Rust 类型推断最坏情况下的复杂度类是什么？依据哪些来源？](.#测验-2rust-类型推断最坏情况下的复杂度类是什么依据哪些来源)
+    - [测验 3：`rustc` 中哪个结构负责保存推断变量与待求解约束？](.#测验-3rustc-中哪个结构负责保存推断变量与待求解约束)
+  - [权威来源索引](.#权威来源索引)
 
 ---
 

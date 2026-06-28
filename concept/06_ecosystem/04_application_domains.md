@@ -19,7 +19,7 @@
 > **层级**: L6 生态工程
 > **A/S/P 标记**: **A+S+P** — 全维度
 > **双维定位**: P×Eva — 评估 Rust 在特定领域的适用性
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Traits](../02_intermediate/01_traits.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md) · [Core Crates](./03_core_crates.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
+> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Traits](../02_intermediate/01_traits.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md) · [Core Crates](03_core_crates.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
 > **后置概念**: [AI Integration](../07_future/01_ai_integration.md) · [Formal Methods](../07_future/02_formal_methods.md)
 > **主要来源**: [Rust in Production](https://www.rust-lang.org/) · [Rust Foundation] · [Ferrous Systems] · [RustConf] · [AWS/Google/Microsoft Rust 博客]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
@@ -828,9 +828,9 @@ graph TD
 | 并发 | [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) | Web/游戏/数据工程核心 |
 | 异步（Async） | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) | Web 后端/嵌入式事件循环 |
 | Unsafe | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | 系统编程/游戏/密码学边界 |
-| 核心 Crate | [`./03_core_crates.md`](./03_core_crates.md) | 各领域的工具支撑 |
-| 工具链 | [`./01_toolchain.md`](./01_toolchain.md) | 工程构建基础 |
-| 设计模式 | [`./02_patterns.md`](./02_patterns.md) | 领域工程模式 |
+| 核心 Crate | [`./03_core_crates.md`](03_core_crates.md) | 各领域的工具支撑 |
+| 工具链 | [`./01_toolchain.md`](01_toolchain.md) | 工程构建基础 |
+| 设计模式 | [`./02_patterns.md`](02_patterns.md) | 领域工程模式 |
 | Rust vs C++ | [`../05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) | 系统领域对比 |
 | Rust vs Go | [`../05_comparative/02_rust_vs_go.md`](../05_comparative/02_rust_vs_go.md) | Web 后端对比 |
 | 安全边界 | [`../05_comparative/04_safety_boundaries.md`](../05_comparative/04_safety_boundaries.md) | 领域安全约束 |

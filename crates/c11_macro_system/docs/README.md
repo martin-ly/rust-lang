@@ -72,26 +72,26 @@ let query = sql!("SELECT * FROM users WHERE id = ?", user_id);
 
 | 文档 | 描述 | 难度 |
 | :--- | :--- | :--- |
-| [00_MASTER_INDEX.md](./00_MASTER_INDEX.md) | 主索引导航 | ⭐ |
-| [ONE_PAGE_SUMMARY.md](./ONE_PAGE_SUMMARY.md) | 一页纸总结 | ⭐⭐ |
-| [Glossary.md](./Glossary.md) | 术语表 | ⭐ |
-| [FAQ.md](./FAQ.md) | 常见问题 | ⭐⭐ |
+| [00_MASTER_INDEX.md](00_MASTER_INDEX.md) | 主索引导航 | ⭐ |
+| [ONE_PAGE_SUMMARY.md](ONE_PAGE_SUMMARY.md) | 一页纸总结 | ⭐⭐ |
+| [Glossary.md](Glossary.md) | 术语表 | ⭐ |
+| [FAQ.md](FAQ.md) | 常见问题 | ⭐⭐ |
 
 ### Rust 版本特性文档
 
 | 文档 | 描述 | 难度 |
 | :--- | :--- | :--- |
-| [RUST_192_MACRO_IMPROVEMENTS.md](./RUST_192_MACRO_IMPROVEMENTS.md) | Rust 1.93.0 宏系统改进 | ⭐⭐⭐ |
-| [RUST_191_MACRO_IMPROVEMENTS.md](./RUST_191_MACRO_IMPROVEMENTS.md) | Rust 1.91 宏系统改进 | ⭐⭐⭐ |
+| [RUST_192_MACRO_IMPROVEMENTS.md](RUST_192_MACRO_IMPROVEMENTS.md) | Rust 1.93.0 宏系统改进 | ⭐⭐⭐ |
+| [RUST_191_MACRO_IMPROVEMENTS.md](RUST_191_MACRO_IMPROVEMENTS.md) | Rust 1.91 宏系统改进 | ⭐⭐⭐ |
 
 ### 分层文档结构
 
 | 层级 | 路径 | 描述 | 时间 |
 | :--- | :--- | :--- | :--- |
-| Tier 1 | [tier_01_foundations/](./tier_01_foundations/) | 宏理论基础 | 2-4小时 |
-| Tier 2 | [tier_02_guides/](./tier_02_guides/) | 声明宏+过程宏实践 | 10-20小时 |
-| Tier 3 | [tier_03_references/](./tier_03_references/) | 最佳实践参考 | 按需 |
-| Tier 4 | [tier_04_advanced/](./tier_04_advanced/) | DSL/调试/优化 | 20-30小时 |
+| Tier 1 | [tier_01_foundations/](tier_01_foundations) | 宏理论基础 | 2-4小时 |
+| Tier 2 | [tier_02_guides/](tier_02_guides) | 声明宏+过程宏实践 | 10-20小时 |
+| Tier 3 | [tier_03_references/](tier_03_references) | 最佳实践参考 | 按需 |
+| Tier 4 | [tier_04_advanced/](tier_04_advanced) | DSL/调试/优化 | 20-30小时 |
 
 ---
 
@@ -284,10 +284,10 @@ macro_rules! debug_print {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 宏系统形式化理论 | 展开规则 | [../../docs/rust-formal-engineering-system/01_theoretical_foundations/08_macro_system/](../../docs/rust-formal-engineering-system/01_theoretical_foundations/08_macro_system/) |
+| 宏系统形式化理论 | 展开规则 | [../../docs/rust-formal-engineering-system/01_theoretical_foundations/08_macro_system/](../../docs/rust-formal-engineering-system/01_theoretical_foundations/08_macro_system) |
 | 类型系统理论 | 宏中的类型操作 | [../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md](../../docs/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md) |
-| 形式化验证理论 | 宏正确性验证 | [../../docs/rust-formal-engineering-system/01_theoretical_foundations/09_formal_verification/](../../docs/rust-formal-engineering-system/01_theoretical_foundations/09_formal_verification/) |
-| 数学基础 | 元编程数学基础 | [../../docs/rust-formal-engineering-system/01_theoretical_foundations/10_mathematical_foundations/](../../docs/rust-formal-engineering-system/01_theoretical_foundations/10_mathematical_foundations/) |
+| 形式化验证理论 | 宏正确性验证 | [../../docs/rust-formal-engineering-system/01_theoretical_foundations/09_formal_verification/](../../docs/rust-formal-engineering-system/01_theoretical_foundations/09_formal_verification) |
+| 数学基础 | 元编程数学基础 | [../../docs/rust-formal-engineering-system/01_theoretical_foundations/10_mathematical_foundations/](../../docs/rust-formal-engineering-system/01_theoretical_foundations/10_mathematical_foundations) |
 
 ---
 

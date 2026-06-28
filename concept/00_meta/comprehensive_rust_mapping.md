@@ -9,7 +9,7 @@
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: C×Kno — 将 Google 的 Comprehensive Rust 课程映射到本知识体系
 > **定位**: 本文件建立 **Comprehensive Rust**（Google 开发的免费 Rust 课程）与本知识体系中 `concept/` 文件的双向映射，帮助学习者将课程章节定位到深层概念文档。
-> **前置概念**: [Learning Guide](./learning_guide.md) · [Bloom Taxonomy](./03_bloom_taxonomy.md)
+> **前置概念**: [Learning Guide](learning_guide.md) · [Bloom Taxonomy](03_bloom_taxonomy.md)
 > **后置概念**: [Application Domains](../06_ecosystem/04_application_domains.md)
 
 ---
@@ -22,23 +22,23 @@
 
 ## 📑 目录
 
-- [Comprehensive Rust 课程映射](#comprehensive-rust-课程映射)
-  - [📑 目录](#-目录)
-  - [一、课程概览](#一课程概览)
-    - [1.1 Comprehensive Rust 是什么](#11-comprehensive-rust-是什么)
-    - [1.2 课程结构](#12-课程结构)
-  - [二、章节映射表](#二章节映射表)
-    - [2.1 Day 1 — Rust 基础](#21-day-1--rust-基础)
-    - [2.2 Day 2 — 所有权与类型系统](#22-day-2--所有权与类型系统)
-    - [2.3 Day 3 — 泛型与 Trait](#23-day-3--泛型与-trait)
-    - [2.4 Day 4 — Android \& 高级主题](#24-day-4--android--高级主题)
-  - [三、互补性分析](#三互补性分析)
-  - [四、来源与延伸阅读](#四来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：本文档《Comprehensive Rust 课程映射》在 Rust 知识体系中属于哪一层级的元数据？（理解层）](#测验-1本文档comprehensive-rust-课程映射在-rust-知识体系中属于哪一层级的元数据理解层)
-    - [测验 2：《Comprehensive Rust 课程映射》的主要用途是什么？（理解层）](#测验-2comprehensive-rust-课程映射的主要用途是什么理解层)
-    - [测验 3：元数据层文档能否替代 L1-L7 的核心概念学习？（理解层）](#测验-3元数据层文档能否替代-l1-l7-的核心概念学习理解层)
+- [Comprehensive Rust 课程映射](.#comprehensive-rust-课程映射)
+  - [📑 目录](.#-目录)
+  - [一、课程概览](.#一课程概览)
+    - [1.1 Comprehensive Rust 是什么](.#11-comprehensive-rust-是什么)
+    - [1.2 课程结构](.#12-课程结构)
+  - [二、章节映射表](.#二章节映射表)
+    - [2.1 Day 1 — Rust 基础](.#21-day-1--rust-基础)
+    - [2.2 Day 2 — 所有权与类型系统](.#22-day-2--所有权与类型系统)
+    - [2.3 Day 3 — 泛型与 Trait](.#23-day-3--泛型与-trait)
+    - [2.4 Day 4 — Android \& 高级主题](.#24-day-4--android--高级主题)
+  - [三、互补性分析](.#三互补性分析)
+  - [四、来源与延伸阅读](.#四来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：本文档《Comprehensive Rust 课程映射》在 Rust 知识体系中属于哪一层级的元数据？（理解层）](.#测验-1本文档comprehensive-rust-课程映射在-rust-知识体系中属于哪一层级的元数据理解层)
+    - [测验 2：《Comprehensive Rust 课程映射》的主要用途是什么？（理解层）](.#测验-2comprehensive-rust-课程映射的主要用途是什么理解层)
+    - [测验 3：元数据层文档能否替代 L1-L7 的核心概念学习？（理解层）](.#测验-3元数据层文档能否替代-l1-l7-的核心概念学习理解层)
 
 ---
 
@@ -96,7 +96,7 @@ Day 4: Android 与高级主题 (4 小时)
 
 | Comprehensive Rust 章节 | 本知识体系对应文件 | 对应章节 | 补充深度 |
 |:---|:---|:---|:---|
-| **Welcome** | [`00_meta/learning_guide.md`](./learning_guide.md) | 〇、学习路径选择全景 | 本体系提供更细粒度的背景适配 |
+| **Welcome** | [`00_meta/learning_guide.md`](learning_guide.md) | 〇、学习路径选择全景 | 本体系提供更细粒度的背景适配 |
 | **Hello, World** | [`06_ecosystem/01_toolchain.md`](../06_ecosystem/01_toolchain.md) | §1.1 安装与配置 | 补充 `rustup` 原理和交叉编译 |
 | **Variables** | [`01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) | §2.1 变量绑定 | 补充移动语义的前置形式化 |
 | **Scalar Types** | [`01_foundation/04_type_system.md`](../01_foundation/04_type_system.md) | §2.1 标量类型 | 补充类型推导与类型别名 |
@@ -178,8 +178,8 @@ Comprehensive Rust 与本知识体系的互补关系:
 
 ## 相关概念文件
 
-- [Learning Guide](./learning_guide.md) — 本知识体系学习指南
-- [Bloom Taxonomy](./03_bloom_taxonomy.md) — 认知层级框架
+- [Learning Guide](learning_guide.md) — 本知识体系学习指南
+- [Bloom Taxonomy](03_bloom_taxonomy.md) — 认知层级框架
 - [Application Domains](../06_ecosystem/04_application_domains.md) — Rust 应用领域分析
 
 ---

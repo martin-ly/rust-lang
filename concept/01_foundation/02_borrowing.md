@@ -24,12 +24,12 @@
 > **层级**: L1 基础概念
 > **前置概念**:
 >
-> [Ownership](./01_ownership.md)
+> [Ownership](01_ownership.md)
 >
 > **后置概念**:
 >
-> [Lifetimes](./03_lifetimes.md) ·
-> [Slices](../01_foundation/04_type_system.md) ·
+> [Lifetimes](03_lifetimes.md) ·
+> [Slices](04_type_system.md) ·
 > [Interior Mutability](../02_intermediate/03_memory_management.md)
 >
 > **主要来源**:
@@ -946,9 +946,9 @@ fn main() {
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| **所有权（Ownership）** | [`./01_ownership.md`](./01_ownership.md) | 借用规则的前提与基础 |
-| **生命周期** | [`./03_lifetimes.md`](./03_lifetimes.md) | 引用时效约束，与借用互补 |
-| **类型系统（Type System）** | [`./04_type_system.md`](./04_type_system.md) | 引用是类型的一部分，`&T`/`&mut T` 是类型构造器 |
+| **所有权（Ownership）** | [`./01_ownership.md`](01_ownership.md) | 借用规则的前提与基础 |
+| **生命周期** | [`./03_lifetimes.md`](03_lifetimes.md) | 引用时效约束，与借用互补 |
+| **类型系统（Type System）** | [`./04_type_system.md`](04_type_system.md) | 引用是类型的一部分，`&T`/`&mut T` 是类型构造器 |
 | **Traits** | [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) | `Borrow`、`AsRef`、`Deref` 等 trait 的借用语义 |
 | **智能指针（Smart Pointer）** | [`../02_intermediate/03_memory_management.md`](../02_intermediate/03_memory_management.md) | `Box`、`Rc`、`Arc` 的 Deref 自动借用 |
 | **内部可变性** | [`../02_intermediate/03_memory_management.md`](../02_intermediate/03_memory_management.md) | `RefCell`、`Cell` 运行时替代编译期检查 |
@@ -1590,8 +1590,8 @@ fn main() {
 
 ## 实践
 
-> **对应 Crate**: [`c01_ownership_borrow_scope`](../crates/c01_ownership_borrow_scope/)
-> **对应练习**: [`exercises/src/ownership_borrowing/`](../exercises/src/ownership_borrowing/)
+> **对应 Crate**: [`c01_ownership_borrow_scope`](../crates/c01_ownership_borrow_scope)
+> **对应练习**: [`exercises/src/ownership_borrowing/`](../exercises/src/ownership_borrowing)
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。
 
@@ -1941,7 +1941,7 @@ Rust 支持 **Split Borrow**（字段级借用分析）：编译器能识别 `p.
 
 > 学完借用与生命周期后，建议通过 Brown University 的 **Ownership Inventory #1** 进行自测：
 >
-> - 本地映射与样题：[所有权清单自测：Brown University Ownership Inventory](./28_ownership_inventories_brown_book.md)
+> - 本地映射与样题：[所有权清单自测：Brown University Ownership Inventory](28_ownership_inventories_brown_book.md)
 > - Brown Book 交互式题目：[Ownership Inventory #1](https://rust-book.cs.brown.edu/ch06-04-inventory.html)
 >
 > Inventory 题目灵感来自真实 StackOverflow 问题，能有效暴露对「移动、借用、生命周期」的常见误解。

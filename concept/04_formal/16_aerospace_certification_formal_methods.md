@@ -9,7 +9,7 @@
 >
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 系统讲解 **DO-178C 航空软件标准** 与 **DO-333 形式化方法补充** 的 Rust 映射——从软件等级 A~E 到定理证明、模型检查、抽象解释三类形式化方法在 Rust 生态中的工具链映射，分析 Rust 所有权（Ownership）系统在航空航天安全关键软件中的独特形式化优势。
-> **前置概念**: [形式化方法](./13_formal_methods.md) · [Hoare 逻辑](./15_hoare_logic.md) · [RustBelt](./04_rustbelt.md)
+> **前置概念**: [形式化方法](13_formal_methods.md) · [Hoare 逻辑](15_hoare_logic.md) · [RustBelt](04_rustbelt.md)
 > **后置概念**: Unsafe · 并发安全（Concurrency Safety） · 验证工具链
 
 ---
@@ -24,50 +24,50 @@
 
 ## 📑 目录
 
-- [航空航天认证与形式化方法 (Aerospace Certification \& Formal Methods)](#航空航天认证与形式化方法-aerospace-certification--formal-methods)
-  - [📑 目录](#-目录)
-  - [一、引言](#一引言)
-    - [1.1 DO-178C 航空软件标准](#11-do-178c-航空软件标准)
-    - [1.2 DO-333 Formal Methods Supplement](#12-do-333-formal-methods-supplement)
-  - [二、DO-178C 等级要求矩阵](#二do-178c-等级要求矩阵)
-  - [三、DO-333 形式化方法映射](#三do-333-形式化方法映射)
-    - [3.1 定理证明 (Theorem Proving)](#31-定理证明-theorem-proving)
-    - [3.2 模型检查 (Model Checking)](#32-模型检查-model-checking)
-    - [3.3 抽象解释 (Abstract Interpretation)](#33-抽象解释-abstract-interpretation)
-  - [四、形式化目标 → 工具映射表](#四形式化目标--工具映射表)
-  - [五、认证案例研究](#五认证案例研究)
-    - [5.1 Rockwell Collins 双通道场引导系统](#51-rockwell-collins-双通道场引导系统)
-    - [5.2 适配 Rust 的形式化验证方案](#52-适配-rust-的形式化验证方案)
-  - [六、Property Preservation](#六property-preservation)
-    - [6.1 源代码到目标代码的性质保持](#61-源代码到目标代码的性质保持)
-    - [6.2 Ferrocene 的合格编译论证](#62-ferrocene-的合格编译论证)
-  - [七、工具鉴定 (DO-330)](#七工具鉴定-do-330)
-    - [7.1 TQL-1 至 TQL-5 映射](#71-tql-1-至-tql-5-映射)
-    - [7.2 Rust 形式化工具的鉴定路径](#72-rust-形式化工具的鉴定路径)
-  - [八、Ferrocene 认证范围](#八ferrocene-认证范围)
-  - [九、Rust 独特优势](#九rust-独特优势)
-  - [十、边界与缺口](#十边界与缺口)
-    - [10.1 Trait 系统未形式化](#101-trait-系统未形式化)
-    - [10.2 Unsafe Rust 缺口](#102-unsafe-rust-缺口)
-    - [10.3 缺少 CompCert 级认证编译器](#103-缺少-compcert-级认证编译器)
-  - [十一、来源与延伸阅读](#十一来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：航空航天认证形式化方法的编译错误](#十边界测试航空航天认证形式化方法的编译错误)
-    - [10.1 边界测试：MISRA C 规则的 Rust 类比（编译错误）](#101-边界测试misra-c-规则的-rust-类比编译错误)
-    - [10.2 边界测试：确定性执行与 `const fn`（编译错误）](#102-边界测试确定性执行与-const-fn编译错误)
-    - [10.3 边界测试：SPARK 模式的 Rust 近似与 `no_panic`（编译错误）](#103-边界测试spark-模式的-rust-近似与-no_panic编译错误)
-    - [10.4 边界测试：MC/DC 覆盖率与短路逻辑（逻辑错误）](#104-边界测试mcdc-覆盖率与短路逻辑逻辑错误)
-    - [10.3 边界测试：形式化验证与 DO-178C 的代码覆盖冲突（验证盲区）](#103-边界测试形式化验证与-do-178c-的代码覆盖冲突验证盲区)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：DO-178C 标准中的 A/B/C/D/E 五个软件等级（DAL）分别对应什么失效条件？（理解层）](#测验-1do-178c-标准中的-abcde-五个软件等级dal分别对应什么失效条件理解层)
-    - [测验 2：Ferrocene 是什么？它在 Rust 航空航天认证中解决了什么问题？（理解层）](#测验-2ferrocene-是什么它在-rust-航空航天认证中解决了什么问题理解层)
-    - [测验 3：为什么航空航天领域特别需要形式化验证，而普通 Web 应用通常不需要？（理解层）](#测验-3为什么航空航天领域特别需要形式化验证而普通-web-应用通常不需要理解层)
-    - [测验 4：MISRA C 和 Rust 在安全性保证上有什么根本区别？（理解层）](#测验-4misra-c-和-rust-在安全性保证上有什么根本区别理解层)
-    - [测验 5：Rust 的所有权系统如何帮助满足 DO-178C 的"数据耦合"和"控制耦合"要求？（理解层）](#测验-5rust-的所有权系统如何帮助满足-do-178c-的数据耦合和控制耦合要求理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [航空航天认证与形式化方法 (Aerospace Certification \& Formal Methods)](.#航空航天认证与形式化方法-aerospace-certification--formal-methods)
+  - [📑 目录](.#-目录)
+  - [一、引言](.#一引言)
+    - [1.1 DO-178C 航空软件标准](.#11-do-178c-航空软件标准)
+    - [1.2 DO-333 Formal Methods Supplement](.#12-do-333-formal-methods-supplement)
+  - [二、DO-178C 等级要求矩阵](.#二do-178c-等级要求矩阵)
+  - [三、DO-333 形式化方法映射](.#三do-333-形式化方法映射)
+    - [3.1 定理证明 (Theorem Proving)](.#31-定理证明-theorem-proving)
+    - [3.2 模型检查 (Model Checking)](.#32-模型检查-model-checking)
+    - [3.3 抽象解释 (Abstract Interpretation)](.#33-抽象解释-abstract-interpretation)
+  - [四、形式化目标 → 工具映射表](.#四形式化目标--工具映射表)
+  - [五、认证案例研究](.#五认证案例研究)
+    - [5.1 Rockwell Collins 双通道场引导系统](.#51-rockwell-collins-双通道场引导系统)
+    - [5.2 适配 Rust 的形式化验证方案](.#52-适配-rust-的形式化验证方案)
+  - [六、Property Preservation](.#六property-preservation)
+    - [6.1 源代码到目标代码的性质保持](.#61-源代码到目标代码的性质保持)
+    - [6.2 Ferrocene 的合格编译论证](.#62-ferrocene-的合格编译论证)
+  - [七、工具鉴定 (DO-330)](.#七工具鉴定-do-330)
+    - [7.1 TQL-1 至 TQL-5 映射](.#71-tql-1-至-tql-5-映射)
+    - [7.2 Rust 形式化工具的鉴定路径](.#72-rust-形式化工具的鉴定路径)
+  - [八、Ferrocene 认证范围](.#八ferrocene-认证范围)
+  - [九、Rust 独特优势](.#九rust-独特优势)
+  - [十、边界与缺口](.#十边界与缺口)
+    - [10.1 Trait 系统未形式化](.#101-trait-系统未形式化)
+    - [10.2 Unsafe Rust 缺口](.#102-unsafe-rust-缺口)
+    - [10.3 缺少 CompCert 级认证编译器](.#103-缺少-compcert-级认证编译器)
+  - [十一、来源与延伸阅读](.#十一来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：航空航天认证形式化方法的编译错误](.#十边界测试航空航天认证形式化方法的编译错误)
+    - [10.1 边界测试：MISRA C 规则的 Rust 类比（编译错误）](.#101-边界测试misra-c-规则的-rust-类比编译错误)
+    - [10.2 边界测试：确定性执行与 `const fn`（编译错误）](.#102-边界测试确定性执行与-const-fn编译错误)
+    - [10.3 边界测试：SPARK 模式的 Rust 近似与 `no_panic`（编译错误）](.#103-边界测试spark-模式的-rust-近似与-no_panic编译错误)
+    - [10.4 边界测试：MC/DC 覆盖率与短路逻辑（逻辑错误）](.#104-边界测试mcdc-覆盖率与短路逻辑逻辑错误)
+    - [10.3 边界测试：形式化验证与 DO-178C 的代码覆盖冲突（验证盲区）](.#103-边界测试形式化验证与-do-178c-的代码覆盖冲突验证盲区)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：DO-178C 标准中的 A/B/C/D/E 五个软件等级（DAL）分别对应什么失效条件？（理解层）](.#测验-1do-178c-标准中的-abcde-五个软件等级dal分别对应什么失效条件理解层)
+    - [测验 2：Ferrocene 是什么？它在 Rust 航空航天认证中解决了什么问题？（理解层）](.#测验-2ferrocene-是什么它在-rust-航空航天认证中解决了什么问题理解层)
+    - [测验 3：为什么航空航天领域特别需要形式化验证，而普通 Web 应用通常不需要？（理解层）](.#测验-3为什么航空航天领域特别需要形式化验证而普通-web-应用通常不需要理解层)
+    - [测验 4：MISRA C 和 Rust 在安全性保证上有什么根本区别？（理解层）](.#测验-4misra-c-和-rust-在安全性保证上有什么根本区别理解层)
+    - [测验 5：Rust 的所有权系统如何帮助满足 DO-178C 的"数据耦合"和"控制耦合"要求？（理解层）](.#测验-5rust-的所有权系统如何帮助满足-do-178c-的数据耦合和控制耦合要求理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -861,10 +861,10 @@ graph TD
 >
 >
 
-- [形式化方法](./13_formal_methods.md) — Rust 形式化验证工具概览
-- [Hoare 逻辑](./15_hoare_logic.md) — 程序验证的形式化基础
-- [RustBelt](./04_rustbelt.md) — Rust 类型系统的 Iris 形式化
-- [Separation Logic](./11_separation_logic.md) — 分离逻辑与内存模型
+- [形式化方法](13_formal_methods.md) — Rust 形式化验证工具概览
+- [Hoare 逻辑](15_hoare_logic.md) — 程序验证的形式化基础
+- [RustBelt](04_rustbelt.md) — Rust 类型系统的 Iris 形式化
+- [Separation Logic](11_separation_logic.md) — 分离逻辑与内存模型
 - [Unsafe](../03_advanced/03_unsafe.md) — Unsafe Rust 的边界
 - [并发安全](../03_advanced/01_concurrency.md) — 并发模型与数据竞争
 

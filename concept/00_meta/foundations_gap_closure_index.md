@@ -7,8 +7,8 @@
 > **层级**: L0 元信息
 > **A/S/P 标记**: S — Structure
 > **双维定位**: C×Eva
-> **前置概念**: [PL Foundations Roadmap](./pl_foundations_roadmap.md) · [C/C++ Engineering Roadmap](./cpp_rust_engineering_roadmap.md) · [Pattern Semantic Space Index](./pattern_semantic_space_index.md)
-> **后置概念**: [Concept Audit Guide](./08_concept_audit_guide.md)
+> **前置概念**: [PL Foundations Roadmap](pl_foundations_roadmap.md) · [C/C++ Engineering Roadmap](cpp_rust_engineering_roadmap.md) · [Pattern Semantic Space Index](pattern_semantic_space_index.md)
+> **后置概念**: [Concept Audit Guide](08_concept_audit_guide.md)
 > **主要来源**: [SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md](../../reports/SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md)
 ---
 
@@ -31,7 +31,7 @@
 | 副作用与纯度 | P0 | ✅ 完成 | [Effects and Purity](../01_foundation/21_effects_and_purity.md) |
 | 控制流深化 | P1 | ✅ 完成 | [Control Flow](../01_foundation/07_control_flow.md) |
 | 数据抽象谱系 | P1 | ✅ 完成 | [Data Abstraction Spectrum](../01_foundation/22_data_abstraction_spectrum.md) |
-| 统一路线图 | — | ✅ 新增 | [PL Foundations Roadmap](./pl_foundations_roadmap.md) |
+| 统一路线图 | — | ✅ 新增 | [PL Foundations Roadmap](pl_foundations_roadmap.md) |
 
 ---
 
@@ -45,7 +45,7 @@
 | SFINAE / 模板元编程 | P1 | ✅ 完成 | [Traits §5.8](../02_intermediate/01_traits.md) |
 | 构造/初始化/运算符/RTTI/友元 | P1 | ✅ 完成 | [Surface Features](../05_comparative/16_cpp_rust_surface_features.md) + 专门文件 |
 | 预处理器 vs 宏 | P2 | ✅ 完成 | [Preprocessor vs Macros](../02_intermediate/26_c_preprocessor_vs_rust_macros.md) |
-| 统一路线图 | — | ✅ 新增 | [C/C++ Engineering Roadmap](./cpp_rust_engineering_roadmap.md) |
+| 统一路线图 | — | ✅ 新增 | [C/C++ Engineering Roadmap](cpp_rust_engineering_roadmap.md) |
 
 ### Phase B 专门文件清单
 
@@ -62,8 +62,8 @@
 | 审计任务 | 优先级 | 状态 | 文件 |
 |:---|:---:|:---:|:---|
 | 模式组合代数 | P0 | ✅ 完成 | [Pattern Composition Algebra](../06_ecosystem/35_pattern_composition_algebra.md) |
-| 算法-模式语义桥 | P0 | ✅ 完成 | [Algorithm-Pattern Semantic Bridge](./semantic_bridge_algorithms_patterns.md) |
-| 统一模式索引 | P1 | ✅ 新增 | [Pattern Semantic Space Index](./pattern_semantic_space_index.md) |
+| 算法-模式语义桥 | P0 | ✅ 完成 | [Algorithm-Pattern Semantic Bridge](semantic_bridge_algorithms_patterns.md) |
+| 统一模式索引 | P1 | ✅ 新增 | [Pattern Semantic Space Index](pattern_semantic_space_index.md) |
 | 并发/分布式模式谱系 | P2 | ✅ 已存在 | [Parallel Distributed Pattern Spectrum](../03_advanced/19_parallel_distributed_pattern_spectrum.md) |
 | 模板去同质化 | P1 | ⚠️ 未启动 | 需后续为 23 个形式化模式文件设计差异化结构 |
 
@@ -73,10 +73,10 @@
 
 | 文件 | 层级 | 作用 |
 |:---|:---|:---|
-| [Pattern Semantic Space Index](./pattern_semantic_space_index.md) | 00_meta | 模式语义空间坐标系导航 |
-| [C/C++ Engineering Roadmap](./cpp_rust_engineering_roadmap.md) | 00_meta | C++ 迁移者主题簇地图 |
-| [PL Foundations Roadmap](./pl_foundations_roadmap.md) | 00_meta | 通用 PL 基座导航 |
-| [Foundations Gap Closure Index](./foundations_gap_closure_index.md) | 00_meta | 本文件：补全状态追踪 |
+| [Pattern Semantic Space Index](pattern_semantic_space_index.md) | 00_meta | 模式语义空间坐标系导航 |
+| [C/C++ Engineering Roadmap](cpp_rust_engineering_roadmap.md) | 00_meta | C++ 迁移者主题簇地图 |
+| [PL Foundations Roadmap](pl_foundations_roadmap.md) | 00_meta | 通用 PL 基座导航 |
+| [Foundations Gap Closure Index](foundations_gap_closure_index.md) | 00_meta | 本文件：补全状态追踪 |
 | [RTTI and Dynamic Typing](../02_intermediate/25_rtti_and_dynamic_typing.md) | 02_intermediate | C++ RTTI vs Rust `Any` |
 | [Preprocessor vs Macros](../02_intermediate/26_c_preprocessor_vs_rust_macros.md) | 02_intermediate | C 预处理器 vs Rust 宏 |
 | [Exception Safety](../02_intermediate/27_exception_safety_rust_cpp.md) | 02_intermediate | 异常安全深度对比 |
@@ -104,7 +104,7 @@
 
 ### 6.2 自动双语标注残留
 
-经抽查，未发现明显的 i18n 脚本机械残留。正常的关键术语双语标注（如"所有权 (Ownership)"）符合 [Terminology Glossary](./terminology_glossary.md) 规范。
+经抽查，未发现明显的 i18n 脚本机械残留。正常的关键术语双语标注（如"所有权 (Ownership)"）符合 [Terminology Glossary](terminology_glossary.md) 规范。
 
 ### 6.3 重复文件已清理
 

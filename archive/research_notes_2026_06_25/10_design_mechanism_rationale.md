@@ -9,39 +9,39 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Rust 设计机制论证：理由与完整论证](#rust-设计机制论证理由与完整论证)
-  - [📑 目录](#-目录)
-  - [🎯 文档宗旨与问题导向 {#-文档宗旨与问题导向}](#-文档宗旨与问题导向--文档宗旨与问题导向)
-    - [核心问题响应](#核心问题响应)
-    - [论证结构](#论证结构)
-  - [📍 Pin：堆/栈区分使用场景的完整论证 {#-pin堆栈区分使用场景的完整论证}](#-pin堆栈区分使用场景的完整论证--pin堆栈区分使用场景的完整论证)
-    - [1. 问题动机：为何需要 Pin？](#1-问题动机为何需要-pin)
-    - [2. 设计决策：为何区分堆与栈？](#2-设计决策为何区分堆与栈)
-    - [3. 形式化论证：堆/栈固定语义](#3-形式化论证堆栈固定语义)
-    - [4. 决策树：Pin 使用场景选型](#4-决策树pin-使用场景选型)
-    - [5. 反例：违反堆/栈约束的后果](#5-反例违反堆栈约束的后果)
-  - [🔒 所有权：为何采用移动语义而非复制语义？ {#-所有权为何采用移动语义而非复制语义}](#-所有权为何采用移动语义而非复制语义--所有权为何采用移动语义而非复制语义)
-  - [📐 借用：为何可变借用独占？ {#-借用为何可变借用独占}](#-借用为何可变借用独占--借用为何可变借用独占)
-  - [⏱️ 生命周期：为何需要显式标注？ {#️-生命周期为何需要显式标注}](#️-生命周期为何需要显式标注-️-生命周期为何需要显式标注)
-  - [📊 型变：为何协变/逆变/不变三种？ {#-型变为何协变逆变不变三种}](#-型变为何协变逆变不变三种--型变为何协变逆变不变三种)
-  - [🔄 异步：为何 Future 需要 Pin？ {#-异步为何-future-需要-pin}](#-异步为何-future-需要-pin--异步为何-future-需要-pin)
-  - [🔀 Send/Sync：为何需要 Trait 标记？ {#-sendsync为何需要-trait-标记}](#-sendsync为何需要-trait-标记--sendsync为何需要-trait-标记)
-  - [🎭 Trait 对象：为何 vtable 与对象安全？ {#-trait-对象为何-vtable-与对象安全}](#-trait-对象为何-vtable-与对象安全--trait-对象为何-vtable-与对象安全)
-  - [📦 宏：为何声明宏与过程宏分离？ {#-宏为何声明宏与过程宏分离}](#-宏为何声明宏与过程宏分离--宏为何声明宏与过程宏分离)
-  - [🔄 闭包：为何三种捕获方式？ {#-闭包为何三种捕获方式}](#-闭包为何三种捕获方式--闭包为何三种捕获方式)
-  - [🎯 模式匹配：为何穷尽？ {#-模式匹配为何穷尽}](#-模式匹配为何穷尽--模式匹配为何穷尽)
-  - [📦 Option/Result：为何无 null？ {#-optionresult为何无-null}](#-optionresult为何无-null--optionresult为何无-null)
-  - [📐 设计机制论证矩阵总览 {#-设计机制论证矩阵总览}](#-设计机制论证矩阵总览--设计机制论证矩阵总览)
-    - [相关思维表征](#相关思维表征)
-  - [📚 相关文档 {#-相关文档}](#-相关文档--相关文档)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [Rust 设计机制论证：理由与完整论证](.#rust-设计机制论证理由与完整论证)
+  - [📑 目录](.#-目录)
+  - [🎯 文档宗旨与问题导向 {#-文档宗旨与问题导向}](.#-文档宗旨与问题导向--文档宗旨与问题导向)
+    - [核心问题响应](.#核心问题响应)
+    - [论证结构](.#论证结构)
+  - [📍 Pin：堆/栈区分使用场景的完整论证 {#-pin堆栈区分使用场景的完整论证}](.#-pin堆栈区分使用场景的完整论证--pin堆栈区分使用场景的完整论证)
+    - [1. 问题动机：为何需要 Pin？](.#1-问题动机为何需要-pin)
+    - [2. 设计决策：为何区分堆与栈？](.#2-设计决策为何区分堆与栈)
+    - [3. 形式化论证：堆/栈固定语义](.#3-形式化论证堆栈固定语义)
+    - [4. 决策树：Pin 使用场景选型](.#4-决策树pin-使用场景选型)
+    - [5. 反例：违反堆/栈约束的后果](.#5-反例违反堆栈约束的后果)
+  - [🔒 所有权：为何采用移动语义而非复制语义？ {#-所有权为何采用移动语义而非复制语义}](.#-所有权为何采用移动语义而非复制语义--所有权为何采用移动语义而非复制语义)
+  - [📐 借用：为何可变借用独占？ {#-借用为何可变借用独占}](.#-借用为何可变借用独占--借用为何可变借用独占)
+  - [⏱️ 生命周期：为何需要显式标注？ {#️-生命周期为何需要显式标注}](.#️-生命周期为何需要显式标注-️-生命周期为何需要显式标注)
+  - [📊 型变：为何协变/逆变/不变三种？ {#-型变为何协变逆变不变三种}](.#-型变为何协变逆变不变三种--型变为何协变逆变不变三种)
+  - [🔄 异步：为何 Future 需要 Pin？ {#-异步为何-future-需要-pin}](.#-异步为何-future-需要-pin--异步为何-future-需要-pin)
+  - [🔀 Send/Sync：为何需要 Trait 标记？ {#-sendsync为何需要-trait-标记}](.#-sendsync为何需要-trait-标记--sendsync为何需要-trait-标记)
+  - [🎭 Trait 对象：为何 vtable 与对象安全？ {#-trait-对象为何-vtable-与对象安全}](.#-trait-对象为何-vtable-与对象安全--trait-对象为何-vtable-与对象安全)
+  - [📦 宏：为何声明宏与过程宏分离？ {#-宏为何声明宏与过程宏分离}](.#-宏为何声明宏与过程宏分离--宏为何声明宏与过程宏分离)
+  - [🔄 闭包：为何三种捕获方式？ {#-闭包为何三种捕获方式}](.#-闭包为何三种捕获方式--闭包为何三种捕获方式)
+  - [🎯 模式匹配：为何穷尽？ {#-模式匹配为何穷尽}](.#-模式匹配为何穷尽--模式匹配为何穷尽)
+  - [📦 Option/Result：为何无 null？ {#-optionresult为何无-null}](.#-optionresult为何无-null--optionresult为何无-null)
+  - [📐 设计机制论证矩阵总览 {#-设计机制论证矩阵总览}](.#-设计机制论证矩阵总览--设计机制论证矩阵总览)
+    - [相关思维表征](.#相关思维表征)
+  - [📚 相关文档 {#-相关文档}](.#-相关文档--相关文档)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -403,11 +403,11 @@ Pin 使用场景决策树
 
 **定理 OR-T1（显式错误处理）**：若 $e : \mathit{Result}[T, E]$ 且无 `unwrap`/`expect`，则 $e$ 的 `None`/`Err` 分支必被处理；编译时保证。
 
-*证明*：由 match 穷尽规则；`?` 操作符将 `Err` 传播至调用者，调用者需处理或标注 `-> Result<_, E>`。见 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) 定理 3.1。∎
+*证明*：由 match 穷尽规则；`?` 操作符将 `Err` 传播至调用者，调用者需处理或标注 `-> Result<_, E>`。见 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](10_language_semantics_expressiveness.md) 定理 3.1。∎
 
 **推论 OR-C1**：`Option`/`Result` 与构造性逻辑 $T \lor E$ 对应；`!` (never) 对应 $\bot$；无隐式 null。
 
-**论证**：类型系统强制处理 None/Err；`?` 操作符传播错误；构造性逻辑（Curry-Howard）对应 $T \lor E$。见 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md)。
+**论证**：类型系统强制处理 None/Err；`?` 操作符传播错误；构造性逻辑（Curry-Howard）对应 $T \lor E$。见 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](10_language_semantics_expressiveness.md)。
 
 **反例**：unwrap 空 Option/Err 导致 panic；未处理 Result 编译警告。
 
@@ -444,9 +444,9 @@ Pin 使用场景决策树
 | :--- | :--- |
 | 思维导图 | [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) §8 设计机制论证 |
 | 决策树 | 本文各机制「使用场景/决策树」；[DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md) |
-| 多维矩阵 | [DESIGN_MECHANISM_RATIONALE 矩阵总览](#设计机制论证矩阵总览)；[UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md) |
+| 多维矩阵 | [DESIGN_MECHANISM_RATIONALE 矩阵总览](.#设计机制论证矩阵总览)；[UNIFIED_SYSTEMATIC_FRAMEWORK](10_unified_systematic_framework.md) |
 
-*依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](../../archive/research_notes_2026_06_25/10_hierarchical_mapping_and_summary.md) § 文档↔思维表征。
+*依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](10_hierarchical_mapping_and_summary.md) § 文档↔思维表征。
 
 ---
 
@@ -457,11 +457,11 @@ Pin 使用场景决策树
 | 文档 | 用途 |
 | :--- | :--- |
 | [pin_self_referential](formal_methods/10_pin_self_referential.md) | Pin 形式化定义、定理、反例 |
-| [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md) | 全面系统化梳理、语义归纳 |
-| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) | 构造性语义、表达能力边界 |
-| [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) | 论证缺口、概念-公理-定理映射 |
+| [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](10_comprehensive_systematic_overview.md) | 全面系统化梳理、语义归纳 |
+| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](10_language_semantics_expressiveness.md) | 构造性语义、表达能力边界 |
+| [FORMAL_PROOF_SYSTEM_GUIDE](10_formal_proof_system_guide.md) | 论证缺口、概念-公理-定理映射 |
 | [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) | 设计机制论证思维导图（§8） |
-| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md) | **Rust 1.93 语言特性全面分析**：92 项特性全覆盖 |
+| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](10_rust_193_language_features_comprehensive_analysis.md) | **Rust 1.93 语言特性全面分析**：92 项特性全覆盖 |
 
 ---
 
@@ -534,7 +534,7 @@ Pin 使用场景决策树
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

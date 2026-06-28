@@ -11,58 +11,58 @@
 
 ### 核心概念
 
-- [📖 概述与导航](./OVERVIEW.md) - 文档结构和阅读路径
+- [📖 概述与导航](OVERVIEW.md) - 文档结构和阅读路径
 - [📚 顶层说明](../README.md) - 项目概述和快速开始
 - [📋 章节导引](../09_design_patterns.md) - 设计模式章节导引
-- [🚀 Rust 1.93.0 设计模式改进](./RUST_192_DESIGN_PATTERN_IMPROVEMENTS.md) - 版本对齐分析
+- [🚀 Rust 1.93.0 设计模式改进](RUST_192_DESIGN_PATTERN_IMPROVEMENTS.md) - 版本对齐分析
 
 ### Tier 1 基础层 ⭐ NEW
 
-- [🎯 项目概览](./tier_01_foundations/01_项目概览.md) - 快速了解设计模式
-- [🗺️ 主索引导航](./tier_01_foundations/02_主索引导航.md) - 找到适合你的学习路径
-- [📖 术语表](./tier_01_foundations/03_术语表.md) - 核心术语速查
-- [❓ 常见问题](./tier_01_foundations/04_常见问题.md) - 解决常见疑问
+- [🎯 项目概览](tier_01_foundations/01_项目概览.md) - 快速了解设计模式
+- [🗺️ 主索引导航](tier_01_foundations/02_主索引导航.md) - 找到适合你的学习路径
+- [📖 术语表](tier_01_foundations/03_术语表.md) - 核心术语速查
+- [❓ 常见问题](tier_01_foundations/04_常见问题.md) - 解决常见疑问
 
 ### 主题分类
 
 #### 🏗️ 结构型模式（源码）
 
-- [src/structural/adapter/](../src/structural/adapter/) - 适配器模式
-- [src/structural/bridge/](../src/structural/bridge/) - 桥接模式
-- [src/structural/composite/](../src/structural/composite/) - 组合模式
-- [src/structural/decorator/](../src/structural/decorator/) - 装饰器模式
-- [src/structural/facade/](../src/structural/facade/) - 外观模式
-- [src/structural/flyweight/](../src/structural/flyweight/) - 享元模式
-- [src/structural/proxy/](../src/structural/proxy/) - 代理模式
+- [src/structural/adapter/](../src/structural/adapter) - 适配器模式
+- [src/structural/bridge/](../src/structural/bridge) - 桥接模式
+- [src/structural/composite/](../src/structural/composite) - 组合模式
+- [src/structural/decorator/](../src/structural/decorator) - 装饰器模式
+- [src/structural/facade/](../src/structural/facade) - 外观模式
+- [src/structural/flyweight/](../src/structural/flyweight) - 享元模式
+- [src/structural/proxy/](../src/structural/proxy) - 代理模式
 
 #### 🏭 创建型模式（源码）
 
-- [src/creational/factory_method/](../src/creational/factory_method/) - 工厂方法
-- [src/creational/abstract_factory/](../src/creational/abstract_factory/) - 抽象工厂
-- [src/creational/builder/](../src/creational/builder/) - 建造者模式
-- [src/creational/prototype/](../src/creational/prototype/) - 原型模式
-- [src/creational/singleton/](../src/creational/singleton/) - 单例模式
-- [src/creational/object_pool/](../src/creational/object_pool/) - 对象池模式
-- [src/creational/static_creation_method/](../src/creational/static_creation_method/) - 静态创建方法
+- [src/creational/factory_method/](../src/creational/factory_method) - 工厂方法
+- [src/creational/abstract_factory/](../src/creational/abstract_factory) - 抽象工厂
+- [src/creational/builder/](../src/creational/builder) - 建造者模式
+- [src/creational/prototype/](../src/creational/prototype) - 原型模式
+- [src/creational/singleton/](../src/creational/singleton) - 单例模式
+- [src/creational/object_pool/](../src/creational/object_pool) - 对象池模式
+- [src/creational/static_creation_method/](../src/creational/static_creation_method) - 静态创建方法
 
 #### 🎭 行为型模式（源码）
 
-- [src/behavioral/strategy/](../src/behavioral/strategy/) - 策略模式
-- [src/behavioral/observer/](../src/behavioral/observer/) - 观察者模式
-- [src/behavioral/iterator/](../src/behavioral/iterator/) - 迭代器模式
-- [src/behavioral/state/](../src/behavioral/state/) - 状态模式
-- [src/behavioral/command/](../src/behavioral/command/) - 命令模式
-- [src/behavioral/mediator/](../src/behavioral/mediator/) - 中介者模式
-- [src/behavioral/memento/](../src/behavioral/memento/) - 备忘录模式
-- [src/behavioral/interpreter/](../src/behavioral/interpreter/) - 解释器模式
-- [src/behavioral/visitor/](../src/behavioral/visitor/) - 访问者模式
-- [src/behavioral/chain_of_responsibility/](../src/behavioral/chain_of_responsibility/) - 责任链模式
-- [src/behavioral/template_method/](../src/behavioral/template_method/) - 模板方法模式
+- [src/behavioral/strategy/](../src/behavioral/strategy) - 策略模式
+- [src/behavioral/observer/](../src/behavioral/observer) - 观察者模式
+- [src/behavioral/iterator/](../src/behavioral/iterator) - 迭代器模式
+- [src/behavioral/state/](../src/behavioral/state) - 状态模式
+- [src/behavioral/command/](../src/behavioral/command) - 命令模式
+- [src/behavioral/mediator/](../src/behavioral/mediator) - 中介者模式
+- [src/behavioral/memento/](../src/behavioral/memento) - 备忘录模式
+- [src/behavioral/interpreter/](../src/behavioral/interpreter) - 解释器模式
+- [src/behavioral/visitor/](../src/behavioral/visitor) - 访问者模式
+- [src/behavioral/chain_of_responsibility/](../src/behavioral/chain_of_responsibility) - 责任链模式
+- [src/behavioral/template_method/](../src/behavioral/template_method) - 模板方法模式
 
 #### ⚡ 并发与并行（源码）
 
-- [src/concurrency/](../src/concurrency/) - 并发模式
-- [src/parallel/](../src/parallel/) - 并行模式
+- [src/concurrency/](../src/concurrency) - 并发模式
+- [src/parallel/](../src/parallel) - 并行模式
 
 #### 🌐 领域专题（源码）
 
@@ -75,31 +75,31 @@
 
 ### 🚀 初学者路径
 
-1. **Tier 1 基础层** → [tier_01_foundations/](./tier_01_foundations/README.md)
-   - [项目概览](./tier_01_foundations/01_项目概览.md)
-   - [主索引导航](./tier_01_foundations/02_主索引导航.md)
-   - [术语表](./tier_01_foundations/03_术语表.md)
-   - [常见问题](./tier_01_foundations/04_常见问题.md)
-2. **基础概念** → [OVERVIEW.md](./OVERVIEW.md)
+1. **Tier 1 基础层** → [tier_01_foundations/](tier_01_foundations/README.md)
+   - [项目概览](tier_01_foundations/01_项目概览.md)
+   - [主索引导航](tier_01_foundations/02_主索引导航.md)
+   - [术语表](tier_01_foundations/03_术语表.md)
+   - [常见问题](tier_01_foundations/04_常见问题.md)
+2. **基础概念** → [OVERVIEW.md](OVERVIEW.md)
 3. **项目概述** → [../README.md](../README.md)
-4. **创建型模式** → [../src/creational/](../src/creational/)
-5. **实践应用** → [../src/bin/](../src/bin/)
+4. **创建型模式** → [../src/creational/](../src/creational)
+5. **实践应用** → [../src/bin/](../src/bin)
 
 ### 🎓 进阶路径
 
-1. **结构型模式** → [../src/structural/](../src/structural/)
-2. **行为型模式** → [../src/behavioral/](../src/behavioral/)
-3. **并发模式** → [../src/concurrency/](../src/concurrency/)
-4. **并行模式** → [../src/parallel/](../src/parallel/)
+1. **结构型模式** → [../src/structural/](../src/structural)
+2. **行为型模式** → [../src/behavioral/](../src/behavioral)
+3. **并发模式** → [../src/concurrency/](../src/concurrency)
+4. **并行模式** → [../src/parallel/](../src/parallel)
 5. **领域专题** → [../src/web_framework_patterns.rs](../src/web_framework_patterns.rs)
 
 ### 🔬 专家路径
 
 1. **Rust 1.89 分析** → [../RUST_189_DESIGN_PATTERNS_ANALYSIS.md](../RUST_189_DESIGN_PATTERNS_ANALYSIS.md)
 2. **项目报告** → [../PROJECT_COMPLETION_REPORT.md](../PROJECT_COMPLETION_REPORT.md)
-3. **完整源码** → [../src/](../src/)
-4. **测试套件** → [../tests/](../tests/)
-5. **性能基准** → [../benches/](../benches/)
+3. **完整源码** → [../src/](../src)
+4. **测试套件** → [../tests/](../tests)
+5. **性能基准** → [../benches/](../benches)
 
 ## 🛠️ 实用工具
 

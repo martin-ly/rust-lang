@@ -16,43 +16,43 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [研究资源汇总](#研究资源汇总)
-  - [📑 目录](#-目录)
-  - [📚 学术资源 {#-学术资源}](#-学术资源--学术资源)
-    - [形式化方法相关论文](#形式化方法相关论文)
-    - [类型理论相关论文](#类型理论相关论文)
-    - [性能优化相关论文](#性能优化相关论文)
-  - [📖 官方文档 {#-官方文档}](#-官方文档--官方文档)
-    - [Rust 官方文档](#rust-官方文档)
-    - [Rust 编译器文档](#rust-编译器文档)
-    - [Rust 工具文档](#rust-工具文档)
-  - [🛠️ 工具资源 {#️-工具资源}](#️-工具资源-️-工具资源)
-    - [形式化验证工具](#形式化验证工具)
-    - [性能分析工具](#性能分析工具)
-    - [内存分析工具](#内存分析工具)
-    - [代码分析工具](#代码分析工具)
-  - [📝 社区资源 {#-社区资源}](#-社区资源--社区资源)
-    - [社区论坛](#社区论坛)
-    - [社区项目](#社区项目)
-  - [🎓 学习资源 {#-学习资源}](#-学习资源--学习资源)
-    - [在线课程](#在线课程)
-    - [书籍](#书籍)
-  - [📰 新闻和博客 {#-新闻和博客}](#-新闻和博客--新闻和博客)
-    - [官方博客](#官方博客)
-    - [社区博客](#社区博客)
-  - [资源与形式化衔接](#资源与形式化衔接)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
-    - [核心文档](#核心文档)
-    - [研究笔记](#研究笔记)
-    - [形式化证明体系（2026-02-14）](#形式化证明体系2026-02-14)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [研究资源汇总](.#研究资源汇总)
+  - [📑 目录](.#-目录)
+  - [📚 学术资源 {#-学术资源}](.#-学术资源--学术资源)
+    - [形式化方法相关论文](.#形式化方法相关论文)
+    - [类型理论相关论文](.#类型理论相关论文)
+    - [性能优化相关论文](.#性能优化相关论文)
+  - [📖 官方文档 {#-官方文档}](.#-官方文档--官方文档)
+    - [Rust 官方文档](.#rust-官方文档)
+    - [Rust 编译器文档](.#rust-编译器文档)
+    - [Rust 工具文档](.#rust-工具文档)
+  - [🛠️ 工具资源 {#️-工具资源}](.#️-工具资源-️-工具资源)
+    - [形式化验证工具](.#形式化验证工具)
+    - [性能分析工具](.#性能分析工具)
+    - [内存分析工具](.#内存分析工具)
+    - [代码分析工具](.#代码分析工具)
+  - [📝 社区资源 {#-社区资源}](.#-社区资源--社区资源)
+    - [社区论坛](.#社区论坛)
+    - [社区项目](.#社区项目)
+  - [🎓 学习资源 {#-学习资源}](.#-学习资源--学习资源)
+    - [在线课程](.#在线课程)
+    - [书籍](.#书籍)
+  - [📰 新闻和博客 {#-新闻和博客}](.#-新闻和博客--新闻和博客)
+    - [官方博客](.#官方博客)
+    - [社区博客](.#社区博客)
+  - [资源与形式化衔接](.#资源与形式化衔接)
+  - [🔗 相关资源 {#-相关资源}](.#-相关资源--相关资源)
+    - [核心文档](.#核心文档)
+    - [研究笔记](.#研究笔记)
+    - [形式化证明体系（2026-02-14）](.#形式化证明体系2026-02-14)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 📚 学术资源 {#-学术资源}
 >
@@ -100,8 +100,8 @@
 3. **Rust's Type System**
    - 作者: Various
    - 摘要: Rust 类型系统的相关研究
-   - 相关: [类型系统基础](./type_theory/10_type_system_foundations.md)
-   - 形式化衔接: [00_completeness_gaps](../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md)、[PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md)
+   - 相关: [类型系统基础](type_theory/10_type_system_foundations.md)
+   - 形式化衔接: [00_completeness_gaps](formal_methods/00_completeness_gaps.md)、[PROOF_INDEX](10_proof_index.md)
 
 ### 性能优化相关论文
 
@@ -112,12 +112,12 @@
 1. **Optimizing Rust Compiler Performance**
    - 作者: Rust Compiler Team
    - 摘要: Rust 编译器的性能优化技术
-   - 相关: [编译器优化](./experiments/10_compiler_optimizations.md)
+   - 相关: [编译器优化](experiments/10_compiler_optimizations.md)
 
 2. **Memory Management in Rust**
    - 作者: Various
    - 摘要: Rust 内存管理的研究
-   - 相关: [内存分析](./experiments/10_memory_analysis.md)
+   - 相关: [内存分析](experiments/10_memory_analysis.md)
 
 ---
 
@@ -194,22 +194,22 @@
 - **Coq**
   - 链接: <https://coq.inria.fr/>
   - 描述: 交互式定理证明器
-  - 相关: [工具使用指南 - Coq](./10_tools_guide.md)
+  - 相关: [工具使用指南 - Coq](10_tools_guide.md)
 
 - **Lean**
   - 链接: <https://leanprover.github.io/>
   - 描述: 函数式编程语言和证明助手
-  - 相关: [工具使用指南 - Lean](./10_tools_guide.md)
+  - 相关: [工具使用指南 - Lean](10_tools_guide.md)
 
 - **Prusti**
   - 链接: <https://www.pm.inf.ethz.ch/research/prusti.html>
   - 描述: Rust 的形式化验证工具
-  - 相关: [工具使用指南 - Prusti](./10_tools_guide.md#prusti)
+  - 相关: [工具使用指南 - Prusti](10_tools_guide.md#prusti)
 
 - **Kani**
   - 链接: <https://github.com/model-checking/kani>
   - 描述: Rust 的模型检查工具
-  - 相关: [工具使用指南 - Kani](./10_tools_guide.md#kani)
+  - 相关: [工具使用指南 - Kani](10_tools_guide.md#kani)
 
 ### 性能分析工具
 
@@ -218,17 +218,17 @@
 - **Criterion.rs**
   - 链接: <https://github.com/bheisler/criterion.rs>
   - 描述: Rust 的基准测试框架
-  - 相关: [工具使用指南 - Criterion.rs](./10_tools_guide.md#criterionrs)
+  - 相关: [工具使用指南 - Criterion.rs](10_tools_guide.md#criterionrs)
 
 - **perf**
   - 链接: <https://perf.wiki.kernel.org/>
   - 描述: Linux 性能分析工具
-  - 相关: [工具使用指南 - perf](./10_tools_guide.md#perf)
+  - 相关: [工具使用指南 - perf](10_tools_guide.md#perf)
 
 - **flamegraph**
   - 链接: <https://github.com/flamegraph-rs/flamegraph>
   - 描述: 性能分析可视化工具
-  - 相关: [工具使用指南 - flamegraph](./10_tools_guide.md#flamegraph)
+  - 相关: [工具使用指南 - flamegraph](10_tools_guide.md#flamegraph)
 
 ### 内存分析工具
 
@@ -237,17 +237,17 @@
 - **Miri**
   - 链接: <https://github.com/rust-lang/miri>
   - 描述: Rust 的 MIR 解释器
-  - 相关: [工具使用指南 - Miri](./10_tools_guide.md#miri)
+  - 相关: [工具使用指南 - Miri](10_tools_guide.md#miri)
 
 - **Valgrind**
   - 链接: <https://valgrind.org/>
   - 描述: 内存调试和性能分析工具
-  - 相关: [工具使用指南 - Valgrind](./10_tools_guide.md#valgrind)
+  - 相关: [工具使用指南 - Valgrind](10_tools_guide.md#valgrind)
 
 - **heaptrack**
   - 链接: <https://github.com/KDE/heaptrack>
   - 描述: 堆内存分析工具
-  - 相关: [工具使用指南 - heaptrack](./10_tools_guide.md#heaptrack)
+  - 相关: [工具使用指南 - heaptrack](10_tools_guide.md#heaptrack)
 
 ### 代码分析工具
 
@@ -256,17 +256,17 @@
 - **Clippy**
   - 链接: <https://github.com/rust-lang/rust-clippy>
   - 描述: Rust 代码检查工具
-  - 相关: [工具使用指南 - Clippy](./10_tools_guide.md#clippy)
+  - 相关: [工具使用指南 - Clippy](10_tools_guide.md#clippy)
 
 - **rust-analyzer**
   - 链接: <https://rust-analyzer.github.io/>
   - 描述: Rust 语言服务器
-  - 相关: [工具使用指南 - rust-analyzer](./10_tools_guide.md#rust-analyzer)
+  - 相关: [工具使用指南 - rust-analyzer](10_tools_guide.md#rust-analyzer)
 
 - **cargo-expand**
   - 链接: <https://github.com/dtolnay/cargo-expand>
   - 描述: 宏展开工具
-  - 相关: [工具使用指南 - cargo-expand](./10_tools_guide.md#cargo-expand)
+  - 相关: [工具使用指南 - cargo-expand](10_tools_guide.md#cargo-expand)
 
 ---
 
@@ -375,15 +375,15 @@
 
 | 资源类型 | 形式化文档 | 可验证/支撑的定理 |
 | :--- | :--- | :--- |
-| RustBelt、Stacked Borrows | [ownership_model](formal_methods/10_ownership_model.md)、[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md)、[coq_skeleton](../../archive/deprecated/coq_skeleton/README.md)、[RUSTBELT_ALIGNMENT](./10_rustbelt_alignment.md) | OW1、T2/T3、CHAN-T1、MUTEX-T1；Coq T-OW2 骨架 |
+| RustBelt、Stacked Borrows | [ownership_model](formal_methods/10_ownership_model.md)、[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md)、[coq_skeleton](../deprecated/coq_skeleton/README.md)、[RUSTBELT_ALIGNMENT](10_rustbelt_alignment.md) | OW1、T2/T3、CHAN-T1、MUTEX-T1；Coq T-OW2 骨架 |
 | Rust 类型系统研究 | [type_system_foundations](type_theory/10_type_system_foundations.md)、[trait_system_formalization](type_theory/10_trait_system_formalization.md) | 类型保持、coherence、RPITIT |
-| Prusti、Kani | [formal_methods](../../archive/research_notes_2026_06_25/formal_methods/README.md) | 所有权、借用、unsafe 契约 |
+| Prusti、Kani | [formal_methods](formal_methods/README.md) | 所有权、借用、unsafe 契约 |
 | Criterion、Miri | [experiments/README](experiments/README.md) | EX-T1、EX-T2；内存安全验证 |
 
-详见 [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) 全证明索引、
-[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./10_international_formal_verification_index.md) 国际对标、
-[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./10_formal_proof_critical_analysis_and_plan_2026_02.md) 批判性分析与推进计划、
-[practical_applications](./10_practical_applications.md) 案例与定理对应。
+详见 [PROOF_INDEX](10_proof_index.md) 全证明索引、
+[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](10_international_formal_verification_index.md) 国际对标、
+[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](10_formal_proof_critical_analysis_and_plan_2026_02.md) 批判性分析与推进计划、
+[practical_applications](10_practical_applications.md) 案例与定理对应。
 
 ---
 
@@ -395,27 +395,27 @@
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
-- [主索引](./README.md) - 完整的研究笔记索引
-- [工具使用指南](./10_tools_guide.md) - 研究工具详细指南
-- [术语表](./10_glossary.md) - 专业术语解释
+- [主索引](README.md) - 完整的研究笔记索引
+- [工具使用指南](10_tools_guide.md) - 研究工具详细指南
+- [术语表](10_glossary.md) - 专业术语解释
 
 ### 研究笔记
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [形式化方法研究](../../archive/research_notes_2026_06_25/formal_methods/README.md) - 形式化方法索引
-- [类型理论研究](./type_theory/README.md) - 类型理论索引
-- [实验研究](./experiments/README.md) - 实验研究索引
+- [形式化方法研究](formal_methods/README.md) - 形式化方法索引
+- [类型理论研究](type_theory/README.md) - 类型理论索引
+- [实验研究](experiments/README.md) - 实验研究索引
 
 ### 形式化证明体系（2026-02-14）
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [批判性分析与推进计划](./10_formal_proof_critical_analysis_and_plan_2026_02.md) - 阶段 1–3 完成总结
-- [国际对标索引](./10_international_formal_verification_index.md) - RustBelt、Aeneas、RustSEM 等
-- [形式化全模型入口](./10_formal_full_model_overview.md) - 统一形式系统
-- [核心定理完整证明](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) - L2 级 ownership T2、borrow T1、type T3
-- [Coq 证明骨架](../../archive/deprecated/coq_skeleton/README.md) - T-OW2 所有权唯一性
+- [批判性分析与推进计划](10_formal_proof_critical_analysis_and_plan_2026_02.md) - 阶段 1–3 完成总结
+- [国际对标索引](10_international_formal_verification_index.md) - RustBelt、Aeneas、RustSEM 等
+- [形式化全模型入口](10_formal_full_model_overview.md) - 统一形式系统
+- [核心定理完整证明](10_core_theorems_full_proofs.md) - L2 级 ownership T2、borrow T1、type T3
+- [Coq 证明骨架](../deprecated/coq_skeleton/README.md) - T-OW2 所有权唯一性
 - L3 实施指南 - Coq/Isabelle 补全路线（已归档）
 
 ---
@@ -483,7 +483,7 @@
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

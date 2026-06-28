@@ -18,8 +18,8 @@
 > [The C Programming Language — K&R]
 >
 > **前置概念**:
-> [Rust vs C++](./01_rust_vs_cpp.md) ·
-> [Rust vs Go](./02_rust_vs_go.md)
+> [Rust vs C++](01_rust_vs_cpp.md) ·
+> [Rust vs Go](02_rust_vs_go.md)
 
 ---
 
@@ -139,7 +139,7 @@ fn main() {
 | 解引用 Optional | N/A（无此概念） | `unwrap()` panic；`if let`/`match` 安全处理 |
 | 默认安全 | 运行期检查 | 编译期强制处理所有情况 |
 
-**核心差异**：Go 的 `nil` 是**十亿美元错误**（C.A.R. Hoare）的现代延续。Rust 通过 `Option<T>` 将"可能缺失"显式编码到类型系统（Type System）中。[→ Rust vs Go 详解](./02_rust_vs_go.md)
+**核心差异**：Go 的 `nil` 是**十亿美元错误**（C.A.R. Hoare）的现代延续。Rust 通过 `Option<T>` 将"可能缺失"显式编码到类型系统（Type System）中。[→ Rust vs Go 详解](02_rust_vs_go.md)
 
 </details>
 
@@ -291,7 +291,7 @@ async fn main() {
 | 取消机制 | 通过 context 手动传递 | 内置 `AbortHandle` |
 | 调试 | goroutine dump | `tokio-console` 运行时检查 |
 
-**知识点**：Rust 的所有权系统为并发原语提供了编译期保证，而 Go 依赖运行时检测和程序员纪律。[→ Rust vs Go 详解](./02_rust_vs_go.md)
+**知识点**：Rust 的所有权系统为并发原语提供了编译期保证，而 Go 依赖运行时检测和程序员纪律。[→ Rust vs Go 详解](02_rust_vs_go.md)
 
 </details>
 
@@ -470,7 +470,7 @@ let sum: i64 = (0..1_000_000).map(|x| x as i64).sum();
 | 内存释放 | ❌ 手动 | ✅ RAII | ✅ GC | ✅ RAII |
 | 溢出检查 | ❌ 无 | ❌ 无 | ❌ 无 | ✅ debug 模式 panic |
 
-**知识点**：Rust 在安全性上接近 Go（自动内存管理、边界检查），在性能上接近 C++（零成本抽象（Zero-Cost Abstraction）、无 GC）。这是 Rust 独特定位的来源。[→ Rust vs C++ 详解](./01_rust_vs_cpp.md)
+**知识点**：Rust 在安全性上接近 Go（自动内存管理、边界检查），在性能上接近 C++（零成本抽象（Zero-Cost Abstraction）、无 GC）。这是 Rust 独特定位的来源。[→ Rust vs C++ 详解](01_rust_vs_cpp.md)
 
 </details>
 
@@ -653,7 +653,7 @@ fn read_config() -> Result<i32, Box<dyn std::error::Error>> {
 |:---:|:---|:---|
 | 10/10 | 🏆 跨语言对比已内化 | 阅读 [Rustonomicon](https://doc.rust-lang.org/nomicon/) 深入 FFI 和兼容层 |
 | 7–9/10 | ✅ 核心差异掌握 | 用 Rust 重写一个 C/Go 项目，对比实现差异 |
-| 4–6/10 | 🔄 需巩固基础 | 重读 [Rust vs C++](./01_rust_vs_cpp.md) · [Rust vs Go](./02_rust_vs_go.md) |
+| 4–6/10 | 🔄 需巩固基础 | 重读 [Rust vs C++](01_rust_vs_cpp.md) · [Rust vs Go](02_rust_vs_go.md) |
 | 0–3/10 | 📚 建议重新开始 | 从 [Ownership](../01_foundation/01_ownership.md) 确认 Rust 核心，再读对比分析 |
 
 ---

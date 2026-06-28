@@ -13,7 +13,7 @@
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价 Rust 形式化验证工具的技术能力与适用边界
 > **前置依赖**: [类型系统（Type System）](../01_foundation/04_type_system.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · 形式化验证 · [生命周期（Lifetimes）](../01_foundation/03_lifetimes.md)
-> **后置延伸**: [编译器内部原理](./45_compiler_internals.md) · [安全与密码学](./43_security_cryptography.md) · [嵌入式系统](./22_embedded_systems.md)
+> **后置延伸**: [编译器内部原理](45_compiler_internals.md) · [安全与密码学](43_security_cryptography.md) · [嵌入式系统](22_embedded_systems.md)
 >
 > **来源**: [Kani](https://model-checking.github.io/kani/) · [Creusot](https://creusot.rs/) · [Verus](https://verus-lang.github.io/verus/)
 > **前置概念**: N/A
@@ -34,49 +34,49 @@
 
 ## 📑 目录
 
-- [Formal Verification Tools（形式化验证工具生态）](#formal-verification-tools形式化验证工具生态)
-  - [📑 目录](#-目录)
-  - [一、权威定义（Definition）](#一权威定义definition)
-    - [1.1 形式化验证的层次模型](#11-形式化验证的层次模型)
-    - [1.2 Rust 形式化验证的独特挑战](#12-rust-形式化验证的独特挑战)
-  - [二、概念属性矩阵](#二概念属性矩阵)
-  - [三、模型检验工具](#三模型检验工具)
-    - [3.1 Kani：基于 CBMC 的 Rust 验证器](#31-kani基于-cbmc-的-rust-验证器)
-      - [Kani 0.66 新特性（2026-05 发布）](#kani-066-新特性2026-05-发布)
-    - [3.2 MIRI：运行时 UB 检测器](#32-miri运行时-ub-检测器)
-  - [四、演绎验证工具](#四演绎验证工具)
-    - [4.1 Prusti：Viper 分离逻辑验证器](#41-prustiviper-分离逻辑验证器)
-    - [4.2 Creusot：Why3/WhyML 验证器](#42-creusotwhy3whyml-验证器)
-    - [4.3 Verus：SMT-LIB 验证器](#43-verussmt-lib-验证器)
-  - [五、类型系统扩展](#五类型系统扩展)
-    - [5.1 Flux：精化类型（Refinement Types）](#51-flux精化类型refinement-types)
-    - [5.2 Aeneas：向函数式语言的转换](#52-aeneas向函数式语言的转换)
-  - [六、验证工具对比与选型](#六验证工具对比与选型)
-    - [6.1 能力矩阵](#61-能力矩阵)
-    - [6.2 选型决策树](#62-选型决策树)
-  - [七、Rust 形式化验证的前沿](#七rust-形式化验证的前沿)
-    - [7.1 RefinedRust：Iris 分离逻辑](#71-refinedrustiris-分离逻辑)
-    - [7.2 RustBelt 验证框架](#72-rustbelt-验证框架)
-    - [7.3 hax：翻译到 F\* 和 Rocq 的验证工具链](#73-hax翻译到-f-和-rocq-的验证工具链)
-    - [7.4 Kani verify-std：标准库验证计划](#74-kani-verify-std标准库验证计划)
-  - [八、反命题与边界](#八反命题与边界)
-    - [8.1 反命题树](#81-反命题树)
-    - [8.2 边界极限](#82-边界极限)
-  - [九、边界测试](#九边界测试)
-    - [9.1 边界测试：Kani 数组越界未被 harness 覆盖（验证盲区）](#91-边界测试kani-数组越界未被-harness-覆盖验证盲区)
-    - [9.2 边界测试：MIRI 无法检测未执行的 unsafe 路径（运行时盲区）](#92-边界测试miri-无法检测未执行的-unsafe-路径运行时盲区)
-    - [9.3 边界测试：Prusti 前置条件过强导致合法调用被拒绝（假阴性）](#93-边界测试prusti-前置条件过强导致合法调用被拒绝假阴性)
-  - [相关概念文件](#相关概念文件)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：`cargo-kani` 与 `cargo-fuzz` 在验证方法上有什么区别？（理解层）](#测验-1cargo-kani-与-cargo-fuzz-在验证方法上有什么区别理解层)
-    - [测验 2：`Prusti` 使用什么技术验证 Rust 程序？（理解层）](#测验-2prusti-使用什么技术验证-rust-程序理解层)
-    - [测验 3：Miri 能检测哪些类别的未定义行为（UB）？（理解层）](#测验-3miri-能检测哪些类别的未定义行为ub理解层)
-    - [测验 4：形式化验证工具链在 Rust 中的主要瓶颈是什么？（理解层）](#测验-4形式化验证工具链在-rust-中的主要瓶颈是什么理解层)
-    - [测验 5：为什么即使有了形式化验证，仍然需要传统测试？（理解层）](#测验-5为什么即使有了形式化验证仍然需要传统测试理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Formal Verification Tools（形式化验证工具生态）](.#formal-verification-tools形式化验证工具生态)
+  - [📑 目录](.#-目录)
+  - [一、权威定义（Definition）](.#一权威定义definition)
+    - [1.1 形式化验证的层次模型](.#11-形式化验证的层次模型)
+    - [1.2 Rust 形式化验证的独特挑战](.#12-rust-形式化验证的独特挑战)
+  - [二、概念属性矩阵](.#二概念属性矩阵)
+  - [三、模型检验工具](.#三模型检验工具)
+    - [3.1 Kani：基于 CBMC 的 Rust 验证器](.#31-kani基于-cbmc-的-rust-验证器)
+      - [Kani 0.66 新特性（2026-05 发布）](.#kani-066-新特性2026-05-发布)
+    - [3.2 MIRI：运行时 UB 检测器](.#32-miri运行时-ub-检测器)
+  - [四、演绎验证工具](.#四演绎验证工具)
+    - [4.1 Prusti：Viper 分离逻辑验证器](.#41-prustiviper-分离逻辑验证器)
+    - [4.2 Creusot：Why3/WhyML 验证器](.#42-creusotwhy3whyml-验证器)
+    - [4.3 Verus：SMT-LIB 验证器](.#43-verussmt-lib-验证器)
+  - [五、类型系统扩展](.#五类型系统扩展)
+    - [5.1 Flux：精化类型（Refinement Types）](.#51-flux精化类型refinement-types)
+    - [5.2 Aeneas：向函数式语言的转换](.#52-aeneas向函数式语言的转换)
+  - [六、验证工具对比与选型](.#六验证工具对比与选型)
+    - [6.1 能力矩阵](.#61-能力矩阵)
+    - [6.2 选型决策树](.#62-选型决策树)
+  - [七、Rust 形式化验证的前沿](.#七rust-形式化验证的前沿)
+    - [7.1 RefinedRust：Iris 分离逻辑](.#71-refinedrustiris-分离逻辑)
+    - [7.2 RustBelt 验证框架](.#72-rustbelt-验证框架)
+    - [7.3 hax：翻译到 F\* 和 Rocq 的验证工具链](.#73-hax翻译到-f-和-rocq-的验证工具链)
+    - [7.4 Kani verify-std：标准库验证计划](.#74-kani-verify-std标准库验证计划)
+  - [八、反命题与边界](.#八反命题与边界)
+    - [8.1 反命题树](.#81-反命题树)
+    - [8.2 边界极限](.#82-边界极限)
+  - [九、边界测试](.#九边界测试)
+    - [9.1 边界测试：Kani 数组越界未被 harness 覆盖（验证盲区）](.#91-边界测试kani-数组越界未被-harness-覆盖验证盲区)
+    - [9.2 边界测试：MIRI 无法检测未执行的 unsafe 路径（运行时盲区）](.#92-边界测试miri-无法检测未执行的-unsafe-路径运行时盲区)
+    - [9.3 边界测试：Prusti 前置条件过强导致合法调用被拒绝（假阴性）](.#93-边界测试prusti-前置条件过强导致合法调用被拒绝假阴性)
+  - [相关概念文件](.#相关概念文件)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：`cargo-kani` 与 `cargo-fuzz` 在验证方法上有什么区别？（理解层）](.#测验-1cargo-kani-与-cargo-fuzz-在验证方法上有什么区别理解层)
+    - [测验 2：`Prusti` 使用什么技术验证 Rust 程序？（理解层）](.#测验-2prusti-使用什么技术验证-rust-程序理解层)
+    - [测验 3：Miri 能检测哪些类别的未定义行为（UB）？（理解层）](.#测验-3miri-能检测哪些类别的未定义行为ub理解层)
+    - [测验 4：形式化验证工具链在 Rust 中的主要瓶颈是什么？（理解层）](.#测验-4形式化验证工具链在-rust-中的主要瓶颈是什么理解层)
+    - [测验 5：为什么即使有了形式化验证，仍然需要传统测试？（理解层）](.#测验-5为什么即使有了形式化验证仍然需要传统测试理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 > **Bloom 层级**: 分析 → 评价
 > **变更日志**:
@@ -841,13 +841,13 @@ fn caller() {
 ## 相关概念文件
 
 - 编译器内部原理 — rustc 管线、MIR、借用（Borrowing）检查器
-- [安全与密码学](./43_security_cryptography.md) — 侧信道防护、常量时间操作
+- [安全与密码学](43_security_cryptography.md) — 侧信道防护、常量时间操作
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — Miri、UB、别名模型
 - [形式化验证](../04_formal/05_verification_toolchain.md) — 定理证明器、SMT、分离逻辑
 - [类型系统](../01_foundation/04_type_system.md) — 类型论、泛型、Trait
 - [生命周期](../01_foundation/03_lifetimes.md) — 借用规则、NLL、Polonius
 - [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、数据竞争
-- [嵌入式系统](./22_embedded_systems.md) — `#![no_std]`、资源受限验证
+- [嵌入式系统](22_embedded_systems.md) — `#![no_std]`、资源受限验证
 - [版本跟踪](../07_future/05_rust_version_tracking.md) — Rust 语言演进对验证工具的影响
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/)

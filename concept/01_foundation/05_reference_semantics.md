@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Und — 理解引用（Reference）语义是所有权（Ownership）模型的延伸
 > **定位**: 深入分析 Rust 的**引用语义机制**——自动解引用（Auto-deref）、Deref 强制（Deref Coercion）、类型强制（Type Coercion）以及它们与借用（Borrowing）检查器的交互，澄清开发者常见的隐式转换困惑。
-> **前置概念**: [Ownership](./01_ownership.md) · [Borrowing](./02_borrowing.md) · [Type System](./04_type_system.md)
+> **前置概念**: [Ownership](01_ownership.md) · [Borrowing](02_borrowing.md) · [Type System](04_type_system.md)
 > **后置概念**: [Smart Pointers](../02_intermediate/03_memory_management.md) · [Generics](../02_intermediate/02_generics.md)
 
 ---
@@ -26,74 +26,74 @@
 ## 📑 目录
 
 - 引用（Reference）语义：自动解引用、Deref 强制与类型转换
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 引用（Reference）的多重含义](#11-引用的多重含义)
-    - [1.2 自动解引用机制](#12-自动解引用机制)
-    - [1.3 Deref 强制](#13-deref-强制)
-  - [二、技术细节](#二技术细节)
-    - [2.1 方法调用的自动引用](#21-方法调用的自动引用)
-    - [2.2 类型强制规则](#22-类型强制规则)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 引用（Reference）的多重含义](.#11-引用的多重含义)
+    - [1.2 自动解引用机制](.#12-自动解引用机制)
+    - [1.3 Deref 强制](.#13-deref-强制)
+  - [二、技术细节](.#二技术细节)
+    - [2.1 方法调用的自动引用](.#21-方法调用的自动引用)
+    - [2.2 类型强制规则](.#22-类型强制规则)
     - 2.3 与借用（Borrowing）检查的交互
-  - [三、使用模式](#三使用模式)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、常见困惑解析](#五常见困惑解析)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [七、多级引用语义与部分重借用（Multi-level References \& Partial Reborrows）](#七多级引用语义与部分重借用multi-level-references--partial-reborrows)
-    - [7.1 多级引用类型](#71-多级引用类型)
-      - [7.1.1 共享引用的嵌套：`&T` → `&&T` → `&&&T`](#711-共享引用的嵌套t--t--t)
+  - [三、使用模式](.#三使用模式)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、常见困惑解析](.#五常见困惑解析)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [七、多级引用语义与部分重借用（Multi-level References \& Partial Reborrows）](.#七多级引用语义与部分重借用multi-level-references--partial-reborrows)
+    - [7.1 多级引用类型](.#71-多级引用类型)
+      - [7.1.1 共享引用的嵌套：`&T` → `&&T` → `&&&T`](.#711-共享引用的嵌套t--t--t)
       - 7.1.2 可变引用（Mutable Reference）的嵌套：`&mut T`、`&mut &T`、`&mut &mut T`
-      - [7.1.3 弱化的不可逆性](#713-弱化的不可逆性)
-    - [7.2 部分重借用（Partial Reborrows）](#72-部分重借用partial-reborrows)
-      - [7.2.1 编译器的字段级借用（Borrowing）粒度](#721-编译器的字段级借用粒度)
-      - [7.2.2 部分重借用的类型学限制](#722-部分重借用的类型学限制)
-      - [7.2.3 Polonius 与未来的改进](#723-polonius-与未来的改进)
-    - [7.3 返回可变引用（Mutable Reference）的形式化语义](#73-返回可变引用的形式化语义)
-      - [7.3.1 两次移动模型](#731-两次移动模型)
-      - [7.3.2 实用模式：`split_first_mut` 与 `split_mut`](#732-实用模式split_first_mut-与-split_mut)
-    - [7.4 Tree Borrows 模型](#74-tree-borrows-模型)
-      - [7.4.1 从 Stacked Borrows 到 Tree Borrows](#741-从-stacked-borrows-到-tree-borrows)
-      - [7.4.2 权限树：Foreign / Read / Write / Unique](#742-权限树foreign--read--write--unique)
-    - [7.5 `as_ref()` / `as_mut()` 与嵌套引用](#75-as_ref--as_mut-与嵌套引用)
-      - [7.5.1 嵌套引用的类型转换](#751-嵌套引用的类型转换)
+      - [7.1.3 弱化的不可逆性](.#713-弱化的不可逆性)
+    - [7.2 部分重借用（Partial Reborrows）](.#72-部分重借用partial-reborrows)
+      - [7.2.1 编译器的字段级借用（Borrowing）粒度](.#721-编译器的字段级借用粒度)
+      - [7.2.2 部分重借用的类型学限制](.#722-部分重借用的类型学限制)
+      - [7.2.3 Polonius 与未来的改进](.#723-polonius-与未来的改进)
+    - [7.3 返回可变引用（Mutable Reference）的形式化语义](.#73-返回可变引用的形式化语义)
+      - [7.3.1 两次移动模型](.#731-两次移动模型)
+      - [7.3.2 实用模式：`split_first_mut` 与 `split_mut`](.#732-实用模式split_first_mut-与-split_mut)
+    - [7.4 Tree Borrows 模型](.#74-tree-borrows-模型)
+      - [7.4.1 从 Stacked Borrows 到 Tree Borrows](.#741-从-stacked-borrows-到-tree-borrows)
+      - [7.4.2 权限树：Foreign / Read / Write / Unique](.#742-权限树foreign--read--write--unique)
+    - [7.5 `as_ref()` / `as_mut()` 与嵌套引用](.#75-as_ref--as_mut-与嵌套引用)
+      - [7.5.1 嵌套引用的类型转换](.#751-嵌套引用的类型转换)
       - 7.5.2 生命周期（Lifetimes）行为
-    - [7.6 代码示例集](#76-代码示例集)
+    - [7.6 代码示例集](.#76-代码示例集)
       - 7.6.1 嵌套引用的构造与模式匹配（Pattern Matching）
       - 7.6.2 结构体（Struct）字段的部分重借用
-      - [7.6.3 `split_mut` 创建不相交可变引用](#763-split_mut-创建不相交可变引用)
+      - [7.6.3 `split_mut` 创建不相交可变引用](.#763-split_mut-创建不相交可变引用)
       - 7.6.4 迭代器（Iterator）可变链
-    - [7.7 边界分析](#77-边界分析)
-      - [7.7.1 命题与反命题](#771-命题与反命题)
-      - [7.7.2 边界极限](#772-边界极限)
-    - [7.8 常见困惑解析](#78-常见困惑解析)
-      - [困惑 1: `let r: &&i32 = &&5;` —— 中间引用的生命周期（Lifetimes）](#困惑-1-let-r-i32--5--中间引用的生命周期)
-      - [困惑 2: `&mut &T` vs `&&mut T`](#困惑-2-mut-t-vs-mut-t)
-      - [困惑 3: 为什么 `&&&&T` 自动解引用但 `&mut &mut T` 不自动解引用到 `&mut T`？](#困惑-3-为什么-t-自动解引用但-mut-mut-t-不自动解引用到-mut-t)
-    - [7.9 形式化视角](#79-形式化视角)
-    - [7.10 名义与结构类型的引用边界](#710-名义与结构类型的引用边界)
-  - [来源与延伸阅读（本节）](#来源与延伸阅读本节)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：引用语义的编译错误](#十边界测试引用语义的编译错误)
-    - [10.1 边界测试：多级引用自动解引用层级（编译错误）](#101-边界测试多级引用自动解引用层级编译错误)
-    - [10.2 边界测试：`&str` 与 `String` 的混用（编译错误）](#102-边界测试str-与-string-的混用编译错误)
-    - [10.3 边界测试：`&mut` 的重新借用与原始引用失效（编译错误）](#103-边界测试mut-的重新借用与原始引用失效编译错误)
+    - [7.7 边界分析](.#77-边界分析)
+      - [7.7.1 命题与反命题](.#771-命题与反命题)
+      - [7.7.2 边界极限](.#772-边界极限)
+    - [7.8 常见困惑解析](.#78-常见困惑解析)
+      - [困惑 1: `let r: &&i32 = &&5;` —— 中间引用的生命周期（Lifetimes）](.#困惑-1-let-r-i32--5--中间引用的生命周期)
+      - [困惑 2: `&mut &T` vs `&&mut T`](.#困惑-2-mut-t-vs-mut-t)
+      - [困惑 3: 为什么 `&&&&T` 自动解引用但 `&mut &mut T` 不自动解引用到 `&mut T`？](.#困惑-3-为什么-t-自动解引用但-mut-mut-t-不自动解引用到-mut-t)
+    - [7.9 形式化视角](.#79-形式化视角)
+    - [7.10 名义与结构类型的引用边界](.#710-名义与结构类型的引用边界)
+  - [来源与延伸阅读（本节）](.#来源与延伸阅读本节)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：引用语义的编译错误](.#十边界测试引用语义的编译错误)
+    - [10.1 边界测试：多级引用自动解引用层级（编译错误）](.#101-边界测试多级引用自动解引用层级编译错误)
+    - [10.2 边界测试：`&str` 与 `String` 的混用（编译错误）](.#102-边界测试str-与-string-的混用编译错误)
+    - [10.3 边界测试：`&mut` 的重新借用与原始引用失效（编译错误）](.#103-边界测试mut-的重新借用与原始引用失效编译错误)
     - 10.4 边界测试：内部可变性与 `&T` 的不可变性矛盾（编译错误/运行时（Runtime） UB）
-    - [10.4 边界测试：`&mut T` 的重新借用与显式解引用混用（编译错误）](#104-边界测试mut-t-的重新借用与显式解引用混用编译错误)
-    - [10.2 边界测试：返回局部变量的悬垂引用](#102-边界测试返回局部变量的悬垂引用)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：`Deref` 强制转换（Deref Coercion）允许什么类型的自动转换？（理解层）](#测验-1deref-强制转换deref-coercion允许什么类型的自动转换理解层)
-    - [测验 2：`&mut T` 是否自动实现 `Deref` 到 `&T`？这种转换在什么情况下发生？（理解层）](#测验-2mut-t-是否自动实现-deref-到-t这种转换在什么情况下发生理解层)
-    - [测验 3：为什么 `Box<T>` 可以像 `&T` 一样被解引用使用？这是语言内建行为吗？（理解层）](#测验-3为什么-boxt-可以像-t-一样被解引用使用这是语言内建行为吗理解层)
-    - [测验 4：`DerefMut` 与 `Deref` 的关系是什么？什么情况下需要实现 `DerefMut`？（理解层）](#测验-4derefmut-与-deref-的关系是什么什么情况下需要实现-derefmut理解层)
-    - [测验 5：自动解引用在编译期有运行时（Runtime）开销吗？（理解层）](#测验-5自动解引用在编译期有运行时开销吗理解层)
-  - [实践](#实践)
-  - [参考来源](#参考来源)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+    - [10.4 边界测试：`&mut T` 的重新借用与显式解引用混用（编译错误）](.#104-边界测试mut-t-的重新借用与显式解引用混用编译错误)
+    - [10.2 边界测试：返回局部变量的悬垂引用](.#102-边界测试返回局部变量的悬垂引用)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：`Deref` 强制转换（Deref Coercion）允许什么类型的自动转换？（理解层）](.#测验-1deref-强制转换deref-coercion允许什么类型的自动转换理解层)
+    - [测验 2：`&mut T` 是否自动实现 `Deref` 到 `&T`？这种转换在什么情况下发生？（理解层）](.#测验-2mut-t-是否自动实现-deref-到-t这种转换在什么情况下发生理解层)
+    - [测验 3：为什么 `Box<T>` 可以像 `&T` 一样被解引用使用？这是语言内建行为吗？（理解层）](.#测验-3为什么-boxt-可以像-t-一样被解引用使用这是语言内建行为吗理解层)
+    - [测验 4：`DerefMut` 与 `Deref` 的关系是什么？什么情况下需要实现 `DerefMut`？（理解层）](.#测验-4derefmut-与-deref-的关系是什么什么情况下需要实现-derefmut理解层)
+    - [测验 5：自动解引用在编译期有运行时（Runtime）开销吗？（理解层）](.#测验-5自动解引用在编译期有运行时开销吗理解层)
+  - [实践](.#实践)
+  - [参考来源](.#参考来源)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -444,9 +444,9 @@ graph TD
 
 ## 相关概念文件
 
-- [Ownership](./01_ownership.md) — 所有权模型
-- [Borrowing](./02_borrowing.md) — 借用与生命周期（Lifetimes）
-- [Type System](./04_type_system.md) — Rust 类型系统（Type System）
+- [Ownership](01_ownership.md) — 所有权模型
+- [Borrowing](02_borrowing.md) — 借用与生命周期（Lifetimes）
+- [Type System](04_type_system.md) — Rust 类型系统（Type System）
 - [Memory Management](../02_intermediate/03_memory_management.md) — 内存管理与智能指针（Smart Pointer）
 - [Generics](../02_intermediate/02_generics.md) — 泛型（Generics）与参数多态
 
@@ -464,7 +464,7 @@ graph TD
 
 > **Bloom 层级**: 理解 → 分析 → 应用
 > **定位**: 深入 Rust 的**多级引用**（`&&T`、`&mut &T`）与**部分重借用**（partial reborrow）机制，澄清嵌套引用在借用检查器中的行为、编译器对结构体（Struct）字段级粒度的跟踪，以及 Tree Borrows 模型下的权限语义。
-> **前置概念**: [Ownership](./01_ownership.md) · [Borrowing](./02_borrowing.md) · [Lifetime](./03_lifetimes.md)
+> **前置概念**: [Ownership](01_ownership.md) · [Borrowing](02_borrowing.md) · [Lifetime](03_lifetimes.md)
 > **后置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Formal Methods](../04_formal/01_linear_logic.md)
 
 ---
@@ -1158,7 +1158,7 @@ let s: &mut &Secret = &mut &Secret(String::from("x"));
 
 > **分析**: 这一边界是 Rust 类型系统安全性的核心支柱之一——多级引用提供了表达复杂内存关系的灵活性（结构规则），但名义类型确保了语义契约在任何引用层级都不会被意外破坏（名义规则）。
 > [来源: [Rust Reference: Types] · [Rust Reference: Subtyping](https://doc.rust-lang.org/reference/subtyping.html) · [Rust Reference: Type Coercions](https://doc.rust-lang.org/reference/)]（一级来源）
-> **与类型系统的关联**: 详见 [`04_type_system.md`](../01_foundation/04_type_system.md) 对名义类型与结构类型的完整分析——其中第 11.7 节专门论证了引用构造的结构本质与目标类型名义约束的交互关系。
+> **与类型系统的关联**: 详见 [`04_type_system.md`](04_type_system.md) 对名义类型与结构类型的完整分析——其中第 11.7 节专门论证了引用构造的结构本质与目标类型名义约束的交互关系。
 
 ---
 
@@ -1403,8 +1403,8 @@ fn main() {}
 
 > **相关资源**:
 >
-> - [crates/ 示例代码](../crates/) — 与本文概念对应的可编译示例
-> - [exercises/ 练习](../exercises/) — 动手编程挑战
+> - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../exercises) — 动手编程挑战
 > - [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

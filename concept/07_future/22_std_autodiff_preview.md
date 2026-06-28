@@ -17,7 +17,7 @@
 > **Bloom 层级**: 评价 → 创造
 > **定位**: 追踪 Rust 语言层面的自动微分（Automatic Differentiation, AD）实验进展，分析其对 AI/ML 生态的潜在影响。
 > **前置概念**: [Generics](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md) · [Machine Learning Ecosystem](../06_ecosystem/46_machine_learning_ecosystem.md)
-> **后置延伸**: [Rust in AI](./21_rust_in_ai.md) · [Evolution](./03_evolution.md)
+> **后置延伸**: [Rust in AI](21_rust_in_ai.md) · [Evolution](03_evolution.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 

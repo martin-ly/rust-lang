@@ -270,9 +270,9 @@ if let Some(value) = manager.get() {
 
 ## 🔗 相关资源
 
-- [特性完整指南](./RUST_192_FEATURES_GUIDE.md)
+- [特性完整指南](RUST_192_FEATURES_GUIDE.md)
 - [API 文档](../README.md)
-- [测试用例](../tests/)
+- [测试用例](../tests)
 
 ---
 

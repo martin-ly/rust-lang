@@ -358,8 +358,8 @@ graph BT
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [Tokio 异步运行时架构](./06_tokio_architecture.md)
-- [Rayon 数据并行架构](./13_rayon_architecture.md)
+- [Tokio 异步运行时架构](06_tokio_architecture.md)
+- [Rayon 数据并行架构](13_rayon_architecture.md)
 - [并发编程模型](../../../../concept/03_advanced/01_concurrency.md)
 - [原子操作与内存排序](../../../../concept/03_advanced/11_atomics_and_memory_ordering.md)
 - [无锁数据结构](../../../../concept/03_advanced/16_lock_free.md)

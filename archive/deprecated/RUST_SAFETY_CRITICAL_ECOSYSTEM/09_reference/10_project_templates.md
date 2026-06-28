@@ -15,28 +15,28 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [项目模板](#项目模板)
-  - [📑 目录](#-目录)
-  - [概述](#概述)
-  - [1. 嵌入式项目模板](#1-嵌入式项目模板)
-    - [1.1 项目结构](#11-项目结构)
-    - [1.2 Cargo.toml模板](#12-cargotoml模板)
-    - [1.3 rust-toolchain.toml](#13-rust-toolchaintoml)
-    - [1.4 .cargo/config.toml](#14-cargoconfigtoml)
-    - [1.5 main.rs模板](#15-mainrs模板)
-    - [1.6 lib.rs模板](#16-librs模板)
-    - [1.7 memory.x](#17-memoryx)
-  - [2. 应用程序模板](#2-应用程序模板)
-    - [2.1 项目结构](#21-项目结构)
-    - [2.2 Cargo.toml](#22-cargotoml)
-    - [2.3 state\_machine.rs](#23-state_machiners)
-    - [2.4 CI/CD配置](#24-cicd配置)
-  - [3. 快速启动命令](#3-快速启动命令)
-    - [3.1 创建新项目](#31-创建新项目)
-    - [3.2 初始化检查清单](#32-初始化检查清单)
-  - [*使用这些模板快速启动您的安全关键Rust项目。*](#使用这些模板快速启动您的安全关键rust项目)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [项目模板](.#项目模板)
+  - [📑 目录](.#-目录)
+  - [概述](.#概述)
+  - [1. 嵌入式项目模板](.#1-嵌入式项目模板)
+    - [1.1 项目结构](.#11-项目结构)
+    - [1.2 Cargo.toml模板](.#12-cargotoml模板)
+    - [1.3 rust-toolchain.toml](.#13-rust-toolchaintoml)
+    - [1.4 .cargo/config.toml](.#14-cargoconfigtoml)
+    - [1.5 main.rs模板](.#15-mainrs模板)
+    - [1.6 lib.rs模板](.#16-librs模板)
+    - [1.7 memory.x](.#17-memoryx)
+  - [2. 应用程序模板](.#2-应用程序模板)
+    - [2.1 项目结构](.#21-项目结构)
+    - [2.2 Cargo.toml](.#22-cargotoml)
+    - [2.3 state\_machine.rs](.#23-state_machiners)
+    - [2.4 CI/CD配置](.#24-cicd配置)
+  - [3. 快速启动命令](.#3-快速启动命令)
+    - [3.1 创建新项目](.#31-创建新项目)
+    - [3.2 初始化检查清单](.#32-初始化检查清单)
+  - [*使用这些模板快速启动您的安全关键Rust项目。*](.#使用这些模板快速启动您的安全关键rust项目)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 概述
 >
@@ -651,7 +651,7 @@ echo "   4. Run 'cargo test' to run tests"
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [检查清单与模板](./10_checklists_and_templates.md)
+- [检查清单与模板](10_checklists_and_templates.md)
 - [安全关键生态系统总览](../README.md)
 
 ---

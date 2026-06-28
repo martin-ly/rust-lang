@@ -27,7 +27,7 @@
 > [Rust Reference — Interior Mutability](https://doc.rust-lang.org/reference/interior-mutability.html)
 >
 > **前置概念**:
-> [Memory Management](./03_memory_management.md) ·
+> [Memory Management](03_memory_management.md) ·
 > [Ownership](../01_foundation/01_ownership.md) ·
 > [Borrowing](../01_foundation/02_borrowing.md)
 >
@@ -75,7 +75,7 @@ fn main() {
 - 大对象转移所有权（Ownership）时避免拷贝
 - trait 对象（`Box<dyn Trait>`）
 
-**知识点**：`Box` 是最简单的智能指针（Smart Pointer），提供唯一的堆所有权（Ownership），零运行时（Runtime）开销（与 C++ `unique_ptr` 类似）。[→ 内存管理详解](./03_memory_management.md)
+**知识点**：`Box` 是最简单的智能指针（Smart Pointer），提供唯一的堆所有权（Ownership），零运行时（Runtime）开销（与 C++ `unique_ptr` 类似）。[→ 内存管理详解](03_memory_management.md)
 
 </details>
 
@@ -130,7 +130,7 @@ fn main() {
 | Java | 隐式引用（Reference）（所有对象都在堆上） |
 | Rust | 显式 `Box`/`Rc`/`Arc` |
 
-**知识点**：Rust 的"显式堆分配"设计避免了 Java 的全局 GC 和 C 的隐式指针混淆。[→ 内存管理详解](./03_memory_management.md)
+**知识点**：Rust 的"显式堆分配"设计避免了 Java 的全局 GC 和 C 的隐式指针混淆。[→ 内存管理详解](03_memory_management.md)
 
 </details>
 
@@ -189,7 +189,7 @@ std::thread::spawn(move || {
 });
 ```
 
-**知识点**：`Rc` 是单线程共享所有权的标准工具。任何需要跨线程共享的场景都必须使用 `Arc`。[→ 内存管理详解](./03_memory_management.md)
+**知识点**：`Rc` 是单线程共享所有权的标准工具。任何需要跨线程共享的场景都必须使用 `Arc`。[→ 内存管理详解](03_memory_management.md)
 
 </details>
 
@@ -250,7 +250,7 @@ let b2 = ref_cell.borrow_mut(); // ❌ 运行时 panic！
 | `Arc<Mutex<T>>` | ✅ | ✅ | 运行时（Runtime）（锁） |
 | `Arc<RwLock<T>>` | ✅ | ✅（读多写少） | 运行时（锁） |
 
-**知识点**：`Rc<RefCell<T>>` 是 Rust 标准库中"绕过编译期借用（Borrowing）检查"的标准方式——不是关闭检查器，而是将检查推迟到运行时。[→ 内存管理详解](./03_memory_management.md)
+**知识点**：`Rc<RefCell<T>>` 是 Rust 标准库中"绕过编译期借用（Borrowing）检查"的标准方式——不是关闭检查器，而是将检查推迟到运行时。[→ 内存管理详解](03_memory_management.md)
 
 </details>
 
@@ -311,7 +311,7 @@ let cell = Cell::new(vec![1, 2, 3]);
 | `T` 任意，需要引用 | `RefCell<T>` |
 | 多线程 | `Mutex<T>` / `RwLock<T>` / 原子类型 |
 
-**知识点**：`Cell` 是内部可变性的最低开销实现，但仅限于 `Copy` 类型。理解 `Cell` 与 `RefCell` 的权衡是高效 Rust 代码的关键。[→ 内存管理详解](./03_memory_management.md)
+**知识点**：`Cell` 是内部可变性的最低开销实现，但仅限于 `Copy` 类型。理解 `Cell` 与 `RefCell` 的权衡是高效 Rust 代码的关键。[→ 内存管理详解](03_memory_management.md)
 
 </details>
 
@@ -494,7 +494,7 @@ std::mem::drop(s);
 println!("{:?}", s); // ❌ 编译错误：use of moved value: s
 ```
 
-**知识点**：`std::mem::drop` 是提前释放值的标准方式。理解它与 `Drop::drop` 的区别是掌握 Rust 资源管理的关键。[→ 内存管理详解](./03_memory_management.md)
+**知识点**：`std::mem::drop` 是提前释放值的标准方式。理解它与 `Drop::drop` 的区别是掌握 Rust 资源管理的关键。[→ 内存管理详解](03_memory_management.md)
 
 </details>
 
@@ -569,7 +569,7 @@ let maybe_rc = weak.upgrade();    // Weak → Option<Rc>
 // 若原 Rc 已被 drop，upgrade() 返回 None
 ```
 
-**知识点**：`Weak` 是 Rust 中处理图结构、树结构中循环引用的标准工具。与垃圾回收语言不同，Rust 要求显式管理这些关系。[→ 内存管理详解](./03_memory_management.md)
+**知识点**：`Weak` 是 Rust 中处理图结构、树结构中循环引用的标准工具。与垃圾回收语言不同，Rust 要求显式管理这些关系。[→ 内存管理详解](03_memory_management.md)
 
 </details>
 
@@ -639,7 +639,7 @@ hello(&(*m)[..]);
 | `String` | `str` | 解引用到字符串切片（String Slice） |
 | `Cow<'a, T>` | `T` | 写时克隆指针 |
 
-**知识点**：`Deref` 是 Rust 中智能指针"透明化"的关键机制，使智能指针的使用体验接近普通引用。[→ 内存管理详解](./03_memory_management.md)
+**知识点**：`Deref` 是 Rust 中智能指针"透明化"的关键机制，使智能指针的使用体验接近普通引用。[→ 内存管理详解](03_memory_management.md)
 
 </details>
 
@@ -651,12 +651,12 @@ hello(&(*m)[..]);
 |:---:|:---|:---|
 | 10/10 | 🏆 内存管理已内化 | 尝试实现自定义智能指针（带 `Deref`/`Drop`） |
 | 7–9/10 | ✅ 核心概念掌握 | 用 `Rc<RefCell<T>>` 实现图结构，对比 `Arc<Mutex<T>>` 版本 |
-| 4–6/10 | 🔄 需巩固基础 | 重读 [Memory Management](./03_memory_management.md)，完成 rustlings 智能指针章节 |
+| 4–6/10 | 🔄 需巩固基础 | 重读 [Memory Management](03_memory_management.md)，完成 rustlings 智能指针章节 |
 | 0–3/10 | 📚 建议重新开始 | 从 [Ownership](../01_foundation/01_ownership.md) 确认基础，再读内存管理 |
 
 ---
 
-> **对应 Crate**: [`c01_ownership_borrow_scope`](../../crates/c01_ownership_borrow_scope/)
+> **对应 Crate**: [`c01_ownership_borrow_scope`](../../crates/c01_ownership_borrow_scope)
 > **对应练习**: [`exercises/src/ownership_borrowing/ex05_smart_pointer_rc.rs`](../../exercises/src/ownership_borrowing/ex05_smart_pointer_rc.rs)
 
 ---

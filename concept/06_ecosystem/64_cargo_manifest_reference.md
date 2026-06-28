@@ -12,8 +12,8 @@
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 把 `Cargo.toml` 的核心字段按用途整理成可速查的参考表，方便快速查阅而非从头阅读。
-> **前置概念**: [Cargo Toolchain](./01_toolchain.md) · [Cargo Dependency Resolution](./60_cargo_dependency_resolution.md) · [Cargo Build Scripts](./59_cargo_build_scripts.md)
-> **后置概念**: [Cargo Profiles and Lints](./65_cargo_profiles_and_lints.md) · [Cargo Source Replacement](./61_cargo_source_replacement.md)
+> **前置概念**: [Cargo Toolchain](01_toolchain.md) · [Cargo Dependency Resolution](60_cargo_dependency_resolution.md) · [Cargo Build Scripts](59_cargo_build_scripts.md)
+> **后置概念**: [Cargo Profiles and Lints](65_cargo_profiles_and_lints.md) · [Cargo Source Replacement](61_cargo_source_replacement.md)
 
 ---
 
@@ -23,25 +23,25 @@
 
 ## 📑 目录
 
-- [Cargo Manifest 参考速查](#cargo-manifest-参考速查)
-  - [📑 目录](#-目录)
+- [Cargo Manifest 参考速查](.#cargo-manifest-参考速查)
+  - [📑 目录](.#-目录)
   - [一、`[package]` 元数据](#一package-元数据)
-  - [二、Target 表](#二target-表)
-  - [三、依赖表](#三依赖表)
+  - [二、Target 表](.#二target-表)
+  - [三、依赖表](.#三依赖表)
   - [四、`[features]`](#四features)
   - [五、`[workspace]`](#五workspace)
   - [六、`[profile.*]`](#六profile)
   - [七、`[lints]` 与 `[hints]`](#七lints-与-hints)
     - [`[lints]`](#lints)
     - [`[hints]`](#hints)
-  - [八、覆盖与替换](#八覆盖与替换)
-  - [九、其他表](#九其他表)
-  - [嵌入式测验](#嵌入式测验)
-    - [测验 1：发布到 crates.io 时，`license` 和 `license-file` 至少需要一个吗？](#测验-1发布到-cratesio-时license-和-license-file-至少需要一个吗)
+  - [八、覆盖与替换](.#八覆盖与替换)
+  - [九、其他表](.#九其他表)
+  - [嵌入式测验](.#嵌入式测验)
+    - [测验 1：发布到 crates.io 时，`license` 和 `license-file` 至少需要一个吗？](.#测验-1发布到-cratesio-时license-和-license-file-至少需要一个吗)
     - [测验 2：`[dev-dependencies]` 在什么场景下使用？](#测验-2dev-dependencies-在什么场景下使用)
     - [测验 3：`[patch]` 与 `[source]` 的主要区别是什么？](#测验-3patch-与-source-的主要区别是什么)
-    - [测验 4：`workspace.lints` 会自动被成员包继承吗？](#测验-4workspacelints-会自动被成员包继承吗)
-  - [权威来源索引](#权威来源索引)
+    - [测验 4：`workspace.lints` 会自动被成员包继承吗？](.#测验-4workspacelints-会自动被成员包继承吗)
+  - [权威来源索引](.#权威来源索引)
 
 ---
 
@@ -190,7 +190,7 @@ opt-level = 2
 
 常用设置：`opt-level`、`debug`、`lto`、`panic`、`incremental`、`codegen-units`、`overflow-checks`、`debug-assertions`、`strip`。
 
-> 详见 [Cargo Profiles and Lints](./65_cargo_profiles_and_lints.md)。
+> 详见 [Cargo Profiles and Lints](65_cargo_profiles_and_lints.md)。
 
 ---
 

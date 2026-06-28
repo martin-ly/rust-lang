@@ -25,7 +25,7 @@
 
 > **后置概念**: [Ecosystem](../06_ecosystem/01_toolchain.md)
 
-> **前置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+> **前置概念**: [Rust vs C++](01_rust_vs_cpp.md)
 
 ## 一、权威定义
 

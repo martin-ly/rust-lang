@@ -923,7 +923,7 @@ fn main() {
 | AFIT/RPITIT | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) | 演进影响 |
 | Trait 系统 | [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) | 演进影响 |
 | Effects 系统 | [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) | 未来方向 |
-| 形式化方法 | [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) | 协同演进 |
+| 形式化方法 | [`../07_future/02_formal_methods.md`](02_formal_methods.md) | 协同演进 |
 | 语言对比 | [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md) | 定位参考 |
 
 ## 断言一致性矩阵（Assertion Consistency Matrix）
@@ -1114,7 +1114,7 @@ graph TD
 ## 权威来源索引
 
 > **补充来源**
-> **相关文件**: [版本跟踪](../07_future/05_rust_version_tracking.md) · [Effects 系统](../07_future/04_effects_system.md) · [能力图谱](../00_meta/competency_graph.md)
+> **相关文件**: [版本跟踪](05_rust_version_tracking.md) · [Effects 系统](04_effects_system.md) · [能力图谱](../00_meta/competency_graph.md)
 
 ## 十、边界测试：语言演进的编译错误
 

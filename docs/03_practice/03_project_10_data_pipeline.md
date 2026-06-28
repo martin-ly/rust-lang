@@ -13,17 +13,17 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [实践项目 10: 数据处理管道](#实践项目-10-数据处理管道)
-  - [📑 目录](#-目录)
-  - [项目目标](#项目目标)
-  - [功能需求](#功能需求)
-  - [学习要点](#学习要点)
-    - [管道模式](#管道模式)
-  - [参考实现](#参考实现)
+- [实践项目 10: 数据处理管道](.#实践项目-10-数据处理管道)
+  - [📑 目录](.#-目录)
+  - [项目目标](.#项目目标)
+  - [功能需求](.#功能需求)
+  - [学习要点](.#学习要点)
+    - [管道模式](.#管道模式)
+  - [参考实现](.#参考实现)
 <a id="完整参考实现位于-examplesdata-pipeline"></a>
-  - [完整参考实现位于: `examples/data-pipeline/`](#完整参考实现位于-examplesdata-pipeline)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+  - [完整参考实现位于: `examples/data-pipeline/`](.#完整参考实现位于-examplesdata-pipeline)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 项目目标
 >
@@ -90,7 +90,7 @@ impl Pipeline {
 
 ---
 
-- [README](./README.md)
+- [README](README.md)
 
 ---
 
@@ -98,7 +98,7 @@ impl Pipeline {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [03_practice 目录](./README.md)
+- [03_practice 目录](README.md)
 - [docs 索引](../README.md)
 
 ---

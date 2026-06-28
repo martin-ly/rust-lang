@@ -129,7 +129,7 @@ impl StateMachine<Running> {
 
 - [返回 C02 文档](../README.md)
 - [类型系统快速参考](../../../../docs/02_reference/quick_reference/type_system.md)
-- [Variance 源码](../../src/type_variance/)
+- [Variance 源码](../../src/type_variance)
 - [Rust Reference - Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html)
 
 ---

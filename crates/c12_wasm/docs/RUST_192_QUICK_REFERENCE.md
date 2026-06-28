@@ -9,23 +9,23 @@
 
 ## 📋 目录
 
-- [Rust 1.92.0 WASM 快速参考](#rust-1920-wasm-快速参考)
-  - [📋 目录](#-目录)
-  - [🎯 快速查找](#-快速查找)
-  - [💡 核心特性速查](#-核心特性速查)
-    - [1. MaybeUninit 文档化](#1-maybeuninit-文档化)
-    - [2. NonZero::div\_ceil](#2-nonzerodiv_ceil)
-    - [3. 联合体原始引用](#3-联合体原始引用)
-    - [4. 迭代器方法特化](#4-迭代器方法特化)
-    - [5. rotate\_right](#5-rotate_right)
-    - [6. Location::file\_as\_c\_str](#6-locationfile_as_c_str)
-  - [📊 性能提升速查](#-性能提升速查)
-  - [🔧 代码模板](#-代码模板)
-    - [高性能 WASM 内存管理器](#高性能-wasm-内存管理器)
-    - [高性能数组处理](#高性能数组处理)
-    - [高效数据旋转](#高效数据旋转)
-  - [📚 相关文档](#-相关文档)
-  - [**维护者**: C12 WASM 文档团队](#维护者-c12-wasm-文档团队)
+- [Rust 1.92.0 WASM 快速参考](.#rust-1920-wasm-快速参考)
+  - [📋 目录](.#-目录)
+  - [🎯 快速查找](.#-快速查找)
+  - [💡 核心特性速查](.#-核心特性速查)
+    - [1. MaybeUninit 文档化](.#1-maybeuninit-文档化)
+    - [2. NonZero::div\_ceil](.#2-nonzerodiv_ceil)
+    - [3. 联合体原始引用](.#3-联合体原始引用)
+    - [4. 迭代器方法特化](.#4-迭代器方法特化)
+    - [5. rotate\_right](.#5-rotate_right)
+    - [6. Location::file\_as\_c\_str](.#6-locationfile_as_c_str)
+  - [📊 性能提升速查](.#-性能提升速查)
+  - [🔧 代码模板](.#-代码模板)
+    - [高性能 WASM 内存管理器](.#高性能-wasm-内存管理器)
+    - [高性能数组处理](.#高性能数组处理)
+    - [高效数据旋转](.#高效数据旋转)
+  - [📚 相关文档](.#-相关文档)
+  - [**维护者**: C12 WASM 文档团队](.#维护者-c12-wasm-文档团队)
 
 ---
 
@@ -33,12 +33,12 @@
 
 | 需求                 | 推荐特性                | 性能提升 | 文档                                                                                     |
 | :--- | :--- | :--- | :--- |
-| **未初始化内存管理** | MaybeUninit             | +5%      | [详细文档](./RUST_192_WASM_IMPROVEMENTS.md#1-maybeuninit-在-wasm-内存管理中的应用)       |
-| **缓冲区分配计算**   | NonZero::div_ceil       | +10%     | [详细文档](./RUST_192_WASM_IMPROVEMENTS.md#2-nonzerodiv_ceil-在-wasm-缓冲区分配中的应用) |
-| **FFI 互操作**       | 联合体原始引用          | 基准     | [详细文档](./RUST_192_WASM_IMPROVEMENTS.md#3-联合体原始引用在-wasm-ffi-中的应用)         |
-| **数组比较**         | Iterator::eq 特化       | +15-25%  | [详细文档](./RUST_192_WASM_IMPROVEMENTS.md#4-迭代器方法特化在-wasm-性能优化中的应用)     |
-| **数据旋转**         | rotate_right            | +30-35%  | [详细文档](./RUST_192_WASM_IMPROVEMENTS.md#5-rotate_right-在-wasm-数据处理中的应用)      |
-| **调试信息**         | Location::file_as_c_str | 基准     | [详细文档](./RUST_192_WASM_IMPROVEMENTS.md#6-locationfile_as_c_str-在-wasm-调试中的应用) |
+| **未初始化内存管理** | MaybeUninit             | +5%      | [详细文档](RUST_192_WASM_IMPROVEMENTS.md#1-maybeuninit-在-wasm-内存管理中的应用)       |
+| **缓冲区分配计算**   | NonZero::div_ceil       | +10%     | [详细文档](RUST_192_WASM_IMPROVEMENTS.md#2-nonzerodiv_ceil-在-wasm-缓冲区分配中的应用) |
+| **FFI 互操作**       | 联合体原始引用          | 基准     | [详细文档](RUST_192_WASM_IMPROVEMENTS.md#3-联合体原始引用在-wasm-ffi-中的应用)         |
+| **数组比较**         | Iterator::eq 特化       | +15-25%  | [详细文档](RUST_192_WASM_IMPROVEMENTS.md#4-迭代器方法特化在-wasm-性能优化中的应用)     |
+| **数据旋转**         | rotate_right            | +30-35%  | [详细文档](RUST_192_WASM_IMPROVEMENTS.md#5-rotate_right-在-wasm-数据处理中的应用)      |
+| **调试信息**         | Location::file_as_c_str | 基准     | [详细文档](RUST_192_WASM_IMPROVEMENTS.md#6-locationfile_as_c_str-在-wasm-调试中的应用) |
 
 ---
 
@@ -223,9 +223,9 @@ wasm_rotate_data(&mut data, 3);
 
 ## 📚 相关文档
 
-- [Rust 1.92.0 WASM 改进文档](./RUST_192_WASM_IMPROVEMENTS.md) - 详细说明
-- [WASM 决策树图](./WASM_DECISION_TREE.md) - 技术选型
-- [WASM 多维概念对比矩阵](./WASM_CONCEPT_MATRIX.md) - 方案对比
+- [Rust 1.92.0 WASM 改进文档](RUST_192_WASM_IMPROVEMENTS.md) - 详细说明
+- [WASM 决策树图](WASM_DECISION_TREE.md) - 技术选型
+- [WASM 多维概念对比矩阵](WASM_CONCEPT_MATRIX.md) - 方案对比
 - [示例代码](../../examples/rust_192_features_demo.rs) - 完整示例
 
 ---

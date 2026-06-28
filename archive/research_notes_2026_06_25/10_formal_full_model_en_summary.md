@@ -9,7 +9,7 @@
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> **Source**: [10_formal_full_model_overview.md](./10_formal_full_model_overview.md) (Chinese)
+> **Source**: [10_formal_full_model_overview.md](10_formal_full_model_overview.md) (Chinese)
 
 ---
 
@@ -17,24 +17,24 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Rust Formal Full Model — English Summary](#rust-formal-full-model--english-summary)
-  - [📑 目录](#-目录)
-  - [Overview](#overview)
-  - [Core Mechanisms and Axiom Layer](#core-mechanisms-and-axiom-layer)
-  - [Theorem Dependency DAG (Simplified)](#theorem-dependency-dag-simplified)
-  - [Axiom → Composition Theorem DAG (Pillars 1+3)](#axiom--composition-theorem-dag-pillars-13)
-  - [Key Axioms (Unified Numbering)](#key-axioms-unified-numbering)
-  - [Formal Language and Proofs](#formal-language-and-proofs)
-  - [Related Documents](#related-documents)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+- [Rust Formal Full Model — English Summary](.#rust-formal-full-model--english-summary)
+  - [📑 目录](.#-目录)
+  - [Overview](.#overview)
+  - [Core Mechanisms and Axiom Layer](.#core-mechanisms-and-axiom-layer)
+  - [Theorem Dependency DAG (Simplified)](.#theorem-dependency-dag-simplified)
+  - [Axiom → Composition Theorem DAG (Pillars 1+3)](.#axiom--composition-theorem-dag-pillars-13)
+  - [Key Axioms (Unified Numbering)](.#key-axioms-unified-numbering)
+  - [Formal Language and Proofs](.#formal-language-and-proofs)
+  - [Related Documents](.#related-documents)
+  - [🆕 Rust 1.94 更新](.#-rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [权威来源索引](.#权威来源索引)
+  - [权威来源索引](.#权威来源索引-1)
 
 ## Overview
 >
@@ -118,15 +118,15 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [FORMAL_LANGUAGE_AND_PROOFS](./10_formal_language_and_proofs.md) — Inference rules, operational semantics, judgment forms, formal proof derivations (mathematical level; complements Coq skeletons)
+- [FORMAL_LANGUAGE_AND_PROOFS](10_formal_language_and_proofs.md) — Inference rules, operational semantics, judgment forms, formal proof derivations (mathematical level; complements Coq skeletons)
 
 ## Related Documents
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [CORE_THEOREMS_FULL_PROOFS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) — Full proofs for T-OW2, T-BR1, T-TY3 (L2)
-- [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) — 105+ proof index
-- [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./10_international_formal_verification_index.md) — International alignment
+- [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) — Full proofs for T-OW2, T-BR1, T-TY3 (L2)
+- [PROOF_INDEX](10_proof_index.md) — 105+ proof index
+- [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](10_international_formal_verification_index.md) — International alignment
 
 ---
 
@@ -136,7 +136,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
 > **适用版本**: Rust 1.96.0+
 
-详见 [RUST_194_RESEARCH_UPDATE](../../archive/research_notes_2026_06_25/10_rust_194_research_update.md)
+详见 [RUST_194_RESEARCH_UPDATE](10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 

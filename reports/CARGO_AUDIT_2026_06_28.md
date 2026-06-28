@@ -1,6 +1,6 @@
 # Cargo Audit 报告（2026-06-28）
 
-> 运行命令: `cargo audit --no-fetch`  
+> 运行命令: `cargo audit --no-fetch`
 > 结果: **未发现已知安全漏洞**
 
 ```text

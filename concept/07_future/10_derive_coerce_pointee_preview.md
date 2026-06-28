@@ -17,7 +17,7 @@
 > **双维定位**: C×Ana — 分析 Derive CoercePointee 预览特性
 > **定位**: 探讨 Rust 1.95+ 中通过派生宏（Macro）自动化 `CoerceUnsized` 和 `DispatchFromDyn` 实现，降低自定义智能指针（Smart Pointer）的**样板代码**和**unsafe 实现风险**。
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Generics](../02_intermediate/02_generics.md) · [Unsafe](../03_advanced/03_unsafe.md)
-> **后置概念**: [Evolution](./03_evolution.md)
+> **后置概念**: [Evolution](03_evolution.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -31,39 +31,39 @@
 ## 📑 目录
 
 - 派生 CoercePointee 预研：智能指针（Smart Pointer）的自动类型强制
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 问题：自定义智能指针的样板代码](#11-问题自定义智能指针的样板代码)
-    - [1.2 CoerceUnsized 与 DispatchFromDyn](#12-coerceunsized-与-dispatchfromdyn)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 问题：自定义智能指针的样板代码](.#11-问题自定义智能指针的样板代码)
+    - [1.2 CoerceUnsized 与 DispatchFromDyn](.#12-coerceunsized-与-dispatchfromdyn)
     - [1.3 `#[derive(CoercePointee)]` 方案](#13-derivecoercepointee-方案)
-  - [二、技术细节](#二技术细节)
+  - [二、技术细节](.#二技术细节)
     - 2.1 派生宏（Macro）的展开逻辑
-    - [2.2 约束条件](#22-约束条件)
-    - [2.3 与现有 Trait 的交互](#23-与现有-trait-的交互)
-  - [三、安全分析](#三安全分析)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、演进路线](#五演进路线)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：CoercePointee 派生的编译错误](#十边界测试coercepointee-派生的编译错误)
+    - [2.2 约束条件](.#22-约束条件)
+    - [2.3 与现有 Trait 的交互](.#23-与现有-trait-的交互)
+  - [三、安全分析](.#三安全分析)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、演进路线](.#五演进路线)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：CoercePointee 派生的编译错误](.#十边界测试coercepointee-派生的编译错误)
     - [10.1 边界测试：非 `#[repr(transparent)]` 类型的 CoercePointee（编译错误）](#101-边界测试非-reprtransparent-类型的-coercepointee编译错误)
-    - [10.2 边界测试：多字段 struct 的 CoercePointee 尝试（编译错误）](#102-边界测试多字段-struct-的-coercepointee-尝试编译错误)
-    - [10.3 边界测试：CoercePointee 与自定义 DST 的元数据（编译错误）](#103-边界测试coercepointee-与自定义-dst-的元数据编译错误)
+    - [10.2 边界测试：多字段 struct 的 CoercePointee 尝试（编译错误）](.#102-边界测试多字段-struct-的-coercepointee-尝试编译错误)
+    - [10.3 边界测试：CoercePointee 与自定义 DST 的元数据（编译错误）](.#103-边界测试coercepointee-与自定义-dst-的元数据编译错误)
     - 10.4 边界测试：`PhantomData` 与 CoercePointee 的生命周期（Lifetimes）交互（编译错误）
-    - [10.4 边界测试：`CoercePointee` 与智能指针的自动转换（编译错误/未来特性）](#104-边界测试coercepointee-与智能指针的自动转换编译错误未来特性)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：`CoercePointee` trait 的作用是什么？它解决了智能指针的什么问题？（理解层）](#测验-1coercepointee-trait-的作用是什么它解决了智能指针的什么问题理解层)
-    - [测验 2：为什么自定义智能指针默认不能强制转换为 `dyn Trait`？（理解层）](#测验-2为什么自定义智能指针默认不能强制转换为-dyn-trait理解层)
+    - [10.4 边界测试：`CoercePointee` 与智能指针的自动转换（编译错误/未来特性）](.#104-边界测试coercepointee-与智能指针的自动转换编译错误未来特性)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：`CoercePointee` trait 的作用是什么？它解决了智能指针的什么问题？（理解层）](.#测验-1coercepointee-trait-的作用是什么它解决了智能指针的什么问题理解层)
+    - [测验 2：为什么自定义智能指针默认不能强制转换为 `dyn Trait`？（理解层）](.#测验-2为什么自定义智能指针默认不能强制转换为-dyn-trait理解层)
     - [测验 3：`#[derive(CoercePointee)]` 需要满足什么条件？（理解层）](#测验-3derivecoercepointee-需要满足什么条件理解层)
-    - [测验 4：`CoercePointee` 与 `CoerceUnsized` 有什么关系？（理解层）](#测验-4coercepointee-与-coerceunsized-有什么关系理解层)
-    - [测验 5：这个特性对 Rust 生态有什么长期影响？（理解层）](#测验-5这个特性对-rust-生态有什么长期影响理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+    - [测验 4：`CoercePointee` 与 `CoerceUnsized` 有什么关系？（理解层）](.#测验-4coercepointee-与-coerceunsized-有什么关系理解层)
+    - [测验 5：这个特性对 Rust 生态有什么长期影响？（理解层）](.#测验-5这个特性对-rust-生态有什么长期影响理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -340,8 +340,8 @@ graph TD
 - [Type System](../01_foundation/04_type_system.md) — Rust 类型系统（Type System）基础
 - [Generics](../02_intermediate/02_generics.md) — 泛型（Generics）与 Trait Bounds
 - [Unsafe](../03_advanced/03_unsafe.md) — unsafe Rust 与内存安全（Memory Safety）
-- [Evolution](./03_evolution.md) — 语言演进机制
-- [Version Tracking](./05_rust_version_tracking.md) — Rust 版本特性演进
+- [Evolution](03_evolution.md) — 语言演进机制
+- [Version Tracking](05_rust_version_tracking.md) — Rust 版本特性演进
 
 ---
 

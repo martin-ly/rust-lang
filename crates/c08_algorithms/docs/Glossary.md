@@ -2,30 +2,30 @@
 
 > **文档定位**: 算法核心术语快速参考，涵盖复杂度、数据结构、算法设计等关键概念
 > **使用方式**: 通过术语索引快速查找定义，理解算法核心概念
-> **相关文档**: [主索引](./00_MASTER_INDEX.md) | [README](./README.md) | [FAQ](./FAQ.md)
+> **相关文档**: [主索引](00_MASTER_INDEX.md) | [README](README.md) | [FAQ](FAQ.md)
 
 ## 📊 目录
 
-- [C08 算法: 术语表 (Glossary)](#c08-算法-术语表-glossary)
-  - [📊 目录](#-目录)
-  - [📋 术语索引](#-术语索引)
-  - [术语详解](#术语详解)
-    - [算法 (Algorithm)](#算法-algorithm)
-    - [时间复杂度 (Time Complexity)](#时间复杂度-time-complexity)
-    - [空间复杂度 (Space Complexity)](#空间复杂度-space-complexity)
-    - [大O记号 (Big-O Notation)](#大o记号-big-o-notation)
-    - [递归 (Recursion)](#递归-recursion)
-    - [动态规划 (Dynamic Programming)](#动态规划-dynamic-programming)
-    - [贪心算法 (Greedy Algorithm)](#贪心算法-greedy-algorithm)
-    - [分治法 (Divide and Conquer)](#分治法-divide-and-conquer)
-    - [回溯法 (Backtracking)](#回溯法-backtracking)
-    - [哈希表 (Hash Table)](#哈希表-hash-table)
-    - [二叉搜索树 (Binary Search Tree)](#二叉搜索树-binary-search-tree)
-    - [图 (Graph)](#图-graph)
-    - [堆 (Heap)](#堆-heap)
-    - [单调栈 (Monotonic Stack)](#单调栈-monotonic-stack)
-    - [前缀和 (Prefix Sum)](#前缀和-prefix-sum)
-  - [📚 延伸阅读](#-延伸阅读)
+- [C08 算法: 术语表 (Glossary)](.#c08-算法-术语表-glossary)
+  - [📊 目录](.#-目录)
+  - [📋 术语索引](.#-术语索引)
+  - [术语详解](.#术语详解)
+    - [算法 (Algorithm)](.#算法-algorithm)
+    - [时间复杂度 (Time Complexity)](.#时间复杂度-time-complexity)
+    - [空间复杂度 (Space Complexity)](.#空间复杂度-space-complexity)
+    - [大O记号 (Big-O Notation)](.#大o记号-big-o-notation)
+    - [递归 (Recursion)](.#递归-recursion)
+    - [动态规划 (Dynamic Programming)](.#动态规划-dynamic-programming)
+    - [贪心算法 (Greedy Algorithm)](.#贪心算法-greedy-algorithm)
+    - [分治法 (Divide and Conquer)](.#分治法-divide-and-conquer)
+    - [回溯法 (Backtracking)](.#回溯法-backtracking)
+    - [哈希表 (Hash Table)](.#哈希表-hash-table)
+    - [二叉搜索树 (Binary Search Tree)](.#二叉搜索树-binary-search-tree)
+    - [图 (Graph)](.#图-graph)
+    - [堆 (Heap)](.#堆-heap)
+    - [单调栈 (Monotonic Stack)](.#单调栈-monotonic-stack)
+    - [前缀和 (Prefix Sum)](.#前缀和-prefix-sum)
+  - [📚 延伸阅读](.#-延伸阅读)
 
 **最后更新**: 2025-10-19
 **适用版本**: Rust 1.75+
@@ -35,7 +35,7 @@
 
 ## 📋 术语索引
 
-[A](#算法-algorithm) | [B](#大o记号-big-o-notation) | [D](#动态规划-dynamic-programming) | [G](#贪心算法-greedy-algorithm) | [H](#哈希表-hash-table) | [T](#时间复杂度-time-complexity)
+[A](.#算法-algorithm) | [B](.#大o记号-big-o-notation) | [D](.#动态规划-dynamic-programming) | [G](.#贪心算法-greedy-algorithm) | [H](.#哈希表-hash-table) | [T](.#时间复杂度-time-complexity)
 
 ---
 
@@ -65,7 +65,7 @@ fn gcd(mut a: u64, mut b: u64) -> u64 {
 }
 ```
 
-**相关**: [algorithm_index](./tier_03_references/01_算法分类参考.md)
+**相关**: [algorithm_index](tier_03_references/01_算法分类参考.md)
 
 ---
 
@@ -82,7 +82,7 @@ fn gcd(mut a: u64, mut b: u64) -> u64 {
 - O(n²) - 平方时间
 - O(2ⁿ) - 指数时间
 
-**相关**: [algorithm_complexity](./tier_02_guides/03_算法复杂度分析.md)
+**相关**: [algorithm_complexity](tier_02_guides/03_算法复杂度分析.md)
 
 ---
 
@@ -104,7 +104,7 @@ fn reverse(arr: &[i32]) -> Vec<i32> {
 }
 ```
 
-**相关**: [algorithm_complexity](./tier_02_guides/03_算法复杂度分析.md)
+**相关**: [algorithm_complexity](tier_02_guides/03_算法复杂度分析.md)
 
 ---
 
@@ -131,7 +131,7 @@ while x > 1 {
 }
 ```
 
-**相关**: [algorithm_complexity](./tier_02_guides/03_算法复杂度分析.md)
+**相关**: [algorithm_complexity](tier_02_guides/03_算法复杂度分析.md)
 
 ---
 
@@ -156,7 +156,7 @@ fn factorial(n: u64) -> u64 {
 }
 ```
 
-**相关**: [ASYNC_RECURSION_ANALYSIS](./ASYNC_RECURSION_ANALYSIS.md)
+**相关**: [ASYNC_RECURSION_ANALYSIS](ASYNC_RECURSION_ANALYSIS.md)
 
 ---
 
@@ -196,7 +196,7 @@ fn fibonacci_dp(n: usize) -> u64 {
 - 最长公共子序列
 - 最短路径
 
-**相关**: [algorithm_exp系列](./algorithm_exp01.md)
+**相关**: [algorithm_exp系列](algorithm_exp01.md)
 
 ---
 
@@ -236,7 +236,7 @@ fn coin_change_greedy(amount: u32, coins: &[u32]) -> Vec<u32> {
 - 霍夫曼编码
 - 最小生成树 (Prim/Kruskal)
 
-**相关**: [algorithm_index](./tier_03_references/01_算法分类参考.md)
+**相关**: [algorithm_index](tier_03_references/01_算法分类参考.md)
 
 ---
 
@@ -283,7 +283,7 @@ fn merge<T: Ord>(left: &[T], right: &[T], result: &mut [T]) {
 - 快速排序
 - 二分查找
 
-**相关**: [algorithm_index](./tier_03_references/01_算法分类参考.md)
+**相关**: [algorithm_index](tier_03_references/01_算法分类参考.md)
 
 ---
 
@@ -336,7 +336,7 @@ fn is_valid(board: &[Vec<char>], row: usize, col: usize) -> bool {
 - 数独
 - 全排列
 
-**相关**: [algorithm_index](./tier_03_references/01_算法分类参考.md)
+**相关**: [algorithm_index](tier_03_references/01_算法分类参考.md)
 
 ---
 
@@ -362,7 +362,7 @@ map.remove("key");           // O(1)
 - 链地址法 (Chaining)
 - 开放寻址 (Open Addressing)
 
-**相关**: [data_structures](./tier_02_guides/02_数据结构实践.md)
+**相关**: [data_structures](tier_02_guides/02_数据结构实践.md)
 
 ---
 
@@ -405,7 +405,7 @@ impl<T: Ord> TreeNode<T> {
 - 红黑树 (BTreeMap内部实现)
 - B树/B+树
 
-**相关**: [data_structures](./tier_02_guides/02_数据结构实践.md)
+**相关**: [data_structures](tier_02_guides/02_数据结构实践.md)
 
 ---
 
@@ -438,7 +438,7 @@ type AdjMatrix = Vec<Vec<bool>>;
 - Floyd-Warshall (全源最短路径)
 - Kruskal/Prim (最小生成树)
 
-**相关**: [algorithm_index](./tier_03_references/01_算法分类参考.md)
+**相关**: [algorithm_index](tier_03_references/01_算法分类参考.md)
 
 ---
 
@@ -467,7 +467,7 @@ heap.peek();       // O(1) 查看最大值
 - 堆排序
 - Top K问题
 
-**相关**: [data_structures](./tier_02_guides/02_数据结构实践.md)
+**相关**: [data_structures](tier_02_guides/02_数据结构实践.md)
 
 ---
 
@@ -498,7 +498,7 @@ fn next_greater_elements(nums: Vec<i32>) -> Vec<i32> {
 }
 ```
 
-**相关**: [data_structures](./tier_02_guides/02_数据结构实践.md)
+**相关**: [data_structures](tier_02_guides/02_数据结构实践.md)
 
 ---
 
@@ -531,17 +531,17 @@ impl PrefixSum {
 
 **应用**: 区间查询
 
-**相关**: [data_structures](./tier_02_guides/02_数据结构实践.md)
+**相关**: [data_structures](tier_02_guides/02_数据结构实践.md)
 
 ---
 
 ## 📚 延伸阅读
 
-- [主索引](./00_MASTER_INDEX.md) - 完整文档导航
-- [FAQ](./FAQ.md) - 常见问题解答
-- [algorithm_index](./algorithm_index.md) - 算法索引
-- [algorithm_complexity](./algorithm_complexity.md) - 复杂度分析
-- [data_structures](./data_structures.md) - 数据结构详解
+- [主索引](00_MASTER_INDEX.md) - 完整文档导航
+- [FAQ](FAQ.md) - 常见问题解答
+- [algorithm_index](algorithm_index.md) - 算法索引
+- [algorithm_complexity](algorithm_complexity.md) - 复杂度分析
+- [data_structures](data_structures.md) - 数据结构详解
 
 ---
 

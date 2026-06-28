@@ -13,17 +13,17 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [实践项目 14: 异步运行时原型](#实践项目-14-异步运行时原型)
-  - [📑 目录](#-目录)
-  - [项目目标](#项目目标)
-  - [功能需求](#功能需求)
-  - [学习要点](#学习要点)
-    - [自定义Future](#自定义future)
-  - [参考实现](#参考实现)
+- [实践项目 14: 异步运行时原型](.#实践项目-14-异步运行时原型)
+  - [📑 目录](.#-目录)
+  - [项目目标](.#项目目标)
+  - [功能需求](.#功能需求)
+  - [学习要点](.#学习要点)
+    - [自定义Future](.#自定义future)
+  - [参考实现](.#参考实现)
 <a id="完整参考实现位于-examplesasync-runtime"></a>
-  - [完整参考实现位于: `examples/async-runtime/`](#完整参考实现位于-examplesasync-runtime)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+  - [完整参考实现位于: `examples/async-runtime/`](.#完整参考实现位于-examplesasync-runtime)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 项目目标
 >
@@ -92,7 +92,7 @@ impl Future for MyFuture {
 
 ---
 
-- [README](./README.md)
+- [README](README.md)
 
 ---
 
@@ -100,7 +100,7 @@ impl Future for MyFuture {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [03_practice 目录](./README.md)
+- [03_practice 目录](README.md)
 - [docs 索引](../README.md)
 
 ---

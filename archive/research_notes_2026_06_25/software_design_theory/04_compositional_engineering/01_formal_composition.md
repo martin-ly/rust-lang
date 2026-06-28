@@ -9,23 +9,23 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [组合的形式化定义](#组合的形式化定义)
-  - [📑 目录](#-目录)
-  - [定义](#定义)
-  - [公理](#公理)
-  - [定理与引理（形式化论证）](#定理与引理形式化论证)
-  - [Rust 对应](#rust-对应)
-  - [设计模式组合示例](#设计模式组合示例)
-  - [Crate 组合](#crate-组合)
-  - [组合反例](#组合反例)
-  - [引用](#引用)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [组合的形式化定义](.#组合的形式化定义)
+  - [📑 目录](.#-目录)
+  - [定义](.#定义)
+  - [公理](.#公理)
+  - [定理与引理（形式化论证）](.#定理与引理形式化论证)
+  - [Rust 对应](.#rust-对应)
+  - [设计模式组合示例](.#设计模式组合示例)
+  - [Crate 组合](.#crate-组合)
+  - [组合反例](.#组合反例)
+  - [引用](.#引用)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -92,15 +92,15 @@ $M_1$ 依赖 $M_2$（记 $M_1 \prec M_2$）当且仅当 $M_1$ 引用 $M_2$ 的 `
 
 **定理 CE-T1（组合保持内存安全）**：若各模块 $M_i$ 满足 [ownership_model](../../formal_methods/10_ownership_model.md) 定理 T2、T3（所有权唯一性、内存安全），则组合 $C = M_1 \oplus \cdots \oplus M_n$ 满足内存安全。
 
-*证明*：见 [02_effectiveness_proofs](./02_effectiveness_proofs.md) CE-T1；归纳基：单模块；归纳步：添加 $M_n$ 时，值传递/所有权转移符合 Def 1.3 接口一致；无新分配模式违反规则。∎
+*证明*：见 [02_effectiveness_proofs](02_effectiveness_proofs.md) CE-T1；归纳基：单模块；归纳步：添加 $M_n$ 时，值传递/所有权转移符合 Def 1.3 接口一致；无新分配模式违反规则。∎
 
 **定理 CE-T2（组合保持数据竞争自由）**：若各模块满足 [borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md) 定理 T1，且跨线程传递仅 Send/Sync、共享仅 Sync，则组合保持数据竞争自由。
 
-*证明*：见 [02_effectiveness_proofs](./02_effectiveness_proofs.md) CE-T2；Send/Sync 为结构性质；跨模块边界约束不变。∎
+*证明*：见 [02_effectiveness_proofs](02_effectiveness_proofs.md) CE-T2；Send/Sync 为结构性质；跨模块边界约束不变。∎
 
 **定理 CE-T3（组合保持类型安全）**：若各模块良型，且 [type_system_foundations](../../type_theory/10_type_system_foundations.md) 进展性 T1、保持性 T2、类型安全 T3 成立，则组合程序良型且类型安全。
 
-*证明*：见 [02_effectiveness_proofs](./02_effectiveness_proofs.md) CE-T3；类型环境合并无冲突；跨模块调用保持类型。∎
+*证明*：见 [02_effectiveness_proofs](02_effectiveness_proofs.md) CE-T3；类型环境合并无冲突；跨模块调用保持类型。∎
 
 **引理 CE-L1（模块无环）**：若 $C = M_1 \oplus \cdots \oplus M_n$ 满足 Def 1.3 无环，则依赖图 $G$ 为 DAG；$M_i \prec^* M_j \land M_j \prec^* M_i \Rightarrow \bot$。
 
@@ -301,7 +301,7 @@ fn main() {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [04_compositional_engineering 目录](./README.md)
+- [04_compositional_engineering 目录](README.md)
 - [上级目录](../README.md)
 
 ---

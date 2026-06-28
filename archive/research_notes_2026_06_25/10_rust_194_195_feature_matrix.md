@@ -16,31 +16,31 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Rust 1.94/1.95 特性矩阵与形式化追踪](#rust-194195-特性矩阵与形式化追踪)
-  - [📑 目录](#-目录)
-  - [特性矩阵概览](#特性矩阵概览)
-  - [形式化文档更新计划](#形式化文档更新计划)
-    - [高优先级更新](#高优先级更新)
-    - [中优先级更新](#中优先级更新)
-  - [新增形式化定义](#新增形式化定义)
-    - [Def 1.94-1 (RangeToInclusive)](#def-194-1-rangetoinclusive)
-    - [Def 1.94-2 (ControlFlow::ok)](#def-194-2-controlflowok)
-    - [Def 1.94-3 (RefCell::try\_map)](#def-194-3-refcelltry_map)
-    - [Def 1.95-1 (生成器状态机)](#def-195-1-生成器状态机)
-  - [证明更新清单](#证明更新清单)
-    - [定理更新](#定理更新)
-  - [网络资源对齐](#网络资源对齐)
-    - [官方资源](#官方资源)
-    - [学术资源](#学术资源)
-  - [持续追踪指标](#持续追踪指标)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [Rust 1.94/1.95 特性矩阵与形式化追踪](.#rust-194195-特性矩阵与形式化追踪)
+  - [📑 目录](.#-目录)
+  - [特性矩阵概览](.#特性矩阵概览)
+  - [形式化文档更新计划](.#形式化文档更新计划)
+    - [高优先级更新](.#高优先级更新)
+    - [中优先级更新](.#中优先级更新)
+  - [新增形式化定义](.#新增形式化定义)
+    - [Def 1.94-1 (RangeToInclusive)](.#def-194-1-rangetoinclusive)
+    - [Def 1.94-2 (ControlFlow::ok)](.#def-194-2-controlflowok)
+    - [Def 1.94-3 (RefCell::try\_map)](.#def-194-3-refcelltry_map)
+    - [Def 1.95-1 (生成器状态机)](.#def-195-1-生成器状态机)
+  - [证明更新清单](.#证明更新清单)
+    - [定理更新](.#定理更新)
+  - [网络资源对齐](.#网络资源对齐)
+    - [官方资源](.#官方资源)
+    - [学术资源](.#学术资源)
+  - [持续追踪指标](.#持续追踪指标)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 特性矩阵概览
 >
@@ -49,17 +49,17 @@
 | 特性 | 1.93 | 1.94 | 1.95 | 形式化文档 | 完成度 |
 | :--- | :---: | :---: | :---: | :--- | :---: |
 | **语言特性** | | | | | |
-| control_flow_ok | - | ✅ | ✅ | [type_system](./type_theory/10_type_system_foundations.md) | 90% |
-| RangeToInclusive 类型 | - | ✅ | ✅ | [type_system](./type_theory/10_type_system_foundations.md) | 80% |
-| 下一代 trait 求解器 | - | - | 🔬 | [type_system](./type_theory/10_type_system_foundations.md) | 60% |
-| Async Drop | - | - | 🔬 | [async](./formal_methods/10_async_state_machine.md) | 40% |
-| 生成器 (iter!) | - | - | 🔬 | [async](./formal_methods/10_async_state_machine.md) | 50% |
-| Pin 重新借用 | - | - | 🔬 | [pin](./formal_methods/10_pin_self_referential.md) | 70% |
+| control_flow_ok | - | ✅ | ✅ | [type_system](type_theory/10_type_system_foundations.md) | 90% |
+| RangeToInclusive 类型 | - | ✅ | ✅ | [type_system](type_theory/10_type_system_foundations.md) | 80% |
+| 下一代 trait 求解器 | - | - | 🔬 | [type_system](type_theory/10_type_system_foundations.md) | 60% |
+| Async Drop | - | - | 🔬 | [async](formal_methods/10_async_state_machine.md) | 40% |
+| 生成器 (iter!) | - | - | 🔬 | [async](formal_methods/10_async_state_machine.md) | 50% |
+| Pin 重新借用 | - | - | 🔬 | [pin](formal_methods/10_pin_self_referential.md) | 70% |
 | **标准库** | | | | | |
-| int_format_into | - | ✅ | ✅ | [ownership](./formal_methods/10_ownership_model.md) | 85% |
-| refcell_try_map | - | ✅ | ✅ | [ownership](./formal_methods/10_ownership_model.md) | 95% |
-| VecDeque::truncate_front | - | ✅ | ✅ | [ownership](./formal_methods/10_ownership_model.md) | 90% |
-| 严格指针来源 | - | 🔬 | 🔬 | [ownership](./formal_methods/10_ownership_model.md) | 65% |
+| int_format_into | - | ✅ | ✅ | [ownership](formal_methods/10_ownership_model.md) | 85% |
+| refcell_try_map | - | ✅ | ✅ | [ownership](formal_methods/10_ownership_model.md) | 95% |
+| VecDeque::truncate_front | - | ✅ | ✅ | [ownership](formal_methods/10_ownership_model.md) | 90% |
+| 严格指针来源 | - | 🔬 | 🔬 | [ownership](formal_methods/10_ownership_model.md) | 65% |
 | **Cargo** | | | | | |
 | rustdoc --merge | - | ✅ | ✅ | - | 85% |
 | config-include | ✅ | ✅ | ✅ | - | 100% |
@@ -80,10 +80,10 @@
 
 | 文档 | 更新内容 | 预计工时 | 状态 |
 | :--- | :--- | :--- | :--- |
-| [type_system_foundations](./type_theory/10_type_system_foundations.md) | 添加 RangeToInclusive、ControlFlow::ok 形式化 | 4h | 🔄 |
-| [ownership_model](./formal_methods/10_ownership_model.md) | 更新 RefCell 操作规则 | 2h | 🔄 |
-| [async_state_machine](./formal_methods/10_async_state_machine.md) | 添加生成器状态机形式化 | 6h | ⏳ |
-| [pin_self_referential](./formal_methods/10_pin_self_referential.md) | 更新重新借用规则 | 4h | ⏳ |
+| [type_system_foundations](type_theory/10_type_system_foundations.md) | 添加 RangeToInclusive、ControlFlow::ok 形式化 | 4h | 🔄 |
+| [ownership_model](formal_methods/10_ownership_model.md) | 更新 RefCell 操作规则 | 2h | 🔄 |
+| [async_state_machine](formal_methods/10_async_state_machine.md) | 添加生成器状态机形式化 | 6h | ⏳ |
+| [pin_self_referential](formal_methods/10_pin_self_referential.md) | 更新重新借用规则 | 4h | ⏳ |
 
 ### 中优先级更新
 
@@ -93,9 +93,9 @@
 
 | 文档 | 更新内容 | 预计工时 | 状态 |
 | :--- | :--- | :--- | :--- |
-| [FORMAL_CONCEPTS_ENCYCLOPEDIA](../../archive/research_notes_2026_06_25/10_formal_concepts_encyclopedia.md) | 添加新类型定义 | 3h | ⏳ |
-| [COUNTER_EXAMPLES_COMPENDIUM](./10_counter_examples_compendium.md) | 添加边界案例 | 4h | ⏳ |
-| [THEOREM_RUST_EXAMPLE_MAPPING](./10_theorem_rust_example_mapping.md) | 更新定理映射 | 2h | ⏳ |
+| [FORMAL_CONCEPTS_ENCYCLOPEDIA](10_formal_concepts_encyclopedia.md) | 添加新类型定义 | 3h | ⏳ |
+| [COUNTER_EXAMPLES_COMPENDIUM](10_counter_examples_compendium.md) | 添加边界案例 | 4h | ⏳ |
+| [THEOREM_RUST_EXAMPLE_MAPPING](10_theorem_rust_example_mapping.md) | 更新定理映射 | 2h | ⏳ |
 
 ---
 
@@ -313,7 +313,7 @@ Generator<Yield=Y, Return=R>:
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

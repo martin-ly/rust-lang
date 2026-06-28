@@ -192,21 +192,21 @@
 
 ### 核心文档
 
-- [Rust 1.92.0 WASM 改进文档](./docs/RUST_192_WASM_IMPROVEMENTS.md)
-- [项目概览](./docs/tier_01_foundations/01_项目概览.md)
-- [主索引导航](./docs/tier_01_foundations/02_主索引导航.md)
+- [Rust 1.92.0 WASM 改进文档](docs/RUST_192_WASM_IMPROVEMENTS.md)
+- [项目概览](docs/tier_01_foundations/01_项目概览.md)
+- [主索引导航](docs/tier_01_foundations/02_主索引导航.md)
 
 ### 思维表征方式
 
-- [WASM 思维导图集合](./docs/WASM_MIND_MAPS.md)
-- [WASM 多维概念对比矩阵](./docs/WASM_CONCEPT_MATRIX.md)
-- [WASM 决策树图](./docs/WASM_DECISION_TREE.md)
-- [WASM 证明树图](./docs/WASM_PROOF_TREE.md)
+- [WASM 思维导图集合](docs/WASM_MIND_MAPS.md)
+- [WASM 多维概念对比矩阵](docs/WASM_CONCEPT_MATRIX.md)
+- [WASM 决策树图](docs/WASM_DECISION_TREE.md)
+- [WASM 证明树图](docs/WASM_PROOF_TREE.md)
 
 ### 示例代码
 
-- [Rust 1.92.0 WASM 特性演示](./examples/rust_192_features_demo.rs)
-- [源代码实现](./src/rust_192_features.rs)
+- [Rust 1.92.0 WASM 特性演示](examples/rust_192_features_demo.rs)
+- [源代码实现](src/rust_192_features.rs)
 
 ---
 

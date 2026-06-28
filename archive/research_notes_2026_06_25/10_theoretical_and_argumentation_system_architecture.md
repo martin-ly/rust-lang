@@ -9,37 +9,37 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Rust 形式化研究：理论体系与论证体系结构](#rust-形式化研究理论体系与论证体系结构)
-  - [📑 目录](#-目录)
-  - [🎯 文档宗旨 {#-文档宗旨}](#-文档宗旨--文档宗旨)
-  - [📐 一、理论体系结构（总览） {#-一理论体系结构总览}](#-一理论体系结构总览--一理论体系结构总览)
-    - [1.1 理论体系四层架构](#11-理论体系四层架构)
-    - [1.2 理论族依赖关系](#12-理论族依赖关系)
-    - [1.3 理论覆盖范围矩阵](#13-理论覆盖范围矩阵)
-  - [📐 二、论证体系结构（总览） {#-二论证体系结构总览}](#-二论证体系结构总览--二论证体系结构总览)
-    - [2.1 论证要素五层结构](#21-论证要素五层结构)
-    - [2.2 论证流向与一致性](#22-论证流向与一致性)
-    - [2.3 论证体系索引](#23-论证体系索引)
-  - [🔬 三、安全与非安全全面论证 {#-三安全与非安全全面论证}](#-三安全与非安全全面论证--三安全与非安全全面论证)
-    - [3.1 安全与非安全边界总览](#31-安全与非安全边界总览)
-    - [3.2 安全保证形式化汇总](#32-安全保证形式化汇总)
-    - [3.3 unsafe 契约矩阵](#33-unsafe-契约矩阵)
-    - [3.4 安全抽象论证](#34-安全抽象论证)
-    - [3.5 UB 分类与反例](#35-ub-分类与反例)
-    - [3.6 安全 vs 非安全决策树](#36-安全-vs-非安全决策树)
-  - [📖 如何阅读本体系 {#-如何阅读本体系}](#-如何阅读本体系--如何阅读本体系)
-  - [💻 代码示例 {#-代码示例}](#-代码示例--代码示例)
-    - [示例 1: 理论体系层验证代码](#示例-1-理论体系层验证代码)
-    - [示例 2: 安全边界验证代码](#示例-2-安全边界验证代码)
-    - [示例 3: Coq 形式化对应代码](#示例-3-coq-形式化对应代码)
-  - [📚 相关文档 {#-相关文档}](#-相关文档--相关文档)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [Rust 形式化研究：理论体系与论证体系结构](.#rust-形式化研究理论体系与论证体系结构)
+  - [📑 目录](.#-目录)
+  - [🎯 文档宗旨 {#-文档宗旨}](.#-文档宗旨--文档宗旨)
+  - [📐 一、理论体系结构（总览） {#-一理论体系结构总览}](.#-一理论体系结构总览--一理论体系结构总览)
+    - [1.1 理论体系四层架构](.#11-理论体系四层架构)
+    - [1.2 理论族依赖关系](.#12-理论族依赖关系)
+    - [1.3 理论覆盖范围矩阵](.#13-理论覆盖范围矩阵)
+  - [📐 二、论证体系结构（总览） {#-二论证体系结构总览}](.#-二论证体系结构总览--二论证体系结构总览)
+    - [2.1 论证要素五层结构](.#21-论证要素五层结构)
+    - [2.2 论证流向与一致性](.#22-论证流向与一致性)
+    - [2.3 论证体系索引](.#23-论证体系索引)
+  - [🔬 三、安全与非安全全面论证 {#-三安全与非安全全面论证}](.#-三安全与非安全全面论证--三安全与非安全全面论证)
+    - [3.1 安全与非安全边界总览](.#31-安全与非安全边界总览)
+    - [3.2 安全保证形式化汇总](.#32-安全保证形式化汇总)
+    - [3.3 unsafe 契约矩阵](.#33-unsafe-契约矩阵)
+    - [3.4 安全抽象论证](.#34-安全抽象论证)
+    - [3.5 UB 分类与反例](.#35-ub-分类与反例)
+    - [3.6 安全 vs 非安全决策树](.#36-安全-vs-非安全决策树)
+  - [📖 如何阅读本体系 {#-如何阅读本体系}](.#-如何阅读本体系--如何阅读本体系)
+  - [💻 代码示例 {#-代码示例}](.#-代码示例--代码示例)
+    - [示例 1: 理论体系层验证代码](.#示例-1-理论体系层验证代码)
+    - [示例 2: 安全边界验证代码](.#示例-2-安全边界验证代码)
+    - [示例 3: Coq 形式化对应代码](.#示例-3-coq-形式化对应代码)
+  - [📚 相关文档 {#-相关文档}](.#-相关文档--相关文档)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -385,16 +385,16 @@
 **推荐阅读顺序**：
 
 1. **顶层**：本文档（理论四层、论证五层、安全边界）
-2. **完整总结与论证脉络**：[00_COMPREHENSIVE_SUMMARY](../../archive/research_notes_2026_06_25/10_00_comprehensive_summary.md) 项目全貌与知识地图、[ARGUMENTATION_CHAIN_AND_FLOW](./10_argumentation_chain_and_flow.md) 论证五步法、概念→定理 DAG、文档依赖
-3. **全局**：[COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md) 语义归纳、概念族谱、缺口追踪
-4. **框架**：[UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md) 思维导图、矩阵、全链路图
-5. **安全**：[SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./10_safe_unsafe_comprehensive_analysis.md) 契约、UB、安全抽象
-6. **证明**：[PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) 按领域/类型查找具体定理
-7. **论证**：[FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) 论证要素、缺口类型
-8. **设计**：[DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) 机制理由
-9. **特性**：[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md) 92 项语言特性
+2. **完整总结与论证脉络**：[00_COMPREHENSIVE_SUMMARY](10_00_comprehensive_summary.md) 项目全貌与知识地图、[ARGUMENTATION_CHAIN_AND_FLOW](10_argumentation_chain_and_flow.md) 论证五步法、概念→定理 DAG、文档依赖
+3. **全局**：[COMPREHENSIVE_SYSTEMATIC_OVERVIEW](10_comprehensive_systematic_overview.md) 语义归纳、概念族谱、缺口追踪
+4. **框架**：[UNIFIED_SYSTEMATIC_FRAMEWORK](10_unified_systematic_framework.md) 思维导图、矩阵、全链路图
+5. **安全**：[SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](10_safe_unsafe_comprehensive_analysis.md) 契约、UB、安全抽象
+6. **证明**：[PROOF_INDEX](10_proof_index.md) 按领域/类型查找具体定理
+7. **论证**：[FORMAL_PROOF_SYSTEM_GUIDE](10_formal_proof_system_guide.md) 论证要素、缺口类型
+8. **设计**：[DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md) 机制理由
+9. **特性**：[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](10_rust_193_language_features_comprehensive_analysis.md) 92 项语言特性
 
-**按需求选读**：缺论证结构 → §§ 二、[ARGUMENTATION_CHAIN_AND_FLOW](./10_argumentation_chain_and_flow.md)；缺安全边界 → §§ 三、SAFE_UNSAFE；缺具体定理 → PROOF_INDEX；缺设计理由 → DESIGN_MECHANISM_RATIONALE；缺全貌 → [00_COMPREHENSIVE_SUMMARY](../../archive/research_notes_2026_06_25/10_00_comprehensive_summary.md)。
+**按需求选读**：缺论证结构 → §§ 二、[ARGUMENTATION_CHAIN_AND_FLOW](10_argumentation_chain_and_flow.md)；缺安全边界 → §§ 三、SAFE_UNSAFE；缺具体定理 → PROOF_INDEX；缺设计理由 → DESIGN_MECHANISM_RATIONALE；缺全貌 → [00_COMPREHENSIVE_SUMMARY](10_00_comprehensive_summary.md)。
 
 ---
 
@@ -602,15 +602,15 @@ Admitted.
 
 | 文档 | 用途 |
 | :--- | :--- |
-| [00_COMPREHENSIVE_SUMMARY](../../archive/research_notes_2026_06_25/10_00_comprehensive_summary.md) | 完整总结综合、项目全貌、知识地图、论证总览 |
-| [ARGUMENTATION_CHAIN_AND_FLOW](./10_argumentation_chain_and_flow.md) | 论证脉络关系、论证五步法、概念→定理 DAG、文档依赖 |
-| [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md) | 全面系统化梳理、语义归纳、概念族谱 |
-| [UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md) | 全局统一框架、思维导图、矩阵、全链路图 |
-| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) | 构造性语义、表达能力边界、unsafe 契约 |
-| [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) | 论证要素规范、概念-公理-定理映射 |
-| [PROOF_INDEX](../../archive/research_notes_2026_06_25/10_proof_index.md) | 形式化证明索引 |
-| [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) | 设计机制论证 |
-| [ARGUMENTATION_GAP_INDEX](./10_argumentation_gap_index.md) | 论证缺口追踪 |
+| [00_COMPREHENSIVE_SUMMARY](10_00_comprehensive_summary.md) | 完整总结综合、项目全貌、知识地图、论证总览 |
+| [ARGUMENTATION_CHAIN_AND_FLOW](10_argumentation_chain_and_flow.md) | 论证脉络关系、论证五步法、概念→定理 DAG、文档依赖 |
+| [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](10_comprehensive_systematic_overview.md) | 全面系统化梳理、语义归纳、概念族谱 |
+| [UNIFIED_SYSTEMATIC_FRAMEWORK](10_unified_systematic_framework.md) | 全局统一框架、思维导图、矩阵、全链路图 |
+| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](10_language_semantics_expressiveness.md) | 构造性语义、表达能力边界、unsafe 契约 |
+| [FORMAL_PROOF_SYSTEM_GUIDE](10_formal_proof_system_guide.md) | 论证要素规范、概念-公理-定理映射 |
+| [PROOF_INDEX](10_proof_index.md) | 形式化证明索引 |
+| [DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md) | 设计机制论证 |
+| [ARGUMENTATION_GAP_INDEX](10_argumentation_gap_index.md) | 论证缺口追踪 |
 | [software_design_theory](software_design_theory/README.md) | **软件设计理论体系**：设计模式形式化、23/43 模型、执行模型、组合工程有效性 |
 | [UNSAFE_RUST_GUIDE](../../concept/03_advanced/03_unsafe.md) | Unsafe Rust 专题指南 |
 
@@ -680,7 +680,7 @@ Admitted.
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---

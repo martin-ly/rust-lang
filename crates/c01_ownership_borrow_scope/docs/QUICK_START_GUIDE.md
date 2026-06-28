@@ -2,47 +2,47 @@
 
 ## 📊 目录
 
-- [Rust 1.90 所有权系统快速开始指南](#rust-190-所有权系统快速开始指南)
-  - [📊 目录](#-目录)
-  - [🚀 5分钟快速开始](#-5分钟快速开始)
-    - [第一步：查看知识图谱（2分钟）](#第一步查看知识图谱2分钟)
-    - [第二步：运行第一个示例（3分钟）](#第二步运行第一个示例3分钟)
-  - [📚 第一天学习计划（2小时）](#-第一天学习计划2小时)
-    - [Hour 1: 核心概念速览](#hour-1-核心概念速览)
-      - [10分钟：理解所有权](#10分钟理解所有权)
-      - [15分钟：理解借用](#15分钟理解借用)
-      - [15分钟：理解生命周期](#15分钟理解生命周期)
-      - [20分钟：实践练习](#20分钟实践练习)
-    - [Hour 2: 智能指针和并发](#hour-2-智能指针和并发)
-      - [15分钟：Box、Rc、Arc](#15分钟boxrcarc)
-      - [15分钟：并发安全](#15分钟并发安全)
-      - [30分钟：综合实践](#30分钟综合实践)
-  - [🎯 第一周学习路线](#-第一周学习路线)
-    - [Day 1-2: 基础巩固（已完成 ✅）](#day-1-2-基础巩固已完成-)
-    - [Day 3-4: 深入核心](#day-3-4-深入核心)
-    - [Day 5-6: 应用实战](#day-5-6-应用实战)
-    - [Day 7: 综合提升](#day-7-综合提升)
-  - [📖 学习资源速查](#-学习资源速查)
-    - [按问题查找](#按问题查找)
-    - [按场景查找](#按场景查找)
-  - [🔧 常见问题快速解决](#-常见问题快速解决)
-    - [Q1: "value borrowed here after move"](#q1-value-borrowed-here-after-move)
-    - [Q2: "cannot borrow as mutable"](#q2-cannot-borrow-as-mutable)
-    - [Q3: "lifetime may not live long enough"](#q3-lifetime-may-not-live-long-enough)
-  - [🎯 学习检查点](#-学习检查点)
-    - [✅ 第1天结束时，你应该能够](#-第1天结束时你应该能够)
-    - [✅ 第3天结束时，你应该能够](#-第3天结束时你应该能够)
-    - [✅ 第5天结束时，你应该能够](#-第5天结束时你应该能够)
-    - [✅ 第7天结束时，你应该能够](#-第7天结束时你应该能够)
-  - [📱 快速参考卡片](#-快速参考卡片)
-    - [所有权规则](#所有权规则)
-    - [借用规则](#借用规则)
-    - [智能指针选择](#智能指针选择)
-  - [🚀 下一步](#-下一步)
-    - [继续深入学习](#继续深入学习)
-    - [实战项目推荐](#实战项目推荐)
-    - [加入社区](#加入社区)
-  - [💡 学习建议](#-学习建议)
+- [Rust 1.90 所有权系统快速开始指南](.#rust-190-所有权系统快速开始指南)
+  - [📊 目录](.#-目录)
+  - [🚀 5分钟快速开始](.#-5分钟快速开始)
+    - [第一步：查看知识图谱（2分钟）](.#第一步查看知识图谱2分钟)
+    - [第二步：运行第一个示例（3分钟）](.#第二步运行第一个示例3分钟)
+  - [📚 第一天学习计划（2小时）](.#-第一天学习计划2小时)
+    - [Hour 1: 核心概念速览](.#hour-1-核心概念速览)
+      - [10分钟：理解所有权](.#10分钟理解所有权)
+      - [15分钟：理解借用](.#15分钟理解借用)
+      - [15分钟：理解生命周期](.#15分钟理解生命周期)
+      - [20分钟：实践练习](.#20分钟实践练习)
+    - [Hour 2: 智能指针和并发](.#hour-2-智能指针和并发)
+      - [15分钟：Box、Rc、Arc](.#15分钟boxrcarc)
+      - [15分钟：并发安全](.#15分钟并发安全)
+      - [30分钟：综合实践](.#30分钟综合实践)
+  - [🎯 第一周学习路线](.#-第一周学习路线)
+    - [Day 1-2: 基础巩固（已完成 ✅）](.#day-1-2-基础巩固已完成-)
+    - [Day 3-4: 深入核心](.#day-3-4-深入核心)
+    - [Day 5-6: 应用实战](.#day-5-6-应用实战)
+    - [Day 7: 综合提升](.#day-7-综合提升)
+  - [📖 学习资源速查](.#-学习资源速查)
+    - [按问题查找](.#按问题查找)
+    - [按场景查找](.#按场景查找)
+  - [🔧 常见问题快速解决](.#-常见问题快速解决)
+    - [Q1: "value borrowed here after move"](.#q1-value-borrowed-here-after-move)
+    - [Q2: "cannot borrow as mutable"](.#q2-cannot-borrow-as-mutable)
+    - [Q3: "lifetime may not live long enough"](.#q3-lifetime-may-not-live-long-enough)
+  - [🎯 学习检查点](.#-学习检查点)
+    - [✅ 第1天结束时，你应该能够](.#-第1天结束时你应该能够)
+    - [✅ 第3天结束时，你应该能够](.#-第3天结束时你应该能够)
+    - [✅ 第5天结束时，你应该能够](.#-第5天结束时你应该能够)
+    - [✅ 第7天结束时，你应该能够](.#-第7天结束时你应该能够)
+  - [📱 快速参考卡片](.#-快速参考卡片)
+    - [所有权规则](.#所有权规则)
+    - [借用规则](.#借用规则)
+    - [智能指针选择](.#智能指针选择)
+  - [🚀 下一步](.#-下一步)
+    - [继续深入学习](.#继续深入学习)
+    - [实战项目推荐](.#实战项目推荐)
+    - [加入社区](.#加入社区)
+  - [💡 学习建议](.#-学习建议)
 
 **版本**: 1.0
 **预计学习时间**: 2小时快速入门，1周深入掌握
@@ -52,7 +52,7 @@
 
 ### 第一步：查看知识图谱（2分钟）
 
-打开 [知识图谱](./KNOWLEDGE_GRAPH.md)，快速了解整体架构：
+打开 [知识图谱](KNOWLEDGE_GRAPH.md)，快速了解整体架构：
 
 ```text
 基础层 → 核心层 → 应用层 → 实践层
@@ -99,7 +99,7 @@ println!("{}", s2);               // ✅ s2 有效
 - ✅ 所有者离开作用域时值被释放
 - ✅ 所有权可以转移
 
-**详细学习**：[示例2-1](./RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-1-所有权三大规则实战)
+**详细学习**：[示例2-1](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-1-所有权三大规则实战)
 
 #### 15分钟：理解借用
 
@@ -123,7 +123,7 @@ r1.push_str(" world");
 - ✅ 借用不能超过所有者的生命周期
 - ✅ Rust 1.90 的NLL让借用更灵活
 
-**详细学习**：[示例2-3](./RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-3-不可变借用深度解析)
+**详细学习**：[示例2-3](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-3-不可变借用深度解析)
 
 #### 15分钟：理解生命周期
 
@@ -144,7 +144,7 @@ let result = longest(&s1, &s2);
 - ✅ 编译器通常能自动推断
 - ✅ 复杂情况需要显式标注
 
-**详细学习**：[示例2-6](./RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-6-生命周期基础)
+**详细学习**：[示例2-6](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-6-生命周期基础)
 
 #### 20分钟：实践练习
 
@@ -189,7 +189,7 @@ thread::spawn(move |
 - ✅ Rc：单线程共享所有权
 - ✅ Arc：多线程共享所有权
 
-**详细学习**：[第三部分](./RUST_190_RICH_EXAMPLES_INTEGRATION.md#第三部分应用层示例layer-2)
+**详细学习**：[第三部分](RUST_190_RICH_EXAMPLES_INTEGRATION.md#第三部分应用层示例layer-2)
 
 #### 15分钟：并发安全
 
@@ -213,7 +213,7 @@ for _ in 0..10 {
 - ✅ Mutex保证互斥访问
 - ✅ 编译器保证线程安全
 
-**详细学习**：[示例4-1](./RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例4-1-多线程所有权传递)
+**详细学习**：[示例4-1](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例4-1-多线程所有权传递)
 
 #### 30分钟：综合实践
 
@@ -224,7 +224,7 @@ for _ in 0..10 {
 cargo run --example rust_190_rich_practical_examples
 ```
 
-阅读并理解：[LRU缓存完整实现](./RUST_190_RICH_EXAMPLES_INTEGRATION.md#51-完整项目安全的并发缓存)
+阅读并理解：[LRU缓存完整实现](RUST_190_RICH_EXAMPLES_INTEGRATION.md#51-完整项目安全的并发缓存)
 
 ---
 
@@ -233,19 +233,19 @@ cargo run --example rust_190_rich_practical_examples
 ### Day 1-2: 基础巩固（已完成 ✅）
 
 - [x] 完成2小时快速入门
-- [ ] 阅读 [知识图谱](./KNOWLEDGE_GRAPH.md) 完整版
+- [ ] 阅读 [知识图谱](KNOWLEDGE_GRAPH.md) 完整版
 - [ ] 运行所有基础示例（示例1-13）
 
 ### Day 3-4: 深入核心
 
-- [ ] 阅读 [所有权理论](./tier_04_advanced/06_类型系统理论.md)
-- [ ] 阅读 [借用理论](./tier_04_advanced/06_类型系统理论.md)
-- [ ] 完成 [多维矩阵对比](./MULTIDIMENSIONAL_MATRIX.md) 阅读
+- [ ] 阅读 [所有权理论](tier_04_advanced/06_类型系统理论.md)
+- [ ] 阅读 [借用理论](tier_04_advanced/06_类型系统理论.md)
+- [ ] 完成 [多维矩阵对比](MULTIDIMENSIONAL_MATRIX.md) 阅读
 - [ ] 运行所有核心示例（示例14-17）
 
 ### Day 5-6: 应用实战
 
-- [ ] 阅读 [智能指针系统](./tier_03_references/05_智能指针API参考.md)
+- [ ] 阅读 [智能指针系统](tier_03_references/05_智能指针API参考.md)
 - [ ] 阅读 [并发安全](../tier_04_advanced/05_跨线程所有权.md)
 - [ ] 运行所有应用示例（示例18-21）
 - [ ] 完成小项目：实现一个简单的缓存
@@ -254,7 +254,7 @@ cargo run --example rust_190_rich_practical_examples
 
 - [ ] 阅读 [最佳实践](../tier_01_foundations/04_常见问题.md)
 - [ ] 研究 [设计模式](../tier_02_guides/07_实战项目集.md)
-- [ ] 完成 [LRU缓存项目](./RUST_190_RICH_EXAMPLES_INTEGRATION.md#51-完整项目安全的并发缓存)
+- [ ] 完成 [LRU缓存项目](RUST_190_RICH_EXAMPLES_INTEGRATION.md#51-完整项目安全的并发缓存)
 - [ ] 总结一周学习成果
 
 ---
@@ -265,11 +265,11 @@ cargo run --example rust_190_rich_practical_examples
 
 | 问题             | 查看资源                                                                      | 预计时间 |
 | :--- | :--- | :--- |
-| 什么是所有权？   | [示例2-1](./RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-1-所有权三大规则实战) | 10分钟   |
-| 如何借用数据？   | [示例2-3](./RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-3-不可变借用深度解析) | 15分钟   |
-| 生命周期怎么用？ | [示例2-6](./RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-6-生命周期基础)       | 20分钟   |
-| 如何共享数据？   | [对比示例](./RUST_190_RICH_EXAMPLES_INTEGRATION.md#对比示例数据共享的5种方式) | 15分钟   |
-| 如何写并发代码？ | [示例4-1](./RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例4-1-多线程所有权传递)   | 25分钟   |
+| 什么是所有权？   | [示例2-1](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-1-所有权三大规则实战) | 10分钟   |
+| 如何借用数据？   | [示例2-3](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-3-不可变借用深度解析) | 15分钟   |
+| 生命周期怎么用？ | [示例2-6](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-6-生命周期基础)       | 20分钟   |
+| 如何共享数据？   | [对比示例](RUST_190_RICH_EXAMPLES_INTEGRATION.md#对比示例数据共享的5种方式) | 15分钟   |
+| 如何写并发代码？ | [示例4-1](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例4-1-多线程所有权传递)   | 25分钟   |
 
 ### 按场景查找
 
@@ -308,7 +308,7 @@ let s2 = s1.clone();
 println!("{}", s1);  // OK：s1仍有效
 ```
 
-**详细学习**：[示例2-2](./RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-2-所有权转移的各种场景)
+**详细学习**：[示例2-2](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-2-所有权转移的各种场景)
 
 ### Q2: "cannot borrow as mutable"
 
@@ -331,7 +331,7 @@ let mut s = String::from("hello");
 let r2 = &mut s;  // OK：r1已结束
 ```
 
-**详细学习**：[示例2-4](./RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-4-可变借用深度解析)
+**详细学习**：[示例2-4](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-4-可变借用深度解析)
 
 ### Q3: "lifetime may not live long enough"
 
@@ -353,7 +353,7 @@ fn no_dangle() -> String {
 }
 ```
 
-**详细学习**：[示例2-7](./RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-7-高级生命周期模式)
+**详细学习**：[示例2-7](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-7-高级生命周期模式)
 
 ---
 
@@ -426,20 +426,20 @@ fn no_dangle() -> String {
 
 ### 继续深入学习
 
-1. **完整学习指南**：[COMPREHENSIVE_LEARNING_GUIDE.md](./COMPREHENSIVE_LEARNING_GUIDE.md)
+1. **完整学习指南**：[COMPREHENSIVE_LEARNING_GUIDE.md](COMPREHENSIVE_LEARNING_GUIDE.md)
    - 3种学习路径选择
    - 12周完整课程
    - 6个实战项目
 
-2. **丰富示例集**：[RUST_190_RICH_EXAMPLES_INTEGRATION.md](./RUST_190_RICH_EXAMPLES_INTEGRATION.md)
+2. **丰富示例集**：[RUST_190_RICH_EXAMPLES_INTEGRATION.md](RUST_190_RICH_EXAMPLES_INTEGRATION.md)
    - 115+ 可运行示例
    - 6000+ 行代码
    - 完整注释和说明
 
 3. **可视化资源**：
-   - [知识图谱](./KNOWLEDGE_GRAPH.md) - 概念关系
-   - [思维导图](./MIND_MAP.md) - 学习路径
-   - [多维矩阵](./MULTIDIMENSIONAL_MATRIX.md) - 系统对比
+   - [知识图谱](KNOWLEDGE_GRAPH.md) - 概念关系
+   - [思维导图](MIND_MAP.md) - 学习路径
+   - [多维矩阵](MULTIDIMENSIONAL_MATRIX.md) - 系统对比
 
 ### 实战项目推荐
 
@@ -475,9 +475,9 @@ fn no_dangle() -> String {
 
 **文档链接**：
 
-- [返回主索引](./00_MASTER_INDEX.md)
-- [完整学习指南](./COMPREHENSIVE_LEARNING_GUIDE.md)
-- [丰富示例集](./RUST_190_RICH_EXAMPLES_INTEGRATION.md)
+- [返回主索引](00_MASTER_INDEX.md)
+- [完整学习指南](COMPREHENSIVE_LEARNING_GUIDE.md)
+- [丰富示例集](RUST_190_RICH_EXAMPLES_INTEGRATION.md)
 
 ---
 

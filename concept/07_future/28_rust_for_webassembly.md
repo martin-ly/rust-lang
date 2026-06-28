@@ -21,8 +21,8 @@
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计 Rust for WASM 架构
 > **定位**: 深度评价 Rust 在 **WebAssembly (Wasm)** 全栈开发中的技术成熟度——从 wasm-bindgen/wasm-pack 工具链到 Yew/Leptos 前端框架，分析 Rust→Wasm 编译模型、JS 互操作内存模型、性能权衡边界与工程选型决策。
-> **前置概念**: [Rust 路线图](./24_roadmap.md) · [WebAssembly 生态](../06_ecosystem/11_webassembly.md) · [Web 框架](../06_ecosystem/27_web_frameworks.md)
-> **后置概念**: [WASI 预览](../06_ecosystem/08_wasi.md) · [形式化方法](./02_formal_methods.md)
+> **前置概念**: [Rust 路线图](24_roadmap.md) · [WebAssembly 生态](../06_ecosystem/11_webassembly.md) · [Web 框架](../06_ecosystem/27_web_frameworks.md)
+> **后置概念**: [WASI 预览](../06_ecosystem/08_wasi.md) · [形式化方法](02_formal_methods.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -52,47 +52,47 @@
 
 ## 📑 目录
 
-- [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](#rust-for-webassembly从-wasm-bindgen-到前端框架的深度技术栈)
-  - [📑 目录](#-目录)
-  - [一、权威定义与核心概念](#一权威定义与核心概念)
-    - [1.1 Rust → Wasm 的编译模型](#11-rust--wasm-的编译模型)
-    - [1.2 wasm-bindgen 的互操作语义](#12-wasm-bindgen-的互操作语义)
-    - [1.3 wasm-pack 的工程化角色](#13-wasm-pack-的工程化角色)
-  - [二、前端框架深度对比](#二前端框架深度对比)
-    - [2.1 Yew：React 范式的 Rust 实现](#21-yewreact-范式的-rust-实现)
-    - [2.2 Leptos：细粒度响应式与性能优先](#22-leptos细粒度响应式与性能优先)
-    - [2.3 框架选型矩阵](#23-框架选型矩阵)
-  - [三、性能特征与 Wasm 内存模型](#三性能特征与-wasm-内存模型)
-    - [3.1 Rust Wasm vs JavaScript 性能边界](#31-rust-wasm-vs-javascript-性能边界)
-    - [3.2 线性内存模型与所有权映射](#32-线性内存模型与所有权映射)
-    - [3.3 JS ↔ Wasm 互操作开销分析](#33-js--wasm-互操作开销分析)
-  - [四、工具链与工程实践](#四工具链与工程实践)
-    - [4.1 目标三元组与编译配置](#41-目标三元组与编译配置)
-    - [4.2 调试与测试策略](#42-调试与测试策略)
-  - [五、反命题与边界分析](#五反命题与边界分析)
-    - [5.1 反命题决策树](#51-反命题决策树)
-    - [5.2 边界极限测试](#52-边界极限测试)
-  - [六、常见陷阱](#六常见陷阱)
-  - [七、来源与延伸阅读](#七来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：WebAssembly 的编译错误](#十边界测试webassembly-的编译错误)
-    - [10.1 边界测试：WASI 的文件系统权限（运行时错误）](#101-边界测试wasi-的文件系统权限运行时错误)
-    - [10.2 边界测试：`wasm-bindgen` 的类型不匹配（编译错误）](#102-边界测试wasm-bindgen-的类型不匹配编译错误)
-    - [10.3 边界测试：WASM 模块的大小限制与 `wee_alloc`（运行时错误）](#103-边界测试wasm-模块的大小限制与-wee_alloc运行时错误)
-    - [10.3 边界测试：WASM 组件模型（Component Model）的类型映射（编译错误）](#103-边界测试wasm-组件模型component-model的类型映射编译错误)
-    - [10.4 边界测试：WASI Preview 2 的功能性权限（运行时错误）](#104-边界测试wasi-preview-2-的功能性权限运行时错误)
-    - [10.3 边界测试：WASM 模块的线性内存与 Rust 的 Vec 增长策略（运行时 OOM）](#103-边界测试wasm-模块的线性内存与-rust-的-vec-增长策略运行时-oom)
-    - [补充定理链](#补充定理链)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：Rust 在 WASM 生态中的长期愿景是什么？（理解层）](#测验-1rust-在-wasm-生态中的长期愿景是什么理解层)
-    - [测验 2：WASI Preview 2 的组件模型对 Rust 开发有什么影响？（理解层）](#测验-2wasi-preview-2-的组件模型对-rust-开发有什么影响理解层)
-    - [测验 3：`wasm32-wasip1` 与 `wasm32-unknown-unknown` target 有什么区别？（理解层）](#测验-3wasm32-wasip1-与-wasm32-unknown-unknown-target-有什么区别理解层)
-    - [测验 4：Rust 如何通过 `wasmtime` 嵌入到现有应用中作为插件系统？（理解层）](#测验-4rust-如何通过-wasmtime-嵌入到现有应用中作为插件系统理解层)
-    - [测验 5：WASM 的 64 位内存提案（Memory64）对 Rust 有什么意义？（理解层）](#测验-5wasm-的-64-位内存提案memory64对-rust-有什么意义理解层)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+- [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](.#rust-for-webassembly从-wasm-bindgen-到前端框架的深度技术栈)
+  - [📑 目录](.#-目录)
+  - [一、权威定义与核心概念](.#一权威定义与核心概念)
+    - [1.1 Rust → Wasm 的编译模型](.#11-rust--wasm-的编译模型)
+    - [1.2 wasm-bindgen 的互操作语义](.#12-wasm-bindgen-的互操作语义)
+    - [1.3 wasm-pack 的工程化角色](.#13-wasm-pack-的工程化角色)
+  - [二、前端框架深度对比](.#二前端框架深度对比)
+    - [2.1 Yew：React 范式的 Rust 实现](.#21-yewreact-范式的-rust-实现)
+    - [2.2 Leptos：细粒度响应式与性能优先](.#22-leptos细粒度响应式与性能优先)
+    - [2.3 框架选型矩阵](.#23-框架选型矩阵)
+  - [三、性能特征与 Wasm 内存模型](.#三性能特征与-wasm-内存模型)
+    - [3.1 Rust Wasm vs JavaScript 性能边界](.#31-rust-wasm-vs-javascript-性能边界)
+    - [3.2 线性内存模型与所有权映射](.#32-线性内存模型与所有权映射)
+    - [3.3 JS ↔ Wasm 互操作开销分析](.#33-js--wasm-互操作开销分析)
+  - [四、工具链与工程实践](.#四工具链与工程实践)
+    - [4.1 目标三元组与编译配置](.#41-目标三元组与编译配置)
+    - [4.2 调试与测试策略](.#42-调试与测试策略)
+  - [五、反命题与边界分析](.#五反命题与边界分析)
+    - [5.1 反命题决策树](.#51-反命题决策树)
+    - [5.2 边界极限测试](.#52-边界极限测试)
+  - [六、常见陷阱](.#六常见陷阱)
+  - [七、来源与延伸阅读](.#七来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：WebAssembly 的编译错误](.#十边界测试webassembly-的编译错误)
+    - [10.1 边界测试：WASI 的文件系统权限（运行时错误）](.#101-边界测试wasi-的文件系统权限运行时错误)
+    - [10.2 边界测试：`wasm-bindgen` 的类型不匹配（编译错误）](.#102-边界测试wasm-bindgen-的类型不匹配编译错误)
+    - [10.3 边界测试：WASM 模块的大小限制与 `wee_alloc`（运行时错误）](.#103-边界测试wasm-模块的大小限制与-wee_alloc运行时错误)
+    - [10.3 边界测试：WASM 组件模型（Component Model）的类型映射（编译错误）](.#103-边界测试wasm-组件模型component-model的类型映射编译错误)
+    - [10.4 边界测试：WASI Preview 2 的功能性权限（运行时错误）](.#104-边界测试wasi-preview-2-的功能性权限运行时错误)
+    - [10.3 边界测试：WASM 模块的线性内存与 Rust 的 Vec 增长策略（运行时 OOM）](.#103-边界测试wasm-模块的线性内存与-rust-的-vec-增长策略运行时-oom)
+    - [补充定理链](.#补充定理链)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：Rust 在 WASM 生态中的长期愿景是什么？（理解层）](.#测验-1rust-在-wasm-生态中的长期愿景是什么理解层)
+    - [测验 2：WASI Preview 2 的组件模型对 Rust 开发有什么影响？（理解层）](.#测验-2wasi-preview-2-的组件模型对-rust-开发有什么影响理解层)
+    - [测验 3：`wasm32-wasip1` 与 `wasm32-unknown-unknown` target 有什么区别？（理解层）](.#测验-3wasm32-wasip1-与-wasm32-unknown-unknown-target-有什么区别理解层)
+    - [测验 4：Rust 如何通过 `wasmtime` 嵌入到现有应用中作为插件系统？（理解层）](.#测验-4rust-如何通过-wasmtime-嵌入到现有应用中作为插件系统理解层)
+    - [测验 5：WASM 的 64 位内存提案（Memory64）对 Rust 有什么意义？（理解层）](.#测验-5wasm-的-64-位内存提案memory64对-rust-有什么意义理解层)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -110,7 +110,7 @@ Rust → Wasm 编译管线:
   ├── 词法/语法分析 → HIR → MIR
   ├── 借用检查与生命周期验证（与原生目标完全一致）
   └── 类型系统检查（Trait 求解、泛型单态化）
-        [来源: [Rust 路线图](../07_future/24_roadmap.md)]
+        [来源: [Rust 路线图](24_roadmap.md)]
 
   LLVM 后端:
   ├── MIR → LLVM IR
@@ -636,11 +636,11 @@ Rust panic in Wasm:
 
 ## 相关概念文件
 
-- [Rust 路线图](./24_roadmap.md) — Rust 语言演进方向与 Wasm 目标支持策略
+- [Rust 路线图](24_roadmap.md) — Rust 语言演进方向与 Wasm 目标支持策略
 - [WebAssembly 生态](../06_ecosystem/11_webassembly.md) — Wasm 通用生态与工具链概览
 - [Web 框架](../06_ecosystem/27_web_frameworks.md) — Rust 服务端 Web 框架对比
 - [WASI 预览](../06_ecosystem/08_wasi.md) — WebAssembly 系统接口标准
-- [形式化方法](./02_formal_methods.md) — Wasm 形式化语义与验证
+- [形式化方法](02_formal_methods.md) — Wasm 形式化语义与验证
 
 ---
 

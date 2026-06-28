@@ -84,7 +84,7 @@ fn list_files(dir: &str) -> std::io::Result<Vec<String>> {
 
 ---
 
-- [README](./README.md)
+- [README](README.md)
 
 ---
 

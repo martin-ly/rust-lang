@@ -94,7 +94,7 @@
 
 ```markdown
 # 修复前
-[文档](./07_project/ONE_PAGE_SUMMARY_TEMPLATE.md)
+[文档](07_project/ONE_PAGE_SUMMARY_TEMPLATE.md)
 
 # 修复后
 [文档](archive/process_reports/2026_02/project/ONE_PAGE_SUMMARY_TEMPLATE.md) (归档)
@@ -106,10 +106,10 @@
 
 ```markdown
 # 修复前
-[形式化分析](./research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)
+[形式化分析](research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)
 
 # 修复后
-[形式化分析](./research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md)
+[形式化分析](research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md)
 ```
 
 ### 方法3: 修正路径错误
@@ -118,10 +118,10 @@
 
 ```markdown
 # 修复前
-[类型系统](./research_notes/type_theory/type_system_foundations.md)
+[类型系统](research_notes/type_theory/type_system_foundations.md)
 
 # 修复后
-[类型系统](./research_notes/type_theory/type_system_foundations.md)
+[类型系统](research_notes/type_theory/type_system_foundations.md)
 ```
 
 ### 方法4: 修复锚点链接
@@ -130,10 +130,10 @@
 
 ```markdown
 # 修复前
-[目录](#-目录)
+[目录](.#-目录)
 
 # 修复后
-[目录](#目录)
+[目录](.#目录)
 ```
 
 ---

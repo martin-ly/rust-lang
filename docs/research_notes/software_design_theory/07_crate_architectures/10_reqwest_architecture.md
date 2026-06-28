@@ -486,8 +486,8 @@ match client.get("https://invalid.url").send().await {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [Hyper HTTP 实现架构](./08_hyper_architecture.md)
-- [SQLx 异步 SQL 工具架构](./09_sqlx_architecture.md)
+- [Hyper HTTP 实现架构](08_hyper_architecture.md)
+- [SQLx 异步 SQL 工具架构](09_sqlx_architecture.md)
 
 ---
 

@@ -1,6 +1,6 @@
 # C11: Rust 宏系统 — 过程宏 (Procedural Macros)
 
-> **配套 crate**: [c11_macro_system](../c11_macro_system/) 的过程宏实现
+> **配套 crate**: [c11_macro_system](../c11_macro_system) 的过程宏实现
 
 ## 概述
 
@@ -29,6 +29,6 @@ struct MyStruct {
 
 ## 文档
 
-详细文档请参阅 [c11_macro_system](../c11_macro_system/)。
+详细文档请参阅 [c11_macro_system](../c11_macro_system)。
 
 ## [来源: Rust Reference / Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)

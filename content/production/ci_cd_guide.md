@@ -9,22 +9,22 @@
 
 ## 📋 目录
 
-- [Rust CI/CD 指南](#rust-cicd-指南)
-  - [📋 目录](#-目录)
-  - [🎯 工作流设计原则](#-工作流设计原则)
-  - [⚡ 缓存策略](#-缓存策略)
-    - [actions/cache 基础配置](#actionscache-基础配置)
-    - [Swatinem/rust-cache 推荐配置](#swatinemrust-cache-推荐配置)
-  - [🔍 代码质量检查](#-代码质量检查)
-    - [cargo test](#cargo-test)
-    - [cargo clippy](#cargo-clippy)
-    - [cargo audit](#cargo-audit)
-    - [cargo fmt](#cargo-fmt)
-  - [🌍 交叉编译](#-交叉编译)
-    - [cargo-cross 方案](#cargo-cross-方案)
-    - [GitHub Actions 矩阵交叉编译](#github-actions-矩阵交叉编译)
-  - [📦 多平台发布矩阵](#-多平台发布矩阵)
-  - [🔗 参考资源](#-参考资源)
+- [Rust CI/CD 指南](.#rust-cicd-指南)
+  - [📋 目录](.#-目录)
+  - [🎯 工作流设计原则](.#-工作流设计原则)
+  - [⚡ 缓存策略](.#-缓存策略)
+    - [actions/cache 基础配置](.#actionscache-基础配置)
+    - [Swatinem/rust-cache 推荐配置](.#swatinemrust-cache-推荐配置)
+  - [🔍 代码质量检查](.#-代码质量检查)
+    - [cargo test](.#cargo-test)
+    - [cargo clippy](.#cargo-clippy)
+    - [cargo audit](.#cargo-audit)
+    - [cargo fmt](.#cargo-fmt)
+  - [🌍 交叉编译](.#-交叉编译)
+    - [cargo-cross 方案](.#cargo-cross-方案)
+    - [GitHub Actions 矩阵交叉编译](.#github-actions-矩阵交叉编译)
+  - [📦 多平台发布矩阵](.#-多平台发布矩阵)
+  - [🔗 参考资源](.#-参考资源)
 
 ---
 

@@ -370,9 +370,9 @@ RUST_SAFETY_CRITICAL_ECOSYSTEM/
 
 ## 相关概念
 
-- [100% 完成报告](./10_00_completion_report_100_percent.md)
-- [主索引](./10_00_rust_safety_critical_ecosystem_master_index.md)
-- [生态系统 README](./10_readme_rust_safety_critical_ecosystem.md)
+- [100% 完成报告](10_00_completion_report_100_percent.md)
+- [主索引](10_00_rust_safety_critical_ecosystem_master_index.md)
+- [生态系统 README](10_readme_rust_safety_critical_ecosystem.md)
 - [docs 总览](../README.md)
 
 ---

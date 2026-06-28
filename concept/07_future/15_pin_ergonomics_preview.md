@@ -19,8 +19,8 @@
 > [Pin/Unpin](../03_advanced/06_pin_unpin.md) ·
 > [Traits](../02_intermediate/01_traits.md)
 > **后置概念**:
-> [Version Tracking](./05_rust_version_tracking.md) ·
-> [Async Drop](./18_async_drop_preview.md)
+> [Version Tracking](05_rust_version_tracking.md) ·
+> [Async Drop](18_async_drop_preview.md)
 > **来源**:
 > [RFC #3709 — Pinned Places](https://github.com/rust-lang/rfcs/issues/3709) ·
 > [Rust Project Goals 2026 — Pin Ergonomics](https://rust-lang.github.io/rust-project-goals/2026/pin-ergonomics.html) ·

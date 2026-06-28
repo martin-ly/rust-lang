@@ -13,16 +13,16 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [实践项目 06: 并发下载器](#实践项目-06-并发下载器)
-  - [📑 目录](#-目录)
-  - [项目目标](#项目目标)
-  - [功能需求](#功能需求)
-  - [学习要点](#学习要点)
-    - [多线程下载](#多线程下载)
-    - [异步下载](#异步下载)
-  - [参考实现](#参考实现)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [实践项目 06: 并发下载器](.#实践项目-06-并发下载器)
+  - [📑 目录](.#-目录)
+  - [项目目标](.#项目目标)
+  - [功能需求](.#功能需求)
+  - [学习要点](.#学习要点)
+    - [多线程下载](.#多线程下载)
+    - [异步下载](.#异步下载)
+  - [参考实现](.#参考实现)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 项目目标
 >
@@ -109,7 +109,7 @@ async fn download_async(url: &str) -> Result<Vec<u8>, reqwest::Error> {
 
 ---
 
-- [README](./README.md)
+- [README](README.md)
 
 ---
 
@@ -117,7 +117,7 @@ async fn download_async(url: &str) -> Result<Vec<u8>, reqwest::Error> {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [03_practice 目录](./README.md)
+- [03_practice 目录](README.md)
 - [docs 索引](../README.md)
 
 ---

@@ -31,7 +31,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [03_advanced/](../../03_advanced/) - 高级语言特性基础
+- [03_advanced/](../../03_advanced) - 高级语言特性基础
 - [06_ecosystem/edition_2024.md](../02_edition_2024.md) - 已稳定的新特性
 
 ---

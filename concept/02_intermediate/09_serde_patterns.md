@@ -11,7 +11,7 @@
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 应用 Serde 序列化设计模式
 > **定位**: 深入分析 **Serde** —— Rust 生态中主导的序列化/反序列化框架，探讨 `Serialize [来源: [serde::Serialize](https://docs.rs/serde/latest/serde/trait.Serialize.html)]`/`Deserialize` derive 宏（Macro）、自定义序列化逻辑、以及类型系统（Type System）如何保障数据转换的安全性。
-> **前置概念**: [Traits](./01_traits.md) · [Macros](../03_advanced/04_macros.md) · [Generics](./02_generics.md)
+> **前置概念**: [Traits](01_traits.md) · [Macros](../03_advanced/04_macros.md) · [Generics](02_generics.md)
 > **后置概念**: [Core Crates](../06_ecosystem/03_core_crates.md) · [Application Domains](../06_ecosystem/04_application_domains.md)
 
 ---
@@ -23,43 +23,43 @@
 
 ## 📑 目录
 
-- [Serde 序列化模式：Rust 的类型驱动数据转换](#serde-序列化模式rust-的类型驱动数据转换)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 Serde 的设计哲学](#11-serde-的设计哲学)
-    - [1.2 Serialize 与 Deserialize Trait](#12-serialize-与-deserialize-trait)
-    - [1.3 数据格式解耦](#13-数据格式解耦)
-  - [二、技术细节](#二技术细节)
-    - [2.1 Derive 宏的展开逻辑](#21-derive-宏的展开逻辑)
-    - [2.2 自定义序列化行为](#22-自定义序列化行为)
-    - [2.3 Visitor 模式与反序列化](#23-visitor-模式与反序列化)
-  - [三、使用模式](#三使用模式)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、常见陷阱](#五常见陷阱)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：Serde 模式的编译错误](#十边界测试serde-模式的编译错误)
-    - [10.1 边界测试：反序列化时字段缺失（运行时错误）](#101-边界测试反序列化时字段缺失运行时错误)
+- [Serde 序列化模式：Rust 的类型驱动数据转换](.#serde-序列化模式rust-的类型驱动数据转换)
+  - [📑 目录](.#-目录)
+  - [一、核心概念](.#一核心概念)
+    - [1.1 Serde 的设计哲学](.#11-serde-的设计哲学)
+    - [1.2 Serialize 与 Deserialize Trait](.#12-serialize-与-deserialize-trait)
+    - [1.3 数据格式解耦](.#13-数据格式解耦)
+  - [二、技术细节](.#二技术细节)
+    - [2.1 Derive 宏的展开逻辑](.#21-derive-宏的展开逻辑)
+    - [2.2 自定义序列化行为](.#22-自定义序列化行为)
+    - [2.3 Visitor 模式与反序列化](.#23-visitor-模式与反序列化)
+  - [三、使用模式](.#三使用模式)
+  - [四、反命题与边界分析](.#四反命题与边界分析)
+    - [4.1 反命题树](.#41-反命题树)
+    - [4.2 边界极限](.#42-边界极限)
+  - [五、常见陷阱](.#五常见陷阱)
+  - [六、来源与延伸阅读](.#六来源与延伸阅读)
+  - [相关概念文件](.#相关概念文件)
+  - [逆向推理链（Backward Reasoning）](.#逆向推理链backward-reasoning)
+  - [权威来源索引](.#权威来源索引)
+  - [十、边界测试：Serde 模式的编译错误](.#十边界测试serde-模式的编译错误)
+    - [10.1 边界测试：反序列化时字段缺失（运行时错误）](.#101-边界测试反序列化时字段缺失运行时错误)
     - [10.2 边界测试：`#[serde(flatten)]` 与重复字段（编译错误 / 运行时错误）](#102-边界测试serdeflatten-与重复字段编译错误--运行时错误)
-    - [10.3 边界测试：反序列化的 `deny_unknown_fields`（运行时错误）](#103-边界测试反序列化的-deny_unknown_fields运行时错误)
-    - [10.4 边界测试：枚举的 `untagged` 反序列化歧义（运行时错误）](#104-边界测试枚举的-untagged-反序列化歧义运行时错误)
-    - [10.5 边界测试：`serde` 的 `skip_serializing_if` 与 `Option` 的交互（逻辑错误）](#105-边界测试serde-的-skip_serializing_if-与-option-的交互逻辑错误)
-    - [10.3 边界测试：serde 的私有字段与反序列化失败（运行时错误）](#103-边界测试serde-的私有字段与反序列化失败运行时错误)
-    - [10.4 边界测试：`serde` 的枚举标签与外部标签冲突（运行时反序列化失败）](#104-边界测试serde-的枚举标签与外部标签冲突运行时反序列化失败)
-  - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
-    - [测验 1：如何让 Serde 在序列化时将 Rust 字段名 `user_name` 映射为 JSON 中的 `userName`？（理解层）](#测验-1如何让-serde-在序列化时将-rust-字段名-user_name-映射为-json-中的-username理解层)
+    - [10.3 边界测试：反序列化的 `deny_unknown_fields`（运行时错误）](.#103-边界测试反序列化的-deny_unknown_fields运行时错误)
+    - [10.4 边界测试：枚举的 `untagged` 反序列化歧义（运行时错误）](.#104-边界测试枚举的-untagged-反序列化歧义运行时错误)
+    - [10.5 边界测试：`serde` 的 `skip_serializing_if` 与 `Option` 的交互（逻辑错误）](.#105-边界测试serde-的-skip_serializing_if-与-option-的交互逻辑错误)
+    - [10.3 边界测试：serde 的私有字段与反序列化失败（运行时错误）](.#103-边界测试serde-的私有字段与反序列化失败运行时错误)
+    - [10.4 边界测试：`serde` 的枚举标签与外部标签冲突（运行时反序列化失败）](.#104-边界测试serde-的枚举标签与外部标签冲突运行时反序列化失败)
+  - [嵌入式测验（Embedded Quiz）](.#嵌入式测验embedded-quiz)
+    - [测验 1：如何让 Serde 在序列化时将 Rust 字段名 `user_name` 映射为 JSON 中的 `userName`？（理解层）](.#测验-1如何让-serde-在序列化时将-rust-字段名-user_name-映射为-json-中的-username理解层)
     - [测验 2：枚举的 `#[serde(tag = "type")]` 属性会产生怎样的 JSON 结构？（理解层）](#测验-2枚举的-serdetag--type-属性会产生怎样的-json-结构理解层)
     - [测验 3：`#[serde(untagged)]` 的序列化/反序列化行为有什么风险和适用场景？（理解层）](#测验-3serdeuntagged-的序列化反序列化行为有什么风险和适用场景理解层)
-    - [测验 4：如果希望字段在 JSON 中缺失时使用默认值，应该如何配置？（理解层）](#测验-4如果希望字段在-json-中缺失时使用默认值应该如何配置理解层)
-    - [测验 5：`serde_json::to_string` 和 `serde_json::to_string_pretty` 输出有什么区别？（理解层）](#测验-5serde_jsonto_string-和-serde_jsonto_string_pretty-输出有什么区别理解层)
-  - [实践](#实践)
-  - [认知路径](#认知路径)
-    - [核心推理链](#核心推理链)
-    - [反命题与边界](#反命题与边界)
+    - [测验 4：如果希望字段在 JSON 中缺失时使用默认值，应该如何配置？（理解层）](.#测验-4如果希望字段在-json-中缺失时使用默认值应该如何配置理解层)
+    - [测验 5：`serde_json::to_string` 和 `serde_json::to_string_pretty` 输出有什么区别？（理解层）](.#测验-5serde_jsonto_string-和-serde_jsonto_string_pretty-输出有什么区别理解层)
+  - [实践](.#实践)
+  - [认知路径](.#认知路径)
+    - [核心推理链](.#核心推理链)
+    - [反命题与边界](.#反命题与边界)
 
 ---
 
@@ -511,9 +511,9 @@ graph TD
 
 ## 相关概念文件
 
-- [Traits](./01_traits.md) — Trait 系统与 derive
+- [Traits](01_traits.md) — Trait 系统与 derive
 - [Macros](../03_advanced/04_macros.md) — 过程宏（Procedural Macro）机制
-- [Generics](./02_generics.md) — 泛型（Generics）与参数多态
+- [Generics](02_generics.md) — 泛型（Generics）与参数多态
 - [Core Crates](../06_ecosystem/03_core_crates.md) — 核心 crate 生态
 - [Application Domains](../06_ecosystem/04_application_domains.md) — 应用领域分析
 
@@ -872,8 +872,8 @@ fn main() {
 
 > **相关资源**:
 >
-> - [crates/ 示例代码](../crates/) — 与本文概念对应的可编译示例
-> - [exercises/ 练习](../exercises/) — 动手编程挑战
+> - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../exercises) — 动手编程挑战
 > - [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

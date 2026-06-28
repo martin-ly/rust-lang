@@ -2,28 +2,28 @@
 
 > **文档定位**: 进程管理核心术语快速参考，涵盖进程、IPC、信号等关键概念
 > **使用方式**: 通过术语索引快速查找定义，理解进程管理核心概念
-> **相关文档**: [主索引](./00_MASTER_INDEX.md) | [README](./README.md) | [FAQ](./FAQ.md)
+> **相关文档**: [主索引](00_MASTER_INDEX.md) | [README](README.md) | [FAQ](FAQ.md)
 
 ## 📊 目录
 
-- [C07 进程管理: 术语表 (Glossary)](#c07-进程管理-术语表-glossary)
-  - [📊 目录](#-目录)
-  - [📋 术语索引](#-术语索引)
-  - [术语详解](#术语详解)
-    - [进程 (Process)](#进程-process)
-    - [Fork](#fork)
-    - [Exec](#exec)
-    - [IPC (Inter-Process Communication)](#ipc-inter-process-communication)
-    - [管道 (Pipe)](#管道-pipe)
-    - [共享内存 (Shared Memory)](#共享内存-shared-memory)
-    - [信号 (Signal)](#信号-signal)
-    - [僵尸进程 (Zombie Process)](#僵尸进程-zombie-process)
-    - [孤儿进程 (Orphan Process)](#孤儿进程-orphan-process)
-    - [进程组 (Process Group)](#进程组-process-group)
-    - [守护进程 (Daemon)](#守护进程-daemon)
-    - [文件描述符 (File Descriptor)](#文件描述符-file-descriptor)
-    - [退出状态 (Exit Status)](#退出状态-exit-status)
-  - [📚 延伸阅读](#-延伸阅读)
+- [C07 进程管理: 术语表 (Glossary)](.#c07-进程管理-术语表-glossary)
+  - [📊 目录](.#-目录)
+  - [📋 术语索引](.#-术语索引)
+  - [术语详解](.#术语详解)
+    - [进程 (Process)](.#进程-process)
+    - [Fork](.#fork)
+    - [Exec](.#exec)
+    - [IPC (Inter-Process Communication)](.#ipc-inter-process-communication)
+    - [管道 (Pipe)](.#管道-pipe)
+    - [共享内存 (Shared Memory)](.#共享内存-shared-memory)
+    - [信号 (Signal)](.#信号-signal)
+    - [僵尸进程 (Zombie Process)](.#僵尸进程-zombie-process)
+    - [孤儿进程 (Orphan Process)](.#孤儿进程-orphan-process)
+    - [进程组 (Process Group)](.#进程组-process-group)
+    - [守护进程 (Daemon)](.#守护进程-daemon)
+    - [文件描述符 (File Descriptor)](.#文件描述符-file-descriptor)
+    - [退出状态 (Exit Status)](.#退出状态-exit-status)
+  - [📚 延伸阅读](.#-延伸阅读)
 
 **最后更新**: 2025-12-25
 **适用版本**: Rust 1.92.0+ (Edition 2024)
@@ -33,28 +33,28 @@
 
 ## 📋 术语索引
 
-[F](#fork) | [I](#ipc-inter-process-communication) | [P](#进程-process) | [S](#信号-signal) | [Z](#僵尸进程-zombie-process)
+[F](.#fork) | [I](.#ipc-inter-process-communication) | [P](.#进程-process) | [S](.#信号-signal) | [Z](.#僵尸进程-zombie-process)
 
 **快速跳转**:
 
-- [C07 进程管理: 术语表 (Glossary)](#c07-进程管理-术语表-glossary)
-  - [📊 目录](#-目录)
-  - [📋 术语索引](#-术语索引)
-  - [术语详解](#术语详解)
-    - [进程 (Process)](#进程-process)
-    - [Fork](#fork)
-    - [Exec](#exec)
-    - [IPC (Inter-Process Communication)](#ipc-inter-process-communication)
-    - [管道 (Pipe)](#管道-pipe)
-    - [共享内存 (Shared Memory)](#共享内存-shared-memory)
-    - [信号 (Signal)](#信号-signal)
-    - [僵尸进程 (Zombie Process)](#僵尸进程-zombie-process)
-    - [孤儿进程 (Orphan Process)](#孤儿进程-orphan-process)
-    - [进程组 (Process Group)](#进程组-process-group)
-    - [守护进程 (Daemon)](#守护进程-daemon)
-    - [文件描述符 (File Descriptor)](#文件描述符-file-descriptor)
-    - [退出状态 (Exit Status)](#退出状态-exit-status)
-  - [📚 延伸阅读](#-延伸阅读)
+- [C07 进程管理: 术语表 (Glossary)](.#c07-进程管理-术语表-glossary)
+  - [📊 目录](.#-目录)
+  - [📋 术语索引](.#-术语索引)
+  - [术语详解](.#术语详解)
+    - [进程 (Process)](.#进程-process)
+    - [Fork](.#fork)
+    - [Exec](.#exec)
+    - [IPC (Inter-Process Communication)](.#ipc-inter-process-communication)
+    - [管道 (Pipe)](.#管道-pipe)
+    - [共享内存 (Shared Memory)](.#共享内存-shared-memory)
+    - [信号 (Signal)](.#信号-signal)
+    - [僵尸进程 (Zombie Process)](.#僵尸进程-zombie-process)
+    - [孤儿进程 (Orphan Process)](.#孤儿进程-orphan-process)
+    - [进程组 (Process Group)](.#进程组-process-group)
+    - [守护进程 (Daemon)](.#守护进程-daemon)
+    - [文件描述符 (File Descriptor)](.#文件描述符-file-descriptor)
+    - [退出状态 (Exit Status)](.#退出状态-exit-status)
+  - [📚 延伸阅读](.#-延伸阅读)
 
 ---
 
@@ -66,7 +66,7 @@
 
 **Rust中的实现**: `std::process::Command`
 
-**相关**: [01_process_model_and_lifecycle](./01_process_model_and_lifecycle.md)
+**相关**: [01_process_model_and_lifecycle](01_process_model_and_lifecycle.md)
 
 ---
 
@@ -99,7 +99,7 @@ match unsafe { fork() } {
 
 **注意**: Windows不支持fork，使用`CreateProcess`代替
 
-**相关**: [01_process_model_and_lifecycle](./01_process_model_and_lifecycle.md)
+**相关**: [01_process_model_and_lifecycle](01_process_model_and_lifecycle.md)
 
 ---
 
@@ -113,7 +113,7 @@ match unsafe { fork() } {
 
 **Rust中**: `Command::new()` + `spawn()` 实际上是fork+exec的组合
 
-**相关**: [01_process_model_and_lifecycle](./01_process_model_and_lifecycle.md)
+**相关**: [01_process_model_and_lifecycle](01_process_model_and_lifecycle.md)
 
 ---
 
@@ -131,7 +131,7 @@ match unsafe { fork() } {
 - Socket
 - 内存映射文件 (Memory-Mapped File)
 
-**相关**: [02_ipc_mechanisms](./02_ipc_mechanisms.md)
+**相关**: [02_ipc_mechanisms](02_ipc_mechanisms.md)
 
 ---
 
@@ -156,7 +156,7 @@ let child = Command::new("cat")
     .spawn()?;
 ```
 
-**相关**: [02_ipc_mechanisms](./02_ipc_mechanisms.md)
+**相关**: [02_ipc_mechanisms](02_ipc_mechanisms.md)
 
 ---
 
@@ -172,7 +172,7 @@ let child = Command::new("cat")
 
 **Rust实现**: 使用`shared_memory` crate
 
-**相关**: [13_ipc_communication_advanced](./11_practical_examples/13_ipc_communication_advanced.md)
+**相关**: [13_ipc_communication_advanced](11_practical_examples/13_ipc_communication_advanced.md)
 
 ---
 
@@ -199,7 +199,7 @@ kill(child_pid, Signal::SIGTERM)?;
 
 **注意**: Windows不支持Unix信号
 
-**相关**: [01_process_model_and_lifecycle](./01_process_model_and_lifecycle.md)
+**相关**: [01_process_model_and_lifecycle](01_process_model_and_lifecycle.md)
 
 ---
 
@@ -215,7 +215,7 @@ kill(child_pid, Signal::SIGTERM)?;
 - 设置`SIGCHLD`信号处理器
 - 确保父进程存活期间处理子进程
 
-**相关**: [FAQ Q4](./FAQ.md#q4-如何避免和处理僵尸进程)
+**相关**: [FAQ Q4](FAQ.md#q4-如何避免和处理僵尸进程)
 
 ---
 
@@ -230,7 +230,7 @@ kill(child_pid, Signal::SIGTERM)?;
 
 **Rust中**: 守护进程(daemon)通常是故意创建的孤儿进程
 
-**相关**: [01_process_model_and_lifecycle](./01_process_model_and_lifecycle.md)
+**相关**: [01_process_model_and_lifecycle](01_process_model_and_lifecycle.md)
 
 ---
 
@@ -255,7 +255,7 @@ Command::new("app")
     .spawn()?;
 ```
 
-**相关**: [04_advanced_process_management](./04_advanced_process_management.md)
+**相关**: [04_advanced_process_management](04_advanced_process_management.md)
 
 ---
 
@@ -278,7 +278,7 @@ Command::new("app")
 5. 关闭文件描述符
 6. 重定向stdin/stdout/stderr到`/dev/null`
 
-**相关**: [04_advanced_process_management](./04_advanced_process_management.md)
+**相关**: [04_advanced_process_management](04_advanced_process_management.md)
 
 ---
 
@@ -302,7 +302,7 @@ Command::new("app")
     .spawn()?;
 ```
 
-**相关**: [12_std_process_deep_dive](./11_practical_examples/12_std_process_deep_dive.md)
+**相关**: [12_std_process_deep_dive](11_practical_examples/12_std_process_deep_dive.md)
 
 ---
 
@@ -326,16 +326,16 @@ if status.success() {
 }
 ```
 
-**相关**: [01_process_model_and_lifecycle](./01_process_model_and_lifecycle.md)
+**相关**: [01_process_model_and_lifecycle](01_process_model_and_lifecycle.md)
 
 ---
 
 ## 📚 延伸阅读
 
-- [主索引](./00_MASTER_INDEX.md) - 完整文档导航
-- [FAQ](./FAQ.md) - 常见问题解答
-- [01-10核心系列](./01_process_model_and_lifecycle.md) - 系统学习
-- [11-18实践系列](./11_practical_examples/11_practical_examples.md) - 实践指南
+- [主索引](00_MASTER_INDEX.md) - 完整文档导航
+- [FAQ](FAQ.md) - 常见问题解答
+- [01-10核心系列](01_process_model_and_lifecycle.md) - 系统学习
+- [11-18实践系列](11_practical_examples/11_practical_examples.md) - 实践指南
 
 ---
 

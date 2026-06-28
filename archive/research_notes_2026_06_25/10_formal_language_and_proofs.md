@@ -9,7 +9,7 @@
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 用形式语言（推理规则、操作语义、判定形式）表达 Rust 核心定理，提供数学级形式证明；与 Coq 骨架互补（形式语言为规范，Coq 为机器可检查实现）
-> **上位文档**: [CORE_THEOREMS_FULL_PROOFS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md)、[FORMAL_FULL_MODEL_OVERVIEW](./10_formal_full_model_overview.md)
+> **上位文档**: [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md)、[FORMAL_FULL_MODEL_OVERVIEW](10_formal_full_model_overview.md)
 
 ---
 
@@ -17,38 +17,38 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [形式语言与形式证明](#形式语言与形式证明)
-  - [📑 目录](#-目录)
-  - [一、形式语言总览](#一形式语言总览)
-  - [二、语法（归纳定义）](#二语法归纳定义)
-    - [2.1 核心表达式（简化）](#21-核心表达式简化)
-    - [2.2 所有权状态](#22-所有权状态)
-    - [2.3 借用类型](#23-借用类型)
-  - [三、判定形式与推理规则](#三判定形式与推理规则)
-    - [3.1 类型判定](#31-类型判定)
-    - [3.2 所有权状态判定](#32-所有权状态判定)
-    - [3.3 借用判定](#33-借用判定)
-  - [四、操作语义（小步）](#四操作语义小步)
-    - [4.1 类型系统归约](#41-类型系统归约)
-    - [4.2 所有权状态转换](#42-所有权状态转换)
-  - [五、形式证明（数学级）](#五形式证明数学级)
-    - [5.1 定理 T-OW2（所有权唯一性）](#51-定理-t-ow2所有权唯一性)
-    - [5.2 定理 T-BR1（数据竞争自由）](#52-定理-t-br1数据竞争自由)
-    - [5.3 定理 T-TY3（类型安全）](#53-定理-t-ty3类型安全)
-  - [六、推导树示例](#六推导树示例)
-    - [T-OW2 归纳步（move）的推导](#t-ow2-归纳步move的推导)
-    - [T-BR1 情况 1 的推导](#t-br1-情况-1-的推导)
-  - [七、与 Coq 的对应](#七与-coq-的对应)
-  - [八、引用](#八引用)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [形式语言与形式证明](.#形式语言与形式证明)
+  - [📑 目录](.#-目录)
+  - [一、形式语言总览](.#一形式语言总览)
+  - [二、语法（归纳定义）](.#二语法归纳定义)
+    - [2.1 核心表达式（简化）](.#21-核心表达式简化)
+    - [2.2 所有权状态](.#22-所有权状态)
+    - [2.3 借用类型](.#23-借用类型)
+  - [三、判定形式与推理规则](.#三判定形式与推理规则)
+    - [3.1 类型判定](.#31-类型判定)
+    - [3.2 所有权状态判定](.#32-所有权状态判定)
+    - [3.3 借用判定](.#33-借用判定)
+  - [四、操作语义（小步）](.#四操作语义小步)
+    - [4.1 类型系统归约](.#41-类型系统归约)
+    - [4.2 所有权状态转换](.#42-所有权状态转换)
+  - [五、形式证明（数学级）](.#五形式证明数学级)
+    - [5.1 定理 T-OW2（所有权唯一性）](.#51-定理-t-ow2所有权唯一性)
+    - [5.2 定理 T-BR1（数据竞争自由）](.#52-定理-t-br1数据竞争自由)
+    - [5.3 定理 T-TY3（类型安全）](.#53-定理-t-ty3类型安全)
+  - [六、推导树示例](.#六推导树示例)
+    - [T-OW2 归纳步（move）的推导](.#t-ow2-归纳步move的推导)
+    - [T-BR1 情况 1 的推导](.#t-br1-情况-1-的推导)
+  - [七、与 Coq 的对应](.#七与-coq-的对应)
+  - [八、引用](.#八引用)
+  - [🆕 Rust 1.94 更新](.#-rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](.#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](.#本文档的rust-194更新要点)
+      - [核心特性应用](.#核心特性应用)
+      - [代码示例更新](.#代码示例更新)
+      - [相关文档](.#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](.#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](.#相关概念)
+  - [权威来源索引](.#权威来源索引)
 
 ## 一、形式语言总览
 >
@@ -64,7 +64,7 @@
 | **操作语义** | $e \to e'$、$S \xrightarrow{op} S'$ | 小步归约、状态转换 |
 | **形式证明** | 归纳、反证、推导树 | 定理的数学证明 |
 
-**与 Rust 的衔接**：形式语言为**数学规范层**；Rust 示例为**实现层**；见 [THEOREM_RUST_EXAMPLE_MAPPING](./10_theorem_rust_example_mapping.md)。
+**与 Rust 的衔接**：形式语言为**数学规范层**；Rust 示例为**实现层**；见 [THEOREM_RUST_EXAMPLE_MAPPING](10_theorem_rust_example_mapping.md)。
 
 ---
 
@@ -335,9 +335,9 @@ $$
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [CORE_THEOREMS_FULL_PROOFS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) — 完整证明（L2）
-- [coq_skeleton](../../archive/deprecated/coq_skeleton/README.md) — Coq 骨架（L3）
-- [ownership_model](./formal_methods/10_ownership_model.md)、[borrow_checker_proof](./formal_methods/10_borrow_checker_proof.md)、[type_system_foundations](./type_theory/10_type_system_foundations.md)
+- [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) — 完整证明（L2）
+- [coq_skeleton](../deprecated/coq_skeleton/README.md) — Coq 骨架（L3）
+- [ownership_model](formal_methods/10_ownership_model.md)、[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md)、[type_system_foundations](type_theory/10_type_system_foundations.md)
 
 ---
 
@@ -352,7 +352,7 @@ $$
 
 > **适用版本**: Rust 1.96.0+
 
-详见 [RUST_194_RESEARCH_UPDATE](../../archive/research_notes_2026_06_25/10_rust_194_research_update.md)
+详见 [RUST_194_RESEARCH_UPDATE](10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 
@@ -415,7 +415,7 @@ $$
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [research_notes 目录](./README.md)
+- [research_notes 目录](README.md)
 - [上级目录](../README.md)
 
 ---
