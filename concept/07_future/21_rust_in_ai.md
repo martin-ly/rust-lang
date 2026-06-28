@@ -392,7 +392,7 @@ graph TD
 ```
 
 > **认知功能**: **Rust 不是 Python 的替代品**——它们是**互补的**，在 AI 流水线的不同阶段各展所长。
-> [来源: [Python vs Rust for ML](https://www.infoworld.com/article/why-rust-for-machine-learning.html)]
+> [来源: [Python vs Rust for ML](https://www.infoworld.com/article/4078766/ai-and-machine-learning-outside-of-python.html)]
 
 ---
 

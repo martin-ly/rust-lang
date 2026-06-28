@@ -20,7 +20,7 @@
 
 > **来源**: [TRPL Ch13 — Closures](https://doc.rust-lang.org/book/ch13-04-performance.html) ·
 > [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html) ·
-> [Bjarne Stroustrup — Foundations of C++](https://www.stroustrup.com/ETAPS-corrected.pdf) ·
+> [Bjarne Stroustrup — Foundations of C++](https://www.stroustrup.com/ETAPS-corrected-draft.pdf) ·
 > [Rust Performance Book](https://nnethercote.github.io/perf-book/)
 
 ## 📑 目录
@@ -96,7 +96,7 @@
 ```
 
 > **核心洞察**: 零成本抽象不是"不花时间"，而是"不花运行时（Runtime）时间"——所有优化在编译期完成，运行时执行的是已优化机器码。
-> [来源: [Bjarne Stroustrup — Foundations of C++](https://www.stroustrup.com/ETAPS-corrected.pdf)]
+> [来源: [Bjarne Stroustrup — Foundations of C++](https://www.stroustrup.com/ETAPS-corrected-draft.pdf)]
 
 ---
 
@@ -390,7 +390,7 @@ Rust 性能分析工具链:
 |:---|:---:|:---|
 | [TRPL — Performance](https://doc.rust-lang.org/book/ch13-04-performance.html) | ✅ 一级 | 迭代器性能 |
 | [Rust Performance Book](https://nnethercote.github.io/perf-book/) | ✅ 一级 | 性能优化指南 |
-| [Bjarne Stroustrup — Foundations of C++](https://www.stroustrup.com/ETAPS-corrected.pdf) | ✅ 一级 | 零开销原则起源 |
+| [Bjarne Stroustrup — Foundations of C++](https://www.stroustrup.com/ETAPS-corrected-draft.pdf) | ✅ 一级 | 零开销原则起源 |
 | [Rust Reference — Generics](https://doc.rust-lang.org/reference/items/generics.html) | ✅ 一级 | 单态化规则 |
 | [LLVM Optimization](https://llvm.org/docs/Passes.html) | ⚠️ 二级 | LLVM 优化管道 |
 

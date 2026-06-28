@@ -954,7 +954,7 @@ async fn optimized_handler(event: LambdaEvent<OrderRequest>) -> Result<Value, Er
 └── 根结论: ❌ 架构模式提供结构，但需要纪律和自动化测试来维护
 ```
 
-> **来源**: [来源: [Fowler — Over-Engineering](https://martinfowler.com/bliki/OverEngineering.html)]
+> **来源**: [来源: [Fowler — Over-Engineering [已失效]]<!-- 原链接: https://martinfowler.com/bliki/OverEngineering.html -->]
 
 ### 9.2 边界极限
 >
@@ -967,7 +967,7 @@ async fn optimized_handler(event: LambdaEvent<OrderRequest>) -> Result<Value, Er
 | **架构迁移成本** | 分层 → 六边形: 高 | 完全重写风险 | 渐进式重构（Strangler Fig 模式）|
 | **测试金字塔** | 单元:集成:E2E = 70:20:10 | 端口隔离使单元测试占比可提高到 80%+ | 投资回报递减 |
 
-> **来源**: [Fowler — Over-Engineering](https://martinfowler.com/bliki/OverEngineering.html) · [AWS Lambda Limits](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html) · [Martin — Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
+> **来源**: [Fowler — Over-Engineering [已失效]]<!-- 原链接: https://martinfowler.com/bliki/OverEngineering.html --> · [AWS Lambda Limits](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html) · [Martin — Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 
 ---
 

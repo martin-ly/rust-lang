@@ -878,7 +878,7 @@ flowchart TD
 ### 7.1 AWS Kani
 >
 >
-> **来源**: [AWS Kani Blog](https://aws.amazon.com/blogs/opensource/verify-rust-programs-using-kani/) · [s2n-quic verification]
+> **来源**: [AWS Kani Blog](https://model-checking.github.io/kani/) · [s2n-quic verification]
 
 AWS 将 Kani 集成到多个核心项目的开发流程中：
 
@@ -890,7 +890,7 @@ AWS 将 Kani 集成到多个核心项目的开发流程中：
 ### 7.2 Microsoft Verus
 >
 >
-> **来源**: [Microsoft Verus Blog](https://www.microsoft.com/en-us/research/project/verus/) · [IronRDP]
+> **来源**: [Microsoft Verus Blog](https://verus-lang.github.io/verus/guide/) · [IronRDP]
 
 Microsoft Research 的 Verus 项目致力于让系统软件验证更加实用：
 

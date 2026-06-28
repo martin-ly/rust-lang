@@ -1628,7 +1628,7 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 
 ### 6.17 Rust Foundation 加入 Datadog Open Source Program（2026-03-25）
 
-**[Rust Foundation, 2026-03-25]** Rust Foundation 宣布加入 [Datadog Open Source Program](https://www.datadoghq.com/blog/datadog-open-source-program/)，获得 Datadog 统一可观测性平台的支持，用于监控和管理 Rust 生态基础设施。
+**[Rust Foundation, 2026-03-25]** Rust Foundation 宣布加入 [Datadog Open Source Program](https://www.datadoghq.com/blog/introducing-open-source-hub/)，获得 Datadog 统一可观测性平台的支持，用于监控和管理 Rust 生态基础设施。
 
 **平台能力**：
 

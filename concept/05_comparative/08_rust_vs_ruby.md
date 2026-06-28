@@ -153,7 +153,7 @@
 ```
 
 > **内存洞察**: Ruby 的 **GC 简化开发**，Rust 的 **所有权（Ownership）提供可预测性**——选择取决于应用场景对延迟和吞吐量的要求。
-> [来源: [Ruby GC Guide](https://tenderlovemaking.com/tags/gc.html)]
+> [来源: [Ruby GC Guide](https://tenderlovemaking.com/2009/12/18/writing-ruby-c-extensions-part-1/)]
 
 ---
 
@@ -315,7 +315,7 @@ Web 框架对比:
 ```
 
 > **速度洞察**: **"开发速度"和"执行速度"不是零和**——选择取决于产品阶段和性能需求。
-> [来源: [Shopify — Rust at Scale](https://shopify.engineering/rust-at-shopify)]
+> [来源: [Shopify — Rust at Scale](https://shopify.engineering/shopify-rust-systems-programming)]
 
 ---
 
@@ -473,7 +473,7 @@ graph TD
 | [Ruby Documentation](https://www.ruby-lang.org/en/documentation/) | ✅ 一级 | 官方文档 |
 | [TRPL](https://doc.rust-lang.org/book/title-page.html) | ✅ 一级 | Rust 官方书 |
 | [Benchmarks Game](https://benchmarksgame-team.pages.debian.net/benchmarksgame/) | ✅ 一级 | 性能基准 |
-| [Shopify Engineering](https://shopify.engineering/rust-at-shopify) | ✅ 二级 | 生产案例 |
+| [Shopify Engineering](https://shopify.engineering/shopify-rust-systems-programming) | ✅ 二级 | 生产案例 |
 | [RubyConf Talks](https://rubyconf.org/) | ✅ 二级 | 社区演讲 |
 | [Wikipedia — Ruby](https://en.wikipedia.org/wiki/Ruby_(programming_language)) | ✅ 一级 | 语言概述 |
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |

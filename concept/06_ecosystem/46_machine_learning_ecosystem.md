@@ -715,7 +715,7 @@ Rust ML 的解决:
            探索性数据分析（EDA）和小数据场景中仍然便利。
 ```
 
-> **来源**: [Polars vs Pandas [已失效]]<!-- 原链接: https://pola.rs/posts/polars-pandas-xlsxwriter/ --> · [Why Not Always Rust](https://matklad.github.io/2023/03/26/rust-myths-and-vegetables.html)
+> **来源**: [Polars vs Pandas [已失效]]<!-- 原链接: https://pola.rs/posts/polars-pandas-xlsxwriter/ --> · [Why Not Always Rust [已失效]]<!-- 原链接: https://matklad.github.io/2023/03/26/rust-myths-and-vegetables.html -->
 
 ### 8.2 边界极限
 

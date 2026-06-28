@@ -413,7 +413,7 @@ deny = [{ name = "crate-name", version = "<1.0.0" }]
 | **crates.io 响应** | 相关包已被移除；Trusted Publishing 机制持续加固 |
 | **攻击窗口** | 2026-05-15 至 2026-05-22（发现后数小时内移除） |
 
-> **深层意义**: TrapDoor 攻击揭示了一个新型威胁向量——**AI 辅助开发工具的供应链攻击**。传统的 `cargo audit` 和 RustSec 数据库只能检测已知的 CVE，但 TrapDoor 利用的是"AI 上下文污染"，这在现有安全工具链中没有直接对应检测手段。这要求 Rust 生态在三个层面加强防御：1) 注册表层面（更严格的包内容扫描，包括 Unicode 异常检测）；2) 工具层面（AI 编码助手的上下文隔离）；3) 开发者层面（对 AI 生成代码的审计意识）。[来源: [Socket.dev — TrapDoor Supply Chain Attack](https://socket.dev/blog/trapdoor-supply-chain-attack)] · 可信度: ✅
+> **深层意义**: TrapDoor 攻击揭示了一个新型威胁向量——**AI 辅助开发工具的供应链攻击**。传统的 `cargo audit` 和 RustSec 数据库只能检测已知的 CVE，但 TrapDoor 利用的是"AI 上下文污染"，这在现有安全工具链中没有直接对应检测手段。这要求 Rust 生态在三个层面加强防御：1) 注册表层面（更严格的包内容扫描，包括 Unicode 异常检测）；2) 工具层面（AI 编码助手的上下文隔离）；3) 开发者层面（对 AI 生成代码的审计意识）。[来源: [Socket.dev — TrapDoor Supply Chain Attack](https://socket.dev/blog/trapdoor-crypto-stealer-npm-pypi-crates)] · 可信度: ✅
 
 ---
 

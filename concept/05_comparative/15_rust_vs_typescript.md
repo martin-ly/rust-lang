@@ -160,7 +160,7 @@ TypeScript 核心特征:
   ├── 运行时: V8 / SpiderMonkey / JavaScriptCore
   ├── 启动: 需引擎初始化（JIT 预热）
   └── 部署: 源代码或 bundle
-  > [来源: [TypeScript Compiler API](https://www.typescriptlang.org/docs/handbook/compiler-api.html)]
+  > [来源: [TypeScript Compiler API](https://github.com/microsoft/TypeScript/wiki/Using-the-Compiler-API)]
 
   Rust 编译流程:
   ├── 输入: .rs 文件

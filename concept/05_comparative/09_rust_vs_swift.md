@@ -397,7 +397,7 @@ graph TD
 ```
 
 > **认知功能**: **Apple 平台优先 Swift**，**跨平台/性能优先 Rust**——不是优劣之分，是场景适配。
-> [来源: [Swift vs Rust Performance](https://www.ben-morris.com/swift-vs-rust/)]
+> [来源: [Swift vs Rust Performance [已失效]]<!-- 原链接: https://www.ben-morris.com/swift-vs-rust/ -->]
 
 ---
 
@@ -499,7 +499,7 @@ graph TD
 | [Swift Ownership Manifesto](https://github.com/apple/swift/blob/main/docs/OwnershipManifesto.md) | ✅ 一级 | 所有权设计 |
 | [TRPL](https://doc.rust-lang.org/book/title-page.html) | ✅ 一级 | Rust 官方书 |
 | [Swift on Server](https://www.swift.org/server/) | ✅ 一级 | 服务端 Swift |
-| [Swift vs Rust Blog](https://www.ben-morris.com/swift-vs-rust/) | ✅ 二级 | 对比分析 |
+| [Swift vs Rust Blog [已失效]]<!-- 原链接: https://www.ben-morris.com/swift-vs-rust/ --> | ✅ 二级 | 对比分析 |
 | [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/) | 🔍 三级 | Web 框架性能对比 |
 
 ---

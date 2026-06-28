@@ -25,14 +25,14 @@
 > **前置概念**: N/A
 ---
 
-> **来源**: [Workflow Management Coalition — Terminology & Glossary](https://www.wfmc.org/standards/terminology) ·
-> [来源: [WfMC — Terminology](https://www.wfmc.org/standards/terminology)] · [来源: [van der Aalst — Process Mining](https://www.springer.com/gp/book/9783662498507)]
+> **来源**: [Workflow Management Coalition — Terminology & Glossary](https://wfmc.org/wp-content/uploads/2022/09/TC-1011_term_glossary_v3.pdf) ·
+> [来源: [WfMC — Terminology](https://wfmc.org/wp-content/uploads/2022/09/TC-1011_term_glossary_v3.pdf)] · [来源: [van der Aalst — Process Mining](https://www.springer.com/gp/book/9783662498507)]
 > [van der Aalst — Process Mining](https://www.springer.com/gp/book/9783662498507) ·
 > [Petri Nets](https://www.informatik.uni-hamburg.de/TGI/PetriNets/) ·
 > [Milner — Communicating and Mobile Systems: The π-Calculus](https://www.amazon.com/Communicating-Mobile-Systems-Calculus-Cambridge/dp/0521658691) ·
 > [Clarke & Emerson — Design and Synthesis of Synchronization Skeletons](https://dl.acm.org/doi/10.1145/567446.567462) ·
 > [Rust async-book](https://rust-lang.github.io/async-book/)
-> [来源: [WfMC — Reference Model](https://www.wfmc.org/standards/reference-model)] · [来源: [van der Aalst — Process Mining](https://www.springer.com/gp/book/9783662498507)] · [来源: [Workflow Patterns](http://www.workflowpatterns.com/)]
+> [来源: [WfMC — Reference Model](https://wfmc.org/public-documents/)] · [来源: [van der Aalst — Process Mining](https://www.springer.com/gp/book/9783662498507)] · [来源: [Workflow Patterns](http://www.workflowpatterns.com/)]
 
 > **后置概念**: [Future Roadmap](../07_future/24_roadmap.md)
 
@@ -95,7 +95,7 @@
 
 ### 1.1 工作流管理联盟（WfMC）定义
 
-> **[Workflow Management Coalition — Terminology & Glossary](https://www.wfmc.org/standards/terminology)** 工作流（Workflow）是业务流程的全部或部分自动化，在此过程中，文档、信息或任务按照一组程序化的规则，从一个参与者传递到另一个参与者以执行动作。
+> **[Workflow Management Coalition — Terminology & Glossary](https://wfmc.org/wp-content/uploads/2022/09/TC-1011_term_glossary_v3.pdf)** 工作流（Workflow）是业务流程的全部或部分自动化，在此过程中，文档、信息或任务按照一组程序化的规则，从一个参与者传递到另一个参与者以执行动作。
 
 ```text
 WfMC 工作流参考模型（1995）:
@@ -120,7 +120,7 @@ WfMC 工作流参考模型（1995）:
   └─────────┘   └─────────────┘   └──────────────┘
 ```
 
-> **来源**: [WfMC — Reference Model](https://www.wfmc.org/standards/reference-model) ·
+> **来源**: [WfMC — Reference Model](https://wfmc.org/public-documents/) ·
 > [来源: [Milner — π-Calculus](https://www.amazon.com/Communicating-Mobile-Systems-Calculus-Cambridge/dp/0521658691)] · [来源: [Clarke & Emerson 1981](https://dl.acm.org/doi/10.1145/567446.567462)]
 > [WfMC — XPDL](https://www.wfmc.org/standards/xpdl)
 
@@ -181,7 +181,7 @@ where F: FnMut() -> Fut, Fut: Future<Output = Result<Output>>
 ```
 
 > **来源**: [WfMC — Workflow Patterns](http://www.workflowpatterns.com/) ·
-> [来源: [Plotkin — SOS](https://homepages.inf.ed.ac.uk/gdp/publications/Structural_Operational_Semantics.pdf)] · [来源: [Rust async-book](https://rust-lang.github.io/async-book/)]
+> [来源: [Plotkin — SOS](https://homepages.inf.ed.ac.uk/gdp/publications/sos_jlap.pdf)] · [来源: [Rust async-book](https://rust-lang.github.io/async-book/)]
 > [van der Aalst — Process Mining](https://www.springer.com/gp/book/9783662498507)
 
 ### 1.3 BPMN 与形式化语义
@@ -440,7 +440,7 @@ W₁ ↓ s₁    W₂ ↓ s₂
 W₁ ∥ W₂ ↓ (s₁, s₂)
 ```
 
-> **来源**: [Plotkin — Structural Operational Semantics](https://homepages.inf.ed.ac.uk/gdp/publications/Structural_Operational_Semantics.pdf) · [Winskel — The Formal Semantics of Programming Languages](https://mitpress.mit.edu/9780262731034/the-formal-semantics-of-programming-languages/)
+> **来源**: [Plotkin — Structural Operational Semantics](https://homepages.inf.ed.ac.uk/gdp/publications/sos_jlap.pdf) · [Winskel — The Formal Semantics of Programming Languages](https://mitpress.mit.edu/9780262731034/the-formal-semantics-of-programming-languages/)
 
 ---
 
@@ -962,7 +962,7 @@ pub struct WorkflowEvent {
 }
 ```
 
-> **来源**: [WfMC — Reference Model](https://www.wfmc.org/standards/reference-model) · [Temporal — Workflow Engine](https://docs.temporal.io/)
+> **来源**: [WfMC — Reference Model](https://wfmc.org/public-documents/) · [Temporal — Workflow Engine](https://docs.temporal.io/)
 
 ### 6.2 分布式执行模型
 >
@@ -1269,11 +1269,11 @@ async fn unbounded_backoff() -> Result<Output> {
 
 ---
 
-> [来源: [WfMC — Terminology](https://www.wfmc.org/standards/terminology)]
+> [来源: [WfMC — Terminology](https://wfmc.org/wp-content/uploads/2022/09/TC-1011_term_glossary_v3.pdf)]
 > [来源: [van der Aalst — Process Mining](https://www.springer.com/gp/book/9783662498507)]
 > [来源: [Milner — π-Calculus](https://www.amazon.com/Communicating-Mobile-Systems-Calculus-Cambridge/dp/0521658691)]
 > [来源: [Clarke & Emerson 1981](https://dl.acm.org/doi/10.1145/567446.567462)]
-> [来源: [Plotkin — SOS](https://homepages.inf.ed.ac.uk/gdp/publications/Structural_Operational_Semantics.pdf)]
+> [来源: [Plotkin — SOS](https://homepages.inf.ed.ac.uk/gdp/publications/sos_jlap.pdf)]
 > [来源: [Winskel — Formal Semantics](https://mitpress.mit.edu/9780262731034/the-formal-semantics-of-programming-languages/)]
 > [来源: [Petri Nets World](https://www.informatik.uni-hamburg.de/TGI/PetriNets/)]
 > [来源: [Workflow Patterns](http://www.workflowpatterns.com/)]

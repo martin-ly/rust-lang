@@ -406,7 +406,7 @@ graph TD
 ```
 
 > **边界要点**: 形式化验证的边界主要与**复杂度**、**工具可用性**、**语义鸿沟**、**并发**和**硬件差距**相关。
-> [来源: [The Limitations of Formal Verification](https://www.hillelwayne.com/post/limitations-of-formal/)]
+> [来源: [The Limitations of Formal Verification](https://www.hillelwayne.com/post/why-dont-people-use-formal-methods/)]
 
 ---
 
@@ -450,7 +450,7 @@ graph TD
 ```
 
 > **陷阱总结**: 形式化验证的陷阱主要与**逻辑混淆**、**框架规则假设**、**过度形式化**、**工具限制**和**抽象精度**相关。
-> [来源: [Formal Verification Pitfalls](https://www.hillelwayne.com/post/limitations-of-formal/)]
+> [来源: [Formal Verification Pitfalls](https://www.hillelwayne.com/post/why-dont-people-use-formal-methods/)]
 
 ---
 

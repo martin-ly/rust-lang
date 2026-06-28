@@ -13,7 +13,7 @@
 > **双维定位**: F×Und — 形式化理解程序执行的求值规则
 > **前置概念**: [Lambda Calculus](14_lambda_calculus.md) · [Variable Model](../01_foundation/20_variable_model.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Ownership Formalization](03_ownership_formal.md) · [Control Flow](../01_foundation/07_control_flow.md)
-> **主要来源**: [Pierce — TAPL, §5-§11](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Harper — PFPL, Part III](https://www.cs.cmu.edu/~rwh/pfpl/) · [Wadler 1984 — Why Calculating is Better than Scheming](https://doi.org/10.1093/comjnl/27.2.115) · [Plotkin 1975 — Call-by-Name, Call-by-Value and the λ-Calculus](https://doi.org/10.1016/0304-3975(75)90017-1) · [Cambridge — OptComp 2025, Lambda Lifting & Evaluation Strategies](https://www.cl.cam.ac.uk/~na482/pdfs/) · [Nottingham — PL Semantics, Evaluation Strategies](https://www.cs.nott.ac.uk/~pszgmh/psem.html) · [Wikipedia: Evaluation strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)
+> **主要来源**: [Pierce — TAPL, §5-§11](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Harper — PFPL, Part III](https://www.cs.cmu.edu/~rwh/pfpl/) · [Wadler 1984 — Why Calculating is Better than Scheming](https://doi.org/10.1093/comjnl/27.2.115) · [Plotkin 1975 — Call-by-Name, Call-by-Value and the λ-Calculus](https://doi.org/10.1016/0304-3975(75)90017-1) · [Cambridge — OptComp 2025, Lambda Lifting & Evaluation Strategies](https://www.cl.cam.ac.uk/~na482/pdfs/) · [Nottingham — PL Semantics, Evaluation Strategies](https://people.cs.nott.ac.uk/pszgmh/) · [Wikipedia: Evaluation strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)
 
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
@@ -587,7 +587,7 @@ Rust 的惰性是局部的（仅在迭代器适配器链中），最终必须通
 | [Plotkin 1975 — Call-by-Name, Call-by-Value and the λ-Calculus](https://doi.org/10.1016/0304-3975(75)90017-1) | CPS 转换与两种求值策略的等价性 |
 | [Wadler 1984 — Why Calculating is Better than Scheming](https://doi.org/10.1093/comjnl/27.2.115) | 惰性求值与等式推理的教学对比 |
 | [Cambridge — OptComp 2025, Lambda Lifting & Evaluation Strategies](https://www.cl.cam.ac.uk/~na482/pdfs/) | 编译优化视角下的求值顺序与 lambda lifting |
-| [Nottingham — PL Semantics, Evaluation Strategies](https://www.cs.nott.ac.uk/~pszgmh/psem.html) | 函数式语言语义课程中的求值策略谱系 |
+| [Nottingham — PL Semantics, Evaluation Strategies](https://people.cs.nott.ac.uk/pszgmh/) | 函数式语言语义课程中的求值策略谱系 |
 | [Wikipedia: Evaluation strategy](https://en.wikipedia.org/wiki/Evaluation_strategy) | 求值策略术语与跨语言速查 |
 
 ## 总结

@@ -359,7 +359,7 @@
 
 - **构建脚本** (Build Script) [L5+] — Cargo 在编译主 crate 前执行的 build.rs，用于代码生成或 C 库链接 — [Cargo Book](https://doc.rust-lang.org/cargo/reference/build-scripts.html)
 
-- **零成本抽象** (Zero-Cost Abstraction) [L5+] — 高级语言特性编译后不产生运行时开销的设计原则 — [C++ Origins](https://www.stroustrup.com/FSM/0cost.pdf) · [Rust Blog](https://blog.rust-lang.org/2015/05/11/traits.html)
+- **零成本抽象** (Zero-Cost Abstraction) [L5+] — 高级语言特性编译后不产生运行时开销的设计原则 — [C++ Origins [已失效]]<!-- 原链接: https://www.stroustrup.com/FSM/0cost.pdf --> · [Rust Blog](https://blog.rust-lang.org/2015/05/11/traits.html)
 
 - **Clap** (Clap) [L5+] — Rust 生态最流行的命令行参数解析库，支持派生宏和构建器模式 — [docs.rs](https://docs.rs/clap/latest/clap/)
 

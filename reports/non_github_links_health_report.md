@@ -1,12 +1,12 @@
 # 非 GitHub 外部链接健康检查报告
 
-> 生成时间: 2026-06-29 00:37:53
+> 生成时间: 2026-06-29 01:09:35
 > 扫描范围: `concept/` 下所有非 `github.com` 的 Markdown 外部链接
-> 去重链接数: 2714
-> HTTP 200: 2180
-> 已白名单（脚本/SSL/403 误报）: 444
-> 受保护/重定向/SSL 警告（需人工复核）: 36
-> 疑似失效（404/超时/5xx）: 54
+> 去重链接数: 2707
+> HTTP 200: 2216
+> 已白名单（脚本/SSL/403 误报）: 458
+> 受保护/重定向/SSL 警告（需人工复核）: 24
+> 疑似失效（404/超时/5xx）: 9
 
 ## 受保护/重定向/SSL 警告链接清单
 
@@ -36,77 +36,20 @@
 | `https://mitpress.mit.edu/9780262731034/the-formal-semantics-of-programming-languages/` | 403 | 06_ecosystem/41_workflow_theory.md |
 | `https://mitpress.mit.edu/books/distributed-algorithms` | 403 | 03_advanced/19_parallel_distributed_pattern_spectrum.md |
 | `https://mitpress.mit.edu/books/introduction-algorithms-fourth-edition` | 403 | 00_meta/semantic_bridge_algorithms_patterns.md |
-| `https://navigation.ros.org/` | <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)> | 06_ecosystem/52_robotics.md |
-| `https://navigation.ros.org/behavior_trees/index.html` | <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)> | 06_ecosystem/52_robotics.md |
-| `https://no-color.org/` | <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)> | 06_ecosystem/25_cli_development.md |
-| `https://pl.ethz.ch/` | <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)> | 04_formal/05_verification_toolchain.md |
-| `https://pmg.csail.mit.edu/papers/osdi99.pdf` | <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)> | 06_ecosystem/50_distributed_consensus.md |
-| `https://qiskit.org/` | 403 | 06_ecosystem/51_quantum_computing_rust.md |
-| `https://qiskit.org/textbook/` | 403 | 06_ecosystem/51_quantum_computing_rust.md |
-| `https://qiskit.org/textbook/ch-applications/vqe-molecules.html` | 403 | 06_ecosystem/51_quantum_computing_rust.md |
-| `https://qiskit.org/textbook/ch-gates/introduction.html` | 403 | 06_ecosystem/51_quantum_computing_rust.md |
-| `https://qiskit.org/textbook/ch-states/introduction.html` | 403 | 06_ecosystem/51_quantum_computing_rust.md |
-| `https://qiskit.org/textbook/ch-states/single-qubit-gates.html` | 403 | 06_ecosystem/51_quantum_computing_rust.md |
-| `https://rust-how-to.org/patterns/dynamic-typing.html` | <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)> | 02_intermediate/25_rtti_and_dynamic_typing.md |
 
 ## 疑似失效链接清单
 
 | URL | 状态 | 涉及文件 |
 |:---|:---|:---|
-| `https://aws.amazon.com/blogs/opensource/rust-microservices/` | 404 | 06_ecosystem/31_microservice_patterns.md |
-| `https://aws.amazon.com/blogs/opensource/verify-rust-programs-using-kani/` | 404 | 07_future/02_formal_methods.md |
-| `https://cel.cs.brown.edu/crp/idioms/copy_move_constructors.html` | 404 | 01_foundation/23_move_semantics.md, 02_intermediate/28_construction_and_initialization.md |
-| `https://cel.cs.brown.edu/crp/idioms/rtti_dynamic_cast.html` | 404 | 02_intermediate/25_rtti_and_dynamic_typing.md |
-| `https://datatracker.ietf.org/wg/cfrg/documents/` | 404 | 06_ecosystem/43_security_cryptography.md |
-| `https://decentralizedthoughts.github.io/2019-12-20-hotsuff/` | 404 | 06_ecosystem/50_distributed_consensus.md |
-| `https://dept-info.labri.fr/~denise/Algorithmes/Consensus/` | 404 | 06_ecosystem/50_distributed_consensus.md |
-| `https://docs.microsoft.com/en-us/dotnet/architecture/microservices/multi-container-microservice-net-applications/subscribe-events-in-background-worker-with-iactionscope` | 404 | 06_ecosystem/33_cqrs_event_sourcing.md |
-| `https://hexdocs.pm/mix/Mix.Tasks.Deploy.html` | 404 | 05_comparative/14_rust_vs_elixir.md |
-| `https://homepages.inf.ed.ac.uk/gdp/publications/Structural_Operational_Semantics.pdf` | 404 | 06_ecosystem/41_workflow_theory.md |
-| `https://letsencrypt.org/docs/rustls/` | 404 | 06_ecosystem/43_security_cryptography.md |
-| `https://llvm.org/docs/SystemZ.html` | 404 | 03_advanced/13_inline_assembly.md |
-| `https://martinfowler.com/bliki/OverEngineering.html` | 404 | 06_ecosystem/35_architecture_patterns.md |
-| `https://matklad.github.io/2023/03/26/rust-myths-and-vegetables.html` | 404 | 06_ecosystem/46_machine_learning_ecosystem.md |
-| `https://shopify.engineering/rust-at-shopify` | 404 | 05_comparative/08_rust_vs_ruby.md |
-| `https://socket.dev/blog/trapdoor-supply-chain-attack` | 404 | 05_comparative/04_safety_boundaries.md |
-| `https://tenderlovemaking.com/tags/gc.html` | 404 | 05_comparative/08_rust_vs_ruby.md |
-| `https://udidahan.com/2009/06/14/the-fault-is-in-the-outbox/` | 404 | 06_ecosystem/33_cqrs_event_sourcing.md |
-| `https://wiki.haskell.org/Open_data_type` | 404 | 07_future/25_open_enums_preview.md |
-| `https://www.aboutamazon.com/news/aws/kiro` | 404 | 07_future/archive/01_ai_integration_original.md |
-| `https://www.ben-morris.com/swift-vs-rust/` | 404 | 05_comparative/09_rust_vs_swift.md |
-| `https://www.cis.upenn.edu/~lee/09cis500/lectures/verification.pdf` | 404 | 06_ecosystem/47_formal_verification_tools.md |
-| `https://www.cl.cam.ac.uk/~gw104/Semantics.pdf` | 404 | 04_formal/12_denotational_semantics.md |
 | `https://www.crcpress.com/Game-Audio-Programming-Principles-and-Practices/DeMan-Larkin/p/book/9781138731499` | 404 | 06_ecosystem/49_game_engine_internals.md |
 | `https://www.cs.bgu.ac.il/~hendlerd/papers/HP.pdf` | 404 | 03_advanced/16_lock_free.md |
-| `https://www.cs.brown.edu/~mph/HerlihyShavit/` | 404 | 03_advanced/19_parallel_distributed_pattern_spectrum.md |
 | `https://www.cs.cmu.edu/~fp/courses/15816-s12/lectures/01-linlogic.pdf` | 404 | 04_formal/09_linear_logic_applications.md |
 | `https://www.cs.cmu.edu/~wing/publications/Milner92.pdf` | 404 | 06_ecosystem/41_workflow_theory.md |
-| `https://www.cs.nott.ac.uk/~pszgmh/psem.html` | 404 | 04_formal/18_evaluation_strategies.md |
 | `https://www.cs.ox.ac.uk/people/samson.abramsky/dt.ps` | 404 | 04_formal/12_denotational_semantics.md |
-| `https://www.datadoghq.com/blog/datadog-open-source-program/` | 404 | 07_future/03_evolution.md |
 | `https://www.disi.unige.it/person/MoggiE/ftp/ic.pdf` | 404 | 01_foundation/21_effects_and_purity.md |
-| `https://www.faa.gov/aircraft/air_cert/design_approvals/criteria/software` | 404 | 07_future/07_mcdc_coverage_preview.md |
-| `https://www.hillelwayne.com/post/formally-verifying/` | 404 | 06_ecosystem/47_formal_verification_tools.md |
-| `https://www.hillelwayne.com/post/limitations-of-formal/` | 404 | 04_formal/11_separation_logic.md |
-| `https://www.infoworld.com/article/why-rust-for-machine-learning.html` | 404 | 07_future/21_rust_in_ai.md |
 | `https://www.jaist.ac.jp/~sgonda/paper/2020_scico.html` | 404 | 04_formal/09_linear_logic_applications.md |
-| `https://www.levels.fyi/t/rust-engineer/salaries/` | 404 | 00_meta/career_landscape.md |
-| `https://www.linuxfoundation.org/press/press-release/sustaining-package-registries-working-group` | 404 | 06_ecosystem/19_security_practices.md |
-| `https://www.microsoft.com/en-us/research/project/verus/` | 404 | 07_future/02_formal_methods.md |
-| `https://www.microsoft.com/en-us/research/publication/paxos-made-live-an-engineering-perspective/` | 404 | 06_ecosystem/50_distributed_consensus.md |
-| `https://www.microsoft.com/en-us/research/publication/practical-type-inference-arbitrary-rank-types/` | 404 | 04_formal/08_type_inference.md |
-| `https://www.nextplatform.com/2021/08/24/why-sve2-is-important-and-why-armv9-is-more-than-sve2/` | 404 | 07_future/25_aarch64_sve_sme_preview.md |
-| `https://www.onehouse.ai/blog/the-ultimate-guide-to-apache-parquet` | 404 | 06_ecosystem/48_data_engineering.md |
 | `https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers21.pdf` | 404 | 07_future/08_safety_tags_preview.md |
 | `https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers22.pdf` | 404 | 06_ecosystem/47_formal_verification_tools.md |
-| `https://www.rtca.org/product/do-178c-software-considerations-in-airborne-systems-and-equipment-certification` | 404 | 06_ecosystem/29_algorithms_competitive_programming.md, 07_future/14_ferrocene_preview.md |
-| `https://www.ssi.gouv.fr/en/guide/rust-secure-development-guide/` | 404 | 06_ecosystem/19_security_practices.md |
-| `https://www.stroustrup.com/ETAPS-corrected.pdf` | 404 | 01_foundation/06_zero_cost_abstractions.md |
-| `https://www.stroustrup.com/FSM/0cost.pdf` | 404 | 00_meta/terminology_glossary.md |
-| `https://www.stroustrup.com/new_value-terminology.pdf` | 404 | 01_foundation/19_value_vs_reference_semantics.md |
-| `https://www.typescriptlang.org/docs/handbook/compiler-api.html` | 404 | 05_comparative/15_rust_vs_typescript.md |
-| `https://www.wfmc.org/standards/reference-model` | 404 | 06_ecosystem/41_workflow_theory.md |
-| `https://www.wfmc.org/standards/terminology` | 404 | 06_ecosystem/41_workflow_theory.md |
 
 ## 已白名单链接清单
 
@@ -513,7 +456,19 @@
 | `https://ieeexplore.ieee.org/document/7414846` | 03_advanced/20_stream_processing_semantics.md |
 | `https://ieeexplore.ieee.org/document/8326838` | 06_ecosystem/50_distributed_consensus.md |
 | `https://ieeexplore.ieee.org/document/8766229` | 01_foundation/10_numerics.md, 07_future/14_ferrocene_preview.md |
+| `https://navigation.ros.org/` | 06_ecosystem/52_robotics.md |
+| `https://navigation.ros.org/behavior_trees/index.html` | 06_ecosystem/52_robotics.md |
 | `https://news.ycombinator.com/item?id=27608507` | 05_comparative/10_rust_vs_zig.md |
+| `https://no-color.org/` | 06_ecosystem/25_cli_development.md |
+| `https://pl.ethz.ch/` | 04_formal/05_verification_toolchain.md |
+| `https://pmg.csail.mit.edu/papers/osdi99.pdf` | 06_ecosystem/50_distributed_consensus.md |
+| `https://qiskit.org/` | 06_ecosystem/51_quantum_computing_rust.md |
+| `https://qiskit.org/textbook/` | 06_ecosystem/51_quantum_computing_rust.md |
+| `https://qiskit.org/textbook/ch-applications/vqe-molecules.html` | 06_ecosystem/51_quantum_computing_rust.md |
+| `https://qiskit.org/textbook/ch-gates/introduction.html` | 06_ecosystem/51_quantum_computing_rust.md |
+| `https://qiskit.org/textbook/ch-states/introduction.html` | 06_ecosystem/51_quantum_computing_rust.md |
+| `https://qiskit.org/textbook/ch-states/single-qubit-gates.html` | 06_ecosystem/51_quantum_computing_rust.md |
+| `https://rust-how-to.org/patterns/dynamic-typing.html` | 02_intermediate/25_rtti_and_dynamic_typing.md |
 | `https://secure-code-guidelines.rust-lang.org/` | 06_ecosystem/19_security_practices.md |
 | `https://spec.rust-lang.org/` | 07_future/17_rust_specification_preview.md |
 | `https://stackoverflow.com/questions/27922584/how-does-rust-provide-move-semantics` | 01_foundation/23_move_semantics.md |
@@ -537,6 +492,8 @@
 | `https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm` | 06_ecosystem/42_api_design_patterns.md |
 | `https://www.iec.ch/functionalsafety` | 07_future/14_ferrocene_preview.md |
 | `https://www.khronos.org/registry/vulkan/specs/1.3/html/vkspec.html` | 06_ecosystem/49_game_engine_internals.md |
+| `https://www.levels.fyi/` | 00_meta/career_landscape.md |
+| `https://www.levels.fyi/t/rust-engineer/salaries/` | 00_meta/career_landscape.md |
 | `https://www.linuxtoday.com/blog/linux-kernel-7-0-officially-released-this-is-whats-new/` | 07_future/19_rust_for_linux.md |
 | `https://www.mysql.com/` | 06_ecosystem/23_database_access.md |
 | `https://www.nalgebra.org/` | 06_ecosystem/52_robotics.md |

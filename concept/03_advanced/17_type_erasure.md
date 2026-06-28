@@ -35,7 +35,7 @@
     - [1.3 对象安全](#13-对象安全)
     - [1.4 Trait Object Upcasting（1.86 stable）](#14-trait-object-upcasting186-stable)
   - [二、类型擦除模式](#二类型擦除模式)
-    - [2.1 Box](#21-box)
+    - [2.1 Box](#21-boxdyn-trait)
     - [2.2 自定义类型擦除](#22-自定义类型擦除)
   - [三、性能权衡](#三性能权衡)
     - [3.1 静态 vs 动态分发](#31-静态-vs-动态分发)

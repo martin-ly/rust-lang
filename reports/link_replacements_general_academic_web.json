@@ -1,0 +1,74 @@
+[
+  {
+    "old_url": "https://cel.cs.brown.edu/crp/idioms/copy_move_constructors.html",
+    "new_url": "https://cel.cs.brown.edu/crp/idioms/constructors/copy_and_move_constructors.html",
+    "status": "replaced",
+    "note": "CRP site restructured; the chapter is now under idioms/constructors/ with filename copy_and_move_constructors.html. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://cel.cs.brown.edu/crp/idioms/rtti_dynamic_cast.html",
+    "new_url": "https://cel.cs.brown.edu/crp/idioms/rtti.html",
+    "status": "replaced",
+    "note": "CRP site restructured; the RTTI/dynamic_cast chapter is now idioms/rtti.html. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://datatracker.ietf.org/wg/cfrg/documents/",
+    "new_url": "https://datatracker.ietf.org/rg/cfrg/about/",
+    "status": "replaced",
+    "note": "CFRG is an IRTF Research Group, not an IETF Working Group; its landing page moved to /rg/cfrg/about/. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://decentralizedthoughts.github.io/2019-12-20-hotsuff/",
+    "new_url": "https://decentralizedthoughts.github.io/2019-06-23-what-is-the-difference-between/",
+    "status": "replaced",
+    "note": "Original slug/date returns 404 (likely typo 'hotsuff' and mis-remembered date). Closest live Decentralized Thoughts post covering HotStuff is the 2019-06-23 comparison. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://dept-info.labri.fr/~denise/Algorithmes/Consensus/",
+    "new_url": "https://algodist.labri.fr/index.php/Main/GT",
+    "status": "replaced",
+    "note": "Personal page no longer exists; closest live replacement is the LaBRI distributed algorithms working group (GT AlgoDist) page, which covers consensus topics. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://hexdocs.pm/mix/Mix.Tasks.Deploy.html",
+    "new_url": "https://mix.hexdocs.pm/Mix.Tasks.Release.html",
+    "status": "replaced",
+    "note": "Mix does not provide a built-in Mix.Tasks.Deploy task; the equivalent deployment task is Mix.Tasks.Release. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://homepages.inf.ed.ac.uk/gdp/publications/Structural_Operational_Semantics.pdf",
+    "new_url": "https://homepages.inf.ed.ac.uk/gdp/publications/sos_jlap.pdf",
+    "status": "replaced",
+    "note": "Gordon Plotkin's 'A Structural Approach to Operational Semantics' is hosted as sos_jlap.pdf on the same site. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://wiki.haskell.org/Open_data_type",
+    "new_url": "https://wiki.haskell.org/Extensible_datatypes",
+    "status": "replaced",
+    "note": "HaskellWiki moved/renamed the page to Extensible_datatypes (server returns 302 to this URL). Verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.cis.upenn.edu/~lee/09cis500/lectures/verification.pdf",
+    "new_url": "https://www.cis.upenn.edu/~cis5000/",
+    "status": "replaced",
+    "note": "Specific lecture PDF is no longer available; the CIS 500 Software Foundations course landing page is the closest live replacement. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.cl.cam.ac.uk/~gw104/Semantics.pdf",
+    "new_url": "https://www.cl.cam.ac.uk/~gw104/dens.pdf",
+    "status": "replaced",
+    "note": "Glynn Winskel's semantics notes are now published as the Denotational Semantics notes (dens.pdf) on the same homepage. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.cs.brown.edu/~mph/HerlihyShavit/",
+    "new_url": "https://cs.brown.edu/courses/csci2951-s/",
+    "status": "replaced",
+    "note": "The HerlihyShavit directory is gone; the Brown course 'Distributed Computing through Combinatorial Topology' (based on the Herlihy & Shavit book) is the closest live replacement. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.cs.nott.ac.uk/~pszgmh/psem.html",
+    "new_url": "https://people.cs.nott.ac.uk/pszgmh/",
+    "status": "replaced",
+    "note": "The specific psem.html page no longer exists (redirects to people.cs.nott.ac.uk and returns 404). The author's current homepage is the closest live replacement. Verified HTTP 200."
+  }
+]

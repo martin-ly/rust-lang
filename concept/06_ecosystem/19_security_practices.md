@@ -26,7 +26,7 @@
 > [OWASP Rust Security](https://owasp.org/www-project-devsecops-guideline/latest/02a-Static-Application-Security-Testing) ·
 > [cargo-audit [来源: [cargo-audit](https://github.com/RustSec/rustsec/tree/main/cargo-audit)]](<https://github.com/RustSec/rustsec/tree/main/cargo-audit>) ·
 > [Rust CVEs](https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=rust) ·
-> [ANSSI Rust Guidelines](https://www.ssi.gouv.fr/en/guide/rust-secure-development-guide/) ·
+> [ANSSI Rust Guidelines](https://messervices.cyber.gouv.fr/documents-guides/anssi-guide-programming_rules_to_develop_secure_applications_with_rust-v1.0.pdf) ·
 > [Wikipedia — Defense in Depth](https://en.wikipedia.org/wiki/Defense_in_depth_(computing))
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
@@ -503,7 +503,7 @@ graph TD
 ```
 
 > **边界要点**: Rust 安全的边界主要与**侧信道**、**逻辑漏洞**、**供应链**、**unsafe 传染**和**验证局限**相关。
-> [来源: [ANSSI Rust Guide](https://www.ssi.gouv.fr/en/guide/rust-secure-development-guide/)]
+> [来源: [ANSSI Rust Guide](https://messervices.cyber.gouv.fr/documents-guides/anssi-guide-programming_rules_to_develop_secure_applications_with_rust-v1.0.pdf)]
 
 ---
 
@@ -741,7 +741,7 @@ cargo deny check advisories
 - 该声明与 2026-02-13 crates.io 恶意 crate 通知政策澄清、2026-01-21 平台安全能力演进共同构成 Rust 供应链安全治理的三条主线
 
 > **关键洞察**: 当注册表成为软件供应链的“前线基础设施”时，其经济可持续性就是安全属性。Sustaining Package Registries Working Group 的成立标志着行业开始将注册表从“被动分发点”重新定义为需要共同投资、治理和防御的**关键运营系统**。
-> **来源**: [Rust Foundation — Package Registry Leaders Unite to Address Open Source Sustainability Crisis](https://rustfoundation.org/media/rust-foundation-and-package-registry-leaders-unite-to-address-open-source-sustainability-crisis/) · [Linux Foundation — Sustaining Package Registries Working Group](https://www.linuxfoundation.org/press/press-release/sustaining-package-registries-working-group) · 可信度: ✅
+> **来源**: [Rust Foundation — Package Registry Leaders Unite to Address Open Source Sustainability Crisis](https://rustfoundation.org/media/rust-foundation-and-package-registry-leaders-unite-to-address-open-source-sustainability-crisis/) · [Linux Foundation — Sustaining Package Registries Working Group](https://openssf.org/blog/2026/05/06/open-infrastructure-is-not-free-part-ii-the-hidden-cost-of-running-package-registries/) · 可信度: ✅
 
 ### 6.7 已知传递依赖安全状态（本项目）
 

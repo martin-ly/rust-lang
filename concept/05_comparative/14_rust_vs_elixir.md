@@ -405,9 +405,9 @@ fn main() {
 
 ## 四、运行时与部署
 
-> **来源**: [Elixir Mix Deploy](https://hexdocs.pm/mix/Mix.Tasks.Deploy.html) · [Rust Compilation](https://doc.rust-lang.org/cargo/guide/build-cache.html)
+> **来源**: [Elixir Mix Deploy](https://mix.hexdocs.pm/Mix.Tasks.Release.html) · [Rust Compilation](https://doc.rust-lang.org/cargo/guide/build-cache.html)
 
-> **来源**: [Elixir Deployment](https://hexdocs.pm/mix/Mix.Tasks.Deploy.html)
+> **来源**: [Elixir Deployment](https://mix.hexdocs.pm/Mix.Tasks.Release.html)
 
 ```text
 运行时与部署:
@@ -438,7 +438,7 @@ fn main() {
 ```
 
 > **部署洞察**: **Rust 的零运行时适合静态部署，Elixir 的热更新适合长运行服务**。
-> [来源: [Elixir Deployment Guide](https://hexdocs.pm/mix/Mix.Tasks.Deploy.html)]
+> [来源: [Elixir Deployment Guide](https://mix.hexdocs.pm/Mix.Tasks.Release.html)]
 
 ---
 

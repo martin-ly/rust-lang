@@ -6705,7 +6705,7 @@
     "status": 301,
     "err": "unknown",
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://docs.rs/ndarray/": {
     "status": 200,
@@ -10263,19 +10263,19 @@
     "status": 403,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://internals.rust-lang.org/": {
     "status": 403,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://internals.rust-lang.org/t/asynchronous-destructors/11127": {
     "status": 403,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://ieeexplore.ieee.org/document/7414846": {
     "status": 202,
@@ -10293,13 +10293,13 @@
     "status": 403,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://isocpp.org/": {
     "status": 403,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-class": {
     "status": 200,
@@ -10311,7 +10311,7 @@
     "status": 403,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://itanium-cxx-abi.github.io/cxx-abi/abi.html": {
     "status": 200,
@@ -10323,13 +10323,13 @@
     "status": 403,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://journals.aps.org/pr/abstract/10.1103/PhysRev.47.777": {
     "status": 403,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://jeffreypalermo.com/blog/the-onion-architecture-part-1/": {
     "status": 200,
@@ -10359,7 +10359,7 @@
     "status": 403,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://jakegoulding.com/rust-ffi-omnibus/": {
     "status": 200,
@@ -10551,7 +10551,7 @@
     "status": 403,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://lamport.azurewebsites.net/tla/tla.html": {
     "status": 200,
@@ -10569,31 +10569,31 @@
     "status": 403,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://leetcode.com/problems/coin-change/": {
     "status": 403,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://leetcode.com/problems/partition-equal-subset-sum/": {
     "status": 403,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://leetcode.com/problems/implement-trie-prefix-tree/": {
     "status": 403,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://leetcode.com/problemset/": {
     "status": 403,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://landscape.cncf.io/": {
     "status": 200,
@@ -10605,7 +10605,7 @@
     "status": 403,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://linkerd.io/": {
     "status": 200,
@@ -10905,31 +10905,31 @@
     "status": 403,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://mitpress.mit.edu/9780262731034": {
     "status": 403,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://mitpress.mit.edu/9780262731034/the-formal-semantics-of-programming-languages/": {
     "status": 403,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://mitpress.mit.edu/books/distributed-algorithms": {
     "status": 403,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://mitpress.mit.edu/9780262037883/model-checking/": {
     "status": 403,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://martinfowler.com/bliki/OverEngineering.html": {
     "status": 404,
@@ -10941,7 +10941,7 @@
     "status": 403,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://marabos.nl/atomics/": {
     "status": 200,
@@ -10977,7 +10977,7 @@
     "status": 403,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book.html": {
     "status": 200,
@@ -15249,7 +15249,7 @@
     "status": 404,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://www.cs.cmu.edu/~rwh/pfpl/": {
     "status": 200,
@@ -15261,13 +15261,13 @@
     "status": 404,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://www.cs.ox.ac.uk/people/samson.abramsky/dt.ps": {
     "status": 404,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://www.cs.rochester.edu/~scott/papers/1996_PODC_queues.pdf": {
     "status": 200,
@@ -15279,7 +15279,7 @@
     "status": 404,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://www.cs.umd.edu/~jkatz/imc.html": {
     "status": 200,
@@ -15291,7 +15291,7 @@
     "status": 404,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://www.docker.com/": {
     "status": 200,
@@ -15429,7 +15429,7 @@
     "status": 404,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://www.hillelwayne.com/post/formally-verifying/": {
     "status": 404,
@@ -15519,7 +15519,7 @@
     "status": 404,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://www.jetbrains.com/lp/devecosystem-2025/": {
     "status": 200,
@@ -15795,7 +15795,7 @@
     "status": 404,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://www.gnu.org/licenses/gpl-faq.html": {
     "status": null,
@@ -15807,7 +15807,7 @@
     "status": 404,
     "err": null,
     "ok": false,
-    "ts": 1782664602.398695
+    "ts": 1782666509.706068
   },
   "https://www.gnu.org/licenses/gpl-faq.html#StaticVsDynamic": {
     "status": null,
@@ -16720,5 +16720,221 @@
     "err": null,
     "ok": true,
     "ts": 1782664602.398695
+  },
+  "https://cel.cs.brown.edu/crp/idioms/rtti.html": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://decentralizedthoughts.github.io/2019-06-23-what-is-the-difference-between/": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/microservices-on-aws.html": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://datatracker.ietf.org/rg/cfrg/about/": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://cs.brown.edu/courses/csci2951-s/": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://learn.microsoft.com/en-us/dotnet/architecture/microservices/multi-container-microservice-net-applications/subscribe-events": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://cel.cs.brown.edu/crp/idioms/constructors/copy_and_move_constructors.html": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://letsencrypt.org/docs/client-options/": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://mix.hexdocs.pm/Mix.Tasks.Release.html": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://openssf.org/blog/2026/05/06/open-infrastructure-is-not-free-part-ii-the-hidden-cost-of-running-package-registries/": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://socket.dev/blog/trapdoor-crypto-stealer-npm-pypi-crates": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://llvm.org/docs/CompilerWriterInfo.html": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://messervices.cyber.gouv.fr/documents-guides/anssi-guide-programming_rules_to_develop_secure_applications_with_rust-v1.0.pdf": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://shopify.engineering/shopify-rust-systems-programming": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://tenderlovemaking.com/2009/12/18/writing-ruby-c-extensions-part-1/": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://read.seas.harvard.edu/~kohler/class/08w-dsi/chandra07paxos.pdf": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://wfmc.org/public-documents/": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://wfmc.org/wp-content/uploads/2022/09/TC-1011_term_glossary_v3.pdf": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://udidahan.com/2012/12/31/life-without-distributed-transactions/": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://people.cs.nott.ac.uk/pszgmh/": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://wiki.haskell.org/Extensible_datatypes": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://www.cambridge.org/core/journals/journal-of-functional-programming/article/practical-type-inference-for-arbitraryrank-types/5339FB9DAB968768874D4C20FA6F8CB6": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://www.aboutamazon.com/news/aws/amazon-ai-frontier-agents-autonomous-kiro": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://www.cis.upenn.edu/~cis5000/": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://algodist.labri.fr/index.php/Main/GT": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://www.faa.gov/aircraft/air_cert/design_approvals/air_software/": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://www.datadoghq.com/blog/introducing-open-source-hub/": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://www.hillelwayne.com/post/theorem-prover-showdown/": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://www.cl.cam.ac.uk/~gw104/dens.pdf": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://www.hillelwayne.com/post/why-dont-people-use-formal-methods/": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://www.infoworld.com/article/4078766/ai-and-machine-learning-outside-of-python.html": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://www.onehouse.ai/blog/onehouse-analytics-engine-guide": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://www.nextplatform.com/2021/03/30/arms-v9-architecture-explains-why-nvidia-needs-to-buy-it/": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://www.stroustrup.com/ETAPS-corrected-draft.pdf": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://www.stroustrup.com/terminology.pdf": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
+  },
+  "https://www.rtca.org/product/do-178c-electronic/": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666509.706068
   }
 }

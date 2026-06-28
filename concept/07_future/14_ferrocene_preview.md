@@ -28,7 +28,7 @@
 > [Ferrocene Project](https://ferrocene.dev/) ·
 > [Ferrocene Specification](https://spec.ferrocene.dev/) ·
 > [ISO 26262 Standard](https://www.iso.org/standard/68383.html) ·
-> [DO-178C Standard](https://www.rtca.org/product/do-178c-software-considerations-in-airborne-systems-and-equipment-certification) ·
+> [DO-178C Standard](https://www.rtca.org/product/do-178c-electronic/) ·
 > [Ferrous Systems Blog](https://ferrous-systems.com/blog/)
 
 ## 📑 目录

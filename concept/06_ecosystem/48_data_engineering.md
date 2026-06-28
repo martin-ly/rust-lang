@@ -712,7 +712,7 @@ Python 对比:
 ```
 
 > **来源**: [Parquet Best Practices [已失效]]<!-- 原链接: https://parquet.apache.org/docs/file-format/config/ --> ·
-> [When Not to Use Parquet](https://www.onehouse.ai/blog/the-ultimate-guide-to-apache-parquet)
+> [When Not to Use Parquet](https://www.onehouse.ai/blog/onehouse-analytics-engine-guide)
 
 ### 8.2 边界极限
 

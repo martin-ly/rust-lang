@@ -164,7 +164,7 @@ fn main() {
 | **密钥派生** | 从密码生成密钥 | Argon2, PBKDF2, HKDF, scrypt | `argon2`, `pbkdf2`, `hkdf` |
 | **随机数生成** | 不可预测性 | CSPRNG（OS / 硬件）| `ring::rand`, `rand::rngs::OsRng` |
 
-> **来源**: [NIST Cryptographic Standards](https://csrc.nist.gov/projects/cryptographic-standards-and-guidelines) · [IETF Crypto Forum](https://datatracker.ietf.org/wg/cfrg/documents/)
+> **来源**: [NIST Cryptographic Standards](https://csrc.nist.gov/projects/cryptographic-standards-and-guidelines) · [IETF Crypto Forum](https://datatracker.ietf.org/rg/cfrg/about/)
 
 ### 1.3 威胁模型
 >
@@ -584,7 +584,7 @@ fn create_tls_server(cert_chain: Vec<CertificateDer<'static>>, key: PrivateKeyDe
 > - 默认禁用压缩（CRIME/BREACH 攻击防护）
 > - 证书验证使用 **webpki**（Rust 实现的 X.509 验证）
 >
-> **来源**: [rustls Documentation](https://docs.rs/rustls/latest/rustls/) · [rustls Book](https://docs.rs/rustls/latest/rustls/manual/index.html) · [Let's Encrypt — Rustls](https://letsencrypt.org/docs/rustls/)
+> **来源**: [rustls Documentation](https://docs.rs/rustls/latest/rustls/) · [rustls Book](https://docs.rs/rustls/latest/rustls/manual/index.html) · [Let's Encrypt — Rustls](https://letsencrypt.org/docs/client-options/)
 
 ### 6.3 dalek-cryptography：零知识友好
 >

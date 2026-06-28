@@ -825,7 +825,7 @@ async fn outbox_publisher(db: &sqlx::PgPool, kafka: &FutureProducer) {
 > - 消费者必须实现**幂等性**以处理重复事件
 > - 通过 `published_at` 字段标记已投递，实现去重
 >
-> **来源**: [Microsoft — Outbox Pattern](https://docs.microsoft.com/en-us/dotnet/architecture/microservices/multi-container-microservice-net-applications/subscribe-events-in-background-worker-with-iactionscope) · [Debezium — Outbox Event Router](https://debezium.io/documentation/reference/stable/transformations/outbox-event-router.html)
+> **来源**: [Microsoft — Outbox Pattern](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/multi-container-microservice-net-applications/subscribe-events) · [Debezium — Outbox Event Router](https://debezium.io/documentation/reference/stable/transformations/outbox-event-router.html)
 
 ### 5.3 读模型的最终一致性
 >
@@ -1288,8 +1288,8 @@ async fn another_bad_example(db: &PgPool, kafka: &FutureProducer, cmd: CreateOrd
 > **修正**: **Outbox 模式**是唯一的可靠解决方案：将数据库写入和事件记录放在**同一事务**中。
 > 事务的原子性保证：要么两者都成功，要么两者都失败。
 > 独立的网络调用（如直接发 Kafka）无法保证与数据库事务的一致性。
-> [来源: [Microsoft — Outbox Pattern](https://docs.microsoft.com/en-us/dotnet/architecture/microservices/multi-container-microservice-net-applications/subscribe-events-in-background-worker-with-iactionscope)] ·
-> [Udi Dahan — Reliable Messaging](https://udidahan.com/2009/06/14/the-fault-is-in-the-outbox/)
+> [来源: [Microsoft — Outbox Pattern](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/multi-container-microservice-net-applications/subscribe-events)] ·
+> [Udi Dahan — Reliable Messaging](https://udidahan.com/2012/12/31/life-without-distributed-transactions/)
 
 ### 10.3 边界测试：事件模式演化破坏反序列化（编译/运行时错误）
 

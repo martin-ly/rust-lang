@@ -1,0 +1,92 @@
+[
+  {
+    "old_url": "https://aws.amazon.com/blogs/opensource/rust-microservices/",
+    "new_url": "https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/microservices-on-aws.html",
+    "status": "replaced",
+    "note": "Original AWS Open Source blog post is gone; replaced with AWS microservices whitepaper that covers Rust-friendly microservices patterns on AWS. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://aws.amazon.com/blogs/opensource/verify-rust-programs-using-kani/",
+    "new_url": "https://model-checking.github.io/kani/",
+    "status": "replaced",
+    "note": "Original AWS Open Source blog post is gone; replaced with the official Kani Rust Verifier documentation site. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://matklad.github.io/2023/03/26/rust-myths-and-vegetables.html",
+    "new_url": null,
+    "status": "archive",
+    "note": "No live replacement found; the exact post does not appear on matklad.github.io and the Wayback Machine has no snapshot."
+  },
+  {
+    "old_url": "https://shopify.engineering/rust-at-shopify",
+    "new_url": "https://shopify.engineering/shopify-rust-systems-programming",
+    "status": "replaced",
+    "note": "Original URL returns 404; Shopify relocated the post to /shopify-rust-systems-programming. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://socket.dev/blog/trapdoor-supply-chain-attack",
+    "new_url": "https://socket.dev/blog/trapdoor-crypto-stealer-npm-pypi-crates",
+    "status": "replaced",
+    "note": "Original URL returns 404; Socket's current article on the TrapDoor campaign is at the new slug. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://tenderlovemaking.com/tags/gc.html",
+    "new_url": "https://tenderlovemaking.com/2009/12/18/writing-ruby-c-extensions-part-1/",
+    "status": "replaced",
+    "note": "Original tag page returns 404; replaced with a live Tenderlovemaking post that discusses Ruby's garbage collector in C extensions. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://udidahan.com/2009/06/14/the-fault-is-in-the-outbox/",
+    "new_url": "https://udidahan.com/2012/12/31/life-without-distributed-transactions/",
+    "status": "replaced",
+    "note": "Original outbox post returns 404; replaced with Udi Dahan's live post on the same transactional-outbox theme. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.aboutamazon.com/news/aws/kiro",
+    "new_url": "https://www.aboutamazon.com/news/aws/amazon-ai-frontier-agents-autonomous-kiro",
+    "status": "replaced",
+    "note": "Original URL returns 404; About Amazon now hosts the Kiro announcement at the new slug. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.ben-morris.com/swift-vs-rust/",
+    "new_url": null,
+    "status": "archive",
+    "note": "No live replacement found; ben-morris.com is unreachable and the Wayback Machine has no snapshot."
+  },
+  {
+    "old_url": "https://www.datadoghq.com/blog/datadog-open-source-program/",
+    "new_url": "https://www.datadoghq.com/blog/introducing-open-source-hub/",
+    "status": "replaced",
+    "note": "Original URL returns 404; Datadog's open-source program is now described in the Open Source Hub launch post. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.hillelwayne.com/post/formally-verifying/",
+    "new_url": "https://www.hillelwayne.com/post/theorem-prover-showdown/",
+    "status": "replaced",
+    "note": "Original URL returns 404; replaced with Hillel Wayne's live post on formally proving code in different theorem provers. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.hillelwayne.com/post/limitations-of-formal/",
+    "new_url": "https://www.hillelwayne.com/post/why-dont-people-use-formal-methods/",
+    "status": "replaced",
+    "note": "Original URL returns 404; replaced with Hillel Wayne's live post on the limitations and adoption barriers of formal methods. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.infoworld.com/article/why-rust-for-machine-learning.html",
+    "new_url": "https://www.infoworld.com/article/4078766/ai-and-machine-learning-outside-of-python.html",
+    "status": "replaced",
+    "note": "Original URL returns 404; InfoWorld's live article covers Rust's role in AI/ML outside of Python. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.nextplatform.com/2021/08/24/why-sve2-is-important-and-why-armv9-is-more-than-sve2/",
+    "new_url": "https://www.nextplatform.com/2021/03/30/arms-v9-architecture-explains-why-nvidia-needs-to-buy-it/",
+    "status": "replaced",
+    "note": "Original URL returns 404; Next Platform's live article covers Arm v9/SVE2 in depth. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.onehouse.ai/blog/the-ultimate-guide-to-apache-parquet",
+    "new_url": "https://www.onehouse.ai/blog/onehouse-analytics-engine-guide",
+    "status": "replaced",
+    "note": "Original URL returns 404; Onehouse's live analytics-engine guide covers Apache Parquet in the lakehouse context. Verified HTTP 200."
+  }
+]

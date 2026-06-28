@@ -123,7 +123,7 @@ Rust 形式化验证生态可按验证方法分层：
 ```
 
 > **来源**: [Hoare 1969](https://doi.org/10.1145/363235.363259) ·
-> [Formal Methods in Software Engineering](https://www.cis.upenn.edu/~lee/09cis500/lectures/verification.pdf) ·
+> [Formal Methods in Software Engineering](https://www.cis.upenn.edu/~cis5000/) ·
 > [Rust Formal Methods Working Group](https://github.com/rust-lang)
 
 ### 1.2 Rust 形式化验证的独特挑战
@@ -742,7 +742,7 @@ F* / Rocq 规范
            适合安全关键模块的定向验证，不适合整个大型项目。
 ```
 
-> **来源**: [Formal Methods Reality Check](https://www.hillelwayne.com/post/formally-verifying/) · [Kani Production Use](https://github.com/model-checking/kani/tree/main/papers) · [Verus README](https://github.com/verus-lang/verus/blob/main/README.md)
+> **来源**: [Formal Methods Reality Check](https://www.hillelwayne.com/post/theorem-prover-showdown/) · [Kani Production Use](https://github.com/model-checking/kani/tree/main/papers) · [Verus README](https://github.com/verus-lang/verus/blob/main/README.md)
 
 ### 8.2 边界极限
 

@@ -17,7 +17,7 @@
 
 > **来源**:
 >
-> [The Semantics of Programming Languages (Winskel)](https://www.cl.cam.ac.uk/~gw104/Semantics.pdf) ·
+> [The Semantics of Programming Languages (Winskel)](https://www.cl.cam.ac.uk/~gw104/dens.pdf) ·
 > [Domain Theory (Abramsky & Jung)](https://www.cs.ox.ac.uk/people/samson.abramsky/dt.ps) ·
 > [Wikipedia — Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics) ·
 > [Wikipedia — Domain Theory](https://en.wikipedia.org/wiki/Domain_theory)
@@ -105,7 +105,7 @@
 ```
 
 > **认知功能**: **指称语义回答"程序计算什么"而非"如何计算"**——通过数学抽象揭示程序的本质含义。
-> [来源: [Winskel — Semantics of PL](https://www.cl.cam.ac.uk/~gw104/Semantics.pdf)]
+> [来源: [Winskel — Semantics of PL](https://www.cl.cam.ac.uk/~gw104/dens.pdf)]
 
 ---
 
@@ -339,7 +339,7 @@ graph TD
 ```
 
 > **认知功能**: **指称语义和操作语义各有优势**——等价证明用指称，实现分析用操作。
-> [来源: [Winskel — Semantics](https://www.cl.cam.ac.uk/~gw104/Semantics.pdf)]
+> [来源: [Winskel — Semantics](https://www.cl.cam.ac.uk/~gw104/dens.pdf)]
 
 ---
 
@@ -420,7 +420,7 @@ graph TD
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Winskel — Semantics](https://www.cl.cam.ac.uk/~gw104/Semantics.pdf) | ✅ 一级 | 经典教材 |
+| [Winskel — Semantics](https://www.cl.cam.ac.uk/~gw104/dens.pdf) | ✅ 一级 | 经典教材 |
 | [Abramsky & Jung — Domain Theory](https://www.cs.ox.ac.uk/people/samson.abramsky/dt.ps) | ✅ 一级 | 领域理论 |
 | [Wikipedia — Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics) | ✅ 二级 | 概述 |
 | [Wikipedia — Domain Theory](https://en.wikipedia.org/wiki/Domain_theory) | ✅ 二级 | 领域理论 |

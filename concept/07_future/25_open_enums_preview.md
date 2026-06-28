@@ -29,7 +29,7 @@
 > [RFC 3518 — Sealed Traits](https://github.com/rust-lang/rfcs/pull/3518) ·
 > [GitHub #156628 — Open Enums Tracking](https://github.com/rust-lang/rust/issues/156628) ·
 > [Scala Sealed Traits](https://docs.scala-lang.org/tour/pattern-matching.html) ·
-> [Haskell Open Data Types](https://wiki.haskell.org/Open_data_type) ·
+> [Haskell Open Data Types](https://wiki.haskell.org/Extensible_datatypes) ·
 > [OCaml Polymorphic Variants](https://ocaml.org/manual/polyvariant.html)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
@@ -311,7 +311,7 @@ data AnyEvent = forall e. EventClass e => AnyEvent e
 ```
 
 > **对比**: Haskell 通过**类型类（Type Class）** 和**存在类型（Existential Types）** 模拟开放枚举，运行时通过虚表（vtable）分派。Rust 的 `enum` + `match` 是编译期静态分派，零运行时开销。
-> [来源: [Haskell Wiki — Open data type](https://wiki.haskell.org/Open_data_type)]
+> [来源: [Haskell Wiki — Open data type](https://wiki.haskell.org/Extensible_datatypes)]
 
 ---
 

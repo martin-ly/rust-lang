@@ -107,7 +107,7 @@
   若所有节点以相同顺序应用相同的操作序列，则状态一致。
 ```
 
-> **来源**: [FLP Result](https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf) · [Consensus in Distributed Systems](https://dept-info.labri.fr/~denise/Algorithmes/Consensus/)
+> **来源**: [FLP Result](https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf) · [Consensus in Distributed Systems](https://algodist.labri.fr/index.php/Main/GT)
 
 ### 1.2 FLP 不可能结果
 
@@ -226,7 +226,7 @@ Leader 选举:
   · 通过 Leader 补全：Follower 向 Leader 请求缺失条目
 ```
 
-> **来源**: [Paxos Made Live — Chandra et al. 2007](https://www.microsoft.com/en-us/research/publication/paxos-made-live-an-engineering-perspective/)
+> **来源**: [Paxos Made Live — Chandra et al. 2007](https://read.seas.harvard.edu/~kohler/class/08w-dsi/chandra07paxos.pdf)
 
 ---
 
@@ -533,7 +533,7 @@ Precommit:
                       └── 否 → 研究原型 → 任意 BFT ✅
 ```
 
-> **来源**: [Consensus in Blockchain](https://arxiv.org/abs/1904.04098) · [Comparing BFT Protocols](https://decentralizedthoughts.github.io/2019-12-20-hotsuff/)
+> **来源**: [Consensus in Blockchain](https://arxiv.org/abs/1904.04098) · [Comparing BFT Protocols](https://decentralizedthoughts.github.io/2019-06-23-what-is-the-difference-between/)
 
 ---
 

@@ -22,10 +22,10 @@
 ---
 
 > **来源**:
-> [DO-178C [来源: [FAA DO-178C](https://www.faa.gov/aircraft/air_cert/design_approvals/criteria/software)] / ED-12C](<https://www.rtca.org/product/do-178c/>) ·
+> [DO-178C [来源: [FAA DO-178C](https://www.faa.gov/aircraft/air_cert/design_approvals/air_software/)] / ED-12C](<https://www.rtca.org/product/do-178c/>) ·
 > [ISO 26262](https://www.iso.org/standard/68383.html) ·
 > [Rust Tracking Issue #124656](https://github.com/rust-lang/rust/issues/124656) ·
-> [MCDC [来源: [FAA MC/DC](https://www.faa.gov/aircraft/air_cert/design_approvals/criteria/software)] Wikipedia](<https://en.wikipedia.org/wiki/Code_coverage>) ·
+> [MCDC [来源: [FAA MC/DC](https://www.faa.gov/aircraft/air_cert/design_approvals/air_software/)] Wikipedia](<https://en.wikipedia.org/wiki/Code_coverage>) ·
 > [NASA Software Safety Guidebook](https://ntrs.nasa.gov/citations/20030093620)
 
 ## 📑 目录

@@ -699,7 +699,7 @@ Rust 的 trait 系统（尤其是关联类型和重载）可能导致歧义。`c
 
 ## 复杂度视角
 
-> **来源**: [Typing is Hard — 类型推断复杂度与可判定性](https://3fx.ch/typing-is-hard.html) · [Vytiniotis et al. 2011 — Practical Type Inference for Arbitrary-Rank Types](https://www.microsoft.com/en-us/research/publication/practical-type-inference-arbitrary-rank-types/)
+> **来源**: [Typing is Hard — 类型推断复杂度与可判定性](https://3fx.ch/typing-is-hard.html) · [Vytiniotis et al. 2011 — Practical Type Inference for Arbitrary-Rank Types](https://www.cambridge.org/core/journals/journal-of-functional-programming/article/practical-type-inference-for-arbitraryrank-types/5339FB9DAB968768874D4C20FA6F8CB6)
 
 HM 类型推断本身可在多项式时间（$O(n^3)$）内完成，但 Rust 的扩展使其复杂度显著上升：
 

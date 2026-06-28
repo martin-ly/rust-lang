@@ -17,7 +17,7 @@
 > [cppreference — Default constructor](https://en.cppreference.com/w/cpp/language/default_constructor) ·
 > [cppreference — Copy constructor](https://en.cppreference.com/w/cpp/language/copy_constructor) ·
 > [cppreference — Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor) ·
-> [Brown CRP — Copy and Move Constructors](https://cel.cs.brown.edu/crp/idioms/copy_move_constructors.html) ·
+> [Brown CRP — Copy and Move Constructors](https://cel.cs.brown.edu/crp/idioms/constructors/copy_and_move_constructors.html) ·
 > [Stroustrup — The C++ Programming Language, 4th ed.](https://www.stroustrup.com/4th.html)
 >
 ---
@@ -217,5 +217,5 @@ Point::new(x, y) = Point { x, y }
 - [cppreference: Default constructor](https://en.cppreference.com/w/cpp/language/default_constructor)
 - [cppreference: Copy constructor](https://en.cppreference.com/w/cpp/language/copy_constructor)
 - [cppreference: Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor)
-- [Brown CRP: Copy and Move Constructors](https://cel.cs.brown.edu/crp/idioms/copy_move_constructors.html)
+- [Brown CRP: Copy and Move Constructors](https://cel.cs.brown.edu/crp/idioms/constructors/copy_and_move_constructors.html)
 - [Stroustrup — The C++ Programming Language, 4th ed.](https://www.stroustrup.com/4th.html)

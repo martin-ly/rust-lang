@@ -264,7 +264,7 @@ Codeium 提供免费的个人版 AI 自动补全和聊天功能：
 >
 > **[来源: [crates.io](https://crates.io/)]**
 >
-> **来源**: [Amazon Kiro](https://www.aboutamazon.com/news/aws/kiro) · [AWS Developer Blog]
+> **来源**: [Amazon Kiro](https://www.aboutamazon.com/news/aws/amazon-ai-frontier-agents-autonomous-kiro) · [AWS Developer Blog]
 > **Bloom 层级**: 应用 → 分析
 
 Kiro 是 Amazon 于 2025 年发布的 **AI 驱动代码审查与安全分析平台**。

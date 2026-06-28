@@ -18,7 +18,7 @@
 > [Rust How-to Book — Dynamic Typing](https://rust-how-to.org/patterns/dynamic-typing.html) ·
 > [C++ Reference — typeid](https://en.cppreference.com/w/cpp/language/typeid) ·
 > [C++ Reference — dynamic_cast](https://en.cppreference.com/w/cpp/language/dynamic_cast) ·
-> [Brown CRP — RTTI and dynamic_cast](https://cel.cs.brown.edu/crp/idioms/rtti_dynamic_cast.html)
+> [Brown CRP — RTTI and dynamic_cast](https://cel.cs.brown.edu/crp/idioms/rtti.html)
 >
 ---
 
@@ -209,4 +209,4 @@ C++ 的 `dynamic_cast` 基于**子类型关系**的运行时反射：如果对�
 - [Rust How-to Book — Dynamic Typing](https://rust-how-to.org/patterns/dynamic-typing.html)
 - [cppreference: typeid](https://en.cppreference.com/w/cpp/language/typeid)
 - [cppreference: dynamic_cast](https://en.cppreference.com/w/cpp/language/dynamic_cast)
-- [Brown CRP: RTTI and dynamic_cast](https://cel.cs.brown.edu/crp/idioms/rtti_dynamic_cast.html)
+- [Brown CRP: RTTI and dynamic_cast](https://cel.cs.brown.edu/crp/idioms/rtti.html)

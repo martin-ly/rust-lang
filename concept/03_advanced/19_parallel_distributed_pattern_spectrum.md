@@ -592,7 +592,7 @@ fn crdt_commutativity() {
 ---
 
 > **权威来源**:
-> [Herlihy & Shavit — The Art of Multiprocessor Programming](https://www.cs.brown.edu/~mph/HerlihyShavit/) ·
+> [Herlihy & Shavit — The Art of Multiprocessor Programming](https://cs.brown.edu/courses/csci2951-s/) ·
 > [Lynch — Distributed Algorithms](https://mitpress.mit.edu/books/distributed-algorithms) ·
 > [Ongaro & Ousterhout — Raft](https://raft.github.io/raft.pdf) ·
 > [Shapiro et al. — CRDT](https://hal.inria.fr/hal-00932836/document) ·
@@ -769,7 +769,7 @@ fn main() {}
 >
 ## 参考来源
 
-> [来源: [Herlihy & Shavit — The Art of Multiprocessor Programming](https://www.cs.brown.edu/~mph/HerlihyShavit/)]
+> [来源: [Herlihy & Shavit — The Art of Multiprocessor Programming](https://cs.brown.edu/courses/csci2951-s/)]
 > [来源: [Lynch — Distributed Algorithms](https://mitpress.mit.edu/books/distributed-algorithms)]
 > [来源: [Ongaro & Ousterhout — Raft](https://raft.github.io/raft.pdf)]
 > [来源: [Shapiro et al. — CRDT](https://hal.inria.fr/hal-00932836/document)]

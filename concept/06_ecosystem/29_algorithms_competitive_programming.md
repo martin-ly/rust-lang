@@ -682,7 +682,7 @@ mod verification {
 | 竞赛编程训练 | Creusot | ⭐☆☆ 中——学习成本高于时间收益 |
 | 通用业务逻辑 | 单元测试 | ☆☆☆ 低——规格比实现更难写对 |
 
-> [来源: [DO-178C Software Considerations](https://www.rtca.org/product/do-178c-software-considerations-in-airborne-systems-and-equipment-certification)] 航空软件认证要求最高等级代码必须通过形式化方法或大量测试覆盖证明正确性。
+> [来源: [DO-178C Software Considerations](https://www.rtca.org/product/do-178c-electronic/)] 航空软件认证要求最高等级代码必须通过形式化方法或大量测试覆盖证明正确性。
 
 ---
 

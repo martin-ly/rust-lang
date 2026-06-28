@@ -18,7 +18,7 @@
 > [RFC 2873 — Inline Assembly](https://rust-lang.github.io/rfcs//2873-inline-asm.html) ·
 > [Rust By Example — Inline Assembly](https://doc.rust-lang.org/rust-by-example/unsafe/asm.html) ·
 > [s390x Vector Support PR](https://github.com/rust-lang/rust/pull/150551) ·
-> [LLVM SystemZ Backend](https://llvm.org/docs/SystemZ.html)
+> [LLVM SystemZ Backend](https://llvm.org/docs/CompilerWriterInfo.html)
 > **前置依赖**: [Unsafe Rust](03_unsafe.md)
 > **对应 Crate**: [`c03_control_fn`](../../crates/c03_control_fn) (底层控制流)
 
@@ -417,7 +417,7 @@ unsafe {
 | [Rust Reference: Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html) | 权威语法参考 |
 | [RFC 2873](https://rust-lang.github.io/rfcs//2873-inline-asm.html) | 内联汇编设计 RFC |
 | [Rust By Example](https://doc.rust-lang.org/rust-by-example/unsafe/asm.html) | 交互式教程 |
-| [LLVM SystemZ Backend](https://llvm.org/docs/SystemZ.html) | s390x 后端文档 |
+| [LLVM SystemZ Backend](https://llvm.org/docs/CompilerWriterInfo.html) | s390x 后端文档 |
 | [IBM Z Architecture Principles](https://www.ibm.com/docs/en/zos/2.5.0?topic=operations-vector-instructions) | IBM Z 向量指令参考 |
 
 ---
@@ -429,7 +429,7 @@ unsafe {
 | [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html) | ✅ 一级 | 官方语法规范 |
 | [RFC 2873](https://rust-lang.github.io/rfcs//2873-inline-asm.html) | ✅ 一级 | 设计决策记录 |
 | [s390x Vector Support PR](https://github.com/rust-lang/rust/pull/150551) | ✅ 一级 | Rust 1.96 s390x vreg 实现 |
-| [LLVM SystemZ Backend](https://llvm.org/docs/SystemZ.html) | ✅ 二级 | 底层代码生成参考 |
+| [LLVM SystemZ Backend](https://llvm.org/docs/CompilerWriterInfo.html) | ✅ 二级 | 底层代码生成参考 |
 | [IBM Z Vector Instructions](https://www.ibm.com/docs/en/zos/2.5.0?topic=operations-vector-instructions) | ✅ 二级 | 硬件指令集手册 |
 
 ---

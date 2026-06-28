@@ -17,7 +17,7 @@
 > [cppreference — Move Constructors](https://en.cppreference.com/w/cpp/language/move_constructor) ·
 > [cppreference — Move assignment operator](https://en.cppreference.com/w/cpp/language/move_assignment) ·
 > [cppreference — Value categories](https://en.cppreference.com/w/cpp/language/value_category) ·
-> [Brown CRP — Copy and Move Constructors](https://cel.cs.brown.edu/crp/idioms/copy_move_constructors.html) ·
+> [Brown CRP — Copy and Move Constructors](https://cel.cs.brown.edu/crp/idioms/constructors/copy_and_move_constructors.html) ·
 > [StackOverflow — How does Rust provide move semantics?](https://stackoverflow.com/questions/27922584/how-does-rust-provide-move-semantics) ·
 > [The Coded Message — C++ Move Semantics Considered Harmful](https://thecodedmessage.com/posts/cpp-move-harmful/) ·
 > [Stroustrup — The C++ Programming Language, 4th ed.](https://www.stroustrup.com/4th.html)
@@ -226,7 +226,7 @@ move: T@src → T@dst
 - [cppreference: Move Constructors](https://en.cppreference.com/w/cpp/language/move_constructor)
 - [cppreference: Move Assignment Operator](https://en.cppreference.com/w/cpp/language/move_assignment)
 - [cppreference: Value Categories](https://en.cppreference.com/w/cpp/language/value_category)
-- [Brown CRP: Copy and Move Constructors](https://cel.cs.brown.edu/crp/idioms/copy_move_constructors.html)
+- [Brown CRP: Copy and Move Constructors](https://cel.cs.brown.edu/crp/idioms/constructors/copy_and_move_constructors.html)
 - [StackOverflow: How does Rust provide move semantics?](https://stackoverflow.com/questions/27922584/how-does-rust-provide-move-semantics)
 - [The Coded Message: C++ Move Semantics Considered Harmful](https://thecodedmessage.com/posts/cpp-move-harmful/)
 - [Stroustrup — The C++ Programming Language, 4th ed.](https://www.stroustrup.com/4th.html)

@@ -1,0 +1,110 @@
+[
+  {
+    "old_url": "https://docs.microsoft.com/en-us/dotnet/architecture/microservices/multi-container-microservice-net-applications/subscribe-events-in-background-worker-with-iactionscope",
+    "new_url": "https://learn.microsoft.com/en-us/dotnet/architecture/microservices/multi-container-microservice-net-applications/subscribe-events",
+    "status": "replaced",
+    "note": "Current docs drop the '-with-iactionscope' suffix; verified HTTP 200."
+  },
+  {
+    "old_url": "https://letsencrypt.org/docs/rustls/",
+    "new_url": "https://letsencrypt.org/docs/client-options/",
+    "status": "replaced",
+    "note": "Original rustls doc removed; client-options lists Rustls-based clients; verified HTTP 200."
+  },
+  {
+    "old_url": "https://llvm.org/docs/SystemZ.html",
+    "new_url": "https://llvm.org/docs/CompilerWriterInfo.html",
+    "status": "replaced",
+    "note": "SystemZ target doc removed; CompilerWriterInfo links to z/Architecture resources; verified HTTP 200."
+  },
+  {
+    "old_url": "https://martinfowler.com/bliki/OverEngineering.html",
+    "new_url": "https://martinfowler.com/bliki/OverEngineering.html",
+    "status": "archive",
+    "note": "Page returns 404 and archive.org snapshot failed; no replacement found."
+  },
+  {
+    "old_url": "https://www.faa.gov/aircraft/air_cert/design_approvals/criteria/software",
+    "new_url": "https://www.faa.gov/aircraft/air_cert/design_approvals/air_software/",
+    "status": "replaced",
+    "note": "FAA reorganized the URL; verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.levels.fyi/t/rust-engineer/salaries/",
+    "new_url": "https://www.levels.fyi/t/rust-engineer/salaries/",
+    "status": "pending",
+    "note": "HTTP 405 AWS WAF captcha challenge; automated verification blocked. No equivalent replacement found."
+  },
+  {
+    "old_url": "https://www.linuxfoundation.org/press/press-release/sustaining-package-registries-working-group",
+    "new_url": "https://openssf.org/blog/2026/05/06/open-infrastructure-is-not-free-part-ii-the-hidden-cost-of-running-package-registries/",
+    "status": "replaced",
+    "note": "Original press release removed; OpenSSF blog announces the working group; verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.microsoft.com/en-us/research/project/verus/",
+    "new_url": "https://verus-lang.github.io/verus/guide/",
+    "status": "replaced",
+    "note": "Verus project page moved to GitHub Pages guide; verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.microsoft.com/en-us/research/publication/paxos-made-live-an-engineering-perspective/",
+    "new_url": "https://read.seas.harvard.edu/~kohler/class/08w-dsi/chandra07paxos.pdf",
+    "status": "replaced",
+    "note": "Microsoft page 403/404; Harvard course PDF verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.microsoft.com/en-us/research/publication/practical-type-inference-arbitrary-rank-types/",
+    "new_url": "https://www.cambridge.org/core/journals/journal-of-functional-programming/article/practical-type-inference-for-arbitraryrank-types/5339FB9DAB968768874D4C20FA6F8CB6",
+    "status": "replaced",
+    "note": "Cambridge JFP article page verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.rtca.org/product/do-178c-software-considerations-in-airborne-systems-and-equipment-certification",
+    "new_url": "https://www.rtca.org/product/do-178c-electronic/",
+    "status": "replaced",
+    "note": "RTCA store URL changed; verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.ssi.gouv.fr/en/guide/rust-secure-development-guide/",
+    "new_url": "https://messervices.cyber.gouv.fr/documents-guides/anssi-guide-programming_rules_to_develop_secure_applications_with_rust-v1.0.pdf",
+    "status": "replaced",
+    "note": "ANSSI moved the guide to messervices.cyber.gouv.fr PDF; verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.stroustrup.com/ETAPS-corrected.pdf",
+    "new_url": "https://www.stroustrup.com/ETAPS-corrected-draft.pdf",
+    "status": "replaced",
+    "note": "Draft version available; verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.stroustrup.com/FSM/0cost.pdf",
+    "new_url": "https://www.stroustrup.com/FSM/0cost.pdf",
+    "status": "archive",
+    "note": "No replacement found; stroustrup.com returns 404."
+  },
+  {
+    "old_url": "https://www.stroustrup.com/new_value-terminology.pdf",
+    "new_url": "https://www.stroustrup.com/terminology.pdf",
+    "status": "replaced",
+    "note": "Current terminology page; verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.typescriptlang.org/docs/handbook/compiler-api.html",
+    "new_url": "https://github.com/microsoft/TypeScript/wiki/Using-the-Compiler-API",
+    "status": "replaced",
+    "note": "TypeScript handbook restructured; official compiler API guide is now the GitHub wiki page; verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.wfmc.org/standards/reference-model",
+    "new_url": "https://wfmc.org/public-documents/",
+    "status": "replaced",
+    "note": "Reference model doc now under public documents; verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.wfmc.org/standards/terminology",
+    "new_url": "https://wfmc.org/wp-content/uploads/2022/09/TC-1011_term_glossary_v3.pdf",
+    "status": "replaced",
+    "note": "Terminology glossary PDF; verified HTTP 200."
+  }
+]
