@@ -17,20 +17,20 @@
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-- [Loom 并发模型检查形式化分析](.#loom-并发模型检查形式化分析)
-  - [目录](.#目录)
-  - [1. 引言](.#1-引言)
-  - [2. 执行路径探索](.#2-执行路径探索)
-    - [定理 2.1 (穷尽探索)](.#定理-21-穷尽探索)
-  - [3. 原子操作](.#3-原子操作)
-    - [定理 3.1 (顺序一致性验证)](.#定理-31-顺序一致性验证)
-  - [4. 内存模型](.#4-内存模型)
-    - [定理 4.1 (Release-Acquire)](.#定理-41-release-acquire)
-  - [5. 反例](.#5-反例)
-    - [反例 5.1 (状态爆炸)](.#反例-51-状态爆炸)
+- [Loom 并发模型检查形式化分析](#loom-并发模型检查形式化分析)
+  - [目录](#目录)
+  - [1. 引言](#1-引言)
+  - [2. 执行路径探索](#2-执行路径探索)
+    - [定理 2.1 (穷尽探索)](#定理-21-穷尽探索)
+  - [3. 原子操作](#3-原子操作)
+    - [定理 3.1 (顺序一致性验证)](#定理-31-顺序一致性验证)
+  - [4. 内存模型](#4-内存模型)
+    - [定理 4.1 (Release-Acquire)](#定理-41-release-acquire)
+  - [5. 反例](#5-反例)
+    - [反例 5.1 (状态爆炸)](#反例-51-状态爆炸)
 <a id="定理数量-4个"></a>
-  - [*定理数量: 4个*](.#定理数量-4个)
-  - [权威来源索引](.#权威来源索引)
+  - [*定理数量: 4个*](#定理数量-4个)
+  - [权威来源索引](#权威来源索引)
 
 ---
 

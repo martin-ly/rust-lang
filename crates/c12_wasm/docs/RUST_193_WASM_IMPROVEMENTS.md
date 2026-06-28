@@ -9,20 +9,20 @@
 
 ## 目录
 
-- [Rust 1.93.0 WebAssembly 改进文档](.#rust-1930-webassembly-改进文档)
-  - [目录](.#目录)
-  - [概述](.#概述)
-  - [Rust 1.93.0 核心特性在 WASM 中的应用](.#rust-1930-核心特性在-wasm-中的应用)
-    - [1. MaybeUninit 增强 API](.#1-maybeuninit-增强-api)
-    - [2. String/Vec into\_raw\_parts](.#2-stringvec-into_raw_parts)
-    - [3. VecDeque pop\_front\_if / pop\_back\_if](.#3-vecdeque-pop_front_if--pop_back_if)
-    - [4. slice.as\_array()](.#4-sliceas_array)
-    - [5. Duration::from\_nanos\_u128](.#5-durationfrom_nanos_u128)
-    - [6. char::MAX\_LEN\_UTF8 / MAX\_LEN\_UTF16](.#6-charmax_len_utf8--max_len_utf16)
-    - [7. fmt::from\_fn](.#7-fmtfrom_fn)
-  - [实现模块](.#实现模块)
-  - [相关文档](.#相关文档)
-  - [**最后更新**: 2026-02-12](.#最后更新-2026-02-12)
+- [Rust 1.93.0 WebAssembly 改进文档](#rust-1930-webassembly-改进文档)
+  - [目录](#目录)
+  - [概述](#概述)
+  - [Rust 1.93.0 核心特性在 WASM 中的应用](#rust-1930-核心特性在-wasm-中的应用)
+    - [1. MaybeUninit 增强 API](#1-maybeuninit-增强-api)
+    - [2. String/Vec into\_raw\_parts](#2-stringvec-into_raw_parts)
+    - [3. VecDeque pop\_front\_if / pop\_back\_if](#3-vecdeque-pop_front_if--pop_back_if)
+    - [4. slice.as\_array()](#4-sliceas_array)
+    - [5. Duration::from\_nanos\_u128](#5-durationfrom_nanos_u128)
+    - [6. char::MAX\_LEN\_UTF8 / MAX\_LEN\_UTF16](#6-charmax_len_utf8--max_len_utf16)
+    - [7. fmt::from\_fn](#7-fmtfrom_fn)
+  - [实现模块](#实现模块)
+  - [相关文档](#相关文档)
+  - [**最后更新**: 2026-02-12](#最后更新-2026-02-12)
 
 ---
 

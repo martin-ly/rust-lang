@@ -17,21 +17,21 @@
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-- [Tonic Health/Reflection形式化分析](.#tonic-healthreflection形式化分析)
-  - [目录](.#目录)
-  - [1. 引言](.#1-引言)
-  - [2. 健康检查协议](.#2-健康检查协议)
-    - [定理 2.1 (健康状态机)](.#定理-21-健康状态机)
-    - [定理 2.2 (watch语义)](.#定理-22-watch语义)
-  - [3. 服务反射](.#3-服务反射)
-    - [定理 3.1 (运行时元数据)](.#定理-31-运行时元数据)
-  - [4. 实现安全](.#4-实现安全)
-    - [定理 4.1 (敏感信息)](.#定理-41-敏感信息)
-  - [5. 反例](.#5-反例)
-    - [反例 5.1 (健康检查竞争)](.#反例-51-健康检查竞争)
+- [Tonic Health/Reflection形式化分析](#tonic-healthreflection形式化分析)
+  - [目录](#目录)
+  - [1. 引言](#1-引言)
+  - [2. 健康检查协议](#2-健康检查协议)
+    - [定理 2.1 (健康状态机)](#定理-21-健康状态机)
+    - [定理 2.2 (watch语义)](#定理-22-watch语义)
+  - [3. 服务反射](#3-服务反射)
+    - [定理 3.1 (运行时元数据)](#定理-31-运行时元数据)
+  - [4. 实现安全](#4-实现安全)
+    - [定理 4.1 (敏感信息)](#定理-41-敏感信息)
+  - [5. 反例](#5-反例)
+    - [反例 5.1 (健康检查竞争)](#反例-51-健康检查竞争)
 <a id="定理数量-6个"></a>
-  - [*定理数量: 6个*](.#定理数量-6个)
-  - [权威来源索引](.#权威来源索引)
+  - [*定理数量: 6个*](#定理数量-6个)
+  - [权威来源索引](#权威来源索引)
 
 ---
 

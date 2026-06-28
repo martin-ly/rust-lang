@@ -17,25 +17,25 @@
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-- [OpenTelemetry Rust形式化分析](.#opentelemetry-rust形式化分析)
-  - [目录](.#目录)
-  - [1. 引言](.#1-引言)
-  - [2. TracerProvider架构](.#2-tracerprovider架构)
-    - [定理 2.1 (全局注册)](.#定理-21-全局注册)
-  - [3. Span上下文传播](.#3-span上下文传播)
-    - [定理 3.1 (上下文传递)](.#定理-31-上下文传递)
-    - [定理 3.2 (Baggage传播)](.#定理-32-baggage传播)
-  - [4. 采样策略](.#4-采样策略)
-    - [定理 4.1 (采样决策)](.#定理-41-采样决策)
-  - [5. 导出器模型](.#5-导出器模型)
-    - [定理 5.1 (批量导出)](.#定理-51-批量导出)
-  - [6. 反例](.#6-反例)
-    - [反例 6.1 (Span未结束)](.#反例-61-span未结束)
-    - [反例 6.2 (阻塞导出器)](.#反例-62-阻塞导出器)
+- [OpenTelemetry Rust形式化分析](#opentelemetry-rust形式化分析)
+  - [目录](#目录)
+  - [1. 引言](#1-引言)
+  - [2. TracerProvider架构](#2-tracerprovider架构)
+    - [定理 2.1 (全局注册)](#定理-21-全局注册)
+  - [3. Span上下文传播](#3-span上下文传播)
+    - [定理 3.1 (上下文传递)](#定理-31-上下文传递)
+    - [定理 3.2 (Baggage传播)](#定理-32-baggage传播)
+  - [4. 采样策略](#4-采样策略)
+    - [定理 4.1 (采样决策)](#定理-41-采样决策)
+  - [5. 导出器模型](#5-导出器模型)
+    - [定理 5.1 (批量导出)](#定理-51-批量导出)
+  - [6. 反例](#6-反例)
+    - [反例 6.1 (Span未结束)](#反例-61-span未结束)
+    - [反例 6.2 (阻塞导出器)](#反例-62-阻塞导出器)
 <a id="定理数量-7个"></a>
-  - [*定理数量: 7个*](.#定理数量-7个)
-  - [权威来源索引](.#权威来源索引)
-  - [权威来源索引](.#权威来源索引-1)
+  - [*定理数量: 7个*](#定理数量-7个)
+  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 

@@ -21,11 +21,11 @@
 
 ## 目录
 
-- [01. 线程与所有权 (Threads and Ownership)](.#01-线程与所有权-threads-and-ownership)
-  - [📋 本文内容](.#-本文内容)
-  - [目录](.#目录)
-  - [1.1. 创建新线程: `thread::spawn`](.#11-创建新线程-threadspawn)
-  - [1.2. `move` 闭包与所有权](.#12-move-闭包与所有权)
+- [01. 线程与所有权 (Threads and Ownership)](#01-线程与所有权-threads-and-ownership)
+  - [📋 本文内容](#-本文内容)
+  - [目录](#目录)
+  - [1.1. 创建新线程: `thread::spawn`](#11-创建新线程-threadspawn)
+  - [1.2. `move` 闭包与所有权](#12-move-闭包与所有权)
 
 ## 1.1. 创建新线程: `thread::spawn`
 

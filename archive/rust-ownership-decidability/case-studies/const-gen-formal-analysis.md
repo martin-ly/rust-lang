@@ -17,20 +17,20 @@
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-- [Const-Gen 编译时生成形式化分析](.#const-gen-编译时生成形式化分析)
-  - [目录](.#目录)
-  - [1. 引言](.#1-引言)
-  - [2. Const泛型](.#2-const泛型)
-    - [定理 2.1 (常量参数)](.#定理-21-常量参数)
-  - [3. 编译时计算](.#3-编译时计算)
-    - [定理 3.1 (const fn)](.#定理-31-const-fn)
-  - [4. 类型级编程](.#4-类型级编程)
-    - [定理 4.1 (类型状态机)](.#定理-41-类型状态机)
-  - [5. 反例](.#5-反例)
-    - [反例 5.1 (泛型滥用)](.#反例-51-泛型滥用)
+- [Const-Gen 编译时生成形式化分析](#const-gen-编译时生成形式化分析)
+  - [目录](#目录)
+  - [1. 引言](#1-引言)
+  - [2. Const泛型](#2-const泛型)
+    - [定理 2.1 (常量参数)](#定理-21-常量参数)
+  - [3. 编译时计算](#3-编译时计算)
+    - [定理 3.1 (const fn)](#定理-31-const-fn)
+  - [4. 类型级编程](#4-类型级编程)
+    - [定理 4.1 (类型状态机)](#定理-41-类型状态机)
+  - [5. 反例](#5-反例)
+    - [反例 5.1 (泛型滥用)](#反例-51-泛型滥用)
 <a id="定理数量-4个"></a>
-  - [*定理数量: 4个*](.#定理数量-4个)
-  - [权威来源索引](.#权威来源索引)
+  - [*定理数量: 4个*](#定理数量-4个)
+  - [权威来源索引](#权威来源索引)
 
 ---
 

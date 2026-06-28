@@ -7,31 +7,31 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [文档中心 - 主索引](.#文档中心---主索引)
-  - [📑 目录](.#-目录)
-  - [按主题快速导航](.#按主题快速导航)
-  - [按角色导航](.#按角色导航)
-  - [01 学习路径与导航](.#01-学习路径与导航)
-  - [02 参考与速查](.#02-参考与速查)
-    - [速查卡详细索引](.#速查卡详细索引)
-  - [03 理论与形式化](.#03-理论与形式化)
-    - [形式化方法研究](.#形式化方法研究)
-    - [类型理论研究](.#类型理论研究)
-    - [软件设计理论](.#软件设计理论)
-  - [04 思维表征](.#04-思维表征)
-  - [05 专题指南](.#05-专题指南)
-  - [06 工具链与版本](.#06-工具链与版本)
-  - [07 项目元文档](.#07-项目元文档)
-  - [🔗 双向链接验证](.#-双向链接验证)
-    - [跨文档映射网络统计](.#跨文档映射网络统计)
-    - [概念映射统计](.#概念映射统计)
-    - [验证清单](.#验证清单)
-  - [其他](.#其他)
-  - [相关链接](.#相关链接)
-    - [核心交叉引用文档](.#核心交叉引用文档)
-    - [快速入口](.#快速入口)
-  - [相关概念](.#相关概念)
-  - [权威来源索引](.#权威来源索引)
+- [文档中心 - 主索引](#文档中心---主索引)
+  - [📑 目录](#-目录)
+  - [按主题快速导航](#按主题快速导航)
+  - [按角色导航](#按角色导航)
+  - [01 学习路径与导航](#01-学习路径与导航)
+  - [02 参考与速查](#02-参考与速查)
+    - [速查卡详细索引](#速查卡详细索引)
+  - [03 理论与形式化](#03-理论与形式化)
+    - [形式化方法研究](#形式化方法研究)
+    - [类型理论研究](#类型理论研究)
+    - [软件设计理论](#软件设计理论)
+  - [04 思维表征](#04-思维表征)
+  - [05 专题指南](#05-专题指南)
+  - [06 工具链与版本](#06-工具链与版本)
+  - [07 项目元文档](#07-项目元文档)
+  - [🔗 双向链接验证](#-双向链接验证)
+    - [跨文档映射网络统计](#跨文档映射网络统计)
+    - [概念映射统计](#概念映射统计)
+    - [验证清单](#验证清单)
+  - [其他](#其他)
+  - [相关链接](#相关链接)
+    - [核心交叉引用文档](#核心交叉引用文档)
+    - [快速入口](#快速入口)
+  - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-13
 > **最后更新**: 2026-05-08
@@ -54,13 +54,13 @@
 | **📋 完整结构总览** | DOCS_STRUCTURE_OVERVIEW | 按 00_COMPREHENSIVE_SUMMARY 格式 100% 覆盖 docs | ←→ [CROSS_REFERENCE_INDEX](../../research_notes_2026_06_25/10_cross_reference_index.md) |
 | **🔗 跨文档映射网络** | [DOCUMENTATION_CROSS_REFERENCE_GUIDE](../../../docs/07_project/07_documentation_cross_reference_guide.md) | 全文档双向链接、概念映射、定理引用 | ←→ [CROSS_REFERENCE_INDEX](../../research_notes_2026_06_25/10_cross_reference_index.md) |
 | **📄 一页纸总结** | [ONE_PAGE_SUMMARY_TEMPLATE](07_project/07_one_page_summary_template.md) | C01–C12 模块速览（12/12 完成） | ←→ 各模块主索引 |
-| **📚 学习路径** | [01_learning](.#01-学习路径与导航) | 学习规划、官方资源映射 | ←→ [quick_reference](.#02-参考与速查) |
-| **⚡ 速查参考** | [02_reference](.#02-参考与速查) | 20 个速查卡、边界特例、标准库 | ←→ [05_guides](.#05-专题指南) ←→ [research_notes](.#03-理论与形式化) |
-| **🔬 形式化理论** | [03_theory](.#03-理论与形式化) | 研究笔记、证明索引 | ←→ [04_thinking](.#04-思维表征) ←→ [05_guides](.#05-专题指南) |
-| **🧠 思维表征** | [04_thinking](.#04-思维表征) | 思维导图、决策树、证明树、矩阵 | ←→ [research_notes](.#03-理论与形式化) |
-| **📖 专题指南** | [05_guides](.#05-专题指南) | 异步、线程、WASM、Unsafe 等 | ←→ [02_reference](.#02-参考与速查) ←→ [research_notes](.#03-理论与形式化) |
-| **🛠️ 工具链** | [06_toolchain](.#06-工具链与版本) | 编译器、Cargo、版本演进 | ←→ [research_notes/type_theory](.#03-理论与形式化) |
-| **⚙️ 项目元文档** | [07_project](.#07-项目元文档) | 知识结构、版本追踪、报告 | ←→ [research_notes](.#03-理论与形式化) |
+| **📚 学习路径** | [01_learning](#01-学习路径与导航) | 学习规划、官方资源映射 | ←→ [quick_reference](#02-参考与速查) |
+| **⚡ 速查参考** | [02_reference](#02-参考与速查) | 20 个速查卡、边界特例、标准库 | ←→ [05_guides](#05-专题指南) ←→ [research_notes](#03-理论与形式化) |
+| **🔬 形式化理论** | [03_theory](#03-理论与形式化) | 研究笔记、证明索引 | ←→ [04_thinking](#04-思维表征) ←→ [05_guides](#05-专题指南) |
+| **🧠 思维表征** | [04_thinking](#04-思维表征) | 思维导图、决策树、证明树、矩阵 | ←→ [research_notes](#03-理论与形式化) |
+| **📖 专题指南** | [05_guides](#05-专题指南) | 异步、线程、WASM、Unsafe 等 | ←→ [02_reference](#02-参考与速查) ←→ [research_notes](#03-理论与形式化) |
+| **🛠️ 工具链** | [06_toolchain](#06-工具链与版本) | 编译器、Cargo、版本演进 | ←→ [research_notes/type_theory](#03-理论与形式化) |
+| **⚙️ 项目元文档** | [07_project](#07-项目元文档) | 知识结构、版本追踪、报告 | ←→ [research_notes](#03-理论与形式化) |
 
 ---
 
@@ -70,10 +70,10 @@
 
 | 角色 | 推荐路径 | 关键入口 |
 | :--- | :--- | :--- |
-| **初学者** | 学习路径 → 速查卡 → C01 模块 | [01_learning](.#01-学习路径与导航) → [quick_reference/ownership_cheatsheet](../../../docs/02_reference/quick_reference/02_ownership_cheatsheet.md) → [c01_ownership_borrow_scope](../../../crates/c01_ownership_borrow_scope/docs/README.md) |
-| **开发者** | 专题指南 → 速查卡 → 边界特例 | [05_guides](.#05-专题指南) → [quick_reference](.#02-参考与速查) → [EDGE_CASES](../../../docs/02_reference/02_edge_cases_and_special_cases.md) |
-| **研究者** | 形式化理论 → 思维表征 → 证明索引 | [research_notes/formal_methods](../../research_notes_2026_06_25/formal_methods/README.md) → [04_thinking](.#04-思维表征) → [PROOF_INDEX](../../research_notes_2026_06_25/10_proof_index.md) |
-| **维护者** | 项目元文档 → 版本追踪 → 跨文档映射 | [07_project](.#07-项目元文档) → [CROSS_REFERENCE_GUIDE](../../../docs/07_project/07_documentation_cross_reference_guide.md) → [CROSS_REFERENCE_INDEX](../../research_notes_2026_06_25/10_cross_reference_index.md) |
+| **初学者** | 学习路径 → 速查卡 → C01 模块 | [01_learning](#01-学习路径与导航) → [quick_reference/ownership_cheatsheet](../../../docs/02_reference/quick_reference/02_ownership_cheatsheet.md) → [c01_ownership_borrow_scope](../../../crates/c01_ownership_borrow_scope/docs/README.md) |
+| **开发者** | 专题指南 → 速查卡 → 边界特例 | [05_guides](#05-专题指南) → [quick_reference](#02-参考与速查) → [EDGE_CASES](../../../docs/02_reference/02_edge_cases_and_special_cases.md) |
+| **研究者** | 形式化理论 → 思维表征 → 证明索引 | [research_notes/formal_methods](../../research_notes_2026_06_25/formal_methods/README.md) → [04_thinking](#04-思维表征) → [PROOF_INDEX](../../research_notes_2026_06_25/10_proof_index.md) |
+| **维护者** | 项目元文档 → 版本追踪 → 跨文档映射 | [07_project](#07-项目元文档) → [CROSS_REFERENCE_GUIDE](../../../docs/07_project/07_documentation_cross_reference_guide.md) → [CROSS_REFERENCE_INDEX](../../research_notes_2026_06_25/10_cross_reference_index.md) |
 
 ---
 
@@ -83,7 +83,7 @@
 
 | 文档 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
-| [01_learning_path_planning.md](../../../docs/01_learning/01_learning_path_planning.md) | 学习路径规划 | → [quick_reference](.#02-参考与速查) → [01_learning/OFFICIAL_RESOURCES_MAPPING](01_learning/01_official_resources_mapping.md) |
+| [01_learning_path_planning.md](../../../docs/01_learning/01_learning_path_planning.md) | 学习路径规划 | → [quick_reference](#02-参考与速查) → [01_learning/OFFICIAL_RESOURCES_MAPPING](01_learning/01_official_resources_mapping.md) |
 | [01_official_resources_mapping.md](01_learning/01_official_resources_mapping.md) | 本项目 ↔ The Rust Book / Reference / RBE | → crates/*/docs/ → [QUICK_REFERENCE](../../research_notes_2026_06_25/10_quick_reference.md) |
 
 ---
@@ -94,7 +94,7 @@
 
 | 文档/目录 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
-| [quick_reference/](../../../docs/02_reference/quick_reference/README.md) | 20 个速查卡（含 AI/ML、类型、所有权、异步等） | → [05_guides](.#05-专题指南) → [research_notes](.#03-理论与形式化) |
+| [quick_reference/](../../../docs/02_reference/quick_reference/README.md) | 20 个速查卡（含 AI/ML、类型、所有权、异步等） | → [05_guides](#05-专题指南) → [research_notes](#03-理论与形式化) |
 | [ALIGNMENT_GUIDE.md](../../../docs/02_reference/ALIGNMENT_GUIDE.md) | 对齐知识综合（内存/格式化/unsafe/缓存行） | → [PERFORMANCE_TUNING_GUIDE](../../../docs/05_guides/05_performance_tuning_guide.md) → UNSAFE_RUST_GUIDE |
 | [02_error_code_mapping.md](../../../docs/02_reference/02_error_code_mapping.md) | 编译器错误码 → 本项目文档映射 | → [TROUBLESHOOTING_GUIDE](../../../docs/05_guides/05_troubleshooting_guide.md) → [research_notes/formal_methods](../../research_notes_2026_06_25/formal_methods/README.md) |
 | [02_edge_cases_and_special_cases.md](../../../docs/02_reference/02_edge_cases_and_special_cases.md) | 空集、零长度、溢出等边界特例 | → [SAFE_DECIDABLE_MECHANISMS](../../research_notes_2026_06_25/10_safe_decidable_mechanisms_overview.md) → [SAFE_UNSAFE_ANALYSIS](../../../docs/research_notes/10_safe_unsafe_comprehensive_analysis.md) |
@@ -136,12 +136,12 @@
 
 | 文档/目录 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
-| [research_notes/](../../../docs/research_notes/README.md) | 形式化方法、类型理论、软件设计理论（主内容） | → [04_thinking](.#04-思维表征) → [05_guides](.#05-专题指南) |
+| [research_notes/](../../../docs/research_notes/README.md) | 形式化方法、类型理论、软件设计理论（主内容） | → [04_thinking](#04-思维表征) → [05_guides](#05-专题指南) |
 | [00_ORGANIZATION_AND_NAVIGATION](../../research_notes_2026_06_25/10_00_organization_and_navigation.md) | 研究笔记组织架构与按目标导航（首次使用入口） | → [00_COMPREHENSIVE_SUMMARY](../../research_notes_2026_06_25/10_00_comprehensive_summary.md) |
 | [00_COMPREHENSIVE_SUMMARY](../../research_notes_2026_06_25/10_00_comprehensive_summary.md) | 完整总结综合（项目全貌、知识地图、论证总览） | → [ARGUMENTATION_CHAIN_AND_FLOW](../../research_notes_2026_06_25/10_argumentation_chain_and_flow.md) → [HIERARCHICAL_MAPPING](../../research_notes_2026_06_25/10_hierarchical_mapping_and_summary.md) |
 | [CROSS_REFERENCE_INDEX](../../research_notes_2026_06_25/10_cross_reference_index.md) | **跨文档映射网络** - 双向链接表、概念映射、定理引用 | → [DOCUMENTATION_CROSS_REFERENCE_GUIDE](../../../docs/07_project/07_documentation_cross_reference_guide.md) → 所有研究笔记 |
 | [ARGUMENTATION_CHAIN_AND_FLOW](../../research_notes_2026_06_25/10_argumentation_chain_and_flow.md) | 论证脉络关系与论证思路（DAG、文档依赖、推导链） | → [FORMAL_FULL_MODEL_OVERVIEW](../../research_notes_2026_06_25/10_formal_full_model_overview.md) → [PROOF_INDEX](../../research_notes_2026_06_25/10_proof_index.md) |
-| [HIERARCHICAL_MAPPING_AND_SUMMARY](../../research_notes_2026_06_25/10_hierarchical_mapping_and_summary.md) | 层次化映射总结（文档树、概念↔定理、文档↔思维表征） | → [04_thinking](.#04-思维表征) → [PROOF_INDEX](../../research_notes_2026_06_25/10_proof_index.md) |
+| [HIERARCHICAL_MAPPING_AND_SUMMARY](../../research_notes_2026_06_25/10_hierarchical_mapping_and_summary.md) | 层次化映射总结（文档树、概念↔定理、文档↔思维表征） | → [04_thinking](#04-思维表征) → [PROOF_INDEX](../../research_notes_2026_06_25/10_proof_index.md) |
 | [rust-formal-engineering-system/](../../../docs/rust-formal-engineering-system/README.md) | 形式化工程系统索引（映射到 research_notes） | → [research_notes/formal_methods](../../research_notes_2026_06_25/formal_methods/README.md) → [research_notes/type_theory](../../../docs/research_notes/type_theory/README.md) |
 | [research_notes/10_proof_index.md](../../research_notes_2026_06_25/10_proof_index.md) | 公理-定理-证明索引 | → [CORE_THEOREMS_FULL_PROOFS](../../research_notes_2026_06_25/10_core_theorems_full_proofs.md) → [formal_methods/*](../../research_notes_2026_06_25/formal_methods/README.md) |
 | [FORMAL_PROOF_SYSTEM_GUIDE](../../research_notes_2026_06_25/10_formal_proof_system_guide.md) | 形式化证明系统指南 | → [formal_methods/](../../research_notes_2026_06_25/formal_methods/README.md) → [type_theory/](../../../docs/research_notes/type_theory/README.md) |

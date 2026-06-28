@@ -15,22 +15,22 @@
 
 ## 目录
 
-- [Rust 1.98 Nightly 前瞻速查表](.#rust-198-nightly-前瞻速查表)
-  - [目录](.#目录)
-  - [语言特性](.#语言特性)
-    - [`gen` 块 — 原生生成器](.#gen-块--原生生成器)
-    - [`for await` — 异步迭代语法糖](.#for-await--异步迭代语法糖)
-    - [`derive(CoercePointee)` — 智能指针自动推导](.#derivecoercepointee--智能指针自动推导)
-    - [`never_type` 推进稳定化](.#never_type-推进稳定化)
+- [Rust 1.98 Nightly 前瞻速查表](#rust-198-nightly-前瞻速查表)
+  - [目录](#目录)
+  - [语言特性](#语言特性)
+    - [`gen` 块 — 原生生成器](#gen-块--原生生成器)
+    - [`for await` — 异步迭代语法糖](#for-await--异步迭代语法糖)
+    - [`derive(CoercePointee)` — 智能指针自动推导](#derivecoercepointee--智能指针自动推导)
+    - [`never_type` 推进稳定化](#never_type-推进稳定化)
     - [函数对齐 `#[rustc_align]`](#函数对齐-rustc_align)
-    - [调试断点 `breakpoint`](.#调试断点-breakpoint)
-  - [核心标准库 API (进行中稳定化)](.#核心标准库-api-进行中稳定化)
-  - [快速参考示例](.#快速参考示例)
-    - [惰性斐波那契序列](.#惰性斐波那契序列)
-    - [异步流求和](.#异步流求和)
-    - [自定义智能指针](.#自定义智能指针)
-  - [Feature Gate 清单](.#feature-gate-清单)
-  - [相关链接](.#相关链接)
+    - [调试断点 `breakpoint`](#调试断点-breakpoint)
+  - [核心标准库 API (进行中稳定化)](#核心标准库-api-进行中稳定化)
+  - [快速参考示例](#快速参考示例)
+    - [惰性斐波那契序列](#惰性斐波那契序列)
+    - [异步流求和](#异步流求和)
+    - [自定义智能指针](#自定义智能指针)
+  - [Feature Gate 清单](#feature-gate-清单)
+  - [相关链接](#相关链接)
 
 ---
 

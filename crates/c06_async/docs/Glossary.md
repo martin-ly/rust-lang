@@ -15,22 +15,22 @@
 
 ## 📊 目录
 
-- [C06 异步编程: 术语表 (Glossary)](.#c06-异步编程-术语表-glossary)
-  - [📊 目录](.#-目录)
-  - [📋 术语索引](.#-术语索引)
-  - [术语详解](.#术语详解)
-    - [`async`/`await`](.#asyncawait)
-    - [`Future`](.#future)
-    - [运行时 (Runtime)](.#运行时-runtime)
-    - [执行器 (Executor)](.#执行器-executor)
-    - [`Pin<T>`](.#pint)
-    - [`Unpin`](.#unpin)
-    - [`Stream`](.#stream)
-    - [`Sink`](.#sink)
-    - [函数颜色 (Function Coloring)](.#函数颜色-function-coloring)
-    - [`Waker`](.#waker)
-    - [`async-trait`](.#async-trait)
-  - [📚 延伸阅读](.#-延伸阅读)
+- [C06 异步编程: 术语表 (Glossary)](#c06-异步编程-术语表-glossary)
+  - [📊 目录](#-目录)
+  - [📋 术语索引](#-术语索引)
+  - [术语详解](#术语详解)
+    - [`async`/`await`](#asyncawait)
+    - [`Future`](#future)
+    - [运行时 (Runtime)](#运行时-runtime)
+    - [执行器 (Executor)](#执行器-executor)
+    - [`Pin<T>`](#pint)
+    - [`Unpin`](#unpin)
+    - [`Stream`](#stream)
+    - [`Sink`](#sink)
+    - [函数颜色 (Function Coloring)](#函数颜色-function-coloring)
+    - [`Waker`](#waker)
+    - [`async-trait`](#async-trait)
+  - [📚 延伸阅读](#-延伸阅读)
 
 **最后更新**: 2025-10-19
 **适用版本**: Rust 1.75+
@@ -40,26 +40,26 @@
 
 ## 📋 术语索引
 
-[A](.#asyncawait) | [E](.#执行器-executor) | [F](.#future) | [P](.#pint) | [S](.#stream) | [U](.#unpin) | [W](.#waker)
+[A](#asyncawait) | [E](#执行器-executor) | [F](#future) | [P](#pint) | [S](#stream) | [U](#unpin) | [W](#waker)
 
 **快速跳转**:
 
-- [C06 异步编程: 术语表 (Glossary)](.#c06-异步编程-术语表-glossary)
-  - [📊 目录](.#-目录)
-  - [📋 术语索引](.#-术语索引)
-  - [术语详解](.#术语详解)
-    - [`async`/`await`](.#asyncawait)
-    - [`Future`](.#future)
-    - [运行时 (Runtime)](.#运行时-runtime)
-    - [执行器 (Executor)](.#执行器-executor)
-    - [`Pin<T>`](.#pint)
-    - [`Unpin`](.#unpin)
-    - [`Stream`](.#stream)
-    - [`Sink`](.#sink)
-    - [函数颜色 (Function Coloring)](.#函数颜色-function-coloring)
-    - [`Waker`](.#waker)
-    - [`async-trait`](.#async-trait)
-  - [📚 延伸阅读](.#-延伸阅读)
+- [C06 异步编程: 术语表 (Glossary)](#c06-异步编程-术语表-glossary)
+  - [📊 目录](#-目录)
+  - [📋 术语索引](#-术语索引)
+  - [术语详解](#术语详解)
+    - [`async`/`await`](#asyncawait)
+    - [`Future`](#future)
+    - [运行时 (Runtime)](#运行时-runtime)
+    - [执行器 (Executor)](#执行器-executor)
+    - [`Pin<T>`](#pint)
+    - [`Unpin`](#unpin)
+    - [`Stream`](#stream)
+    - [`Sink`](#sink)
+    - [函数颜色 (Function Coloring)](#函数颜色-function-coloring)
+    - [`Waker`](#waker)
+    - [`async-trait`](#async-trait)
+  - [📚 延伸阅读](#-延伸阅读)
 
 ---
 

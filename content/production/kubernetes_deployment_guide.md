@@ -8,20 +8,20 @@
 
 ## 📋 目录
 
-- [Rust 服务 Kubernetes 部署指南](.#rust-服务-kubernetes-部署指南)
-  - [📋 目录](.#-目录)
-  - [🎯 部署策略概览](.#-部署策略概览)
-  - [📦 容器化](.#-容器化)
-    - [1. 多阶段 Dockerfile](.#1-多阶段-dockerfile)
-    - [2. 镜像优化](.#2-镜像优化)
-  - [☸️ Kubernetes 资源配置](.#️-kubernetes-资源配置)
-    - [1. Deployment](.#1-deployment)
-    - [2. Service](.#2-service)
-    - [3. ConfigMap / Secret](.#3-configmap--secret)
-    - [4. HorizontalPodAutoscaler](.#4-horizontalpodautoscaler)
-  - [🔒 安全最佳实践](.#-安全最佳实践)
-  - [📊 监控与可观测性](.#-监控与可观测性)
-  - [🔗 参考资源](.#-参考资源)
+- [Rust 服务 Kubernetes 部署指南](#rust-服务-kubernetes-部署指南)
+  - [📋 目录](#-目录)
+  - [🎯 部署策略概览](#-部署策略概览)
+  - [📦 容器化](#-容器化)
+    - [1. 多阶段 Dockerfile](#1-多阶段-dockerfile)
+    - [2. 镜像优化](#2-镜像优化)
+  - [☸️ Kubernetes 资源配置](#️-kubernetes-资源配置)
+    - [1. Deployment](#1-deployment)
+    - [2. Service](#2-service)
+    - [3. ConfigMap / Secret](#3-configmap--secret)
+    - [4. HorizontalPodAutoscaler](#4-horizontalpodautoscaler)
+  - [🔒 安全最佳实践](#-安全最佳实践)
+  - [📊 监控与可观测性](#-监控与可观测性)
+  - [🔗 参考资源](#-参考资源)
 
 ---
 

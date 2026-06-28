@@ -17,21 +17,21 @@
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-- [Moka 并发缓存形式化分析](.#moka-并发缓存形式化分析)
-  - [目录](.#目录)
-  - [1. 引言](.#1-引言)
-  - [2. 架构设计](.#2-架构设计)
-    - [定理 2.1 (分段锁)](.#定理-21-分段锁)
-    - [定理 2.2 (无锁读取)](.#定理-22-无锁读取)
-  - [3. 驱逐策略](.#3-驱逐策略)
-    - [定理 3.1 (Window-TinyLFU)](.#定理-31-window-tinylfu)
-  - [4. TTL支持](.#4-ttl支持)
-    - [定理 4.1 (过期策略)](.#定理-41-过期策略)
-  - [5. 反例](.#5-反例)
-    - [反例 5.1 (缓存雪崩)](.#反例-51-缓存雪崩)
+- [Moka 并发缓存形式化分析](#moka-并发缓存形式化分析)
+  - [目录](#目录)
+  - [1. 引言](#1-引言)
+  - [2. 架构设计](#2-架构设计)
+    - [定理 2.1 (分段锁)](#定理-21-分段锁)
+    - [定理 2.2 (无锁读取)](#定理-22-无锁读取)
+  - [3. 驱逐策略](#3-驱逐策略)
+    - [定理 3.1 (Window-TinyLFU)](#定理-31-window-tinylfu)
+  - [4. TTL支持](#4-ttl支持)
+    - [定理 4.1 (过期策略)](#定理-41-过期策略)
+  - [5. 反例](#5-反例)
+    - [反例 5.1 (缓存雪崩)](#反例-51-缓存雪崩)
 <a id="定理数量-4个"></a>
-  - [*定理数量: 4个*](.#定理数量-4个)
-  - [权威来源索引](.#权威来源索引)
+  - [*定理数量: 4个*](#定理数量-4个)
+  - [权威来源索引](#权威来源索引)
 
 ---
 

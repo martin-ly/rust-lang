@@ -16,18 +16,18 @@
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-- [核心定理集](.#核心定理集)
-  - [📋 目录](.#-目录)
-  - [🎯 定理集概述](.#-定理集概述)
-  - [📁 文档导航](.#-文档导航)
-  - [🔑 核心定理清单](.#-核心定理清单)
-    - [可判定性定理](.#可判定性定理)
-    - [安全性定理](.#安全性定理)
-    - [正确性定理](.#正确性定理)
-  - [🔗 与其他模块的关联](.#-与其他模块的关联)
+- [核心定理集](#核心定理集)
+  - [📋 目录](#-目录)
+  - [🎯 定理集概述](#-定理集概述)
+  - [📁 文档导航](#-文档导航)
+  - [🔑 核心定理清单](#-核心定理清单)
+    - [可判定性定理](#可判定性定理)
+    - [安全性定理](#安全性定理)
+    - [正确性定理](#正确性定理)
+  - [🔗 与其他模块的关联](#-与其他模块的关联)
 <a id="状态--完成"></a>
-  - [**状态**: ✅ 完成](.#状态--完成)
-  - [权威来源索引](.#权威来源索引)
+  - [**状态**: ✅ 完成](#状态--完成)
+  - [权威来源索引](#权威来源索引)
 
 ---
 

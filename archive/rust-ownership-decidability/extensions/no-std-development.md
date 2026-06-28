@@ -13,7 +13,7 @@
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Wikipedia - Bare-Metal Programming](https://en.wikipedia.org/wiki/Bare_Metal_Programming)** · **来源: [Wikipedia - Embedded System](https://en.wikipedia.org/wiki/Embedded_System)** · **[来源: ACM - Resource-Constrained Computing]** · **[来源: IEEE - Embedded Software Standards]**
 
-- [No_std 开发](.#no_std-开发)
+- [No_std 开发](#no_std-开发)
 
 ## No_std 基础
 >

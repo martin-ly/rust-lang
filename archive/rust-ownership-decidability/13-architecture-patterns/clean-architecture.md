@@ -15,23 +15,23 @@
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-- [清洁架构 (Clean Architecture)](.#清洁架构-clean-architecture)
-  - [目录](.#目录)
-  - [核心概念](.#核心概念)
-  - [原则](.#原则)
-    - [1. 依赖规则](.#1-依赖规则)
-    - [2. 抽象在内，实现在外](.#2-抽象在内实现在外)
-  - [Rust 实现](.#rust-实现)
-    - [端口与适配器](.#端口与适配器)
-    - [DI 配置](.#di-配置)
-  - [领域驱动设计要素](.#领域驱动设计要素)
-  - [错误处理](.#错误处理)
-  - [测试](.#测试)
-  - [对比](.#对比)
+- [清洁架构 (Clean Architecture)](#清洁架构-clean-architecture)
+  - [目录](#目录)
+  - [核心概念](#核心概念)
+  - [原则](#原则)
+    - [1. 依赖规则](#1-依赖规则)
+    - [2. 抽象在内，实现在外](#2-抽象在内实现在外)
+  - [Rust 实现](#rust-实现)
+    - [端口与适配器](#端口与适配器)
+    - [DI 配置](#di-配置)
+  - [领域驱动设计要素](#领域驱动设计要素)
+  - [错误处理](#错误处理)
+  - [测试](#测试)
+  - [对比](#对比)
 <a id="文档版本-100"></a>
-  - [*文档版本: 1.0.0*](.#文档版本-100)
-  - [权威来源索引](.#权威来源索引)
-  - [权威来源索引](.#权威来源索引-1)
+  - [*文档版本: 1.0.0*](#文档版本-100)
+  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 核心概念
 >

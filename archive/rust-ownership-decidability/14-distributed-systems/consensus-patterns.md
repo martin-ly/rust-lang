@@ -14,23 +14,23 @@
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-- [分布式共识模式](.#分布式共识模式)
-  - [目录](.#目录)
-  - [概念](.#概念)
-    - [CAP 定理](.#cap-定理)
-  - [共识算法](.#共识算法)
-    - [Raft 算法](.#raft-算法)
-    - [使用示例](.#使用示例)
-  - [一致性级别](.#一致性级别)
-    - [线性一致性 (Linearizability)](.#线性一致性-linearizability)
-    - [最终一致性](.#最终一致性)
-  - [Rust 实现考量](.#rust-实现考量)
-    - [所有权与分布式状态](.#所有权与分布式状态)
-    - [错误处理](.#错误处理)
-  - [参考](.#参考)
+- [分布式共识模式](#分布式共识模式)
+  - [目录](#目录)
+  - [概念](#概念)
+    - [CAP 定理](#cap-定理)
+  - [共识算法](#共识算法)
+    - [Raft 算法](#raft-算法)
+    - [使用示例](#使用示例)
+  - [一致性级别](#一致性级别)
+    - [线性一致性 (Linearizability)](#线性一致性-linearizability)
+    - [最终一致性](#最终一致性)
+  - [Rust 实现考量](#rust-实现考量)
+    - [所有权与分布式状态](#所有权与分布式状态)
+    - [错误处理](#错误处理)
+  - [参考](#参考)
 <a id="文档版本-100"></a>
-  - [*文档版本: 1.0.0*](.#文档版本-100)
-  - [权威来源索引](.#权威来源索引)
+  - [*文档版本: 1.0.0*](#文档版本-100)
+  - [权威来源索引](#权威来源索引)
 
 ## 概念
 >

@@ -9,20 +9,20 @@
 
 ## 📋 目录
 
-- [Tree Borrows 模型权威指南](.#tree-borrows-模型权威指南)
-  - [📋 目录](.#-目录)
-  - [🎯 为什么需要 Tree Borrows](.#-为什么需要-tree-borrows)
-  - [🌳 核心概念](.#-核心概念)
-    - [1. 权限树 (Permission Tree)](.#1-权限树-permission-tree)
-    - [2. 指针状态机](.#2-指针状态机)
-    - [3. 转换规则](.#3-转换规则)
-  - [📊 Tree Borrows vs Stacked Borrows](.#-tree-borrows-vs-stacked-borrows)
-  - [🔧 Miri 中使用 Tree Borrows](.#-miri-中使用-tree-borrows)
-  - [⚠️ 常见模式与陷阱](.#️-常见模式与陷阱)
-    - [模式 1: 手动迭代器 (safe under TB)](.#模式-1-手动迭代器-safe-under-tb)
-    - [模式 2: 双指针技巧](.#模式-2-双指针技巧)
-    - [陷阱: 父指针在子指针活跃时被使用](.#陷阱-父指针在子指针活跃时被使用)
-  - [🔗 参考资源](.#-参考资源)
+- [Tree Borrows 模型权威指南](#tree-borrows-模型权威指南)
+  - [📋 目录](#-目录)
+  - [🎯 为什么需要 Tree Borrows](#-为什么需要-tree-borrows)
+  - [🌳 核心概念](#-核心概念)
+    - [1. 权限树 (Permission Tree)](#1-权限树-permission-tree)
+    - [2. 指针状态机](#2-指针状态机)
+    - [3. 转换规则](#3-转换规则)
+  - [📊 Tree Borrows vs Stacked Borrows](#-tree-borrows-vs-stacked-borrows)
+  - [🔧 Miri 中使用 Tree Borrows](#-miri-中使用-tree-borrows)
+  - [⚠️ 常见模式与陷阱](#️-常见模式与陷阱)
+    - [模式 1: 手动迭代器 (safe under TB)](#模式-1-手动迭代器-safe-under-tb)
+    - [模式 2: 双指针技巧](#模式-2-双指针技巧)
+    - [陷阱: 父指针在子指针活跃时被使用](#陷阱-父指针在子指针活跃时被使用)
+  - [🔗 参考资源](#-参考资源)
 
 ---
 

@@ -6,24 +6,24 @@
 
 ## 📊 目录
 
-- [C03 控制流与函数: 术语表 (Glossary)](.#c03-控制流与函数-术语表-glossary)
-  - [📊 目录](.#-目录)
-  - [📋 术语索引](.#-术语索引)
-  - [控制流 (Control Flow)](.#控制流-control-flow)
-  - [表达式 (Expression)](.#表达式-expression)
-  - [函数 (Function)](.#函数-function)
-  - [闭包 (Closure)](.#闭包-closure)
-  - [Match 表达式](.#match-表达式)
-  - [模式匹配 (Pattern Matching)](.#模式匹配-pattern-matching)
-  - [穷尽性 (Exhaustiveness)](.#穷尽性-exhaustiveness)
-  - [迭代器 (Iterator)](.#迭代器-iterator)
-  - [Never 类型 (!)](.#never-类型-)
-  - [? 运算符 (Question Mark Operator)](.#-运算符-question-mark-operator)
-  - [Fn Traits](.#fn-traits)
-  - [高阶函数 (Higher-Order Function)](.#高阶函数-higher-order-function)
-  - [Let-Else 模式](.#let-else-模式)
-  - [标签块 (Labeled Block)](.#标签块-labeled-block)
-  - [📚 延伸阅读](.#-延伸阅读)
+- [C03 控制流与函数: 术语表 (Glossary)](#c03-控制流与函数-术语表-glossary)
+  - [📊 目录](#-目录)
+  - [📋 术语索引](#-术语索引)
+  - [控制流 (Control Flow)](#控制流-control-flow)
+  - [表达式 (Expression)](#表达式-expression)
+  - [函数 (Function)](#函数-function)
+  - [闭包 (Closure)](#闭包-closure)
+  - [Match 表达式](#match-表达式)
+  - [模式匹配 (Pattern Matching)](#模式匹配-pattern-matching)
+  - [穷尽性 (Exhaustiveness)](#穷尽性-exhaustiveness)
+  - [迭代器 (Iterator)](#迭代器-iterator)
+  - [Never 类型 (!)](#never-类型-)
+  - [? 运算符 (Question Mark Operator)](#-运算符-question-mark-operator)
+  - [Fn Traits](#fn-traits)
+  - [高阶函数 (Higher-Order Function)](#高阶函数-higher-order-function)
+  - [Let-Else 模式](#let-else-模式)
+  - [标签块 (Labeled Block)](#标签块-labeled-block)
+  - [📚 延伸阅读](#-延伸阅读)
 
 **最后更新**: 2025-12-11
 **适用版本**: Rust 1.92.0+
@@ -33,7 +33,7 @@
 
 ## 📋 术语索引
 
-[C](.#控制流-control-flow) | [E](.#表达式-expression) | [F](.#函数-function) | [I](.#迭代器-iterator) | [M](.#match-表达式) | [N](.#never-类型-) | [P](.#模式匹配-pattern-matching)
+[C](#控制流-control-flow) | [E](#表达式-expression) | [F](#函数-function) | [I](#迭代器-iterator) | [M](#match-表达式) | [N](#never-类型-) | [P](#模式匹配-pattern-matching)
 
 ---
 

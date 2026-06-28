@@ -12,28 +12,28 @@
 
 ## 目录
 
-- [C01 所有权与借用: 术语表 (Glossary)](.#c01-所有权与借用-术语表-glossary)
-  - [目录](.#目录)
-  - [📋 术语索引](.#-术语索引)
-  - [所有权 (Ownership)](.#所有权-ownership)
-  - [借用 (Borrowing)](.#借用-borrowing)
-  - [引用 (Reference)](.#引用-reference)
-  - [生命周期 (Lifetime)](.#生命周期-lifetime)
-  - [Move 语义](.#move-语义)
-  - [Copy Trait](.#copy-trait)
-  - [Clone Trait](.#clone-trait)
-  - [作用域 (Scope)](.#作用域-scope)
-  - [Drop](.#drop)
-  - [智能指针 (Smart Pointer)](.#智能指针-smart-pointer)
-  - [内部可变性 (Interior Mutability)](.#内部可变性-interior-mutability)
-  - [Deref Trait](.#deref-trait)
-  - [悬垂指针 (Dangling Pointer)](.#悬垂指针-dangling-pointer)
-  - [RAII](.#raii)
-  - [📚 延伸阅读](.#-延伸阅读)
+- [C01 所有权与借用: 术语表 (Glossary)](#c01-所有权与借用-术语表-glossary)
+  - [目录](#目录)
+  - [📋 术语索引](#-术语索引)
+  - [所有权 (Ownership)](#所有权-ownership)
+  - [借用 (Borrowing)](#借用-borrowing)
+  - [引用 (Reference)](#引用-reference)
+  - [生命周期 (Lifetime)](#生命周期-lifetime)
+  - [Move 语义](#move-语义)
+  - [Copy Trait](#copy-trait)
+  - [Clone Trait](#clone-trait)
+  - [作用域 (Scope)](#作用域-scope)
+  - [Drop](#drop)
+  - [智能指针 (Smart Pointer)](#智能指针-smart-pointer)
+  - [内部可变性 (Interior Mutability)](#内部可变性-interior-mutability)
+  - [Deref Trait](#deref-trait)
+  - [悬垂指针 (Dangling Pointer)](#悬垂指针-dangling-pointer)
+  - [RAII](#raii)
+  - [📚 延伸阅读](#-延伸阅读)
 
 ## 📋 术语索引
 
-[B](.#借用-borrowing) | [C](.#copy-trait) | [D](.#drop) | [L](.#生命周期-lifetime) | [M](.#move-语义) | [O](.#所有权-ownership) | [R](.#引用-reference) | [S](.#作用域-scope)
+[B](#借用-borrowing) | [C](#copy-trait) | [D](#drop) | [L](#生命周期-lifetime) | [M](#move-语义) | [O](#所有权-ownership) | [R](#引用-reference) | [S](#作用域-scope)
 
 ---
 

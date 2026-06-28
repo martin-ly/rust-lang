@@ -17,20 +17,20 @@
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-- [Derive-More 派生宏形式化分析](.#derive-more-派生宏形式化分析)
-  - [目录](.#目录)
-  - [1. 引言](.#1-引言)
-  - [2. 派生宏列表](.#2-派生宏列表)
-    - [定理 2.1 (支持的Trait)](.#定理-21-支持的trait)
-  - [3. 生成代码](.#3-生成代码)
-    - [定理 3.1 (等价手写)](.#定理-31-等价手写)
-  - [4. 边界条件](.#4-边界条件)
-    - [定理 4.1 (溢出行为)](.#定理-41-溢出行为)
-  - [5. 反例](.#5-反例)
-    - [反例 5.1 (泛型约束)](.#反例-51-泛型约束)
+- [Derive-More 派生宏形式化分析](#derive-more-派生宏形式化分析)
+  - [目录](#目录)
+  - [1. 引言](#1-引言)
+  - [2. 派生宏列表](#2-派生宏列表)
+    - [定理 2.1 (支持的Trait)](#定理-21-支持的trait)
+  - [3. 生成代码](#3-生成代码)
+    - [定理 3.1 (等价手写)](#定理-31-等价手写)
+  - [4. 边界条件](#4-边界条件)
+    - [定理 4.1 (溢出行为)](#定理-41-溢出行为)
+  - [5. 反例](#5-反例)
+    - [反例 5.1 (泛型约束)](#反例-51-泛型约束)
 <a id="定理数量-4个"></a>
-  - [*定理数量: 4个*](.#定理数量-4个)
-  - [权威来源索引](.#权威来源索引)
+  - [*定理数量: 4个*](#定理数量-4个)
+  - [权威来源索引](#权威来源索引)
 
 ---
 

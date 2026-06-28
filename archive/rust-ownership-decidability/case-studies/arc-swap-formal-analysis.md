@@ -17,22 +17,22 @@
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-- [Arc-Swap 原子交换形式化分析](.#arc-swap-原子交换形式化分析)
-  - [目录](.#目录)
-  - [1. 引言](.#1-引言)
-  - [2. 读写语义](.#2-读写语义)
-    - [定理 2.1 (读取无锁)](.#定理-21-读取无锁)
-    - [定理 2.2 (原子交换)](.#定理-22-原子交换)
-  - [3. 内存序](.#3-内存序)
-    - [定理 3.1 (Acquire-Release)](.#定理-31-acquire-release)
-  - [4. 延迟释放](.#4-延迟释放)
-    - [定理 4.1 (旧值保护)](.#定理-41-旧值保护)
-  - [5. 反例](.#5-反例)
-    - [反例 5.1 (频繁交换)](.#反例-51-频繁交换)
-    - [反例 5.2 (递归锁)](.#反例-52-递归锁)
+- [Arc-Swap 原子交换形式化分析](#arc-swap-原子交换形式化分析)
+  - [目录](#目录)
+  - [1. 引言](#1-引言)
+  - [2. 读写语义](#2-读写语义)
+    - [定理 2.1 (读取无锁)](#定理-21-读取无锁)
+    - [定理 2.2 (原子交换)](#定理-22-原子交换)
+  - [3. 内存序](#3-内存序)
+    - [定理 3.1 (Acquire-Release)](#定理-31-acquire-release)
+  - [4. 延迟释放](#4-延迟释放)
+    - [定理 4.1 (旧值保护)](#定理-41-旧值保护)
+  - [5. 反例](#5-反例)
+    - [反例 5.1 (频繁交换)](#反例-51-频繁交换)
+    - [反例 5.2 (递归锁)](#反例-52-递归锁)
 <a id="定理数量-4个"></a>
-  - [*定理数量: 4个*](.#定理数量-4个)
-  - [权威来源索引](.#权威来源索引)
+  - [*定理数量: 4个*](#定理数量-4个)
+  - [权威来源索引](#权威来源索引)
 
 ---
 

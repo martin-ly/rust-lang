@@ -17,21 +17,21 @@
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-- [Pulldown-CMark Markdown形式化分析](.#pulldown-cmark-markdown形式化分析)
-  - [目录](.#目录)
-  - [1. 引言](.#1-引言)
-  - [2. 拉取解析](.#2-拉取解析)
-    - [定理 2.1 (惰性解析)](.#定理-21-惰性解析)
-  - [3. 事件类型](.#3-事件类型)
-    - [定理 3.1 (平衡标签)](.#定理-31-平衡标签)
-  - [4. 零拷贝](.#4-零拷贝)
-    - [定理 4.1 (字符串引用)](.#定理-41-字符串引用)
-  - [5. 反例](.#5-反例)
-    - [反例 5.1 (未处理所有事件)](.#反例-51-未处理所有事件)
-    - [反例 5.2 (递归深度)](.#反例-52-递归深度)
+- [Pulldown-CMark Markdown形式化分析](#pulldown-cmark-markdown形式化分析)
+  - [目录](#目录)
+  - [1. 引言](#1-引言)
+  - [2. 拉取解析](#2-拉取解析)
+    - [定理 2.1 (惰性解析)](#定理-21-惰性解析)
+  - [3. 事件类型](#3-事件类型)
+    - [定理 3.1 (平衡标签)](#定理-31-平衡标签)
+  - [4. 零拷贝](#4-零拷贝)
+    - [定理 4.1 (字符串引用)](#定理-41-字符串引用)
+  - [5. 反例](#5-反例)
+    - [反例 5.1 (未处理所有事件)](#反例-51-未处理所有事件)
+    - [反例 5.2 (递归深度)](#反例-52-递归深度)
 <a id="定理数量-4个"></a>
-  - [*定理数量: 4个*](.#定理数量-4个)
-  - [权威来源索引](.#权威来源索引)
+  - [*定理数量: 4个*](#定理数量-4个)
+  - [权威来源索引](#权威来源索引)
 
 ---
 

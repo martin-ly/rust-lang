@@ -17,23 +17,23 @@
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-- [Prometheus客户端形式化分析](.#prometheus客户端形式化分析)
-  - [目录](.#目录)
-  - [1. 引言](.#1-引言)
-  - [2. 指标类型](.#2-指标类型)
-    - [定理 2.1 (Counter单调性)](.#定理-21-counter单调性)
-    - [定理 2.2 (Gauge双向)](.#定理-22-gauge双向)
-  - [3. 标签一致性](.#3-标签一致性)
-    - [定理 3.1 (标签集不变式)](.#定理-31-标签集不变式)
-  - [4. 原子性保证](.#4-原子性保证)
-    - [定理 4.1 (无锁计数)](.#定理-41-无锁计数)
-  - [5. 反例](.#5-反例)
-    - [反例 5.1 (Histogram桶配置)](.#反例-51-histogram桶配置)
-    - [反例 5.2 (标签基数)](.#反例-52-标签基数)
+- [Prometheus客户端形式化分析](#prometheus客户端形式化分析)
+  - [目录](#目录)
+  - [1. 引言](#1-引言)
+  - [2. 指标类型](#2-指标类型)
+    - [定理 2.1 (Counter单调性)](#定理-21-counter单调性)
+    - [定理 2.2 (Gauge双向)](#定理-22-gauge双向)
+  - [3. 标签一致性](#3-标签一致性)
+    - [定理 3.1 (标签集不变式)](#定理-31-标签集不变式)
+  - [4. 原子性保证](#4-原子性保证)
+    - [定理 4.1 (无锁计数)](#定理-41-无锁计数)
+  - [5. 反例](#5-反例)
+    - [反例 5.1 (Histogram桶配置)](#反例-51-histogram桶配置)
+    - [反例 5.2 (标签基数)](#反例-52-标签基数)
 <a id="定理数量-6个"></a>
-  - [*定理数量: 6个*](.#定理数量-6个)
-  - [权威来源索引](.#权威来源索引)
-  - [权威来源索引](.#权威来源索引-1)
+  - [*定理数量: 6个*](#定理数量-6个)
+  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 

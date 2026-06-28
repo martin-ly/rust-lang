@@ -17,20 +17,20 @@
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Wikipedia - Model Checking](https://en.wikipedia.org/wiki/Model_Checking)** · **来源: [Wikipedia - Concurrency Bug](https://en.wikipedia.org/wiki/Concurrency_Bug)** · **[来源: ACM - Randomized Concurrency Testing]** · **[来源: IEEE - Verification of Concurrent Programs]**
 
-- [Shuttle 确定性并发测试形式化分析](.#shuttle-确定性并发测试形式化分析)
-  - [目录](.#目录)
-  - [1. 引言](.#1-引言)
-  - [2. 调度器控制](.#2-调度器控制)
-    - [定理 2.1 (确定性调度)](.#定理-21-确定性调度)
-  - [3. 随机测试](.#3-随机测试)
-    - [定理 3.1 (边界探索)](.#定理-31-边界探索)
-  - [4. 可重现性](.#4-可重现性)
-    - [定理 4.1 (种子控制)](.#定理-41-种子控制)
-  - [5. 反例](.#5-反例)
-    - [反例 5.1 (超时依赖)](.#反例-51-超时依赖)
+- [Shuttle 确定性并发测试形式化分析](#shuttle-确定性并发测试形式化分析)
+  - [目录](#目录)
+  - [1. 引言](#1-引言)
+  - [2. 调度器控制](#2-调度器控制)
+    - [定理 2.1 (确定性调度)](#定理-21-确定性调度)
+  - [3. 随机测试](#3-随机测试)
+    - [定理 3.1 (边界探索)](#定理-31-边界探索)
+  - [4. 可重现性](#4-可重现性)
+    - [定理 4.1 (种子控制)](#定理-41-种子控制)
+  - [5. 反例](#5-反例)
+    - [反例 5.1 (超时依赖)](#反例-51-超时依赖)
 <a id="定理数量-4个"></a>
-  - [*定理数量: 4个*](.#定理数量-4个)
-  - [权威来源索引](.#权威来源索引)
+  - [*定理数量: 4个*](#定理数量-4个)
+  - [权威来源索引](#权威来源索引)
 
 ---
 

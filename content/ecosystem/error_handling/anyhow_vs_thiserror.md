@@ -8,17 +8,17 @@
 
 ## 📋 目录
 
-- [anyhow vs thiserror: Rust 错误处理生态指南](.#anyhow-vs-thiserror-rust-错误处理生态指南)
-  - [📋 目录](.#-目录)
-  - [🎯 核心对比](.#-核心对比)
-  - [📦 thiserror (库开发)](.#-thiserror-库开发)
-  - [📦 anyhow (应用开发)](.#-anyhow-应用开发)
-  - [📦 miette (诊断增强)](.#-miette-诊断增强)
-  - [🔄 使用模式](.#-使用模式)
-    - [库 + 应用协作](.#库--应用协作)
-    - [从 anyhow 转换到 thiserror](.#从-anyhow-转换到-thiserror)
-  - [📊 选择决策树](.#-选择决策树)
-  - [🔗 参考资源](.#-参考资源)
+- [anyhow vs thiserror: Rust 错误处理生态指南](#anyhow-vs-thiserror-rust-错误处理生态指南)
+  - [📋 目录](#-目录)
+  - [🎯 核心对比](#-核心对比)
+  - [📦 thiserror (库开发)](#-thiserror-库开发)
+  - [📦 anyhow (应用开发)](#-anyhow-应用开发)
+  - [📦 miette (诊断增强)](#-miette-诊断增强)
+  - [🔄 使用模式](#-使用模式)
+    - [库 + 应用协作](#库--应用协作)
+    - [从 anyhow 转换到 thiserror](#从-anyhow-转换到-thiserror)
+  - [📊 选择决策树](#-选择决策树)
+  - [🔗 参考资源](#-参考资源)
 
 ---
 

@@ -16,18 +16,18 @@
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-- [所有权概念卡片 - 全面深度解析](.#所有权概念卡片---全面深度解析)
-  - [目录](.#目录)
-  - [1. 概念定义 (Concept Definition)](.#1-概念定义-concept-definition)
-    - [1.1 形式化定义](.#11-形式化定义)
-    - [1.2 核心属性](.#12-核心属性)
-  - [2. 关系图谱](.#2-关系图谱)
-  - [3. 示例与反例](.#3-示例与反例)
-    - [正确示例](.#正确示例)
-    - [反例](.#反例)
-  - [4. 场景决策树](.#4-场景决策树)
-  - [5. 参考文献](.#5-参考文献)
-  - [权威来源索引](.#权威来源索引)
+- [所有权概念卡片 - 全面深度解析](#所有权概念卡片---全面深度解析)
+  - [目录](#目录)
+  - [1. 概念定义 (Concept Definition)](#1-概念定义-concept-definition)
+    - [1.1 形式化定义](#11-形式化定义)
+    - [1.2 核心属性](#12-核心属性)
+  - [2. 关系图谱](#2-关系图谱)
+  - [3. 示例与反例](#3-示例与反例)
+    - [正确示例](#正确示例)
+    - [反例](#反例)
+  - [4. 场景决策树](#4-场景决策树)
+  - [5. 参考文献](#5-参考文献)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 概念定义 (Concept Definition)
 >

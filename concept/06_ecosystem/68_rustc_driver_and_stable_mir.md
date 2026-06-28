@@ -26,22 +26,22 @@
 
 ## 📑 目录
 
-- [rustc Driver、Interface 与 Stable MIR](.#rustc-driverinterface-与-stable-mir)
-  - [📑 目录](.#-目录)
-  - [一、为什么要把 rustc 当库用](.#一为什么要把-rustc-当库用)
-  - [二、`rustc_driver`：高级入口](.#二rustc_driver高级入口)
-  - [三、`rustc_interface`：低级控制](.#三rustc_interface低级控制)
-  - [四、`rustc_private` 与外部 Driver](.#四rustc_private-与外部-driver)
-  - [五、Stable MIR / `rustc_public`](.#五stable-mir--rustc_public)
-    - [5.1 问题](.#51-问题)
-    - [5.2 解决方案](.#52-解决方案)
-  - [六、典型应用场景](.#六典型应用场景)
-  - [嵌入式测验](.#嵌入式测验)
-    - [测验 1：`rustc_driver` 和 `rustc_interface` 的主要区别是什么？](.#测验-1rustc_driver-和-rustc_interface-的主要区别是什么)
-    - [测验 2：外部 crate 使用 `rustc_driver` 需要什么 nightly feature 和组件？](.#测验-2外部-crate-使用-rustc_driver-需要什么-nightly-feature-和组件)
-    - [测验 3：Stable MIR（rustc\_public）试图解决什么问题？](.#测验-3stable-mirrustc_public试图解决什么问题)
-    - [测验 4：为什么 rustdoc 更适合用 `rustc_interface` 而不是 `rustc_driver`？](.#测验-4为什么-rustdoc-更适合用-rustc_interface-而不是-rustc_driver)
-  - [权威来源索引](.#权威来源索引)
+- [rustc Driver、Interface 与 Stable MIR](#rustc-driverinterface-与-stable-mir)
+  - [📑 目录](#-目录)
+  - [一、为什么要把 rustc 当库用](#一为什么要把-rustc-当库用)
+  - [二、`rustc_driver`：高级入口](#二rustc_driver高级入口)
+  - [三、`rustc_interface`：低级控制](#三rustc_interface低级控制)
+  - [四、`rustc_private` 与外部 Driver](#四rustc_private-与外部-driver)
+  - [五、Stable MIR / `rustc_public`](#五stable-mir--rustc_public)
+    - [5.1 问题](#51-问题)
+    - [5.2 解决方案](#52-解决方案)
+  - [六、典型应用场景](#六典型应用场景)
+  - [嵌入式测验](#嵌入式测验)
+    - [测验 1：`rustc_driver` 和 `rustc_interface` 的主要区别是什么？](#测验-1rustc_driver-和-rustc_interface-的主要区别是什么)
+    - [测验 2：外部 crate 使用 `rustc_driver` 需要什么 nightly feature 和组件？](#测验-2外部-crate-使用-rustc_driver-需要什么-nightly-feature-和组件)
+    - [测验 3：Stable MIR（rustc\_public）试图解决什么问题？](#测验-3stable-mirrustc_public试图解决什么问题)
+    - [测验 4：为什么 rustdoc 更适合用 `rustc_interface` 而不是 `rustc_driver`？](#测验-4为什么-rustdoc-更适合用-rustc_interface-而不是-rustc_driver)
+  - [权威来源索引](#权威来源索引)
 
 ---
 

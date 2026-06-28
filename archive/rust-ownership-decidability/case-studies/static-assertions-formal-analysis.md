@@ -17,20 +17,20 @@
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-- [Static-Assertions 编译时断言形式化分析](.#static-assertions-编译时断言形式化分析)
-  - [目录](.#目录)
-  - [1. 引言](.#1-引言)
-  - [2. 类型断言](.#2-类型断言)
-    - [定理 2.1 (类型相等)](.#定理-21-类型相等)
-  - [3. 大小断言](.#3-大小断言)
-    - [定理 3.1 (大小检查)](.#定理-31-大小检查)
-  - [4. 特征断言](.#4-特征断言)
-    - [定理 4.1 (Trait实现)](.#定理-41-trait实现)
-  - [5. 反例](.#5-反例)
-    - [反例 5.1 (条件编译)](.#反例-51-条件编译)
+- [Static-Assertions 编译时断言形式化分析](#static-assertions-编译时断言形式化分析)
+  - [目录](#目录)
+  - [1. 引言](#1-引言)
+  - [2. 类型断言](#2-类型断言)
+    - [定理 2.1 (类型相等)](#定理-21-类型相等)
+  - [3. 大小断言](#3-大小断言)
+    - [定理 3.1 (大小检查)](#定理-31-大小检查)
+  - [4. 特征断言](#4-特征断言)
+    - [定理 4.1 (Trait实现)](#定理-41-trait实现)
+  - [5. 反例](#5-反例)
+    - [反例 5.1 (条件编译)](#反例-51-条件编译)
 <a id="定理数量-4个"></a>
-  - [*定理数量: 4个*](.#定理数量-4个)
-  - [权威来源索引](.#权威来源索引)
+  - [*定理数量: 4个*](#定理数量-4个)
+  - [权威来源索引](#权威来源索引)
 
 ---
 

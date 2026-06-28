@@ -17,25 +17,25 @@
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-- [Bindgen/Cbindgen FFI绑定形式化分析](.#bindgencbindgen-ffi绑定形式化分析)
-  - [目录](.#目录)
-  - [1. 引言](.#1-引言)
-  - [2. Bindgen (C→Rust)](.#2-bindgen-crust)
-    - [定理 2.1 (类型映射)](.#定理-21-类型映射)
-    - [定理 2.2 (不安全边界)](.#定理-22-不安全边界)
-  - [3. Cbindgen (Rust→C)](.#3-cbindgen-rustc)
-    - [定理 3.1 (公开接口)](.#定理-31-公开接口)
-  - [4. 所有权映射](.#4-所有权映射)
-    - [定理 4.1 (Box→指针)](.#定理-41-box指针)
-  - [5. 布局兼容](.#5-布局兼容)
-    - [定理 5.1 (repr(C))](.#定理-51-reprc)
-  - [6. 反例](.#6-反例)
-    - [反例 6.1 (panic跨越边界)](.#反例-61-panic跨越边界)
-    - [反例 6.2 (生命周期逃逸)](.#反例-62-生命周期逃逸)
+- [Bindgen/Cbindgen FFI绑定形式化分析](#bindgencbindgen-ffi绑定形式化分析)
+  - [目录](#目录)
+  - [1. 引言](#1-引言)
+  - [2. Bindgen (C→Rust)](#2-bindgen-crust)
+    - [定理 2.1 (类型映射)](#定理-21-类型映射)
+    - [定理 2.2 (不安全边界)](#定理-22-不安全边界)
+  - [3. Cbindgen (Rust→C)](#3-cbindgen-rustc)
+    - [定理 3.1 (公开接口)](#定理-31-公开接口)
+  - [4. 所有权映射](#4-所有权映射)
+    - [定理 4.1 (Box→指针)](#定理-41-box指针)
+  - [5. 布局兼容](#5-布局兼容)
+    - [定理 5.1 (repr(C))](#定理-51-reprc)
+  - [6. 反例](#6-反例)
+    - [反例 6.1 (panic跨越边界)](#反例-61-panic跨越边界)
+    - [反例 6.2 (生命周期逃逸)](#反例-62-生命周期逃逸)
 <a id="定理数量-6个"></a>
-  - [*定理数量: 6个*](.#定理数量-6个)
-  - [权威来源索引](.#权威来源索引)
-  - [权威来源索引](.#权威来源索引-1)
+  - [*定理数量: 6个*](#定理数量-6个)
+  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 

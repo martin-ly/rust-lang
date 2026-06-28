@@ -15,22 +15,22 @@
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-- [实战：实现 `Vec<T>`](.#实战实现-vect)
-  - [目录](.#目录)
-  - [1. 设计目标](.#1-设计目标)
-  - [2. 基本实现](.#2-基本实现)
-    - [2.1 结构定义与创建](.#21-结构定义与创建)
-    - [2.2 Push 操作](.#22-push-操作)
-    - [2.3 Pop 操作](.#23-pop-操作)
-    - [2.4 索引访问](.#24-索引访问)
-  - [3. Drop 实现](.#3-drop-实现)
-  - [4. 迭代器实现](.#4-迭代器实现)
-  - [5. 测试与验证](.#5-测试与验证)
-  - [6. Miri 验证](.#6-miri-验证)
-  - [完整代码](.#完整代码)
+- [实战：实现 `Vec<T>`](#实战实现-vect)
+  - [目录](#目录)
+  - [1. 设计目标](#1-设计目标)
+  - [2. 基本实现](#2-基本实现)
+    - [2.1 结构定义与创建](#21-结构定义与创建)
+    - [2.2 Push 操作](#22-push-操作)
+    - [2.3 Pop 操作](#23-pop-操作)
+    - [2.4 索引访问](#24-索引访问)
+  - [3. Drop 实现](#3-drop-实现)
+  - [4. 迭代器实现](#4-迭代器实现)
+  - [5. 测试与验证](#5-测试与验证)
+  - [6. Miri 验证](#6-miri-验证)
+  - [完整代码](#完整代码)
 <a id="最后更新-2026-03-07"></a>
-  - [*最后更新: 2026-03-07*](.#最后更新-2026-03-07)
-  - [权威来源索引](.#权威来源索引)
+  - [*最后更新: 2026-03-07*](#最后更新-2026-03-07)
+  - [权威来源索引](#权威来源索引)
 
 ---
 

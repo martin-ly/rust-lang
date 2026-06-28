@@ -13,22 +13,22 @@
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-- [Rust 所有权系统元模型](.#rust-所有权系统元模型)
-  - [📋 目录](.#-目录)
-  - [🎯 元模型概述](.#-元模型概述)
-  - [📁 文档导航](.#-文档导航)
-    - [核心文档](.#核心文档)
-    - [Rust 1.94 对齐](.#rust-194-对齐)
-  - [🔗 与其他模块的关联](.#-与其他模块的关联)
-  - [🧮 形式化基础](.#-形式化基础)
-    - [抽象语法 (Abstract Syntax)](.#抽象语法-abstract-syntax)
-    - [核心判断 (Core Judgments)](.#核心判断-core-judgments)
-    - [语义域 (Semantic Domains)](.#语义域-semantic-domains)
-  - [📚 阅读指南](.#-阅读指南)
-    - [推荐阅读顺序](.#推荐阅读顺序)
-    - [前置知识](.#前置知识)
-    - [关联阅读](.#关联阅读)
-  - [权威来源索引](.#权威来源索引)
+- [Rust 所有权系统元模型](#rust-所有权系统元模型)
+  - [📋 目录](#-目录)
+  - [🎯 元模型概述](#-元模型概述)
+  - [📁 文档导航](#-文档导航)
+    - [核心文档](#核心文档)
+    - [Rust 1.94 对齐](#rust-194-对齐)
+  - [🔗 与其他模块的关联](#-与其他模块的关联)
+  - [🧮 形式化基础](#-形式化基础)
+    - [抽象语法 (Abstract Syntax)](#抽象语法-abstract-syntax)
+    - [核心判断 (Core Judgments)](#核心判断-core-judgments)
+    - [语义域 (Semantic Domains)](#语义域-semantic-domains)
+  - [📚 阅读指南](#-阅读指南)
+    - [推荐阅读顺序](#推荐阅读顺序)
+    - [前置知识](#前置知识)
+    - [关联阅读](#关联阅读)
+  - [权威来源索引](#权威来源索引)
 
 ---
 

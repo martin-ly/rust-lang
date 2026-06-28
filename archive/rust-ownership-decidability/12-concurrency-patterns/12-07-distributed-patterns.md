@@ -16,20 +16,20 @@
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-- [Rust 分布式模式](.#rust-分布式模式)
-  - [目录](.#目录)
-  - [1. 分布式系统理论](.#1-分布式系统理论)
-    - [1.1 CAP定理](.#11-cap定理)
-    - [1.2 一致性模型](.#12-一致性模型)
-    - [1.3 故障模型](.#13-故障模型)
-  - [2. 共识算法](.#2-共识算法)
-    - [2.1 Raft协议](.#21-raft协议)
-    - [2.2 领导者选举](.#22-领导者选举)
-    - [Rust 1.94 延迟初始化在分布式系统中的应用](.#rust-194-延迟初始化在分布式系统中的应用)
+- [Rust 分布式模式](#rust-分布式模式)
+  - [目录](#目录)
+  - [1. 分布式系统理论](#1-分布式系统理论)
+    - [1.1 CAP定理](#11-cap定理)
+    - [1.2 一致性模型](#12-一致性模型)
+    - [1.3 故障模型](#13-故障模型)
+  - [2. 共识算法](#2-共识算法)
+    - [2.1 Raft协议](#21-raft协议)
+    - [2.2 领导者选举](#22-领导者选举)
+    - [Rust 1.94 延迟初始化在分布式系统中的应用](#rust-194-延迟初始化在分布式系统中的应用)
 <a id="继续"></a>
-  - [（继续...）](.#继续)
-  - [权威来源索引](.#权威来源索引)
-  - [权威来源索引](.#权威来源索引-1)
+  - [（继续...）](#继续)
+  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 

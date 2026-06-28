@@ -17,21 +17,21 @@
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-- [LRU/Cached 缓存形式化分析](.#lrucached-缓存形式化分析)
-  - [目录](.#目录)
-  - [1. 引言](.#1-引言)
-  - [2. LRU语义](.#2-lru语义)
-    - [定理 2.1 (最近最少使用)](.#定理-21-最近最少使用)
-  - [3. 并发缓存](.#3-并发缓存)
-    - [定理 3.1 (DashCache)](.#定理-31-dashcache)
-  - [4. 过期策略](.#4-过期策略)
-    - [定理 4.1 (TTL)](.#定理-41-ttl)
-  - [5. 反例](.#5-反例)
-    - [反例 5.1 (缓存穿透)](.#反例-51-缓存穿透)
-    - [反例 5.2 (大Value)](.#反例-52-大value)
+- [LRU/Cached 缓存形式化分析](#lrucached-缓存形式化分析)
+  - [目录](#目录)
+  - [1. 引言](#1-引言)
+  - [2. LRU语义](#2-lru语义)
+    - [定理 2.1 (最近最少使用)](#定理-21-最近最少使用)
+  - [3. 并发缓存](#3-并发缓存)
+    - [定理 3.1 (DashCache)](#定理-31-dashcache)
+  - [4. 过期策略](#4-过期策略)
+    - [定理 4.1 (TTL)](#定理-41-ttl)
+  - [5. 反例](#5-反例)
+    - [反例 5.1 (缓存穿透)](#反例-51-缓存穿透)
+    - [反例 5.2 (大Value)](#反例-52-大value)
 <a id="定理数量-4个"></a>
-  - [*定理数量: 4个*](.#定理数量-4个)
-  - [权威来源索引](.#权威来源索引)
+  - [*定理数量: 4个*](#定理数量-4个)
+  - [权威来源索引](#权威来源索引)
 
 ---
 

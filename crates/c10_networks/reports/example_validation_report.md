@@ -2,20 +2,20 @@
 
 ## 📊 目录
 
-- [C10 Networks 示例验证报告](.#c10-networks-示例验证报告)
-  - [📊 目录](.#-目录)
-  - [验证结果](.#验证结果)
-    - [编译验证](.#编译验证)
-    - [功能验证](.#功能验证)
-      - [1. 异步特性演示 (rust\_190\_async\_features\_demo)](.#1-异步特性演示-rust_190_async_features_demo)
-      - [2. 语义验证演示 (semantic\_verification\_demo)](.#2-语义验证演示-semantic_verification_demo)
-      - [3. 性能基准演示 (rust\_190\_performance\_benchmark)](.#3-性能基准演示-rust_190_performance_benchmark)
-  - [技术特性验证](.#技术特性验证)
-    - [Rust 1.90 新特性](.#rust-190-新特性)
-    - [网络编程特性](.#网络编程特性)
-    - [形式化方法](.#形式化方法)
-  - [结论](.#结论)
-  - [项目可以正常使用，所有功能都已验证可用](.#项目可以正常使用所有功能都已验证可用)
+- [C10 Networks 示例验证报告](#c10-networks-示例验证报告)
+  - [📊 目录](#-目录)
+  - [验证结果](#验证结果)
+    - [编译验证](#编译验证)
+    - [功能验证](#功能验证)
+      - [1. 异步特性演示 (rust\_190\_async\_features\_demo)](#1-异步特性演示-rust_190_async_features_demo)
+      - [2. 语义验证演示 (semantic\_verification\_demo)](#2-语义验证演示-semantic_verification_demo)
+      - [3. 性能基准演示 (rust\_190\_performance\_benchmark)](#3-性能基准演示-rust_190_performance_benchmark)
+  - [技术特性验证](#技术特性验证)
+    - [Rust 1.90 新特性](#rust-190-新特性)
+    - [网络编程特性](#网络编程特性)
+    - [形式化方法](#形式化方法)
+  - [结论](#结论)
+  - [项目可以正常使用，所有功能都已验证可用](#项目可以正常使用所有功能都已验证可用)
 
 **验证时间**: 2025-09-28 12:09:42
 **验证环境**: Windows PowerShell

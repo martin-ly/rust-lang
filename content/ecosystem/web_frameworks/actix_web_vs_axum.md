@@ -8,17 +8,17 @@
 
 ## 📋 目录
 
-- [Actix-web vs Axum: Rust Web 框架选择指南](.#actix-web-vs-axum-rust-web-框架选择指南)
-  - [📋 目录](.#-目录)
-  - [🎯 核心对比](.#-核心对比)
-  - [⚡ Actix-web](.#-actix-web)
-  - [🔷 Axum](.#-axum)
-  - [📊 性能对比](.#-性能对比)
-  - [🔄 中间件系统](.#-中间件系统)
-    - [Actix-web](.#actix-web)
-    - [Axum (Tower)](.#axum-tower)
-  - [📐 选择决策树](.#-选择决策树)
-  - [🔗 参考资源](.#-参考资源)
+- [Actix-web vs Axum: Rust Web 框架选择指南](#actix-web-vs-axum-rust-web-框架选择指南)
+  - [📋 目录](#-目录)
+  - [🎯 核心对比](#-核心对比)
+  - [⚡ Actix-web](#-actix-web)
+  - [🔷 Axum](#-axum)
+  - [📊 性能对比](#-性能对比)
+  - [🔄 中间件系统](#-中间件系统)
+    - [Actix-web](#actix-web)
+    - [Axum (Tower)](#axum-tower)
+  - [📐 选择决策树](#-选择决策树)
+  - [🔗 参考资源](#-参考资源)
 
 ---
 

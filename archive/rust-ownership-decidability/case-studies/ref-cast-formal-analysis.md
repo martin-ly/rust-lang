@@ -17,20 +17,20 @@
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-- [Ref-Cast 引用转换形式化分析](.#ref-cast-引用转换形式化分析)
-  - [目录](.#目录)
-  - [1. 引言](.#1-引言)
-  - [2. RefCast Trait](.#2-refcast-trait)
-    - [定理 2.1 (引用转换)](.#定理-21-引用转换)
-  - [3. 自动派生](.#3-自动派生)
-    - [定理 3.1 (派生宏)](.#定理-31-派生宏)
-  - [4. 安全保证](.#4-安全保证)
-    - [定理 4.1 (repr(transparent))](.#定理-41-reprtransparent)
-  - [5. 反例](.#5-反例)
-    - [反例 5.1 (非透明类型)](.#反例-51-非透明类型)
+- [Ref-Cast 引用转换形式化分析](#ref-cast-引用转换形式化分析)
+  - [目录](#目录)
+  - [1. 引言](#1-引言)
+  - [2. RefCast Trait](#2-refcast-trait)
+    - [定理 2.1 (引用转换)](#定理-21-引用转换)
+  - [3. 自动派生](#3-自动派生)
+    - [定理 3.1 (派生宏)](#定理-31-派生宏)
+  - [4. 安全保证](#4-安全保证)
+    - [定理 4.1 (repr(transparent))](#定理-41-reprtransparent)
+  - [5. 反例](#5-反例)
+    - [反例 5.1 (非透明类型)](#反例-51-非透明类型)
 <a id="定理数量-4个"></a>
-  - [*定理数量: 4个*](.#定理数量-4个)
-  - [权威来源索引](.#权威来源索引)
+  - [*定理数量: 4个*](#定理数量-4个)
+  - [权威来源索引](#权威来源索引)
 
 ---
 

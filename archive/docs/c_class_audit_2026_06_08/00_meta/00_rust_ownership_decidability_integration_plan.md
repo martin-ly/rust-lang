@@ -12,22 +12,22 @@
 
 ## 📑 目录
 
-- [rust-ownership-decidability 与 research\_notes 整合计划](.#rust-ownership-decidability-与-research_notes-整合计划)
-  - [📑 目录](.#-目录)
-  - [1. 现状分析](.#1-现状分析)
-    - [1.1 `rust-ownership-decidability/` 概况](.#11-rust-ownership-decidability-概况)
-    - [1.2 `research_notes/` 概况](.#12-research_notes-概况)
-    - [1.3 重复与交叉](.#13-重复与交叉)
-  - [2. 整合策略](.#2-整合策略)
-    - [2.1 保留 `rust-ownership-decidability/` 作为独立体系](.#21-保留-rust-ownership-decidability-作为独立体系)
-    - [2.2 建立双向链接而非物理合并](.#22-建立双向链接而非物理合并)
-    - [2.3 版本号对齐](.#23-版本号对齐)
-    - [2.4 清理过时内容](.#24-清理过时内容)
-  - [3. 执行步骤](.#3-执行步骤)
-  - [4. 统一索引结构（建议）](.#4-统一索引结构建议)
-  - [5. 相关文档](.#5-相关文档)
-  - [相关概念](.#相关概念)
-  - [权威来源索引](.#权威来源索引)
+- [rust-ownership-decidability 与 research\_notes 整合计划](#rust-ownership-decidability-与-research_notes-整合计划)
+  - [📑 目录](#-目录)
+  - [1. 现状分析](#1-现状分析)
+    - [1.1 `rust-ownership-decidability/` 概况](#11-rust-ownership-decidability-概况)
+    - [1.2 `research_notes/` 概况](#12-research_notes-概况)
+    - [1.3 重复与交叉](#13-重复与交叉)
+  - [2. 整合策略](#2-整合策略)
+    - [2.1 保留 `rust-ownership-decidability/` 作为独立体系](#21-保留-rust-ownership-decidability-作为独立体系)
+    - [2.2 建立双向链接而非物理合并](#22-建立双向链接而非物理合并)
+    - [2.3 版本号对齐](#23-版本号对齐)
+    - [2.4 清理过时内容](#24-清理过时内容)
+  - [3. 执行步骤](#3-执行步骤)
+  - [4. 统一索引结构（建议）](#4-统一索引结构建议)
+  - [5. 相关文档](#5-相关文档)
+  - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 现状分析
 >
