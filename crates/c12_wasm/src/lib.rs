@@ -1,15 +1,27 @@
-//! Lib
+//! # c12_wasm - Rust WebAssembly 学习模块
+//!
+//! 本 crate 提供 Rust 编译到 WebAssembly 的学习示例，涵盖 wasm-bindgen 基础、
+//! 浏览器 API 交互、复杂类型传递、数组/字符串操作、性能优化与错误处理，
+//! 以及 WASI、WasmEdge、Component Model 等进阶主题。
+//!
+//! ## 模块组织
+//!
+//! - [`basic_examples`] - wasm-bindgen 基础函数
+//! - [`complex_types`] - 结构体与对象传递
+//! - [`array_examples`] - 数组与向量操作
+//! - [`string_examples`] - 字符串操作
+//! - [`performance_examples`] - 性能优化技巧
+//! - [`error_examples`] - 错误处理示例
+//! - [`browser_api`] - 浏览器 API 交互
+//! - [`math_utils`] - 数学工具
+//! - [`ecosystem_examples`] - 生态集成示例
+//! - [`wasmedge_examples`] - WasmEdge 示例
+//! - [`wasi_migration`] / [`wasm_performance`] - WASI 与性能
+//! - [`rust_186_features`]..[`rust_197_features`] - 按 Rust 版本组织的特性示例
 
 // [来源: WebAssembly Spec / wasm-bindgen docs]
-//! WebAssembly compilation targets, WASI, and browser integration.
 #![allow(clippy::type_complexity)]
-//! # C12 WASM - 核心示例代码
-//! # C12 WASM - core example
-//! - wasm-bindgen 基础用法
-//! - 性能优化技巧
-//! - performance optimization tip
-//! - WASI 应用示例
-//! - WASI application example
+
 // 引入生态库示例模块
 pub mod ecosystem_examples;
 pub mod error;
@@ -18,14 +30,10 @@ pub mod ffi_advanced;
 // 引入 WasmEdge 示例模块
 pub mod wasmedge_examples;
 
-/// 浏览器 API 交互模块
-/// API module
+/// 浏览器 API 交互模块。
 pub mod browser_api;
 
-/// 数学工具模块
-/// math tool module
-/// tool module
-/// 数学toolmodule
+/// 数学工具模块。
 pub mod math_utils;
 
 // Rust 1.91 新特性模块
@@ -45,27 +53,23 @@ pub mod rust_196_features;
 pub mod rust_197_features;
 
 pub mod wasi_migration;
-pub mod wasm_performance; // WASI p1/p2 迁移指南 // WebAssembly Component Model (WASI Preview 2)
+pub mod wasm_performance;
 
-/// wasm-bindgen 基础示例
+/// wasm-bindgen 基础示例。
 pub mod basic_examples {
     use wasm_bindgen::prelude::*;
 
-    /// 简单的加法函数
-    /// simple addition function
-    /// simple function
+    /// 简单的加法函数。
+    ///
     /// # 参数
-    /// # parameter
     /// - `a`: 第一个加数
-    /// - `a`: first
     /// - `b`: 第二个加数
-    /// - `b`: second
+    ///
     /// # 返回值
-    /// # return value
-    /// 返回两个数的和
-    /// and
+    /// 返回两个数的和。
+    ///
     /// # 示例
-    /// # example
+    /// ```js
     /// import { add } from './pkg/hello_wasm';
     /// const result = add(2, 3); // 5
     /// ```
@@ -74,15 +78,16 @@ pub mod basic_examples {
         a + b
     }
 
-    /// 字符串问候函数
-    /// function
+    /// 字符串问候函数。
+    ///
     /// # 参数
-    /// # parameter
+    /// - `name`: 要问候的对象
+    ///
     /// # 返回值
-    /// # return value
-    /// 返回格式化的问候字符串
+    /// 返回格式化的问候字符串。
+    ///
     /// # 示例
-    /// # example
+    /// ```js
     /// import { greet } from './pkg/hello_wasm';
     /// const message = greet("World"); // "Hello, World!"
     /// ```
@@ -91,26 +96,19 @@ pub mod basic_examples {
         format!("Hello, {}!", name)
     }
 
-    /// 数组求和
-    /// array and
-    /// and
+    /// 数组求和。
+    ///
     /// # 参数
-    /// # parameter
     /// - `arr`: 要计算的整数数组
-    /// - `arr`: array
-    /// - `arr`:
+    ///
     /// # 返回值
-    /// # return value
-    /// 返回数组中所有元素的和
-    /// array in all element and
-    /// in all element and
+    /// 返回数组中所有元素的和。
+    ///
     /// # 注意
-    /// #
-    /// 这个函数会克隆数组，对于大数组可能不够高效
-    /// function array ，to array may efficient
-    /// function ，to may efficient
+    /// 这个函数会克隆数组，对于大数组可能不够高效。
+    ///
     /// # 示例
-    /// # example
+    /// ```js
     /// import { sum_array } from './pkg/hello_wasm';
     /// const result = sum_array(new Int32Array([1, 2, 3, 4, 5])); // 15
     /// ```
@@ -120,13 +118,11 @@ pub mod basic_examples {
     }
 }
 
-/// 复杂类型示例
-/// complex type example
+/// 复杂类型示例。
 pub mod complex_types {
     use wasm_bindgen::prelude::*;
 
-    /// 计数器结构体
-    /// struct
+    /// 计数器结构体。
     #[wasm_bindgen]
     pub struct Counter {
         value: i32,
@@ -134,58 +130,39 @@ pub mod complex_types {
 
     #[wasm_bindgen]
     impl Counter {
-        /// 创建新的计数器实例
-        /// # 返回值
-        /// # return value
-        /// 返回初始值为 0 的计数器
-        /// as 0
+        /// 创建初始值为 0 的计数器。
         #[wasm_bindgen(constructor)]
         #[allow(clippy::new_without_default)]
         pub fn new() -> Counter {
             Counter { value: 0 }
         }
 
-        /// 增加计数器值
-        /// 每次调用会将内部值加 1
-        /// will inside 1
+        /// 将计数器值加 1。
         #[wasm_bindgen]
         pub fn increment(&mut self) {
             self.value += 1;
         }
 
-        /// 减少计数器值
-        /// 每次调用会将内部值减 1
-        /// will inside 1
+        /// 将计数器值减 1。
         #[wasm_bindgen]
         pub fn decrement(&mut self) {
             self.value -= 1;
         }
 
-        /// 重置计数器
-        /// 将计数器值重置为 0
-        /// will as 0
+        /// 将计数器值重置为 0。
         #[wasm_bindgen]
         pub fn reset(&mut self) {
             self.value = 0;
         }
 
-        /// 获取当前计数器值
-        /// when before
-        /// # 返回值
-        /// # return value
-        /// 返回当前计数器的值
-        /// when before
+        /// 获取当前计数器值。
         #[wasm_bindgen(getter)]
         pub fn value(&self) -> i32 {
             self.value
         }
     }
 
-    /// 人员信息结构体
-    /// person struct
-    /// struct
-    /// 展示如何传递复杂对象
-    /// complex to
+    /// 人员信息结构体，展示如何传递复杂对象。
     #[wasm_bindgen]
     pub struct Person {
         name: String,
@@ -194,49 +171,41 @@ pub mod complex_types {
 
     #[wasm_bindgen]
     impl Person {
-        /// 创建新的人员实例
-        /// person
+        /// 创建新的人员实例。
+        ///
         /// # 参数
-        /// # parameter
         /// - `name`: 人员姓名
-        /// - `name`: person
-        /// - `name`:
         /// - `age`: 人员年龄
-        /// - `age`: person
-        /// - `age`:
+        ///
         /// # 返回值
-        /// # return value
-        /// 返回新的人员实例
-        /// person
+        /// 返回新的人员实例。
         #[wasm_bindgen(constructor)]
         pub fn new(name: String, age: u32) -> Person {
             Person { name, age }
         }
 
-        /// 获取姓名
+        /// 获取姓名。
         #[wasm_bindgen(getter)]
         pub fn name(&self) -> String {
             self.name.clone()
         }
 
-        /// 获取年龄
+        /// 获取年龄。
         #[wasm_bindgen(getter)]
         pub fn age(&self) -> u32 {
             self.age
         }
 
-        /// 设置年龄
+        /// 设置年龄。
+        ///
         /// # 参数
-        /// # parameter
         /// - `age`: 新的年龄值
-        /// - `age`:
         #[wasm_bindgen(setter)]
         pub fn set_age(&mut self, age: u32) {
             self.age = age;
         }
 
-        /// 转换为字符串描述
-        /// conversion as describe
+        /// 转换为字符串描述。
         #[wasm_bindgen(js_name = "toString")]
         pub fn to_str(&self) -> String {
             format!("{} ({} years old)", self.name, self.age)
@@ -244,30 +213,20 @@ pub mod complex_types {
     }
 }
 
-/// 数组和向量操作示例
-/// array and operation example
-/// and example
+/// 数组和向量操作示例。
 pub mod array_examples {
     use wasm_bindgen::prelude::*;
 
-    /// 计算数组的平均值
-    /// array
+    /// 计算数组的平均值。
+    ///
     /// # 参数
-    /// # parameter
     /// - `numbers`: 数字数组
-    /// - `numbers`: number array
-    /// - `numbers`:
-    /// - `numbers`: 数字array
+    ///
     /// # 返回值
-    /// # return value
-    /// 返回平均值，如果数组为空则返回 0.0
-    /// ，if array as 0.0
-    /// ，if as 0.0
+    /// 返回平均值，如果数组为空则返回 0.0。
+    ///
     /// # 性能说明
-    /// # performance explain
-    /// 这个函数会遍历整个数组一次，时间复杂度 O(n)
-    /// function array ，time complexity O(n)
-    /// function ，time complexity O(n)
+    /// 这个函数会遍历整个数组一次，时间复杂度 O(n)。
     #[wasm_bindgen]
     pub fn calculate_average(numbers: &[f64]) -> f64 {
         if numbers.is_empty() {
@@ -277,76 +236,60 @@ pub mod array_examples {
         sum / (numbers.len() as f64)
     }
 
-    /// 查找数组中的最大值
-    /// array in maximum
-    /// in maximum
+    /// 查找数组中的最大值。
+    ///
     /// # 参数
-    /// # parameter
     /// - `numbers`: 数字数组
-    /// - `numbers`: number array
-    /// - `numbers`:
-    /// - `numbers`: 数字array
+    ///
     /// # 返回值
-    /// # return value
+    /// 返回数组中的最大值，如果数组为空则返回 `None`。
     #[wasm_bindgen]
     pub fn find_max(numbers: &[i32]) -> Option<i32> {
         numbers.iter().max().copied()
     }
 
-    /// 反转数组
-    /// array
-    /// 反转array
+    /// 反转数组。
+    ///
     /// # 参数
-    /// # parameter
-    /// - `numbers`: 要反转array
+    /// - `numbers`: 要反转的数组
+    ///
     /// # 返回值
-    /// # return value
-    /// 返回反转后的新数组
-    /// after array
-    /// after
+    /// 返回反转后的新数组。
+    ///
     /// # 注意
-    /// #
-    /// 这个函数会创建一个新数组，内存使用 O(n)
-    /// function array ，memory O(n)
-    /// function ，memory O(n)
+    /// 这个函数会创建一个新数组，内存使用 O(n)。
     #[wasm_bindgen]
     pub fn reverse_array(numbers: &[i32]) -> Vec<i32> {
         numbers.iter().rev().copied().collect()
     }
 
-    /// 过滤数组中的偶数
-    /// array in
-    /// in
+    /// 过滤数组中的偶数。
+    ///
     /// # 参数
-    /// # parameter
-    /// - `numbers`: 要Filterarray
+    /// - `numbers`: 要过滤的数组
+    ///
     /// # 返回值
-    /// # return value
-    /// 返回只包含偶数的新数组
-    /// array
+    /// 返回只包含偶数的新数组。
     #[wasm_bindgen]
     pub fn filter_even(numbers: &[i32]) -> Vec<i32> {
         numbers.iter().filter(|&&x| x % 2 == 0).copied().collect()
     }
 }
 
-/// 字符串操作示例
-/// operation example
-/// example
+/// 字符串操作示例。
 pub mod string_examples {
     use wasm_bindgen::prelude::*;
 
-    /// 反转字符串
+    /// 反转字符串。
+    ///
     /// # 参数
-    /// # parameter
     /// - `s`: 要反转的字符串
-    /// - `s`:
+    ///
     /// # 返回值
-    /// # return value
-    /// 返回反转后的字符串
-    /// after
+    /// 返回反转后的字符串。
+    ///
     /// # 示例
-    /// # example
+    /// ```js
     /// import { reverse_string } from './pkg/hello_wasm';
     /// const result = reverse_string("hello"); // "olleh"
     /// ```
@@ -355,14 +298,13 @@ pub mod string_examples {
         s.chars().rev().collect()
     }
 
-    /// 检查字符串是否为回文
-    /// as
+    /// 检查字符串是否为回文。
+    ///
     /// # 参数
-    /// # parameter
     /// - `s`: 要检查的字符串
-    /// - `s`:
+    ///
     /// # 返回值
-    /// # return value
+    /// 如果是回文返回 `true`，否则返回 `false`。
     #[wasm_bindgen]
     pub fn is_palindrome(s: &str) -> bool {
         let s_lower: String = s
@@ -374,39 +316,32 @@ pub mod string_examples {
         s_lower == reversed
     }
 
-    /// 统计字符串中的单词数
-    /// in
+    /// 统计字符串中的单词数。
+    ///
     /// # 参数
-    /// # parameter
     /// - `s`: 要分析的字符串
-    /// - `s`: analyze
+    ///
     /// # 返回值
-    /// # return value
-    /// 返回单词数量
-    /// quantity
+    /// 返回单词数量。
     #[wasm_bindgen]
     pub fn count_words(s: &str) -> u32 {
         s.split_whitespace().count() as u32
     }
 
-    /// 将字符串转换为大写
-    /// will conversion as
+    /// 将字符串转换为大写。
+    ///
     /// # 参数
-    /// # parameter
     /// - `s`: 要转换的字符串
-    /// - `s`: conversion
+    ///
     /// # 返回值
-    /// # return value
-    /// 返回转换为大写的字符串
-    /// conversion as
+    /// 返回转换为大写的字符串。
     #[wasm_bindgen]
     pub fn to_uppercase(s: &str) -> String {
         s.to_uppercase()
     }
 }
 
-/// 性能优化示例
-/// performance optimization example
+/// 性能优化示例。
 pub mod performance_examples {
     use std::cell::RefCell;
     use wasm_bindgen::prelude::*;
@@ -416,22 +351,18 @@ pub mod performance_examples {
         static BUFFER: RefCell<Vec<u8>> = const { RefCell::new(Vec::new()) };
     }
 
-    /// 优化的数组处理函数（重用缓冲区）
-    /// optimization array function （buffering ）
-    /// optimization function （buffering ）
-    /// 这个函数展示了如何重用缓冲区来减少内存分配
-    /// function buffering memory
+    /// 优化的数组处理函数（重用缓冲区）。
+    ///
+    /// 这个函数展示了如何重用缓冲区来减少内存分配。
+    ///
     /// # 参数
-    /// # parameter
+    /// - `data`: 输入字节数组
+    ///
     /// # 返回值
-    /// # return value
-    /// 返回处理后的字节数组
-    /// after array
-    /// after
+    /// 返回处理后的字节数组。
+    ///
     /// # 性能说明
-    /// # performance explain
-    /// 通过重用线程局部缓冲区，避免了每次调用都分配新内存
-    /// thread-local buffering ，memory
+    /// 通过重用线程局部缓冲区，避免了每次调用都分配新内存。
     #[wasm_bindgen]
     pub fn process_bytes_optimized(data: &[u8]) -> Vec<u8> {
         BUFFER.with(|buf| {
@@ -443,7 +374,7 @@ pub mod performance_examples {
                 buffer.reserve(data.len());
             }
 
-            // 处理数据（示例：将每个字节乘以2）
+            // 处理数据（示例：将每个字节乘以 2）
             for &byte in data {
                 buffer.push(byte.wrapping_mul(2));
             }
@@ -452,16 +383,13 @@ pub mod performance_examples {
         })
     }
 
-    /// 预分配容量的向量创建
-    /// pre-allocate capacity
+    /// 预分配容量的向量创建。
+    ///
     /// # 参数
-    /// # parameter
     /// - `size`: 向量大小
-    /// - `size`:
+    ///
     /// # 返回值
-    /// # return value
-    /// 返回预分配容量的向量
-    /// pre-allocate capacity
+    /// 返回预分配容量的向量。
     #[wasm_bindgen]
     pub fn create_preallocated_vector(size: usize) -> Vec<i32> {
         let mut vec = Vec::with_capacity(size);
@@ -472,31 +400,25 @@ pub mod performance_examples {
     }
 }
 
-/// 错误处理示例
-/// error handling example
+/// 错误处理示例。
 pub mod error_examples {
     use wasm_bindgen::prelude::*;
 
-    /// 安全的除法运算
-    /// division
+    /// 安全的除法运算。
+    ///
     /// # 参数
-    /// # parameter
     /// - `a`: 被除数
-    /// - `a`: is
-    /// - `a`: is除数
-    /// - `a`: is
     /// - `b`: 除数
-    /// - `b`:
+    ///
     /// # 返回值
-    /// # return value
-    /// 返回 `Result`，成功时包含商，失败时包含错误信息
-    /// `Result`，，failure error message
-    /// `Result`，，error message
+    /// 返回 `Result`，成功时包含商，失败时包含错误信息。
+    ///
     /// # 示例
-    /// # example
+    /// ```js
     /// import { safe_divide } from './pkg/hello_wasm';
-    /// const result1 = await safe_divide(10, 2); // 5
-    /// const result2 = await safe_divide(10, 0); // 抛出错误
+    /// const result1 = safe_divide(10, 2); // 5
+    /// const result2 = safe_divide(10, 0); // 抛出错误
+    /// ```
     #[wasm_bindgen]
     pub fn safe_divide(a: f64, b: f64) -> Result<f64, JsValue> {
         if b == 0.0 {
@@ -506,16 +428,15 @@ pub mod error_examples {
         }
     }
 
-    /// 验证输入字符串长度
-    /// input
+    /// 验证输入字符串长度。
+    ///
     /// # 参数
-    /// # parameter
+    /// - `input`: 要验证的字符串
     /// - `min_length`: 最小长度
     /// - `max_length`: 最大长度
+    ///
     /// # 返回值
-    /// # return value
-    /// 如果验证通过返回字符串，否则返回错误
-    /// if ，
+    /// 如果验证通过返回字符串，否则返回错误。
     #[wasm_bindgen]
     pub fn validate_string(
         input: &str,

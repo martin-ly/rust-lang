@@ -23,7 +23,7 @@
 - [Miri 实战指南](05_miri_practical_guide.md) — 检测未定义行为
 - [Kani 实战指南](05_kani_practical_guide.md) — Bounded Model Checker
 - [形式化验证整合指南](05_formal_verification_integration_guide.md)
-- [BorrowSanitizer 预览](05_borrowsanitizer_preview.md)
+- [BorrowSanitizer 预览](../../concept/07_future/20_borrowsanitizer_preview.md)
 - [Safety Tags 预研指南](05_safety_tags_guide.md)
 
 ### 生态与互操作

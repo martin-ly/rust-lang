@@ -1,16 +1,11 @@
-//! Lib
+//! # c09_design_pattern - Rust 设计模式学习库
+//!
+//! 本 crate 提供 Rust 中常用设计模式的完整实现与实际应用案例，
+//! 涵盖创建型、结构型、行为型模式，以及并发/并行模式与领域特定模式。
 
 // [来源: Rust Reference / Design Patterns (GoF)]
-//! Idiomatic Rust design patterns and architectural strategies.
 #![allow(clippy::type_complexity)]
 #![allow(clippy::new_without_default)]
-//! Rust设计模式实践案例库
-//! Rust Design Pattern Practice Case Library
-//!
-//! 本库提供了Rust中各种设计模式的完整实现和实际应用案例，
-//! This library provides complete implementations and practical application cases of various design patterns in Rust,
-//! 包括基础设计模式、高级设计模式以及在特定领域的应用。
-//! foundation design 、design and in domain application 。
 // 基础设计模式模块
 pub mod behavioral;
 pub mod creational;
@@ -63,11 +58,10 @@ pub mod rust_idioms;
 // 示例程序
 // pub mod bin; // 暂时注释掉，避免编译错误
 
-/// 设计模式库版本信息
+/// 设计模式库版本号。
 pub const VERSION: &str = "1.0.1";
 
-/// 获取库版本信息
-/// Get library version info
+/// 返回设计模式库版本号。
 ///
 /// # Examples
 ///
@@ -81,8 +75,7 @@ pub fn get_version() -> &'static str {
     VERSION
 }
 
-/// 设计模式分类
-/// design classification
+/// 设计模式分类。
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum PatternCategory {
     Creational,
@@ -93,30 +86,25 @@ pub enum PatternCategory {
     DomainSpecific,
 }
 
-/// 执行模型：同步/异步/混合
-/// ：synchronous /async /
+/// 执行模型：同步 / 异步 / 混合。
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum ExecutionModel {
-    /// 纯同步：阻塞式执行
+    /// 纯同步：阻塞式执行。
     Sync,
-    /// 纯异步：基于 async/await 或事件驱动
-    /// async ： async/await or event-driven
+    /// 纯异步：基于 async/await 或事件驱动。
     Async,
-    /// 混合：同步为主，提供异步适配；或异步内部含阻塞边界
-    /// ：synchronous as ，async ；or async inside edge
+    /// 混合：以同步为主并提供异步适配，或异步内部含阻塞边界。
     Hybrid,
 }
 
-/// 设计模式信息
-/// designpattern information
+/// 设计模式元信息。
 #[derive(Debug, Clone)]
 pub struct PatternInfo {
     pub name: String,
     pub category: PatternCategory,
     pub description: String,
     pub use_cases: Vec<String>,
-    /// 执行模型（同步/异步/混合）
-    /// （synchronous /async /）
+    /// 执行模型（同步 / 异步 / 混合）。
     pub execution_model: ExecutionModel,
 }
 
@@ -325,8 +313,7 @@ pub fn get_patterns_by_category(category: PatternCategory) -> Vec<PatternInfo> {
         .collect()
 }
 
-/// 搜索设计模式
-/// Search designpattern
+/// 按关键字搜索设计模式。
 pub fn search_patterns(query: &str) -> Vec<PatternInfo> {
     let query_lower = query.to_lowercase();
     get_all_patterns()

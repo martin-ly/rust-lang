@@ -28,7 +28,7 @@
 |:---|:---|:---:|:---|
 | **Ch 1: Getting Started** | [00_pl_prerequisites.md](../concept/01_foundation/00_pl_prerequisites.md) | ⚠️ | TRPL 侧重安装与 Hello World；concept/ 前置 PL 理论基础 |
 | **Ch 2: Guessing Game** | [07_control_flow.md](../concept/01_foundation/07_control_flow.md) · [10_error_handling_basics.md](../concept/01_foundation/10_error_handling_basics.md) | ⚠️ | TRPL 以完整项目驱动；concept/ 拆分为控制流和错误处理 |
-| **Ch 3: Common Programming Concepts** | [04_type_system.md](../concept/01_foundation/04_type_system.md) · [11_numeric_types.md](../concept/01_foundation/11_numeric_types.md) · [20_variable_model.md](../concept/01_foundation/20_variable_model.md) | ✅ | 变量、类型、函数、控制流、注释等基础概念完全覆盖 |
+| **Ch 3: Common Programming Concepts** | [04_type_system.md](../concept/01_foundation/04_type_system.md) · [10_numerics.md](../concept/01_foundation/10_numerics.md) · [20_variable_model.md](../concept/01_foundation/20_variable_model.md) | ✅ | 变量、类型、函数、控制流、注释等基础概念完全覆盖 |
 | **Ch 4: Understanding Ownership** | [01_ownership.md](../concept/01_foundation/01_ownership.md) | ✅ | 核心叙事一致；concept/ 额外提供形式化命题和定理链 |
 | **Ch 5: Using Structs** | [04_type_system.md](../concept/01_foundation/04_type_system.md) · [08_collections.md](../concept/01_foundation/08_collections.md) | ✅ | struct、enum、method 完全覆盖；concept/ 额外包含 ADT 代数语义 |
 | **Ch 6: Enums and Pattern Matching** | [04_type_system.md](../concept/01_foundation/04_type_system.md) · [07_control_flow.md](../concept/01_foundation/07_control_flow.md) | ✅ | enum、match、if let 完全覆盖；concept/ 额外包含穷尽性证明 |

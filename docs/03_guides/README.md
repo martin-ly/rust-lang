@@ -21,7 +21,7 @@
 | P2P 网络 | [libp2p 指南](03_libp2p_guide.md) | 进阶 |
 | 未定义行为检测 | [Miri 使用指南](03_miri_guide.md) | 进阶 |
 | 网络协议 | [QUIC / HTTP/3 指南](03_quic_http3_guide.md) | 进阶 |
-| 内核开发 | [Rust for Linux 指南](03_rust_for_linux_guide.md) | 专家 |
+| 内核开发 | [Rust for Linux 指南](../04_research/04_rust_for_linux.md) | 专家 |
 
 ## 使用建议
 

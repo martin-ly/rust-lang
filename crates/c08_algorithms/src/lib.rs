@@ -1,43 +1,26 @@
-//! Lib
+//! # c08_algorithms - Rust 算法学习库
+//!
+//! 本 crate 提供 Rust 中常用算法与数据结构的学习实现，涵盖排序、搜索、图算法、
+//! 动态规划、贪心、字符串算法、几何、数论、机器学习基础、性能优化与形式化验证示例。
+//!
+//! ## 特性
+//!
+//! - **Rust 1.95.0+ 特性对齐**：使用 Edition 2024 与最新标准库 API
+//! - **多实现方式**：同步、并行、异步（gen blocks，nightly-only）
+//! - **主题化组织**：按算法主题与 LeetCode 分类双维度组织
+//! - **形式化验证**：含 Kani 验证示例与循环不变量说明
+//! - **完整文档**：算法说明、复杂度分析与可运行示例
+//!
+//! ## 使用示例
 
 // [来源: Rust Standard Library / The Algorithm Design Manual]
-//! Collections, iterators, and algorithmic patterns in Rust.
 #![allow(clippy::type_complexity)]
 #![allow(clippy::assertions_on_constants)]
 #![allow(clippy::bool_assert_comparison)]
 #![allow(clippy::approx_constant)]
 #![feature(gen_blocks, yield_expr)]
 #![cfg_attr(feature = "portable_simd", feature(portable_simd))]
-//! Rust 1.95.0 高级算法实现库
-//! Rust 1.95.0 algorithm library
-//!
-//! 本库提供了Rust中各种高级算法的完整实现，完全对齐 Rust 1.95.0 版本特性，
-//! This library provides complete implementations of various advanced algorithms in Rust, fully aligned with Rust 1.95.0 features,
-//! 包括排序、搜索、图算法、机器学习算法、密码学算法等。
-//! Including sorting, searching, graph algorithms, machine learning algorithms, cryptographic algorithms, etc.
-//!
-//! ## 特性
-//! ## feature
-//!
-//! - **Rust 1.95.0+ 特性对齐**: 完全支持最新语言特性 (Edition 2024)
-//! - **Rust 1.95.0+ feature to **: feature (Edition 2024)
-//! - **对齐日期**: 2026-05-12
-//! - **to date **: 2026-05-12
-//! - **LeetCode 分类组织**: 按照 LeetCode 官方分类组织算法
-//! - **LeetCode **: LeetCode algorithm
-//! - **主题化组织**: 按算法主题分类组织
-//! - **organize **: algorithm classification organize
-//! - **多实现方式**: 同步、并行、异步实现
-//! - **multipleimplementationmethod**: synchronousparallelasync implementation
-//! - **形式化验证**: 包含算法正确性证明（循环不变量、霍尔逻辑）
-//! - ****: algorithm （circulation variable 、）
-//! - **完整文档**: 详细的算法说明和复杂度分析（主定理、摊还分析）
-//! - **complete **: algorithm explain and complex analyze （theorem 、analyze ）
-//! - **异步模式**: Actor/Reactor/CSP三大模式完整实现
-//! - **asyncpattern**: Actor/Reactor/CSPlargepatterncomplete implementation
-//!
-//! ## 使用示例
-//! ## Usage Examples
+
 //
 // ```rust
 // use c08_algorithms::topics::sorting::{SortingEngine, SortingAlgorithm};
@@ -129,13 +112,13 @@ pub mod algorithm_decision_trees;
 // LeetCode 分类算法模块（结合 Rust 1.95 特性）
 pub mod leetcode;
 
-/// 算法库版本信息
-/// algorithmlibraryversion information
+/// 算法库版本号。
 pub const VERSION: &str = "0.3.0";
-pub const RUST_VERSION: &str = "1.92.0";
 
-/// 获取库版本信息
-/// Get library version info
+/// 本 crate 目标对齐的 Rust 版本。
+pub const RUST_VERSION: &str = "1.95.0";
+
+/// 返回算法库版本号。
 ///
 /// # Examples
 ///
@@ -149,8 +132,7 @@ pub fn get_version() -> &'static str {
     VERSION
 }
 
-/// 获取支持的 Rust 版本
-/// Get support Rust version
+/// 返回本 crate 目标对齐的 Rust 版本号。
 ///
 /// # Examples
 ///

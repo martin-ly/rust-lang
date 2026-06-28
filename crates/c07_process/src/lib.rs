@@ -1,30 +1,18 @@
-//! Lib
-
-// [来源: Rust Standard Library / Rust Reference]
-//! Process management, IPC, signals, and system programming.
-#![allow(clippy::type_complexity)]
-#![allow(clippy::items_after_test_module)]
-#![allow(clippy::unnecessary_get_then_check)]
-
-//! # C07 Process Management Library
+//! # c07_process - Rust 进程管理与 IPC 学习模块
 //!
-//! 一个功能完整的 Rust 进程管理和 IPC 通信库。
-//! functionality complete Rust process and IP C library 。
+//! 本 crate 提供 Rust 进程管理、进程间通信（IPC）、信号、同步原语、
+//! 异步运行时与系统编程的学习实现，涵盖进程池、管道、共享内存、
+//! eBPF / Rust for Linux 预研等主题。
 //!
 //! ## 快速开始
-//! ## fast
 //!
 //! ```rust
 //! use c07_process::prelude::*;
 //! use std::collections::HashMap;
 //!
 //! fn main() -> c07_process::Result<()> {
-//!     // 创建进程管理器
-//!     // createprocess manager
 //!     let pm = ProcessManager::new();
 //!
-//!     // 创建进程配置
-//!     // createprocess configuration
 //!     let mut env = HashMap::new();
 //!     env.insert("PATH".to_string(), "/usr/bin:/bin".to_string());
 //!
@@ -39,15 +27,16 @@
 //!         resource_limits: ResourceLimits::default(),
 //!     };
 //!
-//!     // 注意：在实际使用中，需要确保程序存在
-//!     // ：in actual in ，program in
-//!     // 这里只是演示配置的创建
 //!     println!("进程配置创建成功: {:?}", config);
-//!     println!("process : {:?}", config);
 //!
 //!     Ok(())
 //! }
 //! ```
+
+// [来源: Rust Standard Library / Rust Reference]
+#![allow(clippy::type_complexity)]
+#![allow(clippy::items_after_test_module)]
+#![allow(clippy::unnecessary_get_then_check)]
 use serde::{Deserialize, Serialize};
 
 // 核心模块
@@ -154,11 +143,7 @@ pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 pub const AUTHORS: &str = env!("CARGO_PKG_AUTHORS");
 pub const DESCRIPTION: &str = env!("CARGO_PKG_DESCRIPTION");
 
-/// 初始化库
-/// library
-/// 初始化进程管理库
-///
-/// 初始化进程管理库，设置必要的资源。
+/// 初始化进程管理库。
 ///
 /// # Examples
 ///
@@ -182,12 +167,6 @@ pub fn init() -> Result<()> {
     Ok(())
 }
 
-/// 库清理函数
-/// librarycleanup function
-///
-/// 清理全局资源和状态
-/// 清理进程管理库资源
-///
 /// 清理进程管理库占用的资源。
 ///
 /// # Examples
@@ -212,13 +191,7 @@ pub fn cleanup() -> Result<()> {
     Ok(())
 }
 
-/// 获取库信息
-/// Get libraryinformation
-/// 获取库信息
-/// Get libraryinformation
-///
 /// 返回进程管理库的版本和功能信息。
-/// process library this and functionality 。
 ///
 /// # Examples
 ///
@@ -239,8 +212,7 @@ pub fn get_library_info() -> LibraryInfo {
     }
 }
 
-/// 库信息结构
-/// library structure
+/// 库元信息结构体。
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LibraryInfo {
     pub name: String,

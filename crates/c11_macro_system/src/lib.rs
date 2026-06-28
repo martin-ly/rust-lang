@@ -1,41 +1,40 @@
-//! Lib
-
-// [来源: Rust Reference / The Little Book of Rust Macros]
-//! Declarative macros (macro_rules!) and macro hygiene.
-#![allow(clippy::type_complexity)]
-#![allow(clippy::assertions_on_constants)]
-
+//! # c11_macro_system - Rust 宏系统学习库
+//!
+//! 本 crate 提供 Rust 声明宏（`macro_rules!`）与过程宏的学习资源，
+//! 涵盖宏卫生、宏模式、属性宏、编译期元编程与宏调试工具。
+//!
 //! ## 模块结构
-//! ## module structure
-//! - `declarative` - 声明宏实现和示例
-//! - `declarative` - and example
+//!
+//! - `declarative` - 声明宏实现与示例
+//! - `procedural_macros` - 过程宏示例
+//! - `attribute_macros` - 属性宏
+//! - `macro_hygiene` - 宏卫生
+//! - `macro_patterns` - 常见宏模式
+//! - `compile_time_metaprogramming` - 编译期元编程
 //! - `utils` - 宏开发辅助工具
-//! - `utils` - tool
-//! - `utils` - 宏开发辅助tool
-//! - `utils` - tool
+//!
 //! ## 快速开始
-//! ## fast
+//!
+//! ```rust
 //! use c11_macro_system::*;
 //!
-//! // 使用声明宏示例
-//! // example
-//! // 查看 examples/ 目录获取更多示例
-//! // examples/ example
-//! // 查看 examples/ 目录Get更多Example of
+//! // 使用声明宏示例，详见 examples/ 目录
+//! ```
+//!
 //! ## 学习路径
-//! ## learn
-//! 1. 查看 `docs/00_MASTER_INDEX.md` 获取完整学习导航
-//! 1. `docs/00_MASTER_INDEX.md` complete learn
-//! 2. 阅读理论文档了解宏的基础概念
-//! 2. theory foundation concept
-//! 3. 运行示例代码进行实践
-//! 3. Run example
-//! 4. 完成练习巩固知识
-//! 4. complete
-//! 4.
+//!
+//! 1. 查看 `docs/00_MASTER_INDEX.md` 获取完整学习导航。
+//! 2. 阅读理论文档了解宏的基础概念。
+//! 3. 运行示例代码进行实践。
+//! 4. 完成练习巩固知识。
+//!
 //! ## 相关资源
-//! ##
+//!
 //! - [The Rust Reference - Macros](https://doc.rust-lang.org/reference/macros.html)
+
+// [来源: Rust Reference / The Little Book of Rust Macros]
+#![allow(clippy::type_complexity)]
+#![allow(clippy::assertions_on_constants)]
 #![warn(missing_docs)]
 #![warn(clippy::all)]
 
@@ -44,8 +43,7 @@ pub mod declarative;
 pub mod error;
 pub mod utils;
 
-/// 过程宏实现模块（文档和示例）
-/// module （and example ）
+/// 过程宏实现模块（文档与示例）。
 pub mod proc;
 
 // Rust 1.91 新特性模块
@@ -82,8 +80,7 @@ pub use archive::rust_192_features::{
     demonstrate_rust_192_macro_features,
 };
 
-/// 模块版本信息
-/// module this
+/// 模块版本号。
 ///
 /// ```
 /// use c11_macro_system::VERSION;
@@ -92,8 +89,7 @@ pub use archive::rust_192_features::{
 /// ```
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 
-/// 模块名称
-/// module
+/// 模块名称。
 ///
 /// ```
 /// use c11_macro_system::MODULE_NAME;

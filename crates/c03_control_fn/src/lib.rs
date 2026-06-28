@@ -1,44 +1,27 @@
-//! Lib
+//! # c03_control_fn - Rust 控制流与函数学习模块
+//!
+//! 本 crate 聚焦 Rust 控制流、函数、闭包与错误处理模式的理论与实践，
+//! 涵盖 `if let` guards、异步控制流、生成器（gen blocks，nightly-only）、
+//! 函数组合、状态机等主题，并按 Rust 版本特性组织历史演进示例。
+//!
+//! ## 模块组织
+//!
+//! - 控制流模式 [`control_flow_patterns`]
+//! - 闭包与函数 [`closure`]
+//! - 异步控制流 [`async_control_flow`]
+//! - 错误处理 [`error_handling`]
+//! - `if let` guards 深度解析 [`if_let_guards_deep_dive`]
+//! - Rust 1.94–1.97 特性演进模块
+//!
+//! ## 版本信息
+//!
+//! - **当前版本**: 与 workspace 一致
+//! - **目标 Rust 版本**: 1.95.0+
+//! - **Edition**: 2024
 
 // [来源: Rust Reference / TRPL]
-//! Control flow, functions, closures, and error handling patterns.
 #![allow(clippy::type_complexity)]
 #![allow(clippy::assertions_on_constants)]
-
-//! Rust 1.95.0 控制streamandfunctionfeatureresearchproject
-//! 本项目专注于控制流与函数系统的深度分析和实践应用，
-//! this project stream and function system analyze and application ，
-//! 涵盖了异步编程增强、类型系统增强、性能优化特性等核心新特性。
-//! async 、type system 、performance optimization feature etc. core feature 。
-//! **当前版本**: Rust 1.95.0+ (Edition 2024)
-//! **对齐日期**: 2026-05-12
-//! **to date **: 2026-05-12
-//! **to齐date**: 2026-05-12
-//! ## Rust 1.95.0 新特性
-//! ## Rust 1.95.0 feature
-//! ## Rust 1.95.0 新feature
-//! - **bool 转浮点数**: `impl From<bool> for {f32, f64}`
-//! - **异步Drop**: 异步资源清理支持
-//! - **async Drop**: async
-//! - **异步生成器**: 原生异步迭代器支持 (nightly)
-//! - **异步闭包 (async closures)**: Rust 1.85.0 stable（非 nightly）
-//! - **Poloniusborrow checker**: 更精确borrowanalysis
-//! - **下一代特质求解器**: 更快的编译和更好的错误消息
-//! - **under trait **: and
-//! - **并行前端**: 并行编译支持
-//! - **parallelism frontend **: parallelism
-//! ## 历史特性模块
-//! ## feature module
-//! ## 历史featuremodule
-//! - **异步Drop**: 异步资源清理支持
-//! - **async Drop**: async
-//! - **异步生成器**: 原生异步迭代器支持
-//! - **异步闭包 (async closures)**: Rust 1.85.0 stable
-//! - **Poloniusborrow checker**: 更精确borrowanalysis
-//! - **下一代特质求解器**: 更快的编译和更好的错误消息
-//! - **under trait **: and
-//! - **并行前端**: 并行编译支持
-//! - **parallelism frontend **: parallelism
 // 导出核心模块
 pub mod async_control_flow;
 pub mod control_flow_patterns;
@@ -127,51 +110,39 @@ pub use basic_syntax::*;
 
 // 版本信息
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
-pub const RUST_VERSION: &str = "1.94.0";
+pub const RUST_VERSION: &str = "1.95.0";
 
-/// 项目信息
-/// projectinformation
-/// project
+/// 项目元信息。
 pub struct ProjectInfo;
 
 impl ProjectInfo {
-    /// 获取项目版本
-    /// Gets项目版本
-    /// project this
+    /// 返回项目版本号。
     pub fn version() -> &'static str {
         VERSION
     }
 
+    /// 返回目标 Rust 版本号。
     pub fn rust_version() -> &'static str {
         RUST_VERSION
     }
 
-    /// 获取项目描述
-    /// Gets项目描述
-    /// project describe
+    /// 返回项目描述。
     pub fn description() -> &'static str {
-        "Rust 1.95.0 控制流与函数特性研究项目"
+        "Rust 控制流与函数特性研究项目"
     }
 }
 
-/// 初始化项目
-/// Initializes项目
-/// project
 /// 初始化控制流与函数模块，设置日志系统并打印项目信息。
-/// Initializes控制流与函数模块，设置日志系统并打印项目信息。
-/// stream and function module ，system and project 。
 ///
 /// ```
 /// use c03_control_fn::init;
 ///
-/// // 初始化项目
-/// // project
+/// init();
 /// ```
 ///
 /// # Note
 ///
 /// 此函数会初始化日志系统，多次调用是安全的。
-/// this function system ，。
 pub fn init() {
     // 设置日志
     tracing_subscriber::fmt::init();
