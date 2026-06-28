@@ -138,6 +138,18 @@
 
 ---
 
+## K 轨道 — TRPL 第三版对照刷新（新增）
+
+| 编号 | 任务 | 状态 | 交付物 |
+|---|---|---|---|
+| K1 | 更新 TRPL 对照文档日期 | ✅ | `docs/TRPL_3RD_ED_DIFF.md` 日期更新为 2026-06-28 |
+| K2 | 修正 Ch 18 映射 | ✅ | Patterns and Matching 映射到 `07_control_flow.md` + `15_iterator_patterns.md` |
+| K3 | 同步更新建议学习路径 | ✅ | 底部学习路径映射 Ch 18 指向已修正 |
+
+**K 轨道结论**: ✅ **TRPL 对照表已刷新**
+
+---
+
 ## 当前阻塞与风险
 
 | 风险 | 可能性 | 影响 | 缓解措施 |
@@ -172,3 +184,4 @@
 - `H: 运行 cargo audit 并生成报告`
 - `I: 修复 rust-ownership-decidability 归档锚点链接`
 - `J: 扩展 Rust 1.98.0 代码示例`
+- `K: 刷新 TRPL 第三版对照差异分析`
