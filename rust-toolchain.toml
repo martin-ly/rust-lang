@@ -1,8 +1,10 @@
 [toolchain]
-# MSRV: stable 1.96.0（当前最新稳定版本）
+# MSRV: stable 1.96.0（当前 latest stable 已对应 1.96.0）
+# 使用 "stable" 通道而非精确版本号，避免 rustup 镜像在版本发布初期
+# 尚未同步 1.96.0 安装包导致的 404。
 # nightly-only 预览模块仍通过各 crate 的 build.rs 自动检测 nightly 并设置
 # `--cfg nightly` 来启用；stable 默认构建不会解析这些模块。
-channel = "1.96.0"
+channel = "stable"
 components = [
     "rustfmt",           # 代码格式化
     "clippy",            # 静态分析
