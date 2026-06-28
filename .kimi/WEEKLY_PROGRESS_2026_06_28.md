@@ -85,6 +85,10 @@
 - `C+D: update 1.97 release plan and add preflight checklist`
   - 更新 `.kimi/EXECUTION_RUST_1_97_RELEASE_2026_07_09.md`
   - 新增 `.kimi/RUST_197_RELEASE_PREFLIGHT_2026_07_08.md`
+- `C: add Rust 1.97 API activation guide for release day`
+  - 新增 `.kimi/RUST_197_API_ACTIVATION_GUIDE.md`
+- `D: add Rust 1.97 post-release stabilization checklist`
+  - 新增 `.kimi/RUST_197_POST_RELEASE_STABILIZATION_2026_07_10.md`
 
 ---
 
