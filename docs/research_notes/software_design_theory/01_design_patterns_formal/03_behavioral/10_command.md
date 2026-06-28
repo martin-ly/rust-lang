@@ -4,13 +4,6 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-> **创建日期**: 2026-02-12
-> **最后更新**: 2026-06-29
-> **Rust 版本**: 1.96.0+ (Edition 2024)
-> **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
-> **对齐说明**: 本文档已于 2026-06-29 完成与 [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)、[Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)、GoF *Design Patterns* 的权威国际化来源对齐升级。
->
-> **权威来源**: [Rust Design Patterns – Behavioral](https://rust-unofficial.github.io/patterns/patterns/behavioural/index.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ## 📊 目录 {#-目录}
 >
@@ -18,7 +11,6 @@
 
 - [Command 形式化分析](#command-形式化分析)
   - [📊 目录 {#-目录}](#-目录--目录)
-  - [权威来源对照](#权威来源对照)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Command 结构）](#def-11command-结构)
     - [Axiom CM1（可存储公理）](#axiom-cm1可存储公理)
@@ -28,31 +20,15 @@
     - [推论 CM-C1（纯 Safe Command）](#推论-cm-c1纯-safe-command)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
-  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196--edition-2024-代码示例更新)
-    - [Edition 2024 关键兼容点](#edition-2024-关键兼容点)
-  - [Rust 所有权、借用、生命周期与 trait 系统约束分析](#rust-所有权借用生命周期与-trait-系统约束分析)
-    - [所有权约束](#所有权约束)
-    - [借用与生命周期约束](#借用与生命周期约束)
-    - [trait 系统约束](#trait-系统约束)
-    - [与 Rust 类型系统的综合联系](#与-rust-类型系统的综合联系)
   - [完整证明](#完整证明)
     - [形式化论证链](#形式化论证链)
     - [与 Rust 类型系统的联系](#与-rust-类型系统的联系)
     - [内存安全保证](#内存安全保证)
-  - [形式化属性：不变式、前置/后置条件与安全边界](#形式化属性不变式前置后置条件与安全边界)
-    - [不变式（Invariants）](#不变式invariants)
-    - [前置条件（Preconditions）](#前置条件preconditions)
-    - [后置条件（Postconditions）](#后置条件postconditions)
-    - [安全边界（Safety Boundary）](#安全边界safety-boundary)
-    - [形式化规约汇总](#形式化规约汇总)
   - [典型场景](#典型场景)
   - [完整场景示例：可撤销文本编辑器](#完整场景示例可撤销文本编辑器)
   - [相关模式](#相关模式)
   - [实现变体](#实现变体)
-  - [反例：常见误用及编译器错误](#反例常见误用及编译器错误)
-    - [反例 1：undo 与 execute 不匹配](#反例-1undo-与-execute-不匹配)
-    - [反例 2：命令历史持有已移动接收者](#反例-2命令历史持有已移动接收者)
-    - [反例 3：RefCell 运行时借用冲突](#反例-3refcell-运行时借用冲突)
+  - [反例：命令副作用不可逆](#反例命令副作用不可逆)
   - [选型决策树](#选型决策树)
   - [与 GoF 对比](#与-gof-对比)
   - [边界](#边界)
@@ -203,53 +179,6 @@ Command 为纯 Safe；闭包或 trait 封装操作，无 `unsafe`。
 ---
 
 ## Rust 实现与代码示例
-
-## Rust 1.96+ / Edition 2024 代码示例更新
->
-> **来源: [Rust Reference – Edition 2024](https://doc.rust-lang.org/reference/editions.html)** | **来源: [Rust 1.96 Release Notes](https://releases.rs/)**
-
-以下示例已在 **Rust 1.96.0+ (Edition 2024)** 语义下校验，使用 `trait Command、Box<dyn Command>、撤销栈` 等现代惯用法。
-
-```rust
-trait Command {
-    fn execute(&self);
-    fn undo(&self);
-}
-
-struct AddText { text: String, receiver: std::rc::Rc<std::cell::RefCell<String>> }
-impl Command for AddText {
-    fn execute(&self) { self.receiver.borrow_mut().push_str(&self.text); }
-    fn undo(&self) {
-        let len = self.receiver.borrow().len();
-        let tlen = self.text.len();
-        self.receiver.borrow_mut().truncate(len - tlen);
-    }
-}
-
-struct Invoker { history: Vec<Box<dyn Command>> }
-impl Invoker {
-    fn run(&mut self, cmd: Box<dyn Command>) { cmd.execute(); self.history.push(cmd); }
-}
-
-fn main() {
-    let doc = std::rc::Rc::new(std::cell::RefCell::new(String::new()));
-    let mut invoker = Invoker { history: vec![] };
-    invoker.run(Box::new(AddText { text: "hello ".into(), receiver: doc.clone() }));
-    println!("{}", doc.borrow());
-}
-```
-
-### Edition 2024 关键兼容点
-
-| 特性 | 应用场景 | 兼容说明 |
-| :--- | :--- | :--- |
-| `rust_2024` 保留字 | 新关键字（`gen`、`unsafe` 修饰等） | 避免将保留字用作标识符 |
-| 尾表达式路径匹配 | `match` / `if let` | 模式绑定语义更清晰 |
-| `impl Trait` 生命周期 | 复杂 trait bound | 生命周期捕获规则更严格 |
-| `&` / `&mut` 自动借用细化 | 方法调用 | 减少显式 `&` / `&mut` 转换 |
-
----
-
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -304,6 +233,52 @@ impl ReversibleCommand for IncrementCommand {
 
 ---
 
+
+## Rust 1.96+ / Edition 2024 代码示例更新
+>
+> **来源: [Rust Reference – Edition 2024](https://doc.rust-lang.org/reference/editions.html)** | **来源: [Rust 1.96 Release Notes](https://releases.rs/)**
+
+以下示例已在 **Rust 1.96.0+ (Edition 2024)** 语义下校验，使用 `trait Command、Box<dyn Command>、撤销栈` 等现代惯用法。
+
+```rust
+trait Command {
+    fn execute(&self);
+    fn undo(&self);
+}
+
+struct AddText { text: String, receiver: std::rc::Rc<std::cell::RefCell<String>> }
+impl Command for AddText {
+    fn execute(&self) { self.receiver.borrow_mut().push_str(&self.text); }
+    fn undo(&self) {
+        let len = self.receiver.borrow().len();
+        let tlen = self.text.len();
+        self.receiver.borrow_mut().truncate(len - tlen);
+    }
+}
+
+struct Invoker { history: Vec<Box<dyn Command>> }
+impl Invoker {
+    fn run(&mut self, cmd: Box<dyn Command>) { cmd.execute(); self.history.push(cmd); }
+}
+
+fn main() {
+    let doc = std::rc::Rc::new(std::cell::RefCell::new(String::new()));
+    let mut invoker = Invoker { history: vec![] };
+    invoker.run(Box::new(AddText { text: "hello ".into(), receiver: doc.clone() }));
+    println!("{}", doc.borrow());
+}
+```
+
+### Edition 2024 关键兼容点
+
+| 特性 | 应用场景 | 兼容说明 |
+| :--- | :--- | :--- |
+| `rust_2024` 保留字 | 新关键字（`gen`、`unsafe` 修饰等） | 避免将保留字用作标识符 |
+| 尾表达式路径匹配 | `match` / `if let` | 模式绑定语义更清晰 |
+| `impl Trait` 生命周期 | 复杂 trait bound | 生命周期捕获规则更严格 |
+| `&` / `&mut` 自动借用细化 | 方法调用 | 减少显式 `&` / `&mut` 转换 |
+
+---
 ## Rust 所有权、借用、生命周期与 trait 系统约束分析
 >
 > **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**

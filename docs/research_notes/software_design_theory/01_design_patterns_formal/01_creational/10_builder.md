@@ -4,13 +4,6 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-> **创建日期**: 2026-02-12
-> **最后更新**: 2026-06-29
-> **Rust 版本**: 1.96.0+ (Edition 2024)
-> **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
-> **对齐说明**: 本文档已于 2026-06-29 完成与 [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)、[Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)、GoF *Design Patterns* 的权威国际化来源对齐升级。
->
-> **权威来源**: [Rust Design Patterns – Creational](https://rust-unofficial.github.io/patterns/patterns/creational/index.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ---
 
@@ -20,7 +13,6 @@
 
 - [Builder 形式化分析](#builder-形式化分析)
   - [📊 目录 {#-目录}](#-目录--目录)
-  - [权威来源对照](#权威来源对照)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Builder 结构）](#def-11builder-结构)
     - [Axiom B1（必填字段公理）](#axiom-b1必填字段公理)
@@ -30,31 +22,15 @@
     - [推论 B-C1（纯 Safe Builder）](#推论-b-c1纯-safe-builder)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
-  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196--edition-2024-代码示例更新)
-    - [Edition 2024 关键兼容点](#edition-2024-关键兼容点)
-  - [Rust 所有权、借用、生命周期与 trait 系统约束分析](#rust-所有权借用生命周期与-trait-系统约束分析)
-    - [所有权约束](#所有权约束)
-    - [借用与生命周期约束](#借用与生命周期约束)
-    - [trait 系统约束](#trait-系统约束)
-    - [与 Rust 类型系统的综合联系](#与-rust-类型系统的综合联系)
   - [完整证明](#完整证明)
     - [形式化论证链](#形式化论证链)
     - [与 Rust 类型系统的联系](#与-rust-类型系统的联系)
     - [内存安全保证](#内存安全保证)
-  - [形式化属性：不变式、前置/后置条件与安全边界](#形式化属性不变式前置后置条件与安全边界)
-    - [不变式（Invariants）](#不变式invariants)
-    - [前置条件（Preconditions）](#前置条件preconditions)
-    - [后置条件（Postconditions）](#后置条件postconditions)
-    - [安全边界（Safety Boundary）](#安全边界safety-boundary)
-    - [形式化规约汇总](#形式化规约汇总)
   - [典型场景](#典型场景)
   - [完整场景示例：HTTP 请求构建器](#完整场景示例http-请求构建器)
   - [相关模式](#相关模式)
   - [实现变体](#实现变体)
-  - [反例：常见误用及编译器错误](#反例常见误用及编译器错误)
-    - [反例 1：缺少必填字段](#反例-1缺少必填字段)
-    - [反例 2：重复 build](#反例-2重复-build)
-    - [反例 3：可变借用链式冲突](#反例-3可变借用链式冲突)
+  - [反例](#反例)
   - [错误处理](#错误处理)
   - [选型决策树](#选型决策树)
   - [与 GoF 对比](#与-gof-对比)
@@ -68,6 +44,7 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -239,6 +216,57 @@ Builder 为纯 Safe；链式 `set` + `build(self)` 消费所有权，无 `unsafe
 ---
 
 ## Rust 实现与代码示例
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+```rust,ignore
+struct Config {
+    host: String,
+    port: u16,
+    timeout: u64,
+}
+
+struct ConfigBuilder {
+    host: Option<String>,
+    port: Option<u16>,
+    timeout: Option<u64>,
+}
+
+impl ConfigBuilder {
+    fn new() -> Self {
+        Self { host: None, port: None, timeout: None }
+    }
+
+    fn host(mut self, host: String) -> Self {
+        self.host = Some(host);
+        self
+    }
+
+    fn port(mut self, port: u16) -> Self {
+        self.port = Some(port);
+        self
+    }
+
+    fn build(self) -> Result<Config, String> {
+        Ok(Config {
+            host: self.host.ok_or("host required")?,
+            port: self.port.ok_or("port required")?,
+            timeout: self.timeout.unwrap_or(30),
+        })
+    }
+}
+
+// 使用：链式调用，build 消费 self
+let config = ConfigBuilder::new()
+    .host("localhost".to_string())
+    .port(8080)
+    .build()?;
+```
+
+**形式化对应**：`build(self)` 即 $\mathit{build} : B \to \mathrm{Result}(T)$；`self` 被消费，符合 Axiom B2。
+
+---
+
 
 ## Rust 1.96+ / Edition 2024 代码示例更新
 >
@@ -315,58 +343,6 @@ fn main() {
 | `&` / `&mut` 自动借用细化 | 方法调用 | 减少显式 `&` / `&mut` 转换 |
 
 ---
-
->
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-
-```rust,ignore
-struct Config {
-    host: String,
-    port: u16,
-    timeout: u64,
-}
-
-struct ConfigBuilder {
-    host: Option<String>,
-    port: Option<u16>,
-    timeout: Option<u64>,
-}
-
-impl ConfigBuilder {
-    fn new() -> Self {
-        Self { host: None, port: None, timeout: None }
-    }
-
-    fn host(mut self, host: String) -> Self {
-        self.host = Some(host);
-        self
-    }
-
-    fn port(mut self, port: u16) -> Self {
-        self.port = Some(port);
-        self
-    }
-
-    fn build(self) -> Result<Config, String> {
-        Ok(Config {
-            host: self.host.ok_or("host required")?,
-            port: self.port.ok_or("port required")?,
-            timeout: self.timeout.unwrap_or(30),
-        })
-    }
-}
-
-// 使用：链式调用，build 消费 self
-let config = ConfigBuilder::new()
-    .host("localhost".to_string())
-    .port(8080)
-    .build()?;
-```
-
-**形式化对应**：`build(self)` 即 $\mathit{build} : B \to \mathrm{Result}(T)$；`self` 被消费，符合 Axiom B2。
-
----
-
 ## Rust 所有权、借用、生命周期与 trait 系统约束分析
 >
 > **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
@@ -785,14 +761,13 @@ graph LR
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 - Rust 1.94 迁移指南
-- Rust 1.94 特性速查
+- [Rust 1.94 特性速查
 - [性能调优指南](../../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
-
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

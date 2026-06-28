@@ -4,13 +4,6 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-> **创建日期**: 2026-02-12
-> **最后更新**: 2026-06-29
-> **Rust 版本**: 1.96.0+ (Edition 2024)
-> **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
-> **对齐说明**: 本文档已于 2026-06-29 完成与 [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)、[Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)、GoF *Design Patterns* 的权威国际化来源对齐升级。
->
-> **权威来源**: [Rust Design Patterns – Creational](https://rust-unofficial.github.io/patterns/patterns/creational/index.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ---
 
@@ -20,7 +13,6 @@
 
 - [Factory Method 形式化分析](#factory-method-形式化分析)
   - [📊 目录 {#-目录}](#-目录--目录)
-  - [权威来源对照](#权威来源对照)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Factory Method 结构）](#def-11factory-method-结构)
     - [Axiom FM1（返回类型一致性公理）](#axiom-fm1返回类型一致性公理)
@@ -30,30 +22,14 @@
     - [推论 FM-C1（纯 Safe Factory）](#推论-fm-c1纯-safe-factory)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
-  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196--edition-2024-代码示例更新)
-    - [Edition 2024 关键兼容点](#edition-2024-关键兼容点)
-  - [Rust 所有权、借用、生命周期与 trait 系统约束分析](#rust-所有权借用生命周期与-trait-系统约束分析)
-    - [所有权约束](#所有权约束)
-    - [借用与生命周期约束](#借用与生命周期约束)
-    - [trait 系统约束](#trait-系统约束)
-    - [与 Rust 类型系统的综合联系](#与-rust-类型系统的综合联系)
   - [完整证明](#完整证明)
     - [形式化论证链](#形式化论证链)
     - [与 Rust 类型系统的联系](#与-rust-类型系统的联系)
     - [内存安全保证](#内存安全保证)
-  - [形式化属性：不变式、前置/后置条件与安全边界](#形式化属性不变式前置后置条件与安全边界)
-    - [不变式（Invariants）](#不变式invariants)
-    - [前置条件（Preconditions）](#前置条件preconditions)
-    - [后置条件（Postconditions）](#后置条件postconditions)
-    - [安全边界（Safety Boundary）](#安全边界safety-boundary)
-    - [形式化规约汇总](#形式化规约汇总)
   - [典型场景](#典型场景)
   - [相关模式](#相关模式)
   - [实现变体](#实现变体)
-  - [反例：常见误用及编译器错误](#反例常见误用及编译器错误)
-    - [反例 1：关联类型未实现 Product](#反例-1关联类型未实现-product)
-    - [反例 2：返回借用导致生命周期错误](#反例-2返回借用导致生命周期错误)
-    - [反例 3：默认方法中可变修改 Creator](#反例-3默认方法中可变修改-creator)
+  - [反例：工厂返回空或无效](#反例工厂返回空或无效)
   - [与理论衔接](#与理论衔接)
   - [选型决策树](#选型决策树)
   - [与 GoF 对比](#与-gof-对比)
@@ -67,6 +43,7 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -215,6 +192,44 @@ Factory Method 为纯 Safe；仅用 trait、impl、`Box`，无 unsafe。
 ---
 
 ## Rust 实现与代码示例
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+```rust
+trait Product {
+    fn operation(&self) -> String;
+}
+
+struct ConcreteProductA;
+impl Product for ConcreteProductA {
+    fn operation(&self) -> String { "Product A".to_string() }
+}
+
+struct ConcreteProductB;
+impl Product for ConcreteProductB {
+    fn operation(&self) -> String { "Product B".to_string() }
+}
+
+#[derive(Clone, Copy)]
+enum ProductType { A, B }
+
+// 工厂方法：C → T，C 为 ProductType（或 Creator），T 为 dyn Product
+fn create_product(t: ProductType) -> Box<dyn Product> {
+    match t {
+        ProductType::A => Box::new(ConcreteProductA),
+        ProductType::B => Box::new(ConcreteProductB),
+    }
+}
+
+// 使用
+let product = create_product(ProductType::A);
+assert_eq!(product.operation(), "Product A");
+```
+
+**形式化对应**：`create_product` 即 $\mathit{factory}$；`ProductType` 为 $C$ 的变体；`Box<dyn Product>` 为 $T$。所有权：`Box::new` 产生拥有权，返回时转移。
+
+---
+
 
 ## Rust 1.96+ / Edition 2024 代码示例更新
 >
@@ -268,45 +283,6 @@ fn main() {
 | `&` / `&mut` 自动借用细化 | 方法调用 | 减少显式 `&` / `&mut` 转换 |
 
 ---
-
->
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-
-```rust
-trait Product {
-    fn operation(&self) -> String;
-}
-
-struct ConcreteProductA;
-impl Product for ConcreteProductA {
-    fn operation(&self) -> String { "Product A".to_string() }
-}
-
-struct ConcreteProductB;
-impl Product for ConcreteProductB {
-    fn operation(&self) -> String { "Product B".to_string() }
-}
-
-#[derive(Clone, Copy)]
-enum ProductType { A, B }
-
-// 工厂方法：C → T，C 为 ProductType（或 Creator），T 为 dyn Product
-fn create_product(t: ProductType) -> Box<dyn Product> {
-    match t {
-        ProductType::A => Box::new(ConcreteProductA),
-        ProductType::B => Box::new(ConcreteProductB),
-    }
-}
-
-// 使用
-let product = create_product(ProductType::A);
-assert_eq!(product.operation(), "Product A");
-```
-
-**形式化对应**：`create_product` 即 $\mathit{factory}$；`ProductType` 为 $C$ 的变体；`Box<dyn Product>` 为 $T$。所有权：`Box::new` 产生拥有权，返回时转移。
-
----
-
 ## Rust 所有权、借用、生命周期与 trait 系统约束分析
 >
 > **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
@@ -675,14 +651,13 @@ graph LR
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - Rust 1.94 迁移指南
-- Rust 1.94 特性速查
+- [Rust 1.94 特性速查
 - [性能调优指南](../../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
-
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

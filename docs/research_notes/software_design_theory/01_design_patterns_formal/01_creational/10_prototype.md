@@ -4,13 +4,6 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-> **创建日期**: 2026-02-12
-> **最后更新**: 2026-06-29
-> **Rust 版本**: 1.96.0+ (Edition 2024)
-> **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
-> **对齐说明**: 本文档已于 2026-06-29 完成与 [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)、[Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)、GoF *Design Patterns* 的权威国际化来源对齐升级。
->
-> **权威来源**: [Rust Design Patterns – Creational](https://rust-unofficial.github.io/patterns/patterns/creational/index.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ## 📊 目录 {#-目录}
 >
@@ -18,7 +11,6 @@
 
 - [Prototype 形式化分析](#prototype-形式化分析)
   - [📊 目录 {#-目录}](#-目录--目录)
-  - [权威来源对照](#权威来源对照)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Prototype 结构）](#def-11prototype-结构)
     - [Axiom P1（独立副本公理）](#axiom-p1独立副本公理)
@@ -28,30 +20,14 @@
     - [推论 P-C1（Clone 安全使用）](#推论-p-c1clone-安全使用)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
-  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196--edition-2024-代码示例更新)
-    - [Edition 2024 关键兼容点](#edition-2024-关键兼容点)
-  - [Rust 所有权、借用、生命周期与 trait 系统约束分析](#rust-所有权借用生命周期与-trait-系统约束分析)
-    - [所有权约束](#所有权约束)
-    - [借用与生命周期约束](#借用与生命周期约束)
-    - [trait 系统约束](#trait-系统约束)
-    - [与 Rust 类型系统的综合联系](#与-rust-类型系统的综合联系)
   - [完整证明](#完整证明)
     - [形式化论证链](#形式化论证链)
     - [与 Rust 类型系统的联系](#与-rust-类型系统的联系)
     - [内存安全保证](#内存安全保证)
-  - [形式化属性：不变式、前置/后置条件与安全边界](#形式化属性不变式前置后置条件与安全边界)
-    - [不变式（Invariants）](#不变式invariants)
-    - [前置条件（Preconditions）](#前置条件preconditions)
-    - [后置条件（Postconditions）](#后置条件postconditions)
-    - [安全边界（Safety Boundary）](#安全边界safety-boundary)
-    - [形式化规约汇总](#形式化规约汇总)
   - [典型场景](#典型场景)
   - [相关模式](#相关模式)
   - [实现变体](#实现变体)
-  - [反例：常见误用及编译器错误](#反例常见误用及编译器错误)
-    - [反例 1：未实现 Clone](#反例-1未实现-clone)
-    - [反例 2：浅拷贝导致共享可变状态](#反例-2浅拷贝导致共享可变状态)
-    - [反例 3：Copy 类型含非 Copy 字段](#反例-3copy-类型含非-copy-字段)
+  - [反例：Clone 含浅拷贝引用](#反例clone-含浅拷贝引用)
   - [与 Copy 的关系](#与-copy-的关系)
   - [选型决策树](#选型决策树)
   - [与 GoF 对比](#与-gof-对比)
@@ -65,6 +41,7 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -224,6 +201,39 @@ $$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$
 ---
 
 ## Rust 实现与代码示例
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+```rust
+#[derive(Clone)]
+struct Config {
+    host: String,
+    port: u16,
+}
+
+// 使用
+let a = Config { host: "localhost".into(), port: 8080 };
+let b = a.clone();  // a 仍有效，b 为独立副本
+assert_eq!(a.host, b.host);
+```
+
+**深拷贝（含嵌套）**：
+
+```rust
+#[derive(Clone)]
+struct Node {
+    value: i32,
+    children: Vec<Node>,
+}
+
+let tree = Node { value: 1, children: vec![] };
+let copy = tree.clone();  // 递归 clone
+```
+
+**形式化对应**：`clone(&self) -> Self` 即 $\mathit{clone}$；`#[derive(Clone)]` 自动生成实现。
+
+---
+
 
 ## Rust 1.96+ / Edition 2024 代码示例更新
 >
@@ -266,40 +276,6 @@ fn main() {
 | `&` / `&mut` 自动借用细化 | 方法调用 | 减少显式 `&` / `&mut` 转换 |
 
 ---
-
->
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-
-```rust
-#[derive(Clone)]
-struct Config {
-    host: String,
-    port: u16,
-}
-
-// 使用
-let a = Config { host: "localhost".into(), port: 8080 };
-let b = a.clone();  // a 仍有效，b 为独立副本
-assert_eq!(a.host, b.host);
-```
-
-**深拷贝（含嵌套）**：
-
-```rust
-#[derive(Clone)]
-struct Node {
-    value: i32,
-    children: Vec<Node>,
-}
-
-let tree = Node { value: 1, children: vec![] };
-let copy = tree.clone();  // 递归 clone
-```
-
-**形式化对应**：`clone(&self) -> Self` 即 $\mathit{clone}$；`#[derive(Clone)]` 自动生成实现。
-
----
-
 ## Rust 所有权、借用、生命周期与 trait 系统约束分析
 >
 > **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
@@ -672,14 +648,13 @@ graph LR
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - Rust 1.94 迁移指南
-- Rust 1.94 特性速查
+- [Rust 1.94 特性速查
 - [性能调优指南](../../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
-
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
