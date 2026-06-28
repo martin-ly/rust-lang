@@ -96,6 +96,8 @@
   - 新增 `crates/c13_embedded/docs/README.md`
   - 新增 `crates/c13_embedded/docs/ONE_PAGE_SUMMARY.md`
   - 新增 `crates/c13_embedded/docs/00_MASTER_INDEX.md`
+- `B: clean up c13_embedded lib.rs doc comments`
+  - 清理中英文混杂与碎片注释
 
 ---
 
