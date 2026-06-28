@@ -4,12 +4,24 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-> **对齐日期**: 2026-05-12
-> **状态**: ✅ 已完成
+> **对齐日期**: 2026-06-29
+> **状态**: 🔄 结构迁回完成，权威国际化对齐升级中
+
+---
+
+## ⚠️ 当前状态说明
+
+> **2026-06-29 更新**
+
+本目录正在进行 **权威国际化来源对齐升级**（Rust 1.96.0+ / Edition 2024）。
+
+- `experiments/`、`software_design_theory/` 各子目录（设计模式、工作流、执行模型、组合工程、边界系统、分布式）内容已从 `archive/research_notes_2026_06_25/` 迁回。
+- `formal_modules/` 已新建 README 并迁回形式化生态思维导图，模块系统规范内容正在补充。
+- 根目录 130+ 篇历史核心文档已从 `archive/research_notes_2026_06_25/` 迁回。
+- 各文件状态标签已更新为 🔄 迁回待审 / 内容升级中，原有“100% 完成”表述正在逐步校准。
 
 ---
 
@@ -43,82 +55,55 @@
 **详细梳理**（实际文件清单、归档约定、formal_methods 概览）：见 **[10_research_notes_organization.md](10_research_notes_organization.md)**。
 
 ```text
-research_notes/
-├── 10_00_organization_and_navigation.md  # 组织架构与按目标导航（首次使用入口）
-├── README.md                    # 本索引文件
-├── 10_research_notes_organization.md  # 全面梳理（结构、归档、版本、维护）
-├── formal_methods/              # 形式化方法研究（六篇核心 + 思维导图/矩阵/决策树，见该目录 README）
+research_notes/                  # 主索引、组织说明与正在升级的核心内容
+├── README.md                    # 本索引文件（含当前状态说明）
+├── INDEX.md                     # 完整索引
+├── 10_research_notes_organization.md  # 实际结构、归档约定、维护检查清单
+├── 10_safe_unsafe_comprehensive_analysis.md  # 安全与非安全全面论证
+├── 10_theorem_rust_example_mapping.md        # 定理↔Rust 示例映射
+│
+├── formal_methods/              # 形式化方法研究（所有权、借用、生命周期、async、Pin、Send/Sync）
 │   ├── README.md
-│   ├── 00_completeness_gaps.md  # 完备性缺口（Phase 1–6 100% 完成）
-│   ├── 10_ownership_model.md       # 所有权模型形式化
-│   ├── 10_borrow_checker_proof.md  # 借用检查器证明
-│   ├── 10_async_state_machine.md   # 异步状态机形式化
-│   ├── 10_lifetime_formalization.md # 生命周期形式化
-│   ├── 10_pin_self_referential.md  # Pin 和自引用类型形式化
-│   ├── 10_send_sync_formalization.md
-│   └── …（思维导图、矩阵、决策树等见 [formal_methods/README](../../archive/research_notes_2026_06_25/formal_methods/README.md)）
+│   ├── 10_ownership_model.md
+│   ├── 10_borrow_checker_proof.md
+│   ├── 10_lifetime_formalization.md
+│   ├── 10_variance_concept_mindmap.md
+│   └── coq_skeleton/            # 轻量 Coq 骨架（完整版见 archive/deprecated/）
+│
 ├── type_theory/                 # 类型理论研究
 │   ├── README.md
-│   ├── 00_completeness_gaps.md  # 完备性缺口（形式化论证不充分声明）
-│   ├── 10_construction_capability.md  # 类型构造能力（Def TCON1、矩阵、决策树）
-│   ├── 10_type_system_foundations.md
-│   ├── 10_trait_system_formalization.md
 │   ├── 10_lifetime_formalization.md
-│   ├── 10_advanced_types.md
 │   └── 10_variance_theory.md
-├── software_design_theory/      # 软件设计理论研究
-│   ├── 01_design_patterns_formal/  # 设计模式形式化（GoF 23）
+│
+├── formal_modules/              # 形式化模块系统（🆕 新建，内容升级中）
+│   ├── README.md
+│   └── 10_formalization_ecology_mindmap.md
+│
+├── software_design_theory/      # 软件设计理论研究（已从 archive 迁回，待权威来源升级）
+│   ├── README.md
+│   ├── 10_00_master_index.md
+│   ├── 06_rust_idioms.md
+│   ├── 07_anti_patterns.md
+│   ├── 01_design_patterns_formal/      # GoF 23 模式形式化（创建型/结构型/行为型）
+│   ├── 02_workflow/                    # 异步/并发工作流模式
 │   ├── 02_workflow_safe_complete_models/  # 23 安全 / 43 完全模型
-│   ├── 03_execution_models/       # 同步/异步/并发/并行/分布式
-│   ├── 04_compositional_engineering/  # 组合工程有效性
-│   ├── 05_boundary_system/        # 边界体系统一分析
-│   ├── 06_rust_idioms.md          # Rust 惯用模式（RAII、Newtype、类型状态）
-│   └── 07_anti_patterns.md        # 反模式与边界
-└── experiments/                 # 实验研究
+│   ├── 03_execution_models/            # 同步/异步/并发/并行/分布式
+│   ├── 04_compositional_engineering/   # 组合工程有效性
+│   ├── 05_boundary_system/             # 边界体系统一分析
+│   ├── 05_distributed/                 # 分布式模式
+│   └── 07_crate_architectures/         # 主流 crate 架构分析
+│
+└── experiments/                 # 实验研究（已从 archive 迁回，待升级到 1.96+）
     ├── README.md
     ├── 10_performance_benchmarks.md
     ├── 10_memory_analysis.md
     ├── 10_compiler_optimizations.md
     ├── 10_concurrency_performance.md
     └── 10_macro_expansion_performance.md
-├── 10_practical_applications.md    # 实际应用案例研究
-├── 10_research_methodology.md      # 研究方法论
-├── 10_quick_reference.md           # 快速参考索引
-├── 10_research_roadmap.md          # 研究路线图
-├── 10_template.md                  # 研究笔记模板
-├── 10_contributing.md              # 贡献指南
-├── 10_quality_checklist.md         # 质量检查清单
-├── 10_system_summary.md            # 系统总结
-├── 10_tools_guide.md              # 研究工具使用指南
-├── 10_changelog.md                # 更新日志
-├── INDEX.md                    # 完整索引
-├── 10_getting_started.md          # 快速入门指南
-├── 10_faq.md                      # 常见问题解答
-├── 10_maintenance_guide.md        # 维护指南
-├── 10_best_practices.md           # 最佳实践
-├── 10_glossary.md                 # 术语表
-├── 10_resources.md                # 研究资源汇总
-├── 10_system_integration.md       # 系统集成指南
-├── 10_example.md                  # 研究笔记示例
-├── 10_progress_tracking.md        # 研究进展跟踪
-├── 10_task_checklist.md           # 研究任务清单
-├── 10_proof_index.md              # 形式化证明文档索引 🆕
-├── 10_international_formal_verification_index.md  # 国际形式化验证对标索引 🆕
-├── 10_formal_proof_critical_analysis_and_plan_2026_02.md  # 批判性分析与可持续推进计划 🆕
-├── 10_formal_full_model_overview.md  # 形式化全模型入口（统一形式系统）🆕
-├── 10_rustbelt_alignment.md  # RustBelt 逐章对标 🆕
-├── 10_executable_semantics_roadmap.md  # 可执行语义路线图 🆕
-├── 10_core_theorems_full_proofs.md  # 核心定理完整证明（L2 级，数学风格）🆕
-├── 10_theorem_rust_example_mapping.md  # 定理↔Rust 示例映射 🆕
-├── 10_aeneas_integration_plan.md  # 已归档 → [archive/deprecated/](../../archive/docs/deprecated/README.md)
-├── 10_coq_of_rust_integration_plan.md  # 已归档 → [archive/deprecated/](../../archive/docs/deprecated/README.md)
-├── 10_coq_isabelle_proof_scaffolding.md  # 已归档 → [archive/deprecated/](../../archive/docs/deprecated/README.md)
-├── coq_skeleton/  # 已归档 → [archive/deprecated/coq_skeleton/](../../archive/docs/deprecated/coq_skeleton/README.md)
-├── 10_content_enhancement.md      # 内容完善指南（含层次推进、实质内容自检表）🆕
-├── 10_classification.md           # 文档分类体系（按角色/层次/主题域）🆕
-├── 10_writing_guide.md            # 研究笔记写作指南
-├── 10_statistics.md               # 研究笔记系统统计报告
-└── 10_quick_find.md               # 研究笔记快速查找
+
+# 根目录还包含 130+ 篇核心文档与扩展索引（已从 archive/research_notes_2026_06_25/ 迁回，详见 INDEX.md）
+# 例如：10_00_organization_and_navigation、10_proof_index、10_authoritative_alignment_guide、
+#       10_international_formal_verification_index、10_authoritative_alignment_gap_matrix 等
 ```
 
 ---
@@ -578,9 +563,9 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 ---
 
 **维护团队**: Rust Research Community
-**最后更新**: 2026-02-26
-**Rust 版本**: 1.93.1+
-**状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记全部完成）
+**最后更新**: 2026-06-29
+**Rust 版本**: 1.96.0+ (Edition 2024)
+**状态**: 🔄 **结构迁回完成，权威国际化对齐升级中**（子目录已从 archive 迁回，内容按 P0/P1/P2 来源逐项升级）
 
 **全面梳理**：[RESEARCH_NOTES_ORGANIZATION](10_research_notes_organization.md) — 实际结构、归档约定、入口与索引关系
 
@@ -643,17 +628,17 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 ---
 
 **维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+**最后更新**: 2026-06-29 (Rust 1.96+ 权威国际化对齐升级中)
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-06-29 启动 research_notes 空目录迁回与权威国际化对齐升级
 
-**文档版本**: 1.1
+**文档版本**: 1.2
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**最后更新**: 2026-06-29
+**状态**: 🔄 权威国际化对齐升级中
 
 ---
 

@@ -21,7 +21,7 @@
     - [Axum](#axum)
     - [Actix-web](#actix-web)
     - [Rocket](#rocket)
-  - [🗄️ 数据库](#数据库)
+  - [🗄️ 数据库](#️-数据库)
     - [SQLx](#sqlx)
     - [Diesel](#diesel)
     - [Sea-ORM](#sea-orm)
@@ -34,8 +34,6 @@
   - [📈 监控与可观测性](#-监控与可观测性)
     - [Tracing 生态系统](#tracing-生态系统)
   - [🔗 参考资源](#-参考资源)
-<a id="状态--持续扩充中"></a>
-  - [**状态**: 🔄 持续扩充中](#状态--持续扩充中)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -585,6 +583,7 @@ fn init_tracing() {
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-05-08
 **状态**: 🔄 持续扩充中
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -609,21 +608,13 @@ fn init_tracing() {
 ## 权威来源索引
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 > **来源: [ACM](https://dl.acm.org/)**

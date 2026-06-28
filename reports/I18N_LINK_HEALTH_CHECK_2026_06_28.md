@@ -1,4 +1,5 @@
 # 国际化权威来源链接健康检查报告
+>
 > 检查日期: 2026-06-28
 > 扫描范围: concept, knowledge, docs
 > 外部链接总数: 4439
@@ -518,7 +519,7 @@
   - `docs\research_notes\software_design_theory\07_crate_architectures\18_tracing_architecture.md`
 - `https://docs.rs/scopeguard/latest/scopeguard/`
   - `concept\00_meta\terminology_glossary.md`
-- `https://github.com/rust-lang/rust/issues/ `
+- `https://github.com/rust-lang/rust/issues/`
   - `concept\00_meta\terminology_glossary.md`
 - `https://github.com/rust-lang/rust/pull/151973`
   - `concept\00_meta\terminology_glossary.md`
@@ -8419,7 +8420,7 @@
   - `concept\06_ecosystem\07_game_ecs.md`
 - `[404] https://diesel.rs/guides/migrations.html` — Not Found
   - `concept\06_ecosystem\23_database_access.md`
-- `[404] https://hexdocs.pm/mix/Mix.Tasks.Deploy.html` — 
+- `[404] https://hexdocs.pm/mix/Mix.Tasks.Deploy.html` —
   - `concept\05_comparative\14_rust_vs_elixir.md`
 - `[404] https://docs.aws.amazon.com/wellarchitected/latest/health-safety-pillar/welcome.html` — Not Found
   - `concept\06_ecosystem\24_cloud_native.md`
@@ -8431,7 +8432,7 @@
   - `concept\06_ecosystem\31_microservice_patterns.md`
 - `[429] https://jeffreypalermo.com/blog/the-onion-architecture-part-3/` — Too Many Requests
   - `concept\06_ecosystem\35_architecture_patterns.md`
-- `[404] https://aws.amazon.com/blogs/opensource/rust-microservices/` — 
+- `[404] https://aws.amazon.com/blogs/opensource/rust-microservices/` —
   - `concept\06_ecosystem\31_microservice_patterns.md`
 - `[404] https://www.ssi.gouv.fr/en/guide/rust-secure-development-guide/` — Not Found
   - `concept\06_ecosystem\19_security_practices.md`
@@ -8628,7 +8629,7 @@
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `[404] https://component-model.bytecodealliance.org/design/composition.html` — Not Found
   - `concept\06_ecosystem\54_webassembly_advanced.md`
-- `[404] https://aws.amazon.com/blogs/opensource/verify-rust-programs-using-kani/` — 
+- `[404] https://aws.amazon.com/blogs/opensource/verify-rust-programs-using-kani/` —
   - `concept\07_future\02_formal_methods.md`
 - `[ERR] https://c2rust.com/` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1016)
   - `concept\06_ecosystem\56_c_to_rust_translation.md`
@@ -9722,7 +9723,7 @@
   - `docs\rust-ownership-decidability\17-unsafe-rust\11-impl-vec.md`
   - `docs\rust-ownership-decidability\17-unsafe-rust\README.md`
   - `docs\rust-ownership-decidability\COMPREHENSIVE_COUNTEREXAMPLES_HANDBOOK.md`
-- `[404] https://aws.amazon.com/blogs/opensource/why-aws-loves-rust/` — 
+- `[404] https://aws.amazon.com/blogs/opensource/why-aws-loves-rust/` —
   - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
   - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
 - `[ERR] https://www.st.com/resource/en/application_note/an4031-using-the-stm32f2-stm32f4-and-stm32f7-series-dma-controllers-stmicroelectronics.pdf` — TimeoutError('The read operation timed out')

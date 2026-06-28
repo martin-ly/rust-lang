@@ -24,7 +24,6 @@
     - [Type Alias Impl Trait (TAIT)](#type-alias-impl-trait-tait)
   - [📈 版本路线图](#-版本路线图)
   - [🔗 参考资源](#-参考资源)
-  - [**状态**: 🔄 持续跟踪更新](#状态--持续跟踪更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -256,6 +255,7 @@ timeline
 **维护者**: Rust 学习项目团队
 **更新日期**: 2026-03-15
 **状态**: 🔄 持续跟踪更新
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -280,17 +280,10 @@ timeline
 ## 权威来源索引
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**

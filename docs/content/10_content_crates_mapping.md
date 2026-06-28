@@ -10,7 +10,7 @@
 >
 - [Content 与 Crates 映射指南](#content-与-crates-映射指南)
   - [📑 目录](#-目录)
-  - [🗺️ 映射关系概览](#映射关系概览)
+  - [🗺️ 映射关系概览](#️-映射关系概览)
   - [📂 详细映射](#-详细映射)
     - [content/emerging/ → C04 + C11](#contentemerging--c04--c11)
     - [content/ecosystem/ → C05 + C06 + C10](#contentecosystem--c05--c06--c10)
@@ -39,6 +39,7 @@
   - [权威来源索引](#权威来源索引)
 
 ## 🗺️ 映射关系概览
+
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
