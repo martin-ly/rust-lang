@@ -18,6 +18,7 @@ import argparse
 import json
 import re
 import sys
+from datetime import datetime, timezone
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Iterable
@@ -41,7 +42,6 @@ TERMS = [
     ("泛型", "Generics"),
     ("trait对象", "Trait Object"),
     ("trait", "Trait"),
-    ("Trait", "Trait"),
     ("Box", "Box"),
     ("Vec", "Vec"),
     ("HashMap", "HashMap"),
@@ -280,6 +280,95 @@ def iter_md_files(dirs: Iterable[Path]) -> Iterable[Path]:
         yield from sorted(directory.rglob("*.md"))
 
 
+def write_report(
+    path: Path,
+    reports: list[FileReport],
+    total_files: int,
+    missing_en: int,
+    missing_summary: int,
+    uncovered_terms: set[str],
+) -> None:
+    """生成 Markdown 格式的双语标注基线报告。"""
+    uncovered_by_term: dict[str, list[str]] = {}
+    for r in reports:
+        for term in r.uncovered_terms:
+            uncovered_by_term.setdefault(term, []).append(str(r.path))
+
+    top_uncovered = sorted(
+        uncovered_by_term.items(), key=lambda kv: len(kv[1]), reverse=True
+    )[:20]
+
+    missing_en_files = [str(r.path) for r in reports if r.missing_en]
+    missing_summary_files = [str(r.path) for r in reports if r.missing_summary]
+
+    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+
+    lines = [
+        "# 国际化双语标注基线报告",
+        "",
+        f"> 生成日期: {now}",
+        f"> 扫描文件数: {total_files}",
+        f"> 生成工具: `scripts/add_bilingual_annotations.py --mode check-only --report`",
+        "",
+        "## 统计",
+        "",
+        "| 指标 | 数值 |",
+        "|---|---:|",
+        f"| 扫描文件数 | {total_files} |",
+        f"| 缺少 EN 字段 | {missing_en} |",
+        f"| 缺少 Summary 字段 | {missing_summary} |",
+        f"| 未覆盖术语种类 | {len(uncovered_terms)} |",
+        "",
+        "## 未覆盖术语 TOP 20",
+        "",
+        "| 术语 | 出现文件数 |",
+        "|---|---:|",
+    ]
+    for term, files in top_uncovered:
+        lines.append(f"| {term} | {len(files)} |")
+
+    lines += [
+        "",
+        "## 缺少 EN 字段的文件",
+        "",
+    ]
+    if missing_en_files:
+        for f in missing_en_files[:50]:
+            lines.append(f"- `{f}`")
+        if len(missing_en_files) > 50:
+            lines.append(f"- ... 共 {len(missing_en_files)} 个文件")
+    else:
+        lines.append("无")
+
+    lines += [
+        "",
+        "## 缺少 Summary 字段的文件",
+        "",
+    ]
+    if missing_summary_files:
+        for f in missing_summary_files[:50]:
+            lines.append(f"- `{f}`")
+        if len(missing_summary_files) > 50:
+            lines.append(f"- ... 共 {len(missing_summary_files)} 个文件")
+    else:
+        lines.append("无")
+
+    lines += [
+        "",
+        "## 建议",
+        "",
+        "1. 优先处理 TOP 未覆盖术语，它们在最多文件中出现。",
+        "2. 对缺失 EN/Summary 的文件，参考 `concept/00_meta/BILINGUAL_TEMPLATE.md` 补齐头部。",
+        "3. 使用 `python scripts/add_bilingual_annotations.py --mode annotate --dir concept/XX_YYYY` 自动标注指定目录。",
+        "",
+        "---",
+        "",
+        "*本报告为基线数据，用于追踪国际化覆盖进度。*",
+    ]
+
+    path.write_text("\n".join(lines), encoding="utf-8")
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="中英双语标注与国际化元数据检查")
     parser.add_argument(
@@ -290,6 +379,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--dir", nargs="+", type=Path, help="指定目录（可多次）")
     parser.add_argument("--output-uncovered", type=Path, help="输出未覆盖术语清单 JSON")
+    parser.add_argument("--report", type=Path, help="输出 Markdown 检查报告")
     args = parser.parse_args(argv)
 
     if args.dir:
@@ -336,6 +426,17 @@ def main(argv: list[str] | None = None) -> int:
             encoding="utf-8",
         )
         print(f"未覆盖术语清单已保存: {args.output_uncovered}")
+
+    if args.report:
+        write_report(
+            args.report,
+            reports,
+            len(reports),
+            total_missing_en,
+            total_missing_summary,
+            total_uncovered,
+        )
+        print(f"Markdown 报告已保存: {args.report}")
 
     if args.mode == "enforce":
         has_error = total_missing_en or total_missing_summary or total_uncovered
