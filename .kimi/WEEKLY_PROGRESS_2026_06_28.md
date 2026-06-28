@@ -77,6 +77,14 @@
 - `D(schedule): resolve BorrowSanitizer cluster by removing redundant 32_borrow_sanitizer_preview.md`
   - 删除 `concept/07_future/32_borrow_sanitizer_preview.md`
   - 更新 `concept/SUMMARY.md`
+- `C+D: robust 1.97 release-day probe & schedule update`
+  - 重写 `scripts/probe_rust_197_apis.rs` 为子进程探测，主程序始终退出 0
+  - 更新 `scripts/rust_197_release_day.sh` 调用探测脚本
+- `D(schedule): add Rust 1.97 release countdown plan`
+  - 新增 `.kimi/RUST_197_RELEASE_COUNTDOWN_2026_06_28.md`
+- `C+D: update 1.97 release plan and add preflight checklist`
+  - 更新 `.kimi/EXECUTION_RUST_1_97_RELEASE_2026_07_09.md`
+  - 新增 `.kimi/RUST_197_RELEASE_PREFLIGHT_2026_07_08.md`
 
 ---
 
