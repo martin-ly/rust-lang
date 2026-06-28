@@ -76,9 +76,10 @@
 ## G4 修复 Clippy/编译警告基线
 
 - [x] 确认 `cargo clippy --workspace --tests --all-features -- -D warnings` 通过
-- [ ] 确认 `cargo test --workspace` 通过（`c05_threads::test_advanced_thread_pool` 在工作区并发测试中偶发失败，正在单线程重跑验证）
+- [x] 确认 `cargo test --workspace` 通过
+  - 修复了 `c05_threads::test_advanced_thread_pool` 的并发竞态：原 `wait_for_completion` 只在 `active_tasks == 0` 时返回，存在任务尚未被工作线程领取就提前返回的 race condition；现增加 `pending_tasks` 计数，等待 `pending_tasks == 0 && active_tasks == 0`
 - [ ] 在 CI 工作流中加入 `--tests` 的 clippy 检查
-- [ ] 提交变更
+- [x] 提交变更（commit `49319fc49`）
 
 ---
 
