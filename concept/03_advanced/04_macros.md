@@ -4,7 +4,12 @@
 >
 > **EN**: Macros
 > **Summary**: Macros. Guide to 04 Macros.
-> **来源**: [TRPL — Ch19.5 Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) · [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html) · [Rust By Example — Macros](https://doc.rust-lang.org/rust-by-example/macros.html)
+> **来源**:
+>
+> [TRPL — Ch19.5 Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) ·
+> [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html) ·
+> [Rust By Example — Macros](https://doc.rust-lang.org/rust-by-example/macros.html)
+>
 > **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：宏（Macro）系统

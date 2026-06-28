@@ -7,7 +7,16 @@
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: S — Structure
 > **双维定位**: C×Eva
-> **前置概念**: [RTTI](25_rtti_and_dynamic_typing.md) · [Preprocessor vs Macros](26_c_preprocessor_vs_rust_macros.md) · [Exception Safety](27_exception_safety_rust_cpp.md) · [Construction](28_construction_and_initialization.md) · [Friend vs Privacy](29_friend_vs_module_privacy.md) · [Move Semantics](../01_foundation/23_move_semantics.md) · [Value vs Reference Semantics](../01_foundation/19_value_vs_reference_semantics.md)
+> **前置概念**:
+>
+> [RTTI](25_rtti_and_dynamic_typing.md) ·
+> [Preprocessor vs Macros](26_c_preprocessor_vs_rust_macros.md) ·
+> [Exception Safety](27_exception_safety_rust_cpp.md) ·
+> [Construction](28_construction_and_initialization.md) ·
+> [Friend vs Privacy](29_friend_vs_module_privacy.md) ·
+> [Move Semantics](../01_foundation/23_move_semantics.md) ·
+> [Value vs Reference Semantics](../01_foundation/19_value_vs_reference_semantics.md)
+>
 > **后置概念**: N/A
 ---
 

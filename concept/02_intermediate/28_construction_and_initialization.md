@@ -9,7 +9,17 @@
 > **双维定位**: C×Ana
 > **前置概念**: [Variable Model](../01_foundation/20_variable_model.md) · [Type System](../01_foundation/04_type_system.md) · [Ownership](../01_foundation/01_ownership.md)
 > **后置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md) · [C++ Surface Features](../05_comparative/16_cpp_rust_surface_features.md)
-> **主要来源**: [TRPL Ch 5 — Using Structs](https://doc.rust-lang.org/book/ch05-00-structs.html) · [Rust Reference — const fn](https://doc.rust-lang.org/reference/const_eval.html#const-functions) · [cppreference — Constructors](https://en.cppreference.com/w/cpp/language/constructor) · [cppreference — Default constructor](https://en.cppreference.com/w/cpp/language/default_constructor) · [cppreference — Copy constructor](https://en.cppreference.com/w/cpp/language/copy_constructor) · [cppreference — Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor) · [Brown CRP — Copy and Move Constructors](https://cel.cs.brown.edu/crp/idioms/copy_move_constructors.html) · [Stroustrup — The C++ Programming Language, 4th ed.](https://www.stroustrup.com/4th.html)
+> **主要来源**:
+>
+> [TRPL Ch 5 — Using Structs](https://doc.rust-lang.org/book/ch05-00-structs.html) ·
+> [Rust Reference — const fn](https://doc.rust-lang.org/reference/const_eval.html#const-functions) ·
+> [cppreference — Constructors](https://en.cppreference.com/w/cpp/language/constructor) ·
+> [cppreference — Default constructor](https://en.cppreference.com/w/cpp/language/default_constructor) ·
+> [cppreference — Copy constructor](https://en.cppreference.com/w/cpp/language/copy_constructor) ·
+> [cppreference — Move constructor](https://en.cppreference.com/w/cpp/language/move_constructor) ·
+> [Brown CRP — Copy and Move Constructors](https://cel.cs.brown.edu/crp/idioms/copy_move_constructors.html) ·
+> [Stroustrup — The C++ Programming Language, 4th ed.](https://www.stroustrup.com/4th.html)
+>
 ---
 
 > **Bloom 层级**: 理解 → 分析

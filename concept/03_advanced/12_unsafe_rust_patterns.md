@@ -12,12 +12,20 @@
 
 ---
 
-> **来源**: [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html)
+> **来源**:
+>
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+> [Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html)
 > [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-keyword.html) ·
 > [Rust Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) ·
 > [Wikipedia — Memory Safety](https://en.wikipedia.org/wiki/Memory_safety)
-> **前置依赖**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md)
+>
+> **前置依赖**:
+>
+> [Ownership](../01_foundation/01_ownership.md) ·
+> [Borrowing](../01_foundation/02_borrowing.md)
+>
 > **前置依赖**: [Traits](../02_intermediate/01_traits.md)
 > **对应练习**: [`exercises/src/unsafe_rust/`](../../exercises/src/unsafe_rust)
 

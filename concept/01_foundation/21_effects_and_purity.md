@@ -19,9 +19,16 @@
 > **双维定位**: C×Und — 理解副作用在编程语言中的本质与 Rust 的控制机制
 > **前置概念**: [Variable Model](20_variable_model.md) · [Evaluation Strategies](../04_formal/18_evaluation_strategies.md) · [Ownership](01_ownership.md)
 > **后置概念**: [Borrowing](02_borrowing.md) · [Effects System](../07_future/04_effects_system.md) · [Async](../03_advanced/02_async.md)
-> **主要来源**: [Haskell Wiki — Referential Transparency](https://wiki.haskell.org/Referential_transparency) · [Pierce — TAPL, §13](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Moggi 1989 — Computational Lambda-Calculus and Monads](https://doi.org/10.1109/LICS.1989.39155) · [Wadler 1992 — The Essence of Functional Programming](https://doi.org/10.1145/143165.143169) · [Wadler 1995 — Monads for Functional Programming](https://doi.org/10.1007/3-540-59451-5_2)
+> **主要来源**:
 >
-> **来源**: [Reference — Constant Evaluation](https://doc.rust-lang.org/reference/const_eval.html) · [Rust Project Goals — const traits](https://rust-lang.github.io/rust-project-goals/2025h1/const-trait.html)
+> [Haskell Wiki — Referential Transparency](https://wiki.haskell.org/Referential_transparency) ·
+> [Pierce — TAPL, §13](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [Moggi 1989 — Computational Lambda-Calculus and Monads](https://doi.org/10.1109/LICS.1989.39155) ·
+> [Wadler 1992 — The Essence of Functional Programming](https://doi.org/10.1145/143165.143169) ·
+> [Wadler 1995 — Monads for Functional Programming](https://doi.org/10.1007/3-540-59451-5_2)
+>
+> **来源**: [Reference — Constant Evaluation](https://doc.rust-lang.org/reference/const_eval.html) ·
+> [Rust Project Goals — const traits](https://rust-lang.github.io/rust-project-goals/2025h1/const-trait.html)
 ---
 
 > **Bloom 层级**: 理解 → 分析 → 评价

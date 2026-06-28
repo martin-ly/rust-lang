@@ -16,6 +16,7 @@
 ---
 
 > **来源**:
+>
 > [Brown University Interactive Book — Ownership Inventory #1](https://rust-book.cs.brown.edu/ch06-04-inventory.html) ·
 > [Ownership Inventory #2](https://rust-book.cs.brown.edu/ch08-04-inventory.html) ·
 > [Ownership Inventory #3](https://rust-book.cs.brown.edu/ch10-04-inventory.html) ·

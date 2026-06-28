@@ -8,7 +8,12 @@
 >
 > **定位**: L3（高级）与 L4（形式化）之间的**决策缓冲带**，帮助你判断是否需要阅读形式化内容。
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
+> **来源**:
+>
+> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+> [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
+>
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---
