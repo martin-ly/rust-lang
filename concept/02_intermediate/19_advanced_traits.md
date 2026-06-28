@@ -37,7 +37,7 @@
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 关联类型（Associated Types）](#11-关联类型associated-types)
-    - [1.2 泛型（Generics）关联类型（GATs）](#12-泛型关联类型gats)
+    - [1.2 泛型关联类型（GATs）](#12-泛型关联类型gats)
     - [1.3 特化（Specialization）](#13-特化specialization)
   - [二、技术细节](#二技术细节)
     - [2.1 关联类型 vs 泛型参数](#21-关联类型-vs-泛型参数)

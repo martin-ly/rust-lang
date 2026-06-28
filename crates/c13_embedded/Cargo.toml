@@ -46,10 +46,10 @@ default = []
 embedded = []
 # cxx 互操作支持
 cxx-interop = ["dep:cxx"]
-# nightly-only 预览特性（如 core_intrinsics、fn_align）
-nightly = []
 
 [lints.rust]
 # bare-metal 编程必须允许 unsafe 代码（内存映射寄存器、原始指针操作）
 unsafe_code = "allow"
 missing_docs = "allow"
+# 声明 nightly 预览模块使用的自定义 cfg，避免 unexpected_cfgs 警告
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(nightly)', 'cfg(kani)'] }

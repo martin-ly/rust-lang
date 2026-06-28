@@ -1,4 +1,4 @@
-#![cfg(feature = "nightly")]
+#![cfg(nightly)]
 
 //! L3 Rust 1.98.0 稳定特性对齐测验
 //!

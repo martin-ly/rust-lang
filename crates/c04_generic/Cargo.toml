@@ -20,11 +20,11 @@ serde = { workspace = true }
 serde_json = { workspace = true }
 futures = { workspace = true }
 
-[features]
-nightly = []
-
 [dev-dependencies]
 criterion = { workspace = true }
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(nightly)', 'cfg(kani)'] }
 
 [lib]
 name = "c04_generic"

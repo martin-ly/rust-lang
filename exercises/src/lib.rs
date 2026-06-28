@@ -1,4 +1,4 @@
-#![cfg_attr(feature = "nightly", feature(gen_blocks, yield_expr))]
+#![cfg_attr(nightly, feature(gen_blocks, yield_expr))]
 
 //! # Rust 编程练习库
 //!
@@ -23,11 +23,11 @@ pub mod error_handling;
 pub mod macros;
 pub mod unsafe_rust;
 /// Rust 1.95 预览特性练习（gen blocks，需要 nightly）。
-#[cfg(feature = "nightly")]
+#[cfg(nightly)]
 pub mod rust_195_feature_exercises;
 
 /// Rust 1.96 预览特性练习（gen blocks，需要 nightly）。
-#[cfg(feature = "nightly")]
+#[cfg(nightly)]
 pub mod rust_196_feature_exercises;
 
 pub mod rust_197_feature_exercises;

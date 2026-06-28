@@ -1,7 +1,7 @@
-> **内容分级**: [综述级]
-
+> **内容分级**:
+>
+> [综述级]
 > **代码状态**: ✅ 含可编译示例
-
 >
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
@@ -11,7 +11,6 @@
 > **Summary**: DevOps and CI/CD. Core Rust concept covering testing strategies, practical examples, practical applications.
 >
 > **受众**: [进阶]
-
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **A+P** — ApplicationProcedure
 > **双维定位**: P×App — 实施 DevOps 和 CI/CD

@@ -1,7 +1,6 @@
 # Edition 2024 完全指南：新特性与迁移策略
 
 > **内容重叠提示**: 本文与 [`knowledge/06_ecosystem/02_edition_2024.md`](../../knowledge/06_ecosystem/02_edition_2024.md) 内容高度重叠。`knowledge/` 版本提供专项深入；`concept/` 版本为项目权威主轨。
-
 > **代码状态**: ✅ 含可编译示例
 >
 > **EN**: Edition Guide

@@ -449,7 +449,7 @@ fn closure_effect() {
 > **权威来源**:
 > [Rust Reference](https://doc.rust-lang.org/reference/) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
-> [Moggi 1989 — Computational Lambda-Calculus and Monads](https://www.disi.unige.it/person/MoggiE/ftp/ic.pdf) ·
+> [Moggi 1989 — Computational Lambda-Calculus and Monads](https://person.dibris.unige.it/moggi-eugenio/ftp/ic91.pdf) ·
 > [Wadler 1992 — The Essence of Functional Programming](https://dl.acm.org/doi/10.1145/143165.143169) ·
 > [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 > **文档版本**: 1.0

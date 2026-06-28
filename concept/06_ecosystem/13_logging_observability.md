@@ -13,7 +13,6 @@
 > **定位**: 覆盖 Rust 生态中 **日志（log/tracing [来源: [tokio tracing](https://docs.rs/tracing/latest/tracing/)]）**、**指标（metrics）**、**分布式追踪（distributed tracing）**三大可观测性支柱，分析各 crate 的设计哲学与选型策略。
 > **前置概念**: [Async](../03_advanced/02_async.md) · [Error Handling](../02_intermediate/04_error_handling.md)
 > **后置概念**: [WebAssembly](11_webassembly.md) · [Rust Version Tracking](../07_future/05_rust_version_tracking.md)
-
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 > **来源**: [log crate](https://docs.rs/log/) · [tracing](https://docs.rs/tracing/) · [std::fmt](https://doc.rust-lang.org/std/fmt/)

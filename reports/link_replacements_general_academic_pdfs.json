@@ -1,0 +1,56 @@
+[
+  {
+    "old_url": "https://www.disi.unige.it/person/MoggiE/ftp/ic.pdf",
+    "new_url": "https://person.dibris.unige.it/moggi-eugenio/ftp/ic91.pdf",
+    "status": "replaced",
+    "note": "Moggi's 'Notions of computation and monads' (Information and Computation, 1991). Original URL returns 404. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.crcpress.com/Game-Audio-Programming-Principles-and-Practices/DeMan-Larkin/p/book/9781138731499",
+    "new_url": "https://api.pageplace.de/preview/DT0400.9781498746748_A28523397/preview-9781498746748_A28523397.pdf",
+    "status": "replaced",
+    "note": "Publisher preview PDF for Game Audio Programming: Principles and Practices. Original CRC Press URL redirects to Routledge. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.cs.cmu.edu/~fp/courses/15816-s12/lectures/01-linlogic.pdf",
+    "new_url": "https://www.cs.cmu.edu/~fp/courses/15816-s12/lectures/01-inference.pdf",
+    "status": "replaced",
+    "note": "Original filename 01-linlogic.pdf returns 404. The course schedule lists Lecture 1 as 'Deductive Inference' and 01-inference.pdf is the same set of notes under the updated filename. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.cs.cmu.edu/~wing/publications/Milner92.pdf",
+    "new_url": "https://era.ed.ac.uk/server/api/core/bitstreams/ca0f32e0-477d-4d99-a50b-3f45d30454a7/content",
+    "status": "replaced",
+    "note": "Original URL returns 404 and the link text refers to Milner's 'The Polyadic π-Calculus'. Replaced with the University of Edinburgh repository PDF of the technical report ECS-LFCS-91-180 (October 1991), which is the same tutorial. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.cs.ox.ac.uk/people/samson.abramsky/dt.ps",
+    "new_url": "https://www.cs.ox.ac.uk/files/298/handbook.pdf",
+    "status": "replaced",
+    "note": "Original .ps URL returns 404. Replaced with the corrected and expanded PDF of the Abramsky & Jung 'Domain Theory' chapter from the Handbook of Logic in Computer Science, vol. 3. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers21.pdf",
+    "new_url": "https://pm.inf.ethz.ch/publications/AstrauskasMuellerPoliSummers19.pdf",
+    "status": "replaced",
+    "note": "Original getpdf.php URL returns 404. Replaced with the direct 2019 OOPSLA paper 'Leveraging Rust Types for Modular Specification and Verification' (the original Prusti paper). Verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers22.pdf",
+    "new_url": "https://pm.inf.ethz.ch/publications/AstrauskasBilyFialaGrannanMathejaMuellerPoliSummers22.pdf",
+    "status": "replaced",
+    "note": "Original getpdf.php URL returns 404. Replaced with the direct NFM 2022 paper 'The Prusti Project: Formal Verification for Rust'. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.cs.bgu.ac.il/~hendlerd/papers/HP.pdf",
+    "new_url": "https://www.cs.otago.ac.nz/cosc440/readings/hazard-pointers.pdf",
+    "status": "replaced",
+    "note": "Original URL and web.archive.org are both unreachable. The link text is 'Hazard Pointers Paper'; replaced with Maged Michael's canonical 'Hazard Pointers: Safe Memory Reclamation for Lock-Free Objects' PDF on the same topic. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.jaist.ac.jp/~sgonda/paper/2020_scico.html",
+    "new_url": "https://munksgaard.me/papers/laumann-munksgaard-larsen.pdf",
+    "status": "replaced",
+    "note": "Original page returns HTTP 404. The link text is 'Session Types for Rust'; replaced with Jespersen-Munksgaard-Larsen 'Session Types for Rust' (WGP 2015) PDF, the foundational Rust session-types paper. Verified HTTP 200."
+  }
+]

@@ -10,7 +10,8 @@ env:
   CARGO_INCREMENTAL: 0
   CARGO_NET_RETRY: 10
   RUSTUP_MAX_RETRIES: 10
-  RUSTFLAGS: "-D warnings"
+  # nightly 预览模块通过 --cfg nightly 启用；同时保留本地/CI 所需的 tokio_unstable
+  RUSTFLAGS: "-D warnings --cfg nightly --cfg tokio_unstable"
   SCCACHE_GHA_ENABLED: "true"
   RUSTC_WRAPPER: "sccache"
 

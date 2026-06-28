@@ -16,7 +16,6 @@
 > **双维定位**: P×Eva — 评价密码学实现的安全性
 > **前置依赖**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Trait](../02_intermediate/01_traits.md) · [类型系统（Type System）](../01_foundation/04_type_system.md) · 安全实践
 > **后置延伸**: [区块链与智能合约安全](06_blockchain.md) · [网络协议](38_network_protocols.md) · [TLS/QUIC](38_network_protocols.md)
-
 >
 > **来源**: [ring](https://docs.rs/ring/) · [rustls](https://docs.rs/rustls/) · [Rust Crypto](https://github.com/RustCrypto)
 > **前置概念**: N/A

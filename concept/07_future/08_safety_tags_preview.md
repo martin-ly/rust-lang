@@ -1,7 +1,6 @@
 # Safety Tags 概念预研：Unsafe 契约的机器可读标注
 
 > **内容重叠提示**: 本文与 [`docs/05_guides/05_safety_tags_guide.md`](../../docs/05_guides/05_safety_tags_guide.md) 内容高度重叠。`docs/` 版本提供专项深入；`concept/` 版本为项目权威主轨。
-
 > **代码状态**: ✅ 含可编译示例
 >
 > **EN**: Safety Tags Preview
@@ -27,7 +26,7 @@
 > [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) ·
 > [Rust Internals — Safety Annotations](https://internals.rust-lang.org/) ·
 > [Rust for Linux](https://rust-for-linux.com/) ·
-> [Prusti: Deductive Verification for Rust](https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers21.pdf)
+> [Prusti: Deductive Verification for Rust](https://pm.inf.ethz.ch/publications/AstrauskasMuellerPoliSummers19.pdf)
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **前置依赖**: [Toolchain](../06_ecosystem/01_toolchain.md)
 
@@ -170,7 +169,7 @@ Safety Tags 的核心是**霍尔逻辑**（Hoare Logic）的三元组：
 > - `modifies:` → 帧条件（frame condition）
 > - `invariant:` → 循环不变式
 > [来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic) ·
-> [Prusti Paper](https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers21.pdf)]
+> [Prusti Paper](https://pm.inf.ethz.ch/publications/AstrauskasMuellerPoliSummers19.pdf)]
 
 ---
 
@@ -343,7 +342,7 @@ graph TD
 | [Rust Reference — Unsafe Functions](https://doc.rust-lang.org/reference/items/functions.html) | ✅ 一级 | unsafe 函数规范 |
 | [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) | ✅ 一级 | 官方项目目标 |
 | [Rust for Linux](https://rust-for-linux.com/) | ✅ 一级 | 内核 Rust 项目 |
-| [Prusti Paper](https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers21.pdf) | ✅ 一级 | Rust 契约验证学术论文 |
+| [Prusti Paper](https://pm.inf.ethz.ch/publications/AstrauskasMuellerPoliSummers19.pdf) | ✅ 一级 | Rust 契约验证学术论文 |
 | [Rust Internals Forum](https://internals.rust-lang.org/) | ⚠️ 二级 | 设计讨论 |
 | [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic) | 🔍 三级 | 形式化基础 |
 

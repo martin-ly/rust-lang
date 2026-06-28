@@ -30,10 +30,6 @@ aho-corasick = { version = "1.1.4", optional = true }
 default = []
 with-petgraph = ["petgraph"]
 with-aho = ["aho-corasick"]
-# portable_simd 需要 nightly 编译器，默认不启用
-portable_simd = []
-# nightly 预览模块（如 rust_198_features）
-nightly = []
 
 
 [dev-dependencies]
@@ -75,7 +71,5 @@ harness = false
 name = "ai_ml_ecosystem_demo"
 
 [lints.rust]
-# 声明 nightly cfg 条件名，消除 unexpected_cfgs 警告
-# 用于 rust_197_features.rs 中 nightly-only 测试的条件编译
-# 同时声明 kani cfg，用于 Kani 形式化验证示例的条件编译
+# 声明 nightly 预览模块与 kani cfg 条件名，避免 unexpected_cfgs 警告
 unexpected_cfgs = { level = "warn", check-cfg = ['cfg(nightly)', 'cfg(kani)'] }

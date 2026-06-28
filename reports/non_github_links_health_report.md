@@ -1,55 +1,12 @@
 # 非 GitHub 外部链接健康检查报告
 
-> 生成时间: 2026-06-29 01:09:35
+> 生成时间: 2026-06-29 01:13:59
 > 扫描范围: `concept/` 下所有非 `github.com` 的 Markdown 外部链接
 > 去重链接数: 2707
-> HTTP 200: 2216
-> 已白名单（脚本/SSL/403 误报）: 458
-> 受保护/重定向/SSL 警告（需人工复核）: 24
-> 疑似失效（404/超时/5xx）: 9
-
-## 受保护/重定向/SSL 警告链接清单
-
-| URL | 状态 | 涉及文件 |
-|:---|:---|:---|
-| `https://csl.illinois.edu/news-and-media/translating-legacy-code-for-a-safer-future` | 301 | 06_ecosystem/56_c_to_rust_translation.md |
-| `https://internals.rust-lang.org` | 403 | 00_meta/semantic_expressiveness.md |
-| `https://internals.rust-lang.org/` | 403 | 00_meta/audit_checklist.md, 00_meta/inter_layer_map.md, 00_meta/self_assessment.md, 01_foundation/05_reference_semantics.md, 05_comparative/05_execution_model_isomorphism.md |
-| `https://internals.rust-lang.org/t/asynchronous-destructors/11127` | 403 | 07_future/18_async_drop_preview.md |
-| `https://internals.rust-lang.org/t/const-trait-stabilization/` | 403 | 02_intermediate/01_traits.md |
-| `https://internals.rust-lang.org/t/soundness-of-min-specialization/` | 403 | 02_intermediate/02_generics.md |
-| `https://internals.rust-lang.org/t/unsafe-fields/` | 403 | 03_advanced/03_unsafe.md |
-| `https://isocpp.org/` | 403 | 05_comparative/01_rust_vs_cpp.md, 06_ecosystem/02_patterns.md, 06_ecosystem/04_application_domains.md |
-| `https://journals.aps.org/pr/abstract/10.1103/PhysRev.47.777` | 403 | 06_ecosystem/51_quantum_computing_rust.md |
-| `https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.70.1895` | 403 | 06_ecosystem/51_quantum_computing_rust.md |
-| `https://learning.quantum.ibm.com/` | 403 | 06_ecosystem/51_quantum_computing_rust.md |
-| `https://leetcode.com/problems/coin-change/` | 403 | 06_ecosystem/29_algorithms_competitive_programming.md |
-| `https://leetcode.com/problems/implement-trie-prefix-tree/` | 403 | 06_ecosystem/29_algorithms_competitive_programming.md |
-| `https://leetcode.com/problems/number-of-1-bits/` | 403 | 06_ecosystem/29_algorithms_competitive_programming.md |
-| `https://leetcode.com/problems/partition-equal-subset-sum/` | 403 | 06_ecosystem/29_algorithms_competitive_programming.md |
-| `https://leetcode.com/problemset/` | 403 | 06_ecosystem/29_algorithms_competitive_programming.md |
-| `https://lib.rs/` | 403 | 06_ecosystem/02_patterns.md, 06_ecosystem/03_core_crates.md, 06_ecosystem/04_application_domains.md, 06_ecosystem/05_formal_ecosystem_tower.md, 06_ecosystem/06_blockchain.md |
-| `https://mitpress.mit.edu/9780262032704/model-checking/` | 403 | 06_ecosystem/41_workflow_theory.md |
-| `https://mitpress.mit.edu/9780262037883/model-checking/` | 403 | 06_ecosystem/41_workflow_theory.md |
-| `https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/` | 403 | 00_meta/semantic_bridge_algorithms_patterns.md |
-| `https://mitpress.mit.edu/9780262731034` | 403 | 00_meta/terminology_glossary.md, 04_formal/17_operational_semantics.md, 04_formal/20_axiomatic_semantics.md |
-| `https://mitpress.mit.edu/9780262731034/the-formal-semantics-of-programming-languages/` | 403 | 06_ecosystem/41_workflow_theory.md |
-| `https://mitpress.mit.edu/books/distributed-algorithms` | 403 | 03_advanced/19_parallel_distributed_pattern_spectrum.md |
-| `https://mitpress.mit.edu/books/introduction-algorithms-fourth-edition` | 403 | 00_meta/semantic_bridge_algorithms_patterns.md |
-
-## 疑似失效链接清单
-
-| URL | 状态 | 涉及文件 |
-|:---|:---|:---|
-| `https://www.crcpress.com/Game-Audio-Programming-Principles-and-Practices/DeMan-Larkin/p/book/9781138731499` | 404 | 06_ecosystem/49_game_engine_internals.md |
-| `https://www.cs.bgu.ac.il/~hendlerd/papers/HP.pdf` | 404 | 03_advanced/16_lock_free.md |
-| `https://www.cs.cmu.edu/~fp/courses/15816-s12/lectures/01-linlogic.pdf` | 404 | 04_formal/09_linear_logic_applications.md |
-| `https://www.cs.cmu.edu/~wing/publications/Milner92.pdf` | 404 | 06_ecosystem/41_workflow_theory.md |
-| `https://www.cs.ox.ac.uk/people/samson.abramsky/dt.ps` | 404 | 04_formal/12_denotational_semantics.md |
-| `https://www.disi.unige.it/person/MoggiE/ftp/ic.pdf` | 404 | 01_foundation/21_effects_and_purity.md |
-| `https://www.jaist.ac.jp/~sgonda/paper/2020_scico.html` | 404 | 04_formal/09_linear_logic_applications.md |
-| `https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers21.pdf` | 404 | 07_future/08_safety_tags_preview.md |
-| `https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers22.pdf` | 404 | 06_ecosystem/47_formal_verification_tools.md |
+> HTTP 200: 2225
+> 已白名单（脚本/SSL/403 误报）: 482
+> 受保护/重定向/SSL 警告（需人工复核）: 0
+> 疑似失效（404/超时/5xx）: 0
 
 ## 已白名单链接清单
 
@@ -60,6 +17,7 @@
 | `https://chromium.googlesource.com/chromium/src/+/main/docs/rust.md` | 06_ecosystem/58_platform_rust_integration.md |
 | `https://clap.rs/` | 06_ecosystem/03_core_crates.md |
 | `https://conal.net/papers/push-pull-frp/push-pull-frp.pdf` | 06_ecosystem/40_reactive_programming.md |
+| `https://csl.illinois.edu/news-and-media/translating-legacy-code-for-a-safer-future` | 06_ecosystem/56_c_to_rust_translation.md |
 | `https://cybersecurity-news.com/hax-rust-verification/` | 06_ecosystem/47_formal_verification_tools.md |
 | `https://dblp.org/db/conf/popl/index.html` | 00_meta/decidability_spectrum.md |
 | `https://developer.arm.com/Processors/Cortex-M` | 06_ecosystem/22_embedded_systems.md |
@@ -456,6 +414,29 @@
 | `https://ieeexplore.ieee.org/document/7414846` | 03_advanced/20_stream_processing_semantics.md |
 | `https://ieeexplore.ieee.org/document/8326838` | 06_ecosystem/50_distributed_consensus.md |
 | `https://ieeexplore.ieee.org/document/8766229` | 01_foundation/10_numerics.md, 07_future/14_ferrocene_preview.md |
+| `https://internals.rust-lang.org` | 00_meta/semantic_expressiveness.md |
+| `https://internals.rust-lang.org/` | 00_meta/audit_checklist.md, 00_meta/inter_layer_map.md, 00_meta/self_assessment.md, 01_foundation/05_reference_semantics.md, 05_comparative/05_execution_model_isomorphism.md |
+| `https://internals.rust-lang.org/t/asynchronous-destructors/11127` | 07_future/18_async_drop_preview.md |
+| `https://internals.rust-lang.org/t/const-trait-stabilization/` | 02_intermediate/01_traits.md |
+| `https://internals.rust-lang.org/t/soundness-of-min-specialization/` | 02_intermediate/02_generics.md |
+| `https://internals.rust-lang.org/t/unsafe-fields/` | 03_advanced/03_unsafe.md |
+| `https://isocpp.org/` | 05_comparative/01_rust_vs_cpp.md, 06_ecosystem/02_patterns.md, 06_ecosystem/04_application_domains.md |
+| `https://journals.aps.org/pr/abstract/10.1103/PhysRev.47.777` | 06_ecosystem/51_quantum_computing_rust.md |
+| `https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.70.1895` | 06_ecosystem/51_quantum_computing_rust.md |
+| `https://learning.quantum.ibm.com/` | 06_ecosystem/51_quantum_computing_rust.md |
+| `https://leetcode.com/problems/coin-change/` | 06_ecosystem/29_algorithms_competitive_programming.md |
+| `https://leetcode.com/problems/implement-trie-prefix-tree/` | 06_ecosystem/29_algorithms_competitive_programming.md |
+| `https://leetcode.com/problems/number-of-1-bits/` | 06_ecosystem/29_algorithms_competitive_programming.md |
+| `https://leetcode.com/problems/partition-equal-subset-sum/` | 06_ecosystem/29_algorithms_competitive_programming.md |
+| `https://leetcode.com/problemset/` | 06_ecosystem/29_algorithms_competitive_programming.md |
+| `https://lib.rs/` | 06_ecosystem/02_patterns.md, 06_ecosystem/03_core_crates.md, 06_ecosystem/04_application_domains.md, 06_ecosystem/05_formal_ecosystem_tower.md, 06_ecosystem/06_blockchain.md |
+| `https://mitpress.mit.edu/9780262032704/model-checking/` | 06_ecosystem/41_workflow_theory.md |
+| `https://mitpress.mit.edu/9780262037883/model-checking/` | 06_ecosystem/41_workflow_theory.md |
+| `https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/` | 00_meta/semantic_bridge_algorithms_patterns.md |
+| `https://mitpress.mit.edu/9780262731034` | 00_meta/terminology_glossary.md, 04_formal/17_operational_semantics.md, 04_formal/20_axiomatic_semantics.md |
+| `https://mitpress.mit.edu/9780262731034/the-formal-semantics-of-programming-languages/` | 06_ecosystem/41_workflow_theory.md |
+| `https://mitpress.mit.edu/books/distributed-algorithms` | 03_advanced/19_parallel_distributed_pattern_spectrum.md |
+| `https://mitpress.mit.edu/books/introduction-algorithms-fourth-edition` | 00_meta/semantic_bridge_algorithms_patterns.md |
 | `https://navigation.ros.org/` | 06_ecosystem/52_robotics.md |
 | `https://navigation.ros.org/behavior_trees/index.html` | 06_ecosystem/52_robotics.md |
 | `https://news.ycombinator.com/item?id=27608507` | 05_comparative/10_rust_vs_zig.md |
@@ -513,3 +494,5 @@
 | `https://www.w3.org/wasm/` | 06_ecosystem/11_webassembly.md, 06_ecosystem/54_webassembly_advanced.md, 07_future/28_rust_for_webassembly.md |
 | `https://www.workflowpatterns.com/` | 00_meta/semantic_bridge_algorithms_patterns.md |
 | `https://zenodo.org/records/19622061` | 04_formal/01_linear_logic.md |
+
+所有非 GitHub 外部链接均可访问或已白名单。

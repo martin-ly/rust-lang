@@ -60,3 +60,18 @@
 ---
 
 *确认后生效，后续按阶段执行并更新进度。*
+
+## 第二阶段进度（2026-06-28 推进）
+
+- [x] T2: 将 `c02_type_system`、`c04_generic`、`c06_async`、`c08_algorithms`、`c13_embedded`、`exercises` 中的 nightly-only 模块统一改用 `cfg(nightly)` 隔离。
+- [x] T2: 移除上述 crate 的 `nightly` Cargo feature，避免 `cargo --all-features` 在 stable 上启用不稳定代码。
+- [x] T2: 在 `field_projections_preview` 等当前 nightly 尚不可用的模块中放置占位实现，确保 nightly 构建不失败。
+- [x] T4: 更新 `ci.yml`、`pr-checks.yml`、`ci_optimized.yml` 的 nightly-preview 矩阵，通过 `RUSTFLAGS="--cfg nightly --cfg tokio_unstable"` 启用预览模块。
+- [x] 验证：
+  - `cargo +stable check --workspace --all-features` ✅
+  - `cargo +stable clippy --workspace --tests -- -D warnings` ✅
+  - `cargo +stable test --workspace` ✅（`c10_networks` 默认 feature 通过）
+  - `cargo +nightly check --workspace --all-features` ✅（需 `RUSTFLAGS='--cfg nightly --cfg tokio_unstable'`）
+  - `cargo +nightly clippy --workspace --tests --all-features -- -D warnings` ✅（需上述 RUSTFLAGS）
+  - `cargo +nightly test --workspace --all-features` ✅（需上述 RUSTFLAGS；Windows 本地因缺少 `wpcap.lib`/`Packet.lib` 需 `--exclude c10_networks`）
+- [ ] T3/T5: 待 `1.97.0` 正式发布后切换默认工具链并更新文档说明。

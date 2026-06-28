@@ -802,7 +802,7 @@ impl PiProcess {
 >
 > **局限**: π 演算的互模拟问题是**不可判定**的，实际验证需要限制子集（如有限控制进程）。
 >
-> **来源**: [Milner — The Polyadic π-Calculus](https://www.cs.cmu.edu/~wing/publications/Milner92.pdf) · [Sangiorgi & Walker — The π-Calculus](https://www.amazon.com/Calculus-Theory-Mobile-Processes/dp/0521781779)
+> **来源**: [Milner — The Polyadic π-Calculus](https://era.ed.ac.uk/server/api/core/bitstreams/ca0f32e0-477d-4d99-a50b-3f45d30454a7/content) · [Sangiorgi & Walker — The π-Calculus](https://www.amazon.com/Calculus-Theory-Mobile-Processes/dp/0521781779)
 
 ### 5.3 时态逻辑（CTL/LTL）
 >

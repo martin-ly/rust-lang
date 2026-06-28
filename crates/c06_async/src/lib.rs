@@ -62,16 +62,9 @@
 // [来源: Rust Reference / RFC 2394 / RFC 3185]
 #![allow(clippy::type_complexity)]
 #![allow(clippy::assertions_on_constants)]
-// Nightly 预研特性（仅用于 async_closures_preview 和 afit_dyn_tracking 模块）
+// Nightly 预研特性（仅用于 rust_198_features 等 async iterator 模块）
 // 这些特性在 stable 编译器下会被条件编译排除
-#![cfg_attr(
-    any(
-        feature = "nightly_async_closures",
-        feature = "nightly_afidt",
-        feature = "nightly_async_iterator"
-    ),
-    feature(async_iterator, async_for_loop)
-)]
+#![cfg_attr(nightly, feature(async_iterator, async_for_loop))]
 
 // ============================================================================
 // 理论基础模块
@@ -149,11 +142,12 @@ pub mod advanced_tools;
 
 pub mod archive;
 
-#[cfg(feature = "nightly_afidt")]
+/// AFIT / dyn async trait 跟踪模块（nightly-only 预览）。
+#[cfg(nightly)]
 pub mod afit_dyn_tracking;
 
-/// Async Closures 实现模块（1.85.0+ 稳定）。
-#[cfg(feature = "nightly_async_closures")]
+/// Async Closures 预览模块（nightly-only）。
+#[cfg(nightly)]
 pub mod async_closures_preview;
 
 /// Async Closures 可编译示例（1.85.0+ stable，对应 concept/03_advanced/24_async_closures.md）。
@@ -183,7 +177,7 @@ pub mod rust_196_features;
 pub mod rust_197_features;
 
 /// Rust 1.98.0 预览特性（异步迭代器，需要 nightly）。
-#[cfg(feature = "nightly_async_iterator")]
+#[cfg(nightly)]
 pub mod rust_198_features;
 
 /// 异步运行时示例。

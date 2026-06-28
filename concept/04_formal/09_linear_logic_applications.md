@@ -16,7 +16,7 @@
 ---
 
 > **来源**: [Linear Logic — Girard 1987](https://girard.perso.math.cnrs.fr/linear.pdf) ·
-> [Session Types for Rust](https://www.jaist.ac.jp/~sgonda/paper/2020_scico.html) ·
+> [Session Types for Rust](https://munksgaard.me/papers/laumann-munksgaard-larsen.pdf) ·
 > [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/popl18/) ·
 > [Wadler — Propositions as Sessions](https://homepages.inf.ed.ac.uk/wadler/papers/linearsub/linearsub.ps) ·
 > [Wikipedia — Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)
@@ -355,7 +355,7 @@ let committed = txn.commit();
 ```
 
 > **应用矩阵**: 线性逻辑的**核心工程价值**是"让非法状态不可表示"——通过类型系统消除运行时状态错误。
-> [来源: [Session Types in Rust](https://www.jaist.ac.jp/~sgonda/paper/2020_scico.html)]
+> [来源: [Session Types in Rust](https://munksgaard.me/papers/laumann-munksgaard-larsen.pdf)]
 
 ---
 
@@ -475,7 +475,7 @@ graph TD
 | [Girard — Linear Logic](https://girard.perso.math.cnrs.fr/linear.pdf) | ✅ 一级 | 原始论文 |
 | [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) | ✅ 一级 | Rust 形式化验证 |
 | [Wadler — Propositions as Sessions](https://homepages.inf.ed.ac.uk/wadler/papers/linearsub/linearsub.ps) | ✅ 一级 | Session Types |
-| [Session Types in Rust](https://www.jaist.ac.jp/~sgonda/paper/2020_scico.html) | ✅ 一级 | 工程实现 |
+| [Session Types in Rust](https://munksgaard.me/papers/laumann-munksgaard-larsen.pdf) | ✅ 一级 | 工程实现 |
 | [Rust Patterns — Typestate](https://rust-unofficial.github.io/patterns/) | ✅ 二级 | 模式库 |
 
 ---
@@ -592,7 +592,7 @@ fn main() {
 }
 ```
 
-> **修正**: 线性逻辑在 Rust 中的体现：未实现 `Copy` 的类型在传递时**移动**（move）所有权（Ownership）。`FileHandle` 没有 `Copy` derive，因此 `use_file(file)` 将 `file` 的所有权转移给函数参数，之后 `file` 不可用。这是 Rust 资源管理的核心：文件句柄、网络连接、锁守卫等必须唯一拥有，防止双重关闭或数据竞争。若需多次使用，应实现 `Clone`（显式复制）或使用引用（Reference）（`&FileHandle`）。这与 C 的文件描述符（可复制 `int`，易双重 `close`）或 Java 的 `Closeable`（引用共享，依赖 GC 和 try-with-resources）不同——Rust 在编译期强制资源的一次性使用。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] · [来源: [Linear Logic in Computer Science](https://www.cs.cmu.edu/~fp/courses/15816-s12/lectures/01-linlogic.pdf)]
+> **修正**: 线性逻辑在 Rust 中的体现：未实现 `Copy` 的类型在传递时**移动**（move）所有权（Ownership）。`FileHandle` 没有 `Copy` derive，因此 `use_file(file)` 将 `file` 的所有权转移给函数参数，之后 `file` 不可用。这是 Rust 资源管理的核心：文件句柄、网络连接、锁守卫等必须唯一拥有，防止双重关闭或数据竞争。若需多次使用，应实现 `Clone`（显式复制）或使用引用（Reference）（`&FileHandle`）。这与 C 的文件描述符（可复制 `int`，易双重 `close`）或 Java 的 `Closeable`（引用共享，依赖 GC 和 try-with-resources）不同——Rust 在编译期强制资源的一次性使用。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] · [来源: [Linear Logic in Computer Science](https://www.cs.cmu.edu/~fp/courses/15816-s12/lectures/01-inference.pdf)]
 
 ### 10.4 边界测试：`Copy` 与 `Drop` 的互斥性（编译错误）
 

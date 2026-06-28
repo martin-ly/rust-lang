@@ -14,7 +14,6 @@
 > **定位**: 把“rustc 如何保证每次修改不破坏生态”讲清楚，覆盖从单元测试到全生态系统回归的多层测试策略。
 > **前置概念**: [Compiler Diagnostics and UI Tests](69_compiler_diagnostics_and_ui_tests.md) · [Rustc Bootstrap](70_rustc_bootstrap.md)
 > **后置概念**: [Compiler Infrastructure](47_compiler_infrastructure.md)
-
 > **来源**: [Rustc Dev Guide — Testing](https://rustc-dev-guide.rust-lang.org/tests/intro.html)
 
 ---

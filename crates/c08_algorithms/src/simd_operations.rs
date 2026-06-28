@@ -9,7 +9,7 @@
 //! - 启用 `portable_simd` feature 时，使用 `core::simd` 进行跨平台 SIMD 编程
 //! - loweruse `std::arch::x86_64` SSE2/AVX implementation
 
-#[cfg(feature = "portable_simd")]
+#[cfg(nightly)]
 pub mod portable {
     use core::simd::Simd;
     use std::simd::cmp::SimdPartialEq;
@@ -62,7 +62,7 @@ pub mod portable {
     }
 }
 
-#[cfg(not(feature = "portable_simd"))]
+#[cfg(not(nightly))]
 pub mod fallback {
     //! 默认回退实现：使用平台特定 SIMD（x86_64 SSE2/AVX）或标量代码
 
@@ -144,26 +144,26 @@ pub mod fallback {
 
 /// 向量化数组加法（portable_simd 启用时使用核心 SIMD 实现）
 /// vectorization （portable_simd core SIMD ）
-#[cfg(feature = "portable_simd")]
+#[cfg(nightly)]
 pub fn array_add(a: &[f32], b: &[f32], result: &mut [f32]) {
     portable::simd_array_add(a, b, result);
 }
 
 /// 向量化数组加法（回退实现）
-#[cfg(not(feature = "portable_simd"))]
+#[cfg(not(nightly))]
 pub fn array_add(a: &[f32], b: &[f32], result: &mut [f32]) {
     fallback::simd_array_add(a, b, result);
 }
 
 /// 向量化搜索（portable_simd 启用时使用核心 SIMD 实现）
 /// vectorization （portable_simd core SIMD ）
-#[cfg(feature = "portable_simd")]
+#[cfg(nightly)]
 pub fn search(arr: &[f32], target: f32) -> Option<usize> {
     portable::simd_search(arr, target)
 }
 
 /// 向量化搜索（回退实现）
-#[cfg(not(feature = "portable_simd"))]
+#[cfg(not(nightly))]
 pub fn search(arr: &[f32], target: f32) -> Option<usize> {
     fallback::simd_search(arr, target)
 }

@@ -57,7 +57,6 @@ pub struct AfidtExamples;
 
 /// 数据源 trait —— 使用原生 async fn
 /// trait —— async fn
-#[cfg(feature = "nightly_afidt")]
 pub trait DataSource {
     async fn fetch(&self, key: &str) -> Option<String>;
     async fn exists(&self, key: &str) -> bool;
@@ -65,10 +64,8 @@ pub trait DataSource {
 
 /// 数据库实现
 /// datalibrary implementation
-#[cfg(feature = "nightly_afidt")]
 pub struct Database;
 
-#[cfg(feature = "nightly_afidt")]
 impl DataSource for Database {
     async fn fetch(&self, key: &str) -> Option<String> {
         Some(format!("db_value_for_{}", key))
@@ -80,10 +77,8 @@ impl DataSource for Database {
 }
 
 /// 缓存实现
-#[cfg(feature = "nightly_afidt")]
 pub struct Cache;
 
-#[cfg(feature = "nightly_afidt")]
 impl DataSource for Cache {
     async fn fetch(&self, key: &str) -> Option<String> {
         Some(format!("cached_value_for_{}", key))
@@ -94,7 +89,6 @@ impl DataSource for Cache {
     }
 }
 
-#[cfg(feature = "nightly_afidt")]
 /// 运行时分发枚举（AFIDT 当前限制：async trait 尚不支持 dyn）
 /// Run enumAFIDT currentasync trait support dyn
 pub enum DataSourceKind {
@@ -102,7 +96,6 @@ pub enum DataSourceKind {
     Cache(Cache),
 }
 
-#[cfg(feature = "nightly_afidt")]
 impl DataSource for DataSourceKind {
     async fn fetch(&self, key: &str) -> Option<String> {
         match self {
@@ -119,7 +112,6 @@ impl DataSource for DataSourceKind {
     }
 }
 
-#[cfg(feature = "nightly_afidt")]
 impl AfidtExamples {
     /// 使用枚举进行运行时分发（AFIDT 尚不完全支持 dyn Trait）
     /// enum runtime （AFIDT dyn Trait）

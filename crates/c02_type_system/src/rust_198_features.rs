@@ -73,7 +73,7 @@ impl Rust198TypeFeatures {
 // 当对应特性稳定后，再将其迁移到稳定模块并补充可编译示例与单元测试。
 // ============================================================================
 
-#[cfg(feature = "nightly")]
+#[cfg(nightly)]
 pub mod nightly_placeholders {
     /// Pin ergonomics: `&pin mut T` / `&pin const T`（lang experiment）
     /// Tracking: rust-lang/rust#130494

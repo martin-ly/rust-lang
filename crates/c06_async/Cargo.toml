@@ -68,8 +68,7 @@ name = "c06_async"
 path = "src/bin/main.rs"
 
 [features]
-
 xtra = ["dep:xtra"]
-nightly_async_closures = []
-nightly_afidt = []
-nightly_async_iterator = []
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(nightly)', 'cfg(kani)'] }

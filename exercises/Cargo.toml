@@ -11,9 +11,9 @@ license = "MIT OR Apache-2.0"
 tokio = { workspace = true }
 futures = { workspace = true }
 
-[features]
-nightly = []
-
 [dev-dependencies]
 tempfile = { workspace = true }
 rayon = { workspace = true }
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(nightly)', 'cfg(kani)'] }

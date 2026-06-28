@@ -1,7 +1,6 @@
 # Rust 系统设计原则与国际权威对齐
 
 > **代码状态**: ✅ 含可编译示例
-
 >
 > **EN**: System Design Principles
 > **Summary**: System Design Principles: Rust ecosystem tools, crates, and engineering practices.

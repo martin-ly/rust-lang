@@ -23,7 +23,6 @@
 > [RFC 0131 — Target Specification](https://github.com/rust-lang/rfcs/pull/131) ·
 > [The rustc Book — Targets](https://doc.rust-lang.org/rustc/targets/index.html) ·
 > [cross crate](https://github.com/cross-rs/cross)
-
 > **前置依赖**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 
 ## 📑 目录

@@ -57,6 +57,10 @@ pub mod const_generics_extended_preview;
 /// Next-generation Trait Solver 预览模块（nightly 实验性）。
 pub mod next_solver_preview;
 
+/// Field Projections 预览模块（nightly-only）。
+#[cfg(nightly)]
+pub mod field_projections_preview;
+
 pub mod rust_186_features;
 pub mod rust_187_features;
 pub mod rust_188_features;

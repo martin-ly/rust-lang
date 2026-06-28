@@ -17,7 +17,6 @@
 > **定位**: 深入分析 Rust 实现的数据库系统——TiKV（分布式事务）、Materialize（流式 SQL）、Meilisearch（搜索引擎）、SurrealDB（多模型）——的架构语义、正确性保证与选型策略。
 > **前置概念**: [Stream Processing Ecosystem](36_stream_processing_ecosystem.md) · [Ownership](../01_foundation/01_ownership.md) · [Concurrency](../03_advanced/01_concurrency.md)
 > **后置概念**: [Distributed Systems](18_distributed_systems.md) · [Formal Methods](../04_formal/05_verification_toolchain.md)
-
 >
 > **来源**: [Diesel](https://docs.rs/diesel/) · [SQLx](https://docs.rs/sqlx/) · [TiKV](https://tikv.org/)
 ---

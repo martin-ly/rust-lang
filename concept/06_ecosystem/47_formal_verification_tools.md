@@ -178,7 +178,7 @@ struct MyData(*mut i32);  // 包含裸指针 → 默认不实现 Send/Sync
 | **学术来源** | CBMC (CProver) | rustc 内部 | Viper (ETH) | Why3 (INRIA) | Ironclad Apps | Liquid Types |
 
 > **来源**: [Kani Documentation](https://model-checking.github.io/kani/) ·
-> [Prusti Paper](https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers22.pdf) ·
+> [Prusti Paper](https://pm.inf.ethz.ch/publications/AstrauskasBilyFialaGrannanMathejaMuellerPoliSummers22.pdf) ·
 > [Creusot Paper](https://hal.inria.fr/hal-03737818) ·
 > [Verus Paper](https://www.microsoft.com/en-us/research/publication/verus-verifying-rust-programs-using-linear-ghost-types/)
 

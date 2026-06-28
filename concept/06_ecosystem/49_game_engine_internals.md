@@ -643,7 +643,7 @@ PCM 样本流
                                         音频输出 (OS 音频后端)
 ```
 
-> **来源**: [Game Audio Programming](https://www.crcpress.com/Game-Audio-Programming-Principles-and-Practices/DeMan-Larkin/p/book/9781138731499) ·
+> **来源**: [Game Audio Programming](https://api.pageplace.de/preview/DT0400.9781498746748_A28523397/preview-9781498746748_A28523397.pdf) ·
 > [OpenAL Specification](https://www.openal.org/documentation/)
 
 ### 6.2 Rust 音频生态

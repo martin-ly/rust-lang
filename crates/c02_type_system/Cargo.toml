@@ -21,14 +21,11 @@ futures = { workspace = true }
 [dev-dependencies]
 criterion = { workspace = true }
 
-[features]
-nightly = []
-
 [lints.rust]
 unsafe_code = "allow"
 missing_docs = "allow"
-# 声明 Kani / Verus 使用的 cfg 条件名，避免 unexpected_cfgs 警告
-unexpected_cfgs = { level = "warn", check-cfg = ['cfg(kani)', 'cfg(verus)'] }
+# 声明 nightly 预览模块与 Kani / Verus 使用的 cfg 条件名，避免 unexpected_cfgs 警告
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(nightly)', 'cfg(kani)', 'cfg(verus)'] }
 
 [lib]
 name = "c02_type_system"

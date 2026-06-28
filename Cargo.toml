@@ -768,6 +768,8 @@ irrefutable_let_patterns = "allow"
 # Rust 1.95+ 新增lints (1.96+ 仍适用)
 unused_crate_dependencies = "warn"
 missing_docs = "allow"
+# 声明 nightly 预览模块使用的自定义 cfg，避免 unexpected_cfgs 警告
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(nightly)', 'cfg(kani)'] }
 
 [workspace.lints.clippy]
 all = { level = "warn", priority = -1 }

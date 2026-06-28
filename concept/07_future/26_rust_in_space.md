@@ -14,7 +14,6 @@
 > **后置延伸**: [Rust for Linux](19_rust_for_linux.md)
 > **来源**: [Ferrocene](https://ferrocene.dev/) · [Rust Embedded WG](https://github.com/rust-embedded/wg)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
-
 > **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs) · [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/) · [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
 ## 认知路径

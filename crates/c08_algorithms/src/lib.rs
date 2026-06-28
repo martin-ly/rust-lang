@@ -18,11 +18,11 @@
 #![allow(clippy::assertions_on_constants)]
 #![allow(clippy::bool_assert_comparison)]
 #![allow(clippy::approx_constant)]
-#![cfg_attr(feature = "nightly", feature(gen_blocks, yield_expr))]
-#![cfg_attr(
-    all(feature = "nightly", feature = "portable_simd"),
-    feature(portable_simd)
-)]
+// nightly-only 预览模块所需 feature gate，仅在 --cfg nightly 时启用。
+// 注：int_format_into / box_as_ptr / nonzero_from_str_radix / exposed_provenance
+// 在当前 nightly 已稳定，无需再声明；保留 gen_blocks / yield_expr / portable_simd。
+#![cfg_attr(nightly, feature(gen_blocks, yield_expr, portable_simd))]
+#![cfg_attr(all(nightly, test), feature(vec_deque_truncate_front))]
 
 //
 // ```rust
@@ -108,19 +108,19 @@ pub mod rust_194_features;
 pub mod rust_195_features;
 
 /// Rust 1.95 `gen` block 算法前瞻（nightly-only）。
-#[cfg(feature = "nightly")]
+#[cfg(nightly)]
 pub mod rust_195_gen_blocks_preview;
 
 pub mod rust_196_features;
 
 /// Rust 1.96 `gen` block 算法前瞻（nightly-only）。
-#[cfg(feature = "nightly")]
+#[cfg(nightly)]
 pub mod rust_196_gen_blocks_preview;
 
 pub mod rust_197_features;
 
 /// Rust 1.98.0 预览特性（需要 nightly）。
-#[cfg(feature = "nightly")]
+#[cfg(nightly)]
 pub mod rust_198_features;
 
 pub mod algorithm_decision_trees;

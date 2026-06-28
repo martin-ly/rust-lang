@@ -18,7 +18,7 @@
 > **来源**:
 >
 > [The Semantics of Programming Languages (Winskel)](https://www.cl.cam.ac.uk/~gw104/dens.pdf) ·
-> [Domain Theory (Abramsky & Jung)](https://www.cs.ox.ac.uk/people/samson.abramsky/dt.ps) ·
+> [Domain Theory (Abramsky & Jung)](https://www.cs.ox.ac.uk/files/298/handbook.pdf) ·
 > [Wikipedia — Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics) ·
 > [Wikipedia — Domain Theory](https://en.wikipedia.org/wiki/Domain_theory)
 >
@@ -164,7 +164,7 @@ Kleene 不动点定理:
 ```
 
 > **不动点洞察**: **Kleene 不动点定理是递归的数学基础**——所有递归定义都可以通过最小不动点赋予语义。
-> [来源: [Abramsky & Jung — Domain Theory](https://www.cs.ox.ac.uk/people/samson.abramsky/dt.ps)]
+> [来源: [Abramsky & Jung — Domain Theory](https://www.cs.ox.ac.uk/files/298/handbook.pdf)]
 
 ---
 
@@ -421,7 +421,7 @@ graph TD
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
 | [Winskel — Semantics](https://www.cl.cam.ac.uk/~gw104/dens.pdf) | ✅ 一级 | 经典教材 |
-| [Abramsky & Jung — Domain Theory](https://www.cs.ox.ac.uk/people/samson.abramsky/dt.ps) | ✅ 一级 | 领域理论 |
+| [Abramsky & Jung — Domain Theory](https://www.cs.ox.ac.uk/files/298/handbook.pdf) | ✅ 一级 | 领域理论 |
 | [Wikipedia — Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics) | ✅ 二级 | 概述 |
 | [Wikipedia — Domain Theory](https://en.wikipedia.org/wiki/Domain_theory) | ✅ 二级 | 领域理论 |
 | [Software Foundations](https://softwarefoundations.cis.upenn.edu/) | ✅ 一级 | Coq 形式化 |

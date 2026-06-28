@@ -16,7 +16,6 @@
 > **后置延伸**: [Safety Tags](31_safety_tags_preview.md) · [BorrowSanitizer](32_borrow_sanitizer_preview.md)
 >
 > **来源**: [Verus GitHub](https://github.com/verus-lang/verus) · [Verus 文档](https://github.com/verus-lang/verusverus/guide/) · [AutoVerus 论文 (OOPSLA 2025)](https://doi.org/10.1145/3763174) · [arXiv 版本](https://arxiv.org/abs/2409.13082)
-
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---

@@ -10263,7 +10263,7 @@
     "status": 403,
     "err": null,
     "ok": false,
-    "ts": 1782666509.706068
+    "ts": 1782666693.339627
   },
   "https://internals.rust-lang.org/": {
     "status": 403,
@@ -16936,5 +16936,59 @@
     "err": null,
     "ok": true,
     "ts": 1782666509.706068
+  },
+  "https://api.pageplace.de/preview/DT0400.9781498746748_A28523397/preview-9781498746748_A28523397.pdf": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666693.339627
+  },
+  "https://www.cs.otago.ac.nz/cosc440/readings/hazard-pointers.pdf": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666693.339627
+  },
+  "https://pm.inf.ethz.ch/publications/AstrauskasMuellerPoliSummers19.pdf": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666693.339627
+  },
+  "https://munksgaard.me/papers/laumann-munksgaard-larsen.pdf": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666693.339627
+  },
+  "https://pm.inf.ethz.ch/publications/AstrauskasBilyFialaGrannanMathejaMuellerPoliSummers22.pdf": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666693.339627
+  },
+  "https://era.ed.ac.uk/server/api/core/bitstreams/ca0f32e0-477d-4d99-a50b-3f45d30454a7/content": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666693.339627
+  },
+  "https://person.dibris.unige.it/moggi-eugenio/ftp/ic91.pdf": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666693.339627
+  },
+  "https://www.cs.ox.ac.uk/files/298/handbook.pdf": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666693.339627
+  },
+  "https://www.cs.cmu.edu/~fp/courses/15816-s12/lectures/01-inference.pdf": {
+    "status": 200,
+    "err": null,
+    "ok": true,
+    "ts": 1782666693.339627
   }
 }

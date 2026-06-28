@@ -1,7 +1,6 @@
 # Rust 1.97 前沿特性预览
 
 > **内容重叠提示**: 本文与 [`docs/02_reference/quick_reference/02_rust_197_features_cheatsheet.md`](../../docs/02_reference/quick_reference/02_rust_197_features_cheatsheet.md) 内容高度重叠。`docs/` 版本提供快速参考；`concept/` 版本为项目权威主轨。
-
 > **代码状态**: [实现级 — 代码已补充]
 >
 > **EN**: Rust 1.97.0 Preview
