@@ -75,8 +75,9 @@ fn test_char_is_control_const() {
     const SPACE_CTRL: bool = ' '.is_control();
     const NUL_CTRL: bool = '\0'.is_control();
 
-    assert!(!SPACE_CTRL);
-    assert!(NUL_CTRL);
+    // 在 const 块中断言，既验证编译期行为，也避免 clippy assertions_on_constants 警告
+    const { assert!(!SPACE_CTRL) };
+    const { assert!(NUL_CTRL) };
 }
 
 /// 测验5: `VecDeque::truncate_front(n)` — 截断前部，保留后部 n 个元素

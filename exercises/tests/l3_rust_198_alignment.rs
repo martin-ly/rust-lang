@@ -39,7 +39,7 @@ fn test_i32_isqrt() {
 fn test_u32_isqrt() {
     assert_eq!(25u32.isqrt(), 5);
     assert_eq!(0u32.isqrt(), 0);
-    assert_eq!(std::u32::MAX.isqrt(), 65535);
+    assert_eq!(u32::MAX.isqrt(), 65535);
 }
 
 /// 测验3: `NonZeroU32::isqrt` — 非零整数平方根
