@@ -2,7 +2,7 @@
 
 > **统计日期**: 2026-06-28
 > **Rust 1.97.0 发布日**: 2026-07-09（剩余 11 天）
-> **主控来源**: `.kimi/EXECUTION_CHECKLIST_2026_06_26_CONFIRMED.md`
+> **主控来源**: `.kimi/SUSTAINABLE_IMPROVEMENT_PLAN_2026_06_28_CONFIRMED.md`
 
 ---
 
