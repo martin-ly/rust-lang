@@ -65,25 +65,47 @@ def collect():
     return urls
 
 
-def check(url: str):
-    for method in ('HEAD', 'GET'):
-        req = urllib.request.Request(url, method=method, headers=HEADERS)
-        try:
-            with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
-                return resp.status, None
-        except urllib.error.HTTPError as e:
-            if method == 'GET':
-                return e.code, None
-        except Exception as e:
-            if method == 'GET':
-                return None, str(e)
-    return None, 'unknown'
+def check(url: str, retries: int = 1):
+    last_status, last_err = None, None
+    for attempt in range(retries + 1):
+        for method in ('GET', 'HEAD'):
+            req = urllib.request.Request(url, method=method, headers=HEADERS)
+            try:
+                with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
+                    return resp.status, None
+            except urllib.error.HTTPError as e:
+                last_status, last_err = e.code, None
+                # Do not retry on 4xx client errors
+                if 400 <= e.code < 500:
+                    return e.code, None
+            except Exception as e:
+                last_err = str(e)
+                last_status = None
+    return last_status, last_err or 'unknown'
+
+
+def classify(status, err):
+    if status == 200:
+        return 'ok'
+    if status in (403, 401):
+        return 'protected'
+    if status in (301, 302, 303, 307, 308, 202):
+        return 'redirect'
+    if err and 'SSL' in err:
+        return 'ssl_warning'
+    if status in (404, 410):
+        return 'broken'
+    if status is None:
+        return 'broken'
+    return 'broken'
 
 
 def main():
     url_map = collect()
     urls = sorted(url_map.keys())
     total = len(urls)
+    ok = []
+    protected = []
     broken = []
     print(f"检查 {total} 个 concept/ 非 GitHub 外部链接...")
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
@@ -91,10 +113,17 @@ def main():
         for i, fut in enumerate(as_completed(futures), 1):
             url = futures[fut]
             status, err = fut.result()
-            if status == 200:
+            cat = classify(status, err)
+            if cat == 'ok':
                 print(f"[{i}/{total}] OK {url}")
+                ok.append(url)
+            elif cat in ('protected', 'redirect', 'ssl_warning'):
+                code = status if status is not None else err
+                print(f"[{i}/{total}] WARN {code} {url}")
+                protected.append((url, status, err))
             else:
-                print(f"[{i}/{total}] FAIL {status or err} {url}")
+                code = status if status is not None else err
+                print(f"[{i}/{total}] FAIL {code} {url}")
                 broken.append((url, status, err))
 
     report_lines = [
@@ -103,21 +132,32 @@ def main():
         f"> 生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
         f"> 扫描范围: `concept/` 下所有非 `github.com` 的 Markdown 外部链接",
         f"> 去重链接数: {total}",
-        f"> HTTP 200: {total - len(broken)}",
-        f"> 异常数: {len(broken)}",
+        f"> HTTP 200: {len(ok)}",
+        f"> 受保护/重定向/SSL 警告（需人工复核）: {len(protected)}",
+        f"> 疑似失效（404/超时/5xx）: {len(broken)}",
         "",
     ]
+    if protected:
+        report_lines.append("## 受保护/重定向/SSL 警告链接清单\n")
+        report_lines.append("| URL | 状态 | 涉及文件 |")
+        report_lines.append("|:---|:---|:---|")
+        for url, status, err in sorted(protected):
+            code = status if status is not None else err
+            files = ', '.join(sorted(set(url_map[url]))[:5])
+            report_lines.append(f"| `{url}` | {code} | {files} |")
+        report_lines.append("")
     if broken:
-        report_lines.append("## 异常链接清单\n")
+        report_lines.append("## 疑似失效链接清单\n")
         report_lines.append("| URL | 状态 | 涉及文件 |")
         report_lines.append("|:---|:---|:---|")
         for url, status, err in sorted(broken):
             code = status if status is not None else err
             files = ', '.join(sorted(set(url_map[url]))[:5])
             report_lines.append(f"| `{url}` | {code} | {files} |")
-    else:
+        report_lines.append("")
+    if not protected and not broken:
         report_lines.append("所有非 GitHub 外部链接均可访问。")
-    report_lines.append("")
+        report_lines.append("")
     REPORT.write_text('\n'.join(report_lines), encoding='utf-8')
     print(f"\n检查完成。异常链接: {len(broken)}")
     print(f"报告已写入: {REPORT}")

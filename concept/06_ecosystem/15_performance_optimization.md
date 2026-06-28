@@ -232,7 +232,7 @@ criterion_main!(benches);
 ```
 
 > **Criterion 洞察**: Criterion 是 Rust 的**事实标准基准测试框架**——它使用统计方法（而非简单的时间平均），提供可靠的性能测量。
-> [来源: [Criterion.rs Book](https://bokeh.github.io/criterion.rs/book/)]
+> [来源: [Criterion.rs Book](https://bheisler.github.io/criterion.rs/book/)]
 
 ---
 
@@ -485,7 +485,7 @@ graph TD
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [Rust Performance Book](https://nnethercote.github.io/perf-book/) | ✅ 一级 | 官方性能优化指南 |
-| [Criterion.rs](https://bokeh.github.io/criterion.rs/book/) | ✅ 一级 | 基准测试框架 |
+| [Criterion.rs](https://bheisler.github.io/criterion.rs/book/) | ✅ 一级 | 基准测试框架 |
 | [cargo-flamegraph](https://github.com/flamegraph-rs/flamegraph) | ✅ 一级 | 火焰图生成 |
 | [cargo-llvm-lines](https://github.com/dtolnay/cargo-llvm-lines) | ✅ 一级 | 泛型（Generics）膨胀分析 |
 | [std::simd](https://doc.rust-lang.org/std/simd/index.html) | ✅ 一级 | SIMD 支持 |

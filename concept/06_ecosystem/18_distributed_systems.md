@@ -368,7 +368,7 @@ async fn main() {
 ```
 
 > **模式矩阵**: Rust 的**分布式生态**正在快速成熟——从服务框架（tonic/axum）到基础设施（Linkerd/TiKV）形成完整链条。
-> [来源: [Are we distributed yet?](https://arewe distributedyet.org/)]
+> [来源: [Are we distributed yet?](https://arewedistributedyet.com/)]
 
 ---
 
