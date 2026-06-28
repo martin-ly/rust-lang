@@ -4,6 +4,13 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
+> **创建日期**: 2026-02-12
+> **最后更新**: 2026-06-29
+> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
+> **对齐说明**: 本文档已于 2026-06-29 完成与 [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)、[Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)、GoF *Design Patterns* 的权威国际化来源对齐升级。
+>
+> **权威来源**: [Rust Design Patterns – Structural](https://rust-unofficial.github.io/patterns/patterns/structural/index.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ## 📑 目录
 >
@@ -11,6 +18,7 @@
 >
 - [Composite 形式化分析](#composite-形式化分析)
   - [📑 目录](#-目录)
+  - [权威来源对照](#权威来源对照)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Composite 结构）](#def-11composite-结构)
     - [Axiom CO1（树结构无环公理）](#axiom-co1树结构无环公理)
@@ -20,15 +28,31 @@
     - [推论 CO-C1（纯 Safe Composite）](#推论-co-c1纯-safe-composite)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
+  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196--edition-2024-代码示例更新)
+    - [Edition 2024 关键兼容点](#edition-2024-关键兼容点)
+  - [Rust 所有权、借用、生命周期与 trait 系统约束分析](#rust-所有权借用生命周期与-trait-系统约束分析)
+    - [所有权约束](#所有权约束)
+    - [借用与生命周期约束](#借用与生命周期约束)
+    - [trait 系统约束](#trait-系统约束)
+    - [与 Rust 类型系统的综合联系](#与-rust-类型系统的综合联系)
   - [完整证明](#完整证明)
     - [形式化论证链](#形式化论证链)
     - [与 Rust 类型系统的联系](#与-rust-类型系统的联系)
     - [内存安全保证](#内存安全保证)
+  - [形式化属性：不变式、前置/后置条件与安全边界](#形式化属性不变式前置后置条件与安全边界)
+    - [不变式（Invariants）](#不变式invariants)
+    - [前置条件（Preconditions）](#前置条件preconditions)
+    - [后置条件（Postconditions）](#后置条件postconditions)
+    - [安全边界（Safety Boundary）](#安全边界safety-boundary)
+    - [形式化规约汇总](#形式化规约汇总)
   - [典型场景](#典型场景)
   - [完整场景示例：文件系统树（File/Directory）](#完整场景示例文件系统树filedirectory)
   - [相关模式](#相关模式)
   - [实现变体](#实现变体)
-  - [反例](#反例)
+  - [反例：常见误用及编译器错误](#反例常见误用及编译器错误)
+    - [反例 1：循环引用导致内存泄漏](#反例-1循环引用导致内存泄漏)
+    - [反例 2：递归过深栈溢出](#反例-2递归过深栈溢出)
+    - [反例 3：遍历时修改子组件](#反例-3遍历时修改子组件)
   - [选型决策树](#选型决策树)
   - [与 GoF 对比](#与-gof-对比)
   - [边界](#边界)
@@ -45,9 +69,9 @@
   - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
-> **状态**: ✅ 已完成
+> **最后更新**: 2026-06-29
+> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
 > **分类**: 结构型
 > **安全边界**: 纯 Safe
 > **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 8 行（Composite）
@@ -267,7 +291,6 @@ assert_eq!(tree.sum(), 6);
 
 ---
 
-
 ## Rust 1.96+ / Edition 2024 代码示例更新
 >
 > **来源: [Rust Reference – Edition 2024](https://doc.rust-lang.org/reference/editions.html)** | **来源: [Rust 1.96 Release Notes](https://releases.rs/)**
@@ -317,6 +340,7 @@ fn main() {
 | `&` / `&mut` 自动借用细化 | 方法调用 | 减少显式 `&` / `&mut` 转换 |
 
 ---
+
 ## Rust 所有权、借用、生命周期与 trait 系统约束分析
 >
 > **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
@@ -545,28 +569,6 @@ impl Composite {
 ```
 
 **编译器错误**：`cannot borrow self.children as mutable because it is also borrowed as immutable`。
-
----
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-**反例**：父子循环引用（父→子→父）在 Rust 中无法用普通所有权表达；需 `Rc`/`Weak` 或重构为无环结构，否则所有权无法建立。
-
-```rust
-// 错误：无法创建循环引用
-// enum Node { Leaf(i32), Composite(Vec<Node>) }
-// 无法在 Vec 中存储引用父节点的子节点
-
-// 需使用 Rc/Weak
-use std::rc::{Rc, Weak};
-use std::cell::RefCell;
-
-struct Node {
-    value: i32,
-    parent: Weak<RefCell<Node>>,
-    children: Vec<Rc<RefCell<Node>>>,
-}
-```
 
 ---
 

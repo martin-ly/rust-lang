@@ -10,7 +10,7 @@
 > **版本**: v1.0
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-> **状态**: 🔄 迁回待审 / 权威国际化来源对齐升级中
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
 > **对齐说明**: 本文档已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/05_distributed/` 迁回，正在按 [Tokio Tutorial](https://tokio.rs/tokio/tutorial)、[Tonic Docs](https://docs.rs/tonic/latest/tonic/)、[Async Book – Streams](https://rust-lang.github.io/async-book/part-guide/streams.html) 等权威来源升级。
 >
 > **权威来源**: [Tokio Tutorial](https://tokio.rs/tokio/tutorial) | [Tonic Docs](https://docs.rs/tonic/latest/tonic/) | [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)

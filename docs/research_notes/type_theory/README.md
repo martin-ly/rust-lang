@@ -7,9 +7,10 @@
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-02-28
+> **最后更新**: 2026-06-29
+> **更新内容**: 新增权威来源索引与最新形式化成果导航
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-> **状态**: ✅ 已完成
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
 > **docs 全结构**: DOCS_STRUCTURE_OVERVIEW § 2.7 type_theory
 
 ---
@@ -30,6 +31,10 @@
     - [4. 高级类型特性](#4-高级类型特性)
     - [5. 型变理论](#5-型变理论)
   - [形式化论证汇总](#形式化论证汇总)
+  - [权威来源索引与最新形式化成果导航](#权威来源索引与最新形式化成果导航)
+    - [权威来源分级（P0/P1/P2）](#权威来源分级p0p1p2)
+    - [类型理论研究主题 ↔ 国际成果导航](#类型理论研究主题--国际成果导航)
+    - [推荐阅读路径](#推荐阅读路径)
   - [公理-定理形式化索引](#公理-定理形式化索引)
   - [📝 研究笔记 {#-研究笔记}](#-研究笔记--研究笔记)
     - [已完成 ✅ {#已完成-}](#已完成--已完成-)
@@ -201,6 +206,35 @@
 *证明*：由 [00_completeness_gaps](../../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md) 定理 CGI-T1；缺口项均有 Def 占位。∎
 
 ---
+
+## 权威来源索引与最新形式化成果导航
+>
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) · [Oxide](https://arxiv.org/abs/1903.00982) · [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) · [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
+
+### 权威来源分级（P0/P1/P2）
+
+| 级别 | 类型 | 代表来源 | 对齐要求 |
+| :--- | :--- | :--- | :--- |
+| **P0** | 官方权威 | Rust Reference、The Rust Book、RFCs、Standard Library、Ferrocene FLS | 100% |
+| **P1** | 学术权威 | RustBelt、Oxide、Tree Borrows、RustSEM、Aeneas、Verus、Creusot | 核心定理/定义必须对齐 |
+| **P2** | 社区/工具权威 | Miri、Kani、Prusti、coq-of-rust、Rust By Example、Clippy | 工具映射与实践示例 |
+
+### 类型理论研究主题 ↔ 国际成果导航
+
+| 主题 | 核心文档 | 国际形式化成果 | 工具链 |
+| :--- | :--- | :--- | :--- |
+| 类型系统基础 | `10_type_system_foundations.md` | Oxide、RustBelt | Miri、Kani |
+| Trait 系统 | `10_trait_system_formalization.md` | RustBelt（trait 对象）、RefinedRust | Prusti、Creusot |
+| 生命周期 | `10_lifetime_formalization.md` | Oxide、RustBelt Lifetime Logic、RustSEM | Polonius、Miri |
+| 型变 | `10_variance_theory.md` | Oxide、RustBelt | Rust Analyzer |
+| 所有权/借用 | `formal_methods/10_ownership_model.md` | RustBelt、Tree Borrows、RustSEM | Aeneas、coq-of-rust |
+| 借用检查器 | `formal_methods/10_borrow_checker_proof.md` | Tree Borrows、Oxide | Miri、Kani |
+
+### 推荐阅读路径
+
+1. **入门**: Rust Reference + TRPL → 本目录类型系统基础/生命周期/型变。
+2. **进阶**: Oxide → 借用检查的形式化规则；RustBelt → 分离逻辑视角。
+3. **专家**: Tree Borrows + RustSEM → 别名模型与可执行语义；Aeneas / Verus / Creusot → 工具链验证。
 
 ## 公理-定理形式化索引
 

@@ -4,6 +4,13 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
+> **创建日期**: 2026-02-12
+> **最后更新**: 2026-06-29
+> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
+> **对齐说明**: 本文档已于 2026-06-29 完成与 [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)、[Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)、GoF *Design Patterns* 的权威国际化来源对齐升级。
+>
+> **权威来源**: [Rust Design Patterns – Structural](https://rust-unofficial.github.io/patterns/patterns/structural/index.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ## 📑 目录
 >
@@ -11,6 +18,7 @@
 >
 - [Flyweight 形式化分析](#flyweight-形式化分析)
   - [📑 目录](#-目录)
+  - [权威来源对照](#权威来源对照)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Flyweight 结构）](#def-11flyweight-结构)
     - [Axiom FL1（共享不可变公理）](#axiom-fl1共享不可变公理)
@@ -20,15 +28,31 @@
     - [推论 FL-C1（纯 Safe Flyweight）](#推论-fl-c1纯-safe-flyweight)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
+  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196--edition-2024-代码示例更新)
+    - [Edition 2024 关键兼容点](#edition-2024-关键兼容点)
+  - [Rust 所有权、借用、生命周期与 trait 系统约束分析](#rust-所有权借用生命周期与-trait-系统约束分析)
+    - [所有权约束](#所有权约束)
+    - [借用与生命周期约束](#借用与生命周期约束)
+    - [trait 系统约束](#trait-系统约束)
+    - [与 Rust 类型系统的综合联系](#与-rust-类型系统的综合联系)
   - [完整证明](#完整证明)
     - [形式化论证链](#形式化论证链)
     - [与 Rust 类型系统的联系](#与-rust-类型系统的联系)
     - [内存安全保证](#内存安全保证)
+  - [形式化属性：不变式、前置/后置条件与安全边界](#形式化属性不变式前置后置条件与安全边界)
+    - [不变式（Invariants）](#不变式invariants)
+    - [前置条件（Preconditions）](#前置条件preconditions)
+    - [后置条件（Postconditions）](#后置条件postconditions)
+    - [安全边界（Safety Boundary）](#安全边界safety-boundary)
+    - [形式化规约汇总](#形式化规约汇总)
   - [典型场景](#典型场景)
   - [完整场景示例：字形缓存（层次推进）](#完整场景示例字形缓存层次推进)
   - [相关模式](#相关模式)
   - [实现变体](#实现变体)
-  - [反例：共享可变状态](#反例共享可变状态)
+  - [反例：常见误用及编译器错误](#反例常见误用及编译器错误)
+    - [反例 1：内部状态可变导致数据竞争](#反例-1内部状态可变导致数据竞争)
+    - [反例 2：错误生命周期返回 \&TreeType](#反例-2错误生命周期返回-treetype)
+    - [反例 3：HashMap 键不稳定](#反例-3hashmap-键不稳定)
   - [选型决策树](#选型决策树)
   - [与 GoF 对比](#与-gof-对比)
   - [边界](#边界)
@@ -45,9 +69,9 @@
   - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
-> **状态**: ✅ 已完成
+> **最后更新**: 2026-06-29
+> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
 > **分类**: 结构型
 > **安全边界**: 纯 Safe
 > **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 11 行（Flyweight）
@@ -241,7 +265,6 @@ assert!(Arc::ptr_eq(&a, &b));  // 同一实例
 
 ---
 
-
 ## Rust 1.96+ / Edition 2024 代码示例更新
 >
 > **来源: [Rust Reference – Edition 2024](https://doc.rust-lang.org/reference/editions.html)** | **来源: [Rust 1.96 Release Notes](https://releases.rs/)**
@@ -292,6 +315,7 @@ fn main() {
 | `&` / `&mut` 自动借用细化 | 方法调用 | 减少显式 `&` / `&mut` 转换 |
 
 ---
+
 ## Rust 所有权、借用、生命周期与 trait 系统约束分析
 >
 > **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
@@ -527,21 +551,6 @@ let key = format!("{}#{}", color, name);
 ```
 
 **风险**：名称与颜色顺序颠倒导致相同类型被重复缓存。
-
----
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-**错误**：享元内部含 `Cell`/`RefCell` 等可变状态，多持有者共享时产生数据竞争或逻辑错误。
-
-```rust
-struct BadFlyweight {
-    count: std::cell::Cell<u32>,  // 共享可变
-}
-// 多线程用 Arc<BadFlyweight> → 数据竞争（若单线程则为逻辑错误）
-```
-
-**Axiom FL1**：共享状态必须不可变；可变状态外置。
 
 ---
 

@@ -4,6 +4,13 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
+> **创建日期**: 2026-02-12
+> **最后更新**: 2026-06-29
+> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
+> **对齐说明**: 本文档已于 2026-06-29 完成与 [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)、[Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)、GoF *Design Patterns* 的权威国际化来源对齐升级。
+>
+> **权威来源**: [Rust Design Patterns – Behavioral](https://rust-unofficial.github.io/patterns/patterns/behavioural/index.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ## 📊 目录 {#-目录}
 >
@@ -11,6 +18,7 @@
 
 - [Mediator 形式化分析](#mediator-形式化分析)
   - [📊 目录 {#-目录}](#-目录--目录)
+  - [权威来源对照](#权威来源对照)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Mediator 结构）](#def-11mediator-结构)
     - [Axiom ME1（无直接耦合公理）](#axiom-me1无直接耦合公理)
@@ -20,13 +28,29 @@
     - [推论 ME-C1（纯 Safe Mediator）](#推论-me-c1纯-safe-mediator)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
+  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196--edition-2024-代码示例更新)
+    - [Edition 2024 关键兼容点](#edition-2024-关键兼容点)
+  - [Rust 所有权、借用、生命周期与 trait 系统约束分析](#rust-所有权借用生命周期与-trait-系统约束分析)
+    - [所有权约束](#所有权约束)
+    - [借用与生命周期约束](#借用与生命周期约束)
+    - [trait 系统约束](#trait-系统约束)
+    - [与 Rust 类型系统的综合联系](#与-rust-类型系统的综合联系)
   - [完整证明](#完整证明)
     - [形式化论证链](#形式化论证链)
+  - [形式化属性：不变式、前置/后置条件与安全边界](#形式化属性不变式前置后置条件与安全边界)
+    - [不变式（Invariants）](#不变式invariants)
+    - [前置条件（Preconditions）](#前置条件preconditions)
+    - [后置条件（Postconditions）](#后置条件postconditions)
+    - [安全边界（Safety Boundary）](#安全边界safety-boundary)
+    - [形式化规约汇总](#形式化规约汇总)
   - [典型场景](#典型场景)
   - [完整场景示例：聊天室（channel 实现）](#完整场景示例聊天室channel-实现)
   - [相关模式](#相关模式)
   - [实现变体](#实现变体)
-  - [反例：同事直接引用](#反例同事直接引用)
+  - [反例：常见误用及编译器错误](#反例常见误用及编译器错误)
+    - [反例 1：组件直接引用彼此](#反例-1组件直接引用彼此)
+    - [反例 2：Mediator 持有组件可变引用导致借用冲突](#反例-2mediator-持有组件可变引用导致借用冲突)
+    - [反例 3：channel 关闭后发送](#反例-3channel-关闭后发送)
   - [选型决策树](#选型决策树)
   - [与 GoF 对比](#与-gof-对比)
   - [边界](#边界)
@@ -227,7 +251,6 @@ m.broadcast("hello");
 
 ---
 
-
 ## Rust 1.96+ / Edition 2024 代码示例更新
 >
 > **来源: [Rust Reference – Edition 2024](https://doc.rust-lang.org/reference/editions.html)** | **来源: [Rust 1.96 Release Notes](https://releases.rs/)**
@@ -273,6 +296,7 @@ fn main() {
 | `&` / `&mut` 自动借用细化 | 方法调用 | 减少显式 `&` / `&mut` 转换 |
 
 ---
+
 ## Rust 所有权、借用、生命周期与 trait 系统约束分析
 >
 > **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
@@ -460,19 +484,6 @@ mediator.notify("btn", Event::Clicked); // send 返回 Err
 ```
 
 **运行期**：`send` 返回 `Err(SendError)`，需显式处理。
-
----
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-**错误**：Colleague 直接持有其他 Colleague 的引用，绕过 Mediator。
-
-```rust,ignore
-struct BadColleague {
-    mediator: Rc<Mediator>,
-    other: Rc<Colleague>,  // 直接耦合，违反 Axiom ME1
-}
-```
 
 ---
 

@@ -4,6 +4,13 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
+> **创建日期**: 2026-02-12
+> **最后更新**: 2026-06-29
+> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
+> **对齐说明**: 本文档已于 2026-06-29 完成与 [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)、[Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)、GoF *Design Patterns* 的权威国际化来源对齐升级。
+>
+> **权威来源**: [Rust Design Patterns – Behavioral](https://rust-unofficial.github.io/patterns/patterns/behavioural/index.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ## 📊 目录 {#-目录}
 >
@@ -11,6 +18,7 @@
 
 - [Template Method 形式化分析](#template-method-形式化分析)
   - [📊 目录 {#-目录}](#-目录--目录)
+  - [权威来源对照](#权威来源对照)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Template Method 结构）](#def-11template-method-结构)
     - [Axiom TM1（骨架不变公理）](#axiom-tm1骨架不变公理)
@@ -20,13 +28,29 @@
     - [推论 TM-C1（近似表达）](#推论-tm-c1近似表达)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
+  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196--edition-2024-代码示例更新)
+    - [Edition 2024 关键兼容点](#edition-2024-关键兼容点)
+  - [Rust 所有权、借用、生命周期与 trait 系统约束分析](#rust-所有权借用生命周期与-trait-系统约束分析)
+    - [所有权约束](#所有权约束)
+    - [借用与生命周期约束](#借用与生命周期约束)
+    - [trait 系统约束](#trait-系统约束)
+    - [与 Rust 类型系统的综合联系](#与-rust-类型系统的综合联系)
   - [完整证明](#完整证明)
     - [形式化论证链](#形式化论证链)
+  - [形式化属性：不变式、前置/后置条件与安全边界](#形式化属性不变式前置后置条件与安全边界)
+    - [不变式（Invariants）](#不变式invariants)
+    - [前置条件（Preconditions）](#前置条件preconditions)
+    - [后置条件（Postconditions）](#后置条件postconditions)
+    - [安全边界（Safety Boundary）](#安全边界safety-boundary)
+    - [形式化规约汇总](#形式化规约汇总)
   - [典型场景](#典型场景)
   - [完整场景示例：数据导入流水线](#完整场景示例数据导入流水线)
   - [相关模式](#相关模式)
   - [实现变体](#实现变体)
-  - [反例：覆盖 template 破坏骨架](#反例覆盖-template-破坏骨架)
+  - [反例：常见误用及编译器错误](#反例常见误用及编译器错误)
+    - [反例 1：覆盖默认模板方法](#反例-1覆盖默认模板方法)
+    - [反例 2：Hook 签名不匹配](#反例-2hook-签名不匹配)
+    - [反例 3：模板中保留中间借用](#反例-3模板中保留中间借用)
   - [选型决策树](#选型决策树)
   - [与 GoF 对比](#与-gof-对比)
   - [边界](#边界)
@@ -222,7 +246,6 @@ assert_eq!(a.template(), "A1A2");
 
 ---
 
-
 ## Rust 1.96+ / Edition 2024 代码示例更新
 >
 > **来源: [Rust Reference – Edition 2024](https://doc.rust-lang.org/reference/editions.html)** | **来源: [Rust 1.96 Release Notes](https://releases.rs/)**
@@ -265,6 +288,7 @@ fn main() {
 | `&` / `&mut` 自动借用细化 | 方法调用 | 减少显式 `&` / `&mut` 转换 |
 
 ---
+
 ## Rust 所有权、借用、生命周期与 trait 系统约束分析
 >
 > **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
@@ -463,18 +487,6 @@ trait DataMiner {
 ```
 
 **编译器错误**：无法同时不可变和可变借用 self。
-
----
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-**错误**：某 impl 覆盖 `template` 而非钩子，破坏算法骨架。
-
-```rust,ignore
-impl Algorithm for BadImpl {
-    fn template(&self) -> String { "hardcoded".into() }  // 忽略 step1/step2
-}
-```
 
 ---
 

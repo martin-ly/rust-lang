@@ -4,6 +4,13 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
+> **创建日期**: 2026-02-12
+> **最后更新**: 2026-06-29
+> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
+> **对齐说明**: 本文档已于 2026-06-29 完成与 [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)、[Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)、GoF *Design Patterns* 的权威国际化来源对齐升级。
+>
+> **权威来源**: [Rust Design Patterns – Creational](https://rust-unofficial.github.io/patterns/patterns/creational/index.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ## 📑 目录
 >
@@ -11,6 +18,7 @@
 >
 - [Singleton 形式化分析](#singleton-形式化分析)
   - [📑 目录](#-目录)
+  - [权威来源对照](#权威来源对照)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Singleton 结构）](#def-11singleton-结构)
     - [Axiom S1（实例唯一性公理）](#axiom-s1实例唯一性公理)
@@ -25,14 +33,30 @@
     - [方式一：OnceLock（纯 Safe，推荐）](#方式一oncelock纯-safe推荐)
     - [方式二：LazyLock（纯 Safe）](#方式二lazylock纯-safe)
     - [方式三：带内部可变（Safe）](#方式三带内部可变safe)
+  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196--edition-2024-代码示例更新)
+    - [Edition 2024 关键兼容点](#edition-2024-关键兼容点)
+  - [Rust 所有权、借用、生命周期与 trait 系统约束分析](#rust-所有权借用生命周期与-trait-系统约束分析)
+    - [所有权约束](#所有权约束)
+    - [借用与生命周期约束](#借用与生命周期约束)
+    - [trait 系统约束](#trait-系统约束)
+    - [与 Rust 类型系统的综合联系](#与-rust-类型系统的综合联系)
   - [完整证明](#完整证明)
     - [形式化论证链](#形式化论证链)
     - [与 Rust 类型系统的联系](#与-rust-类型系统的联系)
     - [内存安全保证](#内存安全保证)
+  - [形式化属性：不变式、前置/后置条件与安全边界](#形式化属性不变式前置后置条件与安全边界)
+    - [不变式（Invariants）](#不变式invariants)
+    - [前置条件（Preconditions）](#前置条件preconditions)
+    - [后置条件（Postconditions）](#后置条件postconditions)
+    - [安全边界（Safety Boundary）](#安全边界safety-boundary)
+    - [形式化规约汇总](#形式化规约汇总)
   - [典型场景](#典型场景)
   - [相关模式](#相关模式)
   - [实现变体](#实现变体)
-  - [反例](#反例)
+  - [反例：常见误用及编译器错误](#反例常见误用及编译器错误)
+    - [反例 1：使用 static mut](#反例-1使用-static-mut)
+    - [反例 2：初始化闭包捕获局部变量](#反例-2初始化闭包捕获局部变量)
+    - [反例 3：无同步的可变全局状态](#反例-3无同步的可变全局状态)
   - [边界](#边界)
   - [与 Rust 1.93 的对应](#与-rust-193-的对应)
   - [思维导图](#思维导图)
@@ -47,9 +71,9 @@
   - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
-> **状态**: ✅ 已完成
+> **最后更新**: 2026-06-29
+> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
 > **分类**: 创建型
 > **安全边界**: 纯 Safe 或 需 unsafe
 > **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 5 行（Singleton）
@@ -286,7 +310,6 @@ fn get_instance() -> Arc<Mutex<i32>> {
 
 ---
 
-
 ## Rust 1.96+ / Edition 2024 代码示例更新
 >
 > **来源: [Rust Reference – Edition 2024](https://doc.rust-lang.org/reference/editions.html)** | **来源: [Rust 1.96 Release Notes](https://releases.rs/)**
@@ -325,6 +348,7 @@ fn main() {
 | `&` / `&mut` 自动借用细化 | 方法调用 | 减少显式 `&` / `&mut` 转换 |
 
 ---
+
 ## Rust 所有权、借用、生命周期与 trait 系统约束分析
 >
 > **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
@@ -516,31 +540,6 @@ unsafe { COUNTER += 1; } // 多线程数据竞争
 **后果**：未定义行为（UB）。
 
 **修复**：`static COUNTER: AtomicU64 = AtomicU64::new(0);` 或 `Mutex<u64>`。
-
----
->
-> **[来源: [crates.io](https://crates.io/)]**
-
-**反例**：使用 `static mut` 且多线程访问未同步 $\rightarrow$ 数据竞争、UB。应使用 `OnceLock`/`LazyLock` 或 `Mutex`。
-
-```rust
-// 错误：UB！
-static mut COUNTER: i32 = 0;
-
-unsafe {
-    // 多线程同时执行此代码 → 数据竞争
-    COUNTER += 1;
-}
-```
-
-**正确**：
-
-```rust,ignore
-static COUNTER: OnceLock<Mutex<i32>> = OnceLock::new();
-
-let counter = COUNTER.get_or_init(|| Mutex::new(0));
-*counter.lock().unwrap() += 1;
-```
 
 ---
 

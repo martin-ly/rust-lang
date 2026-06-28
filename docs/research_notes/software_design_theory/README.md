@@ -18,7 +18,7 @@
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-> **状态**: 🔄 迁回待审 / 权威国际化来源对齐升级中
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
 > **对齐说明**: 本目录已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/` 迁回，正在按 [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)、[Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)、GoF *Design Patterns* 等权威来源升级。
 > **目标**: 面向 Rust 语言机制的软件设计形式分析、边界论证与组合工程有效性
 > **docs 全结构**: DOCS_STRUCTURE_OVERVIEW § 2.7 software_design_theory

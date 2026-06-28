@@ -5,9 +5,10 @@
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-20
-> **最后更新**: 2026-02-28
+> **最后更新**: 2026-06-29
+> **更新内容**: 补充形式化验证对标、差距分析与可持续推进方案
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-> **状态**: ✅ 96%+ 对齐完成（Phase C）
+> **状态**: 🔄 升级中
 > **用途**: 系统对齐网络权威内容，确保文档的准确性和权威性
 > **完成报告**: 100_PERCENT_AUTHORITATIVE_ALIGNMENT_COMPLETE_REPORT
 
@@ -41,6 +42,13 @@
   - [持续追踪机制](#持续追踪机制)
     - [追踪检查表](#追踪检查表)
     - [更新响应流程](#更新响应流程)
+  - [形式化验证对标与差距分析](#形式化验证对标与差距分析)
+    - [按来源层级的形式化覆盖](#按来源层级的形式化覆盖)
+    - [形式化验证差距矩阵](#形式化验证差距矩阵)
+  - [可持续推进方案](#可持续推进方案)
+    - [短期（1–2 季度）](#短期12-季度)
+    - [中期（2–4 季度）](#中期24-季度)
+    - [长期（4–8 季度）](#长期48-季度)
   - [🆕 Rust 1.94 研究更新](#-rust-194-研究更新)
     - [核心研究点](#核心研究点)
   - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
@@ -401,6 +409,54 @@ let r = &s;
 **维护者**: Rust Formal Methods Research Team
 **最后更新**: 2026-02-20
 **状态**: 🔄 构建中
+
+---
+
+## 形式化验证对标与差距分析
+>
+> **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) · [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) · [RustSEM](https://doi.org/10.1007/s10703-024-00460-3) · [Oxide](https://arxiv.org/abs/1903.00982) · [Aeneas](https://arxiv.org/abs/2206.07185) · [Verus](https://doi.org/10.1145/3586037)
+
+### 按来源层级的形式化覆盖
+
+| 来源层级 | 形式化来源 | 本项目覆盖度 | 关键差距 |
+| :--- | :--- | :--- | :--- |
+| **P0 官方权威** | Rust Reference、FLS、MIR 语义草案 | 概念定义 100% 对齐 | 官方 MIR 形式化仍在演进 |
+| **P1 学术权威** | RustBelt、Oxide、Tree Borrows、RustSEM | 定理/定义概念级对齐 | 无机械证明；无内存级可执行语义 |
+| **P2 社区/工具** | Miri、Kani、Prusti、Creusot、Aeneas、coq-of-rust | 工具名称与用途已映射 | 无实际验证流水线；无规范库 |
+
+### 形式化验证差距矩阵
+
+| 主题 | RustBelt | Oxide | Tree Borrows | RustSEM | 本项目状态 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 所有权唯一性 | ✅ 已证明 | ✅ 类型规则 | ✅ 树节点独占 | ✅ `own(b)` | ✅ 概念对齐，❌ 机械证明 |
+| 借用安全性 | ✅ 已证明 | ✅ 推理规则 | ✅ 权限树 | ✅ `mut/shr` | ✅ 概念对齐，❌ 机械证明 |
+| 生命周期 | ✅ Lifetime Logic | ✅ Region | ✅ 节点存活期 | ✅ 时间戳跨度 | ✅ 类型论/形式化定义 |
+| 数据竞争自由 | ✅ 已证明 | — | — | ✅ 运行时检测 | ✅ 定理 1 |
+| unsafe 封装 | ✅ 库规范 | — | ✅ 运行期检测 | ✅ 部分支持 | ⚠️ Def 占位 |
+| 可执行语义 | — | — | ✅ Miri | ✅ K-Framework | ❌ 无实现 |
+| 工具链验证 | Aeneas/Verus | — | Miri/Kani | — | ⚠️ 计划/占位 |
+
+## 可持续推进方案
+
+> **目标**: 在不破坏现有 `PROOF_INDEX` 与 `concept/`、`knowledge/` 结构的前提下，持续吸收 P0/P1/P2 来源的最新成果。
+
+### 短期（1–2 季度）
+
+1. **文献映射补全**: 将 Tree Borrows、RustSEM、Oxide 的关键定理/定义与 `PROOF_INDEX` 逐条建立映射（已完成于本文档与国际对标索引）。
+2. **元信息升级**: 把所有形式化相关文档的 `Rust 版本` 更新为 `1.96.0+`，`状态` 更新为 `升级中`。
+3. **反例与案例更新**: 在 `borrow_checker_proof`、`ownership_model`、`variance_*` 中补充 Tree Borrows / Miri 检测示例。
+
+### 中期（2–4 季度）
+
+1. **工具链原型**: 选取 3–5 个 `crates/` 示例，分别用 Miri、Kani、Aeneas 运行并记录结果，填充工具映射中的「差距」列。
+2. **Coq 骨架推进**: 补全 `deprecated/coq_skeleton/` 中 `OWNERSHIP_UNIQUENESS.v` 与 `BORROW_DATARACE_FREE.v` 的 `Admitted` 证明，至少覆盖 Safe Rust 子集。
+3. **可执行语义占位**: 在 `formal_methods/` 新增 K-Framework / Miri 动态语义章节，作为 RustSEM 的轻量级映射。
+
+### 长期（4–8 季度）
+
+1. **自动化对齐检查**: 每季度扫描 Rust Reference、RustBelt 博客、Miri 更新日志，更新权威来源索引。
+2. **分层验证流水线**: 建立「Miri 动态检测 → Kani 有界证明 → Aeneas/Verus/Creusot 演绎证明 → Coq/Iris 基础证明」的渐进式验证路径。
+3. **知识沉淀**: 将升级过程中形成的新定义/定理迁移到 `knowledge/` 与 `concept/` 的正式条目中，保证 `docs/research_notes/` 与上层知识的单向依赖。
 
 ---
 

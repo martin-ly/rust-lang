@@ -10,8 +10,10 @@
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-03-11
+> **最后更新**: 2026-06-29
 > **更新内容**:
+>
+> - 补充 Tree Borrows / RustSEM / RustBelt / Oxide 形式化成果
 >
 > - 添加 Send/Sync/Pin 形式化定义 (Def 3.1–3.3)；添加智能指针所有权定义 (Def 4.1–4.4)；添加 Rust 1.94 RefCell::try_map 定义 (Def 4.5)；定理编号更新
 > - **增强定理 5 证明**: 添加结构归纳详细步骤、4个独立引理（无空指针/悬垂指针/数据竞争/use-after-free）、分离逻辑正式对应
@@ -20,7 +22,7 @@
 > - **增强反例分析**: 8个详细反例、CVE 关联分析（CVE-2015-0235, CVE-2018-1000810, CVE-2019-15548, CVE-2020-36323, CVE-2021-29941）
 > - **深化权威来源对齐**: RustBelt Iris 框架详细对应（资源代数、断言映射）、Aeneas borrow_generated_from 深度对比
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-> **状态**: ✅ 已完成 (Week 1 任务 P1-W1-T1) | Rust 1.94 已整合
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
 > **六篇并表**: README §formal_methods 六篇并表 第 1 行（所有权）
 
 ---
@@ -68,6 +70,12 @@
     - [Aeneas 验证后端](#aeneas-验证后端)
     - [与本文档形式化的对应](#与本文档形式化的对应)
     - [参考文献 {#-参考文献}](#参考文献--参考文献)
+  - [🆕 最新形式化成果集成（Tree Borrows / RustSEM / RustBelt / Oxide）](#-最新形式化成果集成tree-borrows--rustsem--rustbelt--oxide)
+    - [1. Tree Borrows（PLDI 2025）别名模型](#1-tree-borrowspldi-2025别名模型)
+    - [2. RustSEM（FMSD 2024）可执行操作语义](#2-rustsemfmsd-2024可执行操作语义)
+    - [3. RustBelt（POPL 2018）Iris 分离逻辑基础](#3-rustbeltpopl-2018iris-分离逻辑基础)
+    - [4. Oxide（ICFP 2023）类型系统语义](#4-oxideicfp-2023类型系统语义)
+    - [5. 国际成果与本项目证明索引的映射](#5-国际成果与本项目证明索引的映射)
   - [欧洲大学课程对齐](#欧洲大学课程对齐)
     - [ETH Zurich (瑞士联邦理工学院)](#eth-zurich-瑞士联邦理工学院)
     - [University of Cambridge](#university-of-cambridge)
@@ -218,6 +226,12 @@
     - [Aeneas 验证后端](#aeneas-验证后端)
     - [与本文档形式化的对应](#与本文档形式化的对应)
     - [参考文献 {#-参考文献}](#参考文献--参考文献)
+  - [🆕 最新形式化成果集成（Tree Borrows / RustSEM / RustBelt / Oxide）](#-最新形式化成果集成tree-borrows--rustsem--rustbelt--oxide)
+    - [1. Tree Borrows（PLDI 2025）别名模型](#1-tree-borrowspldi-2025别名模型)
+    - [2. RustSEM（FMSD 2024）可执行操作语义](#2-rustsemfmsd-2024可执行操作语义)
+    - [3. RustBelt（POPL 2018）Iris 分离逻辑基础](#3-rustbeltpopl-2018iris-分离逻辑基础)
+    - [4. Oxide（ICFP 2023）类型系统语义](#4-oxideicfp-2023类型系统语义)
+    - [5. 国际成果与本项目证明索引的映射](#5-国际成果与本项目证明索引的映射)
   - [欧洲大学课程对齐](#欧洲大学课程对齐)
     - [ETH Zurich (瑞士联邦理工学院)](#eth-zurich-瑞士联邦理工学院)
     - [University of Cambridge](#university-of-cambridge)
@@ -980,6 +994,119 @@ data2  (* [100; 2; 3] *)
    - 论文: <https://arxiv.org/abs/2206.07185>
    - 摘要: 函数式翻译方法，预言变量，Safe Rust验证
    - 与本目录: 所有权规则、借用语义的形式化翻译
+
+---
+
+## 🆕 最新形式化成果集成（Tree Borrows / RustSEM / RustBelt / Oxide）
+>
+> **学术来源**: [Tree Borrows (PLDI 2025)](https://doi.org/10.1145/3735592) · [RustSEM (FMSD 2024)](https://doi.org/10.1007/s10703-024-00460-3) · [RustBelt (POPL 2018)](https://doi.org/10.1145/3158154) · [Oxide (ICFP 2023 / arXiv:1903.00982)](https://arxiv.org/abs/1903.00982)
+> **状态**: 📝 扩展（在 RustBelt 与 Aeneas 基础上补充最新国际成果）
+
+### 1. Tree Borrows（PLDI 2025）别名模型
+
+> **来源**: [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
+
+**论文**: *Tree Borrows*（PLDI 2025 Distinguished Paper）
+**作者**: Neven Villani, Johannes Hostert, Derek Dreyer, Ralf Jung
+**核心思想**: 用**树状权限（tree-structured permissions）**替代 Stacked Borrows 的栈式模型，为每个内存位置维护一棵借用树，记录父节点与子节点之间的共享/独占关系。
+
+| 特性 | Stacked Borrows | Tree Borrows |
+| :--- | :--- | :--- |
+| 数据结构 | 栈 | 树 |
+| 可变借用传播 | 弹出栈顶 | 子树冻结/独占 |
+| 与编译器优化 | 支持基础别名分析 | 支持更多类型驱动的过程内优化 |
+| 实证结果 | — | 在 crates.io 前 3 万 crate 中减少 54% 的误拒 |
+| 形式化 | Coq（Iris） | Rocq 机械证明 |
+
+**与借用检查器 / Miri 的关系**:
+
+- Tree Borrows 是 Rust 引用别名规则的**操作语义精化**：编译期借用检查器保证的「共享 XOR 可变」不变量，被 Tree Borrows 细化为运行时可检查的权限树。
+- Miri 已实现 Tree Borrows 作为可选别名模型（`-Zmiri-tree-borrows`），用于在 unsafe 代码中检测别名违规。
+- 本文档的 **Axiom 1（可变借用唯一性）** 与 **Axiom 2（可变-不可变互斥）** 对应 Tree Borrows 中「同一子树在写访问时必须被独占」的规则。
+
+### 2. RustSEM（FMSD 2024）可执行操作语义
+
+> **来源**: [Formally Understanding Rust’s Ownership and Borrowing System at the Memory Level](https://link.springer.com/article/10.1007/s10703-024-00460-3)
+
+**论文**: *Formally Understanding Rust’s Ownership and Borrowing System at the Memory Level*（Formal Methods in System Design, 2024）
+**作者**: Shuanglong Kan, Zhe Chen, David Sanán, Shang-Wei Lin, Yang Liu
+**核心思想**: 在**内存级别**形式化 Ownership and Borrowing System（OBS），将 Rust 类型系统维护的所有权/借用不变量映射到内存布局，并对每条内存操作进行检查。
+
+**RustSEM 关键构造**:
+
+- **Own pointers**: `own(b)` 表示变量对内存块 `b` 的独占所有权。
+- **共享/可变引用值**: `shr(lt, p)` / `mut(lt, p)` 把引用携带的生命周期 `lt` 显式存入内存模型。
+- **动态生命周期延伸（dynamic lifetime extension）**: 引用每次被使用时自动延伸时间戳跨度，精确建模 Non-Lexical Lifetimes（NLL）。
+- **可执行语义**: 在 K-Framework 中实现，可运行真实 Rust 程序；使用约 700 个测试用例验证与 `rustc` 的语义一致性。
+
+**与本文档的对应**:
+
+| RustSEM 概念 | 本文档概念 | 关系 |
+| :--- | :--- | :--- |
+| `v →_own B` | Def 1.3 所有权环境 `Ω` | 运行时的所有权状态实例 |
+| `mut(lt, p)` / `shr(lt, p)` | 借用状态 `S = (I, M, T)` | 引用值附带的借用类型与生命周期 |
+| 动态生命周期延伸 | Axiom 3（借用有效性保持） | NLL 的语义解释 |
+| 700+ 测试 | 定理 5 / 定理 6 | 操作语义验证内存安全定理的实例 |
+
+### 3. RustBelt（POPL 2018）Iris 分离逻辑基础
+
+> **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
+
+**论文**: *RustBelt: Securing the Foundations of the Rust Programming Language*（POPL 2018）
+**作者**: Ralf Jung, Jacques-Henri Jourdan, Robbert Krebbers, Derek Dreyer
+**核心思想**: 在 **Iris（高阶并发分离逻辑）** 中为贴近 MIR 的核心语言 `λ_Rust` 建立语义类型安全证明，并给出 unsafe 库需要满足的可扩展规范。
+
+**Iris / RustBelt 与本文档形式化的对应**:
+
+| 本文档 | RustBelt / Iris | 说明 |
+| :--- | :--- | :--- |
+| 定理 5（内存安全） | Theorem 4.1（Memory Safety） | 直接对应 |
+| 定理 6（所有权唯一性） | Lem. 3.2（Unique Ownership） | 等价表述 |
+| Axiom 1-2（借用规则） | Mutable Borrow Exclusivity | 分离逻辑中的独占 token |
+| Def 1.3 `Ω` | Iris Ghost State / Resource Algebra | 所有权状态的形式化编码 |
+| 生命周期 | Lifetime Logic / Time Credits | 借用 proposition 的时间维度 |
+
+RustBelt 的**资源代数**可形式化为：
+
+```
+M := OwnState × Val
+OwnState := {Owned, Borrowed_Imm(q), Borrowed_Mut, Moved}
+  where q ∈ (0,1] 为分数权限
+```
+
+这与本文档 Def 1.3 的所有权环境 `Ω` 完全兼容，并可作为其机械证明的底层模型。
+
+### 4. Oxide（ICFP 2023）类型系统语义
+
+> **来源**: [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982)
+
+**论文**: *Oxide: The Essence of Rust*
+**作者**: Aaron Weiss, Olek Gierczak, Daniel Patterson, Amal Ahmed
+**核心思想**: 用**基于区域的别名管理（region-based alias management）**给出接近源级 Rust 的类型系统，首次以传统进展-保持（progress & preservation）证明 Rust 的类型安全。
+
+**Oxide 关键创新**:
+
+- 将生命周期视为**位置集合（regions / provenances）**，而非简单的代码行区间。
+- 用推理规则归纳地定义借用检查，而非约束求解器。
+- 提供经过测试的语义（tested semantics），在 Rust 官方借用检查器与 NLL 测试套件上验证一致性。
+
+**与本文档的对应**:
+
+| Oxide | 本文档 | 关系 |
+| :--- | :--- | :--- |
+| 所有权作为 use-once 变量 | 规则 2（移动语义） | 等价 |
+| `&ω p` 与 ownership safety judgment | Axiom 1-2 / Def 1.4 | 形式化来源 |
+| Region / provenance | Def 1.1 生命周期 | 区域是位置的集合 |
+| Progress & Preservation | 定理 5 / 定理 6 | 类型安全的两种证明路径 |
+
+### 5. 国际成果与本项目证明索引的映射
+
+| 国际成果 | 年份 | 本项目对应 | 当前差距 |
+| :--- | :--- | :--- | :--- |
+| Tree Borrows | 2025 | `borrow_checker_proof` 定理 1、反例表 | 无树状权限的机械证明 |
+| RustSEM | 2024 | `ownership_model` 状态转移、`Ω` | 无 K-Framework 可执行语义 |
+| RustBelt | 2018 | `ownership_model` 定理 5/6、`coq_skeleton` | Coq 骨架存在但未补全 |
+| Oxide | 2023 | `type_theory/lifetime_formalization` | 无区域-based 别名管理精化 |
 
 ---
 

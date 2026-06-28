@@ -21,6 +21,12 @@
     - [2.6 Crux-MIR](#26-crux-mir)
     - [2.7 AutoVerus](#27-autoverus)
     - [2.8 Tree Borrows (PLDI 2025)](#28-tree-borrows-pldi-2025)
+    - [2.9 Verus](#29-verus)
+    - [2.10 Kani](#210-kani)
+    - [2.11 Prusti](#211-prusti)
+    - [2.12 Creusot](#212-creusot)
+    - [2.13 Miri](#213-miri)
+    - [2.14 工具链映射汇总](#214-工具链映射汇总)
   - [三、POPL/PLDI/ICFP 论文对齐](#三poplpldiicfp-论文对齐)
   - [四、与本项目 PROOF\_INDEX 的映射](#四与本项目-proof_index-的映射)
   - [五、季度更新记录](#五季度更新记录)
@@ -34,9 +40,10 @@
   - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-14
-> **最后更新**: 2026-02-28
+> **最后更新**: 2026-06-29
+> **更新内容**: 补充 Verus / Kani / Prusti / Creusot / Miri 工具链映射
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-> **状态**: ✅ 索引完成；季度更新
+> **状态**: 🔄 升级中
 > **用途**: 系统对标国际权威 Rust 形式化证明模型，明确本项目 PROOF_INDEX 与最新成果的对应关系与差距
 > **维护**: 季度更新，Rust 新版本发布时补充
 
@@ -57,6 +64,11 @@
 | **Crux-MIR** | Galois | 2024 | 比特级精确、密码学验证 | Crux | 无直接对应 |
 | **RustSEM** | 2024 (FMSD) | 2024 | 内存级 OBS、可执行语义、700+ 测试 | K-Framework | 无直接对应 |
 | **AutoVerus** | - | 2024–2025 | LLM 自动证明生成 | Verus | 无直接对应 |
+| **Verus** | MSR/CMU/ETH 等 | 2023 | Safe + 部分 unsafe 系统代码 | SMT（Z3） | `10_international_formal_verification_index.md` |
+| **Kani** | AWS/Model Checking | 2022+ | unsafe 代码属性、内存安全 | CBMC 模型检查 | `formal_methods/10_borrow_checker_proof.md`（CAV 工具） |
+| **Prusti** | ETH Zurich | 2019–2022 | Safe Rust 功能正确性 | Viper / 分离逻辑 | `formal_methods/10_borrow_checker_proof.md` |
+| **Creusot** | Inria/Paris-Saclay | 2022 | Safe Rust + 部分 unsafe | Why3 / SMT | 无直接对应 |
+| **Miri** | Rust 官方 | 2017+ | MIR 解释、UB 动态检测 | 解释器 | `formal_methods/10_borrow_checker_proof.md` |
 
 ---
 
@@ -137,6 +149,74 @@
 
 ---
 
+### 2.9 Verus
+
+> **来源**: [Verus](https://github.com/verus-lang/verus)
+
+- **方法**: 基于**线性 ghost 类型（linear ghost types）**的 SMT 验证器，直接在 Rust 源码上添加规范注解。
+- **覆盖范围**: 低层系统代码、并发原语、部分 unsafe 代码；使用 Z3 自动求解。
+- **与本项目 PROOF_INDEX 映射**:
+  - 所有权/借用：对应 `ownership_model` 定理 5/6 的功能正确性扩展。
+  - 并发安全：对应 `send_sync_formalization` 中的 `Send`/`Sync` 规范。
+  - 线性 ghost 类型：对应 Axiom OW1 / Axiom BR1 的 ghost-state 扩展。
+- **差距**: 无 Verus 规范库的直接映射；无线性 ghost 类型在本项目形式化中的占位。
+
+### 2.10 Kani
+
+> **来源**: [Kani Rust Verifier](https://github.com/model-checking/kani)
+
+- **方法**: **位精确模型检查（bit-precise model checking）**，基于 CBMC；通过 `#[kani::proof]` harness 与 `kani::any()` 符号输入验证属性。
+- **覆盖范围**: unsafe 块、内存安全（空指针、UAF、越界）、panic、算术溢出、用户断言。
+- **与本项目 PROOF_INDEX 映射**:
+  - 内存安全定理：验证 `Theorem 5` 在 unsafe 子集上的运行时实例。
+  - 数据竞争自由：通过符号执行检查 `Theorem 1` 的并发路径。
+- **差距**: 无并发支持；无法给出数学证明，只能给出有界验证/反例。
+
+### 2.11 Prusti
+
+> **来源**: [Prusti](https://github.com/viperproject/prusti)
+
+- **方法**: 将 Rust 程序翻译到 **Viper** 中间验证语言，利用隐式动态帧/分离逻辑自动构建内存安全证明；用户可写合约验证功能正确性。
+- **覆盖范围**: Safe Rust；递归数据类型、循环不变式、前置/后置条件。
+- **与本项目 PROOF_INDEX 映射**:
+  - 借用检查器正确性：对应 `borrow_checker_proof` Theorem 2。
+  - 分离逻辑 framing：对应 RustBelt/Iris 资源代数（`ownership_model` § Iris 对应）。
+- **差距**: 不支持内部可变性；对 unsafe 代码支持有限；本项目无 Viper 编码。
+
+### 2.12 Creusot
+
+> **来源**: [Creusot](https://github.com/creusot-rs/creusot)
+
+- **方法**: **演绎验证器**，将 MIR 翻译到 Why3 的 Coma/MLCFG 中间语言，使用 **Pearlite** 规范语言；SMT 求解器 discharge VCs。
+- **覆盖范围**: Safe Rust 功能正确性；最近扩展线性 ghost 类型以支持部分 unsafe 代码。
+- **与本项目 PROOF_INDEX 映射**:
+  - 函数合约/循环不变式：对应 `ownership_model` / `borrow_checker_proof` 中的定理与引理。
+  - 预言变量（prophecy）编码可变借用：与 Aeneas 的 CPV 互补。
+- **差距**: 无 Why3/Coma 翻译；无 Pearlite 规范库。
+
+### 2.13 Miri
+
+> **来源**: [Miri](https://github.com/rust-lang/miri)
+
+- **方法**: MIR 解释器，运行时检测未定义行为（UB）。
+- **覆盖范围**: 越界访问、悬垂指针、未初始化读取、别名违规（Stacked Borrows / Tree Borrows）、内存泄漏、部分并发数据竞争。
+- **与本项目 PROOF_INDEX 映射**:
+  - 借用规则动态检测：为 `borrow_checker_proof` 的反例表提供运行时证据。
+  - Tree Borrows 模式：验证 `Tree Borrows (PLDI 2025)` 的别名模型在标准库测试套件上的可实现性。
+- **差距**: 非穷举（依赖测试覆盖）；不能替代形式化证明。
+
+### 2.14 工具链映射汇总
+
+| 工具 | 方法 | 覆盖范围 | 本项目 PROOF_INDEX 映射 | 主要差距 |
+| :--- | :--- | :--- | :--- | :--- |
+| **Aeneas** | 函数式翻译 + 预言变量 | Safe Rust | `10_aeneas_integration_plan.md` | 无多后端翻译验证 |
+| **coq-of-rust** | THIR → Rocq 浅嵌入 | Safe + 部分标准库 | 无直接对应 | 无 THIR 形式化 |
+| **Verus** | 线性 ghost 类型 + SMT | 系统代码/部分 unsafe | `ownership_model` / `send_sync_formalization` | 无 ghost 类型规范 |
+| **Kani** | CBMC 模型检查 | unsafe / 属性 | `borrow_checker_proof` 定理 1/5 | 非证明、无并发 |
+| **Prusti** | Viper / 分离逻辑 | Safe Rust | `borrow_checker_proof` 定理 2 | 无 unsafe 支持 |
+| **Creusot** | Why3 演绎验证 | Safe Rust + 部分 unsafe | 函数合约/循环不变式 | 无 Why3/Coma 后端 |
+| **Miri** | MIR 解释器 | UB 动态检测 | 反例表 / Tree Borrows | 非穷举 |
+
 ## 三、POPL/PLDI/ICFP 论文对齐
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -146,7 +226,7 @@
 | **POPL** | RustBelt: Logical Foundations for the Future of Safe Systems Programming | 2018 | plv.mpi-sws.org/rustbelt | ownership_model、borrow_checker_proof |
 | **POPL** | RustBelt Meets Relaxed Memory | 2020 | rbrlx | send_sync_formalization、async_state_machine |
 | **PLDI** | Tree Borrows: A New Aliasing Model for Rust (Distinguished Paper) | 2025 | [ETH PLDI25](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) | borrow_checker_proof、BORROW_DATARACE_FREE.v |
-| **ICFP** | Oxide: The Essence of Rust | 2023 | [Oxide](https://arxiv.org/abs/2303.00924) | ownership_model（高层语义） |
+| **ICFP** | Oxide: The Essence of Rust | 2023 | [Oxide](https://arxiv.org/abs/1903.00982) | ownership_model（高层语义） |
 | **PLDI** | Stacked Borrows (Miri 实现基础) | 2019 | Ralf Jung 论文 | borrow_checker_proof、Miri 检测 |
 
 > **说明**：RustBelt 系列为 Rust 形式化验证奠基性工作；Tree Borrows 为 PLDI 2025 杰出论文；Oxide 为 ICFP 高层语义抽象。
@@ -176,6 +256,7 @@
 | 2026-02-14 | 初版创建 |
 | 2026-02-14 | 补充 coq_skeleton 与 RustBelt 对应 |
 | 2026-02-14 | T-BR1/T-TY3 Coq 骨架创建；Tree Borrows PLDI 2025 补充 |
+| 2026-06-29 | 补充 Verus/Kani/Prusti/Creusot/Miri 工具链映射；升级到 Rust 1.96.0+ |
 
 ---
 
