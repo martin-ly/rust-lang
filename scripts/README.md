@@ -1,8 +1,9 @@
 # 脚本工具
 
-> **项目**: Rust系统化学习项目
-> **维护者**: Rust学习项目团队
-> **最后更新**: 2026-06-02
+> **项目**: Rust 系统化学习项目
+> **维护者**: Rust 学习项目团队
+> **最后更新**: 2026-06-28
+> **状态**: 清理中（Phase 3 C4）
 
 ---
 
@@ -12,12 +13,10 @@
 scripts/
 ├── README.md                          # 本文件
 │
-├── 【根目录：活跃脚本】                # 当前维护的核心工具
-│
 ├── archive/                           # 归档脚本（按年份分类）
 │   └── 2026/
-│       ├── dead_link_audit/           # 5月死链审计调试系列（一次性）
-│       ├── link_fix_iterations/       # 链接修复迭代旧版本
+│       ├── dead_link_audit/           # 5 月死链审计调试系列（一次性）
+│       ├── link_fix_iterations/       # 历史链接修复战役脚本
 │       ├── compile_fail/              # compile_fail 验证旧版本
 │       ├── knowledge_links/           # knowledge 模块链接旧脚本
 │       ├── push_bump/                 # 批量推送/版本升级脚本
@@ -26,74 +25,120 @@ scripts/
 │
 ├── fixes/                             # 针对性问题修复工具
 ├── maintenance/                       # 项目结构维护工具
-└── utils/                             # 通用辅助工具
+├── utils/                             # 通用辅助工具
+├── templates/                         # 文档模板
+└── i18n/                              # 国际化/双语标注工具
 ```
 
 ---
 
-## 活跃脚本（根目录）
+## 活跃脚本速查
+
+以下列出根目录下 **94** 个活跃脚本中的核心工具。完整清单可运行：
+
+```bash
+ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
+```
 
 ### 🔍 审计与检查
 
-| 脚本 | 功能 | 说明 |
-|------|------|------|
-| `audit_code_blocks.py` | 代码块标记审计 | 为不完整片段添加 `ignore` 标记 |
-| `audit_stable_apis.py` | 稳定 API 审计 | 检查文档中 API 稳定性标注 |
-| `concept_audit.py` | 概念知识体系审计 | 概念一致性自动化检查 |
-| `concept_consistency_auditor.py` | 概念一致性审计 | 跨文档概念对齐检查 |
-| `kb_auditor.py` | 知识库审计 | 知识库完整性检查 |
-| `cross_concept_diff.py` | 交叉概念 Diff | 对比不同文档中的概念描述 |
-| `rust_version_tracker.py` | Rust 版本跟踪 | 监控 Rust 版本特性更新 |
-| `version_fact_check.py` | 版本事实核查 | 验证版本相关陈述的准确性 |
+| 脚本 | 功能 |
+|------|------|
+| `audit_code_blocks.py` | 代码块标记审计 |
+| `audit_concept_metadata.py` | `concept/` 元数据头审计 |
+| `audit_crate_docs_boilerplate.py` | crate 文档样板完整性审计 |
+| `audit_source_links.py` | 来源链接标注审计 |
+| `audit_stable_apis.py` | 文档中稳定 API 标注审计 |
+| `concept_audit.py` | 概念知识体系一致性检查 |
+| `concept_consistency_auditor.py` | 跨文档概念对齐检查 |
+| `cross_concept_diff.py` | 交叉概念 Diff |
+| `docs_value_audit.py` | 文档价值分级审计 |
+| `kb_auditor.py` | 知识库完整性检查 |
+| `rust_version_tracker.py` | Rust 版本特性跟踪 |
+| `version_fact_check.py` | 版本相关事实核查 |
+| `lint_filenames.py` | 文件名 snake_case 命名检查 |
 
 ### 🔗 链接检查与修复
 
-| 脚本 | 功能 | 说明 |
-|------|------|------|
-| `check_links.py` | 链接有效性检查 | 跨平台链接检查（Python） |
-| `fix_anchor_links_v3.py` | 锚点链接修复 | 批量修复 Markdown 损坏锚点（v3 最新版） |
-| `fix_broken_anchors_v4.py` | 损坏锚点降级修复 | 将指向不存在标题的锚点降级为纯文本 |
-| `check_active_anchors.py` | 活跃内容锚点检查 | 检查 concept/knowledge/book 中的同文件锚点 |
-| `fix_code_blocks.py` | 代码块修复 | 修复不完整代码块标记 |
-| `fix_compile_failures.py` | 编译失败修复 | 批量修复编译失败的代码块标记 |
-| `fix_readme_navigation.py` | README 导航修复 | 修复 README 目录导航 |
+| 脚本 | 功能 |
+|------|------|
+| `check_links.py` | 本地 Markdown 链接有效性检查 |
+| `check_active_anchors.py` | 同文件锚点检查 |
+| `check_all_concept_links_health.py` | concept 全量链接健康检查 |
+| `check_github_links_health.py` | GitHub 链接健康检查 |
+| `check_non_github_links_health.py` | 非 GitHub 外部链接健康检查 |
+| `check_source_links_health_extended.py` | 来源链接健康检查（扩展版） |
+| `fix_anchor_links_v3.py` | emoji/特殊字符锚点修复 |
+| `fix_broken_anchors_v4.py` | 不存在标题的锚点降级修复 |
+| `fix_dead_links_v3.py` | 死链批量修复 |
+| `fix_dot_anchor_links.py` | 点号锚点修复 |
+
+### 🌐 i18n 与双语标注
+
+| 脚本 | 功能 |
+|------|------|
+| `add_bilingual_annotations.py` | 术语双语标注 |
+| `check_i18n_metadata.py` | i18n 元数据检查 |
+| `fix_concept_en_titles.py` | 概念页英文标题规范化 |
+| `fix_concept_i18n_metadata_v2.py` | 概念页 i18n 元数据修复 |
+| `list_i18n_metadata.py` | i18n 元数据列表 |
+| `multilingual_alignment.py` | 多语言对齐 |
 
 ### 📝 生成工具
 
-| 脚本 | 功能 | 说明 |
-|------|------|------|
-| `add_sources.py` | 批量添加来源标注 | 为文档添加权威来源引用 |
-| `auto_toc_generator.py` | 自动生成目录 | 基于目录结构生成 SUMMARY.md |
-| `auto_categorize_blocks.py` | 代码块自动分类 | 为编译失败代码块建议正确标记 |
-| `build_search_index.py` | 构建搜索索引 | 基于 concept_kb.json 构建索引 |
-| `generate_summary.py` | 生成汇总 | 自动生成文档汇总 |
-| `generate_version_features.py` | 生成版本特性表 | 按 Rust 版本整理特性 |
-| `code_block_compiler.py` | 代码块编译验证 | 提取并测试 Markdown 中的 Rust 代码 |
+| 脚本 | 功能 |
+|------|------|
+| `add_sources.py` | 批量添加来源标注 |
+| `add_missing_sources.py` | 补充缺失来源 |
+| `auto_toc_generator.py` | 自动生成目录 |
+| `auto_link_concepts.py` | 自动添加概念交叉链接 |
+| `build_search_index.py` | 构建搜索索引 |
+| `generate_crate_docs_boilerplate.py` | 批量生成 crate 文档样板 |
+| `generate_en_skeleton.py` | 生成英文骨架 |
+| `generate_summary.py` | 生成汇总 |
+| `generate_version_features.py` | 生成版本特性表 |
+| `extract_runnable_quizzes.py` | 提取可运行测验 |
 
 ### 🔧 清理与维护
 
-| 脚本 | 功能 | 说明 |
-|------|------|------|
-| `archive_deprecated_content.py` | 归档过时内容 | 清理不再维护的文档到 archive |
-| `cleanup_mechanical_citations.py` | 清理机械引用 | 移除冗余的机械式引用标记 |
-| `cleanup_title_embedded_citations.py` | 清理标题内嵌引用 | 清理嵌入标题的引用 |
+| 脚本 | 功能 |
+|------|------|
+| `archive_deprecated_content.py` | 归档过时内容 |
+| `batch_archive_c_class.py` | 批量归档 C 类文档 |
+| `cleanup_mechanical_citations.py` | 清理机械引用 |
+| `cleanup_title_embedded_citations.py` | 清理标题内嵌引用 |
+| `fix_code_blocks.py` | 代码块标记修复 |
+| `fix_templated_chains.py` | 模板链修复 |
+| `quarterly_maintenance.py` | 季度维护编排 |
+| `quarterly_sync.py` | 季度同步 |
+| `quarterly_zombie_cleanup.py` | 季度僵尸内容清理 |
 
 ### 🏗️ 构建与测试
 
-| 脚本 | 功能 | 说明 |
-|------|------|------|
-| `cargo-build-optimized.sh` / `.ps1` | 优化编译 | Cargo 编译优化（Linux/macOS / Windows） |
-| `cargo-update-check.sh` / `.ps1` | 依赖更新检查 | 检查并报告依赖更新 |
-| `run-miri.sh` / `.bat` | Miri 测试 | 运行 Miri 检测未定义行为 |
-| `exercise-check.sh` / `.ps1` | 练习题评测 | Rust 练习题自动化评测 |
-| `verify_compile_fail_v3.py` | compile_fail 验证 | 验证 `compile_fail` 代码块确实编译失败 |
+| 脚本 | 功能 |
+|------|------|
+| `cargo-build-optimized.sh` / `.ps1` | 优化编译 |
+| `cargo-update-check.sh` / `.ps1` | 依赖更新检查 |
+| `run-miri.sh` / `.bat` | Miri 测试 |
+| `exercise-check.sh` / `.ps1` | 练习题评测 |
+| `code_block_compiler.py` | 代码块编译验证 |
+| `verify_compile_fail_v3.py` | `compile_fail` 代码块验证 |
 
 ### 📋 日常工具
 
-| 脚本 | 功能 | 说明 |
-|------|------|------|
-| `check_dependencies.sh` / `.bat` | 依赖检查 | 检查项目依赖完整性 |
-| `daily_checklist.sh` / `.ps1` | 每日检查清单 | 日常维护任务清单 |
+| 脚本 | 功能 |
+|------|------|
+| `check_dependencies.sh` / `.bat` | 依赖检查 |
+| `daily_checklist.sh` / `.ps1` | 每日检查清单 |
+| `supply_chain_audit.py` | 供应链审计 |
+
+### 🚀 Rust 版本发布相关
+
+| 脚本 | 功能 |
+|------|------|
+| `rust_197_release_day.sh` | Rust 1.97.0 发布日执行脚本 |
+| `rust_197_upstream_monitor.sh` | 上游发布动态监控 |
+| `batch_version_refresh.py` | 批量版本号刷新 |
 
 ---
 
@@ -101,7 +146,7 @@ scripts/
 
 ### `fixes/`
 
-针对性问题排查工具：
+针对性问题排查工具，例如：
 
 - `find_cfg_gap.py` — 查找条件编译配置间隙
 - `find_clippy_issue.py` — 定位 Clippy 警告问题
@@ -109,18 +154,29 @@ scripts/
 
 ### `maintenance/`
 
-项目结构维护工具：
+项目结构维护工具，例如：
 
 - `analyze_doc_structure.py` — 分析文档结构
 - `auto_add_structure.py` — 自动添加文档结构
 - `add_cross_references.py` — 批量添加 concept ↔ knowledge 交叉引用
 - `cleanup_unused_aliases.py` — 清理未使用的别名
+- `fix_final_broken_links.py` — 死链修复（维护版）
 
 ### `utils/`
 
-通用辅助工具：
+通用辅助工具，例如：
 
 - `enhance_placeholder_files.py` — 增强占位文件内容
+
+### `i18n/`
+
+国际化专用工具，例如：
+
+- `fix_rfc_links.py` — RFC 链接修复（i18n 版）
+
+### `templates/`
+
+docs/ crate 文档样板模板。
 
 ---
 
@@ -128,10 +184,11 @@ scripts/
 
 `archive/2026/` 目录存放以下类型的历史脚本：
 
-1. **迭代旧版本**：如 `fix_anchor_links.py` → `v2` → `v3`（保留 v3，归档 v1/v2）
+1. **迭代旧版本**：如 `fix_dead_links.py` / `v2` → `v3`（保留 v3，归档 v1/v2）
 2. **一次性调试脚本**：如 `_debug_docs_links*.py`、`_analyze_*.py` 系列
 3. **批量推送脚本**：如 `push_22.py` ~ `push_30.py`、`final_push.py` 等
 4. **过时的平台脚本**：被 Python 跨平台脚本替代的 PowerShell/Batch 脚本
+5. **一次性链接修复战役脚本**：`link_fix_iterations/` 下各轮次死链修复脚本
 
 > ⚠️ 归档脚本不再维护，仅供参考或历史回溯。如需使用，请先检查活跃目录中是否有更新的替代版本。
 
@@ -169,7 +226,7 @@ scripts/
 
 ---
 
-> **文档版本**: 2.0
+> **文档版本**: 2.1
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-> **最后更新**: 2026-06-02
-> **状态**: ✅ 脚本全面清理归档完成
+> **最后更新**: 2026-06-28
+> **状态**: 清理中（已归档重复脚本版本）
