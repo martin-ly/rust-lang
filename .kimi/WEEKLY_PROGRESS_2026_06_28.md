@@ -92,6 +92,10 @@
 - `B: add crate docs boilerplate audit script and remove duplicate README`
   - 新增 `scripts/audit_crate_docs_boilerplate.py`
   - 删除 `crates/c03_control_fn/docs/README (2).md`
+- `B: add missing boilerplate docs for c13_embedded`
+  - 新增 `crates/c13_embedded/docs/README.md`
+  - 新增 `crates/c13_embedded/docs/ONE_PAGE_SUMMARY.md`
+  - 新增 `crates/c13_embedded/docs/00_MASTER_INDEX.md`
 
 ---
 
