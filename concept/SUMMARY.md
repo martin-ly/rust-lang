@@ -323,7 +323,6 @@
   - [Rust 1.97 前沿特性预览](07_future/rust_1_97_preview.md)
   - [Rust 1.98+ 前沿特性预览](07_future/rust_1_98_preview.md)
   - [Safety Tags（安全标签）预览](07_future/31_safety_tags_preview.md)
-  - [BorrowSanitizer 预览](07_future/32_borrow_sanitizer_preview.md)
   - [AutoVerus / Verus 预览](07_future/33_autoverus_preview.md)
 
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
