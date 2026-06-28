@@ -24,16 +24,18 @@
 |---|---|---|---|---|
 | B1 | 清理空 `.gitkeep` 与空/占位 `.rs` 文件 | Kimi | ✅ 已完成 | 2026-06-28 |
 | B2 | 更新 `crates/README.md` 补全全部 workspace crate | Kimi | ✅ 已完成 | 2026-06-28 |
-| B3 | 实现 `unsafe_rust/` 练习主题 | Kimi | 🔄 进行中 | 2026-06-29 |
-| B4 | 复查重复/编号冲突文件 | Kimi | ⏳ 待开始 | 2026-06-30 |
-| B5 | 补全 `crates/common` examples/tests（如需要） | Kimi | ⏳ 待开始 | 2026-07-01 |
+| B3 | 实现 `unsafe_rust/` 练习主题 | Kimi | ✅ 已完成 | 2026-06-28 |
+| B4 | 复查重复/编号冲突文件 | Kimi | ✅ 已完成 | 2026-06-28 |
+| B5 | 补全 `crates/common` examples/tests | Kimi | ✅ 已完成 | 2026-06-28 |
+| B6 | 处理 `BorrowSanitizer` 文件重叠 | Kimi | ✅ 已完成 | 2026-06-28 |
+| B7 | 模板化 per-crate boilerplate docs | Kimi | ⏸️ 推迟 | 2026-07 中下旬 |
 
 ### C. Rust 1.97.0 发布日准备
 
 | 编号 | 任务 | 负责人 | 状态 | 预计完成 |
 |---|---|---|---|---|
 | C1 | 复核 `rust-toolchain.toml`、1.97 特性代码、preview 文档 | Kimi | ✅ 已完成 | 2026-06-28 |
-| C2 | 创建发布日自动检查脚本 | Kimi | 🔄 进行中 | 2026-06-29 |
+| C2 | 创建发布日自动检查脚本 | Kimi | ✅ 已完成 | 2026-06-28 |
 | C3 | 准备 `VecDeque::truncate_front` / `retain_back` fallback 切换策略 | Kimi | ✅ 已就绪 | 2026-06-28 |
 | C4 | 预演 `rust-toolchain.toml` → `1.97.0` 切换 | Kimi | ⏳ 2026-07-08 执行 | 2026-07-08 |
 | C5 | 发布日执行 `.kimi/EXECUTION_RUST_1_97_RELEASE_2026_07_09.md` | Kimi | ⏳ 2026-07-09 执行 | 2026-07-09 |
@@ -53,7 +55,7 @@
 |---|---|---|
 | `VecDeque::retain_back` 可能未进入 1.97.0 | 需要保留等效实现 | 已写 fallback，发布日按 Release Notes 决定 |
 | Sea-ORM 2.0 stable 继续延迟 | 生态文档状态需更新 | 已标注 rc.41 跟踪中 |
-| 506 个外部失效链接 | 国际化质量 | 排入 2026-07 中下旬分批处理 |
+| 506 个外部失效链接 | 国际化质量 | 排入 2026-07 中下旬分批处理（不在 BCD 范围） |
 
 ---
 
@@ -62,14 +64,25 @@
 - 已清理空/占位文件：**56 个**
 - 已补全 README：**10 个**
 - `concept/SUMMARY.md` 新增链接：**13 个**
+- `unsafe_rust/` 练习主题：**7 个练习 + 17 个集成测试**
+- `crates/common` 新增示例/测试：**3 个文件**
+- 删除冗余 BorrowSanitizer 预览文件：**1 个**
 - 全 workspace 编译/测试/Clippy 状态：**✅ 通过**
 - 距离 Rust 1.97.0 发布日：**11 天**
 
 ---
 
+## 本周已交付提交
+
+- `D(schedule): resolve BorrowSanitizer cluster by removing redundant 32_borrow_sanitizer_preview.md`
+  - 删除 `concept/07_future/32_borrow_sanitizer_preview.md`
+  - 更新 `concept/SUMMARY.md`
+
+---
+
 ## 下周（2026-07-05 ~ 2026-07-11）概要
 
-1. 完成 B3 `unsafe_rust/` 练习主题与 B4/B5 剩余结构债务。
-2. 2026-07-08 预演工具链切换；2026-07-09 执行 1.97 发布日清单。
+1. 2026-07-08 预演工具链切换。
+2. 2026-07-09 执行 1.97 发布日清单。
 3. 发布日后 3 天内完成 P2 稳定化（CHANGELOG、归档、回归测试）。
 4. 启动 P4 i18n 链接治理（如时间允许）。

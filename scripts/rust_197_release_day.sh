@@ -68,8 +68,18 @@ echo ""
 # ---------------------------------------------------------------------------
 echo "--- 阶段 3: 1.97 API 可用性探测 ---"
 
+if [[ -f scripts/probe_rust_197_apis.rs ]]; then
+    echo "运行独立探测程序..."
+    rustup run "${RUST_VERSION}" rustc --edition 2024 scripts/probe_rust_197_apis.rs -o /tmp/probe_197 || true
+    if [[ -x /tmp/probe_197 ]]; then
+        /tmp/probe_197 || true
+    fi
+else
+    echo "⚠️ 未找到 scripts/probe_rust_197_apis.rs，跳过自动探测"
+fi
+
 cat <<'EOF'
-请根据 Rust 1.97.0 Release Notes 手动检查并激活以下文件中的等效实现：
+请根据 Rust 1.97.0 Release Notes 和上方探测结果，手动检查并激活以下文件中的等效实现：
 
   crates/c08_algorithms/src/rust_197_features.rs
     - VecDeque::truncate_front
