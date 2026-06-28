@@ -7,6 +7,7 @@
 > **预检记录**:
 >   - 2026-06-25 预检完成，`Rust 1.97.0 stable` 尚未发布（当前最新为 beta.4），详见 `reports/RUST_1_97_RELEASE_PREFLIGHT_2026_06_25.md`
 >   - 2026-06-28 发布日探测脚本 `scripts/probe_rust_197_apis.rs` 与执行脚本 `scripts/rust_197_release_day.sh` 就绪，倒计时排期见 `.kimi/RUST_197_RELEASE_COUNTDOWN_2026_06_28.md`
+>   - 2026-06-28 确认：workspace 因多处使用 nightly feature gates（`gen_blocks`、`never_type`、`core_intrinsics` 等），无法整体切换到 1.97.0 stable。发布日保持 nightly 工具链，仅激活已在 1.97.0 稳定的 API 并更新文档状态。
 
 ---
 
@@ -17,25 +18,25 @@
 - [ ] 从当前分支创建发布日工作分支：`git checkout -b rust-1.97-release-day`
 - [ ] 备份当前 `Cargo.lock`（可选）：`cp Cargo.lock Cargo.lock.pre-1.97`
 - [ ] 运行发布日 API 探测脚本：`rustc --edition 2024 scripts/probe_rust_197_apis.rs -o /tmp/probe_197 && /tmp/probe_197`
+- [ ] **保持 `rust-toolchain.toml` 为 `nightly`**（workspace 依赖 nightly feature gates，详见阶段 1 说明）
 
 ---
 
-## 阶段 1：工具链切换（15 分钟）
+## 阶段 1：工具链策略确认（15 分钟）
 
-- [ ] 修改 `rust-toolchain.toml` 的 channel：
+> **重要调整（2026-06-28）**: workspace 中多个 crate 在 `src/lib.rs` 顶部声明了 nightly-only feature gates（如 `c08_algorithms` 的 `gen_blocks/yield_expr`、`c02_type_system` 的 `never_type/derive_coerce_pointee`、`c13_embedded` 的 `core_intrinsics/fn_align` 等）。因此 **不能** 将整个 workspace 切换到 `1.97.0` stable，否则会出现 `#[feature] may not be used on the stable release channel` 错误。
+>
+> 发布日策略：保持 `rust-toolchain.toml = "nightly"`，在 nightly 上激活 1.97.0 已稳定的 API，并在文档中标注其为 1.97.0 stable。
 
-  ```toml
-  channel = "1.97.0"
-  ```
-
-- [ ] 安装目标并验证：
+- [ ] 确认 `rust-toolchain.toml` 仍为 `channel = "nightly"`
+- [ ] 验证 nightly 工具链可用：
 
   ```bash
   rustup show
-  rustc --version  # 应输出 1.97.0
+  rustc --version  # 应输出 1.98.0-nightly 或更新
   ```
 
-- [ ] 运行 `cargo check --workspace` 确认 1.97 编译基线通过
+- [ ] 运行 `cargo check --workspace` 确认 nightly 编译基线通过
 
 ---
 
@@ -59,10 +60,14 @@
 
 ## 阶段 3：全 Workspace 验证（1 小时）
 
+在 nightly 工具链上运行：
+
 - [ ] `cargo check --workspace`
 - [ ] `cargo test --workspace`
-- [ ] `cargo clippy --workspace -- -D warnings`（若项目启用）
+- [ ] `cargo clippy --workspace --all-features -- -D warnings`（若项目启用）
 - [ ] 修复所有因 1.97 引入的编译/Clippy 警告
+
+> 可选：若未来希望某个 crate 单独在 stable 1.97.0 验证，需先将其 nightly feature gates 移入 `#[cfg(nightly)]` 模块或删除。
 
 ---
 

@@ -37,16 +37,22 @@ echo "✅ 版本验证通过"
 echo ""
 
 # ---------------------------------------------------------------------------
-# 阶段 1: 切换工具链
+# 阶段 1: 工具链策略确认
 # ---------------------------------------------------------------------------
-echo "--- 阶段 1: 切换 rust-toolchain.toml ---"
+echo "--- 阶段 1: 工具链策略确认 ---"
 
-sed -i.bak "s/^channel = .*/channel = \"${RUST_VERSION}\"/" rust-toolchain.toml
-rm -f rust-toolchain.toml.bak
-echo "✅ rust-toolchain.toml 已更新为 ${RUST_VERSION}"
+echo "说明: workspace 中多处使用 nightly feature gates（gen_blocks、never_type、"
+echo "      core_intrinsics 等），无法整体切换到 ${RUST_VERSION} stable。"
+echo "      保持 rust-toolchain.toml 为 nightly，仅在 nightly 上激活 1.97 稳定 API。"
+
+if grep -q '^channel = "nightly"' rust-toolchain.toml; then
+    echo "✅ rust-toolchain.toml 已保持为 nightly"
+else
+    echo "⚠️ rust-toolchain.toml 不是 nightly，请人工确认是否意图切换"
+fi
 
 rustup show
-cargo +"${RUST_VERSION}" --version
+rustc --version
 
 echo ""
 
@@ -55,10 +61,10 @@ echo ""
 # ---------------------------------------------------------------------------
 echo "--- 阶段 2: 首次编译基线 ---"
 
-if cargo +"${RUST_VERSION}" check --workspace; then
-    echo "✅ 1.97 基线编译通过"
+if cargo check --workspace; then
+    echo "✅ nightly 基线编译通过"
 else
-    echo "⚠️ 1.97 基线编译存在错误，需人工介入"
+    echo "⚠️ nightly 基线编译存在错误，需人工介入"
 fi
 
 echo ""
@@ -69,8 +75,8 @@ echo ""
 echo "--- 阶段 3: 1.97 API 可用性探测 ---"
 
 if [[ -f scripts/probe_rust_197_apis.rs ]]; then
-    echo "运行独立探测程序..."
-    rustup run "${RUST_VERSION}" rustc --edition 2024 scripts/probe_rust_197_apis.rs -o /tmp/probe_197 || true
+    echo "运行独立探测程序（在 nightly 上编译并执行，1.97 stable API 在 nightly 上同样可用）..."
+    rustc --edition 2024 scripts/probe_rust_197_apis.rs -o /tmp/probe_197 || true
     if [[ -x /tmp/probe_197 ]]; then
         /tmp/probe_197 || true
     fi
@@ -91,8 +97,8 @@ cat <<'EOF'
     - C-variadic fn definitions（若未进入 1.97，标注 nightly）
     - box_vec_non_null（若未进入 1.97，标注 1.98）
 
-  建议探测命令:
-    cargo +1.97.0 check -p c08_algorithms
+  建议验证命令（保持 nightly 工具链）:
+    cargo check -p c08_algorithms
     # 然后取消注释真实 API 调用，再次运行 cargo check
 EOF
 
@@ -103,9 +109,9 @@ echo ""
 # ---------------------------------------------------------------------------
 echo "--- 阶段 4: 全 Workspace 验证 ---"
 
-cargo +"${RUST_VERSION}" check --workspace
-cargo +"${RUST_VERSION}" test --workspace
-cargo +"${RUST_VERSION}" clippy --workspace --all-features -- -D warnings
+cargo check --workspace
+cargo test --workspace
+cargo clippy --workspace --all-features -- -D warnings
 
 echo "✅ 全 Workspace 验证通过"
 echo ""

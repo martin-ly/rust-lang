@@ -12,7 +12,9 @@
 1. **必须以 Rust 1.97.0 官方 Release Notes 为唯一权威来源**。
 2. 仅当 Release Notes 明确列出某 API 已稳定，才取消注释真实调用并删除等效实现。
 3. 若 API 未进入 1.97.0，保留等效实现，并将注释更新为 `推迟至 1.98`。
-4. 激活后必须运行 `cargo check -p c08_algorithms` 和 `cargo test -p c08_algorithms`。
+4. 激活后在 **nightly** 工具链上运行 `cargo check -p c08_algorithms` 和 `cargo test -p c08_algorithms`。
+
+> **工具链说明**: workspace 因多处使用 nightly feature gates 无法整体切换到 1.97.0 stable。`c08_algorithms` 本身也声明了 `#![feature(gen_blocks, yield_expr)]`，因此只能在 nightly 上编译。1.97.0 已稳定的 API 在 nightly 上同样可用，文档中标注其为 1.97.0 stable 即可。
 
 ---
 

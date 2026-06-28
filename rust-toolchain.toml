@@ -1,5 +1,7 @@
 [toolchain]
-channel = "nightly"  # 项目使用 nightly 1.98.0 预览实验性特性；MSRV 为 1.96.0 stable
+channel = "nightly"  # 项目使用 nightly 1.98.0 预览实验性特性（如 gen_blocks、never_type 等）
+# 注意: workspace 整体依赖 nightly feature gates，因此不切换到 stable 工具链。
+# Rust 1.97.0 稳定版 API 仍可在 nightly 上激活并使用；相关文档会标注实际稳定版本。
 components = [
     "rustfmt",           # 代码格式化
     "clippy",            # 静态分析

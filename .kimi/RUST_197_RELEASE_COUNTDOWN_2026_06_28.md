@@ -63,8 +63,8 @@
 
 ### 2026-07-08（周三）— 发布日前一天
 
-- [ ] 预演 `rust-toolchain.toml` → `1.97.0` 切换（可临时切换后回滚）
-- [ ] 确认本地 rustup 可下载 1.97.0
+- [ ] 确认 `rust-toolchain.toml` 保持 `nightly`（workspace 依赖 nightly feature gates）
+- [ ] 确认本地 rustup 可下载 1.97.0（用于单独运行探测脚本）
 - [ ] 最终确认 `scripts/probe_rust_197_apis.rs` 在 1.97.0 下的输出
 - [ ] 准备发布日工作分支：`git checkout -b rust-1.97-release-day`
 

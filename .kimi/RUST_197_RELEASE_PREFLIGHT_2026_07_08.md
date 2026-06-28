@@ -16,11 +16,12 @@
 
 ## 代码预检
 
-- [ ] `rust-toolchain.toml` 当前为 `channel = "nightly"`（发布日再切换）
+- [ ] `rust-toolchain.toml` 保持 `channel = "nightly"`（workspace 依赖 nightly feature gates）
 - [ ] `crates/c08_algorithms/src/rust_197_features.rs` 中 fallback 实现完整
 - [ ] 全 workspace 编译通过：`cargo check --workspace`
 - [ ] 全 workspace 测试通过：`cargo test --workspace`
 - [ ] Clippy 无警告：`cargo clippy --workspace --all-features -- -D warnings`
+- [ ] 已确认无法整体切换到 1.97.0 stable（`gen_blocks`、`never_type`、`core_intrinsics` 等 nightly feature 在 crate 根使用）
 
 ## 文档预检
 
