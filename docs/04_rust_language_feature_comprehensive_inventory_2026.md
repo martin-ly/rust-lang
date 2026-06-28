@@ -580,7 +580,7 @@ fn empty_range() {
 **权威对齐**:
 
 - 稳定版本: **1.95.0** (2026-04-16)
-- RFC: [RFC 3550](https://rust-lang.github.io/rfcs/3550-rangeful.html)
+- RFC: [RFC 3550](https://rust-lang.github.io/rfcs/3550-new-range.html)
 - 来源: [rust-lang/rust#136431](https://github.com/rust-lang/rust/pull/136431)
 
 ### 02.4 1.95+ 新增特性深度梳理：bool: `TryFrom<integer>`
@@ -793,7 +793,7 @@ fn old_way(msg: Message) -> String {
 **权威对齐**:
 
 - 稳定版本: **1.95.0** (2026-04-16)
-- RFC: [RFC 3637](https://rust-lang.github.io/rfcs/3637-if-let-guards.html) (guard patterns 的一部分)
+- RFC: [RFC 3637](https://rust-lang.github.io/rfcs/3637-guard-patterns.html) (guard patterns 的一部分)
 - 来源: [rust-lang/rust#135345](https://github.com/rust-lang/rust/pull/135345)
 - 前置依赖: `let chains` (1.88, 2024 Edition)
 

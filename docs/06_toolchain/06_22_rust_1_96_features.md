@@ -11,7 +11,7 @@
 >
 > - [Announcing Rust 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html)
 > - [releases.rs — 1.96.0](https://releases.rs/docs/1.96.0/)
-> - [RFC 3550 — Copy-compatible Range types](https://rust-lang.github.io/rfcs/3550-rangext.html)
+> - [RFC 3550 — Copy-compatible Range types](https://rust-lang.github.io/rfcs/3550-new-range.html)
 
 ---
 

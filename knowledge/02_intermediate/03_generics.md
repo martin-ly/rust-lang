@@ -736,7 +736,7 @@ dyn Trait 替代后:
 | [The Rust Book - Generics](https://doc.rust-lang.org/book/ch10-00-generics.html) | 官方教程 | 泛型语法、Trait Bound | 模块 1、模块 5 |
 | [Rust Reference - Generic parameters](https://doc.rust-lang.org/reference/items/generics.html) | 官方参考 | 泛型参数、where 子句 | 模块 1、模块 4 |
 | [RFC 2000 - Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html) | 官方 RFC | Const Generics 设计 | 模块 1.2、模块 5.2 |
-| [RFC 2289 - Associated Type Constructors](https://rust-lang.github.io/rfcs/2289-associated-type-constructors.html) | 官方 RFC | GAT 设计动机 | 模块 4.1 |
+| [RFC 2289 - Associated Type Constructors](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html) | 官方 RFC | GAT 设计动机 | 模块 4.1 |
 
 ### 8.2 学术来源
 >

@@ -478,7 +478,7 @@ match client.get("https://invalid.url").send().await {
 - [Reqwest Middleware 文档](https://docs.rs/reqwest-middleware/latest/reqwest_middleware/) — 中间件 trait 与组合
 - [Hyper 官方文档](https://docs.rs/hyper/latest/hyper/) — HTTP 协议实现、连接池
 - [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) — `dyn` 与异步 trait
-- [The Rust Programming Language, Chapter 17](https://doc.rust-lang.org/book/ch17-01-futures-and-async.html) — async/await 语义
+- [The Rust Programming Language, Chapter 17](https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html) — async/await 语义
 
 ---
 

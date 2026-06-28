@@ -416,7 +416,7 @@ diesel::users
 
 当查询复杂度增加（CTE、窗口函数、LATERAL JOIN），SQLx 的"写 SQL"方式优势愈发明显；而对于简单的 CRUD，Diesel 的 DSL 提供了更好的可组合性和重构安全性。
 
-> [来源: Diesel 官方文档, https://diesel.rs/guides/getting-started.html]
+> 来源: [Diesel 官方文档](https://diesel.rs/guides/getting-started.html)
 > 来源: SQLx vs Diesel 社区讨论, https: /  / github.com / launchbadge / [sqlx](https://github.com/launchbadge/sqlx) / discussions
 
 ---

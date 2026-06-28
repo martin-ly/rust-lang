@@ -439,7 +439,7 @@ tx.commit().await?;
 
 `Transaction` 未提交即被 `drop` 时，析构函数自动发送 `ROLLBACK`，利用 Rust 的确定性析构避免资源泄漏。
 
-> [来源: The Rust Programming Language, Chapter 17: Async/Await](https://doc.rust-lang.org/book/ch17-01-futures-and-async.html)
+> [来源: The Rust Programming Language, Chapter 17: Async/Await](https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html)
 
 ---
 
@@ -466,7 +466,7 @@ tx.commit().await?;
 - [SQLx 官方文档](https://docs.rs/sqlx/latest/sqlx/) — 宏 API、Pool 配置、类型映射
 - [SQLx CLI / Offline Mode](https://docs.rs/sqlx-cli/latest/sqlx_cli/) — `cargo sqlx prepare` 与离线构建
 - [The Rust Programming Language, Chapter 19](https://doc.rust-lang.org/book/ch19-06-macros.html) — 过程宏机制
-- [The Rust Programming Language, Chapter 17](https://doc.rust-lang.org/book/ch17-01-futures-and-async.html) — async/await 与 Future trait
+- [The Rust Programming Language, Chapter 17](https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html) — async/await 与 Future trait
 - [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html) — 宏展开语义
 
 ---

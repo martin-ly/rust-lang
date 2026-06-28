@@ -15,8 +15,8 @@ Diesel 是 Rust 生态中**类型安全的 SQL ORM 与查询构建器**，其设
 Diesel 的哲学可以概括为：**Schema 即类型，查询即类型变换，数据库交互即类型证明**。
 这种设计使得诸如 `SELECT * FROM users WHERE id = 'not_a_number'` 之类的错误在编译阶段即被捕获，而非在生产环境的查询执行阶段抛出异常。
 
-> [来源: Diesel 官方文档, https://diesel.rs/guides/getting-started]
-> [来源: The Rust Programming Language, 泛型与 Trait 章节, https://doc.rust-lang.org/book/ch10-00-generics.html]
+> 来源: [Diesel 官方文档](https://diesel.rs/guides/getting-started)
+> 来源: [The Rust Programming Language, 泛型与 Trait 章节](https://doc.rust-lang.org/book/ch10-00-generics.html)
 
 ---
 
@@ -202,7 +202,7 @@ users::table
     .load::<User>(conn)?;
 ```
 
-> [来源: Diesel Query Builder 文档, https://diesel.rs/guides/all-about-inserts.html]
+> 来源: [Diesel Query Builder 文档](https://diesel.rs/guides/all-about-inserts.html)
 > 来源: [Rust Reference, Trait 与泛型章节, https://doc.rust-lang.org/reference/items/traits.html](https://doc.rust-lang.org/reference/)
 
 ---
@@ -438,7 +438,7 @@ struct UserChangeset {
 }
 ```
 
-> [来源: Diesel Schema 文档, https://diesel.rs/guides/schema-in-depth.html]
+> 来源: [Diesel Schema 文档](https://diesel.rs/guides/schema-in-depth.html)
 > 来源: [Rust Reference, 过程宏, https://doc.rust-lang.org/reference/procedural-macros.html](https://doc.rust-lang.org/reference/)
 
 ---
@@ -651,7 +651,7 @@ let row: (i64, String) = sqlx::query_as("SELECT id, name FROM users WHERE id = $
 | 启动/原型速度 | ❌ 需配置 | ✅ 快 | ✅ 最快 |
 | 零成本抽象 | ✅ 是 | ✅ 是 | ✅ 是 |
 
-> [来源: Diesel vs sqlx 对比分析, https://diesel.rs/guides/comparison-to-other-orms.html]
+> 来源: [Diesel vs sqlx 对比分析](https://diesel.rs/guides/comparison-to-other-orms.html)
 > 来源: sqlx 文档, https: /  / github.com / launchbadge / [sqlx](https://github.com/launchbadge/sqlx)
 
 ---

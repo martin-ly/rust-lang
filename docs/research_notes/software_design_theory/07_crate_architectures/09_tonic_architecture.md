@@ -14,7 +14,7 @@ Tonic 的核心理念可以概括为：**gRPC 即 HTTP/2 + Protobuf + 流语义*
 与 Go 的 gRPC 实现不同，Tonic 充分利用 Rust 的类型系统，在编译期即保证：服务方法的签名与 `.proto` 定义一致、流类型的方向（服务器流/客户端流/双向流）与 handler 签名匹配、拦截器链的类型正确。
 
 > 来源: Tonic 官方文档, https: /  / [docs.rs](https://docs.rs/) / tonic / latest / tonic /
-> [来源: Tonic GitHub README, https://github.com/hyperium/tonic]
+> 来源: [Tonic GitHub README](https://github.com/hyperium/tonic)
 
 ---
 
@@ -72,7 +72,7 @@ graph TB
 | 传输层 | HTTP/2 连接管理与帧传输 | `hyper`, `h2`, `tokio` |
 | 编解码层 | Protobuf 序列化/反序列化 | `prost::Message` |
 
-> [来源: gRPC 官方文档, https://grpc.io/docs/what-is-grpc/introduction/]
+> 来源: [gRPC 官方文档](https://grpc.io/docs/what-is-grpc/introduction/)
 
 ---
 
@@ -354,7 +354,7 @@ impl Chat for MyChatService {
 }
 ```
 
-> [来源: gRPC 核心概念, https://grpc.io/docs/what-is-grpc/core-concepts/]
+> 来源: [gRPC 核心概念](https://grpc.io/docs/what-is-grpc/core-concepts/)
 
 ---
 
@@ -458,8 +458,8 @@ message Config {
 gRPC Stream 有协议开销（HTTP/2 HEADERS + DATA 帧）。
 如果每条消息极小（<100 bytes）且频率极高（>10k msg/s），批量 unary 调用或专用消息队列（如 NATS、Kafka）可能更高效。
 
-> [来源: Protobuf 语言指南, https://protobuf.dev/programming-guides/proto3/]
-> [来源: gRPC Web 文档, https://github.com/grpc/grpc-web]
+> 来源: [Protobuf 语言指南](https://protobuf.dev/programming-guides/proto3/)
+> 来源: [gRPC Web 文档](https://github.com/grpc/grpc-web)
 
 ---
 

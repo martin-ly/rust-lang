@@ -6,8 +6,8 @@
 > **Bloom 层级**: 理解
 > **稳定版本**: Rust 1.96.0 (2026-04-16)
 > **Edition**: 2024
-> **RFC**: [RFC 3550](https://rust-lang.github.io/rfcs/3550-rangeful.html)
-> **权威来源**: [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/), [RFC 3550: Rangeful](https://rust-lang.github.io/rfcs/3550-rangeful.html), [std::ops::Range](https://doc.rust-lang.org/std/ops/struct.Range.html)
+> **RFC**: [RFC 3550](https://rust-lang.github.io/rfcs/3550-new-range.html)
+> **权威来源**: [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/), [RFC 3550: Rangeful](https://rust-lang.github.io/rfcs/3550-new-range.html), [std::ops::Range](https://doc.rust-lang.org/std/ops/struct.Range.html)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 RFC 3550 设计决策来源标注、Range 类型形式化语义引用 [来源: Authority Source Sprint Batch 8]
 >
@@ -225,7 +225,7 @@ core::range::RangeInclusive (1.96.0+):
 | 来源 | 类型 | 说明 |
 |------|------|------|
 | [Rust 1.96.0 Release](https://releases.rs/docs/1.96.0/) | 官方 | `core::range` 模块稳定化 |
-| [RFC 3550](https://rust-lang.github.io/rfcs/3550-rangeful.html) | 官方 | Range 类型系统改进提案 |
+| [RFC 3550](https://rust-lang.github.io/rfcs/3550-new-range.html) | 官方 | Range 类型系统改进提案 |
 
 ---
 
@@ -263,7 +263,7 @@ core::range::RangeInclusive (1.96.0+):
 ## 📚 权威来源索引
 
 - [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/) [来源: Rust Release Team / 2026]
-- [RFC 3550: Rangeful](https://rust-lang.github.io/rfcs/3550-rangeful.html) [来源: Rust Core Team / 2025]
+- [RFC 3550: Rangeful](https://rust-lang.github.io/rfcs/3550-new-range.html) [来源: Rust Core Team / 2025]
 - [std::ops::Range](https://doc.rust-lang.org/std/ops/struct.Range.html) [来源: Rust Standard Library / 2025]
 
 ---

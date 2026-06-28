@@ -45,6 +45,11 @@ URL_REPLACEMENTS = {
     "https://tokio.rs/tokio/topics/io": "https://tokio.rs/tokio/tutorial/io",
     "https://tokio.rs/tokio/topics/runtime-internals": "https://tokio.rs/tokio/topics",
     "https://tokio.rs/docs": "https://tokio.rs/tokio/tutorial",
+    # TRPL 3rd edition chapter renames
+    "https://doc.rust-lang.org/book/ch13-00-functional-features-of-rust.html": "https://doc.rust-lang.org/book/ch13-00-functional-features.html",
+    "https://doc.rust-lang.org/book/ch16-00-fearless-concurrency.html": "https://doc.rust-lang.org/book/ch16-00-concurrency.html",
+    "https://doc.rust-lang.org/book/ch17-01-futures-and-async.html": "https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html",
+    "https://doc.rust-lang.org/book/ch17-03-std-futures.html": "https://doc.rust-lang.org/book/ch17-02-concurrency-with-async.html",
 }
 
 

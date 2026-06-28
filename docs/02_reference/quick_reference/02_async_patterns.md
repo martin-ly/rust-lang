@@ -1185,7 +1185,7 @@ async fn process_stream() {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [Rust 异步编程文档](https://doc.rust-lang.org/book/ch16-00-fearless-concurrency.html)
+- [Rust 异步编程文档](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 - [Async Book](https://rust-lang.github.io/async-book/)
 - [Tokio 文档](https://tokio.rs/)
 

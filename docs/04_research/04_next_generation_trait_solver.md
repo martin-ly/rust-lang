@@ -370,7 +370,7 @@ flowchart TD
    <https://rust-lang.github.io/rfcs/1210-impl-specialization.html>
 
 2. **RFC 2289**. "Associated Type Constructors". *Rust RFCs*, 2018.
-   <https://rust-lang.github.io/rfcs/2289-associated-type-constructors.html> (GATs 的前身)
+   <https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html> (GATs 的前身)
 
 ### 学术论文
 >

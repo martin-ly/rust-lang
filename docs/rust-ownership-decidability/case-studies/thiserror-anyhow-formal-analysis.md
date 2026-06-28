@@ -318,7 +318,7 @@ fn print_error_chain(err: &Error) {
 
 > **来源: [Rust Reference - Result](https://doc.rust-lang.org/std/result/)**
 
-> **来源: [RFC 2504 - Try Trait](https://rust-lang.github.io/rfcs/2504-try-trait.html)**
+> **来源: [RFC 2504 - Try Trait](https://rust-lang.github.io/rfcs/2504-fix-error.html)**
 
 ---
 

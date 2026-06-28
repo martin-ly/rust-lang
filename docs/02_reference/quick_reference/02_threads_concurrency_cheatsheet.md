@@ -855,7 +855,7 @@ let shared_map: Arc<HashMap<i32, String>> = Arc::new(HashMap::new());
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
-- [Rust 并发文档](https://doc.rust-lang.org/book/ch16-00-fearless-concurrency.html)
+- [Rust 并发文档](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 - [std::thread 文档](https://doc.rust-lang.org/std/thread/)
 - [std::sync 文档](https://doc.rust-lang.org/std/sync/)
 

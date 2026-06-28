@@ -728,7 +728,7 @@ vec.iter().map(|x| x * 2).collect::<Vec<_>>();
 
 > **来源: [Wikipedia - Iterator Pattern](https://en.wikipedia.org/wiki/Iterator_Pattern)**
 
-> **来源: [TRPL Ch. 13 - Iterators](https://doc.rust-lang.org/book/ch13-00-functional-features-of-rust.html)**
+> **来源: [TRPL Ch. 13 - Iterators](https://doc.rust-lang.org/book/ch13-00-functional-features.html)**
 
 > **来源: [Rust Reference - Iterator](https://doc.rust-lang.org/reference/)**
 

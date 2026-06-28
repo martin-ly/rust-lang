@@ -447,7 +447,7 @@ impl Future for MyAsyncFn {
 ```
 
 > [来源: Rust Reference — Pinning](https://doc.rust-lang.org/reference/items/traits.html)
-> [来源: TRPL — Pinning and Interior Mutability](https://doc.rust-lang.org/book/ch17-03-std-futures.html)
+> [来源: TRPL — Pinning and Interior Mutability](https://doc.rust-lang.org/book/ch17-02-concurrency-with-async.html)
 
 ### 6.2 Send / Sync 跨越 await 点
 >

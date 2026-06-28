@@ -848,7 +848,7 @@ fn foo(x: &mut Vec<&'static str>, y: &'static str) {
 > **权威来源**:
 > [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html),
 > [Rustonomicon — Lifetimes](https://doc.rust-lang.org/nomicon/lifetimes.html),
-> [RFC 1414: Lifetime Elision](https://rust-lang.github.io/rfcs/1414-lifetime-elision.html),
+> [RFC 0141: Lifetime Elision](https://rust-lang.github.io/rfcs/0141-lifetime-elision.html),
 > [RFC 2094: NLL](https://rust-lang.github.io/rfcs/2094-nll.html)
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、RFC 1414 Lifetime Elision、RFC 2094 NLL、Rustonomicon） [来源: Authority Source Sprint Batch 8]

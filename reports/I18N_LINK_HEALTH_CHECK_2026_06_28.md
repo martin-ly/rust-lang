@@ -1,10 +1,10 @@
 # 国际化权威来源链接健康检查报告
 > 检查日期: 2026-06-28
 > 扫描范围: concept, knowledge, docs
-> 外部链接总数: 4451
+> 外部链接总数: 4439
 > 手动检查（跳过）: 1508
-> 重定向链接: 226
-> 失效/异常链接: 530
+> 重定向链接: 225
+> 失效/异常链接: 506
 
 ## 手动检查域名（跳过）
 
@@ -7372,7 +7372,11 @@
 
 ## 重定向链接
 
-- `https://www.jetbrains.com/lp/devecosystem-2025/` → `https://devecosystem-2025.jetbrains.com/`
+- `https://www.rust-lang.org/learn` → `https://rust-lang.org/learn/`
+  - `concept\00_meta\03_bloom_taxonomy.md`
+- `https://tools.ietf.org/html/rfc3629` → `https://datatracker.ietf.org/doc/html/rfc3629`
+  - `concept\01_foundation\18_strings_and_encoding.md`
+- `https://www.roberthalf.com/salary-guide` → `https://www.roberthalf.com/us/en/insights/salary-guide?utm_medium=sales-support&utm_source=print-collateral&utm_campaign=v2_client_thought-leadership_salary-guide-2026_all`
   - `concept\00_meta\career_landscape.md`
 - `https://www.rust-lang.org/tools/install` → `https://rust-lang.org/tools/install/`
   - `concept\01_foundation\00_start.md`
@@ -7381,30 +7385,60 @@
   - `knowledge\00_start\03_learning_roadmap.md`
   - `knowledge\00_start\README.md`
   - `knowledge\01_fundamentals\04_ownership.md`
-- `https://www.rust-lang.org/learn` → `https://rust-lang.org/learn/`
-  - `concept\00_meta\03_bloom_taxonomy.md`
-- `https://tools.ietf.org/html/rfc3629` → `https://datatracker.ietf.org/doc/html/rfc3629`
-  - `concept\01_foundation\18_strings_and_encoding.md`
 - `https://basic-formal-ontology.org/` → `https://bfo-ontology.github.io/`
   - `concept\00_meta\kg_tlo_alignment.md`
-- `https://www.roberthalf.com/salary-guide` → `https://www.roberthalf.com/us/en/insights/salary-guide?utm_medium=sales-support&utm_source=print-collateral&utm_campaign=v2_client_thought-leadership_salary-guide-2026_all`
-  - `concept\00_meta\career_landscape.md`
-- `https://tools.ietf.org/html/rfc768` → `https://datatracker.ietf.org/doc/html/rfc768`
-  - `concept\03_advanced\18_network_programming.md`
-- `https://tools.ietf.org/html/rfc793` → `https://datatracker.ietf.org/doc/html/rfc793`
-  - `concept\03_advanced\18_network_programming.md`
-- `https://cft.vanderbilt.edu/guides-sub-pages/blooms-taxonomy/` → `https://www.vanderbilt.edu/advanced-institute/`
-  - `concept\00_meta\03_bloom_taxonomy.md`
-- `https://cs.brown.edu/~sk/Publications/Books/ProgLangs/2007-04-26/plai-2007-04-26.pdf` → `https://cs.brown.edu/people/sk/Publications/Books/ProgLangs/2007-04-26/plai-2007-04-26.pdf`
-  - `concept\00_meta\pl_foundations_roadmap.md`
-- `https://www.ibm.com/docs/en/zos/2.5.0?topic=operations-vector-instructions` → `https://www.ibm.com/docs/en/zos/2.5.0`
-  - `concept\03_advanced\13_inline_assembly.md`
-- `http://pages.cs.wisc.edu/~remzi/OSTEP/` → `https://pages.cs.wisc.edu/~remzi/OSTEP/`
-  - `concept\03_advanced\01_concurrency.md`
-- `http://www.adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html` → `https://www.adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html`
-  - `concept\04_formal\10_category_theory.md`
 - `https://cs.cmu.edu/~rwh/pfpl/` → `https://www.cs.cmu.edu/~rwh/pfpl/`
   - `concept\00_meta\pl_foundations_roadmap.md`
+- `http://pages.cs.wisc.edu/~remzi/OSTEP/` → `https://pages.cs.wisc.edu/~remzi/OSTEP/`
+  - `concept\03_advanced\01_concurrency.md`
+- `https://www.jetbrains.com/lp/devecosystem-2025/` → `https://devecosystem-2025.jetbrains.com/`
+  - `concept\00_meta\career_landscape.md`
+- `https://cft.vanderbilt.edu/guides-sub-pages/blooms-taxonomy/` → `https://www.vanderbilt.edu/advanced-institute/`
+  - `concept\00_meta\03_bloom_taxonomy.md`
+- `https://standards.ieee.org/standard/754-2019.html` → `https://standards.ieee.org/ieee/754/6210/`
+  - `concept\01_foundation\05_reference_semantics.md`
+- `https://cs.brown.edu/~sk/Publications/Books/ProgLangs/2007-04-26/plai-2007-04-26.pdf` → `https://cs.brown.edu/people/sk/Publications/Books/ProgLangs/2007-04-26/plai-2007-04-26.pdf`
+  - `concept\00_meta\pl_foundations_roadmap.md`
+- `https://tools.ietf.org/html/rfc793` → `https://datatracker.ietf.org/doc/html/rfc793`
+  - `concept\03_advanced\18_network_programming.md`
+- `https://www.ibm.com/docs/en/zos/2.5.0?topic=operations-vector-instructions` → `https://www.ibm.com/docs/en/zos/2.5.0`
+  - `concept\03_advanced\13_inline_assembly.md`
+- `https://tools.ietf.org/html/rfc768` → `https://datatracker.ietf.org/doc/html/rfc768`
+  - `concept\03_advanced\18_network_programming.md`
+- `http://www.adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html` → `https://www.adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html`
+  - `concept\04_formal\10_category_theory.md`
+- `https://ferrous-systems.com/ferrocene/` → `https://ferrocene.dev/en`
+  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
+  - `concept\06_ecosystem\05_formal_ecosystem_tower.md`
+  - `concept\07_future\17_rust_specification_preview.md`
+  - `knowledge\04_expert\safety_critical\01_completion_report_100_percent.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\01_academic_research_landscape.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\02_rust_ecosystem_mind_map.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\01_comprehensive_language_comparison_matrix.md`
+  - `knowledge\04_expert\safety_critical\02_matrices\02_rust_multi_dimensional_matrix.md`
+  - `knowledge\04_expert\safety_critical\02_rust_safety_critical_ecosystem_master_index.md`
+  - `knowledge\04_expert\safety_critical\03_decision_trees\01_rust_decision_trees.md`
+  - `knowledge\04_expert\safety_critical\03_decision_trees\02_safety_integrity_level_selection_guide.md`
+  - `knowledge\04_expert\safety_critical\03_readme_rust_safety_critical_ecosystem.md`
+  - `knowledge\04_expert\safety_critical\04_axiomatic_reasoning\02_rust_axiomatic_reasoning_trees.md`
+  - `knowledge\04_expert\safety_critical\05_strategic_guidance\01_adoption_strategy_and_roi_analysis.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\01_education_and_training_roadmap.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\02_rust_2026_2030_roadmap_forecast.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\03_sustainable_roadmap_and_plans.md`
+  - `knowledge\04_expert\safety_critical\06_roadmaps\04_technology_watch_and_emerging_trends.md`
+  - `knowledge\04_expert\safety_critical\07_case_studies\01_case_study_01_ferrocene_certification.md`
+  - `knowledge\04_expert\safety_critical\08_training\01_assessment_and_certification.md`
+  - `knowledge\04_expert\safety_critical\08_training\02_certification_prep_guide.md`
+  - `knowledge\04_expert\safety_critical\08_training\03_hands_on_lab_exercises.md`
+  - `knowledge\04_expert\safety_critical\08_training\05_rust_safety_critical_training_program.md`
+  - `knowledge\04_expert\safety_critical\09_reference\04_comprehensive_international_alignment_completion_report.md`
+  - `knowledge\04_expert\safety_critical\09_reference\05_deployment_and_maintenance_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\10_performance_optimization_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\13_rust_safety_critical_coding_guidelines.md`
+  - `knowledge\04_expert\safety_critical\09_reference\14_safety_critical_checklists.md`
+  - `knowledge\04_expert\safety_critical\10_standards\01_do_178c_rust_compliance_pathway.md`
+  - `knowledge\04_expert\safety_critical\10_standards\02_iec_61508_rust_implementation_guide.md`
+  - `knowledge\04_expert\safety_critical\README.md`
 - `https://marabos.nl/atomics/` → `https://mara.nl/atomics/`
   - `concept\03_advanced\10_concurrency_patterns.md`
   - `concept\03_advanced\11_atomics_and_memory_ordering.md`
@@ -7417,6 +7451,10 @@
   - `knowledge\03_advanced\04_lazy_initialization.md`
   - `knowledge\03_advanced\concurrency\01_atomics.md`
   - `knowledge\03_advanced\concurrency\02_synchronization.md`
+- `https://trust-in-soft.com/` → `https://www.trust-in-soft.com/`
+  - `concept\04_formal\22_modern_verification_tools.md`
+- `https://marabos.nl/atomics/memory-ordering.html` → `https://mara.nl/atomics/memory-ordering.html`
+  - `concept\03_advanced\11_atomics_and_memory_ordering.md`
 - `https://coq.inria.fr/` → `https://rocq-prover.org/`
   - `concept\04_formal\01_linear_logic.md`
   - `concept\04_formal\02_type_theory.md`
@@ -7450,127 +7488,77 @@
   - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
   - `docs\rust-ownership-decidability\formal-foundations\semantics\mechanized-proofs.md`
   - `knowledge\04_expert\academic\01_coq_formalization_guide.md`
-- `https://marabos.nl/atomics/memory-ordering.html` → `https://mara.nl/atomics/memory-ordering.html`
-  - `concept\03_advanced\11_atomics_and_memory_ordering.md`
-- `https://ferrous-systems.com/ferrocene/` → `https://ferrocene.dev/en`
+- `https://www.microsoft.com/en-us/research/publication/verus/` → `https://www.microsoft.com/en-us/research/publication/verus-a-practical-foundation-for-systems-verification/`
   - `concept\04_formal\16_aerospace_certification_formal_methods.md`
-  - `concept\06_ecosystem\05_formal_ecosystem_tower.md`
-  - `concept\07_future\17_rust_specification_preview.md`
-  - `knowledge\04_expert\safety_critical\01_completion_report_100_percent.md`
-  - `knowledge\04_expert\safety_critical\01_mind_maps\01_academic_research_landscape.md`
-  - `knowledge\04_expert\safety_critical\01_mind_maps\02_rust_ecosystem_mind_map.md`
-  - `knowledge\04_expert\safety_critical\02_matrices\01_comprehensive_language_comparison_matrix.md`
-  - `knowledge\04_expert\safety_critical\02_matrices\02_rust_multi_dimensional_matrix.md`
-  - `knowledge\04_expert\safety_critical\02_rust_safety_critical_ecosystem_master_index.md`
-  - `knowledge\04_expert\safety_critical\03_decision_trees\01_rust_decision_trees.md`
-  - `knowledge\04_expert\safety_critical\03_decision_trees\02_safety_integrity_level_selection_guide.md`
-  - `knowledge\04_expert\safety_critical\03_readme_rust_safety_critical_ecosystem.md`
-  - `knowledge\04_expert\safety_critical\04_axiomatic_reasoning\02_rust_axiomatic_reasoning_trees.md`
-  - `knowledge\04_expert\safety_critical\05_strategic_guidance\01_adoption_strategy_and_roi_analysis.md`
-  - `knowledge\04_expert\safety_critical\06_roadmaps\01_education_and_training_roadmap.md`
-  - `knowledge\04_expert\safety_critical\06_roadmaps\02_rust_2026_2030_roadmap_forecast.md`
-  - `knowledge\04_expert\safety_critical\06_roadmaps\03_sustainable_roadmap_and_plans.md`
-  - `knowledge\04_expert\safety_critical\06_roadmaps\04_technology_watch_and_emerging_trends.md`
-  - `knowledge\04_expert\safety_critical\07_case_studies\01_case_study_01_ferrocene_certification.md`
-  - `knowledge\04_expert\safety_critical\08_training\01_assessment_and_certification.md`
-  - `knowledge\04_expert\safety_critical\08_training\02_certification_prep_guide.md`
-  - `knowledge\04_expert\safety_critical\08_training\03_hands_on_lab_exercises.md`
-  - `knowledge\04_expert\safety_critical\08_training\05_rust_safety_critical_training_program.md`
-  - `knowledge\04_expert\safety_critical\09_reference\04_comprehensive_international_alignment_completion_report.md`
-  - `knowledge\04_expert\safety_critical\09_reference\05_deployment_and_maintenance_guide.md`
-  - `knowledge\04_expert\safety_critical\09_reference\10_performance_optimization_guide.md`
-  - `knowledge\04_expert\safety_critical\09_reference\13_rust_safety_critical_coding_guidelines.md`
-  - `knowledge\04_expert\safety_critical\09_reference\14_safety_critical_checklists.md`
-  - `knowledge\04_expert\safety_critical\10_standards\01_do_178c_rust_compliance_pathway.md`
-  - `knowledge\04_expert\safety_critical\10_standards\02_iec_61508_rust_implementation_guide.md`
-  - `knowledge\04_expert\safety_critical\README.md`
 - `https://pyo3.rs/` → `https://pyo3.rs/v0.29.0/`
   - `concept\05_comparative\07_rust_vs_python.md`
   - `concept\06_ecosystem\03_core_crates.md`
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
   - `docs\rust-ownership-decidability\extensions\README.md`
-- `https://trust-in-soft.com/` → `https://www.trust-in-soft.com/`
-  - `concept\04_formal\22_modern_verification_tools.md`
-- `https://standards.ieee.org/standard/754-2019.html` → `https://standards.ieee.org/ieee/754/6210/`
-  - `concept\01_foundation\05_reference_semantics.md`
-- `https://golang.org/doc/faq#nil_error` → `https://go.dev/doc/faq`
-  - `concept\05_comparative\02_rust_vs_go.md`
 - `https://mypy.readthedocs.io/` → `https://mypy.readthedocs.io/en/stable/`
   - `concept\05_comparative\07_rust_vs_python.md`
-- `https://www.microsoft.com/en-us/research/publication/verus/` → `https://www.microsoft.com/en-us/research/publication/verus-a-practical-foundation-for-systems-verification/`
-  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
-- `https://docs.microsoft.com/en-us/dotnet/csharp/` → `https://learn.microsoft.com/en-us/dotnet/csharp/`
-  - `concept\05_comparative\13_rust_vs_csharp.md`
 - `https://www.adacore.com/about-spark` → `https://www.adacore.com/languages/spark`
   - `concept\04_formal\16_aerospace_certification_formal_methods.md`
-- `https://www.rust-lang.org/` → `https://rust-lang.org/`
-  - `concept\05_comparative\07_rust_vs_python.md`
-  - `concept\05_comparative\08_rust_vs_ruby.md`
-  - `concept\05_comparative\09_rust_vs_swift.md`
-  - `concept\05_comparative\14_rust_vs_elixir.md`
-  - `concept\06_ecosystem\02_patterns.md`
-  - `concept\06_ecosystem\04_application_domains.md`
-  - `concept\06_ecosystem\48_industrial_case_studies.md`
-  - `concept\07_future\01_ai_integration.md`
-  - `concept\07_future\02_formal_methods.md`
-  - `concept\07_future\03_evolution.md`
-  - `concept\07_future\04_effects_system.md`
-  - `concept\07_future\11_stable_abi_preview.md`
-  - `concept\07_future\12_inline_const_pattern_preview.md`
-  - `concept\07_future\13_must_not_suspend_preview.md`
-  - `concept\07_future\14_lifetime_capture_preview.md`
-  - `concept\07_future\15_rpitit_preview.md`
-  - `concept\07_future\16_type_alias_impl_trait_preview.md`
-  - `concept\07_future\17_arbitrary_self_types_preview.md`
-  - `concept\07_future\17_const_trait_preview.md`
-  - `concept\07_future\18_field_projections_preview.md`
-  - `concept\07_future\22_gen_blocks_preview.md`
-  - `concept\07_future\22_std_autodiff_preview.md`
-  - `concept\07_future\24_roadmap.md`
-  - `concept\07_future\24_wasm_target_evolution.md`
-  - `concept\07_future\29_ebpf_rust.md`
-  - `concept\07_future\archive\01_ai_integration_original.md`
-  - `concept\07_future\rust_1_97_preview.md`
-  - `concept\07_future\rust_1_98_preview.md`
-  - `docs\rust-ownership-decidability\archive\MASTER_INDEX.md`
-- `https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/exceptions/` → `https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/exceptions/`
-  - `concept\05_comparative\13_rust_vs_csharp.md`
-- `https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/` → `https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/async-scenarios`
-  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://golang.org/doc/faq#nil_error` → `https://go.dev/doc/faq`
+  - `concept\05_comparative\02_rust_vs_go.md`
 - `https://docs.oracle.com/javase/9/docs/api/java/lang/ref/Finalizer.html` → `https://docs.oracle.com/en/java/javase/26/`
   - `concept\05_comparative\06_rust_vs_java.md`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/` → `https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/generics`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/functional/pattern-matching` → `https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/functional/pattern-matching`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/unsafe-code` → `https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/unsafe-code`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/` → `https://learn.microsoft.com/en-us/dotnet/csharp/`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
 - `https://docs.microsoft.com/en-us/dotnet/core/tools/` → `https://learn.microsoft.com/en-us/dotnet/core/tools/`
-  - `concept\05_comparative\13_rust_vs_csharp.md`
-- `https://hexdocs.pm/elixir/GenServer.html` → `https://elixir.hexdocs.pm/GenServer.html`
-  - `concept\05_comparative\14_rust_vs_elixir.md`
-- `https://www.misra.org.uk/` → `https://misra.org.uk/`
-  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
-  - `knowledge\04_expert\safety_critical\README.md`
-- `https://www.rtca.org/product/do-178c/` → `https://www.rtca.org/products/do-178c-electronic/`
-  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
-  - `concept\07_future\07_mcdc_coverage_preview.md`
-- `https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/interop/` → `https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/interop/`
-  - `concept\05_comparative\13_rust_vs_csharp.md`
-- `https://www.erlang.org/doc/reference_manual/processes.html` → `https://www.erlang.org/doc/system/ref_man_processes.html`
-  - `concept\05_comparative\14_rust_vs_elixir.md`
-- `https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/language#asyncmain` → `https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/language`
   - `concept\05_comparative\13_rust_vs_csharp.md`
 - `https://doc.akka.io/docs/akka/current/typed/actors.html` → `https://doc.akka.io/libraries/akka-core/current/typed/actors.html`
   - `concept\05_comparative\12_rust_vs_scala.md`
-- `https://www.erlang.org/doc/tutorial/nif.html` → `https://www.erlang.org/doc/system/nif.html`
+- `https://www.rtca.org/product/do-178c/` → `https://www.rtca.org/products/do-178c-electronic/`
+  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
+  - `concept\07_future\07_mcdc_coverage_preview.md`
+- `https://www.misra.org.uk/` → `https://misra.org.uk/`
+  - `concept\04_formal\16_aerospace_certification_formal_methods.md`
+  - `knowledge\04_expert\safety_critical\README.md`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/` → `https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://hexdocs.pm/elixir/GenServer.html` → `https://elixir.hexdocs.pm/GenServer.html`
   - `concept\05_comparative\14_rust_vs_elixir.md`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/interop/` → `https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/interop/`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/` → `https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/reflection-and-attributes/`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
 - `https://basarat.gitbook.io/typescript/` → `https://basarat.gitbook.io/typescript`
   - `concept\05_comparative\15_rust_vs_typescript.md`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/` → `https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/async-scenarios`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/language#asyncmain` → `https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/language`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://www.erlang.org/doc/tutorial/nif.html` → `https://www.erlang.org/doc/system/nif.html`
+  - `concept\05_comparative\14_rust_vs_elixir.md`
+- `https://hexdocs.pm/elixir/typespecs.html` → `https://elixir.hexdocs.pm/typespecs.html`
+  - `concept\05_comparative\14_rust_vs_elixir.md`
+- `https://www.erlang.org/doc/reference_manual/processes.html` → `https://www.erlang.org/doc/system/ref_man_processes.html`
+  - `concept\05_comparative\14_rust_vs_elixir.md`
 - `https://bevyengine.org/learn/book/` → `https://bevy.org/learn/book/`
   - `concept\06_ecosystem\07_game_ecs.md`
   - `concept\06_ecosystem\21_game_development.md`
   - `concept\06_ecosystem\26_game_development.md`
   - `concept\06_ecosystem\49_game_engine_internals.md`
   - `concept\archive\06_ecosystem_26_game_development_deprecated.md`
-- `https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/` → `https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/`
-  - `concept\05_comparative\13_rust_vs_csharp.md`
-- `https://docs.substrate.io/build/` → `https://docs.polkadot.com/`
-  - `concept\06_ecosystem\06_blockchain.md`
+- `https://webassembly.org/docs/modules/#linear-memory` → `https://webassembly.github.io/spec/core/syntax/modules.html`
+  - `concept\06_ecosystem\11_webassembly.md`
+  - `concept\07_future\28_rust_for_webassembly.md`
+- `https://www.consul.io/` → `https://developer.hashicorp.com/consul`
+  - `concept\06_ecosystem\18_distributed_systems.md`
+- `https://www.rfc-editor.org/info/rfc9000` → `https://www.rfc-editor.org/info/rfc9000/`
+  - `concept\06_ecosystem\04_application_domains.md`
+  - `concept\06_ecosystem\38_network_protocols.md`
+- `https://polkadot.network/` → `https://polkadot.com/`
+  - `concept\06_ecosystem\11_webassembly.md`
+- `https://near.org/` → `https://www.near.org/`
+  - `concept\06_ecosystem\11_webassembly.md`
 - `https://docs.substrate.io/` → `https://docs.polkadot.com/`
   - `concept\06_ecosystem\06_blockchain.md`
   - `docs\rust-ownership-decidability\case-studies\blockchain\README.md`
@@ -7584,215 +7572,190 @@
   - `docs\04_research\04_rust_for_linux.md`
   - `docs\04_research\04_rust_for_linux_2026.md`
   - `knowledge\04_expert\safety_critical\README.md`
-- `https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/functional/pattern-matching` → `https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/functional/pattern-matching`
-  - `concept\05_comparative\13_rust_vs_csharp.md`
-- `https://www.rfc-editor.org/info/rfc9000` → `https://www.rfc-editor.org/info/rfc9000/`
-  - `concept\06_ecosystem\04_application_domains.md`
-  - `concept\06_ecosystem\38_network_protocols.md`
-- `https://webassembly.org/docs/modules/#linear-memory` → `https://webassembly.github.io/spec/core/syntax/modules.html`
-  - `concept\06_ecosystem\11_webassembly.md`
-  - `concept\07_future\28_rust_for_webassembly.md`
-- `https://polkadot.network/` → `https://polkadot.com/`
-  - `concept\06_ecosystem\11_webassembly.md`
-- `https://near.org/` → `https://www.near.org/`
-  - `concept\06_ecosystem\11_webassembly.md`
-- `https://www.rust-lang.org/policies/security` → `https://rust-lang.org/policies/security/`
-  - `concept\06_ecosystem\19_security_practices.md`
-  - `concept\07_future\05_rust_version_tracking.md`
-- `https://hexdocs.pm/elixir/typespecs.html` → `https://elixir.hexdocs.pm/typespecs.html`
-  - `concept\05_comparative\14_rust_vs_elixir.md`
-- `https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=rust` → `https://www.cve.org/CVERecord/SearchResults?query=rust`
-  - `concept\06_ecosystem\19_security_practices.md`
-  - `concept\07_future\19_rust_for_linux.md`
-- `https://www.rust-lang.org/policies/licenses` → `https://rust-lang.org/policies/licenses/`
-  - `concept\06_ecosystem\20_licensing_and_compliance.md`
 - `https://bevyengine.org/` → `https://bevy.org/`
   - `concept\06_ecosystem\21_game_development.md`
   - `concept\06_ecosystem\26_game_development.md`
   - `concept\06_ecosystem\49_game_engine_internals.md`
   - `concept\archive\06_ecosystem_26_game_development_deprecated.md`
   - `docs\rust-ownership-decidability\case-studies\gamedev\README.md`
-- `https://bevyengine.org/learn/book/introduction/` → `https://bevy.org/learn/book/introduction/`
-  - `concept\06_ecosystem\26_game_development.md`
-  - `concept\06_ecosystem\49_game_engine_internals.md`
-  - `concept\archive\06_ecosystem_26_game_development_deprecated.md`
-- `https://opensource.org/licenses/MIT` → `https://opensource.org/license/MIT`
-  - `concept\06_ecosystem\20_licensing_and_compliance.md`
-- `https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/` → `https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/reflection-and-attributes/`
-  - `concept\05_comparative\13_rust_vs_csharp.md`
-- `https://developers.eventstore.com/server/v24.10/` → `https://docs.kurrent.io/server/v24.10/`
-  - `concept\06_ecosystem\31_microservice_patterns.md`
-  - `concept\06_ecosystem\33_cqrs_event_sourcing.md`
-- `https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/` → `https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/`
-  - `concept\05_comparative\13_rust_vs_csharp.md`
-- `https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html` → `https://specifications.freedesktop.org/basedir/basedir-spec-latest.html`
-  - `concept\06_ecosystem\25_cli_development.md`
-  - `docs\rust-ownership-decidability\case-studies\cli\README.md`
-- `https://www.consul.io/` → `https://developer.hashicorp.com/consul`
-  - `concept\06_ecosystem\18_distributed_systems.md`
-- `https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions` → `https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax`
-  - `concept\06_ecosystem\28_devops_and_ci_cd.md`
-- `https://developers.eventstore.com/` → `https://docs.kurrent.io/`
-  - `concept\06_ecosystem\31_microservice_patterns.md`
 - `https://bevyengine.org/learn/` → `https://bevy.org/learn/`
   - `concept\06_ecosystem\21_game_development.md`
   - `docs\rust-ownership-decidability\case-studies\bevy-ecs-formal-analysis.md`
   - `docs\rust-ownership-decidability\case-studies\gamedev\README.md`
-- `https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/unsafe-code` → `https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/unsafe-code`
-  - `concept\05_comparative\13_rust_vs_csharp.md`
-- `https://cqrs.files.wordpress.com/2010/11/cqrs_documents.pdf` → `https://cqrs.wordpress.com/wp-content/uploads/2010/11/cqrs_documents.pdf`
-  - `concept\06_ecosystem\33_cqrs_event_sourcing.md`
-- `https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows` → `https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching`
+- `https://www.rust-lang.org/policies/security` → `https://rust-lang.org/policies/security/`
+  - `concept\06_ecosystem\19_security_practices.md`
+  - `concept\07_future\05_rust_version_tracking.md`
+- `https://opensource.org/licenses/MIT` → `https://opensource.org/license/MIT`
+  - `concept\06_ecosystem\20_licensing_and_compliance.md`
+- `https://www.rust-lang.org/policies/licenses` → `https://rust-lang.org/policies/licenses/`
+  - `concept\06_ecosystem\20_licensing_and_compliance.md`
+- `https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions` → `https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax`
   - `concept\06_ecosystem\28_devops_and_ci_cd.md`
-- `https://jeffreypalermo.com/blog/the-onion-architecture-part-1/` → `https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/`
-  - `concept\06_ecosystem\35_architecture_patterns.md`
+- `https://bevyengine.org/learn/book/introduction/` → `https://bevy.org/learn/book/introduction/`
+  - `concept\06_ecosystem\26_game_development.md`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+  - `concept\archive\06_ecosystem_26_game_development_deprecated.md`
+- `https://developers.eventstore.com/server/v24.10/` → `https://docs.kurrent.io/server/v24.10/`
+  - `concept\06_ecosystem\31_microservice_patterns.md`
+  - `concept\06_ecosystem\33_cqrs_event_sourcing.md`
+- `https://docs.substrate.io/build/` → `https://docs.polkadot.com/`
+  - `concept\06_ecosystem\06_blockchain.md`
+- `https://developers.eventstore.com/` → `https://docs.kurrent.io/`
+  - `concept\06_ecosystem\31_microservice_patterns.md`
+- `https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)` → `https://learn.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)`
+  - `concept\06_ecosystem\33_cqrs_event_sourcing.md`
 - `https://redis.io/docs/manual/pubsub/` → `https://redis.io/docs/latest/manual/pubsub/`
   - `concept\06_ecosystem\32_event_driven_architecture.md`
+- `https://cqrs.files.wordpress.com/2010/11/cqrs_documents.pdf` → `https://cqrs.wordpress.com/wp-content/uploads/2010/11/cqrs_documents.pdf`
+  - `concept\06_ecosystem\33_cqrs_event_sourcing.md`
+- `https://jeffreypalermo.com/blog/the-onion-architecture-part-1/` → `https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/`
+  - `concept\06_ecosystem\35_architecture_patterns.md`
 - `https://docs.microsoft.com/en-us/azure/azure-functions/` → `https://learn.microsoft.com/en-us/azure/azure-functions/`
   - `concept\06_ecosystem\35_architecture_patterns.md`
-- `https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/` → `https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/generics`
+- `https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=rust` → `https://www.cve.org/CVERecord/SearchResults?query=rust`
+  - `concept\06_ecosystem\19_security_practices.md`
+  - `concept\07_future\19_rust_for_linux.md`
+- `https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html` → `https://specifications.freedesktop.org/basedir/basedir-spec-latest.html`
+  - `concept\06_ecosystem\25_cli_development.md`
+  - `docs\rust-ownership-decidability\case-studies\cli\README.md`
+- `https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/` → `https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/`
   - `concept\05_comparative\13_rust_vs_csharp.md`
 - `https://www.springer.com/gp/book/9783662498507` → `https://link.springer.com/book/9783662498507`
   - `concept\06_ecosystem\41_workflow_theory.md`
+- `https://www.springer.com/gp/book/9783540761942` → `https://link.springer.com/book/9783540761942`
+  - `concept\06_ecosystem\41_workflow_theory.md`
 - `https://docs.temporal.io/clusters` → `https://docs.temporal.io/temporal-service`
   - `concept\06_ecosystem\41_workflow_theory.md`
-- `https://jeffreypalermo.com/blog/the-onion-architecture-part-3/` → `https://jeffreypalermo.com/2008/08/the-onion-architecture-part-3/`
-  - `concept\06_ecosystem\35_architecture_patterns.md`
-- `https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/saga/saga` → `https://learn.microsoft.com/en-us/azure/architecture/patterns/saga`
-  - `concept\06_ecosystem\41_workflow_theory.md`
+- `https://tools.ietf.org/html/rfc7231` → `https://datatracker.ietf.org/doc/html/rfc7231`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
 - `https://docs.risingwave.com/` → `https://docs.risingwave.com/get-started/intro`
   - `concept\06_ecosystem\36_stream_processing_ecosystem.md`
-- `https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)` → `https://learn.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)`
-  - `concept\06_ecosystem\33_cqrs_event_sourcing.md`
-- `https://tools.ietf.org/html/rfc7540` → `https://datatracker.ietf.org/doc/html/rfc7540`
-  - `concept\06_ecosystem\42_api_design_patterns.md`
-  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
 - `https://tikv.org/docs/` → `https://tikv.org/docs/7.1/concepts/overview/`
   - `concept\06_ecosystem\37_database_systems.md`
   - `concept\06_ecosystem\50_distributed_consensus.md`
-- `https://www.springer.com/gp/book/9783540761942` → `https://link.springer.com/book/9783540761942`
+- `https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/saga/saga` → `https://learn.microsoft.com/en-us/azure/architecture/patterns/saga`
   - `concept\06_ecosystem\41_workflow_theory.md`
 - `https://www.meilisearch.com/docs` → `https://www.meilisearch.com/docs/getting_started/overview`
   - `concept\06_ecosystem\37_database_systems.md`
+- `https://tools.ietf.org/html/rfc7540` → `https://datatracker.ietf.org/doc/html/rfc7540`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://developers.google.com/protocol-buffers` → `https://protobuf.dev/`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
 - `https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design` → `https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design`
   - `concept\06_ecosystem\42_api_design_patterns.md`
-- `https://tools.ietf.org/html/rfc7231` → `https://datatracker.ietf.org/doc/html/rfc7231`
-  - `concept\06_ecosystem\42_api_design_patterns.md`
-- `https://developers.google.com/protocol-buffers` → `https://protobuf.dev/`
+- `https://www.apollographql.com/docs/apollo-server/` → `https://www.apollographql.com/docs/apollo-server`
   - `concept\06_ecosystem\42_api_design_patterns.md`
 - `https://tools.ietf.org/html/rfc7807` → `https://datatracker.ietf.org/doc/html/rfc7807`
   - `concept\06_ecosystem\42_api_design_patterns.md`
 - `https://docs.microsoft.com/en-us/azure/architecture/microservices/design/gateway` → `https://learn.microsoft.com/en-us/azure/architecture/microservices/design/gateway`
   - `concept\06_ecosystem\42_api_design_patterns.md`
-- `https://docs.konghq.com/` → `https://developer.konghq.com/`
-  - `concept\06_ecosystem\42_api_design_patterns.md`
-- `https://www.apollographql.com/docs/apollo-server/` → `https://www.apollographql.com/docs/apollo-server`
-  - `concept\06_ecosystem\42_api_design_patterns.md`
-- `https://briansmith.org/rustdoc/ring/` → `https://docs.rs/ring/latest/ring/`
-  - `concept\06_ecosystem\43_security_cryptography.md`
 - `https://tools.ietf.org/html/rfc8439` → `https://datatracker.ietf.org/doc/html/rfc8439`
   - `concept\06_ecosystem\43_security_cryptography.md`
-- `https://tools.ietf.org/html/rfc9106` → `https://datatracker.ietf.org/doc/html/rfc9106`
+- `https://tools.ietf.org/html/rfc8446` → `https://datatracker.ietf.org/doc/html/rfc8446`
   - `concept\06_ecosystem\43_security_cryptography.md`
 - `https://developers.google.com/protocol-buffers/docs/proto3` → `https://protobuf.dev/programming-guides/proto3/`
   - `concept\06_ecosystem\42_api_design_patterns.md`
-- `https://tools.ietf.org/html/rfc8446` → `https://datatracker.ietf.org/doc/html/rfc8446`
+- `https://docs.konghq.com/` → `https://developer.konghq.com/`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://stripe.com/docs/api/versioning` → `https://docs.stripe.com/api/versioning`
+  - `concept\06_ecosystem\42_api_design_patterns.md`
+- `https://tools.ietf.org/html/rfc9106` → `https://datatracker.ietf.org/doc/html/rfc9106`
   - `concept\06_ecosystem\43_security_cryptography.md`
-- `https://www.rfc-editor.org/info/rfc8032` → `https://www.rfc-editor.org/info/rfc8032/`
+- `https://briansmith.org/rustdoc/ring/` → `https://docs.rs/ring/latest/ring/`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/exceptions/` → `https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/exceptions/`
+  - `concept\05_comparative\13_rust_vs_csharp.md`
+- `https://csrc.nist.gov/publications/detail/fips/197/final` → `https://csrc.nist.gov/pubs/fips/197/final`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://tools.ietf.org/html/rfc8032` → `https://datatracker.ietf.org/doc/html/rfc8032`
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://csrc.nist.gov/publications/detail/fips/186/5/final` → `https://csrc.nist.gov/pubs/fips/186-5/final`
   - `concept\06_ecosystem\43_security_cryptography.md`
 - `https://tools.ietf.org/html/rfc7748` → `https://datatracker.ietf.org/doc/html/rfc7748`
   - `concept\06_ecosystem\43_security_cryptography.md`
-- `https://csrc.nist.gov/publications/detail/fips/197/final` → `https://csrc.nist.gov/pubs/fips/197/final`
+- `https://tools.ietf.org/html/rfc2104` → `https://datatracker.ietf.org/doc/html/rfc2104`
   - `concept\06_ecosystem\43_security_cryptography.md`
 - `https://csrc.nist.gov/publications/detail/fips/180/4/final` → `https://csrc.nist.gov/pubs/fips/180-4/upd1/final`
   - `concept\06_ecosystem\43_security_cryptography.md`
-- `https://csrc.nist.gov/publications/detail/sp/800-57-part-1/rev-5/final` → `https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final`
+- `https://www.rfc-editor.org/info/rfc8032` → `https://www.rfc-editor.org/info/rfc8032/`
   - `concept\06_ecosystem\43_security_cryptography.md`
-- `https://tools.ietf.org/html/rfc2104` → `https://datatracker.ietf.org/doc/html/rfc2104`
-  - `concept\06_ecosystem\43_security_cryptography.md`
-- `https://arrow.apache.org/ballista/` → `https://datafusion.apache.org/ballista/`
-  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
-- `https://tools.ietf.org/html/rfc5869` → `https://datatracker.ietf.org/doc/html/rfc5869`
-  - `concept\06_ecosystem\43_security_cryptography.md`
-- `https://stripe.com/docs/api/versioning` → `https://docs.stripe.com/api/versioning`
-  - `concept\06_ecosystem\42_api_design_patterns.md`
 - `https://arrow.apache.org/datafusion/` → `https://datafusion.apache.org/`
   - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
   - `concept\06_ecosystem\48_data_engineering.md`
   - `concept\06_ecosystem\55_rust_for_data_science.md`
-- `https://blake3.io/blake3.pdf` → `https://github.com/BLAKE3-team/BLAKE3/`
+- `https://arrow.apache.org/ballista/` → `https://datafusion.apache.org/ballista/`
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `https://tools.ietf.org/html/rfc5869` → `https://datatracker.ietf.org/doc/html/rfc5869`
   - `concept\06_ecosystem\43_security_cryptography.md`
-- `https://csrc.nist.gov/publications/detail/fips/186/5/final` → `https://csrc.nist.gov/pubs/fips/186-5/final`
-  - `concept\06_ecosystem\43_security_cryptography.md`
-- `https://www.wfmc.org/standards/xpdl` → `https://wfmc.org/wp-content/uploads/2022/09/xpdl.jpeg`
-  - `concept\06_ecosystem\41_workflow_theory.md`
-- `https://arrow.apache.org/datafusion/user-guide/sql/index.html` → `https://datafusion.apache.org/user-guide/sql/index.html`
-  - `concept\06_ecosystem\48_data_engineering.md`
 - `https://arrow.apache.org/datafusion/user-guide/introduction.html` → `https://datafusion.apache.org/user-guide/introduction.html`
   - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
   - `concept\06_ecosystem\55_rust_for_data_science.md`
+- `https://www.wfmc.org/standards/xpdl` → `https://wfmc.org/wp-content/uploads/2022/09/xpdl.jpeg`
+  - `concept\06_ecosystem\41_workflow_theory.md`
+- `https://csrc.nist.gov/publications/detail/sp/800-57-part-1/rev-5/final` → `https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final`
+  - `concept\06_ecosystem\43_security_cryptography.md`
 - `https://arrow.apache.org/datafusion/user-guide/example-usage.html` → `https://datafusion.apache.org/user-guide/example-usage.html`
   - `concept\06_ecosystem\48_data_engineering.md`
-- `https://tools.ietf.org/html/rfc8032` → `https://datatracker.ietf.org/doc/html/rfc8032`
+- `https://blake3.io/blake3.pdf` → `https://github.com/BLAKE3-team/BLAKE3/`
   - `concept\06_ecosystem\43_security_cryptography.md`
+- `https://arrow.apache.org/datafusion/user-guide/sql/index.html` → `https://datafusion.apache.org/user-guide/sql/index.html`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://www.confluent.io/learn/batch-vs-real-time-data-processing/` → `https://www.confluent.io/learn/batch-processing/`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://research.google/pubs/pub36632/` → `https://research.google/pubs/dremel-interactive-analysis-of-web-scale-datasets-2/`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://docs.aws.amazon.com/whitepapers/latest/s3-optimizing-performance-best-practices/introduction.html` → `https://docs.aws.amazon.com/AmazonS3/latest/userguide/`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://gitlab.mpi-sws.org/lgaeher/refinedrust` → `https://gitlab.mpi-sws.org/users/sign_in`
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+  - `docs\04_research\04_rust_formal_verification.md`
+- `https://docs.delta.io/latest/index.html` → `https://docs.delta.io/index.html`
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://docs.godotengine.org/` → `https://docs.godotengine.org/en/stable/`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
 - `https://pola.rs/benchmarks.html` → `https://pola.rs/benchmarks/`
   - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
   - `concept\06_ecosystem\48_data_engineering.md`
   - `concept\06_ecosystem\55_rust_for_data_science.md`
-- `https://docs.delta.io/latest/index.html` → `https://docs.delta.io/index.html`
+- `https://docs.delta.io/latest/delta-batch.html#schema-enforcement` → `https://docs.delta.io/delta-batch/`
   - `concept\06_ecosystem\48_data_engineering.md`
-- `https://research.google/pubs/pub36632/` → `https://research.google/pubs/dremel-interactive-analysis-of-web-scale-datasets-2/`
-  - `concept\06_ecosystem\48_data_engineering.md`
-- `https://csrc.nist.gov/publications/detail/sp/800-38d/final` → `https://csrc.nist.gov/pubs/sp/800/38/d/final`
-  - `concept\06_ecosystem\43_security_cryptography.md`
-- `https://docs.aws.amazon.com/whitepapers/latest/s3-optimizing-performance-best-practices/introduction.html` → `https://docs.aws.amazon.com/AmazonS3/latest/userguide/`
-  - `concept\06_ecosystem\48_data_engineering.md`
-- `https://docs.godotengine.org/` → `https://docs.godotengine.org/en/stable/`
-  - `concept\06_ecosystem\49_game_engine_internals.md`
-- `https://www.confluent.io/learn/batch-vs-real-time-data-processing/` → `https://www.confluent.io/learn/batch-processing/`
-  - `concept\06_ecosystem\48_data_engineering.md`
-- `https://rapier.rs/docs/user_guides/rust/getting_started` → `https://rapier.rs:443/docs/user_guides/rust/getting_started/`
-  - `concept\06_ecosystem\49_game_engine_internals.md`
-- `https://rapier.rs/docs/user_guides/rust/getting_started#benchmarks` → `https://rapier.rs:443/docs/user_guides/rust/getting_started/`
-  - `concept\06_ecosystem\49_game_engine_internals.md`
 - `https://developer.valvesoftware.com/wiki/Source_Multiplayer_Networking` → `https://developer.valvesoftware.com/.within.website/?redir=https://developer.valvesoftware.com/wiki/Source_Multiplayer_Networking`
   - `concept\06_ecosystem\49_game_engine_internals.md`
-- `https://www.gamedeveloper.com/programming/oop-is-dead-long-live-ecs` → `https://www.gamedeveloper.com/programming`
-  - `concept\06_ecosystem\49_game_engine_internals.md`
-- `https://www.pearson.com/en-us/subject-catalog/p/real-time-systems/P200000005792` → `https://www.pearson.com/en-us/search/All-results?aq=real%20time%20systems`
-  - `concept\06_ecosystem\52_robotics.md`
-- `https://rapier.rs/docs/user_guides/rust/common_mistakes#using-a-variable-timestep` → `https://rapier.rs:443/docs/user_guides/rust/common_mistakes/`
-  - `concept\06_ecosystem\49_game_engine_internals.md`
-- `https://rapier.rs/docs/user_guides/rust/advanced_collision_detection#continuous-collision-detection` → `https://rapier.rs:443/docs/user_guides/rust/advanced_collision_detection/`
+- `https://rapier.rs/docs/user_guides/rust/getting_started` → `https://rapier.rs:443/docs/user_guides/rust/getting_started/`
   - `concept\06_ecosystem\49_game_engine_internals.md`
 - `https://fast-dds.docs.eprosima.com/` → `https://fast-dds.docs.eprosima.com/en/latest/`
   - `concept\06_ecosystem\52_robotics.md`
-- `https://docs.delta.io/latest/delta-batch.html#schema-enforcement` → `https://docs.delta.io/delta-batch/`
-  - `concept\06_ecosystem\48_data_engineering.md`
+- `https://rapier.rs/docs/user_guides/rust/common_mistakes#using-a-variable-timestep` → `https://rapier.rs:443/docs/user_guides/rust/common_mistakes/`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://rapier.rs/docs/user_guides/rust/getting_started#benchmarks` → `https://rapier.rs:443/docs/user_guides/rust/getting_started/`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://docs.lvgl.io/latest/en/html/index.html` → `https://lvgl.io/docs/open`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://www.pearson.com/en-us/subject-catalog/p/real-time-systems/P200000005792` → `https://www.pearson.com/en-us/search/All-results?aq=real%20time%20systems`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://www.gamedeveloper.com/programming/oop-is-dead-long-live-ecs` → `https://www.gamedeveloper.com/programming`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `https://rapier.rs/docs/user_guides/rust/advanced_collision_detection#continuous-collision-detection` → `https://rapier.rs:443/docs/user_guides/rust/advanced_collision_detection/`
+  - `concept\06_ecosystem\49_game_engine_internals.md`
 - `https://docs.lvgl.io/master/intro/index.html` → `https://lvgl.io/docs/open/introduction`
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `https://www.pearson.com/en-us/subject-catalog/p/modern-control-engineering/P200000005828` → `https://www.pearson.com/en-us/search/All-results?aq=modern%20control%20engineering`
   - `concept\06_ecosystem\52_robotics.md`
-- `https://docs.lvgl.io/latest/en/html/index.html` → `https://lvgl.io/docs/open`
+- `https://www.eprosima.com/index.php/products-all/eprosima-fast-dds` → `https://www.eprosima.com/middleware/fast-dds`
+  - `concept\06_ecosystem\52_robotics.md`
+- `https://slint-ui.com/docs/slint/` → `https://docs.slint.dev/latest/docs/slint/`
   - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://csrc.nist.gov/publications/detail/sp/800-38d/final` → `https://csrc.nist.gov/pubs/sp/800/38/d/final`
+  - `concept\06_ecosystem\43_security_cryptography.md`
 - `https://slint-ui.com/` → `https://slint.dev/`
   - `concept\06_ecosystem\53_embedded_graphics.md`
-- `https://www.cypress.com/file/46266/download` → `https://sso.infineon.com/as/authorization.oauth2?scope=email+openid+profile+address+ifxScope&response_type=code&redirect_uri=https%3A%2F%2Fwww.infineon.com%2Fauth%2Fcallback&state=JHGX_GrFECzrqn5xubuKBj-5QlwCEBtDALV8uaFu1l0%3AoriginURL%3D%2Fcontent%2Fdam%2Finfineon%2Frow%2Fpublic%2Fdocuments%2F10%2F42%2Finfineon-an89659-interfacing-spi-f-ram-with-psoc-4-applicationnotes-ja.pdf%26action%3Dlg_gd%26ui_locales%3Dnull&code_challenge_method=S256&nonce=vRUb3Z5-0OY38n5TVV6-7tIlni6iuP-CbvnGl3bJlWc&client_id=ifxWebUser&code_challenge=dd750WilACJ2fkXvxchetsMpefBBI_gZM3j-fCXGbCU&ui_locales=EN`
+- `https://slint-ui.com/docs/rust/slint/platform/trait.Platform.html` → `https://docs.slint.dev/latest/docs/rust/slint/platform/trait.Platform`
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `https://docs.github.com/en/billing/managing-billing-for-github-actions` → `https://docs.github.com/en/billing/concepts/product-billing/github-actions`
   - `concept\07_future\02_formal_methods.md`
-- `https://security.googleblog.com/` → `https://blog.google/security/`
-  - `concept\06_ecosystem\58_platform_rust_integration.md`
-- `https://slint-ui.com/docs/slint/` → `https://docs.slint.dev/latest/docs/slint/`
-  - `concept\06_ecosystem\53_embedded_graphics.md`
 - `https://docs.docker.com/desktop/wasm/` → `https://docs.docker.com/desktop/features/wasm/`
   - `concept\06_ecosystem\54_webassembly_advanced.md`
-- `https://slint-ui.com/docs/rust/slint/platform/trait.Platform.html` → `https://docs.slint.dev/latest/docs/rust/slint/platform/trait.Platform`
-  - `concept\06_ecosystem\53_embedded_graphics.md`
-- `https://www.rust-lang.org/governance/wgs` → `https://rust-lang.org/governance/wgs/`
-  - `concept\07_future\08_safety_tags_preview.md`
-- `https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-31431` → `https://www.cve.org/CVERecord?id=CVE-2026-31431`
-  - `concept\07_future\05_rust_version_tracking.md`
 - `https://spec.ferrocene.dev/` → `https://rust-lang.github.io/fls/`
   - `concept\07_future\14_ferrocene_preview.md`
   - `concept\07_future\17_rust_specification_preview.md`
@@ -7805,6 +7768,14 @@
   - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
   - `docs\research_notes\formal_methods\10_ownership_model.md`
   - `knowledge\04_expert\academic\03_ownership_model_comprehensive.md`
+- `https://security.googleblog.com/` → `https://blog.google/security/`
+  - `concept\06_ecosystem\58_platform_rust_integration.md`
+- `https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-31431` → `https://www.cve.org/CVERecord?id=CVE-2026-31431`
+  - `concept\07_future\05_rust_version_tracking.md`
+- `https://www.cypress.com/file/46266/download` → `https://sso.infineon.com/as/authorization.oauth2?scope=email+openid+profile+address+ifxScope&response_type=code&redirect_uri=https%3A%2F%2Fwww.infineon.com%2Fauth%2Fcallback&state=xzQKjQ35gm_H6eopG54v9U2z_kyqOioR8hLXzujrL18%3AoriginURL%3D%2Fcontent%2Fdam%2Finfineon%2Frow%2Fpublic%2Fdocuments%2F10%2F42%2Finfineon-an89659-interfacing-spi-f-ram-with-psoc-4-applicationnotes-ja.pdf%26action%3Dlg_gd%26ui_locales%3Dnull&code_challenge_method=S256&nonce=-WUXkCmNnuz_D_uRIQT-z4U8g38bRXXWcn8ZvM8XqkE&client_id=ifxWebUser&code_challenge=pdGMPD_T8hk1sPcjd1aAAEYZx0gZOH7iUw9emzOpGnM&ui_locales=EN`
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `https://git.kernel.org/linus/8aebac82933f` → `https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=8aebac82933f`
+  - `concept\07_future\19_rust_for_linux.md`
 - `https://doc.rust-lang.org/` → `https://doc.rust-lang.org/stable/`
   - `concept\07_future\19_rust_for_linux.md`
   - `docs\00_meta\00_annual_review_template.md`
@@ -8018,65 +7989,63 @@
   - `knowledge\99_archive\02_version_tracking.md`
   - `knowledge\99_archive\03_case_studies.md`
   - `knowledge\99_archive\04_exercises.md`
-- `https://git.kernel.org/linus/8aebac82933f` → `https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=8aebac82933f`
-  - `concept\07_future\19_rust_for_linux.md`
+- `https://www.rust-lang.org/governance/wgs` → `https://rust-lang.org/governance/wgs/`
+  - `concept\07_future\08_safety_tags_preview.md`
+- `https://codeium.com` → `https://devin.ai/desktop`
+  - `concept\07_future\archive\01_ai_integration_original.md`
+- `https://ebpf.io/projects/#aya` → `https://ebpf.io/applications/`
+  - `concept\07_future\29_ebpf_rust.md`
+- `https://www.rtca.org/product/do-178c` → `https://www.rtca.org/products/do-178c-electronic/`
+  - `concept\07_future\14_ferrocene_preview.md`
+- `https://131002.net/siphash/` → `https://www.aumasson.jp/`
+  - `knowledge\02_intermediate\01_collections.md`
 - `https://foundation.rust-lang.org/news/` → `https://rustfoundation.org/media/`
   - `concept\07_future\24_roadmap.md`
   - `docs\00_meta\00_quarterly_sync_checklist.md`
   - `docs\04_research\04_rust_for_linux.md`
   - `knowledge\00_start\04_rust_philosophy.md`
-- `https://codeium.com` → `https://devin.ai/desktop`
-  - `concept\07_future\archive\01_ai_integration_original.md`
-- `https://www.rtca.org/product/do-178c` → `https://www.rtca.org/products/do-178c-electronic/`
-  - `concept\07_future\14_ferrocene_preview.md`
-- `https://rustfoundation.org/media/expanding-the-rust-formal-verification-ecosystem-welcoming-esbmc` → `https://rustfoundation.org/media/expanding-the-rust-formal-verification-ecosystem-welcoming-esbmc/`
-  - `concept\07_future\rust_1_97_preview.md`
-- `https://ocaml.org/manual/polyvariant.html` → `https://ocaml.org/manual/5.5/polyvariant.html`
-  - `concept\07_future\25_open_enums_preview.md`
-- `https://ebpf.io/projects/#aya` → `https://ebpf.io/applications/`
-  - `concept\07_future\29_ebpf_rust.md`
-- `https://131002.net/siphash/` → `https://www.aumasson.jp/`
-  - `knowledge\02_intermediate\01_collections.md`
+- `https://www.rust-lang.org` → `https://rust-lang.org/`
+  - `knowledge\04_expert\safety_critical\03_readme_rust_safety_critical_ecosystem.md`
 - `https://tokio.rs/blog/` → `https://tokio.rs/blog`
   - `knowledge\03_advanced\async\01_async_await.md`
 - `https://rust-lang.org/governance` → `https://rust-lang.org/governance/`
   - `knowledge\04_expert\safety_critical\05_strategic_guidance\02_comprehensive_recommendations_and_opinions.md`
   - `knowledge\04_expert\safety_critical\09_reference\12_quick_reference_card.md`
+- `https://ferrous-systems.com/ferrocene` → `https://ferrocene.dev/en`
+  - `knowledge\04_expert\safety_critical\07_case_studies\01_case_study_01_ferrocene_certification.md`
 - `https://www.elsevier.com/books/the-art-of-multiprocessor-programming/herlihy/978-0-12-415950-1` → `https://shop.elsevier.com/books/the-art-of-multiprocessor-programming/herlihy/978-0-12-415950-1`
   - `knowledge\03_advanced\concurrency\01_atomics.md`
   - `knowledge\03_advanced\concurrency\02_synchronization.md`
-- `https://www.rust-lang.org` → `https://rust-lang.org/`
-  - `knowledge\04_expert\safety_critical\03_readme_rust_safety_critical_ecosystem.md`
 - `https://www.easa.europa.eu/` → `https://www.easa.europa.eu/en`
   - `knowledge\04_expert\safety_critical\10_standards\05_regulatory_landscape_and_approvals.md`
-- `https://ferrous-systems.com/ferrocene` → `https://ferrocene.dev/en`
-  - `knowledge\04_expert\safety_critical\07_case_studies\01_case_study_01_ferrocene_certification.md`
-- `https://www.shuttle.rs/` → `https://www.shuttle.dev/`
-  - `knowledge\06_ecosystem\deployment\README.md`
-- `https://nixos.org/download.html` → `https://nixos.org/download/`
-  - `docs\01_nix_setup.md`
-- `https://kubernetes.io/docs/` → `https://kubernetes.io/docs/home/`
-  - `knowledge\06_ecosystem\deployment\01_kubernetes_deployment_guide.md`
-- `https://docs.docker.com/get-docker/` → `https://docs.docker.com/get-started/get-docker/`
-  - `docs\06_docker_guide.md`
-- `https://cve.mitre.org/` → `https://www.cve.org/`
-  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+- `https://rustfoundation.org/media/expanding-the-rust-formal-verification-ecosystem-welcoming-esbmc` → `https://rustfoundation.org/media/expanding-the-rust-formal-verification-ecosystem-welcoming-esbmc/`
+  - `concept\07_future\rust_1_97_preview.md`
 - `https://marabos.nl/` → `https://mara.nl/`
   - `knowledge\04_expert\02_unsafe_audit.md`
-- `https://adacore.com` → `https://www.adacore.com/`
-  - `knowledge\04_expert\safety_critical\05_strategic_guidance\02_comprehensive_recommendations_and_opinions.md`
+- `https://kubernetes.io/docs/` → `https://kubernetes.io/docs/home/`
+  - `knowledge\06_ecosystem\deployment\01_kubernetes_deployment_guide.md`
+- `https://www.shuttle.rs/` → `https://www.shuttle.dev/`
+  - `knowledge\06_ecosystem\deployment\README.md`
+- `https://cfs.gsfc.nasa.gov/` → `https://etd.gsfc.nasa.gov/capabilities/core-flight-system/`
+  - `knowledge\04_expert\safety_critical\07_case_studies\02_case_study_02_nasa_cfs_rust.md`
+- `https://docs.docker.com/get-docker/` → `https://docs.docker.com/get-started/get-docker/`
+  - `docs\06_docker_guide.md`
+- `https://nixos.org/download.html` → `https://nixos.org/download/`
+  - `docs\01_nix_setup.md`
+- `https://www.cenelec.eu/` → `https://www.cencenelec.eu/`
+  - `knowledge\04_expert\safety_critical\07_case_studies\05_case_study_05_railway_signaling.md`
 - `https://www.infoworld.com/article/4141483/` → `https://www.infoworld.com/article/4141483`
   - `docs\10_authoritative_sources_and_citations.md`
 - `https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-68260` → `https://www.cve.org/CVERecord?id=CVE-2025-68260`
   - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
   - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
+- `https://adacore.com` → `https://www.adacore.com/`
+  - `knowledge\04_expert\safety_critical\05_strategic_guidance\02_comprehensive_recommendations_and_opinions.md`
 - `https://coq.inria.fr/documentation` → `https://rocq-prover.org/docs`
   - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\READING_GUIDE.md`
   - `knowledge\04_expert\academic\01_coq_formalization_guide.md`
-- `https://www.cenelec.eu/` → `https://www.cencenelec.eu/`
-  - `knowledge\04_expert\safety_critical\07_case_studies\05_case_study_05_railway_signaling.md`
-- `https://cfs.gsfc.nasa.gov/` → `https://etd.gsfc.nasa.gov/capabilities/core-flight-system/`
-  - `knowledge\04_expert\safety_critical\07_case_studies\02_case_study_02_nasa_cfs_rust.md`
+- `https://cve.mitre.org/` → `https://www.cve.org/`
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
 - `https://blog.rust-lang.org/2026/01/22/Rust-1.93.0` → `https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/`
   - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
   - `docs\archive\version_reports\RUST_192_COMPREHENSIVE_MIND_REPRESENTATIONS.md`
@@ -8085,7 +8054,9 @@
   - `docs\02_reference\ALIGNMENT_GUIDE.md`
 - `https://defmt.ferrous-systems.com/filtering.html` → `https://defmt.ferrous-systems.com/filtering`
   - `docs\03_guides\03_embassy_deep_dive.md`
-- `https://spec.ferrocene.dev/functions.html` → `https://rust-lang.github.io/fls/functions.html`
+- `https://docs.microsoft.com/en-us/azure/devops/pipelines/test/codecoverage-for-pullrequests` → `https://learn.microsoft.com/en-us/azure/devops/pipelines/test/review-code-coverage-results?view=azure-devops`
+  - `docs\03_guides\03_test_coverage.md`
+- `https://spec.ferrocene.dev/inline-assembly.html` → `https://rust-lang.github.io/fls/inline-assembly.html`
   - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
 - `https://coq.inria.fr/doc/` → `https://rocq-prover.org/docs`
   - `docs\00_meta\00_formal_content_master_index.md`
@@ -8217,110 +8188,107 @@
   - `docs\rust-ownership-decidability\formal-foundations\semantics\operational-semantics.md`
   - `docs\rust-ownership-decidability\formal-foundations\semantics\semantics-equivalence-proof.md`
   - `docs\rust-ownership-decidability\progress\2026-03-06_FORMAL_ANALYSIS_PROGRESS.md`
-- `https://spec.ferrocene.dev/patterns.html` → `https://rust-lang.github.io/fls/patterns.html`
+- `https://www.ibm.com/docs/en/zos/2.4.0?topic=instructions-vector-instructions` → `https://www.ibm.com/docs/en/zos/2.4.0`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+- `https://spec.ferrocene.dev/functions.html` → `https://rust-lang.github.io/fls/functions.html`
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+- `https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing` → `https://rust-lang.github.io/fls/ownership-and-deconstruction.html`
   - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
 - `https://spec.ferrocene.dev/exceptions-and-errors.html` → `https://rust-lang.github.io/fls/exceptions-and-errors.html`
-  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
-- `https://spec.ferrocene.dev/concurrency.html` → `https://rust-lang.github.io/fls/concurrency.html`
   - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
 - `https://spec.ferrocene.dev/unsafety.html` → `https://rust-lang.github.io/fls/unsafety.html`
   - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
   - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
-- `https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html` → `https://research.google/blog/extra-extra-read-all-about-it-nearly-all-binary-searches-and-mergesorts-are-broken/`
-  - `docs\05_guides\05_kani_practical_guide.md`
+- `https://spec.ferrocene.dev/ffi.html` → `https://rust-lang.github.io/fls/ffi.html`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
 - `https://spec.ferrocene.dev/undefined-behavior.html` → `https://rust-lang.github.io/fls/undefined-behavior.html`
   - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
-- `https://spec.ferrocene.dev/inline-assembly.html` → `https://rust-lang.github.io/fls/inline-assembly.html`
-  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
 - `https://spec.ferrocene.dev/ownership-and-deconstruction.html` → `https://rust-lang.github.io/fls/ownership-and-deconstruction.html`
   - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
   - `docs\research_notes\formal_methods\10_ownership_model.md`
-- `https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing` → `https://rust-lang.github.io/fls/ownership-and-deconstruction.html`
-  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
-  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
-- `https://docs.microsoft.com/en-us/azure/devops/pipelines/test/codecoverage-for-pullrequests` → `https://learn.microsoft.com/en-us/azure/devops/pipelines/test/review-code-coverage-results?view=azure-devops`
-  - `docs\03_guides\03_test_coverage.md`
-- `https://discord.gg/rust-lang-community` → `https://discord.com/invite/rust-lang-community`
-  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
-- `https://spec.ferrocene.dev/ffi.html` → `https://rust-lang.github.io/fls/ffi.html`
+- `https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html` → `https://research.google/blog/extra-extra-read-all-about-it-nearly-all-binary-searches-and-mergesorts-are-broken/`
+  - `docs\05_guides\05_kani_practical_guide.md`
+- `https://spec.ferrocene.dev/patterns.html` → `https://rust-lang.github.io/fls/patterns.html`
   - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
 - `https://rustnationuk.com/` → `https://www.rustnationuk.com/`
   - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+- `https://spec.ferrocene.dev/concurrency.html` → `https://rust-lang.github.io/fls/concurrency.html`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+- `https://discord.gg/rust-lang-community` → `https://discord.com/invite/rust-lang-community`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+- `https://bevyengine.org/learn/quick-start/getting-started/ecs/` → `https://bevy.org/learn/quick-start/getting-started/ecs/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
 - `http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3587.pdf` → `https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3587.pdf`
   - `docs\archive\rust-ownership-chinese\guides\zero-cost-abstraction-proof.md`
 - `https://discord.gg/rust-lang` → `https://discord.com/invite/rust-lang`
   - `docs\archive\rust-ownership-chinese\REFERENCES.md`
   - `docs\rust-ownership-decidability\08-advanced-topics\README.md`
-- `https://www.ibm.com/docs/en/zos/2.4.0?topic=instructions-vector-instructions` → `https://www.ibm.com/docs/en/zos/2.4.0`
-  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
 - `https://bevyengine.org/news/bevy-0-6/` → `https://bevy.org/news/bevy-0-6/`
-  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
-- `https://bevyengine.org/learn/quick-start/getting-started/ecs/` → `https://bevy.org/learn/quick-start/getting-started/ecs/`
-  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
-- `https://tools.ietf.org/html/rfc7230` → `https://datatracker.ietf.org/doc/html/rfc7230`
-  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
-- `https://bevyengine.org/learn/quick-start/getting-started/resources/` → `https://bevy.org/learn/quick-start/getting-started/resources/`
   - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
 - `https://tools.ietf.org/html/rfc7540#section-5.2` → `https://datatracker.ietf.org/doc/html/rfc7540`
   - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
+- `https://bevyengine.org/learn/quick-start/getting-started/resources/` → `https://bevy.org/learn/quick-start/getting-started/resources/`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
+- `https://tools.ietf.org/html/rfc7230` → `https://datatracker.ietf.org/doc/html/rfc7230`
+  - `docs\research_notes\software_design_theory\07_crate_architectures\08_hyper_architecture.md`
 - `https://linearlogic.com/` → `https://www.linearlogic.com/`
   - `docs\rust-ownership-decidability\00-foundations\00-01-linear-logic-deep.md`
-- `https://docs.oracle.com/javase/` → `https://docs.oracle.com/en/java/javase/26/`
-  - `docs\rust-ownership-decidability\05-comparative-study\05-04-rust-vs-java.md`
 - `https://www.zero2prod.com/` → `https://www.zero2prod.com/index.html?country=Hong%20Kong&discount_code=SEA60`
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
   - `docs\rust-ownership-decidability\07-references\online-courses.md`
-- `http://adam.chlipala.net/frap/` → `https://adam.chlipala.net/frap/`
-  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `https://gitlab.mpi-sws.org/FP/rustbelt` → `https://gitlab.mpi-sws.org/users/sign_in`
+  - `docs\rust-ownership-decidability\RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\mechanized-proofs.md`
+- `https://docs.oracle.com/javase/` → `https://docs.oracle.com/en/java/javase/26/`
+  - `docs\rust-ownership-decidability\05-comparative-study\05-04-rust-vs-java.md`
 - `https://www.elsevier.com/books/engineering-a-compiler/cooper/978-0-12-815412-0` → `https://shop.elsevier.com/books/engineering-a-compiler/cooper/978-0-12-815412-0`
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
-- `https://store.doverpublications.com/0486478831.html` → `https://store.doverpublications.com/products/9780486478838`
-  - `docs\rust-ownership-decidability\07-references\books-resources.md`
-- `https://www.pearson.com/en-us/subject-catalog/p/introduction-to-automata-theory-languages-and-computation/P200000005792` → `https://www.pearson.com/en-us/search/All-results?aq=introduction%20to%20automata%20theory%20languages%20and%20computation`
+- `http://adam.chlipala.net/frap/` → `https://adam.chlipala.net/frap/`
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
 - `https://cs242.stanford.edu/` → `https://web.stanford.edu/class/cs242/`
   - `docs\rust-ownership-decidability\07-references\bibliography.md`
   - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `https://www.pearson.com/en-us/subject-catalog/p/introduction-to-automata-theory-languages-and-computation/P200000005792` → `https://www.pearson.com/en-us/search/All-results?aq=introduction%20to%20automata%20theory%20languages%20and%20computation`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
 - `https://www.pearson.com/en-us/subject-catalog/p/compilers-principles-techniques-and-tools/P200000005663` → `https://www.pearson.com/en-us/search/All-results?aq=compilers%20principles%20techniques%20and%20tools`
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
-- `https://www.elsevier.com/books/optimizing-compilers-for-modern-architectures/allen/978-1-55860-286-1` → `https://shop.elsevier.com/books/optimizing-compilers-for-modern-architectures/allen/978-0-08-051324-9`
+- `https://store.doverpublications.com/0486478831.html` → `https://store.doverpublications.com/products/9780486478838`
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
 - `http://adam.chlipala.net/cpdt/` → `https://adam.chlipala.net/cpdt/`
   - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `https://www.elsevier.com/books/optimizing-compilers-for-modern-architectures/allen/978-1-55860-286-1` → `https://shop.elsevier.com/books/optimizing-compilers-for-modern-architectures/allen/978-0-08-051324-9`
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
 - `https://docs.microsoft.com/en-us/learn/paths/rust-first-steps/` → `https://learn.microsoft.com/en-us/training/browse/`
-  - `docs\rust-ownership-decidability\07-references\online-courses.md`
-- `https://courses.engr.illinois.edu/cs421/` → `https://courses.grainger.illinois.edu/cs421/su2026/`
-  - `docs\rust-ownership-decidability\07-references\online-courses.md`
-- `https://www.rustlab.it/` → `https://rustlab.it/`
   - `docs\rust-ownership-decidability\07-references\online-courses.md`
 - `http://www.deepspec.org/` → `https://deepspec.org/main`
   - `docs\rust-ownership-decidability\07-references\online-courses.md`
-- `https://www.cs.uoregon.edu/research/summerschool/` → `https://www.cs.uoregon.edu/research/summerschool/summer26/`
-  - `docs\rust-ownership-decidability\07-references\online-courses.md`
-- `https://rustfest.eu/` → `https://rustfest.global/`
-  - `docs\rust-ownership-decidability\07-references\online-courses.md`
-- `http://twelf.org/` → `https://twelf.org/`
-  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
-- `http://nusmv.fbk.eu/` → `https://nusmv.fbk.eu/`
-  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
 - `https://www.sonarqube.org/` → `https://www.sonarsource.com/products/sonarqube/`
-  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
-- `https://www.synopsys.com/software-integrity/security-testing/static-analysis-sast.html` → `https://www.blackduck.com/`
-  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
-- `http://www.nuprl.org/` → `https://nuprl.org/`
   - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
 - `https://agda.readthedocs.io/` → `https://agda.readthedocs.io/en/v2.8.0-r3/`
   - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://courses.engr.illinois.edu/cs421/` → `https://courses.grainger.illinois.edu/cs421/su2026/`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `http://twelf.org/` → `https://twelf.org/`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://www.synopsys.com/software-integrity/security-testing/static-analysis-sast.html` → `https://www.blackduck.com/`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://rustfest.eu/` → `https://rustfest.global/`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `https://www.rustlab.it/` → `https://rustlab.it/`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `http://nusmv.fbk.eu/` → `https://nusmv.fbk.eu/`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
 - `https://www.idris-lang.org/` → `https://idris-lang.org/`
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `https://www.cs.uoregon.edu/research/summerschool/` → `https://www.cs.uoregon.edu/research/summerschool/summer26/`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `http://www.nuprl.org/` → `https://nuprl.org/`
   - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
 - `https://moves.rwth-aachen.de/teaching/ss-18/model-checking/` → `https://moves.rwth-aachen.de/teaching/ws-20-21/model-checking/`
   - `docs\rust-ownership-decidability\07-references\online-courses.md`
-- `https://www.ndcconferences.com/` → `https://ndcconferences.com/`
-  - `docs\rust-ownership-decidability\07-references\online-courses.md`
 - `https://redis.io/docs/manual/patterns/distributed-locks/` → `https://redis.io/docs/latest/manual/patterns/distributed-locks/`
   - `docs\rust-ownership-decidability\14-distributed-systems\13-01-distributed-patterns.md`
-- `https://actix.rs/docs` → `https://actix.rs/docs/`
-  - `docs\rust-ownership-decidability\case-studies\actix-web-formal-analysis.md`
 - `https://www.wfmc.org/` → `https://wfmc.org/`
   - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\13-mi-with-design-time-knowledge.md`
   - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\14-mi-with-runtime-knowledge.md`
@@ -8329,116 +8297,111 @@
   - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\41-thread-merge.md`
   - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\42-thread-split.md`
   - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\43-explicit-termination.md`
-- `https://pyo3.rs` → `https://pyo3.rs/v0.29.0/`
-  - `docs\rust-ownership-decidability\case-studies\pyo3-formal-analysis.md`
 - `https://ink.substrate.io/` → `https://use.ink/`
   - `docs\rust-ownership-decidability\case-studies\blockchain\README.md`
+- `https://actix.rs/docs` → `https://actix.rs/docs/`
+  - `docs\rust-ownership-decidability\case-studies\actix-web-formal-analysis.md`
 - `http://codecapsule.com/2013/11/11/robin-hood-hashing/` → `https://codecapsule.com/2013/11/11/robin-hood-hashing/`
   - `docs\rust-ownership-decidability\case-studies\std-hashmap-formal-analysis.md`
+- `https://pyo3.rs` → `https://pyo3.rs/v0.29.0/`
+  - `docs\rust-ownership-decidability\case-studies\pyo3-formal-analysis.md`
 - `https://morestina.net/blog/1868/self-referential-structs-in-rust` → `https://morestina.net/1868/self-referential-types-for-fun-and-profit`
   - `docs\rust-ownership-decidability\case-studies\ouroboros-formal-analysis.md`
+- `https://www.ndcconferences.com/` → `https://ndcconferences.com/`
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
 
 ## 失效或异常链接
 
-- `[403] https://web.mit.edu/rust-lang/` — Forbidden
-  - `concept\00_meta\sources.md`
+- `[404] https://iris-project.org/tutorial.html]` — Not Found
+  - `concept\00_meta\rustbelt_predicate_map.md`
 - `[404] https://en.wikipedia.org/wiki/Ownership_types` — Not Found
   - `concept\00_meta\sources.md`
   - `concept\01_foundation\01_ownership.md`
-- `[404] https://iris-project.org/tutorial.html]` — Not Found
-  - `concept\00_meta\rustbelt_predicate_map.md`
-- `[404] https://en.wikipedia.org/wiki/Ownership_(programming)` — Not Found
-  - `concept\01_foundation\README.md`
-- `[404] https://en.wikipedia.org/wiki/Trait-based_programming` — Not Found
-  - `concept\02_intermediate\README.md`
-  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\trait-system.md`
-- `[404] https://cel.cs.brown.edu/crp/idioms/copy_move_constructors.html` — Not Found
-  - `concept\01_foundation\23_move_semantics.md`
-  - `concept\02_intermediate\28_construction_and_initialization.md`
+- `[404] https://www.stroustrup.com/ETAPS-corrected.pdf` — Not Found
+  - `concept\01_foundation\06_zero_cost_abstractions.md`
 - `[404] https://cel.cs.brown.edu/crp/idioms/rtti_dynamic_cast.html` — Not Found
   - `concept\02_intermediate\25_rtti_and_dynamic_typing.md`
 - `[404] https://blog.google/technology/developers/comprehensive-rust/` — Not Found
   - `concept\00_meta\comprehensive_rust_mapping.md`
-- `[404] https://tokio.rs/tokio/topics/runtime` — Not Found
-  - `concept\03_advanced\02_async.md`
-  - `concept\03_advanced\02_async_patterns.md`
-  - `concept\03_advanced\18_network_programming.md`
-  - `concept\archive\03_advanced_02_async_original.md`
-- `[404] https://www.stroustrup.com/FSM/0cost.pdf` — Not Found
-  - `concept\00_meta\terminology_glossary.md`
 - `[404] https://www.stroustrup.com/new_value-terminology.pdf` — Not Found
   - `concept\01_foundation\19_value_vs_reference_semantics.md`
-- `[404] https://www.stroustrup.com/ETAPS-corrected.pdf` — Not Found
-  - `concept\01_foundation\06_zero_cost_abstractions.md`
-- `[404] https://llvm.org/docs/SystemZ.html` — Not Found
-  - `concept\03_advanced\13_inline_assembly.md`
+- `[403] https://web.mit.edu/rust-lang/` — Forbidden
+  - `concept\00_meta\sources.md`
+- `[404] https://www.levels.fyi/t/rust-engineer/salaries/` — Not Found
+  - `concept\00_meta\career_landscape.md`
+- `[404] https://cel.cs.brown.edu/crp/idioms/copy_move_constructors.html` — Not Found
+  - `concept\01_foundation\23_move_semantics.md`
+  - `concept\02_intermediate\28_construction_and_initialization.md`
+- `[404] https://www.stroustrup.com/FSM/0cost.pdf` — Not Found
+  - `concept\00_meta\terminology_glossary.md`
+- `[404] https://en.wikipedia.org/wiki/Trait-based_programming` — Not Found
+  - `concept\02_intermediate\README.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\trait-system.md`
+- `[404] https://en.wikipedia.org/wiki/Ownership_(programming)` — Not Found
+  - `concept\01_foundation\README.md`
 - `[404] https://en.wikipedia.org/wiki/Fractional_permissions` — Not Found
   - `concept\04_formal\03_ownership_formal.md`
+- `[404] https://en.wikipedia.org/wiki/Phase_semantics` — Not Found
+  - `concept\04_formal\01_linear_logic.md`
 - `[404] https://www.cs.bgu.ac.il/~hendlerd/papers/HP.pdf` — Not Found
   - `concept\03_advanced\16_lock_free.md`
 - `[404] https://www.jaist.ac.jp/~sgonda/paper/2020_scico.html` — Not Found
   - `concept\04_formal\09_linear_logic_applications.md`
-- `[404] https://en.wikipedia.org/wiki/Phase_semantics` — Not Found
-  - `concept\04_formal\01_linear_logic.md`
 - `[404] https://www.microsoft.com/en-us/research/publication/practical-type-inference-arbitrary-rank-types/` — Not Found
   - `concept\04_formal\08_type_inference.md`
-- `[404] https://www.levels.fyi/t/rust-engineer/salaries/` — Not Found
-  - `concept\00_meta\career_landscape.md`
-- `[404] https://homepages.inf.ed.ac.uk/wadler/papers/linearsubtypes/linearsubtypes.pdf` — Not Found
-  - `concept\04_formal\09_linear_logic_applications.md`
-- `[404] https://www.cs.cmu.edu/~fp/courses/15816-s12/lectures/01-linlogic.pdf` — Not Found
-  - `concept\04_formal\09_linear_logic_applications.md`
+- `[404] https://llvm.org/docs/SystemZ.html` — Not Found
+  - `concept\03_advanced\13_inline_assembly.md`
 - `[404] https://marabos.nl/atomics/happens-before.html` — Not Found
   - `concept\03_advanced\11_atomics_and_memory_ordering.md`
-- `[404] https://www.hillelwayne.com/post/limitations-of-formal/` — Not Found
-  - `concept\04_formal\11_separation_logic.md`
-- `[404] https://www.cs.ox.ac.uk/people/samson.abramsky/dt.ps` — Not Found
-  - `concept\04_formal\12_denotational_semantics.md`
 - `[404] https://en.wikipedia.org/wiki/Viper_(verification_infrastructure)` — Not Found
   - `concept\04_formal\05_verification_toolchain.md`
-- `[404] https://www.ralfj.de/blog/2023/01/07/tree-borrows.html` — Not Found
-  - `concept\04_formal\31_miri.md`
-  - `docs\05_guides\05_miri_practical_guide.md`
+- `[404] https://www.cs.cmu.edu/~fp/courses/15816-s12/lectures/01-linlogic.pdf` — Not Found
+  - `concept\04_formal\09_linear_logic_applications.md`
+- `[404] https://www.cs.ox.ac.uk/people/samson.abramsky/dt.ps` — Not Found
+  - `concept\04_formal\12_denotational_semantics.md`
+- `[404] https://homepages.inf.ed.ac.uk/wadler/papers/linearsubtypes/linearsubtypes.pdf` — Not Found
+  - `concept\04_formal\09_linear_logic_applications.md`
+- `[404] https://www.hillelwayne.com/post/limitations-of-formal/` — Not Found
+  - `concept\04_formal\11_separation_logic.md`
+- `[404] https://marabos.nl/atomics/when-to-use.html` — Not Found
+  - `concept\03_advanced\10_concurrency_patterns.md`
+  - `concept\03_advanced\11_atomics_and_memory_ordering.md`
 - `[404] https://www.ralfj.de/blog/2023/01-31_tree-borrows.html` — Not Found
   - `concept\04_formal\17_operational_semantics.md`
   - `concept\07_future\17_rust_specification_preview.md`
   - `concept\07_future\20_borrowsanitizer_preview.md`
-- `[404] https://marabos.nl/atomics/when-to-use.html` — Not Found
-  - `concept\03_advanced\10_concurrency_patterns.md`
-  - `concept\03_advanced\11_atomics_and_memory_ordering.md`
-- `[404] https://socket.dev/blog/trapdoor-supply-chain-attack` — Not Found
+- `[404] https://en.wikipedia.org/wiki/Trust_(social)` — Not Found
   - `concept\05_comparative\04_safety_boundaries.md`
-- `[404] https://www.cs.brown.edu/~mph/HerlihyShavit/` — Not Found
-  - `concept\03_advanced\19_parallel_distributed_pattern_spectrum.md`
+- `[404] https://www.ralfj.de/blog/2023/01/07/tree-borrows.html` — Not Found
+  - `concept\04_formal\31_miri.md`
+  - `docs\05_guides\05_miri_practical_guide.md`
 - `[404] https://v8.dev/blog/jit` — Not Found
   - `concept\05_comparative\08_rust_vs_javascript.md`
 - `[404] https://www.ben-morris.com/swift-vs-rust/` — Not Found
   - `concept\05_comparative\09_rust_vs_swift.md`
-- `[404] https://en.wikipedia.org/wiki/Trust_(social)` — Not Found
+- `[404] https://socket.dev/blog/trapdoor-supply-chain-attack` — Not Found
   - `concept\05_comparative\04_safety_boundaries.md`
-- `[404] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Type_coercion` — Not Found
-  - `concept\05_comparative\08_rust_vs_javascript.md`
-- `[404] https://docs.scala-lang.org/scala3/book/types-intro.html` — Not Found
-  - `concept\05_comparative\12_rust_vs_scala.md`
 - `[404] https://tenderlovemaking.com/tags/gc.html` — Not Found
   - `concept\05_comparative\08_rust_vs_ruby.md`
+- `[404] https://docs.scala-lang.org/scala3/book/types-intro.html` — Not Found
+  - `concept\05_comparative\12_rust_vs_scala.md`
 - `[404] https://docs.scala-lang.org/scala3/book/types-inference.html` — Not Found
   - `concept\05_comparative\12_rust_vs_scala.md`
+- `[404] https://www.cs.nott.ac.uk/~pszgmh/psem.html` — Not Found
+  - `concept\04_formal\18_evaluation_strategies.md`
 - `[404] https://docs.scala-lang.org/topic/implicit-conversions.html` — Not Found
   - `concept\05_comparative\12_rust_vs_scala.md`
 - `[404] https://docs.scala-lang.org/scala3/book/interop.html` — Not Found
   - `concept\05_comparative\12_rust_vs_scala.md`
-- `[404] https://shopify.engineering/rust-at-shopify` — Not Found
-  - `concept\05_comparative\08_rust_vs_ruby.md`
-- `[404] https://www.cs.nott.ac.uk/~pszgmh/psem.html` — Not Found
-  - `concept\04_formal\18_evaluation_strategies.md`
-- `[404] https://hexdocs.pm/mix/Mix.Tasks.Deploy.html` — 
-  - `concept\05_comparative\14_rust_vs_elixir.md`
+- `[404] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Type_coercion` — Not Found
+  - `concept\05_comparative\08_rust_vs_javascript.md`
+- `[404] https://www.cs.brown.edu/~mph/HerlihyShavit/` — Not Found
+  - `concept\03_advanced\19_parallel_distributed_pattern_spectrum.md`
+- `[404] https://en.wikipedia.org/wiki/Design_pattern%3B_Wikipedia_%E2%80%94_RAII%3B_Wikipedia_%E2%80%94_Typestate_analysis` — Not Found
+  - `concept\06_ecosystem\02_patterns.md`
 - `[403] https://en.wikipedia.org/` — Too Many Reqs (1862a4b)
   - `concept\06_ecosystem\02_patterns.md`
   - `concept\06_ecosystem\04_application_domains.md`
-- `[404] https://en.wikipedia.org/wiki/Design_pattern%3B_Wikipedia_%E2%80%94_RAII%3B_Wikipedia_%E2%80%94_Typestate_analysis` — Not Found
-  - `concept\06_ecosystem\02_patterns.md`
 - `[404] https://en.wikipedia.org/wiki/Design_pattern%3B_Wikipedia_%E2%80%94_RAII%3B_Wikipedia_%E2%80%94_Typestate` — Not Found
   - `concept\06_ecosystem\02_patterns.md`
 - `[404] https://webassembly.org/docs/portability-and-performance/` — Not Found
@@ -8446,200 +8409,230 @@
   - `concept\06_ecosystem\54_webassembly_advanced.md`
 - `[ERR] https://arewe distributedyet.org/` — Tunnel connection failed: 400 Invalid header received from client
   - `concept\06_ecosystem\18_distributed_systems.md`
+- `[404] https://shopify.engineering/rust-at-shopify` — Not Found
+  - `concept\05_comparative\08_rust_vs_ruby.md`
 - `[404] https://rustsec.org/advisories/rss.xml` — Not Found
+  - `concept\06_ecosystem\19_security_practices.md`
+- `[404] https://www.linuxfoundation.org/press/press-release/sustaining-package-registries-working-group` — Not Found
   - `concept\06_ecosystem\19_security_practices.md`
 - `[404] https://en.wikipedia.org/wiki/Entity_component_system%3B_Richard_Fabian_%E2%80%94_Data_Oriented_Design%3B_Niko_Matsakis_Blog` — Not Found
   - `concept\06_ecosystem\07_game_ecs.md`
-- `[404] https://www.pingcap.com/blog/why-rust/` — Not Found
-  - `concept\06_ecosystem\18_distributed_systems.md`
-  - `concept\06_ecosystem\31_microservice_patterns.md`
 - `[404] https://diesel.rs/guides/migrations.html` — Not Found
   - `concept\06_ecosystem\23_database_access.md`
-- `[404] https://www.linuxfoundation.org/press/press-release/sustaining-package-registries-working-group` — Not Found
-  - `concept\06_ecosystem\19_security_practices.md`
+- `[404] https://hexdocs.pm/mix/Mix.Tasks.Deploy.html` — 
+  - `concept\05_comparative\14_rust_vs_elixir.md`
 - `[404] https://docs.aws.amazon.com/wellarchitected/latest/health-safety-pillar/welcome.html` — Not Found
   - `concept\06_ecosystem\24_cloud_native.md`
-- `[404] https://nodejs.org/en/docs/guides/dont-block-the-event-loop` — Not Found
-  - `concept\05_comparative\15_rust_vs_typescript.md`
-- `[404] https://www.rtca.org/product/do-178c-software-considerations-in-airborne-systems-and-equipment-certification` — Not Found
-  - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
-  - `concept\07_future\14_ferrocene_preview.md`
 - `[404] https://microservices.io/book/` — Not Found
   - `concept\06_ecosystem\31_microservice_patterns.md`
   - `concept\06_ecosystem\32_event_driven_architecture.md`
-- `[404] https://martinfowler.com/bliki/OverEngineering.html` — Not Found
+- `[404] https://www.pingcap.com/blog/why-rust/` — Not Found
+  - `concept\06_ecosystem\18_distributed_systems.md`
+  - `concept\06_ecosystem\31_microservice_patterns.md`
+- `[429] https://jeffreypalermo.com/blog/the-onion-architecture-part-3/` — Too Many Requests
   - `concept\06_ecosystem\35_architecture_patterns.md`
+- `[404] https://aws.amazon.com/blogs/opensource/rust-microservices/` — 
+  - `concept\06_ecosystem\31_microservice_patterns.md`
 - `[404] https://www.ssi.gouv.fr/en/guide/rust-secure-development-guide/` — Not Found
   - `concept\06_ecosystem\19_security_practices.md`
+- `[404] https://martinfowler.com/bliki/OverEngineering.html` — Not Found
+  - `concept\06_ecosystem\35_architecture_patterns.md`
+- `[404] https://www.rfc-editor.org/rfc/rfc9000.html` — Not Found
+  - `concept\06_ecosystem\38_network_protocols.md`
+- `[404] https://www.rtca.org/product/do-178c-software-considerations-in-airborne-systems-and-equipment-certification` — Not Found
+  - `concept\06_ecosystem\29_algorithms_competitive_programming.md`
+  - `concept\07_future\14_ferrocene_preview.md`
 - `[404] https://www.rfc-editor.org/rfc/rfc9114.html` — Not Found
   - `concept\06_ecosystem\38_network_protocols.md`
   - `docs\rust-ownership-decidability\case-studies\reqwest-formal-analysis.md`
-- `[404] https://aws.amazon.com/blogs/opensource/rust-microservices/` — 
-  - `concept\06_ecosystem\31_microservice_patterns.md`
-- `[404] https://www.rfc-editor.org/rfc/rfc9000.html` — Not Found
-  - `concept\06_ecosystem\38_network_protocols.md`
-- `[404] https://tokio.rs/tokio/topics/internals` — Not Found
-  - `concept\06_ecosystem\40_reactive_programming.md`
-- `[ERR] https://sqs` — [Errno 11001] getaddrinfo failed
-  - `concept\06_ecosystem\35_architecture_patterns.md`
-- `[404] https://homepages.inf.ed.ac.uk/gdp/publications/Structural_Operational_Semantics.pdf` — Not Found
-  - `concept\06_ecosystem\41_workflow_theory.md`
-- `[404] https://www.wfmc.org/standards/reference-model` — Not Found
-  - `concept\06_ecosystem\41_workflow_theory.md`
 - `[404] https://www.cs.cmu.edu/~wing/publications/Milner92.pdf` — Not Found
   - `concept\06_ecosystem\41_workflow_theory.md`
+- `[404] https://homepages.inf.ed.ac.uk/gdp/publications/Structural_Operational_Semantics.pdf` — Not Found
+  - `concept\06_ecosystem\41_workflow_theory.md`
+- `[ERR] https://sqs` — [Errno 11001] getaddrinfo failed
+  - `concept\06_ecosystem\35_architecture_patterns.md`
 - `[404] https://graphql.org/blog/2015/10/16/subscriptions/` — Not Found
   - `concept\06_ecosystem\42_api_design_patterns.md`
-- `[404] https://datatracker.ietf.org/wg/cfrg/documents/` — Not Found
-  - `concept\06_ecosystem\43_security_cryptography.md`
 - `[404] https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-versioning` — Not Found
   - `concept\06_ecosystem\42_api_design_patterns.md`
-- `[404] https://www.wfmc.org/standards/terminology` — Not Found
+- `[ERR] https://www.rust-lang.org/` — _ssl.c:999: The handshake operation timed out
+  - `concept\05_comparative\07_rust_vs_python.md`
+  - `concept\05_comparative\08_rust_vs_ruby.md`
+  - `concept\05_comparative\09_rust_vs_swift.md`
+  - `concept\05_comparative\14_rust_vs_elixir.md`
+  - `concept\06_ecosystem\02_patterns.md`
+  - `concept\06_ecosystem\04_application_domains.md`
+  - `concept\06_ecosystem\48_industrial_case_studies.md`
+  - `concept\07_future\01_ai_integration.md`
+  - `concept\07_future\02_formal_methods.md`
+  - `concept\07_future\03_evolution.md`
+  - `concept\07_future\04_effects_system.md`
+  - `concept\07_future\11_stable_abi_preview.md`
+  - `concept\07_future\12_inline_const_pattern_preview.md`
+  - `concept\07_future\13_must_not_suspend_preview.md`
+  - `concept\07_future\14_lifetime_capture_preview.md`
+  - `concept\07_future\15_rpitit_preview.md`
+  - `concept\07_future\16_type_alias_impl_trait_preview.md`
+  - `concept\07_future\17_arbitrary_self_types_preview.md`
+  - `concept\07_future\17_const_trait_preview.md`
+  - `concept\07_future\18_field_projections_preview.md`
+  - `concept\07_future\22_gen_blocks_preview.md`
+  - `concept\07_future\22_std_autodiff_preview.md`
+  - `concept\07_future\24_roadmap.md`
+  - `concept\07_future\24_wasm_target_evolution.md`
+  - `concept\07_future\29_ebpf_rust.md`
+  - `concept\07_future\archive\01_ai_integration_original.md`
+  - `concept\07_future\rust_1_97_preview.md`
+  - `concept\07_future\rust_1_98_preview.md`
+  - `docs\rust-ownership-decidability\archive\MASTER_INDEX.md`
+- `[404] https://datatracker.ietf.org/wg/cfrg/documents/` — Not Found
+  - `concept\06_ecosystem\43_security_cryptography.md`
+- `[404] https://smallcultfollowing.com/babysteps/blog/2019/01/21/polonius-and-region-errors/` — Not Found
+  - `concept\06_ecosystem\45_compiler_internals.md`
+- `[404] https://burn.dev/book/building-blocks/backend.html` — Not Found
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `[404] https://www.wfmc.org/standards/reference-model` — Not Found
   - `concept\06_ecosystem\41_workflow_theory.md`
 - `[404] https://letsencrypt.org/docs/rustls/` — Not Found
   - `concept\06_ecosystem\43_security_cryptography.md`
-- `[404] https://burn.dev/book/` — Not Found
-  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
-- `[404] https://burn.dev/book/building-blocks/backend.html` — Not Found
+- `[404] https://pola.rs/posts/polars-pandas-xlsxwriter/` — Not Found
   - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
 - `[404] https://burn.dev/blog/why-rust-for-deep-learning.html` — Not Found
   - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
-- `[404] https://pola.rs/posts/polars-pandas-xlsxwriter/` — Not Found
-  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
-- `[404] https://smallcultfollowing.com/babysteps/blog/2019/01/21/polonius-and-region-errors/` — Not Found
-  - `concept\06_ecosystem\45_compiler_internals.md`
-- `[404] https://burn.dev/book/building-blocks/tensor.html` — Not Found
-  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
-- `[404] https://docs.pola.rs/user-guide/transformations/time-series/windows/` — Not Found
-  - `concept\06_ecosystem\48_data_engineering.md`
 - `[ERR] https://cybersecurity-news.com/hax-rust-verification/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
   - `concept\06_ecosystem\47_formal_verification_tools.md`
-- `[404] https://docs.getdbt.com/docs/build/about-sql-reference` — Not Found
-  - `concept\06_ecosystem\48_data_engineering.md`
 - `[404] https://goto.ucsd.edu/~rjhala/papers/liquid_types_pldi08.pdf` — Not Found
-  - `concept\06_ecosystem\47_formal_verification_tools.md`
-- `[404] https://pola.rs/posts/rust-for-data/` — Not Found
-  - `concept\06_ecosystem\48_data_engineering.md`
-- `[404] https://www.hillelwayne.com/post/formally-verifying/` — Not Found
-  - `concept\06_ecosystem\47_formal_verification_tools.md`
-- `[404] https://parquet.apache.org/docs/file-format/schema-evolution/` — Not Found
-  - `concept\06_ecosystem\48_data_engineering.md`
-- `[404] https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers22.pdf` — Not found (filtered)
   - `concept\06_ecosystem\47_formal_verification_tools.md`
 - `[404] https://docs.pola.rs/user-guide/concepts/data-structures/#dataframe` — Not Found
   - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `[404] https://www.hillelwayne.com/post/formally-verifying/` — Not Found
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `[404] https://burn.dev/book/building-blocks/tensor.html` — Not Found
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `[404] https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers22.pdf` — Not found (filtered)
+  - `concept\06_ecosystem\47_formal_verification_tools.md`
+- `[404] https://burn.dev/book/` — Not Found
+  - `concept\06_ecosystem\46_machine_learning_ecosystem.md`
+- `[404] https://docs.pola.rs/user-guide/transformations/time-series/windows/` — Not Found
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `[ERR] https://nodejs.org/en/docs/guides/dont-block-the-event-loop` — _ssl.c:999: The handshake operation timed out
+  - `concept\05_comparative\15_rust_vs_typescript.md`
 - `[404] https://www.onehouse.ai/blog/the-ultimate-guide-to-apache-parquet` — Not Found
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `[404] https://docs.getdbt.com/docs/build/about-sql-reference` — Not Found
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `[404] https://pola.rs/posts/rust-for-data/` — Not Found
   - `concept\06_ecosystem\48_data_engineering.md`
 - `[403] https://www.realtimerendering.com/` — Forbidden
   - `concept\06_ecosystem\49_game_engine_internals.md`
+- `[404] https://parquet.apache.org/docs/file-format/config/` — Not Found
+  - `concept\06_ecosystem\48_data_engineering.md`
 - `[404] https://arrow.apache.org/datafusion/user-guide/caching.html` — Not Found
+  - `concept\06_ecosystem\48_data_engineering.md`
+- `[404] https://docs.unity3d.com/Manual/UnityArchitecture.html` — Not Found
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `[404] https://parquet.apache.org/docs/file-format/schema-evolution/` — Not Found
   - `concept\06_ecosystem\48_data_engineering.md`
 - `[ERR] https://pmg.csail.mit.edu/papers/osdi99.pdf` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
   - `concept\06_ecosystem\50_distributed_consensus.md`
-- `[404] https://parquet.apache.org/docs/file-format/config/` — Not Found
-  - `concept\06_ecosystem\48_data_engineering.md`
 - `[403] https://www.khronos.org/registry/vulkan/specs/1.3/html/vkspec.html` — Forbidden
   - `concept\06_ecosystem\49_game_engine_internals.md`
+- `[404] https://www.crcpress.com/Game-Audio-Programming-Principles-and-Practices/DeMan-Larkin/p/book/9781138731499` — Not Found
+  - `concept\06_ecosystem\49_game_engine_internals.md`
+- `[403] https://learning.quantum.ibm.com/` — Forbidden
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
 - `[403] https://qiskit.org/textbook/ch-states/introduction.html` — Forbidden
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[403] https://qiskit.org/textbook/` — Forbidden
-  - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[404] https://docs.unity3d.com/Manual/UnityArchitecture.html` — Not Found
-  - `concept\06_ecosystem\49_game_engine_internals.md`
-- `[403] https://journals.aps.org/pr/abstract/10.1103/PhysRev.47.777` — Forbidden
-  - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[403] https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.70.1895` — Forbidden
-  - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[403] https://qiskit.org/textbook/ch-gates/introduction.html` — Forbidden
-  - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[403] https://www.nsa.gov/Press-Room/Fact-Sheets/Article/3215798/nsa-releases-cnsa-20/` — Forbidden
+- `[403] https://qiskit.org/textbook/ch-states/single-qubit-gates.html` — Forbidden
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
 - `[404] https://dept-info.labri.fr/~denise/Algorithmes/Consensus/` — Not Found
   - `concept\06_ecosystem\50_distributed_consensus.md`
-- `[403] https://learning.quantum.ibm.com/` — Forbidden
+- `[403] https://qiskit.org/textbook/ch-gates/introduction.html` — Forbidden
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[404] https://www.crcpress.com/Game-Audio-Programming-Principles-and-Practices/DeMan-Larkin/p/book/9781138731499` — Not Found
-  - `concept\06_ecosystem\49_game_engine_internals.md`
-- `[403] https://wiki.linuxfoundation.org/realtime/start` — Forbidden
-  - `concept\06_ecosystem\52_robotics.md`
-- `[404] https://www.microsoft.com/en-us/research/publication/paxos-made-live-an-engineering-perspective/` — Not Found
-  - `concept\06_ecosystem\50_distributed_consensus.md`
-- `[403] https://qiskit.org/textbook/ch-states/single-qubit-gates.html` — Forbidden
-  - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[ERR] https://navigation.ros.org/behavior_trees/index.html` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
-  - `concept\06_ecosystem\52_robotics.md`
 - `[403] https://qiskit.org/` — Forbidden
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[403] https://qiskit.org/textbook/ch-applications/vqe-molecules.html` — Forbidden
+- `[404] https://www.microsoft.com/en-us/research/publication/paxos-made-live-an-engineering-perspective/` — Not Found
+  - `concept\06_ecosystem\50_distributed_consensus.md`
+- `[404] https://www.wfmc.org/standards/terminology` — Not Found
+  - `concept\06_ecosystem\41_workflow_theory.md`
+- `[403] https://www.nsa.gov/Press-Room/Fact-Sheets/Article/3215798/nsa-releases-cnsa-20/` — Forbidden
   - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[ERR] https://navigation.ros.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+- `[403] https://journals.aps.org/pr/abstract/10.1103/PhysRev.47.777` — Forbidden
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `[403] https://wiki.linuxfoundation.org/realtime/start` — Forbidden
   - `concept\06_ecosystem\52_robotics.md`
+- `[403] https://qiskit.org/textbook/` — Forbidden
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `[403] https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.70.1895` — Forbidden
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
 - `[404] https://docs.cosmos.network/main/` — Not Found
   - `concept\06_ecosystem\50_distributed_consensus.md`
+- `[404] https://docs.pennylane.ai/en/stable/introduction/gradients.html` — Not Found
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `[ERR] https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows` — _ssl.c:999: The handshake operation timed out
+  - `concept\06_ecosystem\28_devops_and_ci_cd.md`
+- `[404] https://docs.pennylane.ai/en/stable/code/api/pennylane.qaoa.html` — Not Found
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `[ERR] https://www.nalgebra.org/benchmarks/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `concept\06_ecosystem\52_robotics.md`
+- `[ERR] https://navigation.ros.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `concept\06_ecosystem\52_robotics.md`
+- `[ERR] https://navigation.ros.org/behavior_trees/index.html` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `concept\06_ecosystem\52_robotics.md`
+- `[404] https://osqp.org/docs/papers/` — Not Found
+  - `concept\06_ecosystem\52_robotics.md`
+- `[404] https://design.ros2.org/articles/rosidl.html` — Not Found
+  - `concept\06_ecosystem\52_robotics.md`
 - `[ERR] https://www.nalgebra.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
   - `concept\06_ecosystem\52_robotics.md`
   - `docs\research_notes\software_design_theory\07_crate_architectures\14_nalgebra_architecture.md`
-- `[ERR] https://www.nalgebra.org/benchmarks/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
-  - `concept\06_ecosystem\52_robotics.md`
-- `[404] https://design.ros2.org/articles/rosidl.html` — Not Found
+- `[ERR] https://www.nalgebra.org/decompositions-and-lapack/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
   - `concept\06_ecosystem\52_robotics.md`
 - `[ERR] https://www.focaltech-systems.com/` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.focaltech-systems.com'. (_ssl.c:1016)
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `[404] https://grobotronics.com/xpt2046-touch-screen-controller.html` — Not Found
   - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[404] https://docs.pennylane.ai/en/stable/code/api/pennylane.qaoa.html` — Not Found
-  - `concept\06_ecosystem\51_quantum_computing_rust.md`
-- `[404] https://docs.lvgl.io/latest/en/html/overview/perf.html` — Not Found
-  - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[404] https://docs.pennylane.ai/en/stable/introduction/gradients.html` — Not Found
-  - `concept\06_ecosystem\51_quantum_computing_rust.md`
 - `[ERR] https://www.displayfuture.com/Display/datasheet/controller/ST7789.pdf` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)
   - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[404] https://osqp.org/docs/papers/` — Not Found
-  - `concept\06_ecosystem\52_robotics.md`
-- `[403] https://developer.arm.com/documentation/dai0298/a/` — Forbidden
+- `[404] https://docs.lvgl.io/latest/en/html/overview/perf.html` — Not Found
   - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[404] https://docs.lvgl.io/latest/en/html/porting/index.html` — Not Found
+- `[403] https://developer.arm.com/documentation/dai0298/a/` — Forbidden
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `[404] https://docs.lvgl.io/latest/en/html/porting/mem.html` — Not Found
   - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[404] https://docs.lvgl.io/latest/en/html/overview/indev.html#gestures` — Not Found
+- `[404] https://docs.lvgl.io/latest/en/html/porting/index.html` — Not Found
   - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[404] https://slint-ui.com/docs/architecture/` — Not Found
+- `[404] https://docs.lvgl.io/latest/en/html/porting/display.html` — Not Found
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[404] https://slint-ui.com/docs/embedded/` — Not Found
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[404] https://docs.lvgl.io/latest/en/html/overview/indev.html#gestures` — Not Found
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `[403] https://developer.arm.com/documentation/den0013/d/Caches/Cache-coherency` — Forbidden
   - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[404] https://docs.lvgl.io/latest/en/html/overview/indev.html` — Not Found
-  - `concept\06_ecosystem\53_embedded_graphics.md`
 - `[403] https://developer.arm.com/documentation/100240/latest/` — Forbidden
-  - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[403] https://trunkrs.dev/` — Forbidden
-  - `concept\06_ecosystem\54_webassembly_advanced.md`
-- `[ERR] https://www.nalgebra.org/decompositions-and-lapack/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
-  - `concept\06_ecosystem\52_robotics.md`
-- `[404] https://component-model.bytecodealliance.org/design/types.html` — Not Found
-  - `concept\06_ecosystem\54_webassembly_advanced.md`
-- `[404] https://docs.lvgl.io/latest/en/html/porting/display.html` — Not Found
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `[404] https://docs.lvgl.io/latest/en/html/overview/memory.html` — Not Found
   - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[403] https://trunkrs.dev/` — Forbidden
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `[404] https://v8.dev/blog/stackoverflow` — Not Found
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
 - `[404] https://pyo3.rs/v0.21.2/concurrency.html` — Not Found
   - `concept\06_ecosystem\55_rust_for_data_science.md`
 - `[404] https://slint-ui.com/docs/rust/` — Not Found
   - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[404] https://component-model.bytecodealliance.org/design/types.html` — Not Found
+  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `[404] https://slint-ui.com/docs/architecture/` — Not Found
+  - `concept\06_ecosystem\53_embedded_graphics.md`
 - `[404] https://component-model.bytecodealliance.org/design/composition.html` — Not Found
   - `concept\06_ecosystem\54_webassembly_advanced.md`
-- `[404] https://v8.dev/blog/stackoverflow` — Not Found
-  - `concept\06_ecosystem\54_webassembly_advanced.md`
+- `[404] https://aws.amazon.com/blogs/opensource/verify-rust-programs-using-kani/` — 
+  - `concept\07_future\02_formal_methods.md`
 - `[ERR] https://c2rust.com/` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1016)
   - `concept\06_ecosystem\56_c_to_rust_translation.md`
   - `docs\04_research\04_llm_c_to_rust_migration.md`
-- `[404] https://aws.amazon.com/blogs/opensource/verify-rust-programs-using-kani/` — 
-  - `concept\07_future\02_formal_methods.md`
-- `[404] https://rustfoundation.org/media/2025-annual-report/` — Not Found
-  - `concept\07_future\03_evolution.md`
-- `[404] https://rustfoundation.org/media/2026-2028-strategy/` — Not Found
-  - `concept\07_future\03_evolution.md`
 - `[404] https://slint-ui.com/docs/rust/slint/theming.html` — Not Found
   - `concept\06_ecosystem\53_embedded_graphics.md`
 - `[404] https://en.wikipedia.org/wiki/Model_Checking` — Not Found
@@ -8649,61 +8642,61 @@
   - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\02_package_manager\README.md`
   - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview-deep.md`
   - `docs\rust-ownership-decidability\case-studies\shuttle-formal-analysis.md`
+- `[404] https://chromium.googlesource.com/chromium/src/+/main/docs/rust.md` — Not Found
+  - `concept\06_ecosystem\58_platform_rust_integration.md`
+- `[404] https://rustfoundation.org/media/2025-annual-report/` — Not Found
+  - `concept\07_future\03_evolution.md`
 - `[404] https://www.microsoft.com/en-us/research/project/verus/` — Not Found
   - `concept\07_future\02_formal_methods.md`
   - `docs\05_guides\05_verus_practical_guide.md`
   - `docs\rust-ownership-decidability\03-verification-tools\03-06-verus-guide.md`
-- `[404] https://slint-ui.com/docs/embedded/` — Not Found
-  - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[404] https://chromium.googlesource.com/chromium/src/+/main/docs/rust.md` — Not Found
-  - `concept\06_ecosystem\58_platform_rust_integration.md`
-- `[404] https://without.boats/blog/pin-and-suffering/` — Not Found
-  - `concept\07_future\15_pin_ergonomics_preview.md`
+- `[404] https://www.datadoghq.com/blog/datadog-open-source-program/` — Not Found
+  - `concept\07_future\03_evolution.md`
 - `[403] https://docs.adacore.com/gnatcoverage-docs/html/gnatcoverage.html` — Forbidden
   - `concept\07_future\07_mcdc_coverage_preview.md`
 - `[ERR] https://spec.rust-lang.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
   - `concept\07_future\17_rust_specification_preview.md`
-- `[404] https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers21.pdf` — Not found (filtered)
-  - `concept\07_future\08_safety_tags_preview.md`
+- `[404] https://rustfoundation.org/media/2026-2028-strategy/` — Not Found
+  - `concept\07_future\03_evolution.md`
 - `[403] https://www.linuxtoday.com/blog/linux-kernel-7-0-officially-released-this-is-whats-new/` — Forbidden
   - `concept\07_future\19_rust_for_linux.md`
-- `[404] https://www.datadoghq.com/blog/datadog-open-source-program/` — Not Found
-  - `concept\07_future\03_evolution.md`
-- `[404] https://lwn.net/Articles/...` — Not Found
-  - `concept\07_future\19_rust_for_linux.md`
-- `[403] https://developer.arm.com/documentation/100986/latest` — Forbidden
-  - `concept\07_future\25_aarch64_sve_sme_preview.md`
 - `[404] https://www.faa.gov/aircraft/air_cert/design_approvals/criteria/software` — Not Found
   - `concept\07_future\07_mcdc_coverage_preview.md`
-- `[404] https://www.pingcap.com/article/rust-in-ai/` — Not Found
-  - `concept\07_future\21_rust_in_ai.md`
-- `[404] https://www.infoworld.com/article/why-rust-for-machine-learning.html` — Not Found
-  - `concept\07_future\21_rust_in_ai.md`
-- `[403] https://developer.arm.com/documentation/109540/latest` — Forbidden
+- `[404] https://without.boats/blog/pin-and-suffering/` — Not Found
+  - `concept\07_future\15_pin_ergonomics_preview.md`
+- `[404] https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers21.pdf` — Not found (filtered)
+  - `concept\07_future\08_safety_tags_preview.md`
+- `[403] https://developer.arm.com/documentation/109246/latest` — Forbidden
   - `concept\07_future\25_aarch64_sve_sme_preview.md`
-- `[403] https://developer.arm.com/documentation/102476/latest` — Forbidden
-  - `concept\07_future\25_aarch64_sve_sme_preview.md`
-- `[ERR] https://docs.kernel.org/bpf/]。` — UnicodeEncodeError('ascii', 'HEAD /bpf/]。 HTTP/1.1', 11, 12, 'ordinal not in range(128)')
-  - `concept\07_future\29_ebpf_rust.md`
-- `[404] https://www.nextplatform.com/2021/08/24/why-sve2-is-important-and-why-armv9-is-more-than-sve2/` — Not Found
-  - `concept\07_future\25_aarch64_sve_sme_preview.md`
-- `[404] https://wiki.haskell.org/Open_data_type` — Not Found
-  - `concept\07_future\25_open_enums_preview.md`
 - `[404] https://www.ralfj.de/blog/2023/01/31/tree-borrows.html` — Not Found
   - `concept\07_future\17_rust_specification_preview.md`
   - `concept\07_future\20_borrowsanitizer_preview.md`
-- `[403] https://developer.arm.com/documentation/109246/latest` — Forbidden
+- `[403] https://developer.arm.com/documentation/100986/latest` — Forbidden
   - `concept\07_future\25_aarch64_sve_sme_preview.md`
-- `[404] https://www.aboutamazon.com/news/aws/kiro` — Not Found
-  - `concept\07_future\archive\01_ai_integration_original.md`
+- `[403] https://developer.arm.com/documentation/102476/latest` — Forbidden
+  - `concept\07_future\25_aarch64_sve_sme_preview.md`
+- `[404] https://www.infoworld.com/article/why-rust-for-machine-learning.html` — Not Found
+  - `concept\07_future\21_rust_in_ai.md`
+- `[ERR] https://docs.kernel.org/bpf/]。` — UnicodeEncodeError('ascii', 'HEAD /bpf/]。 HTTP/1.1', 11, 12, 'ordinal not in range(128)')
+  - `concept\07_future\29_ebpf_rust.md`
+- `[403] https://developer.arm.com/documentation/109540/latest` — Forbidden
+  - `concept\07_future\25_aarch64_sve_sme_preview.md`
+- `[404] https://docs.lvgl.io/latest/en/html/overview/indev.html` — Not Found
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[404] https://www.pingcap.com/article/rust-in-ai/` — Not Found
+  - `concept\07_future\21_rust_in_ai.md`
+- `[404] https://lwn.net/Articles/...` — Not Found
+  - `concept\07_future\19_rust_for_linux.md`
+- `[404] https://wiki.haskell.org/Open_data_type` — Not Found
+  - `concept\07_future\25_open_enums_preview.md`
 - `[404] https://smallcultfollowing.com/babysteps/blog/2024/01/05/two-interpretations-of-borrowing/` — Not Found
   - `knowledge\01_fundamentals\01_borrowing.md`
-- `[404] https://tokio.rs/tokio/topics/cancellation` — Not Found
-  - `concept\archive\03_advanced_02_async_original.md`
+- `[404] https://www.aboutamazon.com/news/aws/kiro` — Not Found
+  - `concept\07_future\archive\01_ai_integration_original.md`
+- `[404] https://www.nextplatform.com/2021/08/24/why-sve2-is-important-and-why-armv9-is-more-than-sve2/` — Not Found
+  - `concept\07_future\25_aarch64_sve_sme_preview.md`
 - `[404] https://www.rust-lang.org/faq` — Not Found
   - `knowledge\00_start\04_rust_philosophy.md`
-- `[404] https://rust-lang.github.io/rfcs/1414-lifetime-elision.html` — Not Found
-  - `knowledge\01_fundamentals\03_lifetimes.md`
 - `[404] https://doc.rust-lang.org/reference/ownership.html` — Not Found
   - `docs\01_core\01_ownership_borrowing_lifetimes.md`
   - `docs\06_toolchain\03_rustdoc_advanced.md`
@@ -8711,20 +8704,8 @@
   - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
   - `knowledge\01_fundamentals\04_ownership.md`
   - `knowledge\04_expert\academic\03_ownership_model_comprehensive.md`
-- `[ERR] https://gitlab.mpi-sws.org/lgaeher/refinedrust` — TimeoutError('The read operation timed out')
-  - `concept\06_ecosystem\47_formal_verification_tools.md`
-  - `docs\04_research\04_rust_formal_verification.md`
-- `[404] https://rust-lang.github.io/rfcs/3382-pin.html` — Not Found
-  - `knowledge\02_intermediate\04_smart_pointers.md`
-- `[404] https://doc.rust-lang.org/nomicon/interior-mutability.html` — Not Found
-  - `knowledge\02_intermediate\04_smart_pointers.md`
 - `[404] https://rust-lang.github.io/rfcs/0596-ownership-and-moves.html` — Not Found
   - `knowledge\02_intermediate\05_strings.md`
-- `[404] https://without.boats/blog/implied-bounds-and-perfect-derive/` — Not Found
-  - `knowledge\02_intermediate\06_traits.md`
-  - `knowledge\03_advanced\06_type_driven_correctness.md`
-- `[404] https://rust-lang.github.io/rfcs/3058-let-chains.html` — Not Found
-  - `knowledge\02_intermediate\02_error_handling.md`
 - `[404] https://plv.mpi-sws.org/rustbelt/tree-borrows/` — Not Found
   - `docs\04_research\04_rust_formal_verification.md`
   - `docs\archive\c_class_audit_2026_06_08\rust-ownership-decidability\LEARNING_ROADMAP_DETAILED.md`
@@ -8989,59 +8970,47 @@
   - `knowledge\04_expert\academic\02_tree_borrows_authoritative_guide.md`
   - `knowledge\04_expert\miri\01_tree_borrows.md`
   - `knowledge\04_expert\safety_critical\02_matrices\03_rust_ownership_memory_model_matrix.md`
+- `[404] https://rust-lang.github.io/rfcs/3382-pin.html` — Not Found
+  - `knowledge\02_intermediate\04_smart_pointers.md`
 - `[404] https://rust-lang.github.io/rfcs/2484-tryfrom-tryinto.html` — Not Found
   - `knowledge\02_intermediate\07_type_conversions.md`
-- `[404] https://rust-lang.github.io/rfcs/2289-associated-type-constructors.html` — Not Found
-  - `docs\04_research\04_next_generation_trait_solver.md`
-  - `knowledge\02_intermediate\03_generics.md`
-- `[404] https://without.boats/blog/6-weeks-of-tokio/` — Not Found
-  - `knowledge\03_advanced\async\01_async_await.md`
-- `[404] https://homepages.inf.ed.ac.uk/wadler/papers/free/theorems_for_free.pdf` — Not Found
-  - `docs\02_reference\02_cross_language_comparison.md`
-  - `knowledge\02_intermediate\03_generics.md`
-- `[404] https://doc.rust-lang.org/edition-guide/rust-2024/let-else.html` — Not Found
-  - `knowledge\02_intermediate\control_flow\02_let_chains.md`
+- `[404] https://doc.rust-lang.org/nomicon/interior-mutability.html` — Not Found
+  - `knowledge\02_intermediate\04_smart_pointers.md`
+- `[404] https://rust-lang.github.io/rfcs/2484-trait-based-exception-handling.html` — Not Found
+  - `knowledge\02_intermediate\07_type_conversions.md`
 - `[404] https://rust-lang.github.io/rfcs/2484-trait-from-tryfrom.html` — Not Found
   - `knowledge\02_intermediate\07_type_conversions.md`
+- `[404] https://without.boats/blog/6-weeks-of-tokio/` — Not Found
+  - `knowledge\03_advanced\async\01_async_await.md`
+- `[404] https://doc.rust-lang.org/edition-guide/rust-2024/let-else.html` — Not Found
+  - `knowledge\02_intermediate\control_flow\02_let_chains.md`
+- `[404] https://without.boats/blog/implied-bounds-and-perfect-derive/` — Not Found
+  - `knowledge\02_intermediate\06_traits.md`
+  - `knowledge\03_advanced\06_type_driven_correctness.md`
+- `[404] https://doc.rust-lang.org/nightly/unstable-book/language-features/asm.html` — Not Found
+  - `knowledge\03_advanced\03_inline_asm.md`
+- `[404] https://without.boats/blog/async-closures/` — Not Found
+  - `knowledge\03_advanced\async\02_async_closure.md`
+- `[ERR] https://yaah.dev/send-sync-magic` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `knowledge\03_advanced\concurrency\03_threads.md`
+- `[404] https://blog.rust-lang.org/2026/01/15/Rust-1.85.0/` — Not Found
+  - `knowledge\03_advanced\async\01_async_closures_2024.md`
 - `[404] https://smallcultfollowing.com/babysteps/blog/2019/10/14/awaiting-sustainability/` — Not Found
   - `knowledge\03_advanced\async\01_async_await.md`
   - `knowledge\03_advanced\async\02_async_closure.md`
-- `[404] https://rust-lang.github.io/rfcs/3668-async-fn.html` — Not Found
-  - `knowledge\03_advanced\async\01_async_closures_2024.md`
-- `[404] https://doc.rust-lang.org/nightly/unstable-book/language-features/asm.html` — Not Found
-  - `knowledge\03_advanced\03_inline_asm.md`
-- `[ERR] https://www.eprosima.com/index.php/products-all/eprosima-fast-dds` — TimeoutError('The read operation timed out')
-  - `concept\06_ecosystem\52_robotics.md`
-- `[404] https://rust-lang.github.io/rfcs/3550-rangeful.html` — Not Found
-  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
-  - `knowledge\02_intermediate\type_system\01_core_range.md`
-- `[404] https://rust-lang.github.io/rfcs/2484-trait-based-exception-handling.html` — Not Found
-  - `knowledge\02_intermediate\07_type_conversions.md`
-- `[404] https://tokio.rs/tokio/topics/shared-state` — Not Found
-  - `knowledge\03_advanced\concurrency\02_synchronization.md`
-- `[404] https://rust-lang.github.io/rfcs/2788-lazy-cell.html` — Not Found
-  - `knowledge\03_advanced\04_lazy_initialization.md`
-- `[404] https://tmandry.gitlab.io/blog/posts/2021-12-21-why-async-rust/` — Not Found
-  - `knowledge\03_advanced\async\01_async_await.md`
-- `[404] https://rust-lang.github.io/rfcs/1228-specialization.html` — Not Found
-  - `knowledge\03_advanced\06_type_driven_correctness.md`
 - `[404] https://smallcultfollowing.com/babysteps/blog/2013/06/11/the-problem-with-safe-concurrency/` — Not Found
   - `knowledge\03_advanced\concurrency\03_threads.md`
-- `[ERR] https://www.st.com/resource/en/reference_manual/rm0090-stm32f405415-stm32f407417-stm32f427437-and-stm32f429439-advanced-armbased-32bit-mcus-stmicroelectronics.pdf` — TimeoutError('The read operation timed out')
-  - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[ERR] https://www.darpa.mil/research/programs/translating-all-c-to-rust` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
-  - `concept\06_ecosystem\56_c_to_rust_translation.md`
-- `[404] https://without.boats/blog/async-closures/` — Not Found
-  - `knowledge\03_advanced\async\02_async_closure.md`
+- `[ERR] https://rrsa.rs/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `knowledge\04_expert\02_unsafe_audit.md`
 - `[404] https://tmandry.gitlab.io/blog/posts/2023-03-02-why-async-fn/` — Not Found
   - `knowledge\03_advanced\async\02_async_closure.md`
-- `[404] https://blog.rust-lang.org/2026/01/15/Rust-1.85.0/` — Not Found
-  - `knowledge\03_advanced\async\01_async_closures_2024.md`
 - `[404] https://iris-project.org/tutorial.html` — Not Found
   - `knowledge\04_expert\academic\01_coq_formalization_guide.md`
-- `[ERR] https://www.intel.com/content/www/us/en/developer/articles/technical/introduction-to-avx512-programming.html` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)
-  - `docs\archive\2026_05_historical_docs\RUST_194_195_FEATURES_DEEP_DIVE.md`
-  - `knowledge\04_expert\safety_critical\01_mind_maps\03_rust_194_195_features_deep_dive.md`
+- `[404] https://homepages.inf.ed.ac.uk/wadler/papers/free/theorems_for_free.pdf` — Not Found
+  - `docs\02_reference\02_cross_language_comparison.md`
+  - `knowledge\02_intermediate\03_generics.md`
+- `[404] https://tmandry.gitlab.io/blog/posts/2021-12-21-why-async-rust/` — Not Found
+  - `knowledge\03_advanced\async\01_async_await.md`
 - `[ERR] https://rust-safety-critical.com/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
   - `knowledge\04_expert\safety_critical\01_completion_report_100_percent.md`
   - `knowledge\04_expert\safety_critical\01_mind_maps\01_academic_research_landscape.md`
@@ -9084,52 +9053,63 @@
   - `knowledge\04_expert\safety_critical\10_standards\02_iec_61508_rust_implementation_guide.md`
   - `knowledge\04_expert\safety_critical\10_standards\03_iso_26262_rust_implementation_guide.md`
   - `knowledge\04_expert\safety_critical\10_standards\05_regulatory_landscape_and_approvals.md`
+- `[404] https://rustc-dev-guide.rust-lang.org/traits.html` — Not Found
+  - `knowledge\04_expert\academic\05_type_system_foundations_guide.md`
+- `[ERR] https://www.intel.com/content/www/us/en/developer/articles/technical/introduction-to-avx512-programming.html` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)
+  - `docs\archive\2026_05_historical_docs\RUST_194_195_FEATURES_DEEP_DIVE.md`
+  - `knowledge\04_expert\safety_critical\01_mind_maps\03_rust_194_195_features_deep_dive.md`
+- `[ERR] https://rust-safety-critical.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `knowledge\04_expert\safety_critical\README.md`
 - `[404] https://blog.m-ou.se/unsafe-rust/` — Not Found
   - `knowledge\03_advanced\unsafe\04_unsafe_rust.md`
-- `[ERR] https://yaah.dev/send-sync-magic` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
-  - `knowledge\03_advanced\concurrency\03_threads.md`
-- `[ERR] https://rrsa.rs/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
-  - `knowledge\04_expert\02_unsafe_audit.md`
 - `[404] https://doc.rust-lang.org/nomicon/memory.html` — Not Found
   - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\06-memory-ordering-deep.md`
   - `docs\rust-ownership-decidability\case-studies\alloc-cortex-m-formal-analysis.md`
   - `docs\rust-ownership-decidability\formal-foundations\semantics\memory-model-semantics.md`
   - `knowledge\04_expert\safety_critical\02_matrices\03_rust_ownership_memory_model_matrix.md`
-- `[ERR] https://www.st.com/resource/en/application_note/an4031-using-the-stm32f2-stm32f4-and-stm32f7-series-dma-controllers-stmicroelectronics.pdf` — TimeoutError('The read operation timed out')
-  - `concept\06_ecosystem\53_embedded_graphics.md`
-- `[404] https://rust-lang.github.io/rfcs/1892-maybe-uninit.html` — Not Found
-  - `knowledge\03_advanced\unsafe\03_maybe_uninit.md`
-- `[404] https://rustc-dev-guide.rust-lang.org/traits.html` — Not Found
-  - `knowledge\04_expert\academic\05_type_system_foundations_guide.md`
 - `[404] https://doc.rust-lang.org/nomicon/uninit.html` — Not Found
   - `knowledge\03_advanced\unsafe\03_maybe_uninit.md`
-- `[ERR] https://www.autosar.org/` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)
-  - `knowledge\04_expert\safety_critical\07_case_studies\03_case_study_03_automotive_ecus.md`
-- `[404] https://www.rust-lang.org/governance/wgs/wg-security-response` — Not Found
-  - `knowledge\04_expert\safety_critical\09_reference\15_security_audit_guide.md`
-  - `knowledge\04_expert\safety_critical\09_reference\16_supply_chain_security_guide.md`
-- `[404] https://rust-lang.github.io/rfcs/2121-cargo-workspace.html` — Not Found
-  - `knowledge\06_ecosystem\01_cargo_basics.md`
-- `[ERR] https://rust-safety-critical.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
-  - `knowledge\04_expert\safety_critical\README.md`
+- `[ERR] https://www.tuvsud.com/` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1016)
+  - `knowledge\04_expert\safety_critical\07_case_studies\01_case_study_01_ferrocene_certification.md`
 - `[404] https://www.fda.gov/` — Not Found
   - `knowledge\04_expert\safety_critical\07_case_studies\04_case_study_04_medical_devices.md`
   - `knowledge\04_expert\safety_critical\10_standards\05_regulatory_landscape_and_approvals.md`
-- `[ERR] https://www.tuvsud.com/` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1016)
-  - `knowledge\04_expert\safety_critical\07_case_studies\01_case_study_01_ferrocene_certification.md`
+- `[ERR] https://opensource.axo.dev/cargo-dist/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `knowledge\04_expert\safety_critical\09_reference\05_deployment_and_maintenance_guide.md`
+  - `knowledge\06_ecosystem\deployment\01_kubernetes_deployment_guide.md`
+- `[ERR] https://www.autosar.org/` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)
+  - `knowledge\04_expert\safety_critical\07_case_studies\03_case_study_03_automotive_ecus.md`
+- `[ERR] https://www.autosar.org` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)
+  - `knowledge\04_expert\safety_critical\07_case_studies\03_case_study_03_automotive_ecus.md`
+- `[404] https://rust-lang.github.io/rfcs/2121-private-dependency.html` — Not Found
+  - `knowledge\06_ecosystem\01_cargo_basics.md`
+- `[404] https://www.rust-lang.org/governance/wgs/wg-security-response` — Not Found
+  - `knowledge\04_expert\safety_critical\09_reference\15_security_audit_guide.md`
+  - `knowledge\04_expert\safety_critical\09_reference\16_supply_chain_security_guide.md`
+- `[404] https://rust-lang.github.io/rfcs/XXXX-edition-2024.html` — Not Found
+  - `knowledge\06_ecosystem\02_edition_2024.md`
+- `[ERR] https://qiskit.org/textbook/ch-applications/vqe-molecules.html` — _ssl.c:999: The handshake operation timed out
+  - `concept\06_ecosystem\51_quantum_computing_rust.md`
+- `[404] https://rust-lang.github.io/rfcs/2121-cargo-workspace.html` — Not Found
+  - `knowledge\06_ecosystem\01_cargo_basics.md`
 - `[ERR] https://www.areweadyet.org/topics/database/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
   - `docs\research_notes\software_design_theory\07_crate_architectures\09_sqlx_architecture.md`
   - `docs\research_notes\software_design_theory\07_crate_architectures\15_sqlx_advanced_architecture.md`
   - `docs\rust-ownership-decidability\case-studies\sqlx-formal-analysis.md`
   - `knowledge\06_ecosystem\databases\01_sea_orm_deep_dive.md`
   - `knowledge\06_ecosystem\databases\02_sqlx_deep_dive.md`
-- `[404] https://render.com/docs/rust` — Not Found
-  - `knowledge\06_ecosystem\deployment\README.md`
-- `[ERR] https://opensource.axo.dev/cargo-dist/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
-  - `knowledge\04_expert\safety_critical\09_reference\05_deployment_and_maintenance_guide.md`
-  - `knowledge\06_ecosystem\deployment\01_kubernetes_deployment_guide.md`
-- `[ERR] https://www.st.com/` — TimeoutError('The read operation timed out')
-  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[404] https://en.wikipedia.org/wiki/Program_Optimization` — Not Found
+  - `docs\01_cargo_build_optimization.md`
+  - `docs\05_guides\05_performance_tuning_guide.md`
+  - `docs\rust-formal-engineering-system\02_practical_applications\performance\README.md`
+  - `docs\rust-formal-engineering-system\02_programming_paradigms\11_benchmark_minimal_guide.md`
+  - `docs\rust-ownership-decidability\comprehensive-analysis\extensions\performance-optimization.md`
+- `[404] https://doc.rust-lang.org/nightly/unstable-book/language-features/const-eval.html` — Not Found
+  - `knowledge\06_ecosystem\emerging\02_generic_const_exprs.md`
+- `[404] https://doc.rust-lang.org/std/assert_matches/macro.assert_matches.html` — Not Found
+  - `knowledge\06_ecosystem\emerging\05_rust_1_96.md`
+- `[404] https://rust-lang.github.io/rfcs/3560-static-mut-references.html` — Not Found
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
 - `[404] https://en.wikipedia.org/wiki/Memory_Safety` — Not Found
   - `docs\00_meta\00_annual_review_template.md`
   - `docs\00_meta\00_improvement_plan_execution_complete.md`
@@ -9716,20 +9696,15 @@
   - `docs\rust-ownership-decidability\visualizations\ownership-comprehensive-mindmap.md`
   - `docs\rust-ownership-decidability\visualizations\ownership-mindmap.md`
   - `docs\rust-ownership-decidability\visualizations\scenario-tree.md`
-- `[404] https://en.wikipedia.org/wiki/Program_Optimization` — Not Found
-  - `docs\01_cargo_build_optimization.md`
-  - `docs\05_guides\05_performance_tuning_guide.md`
-  - `docs\rust-formal-engineering-system\02_practical_applications\performance\README.md`
-  - `docs\rust-formal-engineering-system\02_programming_paradigms\11_benchmark_minimal_guide.md`
-  - `docs\rust-ownership-decidability\comprehensive-analysis\extensions\performance-optimization.md`
-- `[404] https://doc.rust-lang.org/std/assert_matches/macro.assert_matches.html` — Not Found
-  - `knowledge\06_ecosystem\emerging\05_rust_1_96.md`
+- `[404] https://render.com/docs/rust` — Not Found
+  - `knowledge\06_ecosystem\deployment\README.md`
+- `[ERR] https://www.st.com/resource/en/reference_manual/rm0090-stm32f405415-stm32f407417-stm32f427437-and-stm32f429439-advanced-armbased-32bit-mcus-stmicroelectronics.pdf` — TimeoutError('The read operation timed out')
+  - `concept\06_ecosystem\53_embedded_graphics.md`
 - `[404] https://en.wikipedia.org/wiki/Language_Evolution` — Not Found
   - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
-- `[ERR] https://www.autosar.org` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)
-  - `knowledge\04_expert\safety_critical\07_case_studies\03_case_study_03_automotive_ecus.md`
-- `[404] https://rust-lang.github.io/rfcs/2121-private-dependency.html` — Not Found
-  - `knowledge\06_ecosystem\01_cargo_basics.md`
+- `[403] https://www.phoronix.com/news/Rust-1.94-Released` — Forbidden
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
 - `[404] https://en.wikipedia.org/wiki/Undefined_Behavior` — Not Found
   - `docs\03_guides\03_miri_guide.md`
   - `docs\05_guides\05_miri_practical_guide.md`
@@ -9747,37 +9722,48 @@
   - `docs\rust-ownership-decidability\17-unsafe-rust\11-impl-vec.md`
   - `docs\rust-ownership-decidability\17-unsafe-rust\README.md`
   - `docs\rust-ownership-decidability\COMPREHENSIVE_COUNTEREXAMPLES_HANDBOOK.md`
-- `[403] https://www.phoronix.com/news/Rust-1.94-Released` — Forbidden
-  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
-  - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
-- `[404] https://rust-lang.github.io/rfcs/XXXX-edition-2024.html` — Not Found
-  - `knowledge\06_ecosystem\02_edition_2024.md`
-- `[404] https://rust-lang.github.io/rfcs/3560-static-mut-references.html` — Not Found
-  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
-- `[404] https://en.wikipedia.org/wiki/Programming_Language_Features` — Not Found
-  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
-- `[403] https://hothardware.com/news/amd-confirms-zen6-avx512-fp16` — Forbidden
-  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
-  - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
-- `[404] https://rust-lang.github.io/rfcs/3637-if-let-guards.html` — Not Found
-  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
-- `[404] https://doc.rust-lang.org/nightly/unstable-book/language-features/const-eval.html` — Not Found
-  - `knowledge\06_ecosystem\emerging\02_generic_const_exprs.md`
-- `[404] https://en.wikipedia.org/wiki/Learning_Path` — Not Found
-  - `docs\01_learning\01_cross_module_learning_roadmap_2025_10_25.md`
-- `[404] https://www.microsoft.com/en-us/security/blog/2025/01/28/rust-in-the-windows-kernel/` — Not Found
-  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
-  - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
-- `[404] https://en.wikipedia.org/wiki/Curriculum_Design` — Not Found
-  - `docs\01_learning\01_cross_module_learning_roadmap_2025_10_25.md`
 - `[404] https://aws.amazon.com/blogs/opensource/why-aws-loves-rust/` — 
   - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
   - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
+- `[ERR] https://www.st.com/resource/en/application_note/an4031-using-the-stm32f2-stm32f4-and-stm32f7-series-dma-controllers-stmicroelectronics.pdf` — TimeoutError('The read operation timed out')
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[ERR] https://www.darpa.mil/research/programs/translating-all-c-to-rust` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `concept\06_ecosystem\56_c_to_rust_translation.md`
+- `[404] https://en.wikipedia.org/wiki/Programming_Language_Features` — Not Found
+  - `docs\04_rust_language_feature_comprehensive_inventory_2026.md`
 - `[404] https://devclass.com/development/2025/12/15/rust-boosted-by-permanent-adoption-for-linux-kernel-code/` — Not Found
   - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
   - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
+- `[403] https://nostarch.com/rust-programming-language-2nd-edition` — Forbidden
+  - `docs\TRPL_3RD_ED_DIFF.md`
+- `[404] https://forge.rust-lang.org/js/index.html` — Not Found
+  - `docs\00_meta\analysis\00_rust_2026_project_goals_monthly_tracking.md`
+- `[404] https://www.microsoft.com/en-us/security/blog/2025/01/28/rust-in-the-windows-kernel/` — Not Found
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
+- `[403] https://hothardware.com/news/amd-confirms-zen6-avx512-fp16` — Forbidden
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
+- `[404] https://en.wikipedia.org/wiki/Spiral_Curriculum` — Not Found
+  - `docs\01_learning\01_learning_path_guide_2025_10_24.md`
+- `[404] https://en.wikipedia.org/wiki/Compiler_Cache` — Not Found
+  - `docs\10_sccache_setup.md`
 - `[404] https://devblogs.microsoft.com/rust/` — Not Found
   - `docs\00_meta\00_quarterly_sync_checklist.md`
+- `[404] https://www.coursera.org/learn/programming-in-rust` — Not Found
+  - `docs\01_learning\01_learning_path_planning.md`
+  - `docs\05_guides\BEST_PRACTICES.md`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\README.md`
+- `[404] https://www.ralfj.de/blog/2021/04/14/memory-safety.html` — Not Found
+  - `docs\02_reference\02_cross_language_comparison.md`
+- `[404] https://en.wikipedia.org/wiki/Zero-overhead_principle` — Not Found
+  - `docs\01_core\README.md`
+- `[404] https://blog.rust-lang.org/2024/12/19/Rust-1.92.0.html` — Not Found
+  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
+- `[404] https://en.wikipedia.org/wiki/Future/Promise` — Not Found
+  - `docs\02_reference\quick_reference\02_async_patterns.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-05-async-patterns-deep.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\03-async-semantics.md`
 - `[404] https://en.wikipedia.org/wiki/Compiler_Construction` — Not Found
   - `docs\02_reference\02_error_code_mapping.md`
   - `docs\04_research\04_endangered_by_language_saved_by_compiler_popl_2026.md`
@@ -9792,98 +9778,60 @@
   - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\03_build_tools\README.md`
   - `docs\rust-formal-engineering-system\06_toolchain_ecosystem\README.md`
   - `docs\rust-ownership-decidability\THEOREM_TO_COMPILER_BRIDGE.md`
-- `[404] https://www.linuxfoundation.org/certification/linux-foundation-certified-rust-programmer` — Not Found
-  - `docs\01_learning\01_lfrs_certification_mapping.md`
-- `[404] https://forge.rust-lang.org/js/index.html` — Not Found
-  - `docs\00_meta\analysis\00_rust_2026_project_goals_monthly_tracking.md`
-- `[403] https://nostarch.com/rust-programming-language-2nd-edition` — Forbidden
-  - `docs\TRPL_3RD_ED_DIFF.md`
-- `[404] https://en.wikipedia.org/wiki/Zero-overhead_principle` — Not Found
-  - `docs\01_core\README.md`
-- `[404] https://en.wikipedia.org/wiki/Compiler_Cache` — Not Found
-  - `docs\10_sccache_setup.md`
-- `[404] https://en.wikipedia.org/wiki/Future/Promise` — Not Found
-  - `docs\02_reference\quick_reference\02_async_patterns.md`
-  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-05-async-patterns-deep.md`
-  - `docs\rust-ownership-decidability\16-program-semantics\03-async-semantics.md`
-- `[404] https://en.wikipedia.org/wiki/Spiral_Curriculum` — Not Found
-  - `docs\01_learning\01_learning_path_guide_2025_10_24.md`
-- `[404] https://rust-lang.github.io/rfcs/2504-try-trait.html` — Not Found
-  - `docs\02_reference\quick_reference\02_error_handling_cheatsheet.md`
-  - `docs\rust-ownership-decidability\ERROR_DIAGNOSTICS_GUIDE.md`
-  - `docs\rust-ownership-decidability\case-studies\anyhow-thiserror-formal-analysis.md`
-  - `docs\rust-ownership-decidability\case-studies\thiserror-anyhow-formal-analysis.md`
 - `[404] https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html` — Not Found
   - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
   - `docs\06_toolchain\06_22_rust_1_96_features.md`
+- `[404] https://doc.rust-lang.org/cargo/book/` — Not Found
+  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
+- `[404] https://doc.rust-lang.org/reference/items/collections.html` — Not Found
+  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
 - `[404] https://en.wikipedia.org/wiki/Exception_Handling` — Not Found
   - `docs\02_reference\quick_reference\02_error_handling_cheatsheet.md`
   - `docs\rust-ownership-decidability\ERROR_DIAGNOSTICS_GUIDE.md`
   - `docs\rust-ownership-decidability\case-studies\anyhow-thiserror-formal-analysis.md`
   - `docs\rust-ownership-decidability\case-studies\thiserror-anyhow-formal-analysis.md`
-- `[404] https://doc.rust-lang.org/cargo/book/` — Not Found
-  - `docs\02_reference\quick_reference\02_cargo_cheatsheet.md`
-- `[404] https://www.ralfj.de/blog/2021/04/14/memory-safety.html` — Not Found
-  - `docs\02_reference\02_cross_language_comparison.md`
-- `[404] https://doc.rust-lang.org/reference/items/collections.html` — Not Found
-  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
-- `[404] https://doc.rust-lang.org/book/ch13-00-functional-features-of-rust.html` — Not Found
-  - `docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md`
-  - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\21-structured-loop.md`
-  - `docs\rust-ownership-decidability\case-studies\std-iterator-formal-analysis.md`
-- `[404] https://www.coursera.org/learn/programming-in-rust` — Not Found
-  - `docs\01_learning\01_learning_path_planning.md`
-  - `docs\05_guides\BEST_PRACTICES.md`
-  - `docs\archive\c_class_audit_2026_06_08\01_learning\README.md`
-- `[404] https://en.wikipedia.org/wiki/Type_Inference` — Not Found
-  - `docs\02_reference\quick_reference\02_type_system.md`
-  - `docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes-deep.md`
-  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\lifetimes-mastery.md`
-- `[404] https://blog.rust-lang.org/2026/01/xx/Rust-1.93.0/` — Not Found
-  - `docs\02_reference\quick_reference\02_rust_190_to_193_features_cheatsheet.md`
-- `[404] https://blog.rust-lang.org/2024/12/19/Rust-1.92.0.html` — Not Found
-  - `docs\02_reference\02_standard_library_comprehensive_analysis_2025_12_25.md`
-- `[404] https://blog.rust-lang.org/2026/05/14/Rust-1.95.0.html` — Not Found
-  - `docs\03_guides\03_let_chains_guide.md`
-- `[404] https://doc.rust-lang.org/book/ch16-00-fearless-concurrency.html` — Not Found
-  - `docs\02_reference\quick_reference\02_async_patterns.md`
-  - `docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md`
-- `[404] https://embassy.dev/book/dev/runtime.html` — Not Found
-  - `docs\03_guides\03_embassy_deep_dive.md`
-- `[404] https://rustcc.cn/` — Not Found
-  - `docs\01_learning\01_learning_path_planning.md`
-  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
-  - `docs\rust-ownership-decidability\07-references\README.md`
-- `[403] https://en.wikipedia.org/wiki/io_uring` — Too Many Reqs (1862a4b)
-  - `docs\03_guides\03_io_uring_guide.md`
-- `[404] https://blog.cloudflare.com/fuzzing-rust/` — Not Found
-  - `docs\03_guides\03_fuzzing_guide.md`
-- `[ERR] https://specs.libp2p.io/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
-  - `docs\03_guides\03_libp2p_guide.md`
-- `[404] https://en.wikipedia.org/wiki/Software_Component` — Not Found
-  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
+- `[404] https://en.wikipedia.org/wiki/Learning_Path` — Not Found
+  - `docs\01_learning\01_cross_module_learning_roadmap_2025_10_25.md`
 - `[404] https://en.wikipedia.org/wiki/Hindley_Milner_Type_System` — Not Found
   - `docs\02_reference\quick_reference\02_type_system.md`
   - `docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes-deep.md`
-- `[404] https://smallcultfollowing.com/babysteps/blog/2019/01/17/polonius/` — Not Found
-  - `docs\04_research\04_polonius_next_gen_borrow_checker.md`
-- `[404] https://docs.codecov.com/docs/rust` — Not Found
-  - `docs\03_guides\03_test_coverage.md`
-- `[404] https://blog.rust-lang.org/2017/06/27/Rust-1.18.html` — Not Found
-  - `docs\04_research\04_next_generation_trait_solver.md`
 - `[404] https://doc.rust-lang.org/nightly/std/ops/trait.Iterator.html` — Not Found
   - `docs\02_reference\quick_reference\02_rust_198_nightly_preview_cheatsheet.md`
+- `[404] https://en.wikipedia.org/wiki/Curriculum_Design` — Not Found
+  - `docs\01_learning\01_cross_module_learning_roadmap_2025_10_25.md`
+- `[404] https://foundation.rust-lang.org/security/` — Not Found
+  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
+  - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
+- `[ERR] https://www.st.com/` — TimeoutError('The read operation timed out')
+  - `concept\06_ecosystem\53_embedded_graphics.md`
+- `[404] https://blog.rust-lang.org/2026/05/14/Rust-1.95.0.html` — Not Found
+  - `docs\03_guides\03_let_chains_guide.md`
+- `[404] https://blog.cloudflare.com/fuzzing-rust/` — Not Found
+  - `docs\03_guides\03_fuzzing_guide.md`
+- `[404] https://embassy.dev/book/dev/runtime.html` — Not Found
+  - `docs\03_guides\03_embassy_deep_dive.md`
+- `[404] https://www.linuxfoundation.org/certification/linux-foundation-certified-rust-programmer` — Not Found
+  - `docs\01_learning\01_lfrs_certification_mapping.md`
+- `[404] https://docs.codecov.com/docs/rust` — Not Found
+  - `docs\03_guides\03_test_coverage.md`
 - `[404] https://rtic.rs/book/` — Not Found
   - `docs\03_guides\03_embedded_rust_guide.md`
   - `docs\rust-ownership-decidability\case-studies\embedded-graphics-formal-analysis.md`
   - `docs\rust-ownership-decidability\case-studies\embedded-storage-formal-analysis.md`
   - `docs\rust-ownership-decidability\case-studies\embedded\EMBEDDED_CRATES_INDEX.md`
   - `docs\rust-ownership-decidability\comprehensive-analysis\case-studies\embassy-embedded-analysis.md`
-- `[404] https://embassy.dev/book/dev/time.html` — Not Found
-  - `docs\03_guides\03_embassy_deep_dive.md`
-- `[404] https://foundation.rust-lang.org/security/` — Not Found
-  - `docs\10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
-  - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
+- `[ERR] https://specs.libp2p.io/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `docs\03_guides\03_libp2p_guide.md`
+- `[404] https://blog.rust-lang.org/2017/06/27/Rust-1.18.html` — Not Found
+  - `docs\04_research\04_next_generation_trait_solver.md`
+- `[404] https://en.wikipedia.org/wiki/Software_Versioning` — Not Found
+  - `docs\03_guides\03_semver_checks.md`
+- `[404] https://en.wikipedia.org/wiki/Software_Component` — Not Found
+  - `docs\02_reference\quick_reference\02_modules_cheatsheet.md`
+- `[404] https://rustcc.cn/` — Not Found
+  - `docs\01_learning\01_learning_path_planning.md`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+  - `docs\rust-ownership-decidability\07-references\README.md`
 - `[404] https://rust-lang.github.io/rfcs/2616-http.html` — Not Found
   - `docs\03_practice\03_project_11_web_server.md`
   - `docs\content\scenarios\10_web_application_scenarios.md`
@@ -9892,228 +9840,232 @@
   - `docs\rust-ownership-decidability\case-studies\actix-web-formal-analysis.md`
   - `docs\rust-ownership-decidability\case-studies\jsonwebtoken-formal-analysis.md`
   - `docs\rust-ownership-decidability\case-studies\web-server-architecture.md`
-- `[404] https://en.wikipedia.org/wiki/Software_Versioning` — Not Found
-  - `docs\03_guides\03_semver_checks.md`
 - `[404] https://rust-lang.github.io/rust-project-goals/2026/flagships.html` — Not Found
   - `docs\04_research\04_safety_critical_alignment_2026.md`
   - `docs\05_guides\05_safety_tags_guide.md`
   - `docs\06_toolchain\06_cargo_script_guide.md`
   - `docs\archive\c_class_audit_2026_06_08\07_future\07_rust_project_goals_2026_matrix.md`
-- `[404] https://docs.rust-embedded.org/faq.html` — Not Found
-  - `docs\05_guides\05_embedded_rust_guide.md`
-- `[404] https://doc.rust-lang.org/rustc/mir/index.html` — Not Found
-  - `docs\05_guides\05_kani_practical_guide.md`
+- `[404] https://doc.rust-lang.org/edition-guide/rust-2024/future-in-prelude.html` — Not Found
+  - `docs\03_guides\03_rust_2024_edition_future_in_prelude.md`
+- `[404] https://rust-lang.github.io/compiler-team/minutes/design-meeting/2021-03-17-next-generation-trait-solver.html` — Not Found
+  - `docs\04_research\04_next_generation_trait_solver.md`
 - `[404] https://en.wikipedia.org/wiki/Cooperative_Multitasking` — Not Found
   - `docs\05_guides\05_async_programming_usage_guide.md`
   - `docs\rust-ownership-decidability\16-program-semantics\03-async-semantics.md`
   - `docs\rust-ownership-decidability\case-studies\tokio-runtime-deep.md`
+- `[404] https://docs.rust-embedded.org/faq.html` — Not Found
+  - `docs\05_guides\05_embedded_rust_guide.md`
+- `[404] https://embassy.dev/book/dev/time.html` — Not Found
+  - `docs\03_guides\03_embassy_deep_dive.md`
+- `[404] https://en.wikipedia.org/wiki/Type_Inference` — Not Found
+  - `docs\02_reference\quick_reference\02_type_system.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\lifetimes-mastery.md`
+- `[404] https://doc.rust-lang.org/rustc/mir/index.html` — Not Found
+  - `docs\05_guides\05_kani_practical_guide.md`
+- `[404] https://smallcultfollowing.com/babysteps/blog/2019/01/17/polonius/` — Not Found
+  - `docs\04_research\04_polonius_next_gen_borrow_checker.md`
+- `[404] https://en.wikipedia.org/wiki/Software_Development_Best_Practices` — Not Found
+  - `docs\05_guides\BEST_PRACTICES.md`
+- `[403] https://en.wikipedia.org/wiki/io_uring` — Too Many Reqs (1862a4b)
+  - `docs\03_guides\03_io_uring_guide.md`
+- `[404] https://en.wikipedia.org/wiki/Code_Review` — Not Found
+  - `docs\05_guides\BEST_PRACTICES.md`
 - `[404] https://en.wikipedia.org/wiki/Software_Design_Pattern` — Not Found
   - `docs\05_guides\05_design_patterns_usage_guide.md`
   - `docs\rust-ownership-decidability\11-design-patterns\11-01-rust-design-patterns.md`
   - `docs\rust-ownership-decidability\16-program-semantics\01-design-patterns-semantics.md`
-- `[404] https://en.wikipedia.org/wiki/Software_Development_Best_Practices` — Not Found
-  - `docs\05_guides\BEST_PRACTICES.md`
-- `[404] https://rust-lang.github.io/compiler-team/minutes/design-meeting/2021-03-17-next-generation-trait-solver.html` — Not Found
-  - `docs\04_research\04_next_generation_trait_solver.md`
-- `[404] https://en.wikipedia.org/wiki/Code_Review` — Not Found
-  - `docs\05_guides\BEST_PRACTICES.md`
-- `[404] https://rust-lang.github.io/rfcs/3550-rangext.html` — Not Found
-  - `docs\06_toolchain\06_22_rust_1_96_features.md`
+- `[404] https://en.wikipedia.org/wiki/Branch_Table` — Not Found
+  - `docs\06_toolchain\06_jump_tables_guide.md`
+- `[404] https://doc.rust-lang.org/reference/attributes/documentation.html` — Not Found
+  - `docs\06_toolchain\06_11_rust_1_93_cargo_rustdoc_changes.md`
+- `[404] https://en.wikipedia.org/wiki/Compiler_Optimization` — Not Found
+  - `docs\06_toolchain\06_parallel_frontend.md`
+- `[404] https://ralfj.de/blog/2017/01/20/the-rustbelt-paper.html` — Not Found
+  - `docs\04_research\04_rust_formal_verification.md`
+- `[ERR] https://ocaml.org/manual/polyvariant.html` — TimeoutError('The read operation timed out')
+  - `concept\07_future\25_open_enums_preview.md`
+- `[404] https://doc.rust-lang.org/reference/items/coroutines.html` — Not Found
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+- `[404] https://doc.rust-lang.org/rust-by-example/std_misc/net.html` — Not Found
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+- `[ERR] https://saw.galois.com/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `docs\04_research\04_llm_c_to_rust_migration.md`
+- `[404] https://www.cs.utah.edu/pldi23/` — Not Found
+  - `docs\05_guides\05_verus_practical_guide.md`
+- `[404] https://blog.rust-lang.org/2026/04/16/Rust-1.95.0.html` — Not Found
+  - `docs\archive\c_class_audit_2026_06_08\00_meta\analysis\00_rust_global_alignment_symmetric_difference_analysis_2026_05.md`
+- `[404] https://www.edx.org/learn/rust/w3cx-programming-with-rust` — Not Found
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\README.md`
+- `[404] https://rust-lang.github.io/rust-project-goals/2026/stabilizations.html` — Not Found
+  - `docs\archive\c_class_audit_2026_06_08\07_future\07_rust_project_goals_2026_matrix.md`
+- `[404] https://without.boats/blog/the-soul-of-rust/` — Not Found
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+- `[404] https://rust-lang.github.io/rust-project-goals/2026/rfc.html` — Not Found
+  - `docs\archive\c_class_audit_2026_06_08\07_future\07_rust_project_goals_2026_matrix.md`
+- `[404] https://www.youtube.com/@RustLangTV` — Not Found
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+- `[404] https://blog.rust-lang.org/2025/10/30/Rust-1.91.0.html` — Not Found
+  - `docs\archive\reports\formal_system_reports\KNOWLEDGE_GRAPH_2025_11_11.md`
+- `[403] https://www.reddit.com/r/rust/` — Blocked
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+  - `docs\rust-ownership-decidability\07-references\README.md`
+- `[404] https://spec.ferrocene.dev/constants-and-statics.html` — Not Found
+  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
+- `[404] https://www.edx.org/learn/rust/the-linux-foundation-rust-for-developers` — Not Found
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\README.md`
+- `[404] https://www.edx.org/learn/rust/microsoft-introduction-to-rust-programming` — Not Found
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\README.md`
+- `[404] https://plv.mpi-sws.org/rustbis/stacked-borrows/` — Not Found
+  - `docs\archive\rust-ownership-chinese\README.md`
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+  - `docs\archive\rust-ownership-chinese\papers\rustbelt-deep-dive.md`
+  - `docs\archive\rust-ownership-chinese\papers\stacked-tree-borrows-analysis.md`
+- `[404] https://rustc-dev-guide.rust-lang.org/optimizations.html` — Not Found
+  - `docs\archive\rust-ownership-chinese\guides\zero-cost-abstraction-proof.md`
+- `[404] https://www.coursera.org/learn/type-theory` — Not Found
+  - `docs\content\academic\README.md`
+- `[404] https://fasterthanli.me/articles/thoughts-on-rust-in-2023` — Not Found
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+- `[404] https://foundation.rust-lang.org/security/](#26-the-update-framework-tuf-cratesio-tuf-integration-rust-foundation-2026-httpsfoundationrust-langorgsecurity)` — Not Found
+  - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
+- `[404] https://doc.rust-lang.org/rust-by-example/async.html` — Not Found
+  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
+- `[404] https://en.wikipedia.org/wiki/Ownership_Type` — Not Found
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\ownership-deep-dive.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\type-ownership-unified-theory.md`
+- `[403] https://cacm.acm.org/magazines/2021/4/251364-safe-systems-programming-in-rust/` — Forbidden
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+- `[404] https://www.cs.cmu.edu/~15-799/` — Not Found
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+- `[404] https://blog.rust-lang.org/2026/01/xx/Rust-1.93.0/` — Not Found
+  - `docs\02_reference\quick_reference\02_rust_190_to_193_features_cheatsheet.md`
+- `[404] https://iris-project.org/pdfs/2025-pldi-tree-borrows.pdf` — Not Found
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+- `[404] https://en.wikipedia.org/wiki/Ownership_Semantics` — Not Found
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+- `[404] https://doc.rust-lang.org/std/borrow/enum.Cow.html]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\01_serde_architecture.md`
+- `[404] https://en.wikipedia.org/wiki/Substructural_Type_System` — Not Found
+  - `docs\research_notes\formal_methods\10_ownership_model.md`
+  - `docs\rust-ownership-decidability\00-foundations\00-01-linear-logic-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\01-01-ownership-rules-deep.md`
+  - `docs\rust-ownership-decidability\formal-foundations\proofs\type-ownership-unified-theory.md`
+- `[404] https://diesel.rs/guides/getting-started]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\03_diesel_architecture.md`
+- `[404] https://cliffle.com/blog/on-rust/` — Not Found
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+- `[404] https://doc.rust-lang.org/nomicon/ffi.html]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\01_serde_architecture.md`
+- `[404] https://rkyv.org/performance.html]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\01_serde_architecture.md`
+- `[ERR] https://www.prusti.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
+- `[404] https://diesel.rs/guides/all-about-inserts.html]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\03_diesel_architecture.md`
+- `[404] https://diesel.rs/guides/schema-in-depth.html]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\03_diesel_architecture.md`
+- `[404] https://diesel.rs/guides/comparison-to-other-orms.html]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\03_diesel_architecture.md`
+- `[404] https://bevyengine.org/learn/advanced-concepts/component-storage/` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
 - `[404] https://en.wikipedia.org/wiki/Formal_Verification` — Not Found
   - `docs\05_guides\05_formal_verification_integration_guide.md`
   - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview-deep.md`
   - `docs\rust-ownership-decidability\03-verification-tools\03-06-verus-guide.md`
   - `docs\rust-ownership-decidability\10-research-frontiers\10-03-verification-advancements.md`
   - `docs\rust-ownership-decidability\COMPREHENSIVE_COUNTEREXAMPLES_HANDBOOK.md`
-- `[404] https://doc.rust-lang.org/edition-guide/rust-2024/future-in-prelude.html` — Not Found
-  - `docs\03_guides\03_rust_2024_edition_future_in_prelude.md`
-- `[404] https://doc.rust-lang.org/rust-by-example/async.html` — Not Found
-  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
-- `[404] https://spec.ferrocene.dev/constants-and-statics.html` — Not Found
-  - `docs\06_toolchain\06_07_rust_1_93_full_changelog.md`
-- `[404] https://www.cs.utah.edu/pldi23/` — Not Found
-  - `docs\05_guides\05_verus_practical_guide.md`
-- `[404] https://ralfj.de/blog/2017/01/20/the-rustbelt-paper.html` — Not Found
-  - `docs\04_research\04_rust_formal_verification.md`
-- `[ERR] https://saw.galois.com/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
-  - `docs\04_research\04_llm_c_to_rust_migration.md`
-- `[404] https://en.wikipedia.org/wiki/Branch_Table` — Not Found
-  - `docs\06_toolchain\06_jump_tables_guide.md`
-- `[404] https://en.wikipedia.org/wiki/Compiler_Optimization` — Not Found
-  - `docs\06_toolchain\06_parallel_frontend.md`
-- `[404] https://doc.rust-lang.org/reference/attributes/documentation.html` — Not Found
-  - `docs\06_toolchain\06_11_rust_1_93_cargo_rustdoc_changes.md`
-- `[404] https://doc.rust-lang.org/reference/items/coroutines.html` — Not Found
-  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
-- `[404] https://doc.rust-lang.org/rust-by-example/std_misc/net.html` — Not Found
-  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
-- `[404] https://www.edx.org/learn/rust/the-linux-foundation-rust-for-developers` — Not Found
-  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
-  - `docs\archive\c_class_audit_2026_06_08\01_learning\README.md`
-- `[404] https://www.edx.org/learn/rust/w3cx-programming-with-rust` — Not Found
-  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
-  - `docs\archive\c_class_audit_2026_06_08\01_learning\README.md`
-- `[404] https://blog.rust-lang.org/2026/04/16/Rust-1.95.0.html` — Not Found
-  - `docs\archive\c_class_audit_2026_06_08\00_meta\analysis\00_rust_global_alignment_symmetric_difference_analysis_2026_05.md`
-- `[404] https://without.boats/blog/the-soul-of-rust/` — Not Found
-  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
-- `[404] https://www.youtube.com/@RustLangTV` — Not Found
-  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
-- `[404] https://rust-lang.github.io/rust-project-goals/2026/stabilizations.html` — Not Found
-  - `docs\archive\c_class_audit_2026_06_08\07_future\07_rust_project_goals_2026_matrix.md`
-- `[404] https://rust-lang.github.io/rust-project-goals/2026/rfc.html` — Not Found
-  - `docs\archive\c_class_audit_2026_06_08\07_future\07_rust_project_goals_2026_matrix.md`
-- `[404] https://rustc-dev-guide.rust-lang.org/optimizations.html` — Not Found
-  - `docs\archive\rust-ownership-chinese\guides\zero-cost-abstraction-proof.md`
-- `[404] https://www.edx.org/learn/rust/microsoft-introduction-to-rust-programming` — Not Found
-  - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
-  - `docs\archive\c_class_audit_2026_06_08\01_learning\README.md`
-- `[404] https://fasterthanli.me/articles/thoughts-on-rust-in-2023` — Not Found
-  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
-- `[404] https://cliffle.com/blog/on-rust/` — Not Found
-  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
-- `[404] https://blog.rust-lang.org/2025/10/30/Rust-1.91.0.html` — Not Found
-  - `docs\archive\reports\formal_system_reports\KNOWLEDGE_GRAPH_2025_11_11.md`
-- `[404] https://en.wikipedia.org/wiki/Borrow_Checker` — Not Found
-  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
-  - `docs\rust-ownership-decidability\case-studies\ouroboros-formal-analysis.md`
-- `[404] https://en.wikipedia.org/wiki/Ownership_Semantics` — Not Found
-  - `docs\research_notes\formal_methods\10_ownership_model.md`
-- `[403] https://www.reddit.com/r/rust/` — Blocked
-  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
-  - `docs\rust-ownership-decidability\07-references\README.md`
-- `[403] https://cacm.acm.org/magazines/2021/4/251364-safe-systems-programming-in-rust/` — Forbidden
-  - `docs\research_notes\formal_methods\10_ownership_model.md`
-- `[404] https://www.coursera.org/learn/type-theory` — Not Found
-  - `docs\content\academic\README.md`
 - `[404] https://en.wikipedia.org/wiki/Alias_Analysis` — Not Found
   - `docs\research_notes\formal_methods\10_ownership_model.md`
   - `docs\rust-ownership-decidability\01-core-concepts\01-02-borrowing-system-deep.md`
   - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\borrowing-in-depth.md`
-- `[404] https://iris-project.org/pdfs/2025-pldi-tree-borrows.pdf` — Not Found
-  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
-- `[404] https://foundation.rust-lang.org/security/](#26-the-update-framework-tuf-cratesio-tuf-integration-rust-foundation-2026-httpsfoundationrust-langorgsecurity)` — Not Found
-  - `docs\archive\c_class_audit_2026_06_08\03_2026_international_authoritative_alignment_report.md`
-- `[404] https://tokio.rs/tokio/topics/backpressure` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\02_tower_architecture.md`
-  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
-- `[404] https://rkyv.org/performance.html]` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\01_serde_architecture.md`
-- `[404] https://diesel.rs/guides/schema-in-depth.html]` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\03_diesel_architecture.md`
-- `[404] https://doc.rust-lang.org/std/borrow/enum.Cow.html]` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\01_serde_architecture.md`
-- `[404] https://diesel.rs/guides/all-about-inserts.html]` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\03_diesel_architecture.md`
-- `[404] https://diesel.rs/guides/comparison-to-other-orms.html]` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\03_diesel_architecture.md`
-- `[404] https://rust-lang.github.io/rfcs/1238-non-lexical-lifetimes.html` — Not Found
-  - `docs\archive\rust-ownership-chinese\guides\drop-check-analysis.md`
-- `[404] https://en.wikipedia.org/wiki/Ownership_Type` — Not Found
-  - `docs\research_notes\formal_methods\10_ownership_model.md`
-  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\ownership-deep-dive.md`
-  - `docs\rust-ownership-decidability\formal-foundations\proofs\type-ownership-unified-theory.md`
-- `[404] https://en.wikipedia.org/wiki/Substructural_Type_System` — Not Found
-  - `docs\research_notes\formal_methods\10_ownership_model.md`
-  - `docs\rust-ownership-decidability\00-foundations\00-01-linear-logic-deep.md`
-  - `docs\rust-ownership-decidability\01-core-concepts\01-01-ownership-rules-deep.md`
-  - `docs\rust-ownership-decidability\formal-foundations\proofs\type-ownership-unified-theory.md`
-- `[404] https://tokio.rs/tokio/topics/runtime-internals` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
-  - `docs\research_notes\software_design_theory\07_crate_architectures\21_mio_architecture.md`
-- `[404] https://doc.rust-lang.org/book/ch10-00-generics.html]` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\01_serde_architecture.md`
-  - `docs\research_notes\software_design_theory\07_crate_architectures\03_diesel_architecture.md`
 - `[404] https://doc.rust-lang.org/book/ch19-06-macros.html]` — Not Found
   - `docs\research_notes\software_design_theory\07_crate_architectures\04_clap_architecture.md`
-- `[404] https://diesel.rs/guides/getting-started]` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\03_diesel_architecture.md`
-- `[404] https://plv.mpi-sws.org/rustbis/stacked-borrows/` — Not Found
-  - `docs\archive\rust-ownership-chinese\README.md`
-  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
-  - `docs\archive\rust-ownership-chinese\papers\rustbelt-deep-dive.md`
-  - `docs\archive\rust-ownership-chinese\papers\stacked-tree-borrows-analysis.md`
-- `[404] https://doc.rust-lang.org/nomicon/ffi.html]` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\01_serde_architecture.md`
-- `[404] https://www.cs.cmu.edu/~15-799/` — Not Found
-  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
-  - `docs\research_notes\formal_methods\10_ownership_model.md`
-- `[404] https://doc.rust-lang.org/book/ch17-03-std-futures.html` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
-- `[404] https://protobuf.dev/programming-guides/proto3/]` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\09_tonic_architecture.md`
-- `[ERR] https://www.prusti.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
-  - `docs\archive\rust-ownership-chinese\REFERENCES.md`
-- `[404] https://actix.rs/actix/` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\12_actix_web_architecture.md`
-- `[404] https://web.dev/performance-wasm/]` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\10_wasm_bindgen_architecture.md`
-- `[404] https://tokio.rs/tokio/topics/io` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
-- `[404] https://actix.rs/actix/actix/trait.Actor.html` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\12_actix_web_architecture.md`
-- `[404] https://bevyengine.org/learn/advanced-concepts/component-storage/` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
-- `[404] https://bevyengine.org/learn/quick-start/getting-started/systems/` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
-- `[404] https://ratatui.rs/concepts/testing/` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\20_ratatui_architecture.md`
 - `[ERR] https://prusti.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
   - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
-- `[404] https://blog.rust-lang.org/2026/01/22/Rust-1.93.0.html` — Not Found
+- `[404] https://grpc.io/docs/what-is-grpc/introduction/]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_tonic_architecture.md`
+- `[404] https://diesel.rs/guides/getting-started.html]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\15_sqlx_advanced_architecture.md`
+- `[404] https://ratatui.rs/concepts/testing/` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\20_ratatui_architecture.md`
+- `[404] https://web.dev/performance-wasm/]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_wasm_bindgen_architecture.md`
+- `[404] https://bevyengine.org/learn/quick-start/getting-started/systems/` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
+- `[404] https://grpc.io/docs/what-is-grpc/core-concepts/]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\09_tonic_architecture.md`
+- `[404] https://blog.rust-lang.org/2026/03/05/Rust-1.94.0.html` — Not Found
   - `docs\rust-ownership-decidability\RUST_194_VS_193_COMPARISON.md`
-- `[404] https://www.rust-lang.org/faq.html` — Not Found
-  - `docs\rust-ownership-decidability\FAQ_COMPREHENSIVE.md`
-- `[404] https://en.wikipedia.org/wiki/Mathematical_Theorem` — Not Found
-  - `docs\rust-ownership-decidability\THEOREM_INTUITIONS.md`
+- `[404] https://bevyengine.org/learn/quick-start/getting-started/states/` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
 - `[404] https://en.wikipedia.org/wiki/Operational_Semantics` — Not Found
   - `docs\rust-ownership-decidability\16-program-semantics\00-semantic-framework.md`
   - `docs\rust-ownership-decidability\UNIFIED_THEORETICAL_FRAMEWORK.md`
   - `docs\rust-ownership-decidability\formal-foundations\RUST_FORMAL_SEMANTICS_DEEP.md`
   - `docs\rust-ownership-decidability\formal-foundations\semantics\semantics-equivalence-proof.md`
-- `[404] https://blog.rust-lang.org/2026/03/05/Rust-1.94.0.html` — Not Found
-  - `docs\rust-ownership-decidability\RUST_194_VS_193_COMPARISON.md`
-- `[404] https://doc.rust-lang.org/book/ch17-01-futures-and-async.html` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\09_sqlx_architecture.md`
-  - `docs\research_notes\software_design_theory\07_crate_architectures\10_reqwest_architecture.md`
-- `[404] https://grpc.io/docs/what-is-grpc/core-concepts/]` — Not Found
+- `[404] https://protobuf.dev/programming-guides/proto3/]` — Not Found
   - `docs\research_notes\software_design_theory\07_crate_architectures\09_tonic_architecture.md`
-- `[404] https://grpc.io/docs/what-is-grpc/introduction/]` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\09_tonic_architecture.md`
+- `[404] https://actix.rs/actix/actix/trait.Actor.html` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\12_actix_web_architecture.md`
+- `[404] https://en.wikipedia.org/wiki/Programming_Language_Theory` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\00-semantic-framework.md`
+  - `docs\rust-ownership-decidability\UNIFIED_THEORETICAL_FRAMEWORK.md`
 - `[404] https://en.wikipedia.org/wiki/Substructural_Logic` — Not Found
   - `docs\rust-ownership-decidability\00-foundations\00-01-linear-logic-deep.md`
+- `[404] https://actix.rs/actix/` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\12_actix_web_architecture.md`
 - `[404] https://ratatui.rs/tutorials/hello-world/` — Not Found
   - `docs\research_notes\software_design_theory\07_crate_architectures\20_ratatui_architecture.md`
-- `[404] https://en.wikipedia.org/wiki/Variable_Scope` — Not Found
-  - `docs\research_notes\type_theory\10_lifetime_formalization.md`
-  - `docs\rust-formal-engineering-system\01_theoretical_foundations\06_lifetime_management\README.md`
+- `[404] https://en.wikipedia.org/wiki/Hoare_Logic` — Not Found
+  - `docs\rust-ownership-decidability\00-foundations\00-03-separation-logic-deep.md`
+- `[404] https://developer.mozilla.org/en-US/docs/WebAssembly]` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\10_wasm_bindgen_architecture.md`
+- `[404] https://en.wikipedia.org/wiki/Mathematical_Theorem` — Not Found
+  - `docs\rust-ownership-decidability\THEOREM_INTUITIONS.md`
+- `[404] https://en.wikipedia.org/wiki/Program_Verification` — Not Found
+  - `docs\rust-ownership-decidability\00-foundations\00-03-separation-logic-deep.md`
+- `[404] https://blog.rust-lang.org/2026/01/22/Rust-1.93.0.html` — Not Found
+  - `docs\rust-ownership-decidability\RUST_194_VS_193_COMPARISON.md`
+- `[404] https://en.wikipedia.org/wiki/Linear_Type` — Not Found
+  - `docs\rust-ownership-decidability\01-core-concepts\01-01-ownership-rules-deep.md`
+  - `docs\rust-ownership-decidability\10-research-frontiers\10-04-ownership-variations.md`
 - `[404] https://en.wikipedia.org/wiki/Covariance_and_Contravariance` — Not Found
   - `docs\research_notes\type_theory\10_variance_theory.md`
 - `[404] https://en.wikipedia.org/wiki/Formal_Grammar` — Not Found
   - `docs\rust-formal-engineering-system\03_compiler_theory\README.md`
-- `[404] https://en.wikipedia.org/wiki/Programming_Language_Theory` — Not Found
-  - `docs\rust-ownership-decidability\16-program-semantics\00-semantic-framework.md`
-  - `docs\rust-ownership-decidability\UNIFIED_THEORETICAL_FRAMEWORK.md`
-- `[404] https://en.wikipedia.org/wiki/Borrowing_(computer_science)` — Not Found
-  - `docs\rust-ownership-decidability\01-core-concepts\01-02-borrowing-system-deep.md`
-  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\borrowing-in-depth.md`
+- `[404] https://en.wikipedia.org/wiki/Variable_Scope` — Not Found
+  - `docs\research_notes\type_theory\10_lifetime_formalization.md`
+  - `docs\rust-formal-engineering-system\01_theoretical_foundations\06_lifetime_management\README.md`
+- `[404] https://supertech.csail.mit.edu/papers/steal.pdf` — Not Found
+  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
 - `[404] https://en.wikipedia.org/wiki/Mutual_Exclusion` — Not Found
   - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability-deep.md`
   - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\interior-mutability.md`
   - `docs\rust-ownership-decidability\12-concurrency-patterns\12-02-thread-safety-patterns.md`
-- `[404] https://en.wikipedia.org/wiki/Read_Copy_Update` — Not Found
+- `[404] https://en.wikipedia.org/wiki/Interior_Mutability` — Not Found
   - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability-deep.md`
   - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\interior-mutability.md`
+- `[404] https://www.rust-lang.org/faq.html` — Not Found
+  - `docs\rust-ownership-decidability\FAQ_COMPREHENSIVE.md`
+- `[404] https://en.wikipedia.org/wiki/Region_Based_Memory_Management` — Not Found
+  - `docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\lifetimes-mastery.md`
 - `[404] https://en.wikipedia.org/wiki/Proof_Theory` — Not Found
   - `docs\rust-ownership-decidability\00-foundations\00-01-linear-logic-deep.md`
-- `[404] https://diesel.rs/guides/getting-started.html]` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\15_sqlx_advanced_architecture.md`
-- `[404] https://bevyengine.org/learn/quick-start/getting-started/states/` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\05_bevy_architecture.md`
-- `[404] https://developer.mozilla.org/en-US/docs/WebAssembly]` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\10_wasm_bindgen_architecture.md`
-- `[404] https://en.wikipedia.org/wiki/Program_Verification` — Not Found
-  - `docs\rust-ownership-decidability\00-foundations\00-03-separation-logic-deep.md`
+- `[404] https://en.wikipedia.org/wiki/Abstract_Interpretation` — Not Found
+  - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview-deep.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-semantic-framework.md`
+- `[404] https://en.wikipedia.org/wiki/Concurrent_Computing` — Not Found
+  - `docs\rust-ownership-decidability\05-comparative-study\05-03-rust-vs-go.md`
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\00-semantic-framework.md`
+  - `docs\rust-ownership-decidability\16-program-semantics\02-concurrency-semantics.md`
 - `[404] https://en.wikipedia.org/wiki/Memory_Management` — Not Found
   - `docs\rust-ownership-decidability\05-comparative-study\05-04-rust-vs-java.md`
   - `docs\rust-ownership-decidability\16-program-semantics\os-abstractions\06-memory-ordering-deep.md`
@@ -10121,228 +10073,186 @@
   - `docs\rust-ownership-decidability\comprehensive-analysis\proofs\memory-safety-proof.md`
   - `docs\rust-ownership-decidability\formal-foundations\models\relaxed-memory-model.md`
   - `docs\rust-ownership-decidability\formal-foundations\proofs\memory-safety-proof.md`
-- `[404] https://en.wikipedia.org/wiki/Linear_Type` — Not Found
-  - `docs\rust-ownership-decidability\01-core-concepts\01-01-ownership-rules-deep.md`
-  - `docs\rust-ownership-decidability\10-research-frontiers\10-04-ownership-variations.md`
-- `[404] https://en.wikipedia.org/wiki/Interior_Pointer` — Not Found
-  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\interior-mutability.md`
 - `[404] https://en.wikipedia.org/wiki/Region_based_Memory_Management` — Not Found
   - `docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes-deep.md`
   - `docs\rust-ownership-decidability\10-research-frontiers\10-04-ownership-variations.md`
   - `docs\rust-ownership-decidability\formal-foundations\RUST_FORMAL_SEMANTICS_DEEP.md`
-- `[404] https://supertech.csail.mit.edu/papers/steal.pdf` — Not Found
-  - `docs\research_notes\software_design_theory\07_crate_architectures\06_tokio_architecture.md`
-- `[403] https://www.sciencedirect.com/science/article/pii/0304397587900454` — Forbidden
-  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
-- `[403] https://www.sciencedirect.com/science/article/pii/S0890540100922840` — Forbidden
-  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
-- `[404] https://en.wikipedia.org/wiki/Concurrent_Computing` — Not Found
-  - `docs\rust-ownership-decidability\05-comparative-study\05-03-rust-vs-go.md`
-  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
-  - `docs\rust-ownership-decidability\16-program-semantics\00-semantic-framework.md`
-  - `docs\rust-ownership-decidability\16-program-semantics\02-concurrency-semantics.md`
-- `[404] https://en.wikipedia.org/wiki/Hoare_Logic` — Not Found
-  - `docs\rust-ownership-decidability\00-foundations\00-03-separation-logic-deep.md`
-- `[ERR] https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.32.5374` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)
+- `[403] https://www.sciencedirect.com/science/article/pii/016800729290027H` — Forbidden
   - `docs\rust-ownership-decidability\07-references\academic-papers.md`
 - `[404] https://gcc.gnu.org/pipermail/gcc-patches/2025-March/619453.html` — Not Found
   - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\polonius-borrow-checker.md`
+- `[404] https://en.wikipedia.org/wiki/Borrowing_(computer_science)` — Not Found
+  - `docs\rust-ownership-decidability\01-core-concepts\01-02-borrowing-system-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\borrowing-in-depth.md`
+- `[ERR] https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.32.5374` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[404] https://en.wikipedia.org/wiki/Read_Copy_Update` — Not Found
+  - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability-deep.md`
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\interior-mutability.md`
 - `[403] https://www.sciencedirect.com/science/article/pii/S0890540185710426` — Forbidden
   - `docs\rust-ownership-decidability\07-references\academic-papers.md`
-- `[404] https://en.wikipedia.org/wiki/Abstract_Interpretation` — Not Found
-  - `docs\rust-ownership-decidability\03-verification-tools\03-01-verification-overview-deep.md`
-  - `docs\rust-ownership-decidability\16-program-semantics\00-semantic-framework.md`
-- `[403] https://www.sciencedirect.com/science/article/pii/016800729290075B` — Forbidden
+- `[404] https://blog.rust-lang.org/inside-rust/2023/02/15/polonius-update.html` — Not Found
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[404] https://en.wikipedia.org/wiki/Interior_Pointer` — Not Found
+  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\interior-mutability.md`
+- `[404] https://en.wikipedia.org/wiki/Atomic_Operation` — Not Found
+  - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability-deep.md`
+- `[500] https://www.cambridge.org/core/journals/journal-of-functional-programming/article/monadic-regions/E632A218E84E00B2D597B02ACCBD8B7B` — Internal Server Error
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[405] https://dspace.mit.edu/handle/1721.1/41162` — Not Allowed
   - `docs\rust-ownership-decidability\07-references\academic-papers.md`
 - `[403] https://www.sciencedirect.com/science/article/pii/0022000078900144` — Forbidden
   - `docs\rust-ownership-decidability\07-references\academic-papers.md`
 - `[404] https://web.cs.dal.ca/~whidden/DM82.pdf` — Not Found
   - `docs\rust-ownership-decidability\07-references\academic-papers.md`
-- `[403] https://www.sciencedirect.com/science/article/pii/016800729290027H` — Forbidden
-  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
-- `[429] https://dspace.mit.edu/handle/1721.1/41162` — Too Many Requests
-  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
-- `[404] https://en.wikipedia.org/wiki/Interior_Mutability` — Not Found
-  - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability-deep.md`
-  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\interior-mutability.md`
-- `[404] https://en.wikipedia.org/wiki/Region_Based_Memory_Management` — Not Found
-  - `docs\rust-ownership-decidability\01-core-concepts\01-03-lifetimes-deep.md`
-  - `docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\lifetimes-mastery.md`
 - `[403] https://www.sciencedirect.com/science/article/pii/0304397593900679` — Forbidden
   - `docs\rust-ownership-decidability\07-references\academic-papers.md`
-- `[403] https://www.sciencedirect.com/science/article/pii/S0890540102000125` — Forbidden
+- `[403] https://www.sciencedirect.com/science/article/pii/0304397587900454` — Forbidden
   - `docs\rust-ownership-decidability\07-references\academic-papers.md`
-- `[403] https://www.sciencedirect.com/science/article/pii/030439759290086S` — Forbidden
-  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
-- `[403] https://www.sciencedirect.com/science/article/pii/S0890540183710435` — Forbidden
-  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
-- `[500] https://www.cambridge.org/core/journals/journal-of-functional-programming/article/efficient-and-insightful-generalization/6A79A3C6E8D8B8E8E8B7E8E8E8E8E8E8` — Internal Server Error
-  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
-- `[403] https://www.sciencedirect.com/science/article/pii/S0304397599002029` — Forbidden
-  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
-- `[500] https://www.cambridge.org/core/journals/journal-of-functional-programming/article/monadic-regions/E632A218E84E00B2D597B02ACCBD8B7B` — Internal Server Error
-  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
-- `[404] https://ocaml.org/workshops/modular-implicits` — Not Found
-  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
-- `[404] https://en.wikipedia.org/wiki/Atomic_Operation` — Not Found
-  - `docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability-deep.md`
-- `[404] https://www.usenix.org/legacy/publications/library/proceedings/otec02/jim.html` — Not Found
+- `[ERR] https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.30.4599` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)
   - `docs\rust-ownership-decidability\07-references\academic-papers.md`
 - `[403] https://www.sciencedirect.com/science/article/pii/S0304397596003025` — Forbidden
   - `docs\rust-ownership-decidability\07-references\academic-papers.md`
-- `[403] https://www.packtpub.com/product/network-programming-with-rust/9781788624893` — Forbidden
-  - `docs\rust-ownership-decidability\07-references\books-resources.md`
-- `[403] https://www.packtpub.com/product/mastering-rust-second-edition/9781789346572` — Forbidden
+- `[403] https://www.sciencedirect.com/science/article/pii/S0890540100922840` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[403] https://www.sciencedirect.com/science/article/pii/016800729290075B` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[403] https://www.sciencedirect.com/science/article/pii/S0304397599002029` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[403] https://www.sciencedirect.com/science/article/pii/S1571066112000563` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[403] https://www.sciencedirect.com/science/article/pii/030439759290086S` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[404] https://ocaml.org/workshops/modular-implicits` — Not Found
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[404] https://www.usenix.org/legacy/publications/library/proceedings/otec02/jim.html` — Not Found
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[403] https://www.packtpub.com/product/rust-web-programming/9781800560813` — Forbidden
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
 - `[403] https://www.packtpub.com/product/rust-high-performance/9781788399487` — Forbidden
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
-- `[403] https://www.sciencedirect.com/science/article/pii/S1571066112000563` — Forbidden
-  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
-- `[404] https://blog.rust-lang.org/inside-rust/2023/02/15/polonius-update.html` — Not Found
+- `[403] https://www.sciencedirect.com/science/article/pii/S0890540102000125` — Forbidden
   - `docs\rust-ownership-decidability\07-references\academic-papers.md`
 - `[403] https://www.sciencedirect.com/bookseries/studies-in-logic-and-the-foundations-of-mathematics/vol/103` — Forbidden
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[500] https://www.cambridge.org/core/journals/journal-of-functional-programming/article/efficient-and-insightful-generalization/6A79A3C6E8D8B8E8E8B7E8E8E8E8E8E8` — Internal Server Error
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[500] https://www.cambridge.org/core/books/practical-foundations-for-programming-languages/99EA2D82D9D29667350B2BA24790B56B` — Internal Server Error
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
 - `[500] https://www.cambridge.org/core/books/lambdacalculus-and-combinators/3453DA0B29AF2541E60D6C0ECA5E3E08` — Internal Server Error
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
-- `[ERR] https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.30.4599` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)
-  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
 - `[403] https://www.sciencedirect.com/bookseries/studies-in-logic-and-the-foundations-of-mathematics/vol/149` — Forbidden
-  - `docs\rust-ownership-decidability\07-references\books-resources.md`
-- `[500] https://www.cambridge.org/core/books/proofs-and-types/EBBEFDA77BE67DAB17AEFD98BD69CC97` — Internal Server Error
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
 - `[404] https://www.cambridge.org/core/books/proof-theory-and-automated-reasoning/9780511815170` — Not Found
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
-- `[500] https://www.cambridge.org/core/books/practical-foundations-for-programming-languages/99EA2D82D9D29667350B2BA24790B56B` — Internal Server Error
+- `[403] https://nostarch.com/Rust` — Forbidden
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
-- `[404] https://www.cambridge.org/core/books/separation-logic/...` — Not Found
-  - `docs\rust-ownership-decidability\07-references\books-resources.md`
-- `[404] https://blog.adacore.com/deductive-verification-of-rust-programs` — Not Found
+- `[403] https://www.sciencedirect.com/science/article/pii/S0890540183710435` — Forbidden
   - `docs\rust-ownership-decidability\07-references\academic-papers.md`
-- `[404] https://www.cambridge.org/core/books/program-logics-for-certified-compilers/...` — Not Found
-  - `docs\rust-ownership-decidability\07-references\books-resources.md`
-- `[404] https://www.cambridge.org/core/books/logic-in-computer-science/...` — Not Found
-  - `docs\rust-ownership-decidability\07-references\books-resources.md`
-- `[404] https://www.cambridge.org/core/books/handbook-of-practical-logic-and-automated-reasoning/...` — Not Found
-  - `docs\rust-ownership-decidability\07-references\books-resources.md`
-- `[404] https://www.cambridge.org/core/books/purely-functional-data-structures/...` — Not Found
-  - `docs\rust-ownership-decidability\07-references\books-resources.md`
 - `[500] https://www.cambridge.org/core/books/basic-proof-theory/0F8A98667AAB0C3F359779168C075113` — Internal Server Error
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
-- `[403] https://math.jhu.edu/~eriehl/context/` — Forbidden
+- `[500] https://www.cambridge.org/core/books/proofs-and-types/EBBEFDA77BE67DAB17AEFD98BD69CC97` — Internal Server Error
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
-- `[500] https://www.cambridge.org/core/books/type-theory-and-formal-proof/0474C94D13653A6A3F8F6B12C4E5A12A` — Internal Server Error
+- `[403] https://www.packtpub.com/product/network-programming-with-rust/9781788624893` — Forbidden
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
 - `[500] https://www.cambridge.org/core/books/linear-logic/1E0E0F0F0F0F0F0F0F0F0F0F0F0F0F0F` — Internal Server Error
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
-- `[404] https://www.cambridge.org/core/books/modern-compiler-implementation-in-java/...` — Not Found
+- `[403] https://www.packtpub.com/product/mastering-rust-second-edition/9781789346572` — Forbidden
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
-- `[403] https://www.packtpub.com/product/rust-web-programming/9781800560813` — Forbidden
+- `[404] https://www.cambridge.org/core/books/logic-in-computer-science/...` — Not Found
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
-- `[404] https://www.cambridge.org/core/books/modern-compiler-implementation-in-ml/...` — Not Found
-  - `docs\rust-ownership-decidability\07-references\books-resources.md`
-- `[500] http://book.realworldhaskell.org/` — Internal Privoxy Error
+- `[404] https://en.wikipedia.org/wiki/Borrow_Checker` — Not Found
+  - `docs\research_notes\formal_methods\10_borrow_checker_proof.md`
+  - `docs\rust-ownership-decidability\case-studies\ouroboros-formal-analysis.md`
+- `[404] https://www.cambridge.org/core/books/separation-logic/...` — Not Found
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
 - `[404] https://www.cambridge.org/core/books/thinking-functionally-with-haskell/...` — Not Found
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
-- `[404] https://www.cambridge.org/core/books/basic-category-theory/...` — Not Found
+- `[404] https://www.cambridge.org/core/books/modern-compiler-implementation-in-ml/...` — Not Found
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
-- `[403] https://nostarch.com/Rust` — Forbidden
+- `[500] https://www.cambridge.org/core/books/type-theory-and-formal-proof/0474C94D13653A6A3F8F6B12C4E5A12A` — Internal Server Error
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
-- `[ERR] https://readrust.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+- `[500] http://book.realworldhaskell.org/` — Internal Privoxy Error
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[403] https://math.jhu.edu/~eriehl/context/` — Forbidden
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[404] https://www.cambridge.org/core/books/program-logics-for-certified-compilers/...` — Not Found
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[404] https://www.cambridge.org/core/books/handbook-of-practical-logic-and-automated-reasoning/...` — Not Found
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[404] https://blog.adacore.com/deductive-verification-of-rust-programs` — Not Found
+  - `docs\rust-ownership-decidability\07-references\academic-papers.md`
+- `[404] https://www.cambridge.org/core/books/modern-compiler-implementation-in-java/...` — Not Found
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[404] https://www.cambridge.org/core/books/purely-functional-data-structures/...` — Not Found
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
 - `[404] https://www.cambridge.org/core/books/how-to-prove-it/...` — Not Found
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
-- `[404] https://www.elsevier.com/books/advanced-compiler-design-and-implementation/muchnick/978-1-55860-320-2` — Not Found
+- `[404] https://www.cambridge.org/core/books/basic-category-theory/...` — Not Found
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
-- `[404] https://www.coursera.org/learn/compilers` — Not Found
-  - `docs\rust-ownership-decidability\07-references\online-courses.md`
-- `[404] https://www.cs.purdue.edu/homes/suresh/330-Spring2023/` — Not Found
-  - `docs\rust-ownership-decidability\07-references\online-courses.md`
 - `[403] https://www.udemy.com/` — Forbidden
   - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `[404] https://www.elsevier.com/books/advanced-compiler-design-and-implementation/muchnick/978-1-55860-320-2` — Not Found
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
 - `[404] https://cs.brown.edu/~bthom/papers/patina-draft.pdf` — Not Found
   - `docs\rust-ownership-decidability\07-references\academic-papers.md`
-- `[ERR] https://itp-conference.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
-  - `docs\rust-ownership-decidability\07-references\online-courses.md`
 - `[ERR] https://isabelle.in.tum.de/doc/prog-prove.pdf` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
   - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `[ERR] https://readrust.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
 - `[500] http://concrete-semantics.org/` — Internal Privoxy Error
   - `docs\rust-ownership-decidability\07-references\books-resources.md`
   - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `[404] https://homotopytypetheory.org/2019/12/07/hott-2019/` — Not Found
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `[404] https://www.cs.purdue.edu/homes/suresh/330-Spring2023/` — Not Found
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
 - `[404] https://www.cs.cmu.edu/~rwh/courses/ttf/` — Not Found
   - `docs\rust-ownership-decidability\07-references\online-courses.md`
-- `[404] https://www.cs.utexas.edu/~eberdou/cs439/` — Not Found
-  - `docs\rust-ownership-decidability\07-references\online-courses.md`
-- `[404] https://www.youtube.com/c/RustLabConference` — Not Found
-  - `docs\rust-ownership-decidability\07-references\online-courses.md`
-- `[404] https://homotopytypetheory.org/2019/12/07/hott-2019/` — Not Found
+- `[404] https://www.coursera.org/learn/compilers` — Not Found
   - `docs\rust-ownership-decidability\07-references\online-courses.md`
 - `[404] https://www.doc.ic.ac.uk/~jv/verification/` — Not Found
   - `docs\rust-ownership-decidability\07-references\online-courses.md`
 - `[404] https://www21.in.tum.de/teaching/progver/WS22/` — Not Found
   - `docs\rust-ownership-decidability\07-references\online-courses.md`
-- `[404] https://www.cs.cmu.edu/~rwh/courses/ppl/` — Not Found
+- `[404] https://www.cs.utexas.edu/~eberdou/cs439/` — Not Found
   - `docs\rust-ownership-decidability\07-references\online-courses.md`
 - `[404] https://www.cs.cmu.edu/~emc/15414-f20/` — Not Found
   - `docs\rust-ownership-decidability\07-references\online-courses.md`
-- `[404] https://www.diku.dk/~torbenm/PA/PA-toc.html` — Not Found
-  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[404] https://www.cs.cmu.edu/~rwh/courses/ppl/` — Not Found
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `[ERR] https://itp-conference.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
 - `[ERR] https://web.stanford.edu/class/cs259/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
   - `docs\rust-ownership-decidability\07-references\online-courses.md`
-- `[ERR] https://oopsla24.sigplan.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+- `[404] https://www.youtube.com/c/RustLabConference` — Not Found
   - `docs\rust-ownership-decidability\07-references\online-courses.md`
-- `[403] https://www.sciencedirect.com/journal/science-of-computer-programming` — Forbidden
-  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
-- `[403] https://scholar.google.com/scholar?q=rust+formal+verification` — Forbidden
-  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
-- `[404] https://en.wikipedia.org/wiki/Programming_Idiom` — Not Found
-  - `docs\rust-ownership-decidability\11-design-patterns\11-02-idiomatic-patterns.md`
-- `[404] https://en.wikipedia.org/wiki/Dependent_Type` — Not Found
-  - `docs\rust-ownership-decidability\08-advanced-topics\08-01-const-generics.md`
 - `[404] https://en.wikipedia.org/wiki/Advanced_Programming_Language_Features` — Not Found
   - `docs\rust-ownership-decidability\08-advanced-topics\README.md`
-- `[404] https://en.wikipedia.org/wiki/Memory_Ordering` — Not Found
-  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
-- `[ERR] https://www.i-cav.org/2024/` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1016)
+- `[ERR] https://oopsla24.sigplan.org/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `docs\rust-ownership-decidability\07-references\online-courses.md`
+- `[404] https://en.wikipedia.org/wiki/Dependent_Type` — Not Found
+  - `docs\rust-ownership-decidability\08-advanced-topics\08-01-const-generics.md`
+- `[403] https://scholar.google.com/scholar?q=rust+formal+verification` — Forbidden
   - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+- `[404] https://www.diku.dk/~torbenm/PA/PA-toc.html` — Not Found
+  - `docs\rust-ownership-decidability\07-references\books-resources.md`
+- `[ERR] https://yices.csl.sri.com/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `[403] https://www.sciencedirect.com/journal/science-of-computer-programming` — Forbidden
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+- `[404] https://en.wikipedia.org/wiki/Lock_Free_Data_Structure` — Not Found
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
 - `[404] https://en.wikipedia.org/wiki/Thread_Pool` — Not Found
   - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
   - `docs\rust-ownership-decidability\case-studies\tokio-runtime-deep.md`
-- `[404] https://en.wikipedia.org/wiki/Work_Stealing` — Not Found
-  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
 - `[ERR] https://sosp2024.postech.ac.kr/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
   - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
-- `[404] https://en.wikipedia.org/wiki/Compare_and_Swap` — Not Found
-  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-04-lock-free-patterns.md`
-- `[ERR] https://isabelle.in.tum.de/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
-  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
-  - `docs\rust-ownership-decidability\formal-foundations\semantics\mechanized-proofs.md`
-- `[404] https://en.wikipedia.org/wiki/Structured_Concurrency` — Not Found
-  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-05-async-patterns-deep.md`
-- `[500] http://compcert.inria.fr/` — Internal Privoxy Error
-  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
-- `[404] https://en.wikipedia.org/wiki/GPU_Computing` — Not Found
-  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism-deep.md`
-  - `docs\rust-ownership-decidability\case-studies\ml-ai\README.md`
-- `[404] https://en.wikipedia.org/wiki/Finite_state_Machine` — Not Found
-  - `docs\rust-ownership-decidability\11-design-patterns\11-03-type-state-pattern.md`
-- `[ERR] https://yices.csl.sri.com/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
-  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
-- `[404] https://en.wikipedia.org/wiki/Denotational_Semantics` — Not Found
-  - `docs\rust-ownership-decidability\16-program-semantics\00-semantic-framework.md`
-  - `docs\rust-ownership-decidability\formal-foundations\RUST_FORMAL_SEMANTICS_DEEP.md`
-- `[404] https://en.wikipedia.org/wiki/Computer_Multitasking` — Not Found
+- `[ERR] https://www.i-cav.org/2024/` — [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1016)
+  - `docs\rust-ownership-decidability\10-research-frontiers\README.md`
+- `[404] https://en.wikipedia.org/wiki/Work_Stealing` — Not Found
   - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
-- `[404] https://en.wikipedia.org/wiki/Self_referential_Struct` — Not Found
-  - `docs\rust-ownership-decidability\16-program-semantics\03-async-semantics.md`
-  - `docs\rust-ownership-decidability\case-studies\ouroboros-formal-analysis.md`
-- `[404] https://en.wikipedia.org/wiki/Lock_Free_Data_Structure` — Not Found
-  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
-- `[404] https://en.wikipedia.org/wiki/Control_Flow` — Not Found
-  - `docs\rust-ownership-decidability\16-program-semantics\04-control-data-flow.md`
-- `[404] https://en.wikipedia.org/wiki/Control_flow_Graph` — Not Found
-  - `docs\rust-ownership-decidability\16-program-semantics\04-control-data-flow.md`
 - `[404] https://en.wikipedia.org/wiki/Actor_Model` — Not Found
   - `docs\rust-ownership-decidability\12-concurrency-patterns\12-03-message-passing-deep.md`
   - `docs\rust-ownership-decidability\12-concurrency-patterns\12-05-async-patterns-deep.md`
@@ -10350,130 +10260,155 @@
   - `docs\rust-ownership-decidability\actor-specialty\ACTOR_MODEL_DEEP_DIVE.md`
 - `[404] https://en.wikipedia.org/wiki/Lock_free_Data_Structure` — Not Found
   - `docs\rust-ownership-decidability\12-concurrency-patterns\12-04-lock-free-patterns.md`
+- `[404] https://en.wikipedia.org/wiki/Compare_and_Swap` — Not Found
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-04-lock-free-patterns.md`
+- `[404] https://en.wikipedia.org/wiki/Programming_Idiom` — Not Found
+  - `docs\rust-ownership-decidability\11-design-patterns\11-02-idiomatic-patterns.md`
+- `[404] https://en.wikipedia.org/wiki/Data_Engineering` — Not Found
+  - `docs\rust-ownership-decidability\15-application-domains\data-engineering.md`
+- `[404] https://en.wikipedia.org/wiki/Finite_state_Machine` — Not Found
+  - `docs\rust-ownership-decidability\11-design-patterns\11-03-type-state-pattern.md`
+- `[404] https://en.wikipedia.org/wiki/Reactor_Pattern` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\03-async-semantics.md`
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-deep.md`
+- `[404] https://doc.rust-lang.org/nomicon/threads.html` — Not Found
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism-deep.md`
+- `[404] https://en.wikipedia.org/wiki/GPU_Computing` — Not Found
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism-deep.md`
+  - `docs\rust-ownership-decidability\case-studies\ml-ai\README.md`
+- `[404] https://en.wikipedia.org/wiki/Memory_Ordering` — Not Found
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
+- `[404] https://en.wikipedia.org/wiki/Self_referential_Struct` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\03-async-semantics.md`
+  - `docs\rust-ownership-decidability\case-studies\ouroboros-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Control_flow_Graph` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\04-control-data-flow.md`
+- `[404] https://en.wikipedia.org/wiki/Denotational_Semantics` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\00-semantic-framework.md`
+  - `docs\rust-ownership-decidability\formal-foundations\RUST_FORMAL_SEMANTICS_DEEP.md`
+- `[404] https://en.wikipedia.org/wiki/Workflow_Pattern` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\08-workflow-patterns.md`
+- `[404] https://en.wikipedia.org/wiki/Computer_Multitasking` — Not Found
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-01-concurrency-architecture-deep.md`
+- `[404] https://blog.rust-lang.org/2026/03/06/Rust-1.94.0.html` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\06-array-windows-semantics.md`
+- `[ERR] https://www.cs.unm.edu/~mccune/prover9/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `[ERR] https://isabelle.in.tum.de/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+  - `docs\rust-ownership-decidability\formal-foundations\semantics\mechanized-proofs.md`
+- `[500] http://compcert.inria.fr/` — Internal Privoxy Error
+  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
+- `[404] https://en.wikipedia.org/wiki/Structured_Concurrency` — Not Found
+  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-05-async-patterns-deep.md`
+- `[404] https://en.wikipedia.org/wiki/Control_Flow` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\04-control-data-flow.md`
+- `[404] https://doc.rust-lang.org/nomicon/pointers.html` — Not Found
+  - `docs\rust-ownership-decidability\17-unsafe-rust\02-raw-pointers.md`
+- `[404] https://en.wikipedia.org/wiki/Type_Casting` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\bytemuck-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Control_Flow_Graph` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\04-control-data-flow.md`
 - `[404] https://en.wikipedia.org/wiki/Communication_and_Concurrency` — Not Found
   - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\13-mi-with-design-time-knowledge.md`
   - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\14-mi-with-runtime-knowledge.md`
   - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\20-cancel-case.md`
   - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\41-thread-merge.md`
   - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\42-thread-split.md`
-- `[404] https://en.wikipedia.org/wiki/Data_Engineering` — Not Found
-  - `docs\rust-ownership-decidability\15-application-domains\data-engineering.md`
-- `[404] https://en.wikipedia.org/wiki/Memory_Model` — Not Found
-  - `docs\rust-ownership-decidability\16-program-semantics\02-concurrency-semantics.md`
-  - `docs\rust-ownership-decidability\formal-foundations\models\tree-borrows-comprehensive.md`
-- `[404] https://doc.rust-lang.org/nomicon/threads.html` — Not Found
-  - `docs\rust-ownership-decidability\12-concurrency-patterns\12-06-data-parallelism-deep.md`
-- `[404] https://en.wikipedia.org/wiki/Reactor_Pattern` — Not Found
-  - `docs\rust-ownership-decidability\16-program-semantics\03-async-semantics.md`
-  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-deep.md`
-- `[404] https://en.wikipedia.org/wiki/Green_Thread` — Not Found
-  - `docs\rust-ownership-decidability\16-program-semantics\03-async-semantics.md`
-- `[404] https://en.wikipedia.org/wiki/Control_Flow_Graph` — Not Found
-  - `docs\rust-ownership-decidability\16-program-semantics\04-control-data-flow.md`
-- `[404] https://en.wikipedia.org/wiki/Data_flow_Analysis` — Not Found
-  - `docs\rust-ownership-decidability\16-program-semantics\04-control-data-flow.md`
+- `[404] https://en.wikipedia.org/wiki/Environment_Variable` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\figment-formal-analysis.md`
 - `[404] https://en.wikipedia.org/wiki/Memory_Alignment` — Not Found
   - `docs\rust-ownership-decidability\case-studies\bytemuck-formal-analysis.md`
   - `docs\rust-ownership-decidability\case-studies\zerocopy-formal-analysis.md`
-- `[404] https://en.wikipedia.org/wiki/Workflow_Pattern` — Not Found
-  - `docs\rust-ownership-decidability\16-program-semantics\08-workflow-patterns.md`
-- `[404] https://en.wikipedia.org/wiki/ARM_Cortex_M` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\cortex-m-rt-formal-analysis.md`
-- `[404] https://en.wikipedia.org/wiki/Embedded_Operating_System` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\embassy-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Heterogeneous_Data_Structure` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\frunk-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Type_Level_Programming` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\generic-array-formal-analysis.md`
+  - `docs\rust-ownership-decidability\case-studies\typenum-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Type_Punning` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\bytemuck-formal-analysis.md`
 - `[404] https://en.wikipedia.org/wiki/UML_Activity_Diagram` — Not Found
   - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\13-mi-with-design-time-knowledge.md`
   - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\14-mi-with-runtime-knowledge.md`
   - `docs\rust-ownership-decidability\16-program-semantics\workflow-patterns\20-cancel-case.md`
-- `[404] https://blog.rust-lang.org/2026/03/06/Rust-1.94.0.html` — Not Found
-  - `docs\rust-ownership-decidability\16-program-semantics\rust-194-features\06-array-windows-semantics.md`
-- `[404] https://en.wikipedia.org/wiki/Environment_Variable` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\figment-formal-analysis.md`
-- `[ERR] https://www.cs.unm.edu/~mccune/prover9/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
-  - `docs\rust-ownership-decidability\07-references\tools-libraries.md`
-- `[404] https://en.wikipedia.org/wiki/Heterogeneous_Data_Structure` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\frunk-formal-analysis.md`
-- `[404] https://en.wikipedia.org/wiki/Real_time_Computing` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\heapless-formal-analysis.md`
-- `[404] https://en.wikipedia.org/wiki/Stack_based_Memory_Allocation` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\heapless-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Embedded_Operating_System` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\embassy-formal-analysis.md`
 - `[404] https://en.wikipedia.org/wiki/Stack_Based_Memory_Allocation` — Not Found
   - `docs\rust-ownership-decidability\case-studies\heapless-formal-analysis.md`
-- `[ERR] https://gitlab.mpi-sws.org/FP/rustbelt` — TimeoutError('The read operation timed out')
-  - `docs\rust-ownership-decidability\RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md`
-  - `docs\rust-ownership-decidability\formal-foundations\semantics\mechanized-proofs.md`
-- `[404] https://en.wikipedia.org/wiki/Wear_Leveling` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\littlefs2-formal-analysis.md`
-- `[404] https://en.wikipedia.org/wiki/Fixed_Size_Data_Structure` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\heapless-formal-analysis.md`
-- `[404] https://en.wikipedia.org/wiki/Self_Referential_Data_Structure` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\ouroboros-formal-analysis.md`
-- `[404] https://en.wikipedia.org/wiki/Binary_Protocol` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\postcard-formal-analysis.md`
-- `[404] https://en.wikipedia.org/wiki/Zero_Copy_Serialization` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\rkyv-formal-analysis.md`
-- `[404] https://en.wikipedia.org/wiki/Schema_Evolution` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\serde-formal-analysis-deep.md`
-- `[404] https://doc.rust-lang.org/nomicon/pointers.html` — Not Found
-  - `docs\rust-ownership-decidability\17-unsafe-rust\02-raw-pointers.md`
-- `[404] https://en.wikipedia.org/wiki/Type_Punning` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\bytemuck-formal-analysis.md`
-- `[404] https://en.wikipedia.org/wiki/Event_Loop` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-deep.md`
-- `[404] https://en.wikipedia.org/wiki/Load_Balancing` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-deep.md`
 - `[404] https://plv.mpi-sws.org/rustbib/` — Not Found
   - `docs\rust-ownership-decidability\17-unsafe-rust\08-aliasing.md`
-- `[404] https://en.wikipedia.org/wiki/Type_Casting` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\bytemuck-formal-analysis.md`
-- `[404] https://en.wikipedia.org/wiki/Union_Type` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\bytemuck-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Stack_based_Memory_Allocation` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\heapless-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Data_flow_Analysis` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\04-control-data-flow.md`
+- `[404] https://en.wikipedia.org/wiki/Green_Thread` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\03-async-semantics.md`
+- `[404] https://en.wikipedia.org/wiki/Wear_Leveling` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\littlefs2-formal-analysis.md`
 - `[ERR] https://book.defmt.ferrous-systems.com/` — [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)
   - `docs\rust-ownership-decidability\case-studies\defmt-formal-analysis.md`
-- `[404] https://rust-lang.github.io/wg-cli/` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\cli\README.md`
-- `[404] https://en.wikipedia.org/wiki/Type_Level_Programming` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\generic-array-formal-analysis.md`
-  - `docs\rust-ownership-decidability\case-studies\typenum-formal-analysis.md`
-- `[404] https://en.wikipedia.org/wiki/Journaling_File_System` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\littlefs2-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/ARM_Cortex_M` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\cortex-m-rt-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Binary_Protocol` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\postcard-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Fixed_Size_Data_Structure` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\heapless-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Zero_Copy_Serialization` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\rkyv-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Event_Loop` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-deep.md`
+- `[404] https://rust-lang.github.io/async-book/04_pinning/` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\std-pin-unpin-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Concurrency_Bug` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\shuttle-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Schema_Evolution` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\serde-formal-analysis-deep.md`
+- `[404] https://en.wikipedia.org/wiki/Union_Type` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\bytemuck-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Load_Balancing` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-deep.md`
+- `[404] https://en.wikipedia.org/wiki/Real_time_Computing` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\heapless-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Zero_Copy` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\zerocopy-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Memory_Mapping` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\zerocopy-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Memory_Model` — Not Found
+  - `docs\rust-ownership-decidability\16-program-semantics\02-concurrency-semantics.md`
+  - `docs\rust-ownership-decidability\formal-foundations\models\tree-borrows-comprehensive.md`
 - `[404] https://en.wikipedia.org/wiki/Command_line_Interface` — Not Found
   - `docs\rust-ownership-decidability\case-studies\cli\README.md`
 - `[404] https://en.wikipedia.org/wiki/Service_Mesh` — Not Found
   - `docs\rust-ownership-decidability\case-studies\cloud\README.md`
-- `[404] https://tokio.rs/docs` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\tokio-runtime-analysis.md`
-- `[404] https://rust-lang.github.io/async-book/04_pinning/` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\std-pin-unpin-formal-analysis.md`
-- `[404] https://en.wikipedia.org/wiki/Physics_Engine` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\gamedev\README.md`
-- `[404] https://en.wikipedia.org/wiki/Entity_Component_System` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\gamedev\README.md`
-- `[404] https://en.wikipedia.org/wiki/Memory_Mapping` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\zerocopy-formal-analysis.md`
-- `[404] https://en.wikipedia.org/wiki/Zero_Copy` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\zerocopy-formal-analysis.md`
-- `[404] https://en.wikipedia.org/wiki/Distributed_Database` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\database\README.md`
-- `[404] https://en.wikipedia.org/wiki/Concurrency_Bug` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\shuttle-formal-analysis.md`
-- `[404] https://en.wikipedia.org/wiki/Container_Runtime` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\cloud\README.md`
+- `[404] https://en.wikipedia.org/wiki/Self_Referential_Data_Structure` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\ouroboros-formal-analysis.md`
 - `[404] https://en.wikipedia.org/wiki/Bare_Metal_Programming` — Not Found
   - `docs\rust-ownership-decidability\case-studies\embedded\README.md`
   - `docs\rust-ownership-decidability\extensions\no-std-development.md`
+- `[404] https://en.wikipedia.org/wiki/Entity_Component_System` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\gamedev\README.md`
+- `[404] https://en.wikipedia.org/wiki/Physics_Engine` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\gamedev\README.md`
+- `[404] https://en.wikipedia.org/wiki/Dynamic_Typing` — Not Found
+  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-python.md`
+- `[404] https://en.wikipedia.org/wiki/Pointer_Aliasing` — Not Found
+  - `docs\rust-ownership-decidability\formal-foundations\models\tree-borrows-comprehensive.md`
+- `[404] https://en.wikipedia.org/wiki/Journaling_File_System` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\littlefs2-formal-analysis.md`
+- `[404] https://en.wikipedia.org/wiki/Input_Device` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\gamedev\README.md`
 - `[404] https://en.wikipedia.org/wiki/Lock_Free_Data_Structures` — Not Found
   - `docs\rust-ownership-decidability\case-studies\tokio-runtime-deep.md`
+- `[404] https://rust-lang.github.io/wg-cli/` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\cli\README.md`
+- `[404] https://en.wikipedia.org/wiki/Container_Runtime` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\cloud\README.md`
+- `[404] https://en.wikipedia.org/wiki/Distributed_Database` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\database\README.md`
+- `[404] https://en.wikipedia.org/wiki/Game_Audio` — Not Found
+  - `docs\rust-ownership-decidability\case-studies\gamedev\README.md`
 - `[404] https://en.wikipedia.org/wiki/Proof_Assistant` — Not Found
   - `docs\rust-ownership-decidability\formal-foundations\proofs\PROOF_PATTERNS.md`
   - `docs\rust-ownership-decidability\formal-foundations\proofs\type-ownership-unified-theory.md`
 - `[404] https://en.wikipedia.org/wiki/Real_Time_Rendering` — Not Found
   - `docs\rust-ownership-decidability\case-studies\gamedev\README.md`
-- `[404] https://en.wikipedia.org/wiki/Game_Audio` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\gamedev\README.md`
-- `[404] https://en.wikipedia.org/wiki/Input_Device` — Not Found
-  - `docs\rust-ownership-decidability\case-studies\gamedev\README.md`
-- `[404] https://en.wikipedia.org/wiki/Pointer_Aliasing` — Not Found
-  - `docs\rust-ownership-decidability\formal-foundations\models\tree-borrows-comprehensive.md`
-- `[404] https://en.wikipedia.org/wiki/Dynamic_Typing` — Not Found
-  - `docs\rust-ownership-decidability\comparative-analysis\rust-vs-python.md`

@@ -278,7 +278,7 @@ let fetch = async |url: &str| -> Result<String, Error> {
 | 来源 | 类型 | 说明 |
 |------|------|------|
 | [Rust 1.85 Release](https://blog.rust-lang.org/2026/01/15/Rust-1.85.0/) | 官方 | async closures 稳定化 |
-| [AsyncFn Traits RFC](https://rust-lang.github.io/rfcs/3668-async-fn.html) | 官方 | AsyncFn trait 家族设计 |
+| [AsyncFn Traits RFC](https://rust-lang.github.io/rfcs/3668-async-closures.html) | 官方 | AsyncFn trait 家族设计 |
 
 ---
 

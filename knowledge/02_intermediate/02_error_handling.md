@@ -15,7 +15,7 @@
 > **权威来源**: [Rust Book Ch09](https://doc.rust-lang.org/book/ch09-00-error-handling.html),
 > [Rust Reference — The `?` operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator),
 > [RFC 243: Trait-based Exception Handling](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html),
-> [RFC 3058: `let` chains](https://rust-lang.github.io/rfcs/3058-let-chains.html),
+> [RFC 3058: `let` chains](https://rust-lang.github.io/rfcs/3058-try-trait-v2.html),
 > [thiserror crate](https://docs.rs/thiserror/),
 > [anyhow crate](https://docs.rs/anyhow/)
 >

@@ -9,7 +9,19 @@
 > **双维定位**: C×Ana
 > **前置概念**: [Ownership](./01_ownership.md) · [Variable Model](./20_variable_model.md) · [Borrowing](./02_borrowing.md)
 > **后置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md) · [Construction](../02_intermediate/28_construction_and_initialization.md)
-> **主要来源**: [TRPL Ch 4 — What is Ownership?](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) · [TRPL Ch 10 — Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html) · [Rust Reference — Moved and Copied Types](https://doc.rust-lang.org/reference/expressions.html#moved-and-copied-types) · [cppreference — Move Constructors](https://en.cppreference.com/w/cpp/language/move_constructor) · [cppreference — Move assignment operator](https://en.cppreference.com/w/cpp/language/move_assignment) · [cppreference — Value categories](https://en.cppreference.com/w/cpp/language/value_category) · [Brown CRP — Copy and Move Constructors](https://cel.cs.brown.edu/crp/idioms/copy_move_constructors.html) · [StackOverflow — How does Rust provide move semantics?](https://stackoverflow.com/questions/27922584/how-does-rust-provide-move-semantics) · [The Coded Message — C++ Move Semantics Considered Harmful](https://thecodedmessage.com/posts/cpp-move-harmful/) · [Stroustrup — The C++ Programming Language, 4th ed.](https://www.stroustrup.com/4th.html)
+> **主要来源**:
+>
+> [TRPL Ch 4 — What is Ownership?](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) ·
+> [TRPL Ch 10 — Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html) ·
+> [Rust Reference — Moved and Copied Types](https://doc.rust-lang.org/reference/expressions.html#moved-and-copied-types) ·
+> [cppreference — Move Constructors](https://en.cppreference.com/w/cpp/language/move_constructor) ·
+> [cppreference — Move assignment operator](https://en.cppreference.com/w/cpp/language/move_assignment) ·
+> [cppreference — Value categories](https://en.cppreference.com/w/cpp/language/value_category) ·
+> [Brown CRP — Copy and Move Constructors](https://cel.cs.brown.edu/crp/idioms/copy_move_constructors.html) ·
+> [StackOverflow — How does Rust provide move semantics?](https://stackoverflow.com/questions/27922584/how-does-rust-provide-move-semantics) ·
+> [The Coded Message — C++ Move Semantics Considered Harmful](https://thecodedmessage.com/posts/cpp-move-harmful/) ·
+> [Stroustrup — The C++ Programming Language, 4th ed.](https://www.stroustrup.com/4th.html)
+>
 ---
 
 > **Bloom 层级**: 理解 → 分析

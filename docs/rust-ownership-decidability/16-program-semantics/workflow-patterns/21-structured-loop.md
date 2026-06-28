@@ -723,7 +723,7 @@ $$
 
 **尾递归与尾调用优化 (TCO)**:
 
-> **来源: [Rust Reference - Functions](https://doc.rust-lang.org/reference/)** · **来源: [TRPL Ch. 13 - Closures](https://doc.rust-lang.org/book/ch13-00-functional-features-of-rust.html)**
+> **来源: [Rust Reference - Functions](https://doc.rust-lang.org/reference/)** · **来源: [TRPL Ch. 13 - Closures](https://doc.rust-lang.org/book/ch13-00-functional-features.html)**
 
 虽然 Rust 编译器目前**不保证**尾调用优化（TCO），但结构化循环与尾递归在语义上等价：
 
