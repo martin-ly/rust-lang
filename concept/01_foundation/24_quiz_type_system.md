@@ -63,7 +63,7 @@ fn main() {
 | `.checked_add(n)` | 返回 `Option` | `None` |
 | `.overflowing_add(n)` | 返回 (结果, 是否溢出) | `(0, true)` |
 
-**知识点**：Rust 数值运算提供多种溢出处理策略，默认行为在 debug/release 间不一致是常见陷阱。[→ 数值类型详解](./11_numeric_types.md)
+**知识点**：Rust 数值运算提供多种溢出处理策略，默认行为在 debug/release 间不一致是常见陷阱。[→ 数值类型详解](./10_numerics.md)
 
 </details>
 

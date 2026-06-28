@@ -3,7 +3,7 @@
 > [综述级]
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-> **本节关键术语**: 数值类型 (Numeric Types) · 整数溢出 (Integer Overflow) · 浮点数 (Floating Point) · 类型转换 (Type Conversion) · 字面值后缀 (Literal Suffix) — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**: 数值类型 (Numeric Types) · 整数类型 (Integer) · 浮点类型 (Float) · 有符号 (Signed) · 无符号 (Unsigned) · 整数溢出 (Integer Overflow) · 浮点数 (Floating Point) · 类型转换 (Type Conversion) · 类型推断 (Type Inference) · 字面值后缀 (Literal Suffix) — [完整对照表](../00_meta/terminology_glossary.md)
 >
 
 # 数值类型与运算：从整数到浮点的完整图景
@@ -36,6 +36,7 @@
     - [2.1 类型转换与 as](#21-类型转换与-as)
     - [2.2 Wrapping、Saturating、Checked、Overflowing](#22-wrappingsaturatingcheckedoverflowing)
     - [2.3 NonZero 类型与优化](#23-nonzero-类型与优化)
+    - [2.4 SIMD 与向量化](#24-simd-与向量化)
   - [三、数值类型矩阵](#三数值类型矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -49,9 +50,12 @@
     - [12.2 边界测试：浮点数相等比较（逻辑错误）](#122-边界测试浮点数相等比较逻辑错误)
     - [12.3 边界测试：`as` 转换的截断风险（编译错误）](#123-边界测试as-转换的截断风险编译错误)
     - [12.4 边界测试：浮点数作为 `match` 条件（编译错误）](#124-边界测试浮点数作为-match-条件编译错误)
-    - [10.3 边界测试：`as` 转换的截断与符号变化（逻辑错误）](#103-边界测试as-转换的截断与符号变化逻辑错误)
-    - [10.4 边界测试：浮点数的 `NaN` 比较（逻辑错误）](#104-边界测试浮点数的-nan-比较逻辑错误)
-    - [10.2 边界测试：`as` 截断与 `From` 语义差异（编译错误）](#102-边界测试as-截断与-from-语义差异编译错误)
+    - [12.5 边界测试：`as` 转换的截断与符号变化（逻辑错误）](#125-边界测试as-转换的截断与符号变化逻辑错误)
+    - [12.6 边界测试：浮点数的 `NaN` 比较（逻辑错误）](#126-边界测试浮点数的-nan-比较逻辑错误)
+    - [12.7 边界测试：`as` 截断与 `From` 语义差异（编译错误）](#127-边界测试as-截断与-from-语义差异编译错误)
+    - [12.8 边界测试：`usize`/`isize` 平台相关大小（编译错误）](#128-边界测试usizeisize-平台相关大小编译错误)
+    - [12.9 边界测试：位运算与逻辑运算混用（编译错误）](#129-边界测试位运算与逻辑运算混用编译错误)
+    - [12.10 边界测试：`Wrapping<T>` 与 `T` 的混用陷阱（编译错误）](#1210-边界测试wrappingt-与-t-的混用陷阱编译错误)
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
@@ -61,6 +65,7 @@
     - [测验 2：`as` 与 `TryFrom` 的区别（理解层）](#测验-2as-与-tryfrom-的区别理解层)
     - [测验 3：NonZero 类型优化（应用层）](#测验-3nonzero-类型优化应用层)
     - [测验 4：浮点数陷阱（分析层）](#测验-4浮点数陷阱分析层)
+    - [测验 5：`usize` 的平台相关性与跨平台风险（理解层）](#测验-5usize-的平台相关性与跨平台风险理解层)
 
 ---
 
@@ -323,6 +328,41 @@ let size = NonZeroU32::new(1024).unwrap();
 
 ---
 
+### 2.4 SIMD 与向量化
+
+```text
+SIMD (Single Instruction Multiple Data):
+
+  std::simd (nightly / Rust 1.64+ 实验):
+  ├── 向量类型: f32x4, i32x8
+  ├── 并行操作: +, -, *, /
+  ├── 掩码操作: 条件选择
+  └── 对齐加载/存储
+
+  代码示例:
+
+  use std::simd::*;
+
+  let a = f32x4::from_array([1.0, 2.0, 3.0, 4.0]);
+  let b = f32x4::from_array([5.0, 6.0, 7.0, 8.0]);
+  let c = a + b; // [6.0, 8.0, 10.0, 12.0]
+
+  第三方 crate:
+  ├── packed_simd: 稳定版替代
+  ├── wide: 跨平台 SIMD
+  └── simdeez: 运行时选择 SIMD 宽度
+
+  注意:
+  ├── 需要平台支持
+  ├── 对齐要求
+  └── 边界处理
+```
+
+> **SIMD 洞察**: **SIMD 是数值计算性能的最后防线**——向量化可将吞吐量提升 4-16 倍。
+> [来源: [std::simd](https://doc.rust-lang.org/std/simd/index.html)]
+
+---
+
 ## 三、数值类型矩阵
 
 ```text
@@ -415,10 +455,25 @@ graph TD
 ├── 64 位平台: 8 字节
 ├── 序列化到文件时大小不固定
 └── 使用 u64/i64 进行跨平台数据交换
+
+边界 6: 常量求值
+├── const fn 中浮点比较可能不稳定
+├── 编译期计算对数值操作有额外限制
+└── 缓解: 避免 const 上下文中的浮点相等比较
+
+边界 7: 性能开销
+├── checked_* 运算在 Debug/Release 均引入分支开销
+├── wrapping_* 通常映射为普通机器指令，接近零额外开销
+└── 缓解: 在 Release 模式结合显式方法选择
+
+边界 8: FFI 映射
+├── C 的 int/long 到 Rust 的映射随平台变化
+├── 应避免在 FFI 边界依赖 C 的“基本整型”
+└── 缓解: 使用 libc crate 的明确类型（如 c_int、c_long）
 ```
 
-> **边界要点**: 数值运算的边界主要与**浮点精度**、**整数除法语义**、**移位位数**、**char 转换**和**平台依赖**相关。
-> [来源: [Rust Reference — Operator Expressions](https://doc.rust-lang.org/reference/expressions/operator-expr.html)]
+> **边界要点**: 数值运算的边界主要与**浮点精度**、**整数除法语义**、**移位位数**、**char 转换**、**平台依赖**、**常量求值**、**性能开销**和**FFI 映射**相关。
+> [来源: [Rust Reference — Operator Expressions](https://doc.rust-lang.org/reference/expressions/operator-expr.html)] · [Rust Performance Book](https://nnethercote.github.io/perf-book/)
 
 ---
 
@@ -451,9 +506,13 @@ graph TD
 陷阱 6: 除以零
   ❌ let x = 1 / 0;  // panic！
   ✅ let x = 1.checked_div(0);  // None
+
+陷阱 7: 位运算与逻辑运算优先级混淆
+  ❌ if x & 1 == 0 { ... }  // 实际为 x & (1 == 0)
+  ✅ if (x & 1) == 0 { ... }
 ```
 
-> **陷阱总结**: 数值陷阱主要与**截断**、**类型转换**、**浮点比较**、**溢出**和**索引类型**相关。
+> **陷阱总结**: 数值陷阱主要与**截断**、**类型转换**、**浮点比较**、**溢出**、**索引类型**、**除零**和**位运算优先级**相关。
 > [来源: [Rust Reference — Numeric Types](https://doc.rust-lang.org/reference/types/numeric.html)]
 
 ---
@@ -467,6 +526,7 @@ graph TD
 | [RFC 0560 — Integer Overflow](https://github.com/rust-lang/rfcs/blob/master/text/0560-integer-overflow.md) | ✅ 一级 | 溢出行为 RFC |
 | [std::num](https://doc.rust-lang.org/std/num/) | ✅ 一级 | 数值模块（Module） |
 | [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754) | ✅ 一级 | 浮点标准 |
+| [Rust Performance Book](https://nnethercote.github.io/perf-book/) | ✅ 二级 | 性能与类型尺寸优化 |
 
 ---
 
@@ -475,6 +535,8 @@ graph TD
 - [Type System](./04_type_system.md) — 类型系统（Type System）
 - [Zero Cost Abstractions](./06_zero_cost_abstractions.md) — 零成本抽象（Zero-Cost Abstraction）
 - [Collections](./08_collections.md) — 集合类型
+- [Performance](../06_ecosystem/15_performance_optimization.md) — 性能优化
+- [Error Handling](../02_intermediate/04_error_handling.md) — 错误处理（Error Handling）
 
 ---
 
@@ -603,7 +665,7 @@ fn fixed() {
 > 这与 C 的 `switch`（不支持浮点）类似，但 Rust 的错误信息更明确——指出浮点模式的语义问题。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
-### 10.3 边界测试：`as` 转换的截断与符号变化（逻辑错误）
+### 12.5 边界测试：`as` 转换的截断与符号变化（逻辑错误）
 
 ```rust,ignore
 fn main() {
@@ -632,7 +694,7 @@ fn main() {
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] ·
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/convert/trait.TryInto.html)]
 
-### 10.4 边界测试：浮点数的 `NaN` 比较（逻辑错误）
+### 12.6 边界测试：浮点数的 `NaN` 比较（逻辑错误）
 
 ```rust,ignore
 fn main() {
@@ -659,7 +721,7 @@ fn main() {
 > [来源: [IEEE 754 Standard](https://ieeexplore.ieee.org/document/8766229)] ·
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.f64.html)]
 
-### 10.2 边界测试：`as` 截断与 `From` 语义差异（编译错误）
+### 12.7 边界测试：`as` 截断与 `From` 语义差异（编译错误）
 
 ```rust,compile_fail
 fn main() {
@@ -684,6 +746,77 @@ fn main() {
 > ——Rust 的类型系统（Type System）区分了"安全但可能失败"和"显式承担风险"两种语义。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/convert/trait.From.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)]
+
+### 12.8 边界测试：`usize`/`isize` 平台相关大小（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x: usize = 1_000_000_000_000;
+    // usize 与 u64 即使同宽也是不同类型，需要显式 as 转换
+    let y = x as u64;
+
+    let arr = [0u8; 1_000_000_000_000]; // ❌ 编译错误: array size too large
+}
+
+// 正确: 使用 Vec 避免栈溢出
+fn fixed() {
+    let arr = vec![0u8; 1_000_000]; // ✅ 堆分配
+    println!("len={}", arr.len());
+}
+```
+
+> **修正**: `usize` 在 32 位平台是 32 位，64 位平台是 64 位。
+> 依赖 `usize` 精确大小的代码不可移植；跨平台数据交换应使用固定大小的 `u32`/`u64`。
+> 数组大小 `[T; N]` 中的 `N` 必须是 `usize`，超大数组在栈上分配会导致栈溢出。
+> 对于动态或大数据，始终使用 `Vec<T>`（堆分配）。
+> Rust 的数组大小限制是 `isize::MAX` 字节，但实际受栈大小限制。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 12.9 边界测试：位运算与逻辑运算混用（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let a = 0b1010;
+    let b = 0b1100;
+    // ❌ 编译错误: cannot apply binary operator `&&` to type `{integer}`
+    // && 是逻辑与，要求 bool 操作数
+    let c = a && b;
+}
+
+// 正确: 使用位运算符
+fn fixed() {
+    let a = 0b1010;
+    let b = 0b1100;
+    let c = a & b; // ✅ 位与: 0b1000
+    println!("{:b}", c);
+}
+```
+
+> **修正**: Rust 严格区分位运算（`&`、`|`、`^`、`!`）和逻辑运算（`&&`、`||`、`!`）。位运算作用于整数类型，逻辑运算作用于 `bool`。
+> C/C++ 中 `&&` 和 `&` 在某些上下文可互换（非零即真），但 Rust 不允许。这消除了 C 语言中常见的 `if (flags & MASK)` 与 `if (flags && MASK)` 混淆错误。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 12.10 边界测试：`Wrapping<T>` 与 `T` 的混用陷阱（编译错误）
+
+```rust,compile_fail
+use std::num::Wrapping;
+
+fn main() {
+    let a = Wrapping(255u8);
+    let b = 1u8;
+    // ❌ 编译错误: Wrapping<u8> 与 u8 不能直接运算
+    let c = a + b;
+}
+```
+
+> **修正**: `Wrapping<T>` 是一个 newtype 包装器，提供**环绕算术**（wrapping arithmetic）：溢出时静默环绕（`255u8 + 1 = 0`）。
+> 但它与原始类型 `T` 是不同的类型，不能直接混用运算。
+> 正确：`Wrapping(255u8) + Wrapping(1u8)` 或 `a.0 + b`（解包后）。
+> Rust 的整数默认使用 panic-on-overflow（debug 模式）或 wrapping（release 模式）。
+> `Wrapping` 显式选择环绕语义，适用于哈希、密码学、游戏循环等场景。
+> 这与 C 的"始终环绕"（UB 仅在 signed overflow）或 Swift 的"默认 panic"不同——Rust 显式区分了两种语义。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/num/struct.Wrapping.html)] ·
+> [来源: [RFC 0560 — Integer Overflow](https://github.com/rust-lang/rfcs/blob/master/text/0560-integer-overflow.md)]
 
 ## 实践
 
@@ -852,6 +985,25 @@ fn main() {
 检测 NaN 必须使用 `is_nan()` 方法。
 
 这也是 `HashMap` 和 `BTreeMap` 不支持 `f32`/`f64` 作为键的原因：`NaN` 破坏了等价关系（反身性不成立）。如需使用浮点作为键，可考虑 `ordered_float` crate。
+</details>
+
+---
+
+### 测验 5：`usize` 的平台相关性与跨平台风险（理解层）
+
+**题目**: `usize` 的大小由什么决定？在写跨平台代码时，将 `usize` 直接与固定大小的整数类型混用有什么风险？
+
+- A. 由编译器版本决定；无风险
+- B. 由目标平台指针宽度决定；在 32 位与 64 位平台间可能导致溢出或类型不匹配
+- C. 固定为 8 字节；与 `u64` 完全等价
+- D. 由 Cargo 特性决定；仅在嵌入式场景有风险
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**正确答案是 B**。
+
+`usize` 大小由目标平台指针宽度决定（32 位平台 4 字节，64 位平台 8 字节）。与 `u32`/`u64` 混用可能因平台不同导致溢出或类型不匹配。
 </details>
 
 ---

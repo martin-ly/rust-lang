@@ -409,4 +409,4 @@ Aeneas 符号化语义五步认知路径
 - [L4 所有权形式化](./03_ownership_formal.md)
 - [L3 Unsafe Rust](../03_advanced/03_unsafe.md)
 - [L6 形式化验证工具](../06_ecosystem/47_formal_verification_tools.md)
-- [BorrowSanitizer](./23_borrow_sanitizer.md)
+- [BorrowSanitizer](./34_borrow_sanitizer_in_formal.md)

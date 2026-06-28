@@ -152,6 +152,6 @@ B
 
 - [Unsafe Rust](../03_advanced/03_unsafe.md)
 - [形式化验证工具生态](../06_ecosystem/47_formal_verification_tools.md)
-- [Safety Tags 深度](../04_formal/22_safety_tags.md)
-- [BorrowSanitizer 预览](./32_borrow_sanitizer_preview.md) · [深度](../04_formal/23_borrow_sanitizer.md)
+- [Safety Tags 深度](../04_formal/33_safety_tags_in_formal.md)
+- [BorrowSanitizer 预览](./32_borrow_sanitizer_preview.md) · [深度](../04_formal/34_borrow_sanitizer_in_formal.md)
 - [AutoVerus/Verus 预览](./33_autoverus_preview.md) · [深度](../04_formal/24_autoverus.md)

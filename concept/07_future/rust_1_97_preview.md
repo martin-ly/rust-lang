@@ -2,8 +2,8 @@
 
 > **代码状态**: [实现级 — 代码已补充]
 >
-> **EN**: Rust 1 97 Preview
-> **Summary**: Rust 1 97 Preview: emerging Rust language feature or ecosystem trend.
+> **EN**: Rust 1.97.0 Preview
+> **Summary**: Preview of Rust 1.97.0 stable features and ongoing ecosystem trends, aligned with official Rust Project Goals 2026.
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
@@ -512,9 +512,9 @@ let mapped = RefCell::try_map(borrowed, |opt| opt.as_ref()).ok();
 
 ---
 
-### 5.5 int_format_into
+### 5.7 int_format_into
 
-**状态**: 🧪 Nightly
+**状态**: 🟢 1.98 已确认
 
 **说明**: 将整数直接格式化到预分配缓冲区，避免 `to_string()` 的堆分配。关键优化用于 `no_std` 和嵌入式场景。
 
@@ -529,11 +529,11 @@ assert_eq!(&buf[..written], b"12345");
 
 ---
 
-### 5.6 float_algebraic
+### 5.8 float_algebraic
 
-**状态**: 🧪 Nightly
+**状态**: 🟢 1.98 已确认
 
-**说明**: 浮点代数运算 intrinsics（`f32::add_algebraic` / `sub_algebraic` / `mul_algebraic` / `div_algebraic` / `rem_algebraic` 等）允许编译器在代数等价前提下重组浮点运算（类似 `-ffast-math`），可能改变舍入行为。该特性仍处于 nightly 实验阶段，尚未进入 1.97 beta 稳定化流程。
+**说明**: 浮点代数运算 intrinsics（`f32::add_algebraic` / `sub_algebraic` / `mul_algebraic` / `div_algebraic` / `rem_algebraic` 等）允许编译器在代数等价前提下重组浮点运算（类似 `-ffast-math`），可能改变舍入行为。PR #157029 已合并至 master，将进入 1.98。
 
 ```rust,ignore
 #![feature(float_algebraic)]
@@ -687,14 +687,6 @@ pub unsafe extern "C" fn my_printf(fmt: *const c_char, mut args: ...) -> c_int {
 > **维护者**: 本项目知识库团队
 > **状态**: 🧪 活跃跟踪中，每 2 周更新一次
 > **过渡**: Rust 1.97 前沿特性预览 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Rust 1.97 前沿特性预览 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-> **过渡**: Rust 1.97 前沿特性预览 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
-
-### 补充定理链
-
-- **定理**: Rust 1.97 前沿特性预览 定义 ⟹ 类型安全保证
-- **定理**: Rust 1.97 前沿特性预览 定义 ⟹ 类型安全保证
-- **定理**: Rust 1.97 前沿特性预览 定义 ⟹ 类型安全保证
 
 ## 嵌入式测验（Embedded Quiz）
 

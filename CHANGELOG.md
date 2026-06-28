@@ -1,6 +1,6 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-06-26（P1 权威事实修正 + Rust 1.96 覆盖缺口回填 + workspace version 对齐 + C-class 长期维护规则落地 + P2 深度内容冲刺完成）
+> **最后更新**: 2026-06-28（P0 Rust 1.97 发布前准备 + 国际学习者入口补齐 + 权威事实复核）
 
 ---
 
@@ -29,6 +29,20 @@
 - **生态状态更新**：
   - Sea-ORM 2.0 stable 仍未发布（最新 `2.0.0-rc.41`），代码侧保持现状，文档侧标注“实验性/跟踪中”。
   - AFIDT / `dyn async Trait` 仍为实验性（tracking issue #133882），代码侧保留 `async_trait`。
+
+### P0 发布前准备与国际对齐梳理（2026-06-28）
+
+- **Rust 1.97.0 发布日准备**：
+  - 复核 `.kimi/EXECUTION_RUST_1_97_RELEASE_2026_07_09.md`，确认 `truncate_front` / `retain_back` 存在推迟至 1.98 风险。
+  - 验证 `crates/c08_algorithms/src/rust_197_features.rs` 已保留等效实现与 fallback 注释。
+  - 新建 `exercises/tests/l3_rust_197_alignment.rs`（8 个可运行测验），对 `truncate_front` / `retain_back` 使用等效实现以保持当前工具链可编译；发布日根据实际稳定状态切换为真实 API。
+  - 清理 `concept/07_future/rust_1_97_preview.md`：修复重复过渡段落、冗余定理链、5.5/5.6 重复编号，同步 int_format_into / float_algebraic 状态为 1.98 已确认。
+- **国际化入口补齐**：
+  - `README.md` 新增 🌍 国际学习者说明徽章与段落，对接 TRPL 3rd Ed / Brown Book / Google Comprehensive Rust / Rust By Example。
+  - `CONTRIBUTING.md` 新增 i18n 规范小节，说明 `concept/` 文件 `**EN**` / `**Summary**` 要求与自查脚本。
+- **权威事实复核**：
+  - 确认 async closures / Rust 2024 Edition / `&raw const` 等关键事实修正已落地，`check_version_facts.py` 已将 `&const` 列为非官方术语检测项。
+- **验证**：`cargo test --workspace`、`cargo clippy --workspace --all-features -- -D warnings` 均通过；`l3_rust_197_alignment.rs` 8 passed。
 
 ### P2 深度内容冲刺：rustc / Cargo / Kani / TRPL-Brown 对齐（2026-06-26）
 

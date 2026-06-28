@@ -198,7 +198,7 @@ Trait Bounds 是 L2 的"枢纽概念"：
 
 - [错误处理（Error Handling）深入：从 Result 到自定义错误生态](./15_error_handling_deep_dive.md)
 - Rust 迭代器（Iterator）模式
-- [迭代器（Iterator）模式：Rust 的惰性计算与零成本抽象（Zero-Cost Abstraction）](16_iterator_patterns.md)
+- [Rust 迭代器（Iterator）模式](15_iterator_patterns.md)
 - 宏（Macro）模式：编译期代码生成的工程实践
 - [RTTI 与动态类型识别：从 C++ 到 Rust](./25_rtti_and_dynamic_typing.md)
 - [C 预处理器 vs Rust 宏：从文本替换到语法树](./26_c_preprocessor_vs_rust_macros.md)

@@ -16,7 +16,7 @@
 > **双维定位**: C×App — 应用闭包（Closures）和捕获模式
 > **定位**: 系统讲解 Rust **闭包（Closure）**——从环境捕获、Fn/FnMut/FnOnce trait 到闭包作为参数和返回值，揭示 Rust 如何将函数式编程的灵活性与所有权（Ownership）系统的安全性结合。
 > **前置概念**: [Traits](../02_intermediate/01_traits.md) · [Ownership](./01_ownership.md) · [Borrowing](./02_borrowing.md)
-> **后置概念**: [Iterator](../02_intermediate/16_iterator_patterns.md) · [Async](../03_advanced/02_async.md) · [Functional Patterns](../02_intermediate/07_closure_types.md)
+> **后置概念**: [Iterator](../02_intermediate/15_iterator_patterns.md) · [Async](../03_advanced/02_async.md) · [Functional Patterns](../02_intermediate/07_closure_types.md)
 
 ---
 
@@ -507,7 +507,7 @@ graph TD
 
 - [Traits](../02_intermediate/01_traits.md) — Trait 系统
 - [Ownership](./01_ownership.md) — 所有权（Ownership）
-- [Iterator](../02_intermediate/16_iterator_patterns.md) — 迭代器（Iterator）
+- [Iterator](../02_intermediate/15_iterator_patterns.md) — 迭代器（Iterator）
 - [Async](../03_advanced/02_async.md) — 异步编程
 
 ---

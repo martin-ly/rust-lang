@@ -13,7 +13,7 @@
 > **双维定位**: T×Fml — 工具链与形式化验证
 > **定位**: 将 Miri 从“nightly 玩具”还原为日常 unsafe 代码审查与教学的标准工具。
 > **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Ownership](../01_foundation/01_ownership.md)
-> **后置概念**: [Tree Borrows](./25_tree_borrows_deep_dive.md) · [BorrowSanitizer](./23_borrow_sanitizer.md) · [Kani](./22_modern_verification_tools.md)
+> **后置概念**: [Tree Borrows](./36_tree_borrows_deep_dive.md) · [BorrowSanitizer](./34_borrow_sanitizer_in_formal.md) · [Kani](./22_modern_verification_tools.md)
 
 ---
 
@@ -158,7 +158,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 # 除非能证明该模式在官方内存模型中会被接受。
 ```
 
-> **深度文档**: [Tree Borrows 深度解析](./25_tree_borrows_deep_dive.md)
+> **深度文档**: [Tree Borrows 深度解析](./36_tree_borrows_deep_dive.md)
 
 ---
 

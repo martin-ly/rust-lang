@@ -414,9 +414,9 @@ Rust for Linux 采用状态 (2024+):
 
 Rust for Linux 是 Rust 形式化工具与运行时检查的重要落地场景：
 
-- **[Safety Tags](../04_formal/22_safety_tags.md)**：内核中存在大量 `unsafe` 边界，Safety Tags（RFC #3842）可将 `# Safety` 文档注释转化为机器可读契约，帮助内核维护者审查 `unsafe` 调用点。
-- **[BorrowSanitizer](../04_formal/23_borrow_sanitizer.md)**：在 Rust/C 混合代码中检测别名模型违规，补充 Miri 无法覆盖的生产环境。
-- **[Tree Borrows](../04_formal/25_tree_borrows_deep_dive.md)**：相比 Stacked Borrows 更适合内核中常见的复杂借用（Borrowing）模式，已被 Miri 支持。
+- **[Safety Tags](../04_formal/33_safety_tags_in_formal.md)**：内核中存在大量 `unsafe` 边界，Safety Tags（RFC #3842）可将 `# Safety` 文档注释转化为机器可读契约，帮助内核维护者审查 `unsafe` 调用点。
+- **[BorrowSanitizer](../04_formal/34_borrow_sanitizer_in_formal.md)**：在 Rust/C 混合代码中检测别名模型违规，补充 Miri 无法覆盖的生产环境。
+- **[Tree Borrows](../04_formal/36_tree_borrows_deep_dive.md)**：相比 Stacked Borrows 更适合内核中常见的复杂借用（Borrowing）模式，已被 Miri 支持。
 - **[AutoVerus / Verus](../04_formal/24_autoverus.md)**：未来可用于验证内核抽象层（如 `kernel::sync`）的功能正确性。
 
 > **趋势判断**：内核代码对工具链的可审查性要求极高，Safety Tags + BorrowSanitizer 的组合有望成为 Rust for Linux 进入核心子系统前的标准流程。

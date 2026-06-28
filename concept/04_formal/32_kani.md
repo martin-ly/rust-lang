@@ -13,7 +13,7 @@
 > **双维定位**: T×Fml — 工具链与形式化验证
 > **定位**: 将 Kani 从"AWS 内部工具"还原为日常安全关键代码审查与教学的标准模型检查器。
 > **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Ownership](../01_foundation/01_ownership.md) · [现代验证工具生态](./22_modern_verification_tools.md)
-> **后置概念**: [Miri](./31_miri.md) · [BorrowSanitizer](./23_borrow_sanitizer.md)
+> **后置概念**: [Miri](./31_miri.md) · [BorrowSanitizer](./34_borrow_sanitizer_in_formal.md)
 
 ---
 

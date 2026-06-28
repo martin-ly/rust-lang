@@ -550,7 +550,7 @@ graph TD
 - [Type Theory](./02_type_theory.md) — 类型论
 - [Generics](../02_intermediate/02_generics.md) — 泛型（Generics）
 - [Traits](../02_intermediate/01_traits.md) — Trait 系统
-- [Iterator](../02_intermediate/16_iterator_patterns.md) — 迭代器（Iterator）
+- [Iterator](../02_intermediate/15_iterator_patterns.md) — 迭代器（Iterator）
 
 ---
 

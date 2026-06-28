@@ -13,7 +13,7 @@
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×Eva
 > **前置依赖**: [形式化验证](05_verification_toolchain.md) · [形式化验证工具生态](../06_ecosystem/47_formal_verification_tools.md)
-> **后置延伸**: [Safety Tags](22_safety_tags.md) · [BorrowSanitizer](23_borrow_sanitizer.md)
+> **后置延伸**: [Safety Tags](33_safety_tags_in_formal.md) · [BorrowSanitizer](34_borrow_sanitizer_in_formal.md)
 >
 > **来源**: [Verus GitHub](https://github.com/verus-lang/verus) · [Verus 文档](https://verus-lang.github.io/verus/) · [AutoVerus 论文 (OOPSLA 2025)](https://doi.org/10.1145/3763174) · [arXiv 版本](https://arxiv.org/abs/2409.13082)
 
@@ -168,6 +168,6 @@ B
 
 - [形式化验证](05_verification_toolchain.md)
 - [形式化验证工具生态](../06_ecosystem/47_formal_verification_tools.md)
-- [Safety Tags](22_safety_tags.md)
-- [BorrowSanitizer](23_borrow_sanitizer.md)
+- [Safety Tags](33_safety_tags_in_formal.md)
+- [BorrowSanitizer](34_borrow_sanitizer_in_formal.md)
 - [Rust 1.98+ 预览](../07_future/rust_1_98_preview.md)

@@ -204,7 +204,7 @@
 | **HRTB (Higher-Ranked Trait Bounds)** | [L1: 生命周期](../01_foundation/03_lifetimes.md) | L2 Trait、L4 类型论 | 评价 | ← 生命周期 + 泛型 ≡ ∀<'a> |
 | **HM Type Inference** | [L4: 类型论](../04_formal/02_type_theory.md) | L1 类型系统、L2 泛型 | 分析 | → 类型自动推导 |
 | **hax** | [L6: 形式化验证](../06_ecosystem/47_formal_verification_tools.md) | L4 形式化、L6 密码学 | 分析 | ← Rust → F*/Rocq 翻译 → 验证 |
-| **HIR (High-level IR)** | [L4: Name Resolution and HIR](../04_formal/25_name_resolution_and_hir.md) | L4 rustc、L4 Type System | 分析 | ← AST → Type Checking → MIR
+| **HIR (High-level IR)** | [L4: Name Resolution and HIR](../04_formal/35_name_resolution_and_hir.md) | L4 rustc、L4 Type System | 分析 | ← AST → Type Checking → MIR
 
 ### I
 
@@ -248,7 +248,7 @@
 |:---|:---|:---|:---|:---|
 | **Newtype Pattern** | [L6: 设计模式](../06_ecosystem/02_patterns.md) | L1 类型系统、L2 Trait | 应用 | ← 零大小类型 → 类型安全 |
 | **NLL (Non-Lexical Lifetimes)** | [L1: 生命周期](../01_foundation/03_lifetimes.md) | L4 区域类型 | 分析 | ← 词法作用域 → 控制流敏感 |
-| **Name Resolution** | [L4: Name Resolution and HIR](../04_formal/25_name_resolution_and_hir.md) | L1 模块、L3 宏、L4 rustc | 分析 | ← 命名空间 + Rib → HIR |
+| **Name Resolution** | [L4: Name Resolution and HIR](../04_formal/35_name_resolution_and_hir.md) | L1 模块、L3 宏、L4 rustc | 分析 | ← 命名空间 + Rib → HIR |
 
 ### O
 

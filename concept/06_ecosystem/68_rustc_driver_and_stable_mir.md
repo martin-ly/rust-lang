@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **F** — Formal
 > **双维定位**: F×Inf — 编译器基础设施与工具接口
 > **定位**: 把“如何把 rustc 当库用”讲清楚：driver 的回调机制、interface 的低级 API、以及面向外部工具的 Stable MIR（rustc_public）愿景。
-> **前置概念**: [Rustc Query System](../04_formal/19_rustc_query_system.md) · [Name Resolution and HIR](../04_formal/25_name_resolution_and_hir.md) · [LLVM Backend and Codegen](./67_llvm_backend_and_codegen.md)
+> **前置概念**: [Rustc Query System](../04_formal/19_rustc_query_system.md) · [Name Resolution and HIR](../04_formal/35_name_resolution_and_hir.md) · [LLVM Backend and Codegen](./67_llvm_backend_and_codegen.md)
 > **后置概念**: [Compiler Infrastructure](./47_compiler_infrastructure.md) · [Compiler Diagnostics and UI Tests](./49_compiler_diagnostics_and_ui_tests.md)（待补）
 
 > **来源**: [Rustc Dev Guide — rustc_driver](https://rustc-dev-guide.rust-lang.org/rustc-driver/intro.html) · [Stable MIR](https://github.com/rust-lang/project-stable-mir)

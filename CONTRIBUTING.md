@@ -131,6 +131,18 @@ cargo test --workspace        # 应全部通过
 - 后续使用中文或英文均可，但同一文件内保持一致
 - 参考 `concept/00_meta/terminology_glossary.md` 中的标准译法
 
+### 国际化（i18n）规范
+
+- 所有 `concept/` 非归档 Markdown 文件必须包含 `**EN**` 英文标题与 `**Summary**` 英文摘要
+- `**EN**` 应为通用、准确的英文标题，避免占位符
+- `**Summary**` 用 1-2 句话概括文件核心内容，便于国际学习者快速索引
+- 修改概念文件后，可运行以下脚本自查：
+
+  ```bash
+  python scripts/i18n/check_concept_headers.py
+  python scripts/i18n/check_terminology_consistency.py
+  ```
+
 ---
 
 ## 验证清单（提交前必做）

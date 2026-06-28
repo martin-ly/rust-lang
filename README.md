@@ -8,6 +8,7 @@
 [![Edition](https://img.shields.io/badge/edition-2024-purple.svg)](https://doc.rust-lang.org/edition-guide/rust-2024/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![KB Quality](https://img.shields.io/badge/kb_quality-23_risk_files-yellow.svg)](reports/kb_quality_dashboard.md)
+[![i18n](https://img.shields.io/badge/i18n-EN%2FSummary%20100%25-success.svg)](concept/00_meta/LEARNING_MVP_PATH.md)
 
 ---
 
@@ -30,6 +31,22 @@ L7 未来 ──→ AI 集成、形式化方法、语言演进
 
 ---
 
+## 🌍 国际学习者入口
+
+本知识库以**中文深度内容**为主体，同时为国际化可读性提供：
+
+- 每个 `concept/` 概念文件均含 `**EN**` 英文标题与 `**Summary**` 英文摘要
+- [`terminology_glossary.md`](concept/00_meta/terminology_glossary.md) 提供 180+ 中英术语对照
+- [`LEARNING_MVP_PATH.md`](concept/00_meta/LEARNING_MVP_PATH.md) 对接国际官方/经典教程：
+  - [The Rust Programming Language (3rd Ed)](https://doc.rust-lang.org/book/)
+  - [Brown University Interactive Book](https://rust-book.cs.brown.edu/)
+  - [Google Comprehensive Rust](https://google.github.io/comprehensive-rust/)
+  - [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
+
+> 欢迎通过 Issue 或 PR 反馈术语翻译、链接可达性与跨文化学习体验问题。
+
+---
+
 ## 快速开始
 
 ### 学习路径
@@ -40,6 +57,7 @@ L7 未来 ──→ AI 集成、形式化方法、语言演进
 | 💼 **面试准备** | [`quick_reference.md`](concept/00_meta/quick_reference.md) + [`self_assessment.md`](concept/00_meta/self_assessment.md) | 8-12h |
 | 🎓 **学术深入** | L4 形式化层 + [`semantic_space.md`](concept/00_meta/semantic_space.md) | 20-30h |
 | 🔧 **问题驱动** | [`self_assessment.md`](concept/00_meta/self_assessment.md) 错题 → 对应章节 | 按需 |
+| 🌍 **国际学习者** | [`LEARNING_MVP_PATH.md`](concept/00_meta/LEARNING_MVP_PATH.md) → 官方文档对照 | 按需 |
 
 ### 质量审计
 

@@ -31,7 +31,6 @@
     - [常见错误分析](#常见错误分析)
   - [🎓 学习检查点](#-学习检查点)
   - [📖 延伸阅读](#-延伸阅读)
-<a id="完成度-05-练习"></a>
   - [**完成度**: 0/5 练习](#完成度-05-练习)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -69,7 +68,7 @@ use std::marker::PhantomPinned;
 /// 自引用结构体：header 指向 content 的一部分
 pub struct Document {
     content: String,
-    header: *const str,  // 指向 content 的某个部分
+    header: *const str,
     _pin: PhantomPinned,
 }
 
@@ -80,71 +79,11 @@ impl Document {
     /// - content 必须非空
     /// - header 指向 content 的前 50 个字符或全部
     pub fn new(content: String) -> Pin<Box<Self>> {
-        // TODO: 实现创建逻辑
-        todo!()
-    }
-
-    /// 获取 header
-    pub fn header(self: Pin<&Self>) -> &str {
-        // TODO: 安全地返回 header
-        todo!()
-    }
-
-    /// 获取 content
-    pub fn content(self: Pin<&Self>) -> &str {
-        // TODO: 返回 content
-        todo!()
-    }
-
-    /// 追加内容（这会改变 content，需要小心处理）
-    ///
-    /// # 挑战
-    /// 如果 content 重新分配，header 指针会失效
-    /// 如何解决？
-    pub fn append(self: Pin<&mut Self>, text: &str) {
-        // TODO: 安全地追加内容
-        // 提示：可能需要使用 Box::pin 和 Pin::as_mut()
-        todo!()
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_document_creation() {
-        let doc = Document::new("Hello, World! This is a test document.".to_string());
-        assert_eq!(doc.header(), "Hello, World! This is a test document.");
-    }
-
-    #[test]
-    fn test_document_append() {
-        let mut doc = Document::new("Hello".to_string());
-        doc.as_mut().append(", World!");
-        assert!(doc.content().contains("Hello, World!"));
-    }
-}
-```
-
-**参考答案**:
-
-<details>
-<summary>点击展开</summary>
-
-```rust,ignore
-use std::pin::Pin;
-use std::marker::PhantomPinned;
-
-pub struct Document {
-    content: String,
-    header: *const str,
-    _pin: PhantomPinned,
-}
-
-impl Document {
-    pub fn new(content: String) -> Pin<Box<Self>> {
-        let header_len = content.len().min(50);
+        let header_len = content
+            .char_indices()
+            .nth(50)
+            .map(|(i, _)| i)
+            .unwrap_or(content.len());
         let header_ptr = &content[..header_len] as *const str;
 
         let mut boxed = Box::pin(Document {
@@ -155,35 +94,65 @@ impl Document {
 
         // 修正 header 指针，使其指向堆上的 content
         unsafe {
-            let content_ptr = &boxed.content as *const String;
-            let str_ptr = &(*content_ptr)[..header_len] as *const str;
+            let content_ref = &boxed.as_ref().content;
+            let str_ptr = &content_ref[..header_len] as *const str;
             boxed.as_mut().get_unchecked_mut().header = str_ptr;
         }
 
         boxed
     }
 
+    /// 获取 header
     pub fn header(self: Pin<&Self>) -> &str {
         unsafe { &*self.header }
     }
 
+    /// 获取 content
     pub fn content(self: Pin<&Self>) -> &str {
-        &self.content
+        &self.get_ref().content
     }
 
+    /// 追加内容（这会改变 content，需要小心处理）
+    ///
+    /// # 说明
+    /// 如果 content 重新分配，原来的 header 指针会失效，
+    /// 因此追加后需要重新计算 header。
     pub fn append(self: Pin<&mut Self>, text: &str) {
         let this = unsafe { self.get_unchecked_mut() };
-        let old_len = this.content.len();
         this.content.push_str(text);
 
-        // 重新计算 header 指针
-        let header_len = old_len.min(50);
+        let header_len = this
+            .content
+            .char_indices()
+            .nth(50)
+            .map(|(i, _)| i)
+            .unwrap_or(this.content.len());
         this.header = &this.content[..header_len] as *const str;
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_document_creation() {
+        let doc = Document::new("Hello, World! This is a test document.".to_string());
+        assert_eq!(doc.as_ref().header(), "Hello, World! This is a test document.");
+    }
+
+    #[test]
+    fn test_document_append() {
+        let mut doc = Document::new("Hello".to_string());
+        doc.as_mut().append(", World!");
+        assert!(doc.as_ref().content().contains("Hello, World!"));
     }
 }
 ```
 
-</details>
+**解析**：
+
+关键点在于：先把 `content` 移入 `Box` 以获得稳定的堆地址，再通过 `Pin::as_mut().get_unchecked_mut()` 修正 `header` 指针；追加内容后 `String` 可能重新分配，因此必须重新计算 `header`。
 
 ---
 
@@ -195,7 +164,8 @@ impl Document {
 
 ```rust
 use std::ptr::NonNull;
-use std::alloc::{alloc, dealloc, Layout};
+use std::alloc::{alloc, dealloc, handle_alloc_error, Layout};
+use std::ptr;
 
 /// RcBox 包含值和引用计数
 struct RcBox<T> {
@@ -217,26 +187,45 @@ pub struct MyWeak<T> {
 impl<T> MyRc<T> {
     /// 创建新的 MyRc
     pub fn new(value: T) -> Self {
-        // TODO: 分配内存并初始化
-        todo!()
+        let layout = Layout::new::<RcBox<T>>();
+        let ptr = unsafe { alloc(layout) as *mut RcBox<T> };
+        if ptr.is_null() {
+            handle_alloc_error(layout);
+        }
+        unsafe {
+            ptr.write(RcBox {
+                value,
+                strong: 1,
+                weak: 0,
+            });
+        }
+        Self {
+            ptr: unsafe { NonNull::new_unchecked(ptr) },
+        }
     }
 
     /// 获取引用计数
     pub fn strong_count(&self) -> usize {
-        // TODO: 返回强引用计数
-        todo!()
+        unsafe { (*self.ptr.as_ptr()).strong }
     }
 
     /// 创建弱引用
     pub fn downgrade(&self) -> MyWeak<T> {
-        // TODO: 创建弱引用
-        todo!()
+        unsafe {
+            (*self.ptr.as_ptr()).weak += 1;
+        }
+        MyWeak { ptr: self.ptr }
     }
 
-    /// 获取内部值
+    /// 获取内部值的可变引用
+    ///
+    /// 只有在强引用为 1、且没有弱引用时才安全
     pub fn get_mut(&mut self) -> Option<&mut T> {
-        // TODO: 只有在强引用为1时返回可变引用
-        todo!()
+        if self.strong_count() == 1 && unsafe { (*self.ptr.as_ptr()).weak } == 0 {
+            Some(unsafe { &mut self.ptr.as_mut().value })
+        } else {
+            None
+        }
     }
 }
 
@@ -244,44 +233,69 @@ impl<T> std::ops::Deref for MyRc<T> {
     type Target = T;
 
     fn deref(&self) -> &T {
-        // TODO: 返回值的引用
-        todo!()
+        unsafe { &(*self.ptr.as_ptr()).value }
     }
 }
 
 impl<T> Clone for MyRc<T> {
     fn clone(&self) -> Self {
-        // TODO: 增加引用计数并返回新指针
-        todo!()
+        unsafe {
+            (*self.ptr.as_ptr()).strong += 1;
+        }
+        Self { ptr: self.ptr }
     }
 }
 
 impl<T> Drop for MyRc<T> {
     fn drop(&mut self) {
-        // TODO: 减少引用计数，如果为0则释放内存
-        todo!()
+        unsafe {
+            let b = self.ptr.as_mut();
+            b.strong -= 1;
+            if b.strong == 0 {
+                ptr::drop_in_place(&mut b.value);
+                if b.weak == 0 {
+                    let layout = Layout::new::<RcBox<T>>();
+                    dealloc(self.ptr.as_ptr() as *mut u8, layout);
+                }
+            }
+        }
     }
 }
 
 impl<T> MyWeak<T> {
     /// 尝试升级弱引用
     pub fn upgrade(&self) -> Option<MyRc<T>> {
-        // TODO: 如果值还存在，返回新的 MyRc
-        todo!()
+        unsafe {
+            let b = &*self.ptr.as_ptr();
+            if b.strong > 0 {
+                (*self.ptr.as_ptr()).strong += 1;
+                Some(MyRc { ptr: self.ptr })
+            } else {
+                None
+            }
+        }
     }
 }
 
 impl<T> Clone for MyWeak<T> {
     fn clone(&self) -> Self {
-        // TODO: 增加弱引用计数
-        todo!()
+        unsafe {
+            (*self.ptr.as_ptr()).weak += 1;
+        }
+        Self { ptr: self.ptr }
     }
 }
 
 impl<T> Drop for MyWeak<T> {
     fn drop(&mut self) {
-        // TODO: 减少弱引用计数
-        todo!()
+        unsafe {
+            let b = self.ptr.as_mut();
+            b.weak -= 1;
+            if b.weak == 0 && b.strong == 0 {
+                let layout = Layout::new::<RcBox<T>>();
+                dealloc(self.ptr.as_ptr() as *mut u8, layout);
+            }
+        }
     }
 }
 
@@ -334,6 +348,7 @@ pub struct Closed;
 /// TCP 连接，使用类型状态确保状态转换正确
 pub struct TcpConnection<State> {
     address: String,
+    #[allow(dead_code)]
     state: State,
 }
 
@@ -346,8 +361,10 @@ impl TcpConnection<Disconnected> {
     }
 
     pub fn connect(self) -> TcpConnection<Connecting> {
-        // TODO: 转换到 Connecting 状态
-        todo!()
+        TcpConnection {
+            address: self.address,
+            state: Connecting,
+        }
     }
 }
 
@@ -358,25 +375,38 @@ impl TcpConnection<Connecting> {
     /// - Ok: 连接成功，进入 Connected 状态
     /// - Err: 连接失败，回到 Disconnected 状态
     pub fn finalize(self) -> Result<TcpConnection<Connected>, TcpConnection<Disconnected>> {
-        // TODO: 模拟连接结果
-        todo!()
+        if self.address.is_empty() {
+            Err(TcpConnection {
+                address: self.address,
+                state: Disconnected,
+            })
+        } else {
+            Ok(TcpConnection {
+                address: self.address,
+                state: Connected,
+            })
+        }
     }
 }
 
 impl TcpConnection<Connected> {
     pub fn send(&self, data: &[u8]) -> Result<(), String> {
-        // TODO: 发送数据
-        todo!()
+        if data.is_empty() {
+            Err("cannot send empty data".to_string())
+        } else {
+            Ok(())
+        }
     }
 
     pub fn receive(&self) -> Result<Vec<u8>, String> {
-        // TODO: 接收数据
-        todo!()
+        Ok(vec![b'H', b'e', b'l', b'l', b'o'])
     }
 
     pub fn close(self) -> TcpConnection<Closed> {
-        // TODO: 关闭连接
-        todo!()
+        TcpConnection {
+            address: self.address,
+            state: Closed,
+        }
     }
 }
 
@@ -443,20 +473,20 @@ impl<T> Buffer<T> {
 
     /// 获取可变的迭代器
     ///
-    /// # 挑战
-    /// 如何让迭代器返回的每一项都可以独立修改？
+    /// 通过原始指针为每一项创建独立的可变引用，
+    /// 使调用者可以在迭代过程中修改元素。
     pub fn iter_mut<'a>(&'a mut self) -> BufferIter<'a, T> {
-        // TODO: 实现可变迭代器
-        todo!()
+        BufferIter {
+            buffer: self,
+            index: 0,
+        }
     }
 
     /// 安全地交换两个元素
-    ///
-    /// # 挑战
-    /// 如何在存在活跃引用时交换元素？
     pub fn swap(&mut self, i: usize, j: usize) {
-        // TODO: 安全交换
-        todo!()
+        if i < self.data.len() && j < self.data.len() {
+            self.data.swap(i, j);
+        }
     }
 }
 
@@ -464,8 +494,14 @@ impl<'a, T> Iterator for BufferIter<'a, T> {
     type Item = BufferItem<'a, T>;
 
     fn next(&mut self) -> Option<Self::Item> {
-        // TODO: 实现迭代逻辑
-        todo!()
+        if self.index < self.buffer.data.len() {
+            let ptr = self.buffer.data.as_mut_ptr();
+            let item = unsafe { &mut *ptr.add(self.index) };
+            self.index += 1;
+            Some(BufferItem { item })
+        } else {
+            None
+        }
     }
 }
 
@@ -480,8 +516,7 @@ impl<'a, T> BufferItem<'a, T> {
 
     /// 用新值替换当前项，返回旧值
     pub fn replace(&mut self, new_value: T) -> T {
-        // TODO: 替换值
-        todo!()
+        std::mem::replace(self.item, new_value)
     }
 }
 
@@ -514,7 +549,7 @@ mod tests {
 
 **目标**: 实现一个带有回调的解析器，处理复杂生命周期。
 
-```rust,ignore
+```rust
 /// 解析事件
 type ParseEvent<'a> = &'a str;
 
@@ -541,19 +576,36 @@ impl<'a, H: EventHandler<'a>> Parser<'a, H> {
 
     /// 解析下一个 token
     ///
-    /// # 挑战
-    /// - 返回的 token 引用 input
-    /// - 同时可能需要调用 handler（也需要引用）
-    /// - 如何在同一个作用域处理这些引用？
+    /// 返回的 token 引用 input，同时调用 handler 通知一次事件。
     pub fn next_token(&mut self) -> Option<&'a str> {
-        // TODO: 解析 token
-        todo!()
+        let remaining = &self.input[self.position..];
+        let start = remaining
+            .find(|c: char| !c.is_whitespace())
+            .unwrap_or(remaining.len());
+        self.position += start;
+
+        if self.position >= self.input.len() {
+            return None;
+        }
+
+        let rest = &self.input[self.position..];
+        let len = rest
+            .find(|c: char| c.is_whitespace())
+            .unwrap_or(rest.len());
+        let token = &self.input[self.position..self.position + len];
+        self.position += len;
+
+        self.handler.on_event(token);
+        Some(token)
     }
 
     /// 解析所有 token
     pub fn parse_all(mut self) -> Vec<&'a str> {
-        // TODO: 解析所有 token
-        todo!()
+        let mut tokens = Vec::new();
+        while let Some(token) = self.next_token() {
+            tokens.push(token);
+        }
+        tokens
     }
 }
 
@@ -573,7 +625,11 @@ pub struct Collector<'b> {
     events: Vec<&'b str>,
 }
 
-impl<'a, 'b: 'a> EventHandler<'a> for Collector<'b> {
+impl<'a, 'b> EventHandler<'a> for Collector<'b>
+where
+    'a: 'b,
+    'b: 'a,
+{
     fn on_event(&mut self, event: ParseEvent<'a>) {
         self.events.push(event);
     }
@@ -608,12 +664,23 @@ mod tests {
 为练习 2 中的 `MyRc<T>` 正确实现 `Send` 和 `Sync` trait。
 
 ```rust,ignore
-// TODO: 在什么条件下 MyRc<T> 是 Send？
-// TODO: 在什么条件下 MyRc<T> 是 Sync？
-// TODO: MyWeak<T> 呢？
+// 条件说明：
+// - MyRc<T> 是 Send 当且仅当 T: Send + Sync。
+//   将 MyRc 移动到另一个线程后，可能通过克隆让其他线程共享访问内部 T，
+//   因此需要 T 既能跨线程移动（Send）也能跨线程共享（Sync）。
+// - MyRc<T> 是 Sync 当且仅当 T: Send + Sync。
+//   多个线程同时持有 &MyRc<T> 时，都能解引用到 &T，要求 T: Sync；
+//   同时 RcBox 中的 value 可能随 MyRc 被移动到另一个线程，要求 T: Send。
+// - MyWeak<T> 的条件与 MyRc<T> 相同：它只保存指向 RcBox 的指针，
+//   upgrade 后得到 MyRc<T>，因此 Send/Sync 的约束同样是 T: Send + Sync。
+//
+// 注意：本练习的 MyRc 使用非原子计数，实际并不能安全地跨线程使用。
+// 这里给出的 Send/Sync 条件是从“如果计数是原子的 Arc”角度推导的。
 
 unsafe impl<T: Send + Sync> Send for MyRc<T> {}
 unsafe impl<T: Send + Sync> Sync for MyRc<T> {}
+unsafe impl<T: Send + Sync> Send for MyWeak<T> {}
+unsafe impl<T: Send + Sync> Sync for MyWeak<T> {}
 ```
 
 ### 挑战 2: 无锁数据结构 (120分钟)
@@ -644,21 +711,57 @@ impl<T> LockFreeStack<T> {
 
     /// 使用 CAS 操作实现 push
     pub fn push(&self, value: T) {
-        // TODO: 使用 compare_and_swap 实现
-        todo!()
+        let new_node = Box::into_raw(Box::new(Node {
+            value,
+            next: ptr::null_mut(),
+        }));
+        loop {
+            let head = self.head.load(Ordering::Acquire);
+            unsafe {
+                (*new_node).next = head;
+            }
+            match self.head.compare_exchange(
+                head,
+                new_node,
+                Ordering::Release,
+                Ordering::Relaxed,
+            ) {
+                Ok(_) => break,
+                Err(_) => continue,
+            }
+        }
     }
 
     /// 使用 CAS 操作实现 pop
     pub fn pop(&self) -> Option<T> {
-        // TODO: 使用 compare_and_swap 实现
-        todo!()
+        loop {
+            let head = self.head.load(Ordering::Acquire);
+            if head.is_null() {
+                return None;
+            }
+            let next = unsafe { (*head).next };
+            match self.head.compare_exchange(
+                head,
+                next,
+                Ordering::AcqRel,
+                Ordering::Acquire,
+            ) {
+                Ok(_) => {
+                    let value = unsafe { ptr::read(&(*head).value) };
+                    unsafe {
+                        drop(Box::from_raw(head));
+                    }
+                    return Some(value);
+                }
+                Err(_) => continue,
+            }
+        }
     }
 }
 
 impl<T> Drop for LockFreeStack<T> {
     fn drop(&mut self) {
-        // TODO: 安全地释放所有节点
-        todo!()
+        while self.pop().is_some() {}
     }
 }
 ```

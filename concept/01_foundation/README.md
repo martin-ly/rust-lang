@@ -183,7 +183,7 @@ Type System（理解"类型即证明"）
 - [Never Type (`!`)：底类型与穷尽性](./05_never_type.md)
 - Rust 错误处理（Error Handling）基础
 - 模块（Module）系统与路径：Rust 的代码组织哲学
-- [Rust 数值类型与运算](./11_numeric_types.md)
+- [数值类型与运算：从整数到浮点的完整图景](./10_numerics.md)
 - [属性与声明宏（Declarative Macro）：编译期元编程基础](12_attributes_and_macros.md)
 - [Panic 与 Abort：不可恢复错误的处理机制](./13_panic_and_abort.md)
 - [类型强制与转换：显式与隐式的边界](./14_coercion_and_casting.md)
