@@ -91,7 +91,7 @@ Wasm 的内存模型:
 ```
 
 > **设计洞察**: Wasm 的**无未定义行为**保证与 Rust 的**安全子集**高度契合。C/C++ 编译到 Wasm 时，许多 UB 行为（如越界访问）被 Wasm 运行时（Runtime）捕获；而 Rust 在编译期就消除了这类 UB。
-> [来源: [WebAssembly Specification — Security](https://webassembly.github.io/spec/core/appendix/security.html)]
+> [来源: [WebAssembly Specification — Security](https://webassembly.github.io/spec/core/appendix/index.html)]
 
 **可编译示例** — 极简 Wasm 导出函数（Rust 1.82+ 必须使用 `#[unsafe(no_mangle)]`）：
 
@@ -355,7 +355,7 @@ graph TD
 > **认知功能**: 此决策树评估 Rust + Wasm 的适用性。核心判断标准是**宿主交互频率**和**二进制大小敏感度**。
 > **使用建议**: 计算密集型、沙箱化需求高的场景优先 Rust + Wasm；与宿主频繁交互的场景需评估跨边界开销。
 > **关键洞察**: Wasm 的**跨边界调用**（Wasm ↔ Host）有固定开销（序列化/边界检查）。如果应用是"细粒度频繁调用"型，原生实现可能更优。
-> [来源: [Wasm Performance Guide](https://webassembly.org/docs/portability-and-performance/)]
+> [来源: [Wasm Performance Guide](https://webassembly.org/docs/portability/)]
 
 ---
 

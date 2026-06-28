@@ -108,7 +108,7 @@
 ```
 
 > **类型洞察**: **Scala 的类型系统（Type System）更表达丰富（HKT），Rust 的类型系统更安全（所有权）**——两者代表了不同的设计哲学。
-> [来源: [Scala Type System](https://docs.scala-lang.org/scala3/book/types-intro.html)]
+> [来源: [Scala Type System](https://docs.scala-lang.org/scala3/book/types-introduction.html)]
 
 ---
 
@@ -238,7 +238,7 @@
 ```
 
 > **推断洞察**: **Scala 的类型推断更学术化，Rust 的类型推断更工程化**——两者都减少样板代码。
-> [来源: [Scala Type Inference](https://docs.scala-lang.org/scala3/book/types-inference.html)]
+> [来源: [Scala Type Inference](https://docs.scala-lang.org/scala3/book/types-inferred.html)]
 
 ---
 
@@ -408,7 +408,7 @@
 ```
 
 > **互操作洞察**: **Scala 是 JVM 生态的"最佳公民"，Rust 是系统编程的"通用胶水"**。
-> [来源: [Scala Interop](https://docs.scala-lang.org/scala3/book/interop.html)]
+> [来源: [Scala Interop](https://docs.scala-lang.org/scala3/book/interacting-with-java.html)]
 
 ---
 
@@ -643,7 +643,7 @@ fn main() {
 }
 ```
 
-> **修正**: Scala 的**隐式转换**（implicit conversions）允许编译器在类型不匹配时自动插入转换函数：`implicit def kmToM(k: Kilometers): Meters = Meters(k.value * 1000)`。这提供了极大的便利性（如 `5.km` 自动转为 `Meters`），但也导致难以追踪的编译错误（隐式解析失败时的错误信息复杂）和意外行为（不期望的转换被应用）。Rust 的 `From`/`Into` trait 要求**显式** `.into()` 调用，转换点一目了然。这与 C++ 的隐式转换构造函数（单参数构造函数自动成为转换）或 Go 的无转换（必须显式）不同——Rust 选择了 Go 的显式路径，但提供了 `From`/`Into` 的标准化转换接口。Scala 3 的 `given`/`using` 替代了 `implicit`，但隐式转换仍存在（需显式导入）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html)] · [来源: [Scala Implicit Conversions](https://docs.scala-lang.org/topic/implicit-conversions.html)]
+> **修正**: Scala 的**隐式转换**（implicit conversions）允许编译器在类型不匹配时自动插入转换函数：`implicit def kmToM(k: Kilometers): Meters = Meters(k.value * 1000)`。这提供了极大的便利性（如 `5.km` 自动转为 `Meters`），但也导致难以追踪的编译错误（隐式解析失败时的错误信息复杂）和意外行为（不期望的转换被应用）。Rust 的 `From`/`Into` trait 要求**显式** `.into()` 调用，转换点一目了然。这与 C++ 的隐式转换构造函数（单参数构造函数自动成为转换）或 Go 的无转换（必须显式）不同——Rust 选择了 Go 的显式路径，但提供了 `From`/`Into` 的标准化转换接口。Scala 3 的 `given`/`using` 替代了 `implicit`，但隐式转换仍存在（需显式导入）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html)] · [来源: [Scala Implicit Conversions](https://docs.scala-lang.org/scala3/reference/contextual/conversions.html)]
 
 ### 10.4 边界测试：Scala 的 actor 模型与 Rust 的 async/channel 的并发模型差异（运行时死锁）
 

@@ -402,7 +402,7 @@ fn main() {
 > BorrowSanitizer 的设计必须选择内存模型（Stacked Borrows 更严格、更多误报；Tree Borrows 更宽松、可能漏报）。
 > 这与 ASan（AddressSanitizer）的 false positive 问题类似——工具开发者需在检测能力和可用性间权衡。
 > [来源: [LLVM Sanitizers](https://clang.llvm.org/docs/AddressSanitizer.html)] ·
-> [来源: [Tree Borrows Paper](https://www.ralfj.de/blog/2023/01/31/tree-borrows.html)]
+> [来源: [Tree Borrows Paper](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html)]
 
 ### 10.2 边界测试：Sanitizer 与优化的交互（运行时检测丢失）
 
@@ -506,7 +506,7 @@ fn main() {
 > 2) 对误报使用 `#[cfg(not(sanitize = "borrow"))]` 跳过；
 > 3) 用 Miri 交叉验证。
 >
-> [来源: [LLVM Sanitizers](https://clang.llvm.org/docs/AddressSanitizer.html)] · [来源: [Tree Borrows](https://www.ralfj.de/blog/2023/01-31_tree-borrows.html)]
+> [来源: [LLVM Sanitizers](https://clang.llvm.org/docs/AddressSanitizer.html)] · [来源: [Tree Borrows](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html)]
 
 ### 10.5 边界测试：BorrowSanitizer 与 Miri 的检测范围差异（UB 漏检）
 

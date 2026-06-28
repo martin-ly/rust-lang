@@ -227,7 +227,7 @@ fn load_llama_model() -> anyhow::Result<Llama> {
 
 ### 3.2 burn：可移植深度学习框架
 
-> **[burn](https://burn.dev/)** 是一个用纯 Rust 编写的深度学习框架，核心设计目标是**后端无关性**（Backend Agnostic）——同一模型代码可编译到 CPU（ndarray）、GPU（WGPU/CUDA）、Web（WASM）等多种后端。[来源: [burn Book](https://burn.dev/book/)]
+> **[burn](https://burn.dev/)** 是一个用纯 Rust 编写的深度学习框架，核心设计目标是**后端无关性**（Backend Agnostic）——同一模型代码可编译到 CPU（ndarray）、GPU（WGPU/CUDA）、Web（WASM）等多种后端。[来源: [burn Book](https://burn.dev/books/burn/)]
 
 ```rust
 // burn 的后端无关 API
@@ -278,7 +278,7 @@ fn run_gpu() {
         └── cuda-backend ─────→ NVIDIA GPU (cuDNN)
 ```
 
-> **来源**: [burn Book — Backend](https://burn.dev/book/building-blocks/backend.html) · [burn GitHub](https://github.com/tracel-ai/burn) · [WGPU Documentation](https://wgpu.rs/)
+> **来源**: [burn Book — Backend](https://burn.dev/books/burn/building-blocks/backend.html) · [burn GitHub](https://github.com/tracel-ai/burn) · [WGPU Documentation](https://wgpu.rs/)
 
 ### 3.3 tch-rs：PyTorch C++ API 绑定
 
@@ -664,7 +664,7 @@ Rust ML 的解决:
   4. 编译期检查：张量维度在类型中编码（如 burn 的 Tensor<B, 2>）
 ```
 
-> **来源**: [Rust Performance Book](https://nnethercote.github.io/perf-book/) · [Why Rust for ML](https://burn.dev/blog/why-rust-for-deep-learning.html)
+> **来源**: [Rust Performance Book](https://nnethercote.github.io/perf-book/) · [Why Rust for ML](https://burn.dev/blog/a-case-for-rust-in-deep-learning/)
 
 ### 7.2 限制分析
 
@@ -676,7 +676,7 @@ Rust ML 的解决:
 | **动态形状** | 编译期形状检查限制灵活性 | `Vec<usize>` 动态维度 |
 | **GPU 内核** | 手写 CUDA 少，依赖库 | Rust CUDA（rustacuda）、WGPU |
 
-> **来源**: [Rust ML Community](https://github.com/rust-ml) · [burn Limitations](https://burn.dev/book/)
+> **来源**: [Rust ML Community](https://github.com/rust-ml) · [burn Limitations](https://burn.dev/books/burn/)
 
 ---
 
@@ -715,7 +715,7 @@ Rust ML 的解决:
            探索性数据分析（EDA）和小数据场景中仍然便利。
 ```
 
-> **来源**: [Polars vs Pandas](https://pola.rs/posts/polars-pandas-xlsxwriter/) · [Why Not Always Rust](https://matklad.github.io/2023/03/26/rust-myths-and-vegetables.html)
+> **来源**: [Polars vs Pandas [已失效]]<!-- 原链接: https://pola.rs/posts/polars-pandas-xlsxwriter/ --> · [Why Not Always Rust](https://matklad.github.io/2023/03/26/rust-myths-and-vegetables.html)
 
 ### 8.2 边界极限
 
@@ -803,7 +803,7 @@ fn good_parallel_df() {
 }
 ```
 
-> **来源**: [Polars Thread Safety](https://docs.pola.rs/user-guide/concepts/data-structures/#dataframe) · [Arrow Thread Safety](https://arrow.apache.org/docs/cpp/api/thread.html)
+> **来源**: [Polars Thread Safety](https://docs.pola.rs/user-guide/concepts/data-types-and-structures/) · [Arrow Thread Safety](https://arrow.apache.org/docs/cpp/api/thread.html)
 
 ### 9.3 边界测试：模型输入维度不匹配导致 panic（逻辑错误）
 
@@ -837,7 +837,7 @@ fn safe_inference(model: &impl Module<B>, input: Tensor<B, 2>) {
 // Tensor<B, 2> 编译期保证是 2D 张量，但具体大小仍需运行时检查
 ```
 
-> **来源**: [burn Tensor](https://burn.dev/book/building-blocks/tensor.html) · [Defensive Programming](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html)
+> **来源**: [burn Tensor](https://burn.dev/books/burn/building-blocks/tensor.html) · [Defensive Programming](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html)
 
 ---
 

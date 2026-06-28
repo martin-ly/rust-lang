@@ -15,7 +15,7 @@
 > **前置依赖**: [类型系统（Type System）](../01_foundation/04_type_system.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · 形式化验证 · [生命周期（Lifetimes）](../01_foundation/03_lifetimes.md)
 > **后置延伸**: [编译器内部原理](45_compiler_internals.md) · [安全与密码学](43_security_cryptography.md) · [嵌入式系统](22_embedded_systems.md)
 >
-> **来源**: [Kani](https://model-checking.github.io/kani/) · [Creusot](https://creusot.rs/) · [Verus](https://verus-lang.github.io/verus/)
+> **来源**: [Kani](https://model-checking.github.io/kani/) · [Creusot](https://creusot.rs/) · [Verus](https://github.com/verus-lang/verusverus/guide/)
 > **前置概念**: N/A
 ---
 
@@ -398,7 +398,7 @@ impl Node {
 
 ### 4.2 Creusot：Why3/WhyML 验证器
 
-> **[Creusot](https://github.com/creusot-rs/creusot)** 是 INRIA 开发的 Rust 验证器，将 Rust 代码翻译为 **WhyML**（Why3 验证语言），利用 Why3 的 SMT 求解器生态进行验证。特色：**浅层嵌入**（Shallow Embedding）—— Rust 类型直接映射到 WhyML 的对应概念。[来源: [Creusot Documentation](https://creusot-rs.github.io/creusot/)]
+> **[Creusot](https://github.com/creusot-rs/creusot)** 是 INRIA 开发的 Rust 验证器，将 Rust 代码翻译为 **WhyML**（Why3 验证语言），利用 Why3 的 SMT 求解器生态进行验证。特色：**浅层嵌入**（Shallow Embedding）—— Rust 类型直接映射到 WhyML 的对应概念。[来源: [Creusot Documentation](https://creusot.rs/)]
 
 ```rust
 // Creusot 规范示例（Pearlite 规范语言）
@@ -429,11 +429,11 @@ Rust 源码 → Creusot 前端 → WhyML → Why3 → SMT 求解器 (Alt-Ergo/Z3
                              Rust 的 Vec<T> → WhyML 的 seq t
 ```
 
-> **来源**: [Creusot Paper — ICFP 2022](https://hal.inria.fr/hal-03737818) · [Why3 Platform](http://why3.lri.fr/) · [Pearlite Specification Language](https://creusot-rs.github.io/creusot/guide/pearlite.html)
+> **来源**: [Creusot Paper — ICFP 2022](https://hal.inria.fr/hal-03737818) · [Why3 Platform](http://why3.lri.fr/) · [Pearlite Specification Language](https://creusot.rs/guide/pearlite.html)
 
 ### 4.3 Verus：SMT-LIB 验证器
 
-> **[Verus](https://github.com/verus-lang/verus)** 是 Microsoft Research 开发的 Rust 验证器，专注于**系统软件验证**。核心设计：将 Rust 代码和规格翻译为 **SMT-LIB**，由 Z3 求解器验证。特色支持：**可执行规格**（Executable Specifications）和**幽灵类型**（Ghost Types）。[来源: [Verus Documentation](https://verus-lang.github.io/verus/)]
+> **[Verus](https://github.com/verus-lang/verus)** 是 Microsoft Research 开发的 Rust 验证器，专注于**系统软件验证**。核心设计：将 Rust 代码和规格翻译为 **SMT-LIB**，由 Z3 求解器验证。特色支持：**可执行规格**（Executable Specifications）和**幽灵类型**（Ghost Types）。[来源: [Verus Documentation](https://github.com/verus-lang/verusverus/guide/)]
 
 ```rust
 // Verus 验证示例
@@ -482,7 +482,7 @@ fn binary_search(v: &Vec<u64>, k: u64) -> (r: usize)
 | **所有权追踪** | 利用 Rust 的所有权系统简化验证条件生成 |
 | **线性类型** | 支持线性 ghost 状态，追踪资源使用 |
 
-> **来源**: [Verus Paper — OSDI 2023](https://www.microsoft.com/en-us/research/publication/verus-verifying-rust-programs-using-linear-ghost-types/) · [Verus Guide](https://verus-lang.github.io/verus/guide/) · [Z3 SMT Solver](https://github.com/Z3Prover/z3)
+> **来源**: [Verus Paper — OSDI 2023](https://www.microsoft.com/en-us/research/publication/verus-verifying-rust-programs-using-linear-ghost-types/) · [Verus Guide](https://github.com/verus-lang/verusverus/guide/guide/) · [Z3 SMT Solver](https://github.com/Z3Prover/z3)
 
 ---
 
@@ -534,7 +534,7 @@ Flux 精化类型:    Vec<i32{v: v>0}>  →  编译期还保证所有元素 > 0
   · 求解器可能超时
 ```
 
-> **来源**: [Flux GitHub](https://github.com/liquid-rust/flux) · [Liquid Types — PLDI 2008](https://goto.ucsd.edu/~rjhala/papers/liquid_types_pldi08.pdf) · [Refinement Types Survey](https://arxiv.org/abs/2010.07763)
+> **来源**: [Flux GitHub](https://github.com/liquid-rust/flux) · [Liquid Types — PLDI 2008](https://goto.ucsd.edu/~rjhala/liquid/liquid_types.pdf) · [Refinement Types Survey](https://arxiv.org/abs/2010.07763)
 
 > **2025 最新进展 — Generic Refinement Types (POPL 2025)**: Flux 团队将精化类型扩展到**泛型上下文**，解决了原始 Flux 无法处理泛型函数（如 `fn max<T: Ord>(a: T, b: T) -> T`）的精化谓词问题。Generic Refinement Types 允许类型参数携带精化约束（如 `T{v: v >= 0}`），并通过**约束抽象**（Constraint Abstraction）在实例化时求解具体谓词。这是精化类型从"特定类型上的轻量验证"向"通用库级验证"的关键跃迁。[来源: [POPL 2025 — Lehmann et al., "Generic Refinement Types"](https://dl.acm.org/doi/10.1145/3704886)]
 
@@ -578,7 +578,7 @@ Rust MIR
 | **Unsafe 代码** | ✅ 支持 | ✅ 支持 | ❌ 不支持 | ❌ 不支持 | ⚠️ 有限 | ❌ 不支持 |
 | **CI 集成** | ✅ cargo kani | ✅ cargo miri | ⚠️ 复杂 | ⚠️ 复杂 | ✅ cargo verus | ⚠️ 实验性 |
 
-> **来源**: [Kani vs MIRI](https://model-checking.github.io/kani/tutorial-kani-rustc.html) · [Verus vs Prusti](https://verus-lang.github.io/verus/guide/compare.html)
+> **来源**: [Kani vs MIRI](https://model-checking.github.io/kani/usage.html) · [Verus vs Prusti](https://github.com/verus-lang/verusverus/guide/guide/compare.html)
 
 ### 6.2 选型决策树
 
@@ -742,7 +742,7 @@ F* / Rocq 规范
            适合安全关键模块的定向验证，不适合整个大型项目。
 ```
 
-> **来源**: [Formal Methods Reality Check](https://www.hillelwayne.com/post/formally-verifying/) · [Kani Production Use](https://model-checking.github.io/kani/publications.html) · [Verus README](https://github.com/verus-lang/verus/blob/main/README.md)
+> **来源**: [Formal Methods Reality Check](https://www.hillelwayne.com/post/formally-verifying/) · [Kani Production Use](https://github.com/model-checking/kani/tree/main/papers) · [Verus README](https://github.com/verus-lang/verus/blob/main/README.md)
 
 ### 8.2 边界极限
 
@@ -782,7 +782,7 @@ fn safe_access(arr: &[i32], idx: usize) -> i32 {
 ```
 
 > **修正**: Kani 的验证范围仅限于有 `#[kani::proof]` 注解的函数。未被 harness 覆盖的代码仍需通过测试和代码审查保证正确性。
-> **来源**: [Kani Tutorial](https://model-checking.github.io/kani/tutorial-first-steps.html) · [Kani Coverage](https://model-checking.github.io/kani/coverage-report.html)
+> **来源**: [Kani Tutorial](https://model-checking.github.io/kani/tutorial-first-steps.html) · [Kani Coverage](https://model-checking.github.io/kani/reference/experimental/coverage.html)
 
 ### 9.2 边界测试：MIRI 无法检测未执行的 unsafe 路径（运行时盲区）
 
@@ -834,7 +834,7 @@ fn caller() {
 > fn sqrt_approx(x: f64) -> f64 { x.sqrt() }
 > ```
 >
-> **来源**: [Prusti Contracts](https://viperproject.github.io/prusti-dev/user-guide/verify/specifications.html) · [Design by Contract](https://en.wikipedia.org/wiki/Design_by_contract)
+> **来源**: [Prusti Contracts](https://viperproject.github.io/prusti-dev/user-guide/verify/summary.html) · [Design by Contract](https://en.wikipedia.org/wiki/Design_by_contract)
 
 ---
 

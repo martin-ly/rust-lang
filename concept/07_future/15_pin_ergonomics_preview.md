@@ -232,7 +232,7 @@ graph TD
 
 > **[教学类比]** Pin Ergonomics 的改进类似于给 Rust 的异步编程"解除绑腿"——核心机制（Pin 保证内存安全）不变，但使用方式更自然。Reborrow Traits 让 `Pin<&mut T>` 的行为更接近普通 `&mut T`，而 `pin` 关键字则从根本上简化自引用类型的表达。
 >
-> **来源**: [Rust Project Goals 2026 — Pin Ergonomics](https://rust-lang.github.io/rust-project-goals/2026/pin-ergonomics.html) · [withoutboats — "Pin and Suffering"](https://without.boats/blog/pin-and-suffering/) · [RFC #3709](https://github.com/rust-lang/rfcs/issues/3709)
+> **来源**: [Rust Project Goals 2026 — Pin Ergonomics](https://rust-lang.github.io/rust-project-goals/2026/pin-ergonomics.html) · [withoutboats — "Pin and Suffering"](https://without.boats/blog/pin/) · [RFC #3709](https://github.com/rust-lang/rfcs/issues/3709)
 
 ## 嵌入式测验（Embedded Quiz）
 

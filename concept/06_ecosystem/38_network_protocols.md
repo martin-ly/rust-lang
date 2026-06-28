@@ -132,7 +132,7 @@ QPACK 解决:
   3. 若引用的条目未收到，stream 独立阻塞（不影响其他 stream）
 ```
 
-> **关键洞察**: QPACK 的设计体现了 QUIC"流独立"的哲学——即使头部压缩（通常是有全局状态的）也被拆分为独立的流。这与 Rust 的所有权模型有有趣的映射：动态表的更新是"共享状态"（`&mut`），但每个流的头部解码是"独立计算"（`&`），通过显式索引（类似 `Rc::clone`）引用（Reference）共享状态。来源: [RFC 9204](https://github.com/rust-lang/rfcs/pull/9204) ✅
+> **关键洞察**: QPACK 的设计体现了 QUIC"流独立"的哲学——即使头部压缩（通常是有全局状态的）也被拆分为独立的流。这与 Rust 的所有权模型有有趣的映射：动态表的更新是"共享状态"（`&mut`），但每个流的头部解码是"独立计算"（`&`），通过显式索引（类似 `Rc::clone`）引用（Reference）共享状态。来源: [RFC 9204](https://datatracker.ietf.org/doc/html/rfc9204) ✅
 
 ---
 
@@ -212,9 +212,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 | **论断** | **来源** | **可信度** | **Tier** |
 |:---|:---|:---:|:---:|
-| QUIC 协议设计 | [RFC 9000](https://github.com/rust-lang/rfcs/pull/9000) | ✅ | Tier 1 |
-| HTTP/3 协议 | [RFC 9114](https://github.com/rust-lang/rfcs/pull/9114) | ✅ | Tier 1 |
-| QPACK 头部压缩 | [RFC 9204](https://github.com/rust-lang/rfcs/pull/9204) | ✅ | Tier 1 |
+| QUIC 协议设计 | [RFC 9000](https://datatracker.ietf.org/doc/html/rfc9000) | ✅ | Tier 1 |
+| HTTP/3 协议 | [RFC 9114](https://datatracker.ietf.org/doc/html/rfc9114) | ✅ | Tier 1 |
+| QPACK 头部压缩 | [RFC 9204](https://datatracker.ietf.org/doc/html/rfc9204) | ✅ | Tier 1 |
 | eBPF 架构 | [eBPF.io] | ✅ | Tier 1 |
 | aya-rs 设计 | [aya-rs Documentation] | ✅ | Tier 1 |
 | Rust 所有权映射 QUIC 流 | [💡 原创分析] | ⚠️ | Tier 3 |

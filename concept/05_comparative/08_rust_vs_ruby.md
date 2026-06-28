@@ -417,7 +417,7 @@ graph TD
 ```
 
 > **边界要点**: Rust vs Ruby 的边界主要与**学习曲线**、**生态成熟度**、**调试**、**部署**和**元编程**相关。
-> [来源: [Rust Learning Curve](https://rust-learning.github.io/)]
+> [来源: [Rust Learning Curve](https://learning-rust.github.io/)]
 
 ---
 

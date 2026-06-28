@@ -539,7 +539,7 @@ let _ref = &mut x;     // Stacked Borrows: ptr 失效
 
 ---
 
-> **权威来源**: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [Iris Tutorial](https://iris-project.org/tutorial-pdfs/iris-from-the-ground-up.pdf) · [The Rustonomicon — Rust's Memory Model](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [Iris Tutorial](https://people.mpi-sws.org/~dreyer/papers/iris-ground-up/paper.pdf) · [The Rustonomicon — Rust's Memory Model](https://doc.rust-lang.org/nomicon/)
 
 ## 嵌入式测验（Embedded Quiz）
 

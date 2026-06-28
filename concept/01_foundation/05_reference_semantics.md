@@ -682,7 +682,7 @@ graph LR
 ### 7.3 返回可变引用的形式化语义
 
 > **Bloom 层级**: 分析
-> [来源: [Verus Project — After Blocks](https://verus-lang.github.io/verus/guide/)]（二级来源）
+> [来源: [Verus Project — After Blocks](https://github.com/verus-lang/verusverus/guide/guide/)]（二级来源）
 
 #### 7.3.1 两次移动模型
 
@@ -1174,7 +1174,7 @@ let s: &mut &Secret = &mut &Secret(String::from("x"));
 | [RustBelt / Iris](https://plv.mpi-sws.org/rustbelt/) | ✅ 一级 | Rust 形式化验证框架 |
 | [Rust Internals — Partial Reborrows](https://internals.rust-lang.org/) | ⚠️ 二级 | 社区对部分重借用的讨论 |
 | [Rust Blog — Polonius Update](https://blog.rust-lang.org/inside-rust/2023/10/06/polonius-update.html) | ⚠️ 二级 | Polonius 借用检查器进展 |
-| [Verus Project](https://verus-lang.github.io/verus/guide/) | ⚠️ 二级 | 形式化验证与 after<> 块 |
+| [Verus Project](https://github.com/verus-lang/verusverus/guide/guide/) | ⚠️ 二级 | 形式化验证与 after<> 块 |
 | [Miri — Tree Borrows](https://github.com/rust-lang/miri) | ⚠️ 二级 | Miri 对 Tree Borrows 的实现 |
 | [TRPL Ch4 — References](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html) | ⚠️ 三级 | 引用的工程直觉 |
 | [Rustonomicon — Transmutes](https://doc.rust-lang.org/nomicon/transmutes.html) | ⚠️ 三级 | unsafe 中的引用转换 |

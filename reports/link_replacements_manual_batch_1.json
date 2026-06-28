@@ -1,0 +1,8 @@
+[
+  {"old_url": "https://docs.pennylane.ai/en/stable/code/api/pennylane.qaoa.html", "new_url": "https://docs.pennylane.ai/en/stable/code/api/pennylane.qaoa.cost.maxcut.html", "status": "replaced", "note": "PennyLane QAOA 模块旧索引页已移除，替换为 maxcut cost 页面作为 QAOA 代表入口"},
+  {"old_url": "https://docs.pennylane.ai/en/stable/introduction/gradients.html", "new_url": "https://docs.pennylane.ai/en/stable/introduction/interfaces.html", "status": "replaced", "note": "gradients 介绍页已移除，interfaces 页包含支持的微分方法说明"},
+  {"old_url": "https://osqp.org/docs/papers/", "new_url": "https://osqp.org/citing/", "status": "replaced", "note": "OSQP 论文列表已移至 Citing OSQP 页面"},
+  {"old_url": "https://tokio.rs/blog/2026-04-dial9-flight-recorder", "new_url": "https://tokio.rs/blog/2026-03-18-dial9", "status": "replaced", "note": "Tokio dial9 博客 slug 日期已更正"},
+  {"old_url": "https://www.pingcap.com/blog/why-rust/", "new_url": "https://www.pingcap.com/blog/why-choose-rust-to-develop-tikv/", "status": "replaced", "note": "PingCAP why-rust 文章已迁移至 why-choose-rust-to-develop-tikv"},
+  {"old_url": "https://grobotronics.com/xpt2046-touch-screen-controller.html", "new_url": "https://grobotronics.com/images/datasheets/xpt2046-datasheet.pdf", "status": "replaced", "note": "商品页已下架，替换为 XPT2046 数据手册 PDF"}
+]

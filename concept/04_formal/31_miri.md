@@ -19,7 +19,7 @@
 
 > **来源**: [Miri 官方 README](https://github.com/rust-lang/miri) ·
 > [Rustonomicon — Undefined Behavior](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) ·
-> [Tree Borrows Paper](https://www.ralfj.de/blog/2023/01/07/tree-borrows.html) ·
+> [Tree Borrows Paper](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html) ·
 > [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
 
 ## 📑 目录
@@ -258,7 +258,7 @@ graph TD
 | [Miri GitHub](https://github.com/rust-lang/miri) | ✅ 一级 | 官方仓库，安装与使用文档 |
 | [Rust Reference — UB](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) | ✅ 一级 | Rust 官方未定义行为列表 |
 | [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) | ✅ 二级 | 学术形式化模型 |
-| [Tree Borrows Blog](https://www.ralfj.de/blog/2023/01/07/tree-borrows.html) | ✅ 二级 | Tree Borrows 设计说明 |
+| [Tree Borrows Blog](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html) | ✅ 二级 | Tree Borrows 设计说明 |
 | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | ✅ 二级 | unsafe Rust 实践指南 |
 
 ---

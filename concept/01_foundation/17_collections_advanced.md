@@ -17,7 +17,7 @@
 
 > **来源**: [std::collections](https://doc.rust-lang.org/std/collections/index.html) ·
 > [TRPL Ch8 — Collections](https://doc.rust-lang.org/book/ch08-00-common-collections.html) ·
-> [Rust Performance Book](https://nnethercote.github.io/perf-book/collections.html) ·
+> [Rust Performance Book](https://nnethercote.github.io/perf-book/print.html#reusing-collections) ·
 > [Wikipedia — B-tree](https://en.wikipedia.org/wiki/B-tree) ·
 > [Wikipedia — Binary Heap](https://en.wikipedia.org/wiki/Binary_heap) ·
 > [hashbrown crate](https://github.com/rust-lang/hashbrown) ·
@@ -59,9 +59,9 @@
   - [十二、边界测试：高级集合的编译错误](#十二边界测试高级集合的编译错误)
     - [12.1 边界测试：`BTreeMap` 键未实现 `Ord`（编译错误）](#121-边界测试btreemap-键未实现-ord编译错误)
     - [12.2 边界测试：`VecDeque` 容量与索引的环绕（逻辑错误）](#122-边界测试vecdeque-容量与索引的环绕逻辑错误)
-    - [10.3 边界测试：`HashMap` 的 `Entry` API 与借用（Borrowing）冲突（编译错误）](#103-边界测试hashmap-的-entry-api-与借用冲突编译错误)
+    - [10.3 边界测试：`HashMap` 的 `Entry` API 与借用冲突（编译错误）](#103-边界测试hashmap-的-entry-api-与借用冲突编译错误)
     - [10.4 边界测试：`BTreeMap` 的 range 查询与可变遍历（编译错误）](#104-边界测试btreemap-的-range-查询与可变遍历编译错误)
-    - [10.5 边界测试：`HashSet` 的自定义哈希与 `Hash` 一致性（Coherence）（运行时（Runtime）逻辑错误）](#105-边界测试hashset-的自定义哈希与-hash-一致性运行时逻辑错误)
+    - [10.5 边界测试：`HashSet` 的自定义哈希与 `Hash` 一致性（运行时逻辑错误）](#105-边界测试hashset-的自定义哈希与-hash-一致性运行时逻辑错误)
     - [10.5 边界测试：`HashMap` 的 `Entry` API 与借用冲突（编译错误）](#105-边界测试hashmap-的-entry-api-与借用冲突编译错误)
     - [10.6 边界测试：`BTreeMap` 的键修改与排序不变性破坏（逻辑错误/UB）](#106-边界测试btreemap-的键修改与排序不变性破坏逻辑错误ub)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -109,7 +109,7 @@ BTreeMap 核心特征:
 > **认知功能**: BTreeMap 的核心优势在于**有序性**——当需要按顺序遍历键或执行范围查询时，BTreeMap 是 HashMap 无法替代的选择。
 > [来源: [std::collections::BTreeMap](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html)]
 > **关键洞察**: Rust 的 BTreeMap 每个内部节点存储 6-11 个元素（B=6），在内存局部性和树高度之间取得平衡。相比 HashMap，BTreeMap 的迭代器（Iterator）提供稳定的按序遍历保证。
-> [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/collections.html)]
+> [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/print.html#reusing-collections)]
 
 ---
 
@@ -594,7 +594,7 @@ graph LR
 |:---|:---:|:---|
 | [std::collections](https://doc.rust-lang.org/std/collections/index.html) | ✅ 一级 | 标准库集合官方文档 |
 | [TRPL Ch8 — Collections](https://doc.rust-lang.org/book/ch08-00-common-collections.html) | ✅ 一级 | 集合类型入门教程 |
-| [Rust Performance Book — Collections](https://nnethercote.github.io/perf-book/collections.html) | ✅ 二级 | 集合性能分析与选型指南 |
+| [Rust Performance Book — Collections](https://nnethercote.github.io/perf-book/print.html#reusing-collections) | ✅ 二级 | 集合性能分析与选型指南 |
 | [Rust Performance Book — Hashing](https://nnethercote.github.io/perf-book/hashing.html) | ✅ 二级 | 哈希算法性能对比 |
 | [hashbrown crate](https://github.com/rust-lang/hashbrown) | ✅ 二级 | Rust 标准库 HashMap 实现基础 |
 | [rustc-hash crate](https://github.com/rust-lang/rustc-hash) | ✅ 二级 | 编译器内部使用的快速哈希 |

@@ -1,0 +1,13 @@
+{
+  "https://burn.dev/blog/why-rust-for-deep-learning.html": "https://burn.dev/blog/a-case-for-rust-in-deep-learning/",
+  "https://burn.dev/book/": "https://burn.dev/books/burn/",
+  "https://burn.dev/book/building-blocks/backend.html": "https://burn.dev/books/burn/building-blocks/backend.html",
+  "https://burn.dev/book/building-blocks/tensor.html": "https://burn.dev/books/burn/building-blocks/tensor.html",
+  "https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-versioning": "https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-versioning",
+  "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Type_coercion": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Equality#type_coercion",
+  "https://docs.aws.amazon.com/wellarchitected/latest/health-safety-pillar/welcome.html": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html",
+  "https://docs.scala-lang.org/scala3/book/interop.html": "https://docs.scala-lang.org/scala3/book/interacting-with-java.html",
+  "https://docs.scala-lang.org/scala3/book/types-inference.html": "https://docs.scala-lang.org/scala3/book/types-inferred.html",
+  "https://docs.scala-lang.org/scala3/book/types-intro.html": "https://docs.scala-lang.org/scala3/book/types-introduction.html",
+  "https://docs.scala-lang.org/topic/implicit-conversions.html": "https://docs.scala-lang.org/scala3/reference/contextual/conversions.html"
+}

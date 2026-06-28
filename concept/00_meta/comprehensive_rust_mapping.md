@@ -18,7 +18,7 @@
 
 > **来源**: [Comprehensive Rust — Google](https://google.github.io/comprehensive-rust/) ·
 > [Comprehensive Rust GitHub](https://github.com/google/comprehensive-rust) ·
-> [Google Rust Course Blog](https://blog.google/technology/developers/comprehensive-rust/)
+> [Google Rust Course Blog](https://google.github.io/comprehensive-rust/)
 
 ---
 
@@ -49,7 +49,7 @@
 ### 1.1 Comprehensive Rust 是什么
 
 > **[Comprehensive Rust](https://google.github.io/comprehensive-rust/)** 是 Google Android 团队于 2022 年发布、持续维护的免费 Rust 课程，目标是在 **4 天**内将有经验的程序员（C++/Java/Go 背景）培训到能阅读、修改和编写 Rust 代码的水平。课程特点：
-> [来源: [Google Blog — Comprehensive Rust](https://blog.google/technology/developers/comprehensive-rust/)]
+> [来源: [Google Blog — Comprehensive Rust](https://google.github.io/comprehensive-rust/)]
 
 - **实践导向**: 每 30–45 分钟讲解后紧跟练习题
 - **多语言对比**: 明确标注与 C++、Java、Go 的差异
@@ -173,7 +173,7 @@ Comprehensive Rust 与本知识体系的互补关系:
 |:---|:---:|:---|
 | [Comprehensive Rust 官网](https://google.github.io/comprehensive-rust/) | ✅ 一级 | Google 官方课程 |
 | [Comprehensive Rust GitHub](https://github.com/google/comprehensive-rust) | ✅ 一级 | 源码与练习题 |
-| [Google Blog — 课程发布](https://blog.google/technology/developers/comprehensive-rust/) | ✅ 一级 | 官方发布说明 |
+| [Google Blog — 课程发布](https://google.github.io/comprehensive-rust/) | ✅ 一级 | 官方发布说明 |
 | [Rust by Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 互补的示例驱动学习 |
 
 ---

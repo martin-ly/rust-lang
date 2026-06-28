@@ -85,7 +85,7 @@ Wasm 演进路径:
 ```
 
 > **关键洞察**: Wasm 遵循 **"最小可行核心 + 渐进式扩展"** 哲学。MVP 即保证安全与可移植，后续提案在不破坏向后兼容的前提下逐步释放性能与表达能力。这与 Java 字节码"一开始就设计完整虚拟机"的策略形成鲜明对比。
-> [来源: [WebAssembly Design Principles](https://webassembly.org/docs/portability-and-performance/)]
+> [来源: [WebAssembly Design Principles](https://webassembly.org/docs/portability/)]
 
 ---
 
@@ -307,7 +307,7 @@ interface type-examples {
 ```
 
 > **类型提升规则**: WIT 的类型系统（Type System）是多种编程语言类型系统的 **"最大公约数"**。Rust `Result<T, E>` ↔ WIT `result<T, E>`（精确对应）；Go `(T, error)` ↔ WIT `result<T, string>`（自动转换）；Python 异常 ↔ WIT `result<T, E>`（异常捕获包装）。
-> [来源: [Component Model Types](https://component-model.bytecodealliance.org/design/types.html)]
+> [来源: [Component Model Types](https://component-model.bytecodealliance.org/design/wit.html)]
 
 ---
 
@@ -338,7 +338,7 @@ world app-world {
 ```
 
 > **关键洞察**: World 的设计将**依赖注入（DI）**提升到了操作系统级别。传统微服务通过环境变量获取依赖地址；WASI 组件通过 World 的 Imports 在链接时显式注入能力，使依赖关系可静态验证、可组合、可替换。
-> [来源: [Component Model Composition](https://component-model.bytecodealliance.org/design/composition.html)]
+> [来源: [Component Model Composition](https://component-model.bytecodealliance.org/design/components.html)]
 
 ---
 
@@ -473,7 +473,7 @@ pub fn process_single_pixel(r: u8, g: u8, b: u8, a: u8) -> [u8; 4] {
 ```
 
 > **优化策略**: (1) 批量 API 一次处理大量数据；(2) 预分配 `SharedArrayBuffer` 避免重复分配；(3) 将算法完全放入 Wasm，仅在输入/输出时穿越边界。
-> [来源: [Wasm Performance Guide](https://webassembly.org/docs/portability-and-performance/)]
+> [来源: [Wasm Performance Guide](https://webassembly.org/docs/portability/)]
 
 ---
 
@@ -526,7 +526,7 @@ pub fn rgba_to_grayscale_simd(rgba: &[u8], gray: &mut [u8]) {
 
 ### 7.1 线性内存与能力模型
 
-> **[WebAssembly Security](https://webassembly.github.io/spec/core/appendix/security.html)** Wasm 的安全模型基于两层机制：**线性内存隔离**（所有内存访问通过边界检查，Guest 无法访问宿主内存）和**能力安全**（Guest 只能访问显式授予的系统资源）。[来源: [Wasm Security Appendix](https://webassembly.github.io/spec/core/appendix/security.html)]
+> **[WebAssembly Security](https://webassembly.github.io/spec/core/appendix/index.html)** Wasm 的安全模型基于两层机制：**线性内存隔离**（所有内存访问通过边界检查，Guest 无法访问宿主内存）和**能力安全**（Guest 只能访问显式授予的系统资源）。[来源: [Wasm Security Appendix](https://webassembly.github.io/spec/core/appendix/index.html)]
 
 | 维度 | Wasm 沙箱 | Linux 进程 | Docker 容器 |
 |:---|:---|:---|:---|
@@ -685,7 +685,7 @@ pub fn recursive_call(n: i32) -> i32 {
 ```
 
 > **修正**: JS 引擎和 Wasm 运行时共享**同一块栈空间**（通常 1MB 左右）。JS → Wasm → JS → Wasm 的同步递归调用会在同一线程栈上累积帧，没有独立的栈切换机制。异步（Async）调用（Promise/Future）将调用帧卸载到堆上，是避免此类栈溢出的标准模式。
-> [来源: [V8 Stack Size](https://v8.dev/blog/stackoverflow)] · [来源: [wasm-bindgen Callbacks](https://rustwasm.github.io/docs/wasm-bindgen/reference/receiving-js-closures-in-rust.html)]
+> [来源: [V8 Stack Size](https://v8.dev/blog)] · [来源: [wasm-bindgen Callbacks](https://rustwasm.github.io/docs/wasm-bindgen/reference/receiving-js-closures-in-rust.html)]
 
 ---
 

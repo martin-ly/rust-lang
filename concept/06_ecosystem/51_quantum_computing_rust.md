@@ -578,7 +578,7 @@ rustls 后量子 TLS 状态:
   经典优化: 调整 2p 个参数 (γ, β) 以最大化 ⟨C⟩
 ```
 
-> **来源**: [Qiskit — VQE Tutorial](https://qiskit.org/textbook/ch-applications/vqe-molecules.html) · [PennyLane — QAOA](https://docs.pennylane.ai/en/stable/code/api/pennylane.qaoa.html)
+> **来源**: [Qiskit — VQE Tutorial](https://qiskit.org/textbook/ch-applications/vqe-molecules.html) · [PennyLane — QAOA](https://docs.pennylane.ai/en/stable/code/api/pennylane.qaoa.cost.maxcut.html)
 
 ### 6.2 参数移位与梯度计算
 
@@ -629,7 +629,7 @@ Rust 在量子-经典混合工作流中的优势:
   4. 内存安全: 长时间运行的 VQE 迭代不会出现内存泄漏
 ```
 
-> **来源**: [PennyLane Gradients](https://docs.pennylane.ai/en/stable/introduction/gradients.html) · [Rayon Parallel Iteration](https://docs.rs/rayon/) · [LogosQ Type Safety](https://arxiv.org/abs/2512.23183)
+> **来源**: [PennyLane Gradients](https://docs.pennylane.ai/en/stable/introduction/interfaces.html) · [Rayon Parallel Iteration](https://docs.rs/rayon/) · [LogosQ Type Safety](https://arxiv.org/abs/2512.23183)
 
 ---
 

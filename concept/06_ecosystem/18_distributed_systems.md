@@ -106,7 +106,7 @@
 ```
 
 > **认知功能**: Rust 在分布式系统中的**独特定位**是"基础设施层"——代理、存储、流处理等需要**极致性能**和**绝对安全**的组件。
-> [来源: [Why Rust for Infrastructure](https://www.pingcap.com/blog/why-rust/)]
+> [来源: [Why Rust for Infrastructure](https://www.pingcap.com/blog/why-choose-rust-to-develop-tikv/)]
 
 ---
 
@@ -393,7 +393,7 @@ graph TD
 ```
 
 > **认知功能**: Rust 在分布式系统中的**最佳切入点是基础设施层**——代理、存储、数据管道。业务服务层 Go/Java 生态更成熟。
-> [来源: [When to use Rust](https://www.pingcap.com/blog/why-rust/)]
+> [来源: [When to use Rust](https://www.pingcap.com/blog/why-choose-rust-to-develop-tikv/)]
 
 ---
 
@@ -503,7 +503,7 @@ graph TD
 | [raft-rs](https://github.com/tikv/raft-rs) | ✅ 一级 | Rust Raft 实现 |
 | [Actix](https://actix.rs/) | ✅ 一级 | Actor 框架 |
 | [Linkerd Blog](https://linkerd.io/2020/12/03/why-linkerd-doesnt-use-envoy/) | ✅ 二级 | 服务网格 |
-| [PingCAP Why Rust](https://www.pingcap.com/blog/why-rust/) | ✅ 二级 | 分布式数据库 |
+| [PingCAP Why Rust](https://www.pingcap.com/blog/why-choose-rust-to-develop-tikv/) | ✅ 二级 | 分布式数据库 |
 
 ---
 

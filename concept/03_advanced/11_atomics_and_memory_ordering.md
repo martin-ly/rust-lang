@@ -30,7 +30,7 @@
 
 ## 📑 目录
 
-- [原子操作（Atomic Operations）与内存序：无锁并发的精确控制](#原子操作与内存序无锁并发的精确控制)
+- [原子操作与内存序：无锁并发的精确控制](#原子操作与内存序无锁并发的精确控制)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 原子类型全景](#11-原子类型全景)
@@ -46,7 +46,7 @@
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
     - [编译错误示例](#编译错误示例)
-    - [4.4 边界测试：原子操作与非原子操作混用（数据竞争 / 运行时（Runtime） UB）](#44-边界测试原子操作与非原子操作混用数据竞争--运行时-ub)
+    - [4.4 边界测试：原子操作与非原子操作混用（数据竞争 / 运行时 UB）](#44-边界测试原子操作与非原子操作混用数据竞争--运行时-ub)
     - [4.5 边界测试：`Ordering::Relaxed` 导致逻辑错误（编译通过但语义错误）](#45-边界测试orderingrelaxed-导致逻辑错误编译通过但语义错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
@@ -195,7 +195,7 @@ Happens-Before 关系:
 ```
 
 > **Happens-Before 洞察**: **Happens-Before 是理解并发可见性的核心概念**——没有它，一个线程的写对另一个线程可能永远不可见。
-> [来源: [Rust Atomics and Locks — Happens-Before](https://marabos.nl/atomics/happens-before.html)]
+> [来源: [Rust Atomics and Locks — Happens-Before](https://mara.nl/atomics/memory-ordering.html)]
 
 ---
 
@@ -465,7 +465,7 @@ graph TD
 ```
 
 > **认知功能**: **原子适合简单场景，锁适合复杂状态，无锁算法只在极端性能需求下考虑**。
-> [来源: [Rust Atomics and Locks — When to Use](https://marabos.nl/atomics/when-to-use.html)]
+> [来源: [Rust Atomics and Locks — When to Use](https://mara.nl/atomics/atomics.html)]
 
 ---
 

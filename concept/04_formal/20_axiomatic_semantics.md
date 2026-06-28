@@ -55,7 +55,7 @@ wp(if B then C1 else C2, Q) = (B → wp(C1, Q)) ∧ (¬B → wp(C2, Q))
 wp(while B do C, Q)   = ∃k. H_k(Q)      （极限构造，H_0 = false, H_{k+1} = (¬B → Q) ∧ (B → wp(C, H_k))）
 ```
 
-> **认知桥梁**: wp 计算是**程序合成的数学基础**——给定后置条件 \(Q\)，通过反向应用 wp 规则，可以机械地推导出实现 \(Q\) 的程序。Creusot 工具正是基于这一原理，从 Why3 逻辑规约自动生成 Rust 代码的验证条件。[来源: [Dijkstra 1975](https://doi.org/10.1145/360933.360975)] · [来源: [Creusot Documentation](https://creusot-rs.github.io/creusot/))]
+> **认知桥梁**: wp 计算是**程序合成的数学基础**——给定后置条件 \(Q\)，通过反向应用 wp 规则，可以机械地推导出实现 \(Q\) 的程序。Creusot 工具正是基于这一原理，从 Why3 逻辑规约自动生成 Rust 代码的验证条件。[来源: [Dijkstra 1975](https://doi.org/10.1145/360933.360975)] · [来源: [Creusot Documentation](https://creusot.rs/))]
 
 ### 1.3 最强后置条件（Strongest Postcondition）
 >
@@ -347,7 +347,7 @@ fn increment_positive(x: i32) -> i32 {
 ### 4.2 Creusot：Why3 逻辑下的 WP 计算
 >
 
-> **[Creusot — Deductive Verification for Rust](https://creusot-rs.github.io/creusot/)** Creusot 是 Inria 开发的 Rust 验证工具，基于 Why3 平台和 Dijkstra 的 wp 计算。与 Prusti 不同，Creusot 显式使用**最弱前置条件**作为验证的核心机制。
+> **[Creusot — Deductive Verification for Rust](https://creusot.rs/)** Creusot 是 Inria 开发的 Rust 验证工具，基于 Why3 平台和 Dijkstra 的 wp 计算。与 Prusti 不同，Creusot 显式使用**最弱前置条件**作为验证的核心机制。
 
 Creusot 的公理语义特色：
 
@@ -372,7 +372,7 @@ pub fn increment(x: i32) -> i32 {
 // 结合前置条件 x > 0，验证通过。
 ```
 
-> **与 RustBelt 的关系**: Creusot 验证的是**功能性正确性**（函数输出满足规约），而 RustBelt 验证的是**内存安全性**（无悬垂指针、无数据竞争）。两者互补：Creusot 的 wp 计算假设底层内存安全已由 Rust 编译器保证，RustBelt 的形式化证明为这一假设提供了数学基础。[来源: [Creusot Documentation](https://creusot-rs.github.io/creusot/)] · [来源: [Why3 Platform](https://why3.lri.fr/)]
+> **与 RustBelt 的关系**: Creusot 验证的是**功能性正确性**（函数输出满足规约），而 RustBelt 验证的是**内存安全性**（无悬垂指针、无数据竞争）。两者互补：Creusot 的 wp 计算假设底层内存安全已由 Rust 编译器保证，RustBelt 的形式化证明为这一假设提供了数学基础。[来源: [Creusot Documentation](https://creusot.rs/)] · [来源: [Why3 Platform](https://why3.lri.fr/)]
 
 ### 4.3 Kani：符号执行与断言验证
 >
@@ -436,7 +436,7 @@ fn check_increment() {
 └── 结论: ⚠️ 标准 Hoare 逻辑不足，需分离逻辑或 RustBelt 的 Iris 扩展
 ```
 
-> **来源**: [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [Prusti Limitations](https://www.pm.inf.ethz.ch/research/prusti.html) · [Creusot Limitations](https://creusot-rs.github.io/creusot/)
+> **来源**: [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [Prusti Limitations](https://www.pm.inf.ethz.ch/research/prusti.html) · [Creusot Limitations](https://creusot.rs/)
 
 ### 5.2 边界极限
 >
@@ -455,7 +455,7 @@ fn check_increment() {
 > 2. **rustc 规格项目**: 将 Rust 语义写入机器可读的规格，使公理工具可以直接引用（Reference）编译器定义的语义
 > 3. **Ghost code 标准化**: 在 Rust 中引入官方支持的 ghost/规约代码语法（类似 SPARK 的 `with Ghost`），降低契约编写的门槛
 >
-> **来源**: [A-mir-formality](https://github.com/rust-lang/a-mir-formality) · [Rust Specification Project](https://rust-lang.github.io/rfcs//3355-rust-spec.html) · [Rust Verification Workshop 2024](https://rustverify.github.io/)
+> **来源**: [A-mir-formality](https://github.com/rust-lang/a-mir-formality) · [Rust Specification Project](https://rust-lang.github.io/rfcs//3355-rust-spec.html) · [Rust Verification Workshop 2024](https://hacspec.github.io/RustVerify24.pdf)
 
 ---
 
@@ -768,7 +768,7 @@ Prusti 将 Rust 翻译为 Viper 中间语言，使用分离逻辑自动验证内
 > - **高可信软件**: Creusot（wp 计算与 Why3 证明器深度集成）
 > - **CI/CD 集成**: Kani（命令行全自动、低学习成本、快速反馈）
 >
-> **来源**: [Prusti Documentation](https://www.pm.inf.ethz.ch/research/prusti.html) · [Creusot Documentation](https://creusot-rs.github.io/creusot/) · [Kani Documentation](https://model-checking.github.io/kani/)
+> **来源**: [Prusti Documentation](https://www.pm.inf.ethz.ch/research/prusti.html) · [Creusot Documentation](https://creusot.rs/) · [Kani Documentation](https://model-checking.github.io/kani/)
 
 ---
 
@@ -832,7 +832,7 @@ fn path_explosion_demo() {
 > 3. **有界验证**：接受"在 k 次迭代内正确"的较弱保证
 > 4. **抽象解释结合**：先用 Prusti 推断不变式，再用 Kani 验证具体断言
 >
-> **来源**: [Kani Loop Contracts](https://model-checking.github.io/kani/kani-core/loop-contracts.html) · [CBMC Bounded Model Checking](https://github.com/diffblue/cbmc)
+> **来源**: [Kani Loop Contracts](https://model-checking.github.io/kani/reference/experimental/loop-contracts.html) · [CBMC Bounded Model Checking](https://github.com/diffblue/cbmc)
 
 ### 10.6 边界测试：Creusot 的 Ghost 代码与零成本抽象
 
@@ -875,7 +875,7 @@ fn factorial(n: Int) -> Int {
 > 2. 对关键 Ghost 函数，使用辅助断言自我验证
 > 3. 社区共享经过审查的 Ghost 函数库（类似标准库的信任模型）
 >
-> **来源**: [Creusot Ghost Code](https://creusot-rs.github.io/creusot/ghost.html) · [Why3 Standard Library](https://why3.lri.fr/stdlib/)
+> **来源**: [Creusot Ghost Code](https://creusot.rs/guide/ghost.html) · [Why3 Standard Library](https://why3.lri.fr/stdlib/)
 
 ---
 

@@ -12,7 +12,7 @@
 > **双维定位**: P×Eva — 评估验证工具的 ROI 和适用性
 > **前置概念**: [RustBelt](04_rustbelt.md) · [Ownership Formalization](03_ownership_formal.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
 > **后置概念**: [Formal Methods](../07_future/02_formal_methods.md)
-> **主要来源**: [AWS Kani] · [Microsoft Verus] · [Creusot](https://creusot.github.io/creusot/) · [Miri Book](https://github.com/rust-lang/miri) · [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) · [Aeneas](https://github.com/AeneasVerif/aeneas) · [RefinedRust] · [a-mir-formality]
+> **主要来源**: [AWS Kani] · [Microsoft Verus] · [Creusot](https://creusot.rs/) · [Miri Book](https://github.com/rust-lang/miri) · [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) · [Aeneas](https://github.com/AeneasVerif/aeneas) · [RefinedRust] · [a-mir-formality]
 > **Bloom 层级**: 评价 → 应用
 > **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** · **[来源: SOSP 2024 Verus]** · **[来源: PLDI 2024 RefinedRust]** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** ✅
 >
@@ -928,7 +928,7 @@ fn binary_search(v: &Vec<u64>, key: u64) -> (r: usize)
 > **关键洞察**: Verus 的 "exec/spec/proof" 三元分离是 Rust 验证工具中最接近"生产代码与验证代码共存"的设计。`spec` 代码在编译期被擦除（零运行时开销），`proof` 代码确保 `exec` 代码的正确性。这与 Rust 的 `const fn` 有哲学上的相似性——两者都区分"编译期计算"和"运行时计算"，但 Verus 将这一区分扩展到形式化证明。[来源: Lorch et al., SOSP 2024] ✅
 > **2026 最新进展 — VerusBelt (PLDI 2026 Distinguished Paper Award)**: VerusBelt 为 Verus 的 proof-oriented 扩展提供了完整的语义基础，形式化证明了 Verus 的 `tracked` 权限系统和 ghost 状态的正确性，建立了从 Verus 规格到 Z3 求解器的可靠翻译。
 > 这是首个为工业级 Rust 验证工具提供完全形式化语义基础的工作，标志着 Rust 验证从"工程实践"向"数学可信"的关键跃迁。
-> [来源: [PLDI 2026 — Hance et al., "VerusBelt: A Semantic Foundation for Verus's Proof-Oriented Extensions to the Rust Type System"](https://verus-lang.github.io/verus/)]
+> [来源: [PLDI 2026 — Hance et al., "VerusBelt: A Semantic Foundation for Verus's Proof-Oriented Extensions to the Rust Type System"](https://github.com/verus-lang/verusverus/guide/)]
 
 ### 7.4 Creusot：基于 Why3 的契约验证
 
@@ -1100,7 +1100,7 @@ fn main() {
 
 > **工业影响**: Rustlantis 已被整合到 Rust 编译器 CI 的模糊测试管线中，与 `cargo-fuzz`、LLVM 的 `LibFuzzer` 共同构成编译器质量保障的多层防御。其方法论（类型感知随机生成 + 差分测试）已被借鉴到 C++（YARPGen）、Go（go-fuzz）和 Swift 编译器测试中。
 
-> **来源**: [Rustlantis OOPSLA 2024](https://rustlantis.github.io/) · [ETH PLF Lab](https://pl.ethz.ch/) · [Differential Testing](https://en.wikipedia.org/wiki/Differential_testing) · 可信度: ✅
+> **来源**: [Rustlantis OOPSLA 2024](https://github.com/cbeuw/rustlantis) · [ETH PLF Lab](https://pl.ethz.ch/) · [Differential Testing](https://en.wikipedia.org/wiki/Differential_testing) · 可信度: ✅
 
 ### 7.9 rustc Bug 实证研究：Rust 特有编译器缺陷分析（OOPSLA 2025）
 

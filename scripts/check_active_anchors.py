@@ -7,6 +7,8 @@ from pathlib import Path
 def github_slug(text):
     text = text.strip()
     text = re.sub(r'\s*\{#[^}]+\}\s*$', '', text)
+    # 剥离 Markdown 链接，保留链接文本（GitHub 锚点基于渲染后的纯文本）
+    text = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', text)
     text = re.sub(r'\\(.)', r'\1', text)
     text = re.sub(r'\*\*(.+?)\*\*', r'\1', text)
     text = re.sub(r'\*(.+?)\*', r'\1', text)

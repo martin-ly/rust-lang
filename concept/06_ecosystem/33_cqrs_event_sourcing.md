@@ -515,7 +515,7 @@ async fn append_with_occ(
 > - `append` 操作接收 `&[OrderEvent]`（共享引用（Reference）），不修改输入事件
 > - 乐观并发控制通过 `expected_version` 实现，类似于 Rust 的 CAS（Compare-And-Swap）操作
 >
-> **来源**: [EventStoreDB — Appending Events](https://developers.eventstore.com/server/v24.10/streams.html#appending-events) · [Fowler — Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html)
+> **来源**: [EventStoreDB — Appending Events](https://docs.kurrent.io/server/v24.10/features/streams.html) · [Fowler — Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html)
 
 ### 4.2 快照策略与版本化
 >
@@ -580,7 +580,7 @@ async fn load_aggregate(
 | **大小触发** | 聚合状态超过阈值 | 针对大数据聚合优化 | 需要监控状态大小 |
 | **自定义触发** | 业务事件（如订单完成）| 语义明确 | 实现复杂 |
 
-> **来源**: [EventStoreDB — Snapshots](https://developers.eventstore.com/server/v24.10/streams.html#snapshots) · [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
+> **来源**: [EventStoreDB — Snapshots [已失效]]<!-- 原链接: https://developers.eventstore.com/server/v24.10/streams.html#snapshots --> · [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
 
 ### 4.3 事件升级（Event Upcasting）
 >
@@ -1024,7 +1024,7 @@ impl<ES: EventStore + Send + Sync> CommandHandler<PlaceOrderCommand> for PlaceOr
 }
 ```
 
-> **来源**: [来源: [Axon Framework — Commands](https://docs.axoniq.io/reference-guide/axon-framework/commands/command-handlers.html)]
+> **来源**: [来源: [Axon Framework — Commands](https://docs.axoniq.io/axon-framework-reference/5.1/commands/command-handlers/)]
 
 ### 6.3 事件存储与投影
 >
@@ -1104,7 +1104,7 @@ impl EventStore for PostgresEventStore {
 }
 ```
 
-> **来源**: [来源: [EventStoreDB — Projections](https://developers.eventstore.com/server/v24.10/projections.html)]
+> **来源**: [来源: [EventStoreDB — Projections](https://docs.kurrent.io/server/v24.10/features/projections/)]
 
 ### 6.4 完整 CQRS+ES 微服务骨架
 >
@@ -1169,7 +1169,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-> **来源**: [Axon Framework — Architecture](https://docs.axoniq.io/reference-guide/axon-framework/architecture-overview) · [EventStoreDB — Getting Started](https://developers.eventstore.com/server/v24.10/quick-start/) · [Rust Event Sourcing Example](https://github.com/rust-lang/async-book/)
+> **来源**: [Axon Framework — Architecture](https://docs.axoniq.io/axon-framework-reference/5.1/) · [EventStoreDB — Getting Started](https://developers.eventstore.com/server/v24.10/quick-start/) · [Rust Event Sourcing Example](https://github.com/rust-lang/async-book/)
 
 ---
 
@@ -1257,7 +1257,7 @@ fn benchmark_rebuild_without_snapshot() {
 }
 ```
 
-> **修正**: 快照是生产环境的事件溯源必需品。推荐的快照策略是**计数触发 + 时间触发**的混合：每 1000 个事件或每 1 小时（以先到者为准）创建一次快照。快照存储应使用与事件存储不同的物理存储（如 S3/MinIO 对象存储），以降低成本。[来源: [EventStoreDB — Snapshots](https://developers.eventstore.com/server/v24.10/streams.html#snapshots)] · [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
+> **修正**: 快照是生产环境的事件溯源必需品。推荐的快照策略是**计数触发 + 时间触发**的混合：每 1000 个事件或每 1 小时（以先到者为准）创建一次快照。快照存储应使用与事件存储不同的物理存储（如 S3/MinIO 对象存储），以降低成本。[来源: [EventStoreDB — Snapshots [已失效]]<!-- 原链接: https://developers.eventstore.com/server/v24.10/streams.html#snapshots -->] · [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
 
 ### 10.2 边界测试：双写不一致导致数据丢失（逻辑错误）
 
@@ -1358,7 +1358,7 @@ fn good_deserialization() {
 > [来源: [Debezium — Outbox](https://debezium.io/documentation/reference/stable/transformations/outbox-event-router.html)]
 > [来源: [Vogels — Eventually Consistent](https://www.allthingsdistributed.com/2008/12/eventually_consistent.html)]
 
-> [来源: [EventStoreDB — Projection Best Practices](https://developers.eventstore.com/server/v24.10/projections.html)]
+> [来源: [EventStoreDB — Projection Best Practices](https://docs.kurrent.io/server/v24.10/features/projections/)]
 > [来源: [Microsoft — Event Sourcing Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/event-sourcing)]
 > [来源: [AWS — CQRS Pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-data-persistence/cqrs-pattern.html)]
 

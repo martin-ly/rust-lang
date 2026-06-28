@@ -1,0 +1,116 @@
+[
+  {
+    "old_url": "https://creusot-rs.github.io/creusot/",
+    "new_url": "https://creusot.rs/",
+    "status": "replaced",
+    "note": "Creusot documentation moved from GitHub Pages to the custom domain creusot.rs. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://creusot-rs.github.io/creusot/ghost.html",
+    "new_url": "https://creusot.rs/guide/ghost.html",
+    "status": "replaced",
+    "note": "Ghost code guide relocated to creusot.rs/guide/ghost.html. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://creusot-rs.github.io/creusot/guide/pearlite.html",
+    "new_url": "https://creusot.rs/guide/pearlite.html",
+    "status": "replaced",
+    "note": "Pearlite specification language guide relocated to creusot.rs/guide/pearlite.html. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://creusot.github.io/creusot/",
+    "new_url": "https://creusot.rs/",
+    "status": "replaced",
+    "note": "Legacy Creusot GitHub Pages site now redirects to the canonical creusot.rs domain. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://verus-lang.github.io/",
+    "new_url": "https://github.com/verus-lang/verus",
+    "status": "replaced",
+    "note": "Verus project homepage (organization GitHub Pages root) is no longer served; replaced with the main Verus repository. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://verus-lang.github.io/verus/",
+    "new_url": "https://verus-lang.github.io/verus/guide/",
+    "status": "replaced",
+    "note": "Verus documentation root now served under /verus/guide/. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://verus-lang.github.io/verus/guide/compare.html",
+    "new_url": "",
+    "status": "archive",
+    "note": "The comparison page was removed in the current Verus guide and no equivalent page exists. Confirmed 404."
+  },
+  {
+    "old_url": "https://model-checking.github.io/kani/ci.html",
+    "new_url": "https://model-checking.github.io/kani/install-github-ci.html",
+    "status": "replaced",
+    "note": "Kani CI documentation moved to install-github-ci.html in the current mdBook. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://model-checking.github.io/kani/coverage-report.html",
+    "new_url": "https://model-checking.github.io/kani/reference/experimental/coverage.html",
+    "status": "replaced",
+    "note": "Coverage reports are now documented under Experimental Features / Coverage. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://model-checking.github.io/kani/kani-core/loop-contracts.html",
+    "new_url": "https://model-checking.github.io/kani/reference/experimental/loop-contracts.html",
+    "status": "replaced",
+    "note": "Loop contracts documentation moved to Experimental Features / Loop Contracts. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://model-checking.github.io/kani/publications.html",
+    "new_url": "https://github.com/model-checking/kani/tree/main/papers",
+    "status": "replaced",
+    "note": "The old publications page no longer exists; Kani papers are now maintained in the repository's papers/ directory. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://model-checking.github.io/kani/tutorial-intro.html",
+    "new_url": "https://model-checking.github.io/kani/tutorial-first-steps.html",
+    "status": "replaced",
+    "note": "Introductory tutorial renamed to tutorial-first-steps.html. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://model-checking.github.io/kani/tutorial-kani-rustc.html",
+    "new_url": "https://model-checking.github.io/kani/usage.html",
+    "status": "replaced",
+    "note": "kani-rustc-specific tutorial is no longer present; replaced with the general command-line usage guide. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://rustverify.github.io/",
+    "new_url": "https://hacspec.github.io/RustVerify24.pdf",
+    "status": "replaced",
+    "note": "Rust Verification Workshop 2024 homepage is no longer served at rustverify.github.io; the RustVerify 2024 proceedings PDF is available on hacspec.github.io. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://rustlantis.github.io/",
+    "new_url": "https://github.com/cbeuw/rustlantis",
+    "status": "replaced",
+    "note": "Rustlantis project homepage is no longer served; the GitHub repository is the canonical project location. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://iris-project.org/tutorial-pdfs/iris-from-the-ground-up.pdf",
+    "new_url": "https://people.mpi-sws.org/~dreyer/papers/iris-ground-up/paper.pdf",
+    "status": "replaced",
+    "note": "The Iris tutorial PDF is no longer hosted at iris-project.org; the same paper is available from the MPI-SWS authors' page. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://viperproject.github.io/prusti-dev/user-guide/verify/specifications.html",
+    "new_url": "https://viperproject.github.io/prusti-dev/user-guide/verify/summary.html",
+    "status": "replaced",
+    "note": "The old specifications.html page was split in the new Prusti user guide; verify/summary.html is the overview of verification features and links to specification syntax. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://goto.ucsd.edu/~rjhala/papers/liquid_types_pldi08.pdf",
+    "new_url": "https://goto.ucsd.edu/~rjhala/liquid/liquid_types.pdf",
+    "status": "replaced",
+    "note": "Same Liquid Types (PLDI 2008) paper, now located under /~rjhala/liquid/. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://homepages.inf.ed.ac.uk/wadler/papers/linearsubtypes/linearsubtypes.pdf",
+    "new_url": "https://homepages.inf.ed.ac.uk/wadler/papers/linearsub/linearsub.ps",
+    "status": "replaced",
+    "note": "The original URL appears to have been malformed; the paper is available as linearsub/linearsub.ps on Wadler's site (PostScript format). Verified HTTP 200."
+  }
+]

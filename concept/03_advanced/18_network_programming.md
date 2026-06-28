@@ -166,7 +166,7 @@ Tokio Runtime 架构:
   │  ├── Socket Buffers                          │
   │  └── Network Device Driver                   │
   └──────────────────────────────────────────────┘
-  > [来源: [Tokio Documentation — Internals](https://tokio.rs/tokio/topics/runtime)]
+  > [来源: [Tokio Documentation — Internals](https://docs.rs/tokio/latest/tokio/runtime/index.html)]
 
   Runtime 创建方式:
   #[tokio::main]  // 多线程 runtime (默认)
@@ -511,7 +511,7 @@ let service = ServiceBuilder::new()
   │ 与同步代码交互      │ blocking pool     │ 阻塞整个运行时    │
   │ 资源占用            │ 较高              │ 较低              │
   └─────────────────────┴───────────────────┴───────────────────┘
-  > [来源: [Tokio Runtime Docs](https://tokio.rs/tokio/topics/runtime)]
+  > [来源: [Tokio Runtime Docs](https://docs.rs/tokio/latest/tokio/runtime/index.html)]
 ```
 
 > **选型原则**: 默认使用 **多线程 Runtime**；仅在嵌入式或资源极度受限场景使用单线程；UDP 用于延迟敏感场景，TCP 用于可靠性优先场景。
@@ -687,7 +687,7 @@ graph LR
   │   └── 实际是阻塞操作，不是 async
   ├── 修复: 使用 tokio::task::spawn_blocking
   └── 检测: cargo flamegraph 显示同步 syscall
-  > [来源: [Tokio Blocking Pool](https://tokio.rs/tokio/topics/blocking)]
+  > [来源: [Tokio Blocking Pool](https://docs.rs/tokio/latest/tokio/task/index.html)]
 
   陷阱 2: 忘记处理 TCP 半开连接
   ├── 症状: 客户端崩溃后服务端连接资源泄漏

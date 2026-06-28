@@ -142,7 +142,7 @@ ELT:
 ```
 
 > **来源**: [ETL vs ELT — AWS](https://aws.amazon.com/compare/the-difference-between-etl-and-elt/) ·
-> [dbt — ELT Best Practices](https://docs.getdbt.com/docs/build/about-sql-reference)
+> [dbt — ELT Best Practices](https://docs.getdbt.com/sql-reference)
 
 ---
 
@@ -339,7 +339,7 @@ fn transform_user_events(df: LazyFrame) -> PolarsResult<DataFrame> {
 ```
 
 > **来源**: [Polars Lazy API](https://docs.pola.rs/user-guide/lazy/) ·
-> [Polars Window Functions](https://docs.pola.rs/user-guide/transformations/time-series/windows/)
+> [Polars Window Functions](https://docs.pola.rs/user-guide/expressions/window-functions/)
 
 ### 4.2 SQL 查询引擎
 
@@ -595,7 +595,7 @@ impl QueryEngine {
 ```
 
 > **来源**: [Moka Cache](https://docs.rs/moka/latest/moka/) ·
-> [DataFusion Caching](https://arrow.apache.org/datafusion/user-guide/caching.html)
+> [DataFusion Caching](https://datafusion.apache.org/user-guide/configs.html)
 
 ### 6.2 数据 API
 
@@ -671,7 +671,7 @@ Python 对比:
 ```
 
 > **来源**: [Polars Performance](https://pola.rs/benchmarks.html) ·
-> [Why Rust for Data](https://pola.rs/posts/rust-for-data/) ·
+> [Why Rust for Data [已失效]]<!-- 原链接: https://pola.rs/posts/rust-for-data/ --> ·
 > [Arrow Rust](https://arrow.apache.org/rust/)
 
 ---
@@ -711,7 +711,7 @@ Python 对比:
 └── 根结论: ❌ Parquet 是分析工作负载的最优解，但不是通用解。选型应考虑访问模式。
 ```
 
-> **来源**: [Parquet Best Practices](https://parquet.apache.org/docs/file-format/config/) ·
+> **来源**: [Parquet Best Practices [已失效]]<!-- 原链接: https://parquet.apache.org/docs/file-format/config/ --> ·
 > [When Not to Use Parquet](https://www.onehouse.ai/blog/the-ultimate-guide-to-apache-parquet)
 
 ### 8.2 边界极限
@@ -753,7 +753,7 @@ fn write_with_schema_evolution() {
 > 2. **删除列**: 旧列数据保留在文件中，reader 忽略
 > 3. **类型转换**: 不支持（需重写文件）
 > 4. 使用 Delta Lake 管理 schema 演化（事务日志记录每次变更）
-> **来源**: [Parquet Schema Evolution](https://parquet.apache.org/docs/file-format/schema-evolution/) ·
+> **来源**: [Parquet Schema Evolution [已失效]]<!-- 原链接: https://parquet.apache.org/docs/file-format/schema-evolution/ --> ·
 > [Delta Lake Schema Enforcement](https://docs.delta.io/latest/delta-batch.html#schema-enforcement)
 
 ### 9.2 边界测试：对象存储流式下载内存溢出（运行时错误）

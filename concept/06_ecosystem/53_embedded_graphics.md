@@ -135,8 +135,8 @@
 > [来源: [embedded-graphics Core Concepts](https://docs.rs/embedded-graphics/latest/embedded_graphics/index.html)]
 > [来源: [embedded-graphics PixelColor](https://docs.rs/embedded-graphics/latest/embedded_graphics/pixelcolor/index.html)]
 > **内存压力**: 高分辨率 + 真彩色 → 帧缓冲超出内部 SRAM → 必须使用外部 PSRAM 或 tile-based 渲染（分块绘制）。
-> [来源: [LVGL Porting Guide](https://docs.lvgl.io/latest/en/html/porting/index.html)]
-> [来源: [LVGL Memory](https://docs.lvgl.io/latest/en/html/porting/mem.html)]
+> [来源: [LVGL Porting Guide](https://docs.lvgl.io/8.3/porting/index.html)]
+> [来源: [LVGL Memory [已失效]]<!-- 原链接: https://docs.lvgl.io/8.3/porting/mem.html -->]
 
 ---
 
@@ -174,11 +174,11 @@
 ```
 
 > **实时洞察**: **60fps UI 要求整个渲染管线在 16.67ms 内完成**——从输入事件处理到帧缓冲传输，任何阻塞操作都会导致掉帧。
-> [来源: [LVGL Performance Guide](https://docs.lvgl.io/latest/en/html/overview/perf.html)]
+> [来源: [LVGL Performance Guide [已失效]]<!-- 原链接: https://docs.lvgl.io/8.3/overview/perf.html -->]
 > [来源: [Embedded Display Refresh](https://en.wikipedia.org/wiki/Refresh_rate)]
 > **触摸洞察**: 电容式触摸控制器通常通过 I2C 通信，中断引脚通知 MCU 有新事件，主循环轮询或中断服务程序读取坐标。
 > [来源: [FT5x06 Datasheet](https://www.focaltech-systems.com/)]
-> [来源: [XPT2046 Touch Controller](https://grobotronics.com/xpt2046-touch-screen-controller.html)]
+> [来源: [XPT2046 Touch Controller](https://grobotronics.com/images/datasheets/xpt2046-datasheet.pdf)]
 
 ---
 
@@ -331,7 +331,7 @@ lvgl-rs: Rust 绑定到 LVGL (Light and Versatile Graphics Library)
 > [来源: [lvgl-rs GitHub](https://github.com/lvgl/lv_binding_rust)]
 > [来源: [LVGL Rust Bindings](https://docs.rs/lvgl/latest/lvgl/)]
 > **生态洞察**: LVGL 是嵌入式 GUI 领域最成熟的 C 库之一，lvgl-rs 使其可被 Rust 项目利用，但绑定维护成本较高，API 更新可能滞后。
-> [来源: [LVGL Documentation](https://docs.lvgl.io/latest/en/html/index.html)]
+> [来源: [LVGL Documentation](https://docs.lvgl.io/8.3/index.html)]
 > [来源: [LVGL Features](https://docs.lvgl.io/master/intro/index.html)]
 
 ---
@@ -381,13 +381,13 @@ Slint (原 sixtyfps): 声明式 UI 框架
 ```
 
 > **声明式洞察**: **Slint 将 UI 描述与业务逻辑分离**——设计师编写 .slint，开发者编写 Rust，编译时生成类型安全的绑定。
-> [来源: [Slint Documentation](https://slint-ui.com/docs/rust/)]
+> [来源: [Slint Documentation](https://docs.slint.dev/latest/docs/rust/slint/)]
 > [来源: [Slint Language](https://slint-ui.com/docs/slint/)]
 > **嵌入式洞察**: Slint 的 `no_std` 后端通过 `slint::platform::Platform` trait 适配自定义显示和输入驱动，适合汽车仪表、工业 HMI 等场景。
-> [来源: [Slint Embedded Guide](https://slint-ui.com/docs/embedded/)]
-> [来源: [Slint Platform Trait](https://slint-ui.com/docs/rust/slint/platform/trait.Platform.html)]
+> [来源: [Slint Embedded Guide](https://docs.slint.dev/latest/docs/slint/guide/platforms/embedded/)]
+> [来源: [Slint Platform Trait](https://docs.slint.dev/latest/docs/rust/slint/platform/trait.Platform.html)]
 > **性能洞察**: 声明式 UI 在编译时展开为命令式绘制调用，无运行时（Runtime）布局引擎——这与 Web 浏览器的 DOM 布局截然不同，更适合资源受限环境。
-> [来源: [Slint Architecture](https://slint-ui.com/docs/architecture/)]
+> [来源: [Slint Architecture](https://docs.slint.dev/latest/docs/cpp/)]
 
 ---
 
@@ -652,8 +652,8 @@ Rust 实现模式:
 > [来源: [Touchscreen Calibration Theory](https://www.ti.com/lit/an/slyt277/slyt277.pdf)]
 > [来源: [micromath Crate](https://docs.rs/micromath/latest/micromath/)]
 > **手势洞察**: 手势识别本质上是有限状态机（FSM）——`Idle` → `Pressed` → `Tracking` → `Released`，状态转换条件基于时间阈值和空间位移。
-> [来源: [LVGL Input Device](https://docs.lvgl.io/latest/en/html/overview/indev.html)]
-> [来源: [LVGL Gestures](https://docs.lvgl.io/latest/en/html/overview/indev.html#gestures)]
+> [来源: [LVGL Input Device](https://docs.lvgl.io/8.3/overview/indev.html)]
+> [来源: [LVGL Gestures](https://docs.lvgl.io/8.3/overview/indev.html#gestures)]
 
 ---
 
@@ -702,7 +702,7 @@ graph TD
 > **反命题洞察 2**: **"Rust 太慢"是错误命题**——零成本抽象（Zero-Cost Abstraction）使迭代器（Iterator）、闭包（Closures）、泛型（Generics）在优化后等价于手写 C；DMA 卸载数据传输后，CPU 只需处理逻辑。
 > [来源: [Rust Reference — Zero Cost Abstractions](https://doc.rust-lang.org/reference/)]
 > **反命题洞察 3**: **"嵌入式 UI 千篇一律"是错误命题**——从 `embedded-graphics` 的像素级控制到 Slint 的声明式主题，Rust 生态提供从底层到高层的全栈定制能力。
-> [来源: [Slint Theming](https://slint-ui.com/docs/rust/slint/theming.html)]
+> [来源: [Slint Theming](https://docs.slint.dev/latest/docs/slint/reference/std-widgets/style/)]
 
 ---
 
@@ -739,8 +739,8 @@ graph TD
 > [来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/)]
 > [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
 > **内存边界**: 最严苛的边界往往是内存——一个 800×480×24bpp 的帧缓冲需要 1.15MB，超过绝大多数 MCU 内部 SRAM，必须采用分块渲染或外部存储器。
-> [来源: [LVGL Porting — Display](https://docs.lvgl.io/latest/en/html/porting/display.html)]
-> [来源: [LVGL Memory Manager](https://docs.lvgl.io/latest/en/html/overview/memory.html)]
+> [来源: [LVGL Porting — Display](https://docs.lvgl.io/8.3/porting/display.html)]
+> [来源: [LVGL Memory Manager [已失效]]<!-- 原链接: https://docs.lvgl.io/8.3/overview/memory.html -->]
 
 ---
 

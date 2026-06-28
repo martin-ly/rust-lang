@@ -445,7 +445,7 @@ fn main() {
 > 这与 C 的 ISO C 标准（明确的 UB 列表）类似，但 Rust 的内存模型更复杂（所有权（Ownership）、借用（Borrowing）、内部可变性、Pin）。
 > 规范的编写是 Rust 成熟度的重要标志——从"实现定义语言"走向"规范定义语言"。
 > [来源: [Rust Specification Draft](https://spec.rust-lang.org/)] ·
-> [来源: [Stacked Borrows vs Tree Borrows](https://www.ralfj.de/blog/2023/01/31/tree-borrows.html)]
+> [来源: [Stacked Borrows vs Tree Borrows](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html)]
 
 ### 10.2 边界测试：规范与编译器实现的差异（编译错误）
 
@@ -496,7 +496,7 @@ fn main() {
 > 这与 C 的 "实现定义行为"（不同编译器行为不同）不同——Rust 的目标是统一规范，但过程需要时间。
 > 规范的编写由 Rust 基金会资助，是 Rust 成熟度的重要标志。
 > [来源: [Rust Specification Project](https://github.com/rust-lang/spec/)] ·
-> [来源: [Stacked Borrows vs Tree Borrows](https://www.ralfj.de/blog/2023/01-31_tree-borrows.html)]
+> [来源: [Stacked Borrows vs Tree Borrows](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html)]
 
 ### 10.5 边界测试：规范草案与编译器实现的不一致（编译行为漂移）
 

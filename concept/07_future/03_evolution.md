@@ -1908,7 +1908,7 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 
 ### 6.31 Rust Foundation 2025 年度报告与 2026-2028 战略（2026-01-27）
 
-**[Rust Foundation, 2026-01-27]** 基金会同步发布 [2025 Annual Report](https://rustfoundation.org/media/2025-annual-report/) 与 [2026-2028 Strategy](https://rustfoundation.org/media/2026-2028-strategy/)，从财务与战略两个维度展示其对 Rust 生态的投入与未来三年方向。
+**[Rust Foundation, 2026-01-27]** 基金会同步发布 [2025 Annual Report](https://rustfoundation.org/wp-content/uploads/2026/01/2025-Annual-Report.pdf) 与 [2026-2028 Strategy](https://rustfoundation.org/strategic-plan/)，从财务与战略两个维度展示其对 Rust 生态的投入与未来三年方向。
 
 **2025 财务概况**：
 
@@ -1930,7 +1930,7 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 **战略定位**：从“基金会已经建成什么”转向“如何支持 Rust 下一阶段的影响与增长”。
 
 > **关键洞察**: 2025 年度报告将项目进展与员工焦点从年度报告中剥离，集中到 [rustfoundation.org/2025](https://rustfoundation.org/2025/)，使报告更聚焦于财务影响；2026-2028 战略则明确把“维护者可持续性”和“组织参与”并列为基础设施同等重要的支柱。
-> **来源**: [Rust Foundation — How We Invested in Rust in 2025 — and What Comes Next](https://rustfoundation.org/media/annual-report-strategy-2025/) · [2025 Annual Report](https://rustfoundation.org/media/2025-annual-report/) · [2026-2028 Strategy](https://rustfoundation.org/media/2026-2028-strategy/) · 可信度: ✅
+> **来源**: [Rust Foundation — How We Invested in Rust in 2025 — and What Comes Next](https://rustfoundation.org/media/annual-report-strategy-2025/) · [2025 Annual Report](https://rustfoundation.org/wp-content/uploads/2026/01/2025-Annual-Report.pdf) · [2026-2028 Strategy](https://rustfoundation.org/strategic-plan/) · 可信度: ✅
 
 ### 6.32 RustConf 2026：回归蒙特利尔与早期安排（2025-12-03）
 

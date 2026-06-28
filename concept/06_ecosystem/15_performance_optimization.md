@@ -384,7 +384,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树展示性能优化的**层次性**。unsafe 是最后手段——绝大多数性能问题可以通过安全代码、编译器优化和算法改进解决。
-> [来源: [Rust Performance Book — Unsafe](https://nnethercote.github.io/perf-book/unsafe-rust.html)]
+> [来源: [Rust Performance Book — Unsafe](https://nnethercote.github.io/perf-book/print.html)]
 
 ---
 
@@ -423,7 +423,7 @@ graph TD
 ```
 
 > **边界要点**: 性能优化的边界主要与**测量可靠性**、**环境差异**、**维护成本**和**平台可移植性**相关。
-> [来源: [Rust Performance Book — Pitfalls](https://nnethercote.github.io/perf-book/pitfalls.html)]
+> [来源: [Rust Performance Book — Pitfalls](https://nnethercote.github.io/perf-book/print.html)]
 
 ---
 

@@ -799,6 +799,14 @@
 - **CI 对齐**: `.github/workflows/ci.yml` 主流程切到 stable；保留不阻塞的 `nightly-preview` job 验证 `--all-features`；新增 `naming-convention` job（warning 模式）。
 - **Clippy 基线修复**: 修复 `c01_ownership_borrow_scope` 与 `c05_threads` 中导致 stable clippy 失败的警告。
 - **验证**: `cargo +stable check/test/clippy --workspace` 与 `cargo +nightly check/clippy --workspace --all-features` 均通过。
+- **外部链接治理（进行中）**:
+  - 增强 `scripts/check_non_github_links_health.py`：按 200 / 301 / 403 / SSL / timeout 分类输出，异常数从 370 降至 169。
+  - 修复第一批高置信度外部链接：`burn.dev` 文档路径迁移、`docs.microsoft.com` Azure 架构指南迁移、MDN `Type_coercion` 重定向、`docs.aws.amazon.com` Well-Architected 错误 pillar 替换、Scala 3 Book 路径迁移。
+- **内部链接修复**:
+  - 修复 `docs/` 8 个问题文件中的 9 条同文件锚点损坏（emoji 变体选择符导致），`scripts/check_links.py` 报告损坏链接降为 0。
+- **脚本工具增强**:
+  - 重写 `scripts/check_github_links_health.py`：引入并发池、缓存与指数退避，解决原顺序检查 10 分钟超时问题。
+  - GitHub 链接检查结果：`400` 去重链接 -> `396` OK，`4` 异常；修复后重新检查 `397` 链接 -> `0` 异常。
 
 ---
 

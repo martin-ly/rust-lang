@@ -29,12 +29,12 @@
 
 ## 📑 目录
 
-- [智能指针（Smart Pointer）：堆内存管理与共享语义](#智能指针堆内存管理与共享语义)
+- [智能指针：堆内存管理与共享语义](#智能指针堆内存管理与共享语义)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 智能指针谱系](#11-智能指针谱系)
     - [1.2 Box：独占堆分配](#12-box独占堆分配)
-    - [1.3 Rc 与 Arc：引用（Reference）计数共享](#13-rc-与-arc引用计数共享)
+    - [1.3 Rc 与 Arc：引用计数共享](#13-rc-与-arc引用计数共享)
   - [二、技术细节](#二技术细节)
     - [2.1 RefCell 与 Cell：内部可变性](#21-refcell-与-cell内部可变性)
     - [2.2 智能指针的组合模式](#22-智能指针的组合模式)
@@ -372,7 +372,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助选择合适的智能指针组合。核心原则是：**单线程优先于多线程，读共享优先于写互斥**。
-> [来源: [Rust Performance Book — Concurrency](https://nnethercote.github.io/perf-book/concurrency.html)]
+> [来源: [Rust Performance Book — Concurrency](https://nnethercote.github.io/perf-book/print.html#parallelism)]
 
 ---
 

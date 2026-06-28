@@ -16,7 +16,7 @@
 
 ---
 
-> **来源**: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) · [TypeScript Deep Dive](https://basarat.gitbook.io/typescript/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [TC39 ECMAScript](https://tc39.es/ecma262/) · [WASM Specification](https://webassembly.github.io/spec/) · [Rust and WASM](https://rustwasm.github.io/book/) · [wasm-bindgen](https://rustwasm.github.io/docs/wasm-bindgen/) · [ts-rs crate](https://docs.rs/ts-rs/latest/ts_rs/) · [oxc project](https://oxc.rs/) · [swc project](https://swc.rs/) · [Type System — Wikipedia](https://en.wikipedia.org/wiki/Type_system) · [Structural vs Nominal Typing](https://www.typescriptlang.org/docs/handbook/type-compatibility.html) · [Rustnomicon](https://doc.rust-lang.org/nomicon/) · [Node.js Performance](https://nodejs.org/en/docs/guides/dont-block-the-event-loop)
+> **来源**: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) · [TypeScript Deep Dive](https://basarat.gitbook.io/typescript/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/) · [TC39 ECMAScript](https://tc39.es/ecma262/) · [WASM Specification](https://webassembly.github.io/spec/) · [Rust and WASM](https://rustwasm.github.io/book/) · [wasm-bindgen](https://rustwasm.github.io/docs/wasm-bindgen/) · [ts-rs crate](https://docs.rs/ts-rs/latest/ts_rs/) · [oxc project](https://oxc.rs/) · [swc project](https://swc.rs/) · [Type System — Wikipedia](https://en.wikipedia.org/wiki/Type_system) · [Structural vs Nominal Typing](https://www.typescriptlang.org/docs/handbook/type-compatibility.html) · [Rustnomicon](https://doc.rust-lang.org/nomicon/) · [Node.js Performance](https://nodejs.org/en/learn/asynchronous-work/dont-block-the-event-loop)
 
 > **前置依赖**: [Type Theory](../04_formal/02_type_theory.md)
 
@@ -182,7 +182,7 @@ TypeScript 核心特征:
   │ 编译时间        │ 快（类型擦除）      │ 慢（LLVM 优化）     │
   │ 迭代速度        │ 快（无需编译）      │ 中等（cargo check） │
   └─────────────────┴─────────────────────┴─────────────────────┘
-  > [来源: [Node.js Performance](https://nodejs.org/en/docs/guides/dont-block-the-event-loop)] · [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
+  > [来源: [Node.js Performance](https://nodejs.org/en/learn/asynchronous-work/dont-block-the-event-loop)] · [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 ```
 
 > **认知功能**: TypeScript 牺牲编译期保证换取**开发速度和生态兼容**，Rust 牺牲开发速度换取**运行时安全和性能**——这是"开发效率"与"运行时效率"的经典权衡。
@@ -285,7 +285,7 @@ TypeScript 核心特征:
   ├── 并行: Worker Threads（共享内存，需 Atomics）
   ├── async/await: 编译为 Promise + generator
   └── 取消: AbortController（信号传递）
-  > [来源: [Node.js Event Loop](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick)]
+  > [来源: [Node.js Event Loop](https://nodejs.org/en/learn/asynchronous-work/event-loop-timers-and-nexttick)]
 
   Rust (Tokio):
   ├── 运行时: 多线程工作窃取（work-stealing）
@@ -574,7 +574,7 @@ graph TD
   ├── 反例: WASM ↔ JS 边界有序列化开销
   ├── 反例: WASM 无法直接访问 JS 对象（需复制）
   └── 结论: ❌ 错误 — WASM 适合计算密集型隔离任务，不适合高频 JS 交互
-  > [来源: [WASM Performance](https://webassembly.github.io/spec/core/benchmarks.html)] · [来源: [wasm-bindgen — Performance](https://rustwasm.github.io/docs/wasm-bindgen/contributing/design/js-objects-in-rust.html)]
+  > [来源: [WASM Performance](https://webassembly.github.io/spec/core/appendix/index.html)] · [来源: [wasm-bindgen — Performance](https://rustwasm.github.io/docs/wasm-bindgen/contributing/design/js-objects-in-rust.html)]
 ```
 
 > **层次一致性（Coherence）**: 反命题分析区分了**类型系统的力量**（Rust 的穷尽保证 vs TS 的渐进检查）和**运行时的真实行为**（TS 类型擦除后即为无类型 JS）。
@@ -671,7 +671,7 @@ graph TD
 | [Type System — Wikipedia](https://en.wikipedia.org/wiki/Type_system) | ✅ 三级 | 类型系统理论基础 |
 | [Structural vs Nominal Typing](https://www.typescriptlang.org/docs/handbook/type-compatibility.html) | ✅ 一级 | TS 类型兼容性官方说明 |
 | [Rustnomicon](https://doc.rust-lang.org/nomicon/) | ✅ 二级 | Rust 不安全编程指南 |
-| [Node.js Performance](https://nodejs.org/en/docs/guides/dont-block-the-event-loop) | ✅ 二级 | Node.js 性能最佳实践 |
+| [Node.js Performance](https://nodejs.org/en/learn/asynchronous-work/dont-block-the-event-loop) | ✅ 二级 | Node.js 性能最佳实践 |
 
 ---
 

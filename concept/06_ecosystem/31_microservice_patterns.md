@@ -20,7 +20,7 @@
 > **来源**: [tower](https://docs.rs/tower/) · [tonic](https://docs.rs/tonic/) · [failsafe](https://docs.rs/failsafe/)
 ---
 
-> **来源**: [Axum](https://docs.rs/axum/latest/axum/) · [Tower](https://docs.rs/tower/latest/tower/) · [failsafe crate](https://docs.rs/failsafe/latest/failsafe/) · [Microservices Patterns (Chris Richardson)](https://microservices.io/book/) · [Kafka Documentation](https://kafka.apache.org/documentation/)
+> **来源**: [Axum](https://docs.rs/axum/latest/axum/) · [Tower](https://docs.rs/tower/latest/tower/) · [failsafe crate](https://docs.rs/failsafe/latest/failsafe/) · [Microservices Patterns (Chris Richardson)](https://microservices.io/book) · [Kafka Documentation](https://kafka.apache.org/documentation/)
 
 ## 📑 目录
 
@@ -86,7 +86,7 @@ Rust 微服务核心竞争力:
 ```
 
 > **认知功能**: Rust 的微服务优势不仅是"快"，而是**可靠性工程**——将分布式系统中最难调试的内存错误和并发错误前移至编译期。
-> [来源: [Why Rust for Microservices](https://www.pingcap.com/blog/why-rust/)] · [来源: [AWS Rust Microservices](https://aws.amazon.com/blogs/opensource/rust-microservices/)]
+> [来源: [Why Rust for Microservices](https://www.pingcap.com/blog/why-choose-rust-to-develop-tikv/)] · [来源: [AWS Rust Microservices](https://aws.amazon.com/blogs/opensource/rust-microservices/)]
 
 ```mermaid
 graph TD
@@ -730,7 +730,7 @@ Rust 微服务并非银弹:
 | [Axum Documentation](https://docs.rs/axum/latest/axum/) | ✅ 一级 | Web 框架官方文档 |
 | [Tower Documentation](https://docs.rs/tower/latest/tower/) | ✅ 一级 | 服务组合抽象 |
 | [failsafe crate](https://docs.rs/failsafe/latest/failsafe/) | ✅ 一级 | 熔断器实现 |
-| [Microservices Patterns (Chris Richardson)](https://microservices.io/book/) | ✅ 一级 | 微服务模式权威 |
+| [Microservices Patterns (Chris Richardson)](https://microservices.io/book) | ✅ 一级 | 微服务模式权威 |
 | [Kafka Documentation](https://kafka.apache.org/documentation/) | ✅ 一级 | 消息队列 |
 | [Linkerd2-proxy](https://github.com/linkerd/linkerd2-proxy) | ✅ 一级 | Rust sidecar 代理 |
 | [Event Store DB](https://developers.eventstore.com/) | ✅ 一级 | 事件存储 |

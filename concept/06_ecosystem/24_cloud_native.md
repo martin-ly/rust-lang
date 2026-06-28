@@ -636,7 +636,7 @@ async fn main() {
 }
 ```
 
-> **修正**: Kubernetes 的**探针**（probe）决定 pod 的生命周期：1) `livenessProbe`：失败 → kubelet 重启容器（用于检测死锁/无限循环）；2) `readinessProbe`：失败 → 从 service endpoints 移除（用于依赖未就绪时，如 DB 连接中）；3) `startupProbe`：失败 → 重启（用于慢启动应用，避免 liveness 过早触发）。常见反模式：1) liveness 检查外部依赖（DB、缓存）→ 外部故障导致全部 pod 重启，级联故障；2) readiness 和 liveness 相同 → 无法区分"未就绪"和"已死"；3) 超时过短 → 正常慢请求触发重启。Rust 云原生应用应暴露 `/health/live`（简单，仅检查进程存活）、`/health/ready`（检查所有依赖就绪）。这与 Go 的 Kubernetes 客户端或 Java 的 Spring Boot Actuator 类似——探针设计是分布式系统的可靠性基石。[来源: [Kubernetes Probes](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)] · [来源: [AWS Well-Architected](https://docs.aws.amazon.com/wellarchitected/latest/health-safety-pillar/welcome.html)]
+> **修正**: Kubernetes 的**探针**（probe）决定 pod 的生命周期：1) `livenessProbe`：失败 → kubelet 重启容器（用于检测死锁/无限循环）；2) `readinessProbe`：失败 → 从 service endpoints 移除（用于依赖未就绪时，如 DB 连接中）；3) `startupProbe`：失败 → 重启（用于慢启动应用，避免 liveness 过早触发）。常见反模式：1) liveness 检查外部依赖（DB、缓存）→ 外部故障导致全部 pod 重启，级联故障；2) readiness 和 liveness 相同 → 无法区分"未就绪"和"已死"；3) 超时过短 → 正常慢请求触发重启。Rust 云原生应用应暴露 `/health/live`（简单，仅检查进程存活）、`/health/ready`（检查所有依赖就绪）。这与 Go 的 Kubernetes 客户端或 Java 的 Spring Boot Actuator 类似——探针设计是分布式系统的可靠性基石。[来源: [Kubernetes Probes](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)] · [来源: [AWS Well-Architected](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html)]
 
 ### 10.3 边界测试：Kubernetes 的 readiness 与 liveness 探针混淆（运行时可用性下降）
 
@@ -659,7 +659,7 @@ async fn health_check() -> &'static str {
 }
 ```
 
-> **修正**: Kubernetes 探针的区分：1) **livenessProbe**：检测死锁/无限循环，失败 → 重启容器；2) **readinessProbe**：检测依赖就绪，失败 → 从 service endpoints 移除（不重启）；3) **startupProbe**：保护慢启动应用，失败 → 重启。反模式：1) 同一端点处理两种探针 → 无法区分状态；2) liveness 检查外部依赖 → 外部故障导致全部 pod 重启，级联故障；3) 超时过短 → 正常慢请求触发重启。Rust 云原生应用应暴露 `/health/live`（简单存活检查）和 `/health/ready`（依赖就绪检查）。这与 Go 的 Kubernetes 客户端或 Java 的 Spring Boot Actuator 类似——探针设计是分布式系统可靠性的基石。[来源: [Kubernetes Probes](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)] · [来源: [AWS Well-Architected](https://docs.aws.amazon.com/wellarchitected/latest/health-safety-pillar/welcome.html)]
+> **修正**: Kubernetes 探针的区分：1) **livenessProbe**：检测死锁/无限循环，失败 → 重启容器；2) **readinessProbe**：检测依赖就绪，失败 → 从 service endpoints 移除（不重启）；3) **startupProbe**：保护慢启动应用，失败 → 重启。反模式：1) 同一端点处理两种探针 → 无法区分状态；2) liveness 检查外部依赖 → 外部故障导致全部 pod 重启，级联故障；3) 超时过短 → 正常慢请求触发重启。Rust 云原生应用应暴露 `/health/live`（简单存活检查）和 `/health/ready`（依赖就绪检查）。这与 Go 的 Kubernetes 客户端或 Java 的 Spring Boot Actuator 类似——探针设计是分布式系统可靠性的基石。[来源: [Kubernetes Probes](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)] · [来源: [AWS Well-Architected](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html)]
 > **过渡**: Rust 云原生生态 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 云原生生态 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 云原生生态 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

@@ -487,7 +487,7 @@ Precommit:
   · 防止在同一高度提交两个不同区块
 ```
 
-> **来源**: [Tendermint Core Documentation](https://docs.tendermint.com/master/introduction/what-is-tendermint.html) · [Cosmos SDK](https://docs.cosmos.network/main/) · [Tendermint BFT Paper](https://arxiv.org/abs/1807.04938)
+> **来源**: [Tendermint Core Documentation](https://docs.tendermint.com/master/introduction/what-is-tendermint.html) · [Cosmos SDK](https://docs.cosmos.network/) · [Tendermint BFT Paper](https://arxiv.org/abs/1807.04938)
 
 ---
 

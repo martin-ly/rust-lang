@@ -1,0 +1,86 @@
+[
+  {
+    "old_url": "https://rustfoundation.org/media/2025-annual-report/",
+    "new_url": "https://rustfoundation.org/wp-content/uploads/2026/01/2025-Annual-Report.pdf",
+    "status": "replaced",
+    "note": "Original path returned 404; Rust Foundation's official 2025 Annual Report is now hosted as a PDF. Verified HTTP 200 via curl."
+  },
+  {
+    "old_url": "https://rustfoundation.org/media/2026-2028-strategy/",
+    "new_url": "https://rustfoundation.org/strategic-plan/",
+    "status": "replaced",
+    "note": "Original path returned 404; replaced with Rust Foundation's official strategic plan landing page. Verified HTTP 200 via curl."
+  },
+  {
+    "old_url": "https://rustfoundation.org/research/2025-annual-report/",
+    "new_url": "https://rustfoundation.org/wp-content/uploads/2026/01/2025-Annual-Report.pdf",
+    "status": "replaced",
+    "note": "Original path returned 404; Rust Foundation's official 2025 Annual Report is now hosted as a PDF. Verified HTTP 200 via curl."
+  },
+  {
+    "old_url": "https://rustfoundation.org/research/rust-foundation-strategic-plan-2026-2028/",
+    "new_url": "https://rustfoundation.org/strategic-plan/",
+    "status": "replaced",
+    "note": "Original path returned 404; replaced with Rust Foundation's official strategic plan landing page. Verified HTTP 200 via curl."
+  },
+  {
+    "old_url": "https://rustsec.org/advisories/rss.xml",
+    "new_url": "https://rustsec.org/feed.xml",
+    "status": "replaced",
+    "note": "Original RSS feed path returned 404; RustSec now publishes its advisories feed at /feed.xml (Atom). Verified HTTP 200."
+  },
+  {
+    "old_url": "https://rust-secure-code.github.io/",
+    "new_url": "https://github.com/rust-secure-code/wg",
+    "status": "replaced",
+    "note": "GitHub Pages site returned 404; the Rust Secure Code Working Group's official coordination repository is the canonical replacement. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://rust-learning.github.io/",
+    "new_url": "https://learning-rust.github.io/",
+    "status": "replaced",
+    "note": "Original domain (rust-learning.github.io) returned 404; the actual Learning Rust site is hosted at learning-rust.github.io. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://smallcultfollowing.com/babysteps/blog/2019/01/21/polonius-and-region-errors/",
+    "new_url": "https://smallcultfollowing.com/babysteps/blog/2019/01/17/polonius-and-region-errors/",
+    "status": "replaced",
+    "note": "Original date in URL was incorrect; Niko Matsakis' 'Polonius and Region Errors' post is dated 2019-01-17. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://without.boats/blog/pin-and-suffering/",
+    "new_url": "https://without.boats/blog/pin/",
+    "status": "replaced",
+    "note": "Original slug returned 404; without.boats migrated the post to /blog/pin/. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.ralfj.de/blog/2023/01-31_tree-borrows.html",
+    "new_url": "https://www.ralfj.de/blog/2023/06/02/tree-borrows.html",
+    "status": "replaced",
+    "note": "Original URL used an incorrect date/dash format; Ralf Jung's Tree Borrows post was published on 2023-06-02. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.ralfj.de/blog/2023/01/07/tree-borrows.html",
+    "new_url": "https://www.ralfj.de/blog/2023/06/02/tree-borrows.html",
+    "status": "replaced",
+    "note": "Original URL used an incorrect date; Ralf Jung's Tree Borrows post was published on 2023-06-02. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://www.ralfj.de/blog/2023/01/31/tree-borrows.html",
+    "new_url": "https://www.ralfj.de/blog/2023/06/02/tree-borrows.html",
+    "status": "replaced",
+    "note": "Original URL used an incorrect date; Ralf Jung's Tree Borrows post was published on 2023-06-02. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://blog.google/technology/developers/comprehensive-rust/",
+    "new_url": "https://google.github.io/comprehensive-rust/",
+    "status": "replaced",
+    "note": "Original Google blog post returned 404; the official Comprehensive Rust course has moved to google.github.io/comprehensive-rust. Verified HTTP 200."
+  },
+  {
+    "old_url": "https://microservices.io/book/",
+    "new_url": "https://microservices.io/book",
+    "status": "replaced",
+    "note": "Original URL with trailing slash returned 404; the same page is served without the trailing slash. Verified HTTP 200."
+  }
+]

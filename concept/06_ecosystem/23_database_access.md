@@ -349,7 +349,7 @@ Toasty:
 ```
 
 > **迁移洞察**: **迁移管理是生产数据库的核心**——所有主要 ORM 都提供成熟的迁移工具。
-> [来源: [Diesel Migrations](https://diesel.rs/guides/migrations.html)]
+> [来源: [Diesel Migrations](https://diesel.rs/guides/getting-started/)]
 
 ---
 

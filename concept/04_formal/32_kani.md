@@ -20,7 +20,7 @@
 > **来源**: [Kani 官方文档](https://model-checking.github.io/kani/) ·
 > [Kani GitHub](https://github.com/model-checking/kani) ·
 > [CBMC](https://github.com/diffblue/cbmc) ·
-> [Kani 教程](https://model-checking.github.io/kani/tutorial-intro.html)
+> [Kani 教程](https://model-checking.github.io/kani/tutorial-first-steps.html)
 
 ## 📑 目录
 
@@ -314,7 +314,7 @@ fn verify_vec_push_safety() {
 |:---|:---:|:---|
 | [Kani 官方文档](https://model-checking.github.io/kani/) | ✅ 一级 | 安装、语法、教程、限制说明 |
 | [Kani GitHub](https://github.com/model-checking/kani) | ✅ 一级 | 源码、Issue、Release Notes |
-| [Kani 教程](https://model-checking.github.io/kani/tutorial-intro.html) | ✅ 一级 | 从零开始的 harness 编写 |
+| [Kani 教程](https://model-checking.github.io/kani/tutorial-first-steps.html) | ✅ 一级 | 从零开始的 harness 编写 |
 | [CBMC GitHub](https://github.com/diffblue/cbmc) | ✅ 二级 | Kani 底层模型检查引擎 |
 | [AWS Kani Blog](https://aws.amazon.com/blogs/aws/) | ✅ 二级 | 工业应用案例 |
 | [Rust 形式化验证工具对比](22_modern_verification_tools.md) | ✅ 二级 | 项目内 Kani/Miri/Verus 对比 |

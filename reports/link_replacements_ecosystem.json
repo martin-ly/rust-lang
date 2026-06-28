@@ -1,0 +1,188 @@
+[
+  {
+    "old_url": "https://slint-ui.com/docs/architecture/",
+    "new_url": "https://docs.slint.dev/latest/docs/cpp/",
+    "status": "replaced",
+    "note": "HTTP 200，原 architecture 页面内容已并入 Slint C++ 文档首页的 Architecture 章节"
+  },
+  {
+    "old_url": "https://slint-ui.com/docs/embedded/",
+    "new_url": "https://docs.slint.dev/latest/docs/slint/guide/platforms/embedded/",
+    "status": "replaced",
+    "note": "HTTP 200，对应 Embedded 平台文档"
+  },
+  {
+    "old_url": "https://slint-ui.com/docs/rust/",
+    "new_url": "https://docs.slint.dev/latest/docs/rust/slint/",
+    "status": "replaced",
+    "note": "HTTP 200，Slint Rust API 文档"
+  },
+  {
+    "old_url": "https://slint-ui.com/docs/rust/slint/theming.html",
+    "new_url": "https://docs.slint.dev/latest/docs/slint/reference/std-widgets/style/",
+    "status": "replaced",
+    "note": "HTTP 200，Widget 样式/主题文档"
+  },
+  {
+    "old_url": "https://docs.lvgl.io/8.3/overview/memory.html",
+    "new_url": "",
+    "status": "archive",
+    "note": "LVGL 8.3 memory 子页已移除；overview 根页可访问但非等价内容"
+  },
+  {
+    "old_url": "https://docs.lvgl.io/8.3/overview/perf.html",
+    "new_url": "",
+    "status": "archive",
+    "note": "perf 子页已移除，未找到等价官方页"
+  },
+  {
+    "old_url": "https://docs.lvgl.io/8.3/porting/mem.html",
+    "new_url": "",
+    "status": "archive",
+    "note": "porting/mem 子页已移除；porting 根页仍可用但非等价"
+  },
+  {
+    "old_url": "https://docs.unity3d.com/Manual/UnityArchitecture.html",
+    "new_url": "https://docs.unity3d.com/2022.3/Documentation/Manual/unity-architecture.html",
+    "status": "replaced",
+    "note": "HTTP 200，Unity architecture 手册"
+  },
+  {
+    "old_url": "https://docs.pola.rs/user-guide/concepts/data-structures/#dataframe",
+    "new_url": "https://docs.pola.rs/user-guide/concepts/data-types-and-structures/",
+    "status": "replaced",
+    "note": "HTTP 200，新 DataFrame/Series 数据结构说明"
+  },
+  {
+    "old_url": "https://docs.pola.rs/user-guide/transformations/time-series/windows/",
+    "new_url": "https://docs.pola.rs/user-guide/expressions/window-functions/",
+    "status": "replaced",
+    "note": "HTTP 200，时间序列窗口内容已并入 Window functions 文档"
+  },
+  {
+    "old_url": "https://pola.rs/posts/polars-pandas-xlsxwriter/",
+    "new_url": "",
+    "status": "archive",
+    "note": "pola.rs/posts 列表中未检索到该文，旧文已下架"
+  },
+  {
+    "old_url": "https://pola.rs/posts/rust-for-data/",
+    "new_url": "",
+    "status": "archive",
+    "note": "pola.rs/posts 列表中未检索到该文，旧文已下架"
+  },
+  {
+    "old_url": "https://parquet.apache.org/docs/file-format/config/",
+    "new_url": "",
+    "status": "archive",
+    "note": "官方文档已无 config 子页，仅 file-format 总览可用"
+  },
+  {
+    "old_url": "https://parquet.apache.org/docs/file-format/schema-evolution/",
+    "new_url": "",
+    "status": "archive",
+    "note": "官方文档已无 schema-evolution 子页"
+  },
+  {
+    "old_url": "https://arrow.apache.org/datafusion/user-guide/caching.html",
+    "new_url": "https://datafusion.apache.org/user-guide/configs.html",
+    "status": "replaced",
+    "note": "HTTP 200，DataFusion 文档已迁移至 datafusion.apache.org；缓存相关配置现位于 configs 页面"
+  },
+  {
+    "old_url": "https://docs.getdbt.com/docs/build/about-sql-reference",
+    "new_url": "https://docs.getdbt.com/sql-reference",
+    "status": "replaced",
+    "note": "HTTP 200，dbt SQL 参考首页"
+  },
+  {
+    "old_url": "https://diesel.rs/guides/migrations.html",
+    "new_url": "https://diesel.rs/guides/getting-started/",
+    "status": "replaced",
+    "note": "HTTP 200，migrations 无独立页面，相关内容已并入 getting-started"
+  },
+  {
+    "old_url": "https://pyo3.rs/v0.21.2/concurrency.html",
+    "new_url": "https://pyo3.rs/main/parallelism",
+    "status": "replaced",
+    "note": "HTTP 200，PyO3 并发/并行指南"
+  },
+  {
+    "old_url": "https://ros-real-time.github.io/",
+    "new_url": "",
+    "status": "archive",
+    "note": "GitHub Pages 已下线，未找到官方等同入口"
+  },
+  {
+    "old_url": "https://grpc.io/blog/tonic-joins-grpc-project/",
+    "new_url": "https://grpc.io/blog/grpc-welcomes-tonic/",
+    "status": "replaced",
+    "note": "HTTP 200，gRPC 官方博客新地址"
+  },
+  {
+    "old_url": "https://chromium.googlesource.com/chromium/src/+/main/docs/rust.md",
+    "new_url": "",
+    "status": "whitelist",
+    "note": "chromium.googlesource.com 连接超时（000），暂时无法验证，按临时性问题处理"
+  },
+  {
+    "old_url": "https://developers.eventstore.com/server/v24.10/projections.html",
+    "new_url": "https://docs.kurrent.io/server/v24.10/features/projections/",
+    "status": "replaced",
+    "note": "HTTP 200，EventStore 已 rebranded 为 Kurrent，projections 文档新地址"
+  },
+  {
+    "old_url": "https://developers.eventstore.com/server/v24.10/streams.html#appending-events",
+    "new_url": "https://docs.kurrent.io/server/v24.10/features/streams.html",
+    "status": "replaced",
+    "note": "HTTP 200，appending-events 锚点已不存在，内容并入 streams 页面"
+  },
+  {
+    "old_url": "https://developers.eventstore.com/server/v24.10/streams.html#snapshots",
+    "new_url": "",
+    "status": "archive",
+    "note": "Kurrent v24.10 streams 文档中已无 snapshots 章节，未找到等价官方页"
+  },
+  {
+    "old_url": "https://docs.axoniq.io/reference-guide/axon-framework/architecture-overview",
+    "new_url": "https://docs.axoniq.io/axon-framework-reference/5.1/",
+    "status": "replaced",
+    "note": "HTTP 200，architecture-overview 内容已并入 Axon Framework 5.1 介绍页"
+  },
+  {
+    "old_url": "https://docs.axoniq.io/reference-guide/axon-framework/commands/command-handlers.html",
+    "new_url": "https://docs.axoniq.io/axon-framework-reference/5.1/commands/command-handlers/",
+    "status": "replaced",
+    "note": "HTTP 200，Axon Framework 5.1 命令处理器文档"
+  },
+  {
+    "old_url": "https://docs.cosmos.network/main/",
+    "new_url": "https://docs.cosmos.network/",
+    "status": "replaced",
+    "note": "HTTP 200，Cosmos 官方文档首页"
+  },
+  {
+    "old_url": "https://design.ros2.org/articles/rosidl.html",
+    "new_url": "",
+    "status": "archive",
+    "note": "design.ros2.org 返回 404，未找到 ROS2 IDL 设计文档官方替代"
+  },
+  {
+    "old_url": "https://graphql.org/blog/2015/10/16/subscriptions/",
+    "new_url": "https://graphql.org/blog/2015-10-16-subscriptions/",
+    "status": "replaced",
+    "note": "HTTP 200，GraphQL Subscriptions 博客新 slug"
+  },
+  {
+    "old_url": "https://component-model.bytecodealliance.org/design/composition.html",
+    "new_url": "https://component-model.bytecodealliance.org/design/components.html",
+    "status": "replaced",
+    "note": "HTTP 200，Components 设计文档"
+  },
+  {
+    "old_url": "https://component-model.bytecodealliance.org/design/types.html",
+    "new_url": "https://component-model.bytecodealliance.org/design/wit.html",
+    "status": "replaced",
+    "note": "HTTP 200，WIT 类型参考文档"
+  }
+]

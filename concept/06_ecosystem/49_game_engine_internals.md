@@ -161,7 +161,7 @@ ECS 调度器                    特定系统和组件
 
 > **来源**: [Bevy Engine](https://bevyengine.org/) ·
 > [Godot Documentation](https://docs.godotengine.org/) ·
-> [Unity Architecture](https://docs.unity3d.com/Manual/UnityArchitecture.html)
+> [Unity Architecture](https://docs.unity3d.com/2022.3/Documentation/Manual/unity-architecture.html)
 
 ---
 

@@ -867,7 +867,7 @@ flowchart TD
 5. **自托管 Runner**：Kani/Verus 需要大内存，GitHub 免费 runner（7GB）可能不足，建议使用自托管 runner
 
 > **来源**:
-> [Kani CI Best Practices](https://model-checking.github.io/kani/ci.html) ·
+> [Kani CI Best Practices](https://model-checking.github.io/kani/install-github-ci.html) ·
 > [GitHub Actions Pricing](https://docs.github.com/en/billing/managing-billing-for-github-actions) ·
 > [AWS CodePipeline Docs]
 
@@ -1666,5 +1666,5 @@ fn main() {
 > [来源: [Wikipedia — Formal Verification](https://en.wikipedia.org/wiki/Formal_verification)]
 > [来源: [Wikipedia — Model Checking](https://en.wikipedia.org/wiki/Model_checking)]
 > [来源: [Wikipedia — Theorem Proving](https://en.wikipedia.org/wiki/Automated_theorem_proving)]
-> [来源: [POPL 2024 — Verus](https://verus-lang.github.io/)]
+> [来源: [POPL 2024 — Verus](https://github.com/verus-lang/verus)]
 > [来源: [AWS Kani](https://github.com/model-checking/kani)]

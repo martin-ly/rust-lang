@@ -125,7 +125,7 @@ fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
 // invariant: forall|i: int| high <= i < arr.len() ==> arr[i] > target
 ```
 
-**权威来源**: [AutoVerus — arXiv 2025](https://arxiv.org/abs/2409.13082) · [Verus Lang](https://verus-lang.github.io/verus/)
+**权威来源**: [AutoVerus — arXiv 2025](https://arxiv.org/abs/2409.13082) · [Verus Lang](https://github.com/verus-lang/verusverus/guide/)
 
 ---
 

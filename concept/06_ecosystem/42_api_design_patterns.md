@@ -320,7 +320,7 @@ async fn get_user_v2(Path(id): Path<Uuid>, headers: HeaderMap) -> Result<Json<Us
 }
 ```
 
-> **来源**: [Microsoft — API Versioning](https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-versioning) ·
+> **来源**: [Microsoft — API Versioning](https://learn.microsoft.com/en-us/azure/architecture/microservices/design/api-design#api-versioning) ·
 > [Stripe API Versioning](https://stripe.com/docs/api/versioning)
 
 ### 3.3 错误处理与状态码
@@ -703,7 +703,7 @@ impl SubscriptionRoot {
 }
 ```
 
-> **来源**: [GraphQL Subscriptions](https://graphql.org/blog/2015/10/16/subscriptions/) ·
+> **来源**: [GraphQL Subscriptions](https://graphql.org/blog/2015-10-16-subscriptions/) ·
 > [async-graphql Subscription](https://docs.rs/async-graphql/latest/async_graphql/attr.Subscription.html)
 
 ---
@@ -1183,7 +1183,7 @@ struct UserV2 {
 > }
 > ```
 >
-> **来源**: [Microsoft — API Versioning](https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-versioning) ·
+> **来源**: [Microsoft — API Versioning](https://learn.microsoft.com/en-us/azure/architecture/microservices/design/api-design#api-versioning) ·
 > [Stripe API Compatibility](https://stripe.com/docs/api/versioning)
 
 ---

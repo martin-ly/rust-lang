@@ -473,7 +473,7 @@ fn bad_function(py: Python<'_>) -> PyResult<()> {
 // 3. 避免在持有锁时跨越语言边界
 ```
 
-> **来源**: [PyO3 Concurrency](https://pyo3.rs/v0.21.2/concurrency.html) · [Python GIL](https://docs.python.org/3/glossary.html#term-global-interpreter-lock)
+> **来源**: [PyO3 Concurrency](https://pyo3.rs/main/parallelism) · [Python GIL](https://docs.python.org/3/glossary.html#term-global-interpreter-lock)
 
 ### 8.3 边界测试：未处理 CSV 解析中的畸形数据
 

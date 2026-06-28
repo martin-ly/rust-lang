@@ -725,7 +725,7 @@ async fn broadcast_with_arc(event: DomainEvent, subscribers: Vec<mpsc::Sender<Ar
 | [NATS Documentation](https://docs.nats.io/) | ✅ 一级 | 消息系统 |
 | [Reactive Streams Specification](https://www.reactive-streams.org/) | ✅ 一级 | 背压规范 |
 | [Kafka Exactly-Once Semantics](https://www.confluent.io/blog/exactly-once-semantics-are-possible-heres-how-apache-kafka-does-it/) | ✅ 一级 | 精确一次语义 |
-| [Microservices Patterns (Chris Richardson)](https://microservices.io/book/) | ✅ 一级 | 事件驱动模式 |
+| [Microservices Patterns (Chris Richardson)](https://microservices.io/book) | ✅ 一级 | 事件驱动模式 |
 | [Designing Data-Intensive Applications](https://dataintensive.net/) | ✅ 一级 | 分布式系统基础 |
 | [Serde Enum Representations](https://serde.rs/enum-representations.html) | ✅ 一级 | 序列化模式 |
 | [bus crate](https://docs.rs/bus/latest/bus/) | ✅ 二级 | 同步广播通道 |

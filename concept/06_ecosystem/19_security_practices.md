@@ -19,7 +19,7 @@
 > **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [Type System](../01_foundation/04_type_system.md) · [Error Handling](../02_intermediate/15_error_handling_deep_dive.md)
 > **后置概念**: [Blockchain](06_blockchain.md) · [Formal Methods](../04_formal/04_rustbelt.md)
 >
-> **来源**: [Rust Secure Code WG](https://rust-secure-code.github.io/) · [Cargo — Specifying Dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **来源**: [Rust Secure Code WG](https://github.com/rust-secure-code/wg) · [Cargo — Specifying Dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 ---
 
 > **来源**: [Rust Secure Code Guidelines](https://anssi-fr.github.io/rust-guide/) ·
@@ -184,7 +184,7 @@ unsafe 代码的安全策略:
   └── 文档化所有安全假设
 
   安全契约文档:
-  /// # Safety [来源: [Rust Secure Code Guidelines](https://rust-secure-code.github.io/)]
+  /// # Safety [来源: [Rust Secure Code Guidelines](https://github.com/rust-secure-code/wg)]
   /// Caller must ensure:
   /// - pointer is non-null and properly aligned
   /// - pointer points to valid memory of at least `len` bytes
@@ -631,7 +631,7 @@ crates.io 团队于 2026-02-13 宣布[更新恶意 crate 通知政策](https://b
 2. **博客文章仅用于有实际使用/利用证据的 case**：只有当存在该 crate 被真实下载、使用或造成实际影响的证据时，才会额外发布 rust-lang.org 博客文章。
 3. **不再为纯 typosquat/无使用证据的恶意 crate 发博客**：大量未被实际使用的 typosquat 包不会触发博客公告。
 
-> **建议**: 订阅 [RustSec Advisory RSS](https://rustsec.org/advisories/rss.xml) 以获取实时安全更新。
+> **建议**: 订阅 [RustSec Advisory RSS](https://rustsec.org/feed.xml) 以获取实时安全更新。
 
 **近期恶意 crate 案例**:
 

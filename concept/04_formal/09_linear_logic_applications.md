@@ -18,7 +18,7 @@
 > **来源**: [Linear Logic — Girard 1987](https://girard.perso.math.cnrs.fr/linear.pdf) ·
 > [Session Types for Rust](https://www.jaist.ac.jp/~sgonda/paper/2020_scico.html) ·
 > [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/popl18/) ·
-> [Wadler — Propositions as Sessions](https://homepages.inf.ed.ac.uk/wadler/papers/linearsubtypes/linearsubtypes.pdf) ·
+> [Wadler — Propositions as Sessions](https://homepages.inf.ed.ac.uk/wadler/papers/linearsub/linearsub.ps) ·
 > [Wikipedia — Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)
 > **前置依赖**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
 > **前置依赖**: [Concurrency](../03_advanced/01_concurrency.md)
@@ -176,7 +176,7 @@ Session Types: 将通信协议编码为类型
 ```
 
 > **Session Types 洞察**: Session Types 将**通信协议的正确性**从运行时（Runtime）测试转化为**编译期类型检查**——协议违规成为类型错误。
-> [来源: [Wadler — Propositions as Sessions](https://homepages.inf.ed.ac.uk/wadler/papers/linearsubtypes/linearsubtypes.pdf)]
+> [来源: [Wadler — Propositions as Sessions](https://homepages.inf.ed.ac.uk/wadler/papers/linearsub/linearsub.ps)]
 
 ---
 
@@ -474,7 +474,7 @@ graph TD
 |:---|:---:|:---|
 | [Girard — Linear Logic](https://girard.perso.math.cnrs.fr/linear.pdf) | ✅ 一级 | 原始论文 |
 | [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) | ✅ 一级 | Rust 形式化验证 |
-| [Wadler — Propositions as Sessions](https://homepages.inf.ed.ac.uk/wadler/papers/linearsubtypes/linearsubtypes.pdf) | ✅ 一级 | Session Types |
+| [Wadler — Propositions as Sessions](https://homepages.inf.ed.ac.uk/wadler/papers/linearsub/linearsub.ps) | ✅ 一级 | Session Types |
 | [Session Types in Rust](https://www.jaist.ac.jp/~sgonda/paper/2020_scico.html) | ✅ 一级 | 工程实现 |
 | [Rust Patterns — Typestate](https://rust-unofficial.github.io/patterns/) | ✅ 二级 | 模式库 |
 

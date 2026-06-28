@@ -514,7 +514,7 @@ Polonius 状态（2025）:
   - 解决了 NLL problem case #3（lending iterator）
 ```
 
-> **来源**: [Polonius Paper — OOPSLA 2018](https://hal.inria.fr/hal-03827702/) · [Rustc Dev Guide — Polonius](https://rustc-dev-guide.rust-lang.org/borrow-check.html) · [Niko Matsakis — Polonius](https://smallcultfollowing.com/babysteps/blog/2019/01/21/polonius-and-region-errors/)
+> **来源**: [Polonius Paper — OOPSLA 2018](https://hal.inria.fr/hal-03827702/) · [Rustc Dev Guide — Polonius](https://rustc-dev-guide.rust-lang.org/borrow-check.html) · [Niko Matsakis — Polonius](https://smallcultfollowing.com/babysteps/blog/2019/01/17/polonius-and-region-errors/)
 
 ### 7.3 别名模型：Tree Borrows
 >

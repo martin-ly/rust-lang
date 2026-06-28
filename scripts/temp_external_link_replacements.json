@@ -1,0 +1,19 @@
+{
+  "https://prev.rust-lang.org/faq.html#why-does-rust-have-traits": "https://doc.rust-lang.org/book/ch10-02-traits.html",
+  "https://nodejs.org/en/docs/guides/dont-block-the-event-loop": "https://nodejs.org/en/learn/asynchronous-work/dont-block-the-event-loop",
+  "https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick": "https://nodejs.org/en/learn/asynchronous-work/event-loop-timers-and-nexttick",
+  "https://webassembly.org/docs/portability-and-performance/": "https://webassembly.org/docs/portability/",
+  "https://webassembly.github.io/spec/core/appendix/security.html": "https://webassembly.github.io/spec/core/appendix/index.html",
+  "https://webassembly.github.io/spec/core/benchmarks.html": "https://webassembly.github.io/spec/core/appendix/index.html",
+  "https://tokio.rs/tokio/topics/runtime": "https://docs.rs/tokio/latest/tokio/runtime/index.html",
+  "https://tokio.rs/tokio/topics/blocking": "https://docs.rs/tokio/latest/tokio/task/index.html",
+  "https://marabos.nl/atomics/happens-before.html": "https://mara.nl/atomics/memory-ordering.html",
+  "https://marabos.nl/atomics/when-to-use.html": "https://mara.nl/atomics/atomics.html",
+  "https://nnethercote.github.io/perf-book/collections.html": "https://nnethercote.github.io/perf-book/print.html#reusing-collections",
+  "https://nnethercote.github.io/perf-book/concurrency.html": "https://nnethercote.github.io/perf-book/print.html#parallelism",
+  "https://nnethercote.github.io/perf-book/pitfalls.html": "https://nnethercote.github.io/perf-book/print.html",
+  "https://nnethercote.github.io/perf-book/string-processing.html": "https://nnethercote.github.io/perf-book/print.html#string",
+  "https://nnethercote.github.io/perf-book/unsafe-rust.html": "https://nnethercote.github.io/perf-book/print.html",
+  "https://v8.dev/blog/jit": "https://v8.dev/blog/maglev",
+  "https://v8.dev/blog/stackoverflow": "https://v8.dev/blog"
+}

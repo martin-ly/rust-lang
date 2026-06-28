@@ -22,7 +22,7 @@
 > [Concurrency](../03_advanced/01_concurrency.md)
 > [来源: [Wikipedia — Simply Typed Lambda Calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus)]
 > **后置概念**: [Formal Methods](../07_future/02_formal_methods.md)
-> **主要来源**: [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) · [Iris Project](https://iris-project.org/) · [Creusot](https://creusot.github.io/creusot/) · [Verus](https://verus-lang.github.io/verus/) · [Kani: AWS] · [Aeneas](https://github.com/AeneasVerif/aeneas) · [RefinedRust] · [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html)
+> **主要来源**: [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) · [Iris Project](https://iris-project.org/) · [Creusot](https://creusot.rs/) · [Verus](https://github.com/verus-lang/verusverus/guide/) · [Kani: AWS] · [Aeneas](https://github.com/AeneasVerif/aeneas) · [RefinedRust] · [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html)
 
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
