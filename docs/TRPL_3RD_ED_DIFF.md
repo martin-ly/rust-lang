@@ -3,7 +3,7 @@
 > **分级**: [B]
 > **版本**: TRPL 第三版（NoStarch 印刷版 / 在线版 2025+）
 > **Rust 版本**: 1.85.0+ (Edition 2024 于 1.85.0 稳定)
-> **最后更新**: 2026-06-02
+> **最后更新**: 2026-06-28
 > **难度**: 初级 → 中级
 > **预计阅读**: 25 分钟
 
@@ -43,7 +43,7 @@
 | **Ch 15: Smart Pointers** | [12_smart_pointers.md](../concept/02_intermediate/12_smart_pointers.md) | ✅ | Box、Rc、RefCell、Arc 完全覆盖；concept/ 额外包含自定义智能指针 |
 | **Ch 16: Fearless Concurrency** | [01_concurrency.md](../concept/03_advanced/01_concurrency.md) | ✅ | 线程、Mutex、Arc、Channel 完全覆盖；concept/ 额外包含内存顺序 |
 | **Ch 17: OOP Features** | [01_traits.md](../concept/02_intermediate/01_traits.md) · [01_rust_vs_cpp.md](../concept/05_comparative/01_rust_vs_cpp.md) | ⚠️ | TRPL 以 trait 对象讲解动态分发；concept/ 强调无继承设计哲学 |
-| **Ch 18: Patterns and Matching** | [12_attributes_and_macros.md](../concept/01_foundation/12_attributes_and_macros.md) | ✅ | 模式语法完全覆盖；concept/ 额外包含守卫条件和 @ 绑定 |
+| **Ch 18: Patterns and Matching** | [07_control_flow.md](../concept/01_foundation/07_control_flow.md) · [12_attributes_and_macros.md](../concept/01_foundation/12_attributes_and_macros.md) · [15_iterator_patterns.md](../concept/02_intermediate/15_iterator_patterns.md) | ✅ | `match`/`if let` 模式语法完全覆盖；concept/ 额外包含守卫条件、@ 绑定与迭代器模式 |
 | **Ch 19: Advanced Features** | [03_advanced/](../concept/03_advanced/) 整层 | 🆕 | TRPL 单章覆盖；concept/ L3 拆分为 20+ 独立文件，深度远超 TRPL |
 | **Ch 20: Multithreaded Web Server** | [18_network_programming.md](../concept/03_advanced/18_network_programming.md) · [comprehensive_web_server.rs](../examples/comprehensive_web_server.rs) | ⚠️ | TRPL 渐进式项目教学；concept/ 有示例但缺少同步逐步教程 |
 | **Ch 21: Appendix** | [02_reference/](../docs/02_reference/) | ✅ | 关键字、运算符、可派生 trait、宏等参考内容完全覆盖 |
@@ -106,7 +106,7 @@ TRPL Ch 14   →  concept/06_ecosystem/01_toolchain.md + 09_cargo_script.md
 TRPL Ch 15   →  concept/02_intermediate/12_smart_pointers.md
 TRPL Ch 16   →  concept/03_advanced/01_concurrency.md
 TRPL Ch 17   →  concept/05_comparative/02_rust_vs_cpp.md (OOP 对比)
-TRPL Ch 18   →  concept/01_foundation/12_attributes_and_macros.md
+TRPL Ch 18   →  concept/01_foundation/07_control_flow.md + concept/02_intermediate/15_iterator_patterns.md
 TRPL Ch 19   →  concept/03_advanced/ (L3 整层)
 TRPL Ch 20   →  examples/comprehensive_web_server.rs
 TRPL Ch 21   →  docs/02_reference/
@@ -116,4 +116,4 @@ TRPL Ch 21   →  docs/02_reference/
 
 > **来源**: [TRPL 第三版（2024 Edition）](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [NoStarch Press — The Rust Programming Language](https://nostarch.com/rust-programming-language-2nd-edition)
 > **维护状态**: 随 TRPL 在线版更新同步维护
-> **最后全面审查**: 2026-06-02
+> **最后全面审查**: 2026-06-28
