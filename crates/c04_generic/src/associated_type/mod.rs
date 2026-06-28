@@ -770,19 +770,19 @@ mod tests {
         assert_eq!(counter.count(), 3);
     }
 
-    /// Use `gen` block Implementation ofand Counter etc.价iterator
-    /// 简化为直观的命令式代码，编译器自动处理状态转换。
-    /// as imperative ，state conversion 。
+    /// Use `std::iter::from_fn` 模拟 gen block：用命令式代码生成迭代器。
     #[test]
     fn test_gen_counter() {
-        let gen_counter = gen move {
-            let mut count = 0u32;
-            let max = 3;
-            while count < max {
+        let mut count = 0u32;
+        let max = 3;
+        let gen_counter = std::iter::from_fn(move || {
+            if count < max {
                 count += 1;
-                yield count;
+                Some(count)
+            } else {
+                None
             }
-        };
+        });
 
         let values: Vec<u32> = gen_counter.collect();
         assert_eq!(values, vec![1, 2, 3]);

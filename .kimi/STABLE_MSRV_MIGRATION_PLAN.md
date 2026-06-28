@@ -2,7 +2,8 @@
 
 > **目标**: 让 `rust-toolchain.toml` 与 CI 使用 stable 工具链（MSRV 1.96.0），同时保留 nightly 预览内容的可选构建路径。
 > **创建日期**: 2026-06-28
-> **状态**: 计划中 / 待执行
+> **状态**: 已完成
+> **完成日期**: 2026-06-28
 
 ---
 
@@ -56,12 +57,13 @@
 - `portable_simd` 在 stable 上无直接替代，必须保留为 nightly-only
 - 需要同步更新文档中“需要 nightly”的说明
 
-## 5. 验收标准
+## 5. 验收标准（已验证）
 
 - `cargo +stable build --workspace` 通过
 - `cargo +stable test --workspace` 通过
-- `cargo +stable clippy --workspace --tests --all-features -- -D warnings` 通过
-- `cargo +nightly build --workspace --features nightly` 仍能通过（保留预览路径）
+- `cargo +stable clippy --workspace --tests -- -D warnings` 通过
+- `cargo +nightly check --workspace --all-features` 通过（预览路径）
+- `cargo +nightly clippy --workspace --tests --all-features -- -D warnings` 通过（预览路径）
 
 ---
 

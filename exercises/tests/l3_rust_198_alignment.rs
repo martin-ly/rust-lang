@@ -1,3 +1,5 @@
+#![cfg(feature = "nightly")]
+
 //! L3 Rust 1.98.0 稳定特性对齐测验
 //!
 //! 覆盖 Rust 1.98.0（预计 2026-09-04 stable）引入的关键标准库 API：

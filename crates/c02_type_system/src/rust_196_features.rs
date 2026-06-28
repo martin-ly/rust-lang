@@ -102,9 +102,9 @@ impl ConstVecDequeExamples {
 
 // ✅ **状态**: `!` 类型的核心功能在 Rust 1.96+ stable / Edition 2024 中已可用：
 //    - `!` 作为函数返回类型（`-> !`）—— 早已稳定
-//    - `Result<T, !>` / `Option<!>` —— stable 可用（通过 edition 2024）
+//    - `Result<T, std::convert::Infallible>` / `Option<std::convert::Infallible>` —— stable 可用（通过 edition 2024）
 //    - never type 在 tuple 表达式中的 coercion —— Rust 1.96.0 stable
-//    - match 穷尽性检查（`Result<T, !>` 无需 `Err` 分支）—— stable 可用
+//    - match 穷尽性检查（`Result<T, std::convert::Infallible>` 无需 `Err` 分支）—— stable 可用
 //
 // ⚠️ **限制**: `!` 作为显式类型别名（如 `type MyNever = !;`）在某些上下文中仍受限，
 //    但这不影响上述核心用例。
@@ -118,8 +118,8 @@ impl ConstVecDequeExamples {
 // ## 核心特性
 // - `!` 可以强制转换为任何类型（coerce to any type）
 // - 在 `match` 中启用更精确的穷尽性检查
-// - `Result<T, !>` 表示"不可能出错"的操作
-// - `Option<!>` 表示"不可能存在"的值
+// - `Result<T, std::convert::Infallible>` 表示"不可能出错"的操作
+// - `Option<std::convert::Infallible>` 表示"不可能存在"的值
 
 // ==================== 示例 1: 基础 Never 类型 ====================
 
@@ -150,13 +150,13 @@ pub fn fatal_error(message: &str) -> ! {
     std::process::exit(1)
 }
 
-// ==================== 示例 2: Result<T, !> —— 不可能失败的运算 ====================
+// ==================== 示例 2: Result<T, std::convert::Infallible> —— 不可能失败的运算 ====================
 
 /// 安全的整数加法（不可能溢出）
 /// （may ）
 /// 当通过类型系统或前置条件保证操作不会失败时，可以使用 `!` 作为错误类型。
 /// when type system or before condition ，can `!` as error type 。
-pub fn safe_add(a: u32, b: u32) -> Result<u32, !> {
+pub fn safe_add(a: u32, b: u32) -> Result<u32, std::convert::Infallible> {
     // 如果业务逻辑保证不会溢出，错误类型为 `!`
     Ok(a.wrapping_add(b))
 }
@@ -165,14 +165,14 @@ pub fn safe_add(a: u32, b: u32) -> Result<u32, !> {
 /// surface （effective ）
 /// 从已知有效的字符串构建数字，理论上不可能失败。
 /// from effective ，theory on may 。
-pub fn parse_known_valid() -> Result<i32, !> {
+pub fn parse_known_valid() -> Result<i32, std::convert::Infallible> {
     // 编译器知道 "42" 一定能解析成功
     Ok("42".parse().unwrap())
 }
 
-/// will `Result<T, !>` 安全地conversionas `T`
-pub fn unwrap_infallible<T>(result: Result<T, !>) -> T {
-    // Rust 2024: match 对 `Result<T, !>` 支持穷尽性检查，
+/// will `Result<T, std::convert::Infallible>` 安全地conversionas `T`
+pub fn unwrap_infallible<T>(result: Result<T, std::convert::Infallible>) -> T {
+    // Rust 2024: match 对 `Result<T, std::convert::Infallible>` 支持穷尽性检查，
     // 编译器知道 `Err` 分支不可能发生
     match result {
         Ok(v) => v,
@@ -182,9 +182,9 @@ pub fn unwrap_infallible<T>(result: Result<T, !>) -> T {
 
 // ==================== 示例 3: match 穷尽性检查 ====================
 
-/// Use `Result<T, !>` 穷尽性 match
+/// Use `Result<T, std::convert::Infallible>` 穷尽性 match
 pub fn demonstrate_exhaustive_match() -> i32 {
-    let x: Result<i32, !> = Ok(42);
+    let x: Result<i32, std::convert::Infallible> = Ok(42);
 
     // 只需要处理 Ok 分支，编译器知道 Err 不可能发生
     match x {
@@ -213,7 +213,7 @@ pub enum Event<T, E> {
 /// may stream
 /// 当 `E = !` 时，Error 变体在物理上不可能被构造。
 /// when `E =!` ，Error volume in on may is 。
-pub fn process_infallible_stream(event: Event<i32, !>) -> Option<i32> {
+pub fn process_infallible_stream(event: Event<i32, std::convert::Infallible>) -> Option<i32> {
     match event {
         Event::Data(v) => Some(v),
         // Event::Error 分支不需要，因为 `!` 无法构造
@@ -224,7 +224,7 @@ pub fn process_infallible_stream(event: Event<i32, !>) -> Option<i32> {
 /// 过滤后的结果类型
 /// Filters后的结果类型
 /// after result type
-pub fn filtered_result(values: Vec<Result<i32, String>>) -> Vec<Result<i32, !>> {
+pub fn filtered_result(values: Vec<Result<i32, String>>) -> Vec<Result<i32, std::convert::Infallible>> {
     values
         .into_iter()
         .filter_map(|r| match r {
@@ -254,7 +254,7 @@ pub fn conditional_never(flag: bool) -> i32 {
 }
 
 pub fn demonstrate_option_never() -> String {
-    let impossible: Option<!> = None;
+    let impossible: Option<std::convert::Infallible> = None;
 
     // 由于 `!` 无法构造，match 只需要处理 None
     match impossible {
@@ -269,7 +269,7 @@ pub fn demonstrate_option_never() -> String {
 /// result
 /// 在某些场景下，配置必须存在且有效，否则程序直接退出。
 /// in scenario under ，must in and effective ，program 。
-pub type InfallibleConfig = Result<AppConfig, !>;
+pub type InfallibleConfig = Result<AppConfig, std::convert::Infallible>;
 
 /// 应用配置
 /// application
@@ -288,7 +288,7 @@ impl AppConfig {
     /// （in environment in ）
     /// 如果配置缺失，直接终止进程而非返回错误。
     /// if ，process while 。
-    pub fn load_critical() -> Result<AppConfig, !> {
+    pub fn load_critical() -> Result<AppConfig, std::convert::Infallible> {
         match Self::load_optional() {
             Some(config) => Ok(config),
             None => fatal_error("关键配置缺失，无法启动应用"),
@@ -309,7 +309,7 @@ impl AppConfig {
 /// constant
 /// 编译期计算不可能在运行时失败，错误类型为 `!`。
 /// may in runtime ，error type as `!`。
-pub const fn compile_time_compute(input: u32) -> Result<u32, !> {
+pub const fn compile_time_compute(input: u32) -> Result<u32, std::convert::Infallible> {
     Ok(input * 2)
 }
 
@@ -323,9 +323,9 @@ pub fn demonstrate_never_type() {
     println!("   Rust 2024 Edition Never 类型 (!) 演示");
     println!("========================================\n");
 
-    // 示例 1: Result<T, !>
+    // 示例 1: Result<T, std::convert::Infallible>
     println!("--- 示例 1: 不可能失败的结果 ---");
-    let result: Result<u32, !> = safe_add(10, 20);
+    let result: Result<u32, std::convert::Infallible> = safe_add(10, 20);
     println!("safe_add(10, 20) => {:?}", result);
     println!("unwrap_infallible => {}", unwrap_infallible(result));
 
@@ -338,7 +338,7 @@ pub fn demonstrate_never_type() {
 
     // 示例 3: 不可能出错的流
     println!("\n--- 示例 3: 不可能出错的流事件 ---");
-    let event: Event<i32, !> = Event::Data(100);
+    let event: Event<i32, std::convert::Infallible> = Event::Data(100);
     println!(
         "process_infallible_stream => {:?}",
         process_infallible_stream(event)
@@ -362,7 +362,7 @@ pub fn demonstrate_never_type() {
 /// Gets never 类型特性信息
 /// never type feature
 pub fn get_never_type_info() -> String {
-    "Rust 2024 Edition Never 类型 (!) 特性:\n- `!` 可强制转换为任何类型\n- `Result<T, !>` \
+    "Rust 2024 Edition Never 类型 (!) 特性:\n- `!` 可强制转换为任何类型\n- `Result<T, std::convert::Infallible>` \
      表示不可能失败的操作\n- match 穷尽性检查：无需处理 `Err(!)` 分支\n- \
      控制流优化：panic/exit/无限循环返回 `!`\n- 编译期常量求值的理想错误类型"
         .to_string()
@@ -522,7 +522,7 @@ mod tests {
 
     #[test]
     fn test_unwrap_infallible() {
-        let result: Result<i32, !> = Ok(42);
+        let result: Result<i32, std::convert::Infallible> = Ok(42);
         assert_eq!(unwrap_infallible(result), 42);
     }
 

@@ -14,9 +14,7 @@
 > **后置延伸**: [RustBelt](04_rustbelt.md) · [Separation Logic](11_separation_logic.md) · [Verification Toolchain](05_verification_toolchain.md)
 > **跨层映射**: L4→L1 公理规约 ↔ 工程直觉 | L4→L3 Unsafe 边界 ↔ 公理失效区域
 > **定理链编号**: T-120 霍尔三元组可判定性 → T-121 wp 计算完备性 → T-122 所有权（Ownership）不变式可验证性
-
 > **后置概念**: [Comparative Studies](../05_comparative/01_rust_vs_cpp.md)
-
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 
 ## 一、权威定义（Definition）
@@ -24,7 +22,6 @@
 
 ### 1.1 Hoare 逻辑与霍尔三元组
 >
-
 > **[Hoare 1969 — An Axiomatic Basis for Computer Programming](https://doi.org/10.1145/363235.363259)** Tony Hoare 提出的公理语义框架通过**霍尔三元组**（Hoare Triple）形式化程序的正确性：
 >
 > $$\{P\}\ C\ \{Q\}$$
@@ -44,7 +41,6 @@ Hoare 逻辑的核心公理包括：
 
 ### 1.2 最弱前置条件（Weakest Precondition）
 >
-
 > **[Dijkstra 1975 — Guarded Commands, Nondeterminacy and Formal Derivation of Programs](https://doi.org/10.1145/360933.360975)** Dijkstra 扩展了 Hoare 逻辑，引入**最弱前置条件**（Weakest Precondition, wp）作为从程序规约反向推导实现的形式化方法：
 >
 > $$\text{wp}(C, Q) = \text{最弱的前置条件 } P \text{，使得 } \{P\}C\{Q\} \text{ 成立}$$
@@ -136,7 +132,12 @@ P → wp(C, Q)    ⟺    sp(P, C) → Q
 | **符号执行** | 路径条件 + SMT | 高（路径爆炸）| Kani | 断言验证/反例生成 | 路径空间指数级增长 |
 | **类型系统（Type System）即规约** | 类型签名 | 全自动 | Rust 编译器本身 | 内存安全（Memory Safety）/数据竞争 | 无法表达功能性规约 |
 
-> **洞察**: Rust 编译器的**借用（Borrowing）检查器**本质上是一个轻量级的、全自动的公理验证器——它通过类型推导自动计算所有权和生命周期（Lifetimes）的不变式，无需程序员手动书写 `{P} C {Q}`。这是 Hoare 逻辑从学术研究走向工业实践的最成功范例：将公理规约"编译进"类型系统（Type System），使验证成为零成本抽象（Zero-Cost Abstraction）。[来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] · [来源: [Rust Reference — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
+> **洞察**:
+>
+> Rust 编译器的**借用（Borrowing）检查器**本质上是一个轻量级的、全自动的公理验证器——它通过类型推导自动计算所有权和生命周期（Lifetimes）的不变式，无需程序员手动书写 `{P} C {Q}`。
+> 这是 Hoare 逻辑从学术研究走向工业实践的最成功范例：将公理规约"编译进"类型系统（Type System），使验证成为零成本抽象（Zero-Cost Abstraction）。
+> [来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] ·
+> [来源: [Rust Reference — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
 
 ---
 

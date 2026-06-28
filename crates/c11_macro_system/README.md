@@ -6,7 +6,7 @@
 > **框架结构**: ✅ **4-Tier 架构**
 > **文档总数**: **36+ 篇**
 > **质量评分**: **95/100**
-> **Rust版本**: 1.93.0+ (Edition 2024)
+> **Rust版本**: 1.96.0+ (Edition 2024)
 
 **Rust 1.93 兼容性**: [兼容性注意事项](../../docs/06_toolchain/06_rust_1.93_compatibility_notes.md) | [深度解析](../../docs/06_toolchain/09_rust_1.93_compatibility_deep_dive.md)
 **思维表征**: [决策图网](../../docs/04_thinking/DECISION_GRAPH_NETWORK.md) | [证明图网](../../docs/04_thinking/PROOF_GRAPH_NETWORK.md) | [思维表征方式](../../docs/04_thinking/THINKING_REPRESENTATION_METHODS.md)

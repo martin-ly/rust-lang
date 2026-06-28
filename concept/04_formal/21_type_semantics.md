@@ -1,11 +1,17 @@
-> **内容分级**: [专家级]
-
+> **内容分级**:
+>
+> [专家级]
+>
 # Type Semantics（类型语义）
 >
 > **EN**: Type Semantics
 > **Summary**: Type Semantics. Guide to 21 Type Semantics.
 > **受众**: [研究者]
-> ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
+>
+> ⚠️ **声明**:
+>
+> 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。
+> 如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
 > **层次定位**: L4 形式化理论 / 类型语义子域 [来源: [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 > **A/S/P 标记**: **S** — Structure（心智模型）
@@ -14,9 +20,7 @@
 > **后置延伸**: [Axiomatic Semantics](20_axiomatic_semantics.md) · [RustBelt](04_rustbelt.md) · [Effects System](../07_future/04_effects_system.md)
 > **跨层映射**: L4→L1 类型语义 ↔ 类型直觉 | L4→L2 Trait 系统 ↔ 存在/全称类型
 > **定理链编号**: T-130 进步定理 → T-131 保持定理 → T-132 类型安全完备性
-
 > **后置概念**: [Comparative Studies](../05_comparative/01_rust_vs_cpp.md)
-
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 
 ## 一、权威定义（Definition）
@@ -24,7 +28,6 @@
 
 ### 1.1 类型作为规约：进步与保持
 >
-
 > **Pierce 2002 — TAPL, Ch.8** 类型系统（Type System）的核心元定理是**进步**（Progress）与**保持**（Preservation）：
 >
 > **进步定理（Progress）**: 若 `⊢ e : T`（表达式 `e` 具有良类型 `T`），则 `e` 要么是值（value），要么可以进一步求值（`e → e'`）。
@@ -47,11 +50,12 @@ Rust 的保持定理扩展:
     - 且 Σ'' 与 Σ' 兼容（无资源泄漏、无重复释放）
 ```
 
-其中 `Σ` 是**所有权（Ownership）/借用（Borrowing）状态**，这是标准 λ 演算的类型系统中所没有的。RustBelt 的形式化证明表明：Rust 的扩展进步/保持定理**蕴含内存安全（Memory Safety）**——良类型程序不会产生悬垂指针、数据竞争或重复释放。[来源: [Pierce 2002, Ch.8](https://www.cis.upenn.edu/~bcpierce/tapl/)] · [来源: [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/)]
+其中 `Σ` 是**所有权（Ownership）/借用（Borrowing）状态**，这是标准 λ 演算的类型系统中所没有的。
+RustBelt 的形式化证明表明：Rust 的扩展进步/保持定理**蕴含内存安全（Memory Safety）**——良类型程序不会产生悬垂指针、数据竞争或重复释放。
+[来源: [Pierce 2002, Ch.8](https://www.cis.upenn.edu/~bcpierce/tapl/)] · [来源: [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/)]
 
 ### 1.2 类型安全到内存安全
 >
-
 > **[Cardelli 1996 — Type Systems (ACM Computing Surveys 28(1))](https://dl.acm.org/doi/10.1145/6041.6042)** Cardelli 区分了两种"安全"：
 >
 > - **类型安全**（Type Safety）：well-typed 程序不会触发未定义的类型错误
@@ -268,7 +272,12 @@ fn read_file(path: &str) -> Result<String, io::Error> {
 // }
 ```
 
-> **与异常的对比**: Java/C++ 的异常是**隐式的控制流**，类型系统不跟踪哪些函数可能抛出异常。Rust 的 `Result<T, E>` 是**显式的控制流**，函数签名直接声明可能的错误类型 `E`。这使类型语义可以精确追踪错误传播路径——编译器强制调用者处理 `Result`，而非在运行时（Runtime）意外捕获异常。来源: [Pierce 2002, Ch.11] · 来源: [Rust Reference — Option/Result] · 来源: [Hoare's Billion Dollar Mistake]
+> **与异常的对比**:
+>
+> Java/C++ 的异常是**隐式的控制流**，类型系统不跟踪哪些函数可能抛出异常。
+> Rust 的 `Result<T, E>` 是**显式的控制流**，函数签名直接声明可能的错误类型 `E`。
+> 这使类型语义可以精确追踪错误传播路径——编译器强制调用者处理 `Result`，而非在运行时（Runtime）意外捕获异常。
+> 来源: [Pierce 2002, Ch.11] · 来源: [Rust Reference — Option/Result] · 来源: [Hoare's Billion Dollar Mistake]
 
 #### Row Polymorphism：Effect System 的类型论基础
 
@@ -300,7 +309,12 @@ fn bar() -> i32                         // 效果 = {}
 | **效果子类型** | `<io> <: <io, async>` | 无直接对应 | Rust 未引入效果子类型关系 |
 | **效果消除** | `handle { ... }` | `block_on(future)` / `match result` | Rust 将 handler 外化到库层 |
 
-> **关键洞察**: Rust 的 effect system 设计是一种**有意的理论裁剪**（deliberate theoretical trimming）。它放弃了完整的 row-polymorphic effect types（需要复杂的类型推断（Type Inference）和子类型判断），转而通过 trait system + 关键字 + 编译器 desugar 在保持零成本的同时，实现效果追踪的核心能力。这与 Rust "实用主义类型论"的设计哲学一致：从理论中汲取正确性保证，但从工程中裁剪实现成本。[来源: [Rust Keyword Generics Initiative](https://github.com/rust-lang/keyword-generics-initiative)]
+> **关键洞察**:
+>
+> Rust 的 effect system 设计是一种**有意的理论裁剪**（deliberate theoretical trimming）。
+> 它放弃了完整的 row-polymorphic effect types（需要复杂的类型推断（Type Inference）和子类型判断），转而通过 trait system + 关键字 + 编译器 desugar 在保持零成本的同时，实现效果追踪的核心能力。
+> 这与 Rust "实用主义类型论"的设计哲学一致：从理论中汲取正确性保证，但从工程中裁剪实现成本。
+> [来源: [Rust Keyword Generics Initiative](https://github.com/rust-lang/keyword-generics-initiative)]
 
 ### 3.4 存在与全称类型：`dyn Trait` 与 `impl Trait`
 >

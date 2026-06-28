@@ -133,9 +133,9 @@ impl RangeOwnershipExamples {
     pub fn demonstrate_std_range_move() {
         let range: std::ops::Range<i32> = 0..5;
 
-        let sum1: i32 = range.clone().into_iter().sum();
-        // 如果不 clone()，range 在此处已被 move
-        let sum2: i32 = range.into_iter().sum();
+        let sum1: i32 = range.clone().sum();
+        // 如果不 clone()，range 在此处已被消费
+        let sum2: i32 = range.sum();
 
         assert_eq!(sum1, 10);
         assert_eq!(sum2, 10);

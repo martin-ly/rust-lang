@@ -51,15 +51,15 @@ let z: bool = unreachable!(); // compiles: `!` coerces to `bool`
 This is why you can write `return val;` in any function regardless of return type."#
     }
 
-    /// `!` in `Result<T, !>` for infallible operations.
+    /// `!` in `Result<T, std::convert::Infallible>` for infallible operations.
     pub fn never_in_result() -> &'static str {
-        r#"`Result<T, !>` represents an operation that can never fail.
+        r#"`Result<T, std::convert::Infallible>` represents an operation that can never fail.
 
 The `Err` variant is uninhabited, so after checking `Ok`, the compiler
 knows the operation succeeded:
 
 ```rust
-fn always_succeeds() -> Result<String, !> {
+fn always_succeeds() -> Result<String, std::convert::Infallible> {
     Ok("guaranteed success".into())
 }
 
@@ -92,7 +92,7 @@ so `main() -> !` is valid for servers that loop forever."#
     pub fn current_stability() -> &'static str {
         r#"`!` stabilization status:
 
-- **1.41.0**: `!` coercions and `Result<T, !>` stabilized for most uses
+- **1.41.0**: `!` coercions and `Result<T, std::convert::Infallible>` stabilized for most uses
 - **Stable today**: `panic!()`, `todo!()`, `loop {}`, `unreachable!()` all work
 - **Nightly edge cases**: Using `!` explicitly as a type annotation in all
   contexts requires `#![feature(never_type)]` (e.g., `let x: ! = panic!();`)
@@ -103,7 +103,7 @@ so `main() -> !` is valid for servers that loop forever."#
     ///
     /// Since `#![feature(never_type)]` is enabled in this crate, we can
     /// use `!` directly in the type system.
-    pub fn infallible_result_demo() -> Result<i32, !> {
+    pub fn infallible_result_demo() -> Result<i32, std::convert::Infallible> {
         // This Result can never be Err.
         Ok(42)
     }

@@ -18,8 +18,11 @@
 #![allow(clippy::assertions_on_constants)]
 #![allow(clippy::bool_assert_comparison)]
 #![allow(clippy::approx_constant)]
-#![feature(gen_blocks, yield_expr)]
-#![cfg_attr(feature = "portable_simd", feature(portable_simd))]
+#![cfg_attr(feature = "nightly", feature(gen_blocks, yield_expr))]
+#![cfg_attr(
+    all(feature = "nightly", feature = "portable_simd"),
+    feature(portable_simd)
+)]
 
 //
 // ```rust
@@ -103,8 +106,21 @@ pub mod rust_189_features;
 pub mod rust_193_features;
 pub mod rust_194_features;
 pub mod rust_195_features;
+
+/// Rust 1.95 `gen` block 算法前瞻（nightly-only）。
+#[cfg(feature = "nightly")]
+pub mod rust_195_gen_blocks_preview;
+
 pub mod rust_196_features;
+
+/// Rust 1.96 `gen` block 算法前瞻（nightly-only）。
+#[cfg(feature = "nightly")]
+pub mod rust_196_gen_blocks_preview;
+
 pub mod rust_197_features;
+
+/// Rust 1.98.0 预览特性（需要 nightly）。
+#[cfg(feature = "nightly")]
 pub mod rust_198_features;
 
 pub mod algorithm_decision_trees;

@@ -9,7 +9,7 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  RUST_VERSION: nightly
+  RUST_VERSION: "1.96.0"
   CARGO_INCREMENTAL: 0
   CARGO_NET_RETRY: 10
   RUSTUP_MAX_RETRIES: 10
@@ -26,13 +26,14 @@ jobs:
       matrix:
         check:
           - { cmd: "fmt", args: "--all -- --check", name: "Formatting" }
-          - { cmd: "clippy", args: "--workspace --tests --all-features -- -D warnings", name: "Clippy" }
+          # stable MSRV clippy：不启用 nightly-only feature
+          - { cmd: "clippy", args: "--workspace --tests -- -D warnings", name: "Clippy" }
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@nightly
+        uses: dtolnay/rust-toolchain@1.96.0
         with:
           components: rustfmt, clippy
 
@@ -53,6 +54,25 @@ jobs:
       - name: Run ${{ matrix.check.name }}
         run: cargo ${{ matrix.check.cmd }} ${{ matrix.check.args }}
 
+  # 命名规范检查（过渡期仅 warning）
+  naming-convention:
+    name: Naming Convention
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Lint filenames
+        run: python scripts/lint_filenames.py --all
+        continue-on-error: true
+
   # 构建和测试（并行矩阵）
   build-and-test:
     name: Build & Test
@@ -72,7 +92,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@nightly
+        uses: dtolnay/rust-toolchain@1.96.0
 
       - name: Setup sccache
         uses: mozilla-actions/sccache-action@v0.0.7
@@ -90,11 +110,11 @@ jobs:
             ${{ runner.os }}-${{ matrix.mode }}-cargo-
 
       - name: Build workspace (${{ matrix.mode }})
-        run: cargo build --workspace --all-features ${{ matrix.profile }} --verbose
+        run: cargo build --workspace ${{ matrix.profile }} --verbose
         if: matrix.os != 'windows-latest'
 
       - name: Run tests (${{ matrix.mode }})
-        run: cargo test --workspace --all-features ${{ matrix.profile }} --verbose
+        run: cargo test --workspace ${{ matrix.profile }} --verbose
         if: matrix.os != 'windows-latest'
 
       - name: Build workspace (Windows, ${{ matrix.mode }})
@@ -104,6 +124,40 @@ jobs:
       - name: Run tests (Windows, ${{ matrix.mode }})
         run: cargo test --workspace --features tls,quic,libp2p ${{ matrix.profile }} --verbose
         if: matrix.os == 'windows-latest'
+
+  # Nightly 预览模块检查（不阻塞 CI）
+  nightly-preview:
+    name: Nightly Preview
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: clippy
+
+      - name: Setup sccache
+        uses: mozilla-actions/sccache-action@v0.0.7
+
+      - name: Cache cargo dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            ~/.cargo/git/db
+            target
+          key: ${{ runner.os }}-cargo-nightly-preview-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-nightly-preview-
+
+      - name: Check nightly-only features
+        run: cargo check --workspace --all-features
+
+      - name: Clippy nightly-only features
+        run: cargo clippy --workspace --tests --all-features -- -D warnings
 
   # 嵌入式测验可运行化验证
   quiz-tests:
@@ -160,9 +214,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          toolchain: ${{ env.RUST_VERSION }}
+        uses: dtolnay/rust-toolchain@1.96.0
 
       - name: Setup sccache
         uses: mozilla-actions/sccache-action@v0.0.7
@@ -180,7 +232,7 @@ jobs:
             ${{ runner.os }}-cargo-docs-
 
       - name: Build documentation
-        run: cargo doc --workspace --no-deps --all-features
+        run: cargo doc --workspace --no-deps
 
       - name: Upload documentation
         uses: actions/upload-artifact@v4
@@ -233,7 +285,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@nightly
+        uses: dtolnay/rust-toolchain@1.96.0
         with:
           components: llvm-tools-preview
 
@@ -256,7 +308,6 @@ jobs:
         run: |
           cargo tarpaulin \
             --workspace \
-            --all-features \
             --engine llvm \
             --out xml \
             --timeout 300 \

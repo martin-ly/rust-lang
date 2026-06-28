@@ -20,6 +20,9 @@ serde = { workspace = true }
 serde_json = { workspace = true }
 futures = { workspace = true }
 
+[features]
+nightly = []
+
 [dev-dependencies]
 criterion = { workspace = true }
 

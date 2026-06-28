@@ -28,8 +28,7 @@
 //! | Newtype Pattern | `type_operation::newtype` | tuple struct |
 //! | Unsafe Abstraction | `r#unsafe` | `unsafe`, `raw pointers` |
 #![allow(clippy::type_complexity)]
-#![feature(never_type)]
-#![feature(derive_coerce_pointee)]
+#![cfg_attr(feature = "nightly", feature(never_type, derive_coerce_pointee))]
 
 // 导出所有主要模块
 pub mod error;
@@ -61,6 +60,9 @@ pub mod rust_192_features;
 pub mod rust_195_features;
 pub mod rust_196_features;
 pub mod rust_197_features;
+
+/// Rust 1.98.0 预览特性（CoercePointee，需要 nightly）。
+#[cfg(feature = "nightly")]
 pub mod rust_198_features;
 
 // 重新导出Rust 1.94特性

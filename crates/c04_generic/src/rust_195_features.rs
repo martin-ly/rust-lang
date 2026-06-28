@@ -160,13 +160,18 @@ impl RealRust195Features {
         f(input).await
     }
 
-    /// `gen` blocks — lazy iterator generation (Rust 1.95 nightly)
+    /// 用 `std::iter::from_fn` 实现惰性迭代器生成。
     pub fn gen_block_demo() -> impl Iterator<Item = i32> {
-        gen {
-            for i in 0..5 {
-                yield i * 2;
+        let mut i = 0;
+        std::iter::from_fn(move || {
+            if i < 5 {
+                let value = i * 2;
+                i += 1;
+                Some(value)
+            } else {
+                None
             }
-        }
+        })
     }
 }
 

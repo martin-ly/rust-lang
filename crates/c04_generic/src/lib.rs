@@ -31,7 +31,6 @@
 #![allow(clippy::type_complexity)]
 #![allow(clippy::missing_const_for_thread_local)]
 #![allow(clippy::assertions_on_constants)]
-#![feature(gen_blocks, yield_expr)]
 
 pub mod associated_type;
 pub mod error;

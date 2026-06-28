@@ -20,8 +20,8 @@
 
 // [来源: The Embedded Rust Book / Rust Reference]
 #![cfg_attr(target_arch = "arm", no_std)]
-#![feature(core_intrinsics, fn_align)]
-#![allow(internal_features)]
+#![cfg_attr(feature = "nightly", feature(core_intrinsics, fn_align))]
+#![cfg_attr(feature = "nightly", allow(internal_features))]
 #![allow(clippy::module_name_repetitions)]
 
 // 核心模块
@@ -44,6 +44,7 @@ pub mod rust_193_features;
 pub mod rust_195_features; // Rust 1.95 特性 (裸指针 unchecked, PowerPC asm, cfg_select 嵌入式)
 pub mod rust_196_features; // Rust 1.96.0+ 特性 (assert_matches!, core::range, From<T> for LazyCell/LazyLock, ManuallyDrop 模式)
 pub mod rust_197_features;
+#[cfg(feature = "nightly")]
 pub mod rust_198_features;
 
 pub mod uart_driver; // RTIC 实时中断驱动并发

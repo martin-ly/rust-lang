@@ -72,3 +72,4 @@ path = "src/bin/main.rs"
 xtra = ["dep:xtra"]
 nightly_async_closures = []
 nightly_afidt = []
+nightly_async_iterator = []

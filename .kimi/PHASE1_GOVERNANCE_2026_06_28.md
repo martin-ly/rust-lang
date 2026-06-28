@@ -60,7 +60,8 @@
 - [x] 重写 `crates/c11_macro_system_proc/src/lib.rs` 顶部文档注释
   - 去除中英混杂、机器翻译痕迹
   - 统一为中文说明
-- [ ] 检查并修复其他 crate 顶层 README 的版本号一致性（待专门 pass 处理，避免破坏内部锚点）
+- [x] 检查并修复其他 crate 顶层 README 的版本号一致性
+  - c05_threads、c07_process、c08_algorithms、c09_design_pattern、c10_networks、c11_macro_system 的顶层 README 头部 `Rust版本` 已统一为 `1.96.0+`
 - [x] 提交变更（c14/c11 修改已合入 commit `592a26951`）
 
 ---
@@ -75,8 +76,9 @@
 
 ## G4 修复 Clippy/编译警告基线
 
-- [x] 确认 `cargo clippy --workspace --tests --all-features -- -D warnings` 通过
-- [x] 确认 `cargo test --workspace` 通过
+- [x] 确认 `cargo +stable clippy --workspace --tests -- -D warnings` 通过
+- [x] 确认 `cargo +stable test --workspace` 通过
+- [x] 确认 nightly 预览路径 `cargo +nightly clippy --workspace --tests --all-features -- -D warnings` 通过（不阻塞 stable）
   - 修复了 `c05_threads::test_advanced_thread_pool` 的并发竞态：原 `wait_for_completion` 只在 `active_tasks == 0` 时返回，存在任务尚未被工作线程领取就提前返回的 race condition；现增加 `pending_tasks` 计数，等待 `pending_tasks == 0 && active_tasks == 0`
 - [x] 在 CI 工作流中加入 `--tests` 的 clippy 检查（commit `5f7ebf63c`）
 - [x] 提交变更（commit `49319fc49`）
@@ -91,19 +93,19 @@
   - 禁止中文、空格、混合大小写（过渡期例外清单需明确列出）
   - 目录名：`snake_case` 或 `number_prefix_snake_case`
 - [x] 创建 `scripts/lint_filenames.py`，检查新增文件是否符合规范
-- [ ] 将命名检查加入 pre-commit / CI（先作为 warning，待历史文件清理后再改为失败）
+- [x] 将命名检查加入 CI（作为 warning，`continue-on-error: true`，待历史文件清理后再改为失败）
 - [x] 提交变更（commit `9dd4836`）
 
 ---
 
 ## G6 工具链稳定化（MSRV）
 
-- [ ] 确认 stable MSRV 迁移策略（建议：混合方案，见 `.kimi/STABLE_MSRV_MIGRATION_PLAN.md`）
-- [ ] 为受影响 crate 添加 `nightly` Cargo feature，将预览内容隔离
-- [ ] 改写或移除可在 stable 实现的 nightly 用法
-- [ ] 修改 `rust-toolchain.toml` 为 stable 1.96.0
-- [ ] 更新 CI 使用 stable 工具链，保留 nightly feature 的可选验证
-- [ ] 确认 `cargo +stable build/test/clippy --workspace` 通过
+- [x] 确认 stable MSRV 迁移策略（混合方案，见 `.kimi/STABLE_MSRV_MIGRATION_PLAN.md`）
+- [x] 为受影响 crate 添加 `nightly` Cargo feature，将预览内容隔离
+- [x] 改写或移除可在 stable 实现的 nightly 用法
+- [x] 修改 `rust-toolchain.toml` 为 stable 1.96.0
+- [x] 更新 CI 使用 stable 工具链，保留 nightly feature 的可选验证
+- [x] 确认 `cargo +stable build/test/clippy --workspace` 通过
 
 ## 验收标准
 
@@ -112,7 +114,7 @@
 1. `.kimi/` 根目录下仅有当前周期活跃清单，历史文件已归档
 2. `docs/archive/` 和 `docs/rust-ownership-decidability/` 已迁移到 `archive/`
 3. `crates/c14_semantic_web/` 有顶层 README，`c11_macro_system_proc` 文档注释已清理
-4. `cargo clippy --workspace --tests --all-features -- -D warnings` 通过
+4. `cargo +stable clippy --workspace --tests -- -D warnings` 通过；nightly 预览路径 `cargo +nightly clippy --workspace --tests --all-features -- -D warnings` 通过（可选）
 5. `NAMING_CONVENTION.md` 和 `ARCHIVE_POLICY.md` 已创建
 
 ---

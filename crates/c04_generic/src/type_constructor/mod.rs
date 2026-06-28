@@ -1098,18 +1098,20 @@ mod tests {
         assert_eq!(iterator.count(), 0);
     }
 
-    /// `gen` block 重构：用命令式代码替代手动 Iterator 状态机
-    /// `gen` block ：imperative Iterator state machine
+    /// 用 `std::iter::from_fn` 重构命令式迭代器生成。
     #[test]
     fn test_gen_number_iterator() {
-        let gen_iter = gen move {
-            let mut current = 1i32;
-            let max = 4;
-            while current < max {
-                yield current;
+        let mut current = 1i32;
+        let max = 4;
+        let gen_iter = std::iter::from_fn(move || {
+            if current < max {
+                let value = current;
                 current += 1;
+                Some(value)
+            } else {
+                None
             }
-        };
+        });
 
         let values: Vec<i32> = gen_iter.collect();
         assert_eq!(values, vec![1, 2, 3]);

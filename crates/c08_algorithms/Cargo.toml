@@ -32,6 +32,8 @@ with-petgraph = ["petgraph"]
 with-aho = ["aho-corasick"]
 # portable_simd 需要 nightly 编译器，默认不启用
 portable_simd = []
+# nightly 预览模块（如 rust_198_features）
+nightly = []
 
 
 [dev-dependencies]

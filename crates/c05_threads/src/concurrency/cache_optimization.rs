@@ -308,9 +308,8 @@ mod tests {
         let value1 = 0u8;
         let value2 = 0u8;
 
-        let same_line = detector.same_cache_line(&value1 as *const u8, &value2 as *const u8);
-        // 两个局部变量很可能在同一缓存行
-        assert!(same_line || !same_line); // 结果取决于内存布局
+        let _same_line = detector.same_cache_line(&value1 as *const u8, &value2 as *const u8);
+        // 两个局部变量是否在同一缓存行取决于具体内存布局，这里仅调用 API 而不做断言。
 
         assert_eq!(detector.false_sharing_count(), 0);
         detector.record_false_sharing();
