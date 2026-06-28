@@ -113,10 +113,8 @@ pub mod basic_syntax;
 // 导出子模块
 pub mod closure;
 pub mod control_struct;
-pub mod coroutine;
 pub mod error_handling;
 pub mod expressions;
-pub mod generator;
 pub mod items;
 pub mod pattern_matching;
 pub mod statements;

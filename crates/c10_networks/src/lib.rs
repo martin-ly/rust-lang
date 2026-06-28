@@ -33,7 +33,6 @@
 //! - 📊 performance
 //! - 🧪 完整的测试覆盖
 //! - 🧪 complete
-pub mod asynchronous_communication;
 #[path = "diagnostics.rs"]
 pub mod diagnostics;
 pub mod epoll;

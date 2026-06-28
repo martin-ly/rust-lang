@@ -107,7 +107,6 @@ pub mod polymorphism;
 pub mod trait_bound;
 pub mod type_constructor;
 pub mod type_inference;
-pub mod type_parameter;
 
 /// 类型别名模块 - 提供项目中使用的所有复杂类型别名
 /// type module - project in all complex type

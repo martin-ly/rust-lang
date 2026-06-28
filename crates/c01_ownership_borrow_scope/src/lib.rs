@@ -325,8 +325,6 @@ pub mod archive;
 pub mod basic_syntax;
 pub mod copy_move;
 pub mod error;
-pub mod expression;
-pub mod function;
 pub mod internal_mut;
 pub mod layout_guarantees;
 pub mod ownership_utils;
@@ -344,7 +342,6 @@ pub mod rust_196_features;
 pub mod rust_197_features;
 
 pub mod scope;
-pub mod variable;
 
 #[cfg(test)]
 pub mod miri_tests;

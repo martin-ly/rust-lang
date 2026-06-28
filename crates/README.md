@@ -1,7 +1,7 @@
 # Crates 工作空间
 
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-> **状态**: ✅ 已完成
+> **状态**: ✅ 持续维护中
 
 ---
 
@@ -24,7 +24,12 @@
 | c09_design_pattern | 设计模式 | [README](c09_design_pattern/README.md) |
 | c10_networks | 网络编程 | [README](c10_networks/README.md) |
 | c11_macro_system | 宏系统 | [README](c11_macro_system/README.md) |
+| c11_macro_system_proc | 过程宏系统 | [README](c11_macro_system_proc/README.md) |
 | c12_wasm | WASM 开发 | [README](c12_wasm/README.md) |
+| c13_embedded | 嵌入式系统 | [README](c13_embedded/README.md) |
+| c14_semantic_web | 语义 Web / 知识图谱 | [README](c14_semantic_web/README.md) |
+| common | 跨 crate 公共工具 | [README](common/README.md) |
+| integration_tests | 集成测试 | [README](integration_tests/README.md) |
 
 ## 相关链接
 
@@ -40,7 +45,7 @@
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
-**文档版本**: 1.1
+**文档版本**: 1.2
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**最后更新**: 2026-06-28
+**状态**: ✅ 已补充 workspace 全部 crate
