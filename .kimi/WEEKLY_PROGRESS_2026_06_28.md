@@ -92,6 +92,9 @@
   - 新增 `.kimi/RUST_197_API_ACTIVATION_GUIDE.md`
 - `D: add Rust 1.97 post-release stabilization checklist`
   - 新增 `.kimi/RUST_197_POST_RELEASE_STABILIZATION_2026_07_10.md`
+- `C: correct 1.97 release plan - keep nightly toolchain due to workspace feature gates`
+  - 关键修正：workspace 因多处 nightly feature gates 无法切换到 1.97.0 stable
+  - 更新 `rust-toolchain.toml` 注释、发布日清单、预检清单、激活指南、执行脚本
 - `B: add crate docs boilerplate audit script and remove duplicate README`
   - 新增 `scripts/audit_crate_docs_boilerplate.py`
   - 删除 `crates/c03_control_fn/docs/README (2).md`
