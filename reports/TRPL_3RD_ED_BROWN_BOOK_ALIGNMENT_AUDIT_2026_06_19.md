@@ -38,7 +38,7 @@
 | Ch 9: Error Handling | `concept/01_foundation/10_error_handling_basics.md` · `concept/02_intermediate/15_error_handling_deep_dive.md` | ✅ |
 | Ch 10: Generics / Traits / Lifetimes | `concept/02_intermediate/01_traits.md` · `concept/02_intermediate/02_generics.md` · `concept/03_advanced/01_lifetimes.md` | ✅ |
 | Ch 11: Testing | `concept/06_ecosystem/12_testing_strategies.md` · `exercises/tests/` | ✅ |
-| Ch 12: I/O Project (CLI) | `concept/00_meta/LEARNING_MVP_PATH.md` · `examples/` | ✅ |
+| Ch 12: I/O Project (CLI) | `concept/00_meta/learning_mvp_path.md` · `examples/` | ✅ |
 | Ch 13: Iterators / Closures | `concept/02_intermediate/15_iterator_patterns.md` · `concept/02_intermediate/14_closures.md` | ✅ |
 | Ch 14: Cargo / Crates.io | `concept/06_ecosystem/01_toolchain.md` · `Cargo.toml` | ✅ |
 | Ch 15: Smart Pointers | `concept/03_advanced/05_smart_pointers.md` | ✅ |
@@ -101,7 +101,7 @@ Brown 书是 TRPL 3rd Ed 的研究分支，核心差异：
 ### 5.1 短期可执行（本轮冲刺）
 
 1. **在学习路径中标注 TRPL 3rd Ed 对应章节**
-   - 修改 `concept/00_meta/LEARNING_MVP_PATH.md`，为每个 Day 增加「TRPL 3rd Ed 参考章节」列。
+   - 修改 `concept/00_meta/learning_mvp_path.md`，为每个 Day 增加「TRPL 3rd Ed 参考章节」列。
    - 在 `concept/03_advanced/02_async.md` 顶部添加指向 TRPL Ch 17 的链接。
 
 2. **在所有权文档中引用 Brown 研究**
@@ -137,7 +137,7 @@ Brown 书是 TRPL 3rd Ed 的研究分支，核心差异：
 
 ## 七、待执行动作
 
-- [ ] 修改 `concept/00_meta/LEARNING_MVP_PATH.md`：增加 TRPL 3rd Ed 章节对照
+- [ ] 修改 `concept/00_meta/learning_mvp_path.md`：增加 TRPL 3rd Ed 章节对照
 - [ ] 修改 `concept/01_foundation/01_ownership.md` / `02_borrowing.md`：引用 Brown 书及研究成果
 - [ ] 修改 `concept/03_advanced/02_async.md`：标注 TRPL Ch 17 对应关系
 - [ ] 扫描并修复 `concept/` 中旧版 TRPL 链接

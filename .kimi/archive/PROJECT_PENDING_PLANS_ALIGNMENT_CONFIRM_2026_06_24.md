@@ -69,7 +69,7 @@
 
 2. **周计划与 4 周检查表冲突**
    - `reports/EXECUTION_PLAN_2026_06_09_WEEK1_4.md`（06-09 ~ 07-07）与 `EXECUTION_CHECKLIST_2026_06_22.md`（06-23 ~ 07-20）时间范围不同。
-   - 前者计划产出 `LEARNING_MVP_PATH_EN.md`，后者 i18n 策略为“中文为主 + 关键术语中英双语”。
+   - 前者计划产出 `concept/00_meta/learning_mvp_path_en.md`，后者 i18n 策略为“中文为主 + 关键术语中英双语”。
 
 3. **Knowledge 模块 8 统计数据冲突**
    - `reports/KNOWLEDGE_MODULE8_ALIGNMENT_2026_06_22.md` 称已补充 89 个文件；

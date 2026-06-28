@@ -79,7 +79,7 @@
 
 | 编号 | 任务 | 来源 | 关键动作 |
 |------|------|------|----------|
-| **P2-9** | TRPL 3rd Ed 逐章对照表 | `reports/TRPL_3RD_ED_BROWN_BOOK_ALIGNMENT_AUDIT_2026_06_19.md` | 更新 `concept/00_meta/LEARNING_MVP_PATH.md`，标注 Ch17 async 等新内容 |
+| **P2-9** | TRPL 3rd Ed 逐章对照表 | `reports/TRPL_3RD_ED_BROWN_BOOK_ALIGNMENT_AUDIT_2026_06_19.md` | 更新 `concept/00_meta/learning_mvp_path.md`，标注 Ch17 async 等新内容 |
 | **P2-10** | Brown Book 所有权研究引用 | 同上 | 在所有权文档中显式引用 Brown Book 可视化方法 |
 | **P2-11** | async.md 标注 TRPL Ch17 | 同上 | 在 `concept/03_advanced/03_async.md` 顶部添加“对应 TRPL 3rd Ch17” |
 

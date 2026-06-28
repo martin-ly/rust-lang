@@ -89,7 +89,7 @@
 | concept\00_meta\kg_ontology.md | L0 | 409 | 4 | 0 | 0 | 1 | 2 | 0 | 6 | ✅ | ❌ | ❌ | 研究者 | 综述级 |
 | concept\00_meta\knowledge_mindmap.md | L0 | 297 | 1 | 0 | 0 | 1 | 2 | 0 | 6 | ✅ | ❌ | ❌ | 进阶 | 综述级 |
 | concept\00_meta\learning_guide.md | L0 | 658 | 3 | 0 | 0 | 1 | 1 | 1 | 6 | ✅ | ❌ | ❌ | 初学者 | 综述级 |
-| concept\00_meta\LEARNING_MVP_PATH.md | L0 | 285 | 1 | 0 | 0 | 1 | 0 | 0 | 6 | ✅ | ✅ | ❌ | 初学者 | 综述级 |
+| concept\00_meta\learning_mvp_path.md | L0 | 285 | 1 | 0 | 0 | 1 | 0 | 0 | 6 | ✅ | ✅ | ❌ | 初学者 | 综述级 |
 | concept\00_meta\methodology.md | L0 | 537 | 1 | 0 | 0 | 2 | 5 | 1 | 6 | ✅ | ✅ | ✅ | 研究者 | 综述级 |
 | concept\00_meta\navigation.md | L0 | 290 | 1 | 0 | 0 | 1 | 0 | 0 | 6 | ✅ | ❌ | ❌ | 初学者 | 综述级 |
 | concept\00_meta\paradigm_transition_matrix.md | L0 | 310 | 1 | 0 | 0 | 1 | 3 | 0 | 6 | ✅ | ❌ | ❌ | 进阶 | 综述级 |

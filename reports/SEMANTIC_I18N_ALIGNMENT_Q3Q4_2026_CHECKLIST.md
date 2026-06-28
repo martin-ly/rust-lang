@@ -49,7 +49,7 @@
 
 | ID | 任务 | 验收标准 | 状态 | 负责人 | 完成日期 |
 |:---|:---|:---|:---:|:---|:---:|
-| i18n-1 | 英文骨架模板冻结 | `concept/00_meta/BILINGUAL_TEMPLATE.md` 定稿 | ✅ | AI | 2026-06-27 |
+| i18n-1 | 英文骨架模板冻结 | `concept/00_meta/bilingual_template.md` 定稿 | ✅ | AI | 2026-06-27 |
 | i18n-2 | concept/ 英文骨架覆盖 80% | 313 文件 EN 骨架元数据已补全 | ✅ | AI | 2026-06-27 |
 | i18n-3 | 术语表强制执行 | 脚本运行无未标注术语 | ⬜ | AI | - |
 | i18n-4 | TRPL 3rd Ed 逐章对照 | `LEARNING_MVP_PATH.md` 含 TRPL Ch1-Ch21 映射 | ⬜ | AI | - |

@@ -48,14 +48,14 @@
 
 - [x] `.github/workflows/ci.yml`: `RUST_VERSION: 1.96.0`
 - [x] `.github/workflows/ci_optimized.yml`: toolchain 版本
-- [x] `.github/workflows/docs-preview.yml`: toolchain 版本
+- [x] `.github/workflows/docs_preview.yml`: toolchain 版本
 - [x] `.github/workflows/miri.yml`: nightly 保持
-- [x] `.github/workflows/weekly-dependency-check.yml`: toolchain 版本
-- [x] `.github/workflows/weekly-deps.yml`: toolchain 版本
+- [x] `.github/workflows/weekly_dependency_check.yml`: toolchain 版本
+- [x] `.github/workflows/weekly_deps.yml`: toolchain 版本
 - [x] `.github/workflows/performance.yml`: toolchain 版本
-- [x] `.github/workflows/pr-checks.yml`: toolchain 版本
-- [x] `.github/workflows/security-audit.yml`: toolchain 版本
-- [x] `.github/workflows/semver-checks.yml`: toolchain 版本
+- [x] `.github/workflows/pr_checks.yml`: toolchain 版本
+- [x] `.github/workflows/security_audit.yml`: toolchain 版本
+- [x] `.github/workflows/semver_checks.yml`: toolchain 版本
 
 ### 2.3 概念文件状态更新
 

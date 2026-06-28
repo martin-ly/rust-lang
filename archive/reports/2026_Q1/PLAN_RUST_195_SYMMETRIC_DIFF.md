@@ -187,7 +187,7 @@
 
 #### 任务 4.1：Windows CI pcap 豁免
 
-- **位置**：`.github/workflows/ci.yml`、`.github/workflows/pr-checks.yml`
+- **位置**：`.github/workflows/ci.yml`、`.github/workflows/pr_checks.yml`
 - **修改**：Windows runner 的测试步骤使用 `--features` 白名单替代 `--all-features`，排除 `sniff`/`pcap`
 - **认知理由**：工程知识包括"知道什么在哪些平台可行"。明确处理平台差异是专业 Rust 开发者的必备认知。
 - **完成标准**：CI 在 Windows 上 green

@@ -3,7 +3,7 @@
 > **维护者**: rust-lang 知识体系项目组
 > **生效日期**: 2026-05-18
 > **策略文件**: [`deny.toml`](deny.toml)
-> **CI 检查**: [`.github/workflows/security-audit.yml`](.github/workflows/security-audit.yml)
+> **CI 检查**: [`.github/workflows/security_audit.yml`](.github/workflows/security_audit.yml)
 
 ---
 

@@ -30,11 +30,11 @@
 
 ### 中优先级重复对（0.60 ~ 0.74）
 
-- `concept/03_advanced/03_unsafe.md` / `knowledge/03_advanced/unsafe/04_unsafe_rust.md`
-- `concept/07_future/22_edition_guide.md` / `concept/07_future/23_rust_edition_guide.md` / `knowledge/06_ecosystem/02_edition_2024.md`
-- `concept/07_future/08_safety_tags_preview.md` / `docs/05_guides/05_safety_tags_guide.md`
-- `concept/07_future/19_rust_for_linux.md` / `docs/04_research/04_rust_for_linux.md`
-- Rust 1.95 相关：`knowledge/06_ecosystem/emerging/03_rust_1_95.md`、`04_rust_1_95_preview.md` / `docs/06_toolchain/06_14_rust_1_95_nightly_preview.md`
+- [x] `concept/03_advanced/03_unsafe.md` / `knowledge/03_advanced/unsafe/04_unsafe_rust.md`
+- [x] `concept/07_future/22_edition_guide.md` / `concept/07_future/23_rust_edition_guide.md` / `knowledge/06_ecosystem/02_edition_2024.md`
+- [x] `concept/07_future/08_safety_tags_preview.md` / `docs/05_guides/05_safety_tags_guide.md`
+- [x] `concept/07_future/19_rust_for_linux.md` / `docs/04_research/04_rust_for_linux.md`
+- [x] Rust 1.95 相关：`knowledge/06_ecosystem/emerging/03_rust_1_95.md`、`04_rust_1_95_preview.md` / `docs/06_toolchain/06_14_rust_1_95_nightly_preview.md`
 
 ---
 
@@ -63,11 +63,25 @@
   - `docs/06_toolchain/06_22_rust_1_96_features.md` → `concept/07_future/rust_1_96_stabilized.md`
 - [x] 合并 Unsafe Fields 内容
   - `docs/05_guides/05_unsafe_fields_preview.md` → `concept/07_future/13_unsafe_fields_preview.md`
-- [ ] 合并 Async Closures 内容（未自动处理，需人工选定 `concept/03_advanced/24_async_closures.md` 为权威来源后重定向 `knowledge/` / `docs/` 中的重复文件）
-- [ ] 处理 Rust 1.97 预览 + 速查表关系（保留速查表格式，仅添加权威来源链接）
-- [ ] 处理 Unsafe Rust 相关内容
-- [ ] 处理 Rust for Linux 相关内容
-- [ ] 处理 Rust 1.95 相关内容
+- [x] 合并 Async Closures 内容
+  - 权威页：`concept/03_advanced/24_async_closures.md`
+  - `knowledge/03_advanced/async/02_async_closure.md` → 重定向页
+  - `knowledge/06_ecosystem/emerging/01_async_closures.md` → 重定向页
+  - `docs/03_guides/03_async_closures_deep_dive.md` → 重定向页
+- [x] 处理 Rust 1.97 预览 + 速查表关系
+  - `concept/07_future/rust_1_97_preview.md` 为权威页
+  - `docs/02_reference/quick_reference/02_rust_197_features_cheatsheet.md` 保留速查表格式，添加权威来源链接
+- [x] 处理 Unsafe Rust 相关内容
+  - 权威页：`concept/03_advanced/03_unsafe.md`
+  - `knowledge/03_advanced/unsafe/04_unsafe_rust.md` → 重定向页
+  - `concept/03_advanced/12_unsafe_rust_patterns.md` 同步更新交叉引用
+- [x] 处理 Rust for Linux 相关内容
+  - 权威页：`concept/07_future/19_rust_for_linux.md`
+  - `docs/04_research/04_rust_for_linux.md` → 重定向页
+- [x] 处理 Rust 1.95 相关内容
+  - 权威页：`docs/06_toolchain/06_14_rust_1_95_nightly_preview.md`
+  - `knowledge/06_ecosystem/emerging/03_rust_1_95.md` → 重定向页
+  - `knowledge/06_ecosystem/emerging/04_rust_1_95_preview.md` → 重定向页
 
 ---
 
@@ -83,20 +97,46 @@
 - `.kimi/` 中以日期风格命名的文件（如 `BCD_TRACK_STATUS_2026_06_28.md`）
 - `.github/ISSUE_TEMPLATE/`（GitHub 强制模板目录名）
 - 第三方虚拟环境（`tools/kg_rag/.venv/`）
+- `reports/` 中日期风格文件
+- `archive/` 下历史归档的中文/大写文件名
 
-### 待处理文件（示例，需持续补充）
+### 本次已处理
 
-- [ ] `.cargo/audit-db..lock` → 移除多余点号或加入忽略
-- [ ] `.github/workflows/` 中部分文件名已是 snake_case，检查是否全部合规
-- [ ] `docs/` 与 `knowledge/` 中历史上传的中文/大写文件名
-- [ ] `reports/` 中日期风格文件作为过渡期例外保留
+- [x] `concept/00_meta/` 大写文件名统一为 snake_case
+  - `BILINGUAL_TEMPLATE.md` → `bilingual_template.md`
+  - `LEARNING_MVP_PATH.md` → `learning_mvp_path.md`（合并根目录重复文件，统一入口）
+  - `LEARNING_MVP_PATH_EN.md` → `concept/00_meta/learning_mvp_path_en.md`
+  - `placeholders/placeholder-generic.md` → `placeholders/placeholder_generic.md`
+- [x] `concept/sources/` 大写文件名统一为 snake_case
+  - `RFC_INDEX.md` → `rfc_index.md`
+  - `THEOREM_TIER_SPEC.md` → `theorem_tier_spec.md`
+- [x] `.github/workflows/` 中 11 个 hyphen 文件名统一为 snake_case
+  - `docs-preview.yml` → `docs_preview.yml`
+  - `docs-quality.yml` → `docs_quality.yml`
+  - `link-check.yml` → `link_check.yml`
+  - `mdbook-pages.yml` → `mdbook_pages.yml`
+  - `pr-checks.yml` → `pr_checks.yml`
+  - `rust-version-tracker.yml` → `rust_version_tracker.yml`
+  - `rust-version-tracking.yml` → `rust_version_tracking.yml`
+  - `security-audit.yml` → `security_audit.yml`
+  - `semver-checks.yml` → `semver_checks.yml`
+  - `weekly-dependency-check.yml` → `weekly_dependency_check.yml`
+  - `weekly-deps.yml` → `weekly_deps.yml`
+- [x] `.cargo/audit-db..lock` 已删除（空文件，多余点号）
+- [x] 新增 `scripts/bulk_rename.py` 批量重命名与引用更新工具
+- [x] `scripts/lint_filenames.py` 调整：默认只检查新增/重命名文件（`--diff-filter=ACR`），避免内容-only 修改误报
+
+### 待后续批次处理
+
+- [ ] `docs/` 与 `knowledge/` 中历史上传的中文/大写文件名（建议按主题批次迁移或归档）
+- [ ] `concept/archive/` 中历史规划文件大写名称
 
 ---
 
 ## C4 更新脚本与文档说明
 
-- [x] `scripts/README.md` 已重写（Phase 3 C4 已完成）
-- [ ] 在 `scripts/README.md` 中补充 `detect_content_overlap.py` 的使用说明
+- [x] `scripts/README.md` 已包含 `detect_content_overlap.py` / `auto_dedup_redirect.py` / `lint_filenames.py` 说明
+- [ ] 在 `scripts/README.md` 中补充 `bulk_rename.py` 的使用说明
 - [ ] 在 `ARCHIVE_POLICY.md` 中补充“内容去重后旧文件如何归档”的示例
 - [ ] 更新 `CONTRIBUTING.md`，说明新增概念文件应以 `concept/` 为权威来源
 

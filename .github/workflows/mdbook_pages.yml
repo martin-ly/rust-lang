@@ -7,7 +7,7 @@ on:
       - 'concept/**'
       - 'book.toml'
       - 'theme/**'
-      - '.github/workflows/mdbook-pages.yml'
+      - '.github/workflows/mdbook_pages.yml'
   workflow_dispatch:
 
 permissions:

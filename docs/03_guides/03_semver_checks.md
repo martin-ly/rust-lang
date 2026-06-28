@@ -159,7 +159,7 @@ cargo semver-checks
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-参见 `.github/workflows/pr-checks.yml` 中的 `semver-checks` 任务：
+参见 `.github/workflows/pr_checks.yml` 中的 `semver-checks` 任务：
 
 ```yaml
 semver-checks:

@@ -2712,7 +2712,7 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
-| 所有权（Ownership） | [](../00_meta/placeholders/placeholder-generic.md) | Pin 根基 |
+| 所有权（Ownership） | [](../00_meta/placeholders/placeholder_generic.md) | Pin 根基 |
 | 生命周期 | [](../01_foundation/03_lifetimes.md) | async fn 捕获规则 |
 | Traits | [](../02_intermediate/01_traits.md) | Future trait 定义 |
 | 并发 | [](../03_advanced/01_concurrency.md) | 并行与并发对比 |

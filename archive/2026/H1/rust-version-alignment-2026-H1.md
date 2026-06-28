@@ -252,7 +252,7 @@ cargo clippy --workspace --all-features -- -D warnings
 
 > 📁 **归档路径:** `archive/YYYY/HN/rust-version-alignment-YYYY-HN.md`
 >
-> 🔄 **关联工作流:** `.github/workflows/rust-version-tracking.yml`
+> 🔄 **关联工作流:** `.github/workflows/rust_version_tracking.yml`
 >
 > 📚 **参考文档:**
 >

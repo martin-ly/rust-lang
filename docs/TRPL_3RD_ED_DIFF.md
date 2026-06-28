@@ -37,7 +37,7 @@
 | **Ch 9: Error Handling** | [10_error_handling_basics.md](../concept/01_foundation/10_error_handling_basics.md) · [04_error_handling.md](../concept/02_intermediate/04_error_handling.md) · [15_error_handling_deep_dive.md](../concept/02_intermediate/15_error_handling_deep_dive.md) | ✅ | panic、Result、? 完全覆盖；concept/ L2 额外包含 anyhow/thiserror |
 | **Ch 10: Generics, Traits, Lifetimes** | [01_traits.md](../concept/02_intermediate/01_traits.md) · [02_generics.md](../concept/02_intermediate/02_generics.md) · [03_lifetimes.md](../concept/01_foundation/03_lifetimes.md) · [18_lifetimes_advanced.md](../concept/02_intermediate/18_lifetimes_advanced.md) | ✅ | 三大核心主题完全覆盖；concept/ 拆分更细 |
 | **Ch 11: Writing Automated Tests** | [16_testing_basics.md](../concept/01_foundation/16_testing_basics.md) · [12_testing_strategies.md](../concept/06_ecosystem/12_testing_strategies.md) | ✅ | 单元测试、集成测试完全覆盖；concept/ 额外包含属性测试 |
-| **Ch 12: I/O Project: CLI** | [MVP 学习路径](../concept/00_meta/LEARNING_MVP_PATH.md) | ⚠️ | TRPL 以完整 CLI 项目贯穿；concept/ MVP 路径更宏观 |
+| **Ch 12: I/O Project: CLI** | [MVP 学习路径](../concept/00_meta/learning_mvp_path.md) | ⚠️ | TRPL 以完整 CLI 项目贯穿；concept/ MVP 路径更宏观 |
 | **Ch 13: Iterators and Closures** | [15_closure_basics.md](../concept/01_foundation/15_closure_basics.md) · [07_closure_types.md](../concept/02_intermediate/07_closure_types.md) · [15_iterator_patterns.md](../concept/02_intermediate/15_iterator_patterns.md) | ✅ | 闭包、迭代器完全覆盖；concept/ 额外包含自定义迭代器 |
 | **Ch 14: More About Cargo** | [09_cargo_script.md](../concept/06_ecosystem/09_cargo_script.md) · [01_toolchain.md](../concept/06_ecosystem/01_toolchain.md) | ⚠️ | TRPL 侧重 Cargo 工作流；concept/ 分散在生态层 |
 | **Ch 15: Smart Pointers** | [12_smart_pointers.md](../concept/02_intermediate/12_smart_pointers.md) | ✅ | Box、Rc、RefCell、Arc 完全覆盖；concept/ 额外包含自定义智能指针 |
@@ -100,7 +100,7 @@ TRPL Ch 4-6  →  concept/01_foundation/01_ownership.md ~ 04_type_system.md
 TRPL Ch 7-9  →  concept/01_foundation/08_collections.md ~ 10_error_handling_basics.md
 TRPL Ch 10   →  concept/02_intermediate/01_traits.md + 02_generics.md + 18_lifetimes_advanced.md
 TRPL Ch 11   →  concept/01_foundation/16_testing_basics.md
-TRPL Ch 12   →  concept/00_meta/LEARNING_MVP_PATH.md (Week 1 Day 7)
+TRPL Ch 12   →  concept/00_meta/learning_mvp_path.md (Week 1 Day 7)
 TRPL Ch 13   →  concept/02_intermediate/07_closure_types.md + 15_iterator_patterns.md
 TRPL Ch 14   →  concept/06_ecosystem/01_toolchain.md + 09_cargo_script.md
 TRPL Ch 15   →  concept/02_intermediate/12_smart_pointers.md

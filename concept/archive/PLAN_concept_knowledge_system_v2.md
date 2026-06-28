@@ -353,7 +353,7 @@
 |:---|:---|:---|:---:|
 | P14-T1 | 新增 `02_intermediate/05_assert_matches.md` | `matches!` / `assert_matches!` / `debug_assert_matches!` 形式化语义 | ✅ |
 | P14-T2 | mdBook 静态站点配置 | `book.toml` + `scripts/generate_summary.py` + Mermaid CDN 按需加载 | ✅ |
-| P14-T3 | GitHub Pages 自动部署工作流 | `.github/workflows/mdbook-pages.yml` | ✅ |
+| P14-T3 | GitHub Pages 自动部署工作流 | `.github/workflows/mdbook_pages.yml` | ✅ |
 | P14-T4 | 更新 02_intermediate/README.md 索引 | 添加 assert_matches 条目 | ✅ |
 | P14-T5 | 更新 version_tracking.md assert_matches 状态 | 添加 concept/ 引用（Reference） | ✅ |
 

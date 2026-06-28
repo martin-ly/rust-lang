@@ -348,7 +348,7 @@
     "concept\\archive\\04_formal_09_operational_semantics_archived.md",
     "concept\\archive\\05_comparative_16_rust_vs_ruby_archived.md",
     "concept\\archive\\07_future_layer_index_legacy.md",
-    "concept\\sources\\THEOREM_TIER_SPEC.md"
+    "concept\\sources\\theorem_tier_spec.md"
   ],
   "内存安全": [
     "concept\\01_foundation\\00_pl_prerequisites.md",
@@ -415,7 +415,7 @@
     "concept\\archive\\01_foundation_03_lifetimes_original.md",
     "concept\\archive\\rust_effect_system_boundary_analysis.md",
     "concept\\archive\\SUMMARY_mdbook_legacy.md",
-    "concept\\sources\\THEOREM_TIER_SPEC.md",
+    "concept\\sources\\theorem_tier_spec.md",
     "concept\\SUMMARY.md"
   ],
   "一致性": [
@@ -497,7 +497,7 @@
     "concept\\archive\\PLAN_concept_knowledge_system_v2.md",
     "concept\\archive\\PLAN_semantic_space_wave_11.md",
     "concept\\archive\\SUMMARY_mdbook_legacy.md",
-    "concept\\sources\\THEOREM_TIER_SPEC.md",
+    "concept\\sources\\theorem_tier_spec.md",
     "concept\\SUMMARY.md"
   ],
   "所有权": [
@@ -688,7 +688,7 @@
     "concept\\07_future\\29_ebpf_rust.md",
     "concept\\07_future\\rust_1_97_preview.md",
     "concept\\07_future\\rust_1_98_preview.md",
-    "concept\\sources\\THEOREM_TIER_SPEC.md"
+    "concept\\sources\\theorem_tier_spec.md"
   ],
   "错误处理": [
     "concept\\01_foundation\\01_ownership.md",
@@ -1448,7 +1448,7 @@
   "Future": [
     "concept\\02_intermediate\\12_smart_pointers.md",
     "concept\\05_comparative\\06_rust_vs_java.md",
-    "concept\\sources\\RFC_INDEX.md"
+    "concept\\sources\\rfc_index.md"
   ],
   "孤儿规则": [
     "concept\\02_intermediate\\21_metaprogramming.md",

@@ -441,7 +441,7 @@ Cargo 会**拒绝解压任何包含符号链接的 crate tarball**，无论 tarb
 >
 > - [crates/ 示例代码](../crates) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../exercises) — 动手编程挑战
-> - [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md)
+> - [MVP 学习路径](../00_meta/learning_mvp_path.md)
 >
 > **建议**: 在一个测试项目中执行 `rustup update stable` 并验证 `cargo --version >= 1.96.0`；使用 `cargo metadata` 检查是否存在非 crates.io registry 来源；尝试 `cargo vendor` 并观察 vendor 目录结构。
 

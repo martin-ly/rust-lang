@@ -34,7 +34,7 @@
   - [Rust 知识体系知识图谱本体规范（Knowledge Graph Ontology）](00_meta/kg_ontology.md)
   - [Rust 知识体系全局思维导图（Knowledge Mindmap）](00_meta/knowledge_mindmap.md)
   - [Rust 知识体系学习指南（Learning Guide）](00_meta/learning_guide.md)
-  - [MVP 学习路径：从零到多线程 CLI（40 小时）](00_meta/LEARNING_MVP_PATH.md)
+  - [MVP 学习路径：从零到多线程 CLI（40 小时）](00_meta/learning_mvp_path.md)
   - [方法论：思维表征与知识结构规范](00_meta/methodology.md)
   - [Rust 知识体系全景导航（Navigation Hub）](00_meta/navigation.md)
   - [Rust 范式转换模式矩阵（Paradigm Transition Matrix）](00_meta/paradigm_transition_matrix.md)

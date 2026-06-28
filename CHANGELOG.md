@@ -52,7 +52,7 @@
   - `rust-toolchain.toml` 改为 `channel = "stable"`（当前 latest stable 已对应 1.96.0；精确 `1.96.0` 包在部分镜像仍有 404，故使用 stable 通道）。
   - `Cargo.toml` 与全部 workspace crate 的 `rust-version` 保持 `1.96.0`。
 - **CI 恢复 stable + nightly 双矩阵**：
-  - `.github/workflows/ci.yml`、`.github/workflows/pr-checks.yml`、`.github/workflows/ci_optimized.yml` 主矩阵切回 `dtolnay/rust-toolchain@1.96.0`/`@stable`。
+  - `.github/workflows/ci.yml`、`.github/workflows/pr_checks.yml`、`.github/workflows/ci_optimized.yml` 主矩阵切回 `dtolnay/rust-toolchain@1.96.0`/`@stable`。
   - 全局 `RUSTFLAGS` 不再包含 `--cfg nightly`；stable 主矩阵仅保留 `--cfg tokio_unstable`。
   - `ci.yml` 的 `nightly-preview` job、`ci_optimized.yml` 的 Miri 任务保留 `@nightly` 与 `--cfg nightly`，用于前瞻性验证。
 - **nightly 预览模块自动检测**：
@@ -82,6 +82,39 @@
   - 新建 `.kimi/PHASE2_CONTENT_DEDUPLICATION_2026_06_29.md`，记录剩余待处理项（Async Closures、Unsafe Rust、Rust for Linux、Rust 1.95 等）。
 - **链接检查**：
   - 运行 `scripts/check_links.py`，损坏链接仍为 13 个（均为已有锚点问题），本次重定向未引入新损坏链接。
+
+### Phase 3 C2 内容去重收尾（2026-06-29）
+
+- **Async Closures 去重**：
+  - 以 `concept/03_advanced/24_async_closures.md` 为权威来源。
+  - `knowledge/03_advanced/async/02_async_closure.md`、`knowledge/06_ecosystem/emerging/01_async_closures.md`、`docs/03_guides/03_async_closures_deep_dive.md` 已改为重定向页，指向 `concept/` 权威页。
+- **Unsafe Rust 去重**：
+  - 以 `concept/03_advanced/03_unsafe.md` 为权威来源。
+  - `knowledge/03_advanced/unsafe/04_unsafe_rust.md` 已改为重定向页。
+  - `concept/03_advanced/12_unsafe_rust_patterns.md` 同步更新交叉引用与链接。
+- **Rust for Linux 去重**：
+  - 以 `concept/07_future/19_rust_for_linux.md` 为权威来源。
+  - `docs/04_research/04_rust_for_linux.md` 已改为重定向页。
+- **Rust 1.95 去重**：
+  - 以 `docs/06_toolchain/06_14_rust_1_95_nightly_preview.md` 为权威来源。
+  - `knowledge/06_ecosystem/emerging/03_rust_1_95.md`、`knowledge/06_ecosystem/emerging/04_rust_1_95_preview.md` 已改为重定向页。
+- **Rust 1.97 速查表关系明确**：
+  - `concept/07_future/rust_1_97_preview.md` 为权威页。
+  - `docs/02_reference/quick_reference/02_rust_197_features_cheatsheet.md` 保留速查表格式，添加权威来源链接。
+- **命名规范清理（snake_case）**：
+  - `concept/00_meta/BILINGUAL_TEMPLATE.md` → `bilingual_template.md`。
+  - `concept/00_meta/LEARNING_MVP_PATH.md` → `learning_mvp_path.md`；根目录重复文件已删除，统一入口为 `concept/00_meta/learning_mvp_path.md`。
+  - `LEARNING_MVP_PATH_EN.md` → `concept/00_meta/learning_mvp_path_en.md`。
+  - `concept/00_meta/placeholders/placeholder-generic.md` → `placeholder_generic.md`。
+  - `concept/sources/RFC_INDEX.md` → `rfc_index.md`、`THEOREM_TIER_SPEC.md` → `theorem_tier_spec.md`。
+  - `.github/workflows/` 中 11 个 hyphen 工作流文件统一为 snake_case（`docs-preview.yml` → `docs_preview.yml` 等）。
+  - 删除 `.cargo/audit-db..lock`（空文件，多余点号）。
+  - 新增 `scripts/bulk_rename.py`：批量重命名并自动更新内部引用。
+  - `scripts/lint_filenames.py` 默认改为 `--diff-filter=ACR`，仅检查新增/重命名文件，避免内容-only 修改误报。
+- **链接检查**：
+  - 运行 `scripts/check_links.py`，损坏锚点仍为 23 个（均为 emoji 标题历史问题），本次重命名与去重未引入新损坏链接。
+- **执行清单**：
+  - 更新 `.kimi/PHASE2_CONTENT_DEDUPLICATION_2026_06_29.md`，标记 C2/C3 任务完成并记录剩余批次。
 
 ### Phase 3 C4 脚本清理启动（2026-06-28）
 
@@ -763,7 +796,7 @@
 - 完成映射报告 `reports/GOOGLE_COMPREHENSIVE_RUST_MAPPING_2026_06_19.md`，覆盖 Day 1-4 基础路径与 Android / Chromium / Bare Metal / Concurrency / Idiomatic Rust / Unsafe 六个专题轨道
 - 识别核心缺口：**API 命名约定**系统整理缺失、Android/Chromium 平台实操覆盖较轻
 - 新建 `concept/02_intermediate/22_api_naming_conventions.md`：系统整理 `new` / `with_` / `try_` / `is_` / `as_` / `to_` / `into_` / `from` / `mut_` / `by` 等命名模式，含可编译示例与练习题
-- `concept/00_meta/LEARNING_MVP_PATH.md`: 在「外部学习路径参考」表中新增 Google Comprehensive Rust 入口，链接到映射报告
+- `concept/00_meta/learning_mvp_path.md`: 在「外部学习路径参考」表中新增 Google Comprehensive Rust 入口，链接到映射报告
 
 ### 🧹 生态过时内容清理
 
@@ -776,7 +809,7 @@
 ### 📚 TRPL 3rd Ed / Brown University Interactive Book 对齐
 
 - 生成审计报告 `reports/TRPL_3RD_ED_BROWN_BOOK_ALIGNMENT_AUDIT_2026_06_19.md`
-- `concept/00_meta/LEARNING_MVP_PATH.md`: 在「外部学习路径参考」中补充 TRPL 3rd Ed 与 Brown 书，并为每个 Day 标注对应 TRPL 章节
+- `concept/00_meta/learning_mvp_path.md`: 在「外部学习路径参考」中补充 TRPL 3rd Ed 与 Brown 书，并为每个 Day 标注对应 TRPL 章节
 - `concept/01_foundation/01_ownership.md` / `02_borrowing.md`: 主要来源升级为 TRPL 3rd Ed + Brown University Interactive Book，引用 OOPSLA 2023/2024 研究
 - `concept/01_foundation/02_borrowing.md`: 新增「借用检查器错误修复模式（Fixing Ownership Errors）」一节，整合 Brown 书的 5 种常见错误修复案例
 - `concept/03_advanced/02_async.md`: 主要来源补充 Brown University Interactive Book: Ch17
@@ -823,7 +856,7 @@
 
 - **MVP 路径精化**: 40 小时学习路径标注必修/选修
 - **术语表冻结**: v3.0 标准，100 高频术语
-- **LEARNING_MVP_PATH_EN.md**: 英文版最小可行学习路径
+- **concept/00_meta/learning_mvp_path_en.md**: 英文版最小可行学习路径
 
 ### 🔧 Phase 1 治理与 Stable MSRV 迁移（2026-06-28 完成）
 
@@ -865,7 +898,7 @@
 
 ### 🌍 国际化
 
-- **`LEARNING_MVP_PATH_EN.md`**: 英文版最小可行学习路径
+- **`concept/00_meta/learning_mvp_path_en.md`**: 英文版最小可行学习路径
   - 3 周 × 6 天结构，35–45 小时总时长
   - 每日任务表（阅读 + 练习 + 验证标准）
   - 配套资源索引（速查表、练习来源、自评清单）
@@ -1347,7 +1380,7 @@
 
 ### 📖 学习体验增强
 
-- **MVP 学习路径**: 新建 `concept/00_meta/LEARNING_MVP_PATH.md`，Hello World → 多线程 CLI，40 小时路径
+- **MVP 学习路径**: 新建 `concept/00_meta/learning_mvp_path.md`，Hello World → 多线程 CLI，40 小时路径
 - **嵌入式测验**: 3 个 L1 核心文件（ownership/borrowing/lifetimes）各添加 5 道折叠测验
 - **术语表补全**: `terminology_glossary.md` 从 80 扩展至 101 个术语
 

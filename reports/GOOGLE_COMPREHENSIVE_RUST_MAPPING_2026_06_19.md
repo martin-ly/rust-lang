@@ -42,7 +42,7 @@ Day 1-4: Rust Fundamentals
 
 | Comprehensive Rust 章节 | 本项目对应文件 | 覆盖评估 |
 |:---|:---|:---:|
-| 1. Hello, World / What is Rust | `concept/00_meta/LEARNING_MVP_PATH.md` · `concept/01_foundation/README.md` | ✅ 已覆盖 |
+| 1. Hello, World / What is Rust | `concept/00_meta/learning_mvp_path.md` · `concept/01_foundation/README.md` | ✅ 已覆盖 |
 | 2. Types and Values | `concept/01_foundation/04_type_system.md` · `crates/c02_type_system` | ✅ 已覆盖 |
 | 3. Control Flow Basics | `concept/01_foundation/05_control_flow.md` · `crates/c03_control_fn` | ✅ 已覆盖 |
 | 4. Tuples and Arrays | `concept/01_foundation/06_compound_types.md` | ✅ 已覆盖 |
@@ -214,7 +214,7 @@ Day 1-4: Rust Fundamentals
 | **P1** | Android / AOSP Rust 实操 | ✅ 已完成 `concept/06_ecosystem/58_platform_rust_integration.md`；下一步补充 AIDL 可编译示例 | 0.5 天 |
 | **P1** | Chromium GN + CXX 实操 | ✅ 已完成 `concept/06_ecosystem/58_platform_rust_integration.md`；下一步补充可编译最小示例 | 0.5-1 天 |
 | **P2** | Google 课程练习本地化 | 选取 5-10 个代表性练习（Builder、Luhn、Link Checker、Dining Philosophers 双版本）纳入 `exercises/` | 1-2 天 |
-| **P2** | 学习路径入口 | 在 `concept/00_meta/LEARNING_MVP_PATH.md` 增加“Google Comprehensive Rust 对照学习”入口 | 0.25 天 |
+| **P2** | 学习路径入口 | 在 `concept/00_meta/learning_mvp_path.md` 增加“Google Comprehensive Rust 对照学习”入口 | 0.25 天 |
 
 ---
 

@@ -20,7 +20,7 @@
 
 ## 二、链接与引用
 
-- [ ] 内部链接指向真实存在的 Markdown 文件（非 `placeholder-generic.md`）。
+- [ ] 内部链接指向真实存在的 Markdown 文件（非 `placeholder_generic.md`）。
 - [ ] 外部来源使用可点击的 HTTPS 链接，优先选择官方文档、学术论文、社区权威资源。
 - [ ] 代码示例中的引用（如 RFC、论文）在文末延伸阅读列出。
 

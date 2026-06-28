@@ -346,12 +346,12 @@
 #### 任务清单
 
 - [ ] **I9.1** 确认 i18n 策略文档
-  - **修改文件**: `concept/00_meta/LEARNING_MVP_PATH.md`
+  - **修改文件**: `concept/00_meta/learning_mvp_path.md`
   - **验收标准**: 在文件顶部明确“中文为主 + 关键术语中英双语 + 代码注释英文”策略。
   - **依赖**: 无。
 
 - [ ] **I9.2** 生成英文版 MVP 路径骨架
-  - **新建文件**: `docs/00_meta/LEARNING_MVP_PATH_EN.md`
+  - **新建文件**: `concept/00_meta/learning_mvp_path_en.md`
   - **验收标准**:
     - 只翻译目录结构与关键术语，不翻译大段教学文本。
     - 链接指向中文原文，标注 `(Chinese)`。
@@ -570,7 +570,7 @@
 
 | 主题 | 关键任务 | 预计文件/活动 | 依赖 |
 | :--- | :--- | :--- | :--- |
-| **国际化与社区验证** | 可用性测试、教师反馈、社区背书、英文版 LEARNING_MVP_PATH | `reports/I18N_COMMUNITY_VALIDATION_PLAN_2026_Q4.md`、`docs/00_meta/LEARNING_MVP_PATH_EN.md` | 内部内容质量基线 |
+| **国际化与社区验证** | 可用性测试、教师反馈、社区背书、英文版 LEARNING_MVP_PATH | `reports/I18N_COMMUNITY_VALIDATION_PLAN_2026_Q4.md`、`concept/00_meta/learning_mvp_path_en.md` | 内部内容质量基线 |
 | **TRPL 3rd / Brown Book 对齐** | 逐章对照审计、所有权文档引用 Brown 研究 | `docs/00_meta/TRPL_3RD_ALIGNMENT_2026_*.md` | TRPL 3rd 出版进度 |
 | **Safety-Critical 工作组落地** | 负责人/预算/认证体系/培训试点评估 | `reports/SAFETY_CRITICAL_ROADMAP_2026_Q4.md` | 组织决策 |
 | **Rust 1.98 稳定化** | 按 `.kimi/EXECUTION_RUST_1_98_RELEASE_*.md` 执行 | `rust-toolchain.toml`、`CHANGELOG.md [3.2.0]` | Rust 1.98.0 stable 发布 |

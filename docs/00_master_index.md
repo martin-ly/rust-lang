@@ -9,7 +9,7 @@
 
 | 入口 | 路径 | 说明 |
 |:---|:---|:---|
-| **初学者起步** | [LEARNING_MVP_PATH.md](../LEARNING_MVP_PATH.md) | 35-45 小时最小可行学习路径 |
+| **初学者起步** | [LEARNING_MVP_PATH.md](../concept/00_meta/learning_mvp_path.md) | 35-45 小时最小可行学习路径 |
 | **概念文件** | [concept/](../concept) | L1-L7 分层概念文档 |
 | **知识索引** | [knowledge/](../knowledge) | 系统化知识卡片 |
 | **速查表** | [docs/02_reference/quick_reference/](02_reference/quick_reference/README.md) | API 速查与参考 |

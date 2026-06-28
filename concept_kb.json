@@ -1201,7 +1201,7 @@
       "templated_chains": 0
     },
     {
-      "path": "concept\\00_meta\\LEARNING_MVP_PATH.md",
+      "path": "concept\\00_meta\\learning_mvp_path.md",
       "layer": "L0",
       "title": "MVP 学习路径：从零到多线程 CLI（40 小时）",
       "positioning": "本项目的**最小可行学习路径**（Minimum Viable Path）。无论背景如何，完成本路径即可独立编写带并发/异步的 Rust CLI 工具。",
@@ -4632,7 +4632,7 @@
         }
       ],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/inter_layer_map.md",
         "../00_meta/terminology_glossary.md",
         "../02_intermediate/01_traits.md",
@@ -5480,7 +5480,7 @@
         }
       ],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../02_intermediate/02_generics.md",
         "../02_intermediate/04_error_handling.md",
@@ -5784,7 +5784,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../01_foundation/04_type_system.md",
         "../02_intermediate/02_generics.md",
@@ -5946,7 +5946,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../02_intermediate/01_traits.md",
         "../02_intermediate/02_generics.md",
@@ -6143,7 +6143,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../02_intermediate/02_generics.md",
         "../03_advanced/02_async.md",
@@ -6315,7 +6315,7 @@
       "sources": [],
       "cross_references": [
         "../../knowledge/02_intermediate/01_collections.md",
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../02_intermediate/02_generics.md",
         "../02_intermediate/12_smart_pointers.md",
@@ -6489,7 +6489,7 @@
       "sources": [],
       "cross_references": [
         "../../knowledge/02_intermediate/05_strings.md",
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../03_advanced/05_rust_ffi.md",
         "./01_ownership.md",
@@ -6650,7 +6650,7 @@
       "sources": [],
       "cross_references": [
         "../../knowledge/02_intermediate/02_error_handling.md",
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../02_intermediate/01_traits.md",
         "../02_intermediate/04_error_handling.md",
@@ -6802,7 +6802,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "./01_ownership.md",
         "./04_type_system.md",
@@ -6944,7 +6944,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../02_intermediate/10_module_system.md",
         "../06_ecosystem/01_toolchain.md",
@@ -7054,7 +7054,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../02_intermediate/02_generics.md",
         "../02_intermediate/04_error_handling.md",
@@ -7208,7 +7208,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../02_intermediate/13_dsl_and_embedding.md",
         "../03_advanced/07_proc_macro.md",
@@ -7351,7 +7351,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../02_intermediate/15_error_handling_deep_dive.md",
         "../03_advanced/03_unsafe.md",
@@ -7518,7 +7518,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../02_intermediate/01_traits.md",
         "../02_intermediate/02_generics.md",
@@ -7702,7 +7702,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../02_intermediate/01_traits.md",
         "../02_intermediate/07_closure_types.md",
@@ -7823,7 +7823,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../02_intermediate/15_error_handling_deep_dive.md",
         "../06_ecosystem/16_testing.md",
@@ -7959,7 +7959,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../02_intermediate/02_generics.md",
         "../02_intermediate/12_smart_pointers.md",
@@ -8083,7 +8083,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../03_advanced/05_rust_ffi.md",
         "./01_ownership.md",
@@ -8227,7 +8227,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../02_intermediate/03_memory_management.md",
         "../04_formal/18_evaluation_strategies.md",
@@ -8413,7 +8413,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../03_advanced/02_async.md",
         "../04_formal/18_evaluation_strategies.md",
@@ -8577,7 +8577,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../02_intermediate/01_traits.md",
         "../02_intermediate/02_generics.md",
@@ -11681,7 +11681,7 @@
       ],
       "cross_references": [
         "../../knowledge/02_intermediate/02_error_handling.md",
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/inter_layer_map.md",
         "../00_meta/terminology_glossary.md",
         "../01_foundation/01_ownership.md",
@@ -11868,7 +11868,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../01_foundation/04_type_system.md",
         "../03_advanced/04_macros.md",
@@ -12009,7 +12009,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../01_foundation/04_type_system.md",
         "../07_future/05_rust_version_tracking.md",
@@ -12167,7 +12167,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../01_foundation/01_ownership.md",
         "../01_foundation/02_borrowing.md",
@@ -12303,7 +12303,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../01_foundation/01_ownership.md",
         "../01_foundation/02_borrowing.md",
@@ -12431,7 +12431,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../03_advanced/04_macros.md",
         "../06_ecosystem/03_core_crates.md",
@@ -12712,7 +12712,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../01_foundation/01_ownership.md",
         "../01_foundation/02_borrowing.md",
@@ -12859,7 +12859,7 @@
       "sources": [],
       "cross_references": [
         "../../knowledge/02_intermediate/04_smart_pointers.md",
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../01_foundation/01_ownership.md",
         "../01_foundation/02_borrowing.md",
@@ -13005,7 +13005,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../03_advanced/04_macros.md",
         "../03_advanced/07_proc_macro.md",
@@ -13142,7 +13142,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../01_foundation/04_type_system.md",
         "../06_ecosystem/02_patterns.md",
@@ -13272,7 +13272,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../01_foundation/04_type_system.md",
         "../03_advanced/02_async.md",
@@ -13410,7 +13410,7 @@
       "sources": [],
       "cross_references": [
         "../../knowledge/01_fundamentals/02_iterators.md",
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../01_foundation/04_type_system.md",
         "../01_foundation/15_closure_basics.md",
@@ -13560,7 +13560,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../01_foundation/04_type_system.md",
         "../01_foundation/06_zero_cost_abstractions.md",
@@ -13684,7 +13684,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../01_foundation/12_attributes_and_macros.md",
         "../03_advanced/07_proc_macro.md",
@@ -13833,7 +13833,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../01_foundation/03_lifetimes.md",
         "../03_advanced/06_pin_unpin.md",
@@ -14016,7 +14016,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../01_foundation/04_type_system.md",
         "../04_formal/04_rustbelt.md",
@@ -14194,7 +14194,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../01_foundation/04_type_system.md",
         "../04_formal/04_rustbelt.md",
@@ -14312,7 +14312,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/terminology_glossary.md",
         "../01_foundation/12_attributes_and_macros.md",
         "../03_advanced/07_proc_macro.md",
@@ -14989,7 +14989,7 @@
         }
       ],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/inter_layer_map.md",
         "../01_foundation/01_ownership.md",
         "../01_foundation/02_borrowing.md",
@@ -15599,7 +15599,7 @@
         }
       ],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/inter_layer_map.md",
         "../01_foundation/01_ownership.md",
         "../01_foundation/03_lifetimes.md",
@@ -15969,7 +15969,7 @@
         }
       ],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../02_intermediate/01_traits.md",
         "../02_intermediate/02_generics.md",
         "../03_advanced/03_unsafe.md",
@@ -16169,7 +16169,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../04_formal/README.md",
         "../06_ecosystem/18_distributed_systems.md",
         "../06_ecosystem/README.md",
@@ -16784,7 +16784,7 @@
         }
       ],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/inter_layer_map.md",
         "../01_foundation/01_ownership.md",
         "../01_foundation/02_borrowing.md",
@@ -17357,7 +17357,7 @@
         }
       ],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/inter_layer_map.md",
         "../01_foundation/04_type_system.md",
         "../02_intermediate/01_traits.md",
@@ -17533,7 +17533,7 @@
       "sources": [],
       "cross_references": [
         "../../knowledge/03_advanced/02_ffi.md",
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../01_foundation/04_type_system.md",
         "../02_intermediate/03_memory_management.md",
         "../04_formal/README.md",
@@ -17724,7 +17724,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../01_foundation/01_ownership.md",
         "../02_intermediate/02_generics.md",
         "../04_formal/README.md",
@@ -17863,7 +17863,7 @@
       "sources": [],
       "cross_references": [
         "../../knowledge/03_advanced/macros/02_procedural.md",
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../01_foundation/04_type_system.md",
         "../02_intermediate/01_traits.md",
         "../02_intermediate/09_serde_patterns.md",
@@ -18000,7 +18000,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../01_foundation/02_borrowing.md",
         "../01_foundation/03_lifetimes.md",
         "../01_foundation/04_type_system.md",
@@ -18157,7 +18157,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../01_foundation/01_ownership.md",
         "../01_foundation/02_borrowing.md",
         "../01_foundation/04_type_system.md",
@@ -18375,7 +18375,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../01_foundation/04_type_system.md",
         "../03_advanced/01_concurrency.md",
         "../04_formal/README.md",
@@ -18580,7 +18580,7 @@
       "sources": [],
       "cross_references": [
         "../../knowledge/03_advanced/concurrency/01_atomics.md",
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../01_foundation/01_ownership.md",
         "../01_foundation/02_borrowing.md",
         "../01_foundation/04_type_system.md",
@@ -18729,7 +18729,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../01_foundation/01_ownership.md",
         "../01_foundation/02_borrowing.md",
         "../01_foundation/04_type_system.md",
@@ -19063,7 +19063,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../01_foundation/04_type_system.md",
         "../02_intermediate/03_memory_management.md",
         "../04_formal/README.md",
@@ -19217,7 +19217,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../01_foundation/01_ownership.md",
         "../01_foundation/02_borrowing.md",
         "../01_foundation/04_type_system.md",
@@ -19411,7 +19411,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../01_foundation/01_ownership.md",
         "../01_foundation/02_borrowing.md",
         "../02_intermediate/01_traits.md",
@@ -19551,7 +19551,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../01_foundation/04_type_system.md",
         "../02_intermediate/01_traits.md",
         "../02_intermediate/02_generics.md",
@@ -19872,7 +19872,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../00_meta/semantic_bridge_algorithms_patterns.md",
         "../03_advanced/16_lock_free.md",
         "../04_formal/README.md",
@@ -19994,7 +19994,7 @@
         }
       ],
       "cross_references": [
-        "../00_meta/LEARNING_MVP_PATH.md",
+        "../00_meta/learning_mvp_path.md",
         "../01_foundation/01_ownership.md",
         "../04_formal/18_evaluation_strategies.md",
         "../04_formal/README.md",

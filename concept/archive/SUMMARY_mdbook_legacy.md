@@ -226,7 +226,7 @@
   - [MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证](07_future/07_mcdc_coverage_preview.md)
   - [Safety Tags 概念预研：Unsafe 契约的机器可读标注](07_future/08_safety_tags_preview.md)
   - [BorrowSanitizer 概念预研：运行时借用检查工业化](07_future/20_borrowsanitizer_preview.md)
-  - [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举（Enum）](../00_meta/placeholders/placeholder-generic.md)
+  - [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举（Enum）](../00_meta/placeholders/placeholder_generic.md)
   - [并行 前端编译预研：Rust 编译器 的多核扩展](07_future/09_parallel_frontend_preview.md)
   - [派生 CoercePointee 预研：智能指针的自动类型强制](07_future/10_derive_coerce_pointee_preview.md)
   - [Const Trait Impl 预研：常量上下文中的 Trait 泛化](07_future/11_const_trait_impl_preview.md)

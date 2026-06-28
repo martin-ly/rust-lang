@@ -251,4 +251,4 @@ Excluded from modification: `01_ownership.md`, `02_borrowing.md`, `LEARNING_MVP_
 | `archive\PLAN_semantic_space_wave_11.md` | `https://doc.rust-lang.org/book/title-page.html` |  |
 | `archive\SUMMARY_mdbook_legacy.md` | `https://doc.rust-lang.org/book/title-page.html` |  |
 | `sources\INDEX.md` | `https://doc.rust-lang.org/book/title-page.html` |  |
-| `sources\THEOREM_TIER_SPEC.md` | `https://doc.rust-lang.org/book/title-page.html` |  |
+| `sources\theorem_tier_spec.md` | `https://doc.rust-lang.org/book/title-page.html` |  |

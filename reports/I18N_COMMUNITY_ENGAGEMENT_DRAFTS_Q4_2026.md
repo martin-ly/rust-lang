@@ -34,8 +34,8 @@ What we'd like from you:
 - Any suggestions for cross-linking with official/community resources?
 
 Links:
-- Learning path: concept/00_meta/LEARNING_MVP_PATH.md
-- Bilingual template: concept/00_meta/BILINGUAL_TEMPLATE.md
+- Learning path: concept/00_meta/learning_mvp_path.md
+- Bilingual template: concept/00_meta/bilingual_template.md
 - Terminology glossary: concept/00_meta/terminology_glossary.md
 - Brown Inventory exercises: exercises/src/ownership_borrowing/brown_inventories/
 

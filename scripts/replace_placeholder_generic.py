@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-将 concept/ 中指向 placeholder-generic.md 的内部链接替换为真实文件链接或纯文本。
+将 concept/ 中指向 placeholder_generic.md 的内部链接替换为真实文件链接或纯文本。
 """
 import re
 from pathlib import Path
@@ -49,7 +49,7 @@ SOURCE_MAP = {
 }
 
 PLACEHOLDER_RE = re.compile(
-    r'\[(?P<text>[^\]]+)\]\((?P<path>[^)]*placeholder-generic\.md[^)]*)\)'
+    r'\[(?P<text>[^\]]+)\]\((?P<path>[^)]*placeholder_generic\.md[^)]*)\)'
 )
 
 

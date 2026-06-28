@@ -192,7 +192,7 @@
 
 - [x] **C3.1** 为 `concept/02_intermediate/` 核心文件补充 `## 实践` 章节（至少 5 篇）
   - 经审计，`concept/02_intermediate/` 核心文件均已含 `## 实践` 章节，无需补充
-- [x] **C3.2** 更新 `concept/00_meta/LEARNING_MVP_PATH.md`，区分必修/选修
+- [x] **C3.2** 更新 `concept/00_meta/learning_mvp_path.md`，区分必修/选修
   - 已添加 "必修/选修快速对照" 表，路径总览使用 🔴/🟡 标记
   - 各 Day 末尾补充类型说明与验证标准
 - [x] **C3.3** 在 MVP 路径中标注 L3 测验入口

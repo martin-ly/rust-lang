@@ -30,8 +30,8 @@
 
 | 源文件 | 链接文本 | 死链接目标 |
 |:---|:---|:---|
-| concept/00_meta/LEARNING_MVP_PATH.md | exercises/rustlings_style/variables.rs | `../exercises/rustlings_style/variables.rs` |
-| concept/00_meta/LEARNING_MVP_PATH.md | exercises/rustlings_style/move_semantics.rs | `../exercises/rustlings_style/move_semantics.rs` |
+| concept/00_meta/learning_mvp_path.md | exercises/rustlings_style/variables.rs | `../exercises/rustlings_style/variables.rs` |
+| concept/00_meta/learning_mvp_path.md | exercises/rustlings_style/move_semantics.rs | `../exercises/rustlings_style/move_semantics.rs` |
 | concept/01_foundation/03_lifetimes.md | `exercises/rustlings_style/ex05_struct_lifetime.rs` | `../exercises/rustlings_style/ex05_struct_lifetime.rs` |
 | concept/02_intermediate/02_generics.md | `exercises/rustlings_style/ex07_generic_type_fix.rs` | `../exercises/rustlings_style/ex07_generic_type_fix.rs` |
 | concept/05_comparative/17_quiz_rust_vs_systems.md | Rust vs Go | `./03_rust_vs_go.md` |
@@ -67,7 +67,7 @@
 | concept/00_meta/05_cross_reference_matrix.md | 2 | 12 | 2.3% |
 | concept/00_meta/08_concept_audit_guide.md | 2 | 10 | 2.7% |
 | concept/00_meta/grading_system.md | 0 | 14 | 0.0% |
-| concept/00_meta/LEARNING_MVP_PATH.md | 0 | 50 | 0.0% |
+| concept/00_meta/learning_mvp_path.md | 0 | 50 | 0.0% |
 | concept/01_foundation/00_pl_prerequisites.md | 0 | 79 | 0.0% |
 | concept/01_foundation/23_quiz_ownership_borrowing.md | 7 | 81 | 4.3% |
 | concept/01_foundation/24_quiz_type_system.md | 7 | 80 | 4.8% |

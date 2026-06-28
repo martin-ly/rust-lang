@@ -105,7 +105,9 @@ def is_excluded(path: Path, excludes: set[str]) -> bool:
 
 def get_changed_files(base_ref: str) -> list[Path]:
     result = subprocess.run(
-        ["git", "diff", "--name-only", "--diff-filter=ACMR", base_ref],
+        # Only added/renamed/copied files affect naming; content-only edits (M)
+        # of existing files should not be flagged.
+        ["git", "diff", "--name-only", "--diff-filter=ACR", base_ref],
         cwd=ROOT,
         capture_output=True,
         text=True,

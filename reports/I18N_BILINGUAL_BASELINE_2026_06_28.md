@@ -49,7 +49,7 @@
 ## 建议
 
 1. 优先处理 TOP 未覆盖术语，它们在最多文件中出现。
-2. 对缺失 EN/Summary 的文件，参考 `concept/00_meta/BILINGUAL_TEMPLATE.md` 补齐头部。
+2. 对缺失 EN/Summary 的文件，参考 `concept/00_meta/bilingual_template.md` 补齐头部。
 3. 使用 `python scripts/add_bilingual_annotations.py --mode annotate --dir concept/XX_YYYY` 自动标注指定目录。
 
 ---

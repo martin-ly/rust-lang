@@ -5474,19 +5474,19 @@
 - `https://github.com/rust-lang/rust/pull/157734`
   - `concept\07_future\rust_1_98_preview.md`
 - `https://github.com/rust-lang/rfcs/pull/3382`
-  - `concept\sources\RFC_INDEX.md`
+  - `concept\sources\rfc_index.md`
 - `https://github.com/rust-lang/rfcs/pull/1053`
-  - `concept\sources\RFC_INDEX.md`
+  - `concept\sources\rfc_index.md`
 - `https://github.com/rust-lang/rfcs/pull/2581`
-  - `concept\sources\RFC_INDEX.md`
+  - `concept\sources\rfc_index.md`
 - `https://github.com/rust-lang/rfcs/pull/2753`
-  - `concept\sources\RFC_INDEX.md`
+  - `concept\sources\rfc_index.md`
 - `https://github.com/rust-lang/rfcs/pull/2807`
-  - `concept\sources\RFC_INDEX.md`
+  - `concept\sources\rfc_index.md`
 - `https://github.com/rust-lang/rfcs/pull/1299`
-  - `concept\sources\RFC_INDEX.md`
+  - `concept\sources\rfc_index.md`
 - `https://github.com/rust-lang/rfcs/pull/2010`
-  - `concept\sources\RFC_INDEX.md`
+  - `concept\sources\rfc_index.md`
 - `https://github.com/rust-lang/rustlings`
   - `docs\archive\c_class_audit_2026_06_08\01_learning\01_official_resources_mapping.md`
   - `docs\archive\c_class_audit_2026_06_08\01_learning\README.md`

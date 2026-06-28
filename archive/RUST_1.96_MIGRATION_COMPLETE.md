@@ -90,7 +90,7 @@ match value {
 
 - `.github/workflows/ci.yml`
 - `.github/workflows/ci_optimized.yml`
-- `.github/workflows/docs-preview.yml`
+- `.github/workflows/docs_preview.yml`
 - `.github/workflows/version_tracking.yml`
 
 **主要变更:**
@@ -169,7 +169,7 @@ Doc-tests: 6 passed
 - [x] `Cargo.toml` (workspace)
 - [x] `.github/workflows/ci.yml`
 - [x] `.github/workflows/ci_optimized.yml`
-- [x] `.github/workflows/docs-preview.yml`
+- [x] `.github/workflows/docs_preview.yml`
 - [x] `.github/workflows/version_tracking.yml`
 
 ### 代码文件 (5)

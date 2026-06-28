@@ -358,7 +358,7 @@ def write_report(
         "## 建议",
         "",
         "1. 优先处理 TOP 未覆盖术语，它们在最多文件中出现。",
-        "2. 对缺失 EN/Summary 的文件，参考 `concept/00_meta/BILINGUAL_TEMPLATE.md` 补齐头部。",
+        "2. 对缺失 EN/Summary 的文件，参考 `concept/00_meta/bilingual_template.md` 补齐头部。",
         "3. 使用 `python scripts/add_bilingual_annotations.py --mode annotate --dir concept/XX_YYYY` 自动标注指定目录。",
         "",
         "---",
@@ -394,7 +394,7 @@ def main(argv: list[str] | None = None) -> int:
 
     for path in iter_md_files(dirs):
         # 跳过元目录自身的模板文件
-        if "00_meta" in path.parts and path.name != "BILINGUAL_TEMPLATE.md":
+        if "00_meta" in path.parts and path.name != "bilingual_template.md":
             continue
         report = process_file(path, args.mode)
         if report is None:

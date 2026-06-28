@@ -27,4 +27,4 @@
 
 1. [TRPL](https://doc.rust-lang.org/book/) — 系统学习基础
 2. [Rust by Example](https://doc.rust-lang.org/rust-by-example/) — 通过示例巩固
-3. 本项目 [MVP 学习路径](../../LEARNING_MVP_PATH.md) — 结构化练习
+3. 本项目 [MVP 学习路径](../../concept/00_meta/learning_mvp_path.md) — 结构化练习

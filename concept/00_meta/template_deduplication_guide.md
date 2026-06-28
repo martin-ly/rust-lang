@@ -7,7 +7,7 @@
 > **层级**: L0 元信息
 > **A/S/P 标记**: M — Meta
 > **双维定位**: M×Eva — Evaluation / Quality
-> **前置概念**: [Bilingual Template](BILINGUAL_TEMPLATE.md) · [Concept Consistency Audit Checklist](concept_consistency_audit_checklist.md)
+> **前置概念**: [Bilingual Template](bilingual_template.md) · [Concept Consistency Audit Checklist](concept_consistency_audit_checklist.md)
 > **后置概念**: [Quality Dashboard](quality_dashboard_v2.md)
 ---
 

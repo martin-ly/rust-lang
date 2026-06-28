@@ -19,4 +19,4 @@
 
 ## 推荐起点
 
-初学者请优先阅读 [学习路径指南](01_learning_path_guide_2025_10_24.md)，然后参照项目根目录的 [LEARNING_MVP_PATH.md](../../LEARNING_MVP_PATH.md) 进行系统学习。
+初学者请优先阅读 [学习路径指南](01_learning_path_guide_2025_10_24.md)，然后参照项目根目录的 [LEARNING_MVP_PATH.md](../../concept/00_meta/learning_mvp_path.md) 进行系统学习。

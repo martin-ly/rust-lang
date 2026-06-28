@@ -84,7 +84,7 @@
 
 | 日 | 任务 | 目标 | 产出 |
 |:---|:---|:---|:---|
-| D4 | LEARNING_MVP_PATH_EN.md | `LEARNING_MVP_PATH_EN.md` | 英文版学习路径 |
+| D4 | concept/00_meta/learning_mvp_path_en.md | `concept/00_meta/learning_mvp_path_en.md` | 英文版学习路径 |
 | D5 | cargo update 同步脚本 | `scripts/sync_cargo_versions.py` | 自动化版本同步 |
 
 ### 轨道四：依赖管理
