@@ -33,15 +33,14 @@
 
 ```text
 archive/
-├── docs/                          # 从 docs/archive/ 迁移的历史文档
+├── README.md                      # 本政策摘要与 archive 目录说明
+├── docs/                          # 从 docs/archive/ 迁移的历史文档（2026-06-28）
 │   └── ...
-├── rust-ownership-decidability/   # 从 docs/rust-ownership-decidability/ 迁移的历史研究
+├── rust-ownership-decidability/   # 从 docs/rust-ownership-decidability/ 迁移的历史研究（2026-06-28）
 │   └── ...
-├── kimi/                          # 从 .kimi/archive/ 迁移的历史计划
-│   └── ...
-├── scripts/                       # 从 scripts/archive/ 整理的历史脚本
-│   └── ...
-└── README.md                      # 本政策摘要与 archive 目录说明
+├── deprecated/                    # 已废弃或替代的旧方案
+├── research_notes_2026_06_25/     # 研究笔记快照
+└── ...
 ```
 
 ## 5. 迁移规则
@@ -70,6 +69,12 @@ archive/
 - 仍有活跃学习路径引用的过渡性内容（应先迁移学习路径再归档）
 - 用户明确保留在活跃目录中的参考内容
 - 正在进行的审计或迁移过程中的临时副本
+
+## 9. 迁移记录
+
+| 日期 | 动作 | 提交 |
+|------|------|------|
+| 2026-06-28 | `docs/archive/` → `archive/docs/`；`docs/rust-ownership-decidability/` → `archive/rust-ownership-decidability/`；合并了此前已存在的部分归档副本 | `9d65d11fc` |
 
 ---
 
