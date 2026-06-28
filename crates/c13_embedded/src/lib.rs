@@ -1,45 +1,28 @@
-//! Lib
+//! # c13_embedded - Bare-metal 嵌入式 Rust 学习模块
+//!
+//! 本 crate 提供 Rust 裸机嵌入式系统学习资源，涵盖 `no_std` 编程、内存映射寄存器、
+//! UART 驱动、中断处理、HAL 设计模式、FFI 与 C 互操作，以及 Embassy / RTIC 异步框架。
+//!
+//! ## 编译说明
+//!
+//! - **Host 目标** (`x86_64-pc-windows-msvc`): 使用模拟代码演示概念，`cargo check` 可正常通过
+//! - **嵌入式目标** (`thumbv7m-none-eabi` 等): 启用 `embedded` feature，使用真实硬件抽象层
+//!
+//! ## 快速开始
+//!
+//! ```text
+//! # Host 上检查编译
+//! cargo check -p c13_embedded
+//!
+//! # 运行演示程序
+//! cargo run -p c13_embedded --bin embedded_demo
+//! ```
 
 // [来源: The Embedded Rust Book / Rust Reference]
-//! Embedded Rust: no_std, bare-metal, RTOS, and hardware abstraction.
 #![cfg_attr(target_arch = "arm", no_std)]
 #![feature(core_intrinsics, fn_align)]
 #![allow(internal_features)]
 #![allow(clippy::module_name_repetitions)]
-
-//! # C13 Embedded - Bare-metal 嵌入式 Rust 学习模块
-//! # C13 Embedded - Bare-metal 嵌入式 Rust learnmodule
-//! This crate providescomplete bare-metal 嵌入式 Rust 编程Example of，包括：
-//! - `no_std` 环境编程
-//! - `no_std` environment
-//! - 内存映射寄存器 (MMIO) 操作
-//! - memory mapping (MMIO) operation
-//! - memory mapping (MMIO)
-//! - UART 驱动设计
-//! - UART driver design
-//! - 中断处理
-//! - in
-//! - in断Handle
-//! - HAL 设计模式（类型状态）
-//! - HAL design （type state ）
-//! - C 语言互操作 (FFI)
-//! - C operation (FFI)
-//! - C (FFI)
-//! ## 编译说明
-//! ## explain
-//! ## 编译explain
-//! - **Host 目标** (`x86_64-pc-windows-msvc`): 使用模拟代码演示概念，`cargo check` 可正常通过
-//! - **Host goal ** (`x86_64-pc-windows-msvc`): demonstration concept ，`cargo check`
-//! - **Host goal** (`x86_64-pc-windows-msvc`): Use模拟代码Demonstration ofconcept，`cargo check` 可正常Via
-//! - **嵌入式目标** (`thumbv7m-none-eabi` 等): 启用 `embedded` feature，使用真实硬件抽象层
-//! - **goal ** (`thumbv7m-none-eabi` etc. ): `embedded` feature，real hardware
-//! ## 快速开始
-//! ## fast
-//! # Host 上检查编译
-//! # Host on
-//! # 运行演示程序
-//! # Run demonstration program
-//! ```text
 
 // 核心模块
 pub mod bare_metal_basics;
@@ -68,8 +51,7 @@ pub mod uart_driver; // RTIC 实时中断驱动并发
 // 库版本信息
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 
-/// 获取库信息
-/// library
+/// 返回当前库的名称、版本与编译目标。
 pub fn get_library_info() -> LibraryInfo {
     LibraryInfo {
         name: "c13_embedded",
@@ -82,18 +64,14 @@ pub fn get_library_info() -> LibraryInfo {
     }
 }
 
-/// 库信息结构体
-/// library struct
+/// 库元信息结构体。
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct LibraryInfo {
     /// 库名称
-    /// library
     pub name: &'static str,
     /// 版本号
-    /// this
     pub version: &'static str,
-    /// 当前编译目标
-    /// when before goal
+    /// 当前编译目标（host 模拟或嵌入式 ARM）
     pub target: &'static str,
 }
 
