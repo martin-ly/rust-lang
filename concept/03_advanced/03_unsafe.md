@@ -28,7 +28,7 @@
 > [Rust Edition Guide 2024 — unsafe attributes](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-attributes.html)
 >
 
-> **内容重叠提示**: 本文与 [`knowledge/03_advanced/unsafe/04_unsafe_rust.md`](../../knowledge/03_advanced/unsafe/04_unsafe_rust.md) 内容高度重叠。`knowledge/` 版本提供专项深入；`concept/` 版本为项目权威主轨。
+> **内容去重提示**: 本文是 Unsafe Rust 的 `concept/` 权威来源。[`knowledge/03_advanced/unsafe/04_unsafe_rust.md`](../../knowledge/03_advanced/unsafe/04_unsafe_rust.md) 与 [`concept/03_advanced/12_unsafe_rust_patterns.md`](12_unsafe_rust_patterns.md) 已重定向至本文件，相关内容已在本文件中统一维护。
 
 ---
 

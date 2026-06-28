@@ -1,7 +1,6 @@
 # Unsafe Fields 预研：字段级安全边界的精确标注
 
 > **内容重叠提示**: 本文与 [`docs/05_guides/05_unsafe_fields_preview.md`](../../docs/05_guides/05_unsafe_fields_preview.md) 内容高度重叠。`docs/` 版本提供专项深入；`concept/` 版本为项目权威主轨。
-
 > **代码状态**: [综述级 — 待补充代码]
 >
 > **EN**: Unsafe Fields Preview

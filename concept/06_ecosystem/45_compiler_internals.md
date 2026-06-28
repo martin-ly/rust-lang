@@ -70,8 +70,8 @@
 
 ### 1.1 rustc 架构概览
 >
-
-> **[Rustc Development Guide](https://rustc-dev-guide.rust-lang.org/compiler-src.html)** rustc 是 Rust 的官方编译器，采用**多阶段编译管线**（Multi-pass Pipeline）架构，核心设计原则：**增量编译**、**延迟计算**（Demand-driven）、**查询系统**（Query System）。
+> **[Rustc Development Guide](https://rustc-dev-guide.rust-lang.org/compiler-src.html)**
+> rustc 是 Rust 的官方编译器，采用**多阶段编译管线**（Multi-pass Pipeline）架构，核心设计原则：**增量编译**、**延迟计算**（Demand-driven）、**查询系统**（Query System）。
 
 ```text
 rustc 核心架构:
@@ -281,7 +281,6 @@ use_debug(42);  // 检查 i32: Debug → 是（标准库实现）
 
 ### 5.1 Trait 解析与 Chalk
 >
-
 > **[Chalk — Rust PL](https://rust-lang.github.io/chalk/book/)** Chalk 是 Rust 的实验性 Trait 求解器，基于 **Datalog 风格的逻辑编程**。rustc 的传统 Trait 求解器是专用算法（Fulfilment / Selection），而 Chalk 的目标是统一和形式化 Trait 解析。
 
 ```text
@@ -457,7 +456,6 @@ MIRI（MIR Interpreter）:
 
 ### 7.1 NLL（Non-Lexical Lifetimes）
 >
-
 > **Niko Matsakis — Rust Blog** NLL 是 Rust 2018 Edition 引入的借用检查改进，核心洞察：**引用（Reference）的有效性应基于实际使用位置，而非词法作用域**。
 
 ```text
@@ -487,7 +485,6 @@ NLL 的实现:
 
 ### 7.2 Polonius：基于逻辑的借用检查
 >
-
 > **[Polonius — OOPSLA 2018](https://hal.inria.fr/hal-03827702/)** Polonius 是下一代 Rust 借用检查器，基于 **Datalog 风格的逻辑编程**（与 Chalk 类似），目标是解决 NLL 的**位置敏感性**（Location Sensitivity）问题。
 
 ```text
@@ -517,7 +514,6 @@ Polonius 状态（2025）:
 
 ### 7.3 别名模型：Tree Borrows
 >
-
 > **[Tree Borrows — PLDI 2025 Distinguished Paper](https://perso.crans.org/vanille/treebor/)** Tree Borrows 是 Miri 的实验性别名模型，目标是替代 Stacked Borrows，提供更精确、更宽容的引用行为分析。
 
 ```text

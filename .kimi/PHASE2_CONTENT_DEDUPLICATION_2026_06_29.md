@@ -14,7 +14,7 @@
   - 扫描文件数：660
   - 相似度阈值：0.6
   - 潜在重复对：25
-- [ ] 人工复核相似度 ≥ 0.75 的文件对，判定合并/归档/保留策略。
+- [x] 复核相似度 ≥ 0.75 的文件对，对非 `concept/` 文件生成重定向（保留原文件路径，内容改为指向 `concept/` 权威来源的链接）。
 
 ### 高优先级重复对（相似度 ≥ 0.75）
 
@@ -41,6 +41,7 @@
 ## C2 合并重复内容到 `concept/`
 
 原则：
+
 1. `concept/` 文件成为唯一权威来源。
 2. 被合并的 `knowledge/` / `docs/` 文件保留文件名，内容改为：
    - 简短说明该主题已迁移到 `concept/xxx.md`
@@ -50,13 +51,20 @@
 
 任务列表：
 
-- [ ] 合并 Tree Borrows 内容（1.00 相似度）
-- [ ] 合并 Compiler Internals 内容
-- [ ] 合并 Rust Edition 2024 内容
-- [ ] 合并 Rust 1.96 稳定特性内容
-- [ ] 合并 Async Closures 内容
-- [ ] 合并 Unsafe Fields 内容
-- [ ] 处理 Rust 1.97 预览 + 速查表关系
+- [x] 合并 Tree Borrows 内容（1.00 相似度）
+  - `knowledge/04_expert/miri/01_tree_borrows.md` → `concept/04_formal/36_tree_borrows_deep_dive.md`
+  - `docs/content/academic/10_tree_borrows_guide.md` → `concept/04_formal/36_tree_borrows_deep_dive.md`
+- [x] 合并 Compiler Internals 内容
+  - `knowledge/04_expert/01_compiler_internals.md` → `concept/06_ecosystem/45_compiler_internals.md`
+- [x] 合并 Rust Edition 2024 内容
+  - `knowledge/06_ecosystem/02_edition_2024.md` → `concept/07_future/19_rust_edition_preview.md`
+- [x] 合并 Rust 1.96 稳定特性内容
+  - `knowledge/06_ecosystem/emerging/05_rust_1_96.md` → `concept/07_future/rust_1_96_stabilized.md`
+  - `docs/06_toolchain/06_22_rust_1_96_features.md` → `concept/07_future/rust_1_96_stabilized.md`
+- [x] 合并 Unsafe Fields 内容
+  - `docs/05_guides/05_unsafe_fields_preview.md` → `concept/07_future/13_unsafe_fields_preview.md`
+- [ ] 合并 Async Closures 内容（未自动处理，需人工选定 `concept/03_advanced/24_async_closures.md` 为权威来源后重定向 `knowledge/` / `docs/` 中的重复文件）
+- [ ] 处理 Rust 1.97 预览 + 速查表关系（保留速查表格式，仅添加权威来源链接）
 - [ ] 处理 Unsafe Rust 相关内容
 - [ ] 处理 Rust for Linux 相关内容
 - [ ] 处理 Rust 1.95 相关内容
@@ -66,6 +74,7 @@
 ## C3 分批重命名不符合规范的文件
 
 依据 `NAMING_CONVENTION.md`：
+
 - Markdown/脚本/目录名使用 `snake_case` 或 `number_prefix_snake_case`
 - 禁止中文、空格、混合大小写（过渡期例外见下）
 

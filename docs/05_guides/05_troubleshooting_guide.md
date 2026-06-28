@@ -62,7 +62,6 @@
     - [LazyLock 初始化问题排查](#lazylock-初始化问题排查)
     - [array\_windows 边界问题](#array_windows-边界问题)
     - [ControlFlow 类型推断问题](#controlflow-类型推断问题)
-<a id="状态--深度整合完成"></a>
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -631,8 +630,7 @@ orce_mut()
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-`
-ust
+```rust
 // array_windows 示例
 let data = [1, 2, 3, 4, 5];
 let sums: Vec<i32> = data.array_windows::<2>()
@@ -645,7 +643,7 @@ let result = items.iter().try_for_each(|&n| {
     if n < 0 { ControlFlow::Break(n) }
     else { ControlFlow::Continue(()) }
 });
-`
+```
 
 **最后更新**: 2026-05-08 (添加 Rust 1.95+ 特性)
 
@@ -744,6 +742,7 @@ fn search(items: &[i32]) -> ControlFlow<i32, ()> {
 
 **维护者**: Rust 学习项目团队
 **状态**: ✅ 深度整合完成
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

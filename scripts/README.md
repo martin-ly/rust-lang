@@ -58,6 +58,7 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 | `version_fact_check.py` | 版本相关事实核查 |
 | `lint_filenames.py` | 文件名 snake_case 命名检查 |
 | `detect_content_overlap.py` | 检测 `concept/`、`knowledge/`、`docs/` 三轨内容相似度，生成去重报告 |
+| `auto_dedup_redirect.py` | 对高相似度非 `concept/` 文件自动生成指向 `concept/` 权威来源的重定向页 |
 
 ### 🔗 链接检查与修复
 

@@ -122,6 +122,21 @@ async fn capture_examples() {
 | 借用（Borrowing）捕获 | ❌ 困难 | ✅ 原生支持 |
 | dyn 兼容 | `Fn` trait 是 dyn-compatible | `AsyncFn` **当前不是** dyn-compatible |
 
+### 2.4 异步可调用体谱系
+
+除了 `async || {}`，Rust 还提供多种“异步可调用”形式，它们的捕获方式与返回类型各不相同：
+
+| 形式 | 语法 | 捕获方式 | 返回类型 | 典型场景 |
+|---|---|---|---|---|
+| `async fn` | `async fn f() -> T` | 按值传参 | `impl Future<Output = T>` | 具名函数 |
+| `async` 块 | `async { ... }` | 按引用捕获环境 | `impl Future<Output = T>` | 局部异步逻辑 |
+| `async move` 块 | `async move { ... }` | 按值 move 环境 | `impl Future<Output = T>`（可能 `'static`） | 转移所有权 |
+| `async` 闭包 | `async \|x\| { ... }` | 按引用捕获（默认） | `impl AsyncFn(...) -> T` | 高阶异步函数参数 |
+| `async move` 闭包 | `async move \|x\| { ... }` | 按值 move 捕获 | `impl AsyncFnOnce(...) -> T` | 单次 / 可 `spawn` |
+| 普通闭包返回 async 块 | `\|x\| async move { ... }` | 闭包按引用捕获，async 块按值 move | `impl Fn(...) -> impl Future` | 旧生态 API |
+
+> 💡 关键直觉：`async \|x\| {}` ≠ `\|x\| async move {}`。前者返回的 `Future` 可借用闭包自身，后者返回的 `Future` 拥有闭包捕获。
+
 ---
 
 ## 3. AsyncFn trait 家族
@@ -180,6 +195,35 @@ where
 // 使用
 let evens = process_items(vec![1, 2, 3, 4], async |x| *x % 2 == 0).await;
 ```
+
+### 3.3 形式化 trait 草图
+
+标准库中的实际定义更复杂，但核心形状可简化为：
+
+```rust,ignore
+use std::future::Future;
+
+pub trait AsyncFn<Args>: AsyncFnMut<Args> {
+    type Output;
+    type CallRefFuture<'a>: Future<Output = Self::Output>
+    where
+        Self: 'a;
+
+    fn async_call(&self, args: Args) -> Self::CallRefFuture<'_>;
+}
+
+pub trait AsyncFnMut<Args>: AsyncFnOnce<Args> {
+    fn async_call_mut(&mut self, args: Args) -> Self::CallRefFuture<'_>;
+}
+
+pub trait AsyncFnOnce<Args> {
+    type Output;
+    type CallOnceFuture: Future<Output = Self::Output>;
+    fn async_call_once(self, args: Args) -> Self::CallOnceFuture;
+}
+```
+
+`CallRefFuture<'a>` 是泛型关联类型（GAT），它允许返回的 `Future` 借用 `&self`。这正是 `AsyncFn` 与 `Fn` 的本质差异：同步 `Fn` 只能返回一个已经构造好的值，无法让返回值携带 `self` 的生命周期。
 
 ---
 
@@ -251,6 +295,53 @@ async fn middleware_chain(
 
 > 💡 设计提示：由于 `AsyncFn` 暂不支持 `dyn`，生产级中间件通常仍用泛型（Generics） `impl AsyncFn(...)` 或返回 `Pin<Box<dyn Future>>` 的传统闭包。
 
+### 4.3 并行处理：Tokio JoinSet
+
+```rust,ignore
+use tokio::task::JoinSet;
+
+async fn parallel_map<F>(items: Vec<i32>, f: F) -> Vec<i32>
+where
+    F: AsyncFn(i32) -> i32 + Clone + Send + Sync + 'static,
+{
+    let mut set = JoinSet::new();
+
+    for item in items {
+        let f = f.clone();
+        set.spawn(async move { f(item).await });
+    }
+
+    let mut results = Vec::new();
+    while let Some(res) = set.join_next().await {
+        results.push(res.unwrap());
+    }
+    results
+}
+```
+
+每次 `f.clone()` 产生一个独立副本，从而满足 `tokio::spawn` 对 `'static` 的要求。
+
+### 4.4 框架实战：Axum 处理函数
+
+```rust,ignore
+use axum::{routing::get, Router};
+use std::time::Duration;
+
+#[tokio::main]
+async fn main() {
+    let auth_checker = async |token: &str| -> bool {
+        tokio::time::sleep(Duration::from_millis(5)).await;
+        token == "valid-token"
+    };
+
+    let app = Router::new()
+        .route("/", get(|| async { "Hello, World!" }));
+
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
+    axum::serve(listener, app).await.unwrap();
+}
+```
+
 ---
 
 ## 5. 限制与边界
@@ -293,6 +384,62 @@ let f = async || {
 ```
 
 需要显式装箱（`Box::pin`）或改用 `async_recursion` 等 crate。
+
+### 5.4 与 `tokio::spawn` 的生命周期冲突
+
+`AsyncFn` 返回的 `Future` 可能借用闭包自身或其捕获的环境，因此通常不是 `'static`，不能直接交给 `tokio::spawn`。
+
+```rust,compile_fail
+async fn bad_spawn() {
+    let local = String::from("hello");
+
+    let f = async |x: i32| {
+        format!("{} {}", local, x) // 按引用捕获 local
+    };
+
+    tokio::spawn(async {
+        let result = f(42).await; // ❌ Future 借用 local，不是 'static
+        println!("{}", result);
+    });
+}
+```
+
+**修复**：使用 `async move ||` 转移所有权，或用 `Arc` 共享 `'static` 数据。
+
+```rust,ignore
+async fn good_spawn() {
+    let local = String::from("hello");
+
+    let f = async move |x: i32| { // move 捕获 local
+        format!("{} {}", local, x)
+    };
+
+    tokio::spawn(async {
+        let result = f(42).await;
+        println!("{}", result);
+    });
+}
+```
+
+### 5.5 `async move ||` 的 FnOnce 语义
+
+`async move ||` 按值捕获非 `Copy` 环境时，闭包本身会被消耗，只能调用一次。
+
+```rust,compile_fail
+async fn bad_once() {
+    let data = vec![1, 2, 3];
+
+    let f = async move |x: i32| {
+        data.push(x);
+        data.len()
+    };
+
+    let len1 = f(4).await; // ✅ 第一次调用
+    let len2 = f(5).await; // ❌ 编译错误：f 已被消耗
+}
+```
+
+若需多次调用，应改用 `async ||`（按引用捕获）或在 `async move ||` 中捕获 `Arc<Mutex<T>>` 等共享所有权类型。
 
 ---
 
@@ -399,5 +546,5 @@ let process = async |items: Vec<i32>| -> i32 {
 >
 > **文档版本**: 2.0
 > **对应 Rust 版本**: 1.85.0+ (Edition 2024 / 2021)
-> **最后更新**: 2026-06-23
+> **最后更新**: 2026-06-28
 > **状态**: ✅ 权威来源对齐完成（对齐 Rust 1.96.0 stable）

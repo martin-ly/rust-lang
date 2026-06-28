@@ -64,6 +64,25 @@
   - `cargo update`、`cargo check --workspace --all-features`、`cargo clippy --workspace --tests --all-features -- -D warnings` 在默认 stable 下通过。
   - `cargo +nightly check --workspace --all-features`、`cargo +nightly clippy --workspace --tests --all-features -- -D warnings`、`cargo +nightly test -p exercises --test l3_rust_198_alignment` 通过。
 
+### Phase 3 C1/C2 内容去重启动（2026-06-29）
+
+- **重叠检测**：
+  - 运行 `scripts/detect_content_overlap.py`，扫描 `concept/`、`knowledge/`、`docs/`，生成 `reports/CONTENT_OVERLAP_DETECTION_2026_06_29.md`。
+  - 660 个 Markdown 文件中存在 25 对潜在重复（阈值 0.6），其中 10 对达到 0.75 以上。
+- **自动重定向合并**：
+  - 新增 `scripts/auto_dedup_redirect.py`，对高相似度非 `concept/` 文件生成指向 `concept/` 权威来源的重定向页。
+  - 已处理 7 个文件（相似度 0.75+）：
+    - Tree Borrows：`knowledge/04_expert/miri/01_tree_borrows.md`、`docs/content/academic/10_tree_borrows_guide.md` → `concept/04_formal/36_tree_borrows_deep_dive.md`
+    - Compiler Internals：`knowledge/04_expert/01_compiler_internals.md` → `concept/06_ecosystem/45_compiler_internals.md`
+    - Rust Edition 2024：`knowledge/06_ecosystem/02_edition_2024.md` → `concept/07_future/19_rust_edition_preview.md`
+    - Rust 1.96 稳定特性：`knowledge/06_ecosystem/emerging/05_rust_1_96.md`、`docs/06_toolchain/06_22_rust_1_96_features.md` → `concept/07_future/rust_1_96_stabilized.md`
+    - Unsafe Fields：`docs/05_guides/05_unsafe_fields_preview.md` → `concept/07_future/13_unsafe_fields_preview.md`
+  - 自动跳过：速查表、不同版本专题（1.97 vs 1.96）、特定映射页等需人工复核的文件。
+- **执行清单**：
+  - 新建 `.kimi/PHASE2_CONTENT_DEDUPLICATION_2026_06_29.md`，记录剩余待处理项（Async Closures、Unsafe Rust、Rust for Linux、Rust 1.95 等）。
+- **链接检查**：
+  - 运行 `scripts/check_links.py`，损坏链接仍为 13 个（均为已有锚点问题），本次重定向未引入新损坏链接。
+
 ### Phase 3 C4 脚本清理启动（2026-06-28）
 
 - **重复脚本版本归档**：
