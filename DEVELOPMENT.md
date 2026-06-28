@@ -70,8 +70,11 @@ cargo test --workspace
 # 代码格式化
 cargo fmt
 
-# 运行检查
-cargo clippy --workspace --all-targets
+# 运行检查（stable MSRV）
+cargo clippy --workspace --tests -- -D warnings
+
+# 可选：验证 nightly-only 预览模块
+cargo +nightly clippy --workspace --tests --all-features -- -D warnings
 
 # 提交更改
 git add .

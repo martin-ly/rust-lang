@@ -89,7 +89,7 @@ cargo test --workspace        # 应全部通过
 ### 大型变更（> 5 文件 或 新增章节）
 
 1. 先在 **Issue** 中描述你的计划，避免与正在进行的工作冲突
-2. 遵循 [执行计划](.kimi/EXECUTION_PLAN_CONFIRMED_2026_05_29.md) 的当前阶段方向
+2. 遵循 [第一阶段执行清单](.kimi/PHASE1_GOVERNANCE_2026_06_28.md) 与 [可持续改进计划](.kimi/SUSTAINABLE_IMPROVEMENT_PLAN_2026_06_28_CONFIRMED.md) 的当前阶段方向
 3. 修改后必须更新 `CHANGELOG.md`
 4. 如涉及 Mermaid 图表，运行 `mdbook build` 验证
 

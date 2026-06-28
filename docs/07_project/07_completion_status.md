@@ -24,7 +24,6 @@
       - [production/](#production)
       - [academic/](#academic)
   - [📝 Docs 完成度](#-docs-完成度)
-<a id="️-已知问题"></a>
   - [⚠️ 已知问题](#️-已知问题)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
