@@ -126,7 +126,7 @@ content/
 ### 学术研究
 
 - [RustBelt 与 Tree Borrows](../../duplicate_content_2026_06_08/10_tree_borrows_authoritative_guide.md)
-- [Coq 形式化验证指南](../../../content/academic/10_coq_formalization_guide.md)
+- [Coq 形式化验证指南](../../../content/academic/coq_formalization_guide.md)
 - [知识表征矩阵](../../../content/representations/10_knowledge_representation_matrix.md)
 - [Web 应用场景](../../../content/scenarios/10_web_application_scenarios.md)
 

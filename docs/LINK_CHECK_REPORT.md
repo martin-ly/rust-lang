@@ -5,7 +5,7 @@
 |:---|:---:|
 | 总链接数 | 91836 |
 | 有效链接 | 32855 |
-| 损坏链接 | 14 |
+| 损坏链接 | 12 |
 | 外部链接 | 58953 |
 | 仅锚点链接 | 27731 |
 
@@ -28,12 +28,9 @@
 | docs\rust-ownership-decidability\case-studies\tokio-runtime-analysis.md | *最后更新: 2026-03-04* | `#最后更新-2026-03-04` | 同文件锚点不存在: #最后更新-2026-03-04 |
 | docs\rust-ownership-decidability\exercises\ADVANCED_OWNERSHIP_WORKSHOP.md | **完成度**: 0/5 练习 | `#完成度-05-练习` | 同文件锚点不存在: #完成度-05-练习 |
 
-### 文件不存在 (2个)
+### 文件不存在 (0个)
 
-| 源文件 | 链接文本 | 链接路径 | 问题 |
-|:---|:---|:---|:---|
-| docs\archive\c_class_audit_2026_06_08\content\README.md | Coq 形式化验证指南 | `../../../content/academic/10_coq_formalization_guide.md` | 文件不存在: docs\content\academic\10_coq_formalization_guide.md |
-| docs\content\academic\README.md | Coq 形式化指南 | `./10_coq_formalization_guide.md` | 文件不存在: docs\content\academic\10_coq_formalization_guide.md |
+所有内部文件链接均有效。
 
 ## 修复建议
 
@@ -55,8 +52,6 @@
 
 | 源文件 | 损坏链接数 |
 |:---|:---:|
-| docs\archive\c_class_audit_2026_06_08\content\README.md | 1 |
-| docs\content\academic\README.md | 1 |
 | docs\rust-ownership-decidability\10-research-frontiers\10-05-ai-integration.md | 1 |
 | docs\rust-ownership-decidability\10-research-frontiers\rust-1.93-features-analysis.md | 1 |
 | docs\rust-ownership-decidability\12-concurrency-patterns\12-03-message-passing-deep.md | 1 |
@@ -70,4 +65,4 @@
 | docs\rust-ownership-decidability\case-studies\tokio-runtime-analysis.md | 1 |
 | docs\rust-ownership-decidability\exercises\ADVANCED_OWNERSHIP_WORKSHOP.md | 1 |
 
-**总计 14 个文件包含损坏链接**
+**总计 12 个文件包含损坏链接**
