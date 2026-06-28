@@ -1,5 +1,7 @@
 # Rust for Linux ：操作系统内核中的内存安全
 
+> **内容重叠提示**: 本文与 [`docs/04_research/04_rust_for_linux.md`](../../docs/04_research/04_rust_for_linux.md) 内容高度重叠。`docs/` 版本提供研究资料；`concept/` 版本为项目权威主轨。
+
 > **代码状态**: [综述级 — 待补充代码]
 >
 > **EN**: Operating Systems

@@ -1,5 +1,7 @@
 # Rust 1.96.0 稳定特性综述
 
+> **内容重叠提示**: 本文与 [`concept/07_future/rust_1_96_stabilized.md`](../../concept/07_future/rust_1_96_stabilized.md) 内容高度重叠。`concept/` 版本为项目权威主轨；本文保留作为工具链参考。
+
 > **代码状态**: [实现级 — 可运行示例已补充]
 > **分级**: [A]
 > **Bloom 层级**: L2-L3

@@ -1,5 +1,7 @@
 # Rust Edition 2024 完整指南
 
+> **内容重叠提示**: 本文与 [`concept/07_future/19_rust_edition_preview.md`](../../concept/07_future/19_rust_edition_preview.md) 内容高度重叠。`concept/` 版本为项目权威主轨；本文保留作为专项深入。
+
 > **深度**: [综述级]
 > **相关概念**: [Edition](../../concept/06_ecosystem/01_toolchain.md)
 > **主轨引用**: 概念级深度分析请参阅 [concept/07_future/23_rust_edition_guide.md](../../concept/07_future/23_rust_edition_guide.md)

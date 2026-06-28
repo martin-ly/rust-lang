@@ -1,5 +1,7 @@
 # Miri Tree Borrows 深度解析
 
+> **内容重叠提示**: 本文与 [`concept/04_formal/36_tree_borrows_deep_dive.md`](../../../concept/04_formal/36_tree_borrows_deep_dive.md) 内容高度重叠。`concept/` 版本为项目权威主轨；本文保留作为专项深入。
+
 > **相关文档**: 请参阅 [docs/content/academic/10_tree_borrows_guide.md](../../../docs/content/academic/10_tree_borrows_guide.md)
 > **Bloom 层级**: 理解
 > **📌 简介**: Tree Borrows 是 Rust 的下一代内存模型，由 Villani 等人在 PLDI 2025 以 Distinguished Paper 发表。

@@ -1,5 +1,7 @@
 # Rust 编译器内部原理 (Compiler Internals)
 
+> **内容重叠提示**: 本文与 [`concept/06_ecosystem/45_compiler_internals.md`](../../concept/06_ecosystem/45_compiler_internals.md) 内容高度重叠。`concept/` 版本为项目权威主轨；本文保留作为专项深入。
+
 > **Bloom 层级**: 理解
 > 深入探索 Rust 编译器 `rustc` 的工作原理，理解从源代码到机器码的完整转换过程，掌握 MIR、借用检查器、类型推断等核心机制。
 >

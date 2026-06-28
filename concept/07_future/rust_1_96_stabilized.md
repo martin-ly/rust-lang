@@ -1,5 +1,11 @@
 # Rust 1.96.0 稳定特性
 
+> **内容重叠提示**: 本文与 [`docs/06_toolchain/06_22_rust_1_96_features.md`](../../docs/06_toolchain/06_22_rust_1_96_features.md) 内容高度重叠。`docs/` 版本提供工具链参考；`concept/` 版本为项目权威主轨。
+
+> **内容重叠提示**: 本文与 [`docs/06_toolchain/06_21_rust_1_97_features.md`](../../docs/06_toolchain/06_21_rust_1_97_features.md) 内容高度重叠。`docs/` 版本提供工具链参考；`concept/` 版本为项目权威主轨。
+
+> **内容重叠提示**: 本文与 [`knowledge/06_ecosystem/emerging/05_rust_1_96.md`](../../knowledge/06_ecosystem/emerging/05_rust_1_96.md) 内容高度重叠。`knowledge/` 版本提供专项深入；`concept/` 版本为项目权威主轨。
+
 > **EN**: Rust 1.96.0 Stabilized Features
 > **Summary**: Rust 1.96.0（2026-05-28 stable）引入的关键语言与库特性：Copy-compatible range 类型、assert_matches! 宏（Macro）、NonZero 范围迭代、AssertUnwindSafe / LazyCell / LazyLock 的 From 实现、s390x vector assembly 以及 Cargo 安全修复。
 >

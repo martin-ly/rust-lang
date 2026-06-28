@@ -1,5 +1,7 @@
 # Async Closures 异步闭包
 
+> **内容重叠提示**: 本文与 [`docs/03_guides/03_async_closures_deep_dive.md`](../../../docs/03_guides/03_async_closures_deep_dive.md) 内容高度重叠。`concept/` 版本为项目权威主轨；本文保留作为专项深入。
+
 > **相关概念**: [异步闭包](../../../concept/03_advanced/02_async.md)
 > **Bloom 层级**: 理解
 > **📌 简介**: 异步闭包（`async || {}`）是 Rust 1.85 稳定的核心特性 [来源: RFC 3668 — Async Closures / 2024;

@@ -1,5 +1,9 @@
 # Async Closures 深度指南
 
+> **内容重叠提示**: 本文与 [`knowledge/06_ecosystem/emerging/01_async_closures.md`](../../knowledge/06_ecosystem/emerging/01_async_closures.md) 内容高度重叠。`concept/` 版本为项目权威主轨；本文保留作为专项深入。
+
+> **内容重叠提示**: 本文与 [`knowledge/03_advanced/async/02_async_closure.md`](../../knowledge/03_advanced/async/02_async_closure.md) 内容高度重叠。`concept/` 版本为项目权威主轨；本文保留作为专项深入。
+
 > **版本说明**：async closures 与 `AsyncFn*` traits 自 **Rust 1.85.0** 起已 stable。本文档按 **Rust 1.96.0+** 复审，示例可直接在 stable 编译器运行。
 
 > **分级**: [A]

@@ -1,5 +1,7 @@
 # Tree Borrows 详解
 
+> **内容重叠提示**: 本文与 [`concept/04_formal/36_tree_borrows_deep_dive.md`](../../../concept/04_formal/36_tree_borrows_deep_dive.md) 内容高度重叠。`concept/` 版本为项目权威主轨；本文保留作为专项深入。
+
 > **相关文档**: 请参阅 [knowledge/04_expert/miri/01_tree_borrows.md](../../../knowledge/04_expert/miri/01_tree_borrows.md)
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)

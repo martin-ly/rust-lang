@@ -1,5 +1,7 @@
 # Google Rust 课程映射
 
+> **内容重叠提示**: 本文与 [`concept/00_meta/comprehensive_rust_mapping.md`](../../concept/00_meta/comprehensive_rust_mapping.md) 内容高度重叠。`concept/` 版本为项目权威主轨；本文保留作为学习映射。
+
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **最后更新**: 2026-06-09
 >

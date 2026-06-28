@@ -1,5 +1,7 @@
 # Unsafe Fields 预览指南
 
+> **内容重叠提示**: 本文与 [`concept/07_future/13_unsafe_fields_preview.md`](../../concept/07_future/13_unsafe_fields_preview.md) 内容高度重叠。`concept/` 版本为项目权威主轨；本文保留作为专项深入。
+
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)

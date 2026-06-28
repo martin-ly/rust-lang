@@ -1,5 +1,7 @@
 # Safety Tags 概念预研：Unsafe 契约的机器可读标注
 
+> **内容重叠提示**: 本文与 [`docs/05_guides/05_safety_tags_guide.md`](../../docs/05_guides/05_safety_tags_guide.md) 内容高度重叠。`docs/` 版本提供专项深入；`concept/` 版本为项目权威主轨。
+
 > **代码状态**: ✅ 含可编译示例
 >
 > **EN**: Safety Tags Preview

@@ -1,5 +1,9 @@
 # Rust 1.97.0 稳定特性
 
+> **内容重叠提示**: 本文与 [`knowledge/06_ecosystem/emerging/05_rust_1_96.md`](../../knowledge/06_ecosystem/emerging/05_rust_1_96.md) 内容高度重叠。`concept/` 版本为项目权威主轨；本文保留作为工具链参考。
+
+> **内容重叠提示**: 本文与 [`concept/07_future/rust_1_96_stabilized.md`](../../concept/07_future/rust_1_96_stabilized.md) 内容高度重叠。`concept/` 版本为项目权威主轨；本文保留作为工具链参考。
+
 > **状态**: 预迁移草稿 — 正式发布日（2026-07-09）根据官方 Release Notes 最终确认勾选。
 > **Rust 版本**: 1.97.0 stable（预计 2026-07-09）
 > **对应预览文档**: `../../concept/07_future/rust_1_97_preview.md`

@@ -17,6 +17,10 @@
 >
 > **来源**: [Tree Borrows 论文 (PLDI 2023)](https://pldi23.sigplan.org/) · [Miri 文档 — Tree Borrows](https://github.com/rust-lang/miri/blob/master/borrow_stacked/README.md) · [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)
 
+> **内容重叠提示**: 本文与 [`docs/content/academic/10_tree_borrows_guide.md`](../../docs/content/academic/10_tree_borrows_guide.md) 内容高度重叠。`docs/` 版本提供专项深入；`concept/` 版本为项目权威主轨。
+
+> **内容重叠提示**: 本文与 [`knowledge/04_expert/miri/01_tree_borrows.md`](../../knowledge/04_expert/miri/01_tree_borrows.md) 内容高度重叠。`knowledge/` 版本提供专项深入；`concept/` 版本为项目权威主轨。
+
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---

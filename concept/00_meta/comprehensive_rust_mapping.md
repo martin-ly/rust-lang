@@ -12,6 +12,8 @@
 > **前置概念**: [Learning Guide](learning_guide.md) · [Bloom Taxonomy](03_bloom_taxonomy.md)
 > **后置概念**: [Application Domains](../06_ecosystem/04_application_domains.md)
 
+> **内容重叠提示**: 本文与 [`docs/01_learning/01_google_rust_mapping.md`](../../docs/01_learning/01_google_rust_mapping.md) 内容高度重叠。`docs/` 版本提供学习映射；`concept/` 版本为项目权威主轨。
+
 ---
 
 > **来源**: [Comprehensive Rust — Google](https://google.github.io/comprehensive-rust/) ·

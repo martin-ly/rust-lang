@@ -7,6 +7,8 @@
 
 # Rust 1.96 稳定特性全景
 
+> **内容重叠提示**: 本文与 [`knowledge/06_ecosystem/emerging/05_rust_1_96.md`](../../knowledge/06_ecosystem/emerging/05_rust_1_96.md) 内容高度重叠。`concept/` 版本为项目权威主轨；本文保留作为工具链参考。
+
 > **Bloom 层级**: L3 (应用)
 
 ---
