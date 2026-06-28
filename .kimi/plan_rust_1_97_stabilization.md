@@ -18,7 +18,7 @@
 | `VecDeque::retain_back` | 🧪 等效实现 (`rev()` 遍历) | ⚠️ **nightly 1.98.0 验证不存在**，可能推迟至 1.98+；若稳定：取消注释 | L35-50 |
 | `float_algebraic` | 🧪 概念伪代码 | 若稳定：添加实际属性语法示例；若未稳定：保持现状 | L62-80 |
 | `RandomSource` | 🧪 概念伪代码 | 若稳定：添加实际 trait 使用示例 | L91-101 |
-| `box_vec_non_null` | 🔄 PFCP | 若稳定：添加 `Box::into_raw_non_null` 实际调用 | L140-150 |
+| `box_vec_non_null` | 🔄 PFCP / 当前 nightly 方法不存在 | 若稳定：添加 `Box::into_non_null` / `Vec::into_non_null` 实际调用；名称以 Release Notes 为准 | L140-150 |
 | `int_format_into` | 🧪 Nightly | 若稳定：添加 `n.format_into(&mut buf)` 实际调用 | L155-165 |
 | C-variadic 定义 | 🔄 PFCP | 若稳定：恢复 `...` 语法签名 | L113-119 |
 

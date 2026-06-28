@@ -8,6 +8,7 @@
 >   - 2026-06-25 预检完成，`Rust 1.97.0 stable` 尚未发布（当前最新为 beta.4），详见 `reports/RUST_1_97_RELEASE_PREFLIGHT_2026_06_25.md`
 >   - 2026-06-28 发布日探测脚本 `scripts/probe_rust_197_apis.rs` 与执行脚本 `scripts/rust_197_release_day.sh` 就绪，倒计时排期见 `.kimi/RUST_197_RELEASE_COUNTDOWN_2026_06_28.md`
 >   - 2026-06-28 确认：workspace 因多处使用 nightly feature gates（`gen_blocks`、`never_type`、`core_intrinsics` 等），无法整体切换到 1.97.0 stable。发布日保持 nightly 工具链，仅激活已在 1.97.0 稳定的 API 并更新文档状态。
+>   - 2026-06-28 探测结果（nightly 2026-06-26，rustc 1.98.0）：`NonZero` bit ops、`const char::is_control`、`ptr::fn_addr_eq`、`NonZeroU32::midpoint/isqrt`、`const size_of_val`、`BuildHasherDefault::new const`、`Box::as_ptr`、`int::format_into` 已可用；`VecDeque::truncate_front` / `retain_back`、`Vec::into_non_null` 仍不可用。详见 `reports/RUST_197_API_PROBE_2026_06_28.md`。
 
 ---
 

@@ -9,8 +9,13 @@
 > **内容分级**: [实验级]
 > **跟踪版本**: beta 1.97.0（2026-05-22 从 master 分支，来源: [releases.rs](https://releases.rs/docs/1.97.0/)）
 > **预计稳定时间**: 2026-07-09（Rust 1.97.0 计划发布日期，来源: [Rust Forge](https://forge.rust-lang.org/)）
-> **当前阶段**: 🧪 Nightly 实验性 / 1.97 已进入 Beta 分支
+> **当前阶段**: 🧪 Nightly 实验性 / 1.97 已进入 Beta 分支 / 距离发布日还有 11 天
 > **发布日准备**: `.kimi/EXECUTION_RUST_1_97_RELEASE_2026_07_09.md` 已就绪；`CHANGELOG.md` 已预置 `[3.1.0]` 模板
+>
+> **2026-06-28 探测快讯**（详见 [`reports/RUST_197_API_PROBE_2026_06_28.md`](../../reports/RUST_197_API_PROBE_2026_06_28.md)）：
+>
+> - ✅ 当前 nightly（rustc 1.98.0，built 2026-06-26）已无需 feature gate 的 API：`NonZero` bit ops、`const char::is_control`、`NonZeroU32::midpoint/isqrt`、`ptr::fn_addr_eq`、`const size_of_val/align_of_val`、`BuildHasherDefault::new` const、`Box::as_ptr`、`int::format_into`。
+> - ❌ 仍不可用或仍需 feature gate：`VecDeque::truncate_front`（仍不稳定）、`VecDeque::retain_back`（方法不存在）、`Vec::into_non_null`（方法不存在）。
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **状态**: 部分特性已 MCP 通过，实现中；稳定版发布前特性集可能调整
 >
@@ -581,11 +586,13 @@ shuffle(&mut data, &mut rng);
 use std::ptr::NonNull;
 
 let boxed = Box::new(42);
-let ptr: NonNull<i32> = Box::into_raw_non_null(boxed);
+let ptr: NonNull<i32> = Box::into_non_null(boxed);
 
 let vec = vec![1, 2, 3];
-let (ptr, len, cap): (NonNull<i32>, usize, usize) = Vec::into_raw_parts_non_null(vec);
+let (ptr, len, cap): (NonNull<i32>, usize, usize) = Vec::into_non_null(vec);
 ```
+
+> **状态更新 (2026-06-28)**: 当前 nightly 上 `Vec::into_non_null` 方法尚不存在；`Box::into_non_null` 亦未探测到。示例使用 tracking issue 中的预期名称，发布日需以实际 API 为准。
 
 ---
 

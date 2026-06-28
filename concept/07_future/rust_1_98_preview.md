@@ -270,7 +270,7 @@ fn demo_198_apis() {
 |:---|:---|:---|
 | `VecDeque::truncate_front` / `retain_back` | 🔄 FCP finished / waiting | PR [#151973](https://github.com/rust-lang/rust/pull/151973) FCP 已完成，当前等待 review / FCP completion；已确定错过 1.97 cutoff，进入 1.98 通道 |
 | `RandomSource` / `DefaultRandomSource` | 🔄 等待 libs-api | PR [#157168](https://github.com/rust-lang/rust/pull/157168)，可插拔随机数源抽象 |
-| `Box::into_raw_non_null` / `Vec::into_raw_parts_non_null` (`box_vec_non_null`) | 🔄 PFCP | PR [#157226](https://github.com/rust-lang/rust/pull/157226)，转换为 `NonNull<T>` |
+| `Box::into_non_null` / `Vec::into_non_null` (`box_vec_non_null`) | 🔄 PFCP | tracking issue [#130364](https://github.com/rust-lang/rust/issues/130364)，转换为 `NonNull<T>`；当前 nightly 方法尚未出现，名称待确认 |
 | `#[optimize]` 属性 | 🔄 PFCP / Blocked | PR [#157273](https://github.com/rust-lang/rust/pull/157273)，函数级优化提示 |
 | `size_of_val_raw` / `align_of_val_raw` / `Layout::for_value_raw` | 🔄 等待 review | PR [#157572](https://github.com/rust-lang/rust/pull/157572)，裸值尺寸/对齐计算 |
 | C-variadic function definitions | 🔄 PFCP | PR [#155942](https://github.com/rust-lang/rust/pull/155942)，定义 C 风格可变参数函数 |

@@ -35,14 +35,47 @@
 - **Rust 1.97.0 发布日准备**：
   - 复核 `.kimi/EXECUTION_RUST_1_97_RELEASE_2026_07_09.md`，确认 `truncate_front` / `retain_back` 存在推迟至 1.98 风险。
   - 验证 `crates/c08_algorithms/src/rust_197_features.rs` 已保留等效实现与 fallback 注释。
-  - 新建 `exercises/tests/l3_rust_197_alignment.rs`（8 个可运行测验），对 `truncate_front` / `retain_back` 使用等效实现以保持当前工具链可编译；发布日根据实际稳定状态切换为真实 API。
+  - 新建 `exercises/tests/l3_rust_197_alignment.rs`（13 个可运行测验），覆盖已验证可用的 1.97 API；对 `truncate_front` / `retain_back` 使用等效实现以保持当前工具链可编译；发布日根据实际稳定状态切换为真实 API。
   - 清理 `concept/07_future/rust_1_97_preview.md`：修复重复过渡段落、冗余定理链、5.5/5.6 重复编号，同步 int_format_into / float_algebraic 状态为 1.98 已确认。
+  - 扩展 `scripts/probe_rust_197_apis.rs` 至 12 项 API，生成 `reports/RUST_197_API_PROBE_2026_06_28.md`：当前 nightly 上 9 项已可用（含 `Box::as_ptr`、`int::format_into`），`VecDeque::truncate_front` / `retain_back` / `Vec::into_non_null` 仍不可用。
+  - 新增 `docs/06_toolchain/06_21_rust_1_97_features.md` 稳定特性文档迁移模板。
 - **国际化入口补齐**：
   - `README.md` 新增 🌍 国际学习者说明徽章与段落，对接 TRPL 3rd Ed / Brown Book / Google Comprehensive Rust / Rust By Example。
   - `CONTRIBUTING.md` 新增 i18n 规范小节，说明 `concept/` 文件 `**EN**` / `**Summary**` 要求与自查脚本。
 - **权威事实复核**：
   - 确认 async closures / Rust 2024 Edition / `&raw const` 等关键事实修正已落地，`check_version_facts.py` 已将 `&const` 列为非官方术语检测项。
-- **验证**：`cargo test --workspace`、`cargo clippy --workspace --all-features -- -D warnings` 均通过；`l3_rust_197_alignment.rs` 8 passed。
+- **验证**：`cargo test --workspace`、`cargo clippy --workspace --all-features -- -D warnings` 均通过；`l3_rust_197_alignment.rs` 13 passed。
+
+### B3 结构债务清理收尾（2026-06-28）
+
+- **Crates 顶层文档注释清理**：
+  - 清理 `c03_control_fn`、`c04_generic`、`c06_async`、`c07_process`、`c08_algorithms`、`c09_design_pattern`、`c10_networks`、`c11_macro_system`、`c12_wasm` 共 9 个 crate 的 `src/lib.rs` 中英文混杂/机器翻译文档注释，统一为中文说明。
+- **Boilerplate 文档模板化与批量生成**：
+  - 新增 `scripts/templates/crate_docs/` 7 个模板文件（README / ONE_PAGE_SUMMARY / 00_MASTER_INDEX / FAQ / Glossary / PENDING_ITEMS / MIND_MAP）。
+  - 新增 `scripts/generate_crate_docs_boilerplate.py` 生成脚本（默认 dry-run，支持 `--yes`）。
+  - 批量生成 56 个缺失 boilerplate 文件，覆盖 17 个 crate，实现 7 类 boilerplate 文档 100% 覆盖。
+  - 更新 `scripts/audit_crate_docs_boilerplate.py` 审计摘要路径为 `target/crate_docs_boilerplate_audit.json`。
+
+### Rust 1.97.0 稳定特性条目草稿（发布日按 Release Notes 最终确认）
+
+> 以下条目基于 2026-06-28 nightly 探测结果与 `releases.rs` beta 分支信息（2026-05-22 从 master 分支）整理，正式发布日需根据官方 Release Notes 增删。
+
+- **标准库新 API**
+  - `NonZero` 位操作：`highest_one` / `lowest_one` / `bit_width`（1.97 预期稳定）。
+  - `char::is_control()` 在常量上下文中可用（1.97 预期稳定）。
+  - `NonZeroU32::midpoint` / `isqrt`（1.97 预期稳定）。
+  - `ptr::fn_addr_eq`（1.97 预期稳定）。
+  - `const size_of_val` / `const align_of_val`（1.97 预期稳定）。
+  - `BuildHasherDefault::new` 标记为 `const fn`（1.97 预期稳定）。
+  - `Box::as_ptr` / `Box::as_mut_ptr`（nightly 已可用，需核对是否进入 1.97.0）。
+  - `int::format_into`（nightly 已可用，需核对是否进入 1.97.0）。
+- **推迟或仍不稳定**
+  - `VecDeque::truncate_front`：当前 nightly 仍需 `#![feature(vec_deque_truncate_front)]`，存在推迟至 1.98 风险。
+  - `VecDeque::retain_back`：当前 nightly 方法不存在，保留等效实现。
+  - `Box::into_non_null` / `Vec::into_non_null`：当前 nightly 方法不存在，保留等效实现。
+- **工具链策略**
+  - workspace 仍保持 `nightly` 工具链，因为多个 crate 声明 nightly-only feature gates（`gen_blocks`、`never_type`、`core_intrinsics` 等）。
+  - 1.97.0 已稳定的 API 在 nightly 上同样可用，代码中保留 fallback 并在发布日按 Release Notes 激活真实调用。
 
 ### P2 深度内容冲刺：rustc / Cargo / Kani / TRPL-Brown 对齐（2026-06-26）
 

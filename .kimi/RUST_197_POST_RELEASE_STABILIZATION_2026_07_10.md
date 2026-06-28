@@ -47,8 +47,9 @@
 
 | 假设 | 实际 | 处理 |
 |---|---|---|
-| `VecDeque::truncate_front` 进入 1.97 | 待确认 | 若未进，回滚等效实现 |
-| `VecDeque::retain_back` 进入 1.97 | 待确认 | 若未进，更新注释为 1.98 |
+| `VecDeque::truncate_front` 进入 1.97 | 待确认 | 若未进，保留等效实现并更新注释为 1.98 |
+| `VecDeque::retain_back` 进入 1.97 | 当前 nightly 方法不存在，大概率推迟 | 若未进，更新注释为 1.98+ |
+| `Box::as_ptr` / `int::format_into` 进入 1.97 | nightly 可用，需核对 beta cutoff | 若未进，保留等效实现并标注 1.98 |
 | 1.97.0 按时发布 | 待确认 | 若延迟，保持 nightly 工具链 |
 
 ---

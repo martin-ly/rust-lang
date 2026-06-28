@@ -430,32 +430,52 @@
 > 以下术语来自 `crates/c08_algorithms/src/rust_197_features.rs` 与 Rust 官方 tracking issues，
 > 在发布日前标记为候选状态，发布日根据稳定内容转为正式术语。
 
-- **`VecDeque::truncate_front`** (VecDeque truncate_front) [L2] — 截断双端队列前部，保留后部 `n` 个元素；与 `truncate` 互补 — [std tracking](https://github.com/rust-lang/rust/issues/ ) — 状态：📋 候选（1.97 预期稳定）
+### ✅ 已验证可用（nightly 2026-06-26，待 1.97 Release Notes 最终确认）
 
-- **`VecDeque::retain_back`** (VecDeque retain_back) [L2] — 从尾部开始保留满足条件的元素；与 `retain` 互补 — [PR #151973](https://github.com/rust-lang/rust/pull/151973) — 状态：🧪 可能推迟至 1.98+，需发布日确认
+- **`NonZero::highest_one` / `lowest_one` / `bit_width`** (NonZero bit operations) [L2] — `NonZero` 整数的位查询方法，避免零值特殊处理 — [tracking issue #130369](https://github.com/rust-lang/rust/issues/130369) — 状态：✅ nightly 可用 / 1.97 预期稳定
 
-- **`float_algebraic`** (Float Algebraic Optimization) [L3] — 允许编译器按代数规则重组浮点运算，以精度换性能 — [PR #157168](https://github.com/rust-lang/rust/pull/157168) — 状态：🔄 PFCP / 候选
+- **`char::is_control` const** (const char::is_control) [L2] — `char::is_control()` 在常量上下文中可用 — 状态：✅ nightly 可用 / 1.97 预期稳定
 
-- **`RandomSource`** (RandomSource) [L2] — 标准库随机数源 trait，统一 `OsRng`、`thread_rng` 等来源 — [PR #157226](https://github.com/rust-lang/rust/pull/157226) — 状态：📋 候选（等待 libs-api 决策）
+- **`NonZeroU32::midpoint`** (NonZero midpoint) [L2] — 计算两个 `NonZero` 值的中点，避免溢出 — 状态：✅ nightly 可用 / 1.97 预期稳定
 
-- **`DefaultRandomSource`** (DefaultRandomSource) [L2] — `RandomSource` 的标准库默认实现 — [PR #157226](https://github.com/rust-lang/rust/pull/157226) — 状态：📋 候选
+- **`NonZeroU32::isqrt`** (NonZero isqrt) [L2] — `NonZero` 整数的整数平方根 — 状态：✅ nightly 可用 / 1.97 预期稳定
 
-- **`C-variadic definitions`** (C Variadic Function Definitions) [L3] — 在 Rust 中直接定义 `unsafe extern "C" fn f(fmt: *const u8, args: ...)` 风格的可变参数函数 — [PR #155942](https://github.com/rust-lang/rust/pull/155942) — 状态：🔄 PFCP / 候选
+- **`ptr::fn_addr_eq`** (fn_addr_eq) [L2] — 比较两个函数指针的地址是否相等，替代不稳定的 `==` 比较 — 状态：✅ nightly 可用 / 1.97 预期稳定
 
-- **`Box::into_raw_non_null`** (Box into_raw_non_null) [L2] — 将 `Box<T>` 转换为 `NonNull<T>`，避免空指针检查 — [PR #157273](https://github.com/rust-lang/rust/pull/157273) — 状态：🔄 PFCP / 候选
+- **`const size_of_val` / `const align_of_val`** (const size_of_val / align_of_val) [L2] — `std::mem::size_of_val` / `align_of_val` 在 `const fn` 中可用 — 状态：✅ nightly 可用 / 1.97 预期稳定
 
-- **`Vec::into_raw_parts_non_null`** (Vec into_raw_parts_non_null) [L2] — 将 `Vec<T>` 解包为 `(NonNull<T>, len, cap)` — [PR #157273](https://github.com/rust-lang/rust/pull/157273) — 状态：🔄 PFCP / 候选
+- **`BuildHasherDefault::new` const** (const BuildHasherDefault::new) [L2] — `BuildHasherDefault::new()` 为 `const fn` — 状态：✅ nightly 可用 / 1.97 预期稳定
 
-- **`int_format_into`** (Integer Format Into) [L2] — 将整数直接格式化为固定字节缓冲区，避免堆分配 — 状态：🧪 Nightly / 候选
+- **`Box::as_ptr` / `Box::as_mut_ptr`** (Box as_ptr / as_mut_ptr) [L2] — 不物化引用的 `Box` 原始指针访问，带 aliasing 保证 — [tracking issue #129090](https://github.com/rust-lang/rust/issues/129090) — 状态：✅ nightly 可用 / 1.97 候选（需核对 beta cutoff 2026-05-22）
 
-- **`proc_macro_value`** (Proc Macro Value) [L3] — 允许过程宏在编译期产生值（而不仅是 token 流） — [PR #152092](https://github.com/rust-lang/rust/pull/152092) — 状态：📋 等待 review / 候选
+- **`int::format_into`** (Integer format_into) [L2] — 将整数直接格式化为 `core::fmt::NumBuffer`，避免堆分配 — [tracking issue #138215](https://github.com/rust-lang/rust/issues/138215) — 状态：✅ nightly 可用 / 1.97 候选（需核对 beta cutoff 2026-05-22）
+
+### ❌ 当前 nightly 仍不可用 / 存在推迟风险
+
+- **`VecDeque::truncate_front`** (VecDeque truncate_front) [L2] — 截断双端队列前部，保留后部 `n` 个元素；与 `truncate` 互补 — [tracking issue #140667](https://github.com/rust-lang/rust/issues/140667) — 状态：❌ 仍需 `#![feature(vec_deque_truncate_front)]`，可能推迟至 1.98+
+
+- **`VecDeque::retain_back`** (VecDeque retain_back) [L2] — 从尾部开始保留满足条件的元素；与 `retain` 互补 — [PR #151973](https://github.com/rust-lang/rust/pull/151973) — 状态：❌ 当前 nightly 方法不存在，可能已移除或推迟至 1.98+
+
+- **`Box::into_non_null`** / **`Vec::into_non_null`** (Box/Vec into_non_null) [L2] — 将 `Box<T>` / `Vec<T>` 转换为 `NonNull<T>`，避免空指针检查 — [tracking issue #130364](https://github.com/rust-lang/rust/issues/130364) — 状态：❌ 当前 nightly 方法不存在，保留等效实现
+
+### 🔄 仍处于 PFCP / 等待 review 的候选
+
+- **`float_algebraic`** (Float Algebraic Optimization) [L3] — 允许编译器按代数规则重组浮点运算，以精度换性能 — [PR #157168](https://github.com/rust-lang/rust/pull/157168) — 状态：🔄 PFCP / 1.98 候选
+
+- **`RandomSource`** (RandomSource) [L2] — 标准库随机数源 trait，统一 `OsRng`、`thread_rng` 等来源 — [PR #157226](https://github.com/rust-lang/rust/pull/157226) — 状态：🔄 PFCP / 1.98 候选
+
+- **`DefaultRandomSource`** (DefaultRandomSource) [L2] — `RandomSource` 的标准库默认实现 — [PR #157226](https://github.com/rust-lang/rust/pull/157226) — 状态：🔄 PFCP / 1.98 候选
+
+- **`C-variadic definitions`** (C Variadic Function Definitions) [L3] — 在 Rust 中直接定义 `unsafe extern "C" fn f(fmt: *const u8, args: ...)` 风格的可变参数函数 — [PR #155942](https://github.com/rust-lang/rust/pull/155942) — 状态：🔄 PFCP / 1.98 候选
+
+- **`proc_macro_value`** (Proc Macro Value) [L3] — 允许过程宏在编译期产生值（而不仅是 token 流） — [PR #152092](https://github.com/rust-lang/rust/pull/152092) — 状态：📋 等待 review / 1.98 候选
 
 ---
 
 > **文档版本**: 2.1
-> **术语总数**: 100 + 10 候选
+> **术语总数**: 100 + 17 候选
 > **与 TRPL 一致率**: 100%（所有 L1~L3 术语均与 TRPL / 官方 Reference 英文原文一致）
-> **最后更新**: 2026-06-22
+> **最后更新**: 2026-06-28
 
 ---
 

@@ -25,8 +25,8 @@
 | 项目 | 内容 |
 |---|---|
 | 函数 | `demo_nonzero_bit_ops` |
-| 等效实现行 | 23 ~ 27 |
-| 真实 API 行 | 17 ~ 21（已注释） |
+| 等效实现行 | 24 ~ 28 |
+| 真实 API 行 | 18 ~ 22（已注释） |
 | 激活操作 | 取消注释 17~21 行；删除 23~27 行及分隔注释 |
 | 验证 | `cargo test -p c08_algorithms test_nonzero_bit_ops` |
 | Fallback | 若未稳定，保留 23~27 行等效实现 |
@@ -36,8 +36,8 @@
 | 项目 | 内容 |
 |---|---|
 | 函数 | `demo_char_is_control_const` |
-| 等效实现行 | 42 ~ 46 |
-| 真实 API 行 | 38 ~ 40（已注释） |
+| 等效实现行 | 44 ~ 48 |
+| 真实 API 行 | 39 ~ 41（已注释） |
 | 激活操作 | 取消注释 38~40 行；删除 42~46 行 |
 | 验证 | `cargo test -p c08_algorithms test_char_is_control_const` |
 
@@ -46,8 +46,8 @@
 | 项目 | 内容 |
 |---|---|
 | 函数 | `demo_vecdeque_truncate_front` |
-| 等效实现行 | 69 ~ 73 |
-| 真实 API 行 | 65 ~ 67（已注释） |
+| 等效实现行 | 72 ~ 76 |
+| 真实 API 行 | 67 ~ 69（已注释） |
 | 激活操作 | 取消注释 65~67 行；删除 69~73 行 |
 | 验证 | `cargo test -p c08_algorithms test_vecdeque_truncate_front` |
 | 边界 | 空 deque、`n >= len`、`n = 0` |
@@ -57,11 +57,33 @@
 | 项目 | 内容 |
 |---|---|
 | 函数 | `demo_vecdeque_retain_back` |
-| 等效实现行 | 91 ~ 98 |
-| 真实 API 行 | 87 ~ 89（已注释） |
+| 等效实现行 | 95 ~ 102 |
+| 真实 API 行 | 90 ~ 92（已注释） |
 | 激活操作 | 若 Release Notes 确认稳定，取消注释 87~89 行；删除 91~98 行 |
 | 验证 | `cargo test -p c08_algorithms test_vecdeque_retain_back` |
 | Fallback | 若未稳定，更新顶部注释为 `推迟至 1.98`，保留等效实现 |
+
+### 5. `Box::as_ptr`
+
+| 项目 | 内容 |
+|---|---|
+| 函数 | `demo_box_as_ptr` |
+| 等效实现行 | 228 ~ 232 |
+| 真实 API 行 | 220 ~ 223（已注释） |
+| 激活操作 | 若 Release Notes 确认稳定，取消注释 220~223 行；删除 225~232 行 |
+| 验证 | `cargo test -p c08_algorithms test_box_as_ptr` |
+| Fallback | 若未稳定，更新注释为 `推迟至 1.98`，保留等效实现 |
+
+### 6. `int::format_into`
+
+| 项目 | 内容 |
+|---|---|
+| 函数 | `demo_int_format_into` |
+| 等效实现行 | 252 ~ 260 |
+| 真实 API 行 | 246 ~ 249（已注释） |
+| 激活操作 | 若 Release Notes 确认稳定，取消注释 246~249 行；删除 251~260 行 |
+| 验证 | `cargo test -p c08_algorithms test_int_format_into` |
+| Fallback | 若未稳定，更新注释为 `推迟至 1.98`，保留等效实现 |
 
 ---
 

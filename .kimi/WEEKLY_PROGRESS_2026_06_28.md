@@ -28,7 +28,9 @@
 | B4 | 复查重复/编号冲突文件 | Kimi | ✅ 已完成 | 2026-06-28 |
 | B5 | 补全 `crates/common` examples/tests | Kimi | ✅ 已完成 | 2026-06-28 |
 | B6 | 处理 `BorrowSanitizer` 文件重叠 | Kimi | ✅ 已完成 | 2026-06-28 |
-| B7 | 模板化 per-crate boilerplate docs | Kimi | ⏸️ 推迟 | 2026-07 中下旬 |
+| B7 | 清理 9 个 crates `src/lib.rs` 中英文混杂文档注释 | Kimi | ✅ 已完成 | 2026-06-28 |
+| B8 | 模板化 per-crate boilerplate docs | Kimi | ✅ 已完成 | 2026-06-28 |
+| B9 | 批量生成缺失 boilerplate 文档（实际生成 56 个文件） | Kimi | ✅ 已完成 | 2026-06-28 |
 
 ### C. Rust 1.97.0 发布日准备
 
@@ -37,6 +39,13 @@
 | C1 | 复核 `rust-toolchain.toml`、1.97 特性代码、preview 文档 | Kimi | ✅ 已完成 | 2026-06-28 |
 | C2 | 创建发布日自动检查脚本 | Kimi | ✅ 已完成 | 2026-06-28 |
 | C3 | 准备 `VecDeque::truncate_front` / `retain_back` fallback 切换策略 | Kimi | ✅ 已就绪 | 2026-06-28 |
+| C3b | 扩展 API 探测脚本至 12 项并生成探测报告 | Kimi | ✅ 已完成 | 2026-06-28 |
+| C3c | 更新术语表 1.97 候选术语状态 | Kimi | ✅ 已完成 | 2026-06-28 |
+| C3d | 准备 `CHANGELOG.md [3.1.0]` 1.97 特性条目草稿 | Kimi | ✅ 已完成 | 2026-06-28 |
+| C3e | 扩展 `exercises/tests/l3_rust_197_alignment.rs` 至 13 个测验 | Kimi | ✅ 已完成 | 2026-06-28 |
+| C3f | 全 workspace 回归测试 | Kimi | ✅ 已完成 | 2026-06-28 |
+| C3g | 整理发布日人工决策清单 | Kimi | ✅ 已完成 | 2026-06-28 |
+| C3h | 修正 1.97/1.98 `box_vec_non_null` API 名称（`into_raw_non_null` → `into_non_null`） | Kimi | ✅ 已完成 | 2026-06-28 |
 | C4 | 预演 `rust-toolchain.toml` → `1.97.0` 切换 | Kimi | ⏳ 2026-07-08 执行 | 2026-07-08 |
 | C5 | 发布日执行 `.kimi/EXECUTION_RUST_1_97_RELEASE_2026_07_09.md` | Kimi | ⏳ 2026-07-09 执行 | 2026-07-09 |
 
@@ -45,7 +54,8 @@
 | 编号 | 任务 | 负责人 | 状态 | 预计完成 |
 |---|---|---|---|---|
 | D1 | 生成本周进度报告（本文件） | Kimi | ✅ 已完成 | 2026-06-28 |
-| D2 | 生成下周计划文件 | Kimi | ⏳ 2026-07-05 生成 | 2026-07-05 |
+| D2 | 生成下周计划文件 | Kimi | ✅ 已提前生成 | 2026-07-05 |
+| D3 | 生成 BCD 轨道状态总览 | Kimi | ✅ 已完成 | 2026-06-28 |
 
 ---
 
@@ -67,9 +77,13 @@
 - `unsafe_rust/` 练习主题：**7 个练习 + 17 个集成测试**
 - `crates/common` 新增示例/测试：**3 个文件**
 - 删除冗余 BorrowSanitizer 预览文件：**1 个**
-- crate docs 核心 boilerplate 覆盖率：**13/13 crate**（README / ONE_PAGE_SUMMARY / 00_MASTER_INDEX）
+- crate docs 核心 boilerplate 覆盖率：**17/17 crate**（README / ONE_PAGE_SUMMARY / 00_MASTER_INDEX / FAQ / Glossary / PENDING_ITEMS / MIND_MAP）
 - c13_embedded 新增 boilerplate docs：**3 个**
 - 删除重复 `README (2).md`：**1 个**
+- 清理 crates `src/lib.rs` 中英文混杂注释：**9 个 crate**
+- 1.97 API 探测脚本覆盖 API：**12 项（9 项已可用）**
+- `l3_rust_197_alignment.rs` 1.97 特性测验：**13 个**
+- 术语表 1.97 候选术语更新：**17 项**
 - 全 workspace 编译/测试/Clippy 状态：**✅ 通过**
 - 距离 Rust 1.97.0 发布日：**11 天**
 

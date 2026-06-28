@@ -28,9 +28,9 @@ fn test_vecdeque_truncate_front_retains_back() {
 }
 
 /// 测验2: Box::into_raw + NonNull 提供对堆分配的非空指针
-/// 对应 1.97 `box_vec_non_null` 系列 API 的设计动机。
+/// 对应 `box_vec_non_null` 系列 API（预期 API 为 `Box::into_non_null`）的设计动机。
 #[test]
-fn test_box_into_raw_non_null() {
+fn test_box_into_non_null_concept() {
     let b = Box::new(42i32);
     let raw = Box::into_raw(b);
     let maybe_null = std::ptr::NonNull::new(raw);

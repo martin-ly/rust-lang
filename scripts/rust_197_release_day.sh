@@ -88,14 +88,33 @@ cat <<'EOF'
 请根据 Rust 1.97.0 Release Notes 和上方探测结果，手动检查并激活以下文件中的等效实现：
 
   crates/c08_algorithms/src/rust_197_features.rs
-    - VecDeque::truncate_front
-    - VecDeque::retain_back（若未进入 1.97，保留等效实现并标注“推迟至 1.98”）
-    - NonZero 位操作 API (highest_one / lowest_one / bit_width)
-    - char::is_control() const
-    - float_algebraic（若未进入 1.97，标注 1.98）
-    - RandomSource / DefaultRandomSource（若未进入 1.97，标注跟踪中）
-    - C-variadic fn definitions（若未进入 1.97，标注 nightly）
-    - box_vec_non_null（若未进入 1.97，标注 1.98）
+    ✅ 大概率已稳定（nightly 已可用，核对 Release Notes 后激活）：
+      - NonZero 位操作 API (highest_one / lowest_one / bit_width)
+      - char::is_control() const
+      - NonZeroU32::midpoint / isqrt
+      - ptr::fn_addr_eq
+      - const size_of_val / align_of_val
+      - BuildHasherDefault::new const
+
+    ⚠️ 需核对 beta cutoff 2026-05-22：
+      - Box::as_ptr / Box::as_mut_ptr
+      - int::format_into
+
+    ❌ 当前 nightly 仍不可用 / 存在推迟风险：
+      - VecDeque::truncate_front（若未进 1.97，标注 1.98）
+      - VecDeque::retain_back（当前 nightly 方法不存在，标注 1.98+）
+      - Box::into_non_null / Vec::into_non_null（标注 1.98+）
+
+    🔄 仍处于 PFCP / 等待 review：
+      - float_algebraic
+      - RandomSource / DefaultRandomSource
+      - C-variadic fn definitions
+      - proc_macro_value
+
+  参考文档：
+    - .kimi/RUST_197_API_ACTIVATION_GUIDE.md
+    - .kimi/RUST_197_RELEASE_DAY_DECISIONS.md
+    - reports/RUST_197_API_PROBE_2026_06_28.md
 
   建议验证命令（保持 nightly 工具链）:
     cargo check -p c08_algorithms
@@ -111,9 +130,15 @@ echo "--- 阶段 4: 全 Workspace 验证 ---"
 
 cargo check --workspace
 cargo test --workspace
-cargo clippy --workspace --all-features -- -D warnings
+if cargo clippy --workspace --all-features -- -D warnings; then
+    echo "✅ Clippy 全 features 通过"
+else
+    echo "⚠️ Clippy --all-features 失败。常见原因："
+    echo "   - Windows 上 c10_networks 需要 Npcap/WinPcap SDK 的 wpcap.lib / Packet.lib"
+    echo "   - 请尝试 cargo clippy --workspace（不含 --all-features）或单独修复 feature 相关链接问题"
+fi
 
-echo "✅ 全 Workspace 验证通过"
+echo "✅ 全 Workspace 基础验证通过"
 echo ""
 
 # ---------------------------------------------------------------------------
@@ -148,9 +173,11 @@ echo "--- 阶段 6: 练习补全 ---"
 cat <<'EOF'
 请根据实际稳定特性更新或新增练习：
 
-  - exercises/tests/l3_rust_197_alignment.rs（已存在，按实际 API 切换）
-  - 新增 VecDeque::truncate_front / retain_back 行为验证
-  - 新增 NonZero 位操作 / char::is_control const 测验
+  - exercises/tests/l3_rust_197_alignment.rs（已存在 13 个测验，按实际 API 切换）
+    - NonZero 位操作 / char::is_control const / NonZeroU32::midpoint / isqrt
+    - ptr::fn_addr_eq / const size_of_val / BuildHasherDefault::new const
+    - VecDeque::truncate_front / retain_back（若已稳定，将 helper 替换为真实 API）
+  - 若 Release Notes 出现未覆盖的新 API，在此文件中补充
 EOF
 
 echo ""

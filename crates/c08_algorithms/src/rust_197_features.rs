@@ -13,6 +13,8 @@ use std::collections::VecDeque;
 /// `NonZero` 整数新增位查询方法：`highest_one` / `lowest_one` / `bit_width`
 ///
 /// 这些 API 避免了在查询前对零值进行特殊处理，因为 `NonZero` 类型本身已保证非零。
+///
+/// ✅ 已在 nightly 2026-06-26（rustc 1.98.0）验证可用。
 pub fn demo_nonzero_bit_ops() {
     // 1.97+ 实际用法:
     // let n = NonZeroU32::new(0b10100).unwrap();
@@ -34,6 +36,8 @@ pub fn demo_nonzero_bit_ops() {
 /// `char::is_control()` 在 Rust 1.97 中变为 `const fn`
 ///
 /// 使得字符分类可在编译期常量/静态项中使用。
+///
+/// ✅ 已在 nightly 2026-06-26（rustc 1.98.0）验证可用。
 pub fn demo_char_is_control_const() {
     // 1.97+ 实际用法:
     // const SPACE_CTRL: bool = ' '.is_control(); // false
@@ -53,6 +57,9 @@ pub fn demo_char_is_control_const() {
 /// `VecDeque::truncate_front(n)` — 截断前部，保留后部 `n` 个元素
 ///
 /// 与 `truncate(n)`（保留前部 `n` 个，截断后部）互补，实现双端队列的对称操作。
+///
+/// ⚠️ 状态更新 (2026-06-28)：当前 nightly 仍需要 `#![feature(vec_deque_truncate_front)]`，
+/// 发布日需再次核对 1.97.0 Release Notes。
 ///
 /// ```text
 /// 原始: [1, 2, 3, 4, 5]
@@ -171,19 +178,20 @@ pub extern "C" fn demo_c_variadic_definition(_fmt: *const u8) {
 // 5. box_vec_non_null（PFCP 中）
 // ============================================================================
 
-/// `Box::into_raw_non_null` / `Vec::into_raw_parts_non_null` 提供非空指针转换
+/// `Box::into_non_null` / `Vec::into_non_null` 提供非空指针转换
 ///
-/// 1.98 状态: PFCP (PR #157226)
+/// 1.98 状态: PFCP (PR #157226)。当前 nightly 上 `Box::into_non_null` / `Vec::into_non_null`
+/// 方法均不存在，可能名称或实现仍在调整。
 /// 设计目标: 允许 `Box<T>` 和 `Vec<T>` 直接转换为 `NonNull<T>`，避免空指针检查开销。
 #[allow(dead_code)]
 pub fn demo_box_vec_non_null() {
     // 概念性伪代码 (1.97+ 稳定后):
     // use std::ptr::NonNull;
     // let boxed = Box::new(42);
-    // let ptr: NonNull<i32> = Box::into_raw_non_null(boxed);
+    // let ptr: NonNull<i32> = Box::into_non_null(boxed);
     //
     // let vec = vec![1, 2, 3];
-    // let (ptr, len, cap): (NonNull<i32>, usize, usize) = Vec::into_raw_parts_non_null(vec);
+    // let (ptr, len, cap): (NonNull<i32>, usize, usize) = Vec::into_non_null(vec);
 
     // 当前等效实现:
     let boxed = Box::new(42);
@@ -205,6 +213,7 @@ pub fn demo_box_vec_non_null() {
 /// `Box::as_ptr` / `Box::as_mut_ptr` — 不物化引用的原始指针访问
 ///
 /// 1.98 状态: 已合并至 master (PR #157876)。此前为 nightly-only `box_as_ptr`。
+/// ✅ 已在 nightly 2026-06-26（rustc 1.98.0）验证可用；发布日需核对 1.97.0 Release Notes。
 /// 关键保证: 该方法不会 materialize 对底层内存的引用，因此在 aliasing model 中
 /// 与 `Box::leak` / `Box::as_ref` 不同，可与其它 raw pointer 操作安全交错。
 #[allow(dead_code)]
@@ -231,7 +240,8 @@ pub fn demo_box_as_ptr() {
 
 /// 整数格式化到现有缓冲区，避免堆分配
 ///
-/// 1.98 状态: 已合并至 master (PR #152544)，因晚于 1.97 beta cutoff 进入 1.98。
+/// 1.98 状态: 已合并至 master (PR #152544)。
+/// ✅ 已在 nightly 2026-06-26（rustc 1.98.0）验证可用；发布日需核对 1.97.0 Release Notes。
 /// 设计目标: `write!(buf, "{}", x)` 的零分配替代方案，用于 `no_std` 和嵌入式场景。
 #[allow(dead_code)]
 pub fn demo_int_format_into() {

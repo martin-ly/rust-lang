@@ -78,7 +78,7 @@ fn main() {
     ));
 
     results.push((
-        "NonZero bit ops",
+        "NonZero bit ops (highest_one/lowest_one/bit_width)",
         probe(
             "NonZero bit ops",
             r#"
@@ -101,6 +101,119 @@ fn main() {
 const _SPACE_CTRL: bool = ' '.is_control();
 const _NUL_CTRL: bool = '\0'.is_control();
 fn main() {}
+"#,
+        ),
+    ));
+
+    results.push((
+        "NonZeroU32::midpoint",
+        probe(
+            "NonZeroU32::midpoint",
+            r#"
+use std::num::NonZeroU32;
+fn main() {
+    let a = NonZeroU32::new(10).unwrap();
+    let b = NonZeroU32::new(20).unwrap();
+    assert_eq!(a.midpoint(b).get(), 15);
+}
+"#,
+        ),
+    ));
+
+    results.push((
+        "NonZeroU32::isqrt",
+        probe(
+            "NonZeroU32::isqrt",
+            r#"
+use std::num::NonZeroU32;
+fn main() {
+    let n = NonZeroU32::new(25).unwrap();
+    assert_eq!(n.isqrt().get(), 5);
+}
+"#,
+        ),
+    ));
+
+    results.push((
+        "ptr::fn_addr_eq",
+        probe(
+            "ptr::fn_addr_eq",
+            r#"
+fn sample() {}
+fn main() {
+    let f: fn() = sample;
+    assert!(std::ptr::fn_addr_eq(f, f));
+}
+"#,
+        ),
+    ));
+
+    results.push((
+        "const mem::size_of_val / align_of_val",
+        probe(
+            "const size_of_val",
+            r#"
+const fn size_and_align<T>(val: &T) -> (usize, usize) {
+    (std::mem::size_of_val(val), std::mem::align_of_val(val))
+}
+fn main() {
+    let x = 42u64;
+    assert_eq!(size_and_align(&x), (8, 8));
+}
+"#,
+        ),
+    ));
+
+    results.push((
+        "BuildHasherDefault::new const",
+        probe(
+            "BuildHasherDefault::new const",
+            r#"
+use std::hash::BuildHasherDefault;
+use std::collections::hash_map::DefaultHasher;
+const _BH: BuildHasherDefault<DefaultHasher> = BuildHasherDefault::new();
+fn main() {}
+"#,
+        ),
+    ));
+
+    results.push((
+        "Vec::into_non_null",
+        probe(
+            "Vec::into_non_null",
+            r#"
+fn main() {
+    let v = vec![1, 2, 3];
+    let _non_null = Vec::into_non_null(v);
+}
+"#,
+        ),
+    ));
+
+    results.push((
+        "Box::as_ptr",
+        probe(
+            "Box::as_ptr",
+            r#"
+fn main() {
+    let b = Box::new(42);
+    let _ptr = Box::as_ptr(&b);
+}
+"#,
+        ),
+    ));
+
+    results.push((
+        "int::format_into",
+        probe(
+            "int::format_into",
+            r#"
+use core::fmt::NumBuffer;
+fn main() {
+    let mut buf = NumBuffer::new();
+    let n = 1972u32;
+    assert_eq!(n.format_into(&mut buf), "1972");
+}
 "#,
         ),
     ));

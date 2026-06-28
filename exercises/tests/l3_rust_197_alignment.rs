@@ -3,6 +3,10 @@
 //! 覆盖 Rust 1.97.0（预计 2026-07-09 stable）引入的关键语言/库特性：
 //! - `NonZero<T>::highest_one` / `lowest_one` / `bit_width`
 //! - `char::is_control()` const 稳定化
+//! - `NonZeroU32::midpoint` / `isqrt`
+//! - `ptr::fn_addr_eq`
+//! - `const size_of_val` / `const align_of_val`
+//! - `BuildHasherDefault::new` const
 //! - `VecDeque::truncate_front`（1.97 候选；若未稳定则使用等效实现）
 //! - `VecDeque::retain_back`（1.97 候选；当前 nightly 尚未提供，使用等效实现）
 //!
@@ -14,6 +18,8 @@
 //! 运行: cargo test --test l3_rust_197_alignment
 
 use std::collections::VecDeque;
+use std::collections::hash_map::DefaultHasher;
+use std::hash::{BuildHasher, BuildHasherDefault, Hasher};
 use std::num::NonZeroU32;
 
 // ============================================================================
@@ -124,4 +130,48 @@ fn test_vecdeque_retain_back_order() {
     retain_back(&mut deque, |x| *x > 25);
 
     assert_eq!(deque.make_contiguous(), &[30, 40, 50]);
+}
+
+/// 测验9: `NonZeroU32::midpoint()` — 无溢出中点
+#[test]
+fn test_nonzero_midpoint() {
+    let a = NonZeroU32::new(10).unwrap();
+    let b = NonZeroU32::new(20).unwrap();
+    assert_eq!(a.midpoint(b).get(), 15);
+}
+
+/// 测验10: `NonZeroU32::isqrt()` — 整数平方根
+#[test]
+fn test_nonzero_isqrt() {
+    let n = NonZeroU32::new(25).unwrap();
+    assert_eq!(n.isqrt().get(), 5);
+}
+
+/// 测验11: `ptr::fn_addr_eq()` — 函数指针地址相等比较
+#[test]
+fn test_ptr_fn_addr_eq() {
+    fn sample() {}
+    let f: fn() = sample;
+    assert!(std::ptr::fn_addr_eq(f, f));
+}
+
+/// 测验12: `const size_of_val` / `const align_of_val`
+#[test]
+fn test_const_size_and_align_of_val() {
+    const fn size_and_align<T>(val: &T) -> (usize, usize) {
+        (std::mem::size_of_val(val), std::mem::align_of_val(val))
+    }
+
+    let x = 42u64;
+    assert_eq!(size_and_align(&x), (8, 8));
+}
+
+/// 测验13: `BuildHasherDefault::new()` 为 const fn
+#[test]
+fn test_build_hasher_default_new_const() {
+    const _BH: BuildHasherDefault<DefaultHasher> = BuildHasherDefault::new();
+    let bh = BuildHasherDefault::<DefaultHasher>::new();
+    let mut hasher = bh.build_hasher();
+    hasher.write_u32(123);
+    let _ = hasher.finish();
 }
