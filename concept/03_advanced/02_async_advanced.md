@@ -28,15 +28,15 @@
     - [8.10 `Stream` / `Sink` trait 完整分析](#810-stream--sink-trait-完整分析)
     - [8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异](#811-pinboxdyn-future-vs-impl-future-的性能差异)
     - [8.12 `loom` 并发模型检测工具](#812-loom-并发模型检测工具)
-    - [8.13 Miri 动态验证：async 状态机的内存安全检测](#813-miri-动态验证async-状态机的内存安全检测)
+    - [8.13 Miri 动态验证：async 状态机的内存安全（Memory Safety）检测](#813-miri-动态验证async-状态机的内存安全检测)
       - [场景 1：悬垂指针检测（使用已释放的 Box）](#场景-1悬垂指针检测使用已释放的-box)
       - [场景 2：无效值检测（非法 bool 构造）](#场景-2无效值检测非法-bool-构造)
       - [场景 3：async 状态机中的未初始化内存](#场景-3async-状态机中的未初始化内存)
       - [Miri 与 async 状态机的特殊关联](#miri-与-async-状态机的特殊关联)
   - [九、知识来源关系（Provenance）](#九知识来源关系provenance)
-  - [十、边界测试：高级异步模式的编译错误](#十边界测试高级异步模式的编译错误)
-    - [10.1 边界测试：`select!` 宏中分支完成后的变量使用（编译错误）](#101-边界测试select-宏中分支完成后的变量使用编译错误)
-    - [10.2 边界测试：`Stream::next()` 与所有权冲突（编译错误）](#102-边界测试streamnext-与所有权冲突编译错误)
+  - [十、边界测试：高级异步（Async）模式的编译错误](#十边界测试高级异步模式的编译错误)
+    - [10.1 边界测试：`select!` 宏（Macro）中分支完成后的变量使用（编译错误）](#101-边界测试select-宏中分支完成后的变量使用编译错误)
+    - [10.2 边界测试：`Stream::next()` 与所有权（Ownership）冲突（编译错误）](#102-边界测试streamnext-与所有权冲突编译错误)
     - [10.5 边界测试：`Pin` 与 `Unpin` 的自动实现冲突（编译错误）](#105-边界测试pin-与-unpin-的自动实现冲突编译错误)
     - [10.3 边界测试：类型不匹配的基础错误](#103-边界测试类型不匹配的基础错误)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
@@ -448,7 +448,7 @@ impl Stream for IntervalStream {
 
 **`Sink`：异步生产者**
 
-> **[futures-rs 文档]** `Sink` trait 表示一个可异步发送值的消费者，如 TCP 连接、消息通道。其生命周期包含四个阶段：`poll_ready`（确认可接收）→ `start_send`（开始发送）→ `poll_flush`（刷出缓冲）→ `poll_close`（关闭）。✅ 已验证
+> **[futures-rs 文档]** `Sink` trait 表示一个可异步发送值的消费者，如 TCP 连接、消息通道。其生命周期（Lifetimes）包含四个阶段：`poll_ready`（确认可接收）→ `start_send`（开始发送）→ `poll_flush`（刷出缓冲）→ `poll_close`（关闭）。✅ 已验证
 
 ```rust,ignore
 // ✅ 正确: Sink trait 的使用模式（概念性代码）
@@ -610,7 +610,7 @@ where
 | **并发组合子** | `buffer_unordered`, `buffered`, `for_each_concurrent` | `tokio::spawn` + `JoinSet`（间接） |
 | **与 Runtime 集成** | 运行时无关 | 深度集成 Tokio（`tokio::time::Interval` 即 Stream） |
 | **背压支持** | 拉取天然背压 | 拉取天然背压 + `tokio::sync::mpsc` 通道缓冲 |
-| **典型使用场景** | 通用异步管道、跨运行时兼容 | Tokio 生态（axum、tonic 流处理） |
+| **典型使用场景** | 通用异步管道、跨运行时（Runtime）兼容 | Tokio 生态（axum、tonic 流处理） |
 
 > **[来源: tokio-stream docs; futures-rs docs]** `tokio_stream::wrappers` 提供了将 Tokio 原语（`TcpListener`, `UnixSignal`, `WatchReceiver`）包装为 `Stream` 的适配器，这是 `futures::stream` 不提供的运行时专属扩展。
 
@@ -1110,7 +1110,7 @@ help: alloc232 was deallocated here:
   |         ^^^^^^^^^^^^^^^^^^^^^^
 ```
 
-> **关键洞察**: Miri 不仅报告 UB，还精确追踪**分配点**和**释放点**，帮助开发者理解指针何时变为悬垂。这对于 async 状态机中的自引用结构尤为重要——状态机被 Pin 后若被 unsafe 代码移动，内部自引用指针会变为悬垂，Miri 能精确定位违规的 `move` 操作。
+> **关键洞察**: Miri 不仅报告 UB，还精确追踪**分配点**和**释放点**，帮助开发者理解指针何时变为悬垂。这对于 async 状态机中的自引用（Reference）结构尤为重要——状态机被 Pin 后若被 unsafe 代码移动，内部自引用指针会变为悬垂，Miri 能精确定位违规的 `move` 操作。
 
 >
 #### 场景 2：无效值检测（非法 bool 构造）
@@ -1372,7 +1372,7 @@ fn main() {
 
 > **过渡**: 在实践中应用 Async/Await 高级主题 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 
-> **过渡**: Async/Await 高级主题 的设计理念体现了 Rust 零成本抽象与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
+> **过渡**: Async/Await 高级主题 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。
 
 ### 反命题与边界
 

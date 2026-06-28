@@ -166,7 +166,7 @@ let m = bad.parse().unwrap_or_default(); // 失败时用类型默认值
 let m = bad.parse()?;                    // 传播错误
 ```
 
-**知识点**：`unwrap` 是 Rust 中最常见的 panic 来源之一。生产代码应尽量避免，或用 `unwrap_or` / `unwrap_or_else` 替代。[→ 错误处理基础详解](10_error_handling_basics.md)
+**知识点**：`unwrap` 是 Rust 中最常见的 panic 来源之一。生产代码应尽量避免，或用 `unwrap_or` / `unwrap_or_else` 替代。[→ 错误处理（Error Handling）基础详解](10_error_handling_basics.md)
 
 </details>
 

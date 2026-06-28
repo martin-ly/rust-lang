@@ -25,7 +25,7 @@
 
 > **C++ 和 Rust 对"程序出错时如何保持状态一致"给出了两套完全不同的答案。
 > C++ 依赖异常传播机制，并通过 strong / basic / no-throw guarantee 描述异常发生时的状态保证；
-> Rust 将可恢复错误编码进类型系统（`Result<T, E>`），将不可恢复错误隔离为 panic，并通过所有权规则保证资源释放（`Drop`）。**
+> Rust 将可恢复错误编码进类型系统（Type System）（`Result<T, E>`），将不可恢复错误隔离为 panic，并通过所有权（Ownership）规则保证资源释放（`Drop`）。**
 
 ---
 
@@ -112,7 +112,7 @@ fn main() {
 }
 ```
 
-Rust 的 panic 用于不可恢复错误（Rust Reference: [Macro std::panic](https://doc.rust-lang.org/std/macro.panic.html)）。默认情况下会展开栈并调用析构函数，但也可以配置为立即 abort。panic 不应用于常规错误处理。
+Rust 的 panic 用于不可恢复错误（Rust Reference: [Macro std::panic](https://doc.rust-lang.org/std/macro.panic.html)）。默认情况下会展开栈并调用析构函数，但也可以配置为立即 abort。panic 不应用于常规错误处理（Error Handling）。
 
 ---
 
@@ -169,7 +169,7 @@ std::expected<int, std::string> parse_int(const std::string& s) {
 | 编译器强制处理 | 否 | 是（未使用 Result 会警告） |
 | 传播语法 | 手动或 `and_then` | `?` 运算符 |
 | 与现有异常生态 | 可混合使用 | 与 panic 严格区分 |
-| 模式匹配 | C++17 `if` 初始化器或 C++23 `std::visit` | `match` / `if let` |
+| 模式匹配（Pattern Matching） | C++17 `if` 初始化器或 C++23 `std::visit` | `match` / `if let` |
 
 ---
 
@@ -195,7 +195,7 @@ f: S -> Result<S', E>
 
 - **L1**：C++ 用异常处理错误，需要 strong/basic/no-throw 保证；Rust 用 `Result` 显式编码错误，`panic` 用于不可恢复错误。
 - **L2**：Rust 的 `Drop` 不可失败，消除了 C++ 析构函数抛异常导致 `std::terminate` 的问题；`?` 运算符提供类似异常传播的便利但受类型约束。
-- **L3**：C++ 异常安全是关于"状态不变量"的运行时/约定保证；Rust 将错误处理转化为类型系统的分支显式化，使异常安全从"约定"变为"可静态检查的结构"。
+- **L3**：C++ 异常安全是关于"状态不变量"的运行时（Runtime）/约定保证；Rust 将错误处理转化为类型系统的分支显式化，使异常安全从"约定"变为"可静态检查的结构"。
 
 ---
 

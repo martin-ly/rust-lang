@@ -72,7 +72,7 @@ mod front_of_house; // 查找 src/front_of_house.rs 或 src/front_of_house/mod.r
 | （默认） | 当前模块（Module）及其子模块 |
 | `pub` | 任何地方 |
 | `pub(crate)` | 当前 crate 内 |
-| `pub(super)` | 父模块 |
+| `pub(super)` | 父模块（Module） |
 | `pub(in path)` | 指定路径内 |
 
 **知识点**：Rust 的模块系统是"基于文件系统的显式树"，与 Python/JavaScript 的隐式模块不同。[→ 模块系统详解](11_modules_and_paths.md)

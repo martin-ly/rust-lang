@@ -35,7 +35,7 @@
   - [二、技术细节](#二技术细节)
     - [2.1 HRTB 的实际应用](#21-hrtb-的实际应用)
     - [2.2 自引用（Reference）与 Pin](#22-自引用与-pin)
-    - 2.3 生命周期与闭包（Closures）
+    - 2.3 生命周期（Lifetimes）与闭包（Closures）
   - [三、生命周期模式矩阵](#三生命周期模式矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -46,7 +46,7 @@
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：高级生命周期的编译错误](#十边界测试高级生命周期的编译错误)
-    - 10.1 边界测试：自引用结构体（Struct）与 `Pin`（编译错误）
+    - 10.1 边界测试：自引用（Reference）结构体（Struct）与 `Pin`（编译错误）
     - [10.2 边界测试：生命周期边界中的 `for<'a>` HRTB（编译错误）](#102-边界测试生命周期边界中的-fora-hrtb编译错误)
     - [10.5 边界测试：闭包（Closures）捕获引用与 `Fn` trait 的生命周期约束（编译错误）](#105-边界测试闭包捕获引用与-fn-trait-的生命周期约束编译错误)
     - [10.6 边界测试：`impl Trait` 返回类型的生命周期捕获（编译错误）](#106-边界测试impl-trait-返回类型的生命周期捕获编译错误)
@@ -54,7 +54,7 @@
   - [实践](#实践)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：变型（Variance）方向（理解层）](#测验-1变型variance方向理解层)
-    - [测验 2：HRTB 与闭包（应用层）](#测验-2hrtb-与闭包应用层)
+    - [测验 2：HRTB 与闭包（Closures）（应用层）](#测验-2hrtb-与闭包应用层)
     - [测验 3：`Pin` 与自引用（分析层）](#测验-3pin-与自引用分析层)
     - [测验 4：生命周期边界中的 `+ 'a`（应用层）](#测验-4生命周期边界中的--a应用层)
     - [测验 5：生命周期省略（Lifetime Elision）规则的例外（分析层）](#测验-5生命周期省略规则的例外分析层)
@@ -418,7 +418,7 @@ graph TD
     style ELIDE2 fill:#c8e6c9
 ```
 
-> **认知功能**: **生命周期省略**覆盖大多数场景——只在编译器无法推断或需要明确文档时显式标注。
+> **认知功能**: **生命周期省略（Lifetime Elision）**覆盖大多数场景——只在编译器无法推断或需要明确文档时显式标注。
 > [来源: [Rust API Guidelines — Lifetimes](https://rust-lang.github.io/api-guidelines//flexibility.html#c-seeker)]
 
 ---
@@ -706,10 +706,10 @@ fn main() {}
 > `dyn Processor<'static>` 要求所有输入输出都是 `'static`，不能处理临时字符串。
 > 修复：
 >
-> 1) `fn use_processor<'a>(p: &dyn Processor<'a>, data: &'a str)` — 泛型生命周期；
+> 1) `fn use_processor<'a>(p: &dyn Processor<'a>, data: &'a str)` — 泛型（Generics）生命周期；
 > 2) `dyn for<'a> Processor<'a>` — HRTB（Higher-Ranked Trait Bounds），接受任意生命周期。
 > HRTB 的语法：`dyn for<'a> Fn(&'a str) -> &'a str` 表示闭包对所有 `'a` 有效。
-> 这与 Java 的泛型通配符（`? extends T`）或 C++ 的模板（无显式生命周期参数）不同——Rust 的 HRTB 允许 trait object 保持生命周期泛型，是高级类型系统的核心特性。
+> 这与 Java 的泛型通配符（`? extends T`）或 C++ 的模板（无显式生命周期参数）不同——Rust 的 HRTB 允许 trait object 保持生命周期泛型，是高级类型系统（Type System）的核心特性。
 > [来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
 
@@ -889,7 +889,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 | 生命周期高级主题：从 HRTB 到自引用类型 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |
 
 > 编译通过 ⟸ 生命周期标注正确 ⟸ 引用有效性
-> 无悬垂引用 ⟸ 生命周期偏序关系 ⟸ 借用规则
+> 无悬垂引用 ⟸ 生命周期偏序关系 ⟸ 借用（Borrowing）规则
 > **过渡**: 掌握 生命周期高级主题：从 HRTB 到自引用类型 的基础语法后，下一步需要理解其在类型系统中的位置与与其他概念的交互关系。
 > **过渡**: 在实践中应用 生命周期高级主题：从 HRTB 到自引用类型 时，务必关注边界条件与异常处理，这是从"能编译"到"能生产"的关键跃迁。
 > **过渡**: 生命周期高级主题：从 HRTB 到自引用类型 的设计理念体现了 Rust 零成本抽象（Zero-Cost Abstraction）与安全保证的核心权衡，理解这一权衡有助于迁移到更高级的并发与形式化验证领域。

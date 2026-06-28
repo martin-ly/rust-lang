@@ -84,7 +84,7 @@ fn main() {
 **解析**:
 
 - `make_exciting` 接收 `&str`，不获取 `s` 的所有权（Ownership），因此调用后 `s` 仍可用。
-- `s.replace(...)` 返回新的 `String`，其所有权在函数内部通过 `s2` → `s3` 传递，最终返回给调用者。
+- `s.replace(...)` 返回新的 `String`，其所有权（Ownership）在函数内部通过 `s2` → `s3` 传递，最终返回给调用者。
 - `out` 拥有返回的 `String`，`s` 仍拥有自己的 `String`，两者独立。
 
 </details>
@@ -176,7 +176,7 @@ fn main() {
     - [`ex07_vec_slice_borrow.rs`](../../exercises/src/ownership_borrowing/ex07_vec_slice_borrow.rs) — Vec 与切片（Slice）借用（Borrowing）冲突（对应 Inventory #2）
     - `ex08_dangling_reference.rs` — 避免悬垂引用（Reference）（对应 Inventory #3）
     - [`ex09_dangling_stack_reference.rs`](../../exercises/src/ownership_borrowing/ex09_dangling_stack_reference.rs) — 悬垂栈引用（Reference）
-    - [`ex10_vec_reallocation.rs`](../../exercises/src/ownership_borrowing/ex10_vec_reallocation.rs) — Vec 重新分配与引用失效
-    - [`ex11_hashmap_borrow.rs`](../../exercises/src/ownership_borrowing/ex11_hashmap_borrow.rs) — HashMap 借用冲突
+    - [`ex10_vec_reallocation.rs`](../../exercises/src/ownership_borrowing/ex10_vec_reallocation.rs) — Vec 重新分配与引用（Reference）失效
+    - [`ex11_hashmap_borrow.rs`](../../exercises/src/ownership_borrowing/ex11_hashmap_borrow.rs) — HashMap 借用（Borrowing）冲突
     - [`ex12_string_in_loop.rs`](../../exercises/src/ownership_borrowing/ex12_string_in_loop.rs) — 循环中的所有权
   - [`02_borrowing.md`](02_borrowing.md) — 系统学习「Fixing Ownership Errors」的 5 种常见模式

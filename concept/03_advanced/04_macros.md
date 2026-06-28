@@ -22,7 +22,7 @@
 > [Traits](../02_intermediate/01_traits.md) ·
 > [Generics](../02_intermediate/02_generics.md)
 > **后置概念**: [DSL Construction] · [Meta-programming]
-> **相关阅读**: [C 预处理器 vs Rust 宏](../02_intermediate/26_c_preprocessor_vs_rust_macros.md) — 从文本替换到语法树的入门对比
+> **相关阅读**: [C 预处理器 vs Rust 宏（Macro）](../02_intermediate/26_c_preprocessor_vs_rust_macros.md) — 从文本替换到语法树的入门对比
 > **主要来源**:
 > [TRPL: Ch19.5](https://doc.rust-lang.org/book/ch19-06-macros.html) ·
 > [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/) ·
@@ -138,7 +138,7 @@ Rust 宏 hygiene:
 
 ---
 
-<!-- 层级一致性: L3 形式化理论 — 卫生宏的 α-等价保持、模式匹配的语法树正则语义 -->
+<!-- 层级一致性（Coherence）: L3 形式化理论 — 卫生宏的 α-等价保持、模式匹配的语法树正则语义 -->
 
 ## 三、形式化理论根基（Formal Foundation）
 
@@ -151,7 +151,7 @@ Rust 宏 hygiene:
 ### 3.1 Hygienic Macro 的形式化
 >
 > **[Wikipedia: Hygienic macro](https://en.wikipedia.org/wiki/Hygienic_macro)** Hygienic macros are macros whose expansion is guaranteed not to cause the accidental capture of identifiers. ✅ 已验证
-> **[Rust Reference: Hygiene](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene)** Rust 的 macro_rules! 和过程宏是卫生的：宏内部定义的标识符不与外部冲突。✅ 已验证
+> **[Rust Reference: Hygiene](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene)** Rust 的 macro_rules! 和过程宏（Procedural Macro）是卫生的：宏内部定义的标识符不与外部冲突。✅ 已验证
 
 Rust 宏卫生性的本质 = **隐式 gensym**：编译器为每个宏展开上下文引入的标识符自动生成唯一名字，程序员无需手动重命名。
 
@@ -508,7 +508,7 @@ graph TD
 
 | 编号 | 前提 ⟹ 结论 | 类型 | 依赖定理 | 失效条件 | 典型场景 |
 |:---|:---|:---|:---|:---|:---|
-| **L1** | 声明宏 hygienic ⟹ 避免标识符冲突 | 语法保证 | Kohlbecker 1986 | 过程宏手动构造标识符（`format_ident!`） | `macro_rules!` 局部变量与外部同名变量共存 |
+| **L1** | 声明宏（Declarative Macro） hygienic ⟹ 避免标识符冲突 | 语法保证 | Kohlbecker 1986 | 过程宏手动构造标识符（`format_ident!`） | `macro_rules!` 局部变量与外部同名变量共存 |
 | **L2** | 过程宏操作 TokenStream ⟹ 编译期元编程 | 阶段隔离 | [RFC 1566](https://rust-lang.github.io/rfcs//1566-proc-macros.html) | 宏 panic 导致编译中断 | `#[derive(Debug)]` 自动生成 impl |
 | **L3** | 宏重复模式 `$($x:expr),*` ⟹ 零开销抽象 | 语法生成 | TLBORM 模式语义 | 重复模式与尾随逗号不匹配 | `vec![1, 2, 3]` 展开为数组初始化 |
 | **L4** | Token 操作 vs 文本替换 ⟹ 类型安全增强 | 对比定理 | L1 + L2 | C 风格预处理器绕过 Token 层 | Rust 宏避免 C `#define` 优先级陷阱 |
@@ -769,7 +769,7 @@ let v2 = make_vec![3, 4];
 
 ### 步骤 2："泛型能替代宏吗？"
 
-> **直觉困惑**: "泛型也能抽象代码，为什么还需要宏？"
+> **直觉困惑**: "泛型（Generics）也能抽象代码，为什么还需要宏？"
 
 **概念解答**: 泛型抽象的是**类型**，宏抽象的是**语法模式**。泛型要求参数数量固定、语法结构固定；宏允许可变参数数量、自定义语法结构。
 
@@ -1498,7 +1498,7 @@ fn foo(x: i32) -> i32 {
 
 关键约束（[Rust Reference: Macros](https://doc.rust-lang.org/reference/macros.html)）：
 
-1. **阶段隔离** ⟹ 属性宏只能作用于被显式装饰的 item，无法全局扫描或修改其他模块代码
+1. **阶段隔离** ⟹ 属性宏只能作用于被显式装饰的 item，无法全局扫描或修改其他模块（Module）代码
 2. **无类型信息** ⟹ 输入是未类型化的 TokenStream，宏无法知道变量具体类型，只能基于语法结构做判断
 3. **编译器二次检查** ⟹ 输出必须是合法 TokenStream，类型正确性由编译器后续阶段保证 [来源: [Rust Reference: Procedural Macros] · [RFC 1566](https://rust-lang.github.io/rfcs/1566-proc-macros.html)]
 
@@ -2083,7 +2083,7 @@ mod internal {
 | 过程宏分三类：Derive/Attr/Fn | [TRPL Ch19.5](https://doc.rust-lang.org/book/ch19-05-advanced-functions-and-closures.html) · [RFC 1566](https://rust-lang.github.io/rfcs/1566-proc-macros.html) | ✅ |
 | Rust 宏是卫生的 | [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-05-macros.html) · [Scheme 卫生宏论文] | ✅ |
 | `vec!` / `format!` 是宏 | [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-05-macros.html) | ✅ |
-| 编译期代码生成零运行时开销 | [Rust Reference: Macros](https://doc.rust-lang.org/reference/macros.html) | ✅ |
+| 编译期代码生成零运行时（Runtime）开销 | [Rust Reference: Macros](https://doc.rust-lang.org/reference/macros.html) | ✅ |
 | 卫生宏原始论文 | [Kohlbecker et al. 1986 — Macro-by-Example: Deriving Syntactic Transformations from their Specifications, POPL] | ✅ |
 | 元编程理论基础 | [Taha 2004 — A Gentle Introduction to Multi-stage Programming] | ✅ |
 | 宏非图灵完备 | [Rust Reference: recursion limit](https://doc.rust-lang.org/reference/) · [TLBORM] | ✅ |
@@ -2419,7 +2419,7 @@ let user = UserBuilder::default()
     .build()?;
 ```
 
-> 派生宏通过 `proc_macro_derive` 接收 `TokenStream`，使用 `syn` 解析结构体定义，再使用 `quote` 生成实现代码。
+> 派生宏通过 `proc_macro_derive` 接收 `TokenStream`，使用 `syn` 解析结构体（Struct）定义，再使用 `quote` 生成实现代码。
 </details>
 
 ---

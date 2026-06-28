@@ -49,7 +49,7 @@ fn make_callback() -> impl AsyncFnOnce() -> i32 {
 }
 ```
 
-> **关键洞察**：`async || {}` 不是“返回 Future 的闭包”，而是**真正的异步（Async）闭包**——调用它返回一个 Future，且捕获语义与同步闭包一致。
+> **关键洞察**：`async || {}` 不是“返回 Future 的闭包（Closures）”，而是**真正的异步（Async）闭包**——调用它返回一个 Future，且捕获语义与同步闭包一致。
 
 ---
 
@@ -339,7 +339,7 @@ Future trait          (1.36)
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | async closures 提供原生异步闭包 ⟹ 简化高阶异步回调 | 掌握旧写法 `\|x\| async move {}` | 能用 `async \|x\| {}` 编写更简洁的异步回调 | 高 |
-| 借用捕获支持 ⟹ 生命周期（Lifetimes）推断更精确 | 理解同步闭包捕获规则 | 能在异步（Async）场景中安全借用环境变量 | 高 |
+| 借用（Borrowing）捕获支持 ⟹ 生命周期（Lifetimes）推断更精确 | 理解同步闭包捕获规则 | 能在异步（Async）场景中安全借用环境变量 | 高 |
 | `AsyncFn` 非 dyn-compatible ⟹ 不能直接用 `Box<dyn AsyncFn>` | 理解 trait object safety | 能用泛型（Generics）或传统闭包绕过 | 高 |
 
 ### 反命题与边界

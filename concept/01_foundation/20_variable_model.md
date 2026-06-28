@@ -131,7 +131,7 @@ Rust 采用更简化的二元分类：
 
 | C++ 类别 | Rust 对应 | 说明 |
 | :--- | :--- | :--- |
-| lvalue | **place expression** | 表示内存位置的表达式（变量、解引用、索引） |
+| lvalue | **place expression** | 表示内存位置的表达式（变量、解引用（Reference）、索引） |
 | prvalue | **value expression** | 表示值的表达式（字面量、函数调用、运算符结果） |
 | xvalue | **无直接对应** | Rust 的 `move` 是编译期语义，不产生特殊表达式类别 |
 
@@ -152,7 +152,7 @@ let s2 = s1; // s1 的所有权转移到 s2
 
 > **形式化命题** [Tier 3]: Rust 消除了 C++ 的 xvalue 类别，因为 Rust 的移动语义在编译期完成（标记 moved-from），无需运行时（Runtime）区分"将亡值"和"普通值"。
 >
-> **论证**: C++ 需要 xvalue 是因为 `std::move` 只是类型转换，对象的生命周期（Lifetimes）由程序员控制；Rust 的移动是所有权转移，由编译器保证原变量不可访问。
+> **论证**: C++ 需要 xvalue 是因为 `std::move` 只是类型转换，对象的生命周期（Lifetimes）由程序员控制；Rust 的移动是所有权（Ownership）转移，由编译器保证原变量不可访问。
 
 ---
 
@@ -233,7 +233,7 @@ BorrowState: None | Shared(usize) | Exclusive
 | `let r = &mut x;` | `E(x).ownership = Own`, `S(l).borrow = None` | `S(l).borrow = Exclusive` |
 | `drop(x)` | `E(x).ownership = Own` | `S(l)` 释放，`E(x).ownership = Moved` |
 
-> **定理** [Tier 2]: 在上述模型中，若程序通过 borrow checker，则运行时永远不会出现 use-after-free 或 double-free。
+> **定理** [Tier 2]: 在上述模型中，若程序通过 borrow checker，则运行时（Runtime）永远不会出现 use-after-free 或 double-free。
 > **证明草图**:
 >
 > 1. `Moved` 状态禁止任何读取/写入/借用（Borrowing）操作（编译期拒绝）
@@ -584,5 +584,5 @@ Rust 编译器要求所有变量在使用前必须初始化。读取未初始化
 ## 总结
 
 - **L1**：变量是名字到值/存储地址的映射；Rust 在这一映射上增加了所有权状态。
-- **L2**：Rust 用 `Copy`/`Move`/`Borrow`/`Drop` 显式管理资源生命周期，替代了手动内存管理。
-- **L3**：所有权不是新模型，而是把 C++ 的 RAII/move 约定提升为类型系统公理，使内存安全可在编译期证明。
+- **L2**：Rust 用 `Copy`/`Move`/`Borrow`/`Drop` 显式管理资源生命周期（Lifetimes），替代了手动内存管理。
+- **L3**：所有权不是新模型，而是把 C++ 的 RAII/move 约定提升为类型系统（Type System）公理，使内存安全（Memory Safety）可在编译期证明。

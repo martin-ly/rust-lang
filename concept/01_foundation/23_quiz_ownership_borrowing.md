@@ -198,7 +198,7 @@ fn main() {
 
 **错误信息**：`cannot borrow`s`as mutable because it is also borrowed as immutable`
 
-**解析**：Rust 的**借用规则二**规定：不可变引用（Immutable Reference）（&T）和可变引用（&mut T）不能同时存在。因为不可变引用的使用者可能依赖数据不被修改。
+**解析**：Rust 的**借用（Borrowing）规则二**规定：不可变引用（Immutable Reference）（&T）和可变引用（&mut T）不能同时存在。因为不可变引用的使用者可能依赖数据不被修改。
 
 **修改方案**——确保不可变引用（Immutable Reference）不再使用后再创建可变引用：
 
@@ -235,9 +235,9 @@ fn dangle() -> &String {
 
 **错误信息**：`missing lifetime specifier`（在函数签名处）
 
-**解析**：`s` 在函数结束时被 drop，返回的引用将指向已释放的内存。Rust 的借用检查器**在编译期阻止所有悬垂引用**。
+**解析**：`s` 在函数结束时被 drop，返回的引用（Reference）将指向已释放的内存。Rust 的借用检查器**在编译期阻止所有悬垂引用**。
 
-**正确写法**——转移所有权：
+**正确写法**——转移所有权（Ownership）：
 
 ```rust
 fn no_dangle() -> String {
@@ -279,7 +279,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 **语义**：返回的引用生命周期（Lifetimes）至少与 `x` 和 `y` 中**较短的那个**一样长。
 
-**知识点**：生命周期标注不改变运行时（Runtime）代码，仅向编译器提供**借用关系约束**。→ 生命周期语法
+**知识点**：生命周期（Lifetimes）标注不改变运行时（Runtime）代码，仅向编译器提供**借用关系约束**。→ 生命周期语法
 
 </details>
 

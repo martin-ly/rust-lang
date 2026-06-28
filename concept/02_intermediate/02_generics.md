@@ -16,7 +16,7 @@
 > **双维定位**: C×App — 实施泛型（Generics）参数化设计
 > **前置依赖**: L1 类型系统（Type System） · [L2 Trait](01_traits.md)
 > **后置延伸**: [L3 Async](../03_advanced/02_async.md) · [L4 类型论](../04_formal/02_type_theory.md) · [L7 效果系统](../07_future/04_effects_system.md)
-> **跨层映射**: L2→L4 参数多态 ↔ System F | L2→L7 泛型效果 → Effect System
+> **跨层映射**: L2→L4 参数多态 ↔ System F | L2→L7 泛型（Generics）效果 → Effect System
 > **定理链编号**: T-030 参数多态保持 → T-031 单态化（Monomorphization） [来源: [Rust Reference — Monomorphization](https://doc.rust-lang.org/reference/items/generics.html)]正确性 → T-032 约束满足可判定
 > **层级**: L2 进阶概念
 > **前置概念**: [Type System Basics](../01_foundation/04_type_system.md) · [Traits](01_traits.md)
@@ -74,15 +74,15 @@
   - [三、思维导图（Mind Map）](#三思维导图mind-map)
   - [四、定理推理链（Theorem Chain）](#四定理推理链theorem-chain)
     - [4.1 引理：参数多态 ⟹ System F 类型规则](#41-引理参数多态--system-f-类型规则)
-    - [4.2 定理：单态化 ⟹ 零成本抽象 ⟹ 语义保持](#42-定理单态化--零成本抽象--语义保持)
+    - [4.2 定理：单态化（Monomorphization） ⟹ 零成本抽象（Zero-Cost Abstraction） ⟹ 语义保持](#42-定理单态化--零成本抽象--语义保持)
     - [4.3 推论：Const Generics ⟹ 类型级编程](#43-推论const-generics--类型级编程)
     - [4.4 约束多态的类型安全](#44-约束多态的类型安全)
-    - [4.5 定理一致性矩阵](#45-定理一致性矩阵)
+    - [4.5 定理一致性（Coherence）矩阵](#45-定理一致性矩阵)
   - [五、示例与反例（Examples \& Counter-examples）](#五示例与反例examples--counter-examples)
     - [5.1 正确示例：泛型函数与约束](#51-正确示例泛型函数与约束)
     - [5.2 正确示例：常量泛型](#52-正确示例常量泛型)
     - [5.3 反例：类型大小未知（E0277）](#53-反例类型大小未知e0277)
-    - [5.4 反例：生命周期约束不足（E0310）](#54-反例生命周期约束不足e0310)
+    - [5.4 反例：生命周期（Lifetimes）约束不足（E0310）](#54-反例生命周期约束不足e0310)
     - [5.5 参数性定理（Theorems for Free）](#55-参数性定理theorems-for-free)
     - [5.6 泛型实现机制对比：单态化 vs 类型擦除 vs 模板](#56-泛型实现机制对比单态化-vs-类型擦除-vs-模板)
     - [5.7 Const Generics 进阶用法](#57-const-generics-进阶用法)
@@ -95,9 +95,9 @@
       - [5.7.7 与 C++ 模板非类型参数的对比](#577-与-c-模板非类型参数的对比)
   - [六、反命题与边界分析（Counter-proposition \& Boundary Analysis）](#六反命题与边界分析counter-proposition--boundary-analysis)
     - [6.1 反命题 1: "泛型总是零成本的"](#61-反命题-1-泛型总是零成本的)
-    - [6.2 反命题 2: "类型推断总是完备的"](#62-反命题-2-类型推断总是完备的)
+    - [6.2 反命题 2: "类型推断（Type Inference）总是完备的"](#62-反命题-2-类型推断总是完备的)
     - [6.3 反命题 3: "泛型约束越严格越好"](#63-反命题-3-泛型约束越严格越好)
-    - [6.4 反命题 4: "Const Generics 完全替代运行时值"](#64-反命题-4-const-generics-完全替代运行时值)
+    - [6.4 反命题 4: "Const Generics 完全替代运行时（Runtime）值"](#64-反命题-4-const-generics-完全替代运行时值)
   - [七、边界极限测试代码（Boundary Limit Tests）](#七边界极限测试代码boundary-limit-tests)
     - [7.1 测试 1: 单态化代码膨胀与 dyn Trait 权衡极限](#71-测试-1-单态化代码膨胀与-dyn-trait-权衡极限)
     - [7.2 测试 2: 生命周期约束递归传递与 HRTB 边界](#72-测试-2-生命周期约束递归传递与-hrtb-边界)
@@ -161,7 +161,7 @@
   - [参考来源](#参考来源)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：泛型函数（理解层）](#测验-1泛型函数理解层)
-    - [测验 2：泛型结构体（应用层）](#测验-2泛型结构体应用层)
+    - [测验 2：泛型结构体（Struct）（应用层）](#测验-2泛型结构体应用层)
     - [测验 3：多个 Trait Bound（应用层）](#测验-3多个-trait-bound应用层)
     - [测验 4：单态化与代码膨胀（分析层）](#测验-4单态化与代码膨胀分析层)
     - [测验 5：关联类型（分析层）](#测验-5关联类型分析层)
@@ -215,7 +215,7 @@
 | **类型参数** | `<T>` | 类型 | 无 | 最常见，泛型容器/函数 |
 | **生命周期参数** | `<'a>` | 引用（Reference）有效期 | 推断 | 函数/结构体（Struct）含引用 |
 
-> **形式化对应**: 生命周期参数在类型论中对应 **区域类型 (Region Types, Tofte & Talpin 1994)**，即引用有效性的形式化约束。详见 L1 生命周期 §4 和 [L4 所有权（Ownership）形式化](../04_formal/03_ownership_formal.md) §2.2。[来源: Tofte & Talpin 1994 — Region Types]
+> **形式化对应**: 生命周期参数在类型论中对应 **区域类型 (Region Types, Tofte & Talpin 1994)**，即引用（Reference）有效性的形式化约束。详见 L1 生命周期 §4 和 [L4 所有权（Ownership）形式化](../04_formal/03_ownership_formal.md) §2.2。[来源: Tofte & Talpin 1994 — Region Types]
 | **常量泛型** | `<const N: usize>` | 编译期常量值 | 无 | 固定大小数组、类型状态 |
 | **关联类型** | `type Item;` | Trait 内部类型 | 实现时确定 | Iterator、Future 等 |
 
@@ -430,7 +430,7 @@ fn draw_dyn(d: &dyn Drawable) {
 | **推论**: Const Generics ⟹ 类型级编程 | 常量参数为编译期求值标量 | 类型参数包含常量值，值决定类型 | 依赖类型基础（有限形式） | 数组抽象、类型级状态机 | 非 const 表达式或浮点参数 | E0435 |
 | **定理**: 约束可满足性 | where 子句为 Horn 子句形式 | 类型推导可判定，Trait 解析终止 | HM 推断扩展 | Trait 解析、编译通过 | GATs 无界递归导致不终止 | E0275 |
 | **引理**: HRTB 全称约束 | `for<'a>` 合法，高阶函数签名良构 | 高阶函数类型安全，生命周期无关性 | 全称量词 (∀) 语义 | 回调抽象、生命周期擦除 | 过度约束不可满足，闭包（Closures）推断失败 | E0582 |
-| **推论**: 泛型一致性（Coherence） | 单态化后类型检查通过 | 所有实例类型安全，行为一致 | 类型替换引理（Substitution Lemma） | — | `transmute` 绕过类型系统 | E0133 |
+| **推论**: 泛型一致性（Coherence） | 单态化后类型检查通过 | 所有实例类型安全，行为一致 | 类型替换引理（Substitution Lemma） | — | `transmute` 绕过类型系统（Type System） | E0133 |
 | **引理**: 关联类型归一化 | 关联类型有唯一实现，无重叠 | 类型别名可替换，Trait 方法可解析 | 约束可满足性 | GATs 使用、Iterator 实现 | 重叠关联类型定义（coherence 破坏） | E0119 |
 | **定理**: 生命周期约束可满足 | `T: 'a` 合法，区域包含关系成立 | 无悬垂引用，借用（Borrowing）检查通过 | 区域子类型（Region Subtyping） | 泛型生命周期安全 | 约束遗漏，T 含短于 'a 的引用 | E0310 |
 | **引理**: Sized 默认约束 ⟹ 静态分发 | T 默认 Sized，内存布局已知 | 单态化生成确定代码，无动态分发 | Sized trait 语义 | 泛型数据结构布局 | `?Sized` 使用但未正确处理 DST | E0277 |

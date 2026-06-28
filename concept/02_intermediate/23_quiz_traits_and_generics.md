@@ -213,7 +213,7 @@ fn main() {
 
 **答案**：✅ 能编译（需 `#[derive(Debug)]` 或确保类型实现 `Debug`）
 
-**解析**：`Option<T>` 和 `Result<T, E>` 是 Rust 标准库中的**泛型枚举（Enum）**：
+**解析**：`Option<T>` 和 `Result<T, E>` 是 Rust 标准库中的**泛型（Generics）枚举（Enum）**：
 
 ```rust
 enum Option<T> {
@@ -356,7 +356,7 @@ Square
 
 **注意**：`dyn Trait` 必须 behind a pointer（`&dyn`、`Box<dyn>`、`Rc<dyn>`），因为编译期不知道具体大小。
 
-**知识点**：trait 对象是实现运行时多态的 Rust 方式，与 Java interface 的引用（Reference）类型类似，但显式标注 `dyn`。[→ Trait 对象详解](01_traits.md)
+**知识点**：trait 对象是实现运行时（Runtime）多态的 Rust 方式，与 Java interface 的引用（Reference）类型类似，但显式标注 `dyn`。[→ Trait 对象详解](01_traits.md)
 
 </details>
 

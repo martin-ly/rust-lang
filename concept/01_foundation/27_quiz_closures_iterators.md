@@ -84,7 +84,7 @@ struct Closure { /* 捕获的环境 */ }
 impl Fn(i32) -> i32 for Closure { ... }
 ```
 
-**知识点**：闭包不是函数指针，而是实现了 `Fn`/`FnMut`/`FnOnce` trait 的匿名类型。每个闭包都有唯一的、不可命名的类型。[→ 闭包详解](15_closure_basics.md)
+**知识点**：闭包（Closures）不是函数指针，而是实现了 `Fn`/`FnMut`/`FnOnce` trait 的匿名类型。每个闭包都有唯一的、不可命名的类型。[→ 闭包详解](15_closure_basics.md)
 
 </details>
 
@@ -245,7 +245,7 @@ iter.for_each(|x| ...); // 驱动整个链
 | 适配器 | `map`、`filter`、`take`、`skip` | 返回新迭代器（Iterator），惰性执行 |
 | 消费者 | `collect`、`sum`、`for_each`、`find` | 驱动迭代器（Iterator）执行，返回非迭代器值 |
 
-**性能优势**：惰性求值允许编译器优化整个迭代器链，消除中间分配：
+**性能优势**：惰性求值允许编译器优化整个迭代器（Iterator）链，消除中间分配：
 
 ```rust,ignore
 // 等价于：一次遍历，无中间 Vec
@@ -486,7 +486,7 @@ fn main() {
 
 | 方法 | 返回 | 说明 |
 |:---|:---|:---|
-| `find(p)` | `Option<&T>` | 第一个满足条件的元素的引用 |
+| `find(p)` | `Option<&T>` | 第一个满足条件的元素的引用（Reference） |
 | `position(p)` | `Option<usize>` | 第一个满足条件的元素的索引 |
 
 **注意闭包签名**：

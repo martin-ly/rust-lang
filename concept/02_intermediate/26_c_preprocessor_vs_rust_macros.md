@@ -23,9 +23,9 @@
 
 ## 一、核心命题
 
-> **C 预处理器和 Rust 宏都叫"宏"，但本质上是两个时代的产物。
+> **C 预处理器和 Rust 宏（Macro）都叫"宏"，但本质上是两个时代的产物。
 > C 预处理器在文本层面做替换，不感知语法、类型和作用域；
-> Rust 宏在 token 流 / AST 层面操作，受卫生性（hygiene）约束，展开后仍受类型系统检查。**
+> Rust 宏在 token 流 / AST 层面操作，受卫生性（hygiene）约束，展开后仍受类型系统（Type System）检查。**
 
 ---
 
@@ -117,7 +117,7 @@ impl Serialize for MyType {}
 | 能力 | C | Rust |
 |:---|:---|:---|
 | 条件编译 | `#ifdef` / `#ifndef` | `#[cfg(...)]` |
-| 头文件保护 | `#ifndef HEADER_H` | 模块系统天然解决 |
+| 头文件保护 | `#ifndef HEADER_H` | 模块（Module）系统天然解决 |
 | 平台适配 | `#ifdef _WIN32` | `cfg(target_os = ...)` |
 | 功能开关 | `#define FEATURE_X` | Cargo features + `cfg(feature = ...)` |
 
@@ -134,7 +134,7 @@ impl Serialize for MyType {}
 | 调试难度 | 高（展开后难以阅读） | 中（`cargo expand` 可查看） |
 | 条件编译 | `#ifdef` | `#[cfg]` |
 | 头文件包含 | `#include` | 模块系统 + `use` |
-| 元编程能力 | 有限 | 声明宏 + 过程宏完整覆盖 |
+| 元编程能力 | 有限 | 声明宏（Declarative Macro） + 过程宏（Procedural Macro）完整覆盖 |
 
 ---
 
@@ -160,7 +160,7 @@ fn max<T: Ord>(a: T, b: T) -> T {
 ### 5.3 什么时候用过程宏
 
 - `#[derive(...)]` 自动生成 trait 实现
-- 自定义属性宏修改函数/结构体
+- 自定义属性宏修改函数/结构体（Struct）
 - 编译期 DSL 解析
 
 详见 [Proc Macro](../03_advanced/07_proc_macro.md)。

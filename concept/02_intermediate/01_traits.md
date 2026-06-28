@@ -81,8 +81,8 @@
       - [定义与语法](#定义与语法)
       - [自动推导规则](#自动推导规则)
       - [`unsafe impl` 的例外情况](#unsafe-impl-的例外情况)
-    - [4.4 Trait + 泛型 ⟹ 零成本抽象](#44-trait--泛型--零成本抽象)
-    - [4.5 定理一致性矩阵](#45-定理一致性矩阵)
+    - [4.4 Trait + 泛型（Generics） ⟹ 零成本抽象（Zero-Cost Abstraction）](#44-trait--泛型--零成本抽象)
+    - [4.5 定理一致性（Coherence）矩阵](#45-定理一致性矩阵)
   - [五、示例与反例（Examples \& Counter-examples）](#五示例与反例examples--counter-examples)
     - [5.1 正确示例：Trait 定义与实现](#51-正确示例trait-定义与实现)
     - [5.2 正确示例：关联类型](#52-正确示例关联类型)
@@ -138,7 +138,7 @@
       - [编译器如何处理 `impl Trait` 返回](#编译器如何处理-impl-trait-返回)
       - [限制：不能用于 trait object](#限制不能用于-trait-object)
       - [形式化语义：存在类型 vs 全称类型](#形式化语义存在类型-vs-全称类型)
-      - [高阶边界：RPITIT 与 HRTB / 生命周期参数](#高阶边界rpitit-与-hrtb--生命周期参数)
+      - [高阶边界：RPITIT 与 HRTB / 生命周期（Lifetimes）参数](#高阶边界rpitit-与-hrtb--生命周期参数)
     - [补充章节：Const Trait 与 `~const` 实验特性](#补充章节const-trait-与-const-实验特性)
       - [问题背景：const fn 中的 Trait Bound 限制](#问题背景const-fn-中的-trait-bound-限制)
       - [`~const` 语法与 `#[const_trait]`](#const-语法与-const_trait)
@@ -147,7 +147,7 @@
       - [`impl const Trait` 与 `~const` 的区别](#impl-const-trait-与-const-的区别)
       - [替代方案：当前稳定 Rust 的 workaround](#替代方案当前稳定-rust-的-workaround)
     - [补充章节：`#[fundamental]` Attribute 与 Orphan Rule 例外](#补充章节fundamental-attribute-与-orphan-rule-例外)
-      - [目的：为智能指针和引用打开 impl 空间](#目的为智能指针和引用打开-impl-空间)
+      - [目的：为智能指针（Smart Pointer）和引用（Reference）打开 impl 空间](#目的为智能指针和引用打开-impl-空间)
       - [哪些类型是 fundamental](#哪些类型是-fundamental)
       - [为什么这些类型是 fundamental：对下游 crate 的"透明性"](#为什么这些类型是-fundamental对下游-crate-的透明性)
       - [与 `#[non_exhaustive]` 的对比](#与-non_exhaustive-的对比)
@@ -165,7 +165,7 @@
     - [12.4 迁移准备](#124-迁移准备)
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
   - [权威来源索引](#权威来源索引)
-    - [10.5 边界测试：trait 的孤儿规则与 blanket impl 冲突（编译错误）](#105-边界测试trait-的孤儿规则与-blanket-impl-冲突编译错误)
+    - [10.5 边界测试：trait 的孤儿规则（Orphan Rule）与 blanket impl 冲突（编译错误）](#105-边界测试trait-的孤儿规则与-blanket-impl-冲突编译错误)
     - [10.6 边界测试：关联常量与泛型参数的交互（编译错误）](#106-边界测试关联常量与泛型参数的交互编译错误)
   - [实践](#实践)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
@@ -431,7 +431,7 @@ pub unsafe auto trait Sync {}
 `unsafe` 前缀意味着：当开发者通过 `unsafe impl` 手动实现或覆盖时，必须自行承担内存安全（Memory Safety）与线程安全的正确性责任。
 
 > **Send 核心语义**:
-> `Send` 标记**可以安全跨线程转移所有权**的类型——即值的所有权从一个线程 move 到另一个线程不会导致数据竞争或内存不安全
+> `Send` 标记**可以安全跨线程转移所有权（Ownership）**的类型——即值的所有权从一个线程 move 到另一个线程不会导致数据竞争或内存不安全
 > 来源: [Rust Reference — Send and Sync / 2025; Rustonomicon — Send and Sync / 2025; RustBelt — 数据竞争自由定理 / POPL 2018](https://doc.rust-lang.org/reference/)。
 > `Sync` 标记**可以安全跨线程共享引用**的类型——即 `&T` 可以安全地传递给多个线程同时读取。
 
@@ -532,7 +532,7 @@ impl !Sync for RawFd {}  // 显式阻止自动 Sync
 | **定理**: Trait 对象安全 | 方法无 `Self: Sized`；无泛型方法；无静态方法 | `dyn Trait` 是合法类型；vtable 可构造 | 存在类型 + vtable 理论 | 运行时（Runtime）多态分发；`Box<dyn Trait>` | `Self: Sized` superbound；泛型方法 | E0038 |
 | **推论**: Auto Trait 结构化推导 | 所有字段满足 Auto Trait；类型非 `!Trait` 覆盖 | 复合类型自动实现 Send/Sync/Sized/Unpin | 结构化推导规则；归纳定义 | 并发安全（Concurrency Safety）分析；类型布局推导 | `unsafe impl !Send for T` 手动否定；原始指针（Raw Pointer）保守 | — |
 | **引理**: Supertrait 传递 | `trait A: B` 声明 | A 的实现者必须实现 B | 子类型传递性；偏序关系 | Trait 层次设计；对象安全传递 | 循环 supertrait（`trait A: B; trait B: A`） | E0399 / E0398 |
-| **定理**: Trait + 泛型零成本 | 单态化 + LLVM 内联优化 | 无运行时（Runtime）开销；直接函数调用 | Parametricity；β-归约 | 性能敏感代码路径优化 | `dyn Trait` 动态分发选择 | — |
+| **定理**: Trait + 泛型零成本 | 单态化（Monomorphization） + LLVM 内联优化 | 无运行时（Runtime）开销；直接函数调用 | Parametricity；β-归约 | 性能敏感代码路径优化 | `dyn Trait` 动态分发选择 | — |
 | **引理**: Blanket impl 可满足 | `impl<T: A> B for T` 形式 | 全称量词 + 蕴含；Horn 子句可满足 | Horn 子句逻辑；一阶可满足性 | 默认行为提供；组合子设计 | 与具体 impl 重叠（如 `impl Foo for Vec<T>` + `impl<T> Foo for T`） | E0119 |
 | **推论**: GATs 约束可满足 | 关联类型参数合法；无递归约束 | 泛型关联类型可实例化 | System Fω 约束；类型族 | HKT 模拟；类型级编程 | 无界递归归一化；不一致约束 | E0275 / E0049 |
 | **引理**: `impl Trait` 存在类型 | 返回类型满足 Trait；单一具体类型 | 抽象返回类型；隐藏实现细节 | 存在量化 ∃T.Trait(T) | API 设计；版本兼容性 | 多分支返回不同类型（除非 `dyn Trait`） | E0746 / E0706 |
@@ -540,7 +540,7 @@ impl !Sync for RawFd {}  // 显式阻止自动 Sync
 
 > **一致性检查**: Orphan Rule ⟹ Coherence ⟹ 全局唯一 impl（链 A），且 Trait 对象安全 ⟹ dyn Trait 可行性（链 B），形成**从定义约束到使用能力**的两条正交推理链。
 > Auto Trait 推导是编译器对结构性质的自动证明，Blanket impl 提供全称量词的默认行为，`impl Trait` 引入存在量化——三者与对象安全共同构成 Trait 系统的"静动两面"。
-> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.2 "类型系统一致性"
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.2 "类型系统（Type System）一致性"
 > **过渡到示例与反例**:
 > 定理链提供了形式化保证，但工程实践中这些保证的边界在哪里？
 > 下一节通过正例展示定理的适用场景，通过反例揭示定理失效的精确条件——特别是 E0117、E0119、E0038 等编译错误的触发机制，将抽象定理映射到具体代码行为。
@@ -1189,7 +1189,7 @@ fn main() {
 | **约束组合** | `ConceptA && ConceptB` | `T: ConceptA + ConceptB` | Rust 使用 `+` |
 | **实现/实例化** | 模板体在实例化时选择 | `impl Addable for Point` | Rust 显式实现，错误信息更明确 |
 | **约束推导** | 自动满足（duck typing） | 必须显式 `impl` | Rust 更严格，但可发现性更好 |
-| **对象/动态分发** | Concept 本身不支持动态多态 | `dyn Trait` | Rust Trait Object 提供运行时多态 |
+| **对象/动态分发** | Concept 本身不支持动态多态 | `dyn Trait` | Rust Trait Object 提供运行时（Runtime）多态 |
 
 > **关键洞察**：C++20 Concepts 让"类型必须能做什么"变得可读，但"怎么做"仍然散落在模板体与特化中；Rust Trait 把"能做什么"与"怎么做"绑定在同一个语言构造中，并通过 Orphan Rule 保证全局一致性。这种统一是 Rust 在泛型系统上做出的一致性（Coherence）与工程可读性权衡的核心结果。
 

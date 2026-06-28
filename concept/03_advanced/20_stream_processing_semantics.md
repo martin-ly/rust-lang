@@ -75,7 +75,7 @@
     - [12.3 边界测试：背压与死锁](#123-边界测试背压与死锁)
   - [十三、知识来源关系](#十三知识来源关系)
   - [十、边界测试：流处理语义的编译错误](#十边界测试流处理语义的编译错误)
-    - [10.1 边界测试：Tokio Stream 与所有权冲突（编译错误）](#101-边界测试tokio-stream-与所有权冲突编译错误)
+    - [10.1 边界测试：Tokio Stream 与所有权（Ownership）冲突（编译错误）](#101-边界测试tokio-stream-与所有权冲突编译错误)
     - [10.2 边界测试：背压传播中的类型不匹配（编译错误）](#102-边界测试背压传播中的类型不匹配编译错误)
     - [10.3 边界测试：Stream 的 `fuse` 与重复 poll 后的行为（逻辑错误）](#103-边界测试stream-的-fuse-与重复-poll-后的行为逻辑错误)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
@@ -684,7 +684,7 @@ async fn consumer_fixed(mut rx: mpsc::Receiver<i32>) {
 }
 ```
 
-> **修正**: Rust 的 channel（`mpsc::channel<T>`）在类型层面保证发送和接收的类型一致性。编译器拒绝类型不匹配的 channel 连接，将运行时（Runtime）类型错误提前到编译期。这与 Go 的 `chan interface{}` 或 Erlang 的动态消息类型形成对比——Rust 的流处理是类型安全的，但要求在设计时明确消息类型。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
+> **修正**: Rust 的 channel（`mpsc::channel<T>`）在类型层面保证发送和接收的类型一致性（Coherence）。编译器拒绝类型不匹配的 channel 连接，将运行时（Runtime）类型错误提前到编译期。这与 Go 的 `chan interface{}` 或 Erlang 的动态消息类型形成对比——Rust 的流处理是类型安全的，但要求在设计时明确消息类型。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
 
 ### 10.3 边界测试：Stream 的 `fuse` 与重复 poll 后的行为（逻辑错误）
 
@@ -741,7 +741,7 @@ fn main() {
 <details>
 <summary>✅ 答案与解析</summary>
 
-`Iterator` 同步拉取元素（`next()` 立即返回）。`Stream` 异步拉取（`next().await` 可能挂起等待数据到达）。
+`Iterator` 同步拉取元素（`next()` 立即返回）。`Stream` 异步（Async）拉取（`next().await` 可能挂起等待数据到达）。
 </details>
 
 ---

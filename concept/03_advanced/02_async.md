@@ -47,7 +47,7 @@
 
 - v4.2 (2026-05-13): Phase B 验证实践——新增§8.13 Miri 动态验证场景（悬垂指针检测、无效 bool 检测、async 状态机未初始化内存检测，含实际 Miri 输出截图）
 - v4.1 (2026-05-13): Phase B 形式化深化——新增§3.1b 状态机操作语义（小步语义、poll 状态转移函数、.await CPS 变换、Pin 约束在操作语义中的体现）；新增§3.2b Pin LTL 形式化（不动性公理 A1-A3、Unpin 豁免、poll 递归调用链验证、与§3.1b 操作语义衔接）
-- v4.0 (2026-05-13): Phase 4 TODO 清理——新增§8.9 Waker/Context 底层机制（VTable、自定义 Reactor）、§8.10 Stream/Sink trait 完整分析（异步迭代器（Iterator）与生产者）、§8.11 `Pin<Box<dyn Future>>` vs impl Future 性能差异（动态/静态分发、栈 pinning）、§8.12 loom 并发模型检测工具
+- v4.0 (2026-05-13): Phase 4 TODO 清理——新增§8.9 Waker/Context 底层机制（VTable、自定义 Reactor）、§8.10 Stream/Sink trait 完整分析（异步（Async）迭代器（Iterator）与生产者）、§8.11 `Pin<Box<dyn Future>>` vs impl Future 性能差异（动态/静态分发、栈 pinning）、§8.12 loom 并发模型检测工具
 - v3.0 (2026-05-13): 深度重构——新增§3.5调度模型对比（含三维Mermaid图）、§3.1状态机变换精确推导（含Pin（Pin）内存布局约束）、§8.7取消安全系统分析（含3种安全模式与形式化定义）、§8.8 Waker契约与活性（含决策树），建立异步语义模型完整推理链
 - v2.0 (2026-05-13): 定理一致性（Coherence）矩阵扩展至10行（含⟹推理链）、新增反命题决策树3组、认知路径6步递进、章节过渡段落与层次一致性标注
 - v1.0 (2026-05-12): 初始版本，完成权威定义、Future 状态机模型、async/await 语法糖解析、Pin 分析、思维导图、示例反例
@@ -69,7 +69,7 @@
   - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attribute-matrix)
     - [2.1 异步 vs 并发 vs 并行对比矩阵](#21-异步-vs-并发-vs-并行对比矩阵)
     - [2.2 Future 组合子矩阵](#22-future-组合子矩阵)
-    - [2.3 运行时对比矩阵](#23-运行时对比矩阵)
+    - [2.3 运行时（Runtime）对比矩阵](#23-运行时对比矩阵)
   - [三、形式化理论根基（Formal Foundation）](#三形式化理论根基formal-foundation)
     - [3.1 async fn 作为状态机：精确推导](#31-async-fn-作为状态机精确推导)
     - [3.1b 状态机操作语义（Operational Semantics）](#31b-状态机操作语义operational-semantics)
@@ -86,7 +86,7 @@
     - [3.5 调度模型对比：抢占式 vs 协作式 vs 绿色线程](#35-调度模型对比抢占式-vs-协作式-vs-绿色线程)
     - [3.5·补充：跨语言异步机制对比](#35补充跨语言异步机制对比)
   - [四、思维导图（Mind Map）](#四思维导图mind-map)
-  - [五、定理一致性矩阵（Theorem Consistency Matrix）](#五定理一致性矩阵theorem-consistency-matrix)
+  - [五、定理一致性（Coherence）矩阵（Theorem Consistency Matrix）](#五定理一致性矩阵theorem-consistency-matrix)
     - [5.1 定理矩阵（10 行，含 ⟹ 推理链）](#51-定理矩阵10-行含--推理链)
     - [5.2 推理链层级图](#52-推理链层级图)
   - [六、反命题决策树（Counter-proposition Decision Trees）](#六反命题决策树counter-proposition-decision-trees)
@@ -101,7 +101,7 @@
     - [8.2 正确示例：并发执行](#82-正确示例并发执行)
     - [8.3 正确示例：Stream 异步迭代](#83-正确示例stream-异步迭代)
     - [8.4 反例：在 async 中阻塞线程](#84-反例在-async-中阻塞线程)
-    - [8.5 反例：未 Pin 的自引用 Future](#85-反例未-pin-的自引用-future)
+    - [8.5 反例：未 Pin 的自引用（Reference） Future](#85-反例未-pin-的自引用-future)
     - [8.6 边界极限测试：跨越 await 的 Send 约束](#86-边界极限测试跨越-await-的-send-约束)
     - [8.7 边界极限测试：取消安全系统分析](#87-边界极限测试取消安全系统分析)
     - [8.8 Waker 契约与活性](#88-waker-契约与活性)
@@ -109,7 +109,7 @@
     - [8.10 `Stream` / `Sink` trait 完整分析](#810-stream--sink-trait-完整分析)
     - [8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异](#811-pinboxdyn-future-vs-impl-future-的性能差异)
     - [8.12 `loom` 并发模型检测工具](#812-loom-并发模型检测工具)
-    - [8.13 Miri 动态验证：async 状态机的内存安全检测](#813-miri-动态验证async-状态机的内存安全检测)
+    - [8.13 Miri 动态验证：async 状态机的内存安全（Memory Safety）检测](#813-miri-动态验证async-状态机的内存安全检测)
       - [场景 1：悬垂指针检测（使用已释放的 Box）](#场景-1悬垂指针检测使用已释放的-box)
       - [场景 2：无效值检测（非法 bool 构造）](#场景-2无效值检测非法-bool-构造)
       - [场景 3：async 状态机中的未初始化内存](#场景-3async-状态机中的未初始化内存)
@@ -120,9 +120,9 @@
       - [问题与解决方案演进](#问题与解决方案演进)
       - [当前最佳实践](#当前最佳实践)
       - [限制与注意事项](#限制与注意事项)
-      - [生命周期陷阱](#生命周期陷阱)
+      - [生命周期（Lifetimes）陷阱](#生命周期陷阱)
   - [十一、国际课程与论文对齐](#十一国际课程与论文对齐)
-  - [十二、`AsyncFn` Trait 家族：异步闭包的类型化（1.85 stable，RFC 3668）](#十二asyncfn-trait-家族异步闭包的类型化185-stablerfc-3668)
+  - [十二、`AsyncFn` Trait 家族：异步闭包（Closures）的类型化（1.85 stable，RFC 3668）](#十二asyncfn-trait-家族异步闭包的类型化185-stablerfc-3668)
     - [12.1 问题：异步闭包的类型真空](#121-问题异步闭包的类型真空)
     - [12.2 `AsyncFn` 家族层级](#122-asyncfn-家族层级)
     - [12.3 关键形式化特性：可重入性限制](#123-关键形式化特性可重入性限制)
@@ -142,7 +142,7 @@
     - [16.1 边界测试：非 Send 类型跨 await 点（编译错误）](#161-边界测试非-send-类型跨-await-点编译错误)
     - [16.2 边界测试：在 async 块中调用阻塞函数（逻辑错误）](#162-边界测试在-async-块中调用阻塞函数逻辑错误)
     - [16.3 边界测试：递归 async fn（编译错误）](#163-边界测试递归-async-fn编译错误)
-    - [16.4 边界测试：在 async 块中借用局部变量生命周期不足（编译错误）](#164-边界测试在-async-块中借用局部变量生命周期不足编译错误)
+    - [16.4 边界测试：在 async 块中借用（Borrowing）局部变量生命周期不足（编译错误）](#164-边界测试在-async-块中借用局部变量生命周期不足编译错误)
     - [16.5 边界测试：`Pin<&mut Self>` 在 async trait 中的误用（编译错误）](#165-边界测试pinmut-self-在-async-trait-中的误用编译错误)
     - [10.4 边界测试：`async fn` 在 trait 中的缺失与 `async_trait` crate（编译错误）](#104-边界测试async-fn-在-trait-中的缺失与-async_trait-crate编译错误)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
@@ -750,7 +750,7 @@ graph TD
 |:---|:---|:---|:---|:---|:---|:---|:---|
 | **L1** | Future trait 语义 ⟹ 惰性求值 | `async fn` / `async {}` 被调用 | 仅构造状态机，无实际执行；首次 `poll` 前零副作用 | λ-演算惰性求值语义 | T1, T2, C1 | 立即热启动（如某些语言 Promise） | 语义偏离 Rust 模型，产生意外副作用 |
 | **L2** | `Pin<&mut Self>` ⟹ 自引用安全 | `!Unpin` + 正确 Pin 构造（`Box::pin` 或栈 Pin） | 状态机内指针字段在跨 `poll` 间始终有效，地址恒定 | 内存位置稳定性公理 | T1, C2, P2 | `Unpin` 误实现、手动 `mem::swap`、栈帧移动 | UB（悬垂指针解引用） |
-| **T1** | async/await 状态机变换 ⟹ 零成本抽象 | 编译器生成 + L2（Pin 保证不动） | 运行时无额外开销，等价于手写状态机；无 GC、无动态分发（默认） | 编译器正确性公理 | A1, S1 | 强制 `Box::pin` 堆分配、`dyn Future` 动态分发、递归状态机膨胀 | 性能退化（非语义错误），缓存不友好 |
+| **T1** | async/await 状态机变换 ⟹ 零成本抽象（Zero-Cost Abstraction） | 编译器生成 + L2（Pin 保证不动） | 运行时无额外开销，等价于手写状态机；无 GC、无动态分发（默认） | 编译器正确性公理 | A1, S1 | 强制 `Box::pin` 堆分配、`dyn Future` 动态分发、递归状态机膨胀 | 性能退化（非语义错误），缓存不友好 |
 | **T2** | `Send` Future ⟹ 跨 await 点状态迁移安全 | 状态机所有捕获字段均实现 `Send` | 可安全跨线程传递并在新线程恢复 `poll`；await 点即为状态序列化点 | 线程安全传递公理 | C1, P1 | 字段含 `!Send`（如 `Rc<T>`、`MutexGuard`） | 编译错误 E0277 |
 | **C1** | `!Send` 类型跨 await ⟹ 编译错误 | 状态机含 `Rc`/裸指针/`MutexGuard` 等 | `tokio::spawn` 及跨线程调度被类型系统（Type System）拒绝 | 子类型拒绝公理 | — | `unsafe impl Send for T` 恶意/错误绕过 | 数据竞争（运行时（Runtime） UB），破坏线程安全 |
 | **C2** | 未 Pin 的自引用结构被移动 ⟹ UB | 手写 Future 含自引用字段且未使用 `Pin<&mut Self>` | 内部指针悬垂，后续 `poll` 解引用无效 | 内存安全（Memory Safety）公理 | — | 编译器未生成 Pin（手写 `Future` 时遗漏） | UB（不可定义行为，可能静默崩溃） |
@@ -2551,7 +2551,7 @@ async fn async_fn(f: impl AsyncFn(i32) -> i32) -> i32 { f(42).await }
 // fn effect_fn(f: impl Fn(i32) -> i32) -> i32 async { f(42).await }
 ```
 
-**形式化洞察**: `AsyncFn` 不是独立的类型系统扩展，而是 `Fn` + `Future` 的组合。但它在**函数签名层面**显式标记了"异步效果"，为未来的 `effect` 关键字提供了设计原型。
+**形式化洞察**: `AsyncFn` 不是独立的类型系统（Type System）扩展，而是 `Fn` + `Future` 的组合。但它在**函数签名层面**显式标记了"异步效果"，为未来的 `effect` 关键字提供了设计原型。
 
 > **来源: [RFC 3668](https://github.com/rust-lang/rfcs/pull/3668)** Async closures trait family.
 > **[来源: Rust 1.85 Release Notes]** Async closures stabilized.
@@ -2638,7 +2638,7 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 | Unsafe 权限分离 | [](03_unsafe.md) | `unsafe_op_in_unsafe_fn` 的权限模型 |
 
 > **过渡: L3 → L2**
-> `async fn` 的本质是状态机——编译器将 `await` 点转换为 enum 变体。这种转换依赖于泛型（`impl Future<Output = T>`）和 Trait（`Future::poll`）的协同。理解 async 的底层实现，需要回到泛型和 Trait 的基础。
+> `async fn` 的本质是状态机——编译器将 `await` 点转换为 enum 变体。这种转换依赖于泛型（Generics）（`impl Future<Output = T>`）和 Trait（`Future::poll`）的协同。理解 async 的底层实现，需要回到泛型和 Trait 的基础。
 > 底层机制见 [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md)（Trait 定义）与 [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md)（泛型单态化）。
 
 > **过渡: L3 → L5**

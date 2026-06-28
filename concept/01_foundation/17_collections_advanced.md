@@ -59,9 +59,9 @@
   - [十二、边界测试：高级集合的编译错误](#十二边界测试高级集合的编译错误)
     - [12.1 边界测试：`BTreeMap` 键未实现 `Ord`（编译错误）](#121-边界测试btreemap-键未实现-ord编译错误)
     - [12.2 边界测试：`VecDeque` 容量与索引的环绕（逻辑错误）](#122-边界测试vecdeque-容量与索引的环绕逻辑错误)
-    - [10.3 边界测试：`HashMap` 的 `Entry` API 与借用冲突（编译错误）](#103-边界测试hashmap-的-entry-api-与借用冲突编译错误)
+    - [10.3 边界测试：`HashMap` 的 `Entry` API 与借用（Borrowing）冲突（编译错误）](#103-边界测试hashmap-的-entry-api-与借用冲突编译错误)
     - [10.4 边界测试：`BTreeMap` 的 range 查询与可变遍历（编译错误）](#104-边界测试btreemap-的-range-查询与可变遍历编译错误)
-    - [10.5 边界测试：`HashSet` 的自定义哈希与 `Hash` 一致性（运行时逻辑错误）](#105-边界测试hashset-的自定义哈希与-hash-一致性运行时逻辑错误)
+    - [10.5 边界测试：`HashSet` 的自定义哈希与 `Hash` 一致性（Coherence）（运行时（Runtime）逻辑错误）](#105-边界测试hashset-的自定义哈希与-hash-一致性运行时逻辑错误)
     - [10.5 边界测试：`HashMap` 的 `Entry` API 与借用冲突（编译错误）](#105-边界测试hashmap-的-entry-api-与借用冲突编译错误)
     - [10.6 边界测试：`BTreeMap` 的键修改与排序不变性破坏（逻辑错误/UB）](#106-边界测试btreemap-的键修改与排序不变性破坏逻辑错误ub)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -798,7 +798,7 @@ fn main() {
 > **修正**:
 >
 > `BTreeMap::range` 返回不可变迭代器（Iterator），因为遍历过程中修改树结构会破坏迭代器状态（节点指针悬垂）。
-> 这与 C++ 的 `std::map` 相同（遍历中 `insert` 可能使迭代器失效），但 Rust 在编译期阻止。`BTreeMap` 的 sorted 性质使其适合范围查询，但修改必须在遍历前或遍历后完成。
+> 这与 C++ 的 `std::map` 相同（遍历中 `insert` 可能使迭代器（Iterator）失效），但 Rust 在编译期阻止。`BTreeMap` 的 sorted 性质使其适合范围查询，但修改必须在遍历前或遍历后完成。
 > 安全模式：
 >
 > 1) `collect` 需要修改的键值对，遍历后再批量插入；

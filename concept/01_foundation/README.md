@@ -29,7 +29,7 @@
     - [补充文件索引](#补充文件索引)
   - [三、课程对齐路径](#三课程对齐路径)
   - [四、形式化层级定位（理论-模型-实践）](#四形式化层级定位理论-模型-实践)
-  - [五、本层定理一致性概览](#五本层定理一致性概览)
+  - [五、本层定理一致性（Coherence）概览](#五本层定理一致性概览)
   - [六、认知路径（从直觉到形式化）](#六认知路径从直觉到形式化)
   - [七、待创建内容](#七待创建内容)
   - [八、跨层出口](#八跨层出口)
@@ -161,14 +161,14 @@ Type System（理解"类型即证明"）
 | [01_ownership.md](01_ownership.md) | 所有权（Ownership） | 唯一所有权、Move/Copy/Drop、线性/仿射逻辑、RAII | ✅ v1.0 | 无（L1 入口） | Borrowing, Type System |
 | [02_borrowing.md](02_borrowing.md) | 借用（Borrowing） | `&T`/`&mut T`、AXM 规则、Reborrow、NLL | ✅ v1.0 | Ownership | Lifetimes, Concurrency |
 | [03_lifetimes.md](03_lifetimes.md) | 生命周期（Lifetimes） | 标注、Elision、NLL、`'static`、HRTB、Variance | ✅ v1.0 | Borrowing | Generics, Async |
-| [04_type_system.md](04_type_system.md) | 类型系统基础 | 标量/复合/ADT、impl/dyn Trait、类型推断（Type Inference） | ✅ v1.0 | Ownership | Trait, Generics, Macros |
+| [04_type_system.md](04_type_system.md) | 类型系统（Type System）基础 | 标量/复合/ADT、impl/dyn Trait、类型推断（Type Inference） | ✅ v1.0 | Ownership | Trait, Generics, Macros |
 | 05_reference_semantics.md | 引用（Reference）语义 | Deref/DerefMut、自动解引用、智能指针（Smart Pointer）接口 | ✅ v1.0 | Borrowing, Type System | Pin, FFI |
 | [06_zero_cost_abstractions.md](06_zero_cost_abstractions.md) | 零成本抽象（Zero-Cost Abstraction） | 单态化（Monomorphization）、内联、迭代器（Iterator）零成本、编译期优化 | ✅ v1.0 | Type System, Generics | Ecosystem Patterns |
 | [07_control_flow.md](07_control_flow.md) | 控制流 | match/if let/loop、表达式导向、穷尽性检查 | ✅ v1.0 | Ownership, Type System | Iterator, Async |
 | [08_collections.md](08_collections.md) | 集合类型 | Vec/HashMap/BTreeMap/HashSet、Entry API、容量管理 | ✅ v1.0 | Ownership, Generics | Smart Pointers, Ecosystem |
 | [09_strings_and_text.md](09_strings_and_text.md) | 字符串与文本 | String/str、UTF-8、格式化、OS 字符串、C 字符串 | ✅ v1.0 | Ownership, Type System | Collections, FFI |
 | [10_numerics.md](10_numerics.md) | 数值类型与运算 | 整数、浮点、溢出、饱和运算、类型转换 | ✅ v1.0 | Type System | Zero Cost, Collections |
-| [19_value_vs_reference_semantics.md](19_value_vs_reference_semantics.md) | 值语义 vs 引用语义 | C++/Java/Python/Rust 对比、Rust 所有权作为值语义极致 | ✅ v1.0 | Ownership, Variable Model | Rust vs C++ |
+| [19_value_vs_reference_semantics.md](19_value_vs_reference_semantics.md) | 值语义 vs 引用（Reference）语义 | C++/Java/Python/Rust 对比、Rust 所有权作为值语义极致 | ✅ v1.0 | Ownership, Variable Model | Rust vs C++ |
 | [20_variable_model.md](20_variable_model.md) | 变量模型（PL 通用） | 环境/存储、绑定语义、值语义 vs 引用（Reference）语义、lvalue/rvalue | ✅ v1.0 | Type System, Ownership | Evaluation Strategies |
 | [21_effects_and_purity.md](21_effects_and_purity.md) | 副作用与纯度 | 引用透明、效果系统、Rust const/unsafe/async 作为效果 | ✅ v1.0 | Ownership, Type System | Formal Methods |
 | [22_data_abstraction_spectrum.md](22_data_abstraction_spectrum.md) | 数据抽象谱系 | C→C++→Java→Haskell→Rust 的抽象演进、Trait 统一性 | ✅ v1.0 | Type System, Trait | Comparative |
@@ -217,8 +217,8 @@ Type System（理解"类型即证明"）
 |:---|:---|:---|:---|:---|
 | **所有权（Ownership）** | 线性/仿射逻辑：资源不可复制 | 所有权状态机：有主/无主 | `move`、`Copy`、`Drop`、RAII | Linear Logic ⊗ · Affine weakening |
 | **借用（Borrowing）** | 分离逻辑：分数权限 | 借用检查器算法 | `&T`、`&mut T`、编译错误 E0382/E0502 | Fractional Permissions · Separation Logic |
-| **生命周期** | 区域类型系统：偏序约束 | 约束图、偏序求解 | 标注、`'a`、Elision、NLL | Region Types (Tofte & Talpin 1994) |
-| **类型系统** | 类型论、范畴论：和/积类型 | HM 推断 + 所有权约束 | `enum`、`struct`、`match`、类型标注 | Algebraic Type Theory · Hindley-Milner |
+| **生命周期（Lifetimes）** | 区域类型系统：偏序约束 | 约束图、偏序求解 | 标注、`'a`、Elision、NLL | Region Types (Tofte & Talpin 1994) |
+| **类型系统** | 类型论、范畴论：和/积类型 | HM 推断 + 所有权（Ownership）约束 | `enum`、`struct`、`match`、类型标注 | Algebraic Type Theory · Hindley-Milner |
 
 ---
 
@@ -227,7 +227,7 @@ Type System（理解"类型即证明"）
 | 定理 | 前提 | 结论 | 依赖的 L4 公理 | 失效条件 | 典型错误码 |
 |:---|:---|:---|:---|:---|:---|
 | 所有权唯一性 | 每个值有唯一 owner | 无 double-free | 线性逻辑 ⊗ | `Rc` 循环、`mem::forget` | — |
-| AXM (Alias-XOR-Mutation) | 借用检查器接受 | 无数据竞争 | 分离逻辑 | `UnsafeCell`、裸指针 | E0502 |
+| AXM (Alias-XOR-Mutation) | 借用（Borrowing）检查器接受 | 无数据竞争 | 分离逻辑 | `UnsafeCell`、裸指针 | E0502 |
 | 引用有效性 | 生命周期约束满足 | 无悬垂指针 | 区域类型 | `'static` 误用、循环引用 | E0597 |
 | Move 语义安全 | 非 Copy 类型赋值后 | 原变量不可访问 | 仿射逻辑 | 隐式 Copy（意外） | E0382 |
 

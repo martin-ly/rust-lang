@@ -36,7 +36,7 @@
     - 1.3 运行时（Runtime）借用（Borrowing）检查
   - [二、技术细节](#二技术细节)
     - [2.1 `Cell<T>`：无借用（Borrowing）语义的复制](#21-cellt无借用语义的复制)
-    - [2.2 `RefCell<T>`：动态借用规则](#22-refcellt动态借用规则)
+    - [2.2 `RefCell<T>`：动态借用（Borrowing）规则](#22-refcellt动态借用规则)
     - [2.3 `Mutex<T>` 与 `RwLock<T>`：线程安全版本](#23-mutext-与-rwlockt线程安全版本)
   - [三、使用模式](#三使用模式)
   - [四、反命题与边界分析](#四反命题与边界分析)
@@ -50,7 +50,7 @@
   - [相关概念文件](#相关概念文件)
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
-    - [10.5 边界测试：`RefCell::borrow_mut` 的递归 panic（运行时 panic）](#105-边界测试refcellborrow_mut-的递归-panic运行时-panic)
+    - [10.5 边界测试：`RefCell::borrow_mut` 的递归 panic（运行时（Runtime） panic）](#105-边界测试refcellborrow_mut-的递归-panic运行时-panic)
     - [10.6 边界测试：`Cell::take` 与 `Default` 的隐式要求（编译错误）](#106-边界测试celltake-与-default-的隐式要求编译错误)
   - [实践](#实践)
   - [参考来源](#参考来源)
@@ -738,7 +738,7 @@ fn main() {
 以下哪种场景最适合使用 `RefCell<T>`？
 
 - A. 多线程共享可变状态
-- B. 单线程中需要绕过编译期借用规则（如实现自引用或回调）
+- B. 单线程中需要绕过编译期借用规则（如实现自引用（Reference）或回调）
 - C. 需要原子操作（Atomic Operations）保证无锁并发
 
 <details>
@@ -769,7 +769,7 @@ fn main() {
 <details>
 <summary>✅ 答案</summary>
 
-**B. 多所有权 + 运行时可变借用（Mutable Borrow）**。
+**B. 多所有权（Ownership） + 运行时可变借用（Mutable Borrow）**。
 
 组合语义：
 

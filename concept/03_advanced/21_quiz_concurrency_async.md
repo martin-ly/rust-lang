@@ -89,7 +89,7 @@ fn main() {
 | 类型 | `Send` | `Sync` | 说明 |
 |:---|:---:|:---:|:---|
 | `Rc<T>` | ❌ | ❌ | 非原子引用（Reference）计数 |
-| `Arc<T>` | ✅（若 `T: Send + Sync`） | ✅（若 `T: Send + Sync`） | 原子引用计数 |
+| `Arc<T>` | ✅（若 `T: Send + Sync`） | ✅（若 `T: Send + Sync`） | 原子引用（Reference）计数 |
 | `Mutex<T>` | ✅（若 `T: Send`） | ✅（若 `T: Send`） | 互斥锁保护 |
 | `Cell<T>` | ✅ | ❌ | 内部可变性，非同步 |
 | `RefCell<T>` | ✅ | ❌ | 运行时（Runtime）借用（Borrowing）检查，非同步 |
@@ -354,7 +354,7 @@ async fn main() {
 
 **错误信息**：`use of moved value: v`
 
-**解析**：`async move` 闭包（Closures）通过 `move` 捕获了 `v` 的所有权，`main` 中的 `v` 不再可用。
+**解析**：`async move` 闭包（Closures）通过 `move` 捕获了 `v` 的所有权（Ownership），`main` 中的 `v` 不再可用。
 
 **解决方案**——使用 `Arc` 共享数据：
 
@@ -490,7 +490,7 @@ fn main() {
 
 **`'static` 约束的深层含义**：
 
-`thread::spawn` 要求闭包满足 `'static`，即闭包捕获的数据必须：
+`thread::spawn` 要求闭包（Closures）满足 `'static`，即闭包捕获的数据必须：
 
 - 拥有所有权（`move`），或
 - 是 `'static` 生命周期（Lifetimes）（如字符串字面量 `"hello"`）
@@ -646,7 +646,7 @@ println!("Result: {}", *counter.lock().unwrap());
 
 | 得分 | 评价 | 建议 |
 |:---:|:---|:---|
-| 10/10 | 🏆 并发/异步已内化 | 进阶至 [Lock-Free](16_lock_free.md) 或 [Stream Processing](20_stream_processing_semantics.md) |
+| 10/10 | 🏆 并发/异步（Async）已内化 | 进阶至 [Lock-Free](16_lock_free.md) 或 [Stream Processing](20_stream_processing_semantics.md) |
 | 7–9/10 | ✅ 核心概念掌握 | 强化 [并发练习](../../exercises/src/concurrency) 和 [异步练习](../../exercises/src/async_programming) |
 | 4–6/10 | 🔄 需巩固基础 | 重读 [Concurrency](01_concurrency.md) · [Async](02_async.md) |
 | 0–3/10 | 📚 建议重新开始 | 从 [Ownership](../01_foundation/01_ownership.md) 确认 Send/Sync 基础，再读并发章节 |

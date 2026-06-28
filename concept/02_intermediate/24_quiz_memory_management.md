@@ -175,7 +175,7 @@ fn main() {
 
 **引用（Reference）计数规则**：
 
-- `Rc::clone(&data)`：增加强引用计数，不克隆数据
+- `Rc::clone(&data)`：增加强引用（Reference）计数，不克隆数据
 - `Rc::strong_count`：当前强引用数
 - 当 `strong_count` 降为 0，数据被 drop
 
@@ -189,7 +189,7 @@ std::thread::spawn(move || {
 });
 ```
 
-**知识点**：`Rc` 是单线程共享所有权的标准工具。任何需要跨线程共享的场景都必须使用 `Arc`。[→ 内存管理详解](03_memory_management.md)
+**知识点**：`Rc` 是单线程共享所有权（Ownership）的标准工具。任何需要跨线程共享的场景都必须使用 `Arc`。[→ 内存管理详解](03_memory_management.md)
 
 </details>
 
@@ -248,7 +248,7 @@ let b2 = ref_cell.borrow_mut(); // ❌ 运行时 panic！
 |:---|:---:|:---|:---:|
 | `Rc<RefCell<T>>` | ❌ | ✅ | 运行时（Runtime） |
 | `Arc<Mutex<T>>` | ✅ | ✅ | 运行时（Runtime）（锁） |
-| `Arc<RwLock<T>>` | ✅ | ✅（读多写少） | 运行时（锁） |
+| `Arc<RwLock<T>>` | ✅ | ✅（读多写少） | 运行时（Runtime）（锁） |
 
 **知识点**：`Rc<RefCell<T>>` 是 Rust 标准库中"绕过编译期借用（Borrowing）检查"的标准方式——不是关闭检查器，而是将检查推迟到运行时。[→ 内存管理详解](03_memory_management.md)
 
@@ -282,7 +282,7 @@ fn main() {
 | 适用类型 | `Copy` 类型 | 任意类型 |
 | 获取内部值 | `.get()`（复制值） | `.borrow()`（返回引用） |
 | 修改 | `.set(new_val)` | `.borrow_mut()` |
-| 运行时检查 | 无（因为值被复制） | 有（借用规则检查） |
+| 运行时检查 | 无（因为值被复制） | 有（借用（Borrowing）规则检查） |
 | 开销 | 最低 | 较低（引用计数） |
 
 **为什么 `Cell` 不需要运行时借用检查**：
@@ -639,7 +639,7 @@ hello(&(*m)[..]);
 | `String` | `str` | 解引用到字符串切片（String Slice） |
 | `Cow<'a, T>` | `T` | 写时克隆指针 |
 
-**知识点**：`Deref` 是 Rust 中智能指针"透明化"的关键机制，使智能指针的使用体验接近普通引用。[→ 内存管理详解](03_memory_management.md)
+**知识点**：`Deref` 是 Rust 中智能指针（Smart Pointer）"透明化"的关键机制，使智能指针的使用体验接近普通引用。[→ 内存管理详解](03_memory_management.md)
 
 </details>
 

@@ -37,7 +37,7 @@
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 关联类型（Associated Types）](#11-关联类型associated-types)
-    - [1.2 泛型关联类型（GATs）](#12-泛型关联类型gats)
+    - [1.2 泛型（Generics）关联类型（GATs）](#12-泛型关联类型gats)
     - [1.3 特化（Specialization）](#13-特化specialization)
   - [二、技术细节](#二技术细节)
     - [2.1 关联类型 vs 泛型参数](#21-关联类型-vs-泛型参数)
@@ -673,7 +673,7 @@ fn main() {
 }
 ```
 
-> **修正**: **GAT**（Generic Associated Types，Rust 1.65+）允许关联类型带泛型参数：`type Item<'a>`。但 GAT 的使用常需额外约束：1) `where Self: 'a` — 保证 `self` 的生命周期（Lifetimes）覆盖 `'a`；2) `Item<'a>: 'a` — 保证输出类型在 `'a` 内有效。GAT 的应用：1)  lending iterator（`LendingIterator` trait，返回与自身绑定的引用）；2) 类型级函数（`type Family<T>`）；3) 替代部分 HKT（Higher-Kinded Types）用例。GAT 的编译错误信息可能复杂，因涉及多个生命周期和关联类型约束。这与 Haskell 的 associated type families（`type family Item c :: * -> *`）或 C++ 的模板模板参数（`template<template<typename> class F>`）类似——Rust 的 GAT 是类型系统的重要扩展，但学习曲线陡。来源: [Rust Reference — Generic Associated Types] · 来源: [RFC 1598 — GAT]
+> **修正**: **GAT**（Generic Associated Types，Rust 1.65+）允许关联类型带泛型参数：`type Item<'a>`。但 GAT 的使用常需额外约束：1) `where Self: 'a` — 保证 `self` 的生命周期（Lifetimes）覆盖 `'a`；2) `Item<'a>: 'a` — 保证输出类型在 `'a` 内有效。GAT 的应用：1)  lending iterator（`LendingIterator` trait，返回与自身绑定的引用）；2) 类型级函数（`type Family<T>`）；3) 替代部分 HKT（Higher-Kinded Types）用例。GAT 的编译错误信息可能复杂，因涉及多个生命周期和关联类型约束。这与 Haskell 的 associated type families（`type family Item c :: * -> *`）或 C++ 的模板模板参数（`template<template<typename> class F>`）类似——Rust 的 GAT 是类型系统（Type System）的重要扩展，但学习曲线陡。来源: [Rust Reference — Generic Associated Types] · 来源: [RFC 1598 — GAT]
 
 ## 实践
 
@@ -735,7 +735,7 @@ trait LendingIterator {
 <details>
 <summary>✅ 答案</summary>
 
-**B. 允许关联类型自身带生命周期/泛型参数**。
+**B. 允许关联类型自身带生命周期（Lifetimes）/泛型参数**。
 
 GAT（Generic Associated Types）是 Rust 1.65 稳定化的重要特性。它允许关联类型有自己的泛型参数：
 
