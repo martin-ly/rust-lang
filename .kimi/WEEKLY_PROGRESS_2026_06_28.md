@@ -67,6 +67,9 @@
 - `unsafe_rust/` 练习主题：**7 个练习 + 17 个集成测试**
 - `crates/common` 新增示例/测试：**3 个文件**
 - 删除冗余 BorrowSanitizer 预览文件：**1 个**
+- crate docs 核心 boilerplate 覆盖率：**13/13 crate**（README / ONE_PAGE_SUMMARY / 00_MASTER_INDEX）
+- c13_embedded 新增 boilerplate docs：**3 个**
+- 删除重复 `README (2).md`：**1 个**
 - 全 workspace 编译/测试/Clippy 状态：**✅ 通过**
 - 距离 Rust 1.97.0 发布日：**11 天**
 
