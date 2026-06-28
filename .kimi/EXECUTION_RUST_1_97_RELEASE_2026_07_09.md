@@ -4,7 +4,9 @@
 > **目标版本**: Rust 1.97.0
 > **预计耗时**: 8 小时（可分 1-2 天完成）
 > **前置依赖**: `.kimi/plan_rust_1_97_stabilization.md` 已就绪
-> **预检记录**: 2026-06-25 预检完成，`Rust 1.97.0 stable` 尚未发布（当前最新为 beta.4），详见 `reports/RUST_1_97_RELEASE_PREFLIGHT_2026_06_25.md`
+> **预检记录**:
+>   - 2026-06-25 预检完成，`Rust 1.97.0 stable` 尚未发布（当前最新为 beta.4），详见 `reports/RUST_1_97_RELEASE_PREFLIGHT_2026_06_25.md`
+>   - 2026-06-28 发布日探测脚本 `scripts/probe_rust_197_apis.rs` 与执行脚本 `scripts/rust_197_release_day.sh` 就绪，倒计时排期见 `.kimi/RUST_197_RELEASE_COUNTDOWN_2026_06_28.md`
 
 ---
 
@@ -14,6 +16,7 @@
 - [ ] 确认本机网络可访问 `static.rust-lang.org`
 - [ ] 从当前分支创建发布日工作分支：`git checkout -b rust-1.97-release-day`
 - [ ] 备份当前 `Cargo.lock`（可选）：`cp Cargo.lock Cargo.lock.pre-1.97`
+- [ ] 运行发布日 API 探测脚本：`rustc --edition 2024 scripts/probe_rust_197_apis.rs -o /tmp/probe_197 && /tmp/probe_197`
 
 ---
 
