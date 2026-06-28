@@ -31,6 +31,7 @@ rustlings watch
 | **C09 设计模式** | 07_structs, 08_enums, 15_traits | 综合运用 | 无直接对应 |
 | **C10 网络** | - | Rustlings 无网络专题 | 参考 C10 模块 |
 | **C11 宏系统** | 21_macros | [21_macros](https://github.com/rust-lang/rustlings/tree/main/exercises/21_macros) | 学完基础后 |
+| **Unsafe Rust** | - | Rustlings 无 unsafe 专题 | 参考 `exercises/src/unsafe_rust/mod.rs` 与 `exercises/tests/l3_unsafe_rust.rs` |
 | **C12 WASM** | - | Rustlings 无 WASM 专题 | 参考 C12 模块 |
 
 ---

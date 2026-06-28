@@ -34,7 +34,7 @@ exercises/
 │   ├── async_programming/        # 异步编程（5/10 道）
 │   ├── error_handling/           # 错误处理（3/5 道）
 │   ├── macros/                   # 宏系统（2/5 道）
-│   └── unsafe_rust/              # Unsafe Rust（0/5 道，预留）
+│   └── unsafe_rust/              # Unsafe Rust（7 道，已完成）
 ├── docs/
 │   └── <topic>/                  # 每道题的 README.md + hint.md
 ├── tests/                        # 集成测试（预留）
