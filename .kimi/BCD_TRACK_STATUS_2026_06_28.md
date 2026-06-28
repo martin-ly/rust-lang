@@ -114,6 +114,18 @@
 
 ---
 
+## I 轨道 — 历史归档锚点修复（新增）
+
+| 编号 | 任务 | 状态 | 交付物 |
+|---|---|---|---|
+| I1 | 修复 rust-ownership-decidability 12 个锚点问题 | ✅ | 12 个归档文件 TOC/锚点修复 |
+| I2 | 清零 docs/LINK_CHECK_REPORT.md 损坏链接 | ✅ | 损坏链接从 12 降至 **0** |
+| I3 | 顺手修复 1 个 archive 文件路径错误 | ✅ | `docs/archive/c_class_audit_2026_06_08/content/README.md` Coq 链接路径修正 |
+
+**I 轨道结论**: ✅ **docs 内部链接损坏数清零**
+
+---
+
 ## 当前阻塞与风险
 
 | 风险 | 可能性 | 影响 | 缓解措施 |
@@ -146,3 +158,4 @@
 - `F: 修复剩余 2 个 Coq 内部链接并更新链接报告`
 - `G: i18n 双语标注基线扫描`
 - `H: 运行 cargo audit 并生成报告`
+- `I: 修复 rust-ownership-decidability 归档锚点链接`
