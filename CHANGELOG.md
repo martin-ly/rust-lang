@@ -1,6 +1,6 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-06-28（P0 Rust 1.97 发布前准备 + 国际学习者入口补齐 + 权威事实复核）
+> **最后更新**: 2026-06-28（P0 Rust 1.97 发布前准备 + 国际学习者入口补齐 + 权威事实复核 + Stable MSRV 1.96.0 迁移完成）
 
 ---
 
@@ -101,8 +101,8 @@
   - `VecDeque::retain_back`：当前 nightly 方法不存在，保留等效实现。
   - `Box::into_non_null` / `Vec::into_non_null`：当前 nightly 方法不存在，保留等效实现。
 - **工具链策略**
-  - workspace 仍保持 `nightly` 工具链，因为多个 crate 声明 nightly-only feature gates（`gen_blocks`、`never_type`、`core_intrinsics` 等）。
-  - 1.97.0 已稳定的 API 在 nightly 上同样可用，代码中保留 fallback 并在发布日按 Release Notes 激活真实调用。
+  - workspace 默认工具链已迁移至 stable MSRV `1.96.0`；nightly 仅用于可选 `--features nightly` 预览模块与 `nightly-preview` CI job。
+  - 1.97.0 已稳定的 API 在 stable 上同样可用，代码中保留 fallback 并在发布日按 Release Notes 激活真实调用。
 
 ### P2 深度内容冲刺：rustc / Cargo / Kani / TRPL-Brown 对齐（2026-06-26）
 
@@ -772,6 +772,18 @@
 - **MVP 路径精化**: 40 小时学习路径标注必修/选修
 - **术语表冻结**: v3.0 标准，100 高频术语
 - **LEARNING_MVP_PATH_EN.md**: 英文版最小可行学习路径
+
+### 🔧 Phase 1 治理与 Stable MSRV 迁移（2026-06-28 完成）
+
+- **治理主控统一**: 以 `.kimi/PHASE1_GOVERNANCE_2026_06_28.md` 为 Phase 1 唯一主控，G1–G6 全部完成。
+- **工具链稳定化**: `rust-toolchain.toml` 从 `nightly` 切换为 MSRV `1.96.0`，默认开发/CI 均使用 stable。
+- **全局 feature gate 清理**: 移除所有 crate 级 `#![feature(...)]`；nightly-only 预览内容统一隔离到可选 `nightly` feature（`--features nightly`），不影响默认 stable 构建。
+- **稳定 API 改写**:
+  - `c02_type_system` 中 `Result<T, !>` / `Option<!>` 改写为 `Result<T, Infallible>` / `Option<Infallible>`。
+  - `c04_generic`、`c08_algorithms`、`exercises` 中 `gen {}` / `yield` 用法拆分为 `nightly` feature 下的预览模块，stable 路径改为等效迭代器实现。
+- **CI 对齐**: `.github/workflows/ci.yml` 主流程切到 stable；保留不阻塞的 `nightly-preview` job 验证 `--all-features`；新增 `naming-convention` job（warning 模式）。
+- **Clippy 基线修复**: 修复 `c01_ownership_borrow_scope` 与 `c05_threads` 中导致 stable clippy 失败的警告。
+- **验证**: `cargo +stable check/test/clippy --workspace` 与 `cargo +nightly check/clippy --workspace --all-features` 均通过。
 
 ---
 
