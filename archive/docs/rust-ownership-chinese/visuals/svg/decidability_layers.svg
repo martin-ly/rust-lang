@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+    </marker>
+    <style>
+      .title { font-family: Arial, sans-serif; font-size: 20px; font-weight: bold; text-anchor: middle; }
+      .layer-title { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; }
+      .layer-text { font-family: Arial, sans-serif; font-size: 12px; }
+      .box { stroke-width: 2; rx: 8; }
+      .decidable { fill: #c8e6c9; stroke: #2e7d32; }
+      .approx { fill: #fff9c4; stroke: #f57f17; }
+      .runtime { fill: #ffe0b2; stroke: #e65100; }
+      .undecidable { fill: #ffcdd2; stroke: #c62828; }
+    </style>
+  </defs>
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <text x="400" y="30" class="title">Rust可判定性层次模型</text>
+
+  <!-- Layer 1: Fully Decidable -->
+  <g transform="translate(100, 60)">
+    <rect x="0" y="0" width="600" height="100" class="box decidable"/>
+    <text x="300" y="25" text-anchor="middle" class="layer-title">第1层: 完全可判定 (Fully Decidable)</text>
+    
+    <g transform="translate(20, 45)">
+      <rect x="0" y="0" width="170" height="45" fill="white" stroke="#2e7d32" rx="5"/>
+      <text x="85" y="18" text-anchor="middle" class="layer-title">语法分析</text>
+      <text x="85" y="35" text-anchor="middle" class="layer-text">正则/上下文无关</text>
+    </g>
+    
+    <g transform="translate(215, 45)">
+      <rect x="0" y="0" width="170" height="45" fill="white" stroke="#2e7d32" rx="5"/>
+      <text x="85" y="18" text-anchor="middle" class="layer-title">类型检查</text>
+      <text x="85" y="35" text-anchor="middle" class="layer-text">Hindley-Milner</text>
+    </g>
+    
+    <g transform="translate(410, 45)">
+      <rect x="0" y="0" width="170" height="45" fill="white" stroke="#2e7d32" rx="5"/>
+      <text x="85" y="18" text-anchor="middle" class="layer-title">Trait求解</text>
+      <text x="85" y="35" text-anchor="middle" class="layer-text">可判定子集</text>
+    </g>
+  </g>
+
+  <!-- Arrow -->
+  <line x1="400" y1="160" x2="400" y2="180" stroke="#333" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Layer 2: Approximately Decidable -->
+  <g transform="translate(100, 190)">
+    <rect x="0" y="0" width="600" height="100" class="box approx"/>
+    <text x="300" y="25" text-anchor="middle" class="layer-title">第2层: 近似可判定 (Approximately Decidable)</text>
+    
+    <g transform="translate(20, 45)">
+      <rect x="0" y="0" width="170" height="45" fill="white" stroke="#f57f17" rx="5"/>
+      <text x="85" y="18" text-anchor="middle" class="layer-title">NLL借用检查</text>
+      <text x="85" y="35" text-anchor="middle" class="layer-text">多项式时间 O(n³)</text>
+    </g>
+    
+    <g transform="translate(215, 45)">
+      <rect x="0" y="0" width="170" height="45" fill="white" stroke="#f57f17" rx="5"/>
+      <text x="85" y="18" text-anchor="middle" class="layer-title">生命周期推断</text>
+      <text x="85" y="35" text-anchor="middle" class="layer-text">区域约束求解</text>
+    </g>
+    
+    <g transform="translate(410, 45)">
+      <rect x="0" y="0" width="170" height="45" fill="white" stroke="#f57f17" rx="5"/>
+      <text x="85" y="18" text-anchor="middle" class="layer-title">Drop检查</text>
+      <text x="85" y="35" text-anchor="middle" class="layer-text">所有权分析</text>
+    </g>
+  </g>
+
+  <!-- Arrow -->
+  <line x1="400" y1="290" x2="400" y2="310" stroke="#333" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Layer 3: Runtime Decidable -->
+  <g transform="translate(100, 320)">
+    <rect x="0" y="0" width="600" height="100" class="box runtime"/>
+    <text x="300" y="25" text-anchor="middle" class="layer-title">第3层: 运行时可判定 (Runtime Decidable)</text>
+    
+    <g transform="translate(20, 45)">
+      <rect x="0" y="0" width="170" height="45" fill="white" stroke="#e65100" rx="5"/>
+      <text x="85" y="18" text-anchor="middle" class="layer-title">RefCell借用</text>
+      <text x="85" y="35" text-anchor="middle" class="layer-text">运行时检查</text>
+    </g>
+    
+    <g transform="translate(215, 45)">
+      <rect x="0" y="0" width="170" height="45" fill="white" stroke="#e65100" rx="5"/>
+      <text x="85" y="18" text-anchor="middle" class="layer-title">Rc/Arc计数</text>
+      <text x="85" y="35" text-anchor="middle" class="layer-text">引用计数</text>
+    </g>
+    
+    <g transform="translate(410, 45)">
+      <rect x="0" y="0" width="170" height="45" fill="white" stroke="#e65100" rx="5"/>
+      <text x="85" y="18" text-anchor="middle" class="layer-title">Miri检测</text>
+      <text x="85" y="35" text-anchor="middle" class="layer-text">UB动态检测</text>
+    </g>
+  </g>
+
+  <!-- Arrow -->
+  <line x1="400" y1="420" x2="400" y2="440" stroke="#333" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Layer 4: Theoretically Undecidable -->
+  <g transform="translate(100, 450)">
+    <rect x="0" y="0" width="600" height="100" class="box undecidable"/>
+    <text x="300" y="25" text-anchor="middle" class="layer-title">第4层: 理论不可判定 (Theoretically Undecidable)</text>
+    
+    <g transform="translate(20, 45)">
+      <rect x="0" y="0" width="170" height="45" fill="white" stroke="#c62828" rx="5"/>
+      <text x="85" y="18" text-anchor="middle" class="layer-title">停机问题</text>
+      <text x="85" y="35" text-anchor="middle" class="layer-text">constexpr无限循环</text>
+    </g>
+    
+    <g transform="translate(215, 45)">
+      <rect x="0" y="0" width="170" height="45" fill="white" stroke="#c62828" rx="5"/>
+      <text x="85" y="18" text-anchor="middle" class="layer-title">Rice定理</text>
+      <text x="85" y="35" text-anchor="middle" class="layer-text">任意语义属性</text>
+    </g>
+    
+    <g transform="translate(410, 45)">
+      <rect x="0" y="0" width="170" height="45" fill="white" stroke="#c62828" rx="5"/>
+      <text x="85" y="18" text-anchor="middle" class="layer-title">类型系统限制</text>
+      <text x="85" y="35" text-anchor="middle" class="layer-text">图灵完备特性</text>
+    </g>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(720, 100)">
+    <text x="0" y="0" class="layer-title">复杂度</text>
+    <text x="0" y="25" class="layer-text">O(n) - 线性</text>
+    <text x="0" y="45" class="layer-text">O(n³) - 多项式</text>
+    <text x="0" y="65" class="layer-text">O(∞) - 无界</text>
+  </g>
+
+  <g transform="translate(720, 200)">
+    <text x="0" y="0" class="layer-title">处理策略</text>
+    <text x="0" y="25" class="layer-text">静态检查</text>
+    <text x="0" y="45" class="layer-text">近似分析</text>
+    <text x="0" y="65" class="layer-text">运行时检查</text>
+    <text x="0" y="85" class="layer-text">保守拒绝</text>
+  </g>
+</svg>

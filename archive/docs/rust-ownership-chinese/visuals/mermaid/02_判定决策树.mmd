@@ -1,0 +1,94 @@
+---
+title: Rust程序属性判定决策树
+---
+
+graph TD
+    Start(["程序属性P<br/>是否可被Rust验证？"])
+    
+    %% 第一层：语法属性
+    Syntax{"P是纯粹<br/>语法属性？"}
+    SyntaxYes["✅ 完全静态可判定"]
+    SyntaxDetails["算法: DFA/LR Parser<br/>复杂度: O(n)<br/>精确度: 100%<br/>示例: 变量命名、括号匹配"]
+    
+    %% 第二层：类型系统
+    TypeSystem{"P涉及<br/>类型系统？"}
+    TypeBasic{"基础类型<br/>匹配？"}
+    TypeBasicYes["✅ 合一算法<br/>复杂度: O(n²)"]
+    TypeLifetime{"生命周期<br/>关系？"}
+    TypeLifetimeYes["✅ NLL/Polonius<br/>复杂度: O(n³)<br/>近似但可靠"]
+    TypeTrait{"Trait约束<br/>求解？"}
+    TypeTraitYes["✅ 受限可判定<br/>限制: 无高阶类型"]
+    
+    %% 第三层：运行时信息
+    Runtime{"P需要<br/>运行时信息？"}
+    RuntimeBorrow{"借用状态？"}
+    RuntimeBorrowYes["✅ RefCell状态机<br/>代价: O(1) + panic风险"]
+    RuntimeRc{"引用计数？"}
+    RuntimeRcYes["✅ Rc/Arc原子操作<br/>代价: 内存序开销"]
+    RuntimeAlias{"别名关系？"}
+    RuntimeAliasYes["✅ Miri解释器<br/>覆盖: 动态执行路径"]
+    
+    %% 第四层：不可判定
+    Universal{"P涉及所有<br/>可能输入？"}
+    Halting{"程序<br/>终止性？"]
+    HaltingYes["❌ Halting Problem<br/>理论: Turing, 1936<br/>结果: 不可判定"]
+    Rice{"语义属性？"]
+    RiceYes["❌ Rice's Theorem<br/>属性: panic/泄漏/正确性<br/>结果: 不可判定"]
+    AliasPrecise{"精确别名<br/>分析？"}
+    AliasPreciseYes["❌ Landi-Ryder<br/>复杂度: PSPACE-hard<br/>结果: 静态不可精确判定"]
+    
+    %% 特殊情况
+    Existential["✅ 存在性可判定<br/>方法: 测试/符号执行<br/>覆盖: 特定路径"]
+    
+    %% 特殊处理
+    Special["特殊情况处理"]
+    Unsafe["🔶 Unsafe代码<br/>→ Miri + 人工审查"]
+    FFI["🔶 FFI边界<br/>→ 外部不变量假设"]
+    Formal["🔶 形式化验证<br/>→ Prusti/Creusot"]
+    
+    %% 连接
+    Start --> Syntax
+    Syntax -->|YES| SyntaxYes
+    Syntax -->|NO| TypeSystem
+    
+    TypeSystem -->|YES| TypeBasic
+    TypeBasic -->|YES| TypeBasicYes
+    TypeBasic -->|NO| TypeLifetime
+    TypeLifetime -->|YES| TypeLifetimeYes
+    TypeLifetime -->|NO| TypeTrait
+    TypeTrait -->|YES| TypeTraitYes
+    TypeTrait -->|NO| Runtime
+    
+    TypeSystem -->|NO| Runtime
+    
+    Runtime -->|YES| RuntimeBorrow
+    RuntimeBorrow -->|YES| RuntimeBorrowYes
+    RuntimeBorrow -->|NO| RuntimeRc
+    RuntimeRc -->|YES| RuntimeRcYes
+    RuntimeRc -->|NO| RuntimeAlias
+    RuntimeAlias -->|YES| RuntimeAliasYes
+    RuntimeAlias -->|NO| Universal
+    
+    Runtime -->|NO| Universal
+    
+    Universal -->|YES| Halting
+    Halting -->|YES| HaltingYes
+    Halting -->|NO| Rice
+    Rice -->|YES| RiceYes
+    Rice -->|NO| AliasPrecise
+    AliasPrecise -->|YES| AliasPreciseYes
+    AliasPrecise -->|NO| Special
+    
+    Universal -->|NO| Existential
+    
+    %% 样式
+    classDef decidable fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+    classDef approx fill:#fff9c4,stroke:#f57f17,stroke-width:2px
+    classDef runtime fill:#ffccbc,stroke:#d84315,stroke-width:2px
+    classDef undecidable fill:#ffcdd2,stroke:#c62828,stroke-width:2px
+    classDef special fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    
+    class SyntaxYes,TypeBasicYes,TypeLifetimeYes,TypeTraitYes decidable
+    class RuntimeBorrowYes,RuntimeRcYes,RuntimeAliasYes runtime
+    class HaltingYes,RiceYes,AliasPreciseYes undecidable
+    class Unsafe,FFI,Formal special

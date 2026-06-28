@@ -1,0 +1,112 @@
+# 所有权系统设计决策树
+
+> **内容分级**: [归档级]
+>
+> **分级**: [C]
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
+## 📑 目录
+>
+- [所有权系统设计决策树](.#所有权系统设计决策树)
+  - [📑 目录](.#-目录)
+  - [1. 智能指针选择决策树](.#1-智能指针选择决策树)
+  - [2. 并发策略决策树](.#2-并发策略决策树)
+  - [3. 错误处理决策树](.#3-错误处理决策树)
+  - [4. 生命周期标注决策](.#4-生命周期标注决策)
+  - [相关概念](.#相关概念)
+
+## 1. 智能指针选择决策树
+>
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+
+```text
+开始
+│
+├─► 需要共享所有权？
+│   ├─ 是 ─► 需要跨线程？
+│   │         ├─ 是 ─► Arc<T>
+│   │         └─ 否 ─► Rc<T>
+│   └─ 否 ─► 需要可变性？
+│             ├─ 是 ─► 需要运行时检查？
+│             │         ├─ 是 ─► RefCell<T>
+│             │         └─ 否 ─► Box<T> + &mut T
+│             └─ 否 ─► Box<T> / &T
+│
+```
+
+## 2. 并发策略决策树
+>
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+
+```text
+数据并发策略
+│
+├─► 数据所有权是否转移？
+│   ├─ 是 ─► 使用 move + spawn
+│   └─ 否 ─► 需要可变访问？
+│             ├─ 是 ─► 互斥访问？
+│             │         ├─ 是 ─► Mutex<T>
+│             │         └─ 否 ─► 考虑设计重构
+│             └─ 否 ─► 只读共享？
+│                       ├─ 是 ─► Arc<T> 或 静态生命周期
+│                       └─ 否 ─► 通道 (mpsc/oneshot)
+│
+```
+
+## 3. 错误处理决策树
+>
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)** · **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+
+```text
+错误处理策略
+│
+├─► 错误是否可恢复？
+│   ├─ 是 ─► 使用 Result<T, E>
+│   │         ├─ 需要传播？ ─► ? 运算符
+│   │         └─ 需要转换？ ─► map_err
+│   └─ 否 ─► 程序Bug？
+│             ├─ 是 ─► panic! + unwrap/expect
+│             └─ 否 ─► unreachable! / todo!
+│
+```
+
+## 4. 生命周期标注决策
+
+```text
+是否需要标注生命周期？
+│
+├─► 函数有引用参数？
+│   ├─ 否 ─► 无需标注
+│   ├─ 是 ─► 返回引用？
+│   │         ├─ 是 ─► 参数有多个？
+│   │         │         ├─ 是 ─► 必须标注
+│   │         │         └─ 否 ─► 推断即可
+│   │         └─ 否 ─► 推断即可
+│   └─ 结构体含引用？
+│       ├─ 是 ─► 必须标注
+│       └─ 否 ─► 推断即可
+```
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](../README.md)
+
+---
+
+## 相关概念
+
+- [visualizations 目录](../README.md)
+- [上级目录](../README.md)
+
+---

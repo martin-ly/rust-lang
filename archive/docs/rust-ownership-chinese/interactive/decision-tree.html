@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rust 所有权判定决策树</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        header p { opacity: 0.9; font-size: 1.1em; }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.4s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .question-card { text-align: center; }
+        .question-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            line-height: 32px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .question-text {
+            font-size: 1.3em;
+            color: #333;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .option-btn {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 16px 24px;
+            font-size: 1.05em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+        .option-btn:hover {
+            background: #e9ecef;
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+        .result-card { text-align: center; }
+        .result-icon { font-size: 4em; margin-bottom: 15px; }
+        .result-title { font-size: 1.8em; margin-bottom: 15px; }
+        .result-description { color: #666; line-height: 1.7; margin-bottom: 20px; }
+        .result-details {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .result-details h4 { color: #333; margin-bottom: 10px; }
+        .result-details ul { margin-left: 20px; color: #555; }
+        .result-details li { margin-bottom: 5px; }
+        .restart-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 14px 32px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .restart-btn:hover { background: #5568d3; transform: translateY(-2px); }
+        .breadcrumb {
+            display: flex; flex-wrap: wrap; gap: 8px;
+            margin-bottom: 20px; padding: 12px 16px;
+            background: #f8f9fa; border-radius: 8px;
+            font-size: 0.9em;
+        }
+        .breadcrumb-item { color: #667eea; }
+        .breadcrumb-separator { color: #999; }
+        .decidable .result-title { color: #28a745; }
+        .approximate .result-title { color: #856404; }
+        .runtime .result-title { color: #fd7e14; }
+        .undecidable .result-title { color: #dc3545; }
+        .code-example {
+            background: #1e1e1e; color: #d4d4d4;
+            border-radius: 8px; padding: 16px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em; overflow-x: auto;
+            margin-top: 15px; text-align: left;
+        }
+        footer {
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+            padding: 20px;
+        }
+        footer a { color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🦀 Rust 所有权判定决策树</h1>
+            <p>判断你的代码属性属于哪个可判定性层次</p>
+        </header>
+        <div id="app"></div>
+        <footer>
+            <p>基于 Rust所有权与可判定性：全面形式语义分析</p>
+        </footer>
+    </div>
+    <script>
+        const decisionTree = {
+            start: {
+                id: 'start',
+                question: '你的程序属性 P 是什么类型的属性？',
+                options: [
+                    { text: '语法层面的属性（如变量命名、括号匹配）', next: 'syntax' },
+                    { text: '类型系统相关的属性', next: 'type_system' },
+                    { text: '需要运行时信息才能确定', next: 'runtime' },
+                    { text: '涉及所有可能的输入情况', next: 'universal' },
+                    { text: '不确定/其他', next: 'special' }
+                ]
+            },
+            syntax: {
+                id: 'syntax',
+                question: '具体是哪种类型的语法属性？',
+                breadcrumb: ['语法属性'],
+                options: [
+                    { text: '词法分析（如标识符合法性）', next: 'result_syntax_lexical' },
+                    { text: '语法结构（如括号匹配、表达式结构）', next: 'result_syntax_parser' }
+                ]
+            },
+            result_syntax_lexical: {
+                id: 'result_syntax_lexical',
+                type: 'decidable',
+                icon: '✅',
+                title: '完全静态可判定',
+                description: '词法属性可以通过正则表达式或DFA在O(n)时间内判定。',
+                details: {
+                    '判定方法': '正则表达式 / DFA（确定性有限自动机）',
+                    '时间复杂度': 'O(n)，n为输入长度',
+                    '精确度': '100%，无近似',
+                    'Rust实践': '编译器前端词法分析器'
+                },
+                example: `// 标识符合法性检查
+let valid_name = "my_variable";  // ✅
+let invalid_name = "123_start";  // ❌ 编译错误
+
+// 括号匹配检查
+fn balanced() { { { } } }  // ✅
+fn unbalanced() { { { } }  // ❌ 编译错误`
+            },
+            result_syntax_parser: {
+                id: 'result_syntax_parser',
+                type: 'decidable',
+                icon: '✅',
+                title: '完全静态可判定',
+                description: '语法结构属性可以通过上下文无关文法和LR解析器在O(n)时间内判定。',
+                details: {
+                    '判定方法': 'LR解析器 / 下推自动机',
+                    '时间复杂度': 'O(n)，线性时间',
+                    '精确度': '100%',
+                    'Rust实践': 'rustc的syntax解析器'
+                },
+                example: `// 表达式结构
+let expr = 1 + 2 * 3;  // ✅ 语法正确`
+            },
+            type_system: {
+                id: 'type_system',
+                question: '具体是哪种类型系统属性？',
+                breadcrumb: ['类型系统'],
+                options: [
+                    { text: '基础类型匹配与推导', next: 'result_type_basic' },
+                    { text: '生命周期关系与检查', next: 'type_lifetime' },
+                    { text: 'Trait约束求解', next: 'result_type_trait' }
+                ]
+            },
+            type_lifetime: {
+                id: 'type_lifetime',
+                question: '生命周期检查的复杂度？',
+                breadcrumb: ['类型系统', '生命周期'],
+                options: [
+                    { text: '简单的生命周期关系', next: 'result_type_lifetime_simple' },
+                    { text: '复杂的借用检查场景', next: 'result_type_lifetime_complex' }
+                ]
+            },
+            result_type_basic: {
+                id: 'result_type_basic',
+                type: 'decidable',
+                icon: '✅',
+                title: '完全静态可判定',
+                description: '基础类型检查和推导可以通过Hindley-Milner算法在多项式时间内完成。',
+                details: {
+                    '判定方法': '类型合一（Unification）',
+                    '时间复杂度': 'O(n²)，多项式时间',
+                    '精确度': '100%',
+                    'Rust实践': 'rustc类型推断'
+                },
+                example: `let x = 5;        // 推断为i32
+let y = "hello";  // 推断为&str`
+            },
+            result_type_lifetime_simple: {
+                id: 'result_type_lifetime_simple',
+                type: 'decidable',
+                icon: '✅',
+                title: '完全静态可判定',
+                description: '简单的生命周期关系检查通过区域包含关系判定。',
+                details: {
+                    '判定方法': '区域包含检查',
+                    '时间复杂度': 'O(n²)',
+                    '精确度': '100%',
+                    'Rust实践': 'rustc生命周期检查'
+                },
+                example: `fn longest<'a>(x: &'a str, y: &'a str) -> &'a str;`
+            },
+            result_type_lifetime_complex: {
+                id: 'result_type_lifetime_complex',
+                type: 'approximate',
+                icon: '⚠️',
+                title: '静态近似可判定',
+                description: '复杂的借用检查场景采用NLL分析，可能保守拒绝安全代码。',
+                details: {
+                    '判定方法': 'NLL数据流分析 / Polonius',
+                    '时间复杂度': 'O(n³)',
+                    '精确度': '~95%，保守近似',
+                    'Rust实践': 'rustc NLL引擎'
+                },
+                example: `let p = if flag { &mut x } else { &mut y };
+// x = 2;  // 可能报错，即使实际上安全`
+            },
+            result_type_trait: {
+                id: 'result_type_trait',
+                type: 'decidable',
+                icon: '✅',
+                title: '受限可判定',
+                description: 'Trait约束求解在受限情况下是可判定的。',
+                details: {
+                    '判定方法': '约束求解',
+                    '时间复杂度': 'O(n²) ~ O(n³)',
+                    '限制': '无高阶类型',
+                    'Rust实践': 'rustc trait解析器'
+                },
+                example: `fn process<T: Display + Clone>(x: T) -> T;`
+            },
+            runtime: {
+                id: 'runtime',
+                question: '需要运行时信息的具体类型？',
+                breadcrumb: ['运行时'],
+                options: [
+                    { text: '借用状态（RefCell）', next: 'result_runtime_refcell' },
+                    { text: '引用计数管理（Rc/Arc）', next: 'result_runtime_rc' },
+                    { text: '指针别名关系', next: 'result_runtime_alias' }
+                ]
+            },
+            result_runtime_refcell: {
+                id: 'result_runtime_refcell',
+                type: 'runtime',
+                icon: '🔶',
+                title: '运行时动态判定',
+                description: 'RefCell在运行时通过借用状态机检查借用规则，违规时panic。',
+                details: {
+                    '判定方法': '运行时状态机',
+                    '时间复杂度': 'O(1)',
+                    '代价': '性能开销 + panic风险',
+                    'Rust实践': 'RefCell<T>, Cell<T>'
+                },
+                example: `let data = RefCell::new(5);
+let r1 = data.borrow();
+// data.borrow_mut();  // ❌ 运行时panic！`
+            },
+            result_runtime_rc: {
+                id: 'result_runtime_rc',
+                type: 'runtime',
+                icon: '🔶',
+                title: '运行时动态判定',
+                description: '引用计数在运行时维护，计数归零时释放内存。',
+                details: {
+                    '判定方法': '原子引用计数',
+                    '时间复杂度': 'O(1)',
+                    '代价': '内存顺序开销',
+                    'Rust实践': 'Rc<T>, Arc<T>'
+                },
+                example: `let data = Rc::new(vec![1, 2, 3]);
+let clone = Rc::clone(&data);  // 计数+1`
+            },
+            result_runtime_alias: {
+                id: 'result_runtime_alias',
+                type: 'runtime',
+                icon: '🔶',
+                title: '运行时动态判定',
+                description: '指针别名分析在静态时不可判定，Miri在运行时检测。',
+                details: {
+                    '判定方法': 'Miri解释器 + Tree Borrows',
+                    '时间复杂度': '高',
+                    '覆盖': '动态执行路径',
+                    'Rust实践': 'Miri工具'
+                },
+                example: `unsafe { let r1 = &mut x as *mut i32; }`
+            },
+            universal: {
+                id: 'universal',
+                question: '涉及所有可能输入的哪种属性？',
+                breadcrumb: ['全称量词'],
+                options: [
+                    { text: '程序是否会终止', next: 'result_undecidable_halting' },
+                    { text: '程序功能是否正确', next: 'result_undecidable_rice' },
+                    { text: '精确的指针别名关系', next: 'result_undecidable_alias' }
+                ]
+            },
+            result_undecidable_halting: {
+                id: 'result_undecidable_halting',
+                type: 'undecidable',
+                icon: '❌',
+                title: '理论不可判定',
+                description: '根据Turing的Halting Problem（1936），不存在通用算法可以判定任意程序是否对所有输入都会终止。',
+                details: {
+                    '理论依据': 'Halting Problem, Turing 1936',
+                    '含义': '不存在通用判定算法',
+                    'Rust影响': '编译器无法基于终止性做推理'
+                },
+                example: `fn collatz(n: u64) { while n != 1 { ... } }
+// 是否对所有n都终止？未解决`
+            },
+            result_undecidable_rice: {
+                id: 'result_undecidable_rice',
+                type: 'undecidable',
+                icon: '❌',
+                title: '理论不可判定',
+                description: "根据Rice's Theorem（1953），任何非平凡的语义属性都是不可判定的。",
+                details: {
+                    '理论依据': "Rice's Theorem, Rice 1953",
+                    '含义': '非平凡语义属性无法静态判定',
+                    '示例': '功能正确性、是否panic、内存泄漏'
+                },
+                example: `fn my_sort(data: &mut [i32]) { ... }
+// 是否正确实现了排序？不可判定`
+            },
+            result_undecidable_alias: {
+                id: 'result_undecidable_alias',
+                type: 'undecidable',
+                icon: '❌',
+                title: '理论不可判定',
+                description: '根据Landi-Ryder定理（1992），精确的指针别名分析是PSPACE-hard的。',
+                details: {
+                    '理论依据': 'Landi-Ryder Theorem, 1992',
+                    '复杂度': 'PSPACE-hard',
+                    'Rust影响': 'Safe Rust禁止别名，Unsafe用运行时检测'
+                },
+                example: `unsafe { ptr1和ptr2是否别名？取决于运行时 }`
+            },
+            special: {
+                id: 'special',
+                question: '属于哪种特殊情况？',
+                breadcrumb: ['特殊情况'],
+                options: [
+                    { text: 'Unsafe代码块', next: 'result_special_unsafe' },
+                    { text: 'FFI外部函数调用', next: 'result_special_ffi' },
+                    { text: '需要形式化验证', next: 'result_special_formal' }
+                ]
+            },
+            result_special_unsafe: {
+                id: 'result_special_unsafe',
+                type: 'runtime',
+                icon: '⚠️',
+                title: '特殊情况：Unsafe代码',
+                description: 'Unsafe代码绕过借用检查器，需要Miri解释器和人工审查。',
+                details: {
+                    '验证方法': 'Miri + 人工审查',
+                    '工具': 'Miri（Stacked/Tree Borrows）',
+                    '最佳实践': '最小化unsafe代码'
+                },
+                example: `/// # Safety\n/// ptr必须是有效的非空指针
+unsafe fn dangerous(ptr: *const i32) -> i32 { *ptr }`
+            },
+            result_special_ffi: {
+                id: 'result_special_ffi',
+                type: 'runtime',
+                icon: '⚠️',
+                title: '特殊情况：FFI边界',
+                description: '外部函数调用需要假设外部代码满足特定不变量。',
+                details: {
+                    '验证方法': '外部不变量假设',
+                    '风险': '外部代码可能违反Rust规则',
+                    '最佳实践': '封装C API为安全Rust接口'
+                },
+                example: `extern "C" { fn c_function(ptr: *mut c_void); }`
+            },
+            result_special_formal: {
+                id: 'result_special_formal',
+                type: 'approximate',
+                icon: '✨',
+                title: '形式化验证',
+                description: '使用Prusti、Creusot等形式化验证工具，需要人工编写规范。',
+                details: {
+                    '工具': 'Prusti, Creusot, RustHorn',
+                    '方法': '分离逻辑、预言逻辑',
+                    '复杂度': '高，需要人工辅助',
+                    '适用': '关键安全组件'
+                },
+                example: `#[requires(n >= 0)]\n#[ensures(result == n * (n + 1) / 2)]\nfn sum(n: i32) -> i32 { ... }`
+            }
+        };
+
+        function render(nodeId, breadcrumbs = []) {
+            const node = decisionTree[nodeId];
+            const app = document.getElementById('app');
+            if (node.type) {
+                renderResult(node, breadcrumbs);
+            } else {
+                renderQuestion(node, breadcrumbs);
+            }
+        }
+
+        function renderQuestion(node, breadcrumbs) {
+            const app = document.getElementById('app');
+            let breadcrumbHtml = '';
+            if (breadcrumbs.length > 0) {
+                breadcrumbHtml = `<div class="breadcrumb">${breadcrumbs.map((b, i) => 
+                    `<span class="breadcrumb-item">${b}</span>${i < breadcrumbs.length - 1 ? '<span class="breadcrumb-separator">→</span>' : ''}`
+                ).join('')}</div>`;
+            }
+            const optionsHtml = node.options.map((opt, idx) => 
+                `<button class="option-btn" onclick="handleOption('${node.id}', '${opt.next}', ${idx}, '${opt.text.split('（')[0].trim()}')">${opt.text}</button>`
+            ).join('');
+            app.innerHTML = `
+                <div class="card question-card">
+                    ${breadcrumbHtml}
+                    <span class="question-number">${breadcrumbs.length + 1}</span>
+                    <div class="question-text">${node.question}</div>
+                    <div class="options">${optionsHtml}</div>
+                </div>`;
+        }
+
+        function renderResult(node, breadcrumbs) {
+            const app = document.getElementById('app');
+            const detailsHtml = Object.entries(node.details).map(([key, value]) => 
+                `<li><strong>${key}:</strong> ${value}</li>`
+            ).join('');
+            app.innerHTML = `
+                <div class="card result-card ${node.type}">
+                    <div class="result-icon">${node.icon}</div>
+                    <h2 class="result-title">${node.title}</h2>
+                    <p class="result-description">${node.description}</p>
+                    <div class="result-details">
+                        <h4>详细信息</h4>
+                        <ul>${detailsHtml}</ul>
+                        ${node.example ? `<div class="code-example">${node.example.replace(/</g, '&lt;')}</div>` : ''}
+                    </div>
+                    <button class="restart-btn" onclick="restart()">🔄 重新开始</button>
+                </div>`;
+        }
+
+        function handleOption(currentId, nextId, optionIndex, optionText) {
+            const currentNode = decisionTree[currentId];
+            const breadcrumbs = currentNode.breadcrumb ? [...currentNode.breadcrumb] : [];
+            breadcrumbs.push(optionText);
+            render(nextId, breadcrumbs);
+        }
+
+        function restart() {
+            render('start', []);
+        }
+
+        render('start', []);
+    </script>
+</body>
+</html>

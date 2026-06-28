@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+    </marker>
+    <style>
+      .box { fill: #e3f2fd; stroke: #1976d2; stroke-width: 2; }
+      .heap { fill: #fff3e0; stroke: #f57c00; stroke-width: 2; }
+      .stack { fill: #e8f5e9; stroke: #388e3c; stroke-width: 2; }
+      .text { font-family: Arial, sans-serif; font-size: 14px; }
+      .title { font-size: 18px; font-weight: bold; }
+      .code { font-family: monospace; font-size: 12px; fill: #d32f2f; }
+    </style>
+  </defs>
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" class="title">Rust所有权转移内存模型</text>
+
+  <!-- Step 1: Initial State -->
+  <g transform="translate(50, 60)">
+    <text x="0" y="0" class="text" font-weight="bold">1. 初始状态</text>
+    <text x="0" y="20" class="code">let s1 = String::from("hello");</text>
+    
+    <!-- Stack -->
+    <rect x="0" y="40" width="120" height="100" class="stack" rx="5"/>
+    <text x="60" y="60" text-anchor="middle" class="text">Stack</text>
+    <rect x="20" y="75" width="80" height="50" fill="white" stroke="#388e3c"/>
+    <text x="60" y="95" text-anchor="middle" class="text">s1</text>
+    <text x="60" y="115" text-anchor="middle" class="code">ptr|len|cap</text>
+    
+    <!-- Heap -->
+    <rect x="160" y="40" width="120" height="100" class="heap" rx="5"/>
+    <text x="220" y="60" text-anchor="middle" class="text">Heap</text>
+    <rect x="180" y="75" width="80" height="50" fill="white" stroke="#f57c00"/>
+    <text x="220" y="105" text-anchor="middle" class="text">"hello"</text>
+    
+    <!-- Arrow -->
+    <line x1="100" y1="100" x2="180" y2="100" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Step 2: Move -->
+  <g transform="translate(50, 200)">
+    <text x="0" y="0" class="text" font-weight="bold">2. 所有权转移</text>
+    <text x="0" y="20" class="code">let s2 = s1; // s1被移动</text>
+    
+    <!-- Stack -->
+    <rect x="0" y="40" width="120" height="120" class="stack" rx="5"/>
+    <text x="60" y="60" text-anchor="middle" class="text">Stack</text>
+    
+    <!-- s1 (invalid) -->
+    <rect x="20" y="75" width="80" height="35" fill="#ffcdd2" stroke="#d32f2f"/>
+    <text x="60" y="97" text-anchor="middle" class="text" fill="#d32f2f">s1 (无效)</text>
+    
+    <!-- s2 -->
+    <rect x="20" y="115" width="80" height="35" fill="white" stroke="#388e3c"/>
+    <text x="60" y="137" text-anchor="middle" class="text">s2</text>
+    
+    <!-- Heap -->
+    <rect x="160" y="40" width="120" height="120" class="heap" rx="5"/>
+    <text x="220" y="60" text-anchor="middle" class="text">Heap</text>
+    <rect x="180" y="85" width="80" height="50" fill="white" stroke="#f57c00"/>
+    <text x="220" y="115" text-anchor="middle" class="text">"hello"</text>
+    
+    <!-- Arrow -->
+    <line x1="100" y1="132" x2="180" y2="110" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="100" y1="92" x2="180" y2="110" stroke="#d32f2f" stroke-width="2" stroke-dasharray="5,5"/>
+  </g>
+
+  <!-- Step 3: Clone -->
+  <g transform="translate(400, 60)">
+    <text x="0" y="0" class="text" font-weight="bold">3. 克隆（显式复制）</text>
+    <text x="0" y="20" class="code">let s2 = s1.clone();</text>
+    
+    <!-- Stack -->
+    <rect x="0" y="40" width="120" height="120" class="stack" rx="5"/>
+    <text x="60" y="60" text-anchor="middle" class="text">Stack</text>
+    <rect x="20" y="75" width="80" height="35" fill="white" stroke="#388e3c"/>
+    <text x="60" y="97" text-anchor="middle" class="text">s1</text>
+    <rect x="20" y="115" width="80" height="35" fill="white" stroke="#388e3c"/>
+    <text x="60" y="137" text-anchor="middle" class="text">s2</text>
+    
+    <!-- Heap -->
+    <rect x="160" y="40" width="200" height="120" class="heap" rx="5"/>
+    <text x="260" y="60" text-anchor="middle" class="text">Heap</text>
+    <rect x="180" y="85" width="70" height="50" fill="white" stroke="#f57c00"/>
+    <text x="215" y="115" text-anchor="middle" class="text">"hello"</text>
+    <rect x="270" y="85" width="70" height="50" fill="white" stroke="#f57c00"/>
+    <text x="305" y="115" text-anchor="middle" class="text">"hello"</text>
+    
+    <!-- Arrows -->
+    <line x1="100" y1="92" x2="180" y2="110" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="100" y1="132" x2="270" y2="110" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Step 4: Borrow -->
+  <g transform="translate(400, 220)">
+    <text x="0" y="0" class="text" font-weight="bold">4. 借用（引用）</text>
+    <text x="0" y="20" class="code">let r = &amp;s1;</text>
+    
+    <!-- Stack -->
+    <rect x="0" y="40" width="120" height="120" class="stack" rx="5"/>
+    <text x="60" y="60" text-anchor="middle" class="text">Stack</text>
+    <rect x="20" y="75" width="80" height="35" fill="white" stroke="#388e3c"/>
+    <text x="60" y="97" text-anchor="middle" class="text">s1</text>
+    <rect x="20" y="115" width="80" height="35" fill="#e1f5fe" stroke="#0288d1"/>
+    <text x="60" y="137" text-anchor="middle" class="text">r (&amp;str)</text>
+    
+    <!-- Heap -->
+    <rect x="160" y="40" width="120" height="120" class="heap" rx="5"/>
+    <text x="220" y="60" text-anchor="middle" class="text">Heap</text>
+    <rect x="180" y="85" width="80" height="50" fill="white" stroke="#f57c00"/>
+    <text x="220" y="115" text-anchor="middle" class="text">"hello"</text>
+    
+    <!-- Arrows -->
+    <line x1="100" y1="92" x2="180" y2="110" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="100" y1="132" x2="170" y2="110" stroke="#0288d1" stroke-width="2" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(50, 400)">
+    <text x="0" y="0" class="text" font-weight="bold">图例</text>
+    <rect x="0" y="15" width="20" height="15" class="stack"/>
+    <text x="30" y="27" class="text">栈 (Stack) - 固定大小，自动管理</text>
+    <rect x="0" y="40" width="20" height="15" class="heap"/>
+    <text x="30" y="52" class="text">堆 (Heap) - 动态分配，手动管理</text>
+    <rect x="0" y="65" width="20" height="15" fill="#e1f5fe" stroke="#0288d1"/>
+    <text x="30" y="77" class="text">引用 (&amp;T) - 借用，非拥有</text>
+    <rect x="0" y="90" width="20" height="15" fill="#ffcdd2" stroke="#d32f2f"/>
+    <text x="30" y="102" class="text">无效 (Moved) - 不可再访问</text>
+  </g>
+
+  <!-- Rules -->
+  <g transform="translate(400, 400)">
+    <text x="0" y="0" class="text" font-weight="bold">所有权规则</text>
+    <text x="0" y="25" class="text">1. 每个值有且只有一个所有者</text>
+    <text x="0" y="50" class="text">2. 所有者离开作用域，值被丢弃</text>
+    <text x="0" y="75" class="text">3. 可以通过引用借用（&amp;T, &amp;mut T）</text>
+    <text x="0" y="100" class="text">4. 同一时刻只能有一个可变引用</text>
+    <text x="0" y="125" class="text">5. 可变引用和不可变引用不能共存</text>
+  </g>
+</svg>
