@@ -14,7 +14,7 @@
 | 探测脚本 | ✅ `scripts/probe_rust_198_apis.rs` 已创建 |
 | Nightly 探测报告 | ✅ `reports/RUST_198_NIGHTLY_PROBE_2026_06_28.md` 已生成 |
 | 概念预览更新 | ✅ `concept/07_future/rust_1_98_preview.md` 已增加探测结果小节 |
-| 代码示例 | ⏳ 待 1.98.0 接近时在 `crates/c08_algorithms/src/rust_198_features.rs` 补充 |
+| 代码示例 | ✅ `crates/c08_algorithms/src/rust_198_features.rs` 已补充 10 个 API demo + 单元测试 |
 | 练习与测验 | ✅ `exercises/tests/l3_rust_198_alignment.rs` 已创建，覆盖 12 个已可用 API |
 
 ---

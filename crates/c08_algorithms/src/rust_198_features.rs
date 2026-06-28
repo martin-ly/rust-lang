@@ -8,6 +8,7 @@
 #![allow(clippy::incompatible_msrv)]
 
 use std::ffi::CStr;
+use core::fmt::NumBuffer;
 use std::net::Ipv6Addr;
 use std::num::NonZeroU32;
 use std::pin::pin;
@@ -208,6 +209,39 @@ pub fn demo_waker_noop() {
     waker.wake_by_ref();
 }
 
+/// 演示 `NonZero<T>::from_str_radix`。
+///
+/// 按指定进制解析非零整数，解析结果为 0 时返回 `Err`。
+pub fn demo_nonzero_from_str_radix() {
+    let n = NonZeroU32::from_str_radix("1a", 16).expect("non-zero parse");
+    assert_eq!(n.get(), 26);
+
+    let zero = NonZeroU32::from_str_radix("0", 10);
+    assert!(zero.is_err());
+}
+
+/// 演示 `Box::as_ptr` / `Box::as_mut_ptr`。
+///
+/// 不物化引用即可获取 Box 内值的原始指针，对 aliasing model 更友好。
+pub fn demo_box_as_ptr() {
+    let mut boxed = Box::new(42);
+    let ptr: *const i32 = Box::as_ptr(&boxed);
+    assert!(!ptr.is_null());
+
+    let mut_ptr: *mut i32 = Box::as_mut_ptr(&mut boxed);
+    unsafe { *mut_ptr = 100; }
+    assert_eq!(*boxed, 100);
+}
+
+/// 演示 `int::format_into`。
+///
+/// 将整数直接格式化到现有缓冲区，避免 `write!` 的堆分配。
+pub fn demo_int_format_into() {
+    let mut buf = NumBuffer::new();
+    let n = 1980u32;
+    assert_eq!(n.format_into(&mut buf), "1980");
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -251,5 +285,8 @@ mod tests {
         demo_pin_macro();
         demo_bool_to_float();
         demo_waker_noop();
+        demo_nonzero_from_str_radix();
+        demo_box_as_ptr();
+        demo_int_format_into();
     }
 }
