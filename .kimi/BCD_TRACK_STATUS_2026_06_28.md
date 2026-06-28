@@ -150,6 +150,18 @@
 
 ---
 
+## L 轨道 — Rust 1.97.0 稳定特性迁移文档预填充（新增）
+
+| 编号 | 任务 | 状态 | 交付物 |
+|---|---|---|---|
+| L1 | 预填充 1.97.0 稳定特性迁移文档 | ✅ | `docs/06_toolchain/06_21_rust_1_97_features.md` 从模板升级为草稿 |
+| L2 | 为已确认 1.97.0 API 提供代码示例 | ✅ | 6 个 API 示例（NonZero 位操作、char::is_control、NonZero midpoint/isqrt、ptr::fn_addr_eq、const size/align、BuildHasherDefault::new） |
+| L3 | 标注风险与推迟 API | ✅ | 2 个 beta cutoff 风险 + 4 个推迟 API |
+
+**L 轨道结论**: ✅ **发布日迁移文档已预填充，发布日只需核对 Release Notes 并勾选**
+
+---
+
 ## 当前阻塞与风险
 
 | 风险 | 可能性 | 影响 | 缓解措施 |
@@ -185,3 +197,4 @@
 - `I: 修复 rust-ownership-decidability 归档锚点链接`
 - `J: 扩展 Rust 1.98.0 代码示例`
 - `K: 刷新 TRPL 第三版对照差异分析`
+- `L: 预填充 Rust 1.97.0 稳定特性迁移文档`
