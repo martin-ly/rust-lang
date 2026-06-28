@@ -211,6 +211,7 @@ pub struct AdvancedThreadPool {
     pool_size: AtomicUsize,
     active_tasks: Arc<AtomicUsize>,
     completed_tasks: Arc<AtomicUsize>,
+    pending_tasks: Arc<AtomicUsize>,
 }
 
 impl AdvancedThreadPool {
@@ -226,6 +227,7 @@ impl AdvancedThreadPool {
             pool_size: AtomicUsize::new(pool_size),
             active_tasks: Arc::new(AtomicUsize::new(0)),
             completed_tasks: Arc::new(AtomicUsize::new(0)),
+            pending_tasks: Arc::new(AtomicUsize::new(0)),
         }
     }
 
@@ -241,6 +243,7 @@ impl AdvancedThreadPool {
                     let task_receiver = self.task_receiver.clone();
                     let active_tasks = Arc::clone(&self.active_tasks);
                     let completed_tasks = Arc::clone(&self.completed_tasks);
+                    let pending_tasks = Arc::clone(&self.pending_tasks);
 
                     move || {
                         loop {
@@ -257,6 +260,7 @@ impl AdvancedThreadPool {
 
                             match task {
                                 Ok(task) => {
+                                    pending_tasks.fetch_sub(1, Ordering::Relaxed);
                                     active_tasks.fetch_add(1, Ordering::Relaxed);
                                     // 执行任务
                                     task();
@@ -288,9 +292,13 @@ impl AdvancedThreadPool {
             return Err("线程池已关闭".to_string());
         }
 
+        self.pending_tasks.fetch_add(1, Ordering::Relaxed);
         self.task_sender
             .send(Box::new(task))
-            .map_err(|_| "发送任务失败".to_string())?;
+            .map_err(|_| {
+                self.pending_tasks.fetch_sub(1, Ordering::Relaxed);
+                "发送任务失败".to_string()
+            })?;
 
         Ok(())
     }
@@ -314,7 +322,9 @@ impl AdvancedThreadPool {
     pub fn wait_for_completion(&self, timeout: Duration) -> bool {
         let start_time = Instant::now();
 
-        while self.active_tasks.load(Ordering::Relaxed) > 0 {
+        while self.pending_tasks.load(Ordering::Relaxed) > 0
+            || self.active_tasks.load(Ordering::Relaxed) > 0
+        {
             if start_time.elapsed() > timeout {
                 return false;
             }
