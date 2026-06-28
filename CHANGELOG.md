@@ -56,6 +56,33 @@
   - 批量生成 56 个缺失 boilerplate 文件，覆盖 17 个 crate，实现 7 类 boilerplate 文档 100% 覆盖。
   - 更新 `scripts/audit_crate_docs_boilerplate.py` 审计摘要路径为 `target/crate_docs_boilerplate_audit.json`。
 
+### E~L 轨道：发布日前持续收尾（2026-06-28 追加）
+
+- **E 轨道 — Rust 1.98.0 跟踪启动**：
+  - 新增 `scripts/probe_rust_198_apis.rs`（17 项候选 API 探测）。
+  - 生成 `reports/RUST_198_NIGHTLY_PROBE_2026_06_28.md`：当前 nightly 上 11 项已可用。
+  - 新增 `exercises/tests/l3_rust_198_alignment.rs`（12 个可运行测验）。
+  - 清理并扩展 `crates/c08_algorithms/src/rust_198_features.rs`，新增 10 个 1.98 API demo。
+  - 新增 `.kimi/RUST_198_TRACKING_2026_06_28.md` 跟踪文档。
+- **F 轨道 — 内部链接治理收尾**：
+  - 修复 docs 下 7 个损坏内部链接，`docs/LINK_CHECK_REPORT.md` 损坏数从 19 降至 0。
+- **G 轨道 — i18n 双语标注基线**：
+  - 增强 `scripts/add_bilingual_annotations.py`，新增 `--report` Markdown 报告输出。
+  - 生成 `reports/I18N_BILINGUAL_BASELINE_2026_06_28.md`：扫描 `concept/` 321 文件，39 种未覆盖术语。
+- **H 轨道 — 安全审计**：
+  - 运行 `cargo audit --no-fetch`，未发现已知安全漏洞，生成 `reports/CARGO_AUDIT_2026_06_28.md`。
+- **I 轨道 — 历史归档锚点修复**：
+  - 修复 `docs/rust-ownership-decidability/` 下 12 个历史归档锚点问题。
+- **J 轨道 — Rust 1.98.0 代码示例扩展**：
+  - 在 `crates/c08_algorithms/src/rust_198_features.rs` 新增 `NonZero::from_str_radix`、`Box::as_ptr/as_mut_ptr`、`int::format_into` 3 个 demo。
+- **K 轨道 — TRPL 第三版对照刷新**：
+  - 更新 `docs/TRPL_3RD_ED_DIFF.md` 日期与 Ch 18 映射。
+- **L 轨道 — Rust 1.97.0 迁移文档预填充**：
+  - 将 `docs/06_toolchain/06_21_rust_1_97_features.md` 从模板升级为预迁移草稿，含 6 个已确认 1.97.0 API 的代码示例与发布日核对清单。
+- **D 轨道增强**：
+  - 新增 `scripts/rust_197_upstream_monitor.sh` 上游发布动态监控脚本。
+  - 更新 `.kimi/RUST_197_RELEASE_COUNTDOWN_2026_06_28.md` 与 `.kimi/BCD_TRACK_STATUS_2026_06_28.md`。
+
 ### Rust 1.97.0 稳定特性条目草稿（发布日按 Release Notes 最终确认）
 
 > 以下条目基于 2026-06-28 nightly 探测结果与 `releases.rs` beta 分支信息（2026-05-22 从 master 分支）整理，正式发布日需根据官方 Release Notes 增删。
