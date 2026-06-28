@@ -65,10 +65,18 @@
 
 ---
 
+## 本轮额外修复
+
+- [x] 清理 Markdown 中冗余的 `.#anchor` 锚点链接
+  - 方式：正则 `(\[[^\]]*\]\()\.#` → `\1#`，仅影响锚点目标，不改动相对路径
+  - 范围：全仓库 `*.md`，共修复 73,874 处，涉及 2,059 个文件
+  - 脚本：`scripts/fix_dot_anchor_links.py`
+  - 已合入自动提交 `82b618c57`
+
 ## G4 修复 Clippy/编译警告基线
 
-- [ ] 确认 `cargo clippy --workspace --tests --all-features -- -D warnings` 通过
-- [ ] 确认 `cargo test --workspace` 通过
+- [x] 确认 `cargo clippy --workspace --tests --all-features -- -D warnings` 通过
+- [ ] 确认 `cargo test --workspace` 通过（`c05_threads::test_advanced_thread_pool` 在工作区并发测试中偶发失败，正在单线程重跑验证）
 - [ ] 在 CI 工作流中加入 `--tests` 的 clippy 检查
 - [ ] 提交变更
 
