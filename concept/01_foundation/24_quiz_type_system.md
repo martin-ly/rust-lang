@@ -10,7 +10,6 @@
 > **内容分级**: [综述级]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
-
 > **后置概念**: [Ownership](./23_quiz_ownership_borrowing.md)
 ---
 

@@ -185,13 +185,10 @@
 > This is achieved by adding constraints to type variables in parametrically polymorphic types.
 > Functions defined in a type class and applied via a type class constraint can use different implementations depending on the particular types of the parameters at each call site.
 > Rust's traits are directly inspired by Haskell's type classes.
-
 > **[Wikipedia: Trait (computer programming)](https://en.wikipedia.org/wiki/Trait_(computer_programming))** In computer programming,
 > a trait is a concept used in object-oriented programming that represents a set of methods that can be used to extend the functionality of a class.
 > Rust uses traits to define shared behavior in an abstract way, enabling ad hoc polymorphism without inheritance.
-
 > **[Wikipedia: Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism)** Ad hoc polymorphism is a kind of polymorphism in which polymorphic functions can be applied to arguments of different types, because a polymorphic function can denote a number of distinct and potentially heterogeneous implementations depending on the type of the argument(s). Rust traits provide this through explicit implementation.
-
 > **来源: [Wikipedia: Type class](https://en.wikipedia.org/wiki/Type_class) · [Wikipedia: Trait (computer programming)](https://en.wikipedia.org/wiki/Trait_(computer_programming)) · [Wikipedia: Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism)** Rust traits 直接受 Haskell type classes 启发，通过显式 `impl` 实现 ad hoc 多态，区别于 C++ 模板重载和 Java 接口继承。
 
 ### 1.2 TRPL 与 RFC 官方定义
