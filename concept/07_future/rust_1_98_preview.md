@@ -280,6 +280,27 @@ fn demo_198_apis() {
 
 ---
 
+### 2.3 Nightly 探测结果（2026-06-28）
+
+> 探测脚本: [`scripts/probe_rust_198_apis.rs`](../../../scripts/probe_rust_198_apis.rs)  
+> 完整报告: [`reports/RUST_198_NIGHTLY_PROBE_2026_06_28.md`](../../../reports/RUST_198_NIGHTLY_PROBE_2026_06_28.md)
+
+使用 `rustc 1.98.0-nightly (2026-06-26)` 对 17 项候选 API 进行无 feature gate 编译探测：
+
+| 状态 | 数量 | 代表 API |
+|---|---|---|
+| ✅ 已可用 | 11 | `i32::isqrt`、`u32::isqrt`、`ptr::with_exposed_provenance`、`ptr::without_provenance`、`ptr::dangling`、`Ipv6Addr::is_unique_local`、`CStr::from_bytes_until_nul`、`std::pin::pin!`、`From<bool> for f32/f64`、`Waker::noop` |
+| ❌ 仍不可用 | 6 | `Pin::as_deref_mut`、`NonZeroI32::isqrt`、`Vec::into_non_null`、`Box::into_non_null`、`VecDeque::truncate_front`、`VecDeque::retain_back` |
+
+**关键发现**:
+
+- `i32::isqrt` 等整数平方根 API 已在 nightly 可用，预计进入 1.98.0 stable。
+- Provenance 相关 API (`with_exposed_provenance`、`without_provenance`、`dangling`) 已在 nightly 可用，是 strict provenance 迁移的重要信号。
+- `Pin::as_deref_mut` 在当前 nightly 仍不存在，说明 Pin ergonomics 仍在演进，教学中应保持保守。
+- 从 1.97.0 推迟的 `Box::into_non_null`、`Vec::into_non_null`、`VecDeque::truncate_front`、`VecDeque::retain_back` 仍未稳定，代码中需继续保留等效实现。
+
+---
+
 ## 三、编译器与工具链预览
 
 ### 3.1 Cranelift Backend（生产级）
