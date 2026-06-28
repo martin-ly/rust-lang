@@ -9,13 +9,12 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
+  RUST_VERSION: "1.96.0"
   CARGO_INCREMENTAL: 0
   CARGO_NET_RETRY: 10
   RUSTUP_MAX_RETRIES: 10
-  # 2026-06-28: stable 1.96.0 尚未发布，临时统一使用 nightly。
-  # 各 crate 的 build.rs 会自动检测 nightly 并启用预览模块；
-  # CI 显式传入 --cfg nightly 以保证与本地/CI 环境一致，同时保留 tokio_unstable。
-  RUSTFLAGS: "-D warnings --cfg nightly --cfg tokio_unstable"
+  # stable 主矩阵不启用 nightly-only 预览模块；保留 tokio_unstable 以兼容相关代码路径。
+  RUSTFLAGS: "-D warnings --cfg tokio_unstable"
   SCCACHE_GHA_ENABLED: "true"
   RUSTC_WRAPPER: "sccache"
 
@@ -29,14 +28,14 @@ jobs:
       matrix:
         check:
           - { cmd: "fmt", args: "--all -- --check", name: "Formatting" }
-          # nightly 下启用 nightly-only 预览模块（RUSTFLAGS 已包含 --cfg nightly）
+          # stable MSRV clippy：不启用 nightly-only 预览模块
           - { cmd: "clippy", args: "--workspace --tests -- -D warnings", name: "Clippy" }
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@nightly
+        uses: dtolnay/rust-toolchain@1.96.0
         with:
           components: rustfmt, clippy
 
@@ -95,7 +94,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@nightly
+        uses: dtolnay/rust-toolchain@1.96.0
 
       - name: Setup sccache
         uses: mozilla-actions/sccache-action@v0.0.7
@@ -174,7 +173,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@nightly
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: ${{ env.RUST_VERSION }}
 
       - name: Cache cargo dependencies
         uses: actions/cache@v4
@@ -218,7 +219,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@nightly
+        uses: dtolnay/rust-toolchain@1.96.0
 
       - name: Setup sccache
         uses: mozilla-actions/sccache-action@v0.0.7
@@ -289,7 +290,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@nightly
+        uses: dtolnay/rust-toolchain@1.96.0
         with:
           components: llvm-tools-preview
 

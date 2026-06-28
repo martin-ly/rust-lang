@@ -74,4 +74,7 @@
   - `cargo +nightly check --workspace --all-features` ✅（需 `RUSTFLAGS='--cfg nightly --cfg tokio_unstable'`）
   - `cargo +nightly clippy --workspace --tests --all-features -- -D warnings` ✅（需上述 RUSTFLAGS）
   - `cargo +nightly test --workspace --all-features` ✅（需上述 RUSTFLAGS；Windows 本地因缺少 `wpcap.lib`/`Packet.lib` 需 `--exclude c10_networks`）
-- [ ] T3/T5: 待 `1.97.0` 正式发布后切换默认工具链并更新文档说明。
+- [x] T3/T5: 默认工具链已切回 stable（当前 latest stable 为 1.96.0）。
+  - `rust-toolchain.toml` 使用 `channel = "stable"`（本地 rustup 镜像对精确 `1.96.0` 包仍 404，故用 stable 通道）。
+  - `Cargo.toml` 与所有 workspace crate 的 `rust-version` 保持 `1.96.0`。
+  - `ci.yml`、`pr-checks.yml`、`ci_optimized.yml` 已恢复 stable 主矩阵，保留 nightly-preview / Miri 等 nightly 任务。

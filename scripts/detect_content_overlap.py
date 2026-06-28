@@ -12,6 +12,7 @@
 from pathlib import Path
 from collections import defaultdict
 import re
+from datetime import datetime
 
 PROJECT_ROOT = Path(".")
 THRESHOLD = 0.6  # 相似度阈值
@@ -167,7 +168,8 @@ def main():
     report_lines.append("3. concept/ 优先：知识应以 concept/ 为主轨，其他轨道迁移或引用\n")
 
     # 保存报告
-    report_path = PROJECT_ROOT / "reports" / "CONTENT_OVERLAP_DETECTION_2026_06_09.md"
+    today = datetime.now().strftime("%Y_%m_%d")
+    report_path = PROJECT_ROOT / "reports" / f"CONTENT_OVERLAP_DETECTION_{today}.md"
     report_path.parent.mkdir(exist_ok=True)
     report_path.write_text("".join(report_lines), encoding="utf-8")
     print(f"报告已保存: {report_path}")

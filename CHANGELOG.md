@@ -1,6 +1,6 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-06-28（P0 Rust 1.97 发布前准备 + 国际学习者入口补齐 + 权威事实复核 + Stable MSRV 1.96.0 迁移完成）
+> **最后更新**: 2026-06-29（P0 Rust 1.97 发布前准备 + 工具链稳定化收尾 + Stable MSRV 1.96.0 迁移完成）
 
 ---
 
@@ -45,6 +45,24 @@
 - **权威事实复核**：
   - 确认 async closures / Rust 2024 Edition / `&raw const` 等关键事实修正已落地，`check_version_facts.py` 已将 `&const` 列为非官方术语检测项。
 - **验证**：`cargo test --workspace`、`cargo clippy --workspace --all-features -- -D warnings` 均通过；`l3_rust_197_alignment.rs` 13 passed。
+
+### P0 工具链稳定化收尾（2026-06-29）
+
+- **默认工具链恢复 stable**：
+  - `rust-toolchain.toml` 改为 `channel = "stable"`（当前 latest stable 已对应 1.96.0；精确 `1.96.0` 包在部分镜像仍有 404，故使用 stable 通道）。
+  - `Cargo.toml` 与全部 workspace crate 的 `rust-version` 保持 `1.96.0`。
+- **CI 恢复 stable + nightly 双矩阵**：
+  - `.github/workflows/ci.yml`、`.github/workflows/pr-checks.yml`、`.github/workflows/ci_optimized.yml` 主矩阵切回 `dtolnay/rust-toolchain@1.96.0`/`@stable`。
+  - 全局 `RUSTFLAGS` 不再包含 `--cfg nightly`；stable 主矩阵仅保留 `--cfg tokio_unstable`。
+  - `ci.yml` 的 `nightly-preview` job、`ci_optimized.yml` 的 Miri 任务保留 `@nightly` 与 `--cfg nightly`，用于前瞻性验证。
+- **nightly 预览模块自动检测**：
+  - `c02_type_system`、`c04_generic`、`c06_async`、`c08_algorithms`、`c13_embedded`、`exercises` 通过 `build.rs` 检测当前 `rustc` 是否为 nightly，自动设置 `--cfg nightly`。
+- **文档说明更新**：
+  - `README.md` 新增“工具链说明”小节，说明默认 stable 与 nightly 预览验证命令。
+  - `.kimi/SUSTAINABLE_IMPROVEMENT_PLAN_2026_06_28_CONFIRMED.md` 更新第二阶段进度，标记 T3/T5 完成。
+- **验证**：
+  - `cargo update`、`cargo check --workspace --all-features`、`cargo clippy --workspace --tests --all-features -- -D warnings` 在默认 stable 下通过。
+  - `cargo +nightly check --workspace --all-features`、`cargo +nightly clippy --workspace --tests --all-features -- -D warnings`、`cargo +nightly test -p exercises --test l3_rust_198_alignment` 通过。
 
 ### Phase 3 C4 脚本清理启动（2026-06-28）
 

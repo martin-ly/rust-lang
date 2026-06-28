@@ -76,6 +76,18 @@ cargo build --workspace
 cargo test --workspace
 ```
 
+### 工具链说明
+
+- 默认工具链为 **stable 1.96.0**（`rust-toolchain.toml` 使用 `stable` 通道）。
+- `crates/c02_type_system`、`c04_generic`、`c06_async`、`c08_algorithms`、`c13_embedded`、`exercises` 中的 nightly-only 预览模块通过各 crate 的 `build.rs` 自动检测 nightly 并启用；stable 默认构建不会编译这些不稳定特性。
+- 如需本地验证 nightly 预览模块：
+
+  ```bash
+  cargo +nightly check --workspace --all-features
+  cargo +nightly clippy --workspace --tests --all-features -- -D warnings
+  cargo +nightly test --workspace --all-features
+  ```
+
 ---
 
 ## 核心文件导航

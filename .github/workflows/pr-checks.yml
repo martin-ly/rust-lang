@@ -7,11 +7,13 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
+  RUST_VERSION: "1.96.0"
   CARGO_INCREMENTAL: 0
   CARGO_NET_RETRY: 10
   RUSTUP_MAX_RETRIES: 10
-  # nightly 预览模块通过 --cfg nightly 启用；同时保留本地/CI 所需的 tokio_unstable
-  RUSTFLAGS: "-D warnings --cfg nightly --cfg tokio_unstable"
+  # stable 主矩阵保留 tokio_unstable；nightly-only 预览模块在 ci.yml nightly-preview job 中测试。
+  # 本工作流 deps-check 因 cargo-udeps 需要仍使用 nightly。
+  RUSTFLAGS: "-D warnings --cfg tokio_unstable"
   SCCACHE_GHA_ENABLED: "true"
   RUSTC_WRAPPER: "sccache"
 
@@ -25,7 +27,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@nightly
+        uses: dtolnay/rust-toolchain@1.96.0
         with:
           components: rustfmt
 
@@ -48,7 +50,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@nightly
+        uses: dtolnay/rust-toolchain@1.96.0
         with:
           components: clippy
 
@@ -79,19 +81,13 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        rust: [nightly]
-        exclude:
-          # 减少矩阵大小：Windows 和 macOS 只测试 stable
-          - os: windows-latest
-            rust: nightly
-          - os: macos-latest
-            rust: nightly
+        rust: [1.96.0]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Rust (${{ matrix.rust }})
-        uses: dtolnay/rust-toolchain@nightly
+        uses: dtolnay/rust-toolchain@1.96.0
 
       - name: Setup sccache
         uses: mozilla-actions/sccache-action@v0.0.7
@@ -133,7 +129,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@nightly
+        uses: dtolnay/rust-toolchain@1.96.0
         with:
           components: llvm-tools-preview
 
@@ -211,7 +207,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@nightly
+        uses: dtolnay/rust-toolchain@1.96.0
 
       - name: Setup sccache
         uses: mozilla-actions/sccache-action@v0.0.7
@@ -250,7 +246,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@nightly
+        uses: dtolnay/rust-toolchain@1.96.0
 
       - name: Setup sccache
         uses: mozilla-actions/sccache-action@v0.0.7

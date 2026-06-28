@@ -2,8 +2,8 @@
 
 > **项目**: Rust 系统化学习项目
 > **维护者**: Rust 学习项目团队
-> **最后更新**: 2026-06-28
-> **状态**: 清理中（Phase 3 C4）
+> **最后更新**: 2026-06-29
+> **状态**: 清理中（Phase 3 C4），内容去重检测已集成
 
 ---
 
@@ -57,6 +57,7 @@ ls scripts/*.py scripts/*.sh scripts/*.ps1 scripts/*.bat
 | `rust_version_tracker.py` | Rust 版本特性跟踪 |
 | `version_fact_check.py` | 版本相关事实核查 |
 | `lint_filenames.py` | 文件名 snake_case 命名检查 |
+| `detect_content_overlap.py` | 检测 `concept/`、`knowledge/`、`docs/` 三轨内容相似度，生成去重报告 |
 
 ### 🔗 链接检查与修复
 
