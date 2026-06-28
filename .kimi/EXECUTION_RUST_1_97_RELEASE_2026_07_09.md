@@ -7,7 +7,7 @@
 > **预检记录**:
 >   - 2026-06-25 预检完成，`Rust 1.97.0 stable` 尚未发布（当前最新为 beta.4），详见 `reports/RUST_1_97_RELEASE_PREFLIGHT_2026_06_25.md`
 >   - 2026-06-28 发布日探测脚本 `scripts/probe_rust_197_apis.rs` 与执行脚本 `scripts/rust_197_release_day.sh` 就绪，倒计时排期见 `.kimi/RUST_197_RELEASE_COUNTDOWN_2026_06_28.md`
->   - 2026-06-28 确认：workspace 因多处使用 nightly feature gates（`gen_blocks`、`never_type`、`core_intrinsics` 等），无法整体切换到 1.97.0 stable。发布日保持 nightly 工具链，仅激活已在 1.97.0 稳定的 API 并更新文档状态。
+>   - 2026-06-28 确认：Phase 1 已完成 stable MSRV 迁移。nightly-only 预览内容已统一隔离到可选 `nightly` feature；默认 `rust-toolchain.toml` 为 `1.96.0`，workspace 可在 stable 下完整编译。发布日将默认工具链更新到 `1.97.0`，nightly 仅用于验证 `--features nightly` 预览模块。
 >   - 2026-06-28 探测结果（nightly 2026-06-26，rustc 1.98.0）：`NonZero` bit ops、`const char::is_control`、`ptr::fn_addr_eq`、`NonZeroU32::midpoint/isqrt`、`const size_of_val`、`BuildHasherDefault::new const`、`Box::as_ptr`、`int::format_into` 已可用；`VecDeque::truncate_front` / `retain_back`、`Vec::into_non_null` 仍不可用。详见 `reports/RUST_197_API_PROBE_2026_06_28.md`。
 
 ---
@@ -19,25 +19,26 @@
 - [ ] 从当前分支创建发布日工作分支：`git checkout -b rust-1.97-release-day`
 - [ ] 备份当前 `Cargo.lock`（可选）：`cp Cargo.lock Cargo.lock.pre-1.97`
 - [ ] 运行发布日 API 探测脚本：`rustc --edition 2024 scripts/probe_rust_197_apis.rs -o /tmp/probe_197 && /tmp/probe_197`
-- [ ] **保持 `rust-toolchain.toml` 为 `nightly`**（workspace 依赖 nightly feature gates，详见阶段 1 说明）
+- [ ] 备份当前 `rust-toolchain.toml`：`cp rust-toolchain.toml rust-toolchain.toml.pre-1.97`
+- [ ] 发布日将 `rust-toolchain.toml` 中的 `channel` 从 `1.96.0` 更新为 `1.97.0`
 
 ---
 
 ## 阶段 1：工具链策略确认（15 分钟）
 
-> **重要调整（2026-06-28）**: workspace 中多个 crate 在 `src/lib.rs` 顶部声明了 nightly-only feature gates（如 `c08_algorithms` 的 `gen_blocks/yield_expr`、`c02_type_system` 的 `never_type/derive_coerce_pointee`、`c13_embedded` 的 `core_intrinsics/fn_align` 等）。因此 **不能** 将整个 workspace 切换到 `1.97.0` stable，否则会出现 `#[feature] may not be used on the stable release channel` 错误。
+> **重要调整（2026-06-28）**: Phase 1 已完成 stable MSRV 迁移。所有 nightly-only feature gate 已从 crate 顶层移除，隔离到可选 `nightly` feature（`--features nightly`）。因此发布日默认工具链可直接切换到 `1.97.0` stable；nightly 仅用于前瞻性预览验证。
 >
-> 发布日策略：保持 `rust-toolchain.toml = "nightly"`，在 nightly 上激活 1.97.0 已稳定的 API，并在文档中标注其为 1.97.0 stable。
+> 发布日策略：将 `rust-toolchain.toml` 更新为 `1.97.0`，在 stable 上激活 1.97.0 已稳定的 API；同步在 nightly 上验证 `--all-features` 不回归。
 
-- [ ] 确认 `rust-toolchain.toml` 仍为 `channel = "nightly"`
-- [ ] 验证 nightly 工具链可用：
+- [ ] 将 `rust-toolchain.toml` 的 `channel` 更新为 `"1.97.0"`
+- [ ] 验证 stable 工具链可用：
 
   ```bash
   rustup show
-  rustc --version  # 应输出 1.98.0-nightly 或更新
+  rustc --version  # 应输出 1.97.0
   ```
 
-- [ ] 运行 `cargo check --workspace` 确认 nightly 编译基线通过
+- [ ] 运行 `cargo +1.97.0 check --workspace` 确认 stable 编译基线通过
 
 ---
 
@@ -65,7 +66,8 @@
 
 - [ ] `cargo check --workspace`
 - [ ] `cargo test --workspace`
-- [ ] `cargo clippy --workspace --all-features -- -D warnings`（若项目启用）
+- [ ] `cargo +1.97.0 clippy --workspace --tests -- -D warnings`
+- [ ] `cargo +nightly clippy --workspace --tests --all-features -- -D warnings`（nightly 预览验证，不阻塞发布）
 - [ ] 修复所有因 1.97 引入的编译/Clippy 警告
 
 > 可选：若未来希望某个 crate 单独在 stable 1.97.0 验证，需先将其 nightly feature gates 移入 `#[cfg(nightly)]` 模块或删除。
@@ -127,7 +129,8 @@
 - [ ] 运行最终验证：`cargo test --workspace`
 - [ ] 提交并推送：`git commit -m "chore: stabilize Rust 1.97.0 support"`
 - [ ] 创建 Pull Request 并请求 review（或按仓库流程直接合并）
-- [ ] 更新 `.kimi/EXECUTION_CHECKLIST_2026_06_22.md` 中 A3.x 系列条目为完成
+- [ ] 更新 `.kimi/EXECUTION_RUST_1_97_RELEASE_2026_07_09.md` 与本清单中所有阶段为完成
+- [ ] 更新 `CHANGELOG.md [3.1.0]` 中工具链策略为 "workspace 默认 `1.97.0` stable，nightly 仅用于可选预览"
 - [ ] 将本清单归档到 `archive/project_reports/` 或类似位置
 
 ---
