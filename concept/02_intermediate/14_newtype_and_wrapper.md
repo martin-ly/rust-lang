@@ -1,5 +1,7 @@
-> **内容分级**: [综述级]
-
+> **内容分级**:
+>
+> [综述级]
+>
 > **本节关键术语**: 新类型模式 (Newtype Pattern) · 包装类型 (Wrapper Type) · 类型安全 (Type Safety) · 零成本抽象（Zero-Cost Abstraction） · Deref — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Newtype 与包装器模式：类型安全的零成本抽象
@@ -16,7 +18,14 @@
 
 ---
 
-> **来源**: [Rust API Guidelines — Newtypes](https://rust-lang.github.io/api-guidelines//type-safety.html#c-newtype) · [TRPL — Newtype Pattern](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#using-the-newtype-pattern-to-implement-external-traits-on-external-types) · [Wikipedia — Newtype](https://en.wikipedia.org/wiki/Newtype) · [Rust Reference — Tuple Structs](https://doc.rust-lang.org/reference/items/structs.html) · [Rust Patterns — Newtype](https://rust-unofficial.github.io/patterns/patterns/behavioural/newtype.html)
+> **来源**:
+>
+> [Rust API Guidelines — Newtypes](https://rust-lang.github.io/api-guidelines//type-safety.html#c-newtype) ·
+> [TRPL — Newtype Pattern](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#using-the-newtype-pattern-to-implement-external-traits-on-external-types) ·
+> [Wikipedia — Newtype](https://en.wikipedia.org/wiki/Newtype) ·
+> [Rust Reference — Tuple Structs](https://doc.rust-lang.org/reference/items/structs.html) ·
+> [Rust Patterns — Newtype](https://rust-unofficial.github.io/patterns/patterns/behavioural/newtype.html)
+>
 
 ## 📑 目录
 

@@ -14,7 +14,14 @@
 
 ---
 
-> **来源**: [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) · [nom Parser Combinators](https://docs.rs/nom/latest/nom/) · [serde DSL Design](https://serde.rs/) · [Rust API Guidelines — DSLs](https://rust-lang.github.io/api-guidelines//predictability.html) · [Wikipedia — Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language)
+> **来源**:
+>
+> [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) ·
+> [nom Parser Combinators](https://docs.rs/nom/latest/nom/) ·
+> [serde DSL Design](https://serde.rs/) ·
+> [Rust API Guidelines — DSLs](https://rust-lang.github.io/api-guidelines//predictability.html) ·
+> [Wikipedia — Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language)
+>
 
 ## 📑 目录
 
