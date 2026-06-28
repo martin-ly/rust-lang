@@ -1,9 +1,8 @@
 [toolchain]
-# 2026-06-28: 由于 stable 1.96.0 尚未在 rustup 镜像发布，
-# 本地默认工具链临时切换到 nightly，以兼容当前 rustc 1.98.0-nightly。
-# nightly-only 预览模块通过各 crate 的 build.rs 自动检测 nightly 并设置
-# `--cfg nightly` 来启用；stable 构建仍不会解析这些模块。
-channel = "nightly"
+# MSRV: stable 1.96.0（当前最新稳定版本）
+# nightly-only 预览模块仍通过各 crate 的 build.rs 自动检测 nightly 并设置
+# `--cfg nightly` 来启用；stable 默认构建不会解析这些模块。
+channel = "1.96.0"
 components = [
     "rustfmt",           # 代码格式化
     "clippy",            # 静态分析

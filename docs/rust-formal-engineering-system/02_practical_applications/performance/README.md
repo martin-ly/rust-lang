@@ -10,7 +10,12 @@
 
 ## 知识结构思维导图
 >
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Performance Engineering](https://en.wikipedia.org/wiki/Performance_Engineering)** · **来源: [Wikipedia - Software Optimization](https://en.wikipedia.org/wiki/Software_Optimization)** · **[来源: ACM - Performance Measurement Methodology]** · **[来源: IEEE - Software Performance Standards]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
+> **来源: [Wikipedia - Performance Engineering](https://en.wikipedia.org/wiki/Performance_Engineering)** ·
+> **来源: [Wikipedia - Software Optimization](https://en.wikipedia.org/wiki/Software_Optimization)** ·
+> **[来源: ACM - Performance Measurement Methodology]** ·
+> **[来源: IEEE - Software Performance Standards]**
+>
 
 ```mermaid
 mindmap
@@ -345,17 +350,10 @@ criterion_main!(benches);
 ## 权威来源索引
 
 > **来源: [Wikipedia - Program Optimization](https://en.wikipedia.org/wiki/Program_Optimization)**
-
 > **[来源: Criterion.rs]**
-
 > **来源: [ACM - Performance Engineering](https://dl.acm.org/)**
-
 > **来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/)**
-
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
-
 > **来源: [Coq Reference](https://coq.inria.fr/doc/)**
-
 > **来源: [TLA+](https://lamport.azurewebsites.net/tla/tla.html)**
-
 > **来源: [ACM - Formal Verification](https://dl.acm.org/)**
