@@ -20,6 +20,7 @@
 | 增强发布日 API 探测脚本 | 2026-06-28 | `scripts/probe_rust_197_apis.rs` 覆盖 12 项 API |
 | 生成 API 可用性探测报告 | 2026-06-28 | `reports/RUST_197_API_PROBE_2026_06_28.md` |
 | 创建发布日执行脚本 | 2026-06-28 | `scripts/rust_197_release_day.sh` |
+| 创建上游发布动态监控脚本 | 2026-06-28 | `scripts/rust_197_upstream_monitor.sh` + `reports/RUST_197_UPSTREAM_MONITOR.log` |
 
 ---
 
@@ -32,6 +33,7 @@
 - [x] 生成本倒计时排期文件
 - [x] 增强 `scripts/probe_rust_197_apis.rs`（12 项 API）并生成 `reports/RUST_197_API_PROBE_2026_06_28.md`
 - [x] 全 workspace 回归：`cargo check` / `cargo test` / `cargo clippy`
+- [x] 创建上游监控脚本 `scripts/rust_197_upstream_monitor.sh` 并首次运行
 
 ### 2026-06-29（周一）— 发布前第 10 天
 
@@ -63,7 +65,8 @@
 
 ### 2026-07-04 ~ 2026-07-07 — 观察与待命
 
-- [ ] 每日检查 releases.rs / Rust 官方博客
+- [ ] 每日运行 `bash scripts/rust_197_upstream_monitor.sh`，查看 `reports/RUST_197_UPSTREAM_MONITOR.log`
+- [ ] 每日人工复核 releases.rs / Rust 官方博客（作为脚本检查的补充）
 - [ ] 记录任何影响发布日执行的变更（特性推迟、签名变化等）
 
 ### 2026-07-08（周三）— 发布日前一天
