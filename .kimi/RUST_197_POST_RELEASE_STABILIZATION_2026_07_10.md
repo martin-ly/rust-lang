@@ -9,6 +9,8 @@
 
 ## 阶段 1：最终回归验证
 
+> 所有验证均在 nightly 工具链上执行（workspace 依赖 nightly feature gates）。
+
 - [ ] `cargo check --workspace`
 - [ ] `cargo test --workspace`
 - [ ] `cargo clippy --workspace --all-features -- -D warnings`
