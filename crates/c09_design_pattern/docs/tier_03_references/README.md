@@ -24,7 +24,8 @@
 ## 🗺️ 现有理论资源
 
 | 资源                                                                              | 说明                                 |
-| :--- | :--- || [00_MASTER_INDEX.md](../00_MASTER_INDEX.md)                                       | 完整索引                             |
+| :--- | :--- |
+| [00_MASTER_INDEX.md](../00_MASTER_INDEX.md)                                       | 完整索引                             |
 | [FAQ.md](../FAQ.md)                                                               | 常见问题（完整版）                   |
 | [Glossary.md](../Glossary.md)                                                     | 术语表（完整版）                     |
 | [Tier 1 基础层](../tier_01_foundations/README.md)                                          | 快速入门和基础参考                   |

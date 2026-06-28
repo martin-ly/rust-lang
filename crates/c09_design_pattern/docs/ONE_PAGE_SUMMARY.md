@@ -8,7 +8,8 @@
 ## 核心概念（4 条）
 
 | 概念 | 说明 |
-| :--- | :--- || **创建型** | Builder、Factory、Singleton；Rust 用 `Default`、`new` 惯用 |
+| :--- | :--- |
+| **创建型** | Builder、Factory、Singleton；Rust 用 `Default`、`new` 惯用 |
 | **结构型** | Adapter、Decorator、Facade；组合优于继承 |
 | **行为型** | Strategy、Observer、State；trait 对象或枚举 |
 | **Rust 特有** | Newtype、RAII、类型状态机；零成本抽象 |

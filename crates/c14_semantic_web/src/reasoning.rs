@@ -25,7 +25,10 @@ pub fn reason(kg: &KnowledgeGraph) -> ReasoningResult {
         // 后置概念：哪些节点依赖当前节点
         for (other, other_deps) in &closure {
             if other != node && other_deps.contains(node) {
-                follow_ups.entry(node.clone()).or_default().insert(other.clone());
+                follow_ups
+                    .entry(node.clone())
+                    .or_default()
+                    .insert(other.clone());
             }
         }
     }

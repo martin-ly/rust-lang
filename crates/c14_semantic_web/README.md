@@ -14,6 +14,7 @@ Rust 知识体系知识图谱工具链：解析、验证、推理与查询。
 1. 查看 [`docs/00_MASTER_INDEX.md`](docs/00_MASTER_INDEX.md) 了解本 crate 的完整文档结构。
 2. 查看 [`docs/ONE_PAGE_SUMMARY.md`](docs/ONE_PAGE_SUMMARY.md) 获取核心概念速览。
 3. 运行示例：
+
    ```bash
    cargo run -p c14_semantic_web --example kg_validate
    cargo run -p c14_semantic_web --example kg_query
