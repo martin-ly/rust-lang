@@ -204,7 +204,7 @@ unsafe 代码的安全策略:
 ```
 
 > **unsafe 洞察**: **unsafe 不是"坏"的**——它是 Rust **必要的逃逸舱**，关键是**隔离、文档和审查**。
-> [来源: [Rust Secure Code Guidelines](https://anssi-fr.github.io/rust-guide/05_unchecked.html)]
+> [来源: [Rust Secure Code Guidelines](https://anssi-fr.github.io/rust-guide/)]
 
 ---
 
@@ -439,7 +439,7 @@ Secrets 管理:
 ```
 
 > **模式矩阵**: Rust 安全是**分层防御**——编译期保证 + 运行时验证 + 审计工具 + 开发实践。
-> [来源: [Rust Secure Code Guidelines](https://anssi-fr.github.io/rust-guide/04_language.html)]
+> [来源: [Rust Secure Code Guidelines](https://anssi-fr.github.io/rust-guide/)]
 
 ---
 
