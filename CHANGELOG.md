@@ -46,6 +46,21 @@
   - 确认 async closures / Rust 2024 Edition / `&raw const` 等关键事实修正已落地，`check_version_facts.py` 已将 `&const` 列为非官方术语检测项。
 - **验证**：`cargo test --workspace`、`cargo clippy --workspace --all-features -- -D warnings` 均通过；`l3_rust_197_alignment.rs` 13 passed。
 
+### Phase 3 C4 脚本清理启动（2026-06-28）
+
+- **重复脚本版本归档**：
+  - 归档 `fix_dead_links.py` / `v2`（保留 `v3`）。
+  - 归档 `fix_concept_i18n_metadata.py`（保留 `v2`）。
+  - 归档旧版 `check_github_links.py`、`check_source_links_health.py`（保留 `check_github_links_health.py`、`check_source_links_health_extended.py`）。
+  - 归档根目录 `fix_rfc_links.py`（`scripts/i18n/` 版本更全）。
+  - 归档根目录 `fix_final_broken_links.py`（`scripts/maintenance/` 版本更全）。
+  - 归档 `add_knowledge_readme_module8.py`（`bulk_add_knowledge_module8.py` 更全）。
+  - 将 11 个一次性链接修复战役脚本移入 `scripts/archive/2026/link_fix_iterations/`。
+- **重写 `scripts/README.md`**：
+  - 更新目录结构与脚本分类表格。
+  - 删除对不存在脚本（`fix_compile_failures.py`、`fix_readme_navigation.py`）的引用。
+  - 补充命名规范、归档说明与使用规范。
+
 ### B3 结构债务清理收尾（2026-06-28）
 
 - **Crates 顶层文档注释清理**：
