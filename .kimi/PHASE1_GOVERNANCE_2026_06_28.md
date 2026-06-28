@@ -78,7 +78,7 @@
 - [x] 确认 `cargo clippy --workspace --tests --all-features -- -D warnings` 通过
 - [x] 确认 `cargo test --workspace` 通过
   - 修复了 `c05_threads::test_advanced_thread_pool` 的并发竞态：原 `wait_for_completion` 只在 `active_tasks == 0` 时返回，存在任务尚未被工作线程领取就提前返回的 race condition；现增加 `pending_tasks` 计数，等待 `pending_tasks == 0 && active_tasks == 0`
-- [ ] 在 CI 工作流中加入 `--tests` 的 clippy 检查
+- [x] 在 CI 工作流中加入 `--tests` 的 clippy 检查（commit `5f7ebf63c`）
 - [x] 提交变更（commit `49319fc49`）
 
 ---
@@ -95,6 +95,15 @@
 - [x] 提交变更（commit `9dd4836`）
 
 ---
+
+## G6 工具链稳定化（MSRV）
+
+- [ ] 确认 stable MSRV 迁移策略（建议：混合方案，见 `.kimi/STABLE_MSRV_MIGRATION_PLAN.md`）
+- [ ] 为受影响 crate 添加 `nightly` Cargo feature，将预览内容隔离
+- [ ] 改写或移除可在 stable 实现的 nightly 用法
+- [ ] 修改 `rust-toolchain.toml` 为 stable 1.96.0
+- [ ] 更新 CI 使用 stable 工具链，保留 nightly feature 的可选验证
+- [ ] 确认 `cargo +stable build/test/clippy --workspace` 通过
 
 ## 验收标准
 
