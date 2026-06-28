@@ -76,14 +76,14 @@
 
 ## G5 制定命名规范
 
-- [ ] 创建 `NAMING_CONVENTION.md`（项目根目录），规定：
+- [x] 创建 `NAMING_CONVENTION.md`（项目根目录），规定：
   - Markdown 文件名：`number_prefix_snake_case.md` 或 `snake_case.md`
   - 脚本文件名：`snake_case.py` / `snake_case.sh` / `snake_case.rs`
   - 禁止中文、空格、混合大小写（过渡期例外清单需明确列出）
   - 目录名：`snake_case` 或 `number_prefix_snake_case`
-- [ ] 创建 `scripts/lint_filenames.py`，检查新增文件是否符合规范
-- [ ] 将命名检查加入 pre-commit / CI（可先作为 warning）
-- [ ] 提交变更
+- [x] 创建 `scripts/lint_filenames.py`，检查新增文件是否符合规范
+- [ ] 将命名检查加入 pre-commit / CI（先作为 warning，待历史文件清理后再改为失败）
+- [x] 提交变更（commit `9dd4836`）
 
 ---
 

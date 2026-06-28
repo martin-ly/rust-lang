@@ -1,22 +1,19 @@
 //! # C11: Rust 过程宏系统
-//! # C11: Rust system
-//! ## 宏类型
-//! ## type
-//! ## 宏type
-//! - **属性宏 (Attribute Macros)**: 装饰函数、结构体等
-//! - **attribute (Attribute Macros)**: function 、struct etc.
-//! - **attribute macro (Attribute Macros)**: 装饰function、structetc.
-//! - **函数式宏 (Function-like Macros)**: 类似macro_rules!但更强大
+//!
+//! 本 crate 演示 Rust 过程宏（Procedural Macros）的核心类型与用法，包括：
+//!
+//! - **派生宏（Derive Macros）**：为结构体或枚举自动实现 trait。
+//! - **属性宏（Attribute Macros）**：装饰函数、结构体、模块等。
+//! - **函数式宏（Function-like Macros）**：类似 `macro_rules!`，但使用 Rust 代码解析 TokenStream。
+//!
 //! ## 核心概念
-//! ## core concept
-//! - **AST**: 抽象语法树表示
-//! - **AST**: syntax tree represent
-//! - **AST**: tree represent
-//! - **AST**: 抽象语法treerepresent
-//! - **编译时执行**: 在编译阶段运行代码
-//! - **compile-time **: in stage Run
+//!
+//! - **TokenStream**：宏接收和返回的标记流。
+//! - **AST**：抽象语法树表示，通常通过 `syn` crate 解析得到。
+//! - **编译时执行**：过程宏在编译阶段运行并生成代码。
+//!
 //! ## 示例
-//! ## example
+//!
 //! ```rust
 //! use c11_macro_system_proc::*;
 //!
