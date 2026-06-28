@@ -1,7 +1,7 @@
 # Rust 1.95 Nightly 预览与实验特性
 
-> **相关文档**: 请参阅 [knowledge/06_ecosystem/emerging/04_rust_1_95_preview.md](../../knowledge/06_ecosystem/emerging/04_rust_1_95_preview.md)
-> **相关文档**: 请参阅 [knowledge/06_ecosystem/emerging/03_rust_1_95.md](../../knowledge/06_ecosystem/emerging/03_rust_1_95.md)
+> **权威来源说明**: 本文为 Rust 1.95 相关内容的权威来源。
+> [knowledge/06_ecosystem/emerging/04_rust_1_95_preview.md](../../knowledge/06_ecosystem/emerging/04_rust_1_95_preview.md) 与 [knowledge/06_ecosystem/emerging/03_rust_1_95.md](../../knowledge/06_ecosystem/emerging/03_rust_1_95.md) 已重定向至此。
 > **分级**: [A]
 > **Bloom 层级**: L3 (应用)
 > **创建日期**: 2026-02-28
