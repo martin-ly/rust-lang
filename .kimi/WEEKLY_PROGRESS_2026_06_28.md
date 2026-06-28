@@ -89,6 +89,9 @@
   - 新增 `.kimi/RUST_197_API_ACTIVATION_GUIDE.md`
 - `D: add Rust 1.97 post-release stabilization checklist`
   - 新增 `.kimi/RUST_197_POST_RELEASE_STABILIZATION_2026_07_10.md`
+- `B: add crate docs boilerplate audit script and remove duplicate README`
+  - 新增 `scripts/audit_crate_docs_boilerplate.py`
+  - 删除 `crates/c03_control_fn/docs/README (2).md`
 
 ---
 
