@@ -1,4 +1,6 @@
-> **Summary**: Plan Concept Knowledge System V2. Core Rust concept.
+> **Summary**:
+>
+> Plan Concept Knowledge System V2. Core Rust concept.
 >
 # Rust 概念知识体系 —— 可持续推进计划与任务
 >

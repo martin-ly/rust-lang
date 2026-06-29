@@ -21,7 +21,6 @@
 > [Girard 1987] · [Pierce 2002, TAPL §15] ·
 > [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) ·
 > [Utrecht: Ownership Types]
-
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---

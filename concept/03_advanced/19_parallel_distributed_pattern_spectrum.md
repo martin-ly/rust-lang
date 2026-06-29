@@ -26,7 +26,6 @@
 ---
 
 > **Bloom 层级**: 分析 → 评价 → 创造
-
 > **对应 Crate**: [`c05_threads`](../../crates/c05_threads)
 > **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency)
 

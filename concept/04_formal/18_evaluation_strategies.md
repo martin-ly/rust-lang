@@ -4,17 +4,33 @@
 >
 > **EN**: Evaluation Strategies
 > **Summary**: Evaluation Strategies: formal methods foundations, semantics, and verification techniques relevant to Rust.
-
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
 > **层级**: L4 形式化 — 通用编程语言机制
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: F×Und — 形式化理解程序执行的求值规则
-> **前置概念**: [Lambda Calculus](14_lambda_calculus.md) · [Variable Model](../01_foundation/20_variable_model.md) · [Type System](../01_foundation/04_type_system.md)
-> **后置概念**: [Ownership Formalization](03_ownership_formal.md) · [Control Flow](../01_foundation/07_control_flow.md)
-> **主要来源**: [Pierce — TAPL, §5-§11](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Harper — PFPL, Part III](https://www.cs.cmu.edu/~rwh/pfpl/) · [Wadler 1984 — Why Calculating is Better than Scheming](https://doi.org/10.1093/comjnl/27.2.115) · [Plotkin 1975 — Call-by-Name, Call-by-Value and the λ-Calculus](https://doi.org/10.1016/0304-3975(75)90017-1) · [Cambridge — OptComp 2025, Lambda Lifting & Evaluation Strategies](https://www.cl.cam.ac.uk/~na482/pdfs/) · [Nottingham — PL Semantics, Evaluation Strategies](https://people.cs.nott.ac.uk/pszgmh/) · [Wikipedia: Evaluation strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)
-
+> **前置概念**:
+>
+> [Lambda Calculus](14_lambda_calculus.md) ·
+> [Variable Model](../01_foundation/20_variable_model.md) ·
+> [Type System](../01_foundation/04_type_system.md)
+>
+> **后置概念**:
+>
+> [Ownership Formalization](03_ownership_formal.md) ·
+> [Control Flow](../01_foundation/07_control_flow.md)
+>
+> **主要来源**:
+>
+> [Pierce — TAPL, §5-§11](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [Harper — PFPL, Part III](https://www.cs.cmu.edu/~rwh/pfpl/) ·
+> [Wadler 1984 — Why Calculating is Better than Scheming](https://doi.org/10.1093/comjnl/27.2.115) ·
+> [Plotkin 1975 — Call-by-Name, Call-by-Value and the λ-Calculus](https://doi.org/10.1016/0304-3975(75)90017-1) ·
+> [Cambridge — OptComp 2025, Lambda Lifting & Evaluation Strategies](https://www.cl.cam.ac.uk/~na482/pdfs/) ·
+> [Nottingham — PL Semantics, Evaluation Strategies](https://people.cs.nott.ac.uk/pszgmh/) ·
+> [Wikipedia: Evaluation strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)
+>
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---

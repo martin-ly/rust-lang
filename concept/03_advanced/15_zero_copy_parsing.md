@@ -21,7 +21,6 @@
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
 > [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs//2000-const-generics.html) ·
 > [Wikipedia — Zero-copy](https://en.wikipedia.org/wiki/Zero-copy)
-
 > **对应 Crate**: [`c10_networks`](../../crates/c10_networks)
 
 ## 📑 目录

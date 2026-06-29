@@ -1,4 +1,6 @@
-> **Summary**: Rust Effect System Deepened Broadened Analysis. Core Rust concept.
+> **Summary**:
+>
+> Rust Effect System Deepened Broadened Analysis. Core Rust concept.
 >
 # Rust 效应系统（Effect System）与其语言边界的全面深化广化分析论证
 >

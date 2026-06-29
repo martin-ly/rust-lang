@@ -1,4 +1,6 @@
-> **Summary**: Plan Semantic Space Wave 11. Core Rust concept.
+> **Summary**:
+>
+> Plan Semantic Space Wave 11. Core Rust concept.
 >
 # Wave 11 计划：Rust 表征空间与语义边界全面梳理
 >

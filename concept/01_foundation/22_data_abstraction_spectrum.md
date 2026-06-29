@@ -20,9 +20,13 @@
 > **后置概念**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type Erasure](../03_advanced/17_type_erasure.md)
 > **主要来源**:
 >
-> [Pierce — TAPL, §18-§24](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Cardelli & Wegner 1985 — On Understanding Types, Data Abstraction, and Polymorphism](https://doi.org/10.1145/6041.6042) ·
+> [Pierce — TAPL, §18-§24](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [Cardelli & Wegner 1985 — On Understanding Types, Data Abstraction, and Polymorphism](https://doi.org/10.1145/6041.6042) ·
 > [Wikipedia: Abstract data type](https://en.wikipedia.org/wiki/Abstract_data_type) ·
-> [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) · [TRPL Ch 5 — Using Structs](https://doc.rust-lang.org/book/ch05-00-structs.html) · [TRPL Ch 6 — Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html) · [TRPL Ch 10 — Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html)
+> [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) ·
+> [TRPL Ch 5 — Using Structs](https://doc.rust-lang.org/book/ch05-00-structs.html) ·
+> [TRPL Ch 6 — Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html) ·
+> [TRPL Ch 10 — Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html)
 >
 > **来源**: [TRPL — Structs](https://doc.rust-lang.org/book/ch05-00-structs.html) ·
 > [TRPL — Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html) ·

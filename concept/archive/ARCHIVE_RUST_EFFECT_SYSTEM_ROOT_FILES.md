@@ -1,4 +1,6 @@
-> **Summary**: Archive Rust Effect System Root Files. Core Rust concept.
+> **Summary**:
+>
+> Archive Rust Effect System Root Files. Core Rust concept.
 >
 # 根目录级 Rust Effect System 文件归档说明
 >

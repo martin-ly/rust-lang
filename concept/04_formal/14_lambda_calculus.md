@@ -1,4 +1,6 @@
-> **内容分级**: [专家级]
+> **内容分级**:
+>
+> [专家级]
 
 # Lambda 演算与 Rust 计算模型
 >
@@ -6,10 +8,8 @@
 > **Summary**: Lambda Calculus: formal methods foundations, semantics, and verification techniques relevant to Rust.
 >
 > **受众**: [研究者]
-
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
-
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 探讨 Lambda 演算作为 Rust 函数式编程的数学基础——从 β-归约到类型化 Lambda 演算，分析 Rust 的闭包（Closures）与函数类型如何映射到计算理论。
 > **前置概念**: [Type Theory](02_type_theory.md) · [Operational Semantics](17_operational_semantics.md) · [Ownership Formal](03_ownership_formal.md)

@@ -10,7 +10,11 @@
 > **来源: [Wikipedia - Ownership (programming)](https://en.wikipedia.org/wiki/Ownership_(programming))** ·
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)** ·
 > **[来源: Stanford CS242 - Programming Languages]**
-> **本节关键术语**: 基础概念 (Foundation) · 所有权 (Ownership) · 借用 (Borrowing) · 生命周期 (Lifetime) · 类型系统 (Type System) — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**:
+>
+> 基础概念 (Foundation) · 所有权 (Ownership) · 借用 (Borrowing) ·
+> 生命周期 (Lifetime) · 类型系统 (Type System) —
+> [完整对照表](../00_meta/terminology_glossary.md)
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/)
 > **前置概念**: N/A

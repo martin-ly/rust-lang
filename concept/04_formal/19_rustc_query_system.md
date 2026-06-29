@@ -1,5 +1,6 @@
-> **内容分级**: [综述级]
-
+> **内容分级**:
+>
+> [综述级]
 > **本节关键术语**: Query System · `TyCtxt` · Dep Graph · Red-Green Algorithm · Incremental Compilation · Salsa · `rustc_middle` — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Rustc 查询系统与增量编译
@@ -13,7 +14,6 @@
 > **定位**: 将 `rustc` 从“顺序 pass 流水线”还原为“按需查询 + 缓存”的真实架构，理解增量编译的底层机制。
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Type Inference](08_type_inference.md) · [NLL and Polonius](../03_advanced/08_nll_and_polonius.md)
 > **后置概念**: [Compiler Internals](../06_ecosystem/45_compiler_internals.md) · [Compiler Infrastructure](../06_ecosystem/47_compiler_infrastructure.md)
-
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---

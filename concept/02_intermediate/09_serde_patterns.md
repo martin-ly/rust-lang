@@ -1,5 +1,6 @@
-> **内容分级**: [综述级]
-
+> **内容分级**:
+>
+> [综述级]
 > **本节关键术语**: 序列化 (Serialization) · 反序列化 (Deserialization) · serde · Serialize · Deserialize · 自定义反序列化 — [完整对照表](../00_meta/terminology_glossary.md)
 >
 # Serde 序列化模式：Rust 的类型驱动数据转换

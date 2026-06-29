@@ -1,4 +1,6 @@
-> **Summary**: Archive Index. Core Rust concept.
+> **Summary**:
+>
+> Archive Index. Core Rust concept.
 >
 # concept/archive/ 统一归档索引
 >

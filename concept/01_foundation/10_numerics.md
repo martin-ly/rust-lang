@@ -3,7 +3,11 @@
 > [综述级]
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-> **本节关键术语**: 数值类型 (Numeric Types) · 整数类型 (Integer) · 浮点类型 (Float) · 有符号 (Signed) · 无符号 (Unsigned) · 整数溢出 (Integer Overflow) · 浮点数 (Floating Point) · 类型转换 (Type Conversion) · 类型推断 (Type Inference) · 字面值后缀 (Literal Suffix) — [完整对照表](../00_meta/terminology_glossary.md)
+> **本节关键术语**:
+>
+> 数值类型 (Numeric Types) · 整数类型 (Integer) · 浮点类型 (Float) · 有符号 (Signed) · 无符号 (Unsigned) ·
+> 整数溢出 (Integer Overflow) · 浮点数 (Floating Point) · 类型转换 (Type Conversion) · 类型推断 (Type Inference) · 字面值后缀 (Literal Suffix)
+> — [完整对照表](../00_meta/terminology_glossary.md)
 >
 
 # 数值类型与运算：从整数到浮点的完整图景

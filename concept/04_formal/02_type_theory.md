@@ -1,4 +1,6 @@
-> **内容分级**: [专家级]
+> **内容分级**:
+>
+> [专家级]
 
 # Type Theory（类型论基础）
 >
@@ -22,7 +24,6 @@
 > [Wikipedia: Type theory](https://en.wikipedia.org/wiki/Type_theory) ·
 > [Pierce 2002, *Types and Programming Languages*](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
 > [Cardelli 1996, *Type Systems* (ACM Computing Surveys)](https://dl.acm.org/doi/10.1145/6041.6042)
-
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
