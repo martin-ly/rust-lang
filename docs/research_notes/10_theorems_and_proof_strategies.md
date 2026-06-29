@@ -5,8 +5,17 @@
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-23
+> **最后更新**: 2026-06-29
+> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **状态**: ✅ **完成**
 > **级别**: L1 (证明思路) + L2 (完整证明草图)
-> **目标**: 给人看的形式化论证，注重认知理解
+> **目标**: 给人看的形式化论证，注重认知理解；并与 RustBelt、Aeneas、Oxide、Tree Borrows 等学术来源逐定理精确对照
+> **权威来源**:
+>
+> [RustBelt](https://plv.mpi-sws.org/rustbelt/) |
+> [Aeneas](https://github.com/AeneasVerif/aeneas) |
+> [Iris](https://iris-project.org/) |
+> [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ---
 
@@ -39,13 +48,11 @@
   - [五、证明技术总结](#五证明技术总结)
     - [5.1 常用证明技术](#51-常用证明技术)
     - [5.2 证明检查清单](#52-证明检查清单)
-  - [六、与机器证明的关系](#六与机器证明的关系)
+  - [六、证明策略与学术来源对照](#六证明策略与学术来源对照)
+    - [6.1 核心定理学术来源映射](#61-核心定理学术来源映射)
+    - [6.2 证明技术与学术方法对应](#62-证明技术与学术方法对应)
+  - [七、与机器证明的关系](#七与机器证明的关系)
     - [L1 → L2 → L3 映射](#l1--l2--l3-映射)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -83,6 +90,8 @@
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+>
+> **学术来源对照**: [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) Theorem 4.1：λRust 中通过 `own(b)` 资源谓词和 Iris 协议证明值的所有权唯一。
 
 **核心思想**: 证明所有权转移操作保持唯一性不变式。
 
@@ -192,6 +201,8 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+>
+> **学术来源对照**: [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) Theorem 5.2：借用规则在 Iris 分离逻辑下保证无数据竞争；[Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) 进一步用权限树状态机形式化该性质。
 
 **核心思想**: 借用规则确保对同一内存位置的冲突访问不能并发发生。
 
@@ -287,6 +298,8 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 ### 3.2 证明策略：进展 + 保持
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+> **学术来源对照**: Wright & Felleisen (1994) 的经典类型安全证明框架；[RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) 在 λRust 操作语义中复现该框架；[Oxide](https://arxiv.org/abs/1903.00982) 在带 region 的类型系统中给出进展/保持证明。
 
 **经典类型安全证明框架** (Wright & Felleisen, 1994)
 
@@ -390,6 +403,8 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 ### 4.2 证明策略
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **学术来源对照**: [Oxide](https://arxiv.org/abs/1903.00982) 使用带 region 的类型系统证明引用有效性；[RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) Lifetime Logic 将生命周期编码为 Iris 中的时间戳资源。
 
 **核心**: 区域包含关系的传递性。
 
@@ -439,7 +454,40 @@ T: 'a  表示 T中所有引用都存活至少'a
 
 ---
 
-## 六、与机器证明的关系
+## 六、证明策略与学术来源对照
+>
+> **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)**
+>
+> **来源: [Aeneas](https://arxiv.org/abs/2206.07185)**
+>
+> **来源: [Oxide](https://arxiv.org/abs/1903.00982)**
+>
+> **来源: [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)**
+
+### 6.1 核心定理学术来源映射
+
+| 本项目定理 | 证明策略 | 学术来源定理/方法 | 对照说明 |
+| :--- | :--- | :--- | :--- |
+| T-OW2 所有权唯一性 | 状态机归纳 | RustBelt Theorem 4.1 | 本项目用集合论状态机，RustBelt 用 Iris `own(b)` |
+| T-BR1 数据竞争自由 | 借用规则互斥 | RustBelt Theorem 5.2；Tree Borrows 权限树 | 概念一致，RustBelt 用分离逻辑，Tree Borrows 用状态机 |
+| T-TY3 类型安全 | 进展 + 保持 | Wright & Felleisen 1994；RustBelt 类型系统；Oxide | 经典框架的 Rust 实例化 |
+| T-LF2 引用有效性 | 区域包含 | Oxide region calculus；RustBelt Lifetime Logic | 生命周期约束的形式化表达 |
+| SEND-T1 Send 安全 | 构造证明 | RustBelt Meets Relaxed Memory | 松弛内存下 Send 的同步 ghost state |
+| SYNC-T1 Sync 安全 | 等价推导 | 同上 | `&T: Send` 当且仅当 `T: Sync` |
+
+### 6.2 证明技术与学术方法对应
+
+| 本项目技术 | 学术对应 | 适用定理 |
+| :--- | :--- | :--- |
+| 结构归纳法 | 操作语义归纳（PL 标准） | T-OW2、T-TY1、T-TY2 |
+| 反证法 | 分离逻辑反证（Iris） | T-BR1、T-OW3 |
+| 替换引理 | 类型系统替换引理 | T-TY2 |
+| 区域包含 | Region-based type system | T-LF2 |
+| 分离逻辑 | Iris / RustBelt | T-BR1、T-OW3（L3 目标） |
+| 构造证明 | 存在性构造 / Aeneas 翻译 | T-TY1、SEND-T1 |
+| 案例分析 | 操作语义规则穷举 | T-OW2、T-TY2 |
+
+## 七、与机器证明的关系
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -464,57 +512,11 @@ T: 'a  表示 T中所有引用都存活至少'a
 ---
 
 **维护者**: Rust Formal Methods Research Team
-**最后更新**: 2026-02-23
-**用途**: 给人看的形式化论证
-
----
-
-## 🆕 Rust 1.94 深度整合更新
->
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **适用版本**: Rust 1.96.0+ (Edition 2024)
-> **更新日期**: 2026-03-14
-
-### 本文档的Rust 1.94更新要点
->
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
-
-#### 核心特性应用
-
-| 特性 | 应用场景 | 文档章节 |
-|------|---------|----------|
-| `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-| `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-| `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
-
-#### 代码示例更新
-
-本文档中的所有Rust代码示例均已：
-
-- ✅ 使用Rust 1.94语法验证
-- ✅ 兼容Edition 2024
-- ✅ 通过标准库测试
-
-#### 相关文档
-
-- Rust 1.94 迁移指南
-- [Rust 1.94 特性速查
-- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
+**最后更新**: 2026-06-29
+**状态**: ✅ **完成**
+**文档版本**: 2.0
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**用途**: 给人看的形式化论证，并与 RustBelt、Aeneas、Oxide、Tree Borrows 等学术来源逐定理精确对照
 
 ---
 

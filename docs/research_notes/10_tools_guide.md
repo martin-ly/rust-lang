@@ -5,9 +5,9 @@
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-02-28
+> **最后更新**: 2026-06-29
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-> **状态**: ✅ 已完成
+> **状态**: ✅ 完成
 
 ---
 
@@ -43,12 +43,7 @@
     - [工具组合](#工具组合)
     - [最佳实践](#最佳实践)
   - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [🆕 权威国际化内容升级](#-权威国际化内容升级)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -120,11 +115,13 @@ cargo prusti --file src/lib.rs
 
 **与形式化衔接**：Prusti 可验证 [ownership_model](formal_methods/10_ownership_model.md) 定理 T2（移动语义）、[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) 定理 T1（借用规则）；`#[requires]`/`#[ensures]` 对应前置/后置条件。
 
-**相关资源**:
+**版本与官方资源**:
 
-- Prusti 文档
-- Prusti 用户指南
-- [Prusti 教程](https://viperproject.github.io/prusti-dev/user-guide/getting-started.html)
+- 最新版本：跟随 [Prusti GitHub Releases](https://github.com/viperproject/prusti-dev/releases) 发布；VS Code 用户推荐通过 [Prusti Assistant](https://marketplace.visualstudio.com/items?itemName=viper-admin.prusti-assistant) 获取最新版。
+- [Prusti 用户指南](https://viperproject.github.io/prusti-dev/user-guide/)
+- [Prusti 教程 - Getting Started](https://viperproject.github.io/prusti-dev/user-guide/getting-started.html)
+- [Prusti GitHub](https://github.com/viperproject/prusti-dev)
+- [Prusti 论文：The Prusti Project](https://pm.inf.ethz.ch/publications/AstrauskasBilyFialaGrannanMathejaMuellerPoliSummers22.pdf)
 
 ---
 
@@ -173,11 +170,112 @@ cargo kani --function test_abs
 
 **与形式化衔接**：Kani 可验证 [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) 无数据竞争、[ownership_model](formal_methods/10_ownership_model.md) 内存安全；`kani::any()` 对应全称量化。
 
-**相关资源**:
+**版本与官方资源**:
 
-- [Kani 文档](https://github.com/model-checking/kani)
-- Kani 用户指南
+- 推荐版本：**0.67.0+**（截至 2026-04，以 [Kani GitHub Releases](https://github.com/model-checking/kani/releases) 最新 tag 为准）。
+- [Kani 官方文档 / The Kani Rust Verifier](https://model-checking.github.io/kani/)
+- [Kani API Docs (docs.rs)](https://docs.rs/kani-verifier/latest)
+- [Kani GitHub](https://github.com/model-checking/kani)
 - [Kani 教程](https://model-checking.github.io/kani/tutorial.html)
+- 安装命令：`cargo install --locked kani-verifier && cargo kani setup`
+
+---
+
+### Creusot
+
+> **来源**: [Creusot](https://creusot-rs.github.io/)
+>
+> **来源**: [Why3](http://why3.lri.fr/)
+
+**用途**: 基于 Why3/SMT 的 Rust 演绎验证器，支持函数契约（pre/post）、循环不变式与 ghost 代码。
+
+**安装**:
+```bash
+# 需要 OPAM、Why3、Alt-Ergo 等辅助工具
+git clone https://github.com/creusot-rs/creusot.git
+cd creusot
+cargo install --path creusot-rustc
+cargo install --path cargo-creusot
+cargo creusot setup install
+```
+
+**基本使用**:
+```rust,ignore
+use creusot_contracts::*;
+
+#[requires(x >= 0)]
+#[ensures(result >= x)]
+fn increment(x: i32) -> i32 {
+    x + 1
+}
+```
+
+**版本与官方资源**:
+- 推荐版本：**0.1.1+**（以 [Creusot GitHub Releases](https://github.com/creusot-rs/creusot/releases) 为准）；依赖特定 nightly Rust。
+- [Creusot 主页](https://creusot-rs.github.io/)
+- [Creusot GitHub](https://github.com/creusot-rs/creusot)
+- [CreuSAT - 经 Creusot 验证的 SAT 求解器](https://github.com/sarsko/CreuSAT)
+
+---
+
+### Aeneas
+
+> **来源**: [Aeneas](https://aeneas-verif.github.io/aeneas/)
+>
+> **来源**: [Charon](https://github.com/AeneasVerif/charon)
+
+**用途**: 将安全 Rust 通过 LLBC 函数式翻译到 F\*/Coq/Lean/HOL4，消除显式内存推理。
+
+**安装与使用**:
+```bash
+# 1. 用 Charon 生成 .llbc
+charon cargo --preset=aeneas
+# 2. 用 Aeneas 翻译到目标证明助手
+./bin/aeneas -backend lean|coq|fstar|hol4 file.llbc
+```
+
+**版本与官方资源**:
+- 推荐版本：以 [Aeneas GitHub](https://github.com/AeneasVerif/aeneas) 最新 commit 为准；与 Charon 版本需匹配。
+- [Aeneas 文档](https://aeneas-verif.github.io/aeneas/)
+- [Aeneas GitHub](https://github.com/AeneasVerif/aeneas)
+- [Charon GitHub](https://github.com/AeneasVerif/charon)
+- [Aeneas 论文 (ICFP 2022)](https://zenodo.org/records/6672939)
+
+---
+
+### Verus
+
+> **来源**: [Verus](https://verus-lang.github.io/verus/)
+
+**用途**: 面向低层系统代码的 Rust 验证器，使用 SMT 求解器静态检查可执行 Rust 代码是否满足规约。
+
+**安装**:
+```bash
+git clone https://github.com/verus-lang/verus.git
+cd verus/source
+# 按仓库 README 安装依赖并运行 vargo build
+```
+
+**基本使用**:
+```rust,ignore
+use vstd::prelude::*;
+
+verus! {
+    fn increment(x: u32) -> (y: u32)
+        requires x < u32::MAX,
+        ensures y == x + 1,
+    {
+        x + 1
+    }
+}
+```
+
+**版本与官方资源**:
+- 推荐版本：以 [Verus GitHub](https://github.com/verus-lang/verus) 最新 commit / release 为准。
+- [Verus 官方文档](https://verus-lang.github.io/verus/)
+- [Verus GitHub](https://github.com/verus-lang/verus)
+- [Verus 教程与参考](https://verus-lang.github.io/verus/guide/)
+- [Verus 标准库 API](https://verus-lang.github.io/verus/verusdoc/vstd/)
 
 ---
 
@@ -364,10 +462,13 @@ cargo miri test --test my_test
 **与形式化衔接**：Miri 检测违反 [ownership_model](formal_methods/10_ownership_model.md)、[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) 的 UB；
 与 [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](10_safe_unsafe_comprehensive_analysis.md) 契约体系对应。
 
-**相关资源**:
+**版本与官方资源**:
 
-- [Miri 文档](https://github.com/rust-lang/miri)
-- [Miri 用户指南](https://github.com/rust-lang/miri#usage)
+- 版本：通过 `rustup component add miri` 安装，版本跟随当前工具链（nightly 优先）。
+- [Miri GitHub](https://github.com/rust-lang/miri)
+- [Miri 使用指南](https://github.com/rust-lang/miri#usage)
+- [rustc dev guide - Miri](https://rustc-dev-guide.rust-lang.org/miri.html)
+- 推荐标志：`-Zmiri-tag-raw-pointers`、`-Zmiri-disable-isolation`（视测试场景而定）
 
 ---
 
@@ -693,71 +794,76 @@ cargo expand > expanded.rs
 - [研究方法论](10_research_methodology.md) - 研究方法概述
 - [实验研究索引](experiments/README.md) - 实验研究工具
 - [形式化方法索引](formal_methods/README.md) - 形式化工具
+- [Rust 异步编程](https://rust-lang.github.io/async-book/)
+- [Rust 性能指南](https://nnethercote.github.io/perf-book/)
+
+## 📚 Cargo Book 与 rustc dev guide 权威章节
+
+> **来源**: [The Cargo Book](https://doc.rust-lang.org/cargo/)
+>
+> **来源**: [rustc dev guide](https://rustc-dev-guide.rust-lang.org/)
+
+### Cargo Book 重点章节
+
+| 章节 | 链接 | 用途 |
+| :--- | :--- | :--- |
+| 指定依赖 | [specifying-dependencies.html](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) | 语义版本、git/path 依赖、features |
+| 工作空间 | [workspaces.html](https://doc.rust-lang.org/cargo/reference/workspaces.html) | 多 crate 管理与统一构建 |
+| 编译配置 (Profiles) | [profiles.html](https://doc.rust-lang.org/cargo/reference/profiles.html) | `dev`/`release`、`opt-level`、`lto` |
+| 构建脚本 | [build-scripts.html](https://doc.rust-lang.org/cargo/reference/build-scripts.html) | `build.rs` 与 FFI/代码生成 |
+| 发布到 crates.io | [publishing.html](https://doc.rust-lang.org/cargo/reference/publishing.html) | 版本发布与元数据 |
+| 环境变量 | [environment-variables.html](https://doc.rust-lang.org/cargo/reference/environment-variables.html) | `CARGO_*` 与构建环境 |
+
+### rustc dev guide 重点章节
+
+| 章节 | 链接 | 用途 |
+| :--- | :--- | :--- |
+| 编译器概览 | [overview.html](https://rustc-dev-guide.rust-lang.org/overview.html) | 编译管线与查询系统 |
+| HIR | [hir.html](https://rustc-dev-guide.rust-lang.org/hir.html) | 高级中间表示 |
+| MIR | [mir/index.html](https://rustc-dev-guide.rust-lang.org/mir/index.html) | 中阶中间表示，借用检查与优化的基础 |
+| 借用检查 | [borrow_check.html](https://rustc-dev-guide.rust-lang.org/borrow_check.html) | NLL/Polonius 与生命周期检查 |
+| 类型推断 | [type-inference.html](https://rustc-dev-guide.rust-lang.org/type-inference.html) | 类型系统实现 |
+| trait 系统 | [traits/resolution.html](https://rustc-dev-guide.rust-lang.org/traits/resolution.html) | trait 解析与 coherence |
+| 代码生成 | [backend/index.html](https://rustc-dev-guide.rust-lang.org/backend/index.html) | LLVM 后端与目标平台 |
+| Miri | [miri.html](https://rustc-dev-guide.rust-lang.org/miri.html) | Miri 解释器架构 |
 
 ---
 
 **维护团队**: Rust Research Community
-**最后更新**: 2026-01-26
-**状态**: ✅ **Rust 1.93.1+ 更新完成**
+**最后更新**: 2026-06-29
+**状态**: ✅ 完成
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 权威国际化内容升级 (Rust 1.96.0+) {#-权威国际化内容升级}
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+> **来源**: [Rust Research Community]
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-> **更新日期**: 2026-03-14
+> **更新日期**: 2026-06-29
 
-### 本文档的Rust 1.94更新要点
+### 本次升级要点
 
-> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
-本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
-
-#### 核心特性应用
-
-> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
-
-| 特性 | 应用场景 | 文档章节 |
-|------|---------|----------|
-| `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-| `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-| `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
-
-#### 代码示例更新
-
-> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
-本文档中的所有Rust代码示例均已：
-
-- ✅ 使用Rust 1.94语法验证
-- ✅ 兼容Edition 2024
-- ✅ 通过标准库测试
-
-#### 相关文档
-
-> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
-
-- Rust 1.94 迁移指南
-- [Rust 1.94 特性速查
-- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
+- 补充 Kani、Prusti、Miri、Creusot、Aeneas、Verus 的官方文档链接与版本信息。
+- 新增 Cargo Book、rustc dev guide 重点章节索引。
+- 删除旧版 Rust 1.94 模板内容，状态更新为 ✅ 完成。
 
 ---
 
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+**维护者**: Rust Research Community
+**最后更新**: 2026-06-29 (权威国际化内容升级)
+**状态**: ✅ 完成
+
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/), [The Cargo Book](https://doc.rust-lang.org/cargo/), [rustc dev guide](https://rustc-dev-guide.rust-lang.org/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-06-29 新增 Cargo Book、rustc dev guide、Kani/Prusti/Miri/Creusot/Aeneas/Verus 官方文档与版本信息 [来源: Authority Source Sprint Batch 9]
 
-**文档版本**: 1.1
+**文档版本**: 1.2
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**最后更新**: 2026-06-29
+**状态**: ✅ 完成
 
 ---
 

@@ -5,6 +5,12 @@
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | [NLL RFC](https://rust-lang.github.io/rfcs/2094-nll.html)
+> **创建日期**: 2026-02-10
+> **最后更新**: 2026-06-29
+> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **状态**: ✅ 已完成权威国际化来源对齐升级
+
 > **一页纸速查** - 生命周期语法、规则、常见模式
 
 ---
@@ -53,13 +59,15 @@
     - [技巧2: 生命周期推断](#技巧2-生命周期推断)
     - [技巧3: 显式drop](#技巧3-显式drop)
   - [快速决策](#快速决策)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [🌍 权威国际化资源链接](#-权威国际化资源链接)
+    - [Rust Reference 核心章节](#rust-reference-核心章节)
+    - [The Rust Programming Language 核心章节](#the-rust-programming-language-核心章节)
+    - [Rust Standard Library 核心 API / 模块](#rust-standard-library-核心-api--模块)
+    - [Rust By Example / Rust Cookbook / cheats.rs](#rust-by-example--rust-cookbook--cheatsrs)
+    - [生命周期专属权威链接](#生命周期专属权威链接)
+      - [Reference Lifetime 章节](#reference-lifetime-章节)
+      - [Rust By Example / Cookbook / cheats.rs](#rust-by-example--cookbook--cheatsrs)
+      - [NLL / RustBelt / Stacked Borrows](#nll--rustbelt--stacked-borrows)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -591,75 +599,86 @@ let r = &x;  // 编译器自动推断
 ---
 
 **维护者**: Rust Formal Methods Research Team
-**最后更新**: 2026-02-28
-**状态**: ✅ 已扩展 - 生命周期速查卡完整版
+**最后更新**: 2026-06-29
+**状态**: ✅ 完成
 
 ---
 
-## 🆕 Rust 1.94 更新
+## 🌍 权威国际化资源链接
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)**
+> **来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)**
+> **来源: [cheats.rs](https://cheats.rs/)**
 
-> **适用版本**: Rust 1.96.0+
+本节为速查内容提供官方权威来源与社区经典参考的直通链接，便于深入验证与扩展阅读。
 
-详见 [RUST_194_RESEARCH_UPDATE](10_rust_194_research_update.md)
+### Rust Reference 核心章节
 
-**最后更新**: 2026-03-14
+- [Reference 首页](https://doc.rust-lang.org/reference/)
+- [Types](https://doc.rust-lang.org/reference/types.html)
+- [Items / Traits](https://doc.rust-lang.org/reference/items/traits.html)
+- [Expressions](https://doc.rust-lang.org/reference/expressions.html)
+- [Statements](https://doc.rust-lang.org/reference/statements.html)
+- [Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html)
 
----
+### The Rust Programming Language 核心章节
 
-## 🆕 Rust 1.94 深度整合更新
->
-> **[来源: [crates.io](https://crates.io/)]**
+- [TRPL 首页](https://doc.rust-lang.org/book/)
+- [Ch. 4 - Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
+- [Ch. 9 - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
+- [Ch. 10 - Generic Types, Traits, Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html)
+- [Ch. 13 - Closures](https://doc.rust-lang.org/book/ch13-00-functional-features.html)
+- [Ch. 15 - Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)
+- [Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
+- [Ch. 19 - Advanced Features / Macros](https://doc.rust-lang.org/book/ch19-06-macros.html)
 
-> **适用版本**: Rust 1.96.0+ (Edition 2024)
-> **更新日期**: 2026-03-14
+### Rust Standard Library 核心 API / 模块
 
-### 本文档的Rust 1.94更新要点
->
-> **[来源: [docs.rs](https://docs.rs/)]**
+- [std 首页](https://doc.rust-lang.org/std/)
+- [std::result](https://doc.rust-lang.org/std/result/)
+- [std::option](https://doc.rust-lang.org/std/option/)
+- [std::error::Error](https://doc.rust-lang.org/std/error/trait.Error.html)
+- [std::fmt](https://doc.rust-lang.org/std/fmt/)
+- [std::panic](https://doc.rust-lang.org/std/panic/)
+- [std::marker (Send / Sync / PhantomData)](https://doc.rust-lang.org/std/marker/)
 
-本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
+### Rust By Example / Rust Cookbook / cheats.rs
 
-#### 核心特性应用
-
-| 特性 | 应用场景 | 文档章节 |
-|------|---------|----------|
-| `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-| `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-| `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
-
-#### 代码示例更新
-
-本文档中的所有Rust代码示例均已：
-
-- ✅ 使用Rust 1.94语法验证
-- ✅ 兼容Edition 2024
-- ✅ 通过标准库测试
-
-#### 相关文档
-
-- Rust 1.94 迁移指南
-- [Rust 1.94 特性速查
-- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
-
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-14 (Rust 1.94 深度整合)
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- [Rust By Example 首页](https://doc.rust-lang.org/rust-by-example/)
+- [Rust Cookbook 首页](https://rust-lang-nursery.github.io/rust-cookbook/)
+- [cheats.rs 首页](https://cheats.rs/)
 
 ---
+
+### 生命周期专属权威链接
+
+> **来源: [Rust Reference - Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)**
+> **来源: [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)**
+
+#### Reference Lifetime 章节
+
+- [Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html)
+- [Trait and Lifetime Bounds](https://doc.rust-lang.org/reference/trait-bounds.html)
+- [Higher-ranked Trait Bounds](https://doc.rust-lang.org/reference/higher-ranked-trait-bounds.html)
+- [Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping-and-variance.html)
+
+#### Rust By Example / Cookbook / cheats.rs
+
+- [RBE - Lifetimes](https://doc.rust-lang.org/rust-by-example/scope/lifetime.html)
+- [RBE - Lifetime Elision](https://doc.rust-lang.org/rust-by-example/scope/lifetime/elision.html)
+- [cheats.rs - Lifetimes](https://cheats.rs/#lifetimes)
+
+#### NLL / RustBelt / Stacked Borrows
+
+- [RFC 2094 - Non-Lexical Lifetimes (NLL)](https://rust-lang.github.io/rfcs/2094-nll.html)
+- [RustBelt: Securing the Foundations of the Rust Programming Language](https://plv.mpi-sws.org/rustbelt/)
+- [RustBelt paper (PDF)](https://plv.mpi-sws.org/rustbelt/rustbelt.pdf)
+- [Stacked Borrows](https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md)
+- [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)
+- [Rustonomicon - Lifetimes](https://doc.rust-lang.org/nomicon/lifetimes.html)
 
 ## 相关概念
 >

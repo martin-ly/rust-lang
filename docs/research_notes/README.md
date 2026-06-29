@@ -5,7 +5,7 @@
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-02-28
+> **最后更新**: 2026-06-29
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **对齐日期**: 2026-06-29
 > **状态**: ✅ 结构迁回完成，权威国际化来源对齐升级完成
@@ -29,22 +29,23 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**首次使用？** 按目标选一条路径 → **[00_ORGANIZATION_AND_NAVIGATION](../../archive/research_notes_2026_06_25/10_00_organization_and_navigation.md)**
+**首次使用？** 按目标选一条路径 → **[00_ORGANIZATION_AND_NAVIGATION](10_00_organization_and_navigation.md)**
 
 | 目标 | 入口 |
 | :--- | :--- |
-| 理解形式化证明 | [FORMAL_FULL_MODEL_OVERVIEW](../../archive/research_notes_2026_06_25/10_formal_full_model_overview.md) → [CORE_THEOREMS_FULL_PROOFS](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) |
+| 理解形式化证明 | [FORMAL_FULL_MODEL_OVERVIEW](10_formal_full_model_overview.md) → [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) |
 | Rust 所有权系统深度形式化 | [`rust-ownership-decidability/`](../../archive/rust-ownership-decidability) — 600K+ 字完整知识库 |
-| 查概念/证明 | [QUICK_FIND](../../archive/research_notes_2026_06_25/10_quick_find.md) |
-| 选设计模式/并发模型 | [software_design_theory/00_MASTER_INDEX](../../archive/research_notes_2026_06_25/software_design_theory/10_00_master_index.md) |
-| 理解三大支柱 | [AUTHORITATIVE_ALIGNMENT_GUIDE](../../archive/research_notes_2026_06_25/10_authoritative_alignment_guide.md)（原 RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN 已归档） |
-| 完整总结与论证脉络 | [00_COMPREHENSIVE_SUMMARY](../../archive/research_notes_2026_06_25/10_00_comprehensive_summary.md) → [ARGUMENTATION_CHAIN_AND_FLOW](../../archive/research_notes_2026_06_25/10_argumentation_chain_and_flow.md) |
+| 查概念/证明 | [QUICK_FIND](10_quick_find.md) |
+| 选设计模式/并发模型 | [software_design_theory/00_MASTER_INDEX](software_design_theory/10_00_master_index.md) |
+| 理解三大支柱 | [AUTHORITATIVE_ALIGNMENT_GUIDE](10_authoritative_alignment_guide.md)（原 RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN 已归档） |
+| 对照 Rust Book 逐章学习 | [RUST_BOOK_ALIGNMENT](10_rust_book_alignment.md) — TRPL 2024 Edition 21 章映射 |
+| 完整总结与论证脉络 | [00_COMPREHENSIVE_SUMMARY](10_00_comprehensive_summary.md) → [ARGUMENTATION_CHAIN_AND_FLOW](10_argumentation_chain_and_flow.md) |
 | 批判性意见与改进计划 | RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN |
 | **结构梳理与归档约定** | **[RESEARCH_NOTES_ORGANIZATION](10_research_notes_organization.md)** — 实际目录、归档说明、入口与索引 |
 | 格式统一与内容/Rust 1.93 对齐计划 | FORMAT_AND_CONTENT_ALIGNMENT_PLAN |
-| 层次化映射（文档树/概念↔定理/文档↔思维表征） | [HIERARCHICAL_MAPPING_AND_SUMMARY](../../archive/research_notes_2026_06_25/10_hierarchical_mapping_and_summary.md) |
+| 层次化映射（文档树/概念↔定理/文档↔思维表征） | [HIERARCHICAL_MAPPING_AND_SUMMARY](10_hierarchical_mapping_and_summary.md) |
 | **docs 全结构梳理**（100% 覆盖） | DOCS_STRUCTURE_OVERVIEW |
-| **目录缺失与内容深化计划** | [00_COMPREHENSIVE_SUMMARY](../../archive/research_notes_2026_06_25/10_00_comprehensive_summary.md) 或 TOC_AND_CONTENT_DEEPENING_PLAN (归档) |
+| **目录缺失与内容深化计划** | [00_COMPREHENSIVE_SUMMARY](10_00_comprehensive_summary.md) 或 TOC_AND_CONTENT_DEEPENING_PLAN (归档) |
 
 ---
 
@@ -157,39 +158,39 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 - ✅ 类型推导正确性证明
 - ✅ 类型推导算法正确性证明
 
-**证明文档索引**: [10_proof_index.md](../../archive/research_notes_2026_06_25/10_proof_index.md)
+**证明文档索引**: [10_proof_index.md](10_proof_index.md)
 
 **按证明深度/层次导航**:
 
-- [按证明深度](../../archive/research_notes_2026_06_25/10_proof_index.md) — L1 证明思路 / L2 完整证明 / L3 机器可检查
-- [按抽象层次](../../archive/research_notes_2026_06_25/10_formal_full_model_overview.md#四抽象层次对应) — 语言级 / MIR 级 / 内存级
-- [形式化全模型入口](../../archive/research_notes_2026_06_25/10_formal_full_model_overview.md) — 统一形式系统、公理列表、定理依赖 DAG
+- [按证明深度](10_proof_index.md) — L1 证明思路 / L2 完整证明 / L3 机器可检查
+- [按抽象层次](10_formal_full_model_overview.md#四抽象层次对应) — 语言级 / MIR 级 / 内存级
+- [形式化全模型入口](10_formal_full_model_overview.md) — 统一形式系统、公理列表、定理依赖 DAG
 
-**论证系统指南**: [10_formal_proof_system_guide.md](../../archive/research_notes_2026_06_25/10_formal_proof_system_guide.md) - 论证缺口分析、概念-公理-定理映射、反例与证明树索引
+**论证系统指南**: [10_formal_proof_system_guide.md](10_formal_proof_system_guide.md) - 论证缺口分析、概念-公理-定理映射、反例与证明树索引
 
-**全面系统化梳理总览**: [10_comprehensive_systematic_overview.md](../../archive/research_notes_2026_06_25/10_comprehensive_systematic_overview.md) - 全局一致性、语义归纳、概念族谱、论证缺口追踪、思维表征全索引
+**全面系统化梳理总览**: [10_comprehensive_systematic_overview.md](10_comprehensive_systematic_overview.md) - 全局一致性、语义归纳、概念族谱、论证缺口追踪、思维表征全索引
 
-**全局统一系统化框架**: [10_unified_systematic_framework.md](../../archive/research_notes_2026_06_25/10_unified_systematic_framework.md) - 全景思维导图、多维矩阵、公理-定理证明全链路、决策树、反例总索引
+**全局统一系统化框架**: [10_unified_systematic_framework.md](10_unified_systematic_framework.md) - 全景思维导图、多维矩阵、公理-定理证明全链路、决策树、反例总索引
 
-**构造性语义与表达能力边界**: [10_language_semantics_expressiveness.md](../../archive/research_notes_2026_06_25/10_language_semantics_expressiveness.md) - 操作/指称/公理语义形式化、表达能力边界论证
+**构造性语义与表达能力边界**: [10_language_semantics_expressiveness.md](10_language_semantics_expressiveness.md) - 操作/指称/公理语义形式化、表达能力边界论证
 
-**设计机制论证**: [10_design_mechanism_rationale.md](../../archive/research_notes_2026_06_25/10_design_mechanism_rationale.md) - Pin 堆/栈区分、所有权、借用、型变等设计理由与完整论证
+**设计机制论证**: [10_design_mechanism_rationale.md](10_design_mechanism_rationale.md) - Pin 堆/栈区分、所有权、借用、型变等设计理由与完整论证
 
-**论证缺口与设计理由综合索引**: [10_argumentation_gap_index.md](../../archive/research_notes_2026_06_25/10_argumentation_gap_index.md) - 缺口追踪、设计理由矩阵、思维表征覆盖
+**论证缺口与设计理由综合索引**: [10_argumentation_gap_index.md](10_argumentation_gap_index.md) - 缺口追踪、设计理由矩阵、思维表征覆盖
 
-**理论体系与论证体系结构**（顶层框架）: [10_theoretical_and_argumentation_system_architecture.md](../../archive/research_notes_2026_06_25/10_theoretical_and_argumentation_system_architecture.md) - 四层理论架构、五层论证结构、安全与非安全全面论证
+**理论体系与论证体系结构**（顶层框架）: [10_theoretical_and_argumentation_system_architecture.md](10_theoretical_and_argumentation_system_architecture.md) - 四层理论架构、五层论证结构、安全与非安全全面论证
 
 **安全与非安全全面论证**: [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md) - 边界、契约、UB 分类、安全抽象
 
-**Rust 1.93 语言特性全面分析**: [10_rust_193_language_features_comprehensive_analysis.md](../../archive/research_notes_2026_06_25/10_rust_193_language_features_comprehensive_analysis.md) - 92 项语言特性全覆盖、设计论证
+**Rust 1.93 语言特性全面分析**: [10_rust_193_language_features_comprehensive_analysis.md](10_rust_193_language_features_comprehensive_analysis.md) - 92 项语言特性全覆盖、设计论证
 
-**批判性分析与推进计划**: [FORMAL_PROOF_SYSTEM_GUIDE](../../archive/research_notes_2026_06_25/10_formal_proof_system_guide.md) - 形式化证明体系批判性分析、国际对标、可持续推进方案
+**批判性分析与推进计划**: [FORMAL_PROOF_SYSTEM_GUIDE](10_formal_proof_system_guide.md) - 形式化证明体系批判性分析、国际对标、可持续推进方案
 
-**核心定理完整证明**: [10_core_theorems_full_proofs.md](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) - ownership T2、borrow T1、type T3 的 L2 级完整证明（归纳基/步、辅助引理、反例否定）
+**核心定理完整证明**: [10_core_theorems_full_proofs.md](10_core_theorems_full_proofs.md) - ownership T2、borrow T1、type T3 的 L2 级完整证明（归纳基/步、辅助引理、反例否定）
 
-**国际形式化验证对标**: [10_international_formal_verification_index.md](../../archive/research_notes_2026_06_25/10_international_formal_verification_index.md) - RustBelt、Aeneas、RustSEM 等对标与差距
+**国际形式化验证对标**: [10_international_formal_verification_index.md](10_international_formal_verification_index.md) - RustBelt、Aeneas、RustSEM 等对标与差距
 
-**权威对齐指南**: [10_authoritative_alignment_guide.md](../../archive/research_notes_2026_06_25/10_authoritative_alignment_guide.md) - 研究笔记权威来源对齐、技术决策参考（原三大支柱文档已归档至 archive/process_reports/2026_02/）
+**权威对齐指南**: [10_authoritative_alignment_guide.md](10_authoritative_alignment_guide.md) - 研究笔记权威来源对齐、技术决策参考（原三大支柱文档已归档至 archive/process_reports/2026_02/）
 
 **相关文档**:
 
@@ -334,17 +335,17 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-**第一次使用？** 请先阅读 [快速入门指南](../../archive/research_notes_2026_06_25/10_getting_started.md)！
+**第一次使用？** 请先阅读 [快速入门指南](10_getting_started.md)！
 
 ### 开始新的研究主题
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-1. 查看 [研究路线图](../../archive/research_notes_2026_06_25/10_research_roadmap.md) 了解研究计划
+1. 查看 [研究路线图](10_research_roadmap.md) 了解研究计划
 2. 选择合适的子目录（formal_methods/、type_theory/、experiments/）
-3. 使用 [研究笔记模板](../../archive/research_notes_2026_06_25/10_template.md) 创建新文件
+3. 使用 [研究笔记模板](10_template.md) 创建新文件
 4. 按照下方「研究笔记规范」章节编写内容
-5. 使用 [质量检查清单](../../archive/research_notes_2026_06_25/10_quality_checklist.md) 检查质量
+5. 使用 [质量检查清单](10_quality_checklist.md) 检查质量
 6. 更新对应目录的 README.md
 7. 在本索引文件中添加链接
 
@@ -354,13 +355,13 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 研究笔记欢迎社区贡献！请查看：
 
-- [贡献指南](../../archive/research_notes_2026_06_25/10_contributing.md) - 详细的贡献流程和规范
-- [质量检查清单](../../archive/research_notes_2026_06_25/10_quality_checklist.md) - 确保质量的标准
-- [研究笔记模板](../../archive/research_notes_2026_06_25/10_template.md) - 快速创建新笔记
-- [研究进展跟踪](../../archive/research_notes_2026_06_25/10_progress_tracking.md) - 详细的研究进展跟踪
-- [研究任务清单](../../archive/research_notes_2026_06_25/10_task_checklist.md) - 具体的研究任务清单
-- [研究笔记写作指南](../../archive/research_notes_2026_06_25/10_writing_guide.md) - 详细的写作指导
-- [研究笔记内容完善指南](../../archive/research_notes_2026_06_25/10_content_enhancement.md) - 内容完善指导
+- [贡献指南](10_contributing.md) - 详细的贡献流程和规范
+- [质量检查清单](10_quality_checklist.md) - 确保质量的标准
+- [研究笔记模板](10_template.md) - 快速创建新笔记
+- [研究进展跟踪](10_progress_tracking.md) - 详细的研究进展跟踪
+- [研究任务清单](10_task_checklist.md) - 具体的研究任务清单
+- [研究笔记写作指南](10_writing_guide.md) - 详细的写作指导
+- [研究笔记内容完善指南](10_content_enhancement.md) - 内容完善指导
 
 **贡献要求**:
 
@@ -395,16 +396,16 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 **实验研究** (5个):
 
-- [x] [性能基准测试](../../archive/research_notes_2026_06_25/experiments/10_performance_benchmarks.md) - ✅ 已完成 (100%)
-- [x] [内存分析](../../archive/research_notes_2026_06_25/experiments/10_memory_analysis.md) - ✅ 已完成 (100%)
-- [x] [编译器优化](../../archive/research_notes_2026_06_25/experiments/10_compiler_optimizations.md) - ✅ 已完成 (100%)
-- [x] [并发性能研究](../../archive/research_notes_2026_06_25/experiments/10_concurrency_performance.md) - ✅ 已完成 (100%)
-- [x] [宏展开性能分析](../../archive/research_notes_2026_06_25/experiments/10_macro_expansion_performance.md) - ✅ 已完成 (100%)
+- [x] [性能基准测试](experiments/10_performance_benchmarks.md) - ✅ 已完成 (100%)
+- [x] [内存分析](experiments/10_memory_analysis.md) - ✅ 已完成 (100%)
+- [x] [编译器优化](experiments/10_compiler_optimizations.md) - ✅ 已完成 (100%)
+- [x] [并发性能研究](experiments/10_concurrency_performance.md) - ✅ 已完成 (100%)
+- [x] [宏展开性能分析](experiments/10_macro_expansion_performance.md) - ✅ 已完成 (100%)
 
 **综合研究** (2个):
 
-- [x] [实际应用案例研究](../../archive/research_notes_2026_06_25/10_practical_applications.md) - ✅ 已完成 (100%)
-- [x] [研究方法论](../../archive/research_notes_2026_06_25/10_research_methodology.md) - ✅ 已完成 (100%)
+- [x] [实际应用案例研究](10_practical_applications.md) - ✅ 已完成 (100%)
+- [x] [研究方法论](10_research_methodology.md) - ✅ 已完成 (100%)
 
 ---
 
@@ -427,7 +428,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 2. **全局分配器线程本地存储支持研究**
    - 全局分配器使用 `thread_local!` 的机制分析
    - 重入问题避免策略研究
-   - 相关笔记: [并发性能研究](../../archive/research_notes_2026_06_25/experiments/10_concurrency_performance.md)
+   - 相关笔记: [并发性能研究](experiments/10_concurrency_performance.md)
 
 3. **MaybeUninit API 增强研究**
    - 新增安全方法的类型理论分析
@@ -456,7 +457,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 1. **异步迭代器性能研究**
    - 性能提升 15-20% 的机制分析
    - 异步迭代器链式操作优化研究
-   - 相关笔记: [并发性能研究](../../archive/research_notes_2026_06_25/experiments/10_concurrency_performance.md)
+   - 相关笔记: [并发性能研究](experiments/10_concurrency_performance.md)
 
 2. **const 上下文增强研究**
    - 对非静态常量引用的形式化分析
@@ -466,14 +467,14 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 3. **JIT 编译器优化研究**
    - 异步代码性能提升机制
    - 内联优化策略分析
-   - 相关笔记: [编译器优化](../../archive/research_notes_2026_06_25/experiments/10_compiler_optimizations.md)
+   - 相关笔记: [编译器优化](experiments/10_compiler_optimizations.md)
 
 4. **内存分配优化研究**
    - 小对象分配性能提升 25-30% 分析
    - 内存碎片减少机制研究
-   - 相关笔记: [内存分析](../../archive/research_notes_2026_06_25/experiments/10_memory_analysis.md)
+   - 相关笔记: [内存分析](experiments/10_memory_analysis.md)
 
-**详细更新**: 参见 [Rust 1.91.1 研究更新报告](../../archive/research_notes_2026_06_25/10_rust_191_research_update_2025_11_15.md)、[Rust 1.92.0 研究更新报告](../../archive/research_notes_2026_06_25/10_rust_192_research_update_2025_12_11.md)
+**详细更新**: 参见 [Rust 1.91.1 研究更新报告](10_rust_191_research_update_2025_11_15.md)、[Rust 1.92.0 研究更新报告](10_rust_192_research_update_2025_12_11.md)
 
 ---
 
@@ -485,7 +486,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 **目标**: 通过分析实际应用案例，验证 Rust 理论在实际项目中的应用效果
 
-**相关笔记**: [10_practical_applications.md](../../archive/research_notes_2026_06_25/10_practical_applications.md)
+**相关笔记**: [10_practical_applications.md](10_practical_applications.md)
 
 **研究内容**:
 
@@ -502,7 +503,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 **目标**: 建立 Rust 研究的方法论体系，为研究提供系统化的方法指导
 
-**相关笔记**: [10_research_methodology.md](../../archive/research_notes_2026_06_25/10_research_methodology.md)
+**相关笔记**: [10_research_methodology.md](10_research_methodology.md)
 
 **研究内容**:
 
@@ -516,21 +517,21 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 ## 🗺️ 快速导航
 
-- [快速查找](../../archive/research_notes_2026_06_25/10_quick_find.md) - 研究笔记快速查找工具（按关键词、领域、目标、优先级）
-- [快速参考](../../archive/research_notes_2026_06_25/10_quick_reference.md) - 按主题快速查找研究笔记
-- [研究路线图](../../archive/research_notes_2026_06_25/10_research_roadmap.md) - 研究推进计划和优先级
-- [系统总结](../../archive/research_notes_2026_06_25/10_system_summary.md) - 系统概览和统计信息
-- [工具使用指南](../../archive/research_notes_2026_06_25/10_tools_guide.md) - 研究工具安装和使用方法
-- [更新日志](../../archive/research_notes_2026_06_25/10_changelog.md) - 系统变更历史记录
+- [快速查找](10_quick_find.md) - 研究笔记快速查找工具（按关键词、领域、目标、优先级）
+- [快速参考](10_quick_reference.md) - 按主题快速查找研究笔记
+- [研究路线图](10_research_roadmap.md) - 研究推进计划和优先级
+- [系统总结](10_system_summary.md) - 系统概览和统计信息
+- [工具使用指南](10_tools_guide.md) - 研究工具安装和使用方法
+- [更新日志](10_changelog.md) - 系统变更历史记录
 - [完整索引](INDEX.md) - 所有研究笔记的详细索引
-- [快速入门指南](../../archive/research_notes_2026_06_25/10_getting_started.md) - 新用户入门指南
-- [常见问题解答](../../archive/research_notes_2026_06_25/10_faq.md) - 常见问题解答
-- [维护指南](../../archive/research_notes_2026_06_25/10_maintenance_guide.md) - 系统维护指南
-- [最佳实践](../../archive/research_notes_2026_06_25/10_best_practices.md) - 研究笔记最佳实践（含实质内容不足判断与四步修复法）
-- [术语表](../../archive/research_notes_2026_06_25/10_glossary.md) - 专业术语解释
-- [研究资源汇总](../../archive/research_notes_2026_06_25/10_resources.md) - 学术和工具资源
-- [系统集成指南](../../archive/research_notes_2026_06_25/10_system_integration.md) - 与形式化工程系统的集成
-- [研究笔记示例](../../archive/research_notes_2026_06_25/10_example.md) - 完整的研究笔记示例
+- [快速入门指南](10_getting_started.md) - 新用户入门指南
+- [常见问题解答](10_faq.md) - 常见问题解答
+- [维护指南](10_maintenance_guide.md) - 系统维护指南
+- [最佳实践](10_best_practices.md) - 研究笔记最佳实践（含实质内容不足判断与四步修复法）
+- [术语表](10_glossary.md) - 专业术语解释
+- [研究资源汇总](10_resources.md) - 学术和工具资源
+- [系统集成指南](10_system_integration.md) - 与形式化工程系统的集成
+- [研究笔记示例](10_example.md) - 完整的研究笔记示例
 
 ---
 
@@ -554,8 +555,8 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
-- 📖 查看 [常见问题解答](../../archive/research_notes_2026_06_25/10_faq.md) 获取常见问题的答案
-- 📚 阅读 [快速入门指南](../../archive/research_notes_2026_06_25/10_getting_started.md) 了解如何使用系统
+- 📖 查看 [常见问题解答](10_faq.md) 获取常见问题的答案
+- 📚 阅读 [快速入门指南](10_getting_started.md) 了解如何使用系统
 - 🐛 提交 Issue 报告问题
 - 💬 参与讨论交流
 - 📧 联系维护团队
@@ -579,7 +580,7 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 - Cargo.toml 多行内联表
 - 配置文件 include 支持
 
-详见 [Rust 1.94 研究更新](../../archive/research_notes_2026_06_25/10_rust_194_research_update.md)
+详见 [Rust 1.94 研究更新](10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 

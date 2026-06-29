@@ -1,14 +1,16 @@
 # Rust 1.94 深度语义分析
 
 > **内容分级**: [归档级]
+> **状态**: ✅ 已完成权威国际化来源对齐升级
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **文档类型**: 研究笔记 / 深度语义分析
-> **Rust 版本**: 1.96.0 (rustc 1.96.0, 4a4ef493e 2026-03-02)
+> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **最后更新**: 2026-06-29
 > **分析日期**: 2026-03-14
-> **权威来源**: Rust官方Release、Standard Library API、RFCs
+> **权威来源**: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/), [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/), [Rust Release Notes](https://doc.rust-lang.org/stable/releases.html), [releases.rs](https://releases.rs/), Standard Library API、RFCs
 
 ---
 
@@ -57,19 +59,28 @@
   - [6. TOML 1.1 - 配置语义的现代化](#6-toml-11---配置语义的现代化)
     - [6.1 关键变更](#61-关键变更)
     - [6.2 Cargo.toml 应用](#62-cargotoml-应用)
+  - [7. `core::range` - 范围类型的语义重构](#7-corerange---范围类型的语义重构)
+    - [7.1 设计动机与语义](#71-设计动机与语义)
+    - [7.2 与 legacy 类型的语义对比](#72-与-legacy-类型的语义对比)
+    - [7.3 实际语义影响](#73-实际语义影响)
+  - [8. `assert_matches!` - 模式断言的诊断语义](#8-assert_matches---模式断言的诊断语义)
+    - [8.1 语义定义](#81-语义定义)
+    - [8.2 与 prelude 的兼容性](#82-与-prelude-的兼容性)
+    - [8.3 形式化语义](#83-形式化语义)
   - [参考文献](#参考文献)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）](#-权威国际化来源对齐升级摘要rust-1960--edition-2024)
+    - [本次升级要点](#本次升级要点)
+      - [新增 Rust 1.96.0 特性](#新增-rust-1960-特性)
+      - [新增 Rust 1.95.0 特性](#新增-rust-1950-特性)
+      - [权威来源对齐](#权威来源对齐)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
 ## 1. array_windows - 数组窗口迭代的语义革命
 >
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+> **来源: [Rust Standard Library - slice::array_windows](https://doc.rust-lang.org/std/primitive.slice.html#method.array_windows)**
+>
+> **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html)**
 
 ### 1.1 形式化定义
 
@@ -244,7 +255,9 @@ fn benchmark_windows(c: &mut Criterion) {
 
 ## 2. ControlFlow - 控制流的形式化抽象
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **来源: [Rust Standard Library - std::ops::ControlFlow](https://doc.rust-lang.org/std/ops/enum.ControlFlow.html)**
+>
+> **来源: [Rust Reference - Range Expressions](https://doc.rust-lang.org/reference/expressions/range-expr.html)**
 
 ### 2.1 类型定义与语义
 
@@ -404,7 +417,11 @@ where T: Clone
 
 ## 3. LazyCell/LazyLock 新方法 - 延迟初始化的语义完善
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+> **来源: [Rust Standard Library - std::cell::LazyCell](https://doc.rust-lang.org/std/cell/struct.LazyCell.html)**
+>
+> **来源: [Rust Standard Library - std::sync::LazyLock](https://doc.rust-lang.org/std/sync/struct.LazyLock.html)**
+>
+> **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html)**
 
 ### 3.1 API演进分析
 
@@ -529,7 +546,9 @@ fn record_metric(name: &str, value: f64) {
 
 ## 4. Peekable 增强 - 迭代器组合子的语义扩展
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+> **来源: [Rust Standard Library - std::iter::Peekable::next_if_map](https://doc.rust-lang.org/std/iter/struct.Peekable.html#method.next_if_map)**
+>
+> **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html)**
 
 ### 4.1 next_if_map 语义
 >
@@ -607,7 +626,9 @@ impl<I: Iterator<Item = char>> Lexer<I> {
 
 ## 5. 数学常量 - 数值语义的精确化
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
+> **来源: [Rust Standard Library - f64::consts](https://doc.rust-lang.org/std/f64/consts/index.html)**
+>
+> **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html)**
 
 ### 5.1 新增常量
 >
@@ -674,7 +695,11 @@ where F: Fn(f64) -> f64
 
 ## 6. TOML 1.1 - 配置语义的现代化
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+> **来源: [TOML 1.1 Specification](https://toml.io/en/v1.1.0)**
+>
+> **来源: [Cargo Reference - Configuration](https://doc.rust-lang.org/cargo/reference/config.html)**
+>
+> **来源: [Rust 1.94 Release Notes / Cargo Dev Cycle](https://blog.rust-lang.org/inside-rust/2026/02/18/this-development-cycle-in-cargo-1.94/)**
 
 ### 6.1 关键变更
 >
@@ -731,74 +756,163 @@ include = [
 
 ---
 
+## 7. `core::range` - 范围类型的语义重构
+>
+> **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
+>
+> **来源: [RFC 3550 - New Range Types](https://rust-lang.github.io/rfcs/3550-new-range.html)**
+>
+> **来源: [Rust Standard Library - core::range](https://doc.rust-lang.org/stable/core/range/index.html)**
+>
+> **来源: [Rust Reference - Range Expressions](https://doc.rust-lang.org/reference/expressions/range-expr.html)**
+
+### 7.1 设计动机与语义
+
+旧 `std::ops::Range` 直接实现 `Iterator`，导致无法安全地实现 `Copy`（`Copy` Iterator 是常见 footgun）。RFC 3550 引入的新 `core::range` 类型通过**实现 `IntoIterator` 而非 `Iterator`** 解决这一矛盾。
+
+**形式化语义**:
+
+```text
+Range<Idx>        = { x | start ≤ x < end }
+RangeFrom<Idx>    = { x | start ≤ x }
+RangeInclusive<Idx> = { x | start ≤ x ≤ end }
+```
+
+**关键语义保证**:
+
+- 范围值本身不可变；迭代消耗的是独立的迭代器
+- `Copy` 允许范围在多个上下文中复用
+- 公共 API 建议使用 `impl RangeBounds` 以同时接受新旧范围类型
+
+### 7.2 与 legacy 类型的语义对比
+
+| 维度 | `std::ops::Range` | `core::range::Range` |
+| :--- | :--- | :--- |
+| `Iterator` | ✅ 直接实现 | ❌ 通过 `IntoIterator` |
+| `Copy` | ❌ | ✅（当 `Idx: Copy`） |
+| 大小 | 2×`Idx` | 2×`Idx` |
+| 复用性 | 需 `.clone()` | 直接复用 |
+| 推荐场景 | 历史代码 | 新代码、公共 API |
+
+### 7.3 实际语义影响
+
+```rust
+use core::range::Range;
+
+let r: Range<i32> = 0..5;
+let r2 = r; // Copy，无需 clone
+
+for i in r { print!("{}", i); }  // 01234
+for i in r2 { print!("{}", i); } // 01234（仍可迭代）
+```
+
+**定理 RANGE-COPY-1**: 若 `Idx: Copy`，则 `core::range::Range<Idx>: Copy`，且多次迭代互不干扰。
+
+---
+
+## 8. `assert_matches!` - 模式断言的诊断语义
+>
+> **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
+>
+> **来源: [Rust Standard Library - core::assert_matches::assert_matches](https://doc.rust-lang.org/stable/core/assert_matches/macro.assert_matches.html)**
+>
+> **来源: [Rust Reference - Patterns](https://doc.rust-lang.org/reference/patterns.html)**
+
+### 8.1 语义定义
+
+`assert_matches!(value, pattern)` 在语义上等价于：
+
+```text
+if value 匹配 pattern { () }
+else { panic!("assertion failed: value = {:?}", value) }
+```
+
+与 `assert!(matches!(value, pattern))` 相比，失败诊断输出 `value` 的完整 `Debug` 表示。
+
+### 8.2 与 prelude 的兼容性
+
+因与第三方 crate 中同名的 `assert_matches!` 宏冲突，该宏**未加入标准 prelude**，需要显式导入：
+
+```rust
+use core::assert_matches::assert_matches;
+```
+
+### 8.3 形式化语义
+
+**定理 ASSERT-MATCH-1**: `assert_matches!(v, p)` 成功当且仅当存在替换 σ 使得 `v` 在 σ 下匹配 `p`。
+
+```rust
+let opt: Option<i32> = Some(42);
+assert_matches!(opt, Some(x) if x > 0);
+```
+
+---
+
 ## 参考文献
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-1. [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/03/05/Rust-1.96.0/)
-2. [Standard Library API - array_windows](https://doc.rust-lang.org/std/primitive.slice.html#method.array_windows)
-3. [Standard Library API - ControlFlow](https://doc.rust-lang.org/std/ops/enum.ControlFlow.html)
-4. [TOML 1.1 Specification](https://toml.io/en/v1.1.0)
-
----
-
-**分析完成**: 2026-03-14
-**分析深度**: 语义级
-**字数**: 约 6000 字
-**状态**: ✅ 完成
-
----
-
-## 🆕 Rust 1.94 深度整合更新
+> **来源: [Rust Release Notes](https://doc.rust-lang.org/stable/releases.html)**
 >
-> **[来源: [crates.io](https://crates.io/)]**
+> **来源: [Rust Blog](https://blog.rust-lang.org/)**
 
+1. [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)
+2. [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)
+3. [Rust Release Notes (doc.rust-lang.org)](https://doc.rust-lang.org/stable/releases.html)
+4. [RFC 3550 - New Range Types](https://rust-lang.github.io/rfcs/3550-new-range.html)
+5. [Standard Library API - slice::array_windows](https://doc.rust-lang.org/std/primitive.slice.html#method.array_windows)
+6. [Standard Library API - slice::element_offset](https://doc.rust-lang.org/std/primitive.slice.html#method.element_offset)
+7. [Standard Library API - std::ops::ControlFlow](https://doc.rust-lang.org/std/ops/enum.ControlFlow.html)
+8. [Standard Library API - std::cell::LazyCell](https://doc.rust-lang.org/std/cell/struct.LazyCell.html)
+9. [Standard Library API - std::sync::LazyLock](https://doc.rust-lang.org/std/sync/struct.LazyLock.html)
+10. [Standard Library API - std::iter::Peekable::next_if_map](https://doc.rust-lang.org/std/iter/struct.Peekable.html#method.next_if_map)
+11. [Standard Library API - f64::consts](https://doc.rust-lang.org/std/f64/consts/index.html)
+12. [Standard Library API - core::range](https://doc.rust-lang.org/stable/core/range/index.html)
+13. [Standard Library API - core::assert_matches::assert_matches](https://doc.rust-lang.org/stable/core/assert_matches/macro.assert_matches.html)
+14. [Rust Reference - Range Expressions](https://doc.rust-lang.org/reference/expressions/range-expr.html)
+15. [Rust Reference - Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards)
+16. [Rust Reference - Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)
+17. [Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)
+18. [TOML 1.1 Specification](https://toml.io/en/v1.1.0)
+
+---
+
+## ✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）
+
+> **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
+> **来源: [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)**
+> **来源: [Rust Release Notes](https://doc.rust-lang.org/stable/releases.html)**
+> **来源: [releases.rs](https://releases.rs/)**
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-> **更新日期**: 2026-03-14
+> **升级日期**: 2026-06-29
 
-### 本文档的Rust 1.94更新要点
->
-> **[来源: [docs.rs](https://docs.rs/)]**
+### 本次升级要点
 
-本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
+本文档已完成权威国际化来源对齐升级，统一版本基准为 **Rust 1.96.0+ / Edition 2024**，同时保留 1.93/1.94 历史分析章节。
 
-#### 核心特性应用
+#### 新增 Rust 1.96.0 特性
 
-| 特性 | 应用场景 | 文档章节 |
-|------|---------|----------|
-| `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-| `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-| `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
+| 特性 | 来源 | 说明 |
+| :--- | :--- | :--- |
+| `core::range` 新类型 | [RFC 3550](https://rust-lang.github.io/rfcs/3550-new-range.html)、[std::range](https://doc.rust-lang.org/stable/std/range/index.html) | `Range`/`RangeFrom`/`RangeInclusive` 实现 `Copy` + `IntoIterator` |
+| `assert_matches!` / `debug_assert_matches!` | [core::assert_matches](https://doc.rust-lang.org/stable/core/assert_matches/macro.assert_matches.html) | 模式断言宏，失败输出 Debug 信息 |
+| Cargo CVE-2026-5223 / CVE-2026-5222 修复 | [Cargo 安全公告](https://github.com/rust-lang/cargo/security/advisories)、[Rust Blog 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) | 第三方 registry tarball symlink 与 URL 规范化修复 |
+| WebAssembly 链接行为变更 | [Rust Blog 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) | 不再默认传递 `--allow-undefined` |
 
-#### 代码示例更新
+#### 新增 Rust 1.95.0 特性
 
-本文档中的所有Rust代码示例均已：
+| 特性 | 来源 | 说明 |
+| :--- | :--- | :--- |
+| `if let` guards on match arms | [Rust Reference - Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards)、[Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | match 臂支持 `if let` 守卫 |
+| `cfg_select!` 宏 | [Rust Reference - Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)、[releases.rs 1.95.0](https://releases.rs/docs/1.95.0/) | 编译期 cfg 条件选择宏 |
+| PowerPC / PowerPC64 内联汇编稳定化 | [Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)、[Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | 稳定 inline assembly for PowerPC |
+| `--remap-path-scope` | [Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | 控制路径重映射作用域 |
 
-- ✅ 使用Rust 1.94语法验证
-- ✅ 兼容Edition 2024
-- ✅ 通过标准库测试
+#### 权威来源对齐
 
-#### 相关文档
-
-- Rust 1.94 迁移指南
-- [Rust 1.94 特性速查
-- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
-
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-14 (Rust 1.94 深度整合)
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- Rust release notes（releases.rs）
+- Rust Blog 对应版本发布公告
+- Rust Reference 具体章节（Range Expressions、Match Guards、Inline Assembly、Conditional Compilation）
+- Rust Standard Library 具体 API（`core::range`、`core::assert_matches`、`std::ops::ControlFlow`）
+- RFC 链接（RFC 3550 等）
 
 ---
 
@@ -813,7 +927,15 @@ include = [
 
 ## 权威来源索引
 
-> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Release Notes](https://doc.rust-lang.org/stable/releases.html)**
+
+> **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
+
+> **来源: [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)**
+
+> **来源: [releases.rs 1.96.0](https://releases.rs/docs/1.96.0/)**
+
+> **来源: [releases.rs 1.95.0](https://releases.rs/docs/1.95.0/)**
 
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
@@ -821,19 +943,12 @@ include = [
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **来源: [ACM](https://dl.acm.org/)**
-
-> **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-> **来源: [ACM](https://dl.acm.org/)**
-> **来源: [IEEE](https://standards.ieee.org/)**
-> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [RFC 3550 - New Range Types](https://rust-lang.github.io/rfcs/3550-new-range.html)**
+
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
+
+> **来源: [TOML 1.1 Specification](https://toml.io/en/v1.1.0)**
 
 ---

@@ -10,7 +10,16 @@
 > **状态**: 🔄 持续更新中
 > **用途**: 系统识别 docs/research_notes 与 P0/P1/P2 权威来源之间的内容缺口，并给出优先级化补全建议
 >
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | [RustBelt](https://plv.mpi-sws.org/rustbelt/) | [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) | [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3) | [Aeneas](https://github.com/AeneasVerif/aeneas) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+> **权威来源**:
+>
+> [Rust Reference](https://doc.rust-lang.org/reference/) |
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) |
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/) |
+> [RustBelt](https://plv.mpi-sws.org/rustbelt/) |
+> [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) |
+> [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3) |
+> [Aeneas](https://github.com/AeneasVerif/aeneas) |
+> [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 
 ---
 

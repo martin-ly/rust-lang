@@ -4,6 +4,11 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
+> **创建日期**: 2026-01-15
+> **最后更新**: 2026-06-29
+> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **状态**: ✅ 已完成权威国际化来源对齐升级
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Standard Library](https://doc.rust-lang.org/std/) | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | [Rust RFCs](https://rust-lang.github.io/rfcs/)
 
 ## 📑 目录
 >
@@ -20,6 +25,9 @@
     - [2. 实验研究方法](#2-实验研究方法)
     - [3. 实证研究方法](#3-实证研究方法)
     - [1.1 形式化研究方法详解](#11-形式化研究方法详解)
+    - [Rust 形式化方法的国际论文与工具链](#rust-形式化方法的国际论文与工具链)
+    - [Iris/RustBelt 风格 Coq 示例](#irisrustbelt-风格-coq-示例)
+    - [Lean 4 / Aeneas 后端示例](#lean-4--aeneas-后端示例)
     - [相关概念](#相关概念)
     - [理论背景](#理论背景)
     - [4. 理论研究方法](#4-理论研究方法)
@@ -51,18 +59,14 @@
     - [已完成 ✅ {#已完成-}](#已完成--已完成-)
     - [进行中 🔄（已完成）](#进行中-已完成)
     - [计划中 📋（已完成）](#计划中-已完成)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [🆕 权威国际化内容升级 (Rust 1.96.0+) {#-权威国际化内容升级}](#-权威国际化内容升级-rust-1960--权威国际化内容升级)
+    - [本次升级要点](#本次升级要点)
   - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-02-28
-> **Rust 版本**: 1.96.0+ (Edition 2024) ✅
-> **状态**: ✅ 已完成 (100%)
+> **最后更新**: 2026-06-29
+> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **状态**: ✅ 完成
 
 ---
 
@@ -238,6 +242,57 @@ Proof.
   (* 证明过程 *)
 Qed.
 ```
+
+### Rust 形式化方法的国际论文与工具链
+>
+> **来源**: [Iris Project](https://iris-project.org/)
+>
+> **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/paper.pdf)
+
+在形式化研究 Rust 时，以下国际论文与项目构成了当前的主流方法：
+
+- **RustBelt** (Jung et al., POPL 2018): 使用 Iris 高阶并发分离逻辑，对 Rust 的核心类型系统和 `unsafe` 库给出了第一个机器检查的安全证明。官方论文 PDF: <https://plv.mpi-sws.org/rustbelt/popl18/paper.pdf>。
+- **Aeneas** (Ho & Protzenko, ICFP 2022): 通过 LLBC（Low-Level Borrow Calculus）将安全 Rust 函数式翻译到 F\*/Coq/Lean，消除了显式内存推理。项目主页: <https://aeneas-verif.github.io/aeneas/>，源码: <https://github.com/AeneasVerif/aeneas>。
+- **RustHorn** (Matsushita et al., ESOP 2020 / TOPLAS 2021): 基于约束 Horn 子句（CHC）的 Rust 程序验证，利用所有权信息消除指针与堆。论文 PDF: <https://www.kb.is.s.u-tokyo.ac.jp/old-users/yskm24t/web/papers/esop2020-rust-horn.pdf>。
+- **RustHornBelt** (Matsushita, Denis, Jourdan, Dreyer, PLDI 2022): 扩展 RustBelt，为带 `unsafe` 代码的 Rust 程序功能正确性提供语义基础。论文 PDF: <https://people.mpi-sws.org/~dreyer/papers/rusthornbelt/paper.pdf>。
+- **Iris** (Jung et al., POPL 2015 / JFP 2018): 高阶并发分离逻辑框架，RustBelt 的证明基础。主页: <https://iris-project.org/>，Coq 实现: <https://gitlab.mpi-sws.org/iris/iris>。
+- **λRust** (RustBelt 的 Coq 形式化): RustBelt 在 Iris 中的操作语义与类型解释。源码: <https://gitlab.mpi-sws.org/iris/lambda-rust>。
+
+### Iris/RustBelt 风格 Coq 示例
+>
+> **来源**: [Iris Project](https://iris-project.org/)
+
+下面的 Coq 片段展示 Iris 分离逻辑中 "points-to" 断言如何表达所有权（与 RustBelt 对 `Box`/`&mut` 的解释一致）:
+
+```coq
+From iris.program_logic Require Export weakestpre.
+From iris.heap_lang Require Export lang proofmode notation.
+
+(* 位置 l 拥有值 v，对应 RustBelt 中 Box/唯一所有权的资源解释 *)
+Definition own_box (l: loc) (v: val) : iProp Σ := l ↦ v.
+
+Lemma own_box_write `{!heapG Σ} (l: loc) (v w: val) :
+  l ↦ v -∗ (l ↦ w -∗ Φ) -∗ WP (Write (LitV (LitLoc l)) (LitV w)) {{ v, Φ }}.
+Proof.
+  iIntros "Hl Hk". wp_write. iApply "Hk". iFrame.
+Qed.
+```
+
+> 说明：上述示例为示意性 Iris/Coq 代码，展示 RustBelt 如何将所有权建模为分离逻辑资源。完整可机器检查的证明请参考 [λRust](https://gitlab.mpi-sws.org/iris/lambda-rust) 与 [RustBelt 论文](https://plv.mpi-sws.org/rustbelt/popl18/paper.pdf)。
+
+### Lean 4 / Aeneas 后端示例
+>
+> **来源**: [Aeneas](https://aeneas-verif.github.io/aeneas/)
+
+Aeneas 将 Rust 的安全子集提取为 Lean 4（或 F\*/Coq/HOL4）中的纯函数，利用 Rust 借用检查保证消除内存推理：
+
+```lean4
+-- Aeneas 生成的 Lean 4 函数签名示例（Result monad 区分 ok/fail/div）
+def take_max (a b : U32) : Result U32 :=
+  if a ≥ b then ok a else ok b
+```
+
+> 说明：Aeneas 的 Lean 后端要求使用 Charon 生成 `.llbc` 文件，再在 Aeneas 中选择 `-backend lean`。详见 [Aeneas 文档](https://aeneas-verif.github.io/aeneas/) 与 [Charon](https://github.com/AeneasVerif/charon)。
 
 ### 相关概念
 
@@ -482,19 +537,28 @@ Qed.
 
 ### 方法论文献
 >
-> **[来源: [crates.io](https://crates.io/)]**
+> **[来源: [Iris Project](https://iris-project.org/)]**
 
-- [研究方法索引](../rust-formal-engineering-system/09_research_agenda/04_research_methods/README.md)
-- [研究工具指南](../rust-formal-engineering-system/09_research_agenda/04_research_methods/README.md)
+- [RustBelt: Securing the Foundations of the Rust Programming Language](https://plv.mpi-sws.org/rustbelt/popl18/paper.pdf) (Jung et al., POPL 2018) — Rust 核心安全性的 Iris/Coq 机器检查证明。
+- [Iris from the Ground Up](https://people.mpi-sws.org/~dreyer/papers/iris-ground-up/paper.pdf) (Jung et al., JFP 2018) — 高阶并发分离逻辑基础。
+- [Aeneas: Rust Verification by Functional Translation](https://zenodo.org/records/6672939) (Ho & Protzenko, ICFP 2022) — 基于 LLBC 的函数式翻译验证。
+- [Sound Borrow-Checking for Rust via Symbolic Semantics](https://dl.acm.org/doi/pdf/10.1145/3547647) (Ho & Protzenko, ICFP 2024) — Aeneas 符号执行与借用检查的形式化。
+- [RustHorn: CHC-based Verification for Rust Programs](https://www.kb.is.s.u-tokyo.ac.jp/old-users/yskm24t/web/papers/esop2020-rust-horn.pdf) (Matsushita et al., ESOP 2020 / TOPLAS 2021) — CHC 自动验证。
+- [RustHornBelt: A Semantic Foundation for Functional Verification of Rust Programs with Unsafe Code](https://people.mpi-sws.org/~dreyer/papers/rusthornbelt/paper.pdf) (Matsushita et al., PLDI 2022) — 带 `unsafe` 代码的功能正确性基础。
+- [λRust Coq Development](https://gitlab.mpi-sws.org/iris/lambda-rust) — RustBelt 在 Iris 中的操作语义与类型解释。
 
 ### 工具文档
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [研究工具使用指南](10_tools_guide.md) - 详细的工具安装和使用方法
-- Criterion.rs 文档
-- [Miri 文档](https://github.com/rust-lang/miri)
-- Prusti 文档
+- [Kani Rust Verifier](https://model-checking.github.io/kani/) — 模型检查器
+- [Prusti User Guide](https://viperproject.github.io/prusti-dev/user-guide/) — 基于 Viper 的演绎验证器
+- [Miri](https://github.com/rust-lang/miri) — Rust MIR 解释器与 UB 检测
+- [Creusot](https://creusot-rs.github.io/) — 基于 Why3/SMT 的 Rust 演绎验证
+- [Aeneas](https://aeneas-verif.github.io/aeneas/) — 函数式翻译验证工具链
+- [Verus](https://verus-lang.github.io/verus/) — 面向系统代码的 SMT 验证器
+- [Criterion.rs](https://bheisler.github.io/criterion.rs/book/) — 统计驱动基准测试
 
 ### 最佳实践
 >
@@ -538,61 +602,41 @@ Qed.
 ---
 
 **维护者**: Rust Research Methodology Group
-**最后更新**: 2026-01-26
-**状态**: ✅ **已完成** (100%)
+**最后更新**: 2026-06-29
+**状态**: ✅ 完成
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 权威国际化内容升级 (Rust 1.96.0+) {#-权威国际化内容升级}
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+> **来源**: [Rust Research Methodology Group]
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-> **更新日期**: 2026-03-14
+> **更新日期**: 2026-06-29
 
-### 本文档的Rust 1.94更新要点
->
-> **[来源: [crates.io](https://crates.io/)]**
+### 本次升级要点
 
-本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
-
-#### 核心特性应用
-
-| 特性 | 应用场景 | 文档章节 |
-|------|---------|----------|
-| `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-| `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-| `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
-
-#### 代码示例更新
-
-本文档中的所有Rust代码示例均已：
-
-- ✅ 使用Rust 1.94语法验证
-- ✅ 兼容Edition 2024
-- ✅ 通过标准库测试
-
-#### 相关文档
-
-- Rust 1.94 迁移指南
-- [Rust 1.94 特性速查
-- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
+- 补充 Rust 形式化方法的国际权威论文索引：RustBelt、Aeneas、RustHorn、RustHornBelt、Iris。
+- Coq/Lean 示例对齐 Iris/RustBelt 的分离逻辑与生命周期逻辑。
+- 方法论文献与工具文档增加官方 PDF、GitHub、项目主页链接。
+- 删除旧版 Rust 1.94 模板内容，状态更新为 ✅ 完成。
 
 ---
 
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+**维护者**: Rust Research Methodology Group
+**最后更新**: 2026-06-29 (权威国际化内容升级)
+**状态**: ✅ 完成
+
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/), [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/paper.pdf), [Iris Project](https://iris-project.org/), [Aeneas](https://aeneas-verif.github.io/aeneas/), [RustHorn](https://www.kb.is.s.u-tokyo.ac.jp/old-users/yskm24t/web/papers/esop2020-rust-horn.pdf)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-06-29 新增 RustBelt、Aeneas、RustHorn、Iris 等国际形式化方法来源 [来源: Authority Source Sprint Batch 9]
 
-**文档版本**: 1.1
+**文档版本**: 1.2
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**最后更新**: 2026-06-29
+**状态**: ✅ 完成
 
 ---
 

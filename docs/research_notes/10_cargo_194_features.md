@@ -5,10 +5,17 @@
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **Cargo 版本**: 1.94.0 [历史声明]
-> **Rust 版本**: 1.94.0 [历史声明]
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **发布日期**: 2026-03-05
-> **最后更新**: 2026-03-13
-> **状态**: ✅ 活跃维护
+> **最后更新**: 2026-06-29
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+> **权威来源**:
+>
+> [Cargo Book](https://doc.rust-lang.org/cargo/) |
+> [releases.rs](https://releases.rs/) |
+> [Rust Blog](https://blog.rust-lang.org/) |
+> [Rust RFCs](https://rust-lang.github.io/rfcs/)
+>
 
 ---
 
@@ -46,12 +53,16 @@
     - [7.1 从旧版本迁移](#71-从旧版本迁移)
     - [7.2 兼容性](#72-兼容性)
   - [八、相关资源](#八相关资源)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
+  - [九、Rust 1.96 Cargo 安全修复](#九rust-196-cargo-安全修复)
+    - [9.1 CVE-2026-5223](#91-cve-2026-5223)
+    - [9.2 CVE-2026-5222](#92-cve-2026-5222)
+    - [9.3 升级建议](#93-升级建议)
+  - [十、Cargo 1.95/1.96 新增/变更](#十cargo-195196-新增变更)
+  - [✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）](#-权威国际化来源对齐升级摘要rust-1960--edition-2024)
+    - [本次升级要点](#本次升级要点)
+      - [新增 Rust 1.96.0 特性](#新增-rust-1960-特性)
+      - [新增 Rust 1.95.0 特性](#新增-rust-1950-特性)
+      - [权威来源对齐](#权威来源对齐)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -59,7 +70,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-Cargo 1.94 带来了多项重要改进，包括配置文件包含、TOML 1.1 支持、发布时间记录等功能。
+Cargo 1.94 带来了多项重要改进，包括配置文件包含、TOML 1.1 支持、发布时间记录等功能。本文档在保留 1.94 历史分析的基础上，已对齐 **Rust 1.96.0+ / Edition 2024** 权威来源，并补充 Cargo CVE-2026-5223/5222 安全修复说明。
 
 ---
 
@@ -69,7 +80,7 @@ Cargo 1.94 带来了多项重要改进，包括配置文件包含、TOML 1.1 支
 
 ### 1.1 特性描述
 
-> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Cargo Book - Config Include](https://doc.rust-lang.org/cargo/reference/config.html#include)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -161,9 +172,9 @@ include = [
 
 ### 2.1 支持的特性
 
-> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [TOML v1.1.0 规范](https://toml.io/en/v1.1.0)**
 >
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+> **来源: [Cargo Book - Manifest Format](https://doc.rust-lang.org/cargo/reference/manifest.html)**
 
 Cargo 1.94 现在解析 TOML v1.1，包含以下新特性：
 
@@ -226,7 +237,7 @@ rust-version = "1.96"  # 需要 1.94+ 来解析 TOML 1.1
 
 ### 3.1 特性描述
 
-> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+> **来源: [Cargo Book - Registry Index Format](https://doc.rust-lang.org/cargo/reference/registry-index.html)**
 
 Cargo registry 索引现在包含 `pubtime` 字段，记录 crate 版本的发布时间。这支持未来的基于时间的依赖解析。
 
@@ -254,7 +265,7 @@ cargo add serde --time "2026-01-01..2026-03-01"
 
 ### 4.1 特性描述
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+> **来源: [Cargo Book - Environment Variables](https://doc.rust-lang.org/cargo/reference/environment-variables.html)**
 
 `CARGO_BIN_EXE_<crate>` 环境变量现在在运行时也可用，而不仅限于构建脚本。
 
@@ -298,7 +309,7 @@ fn test_cli_tool() {
 
 ### 5.1 cargo clean 优化
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
+> **来源: [Cargo CHANGELOG 1.94+](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html)**
 
 `cargo clean -p` 和 `cargo clean --workspace` 现在更快了。
 
@@ -394,71 +405,103 @@ protocol = "sparse"
 
 ---
 
-## 🆕 Rust 1.94 更新
+## 九、Rust 1.96 Cargo 安全修复
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-> **最新版本**: Rust 1.96.0 (2026-03-05)
+> **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
+> **来源: [CVE-2026-5223](https://blog.rust-lang.org/2026/05/25/cve-2026-5223/)**
+> **来源: [CVE-2026-5222](https://blog.rust-lang.org/2026/05/25/cve-2026-5222/)**
+> **来源: [Cargo Security Advisories](https://github.com/rust-lang/cargo/security/advisories)**
+> **来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)**
 
-- TOML 1.1 支持
-- Cargo.toml 多行内联表
-- 配置文件 include 支持
+Rust 1.96.0 包含两个 Cargo 安全修复，主要影响使用**第三方 registry** 的用户；crates.io 用户不受影响。
 
-详见 [Rust 1.94 研究更新](10_rust_194_research_update.md)
+### 9.1 CVE-2026-5223
 
-**最后更新**: 2026-03-14
+| 属性 | 说明 |
+| :--- | :--- |
+| 严重级别 | 中危 (Medium) |
+| 影响范围 | 第三方 registry 用户 |
+| 问题描述 | Cargo 错误处理第三方 registry crate tarball 中的符号链接，允许恶意 crate 覆盖同一 registry 中其他 crate 的源代码缓存 |
+| 修复方式 | Rust 1.96.0 起拒绝提取 tarball 中的任何符号链接 |
+| 权威来源 | [CVE-2026-5223](https://blog.rust-lang.org/2026/05/25/cve-2026-5223/)、[Cargo CHANGELOG 1.96](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-196-2026-05-28)、[releases.rs 1.96.0](https://releases.rs/docs/1.96.0/) |
+
+### 9.2 CVE-2026-5222
+
+| 属性 | 说明 |
+| :--- | :--- |
+| 严重级别 | 低危 (Low) |
+| 影响范围 | 第三方 registry 用户 |
+| 问题描述 | URL 规范化后的认证处理问题 |
+| 修复方式 | 修复 URL 规范化中的身份验证逻辑 |
+| 权威来源 | [CVE-2026-5222](https://blog.rust-lang.org/2026/05/25/cve-2026-5222/)、[Cargo CHANGELOG 1.96](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-196-2026-05-28)、[releases.rs 1.96.0](https://releases.rs/docs/1.96.0/) |
+
+### 9.3 升级建议
+
+```bash
+# 升级至 Rust 1.96.0+
+rustup update stable
+
+# 验证 Cargo 版本
+cargo --version  # >= 1.96.0
+```
+
+## 十、Cargo 1.95/1.96 新增/变更
+
+> **来源: [Cargo 1.95 CHANGELOG](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-195-2026-04-16)**
+> **来源: [Cargo 1.96 CHANGELOG](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-196-2026-05-28)**
+> **来源: [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)**
+> **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
+
+| 特性 | 来源 | 说明 |
+| :--- | :--- | :--- |
+| `target.'cfg(..)'.rustdocflags` | [Cargo CHANGELOG 1.96](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-196-2026-05-28)、[cargo#16846](https://github.com/rust-lang/cargo/pull/16846) | 在 Cargo 配置中支持按 `cfg` 条件设置 `rustdocflags` |
+| dependency 同时指定 git 仓库与 alternate registry | [Cargo CHANGELOG 1.96](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-196-2026-05-28)、[cargo#16810](https://github.com/rust-lang/cargo/pull/16810) | 本地使用 git 版本，发布时使用 registry 版本 |
+| `cargo init` 禁止在主目录执行 | [Cargo CHANGELOG 1.95](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-195-2026-04-16)、[cargo#16566](https://github.com/rust-lang/cargo/pull/16566) | 避免新用户因清单发现产生混乱状态 |
+| `cargo package` 覆盖大 crate 文件损坏修复 | [Cargo CHANGELOG 1.95](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-195-2026-04-16)、[cargo#16713](https://github.com/rust-lang/cargo/pull/16713) | 修复覆盖较大现有 `.crate` 时产生损坏包的问题 |
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## ✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）
 
-> **[来源: [crates.io](https://crates.io/)]**
+> **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
+> **来源: [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)**
+> **来源: [releases.rs](https://releases.rs/)**
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-> **更新日期**: 2026-03-14
+> **升级日期**: 2026-06-29
 
-### 本文档的Rust 1.94更新要点
->
-> **[来源: [docs.rs](https://docs.rs/)]**
+### 本次升级要点
 
-本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
+本文档已完成权威国际化来源对齐升级，统一版本基准为 **Rust 1.96.0+ / Edition 2024**，同时保留 1.93/1.94 历史分析章节。
 
-#### 核心特性应用
+#### 新增 Rust 1.96.0 特性
 
-| 特性 | 应用场景 | 文档章节 |
-|------|---------|----------|
-| `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-| `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-| `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
+| 特性 | 来源 | 说明 |
+| :--- | :--- | :--- |
+| `core::range` 新类型 | [RFC 3550](https://rust-lang.github.io/rfcs/3550-new-range.html)、[std::range](https://doc.rust-lang.org/stable/std/range/index.html) | `Range`/`RangeFrom`/`RangeInclusive` 实现 `Copy` + `IntoIterator` |
+| `assert_matches!` / `debug_assert_matches!` | [core::assert_matches](https://doc.rust-lang.org/stable/core/assert_matches/macro.assert_matches.html) | 模式断言宏，失败输出 Debug 信息 |
+| Cargo CVE-2026-5223 / CVE-2026-5222 修复 | [Cargo 安全公告](https://github.com/rust-lang/cargo/security/advisories)、[Rust Blog 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) | 第三方 registry tarball symlink 与 URL 规范化修复 |
+| WebAssembly 链接行为变更 | [Rust Blog 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) | 不再默认传递 `--allow-undefined` |
+| Cargo `target.'cfg(..)'.rustdocflags` | [Cargo CHANGELOG 1.96](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-196-2026-05-28)、[cargo#16846](https://github.com/rust-lang/cargo/pull/16846) | 按 `cfg` 条件设置 rustdocflags |
+| dependency 同时指定 git 与 alternate registry | [Cargo CHANGELOG 1.96](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-196-2026-05-28)、[cargo#16810](https://github.com/rust-lang/cargo/pull/16810) | 本地 git，发布 registry |
 
-#### 代码示例更新
+#### 新增 Rust 1.95.0 特性
 
-本文档中的所有Rust代码示例均已：
+| 特性 | 来源 | 说明 |
+| :--- | :--- | :--- |
+| `if let` guards on match arms | [Rust Reference - Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards)、[Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | match 臂支持 `if let` 守卫 |
+| `cfg_select!` 宏 | [Rust Reference - Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)、[releases.rs 1.95.0](https://releases.rs/docs/1.95.0/) | 编译期 cfg 条件选择宏 |
+| PowerPC / PowerPC64 内联汇编稳定化 | [Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)、[Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | 稳定 inline assembly for PowerPC |
+| `--remap-path-scope` | [Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | 控制路径重映射作用域 |
+| `cargo init` 禁止在主目录执行 | [Cargo CHANGELOG 1.95](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-195-2026-04-16)、[cargo#16566](https://github.com/rust-lang/cargo/pull/16566) | 避免清单发现混乱 |
+| `cargo package` 覆盖大 crate 文件损坏修复 | [Cargo CHANGELOG 1.95](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-195-2026-04-16)、[cargo#16713](https://github.com/rust-lang/cargo/pull/16713) | 修复 `.crate` 覆盖损坏 |
 
-- ✅ 使用Rust 1.94语法验证
-- ✅ 兼容Edition 2024
-- ✅ 通过标准库测试
+#### 权威来源对齐
 
-#### 相关文档
-
-- Rust 1.94 迁移指南
-- [Rust 1.94 特性速查
-- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
-
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-14 (Rust 1.94 深度整合)
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- Rust release notes（releases.rs）
+- Rust Blog 对应版本发布公告
+- Rust Reference 具体章节（Range Expressions、Match Guards、Inline Assembly、Conditional Compilation）
+- Rust Standard Library 具体 API（`core::range`、`core::assert_matches`、`std::ops::ControlFlow`）
+- RFC 链接（RFC 3550 等）
 
 ---
 
@@ -475,7 +518,20 @@ protocol = "sparse"
 
 > **来源: [Wikipedia - Build Automation](https://en.wikipedia.org/wiki/Build_Automation)**
 > **来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)**
-> **来源: [Rust Reference - Cargo](https://doc.rust-lang.org/cargo/)**
+> **来源: [Cargo Book - Config Include](https://doc.rust-lang.org/cargo/reference/config.html#include)**
+> **来源: [Cargo Book - Manifest Format](https://doc.rust-lang.org/cargo/reference/manifest.html)**
+> **来源: [Cargo Book - Environment Variables](https://doc.rust-lang.org/cargo/reference/environment-variables.html)**
+> **来源: [Cargo Book - Registry Index](https://doc.rust-lang.org/cargo/reference/registry-index.html)**
+> **来源: [Cargo CHANGELOG 1.95](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-195-2026-04-16)**
+> **来源: [Cargo CHANGELOG 1.96](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-196-2026-05-28)**
+> **来源: [CVE-2026-5223](https://blog.rust-lang.org/2026/05/25/cve-2026-5223/)**
+> **来源: [CVE-2026-5222](https://blog.rust-lang.org/2026/05/25/cve-2026-5222/)**
+> **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
+> **来源: [releases.rs 1.96.0](https://releases.rs/docs/1.96.0/)**
+> **来源: [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)**
+> **来源: [releases.rs 1.95.0](https://releases.rs/docs/1.95.0/)**
+> **来源: [Cargo Security Advisories](https://github.com/rust-lang/cargo/security/advisories)**
+> **来源: [RFC 3550 - New Range Types](https://rust-lang.github.io/rfcs/3550-new-range.html)**
 > **来源: [crates.io Documentation](https://crates.io/)**
 
 ---

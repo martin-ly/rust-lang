@@ -5,6 +5,8 @@
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
+> **权威来源**: [Rust Release Notes](https://doc.rust-lang.org/stable/releases.html) | [Rust Blog](https://blog.rust-lang.org/) | [Rust Reference](https://doc.rust-lang.org/reference/) | [Rust Standard Library](https://doc.rust-lang.org/std/)
+
 ## 📑 目录
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -21,19 +23,20 @@
   - [8. 常量与编译期族](#8-常量与编译期族)
   - [9. FFI 与不安全族](#9-ffi-与不安全族)
   - [10. Rust 1.93 新增/变更族](#10-rust-193-新增变更族)
+  - [11. Rust 1.95/1.96 新增/变更族](#11-rust-195196-新增变更族)
   - [相关文档](#相关文档)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档-1)
+  - [✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）](#-权威国际化来源对齐升级摘要rust-1960--edition-2024)
+    - [本次升级要点](#本次升级要点)
+      - [新增 Rust 1.96.0 特性](#新增-rust-1960-特性)
+      - [新增 Rust 1.95.0 特性](#新增-rust-1950-特性)
+      - [权威来源对齐](#权威来源对齐)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-13
-> **最后更新**: 2026-02-28
+> **最后更新**: 2026-06-29
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-> **状态**: ✅ 已完成
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
 > **目标**: 按特性族展开「概念-公理-定理-证明方法-反例」五维矩阵，便于逐特性查找
 > **上位文档**: [UNIFIED_SYSTEMATIC_FRAMEWORK](10_unified_systematic_framework.md)、[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](10_rust_193_language_features_comprehensive_analysis.md)
 
@@ -55,7 +58,7 @@
 | MaybeUninit | 延迟初始化 | MAYBEUNINIT1 | MAYBEUNINIT-T1 | ownership_model | 未初始化 assume_init |
 | 智能指针 | Deref/Drop 语义 | DROP1/DEREF1 | DROP-T1/DEREF-T1 | ownership_model | 违反 Drop 顺序 |
 | 裸指针 | FFI、unsafe 底层 | RAW1 | RAW-T1 | borrow_checker_proof | 解引用空指针 |
-| 引用 | 借用、零成本 | &T、&mut T | borrow_checker | 悬垂引用 |
+| 引用 | 借用、零成本 | &T、&mut T | borrow_checker | - | 悬垂引用 |
 | 内存布局 | 与 C 互操作 | REPR1 | REPR-T1 | ownership_model | 错误布局导致 UB |
 
 ---
@@ -214,6 +217,30 @@
 
 ---
 
+## 11. Rust 1.95/1.96 新增/变更族
+
+> **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
+> **来源: [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)**
+> **来源: [releases.rs 1.96.0](https://releases.rs/docs/1.96.0/)**
+> **来源: [releases.rs 1.95.0](https://releases.rs/docs/1.95.0/)**
+> **来源: [RFC 3550 - New Range Types](https://rust-lang.github.io/rfcs/3550-new-range.html)**
+
+| 特性 | 概念 | 公理/定义 | 定理 | 证明方法 | 反例 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `core::range` 新类型 | [`Copy`](https://doc.rust-lang.org/stable/core/marker/trait.Copy.html) + [`IntoIterator`](https://doc.rust-lang.org/stable/core/iter/trait.IntoIterator.html) 范围 | [RFC 3550](https://rust-lang.github.io/rfcs/3550-new-range.html)、[std::range](https://doc.rust-lang.org/stable/std/range/index.html) | RANGE-T1 | type_system_foundations | 混用 legacy `std::ops::Range` |
+| `assert_matches!` | 模式断言宏（[core::assert_matches](https://doc.rust-lang.org/stable/core/assert_matches/macro.assert_matches.html)） | ASSERT-MATCH1 | - | - | 模式不匹配时 panic |
+| `debug_assert_matches!` | 调试模式断言宏（[core::assert_matches](https://doc.rust-lang.org/stable/core/assert_matches/macro.assert_matches.html)） | ASSERT-MATCH-D1 | - | - | 仅在 debug 生效 |
+| `if let` guards | match 臂 [`if let` 守卫](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards) | GUARD1 | GUARD-T1 | borrow_checker_proof | 绑定作用域错误 |
+| `cfg_select!` | 编译期 cfg 选择（[std::cfg_select!](https://doc.rust-lang.org/stable/std/macro.cfg_select.html)、[Reference - Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)） | CFG-SEL1 | - | macro_expansion | 无匹配分支 |
+| PowerPC inline asm | 内联汇编平台扩展（[Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)） | ASM-PPC1 | - | toolchain | 非 PowerPC 目标 |
+| Cargo CVE-2026-5223 | tarball symlink 安全 | [CVE-2026-5223](https://blog.rust-lang.org/2026/05/25/cve-2026-5223/)、[Cargo CHANGELOG 1.96](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-196-2026-05-28) | - | toolchain | 第三方 registry 恶意 crate |
+| Cargo CVE-2026-5222 | URL 规范化认证 | [CVE-2026-5222](https://blog.rust-lang.org/2026/05/25/cve-2026-5222/)、[Cargo CHANGELOG 1.96](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-196-2026-05-28) | - | toolchain | 规范化后凭据泄露 |
+| WebAssembly 链接行为变更 | 不再默认传递 `--allow-undefined`（[Rust Blog 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/#changes-to-webassembly-targets)、[rustc#149868](https://github.com/rust-lang/rust/pull/149868)） | WASM-LINK1 | - | toolchain | 未定义符号被静默导入 |
+| Cargo `target.'cfg(..)'.rustdocflags` | 按 `cfg` 条件设置 rustdocflags | [Cargo CHANGELOG 1.96](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-196-2026-05-28)、[cargo#16846](https://github.com/rust-lang/cargo/pull/16846) | - | toolchain | 配置位置错误 |
+| dependency 同时指定 git 与 alternate registry | 本地 git、发布 registry | [Cargo CHANGELOG 1.96](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-196-2026-05-28)、[cargo#16810](https://github.com/rust-lang/cargo/pull/16810) | - | toolchain | registry 不一致 |
+
+---
+
 ## 相关文档
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -228,62 +255,52 @@
 ---
 
 **维护者**: Rust Formal Methods Research Team
-**最后更新**: 2026-02-13
-**状态**: ✅ 100% 完成（10 特性族 × 五维矩阵）
+**最后更新**: 2026-06-29
+**状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+## ✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）
 
+> **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
+> **来源: [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)**
+> **来源: [releases.rs](https://releases.rs/)**
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-> **更新日期**: 2026-03-14
+> **升级日期**: 2026-06-29
 
-### 本文档的Rust 1.94更新要点
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+### 本次升级要点
 
-本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
+本文档已完成权威国际化来源对齐升级，统一版本基准为 **Rust 1.96.0+ / Edition 2024**，同时保留 1.93/1.94 历史分析章节。
 
-#### 核心特性应用
+#### 新增 Rust 1.96.0 特性
 
-| 特性 | 应用场景 | 文档章节 |
-|------|---------|----------|
-| `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-| `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-| `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
+| 特性 | 来源 | 说明 |
+| :--- | :--- | :--- |
+| `core::range` 新类型 | [RFC 3550](https://rust-lang.github.io/rfcs/3550-new-range.html)、[std::range](https://doc.rust-lang.org/stable/std/range/index.html) | `Range`/`RangeFrom`/`RangeInclusive` 实现 `Copy` + `IntoIterator` |
+| `assert_matches!` / `debug_assert_matches!` | [core::assert_matches](https://doc.rust-lang.org/stable/core/assert_matches/macro.assert_matches.html) | 模式断言宏，失败输出 Debug 信息 |
+| Cargo CVE-2026-5223 / CVE-2026-5222 修复 | [Cargo 安全公告](https://github.com/rust-lang/cargo/security/advisories)、[Rust Blog 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) | 第三方 registry tarball symlink 与 URL 规范化修复 |
+| WebAssembly 链接行为变更 | [Rust Blog 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) | 不再默认传递 `--allow-undefined` |
+| Cargo `target.'cfg(..)'.rustdocflags` | [Cargo CHANGELOG 1.96](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-196-2026-05-28)、[cargo#16846](https://github.com/rust-lang/cargo/pull/16846) | 按 `cfg` 条件设置 rustdocflags |
+| dependency 同时指定 git 与 alternate registry | [Cargo CHANGELOG 1.96](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-196-2026-05-28)、[cargo#16810](https://github.com/rust-lang/cargo/pull/16810) | 本地 git，发布 registry |
 
-#### 代码示例更新
+#### 新增 Rust 1.95.0 特性
 
-本文档中的所有Rust代码示例均已：
+| 特性 | 来源 | 说明 |
+| :--- | :--- | :--- |
+| `if let` guards on match arms | [Rust Reference - Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards)、[Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | match 臂支持 `if let` 守卫 |
+| `cfg_select!` 宏 | [Rust Reference - Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)、[releases.rs 1.95.0](https://releases.rs/docs/1.95.0/) | 编译期 cfg 条件选择宏 |
+| PowerPC / PowerPC64 内联汇编稳定化 | [Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)、[Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | 稳定 inline assembly for PowerPC |
+| `--remap-path-scope` | [Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | 控制路径重映射作用域 |
+| `cargo init` 禁止在主目录执行 | [Cargo CHANGELOG 1.95](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-195-2026-04-16)、[cargo#16566](https://github.com/rust-lang/cargo/pull/16566) | 避免清单发现混乱 |
+| `cargo package` 覆盖大 crate 文件损坏修复 | [Cargo CHANGELOG 1.95](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-195-2026-04-16)、[cargo#16713](https://github.com/rust-lang/cargo/pull/16713) | 修复 `.crate` 覆盖损坏 |
 
-- ✅ 使用Rust 1.94语法验证
-- ✅ 兼容Edition 2024
-- ✅ 通过标准库测试
+#### 权威来源对齐
 
-#### 相关文档
-
-- Rust 1.94 迁移指南
-- Rust 1.94 特性速查
-- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
-
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-14 (Rust 1.94 深度整合)
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- Rust release notes（releases.rs）
+- Rust Blog 对应版本发布公告
+- Rust Reference 具体章节（Range Expressions、Match Guards、Inline Assembly、Conditional Compilation）
+- Rust Standard Library 具体 API（`core::range`、`core::assert_matches`、`std::ops::ControlFlow`）
+- RFC 链接（RFC 3550 等）
 
 ---
 
@@ -311,5 +328,20 @@
 > **来源: [IEEE](https://standards.ieee.org/)**
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
+> **来源: [releases.rs 1.96.0](https://releases.rs/docs/1.96.0/)**
+> **来源: [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)**
+> **来源: [releases.rs 1.95.0](https://releases.rs/docs/1.95.0/)**
+> **来源: [RFC 3550 - New Range Types](https://rust-lang.github.io/rfcs/3550-new-range.html)**
+> **来源: [Rust Reference - Range Expressions](https://doc.rust-lang.org/reference/expressions/range-expr.html)**
+> **来源: [Rust Reference - Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards)**
+> **来源: [Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)**
+> **来源: [Rust Standard Library - core::range](https://doc.rust-lang.org/stable/core/range/index.html)**
+> **来源: [Rust Standard Library - assert_matches](https://doc.rust-lang.org/stable/core/assert_matches/macro.assert_matches.html)**
+> **来源: [Rust Standard Library - cfg_select!](https://doc.rust-lang.org/stable/std/macro.cfg_select.html)**
+> **来源: [CVE-2026-5223](https://blog.rust-lang.org/2026/05/25/cve-2026-5223/)**
+> **来源: [CVE-2026-5222](https://blog.rust-lang.org/2026/05/25/cve-2026-5222/)**
+> **来源: [Cargo CHANGELOG 1.95](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-195-2026-04-16)**
+> **来源: [Cargo CHANGELOG 1.96](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-196-2026-05-28)**
 
 ---

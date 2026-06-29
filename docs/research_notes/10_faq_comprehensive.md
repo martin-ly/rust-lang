@@ -1,6 +1,8 @@
 # Rust形式化方法 FAQ 汇总
 
 > **内容分级**: [归档级]
+> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **状态**: ✅ 已完成权威国际化来源对齐升级
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -12,7 +14,14 @@
 
 ## 快速导航
 >
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - FAQ](https://en.wikipedia.org/wiki/FAQ)** · **来源: [Wikipedia - Knowledge Base](https://en.wikipedia.org/wiki/Knowledge_Base)** · **[来源: ACM - Technical Q&A Best Practices]** · **[来源: IEEE - Documentation Usability]**
+> **来源:
+>
+> [Rust Official Docs](https://doc.rust-lang.org/)** ·
+> **来源: [Wikipedia - FAQ](https://en.wikipedia.org/wiki/FAQ)** ·
+> **来源: [Wikipedia - Knowledge Base](https://en.wikipedia.org/wiki/Knowledge_Base)** ·
+> **[来源: ACM - Technical Q&A Best Practices]** ·
+> **[来源: IEEE - Documentation Usability]**
+>
 
 - [Rust形式化方法 FAQ 汇总](#rust形式化方法-faq-汇总)
   - [快速导航](#快速导航)

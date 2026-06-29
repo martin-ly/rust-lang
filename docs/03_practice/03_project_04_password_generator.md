@@ -20,7 +20,6 @@
   - [学习要点](#学习要点)
     - [随机数生成](#随机数生成)
   - [参考实现](#参考实现)
-<a id="完整参考实现位于-examplespassword-generator"></a>
   - [完整参考实现位于: `examples/password-generator/`](#完整参考实现位于-examplespassword-generator)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)

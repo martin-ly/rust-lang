@@ -5,7 +5,6 @@
 >
 > **受众**: [进阶] / [专家]
 > **内容分级**: [专家级]
-
 > **创建日期**: 2026-02-15
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -45,8 +44,6 @@
     - [LazyLock 在跨模块配置共享中的应用](#lazylock-在跨模块配置共享中的应用)
     - [ControlFlow 在跨模块错误处理中的应用](#controlflow-在跨模块错误处理中的应用)
     - [array\_windows 在跨模块数据流中的应用](#array_windows-在跨模块数据流中的应用)
-<a id="状态--深度整合完成"></a>
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -539,6 +536,7 @@ pub fn process_module_pipeline(
 
 **维护者**: Rust 学习项目团队
 **状态**: ✅ 深度整合完成
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

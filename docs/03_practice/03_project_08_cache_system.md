@@ -20,7 +20,6 @@
   - [学习要点](#学习要点)
     - [并发安全缓存](#并发安全缓存)
   - [参考实现](#参考实现)
-<a id="完整参考实现位于-examplescache-system"></a>
   - [完整参考实现位于: `examples/cache-system/`](#完整参考实现位于-examplescache-system)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)

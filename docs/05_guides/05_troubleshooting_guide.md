@@ -62,7 +62,6 @@
     - [LazyLock 初始化问题排查](#lazylock-初始化问题排查)
     - [array\_windows 边界问题](#array_windows-边界问题)
     - [ControlFlow 类型推断问题](#controlflow-类型推断问题)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 

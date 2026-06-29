@@ -5,9 +5,9 @@
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-02-28
+> **最后更新**: 2026-06-29
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-> **状态**: ✅ 已完成
+> **状态**: ✅ 完成
 
 ---
 
@@ -54,16 +54,16 @@
     - [1. 使用质量检查清单](#1-使用质量检查清单)
     - [2. 代码审查](#2-代码审查)
     - [3. 持续改进](#3-持续改进)
+  - [🎯 与 Rust 官方规范的对齐](#-与-rust-官方规范的对齐)
+    - [Rust API Guidelines](#rust-api-guidelines)
+    - [Clippy lint 文档](#clippy-lint-文档)
+    - [Nomicon 重点章节](#nomicon-重点章节)
+    - [Rust Book 重点章节](#rust-book-重点章节)
   - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
     - [核心文档](#核心文档)
     - [工具和资源](#工具和资源)
-  - [🆕 Rust 1.94 研究更新](#-rust-194-研究更新)
-    - [核心研究点](#核心研究点)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
+  - [🆕 权威国际化内容升级 (Rust 1.96.0+) {#-权威国际化内容升级}](#-权威国际化内容升级-rust-1960--权威国际化内容升级)
+    - [本次升级要点](#本次升级要点)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -748,6 +748,62 @@ git commit -m "添加所有权模型形式化研究笔记
 
 ---
 
+## 🎯 与 Rust 官方规范的对齐
+>
+> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+>
+> **来源**: [Clippy Lints](https://rust-lang.github.io/rust-clippy/master/index.html)
+>
+> **来源**: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)
+
+研究笔记的代码示例、API 设计与安全讨论应与以下官方规范保持一致：
+
+### Rust API Guidelines
+
+- **C-CASE**: 命名符合 RFC 430（类型 CamelCase、函数 snake_case）。
+- **C-CONV**: 转换方法使用 `as_`（免费/借用）、`to_`（昂贵）、`into_`（消耗）。
+- **C-GETTER**: Getter 省略 `get_` 前缀，直接使用字段名。
+- **C-COMMON-TRAITS**: 公共类型尽早实现 `Copy、Clone、Eq、PartialEq、Ord、PartialOrd、Hash、Debug、Display、Default`。
+- **C-SEND-SYNC**: 类型应尽可能实现 `Send`/`Sync`（手动实现为 unsafe，需严格论证）。
+- **C-GOOD-ERR**: 错误类型实现 `std::error::Error + Send + Sync`，并提供清晰 `Display`。
+- 完整清单见 [Rust API Guidelines Checklist](https://rust-lang.github.io/api-guidelines/checklist.html)。
+
+### Clippy lint 文档
+
+- **correctness**: 可能产生错误结果的代码（如 `absurd_extreme_comparisons`）。
+- **suspicious**: 很可能是 bug 的代码（如 `double_must_use`）。
+- **style**: 不符合 Rust 风格的写法（如 `needless_return`）。
+- **complexity**: 过度复杂的写法（如 `too_many_arguments`）。
+- **perf**: 性能反模式（如 `vec_init_then_push`）。
+- 完整 lint 列表与示例见 [Clippy Lints](https://rust-lang.github.io/rust-clippy/master/index.html)。
+
+### Nomicon 重点章节
+
+| 主题 | Nomicon 章节 | 说明 |
+| :--- | :--- | :--- |
+| Unsafe 能力边界 | [what-unsafe-does.html](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | `unsafe` 允许的五种额外操作 |
+| 行为 considered UB | [what-unsafe-does.html#behavior-considered-undefined](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | 语言层面的未定义行为清单 |
+| 生命周期省略 | [lifetime-elision.html](https://doc.rust-lang.org/nomicon/lifetime-elision.html) | 函数签名中的生命周期推断 |
+| 子类型与型变 | [subtyping-and-variance.html](https://doc.rust-lang.org/nomicon/subtyping-and-variance.html) | 协变/逆变/不变与内存安全 |
+| 发送与同步 | [send-and-sync.html](https://doc.rust-lang.org/nomicon/send-and-sync.html) | `Send`/`Sync` 的语义与手动实现 |
+| 未初始化内存 | [uninitialized.html](https://doc.rust-lang.org/nomicon/uninitialized.html) | `MaybeUninit` 与 unsafe 初始化 |
+
+### Rust Book 重点章节
+
+| 主题 | Rust Book 章节 | 说明 |
+| :--- | :--- | :--- |
+| 所有权与借用 | [ch04-00-understanding-ownership.html](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) | 所有权、借用、slice |
+| 泛型与 trait | [ch10-00-generics.html](https://doc.rust-lang.org/book/ch10-00-generics.html) | 泛型、trait、生命周期 |
+| 迭代器与闭包 | [ch13-00-functional-features.html](https://doc.rust-lang.org/book/ch13-00-functional-features.html) | 闭包、迭代器 |
+| 并发编程 | [ch16-00-concurrency.html](https://doc.rust-lang.org/book/ch16-00-concurrency.html) | 线程、`Mutex`、`Arc`、Send/Sync |
+| 高级 trait / unsafe | [ch19-00-advanced-features.html](https://doc.rust-lang.org/book/ch19-00-advanced-features.html) | 不安全 Rust、高级 trait、宏 |
+
+> 实践建议：在编写研究笔记的代码示例时，先运行 `cargo clippy -- -W clippy::all`，并对 unsafe 段落给出对应 Nomicon 章节的引用。
+
+---
+
 ## 🔗 相关资源 {#-相关资源}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -772,81 +828,39 @@ git commit -m "添加所有权模型形式化研究笔记
 ---
 
 **维护团队**: Rust Research Community
-**最后更新**: 2026-02-12
-**状态**: ✅ **100% 完成**（含形式化衔接、实质内容检查表、Rust 示例与定理对应）
+**最后更新**: 2026-06-29
+**状态**: ✅ 完成
 
 ---
 
-## 🆕 Rust 1.94 研究更新
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-> **适用版本**: Rust 1.96.0+
-
-### 核心研究点
+## 🆕 权威国际化内容升级 (Rust 1.96.0+) {#-权威国际化内容升级}
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+> **来源**: [Rust Research Community]
 
-- array_windows 的形式化语义
-- ControlFlow 的代数结构
-- LazyCell/LazyLock 的延迟语义
-- 与现有理论框架的集成
-
-详见 [RUST_194_RESEARCH_UPDATE](10_rust_194_research_update.md)
-
-**最后更新**: 2026-03-14
-
----
-
-## 🆕 Rust 1.94 深度整合更新
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-> **更新日期**: 2026-03-14
+> **更新日期**: 2026-06-29
 
-### 本文档的Rust 1.94更新要点
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+### 本次升级要点
 
-本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
-
-#### 核心特性应用
-
-| 特性 | 应用场景 | 文档章节 |
-|------|---------|----------|
-| `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-| `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-| `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
-
-#### 代码示例更新
-
-本文档中的所有Rust代码示例均已：
-
-- ✅ 使用Rust 1.94语法验证
-- ✅ 兼容Edition 2024
-- ✅ 通过标准库测试
-
-#### 相关文档
-
-- Rust 1.94 迁移指南
-- Rust 1.94 特性速查
-- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
+- 新增「与 Rust 官方规范的对齐」章节，系统引用 Rust API Guidelines、Clippy lint 文档、Nomicon、Rust Book 具体章节。
+- 删除旧版 Rust 1.94 模板内容，状态更新为 ✅ 完成。
 
 ---
 
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+**维护者**: Rust Research Community
+**最后更新**: 2026-06-29 (权威国际化内容升级)
+**状态**: ✅ 完成
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/), [Clippy Lints](https://rust-lang.github.io/rust-clippy/master/index.html), [The Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-06-29 新增 Rust API Guidelines、Clippy、Nomicon、Rust Book 章节对齐 [来源: Authority Source Sprint Batch 9]
 
-**文档版本**: 1.1
+**文档版本**: 1.2
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**最后更新**: 2026-06-29
+**状态**: ✅ 完成
 
 ---
 

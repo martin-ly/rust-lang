@@ -5,9 +5,12 @@
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-21
-> **最后更新**: 2026-02-21
-> **状态**: ✅ 100% 完成
+> **最后更新**: 2026-06-29
+> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **状态**: ✅ **完成**
 > **范围**: 所有形式化方法相关文档的统一索引
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [RustBelt](https://plv.mpi-sws.org/rustbelt/) | [Aeneas](https://github.com/AeneasVerif/aeneas) | [Ferrocene FLS](https://spec.ferrocene.dev/)
 
 ---
 
@@ -47,13 +50,10 @@
     - [贡献流程](#贡献流程)
   - [变更日志](#变更日志)
   - [附录：思维导图全貌](#附录思维导图全貌)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [P1 学术来源覆盖映射](#p1-学术来源覆盖映射)
+    - [按来源映射](#按来源映射)
+    - [按主题映射](#按主题映射)
+    - [P1 对齐检查清单](#p1-对齐检查清单)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -469,72 +469,65 @@ TODO    和相关定义    命名规范  Rust测试  填写描述
 
 ---
 
-## 🆕 Rust 1.94 更新
+## P1 学术来源覆盖映射
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+> **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)**
+>
+> **来源: [Aeneas](https://arxiv.org/abs/2206.07185)**
+>
+> **来源: [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)**
+>
+> **来源: [RustSEM](https://doi.org/10.1007/s10703-024-00460-3)**
+>
+> **来源: [Oxide](https://arxiv.org/abs/1903.00982)**
+>
+> **来源: [RustHorn](https://doi.org/10.1007/978-3-030-45237-7_4)**
 
-> **最新版本**: Rust 1.96.0 (2026-03-05)
+P1 学术来源指经过同行评审、被国际形式化验证社区广泛接受的 Rust 形式化成果。本节给出这些来源与本项目文档的逐主题覆盖映射。
 
-- TOML 1.1 支持
-- Cargo.toml 多行内联表
-- 配置文件 include 支持
+### 按来源映射
 
-详见 [Rust 1.94 研究更新](10_rust_194_research_update.md)
+| P1 来源 | 机构/会议 | 核心贡献 | 本项目覆盖文档 | 覆盖状态 |
+| :--- | :--- | :--- | :--- | :--- |
+| **RustBelt (POPL 2018)** | MPI-SWS | Iris 分离逻辑证明所有权/借用/核心库安全 | `formal_methods/10_ownership_model.md`, `formal_methods/10_borrow_checker_proof.md`, `coq_skeleton/*.v` | 概念对齐；L3 骨架待补全 |
+| **RustBelt Meets Relaxed Memory (POPL 2020)** | MPI-SWS | 松弛内存、`Arc`、原子操作同步 ghost state | `formal_methods/10_ownership_model.md` (Def ATOMIC1), `formal_methods/10_send_sync_formalization.md` | 仅 Def 级 |
+| **Tree Borrows (PLDI 2025)** | ETH | 树结构借用模型、权限状态机、54% 更少拒绝 | `formal_methods/10_borrow_checker_proof.md`, `coq_skeleton/BORROW_DATARACE_FREE.v` | 概念对齐；无形式化树模型 |
+| **Oxide (ICFP 2023)** | 宾大等 | 带区域的生命周期类型系统 | `type_theory/10_lifetime_formalization.md`, `type_theory/10_type_system_foundations.md` | 概念对齐；无 region calculus |
+| **RustSEM (FMSD 2024)** | K-Framework | 内存级 OBS、可执行语义、700+ 测试 | 无直接对应 | 未覆盖 |
+| **RustHorn (CAV 2020)** | 京都大学 | CHC 编码验证 Rust 程序 | `formal_methods/10_borrow_checker_proof.md` (T-BR1) | 概念映射；无 CHC 形式化 |
+| **Aeneas (ICFP 2022/2023)** | INRIA 等 | Safe Rust → Coq/F*/HOL4/Lean | `10_aeneas_integration_plan.md`, `10_l3_machine_proof_guide.md` | 计划/占位 |
 
-**最后更新**: 2026-03-14
+### 按主题映射
+
+| 主题 | P1 来源 | 本项目文档 | 覆盖状态 | 关键差距 |
+| :--- | :--- | :--- | :--- | :--- |
+| 所有权唯一性 | RustBelt Theorem 4.1 | `10_ownership_model.md` T-OW2 | ✅ 概念对齐 | ❌ 无 Iris/Coq 机器证明 |
+| 借用/别名模型 | RustBelt / Tree Borrows | `10_borrow_checker_proof.md` T-BR1 | ✅ 概念对齐 | ❌ 无树结构/权限状态机 |
+| 类型安全 | RustBelt / Oxide | `10_type_system_foundations.md` T-TY3 | ✅ 概念对齐 | ❌ 无 MIR/region 级语义 |
+| 生命周期 | Oxide / RustBelt Lifetime Logic | `type_theory/10_lifetime_formalization.md` | ✅ 定义完整 | ❌ 无 inference 算法证明 |
+| 数据竞争自由 | RustBelt / RustSEM | `10_borrow_checker_proof.md` T-BR1 | ✅ 定理完整 | ❌ 无并发分离逻辑 L3 |
+| 原子/松弛内存 | RustBelt Meets Relaxed Memory | `formal_methods/10_ownership_model.md` | ⚠️ Def 级 | ❌ 无内存模型 |
+| unsafe 封装 | RustBelt library specs | `formal_methods/10_borrow_checker_proof.md` Def UNSAFE1 | ⚠️ 占位 | ❌ 无协议规范 |
+| 可执行语义 | RustSEM / Miri | 无 | ❌ 未覆盖 | 无 K-Framework/MIR 语义 |
+
+### P1 对齐检查清单
+
+- [x] RustBelt 核心定理与 `T-OW2`/`T-BR1`/`T-TY3` 建立映射
+- [x] Tree Borrows 与 `borrow_checker_proof` 建立概念关联
+- [x] Oxide 与生命周期/类型系统文档建立映射
+- [x] RustSEM 作为可执行语义目标记录在案
+- [x] Aeneas 集成计划已制定
+- [ ] RustBelt Meets Relaxed Memory 的松弛内存模型未覆盖
+- [ ] RustSEM 的 K-Framework 实现未迁移
+- [ ] Aeneas 翻译验证未实际运行
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **适用版本**: Rust 1.96.0+ (Edition 2024)
-> **更新日期**: 2026-03-14
-
-### 本文档的Rust 1.94更新要点
->
-> **[来源: [crates.io](https://crates.io/)]**
-
-本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
-
-#### 核心特性应用
-
-| 特性 | 应用场景 | 文档章节 |
-|------|---------|----------|
-| `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-| `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-| `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
-
-#### 代码示例更新
-
-本文档中的所有Rust代码示例均已：
-
-- ✅ 使用Rust 1.94语法验证
-- ✅ 兼容Edition 2024
-- ✅ 通过标准库测试
-
-#### 相关文档
-
-- Rust 1.94 迁移指南
-- [Rust 1.94 特性速查
-- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
-
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-14 (Rust 1.94 深度整合)
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
+**维护者**: Rust Formal Methods Research Team
+**最后更新**: 2026-06-29
+**状态**: ✅ **完成**
+**文档版本**: 2.0
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---
 

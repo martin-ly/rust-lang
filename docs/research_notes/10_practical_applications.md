@@ -4,6 +4,11 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
+> **创建日期**: 2026-01-20
+> **最后更新**: 2026-06-29
+> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **状态**: ✅ 已完成权威国际化来源对齐升级
+> **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Cargo Book](https://doc.rust-lang.org/cargo/) | [Tokio Docs](https://tokio.rs/tokio/tutorial) | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ## 📑 目录
 >
@@ -49,22 +54,21 @@
     - [与类型理论、实验研究的关联](#与类型理论实验研究的关联)
     - [案例快速索引](#案例快速索引)
     - [与形式化衔接的案例索引（层次推进）](#与形式化衔接的案例索引层次推进)
+  - [🌐 案例官方文档、源码与基准索引](#-案例官方文档源码与基准索引)
+  - [🧭 Rust 机制与官方文档对照](#-rust-机制与官方文档对照)
   - [📖 参考文献 {#-参考文献}](#-参考文献--参考文献)
     - [实际项目](#实际项目)
     - [相关文档](#相关文档)
     - [工具资源](#工具资源)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档-1)
+  - [🆕 权威国际化内容升级 (Rust 1.96.0+) {#-权威国际化内容升级}](#-权威国际化内容升级-rust-1960--权威国际化内容升级)
+    - [本次升级要点](#本次升级要点)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2025-01-27
-> **最后更新**: 2026-02-28
+> **最后更新**: 2026-06-29
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-> **状态**: ✅ 已完成
+> **状态**: ✅ 完成
 
 ---
 
@@ -1081,6 +1085,50 @@ impl<T> Drop for SafeVec<T> {
 
 ---
 
+## 🌐 案例官方文档、源码与基准索引
+>
+> **来源**: [Rust Official Docs](https://doc.rust-lang.org/)
+
+为便于复现与深入研究，每个案例应链接到官方文档、源码仓库及公开基准：
+
+| 案例 | 官方文档 | 源码仓库 | 性能基准 / 案例研究 |
+| :--- | :--- | :--- | :--- |
+| Redox OS | [redox-os.org](https://www.redox-os.org/) | [redox-os/redox](https://gitlab.redox-os.org/redox-os/redox) | 系统调用与微内核评估见项目文档 |
+| Tokio | [tokio.rs](https://tokio.rs/) | [tokio-rs/tokio](https://github.com/tokio-rs/tokio) | [TechEmpower](https://www.techempower.com/benchmarks/)、仓库内 `benches/` |
+| Actix-web | [actix.rs](https://actix.rs/) | [actix/actix-web](https://github.com/actix/actix-web) | [TechEmpower](https://www.techempower.com/benchmarks/)、仓库 `benches/` |
+| Linkerd | [linkerd.io](https://linkerd.io/) | [linkerd2-proxy](https://github.com/linkerd2/linkerd2-proxy) | 官方性能报告与负载测试文档 |
+| TiKV | [tikv.org](https://tikv.org/) | [tikv/tikv](https://github.com/tikv/tikv) | 仓库 `benches/`、[TiKV 性能白皮书](https://tikv.org/) |
+| ScyllaDB Rust 驱动 | [Rust Driver Docs](https://rust-driver.docs.scylladb.com/) | [scylladb/scylla-rust-driver](https://github.com/scylladb/scylla-rust-driver) | 官方 benchmark 与 examples |
+| Tock | [tockos.org](https://www.tockos.org/) | [tock/tock](https://github.com/tock/tock) | 嵌入式评估与论文 |
+| Drone | [Drone OS Book](https://book.drone-os.com/) | [drone-os/drone](https://github.com/drone-os/drone) | 实时性评估见文档 |
+| Firecracker | [firecracker-microvm.github.io](https://firecracker-microvm.github.io/) | [firecracker-microvm/firecracker](https://github.com/firecracker-microvm/firecracker) | 官方 microVM 启动与密度基准 |
+| Axum (案例 1) | [docs.rs/axum](https://docs.rs/axum/) | [tokio-rs/axum](https://github.com/tokio-rs/axum) | [TechEmpower](https://www.techempower.com/benchmarks/) |
+
+> 建议：在引用性能数据时，应注明测试版本、硬件环境与负载模型；优先使用 TechEmpower 或项目官方 `benches/` 的可复现结果。
+
+## 🧭 Rust 机制与官方文档对照
+>
+> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)
+>
+> **来源**: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **来源**: [Rust RFCs](https://github.com/rust-lang/rfcs)
+
+案例分析中涉及的 Rust 机制可对照以下官方章节与 RFC：
+
+| 机制 | Rust Book | Nomicon | RFC |
+| :--- | :--- | :--- | :--- |
+| 所有权与移动 | [ch04](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) | [ownership.html](https://doc.rust-lang.org/nomicon/ownership.html) | 核心语言设计 |
+| 借用与生命周期 | [ch10](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) | [lifetimes.html](https://doc.rust-lang.org/nomicon/lifetimes.html)、[lifetime-elision.html](https://doc.rust-lang.org/nomicon/lifetime-elision.html) | [RFC 141](https://rust-lang.github.io/rfcs/0141-lifetime-elision.html) |
+| 异步 / Future | [ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) | [async-await.html](https://doc.rust-lang.org/nomicon/async-await.html) | [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html) |
+| 并发 / Send/Sync | [ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) | [send-and-sync.html](https://doc.rust-lang.org/nomicon/send-and-sync.html) | 核心语言设计 |
+| Unsafe / 原始指针 | [ch19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) | [what-unsafe-does.html](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | [RFC 1966](https://rust-lang.github.io/rfcs/1966-unsafe-pointer-reform.html) |
+| impl Trait / 泛型 | [ch10](https://doc.rust-lang.org/book/ch10-02-traits.html) | — | [RFC 1522](https://rust-lang.github.io/rfcs/1522-conservative-impl-trait.html)、[RFC 1951](https://rust-lang.github.io/rfcs/1951-expand-impl-trait.html) |
+| 型变 | [ch19.3](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html) | [subtyping-and-variance.html](https://doc.rust-lang.org/nomicon/subtyping-and-variance.html) | [RFC 738](https://rust-lang.github.io/rfcs/0738-variance.html) |
+| Error 处理 | [ch09](https://doc.rust-lang.org/book/ch09-00-error-handling.html) | — | [RFC 1859](https://rust-lang.github.io/rfcs/1859-try-trait.html)（`Try` trait） |
+
+---
+
 ## 📖 参考文献 {#-参考文献}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -1089,8 +1137,16 @@ impl<T> Drop for SafeVec<T> {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
+- [Redox OS](https://www.redox-os.org/) - 类 Unix 操作系统
 - [Tokio](https://tokio.rs/) - 异步运行时
 - [Actix-web](https://actix.rs/) - Web 框架
+- [Linkerd](https://linkerd.io/) - 服务网格
+- [TiKV](https://tikv.org/) - 分布式键值存储
+- [ScyllaDB Rust Driver](https://rust-driver.docs.scylladb.com/) - NoSQL 驱动
+- [Tock](https://www.tockos.org/) - 嵌入式操作系统
+- [Drone](https://book.drone-os.com/) - 实时操作系统框架
+- [Firecracker](https://firecracker-microvm.github.io/) - 微虚拟机
+- [Axum](https://docs.rs/axum/) - 模块化 Web 框架
 - [Rocket](https://rocket.rs/) - Web 框架
 
 ### 相关文档
@@ -1110,66 +1166,40 @@ impl<T> Drop for SafeVec<T> {
 ---
 
 **维护者**: Rust Application Research Team
-**最后更新**: 2026-01-26
-**状态**: ✅ **已完成** (100%)
+**最后更新**: 2026-06-29
+**状态**: ✅ 完成
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 权威国际化内容升级 (Rust 1.96.0+) {#-权威国际化内容升级}
 >
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+> **来源**: [Rust Application Research Team]
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-> **更新日期**: 2026-03-14
+> **更新日期**: 2026-06-29
 
-### 本文档的Rust 1.94更新要点
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+### 本次升级要点
 
-本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
-
-#### 核心特性应用
-
-| 特性 | 应用场景 | 文档章节 |
-|------|---------|----------|
-| `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-| `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-| `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
-
-#### 代码示例更新
-
-本文档中的所有Rust代码示例均已：
-
-- ✅ 使用Rust 1.94语法验证
-- ✅ 兼容Edition 2024
-- ✅ 通过标准库测试
-
-#### 相关文档
-
-- Rust 1.94 迁移指南
-- Rust 1.94 特性速查
-- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
+- 补充各案例官方文档、源码仓库与性能基准引用。
+- 新增 Rust 机制与 Rust Book、Nomicon、RFCs 的对照表。
+- 删除旧版 Rust 1.94 模板内容，状态更新为 ✅ 完成。
 
 ---
 
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+**维护者**: Rust Application Research Team
+**最后更新**: 2026-06-29 (权威国际化内容升级)
+**状态**: ✅ 完成
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/), [The Rustonomicon](https://doc.rust-lang.org/nomicon/), [Rust RFCs](https://github.com/rust-lang/rfcs), [TechEmpower](https://www.techempower.com/benchmarks/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-06-29 新增项目官方文档、源码、性能基准与 Rust 机制对照 [来源: Authority Source Sprint Batch 9]
 
-**文档版本**: 1.1
+**文档版本**: 1.2
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
-
----
-
-> **权威来源**: Rust Official Docs
+**最后更新**: 2026-06-29
+**状态**: ✅ 完成
 
 ---
 

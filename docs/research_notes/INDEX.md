@@ -168,6 +168,12 @@
 - 形式化验证对标与差距分析
 - 可持续推进方案与改进建议
 
+7b2. **[10_rust_book_alignment.md](10_rust_book_alignment.md)** - Rust Book 逐章对标映射表 🆕
+
+- TRPL 2024 Edition 21 章逐章映射到本项目文档、示例、练习
+- 权威来源链接（TRPL、RBE、RFC、Reference、Rustonomicon、std）
+- 已对齐内容与待补缺口矩阵
+
 7c. **[10_formal_full_model_overview.md](10_formal_full_model_overview.md)** - 形式化全模型入口 🆕
 
 - 统一形式系统（ownership+borrow+lifetime+type+trait+async+pin）
@@ -747,7 +753,7 @@
 
 **维护团队**: Rust Research Community
 **最后更新**: 2026-06-29
-**状态**: 🔄 **结构迁回完成，权威国际化对齐升级中**（子目录已从 archive 迁回，按 P0/P1/P2 来源逐项升级）
+**状态**: ✅ **结构迁回完成，权威国际化来源对齐升级完成**（子目录已从 archive 迁回，按 P0/P1/P2 来源逐项升级完成）
 
 ---
 

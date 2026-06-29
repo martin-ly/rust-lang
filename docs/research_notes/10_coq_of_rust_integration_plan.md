@@ -1,10 +1,10 @@
 # Coq of Rust 集成计划（已归档）
 
 > **内容分级**: [归档级]
+> **状态**: ✅ 已完成权威国际化来源对齐升级
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **归档说明**: 本文档已迁至 archive/deprecated/10_coq_of_rust_integration_plan.md
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 

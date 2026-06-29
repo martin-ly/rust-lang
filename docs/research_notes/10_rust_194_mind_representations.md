@@ -5,8 +5,12 @@
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **表征类型**: 思维导图 / 多维矩阵 / 决策树 / 证明树
-> **Rust 版本**: 1.96.0
+> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **最后更新**: 2026-06-29
 > **创建日期**: 2026-03-14
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+
+> **权威来源**: [Rust Blog](https://blog.rust-lang.org/) | [Rust Reference](https://doc.rust-lang.org/reference/) | [Rust Standard Library](https://doc.rust-lang.org/std/)
 
 ---
 
@@ -24,7 +28,7 @@
     - [2.1 所有权语义矩阵](#21-所有权语义矩阵)
     - [2.2 并发原语矩阵](#22-并发原语矩阵)
     - [2.3 错误处理策略矩阵](#23-错误处理策略矩阵)
-    - [2.4 Rust 1.94 新特性影响矩阵](#24-rust-194-新特性影响矩阵)
+    - [2.4 Rust 1.94/1.95/1.96 新特性影响矩阵](#24-rust-194195196-新特性影响矩阵)
     - [2.5 语言特性对比矩阵 (vs 其他语言)](#25-语言特性对比矩阵-vs-其他语言)
   - [🌳 3. 决策树图 (Decision Trees)](#-3-决策树图-decision-trees)
     - [3.1 所有权选择决策树](#31-所有权选择决策树)
@@ -38,12 +42,11 @@
     - [4.3 线程安全性证明树](#43-线程安全性证明树)
     - [4.4 Rust 1.94 array\_windows 正确性证明](#44-rust-194-array_windows-正确性证明)
   - [📈 5. 完整度评估](#-5-完整度评估)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）](#-权威国际化来源对齐升级摘要rust-1960--edition-2024)
+    - [本次升级要点](#本次升级要点)
+      - [新增 Rust 1.96.0 特性](#新增-rust-1960-特性)
+      - [新增 Rust 1.95.0 特性](#新增-rust-1950-特性)
+      - [权威来源对齐](#权威来源对齐)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -162,7 +165,44 @@ mindmap
       TOML 1.1
         多行内联表
         include 支持
+    Rust 1.95 新特性
+      if let guards
+      cfg_select!
+      PowerPC inline asm
+    Rust 1.96 新特性
+      core::range
+        Copy + IntoIterator
+        RFC 3550
+      assert_matches!
+        debug_assert_matches!
+      Cargo CVE-2026-5223
+      Cargo CVE-2026-5222
+      WebAssembly --allow-undefined
 ```
+
+> **来源: [std::slice::array_windows](https://doc.rust-lang.org/stable/std/slice/struct.ArrayWindows.html)**
+>
+> **来源: [std::cell::LazyCell](https://doc.rust-lang.org/stable/std/cell/struct.LazyCell.html)**
+>
+> **来源: [std::sync::LazyLock](https://doc.rust-lang.org/stable/std/sync/struct.LazyLock.html)**
+>
+> **来源: [std::ops::ControlFlow](https://doc.rust-lang.org/stable/std/ops/enum.ControlFlow.html)**
+>
+> **来源: [f64::consts](https://doc.rust-lang.org/stable/std/f64/consts/index.html)**
+>
+> **来源: [TOML 1.1 Specification](https://toml.io/en/v1.1.0)**
+>
+> **来源: [Rust Reference - Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards)**
+>
+> **来源: [Rust Reference - Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)**
+>
+> **来源: [Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)**
+>
+> **来源: [core::range](https://doc.rust-lang.org/stable/core/range/index.html)**
+>
+> **来源: [core::assert_matches](https://doc.rust-lang.org/stable/core/assert_matches/macro.assert_matches.html)**
+>
+> **来源: [Cargo Security Advisories](https://github.com/rust-lang/cargo/security/advisories)**
 
 ### 1.2 所有权语义思维导图
 
@@ -328,20 +368,35 @@ mindmap
 | **提前终止** | ❌ | ✅(?操作符) | ✅ | ✅ | 错误传播 |
 | **迭代控制** | ✅ | ✅ | ❌ | ✅ | try_fold |
 
-### 2.4 Rust 1.94 新特性影响矩阵
+> **来源: [The ? Operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator)**
+>
+> **来源: [Iterator::try_fold](https://doc.rust-lang.org/stable/std/iter/trait.Iterator.html#method.try_fold)**
+>
+> **来源: [Iterator::try_for_each](https://doc.rust-lang.org/stable/std/iter/trait.Iterator.html#method.try_for_each)**
+
+### 2.4 Rust 1.94/1.95/1.96 新特性影响矩阵
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+> **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
+> **来源: [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)**
 
-| 新特性 | 影响模块 | 内存安全 | 类型安全 | 性能 | 表达力 | 兼容性 |
-|--------|----------|----------|----------|------|--------|--------|
-| array_windows | C08 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| LazyCell::get_mut | C01/C02 | ✅ | ✅ | ⚠️ | ✅ | ✅ |
-| ControlFlow | C03/C06 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| EULER_GAMMA | C08 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| TOML 1.1 | 全部 | N/A | N/A | N/A | ✅ | ⚠️ MSRV |
-| Edition 2024 | 全部 | ✅ | ✅ | ✅ | ✅ | ⚠️ 需迁移 |
+| 新特性 | 版本 | 影响模块 | 内存安全 | 类型安全 | 性能 | 表达力 | 兼容性 | 权威来源 |
+|--------|------|----------|----------|----------|------|--------|--------|----------|
+| array_windows | 1.96 | C08 | ✅ | ✅ | ✅ | ✅ | ✅ | [std::slice::array_windows](https://doc.rust-lang.org/stable/std/primitive.slice.html#method.array_windows) |
+| LazyCell::get_mut | 1.96 | C01/C02 | ✅ | ✅ | ⚠️ | ✅ | ✅ | [std::cell::LazyCell](https://doc.rust-lang.org/stable/std/cell/struct.LazyCell.html) |
+| ControlFlow | 1.96 | C03/C06 | ✅ | ✅ | ✅ | ✅ | ✅ | [std::ops::ControlFlow](https://doc.rust-lang.org/stable/std/ops/enum.ControlFlow.html) |
+| EULER_GAMMA | 1.96 | C08 | ✅ | ✅ | ✅ | ✅ | ✅ | [f64::consts::EULER_GAMMA](https://doc.rust-lang.org/stable/std/f64/consts/constant.EULER_GAMMA.html) |
+| TOML 1.1 | 1.94 | 全部 | N/A | N/A | N/A | ✅ | ⚠️ MSRV | [TOML 1.1.0 Spec](https://toml.io/en/v1.1.0) |
+| Edition 2024 | 1.94+ | 全部 | ✅ | ✅ | ✅ | ✅ | ⚠️ 需迁移 | [Edition 2024 Guide](https://doc.rust-lang.org/edition-guide/rust-2024/) |
+| core::range | 1.96 | C04/C08 | ✅ | ✅ | ✅ | ✅ | ✅ | [RFC 3550](https://rust-lang.github.io/rfcs/3550-new-range.html)、[core::range](https://doc.rust-lang.org/stable/core/range/index.html) |
+| assert_matches! | 1.96 | C09 | ✅ | ✅ | ✅ | ✅ | ✅ | [core::assert_matches::assert_matches](https://doc.rust-lang.org/stable/core/assert_matches/macro.assert_matches.html) |
+| if let guards | 1.95 | C04 | ✅ | ✅ | ✅ | ✅ | ✅ | [Rust Reference - Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards) |
+| cfg_select! | 1.95 | C09 | ✅ | ✅ | ✅ | ✅ | ✅ | [Rust Reference - cfg_select!](https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg_select-macro) |
+| PowerPC inline asm | 1.95 | C03/C06 | ✅ | ✅ | ✅ | ✅ | ✅ | [Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html) |
+| Cargo CVE-2026-5223 | 1.96 | 生态 | ✅ | N/A | N/A | N/A | ✅ | [Cargo Security Advisories](https://github.com/rust-lang/cargo/security/advisories) |
+| Cargo CVE-2026-5222 | 1.96 | 生态 | ✅ | N/A | N/A | N/A | ✅ | [Cargo Security Advisories](https://github.com/rust-lang/cargo/security/advisories) |
 
 ### 2.5 语言特性对比矩阵 (vs 其他语言)
 
@@ -703,7 +758,7 @@ graph TD
 ║  ├── 所有权语义矩阵        ✅ 完成                                           ║
 ║  ├── 并发原语矩阵          ✅ 完成                                           ║
 ║  ├── 错误处理矩阵          ✅ 完成                                           ║
-║  ├── 1.94 特性影响矩阵     ✅ 完成                                           ║
+║  ├── 1.94/1.95/1.96 特性影响矩阵 ✅ 完成                                     ║
 ║  └── 语言对比矩阵          ✅ 完成                                           ║
 ║                                                                               ║
 ║  决策树 (Decision Trees)    [████████████████████████████████████] 100%      ║
@@ -727,62 +782,49 @@ graph TD
 ---
 
 **文档版本**: v1.0
-**最后更新**: 2026-03-14
+**最后更新**: 2026-06-29
 **对齐版本**: Rust 1.96.0
 **资产类型**: 思维表征全类别
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
->
-> **[来源: [docs.rs](https://docs.rs/)]**
+## ✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）
 
+> **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
+> **来源: [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)**
+> **来源: [releases.rs](https://releases.rs/)**
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-> **更新日期**: 2026-03-14
+> **升级日期**: 2026-06-29
 
-### 本文档的Rust 1.94更新要点
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+### 本次升级要点
 
-本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
+本文档已完成权威国际化来源对齐升级，统一版本基准为 **Rust 1.96.0+ / Edition 2024**，同时保留 1.93/1.94 历史分析章节。
 
-#### 核心特性应用
+#### 新增 Rust 1.96.0 特性
 
-| 特性 | 应用场景 | 文档章节 |
-|------|---------|----------|
-| `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-| `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-| `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
+| 特性 | 来源 | 说明 |
+| :--- | :--- | :--- |
+| `core::range` 新类型 | [RFC 3550](https://rust-lang.github.io/rfcs/3550-new-range.html)、[std::range](https://doc.rust-lang.org/stable/std/range/index.html) | `Range`/`RangeFrom`/`RangeInclusive` 实现 `Copy` + `IntoIterator` |
+| `assert_matches!` / `debug_assert_matches!` | [core::assert_matches](https://doc.rust-lang.org/stable/core/assert_matches/macro.assert_matches.html) | 模式断言宏，失败输出 Debug 信息 |
+| Cargo CVE-2026-5223 / CVE-2026-5222 修复 | [Cargo 安全公告](https://github.com/rust-lang/cargo/security/advisories)、[Rust Blog 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) | 第三方 registry tarball symlink 与 URL 规范化修复 |
+| WebAssembly 链接行为变更 | [Rust Blog 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) | 不再默认传递 `--allow-undefined` |
 
-#### 代码示例更新
+#### 新增 Rust 1.95.0 特性
 
-本文档中的所有Rust代码示例均已：
+| 特性 | 来源 | 说明 |
+| :--- | :--- | :--- |
+| `if let` guards on match arms | [Rust Reference - Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards)、[Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | match 臂支持 `if let` 守卫 |
+| `cfg_select!` 宏 | [Rust Reference - Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)、[releases.rs 1.95.0](https://releases.rs/docs/1.95.0/) | 编译期 cfg 条件选择宏 |
+| PowerPC / PowerPC64 内联汇编稳定化 | [Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)、[Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | 稳定 inline assembly for PowerPC |
+| `--remap-path-scope` | [Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | 控制路径重映射作用域 |
 
-- ✅ 使用Rust 1.94语法验证
-- ✅ 兼容Edition 2024
-- ✅ 通过标准库测试
+#### 权威来源对齐
 
-#### 相关文档
-
-- Rust 1.94 迁移指南
-- [Rust 1.94 特性速查
-- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
-
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-14 (Rust 1.94 深度整合)
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- Rust release notes（releases.rs）
+- Rust Blog 对应版本发布公告
+- Rust Reference 具体章节（Range Expressions、Match Guards、Inline Assembly、Conditional Compilation）
+- Rust Standard Library 具体 API（`core::range`、`core::assert_matches`、`std::ops::ControlFlow`）
+- RFC 链接（RFC 3550 等）
 
 ---
 
@@ -812,5 +854,12 @@ graph TD
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
+> **来源: [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)**
+> **来源: [releases.rs 1.96.0](https://releases.rs/docs/1.96.0/)**
+> **来源: [releases.rs 1.95.0](https://releases.rs/docs/1.95.0/)**
+> **来源: [RFC 3550 - New Range Types](https://rust-lang.github.io/rfcs/3550-new-range.html)**
+> **来源: [Rust Standard Library - core::range](https://doc.rust-lang.org/stable/core/range/index.html)**
+> **来源: [Rust Standard Library - assert_matches](https://doc.rust-lang.org/stable/core/assert_matches/macro.assert_matches.html)**
 
 ---

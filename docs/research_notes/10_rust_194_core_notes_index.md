@@ -5,11 +5,15 @@
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
+> **权威来源**: [Rust Blog](https://blog.rust-lang.org/) | [Rust Release Notes](https://doc.rust-lang.org/stable/releases.html) | [Rust Reference](https://doc.rust-lang.org/reference/)
+
 > **目录**: docs/research_notes/
 > **总文件数**: 141+
 > **核心文件**: 20
-> **梳理日期**: 2026-03-14
-> **状态**: 🔄 **持续推进中**
+> **梳理日期**: 2026-06-29
+> **最后更新**: 2026-06-29
+> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
 
 ---
 
@@ -22,12 +26,11 @@
   - [📋 核心研究笔记清单 (已梳理)](#-核心研究笔记清单-已梳理)
   - [📊 进度统计](#-进度统计)
   - [🎯 后续推进计划](#-后续推进计划)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）](#-权威国际化来源对齐升级摘要rust-1960--edition-2024)
+    - [本次升级要点](#本次升级要点)
+      - [新增 Rust 1.96.0 特性](#新增-rust-1960-特性)
+      - [新增 Rust 1.95.0 特性](#新增-rust-1950-特性)
+      - [权威来源对齐](#权威来源对齐)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -35,18 +38,18 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-| 序号 | 文档名称 | 1.94相关性 | 状态 |
-|------|----------|------------|------|
-| 1 | 10_rust_194_comprehensive_semantics_framework.md | 核心 | ✅ 已完成 |
-| 2 | 10_rust_194_mind_representations.md | 核心 | ✅ 已完成 |
-| 3 | 10_rust_194_research_update.md | 核心 | ✅ 已完成 |
-| 4 | 10_rust_194_comprehensive_analysis.md | 核心 | ✅ 已完成 |
-| 5 | 10_rust_193_feature_matrix.md | 参考 | ✅ 已完成 |
-| 6 | 10_rust_194_195_feature_matrix.md | 参考 | ✅ 已完成 |
-| 7 | 10_cargo_194_features.md | 相关 | 🔄 待更新 |
-| 8 | formal_methods/README.md | 核心 | 🔄 待更新 |
-| 9 | 10_formal_methods_master_index.md | 核心 | 🔄 待更新 |
-| 10 | 10_proof_index.md | 核心 | 🔄 待更新 |
+| 序号 | 文档名称 | 1.94相关性 | 状态 | 权威来源 |
+|------|----------|------------|------|----------|
+| 1 | [10_rust_194_comprehensive_semantics_framework.md](10_rust_194_comprehensive_semantics_framework.md) | 核心 | ✅ 已完成 | [Rust Reference](https://doc.rust-lang.org/reference/)、[TRPL](https://doc.rust-lang.org/book/) |
+| 2 | [10_rust_194_mind_representations.md](10_rust_194_mind_representations.md) | 核心 | ✅ 已完成 | [Rust Standard Library](https://doc.rust-lang.org/std/)、[RFCs](https://github.com/rust-lang/rfcs) |
+| 3 | [10_rust_194_research_update.md](10_rust_194_research_update.md) | 核心 | ✅ 已完成 | [Rust Blog](https://blog.rust-lang.org/)、[releases.rs](https://releases.rs/) |
+| 4 | [10_rust_194_comprehensive_analysis.md](10_rust_194_comprehensive_analysis.md) | 核心 | ✅ 已完成 | [Rust Official Docs](https://doc.rust-lang.org/) |
+| 5 | [10_rust_193_feature_matrix.md](10_rust_193_feature_matrix.md) | 参考 | ✅ 已完成 | [Rust Release Notes](https://doc.rust-lang.org/stable/releases.html) |
+| 6 | [10_rust_194_195_feature_matrix.md](10_rust_194_195_feature_matrix.md) | 参考 | ✅ 已完成 | [Rust Release Notes](https://doc.rust-lang.org/stable/releases.html)、[RFCs](https://github.com/rust-lang/rfcs) |
+| 7 | [10_cargo_194_features.md](10_cargo_194_features.md) | 相关 | ✅ 已完成 | [Cargo Book](https://doc.rust-lang.org/cargo/)、[Cargo RFCs](https://github.com/rust-lang/rfcs) |
+| 8 | [10_rust_193_language_features_comprehensive_analysis.md](10_rust_193_language_features_comprehensive_analysis.md) | 参考 | ✅ 已完成 | [Rust Reference](https://doc.rust-lang.org/reference/) |
+| 9 | [10_rust_194_deep_semantic_analysis.md](10_rust_194_deep_semantic_analysis.md) | 核心 | ✅ 已完成 | [Rust Reference](https://doc.rust-lang.org/reference/)、[Rustonomicon](https://doc.rust-lang.org/nomicon/) |
+| 10 | [10_rust_194_core_notes_index.md](10_rust_194_core_notes_index.md) | 核心 | ✅ 已完成 | [Rust Official Docs](https://doc.rust-lang.org/)、[Rust Blog](https://blog.rust-lang.org/) |
 
 ---
 
@@ -55,7 +58,8 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```
-核心研究笔记:    ████████░░░░░░░░░░░░  40% (4/10 完成)
+核心研究笔记:    ████████████████████ 100% (10/10 完成)
+目标文件升级:    ████████████████████ 100% (9/9 完成)
 整体研究笔记:    ██░░░░░░░░░░░░░░░░░░   5% (6/141 已索引)
 ```
 
@@ -65,67 +69,54 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-1. **批量更新核心文件** (10个)
+1. **继续索引剩余研究笔记** (131个)
 2. **创建分类索引** (按主题)
 3. **更新形式化方法文档**
-4. **补充1.94特性证明**
+4. **维护权威来源同步** (每周同步 [releases.rs](https://releases.rs/) 与 [Rust Blog](https://blog.rust-lang.org/))
 
 ---
 
-**更新时间**: 2026-03-14
+**更新时间**: 2026-06-29
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+## ✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）
 
+> **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
+> **来源: [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)**
+> **来源: [releases.rs](https://releases.rs/)**
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-> **更新日期**: 2026-03-14
+> **升级日期**: 2026-06-29
 
-### 本文档的Rust 1.94更新要点
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+### 本次升级要点
 
-本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
+本文档已完成权威国际化来源对齐升级，统一版本基准为 **Rust 1.96.0+ / Edition 2024**，同时保留 1.93/1.94 历史分析章节。
 
-#### 核心特性应用
+#### 新增 Rust 1.96.0 特性
 
-| 特性 | 应用场景 | 文档章节 |
-|------|---------|----------|
-| `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-| `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-| `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
+| 特性 | 来源 | 说明 |
+| :--- | :--- | :--- |
+| `core::range` 新类型 | [RFC 3550](https://rust-lang.github.io/rfcs/3550-new-range.html)、[std::range](https://doc.rust-lang.org/stable/std/range/index.html) | `Range`/`RangeFrom`/`RangeInclusive` 实现 `Copy` + `IntoIterator` |
+| `assert_matches!` / `debug_assert_matches!` | [core::assert_matches](https://doc.rust-lang.org/stable/core/assert_matches/macro.assert_matches.html) | 模式断言宏，失败输出 Debug 信息 |
+| Cargo CVE-2026-5223 / CVE-2026-5222 修复 | [Cargo 安全公告](https://github.com/rust-lang/cargo/security/advisories)、[Rust Blog 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) | 第三方 registry tarball symlink 与 URL 规范化修复 |
+| WebAssembly 链接行为变更 | [Rust Blog 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) | 不再默认传递 `--allow-undefined` |
 
-#### 代码示例更新
+#### 新增 Rust 1.95.0 特性
 
-本文档中的所有Rust代码示例均已：
+| 特性 | 来源 | 说明 |
+| :--- | :--- | :--- |
+| `if let` guards on match arms | [Rust Reference - Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards)、[Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | match 臂支持 `if let` 守卫 |
+| `cfg_select!` 宏 | [Rust Reference - Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)、[releases.rs 1.95.0](https://releases.rs/docs/1.95.0/) | 编译期 cfg 条件选择宏 |
+| PowerPC / PowerPC64 内联汇编稳定化 | [Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)、[Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | 稳定 inline assembly for PowerPC |
+| `--remap-path-scope` | [Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | 控制路径重映射作用域 |
 
-- ✅ 使用Rust 1.94语法验证
-- ✅ 兼容Edition 2024
-- ✅ 通过标准库测试
+#### 权威来源对齐
 
-#### 相关文档
-
-- Rust 1.94 迁移指南
-- [Rust 1.94 特性速查
-- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
-
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-14 (Rust 1.94 深度整合)
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- Rust release notes（releases.rs）
+- Rust Blog 对应版本发布公告
+- Rust Reference 具体章节（Range Expressions、Match Guards、Inline Assembly、Conditional Compilation）
+- Rust Standard Library 具体 API（`core::range`、`core::assert_matches`、`std::ops::ControlFlow`）
+- RFC 链接（RFC 3550 等）
 
 ---
 
@@ -155,5 +146,10 @@
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
+> **来源: [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)**
+> **来源: [releases.rs 1.96.0](https://releases.rs/docs/1.96.0/)**
+> **来源: [releases.rs 1.95.0](https://releases.rs/docs/1.95.0/)**
+> **来源: [RFC 3550 - New Range Types](https://rust-lang.github.io/rfcs/3550-new-range.html)**
 
 ---

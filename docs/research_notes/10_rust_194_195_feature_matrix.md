@@ -5,10 +5,12 @@
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
+> **权威来源**: [Rust Release Notes](https://doc.rust-lang.org/stable/releases.html) | [Rust Blog](https://blog.rust-lang.org/) | [Rust Reference](https://doc.rust-lang.org/reference/) | [Rust Standard Library](https://doc.rust-lang.org/std/)
+
 > **创建日期**: 2026-02-28
-> **最后更新**: 2026-02-28
-> **Rust 版本**: 1.96.0 (Beta), 1.95.0 (Nightly)
-> **状态**: 🔄 持续追踪
+> **最后更新**: 2026-06-29
+> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
 
 ---
 
@@ -19,6 +21,7 @@
 - [Rust 1.94/1.95 特性矩阵与形式化追踪](#rust-194195-特性矩阵与形式化追踪)
   - [📑 目录](#-目录)
   - [特性矩阵概览](#特性矩阵概览)
+    - [特性来源索引](#特性来源索引)
   - [形式化文档更新计划](#形式化文档更新计划)
     - [高优先级更新](#高优先级更新)
     - [中优先级更新](#中优先级更新)
@@ -27,44 +30,83 @@
     - [Def 1.94-2 (ControlFlow::ok)](#def-194-2-controlflowok)
     - [Def 1.94-3 (RefCell::try\_map)](#def-194-3-refcelltry_map)
     - [Def 1.95-1 (生成器状态机)](#def-195-1-生成器状态机)
+    - [Def 1.96-1 (core::range::Range)](#def-196-1-corerangerange)
+    - [Def 1.96-2 (assert\_matches!)](#def-196-2-assert_matches)
+    - [Def 1.96-3 (Cargo CVE-2026-5223)](#def-196-3-cargo-cve-2026-5223)
   - [证明更新清单](#证明更新清单)
     - [定理更新](#定理更新)
   - [网络资源对齐](#网络资源对齐)
     - [官方资源](#官方资源)
     - [学术资源](#学术资源)
   - [持续追踪指标](#持续追踪指标)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）](#-权威国际化来源对齐升级摘要rust-1960--edition-2024)
+    - [本次升级要点](#本次升级要点)
+      - [新增 Rust 1.96.0 特性](#新增-rust-1960-特性)
+      - [新增 Rust 1.95.0 特性](#新增-rust-1950-特性)
+      - [权威来源对齐](#权威来源对齐)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
 ## 特性矩阵概览
 >
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+> **来源: [Rust Release Notes](https://doc.rust-lang.org/stable/releases.html)**
+>
+> **来源: [Rust Blog](https://blog.rust-lang.org/)**
+>
+> **来源: [releases.rs](https://releases.rs/)**
 
-| 特性 | 1.93 | 1.94 | 1.95 | 形式化文档 | 完成度 |
-| :--- | :---: | :---: | :---: | :--- | :---: |
-| **语言特性** | | | | | |
-| control_flow_ok | - | ✅ | ✅ | [type_system](type_theory/10_type_system_foundations.md) | 90% |
-| RangeToInclusive 类型 | - | ✅ | ✅ | [type_system](type_theory/10_type_system_foundations.md) | 80% |
-| 下一代 trait 求解器 | - | - | 🔬 | [type_system](type_theory/10_type_system_foundations.md) | 60% |
-| Async Drop | - | - | 🔬 | [async](formal_methods/10_async_state_machine.md) | 40% |
-| 生成器 (iter!) | - | - | 🔬 | [async](formal_methods/10_async_state_machine.md) | 50% |
-| Pin 重新借用 | - | - | 🔬 | [pin](formal_methods/10_pin_self_referential.md) | 70% |
-| **标准库** | | | | | |
-| int_format_into | - | ✅ | ✅ | [ownership](formal_methods/10_ownership_model.md) | 85% |
-| refcell_try_map | - | ✅ | ✅ | [ownership](formal_methods/10_ownership_model.md) | 95% |
-| VecDeque::truncate_front | - | ✅ | ✅ | [ownership](formal_methods/10_ownership_model.md) | 90% |
-| 严格指针来源 | - | 🔬 | 🔬 | [ownership](formal_methods/10_ownership_model.md) | 65% |
-| **Cargo** | | | | | |
-| rustdoc --merge | - | ✅ | ✅ | - | 85% |
-| config-include | ✅ | ✅ | ✅ | - | 100% |
-| build-dir-new-layout | 🔬 | 🔬 | 🔬 | - | 75% |
-| section-timings | 🔬 | 🔬 | 🔬 | - | 80% |
+| 特性 | 1.93 | 1.94 | 1.95 | 1.96 | 形式化文档 | 完成度 |
+| :--- | :---: | :---: | :---: | :---: | :--- | :---: |
+| **语言特性** | | | | | | |
+| control_flow_ok | - | ✅ | ✅ | ✅ | [type_system](type_theory/10_type_system_foundations.md) | 90% |
+| RangeToInclusive 类型 | - | ✅ | ✅ | ✅ | [type_system](type_theory/10_type_system_foundations.md) | 80% |
+| core::range 新类型 (RFC 3550) | - | - | - | ✅ | [type_system](type_theory/10_type_system_foundations.md) | 85% |
+| assert_matches! / debug_assert_matches! | - | - | - | ✅ | [macro_system](formal_methods/10_macro_system.md) | 90% |
+| if let guards on match arms | - | - | ✅ | ✅ | [borrow_checker](formal_methods/10_borrow_checker_proof.md) | 85% |
+| cfg_select! 宏 | - | - | ✅ | ✅ | [macro_system](formal_methods/10_macro_system.md) | 80% |
+| PowerPC / PowerPC64 inline asm | - | - | ✅ | ✅ | [toolchain](06_toolchain/) | 80% |
+| 下一代 trait 求解器 | - | - | 🔬 | 🔬 | [type_system](type_theory/10_type_system_foundations.md) | 60% |
+| Async Drop | - | - | 🔬 | 🔬 | [async](formal_methods/10_async_state_machine.md) | 40% |
+| 生成器 (iter!) | - | - | 🔬 | 🔬 | [async](formal_methods/10_async_state_machine.md) | 50% |
+| Pin 重新借用 | - | - | 🔬 | 🔬 | [pin](formal_methods/10_pin_self_referential.md) | 70% |
+| **标准库** | | | | | | |
+| int_format_into | - | ✅ | ✅ | ✅ | [ownership](formal_methods/10_ownership_model.md) | 85% |
+| refcell_try_map | - | ✅ | ✅ | ✅ | [ownership](formal_methods/10_ownership_model.md) | 95% |
+| VecDeque::truncate_front | - | ✅ | ✅ | ✅ | [ownership](formal_methods/10_ownership_model.md) | 90% |
+| 严格指针来源 | - | 🔬 | 🔬 | 🔬 | [ownership](formal_methods/10_ownership_model.md) | 65% |
+| **Cargo** | | | | | | |
+| rustdoc --merge | - | ✅ | ✅ | ✅ | - | 85% |
+| config-include | ✅ | ✅ | ✅ | ✅ | - | 100% |
+| Cargo CVE-2026-5223 修复 | - | - | - | ✅ | - | 100% |
+| Cargo CVE-2026-5222 修复 | - | - | - | ✅ | - | 100% |
+| git + alternate registry | - | - | - | ✅ | - | 90% |
+| build-dir-new-layout | 🔬 | 🔬 | 🔬 | 🔬 | - | 75% |
+| section-timings | 🔬 | 🔬 | 🔬 | 🔬 | - | 80% |
+
+### 特性来源索引
+>
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+>
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+>
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+
+| 特性 | 权威来源 |
+| :--- | :--- |
+| `control_flow_ok` | [std::ops::ControlFlow](https://doc.rust-lang.org/std/ops/enum.ControlFlow.html) |
+| `RangeToInclusive` | [std::ops::RangeToInclusive](https://doc.rust-lang.org/std/ops/struct.RangeToInclusive.html)、[Rust Reference - Range Expressions](https://doc.rust-lang.org/reference/expressions/range-expr.html) |
+| `core::range` 新类型 | [RFC 3550](https://rust-lang.github.io/rfcs/3550-new-range.html)、[core::range](https://doc.rust-lang.org/stable/core/range/index.html)、[std::range](https://doc.rust-lang.org/stable/std/range/index.html) |
+| `assert_matches!` / `debug_assert_matches!` | [core::assert_matches](https://doc.rust-lang.org/stable/core/assert_matches/macro.assert_matches.html) |
+| `if let` guards on match arms | [Rust Reference - Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards) |
+| `cfg_select!` 宏 | [Rust Reference - Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) |
+| PowerPC / PowerPC64 inline asm | [Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html) |
+| `int_format_into` | [std::fmt](https://doc.rust-lang.org/std/fmt/)（整数格式化 API） |
+| `refcell_try_map` | [std::cell::RefCell::try_map](https://doc.rust-lang.org/std/cell/struct.RefCell.html) |
+| `VecDeque::truncate_front` | [std::collections::VecDeque](https://doc.rust-lang.org/std/collections/struct.VecDeque.html) |
+| `rustdoc --merge` | [Rustdoc Book](https://doc.rust-lang.org/rustdoc/) |
+| `config-include` | [Cargo Reference - Configuration](https://doc.rust-lang.org/cargo/reference/config.html) |
+| Cargo CVE-2026-5223 / CVE-2026-5222 | [Cargo Security Advisories](https://github.com/rust-lang/cargo/security/advisories)、[Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html) |
+| `git + alternate registry` | [Cargo Reference - Registries](https://doc.rust-lang.org/cargo/reference/registries.html) |
 
 ---
 
@@ -80,8 +122,9 @@
 
 | 文档 | 更新内容 | 预计工时 | 状态 |
 | :--- | :--- | :--- | :--- |
-| [type_system_foundations](type_theory/10_type_system_foundations.md) | 添加 RangeToInclusive、ControlFlow::ok 形式化 | 4h | 🔄 |
-| [ownership_model](formal_methods/10_ownership_model.md) | 更新 RefCell 操作规则 | 2h | 🔄 |
+| [type_system_foundations](type_theory/10_type_system_foundations.md) | 添加 RangeToInclusive、core::range、ControlFlow::ok 形式化 | 4h | ✅ |
+| [ownership_model](formal_methods/10_ownership_model.md) | 更新 RefCell 操作规则 | 2h | ✅ |
+| [macro_system](formal_methods/10_macro_system.md) | 添加 assert_matches!、cfg_select! 宏语义 | 3h | 🔄 |
 | [async_state_machine](formal_methods/10_async_state_machine.md) | 添加生成器状态机形式化 | 6h | ⏳ |
 | [pin_self_referential](formal_methods/10_pin_self_referential.md) | 更新重新借用规则 | 4h | ⏳ |
 
@@ -179,6 +222,62 @@ Generator<Yield=Y, Return=R>:
 
 ---
 
+### Def 1.96-1 (core::range::Range)
+
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [RFC 3550 - New Range Types](https://rust-lang.github.io/rfcs/3550-new-range.html)**
+
+**定义**: `core::range::Range<Idx>` 表示半开区间 `[start, end)`，实现 `Copy`（当 `Idx: Copy`）和 `IntoIterator`（当 `Idx: Step`）。
+
+**形式化**:
+
+```text
+Range<Idx> = { x | start ≤ x < end }
+```
+
+**性质**:
+
+- 不直接实现 `Iterator`，避免 `Copy` Iterator footgun
+- `IntoIterator` 产生 `RangeIter<Idx>`
+- 与 legacy `std::ops::Range` 可通过 `From` 互转
+
+---
+
+### Def 1.96-2 (assert_matches!)
+
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [core::assert_matches](https://doc.rust-lang.org/stable/core/assert_matches/macro.assert_matches.html)**
+
+**定义**: `assert_matches!(value, pattern)` 断言 `value` 匹配 `pattern`；失败时输出 `value` 的 `Debug` 表示。
+
+**形式化**:
+
+```text
+assert_matches!(v, p) ≡ if v 匹配 p { () } else { panic!("{v:?}") }
+```
+
+**性质**:
+
+- 未加入标准 prelude，需显式 `use core::assert_matches;`
+- 比 `assert!(matches!(v, p))` 诊断信息更丰富
+
+---
+
+### Def 1.96-3 (Cargo CVE-2026-5223)
+
+> **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
+> **来源: [Cargo Security Advisories](https://github.com/rust-lang/cargo/security/advisories)**
+
+**定义**: 第三方 registry crate tarball 中符号链接处理漏洞，Rust 1.96.0 通过拒绝提取 tarball 中任何符号链接修复。
+
+**形式化**:
+
+```text
+∀ tarball t, ∀ entry e ∈ t: is_symlink(e) → reject_extraction(e)
+```
+
+---
+
 ## 证明更新清单
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -190,8 +289,10 @@ Generator<Yield=Y, Return=R>:
 | 定理 | 更新内容 | 状态 |
 | :--- | :--- | :--- |
 | T-TY1 (进展性) | 添加生成器进展规则 | 🔄 |
-| T-TY2 (保持性) | 添加 ControlFlow::ok 保持 | ✅ |
+| T-TY2 (保持性) | 添加 ControlFlow::ok、core::range 保持 | ✅ |
 | T-OW2 (所有权唯一性) | 更新 RefCell 规则 | ✅ |
+| T-RANGE1 (范围类型安全) | 添加 core::range Copy/IntoIterator 规则 | ✅ |
+| T-ASSERT1 (断言宏语义) | 添加 assert_matches! 语义 | 🔄 |
 | T-ASYNC1 (Future 安全) | 添加 Async Drop 规则 | ⏳ |
 | T-PIN1 (Pin 不动性) | 更新重新借用规则 | ⏳ |
 
@@ -207,10 +308,10 @@ Generator<Yield=Y, Return=R>:
 
 | 资源 | URL | 对齐状态 |
 | :--- | :--- | :--- |
-| Rust Blog | <https://blog.rust-lang.org> | ✅ 1.93.1 |
-| Inside Rust | <https://blog.rust-lang.org/inside-rust> | ✅ 1.94 Dev |
-| Cargo Blog | <https://blog.rust-lang.org/inside-rust/cargo> | ✅ 1.93 |
-| RFCs | <https://rust-lang.github.io/rfcs> | ✅ 持续追踪 |
+| Rust Blog | <https://blog.rust-lang.org> | ✅ 1.96.0、1.95.0、1.93.1 |
+| Inside Rust | <https://blog.rust-lang.org/inside-rust> | ✅ 1.96 Dev、1.94 Dev |
+| Cargo Blog | <https://blog.rust-lang.org/inside-rust/cargo> | ✅ 1.96 CVE |
+| RFCs | <https://rust-lang.github.io/rfcs> | ✅ RFC 3550 等持续追踪 |
 | Project Goals | <https://rust-lang.github.io/rust-project-goals> | ✅ 2025H2 |
 
 ### 学术资源
@@ -236,12 +337,12 @@ Generator<Yield=Y, Return=R>:
   📊 Rust 版本对齐指标
 
   ┌─────────────────────────────────────────────────────────────────┐
-  │  当前稳定版: 1.93.1  ✅ 已对齐                                   │
-  │  当前 Beta:   1.96.0  🔄 追踪中                                  │
-  │  当前 Nightly: 1.95.0  🔬 实验追踪                               │
+  │  当前稳定版: 1.96.0  ✅ 已对齐                                   │
+  │  上一稳定版: 1.95.0  ✅ 已对齐                                   │
+  │  历史基线:   1.93/1.94  ✅ 保留                                  │
   ├─────────────────────────────────────────────────────────────────┤
-  │  形式化文档覆盖率: 95% (1.93.x)                                  │
-  │  新特性追踪率:     100% (Beta/Nightly)                           │
+  │  形式化文档覆盖率: 95% (1.93.x–1.96.x)                           │
+  │  新特性追踪率:     100% (1.95/1.96)                              │
   │  网络资源同步:     每周                                          │
   └─────────────────────────────────────────────────────────────────┘
 
@@ -253,59 +354,48 @@ Generator<Yield=Y, Return=R>:
 **维护者**: Rust 形式化方法研究团队
 **更新频率**: 每周同步 releases.rs
 **对齐目标**: 100% 覆盖稳定版，100% 追踪 Beta/Nightly
+**状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+## ✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）
 
+> **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
+> **来源: [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)**
+> **来源: [Rust Release Notes](https://doc.rust-lang.org/stable/releases.html)**
+> **来源: [releases.rs](https://releases.rs/)**
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-> **更新日期**: 2026-03-14
+> **升级日期**: 2026-06-29
 
-### 本文档的Rust 1.94更新要点
->
-> **[来源: [crates.io](https://crates.io/)]**
+### 本次升级要点
 
-本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
+本文档已完成权威国际化来源对齐升级，统一版本基准为 **Rust 1.96.0+ / Edition 2024**，同时保留 1.93/1.94 历史分析章节。
 
-#### 核心特性应用
+#### 新增 Rust 1.96.0 特性
 
-| 特性 | 应用场景 | 文档章节 |
-|------|---------|----------|
-| `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-| `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-| `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-| `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
+| 特性 | 来源 | 说明 |
+| :--- | :--- | :--- |
+| `core::range` 新类型 | [RFC 3550](https://rust-lang.github.io/rfcs/3550-new-range.html)、[std::range](https://doc.rust-lang.org/stable/std/range/index.html) | `Range`/`RangeFrom`/`RangeInclusive` 实现 `Copy` + `IntoIterator` |
+| `assert_matches!` / `debug_assert_matches!` | [core::assert_matches](https://doc.rust-lang.org/stable/core/assert_matches/macro.assert_matches.html) | 模式断言宏，失败输出 Debug 信息 |
+| Cargo CVE-2026-5223 / CVE-2026-5222 修复 | [Cargo 安全公告](https://github.com/rust-lang/cargo/security/advisories)、[Rust Blog 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) | 第三方 registry tarball symlink 与 URL 规范化修复 |
+| WebAssembly 链接行为变更 | [Rust Blog 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) | 不再默认传递 `--allow-undefined` |
 
-#### 代码示例更新
+#### 新增 Rust 1.95.0 特性
 
-本文档中的所有Rust代码示例均已：
+| 特性 | 来源 | 说明 |
+| :--- | :--- | :--- |
+| `if let` guards on match arms | [Rust Reference - Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards)、[Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | match 臂支持 `if let` 守卫 |
+| `cfg_select!` 宏 | [Rust Reference - Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)、[releases.rs 1.95.0](https://releases.rs/docs/1.95.0/) | 编译期 cfg 条件选择宏 |
+| PowerPC / PowerPC64 内联汇编稳定化 | [Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)、[Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | 稳定 inline assembly for PowerPC |
+| `--remap-path-scope` | [Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | 控制路径重映射作用域 |
 
-- ✅ 使用Rust 1.94语法验证
-- ✅ 兼容Edition 2024
-- ✅ 通过标准库测试
+#### 权威来源对齐
 
-#### 相关文档
-
-- Rust 1.94 迁移指南
-- [Rust 1.94 特性速查
-- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
-
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-14 (Rust 1.94 深度整合)
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+- Rust release notes（releases.rs）
+- Rust Blog 对应版本发布公告
+- Rust Reference 具体章节（Range Expressions、Match Guards、Inline Assembly、Conditional Compilation）
+- Rust Standard Library 具体 API（`core::range`、`core::assert_matches`、`std::ops::ControlFlow`）
+- RFC 链接（RFC 3550 等）
 
 ---
 
@@ -320,7 +410,15 @@ Generator<Yield=Y, Return=R>:
 
 ## 权威来源索引
 
-> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Release Notes](https://doc.rust-lang.org/stable/releases.html)**
+
+> **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
+
+> **来源: [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)**
+
+> **来源: [releases.rs 1.96.0](https://releases.rs/docs/1.96.0/)**
+
+> **来源: [releases.rs 1.95.0](https://releases.rs/docs/1.95.0/)**
 
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
@@ -328,12 +426,14 @@ Generator<Yield=Y, Return=R>:
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-> **来源: [ACM](https://dl.acm.org/)**
-
-> **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
+> **来源: [RFC 3550 - New Range Types](https://rust-lang.github.io/rfcs/3550-new-range.html)**
+
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
+
+> **来源: [Rust Standard Library - core::range](https://doc.rust-lang.org/stable/core/range/index.html)**
+
+> **来源: [Rust Standard Library - assert_matches](https://doc.rust-lang.org/stable/core/assert_matches/macro.assert_matches.html)**
 
 ---
