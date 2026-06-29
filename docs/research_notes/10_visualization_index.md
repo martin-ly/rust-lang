@@ -1,14 +1,23 @@
 # 可视化文档索引
 
+> **概念族**: 思维表征 / 可视化
+
 > **内容分级**: [归档级]
+
 >
+
 > **分级**: [B]
+
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
+
 >
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
 >
+
 - [可视化文档索引](#可视化文档索引)
   - [📑 目录](#-目录)
   - [🎯 概述 {#-概述}](#-概述--概述)
@@ -40,19 +49,23 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2025-12-25
+
 > **最后更新**: 2026-02-28
+
 > **Rust 版本**: 1.96.0+ (Edition 2024)
+
 > **状态**: ✅ 已完成
 
 ---
 
 ## 🎯 概述 {#-概述}
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档索引了所有使用多种思维表征方式（思维导图、概念对比矩阵、决策树等）创建的可视化文档。
@@ -60,20 +73,27 @@
 **可视化类型**：
 
 - 🧠 **思维导图**：展示任务关系、概念关系
+
 - 📊 **对比矩阵**：对比不同概念、策略、工具
+
 - 🌳 **决策树**：决策流程和优先级判断
+
 - 📈 **进度图表**：任务完成度和进度跟踪
 
 ---
 
 ## 🧠 思维导图 {#-思维导图}
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 任务关系网络图
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文档**: TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md（已归档）
@@ -81,8 +101,11 @@
 **内容**：
 
 - 高优先级任务关系
+
 - 中优先级任务关系
+
 - 低优先级任务关系
+
 - 工具与验证依赖关系
 
 **格式**: Mermaid 流程图
@@ -90,19 +113,25 @@
 **用途**：
 
 - 理解任务之间的依赖关系
+
 - 识别可以并行执行的任务
+
 - 规划任务执行顺序
 
 ---
 
 ## 📊 概念对比矩阵 {#-概念对比矩阵}
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 任务类型对比矩阵
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文档**: TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md（已归档）
@@ -110,18 +139,23 @@
 **对比维度**：
 
 - 形式化方法研究 vs 类型理论研究 vs 实验研究 vs 综合研究
+
 - 复杂度、时间投入、工具需求、完成度、优先级、阻塞风险、并行度
 
 **用途**：
 
 - 理解不同任务类型的特征
+
 - 选择合适的执行策略
+
 - 资源分配决策
 
 ### 2. 任务完成策略对比矩阵
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文档**: TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md（已归档）
@@ -129,18 +163,23 @@
 **对比策略**：
 
 - 顺序推进 vs 并行推进 vs 迭代推进 vs 批量推进
+
 - 适用任务类型、优势、劣势、推荐度
 
 **用途**：
 
 - 选择最佳执行策略
+
 - 优化任务执行效率
+
 - 平衡质量和速度
 
 ### 3. 工具选择对比矩阵
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文档**: TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md（已归档）
@@ -148,24 +187,31 @@
 **对比工具**：
 
 - Coq vs Isabelle vs Criterion.rs vs Valgrind vs Mermaid
+
 - 适用场景、学习曲线、验证能力、推荐度
 
 **用途**：
 
 - 选择合适的工具
+
 - 评估工具成本
+
 - 工具组合优化
 
 ---
 
 ## 🌳 决策树 {#-决策树}
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 任务优先级决策树
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **文档**: TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md（已归档）
@@ -173,28 +219,43 @@
 **决策流程**：
 
 ```text
+
 开始任务选择
+
 ├─ 是否高优先级任务未完成？
+
 │  ├─ 是 → 选择高优先级任务
+
 │  │   ├─ 是否有形式化工具验证需求？
+
 │  │   └─ 是否有依赖关系？
+
 │  └─ 否 → 继续判断
+
 ├─ 是否中优先级任务可并行？
+
 │  └─ ...
+
 └─ 是否低优先级任务？
+
    └─ ...
+
 ```
 
 **用途**：
 
 - 快速决策任务优先级
+
 - 理解任务选择逻辑
+
 - 自动化任务调度
 
 ---
 
 ## 📈 进度可视化 {#-进度可视化}
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 周进度跟踪表
@@ -206,7 +267,9 @@
 **内容**：
 
 - 每周完成度统计
+
 - 关键里程碑标记
+
 - 进度趋势分析
 
 ### 2. 任务完成度热力图
@@ -218,20 +281,31 @@
 **可视化**：
 
 ```text
+
 高优先级任务:
+
 [████████████████░░] 87.5% → [████████████████████] 100%
 
+
+
 中优先级任务:
+
 [███░░░░░░░░░░░░░░░] 16.7% → [████████████████░░░░] 80%
 
+
+
 低优先级任务:
+
 [░░░░░░░░░░░░░░░░░░] 0% → [██████████████░░░░░░] 85%
+
 ```
 
 ---
 
 ## 🔗 相关文档 {#-相关文档}
+
 >
+
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 核心文档
@@ -239,7 +313,9 @@
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - 任务编排与执行计划 - 包含所有可视化内容
+
 - [任务清单](10_task_checklist.md) - 详细任务列表
+
 - [进度跟踪](10_progress_tracking.md) - 详细进度跟踪
 
 ### 工具资源
@@ -247,13 +323,17 @@
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - [Mermaid 文档](https://mermaid.js.org/) - 图表绘制工具
+
 - [Graphviz 文档](https://graphviz.org/) - 图形可视化工具
+
 - [PlantUML 文档](https://plantuml.com/) - UML 图表工具
 
 ---
 
 ## 💻 可视化代码示例
+
 >
+
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 示例 1: Mermaid 思维导图代码
@@ -261,156 +341,267 @@
 > **来源: [ACM](https://dl.acm.org/)**
 
 ```mermaid
+
 graph TB
+
     subgraph "理论基础"
+
         A1["所有权规则 1-3"]
+
         A2["借用规则 5-8"]
+
         A3["生命周期规则"]
+
     end
+
+
 
     subgraph "核心定理"
+
         T1["T-OW2 所有权唯一性"]
+
         T2["T-BR1 数据竞争自由"]
+
         T3["T-TY3 类型安全"]
+
     end
+
+
 
     subgraph "应用保证"
+
         G1["内存安全"]
+
         G2["并发安全"]
+
         G3["类型安全"]
+
     end
 
+
+
     A1 --> T1
+
     A2 --> T2
+
     A3 --> T2
 
+
+
     T1 --> G1
+
     T2 --> G2
+
     T3 --> G3
 
+
+
     style A1 fill:#f9f
+
     style T1 fill:#bbf
+
     style G1 fill:#bfb
+
 ```
 
 ### 示例 2: 概念对比矩阵代码
+
 >
+
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```markdown
+
 | 特性 | 形式化方法 | 实验验证 | 工具支持 |
+
 | :--- | :--- | :--- | :--- |
+
 | 所有权 | Coq/Isabelle | Miri | rustc |
+
 | 借用 | Coq/Isabelle | 并发测试 | clippy |
+
 | 类型 | Coq/Isabelle | 基准测试 | rust-analyzer |
+
 ```
 
 ### 示例 3: 决策树代码
+
 >
+
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
+
 开始研究选择
+
 │
+
 ├─ 选择研究类型
+
 │  ├─ 理论研究 → 形式化方法
+
 │  │   ├─ 使用 Coq → 构造主义逻辑
+
 │  │   └─ 使用 Isabelle → 高阶逻辑
+
 │  └─ 实验研究 → 性能分析
+
 │      ├─ 微基准 → Criterion.rs
+
 │      └─ 宏基准 → 实际应用测试
+
 │
+
 └─ 验证方法
+
    ├─ 形式化证明 → 定理证明器
+
    └─ 经验验证 → 测试套件
+
 ```
 
 ### 示例 4: Rust 可视化代码
+
 >
+
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
+
 // 研究场景：性能数据可视化
+
 use std::collections::HashMap;
 
+
+
 fn visualize_performance_data(data: &[(String, f64)]) {
+
     let max_val = data.iter()
+
         .map(|(_, v)| *v)
+
         .fold(0.0, f64::max);
 
+
+
     for (name, value) in data {
+
         let bar_length = ((value / max_val) * 50.0) as usize;
+
         let bar = "█".repeat(bar_length);
+
         println!("{:20} |{} {:.2}", name, bar, value);
+
     }
+
 }
+
+
 
 fn main() {
+
     let perf_data = vec![
+
         ("Vec::push".to_string(), 15.2),
+
         ("VecDeque::push".to_string(), 12.8),
+
         ("LinkedList::push".to_string(), 45.5),
+
         ("HashMap::insert".to_string(), 28.3),
+
     ];
 
+
+
     visualize_performance_data(&perf_data);
+
 }
+
 ```
 
 ---
 
 ## 🔗 形式化链接
+
 >
+
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 可视化文档索引
+
 >
+
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 可视化类型 | 文档 | 内容 |
+
 | :--- | :--- | :--- |
+
 | 思维导图 | [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) | 知识结构化思维导图 |
+
 | 概念矩阵 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/04_multi_dimensional_concept_matrix.md) | 多维概念对比矩阵 |
+
 | 决策树 | [DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md) | 决策图网络 |
+
 | 证明树 | [PROOF_INDEX](10_proof_index.md) | 证明树结构 |
 
 ### 研究笔记链接
+
 >
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 类别 | 文档 | 可视化内容 |
+
 | :--- | :--- | :--- |
+
 | 形式化方法 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) | 所有权状态图 |
+
 | 类型理论 | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) | 类型推导树 |
+
 | 实验研究 | [experiments/10_performance_benchmarks.md](experiments/10_performance_benchmarks.md) | 性能图表 |
 
 ### 形式化定理链接
+
 >
+
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 定理 | 可视化表示 | 代码示例位置 |
+
 | :--- | :--- | :--- |
+
 | T-OW2 | 所有权状态转换图 | [10_coq_isabelle_proof_scaffolding.md](10_coq_isabelle_proof_scaffolding.md) |
+
 | T-BR1 | 借用生命周期图 | [10_coq_isabelle_proof_scaffolding.md](10_coq_isabelle_proof_scaffolding.md) |
+
 | T-TY3 | 类型推导树 | [10_coq_isabelle_proof_scaffolding.md](10_coq_isabelle_proof_scaffolding.md) |
 
 ---
 
 **维护者**: Rust Research Visualization Team
+
 **最后更新**: 2026-02-20
+
 **状态**: ✅ **已完成**
 
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+
 >
+
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
+
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
 >
+
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -418,10 +609,15 @@ fn main() {
 #### 核心特性应用
 
 | 特性 | 应用场景 | 文档章节 |
+
 |------|---------|----------|
+
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
+
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
+
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新
@@ -429,37 +625,51 @@ fn main() {
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
+
 - ✅ 兼容Edition 2024
+
 - ✅ 通过标准库测试
 
 #### 相关文档
 
 - Rust 1.94 迁移指南
+
 - [Rust 1.94 特性速查
+
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
+
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+
 >
+
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
+
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
 **最后更新**: 2026-05-19
+
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---
 
 ## 相关概念
+
 >
+
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [research_notes 目录](README.md)
+
 - [上级目录](../README.md)
 
 ---

@@ -1,0 +1,217 @@
+# 类型系统反例边界
+
+> **内容分级**: [核心级]
+> **层级**: L6 (反例边界)
+> **Bloom 层级**: L5-L6 (分析/评价)
+> **概念族**: 类型系统 / Trait / 反例边界
+> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **状态**: ✅ 已完成
+> **创建日期**: 2026-06-29
+> **最后更新**: 2026-06-29
+
+---
+
+## 目录
+
+- [类型系统反例边界](#类型系统反例边界)
+  - [目录](#目录)
+  - [1. 型变误用：数组与 Vec 的协变差异](#1-型变误用数组与-vec-的协变差异)
+  - [2. 生命周期子类型误判](#2-生命周期子类型误判)
+  - [3. `dyn Trait` 对象大小不固定](#3-dyn-trait-对象大小不固定)
+  - [4. `impl Trait` 返回类型泄露限制](#4-impl-trait-返回类型泄露限制)
+  - [5. Orphan 规则冲突](#5-orphan-规则冲突)
+  - [6. 关联类型歧义](#6-关联类型歧义)
+  - [7. Copy / Drop 互斥](#7-copy--drop-互斥)
+  - [总结](#总结)
+
+---
+
+## 1. 型变误用：数组与 Vec 的协变差异
+
+### 现象
+```rust
+fn takes_animals(animals: &[&Animal]) { /* ... */ }
+
+let cats: &[&Cat] = &[&Cat];
+takes_animals(cats); // ✅ &[&Cat] 可协变为 &[&Animal]
+```
+
+反例：误以为 `Vec<&Cat>` 可直接传给 `Vec<&Animal>`：
+```rust
+fn takes_animals_vec(animals: Vec<&Animal>) { /* ... */ }
+
+let cats: Vec<&Cat> = vec![&Cat];
+takes_animals_vec(cats); // ❌ Vec<T> 对 T 是协变，但这里生命周期/类型不匹配
+```
+
+### 修复方案
+- 使用 `&[&Cat]` 切片，切片对元素是协变的。
+- 或显式转换：`cats.into_iter().map(|c| c as &Animal).collect()`。
+
+> **相关文档**: [10_variance_theory.md](10_variance_theory.md)
+
+---
+
+## 2. 生命周期子类型误判
+
+### 现象
+```rust
+fn assign<'a, 'b>(x: &'a str, y: &'b str) -> &'b str {
+    x // ❌ 'a 不一定比 'b 长
+}
+```
+
+### 编译器错误
+```text
+error: lifetime may not live long enough
+```
+
+### 修复方案
+```rust
+fn assign<'a, 'b: 'a>(x: &'a str, y: &'b str) -> &'a str {
+    x
+}
+```
+
+或返回 `x` 本身并让生命周期统一。
+
+---
+
+## 3. `dyn Trait` 对象大小不固定
+
+### 现象
+```rust
+fn take_trait(obj: dyn Trait) { /* ... */ }
+```
+
+### 编译器错误
+```text
+error[E0277]: the size for values of type `dyn Trait` cannot be known at compilation time
+```
+
+### 修复方案
+- 使用引用/智能指针：`&dyn Trait`、`Box<dyn Trait>`、`Rc<dyn Trait>`、`Arc<dyn Trait>`。
+- 或改用泛型 `fn take<T: Trait>(obj: T)`。
+
+---
+
+## 4. `impl Trait` 返回类型泄露限制
+
+### 现象
+```rust
+trait Foo {}
+fn make_foo() -> impl Foo { /* ... */ }
+
+fn consumer() {
+    let a = make_foo();
+    let b = make_foo();
+    // 无法判断 a 与 b 是否为同一具体类型
+}
+```
+
+### 边界
+- `impl Trait` 返回类型隐藏具体类型，调用者无法构造相同类型。
+- 不能在不同返回点返回不同类型，即使都实现该 trait。
+
+### 修复方案
+- 需要多态返回时用 `Box<dyn Trait>`。
+- 需要调用者构造同类型时，返回具体类型或泛型。
+
+---
+
+## 5. Orphan 规则冲突
+
+### 现象
+```rust
+// 在下游 crate 中试图为外部类型实现外部 trait
+impl serde::Serialize for std::vec::Vec<u8> {
+    // ...
+}
+```
+
+### 编译器错误
+```text
+error[E0117]: only traits defined in the current crate can be implemented for arbitrary types
+```
+
+### 修复方案
+- 使用 newtype 模式包装外部类型：`struct MyBytes(Vec<u8>)`。
+- 只在当前 crate 定义的类型上实现外部 trait，或为当前 trait 实现外部类型。
+
+---
+
+## 6. 关联类型歧义
+
+### 现象
+```rust
+trait Iterator {
+    type Item;
+    fn next(&mut self) -> Option<Self::Item>;
+}
+
+fn process<I: Iterator>(it: &mut I) -> Option<I::Item> {
+    it.next()
+}
+
+// 同时实现多个 Item 类型不可能，但调用者可能误以为可参数化
+```
+
+### 边界
+- 一个类型对同一个 trait 只能有一种关联类型实现。
+- 与泛型参数不同，关联类型由实现决定，调用方不能指定。
+
+### 修复方案
+- 若需参数化，使用泛型 trait：`trait Container<T>`。
+
+---
+
+## 7. Copy / Drop 互斥
+
+### 现象
+```rust
+#[derive(Copy)]
+struct Resource {
+    handle: *mut c_void,
+}
+
+impl Drop for Resource {
+    fn drop(&mut self) { /* 释放资源 */ }
+}
+```
+
+### 编译器错误
+```text
+error[E0184]: the trait `Copy` may not be implemented for this type; the type implements `Drop`
+```
+
+### 根因
+`Copy` 语义按位复制会产生多个相同资源句柄，与 `Drop` 单次释放语义冲突。
+
+### 修复方案
+- 移除 `Copy`，仅保留 `Clone`（若需深拷贝）。
+- 使用 `Rc`/`Arc` 共享所有权。
+
+---
+
+## 总结
+
+| 反例 | 涉及概念 | 典型错误码 | 修复方向 |
+|------|----------|------------|----------|
+| 型变误用 | 型变、子类型 | E0308 / E0623 | 切片转换、显式收集 |
+| 生命周期子类型误判 | 生命周期、子类型 | lifetime mismatch | 生命周期约束 `'b: 'a` |
+| `dyn Trait` 大小不固定 | trait 对象 | E0277 | `Box<dyn Trait>` / 泛型 |
+| `impl Trait` 类型隐藏 | 抽象返回类型 | — | `Box<dyn Trait>` / 具体类型 |
+| Orphan 规则冲突 | trait 实现规则 | E0117 | newtype 模式 |
+| 关联类型歧义 | 关联类型 | E0221 | 泛型 trait |
+| Copy / Drop 互斥 | 资源语义 | E0184 | 移除 Copy / 使用 Rc/Arc |
+
+> **权威来源**: [Rust Reference – Type System](https://doc.rust-lang.org/reference/type-system.html) | [Rust Reference – Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping-and-variance.html) | [Rust Reference – Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) | [Rust Reference – Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules) | [The Rust Programming Language – Ch 10](https://doc.rust-lang.org/book/ch10-00-generics.html) | [The Rust Programming Language – Ch 17](https://doc.rust-lang.org/book/ch17-00-oop.html) | [Rustonomicon – Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html)
+
+## 相关概念
+
+- [类型系统基础](10_type_system_foundations.md)
+- [Trait 系统形式化](10_trait_system_formalization.md)
+- [型变理论](10_variance_theory.md)
+- [生命周期形式化](10_lifetime_formalization.md)
+- [通用反例汇编](../10_counter_examples_compendium.md)
+- [知识图谱索引](../10_knowledge_graph_index.md)

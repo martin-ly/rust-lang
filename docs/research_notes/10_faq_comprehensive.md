@@ -1,26 +1,45 @@
 # Rust形式化方法 FAQ 汇总
 
+> **概念族**: 方法论 / 工具 / 指南
+
 > **内容分级**: [归档级]
+
 > **Rust 版本**: 1.96.0+ (Edition 2024)
+
 > **状态**: ✅ 已完成权威国际化来源对齐升级
+
 >
+
 > **分级**: [B]
+
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **创建日期**: 2026-02-24
+
 > **目标**: 解答学习者最常见的问题
+
 > **级别**: L1 (给人看的)
 
 ---
 
 ## 快速导航
+
 >
+
 > **来源:
+
 >
+
 > [Rust Official Docs](https://doc.rust-lang.org/)** ·
+
 > **来源: [Wikipedia - FAQ](https://en.wikipedia.org/wiki/FAQ)** ·
+
 > **来源: [Wikipedia - Knowledge Base](https://en.wikipedia.org/wiki/Knowledge_Base)** ·
+
 > **[来源: ACM - Technical Q&A Best Practices]** ·
+
 > **[来源: IEEE - Documentation Usability]**
+
 >
 
 - [Rust形式化方法 FAQ 汇总](#rust形式化方法-faq-汇总)
@@ -98,13 +117,17 @@
 ---
 
 ## 一、所有权与借用 (15问)
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Q1: 什么是所有权？一句话解释
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **A**: 每个值在任意时刻有且只有一个所有者（变量），所有者离开作用域时值被自动释放。
@@ -116,24 +139,37 @@
 ### Q2: Move和Copy有什么区别？
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **A**:
 
 - **Move**: 转移所有权，原变量不再有效
+
 - **Copy**: 复制值，原变量仍然有效
 
 ```rust
+
 // Move示例
+
 let x = String::from("hello");  // String不实现Copy
+
 let y = x;                      // 所有权转移到y
+
 // println!("{}", x);           // 错误！x已无效
 
+
+
 // Copy示例
+
 let x = 5;                      // i32实现Copy
+
 let y = x;                      // 复制值
+
 println!("{}", x);              // OK！x仍然有效
+
 ```
 
 **记忆**: 复杂类型Move，简单类型Copy。
@@ -143,22 +179,35 @@ println!("{}", x);              // OK！x仍然有效
 ### Q3: 为什么需要借用？
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **A**: 借用允许你临时使用值而不获取所有权，避免频繁转移所有权的麻烦。
 
 ```rust
+
 fn print_length(s: &String) {  // 借用，不获取所有权
+
     println!("{}", s.len());
+
 } // s在这里归还，但原变量仍然有效
 
+
+
 fn main() {
+
     let s = String::from("hello");
+
     print_length(&s);  // 借用s
+
     print_length(&s);  // 可以再次借用！
+
     println!("{}", s); // OK，s仍然有效
+
 }
+
 ```
 
 ---
@@ -166,7 +215,9 @@ fn main() {
 ### Q4: &和&mut为什么不能同时存在？
 
 > **来源: [ACM](https://dl.acm.org/)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **A**: 防止数据竞争。如果允许多个读者和一个写者同时存在，读者可能读到正在被修改的数据。
@@ -174,14 +225,21 @@ fn main() {
 **类比**: 图书馆的书
 
 - `&`: 多人可以同时阅读（不可变借用）
+
 - `&mut`: 一个人借走修改时，其他人不能看（可变借用）
 
 ```rust
+
 let mut x = 5;
+
 let r1 = &x;        // 读者1
+
 let r2 = &x;        // 读者2
+
 // let r3 = &mut x; // 错误！不能有写者
+
 println!("{} {}", r1, r2); // 读者还在用
+
 ```
 
 ---
@@ -189,23 +247,37 @@ println!("{} {}", r1, r2); // 读者还在用
 ### Q5: 什么是悬垂引用？Rust如何防止？
 
 > **来源: [IEEE](https://standards.ieee.org/)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **A**: 悬垂引用是指引用指向已经被释放的内存。Rust通过生命周期检查在编译时防止。
 
 ```rust,ignore
+
 // ❌ 编译错误
+
 fn dangling() -> &String {
+
     let s = String::from("hello");
+
     &s  // 错误！s将在函数结束时被释放
+
 }
 
+
+
 // ✅ 正确做法
+
 fn not_dangling() -> String {
+
     let s = String::from("hello");
+
     s  // 转移所有权
+
 }
+
 ```
 
 ---
@@ -213,7 +285,9 @@ fn not_dangling() -> String {
 ### Q6: 如何理解"所有权系统防止内存泄漏"？
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **A**: 严格来说，所有权系统主要防止**内存不安全**（use-after-free, double-free），而不是内存泄漏。
@@ -221,6 +295,7 @@ fn not_dangling() -> String {
 但Rust确实有助于减少内存泄漏：
 
 - RAII模式：离开作用域自动释放
+
 - 编译时检查：避免忘记释放
 
 注意：`Rc`循环引用、`mem::forget`仍可能导致泄漏。
@@ -230,7 +305,9 @@ fn not_dangling() -> String {
 ### Q7: 为什么`Rc`不能跨线程？
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **A**: `Rc`使用非原子引用计数（不是线程安全的）。跨线程使用会导致数据竞争（计数更新冲突）。
@@ -238,13 +315,21 @@ fn not_dangling() -> String {
 使用`Arc`（原子引用计数）代替：
 
 ```rust
+
 use std::sync::Arc;
+
 use std::thread;
 
+
+
 let data = Arc::new(5);
+
 thread::spawn(move || {
+
     println!("{}", data);  // OK
+
 });
+
 ```
 
 ---
@@ -252,25 +337,39 @@ thread::spawn(move || {
 ### Q8: `RefCell`和`Mutex`有什么区别？
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **A**:
 
 - **RefCell**: 单线程运行时借用检查
+
 - **Mutex**: 多线程互斥锁
 
 ```rust
+
 use std::cell::RefCell;
+
 use std::sync::Mutex;
 
+
+
 // RefCell - 单线程
+
 let cell = RefCell::new(5);
+
 *cell.borrow_mut() = 10;  // 运行时检查
 
+
+
 // Mutex - 多线程
+
 let mutex = Mutex::new(5);
+
 *mutex.lock().unwrap() = 10;  // 线程安全
+
 ```
 
 ---
@@ -278,7 +377,9 @@ let mutex = Mutex::new(5);
 ### Q9: 什么是"内部可变性"模式？
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **A**: 允许在不可变引用下修改数据，通过运行时检查保证安全。
@@ -286,13 +387,17 @@ let mutex = Mutex::new(5);
 常见类型：
 
 - `Cell<T>`: 对于Copy类型
+
 - `RefCell<T>`: 运行时借用检查
+
 - `Mutex<T>`: 线程安全版本
 
 使用场景：
 
 - 缓存
+
 - 计数器
+
 - 延迟初始化
 
 ---
@@ -304,24 +409,41 @@ let mutex = Mutex::new(5);
 **A**:
 
 | 类型 | 所有权 | 线程安全 | 使用场景 |
+
 | :--- | :--- | :--- | :--- |
+
 | `Box<T>` | 唯一 | ✅ | 堆分配，单一所有者 |
+
 | `Rc<T>` | 共享 | ❌ | 单线程共享所有权 |
+
 | `Arc<T>` | 共享 | ✅ | 多线程共享所有权 |
 
 ```rust
+
 // Box: 唯一所有权
+
 let b = Box::new(5);
 
+
+
 // Rc: 单线程共享
+
 use std::rc::Rc;
+
 let rc = Rc::new(5);
+
 let rc2 = Rc::clone(&rc);  // 引用计数+1
 
+
+
 // Arc: 多线程共享
+
 use std::sync::Arc;
+
 let arc = Arc::new(5);
+
 let arc2 = Arc::clone(&arc);
+
 ```
 
 ---
@@ -335,14 +457,21 @@ let arc2 = Arc::clone(&arc);
 实现Copy的条件：
 
 - 只包含标量值
+
 - 或者包含其他Copy类型
 
 ```rust,ignore
+
 // Copy类型
+
 i32, f64, bool, char, (i32, i32), [i32; 4]
 
+
+
 // 非Copy类型
+
 String, Vec<T>, Box<T>, Rc<T>
+
 ```
 
 ---
@@ -354,14 +483,21 @@ String, Vec<T>, Box<T>, Rc<T>
 **A**:
 
 - `clone()`: 通用克隆方法
+
 - `to_owned()`: 从借用创建拥有值
 
 ```rust
+
 let s: &str = "hello";
+
 let s2 = s.to_owned();  // String
 
+
+
 let v = vec![1, 2, 3];
+
 let v2 = v.clone();  // Vec<i32>
+
 ```
 
 ---
@@ -373,19 +509,33 @@ let v2 = v.clone();  // Vec<i32>
 **A**: 缩小不可变借用的作用域：
 
 ```rust,ignore
+
 // ❌ 错误
+
 let mut x = 5;
+
 let r1 = &x;
+
 let r2 = &mut x;  // 错误！r1还在用
+
 println!("{}", r1);
 
+
+
 // ✅ 修复
+
 let mut x = 5;
+
 {
+
     let r1 = &x;
+
     println!("{}", r1);
+
 }  // r1在这里结束
+
 let r2 = &mut x;  // OK
+
 ```
 
 ---
@@ -397,21 +547,35 @@ let r2 = &mut x;  // OK
 **A**:
 
 - `swap`: 交换两个可变引用指向的值
+
 - `replace`: 替换值并返回旧值
 
 ```rust
+
 use std::mem;
 
+
+
 let mut x = 5;
+
 let mut y = 10;
+
 mem::swap(&mut x, &mut y);
+
 assert_eq!(x, 10);
+
 assert_eq!(y, 5);
 
+
+
 let mut s = String::from("hello");
+
 let old = mem::replace(&mut s, String::from("world"));
+
 assert_eq!(old, "hello");
+
 assert_eq!(s, "world");
+
 ```
 
 ---
@@ -425,12 +589,15 @@ assert_eq!(s, "world");
 对比：
 
 - GC语言：运行时有垃圾回收开销
+
 - Rust：编译时检查，运行时直接内存操作
 
 ---
 
 ## 二、类型系统 (10问)
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Q16: 什么是类型安全？
@@ -440,7 +607,9 @@ assert_eq!(s, "world");
 **A**: 良类型的程序不会陷入未定义行为。Rust的类型系统保证：
 
 - 不会访问无效内存
+
 - 不会类型混淆
+
 - 不会悬垂引用
 
 **形式化**: Γ ⊢ e : τ → ~stuck(e)
@@ -454,18 +623,27 @@ assert_eq!(s, "world");
 **A**: 标记编译时已知大小的类型。
 
 ```rust,ignore
+
 // 自动实现Sized的类型
+
 i32, f64, [i32; 5], String
 
+
+
 // 非Sized类型（DST）
+
 str, [i32], dyn Trait
+
 ```
 
 使用：
 
 ```rust
+
 fn foo<T: Sized>(x: T) {}  // 默认约束
+
 fn bar<T: ?Sized>(x: &T) {}  // 允许DST
+
 ```
 
 ---
@@ -477,14 +655,21 @@ fn bar<T: ?Sized>(x: &T) {}  // 允许DST
 **A**:
 
 - `impl Trait`: 静态分发，编译时确定具体类型
+
 - `dyn Trait`: 动态分发，运行时确定（有虚表开销）
 
 ```rust,ignore
+
 // 静态分发，无运行时开销
+
 fn foo(x: impl Trait) {}
 
+
+
 // 动态分发，有虚表查找
+
 fn bar(x: &dyn Trait) {}
+
 ```
 
 ---
@@ -496,14 +681,23 @@ fn bar(x: &dyn Trait) {}
 **A**: 描述复合类型如何继承组成部分的子类型关系。
 
 ```rust,ignore
+
 // 协变: T <: U → Box<T> <: Box<U>
+
 Box<&'static str> <: Box<&'a str>
 
+
+
 // 逆变: T <: U → fn(U) <: fn(T)
+
 fn(&'a str) <: fn(&'static str)
 
+
+
 // 不变: &mut T
+
 &mut &'static str 和 &mut &'a str 无关
+
 ```
 
 ---
@@ -517,12 +711,17 @@ fn(&'a str) <: fn(&'static str)
 常见`'static`类型：
 
 - 字符串字面量：`&'static str`
+
 - 全局常量
+
 - 拥有所有权的类型（隐式）
 
 ```rust
+
 let s: &'static str = "hello";  // 字面量
+
 const X: i32 = 5;  // 'static
+
 ```
 
 ---
@@ -534,20 +733,31 @@ const X: i32 = 5;  // 'static
 **A**: Trait中定义的占位类型，由实现者指定。
 
 ```rust,ignore
+
 trait Iterator {
+
     type Item;  // 关联类型
+
     fn next(&mut self) -> Option<Self::Item>;
+
 }
 
+
+
 impl Iterator for Vec<i32> {
+
     type Item = i32;  // 指定为i32
+
     fn next(&mut self) -> Option<i32> { ... }
+
 }
+
 ```
 
 对比泛型参数：
 
 - 关联类型：每个实现一个类型
+
 - 泛型参数：可以实现多个（Vec<i32>, Vec<String>）
 
 ---
@@ -559,15 +769,21 @@ impl Iterator for Vec<i32> {
 **A**: 允许关联类型有泛型参数。
 
 ```rust,ignore
+
 trait Container {
+
     type Item<'a>;  // GAT
+
     fn get(&self, index: usize) -> Option<Self::Item<'_>>;
+
 }
+
 ```
 
 使用场景：
 
 - 返回借用的迭代器
+
 - 类型族定义
 
 ---
@@ -579,16 +795,23 @@ trait Container {
 **A**: `const fn`可以在编译时执行。
 
 ```rust
+
 const fn add(a: i32, b: i32) -> i32 {
+
     a + b
+
 }
 
+
+
 const X: i32 = add(1, 2);  // 编译时常量
+
 ```
 
 限制：
 
 - 不能使用堆分配
+
 - 不能使用运行时特性
 
 ---
@@ -600,19 +823,33 @@ const X: i32 = add(1, 2);  // 编译时常量
 **A**: 为特定类型提供泛型的特殊实现。
 
 ```rust,ignore
+
 // 通用实现
+
 trait Trait {
+
     fn method(&self);
+
 }
+
+
 
 impl<T> Trait for T {
+
     default fn method(&self) { ... }
+
 }
 
+
+
 // 特定类型的特化
+
 impl Trait for i32 {
+
     fn method(&self) { ... }  // 专门优化
+
 }
+
 ```
 
 **注意**: 目前不稳定，需要`#![feature(specialization)]`
@@ -626,21 +863,29 @@ impl Trait for i32 {
 **A**: `Option<&T>`和`&T`大小相同，用0表示`None`。
 
 ```rust
+
 use std::mem::size_of;
 
+
+
 assert_eq!(size_of::<Option<&i32>>(), size_of::<&i32>());
+
 // 两者都是8字节（64位系统）
+
 ```
 
 好处：
 
 - `Option<&T>`无额外开销
+
 - 类似C的nullable指针但类型安全
 
 ---
 
 ## 三、生命周期 (10问)
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Q26: 生命周期省略规则是什么？
@@ -650,15 +895,23 @@ assert_eq!(size_of::<Option<&i32>>(), size_of::<&i32>());
 **A**: 编译器自动推断生命周期的三条规则：
 
 1. 每个引用参数有自己的生命周期
+
 2. 只有一个输入生命周期 → 赋给输出
+
 3. `&self`存在 → `self`的生命周期赋给输出
 
 ```rust,ignore
+
 // 省略前
+
 fn foo<'a>(x: &'a str) -> &'a str { x }
 
+
+
 // 省略后
+
 fn foo(x: &str) -> &str { x }  // 规则2
+
 ```
 
 ---
@@ -670,18 +923,31 @@ fn foo(x: &str) -> &str { x }  // 规则2
 **A**: `'a: 'b`表示`'a`至少和`'b`一样长。
 
 ```rust
+
 // T中所有引用至少存活'a
+
 struct Container<'a, T: 'a> {
+
     data: &'a T,
+
 }
 
+
+
 // 多重约束
+
 fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &'a str
+
 where
+
     'a: 'b,  // 'a 至少和 'b 一样长
+
 {
+
     x
+
 }
+
 ```
 
 ---
@@ -693,10 +959,15 @@ where
 **A**: `'static`是`'a`的子类型（`'static <: 'a`），因为`'static`更长。
 
 ```rust
+
 let s: &'static str = "hello";
+
 take_str(s);  // 可以传给需要&'a str的函数
 
+
+
 fn take_str<'a>(s: &'a str) {}
+
 ```
 
 协变：可以用长生命周期代替短生命周期。
@@ -710,15 +981,25 @@ fn take_str<'a>(s: &'a str) {}
 **A**: 当编译器无法确定返回引用与哪个参数关联时。
 
 ```rust,ignore
+
 // ❌ 编译错误 - 不知道返回的引用来自x还是y
+
 fn longest(x: &str, y: &str) -> &str {
+
     if x.len() > y.len() { x } else { y }
+
 }
 
+
+
 // ✅ 正确 - 显式标注
+
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+
     if x.len() > y.len() { x } else { y }
+
 }
+
 ```
 
 ---
@@ -730,18 +1011,27 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 **A**: 高阶 trait bound (HRTB)，表示"对于所有生命周期"。
 
 ```rust
+
 // 接受任何生命周期的闭包
+
 fn foo<F>(f: F)
+
 where
+
     F: for<'a> Fn(&'a str) -> &'a str,
+
 {
+
     f("hello");
+
 }
+
 ```
 
 使用场景：
 
 - 回调函数
+
 - 泛型约束
 
 ---
@@ -753,16 +1043,27 @@ where
 **A**: 结构体存活期间，其引用字段指向的数据必须有效。
 
 ```rust
+
 struct Person<'a> {
+
     name: &'a str,  // name必须活得比Person长
+
 }
 
+
+
 fn main() {
+
     let name = String::from("Alice");
+
     let p = Person { name: &name };
+
     // name在这里不能drop
+
     println!("{}", p.name);
+
 } // name和p同时结束，OK
+
 ```
 
 ---
@@ -774,18 +1075,31 @@ fn main() {
 **A**: 使用`Pin`保证结构不会被移动。
 
 ```rust
+
 use std::pin::Pin;
 
+
+
 struct SelfReferential {
+
     data: String,
+
     ptr_to_data: *const String,  // 指向data
+
 }
 
+
+
 // 使用Pin防止移动
+
 let mut pinned = Pin::new(Box::new(SelfReferential {
+
     data: String::from("hello"),
+
     ptr_to_data: std::ptr::null(),
+
 }));
+
 ```
 
 ---
@@ -797,15 +1111,25 @@ let mut pinned = Pin::new(Box::new(SelfReferential {
 **A**: async函数返回的Future捕获所有参数的生命周期。
 
 ```rust
+
 async fn foo(x: &str) {  // 等价于 fn foo<'a>(x: &'a str) -> impl Future<Output = ()> + 'a
+
     println!("{}", x);
+
 }
 
+
+
 fn main() {
+
     let s = String::from("hello");
+
     let fut = foo(&s);  // Future<'a>
+
     // s必须活到Future执行完成
+
 }
+
 ```
 
 ---
@@ -817,13 +1141,21 @@ fn main() {
 **A**: 零大小类型，用于告诉编译器你"使用"了某个类型，影响生命周期。
 
 ```rust
+
 use std::marker::PhantomData;
 
+
+
 struct Slice<'a, T: 'a> {
+
     ptr: *const T,
+
     len: usize,
+
     _marker: PhantomData<&'a T>,  // 告诉编译器我们拥有&'a T
+
 }
+
 ```
 
 ---
@@ -835,12 +1167,19 @@ struct Slice<'a, T: 'a> {
 **A**:
 
 ```rust
+
 struct Container<'a, T>
+
 where
+
     T: 'a,  // T中所有引用至少存活'a
+
 {
+
     data: &'a T,
+
 }
+
 ```
 
 约束：
@@ -850,7 +1189,9 @@ where
 ---
 
 ## 四、并发与异步 (10问)
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Q36: Send和Sync有什么区别？
@@ -860,20 +1201,31 @@ where
 **A**:
 
 - **Send**: 可以跨线程转移所有权
+
 - **Sync**: 可以跨线程共享（通过`&T`）
 
 **等价定义**: `T: Sync ⇔ &T: Send`
 
 ```rust,ignore
+
 // Rc既不是Send也不是Sync
+
 use std::rc::Rc;
+
 let data: Rc<i32> = Rc::new(5);
+
 // thread::spawn(move || { *data });  // 错误！
 
+
+
 // Arc是Send+Sync（如果T:Sync）
+
 use std::sync::Arc;
+
 let data: Arc<i32> = Arc::new(5);
+
 thread::spawn(move || { println!("{}", data); });  // OK
+
 ```
 
 ---
@@ -885,9 +1237,13 @@ thread::spawn(move || { println!("{}", data); });  // OK
 **A**: `Cell`提供内部可变性但没有同步机制，多线程同时修改会导致数据竞争。
 
 ```rust
+
 use std::cell::Cell;
+
 let cell = Cell::new(0);
+
 // thread::spawn(|| cell.set(1));  // 错误！Cell不是Send也不是Sync
+
 ```
 
 使用`Mutex`或`RwLock`进行线程安全的内部可变性。
@@ -901,10 +1257,15 @@ let cell = Cell::new(0);
 **A**:
 
 | 场景 | 推荐 | 理由 |
+
 | :--- | :--- | :--- |
+
 | 读多写少 | `RwLock` | 并发读 |
+
 | 读写均衡 | `Mutex` | 简单高效 |
+
 | 写多读少 | `Mutex` | 避免写者饥饿 |
+
 | 需要升级锁 | `RwLock` | 读锁升级写锁 |
 
 ---
@@ -918,16 +1279,25 @@ let cell = Cell::new(0);
 避免策略：
 
 1. 锁顺序一致
+
 2. 使用`try_lock`
+
 3. 避免嵌套锁
+
 4. 使用作用域锁
 
 ```rust,ignore
+
 // 良好实践：使用作用域
+
 {
+
     let guard = mutex.lock().unwrap();
+
     // 使用数据
+
 }  // 自动释放
+
 ```
 
 ---
@@ -939,18 +1309,31 @@ let cell = Cell::new(0);
 **A**: 编译器将async函数转换为状态机。
 
 ```rust,ignore
+
 async fn foo() {
+
     println!("A");
+
     bar().await;  // 挂起点
+
     println!("B");
+
 }
 
+
+
 // 大致转换为：
+
 enum FooFuture {
+
     Start,
+
     WaitingBar,
+
     Done,
+
 }
+
 ```
 
 执行器轮询Future，在`.await`处可能让出线程。
@@ -964,16 +1347,27 @@ enum FooFuture {
 **A**: `Pin`保证值不会被移动，用于自引用结构。
 
 ```rust,ignore
+
 use std::pin::Pin;
 
+
+
 async fn self_referential() {
+
     let s = String::from("hello");
+
     let ptr = &s as *const _;  // 指向s
+
     // 如果s被移动，ptr就悬垂了
+
     some_async().await;  // 可能被移动！
 
+
+
     // Pin防止移动
+
 }
+
 ```
 
 ---
@@ -985,23 +1379,35 @@ async fn self_referential() {
 **A**:
 
 - `thread::spawn`: 创建OS线程，成本高
+
 - `tokio::spawn`: 创建任务，调度到线程池
 
 ```rust,ignore
+
 // OS线程
+
 thread::spawn(|| {
+
     // 独立线程执行
+
 });
 
+
+
 // 异步任务
+
 tokio::spawn(async {
+
     // 在tokio运行时调度
+
 });
+
 ```
 
 数量：
 
 - OS线程：几百个
+
 - 异步任务：数百万个
 
 ---
@@ -1013,11 +1419,17 @@ tokio::spawn(async {
 **A**: 标记可以安全移动的类型。大多数类型都是`Unpin`。
 
 ```rust,ignore
+
 // 自动Unpin
+
 i32, String, Vec<T>
 
+
+
 // 非Unpin（自引用）
+
 async fn, Pin<&mut T>
+
 ```
 
 ---
@@ -1029,11 +1441,17 @@ async fn, Pin<&mut T>
 **A**: 等待多个Future，哪个先完成就执行哪个。
 
 ```rust,ignore
+
 tokio::select! {
+
     result = task1 => println!("task1 done: {:?}", result),
+
     result = task2 => println!("task2 done: {:?}", result),
+
     _ = timeout => println!("timeout!"),
+
 }
+
 ```
 
 ---
@@ -1045,25 +1463,41 @@ tokio::select! {
 **A**: `.await`前释放锁：
 
 ```rust,ignore
+
 // ❌ 危险
+
 let guard = mutex.lock().unwrap();
+
 some_async().await;  // 可能死锁
 
+
+
 // ✅ 安全
+
 {
+
     let guard = mutex.lock().unwrap();
+
     // 使用guard
+
 }  // 释放锁
+
 some_async().await;  // OK
 
+
+
 // 或使用tokio::sync::Mutex
+
 let guard = tokio_mutex.lock().await;
+
 ```
 
 ---
 
 ## 五、形式化方法 (10问)
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Q46: 什么是L1/L2/L3证明？
@@ -1073,7 +1507,9 @@ let guard = tokio_mutex.lock().await;
 **A**:
 
 - **L1**: 证明思路（给人看的）
+
 - **L2**: 完整数学证明（详细推导）
+
 - **L3**: 机器证明（Coq/Lean可验证）
 
 本项目重点是L1和L2。
@@ -1107,8 +1543,11 @@ let guard = tokio_mutex.lock().await;
 **A**:
 
 1. 理解为什么Rust安全
+
 2. 更好地设计系统
+
 3. 避免常见错误
+
 4. 技术决策依据
 
 不需要写Coq证明，理解概念即可。
@@ -1116,39 +1555,55 @@ let guard = tokio_mutex.lock().await;
 ---
 
 ### Q50: 如何学习形式化方法？
+
 >
+
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **A**: 学习路径：
 
 1. 初学者：概念百科 + 反例集
+
 2. 进阶者：定理汇编 + 证明思路
+
 3. 专家：Coq + Iris + 论文
 
 ---
 
 ## 六、分布式与工作流 (5问)
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Q51: Saga模式解决什么问题？
+
 >
+
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **A**: 长事务问题。将大事务分解为多个小事务，每个有补偿操作。
 
 ```rust,ignore
+
 // 编排式
+
 let saga = Saga::new()
+
     .step(reserve_inventory, compensate_inventory)
+
     .step(process_payment, refund_payment)
+
     .step(create_shipment, cancel_shipment);
+
 ```
 
 ---
 
 ### Q52: CQRS适合什么场景？
+
 >
+
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **A**: 读多写少、复杂查询、需要事件溯源。
@@ -1156,31 +1611,41 @@ let saga = Saga::new()
 ---
 
 ### Q53: 熔断器模式如何工作？
+
 >
+
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **A**:
 
 - Closed: 正常
+
 - Open: 错误率过高，快速失败
+
 - Half-Open: 试探恢复
 
 ---
 
 ### Q54: 如何选择工作流引擎？
+
 >
+
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **A**:
 
 - 需要持久化 → Temporal/Cadence
+
 - 简单流程 → 自研状态机
+
 - 人工任务 → Camunda
 
 ---
 
 ### Q55: 什么是补偿事务？
+
 >
+
 > **[来源: [crates.io](https://crates.io/)]**
 
 **A**: 分布式系统中，通过执行补偿操作撤销已完成操作，达到最终一致性。
@@ -1188,14 +1653,19 @@ let saga = Saga::new()
 ---
 
 **维护者**: Rust Formal Methods Research Team
+
 **最后更新**: 2026-02-24
+
 **状态**: ✅ 已完成 - FAQ汇总 (55问)
 
 ---
 
 ## 🆕 Rust 1.94 更新
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
 > **适用版本**: Rust 1.96.0+
 
 详见 [RUST_194_RESEARCH_UPDATE](10_rust_194_research_update.md)
@@ -1205,13 +1675,19 @@ let saga = Saga::new()
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
+
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
 >
+
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -1219,10 +1695,15 @@ let saga = Saga::new()
 #### 核心特性应用
 
 | 特性 | 应用场景 | 文档章节 |
+
 |------|---------|----------|
+
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
+
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
+
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新
@@ -1230,29 +1711,39 @@ let saga = Saga::new()
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
+
 - ✅ 兼容Edition 2024
+
 - ✅ 通过标准库测试
 
 #### 相关文档
 
 - Rust 1.94 迁移指南
+
 - Rust 1.94 特性速查
+
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
+
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
 
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+
 >
+
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
+
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
 **最后更新**: 2026-05-19
+
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---
@@ -1262,10 +1753,13 @@ let saga = Saga::new()
 ---
 
 ## 相关概念
+
 >
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [research_notes 目录](README.md)
+
 - [上级目录](../README.md)
 
 ---
@@ -1273,26 +1767,47 @@ let saga = Saga::new()
 ## 权威来源索引
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+
 > **[来源: Stack Overflow Rust Tag]**
+
 > **[来源: Rust Users Forum]**
+
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+
 > **来源: [ACM](https://dl.acm.org/)**
+
 > **来源: [IEEE](https://standards.ieee.org/)**
+
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+
 > **来源: [ACM](https://dl.acm.org/)**
+
 > **来源: [IEEE](https://standards.ieee.org/)**
+
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

@@ -5,6 +5,7 @@
 >
 > - `async-std` 已进入维护模式，新项目建议优先考虑 Tokio / smol。
 > - `wasm32-wasi` 已重命名为 `wasm32-wasip1`；WASI Preview 2 目标为 `wasm32-wasip2`。
+> **概念族**: 软件设计 / Crate 架构
 
 ---
 
@@ -198,7 +199,7 @@ graph TD
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 技术维度 | Serde | Tower | Diesel | Bevy | Tokio |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | **泛型** | `Serialize<T>` / `Deserialize<'de, T>` | `Service<Request>` | `QueryDsl<Table>` | `Query<'w, 's, Q, F>` | `Future<Output = T>` |
 | **关联类型** | `Serializer::Ok`, `Visitor::Value` | `Service::Response`, `Layer::Service` | `Backend::RawValue` | `Component::Storage` | `Stream::Item` |
 | **Trait Bound** | `T: Serialize` | `S: Service<Req>` | `T: Queryable<DB>` | `Q: WorldQuery` | `T: Send + 'static` |
@@ -206,23 +207,15 @@ graph TD
 | **宏** | `#[derive(Serialize)]` | 无（纯 trait） | `table!`, `#[derive(Queryable)]` | `#[derive(Component)]` | `select!`, `spawn!` |
 | **零成本证明** | 单态化消除虚调用 | 编译期中间件栈内联 | 类型状态消除运行时 SQL 检查 | Archetype 连续内存无 indirection | work-stealing 无全局锁 |
 
-| **技术维度** | Tonic | wasm-bindgen | Tracing | Crossbeam | Ratatui | mio |
-|:---|:---|:---|:---|:---|:---|:---|:--- |
+| 技术维度 | Tonic | wasm-bindgen | Tracing | Crossbeam | Ratatui | mio |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **核心抽象** | `Streaming<T>` / `Response<T>` | `#[wasm_bindgen]` 生成的接口 | `Span` / `Event` / `Subscriber` | `epoch::pin` / `ArrayQueue` | `Widget::render` / `Buffer::diff` | `Poll` / `Registry` / `Token` |
-| **类型系统** | `Service::Response` | `JsValue` 跨语言表示 | `Value` trait 结构化字段 | `AtomicCell<T>` 原子类型 | `StatefulWidget::State` | `Token(usize)` 零成本映射 |
+| **泛型** | `Streaming<T>` / `Response<T>` | `#[wasm_bindgen]` 生成的接口 | `Subscriber` 泛型化 | `ArrayQueue<T>` | `StatefulWidget` 泛型状态 | `Registry` 泛型平台后端 |
+| **关联类型** | `Service::Response` | `JsValue` 跨语言表示 | `Value` trait 结构化字段 | `AtomicCell<T>` 原子类型 | `StatefulWidget::State` | `Event` 平台相关类型 |
+| **Trait Bound** | `T: prost::Message` | `T: Into<JsValue>` | `V: Visit` | `T: Send` | `W: Widget` | `T: Token` |
+| **生命周期** | `Streaming<'a, T>` 流借用 | 手动内存管理边界 | `Span` 显式进入/退出 | `pin` 保护对象生命周期 | `Frame` 局部渲染生命周期 | `Registry` 与 `Poll` 同步 |
+| **宏** | `#[tonic::service]` | `#[wasm_bindgen]` | `tracing::instrument!` | 无 | `#[derive(Widget)]` | 无 |
 | **零成本证明** | gRPC 编码零拷贝 | JS ↔ WASM 无额外拷贝 | 无 Subscriber 时编译期消除 | Lock-free 无内核切换 | 差分渲染仅输出变更 | 与直接 epoll 等价的系统调用数 |
-|:---|:---|:---|:---|:---|:---|
-| **核心抽象** | `Streaming<T>` / `Response<T>` | `#[wasm_bindgen]` 生成的接口 | `Span` / `Event` / `Subscriber` | `epoch::pin` / `ArrayQueue` | `Widget::render` / `Buffer::diff` |
-| **类型系统** | `Service::Response` | `JsValue` 跨语言表示 | `Value` trait 结构化字段 | `AtomicCell<T>` 原子类型 | `StatefulWidget::State` |
-
-| **零成本证明** | gRPC 编码零拷贝 | JS ↔ WASM 无额外拷贝 | 无 Subscriber 时编译期消除 | Lock-free 无内核切换 | 差分渲染仅输出变更 |
-|:---|:---|:---|:---|:---|:---|
-| **泛型** | `Streaming<T>` / `Response<T>` | `#[wasm_bindgen]` 生成的接口 | | | |
-| **关联类型** | `Service::Response` | `JsValue` 跨语言表示 | | | |
-| **Trait Bound** | `T: prost::Message` | `T: Into<JsValue>` | | | |
-| **生命周期** | `Streaming<'a, T>` 流借用 | 手动内存管理边界 | | | |
-| **宏** | `#[tonic::service]` | `#[wasm_bindgen]` | | | |
-| **零成本证明** | gRPC 编码零拷贝 | JS ↔ WASM 无额外拷贝 | | | |
 
 > 来源: [Rust Reference · TRPL · Rustonomicon · 各 crate 官方文档](https://doc.rust-lang.org/reference/)
 

@@ -1,11 +1,19 @@
 # Coq of Rust 集成计划（已归档）
 
+> **概念族**: 形式化方法 / 证明助手
+
 > **内容分级**: [归档级]
+
 > **状态**: ✅ 已完成权威国际化来源对齐升级
+
 >
+
 > **分级**: [B]
+
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **归档说明**: 本文档已迁至 archive/deprecated/10_coq_of_rust_integration_plan.md
+
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 
 请访问 archive/deprecated/10_coq_of_rust_integration_plan.md 查看完整内容。
@@ -15,9 +23,13 @@
 ---
 
 ## 📑 目录
+
 >
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
 >
+
 - [Coq of Rust 集成计划（已归档）](#coq-of-rust-集成计划已归档)
   - [📑 目录](#-目录)
   - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
@@ -25,32 +37,43 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
 ## 🆕 Rust 1.94 深度整合更新
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
+
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 应用场景 | 文档章节 |
+
 |------|---------|----------|
+
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
+
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
+
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新
@@ -58,37 +81,51 @@
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
+
 - ✅ 兼容Edition 2024
+
 - ✅ 通过标准库测试
 
 #### 相关文档
 
 - Rust 1.94 迁移指南
+
 - [Rust 1.94 特性速查
+
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
+
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+
 >
+
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
+
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
 **最后更新**: 2026-05-19
+
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---
 
 ## 相关概念
+
 >
+
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [research_notes 目录](README.md)
+
 - [上级目录](../README.md)
 
 ---
@@ -96,8 +133,11 @@
 ## 权威来源索引
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
+
 > **来源: [Coq Reference Manual](https://coq.inria.fr/doc/)**
+
 > **来源: [TLA+ Documentation](https://lamport.azurewebsites.net/tla/tla.html)**
+
 > **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
 ---

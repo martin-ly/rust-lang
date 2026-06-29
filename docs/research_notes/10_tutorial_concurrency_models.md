@@ -6,6 +6,7 @@
 >
 > - `async-std` 已进入维护模式，新项目建议优先考虑 Tokio / smol。
 > - `wasm32-wasi` 已重命名为 `wasm32-wasip1`；WASI Preview 2 目标为 `wasm32-wasip2`。
+> **概念族**: 教程
 
 ---
 

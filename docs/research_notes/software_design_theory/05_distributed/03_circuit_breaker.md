@@ -1,25 +1,43 @@
 # Circuit Breaker 模式形式化定义
 
+> **概念族**: 软件设计 / 分布式模式
+
 > **内容分级**: [归档级]
+
 >
+
 > **分级**: [B]
+
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **模式类型**: 容错机制
+
 > **创建日期**: 2026-03-08
+
 > **版本**: v1.0
+
 > **最后更新**: 2026-06-29
+
 > **Rust 版本**: 1.96.0+ (Edition 2024)
+
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+
 > **对齐说明**: 本文档已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/05_distributed/` 迁回，正在按 [Tokio Tutorial](https://tokio.rs/tokio/tutorial)、[Tonic Docs](https://docs.rs/tonic/latest/tonic/)、[Async Book – Streams](https://rust-lang.github.io/async-book/part-guide/streams.html) 等权威来源升级。
+
 >
+
 > **权威来源**: [Tokio Tutorial](https://tokio.rs/tokio/tutorial) | [Tonic Docs](https://docs.rs/tonic/latest/tonic/) | [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ---
 
 ## 📑 目录
+
 >
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
 >
+
 - [Circuit Breaker 模式形式化定义](#circuit-breaker-模式形式化定义)
   - [📑 目录](#-目录)
   - [1. 概念定义 (Def)](#1-概念定义-def)
@@ -44,46 +62,69 @@
   - [权威来源索引](#权威来源索引)
 
 ## 1. 概念定义 (Def)
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### Def CB1: Circuit Breaker
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Circuit Breaker（熔断器）是一种**故障快速失败机制**，用于防止故障级联扩散。
 
 ```
+
 CircuitBreaker := (S, T, f_threshold, t_timeout)
+
   where:
+
     S ∈ {Closed, Open, HalfOpen}  -- 状态
+
     T = {r₁, r₂, ..., rₙ}          -- 请求记录
+
     f_threshold ∈ ℕ                -- 故障阈值
+
     t_timeout ∈ Time               -- 超时时间
+
 ```
 
 ### Def CB2: 状态转换
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```
+
 State_Transition :=
+
   | Closed --(failures ≥ f_threshold)--> Open
+
   | Open --(t_timeout expired)--> HalfOpen
+
   | HalfOpen --(success)--> Closed
+
   | HalfOpen --(failure)--> Open
+
 ```
 
 ### Def CB3: 故障计数器
+
 >
+
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
+
 FailureCount(t) := |{r ∈ T | time(r) ∈ [t - window, t] ∧ result(r) = failure}|
+
 ```
 
 滑动窗口内的故障请求计数。
@@ -91,35 +132,49 @@ FailureCount(t) := |{r ∈ T | time(r) ∈ [t - window, t] ∧ result(r) = failu
 ---
 
 ## 2. 基本假设 (Axiom)
+
 >
+
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Axiom CB1: 状态互斥
+
 >
+
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
+
 ∀t. State(t) = Closed ⊕ Open ⊕ HalfOpen
+
 ```
 
 任一时刻只处于一个状态。
 
 ### Axiom CB2: 故障阈值正性
+
 >
+
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
+
 f_threshold > 0
+
 ```
 
 阈值必须为正整数。
 
 ### Axiom CB3: 超时单调性
+
 >
+
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
+
 t₁ < t₂ → CanRetry(t₁) → CanRetry(t₂)
+
 ```
 
 一旦可以重试，之后一直可以重试（直到状态改变）。
@@ -127,130 +182,227 @@ t₁ < t₂ → CanRetry(t₁) → CanRetry(t₂)
 ---
 
 ## 3. 定理 (Theorem)
+
 >
+
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### Theorem CB1: 故障隔离
+
 >
+
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
+
 State = Open → ∀req. Reject(req)
+
 ```
 
 **证明概要**:
 
 1. 当状态为 Open 时，熔断器打开
+
 2. 所有请求被立即拒绝
+
 3. 下游服务被保护，不受故障影响
 
 ### Theorem CB2: 自恢复
+
 >
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
+
 State = Open ∧ (now - last_failure) > t_timeout
+
 → ◇(State = HalfOpen)
+
 ```
 
 **证明概要**:
 
 1. 超时时间到达后，状态自动转为 HalfOpen
+
 2. 允许试探性请求通过
+
 3. 若成功则完全恢复 (Closed)
 
 ---
 
 ## 4. Rust 实现示例
+
 >
+
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
+
 use std::sync::atomic::{AtomicU32, Ordering};
+
 use std::time::{Duration, Instant};
 
+
+
 pub enum CircuitState {
+
     Closed,     // 正常
+
     Open,       // 熔断
+
     HalfOpen,   // 半开试探
+
 }
+
+
 
 pub struct CircuitBreaker {
+
     state: std::sync::RwLock<CircuitState>,
+
     failure_count: AtomicU32,
+
     threshold: u32,
+
     timeout: Duration,
+
     last_failure: std::sync::Mutex<Option<Instant>>,
+
 }
+
+
 
 impl CircuitBreaker {
+
     pub async fn call<F, T, E>(&self, f: F) -> Result<T, CircuitError<E>>
+
     where
+
         F: FnOnce() -> Result<T, E>,
+
     {
+
         // 检查状态
+
         {
+
             let state = self.state.read().unwrap();
+
             match *state {
+
                 CircuitState::Open => {
+
                     // 检查是否超时
+
                     let last = self.last_failure.lock().unwrap();
+
                     if let Some(t) = *last {
+
                         if t.elapsed() > self.timeout {
+
                             drop(state);
+
                             drop(last);
+
                             let mut s = self.state.write().unwrap();
+
                             *s = CircuitState::HalfOpen;
+
                         } else {
+
                             return Err(CircuitError::Open);
+
                         }
+
                     }
+
                 }
+
                 _ => {}
+
             }
+
         }
+
+
 
         // 执行请求
+
         match f() {
+
             Ok(result) => {
+
                 self.on_success();
+
                 Ok(result)
+
             }
+
             Err(e) => {
+
                 self.on_failure();
+
                 Err(CircuitError::Inner(e))
+
             }
+
         }
+
     }
+
+
 
     fn on_success(&self) {
+
         self.failure_count.store(0, Ordering::SeqCst);
+
         let mut state = self.state.write().unwrap();
+
         *state = CircuitState::Closed;
+
     }
+
+
 
     fn on_failure(&self) {
+
         let count = self.failure_count.fetch_add(1, Ordering::SeqCst) + 1;
+
         *self.last_failure.lock().unwrap() = Some(Instant::now());
 
+
+
         if count >= self.threshold {
+
             let mut state = self.state.write().unwrap();
+
             *state = CircuitState::Open;
+
         }
+
     }
+
 }
+
 ```
 
 ---
 
 ## 5. 配置建议
+
 >
+
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 场景 | threshold | timeout | 说明 |
+
 |------|-----------|---------|------|
+
 | 关键服务 | 5 | 30s | 保守策略 |
+
 | 普通服务 | 10 | 60s | 平衡策略 |
+
 | 内部服务 | 20 | 30s | 宽松策略 |
 
 ---
@@ -258,19 +410,25 @@ impl CircuitBreaker {
 **相关阅读**:
 
 - [分布式架构决策树](../../10_distributed_architecture_decision_tree.md)
+
 - [超时模式](06_timeout_pattern.md)
 
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+
 >
+
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
+
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
 >
+
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -278,10 +436,15 @@ impl CircuitBreaker {
 #### 核心特性应用
 
 | 特性 | 应用场景 | 文档章节 |
+
 |------|---------|----------|
+
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
+
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
+
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新
@@ -289,38 +452,51 @@ impl CircuitBreaker {
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
+
 - ✅ 兼容Edition 2024
+
 - ✅ 通过标准库测试
 
 #### 相关文档
 
 - Rust 1.94 迁移指南
+
 - Rust 1.94 特性速查
+
 - [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
+
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
 
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+
 >
+
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
+
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
 **最后更新**: 2026-05-19
+
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---
 
 ## 相关概念
+
 >
+
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [05_distributed 目录](README.md)
+
 - [上级目录](../README.md)
 
 ---
@@ -328,17 +504,29 @@ impl CircuitBreaker {
 ## 权威来源索引
 
 > **来源: [Wikipedia - Circuit Breaker Pattern](https://en.wikipedia.org/wiki/Circuit_Breaker_Pattern)**
+
 > **来源: [Wikipedia - Fault Tolerance](https://en.wikipedia.org/wiki/Fault_Tolerance)**
+
 > **[来源: Martin Fowler - Circuit Breaker]**
+
 > **[来源: IEEE - Resilient Software Architecture]**
+
 > **[来源: ACM - Fault-Tolerant Design Patterns]**
+
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+
 > **来源: [ACM](https://dl.acm.org/)**
+
 > **来源: [IEEE](https://standards.ieee.org/)**
+
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

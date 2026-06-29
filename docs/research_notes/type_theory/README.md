@@ -1,25 +1,41 @@
 > **归档提示**:
+
+> **概念族**: 类型理论
+
 >
+
 > 本文档内容为研究笔记，自 2026-03 前后未再更新，于 2026-06-25 标记为归档参考。
+
 > 核心结论请优先查阅 `concept/` 与 `knowledge/`。
 
 # 🔬 类型理论研究 {#-类型理论研究}
 
 > **内容分级**: [归档级]
+
 >
+
 > **分级**: [B]
+
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **创建日期**: 2025-01-27
+
 > **最后更新**: 2026-06-29
+
 > **更新内容**: 新增权威来源索引与最新形式化成果导航
+
 > **Rust 版本**: 1.96.0+ (Edition 2024)
+
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
+
 > **docs 全结构**: DOCS_STRUCTURE_OVERVIEW § 2.7 type_theory
 
 ---
 
 ## 📊 目录 {#-目录}
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [🔬 类型理论研究 {#-类型理论研究}](#-类型理论研究--类型理论研究)
@@ -57,97 +73,122 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 完备性声明
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**本目录核心缺口已补全，全部缺口均有 Def 占位**。详见 [00_completeness_gaps](../../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md)：
+**本目录核心缺口已补全，全部缺口均有 Def 占位**。详见 [00_completeness_gaps](../../../../../../../formal_methods/00_completeness_gaps.md)：
 
-- **Rust 1.93 类型系统特性**：LUB coercion、Copy specialization、offset_of!、never_type、type ascription、newtype、deref_nullptr ✅ Def 已补全；const &mut static、existential 等见 [00_completeness_gaps](../../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md)
+- **Rust 1.93 类型系统特性**：LUB coercion、Copy specialization、offset_of!、never_type、type ascription、newtype、deref_nullptr ✅ Def 已补全；const &mut static、existential 等见 [00_completeness_gaps](../../../../../../../formal_methods/00_completeness_gaps.md)
+
 - **组合法则**：Trait coherence、类型+生命周期+型变、negative impls、impl/dyn 边界、const 求值失败 ✅ 已补全；孤儿规则放宽为倡议未稳定
+
 - **Trait 特性**：RPITIT、async fn in trait ✅ 已补全（Def RPIT1/ASYNC1、定理 RPIT-T1/ASYNC-T1）；negative impls、fundamental 等为扩展缺口
 
 ---
 
 ## 🎯 研究目标 {#-研究目标}
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本目录专注于 Rust 类型系统的理论基础和形式化研究，包括：
 
 1. **类型系统基础**: Rust 类型系统的形式化定义和理论基础
+
 2. **Trait 系统**: Trait 系统的形式化建模和类型推导
+
 3. **生命周期**: 生命周期系统的类型理论解释
+
 4. **高级类型**: GATs、const 泛型等高级类型特性
 
 ---
 
 ## 📚 研究主题 {#-研究主题}
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 类型系统基础
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **研究问题**:
 
 - Rust 类型系统的形式化定义是什么？
+
 - 类型推导算法如何工作？
+
 - 类型安全如何保证？
 
-**相关笔记**: [10_type_system_foundations.md](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)
+**相关笔记**: [10_type_system_foundations.md](10_type_system_foundations.md)
 
 **状态**: ✅ 已完成 (100%)
 
 ### 1b. 类型构造能力
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **研究问题**:
 
 - 哪些类型可构造、用何种语法、构造路径是否唯一？
+
 - 何时可推断、何时需注解、何时必然失败？
 
-**相关笔记**: [10_construction_capability.md](../../../archive/research_notes_2026_06_25/type_theory/10_construction_capability.md)
+**相关笔记**: [10_construction_capability.md](10_construction_capability.md)
 
 **状态**: ✅ 已完成
 
 ---
 
 ### 2. Trait 系统形式化
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **研究问题**:
 
 - Trait 的类型理论基础是什么？
+
 - Trait 对象和动态分发的语义如何形式化？
+
 - 泛型 Trait 的类型推导如何工作？
 
-**相关笔记**: [10_trait_system_formalization.md](../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md)
+**相关笔记**: [10_trait_system_formalization.md](10_trait_system_formalization.md)
 
 **状态**: ✅ 已完成 (100%)
 
 ---
 
 ### 3. 生命周期形式化
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **研究问题**:
 
 - 生命周期的类型理论解释是什么？
+
 - 生命周期推断算法如何形式化？
+
 - 生命周期与类型系统的关系如何？
 
 **相关笔记**: [10_lifetime_formalization.md](10_lifetime_formalization.md)
@@ -157,43 +198,53 @@
 ---
 
 ### 4. 高级类型特性
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **研究问题**:
 
 - GATs (Generic Associated Types) 的类型理论是什么？
+
 - const 泛型如何影响类型系统？
+
 - Dependent Type 与 Rust 的关系如何？
 
-**相关笔记**: [10_advanced_types.md](../../../archive/research_notes_2026_06_25/type_theory/10_advanced_types.md)
+**相关笔记**: [10_advanced_types.md](10_advanced_types.md)
 
 **状态**: ✅ 已完成 (100%)
 
 ---
 
 ### 5. 型变理论
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **研究问题**:
 
 - 型变的数学基础是什么？
+
 - Rust 的型变规则如何推导？
+
 - 型变如何保证类型安全？
 
 **相关笔记**: [10_variance_theory.md](10_variance_theory.md)
 
 **状态**: ✅ 已完成 (100%)
 
-**论证增强**: 已补充完整证明、反例、公理-定理证明树；详见 [FORMAL_PROOF_SYSTEM_GUIDE](../../../archive/research_notes_2026_06_25/10_formal_proof_system_guide.md)
+**论证增强**: 已补充完整证明、反例、公理-定理证明树；详见 [FORMAL_PROOF_SYSTEM_GUIDE](../../10_formal_proof_system_guide.md)
 
 **Trait 系统、高级类型、类型系统基础**：均已补充反例、公理-定理证明树，论证系统 100% 完成
 
 ---
 
 ## 形式化论证汇总
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def TT1（类型理论覆盖）**：设 $\mathcal{T}$ 为类型理论族，$\mathcal{T} = \{\text{type\_system},\, \text{trait},\, \text{lifetime},\, \text{advanced},\, \text{variance}\}$。每 $t \in \mathcal{T}$ 有 Def、Axiom、Theorem 及证明。
@@ -204,56 +255,79 @@
 
 *证明*：由 type_system T1–T3、trait 对象安全、lifetime T2、variance T1–T4；良型 + 各定理 ⇒ 类型安全。∎
 
-**定理 TT-T2（缺口 Def 占位）**：$\mathcal{T}$ 对 Rust 1.93 类型系统存在 [00_completeness_gaps](../../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md) 所列缺口；**阶段 1–7 已补全 Def 占位**（LUB、Copy、coherence、RPITIT、组合法则、offset_of!、const、孤儿规则等均有 Def）。
+**定理 TT-T2（缺口 Def 占位）**：$\mathcal{T}$ 对 Rust 1.93 类型系统存在 [00_completeness_gaps](../../../../../../../formal_methods/00_completeness_gaps.md) 所列缺口；**阶段 1–7 已补全 Def 占位**（LUB、Copy、coherence、RPITIT、组合法则、offset_of!、const、孤儿规则等均有 Def）。
 
-*证明*：由 [00_completeness_gaps](../../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md) 定理 CGI-T1；缺口项均有 Def 占位。∎
+*证明*：由 [00_completeness_gaps](../../../../../../../formal_methods/00_completeness_gaps.md) 定理 CGI-T1；缺口项均有 Def 占位。∎
 
 ---
 
 ## 权威来源索引与最新形式化成果导航
+
 >
+
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) · [Oxide](https://arxiv.org/abs/1903.00982) · [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) · [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
 
 ### 权威来源分级（P0/P1/P2）
 
 | 级别 | 类型 | 代表来源 | 对齐要求 |
+
 | :--- | :--- | :--- | :--- |
+
 | **P0** | 官方权威 | Rust Reference、The Rust Book、RFCs、Standard Library、Ferrocene FLS | 100% |
+
 | **P1** | 学术权威 | RustBelt、Oxide、Tree Borrows、RustSEM、Aeneas、Verus、Creusot | 核心定理/定义必须对齐 |
+
 | **P2** | 社区/工具权威 | Miri、Kani、Prusti、coq-of-rust、Rust By Example、Clippy | 工具映射与实践示例 |
 
 ### 类型理论研究主题 ↔ 国际成果导航
 
 | 主题 | 核心文档 | 国际形式化成果 | 工具链 |
+
 | :--- | :--- | :--- | :--- |
+
 | 类型系统基础 | `10_type_system_foundations.md` | Oxide、RustBelt | Miri、Kani |
+
 | Trait 系统 | `10_trait_system_formalization.md` | RustBelt（trait 对象）、RefinedRust | Prusti、Creusot |
+
 | 生命周期 | `10_lifetime_formalization.md` | Oxide、RustBelt Lifetime Logic、RustSEM | Polonius、Miri |
+
 | 型变 | `10_variance_theory.md` | Oxide、RustBelt | Rust Analyzer |
+
 | 所有权/借用 | `formal_methods/10_ownership_model.md` | RustBelt、Tree Borrows、RustSEM | Aeneas、coq-of-rust |
+
 | 借用检查器 | `formal_methods/10_borrow_checker_proof.md` | Tree Borrows、Oxide | Miri、Kani |
 
 ### 推荐阅读路径
 
 1. **入门**: Rust Reference + TRPL → 本目录类型系统基础/生命周期/型变。
+
 2. **进阶**: Oxide → 借用检查的形式化规则；RustBelt → 分离逻辑视角。
+
 3. **专家**: Tree Borrows + RustSEM → 别名模型与可执行语义；Aeneas / Verus / Creusot → 工具链验证。
 
 ## 公理-定理形式化索引
 
 | 文档 | 核心公理/定理 | 证明要点 | 缺口 |
+
 | :--- | :--- | :--- | :--- |
-| [00_completeness_gaps](../../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md) | Def CGI、Axiom CGI1、CGI-T1 | 不完备性形式化 | 缺口索引 |
-| [type_system_foundations](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | T1–T5、LUB-T1、COP-T1、OFFSET-T1、ASC-T1、BOT-T1、NEWTYPE-T1、DEREF-NULL1 | 良型不卡住、求值保型 | 类型推断歧义 |
-| [construction_capability](../../../archive/research_notes_2026_06_25/type_theory/10_construction_capability.md) | Def TCON1、TCON-T1、TCON-L1、TCON-C1 | 类型构造能力、确定性判定树 | - |
-| [trait_system_formalization](../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) | 对象安全、impl 解析、COH-T1、RPIT-T1、ASYNC-T1、NEG-T1、DYN-T1、TRAIT-GAT1、SPEC-T1 | dyn | 孤儿放宽（倡议） |
+
+| [00_completeness_gaps](../../../../../../../formal_methods/00_completeness_gaps.md) | Def CGI、Axiom CGI1、CGI-T1 | 不完备性形式化 | 缺口索引 |
+
+| [type_system_foundations](10_type_system_foundations.md) | T1–T5、LUB-T1、COP-T1、OFFSET-T1、ASC-T1、BOT-T1、NEWTYPE-T1、DEREF-NULL1 | 良型不卡住、求值保型 | 类型推断歧义 |
+
+| [construction_capability](10_construction_capability.md) | Def TCON1、TCON-T1、TCON-L1、TCON-C1 | 类型构造能力、确定性判定树 | - |
+
+| [trait_system_formalization](10_trait_system_formalization.md) | 对象安全、impl 解析、COH-T1、RPIT-T1、ASYNC-T1、NEG-T1、DYN-T1、TRAIT-GAT1、SPEC-T1 | dyn | 孤儿放宽（倡议） |
+
 | [lifetime_formalization](10_lifetime_formalization.md) | outlives、T2 引用有效性 | 区域类型、见 formal_methods | 与型变组合 |
-| [advanced_types](../../../archive/research_notes_2026_06_25/type_theory/10_advanced_types.md) | GAT、const 泛型、PhantomData、CONST-EVAL-T1、CONST-MUT1、EXIST1 | 关联类型、类型级常量 | existential 完整规则 |
+
+| [advanced_types](10_advanced_types.md) | GAT、const 泛型、PhantomData、CONST-EVAL-T1、CONST-MUT1、EXIST1 | 关联类型、类型级常量 | existential 完整规则 |
+
 | [variance_theory](10_variance_theory.md) | T1–T4、VAR-COM-T1/C1 | 协变/逆变/不变、组合传递 | 三元组合已补全 |
 
-本索引与 [FORMAL_PROOF_SYSTEM_GUIDE](../../../archive/research_notes_2026_06_25/10_formal_proof_system_guide.md)、[PROOF_INDEX](../../../archive/research_notes_2026_06_25/10_proof_index.md) 衔接。
+本索引与 [FORMAL_PROOF_SYSTEM_GUIDE](../../10_formal_proof_system_guide.md)、[PROOF_INDEX](../10_proof_index.md) 衔接。
 
-**缺口补全**：见 [00_completeness_gaps](../../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md) § 补全路线图。
+**缺口补全**：见 [00_completeness_gaps](../../../../../../../formal_methods/00_completeness_gaps.md) § 补全路线图。
 
 ---
 
@@ -263,11 +337,16 @@
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
-- [x] [类型系统基础](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) - 100%
-- [x] [类型构造能力](../../../archive/research_notes_2026_06_25/type_theory/10_construction_capability.md) - Def TCON1、矩阵、决策树
-- [x] [Trait 系统形式化](../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) - 100%
+- [x] [类型系统基础](10_type_system_foundations.md) - 100%
+
+- [x] [类型构造能力](10_construction_capability.md) - Def TCON1、矩阵、决策树
+
+- [x] [Trait 系统形式化](10_trait_system_formalization.md) - 100%
+
 - [x] [生命周期形式化](10_lifetime_formalization.md) - 100%
-- [x] [高级类型特性](../../../archive/research_notes_2026_06_25/type_theory/10_advanced_types.md) - 100%
+
+- [x] [高级类型特性](10_advanced_types.md) - 100%
+
 - [x] [型变理论](10_variance_theory.md) - 100%
 
 ---
@@ -279,7 +358,9 @@
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - [形式化工程系统 - 类型系统](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)
+
 - [类型系统文档](../../../crates/c02_type_system/docs/README.md)
+
 - [类型系统速查卡](../../02_reference/quick_reference/02_type_system.md)
 
 ### 代码实现
@@ -287,15 +368,19 @@
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - [类型系统实现](../../../crates/c02_type_system/src/README.md)
+
 - [类型系统示例](../../../crates/c02_type_system/examples/README.md)
 
 ### 学术资源
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-- [CORE_THEOREMS_FULL_PROOFS](../../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) — 类型安全 T-TY3 完整证明（L2）；[coq_skeleton](../../../archive/deprecated/coq_skeleton/README.md) — Coq 证明骨架
+- [CORE_THEOREMS_FULL_PROOFS](../10_core_theorems_full_proofs.md) — 类型安全 T-TY3 完整证明（L2）；[coq_skeleton](../../../archive/deprecated/coq_skeleton/README.md) — Coq 证明骨架
+
 - **Types and Programming Languages** (Benjamin C. Pierce)
+
 - **Advanced Topics in Types and Programming Languages**
+
 - **Category Theory for Programmers** (Bartosz Milewski)
 
 ---
@@ -307,21 +392,29 @@
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - **Coq**: 类型理论证明助手
+
 - **Agda**: 依赖类型编程语言
+
 - **Idris**: 依赖类型函数式编程语言
+
 - **Lean**: 现代类型理论证明器
 
 ### 类型理论方法
 
 1. **简单类型 Lambda 演算**: 基础类型系统
+
 2. **系统 F**: 多态类型系统
+
 3. **依赖类型**: 类型依赖于值
+
 4. **范畴论**: 类型和函数的范畴论解释
 
 ### 证明策略
 
 - **类型推导**: 自动推导表达式的类型
+
 - **类型检查**: 验证类型是否正确
+
 - **类型安全**: 证明类型系统保证安全
 
 ---
@@ -331,30 +424,41 @@
 ### 创建新的研究笔记
 
 1. 复制模板文件（如 `10_type_system_foundations.md`）
+
 2. 填写研究问题和目标
+
 3. 添加类型理论定义和证明
+
 4. 提供代码示例和验证
+
 5. 更新本 README 的链接
 
 ### 研究流程
 
 1. **问题定义**: 明确要研究的类型系统特性
+
 2. **文献调研**: 查阅相关类型理论文献
+
 3. **形式化建模**: 使用类型理论语言定义
+
 4. **证明验证**: 使用工具或手工证明
+
 5. **文档编写**: 记录研究过程和结果
 
 ---
 
 **维护团队**: Rust Type Theory Research Group
+
 **最后更新**: 2026-02-14
-**状态**: ✅ **核心缺口已补全**；全部缺口 Def 占位；见 [00_completeness_gaps](../../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md)
+
+**状态**: ✅ **核心缺口已补全**；全部缺口 Def 占位；见 [00_completeness_gaps](../../../../../../../formal_methods/00_completeness_gaps.md)
 
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
+
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
@@ -364,10 +468,15 @@
 #### 核心特性应用
 
 | 特性 | 应用场景 | 文档章节 |
+
 |------|---------|----------|
+
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
+
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
+
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新
@@ -375,28 +484,39 @@
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
+
 - ✅ 兼容Edition 2024
+
 - ✅ 通过标准库测试
 
 #### 相关文档
 
 - Rust 1.94 迁移指南
+
 - [Rust 1.94 特性速查
+
 - [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
+
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+
 >
+
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
+
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
 **最后更新**: 2026-05-19
+
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---

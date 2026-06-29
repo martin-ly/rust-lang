@@ -1,4 +1,6 @@
 # 错误处理速查卡
+>
+> **概念族**: 速查卡
 
 > **内容分级**: [归档级]
 >
@@ -29,6 +31,14 @@
   - [错误转换](#错误转换)
   - [panic vs Result](#panic-vs-result)
   - [🌍 权威国际化资源链接](#-权威国际化资源链接)
+    - [Rust Reference 核心章节](#rust-reference-核心章节)
+    - [The Rust Programming Language 核心章节](#the-rust-programming-language-核心章节)
+    - [Rust Standard Library 核心 API / 模块](#rust-standard-library-核心-api--模块)
+    - [Rust By Example / Rust Cookbook / cheats.rs](#rust-by-example--rust-cookbook--cheatsrs)
+    - [错误处理专属权威链接](#错误处理专属权威链接)
+      - [std::error::Error](#stderrorerror)
+      - [Rust By Example / Cookbook / cheats.rs](#rust-by-example--cookbook--cheatsrs)
+      - [RFC 2504 / anyhow / thiserror](#rfc-2504--anyhow--thiserror)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -122,7 +132,6 @@ let file = File::open("file")?;  // IOError自动转为MyError
 **状态**: ✅ 完成
 
 ---
-
 
 ## 🌍 权威国际化资源链接
 >

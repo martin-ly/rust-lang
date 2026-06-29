@@ -1,4 +1,6 @@
 # 🔬 Rust 研究笔记
+>
+> **概念族**: 元/导航/索引
 
 > **内容分级**: [归档级]
 >
@@ -382,16 +384,16 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 - [x] [所有权模型形式化](formal_methods/10_ownership_model.md) - ✅ 已完成 (100%)
 - [x] [借用检查器证明](formal_methods/10_borrow_checker_proof.md) - ✅ 已完成 (100%)
-- [x] [异步状态机形式化](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) - ✅ 已完成 (100%)
+- [x] [异步状态机形式化](formal_methods/10_async_state_machine.md) - ✅ 已完成 (100%)
 - x] [生命周期形式化 - ✅ 已完成 (100%)
-- [x] [Pin 和自引用类型形式化](../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md) - ✅ 已完成 (100%)
+- [x] [Pin 和自引用类型形式化](formal_methods/10_pin_self_referential.md) - ✅ 已完成 (100%)
 
 **类型理论研究** (5个):
 
-- [x] [类型系统基础](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) - ✅ 已完成 (100%)
-- [x] [Trait 系统形式化](../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) - ✅ 已完成 (100%)
+- [x] [类型系统基础](type_theory/10_type_system_foundations.md) - ✅ 已完成 (100%)
+- [x] [Trait 系统形式化](type_theory/10_trait_system_formalization.md) - ✅ 已完成 (100%)
 - [x] [生命周期形式化](type_theory/10_lifetime_formalization.md) - ✅ 已完成 (100%)
-- [x] [高级类型特性](../../archive/research_notes_2026_06_25/type_theory/10_advanced_types.md) - ✅ 已完成 (100%)
+- [x] [高级类型特性](type_theory/10_advanced_types.md) - ✅ 已完成 (100%)
 - [x] [型变理论](type_theory/10_variance_theory.md) - ✅ 已完成 (100%)
 
 **实验研究** (5个):
@@ -433,7 +435,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 3. **MaybeUninit API 增强研究**
    - 新增安全方法的类型理论分析
    - 未初始化内存的安全性形式化
-   - 相关笔记: [类型系统基础](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)、[高级类型特性](../../archive/research_notes_2026_06_25/type_theory/10_advanced_types.md)
+   - 相关笔记: [类型系统基础](type_theory/10_type_system_foundations.md)、[高级类型特性](type_theory/10_advanced_types.md)
 
 4. **`cfg` 属性在 `asm!` 行上研究**
    - 内联汇编条件编译的改进
@@ -462,7 +464,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 2. **const 上下文增强研究**
    - 对非静态常量引用的形式化分析
    - const 泛型配置系统研究
-   - 相关笔记: [类型系统基础](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)
+   - 相关笔记: [类型系统基础](type_theory/10_type_system_foundations.md)
 
 3. **JIT 编译器优化研究**
    - 异步代码性能提升机制

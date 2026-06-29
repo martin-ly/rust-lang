@@ -1,41 +1,63 @@
 # 边界体系统一分析
 
+> **概念族**: 软件设计 / 边界系统
+
 > **内容分级**: [归档级]
+
 >
+
 > **分级**: [B]
+
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **创建日期**: 2026-02-12
+
 > **最后更新**: 2026-06-29
+
 > **Rust 版本**: 1.96.0+ (Edition 2024)
+
 > **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
+
 > **对齐说明**: 本目录已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/05_boundary_system/` 迁回，正在按 [Rustonomicon](https://doc.rust-lang.org/nomicon/)、[Rust Reference – Unsafe](https://doc.rust-lang.org/reference/unsafe-blocks.html)、[Ferrocene Language Specification](https://spec.ferrocene.dev/) 等权威来源升级。
+
 >
+
 > **权威来源**: [Rustonomicon](https://doc.rust-lang.org/nomicon/) | [Rust Reference](https://doc.rust-lang.org/reference/) | [Ferrocene Language Specification](https://spec.ferrocene.dev/) | [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
 ---
 
 ## 宗旨
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本目录提供软件设计理论体系的三维边界分析。
+
 **层次推进**：先读本 README 与 Def B1–B3，再查各矩阵决策树，
+
 最后按 03_semantic_boundary_map 模式选取示例实践。
 
 1. **安全 vs 非安全**：模式/模型在 Rust 中的安全子集边界
+
 2. **支持 vs 不支持**：语言/库的原生支持程度
+
 3. **充分表达 vs 非充分表达**：相对 OOP/GoF 的语义等价性
 
 ---
 
 ## 形式化定义
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 设 $D$ 为设计模式或执行模型，$B_s$、$B_p$、$B_e$ 分别为安全、支持、表达边界函数（定义见各矩阵文档）：
 
 - **Def B1**：$B_s(D) \in \{\mathrm{Safe},\, \mathrm{Unsafe},\, \mathrm{Inexpr}\}$（见 [safe_unsafe_matrix](10_safe_unsafe_matrix.md) Def 1.1）
+
 - **Def B2**：$B_p(D) \in \{\mathrm{Native},\, \mathrm{Lib},\, \mathrm{FFI}\}$（见 [supported_unsupported_matrix](10_supported_unsupported_matrix.md) Def 1.1）
+
 - **Def B3**：$B_e(D) \in \{\mathrm{Same},\, \mathrm{Approx},\, \mathrm{NoExpr}\}$（见 [expressive_inexpressive_matrix](10_expressive_inexpressive_matrix.md) Def 1.1）
 
 **Axiom B1**：三维边界独立；任一维度可单独判定；组合使用时需同时满足各维约束。
@@ -51,61 +73,93 @@
 ---
 
 ## 文档索引
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 内容 |
+
 | :--- | :--- |
+
 | [safe_unsafe_matrix](10_safe_unsafe_matrix.md) | 安全 vs 非安全边界矩阵 |
+
 | [supported_unsupported_matrix](10_supported_unsupported_matrix.md) | 支持 vs 不支持边界矩阵 |
+
 | [expressive_inexpressive_matrix](10_expressive_inexpressive_matrix.md) | 充分表达 vs 非充分表达边界矩阵 |
 
 ---
 
 ## 三维边界快速参考
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 维度 | 取值 | 含义 |
+
 | :--- | :--- | :--- |
+
 | 安全 | 纯 Safe / 需 unsafe / 无法表达 | 是否依赖 unsafe |
+
 | 支持 | 原生 / 库 / FFI | 语言/标准库 vs 第三方 |
+
 | 表达 | 等价 / 近似 / 不可表达 | 相对 GoF/OOP 语义 |
 
 ## 使用流程
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. 查模式：在 [04_boundary_matrix](../01_design_patterns_formal/04_boundary_matrix.md) 或对应模式文档
+
 2. 判安全：用 [safe_unsafe_matrix](10_safe_unsafe_matrix.md) 决策树
+
 3. 判支持：用 [supported_unsupported_matrix](10_supported_unsupported_matrix.md) 判定
+
 4. 查表达：用 [expressive_inexpressive_matrix](10_expressive_inexpressive_matrix.md) 了解差异
 
 ---
 
 ## 快速决策
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 问题 | 查文档 |
+
 | :--- | :--- |
+
 | 某模式是否纯 Safe？ | [safe_unsafe_matrix](10_safe_unsafe_matrix.md) |
+
 | 需哪个 crate？ | [supported_unsupported_matrix](10_supported_unsupported_matrix.md) |
+
 | 与 GoF 有无差异？ | [expressive_inexpressive_matrix](10_expressive_inexpressive_matrix.md) |
+
 | 从 OOP 迁移？ | expressive_inexpressive_matrix § 从 OOP 迁移建议 |
 
 ---
 
 ## 模式选取决策依据（实质指南）
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 需求类型 | 决策依据 | 推荐矩阵 |
+
 | :--- | :--- | :--- |
+
 | **安全优先** | 需零 unsafe、无 FFI | safe_unsafe_matrix；排除 Inexpr |
+
 | **零依赖** | 仅 std、无第三方 crate | supported_unsupported_matrix；选 Native |
+
 | **语义等价** | 与 GoF/OOP 一致 | expressive_inexpressive_matrix；选 Same |
+
 | **组合约束** | 子模式 Safe 则组合 Safe | 定理 B-T1、SBM-C2；见 [04_compositional_engineering](../04_compositional_engineering/02_effectiveness_proofs.md) CE-T1–T3 |
+
 | **执行模型** | 同步/异步/并发/并行/分布式 | [03_execution_models/06_boundary_analysis](../03_execution_models/06_boundary_analysis.md) 决策树 |
 
 **选型流程**：需求 → 03_semantic_boundary_map 模式选取示例 → 查 Safe/支持/表达 → 确定实现路径。
@@ -113,7 +167,9 @@
 ---
 
 ## 模式选取与边界判定完整示例（实质内容）
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **场景**：需跨平台 UI 组件族（按钮、文本框）；运行时根据平台选择。
@@ -131,11 +187,15 @@
 ---
 
 ## 场景化 Safe 决策示例（实质内容）
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 示例 1：需全局唯一配置
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **需求**：应用启动时加载配置，全局访问。
@@ -145,7 +205,9 @@
 **结论**：`OnceLock<Config>`，零 unsafe。
 
 ### 示例 2：需跨线程共享缓存
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **需求**：多线程可读共享缓存，偶有更新。
@@ -175,6 +237,7 @@
 ## 🆕 Rust 1.94 深度整合更新
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
+
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
@@ -188,10 +251,15 @@
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 | 特性 | 应用场景 | 文档章节 |
+
 |------|---------|----------|
+
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
+
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
+
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新
@@ -199,29 +267,39 @@
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
+
 - ✅ 兼容Edition 2024
+
 - ✅ 通过标准库测试
 
 #### 相关文档
 
 - Rust 1.94 迁移指南
+
 - Rust 1.94 特性速查
+
 - [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
+
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
 
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+
 >
+
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
+
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
 **最后更新**: 2026-05-19
+
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---
@@ -229,10 +307,17 @@
 ## 权威来源索引
 
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
+
 > **来源: [Rust Reference – Unsafe Blocks](https://doc.rust-lang.org/reference/unsafe-blocks.html)**
+
 > **来源: [Rust Reference – Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)**
+
 > **来源: [Rust Reference – Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html)**
+
 > **来源: [Ferrocene Language Specification](https://spec.ferrocene.dev/)**
+
 > **来源: [Rust API Guidelines – Unsafe Code](https://rust-lang.github.io/api-guidelines/unsafe.html)**
+
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**

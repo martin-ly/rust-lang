@@ -1,4 +1,6 @@
 # 🔗 跨文档映射网络 - 核心索引 {#-跨文档映射网络---核心索引}
+>
+> **概念族**: 元/导航/索引
 
 > **内容分级**: [归档级]
 >
@@ -45,6 +47,7 @@
       - [权威来源对齐](#权威来源对齐)
       - [形式化来源对照](#形式化来源对照)
       - [版本与生态更新](#版本与生态更新)
+      - [层级-主题-文档三维矩阵](#层级-主题-文档三维矩阵)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -522,6 +525,41 @@ graph TD
 - 所有概念、示例与最佳实践统一对齐 **Rust 1.96.0+ (Edition 2024)**。
 - 生态引用已更新：async-std → Tokio / smol；wasm32-wasi → wasm32-wasip1 / wasm32-wasip2（详见 [10_application_trees.md](10_application_trees.md)）。
 - 后续版本跟踪请参见 [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) 与 [Rust Reference](https://doc.rust-lang.org/reference/)。
+
+---
+
+#### 层级-主题-文档三维矩阵
+
+> **来源**: [10_knowledge_graph_index.md](10_knowledge_graph_index.md)
+
+| 层级 | 主题 | 主文档 | 反例/边界 |
+|------|------|--------|-----------|
+| L1 元概念 | 资源管理 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) | [10_counter_examples_compendium.md](10_counter_examples_compendium.md) |
+| L1 元概念 | 类型安全 | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) | [10_counter_examples_compendium.md](10_counter_examples_compendium.md) |
+| L1 元概念 | 并发安全 | [formal_methods/10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) | [10_counter_examples_compendium.md](10_counter_examples_compendium.md) |
+| L1 元概念 | 内存安全 | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md) | [10_counter_examples_compendium.md](10_counter_examples_compendium.md) |
+| L1 元概念 | 抽象能力 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | [10_counter_examples_compendium.md](10_counter_examples_compendium.md) |
+| L0 权威来源 | 权威来源对齐网络 | [10_authoritative_source_alignment_network.md](10_authoritative_source_alignment_network.md) | — |
+| L1 元概念 | 权威来源对齐 | [10_authoritative_source_alignment_network.md](10_authoritative_source_alignment_network.md) | [10_rust_reference_alignment.md](10_rust_reference_alignment.md) / [10_rustonomicon_alignment.md](10_rustonomicon_alignment.md) / [10_cargo_book_alignment.md](10_cargo_book_alignment.md) / [10_edition_guide_alignment.md](10_edition_guide_alignment.md) / [10_async_book_alignment.md](10_async_book_alignment.md) / [10_rfc_alignment_index.md](10_rfc_alignment_index.md) |
+| L2 核心概念族 | 所有权 / 借用 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) / [10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | [formal_methods/60_ownership_counterexamples.md](formal_methods/60_ownership_counterexamples.md) / [10_counter_examples_compendium.md](10_counter_examples_compendium.md) |
+| L2 核心概念族 | 生命周期 / 型变 | [type_theory/10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md) / [10_variance_theory.md](type_theory/10_variance_theory.md) | [10_counter_examples_compendium.md](10_counter_examples_compendium.md) |
+| L2 核心概念族 | 类型系统 / Trait | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) / [10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | [type_theory/60_type_system_counterexamples.md](type_theory/60_type_system_counterexamples.md) / [10_counter_examples_compendium.md](10_counter_examples_compendium.md) |
+| L2 核心概念族 | Send/Sync | [formal_methods/10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) / [10_counter_examples_compendium.md](10_counter_examples_compendium.md) |
+| L2 核心概念族 | async/await / Future / Pin | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) / [10_pin_self_referential.md](formal_methods/10_pin_self_referential.md) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) / [10_counter_examples_compendium.md](10_counter_examples_compendium.md) |
+| L2 核心概念族 | 模块系统 | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) | [formal_modules/60_module_counterexamples.md](formal_modules/60_module_counterexamples.md) |
+| L5 代码实践 | 模块系统模式 | [formal_modules/70_module_patterns_and_refactoring.md](formal_modules/70_module_patterns_and_refactoring.md) | [formal_modules/60_module_counterexamples.md](formal_modules/60_module_counterexamples.md) |
+| L2 核心概念族 | 设计模式 | [software_design_theory/01_design_patterns_formal/README.md](software_design_theory/01_design_patterns_formal/README.md) | [software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) |
+| L2 核心概念族 | 工作流模式 | [software_design_theory/02_workflow/README.md](software_design_theory/02_workflow/README.md) | [software_design_theory/60_workflow_compositional_distributed_counterexamples.md](software_design_theory/60_workflow_compositional_distributed_counterexamples.md) |
+| L2 核心概念族 | 执行模型 | [software_design_theory/03_execution_models/README.md](software_design_theory/03_execution_models/README.md) | 待补 |
+| L2 核心概念族 | 组合工程 | [software_design_theory/04_compositional_engineering/README.md](software_design_theory/04_compositional_engineering/README.md) | [software_design_theory/60_workflow_compositional_distributed_counterexamples.md](software_design_theory/60_workflow_compositional_distributed_counterexamples.md) |
+| L2 核心概念族 | 边界系统 | [software_design_theory/05_boundary_system/README.md](software_design_theory/05_boundary_system/README.md) | [software_design_theory/05_boundary_system/README.md](software_design_theory/05_boundary_system/README.md) |
+| L2 核心概念族 | 分布式模式 | [software_design_theory/05_distributed/README.md](software_design_theory/05_distributed/README.md) | [software_design_theory/60_workflow_compositional_distributed_counterexamples.md](software_design_theory/60_workflow_compositional_distributed_counterexamples.md) |
+| L2 核心概念族 | Crate 架构 | [software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) |
+| L2 核心概念族 | unsafe / FFI | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) / [10_counter_examples_compendium.md](10_counter_examples_compendium.md) |
+| L5 代码实践 | 实验与性能 | [experiments/README.md](experiments/README.md) | [experiments/60_experiments_counterexamples.md](experiments/60_experiments_counterexamples.md) |
+| L7 版本层 | Rust 1.91–1.96 | [10_rust_194_research_update.md](10_rust_194_research_update.md) | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) |
+
+> 完整知识图谱见 [10_knowledge_graph_index.md](10_knowledge_graph_index.md)。
 
 ---
 

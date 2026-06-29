@@ -1,4 +1,6 @@
 # 工作流引擎模式形式化定义
+>
+> **概念族**: 软件设计 / 工作流模式
 
 > **内容分级**: [归档级]
 >
@@ -21,9 +23,9 @@
 
 | 模式 | 状态 | 文件 |
 |------|------|------|
-| 工作流状态机 | 📝 规划中 | `01_workflow_state_machine.md` |
-| 补偿链 | 📝 规划中 | `02_compensation_chain.md` |
-| 长事务 | 📝 规划中 | `03_long_running_transaction.md` |
+| 工作流状态机 | 🔄 持续推进中 | [01_workflow_state_machine.md](01_workflow_state_machine.md) |
+| 补偿链 | 🔄 持续推进中 | [02_compensation_chain.md](02_compensation_chain.md) |
+| 长事务 | 🔄 持续推进中 | [03_long_running_transaction.md](03_long_running_transaction.md) |
 
 ---
 

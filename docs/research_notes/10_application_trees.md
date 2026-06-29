@@ -5,6 +5,7 @@
 > - 异步运行时：`async-std` 已归档，新项目优先使用 **Tokio** 或 **smol**。
 > - WASI 目标：`wasm32-wasi` 已重命名为 **`wasm32-wasip1`**；WASI Preview 2 目标为 **`wasm32-wasip2`**。
 > - 学习时请以 [The Rust Programming Language](https://doc.rust-lang.org/book/)、[Rust Reference](https://doc.rust-lang.org/reference/)、[Cargo Book](https://doc.rust-lang.org/cargo/)、[Rust Edition Guide - Rust 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) 为准。
+> **概念族**: 实际应用
 
 ---
 

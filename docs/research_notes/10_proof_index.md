@@ -1,4 +1,6 @@
 # 📚 形式化证明文档索引 {#-形式化证明文档索引}
+>
+> **概念族**: 形式化方法
 
 > **内容分级**: [归档级]
 >
@@ -50,6 +52,8 @@
       - [执行模型扩展（引理/推论）](#执行模型扩展引理推论)
   - [📐 按证明深度导航 {#-按证明深度导航}](#-按证明深度导航--按证明深度导航)
   - [🌍 国际机器可检查证明对标 {#-国际机器可检查证明对标}](#-国际机器可检查证明对标--国际机器可检查证明对标)
+    - [核心定理对标表](#核心定理对标表)
+    - [工具链映射说明](#工具链映射说明)
   - [📖 Ferrocene FLS 与 Rust Reference 精确章节 {#-ferrocene-fls-与-rust-reference-精确章节}](#-ferrocene-fls-与-rust-reference-精确章节--ferrocene-fls-与-rust-reference-精确章节)
   - [🔬 按证明类型分类 {#-按证明类型分类}](#-按证明类型分类--按证明类型分类)
     - [唯一性证明](#唯一性证明)
@@ -102,7 +106,7 @@
 | **L2** | 完整证明 | 归纳基、归纳步、辅助引理编号、形式化陈述 |
 | **L3** | 机器可检查 | Coq/Isabelle/Lean 证明代码 |
 
-**本索引现状**: 多数为 L1；部分（如型变、组合工程、CORE_THEOREMS_FULL_PROOFS）为 L2；L3 骨架已创建（[coq_skeleton](coq_skeleton/README.md) T-OW2/T-BR1/T-TY3，证明 Admitted 待补全），见 [COQ_ISABELLE_PROOF_SCAFFOLDING](10_coq_isabelle_proof_scaffolding.md)、[FORMAL_LANGUAGE_AND_PROOFS](10_formal_language_and_proofs.md)。
+**本索引现状**: 多数为 L1；部分（如型变、组合工程、CORE_THEOREMS_FULL_PROOFS）为 L2；L3 骨架已创建（[coq_skeleton](README.md) T-OW2/T-BR1/T-TY3，证明 Admitted 待补全），见 [COQ_ISABELLE_PROOF_SCAFFOLDING](10_coq_isabelle_proof_scaffolding.md)、[FORMAL_LANGUAGE_AND_PROOFS](10_formal_language_and_proofs.md)。
 
 ---
 

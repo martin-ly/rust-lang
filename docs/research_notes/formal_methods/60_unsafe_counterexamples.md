@@ -1,0 +1,210 @@
+# Unsafe 与 FFI 反例边界
+
+> **内容分级**: [核心级]
+> **层级**: L6 (反例边界)
+> **Bloom 层级**: L5-L6 (分析/评价)
+> **概念族**: unsafe / FFI / 内存安全 / 反例边界
+> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **状态**: ✅ 已完成
+> **创建日期**: 2026-06-29
+> **最后更新**: 2026-06-29
+
+---
+
+## 目录
+
+- [Unsafe 与 FFI 反例边界](#unsafe-与-ffi-反例边界)
+  - [目录](#目录)
+  - [1. 解引用悬空裸指针](#1-解引用悬空裸指针)
+  - [2. 越界访问裸指针](#2-越界访问裸指针)
+  - [3. 数据竞争：裸指针并发写](#3-数据竞争裸指针并发写)
+  - [4. 类型双关（Type Pun）导致错位](#4-类型双关type-pun导致错位)
+  - [5. `unsafe impl` 虚假 Send/Sync](#5-unsafe-impl-虚假-sendsync)
+  - [6. FFI 调用后使用已释放内存](#6-ffi-调用后使用已释放内存)
+  - [7. `transmute` 误用](#7-transmute-误用)
+  - [总结](#总结)
+
+---
+
+## 1. 解引用悬空裸指针
+
+### 现象
+```rust
+let ptr: *const i32 = {
+    let x = 42;
+    &x as *const i32
+}; // x 在这里 drop
+unsafe {
+    println!("{}", *ptr); // ❌ 悬空解引用
+}
+```
+
+### 后果
+运行时未定义行为（UB），可能读取垃圾数据或触发段错误。
+
+### 修复方案
+- 保证裸指针指向的内存在整个使用期间有效。
+- 使用引用或智能指针管理生命周期。
+
+---
+
+## 2. 越界访问裸指针
+
+### 现象
+```rust
+let arr = [1, 2, 3];
+let ptr = arr.as_ptr();
+unsafe {
+    println!("{}", *ptr.add(100)); // ❌ 越界
+}
+```
+
+### 后果
+UB，可能破坏堆元数据或被安全机制检测为越界。
+
+### 修复方案
+- 始终校验偏移量是否在分配大小内。
+- 使用 `slice::get_unchecked` 仅在已验证索引后使用。
+
+---
+
+## 3. 数据竞争：裸指针并发写
+
+### 现象
+```rust
+use std::thread;
+
+static mut COUNTER: i32 = 0;
+
+fn main() {
+    let mut handles = vec![];
+    for _ in 0..10 {
+        handles.push(thread::spawn(|| unsafe {
+            COUNTER += 1; // ❌ 数据竞争
+        }));
+    }
+    // ...
+}
+```
+
+### 后果
+UB，结果不可预期。
+
+### 修复方案
+- 使用 `AtomicI32`。
+- 或使用 `Mutex<i32>` / `RwLock<i32>`。
+
+---
+
+## 4. 类型双关（Type Pun）导致错位
+
+### 现象
+```rust
+let bytes: [u8; 4] = [0x01, 0x00, 0x00, 0x00];
+let ptr = bytes.as_ptr() as *const u32;
+unsafe {
+    println!("{}", *ptr); // ⚠️ 未对齐或 endian 问题
+}
+```
+
+### 后果
+- 未对齐访问导致 UB。
+- endian 不一致导致逻辑错误。
+
+### 修复方案
+- 使用 `u32::from_le_bytes` / `from_be_bytes`。
+- 使用 `std::ptr::read_unaligned` 时仍需谨慎。
+
+---
+
+## 5. `unsafe impl` 虚假 Send/Sync
+
+### 现象
+```rust
+use std::cell::Cell;
+
+struct Bad(Cell<i32>);
+
+unsafe impl Send for Bad {}
+unsafe impl Sync for Bad {}
+
+// 现在可以跨线程共享 Cell，造成数据竞争
+```
+
+### 后果
+绕过借用检查器，运行时数据竞争 UB。
+
+### 修复方案
+- 不手动实现 Send/Sync，让编译器自动推导。
+- 若必须实现，确保所有字段本身满足 Send/Sync 且内部不变量成立。
+
+---
+
+## 6. FFI 调用后使用已释放内存
+
+### 现象
+```rust
+extern "C" {
+    fn get_string() -> *const c_char;
+    fn free_string(p: *const c_char);
+}
+
+unsafe {
+    let s = get_string();
+    let _rust_str = CStr::from_ptr(s).to_str().unwrap();
+    free_string(s);
+    // ❌ 后续使用 _rust_str 指向已释放内存
+}
+```
+
+### 后果
+use-after-free，UB。
+
+### 修复方案
+- 在释放前复制数据到 Rust 拥有所有权的类型（`String`、`Vec<u8>`）。
+- 明确 FFI 端内存管理协议。
+
+---
+
+## 7. `transmute` 误用
+
+### 现象
+```rust
+let f: f32 = 1.0;
+let i: i32 = unsafe { std::mem::transmute(f) }; // ✅ 合法：大小相同
+
+let x: u64 = 1;
+let p: *const u8 = unsafe { std::mem::transmute(x) }; // ❌ 大小相同但语义错误
+```
+
+### 后果
+产生无效值、未对齐指针、破坏类型不变量。
+
+### 修复方案
+- 优先使用类型安全转换：`as`、`.into()`、`from_le_bytes`。
+- `transmute` 前验证：`size_of::<A>() == size_of::<B>()`、对齐、合法值。
+
+---
+
+## 总结
+
+| 反例 | 涉及概念 | 后果 | 修复方向 |
+|------|----------|------|----------|
+| 悬空裸指针 | 生命周期、裸指针 | UB / 段错误 | 保证内存有效 |
+| 越界访问 | 指针运算 | UB | 边界检查 |
+| 裸指针并发写 | 数据竞争 | UB | Atomic / Mutex |
+| 类型双关 | 对齐、endian | UB / 逻辑错误 | 安全转换 API |
+| 虚假 Send/Sync | 并发不变量 | 数据竞争 | 不手动实现 |
+| FFI use-after-free | FFI 内存协议 | UB | 复制所有权 |
+| `transmute` 误用 | 类型擦除 | UB | 安全转换 |
+
+> **权威来源**: [Rust Reference – Unsafe Blocks](https://doc.rust-lang.org/reference/unsafe-blocks.html) | [Rust Reference – Extern Functions](https://doc.rust-lang.org/reference/items/external-blocks.html) | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | [The Rust Programming Language – Ch 19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) | [Rust Reference – Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)
+
+## 相关概念
+
+- [安全与非安全全面论证](../10_safe_unsafe_comprehensive_analysis.md)
+- [模块系统与安全抽象](../formal_modules/40_module_safety_abstraction.md)
+- [所有权与借用反例](60_ownership_counterexamples.md)
+- [并发与异步反例](60_concurrency_async_counterexamples.md)
+- [通用反例汇编](../10_counter_examples_compendium.md)
+- [知识图谱索引](../10_knowledge_graph_index.md)

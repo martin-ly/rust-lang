@@ -1,0 +1,105 @@
+# Async Book 对齐矩阵
+
+> **概念族**: 权威来源对齐 / Async Book
+> **内容分级**: [核心级]
+> **层级**: L0-L6
+> **Bloom 层级**: L5-L6 (分析/评价)
+> **Rust 版本**: 1.96.0+ (Edition 2024)
+> **状态**: ✅ 已完成
+> **创建日期**: 2026-06-29
+> **最后更新**: 2026-06-29
+
+---
+
+## 目录
+
+- [Async Book 对齐矩阵](#async-book-对齐矩阵)
+  - [目录](#目录)
+  - [一、对齐说明](#一对齐说明)
+  - [二、Future 与 async/await](#二future-与-asyncawait)
+  - [三、Pin 与自引用](#三pin-与自引用)
+  - [四、执行器与 Waker](#四执行器与-waker)
+  - [五、IO 与并发](#五io-与并发)
+  - [六、状态机与编译](#六状态机与编译)
+  - [七、常见误区](#七常见误区)
+  - [八、未覆盖缺口](#八未覆盖缺口)
+
+---
+
+## 一、对齐说明
+
+本文档将 `docs/research_notes/` 中关于异步编程、Future、Pin、执行器的内容与 [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) 建立映射。
+
+---
+
+## 二、Future 与 async/await
+
+| Async Book 章节 | 项目文档 | 状态 | 备注 |
+|-----------------|----------|------|------|
+| [Why Async?](https://rust-lang.github.io/async-book/01_getting_started/02_why_async.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | ✅ | 异步动机 |
+| [async/await Primer](https://rust-lang.github.io/async-book/01_getting_started/04_async_await_primer.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | ✅ | async 块编译为 Future |
+| [The Future Trait](https://rust-lang.github.io/async-book/02_execution/02_future.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | ✅ | Future::poll |
+
+---
+
+## 三、Pin 与自引用
+
+| Async Book 章节 | 项目文档 | 状态 | 备注 |
+|-----------------|----------|------|------|
+| [Pinning](https://rust-lang.github.io/async-book/04_pinning/01_chapter.html) | [formal_methods/10_pin_self_referential.md](formal_methods/10_pin_self_referential.md) | ✅ | Pin 保证不移动 |
+| [Pin and Suffering](https://rust-lang.github.io/async-book/04_pinning/01_chapter.html) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §5 | ✅ | Pin 契约破坏 |
+
+---
+
+## 四、执行器与 Waker
+
+| Async Book 章节 | 项目文档 | 状态 | 备注 |
+|-----------------|----------|------|------|
+| [Executors](https://rust-lang.github.io/async-book/02_execution/04_executor.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | ✅ | 执行器调度 |
+| [Waker](https://rust-lang.github.io/async-book/02_execution/03_wakeups.html) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §7 | ✅ | 错误 poll 不注册 waker |
+
+---
+
+## 五、IO 与并发
+
+| Async Book 章节 | 项目文档 | 状态 | 备注 |
+|-----------------|----------|------|------|
+| [Async IO](https://rust-lang.github.io/async-book/03_async_await/01_chapter.html) | [crates/c06_async/](crates/c06_async/README.md) | ✅ | 异步 IO 示例 |
+| [Shared State](https://rust-lang.github.io/async-book/03_async_await/04_shared_state.html) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §4 | ✅ | 异步中持同步锁 |
+
+---
+
+## 六、状态机与编译
+
+| Async Book 章节 | 项目文档 | 状态 | 备注 |
+|-----------------|----------|------|------|
+| [Under the Hood](https://rust-lang.github.io/async-book/02_execution/01_chapter.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | ✅ | async 状态机展开 |
+| [Async Lifetimes](https://rust-lang.github.io/async-book/03_async_await/02_async_lifetimes.html) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §6 | ✅ | async 析构限制 |
+
+---
+
+## 七、常见误区
+
+| 误区 | 项目反例 | Async Book 来源 |
+|------|----------|-----------------|
+| 在 `Drop` 中调用 `.await` | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §6 | [Async Drop](https://rust-lang.github.io/async-book/04_pinning/01_chapter.html) |
+| 同步锁跨越 await | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §4 | [Shared State](https://rust-lang.github.io/async-book/03_async_await/04_shared_state.html) |
+| poll 不注册 waker | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §7 | [Waker](https://rust-lang.github.io/async-book/02_execution/03_wakeups.html) |
+
+---
+
+## 八、未覆盖缺口
+
+1. `Stream` trait（已不稳定 `async_iter`）的专门对齐待 Rust 1.97+ 稳定后补充。
+2. 异步 trait（`trait Foo { async fn bar(); }`）的 Rust 1.75+ 特性需更新。
+3. 具体运行时（tokio/async-std）差异可单独成文。
+
+> **权威来源**: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)
+
+## 相关概念
+
+- [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
+- [异步状态机形式化](formal_methods/10_async_state_machine.md)
+- [Pin 与自引用](formal_methods/10_pin_self_referential.md)
+- [并发与异步反例](formal_methods/60_concurrency_async_counterexamples.md)
+- [知识图谱索引](10_knowledge_graph_index.md)

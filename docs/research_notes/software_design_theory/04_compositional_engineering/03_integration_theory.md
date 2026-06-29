@@ -1,21 +1,37 @@
 # 与 ownership/borrow/trait 的衔接
 
+> **概念族**: 软件设计 / 组合工程
+
 > **内容分级**: [归档级]
+
 >
+
 > **分级**: [B]
+
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **创建日期**: 2026-02-12
+
 > **最后更新**: 2026-06-29
+
 > **Rust 版本**: 1.96.0+ (Edition 2024)
+
 > **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
+
 > **对齐说明**: 本文档已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/` 迁回，正在按 [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)、[Tower Layer/Service Docs](https://docs.rs/tower/latest/tower/trait.Layer.html)、[Rust Design Patterns](https://rust-unofficial.github.io/patterns/) 等权威来源升级。
+
 >
+
 > **权威来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [Tower Docs](https://docs.rs/tower/latest/tower/) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ## 📑 目录
+
 >
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
 >
+
 - [与 ownership/borrow/trait 的衔接](#与-ownershipborrowtrait-的衔接)
   - [📑 目录](#-目录)
   - [形式化定义与定理](#形式化定义与定理)
@@ -45,27 +61,35 @@
   - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
+
 > **最后更新**: 2026-06-29
+
 > **Rust 版本**: 1.96.0+ (Edition 2024)
+
 > **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
 
 ---
 
 ## 形式化定义与定理
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def 1.1（跨模块边界）**:
 
 设 $M_1$、$M_2$ 为模块，$f : M_1 \to M_2$ 为 `pub fn` 调用。
+
 **跨模块边界**指 $f$ 的参数与返回值在 $M_1$ 与 $M_2$ 间传递。
 
 **Def 1.2（性质保持）**:
 
 设 $\Phi$ 为性质（如内存安全、无数据竞争、类型安全）。
+
 若 $M_1$、$M_2$ 各自满足 $\Phi$，且跨模块调用不破坏 $\Phi$，则称**组合保持 $\Phi$**。
 
 **Axiom IT1**：所有权在跨模块值传递时转移；引用传递遵守借用规则。
+
 由 [ownership_model](../../formal_methods/10_ownership_model.md) 规则 1–3、[borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md) 规则 5–8。
 
 **Axiom IT2**：`Send`/`Sync` 为结构性质；若 $T$ 的所有字段为 Send，则 $T$ 为 Send。组合不改变字段类型。
@@ -87,48 +111,83 @@
 ---
 
 ## 衔接关系图
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
+
 组合软件工程有效性
+
         │
+
         ├── 所有权：[ownership_model](../../formal_methods/10_ownership_model.md) T2, T3
+
         │   组合时值传递/移动/借用保持唯一性
+
         │   跨模块调用：参数为值则移动，为 & 则借用
+
         │
+
         ├── 借用：[borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md) T1
+
         │   组合时借用规则跨模块成立
+
         │   pub fn f(&self, x: &T) 保证 x 与 self 借用互斥
+
         │
+
         ├── 生命周期：lifetime_formalization T2
+
         │   组合时 outlives 关系保持
+
         │   跨模块引用需满足生命周期约束
+
         │
+
         ├── 类型系统：[type_system_foundations](../../type_theory/10_type_system_foundations.md) T1–T3
+
         │   组合时类型检查保持
+
         │   模块边界：实参类型与形参一致
+
         │
+
         ├── Trait：[trait_system_formalization](../../type_theory/10_trait_system_formalization.md)
+
         │   组合时 impl 解析、对象安全保持
+
         │   泛型约束跨模块传递
+
         │
+
         └── 异步：[async_state_machine](../../formal_methods/10_async_state_machine.md) T6.1–T6.3
+
             组合时 Future 状态转换保持
+
             async 模块组合：await 链保持 Send
+
 ```
 
 ---
 
 ## 组合与所有权
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 传递方式 | 所有权 | 形式化 |
+
 | :--- | :--- | :--- |
+
 | `fn f(x: T)` | 移动 | $\Omega(x) \mapsto \text{callee}$ |
+
 | `fn f(x: &T)` | 不可变借用 | 借用规则 5–6 |
+
 | `fn f(x: &mut T)` | 可变借用 | 借用规则 7–8 |
+
 | `fn f() -> T` | 返回转移 | $\Omega(\text{ret}) \mapsto \text{caller}$ |
 
 组合时上述规则在模块边界不变；`pub fn` 为边界。
@@ -136,13 +195,19 @@
 ---
 
 ## 组合与 trait
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 场景 | 衔接 |
+
 | :--- | :--- |
+
 | `fn f<T: Trait>(x: T)` | 泛型约束跨模块；单态化后类型确定 |
+
 | `fn f(x: &dyn Trait)` | 对象安全；vtable 正确 |
+
 | `impl Trait for ForeignType` | 孤儿规则； coherence 保证 |
 
 ---
@@ -150,21 +215,33 @@
 ## Tower Service 与类型驱动中间件组合
 
 > **来源: [Tower Docs](https://docs.rs/tower/latest/tower/)**
+
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
 **Def 1.3（Tower Service 边界）**：
+
 `Service<Request>` 将请求处理抽象为统一接口；`Layer` 在不改变核心服务语义的前提下添加横切关注点。
 
 ```rust,ignore
+
 use tower::{Service, ServiceExt};
 
+
+
 async fn handle<S>(mut svc: S, req: Request) -> Result<Response, S::Error>
+
 where
+
     S: Service<Request>,
+
 {
+
     svc.ready().await?;
+
     svc.call(req).await
+
 }
+
 ```
 
 **定理 IT-T3（中间件类型保持）**：若核心服务 $S$ 满足 `Service<Request, Response = R, Error = E>`，中间件 $L$ 保持 `Request`/`Response` 类型不变（或在 `Layer` 签名中显式转换），则组合后类型安全由 CE-T3 保持。
@@ -174,14 +251,19 @@ where
 ---
 
 ## 设计模式组合示例
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 设计模式可组合使用，例如：
 
 - **Builder + Factory Method**：Builder 作为工厂的产品
+
 - **Decorator + Strategy**：装饰器持有多态策略
+
 - **Observer + Command**：观察者接收命令对象
+
 - **Composite + Visitor**：组合结构配合访问者遍历
 
 组合后由各模式的形式化约束与 CE-T1–T3，保持安全性。
@@ -189,74 +271,133 @@ where
 ---
 
 ## 组合代码示例
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
+
 // Builder + Strategy：可配置的排序策略
+
 trait SortStrategy { fn sort(&self, v: &mut [i32]); }
+
 struct QuickSort;
+
 impl SortStrategy for QuickSort { fn sort(&self, v: &mut [i32]) { /* ... */ } }
 
+
+
 struct SorterBuilder<S: SortStrategy> { strategy: S }
+
 impl<S: SortStrategy> SorterBuilder<S> {
+
     fn new(strategy: S) -> Self { Self { strategy } }
+
     fn sort(&self, v: &mut [i32]) { self.strategy.sort(v); }
+
 }
 
+
+
 // Composite + Visitor：树遍历
+
 fn visit<V: Visitor>(v: &mut V, node: &Node) {
+
     match node {
+
         Node::Leaf(x) => v.visit_leaf(x),
+
         Node::Composite(children) => {
+
             for c in children { visit(v, c); }
+
             v.visit_composite(children);
+
         }
+
     }
+
 }
+
 ```
 
 ---
 
 ## 完整多模式组合链条：Builder + Factory + Repository
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **场景**：订单创建（Builder）→ 工厂选择（Factory）→ 持久化（Repository + DTO）。
 
 ```rust
+
 // DTO
+
 struct OrderDto { id: u64, amount: u64 }
 
+
+
 // Repository
+
 trait OrderRepo {
+
     fn save(&self, dto: OrderDto) -> Result<(), String>;
+
 }
+
+
 
 // Builder
+
 struct OrderBuilder { amount: Option<u64> }
+
 impl OrderBuilder {
+
     fn new() -> Self { Self { amount: None } }
+
     fn amount(mut self, v: u64) -> Self { self.amount = Some(v); self }
+
     fn build(self) -> Result<OrderDto, String> {
+
         Ok(OrderDto { id: 0, amount: self.amount.ok_or("amount required")? })
+
     }
+
 }
+
+
 
 // Factory：选择不同 Builder 变体
+
 enum OrderType { Standard, Premium }
+
 fn create_builder(t: OrderType) -> OrderBuilder {
+
     match t {
+
         OrderType::Standard => OrderBuilder::new(),
+
         OrderType::Premium => OrderBuilder::new(),
+
     }
+
 }
 
+
+
 // 组合调用：Factory → Builder → Repository
+
 fn place_order<R: OrderRepo>(repo: &R, t: OrderType, amount: u64) -> Result<(), String> {
+
     let dto = create_builder(t).amount(amount).build()?;
+
     repo.save(dto)
+
 }
+
 ```
 
 **形式化对应**：Builder 满足 B-T2；Factory 满足 FM-T1；Repository 为 43 完全扩展模式；组合由 CE-T1–T3 保持内存安全、数据竞争自由、类型安全。
@@ -264,28 +405,41 @@ fn place_order<R: OrderRepo>(repo: &R, t: OrderType, amount: u64) -> Result<(), 
 ---
 
 ## 组合验证清单
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 组合多模块/多模式时，确认：
 
 - [ ] **CE-T1**：无 `unsafe` 泄漏；跨模块无悬垂、双重释放
+
 - [ ] **CE-T2**：跨线程仅 `Send` 类型；共享仅 `Sync` 类型
+
 - [ ] **CE-T3**：`cargo check` 通过；类型在边界一致
+
 - [ ] **依赖无环**：`mod`/`use` 图无环
+
 - [ ] **接口稳定**：`pub` 变更需考虑消费者
 
 ---
 
 ## 跨模块 Send/Sync 传递
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 场景 | 约束 |
+
 | :--- | :--- |
+
 | `spawn(move \|\| ...)` 捕获模块内类型 | 捕获类型需 `Send` |
+
 | `Arc<T>` 跨线程共享 | `T: Send + Sync` |
+
 | `Mutex<T>` 跨线程 | `T: Send`（Mutex 内部保证 Sync） |
+
 | async 块跨 await | 持有什么类型决定 Future 是否 Send |
 
 组合时：若模块 A 的 `pub fn` 返回 `impl Future` 且内部持有 `T`，则 `T: Send` 才能跨 spawn。
@@ -293,20 +447,29 @@ fn place_order<R: OrderRepo>(repo: &R, t: OrderType, amount: u64) -> Result<(), 
 ---
 
 ## 组合反例
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 反例 | 后果 |
+
 | :--- | :--- |
+
 | 循环 mod 依赖 | 编译失败 |
+
 | pub 暴露 unsafe | 破坏 CE-T1 |
+
 | 跨模块传递 `Rc` 到 spawn | 编译错误（非 Send） |
+
 | trait 方法返回 `Self` 做 dyn | 对象安全违规 |
 
 ---
 
 ## 多层次组合链条（实质内容）
+
 >
+
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 链条 1：Builder + Factory + Repository
@@ -316,24 +479,43 @@ fn place_order<R: OrderRepo>(repo: &R, t: OrderType, amount: u64) -> Result<(), 
 **场景**：订单创建需配置校验、持久化。
 
 ```rust,ignore
+
 // Builder：多步骤构建
+
 struct OrderBuilder { items: Vec<Item>, valid: bool }
+
 impl OrderBuilder {
+
     fn new() -> Self { Self { items: vec![], valid: true } }
+
     fn add_item(mut self, i: Item) -> Self { self.items.push(i); self }
+
     fn build(self) -> Result<Order, String> {
+
         if self.items.is_empty() { Err("empty".into()) }
+
         else { Ok(Order { items: self.items }) }
+
     }
+
 }
 
+
+
 // Factory：创建 Builder 或预配置订单
+
 trait OrderFactory { fn create_builder(&self) -> OrderBuilder; }
 
+
+
 // Repository：持久化
+
 trait OrderRepo { fn save(&mut self, o: Order) -> Result<u64, String>; }
 
+
+
 // 组合：Factory.create_builder().add_item(...).build()? → repo.save(order)?
+
 ```
 
 ### 链条 2：Decorator + Strategy + Observer（完整实现）
@@ -343,43 +525,81 @@ trait OrderRepo { fn save(&mut self, o: Order) -> Result<u64, String>; }
 **场景**：可配置的日志装饰服务，执行后发事件；Strategy 切换算法，Observer 通知完成。
 
 ```rust
+
 use std::sync::mpsc;
+
+
 
 trait Service { fn call(&self) -> i32; }
 
+
+
 struct Logging<S: Service>(S);
+
 impl<S: Service> Service for Logging<S> {
+
     fn call(&self) -> i32 {
+
         println!("[before]");
+
         let r = self.0.call();
+
         println!("[after] {}", r);
+
         r
+
     }
+
 }
+
+
 
 trait Algo { fn run(&self) -> i32; }
+
 struct AlgoA;
+
 impl Algo for AlgoA { fn run(&self) -> i32 { 1 } }
+
 struct AlgoB;
+
 impl Algo for AlgoB { fn run(&self) -> i32 { 2 } }
 
+
+
 struct ServiceWithStrategy<A: Algo> { algo: A }
+
 impl<A: Algo> Service for ServiceWithStrategy<A> {
+
     fn call(&self) -> i32 { self.algo.run() }
+
 }
+
+
 
 // Observer：call 完成后发送事件
+
 fn run_with_observer<S: Service>(s: &S, tx: &mpsc::Sender<i32>) -> i32 {
+
     let r = s.call();
+
     let _ = tx.send(r);
+
     r
+
 }
 
+
+
 // 组合：Logging(ServiceWithStrategy(AlgoB)) + Observer
+
 // let (tx, rx) = mpsc::channel();
+
 // let svc = Logging(ServiceWithStrategy { algo: AlgoB });
+
 // run_with_observer(&svc, &tx);
+
 // assert_eq!(rx.recv().unwrap(), 2);
+
 ```
 
 ### 链条 3：Composite + Visitor + Iterator（完整实现）
@@ -389,45 +609,85 @@ fn run_with_observer<S: Service>(s: &S, tx: &mpsc::Sender<i32>) -> i32 {
 **场景**：树结构遍历、收集、统计；Visitor 访问各节点，Iterator 展平为叶值序列。
 
 ```rust
+
 enum Node { Leaf(i32), Branch(Vec<Node>) }
 
+
+
 trait Visitor {
+
     fn visit_leaf(&mut self, n: &i32);
+
     fn visit_branch(&mut self, children: &[Node]);
+
 }
+
+
 
 struct SumVisitor { sum: i32 }
+
 impl Visitor for SumVisitor {
+
     fn visit_leaf(&mut self, n: &i32) { self.sum += n; }
+
     fn visit_branch(&mut self, children: &[Node]) {
+
         for c in children { c.accept(self); }
+
     }
+
 }
+
+
 
 impl Node {
+
     fn accept<V: Visitor>(&self, v: &mut V) {
+
         match self {
+
             Node::Leaf(n) => v.visit_leaf(n),
+
             Node::Branch(children) => v.visit_branch(children),
+
         }
+
     }
+
     fn iter(&self) -> impl Iterator<Item = i32> + '_ {
+
         let mut stack = vec![self];
+
         std::iter::from_fn(move || {
+
             while let Some(n) = stack.pop() {
+
                 match n {
+
                     Node::Leaf(x) => return Some(*x),
+
                     Node::Branch(cs) => stack.extend(cs.iter().rev()),
+
                 }
+
             }
+
             None
+
         })
+
     }
+
 }
 
+
+
 // 使用：let t = Node::Branch(vec![Node::Leaf(1), Node::Leaf(2)]);
+
 // let mut v = SumVisitor { sum: 0 }; t.accept(&mut v); assert_eq!(v.sum, 3);
+
 // assert_eq!(t.iter().collect::<Vec<_>>(), vec![2, 1]);
+
 ```
 
 ### 链条 4：Chain of Responsibility + Command + Observer
@@ -437,36 +697,67 @@ impl Node {
 **场景**：HTTP 请求经认证→限流→业务处理；每步可封装为 Command；处理完成后发事件。
 
 ```rust,ignore
+
 // 链式处理器：Vec 顺序尝试，替代 Option<Box<Handler>>
+
 fn handle_chain(handlers: &[Box<dyn Handler>], req: &Request) -> Response {
+
     for h in handlers {
+
         if let Some(r) = h.try_handle(req) { return r; }
+
     }
+
     Response::ok()
+
 }
+
+
 
 trait Handler {
+
     fn try_handle(&self, req: &Request) -> Option<Response>;
+
 }
+
+
 
 struct AuthHandler;
+
 impl Handler for AuthHandler {
+
     fn try_handle(&self, req: &Request) -> Option<Response> {
+
         if req.valid_token() { None } else { Some(Response::unauthorized()) }
+
     }
+
 }
 
+
+
 struct CommandHandler<C: Command> { cmd: C }
+
 impl<C: Command> Handler for CommandHandler<C> {
+
     fn try_handle(&self, req: &Request) -> Option<Response> {
+
         Some(self.cmd.execute(req))
+
     }
+
 }
+
+
 
 trait Command { fn execute(&self, req: &Request) -> Response; }
 
+
+
 // 组合：handlers = [Auth, RateLimit, CommandHandler(PlaceOrderCmd)]
+
 // 业务完成后：tx.send(ProcessedEvent) — Observer
+
 ```
 
 **组合要点**：链为 `Vec<Box<dyn Handler>>` 顺序尝试；业务节点持 `Command`；处理完成后通过 channel 发送事件；符合 CE-T1、CE-T2。
@@ -474,33 +765,47 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 ---
 
 ## 跨模块边界最佳实践
+
 >
+
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 实践 | 说明 |
+
 | :--- | :--- |
+
 | **最小 pub** | 仅暴露必要接口；内部实现 `pub(crate)` |
+
 | **trait 边界** | 泛型 `T: Trait` 在模块边界明确；避免 `dyn Trait` 泛滥 |
+
 | **所有权传递** | 跨模块用值传递或 `&`/`&mut`；避免跨模块持有裸指针 |
+
 | **错误类型** | 模块间用 `Result<T, E>` 或自定义 `Error`；`From` 实现转换 |
+
 | **文档契约** | `pub fn` 文档化前置/后置条件；unsafe 契约显式标注 |
 
 ---
 
 ## 引用
+
 >
+
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../../10_theoretical_and_argumentation_system_architecture.md) § 1.2 理论族依赖
+
 - [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](../../10_comprehensive_systematic_overview.md) 概念族谱
 
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+
 >
+
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
+
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
@@ -514,10 +819,15 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 | 特性 | 应用场景 | 文档章节 |
+
 |------|---------|----------|
+
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
+
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
+
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新
@@ -527,7 +837,9 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
+
 - ✅ 兼容Edition 2024
+
 - ✅ 通过标准库测试
 
 #### 相关文档
@@ -535,31 +847,41 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 - Rust 1.94 迁移指南
+
 - [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
+
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
 
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+
 >
+
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
+
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
 **最后更新**: 2026-05-19
+
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---
 
 ## 相关概念
+
 >
+
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [04_compositional_engineering 目录](README.md)
+
 - [上级目录](../README.md)
 
 ---
@@ -567,11 +889,19 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 ## 权威来源索引
 
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
+
 > **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)**
+
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
+
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+
 ---

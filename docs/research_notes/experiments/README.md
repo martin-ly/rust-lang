@@ -1,14 +1,25 @@
 # 🔬 实验研究 {#-实验研究}
 
+> **概念族**: 实验研究
+
 > **内容分级**: [归档级]
+
 >
+
 > **分级**: [B]
+
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **创建日期**: 2025-01-27
+
 > **最后更新**: 2026-06-29
+
 > **Rust 版本**: 1.96.0+ (Edition 2024)
+
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96+ / Edition 2024）
+
 > **对齐说明**: 本目录已于 2026-06-29 完成按 Criterion.rs Book、The Rust Performance Book、rustc Book、Rust Reference、TRPL、Rust Standard Library 等权威国际化来源的对齐升级。
+
 > **docs 全结构**: DOCS_STRUCTURE_OVERVIEW § 2.7 experiments
 
 ---
@@ -52,32 +63,45 @@
 ---
 
 ## 🎯 研究目标 {#-研究目标}
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本目录专注于通过实验验证理论假设，优化 Rust 实践，包括：
 
 1. **性能基准测试**: 评估不同实现的性能特征
+
 2. **内存分析**: 分析内存使用模式和优化机会
+
 3. **编译器优化**: 评估编译器优化的效果
+
 4. **并发性能**: 测试并发实现的性能
 
 ---
 
 ## 📚 研究主题 {#-研究主题}
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 1. 性能基准测试
+
 >
+
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96+ / Edition 2024）
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)
 
 **研究问题**:
 
 - 不同实现的性能差异如何？
+
 - 如何设计有效的基准测试？
+
 - 如何分析性能瓶颈？
 
 **相关笔记**: [10_performance_benchmarks.md](10_performance_benchmarks.md)
@@ -87,15 +111,21 @@
 ---
 
 ### 2. 内存分析
+
 >
+
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96+ / Edition 2024）
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)
 
 **研究问题**:
 
 - 不同数据结构的内存使用模式如何？
+
 - 如何优化内存分配？
+
 - 内存泄漏如何检测和修复？
 
 **相关笔记**: [10_memory_analysis.md](10_memory_analysis.md)
@@ -105,15 +135,21 @@
 ---
 
 ### 3. 编译器优化
+
 >
+
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96+ / Edition 2024）
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)
 
 **研究问题**:
 
 - 编译器优化的效果如何？
+
 - 如何编写编译器友好的代码？
+
 - 内联、循环优化等优化的影响如何？
 
 **相关笔记**: [10_compiler_optimizations.md](10_compiler_optimizations.md)
@@ -123,15 +159,21 @@
 ---
 
 ### 4. 并发性能
+
 >
+
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96+ / Edition 2024）
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)
 
 **研究问题**:
 
 - 不同并发模型的性能如何？
+
 - 如何优化并发实现？
+
 - 锁、通道等同步原语的性能特征如何？
 
 **相关笔记**: [10_concurrency_performance.md](10_concurrency_performance.md)
@@ -141,15 +183,21 @@
 ---
 
 ### 5. 宏展开性能
+
 >
+
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96+ / Edition 2024）
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)
 
 **研究问题**:
 
 - 不同宏的展开性能如何？
+
 - 宏对编译时间的影响如何？
+
 - 如何优化宏展开性能？
 
 **相关笔记**: [10_macro_expansion_performance.md](10_macro_expansion_performance.md)
@@ -159,23 +207,34 @@
 ---
 
 ## 📝 研究笔记 {#-研究笔记}
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 已完成 ✅ {#已完成-}
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [x] [性能基准测试](10_performance_benchmarks.md) - 100%
+
 - [x] [内存分析](10_memory_analysis.md) - 100%
+
 - [x] [编译器优化](10_compiler_optimizations.md) - 100%
+
 - [x] [并发性能研究](10_concurrency_performance.md) - 100%
+
 - [x] [宏展开性能分析](10_macro_expansion_performance.md) - 100%
+- [x] [实验与性能研究反例边界](60_experiments_counterexamples.md) - 100%
 
 ---
 
 ## 🔗 相关资源 {#-相关资源}
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 核心文档
@@ -183,7 +242,9 @@
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - [基准测试框架](../../../crates/c08_algorithms/docs/README.md)
+
 - [性能分析工具](../../../crates/c06_async/docs/README.md)
+
 - [内存分析工具](../../../crates/c05_threads/docs/README.md)
 
 ### 代码实现
@@ -191,7 +252,9 @@
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - [算法实现](../../../crates/c08_algorithms/src/README.md)
+
 - [异步实现](../../../crates/c06_async/docs/README.md)
+
 - [并发实现](../../../crates/c05_threads/docs/README.md)
 
 ### 工具资源
@@ -199,8 +262,11 @@
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 - [Criterion.rs](https://github.com/bheisler/criterion.rs): 统计驱动的基准测试框架
+
 - perf: Linux 性能分析工具
+
 - Valgrind: 内存分析工具
+
 - [flamegraph](https://github.com/flamegraph-rs/flamegraph): 性能火焰图生成工具
 
 ---
@@ -212,9 +278,13 @@
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 1. **假设提出**: 明确要验证的假设
+
 2. **实验设计**: 设计实验方案和对照组
+
 3. **数据收集**: 收集性能数据
+
 4. **数据分析**: 分析数据并得出结论
+
 5. **结果验证**: 验证结果的可靠性
 
 ### 基准测试方法
@@ -222,8 +292,11 @@
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 - **统计方法**: 使用统计方法分析结果
+
 - **多次运行**: 多次运行取平均值
+
 - **环境控制**: 控制实验环境的一致性
+
 - **结果报告**: 清晰报告实验结果
 
 ### 性能分析工具
@@ -231,8 +304,11 @@
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 - **Profiler**: 性能分析器
+
 - **Memory Profiler**: 内存分析器
+
 - **Benchmark Framework**: 基准测试框架
+
 - **Visualization Tools**: 可视化工具
 
 ---
@@ -260,10 +336,15 @@
 **推论 EX-C1**：实验不能替代形式化证明；形式化证明不能替代实验验证（性能、资源消耗等经验性质）。
 
 | 实验类型 | 形式化定理 | 验证目标 | 文档链接 |
+
 | :--- | :--- | :--- | :--- |
+
 | 内存分析 | ownership T2/T3、RC-T1、REFCELL-T1 | 无泄漏、无双重释放 | [ownership_model](../../research_notes/formal_methods/10_ownership_model.md) |
+
 | 并发性能 | borrow T1、CHAN-T1、MUTEX-T1、async T6.2、SPAWN-T1 | 无数据竞争 | [borrow_checker_proof](../../research_notes/formal_methods/10_borrow_checker_proof.md)、[async_state_machine](../../research_notes/formal_methods/10_async_state_machine.md) |
+
 | 编译器优化 | type_system 保持性 | 优化保持类型 | [type_system_foundations](../../research_notes/type_theory/10_type_system_foundations.md) |
+
 | 宏展开 | 宏卫生、展开正确性 | 编译时间与正确性 | — |
 
 ---
@@ -271,10 +352,15 @@
 ## 实验可重复性
 
 | 要点 | 说明 |
+
 | :--- | :--- |
+
 | 固定 Rust 版本 | `rust-toolchain.toml` 指定 |
+
 | 固定依赖版本 | `Cargo.lock` 提交 |
+
 | 环境变量 | 文档化 CPU governor、thermal 等 |
+
 | 统计报告 | Criterion 输出均值、置信区间 |
 
 各实验文档的「结果分析模板」均含**示例填写**（典型 x86_64、Rust 1.96+ 环境下的示例数据），便于对照和复现。
@@ -288,10 +374,15 @@
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 1. 复制模板文件（如 `10_performance_benchmarks.md`）
+
 2. 填写实验假设和目标
+
 3. 设计实验方案
+
 4. 运行实验并收集数据
+
 5. 分析结果并得出结论
+
 6. 更新本 README 的链接
 
 ### 实验流程
@@ -299,16 +390,23 @@
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 1. **问题定义**: 明确要研究的性能问题
+
 2. **假设提出**: 提出可验证的假设
+
 3. **实验设计**: 设计实验方案
+
 4. **数据收集**: 运行实验并收集数据
+
 5. **数据分析**: 分析数据并得出结论
+
 6. **结果报告**: 编写实验报告
 
 ---
 
 **维护团队**: Rust Performance Research Group
+
 **最后更新**: 2026-02-12
+
 **状态**: ✅ **全部 100% 完成**
 
 ---
@@ -316,6 +414,7 @@
 ## 🆕 Rust 1.94 深度整合更新
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
+
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
@@ -327,10 +426,15 @@
 #### 核心特性应用
 
 | 特性 | 应用场景 | 文档章节 |
+
 |------|---------|----------|
+
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
+
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
+
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新
@@ -338,29 +442,39 @@
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
+
 - ✅ 兼容Edition 2024
+
 - ✅ 通过标准库测试
 
 #### 相关文档
 
 - Rust 1.94 迁移指南
+
 - Rust 1.94 特性速查
+
 - [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
+
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
 
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+
 >
+
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
+
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
 **最后更新**: 2026-05-19
+
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---
@@ -368,25 +482,43 @@
 ## 权威来源索引（国际化）
 
 | 来源 | 链接 | 覆盖主题 |
+
 | :--- | :--- | :--- |
+
 | Criterion.rs Book | [bheisler.github.io/criterion.rs/book](https://bheisler.github.io/criterion.rs/book/) | 统计显著性、置信区间、回归检测、基准设计 |
+
 | The Rust Performance Book | [nnethercote.github.io/perf-book](https://nnethercote.github.io/perf-book/) | Profiling、内存、并行性、编译时间 |
+
 | rustc Book | [doc.rust-lang.org/rustc](https://doc.rust-lang.org/rustc/) | 优化级别、LTO、PGO、内联 |
+
 | Rust Reference | [doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/) | 语言语义、类型布局、宏、并发 |
+
 | The Rust Programming Language | [doc.rust-lang.org/book](https://doc.rust-lang.org/book/) | 官方教程（所有权、并发、宏） |
+
 | Rust Standard Library | [doc.rust-lang.org/std](https://doc.rust-lang.org/std/) | `std::sync`、`std::alloc`、`Atomic`、`Vec` 等 API |
+
 | Tokio Docs | [docs.rs/tokio](https://docs.rs/tokio/latest/tokio/) | 异步运行时与通道 |
+
 | Rayon Docs | [docs.rs/rayon](https://docs.rs/rayon/latest/rayon/) | 数据并行 |
+
 | Crossbeam Docs | [docs.rs/crossbeam](https://docs.rs/crossbeam/latest/crossbeam/) | 高性能并发原语 |
+
 | The Little Book of Rust Macros | [veykril.github.io/tlborm](https://veykril.github.io/tlborm/) | 宏高级主题 |
 
 ## 权威来源索引
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+
 > **来源: [ACM](https://dl.acm.org/)**
+
 > **来源: [IEEE](https://standards.ieee.org/)**
+
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**

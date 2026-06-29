@@ -1,4 +1,6 @@
 # 研究笔记完整索引
+>
+> **概念族**: 元/导航/索引
 
 > **内容分级**: [归档级]
 >
@@ -8,9 +10,9 @@
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-> **状态**: ✅ **结构迁回完成，权威国际化来源对齐升级完成**（子目录已从 archive 迁回，按 P0/P1/P2 来源逐项升级完成）
+> **状态**: ✅ **docs/research_notes 六层两网一库知识体系 100% 骨架与核心内容覆盖完成**（阶段 0-3 完成；阶段 4 行号级锚点作为持续增强项）
 >
-> **说明**: 2026-06-29 已将 `experiments/`、`software_design_theory/` 各子目录、`formal_modules/` 及根目录 130+ 篇核心文档从 `archive/research_notes_2026_06_25/` 迁回，并完成权威国际化来源对齐升级。
+> **说明**: 2026-06-29 已将 `experiments/`、`software_design_theory/` 各子目录、`formal_modules/` 及根目录 130+ 篇核心文档从 `archive/research_notes_2026_06_25/` 迁回；完成权威国际化来源对齐升级；补齐模块系统、所有权/借用、类型系统、并发/异步、unsafe、设计模式、Crate 架构、工作流/组合工程/分布式、实验研究、版本演进等 10+ 个反例边界文件；`10_knowledge_graph_index.md` 建立六层两网一库完整知识图谱索引。
 
 ---
 
@@ -168,6 +170,28 @@
 - 形式化验证对标与差距分析
 - 可持续推进方案与改进建议
 
+7b1a. **[10_authoritative_source_alignment_network.md](10_authoritative_source_alignment_network.md)** - 权威来源对齐网络总索引 🆕
+   - P0/P1/P2 权威来源总览
+   - 各权威来源对齐文档入口
+
+7b1b. **[10_rust_reference_alignment.md](10_rust_reference_alignment.md)** - Rust Reference 对齐矩阵 🆕
+   - 词法、类型、表达式、modules、unsafe、attributes 章节映射
+
+7b1c. **[10_rustonomicon_alignment.md](10_rustonomicon_alignment.md)** - Rustonomicon 对齐矩阵 🆕
+   - 所有权、类型布局、并发、未初始化内存、FFI 映射
+
+7b1d. **[10_cargo_book_alignment.md](10_cargo_book_alignment.md)** - Cargo Book 对齐矩阵 🆕
+   - package、依赖、workspace、features、build、发布映射
+
+7b1e. **[10_edition_guide_alignment.md](10_edition_guide_alignment.md)** - Rust Edition Guide 对齐矩阵 🆕
+   - 2018/2021/2024 Edition 变更映射
+
+7b1f. **[10_async_book_alignment.md](10_async_book_alignment.md)** - Async Book 对齐矩阵 🆕
+   - Future、Pin、执行器、Waker、IO 映射
+
+7b1g. **[10_rfc_alignment_index.md](10_rfc_alignment_index.md)** - Rust RFC 对齐索引 🆕
+   - 核心语言、类型系统、异步、Edition、工具链 RFC 映射
+
 7b2. **[10_rust_book_alignment.md](10_rust_book_alignment.md)** - Rust Book 逐章对标映射表 🆕
 
 - TRPL 2024 Edition 21 章逐章映射到本项目文档、示例、练习
@@ -194,6 +218,19 @@
 
 7l. **[COQ_ISABELLE_PROOF_SCAFFOLDING](../../archive/docs/deprecated/README.md)** - Coq/Isabelle 证明骨架与 L3 实施指南（已归档）
 7m. **[coq_skeleton](../../archive/docs/deprecated/coq_skeleton/README.md)** - Coq 证明骨架（T-OW2/T-BR1/T-TY3）；本目录仅保留 [coq_skeleton/README.md](../../archive/deprecated/coq_skeleton/README.md) 重定向（已归档）
+
+7n. **[10_knowledge_graph_index.md](10_knowledge_graph_index.md)** - 六层两网一库知识图谱索引 🆕
+
+- L0-L7 概念节点、关系边、文档锚点
+- 8 大主-topic 入口与反例覆盖
+
+7o. **[10_cross_reference_index.md](10_cross_reference_index.md)** - 跨文档映射网络 🆕
+
+- 层级-主题-文档三维矩阵
+
+7p. **[10_research_notes_systematization_completion_report.md](10_research_notes_systematization_completion_report.md)** - docs/research_notes 系统化层次化梳理完成报告 🆕
+
+- 四阶段完成情况、新增文件清单、自动化检查结果、8 大主-topic 覆盖矩阵
 
 1. **[10_comprehensive_systematic_overview.md](10_comprehensive_systematic_overview.md)** - 全面系统化梳理总览
    - 五大梳理维度（概念定义、属性关系、解释论证、形式化证明、思维表征）
@@ -466,7 +503,15 @@
    - Aeneas / coq-of-rust / RustBelt 中的模块处理
    - 状态: ✅ 新建完成 / 权威国际化来源对齐完成
 
-7. **[10_formalization_ecology_mindmap.md](formal_modules/10_formalization_ecology_mindmap.md)** - Rust 形式化生态思维导图
+7. **[60_module_counterexamples.md](formal_modules/60_module_counterexamples.md)** - 模块系统反例与边界案例
+   - 循环依赖、`mod` 重复、`use` 路径、`pub(in path)`、`crate-type`、`#[no_mangle]`、可见性安全边界
+   - 状态: ✅ 新建完成
+
+8. **[70_module_patterns_and_refactoring.md](formal_modules/70_module_patterns_and_refactoring.md)** - 模块系统代码实践模式
+   - 职责分层、`pub use` 重导出、sealed trait、unsafe 封装、workspace、重构示例
+   - 状态: ✅ 新建完成
+
+9. **[10_formalization_ecology_mindmap.md](formal_modules/10_formalization_ecology_mindmap.md)** - Rust 形式化生态思维导图
    - 验证工具、证明助手、形式化语义、研究项目概览
    - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
 
@@ -626,6 +671,7 @@
 - [所有权模型形式化](formal_methods/10_ownership_model.md)
 - [借用检查器证明](formal_methods/10_borrow_checker_proof.md)
 - [Pin 和自引用类型形式化](formal_methods/10_pin_self_referential.md)
+- [所有权与借用反例边界](formal_methods/60_ownership_counterexamples.md)
 
 ### 类型系统
 
@@ -636,6 +682,7 @@
 - [Trait 系统形式化](type_theory/10_trait_system_formalization.md)
 - [高级类型特性](type_theory/10_advanced_types.md)
 - [型变理论](type_theory/10_variance_theory.md)
+- [类型系统反例边界](type_theory/60_type_system_counterexamples.md)
 
 ### 生命周期
 
@@ -651,6 +698,7 @@
 - [异步状态机形式化](formal_methods/10_async_state_machine.md)
 - [并发性能研究](experiments/10_concurrency_performance.md)
 - [执行模型](software_design_theory/03_execution_models/README.md)（同步/异步/并发/并行/分布式）
+- [并发与异步反例边界](formal_methods/60_concurrency_async_counterexamples.md)
 
 ### 安全与 unsafe
 
@@ -659,6 +707,7 @@
 - [安全与非安全全面论证](10_safe_unsafe_comprehensive_analysis.md)
 - [05_boundary_system 三维边界](software_design_theory/05_boundary_system/README.md)
 - [07_anti_patterns 反模式](software_design_theory/07_anti_patterns.md)
+- [Unsafe 与 FFI 反例边界](formal_methods/60_unsafe_counterexamples.md)
 
 ### 设计模式与工程
 
@@ -668,6 +717,9 @@
 - [23 安全 / 43 完全模型](software_design_theory/02_workflow_safe_complete_models/README.md)
 - [组合工程](software_design_theory/04_compositional_engineering/README.md)
 - [06_rust_idioms](software_design_theory/06_rust_idioms.md)、[07_anti_patterns](software_design_theory/07_anti_patterns.md)
+- [设计模式反例边界](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md)
+- [Crate 架构反例边界](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md)
+- [工作流/组合工程/分布式反例边界](software_design_theory/60_workflow_compositional_distributed_counterexamples.md)
 
 ### 性能优化
 
@@ -677,6 +729,7 @@
 - [内存分析](experiments/10_memory_analysis.md)
 - [编译器优化](experiments/10_compiler_optimizations.md)
 - [宏展开性能分析](experiments/10_macro_expansion_performance.md)
+- [实验与性能研究反例边界](experiments/60_experiments_counterexamples.md)
 
 ### 实际应用 {#实际应用-1}
 
@@ -689,6 +742,7 @@
 
 - [Rust 1.93 语言特性全面分析](10_rust_193_language_features_comprehensive_analysis.md)
 - [Rust 1.92 研究更新](10_rust_192_research_update_2025_12_11.md)、[Rust 1.91 研究更新](10_rust_191_research_update_2025_11_15.md)
+- [版本演进边界与迁移反例](10_version_evolution_counterexamples.md)
 
 ---
 

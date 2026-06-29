@@ -1,4 +1,5 @@
 > **归档提示**: 本文档内容为研究笔记，自 2026-03 前后未再更新，于 2026-06-25 标记为归档参考。核心结论请优先查阅 `concept/` 与 `knowledge/`。
+> **概念族**: 安全 / 验证
 
 # Rust 安全与非安全全面论证与分析
 
@@ -355,8 +356,8 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 | 文档 | 用途 |
 | :--- | :--- |
-| [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../../archive/research_notes_2026_06_25/10_theoretical_and_argumentation_system_architecture.md) | 理论体系、论证体系、安全边界总览 |
-| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../archive/research_notes_2026_06_25/10_language_semantics_expressiveness.md) | 公理语义、unsafe 契约 |
+| [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](10_theoretical_and_argumentation_system_architecture.md) | 理论体系、论证体系、安全边界总览 |
+| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](10_language_semantics_expressiveness.md) | 公理语义、unsafe 契约 |
 | [UNSAFE_RUST_GUIDE](../../concept/03_advanced/03_unsafe.md) | Unsafe Rust 专题指南 |
 | [ownership_model](formal_methods/10_ownership_model.md) | 内存安全定理 |
 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) | 数据竞争自由定理 |

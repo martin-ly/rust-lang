@@ -1,4 +1,6 @@
 # research_notes 全面梳理
+>
+> **概念族**: 元/导航/索引
 
 > **内容分级**: [归档级]
 >
@@ -41,7 +43,7 @@
 1. **结构透明**：实际目录与文件清单与 README/INDEX 一致
 2. **归档清晰**：已归档项（Aeneas、coq-of-rust、coq_skeleton）入口统一指向 archive
 3. **版本统一**：全目录元数据默认 Rust 1.96.0+ (Edition 2024)
-4. **单入口**：首次使用从 [00_ORGANIZATION_AND_NAVIGATION](../../archive/research_notes_2026_06_25/10_00_organization_and_navigation.md) 或 [README](README.md) 进入
+4. **单入口**：首次使用从 [00_ORGANIZATION_AND_NAVIGATION](10_00_organization_and_navigation.md) 或 [README](README.md) 进入
 
 ---
 
@@ -126,12 +128,12 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 
 | 文档 | 角色 | 何时用 |
 | :--- | :--- | :--- |
-| [00_ORGANIZATION_AND_NAVIGATION](../../archive/research_notes_2026_06_25/10_00_organization_and_navigation.md) | 按目标选路径、三大支柱、层级 | 首次使用、不知道从哪看 |
+| [00_ORGANIZATION_AND_NAVIGATION](10_00_organization_and_navigation.md) | 按目标选路径、三大支柱、层级 | 首次使用、不知道从哪看 |
 | [README](README.md) | 主入口、研究方向、规范、目录树 | 总览、规范 |
 | [INDEX](INDEX.md) | 完整列表、按领域/主题/证明 | 查具体文档、证明索引 |
-| [QUICK_FIND](../../archive/research_notes_2026_06_25/10_quick_find.md) | 关键词/领域/目标 | 快速定位 |
-| [QUICK_REFERENCE](../../archive/research_notes_2026_06_25/10_quick_reference.md) | 按主题快速参考 | 按主题查 |
-| [HIERARCHICAL_MAPPING_AND_SUMMARY](../../archive/research_notes_2026_06_25/10_hierarchical_mapping_and_summary.md) | 文档树、概念↔定理、文档↔思维表征 | 层次化检索、双向追溯 |
+| [QUICK_FIND](10_quick_find.md) | 关键词/领域/目标 | 快速定位 |
+| [QUICK_REFERENCE](10_quick_reference.md) | 按主题快速参考 | 按主题查 |
+| [HIERARCHICAL_MAPPING_AND_SUMMARY](10_hierarchical_mapping_and_summary.md) | 文档树、概念↔定理、文档↔思维表征 | 层次化检索、双向追溯 |
 | 本文件 | 结构梳理、归档约定、版本 | 维护与一致性检查 |
 
 ---
@@ -143,7 +145,7 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 - **默认版本**：所有 research_notes 下文档元数据统一为 **Rust 1.93.1+ (Edition 2024)**（历史归档保留原版本）。
 - **权威引用**：releases.rs 1.93.0、
 - Rust 1.93.1 公告；
-- 详见 [00_ORGANIZATION_AND_NAVIGATION § 六](../../archive/research_notes_2026_06_25/10_00_organization_and_navigation.md#六权威来源与版本约定)。
+- 详见 [00_ORGANIZATION_AND_NAVIGATION § 六](10_00_organization_and_navigation.md#六权威来源与版本约定)。
 
 ---
 
@@ -162,7 +164,7 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 - **决策树**：*_DECISION_TREE（DESIGN_PATTERN_SELECTION、WORKFLOW_ENGINE、DISTRIBUTED_ARCHITECTURE、ASYNC_RUNTIME、ERROR_TYPE_SELECTION、OWNERSHIP_TRANSFER、TESTING_STRATEGY、ERROR_HANDLING、SERIALIZATION、VERIFICATION_TOOLS）
 - **其他**：APPLICATION_TREES、PROOF_TECHNIQUES_MINDMAP、PROOF_STRATEGIES、FORMAL_FOUNDATIONS_INDEX、CASE_STUDIES 等
 
-完整列表以 `formal_methods/` 下实际文件为准；详见 [formal_methods/README](../../archive/research_notes_2026_06_25/formal_methods/README.md)。
+完整列表以 `formal_methods/` 下实际文件为准；详见 [formal_methods/README](formal_methods/README.md)。
 
 ---
 
