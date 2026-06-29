@@ -37,6 +37,7 @@
     - [3. `unsafe trait` 的模块内实现](#3-unsafe-trait-的模块内实现)
   - [反例与边界](#反例与边界)
   - [权威来源对照表](#权威来源对照表)
+  - [学术/社区来源参考](#学术社区来源参考)
 
 ---
 
@@ -307,3 +308,11 @@ pub use inner::MyType;
 ---
 
 > **权威来源**: [Rustonomicon – Safe and Unsafe](https://doc.rust-lang.org/nomicon/safe-unsafe-meaning.html) | [Rustonomicon – Interior Mutability](https://doc.rust-lang.org/nomicon/interior-mutability.html) | [Rust API Guidelines – Unsafe](https://rust-lang.github.io/api-guidelines/unsafe.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+
+---
+
+## 学术/社区来源参考
+
+> **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**: [Aeneas](https://aeneas-verification.github.io/)
+> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)

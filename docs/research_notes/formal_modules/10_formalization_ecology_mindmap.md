@@ -45,6 +45,7 @@
       - [相关文档](#相关文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [学术/社区来源参考](#学术社区来源参考)
 
 ## 生态系统层次
 
@@ -387,3 +388,9 @@
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 ---
+
+## 学术/社区来源参考
+
+> **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**: [Aeneas](https://aeneas-verification.github.io/)
+> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)

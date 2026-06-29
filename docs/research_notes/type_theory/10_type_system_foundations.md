@@ -4687,3 +4687,9 @@ fn truncate_front(&mut self, len: usize)
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ---
+
+## 权威来源参考
+
+> **来源**: [Oxide](https://arxiv.org/abs/1903.00982)
+> **来源**: [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
+> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)

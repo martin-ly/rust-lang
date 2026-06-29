@@ -2,9 +2,15 @@
 
 > **分级**: [A]
 > **Bloom 层级**: L4-L5 (分析/评价)
-
 > **定位**: 三轨道（concept/ / knowledge/ / docs/）核心文件的层次关系、定理链、跨层映射的单一事实来源
-> **来源: [Wikipedia - Knowledge Organization](https://en.wikipedia.org/wiki/Knowledge_Organization)** · **来源: [Wikipedia - Taxonomy](https://en.wikipedia.org/wiki/Taxonomy)** · **[来源: ACM - Knowledge Representation]** · **[来源: IEEE - Information Architecture]** · **[来源: Bloom Taxonomy 2001]**
+> **来源:
+>
+> [Wikipedia - Knowledge Organization](https://en.wikipedia.org/wiki/Knowledge_Organization)** ·
+> **来源: [Wikipedia - Taxonomy](https://en.wikipedia.org/wiki/Taxonomy)** ·
+> **[来源: ACM - Knowledge Representation]** ·
+> **[来源: IEEE - Information Architecture]** ·
+> **[来源: Bloom Taxonomy 2001]**
+>
 > **覆盖**: 30 个核心示范文件 + L0-L7 全局架构
 > **更新频率**: 每批次核心文件完善后同步更新
 > **状态**: v1.0（2026-05-21）

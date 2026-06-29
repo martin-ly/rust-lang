@@ -16,19 +16,43 @@
 - [实验与性能研究反例边界](#实验与性能研究反例边界)
   - [目录](#目录)
   - [1. 基准测试未禁用优化](#1-基准测试未禁用优化)
+    - [现象](#现象)
+    - [后果](#后果)
+    - [修复方案](#修复方案)
   - [2. 编译器常量折叠掩盖真实性能](#2-编译器常量折叠掩盖真实性能)
+    - [现象](#现象-1)
+    - [后果](#后果-1)
+    - [修复方案](#修复方案-1)
   - [3. 微基准未预热缓存](#3-微基准未预热缓存)
+    - [现象](#现象-2)
+    - [问题](#问题)
+    - [修复方案](#修复方案-2)
   - [4. 错误使用 `black_box`](#4-错误使用-black_box)
+    - [现象](#现象-3)
+    - [问题](#问题-1)
+    - [修复方案](#修复方案-3)
   - [5. 单线程基准推断多线程性能](#5-单线程基准推断多线程性能)
+    - [现象](#现象-4)
+    - [问题](#问题-2)
+    - [修复方案](#修复方案-4)
   - [6. 内存分析忽略分配器差异](#6-内存分析忽略分配器差异)
+    - [现象](#现象-5)
+    - [问题](#问题-3)
+    - [修复方案](#修复方案-5)
   - [7. 宏展开性能测试未控制输入规模](#7-宏展开性能测试未控制输入规模)
+    - [现象](#现象-6)
+    - [修复方案](#修复方案-6)
   - [总结](#总结)
+  - [相关概念](#相关概念)
+  - [RFC 参考](#rfc-参考)
+  - [权威来源参考](#权威来源参考)
 
 ---
 
 ## 1. 基准测试未禁用优化
 
 ### 现象
+
 ```rust
 #[bench]
 fn bench_naive(b: &mut Bencher) {
@@ -39,9 +63,11 @@ fn bench_naive(b: &mut Bencher) {
 ```
 
 ### 后果
+
 测得的是零耗时，无法反映真实算法性能。
 
 ### 修复方案
+
 - 使用 `std::hint::black_box` 阻止编译器优化。
 - 使用 `criterion` 并传入 `Throughput`。
 
@@ -50,6 +76,7 @@ fn bench_naive(b: &mut Bencher) {
 ## 2. 编译器常量折叠掩盖真实性能
 
 ### 现象
+
 ```rust
 fn compute() -> i32 {
     factorial(10) // ❌ 编译期可能计算为常量
@@ -57,9 +84,11 @@ fn compute() -> i32 {
 ```
 
 ### 后果
+
 运行时基准测试显示不现实的低延迟。
 
 ### 修复方案
+
 - 输入参数使用 `black_box`。
 - 从外部读取输入，避免编译期折叠。
 
@@ -68,6 +97,7 @@ fn compute() -> i32 {
 ## 3. 微基准未预热缓存
 
 ### 现象
+
 ```rust
 fn bench_once(b: &mut Bencher) {
     b.iter(|| heavy_computation(&data));
@@ -75,9 +105,11 @@ fn bench_once(b: &mut Bencher) {
 ```
 
 ### 问题
+
 第一次迭代冷缓存、分支预测未建立，结果波动大。
 
 ### 修复方案
+
 - Criterion 自动处理预热；自定义 benchmark 时应包含 warm-up 阶段。
 - 多次运行取稳定值。
 
@@ -86,6 +118,7 @@ fn bench_once(b: &mut Bencher) {
 ## 4. 错误使用 `black_box`
 
 ### 现象
+
 ```rust
 b.iter(|| {
     let input = black_box(vec![1, 2, 3]); // ❌ 每次迭代重新分配
@@ -94,9 +127,11 @@ b.iter(|| {
 ```
 
 ### 问题
+
 `black_box` 用于阻止优化，但不应引入额外分配；否则测的是分配开销。
 
 ### 修复方案
+
 - 将输入准备放在 `iter` 外部。
 - 仅对关键值使用 `black_box`。
 
@@ -105,15 +140,18 @@ b.iter(|| {
 ## 5. 单线程基准推断多线程性能
 
 ### 现象
+
 ```rust
 // 单线程测得算法 A 比 B 快 10%
 // 直接推断在多核服务器上 A 也比 B 好
 ```
 
 ### 问题
+
 忽略了锁竞争、缓存一致性、伪共享（false sharing）等多线程因素。
 
 ### 修复方案
+
 - 在目标并发度下测试。
 - 使用 `criterion` 的多线程场景或自定义 tokio/rt 负载。
 
@@ -122,15 +160,18 @@ b.iter(|| {
 ## 6. 内存分析忽略分配器差异
 
 ### 现象
+
 ```rust
 // 在 glibc malloc 下测得内存占用
 // 直接推断 musl/jemalloc 下相同
 ```
 
 ### 问题
+
 不同分配器碎片化和释放策略不同，影响峰值内存和 long-running 占用。
 
 ### 修复方案
+
 - 在目标部署环境分配器下测试。
 - 使用 `#[global_allocator]` 固定分配器。
 
@@ -139,6 +180,7 @@ b.iter(|| {
 ## 7. 宏展开性能测试未控制输入规模
 
 ### 现象
+
 ```rust
 macro_rules! count {
     ($x:tt) => { 1 };
@@ -149,6 +191,7 @@ macro_rules! count {
 ```
 
 ### 修复方案
+
 - 使用参数化输入规模。
 - 测量编译时间时使用 `cargo build --timings` 或 `-Ztime-passes`。
 
@@ -176,3 +219,22 @@ macro_rules! count {
 - [宏展开性能分析](10_macro_expansion_performance.md)
 - [内存分析](10_memory_analysis.md)
 - [知识图谱索引](../10_knowledge_graph_index.md)
+
+---
+
+## RFC 参考
+
+> **来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)**
+
+- [RFC 到反例自动化映射索引](../10_rfc_to_counterexample_mapping.md)
+- [Rust RFCs 官方索引](https://rust-lang.github.io/rfcs/)
+
+- [RFC 2394: async/await](https://rust-lang.github.io/rfcs/2394-async_await.html)
+- [RFC 3513: gen blocks](https://rust-lang.github.io/rfcs/3513-gen-blocks.html)
+
+## 权威来源参考
+
+本反例汇编参考以下 P1/P1.5/P2 权威来源：
+
+- [Rust Performance Book](https://nnethercote.github.io/perf-book/)
+- [This Week in Rust](https://this-week-in-rust.org/)

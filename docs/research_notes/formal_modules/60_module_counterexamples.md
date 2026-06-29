@@ -53,6 +53,8 @@
     - [修复方案](#修复方案-5)
   - [总结](#总结)
   - [相关概念](#相关概念)
+  - [RFC 参考](#rfc-参考)
+  - [权威来源参考](#权威来源参考)
 
 ---
 
@@ -385,3 +387,21 @@ error: linking with `cc` failed: exit code: 1
 - [模块系统与安全抽象](40_module_safety_abstraction.md)
 - [形式化工具中的模块映射](50_formal_tools_module_mapping.md)
 - [知识图谱索引](../10_knowledge_graph_index.md)
+
+---
+
+## RFC 参考
+
+> **来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)**
+
+- [RFC 到反例自动化映射索引](../10_rfc_to_counterexample_mapping.md)
+- [Rust RFCs 官方索引](https://rust-lang.github.io/rfcs/)
+
+- [RFC 2126: Path clarity](https://rust-lang.github.io/rfcs/2126-path-clarity.html)
+
+## 权威来源参考
+
+本反例汇编参考以下 P1/P1.5/P2 权威来源：
+
+- [RFC 2126: Path clarity](https://rust-lang.github.io/rfcs/2126-path-clarity.html)
+- [Rust Reference Modules](https://doc.rust-lang.org/reference/items/modules.html)

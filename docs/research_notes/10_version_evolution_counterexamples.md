@@ -41,6 +41,8 @@
     - [修复方案](#修复方案-6)
   - [总结](#总结)
   - [相关概念](#相关概念)
+  - [RFC 参考](#rfc-参考)
+  - [权威来源参考](#权威来源参考)
 
 ---
 
@@ -220,3 +222,23 @@ fn main() {
 - [Rust 1.94/1.95 特性矩阵](10_rust_194_195_feature_matrix.md)
 - [Rust 1.93 反例索引](10_rust_193_counterexamples_index.md)
 - [知识图谱索引](10_knowledge_graph_index.md)
+
+---
+
+## RFC 参考
+
+> **来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)**
+
+- [RFC 到反例自动化映射索引](10_rfc_to_counterexample_mapping.md)
+- [Rust RFCs 官方索引](https://rust-lang.github.io/rfcs/)
+
+- [RFC 2094: Non-lexical lifetimes](https://rust-lang.github.io/rfcs/2094-nll.html)
+- [RFC 2585: Unsafe blocks in unsafe fn](https://rust-lang.github.io/rfcs/2585-unsafe-block-in-unsafe-fn.html)
+- [RFC 3513: gen blocks](https://rust-lang.github.io/rfcs/3513-gen-blocks.html)
+
+## 权威来源参考
+
+本反例汇编参考以下 P1/P1.5/P2 权威来源：
+
+- [Rust Release Blog](https://blog.rust-lang.org/)
+- [This Week in Rust](https://this-week-in-rust.org/)

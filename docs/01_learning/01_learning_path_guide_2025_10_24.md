@@ -40,7 +40,12 @@
 
 ## 🗺️ 推荐学习路径
 >
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Educational Technology](https://en.wikipedia.org/wiki/Educational_Technology)** · **来源: [Wikipedia - Spiral Curriculum](https://en.wikipedia.org/wiki/Spiral_Curriculum)** · **[来源: ACM - CS Curriculum Guidelines]** · **[来源: IEEE - Learning Outcome Standards]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
+> **来源: [Wikipedia - Educational Technology](https://en.wikipedia.org/wiki/Educational_Technology)** ·
+> **来源: [Wikipedia - Spiral Curriculum](https://en.wikipedia.org/wiki/Spiral_Curriculum)** ·
+> **[来源: ACM - CS Curriculum Guidelines]** ·
+> **[来源: IEEE - Learning Outcome Standards]**
+>
 
 ### 路径 1: 初学者 (4-6 周)
 

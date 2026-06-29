@@ -171,26 +171,179 @@
 - 可持续推进方案与改进建议
 
 7b1a. **[10_authoritative_source_alignment_network.md](10_authoritative_source_alignment_network.md)** - 权威来源对齐网络总索引 🆕
-   - P0/P1/P2 权威来源总览
-   - 各权威来源对齐文档入口
+
+- P0/P1/P2 权威来源总览
+- 各权威来源对齐文档入口
 
 7b1b. **[10_rust_reference_alignment.md](10_rust_reference_alignment.md)** - Rust Reference 对齐矩阵 🆕
-   - 词法、类型、表达式、modules、unsafe、attributes 章节映射
+
+- 词法、类型、表达式、modules、unsafe、attributes 章节映射
+
+7b1b1. **[10_rust_reference_chapters_alignment.md](10_rust_reference_chapters_alignment.md)** - Rust Reference 分章节深度对齐 🆕
+
+- Reference 每个主要章节与项目概念/机制/反例的细粒度映射
 
 7b1c. **[10_rustonomicon_alignment.md](10_rustonomicon_alignment.md)** - Rustonomicon 对齐矩阵 🆕
-   - 所有权、类型布局、并发、未初始化内存、FFI 映射
+
+- 所有权、类型布局、并发、未初始化内存、FFI 映射
 
 7b1d. **[10_cargo_book_alignment.md](10_cargo_book_alignment.md)** - Cargo Book 对齐矩阵 🆕
-   - package、依赖、workspace、features、build、发布映射
+
+- package、依赖、workspace、features、build、发布映射
 
 7b1e. **[10_edition_guide_alignment.md](10_edition_guide_alignment.md)** - Rust Edition Guide 对齐矩阵 🆕
-   - 2018/2021/2024 Edition 变更映射
+
+- 2018/2021/2024 Edition 变更映射
 
 7b1f. **[10_async_book_alignment.md](10_async_book_alignment.md)** - Async Book 对齐矩阵 🆕
-   - Future、Pin、执行器、Waker、IO 映射
+
+- Future、Pin、执行器、Waker、IO 映射
 
 7b1g. **[10_rfc_alignment_index.md](10_rfc_alignment_index.md)** - Rust RFC 对齐索引 🆕
-   - 核心语言、类型系统、异步、Edition、工具链 RFC 映射
+
+- 核心语言、类型系统、异步、Edition、工具链 RFC 映射
+
+7b1h. **[10_ferrocene_fls_alignment.md](10_ferrocene_fls_alignment.md)** - Ferrocene Language Specification 对齐矩阵 🆕
+
+- 安全关键 Rust 子集：词法、类型、所有权、借用、并发、unsafe、模块映射
+
+7b1i. **[10_rustc_dev_guide_alignment.md](10_rustc_dev_guide_alignment.md)** - rustc-dev-guide 对齐矩阵 🆕
+
+- 编译器内部：名称解析、类型推断、借用检查、HIR/MIR、async lowering 映射
+
+7b1j. **[10_std_library_alignment.md](10_std_library_alignment.md)** - Standard Library 对齐索引 🆕
+
+- 核心类型、所有权/借用、并发同步、集合迭代器、IO/async、FFI/unsafe 辅助映射
+
+7b1k. **[10_community_best_practices_alignment.md](10_community_best_practices_alignment.md)** - 社区最佳实践对齐矩阵 🆕
+
+- API Guidelines、Rust Design Patterns、Rust Performance Book、社区博客映射
+
+7b1l. **[10_rust_by_example_alignment.md](10_rust_by_example_alignment.md)** - Rust By Example 对齐矩阵 🆕
+
+- 官方交互式示例与项目示例/反例映射
+
+7b1m. **[10_unsafe_code_guidelines_alignment.md](10_unsafe_code_guidelines_alignment.md)** - Unsafe Code Guidelines 对齐矩阵 🆕
+
+- 内存模型、UB、类型布局、FFI、并发与项目 unsafe 反例映射
+
+7b1n. **[10_rustc_errors_alignment.md](10_rustc_errors_alignment.md)** - Rustc 错误码与反例边界对齐索引 🆕
+
+- 所有权、类型、模块、并发、unsafe 错误码与项目反例映射
+
+7b1o. **[10_academic_papers_alignment.md](10_academic_papers_alignment.md)** - IEEE/ACM/arXiv/Springer 学术资源对齐索引 🆕
+
+- RustBelt、Tree Borrows、Aeneas、coq-of-rust、Prusti、Creusot、Kani 等论文/工具映射
+- 顶级会议/期刊资源（POPL、PLDI、OOPSLA、ICFP、TOPLAS、JFP、FMSD）
+- 按出版商分类（ACM DL、IEEE Xplore、Springer、arXiv）与 DOI 映射
+
+7b1p. **[10_verification_tools_practical_alignment.md](10_verification_tools_practical_alignment.md)** - 形式化验证工具实战对齐矩阵 🆕
+
+- Aeneas、coq-of-rust、Kani、Prusti、Creusot 实战能力与项目内容映射
+
+7b1q. **[10_rfc_argumentation_chain.md](10_rfc_argumentation_chain.md)** - RFC 深度论证链索引 🆕
+
+- 关键 RFC 的 Motivation→Design→Drawbacks→Rationale 与项目知识体系映射
+
+7b1r. **[10_i18n_source_alignment.md](10_i18n_source_alignment.md)** - 国际化多语言权威来源对齐索引 🆕
+
+- 中/日/多语言官方翻译、社区资源、术语对照
+
+7b1s. **[10_authoritative_source_version_tracking.md](10_authoritative_source_version_tracking.md)** - 权威来源版本跟踪表 🆕
+
+- P0/P1/P2 权威来源的最后检查日期、版本/Edition、状态
+
+7b1t. **[10_rfc_tracking_status.md](10_rfc_tracking_status.md)** - RFC 实现状态追踪表 🆕
+
+- 关键 RFC 的 stable / in-progress / deprecated 状态与项目响应
+
+7b1u. **[10_design_patterns_authoritative_alignment.md](10_design_patterns_authoritative_alignment.md)** - 设计模式权威来源对齐矩阵 🆕
+
+- GoF 模式、Rust 惯用法、企业级/分布式模式、反模式
+
+7b1v. **[10_async_ecosystem_alignment.md](10_async_ecosystem_alignment.md)** - 异步生态权威来源对齐矩阵 🆕
+
+- tokio、async-std、smol、futures、axum、tonic 等生态映射
+
+7b1w. **[10_version_evolution_alignment.md](10_version_evolution_alignment.md)** - 版本演进权威来源对齐矩阵 🆕
+
+- 官方发布说明、Edition 演进、关键特性版本映射、不稳定特性追踪
+
+7b1x. **[10_safety_and_unsafe_authoritative_alignment.md](10_safety_and_unsafe_authoritative_alignment.md)** - 安全与 unsafe 权威来源对齐矩阵 🆕
+
+- P0/P1/P2 安全与 unsafe 权威来源网络、安全边界映射
+
+7b1y. **[10_toolchain_ecosystem_alignment.md](10_toolchain_ecosystem_alignment.md)** - 工具链生态权威来源对齐矩阵 🆕
+
+- rustc、rustup、Cargo、clippy、rustfmt、rust-analyzer、rustdoc 映射
+
+7b1z. **[10_i18n_translation_gap_analysis.md](10_i18n_translation_gap_analysis.md)** - 国际化翻译版本差异检测与对齐指南 🆕
+
+- 中/日文翻译版本差异检测、术语一致性、自动化检测方法
+
+7b1aa. **[10_authoritative_source_line_anchors.md](10_authoritative_source_line_anchors.md)** - 权威来源行号锚点索引 🆕
+
+- 核心概念到 TRPL、Reference、Rustonomicon、UCG、RFC 的 GitHub 行号级链接
+
+7b1ab. **[10_rfc_to_counterexample_mapping.md](10_rfc_to_counterexample_mapping.md)** - RFC 到反例自动化映射索引 🆕
+
+- 关键 RFC 与项目反例文档的双向映射、自动化检测建议
+
+7b1ac. **[10_performance_and_testing_alignment.md](10_performance_and_testing_alignment.md)** - 性能优化与测试质量权威来源对齐矩阵 🆕
+
+- Rust Performance Book、Cargo 测试、rustdoc 测试、Miri、Clippy、Criterion.rs、iai-callgrind
+- tokio/console、flamegraph、coz、valgrind、AddressSanitizer、proptest、cargo-fuzz、cargo-mutants 映射
+
+7b1ad. **[10_macros_ffi_embedded_alignment.md](10_macros_ffi_embedded_alignment.md)** - 宏系统、FFI 与嵌入式生态权威来源对齐矩阵 🆕
+
+- Rust Reference / Rustonomicon / The Little Book of Rust Macros / proc-macro-workshop
+- FFI 与 bindgen / cbindgen / cxx / windows-rs
+- WebAssembly wasm-bindgen / wasm-pack / The Rust and WebAssembly Book
+- 嵌入式 embedded-hal / Embassy / RTIC / The Embedded Rust Book / Ferrous Systems Training / probe-rs / defmt
+
+7b1ae. **[10_error_handling_network_web_alignment.md](10_error_handling_network_web_alignment.md)** - 错误处理与网络/Web 生态权威来源对齐矩阵 🆕
+
+- Rust Book Ch 9 / Rust Reference panic/unwind / std::result / thiserror / anyhow / eyre
+- tokio::net / hyper / tonic / gRPC / mio / h3 / quinn
+- axum / actix-web / rocket / tower / tower-http
+- HTTP/1.1 / HTTP/2 / HTTP/3 / WebSocket / OpenAPI
+
+7b1af. **[10_database_storage_cloud_alignment.md](10_database_storage_cloud_alignment.md)** - 数据库、存储与云原生生态权威来源对齐矩阵 🆕
+
+- 关系型 ORM/查询构建器（diesel、sqlx、sea-orm、rusqlite）
+- KV/缓存/NoSQL（redis-rs、mini-redis、sled、mongodb-rust-driver）
+- 消息队列（rdkafka、lapin、nats-rs）
+- Kubernetes/可观测性/容器化部署映射
+
+7b1ag. **[10_cicd_supply_chain_alignment.md](10_cicd_supply_chain_alignment.md)** - CI/CD 与供应链安全权威来源对齐矩阵 🆕
+
+- GitHub Actions、GitLab CI、cargo-make、release-plz、cargo-dist
+- 测试与质量：codecov、cargo-tarpaulin、nextest、cargo-llvm-cov
+- 供应链安全：cargo-audit、cargo-deny、cargo-vet、Sigstore、SLSA、SBOM
+- 发布与签名：crates.io 政策、GitHub Releases、attestation
+
+7b1ah. **[10_authoritative_source_gap_and_backref_index.md](10_authoritative_source_gap_and_backref_index.md)** - 权威来源缺口与反向追溯索引 🆕
+
+- 已建立反向追溯的 P0/P1/P2 权威来源与项目文档映射
+- 尚未对齐的缺口（Rust Reference、Rust By Example、学术论文、社区来源）
+- P0/P1/P2 补全优先级与维护清单
+
+7b1ai. **[10_crate_architecture_authoritative_alignment.md](10_crate_architecture_authoritative_alignment.md)** - Crate 架构权威来源对齐矩阵 🆕
+
+- workspace 组织、public/private API、feature 设计、错误类型、日志/tracing、配置管理、CLI、库 vs 二进制、MSRV 策略
+- Cargo Book、Rust Reference、Rust API Guidelines、Rust Design Patterns、crates.io 政策映射
+
+7b1aj. **[10_learning_and_interview_alignment.md](10_learning_and_interview_alignment.md)** - 学习路径与面试题权威来源对齐矩阵 🆕
+
+- TRPL、RBE、Rustlings、std 文档等官方学习资源映射
+- course.rs、Rust 中文社区、Rust Japan、Exercism Rust track 等社区资源映射
+- 常见面试题与权威来源映射、Bloom L1-L6 对应矩阵
+
+7b1ak. **[10_authoritative_source_completion_plan.md](10_authoritative_source_completion_plan.md)** - 权威来源自动补全计划 🆕
+
+- 覆盖率现状与 TOP 10 缺口概念族
+- `suggest_authoritative_sources.py` 自动补全脚本使用说明
+- P0/P1/P2 补全优先级与下一步计划
 
 7b2. **[10_rust_book_alignment.md](10_rust_book_alignment.md)** - Rust Book 逐章对标映射表 🆕
 

@@ -34,6 +34,7 @@
       - [相关文档](#相关文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [多语言术语参考](#多语言术语参考)
 
 > **创建日期**: 2026-02-14
 
@@ -252,9 +253,7 @@
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -280,19 +279,19 @@
 ## 权威来源索引
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---
+---
+
+## 多语言术语参考
+
+> **来源: [国际化术语库](../data/i18n_terminology.yaml)**
+
+本文档涉及的英/中/日关键术语参见项目统一术语库 [`data/i18n_terminology.yaml`](../data/i18n_terminology.yaml)。

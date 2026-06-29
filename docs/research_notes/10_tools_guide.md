@@ -1,4 +1,5 @@
 # 研究工具使用指南
+>
 > **概念族**: 方法论 / 工具 / 指南
 
 > **内容分级**: [归档级]
@@ -22,6 +23,9 @@
   - [🔬 形式化验证工具 {#-形式化验证工具}](#-形式化验证工具--形式化验证工具)
     - [Prusti](#prusti)
     - [Kani](#kani)
+    - [Creusot](#creusot)
+    - [Aeneas](#aeneas)
+    - [Verus](#verus)
     - [可选进阶：Coq/Lean](#可选进阶coqlean)
   - [⚡ 性能分析工具 {#-性能分析工具}](#-性能分析工具--性能分析工具)
     - [Criterion.rs](#criterionrs)
@@ -44,7 +48,11 @@
     - [工具组合](#工具组合)
     - [最佳实践](#最佳实践)
   - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
-  - [🆕 权威国际化内容升级](#-权威国际化内容升级)
+  - [📚 Cargo Book 与 rustc dev guide 权威章节](#-cargo-book-与-rustc-dev-guide-权威章节)
+    - [Cargo Book 重点章节](#cargo-book-重点章节)
+    - [rustc dev guide 重点章节](#rustc-dev-guide-重点章节)
+  - [🆕 权威国际化内容升级 (Rust 1.96.0+) {#-权威国际化内容升级}](#-权威国际化内容升级-rust-1960--权威国际化内容升级)
+    - [本次升级要点](#本次升级要点)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -191,6 +199,7 @@ cargo kani --function test_abs
 **用途**: 基于 Why3/SMT 的 Rust 演绎验证器，支持函数契约（pre/post）、循环不变式与 ghost 代码。
 
 **安装**:
+
 ```bash
 # 需要 OPAM、Why3、Alt-Ergo 等辅助工具
 git clone https://github.com/creusot-rs/creusot.git
@@ -201,6 +210,7 @@ cargo creusot setup install
 ```
 
 **基本使用**:
+
 ```rust,ignore
 use creusot_contracts::*;
 
@@ -212,6 +222,7 @@ fn increment(x: i32) -> i32 {
 ```
 
 **版本与官方资源**:
+
 - 推荐版本：**0.1.1+**（以 [Creusot GitHub Releases](https://github.com/creusot-rs/creusot/releases) 为准）；依赖特定 nightly Rust。
 - [Creusot 主页](https://creusot-rs.github.io/)
 - [Creusot GitHub](https://github.com/creusot-rs/creusot)
@@ -228,6 +239,7 @@ fn increment(x: i32) -> i32 {
 **用途**: 将安全 Rust 通过 LLBC 函数式翻译到 F\*/Coq/Lean/HOL4，消除显式内存推理。
 
 **安装与使用**:
+
 ```bash
 # 1. 用 Charon 生成 .llbc
 charon cargo --preset=aeneas
@@ -236,6 +248,7 @@ charon cargo --preset=aeneas
 ```
 
 **版本与官方资源**:
+
 - 推荐版本：以 [Aeneas GitHub](https://github.com/AeneasVerif/aeneas) 最新 commit 为准；与 Charon 版本需匹配。
 - [Aeneas 文档](https://aeneas-verif.github.io/aeneas/)
 - [Aeneas GitHub](https://github.com/AeneasVerif/aeneas)
@@ -251,6 +264,7 @@ charon cargo --preset=aeneas
 **用途**: 面向低层系统代码的 Rust 验证器，使用 SMT 求解器静态检查可执行 Rust 代码是否满足规约。
 
 **安装**:
+
 ```bash
 git clone https://github.com/verus-lang/verus.git
 cd verus/source
@@ -258,6 +272,7 @@ cd verus/source
 ```
 
 **基本使用**:
+
 ```rust,ignore
 use vstd::prelude::*;
 
@@ -272,6 +287,7 @@ verus! {
 ```
 
 **版本与官方资源**:
+
 - 推荐版本：以 [Verus GitHub](https://github.com/verus-lang/verus) 最新 commit / release 为准。
 - [Verus 官方文档](https://verus-lang.github.io/verus/)
 - [Verus GitHub](https://github.com/verus-lang/verus)

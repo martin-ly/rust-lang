@@ -1,5 +1,3 @@
-<a id="rust-193-cargo-与-rustdoc-变更详解"></a>
-
 # Rust 1.93 Cargo 与 Rustdoc 变更详解
 
 > **分级**: [A]

@@ -1,25 +1,15 @@
 # 🔬 实验研究 {#-实验研究}
 
 > **概念族**: 实验研究
-
 > **内容分级**: [归档级]
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2025-01-27
-
 > **最后更新**: 2026-06-29
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96+ / Edition 2024）
-
 > **对齐说明**: 本目录已于 2026-06-29 完成按 Criterion.rs Book、The Rust Performance Book、rustc Book、Rust Reference、TRPL、Rust Standard Library 等权威国际化来源的对齐升级。
-
 > **docs 全结构**: DOCS_STRUCTURE_OVERVIEW § 2.7 experiments
 
 ---

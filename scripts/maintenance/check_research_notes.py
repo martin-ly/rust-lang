@@ -7,6 +7,9 @@ Runs the following checks:
 2. Every .md file contains at least one authority source marker.
 3. Top metadata block uses Rust 1.96.0+ (Edition 2024) where present.
 4. README/INDEX/organization files are up-to-date with actual structure.
+5-12. Informational checks: archive links, broken internal links, metadata coverage,
+      counterexample coverage, authority URL coverage, RFC counterexample mapping,
+      i18n terminology reference coverage, code example anchor coverage.
 
 Usage:
     python scripts/maintenance/check_research_notes.py
@@ -16,6 +19,11 @@ import os
 import re
 import sys
 from pathlib import Path
+
+try:
+    import yaml
+except ImportError:  # pragma: no cover
+    yaml = None  # type: ignore[assignment]
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 RESEARCH_NOTES = PROJECT_ROOT / "docs" / "research_notes"
@@ -210,6 +218,182 @@ def check_counterexample_coverage() -> list[str]:
     return issues
 
 
+def check_rfc_counterexample_mapping() -> list[Path]:
+    """
+    Scan counterexample files under docs/research_notes/ for RFC authority URLs.
+    Returns a list of files that do not reference any RFC URL (informational).
+    """
+    rfc_patterns = [
+        r"rust-lang\.github\.io/rfcs/",
+        r"github\.com/rust-lang/rfcs",
+    ]
+    regex = re.compile("|".join(rfc_patterns))
+    issues: list[Path] = []
+
+    for f in RESEARCH_NOTES.rglob("*.md"):
+        name = f.name.lower()
+        if "counterexample" not in name and "反例" not in name:
+            continue
+        content = f.read_text(encoding="utf-8", errors="ignore")
+        if not regex.search(content):
+            issues.append(f.relative_to(PROJECT_ROOT))
+
+    return issues
+
+
+def check_i18n_terminology() -> list[Path]:
+    """
+    Check that i18n-related research notes reference the terminology library.
+    Returns a list of i18n-related files that do not mention i18n_terminology.yaml.
+    This is informational only and should not affect the exit code.
+    """
+    terminology_file = PROJECT_ROOT / "data" / "i18n_terminology.yaml"
+    if yaml is None or not terminology_file.exists():
+        return []
+
+    # Basic validation: ensure the file is parseable YAML with a terms list.
+    try:
+        data = yaml.safe_load(terminology_file.read_text(encoding="utf-8"))
+        if not isinstance(data, dict) or not isinstance(data.get("terms"), list):
+            return []
+    except yaml.YAMLError:
+        return []
+
+    missing_reference: list[Path] = []
+    for f in RESEARCH_NOTES.rglob("*.md"):
+        content = f.read_text(encoding="utf-8", errors="ignore")
+        concept_family_match = re.search(r">\s*\*\*概念族\*\*[:：]\s*(.+)", content)
+        if not concept_family_match:
+            continue
+        concept_family = concept_family_match.group(1)
+        if "i18n" not in concept_family and "国际化" not in concept_family:
+            continue
+        rel = f.relative_to(PROJECT_ROOT)
+        if "i18n_terminology.yaml" not in content:
+            missing_reference.append(rel)
+
+    return missing_reference
+
+
+def check_authority_url_coverage() -> list[Path]:
+    """
+    Check that .md files reference at least one international authoritative URL (informational).
+    """
+    authority_patterns = [
+        r"doc\.rust-lang\.org",
+        r"rust-lang\.github\.io",
+        r"github\.com/rust-lang",
+        r"github\.com/diesel-rs",
+        r"github\.com/launchbadge",
+        r"github\.com/SeaQL",
+        r"github\.com/rusqlite",
+        r"github\.com/redis-rs",
+        r"github\.com/mongodb",
+        r"github\.com/kube-rs",
+        r"github\.com/nats-io",
+        r"github\.com/ferrous-systems",
+        r"github\.com/probe-rs",
+        r"github\.com/hyperium",
+        r"github\.com/tower-rs",
+        r"github\.com/actix",
+        r"github\.com/SergioBenitez",
+        r"github\.com/tokio-rs/axum",
+        r"github\.com/tokio-rs/mini-redis",
+        r"github\.com/quinn-rs",
+        r"github\.com/dtolnay",
+        r"github\.com/EmbarkStudios",
+        r"github\.com/rustsec",
+        r"github\.com/rust-lang/cargo-vet",
+        r"github\.com/ulid",
+        r"github\.com/model-checking",
+        r"github\.com/creusot-rs",
+        r"github\.com/formal-land",
+        r"github\.com/sosnek",
+        r"spec\.ferrocene\.dev",
+        r"rustc-dev-guide\.rust-lang\.org",
+        r"plv\.mpi-sws\.org",
+        r"aeneas-verification\.github\.io",
+        r"link\.springer\.com",
+        r"plf\.inf\.ethz\.ch",
+        r"nnethercote\.github\.io",
+        r"rust-unofficial\.github\.io",
+        r"rust-lang\.github\.io/api-guidelines",
+        r"releases\.rs",
+        r"this-week-in-rust\.org",
+        r"blog\.rust-lang\.org",
+        r"kaisery\.github\.io/trpl-zh-cn",
+        r"doc\.rust-jp\.rs",
+        r"rustcc\.cn",
+        r"course\.rs",
+        r"microservices\.io",
+        r"dataintensive\.net",
+        r"ryhl\.io",
+        r"docs\.rs/tokio",
+        r"docs\.rs",
+        r"crates\.io",
+        r"opentelemetry\.io",
+        r"prometheus\.io",
+        r"kubernetes\.io",
+        r"sigstore\.dev",
+        r"slsa\.dev",
+        r"spdx\.dev",
+        r"arxiv\.org",
+        r"acm\.org",
+        r"dl\.acm\.org",
+        r"ieee\.org",
+        r"springer\.com",
+    ]
+    regex = re.compile("|".join(authority_patterns))
+    issues: list[Path] = []
+    for f in RESEARCH_NOTES.rglob("*.md"):
+        content = f.read_text(encoding="utf-8", errors="ignore")
+        if not regex.search(content):
+            issues.append(f.relative_to(PROJECT_ROOT))
+    return issues
+
+
+def check_code_example_anchors() -> list[str]:
+    """
+    Scan docs/research_notes/*.md for relative links to local .rs files.
+
+    Checks that relative links pointing to Rust source files (e.g.
+    ../examples/..., ../../crates/.../*.rs, ../crates/.../*.rs) resolve to
+    existing files under the project root. Returns a list of broken or
+    missing anchors in the form "<source.md> -> <link>". This check is
+    informational and should not affect the exit code.
+    """
+    issues: list[str] = []
+    link_pattern = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
+
+    for f in RESEARCH_NOTES.rglob("*.md"):
+        text = f.read_text(encoding="utf-8", errors="ignore")
+        rel = f.relative_to(PROJECT_ROOT).as_posix()
+        for m in link_pattern.finditer(text):
+            link = m.group(1)
+            # Skip external, archive, anchor-only, and absolute links.
+            if (
+                link.startswith("http")
+                or link.startswith("mailto:")
+                or link.startswith("#")
+                or link.startswith("/")
+                or "archive/" in link
+            ):
+                continue
+            base = link.split("#")[0].split("?")[0]
+            if not base or not base.endswith(".rs"):
+                continue
+            target = (f.parent / base).resolve()
+            # Only report links whose target is inside the project root.
+            try:
+                target.relative_to(PROJECT_ROOT.resolve())
+            except ValueError:
+                continue
+            if not target.exists():
+                issues.append(f"{rel} -> {link}")
+
+    return sorted(set(issues))
+
+
 def main() -> int:
     exit_code = 0
 
@@ -219,7 +403,7 @@ def main() -> int:
 
     # 1. Empty directories
     empty_dirs = find_empty_dirs()
-    print(f"\n[1/4] Empty directories: {len(empty_dirs)}")
+    print(f"\n[1/12] Empty directories: {len(empty_dirs)}")
     if empty_dirs:
         exit_code = 1
         for d in empty_dirs:
@@ -234,7 +418,7 @@ def main() -> int:
         if not check_authority_source(md):
             missing_source.append(md.relative_to(PROJECT_ROOT))
 
-    print(f"\n[2/4] Markdown files missing authority source: {len(missing_source)}")
+    print(f"\n[2/12] Markdown files missing authority source: {len(missing_source)}")
     if missing_source:
         exit_code = 1
         for p in missing_source:
@@ -249,7 +433,7 @@ def main() -> int:
         if not ok:
             wrong_version.append((md.relative_to(PROJECT_ROOT), version or "N/A"))
 
-    print(f"\n[3/4] Files with outdated Rust version metadata: {len(wrong_version)}")
+    print(f"\n[3/12] Files with outdated Rust version metadata: {len(wrong_version)}")
     if wrong_version:
         exit_code = 1
         for p, version in wrong_version:
@@ -259,7 +443,7 @@ def main() -> int:
 
     # 4. INDEX consistency
     index_issues = check_index_consistency()
-    print(f"\n[4/6] INDEX.md consistency issues: {len(index_issues)}")
+    print(f"\n[4/12] INDEX.md consistency issues: {len(index_issues)}")
     if index_issues:
         exit_code = 1
         for issue in index_issues:
@@ -269,7 +453,7 @@ def main() -> int:
 
     # 5. Archive link audit (informational/warning)
     replaceable, archive_only, missing_both = check_archive_links()
-    print(f"\n[5/8] Archive link audit:")
+    print(f"\n[5/12] Archive link audit:")
     print(f"  ℹ️  Replaceable links (target exists in current dir): {len(replaceable)}")
     print(f"  ℹ️  Archive-only links (target only in archive): {len(archive_only)}")
     print(f"  ℹ️  Missing both sides: {len(missing_both)}")
@@ -286,7 +470,7 @@ def main() -> int:
 
     # 6. Broken internal links (error)
     broken_links = check_broken_internal_links()
-    print(f"\n[6/8] Broken internal markdown links: {len(broken_links)}")
+    print(f"\n[6/12] Broken internal markdown links: {len(broken_links)}")
     if broken_links:
         exit_code = 1
         for item in broken_links[:20]:
@@ -299,7 +483,7 @@ def main() -> int:
     # 7. Metadata coverage (warning)
     missing_level = check_level_metadata()
     missing_family = check_concept_family_metadata()
-    print(f"\n[7/8] Metadata coverage (informational):")
+    print(f"\n[7/12] Metadata coverage (informational):")
     print(f"  ℹ️  Files missing level metadata: {len(missing_level)}")
     if missing_level:
         for item in missing_level[:10]:
@@ -315,13 +499,61 @@ def main() -> int:
 
     # 8. Counterexample coverage (warning)
     missing_counterexample = check_counterexample_coverage()
-    print(f"\n[8/8] Counterexample coverage (informational):")
+    print(f"\n[8/12] Counterexample coverage (informational):")
     if missing_counterexample:
         print(f"  ℹ️  Core families without clear counterexample coverage: {len(missing_counterexample)}")
         for item in missing_counterexample:
             print(f"    ⚠️  {item}")
     else:
         print("  ✅ Core concept families have counterexample coverage")
+
+    # 9. Authority URL coverage (informational)
+    missing_auth_url = check_authority_url_coverage()
+    print(f"\n[9/12] Authority URL coverage (informational):")
+    print(f"  ℹ️  Files without international authority URL: {len(missing_auth_url)}")
+    if missing_auth_url:
+        for item in missing_auth_url[:10]:
+            print(f"    ⚠️  {item}")
+        if len(missing_auth_url) > 10:
+            print(f"    ... and {len(missing_auth_url) - 10} more")
+    else:
+        print("  ✅ All files reference at least one authority URL")
+
+    # 10. RFC counterexample mapping (informational)
+    missing_rfc_link = check_rfc_counterexample_mapping()
+    print(f"\n[10/12] RFC counterexample mapping (informational):")
+    print(f"  ℹ️  Counterexample files without RFC URL: {len(missing_rfc_link)}")
+    if missing_rfc_link:
+        for item in missing_rfc_link[:10]:
+            print(f"    ⚠️  {item}")
+        if len(missing_rfc_link) > 10:
+            print(f"    ... and {len(missing_rfc_link) - 10} more")
+    else:
+        print("  ✅ All counterexample files reference at least one RFC URL")
+
+    # 11. i18n terminology reference coverage (informational)
+    missing_terminology_ref = check_i18n_terminology()
+    print(f"\n[11/12] i18n terminology reference coverage (informational):")
+    print(f"  ℹ️  i18n files not referencing terminology library: {len(missing_terminology_ref)}")
+    if missing_terminology_ref:
+        for item in missing_terminology_ref[:10]:
+            print(f"    ⚠️  {item}")
+        if len(missing_terminology_ref) > 10:
+            print(f"    ... and {len(missing_terminology_ref) - 10} more")
+    else:
+        print("  ✅ All i18n files reference the terminology library")
+
+    # 12. Code example anchor coverage (informational)
+    broken_code_anchors = check_code_example_anchors()
+    print(f"\n[12/12] Code example anchor coverage (informational):")
+    print(f"  ℹ️  Broken code example anchors: {len(broken_code_anchors)}")
+    if broken_code_anchors:
+        for item in broken_code_anchors[:10]:
+            print(f"    ⚠️  {item}")
+        if len(broken_code_anchors) > 10:
+            print(f"    ... and {len(broken_code_anchors) - 10} more")
+    else:
+        print("  ✅ All referenced code example files exist")
 
     print("\n" + "=" * 60)
     if exit_code == 0:

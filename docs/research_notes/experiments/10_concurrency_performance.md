@@ -1,19 +1,11 @@
 > **⚠️ 历史文档提示**：
-
 >
-
 > 本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
-
 > 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
-
 > 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
-
 >
-
 > - `async-std` 已进入维护模式，本实验笔记已将其示例替换为 Tokio；新项目建议优先考虑 Tokio / smol。
-
 > - `wasm32-wasi` 已重命名为 `wasm32-wasip1`；WASI Preview 2 目标为 `wasm32-wasip2`。
-
 > **概念族**: 实验研究
 
 ---
@@ -21,33 +13,30 @@
 # 并发性能研究
 
 > **内容分级**: [归档级]
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2025-01-27
-
 > **最后更新**: 2026-06-29
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
-
 > **对齐说明**: 本文档已于 2026-06-29 完成按 Criterion.rs Book、The Rust Performance Book、rustc Book、Rust Reference、TRPL、Rust Standard Library 等权威国际化来源的对齐升级。
-
 >
-
-> **权威来源**: [The Rust Performance Book](https://nnethercote.github.io/perf-book/) | [Tokio Docs](https://docs.rs/tokio/latest/tokio/) | [Rayon Docs](https://docs.rs/rayon/latest/rayon/) | [Crossbeam Docs](https://docs.rs/crossbeam/latest/crossbeam/) | [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**:
+>
+> [The Rust Performance Book](https://nnethercote.github.io/perf-book/) |
+> [Tokio Docs](https://docs.rs/tokio/latest/tokio/) |
+> [Rayon Docs](https://docs.rs/rayon/latest/rayon/) |
+> [Crossbeam Docs](https://docs.rs/crossbeam/latest/crossbeam/) |
+> [Rust Reference](https://doc.rust-lang.org/reference/) |
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) |
+> [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
 
 ## 📑 目录
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 >
 
 - [并发性能研究](#并发性能研究)

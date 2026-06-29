@@ -38,7 +38,11 @@
 
 ## 🗺️ 7 条定制化学习路径
 >
-> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Learning Path](https://en.wikipedia.org/wiki/Learning_Path)** · **来源: [Wikipedia - Curriculum Design](https://en.wikipedia.org/wiki/Curriculum_Design)** · **[来源: ACM - Computing Education Research]** · **[来源: IEEE - Competency Frameworks]**
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
+> **来源: [Wikipedia - Learning Path](https://en.wikipedia.org/wiki/Learning_Path)** ·
+> **来源: [Wikipedia - Curriculum Design](https://en.wikipedia.org/wiki/Curriculum_Design)** ·
+> **[来源: ACM - Computing Education Research]** · **[来源: IEEE - Competency Frameworks]**
+>
 
 ### 路径 1: 零基础入门
 

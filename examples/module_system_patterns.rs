@@ -103,9 +103,6 @@ mod unsafe_encapsulation_demo {
     pub fn run() {
         let mut data = *b"Rust";
         reverse_buffer(&mut data);
-        println!(
-            "[unsafe 封装] 反转后: {}",
-            String::from_utf8_lossy(&data)
-        );
+        println!("[unsafe 封装] 反转后: {}", String::from_utf8_lossy(&data));
     }
 }

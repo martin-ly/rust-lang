@@ -839,3 +839,9 @@ gRPC Stream 有协议开销（HTTP/2 HEADERS + DATA 帧）。
 > **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
 
 ---
+
+## 权威来源参考
+
+> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+> **来源**: [This Week in Rust](https://this-week-in-rust.org/)

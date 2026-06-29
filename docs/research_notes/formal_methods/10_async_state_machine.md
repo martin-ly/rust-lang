@@ -1,17 +1,12 @@
-> **⚠️ 历史文档提示**：本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
-
-> 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
-
-> 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
-
+> **⚠️ 历史文档提示**：
 >
-
+> 本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
+> 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
+> 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
+>
 > - `async-std` 已进入维护模式，新项目建议优先考虑 Tokio / smol。
-
 > - `wasm32-wasi` 已重命名为 `wasm32-wasip1`；WASI Preview 2 目标为 `wasm32-wasip2`。
-
 > **概念族**: 异步 / Future / async/await
-
 > **迁回说明**: 本文档于 2026-06-29 从 archive/research_notes_2026_06_25/ 迁回，作为当前 docs/research_notes/ 概念链关键节点持续推进。
 
 ---
@@ -19,23 +14,14 @@
 # 异步状态机形式化
 
 > **内容分级**: [归档级]
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2025-01-27
-
 > **最后更新**: 2026-02-28
-
 > **Rust 版本**: 1.93.1+ (Edition 2024)
-
 > **状态**: ✅ 已完成 (Week 2 任务 P1-W2-T2)
-
 > **更新内容**: 添加 Future/Poll/Waker/Context 形式化定义
-
 > **六篇并表**: [README §formal_methods 六篇并表](README.md#formal_methods-六篇并表) 第 4 行（异步）
 
 ---

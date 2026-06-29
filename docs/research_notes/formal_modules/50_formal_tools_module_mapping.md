@@ -38,6 +38,7 @@
     - [3. RustBelt 风格的规范](#3-rustbelt-风格的规范)
   - [反例与边界](#反例与边界)
   - [权威来源对照表](#权威来源对照表)
+  - [学术/社区来源参考](#学术社区来源参考)
 
 ---
 
@@ -298,3 +299,11 @@ End BoundedCounter.
 ---
 
 > **权威来源**: [Aeneas – GitHub](https://github.com/AeneasVerif/aeneas) | [coq-of-rust – GitHub](https://github.com/formal-land/coq-of-rust) | [RustBelt – POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) | [Aeneas – LLBC Paper](https://arxiv.org/abs/2207.09467)
+
+---
+
+## 学术/社区来源参考
+
+> **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**: [Aeneas](https://aeneas-verification.github.io/)
+> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)

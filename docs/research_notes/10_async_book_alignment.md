@@ -23,6 +23,8 @@
   - [六、状态机与编译](#六状态机与编译)
   - [七、常见误区](#七常见误区)
   - [八、未覆盖缺口](#八未覆盖缺口)
+  - [相关概念](#相关概念)
+  - [学术权威参考](#学术权威参考)
 
 ---
 
@@ -64,7 +66,7 @@
 
 | Async Book 章节 | 项目文档 | 状态 | 备注 |
 |-----------------|----------|------|------|
-| [Async IO](https://rust-lang.github.io/async-book/03_async_await/01_chapter.html) | [crates/c06_async/](crates/c06_async/README.md) | ✅ | 异步 IO 示例 |
+| [Async IO](https://rust-lang.github.io/async-book/03_async_await/01_chapter.html) | [crates/c06_async/](../crates/c06_async/README.md) | ✅ | 异步 IO 示例 |
 | [Shared State](https://rust-lang.github.io/async-book/03_async_await/04_shared_state.html) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §4 | ✅ | 异步中持同步锁 |
 
 ---
@@ -103,3 +105,14 @@
 - [Pin 与自引用](formal_methods/10_pin_self_referential.md)
 - [并发与异步反例](formal_methods/60_concurrency_async_counterexamples.md)
 - [知识图谱索引](10_knowledge_graph_index.md)
+
+---
+
+## 学术权威参考
+
+本对齐矩阵同时参考以下 P1 学术权威来源，以形成完整的官方-学术对照网络：
+
+- [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
+- [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
+- [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
+- [Aeneas](https://aeneas-verification.github.io/)

@@ -1,21 +1,37 @@
 # 定理与证明策略汇编
+
 > **概念族**: 形式化方法
 
 > **内容分级**: [归档级]
+
 >
+
 > **分级**: [B]
+
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **创建日期**: 2026-02-23
+
 > **最后更新**: 2026-06-29
+
 > **Rust 版本**: 1.96.0+ (Edition 2024)
+
 > **状态**: ✅ **完成**
+
 > **级别**: L1 (证明思路) + L2 (完整证明草图)
+
 > **目标**: 给人看的形式化论证，注重认知理解；并与 RustBelt、Aeneas、Oxide、Tree Borrows 等学术来源逐定理精确对照
+
 > **权威来源**:
+
 >
+
 > [RustBelt](https://plv.mpi-sws.org/rustbelt/) |
+
 > [Aeneas](https://github.com/AeneasVerif/aeneas) |
+
 > [Iris](https://iris-project.org/) |
+
 > [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ---
@@ -62,12 +78,19 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 定理ID | 定理名称 | 难度 | 证明策略 | 状态 |
+
 | :--- | :--- | :--- | :--- | :--- |
+
 | T-OW2 | 所有权唯一性 | ⭐⭐⭐ | 状态机归纳 | ✅ |
+
 | T-BR1 | 数据竞争自由 | ⭐⭐⭐⭐ | 分离逻辑 | 🔄 |
+
 | T-TY3 | 类型安全 | ⭐⭐⭐ | 进展+保持 | ✅ |
+
 | T-LF2 | 引用有效性 | ⭐⭐ | 区域包含 | ✅ |
+
 | SEND-T1 | Send安全 | ⭐⭐ | 构造证明 | ✅ |
+
 | SYNC-T1 | Sync安全 | ⭐⭐ | 等价推导 | ✅ |
 
 ---
@@ -79,7 +102,9 @@
 ### 1.1 定理陈述
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定理 (T-OW2)**: 对于任何值$v$，在任意时刻，最多存在一个变量$x$使得$\Omega(x) = \text{Owned}$且$\Gamma(x) = v$。
@@ -89,9 +114,13 @@
 ### 1.2 证明策略
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
 >
+
 > **学术来源对照**: [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) Theorem 4.1：λRust 中通过 `own(b)` 资源谓词和 Iris 协议证明值的所有权唯一。
 
 **核心思想**: 证明所有权转移操作保持唯一性不变式。
@@ -99,27 +128,41 @@
 **证明结构**:
 
 ```
+
 1. 定义所有权唯一性不变式
+
 2. 证明初始状态满足不变式
+
 3. 对状态转移进行归纳
+
    - 证明每种转移保持不变式
+
 4. 得出所有可达状态满足不变式
+
 ```
 
 ### 1.3 详细证明思路
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **步骤 1: 定义不变式**
 
 ```
+
 ownership_unique(S) ≡
+
   ∀v: Value, ∀x₁, x₂: Var,
+
     Ω(x₁) = Owned ∧ Γ(x₁) = v ∧
+
     Ω(x₂) = Owned ∧ Γ(x₂) = v
+
     → x₁ = x₂
+
 ```
 
 **步骤 2: 归纳基础**
@@ -127,6 +170,7 @@ ownership_unique(S) ≡
 初始状态：程序开始时，每个值只有一个所有者。
 
 - 由语言语义保证
+
 - 或通过变量声明规则保证
 
 **步骤 3: 归纳步骤**
@@ -136,33 +180,53 @@ ownership_unique(S) ≡
 **情况 A: Move操作**
 
 ```
+
 pre: owns(x, v)
+
 post: owns(y, v) ∧ ¬valid(x)
 
+
+
 分析:
+
 - x失去所有权，变为Moved状态
+
 - y获得所有权
+
 - 其他变量不变
+
 - 因此v仍然只有一个所有者(y)
+
 ```
 
 **情况 B: Copy操作**
 
 ```
+
 pre: owns(x, v)
+
 post: owns(x, v) ∧ owns(y, v')
 
+
+
 注意: Copy创建的是新值v'，不是共享v
+
 因此不涉及唯一性违反
+
 ```
 
 **情况 C: Drop操作**
 
 ```
+
 pre: owns(x, v)
+
 post: v被释放，x变为Dropped
 
+
+
 分析: v不再存在，唯一性自然保持
+
 ```
 
 **关键引理**: 每个操作都是原子性的，不会出现中间状态。
@@ -170,7 +234,9 @@ post: v被释放，x变为Dropped
 ### 1.4 推论
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **推论 1 (无使用后移动)**: 值被移动后，原变量不能继续使用。
@@ -180,13 +246,17 @@ post: v被释放，x变为Dropped
 ---
 
 ## 二、数据竞争自由定理 (T-BR1)
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 2.1 定理陈述
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **定理 (T-BR1)**: 通过Rust借用检查的程序是数据竞争自由的。
@@ -194,15 +264,21 @@ post: v被释放，x变为Dropped
 **形式化**:
 
 ```
+
 BorrowCheck(P) = OK → DataRaceFree(P)
+
 ```
 
 ### 2.2 证明策略
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
 >
+
 > **学术来源对照**: [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) Theorem 5.2：借用规则在 Iris 分离逻辑下保证无数据竞争；[Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) 进一步用权限树状态机形式化该性质。
 
 **核心思想**: 借用规则确保对同一内存位置的冲突访问不能并发发生。
@@ -210,25 +286,37 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 **证明结构**:
 
 ```
+
 1. 定义数据竞争
+
 2. 分析借用规则如何保证互斥
+
 3. 证明借用检查通过 ⇒ 无数据竞争
+
 ```
 
 ### 2.3 详细证明思路
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **步骤 1: 数据竞争定义**
 
 ```
+
 数据竞争存在当且仅当:
+
 ∃a₁, a₂: MemoryAccess,
+
   a₁.thread ≠ a₂.thread ∧      // 不同线程
+
   a₁.location = a₂.location ∧  // 同一位置
+
   (a₁.is_write ∨ a₂.is_write)  // 至少一个写
+
 ```
 
 **步骤 2: 借用规则分析**
@@ -236,7 +324,9 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 **规则**: 在任意时刻，对于内存位置l：
 
 - 要么：有一个可变借用`&mut l`
+
 - 要么：有多个不可变借用`&l`
+
 - 不会同时有可变和不可变借用
 
 **步骤 3: 证明借用规则阻止数据竞争**
@@ -244,19 +334,29 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 **情况 A: 可变借用**
 
 ```
+
 如果线程T持有 &mut l:
+
 - 没有其他线程可以持有 &l 或 &mut l
+
 - 因此其他线程不能访问l
+
 - 不存在并发访问，无数据竞争
+
 ```
 
 **情况 B: 不可变借用**
 
 ```
+
 如果多个线程持有 &l:
+
 - 所有线程都是读操作
+
 - 没有写操作
+
 - 读-读不冲突，无数据竞争
+
 ```
 
 **关键观察**: 借用检查器在编译时强制执行上述规则。
@@ -264,19 +364,25 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 ### 2.4 直观理解
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **类比**: 借用系统像图书馆的管理规则：
 
 - `&mut T`: 一个人借走书，其他人不能借
+
 - `&T`: 多人可以借阅副本（同时阅读）
+
 - 规则防止：一人正在修改时，其他人也在读或改
 
 ---
 
 ## 三、类型安全定理 (T-TY3)
+
 >
+
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 定理陈述
@@ -288,28 +394,39 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 **形式化**:
 
 ```
+
 Γ ⊢ e : τ → ¬∃e', e →* e' ∧ type_error(e')
+
 ```
 
 **分解为两个子定理**:
 
 - T-TY1 (进展性): 良类型表达式可以继续求值或已是值
+
 - T-TY2 (保持性): 求值保持类型
 
 ### 3.2 证明策略：进展 + 保持
+
 >
+
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
 >
+
 > **学术来源对照**: Wright & Felleisen (1994) 的经典类型安全证明框架；[RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) 在 λRust 操作语义中复现该框架；[Oxide](https://arxiv.org/abs/1903.00982) 在带 region 的类型系统中给出进展/保持证明。
 
 **经典类型安全证明框架** (Wright & Felleisen, 1994)
 
 ```
+
 类型安全 = 进展性 + 保持性
+
 ```
 
 ### 3.3 进展性 (T-TY1)
+
 >
+
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **定理**: 如果$e$是良类型的，那么$e$要么是值，要么可以求值为某个$e'$。
@@ -317,26 +434,45 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 **证明思路**:
 
 ```
+
 对类型推导进行结构归纳:
 
+
+
 情况 1: e是值 (整数、布尔、函数)
+
   → 直接满足
 
+
+
 情况 2: e是变量
+
   → 假设上下文已定义
 
+
+
 情况 3: e = e₁ + e₂
+
   → 递归应用归纳假设
+
   → e₁和e₂都可以求值
+
   → 因此e可以求值
 
+
+
 情况 4: e = (λx.e₁) e₂
+
   → e₂可以求值（归纳假设）
+
   → 或e₂是值，可以β归约
+
 ```
 
 ### 3.4 保持性 (T-TY2)
+
 >
+
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **定理**: 如果$e$是良类型的且$e → e'$，那么$e'$也是良类型的。
@@ -344,53 +480,81 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 **证明思路**:
 
 ```
+
 对求值规则进行案例分析:
 
+
+
 情况 1: β归约 (λx.e₁) v₂ → [v₂/x]e₁
+
   → 使用替换引理
+
   → 替换保持类型
 
+
+
 情况 2: 算术求值 n₁ + n₂ → n₃
+
   → 结果仍是整数
 
+
+
 情况 3: 条件求值 if true e₂ e₃ → e₂
+
   → 分支类型与条件类型一致
+
 ```
 
 **关键引理 (替换引理)**:
 
 ```
+
 如果 Γ, x:τ₁ ⊢ e : τ₂ 且 Γ ⊢ v : τ₁
+
 那么 Γ ⊢ [v/x]e : τ₂
+
 ```
 
 ### 3.5 直观理解
+
 >
+
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **类型系统作为过滤器**:
 
 ```
+
 所有程序
+
     │
+
     ├── 良类型程序 ──→ 类型安全（不会崩溃）
+
     │
+
     └── 非良类型程序 ──→ 编译错误
+
 ```
 
 **Rust的扩展**:
 
 - 所有权系统扩展了类型安全
+
 - 不仅保证"不会stuck"，还保证"内存安全"
 
 ---
 
 ## 四、生命周期有效性定理 (T-LF2)
+
 >
+
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 4.1 定理陈述
+
 >
+
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **定理**: 引用的生命周期不超过被引用数据的生命周期。
@@ -398,13 +562,19 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 **形式化**:
 
 ```
+
 Γ ⊢ r: &'a T  →  lifetime(r) ⊆ lifetime(T)
+
 ```
 
 ### 4.2 证明策略
+
 >
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
 >
+
 > **学术来源对照**: [Oxide](https://arxiv.org/abs/1903.00982) 使用带 region 的类型系统证明引用有效性；[RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) Lifetime Logic 将生命周期编码为 Iris 中的时间戳资源。
 
 **核心**: 区域包含关系的传递性。
@@ -412,100 +582,157 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 **证明思路**:
 
 ```
+
 1. 每个值有隐式或显式的生命周期
+
 2. 引用创建时，编译器检查被引用值的生命周期
+
 3. 生命周期关系通过类型系统传播
+
 4. 如果引用可能比数据活得长，编译拒绝
+
 ```
 
 **关键规则 (Outlives)**:
 
 ```
+
 T: 'a  表示 T中所有引用都存活至少'a
+
 ```
 
 ---
 
 ## 五、证明技术总结
+
 >
+
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 5.1 常用证明技术
+
 >
+
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 技术 | 适用场景 | 示例 |
+
 | :--- | :--- | :--- |
+
 | **结构归纳** | 归纳定义的数据 | 表达式、类型、状态 |
+
 | **规则归纳** | 归纳定义的关系 | 类型判断、求值关系 |
+
 | **反证法** | 否定性质 | 无数据竞争 |
+
 | **案例分析** | 有限情况 | 操作语义规则 |
+
 | **构造法** | 存在性命题 | 存在类型安全求值 |
 
 ### 5.2 证明检查清单
+
 >
+
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] 定义清晰（概念、谓词、关系）
+
 - [ ] 归纳基础成立
+
 - [ ] 归纳步骤覆盖所有情况
+
 - [ ] 辅助引理已证明
+
 - [ ] 边界情况已考虑
+
 - [ ] 反例已排除
 
 ---
 
 ## 六、证明策略与学术来源对照
+
 >
+
 > **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)**
+
 >
+
 > **来源: [Aeneas](https://arxiv.org/abs/2206.07185)**
+
 >
+
 > **来源: [Oxide](https://arxiv.org/abs/1903.00982)**
+
 >
+
 > **来源: [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)**
 
 ### 6.1 核心定理学术来源映射
 
 | 本项目定理 | 证明策略 | 学术来源定理/方法 | 对照说明 |
+
 | :--- | :--- | :--- | :--- |
+
 | T-OW2 所有权唯一性 | 状态机归纳 | RustBelt Theorem 4.1 | 本项目用集合论状态机，RustBelt 用 Iris `own(b)` |
+
 | T-BR1 数据竞争自由 | 借用规则互斥 | RustBelt Theorem 5.2；Tree Borrows 权限树 | 概念一致，RustBelt 用分离逻辑，Tree Borrows 用状态机 |
+
 | T-TY3 类型安全 | 进展 + 保持 | Wright & Felleisen 1994；RustBelt 类型系统；Oxide | 经典框架的 Rust 实例化 |
+
 | T-LF2 引用有效性 | 区域包含 | Oxide region calculus；RustBelt Lifetime Logic | 生命周期约束的形式化表达 |
+
 | SEND-T1 Send 安全 | 构造证明 | RustBelt Meets Relaxed Memory | 松弛内存下 Send 的同步 ghost state |
+
 | SYNC-T1 Sync 安全 | 等价推导 | 同上 | `&T: Send` 当且仅当 `T: Sync` |
 
 ### 6.2 证明技术与学术方法对应
 
 | 本项目技术 | 学术对应 | 适用定理 |
+
 | :--- | :--- | :--- |
+
 | 结构归纳法 | 操作语义归纳（PL 标准） | T-OW2、T-TY1、T-TY2 |
+
 | 反证法 | 分离逻辑反证（Iris） | T-BR1、T-OW3 |
+
 | 替换引理 | 类型系统替换引理 | T-TY2 |
+
 | 区域包含 | Region-based type system | T-LF2 |
+
 | 分离逻辑 | Iris / RustBelt | T-BR1、T-OW3（L3 目标） |
+
 | 构造证明 | 存在性构造 / Aeneas 翻译 | T-TY1、SEND-T1 |
+
 | 案例分析 | 操作语义规则穷举 | T-OW2、T-TY2 |
 
 ## 七、与机器证明的关系
+
 >
+
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### L1 → L2 → L3 映射
+
 >
+
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 层级 | 内容 | 形式 |
+
 | :--- | :--- | :--- |
+
 | **L1** | 证明思路 (本文档) | 自然语言 + 数学符号 |
+
 | **L2** | 完整证明 (草图) | 详细步骤，可能省略基础情况 |
+
 | **L3** | 机器证明 (Coq) | 形式化，可验证，完全详细 |
 
 **关系**:
 
 - L1 给人看，理解核心思想
+
 - L2 给专家看，验证证明结构
+
 - L3 给机器看，确保绝对正确
 
 **本项目重点**: L1和L2，确保概念清晰、论证完整。
@@ -513,19 +740,27 @@ T: 'a  表示 T中所有引用都存活至少'a
 ---
 
 **维护者**: Rust Formal Methods Research Team
+
 **最后更新**: 2026-06-29
+
 **状态**: ✅ **完成**
+
 **文档版本**: 2.0
+
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
 **用途**: 给人看的形式化论证，并与 RustBelt、Aeneas、Oxide、Tree Borrows 等学术来源逐定理精确对照
 
 ---
 
 ## 相关概念
+
 >
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [research_notes 目录](README.md)
+
 - [上级目录](../README.md)
 
 ---
@@ -541,12 +776,19 @@ T: 'a  表示 T中所有引用都存活至少'a
 > **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+
 > **来源: [ACM](https://dl.acm.org/)**
+
 > **来源: [IEEE](https://standards.ieee.org/)**
+
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

@@ -37,6 +37,7 @@
     - [3. `pub use` 重导出](#3-pub-use-重导出)
   - [反例与边界](#反例与边界)
   - [权威来源对照表](#权威来源对照表)
+  - [学术/社区来源参考](#学术社区来源参考)
 
 ---
 
@@ -263,3 +264,11 @@ pub use internal::InnerStruct as PublicStruct; // 对外暴露
 ---
 
 > **权威来源**: [Rust Reference – Items and Modules](https://doc.rust-lang.org/reference/items/modules.html) | [Rust Reference – Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html) | [Rust Reference – Use Declarations](https://doc.rust-lang.org/reference/items/use-declarations.html) | [TRPL – Managing Growing Projects](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)
+
+---
+
+## 学术/社区来源参考
+
+> **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**: [Aeneas](https://aeneas-verification.github.io/)
+> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)

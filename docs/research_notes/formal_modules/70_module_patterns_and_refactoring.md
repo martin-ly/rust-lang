@@ -40,6 +40,7 @@
     - [验证清单](#验证清单)
   - [总结](#总结)
   - [相关概念](#相关概念)
+  - [学术/社区来源参考](#学术社区来源参考)
 
 ---
 
@@ -297,3 +298,11 @@ pub fn parse(input: &str) -> Result<Expr, ParseError> {
 - [Linkage 与符号](20_linkage_and_symbols.md)
 - [模块系统与安全抽象](40_module_safety_abstraction.md)
 - [知识图谱索引](../10_knowledge_graph_index.md)
+
+---
+
+## 学术/社区来源参考
+
+> **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**: [Aeneas](https://aeneas-verification.github.io/)
+> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)

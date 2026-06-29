@@ -1,23 +1,16 @@
 # Trait 系统形式化
 
 > **概念族**: 类型系统 / Trait
-
 > **迁回说明**: 本文档于 2026-06-29 从 archive/research_notes_2026_06_25/ 迁回，作为当前 docs/research_notes/ 概念链关键节点持续推进。
-
 > **内容分级**: [归档级]
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 >
 
 - [Trait 系统形式化](#trait-系统形式化)

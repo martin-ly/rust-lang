@@ -11,9 +11,31 @@
 
 ---
 
+## 七、扩展对齐专题
+
+| 专题 | 对齐文档 | 说明 |
+|------|----------|------|
+| 设计模式 | [10_design_patterns_authoritative_alignment.md](10_design_patterns_authoritative_alignment.md) | GoF、Rust 惯用法、企业级模式、反模式 |
+| 异步生态 | [10_async_ecosystem_alignment.md](10_async_ecosystem_alignment.md) | tokio、async-std、smol、axum、tonic 等生态 |
+| 版本演进 | [10_version_evolution_alignment.md](10_version_evolution_alignment.md) | 官方发布、Edition、关键特性、不稳定特性追踪 |
+| 性能与测试 | [10_performance_and_testing_alignment.md](10_performance_and_testing_alignment.md) | Rust Performance Book、Cargo 测试、Miri、Clippy、Criterion、Sanitizer |
+| 行号级锚点 | [10_authoritative_source_line_anchors.md](10_authoritative_source_line_anchors.md) | 核心概念到权威来源 GitHub 行号级链接 |
+| RFC 到反例映射 | [10_rfc_to_counterexample_mapping.md](10_rfc_to_counterexample_mapping.md) | 关键 RFC 与项目反例文档的双向映射 |
+| 宏 / FFI / 嵌入式生态 | [10_macros_ffi_embedded_alignment.md](10_macros_ffi_embedded_alignment.md) | 宏系统、FFI、WebAssembly、嵌入式生态权威来源对齐 |
+| 错误处理 / 网络 / Web | [10_error_handling_network_web_alignment.md](10_error_handling_network_web_alignment.md) | Rust Book Ch 9、std::result、thiserror/anyhow/eyre、tokio::net、hyper、tonic、axum、actix-web、rocket、tower、HTTP/1/2/3、WebSocket、OpenAPI 权威来源对齐 |
+| 数据库、存储与云原生 | [10_database_storage_cloud_alignment.md](10_database_storage_cloud_alignment.md) | diesel、sqlx、sea-orm、rusqlite、redis、mongo、kafka、rabbitmq、nats、kube-rs、otel、prometheus、容器/K8s |
+| CI/CD 与供应链安全 | [10_cicd_supply_chain_alignment.md](10_cicd_supply_chain_alignment.md) | GitHub Actions、GitLab CI、测试质量、供应链安全、发布签名 |
+| 缺口与反向追溯 | [10_authoritative_source_gap_and_backref_index.md](10_authoritative_source_gap_and_backref_index.md) | 权威来源缺口分析、已建立/未建立反向追溯的权威来源、P0/P1/P2 补全优先级 |
+| Crate 架构 | [10_crate_architecture_authoritative_alignment.md](10_crate_architecture_authoritative_alignment.md) | workspace、public/private API、feature、错误类型、日志、配置、CLI、库/二进制、MSRV |
+| 学习路径与面试题 | [10_learning_and_interview_alignment.md](10_learning_and_interview_alignment.md) | 官方/社区学习资源、面试题与权威来源映射、Bloom 层级对应 |
+| 自动补全计划 | [10_authoritative_source_completion_plan.md](10_authoritative_source_completion_plan.md) | 权威来源 P0/P1/P2 自动补全建议与覆盖率提升计划 |
+
+---
+
 ## 目录
 
 - [权威来源对齐网络总索引](#权威来源对齐网络总索引)
+  - [七、扩展对齐专题](#七扩展对齐专题)
   - [目录](#目录)
   - [一、网络说明](#一网络说明)
   - [二、P0 官方权威来源对齐](#二p0-官方权威来源对齐)
@@ -21,6 +43,7 @@
   - [四、P2 社区权威来源对齐](#四p2-社区权威来源对齐)
   - [五、对齐维度与状态标记](#五对齐维度与状态标记)
   - [六、维护与更新](#六维护与更新)
+  - [相关概念](#相关概念)
 
 ---
 
@@ -41,15 +64,28 @@
 | 权威来源 | 类型 | 对齐文档 | 覆盖主题 | 状态 |
 |----------|------|----------|----------|------|
 | [The Rust Programming Language](https://doc.rust-lang.org/book/) | 教程 | [10_rust_book_alignment.md](10_rust_book_alignment.md) | 所有权、类型系统、并发、错误处理、宏、OOP 等 21 章 | ✅ 已完成 |
-| [Rust Reference](https://doc.rust-lang.org/reference/) | 语言规范 | [10_rust_reference_alignment.md](10_rust_reference_alignment.md) | 词法、类型、表达式、items、modules、unsafe、attributes | ✅ 已完成 |
+| [Rust Reference](https://doc.rust-lang.org/reference/) | 语言规范 | [10_rust_reference_alignment.md](10_rust_reference_alignment.md) / [10_rust_reference_chapters_alignment.md](10_rust_reference_chapters_alignment.md) | 词法、类型、表达式、items、modules、unsafe、attributes | ✅ 已完成 |
 | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | 高级/unsafe 指南 | [10_rustonomicon_alignment.md](10_rustonomicon_alignment.md) | 所有权、生命周期、子类型、Send/Sync、FFI、未初始化内存 | ✅ 已完成 |
 | [Cargo Book](https://doc.rust-lang.org/cargo/) | 构建工具 | [10_cargo_book_alignment.md](10_cargo_book_alignment.md) | 依赖、workspace、features、crate-type、发布、配置 | ✅ 已完成 |
+| [Toolchain Ecosystem](https://www.rust-lang.org/tools) | 工具链 | [10_toolchain_ecosystem_alignment.md](10_toolchain_ecosystem_alignment.md) | rustc、rustup、clippy、rustfmt、rust-analyzer、rustdoc | ✅ 已完成 |
+| [Async Ecosystem](https://tokio.rs/) | 异步生态 | [10_async_ecosystem_alignment.md](10_async_ecosystem_alignment.md) | tokio、async-std、smol、futures、axum、tonic | ✅ 已完成 |
+| [Version Evolution](https://blog.rust-lang.org/) | 版本演进 | [10_version_evolution_alignment.md](10_version_evolution_alignment.md) | 官方发布说明、Edition、关键特性版本映射 | ✅ 已完成 |
 | [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) | 版本迁移 | [10_edition_guide_alignment.md](10_edition_guide_alignment.md) | 2015/2018/2021/2024 Edition 差异与迁移 | ✅ 已完成 |
 | [Async Book](https://rust-lang.github.io/async-book/) | 异步编程 | [10_async_book_alignment.md](10_async_book_alignment.md) | Future、async/await、Pin、执行器、IO | ✅ 已完成 |
 | [Rust RFCs](https://rust-lang.github.io/rfcs/) | 设计提案 | [10_rfc_alignment_index.md](10_rfc_alignment_index.md) | 所有权、借用、生命周期、async、Edition、语法糖 | ✅ 已完成 |
-| [Standard Library](https://doc.rust-lang.org/std/) | API 文档 | 各主题文档内嵌链接 | 核心类型、trait、collections、sync、io | ✅ 持续 |
-| [Ferrocene Language Specification](https://spec.ferrocene.dev/) | 形式化规范 | [10_international_formal_verification_index.md](10_international_formal_verification_index.md) | 语义规范、安全关键认证 | ✅ 已索引 |
-| [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) | 编译器开发 | [formal_modules/](formal_modules/README.md) / [type_theory/](type_theory/README.md) | HIR/MIR、名称解析、类型推断 | ✅ 已索引 |
+| [Standard Library](https://doc.rust-lang.org/std/) | API 文档 | [10_std_library_alignment.md](10_std_library_alignment.md) | 核心类型、trait、collections、sync、io | ✅ 已完成 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | 交互式示例 | [10_rust_by_example_alignment.md](10_rust_by_example_alignment.md) | 基础概念、所有权、类型、并发、unsafe | ✅ 已完成 |
+| [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) | unsafe 指南 | [10_unsafe_code_guidelines_alignment.md](10_unsafe_code_guidelines_alignment.md) | 内存模型、UB、类型布局、FFI | ✅ 已完成 |
+| [Safety & Unsafe](https://doc.rust-lang.org/nomicon/) | 安全/unsafe | [10_safety_and_unsafe_authoritative_alignment.md](10_safety_and_unsafe_authoritative_alignment.md) | P0/P1/P2 安全与 unsafe 权威来源网络 | ✅ 已完成 |
+| [Rust Error Codes](https://doc.rust-lang.org/error_codes/error-index.html) | 错误参考 | [10_rustc_errors_alignment.md](10_rustc_errors_alignment.md) | 所有权、类型、模块、并发错误码 | ✅ 已完成 |
+| [Ferrocene Language Specification](https://spec.ferrocene.dev/) | 形式化规范 | [10_ferrocene_fls_alignment.md](10_ferrocene_fls_alignment.md) | 语义规范、安全关键认证 | ✅ 已完成 |
+| [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) | 编译器开发 | [10_rustc_dev_guide_alignment.md](10_rustc_dev_guide_alignment.md) | HIR/MIR、名称解析、类型推断 | ✅ 已完成 |
+| [Verification Tools](https://rust-lang.github.io/rust-formal-methods/) | 形式化工具 | [10_verification_tools_practical_alignment.md](10_verification_tools_practical_alignment.md) | Aeneas、coq-of-rust、Kani、Prusti、Creusot 实战映射 | ✅ 已完成 |
+| [RFC Argumentation](https://rust-lang.github.io/rfcs/) | 设计论证 | [10_rfc_argumentation_chain.md](10_rfc_argumentation_chain.md) | 关键 RFC 的 Motivation→Design→Drawbacks 论证链 | ✅ 已完成 |
+| [i18n Sources](https://rust-lang.org/) | 国际化资源 | [10_i18n_source_alignment.md](10_i18n_source_alignment.md) | 中/日/多语言官方翻译与社区资源 | ✅ 已完成 |
+| [i18n Translation Gap](https://github.com/rust-lang/book) | 翻译差异检测 | [10_i18n_translation_gap_analysis.md](10_i18n_translation_gap_analysis.md) | 多语言翻译版本差异检测与对齐流程 | ✅ 已完成 |
+| [Version Tracking](https://releases.rs/) | 版本跟踪 | [10_authoritative_source_version_tracking.md](10_authoritative_source_version_tracking.md) | 所有权威来源的最后检查日期与版本 | ✅ 已完成 |
+| [RFC Tracking](https://rust-lang.github.io/rfcs/) | RFC 实现状态 | [10_rfc_tracking_status.md](10_rfc_tracking_status.md) | 关键 RFC 的 stable/in-progress/deprecated 状态 | ✅ 已完成 |
 
 ---
 
@@ -62,18 +98,19 @@
 | [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3) | 多机构 | 操作语义 | [10_rustsem_semantics.md](10_rustsem_semantics.md) | Rust 操作语义 |
 | [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) | ETH Zürich | 借用模型 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | 别名模型改进 |
 | [Stacked Borrows](https://plv.mpi-sws.org/rustbos/) | MPI-SWS | 借用模型 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | 原始别名规则 |
+| [IEEE/ACM/arXiv/Springer Academic Resources](https://dl.acm.org/) | 多机构 | 学术论文/工具综述 | [10_academic_papers_alignment.md](10_academic_papers_alignment.md) | POPL/PLDI/OOPSLA/ICFP 顶级会议、TOPLAS/JFP/FMSD 期刊、ACM DL/IEEE Xplore/Springer/arXiv 出版商 |
 
 ---
 
 ## 四、P2 社区权威来源对齐
 
-| 权威来源 | 类型 | 覆盖主题 | 状态 |
-|----------|------|----------|------|
-| [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | 最佳实践 | API 设计、命名、SemVer、Future-proofing | ✅ 已索引 |
-| [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | 设计模式 | 惯用法、反模式、idioms | ✅ 已索引 |
-| [Rust Performance Book](https://nnethercote.github.io/perf-book/) | 性能优化 | 基准测试、Profiling、优化技巧 | ✅ 已索引 |
-| [This Week in Rust](https://this-week-in-rust.org/) | 社区周报 | 新版本特性、博客、RFC 进展 | ✅ 持续追踪 |
-| [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/) | 官方博客 | 编译器、语言团队进展 | ✅ 持续追踪 |
+| 权威来源 | 类型 | 对齐文档 | 覆盖主题 | 状态 |
+|----------|------|----------|----------|------|
+| [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | 最佳实践 | [10_community_best_practices_alignment.md](10_community_best_practices_alignment.md) | API 设计、命名、SemVer、Future-proofing | ✅ 已完成 |
+| [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | 设计模式 | [10_community_best_practices_alignment.md](10_community_best_practices_alignment.md) / [10_design_patterns_authoritative_alignment.md](10_design_patterns_authoritative_alignment.md) | 惯用法、GoF 模式、反模式 | ✅ 已完成 |
+| [Rust Performance Book](https://nnethercote.github.io/perf-book/) | 性能优化 | [10_community_best_practices_alignment.md](10_community_best_practices_alignment.md) / [10_performance_and_testing_alignment.md](10_performance_and_testing_alignment.md) | 基准测试、Profiling、优化技巧 | ✅ 已完成 |
+| [This Week in Rust](https://this-week-in-rust.org/) | 社区周报 | — | 新版本特性、博客、RFC 进展 | ✅ 持续追踪 |
+| [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/) | 官方博客 | — | 编译器、语言团队进展 | ✅ 持续追踪 |
 
 ---
 

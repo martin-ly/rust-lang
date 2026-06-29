@@ -18,6 +18,7 @@ members = [
     "crates/c12_wasm",
     "crates/c13_embedded",
     "crates/c14_semantic_web",
+    "crates/c15_verification_tools",
     "crates/common",
     "crates/integration_tests",
     "exercises",
@@ -769,7 +770,7 @@ irrefutable_let_patterns = "allow"
 unused_crate_dependencies = "warn"
 missing_docs = "allow"
 # 声明 nightly 预览模块使用的自定义 cfg，避免 unexpected_cfgs 警告
-unexpected_cfgs = { level = "warn", check-cfg = ['cfg(nightly)', 'cfg(kani)'] }
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(nightly)', 'cfg(kani)', 'cfg(prusti)'] }
 
 [workspace.lints.clippy]
 all = { level = "warn", priority = -1 }

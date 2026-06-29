@@ -1,23 +1,37 @@
 # 教程：理解生命周期
+
 > **概念族**: 教程
 
 > **内容分级**: [归档级]
+
 > **Rust 版本**: 1.96.0+ (Edition 2024)
+
 > **状态**: ✅ 已完成权威国际化来源对齐升级
+
 >
+
 > **分级**: [B]
+
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **创建日期**: 2026-02-24
+
 > **目标受众**: 初学者-进阶
+
 > **预计阅读时间**: 20分钟
+
 > **级别**: L1/L2
 
 ---
 
 ## 📑 目录
+
 >
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
 >
+
 - [教程：理解生命周期](#教程理解生命周期)
   - [📑 目录](#-目录)
   - [引言](#引言)
@@ -48,151 +62,227 @@
   - [权威来源索引](#权威来源索引)
 
 ## 引言
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 生命周期是Rust最令初学者困惑的概念之一。
+
 但其实它的核心思想很简单：**引用不能比它指向的数据活得更长**。
 
 ---
 
 ## 第一部分：什么是生命周期？
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 直观理解
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 生命周期就是引用的**有效期限**。
 
 ```rust
+
 {
+
     let x = 5;           // x的生命周期开始
+
     let r = &x;          // r借用x，r的生命周期不能超过x
+
     println!("{}", r);   // r在此使用
+
 }  // x和r的生命周期结束
+
 ```
 
 ### 为什么需要生命周期？
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 防止悬垂引用：
 
 ```rust
+
 let r;
+
 {
+
     let x = 5;
+
     r = &x;  // 错误！x在块结束时被释放
+
 }
+
 // r仍然有效，但指向无效内存
+
 ```
 
 ---
 
 ## 第二部分：生命周期语法
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 显式生命周期
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
+
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+
     if x.len() > y.len() { x } else { y }
+
 }
 
+
+
 // 'a 是一个生命周期参数
+
 // 表示x、y和返回值都有相同的生命周期
+
 ```
 
 ### 生命周期省略
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 大多数情况下，编译器自动推断：
 
 ```rust,ignore
+
 fn first_word(s: &str) -> &str { ... }
 
+
+
 // 编译器自动添加：
+
 // fn first_word<'a>(s: &'a str) -> &'a str
+
 ```
 
 **三条省略规则**:
 
 1. 每个引用参数有自己的生命周期
+
 2. 只有一个输入生命周期 → 赋给输出
+
 3. `&self`存在 → `self`的生命周期赋给输出
 
 ---
 
 ## 第三部分：生命周期关系
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 'static 生命周期
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
+
 let s: &'static str = "hello";
 
+
+
 // 'static 表示整个程序运行期间有效
+
 // 字符串字面量是'static
+
 ```
 
 ### 子类型关系
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
+
 // 'static 是 'a 的子类型
+
 // 因为 'static 比任何 'a 都长
 
+
+
 let s: &'static str = "hello";
+
 take_str(s);  // 可以传给需要 &'a str 的函数
 
+
+
 fn take_str<'a>(s: &'a str) {}
+
 ```
 
 ---
 
 ## 第四部分：结构体中的生命周期
+
 >
+
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
+
 struct Person<'a> {
+
     name: &'a str,  // name必须活得比Person长
+
 }
 
+
+
 fn main() {
+
     let name = String::from("Alice");
+
     let p = Person { name: &name };
+
     // name必须在这里之后才能drop
+
     println!("{}", p.name);
+
 }
+
 ```
 
 ---
 
 ## 第五部分：常见模式
+
 >
+
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 模式1: 输入输出相同
@@ -200,9 +290,13 @@ fn main() {
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```rust
+
 fn identity<'a>(x: &'a str) -> &'a str {
+
     x
+
 }
+
 ```
 
 ### 模式2: 多个独立生命周期
@@ -210,12 +304,19 @@ fn identity<'a>(x: &'a str) -> &'a str {
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```rust,ignore
+
 fn parse<'a, 'b>(
+
     input: &'a str,
+
     config: &'b Config
+
 ) -> &'a str {
+
     // 返回与input关联的数据
+
 }
+
 ```
 
 ### 模式3: 方法
@@ -223,84 +324,133 @@ fn parse<'a, 'b>(
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```rust,ignore
+
 impl<'a> Person<'a> {
+
     fn get_name(&self) -> &'a str {
+
         self.name
+
     }
+
 }
+
 ```
 
 ---
 
 ## 第六部分：高级话题
+
 >
+
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### NLL (非词法生命周期)
+
 >
+
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
+
 let mut x = 5;
+
 let y = &x;
+
 println!("{}", y);  // y最后一次使用
+
 // 这里y已经结束
+
 let z = &mut x;  // OK！NLL允许
+
 ```
 
 ### HRTB (高阶trait bound)
+
 >
+
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
+
 fn call_with_ref<F>(f: F)
+
 where
+
     F: for<'a> Fn(&'a str),
+
 {
+
     f("hello");
+
 }
+
 ```
 
 ---
 
 ## 总结
+
 >
+
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
+
 生命周期
+
     │
+
     ├──→ 核心思想
+
     │       └── 引用不能比数据活得长
+
     │
+
     ├──→ 语法
+
     │       ├── 显式标注: 'a
+
     │       ├── 省略规则
+
     │       └── 'static
+
     │
+
     └──→ 应用
+
             ├── 函数
+
             ├── 结构体
+
             └── trait
+
 ```
 
 ---
 
 **维护者**: Rust Formal Methods Research Team
+
 **最后更新**: 2026-02-24
+
 **状态**: ✅ 已完成 - 教程：理解生命周期 (3/5教程)
 
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+
 >
+
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
+
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
 >
+
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -308,10 +458,15 @@ where
 #### 核心特性应用
 
 | 特性 | 应用场景 | 文档章节 |
+
 |------|---------|----------|
+
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
+
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
+
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
+
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新
@@ -319,38 +474,51 @@ where
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
+
 - ✅ 兼容Edition 2024
+
 - ✅ 通过标准库测试
 
 #### 相关文档
 
 - Rust 1.94 迁移指南
+
 - Rust 1.94 特性速查
+
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
+
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
 
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+
 >
+
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
+
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
 **最后更新**: 2026-05-19
+
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---
 
 ## 相关概念
+
 >
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [research_notes 目录](README.md)
+
 - [上级目录](../README.md)
 
 ---

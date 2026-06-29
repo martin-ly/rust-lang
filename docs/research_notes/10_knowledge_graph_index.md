@@ -29,7 +29,7 @@
     - [4.2 代码示例锚点](#42-代码示例锚点)
   - [五、8 大主-topic 入口](#五8-大主-topic-入口)
   - [六、阶段推进状态](#六阶段推进状态)
-    - [剩余细化项](#剩余细化项)
+    - [剩余细化项（阶段 4 收尾）](#剩余细化项阶段-4-收尾)
   - [七、权威来源索引](#七权威来源索引)
 
 ---
@@ -135,14 +135,45 @@
 | 并发基准 | 实验研究 | L5 | [experiments/10_concurrency_performance.md](experiments/10_concurrency_performance.md) | [experiments/60_experiments_counterexamples.md](experiments/60_experiments_counterexamples.md) §5 |
 | 内存分析 | 实验研究 | L5 | [experiments/10_memory_analysis.md](experiments/10_memory_analysis.md) | [experiments/60_experiments_counterexamples.md](experiments/60_experiments_counterexamples.md) §6 |
 | 宏展开性能 | 实验研究 | L5 | [experiments/10_macro_expansion_performance.md](experiments/10_macro_expansion_performance.md) | [experiments/60_experiments_counterexamples.md](experiments/60_experiments_counterexamples.md) §7 |
-| Rust Reference 对齐 | 权威来源对齐 | L0-L4 | [10_rust_reference_alignment.md](10_rust_reference_alignment.md) | — |
+| Rust Reference 对齐 | 权威来源对齐 | L0-L4 | [10_rust_reference_alignment.md](10_rust_reference_alignment.md) / [10_rust_reference_chapters_alignment.md](10_rust_reference_chapters_alignment.md) | — |
 | Rustonomicon 对齐 | 权威来源对齐 | L0-L6 | [10_rustonomicon_alignment.md](10_rustonomicon_alignment.md) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) |
 | Cargo Book 对齐 | 权威来源对齐 | L0-L5 | [10_cargo_book_alignment.md](10_cargo_book_alignment.md) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) |
 | Edition Guide 对齐 | 权威来源对齐 | L7 | [10_edition_guide_alignment.md](10_edition_guide_alignment.md) | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) |
 | Async Book 对齐 | 权威来源对齐 | L0-L6 | [10_async_book_alignment.md](10_async_book_alignment.md) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) |
 | RFC 对齐索引 | 权威来源对齐 | L0-L7 | [10_rfc_alignment_index.md](10_rfc_alignment_index.md) | 各主题反例 |
+| Ferrocene FLS 对齐 | 权威来源对齐 | L0-L4 | [10_ferrocene_fls_alignment.md](10_ferrocene_fls_alignment.md) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) |
+| rustc-dev-guide 对齐 | 权威来源对齐 | L0-L4 | [10_rustc_dev_guide_alignment.md](10_rustc_dev_guide_alignment.md) | [formal_modules/60_module_counterexamples.md](formal_modules/60_module_counterexamples.md) |
+| Standard Library 对齐 | 权威来源对齐 | L0-L5 | [10_std_library_alignment.md](10_std_library_alignment.md) | 各主题反例 |
+| 社区最佳实践对齐 | 权威来源对齐 | L0-L5 | [10_community_best_practices_alignment.md](10_community_best_practices_alignment.md) | [software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) / [experiments/60_experiments_counterexamples.md](experiments/60_experiments_counterexamples.md) |
+| Rust By Example 对齐 | 权威来源对齐 | L0-L5 | [10_rust_by_example_alignment.md](10_rust_by_example_alignment.md) | 各主题反例 |
+| Unsafe Code Guidelines 对齐 | 权威来源对齐 | L0-L6 | [10_unsafe_code_guidelines_alignment.md](10_unsafe_code_guidelines_alignment.md) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) |
+| Rustc 错误码对齐 | 权威来源对齐 | L6 | [10_rustc_errors_alignment.md](10_rustc_errors_alignment.md) | 各主题反例 |
+| 学术论文与工具对齐 | 权威来源对齐 | L0-L4 | [10_academic_papers_alignment.md](10_academic_papers_alignment.md) | [10_international_formal_verification_index.md](10_international_formal_verification_index.md) |
+| 验证工具实战对齐 | 权威来源对齐 | L3-L4 | [10_verification_tools_practical_alignment.md](10_verification_tools_practical_alignment.md) | [10_verification_tools_matrix.md](10_verification_tools_matrix.md) |
+| RFC 深度论证链 | 权威来源对齐 / 论证 | L0-L3 | [10_rfc_argumentation_chain.md](10_rfc_argumentation_chain.md) | [10_rfc_alignment_index.md](10_rfc_alignment_index.md) |
+| 国际化多语言来源 | 权威来源对齐 / i18n | L0-L1 | [10_i18n_source_alignment.md](10_i18n_source_alignment.md) | — |
+| 权威来源版本跟踪 | 权威来源对齐 / 运维 | L0-L7 | [10_authoritative_source_version_tracking.md](10_authoritative_source_version_tracking.md) | — |
+| RFC 实现状态追踪 | 权威来源对齐 / 版本演进 | L0-L7 | [10_rfc_tracking_status.md](10_rfc_tracking_status.md) | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) |
+| 设计模式权威来源对齐 | 权威来源对齐 / 设计模式 | L0-L5 | [10_design_patterns_authoritative_alignment.md](10_design_patterns_authoritative_alignment.md) | [software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) |
+| 异步生态权威来源对齐 | 权威来源对齐 / 异步生态 | L0-L5 | [10_async_ecosystem_alignment.md](10_async_ecosystem_alignment.md) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) |
+| 版本演进权威来源对齐 | 权威来源对齐 / 版本演进 | L0-L7 | [10_version_evolution_alignment.md](10_version_evolution_alignment.md) | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) |
+| 安全/unsafe 权威来源对齐 | 权威来源对齐 / 安全 / unsafe | L0-L6 | [10_safety_and_unsafe_authoritative_alignment.md](10_safety_and_unsafe_authoritative_alignment.md) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) |
+| 工具链生态权威来源对齐 | 权威来源对齐 / 工具链 | L0-L4 | [10_toolchain_ecosystem_alignment.md](10_toolchain_ecosystem_alignment.md) | [10_cargo_book_alignment.md](10_cargo_book_alignment.md) |
+| 翻译版本差异检测 | 权威来源对齐 / i18n / 运维 | L0-L1 | [10_i18n_translation_gap_analysis.md](10_i18n_translation_gap_analysis.md) | [10_authoritative_source_version_tracking.md](10_authoritative_source_version_tracking.md) |
+| 行号级锚点索引 | 权威来源对齐 / 锚点 | L0-L7 | [10_authoritative_source_line_anchors.md](10_authoritative_source_line_anchors.md) | 各对齐文档 |
+| RFC 到反例映射 | 权威来源对齐 / RFC / 反例 | L0-L5 | [10_rfc_to_counterexample_mapping.md](10_rfc_to_counterexample_mapping.md) | 各 `60_*_counterexamples.md` |
+| 性能与测试权威来源对齐 | 权威来源对齐 / 性能 / 测试 | L0-L5 | [10_performance_and_testing_alignment.md](10_performance_and_testing_alignment.md) | [experiments/60_experiments_counterexamples.md](experiments/60_experiments_counterexamples.md) |
+| 宏/FFI/嵌入式生态权威来源对齐 | 权威来源对齐 / 宏 / FFI / 嵌入式 | L0-L5 | [10_macros_ffi_embedded_alignment.md](10_macros_ffi_embedded_alignment.md) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) / [crates/c13_embedded/README.md](../crates/c13_embedded/README.md) |
+| 学术资源对齐索引 | 权威来源对齐 / 学术资源 | L0-L6 | [10_academic_papers_alignment.md](10_academic_papers_alignment.md) | [10_international_formal_verification_index.md](10_international_formal_verification_index.md) |
+| 错误处理与网络/Web 生态权威来源对齐 | 权威来源对齐 / 错误处理 / 网络 / Web | L0-L5 | [10_error_handling_network_web_alignment.md](10_error_handling_network_web_alignment.md) | [10_error_handling_cheatsheet.md](10_error_handling_cheatsheet.md) / [crates/c10_networks/README.md](../crates/c10_networks/README.md) |
+| 数据库、存储与云原生生态权威来源对齐 | 权威来源对齐 / 数据库 / 存储 / 云原生 | L0-L5 | [10_database_storage_cloud_alignment.md](10_database_storage_cloud_alignment.md) | [crates/c10_networks/README.md](../crates/c10_networks/README.md) |
+| CI/CD 与供应链安全权威来源对齐 | 权威来源对齐 / CI/CD / 供应链安全 | L0-L4 | [10_cicd_supply_chain_alignment.md](10_cicd_supply_chain_alignment.md) | [.github/workflows/ci.yml](../.github/workflows/ci.yml) |
+| 权威来源缺口与反向追溯索引 | 权威来源对齐 / 缺口分析 / 反向追溯 | L0-L7 | [10_authoritative_source_gap_and_backref_index.md](10_authoritative_source_gap_and_backref_index.md) | [10_authoritative_alignment_gap_matrix.md](10_authoritative_alignment_gap_matrix.md) / [10_authoritative_alignment_gap_analysis.md](10_authoritative_alignment_gap_analysis.md) |
+| Crate 架构权威来源对齐 | 权威来源对齐 / Crate 架构 | L0-L5 | [10_crate_architecture_authoritative_alignment.md](10_crate_architecture_authoritative_alignment.md) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) |
+| 学习路径与面试题权威来源对齐 | 权威来源对齐 / 学习路径 / 面试评估 | L0-L5 | [10_learning_and_interview_alignment.md](10_learning_and_interview_alignment.md) | [10_interview_questions_collection.md](10_interview_questions_collection.md) |
+| 权威来源自动补全计划 | 权威来源对齐 / 补全计划 | L0-L7 | [10_authoritative_source_completion_plan.md](10_authoritative_source_completion_plan.md) | [10_authoritative_alignment_gap_analysis.md](10_authoritative_alignment_gap_analysis.md) / [10_authoritative_alignment_gap_matrix.md](10_authoritative_alignment_gap_matrix.md) |
 
-> **待补全**：代码示例到具体文件行号的锚点。
+> **已补充**：关键概念已建立到权威来源的行号级锚点索引，见 [10_authoritative_source_line_anchors.md](10_authoritative_source_line_anchors.md)。
 
 ---
 
@@ -170,6 +201,40 @@
 | aligns_to | async/await | Async Book | 项目异步概念与 Async Book 对齐 | [10_async_book_alignment.md](10_async_book_alignment.md) |
 | aligns_to | 版本演进 | Edition Guide | 项目版本反例与 Edition Guide 对齐 | [10_edition_guide_alignment.md](10_edition_guide_alignment.md) |
 | aligns_to | Crate 架构 | Cargo Book | 项目 crate 架构与 Cargo Book 对齐 | [10_cargo_book_alignment.md](10_cargo_book_alignment.md) |
+| aligns_to | 安全/unsafe | Ferrocene FLS | 项目 unsafe 边界与 FLS 对齐 | [10_ferrocene_fls_alignment.md](10_ferrocene_fls_alignment.md) |
+| aligns_to | 借用检查 | rustc-dev-guide | 项目借用检查与编译器实现对齐 | [10_rustc_dev_guide_alignment.md](10_rustc_dev_guide_alignment.md) |
+| aligns_to | 核心类型 | Standard Library | 项目示例与 std API 对齐 | [10_std_library_alignment.md](10_std_library_alignment.md) |
+| aligns_to | 设计模式 | API Guidelines | 项目模式与社区最佳实践对齐 | [10_community_best_practices_alignment.md](10_community_best_practices_alignment.md) |
+| aligns_to | 核心概念 | Rust By Example | 项目示例与官方交互式示例对齐 | [10_rust_by_example_alignment.md](10_rust_by_example_alignment.md) |
+| aligns_to | unsafe | Unsafe Code Guidelines | 项目 unsafe 边界与 UCG 对齐 | [10_unsafe_code_guidelines_alignment.md](10_unsafe_code_guidelines_alignment.md) |
+| aligns_to | 反例边界 | Rust Error Codes | 项目反例与 rustc 错误码对齐 | [10_rustc_errors_alignment.md](10_rustc_errors_alignment.md) |
+| aligns_to | 形式化证明 | Academic Papers | 项目形式化内容与学术论文对齐 | [10_academic_papers_alignment.md](10_academic_papers_alignment.md) |
+| aligns_to | 核心定理 | Verification Tools | 项目定理与可验证工具能力对齐 | [10_verification_tools_practical_alignment.md](10_verification_tools_practical_alignment.md) |
+| aligns_to | 语言设计决策 | RFC Argumentation | 项目概念与 RFC 论证链对齐 | [10_rfc_argumentation_chain.md](10_rfc_argumentation_chain.md) |
+| aligns_to | 项目概念 | i18n Sources | 项目术语与中/日/多语言来源对齐 | [10_i18n_source_alignment.md](10_i18n_source_alignment.md) |
+| tracks | 权威来源 | Version | 权威来源版本与检查日期跟踪 | [10_authoritative_source_version_tracking.md](10_authoritative_source_version_tracking.md) |
+| tracks | RFC | Implementation Status | RFC 实现状态与项目响应跟踪 | [10_rfc_tracking_status.md](10_rfc_tracking_status.md) |
+| aligns_to | 设计模式 | Design Patterns | GoF/Rust 惯用法与企业级模式对齐 | [10_design_patterns_authoritative_alignment.md](10_design_patterns_authoritative_alignment.md) |
+| aligns_to | 异步生态 | Async Ecosystem | tokio/async-std/smol/axum/tonic 生态对齐 | [10_async_ecosystem_alignment.md](10_async_ecosystem_alignment.md) |
+| tracks | 版本演进 | Release Blog | 官方版本发布说明与关键特性映射 | [10_version_evolution_alignment.md](10_version_evolution_alignment.md) |
+| aligns_to | 安全/unsafe | UCG / Rustonomicon / RustBelt | 项目安全边界与多层级权威来源对齐 | [10_safety_and_unsafe_authoritative_alignment.md](10_safety_and_unsafe_authoritative_alignment.md) |
+| aligns_to | 工具链 | Rust Toolchain | rustc、rustup、Cargo、clippy、rust-analyzer 等生态对齐 | [10_toolchain_ecosystem_alignment.md](10_toolchain_ecosystem_alignment.md) |
+| aligns_to | 性能/测试 | Performance/Testing Book | 项目性能优化与测试策略与 Rust Performance Book / Cargo / Miri / Sanitizer 对齐 | [10_performance_and_testing_alignment.md](10_performance_and_testing_alignment.md) |
+| aligns_to | 宏/FFI/嵌入式生态 | Macros / FFI / Embedded Ecosystem | 项目宏系统、FFI、WebAssembly、嵌入式内容与多层级权威来源对齐 | [10_macros_ffi_embedded_alignment.md](10_macros_ffi_embedded_alignment.md) |
+| tracks | 翻译版本 | i18n Sources | 多语言翻译与英文原版版本差异跟踪 | [10_i18n_translation_gap_analysis.md](10_i18n_translation_gap_analysis.md) |
+| anchors_to | 核心概念 | Authoritative Source | 关键概念到权威来源 GitHub 行号级锚点 | [10_authoritative_source_line_anchors.md](10_authoritative_source_line_anchors.md) |
+| maps_to | RFC | Counterexample | RFC 关键约束到项目反例文档映射 | [10_rfc_to_counterexample_mapping.md](10_rfc_to_counterexample_mapping.md) |
+| aligns_to | 项目概念 | 学术论文 | 项目核心概念与 IEEE/ACM/arXiv/Springer 学术资源对齐 | [10_academic_papers_alignment.md](10_academic_papers_alignment.md) |
+| aligns_to | 错误处理与网络/Web 生态 | Rust Book / std::result / thiserror / anyhow / eyre / tokio::net / hyper / tonic / axum / tower / HTTP/3 / WebSocket / OpenAPI | 错误处理、网络与 Web 权威来源对齐 | [10_error_handling_network_web_alignment.md](10_error_handling_network_web_alignment.md) |
+| aligns_to | 数据库与存储生态 | Database / Storage / Cloud Ecosystem | 项目数据库/存储/云原生内容与官方文档、crate 生态对齐 | [10_database_storage_cloud_alignment.md](10_database_storage_cloud_alignment.md) |
+| aligns_to | CI/CD 与供应链安全 | GitHub Actions / Cargo Book / Security Tools | 项目 CI/CD 与供应链安全实践与官方文档对齐 | [10_cicd_supply_chain_alignment.md](10_cicd_supply_chain_alignment.md) |
+| tracks | 权威来源缺口 | P0/P1/P2 补全优先级 | 按 P0/P1/P2 跟踪权威来源缺口与项目文档映射 | [10_authoritative_source_gap_and_backref_index.md](10_authoritative_source_gap_and_backref_index.md) |
+| aligns_to | Crate 架构 | Cargo Book / Reference / API Guidelines / Rust Design Patterns / crates.io | 项目 crate 架构与多层级 Crate 架构权威来源对齐 | [10_crate_architecture_authoritative_alignment.md](10_crate_architecture_authoritative_alignment.md) |
+| aligns_to | 学习路径 | 官方学习资源 | 项目学习路径与 TRPL/RBE/Rustlings/std 对齐 | [10_learning_and_interview_alignment.md](10_learning_and_interview_alignment.md) |
+| aligns_to | 学习路径 | 社区学习资源 | 项目学习路径与 course.rs/中文社区/Rust Japan/Exercism 对齐 | [10_learning_and_interview_alignment.md](10_learning_and_interview_alignment.md) |
+| maps_to | 面试题 | 权威来源 | 面试题目到官方规范、RFC、论文的映射 | [10_learning_and_interview_alignment.md](10_learning_and_interview_alignment.md) |
+| depends_on | 权威来源自动补全计划 | 权威来源缺口分析 | 补全计划基于缺口分析结果制定优先级 | [10_authoritative_source_completion_plan.md](10_authoritative_source_completion_plan.md) |
+| refines | 权威来源自动补全计划 | 覆盖率提升路径 | 为 P0/P1/P2 缺口提供推荐权威来源与优先级 | [10_authoritative_source_completion_plan.md](10_authoritative_source_completion_plan.md) |
 
 > **待补全**：为每条边增加具体文档行号锚点。
 
@@ -190,11 +255,17 @@
 
 | 主题 | crate / 示例 | 文件 |
 |------|--------------|------|
-| 所有权 | `crates/c01_ownership_borrow_scope` | [crates/c01_ownership_borrow_scope/README.md](../crates/c01_ownership_borrow_scope/README.md) |
-| 异步 | `crates/c06_async` | [crates/c06_async/README.md](../crates/c06_async/README.md) |
-| 并发 | `crates/c05_threads` | [crates/c05_threads/README.md](../crates/c05_threads/README.md) |
-| 设计模式 | `crates/c09_design_pattern` | [crates/c09_design_pattern/README.md](../crates/c09_design_pattern/README.md) |
-| 模块系统 | 单文件 Cargo script | [examples/module_system_patterns.rs](../examples/module_system_patterns.rs) |
+| 所有权 | `crates/c01_ownership_borrow_scope` | [crates/c01_ownership_borrow_scope/README.md](../../crates/c01_ownership_borrow_scope/README.md) |
+| 异步 | `crates/c06_async` | [crates/c06_async/README.md](../../crates/c06_async/README.md) |
+| 并发 | `crates/c05_threads` | [crates/c05_threads/README.md](../../crates/c05_threads/README.md) |
+| 设计模式 | `crates/c09_design_pattern` | [crates/c09_design_pattern/README.md](../../crates/c09_design_pattern/README.md) |
+| 模块系统 | 单文件 Cargo script | [examples/module_system_patterns.rs](../../examples/module_system_patterns.rs) |
+| 宏系统 | `crates/c11_macro_system` | [crates/c11_macro_system/examples/](../../crates/c11_macro_system/examples/) |
+| FFI / Embedded / WASM | `crates/c12_wasm` / `crates/c13_embedded` | [crates/c12_wasm/examples/](../../crates/c12_wasm/examples/) / [crates/c13_embedded/examples/](../../crates/c13_embedded/examples/) |
+| 异步/并发示例 | `crates/c06_async` / `crates/c05_threads` | [crates/c06_async/examples/](../../crates/c06_async/examples/) / [crates/c05_threads/examples/](../../crates/c05_threads/examples/) |
+| 验证工具示例 | `crates/c15_verification_tools` | [crates/c15_verification_tools/examples/](../../crates/c15_verification_tools/examples/) |
+| 顶层 examples 目录 | `examples/` | [examples/](../../examples/) |
+| 形式化验证工具 | `crates/c15_verification_tools` | [crates/c15_verification_tools/README.md](../../crates/c15_verification_tools/README.md) |
 
 ---
 
@@ -235,7 +306,7 @@
 ### 剩余细化项（阶段 4 收尾）
 
 1. 关系边缺少文档行号锚点。
-2. 代码示例锚点未细化到具体文件行号。
+2. 已建立示例文件级锚点，行号级锚点持续补充。
 3. 版本特性与知识图谱节点未完全双向追溯。
 
 ---

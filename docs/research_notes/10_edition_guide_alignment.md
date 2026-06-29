@@ -22,6 +22,8 @@
   - [五、迁移工具与流程](#五迁移工具与流程)
   - [六、版本特性与知识图谱映射](#六版本特性与知识图谱映射)
   - [七、未覆盖缺口](#七未覆盖缺口)
+  - [相关概念](#相关概念)
+  - [学术权威参考](#学术权威参考)
 
 ---
 
@@ -95,3 +97,14 @@
 - [版本演进边界与迁移反例](10_version_evolution_counterexamples.md)
 - [Rust Reference 对齐](10_rust_reference_alignment.md)
 - [知识图谱索引](10_knowledge_graph_index.md)
+
+---
+
+## 学术权威参考
+
+本对齐矩阵同时参考以下 P1 学术权威来源，以形成完整的官方-学术对照网络：
+
+- [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
+- [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
+- [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
+- [Aeneas](https://aeneas-verification.github.io/)

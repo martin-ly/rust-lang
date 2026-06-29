@@ -37,6 +37,7 @@
     - [3. 显式符号名](#3-显式符号名)
   - [反例与边界](#反例与边界)
   - [权威来源对照表](#权威来源对照表)
+  - [学术/社区来源参考](#学术社区来源参考)
 
 ---
 
@@ -237,3 +238,11 @@ pub extern "C" fn add(a: i32, b: i32) -> i32 {
 ---
 
 > **权威来源**: [Rust Reference – Linkage](https://doc.rust-lang.org/reference/linkage.html) | [Rust Reference – External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html) | [Rustonomicon – FFI](https://doc.rust-lang.org/nomicon/ffi.html) | [Ferrocene Language Specification](https://spec.ferrocene.dev/)
+
+---
+
+## 学术/社区来源参考
+
+> **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**: [Aeneas](https://aeneas-verification.github.io/)
+> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)

@@ -22,6 +22,8 @@
   - [五、Edition 与版本 RFC](#五edition-与版本-rfc)
   - [六、工具链 RFC](#六工具链-rfc)
   - [七、未覆盖缺口](#七未覆盖缺口)
+  - [相关概念](#相关概念)
+  - [学术权威参考](#学术权威参考)
 
 ---
 
@@ -37,7 +39,7 @@
 |-----|------|----------|------|
 | [RFC 1859](https://rust-lang.github.io/rfcs/1859-non-lexical-lifetimes.html) — Non-Lexical Lifetimes | 借用检查器改进 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | ✅ |
 | [RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html) — NLL | 非词法生命周期 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | ✅ |
-| [RFC 0380](https://rust-lang.github.io/rfcs/0380-stabilize-no-std.html) — `no_std` | 无 std 环境 | [crates/c13_embedded/](crates/c13_embedded/README.md) | ✅ |
+| [RFC 0380](https://rust-lang.github.io/rfcs/0380-stabilize-no-std.html) — `no_std` | 无 std 环境 | [crates/c13_embedded/](../crates/c13_embedded/README.md) | ✅ |
 | [RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html) — Specialization | Trait 特化 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | 🔄 |
 
 ---
@@ -85,14 +87,26 @@
 ## 七、未覆盖缺口
 
 1. 宏系统相关 RFC（如 `macro_rules!` hygiene、proc-macro）可进一步索引。
-2.  const 泛型、const eval 相关 RFC 待随内容扩展补充。
+2. const 泛型、const eval 相关 RFC 待随内容扩展补充。
 3. Rust 1.97+ 新特性的 RFC 需持续跟踪。
 
 > **权威来源**: [Rust RFCs](https://rust-lang.github.io/rfcs/)
 
 ## 相关概念
 
+- [RFC 到反例自动化映射索引](10_rfc_to_counterexample_mapping.md)
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
 - [Rust Reference 对齐](10_rust_reference_alignment.md)
 - [Edition Guide 对齐](10_edition_guide_alignment.md)
 - [知识图谱索引](10_knowledge_graph_index.md)
+
+---
+
+## 学术权威参考
+
+本对齐矩阵同时参考以下 P1 学术权威来源，以形成完整的官方-学术对照网络：
+
+- [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
+- [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
+- [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
+- [Aeneas](https://aeneas-verification.github.io/)

@@ -25,6 +25,8 @@
   - [八、Attributes](#八attributes)
   - [九、版本差异](#九版本差异)
   - [十、未覆盖缺口](#十未覆盖缺口)
+  - [相关概念](#相关概念)
+  - [学术权威参考](#学术权威参考)
 
 ---
 
@@ -33,6 +35,7 @@
 本文档将 `docs/research_notes/` 中的概念、机制、反例与 [Rust Reference](https://doc.rust-lang.org/reference/) 的规范章节建立映射。
 
 对齐状态：
+
 - ✅ 已对齐：项目文档与 Reference 一致。
 - 🔄 部分对齐：部分章节已覆盖，仍有细化空间。
 - ⏳ 待对齐：尚未建立直接映射。
@@ -44,7 +47,7 @@
 | Reference 章节 | 项目文档 | 状态 | 备注 |
 |----------------|----------|------|------|
 | [Lexical Elements](https://doc.rust-lang.org/reference/tokens.html) | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) | 🔄 | 基础词法在类型基础中提及 |
-| [Macros](https://doc.rust-lang.org/reference/macros.html) | [crates/c11_macro_system/](crates/c11_macro_system/README.md) | 🔄 | 声明宏/过程宏有 crate 示例 |
+| [Macros](https://doc.rust-lang.org/reference/macros.html) | [crates/c11_macro_system/](../crates/c11_macro_system/README.md) | 🔄 | 声明宏/过程宏有 crate 示例 |
 | [Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) | ✅ | crate、module、source file 规则 |
 
 ---
@@ -67,8 +70,8 @@
 | Reference 章节 | 项目文档 | 状态 | 备注 |
 |----------------|----------|------|------|
 | [Expressions](https://doc.rust-lang.org/reference/expressions.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | ✅ | async 块表达式 |
-| [Control Flow](https://doc.rust-lang.org/reference/expressions.html#control-flow-expressions) | [crates/c03_control_fn/](crates/c03_control_fn/README.md) | 🔄 | 基础控制流在 crate 中 |
-| [Match Expressions](https://doc.rust-lang.org/reference/expressions/match-expr.html) | [crates/c03_control_fn/](crates/c03_control_fn/README.md) | 🔄 | 模式匹配示例 |
+| [Control Flow](https://doc.rust-lang.org/reference/expressions.html#control-flow-expressions) | [crates/c03_control_fn/](../crates/c03_control_fn/README.md) | 🔄 | 基础控制流在 crate 中 |
+| [Match Expressions](https://doc.rust-lang.org/reference/expressions/match-expr.html) | [crates/c03_control_fn/](../crates/c03_control_fn/README.md) | 🔄 | 模式匹配示例 |
 
 ---
 
@@ -135,3 +138,14 @@
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
 - [Rust Book 对齐](10_rust_book_alignment.md)
 - [知识图谱索引](10_knowledge_graph_index.md)
+
+---
+
+## 学术权威参考
+
+本对齐矩阵同时参考以下 P1 学术权威来源，以形成完整的官方-学术对照网络：
+
+- [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
+- [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
+- [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
+- [Aeneas](https://aeneas-verification.github.io/)

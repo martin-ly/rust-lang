@@ -42,6 +42,7 @@
     - [路径 G：高性能并发与数据结构（推荐优先级：高）](#路径-g高性能并发与数据结构推荐优先级高)
   - [七、与其他概念文件的交叉引用](#七与其他概念文件的交叉引用)
   - [权威来源索引](#权威来源索引)
+  - [权威来源参考](#权威来源参考)
 
 ---
 
@@ -332,3 +333,9 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
 
 ---
+
+## 权威来源参考
+
+> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+> **来源**: [This Week in Rust](https://this-week-in-rust.org/)

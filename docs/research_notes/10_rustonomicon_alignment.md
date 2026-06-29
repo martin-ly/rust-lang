@@ -23,6 +23,8 @@
   - [六、FFI](#六ffi)
   - [七、实现相关机制](#七实现相关机制)
   - [八、差异与注意点](#八差异与注意点)
+  - [相关概念](#相关概念)
+  - [学术权威参考](#学术权威参考)
 
 ---
 
@@ -103,3 +105,14 @@
 - [Rust Reference 对齐](10_rust_reference_alignment.md)
 - [Unsafe 与 FFI 反例](formal_methods/60_unsafe_counterexamples.md)
 - [知识图谱索引](10_knowledge_graph_index.md)
+
+---
+
+## 学术权威参考
+
+本对齐矩阵同时参考以下 P1 学术权威来源，以形成完整的官方-学术对照网络：
+
+- [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
+- [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
+- [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
+- [Aeneas](https://aeneas-verification.github.io/)

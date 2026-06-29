@@ -39,6 +39,7 @@
       - [相关文档](#相关文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [学术/社区来源参考](#学术社区来源参考)
 
 ## 🆕 Rust 1.94 深度整合更新
 
@@ -141,3 +142,8 @@
 > **来源: [ACM - Formal Verification](https://dl.acm.org/)**
 
 ---
+
+## 学术/社区来源参考
+
+> **来源**: [Aeneas](https://aeneas-verification.github.io/)
+> **来源**: [coq-of-rust](https://github.com/formal-land/coq-of-rust)

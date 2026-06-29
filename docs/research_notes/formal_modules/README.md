@@ -22,6 +22,7 @@
   - [计划补充内容](#计划补充内容)
   - [权威来源](#权威来源)
   - [相关概念](#相关概念)
+  - [学术/社区来源参考](#学术社区来源参考)
 
 ---
 
@@ -74,3 +75,11 @@
 - [形式化方法索引](../formal_methods/)
 - [研究笔记主索引](../README.md)
 - [Crate 架构分析](../software_design_theory/07_crate_architectures/)
+
+---
+
+## 学术/社区来源参考
+
+> **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**: [Aeneas](https://aeneas-verification.github.io/)
+> **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)

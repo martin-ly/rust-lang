@@ -1,0 +1,27 @@
+[package]
+name = "c15_verification_tools"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.96.0"
+license = "MIT OR Apache-2.0"
+authors = ["Rust 学习项目团队"]
+description = "Kani / Aeneas / Prusti 验证工具实战示例 crate"
+
+[dependencies]
+
+[dev-dependencies]
+# Kani 通常通过 `cargo install kani-verifier && cargo kani setup` 单独安装。
+# 若需要在常规 `cargo check` 中提供 `kani` crate 的桩实现，可取消下一行注释：
+# kani-verifier = "*"
+
+[[example]]
+name = "kani_example"
+path = "examples/kani_example.rs"
+
+[[example]]
+name = "aeneas_example"
+path = "examples/aeneas_example.rs"
+
+[[example]]
+name = "prusti_example"
+path = "examples/prusti_example.rs"

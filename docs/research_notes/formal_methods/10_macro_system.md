@@ -28,6 +28,7 @@
     - [反例 2：过程宏生成非法代码](#反例-2过程宏生成非法代码)
   - [五、与其他概念的关系](#五与其他概念的关系)
   - [六、权威来源索引](#六权威来源索引)
+  - [学术/社区来源参考](#学术社区来源参考)
 
 ---
 
@@ -130,3 +131,11 @@ pub fn cfg_select(input: TokenStream) -> TokenStream {
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)
 > **来源**: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)
 > **来源**: [Rust RFCs](https://rust-lang.github.io/rfcs/)
+
+---
+
+## 学术/社区来源参考
+
+> **来源**: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)
+> **来源**: [Rust Reference – Macros](https://doc.rust-lang.org/reference/macros.html)
+> **来源**: [proc-macro-workshop](https://github.com/dtolnay/proc-macro-workshop)

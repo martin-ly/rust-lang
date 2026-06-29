@@ -16,19 +16,44 @@
 - [设计模式反例边界](#设计模式反例边界)
   - [目录](#目录)
   - [1. 单例模式导致全局可变状态](#1-单例模式导致全局可变状态)
+    - [现象](#现象)
+    - [问题](#问题)
+    - [修复方案](#修复方案)
   - [2. Observer 模式生命周期管理不当](#2-observer-模式生命周期管理不当)
+    - [现象](#现象-1)
+    - [问题](#问题-1)
+    - [修复方案](#修复方案-1)
   - [3. 滥用内部可变性](#3-滥用内部可变性)
+    - [现象](#现象-2)
+    - [问题](#问题-2)
+    - [修复方案](#修复方案-2)
   - [4. Builder 模式缺失必要字段验证](#4-builder-模式缺失必要字段验证)
+    - [现象](#现象-3)
+    - [问题](#问题-3)
+    - [修复方案](#修复方案-3)
   - [5. 错误使用 `Deref` 模拟继承](#5-错误使用-deref-模拟继承)
+    - [现象](#现象-4)
+    - [问题](#问题-4)
+    - [修复方案](#修复方案-4)
   - [6. 过度泛型化](#6-过度泛型化)
+    - [现象](#现象-5)
+    - [问题](#问题-5)
+    - [修复方案](#修复方案-5)
   - [7. 错误选择 Arc/Mutex 粒度](#7-错误选择-arcmutex-粒度)
+    - [现象](#现象-6)
+    - [问题](#问题-6)
+    - [修复方案](#修复方案-6)
   - [总结](#总结)
+  - [相关概念](#相关概念)
+  - [RFC 参考](#rfc-参考)
+  - [权威来源参考](#权威来源参考)
 
 ---
 
 ## 1. 单例模式导致全局可变状态
 
 ### 现象
+
 ```rust
 use std::sync::Mutex;
 
@@ -40,11 +65,13 @@ fn update_config(c: AppConfig) {
 ```
 
 ### 问题
+
 - 隐藏依赖，测试困难。
 - 全局锁成为瓶颈。
 - 初始化顺序和 panic 恢复难以控制。
 
 ### 修复方案
+
 - 显式传递 `Arc<AppConfig>` 或上下文对象。
 - 使用 `OnceLock` / `LazyLock` 做只读全局初始化，避免运行时可变。
 - 将可变状态局部化。
@@ -54,6 +81,7 @@ fn update_config(c: AppConfig) {
 ## 2. Observer 模式生命周期管理不当
 
 ### 现象
+
 ```rust
 struct Subject<'a> {
     observers: Vec<&'a dyn Observer>, // ❌ 观察者生命周期耦合过紧
@@ -61,10 +89,12 @@ struct Subject<'a> {
 ```
 
 ### 问题
+
 - 难以动态增删观察者。
 - 容易因生命周期不匹配导致编译失败或悬垂引用。
 
 ### 修复方案
+
 - 使用 `Weak<dyn Observer>` 或 channel（`tokio::sync::mpsc`）解耦。
 - 或让 Subject 拥有 Observer：`Vec<Box<dyn Observer>>`。
 
@@ -73,6 +103,7 @@ struct Subject<'a> {
 ## 3. 滥用内部可变性
 
 ### 现象
+
 ```rust
 struct Counter {
     value: RefCell<i32>,
@@ -86,7 +117,9 @@ impl Counter {
 ```
 
 ### 问题
+
 `RefCell` 将编译期检查推迟到运行时，可能 panic：
+
 ```rust
 let c = Counter { value: RefCell::new(0) };
 let a = c.value.borrow();
@@ -94,6 +127,7 @@ let b = c.value.borrow_mut(); // ❌ 运行时 panic
 ```
 
 ### 修复方案
+
 - 优先使用 `&mut self` 暴露可变接口。
 - 仅在共享所有权且无法使用 `&mut` 时使用 `RefCell` / `Mutex`。
 
@@ -102,6 +136,7 @@ let b = c.value.borrow_mut(); // ❌ 运行时 panic
 ## 4. Builder 模式缺失必要字段验证
 
 ### 现象
+
 ```rust
 let req = RequestBuilder::new()
     .method("GET")
@@ -109,10 +144,12 @@ let req = RequestBuilder::new()
 ```
 
 ### 问题
+
 - 运行时才发现必要字段缺失。
 - 破坏 Builder 的类型安全优势。
 
 ### 修复方案
+
 - 使用类型状态模式：只有设置 url 后才能调用 `build()`。
 - 或让 `build()` 返回 `Result<Request, BuilderError>`。
 
@@ -121,6 +158,7 @@ let req = RequestBuilder::new()
 ## 5. 错误使用 `Deref` 模拟继承
 
 ### 现象
+
 ```rust
 struct Admin(User);
 
@@ -137,10 +175,12 @@ impl Admin {
 ```
 
 ### 问题
+
 - `Deref` 应仅用于智能指针语义，不能表达 is-a 关系。
 - 滥用会导致 API 表面不可控，违反 API Guidelines。
 
 ### 修复方案
+
 - 使用组合 + 显式转发方法。
 - 若需多态，使用 trait + `dyn Trait`。
 
@@ -149,6 +189,7 @@ impl Admin {
 ## 6. 过度泛型化
 
 ### 现象
+
 ```rust
 trait Processor<I, O, E, C, S>
 where
@@ -161,10 +202,12 @@ where
 ```
 
 ### 问题
+
 - 类型参数过多，调用方负担大。
 - 编译错误信息复杂，可读性差。
 
 ### 修复方案
+
 - 合并相关参数到单一上下文类型。
 - 使用关联类型减少泛型参数。
 - 必要时用 `dyn Trait` 简化接口。
@@ -174,6 +217,7 @@ where
 ## 7. 错误选择 Arc/Mutex 粒度
 
 ### 现象
+
 ```rust
 struct Service {
     data: Arc<Mutex<HashMap<String, Vec<User>>>>,
@@ -181,10 +225,12 @@ struct Service {
 ```
 
 ### 问题
+
 - 所有读写共用一把大锁，并发度低。
 - `Vec` 操作也可能阻塞其他 key 的访问。
 
 ### 修复方案
+
 - 使用 `RwLock` 或 `DashMap`。
 - 拆分锁粒度：每个 key 一个 `Mutex<Vec<User>>`。
 - 对读多写少场景使用 `Arc<ArcSwap>` 或 `RwLock`。
@@ -212,3 +258,19 @@ struct Service {
 - [模块系统代码实践](../../formal_modules/70_module_patterns_and_refactoring.md)
 - [并发与异步反例](../../formal_methods/60_concurrency_async_counterexamples.md)
 - [知识图谱索引](../../10_knowledge_graph_index.md)
+
+---
+
+## RFC 参考
+
+> **来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)**
+
+- [RFC 到反例自动化映射索引](../../10_rfc_to_counterexample_mapping.md)
+- [Rust RFCs 官方索引](https://rust-lang.github.io/rfcs/)
+
+## 权威来源参考
+
+本反例汇编参考以下 P1/P1.5/P2 权威来源：
+
+- [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+- [Refactoring Guru](https://refactoring.guru/design-patterns)

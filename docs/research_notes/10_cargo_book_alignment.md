@@ -24,6 +24,8 @@
   - [七、发布与注册](#七发布与注册)
   - [八、高级配置](#八高级配置)
   - [九、未覆盖缺口](#九未覆盖缺口)
+  - [相关概念](#相关概念)
+  - [学术权威参考](#学术权威参考)
 
 ---
 
@@ -76,7 +78,7 @@
 
 | Cargo Book 章节 | 项目文档 | 状态 | 备注 |
 |-----------------|----------|------|------|
-| [Build Scripts](https://doc.rust-lang.org/cargo/reference/build-scripts.html) | [examples/build_script_practice/](examples/build_script_practice/README.md) | ✅ | build.rs 示例 |
+| [Build Scripts](https://doc.rust-lang.org/cargo/reference/build-scripts.html) | [examples/build_script_practice/](../examples/build_script_practice/README.md) | ✅ | build.rs 示例 |
 | [Config](https://doc.rust-lang.org/cargo/reference/config.html) | [10_authoritative_alignment_guide.md](10_authoritative_alignment_guide.md) | 🔄 | .cargo/config.toml |
 
 ---
@@ -113,3 +115,14 @@
 - [模块系统代码实践](formal_modules/70_module_patterns_and_refactoring.md)
 - [Crate 架构反例](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md)
 - [知识图谱索引](10_knowledge_graph_index.md)
+
+---
+
+## 学术权威参考
+
+本对齐矩阵同时参考以下 P1 学术权威来源，以形成完整的官方-学术对照网络：
+
+- [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
+- [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
+- [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
+- [Aeneas](https://aeneas-verification.github.io/)

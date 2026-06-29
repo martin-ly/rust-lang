@@ -86,3 +86,10 @@
 - `type_theory/README.md` -> `../../../archive/research_notes_2026_06_25/formal_methods/00_completeness_gaps.md`
 
 ## 双向缺失链接
+
+---
+
+## 权威来源参考
+
+> **来源**: [Rust Official Docs](https://doc.rust-lang.org/)
+> **来源**: [This Week in Rust](https://this-week-in-rust.org/)

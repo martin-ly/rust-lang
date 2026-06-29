@@ -45,6 +45,8 @@
     - [修复方案](#修复方案-6)
   - [总结](#总结)
   - [相关概念](#相关概念)
+  - [RFC 参考](#rfc-参考)
+  - [权威来源参考](#权威来源参考)
 
 ---
 
@@ -261,3 +263,23 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 - [Send/Sync 形式化](10_send_sync_formalization.md)
 - [通用反例汇编](../10_counter_examples_compendium.md)
 - [知识图谱索引](../10_knowledge_graph_index.md)
+
+---
+
+## RFC 参考
+
+> **来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)**
+
+- [RFC 到反例自动化映射索引](../10_rfc_to_counterexample_mapping.md)
+- [Rust RFCs 官方索引](https://rust-lang.github.io/rfcs/)
+
+- [RFC 2094: Non-lexical lifetimes](https://rust-lang.github.io/rfcs/2094-nll.html)
+- [RFC 1858: Immovable types](https://github.com/rust-lang/rfcs/pull/1858)
+
+## 权威来源参考
+
+本反例汇编参考以下 P1/P1.5/P2 权威来源：
+
+- [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
+- [Stacked Borrows](https://plv.mpi-sws.org/rustbos/)
+- [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)

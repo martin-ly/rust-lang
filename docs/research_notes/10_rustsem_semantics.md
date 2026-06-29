@@ -68,6 +68,7 @@
       - [相关文档](#相关文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [多语言术语参考](#多语言术语参考)
 
 ## 一、概述
 
@@ -900,3 +901,10 @@ Rust 语义层次
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---
+---
+
+## 多语言术语参考
+
+> **来源: [国际化术语库](../data/i18n_terminology.yaml)**
+
+本文档涉及的英/中/日关键术语参见项目统一术语库 [`data/i18n_terminology.yaml`](../data/i18n_terminology.yaml)。
