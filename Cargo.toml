@@ -199,6 +199,9 @@ hyper-rustls = "0.27.9"
 # libp2p: P2P网络协议栈
 # 2026-05-28: 已升级至 0.56.0，hickory-resolver 同步升级至 0.26.1，c10_networks DNS 模块已适配
 libp2p = { version = "0.56.0", features = ["tokio", "tcp", "noise", "yamux", "gossipsub", "kad", "identify"] }
+# multibase: 锁定 0.9.2，避免 0.9.3 引入 base45 传递依赖
+# multiaddr -> multibase 默认会选择最新兼容版本；通过 workspace 依赖强制固定
+multibase = "=0.9.2"
 # hyper-tls: hyper与native-tls的集成，提供TLS支持
 hyper-tls = "0.6.0"
 # hyper-timeout: hyper的超时支持

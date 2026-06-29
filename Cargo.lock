@@ -1307,6 +1307,7 @@ dependencies = [
  "io-uring",
  "libp2p",
  "lru",
+ "multibase",
  "nom 8.0.0",
  "opentelemetry",
  "opentelemetry-otlp",

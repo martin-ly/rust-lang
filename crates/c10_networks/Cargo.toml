@@ -23,6 +23,8 @@ bytes = { workspace = true, features = ["serde"] }
 # async-trait 已迁移至原生 AFIT (1.75+)
 # libp2p 为可选依赖，通过 feature 启用
 libp2p = { workspace = true, features = ["ping", "macros", "relay", "autonat", "dcutr"], optional = true }
+# 锁定 multibase 0.9.2，防止 libp2p 传递依赖升级到 0.9.3 引入 base45
+multibase = { workspace = true, optional = true }
 hickory-resolver = { workspace = true }
 hickory-proto = { workspace = true }
 nom = { workspace = true }
@@ -73,7 +75,7 @@ pnet = ["dep:pnet_packet", "dep:pnet_base", "dep:pnet_macros_support"]
 # Sub-features for specific pcap functionality
 pcap_live = ["sniff", "pcap"]
 offline = ["sniff", "pcap"]
-libp2p = ["dep:libp2p"]
+libp2p = ["dep:libp2p", "dep:multibase"]
 
 [build-dependencies]
 tonic = { workspace = true }
