@@ -216,9 +216,7 @@ impl<R: OrderRepository> OrderService<R> {
 ### 实例推导：CE-T1–T3 作用于模式组合（R1-01 最小交付）
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Decorator + Strategy 组合有效性推导**：
@@ -236,17 +234,12 @@ impl<R: OrderRepository> OrderService<R> {
 ## 文档索引
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 文档 | 内容 |
-
 | :--- | :--- |
-
 | [01_formal_composition](01_formal_composition.md) | 组合的形式化定义 |
-
 | [02_effectiveness_proofs](02_effectiveness_proofs.md) | 有效性定理与证明 |
-
 | [03_integration_theory](03_integration_theory.md) | 与 ownership/borrow/trait 的衔接 |
 | [03_configuration_management_pattern](03_configuration_management_pattern.md) | 配置管理模式的层级加载与 Rust 实现 |
 
@@ -255,7 +248,6 @@ impl<R: OrderRepository> OrderService<R> {
 ## 核心问题
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **组合的形式化**：模块、crate、trait、泛型如何组合？组合满足何种性质？
@@ -269,7 +261,6 @@ impl<R: OrderRepository> OrderService<R> {
 ## 形式化论证汇总
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Def CE1（组合有效性）**：设 $C = M_1 \oplus \cdots \oplus M_n$ 为模块组合。若 $C$ 满足 CE-T1、CE-T2、CE-T3，则称 $C$ **有效**。
@@ -283,43 +274,30 @@ impl<R: OrderRepository> OrderService<R> {
 ### 组合法则依赖链（Def → Axiom → Lemma → Theorem → Corollary）
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
-
 Def CE1 (组合有效性)     Def 1.1 (模块组合)
-
         │                      │
-
         └──────────┬───────────┘
-
                    ▼
 
             Axiom CE0, CE1
-
                    │
-
     ┌──────────────┼──────────────┐
-
     ▼              ▼              ▼
 
 ownership T2,T3  borrow T1    type T1,T2,T3
 
     │              │              │
-
     └──────────────┼──────────────┘
-
                    ▼
 
         CE-T1 ──► CE-T2 ──► CE-T3
 
         (内存)    (数据竞争)  (类型)
-
                    │
-
                    ▼
 
              推论 CE-C1
@@ -327,13 +305,9 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 ```
 
 | 定理 | 依赖 | 来源 |
-
 | :--- | :--- | :--- |
-
 | CE-T1 | ownership T2、T3 | [ownership_model](../../../research_notes/formal_methods/10_ownership_model.md) |
-
 | CE-T2 | borrow T1、Send/Sync | [borrow_checker_proof](../../../research_notes/formal_methods/10_borrow_checker_proof.md)、[send_sync_formalization](../../../research_notes/formal_methods/10_send_sync_formalization.md) |
-
 | CE-T3 | type T1、T2、T3 | [type_system_foundations](../../../research_notes/type_theory/10_type_system_foundations.md) |
 
 ---
@@ -685,17 +659,12 @@ L4 跨进程/跨网络（分布式、微服务）
 ## 定理速查
 
 | 定理 | 陈述 |
-
 | :--- | :--- |
-
 | CE-T1 | 组合保持内存安全 |
-
 | CE-T2 | 组合保持数据竞争自由 |
-
 | CE-T3 | 组合保持类型安全 |
 
 组合时所有权传递、借用规则、Send/Sync 在模块边界不变。
-
 详见 [02_effectiveness_proofs](02_effectiveness_proofs.md)。
 
 ---
@@ -703,11 +672,8 @@ L4 跨进程/跨网络（分布式、微服务）
 ## 实践要点
 
 - **无循环依赖**：`cargo check` 可检测；`mod` 图需为 DAG
-
 - **pub 边界**：跨模块仅通过 `pub` 接口；内部实现可私有
-
 - **trait 约束**：泛型 `T: Trait` 在组合边界保持
-
 - **验证**：组合后运行测试；CE-T1/T2/T3 用 cargo、clippy、MIRI 验证
 
 ---
@@ -717,21 +683,13 @@ L4 跨进程/跨网络（分布式、微服务）
 ```text
 
 需组合多模块/多模式？
-
 ├── 创建 + 构建？ → Builder + Factory Method
-
 ├── 编排 + 持久化？ → Service Layer + Repository + DTO
-
 ├── 装饰 + 策略？ → Decorator + Strategy
-
 ├── 事件 + 操作？ → Observer + Command（channel 传命令）
-
 ├── 树 + 遍历？ → Composite + Visitor
-
 ├── 需事务边界？ → Unit of Work + Repository
-
 └── 需跨边界？ → DTO + Gateway + Remote Facade
-
 ```
 
 ---
@@ -739,17 +697,11 @@ L4 跨进程/跨网络（分布式、微服务）
 ## 组合反例（层次推进）
 
 | 反例 | 后果 | 规避 |
-
 | :--- | :--- | :--- |
-
 | 循环依赖 A→B→A | 编译失败 | 提取公共模块、依赖倒置 |
-
 | 跨模块泄漏 `unsafe` | 破坏 CE-T1 | 最小化 unsafe 边界、安全抽象 |
-
 | 跨线程传 `Rc` | 编译错误 | 用 `Arc`；Send/Sync 约束 |
-
 | 泛型约束不一致 | 类型不匹配 | 统一 trait 约束、文档化接口 |
-
 | pub 泄漏内部可变 | 破坏封装 | 仅 pub 必要 API；内部 RefCell 封装 |
 
 ---
@@ -757,27 +709,16 @@ L4 跨进程/跨网络（分布式、微服务）
 ## 组合反例→编译错误映射（CE-T1/T2/T3）
 
 | 违反定理 | 典型错误码 | 典型信息 | 修复方向 |
-
 | :--- | :--- | :--- | :--- |
-
 | **CE-T1**（内存安全） | E0382 | borrow of moved value | 避免使用已移动值；检查所有权 |
-
 | :--- | :--- | :--- | :--- |
-
 | :--- | :--- | :--- | :--- |
-
 | :--- | :--- | :--- | :--- |
-
 | **CE-T2**（数据竞争自由） | E0499 | cannot borrow as mutable more than once | 避免并发可变借用；用 channel |
-
 | :--- | :--- | :--- | :--- |
-
 | :--- | :--- | :--- | :--- |
-
 | **CE-T3**（类型安全） | E0308 | mismatched types | 统一类型；检查 `From`/`Into` |
-
 | :--- | :--- | :--- | :--- |
-
 | :--- | :--- | :--- | :--- |
 
 **引用**：[ERROR_CODE_MAPPING](../../../02_reference/02_error_code_mapping.md)
@@ -787,7 +728,6 @@ L4 跨进程/跨网络（分布式、微服务）
 ## 🆕 Rust 1.94 深度整合更新
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
-
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
@@ -801,15 +741,10 @@ L4 跨进程/跨网络（分布式、微服务）
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 | 特性 | 应用场景 | 文档章节 |
-
 |------|---------|----------|
-
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
-
 | `ControlFlow<B, C>` | 错误处理、提前终止控制 | 错误处理、控制流 |
-
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
-
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新
@@ -819,9 +754,7 @@ L4 跨进程/跨网络（分布式、微服务）
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
-
 - ✅ 兼容Edition 2024
-
 - ✅ 通过标准库测试
 
 #### 相关文档
@@ -829,21 +762,17 @@ L4 跨进程/跨网络（分布式、微服务）
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - Rust 1.94 迁移指南
-
 - [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
-
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
 
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -859,17 +788,10 @@ L4 跨进程/跨网络（分布式、微服务）
 ## 权威来源索引
 
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
-
 > **来源: [Tower Layer/Service Docs](https://docs.rs/tower/latest/tower/trait.Layer.html)**
-
 > **来源: [Tower Service Trait](https://docs.rs/tower/latest/tower/trait.Service.html)**
-
 > **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**

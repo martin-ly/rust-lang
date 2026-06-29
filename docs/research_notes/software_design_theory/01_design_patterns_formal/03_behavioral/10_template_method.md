@@ -663,6 +663,7 @@ impl DataImport for CsvImport {
 ### 反例 1：覆盖默认模板方法
 
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
+
 ```rust,ignore
 
 impl DataMiner for BadMiner {
@@ -678,6 +679,7 @@ Rust 中允许，但违背模板方法意图。
 ### 反例 2：Hook 签名不匹配
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
+
 ```rust,ignore
 
 impl DataMiner for PdfMiner {
@@ -693,6 +695,7 @@ impl DataMiner for PdfMiner {
 ### 反例 3：模板中保留中间借用
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
+
 ```rust,ignore
 
 trait DataMiner {

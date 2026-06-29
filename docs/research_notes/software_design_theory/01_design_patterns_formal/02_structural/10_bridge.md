@@ -692,6 +692,7 @@ Axiom BR2 (委托借用)
 ### 反例 1：实现层方法需要 &mut 但抽象层为 &self
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
+
 ```rust,ignore
 
 trait Renderer { fn render(&mut self); }
@@ -711,6 +712,7 @@ impl Circle {
 ### 反例 2：trait object 不满足对象安全
 
 > 以下代码故意展示编译失败，用于说明对应反例。
+
 ```rust,compile_fail
 
 trait Renderer { fn create<T>() -> T; }
@@ -726,6 +728,7 @@ fn use_renderer(r: Box<dyn Renderer>) {}
 ### 反例 3：生命周期不匹配
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
+
 ```rust,ignore
 
 struct Circle<'a> { renderer: &'a dyn Renderer }

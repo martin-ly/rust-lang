@@ -779,6 +779,7 @@ impl Adapter {
 > 以下代码故意展示编译失败，用于说明对应反例。
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
+
 ```rust,ignore
 
 struct Adapter<'a> { adaptee: &'a Adaptee }
@@ -798,6 +799,7 @@ fn make() -> Adapter<'static> {
 ### 反例 3：委托链中出现可变借用冲突
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
+
 ```rust,ignore
 
 impl Target for Adapter {

@@ -661,6 +661,7 @@ ownership_model T2
 ### 反例 1：关联类型未实现 Product
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
+
 ```rust,ignore
 
 impl Creator for CreatorA {
@@ -678,6 +679,7 @@ impl Creator for CreatorA {
 ### 反例 2：返回借用导致生命周期错误
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
+
 ```rust,ignore
 
 struct CreatorWithLocal { p: ConcreteProductA }
@@ -697,6 +699,7 @@ impl Creator for CreatorWithLocal {
 ### 反例 3：默认方法中可变修改 Creator
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
+
 ```rust,ignore
 
 trait Creator {

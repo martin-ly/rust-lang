@@ -48,6 +48,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引-1)
+  - [社区权威参考](#社区权威参考)
 
 ## 六篇 × 六维 完备性矩阵
 
@@ -286,6 +287,7 @@
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
 ## 社区权威参考
 
 - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)

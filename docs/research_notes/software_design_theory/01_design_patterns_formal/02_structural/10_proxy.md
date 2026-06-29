@@ -730,6 +730,7 @@ proxy.display(); // panic：已有不可变借用，尝试可变借用
 > 以下代码故意展示编译失败，用于说明对应反例。
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
+
 ```rust,ignore
 
 struct Proxy<'a> { subject: &'a RealImage }

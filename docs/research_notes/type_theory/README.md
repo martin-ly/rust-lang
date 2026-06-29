@@ -74,6 +74,7 @@
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
   - [权威来源索引](#权威来源索引)
+  - [社区权威参考](#社区权威参考)
 
 ---
 
@@ -530,6 +531,7 @@
 > **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
 
 > **来源: [ACM - Type Systems](https://dl.acm.org/)**
+>
 ## 社区权威参考
 
 - [This Week in Rust](https://this-week-in-rust.org/)

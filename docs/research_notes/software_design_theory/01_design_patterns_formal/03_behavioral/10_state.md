@@ -174,6 +174,7 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
 2. **穷尽匹配**：
 
    > 以下代码片段为示意性伪代码，非完整可编译示例。
+
    ```rust,ignore
 
    match state { State::A => ..., State::B => ..., State::C => ... }
@@ -203,6 +204,7 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
 1. **类型状态定义**：
 
    > 以下代码片段为示意性伪代码，非完整可编译示例。
+
    ```rust,ignore
 
    struct Config<State> { data: i32, _marker: PhantomData<State> }
@@ -216,6 +218,7 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
 2. **状态特定方法**：
 
    > 以下代码片段为示意性伪代码，非完整可编译示例。
+
    ```rust,ignore
 
    impl Config<Locked> { fn unlock(self) -> Config<Unlocked> { ... } }
@@ -697,6 +700,7 @@ impl Order {
 ### 反例 1：状态转移后仍使用旧状态
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
+
 ```rust,ignore
 
 let old = post.state;
@@ -712,6 +716,7 @@ old.handle(); // 错误：old 已移动
 ### 反例 2：状态未实现 Send 导致跨线程失败
 
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
+
 ```rust,ignore
 
 fn send_post(p: Post) -> impl FnOnce() { move || { p.request_review(); } }
@@ -723,6 +728,7 @@ fn send_post(p: Post) -> impl FnOnce() { move || { p.request_review(); } }
 ### 反例 3：允许非法状态转移
 
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
+
 ```rust,ignore
 
 impl Post {

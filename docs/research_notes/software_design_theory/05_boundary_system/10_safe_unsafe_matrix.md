@@ -61,6 +61,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
   - [学术权威参考](#学术权威参考)
+  - [社区权威参考](#社区权威参考)
 
 > **创建日期**: 2026-02-12
 
@@ -675,6 +676,7 @@ impl PaymentGateway for FFIPaymentGateway {
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
 - [Aeneas](https://aeneas-verification.github.io/)
+
 ## 社区权威参考
 
 - [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)

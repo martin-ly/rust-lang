@@ -215,6 +215,7 @@ trait 定义策略接口；`impl Trait` 或 `dyn Trait` 实现多态；由 [trai
 1. **不可变调用**：
 
    > 以下代码片段为示意性伪代码，非完整可编译示例。
+
    ```rust,ignore
 
    fn run(&self) -> i32 { self.strategy.execute(&self.data) }
@@ -676,6 +677,7 @@ impl<S: CompressStrategy> Exporter<S> {
 ### 反例 1：引用策略生命周期不足
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
+
 ```rust,ignore
 
 fn make_cart() -> ShoppingCart<'static> {
@@ -693,6 +695,7 @@ fn make_cart() -> ShoppingCart<'static> {
 ### 反例 2：策略需要 &mut 但上下文为 &self
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
+
 ```rust,ignore
 
 trait Strategy { fn execute(&mut self); }
@@ -710,6 +713,7 @@ impl Context {
 ### 反例 3：泛型策略导致代码膨胀
 
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
+
 ```rust,ignore
 
 struct Context<S: Strategy> { strategy: S }

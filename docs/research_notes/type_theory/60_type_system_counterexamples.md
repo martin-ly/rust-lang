@@ -46,6 +46,8 @@
   - [总结](#总结)
   - [相关概念](#相关概念)
   - [RFC 参考](#rfc-参考)
+  - [权威来源参考](#权威来源参考)
+  - [社区权威参考](#社区权威参考)
 
 ---
 
@@ -278,6 +280,7 @@ error[E0184]: the trait `Copy` may not be implemented for this type; the type im
 
 - [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
 - [Oxide](https://arxiv.org/abs/1903.00982)
+
 ## 社区权威参考
 
 - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)

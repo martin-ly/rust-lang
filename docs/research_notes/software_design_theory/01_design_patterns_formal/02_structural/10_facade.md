@@ -765,6 +765,7 @@ impl LogFacade {
 ### 反例 1：Facade 持有子系统局部引用
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
+
 ```rust,ignore
 
 fn make_facade() -> Facade<'static> {
@@ -808,6 +809,7 @@ impl Facade {
 > 以下代码故意展示编译失败，用于说明对应反例。
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
+
 ```rust,ignore
 
 static FACADE: Facade = Facade::new();

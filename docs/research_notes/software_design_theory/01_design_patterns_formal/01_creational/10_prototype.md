@@ -639,6 +639,7 @@ ownership_model T2
 ### 反例 1：未实现 Clone
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
+
 ```rust,ignore
 
 struct Database { conn: RawConn }

@@ -608,6 +608,7 @@ Axiom MO2 (兼容性)
 ### 反例 1：备忘录持有发起者引用
 
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
+
 ```rust,ignore
 
 struct Memento<'a> { editor: &'a Editor }
@@ -619,6 +620,7 @@ struct Memento<'a> { editor: &'a Editor }
 ### 反例 2：恢复后修改备忘录影响发起者
 
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
+
 ```rust,ignore
 
 let mut m = editor.save();
@@ -634,6 +636,7 @@ editor.restore(&m);
 ### 反例 3：备忘录字段未完整捕获状态
 
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
+
 ```rust,ignore
 
 struct EditorState { text: String } // 缺少 cursor
