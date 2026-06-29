@@ -434,11 +434,9 @@
 ## 相关概念
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [software_design_theory 目录](README.md)
-
 - [上级目录](../README.md)
 
 ---
@@ -446,15 +444,13 @@
 ## 权威来源索引
 
 > **来源: [Wikipedia - Software Design Pattern](https://en.wikipedia.org/wiki/Software_Design_Pattern)**
-
 > **来源: [Wikipedia - Software Architecture](https://en.wikipedia.org/wiki/Software_Architecture)**
-
 > **[来源: ACM - Design Patterns Survey]**
-
 > **[来源: IEEE - Software Design Standards]**
-
 > **来源: [Gang of Four - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)**
-
 > **[来源: Martin Fowler - Patterns of Enterprise Application Architecture]**
 
 ---
+
+> **来源: [ACM Digital Library](https://dl.acm.org/)**
+> **来源: [IEEE Standards](https://standards.ieee.org/)**

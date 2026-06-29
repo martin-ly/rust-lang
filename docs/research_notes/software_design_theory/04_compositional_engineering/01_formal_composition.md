@@ -542,9 +542,7 @@ fn main() {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
-
 >
-
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -560,7 +558,6 @@ fn main() {
 ## 相关概念
 
 >
-
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [04_compositional_engineering 目录](README.md)
@@ -572,17 +569,14 @@ fn main() {
 ## 权威来源索引
 
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
-
 > **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---
+
+> **来源: [ACM Digital Library](https://dl.acm.org/)**
+> **来源: [Springer Computer Science](https://link.springer.com/)**

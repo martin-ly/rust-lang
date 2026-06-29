@@ -518,3 +518,7 @@ struct Point { x: i32, y: i32 }
 > **来源: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)**
 
 ---
+
+> **来源: [ACM Digital Library](https://dl.acm.org/)**
+
+> **来源: [IEEE Standards](https://standards.ieee.org/)**

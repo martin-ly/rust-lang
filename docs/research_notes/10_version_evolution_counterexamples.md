@@ -242,3 +242,7 @@ fn main() {
 
 - [Rust Release Blog](https://blog.rust-lang.org/)
 - [This Week in Rust](https://this-week-in-rust.org/)
+
+> **来源: [RustBelt: Securing the Foundations of the Rust Programming Language](https://plv.mpi-sws.org/rustbelt/popl18/)**
+
+> **来源: [RustSEM: A Formal Semantics for Rust](https://link.springer.com/article/10.1007/s10703-024-00460-3)**

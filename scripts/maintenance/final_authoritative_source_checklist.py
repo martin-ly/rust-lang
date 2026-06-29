@@ -30,83 +30,16 @@ RESEARCH_NOTES = PROJECT_ROOT / "docs" / "research_notes"
 
 # Authority-source marker patterns.
 AUTHORITY_MARKER_RE = re.compile(r">\s*\*\*(来源|权威来源)\*\*[:：]")
-LINK_RE = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
-CONCEPT_FAMILY_RE = re.compile(r">\s*\*\*概念族\*\*[:：]\s*(.+)")
 
-# Domain-based tier classification for linked authority sources.
-P0_OFFICIAL_PATTERNS: tuple[str, ...] = (
-    r"doc\.rust-lang\.org",
-    r"rust-lang\.github\.io",
-    r"github\.com/rust-lang",
-    r"blog\.rust-lang\.org",
-    r"inside-rust\.lang\.org",
-    r"releases\.rs",
-    r"spec\.ferrocene\.dev",
-    r"rustc-dev-guide\.rust-lang\.org",
-    r"crates\.io",
-    r"docs\.rs",
-)
-
-P1_ACADEMIC_PATTERNS: tuple[str, ...] = (
-    r"arxiv\.org",
-    r"acm\.org",
-    r"dl\.acm\.org",
-    r"ieee\.org",
-    r"standards\.ieee\.org",
-    r"springer\.com",
-    r"link\.springer\.com",
-    r"plv\.mpi-sws\.org",
-    r"mpi-sws\.org",
-    r"plf\.inf\.ethz\.ch",
-    r"ethz\.ch",
-    r"aeneas-verification\.github\.io",
-    r"github\.com/model-checking",
-    r"github\.com/creusot-rs",
-    r"github\.com/formal-land",
-    r"github\.com/sosnek",
-)
-
-P2_COMMUNITY_PATTERNS: tuple[str, ...] = (
-    r"rust-unofficial\.github\.io",
-    r"nnethercote\.github\.io",
-    r"this-week-in-rust\.org",
-    r"course\.rs",
-    r"rustcc\.cn",
-    r"kaisery\.github\.io/trpl-zh-cn",
-    r"doc\.rust-jp\.rs",
-    r"microservices\.io",
-    r"dataintensive\.net",
-    r"ryhl\.io",
-    r"tokio\.rs",
-    r"github\.com/tokio-rs",
-    r"github\.com/diesel-rs",
-    r"github\.com/launchbadge",
-    r"github\.com/SeaQL",
-    r"github\.com/rusqlite",
-    r"github\.com/redis-rs",
-    r"github\.com/mongodb",
-    r"github\.com/kube-rs",
-    r"github\.com/nats-io",
-    r"github\.com/ferrous-systems",
-    r"github\.com/probe-rs",
-    r"github\.com/hyperium",
-    r"github\.com/tower-rs",
-    r"github\.com/actix",
-    r"github\.com/SergioBenitez",
-    r"github\.com/tokio-rs/axum",
-    r"github\.com/tokio-rs/mini-redis",
-    r"github\.com/quinn-rs",
-    r"github\.com/dtolnay",
-    r"github\.com/EmbarkStudios",
-    r"github\.com/rustsec",
-    r"github\.com/rust-lang/cargo-vet",
-    r"github\.com/ulid",
-    r"opentelemetry\.io",
-    r"prometheus\.io",
-    r"kubernetes\.io",
-    r"sigstore\.dev",
-    r"slsa\.dev",
-    r"spdx\.dev",
+# Reuse the same tier classification logic as the coverage dashboard so that
+# the final checklist and the dashboard report identical numbers.
+sys.path.insert(0, str(PROJECT_ROOT / "scripts" / "maintenance"))
+from authority_coverage_dashboard import (
+    extract_concept_family,
+    extract_urls,
+    iter_md_files,
+    pct,
+    tier_coverage,
 )
 
 
@@ -124,44 +57,20 @@ class FileInfo:
         return self.family is not None
 
 
-def classify_url(url: str) -> str | None:
-    """Classify a URL into P0/P1/P2 or return None if unknown."""
-    lower = url.lower()
-    for pattern in P0_OFFICIAL_PATTERNS:
-        if re.search(pattern, lower):
-            return "P0"
-    for pattern in P1_ACADEMIC_PATTERNS:
-        if re.search(pattern, lower):
-            return "P1"
-    for pattern in P2_COMMUNITY_PATTERNS:
-        if re.search(pattern, lower):
-            return "P2"
-    return None
-
-
-def iter_md_files() -> Iterable[Path]:
-    """Yield all Markdown files under docs/research_notes."""
-    return sorted(RESEARCH_NOTES.rglob("*.md"))
-
-
 def analyze_file(path: Path) -> FileInfo:
     """Extract concept family, authority markers, and source tiers from a file."""
     text = path.read_text(encoding="utf-8", errors="ignore")
 
-    family_match = CONCEPT_FAMILY_RE.search(text)
-    family = family_match.group(1).strip() if family_match else None
-
+    family = extract_concept_family(text)
     has_marker = bool(AUTHORITY_MARKER_RE.search(text))
+    coverage = tier_coverage(extract_urls(text))
 
-    levels: set[str] = set()
-    for line in text.splitlines():
-        if AUTHORITY_MARKER_RE.search(line):
-            for url in LINK_RE.findall(line):
-                level = classify_url(url)
-                if level:
-                    levels.add(level)
-
-    return FileInfo(path.relative_to(PROJECT_ROOT), family, has_marker, levels)
+    return FileInfo(
+        path.relative_to(PROJECT_ROOT),
+        family,
+        has_marker,
+        {tier for tier, covered in coverage.items() if covered},
+    )
 
 
 def build_family_map(files: Iterable[FileInfo]) -> dict[str, list[FileInfo]]:
@@ -171,11 +80,6 @@ def build_family_map(files: Iterable[FileInfo]) -> dict[str, list[FileInfo]]:
         key = info.family if info.family else "(未指定概念族)"
         families[key].append(info)
     return dict(families)
-
-
-def pct(part: int, total: int) -> float:
-    """Percentage, returning 0.0 when total is 0."""
-    return (part / total * 100.0) if total else 0.0
 
 
 def threshold_ok(part: int, total: int, threshold: float) -> bool:

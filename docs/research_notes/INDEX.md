@@ -1,18 +1,21 @@
 # 研究笔记完整索引
 >
 > **概念族**: 元/导航/索引
-
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ **docs/research_notes 六层两网一库知识体系 100% 骨架与核心内容覆盖完成**（阶段 0-3 完成；阶段 4 行号级锚点作为持续增强项）
 >
-> **说明**: 2026-06-29 已将 `experiments/`、`software_design_theory/` 各子目录、`formal_modules/` 及根目录 130+ 篇核心文档从 `archive/research_notes_2026_06_25/` 迁回；完成权威国际化来源对齐升级；补齐模块系统、所有权/借用、类型系统、并发/异步、unsafe、设计模式、Crate 架构、工作流/组合工程/分布式、实验研究、版本演进等 10+ 个反例边界文件；`10_knowledge_graph_index.md` 建立六层两网一库完整知识图谱索引。
+> **说明**:
+>
+> 2026-06-29 已将 `experiments/`、`software_design_theory/` 各子目录、`formal_modules/` 及根目录 130+ 篇核心文档从 `archive/research_notes_2026_06_25/` 迁回；
+> 完成权威国际化来源对齐升级；补齐模块系统、所有权/借用、类型系统、并发/异步、unsafe、设计模式、Crate 架构、工作流/组合工程/分布式、实验研究、版本演进等 10+ 个反例边界文件；
+> `10_knowledge_graph_index.md` 建立六层两网一库完整知识图谱索引。
+>
 
 ---
 
@@ -344,6 +347,12 @@
 - 覆盖率现状与 TOP 10 缺口概念族
 - `suggest_authoritative_sources.py` 自动补全脚本使用说明
 - P0/P1/P2 补全优先级与下一步计划
+
+7b1al. **[10_authoritative_source_100_percent_roadmap.md](10_authoritative_source_100_percent_roadmap.md)** - 权威来源对齐 100% 完成路线图 🆕
+
+- P0/P1/P2 覆盖率 100% 目标与冲刺阶段
+- 剩余缺口 TOP 10 概念族及补全策略
+- 质量门禁与自动化工具清单
 
 7b2. **[10_rust_book_alignment.md](10_rust_book_alignment.md)** - Rust Book 逐章对标映射表 🆕
 
@@ -1027,19 +1036,12 @@
 ## 权威来源索引
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -1048,3 +1050,5 @@
 > **来源: [IEEE](https://standards.ieee.org/)**
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
+> **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)**
+> **来源: [This Week in Rust](https://this-week-in-rust.org/)**

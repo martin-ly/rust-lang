@@ -173,6 +173,7 @@
 | Crate 架构权威来源对齐 | 权威来源对齐 / Crate 架构 | L0-L5 | [10_crate_architecture_authoritative_alignment.md](10_crate_architecture_authoritative_alignment.md) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) |
 | 学习路径与面试题权威来源对齐 | 权威来源对齐 / 学习路径 / 面试评估 | L0-L5 | [10_learning_and_interview_alignment.md](10_learning_and_interview_alignment.md) | [10_interview_questions_collection.md](10_interview_questions_collection.md) |
 | 权威来源自动补全计划 | 权威来源对齐 / 补全计划 | L0-L7 | [10_authoritative_source_completion_plan.md](10_authoritative_source_completion_plan.md) | [10_authoritative_alignment_gap_analysis.md](10_authoritative_alignment_gap_analysis.md) / [10_authoritative_alignment_gap_matrix.md](10_authoritative_alignment_gap_matrix.md) |
+| 权威来源对齐 / 100% 完成路线图 | 权威来源对齐 / 100% 路线图 | L0-L7 | [10_authoritative_source_100_percent_roadmap.md](10_authoritative_source_100_percent_roadmap.md) | [10_authoritative_source_completion_plan.md](10_authoritative_source_completion_plan.md) / [10_authoritative_alignment_gap_matrix.md](10_authoritative_alignment_gap_matrix.md) |
 
 > **已补充**：关键概念已建立到权威来源的行号级锚点索引，见 [10_authoritative_source_line_anchors.md](10_authoritative_source_line_anchors.md)。
 
@@ -236,6 +237,8 @@
 | maps_to | 面试题 | 权威来源 | 面试题目到官方规范、RFC、论文的映射 | [10_learning_and_interview_alignment.md](10_learning_and_interview_alignment.md) |
 | depends_on | 权威来源自动补全计划 | 权威来源缺口分析 | 补全计划基于缺口分析结果制定优先级 | [10_authoritative_source_completion_plan.md](10_authoritative_source_completion_plan.md) |
 | refines | 权威来源自动补全计划 | 覆盖率提升路径 | 为 P0/P1/P2 缺口提供推荐权威来源与优先级 | [10_authoritative_source_completion_plan.md](10_authoritative_source_completion_plan.md) |
+| implements | 权威来源对齐 / 100% 完成路线图 | 覆盖率提升路径 | 将补全计划落实为 P0/P1/P2 100% 覆盖的冲刺阶段与质量门禁 | [10_authoritative_source_100_percent_roadmap.md](10_authoritative_source_100_percent_roadmap.md) |
+| tracks | 权威来源对齐 / 100% 完成路线图 | 权威来源对齐网络 | 跟踪 P0/P1/P2 覆盖率与 12 项自动化检查状态 | [10_authoritative_source_100_percent_roadmap.md](10_authoritative_source_100_percent_roadmap.md) |
 
 > **待补全**：为每条边增加具体文档行号锚点。
 

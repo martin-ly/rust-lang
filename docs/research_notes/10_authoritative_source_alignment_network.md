@@ -29,6 +29,7 @@
 | Crate 架构 | [10_crate_architecture_authoritative_alignment.md](10_crate_architecture_authoritative_alignment.md) | workspace、public/private API、feature、错误类型、日志、配置、CLI、库/二进制、MSRV |
 | 学习路径与面试题 | [10_learning_and_interview_alignment.md](10_learning_and_interview_alignment.md) | 官方/社区学习资源、面试题与权威来源映射、Bloom 层级对应 |
 | 自动补全计划 | [10_authoritative_source_completion_plan.md](10_authoritative_source_completion_plan.md) | 权威来源 P0/P1/P2 自动补全建议与覆盖率提升计划 |
+| 100% 完成路线图 | [10_authoritative_source_100_percent_roadmap.md](10_authoritative_source_100_percent_roadmap.md) | P0/P1/P2 覆盖率 100% 目标、冲刺阶段、自动化工具与质量门禁 |
 
 ---
 

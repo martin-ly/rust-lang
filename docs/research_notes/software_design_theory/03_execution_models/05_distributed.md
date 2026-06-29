@@ -670,25 +670,19 @@ CQRS 使用 `tokio::sync::mpsc` 传递事件。
 ## 相关概念
 
 >
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [03_execution_models 目录](README.md)
-
 - [上级目录](../README.md)
 
 ## 权威来源索引
 
 > **来源: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)**
-
 > **来源: [Tokio Tutorial](https://tokio.rs/tokio/tutorial)**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
-
 ---
+> **来源: [ACM Digital Library](https://dl.acm.org/)**
+> **来源: [Springer Computer Science](https://link.springer.com/)**

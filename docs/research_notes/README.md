@@ -625,13 +625,14 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查
+- Rust 1.94 特性速查
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-06-29 (Rust 1.96+ 权威国际化来源对齐升级完成)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -648,19 +649,13 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 ## 权威来源索引
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
-
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
+> **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)**
+> **来源: [This Week in Rust](https://this-week-in-rust.org/)**

@@ -230,3 +230,7 @@ let file = File::open("file")?;  // IOError自动转为MyError
 > **来源: [RFC 2504 - Error trait improvements](https://rust-lang.github.io/rfcs/2504-fix-error.html)**
 
 ---
+
+> **来源: [ACM Digital Library](https://dl.acm.org/)**
+
+> **来源: [IEEE Standards](https://standards.ieee.org/)**

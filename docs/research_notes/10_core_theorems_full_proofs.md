@@ -1,27 +1,15 @@
 # 核心定理完整证明（L2 级）
 
 > **概念族**: 形式化方法
-
 > **内容分级**: [归档级]
-
->
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-14
-
 > **最后更新**: 2026-02-20
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 已完成
-
 > **用途**: 为 ownership T2、borrow T1、type T3 提供 L2 级完整证明，含归纳基/归纳步形式化陈述、辅助引理显式编号、证明依赖 DAG
-
 > **证明深度**: L2（完整证明，非机器可检查）
-
 > **上位文档**: [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](10_formal_proof_critical_analysis_and_plan_2026_02.md)、[PROOF_INDEX](10_proof_index.md)
 
 **形式语言与形式证明**：本文档的定理同时以**形式语言**（推理规则、操作语义、判定形式）表达，见 [FORMAL_LANGUAGE_AND_PROOFS](10_formal_language_and_proofs.md)。形式语言为数学规范层。Rust 示例衔接见 [THEOREM_RUST_EXAMPLE_MAPPING](10_theorem_rust_example_mapping.md)。
@@ -31,9 +19,7 @@
 ## 📑 目录
 
 >
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 >
 
 - [核心定理完整证明（L2 级）](#核心定理完整证明l2-级)
@@ -68,21 +54,15 @@
 ## 〇、证明结构规范（A→L→T→C 链）
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 形式化文档应遵循 **Axiom → Lemma → Theorem → Corollary** 可追溯链：
 
 | 层级 | 符号 | 说明 | 示例 |
-
 | :--- | :--- | :--- | :--- |
-
 | **Axiom** | A-OW1, A-BR1 | 不证自明的前提 | 规则 1 唯一所有者 |
-
 | **Lemma** | L-OW1, L-BR1 | 由 Axiom 推导的中间结论 | L-OW1 初始唯一性 |
-
 | **Theorem** | T-OW2, T-BR1 | 主要结论 | T-OW2 所有权唯一性 |
-
 | **Corollary** | C-OW1 | 由 Theorem 直接推论 | 推论 |
 
 **引用规范**：每个 Theorem 应显式列出依赖的 Axiom/Lemma；Lemma 引用 Axiom；Corollary 引用 Theorem。详见 [formal_methods/README](formal_methods/README.md)、[PROOF_INDEX](10_proof_index.md)。
@@ -92,7 +72,6 @@
 ## 一、证明依赖 DAG
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```text
