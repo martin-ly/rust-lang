@@ -401,13 +401,19 @@ impl ConfigBuilder {
 
 // 使用：链式调用，build 消费 self
 
-let config = ConfigBuilder::new()
+fn main() -> Result<(), String> {
 
-    .host("localhost".to_string())
+    let _config = ConfigBuilder::new()
 
-    .port(8080)
+        .host("localhost".to_string())
 
-    .build()?;
+        .port(8080)
+
+        .build()?;
+
+    Ok(())
+
+}
 
 ```
 
@@ -809,15 +815,21 @@ impl HttpRequestBuilder {
 
 // 使用：链式构建，缺必填则 Err
 
-let req = HttpRequestBuilder::new()
+fn main() -> Result<(), String> {
 
-    .url("https://api.example.com")
+    let _req = HttpRequestBuilder::new()
 
-    .header("Content-Type", "application/json")
+        .url("https://api.example.com")
 
-    .body(r#"{"key":"value"}"#)
+        .header("Content-Type", "application/json")
 
-    .build()?;
+        .body(r#"{"key":"value"}"#)
+
+        .build()?;
+
+    Ok(())
+
+}
 
 ```
 
@@ -870,6 +882,7 @@ let req = HttpRequestBuilder::new()
 ### 反例 1：缺少必填字段
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
+
 ```rust,ignore
 
 let cfg = ConfigBuilder::new()
@@ -889,6 +902,7 @@ let cfg = ConfigBuilder::new()
 ### 反例 2：重复 build
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
+
 ```rust,ignore
 
 let b = ConfigBuilder::new().host("h".into()).port(80);
@@ -906,6 +920,7 @@ let c2 = b.build(); // 错误：b 已移动
 ### 反例 3：可变借用链式冲突
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
+
 ```rust,ignore
 
 let mut b = ConfigBuilder::new();
