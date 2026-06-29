@@ -46,6 +46,7 @@
   - [相关概念](#相关概念)
   - [RFC 参考](#rfc-参考)
   - [权威来源参考](#权威来源参考)
+  - [学术权威参考](#学术权威参考)
 
 ---
 
@@ -238,3 +239,9 @@ macro_rules! count {
 
 - [Rust Performance Book](https://nnethercote.github.io/perf-book/)
 - [This Week in Rust](https://this-week-in-rust.org/)
+
+## 学术权威参考
+
+- [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
+- [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
+- [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)

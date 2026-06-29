@@ -1263,3 +1263,9 @@ let row: (i64, String) = sqlx::query_as("SELECT id, name FROM users WHERE id = $
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 > **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 > **来源**: [This Week in Rust](https://this-week-in-rust.org/)
+
+## 学术权威参考
+
+- [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
+- [Aeneas](https://aeneas-verification.github.io/)
+- [Oxide](https://arxiv.org/abs/1903.00982)

@@ -917,3 +917,9 @@ Tower 处于"抽象 sweet spot"——足够底层以支持任意请求-响应协
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 > **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 > **来源**: [This Week in Rust](https://this-week-in-rust.org/)
+
+## 学术权威参考
+
+- [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
+- [Aeneas](https://aeneas-verification.github.io/)
+- [Oxide](https://arxiv.org/abs/1903.00982)

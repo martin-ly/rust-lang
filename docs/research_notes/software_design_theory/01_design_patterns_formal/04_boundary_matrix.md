@@ -632,3 +632,9 @@ Observer ──→ Command
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ---
+
+## 社区权威参考
+
+- [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+- [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+- [This Week in Rust](https://this-week-in-rust.org/)

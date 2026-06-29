@@ -68,6 +68,7 @@
       - [相关文档](#相关文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [社区权威参考](#社区权威参考)
 
 ## 使用指南
 
@@ -1658,3 +1659,8 @@ trait EventStore {
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ---
+
+## 社区权威参考
+
+- [Rust 中文社区](https://rustcc.cn/)
+- [This Week in Rust](https://this-week-in-rust.org/)

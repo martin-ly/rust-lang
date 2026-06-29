@@ -29,6 +29,7 @@
   - [五、与其他概念的关系](#五与其他概念的关系)
   - [六、权威来源索引](#六权威来源索引)
   - [学术/社区来源参考](#学术社区来源参考)
+  - [学术权威参考](#学术权威参考)
 
 ---
 
@@ -139,3 +140,9 @@ pub fn cfg_select(input: TokenStream) -> TokenStream {
 > **来源**: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)
 > **来源**: [Rust Reference – Macros](https://doc.rust-lang.org/reference/macros.html)
 > **来源**: [proc-macro-workshop](https://github.com/dtolnay/proc-macro-workshop)
+
+## 学术权威参考
+
+- [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
+- [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
+- [Oxide](https://arxiv.org/abs/1903.00982)

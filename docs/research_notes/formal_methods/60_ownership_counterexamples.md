@@ -283,3 +283,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Stacked Borrows](https://plv.mpi-sws.org/rustbos/)
 - [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
+## 社区权威参考
+
+- [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
+- [This Week in Rust](https://this-week-in-rust.org/)

@@ -278,3 +278,7 @@ error[E0184]: the trait `Copy` may not be implemented for this type; the type im
 
 - [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
 - [Oxide](https://arxiv.org/abs/1903.00982)
+## 社区权威参考
+
+- [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
+- [This Week in Rust](https://this-week-in-rust.org/)

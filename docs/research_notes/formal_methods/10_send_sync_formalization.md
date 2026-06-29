@@ -495,3 +495,8 @@ Def SEND1, SYNC1
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ---
+
+## 社区权威参考
+
+- [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
+- [This Week in Rust](https://this-week-in-rust.org/)

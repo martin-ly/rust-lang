@@ -1893,3 +1893,9 @@ _版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/) 规范。_
 > **权威来源**: Rust Official Docs
 
 ---
+
+## 社区权威参考
+
+- [This Week in Rust](https://this-week-in-rust.org/)
+- [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
+- [Rust 中文社区](https://rustcc.cn/)

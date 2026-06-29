@@ -47,6 +47,7 @@
   - [相关概念](#相关概念)
   - [RFC 参考](#rfc-参考)
   - [权威来源参考](#权威来源参考)
+  - [学术权威参考](#学术权威参考)
 
 ---
 
@@ -241,3 +242,9 @@ serde = "1.0.200"
 
 - [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 - [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+
+## 学术权威参考
+
+- [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
+- [Aeneas](https://aeneas-verification.github.io/)
+- [Oxide](https://arxiv.org/abs/1903.00982)

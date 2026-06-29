@@ -378,3 +378,8 @@ $
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ---
+
+## 社区权威参考
+
+- [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
+- [This Week in Rust](https://this-week-in-rust.org/)

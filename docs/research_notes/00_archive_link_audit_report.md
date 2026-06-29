@@ -93,3 +93,9 @@
 
 > **来源**: [Rust Official Docs](https://doc.rust-lang.org/)
 > **来源**: [This Week in Rust](https://this-week-in-rust.org/)
+
+## 学术权威参考
+
+- [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
+- [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
+- [Aeneas](https://aeneas-verification.github.io/)

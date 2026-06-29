@@ -530,3 +530,8 @@
 > **来源: [Rust Reference - Type System](https://doc.rust-lang.org/reference/types.html)**
 
 > **来源: [ACM - Type Systems](https://dl.acm.org/)**
+## 社区权威参考
+
+- [This Week in Rust](https://this-week-in-rust.org/)
+- [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
+- [Rust 中文社区](https://rustcc.cn/)

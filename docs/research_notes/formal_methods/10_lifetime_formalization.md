@@ -145,3 +145,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 > **来源**: [Oxide (arXiv:1903.00982)](https://arxiv.org/abs/1903.00982)
 
 ---
+
+## 社区权威参考
+
+- [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
+- [This Week in Rust](https://this-week-in-rust.org/)

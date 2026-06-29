@@ -40,6 +40,7 @@
       - [相关文档](#相关文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [社区权威参考](#社区权威参考)
 
 ## 模式特性总览
 
@@ -320,3 +321,9 @@ impl OrderQueryHandler {
 > **来源: [ACM - Software Design Patterns](https://dl.acm.org/)**
 
 ---
+
+## 社区权威参考
+
+- [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+- [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+- [This Week in Rust](https://this-week-in-rust.org/)

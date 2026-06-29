@@ -321,3 +321,14 @@
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+
+## 学术权威参考
+
+- [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
+- [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
+- [Aeneas](https://aeneas-verification.github.io/)
+## 社区权威参考
+
+- [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+- [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+- [This Week in Rust](https://this-week-in-rust.org/)

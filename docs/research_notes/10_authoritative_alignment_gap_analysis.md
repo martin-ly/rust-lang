@@ -23,6 +23,7 @@
   - [六、质量与维护缺口](#六质量与维护缺口)
   - [七、补全优先级](#七补全优先级)
   - [相关概念](#相关概念)
+  - [社区权威参考](#社区权威参考)
 
 ---
 
@@ -111,3 +112,9 @@
 - [权威来源版本跟踪表](10_authoritative_source_version_tracking.md)
 - [RFC 实现状态追踪表](10_rfc_tracking_status.md)
 - [知识图谱索引](10_knowledge_graph_index.md)
+
+## 社区权威参考
+
+- [This Week in Rust](https://this-week-in-rust.org/)
+- [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
+- [Rust 中文社区](https://rustcc.cn/)

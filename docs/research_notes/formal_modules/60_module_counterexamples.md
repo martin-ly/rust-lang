@@ -55,6 +55,7 @@
   - [相关概念](#相关概念)
   - [RFC 参考](#rfc-参考)
   - [权威来源参考](#权威来源参考)
+  - [学术权威参考](#学术权威参考)
 
 ---
 
@@ -405,3 +406,13 @@ error: linking with `cc` failed: exit code: 1
 
 - [RFC 2126: Path clarity](https://rust-lang.github.io/rfcs/2126-path-clarity.html)
 - [Rust Reference Modules](https://doc.rust-lang.org/reference/items/modules.html)
+
+## 学术权威参考
+
+- [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
+- [Aeneas](https://aeneas-verification.github.io/)
+- [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
+## 社区权威参考
+
+- [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
+- [This Week in Rust](https://this-week-in-rust.org/)

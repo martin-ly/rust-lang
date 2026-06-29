@@ -43,6 +43,7 @@
   - [七、与其他概念文件的交叉引用](#七与其他概念文件的交叉引用)
   - [权威来源索引](#权威来源索引)
   - [权威来源参考](#权威来源参考)
+  - [学术权威参考](#学术权威参考)
 
 ---
 
@@ -339,3 +340,9 @@ graph TD
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 > **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 > **来源**: [This Week in Rust](https://this-week-in-rust.org/)
+
+## 学术权威参考
+
+- [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
+- [Aeneas](https://aeneas-verification.github.io/)
+- [Oxide](https://arxiv.org/abs/1903.00982)

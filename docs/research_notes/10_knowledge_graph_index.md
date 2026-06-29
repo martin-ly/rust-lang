@@ -31,6 +31,7 @@
   - [六、阶段推进状态](#六阶段推进状态)
     - [剩余细化项（阶段 4 收尾）](#剩余细化项阶段-4-收尾)
   - [七、权威来源索引](#七权威来源索引)
+  - [社区权威参考](#社区权威参考)
 
 ---
 
@@ -319,3 +320,8 @@
 > **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 > **来源**: [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
 > **来源**: [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
+>
+## 社区权威参考
+
+- [Rust 中文社区](https://rustcc.cn/)
+- [This Week in Rust](https://this-week-in-rust.org/)

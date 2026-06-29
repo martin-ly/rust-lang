@@ -23,6 +23,7 @@
   - [六、剩余增强项](#六剩余增强项)
   - [七、结论](#七结论)
   - [相关概念](#相关概念)
+  - [社区权威参考](#社区权威参考)
 
 ---
 
@@ -154,3 +155,9 @@
 - [跨文档映射网络](10_cross_reference_index.md)
 - [层次化梳理与映射总结](10_hierarchical_mapping_and_summary.md)
 - [研究笔记主索引](INDEX.md)
+
+## 社区权威参考
+
+- [This Week in Rust](https://this-week-in-rust.org/)
+- [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
+- [Rust 中文社区](https://rustcc.cn/)

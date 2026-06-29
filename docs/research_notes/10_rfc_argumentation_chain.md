@@ -31,6 +31,7 @@
   - [七、未覆盖缺口](#七未覆盖缺口)
   - [相关概念](#相关概念)
   - [学术权威参考](#学术权威参考)
+  - [社区权威参考](#社区权威参考)
 
 ---
 
@@ -146,3 +147,8 @@
 - [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
 - [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
 - [Aeneas](https://aeneas-verification.github.io/)
+
+## 社区权威参考
+
+- [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
+- [This Week in Rust](https://this-week-in-rust.org/)

@@ -60,6 +60,7 @@
       - [相关文档](#相关文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [学术权威参考](#学术权威参考)
 
 > **创建日期**: 2026-02-12
 
@@ -669,4 +670,13 @@ impl PaymentGateway for FFIPaymentGateway {
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
----
+## 学术权威参考
+
+- [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
+- [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
+- [Aeneas](https://aeneas-verification.github.io/)
+## 社区权威参考
+
+- [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+- [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+- [This Week in Rust](https://this-week-in-rust.org/)

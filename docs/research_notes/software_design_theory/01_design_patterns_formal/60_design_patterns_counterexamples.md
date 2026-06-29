@@ -47,6 +47,7 @@
   - [相关概念](#相关概念)
   - [RFC 参考](#rfc-参考)
   - [权威来源参考](#权威来源参考)
+  - [学术权威参考](#学术权威参考)
 
 ---
 
@@ -274,3 +275,9 @@ struct Service {
 
 - [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 - [Refactoring Guru](https://refactoring.guru/design-patterns)
+
+## 学术权威参考
+
+- [Aeneas](https://aeneas-verification.github.io/)
+- [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
+- [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)

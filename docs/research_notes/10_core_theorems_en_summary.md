@@ -32,6 +32,7 @@
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
   - [权威来源索引](#权威来源索引)
+  - [社区权威参考](#社区权威参考)
 
 > **创建日期**: 2026-02-14
 
@@ -244,3 +245,8 @@ L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with 
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---
+
+## 社区权威参考
+
+- [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
+- [This Week in Rust](https://this-week-in-rust.org/)

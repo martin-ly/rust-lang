@@ -29,6 +29,7 @@
       - [相关文档](#相关文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [社区权威参考](#社区权威参考)
 
 > **创建日期**: 2026-02-14
 
@@ -201,3 +202,9 @@
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---
+
+## 社区权威参考
+
+- [This Week in Rust](https://this-week-in-rust.org/)
+- [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
+- [Rust 中文社区](https://rustcc.cn/)

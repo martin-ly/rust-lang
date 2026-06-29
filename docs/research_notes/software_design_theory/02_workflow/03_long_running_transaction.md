@@ -27,6 +27,7 @@
     - [反例 2：循环依赖](#反例-2循环依赖)
   - [五、与其他概念的关系](#五与其他概念的关系)
   - [六、权威来源索引](#六权威来源索引)
+  - [学术权威参考](#学术权威参考)
 
 ---
 
@@ -139,3 +140,9 @@ impl LongRunningTransaction {
 > **来源**: [Tokio Tutorial](https://tokio.rs/tokio/tutorial)
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
 > **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+
+## 学术权威参考
+
+- [Aeneas](https://aeneas-verification.github.io/)
+- [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
+- [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)

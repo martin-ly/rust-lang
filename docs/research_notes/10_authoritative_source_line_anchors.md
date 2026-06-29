@@ -24,6 +24,7 @@
   - [六、RFCs](#六rfcs)
   - [七、未覆盖缺口](#七未覆盖缺口)
   - [相关概念](#相关概念)
+  - [社区权威参考](#社区权威参考)
 
 ---
 
@@ -120,3 +121,9 @@
 - [10_unsafe_code_guidelines_alignment.md](10_unsafe_code_guidelines_alignment.md) — Unsafe Code Guidelines 对齐
 - [10_rfc_alignment_index.md](10_rfc_alignment_index.md) — RFC 对齐索引
 - [10_authoritative_source_version_tracking.md](10_authoritative_source_version_tracking.md) — 权威来源版本跟踪
+
+## 社区权威参考
+
+- [This Week in Rust](https://this-week-in-rust.org/)
+- [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
+- [Rust 中文社区](https://rustcc.cn/)

@@ -59,6 +59,7 @@
       - [Nomicon / RFC / Miri](#nomicon--rfc--miri)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [社区权威参考](#社区权威参考)
 
 ## Send与Sync
 >
@@ -520,3 +521,9 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 > **来源: [ACM - Concurrent Programming](https://dl.acm.org/)**
 
 ---
+
+## 社区权威参考
+
+- [This Week in Rust](https://this-week-in-rust.org/)
+- [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
+- [Rust 中文社区](https://rustcc.cn/)

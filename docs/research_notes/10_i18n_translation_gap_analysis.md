@@ -27,6 +27,7 @@
   - [七、未覆盖缺口](#七未覆盖缺口)
   - [相关概念](#相关概念)
   - [学术权威参考](#学术权威参考)
+  - [社区权威参考](#社区权威参考)
 
 ---
 
@@ -159,3 +160,8 @@ python scripts/maintenance/check_i18n_translation_gap.py
 - [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
 - [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
 - [Aeneas](https://aeneas-verification.github.io/)
+
+## 社区权威参考
+
+- [Rust Book 中文](https://kaisery.github.io/trpl-zh-cn/)
+- [This Week in Rust](https://this-week-in-rust.org/)

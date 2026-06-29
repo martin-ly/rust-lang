@@ -39,6 +39,7 @@
       - [相关文档](#相关文档-1)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [社区权威参考](#社区权威参考)
 
 ## 概述
 
@@ -195,3 +196,9 @@
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
 ---
+
+## 社区权威参考
+
+- [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+- [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+- [This Week in Rust](https://this-week-in-rust.org/)

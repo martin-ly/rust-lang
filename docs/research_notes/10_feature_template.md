@@ -48,6 +48,7 @@
       - [相关文档](#相关文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [社区权威参考](#社区权威参考)
 
 ## 模板结构
 
@@ -278,3 +279,8 @@
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ---
+
+## 社区权威参考
+
+- [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
+- [This Week in Rust](https://this-week-in-rust.org/)
