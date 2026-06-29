@@ -778,6 +778,8 @@ struct GlyphInstance {
 
 ### 反例 1：内部状态可变导致数据竞争
 
+> 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
+
 ```rust,ignore
 
 struct TreeType { name: String, count: Cell<u32> }
@@ -790,6 +792,9 @@ struct TreeType { name: String, count: Cell<u32> }
 
 ### 反例 2：错误生命周期返回 &TreeType
 
+> 以下代码故意展示编译失败，用于说明对应反例。
+
+> 以下代码片段为示意性伪代码，非完整可编译示例。
 ```rust,ignore
 
 impl TreeFactory {
@@ -803,6 +808,8 @@ impl TreeFactory {
 **编译器错误**：无法返回局部 `RwLockGuard` 保护的引用。
 
 ### 反例 3：HashMap 键不稳定
+
+> 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
 ```rust,ignore
 

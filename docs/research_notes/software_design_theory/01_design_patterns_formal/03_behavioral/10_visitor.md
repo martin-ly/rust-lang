@@ -165,6 +165,7 @@ Rust 用 `match` 单分发或 trait 模拟；无 OOP 风格双重分发，表达
 
 1. **单分发模式**：
 
+   > 以下代码片段为示意性伪代码，非完整可编译示例。
    ```rust,ignore
 
    fn visit<V: Visitor>(v: &mut V, e: &Expr) {
@@ -667,6 +668,7 @@ impl ExprVisitor<String> for PrettyPrint {
 
 ### 反例 1：新增元素类型未实现 visit
 
+> 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 ```rust,ignore
 
 struct Triangle;
@@ -683,6 +685,7 @@ impl Shape for Triangle {
 
 ### 反例 2：访问者中可变借用元素
 
+> 以下代码片段为示意性伪代码，非完整可编译示例。
 ```rust,ignore
 
 impl Visitor for BadVisitor {
@@ -697,6 +700,7 @@ impl Visitor for BadVisitor {
 
 ### 反例 3：遍历中修改元素集合
 
+> 以下代码片段为示意性伪代码，非完整可编译示例。
 ```rust,ignore
 
 for s in &shapes { s.accept(&mut visitor); shapes.push(...); }

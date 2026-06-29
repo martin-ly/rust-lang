@@ -198,6 +198,8 @@ $$D_1(D_2(D_3(\cdots))) \text{ 形成有效委托链}$$
 
 1. **装饰器结构**：
 
+   > 以下代码片段为示意性伪代码，非完整可编译示例。
+
    ```rust,ignore
 
    struct Decorator<C: Component> { inner: C }
@@ -215,6 +217,8 @@ $$D_1(D_2(D_3(\cdots))) \text{ 形成有效委托链}$$
    - 子借用的生命周期不超过父借用
 
 3. **可叠加性**：
+
+   > 以下代码片段为示意性伪代码，非完整可编译示例。
 
    ```rust,ignore
 
@@ -754,6 +758,7 @@ impl<C: HttpClient> HttpClient for RetryDecorator<C> {
 
 ### 反例 1：泛型装饰器递归类型无限
 
+> 以下代码片段为示意性伪代码，非完整可编译示例。
 ```rust,ignore
 
 struct A<C>(C);
@@ -768,6 +773,7 @@ type X = B<B<B<...>>>; // 无法终止
 
 ### 反例 2：装饰器持有 &mut 导致借用冲突
 
+> 以下代码片段为示意性伪代码，非完整可编译示例。
 ```rust,ignore
 
 struct MilkDecorator<'a, C: Coffee> { component: &'a mut C }
@@ -790,6 +796,7 @@ fn use(c: &mut impl Coffee) {
 
 ### 反例 3：trait object 装饰丢失 Send
 
+> 以下代码片段为示意性伪代码，非完整可编译示例。
 ```rust,ignore
 
 fn share(coffee: Box<dyn Coffee + Send>) { ... }

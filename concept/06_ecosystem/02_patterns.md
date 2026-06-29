@@ -14,6 +14,8 @@
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [TRPL — Patterns](https://doc.rust-lang.org/book/ch18-00-patterns.html) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+>
+> **说明**: 本文档包含可直接编译的标准库示例（`rust`）、依赖外部 crate 或仅为示意的代码片段（`rust,ignore`），以及故意展示编译失败的边界测试（`rust,compile_fail`）。
 ---
 
 > **Bloom 层级**: 应用 → 分析
@@ -456,19 +458,21 @@ impl PluginRegistry {
 
 **动态加载（libloading）**:
 
-rust,ignore
+```rust,ignore
 // 使用 `libloading` crate 加载 .dll / .so
 use libloading::{Library, Symbol};
 
 type CreatePlugin = unsafe fn() -> *mut dyn Plugin;
 
 unsafe {
-    let lib = Library::new("plugin.so").ok()?; [来源: [Rust Foundation](https://foundation.rust-lang.org/)]
+    let lib = Library::new("plugin.so").ok()?;
     let create: Symbol<CreatePlugin> = lib.get(b"create_plugin").ok()?;
     let plugin = Box::from_raw(create());
 }
 
 ```
+
+> [来源: [Rust Foundation](https://foundation.rust-lang.org/)]
 
 **与其他语言对比**：
 
@@ -502,7 +506,7 @@ unsafe {
 
 使用 `Vec<Box<dyn Fn(&T)>>` 存储闭包回调，适用于单线程同步场景。所有权核心挑战在于：Subject 持有 Observer 回调，而 Observer 可能持有 Subject 的引用。
 
-```rust,ignore
+```rust
 use std::cell::RefCell;
 use std::rc::{Rc, Weak};
 
@@ -540,7 +544,7 @@ struct TemperatureDisplay {
 
 impl TemperatureDisplay {
     fn update(&self, temp: f32) {
-        println!("Display: 当前温度 {}°C", temp); [来源: [Rust in Production](https://www.rust-lang.org/)]
+        println!("Display: 当前温度 {}°C", temp);
     }
 
     fn attach(sensor: &Rc<RefCell<TemperatureSensor>>) -> Rc<RefCell<Self>> {
@@ -560,6 +564,8 @@ impl TemperatureDisplay {
 }
 ```
 
+> [来源: [Rust in Production](https://www.rust-lang.org/)]
+
 **关键洞察**：`Weak<T>` 不增加引用计数，当 Subject 被释放时，`upgrade()` 返回 `None`，Observer 自动失效。这避免了 `Rc`/`Arc` 循环引用导致的内存泄漏。来源: [TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)** `Rc::downgrade` 产生 `Weak<T>`，允许引用而不拥有所有权，是打破循环引用的标准手段。✅
@@ -578,7 +584,7 @@ struct AsyncEventBus<T: Clone + Send + 'static> {
 }
 
 impl<T: Clone + Send + 'static> AsyncEventBus<T> {
-    fn new(capacity: usize) -> Self { [来源: [Rust FFI Guidelines](https://doc.rust-lang.org/nomicon/ffi.html)]
+    fn new(capacity: usize) -> Self {
         let (sender, _receiver) = broadcast::channel(capacity);
         Self { sender }
     }
@@ -601,10 +607,12 @@ async fn async_observer_example() {
 
     bus.publish("event".to_string()).unwrap();
 
-    assert_eq!(rx1.recv().await.unwrap(), "event"); [来源: [Rust CLI Book](https://rust-cli.github.io/book/)]
+    assert_eq!(rx1.recv().await.unwrap(), "event");
     assert_eq!(rx2.recv().await.unwrap(), "event");
 }
 ```
+
+> [来源: [Rust FFI Guidelines](https://doc.rust-lang.org/nomicon/ffi.html)] · [Rust CLI Book](https://rust-cli.github.io/book/)
 
 **关键洞察**：`broadcast` 通道解耦了生产者和消费者的生命周期——接收者可以独立存在，即使发送者已关闭，`recv()` 会返回错误而非悬垂引用。[来源: Tokio Documentation]
 
@@ -645,11 +653,13 @@ async fn lightweight_observer_example() {
 
     let mut listener = subject.lock().unwrap().listen();
     // 另一个任务修改值并通知
-    subject.lock().unwrap().set_value(42); [来源: [Rust by Example](https://doc.rust-lang.org/rust-by-example/)]
+    subject.lock().unwrap().set_value(42);
 
     listener.await; // 等待通知
 }
 ```
+
+> [来源: [Rust by Example](https://doc.rust-lang.org/rust-by-example/)]
 
 **关键洞察**：`event-listener` 使用无锁原子操作实现通知，相比 `Mutex<Vec<Callback>>` 减少了锁竞争，适用于高并发细粒度事件场景。[来源: event-listener crate docs]
 
@@ -718,12 +728,14 @@ fn sensor_system(mut writer: EventWriter<TemperatureChanged>) {
     writer.send(TemperatureChanged(25.0));
 }
 
-fn display_system(mut reader: EventReader<TemperatureChanged>) { [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+fn display_system(mut reader: EventReader<TemperatureChanged>) {
     for event in reader.read() {
         println!("Display: {}°C", event.0);
     }
 }
 ```
+
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 **关键洞察**：Bevy 的事件系统消除了 Observer 与 Subject 之间的直接引用关系，将所有权交由 ECS 调度器统一管理，从根本上规避了循环引用问题。[来源: Bevy Engine Documentation]
 
@@ -784,7 +796,7 @@ impl<'a, T> LendingIterator for Windows<'a, T> {
 当需要存储异构类型且避免泛型传播时，使用类型擦除：
 
 ```rust,ignore
-// 手动 vtable：将任意 Write 类型擦除为统一句柄 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+// 手动 vtable：将任意 Write 类型擦除为统一句柄
 struct DynWriter {
     ptr: *mut (),
     vtable: &'static WriterVTable,
@@ -800,6 +812,8 @@ struct WriterVTable {
 // 零成本替代：enum 类型擦除（如 io::Write 的 Either<L, R>）
 ```
 
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
 > **关键洞察**: `Box<dyn Write>` 是**动态擦除**，运行时通过 vtable 分发；`enum Either<L, R>` 是**静态擦除**，编译期确定分支，零运行时开销。
 [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 
@@ -813,7 +827,7 @@ struct WriterVTable {
 | **Resource Pool** | 异步环境下的连接/对象复用 | `deadpool` / `bb8` |
 | **Stream 适配** | 异步迭代与转换 | `futures::Stream` + `StreamExt` |
 
-rust,ignore
+```rust,ignore
 // Graceful Shutdown 模式
 use tokio::sync::mpsc;
 
@@ -930,7 +944,7 @@ struct ParseError {
 }
 
 // snafu：上下文敏感
-use snafu::{Snafu, ResultExt, ensure}; [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
+use snafu::{Snafu, ResultExt, ensure};
 
 # [derive(Debug, Snafu)]
 
@@ -944,6 +958,8 @@ fn load(path: &str) -> Result<Config, Error> {
 }
 
 ```
+
+> [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 
 > **选型决策**: 编写库 → **thiserror**（生态最轻）；构建 CLI/终端应用 → **miette**（诊断美观）；复杂状态机/领域错误 → **snafu**（结构化上下文）。
 
@@ -988,10 +1004,12 @@ impl<T: serde::Serialize, E: std::error::Error> Processor<T, E> for JsonProcesso
 }
 
 // ✅ 适度设计：先用具体类型实现，待确需多态时再抽象
-fn to_json<T: serde::Serialize>(input: T) -> Result<Vec<u8>, serde_json::Error> { [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
+fn to_json<T: serde::Serialize>(input: T) -> Result<Vec<u8>, serde_json::Error> {
     serde_json::to_vec(&input)
 }
 ```
+
+> [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 
 **成本分析**：
 
@@ -1052,12 +1070,14 @@ enum Transport {
 impl Transport {
     fn send(&self, data: &[u8]) -> std::io::Result<()> {
         match self {
-            Transport::Tcp(t) => t.write_all(data), [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
+            Transport::Tcp(t) => t.write_all(data),
             Transport::Udp(u) => u.send(data).map(|_| ()),
         }
     }
 }
 ```
+
+> [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
 
 **三次法则（Rule of Three）的 Rust 适配**：
 
@@ -1150,7 +1170,7 @@ struct AppState {
     // ... 数十个字段
 }
 
-// 所有 handler 都持有 &AppState 或 Arc<AppState> [来源: [lib.rs](https://lib.rs/)]
+// 所有 handler 都持有 &AppState 或 Arc<AppState>
 async fn handler(state: Arc<Mutex<AppState>>) { /* ... */ }
 
 // ✅ 按领域拆分：状态分散，组合代替堆砌
@@ -1167,6 +1187,8 @@ struct App {
 // Handler 只依赖所需子集
 async fn handler(db: &DatabaseLayer, sessions: &SessionLayer) { /* ... */ }
 ```
+
+> [来源: [lib.rs](https://lib.rs/)]
 
 **Rust 对策**：
 
@@ -1321,7 +1343,7 @@ impl Door<Closed> {
 }
 
 impl Door<Open> {
-    fn close(self) -> Door<Closed> { [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
+    fn close(self) -> Door<Closed> {
         Door { _state: std::marker::PhantomData }
     }
     fn pass_through(&self) -> &'static str {
@@ -1337,6 +1359,8 @@ fn main() {
     // let door = door.close(); // 编译错误：door 已 move
 }
 ```
+
+> [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
 
 ```rust
 // Builder 模式：编译期强制逐步构造
@@ -1356,7 +1380,7 @@ impl HttpRequestBuilder {
     fn new() -> Self {
         Self { method: None, url: None, headers: vec![] }
     }
-    fn method(mut self, m: &str) -> Self { [来源: [crates.io](https://crates.io/)]
+    fn method(mut self, m: &str) -> Self {
         self.method = Some(m.to_string()); self
     }
     fn url(mut self, u: &str) -> Self {
@@ -1384,6 +1408,8 @@ fn main() {
     println!("{} {}", req.method, req.url);
 }
 ```
+
+> [来源: [crates.io](https://crates.io/)]
 
 > **关键洞察**: Typestate 模式利用泛型将运行时状态检查转化为编译期类型约束；Builder 模式利用所有权转移保证构造过程的原子性。两者都是 Rust 类型系统的**零成本抽象（Zero-Cost Abstraction）**——编译后无运行时开销。
 [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]

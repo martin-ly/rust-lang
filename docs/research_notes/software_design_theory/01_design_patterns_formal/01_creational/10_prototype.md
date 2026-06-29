@@ -222,6 +222,8 @@ $$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$
 
 2. **所有权转移**：返回值为新拥有值
 
+   > 以下代码片段为示意性伪代码，非完整可编译示例。
+
    ```rust,ignore
 
    let a = Config { ... };
@@ -636,6 +638,7 @@ ownership_model T2
 
 ### 反例 1：未实现 Clone
 
+> 以下代码片段为示意性伪代码，非完整可编译示例。
 ```rust,ignore
 
 struct Database { conn: RawConn }
@@ -651,6 +654,8 @@ let db2 = db.clone(); // 错误
 **修复**：`#[derive(Clone)]` 或手动实现；若包含裸指针需用 `Arc` 等安全抽象。
 
 ### 反例 2：浅拷贝导致共享可变状态
+
+> 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
 ```rust,ignore
 
@@ -672,7 +677,9 @@ b.cache.borrow_mut().push(1); // 同时影响 a
 
 ### 反例 3：Copy 类型含非 Copy 字段
 
-```rust,ignore
+> 以下代码故意展示编译失败，用于说明对应反例。
+
+```rust,compile_fail
 
 #[derive(Copy, Clone)]
 

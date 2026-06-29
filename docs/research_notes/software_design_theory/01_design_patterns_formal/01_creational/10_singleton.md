@@ -716,6 +716,8 @@ Mutex/RwLock (内部可变)
 
 ### 反例 1：使用 static mut
 
+> 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
+
 ```rust,ignore
 
 static mut INSTANCE: Config = Config { db_url: String::new() };
@@ -730,6 +732,9 @@ unsafe { INSTANCE.db_url = "x".into(); }
 
 ### 反例 2：初始化闭包捕获局部变量
 
+> 以下代码故意展示编译失败，用于说明对应反例。
+
+> 以下代码片段为示意性伪代码，非完整可编译示例。
 ```rust,ignore
 
 let local = String::from("temp");
@@ -743,6 +748,8 @@ static CFG: LazyLock<String> = LazyLock::new(|| local.clone());
 **原因**：`static` 初始化闭包必须为 `'static`。
 
 ### 反例 3：无同步的可变全局状态
+
+> 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
 ```rust,ignore
 

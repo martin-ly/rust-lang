@@ -4,7 +4,6 @@
 >
 > **受众**: [进阶]
 > **内容分级**: [专家级]
-
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
 
@@ -186,19 +185,19 @@ fn dp_examples() {
 
 ```rust,ignore
 use c08_algorithms::data_structure::{
-    DisjointSetUnion, FenwickTree, SegmentTree, LruCache
+    DisjointSet, Fenwick, SegmentTree, LruCache
 };
 
 fn data_structure_examples() {
     // 并查集
-    let mut dsu = DisjointSetUnion::new(5);
+    let mut dsu = DisjointSet::new(5);
     dsu.union(0, 1);
     dsu.union(1, 2);
     assert!(dsu.find(0) == dsu.find(2));
 
     // 线段树区间求和
-    let mut seg = SegmentTree::new(&[1, 3, 5, 7, 9]);
-    assert_eq!(seg.query(1, 3), 15); // 3 + 5 + 7
+    let mut seg = SegmentTree::from_slice(&[1, 3, 5, 7, 9]);
+    assert_eq!(seg.query_sum(1, 3), 15); // 3 + 5 + 7
 }
 ```
 
@@ -350,19 +349,12 @@ fn verified_algorithms() {
 ## 权威来源索引
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
-
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
-
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [ACM](https://dl.acm.org/)**
-
 > **来源: [IEEE](https://standards.ieee.org/)**
-
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
-
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ---

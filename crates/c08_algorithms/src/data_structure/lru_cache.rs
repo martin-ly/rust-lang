@@ -55,6 +55,10 @@ impl<K: std::hash::Hash + Eq + Clone, V> LruCache<K, V> {
     pub fn is_empty(&self) -> bool {
         self.map.is_empty()
     }
+
+    pub fn contains_key(&self, key: &K) -> bool {
+        self.map.contains_key(key)
+    }
 }
 
 #[cfg(feature = "with-petgraph")]

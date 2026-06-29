@@ -15,7 +15,7 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: 分析 → 评价
-> **定位**: 本目录对 Rust 生态中 **21 个核心工业级 crate** 进行系统性架构解构，揭示类型系统、零成本抽象、组合性设计在真实工程中的运用方式。
+> **定位**: 本目录对 Rust 生态中 **23 个核心工业级 crate** 进行系统性架构解构，揭示类型系统、零成本抽象、组合性设计在真实工程中的运用方式。
 > **方法论对齐**: 软件架构分析 (Software Architecture Analysis) · 设计恢复 (Design Recovery) · 架构权衡分析方法 (ATAM)
 
 ---
@@ -38,6 +38,7 @@
     - [路径 D：工具与 CLI（推荐优先级：中）](#路径-d工具与-cli推荐优先级中)
     - [路径 E：分布式 RPC 与 WASM（推荐优先级：中）](#路径-e分布式-rpc-与-wasm推荐优先级中)
     - [路径 F：底层系统编程（推荐优先级：高）](#路径-f底层系统编程推荐优先级高)
+    - [路径 H：缓存与分布式协调（推荐优先级：高）](#路径-h缓存与分布式协调推荐优先级高)
     - [路径 G：可观测性与系统监控（推荐优先级：高）](#路径-g可观测性与系统监控推荐优先级高)
     - [路径 G：高性能并发与数据结构（推荐优先级：高）](#路径-g高性能并发与数据结构推荐优先级高)
   - [七、与其他概念文件的交叉引用](#七与其他概念文件的交叉引用)
@@ -94,6 +95,8 @@
 | 19 | **Crossbeam** | 无锁并发 | `epoch::pin` + 无锁队列/通道 | EBR 内存回收、`AtomicCell` 类型安全 | ✅ Lock-free 保证 | [19_crossbeam_architecture.md](19_crossbeam_architecture.md) |
 | 20 | **Ratatui** | TUI 框架 | `Widget::render` + `Buffer::diff` | 即时模式渲染、`Backend` trait 抽象 | ✅ 差分渲染 O(变更) | [20_ratatui_architecture.md](20_ratatui_architecture.md) |
 | 21 | **mio** | IO 多路复用 | `Poll` + `Registry` + `Token` + `Waker` | 跨平台 epoll/kqueue/IOCP 统一抽象 | ✅ 与直接 epoll 零额外开销 | [21_mio_architecture.md](21_mio_architecture.md) |
+| 22 | **redis-rs** | 缓存 / 消息 / 分布式协调 | `Client` → `MultiplexedConnection` / `ConnectionManager` / `PubSub` / `ClusterClient` | `FromRedisValue` / `ToRedisArgs` trait、命令返回类型静态化 | ✅ 单连接多路复用零额外连接开销 | [22_redis_architecture.md](22_redis_architecture.md) |
+| 23 | **mongodb-rust-driver** | 文档数据库 / NoSQL | `Client` → `Database` → `Collection<T>` | `Serialize`/`Deserialize` 类型参数、`bson::doc!` 编译期构造 | ✅ 内置连接池、BSON 原生模型 | [23_mongodb_architecture.md](23_mongodb_architecture.md) |
 
 > [来源: crates.io download statistics · docs.rs API documentation]
 
@@ -145,6 +148,14 @@ graph TD
         MIO[mio<br/>跨平台事件通知]
     end
 
+    subgraph 缓存与消息层["缓存与消息层"]
+        REDIS[redis-rs<br/>Redis 客户端]
+    end
+
+    subgraph 文档数据库层["文档数据库层"]
+        MONGODB[mongodb-rust-driver<br/>MongoDB 客户端]
+    end
+
     subgraph TUI 层["TUI 层"]
         TUI[Ratatui<br/>终端界面]
     end
@@ -169,6 +180,8 @@ graph TD
     CB --> RAYON
     MIO --> TOKIO
     MIO --> HYPER
+    REDIS --> TOKIO
+    MONGODB --> TOKIO
     TUI --> CLAP
 ```
 
@@ -190,6 +203,7 @@ graph TD
 | **ECS** | Bevy | `Query<&T, With<U>>` 使用 HRTB 在编译期保证组件借用不重叠 |
 | **Actor** | Actix-web | `Actor` + `Handler<M>` trait，消息类型在编译期路由到对应处理器 |
 | **Strategy** | Wgpu | `Backends::VULKAN \| METAL \| DX12` 运行时策略选择，trait 对象隐藏后端差异 |
+| **Command + Typeclass** | redis-rs | `FromRedisValue` / `ToRedisArgs` 将动态 RESP 协议静态类型化 |
 | **Fork-Join** | Rayon | `join(f, g)` 类型要求 `f: FnOnce() -> R1 + Send`，编译期保证线程安全 |
 
 > [来源: Rust Design Patterns Book · GoF Design Patterns · Rust API Guidelines]
@@ -219,6 +233,16 @@ graph TD
 | **宏** | `#[tonic::service]` | `#[wasm_bindgen]` | `tracing::instrument!` | 无 | `#[derive(Widget)]` | 无 |
 | **零成本证明** | gRPC 编码零拷贝 | JS ↔ WASM 无额外拷贝 | 无 Subscriber 时编译期消除 | Lock-free 无内核切换 | 差分渲染仅输出变更 | 与直接 epoll 等价的系统调用数 |
 
+| 技术维度 | redis-rs |
+| :--- | :--- |
+| **核心抽象** | `Client` / `MultiplexedConnection` / `ConnectionManager` / `PubSub` / `ClusterClient` |
+| **泛型** | `Commands<RV: FromRedisValue>`、Pipeline 泛型结果 |
+| **关联类型** | `FromRedisValue::Error`、`ToRedisArgs` 编码类型 |
+| **Trait Bound** | `T: FromRedisValue`、`T: ToRedisArgs` |
+| **生命周期** | 异步连接通过 `Arc` 共享，生命周期由运行时管理 |
+| **宏** | 无（纯 trait 与命令构造） |
+| **零成本证明** | 多路复用连接避免每任务一个 TCP 连接 |
+
 > 来源: [Rust Reference · TRPL · Rustonomicon · 各 crate 官方文档](https://doc.rust-lang.org/reference/)
 
 ---
@@ -242,8 +266,10 @@ graph TD
 
 1. **Serde** → 类型安全序列化基础
 2. **SQLx** / **Diesel** → 数据库交互的类型安全层
-3. **Rayon** → 数据并行加速计算
-4. **nalgebra/ndarray** → 数值计算与科学计算
+3. **redis-rs** → 缓存、消息队列与分布式协调
+4. **mongodb-rust-driver** → 文档数据库与 NoSQL 数据持久化
+5. **Rayon** → 数据并行加速计算
+6. **nalgebra/ndarray** → 数值计算与科学计算
 
 ### 路径 C：系统编程与图形（推荐优先级：中）
 >
@@ -277,6 +303,15 @@ graph TD
 2. **Tokio** → 基于 mio 的异步运行时构建
 3. **Crossbeam** → 无锁并发原语补充
 
+### 路径 H：缓存与分布式协调（推荐优先级：高）
+>
+> **[来源: [Redis 官方文档](https://redis.io/documentation)]**
+
+1. **redis-rs** → Redis 客户端核心抽象与异步连接管理
+2. **mongodb-rust-driver** → MongoDB 文档模型、聚合管道与变更流
+3. **Tokio** → 异步运行时基础
+4. **Crossbeam** → 无锁并发原语补充
+
 ### 路径 G：可观测性与系统监控（推荐优先级：高）
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -304,6 +339,8 @@ graph TD
 - [concept L4: 形式验证工具链](../../../../concept/04_formal/05_verification_toolchain.md) — Kani、Miri 对 unsafe crate 的验证实践
 - [concept L3: 异步编程](../../../../concept/03_advanced/02_async.md) — Tokio/Axum 的 async/await 语义基础
 - [concept L3: 并发编程](../../../../concept/03_advanced/01_concurrency.md) — Rayon、Bevy 系统的并发安全保证
+- [22_redis_architecture.md](22_redis_architecture.md) — redis-rs 缓存、消息队列与分布式协调
+- [23_mongodb_architecture.md](23_mongodb_architecture.md) — mongodb-rust-driver 文档数据库、NoSQL 与异步数据访问
 - [docs: Workflow Patterns 所有权分析](../../../../archive/rust-ownership-decidability/16-program-semantics/09-workflow-ownership-analysis.md) — 分布式系统中工作流模式与 Rust 所有权的交互
 
 ---
@@ -313,7 +350,7 @@ graph TD
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 > **最后更新**: 2026-05-23
-> **状态**: ✅ 21 crate 架构解构完成
+> **状态**: ✅ 23 crate 架构解构完成
 
 ---
 

@@ -198,6 +198,8 @@ $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用
 
 1. **持有关系**：$\Omega(A) \supset S$ 表示 $A$ 拥有 $S$
 
+   > 以下代码片段为示意性伪代码，非完整可编译示例。
+
    ```rust,ignore
 
    struct Adapter { inner: S }  // A 拥有 S
@@ -249,6 +251,8 @@ $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用
    - 借用检查器验证同一作用域内无冲突借用
 
 3. **委托链**：
+
+   > 以下代码片段为示意性伪代码，非完整可编译示例。
 
    ```rust,ignore
 
@@ -650,6 +654,8 @@ borrow_checker_proof
 
 **场景**：现有 `reqwest` 返回 `Result<Response, reqwest::Error>`；需适配为统一 `trait HttpClient` 返回 `Result<String, Box<dyn std::error::Error>>`。
 
+> 以下代码依赖外部 crate `reqwest`，非独立可编译示例。
+
 ```rust,ignore
 
 trait HttpClient {
@@ -754,6 +760,8 @@ fn fetch_data<H: HttpClient>(client: &H, url: &str) -> Result<String, Box<dyn st
 
 ### 反例 1：返回被适配者内部可变引用
 
+> 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
+
 ```rust,ignore
 
 impl Adapter {
@@ -768,6 +776,9 @@ impl Adapter {
 
 ### 反例 2：引用型 Adapter 生命周期不匹配
 
+> 以下代码故意展示编译失败，用于说明对应反例。
+
+> 以下代码片段为示意性伪代码，非完整可编译示例。
 ```rust,ignore
 
 struct Adapter<'a> { adaptee: &'a Adaptee }
@@ -786,6 +797,7 @@ fn make() -> Adapter<'static> {
 
 ### 反例 3：委托链中出现可变借用冲突
 
+> 以下代码片段为示意性伪代码，非完整可编译示例。
 ```rust,ignore
 
 impl Target for Adapter {

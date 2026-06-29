@@ -23,14 +23,15 @@
     - [L1 元概念](#l1-元概念)
     - [L2 核心概念族](#l2-核心概念族)
     - [L3 具体概念](#l3-具体概念)
-  - [三、关系边](#三关系边)
-  - [四、文档锚点](#四文档锚点)
+  - [三、关系类型与符号对照](#三关系类型与符号对照)
+  - [四、关系边](#四关系边)
+  - [五、文档锚点](#五文档锚点)
     - [4.1 形式化证明锚点](#41-形式化证明锚点)
     - [4.2 代码示例锚点](#42-代码示例锚点)
-  - [五、8 大主-topic 入口](#五8-大主-topic-入口)
-  - [六、阶段推进状态](#六阶段推进状态)
+  - [六、8 大主-topic 入口](#六8-大主-topic-入口)
+  - [七、阶段推进状态](#七阶段推进状态)
     - [剩余细化项（阶段 4 收尾）](#剩余细化项阶段-4-收尾)
-  - [七、权威来源索引](#七权威来源索引)
+  - [八、权威来源索引](#八权威来源索引)
   - [社区权威参考](#社区权威参考)
 
 ---
@@ -132,6 +133,8 @@
 | 服务组合 | 组合工程 | L3 | [software_design_theory/04_compositional_engineering/README.md](software_design_theory/04_compositional_engineering/README.md) | [software_design_theory/60_workflow_compositional_distributed_counterexamples.md](software_design_theory/60_workflow_compositional_distributed_counterexamples.md) §5 |
 | 分布式 ID | 分布式 | L3 | [software_design_theory/05_distributed/README.md](software_design_theory/05_distributed/README.md) | [software_design_theory/60_workflow_compositional_distributed_counterexamples.md](software_design_theory/60_workflow_compositional_distributed_counterexamples.md) §4 |
 | Actor 消息顺序 | 分布式 | L3 | [software_design_theory/05_distributed/README.md](software_design_theory/05_distributed/README.md) | [software_design_theory/60_workflow_compositional_distributed_counterexamples.md](software_design_theory/60_workflow_compositional_distributed_counterexamples.md) §6 |
+| Redis / redis-rs | Crate 架构 / 缓存 / 消息 / 分布式协调 | L3-L5 | [software_design_theory/07_crate_architectures/22_redis_architecture.md](software_design_theory/07_crate_architectures/22_redis_architecture.md) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) |
+| MongoDB / mongodb-rust-driver | Crate 架构 / 文档数据库 / NoSQL / 异步数据访问 | L3-L5 | [software_design_theory/07_crate_architectures/23_mongodb_architecture.md](software_design_theory/07_crate_architectures/23_mongodb_architecture.md) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) |
 | 微基准 | 实验研究 | L5 | [experiments/10_performance_benchmarks.md](experiments/10_performance_benchmarks.md) | [experiments/60_experiments_counterexamples.md](experiments/60_experiments_counterexamples.md) §1-§4 |
 | 并发基准 | 实验研究 | L5 | [experiments/10_concurrency_performance.md](experiments/10_concurrency_performance.md) | [experiments/60_experiments_counterexamples.md](experiments/60_experiments_counterexamples.md) §5 |
 | 内存分析 | 实验研究 | L5 | [experiments/10_memory_analysis.md](experiments/10_memory_analysis.md) | [experiments/60_experiments_counterexamples.md](experiments/60_experiments_counterexamples.md) §6 |
@@ -179,7 +182,30 @@
 
 ---
 
-## 三、关系边
+## 三、关系类型与符号对照
+
+> **来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/) |
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) |
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/) |
+> [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) |
+> [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
+>
+
+`10_concept_relationship_network.md` 使用符号关系（≡/⇒/⊥/∘/⊂）表达概念间语义；本知识图谱索引使用英文动词关系类型。
+下表给出两套术语的统一映射，使概念网络与 KG 边可以互相转换。
+
+| 符号 | 符号名称 | KG 关系类型 | 语义说明 | 典型场景 |
+|------|----------|-------------|----------|----------|
+| ≡ | 等价 | `equivalent_to` / `aligns_to` | 两概念语义可互换，或项目概念与权威来源对齐 | `Future` ≡ `async/await` |
+| ⇒ | 蕴含 | `implies` | A 成立必然导致 B 成立 | 所有权 ⇒ 移动语义 |
+| ⊥ | 互斥 | `contradicts` | 同一上下文中不能同时成立 | 共享借用 ⊥ 可变借用 |
+| ∘ | 组合 | `composes_with` / `depends_on` | A 与 B 组合形成新概念，或 A 的实现依赖 B | `Mutex ∘ Arc` ⇒ 线程安全共享可变 |
+| ⊂ | 层次/精化 | `refines` / `hierarchical` | A 是 B 的子集、特例或更精化的模型 | 移动语义 ⊂ 所有权 |
+
+> **映射规则**：符号网络的 ∘ 在本 KG 中根据语境拆分为 `composes_with`（强调语义组合）或 `depends_on`（强调实现依赖）；⊂ 拆分为 `refines`（强调更精确建模）或 `hierarchical`（强调层次包含）。
+
+## 四、关系边
 
 | 关系类型 | 源节点 | 目标节点 | 说明 | 锚点文档 |
 |----------|--------|----------|------|----------|
@@ -235,16 +261,47 @@
 | aligns_to | 学习路径 | 官方学习资源 | 项目学习路径与 TRPL/RBE/Rustlings/std 对齐 | [10_learning_and_interview_alignment.md](10_learning_and_interview_alignment.md) |
 | aligns_to | 学习路径 | 社区学习资源 | 项目学习路径与 course.rs/中文社区/Rust Japan/Exercism 对齐 | [10_learning_and_interview_alignment.md](10_learning_and_interview_alignment.md) |
 | maps_to | 面试题 | 权威来源 | 面试题目到官方规范、RFC、论文的映射 | [10_learning_and_interview_alignment.md](10_learning_and_interview_alignment.md) |
+| depends_on | Redis | 异步/await | Redis 异步客户端基于 Future 与 async/await 构建 | [software_design_theory/07_crate_architectures/22_redis_architecture.md](software_design_theory/07_crate_architectures/22_redis_architecture.md) |
+| depends_on | Redis | 并发安全 | MultiplexedConnection 的 Clone + Send 依赖 Send/Sync 保证 | [software_design_theory/07_crate_architectures/22_redis_architecture.md](software_design_theory/07_crate_architectures/22_redis_architecture.md) |
+| implements | Redis | 缓存 | Redis 提供键值缓存、TTL、LRU 近似淘汰 | [software_design_theory/07_crate_architectures/22_redis_architecture.md](software_design_theory/07_crate_architectures/22_redis_architecture.md) |
+| implements | Redis | 分布式 | Redis 提供 Pub/Sub、Streams、分布式锁、Cluster 协调 | [software_design_theory/07_crate_architectures/22_redis_architecture.md](software_design_theory/07_crate_architectures/22_redis_architecture.md) |
+| aligns_to | Redis | redis-rs docs | 项目 Redis 概念与 redis-rs 官方文档对齐 | [software_design_theory/07_crate_architectures/22_redis_architecture.md](software_design_theory/07_crate_architectures/22_redis_architecture.md) |
+| refines | MongoDB | NoSQL | MongoDB 是文档型 NoSQL 数据库的典型实现 | [software_design_theory/07_crate_architectures/23_mongodb_architecture.md](software_design_theory/07_crate_architectures/23_mongodb_architecture.md) |
+| refines | MongoDB | 文档数据库 | MongoDB 以 BSON 文档为数据模型 | [software_design_theory/07_crate_architectures/23_mongodb_architecture.md](software_design_theory/07_crate_architectures/23_mongodb_architecture.md) |
+| depends_on | MongoDB | 异步/await | mongodb-rust-driver 基于 Tokio 与 async/await 构建 | [software_design_theory/07_crate_architectures/23_mongodb_architecture.md](software_design_theory/07_crate_architectures/23_mongodb_architecture.md) |
+| implements | MongoDB | 分布式 | MongoDB 副本集/分片集群提供分布式文档存储 | [software_design_theory/07_crate_architectures/23_mongodb_architecture.md](software_design_theory/07_crate_architectures/23_mongodb_architecture.md) |
+| aligns_to | MongoDB | mongodb-rust-driver docs | 项目 MongoDB 概念与 mongodb-rust-driver 官方文档对齐 | [software_design_theory/07_crate_architectures/23_mongodb_architecture.md](software_design_theory/07_crate_architectures/23_mongodb_architecture.md) |
 | depends_on | 权威来源自动补全计划 | 权威来源缺口分析 | 补全计划基于缺口分析结果制定优先级 | [10_authoritative_source_completion_plan.md](10_authoritative_source_completion_plan.md) |
 | refines | 权威来源自动补全计划 | 覆盖率提升路径 | 为 P0/P1/P2 缺口提供推荐权威来源与优先级 | [10_authoritative_source_completion_plan.md](10_authoritative_source_completion_plan.md) |
 | implements | 权威来源对齐 / 100% 完成路线图 | 覆盖率提升路径 | 将补全计划落实为 P0/P1/P2 100% 覆盖的冲刺阶段与质量门禁 | [10_authoritative_source_100_percent_roadmap.md](10_authoritative_source_100_percent_roadmap.md) |
 | tracks | 权威来源对齐 / 100% 完成路线图 | 权威来源对齐网络 | 跟踪 P0/P1/P2 覆盖率与 12 项自动化检查状态 | [10_authoritative_source_100_percent_roadmap.md](10_authoritative_source_100_percent_roadmap.md) |
 
+| depends_on | 生命周期 | 所有权 | 生命周期语义建立在所有权规则之上；引用的有效性取决于被引用值的所有权 | [type_theory/10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md) / P0: [Rust Reference – Lifetime elision](https://doc.rust-lang.org/reference/lifetime-elision.html) |
+| depends_on | Pin | Future | `Future::poll` 要求 `Pin<&mut Self>`，Pin 是 Future 安全自引用的实现依赖 | [formal_methods/10_pin_self_referential.md](formal_methods/10_pin_self_referential.md) / P0: [Async Book – Pinning](https://rust-lang.github.io/async-book/04_pinning/01_chapter.html) |
+| depends_on | unsafe | 借用/所有权 | `unsafe` 块绕过借用检查器，其正确性依赖对所有权/借用规则的手工维护 | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md) / P0: [Rustonomicon – Meet Safe and Unsafe](https://doc.rust-lang.org/nomicon/meet-safe-and-unsafe.html) |
+| depends_on | FFI | unsafe | FFI 调用必须位于 `unsafe` 块/函数中，正确性依赖 unsafe 语义 | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md) / P0: [Rustonomicon – FFI](https://doc.rust-lang.org/nomicon/ffi.html) |
+| depends_on | 模块系统 | crate-type | `crate-type` 决定模块系统编译产物形态（bin/lib/cdylib 等） | [formal_modules/20_linkage_and_symbols.md](formal_modules/20_linkage_and_symbols.md) / P0: [Cargo Book – crate-type](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#the-crate-type-field) |
+| implies | 所有权 | 移动语义 | 所有权规则默认通过移动转移资源 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) / P0: [TRPL – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) |
+| implies | 借用 | 生命周期 | 借用产生引用，引用必须携带生命周期约束 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) / P0: [Rust Reference – Lifetime elision](https://doc.rust-lang.org/reference/lifetime-elision.html) |
+| implies | RAII | 资源管理 | RAII 将资源获取与对象生命周期绑定，是资源管理的核心惯用法 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) / P0: [TRPL – Drop](https://doc.rust-lang.org/book/ch15-03-drop.html) |
+| implies | Send+Sync | 并发安全 | 类型同时满足 Send 与 Sync 时可在多线程间安全共享 | [formal_methods/10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) / P0: [Rust Reference – Send/Sync](https://doc.rust-lang.org/reference/special-types-and-traits.html) |
+| contradicts | Copy | Drop | 编译器禁止同时实现 Copy 与 Drop | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) / P0: [Rust Reference – Copy](https://doc.rust-lang.org/reference/special-types-and-traits.html#copy) |
+| contradicts | 同一数据共享+可变借用 | 借用规则 | 同一数据的共享借用与可变借用不能共存 | [10_counter_examples_compendium.md](10_counter_examples_compendium.md) / P0: [TRPL – References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html) |
+| contradicts | Pin 契约违反 | 自引用安全 | 破坏 Pin 的不移动契约将导致自引用指针失效 | [formal_methods/10_pin_self_referential.md](formal_methods/10_pin_self_referential.md) / P0: [Async Book – Pin contract](https://rust-lang.github.io/async-book/04_pinning/01_chapter.html) |
+| implements | Mutex | 内部可变性 | `Mutex<T>` 在共享所有权下提供内部可变性 | [formal_methods/10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) / P0: [std::sync::Mutex](https://doc.rust-lang.org/std/sync/struct.Mutex.html) |
+| implements | Arc | 共享所有权 | `Arc<T>` 通过原子引用计数实现线程安全的共享所有权 | [formal_methods/10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) / P0: [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html) |
+| implements | Channel | 消息传递模式 | `std::sync::mpsc` 实现线程间消息传递模式 | [formal_methods/10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) / P0: [TRPL – Message Passing](https://doc.rust-lang.org/book/ch16-02-message-passing.html) |
+| refines | Pin | 所有权 | Pin 是对所有权模型的精化，保证特定值不被移动 | [formal_methods/10_pin_self_referential.md](formal_methods/10_pin_self_referential.md) / P1: [RustBelt – Pin reasoning](https://plv.mpi-sws.org/rustbelt/popl18/) |
+| refines | core::range | 范围/迭代器 | `core::range` 模块精化了 Rust 的范围与迭代器抽象 | [10_rust_194_research_update.md](10_rust_194_research_update.md) / P0: [Rust 1.96 Release Notes – core::range](https://releases.rs/1.96.0/) |
+| version_introduces | Edition 2024 | tail-expr drop order | 2024 Edition 改变尾部表达式临时值作用域/drop 顺序 | [10_rust_194_research_update.md](10_rust_194_research_update.md) / P0: [Edition Guide – Tail expression temporary scope](https://doc.rust-lang.org/edition-guide/rust-2024/temporary-tail-expr-scope.html) |
+| version_introduces | 1.95 | if-let guards | Rust 1.95 稳定化 `if let` guards | [10_rust_194_research_update.md](10_rust_194_research_update.md) / P0: [Rust 1.95 Release Notes](https://releases.rs/1.95.0/) |
+| version_introduces | 1.96 | core::range / assert_matches! | Rust 1.96 引入 `core::range` 模块并稳定化 `assert_matches!` | [10_rust_194_195_feature_matrix.md](10_rust_194_195_feature_matrix.md) / P0: [Rust 1.96 Release Notes](https://releases.rs/1.96.0/) |
+
 > **待补全**：为每条边增加具体文档行号锚点。
 
 ---
 
-## 四、文档锚点
+## 五、文档锚点
 
 ### 4.1 形式化证明锚点
 
@@ -267,13 +324,14 @@
 | 宏系统 | `crates/c11_macro_system` | [crates/c11_macro_system/examples/](../../crates/c11_macro_system/examples/) |
 | FFI / Embedded / WASM | `crates/c12_wasm` / `crates/c13_embedded` | [crates/c12_wasm/examples/](../../crates/c12_wasm/examples/) / [crates/c13_embedded/examples/](../../crates/c13_embedded/examples/) |
 | 异步/并发示例 | `crates/c06_async` / `crates/c05_threads` | [crates/c06_async/examples/](../../crates/c06_async/examples/) / [crates/c05_threads/examples/](../../crates/c05_threads/examples/) |
+| Redis 示例 | `crates/c06_async` | [crates/c06_async/examples/redis_basic_kv.rs](../../crates/c06_async/examples/redis_basic_kv.rs) / [redis_pub_sub.rs](../../crates/c06_async/examples/redis_pub_sub.rs) / [redis_distributed_lock.rs](../../crates/c06_async/examples/redis_distributed_lock.rs) |
 | 验证工具示例 | `crates/c15_verification_tools` | [crates/c15_verification_tools/examples/](../../crates/c15_verification_tools/examples/) |
 | 顶层 examples 目录 | `examples/` | [examples/](../../examples/) |
 | 形式化验证工具 | `crates/c15_verification_tools` | [crates/c15_verification_tools/README.md](../../crates/c15_verification_tools/README.md) |
 
 ---
 
-## 五、8 大主-topic 入口
+## 六、8 大主-topic 入口
 
 | 主-topic | 主文档 | 子主题索引 | 反例 |
 |----------|--------|------------|------|
@@ -288,7 +346,7 @@
 
 ---
 
-## 六、阶段推进状态
+## 七、阶段推进状态
 
 - **阶段 0 基线修复**: ✅ 完成
 - **阶段 1 知识图谱骨架**: ✅ 完成 — 统一索引、层级/概念族标注、核心节点与边已建立
@@ -315,7 +373,7 @@
 
 ---
 
-## 七、权威来源索引
+## 八、权威来源索引
 
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)

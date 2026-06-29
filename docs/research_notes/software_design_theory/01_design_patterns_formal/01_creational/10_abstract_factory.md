@@ -179,6 +179,8 @@ $$\Omega(\mathit{create}_i(f)) \cap \Omega(f) = \emptyset$$
 
 1. **trait 定义**：
 
+   > 以下代码片段为示意性伪代码，非完整可编译示例。
+
    ```rust,ignore
 
    trait GuiFactory {
@@ -296,6 +298,8 @@ Abstract Factory 为纯 Safe；trait 多态工厂、产品所有权转移，无 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+> 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
 ```rust,ignore
 
@@ -673,6 +677,7 @@ ownership_model T2
 
 ### 反例 1：混用不同族产品
 
+> 以下代码片段为示意性伪代码，非完整可编译示例。
 ```rust,ignore
 
 let win_factory = WinFactory;
@@ -697,6 +702,7 @@ let ui: (WinButton, MacDialog) = (
 
 ### 反例 2：缺失 trait bound 导致方法不可用
 
+> 以下代码片段为示意性伪代码，非完整可编译示例。
 ```rust,ignore
 
 trait GuiFactory {
@@ -721,6 +727,7 @@ fn use_button<F: GuiFactory>(f: &F) {
 
 ### 反例 3：试图返回工厂局部借用
 
+> 以下代码片段为示意性伪代码，非完整可编译示例。
 ```rust,ignore
 
 struct BadFactory { btn: WinButton }

@@ -607,6 +607,7 @@ fn main() {
 
 ### 反例 1：回调中修改 Subject 导致借用冲突
 
+> 以下代码片段为示意性伪代码，非完整可编译示例。
 ```rust,ignore
 
 struct Subject { observers: Vec<Box<dyn Fn()>> }
@@ -629,6 +630,7 @@ impl Subject {
 
 ### 反例 2：channel 发送未处理错误
 
+> 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 ```rust,ignore
 
 self.sender.send(event).unwrap();
@@ -641,6 +643,7 @@ self.sender.send(event).unwrap();
 
 ### 反例 3：观察者生命周期短于 Subject
 
+> 以下代码片段为示意性伪代码，非完整可编译示例。
 ```rust,ignore
 
 let subject = Subject::new();

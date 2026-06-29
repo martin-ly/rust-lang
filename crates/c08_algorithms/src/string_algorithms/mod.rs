@@ -526,6 +526,15 @@ impl SuffixAutomaton {
         }
         sam
     }
+
+    pub fn from_bytes(text: &[u8]) -> Self {
+        let mut sam = Self::new();
+        for &b in text {
+            sam.extend(b);
+        }
+        sam
+    }
+
     pub fn count_distinct_substrings(&self) -> usize {
         let mut total = 0usize;
         for i in 1..self.st.len() {
@@ -539,6 +548,10 @@ impl SuffixAutomaton {
         total
     }
     pub fn longest_common_substring_len(&self, t: &str) -> usize {
+        self.longest_common_substring(t)
+    }
+
+    pub fn longest_common_substring(&self, t: &str) -> usize {
         let mut v = 0usize;
         let mut l = 0usize;
         let mut best = 0usize;

@@ -88,6 +88,7 @@ criterion = { workspace = true }
 anyhow = { workspace = true }
 axum = { workspace = true }
 ring = { workspace = true }
+mongodb = "3.0"
 
 aes-gcm = "0.10"
 sha2 = { workspace = true }

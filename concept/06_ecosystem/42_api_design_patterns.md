@@ -23,6 +23,8 @@
 >
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 > **前置概念**: N/A
+>
+> **说明**: 本文档包含可直接编译的示例（`rust`）、依赖外部 crate（如 axum、tonic、async-graphql）的示意代码（`rust,ignore`），以及展示运行时/逻辑错误的边界测试（`rust,ignore`）。
 ---
 
 > **来源**: [Fielding 2000 — Architectural Styles and the Design of Network-based Software Architectures](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm) ·

@@ -234,6 +234,8 @@ $$\mathit{handle}(h, r) \text{ 不处理 } \implies \mathit{next}(h) \neq \mathr
 
 1. **递归处理**：
 
+   > 以下代码片段为示意性伪代码，非完整可编译示例。
+
    ```rust,ignore
 
    fn handle(&self, req: &Request) -> bool {
@@ -758,6 +760,8 @@ let chain = LogHandler {
 
 ### 反例 1：循环链导致栈溢出
 
+> 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
+
 ```rust,ignore
 
 h1.set_next(Box::new(h2));
@@ -770,6 +774,9 @@ h1.handle("x"); // stack overflow
 
 ### 反例 2：trait object 不满足对象安全
 
+> 以下代码故意展示编译失败，用于说明对应反例。
+
+> 以下代码片段为示意性伪代码，非完整可编译示例。
 ```rust,ignore
 
 trait Handler { fn handle<T>(&self, req: T); }
@@ -779,6 +786,8 @@ trait Handler { fn handle<T>(&self, req: T); }
 **编译器错误**：`cannot be made into an object`。
 
 ### 反例 3：请求生命周期不足
+
+> 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
 ```rust,ignore
 

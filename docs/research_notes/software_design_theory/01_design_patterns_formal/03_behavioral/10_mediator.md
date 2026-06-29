@@ -178,6 +178,7 @@ $$\text{避免循环引用；用 }\mathit{Weak}\text{ 或重构为无环}$$
 
 1. **弱引用模式**：
 
+   > 以下代码片段为示意性伪代码，非完整可编译示例。
    ```rust,ignore
 
    struct Mediator { colleagues: Vec<Weak<Colleague>> }
@@ -216,6 +217,7 @@ channel 或回调消息传递满足借用规则；无数据竞争。
 
 1. **channel 模式**：
 
+   > 以下代码片段为示意性伪代码，非完整可编译示例。
    ```rust,ignore
 
    let (tx, rx) = mpsc::channel();
@@ -664,6 +666,7 @@ fn run_room(rx: mpsc::Receiver<ChatMessage>) {
 
 ### 反例 1：组件直接引用彼此
 
+> 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 ```rust,ignore
 
 struct A { b: Rc<RefCell<B>> }
@@ -676,6 +679,7 @@ struct B { a: Rc<RefCell<A>> }
 
 ### 反例 2：Mediator 持有组件可变引用导致借用冲突
 
+> 以下代码片段为示意性伪代码，非完整可编译示例。
 ```rust,ignore
 
 struct Mediator { components: Vec<&mut Component> }
@@ -686,6 +690,7 @@ struct Mediator { components: Vec<&mut Component> }
 
 ### 反例 3：channel 关闭后发送
 
+> 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 ```rust,ignore
 
 drop(rx);

@@ -762,6 +762,8 @@ impl Editor {
 
 ### 反例 1：undo 与 execute 不匹配
 
+> 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
+
 ```rust,ignore
 
 impl Command for AddText {
@@ -778,6 +780,9 @@ impl Command for AddText {
 
 ### 反例 2：命令历史持有已移动接收者
 
+> 以下代码故意展示编译失败，用于说明对应反例。
+
+> 以下代码片段为示意性伪代码，非完整可编译示例。
 ```rust,ignore
 
 let cmd = AddText { receiver: doc };
@@ -791,6 +796,8 @@ doc.borrow_mut().push_str("x"); // 错误
 **编译器错误**：`use of moved value: doc`。
 
 ### 反例 3：RefCell 运行时借用冲突
+
+> 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
 ```rust,ignore
 

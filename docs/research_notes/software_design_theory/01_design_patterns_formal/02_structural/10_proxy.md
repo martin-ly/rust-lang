@@ -197,6 +197,8 @@ $$\mathit{delegate}(p) \text{ 满足借用/所有权规则；无循环依赖}$$
 
 1. **虚拟代理**：
 
+   > 以下代码片段为示意性伪代码，非完整可编译示例。
+
    ```rust,ignore
 
    struct LazyProxy { inner: OnceLock<RealSubject> }
@@ -244,6 +246,8 @@ $$\mathit{delegate}(p) \text{ 满足借用/所有权规则；无循环依赖}$$
 **证明**：
 
 1. **权限检查**：
+
+   > 以下代码片段为示意性伪代码，非完整可编译示例。
 
    ```rust,ignore
 
@@ -705,6 +709,8 @@ borrow_checker_proof
 
 ### 反例 1：RefCell 运行时借用冲突
 
+> 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
+
 ```rust,ignore
 
 let proxy = ProxyImage { ... };
@@ -721,6 +727,9 @@ proxy.display(); // panic：已有不可变借用，尝试可变借用
 
 ### 反例 2：代理生命周期短于主题
 
+> 以下代码故意展示编译失败，用于说明对应反例。
+
+> 以下代码片段为示意性伪代码，非完整可编译示例。
 ```rust,ignore
 
 struct Proxy<'a> { subject: &'a RealImage }
@@ -732,6 +741,8 @@ fn make() -> Proxy<'static> { let r = RealImage::new(""); Proxy { subject: &r } 
 **编译器错误**：`cannot return value referencing local variable r`。
 
 ### 反例 3：保护代理未验证权限
+
+> 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
 ```rust,ignore
 

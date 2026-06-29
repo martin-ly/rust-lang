@@ -71,6 +71,12 @@ impl<T: Ord> PriorityQueue<T> {
             self.push(v);
         }
     }
+
+    pub fn from_vec(vec: Vec<T>, kind: HeapKind) -> Self {
+        let mut pq = Self::new(kind);
+        pq.extend(vec);
+        pq
+    }
 }
 
 /// 异步批量构建一个堆并返回（CPU 密集：spawn_blocking）

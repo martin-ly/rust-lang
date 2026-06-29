@@ -398,16 +398,17 @@ deque.push_back(2);   // 尾部插入 O(1)
 // 本模块提供的高级数据结构
 use c08_algorithms::data_structure::*;
 
-// 线段树 - 区间查询/更新
-let mut segtree = SegmentTree::new(&data);
-let sum = segtree.query(l, r);  // O(log n)
+// 线段树 - 区间求和查询/更新
+let data = vec![1i64, 3, 5, 7, 9];
+let mut segtree = SegmentTree::from_slice(&data);
+let sum = segtree.query_sum(1, 3);  // O(log n)
 
 // Fenwick树 - 前缀和
-let mut fenwick = FenwickTree::new(n);
+let mut fenwick = Fenwick::new(n);
 fenwick.add(i, x);  // O(log n)
 
 // LRU缓存
-let mut lru = LRUCache::new(capacity);
+let mut lru = LruCache::new(capacity);
 lru.get(&key);  // O(1)
 ```
 

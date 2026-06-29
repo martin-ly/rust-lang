@@ -189,6 +189,8 @@ $$\mathit{build}(b) = t \implies \nexists b': B,\, b' = b \land \mathit{build}(b
 
 2. **单次使用保证**：
 
+   > 以下代码片段为示意性伪代码，非完整可编译示例。
+
    ```rust,ignore
 
    let builder = ConfigBuilder::new();
@@ -221,6 +223,8 @@ $$\mathit{build}(b) = t \implies \nexists b': B,\, b' = b \land \mathit{build}(b
 
 1. **类型状态定义**：
 
+   > 以下代码片段为示意性伪代码，非完整可编译示例。
+
    ```rust,ignore
 
    struct ConfigBuilder<State> { host: Option<String>, port: Option<u16>, _state: PhantomData<State> }
@@ -234,6 +238,8 @@ $$\mathit{build}(b) = t \implies \nexists b': B,\, b' = b \land \mathit{build}(b
    ```
 
 2. **状态转换**：
+
+   > 以下代码片段为示意性伪代码，非完整可编译示例。
 
    ```rust,ignore
 
@@ -319,7 +325,7 @@ Builder 为纯 Safe；链式 `set` + `build(self)` 消费所有权，无 `unsafe
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-```rust,ignore
+```rust,no_run
 
 struct Config {
 
@@ -733,7 +739,7 @@ ownership_model T2
 
 **场景**：构建 HTTP 请求；URL 必填，headers/body 可选；链式调用 + `ok_or` 校验。
 
-```rust,ignore
+```rust,no_run
 
 struct HttpRequest { url: String, headers: Vec<(String, String)>, body: Option<String> }
 
@@ -863,6 +869,7 @@ let req = HttpRequestBuilder::new()
 
 ### 反例 1：缺少必填字段
 
+> 以下代码片段为示意性伪代码，非完整可编译示例。
 ```rust,ignore
 
 let cfg = ConfigBuilder::new()
@@ -881,6 +888,7 @@ let cfg = ConfigBuilder::new()
 
 ### 反例 2：重复 build
 
+> 以下代码片段为示意性伪代码，非完整可编译示例。
 ```rust,ignore
 
 let b = ConfigBuilder::new().host("h".into()).port(80);
@@ -897,6 +905,7 @@ let c2 = b.build(); // 错误：b 已移动
 
 ### 反例 3：可变借用链式冲突
 
+> 以下代码片段为示意性伪代码，非完整可编译示例。
 ```rust,ignore
 
 let mut b = ConfigBuilder::new();

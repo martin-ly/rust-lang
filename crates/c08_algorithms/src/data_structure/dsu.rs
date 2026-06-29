@@ -38,6 +38,10 @@ impl DisjointSet {
         }
         true
     }
+
+    pub fn connected(&mut self, a: usize, b: usize) -> bool {
+        self.find(a) == self.find(b)
+    }
 }
 
 #[cfg(test)]
