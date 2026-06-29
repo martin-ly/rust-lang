@@ -21,8 +21,8 @@
     - [图算法](#图算法)
     - [动态规划](#动态规划)
   - [📊 数据结构](#-数据结构)
-    - [栈和队列](#栈和队列)
-    - [树结构](#树结构)
+    - [优先队列与 LRU](#优先队列与-lru)
+    - [线段树](#线段树)
     - [哈希表](#哈希表)
     - [BTreeMap/BTreeSet 与 append（Rust 1.93）](#btreemapbtreeset-与-appendrust-193)
   - [💡 代码示例](#-代码示例)
@@ -70,9 +70,9 @@
 
 > **快速参考** | [完整文档](../../../crates/c08_algorithms/docs/README.md) | [代码示例](../../../crates/c08_algorithms/examples/README.md)
 > **创建日期**: 2026-01-26
-> **最后更新**: 2026-05-08
+> **最后更新**: 2026-06-29
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-> **状态**: ✅ 已完成
+> **状态**: ✅ 阶段 0 API 对齐完成
 
 ---
 
@@ -87,21 +87,25 @@
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
-use c08_algorithms::algorithms::sorting::*;
+use c08_algorithms::sorting::{sort_sync, sort_parallel, SortingAlgo};
 
 let mut data = vec![64, 34, 25, 12, 22, 11, 90];
 
-// 快速排序
-quicksort(&mut data);
-println!("Sorted: {:?}", data);
+// 统一同步入口：原地排序
+sort_sync(&mut data, SortingAlgo::Quick);
+println!("Quick sorted: {:?}", data);
 
-// 归并排序
-let sorted = mergesort(&data);
-println!("Sorted: {:?}", sorted);
+// 归并排序同样通过 sort_sync 选择算法
+sort_sync(&mut data, SortingAlgo::Merge);
+println!("Merge sorted: {:?}", data);
 
 // 堆排序
-heapsort(&mut data);
-println!("Sorted: {:?}", data);
+sort_sync(&mut data, SortingAlgo::Heap);
+println!("Heap sorted: {:?}", data);
+
+// 并行排序入口
+sort_parallel(&mut data, SortingAlgo::Quick);
+println!("Parallel sorted: {:?}", data);
 ```
 
 ### 搜索算法
@@ -111,18 +115,25 @@ println!("Sorted: {:?}", data);
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
-use c08_algorithms::algorithms::searching::*;
+use c08_algorithms::searching::{
+    binary_search_sync, linear_search_sync, parallel_search,
+};
 
 let data = vec![1, 3, 5, 7, 9, 11, 13, 15];
 
-// 二分搜索
-if let Some(index) = binary_search(&data, 7) {
-    println!("Found at index: {}", index);
+// 二分搜索：返回 Result<Option<usize>>
+if let Ok(Some(index)) = binary_search_sync(&data, &7) {
+    println!("Binary search found at index: {}", index);
 }
 
-// 线性搜索
-if let Some(index) = linear_search(&data, 7) {
-    println!("Found at index: {}", index);
+// 线性搜索：返回 Option<usize>
+if let Some(index) = linear_search_sync(&data, &7) {
+    println!("Linear search found at index: {}", index);
+}
+
+// 并行搜索：在未排序数据中查找目标索引
+if let Some(index) = parallel_search(&data, &7) {
+    println!("Parallel search found at index: {}", index);
 }
 ```
 
@@ -137,6 +148,9 @@ if let Some(index) = linear_search(&data, 7) {
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
+
+> 在 `c08_algorithms` 中，排序统一通过 `sorting::sort_sync(&mut data, SortingAlgo::*)`
+> 调用；并行版本使用 `sorting::sort_parallel(&mut data, SortingAlgo::*)`。
 
 | 算法     | 时间复杂度 | 空间复杂度 | 稳定性 | 使用场景   |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -163,17 +177,32 @@ if let Some(index) = linear_search(&data, 7) {
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
-use c08_algorithms::algorithms::graph::*;
+use c08_algorithms::graph::{bfs_shortest_path_sync, dijkstra_sync};
+use std::collections::HashMap;
 
-// BFS (广度优先搜索)
-let graph = Graph::new(vertices, edges);
-let path = bfs(&graph, start, end)?;
+// 非加权图：邻接表 HashMap<T, Vec<T>>
+let mut graph = HashMap::new();
+graph.insert(0, vec![1, 2]);
+graph.insert(1, vec![2]);
+graph.insert(2, vec![3]);
+graph.insert(3, vec![]);
 
-// DFS (深度优先搜索)
-let path = dfs(&graph, start, end)?;
+// BFS 最短路径（非加权）：返回 Option<Vec<T>>
+if let Some(path) = bfs_shortest_path_sync(&graph, &0, &3) {
+    println!("BFS shortest path: {:?}", path);
+}
 
-// 最短路径 (Dijkstra)
-let distances = dijkstra(&graph, start)?;
+// 加权图：邻接表 HashMap<T, Vec<(T, f64)>>
+let mut weighted = HashMap::new();
+weighted.insert(0, vec![(1, 1.0), (2, 4.0)]);
+weighted.insert(1, vec![(2, 2.0), (3, 5.0)]);
+weighted.insert(2, vec![(3, 1.0)]);
+weighted.insert(3, vec![]);
+
+// Dijkstra：返回 (距离表 HashMap<T, f64>, 前驱表 HashMap<T, T>)
+let (distances, predecessors) = dijkstra_sync(&weighted, &0);
+println!("Distances: {:?}", distances);
+println!("Predecessors: {:?}", predecessors);
 ```
 
 ### 动态规划
@@ -183,16 +212,20 @@ let distances = dijkstra(&graph, start)?;
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore
-use c08_algorithms::algorithms::dynamic_programming::*;
+use c08_algorithms::dynamic_programming::{lcs_sync, knapsack_01_sync};
 
-// 斐波那契数列
-let fib_n = fibonacci(10);
+// 最长公共子序列：返回长度（usize）
+let s1 = b"ABCDGH";
+let s2 = b"AEDFHR";
+let lcs_len = lcs_sync(s1, s2);
+println!("LCS length: {}", lcs_len);
 
-// 最长公共子序列
-let lcs = longest_common_subsequence("ABCDGH", "AEDFHR");
-
-// 0-1 背包问题
-let max_value = knapsack_01(weights, values, capacity);
+// 0-1 背包问题：返回最大价值（i64）
+let weights = vec![2usize, 2, 6, 5, 4];
+let values = vec![6i64, 3, 5, 4, 6];
+let capacity = 10usize;
+let max_value = knapsack_01_sync(&weights, &values, capacity);
+println!("Max knapsack value: {}", max_value);
 ```
 
 ---
@@ -201,52 +234,54 @@ let max_value = knapsack_01(weights, values, capacity);
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 栈和队列
+### 优先队列与 LRU
 
-> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-```rust,ignore
-use c08_algorithms::data_structures::*;
+> 本 crate 未提供基础 `Stack` / `Queue` 类型，可直接使用 `Vec` / `VecDeque`。
+> 这里展示 crate 实际提供的数据结构：`PriorityQueue` 与 `LruCache`。
 
-// 栈
-let mut stack = Stack::new();
-stack.push(1);
-stack.push(2);
-if let Some(value) = stack.pop() {
+```rust,ignore
+use c08_algorithms::data_structure::{
+    lru_cache::LruCache,
+    priority_queue::{HeapKind, PriorityQueue},
+};
+
+// 优先队列（最大堆）
+let mut pq = PriorityQueue::new(HeapKind::Max);
+pq.extend(vec![3, 1, 4, 1, 5]);
+while let Some(value) = pq.pop() {
     println!("Popped: {}", value);
 }
 
-// 队列
-let mut queue = Queue::new();
-queue.enqueue(1);
-queue.enqueue(2);
-if let Some(value) = queue.dequeue() {
-    println!("Dequeued: {}", value);
-}
+// LRU 缓存
+let mut cache = LruCache::new(2);
+cache.put("a", 1);
+cache.put("b", 2);
+println!("{:?}", cache.get(&"a"));
+cache.put("c", 3); // 淘汰最早未使用的条目
 ```
 
-### 树结构
+### 线段树
 
-> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+>
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+
+> 本 crate 未提供 `BinarySearchTree`，实际提供的是区间查询结构 `SegmentTree`。
 
 ```rust,ignore
-use c08_algorithms::data_structures::tree::*;
+use c08_algorithms::data_structure::segtree::SegmentTree;
 
-// 二叉搜索树
-let mut bst = BinarySearchTree::new();
-bst.insert(5);
-bst.insert(3);
-bst.insert(7);
+// 线段树：点更新、区间和查询，O(log n)
+let arr = [1, 2, 3, 4, 5];
+let mut st = SegmentTree::from_slice(&arr);
+println!("Sum[1..3] = {}", st.query_sum(1, 3));
 
-if let Some(value) = bst.search(3) {
-    println!("Found: {}", value);
-}
-
-// 遍历
-let inorder = bst.inorder_traversal();
-println!("Inorder: {:?}", inorder);
+st.update_point(2, 10);
+println!("After update, Sum[1..3] = {}", st.query_sum(1, 3));
 ```
 
 ### 哈希表
@@ -880,8 +915,9 @@ fn fib(n: usize) -> usize {
 
 ---
 
-**最后更新**: 2026-05-08
-**Rust 版本**: 1.96.0+ (Edition 2024)
+**文档版本**: 1.2
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-06-29
 **提示**: 使用 `cargo doc --open` 查看完整 API 文档
 
 ---
@@ -1311,10 +1347,10 @@ impl StreamProcessor {
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [来源: Authority Source Sprint Batch 8]
 
-**文档版本**: 1.1
+**文档版本**: 1.2
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**最后更新**: 2026-06-29
+**状态**: ✅ 阶段 0 API 对齐完成
 
 ---
 

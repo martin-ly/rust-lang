@@ -2,7 +2,6 @@
 
 > **注意**: 本文档描述的是 Rust 1.91 的异步编程特性，当前版本为 Rust 1.92.0。
 > 请参考 [RUST_192_ASYNC_IMPROVEMENTS.md](RUST_192_ASYNC_IMPROVEMENTS.md) 了解 Rust 1.92.0 的最新异步改进。
-
 > **文档版本**: 1.0
 > **创建日期**: 2025-01-27
 > **适用版本**: Rust 1.91.0+

@@ -15,7 +15,7 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: 分析 → 评价
-> **定位**: 本目录对 Rust 生态中 **23 个核心工业级 crate** 进行系统性架构解构，揭示类型系统、零成本抽象、组合性设计在真实工程中的运用方式。
+> **定位**: 本目录对 Rust 生态中 **25 个核心工业级 crate** 进行系统性架构解构，揭示类型系统、零成本抽象、组合性设计在真实工程中的运用方式。
 > **方法论对齐**: 软件架构分析 (Software Architecture Analysis) · 设计恢复 (Design Recovery) · 架构权衡分析方法 (ATAM)
 
 ---
@@ -97,6 +97,8 @@
 | 21 | **mio** | IO 多路复用 | `Poll` + `Registry` + `Token` + `Waker` | 跨平台 epoll/kqueue/IOCP 统一抽象 | ✅ 与直接 epoll 零额外开销 | [21_mio_architecture.md](21_mio_architecture.md) |
 | 22 | **redis-rs** | 缓存 / 消息 / 分布式协调 | `Client` → `MultiplexedConnection` / `ConnectionManager` / `PubSub` / `ClusterClient` | `FromRedisValue` / `ToRedisArgs` trait、命令返回类型静态化 | ✅ 单连接多路复用零额外连接开销 | [22_redis_architecture.md](22_redis_architecture.md) |
 | 23 | **mongodb-rust-driver** | 文档数据库 / NoSQL | `Client` → `Database` → `Collection<T>` | `Serialize`/`Deserialize` 类型参数、`bson::doc!` 编译期构造 | ✅ 内置连接池、BSON 原生模型 | [23_mongodb_architecture.md](23_mongodb_architecture.md) |
+| 24 | **regex** | 文本处理 / 模式匹配 | `Regex` / `RegexBuilder` / `RegexSet` | 不可变 `Regex` 共享、`Captures<'t>` 生命周期借用 | ✅ 线性时间保证、DFA/NFA/Hybrid 引擎 | [24_regex_architecture.md](24_regex_architecture.md) |
+| 25 | **chrono** | 日期时间 / 时区 | `DateTime<Tz>` / `NaiveDateTime` / `Duration` | `TimeZone` trait 类型化时区、`TimeDelta` 正负 Duration | ✅ Naive 与带时区类型在编译期分离 | [25_chrono_architecture.md](25_chrono_architecture.md) |
 
 > [来源: crates.io download statistics · docs.rs API documentation]
 
@@ -156,8 +158,16 @@ graph TD
         MONGODB[mongodb-rust-driver<br/>MongoDB 客户端]
     end
 
+    subgraph 文本处理与验证层["文本处理与验证层"]
+        REGEX[regex<br/>正则表达式引擎]
+    end
+
     subgraph TUI 层["TUI 层"]
         TUI[Ratatui<br/>终端界面]
+    end
+
+    subgraph 日期时间层["日期时间层"]
+        CHRONO[chrono<br/>日期时间]
     end
 
     TOKIO --> AXUM
@@ -182,10 +192,13 @@ graph TD
     MIO --> HYPER
     REDIS --> TOKIO
     MONGODB --> TOKIO
+    REGEX --> CLAP
+    REGEX --> REQ
     TUI --> CLAP
+    CHRONO --> TOKIO
 ```
 
-> **认知功能**: 此图展示 14 个 crate 的**依赖层级关系**——基础设施层 crate 被上层框架依赖，形成 Rust 生态的「技术栈地基」。
+> **认知功能**: 此图展示 16 个 crate 的**依赖层级关系**——基础设施层 crate 被上层框架依赖，形成 Rust 生态的「技术栈地基」。
 > [来源: crates.io dependency graph analysis]
 
 ---
@@ -270,6 +283,7 @@ graph TD
 4. **mongodb-rust-driver** → 文档数据库与 NoSQL 数据持久化
 5. **Rayon** → 数据并行加速计算
 6. **nalgebra/ndarray** → 数值计算与科学计算
+7. **chrono** → 日期时间处理、时区计算与格式化解析
 
 ### 路径 C：系统编程与图形（推荐优先级：中）
 >
@@ -341,16 +355,18 @@ graph TD
 - [concept L3: 并发编程](../../../../concept/03_advanced/01_concurrency.md) — Rayon、Bevy 系统的并发安全保证
 - [22_redis_architecture.md](22_redis_architecture.md) — redis-rs 缓存、消息队列与分布式协调
 - [23_mongodb_architecture.md](23_mongodb_architecture.md) — mongodb-rust-driver 文档数据库、NoSQL 与异步数据访问
+- [24_regex_architecture.md](24_regex_architecture.md) — regex 正则表达式引擎、文本匹配与验证
+- [25_chrono_architecture.md](25_chrono_architecture.md) — chrono 日期时间、时区、Duration 与格式化解析
 - [docs: Workflow Patterns 所有权分析](../../../../archive/rust-ownership-decidability/16-program-semantics/09-workflow-ownership-analysis.md) — 分布式系统中工作流模式与 Rust 所有权的交互
 
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [crates.io](https://crates.io/) · [docs.rs](https://docs.rs/)
 >
-> **文档版本**: 1.0
+> **文档版本**: 1.1
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-> **最后更新**: 2026-05-23
-> **状态**: ✅ 23 crate 架构解构完成
+> **最后更新**: 2026-06-29
+> **状态**: ✅ 25 crate 架构解构完成
 
 ---
 

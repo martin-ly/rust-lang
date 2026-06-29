@@ -11,6 +11,7 @@ keywords = ["process", "ipc", "synchronization", "system-programming"]
 categories = ["system-programming", "concurrency"]
 
 [dependencies]
+regex = "1.11"
 tokio = { workspace = true, optional = true }
 tokio-util = { workspace = true, optional = true }
 futures = { workspace = true, optional = true }
