@@ -207,12 +207,10 @@ let outputs = plan.run(tvec![tensor1(&[1.0f32, 2.0, 3.0]).into()])?;
 > - [来源: [tract-onnx crates.io](https://crates.io/crates/tract-onnx)]
 > - [来源: [tract GitHub Repository](https://github.com/snipsco/tract)]
 > - [来源: [ONNX 规范](https://onnx.ai/onnx/intro/)]
-
 > **P1（学术论文/演讲）**:
 >
 > - [来源: [ONNX: Open Neural Network Exchange](https://arxiv.org/abs/2002.06838)] — ONNX 中间表示标准
 > - [来源: [Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference](https://arxiv.org/abs/1712.05877)] — INT8 量化参考
-
 > **P2（仓库/社区文章）**:
 >
 > - [来源: [tract examples](https://github.com/snipsco/tract/tree/main/examples)]

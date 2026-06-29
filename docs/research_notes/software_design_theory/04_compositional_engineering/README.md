@@ -1,35 +1,30 @@
 # 组合软件工程有效性形式论证
 
 > **概念族**: 软件设计 / 组合工程
-
 > **内容分级**: [归档级]
-
 >
-
 > **分级**: [B]
-
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-12
-
 > **最后更新**: 2026-06-29
-
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **状态**: ✅ 权威国际化来源对齐升级完成 (2026-06-29)
-
 > **对齐说明**: 本目录已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/` 迁回，正在按 [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)、[Tower Layer/Service Docs](https://docs.rs/tower/latest/tower/trait.Layer.html)、[Rust Design Patterns](https://rust-unofficial.github.io/patterns/) 等权威来源升级。
-
 >
-
-> **权威来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [Tower Docs](https://docs.rs/tower/latest/tower/) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
+> **权威来源**:
+>
+> [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) |
+> [Tower Docs](https://docs.rs/tower/latest/tower/) |
+> [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) |
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) |
+> [Rust Reference](https://doc.rust-lang.org/reference/)
+>
 
 ---
 
 ## 📊 目录 {#-目录}
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [组合软件工程有效性形式论证](#组合软件工程有效性形式论证)
@@ -70,7 +65,6 @@
 ## 宗旨
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 论证 Rust 组合软件工程的有效性：形式化定义组合、建立有效性定理、与 ownership/borrow/trait 衔接。
@@ -80,23 +74,16 @@
 ## 设计模式组合示例（实质内容）
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 组合 | 实现要点 | 形式化衔接 |
 
 | :--- | :--- | :--- |
-
 | Builder + Factory Method | 工厂返回 Builder | CE-T1、CE-T3；[CE-PAT1](02_effectiveness_proofs.md#定理-ce-pat1模式组合-ce-保持)、[模式组合约束 DAG](../01_design_patterns_formal/04_boundary_matrix.md#模式组合约束-dagd15) |
-
 | Decorator + Strategy | 装饰器持 `impl Strategy` | CE-T2（无共享可变） |
-
 | Observer + Command | channel 传 `Box<dyn Command>` | CE-T2（Send 约束） |
-
 | Composite + Visitor | `match` 遍历 + `Visitor` trait | CE-T1、CE-T3 |
-
 | Repository + Service Layer | 模块依赖、trait 组合 | [03_integration_theory](03_integration_theory.md) IT-T1 |
-
 | Builder + Factory + Repository | 订单创建→工厂选择→持久化完整链条 | [03_integration_theory](03_integration_theory.md) § 完整多模式组合链条 |
 
 ---
@@ -104,15 +91,12 @@
 ## 组合完整代码示例（层次推进）
 
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ### 示例 1：Builder + Factory Method
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust
@@ -174,9 +158,7 @@ impl ConfigFactory for DefaultFactory {
 ### 示例 2：Repository + Service Layer + DTO（完整链条）
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
-
 >
-
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```rust,ignore

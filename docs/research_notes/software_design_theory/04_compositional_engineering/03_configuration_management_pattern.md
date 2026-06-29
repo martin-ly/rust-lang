@@ -16,7 +16,17 @@
 >
 > **状态**: ✅ 已完成
 >
-> **权威来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [Cargo Book – Environment Variables](https://doc.rust-lang.org/cargo/reference/environment-variables.html) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [config crate docs](https://docs.rs/config/latest/config/) | [clap docs](https://docs.rs/clap/latest/clap/) | [envy docs](https://docs.rs/envy/latest/envy/) | [figment docs](https://docs.rs/figment/latest/figment/)
+> **权威来源**:
+>
+> [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) |
+> [Cargo Book – Environment Variables](https://doc.rust-lang.org/cargo/reference/environment-variables.html) |
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) |
+> [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) |
+> [config crate docs](https://docs.rs/config/latest/config/) |
+> [clap docs](https://docs.rs/clap/latest/clap/) |
+> [envy docs](https://docs.rs/envy/latest/envy/) |
+> [figment docs](https://docs.rs/figment/latest/figment/)
+>
 
 ---
 

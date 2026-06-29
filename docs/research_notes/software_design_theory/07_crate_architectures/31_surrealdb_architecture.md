@@ -245,12 +245,10 @@ db.use_ns("test").use_db("test").await?;
 > - [来源: [surrealdb crates.io](https://crates.io/crates/surrealdb)]
 > - [来源: [SurrealDB 官方文档](https://docs.surrealdb.com/)]
 > - [来源: [SurrealQL Reference](https://docs.surrealdb.com/docs/surrealql)]
-
 > **P1（学术论文/演讲）**:
 >
 > - [来源: [Graph Databases: New Opportunities for Connected Data](https://www.oreilly.com/library/view/graph-databases/9781491935811/)] — 图数据库模型基础
 > - [来源: [FoundationDB: A Distributed Key-Value Store](https://dl.acm.org/doi/10.1145/3296957.3190648)] — 分布式键值存储与 TiKV 相关参考
-
 > **P2（仓库/社区文章）**:
 >
 > - [来源: [surrealdb GitHub Repository](https://github.com/surrealdb/surrealdb)]

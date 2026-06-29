@@ -327,12 +327,10 @@ let conn = Connection::connect(&addr, props).await?;
 > - [来源: [lapin crates.io](https://crates.io/crates/lapin)]
 > - [来源: [RabbitMQ 官方文档](https://www.rabbitmq.com/docs)]
 > - [来源: [AMQP 0-9-1 Specification](https://www.rabbitmq.com/resources/specs/amqp0-9-1.pdf)]
-
 > **P1（学术论文/演讲）**:
 >
 > - [来源: [Advanced Message Queuing Protocol (AMQP) White Paper](https://www.amqp.org/sites/amqp.org/files/amqp.pdf)] — AMQP 设计目标与模型
 > - [来源: [The End of Cloud Computing as a Platform for the Internet of Things](https://dl.acm.org/doi/10.1145/3093744.3093746)] — 消息中间件在分布式系统中的应用参考
-
 > **P2（仓库/社区文章）**:
 >
 > - [来源: [lapin GitHub Repository](https://github.com/amqp-rs/lapin)]

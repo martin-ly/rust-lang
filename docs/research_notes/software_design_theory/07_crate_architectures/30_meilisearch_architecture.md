@@ -249,12 +249,10 @@ let task = index.set_settings(&settings).await?;
 > - [来源: [meilisearch-sdk Documentation](https://docs.rs/meilisearch-sdk/latest/meilisearch_sdk/)]
 > - [来源: [meilisearch-sdk crates.io](https://crates.io/crates/meilisearch-sdk)]
 > - [来源: [Meilisearch 官方文档](https://www.meilisearch.com/docs)]
-
 > **P1（学术论文/演讲）**:
 >
 > - [来源: [Faster Search with Inverted Indexes](https://dl.acm.org/doi/10.1145/263690.263806)] — 倒排索引与搜索引擎基础
 > - [来源: [Learning to Rank: From Pairwise Approach to Listwise Approach](https://dl.acm.org/doi/10.1145/1273496.1273513)] — 排序规则相关理论基础
-
 > **P2（仓库/社区文章）**:
 >
 > - [来源: [meilisearch-sdk GitHub Repository](https://github.com/meilisearch/meilisearch-sdk)]

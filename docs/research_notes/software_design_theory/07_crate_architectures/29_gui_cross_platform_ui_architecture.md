@@ -344,7 +344,15 @@ let window = web_sys::window().unwrap();
 
 ---
 
-> **权威来源**: [Tauri 官方文档](https://tauri.app/) · [Dioxus 官方文档](https://dioxuslabs.com/) · [Leptos 官方文档](https://leptos.dev/) · [egui 官方文档](https://www.egui.rs/) · [iced 官方文档](https://iced.rs/) · [areweguiyet.com](https://areweguiyet.com/) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+> **权威来源**:
+>
+> [Tauri 官方文档](https://tauri.app/) ·
+> [Dioxus 官方文档](https://dioxuslabs.com/) ·
+> [Leptos 官方文档](https://leptos.dev/) ·
+> [egui 官方文档](https://www.egui.rs/) ·
+> [iced 官方文档](https://iced.rs/) ·
+> [areweguiyet.com](https://areweguiyet.com/) ·
+> [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 >
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

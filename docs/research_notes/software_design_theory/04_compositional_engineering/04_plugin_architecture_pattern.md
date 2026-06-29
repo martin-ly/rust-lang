@@ -16,9 +16,21 @@
 >
 > **状态**: ✅ 已完成
 >
-> **对齐说明**: 本文档按 [Rust Reference – FFI](https://doc.rust-lang.org/reference/items/external-blocks.html)、[libloading docs](https://docs.rs/libloading/latest/libloading/)、[Cargo Book – crate-type](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#the-crate-type-field)、[Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) 与 [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) 组织。
+> **对齐说明**:
 >
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [libloading docs](https://docs.rs/libloading/latest/libloading/) | [Cargo Book](https://doc.rust-lang.org/cargo/reference/) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> 本文档按 [Rust Reference – FFI](https://doc.rust-lang.org/reference/items/external-blocks.html)、
+> [libloading docs](https://docs.rs/libloading/latest/libloading/)、
+> [Cargo Book – crate-type](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#the-crate-type-field)、
+> [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) 与 [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) 组织。
+>
+> **权威来源**:
+>
+> [Rust Reference](https://doc.rust-lang.org/reference/) |
+> [libloading docs](https://docs.rs/libloading/latest/libloading/) |
+> [Cargo Book](https://doc.rust-lang.org/cargo/reference/) |
+> [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) |
+> [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) |
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 
 ---
 

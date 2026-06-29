@@ -388,14 +388,12 @@ let order = topo_order(&items); // Err: DependencyCycle
 > - [The Rust Programming Language](https://doc.rust-lang.org/book/)
 > - [Rust Standard Library](https://doc.rust-lang.org/std/)
 > - [Rustonomicon](https://doc.rust-lang.org/nomicon/)
-
 > **P1 权威来源（Rust 社区与工程实践）**:
 >
 > - [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)
 > - [Tokio Tutorial](https://tokio.rs/tokio/tutorial)
 > - [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 > - [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
-
 > **P2 权威来源（学术与行业经典）**:
 >
 > - [Wikipedia - Long-Running Transaction](https://en.wikipedia.org/wiki/Long_Running_Transaction)

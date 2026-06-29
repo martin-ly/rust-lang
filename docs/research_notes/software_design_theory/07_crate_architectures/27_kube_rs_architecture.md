@@ -245,12 +245,10 @@ struct MyAppSpec {
 > - [来源: [kube-rs crates.io](https://crates.io/crates/kube)]
 > - [来源: [Kubernetes 官方文档](https://kubernetes.io/docs/home/)]
 > - [来源: [k8s-openapi Documentation](https://docs.rs/k8s-openapi/latest/k8s_openapi/)]
-
 > **P1（学术论文/演讲）**:
 >
 > - [来源: [Borg, Omega, and Kubernetes – ACM Queue](https://queue.acm.org/detail.cfm?id=2898444)] — Google 集群管理系统演进
 > - [来源: [Large-scale cluster management at Google with Borg](https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/)] — 分布式调度与控制器模式
-
 > **P2（仓库/社区文章）**:
 >
 > - [来源: [kube-rs GitHub Repository](https://github.com/kube-rs/kube)]

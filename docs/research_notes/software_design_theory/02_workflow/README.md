@@ -1,7 +1,6 @@
 # 工作流引擎模式形式化定义
 >
 > **概念族**: 软件设计 / 工作流模式
-
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
@@ -11,9 +10,15 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
 > **目标**: 为工作流引擎核心概念提供形式化定义
-> **对齐说明**: 本目录已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/02_workflow/` 迁回，正在按 [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)、[Tokio Tutorial](https://tokio.rs/tokio/tutorial)、[futures-rs docs](https://docs.rs/futures/latest/futures/) 等权威来源升级。
+> **对齐说明**:
 >
-> **权威来源**: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) | [Tokio Tutorial](https://tokio.rs/tokio/tutorial) | [futures-rs docs](https://docs.rs/futures/latest/futures/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
+> 本目录已于 2026-06-29 从 `archive/research_notes_2026_06_25/software_design_theory/02_workflow/` 迁回，正在按 [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)、[Tokio Tutorial](https://tokio.rs/tokio/tutorial)、[futures-rs docs](https://docs.rs/futures/latest/futures/) 等权威来源升级。
+>
+> **权威来源**: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) |
+> [Tokio Tutorial](https://tokio.rs/tokio/tutorial) |
+> [futures-rs docs](https://docs.rs/futures/latest/futures/) |
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) |
+> [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ---
 
@@ -51,7 +56,6 @@ Proof  :=  L2 级自然语言证明
 ## 🆕 Rust 1.94 深度整合更新
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
-
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 

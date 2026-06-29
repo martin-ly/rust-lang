@@ -6,7 +6,12 @@
 > **Bloom 层级**: L3-L5（应用 / 分析 / 评价）
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成
-> **权威来源**: [CLRS – Introduction to Algorithms](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/) | [William Pugh, Skip Lists: A Probabilistic Alternative to Balanced Trees](https://dl.acm.org/doi/10.1145/78973.78977) | [Seidel & Aragon, Randomized Search Trees](https://dl.acm.org/doi/10.1145/138403.138440) | [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**:
+>
+> [CLRS – Introduction to Algorithms](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/) |
+> [William Pugh, Skip Lists: A Probabilistic Alternative to Balanced Trees](https://dl.acm.org/doi/10.1145/78973.78977) |
+> [Seidel & Aragon, Randomized Search Trees](https://dl.acm.org/doi/10.1145/138403.138440) |
+> [Rust Standard Library](https://doc.rust-lang.org/std/)
 
 ---
 

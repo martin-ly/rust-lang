@@ -6,7 +6,12 @@
 > **Bloom 层级**: L3-L5（应用 / 分析 / 评价）
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成
-> **权威来源**: [ARC: A Self-Tuning, Low Overhead Replacement Cache](https://www.usenix.org/legacy/events/fast03/tech/full_papers/megiddo/megiddo.pdf) | [TinyLFU: A Highly Efficient Cache Admission Policy](https://dl.acm.org/doi/10.1145/2674005.2674994) | [Caffeine – high performance caching library](https://github.com/ben-manes/caffeine) | [Wikipedia – Cache replacement policies](https://en.wikipedia.org/wiki/Cache_replacement_policies)
+> **权威来源**:
+>
+> [ARC: A Self-Tuning, Low Overhead Replacement Cache](https://www.usenix.org/legacy/events/fast03/tech/full_papers/megiddo/megiddo.pdf) |
+> [TinyLFU: A Highly Efficient Cache Admission Policy](https://dl.acm.org/doi/10.1145/2674005.2674994) |
+> [Caffeine – high performance caching library](https://github.com/ben-manes/caffeine) |
+> [Wikipedia – Cache replacement policies](https://en.wikipedia.org/wiki/Cache_replacement_policies)
 
 ---
 
@@ -173,5 +178,4 @@ ARC 需要维护 B1/B2 幽灵队列，总元数据量可达 `2×capacity`。在�
 直接运行并对比命中率。
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
-
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**

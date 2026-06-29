@@ -28,7 +28,9 @@
 
 > **[来源: [ort crates.io](https://crates.io/crates/ort)]**
 
-`ort` 是 Rust 生态中对接 **Microsoft ONNX Runtime** 的工业级安全封装。ONNX Runtime 是跨平台、高性能的机器学习推理引擎，支持 CPU、CUDA、TensorRT、OpenVINO、DirectML、CoreML 等执行后端。`ort` 通过安全的 Rust API 暴露 ONNX Runtime 的会话管理、张量输入输出、执行提供者（Execution Provider）与 IO 绑定能力，广泛应用于图像识别、NLP、语音、推荐系统等场景。
+`ort` 是 Rust 生态中对接 **Microsoft ONNX Runtime** 的工业级安全封装。
+ONNX Runtime 是跨平台、高性能的机器学习推理引擎，支持 CPU、CUDA、TensorRT、OpenVINO、DirectML、CoreML 等执行后端。
+`ort` 通过安全的 Rust API 暴露 ONNX Runtime 的会话管理、张量输入输出、执行提供者（Execution Provider）与 IO 绑定能力，广泛应用于图像识别、NLP、语音、推荐系统等场景。
 
 > [来源: [ort 官方文档](https://ort.pyke.io/)]
 
@@ -210,12 +212,10 @@ let (_shape, data) = outputs["output0"].try_extract_tensor::<f32>()?;
 > - [来源: [ort crates.io](https://crates.io/crates/ort)]
 > - [来源: [ONNX Runtime 官方文档](https://onnxruntime.ai/docs/)]
 > - [来源: [ort 官方教程](https://ort.pyke.io/)]
-
 > **P1（学术论文/演讲）**:
 >
 > - [来源: [ONNX: Open Neural Network Exchange](https://arxiv.org/abs/2002.06838)] — ONNX 中间表示标准
 > - [来源: [TensorRT: Programmable Inference Accelerator](https://arxiv.org/abs/1605.02697)] — GPU 推理加速参考
-
 > **P2（仓库/社区文章）**:
 >
 > - [来源: [ort GitHub Repository](https://github.com/pykeio/ort)]
