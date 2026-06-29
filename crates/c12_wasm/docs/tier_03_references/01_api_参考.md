@@ -29,7 +29,6 @@
     - [console](#console)
     - [Fetch API](#fetch-api)
   - [📚 相关资源](#-相关资源)
-  - [**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2](#适用版本-rust-1920--edition-2024-wasm-20--wasi-02)
 
 ---
 
@@ -193,6 +192,7 @@ pub async fn fetch_data(url: &str) -> Result<JsValue, JsValue> {
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-30
 **适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

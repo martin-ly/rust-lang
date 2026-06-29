@@ -26,7 +26,11 @@ async fn main() -> anyhow::Result<()> {
             });
 
             let (a, b) = tokio::join!(t1, t2);
-            println!("local values = {:?}, {:?}", a.expect("值应存在"), b.expect("值应存在"));
+            println!(
+                "local values = {:?}, {:?}",
+                a.expect("值应存在"),
+                b.expect("值应存在")
+            );
 
             Ok::<_, anyhow::Error>(())
         })

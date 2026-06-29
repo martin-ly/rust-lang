@@ -505,7 +505,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     #[ignore] // 等待批次处理可能超时，默认跳过
     async fn test_batch_processing() {
         let processor = SimpleBatchProcessor::new("test".to_string());
@@ -522,7 +522,10 @@ mod tests {
         // 添加一些测试项目
         for i in 0..10 {
             let item = BatchItem::new(format!("item_{}", i), 100, 0);
-            batch_processor.add_item(item).await.expect("添加项目不应失败");
+            batch_processor
+                .add_item(item)
+                .await
+                .expect("添加项目不应失败");
         }
 
         // 等待处理完成
@@ -532,12 +535,15 @@ mod tests {
         assert!(stats.total_batches > 0);
         assert_eq!(stats.total_items, 10);
 
-        batch_processor.shutdown().await.expect("关闭批处理器不应失败");
+        batch_processor
+            .shutdown()
+            .await
+            .expect("关闭批处理器不应失败");
         let _ = handle.await;
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     #[ignore] // 等待处理完成可能超时，默认跳过
     async fn test_hybrid_batch_strategy() {
         let processor = SimpleBatchProcessor::new("hybrid_test".to_string());
@@ -559,7 +565,10 @@ mod tests {
         for i in 0..5 {
             let size = 200 + i * 100; // 200, 300, 400, 500, 600 bytes
             let item = BatchItem::new(format!("item_{}", i), size, 0);
-            batch_processor.add_item(item).await.expect("添加项目不应失败");
+            batch_processor
+                .add_item(item)
+                .await
+                .expect("添加项目不应失败");
         }
 
         // 等待处理完成
@@ -568,7 +577,10 @@ mod tests {
         let stats = batch_processor.get_stats().await;
         assert!(stats.total_batches > 0);
 
-        batch_processor.shutdown().await.expect("关闭批处理器不应失败");
+        batch_processor
+            .shutdown()
+            .await
+            .expect("关闭批处理器不应失败");
         let _ = handle.await;
     }
 }

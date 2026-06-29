@@ -31,7 +31,6 @@
     - [1. HTTP协议](#1-http协议)
       - [1.1 HTTP基础](#11-http基础)
   - [🔗 相关文档](#-相关文档)
-  - [_维护者: C10 Networks 开发团队_](#维护者-c10-networks-开发团队)
 
 [![Rust](https://img.shields.io/badge/rust-1.90+-orange.svg)](https://www.rust-lang.org/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](../../LICENSE)
@@ -1164,6 +1163,7 @@ impl HttpResponse {
 _最后更新: 2025年1月_
 _文档版本: v2.0_
 _维护者: C10 Networks 开发团队_
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

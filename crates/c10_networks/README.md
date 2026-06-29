@@ -8,7 +8,7 @@
 
 ## 目录
 
-- [🦀 C10 Networks - Rust 1.96.0+ 网络编程库](#-c10-networks---rust-1930-网络编程库)
+- [🦀 C10 Networks - Rust 1.96.0+ 网络编程库](#-c10-networks---rust-1960-网络编程库)
   - [目录](#目录)
   - [🎯 最新更新 (2025-11-15) ✨](#-最新更新-2025-11-15-)
     - [📖 新版文档导航](#-新版文档导航)
@@ -52,7 +52,6 @@
     - [使用指南](#使用指南)
   - [🔗 相关链接](#-相关链接)
   - [📞 支持](#-支持)
-  - [**C10 Networks** - 让 Rust 网络编程更简单、更安全、更高效](#c10-networks---让-rust-网络编程更简单更安全更高效)
 
 ## 🎯 最新更新 (2025-11-15) ✨
 
@@ -657,6 +656,7 @@ async fn main() -> c10_networks::NetworkResult<()> {
 ---
 
 **C10 Networks** - 让 Rust 网络编程更简单、更安全、更高效
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

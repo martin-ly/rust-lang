@@ -28,7 +28,6 @@
     - [3. 二进制大小对比矩阵](#3-二进制大小对比矩阵)
   - [🛡️ 安全性对比矩阵](#️-安全性对比矩阵)
   - [📚 相关文档](#-相关文档)
-  - [**维护者**: C12 WASM 文档团队](#维护者-c12-wasm-文档团队)
 
 ---
 
@@ -284,6 +283,7 @@
 
 **最后更新**: 2025-12-11
 **维护者**: C12 WASM 文档团队
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -9,6 +9,7 @@ categories = ["algorithms", "development-tools::testing"]
 description = "Rust algorithms learning module"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/rust-lang/rust-lang-learning"
+autoexamples = false
 
 [dependencies]
 common = { workspace = true, features = ["serde", "error-trait", "async"] }
@@ -26,8 +27,14 @@ num_cpus = { workspace = true }
 tokio-stream = { workspace = true }
 petgraph = { workspace = true, optional = true }
 aho-corasick = { version = "1.1.4", optional = true }
+crossbeam-epoch = { workspace = true }
+# ONNX / 纯 Rust 推理引擎示例依赖（可选，需启用 with-ort-tract）
+ort = { version = "=2.0.0-rc.12", optional = true }
+tract-onnx = { version = "0.23.1", optional = true }
+
 [features]
 default = []
+with-ort-tract = ["dep:ort", "dep:tract-onnx"]
 with-petgraph = ["petgraph"]
 with-aho = ["aho-corasick"]
 
@@ -68,7 +75,87 @@ name = "simple_benchmarks"
 harness = false
 
 [[example]]
+name = "advanced_data_structures_demo"
+
+[[example]]
 name = "ai_ml_ecosystem_demo"
+
+[[example]]
+name = "lock_free_data_structures_demo"
+
+[[example]]
+name = "algorithm_comparison_demo"
+
+[[example]]
+name = "algorithm_complexity_demo"
+
+[[example]]
+name = "algorithm_comprehensive_demo"
+
+[[example]]
+name = "algorithm_optimization_demo"
+
+[[example]]
+name = "backtracking_algorithms_demo"
+
+[[example]]
+name = "c08_rust_193_features_demo"
+
+[[example]]
+name = "cache_eviction_policies_demo"
+
+[[example]]
+name = "collections_mut_ref_demo"
+
+[[example]]
+name = "comprehensive_network_async_demo"
+
+[[example]]
+name = "core_range_demo"
+
+[[example]]
+name = "cross_module_integration_demo"
+
+[[example]]
+name = "data_structures_demo"
+
+[[example]]
+name = "divide_conquer_demo"
+
+[[example]]
+name = "dynamic_programming_demo"
+
+[[example]]
+name = "graph_algorithms_demo"
+
+[[example]]
+name = "greedy_algorithms_demo"
+
+[[example]]
+name = "gui_calculator_demo"
+
+[[example]]
+name = "searching_algorithms_demo"
+
+[[example]]
+name = "sorting_algorithms_demo"
+
+[[example]]
+name = "string_algorithms_demo"
+
+[[example]]
+name = "ort_basic_inference"
+required-features = ["with-ort-tract"]
+
+[[example]]
+name = "tract_basic_inference"
+required-features = ["with-ort-tract"]
+
+[[example]]
+name = "treiber_stack_demo"
+
+[[example]]
+name = "treap_skip_list_demo"
 
 [lints.rust]
 # 声明 nightly 预览模块与 kani cfg 条件名，避免 unexpected_cfgs 警告

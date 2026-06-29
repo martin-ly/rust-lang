@@ -41,6 +41,13 @@ tonic-prost = { workspace = true }
 url = { workspace = true }
 rustls = { workspace = true, optional = true }
 
+# Kafka support (optional, requires librdkafka build environment)
+rdkafka = { version = "0.37", features = ["tokio"], optional = true }
+
+# Kubernetes ecosystem examples
+kube = { version = "0.98", features = ["client", "runtime", "derive"], optional = true }
+k8s-openapi = { version = "0.24", features = ["latest"], optional = true }
+
 
 # QUIC / HTTP3 支持
 quinn = { version = "0.11.9", optional = true }
@@ -54,6 +61,18 @@ pnet_datalink = { version = "0.35", optional = true }
 pnet_packet = { version = "0.35", optional = true }
 pnet_base = { version = "0.35", optional = true }
 pnet_macros_support = { version = "0.35", optional = true }
+
+# Search / vector database / document-graph database ecosystem examples
+meilisearch-sdk = { version = "0.33.0", default-features = false, features = ["reqwest", "tls"], optional = true }
+surrealdb = { version = "2.0.0", default-features = false, features = ["protocol-ws", "rustls"], optional = true }
+vector = { version = "0.4.1", optional = true }
+
+# Cloud vendor SDK examples
+aws-config = { version = "1.8.16", optional = true }
+aws-sdk-s3 = { version = "1.137.0", optional = true }
+azure_core = { version = "0.30.0", optional = true }
+azure_identity = { version = "0.30.0", optional = true }
+azure_storage_blob = { version = "0.7.0", optional = true }
 
 [target.'cfg(target_os = "linux")'.dependencies]
 # io_uring 仅 Linux 可用
@@ -76,6 +95,17 @@ pnet = ["dep:pnet_packet", "dep:pnet_base", "dep:pnet_macros_support"]
 pcap_live = ["sniff", "pcap"]
 offline = ["sniff", "pcap"]
 libp2p = ["dep:libp2p", "dep:multibase"]
+# Kafka ecosystem examples
+kafka = ["dep:rdkafka"]
+# Kubernetes ecosystem examples
+kube-rs = ["dep:kube", "dep:k8s-openapi"]
+# Search / database ecosystem examples
+meilisearch = ["dep:meilisearch-sdk"]
+surrealdb = ["dep:surrealdb"]
+vector-db = ["dep:vector"]
+# Cloud vendor SDK examples
+aws-sdk = ["dep:aws-config", "dep:aws-sdk-s3"]
+azure-sdk = ["dep:azure_core", "dep:azure_identity", "dep:azure_storage_blob"]
 
 [build-dependencies]
 tonic = { workspace = true }
@@ -89,7 +119,7 @@ anyhow = { workspace = true }
 axum = { workspace = true }
 ring = { workspace = true }
 mongodb = "3.0"
-rdkafka = { version = "0.37", features = ["tokio"] }
+lapin = "2.5"
 
 aes-gcm = "0.10"
 sha2 = { workspace = true }
@@ -107,6 +137,46 @@ path = "src/bin/main.rs"
 [[example]]
 name = "p2p_minimal"
 required-features = ["libp2p"]
+
+[[example]]
+name = "kafka_async_producer"
+required-features = ["kafka"]
+
+[[example]]
+name = "kafka_consumer_group"
+required-features = ["kafka"]
+
+[[example]]
+name = "kube_list_pods"
+required-features = ["kube-rs"]
+
+[[example]]
+name = "kube_watch_pods"
+required-features = ["kube-rs"]
+
+[[example]]
+name = "meilisearch_basic_search"
+required-features = ["meilisearch"]
+
+[[example]]
+name = "surrealdb_basic_crud"
+required-features = ["surrealdb"]
+
+[[example]]
+name = "vector_hnsw_search"
+required-features = ["vector-db"]
+
+[[example]]
+name = "aws_s3_list_buckets"
+required-features = ["aws-sdk"]
+
+[[example]]
+name = "aws_sdk_list_buckets"
+required-features = ["aws-sdk"]
+
+[[example]]
+name = "azure_blob_list_containers"
+required-features = ["azure-sdk"]
 
 [[bench]]
 name = "concurrency_performance"

@@ -3,7 +3,7 @@
 //! This module provides crate-specific error types and utilities using
 //! the trait-based error design from the common crate.
 
-use common::{impl_into_unified_error, ErrorCode};
+use common::{ErrorCode, impl_into_unified_error};
 use std::time::Duration;
 use thiserror::Error;
 

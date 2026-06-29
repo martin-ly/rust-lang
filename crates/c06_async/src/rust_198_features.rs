@@ -35,7 +35,10 @@ impl CountingAsyncIter {
     /// 创建新的计数异步迭代器
     /// Create new asynciterator
     pub fn new(start: i32, end: i32) -> Self {
-        Self { current: start, end }
+        Self {
+            current: start,
+            end,
+        }
     }
 }
 
@@ -174,6 +177,9 @@ mod tests {
     async fn test_batch_process() {
         let stream = CountingAsyncIter::new(0, 10);
         let batches = Rust198AsyncFeatures::batch_process(stream, 3).await;
-        assert_eq!(batches, vec![vec![0, 1, 2], vec![3, 4, 5], vec![6, 7, 8], vec![9]]);
+        assert_eq!(
+            batches,
+            vec![vec![0, 1, 2], vec![3, 4, 5], vec![6, 7, 8], vec![9]]
+        );
     }
 }

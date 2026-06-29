@@ -19,6 +19,7 @@ crossbeam = { workspace = true }
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true }
 futures = { workspace = true }
+libloading = "0.8"
 
 [features]
 tokio-bench = []

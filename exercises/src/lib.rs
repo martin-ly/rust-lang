@@ -14,17 +14,18 @@
 //!
 //! 每道练习题对应 `docs/` 下的说明文档和 `tests/` 下的测试用例。
 
-pub mod ownership_borrowing;
-pub mod type_system;
-pub mod generics_traits;
-pub mod concurrency;
+pub mod algorithms;
 pub mod async_programming;
+pub mod concurrency;
 pub mod error_handling;
+pub mod generics_traits;
 pub mod macros;
-pub mod unsafe_rust;
+pub mod ownership_borrowing;
 /// Rust 1.95 预览特性练习（gen blocks，需要 nightly）。
 #[cfg(nightly)]
 pub mod rust_195_feature_exercises;
+pub mod type_system;
+pub mod unsafe_rust;
 
 /// Rust 1.96 预览特性练习（gen blocks，需要 nightly）。
 #[cfg(nightly)]

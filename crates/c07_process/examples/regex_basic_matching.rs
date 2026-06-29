@@ -39,9 +39,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     );
 
     // 4. RegexBuilder：运行时配置匹配语义
-    let case_insensitive = RegexBuilder::new(r"rust")
-        .case_insensitive(true)
-        .build()?;
+    let case_insensitive = RegexBuilder::new(r"rust").case_insensitive(true).build()?;
     println!(
         "  大小写不敏感匹配 'RustLang': {}",
         case_insensitive.is_match("RustLang")
@@ -53,14 +51,18 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("  替换数字为掩码: {masked}");
 
     let incremented = digits.replace_all("a1b2c3", |caps: &regex::Captures| {
-        caps[0].parse::<i32>().unwrap_or(0).wrapping_add(1).to_string()
+        caps[0]
+            .parse::<i32>()
+            .unwrap_or(0)
+            .wrapping_add(1)
+            .to_string()
     });
     println!("  数字加 1: {incremented}");
 
     // 6. RegexSet：多模式同时匹配
-    let set = RegexSet::new(&[
-        r"^\d+$",          // 纯数字
-        r"^[a-zA-Z]+$",    // 纯字母
+    let set = RegexSet::new([
+        r"^\d+$",           // 纯数字
+        r"^[a-zA-Z]+$",     // 纯字母
         r"^[a-zA-Z0-9_]+$", // 标识符
     ])?;
     let input = "abc123";

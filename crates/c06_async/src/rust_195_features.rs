@@ -510,7 +510,7 @@ mod tests {
     // ------------------------------------------------------------------------
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_spawn_named_task() {
         let handle = NamedTaskExamples::spawn_named_task("test-task", async { 42 })
             .await
@@ -520,7 +520,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_spawn_named_pool() {
         let handles = NamedTaskExamples::spawn_named_pool(3, "worker", |i| async move { i * 2 });
         assert_eq!(handles.len(), 3);
@@ -533,7 +533,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_handle_request() {
         let result = NamedTaskExamples::handle_request("req-001")
             .await
@@ -545,7 +545,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_named_task_with_tracing() {
         let handle = NamedTaskExamples::named_task_with_tracing("traced-task", async { "done" })
             .await
@@ -561,7 +561,6 @@ mod tests {
         assert!(guide.contains("task::Builder"));
     }
 }
-
 
 // ============================================================================
 // Real Rust 1.95 Features — Async programming
@@ -599,14 +598,14 @@ mod real_rust_195_tests {
     use super::*;
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_apply_async_fn() {
         let result = RealRust195Features::apply_async_fn(async |x| x * 2, 21).await;
         assert_eq!(result, 42);
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_map_async_closure() {
         let items = vec![1, 2, 3, 4];
         let result = RealRust195Features::map_async_closure(items, async |x| x * x).await;

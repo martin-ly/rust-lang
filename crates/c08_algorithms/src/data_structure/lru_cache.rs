@@ -1,6 +1,8 @@
 //! 简易 LRU Cache，提供非线程安全与可选线程安全包装
 use std::collections::{HashMap, VecDeque};
 
+use super::CachePolicy;
+
 #[derive(Clone, Debug)]
 pub struct LruCache<K, V> {
     cap: usize,
@@ -77,7 +79,11 @@ pub mod ts {
         where
             V: Clone,
         {
-            self.0.write().expect("LRU缓存写入锁被污染").get(key).cloned()
+            self.0
+                .write()
+                .expect("LRU缓存写入锁被污染")
+                .get(key)
+                .cloned()
         }
         pub fn put(&self, key: K, value: V) {
             self.0.write().expect("LRU缓存写入锁被污染").put(key, value)
@@ -88,6 +94,28 @@ pub mod ts {
         pub fn is_empty(&self) -> bool {
             self.len() == 0
         }
+    }
+}
+
+impl<K: std::hash::Hash + Eq + Clone, V> CachePolicy<K, V> for LruCache<K, V> {
+    fn new(cap: usize) -> Self {
+        LruCache::new(cap)
+    }
+
+    fn get(&mut self, key: &K) -> Option<&V> {
+        LruCache::get(self, key)
+    }
+
+    fn put(&mut self, key: K, value: V) {
+        LruCache::put(self, key, value)
+    }
+
+    fn len(&self) -> usize {
+        LruCache::len(self)
+    }
+
+    fn is_empty(&self) -> bool {
+        LruCache::is_empty(self)
     }
 }
 

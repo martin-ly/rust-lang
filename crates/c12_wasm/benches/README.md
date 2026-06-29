@@ -4,8 +4,9 @@
 
 ## 📚 基准测试列表
 
-| 基准测试文件                                               | 描述               | 测试项数 |
-| :--- | :--- | :--- || [array_processing_bench.rs](array_processing_bench.rs)   | 数组操作性能测试   | 5+       |
+| 基准测试文件  | 描述  | 测试项数 |
+| :--- | :--- | :--- |
+| [array_processing_bench.rs](array_processing_bench.rs)   | 数组操作性能测试   | 5+       |
 | [string_operations_bench.rs](string_operations_bench.rs) | 字符串操作性能测试 | 4+       |
 | [design_patterns_bench.rs](design_patterns_bench.rs)     | 设计模式性能测试   | 4+       |
 

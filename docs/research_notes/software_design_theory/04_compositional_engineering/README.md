@@ -266,6 +266,7 @@ impl<R: OrderRepository> OrderService<R> {
 | [02_effectiveness_proofs](02_effectiveness_proofs.md) | 有效性定理与证明 |
 
 | [03_integration_theory](03_integration_theory.md) | 与 ownership/borrow/trait 的衔接 |
+| [03_configuration_management_pattern](03_configuration_management_pattern.md) | 配置管理模式的层级加载与 Rust 实现 |
 
 ---
 

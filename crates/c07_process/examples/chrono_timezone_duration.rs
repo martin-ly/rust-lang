@@ -9,7 +9,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     demonstrate_utc_to_local();
     demonstrate_fixed_offset()?;
-    let _ = demonstrate_duration_arithmetic();
+    demonstrate_duration_arithmetic();
     demonstrate_negative_duration();
     demonstrate_std_duration_conversion();
 
@@ -34,7 +34,10 @@ fn demonstrate_fixed_offset() -> Result<(), Box<dyn std::error::Error>> {
     let sh = FixedOffset::east_opt(8 * 3600).ok_or("无法构造 +08:00 偏移")?;
     let ny = FixedOffset::west_opt(5 * 3600).ok_or("无法构造 -05:00 偏移")?;
 
-    let flight = Utc.with_ymd_and_hms(2026, 6, 29, 14, 0, 0).single().ok_or("时间不存在")?;
+    let flight = Utc
+        .with_ymd_and_hms(2026, 6, 29, 14, 0, 0)
+        .single()
+        .ok_or("时间不存在")?;
     println!("  起飞 UTC:        {flight}");
     println!("  起飞 上海 +08:00: {}", flight.with_timezone(&sh));
     println!("  起飞 纽约 -05:00: {}", flight.with_timezone(&ny));

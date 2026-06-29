@@ -70,7 +70,6 @@
     - [关键要点](#关键要点)
     - [下一步行动](#下一步行动)
     - [参考资源](#参考资源)
-  - [_WASI 0.2 组件模型代表了 WebAssembly 生态系统的重大飞跃，掌握它将使你能够构建更加模块化、可维护和高性能的应用程序。_ 🚀](#wasi-02-组件模型代表了-webassembly-生态系统的重大飞跃掌握它将使你能够构建更加模块化可维护和高性能的应用程序-)
 
 ---
 
@@ -1152,6 +1151,7 @@ wasm-tools compose component-a.wasm component-b.wasm -o composed.wasm
 ---
 
 _WASI 0.2 组件模型代表了 WebAssembly 生态系统的重大飞跃，掌握它将使你能够构建更加模块化、可维护和高性能的应用程序。_ 🚀
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

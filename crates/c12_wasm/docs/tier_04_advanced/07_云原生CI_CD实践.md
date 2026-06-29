@@ -59,7 +59,6 @@
   - [🎯 总结](#-总结)
     - [CI/CD 流程检查清单](#cicd-流程检查清单)
     - [关键指标](#关键指标)
-  - [**相关文档**: 容器技术深度集成 | 生产级部署](#相关文档-容器技术深度集成--生产级部署)
 
 ---
 
@@ -907,6 +906,7 @@ feature/*    develop       main/tags
 **文档维护**: Documentation Team
 **最后更新**: 2025-12-11
 **相关文档**: [容器技术深度集成](06_容器技术深度集成.md) | [生产级部署](03_生产级部署.md)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

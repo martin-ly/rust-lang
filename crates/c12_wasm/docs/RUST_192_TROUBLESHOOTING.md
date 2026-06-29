@@ -26,7 +26,6 @@
     - [问题 8: JavaScript 调用失败](#问题-8-javascript-调用失败)
     - [问题 9: 类型转换错误](#问题-9-类型转换错误)
   - [📚 相关文档](#-相关文档)
-  - [**维护者**: C12 WASM 文档团队](#维护者-c12-wasm-文档团队)
 
 ---
 
@@ -316,6 +315,7 @@ if (value !== undefined) {
 
 **最后更新**: 2025-12-11
 **维护者**: C12 WASM 文档团队
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

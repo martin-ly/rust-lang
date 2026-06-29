@@ -19,6 +19,7 @@ members = [
     "crates/c13_embedded",
     "crates/c14_semantic_web",
     "crates/c15_verification_tools",
+    "crates/c16_gui",
     "crates/common",
     "crates/integration_tests",
     "exercises",
@@ -234,6 +235,16 @@ actix-web = "4.13.0"
 actix = "0.13.5"
 # actix-rt: actix的运行时支持
 actix-rt = "2.11.0"
+
+# 2026-06-29: 二线 Web 框架与模板引擎专题
+# salvo: 现代 Rust Web 框架，强调高性能与可扩展性
+salvo = "0.93.0"
+# ntex: 可组合网络服务框架，与 actix-web 同源设计
+ntex = { version = "3.10.0", features = ["tokio"] }
+# askama: 类型安全、编译期 Jinja-like 模板引擎
+askama = "0.16.0"
+# maud: 编译期 HTML 模板宏，Rust-native DSL
+maud = "0.27.0"
 
 # 2025-09-27: 终端UI库最新稳定版本
 # crossterm: 跨平台终端操作库，支持Windows、Linux和macOS

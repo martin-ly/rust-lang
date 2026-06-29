@@ -418,7 +418,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_task_queue_rotate() {
         let mut queue = AsyncTaskQueue::new();
         queue.push(TaskItem {
@@ -447,7 +447,8 @@ mod tests {
 
     #[test]
     fn test_async_resource_allocator() {
-        let allocator = AsyncResourceAllocator::new(1024, NonZeroUsize::new(64).expect("块大小应非零"));
+        let allocator =
+            AsyncResourceAllocator::new(1024, NonZeroUsize::new(64).expect("块大小应非零"));
         assert_eq!(allocator.max_concurrent_tasks(), 16);
     }
 

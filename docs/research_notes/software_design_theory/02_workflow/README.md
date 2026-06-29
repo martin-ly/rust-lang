@@ -23,9 +23,9 @@
 
 | 模式 | 状态 | 文件 |
 |------|------|------|
-| 工作流状态机 | 🔄 持续推进中 | [01_workflow_state_machine.md](01_workflow_state_machine.md) |
-| 补偿链 | 🔄 持续推进中 | [02_compensation_chain.md](02_compensation_chain.md) |
-| 长事务 | 🔄 持续推进中 | [03_long_running_transaction.md](03_long_running_transaction.md) |
+| 工作流状态机 | ✅ 已完成 | [01_workflow_state_machine.md](01_workflow_state_machine.md) |
+| 补偿链 | ✅ 已完成 | [02_compensation_chain.md](02_compensation_chain.md) |
+| 长事务 | ✅ 已完成 | [03_long_running_transaction.md](03_long_running_transaction.md) |
 
 ---
 

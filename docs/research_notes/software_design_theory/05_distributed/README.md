@@ -52,7 +52,8 @@
 
 | 重试模式 | 📝 规划中 | `07_retry_pattern.md` |
 
-| 熔断模式 | 📝 规划中 | `08_fallback_pattern.md` |
+| Fallback / Degrade 模式 | ✅ 已完成 | `08_fallback_pattern.md` |
+| 限流与幂等模式 | ✅ 已完成 | `09_rate_limiting_idempotency_pattern.md` |
 
 ---
 

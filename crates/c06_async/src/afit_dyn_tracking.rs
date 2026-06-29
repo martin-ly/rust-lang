@@ -174,7 +174,7 @@ impl AsyncTraitComparison {
 /// ## ❌ Send bound 问题
 /// AFIDT Future Send in trait bound in express 。
 /// 需要 RTN (Return Type Notation) 解决。
-    /// ```text
+/// ```text
 /// // 当前无法表达：返回的 Future 必须是 Send 的
 /// // when before express ： Future must Send
 /// fn spawn_task<T>(source: T)
@@ -185,7 +185,7 @@ impl AsyncTraitComparison {
 ///     tokio::spawn(async move { source.fetch("key").await });
 /// }
 /// ```
-/// 
+///
 /// ## ❌ 关联类型投影
 /// ## ❌ associated type
 /// 某些复杂的关联类型场景在 AFIDT 中仍有边界情况。

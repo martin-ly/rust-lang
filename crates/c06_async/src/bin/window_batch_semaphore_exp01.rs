@@ -1,6 +1,7 @@
 use std::sync::Arc;
 use std::time::Duration;
-use tokio_stream::{StreamExt, wrappers::IntervalStream};
+use tokio_stream::StreamExt;
+use tokio_stream::wrappers::IntervalStream;
 
 #[tokio::main(flavor = "multi_thread", worker_threads = 2)]
 async fn main() {
@@ -34,7 +35,11 @@ async fn main() {
         if batch.is_empty() {
             break;
         }
-        let permit = sem.clone().acquire_owned().await.expect("获取信号量许可不应失败");
+        let permit = sem
+            .clone()
+            .acquire_owned()
+            .await
+            .expect("获取信号量许可不应失败");
         tokio::spawn(async move {
             let _p = permit;
             tokio::time::sleep(Duration::from_millis(60)).await;

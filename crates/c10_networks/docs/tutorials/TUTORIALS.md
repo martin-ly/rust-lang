@@ -58,7 +58,6 @@
       - [实现简单的负载均衡](#实现简单的负载均衡)
     - [故障恢复](#故障恢复)
       - [实现故障恢复机制](#实现故障恢复机制)
-  - [这个教程涵盖了 c10\_networks 库的主要功能和使用方法，从基础的网络编程到高级的性能优化和安全配置。通过遵循这些最佳实践，您可以构建高效、可靠和安全的网络应用程序](#这个教程涵盖了-c10_networks-库的主要功能和使用方法从基础的网络编程到高级的性能优化和安全配置通过遵循这些最佳实践您可以构建高效可靠和安全的网络应用程序)
 
 ## 快速开始
 
@@ -1385,6 +1384,7 @@ impl FaultTolerantClient {
 ```
 
 这个教程涵盖了 c10_networks 库的主要功能和使用方法，从基础的网络编程到高级的性能优化和安全配置。通过遵循这些最佳实践，您可以构建高效、可靠和安全的网络应用程序
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -427,7 +427,7 @@ mod tests {
     use tokio::sync::Mutex;
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_fixed_retry_strategy() {
         let config = RetryConfig {
             max_attempts: 3,
@@ -462,7 +462,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     #[ignore] // 严格时序断言在 CI/慢速环境易失败
     async fn test_exponential_backoff() {
         let config = RetryConfig {
@@ -507,7 +507,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     #[ignore] // OnErrorType 条件匹配在部分环境不稳定
     async fn test_retry_condition() {
         let config = RetryConfig {

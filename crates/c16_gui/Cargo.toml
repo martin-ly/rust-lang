@@ -1,0 +1,53 @@
+[package]
+name = "c16_gui"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.96.0"
+license = "MIT OR Apache-2.0"
+authors = ["Rust 学习项目团队"]
+description = "GUI / 跨平台 UI 生态实战示例 crate（Tauri / Dioxus / Leptos / egui / iced）"
+keywords = ["gui", "ui", "tauri", "dioxus", "leptos", "egui", "iced"]
+categories = ["gui", "web-programming"]
+
+[dependencies]
+# 桌面应用框架
+tauri = { workspace = true }
+
+# 全栈 Web / 跨平台 UI 框架
+dioxus = { workspace = true }
+dioxus-web = { workspace = true }
+
+# 全栈同构 Web 框架
+leptos = { workspace = true }
+leptos_axum = { workspace = true }
+
+# 即时模式 GUI 与原生窗口运行器
+egui = { workspace = true }
+eframe = "0.34.3"
+
+# Elm 风格声明式 GUI
+iced = { workspace = true }
+
+[lints.rust]
+unsafe_code = "allow"
+missing_docs = "allow"
+
+[[example]]
+name = "tauri_desktop_minimal"
+path = "examples/tauri_desktop_minimal.rs"
+
+[[example]]
+name = "dioxus_web_minimal"
+path = "examples/dioxus_web_minimal.rs"
+
+[[example]]
+name = "leptos_counter"
+path = "examples/leptos_counter.rs"
+
+[[example]]
+name = "egui_native_minimal"
+path = "examples/egui_native_minimal.rs"
+
+[[example]]
+name = "iced_counter"
+path = "examples/iced_counter.rs"

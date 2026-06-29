@@ -67,7 +67,7 @@
 //! - 有缓冲: 异步通信 (容量有限)
 //! - buffering : async ()
 //!
-//! 
+//!
 //! ### 1.3 并发组合
 //! ### 1.3 concurrency combination
 //! ```text

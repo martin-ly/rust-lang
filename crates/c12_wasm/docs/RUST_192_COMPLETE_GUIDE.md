@@ -31,7 +31,6 @@
     - [核心学习文档](#核心学习文档)
     - [实践指南](#实践指南)
     - [高级主题](#高级主题)
-  - [**维护者**: C12 WASM 文档团队](#维护者-c12-wasm-文档团队)
 
 ---
 
@@ -196,6 +195,7 @@ cargo run --example 12_rust_192_comprehensive_demo
 
 **最后更新**: 2025-12-11
 **维护者**: C12 WASM 文档团队
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

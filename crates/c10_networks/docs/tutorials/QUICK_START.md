@@ -50,7 +50,6 @@
     - [Q: 抓包功能需要什么权限？](#q-抓包功能需要什么权限)
     - [Q: 如何自定义DNS服务器？](#q-如何自定义dns服务器)
     - [Q: 性能基准测试如何运行？](#q-性能基准测试如何运行)
-  - [_维护者: C10 Networks 开发团队_](#维护者-c10-networks-开发团队)
 
 ## 🎯 概述
 
@@ -694,6 +693,7 @@ A: 运行 `cargo bench` 或查看 [基准测试指南](benchmark_minimal_guide.m
 _最后更新: 2025年1月_
 _文档版本: v1.0_
 _维护者: C10 Networks 开发团队_
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

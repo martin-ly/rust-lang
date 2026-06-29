@@ -54,7 +54,6 @@
     - [示例 1: AI 图像处理服务](#示例-1-ai-图像处理服务)
     - [示例 2: 边缘计算数据处理](#示例-2-边缘计算数据处理)
   - [📚 相关资源](#-相关资源)
-  - [**适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2, WasmEdge 0.13+](#适用版本-rust-1920--edition-2024-wasm-20--wasi-02-wasmedge-013)
 
 ---
 
@@ -835,6 +834,7 @@ fn process_data(data: &str) -> String {
 **文档维护**: Documentation Team
 **创建日期**: 2025-10-30
 **适用版本**: Rust 1.92.0+ / Edition 2024, WASM 2.0 + WASI 0.2, WasmEdge 0.13+
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

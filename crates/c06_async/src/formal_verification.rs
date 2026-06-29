@@ -46,7 +46,7 @@
 //!    其中 I 是循环不变式
 //!    its in I circulation
 //!
-//! 
+//!
 //! ## 2. 时序逻辑 (Temporal Logic)
 //! ```text
 //! 算子:
@@ -67,7 +67,7 @@
 //! - 活性 (Liveness): □◇Good (无限次到达好状态)
 //! - (Liveness): □◇Good (to state )
 //! ```
-//! 
+//!
 //! ## 3. 并发验证
 //! ## 3. concurrent verification
 //! ```text

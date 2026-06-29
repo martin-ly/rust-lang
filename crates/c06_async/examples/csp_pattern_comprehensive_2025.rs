@@ -52,7 +52,7 @@
 //! ## Run way
 //! cargo run --example csp_pattern_comprehensive_2025
 //! ```
-//! 
+//!
 //! ## 版本信息
 //! ## this
 //! - 日期: 2025-10-06
@@ -94,7 +94,7 @@ use tokio::time::{sleep, timeout};
 /// select! { ... } ≡ P □ Q □ R ...
 /// spawn(P) ||| spawn(Q) ≡ P ||| Q
 /// ```
-/// 
+///
 /// ## 核心原则 (Core Principles)
 /// ### 1. 通信同步 (Communication Synchronization)
 /// ### 1. 通信synchronous (Communication Synchronization)
@@ -493,7 +493,7 @@ impl CspSystem {
 /// Sink = recv?ch2 → store → Sink
 /// Pipeline = Source ||| Transform ||| Sink
 /// ```
-/// 
+///
 /// ## 应用场景 (Use Cases)
 /// ## application scenario (Use Cases)
 /// - 日志处理: 收集 → 解析 → 存储
@@ -635,7 +635,7 @@ pub async fn data_processing_pipeline_example() {
 /// Collector = recv?result_ch → aggregate → Collector
 /// System = Dispatcher ||| Worker_1 ||| ... ||| Worker_n ||| Collector
 /// ```
-/// 
+///
 /// ## 应用场景 (Use Cases)
 /// ## application scenario (Use Cases)
 /// - 任务队列: 异步任务处理
@@ -808,7 +808,7 @@ pub async fn distributed_task_scheduler_example() {
 /// Output = recv?output_ch → display → Output
 /// System = Source_1 ||| ... ||| Source_n ||| Filter ||| Aggregator ||| Output
 /// ```
-/// 
+///
 /// ## 应用场景 (Use Cases)
 /// ## application scenario (Use Cases)
 /// - 日志收集: 多源日志聚合
