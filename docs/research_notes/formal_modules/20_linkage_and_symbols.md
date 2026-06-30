@@ -30,7 +30,7 @@
   - [解释与论证](#解释与论证)
     - [为什么 Rust 默认要 name mangling](#为什么-rust-默认要-name-mangling)
     - [`extern crate` 的演进](#extern-crate-的演进)
-    - [`#[linkage = "internal"]` 与 `static` {#linkage-internal-与-static}](#linkage--internal-与-static-linkage-internal-与-static)
+    - [`#[linkage = "internal"]` 与 `static`](#linkage-internal-与-static)
   - [Rust 示例](#rust-示例)
     - [1. 基本 FFI 导出](#1-基本-ffi-导出)
     - [2. `extern crate` 别名（Rust 2018+ 场景）](#2-extern-crate-别名rust-2018-场景)

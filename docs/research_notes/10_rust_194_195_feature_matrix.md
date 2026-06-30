@@ -66,7 +66,7 @@
 | assert_matches! / debug_assert_matches! | - | - | - | ✅ | [macro_system](formal_methods/10_macro_system.md) | 90% |
 | if let guards on match arms | - | - | ✅ | ✅ | [borrow_checker](formal_methods/10_borrow_checker_proof.md) | 85% |
 | cfg_select! 宏 | - | - | ✅ | ✅ | [macro_system](formal_methods/10_macro_system.md) | 80% |
-| PowerPC / PowerPC64 inline asm | - | - | ✅ | ✅ | [toolchain](../../06_toolchain/) | 80% |
+| PowerPC / PowerPC64 inline asm | - | - | ✅ | ✅ | [toolchain](../../06_toolchain/README.md) | 80% |
 | 下一代 trait 求解器 | - | - | 🔬 | 🔬 | [type_system](type_theory/10_type_system_foundations.md) | 60% |
 | Async Drop | - | - | 🔬 | 🔬 | [async](formal_methods/10_async_state_machine.md) | 40% |
 | 生成器 (iter!) | - | - | 🔬 | 🔬 | [async](formal_methods/10_async_state_machine.md) | 50% |
