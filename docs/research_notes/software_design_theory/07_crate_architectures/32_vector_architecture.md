@@ -174,7 +174,7 @@ let hits = index.search(&embeddings, &query_embedding, 5);
 
 - [nalgebra / ndarray 科学计算架构](14_nalgebra_architecture.md) — 向量/矩阵运算基础
 - [Tokio 异步运行时架构](06_tokio_architecture.md) — 将 vector 集成到异步服务
-- [AI 集成与嵌入模型](../../../../concept/06_ecosystem/40_ai_integration.md)
+- [机器学习生态](../../../../concept/06_ecosystem/46_machine_learning_ecosystem.md)
 - [数据库与存储生态权威来源对齐](../../10_database_storage_cloud_alignment.md)
 
 ---

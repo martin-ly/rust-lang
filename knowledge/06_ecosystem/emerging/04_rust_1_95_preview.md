@@ -1,9 +1,8 @@
 # Rust 1.95 预览特性
 
-> **本文已重定向到权威来源**：[`docs/06_toolchain/06_14_rust_1_95_nightly_preview.md`](../../../docs/06_toolchain/06_14_rust_1_95_nightly_preview.md)
->
-> 本页面保留原路径，仅作为重定向/导航页。有关 Rust 1.95 的完整内容请访问 `docs/06_toolchain/06_14_rust_1_95_nightly_preview.md`。
+> **注意**: Rust 1.95 稳定特性内容已整合到 `concept/07_future/rust_1_95_stabilized.md`；各 nightly/预览特性请见 `concept/07_future/` 下对应的特性预览文件（如 `15_gen_blocks_preview.md`、`18_async_drop_preview.md` 等）。
+> 请以 [concept/07_future/rust_1_95_stabilized.md](../../../concept/07_future/rust_1_95_stabilized.md) 为权威来源。
 
 ---
 
-- [返回权威来源](../../../docs/06_toolchain/06_14_rust_1_95_nightly_preview.md)
+**历史内容已迁移**：本文件不再维护，请点击上方链接查看最新内容。

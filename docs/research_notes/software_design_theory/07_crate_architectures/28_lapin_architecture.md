@@ -297,7 +297,7 @@ let conn = Connection::connect(&addr, props).await?;
 - [Tracing 可观测性架构](18_tracing_architecture.md)
 - [Kafka / rdkafka 架构](26_kafka_architecture.md) — 日志型消息队列对比
 - [异步编程模型](../../../../concept/03_advanced/02_async.md)
-- [分布式模式](../../../../concept/03_advanced/19_distributed_patterns.md)
+- [分布式模式](../../../../concept/03_advanced/19_parallel_distributed_pattern_spectrum.md)
 
 ---
 

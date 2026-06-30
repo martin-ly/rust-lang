@@ -283,7 +283,7 @@ let client = Client::with_options(opts)?;
 - [redis-rs 缓存/消息架构](22_redis_architecture.md)
 - [SQLx 数据库工具架构](09_sqlx_architecture.md)
 - [异步编程模型](../../../../concept/03_advanced/02_async.md)
-- [分布式模式](../../../../concept/03_advanced/19_distributed_patterns.md)
+- [分布式模式](../../../../concept/03_advanced/19_parallel_distributed_pattern_spectrum.md)
 - [数据库与存储生态权威来源对齐](../../10_database_storage_cloud_alignment.md)
 
 ---

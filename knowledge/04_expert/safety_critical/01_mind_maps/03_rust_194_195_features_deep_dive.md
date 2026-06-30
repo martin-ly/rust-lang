@@ -1,5 +1,7 @@
 # Rust 1.94/1.95 特性深度解析
 
+> **归档说明**: 本文为安全关键视角的深度研究笔记。Rust 1.95 稳定特性的权威来源已迁移至 [`concept/07_future/rust_1_95_stabilized.md`](../../../../concept/07_future/rust_1_95_stabilized.md)，后续安全关键系统建议将逐步合并到 `concept/06_ecosystem/safety_critical/` 系列文件。
+
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 >

@@ -1,7 +1,7 @@
 # Rust 1.95 Nightly 预览与实验特性 {#rust-195-nightly-预览与实验特性}
 
-> **权威来源说明**: 本文为 Rust 1.95 相关内容的权威来源。
-> [knowledge/06_ecosystem/emerging/04_rust_1_95_preview.md](../../knowledge/06_ecosystem/emerging/04_rust_1_95_preview.md) 与 [knowledge/06_ecosystem/emerging/03_rust_1_95.md](../../knowledge/06_ecosystem/emerging/03_rust_1_95.md) 已重定向至此。
+> **权威来源说明**: Rust 1.95 **稳定特性**的权威来源为 [`concept/07_future/rust_1_95_stabilized.md`](../../concept/07_future/rust_1_95_stabilized.md)。
+> 本文仅保留 **Nightly / 实验特性** 的工具链视角内容；[knowledge/06_ecosystem/emerging/04_rust_1_95_preview.md](../../knowledge/06_ecosystem/emerging/04_rust_1_95_preview.md) 与 [knowledge/06_ecosystem/emerging/03_rust_1_95.md](../../knowledge/06_ecosystem/emerging/03_rust_1_95.md) 已重定向至 `concept/07_future/rust_1_95_stabilized.md`。
 > **分级**: [A]
 > **Bloom 层级**: L3 (应用)
 > **创建日期**: 2026-02-28
@@ -19,34 +19,35 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [Rust 1.95 Nightly 预览与实验特性](#rust-195-nightly-预览与实验特性)
-  - [目录](#目录)
-  - [版本概览](#版本概览)
-  - [实验性语言特性](#实验性语言特性)
-    - [1. 下一代 Trait 求解器 (next-solver)](#1-下一代-trait-求解器-next-solver)
-    - [2. Async Drop](#2-async-drop)
-    - [3. 生成器 (Generators)](#3-生成器-generators)
-    - [4. Pin 人体工学改进](#4-pin-人体工学改进)
-  - [编译器实验](#编译器实验)
-    - [1. `-Zinstrument-mcount`](#1--zinstrument-mcount)
-    - [2. `-Cdebuginfo-compression`](#2--cdebuginfo-compression)
-    - [3. `fn_align` 属性](#3-fn_align-属性)
-  - [标准库实验](#标准库实验)
-    - [1. 严格指针来源 (Strict Provenance)](#1-严格指针来源-strict-provenance)
-    - [2. `offset_of_slice`](#2--cdebuginfo-compression)
-    - [3. `MaybeUninit` 持续改进](#3-maybeuninit-持续改进)
-  - [Cargo 实验](#cargo-实验)
-    - [1. Build Dir 新布局](#1-build-dir-新布局)
-    - [2. Section Timings](#2-section-timings)
-  - [形式化研究机会](#形式化研究机会)
-    - [高优先级研究主题](#高优先级研究主题)
-    - [建议添加的形式化定义](#建议添加的形式化定义)
-  - [风险与注意事项](#风险与注意事项)
-    - [实验特性风险](#实验特性风险)
-    - [生产使用建议](#生产使用建议)
-  - [相关文档](#相关文档)
-  - [Rust 1.96+ 更新](#rust-196-更新)
-  - [权威来源索引](#权威来源索引)
+- [Rust 1.95 Nightly 预览与实验特性 {#rust-195-nightly-预览与实验特性}](#rust-195-nightly-预览与实验特性-rust-195-nightly-预览与实验特性)
+  - [目录 {#目录}](#目录-目录)
+  - [版本概览 {#版本概览}](#版本概览-版本概览)
+  - [实验性语言特性 {#实验性语言特性}](#实验性语言特性-实验性语言特性)
+    - [1. 下一代 Trait 求解器 (next-solver) {#1-下一代-trait-求解器-next-solver}](#1-下一代-trait-求解器-next-solver-1-下一代-trait-求解器-next-solver)
+    - [2. Async Drop {#2-async-drop}](#2-async-drop-2-async-drop)
+    - [3. 生成器 (Generators) {#3-生成器-generators}](#3-生成器-generators-3-生成器-generators)
+    - [4. Pin 人体工学改进 {#4-pin-人体工学改进}](#4-pin-人体工学改进-4-pin-人体工学改进)
+  - [编译器实验 {#编译器实验}](#编译器实验-编译器实验)
+    - [1. `-Zinstrument-mcount` {#1--zinstrument-mcount}](#1--zinstrument-mcount-1--zinstrument-mcount)
+    - [2. `-Cdebuginfo-compression` {#2--cdebuginfo-compression}](#2--cdebuginfo-compression-2--cdebuginfo-compression)
+    - [3. `fn_align` 属性 {#3-fn\_align-属性}](#3-fn_align-属性-3-fn_align-属性)
+  - [标准库实验 {#标准库实验}](#标准库实验-标准库实验)
+    - [1. 严格指针来源 (Strict Provenance) {#1-严格指针来源-strict-provenance}](#1-严格指针来源-strict-provenance-1-严格指针来源-strict-provenance)
+    - [2. `offset_of_slice` {#2-offset\_of\_slice}](#2-offset_of_slice-2-offset_of_slice)
+    - [3. `MaybeUninit` 持续改进 {#3-maybeuninit-持续改进}](#3-maybeuninit-持续改进-3-maybeuninit-持续改进)
+  - [Cargo 实验 {#cargo-实验}](#cargo-实验-cargo-实验)
+    - [1. Build Dir 新布局 {#1-build-dir-新布局}](#1-build-dir-新布局-1-build-dir-新布局)
+    - [2. Section Timings {#2-section-timings}](#2-section-timings-2-section-timings)
+  - [形式化研究机会 {#形式化研究机会}](#形式化研究机会-形式化研究机会)
+    - [高优先级研究主题 {#高优先级研究主题}](#高优先级研究主题-高优先级研究主题)
+    - [建议添加的形式化定义 {#建议添加的形式化定义}](#建议添加的形式化定义-建议添加的形式化定义)
+  - [风险与注意事项 {#风险与注意事项}](#风险与注意事项-风险与注意事项)
+    - [实验特性风险 {#实验特性风险}](#实验特性风险-实验特性风险)
+    - [生产使用建议 {#生产使用建议}](#生产使用建议-生产使用建议)
+  - [相关文档 {#相关文档}](#相关文档-相关文档)
+  - [Rust 1.96+ 更新 {#rust-196-更新}](#rust-196-更新-rust-196-更新)
+  - [**最后更新**: 2026-06-08 (对齐 1.96 稳定版内容)](#最后更新-2026-06-08-对齐-196-稳定版内容)
+  - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
 ---
 

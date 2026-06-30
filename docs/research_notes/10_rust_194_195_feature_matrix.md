@@ -1,6 +1,8 @@
 # Rust 1.94/1.95 特性矩阵与形式化追踪 {#rust-194195-特性矩阵与形式化追踪}
 >
 > **概念族**: 版本特性
+>
+> **归档说明**: 本文档为历史研究笔记。Rust 1.95 稳定特性的权威来源已迁移至 [`concept/07_future/rust_1_95_stabilized.md`](../../concept/07_future/rust_1_95_stabilized.md)，Rust 1.96 稳定特性请参见 [`concept/07_future/rust_1_96_stabilized.md`](../../concept/07_future/rust_1_96_stabilized.md)。
 
 > **内容分级**: [归档级]
 >
@@ -20,34 +22,34 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Rust 1.94/1.95 特性矩阵与形式化追踪](#rust-194195-特性矩阵与形式化追踪)
-  - [📑 目录](#目录)
-  - [特性矩阵概览](#特性矩阵概览)
-    - [特性来源索引](#特性来源索引)
-  - [形式化文档更新计划](#形式化文档更新计划)
-    - [高优先级更新](#高优先级更新)
-    - [中优先级更新](#中优先级更新)
-  - [新增形式化定义](#新增形式化定义)
-    - [Def 1.94-1 (RangeToInclusive)](#def-194-1-rangetoinclusive)
-    - [Def 1.94-2 (ControlFlow::ok)](#def-194-2-controlflowok)
-    - [Def 1.94-3 (RefCell::try\_map)](#def-194-3-refcelltry_map)
-    - [Def 1.95-1 (生成器状态机)](#def-195-1-生成器状态机)
-    - [Def 1.96-1 (core::range::Range)](#def-196-1-corerangerange)
-    - [Def 1.96-2 (assert\_matches!)](#def-196-2-assert_matches)
-    - [Def 1.96-3 (Cargo CVE-2026-5223)](#def-196-3-cargo-cve-2026-5223)
-  - [证明更新清单](#证明更新清单)
-    - [定理更新](#定理更新)
-  - [网络资源对齐](#网络资源对齐)
-    - [官方资源](#官方资源)
-    - [学术资源](#学术资源)
-  - [持续追踪指标](#持续追踪指标)
-  - [✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）](#权威国际化来源对齐升级摘要rust-1960-edition-2024)
-    - [本次升级要点](#本次升级要点)
-      - [新增 Rust 1.96.0 特性](#新增-rust-1960-特性)
-      - [新增 Rust 1.95.0 特性](#新增-rust-1950-特性)
-      - [权威来源对齐](#权威来源对齐)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [Rust 1.94/1.95 特性矩阵与形式化追踪 {#rust-194195-特性矩阵与形式化追踪}](#rust-194195-特性矩阵与形式化追踪-rust-194195-特性矩阵与形式化追踪)
+  - [📑 目录 {#目录}](#-目录-目录)
+  - [特性矩阵概览 {#特性矩阵概览}](#特性矩阵概览-特性矩阵概览)
+    - [特性来源索引 {#特性来源索引}](#特性来源索引-特性来源索引)
+  - [形式化文档更新计划 {#形式化文档更新计划}](#形式化文档更新计划-形式化文档更新计划)
+    - [高优先级更新 {#高优先级更新}](#高优先级更新-高优先级更新)
+    - [中优先级更新 {#中优先级更新}](#中优先级更新-中优先级更新)
+  - [新增形式化定义 {#新增形式化定义}](#新增形式化定义-新增形式化定义)
+    - [Def 1.94-1 (RangeToInclusive) {#def-194-1-rangetoinclusive}](#def-194-1-rangetoinclusive-def-194-1-rangetoinclusive)
+    - [Def 1.94-2 (ControlFlow::ok) {#def-194-2-controlflowok}](#def-194-2-controlflowok-def-194-2-controlflowok)
+    - [Def 1.94-3 (RefCell::try\_map) {#def-194-3-refcelltry\_map}](#def-194-3-refcelltry_map-def-194-3-refcelltry_map)
+    - [Def 1.95-1 (生成器状态机) {#def-195-1-生成器状态机}](#def-195-1-生成器状态机-def-195-1-生成器状态机)
+    - [Def 1.96-1 (core::range::Range) {#def-196-1-corerangerange}](#def-196-1-corerangerange-def-196-1-corerangerange)
+    - [Def 1.96-2 (assert\_matches!) {#def-196-2-assert\_matches}](#def-196-2-assert_matches-def-196-2-assert_matches)
+    - [Def 1.96-3 (Cargo CVE-2026-5223) {#def-196-3-cargo-cve-2026-5223}](#def-196-3-cargo-cve-2026-5223-def-196-3-cargo-cve-2026-5223)
+  - [证明更新清单 {#证明更新清单}](#证明更新清单-证明更新清单)
+    - [定理更新 {#定理更新}](#定理更新-定理更新)
+  - [网络资源对齐 {#网络资源对齐}](#网络资源对齐-网络资源对齐)
+    - [官方资源 {#官方资源}](#官方资源-官方资源)
+    - [学术资源 {#学术资源}](#学术资源-学术资源)
+  - [持续追踪指标 {#持续追踪指标}](#持续追踪指标-持续追踪指标)
+  - [✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024） {#权威国际化来源对齐升级摘要rust-1960-edition-2024}](#-权威国际化来源对齐升级摘要rust-1960--edition-2024-权威国际化来源对齐升级摘要rust-1960-edition-2024)
+    - [本次升级要点 {#本次升级要点}](#本次升级要点-本次升级要点)
+      - [新增 Rust 1.96.0 特性 {#新增-rust-1960-特性}](#新增-rust-1960-特性-新增-rust-1960-特性)
+      - [新增 Rust 1.95.0 特性 {#新增-rust-1950-特性}](#新增-rust-1950-特性-新增-rust-1950-特性)
+      - [权威来源对齐 {#权威来源对齐}](#权威来源对齐-权威来源对齐)
+  - [相关概念 {#相关概念}](#相关概念-相关概念)
+  - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
 ## 特性矩阵概览 {#特性矩阵概览}
 >
@@ -66,7 +68,7 @@
 | assert_matches! / debug_assert_matches! | - | - | - | ✅ | [macro_system](formal_methods/10_macro_system.md) | 90% |
 | if let guards on match arms | - | - | ✅ | ✅ | [borrow_checker](formal_methods/10_borrow_checker_proof.md) | 85% |
 | cfg_select! 宏 | - | - | ✅ | ✅ | [macro_system](formal_methods/10_macro_system.md) | 80% |
-| PowerPC / PowerPC64 inline asm | - | - | ✅ | ✅ | [toolchain](../../06_toolchain/README.md) | 80% |
+| PowerPC / PowerPC64 inline asm | - | - | ✅ | ✅ | [toolchain](../06_toolchain/README.md) | 80% |
 | 下一代 trait 求解器 | - | - | 🔬 | 🔬 | [type_system](type_theory/10_type_system_foundations.md) | 60% |
 | Async Drop | - | - | 🔬 | 🔬 | [async](formal_methods/10_async_state_machine.md) | 40% |
 | 生成器 (iter!) | - | - | 🔬 | 🔬 | [async](formal_methods/10_async_state_machine.md) | 50% |

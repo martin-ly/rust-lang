@@ -1,6 +1,6 @@
 # Rust 1.96 特性速查表 {#rust-196-特性速查表}
 
-> **内容重叠提示**: 本文与 [`knowledge/06_ecosystem/emerging/05_rust_1_96.md`](../../../knowledge/06_ecosystem/emerging/05_rust_1_96.md) 内容高度重叠。`concept/` 版本为项目权威主轨；本文保留作为快速参考。
+> **内容重叠提示**: 本文与 [`concept/07_future/rust_1_96_stabilized.md`](../../../concept/07_future/rust_1_96_stabilized.md) 内容高度重叠。`concept/` 版本为项目权威主轨；本文保留作为快速参考。
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)
 > **版本**: Rust 1.96
@@ -22,29 +22,29 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [Rust 1.96 特性速查表](#rust-196-特性速查表)
-  - [目录](#目录)
-  - [if let guards 语法](#if-let-guards-语法)
-    - [基本语法](#基本语法)
-    - [链式守卫](#链式守卫)
-    - [对比表](#对比表)
-    - [代码示例](#代码示例)
-  - [Range 类型对比](#range-类型对比)
-    - [类型总览](#类型总览)
-    - [使用场景速查](#使用场景速查)
-    - [Range 方法](#range-方法)
-  - [新 Lint 规则](#新-lint-规则)
-    - [Rust 1.96 新增 Lints](#rust-196-新增-lints)
-    - [配置方式](#配置方式)
-    - [命令行使用](#命令行使用)
-  - [快速参考示例](#快速参考示例)
-    - [if let guards 模板](#if-let-guards-模板)
-    - [Range 常用模式](#range-常用模式)
-    - [PinCoerceUnsized 快速使用（nightly 前瞻，实验性）](#pincoerceunsized-快速使用nightly-前瞻实验性)
-    - [元组 Coercion 示例](#元组-coercion-示例)
-  - [迁移检查清单](#迁移检查清单)
-  - [相关链接](#相关链接)
-  - [权威来源索引](#权威来源索引)
+- [Rust 1.96 特性速查表 {#rust-196-特性速查表}](#rust-196-特性速查表-rust-196-特性速查表)
+  - [目录 {#目录}](#目录-目录)
+  - [if let guards 语法 {#if-let-guards-语法}](#if-let-guards-语法-if-let-guards-语法)
+    - [基本语法 {#基本语法}](#基本语法-基本语法)
+    - [链式守卫 {#链式守卫}](#链式守卫-链式守卫)
+    - [对比表 {#对比表}](#对比表-对比表)
+    - [代码示例 {#代码示例}](#代码示例-代码示例)
+  - [Range 类型对比 {#range-类型对比}](#range-类型对比-range-类型对比)
+    - [类型总览 {#类型总览}](#类型总览-类型总览)
+    - [使用场景速查 {#使用场景速查}](#使用场景速查-使用场景速查)
+    - [Range 方法 {#range-方法}](#range-方法-range-方法)
+  - [新 Lint 规则 {#新-lint-规则}](#新-lint-规则-新-lint-规则)
+    - [Rust 1.96 新增 Lints {#rust-196-新增-lints}](#rust-196-新增-lints-rust-196-新增-lints)
+    - [配置方式 {#配置方式}](#配置方式-配置方式)
+    - [命令行使用 {#命令行使用}](#命令行使用-命令行使用)
+  - [快速参考示例 {#快速参考示例}](#快速参考示例-快速参考示例)
+    - [if let guards 模板 {#if-let-guards-模板}](#if-let-guards-模板-if-let-guards-模板)
+    - [Range 常用模式 {#range-常用模式}](#range-常用模式-range-常用模式)
+    - [PinCoerceUnsized 快速使用（nightly 前瞻，实验性） {#pincoerceunsized-快速使用nightly-前瞻实验性}](#pincoerceunsized-快速使用nightly-前瞻实验性-pincoerceunsized-快速使用nightly-前瞻实验性)
+    - [元组 Coercion 示例 {#元组-coercion-示例}](#元组-coercion-示例-元组-coercion-示例)
+  - [迁移检查清单 {#迁移检查清单}](#迁移检查清单-迁移检查清单)
+  - [相关链接 {#相关链接}](#相关链接-相关链接)
+  - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
 ---
 

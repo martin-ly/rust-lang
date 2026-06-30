@@ -20,7 +20,7 @@ import sys
 from pathlib import Path
 from collections import Counter
 
-QUICK_REF_DIR = Path("docs/02_reference/quick_reference")
+DEFAULT_TARGET = Path("docs/02_reference/quick_reference")
 
 # 目录标题匹配：## 📋 目录 / ## 📑 目录 / ## 目录 等
 TOC_HEADING_RE = re.compile(r"^##\s+.*目录\s*(\{#[^}]*\})?\s*$")
@@ -242,7 +242,19 @@ def fix_file(path: Path, dry_run: bool = False):
 def main():
     dry_run = "--dry-run" in sys.argv
 
-    md_files = sorted(QUICK_REF_DIR.glob("*.md"))
+    # 支持命令行传入文件或目录，默认处理 quick_reference
+    non_flag_args = [a for a in sys.argv[1:] if a != "--dry-run"]
+    if non_flag_args:
+        user_path = Path(non_flag_args[0])
+        if user_path.is_file():
+            md_files = [user_path]
+        elif user_path.is_dir():
+            md_files = sorted(user_path.glob("*.md"))
+        else:
+            print(f"路径不存在: {user_path}")
+            return
+    else:
+        md_files = sorted(DEFAULT_TARGET.glob("*.md"))
     print(f"发现 {len(md_files)} 个 Markdown 文件")
     if dry_run:
         print("(当前为预览模式，不会写入文件)\n")

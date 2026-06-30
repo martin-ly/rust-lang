@@ -878,6 +878,8 @@ Rust 1.96.0 已按计划进入 stable 通道。详见 [`docs/06_toolchain/06_19_
 
 ### 近期稳定版发布笔记回顾（1.93–1.95）
 
+> 📎 Rust 1.95 稳定特性的完整说明与示例已迁移至 [`concept/07_future/rust_1_95_stabilized.md`](rust_1_95_stabilized.md)。本节仅保留形式模型视角的极简回顾。
+
 **Rust 1.95.0（2026-04-16）** [来源: [Rust Blog](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)]：
 
 | **特性** | **说明** |
