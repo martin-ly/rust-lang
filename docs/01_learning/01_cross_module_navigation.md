@@ -1,4 +1,4 @@
-# 跨模块学习导航图
+# 跨模块学习导航图 {#跨模块学习导航图}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
@@ -10,25 +10,25 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [跨模块学习导航图](#跨模块学习导航图)
-  - [📑 目录](#-目录)
-  - [🗺️ 学习路线图](#️-学习路线图)
-  - [📚 模块详细映射](#-模块详细映射)
-    - [核心概念 → 源码 → 文档 → 实践](#核心概念--源码--文档--实践)
-  - [🔄 学习循环](#-学习循环)
-  - [🎯 推荐学习路径](#-推荐学习路径)
+  - [📑 目录](#目录)
+  - [🗺️ 学习路线图](#学习路线图)
+  - [📚 模块详细映射](#模块详细映射)
+    - [核心概念 → 源码 → 文档 → 实践](#核心概念-源码-文档-实践)
+  - [🔄 学习循环](#学习循环)
+  - [🎯 推荐学习路径](#推荐学习路径)
     - [路径 A: Web 开发者](#路径-a-web-开发者)
     - [路径 B: 系统开发者](#路径-b-系统开发者)
     - [路径 C: 研究者](#路径-c-研究者)
-  - [🔗 快速链接](#-快速链接)
+  - [🔗 快速链接](#快速链接)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🗺️ 学习路线图
+## 🗺️ 学习路线图 {#学习路线图}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -100,11 +100,11 @@
 
 ---
 
-## 📚 模块详细映射
+## 📚 模块详细映射 {#模块详细映射}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 核心概念 → 源码 → 文档 → 实践
+### 核心概念 → 源码 → 文档 → 实践 {#核心概念-源码-文档-实践}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -120,7 +120,7 @@
 
 ---
 
-## 🔄 学习循环
+## 🔄 学习循环 {#学习循环}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -157,11 +157,11 @@
 
 ---
 
-## 🎯 推荐学习路径
+## 🎯 推荐学习路径 {#推荐学习路径}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 路径 A: Web 开发者
+### 路径 A: Web 开发者 {#路径-a-web-开发者}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -173,7 +173,7 @@ C01 → C02 → C03 → C04 → C06 → content/ecosystem/async_runtimes/
                            content/scenarios/web_app/
 ```
 
-### 路径 B: 系统开发者
+### 路径 B: 系统开发者 {#路径-b-系统开发者}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -183,7 +183,7 @@ C01 → C02 → C05 → C07 → C10 → content/production/
                            content/emerging/
 ```
 
-### 路径 C: 研究者
+### 路径 C: 研究者 {#路径-c-研究者}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -195,7 +195,7 @@ C01 → C04 → C11 → docs/research_notes/
 
 ---
 
-## 🔗 快速链接
+## 🔗 快速链接 {#快速链接}
 
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -228,7 +228,7 @@ C01 → C04 → C11 → docs/research_notes/
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -237,7 +237,7 @@ C01 → C04 → C11 → docs/research_notes/
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**

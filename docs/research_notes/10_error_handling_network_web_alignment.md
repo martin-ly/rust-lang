@@ -1,4 +1,4 @@
-# 错误处理与网络/Web 生态权威来源对齐矩阵
+# 错误处理与网络/Web 生态权威来源对齐矩阵 {#错误处理与网络web-生态权威来源对齐矩阵}
 
 > **概念族**: 权威来源对齐 / 错误处理 / 网络 / Web
 > **内容分级**: [核心级]
@@ -11,7 +11,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [错误处理与网络/Web 生态权威来源对齐矩阵](#错误处理与网络web-生态权威来源对齐矩阵)
   - [目录](#目录)
@@ -27,7 +27,7 @@
 
 ---
 
-## 一、对齐说明
+## 一、对齐说明 {#一对齐说明}
 
 本文档将 `docs/research_notes/` 中的错误处理、网络基础与 Web 生态内容与国际化权威来源建立映射，覆盖：
 
@@ -40,7 +40,7 @@
 
 ---
 
-## 二、错误处理
+## 二、错误处理 {#二错误处理}
 
 | 概念/库 | 权威来源 | 项目文档 | 备注 |
 |---------|----------|----------|------|
@@ -54,7 +54,7 @@
 
 ---
 
-## 三、网络基础
+## 三、网络基础 {#三网络基础}
 
 | 库/框架 | 权威来源 | 项目文档 | 备注 |
 |---------|----------|----------|------|
@@ -66,7 +66,7 @@
 
 ---
 
-## 四、Web 框架
+## 四、Web 框架 {#四web-框架}
 
 | 框架/库 | 权威来源 | 项目文档 | 备注 |
 |---------|----------|----------|------|
@@ -78,7 +78,7 @@
 
 ---
 
-## 五、Web 标准/协议
+## 五、Web 标准/协议 {#五web-标准协议}
 
 | 标准/协议 | 权威来源 | 项目文档 | 备注 |
 |-----------|----------|----------|------|
@@ -90,7 +90,7 @@
 
 ---
 
-## 六、与项目文档的映射
+## 六、与项目文档的映射 {#六与项目文档的映射}
 
 | 项目文档 | 生态覆盖 | 权威来源 |
 |----------|----------|----------|
@@ -107,7 +107,7 @@
 
 ---
 
-## 七、未覆盖缺口
+## 七、未覆盖缺口 {#七未覆盖缺口}
 
 1. `color-eyre` / `stable-eyre` 与错误报告可视化的专门对齐。
 2. `reqwest` / `surf` 等高级 HTTP 客户端与 `hyper` 的选型矩阵。
@@ -118,7 +118,7 @@
 
 > **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/) | [Rust Standard Library](https://doc.rust-lang.org/std/) | [Tokio](https://tokio.rs/) | [hyper](https://hyper.rs/) | [tonic](https://docs.rs/tonic/) | [axum](https://docs.rs/axum/) | [actix-web](https://actix.rs/) | [rocket](https://rocket.rs/) | [RFC 9112](https://www.rfc-editor.org/rfc/rfc9112.html) | [RFC 9113](https://www.rfc-editor.org/rfc/rfc9113.html) | [RFC 9114](https://www.rfc-editor.org/rfc/rfc9114.html) | [RFC 6455](https://www.rfc-editor.org/rfc/rfc6455.html) | [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
 - [错误处理速查卡](10_error_handling_cheatsheet.md)
@@ -133,7 +133,7 @@
 
 ---
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 本对齐矩阵同时参考以下 P1 学术权威来源，以形成完整的官方-学术对照网络：
 

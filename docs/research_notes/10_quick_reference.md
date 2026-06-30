@@ -1,4 +1,4 @@
-# 研究笔记快速参考
+# 研究笔记快速参考 {#研究笔记快速参考}
 
 > **概念族**: 综合研究
 
@@ -22,7 +22,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -31,42 +31,42 @@
 >
 
 - [研究笔记快速参考](#研究笔记快速参考)
-  - [📑 目录](#-目录)
-  - [📊 快速导航](#-快速导航)
+  - [📑 目录](#目录)
+  - [📊 快速导航](#快速导航)
     - [按研究领域查找](#按研究领域查找)
-      - [🔬 形式化方法研究](#-形式化方法研究)
-      - [🔷 类型理论研究](#-类型理论研究)
-      - [🌐 软件设计理论](#-软件设计理论)
-      - [⚡ 实验研究](#-实验研究)
-      - [🌐 综合研究](#-综合研究)
-  - [🎯 按研究目标查找](#-按研究目标查找)
+      - [🔬 形式化方法研究](#形式化方法研究)
+      - [🔷 类型理论研究](#类型理论研究)
+      - [🌐 软件设计理论](#软件设计理论)
+      - [⚡ 实验研究](#实验研究)
+      - [🌐 综合研究](#综合研究)
+  - [🎯 按研究目标查找](#按研究目标查找)
     - [我想证明某个性质](#我想证明某个性质)
     - [我想理解类型系统](#我想理解类型系统)
     - [我想优化性能](#我想优化性能)
     - [我想学习研究方法](#我想学习研究方法)
-  - [🔍 按关键词查找](#-按关键词查找)
+  - [🔍 按关键词查找](#按关键词查找)
     - [所有权相关](#所有权相关)
     - [类型系统相关](#类型系统相关)
     - [异步相关](#异步相关)
     - [性能相关](#性能相关)
     - [生命周期相关](#生命周期相关)
-  - [🛠️ 常用工具快速查找](#️-常用工具快速查找)
+  - [🛠️ 常用工具快速查找](#常用工具快速查找)
     - [形式化验证工具](#形式化验证工具)
     - [性能分析工具](#性能分析工具)
     - [内存分析工具](#内存分析工具)
-  - [📚 学习路径建议](#-学习路径建议)
+  - [📚 学习路径建议](#学习路径建议)
     - [初学者路径](#初学者路径)
     - [进阶路径](#进阶路径)
     - [专家路径](#专家路径)
-  - [🔗 相关资源](#-相关资源)
+  - [🔗 相关资源](#相关资源)
     - [核心文档](#核心文档)
     - [外部资源](#外部资源)
-  - [🌍 权威国际化资源链接](#-权威国际化资源链接)
+  - [🌍 权威国际化资源链接](#权威国际化资源链接)
     - [Rust Reference 核心章节](#rust-reference-核心章节)
     - [The Rust Programming Language 核心章节](#the-rust-programming-language-核心章节)
-    - [Rust Standard Library 核心 API / 模块](#rust-standard-library-核心-api--模块)
-    - [Rust By Example / Rust Cookbook / cheats.rs](#rust-by-example--rust-cookbook--cheatsrs)
-    - [快速查找专属语言 / API 链接](#快速查找专属语言--api-链接)
+    - [Rust Standard Library 核心 API / 模块](#rust-standard-library-核心-api-模块)
+    - [Rust By Example / Rust Cookbook / cheats.rs](#rust-by-example-rust-cookbook-cheatsrs)
+    - [快速查找专属语言 / API 链接](#快速查找专属语言-api-链接)
       - [所有权与借用](#所有权与借用)
       - [类型系统](#类型系统)
       - [异步与并发](#异步与并发)
@@ -75,7 +75,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 📊 快速导航
+## 📊 快速导航 {#快速导航}
 
 >
 
@@ -89,13 +89,13 @@
 
 ---
 
-### 按研究领域查找
+### 按研究领域查找 {#按研究领域查找}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-#### 🔬 形式化方法研究
+#### 🔬 形式化方法研究 {#形式化方法研究}
 
 >
 
@@ -117,7 +117,7 @@
 
 | Pin 和自引用类型 | [10_pin_self_referential.md](formal_methods/10_pin_self_referential.md)                | ✅ 100%           |
 
-#### 🔷 类型理论研究
+#### 🔷 类型理论研究 {#类型理论研究}
 
 >
 
@@ -141,7 +141,7 @@
 
 | 型变理论         | [10_variance_theory.md](type_theory/10_variance_theory.md)                         | ✅ 100%               |
 
-#### 🌐 软件设计理论
+#### 🌐 软件设计理论 {#软件设计理论}
 
 >
 
@@ -165,7 +165,7 @@
 
 | 反模式与边界 | [07_anti_patterns](software_design_theory/07_anti_patterns.md) | ✅ 13 反例、规避策略 |
 
-#### ⚡ 实验研究
+#### ⚡ 实验研究 {#实验研究}
 
 >
 
@@ -185,7 +185,7 @@
 
 | 宏展开性能     | [10_macro_expansion_performance.md](experiments/10_macro_expansion_performance.md)     | ✅ 100% |
 
-#### 🌐 综合研究
+#### 🌐 综合研究 {#综合研究}
 
 >
 
@@ -201,13 +201,13 @@
 
 ---
 
-## 🎯 按研究目标查找
+## 🎯 按研究目标查找 {#按研究目标查找}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 我想证明某个性质
+### 我想证明某个性质 {#我想证明某个性质}
 
 >
 
@@ -219,7 +219,7 @@
 
 - 核心定理完整证明 → [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md)（L2）
 
-- Coq 证明骨架 → [archive/deprecated/coq_skeleton](../archive/deprecated/coq_skeleton/README.md)、[COQ_ISABELLE_PROOF_SCAFFOLDING](../archive/deprecated/README.md)（已归档）
+- Coq 证明骨架 → [archive/deprecated/coq_skeleton](../../archive/deprecated/coq_skeleton/README.md)、[COQ_ISABELLE_PROOF_SCAFFOLDING](../../archive/deprecated/README.md)（已归档）
 
 **形式化方法研究**:
 
@@ -231,7 +231,7 @@
 
 - 引用有效性 → 生命周期形式化
 
-### 我想理解类型系统
+### 我想理解类型系统 {#我想理解类型系统}
 
 >
 
@@ -247,7 +247,7 @@
 
 - 型变规则 → [型变理论](type_theory/10_variance_theory.md)
 
-### 我想优化性能
+### 我想优化性能 {#我想优化性能}
 
 >
 
@@ -263,7 +263,7 @@
 
 - 并发优化 → [并发性能](experiments/10_concurrency_performance.md)
 
-### 我想学习研究方法
+### 我想学习研究方法 {#我想学习研究方法}
 
 >
 
@@ -279,13 +279,13 @@
 
 ---
 
-## 🔍 按关键词查找
+## 🔍 按关键词查找 {#按关键词查找}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 所有权相关
+### 所有权相关 {#所有权相关}
 
 >
 
@@ -297,7 +297,7 @@
 
 - Pin 类型 → [10_pin_self_referential.md](formal_methods/10_pin_self_referential.md)
 
-### 类型系统相关
+### 类型系统相关 {#类型系统相关}
 
 >
 
@@ -317,7 +317,7 @@
 
 - 类型理论缺口 → [00_completeness_gaps.md](formal_methods/00_completeness_gaps.md)
 
-### 异步相关
+### 异步相关 {#异步相关}
 
 >
 
@@ -327,7 +327,7 @@
 
 - async/await → [10_async_state_machine.md](formal_methods/10_async_state_machine.md)
 
-### 性能相关
+### 性能相关 {#性能相关}
 
 >
 
@@ -343,7 +343,7 @@
 
 - 宏性能 → [10_macro_expansion_performance.md](experiments/10_macro_expansion_performance.md)
 
-### 生命周期相关
+### 生命周期相关 {#生命周期相关}
 
 >
 
@@ -355,13 +355,13 @@
 
 ---
 
-## 🛠️ 常用工具快速查找
+## 🛠️ 常用工具快速查找 {#常用工具快速查找}
 
 >
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 形式化验证工具
+### 形式化验证工具 {#形式化验证工具}
 
 >
 
@@ -375,7 +375,7 @@
 
 - **Prusti** → [研究方法论](10_research_methodology.md#验证工具)
 
-### 性能分析工具
+### 性能分析工具 {#性能分析工具}
 
 >
 
@@ -389,7 +389,7 @@
 
 - **flamegraph** → [研究方法论](10_research_methodology.md#分析工具)
 
-### 内存分析工具
+### 内存分析工具 {#内存分析工具}
 
 >
 
@@ -403,13 +403,13 @@
 
 ---
 
-## 📚 学习路径建议
+## 📚 学习路径建议 {#学习路径建议}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 初学者路径
+### 初学者路径 {#初学者路径}
 
 >
 
@@ -421,7 +421,7 @@
 
 3. [性能基准测试](experiments/10_performance_benchmarks.md) - 开始实验
 
-### 进阶路径
+### 进阶路径 {#进阶路径}
 
 >
 
@@ -433,7 +433,7 @@
 
 3. [高级类型特性](type_theory/10_advanced_types.md) - 学习高级特性
 
-### 专家路径
+### 专家路径 {#专家路径}
 
 >
 
@@ -447,13 +447,13 @@
 
 ---
 
-## 🔗 相关资源
+## 🔗 相关资源 {#相关资源}
 
 >
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 核心文档
+### 核心文档 {#核心文档}
 
 >
 
@@ -497,7 +497,7 @@
 
 - [工具使用指南](10_tools_guide.md) - 研究工具详细指南
 
-### 外部资源
+### 外部资源 {#外部资源}
 
 >
 
@@ -519,7 +519,7 @@
 
 ---
 
-## 🌍 权威国际化资源链接
+## 🌍 权威国际化资源链接 {#权威国际化资源链接}
 
 >
 
@@ -537,7 +537,7 @@
 
 本节为速查内容提供官方权威来源与社区经典参考的直通链接，便于深入验证与扩展阅读。
 
-### Rust Reference 核心章节
+### Rust Reference 核心章节 {#rust-reference-核心章节}
 
 - [Reference 首页](https://doc.rust-lang.org/reference/)
 
@@ -551,7 +551,7 @@
 
 - [Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html)
 
-### The Rust Programming Language 核心章节
+### The Rust Programming Language 核心章节 {#the-rust-programming-language-核心章节}
 
 - [TRPL 首页](https://doc.rust-lang.org/book/)
 
@@ -569,7 +569,7 @@
 
 - [Ch. 19 - Advanced Features / Macros](https://doc.rust-lang.org/book/ch19-06-macros.html)
 
-### Rust Standard Library 核心 API / 模块
+### Rust Standard Library 核心 API / 模块 {#rust-standard-library-核心-api-模块}
 
 - [std 首页](https://doc.rust-lang.org/std/)
 
@@ -585,7 +585,7 @@
 
 - [std::marker (Send / Sync / PhantomData)](https://doc.rust-lang.org/std/marker/)
 
-### Rust By Example / Rust Cookbook / cheats.rs
+### Rust By Example / Rust Cookbook / cheats.rs {#rust-by-example-rust-cookbook-cheatsrs}
 
 - [Rust By Example 首页](https://doc.rust-lang.org/rust-by-example/)
 
@@ -595,13 +595,13 @@
 
 ---
 
-### 快速查找专属语言 / API 链接
+### 快速查找专属语言 / API 链接 {#快速查找专属语言-api-链接}
 
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-#### 所有权与借用
+#### 所有权与借用 {#所有权与借用}
 
 - [Reference - Memory allocation and lifetime](https://doc.rust-lang.org/reference/memory-model.html#memory-allocation-and-lifetime)
 
@@ -615,7 +615,7 @@
 
 - [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html)
 
-#### 类型系统
+#### 类型系统 {#类型系统}
 
 - [Reference - Types](https://doc.rust-lang.org/reference/types.html)
 
@@ -627,7 +627,7 @@
 
 - [std::marker (Send / Sync / Copy / Sized)](https://doc.rust-lang.org/std/marker/)
 
-#### 异步与并发
+#### 异步与并发 {#异步与并发}
 
 - [TRPL Ch. 17 - Async / Await](https://doc.rust-lang.org/book/ch17-00-async-await.html)
 
@@ -639,7 +639,7 @@
 
 - [std::thread](https://doc.rust-lang.org/std/thread/)
 
-#### 生命周期
+#### 生命周期 {#生命周期}
 
 - [Reference - Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html)
 
@@ -647,7 +647,7 @@
 
 - [cheats.rs - Lifetimes](https://cheats.rs/#lifetimes)
 
-#### 宏与错误处理
+#### 宏与错误处理 {#宏与错误处理}
 
 - [Reference - Macros](https://doc.rust-lang.org/reference/macros.html)
 
@@ -659,7 +659,7 @@
 
 - [std::option::Option](https://doc.rust-lang.org/std/option/)
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -671,7 +671,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

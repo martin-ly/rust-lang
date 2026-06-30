@@ -454,8 +454,8 @@ def generate_dashboard(audits: list[FileAudit], dead_links: list[dict]) -> str:
             dl = a.dual_labels
             if dl.get("audience") and dl.get("content_level"):
                 dual_label_stats["has_both"] += 1
-            audience = dl.get("audience", "")
-            level = dl.get("content_level", "")
+            audience = dl.get("audience") or ""
+            level = dl.get("content_level") or ""
             if "初学者" in audience and level == "研究者级":
                 dual_label_stats["illegal"] += 1
 
@@ -509,8 +509,8 @@ def generate_dashboard(audits: list[FileAudit], dead_links: list[dict]) -> str:
                 issues.append("缺失受众标签")
             if not dl.get("content_level"):
                 issues.append("缺失内容分级标签")
-            audience = dl.get("audience", "")
-            level = dl.get("content_level", "")
+            audience = dl.get("audience") or ""
+            level = dl.get("content_level") or ""
             if "初学者" in audience and level == "研究者级":
                 issues.append("非法标签组合: 初学者 + 研究者级")
         # 模板化 ⟹ 检查

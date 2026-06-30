@@ -8,7 +8,7 @@
 
 ---
 
-# chrono Crate 架构解构
+# chrono Crate 架构解构 {#chrono-crate-架构解构}
 
 > **最后更新**: 2026-06-29
 > **内容分级**: [归档级]
@@ -19,7 +19,7 @@
 
 ---
 
-## 1. 引言：chrono 在 Rust 生态中的定位
+## 1. 引言：chrono 在 Rust 生态中的定位 {#1-引言chrono-在-rust-生态中的定位}
 
 > **[来源: [chrono docs.rs](https://docs.rs/chrono/latest/chrono/)]**
 
@@ -38,9 +38,9 @@
 
 ---
 
-## 2. 核心类型与抽象
+## 2. 核心类型与抽象 {#2-核心类型与抽象}
 
-### 2.1 日期时间类型谱系
+### 2.1 日期时间类型谱系 {#21-日期时间类型谱系}
 
 > **[来源: [chrono docs.rs – DateTime](https://docs.rs/chrono/latest/chrono/struct.DateTime.html)]**
 
@@ -74,7 +74,7 @@ graph TD
 | `DateTime<Local>` | 系统本地时区的日期时间 | 用户界面展示 |
 | `DateTime<FixedOffset>` | 固定偏移时区 | 解析带 `+08:00` 的字符串 |
 
-### 2.2 时区抽象 `TimeZone`
+### 2.2 时区抽象 `TimeZone` {#22-时区抽象-timezone}
 
 > **[来源: [chrono docs.rs – TimeZone](https://docs.rs/chrono/latest/chrono/offset/trait.TimeZone.html)]**
 
@@ -93,7 +93,7 @@ let sh_dt = utc.with_timezone(&sh);
 let local = utc.with_timezone(&Local);
 ```
 
-### 2.3 `Duration` 与 `TimeDelta`
+### 2.3 `Duration` 与 `TimeDelta` {#23-duration-与-timedelta}
 
 > **[来源: [chrono docs.rs – TimeDelta](https://docs.rs/chrono/latest/chrono/struct.TimeDelta.html)]**
 
@@ -120,9 +120,9 @@ let diff = later - now;
 
 ---
 
-## 3. 格式化与解析
+## 3. 格式化与解析 {#3-格式化与解析}
 
-### 3.1 `strftime` / `parse_from_str`
+### 3.1 `strftime` / `parse_from_str` {#31-strftime-parse_from_str}
 
 > **[来源: [chrono docs.rs – format::strftime](https://docs.rs/chrono/latest/chrono/format/strftime/index.html)]**
 
@@ -148,7 +148,7 @@ let formatted = dt.format("%Y年%m月%d日 %H:%M:%S %:z").to_string();
 | `%:z` | 带冒号时区偏移 | +08:00 |
 | `%.3f` | 毫秒 | 123 |
 
-### 3.2 RFC 3339 / ISO 8601
+### 3.2 RFC 3339 / ISO 8601 {#32-rfc-3339-iso-8601}
 
 > **[来源: [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339)]**
 
@@ -163,7 +163,7 @@ let dt: DateTime<Utc> = s.parse::<DateTime<Utc>>()?;
 
 ---
 
-## 4. 时区处理最佳实践
+## 4. 时区处理最佳实践 {#4-时区处理最佳实践}
 
 > **[来源: [chrono docs.rs – offset](https://docs.rs/chrono/latest/chrono/offset/index.html)]**
 
@@ -181,11 +181,11 @@ let display = stored.with_timezone(&Local); // 展示给用户
 
 ---
 
-## 5. 反例边界
+## 5. 反例边界 {#5-反例边界}
 
 > **[来源: [chrono docs.rs – NaiveDateTime](https://docs.rs/chrono/latest/chrono/naive/struct.NaiveDateTime.html)]**
 
-### 5.1 Naive 类型误用
+### 5.1 Naive 类型误用 {#51-naive-类型误用}
 
 将 `NaiveDateTime` 默认当作本地时间处理，跨系统或跨 DST 边界时会产生歧义。
 
@@ -197,7 +197,7 @@ let naive = NaiveDateTime::parse_from_str("2026-06-29T21:50:42", "%Y-%m-%dT%H:%M
 let utc_assumed = naive.and_utc(); // 实际语义为 "此时刻的本地时间视为 UTC"
 ```
 
-### 5.2 时区忽略
+### 5.2 时区忽略 {#52-时区忽略}
 
 直接比较 `DateTime<Utc>` 与 `DateTime<Local>` 在类型上不允许，必须先统一时区：
 
@@ -211,7 +211,7 @@ let b = Local::now();
 let same = a == b.with_timezone(&Utc); // ✅ 统一时区后再比较
 ```
 
-### 5.3 Duration 为负
+### 5.3 Duration 为负 {#53-duration-为负}
 
 `chrono::Duration` 支持负值，但 `std::time::Duration` 不支持，混用会导致 panic 或转换失败。
 
@@ -224,7 +224,7 @@ let chrono_dur = Duration::seconds(-10);
 let _std: StdDuration = chrono_dur.to_std().unwrap();
 ```
 
-### 5.4 格式化字符串错误
+### 5.4 格式化字符串错误 {#54-格式化字符串错误}
 
 `%Z` 与 `%z` 含义不同：前者是时区名称（chrono 输出为数字偏移），后者是数值偏移；解析时大小写敏感。
 
@@ -237,7 +237,7 @@ let d = NaiveDate::parse_from_str("2026-6-9", "%Y-%m-%d");
 
 ---
 
-## 6. 设计模式与类型系统利用
+## 6. 设计模式与类型系统利用 {#6-设计模式与类型系统利用}
 
 > **[来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]**
 
@@ -250,7 +250,7 @@ let d = NaiveDate::parse_from_str("2026-6-9", "%Y-%m-%d");
 
 ---
 
-## 7. 相关概念
+## 7. 相关概念 {#7-相关概念}
 
 - [00_crate_architecture_master_index.md](00_crate_architecture_master_index.md) — Rust 工业级 Crate 架构总索引
 - [std::time](https://doc.rust-lang.org/std/time/) — Rust 标准库时间类型
@@ -269,19 +269,19 @@ let d = NaiveDate::parse_from_str("2026-6-9", "%Y-%m-%d");
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
-### P0 — 核心官方文档
+### P0 — 核心官方文档 {#p0-核心官方文档}
 
 - [chrono docs.rs](https://docs.rs/chrono/latest/chrono/)
 - [Rust Standard Library – std::time](https://doc.rust-lang.org/std/time/)
 
-### P1 — 标准与学术论文
+### P1 — 标准与学术论文 {#p1-标准与学术论文}
 
 - [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) — Date and Time on the Internet: Timestamps
 - [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) — Data elements and interchange formats
 
-### P2 — 官方仓库与社区文章
+### P2 — 官方仓库与社区文章 {#p2-官方仓库与社区文章}
 
 - [chrono GitHub Repository](https://github.com/chronotope/chrono)
 - [This Week in Rust](https://this-week-in-rust.org/)

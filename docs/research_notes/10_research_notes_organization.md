@@ -1,4 +1,4 @@
-# research_notes 全面梳理
+# research_notes 全面梳理 {#research_notes-全面梳理}
 >
 > **概念族**: 元/导航/索引
 
@@ -14,12 +14,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [research\_notes 全面梳理](#research_notes-全面梳理)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、梳理目标](#一梳理目标)
   - [二、实际目录结构（当前）](#二实际目录结构当前)
   - [三、归档约定](#三归档约定)
@@ -28,7 +28,7 @@
   - [六、formal\_methods 文件清单（概览）](#六formal_methods-文件清单概览)
   - [七、维护检查清单](#七维护检查清单)
   - [八、结构迁回检查项（2026-06-29）](#八结构迁回检查项2026-06-29)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -36,7 +36,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 一、梳理目标
+## 一、梳理目标 {#一梳理目标}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -47,7 +47,7 @@
 
 ---
 
-## 二、实际目录结构（当前）
+## 二、实际目录结构（当前） {#二实际目录结构当前}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -98,14 +98,14 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
     ├── 10_concurrency_performance.md
     └── 10_macro_expansion_performance.md
 
-# 根目录还包含 130+ 篇核心文档与扩展索引（已从 archive/research_notes_2026_06_25/ 迁回，详见 INDEX.md）
-# 例如：10_00_organization_and_navigation、10_proof_index、10_authoritative_alignment_guide、
-#       10_international_formal_verification_index、10_authoritative_alignment_gap_matrix 等
+# 根目录还包含 130+ 篇核心文档与扩展索引（已从 archive/research_notes_2026_06_25/ 迁回，详见 INDEX.md） {#根目录还包含-130-篇核心文档与扩展索引已从-archiveresearch_notes_2026_06_25-迁回详见-indexmd}
+# 例如：10_00_organization_and_navigation、10_proof_index、10_authoritative_alignment_guide、 {#例如10_00_organization_and_navigation10_proof_index10_authoritative_alignment_guide}
+# 10_international_formal_verification_index、10_authoritative_alignment_gap_matrix 等 {#10_international_formal_verification_index10_authoritative_alignment_gap_matrix-等}
 ```
 
 ---
 
-## 三、归档约定
+## 三、归档约定 {#三归档约定}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -122,7 +122,7 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 
 ---
 
-## 四、入口与索引关系
+## 四、入口与索引关系 {#四入口与索引关系}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -138,7 +138,7 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 
 ---
 
-## 五、版本与元数据约定
+## 五、版本与元数据约定 {#五版本与元数据约定}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -149,7 +149,7 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 
 ---
 
-## 六、formal_methods 文件清单（概览）
+## 六、formal_methods 文件清单（概览） {#六formal_methods-文件清单概览}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -168,7 +168,7 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 
 ---
 
-## 七、维护检查清单
+## 七、维护检查清单 {#七维护检查清单}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -181,7 +181,7 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 
 ---
 
-## 八、结构迁回检查项（2026-06-29）
+## 八、结构迁回检查项（2026-06-29） {#八结构迁回检查项2026-06-29}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -203,20 +203,20 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -227,7 +227,7 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -237,7 +237,7 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 - ✅ 兼容Edition 2024
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -263,7 +263,7 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -272,7 +272,7 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

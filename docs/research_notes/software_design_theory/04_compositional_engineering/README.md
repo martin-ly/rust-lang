@@ -1,4 +1,4 @@
-# 组合软件工程有效性形式论证
+# 组合软件工程有效性形式论证 {#组合软件工程有效性形式论证}
 
 > **概念族**: 软件设计 / 组合工程
 > **内容分级**: [归档级]
@@ -22,23 +22,23 @@
 
 ---
 
-## 📊 目录 {#-目录}
+## 📊 目录 {#目录}
 
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [组合软件工程有效性形式论证](#组合软件工程有效性形式论证)
-  - [📊 目录 {#-目录}](#-目录--目录)
+  - [📊 目录](#目录)
   - [宗旨](#宗旨)
   - [设计模式组合示例（实质内容）](#设计模式组合示例实质内容)
   - [组合完整代码示例（层次推进）](#组合完整代码示例层次推进)
-    - [示例 1：Builder + Factory Method](#示例-1builder--factory-method)
-    - [示例 2：Repository + Service Layer + DTO（完整链条）](#示例-2repository--service-layer--dto完整链条)
+    - [示例 1：Builder + Factory Method](#示例-1builder-factory-method)
+    - [示例 2：Repository + Service Layer + DTO（完整链条）](#示例-2repository-service-layer-dto完整链条)
     - [实例推导：CE-T1–T3 作用于模式组合（R1-01 最小交付）](#实例推导ce-t1t3-作用于模式组合r1-01-最小交付)
   - [文档索引](#文档索引)
   - [核心问题](#核心问题)
   - [形式化论证汇总](#形式化论证汇总)
-    - [组合法则依赖链（Def → Axiom → Lemma → Theorem → Corollary）](#组合法则依赖链def--axiom--lemma--theorem--corollary)
+    - [组合法则依赖链（Def → Axiom → Lemma → Theorem → Corollary）](#组合法则依赖链def-axiom-lemma-theorem-corollary)
   - [组件成熟度与构建能力确定性](#组件成熟度与构建能力确定性)
   - [L3/L4 验证手段细化](#l3l4-验证手段细化)
     - [L3/L4 验证工具索引](#l3l4-验证工具索引)
@@ -53,7 +53,7 @@
   - [组合选型决策树（层次推进）](#组合选型决策树层次推进)
   - [组合反例（层次推进）](#组合反例层次推进)
   - [组合反例→编译错误映射（CE-T1/T2/T3）](#组合反例编译错误映射ce-t1t2t3)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -62,7 +62,7 @@
 
 ---
 
-## 宗旨
+## 宗旨 {#宗旨}
 
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -71,7 +71,7 @@
 
 ---
 
-## 设计模式组合示例（实质内容）
+## 设计模式组合示例（实质内容） {#设计模式组合示例实质内容}
 
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -88,12 +88,12 @@
 
 ---
 
-## 组合完整代码示例（层次推进）
+## 组合完整代码示例（层次推进） {#组合完整代码示例层次推进}
 
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 示例 1：Builder + Factory Method
+### 示例 1：Builder + Factory Method {#示例-1builder-factory-method}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -155,7 +155,7 @@ impl ConfigFactory for DefaultFactory {
 
 ```
 
-### 示例 2：Repository + Service Layer + DTO（完整链条）
+### 示例 2：Repository + Service Layer + DTO（完整链条） {#示例-2repository-service-layer-dto完整链条}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -213,7 +213,7 @@ impl<R: OrderRepository> OrderService<R> {
 
 ```
 
-### 实例推导：CE-T1–T3 作用于模式组合（R1-01 最小交付）
+### 实例推导：CE-T1–T3 作用于模式组合（R1-01 最小交付） {#实例推导ce-t1t3-作用于模式组合r1-01-最小交付}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -231,7 +231,7 @@ impl<R: OrderRepository> OrderService<R> {
 
 ---
 
-## 文档索引
+## 文档索引 {#文档索引}
 
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -245,7 +245,7 @@ impl<R: OrderRepository> OrderService<R> {
 
 ---
 
-## 核心问题
+## 核心问题 {#核心问题}
 
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -258,7 +258,7 @@ impl<R: OrderRepository> OrderService<R> {
 
 ---
 
-## 形式化论证汇总
+## 形式化论证汇总 {#形式化论证汇总}
 
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -271,7 +271,7 @@ impl<R: OrderRepository> OrderService<R> {
 
 **推论 CE-C1**：若各 $M_i$ 为 Safe 且良型，则有效组合 $C$ 为 Safe 且良型。*证明*：由 CE-T1、CE-T2、CE-T3 直接。∎
 
-### 组合法则依赖链（Def → Axiom → Lemma → Theorem → Corollary）
+### 组合法则依赖链（Def → Axiom → Lemma → Theorem → Corollary） {#组合法则依赖链def-axiom-lemma-theorem-corollary}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -312,7 +312,7 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 
 ---
 
-## 组件成熟度与构建能力确定性
+## 组件成熟度与构建能力确定性 {#组件成熟度与构建能力确定性}
 
 **Def CE-MAT1（组件成熟度）**：
 
@@ -336,7 +336,7 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 
 ---
 
-## L3/L4 验证手段细化
+## L3/L4 验证手段细化 {#l3l4-验证手段细化}
 
 **Def CE-VER1（L3/L4 验证手段）**：L3（多 crate）、L4（跨进程/分布式）的有效性判定需在 `cargo check` 之外增加以下手段：
 
@@ -362,7 +362,7 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 
 | :--- | :--- | :--- |
 
-### L3/L4 验证工具索引
+### L3/L4 验证工具索引 {#l3l4-验证工具索引}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -388,7 +388,7 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 
 ---
 
-## 架构模式→成熟度层级映射
+## 架构模式→成熟度层级映射 {#架构模式成熟度层级映射}
 
 与 [02_complete_43_catalog](../02_workflow_safe_complete_models/02_complete_43_catalog.md) 的 20 扩展模式对应：
 
@@ -414,7 +414,7 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 
 ---
 
-## 构建能力确定性判定树
+## 构建能力确定性判定树 {#构建能力确定性判定树}
 
 ```text
 
@@ -448,7 +448,7 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 
 ---
 
-## 表达力×组合联合判定树（支柱 2+3）
+## 表达力×组合联合判定树（支柱 2+3） {#表达力组合联合判定树支柱-23}
 
 **用途**：选型时同时考虑「表达边界」（等价/近似/不可表达）与「组合层级」（L1–L4）。
 
@@ -492,13 +492,13 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 
 ---
 
-## 组件构建能力形式化树图（与 43 模式联合）
+## 组件构建能力形式化树图（与 43 模式联合） {#组件构建能力形式化树图与-43-模式联合}
 
 **Def CE-TREE1（模块→crate→进程→网络）**：设 $G$ 为依赖图，$\mathit{Level}(G) \in \{\mathrm{L1}, \mathrm{L2}, \mathrm{L3}, \mathrm{L4}\}$ 由 $G$ 的粒度确定。
 
 架构模式 $P$ 映射到 $\mathit{Level}(P)$ 由 [02_complete_43_catalog](../02_workflow_safe_complete_models/02_complete_43_catalog.md) 与 CE-MAT1 联合定义。
 
-### Mermaid 形式化树图
+### Mermaid 形式化树图 {#mermaid-形式化树图}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -590,7 +590,7 @@ flowchart TB
 
 ```
 
-### ASCII 形式化树图（模块→crate→进程→网络）
+### ASCII 形式化树图（模块→crate→进程→网络） {#ascii-形式化树图模块crate进程网络}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -656,7 +656,7 @@ L4 跨进程/跨网络（分布式、微服务）
 
 ---
 
-## 定理速查
+## 定理速查 {#定理速查}
 
 | 定理 | 陈述 |
 | :--- | :--- |
@@ -669,7 +669,7 @@ L4 跨进程/跨网络（分布式、微服务）
 
 ---
 
-## 实践要点
+## 实践要点 {#实践要点}
 
 - **无循环依赖**：`cargo check` 可检测；`mod` 图需为 DAG
 - **pub 边界**：跨模块仅通过 `pub` 接口；内部实现可私有
@@ -678,7 +678,7 @@ L4 跨进程/跨网络（分布式、微服务）
 
 ---
 
-## 组合选型决策树（层次推进）
+## 组合选型决策树（层次推进） {#组合选型决策树层次推进}
 
 ```text
 
@@ -694,7 +694,7 @@ L4 跨进程/跨网络（分布式、微服务）
 
 ---
 
-## 组合反例（层次推进）
+## 组合反例（层次推进） {#组合反例层次推进}
 
 | 反例 | 后果 | 规避 |
 | :--- | :--- | :--- |
@@ -706,7 +706,7 @@ L4 跨进程/跨网络（分布式、微服务）
 
 ---
 
-## 组合反例→编译错误映射（CE-T1/T2/T3）
+## 组合反例→编译错误映射（CE-T1/T2/T3） {#组合反例编译错误映射ce-t1t2t3}
 
 | 违反定理 | 典型错误码 | 典型信息 | 修复方向 |
 | :--- | :--- | :--- | :--- |
@@ -725,18 +725,18 @@ L4 跨进程/跨网络（分布式、微服务）
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -747,7 +747,7 @@ L4 跨进程/跨网络（分布式、微服务）
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -757,7 +757,7 @@ L4 跨进程/跨网络（分布式、微服务）
 - ✅ 兼容Edition 2024
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -785,7 +785,7 @@ L4 跨进程/跨网络（分布式、微服务）
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 > **来源: [Tower Layer/Service Docs](https://docs.rs/tower/latest/tower/trait.Layer.html)**

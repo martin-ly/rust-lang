@@ -1,4 +1,4 @@
-# Async Closures 深度指南
+# Async Closures 深度指南 {#async-closures-深度指南}
 
 > **注意**: 本主题内容已整合到 `concept/03_advanced/24_async_closures.md`。
 > 请以 [concept/03_advanced/24_async_closures.md](../../concept/03_advanced/24_async_closures.md) 为权威来源。

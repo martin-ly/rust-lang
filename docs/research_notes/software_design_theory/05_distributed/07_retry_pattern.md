@@ -1,4 +1,4 @@
-# 重试模式形式化定义
+# 重试模式形式化定义 {#重试模式形式化定义}
 
 > **概念族**: 软件设计 / 分布式模式
 
@@ -30,12 +30,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [重试模式形式化定义](#重试模式形式化定义)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 概念定义 (Def)](#1-概念定义-def)
     - [Def RT1: Retry](#def-rt1-retry)
     - [Def RT2: 退避策略](#def-rt2-退避策略)
@@ -50,7 +50,7 @@
   - [4. Rust 实现示例](#4-rust-实现示例)
   - [5. 重试策略选择](#5-重试策略选择)
   - [6. 可重试错误分类](#6-可重试错误分类)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -58,7 +58,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 1. 概念定义 (Def)
+## 1. 概念定义 (Def) {#1-概念定义-def}
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
 
@@ -70,7 +70,7 @@
 
 > **[来源: IEEE - Resilient Software Architecture]**
 
-### Def RT1: Retry
+### Def RT1: Retry {#def-rt1-retry}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -94,7 +94,7 @@ Retry := (Op, policy, predicate)
 
 ```
 
-### Def RT2: 退避策略
+### Def RT2: 退避策略 {#def-rt2-退避策略}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -116,7 +116,7 @@ BackoffStrategy :=
 
 ```
 
-### Def RT3: 抖动 (Jitter)
+### Def RT3: 抖动 (Jitter) {#def-rt3-抖动-jitter}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -136,13 +136,13 @@ Jitter := None | Full | Equal | Decorrelated
 
 ---
 
-## 2. 基本假设 (Axiom)
+## 2. 基本假设 (Axiom) {#2-基本假设-axiom}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### Axiom RT1: 重试次数有界
+### Axiom RT1: 重试次数有界 {#axiom-rt1-重试次数有界}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -154,7 +154,7 @@ attempts ≤ max_attempts
 
 重试次数必须有限，防止无限循环。
 
-### Axiom RT2: 幂等性要求
+### Axiom RT2: 幂等性要求 {#axiom-rt2-幂等性要求}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -166,7 +166,7 @@ attempts ≤ max_attempts
 
 非幂等操作只能对瞬态错误重试。
 
-### Axiom RT3: 退避单调性
+### Axiom RT3: 退避单调性 {#axiom-rt3-退避单调性}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -180,13 +180,13 @@ n < m → backoff(n) ≤ backoff(m)
 
 ---
 
-## 3. 定理 (Theorem)
+## 3. 定理 (Theorem) {#3-定理-theorem}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### Theorem RT1: 成功率提升
+### Theorem RT1: 成功率提升 {#theorem-rt1-成功率提升}
 
 >
 
@@ -214,7 +214,7 @@ P(success) ≤ 1 - (1 - p)^n
 
 4. 当 p > 0 且 n ≥ 1，成功率提升
 
-### Theorem RT2: 负载控制
+### Theorem RT2: 负载控制 {#theorem-rt2-负载控制}
 
 >
 
@@ -238,7 +238,7 @@ ExponentialBackoff → prevents thundering herd
 
 ---
 
-## 4. Rust 实现示例
+## 4. Rust 实现示例 {#4-rust-实现示例}
 
 >
 
@@ -492,7 +492,7 @@ pub async fn fetch_with_retry(url: &str) -> Result<String, RetryError<reqwest::E
 
 ---
 
-## 5. 重试策略选择
+## 5. 重试策略选择 {#5-重试策略选择}
 
 >
 
@@ -512,7 +512,7 @@ pub async fn fetch_with_retry(url: &str) -> Result<String, RetryError<reqwest::E
 
 ---
 
-## 6. 可重试错误分类
+## 6. 可重试错误分类 {#6-可重试错误分类}
 
 >
 
@@ -562,7 +562,7 @@ pub fn is_retryable_error<E: std::error::Error>(e: &E) -> bool {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -570,7 +570,7 @@ pub fn is_retryable_error<E: std::error::Error>(e: &E) -> bool {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -578,7 +578,7 @@ pub fn is_retryable_error<E: std::error::Error>(e: &E) -> bool {
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -592,7 +592,7 @@ pub fn is_retryable_error<E: std::error::Error>(e: &E) -> bool {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -602,7 +602,7 @@ pub fn is_retryable_error<E: std::error::Error>(e: &E) -> bool {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -634,7 +634,7 @@ pub fn is_retryable_error<E: std::error::Error>(e: &E) -> bool {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -646,7 +646,7 @@ pub fn is_retryable_error<E: std::error::Error>(e: &E) -> bool {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 

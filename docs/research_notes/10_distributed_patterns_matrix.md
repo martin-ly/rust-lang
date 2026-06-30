@@ -1,4 +1,4 @@
-# 分布式模式特性矩阵
+# 分布式模式特性矩阵 {#分布式模式特性矩阵}
 
 > **概念族**: 软件设计 / 分布式系统
 
@@ -18,7 +18,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -27,13 +27,13 @@
 >
 
 - [分布式模式特性矩阵](#分布式模式特性矩阵)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [模式特性总览](#模式特性总览)
   - [详细模式分析](#详细模式分析)
     - [1. Saga 模式](#1-saga-模式)
     - [2. CQRS 模式](#2-cqrs-模式)
   - [与 Rust 特性结合](#与-rust-特性结合)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -42,7 +42,7 @@
   - [权威来源索引](#权威来源索引)
   - [社区权威参考](#社区权威参考)
 
-## 模式特性总览
+## 模式特性总览 {#模式特性总览}
 
 >
 
@@ -66,13 +66,13 @@
 
 ---
 
-## 详细模式分析
+## 详细模式分析 {#详细模式分析}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. Saga 模式
+### 1. Saga 模式 {#1-saga-模式}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -140,7 +140,7 @@ impl SagaCoordinator {
 
 ```
 
-### 2. CQRS 模式
+### 2. CQRS 模式 {#2-cqrs-模式}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -194,7 +194,7 @@ impl OrderQueryHandler {
 
 ---
 
-## 与 Rust 特性结合
+## 与 Rust 特性结合 {#与-rust-特性结合}
 
 >
 
@@ -220,7 +220,7 @@ impl OrderQueryHandler {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -230,13 +230,13 @@ impl OrderQueryHandler {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -252,7 +252,7 @@ impl OrderQueryHandler {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -264,7 +264,7 @@ impl OrderQueryHandler {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -298,7 +298,7 @@ impl OrderQueryHandler {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -310,7 +310,7 @@ impl OrderQueryHandler {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 
@@ -322,7 +322,7 @@ impl OrderQueryHandler {
 
 ---
 
-## 社区权威参考
+## 社区权威参考 {#社区权威参考}
 
 - [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 - [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)

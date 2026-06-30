@@ -1,4 +1,4 @@
-# Unsafe Code Guidelines 对齐矩阵
+# Unsafe Code Guidelines 对齐矩阵 {#unsafe-code-guidelines-对齐矩阵}
 
 > **概念族**: 权威来源对齐 / Unsafe Code Guidelines
 > **内容分级**: [核心级]
@@ -11,7 +11,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [Unsafe Code Guidelines 对齐矩阵](#unsafe-code-guidelines-对齐矩阵)
   - [目录](#目录)
@@ -29,13 +29,13 @@
 
 ---
 
-## 一、对齐说明
+## 一、对齐说明 {#一对齐说明}
 
 [Unsafe Code Guidelines (UCG)](https://rust-lang.github.io/unsafe-code-guidelines/) 是 Rust 社区正在编写的非官方但权威的 unsafe 代码指南。本文档将项目中的 unsafe 反例、边界案例与 UCG 的议题和结论建立映射。
 
 ---
 
-## 二、内存模型
+## 二、内存模型 {#二内存模型}
 
 | UCG 主题 | 项目文档 | 状态 | 备注 |
 |-----------|----------|------|------|
@@ -45,7 +45,7 @@
 
 ---
 
-## 三、所有权与借用
+## 三、所有权与借用 {#三所有权与借用}
 
 | UCG 主题 | 项目文档 | 状态 | 备注 |
 |-----------|----------|------|------|
@@ -54,7 +54,7 @@
 
 ---
 
-## 四、类型与布局
+## 四、类型与布局 {#四类型与布局}
 
 | UCG 主题 | 项目文档 | 状态 | 备注 |
 |-----------|----------|------|------|
@@ -64,7 +64,7 @@
 
 ---
 
-## 五、并发
+## 五、并发 {#五并发}
 
 | UCG 主题 | 项目文档 | 状态 | 备注 |
 |-----------|----------|------|------|
@@ -73,7 +73,7 @@
 
 ---
 
-## 六、FFI
+## 六、FFI {#六ffi}
 
 | UCG 主题 | 项目文档 | 状态 | 备注 |
 |-----------|----------|------|------|
@@ -82,7 +82,7 @@
 
 ---
 
-## 七、常见 unsafe 模式
+## 七、常见 unsafe 模式 {#七常见-unsafe-模式}
 
 | 模式 | 项目反例 | UCG 参考 |
 |------|----------|----------|
@@ -96,7 +96,7 @@
 
 ---
 
-## 八、未覆盖缺口
+## 八、未覆盖缺口 {#八未覆盖缺口}
 
 1. UCG 中关于 `repr(C)`、`repr(transparent)` 的详细布局规则可进一步展开。
 2. `MaybeUninit` 的具体使用模式与 UCG 结论可补充示例。
@@ -104,7 +104,7 @@
 
 > **权威来源**: [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
 - [Rustonomicon 对齐](10_rustonomicon_alignment.md)
@@ -113,7 +113,7 @@
 
 ---
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 本对齐矩阵同时参考以下 P1 学术权威来源，以形成完整的官方-学术对照网络：
 
@@ -122,7 +122,7 @@
 - [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
 - [Aeneas](https://aeneas-verification.github.io/)
 
-## 社区权威参考
+## 社区权威参考 {#社区权威参考}
 
 - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
 - [This Week in Rust](https://this-week-in-rust.org/)

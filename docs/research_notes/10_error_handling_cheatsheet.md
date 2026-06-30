@@ -1,4 +1,4 @@
-# 错误处理速查卡
+# 错误处理速查卡 {#错误处理速查卡}
 >
 > **概念族**: 速查卡
 
@@ -17,12 +17,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [错误处理速查卡](#错误处理速查卡)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [Result与Option](#result与option)
   - [常用方法](#常用方法)
     - [Option](#option)
@@ -30,19 +30,19 @@
   - [?操作符](#操作符)
   - [错误转换](#错误转换)
   - [panic vs Result](#panic-vs-result)
-  - [🌍 权威国际化资源链接](#-权威国际化资源链接)
+  - [🌍 权威国际化资源链接](#权威国际化资源链接)
     - [Rust Reference 核心章节](#rust-reference-核心章节)
     - [The Rust Programming Language 核心章节](#the-rust-programming-language-核心章节)
-    - [Rust Standard Library 核心 API / 模块](#rust-standard-library-核心-api--模块)
-    - [Rust By Example / Rust Cookbook / cheats.rs](#rust-by-example--rust-cookbook--cheatsrs)
+    - [Rust Standard Library 核心 API / 模块](#rust-standard-library-核心-api-模块)
+    - [Rust By Example / Rust Cookbook / cheats.rs](#rust-by-example-rust-cookbook-cheatsrs)
     - [错误处理专属权威链接](#错误处理专属权威链接)
       - [std::error::Error](#stderrorerror)
-      - [Rust By Example / Cookbook / cheats.rs](#rust-by-example--cookbook--cheatsrs)
-      - [RFC 2504 / anyhow / thiserror](#rfc-2504--anyhow--thiserror)
+      - [Rust By Example / Cookbook / cheats.rs](#rust-by-example-cookbook-cheatsrs)
+      - [RFC 2504 / anyhow / thiserror](#rfc-2504-anyhow-thiserror)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## Result与Option
+## Result与Option {#result与option}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -53,11 +53,11 @@
 
 ---
 
-## 常用方法
+## 常用方法 {#常用方法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Option
+### Option {#option}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
@@ -71,7 +71,7 @@ opt.map(|v| ...)    // 映射
 opt.and_then(|v| ...) // 链式操作
 ```
 
-### Result
+### Result {#result}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -84,7 +84,7 @@ res.and_then(|v| ...) // 链式操作
 
 ---
 
-## ?操作符
+## ?操作符 {#操作符}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -98,7 +98,7 @@ fn may_fail() -> Result<T, Error> {
 
 ---
 
-## 错误转换
+## 错误转换 {#错误转换}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -114,7 +114,7 @@ let file = File::open("file")?;  // IOError自动转为MyError
 
 ---
 
-## panic vs Result
+## panic vs Result {#panic-vs-result}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -133,7 +133,7 @@ let file = File::open("file")?;  // IOError自动转为MyError
 
 ---
 
-## 🌍 权威国际化资源链接
+## 🌍 权威国际化资源链接 {#权威国际化资源链接}
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -144,7 +144,7 @@ let file = File::open("file")?;  // IOError自动转为MyError
 
 本节为速查内容提供官方权威来源与社区经典参考的直通链接，便于深入验证与扩展阅读。
 
-### Rust Reference 核心章节
+### Rust Reference 核心章节 {#rust-reference-核心章节}
 
 - [Reference 首页](https://doc.rust-lang.org/reference/)
 - [Types](https://doc.rust-lang.org/reference/types.html)
@@ -153,7 +153,7 @@ let file = File::open("file")?;  // IOError自动转为MyError
 - [Statements](https://doc.rust-lang.org/reference/statements.html)
 - [Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html)
 
-### The Rust Programming Language 核心章节
+### The Rust Programming Language 核心章节 {#the-rust-programming-language-核心章节}
 
 - [TRPL 首页](https://doc.rust-lang.org/book/)
 - [Ch. 4 - Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
@@ -164,7 +164,7 @@ let file = File::open("file")?;  // IOError自动转为MyError
 - [Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 - [Ch. 19 - Advanced Features / Macros](https://doc.rust-lang.org/book/ch19-06-macros.html)
 
-### Rust Standard Library 核心 API / 模块
+### Rust Standard Library 核心 API / 模块 {#rust-standard-library-核心-api-模块}
 
 - [std 首页](https://doc.rust-lang.org/std/)
 - [std::result](https://doc.rust-lang.org/std/result/)
@@ -174,7 +174,7 @@ let file = File::open("file")?;  // IOError自动转为MyError
 - [std::panic](https://doc.rust-lang.org/std/panic/)
 - [std::marker (Send / Sync / PhantomData)](https://doc.rust-lang.org/std/marker/)
 
-### Rust By Example / Rust Cookbook / cheats.rs
+### Rust By Example / Rust Cookbook / cheats.rs {#rust-by-example-rust-cookbook-cheatsrs}
 
 - [Rust By Example 首页](https://doc.rust-lang.org/rust-by-example/)
 - [Rust Cookbook 首页](https://rust-lang-nursery.github.io/rust-cookbook/)
@@ -182,12 +182,12 @@ let file = File::open("file")?;  // IOError自动转为MyError
 
 ---
 
-### 错误处理专属权威链接
+### 错误处理专属权威链接 {#错误处理专属权威链接}
 
 > **来源: [TRPL Ch. 9 - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)**
 > **来源: [Rust Reference - Result](https://doc.rust-lang.org/std/result/)**
 
-#### std::error::Error
+#### std::error::Error {#stderrorerror}
 
 - [std::error::Error trait](https://doc.rust-lang.org/std/error/trait.Error.html)
 - [std::result::Result](https://doc.rust-lang.org/std/result/)
@@ -195,7 +195,7 @@ let file = File::open("file")?;  // IOError自动转为MyError
 - [std::fmt::Display](https://doc.rust-lang.org/std/fmt/trait.Display.html)
 - [std::fmt::Debug](https://doc.rust-lang.org/std/fmt/trait.Debug.html)
 
-#### Rust By Example / Cookbook / cheats.rs
+#### Rust By Example / Cookbook / cheats.rs {#rust-by-example-cookbook-cheatsrs}
 
 - [RBE - Error Handling](https://doc.rust-lang.org/rust-by-example/error.html)
 - [RBE - Option & unwrap](https://doc.rust-lang.org/rust-by-example/error/option_unwrap.html)
@@ -204,7 +204,7 @@ let file = File::open("file")?;  // IOError自动转为MyError
 - [Rust Cookbook - Errors](https://rust-lang-nursery.github.io/rust-cookbook/errors.html)
 - [cheats.rs - Error Handling](https://cheats.rs/#error-handling)
 
-#### RFC 2504 / anyhow / thiserror
+#### RFC 2504 / anyhow / thiserror {#rfc-2504-anyhow-thiserror}
 
 - [RFC 2504 - Error trait improvements (source / backtrace)](https://rust-lang.github.io/rfcs/2504-fix-error.html)
 - [RFC 1859 - Try trait / `?` operator](https://rust-lang.github.io/rfcs/1859-try-trait.html)
@@ -213,7 +213,7 @@ let file = File::open("file")?;  // IOError自动转为MyError
 - [thiserror docs](https://docs.rs/thiserror/latest/thiserror/)
 - [thiserror GitHub](https://github.com/dtolnay/thiserror)
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -222,7 +222,7 @@ let file = File::open("file")?;  // IOError自动转为MyError
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Exception Handling](https://en.wikipedia.org/wiki/Exception_Handling)**
 > **来源: [TRPL Ch. 9 - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)**

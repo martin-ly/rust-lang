@@ -1,4 +1,4 @@
-# Trait 系统理论
+# Trait 系统理论 {#trait-系统理论}
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -13,7 +13,7 @@
 
 ---
 
-## Trait 作为类型类
+## Trait 作为类型类 {#trait-作为类型类}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -55,7 +55,7 @@ fn process<T: Drawable + Clone + Send>(item: &T) {
 }
 ```
 
-## 关联类型
+## 关联类型 {#关联类型}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -82,7 +82,7 @@ impl Iterator for Counter {
 // 关联类型：实现者选择类型（Iterator::Item 由实现决定）
 ```
 
-## Trait 对象与动态分发
+## Trait 对象与动态分发 {#trait-对象与动态分发}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -112,11 +112,11 @@ fn demo() {
 }
 ```
 
-## 更多代码示例
+## 更多代码示例 {#更多代码示例}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 泛型约束与边界
+### 泛型约束与边界 {#泛型约束与边界}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -161,7 +161,7 @@ where
 }
 ```
 
-### 高级 Trait 模式
+### 高级 Trait 模式 {#高级-trait-模式}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -227,7 +227,7 @@ impl Distance for Kilometers {
 }
 ```
 
-### Trait 对象与对象安全
+### Trait 对象与对象安全 {#trait-对象与对象安全}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -280,7 +280,7 @@ fn heterogeneous_collection() {
 
 ---
 
-## 相关研究笔记
+## 相关研究笔记 {#相关研究笔记}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -305,7 +305,7 @@ fn heterogeneous_collection() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
 

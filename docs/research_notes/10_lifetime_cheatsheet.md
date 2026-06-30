@@ -1,4 +1,4 @@
-# 生命周期速查卡
+# 生命周期速查卡 {#生命周期速查卡}
 >
 > **概念族**: 速查卡
 
@@ -17,15 +17,15 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [生命周期速查卡](#生命周期速查卡)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [生命周期语法](#生命周期语法)
-  - [生命周期省略规则](#生命周期省略规则)
-  - [结构体生命周期](#结构体生命周期)
+  - [生命周期省略规则](#生命周期省略规则-1)
+  - [结构体生命周期](#结构体生命周期-1)
   - ['static 生命周期](#static-生命周期)
   - [高阶Trait Bound (HRTB)](#高阶trait-bound-hrtb)
   - [常见模式](#常见模式)
@@ -61,19 +61,19 @@
     - [技巧2: 生命周期推断](#技巧2-生命周期推断)
     - [技巧3: 显式drop](#技巧3-显式drop)
   - [快速决策](#快速决策)
-  - [🌍 权威国际化资源链接](#-权威国际化资源链接)
+  - [🌍 权威国际化资源链接](#权威国际化资源链接)
     - [Rust Reference 核心章节](#rust-reference-核心章节)
     - [The Rust Programming Language 核心章节](#the-rust-programming-language-核心章节)
-    - [Rust Standard Library 核心 API / 模块](#rust-standard-library-核心-api--模块)
-    - [Rust By Example / Rust Cookbook / cheats.rs](#rust-by-example--rust-cookbook--cheatsrs)
+    - [Rust Standard Library 核心 API / 模块](#rust-standard-library-核心-api-模块)
+    - [Rust By Example / Rust Cookbook / cheats.rs](#rust-by-example-rust-cookbook-cheatsrs)
     - [生命周期专属权威链接](#生命周期专属权威链接)
       - [Reference Lifetime 章节](#reference-lifetime-章节)
-      - [Rust By Example / Cookbook / cheats.rs](#rust-by-example--cookbook--cheatsrs)
-      - [NLL / RustBelt / Stacked Borrows](#nll--rustbelt--stacked-borrows)
+      - [Rust By Example / Cookbook / cheats.rs](#rust-by-example-cookbook-cheatsrs)
+      - [NLL / RustBelt / Stacked Borrows](#nll-rustbelt-stacked-borrows)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 生命周期语法
+## 生命周期语法 {#生命周期语法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -92,7 +92,7 @@ where
 
 ---
 
-## 生命周期省略规则
+## 生命周期省略规则 {#生命周期省略规则-1}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -119,7 +119,7 @@ where
 
 ---
 
-## 结构体生命周期
+## 结构体生命周期 {#结构体生命周期-1}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -144,7 +144,7 @@ impl<'a> Parser<'a> {
 
 ---
 
-## 'static 生命周期
+## 'static 生命周期 {#static-生命周期}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -164,7 +164,7 @@ static GLOBAL: i32 = 42;
 
 ---
 
-## 高阶Trait Bound (HRTB)
+## 高阶Trait Bound (HRTB) {#高阶trait-bound-hrtb}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -184,11 +184,11 @@ call_with_ref(closure);
 
 ---
 
-## 常见模式
+## 常见模式 {#常见模式}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 输入输出相同生命周期
+### 输入输出相同生命周期 {#输入输出相同生命周期}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -200,7 +200,7 @@ fn identity<'a>(x: &'a str) -> &'a str {
 }
 ```
 
-### 返回与特定输入关联
+### 返回与特定输入关联 {#返回与特定输入关联}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -212,7 +212,7 @@ fn get_name<'a>(person: &'a Person) -> &'a str {
 }
 ```
 
-### 多个输入，返回其中一个
+### 多个输入，返回其中一个 {#多个输入返回其中一个}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
@@ -226,7 +226,7 @@ fn choose<'a>(first: &'a str, second: &'a str, use_first: bool) -> &'a str {
 
 ---
 
-## 生命周期错误与修复
+## 生命周期错误与修复 {#生命周期错误与修复}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -238,7 +238,7 @@ fn choose<'a>(first: &'a str, second: &'a str, use_first: bool) -> &'a str {
 
 ---
 
-## Trait对象生命周期
+## Trait对象生命周期 {#trait对象生命周期}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -258,7 +258,7 @@ trait Read {}
 
 ---
 
-## 型变与生命周期
+## 型变与生命周期 {#型变与生命周期}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -277,7 +277,7 @@ fn example() {
 
 ---
 
-## 与泛型结合
+## 与泛型结合 {#与泛型结合}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -301,7 +301,7 @@ where
 
 ---
 
-## 自我引用结构
+## 自我引用结构 {#自我引用结构}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -336,7 +336,7 @@ impl SelfReferential {
 
 ---
 
-## 快速诊断
+## 快速诊断 {#快速诊断}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -354,11 +354,11 @@ impl SelfReferential {
 解决: 返回值所有权或'static
 ```
 
-## 生命周期基础
+## 生命周期基础 {#生命周期基础}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 生命周期关系
+### 生命周期关系 {#生命周期关系}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -367,7 +367,7 @@ impl SelfReferential {
 T: 'a   // T 中所有引用至少存活 'a
 ```
 
-### 常见生命周期
+### 常见生命周期 {#常见生命周期}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -379,11 +379,11 @@ T: 'a   // T 中所有引用至少存活 'a
 
 ---
 
-## 生命周期省略规则
+## 生命周期省略规则 {#生命周期省略规则-1}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 三条规则
+### 三条规则 {#三条规则}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -393,7 +393,7 @@ T: 'a   // T 中所有引用至少存活 'a
 3. `&self`/`&mut self`存在 → self的生命周期赋给输出
 ```
 
-### 示例
+### 示例 {#示例}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -411,11 +411,11 @@ fn method(&self, x: &str) -> &str { self.0 }
 
 ---
 
-## 常见生命周期模式
+## 常见生命周期模式 {#常见生命周期模式}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 模式1: 输入输出相同
+### 模式1: 输入输出相同 {#模式1-输入输出相同}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -425,7 +425,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 }
 ```
 
-### 模式2: 返回self的引用
+### 模式2: 返回self的引用 {#模式2-返回self的引用}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -435,7 +435,7 @@ impl<'a> Parser<'a> {
 }
 ```
 
-### 模式3: 独立生命周期
+### 模式3: 独立生命周期 {#模式3-独立生命周期}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -447,11 +447,11 @@ fn parse<'a, 'b>(input: &'a str, config: &'b Config) -> &'a str {
 
 ---
 
-## 生命周期约束
+## 生命周期约束 {#生命周期约束}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### HRTB (高阶trait bound)
+### HRTB (高阶trait bound) {#hrtb-高阶trait-bound}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -459,7 +459,7 @@ fn parse<'a, 'b>(input: &'a str, config: &'b Config) -> &'a str {
 F: for<'a> Fn(&'a str) -> &'a str
 ```
 
-### 多重约束
+### 多重约束 {#多重约束}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -473,11 +473,11 @@ where
 
 ---
 
-## 常见错误
+## 常见错误 {#常见错误}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 错误1: 返回局部引用
+### 错误1: 返回局部引用 {#错误1-返回局部引用}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -494,7 +494,7 @@ fn good() -> String {
 }
 ```
 
-### 错误2: 生命周期不匹配
+### 错误2: 生命周期不匹配 {#错误2-生命周期不匹配}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -508,7 +508,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str { ... }
 
 ---
 
-## 结构体生命周期
+## 结构体生命周期 {#结构体生命周期-1}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -525,7 +525,7 @@ let p = Person { name: &name };
 
 ---
 
-## 生命周期与子类型
+## 生命周期与子类型 {#生命周期与子类型}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -544,11 +544,11 @@ fn take_str<'a>(s: &'a str) {}
 
 ---
 
-## 技巧
+## 技巧 {#技巧}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 技巧1: `'static`默认
+### 技巧1: `'static`默认 {#技巧1-static默认}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -559,7 +559,7 @@ struct OwnedData {
 }
 ```
 
-### 技巧2: 生命周期推断
+### 技巧2: 生命周期推断 {#技巧2-生命周期推断}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -568,7 +568,7 @@ struct OwnedData {
 let r = &x;  // 编译器自动推断
 ```
 
-### 技巧3: 显式drop
+### 技巧3: 显式drop {#技巧3-显式drop}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -583,7 +583,7 @@ let r = &x;  // 编译器自动推断
 
 ---
 
-## 快速决策
+## 快速决策 {#快速决策}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -606,7 +606,7 @@ let r = &x;  // 编译器自动推断
 
 ---
 
-## 🌍 权威国际化资源链接
+## 🌍 权威国际化资源链接 {#权威国际化资源链接}
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -617,7 +617,7 @@ let r = &x;  // 编译器自动推断
 
 本节为速查内容提供官方权威来源与社区经典参考的直通链接，便于深入验证与扩展阅读。
 
-### Rust Reference 核心章节
+### Rust Reference 核心章节 {#rust-reference-核心章节}
 
 - [Reference 首页](https://doc.rust-lang.org/reference/)
 - [Types](https://doc.rust-lang.org/reference/types.html)
@@ -626,7 +626,7 @@ let r = &x;  // 编译器自动推断
 - [Statements](https://doc.rust-lang.org/reference/statements.html)
 - [Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html)
 
-### The Rust Programming Language 核心章节
+### The Rust Programming Language 核心章节 {#the-rust-programming-language-核心章节}
 
 - [TRPL 首页](https://doc.rust-lang.org/book/)
 - [Ch. 4 - Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
@@ -637,7 +637,7 @@ let r = &x;  // 编译器自动推断
 - [Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 - [Ch. 19 - Advanced Features / Macros](https://doc.rust-lang.org/book/ch19-06-macros.html)
 
-### Rust Standard Library 核心 API / 模块
+### Rust Standard Library 核心 API / 模块 {#rust-standard-library-核心-api-模块}
 
 - [std 首页](https://doc.rust-lang.org/std/)
 - [std::result](https://doc.rust-lang.org/std/result/)
@@ -647,7 +647,7 @@ let r = &x;  // 编译器自动推断
 - [std::panic](https://doc.rust-lang.org/std/panic/)
 - [std::marker (Send / Sync / PhantomData)](https://doc.rust-lang.org/std/marker/)
 
-### Rust By Example / Rust Cookbook / cheats.rs
+### Rust By Example / Rust Cookbook / cheats.rs {#rust-by-example-rust-cookbook-cheatsrs}
 
 - [Rust By Example 首页](https://doc.rust-lang.org/rust-by-example/)
 - [Rust Cookbook 首页](https://rust-lang-nursery.github.io/rust-cookbook/)
@@ -655,25 +655,25 @@ let r = &x;  // 编译器自动推断
 
 ---
 
-### 生命周期专属权威链接
+### 生命周期专属权威链接 {#生命周期专属权威链接}
 
 > **来源: [Rust Reference - Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)**
 > **来源: [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)**
 
-#### Reference Lifetime 章节
+#### Reference Lifetime 章节 {#reference-lifetime-章节}
 
 - [Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html)
 - [Trait and Lifetime Bounds](https://doc.rust-lang.org/reference/trait-bounds.html)
 - [Higher-ranked Trait Bounds](https://doc.rust-lang.org/reference/higher-ranked-trait-bounds.html)
 - [Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping-and-variance.html)
 
-#### Rust By Example / Cookbook / cheats.rs
+#### Rust By Example / Cookbook / cheats.rs {#rust-by-example-cookbook-cheatsrs}
 
 - [RBE - Lifetimes](https://doc.rust-lang.org/rust-by-example/scope/lifetime.html)
 - [RBE - Lifetime Elision](https://doc.rust-lang.org/rust-by-example/scope/lifetime/elision.html)
 - [cheats.rs - Lifetimes](https://cheats.rs/#lifetimes)
 
-#### NLL / RustBelt / Stacked Borrows
+#### NLL / RustBelt / Stacked Borrows {#nll-rustbelt-stacked-borrows}
 
 - [RFC 2094 - Non-Lexical Lifetimes (NLL)](https://rust-lang.github.io/rfcs/2094-nll.html)
 - [RustBelt: Securing the Foundations of the Rust Programming Language](https://plv.mpi-sws.org/rustbelt/)
@@ -682,7 +682,7 @@ let r = &x;  // 编译器自动推断
 - [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)
 - [Rustonomicon - Lifetimes](https://doc.rust-lang.org/nomicon/lifetimes.html)
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -691,7 +691,7 @@ let r = &x;  // 编译器自动推断
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Variable Scope](https://en.wikipedia.org/wiki/Variable_Scope)**
 > **来源: [TRPL Ch. 10 - Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html)**

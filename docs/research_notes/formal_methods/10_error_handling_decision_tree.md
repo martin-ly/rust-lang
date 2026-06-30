@@ -1,4 +1,4 @@
-# Rust 错误处理决策树
+# Rust 错误处理决策树 {#rust-错误处理决策树}
 
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 
@@ -20,7 +20,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 >
 
@@ -48,7 +48,7 @@
       - [对比表](#对比表)
   - [对比分析](#对比分析)
     - [Result vs Option vs panic](#result-vs-option-vs-panic)
-      - [详细对比](#详细对比)
+      - [详细对比](#详细对比-1)
       - [转换关系](#转换关系)
     - [thiserror vs anyhow](#thiserror-vs-anyhow)
       - [详细对比](#详细对比-1)
@@ -77,23 +77,23 @@
       - [4.2 测试错误传播](#42-测试错误传播)
       - [4.3 测试错误处理逻辑](#43-测试错误处理逻辑)
   - [反模式警示](#反模式警示)
-    - [❌ 反模式 1: 滥用 `unwrap()`](#-反模式-1-滥用-unwrap)
-    - [❌ 反模式 2: 过度使用 `String` 作为错误](#-反模式-2-过度使用-string-作为错误)
-    - [❌ 反模式 3: 错误的 `?` 使用导致信息丢失](#-反模式-3-错误的--使用导致信息丢失)
-    - [❌ 反模式 4: 混淆 `Option` 和 `Result`](#-反模式-4-混淆-option-和-result)
-    - [❌ 反模式 5: 忽略错误](#-反模式-5-忽略错误)
-    - [❌ 反模式 6: 过度详细的错误类型](#-反模式-6-过度详细的错误类型)
-    - [❌ 反模式 7: 跨线程边界传递非 Send 错误](#-反模式-7-跨线程边界传递非-send-错误)
-    - [❌ 反模式 8: 在热路径中创建错误字符串](#-反模式-8-在热路径中创建错误字符串)
+    - [❌ 反模式 1: 滥用 `unwrap()`](#反模式-1-滥用-unwrap)
+    - [❌ 反模式 2: 过度使用 `String` 作为错误](#反模式-2-过度使用-string-作为错误)
+    - [❌ 反模式 3: 错误的 `?` 使用导致信息丢失](#反模式-3-错误的-使用导致信息丢失)
+    - [❌ 反模式 4: 混淆 `Option` 和 `Result`](#反模式-4-混淆-option-和-result)
+    - [❌ 反模式 5: 忽略错误](#反模式-5-忽略错误)
+    - [❌ 反模式 6: 过度详细的错误类型](#反模式-6-过度详细的错误类型)
+    - [❌ 反模式 7: 跨线程边界传递非 Send 错误](#反模式-7-跨线程边界传递非-send-错误)
+    - [❌ 反模式 8: 在热路径中创建错误字符串](#反模式-8-在热路径中创建错误字符串)
   - [代码示例](#代码示例)
     - [完整示例 1: 分层错误处理架构](#完整示例-1-分层错误处理架构)
     - [完整示例 2: 带重试和断路器的错误处理](#完整示例-2-带重试和断路器的错误处理)
-    - [完整示例 3: anyhow + thiserror 混合使用](#完整示例-3-anyhow--thiserror-混合使用)
+    - [完整示例 3: anyhow + thiserror 混合使用](#完整示例-3-anyhow-thiserror-混合使用)
   - [附录](#附录)
     - [A. 快速决策参考表](#a-快速决策参考表)
     - [B. 常用 crate 对比](#b-常用-crate-对比)
     - [C. 进一步阅读](#c-进一步阅读)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -102,7 +102,7 @@
 
 ---
 
-## 决策树总览
+## 决策树总览 {#决策树总览}
 
 >
 
@@ -176,13 +176,13 @@
 
 ---
 
-## 决策维度详解
+## 决策维度详解 {#决策维度详解}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 维度 1: 错误类型 - 可恢复 vs 不可恢复
+### 维度 1: 错误类型 - 可恢复 vs 不可恢复 {#维度-1-错误类型---可恢复-vs-不可恢复}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -210,7 +210,7 @@
 
 ---
 
-### 维度 2: 错误传播范围
+### 维度 2: 错误传播范围 {#维度-2-错误传播范围}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -274,7 +274,7 @@
 
 ```
 
-#### 2.1 本地处理场景
+#### 2.1 本地处理场景 {#21-本地处理场景}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -292,7 +292,7 @@
 
 | 可选字段 | `Option` + `if let` | `if let Some(name) = user.nickname { ... }` |
 
-#### 2.2 错误传播场景
+#### 2.2 错误传播场景 {#22-错误传播场景}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -318,7 +318,7 @@
 
 ---
 
-### 维度 3: 错误处理策略
+### 维度 3: 错误处理策略 {#维度-3-错误处理策略}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -356,7 +356,7 @@
 
 ```
 
-#### 策略选择矩阵
+#### 策略选择矩阵 {#策略选择矩阵}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -380,7 +380,7 @@
 
 | 内部 Bug | ❌ | ❌ | ❌ | ❌ | `panic` |
 
-#### 3.1 重试策略决策
+#### 3.1 重试策略决策 {#31-重试策略决策}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -438,7 +438,7 @@ fn should_retry(error: &Error) -> RetryDecision {
 
 ```
 
-#### 3.2 降级策略
+#### 3.2 降级策略 {#32-降级策略}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -460,7 +460,7 @@ fn should_retry(error: &Error) -> RetryDecision {
 
 ---
 
-### 维度 4: 库 vs 应用
+### 维度 4: 库 vs 应用 {#维度-4-库-vs-应用}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -532,7 +532,7 @@ fn should_retry(error: &Error) -> RetryDecision {
 
 ```
 
-#### 对比表
+#### 对比表 {#对比表}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -554,13 +554,13 @@ fn should_retry(error: &Error) -> RetryDecision {
 
 ---
 
-## 对比分析
+## 对比分析 {#对比分析}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Result vs Option vs panic
+### Result vs Option vs panic {#result-vs-option-vs-panic}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -612,7 +612,7 @@ fn should_retry(error: &Error) -> RetryDecision {
 
 ```
 
-#### 详细对比
+#### 详细对比 {#详细对比-1}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -632,7 +632,7 @@ fn should_retry(error: &Error) -> RetryDecision {
 
 | **适用边界** | 库/应用边界 | 函数内部 | 仅程序终止 |
 
-#### 转换关系
+#### 转换关系 {#转换关系}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -664,7 +664,7 @@ let value = result.unwrap();        // 仅用于原型/测试
 
 ---
 
-### thiserror vs anyhow
+### thiserror vs anyhow {#thiserror-vs-anyhow}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -718,7 +718,7 @@ let value = result.unwrap();        // 仅用于原型/测试
 
 ```
 
-#### 详细对比
+#### 详细对比 {#详细对比-1}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -742,7 +742,7 @@ let value = result.unwrap();        // 仅用于原型/测试
 
 | **典型使用** | 定义错误枚举 | 函数返回类型 |
 
-#### 混合使用模式
+#### 混合使用模式 {#混合使用模式}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -810,7 +810,7 @@ fn main() -> Result<()> {
 
 ---
 
-### 自定义错误类型设计
+### 自定义错误类型设计 {#自定义错误类型设计}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -890,7 +890,7 @@ fn main() -> Result<()> {
 
 ```
 
-#### 设计原则
+#### 设计原则 {#设计原则}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -908,7 +908,7 @@ fn main() -> Result<()> {
 
 | **向后兼容** | 添加变体不破坏 API | `#[non_exhaustive]` |
 
-#### 推荐模式
+#### 推荐模式 {#推荐模式}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -1004,7 +1004,7 @@ pub enum AppError {
 
 ---
 
-### 错误链和上下文
+### 错误链和上下文 {#错误链和上下文}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -1042,7 +1042,7 @@ pub enum AppError {
 
 ```
 
-#### anyhow 上下文链
+#### anyhow 上下文链 {#anyhow-上下文链}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -1102,7 +1102,7 @@ fn process_user(user_id: Uuid) -> Result<()> {
 
 ```
 
-#### thiserror 错误源
+#### thiserror 错误源 {#thiserror-错误源}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -1178,17 +1178,17 @@ fn load_config(path: &str) -> Result<Config, ConfigError> {
 
 ---
 
-## 最佳实践
+## 最佳实践 {#最佳实践}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 错误类型设计模式
+### 1. 错误类型设计模式 {#1-错误类型设计模式}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
-#### 模式 A: 分层错误架构
+#### 模式 A: 分层错误架构 {#模式-a-分层错误架构}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -1292,7 +1292,7 @@ impl From<ApplicationError> for ApiError {
 
 ```
 
-#### 模式 B: 错误状态码映射
+#### 模式 B: 错误状态码映射 {#模式-b-错误状态码映射}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -1330,7 +1330,7 @@ impl HttpStatusCode for ApiError {
 
 ```
 
-#### 模式 C: 错误 Builder
+#### 模式 C: 错误 Builder {#模式-c-错误-builder}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -1438,11 +1438,11 @@ let err = ErrorBuilder::new(ErrorCode::NotFound)
 
 ---
 
-### 2. 错误转换和映射
+### 2. 错误转换和映射 {#2-错误转换和映射}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
-#### 2.1 自动转换 (`From` trait)
+#### 2.1 自动转换 (`From` trait) {#21-自动转换-from-trait}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -1490,7 +1490,7 @@ fn read_config() -> Result<Config, AppError> {
 
 ```
 
-#### 2.2 映射错误 (`map_err`)
+#### 2.2 映射错误 (`map_err`) {#22-映射错误-map_err}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -1530,7 +1530,7 @@ fn load_users() -> Result<Vec<User>> {
 
 ```
 
-#### 2.3 错误类型转换矩阵
+#### 2.3 错误类型转换矩阵 {#23-错误类型转换矩阵}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -1546,11 +1546,11 @@ fn load_users() -> Result<Vec<User>> {
 
 ---
 
-### 3. 错误报告和日志
+### 3. 错误报告和日志 {#3-错误报告和日志}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-#### 3.1 结构化日志集成
+#### 3.1 结构化日志集成 {#31-结构化日志集成}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -1620,7 +1620,7 @@ async fn authenticate_user(
 
 ```
 
-#### 3.2 用户友好的错误报告
+#### 3.2 用户友好的错误报告 {#32-用户友好的错误报告}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -1700,7 +1700,7 @@ fn suggest_fixes(err: &anyhow::Error) -> String {
 
 ```
 
-#### 3.3 错误聚合和监控
+#### 3.3 错误聚合和监控 {#33-错误聚合和监控}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -1744,11 +1744,11 @@ pub fn report_error(err: &AppError) {
 
 ---
 
-### 4. 测试错误处理
+### 4. 测试错误处理 {#4-测试错误处理}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
-#### 4.1 测试错误类型
+#### 4.1 测试错误类型 {#41-测试错误类型}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -1820,7 +1820,7 @@ mod tests {
 
 ```
 
-#### 4.2 测试错误传播
+#### 4.2 测试错误传播 {#42-测试错误传播}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -1854,7 +1854,7 @@ fn test_error_propagation() {
 
 ```
 
-#### 4.3 测试错误处理逻辑
+#### 4.3 测试错误处理逻辑 {#43-测试错误处理逻辑}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -1934,13 +1934,13 @@ async fn test_circuit_breaker() {
 
 ---
 
-## 反模式警示
+## 反模式警示 {#反模式警示}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### ❌ 反模式 1: 滥用 `unwrap()`
+### ❌ 反模式 1: 滥用 `unwrap()` {#反模式-1-滥用-unwrap}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -1978,7 +1978,7 @@ let val = Some(42).expect("this is a bug: value should exist");
 
 ```
 
-### ❌ 反模式 2: 过度使用 `String` 作为错误
+### ❌ 反模式 2: 过度使用 `String` 作为错误 {#反模式-2-过度使用-string-作为错误}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -2036,7 +2036,7 @@ match do_something() {
 
 ```
 
-### ❌ 反模式 3: 错误的 `?` 使用导致信息丢失
+### ❌ 反模式 3: 错误的 `?` 使用导致信息丢失 {#反模式-3-错误的-使用导致信息丢失}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -2090,7 +2090,7 @@ fn process_file(path: &str) -> Result<Data> {
 
 ```
 
-### ❌ 反模式 4: 混淆 `Option` 和 `Result`
+### ❌ 反模式 4: 混淆 `Option` 和 `Result` {#反模式-4-混淆-option-和-result}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -2148,7 +2148,7 @@ fn find_user(id: Uuid) -> Result<User, FindUserError> {
 
 ```
 
-### ❌ 反模式 5: 忽略错误
+### ❌ 反模式 5: 忽略错误 {#反模式-5-忽略错误}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -2198,7 +2198,7 @@ let _ = cache.insert(key, value); // 缓存失败可接受
 
 ```
 
-### ❌ 反模式 6: 过度详细的错误类型
+### ❌ 反模式 6: 过度详细的错误类型 {#反模式-6-过度详细的错误类型}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -2258,7 +2258,7 @@ enum DatabaseError {
 
 ```
 
-### ❌ 反模式 7: 跨线程边界传递非 Send 错误
+### ❌ 反模式 7: 跨线程边界传递非 Send 错误 {#反模式-7-跨线程边界传递非-send-错误}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -2306,7 +2306,7 @@ enum GoodError {
 
 ```
 
-### ❌ 反模式 8: 在热路径中创建错误字符串
+### ❌ 反模式 8: 在热路径中创建错误字符串 {#反模式-8-在热路径中创建错误字符串}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -2362,13 +2362,13 @@ enum LazyError {
 
 ---
 
-## 代码示例
+## 代码示例 {#代码示例}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 完整示例 1: 分层错误处理架构
+### 完整示例 1: 分层错误处理架构 {#完整示例-1-分层错误处理架构}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -2964,7 +2964,7 @@ fn main() {
 
 ```
 
-### 完整示例 2: 带重试和断路器的错误处理
+### 完整示例 2: 带重试和断路器的错误处理 {#完整示例-2-带重试和断路器的错误处理}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -3762,7 +3762,7 @@ mod tests {
 
 ```
 
-### 完整示例 3: anyhow + thiserror 混合使用
+### 完整示例 3: anyhow + thiserror 混合使用 {#完整示例-3-anyhow-thiserror-混合使用}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -4432,13 +4432,13 @@ mod examples {
 
 ---
 
-## 附录
+## 附录 {#附录}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### A. 快速决策参考表
+### A. 快速决策参考表 {#a-快速决策参考表}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -4464,7 +4464,7 @@ mod examples {
 
 | 下游故障 | 断路器 | `circuit_breaker.call(op).await?` |
 
-### B. 常用 crate 对比
+### B. 常用 crate 对比 {#b-常用-crate-对比}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -4482,7 +4482,7 @@ mod examples {
 
 | `fehler` | 异常式错误 | 极小 | 简化错误处理 |
 
-### C. 进一步阅读
+### C. 进一步阅读 {#c-进一步阅读}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -4498,7 +4498,7 @@ mod examples {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -4508,13 +4508,13 @@ mod examples {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -4530,7 +4530,7 @@ mod examples {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -4542,7 +4542,7 @@ mod examples {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -4580,7 +4580,7 @@ mod examples {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Exception Handling](https://en.wikipedia.org/wiki/Exception_Handling)**
 

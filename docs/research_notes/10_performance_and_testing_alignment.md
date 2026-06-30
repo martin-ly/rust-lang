@@ -1,4 +1,4 @@
-# 性能优化与测试质量权威来源对齐矩阵
+# 性能优化与测试质量权威来源对齐矩阵 {#性能优化与测试质量权威来源对齐矩阵}
 
 > **概念族**: 权威来源对齐 / 性能 / 测试
 > **内容分级**: [核心级]
@@ -11,7 +11,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [性能优化与测试质量权威来源对齐矩阵](#性能优化与测试质量权威来源对齐矩阵)
   - [目录](#目录)
@@ -27,8 +27,8 @@
     - [3.2 运行时诊断与可视化](#32-运行时诊断与可视化)
     - [3.3 动态分析与 Sanitizer](#33-动态分析与-sanitizer)
   - [四、测试策略矩阵](#四测试策略矩阵)
-    - [4.1 单元测试 / 集成测试 / doctests](#41-单元测试--集成测试--doctests)
-    - [4.2 Property-based / Fuzzing / Mutation](#42-property-based--fuzzing--mutation)
+    - [4.1 单元测试 / 集成测试 / doctests](#41-单元测试-集成测试-doctests)
+    - [4.2 Property-based / Fuzzing / Mutation](#42-property-based-fuzzing-mutation)
   - [五、项目文档映射](#五项目文档映射)
   - [六、未覆盖缺口](#六未覆盖缺口)
   - [相关概念](#相关概念)
@@ -36,7 +36,7 @@
 
 ---
 
-## 一、对齐说明
+## 一、对齐说明 {#一对齐说明}
 
 本文档将 `docs/research_notes/` 及项目代码库中的性能优化、测试质量内容与 P0 官方文档、P2 社区/行业权威工具建立对齐矩阵，确保：
 
@@ -46,9 +46,9 @@
 
 ---
 
-## 二、P0 官方权威来源
+## 二、P0 官方权威来源 {#二p0-官方权威来源}
 
-### 2.1 Rust Performance Book
+### 2.1 Rust Performance Book {#21-rust-performance-book}
 
 | Performance Book 章节 | 项目文档 | 状态 | 备注 |
 |-----------------------|----------|------|------|
@@ -59,7 +59,7 @@
 | [Parallelism](https://nnethercote.github.io/perf-book/parallelism.html) | [experiments/10_concurrency_performance.md](experiments/10_concurrency_performance.md) | ✅ | 并发基准、Rayon、tokio |
 | [Compiler Options](https://nnethercote.github.io/perf-book/build-configuration.html) | [experiments/10_compiler_optimizations.md](experiments/10_compiler_optimizations.md) §3 | ✅ | release 配置、profile |
 
-### 2.2 Cargo 测试文档
+### 2.2 Cargo 测试文档 {#22-cargo-测试文档}
 
 | Cargo 测试主题 | 项目文档 | 状态 | 备注 |
 |----------------|----------|------|------|
@@ -68,14 +68,14 @@
 | [Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) | [10_cargo_book_alignment.md](10_cargo_book_alignment.md) | ✅ | workspace 级测试运行 |
 | [Target features](https://doc.rust-lang.org/cargo/reference/features.html) | [10_cargo_book_alignment.md](10_cargo_book_alignment.md) §4 | ✅ | feature 与条件测试 |
 
-### 2.3 rustdoc 测试
+### 2.3 rustdoc 测试 {#23-rustdoc-测试}
 
 | rustdoc 主题 | 项目文档 | 状态 | 备注 |
 |--------------|----------|------|------|
 | [Documentation tests](https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html) | [docs/06_toolchain/03_rustdoc_advanced.md](../06_toolchain/03_rustdoc_advanced.md) | ✅ | doctests、隐藏代码、属性 |
 | [Test attributes](https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html#attributes) | [docs/06_toolchain/03_rustdoc_advanced.md](../06_toolchain/03_rustdoc_advanced.md) | ✅ | `ignore`、`no_run`、`should_panic` |
 
-### 2.4 Miri
+### 2.4 Miri {#24-miri}
 
 | Miri 主题 | 项目文档 | 状态 | 备注 |
 |-----------|----------|------|------|
@@ -83,7 +83,7 @@
 | [Concurrency with Miri](https://github.com/rust-lang/miri#miri-) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) | ✅ | 异步/并发 UB 检测 |
 | [Foreign Function Interface](https://github.com/rust-lang/miri#miri-) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) | 🔄 | FFI 行为检测 |
 
-### 2.5 Clippy
+### 2.5 Clippy {#25-clippy}
 
 | Clippy 主题 | 项目文档 | 状态 | 备注 |
 |-------------|----------|------|------|
@@ -93,9 +93,9 @@
 
 ---
 
-## 三、P2 社区/行业权威来源
+## 三、P2 社区/行业权威来源 {#三p2-社区行业权威来源}
 
-### 3.1 基准测试与 Profiling
+### 3.1 基准测试与 Profiling {#31-基准测试与-profiling}
 
 | 工具/来源 | 类型 | 项目文档 | 状态 | 备注 |
 |-----------|------|----------|------|------|
@@ -105,7 +105,7 @@
 | [flamegraph](https://github.com/flamegraph-rs/flamegraph) | 火焰图生成 | [experiments/10_performance_benchmarks.md](experiments/10_performance_benchmarks.md) §5 | ✅ | cargo flamegraph |
 | [coz](https://github.com/plasma-umass/coz) | 因果性能分析 | [experiments/10_performance_benchmarks.md](experiments/10_performance_benchmarks.md) §5 | 🔄 | Linux causal profiling |
 
-### 3.2 运行时诊断与可视化
+### 3.2 运行时诊断与可视化 {#32-运行时诊断与可视化}
 
 | 工具/来源 | 类型 | 项目文档 | 状态 | 备注 |
 |-----------|------|----------|------|------|
@@ -113,7 +113,7 @@
 | [tokio-metrics](https://github.com/tokio-rs/tokio-metrics) | 异步指标采集 | [crates/c06_async/README.md](../../crates/c06_async/README.md) | ✅ | runtime/task 指标 |
 | [tracing](https://github.com/tokio-rs/tracing) + [opentelemetry](https://github.com/open-telemetry/opentelemetry-rust) | 分布式追踪 | [crates/c06_async/README.md](../../crates/c06_async/README.md) | ✅ | async 链路追踪 |
 
-### 3.3 动态分析与 Sanitizer
+### 3.3 动态分析与 Sanitizer {#33-动态分析与-sanitizer}
 
 | 工具/来源 | 类型 | 项目文档 | 状态 | 备注 |
 |-----------|------|----------|------|------|
@@ -124,9 +124,9 @@
 
 ---
 
-## 四、测试策略矩阵
+## 四、测试策略矩阵 {#四测试策略矩阵}
 
-### 4.1 单元测试 / 集成测试 / doctests
+### 4.1 单元测试 / 集成测试 / doctests {#41-单元测试-集成测试-doctests}
 
 | 策略 | 权威来源 | 项目文档 | 状态 | 备注 |
 |------|----------|----------|------|------|
@@ -135,7 +135,7 @@
 | Doctests | [rustdoc – Documentation tests](https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html) | [docs/06_toolchain/03_rustdoc_advanced.md](../06_toolchain/03_rustdoc_advanced.md) | ✅ | 文档示例即测试 |
 | 测试覆盖率 | [tarpaulin](https://github.com/xd009642/tarpaulin) / [cargo-llvm-cov](https://github.com/taiki-e/cargo-llvm-cov) | [10_tools_guide.md](10_tools_guide.md) | ✅ | CI 覆盖率报告 |
 
-### 4.2 Property-based / Fuzzing / Mutation
+### 4.2 Property-based / Fuzzing / Mutation {#42-property-based-fuzzing-mutation}
 
 | 策略 | 工具/来源 | 项目文档 | 状态 | 备注 |
 |------|-----------|----------|------|------|
@@ -146,7 +146,7 @@
 
 ---
 
-## 五、项目文档映射
+## 五、项目文档映射 {#五项目文档映射}
 
 | 主题 | 权威来源 | 项目文档 |
 |------|----------|----------|
@@ -158,7 +158,7 @@
 
 ---
 
-## 六、未覆盖缺口
+## 六、未覆盖缺口 {#六未覆盖缺口}
 
 1. Rust Performance Book 中「SIMD」、「Cache Efficiency」、「Compile Times」章节可补充更多项目示例。
 2. cargo-fuzz 与项目 unsafe/解析器代码的集成用例尚需完善。
@@ -168,7 +168,7 @@
 
 > **权威来源**: [Rust Performance Book](https://nnethercote.github.io/perf-book/) | [Cargo Book](https://doc.rust-lang.org/cargo/) | [rustdoc](https://doc.rust-lang.org/rustdoc/) | [Miri](https://github.com/rust-lang/miri) | [Clippy](https://doc.rust-lang.org/clippy/) | [Criterion.rs](https://bheisler.github.io/criterion.rs/book/) | [iai-callgrind](https://github.com/iai-callgrind/iai-callgrind) | [tokio/console](https://github.com/tokio-rs/console) | [flamegraph](https://github.com/flamegraph-rs/flamegraph) | [valgrind](https://valgrind.org/) | [Sanitizers](https://doc.rust-lang.org/unstable-book/compiler-flags/sanitizer.html)
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
 - [社区最佳实践对齐矩阵](10_community_best_practices_alignment.md)
@@ -179,7 +179,7 @@
 
 ---
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 本对齐矩阵同时参考以下 P1 学术权威来源，以形成完整的官方-学术对照网络：
 

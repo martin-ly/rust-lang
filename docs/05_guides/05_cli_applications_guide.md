@@ -1,4 +1,4 @@
-# CLI 应用开发指南
+# CLI 应用开发指南 {#cli-应用开发指南}
 
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
@@ -12,12 +12,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [CLI 应用开发指南](#cli-应用开发指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [文档定位](#文档定位)
   - [官方 CLI Book 入口](#官方-cli-book-入口)
   - [本项目对应模块](#本项目对应模块)
@@ -30,7 +30,7 @@
   - [推荐学习路径](#推荐学习路径)
   - [常用 crate 推荐](#常用-crate-推荐)
   - [最佳实践](#最佳实践)
-    - [1. 使用 `?` 操作符传播错误](#1-使用--操作符传播错误)
+    - [1. 使用 `?` 操作符传播错误](#1-使用-操作符传播错误)
     - [2. 提供有意义的错误信息](#2-提供有意义的错误信息)
     - [3. 使用 exit codes](#3-使用-exit-codes)
   - [使用场景](#使用场景)
@@ -44,11 +44,10 @@
     - [array\_windows 在参数解析中的应用](#array_windows-在参数解析中的应用)
     - [ControlFlow 在验证管道中的应用](#controlflow-在验证管道中的应用)
     - [LazyLock 在配置管理中的应用](#lazylock-在配置管理中的应用)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 文档定位
+## 文档定位 {#文档定位}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -59,7 +58,7 @@
 
 ---
 
-## 官方 CLI Book 入口
+## 官方 CLI Book 入口 {#官方-cli-book-入口}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -70,7 +69,7 @@
 
 ---
 
-## 本项目对应模块
+## 本项目对应模块 {#本项目对应模块}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -85,11 +84,11 @@
 
 ---
 
-## 快速开始示例
+## 快速开始示例 {#快速开始示例}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 最小 CLI 应用
+### 1. 最小 CLI 应用 {#1-最小-cli-应用}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -110,7 +109,7 @@ fn main() {
 }
 ```
 
-### 2. 使用 clap 构建专业 CLI
+### 2. 使用 clap 构建专业 CLI {#2-使用-clap-构建专业-cli}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -166,7 +165,7 @@ fn main() {
 }
 ```
 
-### 3. 异步 CLI 示例
+### 3. 异步 CLI 示例 {#3-异步-cli-示例}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -203,7 +202,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-### 4. 带进度条的 CLI
+### 4. 带进度条的 CLI {#4-带进度条的-cli}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
@@ -236,7 +235,7 @@ fn main() {
 }
 ```
 
-### 5. 错误处理最佳实践
+### 5. 错误处理最佳实践 {#5-错误处理最佳实践}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
@@ -281,7 +280,7 @@ fn main() {
 
 ---
 
-## 推荐学习路径
+## 推荐学习路径 {#推荐学习路径}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -292,7 +291,7 @@ fn main() {
 
 ---
 
-## 常用 crate 推荐
+## 常用 crate 推荐 {#常用-crate-推荐}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -308,11 +307,11 @@ fn main() {
 
 ---
 
-## 最佳实践
+## 最佳实践 {#最佳实践}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 1. 使用 `?` 操作符传播错误
+### 1. 使用 `?` 操作符传播错误 {#1-使用-操作符传播错误}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -324,7 +323,7 @@ fn read_config(path: &str) -> Result<Config, Box<dyn std::error::Error>> {
 }
 ```
 
-### 2. 提供有意义的错误信息
+### 2. 提供有意义的错误信息 {#2-提供有意义的错误信息}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -337,7 +336,7 @@ fn main() {
 }
 ```
 
-### 3. 使用 exit codes
+### 3. 使用 exit codes {#3-使用-exit-codes}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -357,11 +356,11 @@ fn main() -> ExitCode {
 
 ---
 
-## 使用场景
+## 使用场景 {#使用场景}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 场景1: 简单命令行工具
+### 场景1: 简单命令行工具 {#场景1-简单命令行工具}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -372,7 +371,7 @@ fn main() -> ExitCode {
 // 适用于：批量重命名、日志分析、数据转换
 ```
 
-### 场景2: 专业级 CLI 应用
+### 场景2: 专业级 CLI 应用 {#场景2-专业级-cli-应用}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -382,7 +381,7 @@ fn main() -> ExitCode {
 - 添加 [进度条](#4-带进度条的-cli) 提升用户体验
 - 实现 [彩色输出](#2-提供有意义的错误信息)
 
-### 场景3: 异步 CLI 工具
+### 场景3: 异步 CLI 工具 {#场景3-异步-cli-工具}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -392,7 +391,7 @@ fn main() -> ExitCode {
 - 实现 超时处理
 - 参考 C06 异步 深入学习
 
-### 场景4: TUI 应用
+### 场景4: TUI 应用 {#场景4-tui-应用}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -404,7 +403,7 @@ fn main() -> ExitCode {
 
 ---
 
-## 形式化链接
+## 形式化链接 {#形式化链接}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -421,7 +420,7 @@ fn main() -> ExitCode {
 
 ---
 
-## 相关文档
+## 相关文档 {#相关文档}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -434,13 +433,13 @@ fn main() -> ExitCode {
 
 ---
 
-## Rust 1.95+ 在 CLI 开发中的应用
+## Rust 1.95+ 在 CLI 开发中的应用 {#rust-195-在-cli-开发中的应用}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.96.0+
 
-### array_windows 在参数解析中的应用
+### array_windows 在参数解析中的应用 {#array_windows-在参数解析中的应用}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -459,7 +458,7 @@ fn parse_key_value_pairs(args: &[String]) -> Vec<(String, String)> {
 }
 ```
 
-### ControlFlow 在验证管道中的应用
+### ControlFlow 在验证管道中的应用 {#controlflow-在验证管道中的应用}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -475,7 +474,7 @@ fn validate_args(args: &CliArgs) -> ControlFlow<ValidationError, ()> {
 }
 ```
 
-### LazyLock 在配置管理中的应用
+### LazyLock 在配置管理中的应用 {#lazylock-在配置管理中的应用}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -510,7 +509,7 @@ pub fn get_config() -> Option<&'static CliConfig> {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -519,7 +518,7 @@ pub fn get_config() -> Option<&'static CliConfig> {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Command-Line Interface](https://en.wikipedia.org/wiki/Command_Line_Interface)**
 > **[来源: clap.rs Documentation]**

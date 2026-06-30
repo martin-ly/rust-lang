@@ -1,4 +1,4 @@
-# Rust 领域分析框架
+# Rust 领域分析框架 {#rust-领域分析框架}
 >
 > **概念族**: 综合研究
 
@@ -15,13 +15,13 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 领域分析框架](#rust-领域分析框架)
-  - [📑 目录](#-目录)
-  - [🎯 概述 {#-概述}](#-概述--概述)
+  - [📑 目录](#目录)
+  - [🎯 概述](#概述)
   - [五大核心领域](#五大核心领域)
     - [领域 1: 内存安全](#领域-1-内存安全)
       - [边界定义](#边界定义)
@@ -29,21 +29,21 @@
       - [关键定理](#关键定理)
       - [领域模型图](#领域模型图)
     - [领域 2: 类型系统](#领域-2-类型系统)
-      - [边界定义 {#边界定义-1}](#边界定义-边界定义-1)
-      - [核心抽象 {#核心抽象-1}](#核心抽象-核心抽象-1)
-      - [关键定理 {#关键定理-1}](#关键定理-关键定理-1)
+      - [边界定义](#边界定义-1)
+      - [核心抽象](#核心抽象-1)
+      - [关键定理](#关键定理-1)
       - [类型层次结构](#类型层次结构)
     - [领域 3: 并发与并行](#领域-3-并发与并行)
-      - [边界定义 {#边界定义-2}](#边界定义-边界定义-2)
-      - [核心抽象 {#核心抽象-2}](#核心抽象-核心抽象-2)
-      - [关键定理 {#关键定理-2}](#关键定理-关键定理-2)
+      - [边界定义](#边界定义-2)
+      - [核心抽象](#核心抽象-2)
+      - [关键定理](#关键定理-2)
       - [并发模型对比](#并发模型对比)
     - [领域 4: 软件设计](#领域-4-软件设计)
-      - [边界定义 {#边界定义-3}](#边界定义-边界定义-3)
-      - [核心抽象 {#核心抽象-3}](#核心抽象-核心抽象-3)
+      - [边界定义](#边界定义-3)
+      - [核心抽象](#核心抽象-3)
       - [设计模式矩阵](#设计模式矩阵)
     - [领域 5: 工具链](#领域-5-工具链)
-      - [边界定义 {#边界定义-4}](#边界定义-边界定义-4)
+      - [边界定义](#边界定义-4)
       - [编译流程模型](#编译流程模型)
       - [工具链层次](#工具链层次)
   - [领域边界与交叉](#领域边界与交叉)
@@ -51,17 +51,16 @@
     - [领域依赖图](#领域依赖图)
   - [领域抽象模型](#领域抽象模型)
     - [抽象层次对比](#抽象层次对比)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 更新](#rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🎯 概述 {#-概述}
+## 🎯 概述 {#概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -74,11 +73,11 @@
 
 ---
 
-## 五大核心领域
+## 五大核心领域 {#五大核心领域}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 领域 1: 内存安全
+### 领域 1: 内存安全 {#领域-1-内存安全}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -86,7 +85,7 @@
 
 **核心关注点**: 防止内存错误（悬垂指针、双重释放、缓冲区溢出、数据竞争）
 
-#### 边界定义
+#### 边界定义 {#边界定义}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -99,7 +98,7 @@
 | 生命周期 | 智能指针实现细节 | 编译器（MIR borrowck） |
 | 内存布局 | 分配器实现 | FFI（unsafe边界） |
 
-#### 核心抽象
+#### 核心抽象 {#核心抽象}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -136,7 +135,7 @@
 Γ, H ⊢ e ⇓ v, H'  (表达式 e 在环境 Γ 和堆 H 下求值为 v，新堆 H')
 ```
 
-#### 关键定理
+#### 关键定理 {#关键定理}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -149,7 +148,7 @@
 | **T-无泄漏** | 资源最终被释放 | [ownership_model](formal_methods/10_ownership_model.md) | ⭐⭐⭐⭐ |
 | **T-数据竞争自由** | 借用规则保证线程安全 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) | ⭐⭐⭐⭐⭐ |
 
-#### 领域模型图
+#### 领域模型图 {#领域模型图}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -185,7 +184,7 @@ graph TB
 
 ---
 
-### 领域 2: 类型系统
+### 领域 2: 类型系统 {#领域-2-类型系统}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -254,7 +253,7 @@ A + B     : A 或 B
 | **T-类型安全** | 进展 + 保持 | [type_system_foundations](type_theory/10_type_system_foundations.md) | ⭐⭐⭐⭐⭐ |
 | **T-型变安全** | 协变/逆变/不变正确性 | [variance_theory](type_theory/10_variance_theory.md) | ⭐⭐⭐⭐ |
 
-#### 类型层次结构
+#### 类型层次结构 {#类型层次结构}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -284,7 +283,7 @@ A + B     : A 或 B
 
 ---
 
-### 领域 3: 并发与并行
+### 领域 3: 并发与并行 {#领域-3-并发与并行}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -338,7 +337,7 @@ Rust 映射:
 | **T-异步安全** | async/await不引入数据竞争 | [async_state_machine](formal_methods/10_async_state_machine.md) | ⭐⭐⭐⭐ |
 | **T-Pin安全** | Pin保证自引用安全 | [pin_self_referential](formal_methods/10_pin_self_referential.md) | ⭐⭐⭐⭐ |
 
-#### 并发模型对比
+#### 并发模型对比 {#并发模型对比}
 
 | 模型 | 通信方式 | 同步机制 | Rust实现 | 适用场景 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -350,7 +349,7 @@ Rust 映射:
 
 ---
 
-### 领域 4: 软件设计
+### 领域 4: 软件设计 {#领域-4-软件设计}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -397,7 +396,7 @@ Rust特有:
   type Resource: Linear = { acquire, release }
 ```
 
-#### 设计模式矩阵
+#### 设计模式矩阵 {#设计模式矩阵}
 
 | 模式 | 意图 | Rust实现 | 形式化类型 |
 | :--- | :--- | :--- | :--- |
@@ -410,7 +409,7 @@ Rust特有:
 
 ---
 
-### 领域 5: 工具链
+### 领域 5: 工具链 {#领域-5-工具链}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -425,7 +424,7 @@ Rust特有:
 | 测试框架 | CI/CD | 形式化（验证工具） |
 | 代码检查 | 代码格式化 | 内存安全（MIR分析） |
 
-#### 编译流程模型
+#### 编译流程模型 {#编译流程模型}
 
 ```text
 源代码
@@ -455,7 +454,7 @@ Rust特有:
 目标代码
 ```
 
-#### 工具链层次
+#### 工具链层次 {#工具链层次}
 
 ```text
 工具链生态
@@ -483,11 +482,11 @@ Rust特有:
 
 ---
 
-## 领域边界与交叉
+## 领域边界与交叉 {#领域边界与交叉}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 领域交叉矩阵
+### 领域交叉矩阵 {#领域交叉矩阵}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -499,7 +498,7 @@ Rust特有:
 | 并发 | 工具链 | 异步状态机 | 10_async_state_machine.md |
 | 软件设计 | 工具链 | 模块化 | 07_module_knowledge_structure_guide.md |
 
-### 领域依赖图
+### 领域依赖图 {#领域依赖图}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -532,11 +531,11 @@ graph TB
 
 ---
 
-## 领域抽象模型
+## 领域抽象模型 {#领域抽象模型}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 抽象层次对比
+### 抽象层次对比 {#抽象层次对比}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -556,7 +555,7 @@ graph TB
 
 ---
 
-## 🆕 Rust 1.94 更新
+## 🆕 Rust 1.94 更新 {#rust-194-更新}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -568,20 +567,20 @@ graph TB
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -590,7 +589,7 @@ graph TB
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -598,7 +597,7 @@ graph TB
 - ✅ 兼容Edition 2024
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查
@@ -621,7 +620,7 @@ graph TB
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -630,7 +629,7 @@ graph TB
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
 

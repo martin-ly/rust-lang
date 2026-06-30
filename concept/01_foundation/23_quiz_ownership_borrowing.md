@@ -17,7 +17,7 @@
 > **后置概念**: [Borrowing](02_borrowing.md)
 ---
 
-> **来源**:
+> **来源**: · [自测题库](../00_meta/self_assessment.md)
 > [The Rust Programming Language — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) ·
 > [The Rust Programming Language — References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html) ·
 > [The Rust Programming Language — Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)

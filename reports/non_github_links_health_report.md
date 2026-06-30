@@ -1,12 +1,19 @@
 # 非 GitHub 外部链接健康检查报告
 
-> 生成时间: 2026-06-29 01:13:59
+> 生成时间: 2026-07-01 05:31:22
 > 扫描范围: `concept/` 下所有非 `github.com` 的 Markdown 外部链接
-> 去重链接数: 2707
-> HTTP 200: 2225
+> 去重链接数: 2703
+> HTTP 200: 2219
 > 已白名单（脚本/SSL/403 误报）: 482
 > 受保护/重定向/SSL 警告（需人工复核）: 0
-> 疑似失效（404/超时/5xx）: 0
+> 疑似失效（404/超时/5xx）: 2
+
+## 疑似失效链接清单
+
+| URL | 状态 | 涉及文件 |
+|:---|:---|:---|
+| `https://jeffreypalermo.com/blog/the-onion-architecture-part-3/` | 429 | 06_ecosystem/35_architecture_patterns.md |
+| `https://www.eprosima.com/index.php/products-all/eprosima-fast-dds` | The read operation timed out | 06_ecosystem/52_robotics.md |
 
 ## 已白名单链接清单
 
@@ -277,7 +284,7 @@
 | `https://en.wikipedia.org/wiki/Memory_allocator` | 02_intermediate/03_memory_management.md |
 | `https://en.wikipedia.org/wiki/Memory_management` | 02_intermediate/03_memory_management.md, 03_advanced/14_custom_allocators.md, 05_comparative/03_paradigm_matrix.md |
 | `https://en.wikipedia.org/wiki/Memory_ordering` | 03_advanced/11_atomics_and_memory_ordering.md, 05_comparative/04_safety_boundaries.md |
-| `https://en.wikipedia.org/wiki/Memory_safety` | 00_meta/inter_layer_map.md, 02_intermediate/03_memory_management.md, 03_advanced/03_unsafe.md, 03_advanced/12_unsafe_rust_patterns.md, 05_comparative/02_rust_vs_go.md |
+| `https://en.wikipedia.org/wiki/Memory_safety` | 00_meta/inter_layer_map.md, 02_intermediate/03_memory_management.md, 03_advanced/03_unsafe.md, 05_comparative/02_rust_vs_go.md, 05_comparative/04_safety_boundaries.md |
 | `https://en.wikipedia.org/wiki/Metaprogramming` | 02_intermediate/21_metaprogramming.md, 03_advanced/04_macros.md, 03_advanced/README.md |
 | `https://en.wikipedia.org/wiki/Model_Checking` | 07_future/02_formal_methods.md |
 | `https://en.wikipedia.org/wiki/Model_checking` | 04_formal/04_rustbelt.md, 04_formal/05_verification_toolchain.md, 07_future/02_formal_methods.md |
@@ -494,5 +501,3 @@
 | `https://www.w3.org/wasm/` | 06_ecosystem/11_webassembly.md, 06_ecosystem/54_webassembly_advanced.md, 07_future/28_rust_for_webassembly.md |
 | `https://www.workflowpatterns.com/` | 00_meta/semantic_bridge_algorithms_patterns.md |
 | `https://zenodo.org/records/19622061` | 04_formal/01_linear_logic.md |
-
-所有非 GitHub 外部链接均可访问或已白名单。

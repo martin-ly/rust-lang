@@ -1,4 +1,4 @@
-# 并发设计模式
+# 并发设计模式 {#并发设计模式}
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -13,11 +13,11 @@
 
 ---
 
-## 并发安全的设计模式
+## 并发安全的设计模式 {#并发安全的设计模式}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 无锁数据结构模式
+### 无锁数据结构模式 {#无锁数据结构模式}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -72,7 +72,7 @@ fn lock_free_demo() {
 }
 ```
 
-### 线程池模式
+### 线程池模式 {#线程池模式}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -173,7 +173,7 @@ fn thread_pool_demo() {
 }
 ```
 
-### 读写锁模式
+### 读写锁模式 {#读写锁模式}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -247,7 +247,7 @@ impl<K: std::hash::Hash + Eq + Clone, V: Clone> Cache<K, V> {
 }
 ```
 
-### 生产者-消费者模式
+### 生产者-消费者模式 {#生产者-消费者模式}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -320,7 +320,7 @@ fn backpressure_producer_consumer() {
 }
 ```
 
-### 扇出-扇入模式
+### 扇出-扇入模式 {#扇出-扇入模式}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -373,7 +373,7 @@ fn fan_out_fan_in() {
 }
 ```
 
-### 信号量模式
+### 信号量模式 {#信号量模式}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -433,7 +433,7 @@ async fn weighted_semaphore() {
 
 ---
 
-## 使用场景
+## 使用场景 {#使用场景}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -450,11 +450,11 @@ async fn weighted_semaphore() {
 
 ---
 
-## 相关研究笔记
+## 相关研究笔记 {#相关研究笔记}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 软件设计理论
+### 软件设计理论 {#软件设计理论}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -466,7 +466,7 @@ async fn weighted_semaphore() {
 | 并行执行模型 | 并行模型理论 | [../../../research_notes/software_design_theory/03_execution_models/04_parallel.md](../../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/04_parallel.md) |
 | 边界矩阵 | 并发安全边界 | [../../../research_notes/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md](../../../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md) |
 
-### 形式化方法
+### 形式化方法 {#形式化方法}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -477,7 +477,7 @@ async fn weighted_semaphore() {
 | Send/Sync 形式化 | 线程安全形式化 | [../../../research_notes/formal_methods/10_send_sync_formalization.md](../../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) |
 | 所有权模型 | 所有权与并发 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
 
-### 实验分析
+### 实验分析 {#实验分析}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -487,7 +487,7 @@ async fn weighted_semaphore() {
 
 ---
 
-## 相关 crates
+## 相关 crates {#相关-crates}
 
 | crate | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -508,7 +508,7 @@ async fn weighted_semaphore() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 

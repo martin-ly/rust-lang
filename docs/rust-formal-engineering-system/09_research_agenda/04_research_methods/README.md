@@ -12,11 +12,11 @@
 
 ---
 
-## 研究方法概述
+## 研究方法概述 {#研究方法概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 形式化方法研究流程
+### 形式化方法研究流程 {#形式化方法研究流程}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -38,45 +38,45 @@
 代码实现与验证
 ```
 
-### 研究笔记结构
+### 研究笔记结构 {#研究笔记结构}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```markdown
-# 研究笔记模板
+# 研究笔记模板 {#研究笔记模板}
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
-## 问题陈述
+## 问题陈述 {#问题陈述}
 > **[来源: Rust Official Docs]**
 - 研究什么问题
 - 为什么重要
 
-## 形式化定义
+## 形式化定义 {#形式化定义}
 > **[来源: Rust Official Docs]**
 - 数学符号定义
 - 类型/状态定义
 
-## 定理与证明
+## 定理与证明 {#定理与证明}
 > **[来源: Rust Official Docs]**
 - 定理陈述
 - 证明步骤
 - 证明验证
 
-## 实现考虑
+## 实现考虑 {#实现考虑}
 > **[来源: Rust Official Docs]**
 - Rust 实现映射
 - 边界条件
 
-## 开放问题
+## 开放问题 {#开放问题}
 > **[来源: Rust Official Docs]**
 - 未解决的疑问
 - 进一步研究方向
 ```
 
-### 证明验证工具
+### 证明验证工具 {#证明验证工具}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -104,7 +104,7 @@ fn double(x: i32) -> i32 {
 }
 ```
 
-### 研究方法论示例
+### 研究方法论示例 {#研究方法论示例}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -165,7 +165,7 @@ mod verification_tests {
 }
 ```
 
-### 类型系统研究示例
+### 类型系统研究示例 {#类型系统研究示例}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -192,7 +192,7 @@ fn verify<'long: 'short>(long: &'long str, short: &'short str) {
 }
 ```
 
-### 所有权研究示例
+### 所有权研究示例 {#所有权研究示例}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -237,7 +237,7 @@ fn borrowing_rules() {
 }
 ```
 
-### 形式化规范写作
+### 形式化规范写作 {#形式化规范写作}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -296,7 +296,7 @@ mod property_tests {
 
 ---
 
-## 形式化方法
+## 形式化方法 {#形式化方法}
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -309,7 +309,7 @@ mod property_tests {
 | 借用检查器证明 | 借用检查器形式化 | [../../../research_notes/formal_methods/10_borrow_checker_proof.md](../../../research_notes/formal_methods/10_borrow_checker_proof.md) |
 | 证明索引 | 形式化证明集合 | [../../../research_notes/10_proof_index.md](../../../../archive/research_notes_2026_06_25/10_proof_index.md) |
 
-## 相关研究笔记
+## 相关研究笔记 {#相关研究笔记}
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -338,7 +338,7 @@ mod property_tests {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 > **来源: [Coq Reference Manual](https://coq.inria.fr/doc/)**

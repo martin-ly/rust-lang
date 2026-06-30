@@ -1,4 +1,4 @@
-# Verus 实战指南 —— 在 Rust 中写证明
+# Verus 实战指南 —— 在 Rust 中写证明 {#verus-实战指南-在-rust-中写证明}
 
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
@@ -12,7 +12,7 @@
 
 ---
 
-## 1. 引言：Verus 是什么
+## 1. 引言：Verus 是什么 {#1-引言verus-是什么}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -45,11 +45,11 @@ flowchart LR
 
 ---
 
-## 2. 安装与项目结构
+## 2. 安装与项目结构 {#2-安装与项目结构}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 2.1 环境要求
+### 2.1 环境要求 {#21-环境要求}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -59,22 +59,22 @@ flowchart LR
 | Z3 | 4.12.0+ | SMT 求解器（Verus 自带） |
 | Verus | 0.24.0+ | `cargo install vargo` 或通过源码构建 |
 
-### 2.2 安装
+### 2.2 安装 {#22-安装}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```bash
-# 方式 1: 使用预构建二进制（推荐）
+# 方式 1: 使用预构建二进制（推荐） {#方式-1-使用预构建二进制推荐}
 git clone https://github.com/verus-lang/verus.git
 cd verus
 source ./tools/activate  # 设置环境变量
 vargo build --release
 
-# 方式 2: 在项目中使用 verus 宏
+# 方式 2: 在项目中使用 verus 宏 {#方式-2-在项目中使用-verus-宏}
 cargo add verus --git https://github.com/verus-lang/verus
 ```
 
-### 2.3 项目结构
+### 2.3 项目结构 {#23-项目结构}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -87,14 +87,14 @@ my_verus_project/
 ```
 
 ```toml
-# rust-toolchain.toml
+# rust-toolchain.toml {#rust-toolchaintoml}
 [toolchain]
 channel = "nightly-2024-10-15"
 components = ["rustc-dev", "llvm-tools-preview", "rust-src"]
 ```
 
 ```toml
-# Cargo.toml
+# Cargo.toml {#cargotoml}
 [dependencies]
 verus = { git = "https://github.com/verus-lang/verus" }
 ```
@@ -103,13 +103,13 @@ verus = { git = "https://github.com/verus-lang/verus" }
 
 ---
 
-## 3. 核心语法
+## 3. 核心语法 {#3-核心语法}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Verus 的核心是 `verus!{}` 宏，在其中可以编写带有 `requires`（前置条件）、`ensures`（后置条件）和 `invariant`（循环不变量）的代码。
 
-### 3.1 `requires` — 前置条件
+### 3.1 `requires` — 前置条件 {#31-requires-前置条件}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -132,7 +132,7 @@ fn abs(x: i64) -> (result: i64)
 } // verus!
 ```
 
-### 3.2 `ensures` — 后置条件
+### 3.2 `ensures` — 后置条件 {#32-ensures-后置条件}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -151,7 +151,7 @@ fn max(a: i32, b: i32) -> (result: i32)
 } // verus!
 ```
 
-### 3.3 `invariant` — 循环不变量
+### 3.3 `invariant` — 循环不变量 {#33-invariant-循环不变量}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -190,7 +190,7 @@ fn factorial(n: u64) -> (result: u64)
 > [来源: [Verus Guide — Specifications](https://verus-lang.github.io/verus/guide/spec.html)]
 > [来源: [Verus Guide — Loops and Invariants](https://verus-lang.github.io/verus/guide/loops.html)]
 
-### 3.4 `decreases` — 终止性证明
+### 3.4 `decreases` — 终止性证明 {#34-decreases-终止性证明}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -220,13 +220,13 @@ fn sum_rec(arr: &[i32], idx: usize) -> (result: i64)
 
 ---
 
-## 4. 所有权与规格：Ghost 状态
+## 4. 所有权与规格：Ghost 状态 {#4-所有权与规格ghost-状态}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Verus 的关键创新是 **ghost 变量** —— 只存在于规格中，不生成运行时代码。
 
-### 4.1 `tracked` Ghost 变量
+### 4.1 `tracked` Ghost 变量 {#41-tracked-ghost-变量}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -266,7 +266,7 @@ fn push_with_ghost<T>(vec: &mut Vec<T>, value: T, ghost_old_len: Ghost<usize>)
 > [来源: [Verus Guide — Ghost Entities](https://verus-lang.github.io/verus/guide/ghost.html)]
 > [来源: [PLDI 2023 — Linear Ghost Types](https://dl.acm.org/doi/10.1145/3591285)]
 
-### 4.2 `Proof` 类型与归纳证明
+### 4.2 `Proof` 类型与归纳证明 {#42-proof-类型与归纳证明}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -313,13 +313,13 @@ fn verify_all_nonnegative(arr: &[i32]) -> (result: bool)
 
 ---
 
-## 5. 可变引用的 Prophecy 编码
+## 5. 可变引用的 Prophecy 编码 {#5-可变引用的-prophecy-编码}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 当函数返回可变引用 `&mut T` 时，Verus 需要 `after<>` 块来描述返回后引用的状态。
 
-### 5.1 `after<>` 基础
+### 5.1 `after<>` 基础 {#51-after-基础}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -351,7 +351,7 @@ impl Counter {
 } // verus!
 ```
 
-### 5.2 返回引用后的状态约束
+### 5.2 返回引用后的状态约束 {#52-返回引用后的状态约束}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -377,13 +377,13 @@ fn get_first_mut(arr: &mut [i32]) -> (result: &mut i32)
 
 ---
 
-## 6. 并发验证
+## 6. 并发验证 {#6-并发验证}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Verus 的独特优势是支持并发程序验证，基于 **linear/affine ghost types** 确保线程安全。
 
-### 6.1 `atomic_with_ghost!` — 原子操作与 Ghost 状态
+### 6.1 `atomic_with_ghost!` — 原子操作与 Ghost 状态 {#61-atomic_with_ghost-原子操作与-ghost-状态}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -422,7 +422,7 @@ impl ConcurrentCounter {
 } // verus!
 ```
 
-### 6.2 Linear Ghost Types for Lock-Free
+### 6.2 Linear Ghost Types for Lock-Free {#62-linear-ghost-types-for-lock-free}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -484,11 +484,11 @@ impl<T> Stack<T> {
 
 ---
 
-## 7. 完整案例
+## 7. 完整案例 {#7-完整案例}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 7.1 案例一：验证链表插入
+### 7.1 案例一：验证链表插入 {#71-案例一验证链表插入}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -556,7 +556,7 @@ impl LinkedList {
 } // verus!
 ```
 
-### 7.2 案例二：验证栈的 LIFO 性质
+### 7.2 案例二：验证栈的 LIFO 性质 {#72-案例二验证栈的-lifo-性质}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -615,7 +615,7 @@ proof fn verify_lifo_property()
 } // verus!
 ```
 
-### 7.3 案例三：验证二分查找正确性
+### 7.3 案例三：验证二分查找正确性 {#73-案例三验证二分查找正确性}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -661,7 +661,7 @@ fn binary_search(arr: &[i32], target: i32) -> (result: Option<usize>)
 
 > [来源: [Rust Reference — slice::binary_search](https://doc.rust-lang.org/std/primitive.slice.html#method.binary_search)]
 
-### 7.4 案例四：验证并发计数器
+### 7.4 案例四：验证并发计数器 {#74-案例四验证并发计数器}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -713,7 +713,7 @@ fn verify_multiple_increments()
 
 ---
 
-## 8. Verus vs Kani：选择指南
+## 8. Verus vs Kani：选择指南 {#8-verus-vs-kani选择指南}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -729,7 +729,7 @@ flowchart TD
     G -->|是| I[Verus 更强大]
 ```
 
-### 8.1 详细对比
+### 8.1 详细对比 {#81-详细对比}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -742,7 +742,7 @@ flowchart TD
 | 验证排序算法正确性 | Verus | 循环不变量描述排列和有序性 |
 | CI 快速回归 | Kani | 无需写规格，接近零成本 |
 
-### 8.2 互补工作流
+### 8.2 互补工作流 {#82-互补工作流}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -768,11 +768,11 @@ verus! {
 
 ---
 
-## 9. 限制与调试技巧
+## 9. 限制与调试技巧 {#9-限制与调试技巧}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 9.1 已知限制
+### 9.1 已知限制 {#91-已知限制}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -787,7 +787,7 @@ verus! {
 
 > [来源: [Verus Guide — Limitations](https://verus-lang.github.io/verus/guide/limitations.html)]
 
-### 9.2 调试 SMT 超时
+### 9.2 调试 SMT 超时 {#92-调试-smt-超时}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -823,7 +823,7 @@ spec fn spec_sum(arr: &[i32], n: int) -> int
 } // verus!
 ```
 
-### 9.3 常见错误
+### 9.3 常见错误 {#93-常见错误}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -837,7 +837,7 @@ spec fn spec_sum(arr: &[i32], n: int) -> int
 
 ---
 
-## 10. 相关文件
+## 10. 相关文件 {#10-相关文件}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -846,7 +846,7 @@ spec fn spec_sum(arr: &[i32], n: int) -> int
 - [所有权的形式化定义](../../concept/04_formal/03_ownership_formal.md)
 - [引用语义与多级借用](../../concept/01_foundation/05_reference_semantics.md)
 
-## 11. 来源与延伸阅读
+## 11. 来源与延伸阅读 {#11-来源与延伸阅读}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -862,7 +862,7 @@ spec fn spec_sum(arr: &[i32], n: int) -> int
 
 ---
 
-## 11. 定理速查表
+## 11. 定理速查表 {#11-定理速查表}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -892,7 +892,7 @@ spec fn spec_sum(arr: &[i32], n: int) -> int
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**

@@ -1,4 +1,4 @@
-# Outbox 模式形式化定义
+# Outbox 模式形式化定义 {#outbox-模式形式化定义}
 
 > **概念族**: 软件设计 / 分布式模式
 
@@ -30,12 +30,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Outbox 模式形式化定义](#outbox-模式形式化定义)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 概念定义 (Def)](#1-概念定义-def)
     - [Def OB1: Outbox](#def-ob1-outbox)
     - [Def OB2: 事务边界](#def-ob2-事务边界)
@@ -49,7 +49,7 @@
     - [Theorem OB2: 消息不重复](#theorem-ob2-消息不重复)
   - [4. Rust 实现示例](#4-rust-实现示例)
   - [5. 与 Saga 模式的关系](#5-与-saga-模式的关系)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -57,13 +57,13 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 1. 概念定义 (Def)
+## 1. 概念定义 (Def) {#1-概念定义-def}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Outbox Pattern](https://en.wikipedia.org/wiki/Outbox_Pattern)** · **来源: [Wikipedia - Event Sourcing](https://en.wikipedia.org/wiki/Event_Sourcing)** · **[来源: ACM - Distributed Transaction Patterns]** · **[来源: IEEE - Message Delivery Guarantees]**
 
-### Def OB1: Outbox
+### Def OB1: Outbox {#def-ob1-outbox}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -89,7 +89,7 @@ Outbox := (T_db, T_outbox, M, P_relay)
 
 ```
 
-### Def OB2: 事务边界
+### Def OB2: 事务边界 {#def-ob2-事务边界}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -115,7 +115,7 @@ Transaction := (db_ops, outbox_ops)
 
 业务操作和消息记录在**同一事务**中。
 
-### Def OB3: 消息状态
+### Def OB3: 消息状态 {#def-ob3-消息状态}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -133,13 +133,13 @@ MessageStatus :=
 
 ---
 
-## 2. 基本假设 (Axiom)
+## 2. 基本假设 (Axiom) {#2-基本假设-axiom}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### Axiom OB1: 事务原子性
+### Axiom OB1: 事务原子性 {#axiom-ob1-事务原子性}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -149,7 +149,7 @@ MessageStatus :=
 
 ```
 
-### Axiom OB2: 中继幂等性
+### Axiom OB2: 中继幂等性 {#axiom-ob2-中继幂等性}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -161,7 +161,7 @@ MessageStatus :=
 
 中继进程必须幂等，可处理重复消息。
 
-### Axiom OB3: 最终投递
+### Axiom OB3: 最终投递 {#axiom-ob3-最终投递}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -175,13 +175,13 @@ MessageStatus :=
 
 ---
 
-## 3. 定理 (Theorem)
+## 3. 定理 (Theorem) {#3-定理-theorem}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### Theorem OB1: 消息不丢失
+### Theorem OB1: 消息不丢失 {#theorem-ob1-消息不丢失}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -201,7 +201,7 @@ db_ops 成功 → ◇(msg ∈ M)
 
 4. P_relay 最终会将其投递到 M
 
-### Theorem OB2: 消息不重复
+### Theorem OB2: 消息不重复 {#theorem-ob2-消息不重复}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -223,7 +223,7 @@ msg.id 唯一 → 消费者收到 msg 一次且仅一次
 
 ---
 
-## 4. Rust 实现示例
+## 4. Rust 实现示例 {#4-rust-实现示例}
 
 >
 
@@ -425,7 +425,7 @@ impl<M: MessageBroker> OutboxRelay<M> {
 
 ---
 
-## 5. 与 Saga 模式的关系
+## 5. 与 Saga 模式的关系 {#5-与-saga-模式的关系}
 
 >
 
@@ -459,7 +459,7 @@ Outbox 模式常与 Saga 配合使用：
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -467,13 +467,13 @@ Outbox 模式常与 Saga 配合使用：
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -487,7 +487,7 @@ Outbox 模式常与 Saga 配合使用：
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -497,7 +497,7 @@ Outbox 模式常与 Saga 配合使用：
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -529,7 +529,7 @@ Outbox 模式常与 Saga 配合使用：
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -541,7 +541,7 @@ Outbox 模式常与 Saga 配合使用：
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 

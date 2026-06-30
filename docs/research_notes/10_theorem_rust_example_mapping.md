@@ -1,4 +1,4 @@
-# 定理 ↔ Rust 示例完整映射
+# 定理 ↔ Rust 示例完整映射 {#定理-rust-示例完整映射}
 
 > **概念族**: 形式化方法
 > **内容分级**: [归档级]
@@ -13,55 +13,55 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 
-- [定理 ↔ Rust 示例完整映射](#定理--rust-示例完整映射)
-  - [📑 目录](#-目录)
-  - [📊 映射总览](#-映射总览)
-  - [🧬 所有权系统定理映射](#-所有权系统定理映射)
+- [定理 ↔ Rust 示例完整映射](#定理-rust-示例完整映射)
+  - [📑 目录](#目录)
+  - [📊 映射总览](#映射总览)
+  - [🧬 所有权系统定理映射](#所有权系统定理映射)
     - [T-OW1: 所有权唯一性定理](#t-ow1-所有权唯一性定理)
     - [T-OW2: 移动语义保持性定理](#t-ow2-移动语义保持性定理)
     - [T-OW3: 资源释放定理](#t-ow3-资源释放定理)
-  - [🧬 借用检查定理映射](#-借用检查定理映射)
+  - [🧬 借用检查定理映射](#借用检查定理映射)
     - [T-BR1: 借用安全性定理](#t-br1-借用安全性定理)
     - [T-BR2: 可变借用排他性定理](#t-br2-可变借用排他性定理)
-  - [🧬 类型系统定理映射](#-类型系统定理映射)
-    - [T-TY1: 类型安全定理 (进展性 + 保持性)](#t-ty1-类型安全定理-进展性--保持性)
+  - [🧬 类型系统定理映射](#类型系统定理映射)
+    - [T-TY1: 类型安全定理 (进展性 + 保持性)](#t-ty1-类型安全定理-进展性-保持性)
     - [T-TY2: 泛型单态化定理](#t-ty2-泛型单态化定理)
-  - [🧬 生命周期定理映射](#-生命周期定理映射)
+  - [🧬 生命周期定理映射](#生命周期定理映射)
     - [T-LT1: 生命周期包含定理](#t-lt1-生命周期包含定理)
     - [T-LT2: 子类型替换定理](#t-lt2-子类型替换定理)
-  - [🧬 并发安全定理映射](#-并发安全定理映射)
+  - [🧬 并发安全定理映射](#并发安全定理映射)
     - [T-SS1: Send 安全性定理](#t-ss1-send-安全性定理)
     - [T-SS2: Sync 安全性定理](#t-ss2-sync-安全性定理)
     - [T-MT1: Mutex 安全性定理](#t-mt1-mutex-安全性定理)
-  - [🧬 异步编程定理映射](#-异步编程定理映射)
+  - [🧬 异步编程定理映射](#异步编程定理映射)
     - [T-FU1: Future 进展定理](#t-fu1-future-进展定理)
     - [T-AS1: async/await 等价性定理](#t-as1-asyncawait-等价性定理)
     - [T-PI1: Pin 安全性定理](#t-pi1-pin-安全性定理)
-  - [🧬 分布式系统定理映射](#-分布式系统定理映射)
+  - [🧬 分布式系统定理映射](#分布式系统定理映射)
     - [T-SG1: Saga 最终一致性定理](#t-sg1-saga-最终一致性定理)
     - [T-CB1: 熔断故障隔离定理](#t-cb1-熔断故障隔离定理)
-  - [🧬 工作流引擎定理映射](#-工作流引擎定理映射)
+  - [🧬 工作流引擎定理映射](#工作流引擎定理映射)
     - [T-WF1: 工作流活性定理](#t-wf1-工作流活性定理)
     - [T-CC1: 补偿一致性定理](#t-cc1-补偿一致性定理)
-  - [📊 映射完整性验证](#-映射完整性验证)
+  - [📊 映射完整性验证](#映射完整性验证)
     - [验证清单](#验证清单)
     - [统计信息](#统计信息)
-  - [🔗 相关文档](#-相关文档)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🔗 相关文档](#相关文档)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
+      - [相关文档](#相关文档-1)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 📊 映射总览
+## 📊 映射总览 {#映射总览}
 
 >
 
@@ -91,13 +91,13 @@
 
 ---
 
-## 🧬 所有权系统定理映射
+## 🧬 所有权系统定理映射 {#所有权系统定理映射}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### T-OW1: 所有权唯一性定理
+### T-OW1: 所有权唯一性定理 {#t-ow1-所有权唯一性定理}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -151,7 +151,7 @@ fn theorem_ow1_ownership_uniqueness() {
 
 ```
 
-### T-OW2: 移动语义保持性定理
+### T-OW2: 移动语义保持性定理 {#t-ow2-移动语义保持性定理}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -209,7 +209,7 @@ fn theorem_ow2_move_semantics() {
 
 ```
 
-### T-OW3: 资源释放定理
+### T-OW3: 资源释放定理 {#t-ow3-资源释放定理}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -285,13 +285,13 @@ fn theorem_ow3_resource_release() {
 
 ---
 
-## 🧬 借用检查定理映射
+## 🧬 借用检查定理映射 {#借用检查定理映射}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### T-BR1: 借用安全性定理
+### T-BR1: 借用安全性定理 {#t-br1-借用安全性定理}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -369,7 +369,7 @@ fn theorem_br1_borrow_safety() {
 
 ```
 
-### T-BR2: 可变借用排他性定理
+### T-BR2: 可变借用排他性定理 {#t-br2-可变借用排他性定理}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -421,13 +421,13 @@ fn theorem_br2_mutable_exclusivity(data: &mut Vec<i32>) {
 
 ---
 
-## 🧬 类型系统定理映射
+## 🧬 类型系统定理映射 {#类型系统定理映射}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### T-TY1: 类型安全定理 (进展性 + 保持性)
+### T-TY1: 类型安全定理 (进展性 + 保持性) {#t-ty1-类型安全定理-进展性-保持性}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -493,7 +493,7 @@ fn theorem_ty1_type_safety() {
 
 ```
 
-### T-TY2: 泛型单态化定理
+### T-TY2: 泛型单态化定理 {#t-ty2-泛型单态化定理}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -553,13 +553,13 @@ fn theorem_ty2_generic_monomorphization<T: std::fmt::Display>(x: T) {
 
 ---
 
-## 🧬 生命周期定理映射
+## 🧬 生命周期定理映射 {#生命周期定理映射}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### T-LT1: 生命周期包含定理
+### T-LT1: 生命周期包含定理 {#t-lt1-生命周期包含定理}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -621,7 +621,7 @@ fn theorem_lt1_lifetime_containment() -> String {
 
 ```
 
-### T-LT2: 子类型替换定理
+### T-LT2: 子类型替换定理 {#t-lt2-子类型替换定理}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -665,13 +665,13 @@ fn theorem_lt2_subtyping<'a>(s: &'a str) -> &'static str {
 
 ---
 
-## 🧬 并发安全定理映射
+## 🧬 并发安全定理映射 {#并发安全定理映射}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### T-SS1: Send 安全性定理
+### T-SS1: Send 安全性定理 {#t-ss1-send-安全性定理}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -725,7 +725,7 @@ fn theorem_ss1_send_safety() {
 
 ```
 
-### T-SS2: Sync 安全性定理
+### T-SS2: Sync 安全性定理 {#t-ss2-sync-安全性定理}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -799,7 +799,7 @@ fn theorem_ss2_sync_safety() {
 
 ```
 
-### T-MT1: Mutex 安全性定理
+### T-MT1: Mutex 安全性定理 {#t-mt1-mutex-安全性定理}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -875,13 +875,13 @@ fn theorem_mt1_mutex_safety() {
 
 ---
 
-## 🧬 异步编程定理映射
+## 🧬 异步编程定理映射 {#异步编程定理映射}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### T-FU1: Future 进展定理
+### T-FU1: Future 进展定理 {#t-fu1-future-进展定理}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -951,7 +951,7 @@ fn theorem_fu1_future_progress() {
 
 ```
 
-### T-AS1: async/await 等价性定理
+### T-AS1: async/await 等价性定理 {#t-as1-asyncawait-等价性定理}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -1001,7 +1001,7 @@ fn manual_future() -> impl Future<Output = i32> {
 
 ```
 
-### T-PI1: Pin 安全性定理
+### T-PI1: Pin 安全性定理 {#t-pi1-pin-安全性定理}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -1077,13 +1077,13 @@ fn theorem_pi1_pin_safety() {
 
 ---
 
-## 🧬 分布式系统定理映射
+## 🧬 分布式系统定理映射 {#分布式系统定理映射}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### T-SG1: Saga 最终一致性定理
+### T-SG1: Saga 最终一致性定理 {#t-sg1-saga-最终一致性定理}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -1137,7 +1137,7 @@ async fn theorem_sg1_saga_eventual_consistency() {
 
 ```
 
-### T-CB1: 熔断故障隔离定理
+### T-CB1: 熔断故障隔离定理 {#t-cb1-熔断故障隔离定理}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -1225,13 +1225,13 @@ impl CircuitBreaker {
 
 ---
 
-## 🧬 工作流引擎定理映射
+## 🧬 工作流引擎定理映射 {#工作流引擎定理映射}
 
 >
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### T-WF1: 工作流活性定理
+### T-WF1: 工作流活性定理 {#t-wf1-工作流活性定理}
 
 >
 
@@ -1307,7 +1307,7 @@ fn theorem_wf1_workflow_liveness() {
 
 ```
 
-### T-CC1: 补偿一致性定理
+### T-CC1: 补偿一致性定理 {#t-cc1-补偿一致性定理}
 
 >
 
@@ -1357,13 +1357,13 @@ async fn theorem_cc1_compensation_consistency() {
 
 ---
 
-## 📊 映射完整性验证
+## 📊 映射完整性验证 {#映射完整性验证}
 
 >
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 验证清单
+### 验证清单 {#验证清单}
 
 >
 
@@ -1379,7 +1379,7 @@ async fn theorem_cc1_compensation_consistency() {
 
 - [x] 覆盖所有核心定理 (42个)
 
-### 统计信息
+### 统计信息 {#统计信息}
 
 >
 
@@ -1399,7 +1399,7 @@ async fn theorem_cc1_compensation_consistency() {
 
 ---
 
-## 🔗 相关文档
+## 🔗 相关文档 {#相关文档}
 
 >
 
@@ -1415,7 +1415,7 @@ async fn theorem_cc1_compensation_consistency() {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -1423,7 +1423,7 @@ async fn theorem_cc1_compensation_consistency() {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -1431,7 +1431,7 @@ async fn theorem_cc1_compensation_consistency() {
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -1445,7 +1445,7 @@ async fn theorem_cc1_compensation_consistency() {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -1455,7 +1455,7 @@ async fn theorem_cc1_compensation_consistency() {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档-1}
 
 - Rust 1.94 迁移指南
 
@@ -1481,7 +1481,7 @@ async fn theorem_cc1_compensation_consistency() {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -1493,7 +1493,7 @@ async fn theorem_cc1_compensation_consistency() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

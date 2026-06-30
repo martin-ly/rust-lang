@@ -1,4 +1,4 @@
-# 🔄 Rust 控制流与函数速查卡
+# 🔄 Rust 控制流与函数速查卡 {#rust-控制流与函数速查卡}
 
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
@@ -6,64 +6,63 @@
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [🔄 Rust 控制流与函数速查卡](#-rust-控制流与函数速查卡)
-  - [📑 目录](#-目录)
-  - [🎯 条件语句](#-条件语句)
+- [🔄 Rust 控制流与函数速查卡](#rust-控制流与函数速查卡)
+  - [📑 目录](#目录)
+  - [🎯 条件语句](#条件语句)
     - [if 表达式](#if-表达式)
     - [match 表达式](#match-表达式)
     - [if let 表达式](#if-let-表达式)
     - [let-else 语句 (Rust 1.65+)](#let-else-语句-rust-165)
-  - [🔁 循环结构](#-循环结构)
+  - [🔁 循环结构](#循环结构)
     - [loop 循环](#loop-循环)
     - [while 循环](#while-循环)
     - [for 循环](#for-循环)
     - [循环控制](#循环控制)
-  - [🎭 模式匹配](#-模式匹配)
+  - [🎭 模式匹配](#模式匹配)
     - [基本模式](#基本模式)
     - [解构模式](#解构模式)
     - [引用模式](#引用模式)
-  - [📝 函数定义](#-函数定义)
+  - [📝 函数定义](#函数定义)
     - [基本函数](#基本函数)
     - [函数参数](#函数参数)
     - [函数返回值](#函数返回值)
     - [函数指针](#函数指针)
-  - [🔒 闭包](#-闭包)
+  - [🔒 闭包](#闭包)
     - [基本闭包](#基本闭包)
     - [闭包捕获](#闭包捕获)
     - [闭包类型](#闭包类型)
     - [闭包作为参数](#闭包作为参数)
     - [闭包作为返回值](#闭包作为返回值)
-  - [🎯 常用模式](#-常用模式)
+  - [🎯 常用模式](#常用模式)
     - [早期返回](#早期返回)
     - [链式调用](#链式调用)
     - [模式匹配与解构](#模式匹配与解构)
     - [函数式编程](#函数式编程)
     - [递归函数](#递归函数)
-  - [🚫 反例速查](#-反例速查)
+  - [🚫 反例速查](#反例速查)
     - [反例 1: match 未覆盖所有分支](#反例-1-match-未覆盖所有分支)
     - [反例 2: 闭包捕获可变引用导致冲突](#反例-2-闭包捕获可变引用导致冲突)
-  - [📚 相关文档](#-相关文档)
-  - [🧩 相关示例代码](#-相关示例代码)
-  - [📚 相关资源](#-相关资源)
+  - [📚 相关文档](#相关文档)
+  - [🧩 相关示例代码](#相关示例代码)
+  - [📚 相关资源](#相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
     - [相关速查卡](#相关速查卡)
-  - [💡 使用场景](#-使用场景)
+  - [💡 使用场景](#使用场景)
     - [场景 1: 命令行参数解析](#场景-1-命令行参数解析)
     - [场景 2: 递归下降解析器](#场景-2-递归下降解析器)
     - [场景 3: 自定义迭代器](#场景-3-自定义迭代器)
-  - [⚠️ 边界情况](#️-边界情况)
+  - [⚠️ 边界情况](#边界情况)
     - [边界 1: 闭包捕获陷阱](#边界-1-闭包捕获陷阱)
     - [边界 2: 递归深度限制](#边界-2-递归深度限制)
     - [边界 3: 模式匹配穷尽性](#边界-3-模式匹配穷尽性)
     - [形式化理论](#形式化理论)
-  - [🆕 Rust 1.95+ 特性整合](#-rust-195-特性整合)
+  - [🆕 Rust 1.95+ 特性整合](#rust-195-特性整合)
     - [核心特性速查](#核心特性速查)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -75,11 +74,11 @@
 
 ---
 
-## 🎯 条件语句
+## 🎯 条件语句 {#条件语句}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### if 表达式
+### if 表达式 {#if-表达式}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -115,7 +114,7 @@ let result = if condition {
 };
 ```
 
-### match 表达式
+### match 表达式 {#match-表达式}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -150,7 +149,7 @@ match value {
 }
 ```
 
-### if let 表达式
+### if let 表达式 {#if-let-表达式}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -175,7 +174,7 @@ if let Some(a) = option1 && let Some(b) = option2 {
 }
 ```
 
-### let-else 语句 (Rust 1.65+)
+### let-else 语句 (Rust 1.65+) {#let-else-语句-rust-165}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -198,11 +197,11 @@ fn process(value: Option<i32>) -> i32 {
 
 ---
 
-## 🔁 循环结构
+## 🔁 循环结构 {#循环结构}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### loop 循环
+### loop 循环 {#loop-循环}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -226,7 +225,7 @@ let result = loop {
 };
 ```
 
-### while 循环
+### while 循环 {#while-循环}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -244,7 +243,7 @@ while let Some(item) = iterator.next() {
 }
 ```
 
-### for 循环
+### for 循环 {#for-循环}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -277,7 +276,7 @@ for (index, value) in vec.iter().enumerate() {
 }
 ```
 
-### 循环控制
+### 循环控制 {#循环控制}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -305,11 +304,11 @@ for i in 1..=10 {
 
 ---
 
-## 🎭 模式匹配
+## 🎭 模式匹配 {#模式匹配}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 基本模式
+### 基本模式 {#基本模式}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -339,7 +338,7 @@ match x {
 }
 ```
 
-### 解构模式
+### 解构模式 {#解构模式}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -371,7 +370,7 @@ match msg {
 }
 ```
 
-### 引用模式
+### 引用模式 {#引用模式}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -395,11 +394,11 @@ match mut_value {
 
 ---
 
-## 📝 函数定义
+## 📝 函数定义 {#函数定义}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 基本函数
+### 基本函数 {#基本函数}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -425,7 +424,7 @@ fn add(a: i32, b: i32) -> i32 {
 }
 ```
 
-### 函数参数
+### 函数参数 {#函数参数}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -451,7 +450,7 @@ fn process(x: i32, y: i32, z: i32) -> i32 {
 }
 ```
 
-### 函数返回值
+### 函数返回值 {#函数返回值}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -477,7 +476,7 @@ fn parse_number(s: &str) -> Result<i32, std::num::ParseIntError> {
 }
 ```
 
-### 函数指针
+### 函数指针 {#函数指针}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -498,11 +497,11 @@ fn apply(f: fn(i32, i32) -> i32, x: i32, y: i32) -> i32 {
 
 ---
 
-## 🔒 闭包
+## 🔒 闭包 {#闭包}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 基本闭包
+### 基本闭包 {#基本闭包}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -523,7 +522,7 @@ let multiply = |x, y| {
 };
 ```
 
-### 闭包捕获
+### 闭包捕获 {#闭包捕获}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -547,7 +546,7 @@ let move_closure = move || {
 // x 不再可用
 ```
 
-### 闭包类型
+### 闭包类型 {#闭包类型}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -568,7 +567,7 @@ fn call_fn_once<F: FnOnce()>(f: F) {
 }
 ```
 
-### 闭包作为参数
+### 闭包作为参数 {#闭包作为参数}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -589,7 +588,7 @@ let result = apply(double);
 let result = apply(|x| x * 3);
 ```
 
-### 闭包作为返回值
+### 闭包作为返回值 {#闭包作为返回值}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -606,11 +605,11 @@ let result = add5(3); // 8
 
 ---
 
-## 🎯 常用模式
+## 🎯 常用模式 {#常用模式}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 早期返回
+### 早期返回 {#早期返回}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -623,7 +622,7 @@ fn process(value: Option<i32>) -> i32 {
 }
 ```
 
-### 链式调用
+### 链式调用 {#链式调用}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -641,7 +640,7 @@ let result = "42"
     .map_err(|e| format!("错误: {}", e));
 ```
 
-### 模式匹配与解构
+### 模式匹配与解构 {#模式匹配与解构}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -663,7 +662,7 @@ match result {
 }
 ```
 
-### 函数式编程
+### 函数式编程 {#函数式编程}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -687,7 +686,7 @@ let sum: i32 = vec![1, 2, 3, 4, 5]
     .fold(0, |acc, x| acc + x);
 ```
 
-### 递归函数
+### 递归函数 {#递归函数}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -713,11 +712,11 @@ fn factorial_tail(n: u64, acc: u64) -> u64 {
 
 ---
 
-## 🚫 反例速查
+## 🚫 反例速查 {#反例速查}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 反例 1: match 未覆盖所有分支
+### 反例 1: match 未覆盖所有分支 {#反例-1-match-未覆盖所有分支}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -743,7 +742,7 @@ let _ = match x {
 
 ---
 
-### 反例 2: 闭包捕获可变引用导致冲突
+### 反例 2: 闭包捕获可变引用导致冲突 {#反例-2-闭包捕获可变引用导致冲突}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -768,14 +767,14 @@ let _ = &v;
 
 ---
 
-## 📚 相关文档
+## 📚 相关文档 {#相关文档}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [控制流与函数完整文档](../../../crates/c03_control_fn/docs/README.md)
 - [控制流与函数 README](../../../crates/c03_control_fn/README.md)
 
-## 🧩 相关示例代码
+## 🧩 相关示例代码 {#相关示例代码}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -787,11 +786,11 @@ let _ = &v;
 
 ---
 
-## 📚 相关资源
+## 📚 相关资源 {#相关资源}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 官方文档
+### 官方文档 {#官方文档}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -799,14 +798,14 @@ let _ = &v;
 - [Rust 函数文档](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html)
 - [Rust 闭包文档](https://doc.rust-lang.org/book/ch13-01-closures.html)
 
-### 项目内部文档
+### 项目内部文档 {#项目内部文档}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [完整控制流文档](../../../crates/c03_control_fn/docs/README.md)
 - [控制流研究笔记](../../research_notes/README.md)
 
-### 相关速查卡
+### 相关速查卡 {#相关速查卡}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -817,11 +816,11 @@ let _ = &v;
 
 ---
 
-## 💡 使用场景
+## 💡 使用场景 {#使用场景}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 场景 1: 命令行参数解析
+### 场景 1: 命令行参数解析 {#场景-1-命令行参数解析}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -872,7 +871,7 @@ fn main() {
 }
 ```
 
-### 场景 2: 递归下降解析器
+### 场景 2: 递归下降解析器 {#场景-2-递归下降解析器}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -936,7 +935,7 @@ fn main() {
 }
 ```
 
-### 场景 3: 自定义迭代器
+### 场景 3: 自定义迭代器 {#场景-3-自定义迭代器}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -982,11 +981,11 @@ fn main() {
 
 ---
 
-## ⚠️ 边界情况
+## ⚠️ 边界情况 {#边界情况}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 边界 1: 闭包捕获陷阱
+### 边界 1: 闭包捕获陷阱 {#边界-1-闭包捕获陷阱}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -1012,7 +1011,7 @@ fn main() {
 }
 ```
 
-### 边界 2: 递归深度限制
+### 边界 2: 递归深度限制 {#边界-2-递归深度限制}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -1044,7 +1043,7 @@ fn main() {
 }
 ```
 
-### 边界 3: 模式匹配穷尽性
+### 边界 3: 模式匹配穷尽性 {#边界-3-模式匹配穷尽性}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -1076,7 +1075,7 @@ fn main() {
 }
 ```
 
-### 形式化理论
+### 形式化理论 {#形式化理论}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -1093,13 +1092,13 @@ fn main() {
 
 ---
 
-## 🆕 Rust 1.95+ 特性整合
+## 🆕 Rust 1.95+ 特性整合 {#rust-195-特性整合}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.96.0+
 
-### 核心特性速查
+### 核心特性速查 {#核心特性速查}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -1152,7 +1151,7 @@ let gamma = f64::consts::EULER_GAMMA;
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -1161,7 +1160,7 @@ let gamma = f64::consts::EULER_GAMMA;
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

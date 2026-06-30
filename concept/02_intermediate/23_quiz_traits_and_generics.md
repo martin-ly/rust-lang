@@ -13,7 +13,7 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
 
-> **后置概念**: [Async/Await](AsyncAwait.md)
+> **后置概念**: [Async/Await](../03_advanced/02_async.md)
 ---
 
 > **来源**:

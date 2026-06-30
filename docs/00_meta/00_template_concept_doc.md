@@ -1,4 +1,4 @@
-# 概念文档标准模板（Concept Document Standard Template）
+# 概念文档标准模板（Concept Document Standard Template） {#概念文档标准模板concept-document-standard-template}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
@@ -9,10 +9,10 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 - [概念文档标准模板（Concept Document Standard Template）](#概念文档标准模板concept-document-standard-template)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [检查清单（提交前自检）](#检查清单提交前自检)
   - [模块 1: 概念定义（Concept Definition）](#模块-1-概念定义concept-definition)
     - [1.1 直观定义（Intuitive）](#11-直观定义intuitive)
@@ -31,7 +31,7 @@
     - [5.1 Minimal（最小正例）](#51-minimal最小正例)
     - [5.2 Realistic（真实场景）](#52-realistic真实场景)
     - [5.3 Production-grade（生产级）](#53-production-grade生产级)
-  - [模块 6: 反例集（Counterexamples \& Anti-patterns）](#模块-6-反例集counterexamples--anti-patterns)
+  - [模块 6: 反例集（Counterexamples \& Anti-patterns）](#模块-6-反例集counterexamples-anti-patterns)
     - [反例 1: XX 错误](#反例-1-xx-错误)
   - [模块 7: 思维表征套件（Multi-modal Representations）](#模块-7-思维表征套件multi-modal-representations)
     - [表征 A: \[类型，如 决策树 / 矩阵 / 状态图\]](#表征-a-类型如-决策树--矩阵--状态图)
@@ -53,7 +53,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 检查清单（提交前自检）
+## 检查清单（提交前自检） {#检查清单提交前自检}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -70,11 +70,11 @@
 
 ---
 
-## 模块 1: 概念定义（Concept Definition）
+## 模块 1: 概念定义（Concept Definition） {#模块-1-概念定义concept-definition}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1.1 直观定义（Intuitive）
+### 1.1 直观定义（Intuitive） {#11-直观定义intuitive}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -84,7 +84,7 @@
 
 > **XX** 是 Rust 中用于 YY 的 ZZ 机制，其核心思想是 WW。
 
-### 1.2 操作定义（Operational）
+### 1.2 操作定义（Operational） {#12-操作定义operational}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -100,7 +100,7 @@ fn example() {}
 fn boundary() {}
 ```
 
-### 1.3 形式化直觉（Formal Intuition）
+### 1.3 形式化直觉（Formal Intuition） {#13-形式化直觉formal-intuition}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -116,7 +116,7 @@ fn boundary() {}
 
 ---
 
-## 模块 2: 属性清单（Property Inventory）
+## 模块 2: 属性清单（Property Inventory） {#模块-2-属性清单property-inventory}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -125,7 +125,7 @@ fn boundary() {}
 | 属性 A | 固有属性 | bool | ... | 当 XX 时不成立 |
 | 属性 B | 关系属性 | 传递/对称/反对称 | ... | 与 YY 的组合可能破坏 |
 
-### 关键推论
+### 关键推论 {#关键推论}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -138,7 +138,7 @@ fn boundary() {}
 
 ---
 
-## 模块 3: 概念依赖图（Concept Dependency Graph）
+## 模块 3: 概念依赖图（Concept Dependency Graph） {#模块-3-概念依赖图concept-dependency-graph}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -151,7 +151,7 @@ graph TD
     style C fill:#f9f,stroke:#333,stroke-width:2px
 ```
 
-### 承上（前置知识回溯）
+### 承上（前置知识回溯） {#承上前置知识回溯}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -161,7 +161,7 @@ graph TD
 |----------|----------|-------------------|
 | 概念 A | `path/to/a.md` | 用于解释 XX 的 YY 属性 |
 
-### 启下（后续延伸预告）
+### 启下（后续延伸预告） {#启下后续延伸预告}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -173,23 +173,23 @@ graph TD
 
 ---
 
-## 模块 4: 机制解释（Mechanistic Explanation）
+## 模块 4: 机制解释（Mechanistic Explanation） {#模块-4-机制解释mechanistic-explanation}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 4.1 类型系统视角
+### 4.1 类型系统视角 {#41-类型系统视角}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 该特性在 HM 推断 / 子类型 / trait solving 中的位置：
 
-### 4.2 内存模型视角
+### 4.2 内存模型视角 {#42-内存模型视角}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 Stacked Borrows / Tree Borrows / LLVM IR 层面的体现：
 
-### 4.3 运行时视角
+### 4.3 运行时视角 {#43-运行时视角}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -197,9 +197,9 @@ vtable 布局、monomorphization 结果、零成本抽象的物理含义：
 
 ---
 
-## 模块 5: 正例集（Positive Examples）
+## 模块 5: 正例集（Positive Examples） {#模块-5-正例集positive-examples}
 
-### 5.1 Minimal（最小正例）
+### 5.1 Minimal（最小正例） {#51-minimal最小正例}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -209,7 +209,7 @@ vtable 布局、monomorphization 结果、零成本抽象的物理含义：
 fn minimal() {}
 ```
 
-### 5.2 Realistic（真实场景）
+### 5.2 Realistic（真实场景） {#52-realistic真实场景}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -219,7 +219,7 @@ fn minimal() {}
 fn realistic() {}
 ```
 
-### 5.3 Production-grade（生产级）
+### 5.3 Production-grade（生产级） {#53-production-grade生产级}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -231,9 +231,9 @@ fn production() {}
 
 ---
 
-## 模块 6: 反例集（Counterexamples & Anti-patterns）
+## 模块 6: 反例集（Counterexamples & Anti-patterns） {#模块-6-反例集counterexamples-anti-patterns}
 
-### 反例 1: XX 错误
+### 反例 1: XX 错误 {#反例-1-xx-错误}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -274,15 +274,15 @@ fn fix_b() {}
 
 ---
 
-## 模块 7: 思维表征套件（Multi-modal Representations）
+## 模块 7: 思维表征套件（Multi-modal Representations） {#模块-7-思维表征套件multi-modal-representations}
 
-### 表征 A: [类型，如 决策树 / 矩阵 / 状态图]
+### 表征 A: [类型，如 决策树 / 矩阵 / 状态图] {#表征-a-类型如-决策树-矩阵-状态图}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
 [插入表征内容]
 
-### 表征 B: [类型]
+### 表征 B: [类型] {#表征-b-类型}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -290,9 +290,9 @@ fn fix_b() {}
 
 ---
 
-## 模块 8: 国际化对齐（International Alignment）
+## 模块 8: 国际化对齐（International Alignment） {#模块-8-国际化对齐international-alignment}
 
-### 8.1 官方来源
+### 8.1 官方来源 {#81-官方来源}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -302,7 +302,7 @@ fn fix_b() {}
 | Rust Reference | 官方参考 | Section XX | 模块 4.1 |
 | RFC XXXX | 官方 RFC | 设计论证部分 | 模块 9 |
 
-### 8.2 学术来源
+### 8.2 学术来源 {#82-学术来源}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -310,7 +310,7 @@ fn fix_b() {}
 |---------------|-----------|----------|--------------|
 | "Title" | PLDI 20XX | ... | 模块 4.2 |
 
-### 8.3 社区权威
+### 8.3 社区权威 {#83-社区权威}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -318,7 +318,7 @@ fn fix_b() {}
 |------|-----------|----------|--------------|
 | Name | "Title" | ... | 模块 9 |
 
-### 8.4 跨语言对比（如适用）
+### 8.4 跨语言对比（如适用） {#84-跨语言对比如适用}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -328,35 +328,35 @@ fn fix_b() {}
 
 ---
 
-## 模块 9: 设计权衡分析（Trade-off Analysis）
+## 模块 9: 设计权衡分析（Trade-off Analysis） {#模块-9-设计权衡分析trade-off-analysis}
 
-### 9.1 为什么 Rust 选择这个设计？
+### 9.1 为什么 Rust 选择这个设计？ {#91-为什么-rust-选择这个设计}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-### 9.2 放弃了什么替代方案？
+### 9.2 放弃了什么替代方案？ {#92-放弃了什么替代方案}
 
-### 9.3 该设计的成本
+### 9.3 该设计的成本 {#93-该设计的成本}
 
 - 编译时间成本: ...
 - 学习曲线成本: ...
 - 表达力限制: ...
 
-### 9.4 什么场景下是次优的？
+### 9.4 什么场景下是次优的？ {#94-什么场景下是次优的}
 
 > 诚实地承认限制，而非盲目推崇。
 
 ---
 
-## 模块 10: 自我检测与练习（Self-assessment）
+## 模块 10: 自我检测与练习（Self-assessment） {#模块-10-自我检测与练习self-assessment}
 
-### 概念性问题
+### 概念性问题 {#概念性问题}
 
 1. ...?
 2. ...?
 3. ...?
 
-### 代码修复题
+### 代码修复题 {#代码修复题}
 
 **题 1**: 修复以下代码中的错误：
 
@@ -366,7 +366,7 @@ fn broken() {}
 
 **题 2**: ...
 
-### 开放设计题
+### 开放设计题 {#开放设计题}
 
 > ...?
 
@@ -389,7 +389,7 @@ fn broken() {}
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [特性跟踪模板](00_rust_feature_tracking_template.md)
 - [决策树模板](00_template_decision_tree.md)
@@ -397,7 +397,7 @@ fn broken() {}
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

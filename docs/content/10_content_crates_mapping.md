@@ -1,4 +1,4 @@
-# Content 与 Crates 映射指南
+# Content 与 Crates 映射指南 {#content-与-crates-映射指南}
 
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
@@ -6,39 +6,39 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 - [Content 与 Crates 映射指南](#content-与-crates-映射指南)
-  - [📑 目录](#-目录)
-  - [🗺️ 映射关系概览](#️-映射关系概览)
-  - [📂 详细映射](#-详细映射)
-    - [content/emerging/ → C04 + C11](#contentemerging--c04--c11)
-    - [content/ecosystem/ → C05 + C06 + C10](#contentecosystem--c05--c06--c10)
-    - [content/production/ → C07 + C12](#contentproduction--c07--c12)
-    - [content/academic/ → C01 + C04](#contentacademic--c01--c04)
-    - [content/scenarios/ → C09 + C10](#contentscenarios--c09--c10)
-  - [🔗 实战项目映射](#-实战项目映射)
+  - [📑 目录](#目录)
+  - [🗺️ 映射关系概览](#映射关系概览)
+  - [📂 详细映射](#详细映射)
+    - [content/emerging/ → C04 + C11](#contentemerging-c04-c11)
+    - [content/ecosystem/ → C05 + C06 + C10](#contentecosystem-c05-c06-c10)
+    - [content/production/ → C07 + C12](#contentproduction-c07-c12)
+    - [content/academic/ → C01 + C04](#contentacademic-c01-c04)
+    - [content/scenarios/ → C09 + C10](#contentscenarios-c09-c10)
+  - [🔗 实战项目映射](#实战项目映射)
     - [项目 1: Web 应用](#项目-1-web-应用)
     - [项目 2: 分布式任务队列](#项目-2-分布式任务队列)
     - [项目 3: WebAssembly 应用](#项目-3-webassembly-应用)
-  - [📚 推荐阅读顺序](#-推荐阅读顺序)
+  - [📚 推荐阅读顺序](#推荐阅读顺序)
     - [基础阶段 (Week 1-3)](#基础阶段-week-1-3)
     - [进阶阶段 (Week 4-7)](#进阶阶段-week-4-7)
     - [实战阶段 (Week 8-12)](#实战阶段-week-8-12)
     - [生产阶段 (Week 13+)](#生产阶段-week-13)
     - [深入研究 (持续)](#深入研究-持续)
-  - [🎯 学习检查点](#-学习检查点)
+  - [🎯 学习检查点](#学习检查点)
     - [检查点 1: 基础掌握](#检查点-1-基础掌握)
     - [检查点 2: 进阶技能](#检查点-2-进阶技能)
     - [检查点 3: 实战能力](#检查点-3-实战能力)
     - [检查点 4: 生产就绪](#检查点-4-生产就绪)
-  - [🔍 快速查找](#-快速查找)
+  - [🔍 快速查找](#快速查找)
     - [按主题查找](#按主题查找)
     - [按难度查找](#按难度查找)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🗺️ 映射关系概览
+## 🗺️ 映射关系概览 {#映射关系概览}
 
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -60,11 +60,11 @@ representations/ ────────▶  (知识表示)                 ─
 
 ---
 
-## 📂 详细映射
+## 📂 详细映射 {#详细映射}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### content/emerging/ → C04 + C11
+### content/emerging/ → C04 + C11 {#contentemerging-c04-c11}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -86,7 +86,7 @@ representations/ ────────▶  (知识表示)                 ─
 
 ---
 
-### content/ecosystem/ → C05 + C06 + C10
+### content/ecosystem/ → C05 + C06 + C10 {#contentecosystem-c05-c06-c10}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -107,7 +107,7 @@ representations/ ────────▶  (知识表示)                 ─
 
 ---
 
-### content/production/ → C07 + C12
+### content/production/ → C07 + C12 {#contentproduction-c07-c12}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -126,7 +126,7 @@ representations/ ────────▶  (知识表示)                 ─
 
 ---
 
-### content/academic/ → C01 + C04
+### content/academic/ → C01 + C04 {#contentacademic-c01-c04}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -145,7 +145,7 @@ representations/ ────────▶  (知识表示)                 ─
 
 ---
 
-### content/scenarios/ → C09 + C10
+### content/scenarios/ → C09 + C10 {#contentscenarios-c09-c10}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -164,9 +164,9 @@ representations/ ────────▶  (知识表示)                 ─
 
 ---
 
-## 🔗 实战项目映射
+## 🔗 实战项目映射 {#实战项目映射}
 
-### 项目 1: Web 应用
+### 项目 1: Web 应用 {#项目-1-web-应用}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -183,7 +183,7 @@ representations/ ────────▶  (知识表示)                 ─
 4. C10 网络 - HTTP 服务
 5. content - 部署到生产环境
 
-### 项目 2: 分布式任务队列
+### 项目 2: 分布式任务队列 {#项目-2-分布式任务队列}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -199,7 +199,7 @@ representations/ ────────▶  (知识表示)                 ─
 3. C07 进程 - 进程间通信
 4. content - 监控和日志
 
-### 项目 3: WebAssembly 应用
+### 项目 3: WebAssembly 应用 {#项目-3-webassembly-应用}
 
 **涉及内容**:
 
@@ -214,60 +214,60 @@ representations/ ────────▶  (知识表示)                 ─
 
 ---
 
-## 📚 推荐阅读顺序
+## 📚 推荐阅读顺序 {#推荐阅读顺序}
 
-### 基础阶段 (Week 1-3)
+### 基础阶段 (Week 1-3) {#基础阶段-week-1-3}
 
 1. crates/C01 - 所有权
 2. crates/C02 - 类型系统
 3. crates/C03 - 控制流
 
-### 进阶阶段 (Week 4-7)
+### 进阶阶段 (Week 4-7) {#进阶阶段-week-4-7}
 
 1. crates/C04 - 泛型
 2. crates/C05 - 并发
 3. crates/C06 - 异步
 
-### 实战阶段 (Week 8-12)
+### 实战阶段 (Week 8-12) {#实战阶段-week-8-12}
 
 1. content/ecosystem/ - 生态库
 2. crates/C09 - 设计模式
 3. crates/C10 - 网络编程
 
-### 生产阶段 (Week 13+)
+### 生产阶段 (Week 13+) {#生产阶段-week-13}
 
 1. content/production/ - 生产实践
 2. crates/C07 - 进程管理
 3. crates/C12 - WASM
 
-### 深入研究 (持续)
+### 深入研究 (持续) {#深入研究-持续}
 
 1. content/academic/ - 学术前沿
 2. content/emerging/ - 新特性
 
 ---
 
-## 🎯 学习检查点
+## 🎯 学习检查点 {#学习检查点}
 
-### 检查点 1: 基础掌握
+### 检查点 1: 基础掌握 {#检查点-1-基础掌握}
 
 - [ ] 能解释所有权、借用、生命周期
 - [ ] 能使用基本类型和泛型
 - [ ] 能编写控制流和模式匹配
 
-### 检查点 2: 进阶技能
+### 检查点 2: 进阶技能 {#检查点-2-进阶技能}
 
 - [ ] 能实现 Trait 和泛型结构
 - [ ] 能编写多线程程序
 - [ ] 能使用 async/await
 
-### 检查点 3: 实战能力
+### 检查点 3: 实战能力 {#检查点-3-实战能力}
 
 - [ ] 能使用生态库
 - [ ] 能设计系统架构
 - [ ] 能编写网络应用
 
-### 检查点 4: 生产就绪
+### 检查点 4: 生产就绪 {#检查点-4-生产就绪}
 
 - [ ] 能部署到生产环境
 - [ ] 能监控和调试
@@ -275,9 +275,9 @@ representations/ ────────▶  (知识表示)                 ─
 
 ---
 
-## 🔍 快速查找
+## 🔍 快速查找 {#快速查找}
 
-### 按主题查找
+### 按主题查找 {#按主题查找}
 
 | 主题 | Crates | Content |
 |------|--------|---------|
@@ -287,7 +287,7 @@ representations/ ────────▶  (知识表示)                 ─
 | 形式化方法 | C01, C04 | academic/ |
 | 架构设计 | C09 | scenarios/ |
 
-### 按难度查找
+### 按难度查找 {#按难度查找}
 
 | 难度 | Crates | Content |
 |------|--------|---------|
@@ -319,14 +319,14 @@ representations/ ────────▶  (知识表示)                 ─
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [content 目录](README.md)
 - [上级目录](../README.md)
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

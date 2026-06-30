@@ -1,4 +1,4 @@
-# 📝 Rust 字符串与格式化速查卡
+# 📝 Rust 字符串与格式化速查卡 {#rust-字符串与格式化速查卡}
 
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
@@ -6,68 +6,68 @@
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [📝 Rust 字符串与格式化速查卡](#-rust-字符串与格式化速查卡)
-  - [📑 目录](#-目录)
-  - [🔤 字符串类型](#-字符串类型)
+- [📝 Rust 字符串与格式化速查卡](#rust-字符串与格式化速查卡)
+  - [📑 目录](#目录)
+  - [🔤 字符串类型](#字符串类型)
     - [String vs \&str](#string-vs-str)
     - [类型特点](#类型特点)
-  - [🆕 字符串创建](#-字符串创建)
+  - [🆕 字符串创建](#字符串创建)
     - [基本创建](#基本创建)
     - [从其他类型创建](#从其他类型创建)
-  - [✂️ 字符串操作](#️-字符串操作)
+  - [✂️ 字符串操作](#字符串操作)
     - [追加内容](#追加内容)
     - [删除内容](#删除内容)
     - [替换](#替换)
     - [查找和检查](#查找和检查)
     - [分割](#分割)
     - [修剪](#修剪)
-  - [🔄 字符串转换](#-字符串转换)
-    - [String ↔ \&str](#string--str)
+  - [🔄 字符串转换](#字符串转换)
+    - [String ↔ \&str](#string-str)
     - [大小写转换](#大小写转换)
     - [数字转换](#数字转换)
     - [字符和字节](#字符和字节)
-  - [🖨️ 格式化输出](#️-格式化输出)
+  - [🖨️ 格式化输出](#格式化输出)
     - [基本宏](#基本宏)
     - [format! 宏](#format-宏)
     - [write! 和 writeln](#write-和-writeln)
-  - [🎨 格式化选项](#-格式化选项)
+  - [🎨 格式化选项](#格式化选项)
     - [对齐和填充](#对齐和填充)
     - [数字格式化](#数字格式化)
     - [浮点数格式化](#浮点数格式化)
     - [字符串格式化](#字符串格式化)
     - [指针和引用](#指针和引用)
-  - [🎯 常用模式](#-常用模式)
+  - [🎯 常用模式](#常用模式)
     - [字符串拼接](#字符串拼接)
     - [字符串模板](#字符串模板)
     - [错误消息格式化](#错误消息格式化)
     - [表格格式化](#表格格式化)
     - [进度条格式化](#进度条格式化)
-  - [💡 代码示例](#-代码示例)
+  - [💡 代码示例](#代码示例)
     - [示例 1: 实现 Display trait](#示例-1-实现-display-trait)
     - [示例 2: 自定义格式化参数](#示例-2-自定义格式化参数)
     - [示例 3: 安全的字符串切片](#示例-3-安全的字符串切片)
     - [示例 4: 字符串模板引擎](#示例-4-字符串模板引擎)
     - [示例 5: CSV 解析器](#示例-5-csv-解析器)
-  - [🎯 使用场景](#-使用场景)
+  - [🎯 使用场景](#使用场景)
     - [场景: 日志格式化系统](#场景-日志格式化系统)
-  - [🚫 反例速查](#-反例速查)
+  - [🚫 反例速查](#反例速查)
     - [反例 1: 在循环中拼接字符串](#反例-1-在循环中拼接字符串)
     - [反例 2: 按字节索引切片 UTF-8](#反例-2-按字节索引切片-utf-8)
     - [反例 3: 错误处理从字节到字符串的转换](#反例-3-错误处理从字节到字符串的转换)
-    - [反例 4: format!  panic 导致的拒绝服务](#反例-4-format--panic-导致的拒绝服务)
+    - [反例 4: format!  panic 导致的拒绝服务](#反例-4-format-panic-导致的拒绝服务)
     - [反例 5: 在热路径上频繁分配字符串](#反例-5-在热路径上频繁分配字符串)
-  - [📚 相关文档](#-相关文档)
-  - [🧩 相关示例代码](#-相关示例代码)
-  - [📚 相关资源](#-相关资源)
+  - [📚 相关文档](#相关文档)
+  - [🧩 相关示例代码](#相关示例代码)
+  - [📚 相关资源](#相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
     - [形式化理论与类型系统](#形式化理论与类型系统)
     - [相关速查卡](#相关速查卡)
-  - [🆕 Rust 1.95+ 特性整合](#-rust-195-特性整合)
+  - [🆕 Rust 1.95+ 特性整合](#rust-195-特性整合)
     - [核心特性速查](#核心特性速查)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -80,11 +80,11 @@
 
 ---
 
-## 🔤 字符串类型
+## 🔤 字符串类型 {#字符串类型}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### String vs &str
+### String vs &str {#string-vs-str}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -100,7 +100,7 @@ let s3: &str = "hello";
 let s4: &str = &s1; // String 自动解引用为 &str
 ```
 
-### 类型特点
+### 类型特点 {#类型特点}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -112,11 +112,11 @@ let s4: &str = &s1; // String 自动解引用为 &str
 
 ---
 
-## 🆕 字符串创建
+## 🆕 字符串创建 {#字符串创建}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 基本创建
+### 基本创建 {#基本创建}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -138,7 +138,7 @@ let s5 = "a".repeat(5); // "aaaaa"
 let mut s6 = String::with_capacity(10);
 ```
 
-### 从其他类型创建
+### 从其他类型创建 {#从其他类型创建}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -159,11 +159,11 @@ let s4 = String::from_utf8(bytes.to_vec()).unwrap();
 
 ---
 
-## ✂️ 字符串操作
+## ✂️ 字符串操作 {#字符串操作}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 追加内容
+### 追加内容 {#追加内容}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -188,7 +188,7 @@ let s2 = String::from("world!");
 let s3 = s1 + &s2; // s1 被移动
 ```
 
-### 删除内容
+### 删除内容 {#删除内容}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -211,7 +211,7 @@ let mut s = String::from("hello");
 s.drain(1..3); // 移除索引 1-2
 ```
 
-### 替换
+### 替换 {#替换}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -231,7 +231,7 @@ let mut s = String::from("hello");
 s.replace_range(0..1, "H");
 ```
 
-### 查找和检查
+### 查找和检查 {#查找和检查}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -254,7 +254,7 @@ let pos = s.find("world"); // Option<usize>
 let pos = s.rfind("l");
 ```
 
-### 分割
+### 分割 {#分割}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -282,7 +282,7 @@ for part in s.split_terminator(',') {
 }
 ```
 
-### 修剪
+### 修剪 {#修剪}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -304,11 +304,11 @@ let trimmed = s.trim_matches(' ');
 
 ---
 
-## 🔄 字符串转换
+## 🔄 字符串转换 {#字符串转换}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### String ↔ &str
+### String ↔ &str {#string-str}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -323,7 +323,7 @@ let s2 = String::from("hello");
 let s3 = format!("{}", "hello");
 ```
 
-### 大小写转换
+### 大小写转换 {#大小写转换}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -343,7 +343,7 @@ let rest: String = chars.as_str().to_lowercase();
 let capitalized = format!("{}{}", first, rest);
 ```
 
-### 数字转换
+### 数字转换 {#数字转换}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -359,7 +359,7 @@ let s = n.to_string();
 let s = format!("{}", n);
 ```
 
-### 字符和字节
+### 字符和字节 {#字符和字节}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -385,11 +385,11 @@ let byte_count = s.len();
 
 ---
 
-## 🖨️ 格式化输出
+## 🖨️ 格式化输出 {#格式化输出}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 基本宏
+### 基本宏 {#基本宏}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -409,7 +409,7 @@ eprintln!("Error: {}", "something went wrong");
 eprint!("Warning: ");
 ```
 
-### format! 宏
+### format! 宏 {#format-宏}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -429,7 +429,7 @@ let s = format!("Name: {name}, Age: {age}");
 let s = format!("{1} and {0}", "first", "second");
 ```
 
-### write! 和 writeln
+### write! 和 writeln {#write-和-writeln}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -448,11 +448,11 @@ writeln!(s, "Line 2").unwrap();
 
 ---
 
-## 🎨 格式化选项
+## 🎨 格式化选项 {#格式化选项}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 对齐和填充
+### 对齐和填充 {#对齐和填充}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 > **扩展**: 内存对齐见 [ALIGNMENT_GUIDE](../ALIGNMENT_GUIDE.md)；此处为**格式化**对齐（文本排版）。
@@ -478,7 +478,7 @@ println!("{:*<10}", value);    // "42********"
 println!("{:*^10}", value);    // "****42****"
 ```
 
-### 数字格式化
+### 数字格式化 {#数字格式化}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -509,7 +509,7 @@ println!("{:+}", n);           // "+1234"
 println!("{:05}", n);          // "01234"
 ```
 
-### 浮点数格式化
+### 浮点数格式化 {#浮点数格式化}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -531,7 +531,7 @@ println!("{:E}", f);           // "3.14159E0"
 println!("{:10.2}", f);        // "      3.14"
 ```
 
-### 字符串格式化
+### 字符串格式化 {#字符串格式化}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -548,7 +548,7 @@ println!("{:.3}", s);          // "hel"
 println!("{:10.3}", s);        // "hel       "
 ```
 
-### 指针和引用
+### 指针和引用 {#指针和引用}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -565,11 +565,11 @@ println!("{:#?}", vec![1, 2, 3]); // 美化格式
 
 ---
 
-## 🎯 常用模式
+## 🎯 常用模式 {#常用模式}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 字符串拼接
+### 字符串拼接 {#字符串拼接}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -593,7 +593,7 @@ let parts = vec!["Hello", "world"];
 let s = parts.join(", ");
 ```
 
-### 字符串模板
+### 字符串模板 {#字符串模板}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -610,7 +610,7 @@ let text = format!(
 );
 ```
 
-### 错误消息格式化
+### 错误消息格式化 {#错误消息格式化}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -636,7 +636,7 @@ let err = Error {
 println!("{}", err); // "Error 404: Not Found"
 ```
 
-### 表格格式化
+### 表格格式化 {#表格格式化}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -655,7 +655,7 @@ for (name, age, role) in rows {
 // Charlie    35  Manager
 ```
 
-### 进度条格式化
+### 进度条格式化 {#进度条格式化}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -675,11 +675,11 @@ print!("\r[{}{}] {:.1}%",
 
 ---
 
-## 💡 代码示例
+## 💡 代码示例 {#代码示例}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 示例 1: 实现 Display trait
+### 示例 1: 实现 Display trait {#示例-1-实现-display-trait}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -713,7 +713,7 @@ println!("Debug: {:?}", p);       // Debug: Point { x: 1.0, y: 2.0 }
 println!("Pretty: {:#?}", p);      // Pretty: 格式化多行输出
 ```
 
-### 示例 2: 自定义格式化参数
+### 示例 2: 自定义格式化参数 {#示例-2-自定义格式化参数}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -749,7 +749,7 @@ println!("{}", data);        // 48 65 6c 6c 6f
 println!("{:x}", data);      // 48656c6c6f
 ```
 
-### 示例 3: 安全的字符串切片
+### 示例 3: 安全的字符串切片 {#示例-3-安全的字符串切片}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -778,7 +778,7 @@ println!("{:?}", safe_slice(s, 0, 5));  // Some("Hello")
 println!("{:?}", safe_slice(s, 6, 8));  // Some("世界")
 ```
 
-### 示例 4: 字符串模板引擎
+### 示例 4: 字符串模板引擎 {#示例-4-字符串模板引擎}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -814,7 +814,7 @@ println!("{}", template.render(&vars));
 // Hello, Alice! You have 5 new messages.
 ```
 
-### 示例 5: CSV 解析器
+### 示例 5: CSV 解析器 {#示例-5-csv-解析器}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -855,11 +855,11 @@ println!("{:?}", row.fields);
 
 ---
 
-## 🎯 使用场景
+## 🎯 使用场景 {#使用场景}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 场景: 日志格式化系统
+### 场景: 日志格式化系统 {#场景-日志格式化系统}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -941,11 +941,11 @@ println!("{}", entry.format_colored());
 
 ---
 
-## 🚫 反例速查
+## 🚫 反例速查 {#反例速查}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 反例 1: 在循环中拼接字符串
+### 反例 1: 在循环中拼接字符串 {#反例-1-在循环中拼接字符串}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -969,7 +969,7 @@ let s: String = (0..1000).map(|i| i.to_string()).collect();
 
 ---
 
-### 反例 2: 按字节索引切片 UTF-8
+### 反例 2: 按字节索引切片 UTF-8 {#反例-2-按字节索引切片-utf-8}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -987,7 +987,7 @@ let c = &s[1..3];  // ❌ 可能 panic：非字符边界
 
 ---
 
-### 反例 3: 错误处理从字节到字符串的转换
+### 反例 3: 错误处理从字节到字符串的转换 {#反例-3-错误处理从字节到字符串的转换}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -1018,7 +1018,7 @@ let s = String::from_utf8_lossy(&[0x80, 0x81, 0x82]);
 
 ---
 
-### 反例 4: format!  panic 导致的拒绝服务
+### 反例 4: format!  panic 导致的拒绝服务 {#反例-4-format-panic-导致的拒绝服务}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -1048,7 +1048,7 @@ fn log_user_input(input: &str) {
 
 ---
 
-### 反例 5: 在热路径上频繁分配字符串
+### 反例 5: 在热路径上频繁分配字符串 {#反例-5-在热路径上频繁分配字符串}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -1083,7 +1083,7 @@ fn process_logs(logs: &[LogEntry]) -> String {
 
 ---
 
-## 📚 相关文档
+## 📚 相关文档 {#相关文档}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -1091,7 +1091,7 @@ fn process_logs(logs: &[LogEntry]) -> String {
 - [算法模块（字符串算法与数据处理）](../../../crates/c08_algorithms/README.md)
 - [WASM 模块（字符串互操作示例）](../../../crates/c12_wasm/README.md)
 
-## 🧩 相关示例代码
+## 🧩 相关示例代码 {#相关示例代码}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -1100,11 +1100,11 @@ fn process_logs(logs: &[LogEntry]) -> String {
 - [字符串算法演示（C08）](../../../crates/c08_algorithms/examples/string_algorithms_demo.rs)（`cargo run -p c08_algorithms --example string_algorithms_demo`）
 - [WASM 字符串操作（C12）](../../../crates/c12_wasm/examples/02_string_operations.rs)（`cargo run -p c12_wasm --example 02_string_operations`）
 
-## 📚 相关资源
+## 📚 相关资源 {#相关资源}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 官方文档
+### 官方文档 {#官方文档}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -1112,14 +1112,14 @@ fn process_logs(logs: &[LogEntry]) -> String {
 - [格式化文档](https://doc.rust-lang.org/std/fmt/)
 - [Rust Reference - String Literals](https://doc.rust-lang.org/reference/tokens.html#string-literals)
 
-### 项目内部文档
+### 项目内部文档 {#项目内部文档}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [完整类型系统文档](../../../crates/c02_type_system/docs/README.md)
 - [字符串研究笔记](../../research_notes/README.md)
 
-### 形式化理论与类型系统
+### 形式化理论与类型系统 {#形式化理论与类型系统}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -1128,7 +1128,7 @@ fn process_logs(logs: &[LogEntry]) -> String {
 - 生命周期形式化 — 字符串生命周期
 - [构造能力理论](../../../archive/research_notes_2026_06_25/type_theory/10_construction_capability.md) — 字符串操作表达能力
 
-### 相关速查卡
+### 相关速查卡 {#相关速查卡}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -1147,12 +1147,12 @@ fn process_logs(logs: &[LogEntry]) -> String {
 
 ---
 
-## 🆕 Rust 1.95+ 特性整合
+## 🆕 Rust 1.95+ 特性整合 {#rust-195-特性整合}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 > **适用版本**: Rust 1.96.0+
 
-### 核心特性速查
+### 核心特性速查 {#核心特性速查}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -1210,7 +1210,7 @@ let gamma = f64::consts::EULER_GAMMA;
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -1219,7 +1219,7 @@ let gamma = f64::consts::EULER_GAMMA;
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - String (computer science)](https://en.wikipedia.org/wiki/String_(computer_science))**
 > **来源: [TRPL Ch. 8 - Strings](https://doc.rust-lang.org/book/ch08-00-common-collections.html)**

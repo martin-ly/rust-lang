@@ -1,4 +1,4 @@
-# Fallback / Degrade 韧性模式
+# Fallback / Degrade 韧性模式 {#fallback-degrade-韧性模式}
 
 > **概念族**: 软件设计 / 分布式模式 / Fallback
 >
@@ -15,9 +15,9 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
-- [Fallback / Degrade 韧性模式](#fallback--degrade-韧性模式)
+- [Fallback / Degrade 韧性模式](#fallback-degrade-韧性模式)
   - [目录](#目录)
   - [一、问题定义](#一问题定义)
   - [二、核心定义](#二核心定义)
@@ -38,7 +38,7 @@
 
 ---
 
-## 一、问题定义
+## 一、问题定义 {#一问题定义}
 
 在分布式系统中，服务依赖可能因网络抖动、超时、过载或局部故障而失败。若直接将失败透传给上游，可能引发级联雪崩。Fallback / Degrade 模式通过**在失败时提供替代路径或受限但可用的响应**，提升系统在部分失效下的可用性（availability）与韧性（resilience）。
 
@@ -46,9 +46,9 @@ Rust 的强类型系统、枚举与 `async/await` 语义，使得我们可以把
 
 ---
 
-## 二、核心定义
+## 二、核心定义 {#二核心定义}
 
-### Def Fallback（回退）
+### Def Fallback（回退） {#def-fallback回退}
 
 ```text
 Fallback(S, F, R) :=
@@ -61,7 +61,7 @@ Fallback(S, F, R) :=
 
 回退强调**失败时的替代结果**：可能是默认值、缓存值、本地计算值或从备用服务获取的值。结果语义上可能不是最强一致，但仍可接受。
 
-### Def Degrade（降级）
+### Def Degrade（降级） {#def-degrade降级}
 
 ```text
 Degrade(S, S', R) :=
@@ -74,7 +74,7 @@ Degrade(S, S', R) :=
 
 降级强调**主动减少服务范围**：从完整功能切换到受限功能，并在条件解除后恢复。
 
-### Fallback vs Degrade 对比
+### Fallback vs Degrade 对比 {#fallback-vs-degrade-对比}
 
 | 维度 | Fallback | Degrade |
 |------|----------|---------|
@@ -86,13 +86,13 @@ Degrade(S, S', R) :=
 
 > **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 
-### Axiom
+### Axiom {#axiom}
 
 - **A-FB-1（有界语义损失）**: 回退或降级结果与主路径结果的差异必须在业务可接受范围内；否则该 fallback 无效。
 - **A-FB-2（可观测性）**: 任何 fallback / degrade 路径必须被记录、监控或指标化，避免静默失败。
 - **A-FB-3（失败隔离）**: Fallback 本身不能依赖于导致主路径失败的同一依赖，否则不能称之为独立回退。
 
-### Theorem
+### Theorem {#theorem}
 
 - **T-FB-1（独立性保证）**: 若 fallback 函数 `F` 对 `S` 无依赖，则 `S` 的不可用不会导致 `F` 不可用。
 - **T-FB-2（降级闭包）**: 若降级服务 `S'` 的调用图是完整服务 `S` 调用图的子图，则降级路径不会引入新的外部依赖失败点。
@@ -101,9 +101,9 @@ Degrade(S, S', R) :=
 
 ---
 
-## 三、Rust 实现方案
+## 三、Rust 实现方案 {#三rust-实现方案}
 
-### 3.1 枚举策略
+### 3.1 枚举策略 {#31-枚举策略}
 
 使用 Rust 枚举将主路径、fallback、降级状态显式化：
 
@@ -125,7 +125,7 @@ pub enum FallbackReason {
 
 > **来源**: [The Rust Programming Language – Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html)
 
-### 3.2 async 策略组合
+### 3.2 async 策略组合 {#32-async-策略组合}
 
 利用 `tokio::time::timeout` 与 `async/await` 组合实现超时触发 fallback：
 
@@ -153,7 +153,7 @@ where
 
 > **来源**: [Tokio Tutorial](https://tokio.rs/tokio/tutorial) | [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)
 
-### 3.3 代码示例
+### 3.3 代码示例 {#33-代码示例}
 
 完整示例见 [`crates/c06_async/examples/fallback_degrade_pattern.rs`](../../../../../crates/c06_async/examples/fallback_degrade_pattern.rs)。
 
@@ -177,9 +177,9 @@ match outcome {
 
 ---
 
-## 四、反例边界
+## 四、反例边界 {#四反例边界}
 
-### 反例 1：Fallback 级联失败
+### 反例 1：Fallback 级联失败 {#反例-1fallback-级联失败}
 
 **场景**: 主服务 `S` 失败，fallback `F` 仍尝试调用 `S` 的缓存接口，而该缓存接口也依赖 `S` 所在集群。
 
@@ -189,7 +189,7 @@ match outcome {
 
 **修复**: Fallback 必须依赖独立数据源或本地计算，避免共享失败域。
 
-### 反例 2：降级后不再恢复
+### 反例 2：降级后不再恢复 {#反例-2降级后不再恢复}
 
 **场景**: 系统触发降级后没有恢复检测逻辑，长期运行在降级模式。
 
@@ -201,7 +201,7 @@ match outcome {
 
 ---
 
-## 五、权威来源
+## 五、权威来源 {#五权威来源}
 
 | 优先级 | 来源 | 说明 |
 |--------|------|------|
@@ -215,7 +215,7 @@ match outcome {
 
 ---
 
-## 六、相关概念
+## 六、相关概念 {#六相关概念}
 
 - [03_circuit_breaker.md](03_circuit_breaker.md) — 熔断器常与 fallback 组合使用。
 - [06_timeout_pattern.md](06_timeout_pattern.md) — 超时是触发 fallback 的典型条件。

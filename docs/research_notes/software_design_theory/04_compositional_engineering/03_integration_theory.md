@@ -1,4 +1,4 @@
-# 与 ownership/borrow/trait 的衔接
+# 与 ownership/borrow/trait 的衔接 {#与-ownershipborrowtrait-的衔接}
 
 > **概念族**: 软件设计 / 组合工程
 
@@ -24,7 +24,7 @@
 
 > **权威来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [Tower Docs](https://docs.rs/tower/latest/tower/) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -33,7 +33,7 @@
 >
 
 - [与 ownership/borrow/trait 的衔接](#与-ownershipborrowtrait-的衔接)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [形式化定义与定理](#形式化定义与定理)
   - [衔接关系图](#衔接关系图)
   - [组合与所有权](#组合与所有权)
@@ -41,18 +41,18 @@
   - [Tower Service 与类型驱动中间件组合](#tower-service-与类型驱动中间件组合)
   - [设计模式组合示例](#设计模式组合示例)
   - [组合代码示例](#组合代码示例)
-  - [完整多模式组合链条：Builder + Factory + Repository](#完整多模式组合链条builder--factory--repository)
+  - [完整多模式组合链条：Builder + Factory + Repository](#完整多模式组合链条builder-factory-repository)
   - [组合验证清单](#组合验证清单)
   - [跨模块 Send/Sync 传递](#跨模块-sendsync-传递)
   - [组合反例](#组合反例)
   - [多层次组合链条（实质内容）](#多层次组合链条实质内容)
-    - [链条 1：Builder + Factory + Repository](#链条-1builder--factory--repository)
-    - [链条 2：Decorator + Strategy + Observer（完整实现）](#链条-2decorator--strategy--observer完整实现)
-    - [链条 3：Composite + Visitor + Iterator（完整实现）](#链条-3composite--visitor--iterator完整实现)
-    - [链条 4：Chain of Responsibility + Command + Observer](#链条-4chain-of-responsibility--command--observer)
+    - [链条 1：Builder + Factory + Repository](#链条-1builder-factory-repository)
+    - [链条 2：Decorator + Strategy + Observer（完整实现）](#链条-2decorator-strategy-observer完整实现)
+    - [链条 3：Composite + Visitor + Iterator（完整实现）](#链条-3composite-visitor-iterator完整实现)
+    - [链条 4：Chain of Responsibility + Command + Observer](#链条-4chain-of-responsibility-command-observer)
   - [跨模块边界最佳实践](#跨模块边界最佳实践)
   - [引用](#引用)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -70,7 +70,7 @@
 
 ---
 
-## 形式化定义与定理
+## 形式化定义与定理 {#形式化定义与定理}
 
 >
 
@@ -110,7 +110,7 @@
 
 ---
 
-## 衔接关系图
+## 衔接关系图 {#衔接关系图}
 
 >
 
@@ -172,7 +172,7 @@
 
 ---
 
-## 组合与所有权
+## 组合与所有权 {#组合与所有权}
 
 >
 
@@ -194,7 +194,7 @@
 
 ---
 
-## 组合与 trait
+## 组合与 trait {#组合与-trait}
 
 >
 
@@ -212,7 +212,7 @@
 
 ---
 
-## Tower Service 与类型驱动中间件组合
+## Tower Service 与类型驱动中间件组合 {#tower-service-与类型驱动中间件组合}
 
 > **来源: [Tower Docs](https://docs.rs/tower/latest/tower/)**
 
@@ -250,7 +250,7 @@ where
 
 ---
 
-## 设计模式组合示例
+## 设计模式组合示例 {#设计模式组合示例}
 
 >
 
@@ -270,7 +270,7 @@ where
 
 ---
 
-## 组合代码示例
+## 组合代码示例 {#组合代码示例}
 
 >
 
@@ -324,7 +324,7 @@ fn visit<V: Visitor>(v: &mut V, node: &Node) {
 
 ---
 
-## 完整多模式组合链条：Builder + Factory + Repository
+## 完整多模式组合链条：Builder + Factory + Repository {#完整多模式组合链条builder-factory-repository}
 
 >
 
@@ -404,7 +404,7 @@ fn place_order<R: OrderRepo>(repo: &R, t: OrderType, amount: u64) -> Result<(), 
 
 ---
 
-## 组合验证清单
+## 组合验证清单 {#组合验证清单}
 
 >
 
@@ -424,7 +424,7 @@ fn place_order<R: OrderRepo>(repo: &R, t: OrderType, amount: u64) -> Result<(), 
 
 ---
 
-## 跨模块 Send/Sync 传递
+## 跨模块 Send/Sync 传递 {#跨模块-sendsync-传递}
 
 >
 
@@ -446,7 +446,7 @@ fn place_order<R: OrderRepo>(repo: &R, t: OrderType, amount: u64) -> Result<(), 
 
 ---
 
-## 组合反例
+## 组合反例 {#组合反例}
 
 >
 
@@ -466,13 +466,13 @@ fn place_order<R: OrderRepo>(repo: &R, t: OrderType, amount: u64) -> Result<(), 
 
 ---
 
-## 多层次组合链条（实质内容）
+## 多层次组合链条（实质内容） {#多层次组合链条实质内容}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 链条 1：Builder + Factory + Repository
+### 链条 1：Builder + Factory + Repository {#链条-1builder-factory-repository}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -518,7 +518,7 @@ trait OrderRepo { fn save(&mut self, o: Order) -> Result<u64, String>; }
 
 ```
 
-### 链条 2：Decorator + Strategy + Observer（完整实现）
+### 链条 2：Decorator + Strategy + Observer（完整实现） {#链条-2decorator-strategy-observer完整实现}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -602,7 +602,7 @@ fn run_with_observer<S: Service>(s: &S, tx: &mpsc::Sender<i32>) -> i32 {
 
 ```
 
-### 链条 3：Composite + Visitor + Iterator（完整实现）
+### 链条 3：Composite + Visitor + Iterator（完整实现） {#链条-3composite-visitor-iterator完整实现}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -690,7 +690,7 @@ impl Node {
 
 ```
 
-### 链条 4：Chain of Responsibility + Command + Observer
+### 链条 4：Chain of Responsibility + Command + Observer {#链条-4chain-of-responsibility-command-observer}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -764,7 +764,7 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 
 ---
 
-## 跨模块边界最佳实践
+## 跨模块边界最佳实践 {#跨模块边界最佳实践}
 
 >
 
@@ -786,7 +786,7 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 
 ---
 
-## 引用
+## 引用 {#引用}
 
 >
 
@@ -798,7 +798,7 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -808,13 +808,13 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -830,7 +830,7 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -842,7 +842,7 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -874,7 +874,7 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -886,7 +886,7 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 

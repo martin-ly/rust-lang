@@ -13,7 +13,7 @@
 
 ---
 
-# kube-rs Crate 架构解构
+# kube-rs Crate 架构解构 {#kube-rs-crate-架构解构}
 
 > **最后更新**: 2026-06-29
 >
@@ -29,7 +29,7 @@
 
 ---
 
-## 1. 引言：kube-rs 的生态定位
+## 1. 引言：kube-rs 的生态定位 {#1-引言kube-rs-的生态定位}
 
 > **[来源: [kube-rs crates.io](https://crates.io/crates/kube)]**
 
@@ -61,13 +61,13 @@ let list = pods.list(&ListParams::default().limit(10)).await?;
 
 ---
 
-## 2. 核心概念
+## 2. 核心概念 {#2-核心概念}
 
 > **[来源: [Kubernetes 官方文档](https://kubernetes.io/docs/home/)]**
 
 `kube-rs` 的编程模型围绕以下核心概念展开：`Client`、`Api`、`Resource`、`Controller`、`Informer`、`watcher` 与 CRD 派生。
 
-### 2.1 Client / Api / Resource
+### 2.1 Client / Api / Resource {#21-client-api-resource}
 
 - `Client`：封装与 kube-apiserver 的 HTTP/2 连接、认证与配置发现。
 - `Api<K>`：针对具体 Kubernetes 资源类型的类型化接口，`K` 必须实现 `Resource` trait。
@@ -83,7 +83,7 @@ let pods: Api<Pod> = Api::namespaced(client, "default");
 
 > [来源: [kube docs.rs – Api](https://docs.rs/kube/latest/kube/struct.Api.html)]
 
-### 2.2 Controller / Controller::new
+### 2.2 Controller / Controller::new {#22-controller-controllernew}
 
 `kube::runtime::Controller` 实现了 Kubernetes 的 **Controller 模式**：监听一个或多个资源类型，对事件进行 reconcile（调谐）。
 
@@ -103,7 +103,7 @@ Controller::new(pods_api, watcher::Config::default())
 
 > [来源: [kube-rs Controller Guide](https://kube.rs/controllers/intro/)]
 
-### 2.3 Informer 与 watcher
+### 2.3 Informer 与 watcher {#23-informer-与-watcher}
 
 - `watcher`：低阶 API，返回 `Stream<Item = Result<Event<K>, watcher::Error>>`，适合自定义处理逻辑。
 - `Informer`（旧称）已被 `watcher` + `Controller` 组合取代。
@@ -122,7 +122,7 @@ while let Some(pod) = stream.next().await {
 
 > [来源: [kube docs.rs – watcher](https://docs.rs/kube/latest/kube/runtime/watcher/index.html)]
 
-### 2.4 CRD 派生
+### 2.4 CRD 派生 {#24-crd-派生}
 
 通过 `#[derive(CustomResource)]` 将 Rust struct 映射为 Kubernetes CRD：
 
@@ -142,7 +142,7 @@ struct MyAppSpec {
 
 ---
 
-## 3. kube-rs 与 k8s-openapi 的关系
+## 3. kube-rs 与 k8s-openapi 的关系 {#3-kube-rs-与-k8s-openapi-的关系}
 
 > **[来源: [k8s-openapi docs.rs](https://docs.rs/k8s-openapi/latest/k8s_openapi/)]**
 
@@ -158,7 +158,7 @@ struct MyAppSpec {
 
 ---
 
-## 4. 反例边界
+## 4. 反例边界 {#4-反例边界}
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -175,7 +175,7 @@ struct MyAppSpec {
 
 ---
 
-## 5. 类型系统利用
+## 5. 类型系统利用 {#5-类型系统利用}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -192,7 +192,7 @@ struct MyAppSpec {
 
 ---
 
-## 6. 代码示例锚点
+## 6. 代码示例锚点 {#6-代码示例锚点}
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -205,7 +205,7 @@ struct MyAppSpec {
 
 ---
 
-## 7. 相关架构与延伸阅读
+## 7. 相关架构与延伸阅读 {#7-相关架构与延伸阅读}
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -217,7 +217,7 @@ struct MyAppSpec {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [kube-rs crates.io](https://crates.io/crates/kube)]**
 >
@@ -237,7 +237,7 @@ struct MyAppSpec {
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
 > **P0（官方/必读）**:
 >
@@ -255,7 +255,7 @@ struct MyAppSpec {
 > - [来源: [kube.rs Guides](https://kube.rs/)]
 > - [来源: [This Week in Rust](https://this-week-in-rust.org/)]
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

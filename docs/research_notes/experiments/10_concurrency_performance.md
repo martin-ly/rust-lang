@@ -10,7 +10,7 @@
 
 ---
 
-# 并发性能研究
+# 并发性能研究 {#并发性能研究}
 
 > **内容分级**: [归档级]
 >
@@ -33,54 +33,54 @@
 > [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 
 - [并发性能研究](#并发性能研究)
-  - [📑 目录](#-目录)
-  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
+  - [📑 目录](#目录)
+  - [🎯 研究目标](#研究目标)
     - [核心问题](#核心问题)
     - [预期成果](#预期成果)
-  - [📚 理论基础 {#-理论基础}](#-理论基础--理论基础)
+  - [📚 理论基础](#理论基础)
     - [形式化论证与实验衔接](#形式化论证与实验衔接)
     - [相关概念](#相关概念)
     - [理论背景](#理论背景)
       - [The Rust Performance Book 并行视角](#the-rust-performance-book-并行视角)
-  - [🔬 实验设计 {#-实验设计}](#-实验设计--实验设计)
+  - [🔬 实验设计](#实验设计)
     - [1. 同步原语性能测试](#1-同步原语性能测试)
     - [2. 通道性能测试](#2-通道性能测试)
     - [3. 异步运行时性能测试](#3-异步运行时性能测试)
     - [4. 并发模式性能测试](#4-并发模式性能测试)
-    - [Rust 1.96+ / Edition 2024 工具链](#rust-196--edition-2024-工具链)
-  - [💻 代码示例 {#-代码示例}](#-代码示例--代码示例)
+    - [Rust 1.96+ / Edition 2024 工具链](#rust-196-edition-2024-工具链)
+  - [💻 代码示例](#代码示例)
     - [示例 1：Mutex vs RwLock 性能测试](#示例-1mutex-vs-rwlock-性能测试)
     - [示例 2：通道性能测试](#示例-2通道性能测试)
     - [示例 3：异步任务性能测试](#示例-3异步任务性能测试)
-  - [📊 实验结果 {#-实验结果}](#-实验结果--实验结果)
+  - [📊 实验结果](#实验结果)
     - [1. 同步原语性能对比](#1-同步原语性能对比)
     - [2. 通道性能对比](#2-通道性能对比)
     - [结果分析模板](#结果分析模板)
-  - [📋 数据收集执行指南 {#-数据收集执行指南}](#-数据收集执行指南--数据收集执行指南)
+  - [📋 数据收集执行指南](#数据收集执行指南)
     - [环境要求](#环境要求)
     - [执行步骤](#执行步骤)
-  - [📐 性能优化建议与工具改进 {#-性能优化建议与工具改进}](#-性能优化建议与工具改进--性能优化建议与工具改进)
+  - [📐 性能优化建议与工具改进](#性能优化建议与工具改进)
     - [性能优化建议](#性能优化建议)
     - [原子内存顺序选型决策树](#原子内存顺序选型决策树)
     - [死锁检测与运行时验证工具](#死锁检测与运行时验证工具)
     - [工具改进](#工具改进)
     - [性能报告](#性能报告)
-  - [🔗 系统集成与实际应用 {#-系统集成与实际应用}](#-系统集成与实际应用--系统集成与实际应用)
+  - [🔗 系统集成与实际应用](#系统集成与实际应用)
     - [与形式化方法的集成](#与形式化方法的集成)
     - [与实验研究的集成](#与实验研究的集成)
     - [实际应用案例](#实际应用案例)
-  - [📖 参考文献 {#-参考文献}](#-参考文献--参考文献)
+  - [📖 参考文献](#参考文献)
     - [学术论文](#学术论文)
     - [官方文档](#官方文档)
     - [相关代码](#相关代码)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -98,7 +98,7 @@
 
 ---
 
-## 🎯 研究目标 {#-研究目标}
+## 🎯 研究目标 {#研究目标}
 
 >
 
@@ -114,7 +114,7 @@
 
 4. **并发安全开销**：评估并发安全的性能开销
 
-### 核心问题
+### 核心问题 {#核心问题}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -128,7 +128,7 @@
 
 3. **如何优化并发实现的性能？**
 
-### 预期成果
+### 预期成果 {#预期成果}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -144,13 +144,13 @@
 
 ---
 
-## 📚 理论基础 {#-理论基础}
+## 📚 理论基础 {#理论基础}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 形式化论证与实验衔接
+### 形式化论证与实验衔接 {#形式化论证与实验衔接}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -182,7 +182,7 @@
 
 **引用**：[experiments/README](README.md) 定理 EX-T1、EX-T2；[FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md)。
 
-### 相关概念
+### 相关概念 {#相关概念}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -202,7 +202,7 @@
 
 - **竞争开销（Contention Overhead）**：锁竞争导致的性能损失
 
-### 理论背景
+### 理论背景 {#理论背景}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -220,7 +220,7 @@
 
 - **CSP 模型**：通过通道进行通信
 
-#### The Rust Performance Book 并行视角
+#### The Rust Performance Book 并行视角 {#the-rust-performance-book-并行视角}
 
 > **来源: [The Rust Performance Book – Parallelism](https://nnethercote.github.io/perf-book/parallelism.html)**
 
@@ -238,13 +238,13 @@ Rust 并发性能优化应关注：
 
 ---
 
-## 🔬 实验设计 {#-实验设计}
+## 🔬 实验设计 {#实验设计}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 同步原语性能测试
+### 1. 同步原语性能测试 {#1-同步原语性能测试}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -274,7 +274,7 @@ Rust 并发性能优化应关注：
 
 - 可扩展性
 
-### 2. 通道性能测试
+### 2. 通道性能测试 {#2-通道性能测试}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -302,7 +302,7 @@ Rust 并发性能优化应关注：
 
 - 内存使用
 
-### 3. 异步运行时性能测试
+### 3. 异步运行时性能测试 {#3-异步运行时性能测试}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -326,7 +326,7 @@ Rust 并发性能优化应关注：
 
 - 资源使用效率
 
-### 4. 并发模式性能测试
+### 4. 并发模式性能测试 {#4-并发模式性能测试}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -352,7 +352,7 @@ Rust 并发性能优化应关注：
 
 ---
 
-### Rust 1.96+ / Edition 2024 工具链
+### Rust 1.96+ / Edition 2024 工具链 {#rust-196-edition-2024-工具链}
 
 > **来源: [The Rust Performance Book – Parallelism](https://nnethercote.github.io/perf-book/parallelism.html)**
 
@@ -378,13 +378,13 @@ Rust 并发性能优化应关注：
 
 - **可重复性**：固定线程数、CPU 亲和性、CPU governor；记录核心数与超线程状态。
 
-## 💻 代码示例 {#-代码示例}
+## 💻 代码示例 {#代码示例}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 示例 1：Mutex vs RwLock 性能测试
+### 示例 1：Mutex vs RwLock 性能测试 {#示例-1mutex-vs-rwlock-性能测试}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -512,7 +512,7 @@ fn main() {
 
 ```
 
-### 示例 2：通道性能测试
+### 示例 2：通道性能测试 {#示例-2通道性能测试}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -638,7 +638,7 @@ async fn tokio_unbounded_channel_benchmark() {
 
 ```
 
-### 示例 3：异步任务性能测试
+### 示例 3：异步任务性能测试 {#示例-3异步任务性能测试}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -698,13 +698,13 @@ async fn async_task_benchmark() {
 
 ---
 
-## 📊 实验结果 {#-实验结果}
+## 📊 实验结果 {#实验结果}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 1. 同步原语性能对比
+### 1. 同步原语性能对比 {#1-同步原语性能对比}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -738,7 +738,7 @@ async fn async_task_benchmark() {
 
 - `Mutex` 在写操作频繁时性能稳定
 
-### 2. 通道性能对比
+### 2. 通道性能对比 {#2-通道性能对比}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -762,7 +762,7 @@ async fn async_task_benchmark() {
 
 - 通道容量对性能有显著影响
 
-### 结果分析模板
+### 结果分析模板 {#结果分析模板}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -806,13 +806,13 @@ async fn async_task_benchmark() {
 
 ---
 
-## 📋 数据收集执行指南 {#-数据收集执行指南}
+## 📋 数据收集执行指南 {#数据收集执行指南}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 环境要求
+### 环境要求 {#环境要求}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -820,7 +820,7 @@ async fn async_task_benchmark() {
 
 - 建议固定 CPU 频率、关闭节能；多线程 bench 需注意核心数与负载隔离
 
-### 执行步骤
+### 执行步骤 {#执行步骤}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -834,13 +834,13 @@ async fn async_task_benchmark() {
 
 ---
 
-## 📐 性能优化建议与工具改进 {#-性能优化建议与工具改进}
+## 📐 性能优化建议与工具改进 {#性能优化建议与工具改进}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 性能优化建议
+### 性能优化建议 {#性能优化建议}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -852,7 +852,7 @@ async fn async_task_benchmark() {
 
 - **Rust 1.96+**：`thread_local` 分配器可降低多线程分配竞争，重跑并发基准以更新基线。
 
-### 原子内存顺序选型决策树
+### 原子内存顺序选型决策树 {#原子内存顺序选型决策树}
 
 >
 
@@ -874,7 +874,7 @@ async fn async_task_benchmark() {
 
 [06_boundary_analysis](../software_design_theory/03_execution_models/06_boundary_analysis.md) § 静态判定 vs 运行时验证。
 
-### 死锁检测与运行时验证工具
+### 死锁检测与运行时验证工具 {#死锁检测与运行时验证工具}
 
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -892,7 +892,7 @@ async fn async_task_benchmark() {
 
 **说明**：死锁无法静态判定；见 [06_boundary_analysis](../software_design_theory/03_execution_models/06_boundary_analysis.md) § 静态判定 vs 运行时验证。
 
-### 工具改进
+### 工具改进 {#工具改进}
 
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -902,7 +902,7 @@ async fn async_task_benchmark() {
 
 - **Criterion**：用 `BenchmarkId` 区分 THREADS、MESSAGES、TASKS 等维度，便于做可复现的并发报告。
 
-### 性能报告
+### 性能报告 {#性能报告}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -910,13 +910,13 @@ async fn async_task_benchmark() {
 
 ---
 
-## 🔗 系统集成与实际应用 {#-系统集成与实际应用}
+## 🔗 系统集成与实际应用 {#系统集成与实际应用}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 与形式化方法的集成
+### 与形式化方法的集成 {#与形式化方法的集成}
 
 >
 
@@ -926,7 +926,7 @@ async fn async_task_benchmark() {
 
 - **借用检查器**：见 [10_borrow_checker_proof.md](../../research_notes/formal_methods/10_borrow_checker_proof.md)。Rust 的并发原语（Mutex、Arc、channel）在类型与借用层面保证数据竞争自由，本研究的性能数据不改变该结论，但可指导「在安全前提下选更快实现」。
 
-### 与实验研究的集成
+### 与实验研究的集成 {#与实验研究的集成}
 
 >
 
@@ -936,7 +936,7 @@ async fn async_task_benchmark() {
 
 - **内存分析**：见 [10_memory_analysis.md](10_memory_analysis.md)。`Arc`、有界通道的缓冲、Tokio 任务队列与 `thread_local` 分配器会影响内存；分析时需区分配置（线程数、任务数、通道容量）。
 
-### 实际应用案例
+### 实际应用案例 {#实际应用案例}
 
 >
 
@@ -950,13 +950,13 @@ async fn async_task_benchmark() {
 
 ---
 
-## 📖 参考文献 {#-参考文献}
+## 📖 参考文献 {#参考文献}
 
 >
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 学术论文
+### 学术论文 {#学术论文}
 
 >
 
@@ -968,7 +968,7 @@ async fn async_task_benchmark() {
 
    - 摘要: 并发原语性能分析和优化
 
-### 官方文档
+### 官方文档 {#官方文档}
 
 >
 
@@ -990,7 +990,7 @@ async fn async_task_benchmark() {
 
 - [Rust Standard Library – std::sync](https://doc.rust-lang.org/std/) - Mutex、RwLock、Arc、Atomic API
 
-### 相关代码
+### 相关代码 {#相关代码}
 
 >
 
@@ -1010,7 +1010,7 @@ async fn async_task_benchmark() {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -1020,7 +1020,7 @@ async fn async_task_benchmark() {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -1028,7 +1028,7 @@ async fn async_task_benchmark() {
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -1042,7 +1042,7 @@ async fn async_task_benchmark() {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -1052,7 +1052,7 @@ async fn async_task_benchmark() {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -1084,7 +1084,7 @@ async fn async_task_benchmark() {
 
 ---
 
-## 权威来源对照表
+## 权威来源对照表 {#权威来源对照表}
 
 | 概念/方法 | 权威来源 URL | 章节/要点 |
 
@@ -1102,7 +1102,7 @@ async fn async_task_benchmark() {
 
 | 原子操作 Ordering | [Rust Standard Library – std::sync::atomic](https://doc.rust-lang.org/std/) | `Ordering::Relaxed` / `Acquire` / `Release` / `SeqCst` |
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

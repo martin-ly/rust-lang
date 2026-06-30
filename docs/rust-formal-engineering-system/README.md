@@ -1,4 +1,4 @@
-# Rust 形式化工程系统
+# Rust 形式化工程系统 {#rust-形式化工程系统}
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -11,13 +11,13 @@
 
 ---
 
-## 导航说明
+## 导航说明 {#导航说明}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本项目的 Rust 形式化理论与工程文档已整合至 **研究笔记系统**。请使用以下入口访问：
 
-### 核心入口
+### 核心入口 {#核心入口}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -29,7 +29,7 @@
 | **类型理论** | [research_notes/type_theory/](../research_notes/type_theory/README.md) | 类型系统基础、Trait 形式化、型变理论、生命周期 |
 | **主索引** | [00_master_index.md](00_master_index.md) | 完整模块映射与导航 |
 
-### 快速跳转
+### 快速跳转 {#快速跳转}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -45,9 +45,9 @@
 
 ---
 
-## 核心概念简介
+## 核心概念简介 {#核心概念简介}
 
-### 1. 所有权系统
+### 1. 所有权系统 {#1-所有权系统}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -69,7 +69,7 @@ fn ownership_demo() {
 }  // s2 和 s3 在这里被丢弃
 ```
 
-### 2. 借用检查
+### 2. 借用检查 {#2-借用检查}
 
 借用检查器在编译时验证引用有效性：
 
@@ -92,7 +92,7 @@ fn borrowing_demo() {
 }
 ```
 
-### 3. 类型系统
+### 3. 类型系统 {#3-类型系统}
 
 Rust 的类型系统基于 Hindley-Milner 类型推导：
 
@@ -119,9 +119,9 @@ fn render<T: Drawable>(item: T) {
 
 ---
 
-## 形式化文档链接
+## 形式化文档链接 {#形式化文档链接}
 
-### 核心研究笔记
+### 核心研究笔记 {#核心研究笔记}
 
 | 主题 | 文档路径 | 内容概述 |
 | :--- | :--- | :--- |
@@ -136,7 +136,7 @@ fn render<T: Drawable>(item: T) {
 
 ---
 
-## 相关文档
+## 相关文档 {#相关文档}
 
 - [研究笔记主入口](../research_notes/README.md)
 - [思维表征方式](../04_thinking/04_thinking_representation_methods.md)
@@ -144,7 +144,7 @@ fn render<T: Drawable>(item: T) {
 
 ---
 
-## 研究笔记完整链接
+## 研究笔记完整链接 {#研究笔记完整链接}
 
 | 研究笔记目录 | 路径 | 内容概述 |
 | :--- | :--- | :--- |
@@ -168,7 +168,7 @@ fn render<T: Drawable>(item: T) {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 > **来源: [Coq Reference](https://coq.inria.fr/doc/)**

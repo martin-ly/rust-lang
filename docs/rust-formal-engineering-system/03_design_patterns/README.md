@@ -1,4 +1,4 @@
-# 设计模式
+# 设计模式 {#设计模式}
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -9,7 +9,7 @@
 > **状态**: ✅ 已完成
 > 内容已整合至： [c09_design_pattern/](../../../crates/c09_design_pattern/README.md)
 
-## 知识结构思维导图
+## 知识结构思维导图 {#知识结构思维导图}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -34,7 +34,7 @@ mindmap
       依赖注入
 ```
 
-## 与核心文档的关联
+## 与核心文档的关联 {#与核心文档的关联}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -47,11 +47,11 @@ mindmap
 
 ---
 
-## Rust 设计模式概览
+## Rust 设计模式概览 {#rust-设计模式概览}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 类型系统驱动的模式
+### 类型系统驱动的模式 {#类型系统驱动的模式}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -96,7 +96,7 @@ fn type_state_demo() {
 }
 ```
 
-### 构造器模式
+### 构造器模式 {#构造器模式}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -160,7 +160,7 @@ fn builder_demo() -> Result<(), String> {
 }
 ```
 
-### RAII 模式
+### RAII 模式 {#raii-模式}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -196,7 +196,7 @@ fn raii_demo() {
 }  // 自动调用 drop，关闭文件
 ```
 
-### 策略模式（使用 Trait）
+### 策略模式（使用 Trait） {#策略模式使用-trait}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -280,7 +280,7 @@ fn strategy_demo() {
 }
 ```
 
-### 访问者模式
+### 访问者模式 {#访问者模式}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -361,7 +361,7 @@ fn visitor_demo() {
 }
 ```
 
-### 新类型模式（Newtype Pattern）
+### 新类型模式（Newtype Pattern） {#新类型模式newtype-pattern}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -412,7 +412,7 @@ fn newtype_demo() {
 
 ---
 
-## 使用场景
+## 使用场景 {#使用场景}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -429,11 +429,11 @@ fn newtype_demo() {
 
 ---
 
-## 相关研究笔记
+## 相关研究笔记 {#相关研究笔记}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 软件设计理论
+### 软件设计理论 {#软件设计理论}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -443,7 +443,7 @@ fn newtype_demo() {
 | Rust 惯用法 | Rust 特定模式 | [../../research_notes/software_design_theory/06_rust_idioms.md](../../../archive/research_notes_2026_06_25/software_design_theory/06_rust_idioms.md) |
 | 反模式 | 常见陷阱 | [../../research_notes/software_design_theory/07_anti_patterns.md](../../../archive/research_notes_2026_06_25/software_design_theory/07_anti_patterns.md) |
 
-### 创建型模式
+### 创建型模式 {#创建型模式}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -453,7 +453,7 @@ fn newtype_demo() {
 | 构造器 | 构造器模式 | [../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_builder.md](../../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/01_creational/10_builder.md) |
 | 工厂方法 | 工厂方法模式 | [../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_factory_method.md](../../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/01_creational/10_factory_method.md) |
 
-### 结构型模式
+### 结构型模式 {#结构型模式}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -463,7 +463,7 @@ fn newtype_demo() {
 | 装饰器 | 装饰器模式 | [../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_decorator.md](../../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/02_structural/10_decorator.md) |
 | 外观 | 外观模式 | [../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_facade.md](../../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/02_structural/10_facade.md) |
 
-### 行为型模式
+### 行为型模式 {#行为型模式}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -475,7 +475,7 @@ fn newtype_demo() {
 
 ---
 
-## 相关 crates
+## 相关 crates {#相关-crates}
 
 | crate | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -494,7 +494,7 @@ fn newtype_demo() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 

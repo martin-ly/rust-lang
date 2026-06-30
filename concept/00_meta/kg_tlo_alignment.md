@@ -7,6 +7,7 @@
 > **目标**: 将项目知识图谱 v2 的六类实体与 ISO/IEC 21838 推荐的顶层本体（BFO / DOLCE）进行显式映射，建立 `TLO → 中层本体 → 领域本体` 的分层架构，并讨论边界案例。
 > **受众**: 知识工程师、形式化方法研究者、本体论实践者
 > **状态**: 教学/工程对齐草案，非形式化公理化
+> **主要来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/) · [RFCs](https://github.com/rust-lang/rfcs)
 
 ---
 

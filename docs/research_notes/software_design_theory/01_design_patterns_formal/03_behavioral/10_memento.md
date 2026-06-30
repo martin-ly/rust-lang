@@ -1,4 +1,4 @@
-# Memento 形式化分析
+# Memento 形式化分析 {#memento-形式化分析}
 
 > **概念族**: 软件设计 / 设计模式
 
@@ -24,14 +24,14 @@
 
 > **权威来源**: [Rust Design Patterns – Behavioral](https://rust-unofficial.github.io/patterns/patterns/behavioural/index.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
-## 📊 目录 {#-目录}
+## 📊 目录 {#目录}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Memento 形式化分析](#memento-形式化分析)
-  - [📊 目录 {#-目录}](#-目录--目录)
+  - [📊 目录](#目录)
   - [权威来源对照](#权威来源对照)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Memento 结构）](#def-11memento-结构)
@@ -42,7 +42,7 @@
     - [推论 MO-C1（近似表达）](#推论-mo-c1近似表达)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
-  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196--edition-2024-代码示例更新)
+  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196-edition-2024-代码示例更新)
     - [Edition 2024 关键兼容点](#edition-2024-关键兼容点)
   - [Rust 所有权、借用、生命周期与 trait 系统约束分析](#rust-所有权借用生命周期与-trait-系统约束分析)
     - [所有权约束](#所有权约束)
@@ -71,7 +71,7 @@
   - [思维导图](#思维导图)
   - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -81,7 +81,7 @@
 
 ---
 
-## 权威来源对照
+## 权威来源对照 {#权威来源对照}
 
 >
 
@@ -107,13 +107,13 @@
 
 ---
 
-## 形式化定义
+## 形式化定义 {#形式化定义}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Def 1.1（Memento 结构）
+### Def 1.1（Memento 结构） {#def-11memento-结构}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -137,7 +137,7 @@ $$\mathcal{MO} = \langle M, O, \mathit{save}: O \rightarrow M, \mathit{restore}:
 
 ---
 
-### Axiom MO1（状态完整公理）
+### Axiom MO1（状态完整公理） {#axiom-mo1状态完整公理}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -149,7 +149,7 @@ $$\mathit{save}(o) = m \implies m\text{ 包含恢复 }o\text{ 所需的全部状
 
 备忘包含足够状态以恢复；无外部依赖。
 
-### Axiom MO2（兼容性公理）
+### Axiom MO2（兼容性公理） {#axiom-mo2兼容性公理}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -163,7 +163,7 @@ $$\mathit{restore}(o, m)\text{ 要求 }m\text{ 与 }o\text{ 版本兼容}$$
 
 ---
 
-### 定理 MO-T1（Clone 实现定理）
+### 定理 MO-T1（Clone 实现定理） {#定理-mo-t1clone-实现定理}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -207,7 +207,7 @@ $$\mathit{restore}(o, m)\text{ 要求 }m\text{ 与 }o\text{ 版本兼容}$$
 
 ---
 
-### 定理 MO-T2（状态一致性定理）
+### 定理 MO-T2（状态一致性定理） {#定理-mo-t2状态一致性定理}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -229,7 +229,7 @@ $$\mathit{restore}(o, m)\text{ 要求 }m\text{ 与 }o\text{ 版本兼容}$$
 
 ---
 
-### 推论 MO-C1（近似表达）
+### 推论 MO-C1（近似表达） {#推论-mo-c1近似表达}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -251,7 +251,7 @@ Memento 与 [expressive_inexpressive_matrix](../../05_boundary_system/10_express
 
 ---
 
-### 概念定义-属性关系-解释论证 层次汇总
+### 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -271,7 +271,7 @@ Memento 与 [expressive_inexpressive_matrix](../../05_boundary_system/10_express
 
 ---
 
-## Rust 实现与代码示例
+## Rust 实现与代码示例 {#rust-实现与代码示例}
 
 >
 
@@ -345,7 +345,7 @@ assert_eq!(o.state, "A");
 
 ---
 
-## Rust 1.96+ / Edition 2024 代码示例更新
+## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
 
 >
 
@@ -401,7 +401,7 @@ fn main() {
 
 ```
 
-### Edition 2024 关键兼容点
+### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
 
@@ -417,25 +417,25 @@ fn main() {
 
 ---
 
-## Rust 所有权、借用、生命周期与 trait 系统约束分析
+## Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}
 
 >
 
 > **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
 
-### 所有权约束
+### 所有权约束 {#所有权约束}
 
 备忘录 `EditorState` 为独立拥有值；发起人通过 `save` 克隆状态，通过 `restore` 消费备忘录数据恢复自身。
 
-### 借用与生命周期约束
+### 借用与生命周期约束 {#借用与生命周期约束}
 
 `save(&self)` 只读借用发起者；`restore(&mut self, &EditorState)` 可变借用发起者并只读借用备忘录。
 
-### trait 系统约束
+### trait 系统约束 {#trait-系统约束}
 
 可定义 `Memento` trait 封装状态访问；发起人可控制备忘录的可见性， caretaker 只能持有不能修改。
 
-### 与 Rust 类型系统的综合联系
+### 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系}
 
 | Rust 机制 | 本模式使用方式 | 保证 |
 
@@ -453,13 +453,13 @@ fn main() {
 
 ---
 
-## 完整证明
+## 完整证明 {#完整证明}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 形式化论证链
+### 形式化论证链 {#形式化论证链}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -495,13 +495,13 @@ Axiom MO2 (兼容性)
 
 ---
 
-## 形式化属性：不变式、前置/后置条件与安全边界
+## 形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}
 
 >
 
 > **来源: [Formal Methods – Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)** | **来源: [Rust API Guidelines – Safety](https://rust-lang.github.io/api-guidelines/safety.html)**
 
-### 不变式（Invariants）
+### 不变式（Invariants） {#不变式invariants}
 
 1. 备忘录捕获发起者某一时刻的完整状态。
 
@@ -509,7 +509,7 @@ Axiom MO2 (兼容性)
 
 3. 恢复操作将发起者还原到备忘录状态。
 
-### 前置条件（Preconditions）
+### 前置条件（Preconditions） {#前置条件preconditions}
 
 1. 备忘录由同一发起者生成。
 
@@ -517,7 +517,7 @@ Axiom MO2 (兼容性)
 
 3. 备忘录数据未被篡改。
 
-### 后置条件（Postconditions）
+### 后置条件（Postconditions） {#后置条件postconditions}
 
 1. 发起者状态与备忘录一致。
 
@@ -525,11 +525,11 @@ Axiom MO2 (兼容性)
 
 3. 多次恢复结果一致。
 
-### 安全边界（Safety Boundary）
+### 安全边界（Safety Boundary） {#安全边界safety-boundary}
 
 纯 Safe。通过 `Clone` 与借用检查保证状态隔离；若使用 `unsafe` 做浅拷贝，需保证不违反发起者不变式。
 
-### 形式化规约汇总
+### 形式化规约汇总 {#形式化规约汇总}
 
 ```text
 
@@ -545,7 +545,7 @@ Axiom MO2 (兼容性)
 
 ---
 
-## 典型场景
+## 典型场景 {#典型场景}
 
 >
 
@@ -563,7 +563,7 @@ Axiom MO2 (兼容性)
 
 ---
 
-## 相关模式
+## 相关模式 {#相关模式}
 
 >
 
@@ -581,7 +581,7 @@ Axiom MO2 (兼容性)
 
 ---
 
-## 实现变体
+## 实现变体 {#实现变体}
 
 >
 
@@ -599,13 +599,13 @@ Axiom MO2 (兼容性)
 
 ---
 
-## 反例：常见误用及编译器错误
+## 反例：常见误用及编译器错误 {#反例常见误用及编译器错误}
 
 >
 
 > **来源: [Rust By Example – Error Handling](https://doc.rust-lang.org/rust-by-example/error.html)** | **来源: [Rust Compiler Error Index](https://doc.rust-lang.org/error_codes/error-index.html)**
 
-### 反例 1：备忘录持有发起者引用
+### 反例 1：备忘录持有发起者引用 {#反例-1备忘录持有发起者引用}
 
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
@@ -617,7 +617,7 @@ struct Memento<'a> { editor: &'a Editor }
 
 **风险**：生命周期与发起者绑定，难以长期存储。
 
-### 反例 2：恢复后修改备忘录影响发起者
+### 反例 2：恢复后修改备忘录影响发起者 {#反例-2恢复后修改备忘录影响发起者}
 
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
@@ -633,7 +633,7 @@ editor.restore(&m);
 
 若备忘录字段为引用或共享 `Rc`，可能意外影响状态。
 
-### 反例 3：备忘录字段未完整捕获状态
+### 反例 3：备忘录字段未完整捕获状态 {#反例-3备忘录字段未完整捕获状态}
 
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
@@ -647,7 +647,7 @@ struct EditorState { text: String } // 缺少 cursor
 
 ---
 
-## 选型决策树
+## 选型决策树 {#选型决策树}
 
 >
 
@@ -669,7 +669,7 @@ struct EditorState { text: String } // 缺少 cursor
 
 ---
 
-## 与 GoF 对比
+## 与 GoF 对比 {#与-gof-对比}
 
 >
 
@@ -687,7 +687,7 @@ struct EditorState { text: String } // 缺少 cursor
 
 ---
 
-## 边界
+## 边界 {#边界}
 
 >
 
@@ -705,7 +705,7 @@ struct EditorState { text: String } // 缺少 cursor
 
 ---
 
-## 与 Rust 1.93 的对应
+## 与 Rust 1.93 的对应 {#与-rust-193-的对应}
 
 >
 
@@ -721,7 +721,7 @@ struct EditorState { text: String } // 缺少 cursor
 
 ---
 
-## 思维导图
+## 思维导图 {#思维导图}
 
 >
 
@@ -771,7 +771,7 @@ mindmap
 
 ---
 
-## 与其他模式的关系图
+## 与其他模式的关系图 {#与其他模式的关系图}
 
 >
 
@@ -799,7 +799,7 @@ graph LR
 
 ---
 
-## 实质内容五维自检
+## 实质内容五维自检 {#实质内容五维自检}
 
 >
 
@@ -823,7 +823,7 @@ graph LR
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -833,13 +833,13 @@ graph LR
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -855,7 +855,7 @@ graph LR
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -867,7 +867,7 @@ graph LR
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -901,7 +901,7 @@ graph LR
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -913,7 +913,7 @@ graph LR
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 

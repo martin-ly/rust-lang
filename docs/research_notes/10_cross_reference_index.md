@@ -1,4 +1,4 @@
-# 🔗 跨文档映射网络 - 核心索引 {#-跨文档映射网络---核心索引}
+# 🔗 跨文档映射网络 - 核心索引 {#跨文档映射网络---核心索引}
 >
 > **概念族**: 元/导航/索引
 > **内容分级**: [归档级]
@@ -11,37 +11,37 @@
 > **状态**: ✅ 已完成权威国际化来源对齐升级
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Standard Library](https://doc.rust-lang.org/std/) | [Cargo Book](https://doc.rust-lang.org/cargo/) | [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [🔗 跨文档映射网络 - 核心索引 {#-跨文档映射网络---核心索引}](#-跨文档映射网络---核心索引--跨文档映射网络---核心索引)
-  - [📑 目录](#-目录)
-  - [🗺️ 文档网络概览 {#️-文档网络概览}](#️-文档网络概览-️-文档网络概览)
+- [🔗 跨文档映射网络 - 核心索引](#跨文档映射网络---核心索引)
+  - [📑 目录](#目录)
+  - [🗺️ 文档网络概览](#文档网络概览)
     - [三大支柱文档网络](#三大支柱文档网络)
     - [文档类型分布](#文档类型分布)
-  - [🔄 双向链接表 {#-双向链接表}](#-双向链接表--双向链接表)
-    - [formal\_methods ↔ 其他文档](#formal_methods--其他文档)
-    - [type\_theory ↔ 其他文档](#type_theory--其他文档)
-    - [software\_design\_theory ↔ 其他文档](#software_design_theory--其他文档)
-    - [速查卡 ↔ 指南/研究笔记](#速查卡--指南研究笔记)
-  - [📐 概念跨文档定义映射 {#-概念跨文档定义映射}](#-概念跨文档定义映射--概念跨文档定义映射)
+  - [🔄 双向链接表](#双向链接表)
+    - [formal\_methods ↔ 其他文档](#formal_methods-其他文档)
+    - [type\_theory ↔ 其他文档](#type_theory-其他文档)
+    - [software\_design\_theory ↔ 其他文档](#software_design_theory-其他文档)
+    - [速查卡 ↔ 指南/研究笔记](#速查卡-指南研究笔记)
+  - [📐 概念跨文档定义映射](#概念跨文档定义映射)
     - [核心概念定义分布](#核心概念定义分布)
     - [概念等价关系](#概念等价关系)
-  - [📜 定理跨文档引用网络 {#-定理跨文档引用网络}](#-定理跨文档引用网络--定理跨文档引用网络)
+  - [📜 定理跨文档引用网络](#定理跨文档引用网络)
     - [定理依赖图](#定理依赖图)
     - [跨文档定理引用矩阵](#跨文档定理引用矩阵)
-  - [🌐 文档依赖关系图 {#-文档依赖关系图}](#-文档依赖关系图--文档依赖关系图)
+  - [🌐 文档依赖关系图](#文档依赖关系图)
     - [层次依赖](#层次依赖)
     - [横向关联](#横向关联)
-  - [🧭 导航指南 {#-导航指南}](#-导航指南--导航指南)
+  - [🧭 导航指南](#导航指南)
     - [按目标快速导航](#按目标快速导航)
     - [交叉验证清单](#交叉验证清单)
-  - [📈 映射统计 {#-映射统计}](#-映射统计--映射统计)
+  - [📈 映射统计](#映射统计)
     - [跨文档链接统计](#跨文档链接统计)
     - [概念映射统计](#概念映射统计)
     - [定理引用统计](#定理引用统计)
-  - [🆕 Rust 1.96.0+ / Edition 2024 权威国际化升级说明](#-rust-1960--edition-2024-权威国际化升级说明)
+  - [🆕 Rust 1.96.0+ / Edition 2024 权威国际化升级说明](#rust-1960-edition-2024-权威国际化升级说明)
     - [升级要点](#升级要点)
       - [权威来源对齐](#权威来源对齐)
       - [形式化来源对照](#形式化来源对照)
@@ -60,11 +60,11 @@
 
 ---
 
-## 🗺️ 文档网络概览 {#️-文档网络概览}
+## 🗺️ 文档网络概览 {#文档网络概览}
 >
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
-### 三大支柱文档网络
+### 三大支柱文档网络 {#三大支柱文档网络}
 >
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
@@ -112,7 +112,7 @@
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 文档类型分布
+### 文档类型分布 {#文档类型分布}
 >
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
@@ -128,11 +128,11 @@
 
 ---
 
-## 🔄 双向链接表 {#-双向链接表}
+## 🔄 双向链接表 {#双向链接表}
 >
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
-### formal_methods ↔ 其他文档
+### formal_methods ↔ 其他文档 {#formal_methods-其他文档}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -145,7 +145,7 @@
 | [pin_self_referential](formal_methods/10_pin_self_referential.md) | → [async_state_machine](formal_methods/10_async_state_machine.md) 自引用Future→ [type_theory/advanced_types](type_theory/10_advanced_types.md) PhantomData→ [PROOF_INDEX](10_proof_index.md) 证明引用 | ← [async_state_machine](formal_methods/10_async_state_machine.md) Pin使用场景← [05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE](../05_guides/05_async_programming_usage_guide.md) Pin实践← [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](10_safe_decidable_mechanisms_overview.md) 安全机制 |
 | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) | → [async_state_machine](formal_methods/10_async_state_machine.md) 跨线程执行→ [software_design_theory/06_boundary_analysis](software_design_theory/03_execution_models/06_boundary_analysis.md) 并发选型→ [PROOF_INDEX](10_proof_index.md) 证明索引 | ← [async_state_machine](formal_methods/10_async_state_machine.md) Send要求← [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) CHAN/MUTEX← [05_guides/THREADS_CONCURRENCY_USAGE_GUIDE](../05_guides/05_threads_concurrency_usage_guide.md) 并发指南 |
 
-### type_theory ↔ 其他文档
+### type_theory ↔ 其他文档 {#type_theory-其他文档}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -157,7 +157,7 @@
 | [advanced_types](type_theory/10_advanced_types.md) | → [type_system_foundations](type_theory/10_type_system_foundations.md) 基础类型→ [trait_system_formalization](type_theory/10_trait_system_formalization.md) GAT→ [formal_methods/pin_self_referential](formal_methods/10_pin_self_referential.md) PhantomData | ← [trait_system_formalization](type_theory/10_trait_system_formalization.md) 关联类型← [pin_self_referential](formal_methods/10_pin_self_referential.md) 高级类型技术← [05_guides/ADVANCED_TOPICS_DEEP_DIVE](../05_guides/05_advanced_topics_deep_dive.md) 高级主题 |
 | [lifetime_formalization](type_theory/10_lifetime_formalization.md) | → [variance_theory](type_theory/10_variance_theory.md) 型变组合→ formal_methods/lifetime_formalization 形式化对应→ [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) 证明引用 | ← [type_system_foundations](type_theory/10_type_system_foundations.md) 生命周期参数← [trait_system_formalization](type_theory/10_trait_system_formalization.md) 生命周期约束← [02_reference/quick_reference/02_type_system.md](../02_reference/quick_reference/02_type_system.md) 速查 |
 
-### software_design_theory ↔ 其他文档
+### software_design_theory ↔ 其他文档 {#software_design_theory-其他文档}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -167,7 +167,7 @@
 | [03_execution_models](software_design_theory/03_execution_models/README.md) | → [async_state_machine](formal_methods/10_async_state_machine.md) 异步形式化→ [send_sync_formalization](formal_methods/10_send_sync_formalization.md) 并发安全→ [software_design_theory/06_boundary_analysis](software_design_theory/03_execution_models/06_boundary_analysis.md) 边界分析 | ← [05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE](../05_guides/05_async_programming_usage_guide.md) 异步实践← [05_guides/THREADS_CONCURRENCY_USAGE_GUIDE](../05_guides/05_threads_concurrency_usage_guide.md) 并发实践← [02_reference/quick_reference/02_async_patterns.md](../02_reference/quick_reference/02_async_patterns.md) 速查 |
 | [04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md) | → [ownership_model](formal_methods/10_ownership_model.md) CE-T1依赖→ [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) CE-T2依赖→ [type_system_foundations](type_theory/10_type_system_foundations.md) CE-T3依赖 | ← [01_design_patterns_formal](software_design_theory/01_design_patterns_formal/README.md) 模式组合← [03_execution_models](software_design_theory/03_execution_models/README.md) 执行组合← [05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES](../05_guides/05_cross_module_integration_examples.md) 集成示例 |
 
-### 速查卡 ↔ 指南/研究笔记
+### 速查卡 ↔ 指南/研究笔记 {#速查卡-指南研究笔记}
 >
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
@@ -182,11 +182,11 @@
 
 ---
 
-## 📐 概念跨文档定义映射 {#-概念跨文档定义映射}
+## 📐 概念跨文档定义映射 {#概念跨文档定义映射}
 >
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
-### 核心概念定义分布
+### 核心概念定义分布 {#核心概念定义分布}
 >
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
@@ -203,7 +203,7 @@
 | **Trait对象安全** | [trait_system_formalization](type_theory/10_trait_system_formalization.md) §对象安全 | type_system_foundations, 01_design_patterns | dyn Trait 约束 |
 | **组合有效性** | [04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md) §Def CE1 | ownership_model, borrow_checker_proof, type_system | CE-T1/T2/T3 依赖链 |
 
-### 概念等价关系
+### 概念等价关系 {#概念等价关系}
 >
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
@@ -245,11 +245,11 @@
 
 ---
 
-## 📜 定理跨文档引用网络 {#-定理跨文档引用网络}
+## 📜 定理跨文档引用网络 {#定理跨文档引用网络}
 >
 > **来源**: [Rust Reference - 形式化基础](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [RustBelt](https://plv.mpi-sws.org/rustbelt/), [Aeneas](https://aeneas-verification.github.io/), [Ferrocene FLS](https://spec.ferrocene.dev/)
 
-### 定理依赖图
+### 定理依赖图 {#定理依赖图}
 >
 > **来源**: [Rust Reference - 形式化基础](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [RustBelt](https://plv.mpi-sws.org/rustbelt/), [Aeneas](https://aeneas-verification.github.io/), [Ferrocene FLS](https://spec.ferrocene.dev/)
 
@@ -291,7 +291,7 @@
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 跨文档定理引用矩阵
+### 跨文档定理引用矩阵 {#跨文档定理引用矩阵}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -318,11 +318,11 @@
 
 ---
 
-## 🌐 文档依赖关系图 {#-文档依赖关系图}
+## 🌐 文档依赖关系图 {#文档依赖关系图}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 层次依赖
+### 层次依赖 {#层次依赖}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -380,7 +380,7 @@ graph TD
     style CROSS_REF fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
-### 横向关联
+### 横向关联 {#横向关联}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -396,11 +396,11 @@ graph TD
 
 ---
 
-## 🧭 导航指南 {#-导航指南}
+## 🧭 导航指南 {#导航指南}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 按目标快速导航
+### 按目标快速导航 {#按目标快速导航}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -414,7 +414,7 @@ graph TD
 | **查找定理证明** | PROOF_INDEX → 具体文档证明树 → CORE_THEOREMS_FULL_PROOFS | [证明索引](10_proof_index.md) → [完整证明](10_core_theorems_full_proofs.md) |
 | **理解论证脉络** | 00_COMPREHENSIVE_SUMMARY → ARGUMENTATION_CHAIN_AND_FLOW → 具体文档 | [总览](10_00_comprehensive_summary.md) → [脉络](10_argumentation_chain_and_flow.md) |
 
-### 交叉验证清单
+### 交叉验证清单 {#交叉验证清单}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -430,11 +430,11 @@ graph TD
 
 ---
 
-## 📈 映射统计 {#-映射统计}
+## 📈 映射统计 {#映射统计}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 跨文档链接统计
+### 跨文档链接统计 {#跨文档链接统计}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -449,7 +449,7 @@ graph TD
 | 指南 ↔ 速查卡 | 45 | 22对 | 100% |
 | **总计** | **416+** | **207+对** | **99%+** |
 
-### 概念映射统计
+### 概念映射统计 {#概念映射统计}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -464,7 +464,7 @@ graph TD
 | 组合工程族 | 2 | 8 | 3 |
 | **总计** | **22** | **97** | **29** |
 
-### 定理引用统计
+### 定理引用统计 {#定理引用统计}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -484,7 +484,7 @@ graph TD
 
 ---
 
-## 🆕 Rust 1.96.0+ / Edition 2024 权威国际化升级说明
+## 🆕 Rust 1.96.0+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明}
 >
 > **来源**: [Rust Edition Guide - Rust 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)
@@ -492,13 +492,13 @@ graph TD
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-06-29
 
-### 升级要点
+### 升级要点 {#升级要点}
 
 > **来源**: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
 本文档已完成权威国际化来源对齐升级：将泛化的 "Rust Official Docs" 替换为官方具体章节/模块/API 链接，并补充 P1 形式化来源对照。
 
-#### 权威来源对齐
+#### 权威来源对齐 {#权威来源对齐}
 
 | 来源类型 | 具体链接 | 用途 |
 | :--- | :--- | :--- |
@@ -508,7 +508,7 @@ graph TD
 | **Rust Standard Library** | [std](https://doc.rust-lang.org/std/)、[Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html)、[HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html)、[Result](https://doc.rust-lang.org/std/result/enum.Result.html)、[Future](https://doc.rust-lang.org/std/future/trait.Future.html)、[Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)、[thread](https://doc.rust-lang.org/std/thread/)、[sync](https://doc.rust-lang.org/std/sync/) | API/模块级别参考 |
 | **Rust Edition Guide** | [Edition Guide](https://doc.rust-lang.org/edition-guide/)、[Rust 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) | 版本差异与迁移 |
 
-#### 形式化来源对照
+#### 形式化来源对照 {#形式化来源对照}
 
 > **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/) / [Aeneas](https://aeneas-verification.github.io/) / [Ferrocene FLS](https://spec.ferrocene.dev/)
 
@@ -519,7 +519,7 @@ graph TD
 | 类型系统/Trait | ✓ Iris 语义 | ✓ 类型系统提取 | ✓ 规范 § 类型 |
 | 异步/Pin | ✓ 扩展模型 | 部分支持 | ✓ 规范 § 表达式 |
 
-#### 版本与生态更新
+#### 版本与生态更新 {#版本与生态更新}
 
 - 所有概念、示例与最佳实践统一对齐 **Rust 1.96.0+ (Edition 2024)**。
 - 生态引用已更新：async-std → Tokio / smol；wasm32-wasi → wasm32-wasip1 / wasm32-wasip2（详见 [10_application_trees.md](10_application_trees.md)）。
@@ -527,7 +527,7 @@ graph TD
 
 ---
 
-#### 层级-主题-文档三维矩阵
+#### 层级-主题-文档三维矩阵 {#层级-主题-文档三维矩阵}
 
 > **来源**: [10_knowledge_graph_index.md](10_knowledge_graph_index.md)
 
@@ -578,7 +578,7 @@ graph TD
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -587,7 +587,7 @@ graph TD
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

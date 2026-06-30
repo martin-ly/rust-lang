@@ -9,7 +9,7 @@
 
 ---
 
-# 应用树
+# 应用树 {#应用树}
 
 > **内容分级**: [归档级]
 >
@@ -24,12 +24,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [应用树](#应用树)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、概述](#一概述)
   - [二、系统编程应用树](#二系统编程应用树)
     - [2.1 概念树](#21-概念树)
@@ -50,9 +50,9 @@
     - [6.1 学习路径文档](#61-学习路径文档)
     - [6.2 领域特定资源](#62-领域特定资源)
     - [6.3 应用树总览](#63-应用树总览)
-  - [🆕 Rust 1.96.0+ / Edition 2024 研究更新](#-rust-1960--edition-2024-研究更新)
+  - [🆕 Rust 1.96.0+ / Edition 2024 研究更新](#rust-1960-edition-2024-研究更新)
     - [核心研究点](#核心研究点)
-  - [🆕 Rust 1.96.0+ / Edition 2024 权威国际化升级说明](#-rust-1960--edition-2024-权威国际化升级说明)
+  - [🆕 Rust 1.96.0+ / Edition 2024 权威国际化升级说明](#rust-1960-edition-2024-权威国际化升级说明)
     - [升级要点](#升级要点)
       - [权威来源对齐](#权威来源对齐)
       - [形式化来源对照](#形式化来源对照)
@@ -60,7 +60,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 一、概述
+## 一、概述 {#一概述}
 >
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
@@ -68,11 +68,11 @@
 
 ---
 
-## 二、系统编程应用树
+## 二、系统编程应用树 {#二系统编程应用树}
 >
 > **来源**: [Rust Standard Library - io](https://doc.rust-lang.org/std/io/), [Rust Standard Library - fs](https://doc.rust-lang.org/std/fs/), [Rust Standard Library - process](https://doc.rust-lang.org/std/process/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
-### 2.1 概念树
+### 2.1 概念树 {#21-概念树}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -123,7 +123,7 @@ mindmap
       内联汇编
 ```
 
-### 2.2 技能路径
+### 2.2 技能路径 {#22-技能路径}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -134,7 +134,7 @@ mindmap
 | **高级** | 并发编程 | 锁、原子、Lock-free | 高性能服务器 |
 | **专家** | 内核开发 | 裸机、驱动、调度器 | 微型OS |
 
-### 2.3 核心技术栈
+### 2.3 核心技术栈 {#23-核心技术栈}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -165,11 +165,11 @@ mindmap
 
 ---
 
-## 三、网络服务应用树
+## 三、网络服务应用树 {#三网络服务应用树}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 3.1 概念树
+### 3.1 概念树 {#31-概念树}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -229,7 +229,7 @@ mindmap
         Memcached
 ```
 
-### 3.2 架构层次
+### 3.2 架构层次 {#32-架构层次}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -240,7 +240,7 @@ mindmap
 | **服务层** | gRPC/REST | 业务逻辑、事务 | 生产级 |
 | **数据层** | SQL/NoSQL | 持久化、缓存 | 生产级 |
 
-### 3.3 服务开发技能树
+### 3.3 服务开发技能树 {#33-服务开发技能树}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -275,11 +275,11 @@ mindmap
 
 ---
 
-## 四、数据系统应用树
+## 四、数据系统应用树 {#四数据系统应用树}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 4.1 概念树
+### 4.1 概念树 {#41-概念树}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -341,7 +341,7 @@ mindmap
         Percolator
 ```
 
-### 4.2 数据系统层次
+### 4.2 数据系统层次 {#42-数据系统层次}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -352,7 +352,7 @@ mindmap
 | **处理层** | SQL、计算 | 查询优化 | datafusion |
 | **服务层** | 协议、API | PostgreSQL协议 | pgwire |
 
-### 4.3 数据库开发技能树
+### 4.3 数据库开发技能树 {#43-数据库开发技能树}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -387,11 +387,11 @@ mindmap
 
 ---
 
-## 五、跨领域通用能力
+## 五、跨领域通用能力 {#五跨领域通用能力}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 5.1 通用技能矩阵
+### 5.1 通用技能矩阵 {#51-通用技能矩阵}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -406,7 +406,7 @@ mindmap
 | **宏编程** | ⚠️ | ⚠️ | ✅ | ⭐⭐ |
 | **测试策略** | ✅ | ✅ | ✅ | ⭐⭐⭐ |
 
-### 5.2 跨领域架构模式
+### 5.2 跨领域架构模式 {#52-跨领域架构模式}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -436,11 +436,11 @@ mindmap
 
 ---
 
-## 六、相关资源
+## 六、相关资源 {#六相关资源}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 6.1 学习路径文档
+### 6.1 学习路径文档 {#61-学习路径文档}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -450,7 +450,7 @@ mindmap
 | 网络服务 | [ASYNC_PROGRAMMING](../05_guides/05_async_programming_usage_guide.md) | [DESIGN_PATTERNS](../05_guides/05_design_patterns_usage_guide.md) |
 | 数据系统 | TYPE_SYSTEM | [UNSAFE_RUST](../../concept/03_advanced/03_unsafe.md) |
 
-### 6.2 领域特定资源
+### 6.2 领域特定资源 {#62-领域特定资源}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -460,7 +460,7 @@ mindmap
 | 网络服务 | tokio, axum, tonic | Linkerd, Vector |
 | 数据系统 | datafusion, polars, sled | TiKV, MeiliSearch |
 
-### 6.3 应用树总览
+### 6.3 应用树总览 {#63-应用树总览}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -495,13 +495,13 @@ Rust 应用领域总览
 
 ---
 
-## 🆕 Rust 1.96.0+ / Edition 2024 研究更新
+## 🆕 Rust 1.96.0+ / Edition 2024 研究更新 {#rust-1960-edition-2024-研究更新}
 >
 > **来源**: [Rust Edition Guide - Rust 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-06-29
 
-### 核心研究点
+### 核心研究点 {#核心研究点}
 
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
 
@@ -517,7 +517,7 @@ Rust 应用领域总览
 
 ---
 
-## 🆕 Rust 1.96.0+ / Edition 2024 权威国际化升级说明
+## 🆕 Rust 1.96.0+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明}
 >
 > **来源**: [Rust Edition Guide - Rust 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)
@@ -525,13 +525,13 @@ Rust 应用领域总览
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-06-29
 
-### 升级要点
+### 升级要点 {#升级要点}
 
 > **来源**: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
 本文档已完成权威国际化来源对齐升级：将泛化的 "Rust Official Docs" 替换为官方具体章节/模块/API 链接，并补充 P1 形式化来源对照。
 
-#### 权威来源对齐
+#### 权威来源对齐 {#权威来源对齐}
 
 | 来源类型 | 具体链接 | 用途 |
 | :--- | :--- | :--- |
@@ -541,7 +541,7 @@ Rust 应用领域总览
 | **Rust Standard Library** | [std](https://doc.rust-lang.org/std/)、[Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html)、[HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html)、[Result](https://doc.rust-lang.org/std/result/enum.Result.html)、[Future](https://doc.rust-lang.org/std/future/trait.Future.html)、[Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)、[thread](https://doc.rust-lang.org/std/thread/)、[sync](https://doc.rust-lang.org/std/sync/) | API/模块级别参考 |
 | **Rust Edition Guide** | [Edition Guide](https://doc.rust-lang.org/edition-guide/)、[Rust 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) | 版本差异与迁移 |
 
-#### 形式化来源对照
+#### 形式化来源对照 {#形式化来源对照}
 
 > **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/) / [Aeneas](https://aeneas-verification.github.io/) / [Ferrocene FLS](https://spec.ferrocene.dev/)
 
@@ -552,7 +552,7 @@ Rust 应用领域总览
 | 类型系统/Trait | ✓ Iris 语义 | ✓ 类型系统提取 | ✓ 规范 § 类型 |
 | 异步/Pin | ✓ 扩展模型 | 部分支持 | ✓ 规范 § 表达式 |
 
-#### 版本与生态更新
+#### 版本与生态更新 {#版本与生态更新}
 
 - 所有概念、示例与最佳实践统一对齐 **Rust 1.96.0+ (Edition 2024)**。
 - 生态引用已更新：async-std → Tokio / smol；wasm32-wasi → wasm32-wasip1 / wasm32-wasip2。
@@ -576,7 +576,7 @@ Rust 应用领域总览
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -585,7 +585,7 @@ Rust 应用领域总览
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

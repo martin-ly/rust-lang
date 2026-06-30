@@ -1,4 +1,4 @@
-# 执行模型形式化框架
+# 执行模型形式化框架 {#执行模型形式化框架}
 
 > **概念族**: 软件设计 / 执行模型
 
@@ -34,14 +34,14 @@
 
 ---
 
-## 📊 目录 {#-目录}
+## 📊 目录 {#目录}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [执行模型形式化框架](#执行模型形式化框架)
-  - [📊 目录 {#-目录}](#-目录--目录)
+  - [📊 目录](#目录)
   - [宗旨](#宗旨)
   - [执行模型分类](#执行模型分类)
   - [执行模型多维对比矩阵](#执行模型多维对比矩阵)
@@ -50,17 +50,17 @@
   - [模型选型决策（实质内容）](#模型选型决策实质内容)
   - [模型选择速查](#模型选择速查)
   - [典型场景与设计模式组合（实质内容）](#典型场景与设计模式组合实质内容)
-    - [场景 1：批处理流水线（同步 + 策略）](#场景-1批处理流水线同步--策略)
-    - [场景 2：高并发 Web 服务（异步 + Observer + 通道）](#场景-2高并发-web-服务异步--observer--通道)
-    - [场景 3：图像处理（并行 + Iterator）](#场景-3图像处理并行--iterator)
-    - [场景 4：多服务编排（分布式 + Proxy + DTO）](#场景-4多服务编排分布式--proxy--dto)
+    - [场景 1：批处理流水线（同步 + 策略）](#场景-1批处理流水线同步-策略)
+    - [场景 2：高并发 Web 服务（异步 + Observer + 通道）](#场景-2高并发-web-服务异步-observer-通道)
+    - [场景 3：图像处理（并行 + Iterator）](#场景-3图像处理并行-iterator)
+    - [场景 4：多服务编排（分布式 + Proxy + DTO）](#场景-4多服务编排分布式-proxy-dto)
     - [选型决策流程（层次推进）](#选型决策流程层次推进)
   - [常见陷阱与规避（执行模型）](#常见陷阱与规避执行模型)
   - [可运行示例（层次推进）](#可运行示例层次推进)
-    - [示例 1：批处理 + Strategy（同步）](#示例-1批处理--strategy同步)
-    - [示例 2：并发 + Observer（std::thread + mpsc）](#示例-2并发--observerstdthread--mpsc)
-    - [示例 3：并行 + Strategy（rayon，需 `cargo add rayon`）](#示例-3并行--strategyrayon需-cargo-add-rayon)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [示例 1：批处理 + Strategy（同步）](#示例-1批处理-strategy同步)
+    - [示例 2：并发 + Observer（std::thread + mpsc）](#示例-2并发-observerstdthread-mpsc)
+    - [示例 3：并行 + Strategy（rayon，需 `cargo add rayon`）](#示例-3并行-strategyrayon需-cargo-add-rayon)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -69,7 +69,7 @@
 
 ---
 
-## 宗旨
+## 宗旨 {#宗旨}
 
 >
 
@@ -79,7 +79,7 @@
 
 ---
 
-## 执行模型分类
+## 执行模型分类 {#执行模型分类}
 
 >
 
@@ -101,7 +101,7 @@
 
 ---
 
-## 执行模型多维对比矩阵
+## 执行模型多维对比矩阵 {#执行模型多维对比矩阵}
 
 >
 
@@ -129,7 +129,7 @@
 
 ---
 
-## 依赖引用
+## 依赖引用 {#依赖引用}
 
 >
 
@@ -153,7 +153,7 @@
 
 ---
 
-## 边界分析
+## 边界分析 {#边界分析}
 
 >
 
@@ -163,7 +163,7 @@
 
 ---
 
-## 模型选型决策（实质内容）
+## 模型选型决策（实质内容） {#模型选型决策实质内容}
 
 >
 
@@ -187,7 +187,7 @@
 
 ---
 
-## 模型选择速查
+## 模型选择速查 {#模型选择速查}
 
 >
 
@@ -209,13 +209,13 @@
 
 ---
 
-## 典型场景与设计模式组合（实质内容）
+## 典型场景与设计模式组合（实质内容） {#典型场景与设计模式组合实质内容}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 场景 1：批处理流水线（同步 + 策略）
+### 场景 1：批处理流水线（同步 + 策略） {#场景-1批处理流水线同步-策略}
 
 >
 
@@ -247,7 +247,7 @@ fn process_batch<S: ProcessStrategy>(data: Vec<i32>, strategy: &S) -> Vec<i32> {
 
 ```
 
-### 场景 2：高并发 Web 服务（异步 + Observer + 通道）
+### 场景 2：高并发 Web 服务（异步 + Observer + 通道） {#场景-2高并发-web-服务异步-observer-通道}
 
 >
 
@@ -273,7 +273,7 @@ tokio::spawn(async move {
 
 ```
 
-### 场景 3：图像处理（并行 + Iterator）
+### 场景 3：图像处理（并行 + Iterator） {#场景-3图像处理并行-iterator}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -295,7 +295,7 @@ let processed: Vec<u8> = pixels
 
 ```
 
-### 场景 4：多服务编排（分布式 + Proxy + DTO）
+### 场景 4：多服务编排（分布式 + Proxy + DTO） {#场景-4多服务编排分布式-proxy-dto}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -317,7 +317,7 @@ struct OrderOrchestrator<I: InventoryService, P: PaymentService> {
 
 ```
 
-### 选型决策流程（层次推进）
+### 选型决策流程（层次推进） {#选型决策流程层次推进}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -335,7 +335,7 @@ struct OrderOrchestrator<I: InventoryService, P: PaymentService> {
 
 ---
 
-## 常见陷阱与规避（执行模型）
+## 常见陷阱与规避（执行模型） {#常见陷阱与规避执行模型}
 
 | 陷阱 | 后果 | 规避 |
 
@@ -353,11 +353,11 @@ struct OrderOrchestrator<I: InventoryService, P: PaymentService> {
 
 ---
 
-## 可运行示例（层次推进）
+## 可运行示例（层次推进） {#可运行示例层次推进}
 
 以下示例可直接复制到 `main.rs` 运行（示例 1–2 仅 std；示例 3 需 `rayon`）。
 
-### 示例 1：批处理 + Strategy（同步）
+### 示例 1：批处理 + Strategy（同步） {#示例-1批处理-strategy同步}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -411,7 +411,7 @@ fn main() {
 
 ```
 
-### 示例 2：并发 + Observer（std::thread + mpsc）
+### 示例 2：并发 + Observer（std::thread + mpsc） {#示例-2并发-observerstdthread-mpsc}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -459,7 +459,7 @@ fn main() {
 
 ```
 
-### 示例 3：并行 + Strategy（rayon，需 `cargo add rayon`）
+### 示例 3：并行 + Strategy（rayon，需 `cargo add rayon`） {#示例-3并行-strategyrayon需-cargo-add-rayon}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -507,19 +507,19 @@ fn main() {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -533,7 +533,7 @@ fn main() {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -543,7 +543,7 @@ fn main() {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -575,7 +575,7 @@ fn main() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)**
 

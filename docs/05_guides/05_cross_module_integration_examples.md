@@ -1,4 +1,4 @@
-# 🔗 跨模块集成示例指南 {#-跨模块集成示例指南}
+# 🔗 跨模块集成示例指南 {#跨模块集成示例指南}
 
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
@@ -12,10 +12,10 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
-- [🔗 跨模块集成示例指南 {#-跨模块集成示例指南}](#-跨模块集成示例指南--跨模块集成示例指南)
-  - [📑 目录](#-目录)
+- [🔗 跨模块集成示例指南](#跨模块集成示例指南)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [示例1: 所有权与类型系统集成](#示例1-所有权与类型系统集成)
     - [场景：类型安全的资源管理](#场景类型安全的资源管理)
@@ -37,7 +37,7 @@
   - [使用场景](#使用场景)
     - [场景1: 全栈 Rust 应用](#场景1-全栈-rust-应用)
     - [场景2: 高性能数据处理系统](#场景2-高性能数据处理系统)
-    - [场景3: 嵌入式 + 云端协同](#场景3-嵌入式--云端协同)
+    - [场景3: 嵌入式 + 云端协同](#场景3-嵌入式-云端协同)
     - [场景4: 可扩展的插件系统](#场景4-可扩展的插件系统)
   - [形式化链接](#形式化链接)
   - [Rust 1.95+ 跨模块集成最佳实践](#rust-195-跨模块集成最佳实践)
@@ -47,7 +47,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 概述
+## 概述 {#概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -57,11 +57,11 @@
 
 ---
 
-## 示例1: 所有权与类型系统集成
+## 示例1: 所有权与类型系统集成 {#示例1-所有权与类型系统集成}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 场景：类型安全的资源管理
+### 场景：类型安全的资源管理 {#场景类型安全的资源管理}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -111,11 +111,11 @@ fn test_resource_manager() {
 
 ---
 
-## 示例2: 异步与网络编程集成
+## 示例2: 异步与网络编程集成 {#示例2-异步与网络编程集成}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 场景：异步HTTP服务器
+### 场景：异步HTTP服务器 {#场景异步http服务器}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -149,11 +149,11 @@ async fn async_http_server() -> Result<(), Box<dyn std::error::Error>> {
 
 ---
 
-## 示例3: 线程与进程管理集成
+## 示例3: 线程与进程管理集成 {#示例3-线程与进程管理集成}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 场景：多线程进程池
+### 场景：多线程进程池 {#场景多线程进程池}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -222,11 +222,11 @@ impl Drop for ThreadPool {
 
 ---
 
-## 示例4: 宏系统与设计模式集成
+## 示例4: 宏系统与设计模式集成 {#示例4-宏系统与设计模式集成}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 场景：使用宏实现设计模式
+### 场景：使用宏实现设计模式 {#场景使用宏实现设计模式}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -274,11 +274,11 @@ fn test_singleton() {
 
 ---
 
-## 示例5: 算法与性能优化集成
+## 示例5: 算法与性能优化集成 {#示例5-算法与性能优化集成}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 场景：高性能数据处理管道
+### 场景：高性能数据处理管道 {#场景高性能数据处理管道}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -313,11 +313,11 @@ fn test_data_pipeline() {
 
 ---
 
-## 示例6: WASM与跨平台集成
+## 示例6: WASM与跨平台集成 {#示例6-wasm与跨平台集成}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 场景：WASM模块与Rust后端集成
+### 场景：WASM模块与Rust后端集成 {#场景wasm模块与rust后端集成}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -345,11 +345,11 @@ fn test_wasm_integration() {
 
 ---
 
-## 最佳实践
+## 最佳实践 {#最佳实践}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 1. 模块边界清晰
+### 1. 模块边界清晰 {#1-模块边界清晰}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -357,7 +357,7 @@ fn test_wasm_integration() {
 - 使用trait定义模块接口
 - 避免循环依赖
 
-### 2. 错误处理统一
+### 2. 错误处理统一 {#2-错误处理统一}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -365,7 +365,7 @@ fn test_wasm_integration() {
 - 实现From trait进行错误转换
 - 提供详细的错误上下文
 
-### 3. 性能考虑
+### 3. 性能考虑 {#3-性能考虑}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -373,7 +373,7 @@ fn test_wasm_integration() {
 - 避免不必要的克隆
 - 利用编译期优化
 
-### 4. 测试策略
+### 4. 测试策略 {#4-测试策略}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -383,11 +383,11 @@ fn test_wasm_integration() {
 
 ---
 
-## 使用场景
+## 使用场景 {#使用场景}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 场景1: 全栈 Rust 应用
+### 场景1: 全栈 Rust 应用 {#场景1-全栈-rust-应用}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -399,7 +399,7 @@ fn test_wasm_integration() {
 // 共享：C02 类型系统定义的通用数据结构
 ```
 
-### 场景2: 高性能数据处理系统
+### 场景2: 高性能数据处理系统 {#场景2-高性能数据处理系统}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -409,7 +409,7 @@ fn test_wasm_integration() {
 - [C06 异步](#示例2-异步与网络编程集成) 处理 I/O
 - [C08 算法](#示例5-算法与性能优化集成) 优化核心计算
 
-### 场景3: 嵌入式 + 云端协同
+### 场景3: 嵌入式 + 云端协同 {#场景3-嵌入式-云端协同}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -419,7 +419,7 @@ fn test_wasm_integration() {
 - 服务端：[C10 网络](#示例2-异步与网络编程集成) + [C06 异步](#示例2-异步与网络编程集成)
 - 通信：共享的类型定义（[C02 类型系统](#示例1-所有权与类型系统集成)）
 
-### 场景4: 可扩展的插件系统
+### 场景4: 可扩展的插件系统 {#场景4-可扩展的插件系统}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -431,7 +431,7 @@ fn test_wasm_integration() {
 
 ---
 
-## 形式化链接
+## 形式化链接 {#形式化链接}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -458,13 +458,13 @@ fn test_wasm_integration() {
 
 ---
 
-## Rust 1.95+ 跨模块集成最佳实践
+## Rust 1.95+ 跨模块集成最佳实践 {#rust-195-跨模块集成最佳实践}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.96.0+
 
-### LazyLock 在跨模块配置共享中的应用
+### LazyLock 在跨模块配置共享中的应用 {#lazylock-在跨模块配置共享中的应用}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -484,7 +484,7 @@ pub fn is_config_ready() -> bool {
 }
 ```
 
-### ControlFlow 在跨模块错误处理中的应用
+### ControlFlow 在跨模块错误处理中的应用 {#controlflow-在跨模块错误处理中的应用}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -513,7 +513,7 @@ where
 }
 ```
 
-### array_windows 在跨模块数据流中的应用
+### array_windows 在跨模块数据流中的应用 {#array_windows-在跨模块数据流中的应用}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -550,7 +550,7 @@ pub fn process_module_pipeline(
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -559,7 +559,7 @@ pub fn process_module_pipeline(
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

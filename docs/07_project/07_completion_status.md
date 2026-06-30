@@ -1,4 +1,4 @@
-# 项目完成度矩阵
+# 项目完成度矩阵 {#项目完成度矩阵}
 
 > **分级**: [A]
 > **Bloom 层级**: L4-L5 (分析/评价)
@@ -8,26 +8,26 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [项目完成度矩阵](#项目完成度矩阵)
-  - [📑 目录](#-目录)
-  - [📊 总体概览](#-总体概览)
-  - [📦 Crates 完成度](#-crates-完成度)
-  - [📚 Content 完成度](#-content-完成度)
+  - [📑 目录](#目录)
+  - [📊 总体概览](#总体概览)
+  - [📦 Crates 完成度](#crates-完成度)
+  - [📚 Content 完成度](#content-完成度)
     - [详细清单](#详细清单)
       - [emerging/](#emerging)
       - [ecosystem/](#ecosystem)
       - [production/](#production)
       - [academic/](#academic)
-  - [📝 Docs 完成度](#-docs-完成度)
-  - [⚠️ 已知问题](#️-已知问题)
+  - [📝 Docs 完成度](#docs-完成度)
+  - [⚠️ 已知问题](#已知问题)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 📊 总体概览
+## 📊 总体概览 {#总体概览}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -41,7 +41,7 @@
 
 ---
 
-## 📦 Crates 完成度
+## 📦 Crates 完成度 {#crates-完成度}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -67,7 +67,7 @@
 
 ---
 
-## 📚 Content 完成度
+## 📚 Content 完成度 {#content-完成度}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -79,11 +79,11 @@
 | academic | 4 | 5 | 80% |
 | **总计** | **23** | **31** | **74%** |
 
-### 详细清单
+### 详细清单 {#详细清单}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-#### emerging/
+#### emerging/ {#emerging}
 
 - [x] `10_rust_1_95_preview.md`
 - [x] `rust_1_96.md`
@@ -93,7 +93,7 @@
 - [x] `wasm_advanced_topics.md`
 - [ ] `const_generics_advanced.md` ⬅️ 本轮
 
-#### ecosystem/
+#### ecosystem/ {#ecosystem}
 
 - [x] `web_frameworks/10_axum_deep_dive.md`
 - [x] `web_frameworks/actix_web_vs_axum.md`
@@ -106,7 +106,7 @@
 - [x] `serialization/serde_best_practices.md`
 - [x] `flutter_rust_10_bridge.md`
 
-#### production/
+#### production/ {#production}
 
 - [x] `10_kubernetes_deployment_guide.md`
 - [x] `observability_guide.md`
@@ -115,7 +115,7 @@
 - [x] `ci_cd_guide.md` ⬅️ 本轮
 - [x] `performance_tuning.md` ⬅️ 本轮
 
-#### academic/
+#### academic/ {#academic}
 
 - [x] `10_tree_borrows_guide.md`
 - [x] `prusti_verification_tutorial.md`
@@ -124,7 +124,7 @@
 
 ---
 
-## 📝 Docs 完成度
+## 📝 Docs 完成度 {#docs-完成度}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -140,7 +140,7 @@
 
 ---
 
-## ⚠️ 已知问题
+## ⚠️ 已知问题 {#已知问题}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -172,7 +172,7 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -181,7 +181,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**

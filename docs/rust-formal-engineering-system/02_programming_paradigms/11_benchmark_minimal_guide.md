@@ -11,7 +11,7 @@
 
 ---
 
-## 形式化链接
+## 形式化链接 {#形式化链接}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -25,11 +25,11 @@
 
 ---
 
-## 基准测试核心概念
+## 基准测试核心概念 {#基准测试核心概念}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 为什么需要基准测试
+### 为什么需要基准测试 {#为什么需要基准测试}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -53,7 +53,7 @@ fn fibonacci(n: u64) -> u64 {
 }
 ```
 
-### 使用 Criterion 进行可靠基准测试
+### 使用 Criterion 进行可靠基准测试 {#使用-criterion-进行可靠基准测试}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -93,7 +93,7 @@ criterion_group!(benches, fibonacci_benchmark);
 criterion_main!(benches);
 ```
 
-### 防止编译器优化（black_box）
+### 防止编译器优化（black_box） {#防止编译器优化black_box}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -123,7 +123,7 @@ pub fn custom_black_box<T>(dummy: T) -> T {
 }
 ```
 
-### 参数化基准测试
+### 参数化基准测试 {#参数化基准测试}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -154,7 +154,7 @@ fn bench_various_sizes(c: &mut Criterion) {
 }
 ```
 
-### 比较不同实现
+### 比较不同实现 {#比较不同实现}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -206,7 +206,7 @@ fn bench_comparison(c: &mut Criterion) {
 }
 ```
 
-### 异步基准测试
+### 异步基准测试 {#异步基准测试}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -236,7 +236,7 @@ fn bench_async(c: &mut Criterion) {
 }
 ```
 
-### 吞吐量测量
+### 吞吐量测量 {#吞吐量测量}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -266,11 +266,11 @@ fn bench_with_throughput(c: &mut Criterion) {
 
 ---
 
-## 基准测试最佳实践
+## 基准测试最佳实践 {#基准测试最佳实践}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 统计显著性
+### 统计显著性 {#统计显著性}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -303,7 +303,7 @@ fn expensive_operation() -> Vec<u32> {
 }
 ```
 
-### 预热与稳定
+### 预热与稳定 {#预热与稳定}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -331,7 +331,7 @@ fn cache_sensitive_operation() -> Vec<f64> {
 }
 ```
 
-### 基准测试隔离
+### 基准测试隔离 {#基准测试隔离}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -359,26 +359,26 @@ fn bench2(c: &mut Criterion) {
 
 ---
 
-## 性能分析工具集成
+## 性能分析工具集成 {#性能分析工具集成}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 使用 perf 分析
+### 使用 perf 分析 {#使用-perf-分析}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```bash
-# 编译并运行基准测试
+# 编译并运行基准测试 {#编译并运行基准测试}
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 $ cargo bench -- --profile-time 10
 
-# 使用 perf 进行详细分析
+# 使用 perf 进行详细分析 {#使用-perf-进行详细分析}
 $ perf record -g target/release/deps/my_benchmark-xxx --bench
 $ perf report
 ```
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
@@ -408,22 +408,22 @@ $ perf report
     - [工具链](#工具链)
   - [相关 crates](#相关-crates)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引-1)
 
-### 使用 cargo-flamegraph
+### 使用 cargo-flamegraph {#使用-cargo-flamegraph}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```bash
-# 安装
+# 安装 {#安装}
 $ cargo install flamegraph
 
-# 生成火焰图
+# 生成火焰图 {#生成火焰图}
 $ cargo flamegraph --bench my_benchmark
 ```
 
-### 内存分配分析
+### 内存分配分析 {#内存分配分析}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -450,7 +450,7 @@ fn profile_memory() {
 
 ---
 
-## 常见陷阱与避免方法
+## 常见陷阱与避免方法 {#常见陷阱与避免方法}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -516,7 +516,7 @@ fn good_bench3(c: &mut Criterion) {
 
 ---
 
-## 快速开始模板
+## 快速开始模板 {#快速开始模板}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -553,11 +553,11 @@ criterion_main!(benches);
 
 ---
 
-## 相关研究笔记
+## 相关研究笔记 {#相关研究笔记}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 实验分析
+### 实验分析 {#实验分析}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -567,7 +567,7 @@ criterion_main!(benches);
 | 编译器优化 | 编译器优化分析 | [../../research_notes/experiments/10_compiler_optimizations.md](../../../archive/research_notes_2026_06_25/experiments/10_compiler_optimizations.md) |
 | 并发性能 | 并发性能测试 | [../../research_notes/experiments/10_concurrency_performance.md](../../../archive/research_notes_2026_06_25/experiments/10_concurrency_performance.md) |
 
-### 工具链
+### 工具链 {#工具链}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -577,7 +577,7 @@ criterion_main!(benches);
 
 ---
 
-## 相关 crates
+## 相关 crates {#相关-crates}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -600,7 +600,7 @@ criterion_main!(benches);
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -609,7 +609,7 @@ criterion_main!(benches);
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引-1}
 
 > **来源: [Wikipedia - Program Optimization](https://en.wikipedia.org/wiki/Program_Optimization)**
 
@@ -629,7 +629,7 @@ criterion_main!(benches);
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引-1}
 
 > **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
 >

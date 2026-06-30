@@ -1,4 +1,4 @@
-# Rust 编译器错误码映射文档
+# Rust 编译器错误码映射文档 {#rust-编译器错误码映射文档}
 
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)
@@ -20,7 +20,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
 > **来源: [Rust Reference - Error Codes](https://doc.rust-lang.org/reference/)** ·
@@ -116,7 +116,7 @@
 
 ---
 
-## 简介
+## 简介 {#简介}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -127,7 +127,7 @@
 - **修复代码**: 提供具体的代码修复示例
 - **深入学习**: 链接到相关的概念文档和形式化理论
 
-### 使用方式
+### 使用方式 {#使用方式}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -140,7 +140,7 @@
 
 ---
 
-## 错误码快速索引
+## 错误码快速索引 {#错误码快速索引}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -159,11 +159,11 @@
 
 ---
 
-## 借用检查错误 (E01xx-E05xx)
+## 借用检查错误 (E01xx-E05xx) {#借用检查错误-e01xx-e05xx}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### E0382 - 使用已移动的值
+### E0382 - 使用已移动的值 {#e0382---使用已移动的值}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -231,7 +231,7 @@ fn main() {
 
 ---
 
-### E0383 - 部分移动
+### E0383 - 部分移动 {#e0383---部分移动}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -307,7 +307,7 @@ fn main() {
 
 ---
 
-### E0499 - 重复可变借用
+### E0499 - 重复可变借用 {#e0499---重复可变借用}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -389,7 +389,7 @@ fn process(s: String) -> String {
 
 ---
 
-### E0502 - 可变与不可变借用共存
+### E0502 - 可变与不可变借用共存 {#e0502---可变与不可变借用共存}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -462,7 +462,7 @@ fn main() {
 
 ---
 
-### E0503 - 使用已移动的值（在借用后）
+### E0503 - 使用已移动的值（在借用后） {#e0503---使用已移动的值在借用后}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -514,7 +514,7 @@ fn main() {
 
 ---
 
-### E0505 - 在借用时移动
+### E0505 - 在借用时移动 {#e0505---在借用时移动}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -559,7 +559,7 @@ fn main() {
 
 ---
 
-### E0506 - 在借用时赋值
+### E0506 - 在借用时赋值 {#e0506---在借用时赋值}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -594,7 +594,7 @@ fn main() {
 
 ---
 
-### E0507 - 从借用内容中移出
+### E0507 - 从借用内容中移出 {#e0507---从借用内容中移出}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -645,7 +645,7 @@ fn main() {
 
 ---
 
-### E0508 - 从数组/元组中移出
+### E0508 - 从数组/元组中移出 {#e0508---从数组元组中移出}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -685,11 +685,11 @@ fn main() {
 
 ---
 
-## 类型系统错误 (E02xx-E03xx)
+## 类型系统错误 (E02xx-E03xx) {#类型系统错误-e02xx-e03xx}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### E0277 - Trait 约束不满足
+### E0277 - Trait 约束不满足 {#e0277---trait-约束不满足}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -750,7 +750,7 @@ fn main() {
 
 ---
 
-### E0282 - 需要类型标注
+### E0282 - 需要类型标注 {#e0282---需要类型标注}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -792,7 +792,7 @@ fn main() {
 
 ---
 
-### E0283 - 类型标注不足
+### E0283 - 类型标注不足 {#e0283---类型标注不足}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -824,7 +824,7 @@ fn main() {
 
 ---
 
-### E0308 - 类型不匹配
+### E0308 - 类型不匹配 {#e0308---类型不匹配}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -870,7 +870,7 @@ fn main() {
 
 ---
 
-### E0308 - 返回值类型不匹配
+### E0308 - 返回值类型不匹配 {#e0308---返回值类型不匹配}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -899,11 +899,11 @@ fn add_result(a: i32, b: i32) -> Result<i32, String> {
 
 ---
 
-## 生命周期错误 (E05xx-E06xx)
+## 生命周期错误 (E05xx-E06xx) {#生命周期错误-e05xx-e06xx}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### E0106 - 需要生命周期标注
+### E0106 - 需要生命周期标注 {#e0106---需要生命周期标注}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -952,7 +952,7 @@ fn main() {
 
 ---
 
-### E0107 - 生命周期参数数量不匹配
+### E0107 - 生命周期参数数量不匹配 {#e0107---生命周期参数数量不匹配}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -990,7 +990,7 @@ fn main() {
 
 ---
 
-### E0597 - 生命周期不足
+### E0597 - 生命周期不足 {#e0597---生命周期不足}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -1059,7 +1059,7 @@ fn main() {
 
 ---
 
-### E0310 - 参数生命周期不足
+### E0310 - 参数生命周期不足 {#e0310---参数生命周期不足}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -1103,7 +1103,7 @@ fn make_container_owned(s: &str) -> ContainerOwned {
 
 ---
 
-### E0495 - 生命周期不匹配
+### E0495 - 生命周期不匹配 {#e0495---生命周期不匹配}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -1140,11 +1140,11 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> Either<'a, 'b> {
 
 ---
 
-## 所有权错误
+## 所有权错误 {#所有权错误}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### E0381 - 使用未初始化变量
+### E0381 - 使用未初始化变量 {#e0381---使用未初始化变量}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -1172,7 +1172,7 @@ fn main() {
 
 ---
 
-### E0384 - 对不可变变量赋值
+### E0384 - 对不可变变量赋值 {#e0384---对不可变变量赋值}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -1203,11 +1203,11 @@ fn main() {
 
 ---
 
-## 模式匹配错误
+## 模式匹配错误 {#模式匹配错误}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### E0004 - 非穷尽模式匹配
+### E0004 - 非穷尽模式匹配 {#e0004---非穷尽模式匹配}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -1263,7 +1263,7 @@ fn main() {
 
 ---
 
-### E0005 - 不可反驳模式
+### E0005 - 不可反驳模式 {#e0005---不可反驳模式}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -1305,7 +1305,7 @@ fn main() {
 
 ---
 
-### E0297 - 模式绑定不匹配
+### E0297 - 模式绑定不匹配 {#e0297---模式绑定不匹配}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -1335,11 +1335,11 @@ fn bar(opt: Option<i32>) {
 
 ---
 
-## 宏系统错误
+## 宏系统错误 {#宏系统错误}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### E0424 - self 使用错误
+### E0424 - self 使用错误 {#e0424---self-使用错误}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -1384,7 +1384,7 @@ impl Foo {
 
 ---
 
-### E0425 - 未找到函数/变量
+### E0425 - 未找到函数/变量 {#e0425---未找到函数变量}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -1411,7 +1411,7 @@ fn main() {
 
 ---
 
-### E0554 - 未知特性
+### E0554 - 未知特性 {#e0554---未知特性}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -1441,11 +1441,11 @@ fn main() {
 
 ---
 
-## 模块系统错误
+## 模块系统错误 {#模块系统错误}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### E0432 - 未解析的导入
+### E0432 - 未解析的导入 {#e0432---未解析的导入}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -1478,7 +1478,7 @@ fn main() {}
 
 ---
 
-### E0433 - 未找到 crate
+### E0433 - 未找到 crate {#e0433---未找到-crate}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -1497,7 +1497,7 @@ fn main() {}
 **解决方案**:
 
 ```toml
-# Cargo.toml
+# Cargo.toml {#cargotoml}
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
 ```
@@ -1513,7 +1513,7 @@ fn main() {}
 
 ---
 
-### E0463 - 找不到 crate
+### E0463 - 找不到 crate {#e0463---找不到-crate}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -1524,19 +1524,19 @@ fn main() {}
 **解决方案**:
 
 ```bash
-# 方案 1: 重新构建
+# 方案 1: 重新构建 {#方案-1-重新构建}
 cargo clean
 cargo build
 
-# 方案 2: 更新依赖
+# 方案 2: 更新依赖 {#方案-2-更新依赖}
 cargo update
 
-# 方案 3: 检查 Cargo.toml 中的依赖声明
+# 方案 3: 检查 Cargo.toml 中的依赖声明 {#方案-3-检查-cargotoml-中的依赖声明}
 ```
 
 ---
 
-### E0603 - 私有模块
+### E0603 - 私有模块 {#e0603---私有模块}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -1574,11 +1574,11 @@ pub use internal::secret;  // ✅ 重新导出
 
 ---
 
-## 变量与可变性错误
+## 变量与可变性错误 {#变量与可变性错误}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### E0596 - 无法借用不可变变量为可变
+### E0596 - 无法借用不可变变量为可变 {#e0596---无法借用不可变变量为可变}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -1607,7 +1607,7 @@ fn main() {
 
 ---
 
-### E0599 - 未找到方法
+### E0599 - 未找到方法 {#e0599---未找到方法}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -1636,7 +1636,7 @@ fn main() {
 
 ---
 
-### E0609 - 未找到字段
+### E0609 - 未找到字段 {#e0609---未找到字段}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -1668,7 +1668,7 @@ fn main() {
 
 ---
 
-### E0614 - 类型不能进行此操作
+### E0614 - 类型不能进行此操作 {#e0614---类型不能进行此操作}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -1697,7 +1697,7 @@ fn main() {
 
 ---
 
-### E0616 - 私有字段
+### E0616 - 私有字段 {#e0616---私有字段}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -1746,11 +1746,11 @@ fn main() {
 
 ---
 
-## Trait 与泛型错误
+## Trait 与泛型错误 {#trait-与泛型错误}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### E0201 - 重复的 Trait 实现
+### E0201 - 重复的 Trait 实现 {#e0201---重复的-trait-实现}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -1794,7 +1794,7 @@ impl Bar for Foo {
 
 ---
 
-### E0323 - 错误的方法签名
+### E0323 - 错误的方法签名 {#e0323---错误的方法签名}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -1836,7 +1836,7 @@ impl Greet for Person {
 
 ---
 
-### E0392 - 参数未使用
+### E0392 - 参数未使用 {#e0392---参数未使用}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -1876,7 +1876,7 @@ struct Wrapper<T> {
 
 ---
 
-### E0275 - Trait 解析无限递归
+### E0275 - Trait 解析无限递归 {#e0275---trait-解析无限递归}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -1897,11 +1897,11 @@ trait Bar: Foo {}  // ✅ 单向约束
 
 ---
 
-## 并发与异步错误
+## 并发与异步错误 {#并发与异步错误}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### E0373 - 闭包生命周期问题
+### E0373 - 闭包生命周期问题 {#e0373---闭包生命周期问题}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -1950,7 +1950,7 @@ fn make_closure_static() -> impl Fn() -> i32 {
 
 ---
 
-### E0378 - Send/Sync 约束不满足
+### E0378 - Send/Sync 约束不满足 {#e0378---sendsync-约束不满足}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -1993,7 +1993,7 @@ fn main() {
 
 ---
 
-### E0700 - 异步块中借用
+### E0700 - 异步块中借用 {#e0700---异步块中借用}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -2048,7 +2048,7 @@ async fn some_async() {}
 
 ---
 
-### E0733 - 递归异步函数
+### E0733 - 递归异步函数 {#e0733---递归异步函数}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -2081,11 +2081,11 @@ fn fib(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 
 ---
 
-## 其他常见错误
+## 其他常见错误 {#其他常见错误}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### E0252 - 名称冲突
+### E0252 - 名称冲突 {#e0252---名称冲突}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -2115,7 +2115,7 @@ fn main() {
 
 ---
 
-### E0301 - 可变与不可变模式
+### E0301 - 可变与不可变模式 {#e0301---可变与不可变模式}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -2140,7 +2140,7 @@ fn main() {
 
 ---
 
-### E0446 - 私有类型在公共接口
+### E0446 - 私有类型在公共接口 {#e0446---私有类型在公共接口}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -2180,7 +2180,7 @@ mod inner {
 
 ---
 
-### E0515 - 返回局部变量的引用
+### E0515 - 返回局部变量的引用 {#e0515---返回局部变量的引用}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -2219,7 +2219,7 @@ fn good_lifetime<'a>(input: &'a str) -> &'a str {
 
 ---
 
-### E0521 - 借用数据逃逸
+### E0521 - 借用数据逃逸 {#e0521---借用数据逃逸}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -2240,7 +2240,7 @@ fn get_ref() -> &'static str {
 
 ---
 
-### E0658 - 不稳定特性
+### E0658 - 不稳定特性 {#e0658---不稳定特性}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -2260,7 +2260,7 @@ fn main() {
 
 ---
 
-### E0689 - 整数类型后缀
+### E0689 - 整数类型后缀 {#e0689---整数类型后缀}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -2289,11 +2289,11 @@ fn main() {
 
 ---
 
-## 警告 (W开头)
+## 警告 (W开头) {#警告-w开头}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### W0001 - 未使用的变量
+### W0001 - 未使用的变量 {#w0001---未使用的变量}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -2327,7 +2327,7 @@ fn main() {
 
 ---
 
-### W0002 - 未使用的导入
+### W0002 - 未使用的导入 {#w0002---未使用的导入}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -2358,7 +2358,7 @@ fn main() {
 
 ---
 
-### W0003 - 不可达代码
+### W0003 - 不可达代码 {#w0003---不可达代码}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -2377,7 +2377,7 @@ fn main() {
 
 ---
 
-### W0004 - 未使用的 mut
+### W0004 - 未使用的 mut {#w0004---未使用的-mut}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -2405,7 +2405,7 @@ fn main() {
 
 ---
 
-### W0005 - 死代码
+### W0005 - 死代码 {#w0005---死代码}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -2440,7 +2440,7 @@ fn main() {}
 
 ---
 
-### W0006 - 未处理的 Result
+### W0006 - 未处理的 Result {#w0006---未处理的-result}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -2480,7 +2480,7 @@ fn main() {
 
 ---
 
-## 错误码快速修复索引表
+## 错误码快速修复索引表 {#错误码快速修复索引表}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -2511,11 +2511,11 @@ fn main() {
 
 ---
 
-## 相关资源
+## 相关资源 {#相关资源}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 项目内文档
+### 项目内文档 {#项目内文档}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -2529,7 +2529,7 @@ fn main() {
 | 异步编程 | `crates/c06_async/docs/` | async/await |
 | 宏系统 | `crates/c11_macro_system/docs/` | 宏编程指南 |
 
-### 速查卡
+### 速查卡 {#速查卡}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -2540,7 +2540,7 @@ fn main() {
 | 错误处理 | `quick_reference/02_error_handling_cheatsheet.md` | 错误处理模式 |
 | 生命周期 | `quick_reference/lifetimes_cheatsheet.md` | 生命周期速查 |
 
-### 官方资源
+### 官方资源 {#官方资源}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -2548,7 +2548,7 @@ fn main() {
 - [Rust Reference](https://doc.rust-lang.org/reference/) - 语言参考
 - [The Rust Book](https://doc.rust-lang.org/book/) - Rust 官方教程
 
-### 形式化理论
+### 形式化理论 {#形式化理论}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -2558,7 +2558,7 @@ fn main() {
 
 ---
 
-## 故障排查建议
+## 故障排查建议 {#故障排查建议}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -2571,7 +2571,7 @@ fn main() {
 
 ---
 
-## Rust 1.95+ 更新说明
+## Rust 1.95+ 更新说明 {#rust-195-更新说明}
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 > **适用版本**: Rust 1.96.0+
@@ -2604,7 +2604,7 @@ Rust 1.94 对错误诊断进行了多项改进：
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
 > **来源: [Wikipedia - Error Message](https://en.wikipedia.org/wiki/Error_Message)**
@@ -2619,7 +2619,7 @@ Rust 1.94 对错误诊断进行了多项改进：
 
 ---
 
-## 思维导图：Rust 错误码体系
+## 思维导图：Rust 错误码体系 {#思维导图rust-错误码体系}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -2641,7 +2641,7 @@ graph TD
 
 ---
 
-## 决策树：编译错误诊断流程
+## 决策树：编译错误诊断流程 {#决策树编译错误诊断流程}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 

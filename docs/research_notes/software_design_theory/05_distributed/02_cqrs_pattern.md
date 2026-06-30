@@ -1,4 +1,4 @@
-# CQRS 模式形式化定义
+# CQRS 模式形式化定义 {#cqrs-模式形式化定义}
 
 > **概念族**: 软件设计 / 分布式模式
 
@@ -30,7 +30,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -39,7 +39,7 @@
 >
 
 - [CQRS 模式形式化定义](#cqrs-模式形式化定义)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 概念定义 (Def)](#1-概念定义-def)
     - [Def CQ1: CQRS (Command Query Responsibility Segregation)](#def-cq1-cqrs-command-query-responsibility-segregation)
     - [Def CQ2: 命令与查询的分离](#def-cq2-命令与查询的分离)
@@ -53,7 +53,7 @@
     - [Theorem CQ2: 查询可扩展性](#theorem-cq2-查询可扩展性)
   - [4. Rust 实现示例](#4-rust-实现示例)
   - [5. 与其他模式的关系](#5-与其他模式的关系)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -61,13 +61,13 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 1. 概念定义 (Def)
+## 1. 概念定义 (Def) {#1-概念定义-def}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Def CQ1: CQRS (Command Query Responsibility Segregation)
+### Def CQ1: CQRS (Command Query Responsibility Segregation) {#def-cq1-cqrs-command-query-responsibility-segregation}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -95,7 +95,7 @@ CQRS_System := (C, Q, S_c, S_q, P_sync)
 
 ```
 
-### Def CQ2: 命令与查询的分离
+### Def CQ2: 命令与查询的分离 {#def-cq2-命令与查询的分离}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -115,7 +115,7 @@ Query   := input → S_q → output
 
 - **查询**无副作用（纯函数）
 
-### Def CQ3: 最终一致性边界
+### Def CQ3: 最终一致性边界 {#def-cq3-最终一致性边界}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -131,13 +131,13 @@ Consistency_Boundary := Δt ∈ Time
 
 ---
 
-## 2. 基本假设 (Axiom)
+## 2. 基本假设 (Axiom) {#2-基本假设-axiom}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### Axiom CQ1: 命令不可重复
+### Axiom CQ1: 命令不可重复 {#axiom-cq1-命令不可重复}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -149,7 +149,7 @@ Consistency_Boundary := Δt ∈ Time
 
 命令执行后，同一命令再次执行产生不同结果（基于版本/ID去重）。
 
-### Axiom CQ2: 投影单调性
+### Axiom CQ2: 投影单调性 {#axiom-cq2-投影单调性}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -161,7 +161,7 @@ Consistency_Boundary := Δt ∈ Time
 
 同步投影是**单调的**，新事件不会撤销已同步的数据。
 
-### Axiom CQ3: 查询一致性级别
+### Axiom CQ3: 查询一致性级别 {#axiom-cq3-查询一致性级别}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -175,13 +175,13 @@ Query_Consistency(q) ∈ {Strong, Eventual, Bounded_Staleness}
 
 ---
 
-## 3. 定理 (Theorem)
+## 3. 定理 (Theorem) {#3-定理-theorem}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### Theorem CQ1: 读写无冲突
+### Theorem CQ1: 读写无冲突 {#theorem-cq1-读写无冲突}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -201,7 +201,7 @@ Query_Consistency(q) ∈ {Strong, Eventual, Bounded_Staleness}
 
 4. 因此命令和查询无资源冲突
 
-### Theorem CQ2: 查询可扩展性
+### Theorem CQ2: 查询可扩展性 {#theorem-cq2-查询可扩展性}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -223,7 +223,7 @@ Query_Consistency(q) ∈ {Strong, Eventual, Bounded_Staleness}
 
 ---
 
-## 4. Rust 实现示例
+## 4. Rust 实现示例 {#4-rust-实现示例}
 
 >
 
@@ -339,7 +339,7 @@ impl<E, S> ProjectionSync<E, S> {
 
 ---
 
-## 5. 与其他模式的关系
+## 5. 与其他模式的关系 {#5-与其他模式的关系}
 
 >
 
@@ -365,7 +365,7 @@ impl<E, S> ProjectionSync<E, S> {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -375,13 +375,13 @@ impl<E, S> ProjectionSync<E, S> {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -397,7 +397,7 @@ impl<E, S> ProjectionSync<E, S> {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -407,7 +407,7 @@ impl<E, S> ProjectionSync<E, S> {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -439,7 +439,7 @@ impl<E, S> ProjectionSync<E, S> {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -451,7 +451,7 @@ impl<E, S> ProjectionSync<E, S> {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - CQRS](https://en.wikipedia.org/wiki/CQRS)**
 

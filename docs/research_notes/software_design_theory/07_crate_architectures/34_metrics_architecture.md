@@ -8,7 +8,7 @@
 
 ---
 
-# metrics Crate 架构解构
+# metrics Crate 架构解构 {#metrics-crate-架构解构}
 
 > **最后更新**: 2026-06-29
 >
@@ -24,7 +24,7 @@
 
 ---
 
-## 1. 引言：Rust 指标生态的门面（Facade）
+## 1. 引言：Rust 指标生态的门面（Facade） {#1-引言rust-指标生态的门面facade}
 
 > **[来源: [metrics crates.io](https://crates.io/crates/metrics)]**
 
@@ -57,11 +57,11 @@ counter!("queries_total", "op" => "search").increment(1);
 
 ---
 
-## 2. 核心 API 架构
+## 2. 核心 API 架构 {#2-核心-api-架构}
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 2.1 Facade + Recorder 两层模型
+### 2.1 Facade + Recorder 两层模型 {#21-facade-recorder-两层模型}
 
 ```mermaid
 graph TD
@@ -84,7 +84,7 @@ graph TD
 
 > [来源: [metrics Macro Docs](https://docs.rs/metrics/latest/metrics/macro.counter.html)]
 
-### 2.2 指标类型
+### 2.2 指标类型 {#22-指标类型}
 
 `metrics` 仅定义三种基础类型，覆盖绝大多数可观测性场景：
 
@@ -96,7 +96,7 @@ graph TD
 
 > [来源: [metrics Kind Docs](https://docs.rs/metrics/latest/metrics/)]
 
-### 2.3 安装 Recorder
+### 2.3 安装 Recorder {#23-安装-recorder}
 
 以 `metrics-exporter-prometheus` 为例：
 
@@ -110,7 +110,7 @@ PrometheusBuilder::new()
 
 > [来源: [metrics-exporter-prometheus docs.rs](https://docs.rs/metrics-exporter-prometheus/latest/metrics_exporter_prometheus/)]
 
-### 2.4 描述指标
+### 2.4 描述指标 {#24-描述指标}
 
 `describe_*!` 宏可在 Recorder 中注册指标的元数据，便于在首次 emit 之前就暴露指标：
 
@@ -123,7 +123,7 @@ metrics::describe_histogram!("http_request_duration_seconds", Unit::Seconds, "HT
 
 ---
 
-## 3. 类型系统利用
+## 3. 类型系统利用 {#3-类型系统利用}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -139,7 +139,7 @@ metrics::describe_histogram!("http_request_duration_seconds", Unit::Seconds, "HT
 
 ---
 
-## 4. 反例边界
+## 4. 反例边界 {#4-反例边界}
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -157,7 +157,7 @@ metrics::describe_histogram!("http_request_duration_seconds", Unit::Seconds, "HT
 
 ---
 
-## 5. 代码示例锚点
+## 5. 代码示例锚点 {#5-代码示例锚点}
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -169,7 +169,7 @@ metrics::describe_histogram!("http_request_duration_seconds", Unit::Seconds, "HT
 
 ---
 
-## 6. 相关架构与延伸阅读
+## 6. 相关架构与延伸阅读 {#6-相关架构与延伸阅读}
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -180,7 +180,7 @@ metrics::describe_histogram!("http_request_duration_seconds", Unit::Seconds, "HT
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [metrics crates.io](https://crates.io/crates/metrics)]**
 >
@@ -200,7 +200,7 @@ metrics::describe_histogram!("http_request_duration_seconds", Unit::Seconds, "HT
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
 > **P0（官方/必读）**:
 >
@@ -220,7 +220,7 @@ metrics::describe_histogram!("http_request_duration_seconds", Unit::Seconds, "HT
 > - [来源: [Prometheus Rust Client](https://github.com/prometheus/client_rust)] — 与直接 Prometheus client 对比参考
 > - [来源: [This Week in Rust](https://this-week-in-rust.org/)]
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

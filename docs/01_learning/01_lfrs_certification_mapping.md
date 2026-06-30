@@ -1,4 +1,4 @@
-# Linux Foundation Certified Rust Programmer (LFRS) 认证映射
+# Linux Foundation Certified Rust Programmer (LFRS) 认证映射 {#linux-foundation-certified-rust-programmer-lfrs-认证映射}
 
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
@@ -16,42 +16,42 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Linux Foundation Certified Rust Programmer (LFRS) 认证映射](#linux-foundation-certified-rust-programmer-lfrs-认证映射)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [考点总览](#考点总览)
   - [考点 1: 语法、类型与控制流](#考点-1-语法类型与控制流)
-    - [映射文件](#映射文件)
-    - [练习验证](#练习验证)
+    - [映射文件](#映射文件-9)
+    - [练习验证](#练习验证-9)
   - [考点 2: Ownership、Borrowing 与 Lifetimes](#考点-2-ownershipborrowing-与-lifetimes)
-    - [映射文件](#映射文件-1)
-    - [练习验证](#练习验证-1)
+    - [映射文件](#映射文件-9)
+    - [练习验证](#练习验证-9)
   - [考点 3: Structs、Enums 与模式匹配](#考点-3-structsenums-与模式匹配)
-    - [映射文件](#映射文件-2)
-    - [练习验证](#练习验证-2)
+    - [映射文件](#映射文件-9)
+    - [练习验证](#练习验证-9)
   - [考点 4: 模块与 Crates](#考点-4-模块与-crates)
-    - [映射文件](#映射文件-3)
-    - [练习验证](#练习验证-3)
+    - [映射文件](#映射文件-9)
+    - [练习验证](#练习验证-9)
   - [考点 5: 集合与字符串](#考点-5-集合与字符串)
-    - [映射文件](#映射文件-4)
-    - [练习验证](#练习验证-4)
+    - [映射文件](#映射文件-9)
+    - [练习验证](#练习验证-9)
   - [考点 6: 错误处理](#考点-6-错误处理)
-    - [映射文件](#映射文件-5)
-    - [练习验证](#练习验证-5)
+    - [映射文件](#映射文件-9)
+    - [练习验证](#练习验证-9)
   - [考点 7: Traits 与泛型](#考点-7-traits-与泛型)
-    - [映射文件](#映射文件-6)
-    - [练习验证](#练习验证-6)
+    - [映射文件](#映射文件-9)
+    - [练习验证](#练习验证-9)
   - [考点 8: 测试](#考点-8-测试)
-    - [映射文件](#映射文件-7)
-    - [练习验证](#练习验证-7)
+    - [映射文件](#映射文件-9)
+    - [练习验证](#练习验证-9)
   - [考点 9: 闭包、迭代器与 Smart Pointers](#考点-9-闭包迭代器与-smart-pointers)
-    - [映射文件](#映射文件-8)
+    - [映射文件](#映射文件-9)
     - [补充计划](#补充计划)
-    - [练习验证](#练习验证-8)
-  - [考点 10: 并发（线程 / 通道 / async）](#考点-10-并发线程--通道--async)
+    - [练习验证](#练习验证-9)
+  - [考点 10: 并发（线程 / 通道 / async）](#考点-10-并发线程-通道-async)
     - [映射文件](#映射文件-9)
     - [缺失内容](#缺失内容)
     - [练习验证](#练习验证-9)
@@ -63,7 +63,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 考点总览
+## 考点总览 {#考点总览}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -82,13 +82,13 @@
 
 ---
 
-## 考点 1: 语法、类型与控制流
+## 考点 1: 语法、类型与控制流 {#考点-1-语法类型与控制流}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **掌握程度**: ✅ 完整
 
-### 映射文件
+### 映射文件 {#映射文件-9}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -102,7 +102,7 @@
 | 函数 | `crates/c03_control_fn/src/function/` | 参数、返回值、语句 vs 表达式 |
 | 注释与文档 | `docs/02_reference/quick_reference/02_control_flow_functions_cheatsheet.md` | 速查卡 |
 
-### 练习验证
+### 练习验证 {#练习验证-9}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -112,13 +112,13 @@
 
 ---
 
-## 考点 2: Ownership、Borrowing 与 Lifetimes
+## 考点 2: Ownership、Borrowing 与 Lifetimes {#考点-2-ownershipborrowing-与-lifetimes}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **掌握程度**: ✅ 完整
 
-### 映射文件
+### 映射文件 {#映射文件-9}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -131,7 +131,7 @@
 | Copy vs Move | `crates/c01_ownership_borrow_scope/src/copy_move/` | 语义差异与实现 |
 | 内部可变性 | `crates/c01_ownership_borrow_scope/src/internal_mut/` | Cell、RefCell、UnsafeCell |
 
-### 练习验证
+### 练习验证 {#练习验证-9}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -146,13 +146,13 @@
 
 ---
 
-## 考点 3: Structs、Enums 与模式匹配
+## 考点 3: Structs、Enums 与模式匹配 {#考点-3-structsenums-与模式匹配}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **掌握程度**: ✅ 完整
 
-### 映射文件
+### 映射文件 {#映射文件-9}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -164,7 +164,7 @@
 | `Option<T>` | `crates/c03_control_fn/src/error_handling/` | 空值安全替代 |
 | 方法语法 | `crates/c02_type_system/src/type_class/` | impl 块、关联函数 |
 
-### 练习验证
+### 练习验证 {#练习验证-9}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -174,13 +174,13 @@
 
 ---
 
-## 考点 4: 模块与 Crates
+## 考点 4: 模块与 Crates {#考点-4-模块与-crates}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **掌握程度**: ✅ 完整
 
-### 映射文件
+### 映射文件 {#映射文件-9}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -191,7 +191,7 @@
 | 路径系统 | `docs/02_reference/quick_reference/02_modules_cheatsheet.md` | 绝对路径、相对路径、super |
 | 可见性 | 所有 crate 的 `src/lib.rs` | pub、pub(crate)、pub(super) 实例 |
 
-### 练习验证
+### 练习验证 {#练习验证-9}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -200,13 +200,13 @@
 
 ---
 
-## 考点 5: 集合与字符串
+## 考点 5: 集合与字符串 {#考点-5-集合与字符串}
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **掌握程度**: ✅ 完整
 
-### 映射文件
+### 映射文件 {#映射文件-9}
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -219,7 +219,7 @@
 | BTreeMap / BTreeSet | `crates/c02_type_system/src/type_composition/collection/` | 有序集合 |
 | 迭代器 | `docs/02_reference/quick_reference/02_collections_iterators_cheatsheet.md` | 迭代器适配器 |
 
-### 练习验证
+### 练习验证 {#练习验证-9}
 
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -229,13 +229,13 @@
 
 ---
 
-## 考点 6: 错误处理
+## 考点 6: 错误处理 {#考点-6-错误处理}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **掌握程度**: ✅ 完整
 
-### 映射文件
+### 映射文件 {#映射文件-9}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -247,7 +247,7 @@
 | 自定义错误 | `crates/c02_type_system/src/advanced_error_handling.rs` | Error trait 实现 |
 | anyhow / thiserror | `docs/05_guides/10_best_practices.md` | 生态库推荐 |
 
-### 练习验证
+### 练习验证 {#练习验证-9}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -257,13 +257,13 @@
 
 ---
 
-## 考点 7: Traits 与泛型
+## 考点 7: Traits 与泛型 {#考点-7-traits-与泛型}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **掌握程度**: ✅ 完整
 
-### 映射文件
+### 映射文件 {#映射文件-9}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -276,7 +276,7 @@
 | 特质对象 | `crates/c04_generic/src/polymorphism/trait_object.rs` | dyn Trait 动态分发 |
 | 运算符重载 | `crates/c04_generic/src/trait_bound/operations.rs` | std::ops 特质 |
 
-### 练习验证
+### 练习验证 {#练习验证-9}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -292,13 +292,13 @@
 
 ---
 
-## 考点 8: 测试
+## 考点 8: 测试 {#考点-8-测试}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **掌握程度**: ✅ 完整
 
-### 映射文件
+### 映射文件 {#映射文件-9}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -312,7 +312,7 @@
 | Miri | `docs/03_guides/03_miri_guide.md` | 未定义行为检测 |
 | 覆盖率 | `docs/03_guides/03_test_coverage.md` | tarpaulin 使用 |
 
-### 练习验证
+### 练习验证 {#练习验证-9}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -321,13 +321,13 @@
 
 ---
 
-## 考点 9: 闭包、迭代器与 Smart Pointers
+## 考点 9: 闭包、迭代器与 Smart Pointers {#考点-9-闭包迭代器与-smart-pointers}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **掌握程度**: ⚠️ 部分 (85%)
 
-### 映射文件
+### 映射文件 {#映射文件-9}
 
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -343,7 +343,7 @@
 | `Cow<T>` | — | 写时克隆 | ❌ 缺失 |
 | 自定义智能指针 | — | Deref/Drop 实现 | ❌ 缺失 |
 
-### 补充计划
+### 补充计划 {#补充计划}
 
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -351,7 +351,7 @@
 - 增加 `exercises/src/ownership_borrowing/ex06_cow.rs` (Cow 练习)
 - 增加 `exercises/src/ownership_borrowing/ex07_custom_smart_pointer.rs` (Deref/Drop)
 
-### 练习验证
+### 练习验证 {#练习验证-9}
 
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -362,13 +362,13 @@
 
 ---
 
-## 考点 10: 并发（线程 / 通道 / async）
+## 考点 10: 并发（线程 / 通道 / async） {#考点-10-并发线程-通道-async}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **掌握程度**: ⚠️ 部分 (90%)
 
-### 映射文件
+### 映射文件 {#映射文件-9}
 
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -387,14 +387,14 @@
 | 无锁数据结构 | `crates/c05_threads/src/lockfree/` | 高级并发 | ✅ |
 | async trait | — | async-trait crate | ⚠️ 部分 |
 
-### 缺失内容
+### 缺失内容 {#缺失内容}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
 - `async fn` in trait（Rust 1.75+ 原生支持，项目已有但分散）
 - 更系统的 async 错误处理模式专题
 
-### 练习验证
+### 练习验证 {#练习验证-9}
 
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -412,11 +412,11 @@
 
 ---
 
-## 学习路径建议
+## 学习路径建议 {#学习路径建议}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 路径 A：按 LFRS 考点顺序学习
+### 路径 A：按 LFRS 考点顺序学习 {#路径-a按-lfrs-考点顺序学习}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -431,7 +431,7 @@
 9. 考点 9 → `crates/c03_control_fn/src/closure/` + 补充 Cow/自定义智能指针
 10. 考点 10 → `crates/c05_threads/` + `crates/c06_async/`
 
-### 路径 B：以练习驱动
+### 路径 B：以练习驱动 {#路径-b以练习驱动}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -442,7 +442,7 @@
 
 ---
 
-## 量化评估标准
+## 量化评估标准 {#量化评估标准}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -454,7 +454,7 @@
 
 ---
 
-## 相关文档
+## 相关文档 {#相关文档}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -476,7 +476,7 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -485,7 +485,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

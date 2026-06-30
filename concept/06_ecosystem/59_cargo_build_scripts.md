@@ -12,8 +12,8 @@
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: T×Ops — 工具链与运维构建
 > **定位**: 把 `build.rs` 从“神秘的编译前脚本”还原为可预测、可调试、可重用的构建阶段工具。
-> **前置概念**: [Toolchain](01_toolchain.md) · [Cross Compilation](17_cross_compilation.md)
-> **后置概念**: [Cargo Registries and Publishing](60_cargo_registries_and_publishing.md) · [DevOps and CI/CD](28_devops_and_ci_cd.md)
+> **前置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
+> **后置概念**: [Cargo Registries and Publishing](62_cargo_registries_and_publishing.md) · [DevOps and CI/CD](28_devops_and_ci_cd.md)
 
 ---
 

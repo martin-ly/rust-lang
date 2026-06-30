@@ -1,4 +1,4 @@
-# research_notes 层次化梳理与映射总结
+# research_notes 层次化梳理与映射总结 {#research_notes-层次化梳理与映射总结}
 
 > **概念族**: 元/导航/索引
 
@@ -24,7 +24,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -33,19 +33,19 @@
 >
 
 - [research\_notes 层次化梳理与映射总结](#research_notes-层次化梳理与映射总结)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、按三大支柱的文档树](#一按三大支柱的文档树)
-  - [二、概念族 ↔ 文档 ↔ Def/Axiom/定理 映射表](#二概念族--文档--defaxiom定理-映射表)
+  - [二、概念族 ↔ 文档 ↔ Def/Axiom/定理 映射表](#二概念族-文档-defaxiom定理-映射表)
     - [2.1 支柱 1（公理判定）](#21-支柱-1公理判定)
     - [2.2 支柱 2（语言表达力）](#22-支柱-2语言表达力)
     - [2.3 支柱 3（组件组合）](#23-支柱-3组件组合)
-  - [三、文档 ↔ 思维表征 映射表](#三文档--思维表征-映射表)
-    - [3.1 按文档 → 思维表征](#31-按文档--思维表征)
-    - [3.2 按思维表征 → 文档（入口）](#32-按思维表征--文档入口)
+  - [三、文档 ↔ 思维表征 映射表](#三文档-思维表征-映射表)
+    - [3.1 按文档 → 思维表征](#31-按文档-思维表征)
+    - [3.2 按思维表征 → 文档（入口）](#32-按思维表征-文档入口)
   - [四、文档依赖关系（简表）](#四文档依赖关系简表)
   - [五、使用说明](#五使用说明)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 更新](#rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -53,7 +53,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 一、按三大支柱的文档树
+## 一、按三大支柱的文档树 {#一按三大支柱的文档树}
 
 >
 
@@ -171,13 +171,13 @@ research_notes/
 
 ---
 
-## 二、概念族 ↔ 文档 ↔ Def/Axiom/定理 映射表
+## 二、概念族 ↔ 文档 ↔ Def/Axiom/定理 映射表 {#二概念族-文档-defaxiom定理-映射表}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 支柱 1（公理判定）
+### 2.1 支柱 1（公理判定） {#21-支柱-1公理判定}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -205,7 +205,7 @@ research_notes/
 
 | 控制流 | [formal_methods/README](formal_methods/README.md) | A-CF1 | 与 T-TY3 衔接 | |
 
-### 2.2 支柱 2（语言表达力）
+### 2.2 支柱 2（语言表达力） {#22-支柱-2语言表达力}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -223,7 +223,7 @@ research_notes/
 
 | 边界系统 | [05_boundary_system](software_design_theory/05_boundary_system/README.md) | Def 1.1–1.2, B1–B3 | SBM-T1/T2, SUM-T1/T2, EIM-T1/T2 | |
 
-### 2.3 支柱 3（组件组合）
+### 2.3 支柱 3（组件组合） {#23-支柱-3组件组合}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -235,7 +235,7 @@ research_notes/
 
 ---
 
-## 三、文档 ↔ 思维表征 映射表
+## 三、文档 ↔ 思维表征 映射表 {#三文档-思维表征-映射表}
 
 >
 
@@ -243,7 +243,7 @@ research_notes/
 
 以下为 research_notes 文档与思维表征（思维导图、多维矩阵、证明树、决策树）的对应关系；思维表征主文档位于 [04_thinking](../04_thinking/README.md)。
 
-### 3.1 按文档 → 思维表征
+### 3.1 按文档 → 思维表征 {#31-按文档-思维表征}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -277,7 +277,7 @@ research_notes/
 
 | ownership_model / borrow / lifetime / async / pin / send_sync | MIND_MAP、各文档「相关思维表征」 | [formal_methods/README §六篇并表](formal_methods/README.md#formal_methods-六篇并表) | 各文档内证明树、PROOF_INDEX | 06_boundary、DESIGN_MECHANISM |
 
-### 3.2 按思维表征 → 文档（入口）
+### 3.2 按思维表征 → 文档（入口） {#32-按思维表征-文档入口}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -301,7 +301,7 @@ research_notes/
 
 ---
 
-## 四、文档依赖关系（简表）
+## 四、文档依赖关系（简表） {#四文档依赖关系简表}
 
 >
 
@@ -325,7 +325,7 @@ research_notes/
 
 ---
 
-## 五、使用说明
+## 五、使用说明 {#五使用说明}
 
 >
 
@@ -349,7 +349,7 @@ research_notes/
 
 ---
 
-## 🆕 Rust 1.94 更新
+## 🆕 Rust 1.94 更新 {#rust-194-更新}
 
 >
 
@@ -363,7 +363,7 @@ research_notes/
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -373,13 +373,13 @@ research_notes/
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -395,7 +395,7 @@ research_notes/
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -405,7 +405,7 @@ research_notes/
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -437,7 +437,7 @@ research_notes/
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -449,7 +449,7 @@ research_notes/
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

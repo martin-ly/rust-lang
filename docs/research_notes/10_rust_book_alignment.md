@@ -1,4 +1,4 @@
-# Rust Book 逐章对标映射表
+# Rust Book 逐章对标映射表 {#rust-book-逐章对标映射表}
 
 > **概念族**: 综合研究
 
@@ -26,7 +26,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [Rust Book 逐章对标映射表](#rust-book-逐章对标映射表)
   - [目录](#目录)
@@ -43,15 +43,15 @@
     - [已识别差距](#已识别差距)
     - [补全路线图](#补全路线图)
   - [引用索引](#引用索引)
-    - [Rust Book → 本项目映射](#rust-book--本项目映射)
-  - [Rust 1.96.0+ / Edition 2024 权威来源对齐更新](#rust-1960--edition-2024-权威来源对齐更新)
+    - [Rust Book → 本项目映射](#rust-book-本项目映射)
+  - [Rust 1.96.0+ / Edition 2024 权威来源对齐更新](#rust-1960-edition-2024-权威来源对齐更新)
     - [核心特性与文档映射](#核心特性与文档映射)
     - [代码示例更新](#代码示例更新)
     - [相关文档](#相关文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 对标概览
+## 对标概览 {#对标概览}
 
 > **来源**: [Rust Official Docs](https://doc.rust-lang.org/)
 
@@ -107,13 +107,13 @@
 
 ---
 
-## 详细对标
+## 详细对标 {#详细对标}
 
 > **来源**: [Rust Official Docs](https://doc.rust-lang.org/)
 
 以下为代表性章节的深度对标示例；完整逐章对齐请参见上表。
 
-### Ch 1-3: 基础概念
+### Ch 1-3: 基础概念 {#ch-1-3-基础概念}
 
 > **来源**: [Rust Official Docs](https://doc.rust-lang.org/)
 
@@ -135,7 +135,7 @@
 
 ---
 
-### Ch 4: 所有权 (核心章节)
+### Ch 4: 所有权 (核心章节) {#ch-4-所有权-核心章节}
 
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
@@ -163,7 +163,7 @@
 
 ---
 
-### Ch 10: 泛型、Trait 与生命周期
+### Ch 10: 泛型、Trait 与生命周期 {#ch-10-泛型trait-与生命周期}
 
 > **来源**: [Rust Standard Library](https://doc.rust-lang.org/std/)
 
@@ -193,7 +193,7 @@
 
 ---
 
-### Ch 15: 智能指针
+### Ch 15: 智能指针 {#ch-15-智能指针}
 
 > **来源**: [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 
@@ -219,7 +219,7 @@
 
 ---
 
-### Ch 16: 无畏并发
+### Ch 16: 无畏并发 {#ch-16-无畏并发}
 
 > **来源**: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
 
@@ -249,11 +249,11 @@
 
 ---
 
-## 形式化内容覆盖度
+## 形式化内容覆盖度 {#形式化内容覆盖度}
 
 > **来源**: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)
 
-### 按类型统计
+### 按类型统计 {#按类型统计}
 
 > **来源**: [crates.io](https://crates.io/)
 
@@ -273,11 +273,11 @@
 
 ---
 
-## 差距与补全计划
+## 差距与补全计划 {#差距与补全计划}
 
 > **来源**: [docs.rs](https://docs.rs/)
 
-### 已识别差距
+### 已识别差距 {#已识别差距}
 
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
 
@@ -301,7 +301,7 @@
 
 | GAP-08 | Rust 1.96+ 新增关键字与保留字追踪 | P2 | Week 2 |
 
-### 补全路线图
+### 补全路线图 {#补全路线图}
 
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
@@ -339,11 +339,11 @@ Week 3
 
 ---
 
-## 引用索引
+## 引用索引 {#引用索引}
 
 > **来源**: [Rust Standard Library](https://doc.rust-lang.org/std/)
 
-### Rust Book → 本项目映射
+### Rust Book → 本项目映射 {#rust-book-本项目映射}
 
 > **来源**: [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 
@@ -387,7 +387,7 @@ Week 3
 
 ---
 
-## Rust 1.96.0+ / Edition 2024 权威来源对齐更新
+## Rust 1.96.0+ / Edition 2024 权威来源对齐更新 {#rust-1960-edition-2024-权威来源对齐更新}
 
 > **来源**: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
 
@@ -397,7 +397,7 @@ Week 3
 
 本文档已针对 **Rust 1.96.0+ / Edition 2024** 进行权威国际化来源对齐升级，逐章映射表、权威来源链接与缺口分析均与当前 TRPL 2024 Edition 保持一致。
 
-### 核心特性与文档映射
+### 核心特性与文档映射 {#核心特性与文档映射}
 
 | 特性 | 应用场景 | 内部文档/章节 |
 
@@ -415,7 +415,7 @@ Week 3
 
 | `Result::inspect` / `Option::inspect` | Ch 9 错误处理 | [10_error_handling_cheatsheet.md](10_error_handling_cheatsheet.md) |
 
-### 代码示例更新
+### 代码示例更新 {#代码示例更新}
 
 本文档中的所有 Rust 代码示例均已：
 
@@ -427,7 +427,7 @@ Week 3
 
 - ✅ 与 TRPL 2024 Edition 章节链接一致
 
-### 相关文档
+### 相关文档 {#相关文档}
 
 - [Rust 1.96 迁移指南](../06_toolchain/06_19_rust_1_96_features.md)
 
@@ -459,7 +459,7 @@ Week 3
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 > **来源**: [crates.io](https://crates.io/)
 
@@ -469,7 +469,7 @@ Week 3
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)
 

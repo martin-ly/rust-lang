@@ -3,6 +3,8 @@
 > **EN**: Bilingual Concept Template
 > **Summary**: Standardized bilingual header template for all `concept/` files to support internationalization.
 >
+> **主要来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [RFCs](https://github.com/rust-lang/rfcs)
+>
 > **适用范围**: `concept/` 目录下所有 L1-L7 概念文件
 > **版本**: 1.0
 > **状态**: 🔄 Q4 2026 国际化基础设施
@@ -23,8 +25,8 @@
 > **层级**: {L0-L7} {基础/进阶/高级/形式化/对比/生态/未来}概念
 > **A/S/P 标记**: {A | S | P | A+S | S+P | ...}
 > **双维定位**: {知识维度 × Bloom 层级}
-> **前置概念**: [{Concept EN}]({file}.md) · ...
-> **后置概念**: [{Concept EN}]({file}.md) · ...
+> **前置概念**: `{Concept EN}` (`{concept_path}.md`) · ...
+> **后置概念**: `{Concept EN}` (`{concept_path}.md`) · ...
 > **主要来源**: [来源1] · [来源2] · ...
 >
 > **来源**: [TRPL — ...](.) · [Rust Reference — ...](.) · [RFC ...](.)

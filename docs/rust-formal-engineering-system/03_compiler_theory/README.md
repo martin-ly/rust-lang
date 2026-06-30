@@ -1,4 +1,4 @@
-# 编译器理论
+# 编译器理论 {#编译器理论}
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -9,7 +9,7 @@
 > **状态**: ✅ 已完成
 > 内容已整合至： 10_compiler_optimizations.md (研究笔记)、[01_compiler_features.md](../06_toolchain_ecosystem/01_compiler/README.md)
 
-## 知识结构思维导图
+## 知识结构思维导图 {#知识结构思维导图}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)** · **来源: [Wikipedia - Formal Grammar](https://en.wikipedia.org/wiki/Formal_Grammar)** · **[来源: ACM - Compiler Design Principles]** · **[来源: IEEE - Language Implementation Standards]**
 
@@ -42,7 +42,7 @@ mindmap
       程序员责任
 ```
 
-## 与核心文档的关联
+## 与核心文档的关联 {#与核心文档的关联}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -55,11 +55,11 @@ mindmap
 
 ---
 
-## Rust 编译器架构
+## Rust 编译器架构 {#rust-编译器架构}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 编译流程
+### 编译流程 {#编译流程}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -87,7 +87,7 @@ LLVM 优化 → 优化后的 LLVM IR
 链接器 → 可执行文件/库
 ```
 
-### MIR（中级中间表示）
+### MIR（中级中间表示） {#mir中级中间表示}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -108,7 +108,7 @@ fn add(a: i32, b: i32) -> i32 {
 // }
 ```
 
-### 借用检查的 MIR 分析
+### 借用检查的 MIR 分析 {#借用检查的-mir-分析}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -132,7 +132,7 @@ fn borrow_check_example() {
 // }
 ```
 
-### 编译器优化
+### 编译器优化 {#编译器优化}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -159,7 +159,7 @@ fn dead_code() {
 }
 ```
 
-### 泛型单态化
+### 泛型单态化 {#泛型单态化}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -181,7 +181,7 @@ fn monomorphization_demo() {
 }
 ```
 
-### 生命周期擦除
+### 生命周期擦除 {#生命周期擦除}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -204,7 +204,7 @@ fn lifetime_erasure() {
 }
 ```
 
-### 属性宏与派生宏
+### 属性宏与派生宏 {#属性宏与派生宏}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -237,7 +237,7 @@ fn with_serde() {}
 const _: () = assert!(std::mem::size_of::<usize>() == 8, "64-bit only");
 ```
 
-### unsafe 代码检查边界
+### unsafe 代码检查边界 {#unsafe-代码检查边界}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -273,7 +273,7 @@ unsafe fn very_dangerous() {
 
 ---
 
-## 使用场景
+## 使用场景 {#使用场景}
 
 | 场景 | 编译器特性 | 应用 |
 | :--- | :--- | :--- |
@@ -288,9 +288,9 @@ unsafe fn very_dangerous() {
 
 ---
 
-## 相关研究笔记
+## 相关研究笔记 {#相关研究笔记}
 
-### 实验分析
+### 实验分析 {#实验分析}
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -298,7 +298,7 @@ unsafe fn very_dangerous() {
 | 内存分析 | 内存使用分析 | 10_memory_analysis.md (研究笔记) |
 | 性能基准 | 性能测试方法论 | 10_performance_benchmarks.md (研究笔记) |
 
-### 形式化方法
+### 形式化方法 {#形式化方法}
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -306,7 +306,7 @@ unsafe fn very_dangerous() {
 | 所有权模型 | 所有权系统形式化 | 10_ownership_model.md (研究笔记) |
 | 生命周期形式化 | 生命周期系统理论 | 10_lifetime_formalization.md (研究笔记) |
 
-### 类型理论
+### 类型理论 {#类型理论}
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -314,7 +314,7 @@ unsafe fn very_dangerous() {
 | 高级类型 | 高级类型特性 | 10_advanced_types.md (研究笔记) |
 | 变型理论 | 类型变型 | 10_variance_theory.md (研究笔记) |
 
-### 工具链
+### 工具链 {#工具链}
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -322,7 +322,7 @@ unsafe fn very_dangerous() {
 
 ---
 
-## 相关 crates
+## 相关 crates {#相关-crates}
 
 | crate | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -342,7 +342,7 @@ unsafe fn very_dangerous() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
 

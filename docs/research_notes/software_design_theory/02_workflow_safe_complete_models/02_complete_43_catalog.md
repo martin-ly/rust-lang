@@ -1,4 +1,4 @@
-# 43 种完全模型索引
+# 43 种完全模型索引 {#43-种完全模型索引}
 
 > **概念族**: 软件设计 / 工作流模式
 > **内容分级**: [归档级]
@@ -20,13 +20,13 @@
 > [Rust Reference](https://doc.rust-lang.org/reference/)
 >
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 
 - [43 种完全模型索引](#43-种完全模型索引)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [定义](#定义)
   - [构成方案](#构成方案)
     - [扩展模式（20）](#扩展模式20)
@@ -60,7 +60,7 @@
   - [扩展模式形式化对应（深入）](#扩展模式形式化对应深入)
   - [扩展模式典型场景（实质内容）](#扩展模式典型场景实质内容)
   - [权威来源](#权威来源)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -75,7 +75,7 @@
 
 ---
 
-## 定义
+## 定义 {#定义}
 
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -84,7 +84,7 @@
 
 ---
 
-## 构成方案
+## 构成方案 {#构成方案}
 
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -97,7 +97,7 @@
 
 | **企业/分布式扩展** | 20 | 见下表 |
 
-### 扩展模式（20）
+### 扩展模式（20） {#扩展模式20}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -151,7 +151,7 @@
 
 | 20 | Event Sourcing | DDD/CQRS | 业务层 | 纯 Safe |
 
-### 扩展模式简要说明
+### 扩展模式简要说明 {#扩展模式简要说明}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -205,13 +205,13 @@
 
 ---
 
-## 扩展模式 Rust 代码示例
+## 扩展模式 Rust 代码示例 {#扩展模式-rust-代码示例}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Domain Model
+### Domain Model {#domain-model}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -273,7 +273,7 @@ impl Order {
 
 ```
 
-### Unit of Work
+### Unit of Work {#unit-of-work}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -327,7 +327,7 @@ impl<T> UnitOfWork<T> {
 
 ```
 
-### Data Mapper
+### Data Mapper {#data-mapper}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -363,7 +363,7 @@ impl From<UserEntity> for (u64, String, String) {
 
 ```
 
-### Value Object
+### Value Object {#value-object}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -407,7 +407,7 @@ impl Money {
 
 ```
 
-### Registry (Service Locator)
+### Registry (Service Locator) {#registry-service-locator}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -445,7 +445,7 @@ fn register<T: Send + 'static>(service: T) {
 
 ```
 
-### Identity Map
+### Identity Map {#identity-map}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -481,7 +481,7 @@ impl<T> IdentityMap<T> {
 
 ```
 
-### Service Layer
+### Service Layer {#service-layer}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -513,7 +513,7 @@ impl OrderService {
 
 ```
 
-### Repository
+### Repository {#repository}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -541,7 +541,7 @@ impl Repository<User> for UserRepository {
 
 ```
 
-### DTO
+### DTO {#dto}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -563,7 +563,7 @@ pub struct UserDto {
 
 ```
 
-### Event Sourcing
+### Event Sourcing {#event-sourcing}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -603,7 +603,7 @@ impl Aggregate {
 
 ```
 
-### Specification
+### Specification {#specification}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -633,7 +633,7 @@ impl<T, A: Specification<T>, B: Specification<T>> Specification<T> for AndSpec<A
 
 ```
 
-### Table Data Gateway (DAO)
+### Table Data Gateway (DAO) {#table-data-gateway-dao}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -665,7 +665,7 @@ impl UserGateway {
 
 ```
 
-### Active Record
+### Active Record {#active-record}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -727,7 +727,7 @@ impl User {
 
 ```
 
-### Gateway（外部系统集成）
+### Gateway（外部系统集成） {#gateway外部系统集成}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -759,7 +759,7 @@ impl PaymentGateway for StripeGateway {
 
 ```
 
-### Model View Controller (MVC)
+### Model View Controller (MVC) {#model-view-controller-mvc}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -803,7 +803,7 @@ mod controller {
 
 ```
 
-### Front Controller
+### Front Controller {#front-controller}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -843,7 +843,7 @@ impl Router {
 
 ```
 
-### Remote Facade
+### Remote Facade {#remote-facade}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -885,7 +885,7 @@ pub async fn handle_order_batch(req: OrderBatchRequest) -> OrderBatchResponse {
 
 ```
 
-### Lazy Load
+### Lazy Load {#lazy-load}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -943,7 +943,7 @@ impl<T> Lazy<T> {
 
 ```
 
-### Plugin (Dependency Injection)
+### Plugin (Dependency Injection) {#plugin-dependency-injection}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -985,7 +985,7 @@ impl App {
 
 ```
 
-### Optimistic Offline Lock
+### Optimistic Offline Lock {#optimistic-offline-lock}
 
 >
 
@@ -1035,7 +1035,7 @@ pub fn update_optimistic(
 
 ---
 
-## 安全边界
+## 安全边界 {#安全边界}
 
 >
 
@@ -1051,7 +1051,7 @@ pub fn update_optimistic(
 
 ---
 
-## 与 23 安全的关系
+## 与 23 安全的关系 {#与-23-安全的关系}
 
 >
 
@@ -1063,7 +1063,7 @@ pub fn update_optimistic(
 
 ---
 
-## 与 23 安全的分层关系
+## 与 23 安全的分层关系 {#与-23-安全的分层关系}
 
 >
 
@@ -1097,7 +1097,7 @@ pub fn update_optimistic(
 
 ---
 
-## 扩展模式选型
+## 扩展模式选型 {#扩展模式选型}
 
 >
 
@@ -1123,7 +1123,7 @@ pub fn update_optimistic(
 
 ---
 
-## 扩展模式选型决策树
+## 扩展模式选型决策树 {#扩展模式选型决策树}
 
 >
 
@@ -1187,7 +1187,7 @@ pub fn update_optimistic(
 
 ---
 
-## 扩展模式形式化对应（深入）
+## 扩展模式形式化对应（深入） {#扩展模式形式化对应深入}
 
 >
 
@@ -1239,7 +1239,7 @@ pub fn update_optimistic(
 
 ---
 
-## 扩展模式典型场景（实质内容）
+## 扩展模式典型场景（实质内容） {#扩展模式典型场景实质内容}
 
 >
 
@@ -1271,7 +1271,7 @@ pub fn update_optimistic(
 
 ---
 
-## 权威来源
+## 权威来源 {#权威来源}
 
 >
 
@@ -1283,7 +1283,7 @@ pub fn update_optimistic(
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -1293,7 +1293,7 @@ pub fn update_optimistic(
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -1301,7 +1301,7 @@ pub fn update_optimistic(
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -1315,7 +1315,7 @@ pub fn update_optimistic(
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -1325,7 +1325,7 @@ pub fn update_optimistic(
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -1357,7 +1357,7 @@ pub fn update_optimistic(
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -1369,7 +1369,7 @@ pub fn update_optimistic(
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Software Design Pattern](https://en.wikipedia.org/wiki/Software_Design_Pattern)**
 

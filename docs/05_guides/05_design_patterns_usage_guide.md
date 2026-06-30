@@ -1,4 +1,4 @@
-# 设计模式使用指南
+# 设计模式使用指南 {#设计模式使用指南}
 
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
@@ -12,17 +12,17 @@
 > **受众**: [进阶]
 > **内容分级**: [专家级]
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [设计模式使用指南](#设计模式使用指南)
-  - [📑 目录](#-目录)
-  - [📋 概述](#-概述)
-  - [🚀 快速开始](#-快速开始)
+  - [📑 目录](#目录)
+  - [📋 概述](#概述)
+  - [🚀 快速开始](#快速开始)
     - [单例模式](#单例模式)
     - [工厂模式](#工厂模式)
-  - [📊 核心模式](#-核心模式)
+  - [📊 核心模式](#核心模式)
     - [1. 创建型模式](#1-创建型模式)
       - [建造者模式](#建造者模式)
     - [2. 结构型模式](#2-结构型模式)
@@ -31,7 +31,7 @@
     - [3. 行为型模式](#3-行为型模式)
       - [策略模式](#策略模式)
       - [观察者模式](#观察者模式)
-  - [📐 23种设计模式完整实现](#-23种设计模式完整实现)
+  - [📐 23种设计模式完整实现](#23种设计模式完整实现)
     - [创建型模式 (Creational Patterns)](#创建型模式-creational-patterns)
       - [1. 单例模式 (Singleton)](#1-单例模式-singleton)
       - [2. 工厂方法 (Factory Method)](#2-工厂方法-factory-method)
@@ -58,13 +58,13 @@
       - [21. 策略模式 (Strategy)](#21-策略模式-strategy)
       - [22. 模板方法模式 (Template Method)](#22-模板方法模式-template-method)
       - [23. 访问者模式 (Visitor)](#23-访问者模式-visitor)
-  - [🦀 Rust 特有模式](#-rust-特有模式)
+  - [🦀 Rust 特有模式](#rust-特有模式)
     - [1. Newtype 模式](#1-newtype-模式)
     - [2. RAII 模式](#2-raii-模式)
     - [3. 类型状态模式 (Type State)](#3-类型状态模式-type-state)
     - [4. Builder 模式（消耗型 vs 非消耗型）](#4-builder-模式消耗型-vs-非消耗型)
-  - [📚 相关文档](#-相关文档)
-  - [🆕 Rust 1.95+ 特性在设计模式中的应用](#-rust-195-特性在设计模式中的应用)
+  - [📚 相关文档](#相关文档)
+  - [🆕 Rust 1.95+ 特性在设计模式中的应用](#rust-195-特性在设计模式中的应用)
     - [1. Array\_windows() 在滑动窗口模式中的应用](#1-array_windows-在滑动窗口模式中的应用)
       - [传统实现 vs Rust 1.95+ 实现](#传统实现-vs-rust-195-实现)
       - [生产示例：股票价格趋势检测](#生产示例股票价格趋势检测)
@@ -84,7 +84,7 @@
 
 ---
 
-## 📋 概述
+## 📋 概述 {#概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -96,11 +96,11 @@
 
 ---
 
-## 🚀 快速开始
+## 🚀 快速开始 {#快速开始}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 单例模式
+### 单例模式 {#单例模式}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -124,7 +124,7 @@ impl Singleton {
 }
 ```
 
-### 工厂模式
+### 工厂模式 {#工厂模式}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -164,19 +164,19 @@ fn create_product(t: ProductType) -> Box<dyn Product> {
 
 ---
 
-## 📊 核心模式
+## 📊 核心模式 {#核心模式}
 
 > **来源: [Rust Design Patterns Book](https://rust-unofficial.github.io/patterns/)** · **来源: [GoF - Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)** · **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 创建型模式
+### 1. 创建型模式 {#1-创建型模式}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-#### 建造者模式
+#### 建造者模式 {#建造者模式}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -236,13 +236,13 @@ let config = ConfigBuilder::new()
     .build()?;
 ```
 
-### 2. 结构型模式
+### 2. 结构型模式 {#2-结构型模式}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-#### 适配器模式
+#### 适配器模式 {#适配器模式}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -271,7 +271,7 @@ impl NewInterface for Adapter {
 }
 ```
 
-#### 装饰器模式
+#### 装饰器模式 {#装饰器模式}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -300,11 +300,11 @@ impl Component for Decorator {
 }
 ```
 
-### 3. 行为型模式
+### 3. 行为型模式 {#3-行为型模式}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-#### 策略模式
+#### 策略模式 {#策略模式}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -342,7 +342,7 @@ impl Context {
 }
 ```
 
-#### 观察者模式
+#### 观察者模式 {#观察者模式}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -388,15 +388,15 @@ impl Subject {
 
 ---
 
-## 📐 23种设计模式完整实现
+## 📐 23种设计模式完整实现 {#23种设计模式完整实现}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 创建型模式 (Creational Patterns)
+### 创建型模式 (Creational Patterns) {#创建型模式-creational-patterns}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-#### 1. 单例模式 (Singleton)
+#### 1. 单例模式 (Singleton) {#1-单例模式-singleton}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -428,7 +428,7 @@ impl Config {
 // ✅ 要：单例尽量只读或提供有限的原子操作
 ```
 
-#### 2. 工厂方法 (Factory Method)
+#### 2. 工厂方法 (Factory Method) {#2-工厂方法-factory-method}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -483,7 +483,7 @@ impl Creator for ConcreteCreatorB {
 // ✅ 要：产品族扩展时使用
 ```
 
-#### 3. 抽象工厂 (Abstract Factory)
+#### 3. 抽象工厂 (Abstract Factory) {#3-抽象工厂-abstract-factory}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -557,7 +557,7 @@ fn render_ui(factory: &dyn GUIFactory) {
 // ✅ 要：产品族稳定但需要切换实现时
 ```
 
-#### 4. 建造者模式 (Builder)
+#### 4. 建造者模式 (Builder) {#4-建造者模式-builder}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -640,7 +640,7 @@ let request = HttpRequestBuilder::post()
 // ✅ 要：必选/可选参数混合、需要验证时
 ```
 
-#### 5. 原型模式 (Prototype)
+#### 5. 原型模式 (Prototype) {#5-原型模式-prototype}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -696,11 +696,11 @@ impl PrototypeRegistry {
 // ✅ 要：复杂对象需要深拷贝或动态创建时
 ```
 
-### 结构型模式 (Structural Patterns)
+### 结构型模式 (Structural Patterns) {#结构型模式-structural-patterns}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
-#### 6. 适配器模式 (Adapter)
+#### 6. 适配器模式 (Adapter) {#6-适配器模式-adapter}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -759,7 +759,7 @@ impl SpecificInterface for Adaptee {
 // ✅ 要：无法修改源码但需要兼容时
 ```
 
-#### 7. 桥接模式 (Bridge)
+#### 7. 桥接模式 (Bridge) {#7-桥接模式-bridge}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -833,7 +833,7 @@ impl Shape for RectangleShape {
 // ✅ 要：形状和渲染方式独立变化时
 ```
 
-#### 8. 组合模式 (Composite)
+#### 8. 组合模式 (Composite) {#8-组合模式-composite}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -907,7 +907,7 @@ impl Graphic for CompoundGraphic {
 // ✅ 要：递归树结构、文档对象模型时
 ```
 
-#### 9. 装饰器模式 (Decorator)
+#### 9. 装饰器模式 (Decorator) {#9-装饰器模式-decorator}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -967,7 +967,7 @@ println!("{}: ${}", coffee.description(), coffee.cost());
 // ✅ 要：运行时动态组合功能时
 ```
 
-#### 10. 外观模式 (Facade)
+#### 10. 外观模式 (Facade) {#10-外观模式-facade}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -1031,7 +1031,7 @@ impl ComputerFacade {
 // ✅ 要：复杂子系统需要简化接口时
 ```
 
-#### 11. 享元模式 (Flyweight)
+#### 11. 享元模式 (Flyweight) {#11-享元模式-flyweight}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -1100,7 +1100,7 @@ impl Tree {
 // ✅ 要：大量重复状态、内存受限时
 ```
 
-#### 12. 代理模式 (Proxy)
+#### 12. 代理模式 (Proxy) {#12-代理模式-proxy}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -1185,11 +1185,11 @@ impl<T: Image> Image for ProtectedImage<T> {
 // ✅ 要：需要控制访问或延迟加载时
 ```
 
-### 行为型模式 (Behavioral Patterns)
+### 行为型模式 (Behavioral Patterns) {#行为型模式-behavioral-patterns}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
-#### 13. 责任链模式 (Chain of Responsibility)
+#### 13. 责任链模式 (Chain of Responsibility) {#13-责任链模式-chain-of-responsibility}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -1271,7 +1271,7 @@ impl Handler for LoggingHandler {
 // ✅ 要：动态调整处理顺序、可插拔处理器时
 ```
 
-#### 14. 命令模式 (Command)
+#### 14. 命令模式 (Command) {#14-命令模式-command}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -1352,7 +1352,7 @@ impl CommandManager {
 // ✅ 要：需要 undo/redo、延迟执行时
 ```
 
-#### 15. 解释器模式 (Interpreter)
+#### 15. 解释器模式 (Interpreter) {#15-解释器模式-interpreter}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -1422,7 +1422,7 @@ let result = expression.interpret(&context);
 // ✅ 要：简单语法、频繁变化的规则时
 ```
 
-#### 16. 迭代器模式 (Iterator)
+#### 16. 迭代器模式 (Iterator) {#16-迭代器模式-iterator}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -1495,7 +1495,7 @@ impl<'a> Iterator for ReverseBookIterator<'a> {
 // ✅ 要：特殊遍历需求时
 ```
 
-#### 17. 中介者模式 (Mediator)
+#### 17. 中介者模式 (Mediator) {#17-中介者模式-mediator}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -1568,7 +1568,7 @@ impl User for ChatUser {
 // ✅ 要：星型通信结构、需要集中管理时
 ```
 
-#### 18. 备忘录模式 (Memento)
+#### 18. 备忘录模式 (Memento) {#18-备忘录模式-memento}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -1661,7 +1661,7 @@ impl History {
 // ✅ 要：有限状态、需要回滚时
 ```
 
-#### 19. 观察者模式 (Observer)
+#### 19. 观察者模式 (Observer) {#19-观察者模式-observer}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -1730,7 +1730,7 @@ impl Observer for NewsChannel {
 // ✅ 要：一对多、动态订阅关系时
 ```
 
-#### 20. 状态模式 (State)
+#### 20. 状态模式 (State) {#20-状态模式-state}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -1820,7 +1820,7 @@ impl Document {
 // ✅ 要：多状态、转换复杂、行为随状态变化时
 ```
 
-#### 21. 策略模式 (Strategy)
+#### 21. 策略模式 (Strategy) {#21-策略模式-strategy}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -1918,7 +1918,7 @@ impl ShoppingCart {
 // ✅ 要：多种可互换算法、需要动态切换时
 ```
 
-#### 22. 模板方法模式 (Template Method)
+#### 22. 模板方法模式 (Template Method) {#22-模板方法模式-template-method}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -2003,7 +2003,7 @@ impl DataMiner for CsvDataMiner {
 // ✅ 要：有固定流程、部分步骤可定制时
 ```
 
-#### 23. 访问者模式 (Visitor)
+#### 23. 访问者模式 (Visitor) {#23-访问者模式-visitor}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -2109,13 +2109,13 @@ impl ShapeCollection {
 
 ---
 
-## 🦀 Rust 特有模式
+## 🦀 Rust 特有模式 {#rust-特有模式}
 
 > **来源: [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)** · **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)** · **来源: [Rust Design Patterns Book](https://rust-unofficial.github.io/patterns/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. Newtype 模式
+### 1. Newtype 模式 {#1-newtype-模式}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -2134,7 +2134,7 @@ fn process_order(id: OrderId) { /* ... */ }
 // process_user(UserId(1));  // 正确
 ```
 
-### 2. RAII 模式
+### 2. RAII 模式 {#2-raii-模式}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -2163,7 +2163,7 @@ impl Drop for FileGuard {
 // 使用场景：资源管理、锁守卫、连接池
 ```
 
-### 3. 类型状态模式 (Type State)
+### 3. 类型状态模式 (Type State) {#3-类型状态模式-type-state}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -2204,7 +2204,7 @@ impl Connection<Connected> {
 // 编译期确保：必须先 connect 才能 send
 ```
 
-### 4. Builder 模式（消耗型 vs 非消耗型）
+### 4. Builder 模式（消耗型 vs 非消耗型） {#4-builder-模式消耗型-vs-非消耗型}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -2247,7 +2247,7 @@ let req2 = builder.build()?; // 可以重用
 
 ---
 
-## 📚 相关文档
+## 📚 相关文档 {#相关文档}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -2256,7 +2256,7 @@ let req2 = builder.build()?; // 可以重用
 - [Rust 特有模式](../../crates/c09_design_pattern/docs/tier_02_guides/05_最佳实践与反模式.md)
 - [设计模式形式化文档](../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/README.md) - 23种设计模式的形式化定义与分析
 
-## 🆕 Rust 1.95+ 特性在设计模式中的应用
+## 🆕 Rust 1.95+ 特性在设计模式中的应用 {#rust-195-特性在设计模式中的应用}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -2266,14 +2266,14 @@ Rust 1.95+ 引入的新特性为设计模式实现提供了更优雅、更高效
 
 ---
 
-### 1. Array_windows() 在滑动窗口模式中的应用
+### 1. Array_windows() 在滑动窗口模式中的应用 {#1-array_windows-在滑动窗口模式中的应用}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **设计模式**: 滑动窗口 (Sliding Window)
 **适用场景**: 时间序列分析、流数据处理、模式检测
 
-#### 传统实现 vs Rust 1.95+ 实现
+#### 传统实现 vs Rust 1.95+ 实现 {#传统实现-vs-rust-195-实现}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -2294,7 +2294,7 @@ fn moving_average_optimized(data: &[f64]) -> Vec<f64> {
 }
 `
 
-#### 生产示例：股票价格趋势检测
+#### 生产示例：股票价格趋势检测 {#生产示例股票价格趋势检测}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -2325,7 +2325,7 @@ impl PriceAnalyzer {
 
 ---
 
-### 2. ControlFlow 在责任链模式中的应用
+### 2. ControlFlow 在责任链模式中的应用 {#2-controlflow-在责任链模式中的应用}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -2353,7 +2353,7 @@ fn validate_request(req: &Request) -> ControlFlow<ValidationError, ()> {
 
 ---
 
-### 3. LazyLock 在单例模式中的应用
+### 3. LazyLock 在单例模式中的应用 {#3-lazylock-在单例模式中的应用}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -2378,7 +2378,7 @@ pub fn get_config_fast() -> Option<&'static AppConfig> {
 
 ---
 
-### 4. 数学常量在算法模式中的应用
+### 4. 数学常量在算法模式中的应用 {#4-数学常量在算法模式中的应用}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -2399,7 +2399,7 @@ where
 
 ---
 
-### 特性对比总结
+### 特性对比总结 {#特性对比总结}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -2435,7 +2435,7 @@ where
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Software Design Pattern](https://en.wikipedia.org/wiki/Software_Design_Pattern)**
 > **来源: [Wikipedia - Gang of Four](https://en.wikipedia.org/wiki/Gang_of_Four)**
@@ -2450,7 +2450,7 @@ where
 
 ---
 
-## 思维导图：Rust 设计模式体系
+## 思维导图：Rust 设计模式体系 {#思维导图rust-设计模式体系}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -2475,7 +2475,7 @@ graph TD
 
 ---
 
-## 决策树：设计模式选择
+## 决策树：设计模式选择 {#决策树设计模式选择}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 

@@ -1,4 +1,4 @@
-# 算法专项练习指南
+# 算法专项练习指南 {#算法专项练习指南}
 
 > **内容分级**: [核心级]
 >
@@ -20,10 +20,10 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 - [算法专项练习指南](#算法专项练习指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、指南说明](#一指南说明)
   - [二、练习题目录](#二练习题目录)
     - [2.1 排序 (`sorting.rs`)](#21-排序-sortingrs)
@@ -34,16 +34,16 @@
   - [三、难度分级](#三难度分级)
   - [四、学习路径](#四学习路径)
   - [五、权威来源索引](#五权威来源索引)
-    - [P0 — Rust 官方文档](#p0--rust-官方文档)
-    - [P1 — 经典算法教材](#p1--经典算法教材)
-    - [P2 — 在线判题与社区资源](#p2--在线判题与社区资源)
+    - [P0 — Rust 官方文档](#p0-rust-官方文档)
+    - [P1 — 经典算法教材](#p1-经典算法教材)
+    - [P2 — 在线判题与社区资源](#p2-在线判题与社区资源)
   - [六、验证方式](#六验证方式)
 
 ---
 
-## 一、指南说明
+## 一、指南说明 {#一指南说明}
 
-本文档定位 `exercises/src/algorithms/` 算法专项练习的入口说明，配套代码位于 [`exercises/src/algorithms/`](../exercises/src/algorithms/) 目录。
+本文档定位 `exercises/src/algorithms/` 算法专项练习的入口说明，配套代码位于 [`exercises/src/algorithms/`](../../exercises/src/algorithms/) 目录。
 练习采用"函数骨架 + 参考实现 + 单元测试"的形式，覆盖排序、搜索、图论、动态规划与经典数据结构五大主题，
 帮助学习者在 Rust 1.96.0+ 环境中掌握算法实现与所有权、借用、泛型等 Rust 特性的结合。
 
@@ -51,9 +51,9 @@
 
 ---
 
-## 二、练习题目录
+## 二、练习题目录 {#二练习题目录}
 
-### 2.1 排序 (`sorting.rs`)
+### 2.1 排序 (`sorting.rs`) {#21-排序-sortingrs}
 
 | 题目 | 函数 | 核心知识点 | 测试覆盖 |
 |------|------|-----------|----------|
@@ -64,7 +64,7 @@
 | 计数排序 | `counting_sort` | 非负整数计数 | 基础、全零 |
 | 荷兰国旗 | `sort_colors` | 三指针、O(n) 原地分类 | 基础、全相同 |
 
-### 2.2 搜索 (`searching.rs`)
+### 2.2 搜索 (`searching.rs`) {#22-搜索-searchingrs}
 
 | 题目 | 函数 | 核心知识点 | 测试覆盖 |
 |------|------|-----------|----------|
@@ -75,7 +75,7 @@
 | DFS 路径 | `dfs_has_path` | 有向图深度优先、访问标记 | 可达、不可达、越界 |
 | 岛屿数量 | `num_islands` | 二维网格 DFS | 基础、空网格 |
 
-### 2.3 图论 (`graph.rs`)
+### 2.3 图论 (`graph.rs`) {#23-图论-graphrs}
 
 | 题目 | 函数/结构 | 核心知识点 | 测试覆盖 |
 |------|-----------|-----------|----------|
@@ -86,7 +86,7 @@
 | 最小生成树 | `kruskal_mst` | Kruskal + 并查集 | 基础图 |
 | 网络延迟时间 | `network_delay_time` | Dijkstra 变种 | 可达、不可达 |
 
-### 2.4 动态规划 (`dynamic_programming.rs`)
+### 2.4 动态规划 (`dynamic_programming.rs`) {#24-动态规划-dynamic_programmingrs}
 
 | 题目 | 函数 | 核心知识点 | 测试覆盖 |
 |------|------|-----------|----------|
@@ -99,7 +99,7 @@
 | 最大子数组和 | `max_subarray_sum` | Kadane 算法 | 基础、单元素、全负 |
 | 爬楼梯 | `climb_stairs` | 斐波那契 DP | 基础、n=0 |
 
-### 2.5 数据结构 (`data_structures.rs`)
+### 2.5 数据结构 (`data_structures.rs`) {#25-数据结构-data_structuresrs}
 
 | 题目 | 结构 | 核心知识点 | 测试覆盖 |
 |------|------|-----------|----------|
@@ -111,7 +111,7 @@
 
 ---
 
-## 三、难度分级
+## 三、难度分级 {#三难度分级}
 
 | 难度 | 对应题目 | 建议对象 |
 |------|----------|----------|
@@ -121,7 +121,7 @@
 
 ---
 
-## 四、学习路径
+## 四、学习路径 {#四学习路径}
 
 1. **阶段 1：排序与搜索**（L2-L3）
    - 先完成 `sorting.rs` 与 `searching.rs`，熟悉递归、切片、索引边界处理。
@@ -136,22 +136,22 @@
 
 ---
 
-## 五、权威来源索引
+## 五、权威来源索引 {#五权威来源索引}
 
-### P0 — Rust 官方文档
+### P0 — Rust 官方文档 {#p0-rust-官方文档}
 
 - [The Rust Programming Language](https://doc.rust-lang.org/book/) — 所有权、借用、泛型、Trait
 - [Rust Reference](https://doc.rust-lang.org/reference/) — 语言语义与标准库约定
 - [Rust By Example](https://doc.rust-lang.org/rust-by-example/) — 可运行示例与惯用法
 - [The Rustonomicon](https://doc.rust-lang.org/nomicon/) — Unsafe 与高级内存模型
 
-### P1 — 经典算法教材
+### P1 — 经典算法教材 {#p1-经典算法教材}
 
 - [CLRS — Introduction to Algorithms](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/) — 排序、图论、DP 形式化
 - [Cracking the Coding Interview](https://www.crackingthecodinginterview.com/) — 面试题型与边界讨论
 - [Algorithm Design Manual](https://www.algorist.com/) — 算法选型与实现技巧
 
-### P2 — 在线判题与社区资源
+### P2 — 在线判题与社区资源 {#p2-在线判题与社区资源}
 
 - [LeetCode](https://leetcode.com/) — 对应题目编号与官方题解
 - [HackerRank](https://www.hackerrank.com/) — 算法专项训练
@@ -159,16 +159,16 @@
 
 ---
 
-## 六、验证方式
+## 六、验证方式 {#六验证方式}
 
 ```bash
-# 运行 exercises crate 全部测试
+# 运行 exercises crate 全部测试 {#运行-exercises-crate-全部测试}
 cargo test -p exercises
 
-# 仅运行算法模块测试
+# 仅运行算法模块测试 {#仅运行算法模块测试}
 cargo test -p exercises --lib algorithms
 
-# 检查研究笔记结构
+# 检查研究笔记结构 {#检查研究笔记结构}
 cd scripts/maintenance && python check_research_notes.py
 ```
 

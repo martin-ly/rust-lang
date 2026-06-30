@@ -1,4 +1,4 @@
-# Cargo 编译速度优化指南
+# Cargo 编译速度优化指南 {#cargo-编译速度优化指南}
 
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
@@ -6,40 +6,40 @@
 
 本文档提供针对大型 Rust 项目（2000+ 依赖）的编译速度优化方案。
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Cargo 编译速度优化指南](#cargo-编译速度优化指南)
-  - [📑 目录](#-目录)
-  - [🚀 快速开始](#-快速开始)
+  - [📑 目录](#目录)
+  - [🚀 快速开始](#快速开始)
     - [1. 安装优化工具](#1-安装优化工具)
     - [2. 使用优化脚本编译](#2-使用优化脚本编译)
-  - [⚙️ 环境变量配置](#️-环境变量配置)
+  - [⚙️ 环境变量配置](#环境变量配置)
     - [Windows (PowerShell)](#windows-powershell)
     - [Linux/macOS (Bash/Zsh)](#linuxmacos-bashzsh)
-  - [📊 优化效果对比](#-优化效果对比)
-  - [🔧 配置文件说明](#-配置文件说明)
+  - [📊 优化效果对比](#优化效果对比)
+  - [🔧 配置文件说明](#配置文件说明)
     - [.cargo/config.toml](#cargoconfigtoml)
     - [Cargo.toml Profile 配置](#cargotoml-profile-配置)
-  - [🛠️ 推荐工具](#️-推荐工具)
-  - [📈 性能监控](#-性能监控)
+  - [🛠️ 推荐工具](#推荐工具)
+  - [📈 性能监控](#性能监控)
     - [查看编译时间](#查看编译时间)
     - [sccache 统计](#sccache-统计)
-  - [🧹 清理和重置](#-清理和重置)
-  - [🔬 进阶优化](#-进阶优化)
+  - [🧹 清理和重置](#清理和重置)
+  - [🔬 进阶优化](#进阶优化)
     - [使用 Nightly 工具链（可选）](#使用-nightly-工具链可选)
     - [内存优化（大型项目）](#内存优化大型项目)
-  - [⚠️ 注意事项](#️-注意事项)
-  - [📚 参考资源](#-参考资源)
+  - [⚠️ 注意事项](#注意事项)
+  - [📚 参考资源](#参考资源)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🚀 快速开始
+## 🚀 快速开始 {#快速开始}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 安装优化工具
+### 1. 安装优化工具 {#1-安装优化工具}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -58,85 +58,85 @@
 chmod +x ./scripts/cargo-build-optimized.sh
 ```
 
-### 2. 使用优化脚本编译
+### 2. 使用优化脚本编译 {#2-使用优化脚本编译}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```powershell
-# 快速检查（最快）
+# 快速检查（最快） {#快速检查最快}
 ./scripts/cargo-build-optimized.ps1 check
 
-# 开发构建
+# 开发构建 {#开发构建}
 ./scripts/cargo-build-optimized.ps1 build dev
 
-# 运行测试
+# 运行测试 {#运行测试}
 ./scripts/cargo-build-optimized.ps1 test
 
-# 查看统计
+# 查看统计 {#查看统计}
 ./scripts/cargo-build-optimized.ps1 stats
 ```
 
-## ⚙️ 环境变量配置
+## ⚙️ 环境变量配置 {#环境变量配置}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 将以下内容添加到你的 PowerShell 配置文件 (`$PROFILE`) 或 `.bashrc`/`.zshrc`：
 
-### Windows (PowerShell)
+### Windows (PowerShell) {#windows-powershell}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```powershell
-# 编译性能优化
+# 编译性能优化 {#编译性能优化-1}
 $env:CARGO_BUILD_JOBS = "16"  # 根据CPU核心数调整
 $env:RUSTC_WRAPPER = "sccache"  # 启用sccache缓存
 
-# 链接器优化
+# 链接器优化 {#链接器优化-2}
 $env:CARGO_TARGET_X86_64_PC_WINDOWS_MSVC_LINKER = "rust-lld.exe"
 
-# 内存优化 - 限制LLVM内存使用
+# 内存优化 - 限制LLVM内存使用 {#内存优化---限制llvm内存使用}
 $env:LLVM_SYS_170_PREFIX = ""
 
-# 更快的编译设置
+# 更快的编译设置 {#更快的编译设置-1}
 $env:CARGO_PROFILE_DEV_OPT_LEVEL = "0"
 $env:CARGO_PROFILE_DEV_DEBUG = "1"
 $env:CARGO_PROFILE_DEV_CODEGEN_UNITS = "256"
 $env:CARGO_PROFILE_DEV_LTO = "off"
 
-# 发布构建优化
+# 发布构建优化 {#发布构建优化-1}
 $env:CARGO_PROFILE_RELEASE_LTO = "thin"
 $env:CARGO_PROFILE_RELEASE_CODEGEN_UNITS = "16"
 ```
 
-### Linux/macOS (Bash/Zsh)
+### Linux/macOS (Bash/Zsh) {#linuxmacos-bashzsh}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# 编译性能优化
+# 编译性能优化 {#编译性能优化-1}
 export CARGO_BUILD_JOBS=$(($(nproc) - 1))
 export RUSTC_WRAPPER="sccache"
 
-# 链接器优化
+# 链接器优化 {#链接器优化-2}
 export CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER="clang"
 export RUSTFLAGS="-C link-arg=-fuse-ld=lld"
 
-# 更快的编译设置
+# 更快的编译设置 {#更快的编译设置-1}
 export CARGO_PROFILE_DEV_OPT_LEVEL="0"
 export CARGO_PROFILE_DEV_DEBUG="1"
 export CARGO_PROFILE_DEV_CODEGEN_UNITS="256"
 export CARGO_PROFILE_DEV_LTO="off"
 
-# 发布构建优化
+# 发布构建优化 {#发布构建优化-1}
 export CARGO_PROFILE_RELEASE_LTO="thin"
 export CARGO_PROFILE_RELEASE_CODEGEN_UNITS="16"
 ```
 
-## 📊 优化效果对比
+## 📊 优化效果对比 {#优化效果对比}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -148,11 +148,11 @@ export CARGO_PROFILE_RELEASE_CODEGEN_UNITS="16"
 | debug=1 | 减少 10-15% 编译时间 | Cargo.toml |
 | 并行编译 | 充分利用多核CPU | 环境变量 |
 
-## 🔧 配置文件说明
+## 🔧 配置文件说明 {#配置文件说明}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### .cargo/config.toml
+### .cargo/config.toml {#cargoconfigtoml}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -163,16 +163,16 @@ export CARGO_PROFILE_RELEASE_CODEGEN_UNITS="16"
 rustc-wrapper = "sccache"  # 编译缓存
 target-dir = "target"
 
-# 链接器优化
+# 链接器优化 {#链接器优化-2}
 [target.x86_64-pc-windows-msvc]
 linker = "rust-lld.exe"
 
-# 稀疏索引加速依赖下载
+# 稀疏索引加速依赖下载 {#稀疏索引加速依赖下载}
 [registries.crates-io]
 protocol = "sparse"
 ```
 
-### Cargo.toml Profile 配置
+### Cargo.toml Profile 配置 {#cargotoml-profile-配置}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -183,7 +183,7 @@ debug = 1              # 仅行表 = 更快
 codegen-units = 256    # 高并行度
 incremental = true     # 增量编译
 
-# 超快速检查 Profile
+# 超快速检查 Profile {#超快速检查-profile}
 [profile.check-fast]
 inherits = "dev"
 opt-level = 0
@@ -191,7 +191,7 @@ debug = 0
 codegen-units = 1024
 ```
 
-## 🛠️ 推荐工具
+## 🛠️ 推荐工具 {#推荐工具}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -203,26 +203,26 @@ codegen-units = 1024
 | cargo-cache | 缓存管理 | `cargo install cargo-cache` |
 | cargo-expand | 宏展开 | `cargo install cargo-expand` |
 
-## 📈 性能监控
+## 📈 性能监控 {#性能监控}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 查看编译时间
+### 查看编译时间 {#查看编译时间}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```bash
-# 使用 cargo 内置计时
+# 使用 cargo 内置计时 {#使用-cargo-内置计时}
 cargo build --timings
 
-# 查看历史编译时间
+# 查看历史编译时间 {#查看历史编译时间}
 cat .cargo-build-times
 
-# 使用脚本查看统计
+# 使用脚本查看统计 {#使用脚本查看统计}
 ./scripts/cargo-build-optimized.ps1 stats
 ```
 
-### sccache 统计
+### sccache 统计 {#sccache-统计}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -230,27 +230,27 @@ cat .cargo-build-times
 sccache --show-stats
 ```
 
-## 🧹 清理和重置
+## 🧹 清理和重置 {#清理和重置}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 当遇到编译问题时：
 
 ```powershell
-# 清理所有缓存
+# 清理所有缓存 {#清理所有缓存}
 ./scripts/cargo-build-optimized.ps1 clean-cache
 
-# 或者手动清理
+# 或者手动清理 {#或者手动清理}
 cargo clean
 Remove-Item -Recurse -Force target
 sccache --stop-server
 ```
 
-## 🔬 进阶优化
+## 🔬 进阶优化 {#进阶优化}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 使用 Nightly 工具链（可选）
+### 使用 Nightly 工具链（可选） {#使用-nightly-工具链可选}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -267,21 +267,21 @@ fast-debuginfo = true
 parallel-frontend = true
 ```
 
-### 内存优化（大型项目）
+### 内存优化（大型项目） {#内存优化大型项目}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 如果遇到内存不足：
 
 ```bash
-# 减少并行度
+# 减少并行度 {#减少并行度}
 export CARGO_BUILD_JOBS=4
 
-# 减少代码生成单元
+# 减少代码生成单元 {#减少代码生成单元}
 export CARGO_PROFILE_DEV_CODEGEN_UNITS=64
 ```
 
-## ⚠️ 注意事项
+## ⚠️ 注意事项 {#注意事项}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -290,7 +290,7 @@ export CARGO_PROFILE_DEV_CODEGEN_UNITS=64
 3. **链接器**：lld 不适用于所有场景，如有问题可回退到默认链接器
 4. **CI/CD**：在 CI 中建议使用 `CARGO_INCREMENTAL=0` 禁用增量编译
 
-## 📚 参考资源
+## 📚 参考资源 {#参考资源}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -315,7 +315,7 @@ export CARGO_PROFILE_DEV_CODEGEN_UNITS=64
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -323,7 +323,7 @@ export CARGO_PROFILE_DEV_CODEGEN_UNITS=64
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Program Optimization](https://en.wikipedia.org/wiki/Program_Optimization)**
 > **[来源: Criterion.rs]**

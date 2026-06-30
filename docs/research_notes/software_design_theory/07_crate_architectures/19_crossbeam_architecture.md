@@ -1,4 +1,4 @@
-# Crossbeam Crate 架构解构
+# Crossbeam Crate 架构解构 {#crossbeam-crate-架构解构}
 
 >
 
@@ -24,7 +24,7 @@
 
 ---
 
-## 1. 引言：Rust 无锁并发的工业标准
+## 1. 引言：Rust 无锁并发的工业标准 {#1-引言rust-无锁并发的工业标准}
 
 Crossbeam 是 Rust 生态中**无锁并发原语**的事实标准库，年下载量超过 8000 万次 来源: [crates.io 统计, 2025](https://crates.io/)。
 
@@ -90,13 +90,13 @@ q.push(1).unwrap();
 
 ---
 
-## 2. 核心架构
+## 2. 核心架构 {#2-核心架构}
 
 >
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 2.1 整体架构
+### 2.1 整体架构 {#21-整体架构}
 
 >
 
@@ -168,7 +168,7 @@ graph TB
 
 > [来源: Brown, T. (2015). "Reclaiming Memory for Lock-Free Data Structures". TAAPS]
 
-### 2.2 Epoch 状态机
+### 2.2 Epoch 状态机 {#22-epoch-状态机}
 
 >
 
@@ -226,13 +226,13 @@ stateDiagram-v2
 
 ---
 
-## 3. 类型系统关键利用
+## 3. 类型系统关键利用 {#3-类型系统关键利用}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 3.1 `Pin<LocalEpoch>`：借用检查器的无锁扩展
+### 3.1 `Pin<LocalEpoch>`：借用检查器的无锁扩展 {#31-pinlocalepoch借用检查器的无锁扩展}
 
 >
 
@@ -290,7 +290,7 @@ impl Guard {
 
 > [来源: Crossbeam Epoch — Guard](https://docs.rs/crossbeam-epoch/latest/crossbeam_epoch/struct.Guard.html)
 
-### 3.2 `Atomic<T>` 与内存排序的类型化封装
+### 3.2 `Atomic<T>` 与内存排序的类型化封装 {#32-atomict-与内存排序的类型化封装}
 
 >
 
@@ -350,7 +350,7 @@ struct Slot<T> {
 
 > [来源: Rustnomicon — Memory Ordering](https://doc.rust-lang.org/nomicon/atomics.html)
 
-### 3.3 `Scope` 与线程安全的借用
+### 3.3 `Scope` 与线程安全的借用 {#33-scope-与线程安全的借用}
 
 >
 
@@ -390,13 +390,13 @@ crossbeam::scope(|s| {
 
 ---
 
-## 4. 无锁算法正确性
+## 4. 无锁算法正确性 {#4-无锁算法正确性}
 
 >
 
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 4.1 `ArrayQueue` 的线性化点
+### 4.1 `ArrayQueue` 的线性化点 {#41-arrayqueue-的线性化点}
 
 >
 
@@ -462,7 +462,7 @@ pub fn push(&self, value: T) -> Result<(), T> {
 
 > [来源: Herlihy & Shavit (2011). "The Art of Multiprocessor Programming". Chapter 10]
 
-### 4.2 `SegQueue` 的动态扩展
+### 4.2 `SegQueue` 的动态扩展 {#42-segqueue-的动态扩展}
 
 >
 
@@ -494,7 +494,7 @@ graph LR
 
 ---
 
-## 5. 与标准库的对比
+## 5. 与标准库的对比 {#5-与标准库的对比}
 
 >
 
@@ -520,7 +520,7 @@ graph LR
 
 ---
 
-## 6. 在生态中的位置
+## 6. 在生态中的位置 {#6-在生态中的位置}
 
 >
 
@@ -580,7 +580,7 @@ graph BT
 
 ---
 
-## 相关架构与延伸阅读
+## 相关架构与延伸阅读 {#相关架构与延伸阅读}
 
 >
 
@@ -600,7 +600,7 @@ graph BT
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -630,13 +630,13 @@ graph BT
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 > **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 > **来源**: [This Week in Rust](https://this-week-in-rust.org/)
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

@@ -1,4 +1,4 @@
-# RustSEM 操作语义
+# RustSEM 操作语义 {#rustsem-操作语义}
 
 > **概念族**: 国际化形式化对齐
 
@@ -22,7 +22,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -31,7 +31,7 @@
 >
 
 - [RustSEM 操作语义](#rustsem-操作语义)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、概述](#一概述)
   - [二、语法定义](#二语法定义)
     - [2.1 抽象语法](#21-抽象语法)
@@ -61,7 +61,7 @@
     - [9.1 内部文档](#91-内部文档)
     - [9.2 外部参考](#92-外部参考)
     - [9.3 语义层次图](#93-语义层次图)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -70,7 +70,7 @@
   - [权威来源索引](#权威来源索引)
   - [多语言术语参考](#多语言术语参考)
 
-## 一、概述
+## 一、概述 {#一概述}
 
 >
 
@@ -90,13 +90,13 @@ RustSEM (Rust Semantic Model) 定义 Rust 语言的完整操作语义。
 
 ---
 
-## 二、语法定义
+## 二、语法定义 {#二语法定义}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 抽象语法
+### 2.1 抽象语法 {#21-抽象语法}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -162,7 +162,7 @@ RustSEM (Rust Semantic Model) 定义 Rust 语言的完整操作语义。
 
 ```
 
-### 2.2 程序状态
+### 2.2 程序状态 {#22-程序状态}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -188,13 +188,13 @@ P: 权限集         当前有效权限
 
 ---
 
-## 三、语义域
+## 三、语义域 {#三语义域}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 3.1 值域
+### 3.1 值域 {#31-值域}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -212,7 +212,7 @@ P: 权限集         当前有效权限
 
 | **Perm** | {Own, Read, Write, Drop} | 权限类型 |
 
-### 3.2 环境域
+### 3.2 环境域 {#32-环境域}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -230,7 +230,7 @@ P: 权限集         当前有效权限
 
 ```
 
-### 3.3 求值上下文
+### 3.3 求值上下文 {#33-求值上下文}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -264,13 +264,13 @@ P: 权限集         当前有效权限
 
 ---
 
-## 四、小步操作语义
+## 四、小步操作语义 {#四小步操作语义}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 4.1 基本归约规则
+### 4.1 基本归约规则 {#41-基本归约规则}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -302,7 +302,7 @@ v; e → e    (Seq)
 
 ```
 
-### 4.2 借用语义
+### 4.2 借用语义 {#42-借用语义}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -342,7 +342,7 @@ x ∈ dom(Σ)  Ω(x) = Owned  ∀y ∈ dom(Σ). no_borrow(y)
 
 ```
 
-### 4.3 所有权语义
+### 4.3 所有权语义 {#43-所有权语义}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -384,13 +384,13 @@ x ∈ dom(Σ)  Γ(x) : Copy
 
 ---
 
-## 五、大步操作语义
+## 五、大步操作语义 {#五大步操作语义}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 5.1 表达式求值
+### 5.1 表达式求值 {#51-表达式求值}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -418,7 +418,7 @@ x ∈ dom(Σ)  Γ(x) : Copy
 
 ```
 
-### 5.2 求值错误规则
+### 5.2 求值错误规则 {#52-求值错误规则}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -448,13 +448,13 @@ BorrowCheck(e) = Fail
 
 ---
 
-## 六、类型系统语义
+## 六、类型系统语义 {#六类型系统语义}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 6.1 类型判定规则
+### 6.1 类型判定规则 {#61-类型判定规则}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -494,7 +494,7 @@ x : τ ∈ Γ
 
 ```
 
-### 6.2 借用类型规则
+### 6.2 借用类型规则 {#62-借用类型规则}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -544,13 +544,13 @@ x : τ ∈ Γ
 
 ---
 
-## 七、内存模型语义
+## 七、内存模型语义 {#七内存模型语义}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 7.1 堆操作语义
+### 7.1 堆操作语义 {#71-堆操作语义}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -590,7 +590,7 @@ H, a := v → H[a := v], ()    (Write)
 
 ```
 
-### 7.2 Stacked Borrows 简化模型
+### 7.2 Stacked Borrows 简化模型 {#72-stacked-borrows-简化模型}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -636,13 +636,13 @@ H, θ, *a := v → H[a := v], θ, ()    (SB-Write)
 
 ---
 
-## 八、并发语义
+## 八、并发语义 {#八并发语义}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 8.1 线程创建
+### 8.1 线程创建 {#81-线程创建}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -656,7 +656,7 @@ S, spawn(e) → S ∪ {t}, t    (Spawn)
 
 ```
 
-### 8.2 共享状态
+### 8.2 共享状态 {#82-共享状态}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -684,7 +684,7 @@ H, atomic_write(a, v) → H[a := v], ()    (Atomic-Write)
 
 ```
 
-### 8.3 Send/Sync 语义
+### 8.3 Send/Sync 语义 {#83-sendsync-语义}
 
 >
 
@@ -710,13 +710,13 @@ safe_to_send(τ)    (Send)
 
 ---
 
-## 九、相关资源
+## 九、相关资源 {#九相关资源}
 
 >
 
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 9.1 内部文档
+### 9.1 内部文档 {#91-内部文档}
 
 >
 
@@ -728,7 +728,7 @@ safe_to_send(τ)    (Send)
 
 - [CONCEPT_AXIOM_THEOREM_MATRIX](10_concept_axiom_theorem_matrix.md) — 概念矩阵
 
-### 9.2 外部参考
+### 9.2 外部参考 {#92-外部参考}
 
 >
 
@@ -746,7 +746,7 @@ safe_to_send(τ)    (Send)
 
 | Types for the JavaScript | 类型系统理论 | 相关理论 |
 
-### 9.3 语义层次图
+### 9.3 语义层次图 {#93-语义层次图}
 
 >
 
@@ -796,7 +796,7 @@ Rust 语义层次
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -806,7 +806,7 @@ Rust 语义层次
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -814,7 +814,7 @@ Rust 语义层次
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -828,7 +828,7 @@ Rust 语义层次
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -838,7 +838,7 @@ Rust 语义层次
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -870,7 +870,7 @@ Rust 语义层次
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -882,7 +882,7 @@ Rust 语义层次
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -903,8 +903,8 @@ Rust 语义层次
 ---
 ---
 
-## 多语言术语参考
+## 多语言术语参考 {#多语言术语参考}
 
-> **来源: [国际化术语库](../data/i18n_terminology.yaml)**
+> **来源: [国际化术语库](../../data/i18n_terminology.yaml)**
 
-本文档涉及的英/中/日关键术语参见项目统一术语库 [`data/i18n_terminology.yaml`](../data/i18n_terminology.yaml)。
+本文档涉及的英/中/日关键术语参见项目统一术语库 [`data/i18n_terminology.yaml`](../../data/i18n_terminology.yaml)。

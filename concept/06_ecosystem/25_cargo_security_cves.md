@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **S** — Security
 > **双维定位**: S×Ops — 供应链安全与运维实践
 > **定位**: 帮助开发者理解 Rust 1.96.0 中 Cargo 的两个 CVE，建立“升级 + 审计 + 验证”的供应链安全习惯。
-> **前置概念**: [Toolchain](01_toolchain.md) · [Public/Private Dependencies](10_public_private_deps.md) · [Security Practices](19_security_practices.md)
+> **前置概念**: [Toolchain](01_toolchain.md) · [Public/Private Dependencies](10_public_private_deps.md) · [Security Practices](19_security_practices.md) · [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **后置概念**: [Cross Compilation](17_cross_compilation.md) · [DevOps and CI/CD](28_devops_and_ci_cd.md)
 
 ---

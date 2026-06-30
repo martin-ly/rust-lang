@@ -1,4 +1,4 @@
-# 工具链生态权威来源对齐矩阵
+# 工具链生态权威来源对齐矩阵 {#工具链生态权威来源对齐矩阵}
 
 > **概念族**: 权威来源对齐 / 工具链生态
 > **内容分级**: [核心级]
@@ -11,7 +11,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [工具链生态权威来源对齐矩阵](#工具链生态权威来源对齐矩阵)
   - [目录](#目录)
@@ -30,13 +30,13 @@
 
 ---
 
-## 一、对齐说明
+## 一、对齐说明 {#一对齐说明}
 
 本文档将 `docs/research_notes/` 中的工具链、构建、质量、发布内容与 Rust 官方工具链生态的权威来源建立映射，覆盖 rustc、Cargo、rustup、clippy、rustfmt、rust-analyzer、rustdoc 等核心组件。
 
 ---
 
-## 二、编译器与核心工具
+## 二、编译器与核心工具 {#二编译器与核心工具}
 
 | 工具 | 官方文档 | 项目文档 | 覆盖主题 |
 |------|----------|----------|----------|
@@ -46,40 +46,40 @@
 
 ---
 
-## 三、构建与包管理
+## 三、构建与包管理 {#三构建与包管理}
 
 | 主题 | 官方来源 | 项目文档 | 备注 |
 |------|----------|----------|------|
 | Cargo.toml 配置 | [Cargo Book](https://doc.rust-lang.org/cargo/reference/manifest.html) | [10_cargo_book_alignment.md](10_cargo_book_alignment.md) | package、dependencies、profile |
-| Workspace | [Cargo Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) | [crates/common/README.md](../crates/common/README.md) | 多 crate 管理 |
+| Workspace | [Cargo Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) | [crates/common/README.md](../../crates/common/README.md) | 多 crate 管理 |
 | Features | [Cargo Features](https://doc.rust-lang.org/cargo/reference/features.html) | [10_cargo_194_features.md](10_cargo_194_features.md) | 条件编译、依赖组合 |
-| Resolver v3 | [Resolver](https://doc.rust-lang.org/cargo/reference/resolver.html) | [examples/resolver_v3_practice/](../examples/resolver_v3_practice/README.md) | 依赖解析 |
+| Resolver v3 | [Resolver](https://doc.rust-lang.org/cargo/reference/resolver.html) | [examples/resolver_v3_practice/](../../examples/resolver_v3_practice/README.md) | 依赖解析 |
 | Cargo script | [Cargo Scripts](https://doc.rust-lang.org/cargo/reference/script.html) | [examples/cargo_script_demo.rs](../../examples/cargo_script_demo.rs) | 单文件脚本 |
 
 ---
 
-## 四、代码质量工具
+## 四、代码质量工具 {#四代码质量工具}
 
 | 工具 | 官方/社区来源 | 项目文档 | 覆盖主题 |
 |------|---------------|----------|----------|
-| clippy | [Clippy Lints](https://rust-lang.github.io/rust-clippy/master/index.html) | [.clippy.toml](../.clippy.toml) | lint、性能、风格 |
-| rustfmt | [rustfmt](https://github.com/rust-lang/rustfmt) | [Cargo.toml](../Cargo.toml) | 代码格式化 |
+| clippy | [Clippy Lints](https://rust-lang.github.io/rust-clippy/master/index.html) | [.clippy.toml](../../.clippy.toml) | lint、性能、风格 |
+| rustfmt | [rustfmt](https://github.com/rust-lang/rustfmt) | [Cargo.toml](../../Cargo.toml) | 代码格式化 |
 | rustdoc | [rustdoc book](https://doc.rust-lang.org/rustdoc/) | [docs/06_toolchain/03_rustdoc_advanced.md](../06_toolchain/03_rustdoc_advanced.md) | 文档、doctests |
-| cargo test | [Cargo Tests](https://doc.rust-lang.org/cargo/commands/cargo-test.html) | [exercises/tests/](../exercises/tests/) | 单元/集成测试 |
+| cargo test | [Cargo Tests](https://doc.rust-lang.org/cargo/commands/cargo-test.html) | [exercises/tests/](../../exercises/tests/) | 单元/集成测试 |
 | cargo bench | [Cargo Benchmarks](https://doc.rust-lang.org/cargo/commands/cargo-bench.html) | [experiments/10_concurrency_performance.md](experiments/10_concurrency_performance.md) | 基准测试 |
 
 ---
 
-## 五、IDE 与编辑器
+## 五、IDE 与编辑器 {#五ide-与编辑器}
 
 | 工具 | 官方来源 | 项目文档 | 覆盖主题 |
 |------|----------|----------|----------|
-| rust-analyzer | [Manual](https://rust-analyzer.github.io/manual.html) | [.vscode/settings.json](../.vscode/settings.json) | LSP、跳转、重构 |
-| VS Code Rust 扩展 | [Marketplace](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer) | [.vscode/README.md](../.vscode/README.md) | 编辑器配置 |
+| rust-analyzer | [Manual](https://rust-analyzer.github.io/manual.html) | [.vscode/settings.json](../../.vscode/settings.json) | LSP、跳转、重构 |
+| VS Code Rust 扩展 | [Marketplace](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer) | [.vscode/README.md](../../.vscode/README.md) | 编辑器配置 |
 
 ---
 
-## 六、文档与发布
+## 六、文档与发布 {#六文档与发布}
 
 | 主题 | 官方来源 | 项目文档 | 备注 |
 |------|----------|----------|------|
@@ -90,17 +90,17 @@
 
 ---
 
-## 七、交叉编译与目标平台
+## 七、交叉编译与目标平台 {#七交叉编译与目标平台}
 
 | 主题 | 官方来源 | 项目文档 | 备注 |
 |------|----------|----------|------|
 | target triple | [Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html) | [docs/06_toolchain/README.md](../06_toolchain/README.md) | 目标平台 |
-| cross | [cross-rs](https://github.com/cross-rs/cross) | [crates/c13_embedded/README.md](../crates/c13_embedded/README.md) | 交叉编译 |
-| wasm32 | [wasm-bindgen](https://rustwasm.github.io/docs/wasm-bindgen/) | [crates/c12_wasm/README.md](../crates/c12_wasm/README.md) | WebAssembly |
+| cross | [cross-rs](https://github.com/cross-rs/cross) | [crates/c13_embedded/README.md](../../crates/c13_embedded/README.md) | 交叉编译 |
+| wasm32 | [wasm-bindgen](https://rustwasm.github.io/docs/wasm-bindgen/) | [crates/c12_wasm/README.md](../../crates/c12_wasm/README.md) | WebAssembly |
 
 ---
 
-## 八、与项目文档的映射
+## 八、与项目文档的映射 {#八与项目文档的映射}
 
 | 项目文档 | 覆盖工具链主题 | 权威来源 |
 |----------|----------------|----------|
@@ -108,12 +108,11 @@
 | [10_rustc_dev_guide_alignment.md](10_rustc_dev_guide_alignment.md) | rustc 内部 | rustc-dev-guide |
 | [docs/06_toolchain/README.md](../06_toolchain/README.md) | 工具链综合 | rustup、rustc、rustdoc |
 | [10_tools_guide.md](10_tools_guide.md) | 常用工具速查 | 官方文档 |
-| [.clippy.toml](../.clippy.toml) | Clippy 配置 | Clippy Lints |
-| [.rustfmt.toml](../.rustfmt.toml) | 格式化配置 | rustfmt |
+| [.clippy.toml](../../.clippy.toml) | Clippy 配置 | Clippy Lints |
 
 ---
 
-## 九、未覆盖缺口
+## 九、未覆盖缺口 {#九未覆盖缺口}
 
 1. `cargo-hack`、`cargo-minimal-versions` 等高级 CI 工具可补充。
 2. `sccache`、`cranelift` 后端等编译加速工具可扩展。
@@ -121,7 +120,7 @@
 
 > **权威来源**: [Rustc Book](https://doc.rust-lang.org/rustc/) | [Cargo Book](https://doc.rust-lang.org/cargo/) | [rustup](https://rust-lang.github.io/rustup/) | [rustdoc](https://doc.rust-lang.org/rustdoc/) | [rust-analyzer](https://rust-analyzer.github.io/manual.html) | [Clippy](https://rust-lang.github.io/rust-clippy/master/index.html) | [rustfmt](https://github.com/rust-lang/rustfmt)
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
 - [Cargo Book 对齐](10_cargo_book_alignment.md)
@@ -131,7 +130,7 @@
 
 ---
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 本对齐矩阵同时参考以下 P1 学术权威来源，以形成完整的官方-学术对照网络：
 
@@ -140,7 +139,7 @@
 - [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
 - [Aeneas](https://aeneas-verification.github.io/)
 
-## 社区权威参考
+## 社区权威参考 {#社区权威参考}
 
 - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
 - [This Week in Rust](https://this-week-in-rust.org/)

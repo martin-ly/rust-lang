@@ -1,4 +1,4 @@
-# 宏系统使用指南
+# 宏系统使用指南 {#宏系统使用指南}
 
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
@@ -14,17 +14,17 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [宏系统使用指南](#宏系统使用指南)
-  - [📑 目录](#-目录)
-  - [📋 概述](#-概述)
-  - [🚀 快速开始](#-快速开始)
+  - [📑 目录](#目录)
+  - [📋 概述](#概述)
+  - [🚀 快速开始](#快速开始)
     - [声明宏](#声明宏)
     - [过程宏](#过程宏)
-  - [📊 核心功能](#-核心功能)
+  - [📊 核心功能](#核心功能)
     - [1. 声明宏](#1-声明宏)
       - [基本语法](#基本语法)
       - [重复模式](#重复模式)
@@ -32,19 +32,19 @@
     - [2. 属性宏](#2-属性宏)
     - [3. 派生宏](#3-派生宏)
     - [4. 函数式宏](#4-函数式宏)
-  - [🔧 实用宏示例](#-实用宏示例)
+  - [🔧 实用宏示例](#实用宏示例)
     - [1. 调试宏](#1-调试宏)
     - [2. 测试宏](#2-测试宏)
     - [3. 构建器宏](#3-构建器宏)
-  - [🔬 声明宏完整示例](#-声明宏完整示例)
+  - [🔬 声明宏完整示例](#声明宏完整示例)
     - [示例 1: 模式匹配与重复](#示例-1-模式匹配与重复)
     - [示例 2: Token Tree 操作](#示例-2-token-tree-操作)
     - [示例 3: 条件编译宏](#示例-3-条件编译宏)
-  - [🔧 过程宏完整示例](#-过程宏完整示例)
+  - [🔧 过程宏完整示例](#过程宏完整示例)
     - [示例 1: 自定义 Derive 宏](#示例-1-自定义-derive-宏)
     - [示例 2: 属性宏](#示例-2-属性宏)
     - [示例 3: 函数式宏](#示例-3-函数式宏)
-  - [⚠️ 宏的常见陷阱与调试技巧](#️-宏的常见陷阱与调试技巧)
+  - [⚠️ 宏的常见陷阱与调试技巧](#宏的常见陷阱与调试技巧)
     - [陷阱 1: 卫生性问题 (Hygiene)](#陷阱-1-卫生性问题-hygiene)
     - [陷阱 2: 表达式 vs 语句](#陷阱-2-表达式-vs-语句)
     - [陷阱 3: 重复模式匹配问题](#陷阱-3-重复模式匹配问题)
@@ -54,24 +54,23 @@
     - [调试技巧 3: 使用 `log_syntax!`](#调试技巧-3-使用-log_syntax)
     - [调试技巧 4: 编译时断言](#调试技巧-4-编译时断言)
     - [调试技巧 5: 过程宏调试](#调试技巧-5-过程宏调试)
-  - [⚡ 最佳实践](#-最佳实践)
+  - [⚡ 最佳实践](#最佳实践)
     - [1. 宏命名](#1-宏命名)
     - [2. 文档](#2-文档)
     - [3. 错误处理](#3-错误处理)
     - [4. 可见性控制](#4-可见性控制)
-  - [📚 相关文档](#-相关文档)
-  - [🆕 Rust 1.95+ 特性](#-rust-195-特性)
+  - [📚 相关文档](#相关文档)
+  - [🆕 Rust 1.95+ 特性](#rust-195-特性)
     - [新特性概览](#新特性概览)
     - [代码示例](#代码示例)
   - [Rust 1.95+ 在宏系统中的应用](#rust-195-在宏系统中的应用)
     - [array\_windows 在宏展开优化中的应用](#array_windows-在宏展开优化中的应用)
     - [LazyLock 在宏编译缓存中的应用](#lazylock-在宏编译缓存中的应用)
     - [ControlFlow 在宏错误处理中的应用](#controlflow-在宏错误处理中的应用)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 📋 概述
+## 📋 概述 {#概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -82,11 +81,11 @@
 
 ---
 
-## 🚀 快速开始
+## 🚀 快速开始 {#快速开始}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 声明宏
+### 声明宏 {#声明宏}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -109,7 +108,7 @@ macro_rules! vec {
 let v = vec![1, 2, 3];
 ```
 
-### 过程宏
+### 过程宏 {#过程宏}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -127,17 +126,17 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 
 ---
 
-## 📊 核心功能
+## 📊 核心功能 {#核心功能}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 声明宏
+### 1. 声明宏 {#1-声明宏}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-#### 基本语法
+#### 基本语法 {#基本语法}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -152,7 +151,7 @@ macro_rules! my_macro {
 }
 ```
 
-#### 重复模式
+#### 重复模式 {#重复模式}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -172,7 +171,7 @@ macro_rules! repeat {
 }
 ```
 
-#### 条件展开
+#### 条件展开 {#条件展开}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -195,7 +194,7 @@ macro_rules! conditional {
 }
 ```
 
-### 2. 属性宏
+### 2. 属性宏 {#2-属性宏}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -217,7 +216,7 @@ fn my_function() {
 }
 ```
 
-### 3. 派生宏
+### 3. 派生宏 {#3-派生宏}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -250,7 +249,7 @@ let s = MyStruct;
 println!("{}", s.method());  // "MyStruct"
 ```
 
-### 4. 函数式宏
+### 4. 函数式宏 {#4-函数式宏}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -267,11 +266,11 @@ my_function_macro!(some input);
 
 ---
 
-## 🔧 实用宏示例
+## 🔧 实用宏示例 {#实用宏示例}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 1. 调试宏
+### 1. 调试宏 {#1-调试宏}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -284,7 +283,7 @@ macro_rules! dbg_print {
 }
 ```
 
-### 2. 测试宏
+### 2. 测试宏 {#2-测试宏}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -302,7 +301,7 @@ test_case!(test_1, 1, 2);
 test_case!(test_2, 2, 4);
 ```
 
-### 3. 构建器宏
+### 3. 构建器宏 {#3-构建器宏}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -343,11 +342,11 @@ let config = Config::new()
 
 ---
 
-## 🔬 声明宏完整示例
+## 🔬 声明宏完整示例 {#声明宏完整示例}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 示例 1: 模式匹配与重复
+### 示例 1: 模式匹配与重复 {#示例-1-模式匹配与重复}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -383,7 +382,7 @@ macro_rules! sum {
 }
 ```
 
-### 示例 2: Token Tree 操作
+### 示例 2: Token Tree 操作 {#示例-2-token-tree-操作}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -419,7 +418,7 @@ let map = hashmap! {
 };
 ```
 
-### 示例 3: 条件编译宏
+### 示例 3: 条件编译宏 {#示例-3-条件编译宏}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -452,11 +451,11 @@ platform_specific! {
 
 ---
 
-## 🔧 过程宏完整示例
+## 🔧 过程宏完整示例 {#过程宏完整示例}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 示例 1: 自定义 Derive 宏
+### 示例 1: 自定义 Derive 宏 {#示例-1-自定义-derive-宏}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -540,7 +539,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
 }
 ```
 
-### 示例 2: 属性宏
+### 示例 2: 属性宏 {#示例-2-属性宏}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -583,7 +582,7 @@ pub fn timed(attr: TokenStream, item: TokenStream) -> TokenStream {
 // fn heavy_computation() -> i32 { ... }
 ```
 
-### 示例 3: 函数式宏
+### 示例 3: 函数式宏 {#示例-3-函数式宏}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -631,11 +630,11 @@ pub fn sql(input: TokenStream) -> TokenStream {
 
 ---
 
-## ⚠️ 宏的常见陷阱与调试技巧
+## ⚠️ 宏的常见陷阱与调试技巧 {#宏的常见陷阱与调试技巧}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 陷阱 1: 卫生性问题 (Hygiene)
+### 陷阱 1: 卫生性问题 (Hygiene) {#陷阱-1-卫生性问题-hygiene}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -664,7 +663,7 @@ macro_rules! safe_scope {
 }
 ```
 
-### 陷阱 2: 表达式 vs 语句
+### 陷阱 2: 表达式 vs 语句 {#陷阱-2-表达式-vs-语句}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -686,7 +685,7 @@ macro_rules! double_safe {
 }
 ```
 
-### 陷阱 3: 重复模式匹配问题
+### 陷阱 3: 重复模式匹配问题 {#陷阱-3-重复模式匹配问题}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -711,7 +710,7 @@ macro_rules! correct_repeat {
 }
 ```
 
-### 陷阱 4: 编译错误信息模糊
+### 陷阱 4: 编译错误信息模糊 {#陷阱-4-编译错误信息模糊}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -740,22 +739,22 @@ macro_rules! good_assert {
 }
 ```
 
-### 调试技巧 1: 展开宏查看
+### 调试技巧 1: 展开宏查看 {#调试技巧-1-展开宏查看}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```bash
-# 查看宏展开结果
+# 查看宏展开结果 {#查看宏展开结果}
 cargo expand --lib
 
-# 查看特定模块的展开
+# 查看特定模块的展开 {#查看特定模块的展开}
 cargo expand --lib my_module
 
-# 查看测试中的宏展开
+# 查看测试中的宏展开 {#查看测试中的宏展开}
 cargo expand --test my_test
 ```
 
-### 调试技巧 2: 使用 `trace_macros!`
+### 调试技巧 2: 使用 `trace_macros!` {#调试技巧-2-使用-trace_macros}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -770,7 +769,7 @@ vec![1, 2, 3];
 trace_macros!(false);
 ```
 
-### 调试技巧 3: 使用 `log_syntax!`
+### 调试技巧 3: 使用 `log_syntax!` {#调试技巧-3-使用-log_syntax}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -785,7 +784,7 @@ macro_rules! debug_macro {
 }
 ```
 
-### 调试技巧 4: 编译时断言
+### 调试技巧 4: 编译时断言 {#调试技巧-4-编译时断言}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -801,7 +800,7 @@ const_assert!(std::mem::size_of::<usize>() == 8);
 // const_assert!(1 == 2); // 编译错误！
 ```
 
-### 调试技巧 5: 过程宏调试
+### 调试技巧 5: 过程宏调试 {#调试技巧-5-过程宏调试}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -820,11 +819,11 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 
 ---
 
-## ⚡ 最佳实践
+## ⚡ 最佳实践 {#最佳实践}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 1. 宏命名
+### 1. 宏命名 {#1-宏命名}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -833,7 +832,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 - 避免与标准库宏冲突
 - 过程宏 crate 名通常以 `_derive` 或 `_macros` 结尾
 
-### 2. 文档
+### 2. 文档 {#2-文档}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -857,7 +856,7 @@ macro_rules! my_vec {
 }
 ````
 
-### 3. 错误处理
+### 3. 错误处理 {#3-错误处理}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -885,7 +884,7 @@ macro_rules! min {
 }
 ```
 
-### 4. 可见性控制
+### 4. 可见性控制 {#4-可见性控制}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -905,7 +904,7 @@ macro_rules! public_macro {
 
 ---
 
-## 📚 相关文档
+## 📚 相关文档 {#相关文档}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -914,13 +913,13 @@ macro_rules! public_macro {
 - [过程宏指南](../../crates/c11_macro_system/docs/tier_02_guides/02_Derive宏开发指南.md)
 - [宏系统思维导图](../../archive/research_notes_2026_06_25/formal_methods/10_macro_system_mindmap.md) - 宏扩展过程的形式化分析
 
-## 🆕 Rust 1.95+ 特性
+## 🆕 Rust 1.95+ 特性 {#rust-195-特性}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.96.0+
 
-### 新特性概览
+### 新特性概览 {#新特性概览}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -933,7 +932,7 @@ orce_mut()
 - **Peekable::next_if_map** - 条件映射迭代
 - **TryFrom<char> for usize** - Unicode 标量值转换
 
-### 代码示例
+### 代码示例 {#代码示例}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -963,13 +962,13 @@ let result = items.iter().try_for_each(|&n| {
 
 ---
 
-## Rust 1.95+ 在宏系统中的应用
+## Rust 1.95+ 在宏系统中的应用 {#rust-195-在宏系统中的应用}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.96.0+
 
-### array_windows 在宏展开优化中的应用
+### array_windows 在宏展开优化中的应用 {#array_windows-在宏展开优化中的应用}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -990,7 +989,7 @@ macro_rules! sliding_window_match {
 }
 ```
 
-### LazyLock 在宏编译缓存中的应用
+### LazyLock 在宏编译缓存中的应用 {#lazylock-在宏编译缓存中的应用}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -1009,7 +1008,7 @@ pub fn get_cached_expansion(macro_name: &str) -> Option<TokenStream> {
 }
 ```
 
-### ControlFlow 在宏错误处理中的应用
+### ControlFlow 在宏错误处理中的应用 {#controlflow-在宏错误处理中的应用}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -1051,7 +1050,7 @@ fn validate_macro_rules(rules: &[MacroRule]) -> ControlFlow<MacroError, ()> {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -1060,7 +1059,7 @@ fn validate_macro_rules(rules: &[MacroRule]) -> ControlFlow<MacroError, ()> {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Macro (computer science)](https://en.wikipedia.org/wiki/Macro_(computer_science))**
 > **来源: [Wikipedia - Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming)**

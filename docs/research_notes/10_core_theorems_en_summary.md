@@ -1,4 +1,4 @@
-# Core Theorems — English Summary
+# Core Theorems — English Summary {#core-theorems-english-summary}
 
 > **概念族**: 形式化方法
 
@@ -10,7 +10,7 @@
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -18,15 +18,15 @@
 
 >
 
-- [Core Theorems — English Summary](#core-theorems--english-summary)
-  - [📑 目录](#-目录)
+- [Core Theorems — English Summary](#core-theorems-english-summary)
+  - [📑 目录](#目录)
   - [Overview](#overview)
   - [Theorem Summary](#theorem-summary)
   - [Auxiliary Lemmas](#auxiliary-lemmas)
   - [L3 Machine-Checkable Scaffolding](#l3-machine-checkable-scaffolding)
   - [Formal Language and Proofs](#formal-language-and-proofs)
   - [Related Documents](#related-documents)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -48,7 +48,7 @@
 
 ---
 
-## Overview
+## Overview {#overview}
 
 >
 
@@ -58,7 +58,7 @@ L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with 
 
 ---
 
-## Theorem Summary
+## Theorem Summary {#theorem-summary}
 
 >
 
@@ -78,7 +78,7 @@ L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with 
 
 ---
 
-## Auxiliary Lemmas
+## Auxiliary Lemmas {#auxiliary-lemmas}
 
 >
 
@@ -104,7 +104,7 @@ L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with 
 
 ---
 
-## L3 Machine-Checkable Scaffolding
+## L3 Machine-Checkable Scaffolding {#l3-machine-checkable-scaffolding}
 
 >
 
@@ -126,7 +126,7 @@ L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with 
 
 ---
 
-## Formal Language and Proofs
+## Formal Language and Proofs {#formal-language-and-proofs}
 
 >
 
@@ -134,7 +134,7 @@ L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with 
 
 - [FORMAL_LANGUAGE_AND_PROOFS](10_formal_language_and_proofs.md) — Formal language (inference rules, operational semantics, judgment forms) and mathematical proofs; complements Coq skeletons.
 
-## Related Documents
+## Related Documents {#related-documents}
 
 >
 
@@ -152,7 +152,7 @@ L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with 
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -162,7 +162,7 @@ L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with 
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -170,7 +170,7 @@ L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with 
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -184,7 +184,7 @@ L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with 
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -194,7 +194,7 @@ L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with 
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -226,7 +226,7 @@ L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with 
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -246,7 +246,7 @@ L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with 
 
 ---
 
-## 社区权威参考
+## 社区权威参考 {#社区权威参考}
 
 - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
 - [This Week in Rust](https://this-week-in-rust.org/)

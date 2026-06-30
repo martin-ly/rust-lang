@@ -1,4 +1,4 @@
-# 项目维护指南
+# 项目维护指南 {#项目维护指南}
 
 > **概念族**: 方法论 / 工具 / 指南
 
@@ -22,7 +22,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -31,7 +31,7 @@
 >
 
 - [项目维护指南](#项目维护指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [维护责任](#维护责任)
     - [维护者角色](#维护者角色)
@@ -51,12 +51,12 @@
     - [内容请求](#内容请求)
   - [版本管理](#版本管理)
     - [版本号规则](#版本号规则)
-    - [变更日志](#变更日志)
+    - [变更日志](#变更日志-1)
   - [备份与归档](#备份与归档)
     - [备份策略](#备份策略)
     - [归档规则](#归档规则)
   - [联系信息](#联系信息)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -64,7 +64,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 概述
+## 概述 {#概述}
 
 >
 
@@ -74,13 +74,13 @@
 
 ---
 
-## 维护责任
+## 维护责任 {#维护责任}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 维护者角色
+### 维护者角色 {#维护者角色}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -100,7 +100,7 @@
 
 | 社区协调 | 反馈收集、问题响应 | 社区经理 |
 
-### 维护周期
+### 维护周期 {#维护周期}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -122,13 +122,13 @@
 
 ---
 
-## 文档标准
+## 文档标准 {#文档标准}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 文件命名规范
+### 文件命名规范 {#文件命名规范}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -138,7 +138,7 @@
 
 ```text
 
-# 核心形式化文档
+# 核心形式化文档 {#核心形式化文档}
 
 <topic>_model.md
 
@@ -148,7 +148,7 @@
 
 
 
-# 思维表征
+# 思维表征 {#思维表征-1}
 
 <topic>_MINDMAP.md
 
@@ -158,25 +158,25 @@
 
 
 
-# 教程
+# 教程 {#教程-1}
 
 TUTORIAL_<topic>.md
 
 
 
-# 速查表
+# 速查表 {#速查表}
 
 <topic>_CHEATSHEET.md
 
 
 
-# 索引
+# 索引 {#索引}
 
 <scope>_INDEX.md
 
 ```
 
-### 头部模板
+### 头部模板 {#头部模板}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -186,7 +186,7 @@ TUTORIAL_<topic>.md
 
 ```markdown
 
-# 标题
+# 标题 {#标题}
 
 
 
@@ -204,7 +204,7 @@ TUTORIAL_<topic>.md
 
 ```
 
-### 内容结构
+### 内容结构 {#内容结构}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -228,13 +228,13 @@ TUTORIAL_<topic>.md
 
 ---
 
-## 更新流程
+## 更新流程 {#更新流程}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 内容更新步骤
+### 内容更新步骤 {#内容更新步骤}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -294,7 +294,7 @@ TUTORIAL_<topic>.md
 
    ```
 
-### Rust版本更新
+### Rust版本更新 {#rust版本更新}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -306,7 +306,7 @@ TUTORIAL_<topic>.md
 
 ```markdown
 
-## Rust 1.96.0 更新检查清单
+## Rust 1.96.0 更新检查清单 {#rust-1960-更新检查清单}
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -326,13 +326,13 @@ TUTORIAL_<topic>.md
 
 ---
 
-## 质量控制
+## 质量控制 {#质量控制}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 自动化检查
+### 自动化检查 {#自动化检查}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -340,7 +340,7 @@ TUTORIAL_<topic>.md
 
 #!/bin/bash
 
-# 质量检查脚本
+# 质量检查脚本 {#质量检查脚本}
 
 
 
@@ -348,7 +348,7 @@ echo "=== 运行质量检查 ==="
 
 
 
-# 检查链接有效性
+# 检查链接有效性 {#检查链接有效性}
 
 echo "检查链接..."
 
@@ -356,7 +356,7 @@ find docs/research_notes -name "*.md" -exec markdown-link-check {} \;
 
 
 
-# 检查格式规范
+# 检查格式规范 {#检查格式规范}
 
 echo "检查格式..."
 
@@ -364,7 +364,7 @@ markdownlint docs/research_notes/**/*.md
 
 
 
-# 统计信息
+# 统计信息 {#统计信息}
 
 echo "生成统计..."
 
@@ -378,19 +378,19 @@ echo "=== 检查完成 ==="
 
 ```
 
-### 手动审核清单
+### 手动审核清单 {#手动审核清单}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```markdown
 
-## 内容审核清单
+## 内容审核清单 {#内容审核清单}
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 
 
-### 形式化文档
+### 形式化文档 {#形式化文档}
 
 
 
@@ -408,7 +408,7 @@ echo "=== 检查完成 ==="
 
 
 
-### 思维表征
+### 思维表征 {#思维表征-1}
 
 
 
@@ -424,7 +424,7 @@ echo "=== 检查完成 ==="
 
 
 
-### 教程
+### 教程 {#教程-1}
 
 
 
@@ -442,13 +442,13 @@ echo "=== 检查完成 ==="
 
 ---
 
-## 社区贡献
+## 社区贡献 {#社区贡献}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 贡献流程
+### 贡献流程 {#贡献流程}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -494,7 +494,7 @@ echo "=== 检查完成 ==="
 
    - 列出影响范围
 
-### 内容请求
+### 内容请求 {#内容请求}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -512,13 +512,13 @@ echo "=== 检查完成 ==="
 
 ---
 
-## 版本管理
+## 版本管理 {#版本管理}
 
 >
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 版本号规则
+### 版本号规则 {#版本号规则}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -536,19 +536,19 @@ echo "=== 检查完成 ==="
 
 ```
 
-### 变更日志
+### 变更日志 {#变更日志-1}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```markdown
 
-## 变更日志
+## 变更日志 {#变更日志-1}
 
 > **[来源: [crates.io](https://crates.io/)]**
 
 
 
-### [1.1.0] - 2026-03-15
+### [1.1.0] - 2026-03-15 {#110---2026-03-15}
 
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -560,7 +560,7 @@ echo "=== 检查完成 ==="
 
 
 
-### [1.0.0] - 2026-02-28
+### [1.0.0] - 2026-02-28 {#100---2026-02-28}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -574,13 +574,13 @@ echo "=== 检查完成 ==="
 
 ---
 
-## 备份与归档
+## 备份与归档 {#备份与归档}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 备份策略
+### 备份策略 {#备份策略}
 
 >
 
@@ -596,7 +596,7 @@ echo "=== 检查完成 ==="
 
 | 版本发布 | 每次 | 永久 |
 
-### 归档规则
+### 归档规则 {#归档规则}
 
 >
 
@@ -610,7 +610,7 @@ echo "=== 检查完成 ==="
 
 ---
 
-## 联系信息
+## 联系信息 {#联系信息}
 
 >
 
@@ -638,7 +638,7 @@ echo "=== 检查完成 ==="
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -648,7 +648,7 @@ echo "=== 检查完成 ==="
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -656,7 +656,7 @@ echo "=== 检查完成 ==="
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -670,7 +670,7 @@ echo "=== 检查完成 ==="
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -680,7 +680,7 @@ echo "=== 检查完成 ==="
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -712,7 +712,7 @@ echo "=== 检查完成 ==="
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -724,7 +724,7 @@ echo "=== 检查完成 ==="
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
 

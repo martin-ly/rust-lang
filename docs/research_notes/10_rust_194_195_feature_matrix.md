@@ -1,4 +1,4 @@
-# Rust 1.94/1.95 特性矩阵与形式化追踪
+# Rust 1.94/1.95 特性矩阵与形式化追踪 {#rust-194195-特性矩阵与形式化追踪}
 >
 > **概念族**: 版本特性
 
@@ -16,12 +16,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.94/1.95 特性矩阵与形式化追踪](#rust-194195-特性矩阵与形式化追踪)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [特性矩阵概览](#特性矩阵概览)
     - [特性来源索引](#特性来源索引)
   - [形式化文档更新计划](#形式化文档更新计划)
@@ -41,7 +41,7 @@
     - [官方资源](#官方资源)
     - [学术资源](#学术资源)
   - [持续追踪指标](#持续追踪指标)
-  - [✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）](#-权威国际化来源对齐升级摘要rust-1960--edition-2024)
+  - [✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）](#权威国际化来源对齐升级摘要rust-1960-edition-2024)
     - [本次升级要点](#本次升级要点)
       - [新增 Rust 1.96.0 特性](#新增-rust-1960-特性)
       - [新增 Rust 1.95.0 特性](#新增-rust-1950-特性)
@@ -49,7 +49,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 特性矩阵概览
+## 特性矩阵概览 {#特性矩阵概览}
 >
 > **来源: [Rust Release Notes](https://doc.rust-lang.org/stable/releases.html)**
 >
@@ -66,7 +66,7 @@
 | assert_matches! / debug_assert_matches! | - | - | - | ✅ | [macro_system](formal_methods/10_macro_system.md) | 90% |
 | if let guards on match arms | - | - | ✅ | ✅ | [borrow_checker](formal_methods/10_borrow_checker_proof.md) | 85% |
 | cfg_select! 宏 | - | - | ✅ | ✅ | [macro_system](formal_methods/10_macro_system.md) | 80% |
-| PowerPC / PowerPC64 inline asm | - | - | ✅ | ✅ | [toolchain](06_toolchain/) | 80% |
+| PowerPC / PowerPC64 inline asm | - | - | ✅ | ✅ | [toolchain](../../06_toolchain/) | 80% |
 | 下一代 trait 求解器 | - | - | 🔬 | 🔬 | [type_system](type_theory/10_type_system_foundations.md) | 60% |
 | Async Drop | - | - | 🔬 | 🔬 | [async](formal_methods/10_async_state_machine.md) | 40% |
 | 生成器 (iter!) | - | - | 🔬 | 🔬 | [async](formal_methods/10_async_state_machine.md) | 50% |
@@ -85,7 +85,7 @@
 | build-dir-new-layout | 🔬 | 🔬 | 🔬 | 🔬 | - | 75% |
 | section-timings | 🔬 | 🔬 | 🔬 | 🔬 | - | 80% |
 
-### 特性来源索引
+### 特性来源索引 {#特性来源索引}
 >
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -112,11 +112,11 @@
 
 ---
 
-## 形式化文档更新计划
+## 形式化文档更新计划 {#形式化文档更新计划}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 高优先级更新
+### 高优先级更新 {#高优先级更新}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -130,7 +130,7 @@
 | [async_state_machine](formal_methods/10_async_state_machine.md) | 添加生成器状态机形式化 | 6h | ⏳ |
 | [pin_self_referential](formal_methods/10_pin_self_referential.md) | 更新重新借用规则 | 4h | ⏳ |
 
-### 中优先级更新
+### 中优先级更新 {#中优先级更新}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -144,11 +144,11 @@
 
 ---
 
-## 新增形式化定义
+## 新增形式化定义 {#新增形式化定义}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Def 1.94-1 (RangeToInclusive)
+### Def 1.94-1 (RangeToInclusive) {#def-194-1-rangetoinclusive}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -169,7 +169,7 @@ RangeToInclusive<T> = { x | x ≤ end }
 
 ---
 
-### Def 1.94-2 (ControlFlow::ok)
+### Def 1.94-2 (ControlFlow::ok) {#def-194-2-controlflowok}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -188,7 +188,7 @@ ok(Break(_)) = None
 
 ---
 
-### Def 1.94-3 (RefCell::try_map)
+### Def 1.94-3 (RefCell::try_map) {#def-194-3-refcelltry_map}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -206,7 +206,7 @@ try_map: Ref<T> -> (T -> Option<U>) -> Result<Ref<U>, Ref<T>>
 
 ---
 
-### Def 1.95-1 (生成器状态机)
+### Def 1.95-1 (生成器状态机) {#def-195-1-生成器状态机}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -224,7 +224,7 @@ Generator<Yield=Y, Return=R>:
 
 ---
 
-### Def 1.96-1 (core::range::Range)
+### Def 1.96-1 (core::range::Range) {#def-196-1-corerangerange}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 > **来源: [RFC 3550 - New Range Types](https://rust-lang.github.io/rfcs/3550-new-range.html)**
@@ -245,7 +245,7 @@ Range<Idx> = { x | start ≤ x < end }
 
 ---
 
-### Def 1.96-2 (assert_matches!)
+### Def 1.96-2 (assert_matches!) {#def-196-2-assert_matches}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 > **来源: [core::assert_matches](https://doc.rust-lang.org/stable/core/assert_matches/macro.assert_matches.html)**
@@ -265,7 +265,7 @@ assert_matches!(v, p) ≡ if v 匹配 p { () } else { panic!("{v:?}") }
 
 ---
 
-### Def 1.96-3 (Cargo CVE-2026-5223)
+### Def 1.96-3 (Cargo CVE-2026-5223) {#def-196-3-cargo-cve-2026-5223}
 
 > **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
 > **来源: [Cargo Security Advisories](https://github.com/rust-lang/cargo/security/advisories)**
@@ -280,11 +280,11 @@ assert_matches!(v, p) ≡ if v 匹配 p { () } else { panic!("{v:?}") }
 
 ---
 
-## 证明更新清单
+## 证明更新清单 {#证明更新清单}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 定理更新
+### 定理更新 {#定理更新}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -300,11 +300,11 @@ assert_matches!(v, p) ≡ if v 匹配 p { () } else { panic!("{v:?}") }
 
 ---
 
-## 网络资源对齐
+## 网络资源对齐 {#网络资源对齐}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 官方资源
+### 官方资源 {#官方资源}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -316,7 +316,7 @@ assert_matches!(v, p) ≡ if v 匹配 p { () } else { panic!("{v:?}") }
 | RFCs | <https://rust-lang.github.io/rfcs> | ✅ RFC 3550 等持续追踪 |
 | Project Goals | <https://rust-lang.github.io/rust-project-goals> | ✅ 2025H2 |
 
-### 学术资源
+### 学术资源 {#学术资源}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -329,7 +329,7 @@ assert_matches!(v, p) ≡ if v 匹配 p { () } else { panic!("{v:?}") }
 
 ---
 
-## 持续追踪指标
+## 持续追踪指标 {#持续追踪指标}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -360,7 +360,7 @@ assert_matches!(v, p) ≡ if v 匹配 p { () } else { panic!("{v:?}") }
 
 ---
 
-## ✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）
+## ✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024） {#权威国际化来源对齐升级摘要rust-1960-edition-2024}
 
 > **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
 > **来源: [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)**
@@ -369,11 +369,11 @@ assert_matches!(v, p) ≡ if v 匹配 p { () } else { panic!("{v:?}") }
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **升级日期**: 2026-06-29
 
-### 本次升级要点
+### 本次升级要点 {#本次升级要点}
 
 本文档已完成权威国际化来源对齐升级，统一版本基准为 **Rust 1.96.0+ / Edition 2024**，同时保留 1.93/1.94 历史分析章节。
 
-#### 新增 Rust 1.96.0 特性
+#### 新增 Rust 1.96.0 特性 {#新增-rust-1960-特性}
 
 | 特性 | 来源 | 说明 |
 | :--- | :--- | :--- |
@@ -382,7 +382,7 @@ assert_matches!(v, p) ≡ if v 匹配 p { () } else { panic!("{v:?}") }
 | Cargo CVE-2026-5223 / CVE-2026-5222 修复 | [Cargo 安全公告](https://github.com/rust-lang/cargo/security/advisories)、[Rust Blog 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) | 第三方 registry tarball symlink 与 URL 规范化修复 |
 | WebAssembly 链接行为变更 | [Rust Blog 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) | 不再默认传递 `--allow-undefined` |
 
-#### 新增 Rust 1.95.0 特性
+#### 新增 Rust 1.95.0 特性 {#新增-rust-1950-特性}
 
 | 特性 | 来源 | 说明 |
 | :--- | :--- | :--- |
@@ -391,7 +391,7 @@ assert_matches!(v, p) ≡ if v 匹配 p { () } else { panic!("{v:?}") }
 | PowerPC / PowerPC64 内联汇编稳定化 | [Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)、[Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | 稳定 inline assembly for PowerPC |
 | `--remap-path-scope` | [Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | 控制路径重映射作用域 |
 
-#### 权威来源对齐
+#### 权威来源对齐 {#权威来源对齐}
 
 - Rust release notes（releases.rs）
 - Rust Blog 对应版本发布公告
@@ -401,7 +401,7 @@ assert_matches!(v, p) ≡ if v 匹配 p { () } else { panic!("{v:?}") }
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -410,7 +410,7 @@ assert_matches!(v, p) ≡ if v 匹配 p { () } else { panic!("{v:?}") }
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Rust Release Notes](https://doc.rust-lang.org/stable/releases.html)**
 

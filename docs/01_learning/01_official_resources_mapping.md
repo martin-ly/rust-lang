@@ -1,4 +1,4 @@
-# 官方资源映射
+# 官方资源映射 {#官方资源映射}
 
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **最后更新**: 2026-06-09
@@ -8,7 +8,7 @@
 
 本文件映射 Rust 官方资源与本项目内容的对应关系。
 
-## 官方资源索引
+## 官方资源索引 {#官方资源索引}
 
 | 官方资源 | 链接 | 本项目对应 |
 | :--- | :--- | :--- |
@@ -21,7 +21,7 @@
 | Async Book | [rust-lang.github.io/async-book](https://rust-lang.github.io/async-book/) | [concept/03_advanced/02_async.md](../../concept/03_advanced/02_async.md) |
 | Release Notes | [blog.rust-lang.org](https://blog.rust-lang.org/) | [docs/06_toolchain/06_19_rust_1_96_features.md](../06_toolchain/06_19_rust_1_96_features.md) |
 
-## 学习路径建议
+## 学习路径建议 {#学习路径建议}
 
 初学者建议按以下顺序使用官方资源：
 

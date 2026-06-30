@@ -12,7 +12,7 @@
 > **预计阅读时间**: 20 分钟
 > **对应练习**: [exercises/src/ownership_borrowing/ex01_hello_move.rs](../../exercises/src/ownership_borrowing)
 >
-> **来源**: [TRPL — Getting Started](https://doc.rust-lang.org/book/ch01-00-getting-started.html) · [Rust Installation](https://www.rust-lang.org/tools/install)
+> **来源**: [TRPL — Getting Started](https://doc.rust-lang.org/book/ch01-00-getting-started.html) · [Rust Installation](https://www.rust-lang.org/tools/install) · [学习指南](../00_meta/learning_guide.md)
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---

@@ -1,4 +1,4 @@
-# 测试覆盖率指南
+# 测试覆盖率指南 {#测试覆盖率指南}
 
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
@@ -13,57 +13,56 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [测试覆盖率指南](#测试覆盖率指南)
-  - [📑 目录](#-目录)
-  - [📋 概述 {#-概述}](#-概述--概述)
-  - [🚀 快速开始 {#-快速开始}](#-快速开始--快速开始)
+  - [📑 目录](#目录)
+  - [📋 概述](#概述)
+  - [🚀 快速开始](#快速开始)
     - [安装覆盖率工具](#安装覆盖率工具)
     - [运行覆盖率测试](#运行覆盖率测试)
-  - [📊 覆盖率工具 {#-覆盖率工具}](#-覆盖率工具--覆盖率工具)
+  - [📊 覆盖率工具](#覆盖率工具)
     - [1. cargo-tarpaulin](#1-cargo-tarpaulin)
     - [2. cargo-llvm-cov](#2-cargo-llvm-cov)
-  - [🎯 覆盖率目标 {#-覆盖率目标}](#-覆盖率目标--覆盖率目标)
+  - [🎯 覆盖率目标](#覆盖率目标)
     - [推荐覆盖率](#推荐覆盖率)
     - [当前项目覆盖率](#当前项目覆盖率)
-  - [📝 测试类型 {#-测试类型}](#-测试类型--测试类型)
+  - [📝 测试类型](#测试类型)
     - [1. 单元测试](#1-单元测试)
     - [2. 集成测试](#2-集成测试)
     - [3. 文档测试](#3-文档测试)
     - [4. 异步测试](#4-异步测试)
-  - [🔧 提高覆盖率 {#-提高覆盖率}](#-提高覆盖率--提高覆盖率)
+  - [🔧 提高覆盖率](#提高覆盖率)
     - [1. 测试边界情况](#1-测试边界情况)
     - [2. 测试错误路径](#2-测试错误路径)
     - [3. 测试并发场景](#3-测试并发场景)
-  - [📊 覆盖率报告 {#-覆盖率报告}](#-覆盖率报告--覆盖率报告)
+  - [📊 覆盖率报告](#覆盖率报告)
     - [生成报告](#生成报告)
     - [解读报告](#解读报告)
     - [覆盖率指标](#覆盖率指标)
-  - [🎯 最佳实践 {#-最佳实践}](#-最佳实践--最佳实践)
+  - [🎯 最佳实践](#最佳实践)
     - [1. 持续集成](#1-持续集成)
     - [2. 覆盖率阈值](#2-覆盖率阈值)
     - [3. 排除文件](#3-排除文件)
-  - [📚 相关资源 {#-相关资源}](#-相关资源--相关资源)
+  - [📚 相关资源](#相关资源)
   - [使用场景](#使用场景)
     - [场景1: 新模块测试策略](#场景1-新模块测试策略)
     - [场景2: CI/CD 集成](#场景2-cicd-集成)
     - [场景3: 覆盖率提升](#场景3-覆盖率提升)
     - [场景4: 发布前质量验证](#场景4-发布前质量验证)
   - [形式化链接](#形式化链接)
-  - [🆕 Rust 1.95+ 特性](#-rust-195-特性)
+  - [🆕 Rust 1.95+ 特性](#rust-195-特性)
     - [新特性概览](#新特性概览)
   - [Rust 1.95+ 在测试开发中的应用](#rust-195-在测试开发中的应用)
     - [array\_windows 在测试数据生成中的应用](#array_windows-在测试数据生成中的应用)
     - [ControlFlow 在测试验证管道中的应用](#controlflow-在测试验证管道中的应用)
     - [LazyLock 在测试固件管理中的应用](#lazylock-在测试固件管理中的应用)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 📋 概述 {#-概述}
+## 📋 概述 {#概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -74,45 +73,45 @@
 
 ---
 
-## 🚀 快速开始 {#-快速开始}
+## 🚀 快速开始 {#快速开始}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 安装覆盖率工具
+### 安装覆盖率工具 {#安装覆盖率工具}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# 安装 cargo-tarpaulin
+# 安装 cargo-tarpaulin {#安装-cargo-tarpaulin}
 cargo install cargo-tarpaulin
 
-# 或使用 cargo-llvm-cov
+# 或使用 cargo-llvm-cov {#或使用-cargo-llvm-cov}
 cargo install cargo-llvm-cov
 ```
 
-### 运行覆盖率测试
+### 运行覆盖率测试 {#运行覆盖率测试}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# 使用 cargo-tarpaulin
+# 使用 cargo-tarpaulin {#使用-cargo-tarpaulin}
 cargo tarpaulin --out Html --output-dir coverage
 
-# 使用 cargo-llvm-cov
+# 使用 cargo-llvm-cov {#使用-cargo-llvm-cov}
 cargo llvm-cov --html
 ```
 
 ---
 
-## 📊 覆盖率工具 {#-覆盖率工具}
+## 📊 覆盖率工具 {#覆盖率工具}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. cargo-tarpaulin
+### 1. cargo-tarpaulin {#1-cargo-tarpaulin}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -127,20 +126,20 @@ cargo llvm-cov --html
 **使用**:
 
 ```bash
-# 基本使用
+# 基本使用 {#基本使用-1}
 cargo tarpaulin
 
-# 生成 HTML 报告
+# 生成 HTML 报告 {#生成-html-报告-1}
 cargo tarpaulin --out Html --output-dir coverage
 
-# 排除某些文件
+# 排除某些文件 {#排除某些文件-1}
 cargo tarpaulin --exclude-files '*/tests/*'
 
-# 设置覆盖率阈值
+# 设置覆盖率阈值 {#设置覆盖率阈值}
 cargo tarpaulin --fail-under 80
 ```
 
-### 2. cargo-llvm-cov
+### 2. cargo-llvm-cov {#2-cargo-llvm-cov}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -155,26 +154,26 @@ cargo tarpaulin --fail-under 80
 **使用**:
 
 ```bash
-# 基本使用
+# 基本使用 {#基本使用-1}
 cargo llvm-cov
 
-# 生成 HTML 报告
+# 生成 HTML 报告 {#生成-html-报告-1}
 cargo llvm-cov --html
 
-# 生成 LCOV 报告
+# 生成 LCOV 报告 {#生成-lcov-报告}
 cargo llvm-cov --lcov --output-path lcov.info
 
-# 排除某些文件
+# 排除某些文件 {#排除某些文件-1}
 cargo llvm-cov --exclude '*/tests/*'
 ```
 
 ---
 
-## 🎯 覆盖率目标 {#-覆盖率目标}
+## 🎯 覆盖率目标 {#覆盖率目标}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 推荐覆盖率
+### 推荐覆盖率 {#推荐覆盖率}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -186,7 +185,7 @@ cargo llvm-cov --exclude '*/tests/*'
 | **示例代码** | 60%+     | 50%+       | 70%+       |
 | **测试代码** | 70%+     | 60%+       | 80%+       |
 
-### 当前项目覆盖率
+### 当前项目覆盖率 {#当前项目覆盖率}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -204,11 +203,11 @@ cargo llvm-cov --exclude '*/tests/*'
 
 ---
 
-## 📝 测试类型 {#-测试类型}
+## 📝 测试类型 {#测试类型}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 1. 单元测试
+### 1. 单元测试 {#1-单元测试}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -231,7 +230,7 @@ mod tests {
 }
 ```
 
-### 2. 集成测试
+### 2. 集成测试 {#2-集成测试}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -246,7 +245,7 @@ fn test_integration() {
 }
 ```
 
-### 3. 文档测试
+### 3. 文档测试 {#3-文档测试}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -265,7 +264,7 @@ pub fn add(a: i32, b: i32) -> i32 {
 }
 ````
 
-### 4. 异步测试
+### 4. 异步测试 {#4-异步测试}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -279,11 +278,11 @@ async fn test_async_function() {
 
 ---
 
-## 🔧 提高覆盖率 {#-提高覆盖率}
+## 🔧 提高覆盖率 {#提高覆盖率}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 1. 测试边界情况
+### 1. 测试边界情况 {#1-测试边界情况}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -304,7 +303,7 @@ fn test_edge_cases() {
 }
 ```
 
-### 2. 测试错误路径
+### 2. 测试错误路径 {#2-测试错误路径}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -322,7 +321,7 @@ fn test_error_handling() {
 }
 ```
 
-### 3. 测试并发场景
+### 3. 测试并发场景 {#3-测试并发场景}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -354,23 +353,23 @@ fn test_concurrent_access() {
 
 ---
 
-## 📊 覆盖率报告 {#-覆盖率报告}
+## 📊 覆盖率报告 {#覆盖率报告}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 生成报告
+### 生成报告 {#生成报告}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```bash
-# HTML 报告
+# HTML 报告 {#html-报告}
 cargo tarpaulin --out Html --output-dir coverage
 
-# 在浏览器中打开
+# 在浏览器中打开 {#在浏览器中打开}
 open coverage/tarpaulin-report.html
 ```
 
-### 解读报告
+### 解读报告 {#解读报告}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -378,7 +377,7 @@ open coverage/tarpaulin-report.html
 - **红色**: 未覆盖的代码
 - **黄色**: 部分覆盖的代码
 
-### 覆盖率指标
+### 覆盖率指标 {#覆盖率指标}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -388,16 +387,16 @@ open coverage/tarpaulin-report.html
 
 ---
 
-## 🎯 最佳实践 {#-最佳实践}
+## 🎯 最佳实践 {#最佳实践}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 1. 持续集成
+### 1. 持续集成 {#1-持续集成}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```yaml
-# .github/workflows/coverage.yml
+# .github/workflows/coverage.yml {#githubworkflowscoverageyml}
 name: Coverage
 
 on: [push, pull_request]
@@ -415,22 +414,22 @@ jobs:
         uses: codecov/codecov-action@v2
 ```
 
-### 2. 覆盖率阈值
+### 2. 覆盖率阈值 {#2-覆盖率阈值}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```toml
-# Cargo.toml
+# Cargo.toml {#cargotoml-1}
 [package.metadata.tarpaulin]
 fail-under = 80  # 覆盖率低于 80% 时失败
 ```
 
-### 3. 排除文件
+### 3. 排除文件 {#3-排除文件}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```toml
-# Cargo.toml
+# Cargo.toml {#cargotoml-1}
 [package.metadata.tarpaulin]
 exclude-files = [
     "*/tests/*",
@@ -441,7 +440,7 @@ exclude-files = [
 
 ---
 
-## 📚 相关资源 {#-相关资源}
+## 📚 相关资源 {#相关资源}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -451,11 +450,11 @@ exclude-files = [
 
 ---
 
-## 使用场景
+## 使用场景 {#使用场景}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 场景1: 新模块测试策略
+### 场景1: 新模块测试策略 {#场景1-新模块测试策略}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -465,18 +464,18 @@ exclude-files = [
 2. 添加 [集成测试](#2-集成测试) 验证模块协作
 3. 使用 [文档测试](#3-文档测试) 保证示例可用
 
-### 场景2: CI/CD 集成
+### 场景2: CI/CD 集成 {#场景2-cicd-集成}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 在持续集成中集成覆盖率检查：
 
 ```yaml
-# 使用 cargo-tarpaulin 生成覆盖率报告
-# 设置覆盖率阈值阻止低质量代码合并
+# 使用 cargo-tarpaulin 生成覆盖率报告 {#使用-cargo-tarpaulin-生成覆盖率报告}
+# 设置覆盖率阈值阻止低质量代码合并 {#设置覆盖率阈值阻止低质量代码合并}
 ```
 
-### 场景3: 覆盖率提升
+### 场景3: 覆盖率提升 {#场景3-覆盖率提升}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -487,7 +486,7 @@ exclude-files = [
 - 补充 [错误路径测试](#2-测试错误路径)
 - 验证 [并发场景](#3-测试并发场景)
 
-### 场景4: 发布前质量验证
+### 场景4: 发布前质量验证 {#场景4-发布前质量验证}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -500,7 +499,7 @@ exclude-files = [
 
 ---
 
-## 形式化链接
+## 形式化链接 {#形式化链接}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -515,13 +514,13 @@ exclude-files = [
 | **外部资源** | [cargo-tarpaulin文档](https://github.com/xd009642/tarpaulin) |
 | :--- | :--- |
 
-## 🆕 Rust 1.95+ 特性
+## 🆕 Rust 1.95+ 特性 {#rust-195-特性}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.96.0+
 
-### 新特性概览
+### 新特性概览 {#新特性概览}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -545,13 +544,13 @@ orce_mut()
 
 ---
 
-## Rust 1.95+ 在测试开发中的应用
+## Rust 1.95+ 在测试开发中的应用 {#rust-195-在测试开发中的应用}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **适用版本**: Rust 1.96.0+
 
-### array_windows 在测试数据生成中的应用
+### array_windows 在测试数据生成中的应用 {#array_windows-在测试数据生成中的应用}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -571,7 +570,7 @@ fn test_sliding_window_processing() {
 }
 ```
 
-### ControlFlow 在测试验证管道中的应用
+### ControlFlow 在测试验证管道中的应用 {#controlflow-在测试验证管道中的应用}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -593,7 +592,7 @@ fn validate_test_results(results: &[TestResult]) -> ControlFlow<Vec<TestFailure>
 }
 ```
 
-### LazyLock 在测试固件管理中的应用
+### LazyLock 在测试固件管理中的应用 {#lazylock-在测试固件管理中的应用}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -631,7 +630,7 @@ pub fn is_test_db_ready() -> bool {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -640,7 +639,7 @@ pub fn is_test_db_ready() -> bool {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Software Testing](https://en.wikipedia.org/wiki/Software_Testing)**
 > **来源: [TRPL Ch. 11 - Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)**

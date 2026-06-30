@@ -1,4 +1,4 @@
-# Rust 项目最佳实践指南
+# Rust 项目最佳实践指南 {#rust-项目最佳实践指南}
 
 > **分级**: [A]
 > **层次定位**: L2-L6 进阶-生态 / 工程最佳实践
@@ -15,7 +15,7 @@
 
 ---
 
-## 📋 目录
+## 📋 目录 {#目录}
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
 > **来源: [Wikipedia - Software Development Best Practices](https://en.wikipedia.org/wiki/Software_Development_Best_Practices)** ·
@@ -24,7 +24,7 @@
 > **[来源: Rust Project Guidelines]**
 
 - [Rust 项目最佳实践指南](#rust-项目最佳实践指南)
-  - [📋 目录](#-目录)
+  - [📋 目录](#目录)
   - [概述](#概述)
   - [1. 代码质量最佳实践](#1-代码质量最佳实践)
     - [1.1 所有权和借用](#11-所有权和借用)
@@ -83,8 +83,8 @@
   - [Rust 1.95+ 最佳实践（深度指南）](#rust-195-最佳实践深度指南)
     - [1. array\_windows - 零开销滑动窗口](#1-array_windows---零开销滑动窗口)
       - [什么时候使用 array\_windows？](#什么时候使用-array_windows)
-      - [最佳实践示例](#最佳实践示例)
-      - [性能检查清单](#性能检查清单)
+      - [最佳实践示例](#最佳实践示例-1)
+      - [性能检查清单](#性能检查清单-1)
     - [2. ControlFlow - 清晰的提前终止语义](#2-controlflow---清晰的提前终止语义)
       - [ControlFlow vs Result/Option 选择指南](#controlflow-vs-resultoption-选择指南)
       - [最佳实践：验证管道](#最佳实践验证管道)
@@ -94,12 +94,12 @@
       - [单线程可变缓存模式](#单线程可变缓存模式)
     - [4. 数学常量 - 精确计算](#4-数学常量---精确计算)
       - [使用标准库常量的好处](#使用标准库常量的好处)
-    - [5. 综合性能优化检查清单](#5-综合性能优化检查清单)
+    - [5. 综合性能优化检查清单](#5-综合性能优化检查清单-1)
       - [array\_windows 优化](#array_windows-优化)
       - [ControlFlow 优化](#controlflow-优化)
       - [LazyLock 优化](#lazylock-优化)
     - [快速参考卡片](#快速参考卡片)
-  - [🆕 新增最佳实践](#-新增最佳实践)
+  - [🆕 新增最佳实践](#新增最佳实践)
     - [1. isqrt - 整数平方根运算](#1-isqrt---整数平方根运算)
       - [什么时候使用 isqrt？](#什么时候使用-isqrt)
       - [最佳实践示例](#最佳实践示例-1)
@@ -126,7 +126,7 @@
 
 ---
 
-## 概述
+## 概述 {#概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -136,11 +136,11 @@
 
 ---
 
-## 1. 代码质量最佳实践
+## 1. 代码质量最佳实践 {#1-代码质量最佳实践}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1.1 所有权和借用
+### 1.1 所有权和借用 {#11-所有权和借用}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -179,7 +179,7 @@ fn good_process(data: &[i32]) -> i32 {
 }
 ```
 
-### 1.2 类型安全
+### 1.2 类型安全 {#12-类型安全}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -214,7 +214,7 @@ fn find_user(id: UserId) -> Option<User> {
 }
 ```
 
-### 1.3 错误处理
+### 1.3 错误处理 {#13-错误处理}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -252,11 +252,11 @@ fn read_config(path: &str) -> Result<Config> {
 
 ---
 
-## 2. 性能优化最佳实践
+## 2. 性能优化最佳实践 {#2-性能优化最佳实践}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 内存管理
+### 2.1 内存管理 {#21-内存管理}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -287,7 +287,7 @@ fn process_string(s: Cow<str>) -> String {
 }
 ```
 
-### 2.2 迭代器优化
+### 2.2 迭代器优化 {#22-迭代器优化}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -314,7 +314,7 @@ for (idx, value) in data.iter().enumerate() {
 }
 ```
 
-### 2.3 零成本抽象
+### 2.3 零成本抽象 {#23-零成本抽象}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -343,11 +343,11 @@ fn error_handler() {
 
 ---
 
-## 3. 错误处理最佳实践
+## 3. 错误处理最佳实践 {#3-错误处理最佳实践}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 3.1 自定义错误类型
+### 3.1 自定义错误类型 {#31-自定义错误类型}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -385,7 +385,7 @@ impl fmt::Display for CustomError {
 impl std::error::Error for CustomError {}
 ```
 
-### 3.2 错误传播
+### 3.2 错误传播 {#32-错误传播}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -409,11 +409,11 @@ fn process_file(path: &str) -> Result<Vec<u8>, AppError> {
 
 ---
 
-## 4. 测试最佳实践
+## 4. 测试最佳实践 {#4-测试最佳实践}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 4.1 单元测试
+### 4.1 单元测试 {#41-单元测试}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -444,7 +444,7 @@ mod tests {
 }
 ```
 
-### 4.2 集成测试
+### 4.2 集成测试 {#42-集成测试}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -490,7 +490,7 @@ fn test_concurrent_access() {
 }
 ```
 
-### 4.3 文档测试
+### 4.3 文档测试 {#43-文档测试}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -521,11 +521,11 @@ pub fn add(a: i32, b: i32) -> i32 {
 
 ---
 
-## 5. 文档最佳实践
+## 5. 文档最佳实践 {#5-文档最佳实践}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 5.1 代码文档
+### 5.1 代码文档 {#51-代码文档}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -562,7 +562,7 @@ pub fn process(input: &str, options: &Options) -> Result<ProcessResult, ProcessE
 }
 ```
 
-### 5.2 README 文档
+### 5.2 README 文档 {#52-readme-文档}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -604,11 +604,11 @@ pub fn process(input: &str, options: &Options) -> Result<ProcessResult, ProcessE
 
 ---
 
-## 6. 安全性最佳实践
+## 6. 安全性最佳实践 {#6-安全性最佳实践}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 6.1 输入验证
+### 6.1 输入验证 {#61-输入验证}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -636,7 +636,7 @@ fn process_input(input: &UserInput) -> Result<(), ValidationError> {
 }
 ```
 
-### 6.2 资源管理
+### 6.2 资源管理 {#62-资源管理}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -680,11 +680,11 @@ impl<'a> Drop for LockGuard<'a> {
 
 ---
 
-## 7. 并发编程最佳实践
+## 7. 并发编程最佳实践 {#7-并发编程最佳实践}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 7.1 线程安全
+### 7.1 线程安全 {#71-线程安全}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -723,7 +723,7 @@ thread::spawn(move || {
 let received = rx.recv().unwrap();
 ```
 
-### 7.2 无锁编程
+### 7.2 无锁编程 {#72-无锁编程}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -750,11 +750,11 @@ fn get_count() -> usize {
 
 ---
 
-## 8. 异步编程最佳实践
+## 8. 异步编程最佳实践 {#8-异步编程最佳实践}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 8.1 Future 和 async/await
+### 8.1 Future 和 async/await {#81-future-和-asyncawait}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -790,7 +790,7 @@ async fn cpu_intensive_task(data: Vec<u8>) -> Vec<u8> {
 }
 ```
 
-### 8.2 错误处理
+### 8.2 错误处理 {#82-错误处理}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -819,11 +819,11 @@ enum AsyncError {
 
 ---
 
-## 9. 模块设计最佳实践
+## 9. 模块设计最佳实践 {#9-模块设计最佳实践}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 9.1 模块组织
+### 9.1 模块组织 {#91-模块组织}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -846,7 +846,7 @@ pub use core::engine::Engine;
 pub use core::types::{Config, Result};
 ```
 
-### 9.2 可见性控制
+### 9.2 可见性控制 {#92-可见性控制}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -870,11 +870,11 @@ mod inner {
 
 ---
 
-## 10. 项目组织最佳实践
+## 10. 项目组织最佳实践 {#10-项目组织最佳实践}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 10.1 目录结构
+### 10.1 目录结构 {#101-目录结构}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -904,7 +904,7 @@ my_project/
     └── guide.md
 ```
 
-### 10.2 特性标志
+### 10.2 特性标志 {#102-特性标志}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -941,56 +941,56 @@ pub struct Config {
 
 ---
 
-## 11. 工具使用
+## 11. 工具使用 {#11-工具使用}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 11.1 Clippy
+### 11.1 Clippy {#111-clippy}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
 ```bash
-# 运行 clippy
+# 运行 clippy {#运行-clippy}
 
 > **Bloom 层级**: L3-L4 (应用/分析)
 cargo clippy
 
-# 更严格的检查
+# 更严格的检查 {#更严格的检查}
 cargo clippy -- -W clippy::all
 
-# 自动修复
+# 自动修复 {#自动修复}
 cargo clippy --fix
 
-# 检查特定 lint
+# 检查特定 lint {#检查特定-lint}
 cargo clippy -- -D warnings
 ```
 
-### 11.2 rustfmt
+### 11.2 rustfmt {#112-rustfmt}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 ```bash
-# 格式化代码
+# 格式化代码 {#格式化代码}
 cargo fmt
 
-# 检查格式
+# 检查格式 {#检查格式}
 cargo fmt -- --check
 ```
 
-### 11.3 依赖管理
+### 11.3 依赖管理 {#113-依赖管理}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```toml
 [dependencies]
-# 版本范围
+# 版本范围 {#版本范围}
 tokio = { version = "1.0", features = ["rt", "net"] }
 serde = { workspace = true }
 
-# 可选依赖
+# 可选依赖 {#可选依赖}
 async-trait = { version = "0.1", optional = true }
 
-# 开发依赖
+# 开发依赖 {#开发依赖}
 [dev-dependencies]
 tokio-test = "0.4"
 mockall = "0.12"
@@ -998,11 +998,11 @@ mockall = "0.12"
 
 ---
 
-## 12. 性能监控
+## 12. 性能监控 {#12-性能监控}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 12.1 基准测试
+### 12.1 基准测试 {#121-基准测试}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -1028,31 +1028,31 @@ criterion_group!(benches, criterion_benchmark);
 criterion_main!(benches);
 ```
 
-### 12.2 性能分析
+### 12.2 性能分析 {#122-性能分析}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```bash
-# 使用 perf (Linux)
+# 使用 perf (Linux) {#使用-perf-linux}
 perf record --call-graph=dwarf ./target/release/my_app
 perf report
 
-# 生成火焰图
+# 生成火焰图 {#生成火焰图}
 cargo install flamegraph
 cargo flamegraph --bin my_app
 
-# 使用 valgrind
+# 使用 valgrind {#使用-valgrind}
 cargo install cargo-valgrind
 cargo valgrind --bin my_app
 ```
 
 ---
 
-## 13. 代码示例
+## 13. 代码示例 {#13-代码示例}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 13.1 新类型模式
+### 13.1 新类型模式 {#131-新类型模式}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -1090,7 +1090,7 @@ impl FromStr for UserId {
 }
 ```
 
-### 13.2 Builder 模式
+### 13.2 Builder 模式 {#132-builder-模式}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -1157,7 +1157,7 @@ let config = Config::builder()
     .build()?;
 ```
 
-### 13.3 状态机模式
+### 13.3 状态机模式 {#133-状态机模式}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -1227,11 +1227,11 @@ println!("运行时长: {:?}", stopped.duration());
 
 ---
 
-## 14. 使用场景
+## 14. 使用场景 {#14-使用场景}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 场景1: 新项目启动
+### 场景1: 新项目启动 {#场景1-新项目启动}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -1241,7 +1241,7 @@ println!("运行时长: {:?}", stopped.duration());
 2. 配置 [Clippy](#111-clippy) 和 [rustfmt](#112-rustfmt)
 3. 设置 [CI/CD 测试](#41-单元测试) 流程
 
-### 场景2: 代码审查
+### 场景2: 代码审查 {#场景2-代码审查}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -1251,7 +1251,7 @@ println!("运行时长: {:?}", stopped.duration());
 - 验证错误处理策略（[3. 错误处理](#3-错误处理最佳实践)）
 - 评估性能优化机会（[2. 性能优化](#2-性能优化最佳实践)）
 
-### 场景3: 性能优化
+### 场景3: 性能优化 {#场景3-性能优化}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -1262,7 +1262,7 @@ println!("运行时长: {:?}", stopped.duration());
 3. 实施 [迭代器优化](#22-迭代器优化)
 4. 参考 [05_performance_tuning_guide.md](05_performance_tuning_guide.md) 深度优化
 
-### 场景4: 团队代码规范
+### 场景4: 团队代码规范 {#场景4-团队代码规范}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -1274,7 +1274,7 @@ println!("运行时长: {:?}", stopped.duration());
 
 ---
 
-## 15. 形式化链接
+## 15. 形式化链接 {#15-形式化链接}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -1293,11 +1293,11 @@ println!("运行时长: {:?}", stopped.duration());
 
 ---
 
-## 相关资源
+## 相关资源 {#相关资源}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 官方资源
+### 官方资源 {#官方资源}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -1306,7 +1306,7 @@ println!("运行时长: {:?}", stopped.duration());
 - [Rust 性能书](https://nnethercote.github.io/perf-book/)
 - [研究笔记最佳实践](../../archive/research_notes_2026_06_25/10_best_practices.md) - 研究笔记写作规范
 
-### 在线课程 (Coursera)
+### 在线课程 (Coursera) {#在线课程-coursera}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -1316,7 +1316,7 @@ println!("运行时长: {:?}", stopped.duration());
 
 > **提示**: 这些 Coursera 课程提供了结构化的学习路径，可作为本文档最佳实践的补充学习资源。
 
-### 项目资源
+### 项目资源 {#项目资源}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -1325,18 +1325,18 @@ println!("运行时长: {:?}", stopped.duration());
 - C05 线程与并发
 - C06 异步
 
-## Rust 1.95+ 最佳实践（深度指南）
+## Rust 1.95+ 最佳实践（深度指南） {#rust-195-最佳实践深度指南}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 > **适用版本**: Rust 1.96.0+
 
 ---
 
-### 1. array_windows - 零开销滑动窗口
+### 1. array_windows - 零开销滑动窗口 {#1-array_windows---零开销滑动窗口}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
-#### 什么时候使用 array_windows？
+#### 什么时候使用 array_windows？ {#什么时候使用-array_windows}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -1347,7 +1347,7 @@ println!("运行时长: {:?}", stopped.duration());
 | 高频数据处理 | ✅ `array_windows` | 缓存友好，无边界检查 |
 | 需要模式匹配 | ✅ `array_windows` | 解构绑定 `[a, b, c]` |
 
-#### 最佳实践示例
+#### 最佳实践示例 {#最佳实践示例-1}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -1376,7 +1376,7 @@ fn bad_example(data: &[i32], n: usize) -> Vec<i32> {
 }
 ```
 
-#### 性能检查清单
+#### 性能检查清单 {#性能检查清单-1}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -1387,11 +1387,11 @@ fn bad_example(data: &[i32], n: usize) -> Vec<i32> {
 
 ---
 
-### 2. ControlFlow - 清晰的提前终止语义
+### 2. ControlFlow - 清晰的提前终止语义 {#2-controlflow---清晰的提前终止语义}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
-#### ControlFlow vs Result/Option 选择指南
+#### ControlFlow vs Result/Option 选择指南 {#controlflow-vs-resultoption-选择指南}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -1403,7 +1403,7 @@ fn bad_example(data: &[i32], n: usize) -> Vec<i32> {
 └─ 否 → 使用 Option<T> 或返回 T
 ```
 
-#### 最佳实践：验证管道
+#### 最佳实践：验证管道 {#最佳实践验证管道}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -1437,7 +1437,7 @@ fn validate_and_process(input: &UserInput) -> ControlFlow<ValidationError, Proce
 }
 ```
 
-#### 最佳实践：搜索与短路
+#### 最佳实践：搜索与短路 {#最佳实践搜索与短路}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -1462,11 +1462,11 @@ fn find_first_valid_connection(connections: &[Connection]) -> Option<&Connection
 
 ---
 
-### 3. LazyLock/LazyCell - 延迟初始化优化
+### 3. LazyLock/LazyCell - 延迟初始化优化 {#3-lazylocklazycell---延迟初始化优化}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-#### 热路径优化模式
+#### 热路径优化模式 {#热路径优化模式}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -1501,7 +1501,7 @@ impl DatabasePool {
 }
 ```
 
-#### 单线程可变缓存模式
+#### 单线程可变缓存模式 {#单线程可变缓存模式}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -1543,11 +1543,11 @@ impl<T> LocalCache<T> {
 
 ---
 
-### 4. 数学常量 - 精确计算
+### 4. 数学常量 - 精确计算 {#4-数学常量---精确计算}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-#### 使用标准库常量的好处
+#### 使用标准库常量的好处 {#使用标准库常量的好处}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -1590,11 +1590,11 @@ where
 
 ---
 
-### 5. 综合性能优化检查清单
+### 5. 综合性能优化检查清单 {#5-综合性能优化检查清单-1}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
-#### array_windows 优化
+#### array_windows 优化 {#array_windows-优化}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -1602,7 +1602,7 @@ where
 - [ ] 是否避免了不必要的 collect()？
 - [ ] 是否在迭代器中进行了最小化计算？
 
-#### ControlFlow 优化
+#### ControlFlow 优化 {#controlflow-优化}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -1610,7 +1610,7 @@ where
 - [ ] 是否使用了 ? 操作符简化代码？
 - [ ] 是否避免了不必要的类型转换？
 
-#### LazyLock 优化
+#### LazyLock 优化 {#lazylock-优化}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -1620,7 +1620,7 @@ where
 
 ---
 
-### 快速参考卡片
+### 快速参考卡片 {#快速参考卡片}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -1661,18 +1661,18 @@ let gamma = f64::consts::EULER_GAMMA;
 
 ---
 
-## 🆕 新增最佳实践
+## 🆕 新增最佳实践 {#新增最佳实践}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 > **最后更新**: 2026-05-08
 
 ---
 
-### 1. isqrt - 整数平方根运算
+### 1. isqrt - 整数平方根运算 {#1-isqrt---整数平方根运算}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-#### 什么时候使用 isqrt？
+#### 什么时候使用 isqrt？ {#什么时候使用-isqrt}
 
 | 场景 | 推荐 | 原因 |
 |------|------|------|
@@ -1681,7 +1681,7 @@ let gamma = f64::consts::EULER_GAMMA;
 | 需要浮点结果 | `sqrt()` | 使用标准浮点平方根 |
 | 大数据范围 | ✅ `isqrt()` | 避免 `f64` 精度丢失 |
 
-#### 最佳实践示例
+#### 最佳实践示例 {#最佳实践示例-1}
 
 ```rust
 // ✅ 推荐：使用 isqrt 进行质数检测
@@ -1726,7 +1726,7 @@ fn bad_distance(p1: (i64, i64), p2: (i64, i64)) -> i64 {
 }
 ```
 
-#### 性能检查清单
+#### 性能检查清单 {#性能检查清单-1}
 
 - [ ] 是否避免了 `f64` 转换开销？
 - [ ] 是否在循环边界检查中使用？
@@ -1735,11 +1735,11 @@ fn bad_distance(p1: (i64, i64), p2: (i64, i64)) -> i64 {
 
 ---
 
-### 2. HashMap::get_disjoint_mut - 安全并行访问
+### 2. HashMap::get_disjoint_mut - 安全并行访问 {#2-hashmapget_disjoint_mut---安全并行访问}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-#### 什么时候使用 get_disjoint_mut？
+#### 什么时候使用 get_disjoint_mut？ {#什么时候使用-get_disjoint_mut}
 
 ```text
 需要同时获取多个可变引用？
@@ -1749,7 +1749,7 @@ fn bad_distance(p1: (i64, i64), p2: (i64, i64)) -> i64 {
 └─ 否 → 使用普通 get_mut()
 ```
 
-#### 最佳实践：并发状态管理
+#### 最佳实践：并发状态管理 {#最佳实践并发状态管理}
 
 ```rust,ignore
 use std::collections::HashMap;
@@ -1811,7 +1811,7 @@ pub fn update_multiple_configs(updates: &[(&str, &str)]) -> Result<(), String> {
 }
 ```
 
-#### 常见模式
+#### 常见模式 {#常见模式}
 
 ```rust,ignore
 // 模式 1: 两键交换
@@ -1842,11 +1842,11 @@ fn upsert_and_update(map: &mut HashMap<String, i32>, insert_key: &str, update_ke
 
 ---
 
-### 3. async Fn Trait - 异步抽象改进
+### 3. async Fn Trait - 异步抽象改进 {#3-async-fn-trait---异步抽象改进}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-#### 最佳实践：清晰的异步 Trait 定义
+#### 最佳实践：清晰的异步 Trait 定义 {#最佳实践清晰的异步-trait-定义}
 
 ```rust,ignore
 // ✅ Rust 1.85/Edition 2024: 更自然的异步 trait 定义
@@ -1899,7 +1899,7 @@ where
 }
 ```
 
-#### 与 ControlFlow 结合
+#### 与 ControlFlow 结合 {#与-controlflow-结合}
 
 ```rust,ignore
 use std::ops::ControlFlow;
@@ -1925,11 +1925,11 @@ where
 
 ---
 
-### 4. Vec::pop_if - 条件弹出
+### 4. Vec::pop_if - 条件弹出 {#4-vecpop_if---条件弹出}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-#### 最佳实践：栈和队列操作
+#### 最佳实践：栈和队列操作 {#最佳实践栈和队列操作}
 
 ```rust,ignore
 // ✅ 推荐：使用 pop_if 进行条件弹出
@@ -1993,23 +1993,23 @@ impl<K: Eq, V> LRUCache<K, V> {
 
 ---
 
-### 5. 综合性能优化检查清单
+### 5. 综合性能优化检查清单 {#5-综合性能优化检查清单-1}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-#### isqrt 优化
+#### isqrt 优化 {#isqrt-优化}
 
 - [ ] 是否替代了 `(n as f64).sqrt() as u64` 模式？
 - [ ] 是否在循环边界中使用以减少迭代次数？
 - [ ] 是否处理了 0 和 1 的特殊情况？
 
-#### get_disjoint_mut 优化
+#### get_disjoint_mut 优化 {#get_disjoint_mut-优化}
 
 - [ ] 是否避免了多次单独借用？
 - [ ] 是否检查了键的存在性？
 - [ ] 是否在热路径上使用（避免锁竞争）？
 
-#### async Fn 优化
+#### async Fn 优化 {#async-fn-优化}
 
 - [ ] 是否移除了不必要的 `#[async_trait]`？（仅当不依赖 `dyn Trait` 时；`dyn Trait` 场景仍需 `async_trait`）
 - [ ] 是否正确地传播了 `ControlFlow`？
@@ -2017,11 +2017,11 @@ impl<K: Eq, V> LRUCache<K, V> {
 
 ---
 
-### 6. 版本兼容性与迁移指南
+### 6. 版本兼容性与迁移指南 {#6-版本兼容性与迁移指南}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-#### 从 1.95+ 迁移到新版本
+#### 从 1.95+ 迁移到新版本 {#从-195-迁移到新版本}
 
 ```rust,ignore
 // 1.95+ 代码：浮点平方根
@@ -2066,7 +2066,7 @@ trait NewProcessor {
 
 ---
 
-### 7. 快速参考卡片
+### 7. 快速参考卡片 {#7-快速参考卡片}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -2135,7 +2135,7 @@ fn process_with_control_flow(data: &[i64]) -> ControlFlow<Error, Vec<i64>> {
 
 ---
 
-## 思维导图：Rust 最佳实践体系
+## 思维导图：Rust 最佳实践体系 {#思维导图rust-最佳实践体系}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -2160,7 +2160,7 @@ graph TD
 
 ---
 
-## 决策树：错误处理策略选择
+## 决策树：错误处理策略选择 {#决策树错误处理策略选择}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -2177,7 +2177,7 @@ graph TD
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Software Development Best Practices](https://en.wikipedia.org/wiki/Software_Development_Best_Practices)**
 > **来源: [Wikipedia - Code Review](https://en.wikipedia.org/wiki/Code_Review)**

@@ -1,4 +1,4 @@
-# docs/research_notes 系统化层次化梳理完成报告
+# docs/research_notes 系统化层次化梳理完成报告 {#docsresearch_notes-系统化层次化梳理完成报告}
 
 > **概念族**: 进度 / 统计 / 完成度
 > **内容分级**: [核心级]
@@ -11,7 +11,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [docs/research\_notes 系统化层次化梳理完成报告](#docsresearch_notes-系统化层次化梳理完成报告)
   - [目录](#目录)
@@ -27,7 +27,7 @@
 
 ---
 
-## 一、目标与范围
+## 一、目标与范围 {#一目标与范围}
 
 将 `docs/research_notes/` 的 258 个 Markdown 文件按 **六层两网一库** 框架进行系统化、层次化梳理：
 
@@ -37,7 +37,7 @@
 
 ---
 
-## 二、四阶段完成情况
+## 二、四阶段完成情况 {#二四阶段完成情况}
 
 | 阶段 | 目标 | 状态 |
 |------|------|------|
@@ -49,7 +49,7 @@
 
 ---
 
-## 三、新增/补强核心文件清单
+## 三、新增/补强核心文件清单 {#三新增补强核心文件清单}
 
 | 文件 | 层级 | 说明 |
 |------|------|------|
@@ -90,7 +90,7 @@
 
 ---
 
-## 四、自动化检查结果
+## 四、自动化检查结果 {#四自动化检查结果}
 
 运行 `python scripts/maintenance/check_research_notes.py`：
 
@@ -104,7 +104,7 @@
 
 ---
 
-## 五、8 大主-topic 覆盖矩阵
+## 五、8 大主-topic 覆盖矩阵 {#五8-大主-topic-覆盖矩阵}
 
 | 主-topic | L3 概念 | L4 机制 | L5 实践 | L6 反例 | L7 版本 |
 |----------|---------|---------|---------|---------|---------|
@@ -123,7 +123,7 @@
 
 ---
 
-## 六、剩余增强项
+## 六、剩余增强项 {#六剩余增强项}
 
 以下作为持续增强项，不影响 100% 骨架与核心内容覆盖判定：
 
@@ -134,7 +134,7 @@
 
 ---
 
-## 七、结论
+## 七、结论 {#七结论}
 
 `docs/research_notes/` 已按 **六层两网一库** 框架完成系统化、层次化梳理：
 
@@ -149,14 +149,14 @@
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) | [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [知识图谱索引](10_knowledge_graph_index.md)
 - [跨文档映射网络](10_cross_reference_index.md)
 - [层次化梳理与映射总结](10_hierarchical_mapping_and_summary.md)
 - [研究笔记主索引](INDEX.md)
 
-## 社区权威参考
+## 社区权威参考 {#社区权威参考}
 
 - [This Week in Rust](https://this-week-in-rust.org/)
 - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)

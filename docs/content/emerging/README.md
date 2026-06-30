@@ -1,4 +1,4 @@
-# Rust 前沿特性跟踪
+# Rust 前沿特性跟踪 {#rust-前沿特性跟踪}
 
 > **分级**: [B]
 > **Bloom 层级**: L4-L5 (分析/评价)
@@ -9,27 +9,27 @@
 
 ---
 
-## 📋 目录
+## 📋 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Rust 前沿特性跟踪](#rust-前沿特性跟踪)
-  - [📋 目录](#-目录)
-  - [🎯 目标](#-目标)
-  - [📊 特性跟踪矩阵](#-特性跟踪矩阵)
-  - [🔬 正在开发的特性](#-正在开发的特性)
+  - [📋 目录](#目录)
+  - [🎯 目标](#目标)
+  - [📊 特性跟踪矩阵](#特性跟踪矩阵)
+  - [🔬 正在开发的特性](#正在开发的特性)
     - [Generic Const Expressions (generic\_const\_exprs)](#generic-const-expressions-generic_const_exprs)
     - [Async Closures](#async-closures)
     - [Impl Trait in Associated Type](#impl-trait-in-associated-type)
     - [Type Alias Impl Trait (TAIT)](#type-alias-impl-trait-tait)
-  - [📈 版本路线图](#-版本路线图)
-  - [🔗 参考资源](#-参考资源)
+  - [📈 版本路线图](#版本路线图)
+  - [🔗 参考资源](#参考资源)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
 ---
 
-## 🎯 目标
+## 🎯 目标 {#目标}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -42,7 +42,7 @@
 
 ---
 
-## 📊 特性跟踪矩阵
+## 📊 特性跟踪矩阵 {#特性跟踪矩阵}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -57,9 +57,9 @@
 
 ---
 
-## 🔬 正在开发的特性
+## 🔬 正在开发的特性 {#正在开发的特性}
 
-### Generic Const Expressions (generic_const_exprs)
+### Generic Const Expressions (generic_const_exprs) {#generic-const-expressions-generic_const_exprs}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -104,7 +104,7 @@ where
 
 ---
 
-### Async Closures
+### Async Closures {#async-closures}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 > **状态**: ✅ **Stable since Rust 1.85.0**
@@ -138,7 +138,7 @@ async fn new_way() {
 
 ---
 
-### Impl Trait in Associated Type
+### Impl Trait in Associated Type {#impl-trait-in-associated-type}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -186,7 +186,7 @@ impl AsyncIterator for Counter {
 
 ---
 
-### Type Alias Impl Trait (TAIT)
+### Type Alias Impl Trait (TAIT) {#type-alias-impl-trait-tait}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -223,7 +223,7 @@ fn recursive_async(n: u32) -> RecursiveFuture {
 
 ---
 
-## 📈 版本路线图
+## 📈 版本路线图 {#版本路线图}
 
 ```mermaid
 timeline
@@ -243,7 +243,7 @@ timeline
 
 ---
 
-## 🔗 参考资源
+## 🔗 参考资源 {#参考资源}
 
 - [Rust Release Tracking](https://releases.rs/)
 - [Rust RFCs](https://rust-lang.github.io/rfcs/)
@@ -269,7 +269,7 @@ timeline
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [Async Closures](../../../knowledge/06_ecosystem/emerging/01_async_closures.md)
 - [Generic Const Exprs](../../../knowledge/06_ecosystem/emerging/02_generic_const_exprs.md)
@@ -277,7 +277,7 @@ timeline
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

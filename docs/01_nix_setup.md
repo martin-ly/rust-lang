@@ -1,4 +1,4 @@
-# Nix 设置指南
+# Nix 设置指南 {#nix-设置指南}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 
@@ -7,12 +7,12 @@
 
 本项目支持使用 Nix 进行开发环境管理，确保所有开发者使用一致的 Rust 工具链。
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Nix 设置指南](#nix-设置指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [前置要求](#前置要求)
   - [快速开始](#快速开始)
     - [进入开发环境](#进入开发环境)
@@ -26,7 +26,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 前置要求
+## 前置要求 {#前置要求}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -37,11 +37,11 @@
   echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
   ```
 
-## 快速开始
+## 快速开始 {#快速开始}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 进入开发环境
+### 进入开发环境 {#进入开发环境}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -51,7 +51,7 @@ nix develop
 
 这将自动加载配置好的 Rust 工具链和开发工具。
 
-### 使用 direnv（推荐）
+### 使用 direnv（推荐） {#使用-direnv推荐}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -70,7 +70,7 @@ nix develop
 
 3. 以后进入项目目录时，开发环境会自动加载。
 
-## 环境特性
+## 环境特性 {#环境特性}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -78,7 +78,7 @@ nix develop
 - **sccache**: 自动配置缓存加速编译
 - **一致性**: 所有开发者使用相同的工具版本
 
-## 可用工具
+## 可用工具 {#可用工具}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -90,11 +90,11 @@ nix develop
 - `clippy` - 静态分析工具
 - `sccache` - 编译缓存工具
 
-## 故障排除
+## 故障排除 {#故障排除}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 缓存问题
+### 缓存问题 {#缓存问题}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -105,7 +105,7 @@ sccache --stop-server
 sccache --start-server
 ```
 
-### 更新依赖
+### 更新依赖 {#更新依赖}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -115,7 +115,7 @@ sccache --start-server
 nix flake update
 ```
 
-## 参考
+## 参考 {#参考}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -139,7 +139,7 @@ nix flake update
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -147,7 +147,7 @@ nix flake update
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

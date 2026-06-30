@@ -8,7 +8,7 @@
 
 ---
 
-# Askama Crate 架构解构
+# Askama Crate 架构解构 {#askama-crate-架构解构}
 
 > **最后更新**: 2026-06-29
 >
@@ -24,7 +24,7 @@
 
 ---
 
-## 1. 引言：Askama 在 Rust 模板生态中的定位
+## 1. 引言：Askama 在 Rust 模板生态中的定位 {#1-引言askama-在-rust-模板生态中的定位}
 
 > **[来源: [askama crates.io](https://crates.io/crates/askama)]**
 
@@ -62,11 +62,11 @@ fn main() {
 
 ---
 
-## 2. 核心 API 架构
+## 2. 核心 API 架构 {#2-核心-api-架构}
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 2.1 派生宏 `#[derive(Template)]`
+### 2.1 派生宏 `#[derive(Template)]` {#21-派生宏-derivetemplate}
 
 Askama 的入口是派生宏。编译期根据 `#[template(...)]` 属性定位模板源，并生成一个 `render()` 方法：
 
@@ -82,7 +82,7 @@ struct HelloTemplate<'a> {
 
 宏展开后，结构体字段成为模板上下文。模板中引用的变量必须在 struct 中定义，否则编译报错。
 
-### 2.2 模板语法与控制结构
+### 2.2 模板语法与控制结构 {#22-模板语法与控制结构}
 
 Askama 支持 Jinja 风格的过滤器、循环、条件、继承和包含：
 
@@ -100,7 +100,7 @@ Askama 支持 Jinja 风格的过滤器、循环、条件、继承和包含：
 
 > [来源: [askama 模板语法](https://djc.github.io/askama/template_syntax.html)]
 
-### 2.3 渲染流程
+### 2.3 渲染流程 {#23-渲染流程}
 
 ```mermaid
 graph LR
@@ -112,7 +112,7 @@ graph LR
 
 渲染在运行时是纯字符串拼接，无模板解析步骤。由于代码在编译期生成，LLVM 可以内联小型模板，性能接近手写 `format!`。
 
-### 2.4 Web 框架集成
+### 2.4 Web 框架集成 {#24-web-框架集成}
 
 通过启用相应 feature，Askama 模板可直接作为 Web 框架响应：
 
@@ -137,7 +137,7 @@ async fn page() -> impl IntoResponse {
 
 ---
 
-## 3. 与 axum / actix-web 及同类模板引擎对比
+## 3. 与 axum / actix-web 及同类模板引擎对比 {#3-与-axum-actix-web-及同类模板引擎对比}
 
 > **[来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]**
 
@@ -161,7 +161,7 @@ async fn page() -> impl IntoResponse {
 
 ---
 
-## 4. 反例边界
+## 4. 反例边界 {#4-反例边界}
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -178,7 +178,7 @@ async fn page() -> impl IntoResponse {
 
 ---
 
-## 5. 代码示例锚点
+## 5. 代码示例锚点 {#5-代码示例锚点}
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -190,7 +190,7 @@ async fn page() -> impl IntoResponse {
 
 ---
 
-## 6. 相关概念
+## 6. 相关概念 {#6-相关概念}
 
 - [00_crate_architecture_master_index.md](00_crate_architecture_master_index.md) — Rust 工业级 Crate 架构总索引
 - [39_salvo_architecture.md](39_salvo_architecture.md) — Salvo Web 框架架构
@@ -211,27 +211,27 @@ async fn page() -> impl IntoResponse {
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
-### P0 — 核心官方文档
+### P0 — 核心官方文档 {#p0-核心官方文档}
 
 > - [来源: [askama docs.rs](https://docs.rs/askama/latest/askama/)]
 > - [来源: [askama book](https://djc.github.io/askama/)]
 > - [来源: [askama crates.io](https://crates.io/crates/askama)]
 
-### P1 — 标准与生态文档
+### P1 — 标准与生态文档 {#p1-标准与生态文档}
 
 > - [来源: [Jinja Documentation](https://jinja.palletsprojects.com/)]
 > - [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 > - [来源: [OWASP XSS Prevention](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)]
 
-### P2 — 仓库与社区文章
+### P2 — 仓库与社区文章 {#p2-仓库与社区文章}
 
 > - [来源: [askama GitHub Repository](https://github.com/djc/askama)]
 > - [来源: [This Week in Rust](https://this-week-in-rust.org/)]
 > - [来源: [Rust 中文社区](https://rustcc.cn/)]
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **F** — Formal
 > **双维定位**: F×Inf — 编译器后端基础设施
 > **定位**: 把“MIR 之后发生了什么”讲清楚：从 LLVM IR 生成、代码优化到目标文件与链接，覆盖 rustc 代码生成层的核心机制。
-> **前置概念**: [Rustc Query System](../04_formal/19_rustc_query_system.md) · [Name Resolution and HIR](../04_formal/35_name_resolution_and_hir.md) · [Trait Solver in rustc](../04_formal/26_trait_solver_in_rustc.md)
+> **前置概念**: [安全边界](../05_comparative/04_safety_boundaries.md)
 > **后置概念**: [Rustc Driver and Stable MIR](68_rustc_driver_and_stable_mir.md) · [Compiler Infrastructure](47_compiler_infrastructure.md)
 
 ---

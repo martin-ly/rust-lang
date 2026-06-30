@@ -1,4 +1,4 @@
-# 软件工程
+# 软件工程 {#软件工程}
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -16,7 +16,7 @@
 
 ---
 
-## 目录结构
+## 目录结构 {#目录结构}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -26,11 +26,11 @@
 
 ---
 
-## 软件工程实践
+## 软件工程实践 {#软件工程实践}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 代码组织
+### 代码组织 {#代码组织}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -52,7 +52,7 @@ mod api {
 }
 ```
 
-### 错误处理
+### 错误处理 {#错误处理}
 
 ```rust,ignore
 use std::result::Result;
@@ -89,7 +89,7 @@ impl Error for AppError {}
 
 ---
 
-## 与核心文档的关联
+## 与核心文档的关联 {#与核心文档的关联}
 
 | 本文档 | 核心文档 | 关系 |
 | :--- | :--- | :--- |
@@ -109,7 +109,7 @@ impl Error for AppError {}
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

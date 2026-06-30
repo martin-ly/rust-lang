@@ -1,4 +1,4 @@
-# 类型系统使用指南
+# 类型系统使用指南 {#类型系统使用指南}
 
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
@@ -14,29 +14,29 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [类型系统使用指南](#类型系统使用指南)
-  - [📑 目录](#-目录)
-  - [📋 概述](#-概述)
-  - [🚀 快速开始](#-快速开始)
-  - [📊 核心功能](#-核心功能)
+  - [📑 目录](#目录)
+  - [📋 概述](#概述)
+  - [🚀 快速开始](#快速开始)
+  - [📊 核心功能](#核心功能)
     - [1. 基本类型系统](#1-基本类型系统)
     - [2. 泛型与 Trait](#2-泛型与-trait)
     - [3. 型变 (Variance)](#3-型变-variance)
     - [4. 高级模式匹配](#4-高级模式匹配)
     - [5. 精确捕获 (Precise Capturing)](#5-精确捕获-precise-capturing)
     - [6. Rust 1.95 类型系统增强](#6-rust-195-类型系统增强)
-  - [⚡ 性能优化](#-性能优化)
-  - [🔧 错误处理](#-错误处理)
-  - [🐛 常见问题与解决方案](#-常见问题与解决方案)
-  - [🔗 相关文档](#-相关文档)
+  - [⚡ 性能优化](#性能优化)
+  - [🔧 错误处理](#错误处理)
+  - [🐛 常见问题与解决方案](#常见问题与解决方案)
+  - [🔗 相关文档](#相关文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 📋 概述
+## 📋 概述 {#概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -47,7 +47,7 @@
 
 ---
 
-## 🚀 快速开始
+## 🚀 快速开始 {#快速开始}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -69,11 +69,11 @@ fn main() {
 
 ---
 
-## 📊 核心功能
+## 📊 核心功能 {#核心功能}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 基本类型系统
+### 1. 基本类型系统 {#1-基本类型系统}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -105,7 +105,7 @@ fn safe_math() {
 }
 ```
 
-### 2. 泛型与 Trait
+### 2. 泛型与 Trait {#2-泛型与-trait}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
@@ -136,7 +136,7 @@ impl<T: std::ops::Add<Output = T> + Copy> Measurable for Point<T> {
 }
 ```
 
-### 3. 型变 (Variance)
+### 3. 型变 (Variance) {#3-型变-variance}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -158,7 +158,7 @@ fn demonstrate_contravariance(f: fn(&'static str)) {
 }
 ```
 
-### 4. 高级模式匹配
+### 4. 高级模式匹配 {#4-高级模式匹配}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -179,7 +179,7 @@ fn advanced_matching() {
 }
 ```
 
-### 5. 精确捕获 (Precise Capturing)
+### 5. 精确捕获 (Precise Capturing) {#5-精确捕获-precise-capturing}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -197,7 +197,7 @@ fn precise_capturing_example() {
 
 `use<..>` 精确捕获允许你在 `impl Trait` 返回类型中明确指定哪些生命周期被捕获，解决了隐式捕获导致的过度约束问题。
 
-### 6. Rust 1.95 类型系统增强
+### 6. Rust 1.95 类型系统增强 {#6-rust-195-类型系统增强}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -221,7 +221,7 @@ fn main() {
 
 ---
 
-## ⚡ 性能优化
+## ⚡ 性能优化 {#性能优化}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -234,7 +234,7 @@ fn main() {
 
 ---
 
-## 🔧 错误处理
+## 🔧 错误处理 {#错误处理}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -258,7 +258,7 @@ fn robust_operation() -> Result<(), ContextualError> {
 
 ---
 
-## 🐛 常见问题与解决方案
+## 🐛 常见问题与解决方案 {#常见问题与解决方案}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -271,7 +271,7 @@ fn robust_operation() -> Result<(), ContextualError> {
 
 ---
 
-## 🔗 相关文档
+## 🔗 相关文档 {#相关文档}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -293,7 +293,7 @@ fn robust_operation() -> Result<(), ContextualError> {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -302,7 +302,7 @@ fn robust_operation() -> Result<(), ContextualError> {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 > **来源: [Pierce 2002 - TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)**

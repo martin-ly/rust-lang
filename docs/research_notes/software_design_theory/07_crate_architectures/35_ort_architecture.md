@@ -8,7 +8,7 @@
 
 ---
 
-# ort Crate 架构解构
+# ort Crate 架构解构 {#ort-crate-架构解构}
 
 > **最后更新**: 2026-06-29
 >
@@ -24,7 +24,7 @@
 
 ---
 
-## 1. 引言：ort 的生态定位
+## 1. 引言：ort 的生态定位 {#1-引言ort-的生态定位}
 
 > **[来源: [ort crates.io](https://crates.io/crates/ort)]**
 
@@ -64,7 +64,7 @@ let (_shape, data) = outputs[0].try_extract_tensor::<f32>()?;
 
 ---
 
-## 2. 核心 API 与概念
+## 2. 核心 API 与概念 {#2-核心-api-与概念}
 
 > **[来源: [ONNX Runtime 官方文档](https://onnxruntime.ai/docs/)]**
 
@@ -81,7 +81,7 @@ let (_shape, data) = outputs[0].try_extract_tensor::<f32>()?;
 
 > [来源: [ort docs.rs – Value](https://docs.rs/ort/latest/ort/value/struct.Value.html)]
 
-### 2.1 Session 构建流水线
+### 2.1 Session 构建流水线 {#21-session-构建流水线}
 
 `Session::builder()` 返回一个类型状态构建器，可链式配置优化级别、线程数、执行提供者、内存分配器等，最终通过 `commit_from_file` 或 `commit_from_memory` 生成 `Session`。
 
@@ -97,7 +97,7 @@ let session = Session::builder()?
 
 > [来源: [ort docs.rs – GraphOptimizationLevel](https://docs.rs/ort/latest/ort/session/builder/enum.GraphOptimizationLevel.html)]
 
-### 2.2 张量输入输出
+### 2.2 张量输入输出 {#22-张量输入输出}
 
 `Tensor::from_array` 支持从 `ndarray::Array` 或 `(shape, data)` 元组构造张量。`Session::run` 返回的 `SessionOutputs` 可通过索引或名称访问，使用 `try_extract_tensor` / `try_extract_array` 获取底层数据。
 
@@ -109,7 +109,7 @@ let (_shape, data) = outputs["output0"].try_extract_tensor::<f32>()?;
 
 > [来源: [ort docs.rs – Tensor](https://docs.rs/ort/latest/ort/value/struct.Tensor.html)]
 
-### 2.3 执行提供者（Execution Provider）
+### 2.3 执行提供者（Execution Provider） {#23-执行提供者execution-provider}
 
 执行提供者允许将算子下推到 GPU/NPU 等硬件。`ort` 通过 feature 控制 EP 编译（如 `cuda`、`tensorrt`、`coreml`），运行时通过 `with_execution_providers` 启用。
 
@@ -126,7 +126,7 @@ let (_shape, data) = outputs["output0"].try_extract_tensor::<f32>()?;
 
 ---
 
-## 3. 反例边界
+## 3. 反例边界 {#3-反例边界}
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -144,7 +144,7 @@ let (_shape, data) = outputs["output0"].try_extract_tensor::<f32>()?;
 
 ---
 
-## 4. 类型系统利用
+## 4. 类型系统利用 {#4-类型系统利用}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -162,7 +162,7 @@ let (_shape, data) = outputs["output0"].try_extract_tensor::<f32>()?;
 
 ---
 
-## 5. 代码示例锚点
+## 5. 代码示例锚点 {#5-代码示例锚点}
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -174,7 +174,7 @@ let (_shape, data) = outputs["output0"].try_extract_tensor::<f32>()?;
 
 ---
 
-## 6. 相关架构与延伸阅读
+## 6. 相关架构与延伸阅读 {#6-相关架构与延伸阅读}
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -186,7 +186,7 @@ let (_shape, data) = outputs["output0"].try_extract_tensor::<f32>()?;
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [ort crates.io](https://crates.io/crates/ort)]**
 >
@@ -204,7 +204,7 @@ let (_shape, data) = outputs["output0"].try_extract_tensor::<f32>()?;
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
 > **P0（官方/必读）**:
 >
@@ -222,7 +222,7 @@ let (_shape, data) = outputs["output0"].try_extract_tensor::<f32>()?;
 > - [来源: [ONNX Runtime GitHub](https://github.com/microsoft/onnxruntime)]
 > - [来源: [This Week in Rust](https://this-week-in-rust.org/)]
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

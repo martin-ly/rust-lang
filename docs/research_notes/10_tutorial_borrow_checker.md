@@ -1,4 +1,4 @@
-# 教程：理解借用检查器
+# 教程：理解借用检查器 {#教程理解借用检查器}
 
 > **概念族**: 教程
 
@@ -26,7 +26,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -35,8 +35,8 @@
 >
 
 - [教程：理解借用检查器](#教程理解借用检查器)
-  - [📑 目录](#-目录)
-  - [引言](#引言)
+  - [📑 目录](#目录)
+  - [引言](#引言-1)
   - [第一部分：为什么需要借用检查器](#第一部分为什么需要借用检查器)
     - [内存安全威胁](#内存安全威胁)
     - [Rust的解决方案](#rust的解决方案)
@@ -69,7 +69,7 @@
   - [第十部分：形式化视角](#第十部分形式化视角)
     - [借用检查器的保证](#借用检查器的保证)
     - [与形式化定义的关联](#与形式化定义的关联)
-  - [总结](#总结)
+  - [总结](#总结-1)
   - [引言](#引言-1)
   - [第一部分：为什么需要借用检查器？](#第一部分为什么需要借用检查器-1)
     - [内存安全问题](#内存安全问题)
@@ -88,16 +88,16 @@
   - [第六部分：形式化视角](#第六部分形式化视角)
     - [定理 T-BR1](#定理-t-br1)
   - [总结](#总结-1)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
   - [权威来源索引](#权威来源索引-1)
 
-## 引言
+## 引言 {#引言-1}
 
 >
 
@@ -109,13 +109,13 @@
 
 ---
 
-## 第一部分：为什么需要借用检查器
+## 第一部分：为什么需要借用检查器 {#第一部分为什么需要借用检查器}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 内存安全威胁
+### 内存安全威胁 {#内存安全威胁}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -157,7 +157,7 @@ void thread2() { counter++; }
 
 ```
 
-### Rust的解决方案
+### Rust的解决方案 {#rust的解决方案}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -195,13 +195,13 @@ let ref2 = &mut counter;  // 错误: 不能有两个可变借用
 
 ---
 
-## 第二部分：借用规则
+## 第二部分：借用规则 {#第二部分借用规则}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 三大规则
+### 三大规则 {#三大规则}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -215,7 +215,7 @@ let ref2 = &mut counter;  // 错误: 不能有两个可变借用
 
 3. **不能同时存在可变和不可变借用**
 
-### 规则的可视化
+### 规则的可视化 {#规则的可视化}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -283,13 +283,13 @@ let ref2 = &mut counter;  // 错误: 不能有两个可变借用
 
 ---
 
-## 第三部分：不可变借用
+## 第三部分：不可变借用 {#第三部分不可变借用}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 基本用法
+### 基本用法 {#基本用法}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -315,7 +315,7 @@ println!("{}, {}, {}", r1, r2, r3);
 
 ```
 
-### 为什么多个不可变借用是安全的
+### 为什么多个不可变借用是安全的 {#为什么多个不可变借用是安全的}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -341,13 +341,13 @@ println!("{}, {}, {}", r1, r2, r3);
 
 ---
 
-## 第四部分：可变借用
+## 第四部分：可变借用 {#第四部分可变借用}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 独占性保证
+### 独占性保证 {#独占性保证}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -377,7 +377,7 @@ r2.push_str("!");
 
 ```
 
-### 为什么需要独占性
+### 为什么需要独占性 {#为什么需要独占性}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -403,13 +403,13 @@ Rust阻止这种情况，保证内存安全。
 
 ---
 
-## 第五部分：可变与不可变借用冲突
+## 第五部分：可变与不可变借用冲突 {#第五部分可变与不可变借用冲突}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 典型的冲突场景
+### 典型的冲突场景 {#典型的冲突场景}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -431,7 +431,7 @@ println!("{}, {}", r1, r2);
 
 ```
 
-### 编译器错误分析
+### 编译器错误分析 {#编译器错误分析}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -461,7 +461,7 @@ error[E0502]: cannot borrow `s` as mutable because it is also borrowed as immuta
 
 ```
 
-### 解决冲突
+### 解决冲突 {#解决冲突}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -491,13 +491,13 @@ r3.push_str(" world");
 
 ---
 
-## 第六部分：NLL (非词法生命周期)
+## 第六部分：NLL (非词法生命周期) {#第六部分nll-非词法生命周期}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 什么是NLL
+### 什么是NLL {#什么是nll}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -523,7 +523,7 @@ r2.push_str(" world");
 
 ```
 
-### NLL的效果
+### NLL的效果 {#nll的效果}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -559,13 +559,13 @@ r2.push_str(" world");
 
 ---
 
-## 第七部分：借用与数据结构
+## 第七部分：借用与数据结构 {#第七部分借用与数据结构}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 结构体中的借用
+### 结构体中的借用 {#结构体中的借用}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -611,7 +611,7 @@ fn main() {
 
 ```
 
-### 自引用结构的问题
+### 自引用结构的问题 {#自引用结构的问题}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -637,13 +637,13 @@ struct SelfRef {
 
 ---
 
-## 第八部分：常见编译错误与解决
+## 第八部分：常见编译错误与解决 {#第八部分常见编译错误与解决}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 错误1: 值被移动后使用
+### 错误1: 值被移动后使用 {#错误1-值被移动后使用}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -665,7 +665,7 @@ println!("{}", s);  // OK
 
 ```
 
-### 错误2: 在借用期间修改
+### 错误2: 在借用期间修改 {#错误2-在借用期间修改}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -691,7 +691,7 @@ s.push_str(" world");  // OK
 
 ```
 
-### 错误3: 返回局部引用
+### 错误3: 返回局部引用 {#错误3-返回局部引用}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -729,13 +729,13 @@ fn good2() -> &'static str {
 
 ---
 
-## 第九部分：内部可变性
+## 第九部分：内部可变性 {#第九部分内部可变性}
 
 >
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 当借用规则太严格时
+### 当借用规则太严格时 {#当借用规则太严格时}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -761,7 +761,7 @@ let mut r1 = cell.borrow_mut();  // 运行时检查的可变借用
 
 ```
 
-### 内部可变性模式
+### 内部可变性模式 {#内部可变性模式}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -779,13 +779,13 @@ let mut r1 = cell.borrow_mut();  // 运行时检查的可变借用
 
 ---
 
-## 第十部分：形式化视角
+## 第十部分：形式化视角 {#第十部分形式化视角}
 
 >
 
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 借用检查器的保证
+### 借用检查器的保证 {#借用检查器的保证}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -799,7 +799,7 @@ let mut r1 = cell.borrow_mut();  // 运行时检查的可变借用
 
 4. 没有使用未初始化内存
 
-### 与形式化定义的关联
+### 与形式化定义的关联 {#与形式化定义的关联}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -815,7 +815,7 @@ let mut r1 = cell.borrow_mut();  // 运行时检查的可变借用
 
 ---
 
-## 总结
+## 总结 {#总结-1}
 
 >
 
@@ -859,7 +859,7 @@ let mut r1 = cell.borrow_mut();  // 运行时检查的可变借用
 
 ```
 
-## 引言
+## 引言 {#引言-1}
 
 >
 
@@ -869,13 +869,13 @@ let mut r1 = cell.borrow_mut();  // 运行时检查的可变借用
 
 ---
 
-## 第一部分：为什么需要借用检查器？
+## 第一部分：为什么需要借用检查器？ {#第一部分为什么需要借用检查器-1}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 内存安全问题
+### 内存安全问题 {#内存安全问题}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -903,13 +903,13 @@ free(ptr);
 
 ---
 
-## 第二部分：借用检查器的核心规则
+## 第二部分：借用检查器的核心规则 {#第二部分借用检查器的核心规则}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 规则1: 要么多个不可变借用，要么一个可变借用
+### 规则1: 要么多个不可变借用，要么一个可变借用 {#规则1-要么多个不可变借用要么一个可变借用}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -937,7 +937,7 @@ println!("{} {}", r1, r2);
 
 **为什么?** 防止数据竞争。读者看到的数据可能被写者修改。
 
-### 规则2: 引用必须始终有效
+### 规则2: 引用必须始终有效 {#规则2-引用必须始终有效}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -959,13 +959,13 @@ let r;
 
 ---
 
-## 第三部分：工作原理
+## 第三部分：工作原理 {#第三部分工作原理}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 借用检查算法
+### 借用检查算法 {#借用检查算法}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -981,7 +981,7 @@ let r;
 
 ```
 
-### 生命周期标注
+### 生命周期标注 {#生命周期标注}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -1005,13 +1005,13 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ---
 
-## 第四部分：常见错误与解决
+## 第四部分：常见错误与解决 {#第四部分常见错误与解决}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 错误1: 借用冲突
+### 错误1: 借用冲突 {#错误1-借用冲突}
 
 >
 
@@ -1043,7 +1043,7 @@ let r2 = &mut x;  // OK
 
 ```
 
-### 错误2: 悬垂引用
+### 错误2: 悬垂引用 {#错误2-悬垂引用}
 
 >
 
@@ -1075,13 +1075,13 @@ fn not_dangling() -> String {
 
 ---
 
-## 第五部分：高级特性
+## 第五部分：高级特性 {#第五部分高级特性}
 
 >
 
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### NLL (非词法生命周期)
+### NLL (非词法生命周期) {#nll-非词法生命周期}
 
 >
 
@@ -1101,7 +1101,7 @@ let z = &mut x;  // OK！NLL允许
 
 ```
 
-### 内部可变性
+### 内部可变性 {#内部可变性}
 
 >
 
@@ -1125,13 +1125,13 @@ let z = x.borrow_mut(); // 运行时错误！已有借用
 
 ---
 
-## 第六部分：形式化视角
+## 第六部分：形式化视角 {#第六部分形式化视角}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 定理 T-BR1
+### 定理 T-BR1 {#定理-t-br1}
 
 >
 
@@ -1155,7 +1155,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 ---
 
-## 总结
+## 总结 {#总结-1}
 
 >
 
@@ -1203,7 +1203,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -1213,7 +1213,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -1221,7 +1221,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -1235,7 +1235,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -1245,7 +1245,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -1271,7 +1271,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -1283,7 +1283,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引-1}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -1317,7 +1317,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引-1}
 
 > **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
 

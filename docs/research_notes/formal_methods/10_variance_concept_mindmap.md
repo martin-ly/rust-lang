@@ -8,7 +8,7 @@
 
 > **概念族**: 形式化方法
 
-# 型变概念族谱
+# 型变概念族谱 {#型变概念族谱}
 
 > **内容分级**: [归档级]
 
@@ -34,7 +34,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -43,13 +43,13 @@
 >
 
 - [型变概念族谱](#型变概念族谱)
-  - [📑 目录](#-目录)
-  - [相关文档](#相关文档)
+  - [📑 目录](#目录)
+  - [相关文档](#相关文档-1)
   - [型变概念全景](#型变概念全景)
   - [一、三种型变详解](#一三种型变详解)
-    - [1.1 协变 (Covariant) +](#11-协变-covariant-)
-    - [1.2 逆变 (Contravariant) -](#12-逆变-contravariant--)
-    - [1.3 不变 (Invariant) =](#13-不变-invariant-)
+    - [1.1 协变 (Covariant) +](#11-协变-covariant)
+    - [1.2 逆变 (Contravariant) -](#12-逆变-contravariant)
+    - [1.3 不变 (Invariant) =](#13-不变-invariant)
   - [二、型变表](#二型变表)
   - [三、型变组合规则](#三型变组合规则)
     - [函数指针的型变](#函数指针的型变)
@@ -64,7 +64,7 @@
   - [六、学习路径](#六学习路径)
   - [七、记忆口诀](#七记忆口诀)
   - [八、何时需要关注型变](#八何时需要关注型变)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -72,7 +72,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 相关文档
+## 相关文档 {#相关文档-1}
 
 >
 
@@ -90,7 +90,7 @@
 
 ---
 
-## 型变概念全景
+## 型变概念全景 {#型变概念全景}
 
 >
 
@@ -144,13 +144,13 @@
 
 ---
 
-## 一、三种型变详解
+## 一、三种型变详解 {#一三种型变详解}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1.1 协变 (Covariant) +
+### 1.1 协变 (Covariant) + {#11-协变-covariant}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -208,7 +208,7 @@ let b2: Box<&'a str> = b1;  // OK
 
 ---
 
-### 1.2 逆变 (Contravariant) -
+### 1.2 逆变 (Contravariant) - {#12-逆变-contravariant}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -260,7 +260,7 @@ let f: fn(&'a str) = handler;  // 可能错误，具体取决于'a
 
 ---
 
-### 1.3 不变 (Invariant) =
+### 1.3 不变 (Invariant) = {#13-不变-invariant}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -310,7 +310,7 @@ let mut r1: &mut &'static str = &mut "hello";
 
 ---
 
-## 二、型变表
+## 二、型变表 {#二型变表}
 
 >
 
@@ -344,13 +344,13 @@ let mut r1: &mut &'static str = &mut "hello";
 
 ---
 
-## 三、型变组合规则
+## 三、型变组合规则 {#三型变组合规则}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 函数指针的型变
+### 函数指针的型变 {#函数指针的型变}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -374,7 +374,7 @@ fn(T) -> U
 
 - 返回位置：函数可以"更具体"的返回，使用方也能接受
 
-### 结构体的型变
+### 结构体的型变 {#结构体的型变}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -398,13 +398,13 @@ struct Contravariant<T>(fn(T));
 
 ---
 
-## 四、型变的实际影响
+## 四、型变的实际影响 {#四型变的实际影响}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 影响1: 生命周期子类型
+### 影响1: 生命周期子类型 {#影响1-生命周期子类型}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -430,7 +430,7 @@ fn takes_str<'a>(s: &'a str) {}
 
 ```
 
-### 影响2: 智能指针的使用
+### 影响2: 智能指针的使用 {#影响2-智能指针的使用}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -460,7 +460,7 @@ let mut r: &mut &'static str = &mut "hello";
 
 ```
 
-### 影响3: 回调函数的类型
+### 影响3: 回调函数的类型 {#影响3-回调函数的类型}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -488,13 +488,13 @@ set_handler(|s: &'static str| { });  // OK
 
 ---
 
-## 五、型变与类型安全
+## 五、型变与类型安全 {#五型变与类型安全}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 为什么&mut必须不变？
+### 为什么&mut必须不变？ {#为什么mut必须不变}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -524,7 +524,7 @@ let local = String::from("local");
 
 ---
 
-### 型变与最新形式化成果
+### 型变与最新形式化成果 {#型变与最新形式化成果}
 
 > **学术来源**: [Oxide (ICFP 2023 / arXiv:1903.00982)](https://arxiv.org/abs/1903.00982) · [Tree Borrows (PLDI 2025)](https://doi.org/10.1145/3735592) · [RustBelt (POPL 2018)](https://doi.org/10.1145/3158154)
 
@@ -544,7 +544,7 @@ let local = String::from("local");
 
 **推论（型变必要性再确认）**: `&mut T` 的不变性不是实现细节，而是上述所有形式化模型保持一致性的共同前提。
 
-## 六、学习路径
+## 六、学习路径 {#六学习路径}
 
 >
 
@@ -588,7 +588,7 @@ let local = String::from("local");
 
 ---
 
-## 七、记忆口诀
+## 七、记忆口诀 {#七记忆口诀}
 
 >
 
@@ -606,7 +606,7 @@ let local = String::from("local");
 
 ---
 
-## 八、何时需要关注型变
+## 八、何时需要关注型变 {#八何时需要关注型变}
 
 >
 
@@ -636,7 +636,7 @@ let local = String::from("local");
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -646,13 +646,13 @@ let local = String::from("local");
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -668,7 +668,7 @@ let local = String::from("local");
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -680,7 +680,7 @@ let local = String::from("local");
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档-1}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -714,7 +714,7 @@ let local = String::from("local");
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -726,7 +726,7 @@ let local = String::from("local");
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 

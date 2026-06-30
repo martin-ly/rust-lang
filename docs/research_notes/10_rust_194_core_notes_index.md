@@ -1,4 +1,4 @@
-# Rust 1.94 核心研究笔记索引
+# Rust 1.94 核心研究笔记索引 {#rust-194-核心研究笔记索引}
 >
 > **概念族**: 版本特性
 
@@ -19,16 +19,16 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.94 核心研究笔记索引](#rust-194-核心研究笔记索引)
-  - [📑 目录](#-目录)
-  - [📋 核心研究笔记清单 (已梳理)](#-核心研究笔记清单-已梳理)
-  - [📊 进度统计](#-进度统计)
-  - [🎯 后续推进计划](#-后续推进计划)
-  - [✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）](#-权威国际化来源对齐升级摘要rust-1960--edition-2024)
+  - [📑 目录](#目录)
+  - [📋 核心研究笔记清单 (已梳理)](#核心研究笔记清单-已梳理)
+  - [📊 进度统计](#进度统计)
+  - [🎯 后续推进计划](#后续推进计划)
+  - [✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）](#权威国际化来源对齐升级摘要rust-1960-edition-2024)
     - [本次升级要点](#本次升级要点)
       - [新增 Rust 1.96.0 特性](#新增-rust-1960-特性)
       - [新增 Rust 1.95.0 特性](#新增-rust-1950-特性)
@@ -36,7 +36,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 📋 核心研究笔记清单 (已梳理)
+## 📋 核心研究笔记清单 (已梳理) {#核心研究笔记清单-已梳理}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -55,7 +55,7 @@
 
 ---
 
-## 📊 进度统计
+## 📊 进度统计 {#进度统计}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -67,7 +67,7 @@
 
 ---
 
-## 🎯 后续推进计划
+## 🎯 后续推进计划 {#后续推进计划}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -82,7 +82,7 @@
 
 ---
 
-## ✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）
+## ✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024） {#权威国际化来源对齐升级摘要rust-1960-edition-2024}
 
 > **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
 > **来源: [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)**
@@ -90,11 +90,11 @@
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **升级日期**: 2026-06-29
 
-### 本次升级要点
+### 本次升级要点 {#本次升级要点}
 
 本文档已完成权威国际化来源对齐升级，统一版本基准为 **Rust 1.96.0+ / Edition 2024**，同时保留 1.93/1.94 历史分析章节。
 
-#### 新增 Rust 1.96.0 特性
+#### 新增 Rust 1.96.0 特性 {#新增-rust-1960-特性}
 
 | 特性 | 来源 | 说明 |
 | :--- | :--- | :--- |
@@ -103,7 +103,7 @@
 | Cargo CVE-2026-5223 / CVE-2026-5222 修复 | [Cargo 安全公告](https://github.com/rust-lang/cargo/security/advisories)、[Rust Blog 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) | 第三方 registry tarball symlink 与 URL 规范化修复 |
 | WebAssembly 链接行为变更 | [Rust Blog 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) | 不再默认传递 `--allow-undefined` |
 
-#### 新增 Rust 1.95.0 特性
+#### 新增 Rust 1.95.0 特性 {#新增-rust-1950-特性}
 
 | 特性 | 来源 | 说明 |
 | :--- | :--- | :--- |
@@ -112,7 +112,7 @@
 | PowerPC / PowerPC64 内联汇编稳定化 | [Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)、[Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | 稳定 inline assembly for PowerPC |
 | `--remap-path-scope` | [Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | 控制路径重映射作用域 |
 
-#### 权威来源对齐
+#### 权威来源对齐 {#权威来源对齐}
 
 - Rust release notes（releases.rs）
 - Rust Blog 对应版本发布公告
@@ -122,7 +122,7 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -131,7 +131,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

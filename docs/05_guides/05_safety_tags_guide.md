@@ -1,4 +1,4 @@
-# Safety Tags 预研指南
+# Safety Tags 预研指南 {#safety-tags-预研指南}
 
 > **深度**: [专家级]
 > **主轨引用**: 概念级深度分析请参阅 [concept/07_future/08_safety_tags_preview.md](../../concept/07_future/08_safety_tags_preview.md)
@@ -14,12 +14,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Safety Tags 预研指南](#safety-tags-预研指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [为什么需要 Safety Tags](#为什么需要-safety-tags)
   - [提议设计（草案阶段）](#提议设计草案阶段)
@@ -31,7 +31,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 概述
+## 概述 {#概述}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** ✅
 
@@ -50,7 +50,7 @@ Safety Tags 愿景:
 
 ---
 
-## 为什么需要 Safety Tags
+## 为什么需要 Safety Tags {#为什么需要-safety-tags}
 
 > **[来源: Rust Internals Forum]** · **[来源: Rust-for-Linux Mailing List]** ✅？
 
@@ -64,11 +64,11 @@ Safety Tags 愿景:
 
 ---
 
-## 提议设计（草案阶段）
+## 提议设计（草案阶段） {#提议设计草案阶段}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### Tag 语法设想
+### Tag 语法设想 {#tag-语法设想}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -89,7 +89,7 @@ struct RawSlice<T> {
 }
 ```
 
-### 标准 Tag 库设想
+### 标准 Tag 库设想 {#标准-tag-库设想}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -104,7 +104,7 @@ struct RawSlice<T> {
 
 ---
 
-## 与现有工具的协同
+## 与现有工具的协同 {#与现有工具的协同}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -125,7 +125,7 @@ Safety Tags 生态:
 
 ---
 
-## 当前状态
+## 当前状态 {#当前状态}
 
 > **[来源: 各工具官方文档 2026-05]** ✅（2026-05）
 
@@ -139,7 +139,7 @@ Safety Tags 生态:
 
 ---
 
-## 行动建议
+## 行动建议 {#行动建议}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -158,7 +158,7 @@ Safety Tags 生态:
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -167,7 +167,7 @@ Safety Tags 生态:
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

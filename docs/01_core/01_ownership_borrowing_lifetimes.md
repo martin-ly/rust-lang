@@ -8,7 +8,7 @@
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 TRPL、Rust Reference、RustBelt 来源标注 [来源: Authority Source Sprint Batch 8]
 
-# 所有权、借用与生命周期：三位一体的内存安全
+# 所有权、借用与生命周期：三位一体的内存安全 {#所有权借用与生命周期三位一体的内存安全}
 
 > **Bloom 层级**: L1-L2 (记忆/理解)
 > **Rust 版本**: 1.96.0+
@@ -17,7 +17,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -48,11 +48,11 @@
   - [6. 进阶阅读](#6-进阶阅读)
   - [权威来源索引](#权威来源索引)
 
-## 1. 所有权：内存管理的根本创新
+## 1. 所有权：内存管理的根本创新 {#1-所有权内存管理的根本创新}
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1.1 为什么需要所有权？
+### 1.1 为什么需要所有权？ {#11-为什么需要所有权}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -64,7 +64,7 @@
 
 Rust 的解决方案：**编译期所有权检查** —— 零运行时开销的内存安全。
 
-### 1.2 所有权的三条铁律
+### 1.2 所有权的三条铁律 {#12-所有权的三条铁律}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -90,7 +90,7 @@ fn makes_copy(some_integer: i32) {
 } // some_integer 离开作用域，无特殊操作（栈上复制）
 ```
 
-### 1.3 返回值与所有权转移
+### 1.3 返回值与所有权转移 {#13-返回值与所有权转移}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -107,7 +107,7 @@ fn takes_and_gives_back(a_string: String) -> String {
 }
 ```
 
-### 1.4 引用计数：共享所有权
+### 1.4 引用计数：共享所有权 {#14-引用计数共享所有权}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -125,11 +125,11 @@ println!("引用计数: {}", Rc::strong_count(&data)); // 2
 
 ---
 
-## 2. 借用：不转移所有权的访问
+## 2. 借用：不转移所有权的访问 {#2-借用不转移所有权的访问}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 不可变借用
+### 2.1 不可变借用 {#21-不可变借用}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -147,7 +147,7 @@ fn calculate_length(s: &String) -> usize {
 } // s 离开作用域，但它不拥有引用的值，所以不释放
 ```
 
-### 2.2 可变借用
+### 2.2 可变借用 {#22-可变借用}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -165,7 +165,7 @@ fn change(some_string: &mut String) {
 }
 ```
 
-### 2.3 借用规则：数据竞争的死结
+### 2.3 借用规则：数据竞争的死结 {#23-借用规则数据竞争的死结}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -181,7 +181,7 @@ println!("{}, {}, 和 {}", r1, r2, r3);
 
 **为什么？** 如果读者（r1, r2）和写者（r3）同时存在，读者可能读到半写入的状态，导致数据竞争。
 
-### 2.4 非词法生命周期 (NLL)
+### 2.4 非词法生命周期 (NLL) {#24-非词法生命周期-nll}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -198,11 +198,11 @@ r2.push_str(" world");
 
 ---
 
-## 3. 生命周期：引用的有效期证明
+## 3. 生命周期：引用的有效期证明 {#3-生命周期引用的有效期证明}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 3.1 生命周期省略
+### 3.1 生命周期省略 {#31-生命周期省略}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -214,7 +214,7 @@ fn first_word(s: &str) -> &str { // 等价于 fn first_word<'a>(s: &'a str) -> &
 }
 ```
 
-### 3.2 显式生命周期标注
+### 3.2 显式生命周期标注 {#32-显式生命周期标注}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -235,7 +235,7 @@ fn main() {
 }
 ```
 
-### 3.3 结构体中的生命周期
+### 3.3 结构体中的生命周期 {#33-结构体中的生命周期}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -256,7 +256,7 @@ impl<'a> ImportantExcerpt<'a> {
 }
 ```
 
-### 3.4 生命周期子类型
+### 3.4 生命周期子类型 {#34-生命周期子类型}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -273,11 +273,11 @@ fn use_any_lifetime(s: &str) {
 
 ---
 
-## 4. 常见陷阱与解决方案
+## 4. 常见陷阱与解决方案 {#4-常见陷阱与解决方案}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 4.1 自引用结构体
+### 4.1 自引用结构体 {#41-自引用结构体}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -299,7 +299,7 @@ struct SelfReferentialFixed {
 }
 ```
 
-### 4.2 `static mut` 的废弃
+### 4.2 `static mut` 的废弃 {#42-static-mut-的废弃}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -319,7 +319,7 @@ static COUNTER: AtomicI32 = AtomicI32::new(0);
 COUNTER.fetch_add(1, Ordering::Relaxed);
 ```
 
-### 4.3 生命周期过长
+### 4.3 生命周期过长 {#43-生命周期过长}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -333,11 +333,11 @@ fn longest_wrong<'a>(x: &'a str, y: &str) -> &'a str {
 
 ---
 
-## 5. 思维模型
+## 5. 思维模型 {#5-思维模型}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 所有权作为资源管理合约
+### 所有权作为资源管理合约 {#所有权作为资源管理合约}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -350,7 +350,7 @@ fn longest_wrong<'a>(x: &'a str, y: &str) -> &'a str {
   └─ 离开作用域 ─→ Drop::drop()
 ```
 
-### 借用检查器的工作流程
+### 借用检查器的工作流程 {#借用检查器的工作流程}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -371,7 +371,7 @@ fn longest_wrong<'a>(x: &'a str, y: &str) -> &'a str {
 
 ---
 
-## 6. 进阶阅读
+## 6. 进阶阅读 {#6-进阶阅读}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -393,7 +393,7 @@ fn longest_wrong<'a>(x: &'a str, y: &str) -> &'a str {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 > **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**

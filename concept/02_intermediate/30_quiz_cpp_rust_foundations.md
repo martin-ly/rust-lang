@@ -18,6 +18,7 @@
 > [Value vs Reference Semantics](../01_foundation/19_value_vs_reference_semantics.md)
 >
 > **后置概念**: N/A
+> **主要来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 ---
 
 > **Bloom 层级**: 理解 → 应用 → 分析

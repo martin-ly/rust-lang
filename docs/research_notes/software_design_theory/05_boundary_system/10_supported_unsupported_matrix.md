@@ -1,4 +1,4 @@
-# 支持 vs 不支持边界矩阵
+# 支持 vs 不支持边界矩阵 {#支持-vs-不支持边界矩阵}
 
 > **概念族**: 软件设计 / 边界系统
 
@@ -26,7 +26,7 @@
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -35,15 +35,15 @@
 >
 
 - [支持 vs 不支持边界矩阵](#支持-vs-不支持边界矩阵)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [形式化定义与公理](#形式化定义与公理)
   - [反例：违反支持边界](#反例违反支持边界)
   - [定义（非形式化对照）](#定义非形式化对照)
-  - [设计模式 × 支持边界](#设计模式--支持边界)
+  - [设计模式 × 支持边界](#设计模式-支持边界)
     - [创建型（5）](#创建型5)
     - [结构型（7）](#结构型7)
     - [行为型（11）](#行为型11)
-  - [执行模型 × 支持边界](#执行模型--支持边界)
+  - [执行模型 × 支持边界](#执行模型-支持边界)
   - [决策树：判定支持边界](#决策树判定支持边界)
   - [典型 crate 映射](#典型-crate-映射)
   - [选型建议](#选型建议)
@@ -55,7 +55,7 @@
     - [示例 2：no\_std 嵌入式](#示例-2no_std-嵌入式)
     - [示例 3：FFI 绑定 C 库](#示例-3ffi-绑定-c-库)
   - [引用](#引用)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -74,7 +74,7 @@
 
 ---
 
-## 形式化定义与公理
+## 形式化定义与公理 {#形式化定义与公理}
 
 >
 
@@ -140,7 +140,7 @@
 
 ---
 
-## 反例：违反支持边界
+## 反例：违反支持边界 {#反例违反支持边界}
 
 >
 
@@ -158,7 +158,7 @@
 
 ---
 
-## 定义（非形式化对照）
+## 定义（非形式化对照） {#定义非形式化对照}
 
 >
 
@@ -176,13 +176,13 @@
 
 ---
 
-## 设计模式 × 支持边界
+## 设计模式 × 支持边界 {#设计模式-支持边界}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 创建型（5）
+### 创建型（5） {#创建型5}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -204,7 +204,7 @@
 
 | Singleton | 原生支持 | OnceLock、LazyLock（std） |
 
-### 结构型（7）
+### 结构型（7） {#结构型7}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -230,7 +230,7 @@
 
 | Proxy | 原生支持 | 委托 |
 
-### 行为型（11）
+### 行为型（11） {#行为型11}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -266,7 +266,7 @@
 
 ---
 
-## 执行模型 × 支持边界
+## 执行模型 × 支持边界 {#执行模型-支持边界}
 
 >
 
@@ -288,7 +288,7 @@
 
 ---
 
-## 决策树：判定支持边界
+## 决策树：判定支持边界 {#决策树判定支持边界}
 
 >
 
@@ -310,7 +310,7 @@
 
 ---
 
-## 典型 crate 映射
+## 典型 crate 映射 {#典型-crate-映射}
 
 >
 
@@ -334,7 +334,7 @@
 
 ---
 
-## 选型建议
+## 选型建议 {#选型建议}
 
 >
 
@@ -356,7 +356,7 @@
 
 ---
 
-## `no_std` 与嵌入式支持
+## `no_std` 与嵌入式支持 {#no_std-与嵌入式支持}
 
 >
 
@@ -378,7 +378,7 @@
 
 ---
 
-## Cargo 特性与可选依赖
+## Cargo 特性与可选依赖 {#cargo-特性与可选依赖}
 
 >
 
@@ -396,7 +396,7 @@
 
 ---
 
-## 版本兼容性
+## 版本兼容性 {#版本兼容性}
 
 >
 
@@ -414,13 +414,13 @@
 
 ---
 
-## 场景化决策示例（层次推进）
+## 场景化决策示例（层次推进） {#场景化决策示例层次推进}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 示例 1：是否需要第三方 crate
+### 示例 1：是否需要第三方 crate {#示例-1是否需要第三方-crate}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -444,7 +444,7 @@ async fn serve() {
 
 ```
 
-### 示例 2：no_std 嵌入式
+### 示例 2：no_std 嵌入式 {#示例-2no_std-嵌入式}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -452,7 +452,7 @@ async fn serve() {
 
 **决策**：仅 `core` + `alloc` → $\mathit{SuppB} \in \{\mathrm{Native},\, \mathrm{Lib}\}$；Factory、Strategy、Adapter 等可用。
 
-### 示例 3：FFI 绑定 C 库
+### 示例 3：FFI 绑定 C 库 {#示例-3ffi-绑定-c-库}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -462,7 +462,7 @@ async fn serve() {
 
 ---
 
-## 引用
+## 引用 {#引用}
 
 >
 
@@ -474,7 +474,7 @@ async fn serve() {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -484,13 +484,13 @@ async fn serve() {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -506,7 +506,7 @@ async fn serve() {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -518,7 +518,7 @@ async fn serve() {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -550,7 +550,7 @@ async fn serve() {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -562,7 +562,7 @@ async fn serve() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
@@ -580,7 +580,7 @@ async fn serve() {
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)

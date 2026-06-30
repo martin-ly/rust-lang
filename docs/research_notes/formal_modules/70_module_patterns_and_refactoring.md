@@ -1,4 +1,4 @@
-# 模块系统代码实践模式
+# 模块系统代码实践模式 {#模块系统代码实践模式}
 
 > **内容分级**: [核心级]
 > **层级**: L5 (代码实践)
@@ -11,24 +11,24 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [模块系统代码实践模式](#模块系统代码实践模式)
   - [目录](#目录)
   - [1. 按职责分层组织 crate](#1-按职责分层组织-crate)
-    - [目标](#目标)
+    - [目标](#目标-4)
     - [推荐结构](#推荐结构)
     - [`lib.rs` 示例](#librs-示例)
   - [2. `pub use` 重导出稳定 API](#2-pub-use-重导出稳定-api)
-    - [目标](#目标-1)
-    - [示例](#示例)
+    - [目标](#目标-4)
+    - [示例](#librs-示例)
     - [好处](#好处)
   - [3. Sealed trait 与私有 supertrait](#3-sealed-trait-与私有-supertrait)
-    - [目标](#目标-2)
+    - [目标](#目标-4)
     - [模式实现](#模式实现)
   - [4. 内部模块封装 unsafe](#4-内部模块封装-unsafe)
-    - [目标](#目标-3)
-    - [示例](#示例-1)
+    - [目标](#目标-4)
+    - [示例](#librs-示例)
   - [5. Workspace 多 crate 共享](#5-workspace-多-crate-共享)
     - [目标](#目标-4)
     - [`Cargo.toml`](#cargotoml)
@@ -44,13 +44,13 @@
 
 ---
 
-## 1. 按职责分层组织 crate
+## 1. 按职责分层组织 crate {#1-按职责分层组织-crate}
 
-### 目标
+### 目标 {#目标-4}
 
 将 crate 内部按**输入/处理/输出**或**公开 API / 领域逻辑 / 适配器**分层，降低模块间耦合。
 
-### 推荐结构
+### 推荐结构 {#推荐结构}
 
 ```text
 my_parser/
@@ -63,7 +63,7 @@ my_parser/
     └── error.rs        // L3 领域概念：错误类型
 ```
 
-### `lib.rs` 示例
+### `lib.rs` 示例 {#librs-示例}
 
 ```rust
 //! MyParser —— 一个轻量级表达式解析器。
@@ -92,13 +92,13 @@ pub fn parse(input: &str) -> Result<Expr, ParseError> {
 
 ---
 
-## 2. `pub use` 重导出稳定 API
+## 2. `pub use` 重导出稳定 API {#2-pub-use-重导出稳定-api}
 
-### 目标
+### 目标 {#目标-4}
 
 让 crate 用户通过一个简洁的入口访问常用类型，同时内部结构可以演进。
 
-### 示例
+### 示例 {#示例-1}
 
 ```rust
 // src/lib.rs
@@ -120,20 +120,20 @@ pub use core::types::{Config, Request, Response};
 pub mod adapters;
 ```
 
-### 好处
+### 好处 {#好处}
 
 - 内部重构（如拆分 `core::types`）不影响大多数用户。
 - 版本升级时可通过重导出标记 deprecated 路径。
 
 ---
 
-## 3. Sealed trait 与私有 supertrait
+## 3. Sealed trait 与私有 supertrait {#3-sealed-trait-与私有-supertrait}
 
-### 目标
+### 目标 {#目标-4}
 
 限制 trait 的下游实现，保持库内部不变量。
 
-### 模式实现
+### 模式实现 {#模式实现}
 
 ```rust
 // src/lib.rs
@@ -160,13 +160,13 @@ impl StableTrait for MyType {
 
 ---
 
-## 4. 内部模块封装 unsafe
+## 4. 内部模块封装 unsafe {#4-内部模块封装-unsafe}
 
-### 目标
+### 目标 {#目标-4}
 
 将 `unsafe` 操作限制在最小私有模块中，公开 API 强制通过安全包装调用。
 
-### 示例
+### 示例 {#示例-1}
 
 ```rust
 // src/lib.rs
@@ -192,13 +192,13 @@ pub fn reverse_buffer(buf: &mut [u8]) {
 
 ---
 
-## 5. Workspace 多 crate 共享
+## 5. Workspace 多 crate 共享 {#5-workspace-多-crate-共享}
 
-### 目标
+### 目标 {#目标-4}
 
 使用 Cargo workspace 将大型项目拆分为多个 crate，同时保持统一构建与依赖管理。
 
-### `Cargo.toml`
+### `Cargo.toml` {#cargotoml}
 
 ```toml
 [workspace]
@@ -210,10 +210,10 @@ thiserror = "2"
 serde = { version = "1", features = ["derive"] }
 ```
 
-### 子 crate 依赖
+### 子 crate 依赖 {#子-crate-依赖}
 
 ```toml
-# my_cli/Cargo.toml
+# my_cli/Cargo.toml {#my_clicargotoml}
 [package]
 name = "my_cli"
 version = "0.1.0"
@@ -224,7 +224,7 @@ my_parser = { path = "../my_parser" }
 serde = { workspace = true }
 ```
 
-### 注意事项
+### 注意事项 {#注意事项}
 
 - 一个 package 只能有一个 `lib`，但可以有多个 `bin`。
 - `path` 依赖不会自动发布到 crates.io，发布时需要指定版本。
@@ -232,9 +232,9 @@ serde = { workspace = true }
 
 ---
 
-## 6. 重构示例：从扁平模块到分层
+## 6. 重构示例：从扁平模块到分层 {#6-重构示例从扁平模块到分层}
 
-### 重构前
+### 重构前 {#重构前}
 
 ```rust
 // src/lib.rs (扁平结构)
@@ -250,7 +250,7 @@ pub mod utils;
 - 用户必须了解内部模块才能找到 API。
 - 所有内部结构都暴露，重构困难。
 
-### 重构后
+### 重构后 {#重构后}
 
 ```rust
 // src/lib.rs (门面模式)
@@ -269,7 +269,7 @@ pub fn parse(input: &str) -> Result<Expr, ParseError> {
 }
 ```
 
-### 验证清单
+### 验证清单 {#验证清单}
 
 - [ ] `cargo check` 通过。
 - [ ] `cargo doc --no-deps` 生成的公开 API 页面只包含预期项。
@@ -277,7 +277,7 @@ pub fn parse(input: &str) -> Result<Expr, ParseError> {
 
 ---
 
-## 总结
+## 总结 {#总结}
 
 | 模式 | 解决的问题 | 可见性关键字 | 典型应用 |
 |------|------------|--------------|----------|
@@ -291,7 +291,7 @@ pub fn parse(input: &str) -> Result<Expr, ParseError> {
 >
 > **可运行代码示例**: [examples/module_system_patterns.rs](../../../examples/module_system_patterns.rs)（包含门面分层、sealed trait、unsafe 封装三种模式的编译运行示例）
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [模块系统规范](10_module_system_specification.md)
 - [模块系统反例与边界案例](60_module_counterexamples.md)
@@ -301,7 +301,7 @@ pub fn parse(input: &str) -> Result<Expr, ParseError> {
 
 ---
 
-## 学术/社区来源参考
+## 学术/社区来源参考 {#学术社区来源参考}
 
 > **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 > **来源**: [Aeneas](https://aeneas-verification.github.io/)

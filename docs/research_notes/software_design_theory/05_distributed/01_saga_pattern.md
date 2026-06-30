@@ -1,4 +1,4 @@
-# Saga 模式形式化定义
+# Saga 模式形式化定义 {#saga-模式形式化定义}
 
 > **概念族**: 软件设计 / 分布式模式
 
@@ -30,7 +30,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -39,7 +39,7 @@
 >
 
 - [Saga 模式形式化定义](#saga-模式形式化定义)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 概念定义 (Def)](#1-概念定义-def)
     - [Def S1: Saga](#def-s1-saga)
     - [Def S2: Saga 执行状态](#def-s2-saga-执行状态)
@@ -53,7 +53,7 @@
     - [Theorem S2: 补偿终止性](#theorem-s2-补偿终止性)
   - [4. Rust 实现示例](#4-rust-实现示例)
   - [5. 与其他模式的关系](#5-与其他模式的关系)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -61,13 +61,13 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 1. 概念定义 (Def)
+## 1. 概念定义 (Def) {#1-概念定义-def}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Def S1: Saga
+### Def S1: Saga {#def-s1-saga}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -93,7 +93,7 @@ Saga := (T, C, ≺, σ)
 
 ```
 
-### Def S2: Saga 执行状态
+### Def S2: Saga 执行状态 {#def-s2-saga-执行状态}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -115,7 +115,7 @@ State(Saga) :=
 
 ```
 
-### Def S3: 补偿正确性
+### Def S3: 补偿正确性 {#def-s3-补偿正确性}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -133,13 +133,13 @@ Correct(cᵢ, tᵢ) := ∀s. exec(tᵢ, s) = s' ∧ exec(cᵢ, s') = s''
 
 ---
 
-## 2. 基本假设 (Axiom)
+## 2. 基本假设 (Axiom) {#2-基本假设-axiom}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### Axiom S1: 补偿幂等性
+### Axiom S1: 补偿幂等性 {#axiom-s1-补偿幂等性}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -151,7 +151,7 @@ Correct(cᵢ, tᵢ) := ∀s. exec(tᵢ, s) = s' ∧ exec(cᵢ, s') = s''
 
 补偿操作必须是**幂等的**，可多次执行而不改变结果。
 
-### Axiom S2: 偏序无环性
+### Axiom S2: 偏序无环性 {#axiom-s2-偏序无环性}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -163,7 +163,7 @@ Correct(cᵢ, tᵢ) := ∀s. exec(tᵢ, s) = s' ∧ exec(cᵢ, s') = s''
 
 执行顺序必须是无环的偏序关系。
 
-### Axiom S3: 最终一致性
+### Axiom S3: 最终一致性 {#axiom-s3-最终一致性}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -177,13 +177,13 @@ Correct(cᵢ, tᵢ) := ∀s. exec(tᵢ, s) = s' ∧ exec(cᵢ, s') = s''
 
 ---
 
-## 3. 定理 (Theorem)
+## 3. 定理 (Theorem) {#3-定理-theorem}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### Theorem S1: Saga 原子性
+### Theorem S1: Saga 原子性 {#theorem-s1-saga-原子性}
 
 >
 
@@ -209,7 +209,7 @@ Saga 满足弱原子性：
 
 5. 达到 Compensated 状态
 
-### Theorem S2: 补偿终止性
+### Theorem S2: 补偿终止性 {#theorem-s2-补偿终止性}
 
 >
 
@@ -231,7 +231,7 @@ Saga 满足弱原子性：
 
 ---
 
-## 4. Rust 实现示例
+## 4. Rust 实现示例 {#4-rust-实现示例}
 
 >
 
@@ -317,7 +317,7 @@ impl<S, E> SagaExecutor<S, E> {
 
 ---
 
-## 5. 与其他模式的关系
+## 5. 与其他模式的关系 {#5-与其他模式的关系}
 
 >
 
@@ -343,7 +343,7 @@ impl<S, E> SagaExecutor<S, E> {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -353,7 +353,7 @@ impl<S, E> SagaExecutor<S, E> {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -361,7 +361,7 @@ impl<S, E> SagaExecutor<S, E> {
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -375,7 +375,7 @@ impl<S, E> SagaExecutor<S, E> {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -385,7 +385,7 @@ impl<S, E> SagaExecutor<S, E> {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -417,7 +417,7 @@ impl<S, E> SagaExecutor<S, E> {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -429,7 +429,7 @@ impl<S, E> SagaExecutor<S, E> {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Saga Pattern](https://en.wikipedia.org/wiki/Saga_Pattern)**
 

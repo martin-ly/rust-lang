@@ -1,4 +1,4 @@
-# 文档生命周期管理制度
+# 文档生命周期管理制度 {#文档生命周期管理制度}
 
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
@@ -9,10 +9,10 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 - [文档生命周期管理制度](#文档生命周期管理制度)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 生命周期阶段](#1-生命周期阶段)
   - [2. 归档流程（强制）](#2-归档流程强制)
     - [2.1 触发归档的条件](#21-触发归档的条件)
@@ -31,7 +31,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 1. 生命周期阶段
+## 1. 生命周期阶段 {#1-生命周期阶段}
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -50,11 +50,11 @@
 
 ---
 
-## 2. 归档流程（强制）
+## 2. 归档流程（强制） {#2-归档流程强制}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 触发归档的条件
+### 2.1 触发归档的条件 {#21-触发归档的条件}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
@@ -67,19 +67,19 @@
 3. **内容合并**: 文档内容已被整合到其他文档中
 4. **标记过时**: 文档顶部已添加过时警告超过 **30 天**
 
-### 2.2 归档操作步骤
+### 2.2 归档操作步骤 {#22-归档操作步骤}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```bash
-# Step 1: 在文档顶部添加归档标记（创建时即添加）
-# Step 2: 从原目录移动到 archive/ 对应子目录
-# Step 3: 更新所有索引文件中对该文档的引用
-# Step 4: 在 archive/ 目录的 README 中记录归档信息
-# Step 5: 90 天后评估是否删除
+# Step 1: 在文档顶部添加归档标记（创建时即添加） {#step-1-在文档顶部添加归档标记创建时即添加}
+# Step 2: 从原目录移动到 archive/ 对应子目录 {#step-2-从原目录移动到-archive-对应子目录}
+# Step 3: 更新所有索引文件中对该文档的引用 {#step-3-更新所有索引文件中对该文档的引用}
+# Step 4: 在 archive/ 目录的 README 中记录归档信息 {#step-4-在-archive-目录的-readme-中记录归档信息}
+# Step 5: 90 天后评估是否删除 {#step-5-90-天后评估是否删除}
 ```
 
-### 2.3 归档标记模板
+### 2.3 归档标记模板 {#23-归档标记模板}
 
 ```markdown
 > **⚠️ 已归档**: 此文档内容已过时，已于 YYYY-MM-DD 归档。
@@ -90,7 +90,7 @@
 
 ---
 
-## 3. 版本升级检查清单
+## 3. 版本升级检查清单 {#3-版本升级检查清单}
 
 每次 Rust 新版本发布（约每 6 周），执行以下检查：
 
@@ -105,12 +105,12 @@
 
 ---
 
-## 4. 自动化检查脚本
+## 4. 自动化检查脚本 {#4-自动化检查脚本}
 
-### 4.1 版本号一致性检查
+### 4.1 版本号一致性检查 {#41-版本号一致性检查}
 
 ```bash
-# 检查所有 .md 文件中的版本标注
+# 检查所有 .md 文件中的版本标注 {#检查所有-md-文件中的版本标注}
 python3 scripts/check_version_consistency.py
 ```
 
@@ -119,25 +119,25 @@ python3 scripts/check_version_consistency.py
 - 文件标注版本 < 项目目标版本 - 1 → 警告
 - 文件标注版本 < 项目目标版本 - 2 → 建议归档
 
-### 4.2 文档重复扫描
+### 4.2 文档重复扫描 {#42-文档重复扫描}
 
 ```bash
-# 基于标题和内容相似度扫描重复文档
+# 基于标题和内容相似度扫描重复文档 {#基于标题和内容相似度扫描重复文档}
 python3 scripts/check_doc_duplicates.py --threshold 0.7
 ```
 
-### 4.3 过时标记检查
+### 4.3 过时标记检查 {#43-过时标记检查}
 
 ```bash
-# 检查标记过时超过 30 天但仍留在原位的文档
+# 检查标记过时超过 30 天但仍留在原位的文档 {#检查标记过时超过-30-天但仍留在原位的文档}
 python3 scripts/check_deprecated_markers.py --days 30
 ```
 
 ---
 
-## 5. 删除策略
+## 5. 删除策略 {#5-删除策略}
 
-### 5.1 禁止删除
+### 5.1 禁止删除 {#51-禁止删除}
 
 以下文件**不得删除**，即使归档：
 
@@ -145,7 +145,7 @@ python3 scripts/check_deprecated_markers.py --days 30
 - 形式化证明（学术价值）
 - 安全审计报告（合规要求）
 
-### 5.2 允许删除
+### 5.2 允许删除 {#52-允许删除}
 
 满足以下全部条件可删除：
 
@@ -156,7 +156,7 @@ python3 scripts/check_deprecated_markers.py --days 30
 
 ---
 
-## 6. 责任分工
+## 6. 责任分工 {#6-责任分工}
 
 | 角色 | 职责 |
 |------|------|
@@ -167,7 +167,7 @@ python3 scripts/check_deprecated_markers.py --days 30
 
 ---
 
-## 7. 相关文档
+## 7. 相关文档 {#7-相关文档}
 
 - `00_documentation_division_of_labor.md` — 文档体系分工协议
 - `DOCS_STRUCTURE_OVERVIEW.md` — 完整结构总览
@@ -189,13 +189,13 @@ python3 scripts/check_deprecated_markers.py --days 30
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [上级目录](../README.md)
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

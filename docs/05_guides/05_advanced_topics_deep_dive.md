@@ -1,4 +1,4 @@
-# 🔬 高级主题深度指南
+# 🔬 高级主题深度指南 {#高级主题深度指南}
 
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
@@ -12,12 +12,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [🔬 高级主题深度指南](#-高级主题深度指南)
-  - [📑 目录](#-目录)
+- [🔬 高级主题深度指南](#高级主题深度指南)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [1. 高级所有权模式](#1-高级所有权模式)
     - [1.1 自定义智能指针](#11-自定义智能指针)
@@ -43,7 +43,7 @@
   - [8. 错误处理最佳实践](#8-错误处理最佳实践)
     - [8.1 自定义错误类型](#81-自定义错误类型)
     - [8.2 错误传播模式](#82-错误传播模式)
-  - [📚 相关资源](#-相关资源)
+  - [📚 相关资源](#相关资源)
   - [Rust 1.95+ 高级特性深度解析](#rust-195-高级特性深度解析)
     - [array\_windows 的高级模式](#array_windows-的高级模式)
       - [1. 多重窗口组合](#1-多重窗口组合)
@@ -55,11 +55,10 @@
       - [1. 分层初始化](#1-分层初始化)
       - [2. 条件初始化](#2-条件初始化)
     - [数学常量的高级应用](#数学常量的高级应用)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 概述
+## 概述 {#概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -72,11 +71,11 @@ SEND-T1/SYNC-T1 (并发)。
 
 ---
 
-## 1. 高级所有权模式
+## 1. 高级所有权模式 {#1-高级所有权模式}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1.1 自定义智能指针
+### 1.1 自定义智能指针 {#11-自定义智能指针}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -114,7 +113,7 @@ impl<T> Deref for Shared<T> {
 }
 ```
 
-### 1.2 零成本抽象的所有权转移
+### 1.2 零成本抽象的所有权转移 {#12-零成本抽象的所有权转移}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -134,11 +133,11 @@ pub fn borrow_value<T>(value: &T) -> &T {
 
 ---
 
-## 2. 高级类型系统技巧
+## 2. 高级类型系统技巧 {#2-高级类型系统技巧}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 关联类型与GATs
+### 2.1 关联类型与GATs {#21-关联类型与gats}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -162,7 +161,7 @@ trait Iterable {
 }
 ```
 
-### 2.2 类型级编程
+### 2.2 类型级编程 {#22-类型级编程}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -191,11 +190,11 @@ impl<T, const N: usize> Array<T, N> {
 
 ---
 
-## 3. 高级并发模式
+## 3. 高级并发模式 {#3-高级并发模式}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 3.1 无锁编程
+### 3.1 无锁编程 {#31-无锁编程}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -226,7 +225,7 @@ impl LockFreeCounter {
 }
 ```
 
-### 3.2 工作窃取算法
+### 3.2 工作窃取算法 {#32-工作窃取算法}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -260,11 +259,11 @@ impl<T> WorkStealingQueue<T> {
 
 ---
 
-## 4. 高级异步编程
+## 4. 高级异步编程 {#4-高级异步编程}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 4.1 自定义Future实现
+### 4.1 自定义Future实现 {#41-自定义future实现}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -305,7 +304,7 @@ impl Future for Delay {
 }
 ```
 
-### 4.2 异步流处理
+### 4.2 异步流处理 {#42-异步流处理}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -329,11 +328,11 @@ where
 
 ---
 
-## 5. 高级宏编程
+## 5. 高级宏编程 {#5-高级宏编程}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 5.1 声明宏高级模式
+### 5.1 声明宏高级模式 {#51-声明宏高级模式}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -350,7 +349,7 @@ macro_rules! count {
 const COUNT: usize = count!(a b c d e); // 5
 ```
 
-### 5.2 过程宏基础
+### 5.2 过程宏基础 {#52-过程宏基础}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -367,11 +366,11 @@ struct MyStruct {
 
 ---
 
-## 6. 性能优化深度指南
+## 6. 性能优化深度指南 {#6-性能优化深度指南}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 6.1 内存布局优化
+### 6.1 内存布局优化 {#61-内存布局优化}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -393,7 +392,7 @@ struct PackedStruct {
 }
 ```
 
-### 6.2 零成本抽象
+### 6.2 零成本抽象 {#62-零成本抽象}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -415,11 +414,11 @@ pub fn fast_add(a: i32, b: i32) -> i32 {
 
 ---
 
-## 7. 内存安全深度分析
+## 7. 内存安全深度分析 {#7-内存安全深度分析}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 7.1 生命周期高级用法
+### 7.1 生命周期高级用法 {#71-生命周期高级用法}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -442,7 +441,7 @@ fn subtype_example<'a: 'b, 'b>(x: &'a str, y: &'b str) -> &'b str {
 }
 ```
 
-### 7.2 借用检查器深入理解
+### 7.2 借用检查器深入理解 {#72-借用检查器深入理解}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -466,11 +465,11 @@ fn borrow_checker_example() {
 
 ---
 
-## 8. 错误处理最佳实践
+## 8. 错误处理最佳实践 {#8-错误处理最佳实践}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 8.1 自定义错误类型
+### 8.1 自定义错误类型 {#81-自定义错误类型}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -498,7 +497,7 @@ impl fmt::Display for MyError {
 impl std::error::Error for MyError {}
 ```
 
-### 8.2 错误传播模式
+### 8.2 错误传播模式 {#82-错误传播模式}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -522,7 +521,7 @@ fn process_file(path: &str) -> Result<Vec<i32>, MyError> {
 
 ---
 
-## 📚 相关资源
+## 📚 相关资源 {#相关资源}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -537,16 +536,16 @@ fn process_file(path: &str) -> Result<Vec<i32>, MyError> {
 
 ---
 
-## Rust 1.95+ 高级特性深度解析
+## Rust 1.95+ 高级特性深度解析 {#rust-195-高级特性深度解析}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 > **适用版本**: Rust 1.96.0+
 
-### array_windows 的高级模式
+### array_windows 的高级模式 {#array_windows-的高级模式}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
-#### 1. 多重窗口组合
+#### 1. 多重窗口组合 {#1-多重窗口组合}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -569,7 +568,7 @@ pub fn multi_window_analysis(prices: &[f64]) -> MultiWindowMetrics {
 }
 ```
 
-#### 2. 窗口内的复杂模式匹配
+#### 2. 窗口内的复杂模式匹配 {#2-窗口内的复杂模式匹配}
 
 ```rust,ignore
 /// 检测复杂的模式序列
@@ -594,11 +593,11 @@ pub fn detect_complex_pattern(data: &[u8]) -> Vec<PatternMatch> {
 }
 ```
 
-### ControlFlow 的高级用法
+### ControlFlow 的高级用法 {#controlflow-的高级用法}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-#### 1. 嵌套 ControlFlow
+#### 1. 嵌套 ControlFlow {#1-嵌套-controlflow}
 
 ```rust,ignore
 use std::ops::ControlFlow;
@@ -622,7 +621,7 @@ fn nested_processing(data: &[Vec<i32>]) -> ControlFlow<Error, Vec<Result>> {
 }
 ```
 
-#### 2. 与泛型结合
+#### 2. 与泛型结合 {#2-与泛型结合}
 
 ```rust,ignore
 /// 通用的提前终止迭代器
@@ -639,11 +638,11 @@ where
 }
 ```
 
-### LazyLock 的高级模式
+### LazyLock 的高级模式 {#lazylock-的高级模式}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-#### 1. 分层初始化
+#### 1. 分层初始化 {#1-分层初始化}
 
 ```rust,ignore
 use std::sync::LazyLock;
@@ -673,7 +672,7 @@ pub fn get_merged_config() -> MergedConfig {
 }
 ```
 
-#### 2. 条件初始化
+#### 2. 条件初始化 {#2-条件初始化}
 
 ```rust,ignore
 /// 仅在特定条件下初始化
@@ -694,7 +693,7 @@ where
 }
 ```
 
-### 数学常量的高级应用
+### 数学常量的高级应用 {#数学常量的高级应用}
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -742,7 +741,7 @@ pub fn log_complexity_analysis(n: usize, base: f64) -> Complexity {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -751,7 +750,7 @@ pub fn log_complexity_analysis(n: usize, base: f64) -> Complexity {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

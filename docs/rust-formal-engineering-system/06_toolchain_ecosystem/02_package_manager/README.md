@@ -12,11 +12,11 @@
 
 ---
 
-## Cargo 核心概念
+## Cargo 核心概念 {#cargo-核心概念}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 依赖管理
+### 依赖管理 {#依赖管理-1}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -29,7 +29,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-# 语义化版本
+# 语义化版本 {#语义化版本}
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 serde = "1.0"           # >= 1.0.0, < 2.0.0
@@ -38,38 +38,38 @@ serde = "^1.0"          # >= 1.0.0, < 2.0.0
 serde = "=1.0.150"      # 精确版本 1.0.150
 serde = ">=1.0, <1.5"   # 范围
 
-# 特性启用
+# 特性启用 {#特性启用}
 serde = { version = "1.0", features = ["derive"] }
 serde = { version = "1.0", default-features = false, features = ["alloc"] }
 
-# 可选依赖
+# 可选依赖 {#可选依赖}
 tracing = { version = "0.1", optional = true }
 
-# 平台特定依赖
+# 平台特定依赖 {#平台特定依赖}
 [target.'cfg(unix)'.dependencies]
 nix = "0.27"
 
 [target.'cfg(windows)'.dependencies]
 windows-sys = "0.52"
 
-# 开发依赖
+# 开发依赖 {#开发依赖}
 [dev-dependencies]
 mockall = "0.12"
 tokio-test = "0.4"
 
-# 构建依赖
+# 构建依赖 {#构建依赖}
 [build-dependencies]
 cc = "1.0"
 ```
 
-### 工作空间
+### 工作空间 {#工作空间-1}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
-# 根 Cargo.toml
+# 根 Cargo.toml {#根-cargotoml}
 [workspace]
 members = ["crate-a", "crate-b", "crate-c"]
 resolver = "2"
@@ -86,7 +86,7 @@ authors = ["Team"]
 ```
 
 ```toml
-# crate-a/Cargo.toml
+# crate-a/Cargo.toml {#crate-acargotoml}
 [package]
 name = "crate-a"
 version.workspace = true
@@ -97,52 +97,52 @@ authors.workspace = true
 serde = { workspace = true }
 ```
 
-### 特性管理
+### 特性管理 {#特性管理}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```toml
 [features]
-# 默认特性
+# 默认特性 {#默认特性}
 default = ["std", "derive"]
 
-# 独立特性
+# 独立特性 {#独立特性}
 std = []
 alloc = []
 serde = ["dep:serde"]
 async = ["tokio", "tokio/rt"]
 
-# 完整特性
+# 完整特性 {#完整特性}
 full = ["std", "serde", "async"]
 
-# 内部特性
+# 内部特性 {#内部特性}
 __internal = []
 ```
 
-### Cargo 命令
+### Cargo 命令 {#cargo-命令}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```bash
-# 项目管理
+# 项目管理 {#项目管理}
 cargo new project-name
 cargo init
 cargo new --lib lib-name
 
-# 构建
+# 构建 {#构建}
 cargo build
 cargo build --release
 cargo build --all-targets
 cargo check          # 快速检查
 cargo fix            # 自动修复
 
-# 测试
+# 测试 {#测试}
 cargo test
 cargo test --doc
 cargo test --lib
 cargo test <filter>
 
-# 依赖管理
+# 依赖管理 {#依赖管理-1}
 cargo add <crate>
 cargo add --dev <crate>
 cargo add --features <feature> <crate>
@@ -150,18 +150,18 @@ cargo update
 cargo tree
 cargo tree -d        # 显示重复依赖
 
-# 发布
+# 发布 {#发布}
 cargo publish --dry-run
 cargo publish
 cargo yank --version x.y.z
 
-# 工作空间
+# 工作空间 {#工作空间-1}
 cargo build --workspace
 cargo test --workspace
 cargo publish --workspace
 ```
 
-### 语义版本规范
+### 语义版本规范 {#语义版本规范}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -181,12 +181,12 @@ cargo publish --workspace
 // "*"         任何版本
 ```
 
-### 自定义配置
+### 自定义配置 {#自定义配置}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```toml
-# .cargo/config.toml
+# .cargo/config.toml {#cargoconfigtoml}
 [build]
 target = "x86_64-unknown-linux-gnu"
 rustflags = ["-C", "link-arg=-fuse-ld=lld"]
@@ -210,12 +210,12 @@ git-fetch-with-cli = true
 retry = 3
 ```
 
-### 虚拟工作空间示例
+### 虚拟工作空间示例 {#虚拟工作空间示例}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```toml
-# 虚拟工作空间根 Cargo.toml
+# 虚拟工作空间根 Cargo.toml {#虚拟工作空间根-cargotoml}
 [workspace]
 members = [
     "crates/core",
@@ -234,21 +234,21 @@ license = "MIT OR Apache-2.0"
 repository = "https://github.com/username/project"
 
 [workspace.dependencies]
-# 核心依赖
+# 核心依赖 {#核心依赖}
 tokio = { version = "1.35", features = ["full"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 anyhow = "1.0"
 tracing = "0.1"
 
-# 本地 crate
+# 本地 crate {#本地-crate}
 core = { path = "crates/core" }
 utils = { path = "crates/utils" }
 ```
 
 ---
 
-## 形式化方法
+## 形式化方法 {#形式化方法}
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -257,7 +257,7 @@ utils = { path = "crates/utils" }
 | Send/Sync 形式化 | 线程安全形式化定义 | [../../../research_notes/formal_methods/10_send_sync_formalization.md](../../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) |
 | 证明索引 | 形式化证明集合 | [../../../research_notes/10_proof_index.md](../../../../archive/research_notes_2026_06_25/10_proof_index.md) |
 
-## 相关研究笔记
+## 相关研究笔记 {#相关研究笔记}
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -287,7 +287,7 @@ utils = { path = "crates/utils" }
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 > **来源: [Wikipedia - Model Checking](https://en.wikipedia.org/wiki/Model_Checking)**

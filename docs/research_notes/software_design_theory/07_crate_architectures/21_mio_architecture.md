@@ -22,7 +22,7 @@
 
 ---
 
-# mio Crate 架构解构
+# mio Crate 架构解构 {#mio-crate-架构解构}
 
 >
 
@@ -42,7 +42,7 @@
 
 ---
 
-## 1. 引言：Rust 异步 IO 的底层基石
+## 1. 引言：Rust 异步 IO 的底层基石 {#1-引言rust-异步-io-的底层基石}
 
 mio（Metal IO）是 Rust 生态中最底层的**跨平台 IO 多路复用库**，年下载量超过 1.2 亿次 来源: [crates.io 统计, 2025](https://crates.io/)。
 
@@ -116,13 +116,13 @@ loop {
 
 ---
 
-## 2. 核心架构
+## 2. 核心架构 {#2-核心架构}
 
 >
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 2.1 整体架构
+### 2.1 整体架构 {#21-整体架构}
 
 >
 
@@ -188,7 +188,7 @@ graph TB
 
 > [来源: mio Docs — Poll](https://docs.rs/mio/latest/mio/struct.Poll.html)
 
-### 2.2 跨平台抽象的统一语义
+### 2.2 跨平台抽象的统一语义 {#22-跨平台抽象的统一语义}
 
 >
 
@@ -226,13 +226,13 @@ mio 的统一策略：
 
 ---
 
-## 3. 类型系统关键利用
+## 3. 类型系统关键利用 {#3-类型系统关键利用}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 3.1 `Token`：零成本的上下文关联
+### 3.1 `Token`：零成本的上下文关联 {#31-token零成本的上下文关联}
 
 >
 
@@ -290,7 +290,7 @@ impl Server {
 
 > [来源: mio Docs — Token](https://docs.rs/mio/latest/mio/struct.Token.html)
 
-### 3.2 `Interest`：编译期事件类型的位掩码
+### 3.2 `Interest`：编译期事件类型的位掩码 {#32-interest编译期事件类型的位掩码}
 
 >
 
@@ -348,7 +348,7 @@ registry.register(&mut socket, Token(0), RW)?;
 
 > [来源: mio Docs — Interest](https://docs.rs/mio/latest/mio/struct.Interest.html)
 
-### 3.3 `Registry` 的线程安全设计
+### 3.3 `Registry` 的线程安全设计 {#33-registry-的线程安全设计}
 
 >
 
@@ -390,13 +390,13 @@ impl Registry {
 
 ---
 
-## 4. `Waker`：跨线程事件循环唤醒
+## 4. `Waker`：跨线程事件循环唤醒 {#4-waker跨线程事件循环唤醒}
 
 >
 
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 4.1 唤醒机制的三平台实现
+### 4.1 唤醒机制的三平台实现 {#41-唤醒机制的三平台实现}
 
 >
 
@@ -456,7 +456,7 @@ sequenceDiagram
 
 > [来源: Linux man 2 eventfd](https://man7.org/linux/man-pages/man2/eventfd.2.html)
 
-### 4.2 与 `std::task::Waker` 的关系
+### 4.2 与 `std::task::Waker` 的关系 {#42-与-stdtaskwaker-的关系}
 
 >
 
@@ -500,13 +500,13 @@ impl std::task::Wake for IoWaker {
 
 ---
 
-## 5. 零成本抽象证明
+## 5. 零成本抽象证明 {#5-零成本抽象证明}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 5.1 与直接使用 epoll 的对比
+### 5.1 与直接使用 epoll 的对比 {#51-与直接使用-epoll-的对比}
 
 >
 
@@ -564,7 +564,7 @@ poll.poll(&mut events, None)?;
 
 ---
 
-## 6. 在 Rust 异步生态中的位置
+## 6. 在 Rust 异步生态中的位置 {#6-在-rust-异步生态中的位置}
 
 >
 
@@ -632,7 +632,7 @@ graph BT
 
 ---
 
-## 相关架构与延伸阅读
+## 相关架构与延伸阅读 {#相关架构与延伸阅读}
 
 >
 
@@ -652,7 +652,7 @@ graph BT
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -682,13 +682,13 @@ graph BT
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 > **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 > **来源**: [This Week in Rust](https://this-week-in-rust.org/)
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

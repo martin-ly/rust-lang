@@ -1,4 +1,4 @@
-# 权威内容对齐指南
+# 权威内容对齐指南 {#权威内容对齐指南}
 >
 > **概念族**: 权威来源对齐
 
@@ -16,13 +16,13 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [权威内容对齐指南](#权威内容对齐指南)
-  - [📑 目录](#-目录)
-  - [🎯 概述 {#-概述}](#-概述--概述)
+  - [📑 目录](#目录)
+  - [🎯 概述](#概述)
   - [权威来源分级](#权威来源分级)
     - [P0: 官方权威](#p0-官方权威)
     - [P1: 学术权威](#p1-学术权威)
@@ -51,9 +51,9 @@
     - [短期（1–2 季度）](#短期12-季度)
     - [中期（2–4 季度）](#中期24-季度)
     - [长期（4–8 季度）](#长期48-季度)
-  - [🆕 Rust 1.94 研究更新](#-rust-194-研究更新)
+  - [🆕 Rust 1.94 研究更新](#rust-194-研究更新)
     - [核心研究点](#核心研究点)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -61,7 +61,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🎯 概述 {#-概述}
+## 🎯 概述 {#概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -74,11 +74,11 @@
 
 ---
 
-## 权威来源分级
+## 权威来源分级 {#权威来源分级}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### P0: 官方权威
+### P0: 官方权威 {#p0-官方权威}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -102,7 +102,7 @@
 > **最后检查**: 2026-02-20
 ```
 
-### P1: 学术权威
+### P1: 学术权威 {#p1-学术权威}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -124,7 +124,7 @@
 > **对齐状态**: ✅ 一致
 ```
 
-### P2: 社区权威
+### P2: 社区权威 {#p2-社区权威}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -149,11 +149,11 @@
 
 ---
 
-## 对齐维度
+## 对齐维度 {#对齐维度}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 维度 1: 概念定义对齐
+### 维度 1: 概念定义对齐 {#维度-1-概念定义对齐}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -173,7 +173,7 @@
 | 借用 | &T / &mut T | &T / &mut T | ✅ 一致 |
 | 生命周期 | 引用有效性范围 | 引用有效性范围 | ✅ 一致 |
 
-### 维度 2: 代码示例对齐
+### 维度 2: 代码示例对齐 {#维度-2-代码示例对齐}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -198,7 +198,7 @@ let r = &s;
 // ✅ 一致
 ```
 
-### 维度 3: 最佳实践对齐
+### 维度 3: 最佳实践对齐 {#维度-3-最佳实践对齐}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -218,7 +218,7 @@ let r = &s;
 | 错误处理 | Result | Result | ✅ |
 | 文档注释 | /// | /// | ✅ |
 
-### 维度 4: 版本特性对齐
+### 维度 4: 版本特性对齐 {#维度-4-版本特性对齐}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -243,7 +243,7 @@ let r = &s;
 | const async fn | 1.77 | ✅ 完整 | 稳定 |
 | 2024 Edition | 1.85 | ✅ 完整 | 稳定 |
 
-### 维度 5: 形式化对齐
+### 维度 5: 形式化对齐 {#维度-5-形式化对齐}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -257,11 +257,11 @@ let r = &s;
 
 ---
 
-## 差异处理规范
+## 差异处理规范 {#差异处理规范}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 差异类型
+### 差异类型 {#差异类型}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
@@ -275,14 +275,14 @@ let r = &s;
 | **差异** | 与权威有差异 | 详细论证 | ⚠️ |
 | **冲突** | 与权威冲突 | 必须论证 | ❌ |
 
-### 差异标记模板
+### 差异标记模板 {#差异标记模板}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```markdown
-### 差异说明模板
+### 差异说明模板 {#差异说明模板}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -297,7 +297,7 @@ let r = &s;
 > 本项目目标是形式化验证，因此需要补充形式化内容。
 ```
 
-### 差异论证要求
+### 差异论证要求 {#差异论证要求}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -316,11 +316,11 @@ let r = &s;
 
 ---
 
-## 对齐检查清单
+## 对齐检查清单 {#对齐检查清单}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 概念定义检查
+### 概念定义检查 {#概念定义检查}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -333,7 +333,7 @@ let r = &s;
 | Trait | Rust Book 10.2 | [Trait系统](type_theory/10_trait_system_formalization.md) | ✅ | 一致 |
 | async/await | Rust Book 17 | [异步状态机](formal_methods/10_async_state_machine.md) | ✅ | 一致 |
 
-### 代码示例检查
+### 代码示例检查 {#代码示例检查}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -357,7 +357,7 @@ let r = &s;
 | 并发 | Rust Book 16 | quick_reference/02_threads_concurrency_cheatsheet.md | ✅ | 一致 |
 | 异步 | Rust Book 17 | quick_reference/02_async_patterns.md | ✅ | 一致 |
 
-### 版本信息检查
+### 版本信息检查 {#版本信息检查}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -369,11 +369,11 @@ let r = &s;
 
 ---
 
-## 持续追踪机制
+## 持续追踪机制 {#持续追踪机制}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 追踪检查表
+### 追踪检查表 {#追踪检查表}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -385,7 +385,7 @@ let r = &s;
 | RFCs | 每季度 | 维护团队 | 2026-02-20 |
 | RustBelt | 每半年 | 研究团队 | 2026-02-20 |
 
-### 更新响应流程
+### 更新响应流程 {#更新响应流程}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -414,11 +414,11 @@ let r = &s;
 
 ---
 
-## 形式化验证对标与差距分析
+## 形式化验证对标与差距分析 {#形式化验证对标与差距分析}
 >
 > **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) · [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) · [RustSEM](https://doi.org/10.1007/s10703-024-00460-3) · [Oxide](https://arxiv.org/abs/1903.00982) · [Aeneas](https://arxiv.org/abs/2206.07185) · [Verus](https://doi.org/10.1145/3586037)
 
-### 按来源层级的形式化覆盖
+### 按来源层级的形式化覆盖 {#按来源层级的形式化覆盖}
 
 | 来源层级 | 形式化来源 | 本项目覆盖度 | 关键差距 |
 | :--- | :--- | :--- | :--- |
@@ -426,7 +426,7 @@ let r = &s;
 | **P1 学术权威** | RustBelt、Oxide、Tree Borrows、RustSEM | 定理/定义概念级对齐 | 无机械证明；无内存级可执行语义 |
 | **P2 社区/工具** | Miri、Kani、Prusti、Creusot、Aeneas、coq-of-rust | 工具名称与用途已映射 | 无实际验证流水线；无规范库 |
 
-### 形式化验证差距矩阵
+### 形式化验证差距矩阵 {#形式化验证差距矩阵}
 
 | 主题 | RustBelt | Oxide | Tree Borrows | RustSEM | 本项目状态 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -438,23 +438,23 @@ let r = &s;
 | 可执行语义 | — | — | ✅ Miri | ✅ K-Framework | ❌ 无实现 |
 | 工具链验证 | Aeneas/Verus | — | Miri/Kani | — | ⚠️ 计划/占位 |
 
-## 可持续推进方案
+## 可持续推进方案 {#可持续推进方案}
 
 > **目标**: 在不破坏现有 `PROOF_INDEX` 与 `concept/`、`knowledge/` 结构的前提下，持续吸收 P0/P1/P2 来源的最新成果。
 
-### 短期（1–2 季度）
+### 短期（1–2 季度） {#短期12-季度}
 
 1. **文献映射补全**: 将 Tree Borrows、RustSEM、Oxide 的关键定理/定义与 `PROOF_INDEX` 逐条建立映射（已完成于本文档与国际对标索引）。
 2. **元信息升级**: 把所有形式化相关文档的 `Rust 版本` 更新为 `1.96.0+`，`状态` 更新为 `升级中`。
 3. **反例与案例更新**: 在 `borrow_checker_proof`、`ownership_model`、`variance_*` 中补充 Tree Borrows / Miri 检测示例。
 
-### 中期（2–4 季度）
+### 中期（2–4 季度） {#中期24-季度}
 
 1. **工具链原型**: 选取 3–5 个 `crates/` 示例，分别用 Miri、Kani、Aeneas 运行并记录结果，填充工具映射中的「差距」列。
 2. **Coq 骨架推进**: 补全 `deprecated/coq_skeleton/` 中 `OWNERSHIP_UNIQUENESS.v` 与 `BORROW_DATARACE_FREE.v` 的 `Admitted` 证明，至少覆盖 Safe Rust 子集。
 3. **可执行语义占位**: 在 `formal_methods/` 新增 K-Framework / Miri 动态语义章节，作为 RustSEM 的轻量级映射。
 
-### 长期（4–8 季度）
+### 长期（4–8 季度） {#长期48-季度}
 
 1. **自动化对齐检查**: 每季度扫描 Rust Reference、RustBelt 博客、Miri 更新日志，更新权威来源索引。
 2. **分层验证流水线**: 建立「Miri 动态检测 → Kani 有界证明 → Aeneas/Verus/Creusot 演绎证明 → Coq/Iris 基础证明」的渐进式验证路径。
@@ -462,12 +462,12 @@ let r = &s;
 
 ---
 
-## 🆕 Rust 1.94 研究更新
+## 🆕 Rust 1.94 研究更新 {#rust-194-研究更新}
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 > **适用版本**: Rust 1.96.0+
 
-### 核心研究点
+### 核心研究点 {#核心研究点}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -482,19 +482,19 @@ let r = &s;
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **[来源: [docs.rs](https://docs.rs/)]**
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -503,7 +503,7 @@ let r = &s;
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -511,7 +511,7 @@ let r = &s;
 - ✅ 兼容Edition 2024
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 - Rust 1.94 特性速查
@@ -535,7 +535,7 @@ let r = &s;
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -544,7 +544,7 @@ let r = &s;
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

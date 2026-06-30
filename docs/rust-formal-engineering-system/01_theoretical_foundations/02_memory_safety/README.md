@@ -1,4 +1,4 @@
-# 内存安全语义
+# 内存安全语义 {#内存安全语义}
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -9,7 +9,7 @@
 > **状态**: ✅ 已完成
 > 内容已整合至： [10_borrow_checker_proof.md](../../../research_notes/formal_methods/10_borrow_checker_proof.md)
 
-## 知识结构思维导图
+## 知识结构思维导图 {#知识结构思维导图}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -33,7 +33,7 @@ mindmap
       借用检查
 ```
 
-## 与核心文档的关联
+## 与核心文档的关联 {#与核心文档的关联}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -46,7 +46,7 @@ mindmap
 
 ---
 
-## 内存安全的核心保证
+## 内存安全的核心保证 {#内存安全的核心保证}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -105,9 +105,9 @@ fn no_use_after_free() {
 }
 ```
 
-## 更多代码示例
+## 更多代码示例 {#更多代码示例}
 
-### 内存布局与对齐
+### 内存布局与对齐 {#内存布局与对齐}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -138,7 +138,7 @@ fn memory_layout() {
 }
 ```
 
-### 安全抽象边界
+### 安全抽象边界 {#安全抽象边界}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -196,7 +196,7 @@ impl Drop for SafeBuffer {
 }
 ```
 
-### 编译时内存安全检查
+### 编译时内存安全检查 {#编译时内存安全检查}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -231,7 +231,7 @@ fn prevent_use_after_free() {
 
 ---
 
-## 相关研究笔记
+## 相关研究笔记 {#相关研究笔记}
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -254,7 +254,7 @@ fn prevent_use_after_free() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 

@@ -1,4 +1,4 @@
-# 异步编程范式
+# 异步编程范式 {#异步编程范式}
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -13,11 +13,11 @@
 
 ---
 
-## 异步编程核心概念
+## 异步编程核心概念 {#异步编程核心概念}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Future 与异步执行
+### Future 与异步执行 {#future-与异步执行}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -57,7 +57,7 @@ impl Future for TimerFuture {
 }
 ```
 
-### async/await 语法
+### async/await 语法 {#asyncawait-语法}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -113,7 +113,7 @@ async fn race_example() {
 }
 ```
 
-### 异步状态机
+### 异步状态机 {#异步状态机}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -169,7 +169,7 @@ fn pin_demo() {
 }
 ```
 
-### 流（Streams）
+### 流（Streams） {#流streams}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -207,7 +207,7 @@ async fn stream_combinators() {
 }
 ```
 
-### 异步运行时
+### 异步运行时 {#异步运行时}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -263,7 +263,7 @@ async fn async_channels() {
 }
 ```
 
-### 取消与超时
+### 取消与超时 {#取消与超时}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -318,7 +318,7 @@ fn cancellation_demo() {
 }
 ```
 
-### 并发控制
+### 并发控制 {#并发控制}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -381,7 +381,7 @@ where
 
 ---
 
-## 使用场景
+## 使用场景 {#使用场景}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -398,11 +398,11 @@ where
 
 ---
 
-## 相关研究笔记
+## 相关研究笔记 {#相关研究笔记}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 软件设计理论
+### 软件设计理论 {#软件设计理论}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -413,7 +413,7 @@ where
 | 异步执行模型 | 异步模型理论 | [../../../research_notes/software_design_theory/03_execution_models/02_async.md](../../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/02_async.md) |
 | 并发执行模型 | 并发模型理论 | [../../../research_notes/software_design_theory/03_execution_models/03_concurrent.md](../../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/03_concurrent.md) |
 
-### 形式化方法
+### 形式化方法 {#形式化方法}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -423,7 +423,7 @@ where
 | Pin 与自引用 | 自引用类型形式化 | [../../../research_notes/formal_methods/10_pin_self_referential.md](../../../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md) |
 | Send/Sync 形式化 | 线程安全 trait 形式化 | [../../../research_notes/formal_methods/10_send_sync_formalization.md](../../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) |
 
-### 实验分析
+### 实验分析 {#实验分析}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -433,7 +433,7 @@ where
 
 ---
 
-## 相关 crates
+## 相关 crates {#相关-crates}
 
 | crate | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -453,7 +453,7 @@ where
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 

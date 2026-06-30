@@ -8,7 +8,7 @@
 
 ---
 
-# meilisearch-sdk Crate 架构解构
+# meilisearch-sdk Crate 架构解构 {#meilisearch-sdk-crate-架构解构}
 
 > **最后更新**: 2026-06-29
 >
@@ -24,7 +24,7 @@
 
 ---
 
-## 1. 引言：Rust Meilisearch 客户端的生态定位
+## 1. 引言：Rust Meilisearch 客户端的生态定位 {#1-引言rust-meilisearch-客户端的生态定位}
 
 > **[来源: [meilisearch-sdk crates.io](https://crates.io/crates/meilisearch-sdk)]**
 
@@ -68,11 +68,11 @@ let results = index.search().with_query("caorl").execute::<Movie>().await?;
 
 ---
 
-## 2. 核心 API 架构
+## 2. 核心 API 架构 {#2-核心-api-架构}
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 2.1 客户端 / 索引 / 任务三层模型
+### 2.1 客户端 / 索引 / 任务三层模型 {#21-客户端-索引-任务三层模型}
 
 ```mermaid
 graph TD
@@ -97,7 +97,7 @@ graph TD
 
 > [来源: [meilisearch-sdk Index Docs](https://docs.rs/meilisearch-sdk/latest/meilisearch_sdk/indexes/struct.Index.html)]
 
-### 2.2 类型化文档与反序列化边界
+### 2.2 类型化文档与反序列化边界 {#22-类型化文档与反序列化边界}
 
 `add_documents` 接受 `&[T: Serialize]`，`execute::<T>()` 要求 `T: DeserializeOwned`。这意味着：
 
@@ -115,7 +115,7 @@ let raw: SearchResults<serde_json::Value> = index
 
 > [来源: [meilisearch-sdk Search Docs](https://docs.rs/meilisearch-sdk/latest/meilisearch_sdk/search/struct.SearchQuery.html)]
 
-### 2.3 任务模型：异步索引的状态机
+### 2.3 任务模型：异步索引的状态机 {#23-任务模型异步索引的状态机}
 
 Meilisearch 的索引更新（文档写入、设置变更、删除）都是异步任务。`meilisearch-sdk` 不隐藏这一事实，而是提供 `TaskInfo` 与 `Task` 类型让调用者显式等待：
 
@@ -131,7 +131,7 @@ match status {
 
 > [来源: [meilisearch-sdk Tasks Docs](https://docs.rs/meilisearch-sdk/latest/meilisearch_sdk/tasks/)]
 
-### 2.4 搜索 Builder 与过滤语法
+### 2.4 搜索 Builder 与过滤语法 {#24-搜索-builder-与过滤语法}
 
 搜索参数通过 builder 链式组合，最终调用 `.execute::<T>().await`：
 
@@ -148,7 +148,7 @@ let results = index
 
 > [来源: [Meilisearch Filtering & Faceted Search](https://www.meilisearch.com/docs/learn/fine_tuning_results/filtering)]
 
-### 2.5 Settings：将搜索行为类型化
+### 2.5 Settings：将搜索行为类型化 {#25-settings将搜索行为类型化}
 
 `Settings` builder 控制可过滤字段、可排序字段、排序规则、同义词、停用词、高亮等：
 
@@ -165,7 +165,7 @@ let task = index.set_settings(&settings).await?;
 
 ---
 
-## 3. 类型系统利用
+## 3. 类型系统利用 {#3-类型系统利用}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -181,7 +181,7 @@ let task = index.set_settings(&settings).await?;
 
 ---
 
-## 4. 反例边界
+## 4. 反例边界 {#4-反例边界}
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -199,7 +199,7 @@ let task = index.set_settings(&settings).await?;
 
 ---
 
-## 5. 代码示例锚点
+## 5. 代码示例锚点 {#5-代码示例锚点}
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -211,7 +211,7 @@ let task = index.set_settings(&settings).await?;
 
 ---
 
-## 6. 相关架构与延伸阅读
+## 6. 相关架构与延伸阅读 {#6-相关架构与延伸阅读}
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -224,7 +224,7 @@ let task = index.set_settings(&settings).await?;
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [meilisearch-sdk crates.io](https://crates.io/crates/meilisearch-sdk)]**
 >
@@ -242,7 +242,7 @@ let task = index.set_settings(&settings).await?;
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
 > **P0（官方/必读）**:
 >
@@ -259,7 +259,7 @@ let task = index.set_settings(&settings).await?;
 > - [来源: [Meilisearch Blog](https://blog.meilisearch.com/)]
 > - [来源: [This Week in Rust](https://this-week-in-rust.org/)]
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

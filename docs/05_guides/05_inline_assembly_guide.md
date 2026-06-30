@@ -1,4 +1,4 @@
-# Rust 内联汇编完整指南
+# Rust 内联汇编完整指南 {#rust-内联汇编完整指南}
 
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
@@ -11,7 +11,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -53,7 +53,7 @@
 
 ---
 
-## 快速开始
+## 快速开始 {#快速开始}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -76,11 +76,11 @@ fn main() {
 
 ---
 
-## 基础语法
+## 基础语法 {#基础语法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### asm! 宏基本结构
+### asm! 宏基本结构 {#asm-宏基本结构}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -96,7 +96,7 @@ asm!(
 );
 ```
 
-### global_asm! 全局汇编
+### global_asm! 全局汇编 {#global_asm-全局汇编}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -119,11 +119,11 @@ extern "C" {
 
 ---
 
-## 操作数详解
+## 操作数详解 {#操作数详解}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 输入操作数 (in)
+### 1. 输入操作数 (in) {#1-输入操作数-in}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -139,7 +139,7 @@ unsafe {
 }
 ```
 
-### 2. 输出操作数 (out)
+### 2. 输出操作数 (out) {#2-输出操作数-out}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -155,7 +155,7 @@ unsafe {
 }
 ```
 
-### 3. 输入输出操作数 (inout)
+### 3. 输入输出操作数 (inout) {#3-输入输出操作数-inout}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -172,7 +172,7 @@ unsafe {
 }
 ```
 
-### 4. 延迟输出 (lateout)
+### 4. 延迟输出 (lateout) {#4-延迟输出-lateout}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -192,7 +192,7 @@ unsafe {
 }
 ```
 
-### 5. 内存操作数 (mem)
+### 5. 内存操作数 (mem) {#5-内存操作数-mem}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -209,7 +209,7 @@ unsafe {
 assert_eq!(arr[0], 42);
 ```
 
-### 6. 标签和跳转
+### 6. 标签和跳转 {#6-标签和跳转}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -234,7 +234,7 @@ assert_eq!(result, 1);
 
 ---
 
-## 汇编选项
+## 汇编选项 {#汇编选项}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -247,7 +247,7 @@ assert_eq!(result, 1);
 | `preserves_flags` | 保留 CPU 标志位 | 需要保持条件码 |
 | `may_unwind` | 可能展开栈 | 调用可能 panic 的函数 |
 
-### 选项组合示例
+### 选项组合示例 {#选项组合示例}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -279,11 +279,11 @@ unsafe fn exit_process(code: i32) -> ! {
 
 ---
 
-## 平台特定指南
+## 平台特定指南 {#平台特定指南}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### x86/x86_64
+### x86/x86_64 {#x86x86_64}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -331,7 +331,7 @@ mod x86_64_examples {
 }
 ```
 
-### ARM/AArch64
+### ARM/AArch64 {#armaarch64}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -369,7 +369,7 @@ mod aarch64_examples {
 }
 ```
 
-### RISC-V
+### RISC-V {#risc-v}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -401,11 +401,11 @@ mod riscv_examples {
 
 ---
 
-## 实战示例
+## 实战示例 {#实战示例}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 1. 系统调用封装
+### 1. 系统调用封装 {#1-系统调用封装}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -445,7 +445,7 @@ pub fn sys_write(fd: usize, buf: &[u8]) -> isize {
 }
 ```
 
-### 2. SIMD 操作 (x86_64 AVX)
+### 2. SIMD 操作 (x86_64 AVX) {#2-simd-操作-x86_64-avx}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -470,7 +470,7 @@ pub unsafe fn add_vectors_avx(a: &[f32; 8], b: &[f32; 8]) -> [f32; 8] {
 }
 ```
 
-### 3. 原子操作（自定义实现）
+### 3. 原子操作（自定义实现） {#3-原子操作自定义实现}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -532,7 +532,7 @@ impl AtomicU64 {
 
 ---
 
-## 与 naked 函数配合
+## 与 naked 函数配合 {#与-naked-函数配合}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -591,11 +591,11 @@ extern "C" fn handle_syscall() {
 
 ---
 
-## 常见陷阱
+## 常见陷阱 {#常见陷阱}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 陷阱 1: 忘记标记 clobbered 寄存器
+### 陷阱 1: 忘记标记 clobbered 寄存器 {#陷阱-1-忘记标记-clobbered-寄存器}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -616,7 +616,7 @@ unsafe {
 }
 ```
 
-### 陷阱 2: 输入输出操作数混淆
+### 陷阱 2: 输入输出操作数混淆 {#陷阱-2-输入输出操作数混淆}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -643,7 +643,7 @@ unsafe {
 > `static mut` 在 Rust 2024 Edition 中引用已被禁止。
 > 即使配合内联汇编，也应优先使用 `AtomicU64` 或 `UnsafeCell`。
 
-### 陷阱 3: 忘记内存屏障
+### 陷阱 3: 忘记内存屏障 {#陷阱-3-忘记内存屏障}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -665,7 +665,7 @@ unsafe {
 }
 ```
 
-### 陷阱 4: 平台假设
+### 陷阱 4: 平台假设 {#陷阱-4-平台假设}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -714,7 +714,7 @@ pub fn get_cycle_count() -> u64 {
 
 ---
 
-## 总结
+## 总结 {#总结}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -733,13 +733,13 @@ pub fn get_cycle_count() -> u64 {
 
 ---
 
-## Rust 1.95+ 在内联汇编中的应用
+## Rust 1.95+ 在内联汇编中的应用 {#rust-195-在内联汇编中的应用}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.96.0+
 
-### LazyLock 在汇编优化缓存中的应用
+### LazyLock 在汇编优化缓存中的应用 {#lazylock-在汇编优化缓存中的应用}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -768,7 +768,7 @@ pub fn optimized_memcpy(dst: *mut u8, src:*const u8, len: usize) {
 }
 ```
 
-### ControlFlow 在汇编错误处理中的应用
+### ControlFlow 在汇编错误处理中的应用 {#controlflow-在汇编错误处理中的应用}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -786,7 +786,7 @@ fn validate_asm_result(result: u64) -> ControlFlow<AsmError, ()> {
 }
 ```
 
-### 数学常量在 SIMD 优化中的应用
+### 数学常量在 SIMD 优化中的应用 {#数学常量在-simd-优化中的应用}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -830,7 +830,7 @@ pub fn aligned_buffer_size(min_size: usize) -> usize {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

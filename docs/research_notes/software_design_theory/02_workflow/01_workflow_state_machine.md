@@ -1,4 +1,4 @@
-# 工作流状态机模式形式化定义
+# 工作流状态机模式形式化定义 {#工作流状态机模式形式化定义}
 
 > **概念族**: 软件设计 / 工作流模式 / 状态机
 
@@ -26,10 +26,10 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 - [工作流状态机模式形式化定义](#工作流状态机模式形式化定义)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 问题定义与动机](#1-问题定义与动机)
   - [2. 核心概念](#2-核心概念)
   - [3. 形式化定义](#3-形式化定义)
@@ -50,7 +50,7 @@
 
 ---
 
-## 1. 问题定义与动机
+## 1. 问题定义与动机 {#1-问题定义与动机}
 
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
@@ -64,7 +64,7 @@
 
 ---
 
-## 2. 核心概念
+## 2. 核心概念 {#2-核心概念}
 
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
 
@@ -78,11 +78,11 @@
 
 ---
 
-## 3. 形式化定义
+## 3. 形式化定义 {#3-形式化定义}
 
 > **来源**: [Rust Official Docs](https://doc.rust-lang.org/)
 
-### Def WF1: 工作流状态机
+### Def WF1: 工作流状态机 {#def-wf1-工作流状态机}
 
 一个工作流状态机是五元组
 
@@ -98,7 +98,7 @@ M := (S, E, T ⊆ S × E × S, s₀ ∈ S, F ⊆ S)
 - `s₀`：初始状态。
 - `F`：终止状态集合（成功或失败）。
 
-### Axiom WF1: 状态互斥
+### Axiom WF1: 状态互斥 {#axiom-wf1-状态互斥}
 
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
 
@@ -108,7 +108,7 @@ M := (S, E, T ⊆ S × E × S, s₀ ∈ S, F ⊆ S)
 ∀ instance, ∀ t, ∃! s ∈ S : state(instance, t) = s
 ```
 
-### Theorem WF1: 状态可达性
+### Theorem WF1: 状态可达性 {#theorem-wf1-状态可达性}
 
 > **来源**: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)
 
@@ -123,11 +123,11 @@ M := (S, E, T ⊆ S × E × S, s₀ ∈ S, F ⊆ S)
 
 ---
 
-## 4. Rust 实现方案
+## 4. Rust 实现方案 {#4-rust-实现方案}
 
 > **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 
-### 4.1 枚举状态机
+### 4.1 枚举状态机 {#41-枚举状态机}
 
 最直接的方式是用 `enum` 表达状态与事件，在 `match` 中穷举合法迁移。
 
@@ -180,7 +180,7 @@ fn main() {
 
 > **来源**: [Rust Standard Library](https://doc.rust-lang.org/std/)
 
-### 4.2 Typestate 模式
+### 4.2 Typestate 模式 {#42-typestate-模式}
 
 利用泛型参数把状态编码进类型，**非法迁移在编译期即被拒绝**。
 
@@ -233,7 +233,7 @@ fn main() {
 
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
 
-### 4.3 持久化工作流
+### 4.3 持久化工作流 {#43-持久化工作流}
 
 生产环境需要把状态持久化，以便进程重启后继续推进。
 
@@ -321,11 +321,11 @@ fn main() {
 
 ---
 
-## 5. 反例与边界
+## 5. 反例与边界 {#5-反例与边界}
 
 > **来源**: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)
 
-### 反例 1：无效状态迁移
+### 反例 1：无效状态迁移 {#反例-1无效状态迁移}
 
 ```rust,should_panic
 let state = OrderState::Shipped;
@@ -336,7 +336,7 @@ state.transition(OrderEvent::Pay).unwrap(); // Err: invalid transition
 
 **修复**：在应用事件前检查当前状态与事件的组合是否合法；Typestate 模式可进一步在编译期禁止。
 
-### 反例 2：并发事件导致状态竞争
+### 反例 2：并发事件导致状态竞争 {#反例-2并发事件导致状态竞争}
 
 多线程/多 actor 同时处理同一工作流实例时，逻辑顺序可能被破坏。
 
@@ -369,7 +369,7 @@ t2.join().unwrap();
 - 通过数据库行锁或版本号实现乐观锁，拒绝过期事件。
 - 使用持久化日志按顺序重放事件。
 
-### 边界：状态版本迁移
+### 边界：状态版本迁移 {#边界状态版本迁移}
 
 业务演进可能新增状态或事件。旧实例加载到新代码后可能出现：
 
@@ -384,7 +384,7 @@ t2.join().unwrap();
 
 ---
 
-## 6. 与其他模式的关系
+## 6. 与其他模式的关系 {#6-与其他模式的关系}
 
 > **来源**: [crates.io](https://crates.io/)
 
@@ -399,7 +399,7 @@ t2.join().unwrap();
 
 ---
 
-## 7. 权威来源索引
+## 7. 权威来源索引 {#7-权威来源索引}
 
 > **P0 权威来源（Rust 官方）**:
 >
@@ -423,7 +423,7 @@ t2.join().unwrap();
 
 ---
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [Aeneas](https://aeneas-verification.github.io/)
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)

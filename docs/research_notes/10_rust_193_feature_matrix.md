@@ -1,4 +1,4 @@
-# Rust 1.93 特性族多维概念矩阵
+# Rust 1.93 特性族多维概念矩阵 {#rust-193-特性族多维概念矩阵}
 >
 > **概念族**: 版本特性
 
@@ -9,12 +9,12 @@
 
 > **权威来源**: [Rust Release Notes](https://doc.rust-lang.org/stable/releases.html) | [Rust Blog](https://blog.rust-lang.org/) | [Rust Reference](https://doc.rust-lang.org/reference/) | [Rust Standard Library](https://doc.rust-lang.org/std/)
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.93 特性族多维概念矩阵](#rust-193-特性族多维概念矩阵)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 内存与所有权族](#1-内存与所有权族)
   - [2. 类型系统族](#2-类型系统族)
   - [3. Trait 与多态族](#3-trait-与多态族)
@@ -27,7 +27,7 @@
   - [10. Rust 1.93 新增/变更族](#10-rust-193-新增变更族)
   - [11. Rust 1.95/1.96 新增/变更族](#11-rust-195196-新增变更族)
   - [相关文档](#相关文档)
-  - [✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）](#-权威国际化来源对齐升级摘要rust-1960--edition-2024)
+  - [✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）](#权威国际化来源对齐升级摘要rust-1960-edition-2024)
     - [本次升级要点](#本次升级要点)
       - [新增 Rust 1.96.0 特性](#新增-rust-1960-特性)
       - [新增 Rust 1.95.0 特性](#新增-rust-1950-特性)
@@ -44,7 +44,7 @@
 
 ---
 
-## 1. 内存与所有权族
+## 1. 内存与所有权族 {#1-内存与所有权族}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -65,7 +65,7 @@
 
 ---
 
-## 2. 类型系统族
+## 2. 类型系统族 {#2-类型系统族}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -89,7 +89,7 @@
 
 ---
 
-## 3. Trait 与多态族
+## 3. Trait 与多态族 {#3-trait-与多态族}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -108,7 +108,7 @@
 
 ---
 
-## 4. 控制流与模式匹配族
+## 4. 控制流与模式匹配族 {#4-控制流与模式匹配族}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -125,7 +125,7 @@
 
 ---
 
-## 5. 并发与异步族
+## 5. 并发与异步族 {#5-并发与异步族}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -142,7 +142,7 @@
 
 ---
 
-## 6. 宏与元编程族
+## 6. 宏与元编程族 {#6-宏与元编程族}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -156,7 +156,7 @@
 
 ---
 
-## 7. 模块与可见性族
+## 7. 模块与可见性族 {#7-模块与可见性族}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -169,7 +169,7 @@
 
 ---
 
-## 8. 常量与编译期族
+## 8. 常量与编译期族 {#8-常量与编译期族}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -184,7 +184,7 @@
 
 ---
 
-## 9. FFI 与不安全族
+## 9. FFI 与不安全族 {#9-ffi-与不安全族}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -199,7 +199,7 @@
 
 ---
 
-## 10. Rust 1.93 新增/变更族
+## 10. Rust 1.93 新增/变更族 {#10-rust-193-新增变更族}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -219,7 +219,7 @@
 
 ---
 
-## 11. Rust 1.95/1.96 新增/变更族
+## 11. Rust 1.95/1.96 新增/变更族 {#11-rust-195196-新增变更族}
 
 > **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
 > **来源: [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)**
@@ -243,7 +243,7 @@
 
 ---
 
-## 相关文档
+## 相关文档 {#相关文档}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -262,7 +262,7 @@
 
 ---
 
-## ✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）
+## ✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024） {#权威国际化来源对齐升级摘要rust-1960-edition-2024}
 
 > **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
 > **来源: [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)**
@@ -270,11 +270,11 @@
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **升级日期**: 2026-06-29
 
-### 本次升级要点
+### 本次升级要点 {#本次升级要点}
 
 本文档已完成权威国际化来源对齐升级，统一版本基准为 **Rust 1.96.0+ / Edition 2024**，同时保留 1.93/1.94 历史分析章节。
 
-#### 新增 Rust 1.96.0 特性
+#### 新增 Rust 1.96.0 特性 {#新增-rust-1960-特性}
 
 | 特性 | 来源 | 说明 |
 | :--- | :--- | :--- |
@@ -285,7 +285,7 @@
 | Cargo `target.'cfg(..)'.rustdocflags` | [Cargo CHANGELOG 1.96](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-196-2026-05-28)、[cargo#16846](https://github.com/rust-lang/cargo/pull/16846) | 按 `cfg` 条件设置 rustdocflags |
 | dependency 同时指定 git 与 alternate registry | [Cargo CHANGELOG 1.96](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-196-2026-05-28)、[cargo#16810](https://github.com/rust-lang/cargo/pull/16810) | 本地 git，发布 registry |
 
-#### 新增 Rust 1.95.0 特性
+#### 新增 Rust 1.95.0 特性 {#新增-rust-1950-特性}
 
 | 特性 | 来源 | 说明 |
 | :--- | :--- | :--- |
@@ -296,7 +296,7 @@
 | `cargo init` 禁止在主目录执行 | [Cargo CHANGELOG 1.95](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-195-2026-04-16)、[cargo#16566](https://github.com/rust-lang/cargo/pull/16566) | 避免清单发现混乱 |
 | `cargo package` 覆盖大 crate 文件损坏修复 | [Cargo CHANGELOG 1.95](https://doc.rust-lang.org/nightly/cargo/CHANGELOG.html#cargo-195-2026-04-16)、[cargo#16713](https://github.com/rust-lang/cargo/pull/16713) | 修复 `.crate` 覆盖损坏 |
 
-#### 权威来源对齐
+#### 权威来源对齐 {#权威来源对齐}
 
 - Rust release notes（releases.rs）
 - Rust Blog 对应版本发布公告
@@ -306,7 +306,7 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -315,7 +315,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Rust Reference - Feature Gates](https://doc.rust-lang.org/reference/)**
 > **来源: [Rust Release Notes](https://github.com/rust-lang/rust/blob/master/RELEASES.md)**

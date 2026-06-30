@@ -7,7 +7,7 @@
 
 > 核心结论请优先查阅 `concept/` 与 `knowledge/`。
 
-# 生命周期形式化（类型理论视角）
+# 生命周期形式化（类型理论视角） {#生命周期形式化类型理论视角}
 
 > **内容分级**: [归档级]
 
@@ -22,7 +22,7 @@
 > **状态**: ✅ 已完成权威国际化来源对齐升级
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | [NLL RFC](https://rust-lang.github.io/rfcs/2094-nll.html)
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -31,38 +31,38 @@
 >
 
 - [生命周期形式化（类型理论视角）](#生命周期形式化类型理论视角)
-  - [📑 目录](#-目录)
-  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
+  - [📑 目录](#目录)
+  - [🎯 研究目标](#研究目标)
     - [核心问题](#核心问题)
     - [预期成果](#预期成果)
-  - [📚 理论基础 {#-理论基础}](#-理论基础--理论基础)
+  - [📚 理论基础](#理论基础)
     - [生命周期核心概念](#生命周期核心概念)
     - [相关理论](#相关理论)
-  - [🔬 形式化定义 {#-形式化定义}](#-形式化定义--形式化定义)
+  - [🔬 形式化定义](#形式化定义)
     - [1. 生命周期](#1-生命周期)
     - [2. 生命周期子类型](#2-生命周期子类型)
     - [3. 生命周期推断](#3-生命周期推断)
   - [公理、定理与引理](#公理定理与引理)
   - [与 formal\_methods 衔接](#与-formal_methods-衔接)
-  - [✅ 证明目标 {#-证明目标}](#-证明目标--证明目标)
+  - [✅ 证明目标](#证明目标)
     - [待证明的性质](#待证明的性质)
     - [证明方法](#证明方法)
-  - [💻 代码示例与实践 {#-代码示例与实践}](#-代码示例与实践--代码示例与实践)
+  - [💻 代码示例与实践](#代码示例与实践)
     - [示例 1: 基本生命周期](#示例-1-基本生命周期)
     - [示例 2: 生命周期推断](#示例-2-生命周期推断)
     - [示例 3: 生命周期约束](#示例-3-生命周期约束)
     - [示例 4: 生命周期与泛型](#示例-4-生命周期与泛型)
     - [示例 5: 高阶生命周期](#示例-5-高阶生命周期)
-  - [📖 参考文献 {#-参考文献}](#-参考文献--参考文献)
+  - [📖 参考文献](#参考文献)
     - [学术论文](#学术论文)
     - [官方文档](#官方文档)
     - [相关代码](#相关代码)
     - [工具资源](#工具资源)
-  - [🔄 研究进展 {#-研究进展}](#-研究进展--研究进展)
-    - [已完成 ✅ {#已完成-}](#已完成--已完成-)
+  - [🔄 研究进展](#研究进展)
+    - [已完成 ✅](#已完成)
     - [进行中 🔄（已完成）](#进行中-已完成)
     - [计划中 📋（已完成）](#计划中-已完成)
-  - [🔗 系统集成与实际应用 {#-系统集成与实际应用}](#-系统集成与实际应用--系统集成与实际应用)
+  - [🔗 系统集成与实际应用](#系统集成与实际应用)
     - [与类型系统的集成](#与类型系统的集成)
     - [与借用检查器的集成](#与借用检查器的集成)
     - [实际应用案例](#实际应用案例)
@@ -70,7 +70,7 @@
     - [生命周期形式化的两条主线](#生命周期形式化的两条主线)
     - [与本项目证明索引的映射](#与本项目证明索引的映射)
     - [生命周期子类型的形式化再表述](#生命周期子类型的形式化再表述)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -90,7 +90,7 @@
 
 ---
 
-## 🎯 研究目标 {#-研究目标}
+## 🎯 研究目标 {#研究目标}
 
 >
 
@@ -98,7 +98,7 @@
 
 本研究的目的是形式化定义 Rust 的生命周期系统，并理解其类型理论基础。
 
-### 核心问题
+### 核心问题 {#核心问题}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -112,7 +112,7 @@
 
 3. **生命周期与类型系统**: 生命周期如何与类型系统集成？
 
-### 预期成果
+### 预期成果 {#预期成果}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -128,13 +128,13 @@
 
 ---
 
-## 📚 理论基础 {#-理论基础}
+## 📚 理论基础 {#理论基础}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 生命周期核心概念
+### 生命周期核心概念 {#生命周期核心概念}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -150,7 +150,7 @@
 
 4. **子类型关系**: 生命周期之间的子类型关系
 
-### 相关理论
+### 相关理论 {#相关理论}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -168,13 +168,13 @@
 
 ---
 
-## 🔬 形式化定义 {#-形式化定义}
+## 🔬 形式化定义 {#形式化定义}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 生命周期
+### 1. 生命周期 {#1-生命周期}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -190,7 +190,7 @@
 
 $$\Lambda : \text{LifetimeVar} \to \text{Scope}$$
 
-### 2. 生命周期子类型
+### 2. 生命周期子类型 {#2-生命周期子类型}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -202,7 +202,7 @@ $$\Lambda : \text{LifetimeVar} \to \text{Scope}$$
 
 **定义 2.2 (引用类型子类型)**: 如果 $\ell_2 <: \ell_1$ 且 $\tau_1 <: \tau_2$，则 $\&\ell_1 \tau_1 <: \&\ell_2 \tau_2$。
 
-### 3. 生命周期推断
+### 3. 生命周期推断 {#3-生命周期推断}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -218,7 +218,7 @@ $$C = \{\ell_1 <: \ell_2, \ell_2 <: \ell_3, \ldots\}$$
 
 ---
 
-## 公理、定理与引理
+## 公理、定理与引理 {#公理定理与引理}
 
 >
 
@@ -246,7 +246,7 @@ $$C = \{\ell_1 <: \ell_2, \ell_2 <: \ell_3, \ldots\}$$
 
 ---
 
-## 与 formal_methods 衔接
+## 与 formal_methods 衔接 {#与-formal_methods-衔接}
 
 >
 
@@ -256,13 +256,13 @@ $$C = \{\ell_1 <: \ell_2, \ell_2 <: \ell_3, \ldots\}$$
 
 ---
 
-## ✅ 证明目标 {#-证明目标}
+## ✅ 证明目标 {#证明目标}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 待证明的性质
+### 待证明的性质 {#待证明的性质}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -272,7 +272,7 @@ $$C = \{\ell_1 <: \ell_2, \ell_2 <: \ell_3, \ldots\}$$
 
 3. **引用有效性**: 见定理 LT-T1
 
-### 证明方法
+### 证明方法 {#证明方法}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -284,13 +284,13 @@ $$C = \{\ell_1 <: \ell_2, \ell_2 <: \ell_3, \ldots\}$$
 
 ---
 
-## 💻 代码示例与实践 {#-代码示例与实践}
+## 💻 代码示例与实践 {#代码示例与实践}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 示例 1: 基本生命周期
+### 示例 1: 基本生命周期 {#示例-1-基本生命周期}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -340,7 +340,7 @@ fn main() {
 
 - 返回值的生命周期是输入生命周期中较短的那个
 
-### 示例 2: 生命周期推断
+### 示例 2: 生命周期推断 {#示例-2-生命周期推断}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -374,7 +374,7 @@ fn first_word(s: &str) -> &str {
 
 - 返回值的生命周期与输入相同
 
-### 示例 3: 生命周期约束
+### 示例 3: 生命周期约束 {#示例-3-生命周期约束}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -418,7 +418,7 @@ impl<'a> ImportantExcerpt<'a> {
 
 - 方法返回值的生命周期受结构体生命周期约束
 
-### 示例 4: 生命周期与泛型
+### 示例 4: 生命周期与泛型 {#示例-4-生命周期与泛型}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -464,7 +464,7 @@ where
 
 - 可以使用 `where` 子句添加约束
 
-### 示例 5: 高阶生命周期
+### 示例 5: 高阶生命周期 {#示例-5-高阶生命周期}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -494,13 +494,13 @@ where
 
 ---
 
-## 📖 参考文献 {#-参考文献}
+## 📖 参考文献 {#参考文献}
 
 >
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 学术论文
+### 学术论文 {#学术论文}
 
 >
 
@@ -520,7 +520,7 @@ where
 
    - 摘要: Rust 生命周期系统的验证
 
-### 官方文档
+### 官方文档 {#官方文档}
 
 >
 
@@ -532,7 +532,7 @@ where
 
 - [生命周期推断](https://doc.rust-lang.org/reference/lifetime-elision.html)
 
-### 相关代码
+### 相关代码 {#相关代码}
 
 >
 
@@ -544,7 +544,7 @@ where
 
 - [形式化工程系统 - 生命周期](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)
 
-### 工具资源
+### 工具资源 {#工具资源}
 
 >
 
@@ -556,13 +556,13 @@ where
 
 ---
 
-## 🔄 研究进展 {#-研究进展}
+## 🔄 研究进展 {#研究进展}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 已完成 ✅ {#已完成-}
+### 已完成 ✅ {#已完成}
 
 >
 
@@ -574,7 +574,7 @@ where
 
 - [x] 初步形式化定义
 
-### 进行中 🔄（已完成）
+### 进行中 🔄（已完成） {#进行中-已完成}
 
 >
 
@@ -582,7 +582,7 @@ where
 
 - [x] 完整的形式化定义（§1–3 生命周期、子类型、推断）、约束与推断已纳入形式化
 
-### 计划中 📋（已完成）
+### 计划中 📋（已完成） {#计划中-已完成}
 
 >
 
@@ -592,13 +592,13 @@ where
 
 ---
 
-## 🔗 系统集成与实际应用 {#-系统集成与实际应用}
+## 🔗 系统集成与实际应用 {#系统集成与实际应用}
 
 >
 
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 与类型系统的集成
+### 与类型系统的集成 {#与类型系统的集成}
 
 >
 
@@ -606,7 +606,7 @@ where
 
 $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\ell_2 \tau_2$ 参与类型推导；与 [type_system_foundations](10_type_system_foundations.md) 的进展性、保持性在扩展引用与生命周期后一致。
 
-### 与借用检查器的集成
+### 与借用检查器的集成 {#与借用检查器的集成}
 
 >
 
@@ -614,7 +614,7 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 
 生命周期约束与 NLL、reborrow、Polonius 的约束生成与求解对应；见 [borrow_checker_proof](../formal_methods/10_borrow_checker_proof.md) 与 lifetime_formalization。
 
-### 实际应用案例
+### 实际应用案例 {#实际应用案例}
 
 >
 
@@ -636,13 +636,13 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 
 ---
 
-## 六、与国际形式化成果对标
+## 六、与国际形式化成果对标 {#六与国际形式化成果对标}
 
 >
 
 > **学术来源**: [Oxide (ICFP 2023 / arXiv:1903.00982)](https://arxiv.org/abs/1903.00982) · [RustBelt (POPL 2018)](https://doi.org/10.1145/3158154) · [Tree Borrows (PLDI 2025)](https://doi.org/10.1145/3735592) · [RustSEM (FMSD 2024)](https://doi.org/10.1007/s10703-024-00460-3)
 
-### 生命周期形式化的两条主线
+### 生命周期形式化的两条主线 {#生命周期形式化的两条主线}
 
 | 主线 | 代表工作 | 生命周期含义 | 证明方法 |
 
@@ -656,7 +656,7 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 
 | **别名模型** | Tree Borrows | 借用树中节点的存活区间 | Rocq 机械证明 |
 
-### 与本项目证明索引的映射
+### 与本项目证明索引的映射 {#与本项目证明索引的映射}
 
 | 国际成果 | 对应本文档 | 覆盖范围 | 差距 |
 
@@ -670,7 +670,7 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 
 | **Tree Borrows** | 引用有效性、NLL | 别名模型 | 无树状权限精化 |
 
-### 生命周期子类型的形式化再表述
+### 生命周期子类型的形式化再表述 {#生命周期子类型的形式化再表述}
 
 借鉴 Oxide 的区域观点，`'long: 'short` 可形式化为：
 
@@ -682,7 +682,7 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 
 这与 Def 2.2 一致，但 Oxide 进一步将 region 解释为**引用的可能来源集合**，使生命周期约束成为别名安全判断的一部分。
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -692,7 +692,7 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -700,7 +700,7 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -714,7 +714,7 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -724,7 +724,7 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -756,7 +756,7 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -768,7 +768,7 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Variable Scope](https://en.wikipedia.org/wiki/Variable_Scope)**
 

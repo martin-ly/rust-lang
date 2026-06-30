@@ -1,4 +1,4 @@
-# 研究笔记术语表
+# 研究笔记术语表 {#研究笔记术语表}
 
 > **概念族**: 参考资源
 
@@ -20,7 +20,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -29,49 +29,49 @@
 >
 
 - [研究笔记术语表](#研究笔记术语表)
-  - [📑 目录](#-目录)
-  - [🔤 术语索引 {#-术语索引}](#-术语索引--术语索引)
+  - [📑 目录](#目录)
+  - [🔤 术语索引](#术语索引)
     - [按字母顺序](#按字母顺序)
-  - [📚 形式化方法术语 {#-形式化方法术语}](#-形式化方法术语--形式化方法术语)
-    - [A {#-类型理论术语av}](#a--类型理论术语av)
+  - [📚 形式化方法术语](#形式化方法术语)
+    - [A](#a)
     - [B](#b)
     - [L](#l)
     - [N](#n)
     - [O](#o)
     - [P](#p)
-  - [🔬 类型理论术语 {#-类型理论术语}](#-类型理论术语--类型理论术语)
+  - [🔬 类型理论术语](#类型理论术语)
     - [M](#m)
     - [C](#c)
     - [S](#s)
     - [U](#u)
-  - [🔬 类型理论术语（A–V） {#a-1}](#-类型理论术语av-a-1)
-    - [A](#a)
-    - [C {#c-1}](#c-c-1)
+  - [🔬 类型理论术语（A–V）](#类型理论术语av)
+    - [A](#a-1)
+    - [C](#c-1)
     - [G](#g)
     - [I](#i)
     - [T](#t)
-    - [V {#v-1}](#v-v-1)
-  - [⚡ 性能优化术语 {#-性能优化术语}](#-性能优化术语--性能优化术语)
-    - [B {#b-1}](#b-b-1)
-    - [C {#c-2}](#c-c-2)
-    - [M {#m-1}](#m-m-1)
-    - [P {#p-1}](#p-p-1)
-  - [🛠️ 工具术语 {#️-工具术语}](#️-工具术语-️-工具术语)
-    - [C {#c-3}](#c-c-3)
-    - [K](#k)
-    - [L {#l-1}](#l-l-1)
-    - [M {#m-2}](#m-m-2)
-    - [P {#p-2}](#p-p-2)
     - [V](#v)
-  - [📖 研究方法术语 {#-研究方法术语}](#-研究方法术语--研究方法术语)
+  - [⚡ 性能优化术语](#性能优化术语)
+    - [B](#b-1)
+    - [C](#c-2)
+    - [M](#m-1)
+    - [P](#p-1)
+  - [🛠️ 工具术语](#工具术语)
+    - [C](#c-3)
+    - [K](#k)
+    - [L](#l-1)
+    - [M](#m-2)
+    - [P](#p-2)
+    - [V](#v-1)
+  - [📖 研究方法术语](#研究方法术语)
     - [E](#e)
     - [F](#f)
-    - [T {#t-1}](#t-t-1)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
+    - [T](#t-1)
+  - [🔗 相关资源](#相关资源)
     - [核心文档](#核心文档)
     - [研究笔记](#研究笔记)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 更新](#rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -79,13 +79,13 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🔤 术语索引 {#-术语索引}
+## 🔤 术语索引 {#术语索引}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 按字母顺序
+### 按字母顺序 {#按字母顺序}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -93,11 +93,11 @@
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [A](#a)
+- [A](#a-1)
 
-- [B](#b)
+- [B](#b-1)
 
-- [C](#c)
+- [C](#c-3)
 
 - [E](#e)
 
@@ -107,27 +107,27 @@
 
 - [I](#i)
 
-- [L](#l)
+- [L](#l-1)
 
-- [M](#m)
+- [M](#m-2)
 
 - [O](#o)
 
-- [P](#p)
+- [P](#p-2)
 
-- [T](#t)
+- [T](#t-1)
 
-- [V](#v)
+- [V](#v-1)
 
 ---
 
-## 📚 形式化方法术语 {#-形式化方法术语}
+## 📚 形式化方法术语 {#形式化方法术语}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### A {#-类型理论术语av}
+### A {#a}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -151,7 +151,7 @@
 
 - **相关**: [异步状态机形式化](formal_methods/10_async_state_machine.md)
 
-### B
+### B {#b}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -179,7 +179,7 @@
 
 - **相关**: [所有权模型形式化](formal_methods/10_ownership_model.md)
 
-### L
+### L {#l}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -203,7 +203,7 @@
 
 - **相关**: [所有权模型形式化](formal_methods/10_ownership_model.md)
 
-### N
+### N {#n}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -219,7 +219,7 @@
 
 - **相关**: 生命周期形式化
 
-### O
+### O {#o}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -247,7 +247,7 @@
 
 - **相关**: [所有权模型形式化](formal_methods/10_ownership_model.md)
 
-### P
+### P {#p}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -273,13 +273,13 @@
 
 ---
 
-## 🔬 类型理论术语 {#-类型理论术语}
+## 🔬 类型理论术语 {#类型理论术语}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### M
+### M {#m}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -299,7 +299,7 @@
 
 - **相关**: [所有权模型形式化](formal_methods/10_ownership_model.md)
 
-### C
+### C {#c}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -319,7 +319,7 @@
 
 - **相关**: [所有权模型形式化](formal_methods/10_ownership_model.md)
 
-### S
+### S {#s}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -343,7 +343,7 @@
 
 - **相关**: [异步状态机形式化](formal_methods/10_async_state_machine.md)
 
-### U
+### U {#u}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -357,13 +357,13 @@
 
 ---
 
-## 🔬 类型理论术语（A–V） {#a-1}
+## 🔬 类型理论术语（A–V） {#类型理论术语av}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### A
+### A {#a-1}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -395,7 +395,7 @@
 
 - **相关**: [型变理论](type_theory/10_variance_theory.md)
 
-### G
+### G {#g}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -407,7 +407,7 @@
 
 - **相关**: [高级类型特性](type_theory/10_advanced_types.md)
 
-### I
+### I {#i}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -427,7 +427,7 @@
 
 - **相关**: [型变理论](type_theory/10_variance_theory.md)
 
-### T
+### T {#t}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -463,7 +463,7 @@
 
 - **相关**: [类型系统基础](type_theory/10_type_system_foundations.md)
 
-### V {#v-1}
+### V {#v}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -477,7 +477,7 @@
 
 ---
 
-## ⚡ 性能优化术语 {#-性能优化术语}
+## ⚡ 性能优化术语 {#性能优化术语}
 
 >
 
@@ -557,7 +557,7 @@
 
 ---
 
-## 🛠️ 工具术语 {#️-工具术语}
+## 🛠️ 工具术语 {#工具术语}
 
 >
 
@@ -585,7 +585,7 @@
 
 - **相关**: [工具使用指南 - Criterion.rs](10_tools_guide.md#criterionrs)
 
-### K
+### K {#k}
 
 >
 
@@ -641,7 +641,7 @@
 
 - **相关**: [工具使用指南 - Prusti](10_tools_guide.md#prusti)
 
-### V
+### V {#v-1}
 
 >
 
@@ -657,13 +657,13 @@
 
 ---
 
-## 📖 研究方法术语 {#-研究方法术语}
+## 📖 研究方法术语 {#研究方法术语}
 
 >
 
 > **[来源: [crates.io](https://crates.io/)]**
 
-### E
+### E {#e}
 
 >
 
@@ -685,7 +685,7 @@
 
 - **相关**: [研究方法论](10_research_methodology.md)
 
-### F
+### F {#f}
 
 >
 
@@ -715,13 +715,13 @@
 
 ---
 
-## 🔗 相关资源 {#-相关资源}
+## 🔗 相关资源 {#相关资源}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 核心文档
+### 核心文档 {#核心文档}
 
 >
 
@@ -733,7 +733,7 @@
 
 - [研究方法论](10_research_methodology.md) - 研究方法框架
 
-### 研究笔记
+### 研究笔记 {#研究笔记}
 
 >
 
@@ -755,7 +755,7 @@
 
 ---
 
-## 🆕 Rust 1.94 更新
+## 🆕 Rust 1.94 更新 {#rust-194-更新}
 
 >
 
@@ -769,7 +769,7 @@
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -779,7 +779,7 @@
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -787,7 +787,7 @@
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -801,7 +801,7 @@
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -811,7 +811,7 @@
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -843,7 +843,7 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -855,7 +855,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

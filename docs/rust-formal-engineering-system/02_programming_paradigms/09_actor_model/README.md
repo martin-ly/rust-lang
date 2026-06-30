@@ -1,4 +1,4 @@
-# Actor 模型理论
+# Actor 模型理论 {#actor-模型理论}
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -12,7 +12,7 @@
 
 ---
 
-## Actor 模型核心概念
+## Actor 模型核心概念 {#actor-模型核心概念}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -22,7 +22,7 @@ Actor 模型是一种并发计算模型，其中：
 - Actor 之间通过异步消息传递通信
 - 每个 Actor 有自己的状态，不共享内存
 
-### 基本 Actor 实现
+### 基本 Actor 实现 {#基本-actor-实现}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -96,7 +96,7 @@ fn demo() {
 }
 ```
 
-### 异步 Actor
+### 异步 Actor {#异步-actor}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -164,7 +164,7 @@ impl AsyncProcessor {
 }
 ```
 
-### Actor 监督与容错
+### Actor 监督与容错 {#actor-监督与容错}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -249,7 +249,7 @@ impl Supervisor {
 }
 ```
 
-### 路由与负载均衡
+### 路由与负载均衡 {#路由与负载均衡}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -320,7 +320,7 @@ impl<M: Clone + Send + 'static> BroadcastRouter<M> {
 }
 ```
 
-### 请求-响应模式
+### 请求-响应模式 {#请求-响应模式}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -409,7 +409,7 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
 
 ---
 
-## 使用场景
+## 使用场景 {#使用场景}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -426,11 +426,11 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
 
 ---
 
-## 相关研究笔记
+## 相关研究笔记 {#相关研究笔记}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 软件设计理论
+### 软件设计理论 {#软件设计理论}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -441,7 +441,7 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
 | 分布式执行模型 | 分布式模型理论 | [../../../research_notes/software_design_theory/03_execution_models/05_distributed.md](../../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/05_distributed.md) |
 | 组合工程 | 组件组合理论 | [../../../research_notes/software_design_theory/04_compositional_engineering/README.md](../../../../archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/README.md) |
 
-### 形式化方法
+### 形式化方法 {#形式化方法}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -454,7 +454,7 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
 
 ---
 
-## 相关 crates
+## 相关 crates {#相关-crates}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -476,7 +476,7 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

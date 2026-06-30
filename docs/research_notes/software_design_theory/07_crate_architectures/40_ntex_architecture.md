@@ -8,7 +8,7 @@
 
 ---
 
-# ntex Crate 架构解构
+# ntex Crate 架构解构 {#ntex-crate-架构解构}
 
 > **最后更新**: 2026-06-29
 >
@@ -24,7 +24,7 @@
 
 ---
 
-## 1. 引言：ntex 在 Rust Web 生态中的定位
+## 1. 引言：ntex 在 Rust Web 生态中的定位 {#1-引言ntex-在-rust-web-生态中的定位}
 
 > **[来源: [ntex crates.io](https://crates.io/crates/ntex)]**
 
@@ -65,11 +65,11 @@ async fn main() -> std::io::Result<()> {
 
 ---
 
-## 2. 核心 API 架构
+## 2. 核心 API 架构 {#2-核心-api-架构}
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 2.1 HttpServer → App → Service 管线
+### 2.1 HttpServer → App → Service 管线 {#21-httpserver-app-service-管线}
 
 ```mermaid
 graph LR
@@ -90,7 +90,7 @@ ntex 的请求生命周期：
 
 > [来源: [ntex::web 文档](https://docs.rs/ntex/latest/ntex/web/index.html)]
 
-### 2.2 `#[web::get]` 与 `Responder`
+### 2.2 `#[web::get]` 与 `Responder` {#22-webget-与-responder}
 
 ntex 使用属性宏将函数注册为路由：
 
@@ -105,7 +105,7 @@ async fn get_user(id: web::types::Path<u64>) -> impl web::Responder {
 
 `impl Responder` 允许返回 `HttpResponse`、`String`、`&'static str`、`web::Json<T>` 等类型，编译期通过 trait 解析为 HTTP Response。
 
-### 2.3 提取器与类型映射
+### 2.3 提取器与类型映射 {#23-提取器与类型映射}
 
 ntex 提供 `web::types` 模块中的提取器：
 
@@ -126,7 +126,7 @@ async fn create_user(
 
 提取器基于 `FromRequest` trait，在编译期保证 handler 参数与请求类型兼容；缺失或格式错误会返回 `Error`。
 
-### 2.4 异步工厂闭包
+### 2.4 异步工厂闭包 {#24-异步工厂闭包}
 
 ntex 3.x 的 `HttpServer::new` 接收一个 `AsyncFn() -> I` 工厂，要求返回 Future：
 
@@ -147,7 +147,7 @@ HttpServer::new(|| async {
 
 ---
 
-## 3. 与 axum / actix-web 对比
+## 3. 与 axum / actix-web 对比 {#3-与-axum-actix-web-对比}
 
 > **[来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]**
 
@@ -171,7 +171,7 @@ HttpServer::new(|| async {
 
 ---
 
-## 4. 反例边界
+## 4. 反例边界 {#4-反例边界}
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -188,7 +188,7 @@ HttpServer::new(|| async {
 
 ---
 
-## 5. 代码示例锚点
+## 5. 代码示例锚点 {#5-代码示例锚点}
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -200,7 +200,7 @@ HttpServer::new(|| async {
 
 ---
 
-## 6. 相关概念
+## 6. 相关概念 {#6-相关概念}
 
 - [00_crate_architecture_master_index.md](00_crate_architecture_master_index.md) — Rust 工业级 Crate 架构总索引
 - [07_axum_architecture.md](07_axum_architecture.md) — Axum Web 框架架构
@@ -220,26 +220,26 @@ HttpServer::new(|| async {
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
-### P0 — 核心官方文档
+### P0 — 核心官方文档 {#p0-核心官方文档}
 
 > - [来源: [ntex docs.rs](https://docs.rs/ntex/latest/ntex/)]
 > - [来源: [ntex crates.io](https://crates.io/crates/ntex)]
 
-### P1 — 标准与生态文档
+### P1 — 标准与生态文档 {#p1-标准与生态文档}
 
 > - [来源: [Tokio 文档](https://docs.rs/tokio/latest/tokio/)]
 > - [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 > - [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 
-### P2 — 仓库与社区文章
+### P2 — 仓库与社区文章 {#p2-仓库与社区文章}
 
 > - [来源: [ntex GitHub Repository](https://github.com/ntex-rs/ntex)]
 > - [来源: [This Week in Rust](https://this-week-in-rust.org/)]
 > - [来源: [Rust 中文社区](https://rustcc.cn/)]
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

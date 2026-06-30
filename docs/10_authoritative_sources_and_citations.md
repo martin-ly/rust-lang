@@ -1,4 +1,4 @@
-# 权威来源与引用
+# 权威来源与引用 {#权威来源与引用}
 
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
@@ -12,12 +12,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [权威来源与引用](#权威来源与引用)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [Rust 1.94.0 权威来源](#rust-1940-权威来源)
     - [官方发布](#官方发布)
     - [核心特性权威说明](#核心特性权威说明)
@@ -45,15 +45,14 @@
     - [官方文档引用](#官方文档引用)
     - [博客文章引用](#博客文章引用)
   - [验证清单](#验证清单)
-  - [**维护说明**: 本文档应随Rust生态更新而更新，确保所有引用来源保持最新和准确](#维护说明-本文档应随rust生态更新而更新确保所有引用来源保持最新和准确)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## Rust 1.94.0 权威来源
+## Rust 1.94.0 权威来源 {#rust-1940-权威来源}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 官方发布
+### 官方发布 {#官方发布}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -63,13 +62,13 @@
 | releases.rs | <https://releases.rs/docs/1.94.0/> | 2026-03-05 | 完整变更列表，17个稳定化API |
 | InfoWorld报道 | <https://www.infoworld.com/article/4141483/> | 2026-03-05 | 技术特性解读 |
 
-### 核心特性权威说明
+### 核心特性权威说明 {#核心特性权威说明}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-#### 1. `array_windows` - 切片迭代方法
+#### 1. `array_windows` - 切片迭代方法 {#1-array_windows---切片迭代方法}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -89,7 +88,7 @@ fn has_abba(s: &str) -> bool {
 }
 ```
 
-#### 2. LazyCell/LazyLock API稳定化
+#### 2. LazyCell/LazyLock API稳定化 {#2-lazycelllazylock-api稳定化}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -106,7 +105,7 @@ fn has_abba(s: &str) -> bool {
 
 来源: <https://releases.rs/docs/1.94.0/>
 
-#### 3. AVX-512 FP16 Intrinsics
+#### 3. AVX-512 FP16 Intrinsics {#3-avx-512-fp16-intrinsics}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -125,7 +124,7 @@ fn has_abba(s: &str) -> bool {
 >
 > —— **HotHardware**, 2025-11-10
 
-#### 4. Cargo TOML 1.1支持
+#### 4. Cargo TOML 1.1支持 {#4-cargo-toml-11支持}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
@@ -137,11 +136,11 @@ fn has_abba(s: &str) -> bool {
 
 ---
 
-## Tree Borrows 权威来源
+## Tree Borrows 权威来源 {#tree-borrows-权威来源}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 学术论文
+### 学术论文 {#学术论文}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -152,7 +151,7 @@ fn has_abba(s: &str) -> bool {
 | Tree Borrows | Neven Villani, Johannes Hostert, Derek Dreyer, Ralf Jung | PLDI 2025 | <https://doi.org/10.1145/3735592> |
 | Miri: Practical Undefined Behavior Detection for Rust | Ralf Jung et al. | POPL 2026 | <https://plf.inf.ethz.ch/research/popl26-miri.html> |
 
-### 学术认可
+### 学术认可 {#学术认可}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -162,7 +161,7 @@ fn has_abba(s: &str) -> bool {
 >
 > —— **Ralf Jung, ETH Zurich Programming Languages Group**, 2025-12-23
 
-### Tree Borrows核心优势
+### Tree Borrows核心优势 {#tree-borrows核心优势}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -172,7 +171,7 @@ fn has_abba(s: &str) -> bool {
 
 > "Tree structure with both parents and children since we want to be able to traverse the tree efficiently in both directions."
 
-### 与Stacked Borrows对比
+### 与Stacked Borrows对比 {#与stacked-borrows对比}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -189,11 +188,11 @@ fn has_abba(s: &str) -> bool {
 
 ---
 
-## Rust 2024 Edition 权威来源
+## Rust 2024 Edition 权威来源 {#rust-2024-edition-权威来源}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 官方文档
+### 官方文档 {#官方文档}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -203,7 +202,7 @@ fn has_abba(s: &str) -> bool {
 | gen关键字文档 | <https://doc.rust-lang.org/edition-guide/rust-2024/gen-keyword.html> | 生成器关键字 |
 | 1.85.0发布公告 | <https://blog.rust-lang.org/2025/02/20/Rust-1.85.0/> | Edition 2024发布 |
 
-### gen关键字权威说明
+### gen关键字权威说明 {#gen关键字权威说明}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -211,7 +210,7 @@ fn has_abba(s: &str) -> bool {
 >
 > —— **The Rust Edition Guide**, <https://doc.rust-lang.org/edition-guide/rust-2024/gen-keyword.html>
 
-### Edition 2024主要变更 (官方)
+### Edition 2024主要变更 (官方) {#edition-2024主要变更-官方}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -240,11 +239,11 @@ Cargo：
 
 ---
 
-## Miri 权威来源
+## Miri 权威来源 {#miri-权威来源}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 功能扩展 (2023-2026)
+### 功能扩展 (2023-2026) {#功能扩展-2023-2026}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -252,7 +251,7 @@ Cargo：
 >
 > —— **Ralf Jung博客**, 2025-12-22
 
-### 并发与性能改进
+### 并发与性能改进 {#并发与性能改进}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -262,7 +261,7 @@ Cargo：
 >
 > —— **Ralf Jung博客**, 2025-12-22
 
-### 核心论文引用
+### 核心论文引用 {#核心论文引用}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -291,11 +290,11 @@ Cargo：
 
 ---
 
-## 大型项目迁移案例
+## 大型项目迁移案例 {#大型项目迁移案例}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### Rust 2024 Edition迁移实践
+### Rust 2024 Edition迁移实践 {#rust-2024-edition迁移实践}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -316,11 +315,11 @@ Cargo：
 
 ---
 
-## 引用格式规范
+## 引用格式规范 {#引用格式规范}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 学术论文引用
+### 学术论文引用 {#学术论文引用}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -330,7 +329,7 @@ Cargo：
 [作者]. [标题]. In [会议] [年份]. DOI:[doi]
 ```
 
-### 官方文档引用
+### 官方文档引用 {#官方文档引用}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -338,7 +337,7 @@ Cargo：
 [文档名称]. [URL]. [访问日期]
 ```
 
-### 博客文章引用
+### 博客文章引用 {#博客文章引用}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -348,7 +347,7 @@ Cargo：
 
 ---
 
-## 验证清单
+## 验证清单 {#验证清单}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -379,7 +378,7 @@ Cargo：
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -387,7 +386,7 @@ Cargo：
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

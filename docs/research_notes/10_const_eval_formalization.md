@@ -1,4 +1,4 @@
-# 常量求值形式化
+# 常量求值形式化 {#常量求值形式化}
 
 > **概念族**: 综合研究
 
@@ -20,7 +20,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -29,7 +29,7 @@
 >
 
 - [常量求值形式化](#常量求值形式化)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 常量求值概述](#1-常量求值概述)
   - [2. 形式化定义](#2-形式化定义)
     - [Def CE-1: 常量上下文](#def-ce-1-常量上下文)
@@ -43,9 +43,9 @@
   - [5. MIR 常量求值](#5-mir-常量求值)
   - [6. 高级特性](#6-高级特性)
     - [const\_eval\_select (不稳定)](#const_eval_select-不稳定)
-  - [🆕 Rust 1.94 研究更新](#-rust-194-研究更新)
+  - [🆕 Rust 1.94 研究更新](#rust-194-研究更新)
     - [核心研究点](#核心研究点)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -53,7 +53,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 1. 常量求值概述
+## 1. 常量求值概述 {#1-常量求值概述}
 
 >
 
@@ -63,13 +63,13 @@ Rust 的常量求值在编译期执行，允许在类型系统和常量定义中
 
 ---
 
-## 2. 形式化定义
+## 2. 形式化定义 {#2-形式化定义}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Def CE-1: 常量上下文
+### Def CE-1: 常量上下文 {#def-ce-1-常量上下文}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -83,7 +83,7 @@ Rust 的常量求值在编译期执行，允许在类型系统和常量定义中
 
 ```
 
-### Def CE-2: 常量求值器
+### Def CE-2: 常量求值器 {#def-ce-2-常量求值器}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -107,13 +107,13 @@ Eval_const(e, env) =
 
 ---
 
-## 3. 常量函数 (const fn)
+## 3. 常量函数 (const fn) {#3-常量函数-const-fn}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Def CE-3: const fn 约束
+### Def CE-3: const fn 约束 {#def-ce-3-const-fn-约束}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -159,7 +159,7 @@ const fn allowed() {
 
 ```
 
-### Def CE-4: 禁止的 const fn 操作
+### Def CE-4: 禁止的 const fn 操作 {#def-ce-4-禁止的-const-fn-操作}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -199,13 +199,13 @@ const fn forbidden() {
 
 ---
 
-## 4. 定理
+## 4. 定理 {#4-定理}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Thm CE-1: 常量求值终止性
+### Thm CE-1: 常量求值终止性 {#thm-ce-1-常量求值终止性}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -223,7 +223,7 @@ const fn forbidden() {
 
 - 无无限递归类型
 
-### Thm CE-2: 常量求值确定性
+### Thm CE-2: 常量求值确定性 {#thm-ce-2-常量求值确定性}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -243,7 +243,7 @@ const fn forbidden() {
 
 ---
 
-## 5. MIR 常量求值
+## 5. MIR 常量求值 {#5-mir-常量求值}
 
 >
 
@@ -277,13 +277,13 @@ MIR (中级中间表示)
 
 ---
 
-## 6. 高级特性
+## 6. 高级特性 {#6-高级特性}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### const_eval_select (不稳定)
+### const_eval_select (不稳定) {#const_eval_select-不稳定}
 
 >
 
@@ -319,7 +319,7 @@ const fn with_const_eval_select<T>(x: T) -> T {
 
 ---
 
-## 🆕 Rust 1.94 研究更新
+## 🆕 Rust 1.94 研究更新 {#rust-194-研究更新}
 
 >
 
@@ -327,7 +327,7 @@ const fn with_const_eval_select<T>(x: T) -> T {
 
 > **适用版本**: Rust 1.96.0+
 
-### 核心研究点
+### 核心研究点 {#核心研究点}
 
 >
 
@@ -347,7 +347,7 @@ const fn with_const_eval_select<T>(x: T) -> T {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -357,7 +357,7 @@ const fn with_const_eval_select<T>(x: T) -> T {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -365,7 +365,7 @@ const fn with_const_eval_select<T>(x: T) -> T {
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -379,7 +379,7 @@ const fn with_const_eval_select<T>(x: T) -> T {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -389,7 +389,7 @@ const fn with_const_eval_select<T>(x: T) -> T {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -421,7 +421,7 @@ const fn with_const_eval_select<T>(x: T) -> T {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -433,7 +433,7 @@ const fn with_const_eval_select<T>(x: T) -> T {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

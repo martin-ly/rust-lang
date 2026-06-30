@@ -1,4 +1,4 @@
-# 工作流引擎能力矩阵
+# 工作流引擎能力矩阵 {#工作流引擎能力矩阵}
 
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 
@@ -30,7 +30,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -39,7 +39,7 @@
 >
 
 - [工作流引擎能力矩阵](#工作流引擎能力矩阵)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [引擎能力对比矩阵](#引擎能力对比矩阵)
     - [核心功能](#核心功能)
@@ -58,7 +58,7 @@
   - [风险评估矩阵](#风险评估矩阵)
   - [与Rust形式化方法关联](#与rust形式化方法关联)
   - [推荐学习路径](#推荐学习路径)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -66,7 +66,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 概述
+## 概述 {#概述}
 
 >
 
@@ -76,13 +76,13 @@
 
 ---
 
-## 引擎能力对比矩阵
+## 引擎能力对比矩阵 {#引擎能力对比矩阵}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 核心功能
+### 核心功能 {#核心功能}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -106,7 +106,7 @@
 
 | **tokio::fsm** | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 
-### 技术特性
+### 技术特性 {#技术特性}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -126,7 +126,7 @@
 
 | **tokio::fsm** | ❌ | ✅ | ❌ | ⚠️ | ❌ | ❌ |
 
-### Rust支持
+### Rust支持 {#rust支持}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -148,13 +148,13 @@
 
 ---
 
-## 选型决策矩阵
+## 选型决策矩阵 {#选型决策矩阵}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 按场景推荐
+### 按场景推荐 {#按场景推荐}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -174,7 +174,7 @@
 
 | 事务补偿(Saga) | Temporal | 原生Saga模式 | 需理解事件溯源 |
 
-### 复杂度评估
+### 复杂度评估 {#复杂度评估}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -194,13 +194,13 @@
 
 ---
 
-## 深度对比
+## 深度对比 {#深度对比}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### Temporal vs Cadence
+### Temporal vs Cadence {#temporal-vs-cadence}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -220,7 +220,7 @@
 
 | **推荐** | 新项目首选 | 存量系统 |
 
-### Camunda 7 vs 8
+### Camunda 7 vs 8 {#camunda-7-vs-8}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -242,13 +242,13 @@
 
 ---
 
-## Rust集成指南
+## Rust集成指南 {#rust集成指南}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### Temporal Rust SDK
+### Temporal Rust SDK {#temporal-rust-sdk}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -306,7 +306,7 @@ async fn compensate_payment(ctx: &mut WorkflowContext, order_id: String) {
 
 ```
 
-### 自研状态机模式
+### 自研状态机模式 {#自研状态机模式}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -400,7 +400,7 @@ impl<S: State> Workflow<S> {
 
 ---
 
-## 设计模式映射
+## 设计模式映射 {#设计模式映射}
 
 >
 
@@ -422,7 +422,7 @@ impl<S: State> Workflow<S> {
 
 ---
 
-## 风险评估矩阵
+## 风险评估矩阵 {#风险评估矩阵}
 
 >
 
@@ -444,7 +444,7 @@ impl<S: State> Workflow<S> {
 
 ---
 
-## 与Rust形式化方法关联
+## 与Rust形式化方法关联 {#与rust形式化方法关联}
 
 >
 
@@ -464,7 +464,7 @@ impl<S: State> Workflow<S> {
 
 ---
 
-## 推荐学习路径
+## 推荐学习路径 {#推荐学习路径}
 
 >
 
@@ -498,7 +498,7 @@ impl<S: State> Workflow<S> {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -508,13 +508,13 @@ impl<S: State> Workflow<S> {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -530,7 +530,7 @@ impl<S: State> Workflow<S> {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -540,7 +540,7 @@ impl<S: State> Workflow<S> {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -572,7 +572,7 @@ impl<S: State> Workflow<S> {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -584,7 +584,7 @@ impl<S: State> Workflow<S> {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 

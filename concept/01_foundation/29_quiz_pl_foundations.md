@@ -7,7 +7,7 @@
 > **层级**: L1 基础概念
 > **A/S/P 标记**: S — Structure
 > **双维定位**: C×Eva
-> **前置概念**:
+> **前置概念**: · [自测题库](../00_meta/self_assessment.md)
 >
 > [Variable Model](20_variable_model.md) ·
 > [Evaluation Strategies](../04_formal/18_evaluation_strategies.md) ·
@@ -15,6 +15,7 @@
 > [Control Flow](07_control_flow.md) ·
 > [Data Abstraction Spectrum](22_data_abstraction_spectrum.md)
 > **后置概念**: N/A
+> **主要来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 ---
 
 > **Bloom 层级**: 理解 → 应用

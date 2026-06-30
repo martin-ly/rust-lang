@@ -1,4 +1,4 @@
-# 研究笔记最佳实践
+# 研究笔记最佳实践 {#研究笔记最佳实践}
 >
 > **概念族**: 综合研究
 
@@ -13,69 +13,69 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [研究笔记最佳实践](#研究笔记最佳实践)
-  - [📑 目录](#-目录)
-  - [📋 概述 {#-概述}](#-概述--概述)
+  - [📑 目录](#目录)
+  - [📋 概述](#概述)
     - [目标](#目标)
   - [形式化论证最佳实践](#形式化论证最佳实践)
   - [研究笔记与形式化体系衔接](#研究笔记与形式化体系衔接)
   - [实质内容不足判断与修复](#实质内容不足判断与修复)
-  - [✍️ 编写最佳实践 {#️-编写最佳实践}](#️-编写最佳实践-️-编写最佳实践)
+  - [✍️ 编写最佳实践](#编写最佳实践)
     - [1. 明确研究目标](#1-明确研究目标)
     - [2. 提供理论基础](#2-提供理论基础)
     - [3. 使用清晰的结构](#3-使用清晰的结构)
-  - [📚 内容组织最佳实践 {#-内容组织最佳实践}](#-内容组织最佳实践--内容组织最佳实践)
+  - [📚 内容组织最佳实践](#内容组织最佳实践)
     - [1. 模块化组织](#1-模块化组织)
     - [2. 渐进式展开](#2-渐进式展开)
     - [3. 交叉引用](#3-交叉引用)
-  - [🔗 链接管理最佳实践 {#-链接管理最佳实践}](#-链接管理最佳实践--链接管理最佳实践)
+  - [🔗 链接管理最佳实践](#链接管理最佳实践)
     - [1. 使用相对路径](#1-使用相对路径)
     - [2. 提供描述性链接文本](#2-提供描述性链接文本)
     - [3. 维护链接完整性](#3-维护链接完整性)
-  - [💻 代码示例最佳实践](#-代码示例最佳实践)
+  - [💻 代码示例最佳实践](#代码示例最佳实践)
     - [1. 提供可运行的代码](#1-提供可运行的代码)
     - [2. 添加注释和说明](#2-添加注释和说明)
     - [3. 展示错误和解决方案](#3-展示错误和解决方案)
-  - [📖 文档格式最佳实践 {#-文档格式最佳实践}](#-文档格式最佳实践--文档格式最佳实践)
+  - [📖 文档格式最佳实践](#文档格式最佳实践)
     - [1. 使用一致的格式](#1-使用一致的格式)
     - [2. 使用列表和表格](#2-使用列表和表格)
     - [3. 使用代码块和引用](#3-使用代码块和引用)
-  - [🔍 可发现性最佳实践 {#-可发现性最佳实践}](#-可发现性最佳实践--可发现性最佳实践)
+  - [🔍 可发现性最佳实践](#可发现性最佳实践)
     - [1. 使用关键词](#1-使用关键词)
     - [2. 更新索引文件](#2-更新索引文件)
     - [3. 提供多种查找方式](#3-提供多种查找方式)
-  - [🤝 协作最佳实践 {#-协作最佳实践}](#-协作最佳实践--协作最佳实践)
+  - [🤝 协作最佳实践](#协作最佳实践)
     - [1. 遵循贡献指南](#1-遵循贡献指南)
     - [2. 提供清晰的提交信息](#2-提供清晰的提交信息)
     - [3. 响应反馈](#3-响应反馈)
-  - [✅ 质量保证最佳实践 {#-质量保证最佳实践}](#-质量保证最佳实践--质量保证最佳实践)
+  - [✅ 质量保证最佳实践](#质量保证最佳实践)
     - [1. 使用质量检查清单](#1-使用质量检查清单)
     - [2. 代码审查](#2-代码审查)
     - [3. 持续改进](#3-持续改进)
-  - [🎯 与 Rust 官方规范的对齐](#-与-rust-官方规范的对齐)
+  - [🎯 与 Rust 官方规范的对齐](#与-rust-官方规范的对齐)
     - [Rust API Guidelines](#rust-api-guidelines)
     - [Clippy lint 文档](#clippy-lint-文档)
     - [Nomicon 重点章节](#nomicon-重点章节)
     - [Rust Book 重点章节](#rust-book-重点章节)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
+  - [🔗 相关资源](#相关资源)
     - [核心文档](#核心文档)
     - [工具和资源](#工具和资源)
-  - [🆕 权威国际化内容升级 (Rust 1.96.0+) {#-权威国际化内容升级}](#-权威国际化内容升级-rust-1960--权威国际化内容升级)
+  - [🆕 权威国际化内容升级 (Rust 1.96.0+)](#权威国际化内容升级-rust-1960)
     - [本次升级要点](#本次升级要点)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 📋 概述 {#-概述}
+## 📋 概述 {#概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档提供研究笔记系统的最佳实践指南，帮助研究者和贡献者创建高质量的研究笔记。
 
-### 目标
+### 目标 {#目标}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -88,7 +88,7 @@
 
 ---
 
-## 形式化论证最佳实践
+## 形式化论证最佳实践 {#形式化论证最佳实践}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -107,7 +107,7 @@
 - ✅ 边界条件：重要断言补充反例
 - ✅ 交叉引用：与 [PROOF_INDEX](10_proof_index.md)、[FORMAL_PROOF_SYSTEM_GUIDE](10_formal_proof_system_guide.md) 衔接
 
-**证明深度**：L1 证明思路 / L2 完整证明 / L3 机器可检查；见 [PROOF_INDEX](10_proof_index.md) § 证明深度层次、[CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) L2 示例、[coq_skeleton](../deprecated/coq_skeleton/README.md) L3 骨架。
+**证明深度**：L1 证明思路 / L2 完整证明 / L3 机器可检查；见 [PROOF_INDEX](10_proof_index.md) § 证明深度层次、[CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) L2 示例、[coq_skeleton](../../archive/deprecated/coq_skeleton/README.md) L3 骨架。
 
 **引用**：[FORMAL_PROOF_SYSTEM_GUIDE](10_formal_proof_system_guide.md) 论证要素规范、
 [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](10_theoretical_and_argumentation_system_architecture.md) 论证体系五层、
@@ -115,7 +115,7 @@
 
 ---
 
-## 研究笔记与形式化体系衔接
+## 研究笔记与形式化体系衔接 {#研究笔记与形式化体系衔接}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -167,7 +167,7 @@ fn example_anti_pattern() {
 
 ---
 
-## 实质内容不足判断与修复
+## 实质内容不足判断与修复 {#实质内容不足判断与修复}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -197,11 +197,11 @@ fn example_anti_pattern() {
 
 ---
 
-## ✍️ 编写最佳实践 {#️-编写最佳实践}
+## ✍️ 编写最佳实践 {#编写最佳实践}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 明确研究目标
+### 1. 明确研究目标 {#1-明确研究目标}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -216,7 +216,7 @@ fn example_anti_pattern() {
 **示例**:
 
 ```markdown
-## 研究目标
+## 研究目标 {#研究目标-1}
 > **[来源: Rust Official Docs]**
 
 本研究旨在形式化 Rust 的所有权模型，包括：
@@ -226,7 +226,7 @@ fn example_anti_pattern() {
 - 生命周期约束的形式化
 ```
 
-### 2. 提供理论基础
+### 2. 提供理论基础 {#2-提供理论基础}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -241,7 +241,7 @@ fn example_anti_pattern() {
 **示例**:
 
 ```markdown
-## 理论基础
+## 理论基础 {#理论基础-1}
 > **[来源: Rust Official Docs]**
 
 本研究基于以下理论：
@@ -251,7 +251,7 @@ fn example_anti_pattern() {
 - **依赖类型**: 用于形式化生命周期
 ```
 
-### 3. 使用清晰的结构
+### 3. 使用清晰的结构 {#3-使用清晰的结构}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -264,32 +264,32 @@ fn example_anti_pattern() {
 **示例**:
 
 ```markdown
-## 研究目标
+## 研究目标 {#研究目标-1}
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-## 理论基础
+## 理论基础 {#理论基础-1}
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-## 形式化定义
+## 形式化定义 {#形式化定义}
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-## 证明目标
+## 证明目标 {#证明目标}
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-## 代码示例 {#-代码示例最佳实践}
+## 代码示例 {#代码示例}
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-## 参考文献
+## 参考文献 {#参考文献}
 > **[来源: [crates.io](https://crates.io/)]**
 ```
 
 ---
 
-## 📚 内容组织最佳实践 {#-内容组织最佳实践}
+## 📚 内容组织最佳实践 {#内容组织最佳实践}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 1. 模块化组织
+### 1. 模块化组织 {#1-模块化组织}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -302,27 +302,27 @@ fn example_anti_pattern() {
 **示例**:
 
 ```markdown
-## 所有权模型形式化
+## 所有权模型形式化 {#所有权模型形式化}
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 基本定义
+### 基本定义 {#基本定义}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-### 所有权转移
+### 所有权转移 {#所有权转移}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
-### 借用规则
+### 借用规则 {#借用规则}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-### 生命周期约束
+### 生命周期约束 {#生命周期约束}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 ```
 
-### 2. 渐进式展开
+### 2. 渐进式展开 {#2-渐进式展开}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -335,29 +335,29 @@ fn example_anti_pattern() {
 **示例**:
 
 ```markdown
-## 类型系统基础
+## 类型系统基础 {#类型系统基础}
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 基本类型
+### 基本类型 {#基本类型}
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 首先介绍基本类型...
 
-### 复合类型
+### 复合类型 {#复合类型}
 
 > **[来源: POPL - Programming Languages Research]**
 
 然后介绍复合类型...
 
-### 高级类型
+### 高级类型 {#高级类型}
 
 > **[来源: PLDI - Programming Language Design]**
 
 最后介绍高级类型...
 ```
 
-### 3. 交叉引用
+### 3. 交叉引用 {#3-交叉引用}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -377,11 +377,11 @@ fn example_anti_pattern() {
 
 ---
 
-## 🔗 链接管理最佳实践 {#-链接管理最佳实践}
+## 🔗 链接管理最佳实践 {#链接管理最佳实践}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 1. 使用相对路径
+### 1. 使用相对路径 {#1-使用相对路径}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -398,7 +398,7 @@ fn example_anti_pattern() {
 ❌ 错误: 研究路线图
 ```
 
-### 2. 提供描述性链接文本
+### 2. 提供描述性链接文本 {#2-提供描述性链接文本}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -415,7 +415,7 @@ fn example_anti_pattern() {
 ❌ 错误: 点击 [这里](10_research_roadmap.md)
 ```
 
-### 3. 维护链接完整性
+### 3. 维护链接完整性 {#3-维护链接完整性}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -429,19 +429,19 @@ fn example_anti_pattern() {
 
 <!-- markdown-link-check-disable -->
 ```bash
-# 检查链接有效性
+# 检查链接有效性 {#检查链接有效性}
 find docs/research_notes -name "*.md" -exec grep -l "\[.*\](.*)" {} \;
-# 注：上述命令中的 `[.*]` 是正则表达式语法，匹配方括号内的任意内容
+# 注：上述命令中的 `[.*]` 是正则表达式语法，匹配方括号内的任意内容 {#注上述命令中的-是正则表达式语法匹配方括号内的任意内容}
 ```
 <!-- markdown-link-check-enable -->
 
 ---
 
-## 💻 代码示例最佳实践
+## 💻 代码示例最佳实践 {#代码示例最佳实践}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 1. 提供可运行的代码
+### 1. 提供可运行的代码 {#1-提供可运行的代码}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -462,7 +462,7 @@ fn main() {
 }
 ```
 
-### 2. 添加注释和说明
+### 2. 添加注释和说明 {#2-添加注释和说明}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -489,7 +489,7 @@ fn main() {
 }
 ```
 
-### 3. 展示错误和解决方案
+### 3. 展示错误和解决方案 {#3-展示错误和解决方案}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -522,11 +522,11 @@ fn main() {
 
 ---
 
-## 📖 文档格式最佳实践 {#-文档格式最佳实践}
+## 📖 文档格式最佳实践 {#文档格式最佳实践}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 1. 使用一致的格式
+### 1. 使用一致的格式 {#1-使用一致的格式}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -539,21 +539,21 @@ fn main() {
 **示例**:
 
 ```markdown
-# 一级标题（文档标题）
+# 一级标题（文档标题） {#一级标题文档标题}
 
-## 二级标题（主要章节）
+## 二级标题（主要章节） {#二级标题主要章节}
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 三级标题（子章节）
+### 三级标题（子章节） {#三级标题子章节}
 
 > **[来源: ACM - Systems Programming Languages]**
 
-#### 四级标题（小节）
+#### 四级标题（小节） {#四级标题小节}
 
 > **[来源: IEEE - Programming Language Standards]**
 ```
 
-### 2. 使用列表和表格
+### 2. 使用列表和表格 {#2-使用列表和表格}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -566,10 +566,10 @@ fn main() {
 **示例**:
 
 ```markdown
-## 研究工具
+## 研究工具 {#研究工具}
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 形式化验证工具
+### 形式化验证工具 {#形式化验证工具}
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -577,7 +577,7 @@ fn main() {
 - **Lean**: 函数式编程语言和证明助手
 - **Prusti**: Rust 的形式化验证工具
 
-### 性能分析工具
+### 性能分析工具 {#性能分析工具}
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 工具         | 用途     | 特点           |
@@ -587,7 +587,7 @@ fn main() {
 | flamegraph   | 火焰图   | 可视化性能     |
 ```
 
-### 3. 使用代码块和引用
+### 3. 使用代码块和引用 {#3-使用代码块和引用}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -611,11 +611,11 @@ fn main() {
 
 ---
 
-## 🔍 可发现性最佳实践 {#-可发现性最佳实践}
+## 🔍 可发现性最佳实践 {#可发现性最佳实践}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 1. 使用关键词
+### 1. 使用关键词 {#1-使用关键词}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -631,7 +631,7 @@ fn main() {
 > **关键词**: 所有权、借用、生命周期、形式化验证
 ```
 
-### 2. 更新索引文件
+### 2. 更新索引文件 {#2-更新索引文件}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -645,14 +645,14 @@ fn main() {
 **示例**:
 
 ```markdown
-## 形式化方法研究
+## 形式化方法研究 {#形式化方法研究}
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [所有权模型形式化](formal_methods/10_ownership_model.md) - 所有权模型的形式化定义
 - [借用检查器证明](formal_methods/10_borrow_checker_proof.md) - 借用检查器的正确性证明
 ```
 
-### 3. 提供多种查找方式
+### 3. 提供多种查找方式 {#3-提供多种查找方式}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -665,11 +665,11 @@ fn main() {
 
 ---
 
-## 🤝 协作最佳实践 {#-协作最佳实践}
+## 🤝 协作最佳实践 {#协作最佳实践}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 1. 遵循贡献指南
+### 1. 遵循贡献指南 {#1-遵循贡献指南}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -679,7 +679,7 @@ fn main() {
 - ✅ 遵循贡献流程
 - ✅ 使用质量检查清单
 
-### 2. 提供清晰的提交信息
+### 2. 提供清晰的提交信息 {#2-提供清晰的提交信息}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -702,7 +702,7 @@ git commit -m "添加所有权模型形式化研究笔记
 相关: #123"
 ```
 
-### 3. 响应反馈
+### 3. 响应反馈 {#3-响应反馈}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -714,11 +714,11 @@ git commit -m "添加所有权模型形式化研究笔记
 
 ---
 
-## ✅ 质量保证最佳实践 {#-质量保证最佳实践}
+## ✅ 质量保证最佳实践 {#质量保证最佳实践}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 1. 使用质量检查清单
+### 1. 使用质量检查清单 {#1-使用质量检查清单}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -728,7 +728,7 @@ git commit -m "添加所有权模型形式化研究笔记
 - ✅ 逐项检查质量要求
 - ✅ 确保所有要求满足
 
-### 2. 代码审查
+### 2. 代码审查 {#2-代码审查}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -738,7 +738,7 @@ git commit -m "添加所有权模型形式化研究笔记
 - ✅ 检查代码正确性
 - ✅ 验证代码可运行性
 
-### 3. 持续改进
+### 3. 持续改进 {#3-持续改进}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -750,7 +750,7 @@ git commit -m "添加所有权模型形式化研究笔记
 
 ---
 
-## 🎯 与 Rust 官方规范的对齐
+## 🎯 与 Rust 官方规范的对齐 {#与-rust-官方规范的对齐}
 >
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 >
@@ -762,7 +762,7 @@ git commit -m "添加所有权模型形式化研究笔记
 
 研究笔记的代码示例、API 设计与安全讨论应与以下官方规范保持一致：
 
-### Rust API Guidelines
+### Rust API Guidelines {#rust-api-guidelines}
 
 - **C-CASE**: 命名符合 RFC 430（类型 CamelCase、函数 snake_case）。
 - **C-CONV**: 转换方法使用 `as_`（免费/借用）、`to_`（昂贵）、`into_`（消耗）。
@@ -772,7 +772,7 @@ git commit -m "添加所有权模型形式化研究笔记
 - **C-GOOD-ERR**: 错误类型实现 `std::error::Error + Send + Sync`，并提供清晰 `Display`。
 - 完整清单见 [Rust API Guidelines Checklist](https://rust-lang.github.io/api-guidelines/checklist.html)。
 
-### Clippy lint 文档
+### Clippy lint 文档 {#clippy-lint-文档}
 
 - **correctness**: 可能产生错误结果的代码（如 `absurd_extreme_comparisons`）。
 - **suspicious**: 很可能是 bug 的代码（如 `double_must_use`）。
@@ -781,7 +781,7 @@ git commit -m "添加所有权模型形式化研究笔记
 - **perf**: 性能反模式（如 `vec_init_then_push`）。
 - 完整 lint 列表与示例见 [Clippy Lints](https://rust-lang.github.io/rust-clippy/master/index.html)。
 
-### Nomicon 重点章节
+### Nomicon 重点章节 {#nomicon-重点章节}
 
 | 主题 | Nomicon 章节 | 说明 |
 | :--- | :--- | :--- |
@@ -792,7 +792,7 @@ git commit -m "添加所有权模型形式化研究笔记
 | 发送与同步 | [send-and-sync.html](https://doc.rust-lang.org/nomicon/send-and-sync.html) | `Send`/`Sync` 的语义与手动实现 |
 | 未初始化内存 | [uninitialized.html](https://doc.rust-lang.org/nomicon/uninitialized.html) | `MaybeUninit` 与 unsafe 初始化 |
 
-### Rust Book 重点章节
+### Rust Book 重点章节 {#rust-book-重点章节}
 
 | 主题 | Rust Book 章节 | 说明 |
 | :--- | :--- | :--- |
@@ -806,11 +806,11 @@ git commit -m "添加所有权模型形式化研究笔记
 
 ---
 
-## 🔗 相关资源 {#-相关资源}
+## 🔗 相关资源 {#相关资源}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 核心文档
+### 核心文档 {#核心文档}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -819,7 +819,7 @@ git commit -m "添加所有权模型形式化研究笔记
 - [质量检查清单](10_quality_checklist.md) - 质量检查标准
 - [维护指南](10_maintenance_guide.md) - 系统维护指南
 
-### 工具和资源
+### 工具和资源 {#工具和资源}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -835,14 +835,14 @@ git commit -m "添加所有权模型形式化研究笔记
 
 ---
 
-## 🆕 权威国际化内容升级 (Rust 1.96.0+) {#-权威国际化内容升级}
+## 🆕 权威国际化内容升级 (Rust 1.96.0+) {#权威国际化内容升级-rust-1960}
 >
 > **来源**: [Rust Research Community]
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-06-29
 
-### 本次升级要点
+### 本次升级要点 {#本次升级要点}
 
 - 新增「与 Rust 官方规范的对齐」章节，系统引用 Rust API Guidelines、Clippy lint 文档、Nomicon、Rust Book 具体章节。
 - 删除旧版 Rust 1.94 模板内容，状态更新为 ✅ 完成。
@@ -866,7 +866,7 @@ git commit -m "添加所有权模型形式化研究笔记
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -875,7 +875,7 @@ git commit -m "添加所有权模型形式化研究笔记
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Best Practice](https://en.wikipedia.org/wiki/Best_Practice)**
 > **来源: [Wikipedia - Code Review](https://en.wikipedia.org/wiki/Code_Review)**

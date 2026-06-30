@@ -1,4 +1,4 @@
-# Cargo Script / Frontmatter 指南
+# Cargo Script / Frontmatter 指南 {#cargo-script-frontmatter-指南}
 
 > **分级**: [A]
 > **Bloom 层级**: L3 (应用)
@@ -11,11 +11,11 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [Cargo Script / Frontmatter 指南](#cargo-script--frontmatter-指南)
+- [Cargo Script / Frontmatter 指南](#cargo-script-frontmatter-指南)
   - [目录](#目录)
   - [1. 什么是 Cargo Script？](#1-什么是-cargo-script)
     - [核心特性](#核心特性)
@@ -39,13 +39,13 @@
 
 ---
 
-## 1. 什么是 Cargo Script？
+## 1. 什么是 Cargo Script？ {#1-什么是-cargo-script}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Cargo Script** 是 Rust 的一项新能力，允许你编写**单文件 Rust 脚本**，直接在文件中声明依赖，无需创建完整的 Cargo 项目。
 
-### 核心特性
+### 核心特性 {#核心特性}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -56,7 +56,7 @@
 - **Shebang 支持**: `#!/usr/bin/env cargo` 使其像脚本语言一样使用
 - **无需 Cargo.toml**: 依赖直接在 `.rs` 文件中声明
 
-### 为什么重要？
+### 为什么重要？ {#为什么重要}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -71,11 +71,11 @@
 
 ---
 
-## 2. Frontmatter 语法
+## 2. Frontmatter 语法 {#2-frontmatter-语法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 基本格式
+### 基本格式 {#基本格式}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
@@ -106,7 +106,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-### 简写依赖语法
+### 简写依赖语法 {#简写依赖语法}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -121,7 +121,7 @@ serde_json = "1"
 ---
 ```
 
-### 最小示例（无 frontmatter）
+### 最小示例（无 frontmatter） {#最小示例无-frontmatter}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -138,11 +138,11 @@ fn main() {
 
 ---
 
-## 3. 完整示例
+## 3. 完整示例 {#3-完整示例}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 示例 1：HTTP 请求脚本
+### 示例 1：HTTP 请求脚本 {#示例-1http-请求脚本}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -187,7 +187,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 cargo +nightly fetch-json.rs
 ```
 
-### 示例 2：数据处理脚本
+### 示例 2：数据处理脚本 {#示例-2数据处理脚本}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -212,7 +212,7 @@ fn main() {
 }
 ```
 
-### 示例 3：系统管理脚本
+### 示例 3：系统管理脚本 {#示例-3系统管理脚本}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -242,7 +242,7 @@ fn main() {
 
 ---
 
-## 4. 与现有工具的对比
+## 4. 与现有工具的对比 {#4-与现有工具的对比}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -271,11 +271,11 @@ graph LR
 
 ---
 
-## 5. 实际应用场景
+## 5. 实际应用场景 {#5-实际应用场景}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 场景 1：替代 Python 系统脚本
+### 场景 1：替代 Python 系统脚本 {#场景-1替代-python-系统脚本}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -300,25 +300,25 @@ fn main() {
 }
 ```
 
-### 场景 2：教学与演示
+### 场景 2：教学与演示 {#场景-2教学与演示}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 单文件示例消除了 Cargo 项目的认知负担，学生可以专注于语言本身。
 
-### 场景 3：CI/CD 流水线
+### 场景 3：CI/CD 流水线 {#场景-3cicd-流水线}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```yaml
-# .github/workflows/check.yml
+# .github/workflows/check.yml {#githubworkflowscheckyml}
 - name: Run custom check
   run: cargo scripts/ci-check.rs
 ```
 
 ---
 
-## 6. 限制与注意事项
+## 6. 限制与注意事项 {#6-限制与注意事项}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -331,7 +331,7 @@ fn main() {
 
 ---
 
-## 参考资源
+## 参考资源 {#参考资源}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -356,7 +356,7 @@ fn main() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
 > **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**

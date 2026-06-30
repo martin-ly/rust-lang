@@ -1,4 +1,4 @@
-# 国际化多语言权威来源对齐索引
+# 国际化多语言权威来源对齐索引 {#国际化多语言权威来源对齐索引}
 
 > **概念族**: 权威来源对齐 / 国际化 / i18n
 > **内容分级**: [核心级]
@@ -11,7 +11,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [国际化多语言权威来源对齐索引](#国际化多语言权威来源对齐索引)
   - [目录](#目录)
@@ -29,7 +29,7 @@
 
 ---
 
-## 一、对齐说明
+## 一、对齐说明 {#一对齐说明}
 
 本文档将 `docs/research_notes/` 中的核心概念与国际化多语言权威来源建立映射，包括官方翻译、社区翻译和区域性学习资源。对齐目的：
 
@@ -39,7 +39,7 @@
 
 ---
 
-## 二、中文权威来源
+## 二、中文权威来源 {#二中文权威来源}
 
 | 来源 | 类型 | 项目文档 | 覆盖主题 | 状态 |
 |------|------|----------|----------|------|
@@ -51,7 +51,7 @@
 
 ---
 
-## 三、日文权威来源
+## 三、日文权威来源 {#三日文权威来源}
 
 | 来源 | 类型 | 项目文档 | 覆盖主题 | 状态 |
 |------|------|----------|----------|------|
@@ -61,7 +61,7 @@
 
 ---
 
-## 四、其他语言来源
+## 四、其他语言来源 {#四其他语言来源}
 
 | 语言 | 来源 | 类型 | 项目文档 | 状态 |
 |------|------|------|----------|------|
@@ -72,7 +72,7 @@
 
 ---
 
-## 五、多语言术语对照
+## 五、多语言术语对照 {#五多语言术语对照}
 
 | 英文术语 | 中文 | 日文 | 项目文档 |
 |----------|------|------|----------|
@@ -85,7 +85,7 @@
 | Pin | 固定 / Pin | 固定/Pin | [formal_methods/10_pin_self_referential.md](formal_methods/10_pin_self_referential.md) |
 | crate | 包 / crate | クレート | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) |
 
-## 六、术语库数据源
+## 六、术语库数据源 {#六术语库数据源}
 
 完整术语库存放于 [`data/i18n_terminology.yaml`](../../data/i18n_terminology.yaml)，采用 YAML 结构化格式，包含每个术语的英文原文、中文翻译、日文翻译、分类及使用说明。
 
@@ -97,7 +97,7 @@
 
 ---
 
-## 七、社区翻译贡献
+## 七、社区翻译贡献 {#七社区翻译贡献}
 
 - 官方翻译仓库：[rust-lang/book](https://github.com/rust-lang/book)、[rust-lang/reference](https://github.com/rust-lang/reference)
 - 中文社区翻译：[rust-lang-cn](https://github.com/rust-lang-cn)
@@ -105,7 +105,7 @@
 
 ---
 
-## 八、未覆盖缺口
+## 八、未覆盖缺口 {#八未覆盖缺口}
 
 1. 中文 Rust Reference 翻译与项目 Reference 对齐矩阵可进一步细化。
 2. ~~日文/中文术语对照表可扩展至更多专业术语（如 variance、coercion、orphan rules）。~~ 已补充：高级术语已统一纳入 [`data/i18n_terminology.yaml`](../../data/i18n_terminology.yaml)。
@@ -113,7 +113,7 @@
 
 > **权威来源**: [TRPL 中文](https://kaisery.github.io/trpl-zh-cn/) | [TRPL 日文](https://doc.rust-jp.rs/book-ja/) | [Rust 中文社区](https://rustcc.cn/) | [Rust Japan](https://rust-jp.rs/)
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
 - [Rust Book 对齐](10_rust_book_alignment.md)
@@ -122,7 +122,7 @@
 
 ---
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 本对齐矩阵同时参考以下 P1 学术权威来源，以形成完整的官方-学术对照网络：
 
@@ -131,7 +131,7 @@
 - [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
 - [Aeneas](https://aeneas-verification.github.io/)
 
-## 社区权威参考
+## 社区权威参考 {#社区权威参考}
 
 - [Rust Book 中文](https://kaisery.github.io/trpl-zh-cn/)
 - [This Week in Rust](https://this-week-in-rust.org/)

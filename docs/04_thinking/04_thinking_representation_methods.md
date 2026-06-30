@@ -1,16 +1,16 @@
-# Rust 思维表征方式文档 / Thinking Representation Methods Documentation
+# Rust 思维表征方式文档 / Thinking Representation Methods Documentation {#rust-思维表征方式文档-thinking-representation-methods-documentation}
 
 > **分级**: [B]
 > **Bloom 层级**: L4-L5 (分析/评价)
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Rust 思维表征方式文档 / Thinking Representation Methods Documentation](#rust-思维表征方式文档--thinking-representation-methods-documentation)
-  - [📑 目录](#-目录)
-  - [🎯 文档概述](#-文档概述)
-  - [🗺️ 1. 思维导图 (Mind Map)](#️-1-思维导图-mind-map)
+- [Rust 思维表征方式文档 / Thinking Representation Methods Documentation](#rust-思维表征方式文档-thinking-representation-methods-documentation)
+  - [📑 目录](#目录)
+  - [🎯 文档概述](#文档概述)
+  - [🗺️ 1. 思维导图 (Mind Map)](#1-思维导图-mind-map)
     - [1.1 Rust 1.93.0 核心特性思维导图](#11-rust-1930-核心特性思维导图)
     - [1.2 所有权系统完整思维导图](#12-所有权系统完整思维导图)
     - [1.3 借用系统完整思维导图](#13-借用系统完整思维导图)
@@ -23,12 +23,12 @@
     - [1.10 跨模块概念依赖思维导图](#110-跨模块概念依赖思维导图)
     - [1.11 模块级思维导图索引](#111-模块级思维导图索引)
     - [1.12 学习路径思维导图](#112-学习路径思维导图)
-  - [📊 2. 多维矩阵 (Multidimensional Matrix)](#-2-多维矩阵-multidimensional-matrix)
+  - [📊 2. 多维矩阵 (Multidimensional Matrix)](#2-多维矩阵-multidimensional-matrix)
     - [2.1 Rust 1.93.0 特性对比矩阵](#21-rust-1930-特性对比矩阵)
     - [2.2 版本迁移对比矩阵](#22-版本迁移对比矩阵)
     - [2.3 特性依赖关系矩阵](#23-特性依赖关系矩阵)
     - [2.4 性能影响矩阵](#24-性能影响矩阵)
-  - [🌳 3. 决策树图 (Decision Tree)](#-3-决策树图-decision-tree)
+  - [🌳 3. 决策树图 (Decision Tree)](#3-决策树图-decision-tree)
     - [3.1 Rust 1.93.0 特性使用决策树](#31-rust-1930-特性使用决策树)
     - [3.2 技术选型决策树](#32-技术选型决策树)
     - [3.3 调试决策树](#33-调试决策树)
@@ -38,28 +38,28 @@
     - [3.7 性能优化决策树](#37-性能优化决策树)
     - [3.8 应用场景决策树](#38-应用场景决策树)
     - [3.9 转换树图 (Transformation Tree)](#39-转换树图-transformation-tree)
-      - [3.9.1 借用 ↔ 所有权转换树](#391-借用--所有权转换树)
-      - [3.9.2 Option ↔ Result 转换树](#392-option--result-转换树)
+      - [3.9.1 借用 ↔ 所有权转换树](#391-借用-所有权转换树)
+      - [3.9.2 Option ↔ Result 转换树](#392-option-result-转换树)
       - [3.9.3 \&T vs \&mut T 选择转换树](#393-t-vs-mut-t-选择转换树)
       - [3.9.4 泛型约束转换树](#394-泛型约束转换树)
       - [3.9.5 生命周期转换树](#395-生命周期转换树)
       - [3.9.6 错误传播转换树](#396-错误传播转换树)
-  - [🔬 4. 证明树图 (Proof Tree)](#-4-证明树图-proof-tree)
+  - [🔬 4. 证明树图 (Proof Tree)](#4-证明树图-proof-tree)
     - [4.1 定理证明树结构](#41-定理证明树结构)
     - [4.2 内存安全证明树](#42-内存安全证明树)
     - [4.3 类型安全证明树](#43-类型安全证明树)
     - [4.4 并发安全证明树](#44-并发安全证明树)
-  - [📈 5. 概念关系网络图 (Concept Relationship Network)](#-5-概念关系网络图-concept-relationship-network)
-  - [🎯 6. 使用指南](#-6-使用指南)
+  - [📈 5. 概念关系网络图 (Concept Relationship Network)](#5-概念关系网络图-concept-relationship-network)
+  - [🎯 6. 使用指南](#6-使用指南)
     - [6.1 何时使用思维导图](#61-何时使用思维导图)
     - [6.2 何时使用多维矩阵](#62-何时使用多维矩阵)
     - [6.3 何时使用决策树](#63-何时使用决策树)
     - [6.4 何时使用证明树](#64-何时使用证明树)
     - [6.5 何时使用转换树](#65-何时使用转换树)
-  - [💻 代码示例](#-代码示例)
+  - [💻 代码示例](#代码示例)
     - [示例 1: 思维导图生成器](#示例-1-思维导图生成器)
     - [示例 2: 决策树枚举实现](#示例-2-决策树枚举实现)
-  - [📚 7. 参考资源](#-7-参考资源)
+  - [📚 7. 参考资源](#7-参考资源)
     - [7.1 官方资源](#71-官方资源)
     - [7.2 项目资源](#72-项目资源)
     - [7.3 相关文档](#73-相关文档)
@@ -78,7 +78,7 @@
 
 ---
 
-## 🎯 文档概述
+## 🎯 文档概述 {#文档概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -92,11 +92,11 @@
 
 ---
 
-## 🗺️ 1. 思维导图 (Mind Map)
+## 🗺️ 1. 思维导图 (Mind Map) {#1-思维导图-mind-map}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1.1 Rust 1.93.0 核心特性思维导图
+### 1.1 Rust 1.93.0 核心特性思维导图 {#11-rust-1930-核心特性思维导图}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -162,7 +162,7 @@ mindmap
         函数宏
 ```
 
-### 1.2 所有权系统完整思维导图
+### 1.2 所有权系统完整思维导图 {#12-所有权系统完整思维导图}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -201,7 +201,7 @@ mindmap
       RAII模式
 ```
 
-### 1.3 借用系统完整思维导图
+### 1.3 借用系统完整思维导图 {#13-借用系统完整思维导图}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -247,7 +247,7 @@ mindmap
         解决建议
 ```
 
-### 1.4 生命周期系统完整思维导图
+### 1.4 生命周期系统完整思维导图 {#14-生命周期系统完整思维导图}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -286,7 +286,7 @@ mindmap
       自引用结构
 ```
 
-### 1.5 泛型系统完整思维导图
+### 1.5 泛型系统完整思维导图 {#15-泛型系统完整思维导图}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -333,7 +333,7 @@ mindmap
         不透明类型
 ```
 
-### 1.6 Trait 系统完整思维导图
+### 1.6 Trait 系统完整思维导图 {#16-trait-系统完整思维导图}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -394,7 +394,7 @@ mindmap
         插件系统
 ```
 
-### 1.7 并发编程完整思维导图
+### 1.7 并发编程完整思维导图 {#17-并发编程完整思维导图}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -448,7 +448,7 @@ mindmap
       自动推导
 ```
 
-### 1.8 异步编程完整思维导图
+### 1.8 异步编程完整思维导图 {#18-异步编程完整思维导图}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -501,7 +501,7 @@ mindmap
         异步读写
 ```
 
-### 1.9 特性应用场景思维导图
+### 1.9 特性应用场景思维导图 {#19-特性应用场景思维导图}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -542,7 +542,7 @@ mindmap
         自动特征改进
 ```
 
-### 1.10 跨模块概念依赖思维导图
+### 1.10 跨模块概念依赖思维导图 {#110-跨模块概念依赖思维导图}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -587,7 +587,7 @@ mindmap
       依赖 C06 C10
 ```
 
-### 1.11 模块级思维导图索引
+### 1.11 模块级思维导图索引 {#111-模块级思维导图索引}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -607,7 +607,7 @@ mindmap
 | C11 | 宏系统层级 | crates/c11_macro_system/docs/ |
 | C12 | WASM 思维导图 | crates/c12_wasm/docs/WASM_MIND_MAPS.md |
 
-### 1.12 学习路径思维导图
+### 1.12 学习路径思维导图 {#112-学习路径思维导图}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -652,11 +652,11 @@ mindmap
 
 ---
 
-## 📊 2. 多维矩阵 (Multidimensional Matrix)
+## 📊 2. 多维矩阵 (Multidimensional Matrix) {#2-多维矩阵-multidimensional-matrix}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 Rust 1.93.0 特性对比矩阵
+### 2.1 Rust 1.93.0 特性对比矩阵 {#21-rust-1930-特性对比矩阵}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -690,7 +690,7 @@ mindmap
 - ✅: 正面影响
 - ⚠️: 需要注意
 
-### 2.2 版本迁移对比矩阵
+### 2.2 版本迁移对比矩阵 {#22-版本迁移对比矩阵}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -700,7 +700,7 @@ mindmap
 | 1.91   | 1.93.0 | 特性完善                   | 低         | 低         | P0         | 快速迁移，收益高                 |
 | 1.92.0 | 1.93.0 | musl 1.2.5、全局分配器增强 | 低         | 低         | P0         | 直接迁移，DNS 解析改进           |
 
-### 2.3 特性依赖关系矩阵
+### 2.3 特性依赖关系矩阵 {#23-特性依赖关系矩阵}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -712,7 +712,7 @@ mindmap
 | 关联项多边界       | 无          | 泛型编程        | 无       | 自动特征改进   | type Item: A + B + C   |
 | 自动特征改进       | 无          | 类型推断        | 无       | 关联项多边界   | 更智能的边界处理       |
 
-### 2.4 性能影响矩阵
+### 2.4 性能影响矩阵 {#24-性能影响矩阵}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -726,11 +726,11 @@ mindmap
 
 ---
 
-## 🌳 3. 决策树图 (Decision Tree)
+## 🌳 3. 决策树图 (Decision Tree) {#3-决策树图-decision-tree}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 3.1 Rust 1.93.0 特性使用决策树
+### 3.1 Rust 1.93.0 特性使用决策树 {#31-rust-1930-特性使用决策树}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -778,7 +778,7 @@ graph TD
     style D6 fill:#ffe1e1
 ```
 
-### 3.2 技术选型决策树
+### 3.2 技术选型决策树 {#32-技术选型决策树}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -818,7 +818,7 @@ graph TD
     style Result fill:#fff5e1
 ```
 
-### 3.3 调试决策树
+### 3.3 调试决策树 {#33-调试决策树}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -872,7 +872,7 @@ graph TD
     style Logic fill:#fff5e1
 ```
 
-### 3.4 优化决策树
+### 3.4 优化决策树 {#34-优化决策树}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -937,7 +937,7 @@ graph TD
     style AsyncOpt fill:#e1ffe1
 ```
 
-### 3.5 学习路径决策树
+### 3.5 学习路径决策树 {#35-学习路径决策树}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -1013,7 +1013,7 @@ graph TD
     style Practice fill:#ffe1e1
 ```
 
-### 3.6 迁移决策树
+### 3.6 迁移决策树 {#36-迁移决策树}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -1043,7 +1043,7 @@ graph TD
     style Test fill:#fff5e1
 ```
 
-### 3.7 性能优化决策树
+### 3.7 性能优化决策树 {#37-性能优化决策树}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -1073,7 +1073,7 @@ graph TD
     style Opt3 fill:#ffe1e1
 ```
 
-### 3.8 应用场景决策树
+### 3.8 应用场景决策树 {#38-应用场景决策树}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -1107,13 +1107,13 @@ graph TD
     Dist --> Dist3[模块: C06 C10 C11]
 ```
 
-### 3.9 转换树图 (Transformation Tree)
+### 3.9 转换树图 (Transformation Tree) {#39-转换树图-transformation-tree}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 转换树描述概念间的转换关系与适用条件，帮助理解何时、如何在不同表示间转换。
 
-#### 3.9.1 借用 ↔ 所有权转换树
+#### 3.9.1 借用 ↔ 所有权转换树 {#391-借用-所有权转换树}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -1141,7 +1141,7 @@ flowchart TD
     style MutRef fill:#ffe1e1
 ```
 
-#### 3.9.2 Option ↔ Result 转换树
+#### 3.9.2 Option ↔ Result 转换树 {#392-option-result-转换树}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -1167,7 +1167,7 @@ flowchart LR
     Err -->|map_err| Err
 ```
 
-#### 3.9.3 &T vs &mut T 选择转换树
+#### 3.9.3 &T vs &mut T 选择转换树 {#393-t-vs-mut-t-选择转换树}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -1183,7 +1183,7 @@ flowchart TD
     UseMut --> Rule2[同一时刻仅一个 &mut T]
 ```
 
-#### 3.9.4 泛型约束转换树
+#### 3.9.4 泛型约束转换树 {#394-泛型约束转换树}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -1199,7 +1199,7 @@ flowchart TD
     Where --> Ex3["fn f<T>() where T: Debug"]
 ```
 
-#### 3.9.5 生命周期转换树
+#### 3.9.5 生命周期转换树 {#395-生命周期转换树}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -1217,7 +1217,7 @@ flowchart TD
     L1 --> L2["fn f<'a, 'b>(x: &'a T, y: &'b U) -> &'a V"]
 ```
 
-#### 3.9.6 错误传播转换树
+#### 3.9.6 错误传播转换树 {#396-错误传播转换树}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -1241,11 +1241,11 @@ flowchart TD
 
 ---
 
-## 🔬 4. 证明树图 (Proof Tree)
+## 🔬 4. 证明树图 (Proof Tree) {#4-证明树图-proof-tree}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 4.1 定理证明树结构
+### 4.1 定理证明树结构 {#41-定理证明树结构}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -1286,7 +1286,7 @@ graph TD
     style C1 fill:#ffe1e1
 ```
 
-### 4.2 内存安全证明树
+### 4.2 内存安全证明树 {#42-内存安全证明树}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -1336,7 +1336,7 @@ graph TD
     style T3 fill:#e1ffe1
 ```
 
-### 4.3 类型安全证明树
+### 4.3 类型安全证明树 {#43-类型安全证明树}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -1383,7 +1383,7 @@ graph TD
     style C1 fill:#ffe1e1
 ```
 
-### 4.4 并发安全证明树
+### 4.4 并发安全证明树 {#44-并发安全证明树}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -1435,7 +1435,7 @@ graph TD
 
 ---
 
-## 📈 5. 概念关系网络图 (Concept Relationship Network)
+## 📈 5. 概念关系网络图 (Concept Relationship Network) {#5-概念关系网络图-concept-relationship-network}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -1484,11 +1484,11 @@ graph LR
 
 ---
 
-## 🎯 6. 使用指南
+## 🎯 6. 使用指南 {#6-使用指南}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 6.1 何时使用思维导图
+### 6.1 何时使用思维导图 {#61-何时使用思维导图}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -1497,7 +1497,7 @@ graph LR
 - ✅ 需要理解概念之间的层次关系
 - ✅ 需要快速浏览特性概览
 
-### 6.2 何时使用多维矩阵
+### 6.2 何时使用多维矩阵 {#62-何时使用多维矩阵}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -1506,7 +1506,7 @@ graph LR
 - ✅ 需要理解特性之间的依赖关系
 - ✅ 需要做出技术选型决策
 
-### 6.3 何时使用决策树
+### 6.3 何时使用决策树 {#63-何时使用决策树}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -1518,7 +1518,7 @@ graph LR
 - ✅ 需要调试错误
 - ✅ 规划学习路径
 
-### 6.4 何时使用证明树
+### 6.4 何时使用证明树 {#64-何时使用证明树}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -1527,7 +1527,7 @@ graph LR
 - ✅ 需要向他人解释安全性保证
 - ✅ 需要形式化验证
 
-### 6.5 何时使用转换树
+### 6.5 何时使用转换树 {#65-何时使用转换树}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -1538,11 +1538,11 @@ graph LR
 
 ---
 
-## 💻 代码示例
+## 💻 代码示例 {#代码示例}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 示例 1: 思维导图生成器
+### 示例 1: 思维导图生成器 {#示例-1-思维导图生成器}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -1608,7 +1608,7 @@ fn create_ownership_mindmap() -> MindMapGenerator {
 }
 ```
 
-### 示例 2: 决策树枚举实现
+### 示例 2: 决策树枚举实现 {#示例-2-决策树枚举实现}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -1665,11 +1665,11 @@ impl DecisionEngine {
 
 ---
 
-## 📚 7. 参考资源
+## 📚 7. 参考资源 {#7-参考资源}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 7.1 官方资源
+### 7.1 官方资源 {#71-官方资源}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -1678,7 +1678,7 @@ impl DecisionEngine {
 - [Rust Book](https://doc.rust-lang.org/book/)
 - [Rust Reference](https://doc.rust-lang.org/reference/)
 
-### 7.2 项目资源
+### 7.2 项目资源 {#72-项目资源}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -1686,7 +1686,7 @@ impl DecisionEngine {
 - [04_decision_graph_network.md](04_decision_graph_network.md) - 决策图网
 - [04_proof_graph_network.md](04_proof_graph_network.md) - 证明图网
 
-### 7.3 相关文档
+### 7.3 相关文档 {#73-相关文档}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -1704,19 +1704,19 @@ impl DecisionEngine {
 
 ---
 
-## Rust 1.95+ 持续更新更新
+## Rust 1.95+ 持续更新更新 {#rust-195-持续更新更新}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.95+更新要点
+### 本文档的Rust 1.95+更新要点 {#本文档的rust-195更新要点}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 本文档已针对 **Rust 1.95+** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -1725,7 +1725,7 @@ impl DecisionEngine {
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -1733,7 +1733,7 @@ impl DecisionEngine {
 - ✅ 兼容Edition 2024
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查（已归档）
@@ -1761,7 +1761,7 @@ impl DecisionEngine {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -1770,7 +1770,7 @@ impl DecisionEngine {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

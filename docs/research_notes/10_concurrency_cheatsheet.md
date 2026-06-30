@@ -1,4 +1,4 @@
-# 并发速查卡
+# 并发速查卡 {#并发速查卡}
 >
 > **概念族**: 速查卡
 
@@ -21,12 +21,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [并发速查卡](#并发速查卡)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [Send与Sync](#send与sync)
   - [同步原语](#同步原语)
   - [创建线程](#创建线程)
@@ -48,20 +48,20 @@
     - [并行迭代](#并行迭代)
   - [死锁预防](#死锁预防)
   - [性能检查清单](#性能检查清单)
-  - [🌍 权威国际化资源链接](#-权威国际化资源链接)
+  - [🌍 权威国际化资源链接](#权威国际化资源链接)
     - [Rust Reference 核心章节](#rust-reference-核心章节)
     - [The Rust Programming Language 核心章节](#the-rust-programming-language-核心章节)
-    - [Rust Standard Library 核心 API / 模块](#rust-standard-library-核心-api--模块)
-    - [Rust By Example / Rust Cookbook / cheats.rs](#rust-by-example--rust-cookbook--cheatsrs)
+    - [Rust Standard Library 核心 API / 模块](#rust-standard-library-核心-api-模块)
+    - [Rust By Example / Rust Cookbook / cheats.rs](#rust-by-example-rust-cookbook-cheatsrs)
     - [并发专属权威链接](#并发专属权威链接)
-      - [std::sync / atomics](#stdsync--atomics)
-      - [Rust By Example / Cookbook / cheats.rs](#rust-by-example--cookbook--cheatsrs)
-      - [Nomicon / RFC / Miri](#nomicon--rfc--miri)
+      - [std::sync / atomics](#stdsync-atomics)
+      - [Rust By Example / Cookbook / cheats.rs](#rust-by-example-cookbook-cheatsrs)
+      - [Nomicon / RFC / Miri](#nomicon-rfc-miri)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
   - [社区权威参考](#社区权威参考)
 
-## Send与Sync
+## Send与Sync {#send与sync}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -78,7 +78,7 @@ T: Send + Sync      T: Send + !Sync    !Send + !Sync
 
 ---
 
-## 同步原语
+## 同步原语 {#同步原语}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -92,7 +92,7 @@ T: Send + Sync      T: Send + !Sync    !Send + !Sync
 
 ---
 
-## 创建线程
+## 创建线程 {#创建线程}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -119,7 +119,7 @@ thread::Builder::new()
 
 ---
 
-## Send/Sync
+## Send/Sync {#sendsync}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -135,11 +135,11 @@ thread::Builder::new()
 
 ---
 
-## 共享状态
+## 共享状态 {#共享状态}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Mutex
+### Mutex {#mutex}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -160,7 +160,7 @@ let num = counter.lock().unwrap();
 println!("{}", *num);
 ```
 
-### RwLock
+### RwLock {#rwlock}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -184,11 +184,11 @@ let r2 = data.read().unwrap();
 
 ---
 
-## 通道通信
+## 通道通信 {#通道通信}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### mpsc
+### mpsc {#mpsc}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
@@ -213,7 +213,7 @@ for received in rx {
 }
 ```
 
-### 多生产者
+### 多生产者 {#多生产者}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -237,7 +237,7 @@ for received in rx {
 
 ---
 
-## 原子操作
+## 原子操作 {#原子操作}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -265,7 +265,7 @@ counter.compare_exchange(
 );
 ```
 
-### 内存序
+### 内存序 {#内存序}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -278,11 +278,11 @@ counter.compare_exchange(
 
 ---
 
-## 线程同步
+## 线程同步 {#线程同步}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### Barrier
+### Barrier {#barrier}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -301,7 +301,7 @@ for _ in 0..3 {
 }
 ```
 
-### Condvar
+### Condvar {#condvar}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -327,7 +327,7 @@ while !*started {
 
 ---
 
-## 线程局部存储
+## 线程局部存储 {#线程局部存储}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -346,11 +346,11 @@ COUNTER.with(|c| {
 
 ---
 
-## 常见模式
+## 常见模式 {#常见模式}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 线程池
+### 线程池 {#线程池}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -368,7 +368,7 @@ for i in 0..8 {
 pool.join();
 ```
 
-### 并行迭代
+### 并行迭代 {#并行迭代}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -383,7 +383,7 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 
 ---
 
-## 死锁预防
+## 死锁预防 {#死锁预防}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -397,7 +397,7 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 
 ---
 
-## 性能检查清单
+## 性能检查清单 {#性能检查清单}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -417,7 +417,7 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 
 ---
 
-## 🌍 权威国际化资源链接
+## 🌍 权威国际化资源链接 {#权威国际化资源链接}
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -428,7 +428,7 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 
 本节为速查内容提供官方权威来源与社区经典参考的直通链接，便于深入验证与扩展阅读。
 
-### Rust Reference 核心章节
+### Rust Reference 核心章节 {#rust-reference-核心章节}
 
 - [Reference 首页](https://doc.rust-lang.org/reference/)
 - [Types](https://doc.rust-lang.org/reference/types.html)
@@ -437,7 +437,7 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 - [Statements](https://doc.rust-lang.org/reference/statements.html)
 - [Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html)
 
-### The Rust Programming Language 核心章节
+### The Rust Programming Language 核心章节 {#the-rust-programming-language-核心章节}
 
 - [TRPL 首页](https://doc.rust-lang.org/book/)
 - [Ch. 4 - Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
@@ -448,7 +448,7 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 - [Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 - [Ch. 19 - Advanced Features / Macros](https://doc.rust-lang.org/book/ch19-06-macros.html)
 
-### Rust Standard Library 核心 API / 模块
+### Rust Standard Library 核心 API / 模块 {#rust-standard-library-核心-api-模块}
 
 - [std 首页](https://doc.rust-lang.org/std/)
 - [std::result](https://doc.rust-lang.org/std/result/)
@@ -458,7 +458,7 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 - [std::panic](https://doc.rust-lang.org/std/panic/)
 - [std::marker (Send / Sync / PhantomData)](https://doc.rust-lang.org/std/marker/)
 
-### Rust By Example / Rust Cookbook / cheats.rs
+### Rust By Example / Rust Cookbook / cheats.rs {#rust-by-example-rust-cookbook-cheatsrs}
 
 - [Rust By Example 首页](https://doc.rust-lang.org/rust-by-example/)
 - [Rust Cookbook 首页](https://rust-lang-nursery.github.io/rust-cookbook/)
@@ -466,12 +466,12 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 
 ---
 
-### 并发专属权威链接
+### 并发专属权威链接 {#并发专属权威链接}
 
 > **来源: [Rustonomicon - Concurrency](https://doc.rust-lang.org/nomicon/concurrency.html)**
 > **来源: [Rust Reference - Memory Model](https://doc.rust-lang.org/reference/memory-model.html)**
 
-#### std::sync / atomics
+#### std::sync / atomics {#stdsync-atomics}
 
 - [std::sync](https://doc.rust-lang.org/std/sync/)
 - [std::sync::atomic](https://doc.rust-lang.org/std/sync/atomic/)
@@ -485,7 +485,7 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 - [AtomicUsize](https://doc.rust-lang.org/std/sync/atomic/struct.AtomicUsize.html)
 - [Ordering](https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html)
 
-#### Rust By Example / Cookbook / cheats.rs
+#### Rust By Example / Cookbook / cheats.rs {#rust-by-example-cookbook-cheatsrs}
 
 - [RBE - Threads](https://doc.rust-lang.org/rust-by-example/std_misc/threads.html)
 - [RBE - Channel](https://doc.rust-lang.org/rust-by-example/std_misc/channels.html)
@@ -493,7 +493,7 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 - [Rust Cookbook - Concurrency](https://rust-lang-nursery.github.io/rust-cookbook/concurrency.html)
 - [cheats.rs - Concurrency](https://cheats.rs/#concurrency)
 
-#### Nomicon / RFC / Miri
+#### Nomicon / RFC / Miri {#nomicon-rfc-miri}
 
 - [Rustonomicon - Concurrency](https://doc.rust-lang.org/nomicon/concurrency.html)
 - [Rustonomicon - Atomics](https://doc.rust-lang.org/nomicon/atomics.html)
@@ -504,7 +504,7 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 - [RFC 2394 - async/await](https://rust-lang.github.io/rfcs/2394-async_await.html)
 - [RFC 3151 - Scoped threads](https://rust-lang.github.io/rfcs/3151-scoped-threads.html)
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -513,7 +513,7 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 > **来源: [TRPL Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**
@@ -522,7 +522,7 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 
 ---
 
-## 社区权威参考
+## 社区权威参考 {#社区权威参考}
 
 - [This Week in Rust](https://this-week-in-rust.org/)
 - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)

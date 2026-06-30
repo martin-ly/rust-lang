@@ -1,4 +1,4 @@
-# Rust 生态系统深度解析
+# Rust 生态系统深度解析 {#rust-生态系统深度解析}
 
 > **分级**: [B]
 > **Bloom 层级**: L3-L4 (应用/分析)
@@ -9,37 +9,37 @@
 
 ---
 
-## 📋 目录
+## 📋 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Rust 生态系统深度解析](#rust-生态系统深度解析)
-  - [📋 目录](#-目录)
-  - [🎯 目标](#-目标)
-  - [📊 生态覆盖矩阵](#-生态覆盖矩阵)
-  - [🌐 Web 框架](#-web-框架)
+  - [📋 目录](#目录)
+  - [🎯 目标](#目标)
+  - [📊 生态覆盖矩阵](#生态覆盖矩阵)
+  - [🌐 Web 框架](#web-框架)
     - [Axum](#axum)
     - [Actix-web](#actix-web)
     - [Rocket](#rocket)
-  - [🗄️ 数据库](#️-数据库)
+  - [🗄️ 数据库](#数据库)
     - [SQLx](#sqlx)
     - [Diesel](#diesel)
     - [Sea-ORM](#sea-orm)
-  - [⚡ 异步运行时](#-异步运行时)
+  - [⚡ 异步运行时](#异步运行时)
     - [Tokio](#tokio)
-  - [📦 序列化](#-序列化)
+  - [📦 序列化](#序列化)
     - [Serde](#serde)
-  - [🧪 测试工具](#-测试工具)
+  - [🧪 测试工具](#测试工具)
     - [测试栈推荐](#测试栈推荐)
-  - [📈 监控与可观测性](#-监控与可观测性)
+  - [📈 监控与可观测性](#监控与可观测性)
     - [Tracing 生态系统](#tracing-生态系统)
-  - [🔗 参考资源](#-参考资源)
+  - [🔗 参考资源](#参考资源)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
 ---
 
-## 🎯 目标
+## 🎯 目标 {#目标}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -52,7 +52,7 @@
 
 ---
 
-## 📊 生态覆盖矩阵
+## 📊 生态覆盖矩阵 {#生态覆盖矩阵}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -77,11 +77,11 @@
 
 ---
 
-## 🌐 Web 框架
+## 🌐 Web 框架 {#web-框架}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Axum
+### Axum {#axum}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -148,7 +148,7 @@ async fn get_user(
 
 ---
 
-### Actix-web
+### Actix-web {#actix-web}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -201,7 +201,7 @@ async fn main() -> std::io::Result<()> {
 
 ---
 
-### Rocket
+### Rocket {#rocket}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -250,11 +250,11 @@ fn rocket() -> _ {
 
 ---
 
-## 🗄️ 数据库
+## 🗄️ 数据库 {#数据库}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### SQLx
+### SQLx {#sqlx}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -325,7 +325,7 @@ async fn transfer_funds(
 
 ---
 
-### Diesel
+### Diesel {#diesel}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -366,7 +366,7 @@ fn create_user(conn: &mut PgConnection, name: &str, email: &str) -> QueryResult<
 
 ---
 
-### Sea-ORM
+### Sea-ORM {#sea-orm}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -399,9 +399,9 @@ async fn find_user_with_posts(db: &DatabaseConnection, user_id: i32) -> Result<O
 
 ---
 
-## ⚡ 异步运行时
+## ⚡ 异步运行时 {#异步运行时}
 
-### Tokio
+### Tokio {#tokio}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -460,9 +460,9 @@ async fn task_management_example() {
 
 ---
 
-## 📦 序列化
+## 📦 序列化 {#序列化}
 
-### Serde
+### Serde {#serde}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -497,9 +497,9 @@ mod custom_format {
 
 ---
 
-## 🧪 测试工具
+## 🧪 测试工具 {#测试工具}
 
-### 测试栈推荐
+### 测试栈推荐 {#测试栈推荐}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -534,9 +534,9 @@ mod tests {
 
 ---
 
-## 📈 监控与可观测性
+## 📈 监控与可观测性 {#监控与可观测性}
 
-### Tracing 生态系统
+### Tracing 生态系统 {#tracing-生态系统}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -571,7 +571,7 @@ fn init_tracing() {
 
 ---
 
-## 🔗 参考资源
+## 🔗 参考资源 {#参考资源}
 
 - [crates.io](https://crates.io/) - Rust 包仓库
 - [lib.rs](https://lib.rs/) - 替代包浏览器
@@ -597,7 +597,7 @@ fn init_tracing() {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [Content 总览](../README.md)
 - [学术对接](../academic/README.md)
@@ -605,7 +605,7 @@ fn init_tracing() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

@@ -1,4 +1,4 @@
-# Miri 实战指南：Rust 未定义行为检测工具
+# Miri 实战指南：Rust 未定义行为检测工具 {#miri-实战指南rust-未定义行为检测工具}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
@@ -13,39 +13,39 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Miri 实战指南：Rust 未定义行为检测工具](#miri-实战指南rust-未定义行为检测工具)
-  - [📑 目录](#-目录)
-  - [🔬 什么是 Miri](#-什么是-miri)
-  - [⚙️ 安装与运行](#️-安装与运行)
+  - [📑 目录](#目录)
+  - [🔬 什么是 Miri](#什么是-miri)
+  - [⚙️ 安装与运行](#安装与运行)
     - [安装 Miri](#安装-miri)
     - [基本命令](#基本命令)
     - [常用环境变量](#常用环境变量)
-  - [🐛 Miri 捕获的常见 UB 模式](#-miri-捕获的常见-ub-模式)
+  - [🐛 Miri 捕获的常见 UB 模式](#miri-捕获的常见-ub-模式)
     - [1. Use-after-free (UAF)](#1-use-after-free-uaf)
     - [2. Data Race (数据竞争)](#2-data-race-数据竞争)
     - [3. Aliasing Violations (别名违规)](#3-aliasing-violations-别名违规)
     - [4. 其他常见 UB](#4-其他常见-ub)
-  - [🌲 Tree Borrows vs Stacked Borrows](#-tree-borrows-vs-stacked-borrows)
+  - [🌲 Tree Borrows vs Stacked Borrows](#tree-borrows-vs-stacked-borrows)
     - [Stacked Borrows (默认)](#stacked-borrows-默认)
     - [Tree Borrows (实验性，推荐)](#tree-borrows-实验性推荐)
-  - [✍️ 编写 Miri 友好测试的实战流程](#️-编写-miri-友好测试的实战流程)
+  - [✍️ 编写 Miri 友好测试的实战流程](#编写-miri-友好测试的实战流程)
     - [步骤 1：隔离 unsafe 代码到独立测试](#步骤-1隔离-unsafe-代码到独立测试)
     - [步骤 2：为 Miri 添加条件编译标记](#步骤-2为-miri-添加条件编译标记)
     - [步骤 3：处理 Miri 的隔离限制](#步骤-3处理-miri-的隔离限制)
     - [步骤 4：本地开发流程](#步骤-4本地开发流程)
-  - [⚠️ Miri 的局限性](#️-miri-的局限性)
-  - [🔧 CI 集成](#-ci-集成)
+  - [⚠️ Miri 的局限性](#miri-的局限性)
+  - [🔧 CI 集成](#ci-集成)
     - [GitHub Actions 示例](#github-actions-示例)
     - [策略建议](#策略建议)
-  - [📖 参考文献](#-参考文献)
+  - [📖 参考文献](#参考文献)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🔬 什么是 Miri
+## 🔬 什么是 Miri {#什么是-miri}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -75,50 +75,50 @@ Miri 的核心价值在于：
 
 ---
 
-## ⚙️ 安装与运行
+## ⚙️ 安装与运行 {#安装与运行}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Miri 仅支持 **nightly** 工具链，因为 Miri 需要编译器内部不稳定的 API。
 
-### 安装 Miri
+### 安装 Miri {#安装-miri}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# 1. 安装 nightly 工具链 (如果尚未安装)
+# 1. 安装 nightly 工具链 (如果尚未安装) {#1-安装-nightly-工具链-如果尚未安装}
 rustup toolchain install nightly
 
-# 2. 安装 Miri 组件
+# 2. 安装 Miri 组件 {#2-安装-miri-组件}
 rustup component add miri --toolchain nightly
 
-# 3. 为当前项目配置 Miri
+# 3. 为当前项目配置 Miri {#3-为当前项目配置-miri}
 cargo +nightly miri setup
 ```
 
-### 基本命令
+### 基本命令 {#基本命令}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# 运行所有测试 (Miri 模式下)
+# 运行所有测试 (Miri 模式下) {#运行所有测试-miri-模式下}
 cargo +nightly miri test
 
-# 运行特定测试
+# 运行特定测试 {#运行特定测试}
 cargo +nightly miri test test_name
 
-# 运行二进制程序
+# 运行二进制程序 {#运行二进制程序}
 cargo +nightly miri run
 
-# 运行单个文件 (无需 Cargo 项目)
+# 运行单个文件 (无需 Cargo 项目) {#运行单个文件-无需-cargo-项目}
 rustc +nightly -Zmiri --edition 2024 file.rs
 ```
 
-### 常用环境变量
+### 常用环境变量 {#常用环境变量}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -133,17 +133,17 @@ rustc +nightly -Zmiri --edition 2024 file.rs
 | `-Zmiri-ignore-leaks` | 忽略内存泄漏检测 | 某些并发测试需要 |
 
 ```bash
-# 示例：禁用隔离并启用 Tree Borrows
+# 示例：禁用隔离并启用 Tree Borrows {#示例禁用隔离并启用-tree-borrows}
 MIRIFLAGS="-Zmiri-disable-isolation -Zmiri-tree-borrows" cargo +nightly miri test
 ```
 
 ---
 
-## 🐛 Miri 捕获的常见 UB 模式
+## 🐛 Miri 捕获的常见 UB 模式 {#miri-捕获的常见-ub-模式}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. Use-after-free (UAF)
+### 1. Use-after-free (UAF) {#1-use-after-free-uaf}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -177,7 +177,7 @@ error: Undefined Behavior: pointer to alloc1402 was dereferenced after this allo
    |         ^^^^^^^^^^^^^^^^^^^ pointer to alloc1402 was dereferenced after this allocation got freed
 ```
 
-### 2. Data Race (数据竞争)
+### 2. Data Race (数据竞争) {#2-data-race-数据竞争}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -214,7 +214,7 @@ fn data_race_example() {
 error: Undefined Behavior: Data race detected between Read on thread `<unnamed>` and Write on thread `main`
 ```
 
-### 3. Aliasing Violations (别名违规)
+### 3. Aliasing Violations (别名违规) {#3-aliasing-violations-别名违规}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -240,7 +240,7 @@ fn aliasing_violation() {
 }
 ```
 
-### 4. 其他常见 UB
+### 4. 其他常见 UB {#4-其他常见-ub}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -258,13 +258,13 @@ fn aliasing_violation() {
 
 ---
 
-## 🌲 Tree Borrows vs Stacked Borrows
+## 🌲 Tree Borrows vs Stacked Borrows {#tree-borrows-vs-stacked-borrows}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Miri 支持两种不同的内存别名模型，通过 `-Zmiri-tree-borrows` 切换。
 
-### Stacked Borrows (默认)
+### Stacked Borrows (默认) {#stacked-borrows-默认}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -285,7 +285,7 @@ Stacked Borrows 模型:
 **优点**：理论成熟，与编译器优化假设一致
 **缺点**：过于严格，某些安全的代码模式被误判为 UB
 
-### Tree Borrows (实验性，推荐)
+### Tree Borrows (实验性，推荐) {#tree-borrows-实验性推荐}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -317,7 +317,7 @@ graph TD
 | `UnsafeCell` 的内部可变性 | ⚠️ 复杂 | ✅ 更直观 |
 
 ```bash
-# 启用 Tree Borrows (推荐用于新项目)
+# 启用 Tree Borrows (推荐用于新项目) {#启用-tree-borrows-推荐用于新项目}
 MIRIFLAGS="-Zmiri-tree-borrows" cargo +nightly miri test
 ```
 
@@ -325,11 +325,11 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo +nightly miri test
 
 ---
 
-## ✍️ 编写 Miri 友好测试的实战流程
+## ✍️ 编写 Miri 友好测试的实战流程 {#编写-miri-友好测试的实战流程}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 步骤 1：隔离 unsafe 代码到独立测试
+### 步骤 1：隔离 unsafe 代码到独立测试 {#步骤-1隔离-unsafe-代码到独立测试}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -366,7 +366,7 @@ mod miri_tests {
 }
 ```
 
-### 步骤 2：为 Miri 添加条件编译标记
+### 步骤 2：为 Miri 添加条件编译标记 {#步骤-2为-miri-添加条件编译标记}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -388,42 +388,42 @@ fn test_miri_specific() {
 }
 ```
 
-### 步骤 3：处理 Miri 的隔离限制
+### 步骤 3：处理 Miri 的隔离限制 {#步骤-3处理-miri-的隔离限制}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 Miri 默认在沙箱中运行，文件系统和网络访问需要显式允许：
 
 ```bash
-# 允许文件系统访问
+# 允许文件系统访问 {#允许文件系统访问}
 MIRIFLAGS="-Zmiri-disable-isolation" cargo +nightly miri test
 
-# 或仅允许特定外部函数调用
+# 或仅允许特定外部函数调用 {#或仅允许特定外部函数调用}
 MIRIFLAGS="-Zmiri-allow-unaligned-access" cargo +nightly miri test
 ```
 
-### 步骤 4：本地开发流程
+### 步骤 4：本地开发流程 {#步骤-4本地开发流程}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```bash
-# 1. 编写功能代码和测试
-# 2. 先用 cargo test 确保逻辑正确
+# 1. 编写功能代码和测试 {#1-编写功能代码和测试}
+# 2. 先用 cargo test 确保逻辑正确 {#2-先用-cargo-test-确保逻辑正确}
 cargo test
 
-# 3. 用 Miri 运行测试检测 UB
+# 3. 用 Miri 运行测试检测 UB {#3-用-miri-运行测试检测-ub}
 cargo +nightly miri test
 
-# 4. 如果有环境交互测试，启用隔离禁用
+# 4. 如果有环境交互测试，启用隔离禁用 {#4-如果有环境交互测试启用隔离禁用}
 MIRIFLAGS="-Zmiri-disable-isolation" cargo +nightly miri test
 
-# 5. (可选) 使用 Tree Borrows 再次验证
+# 5. (可选) 使用 Tree Borrows 再次验证 {#5-可选-使用-tree-borrows-再次验证}
 MIRIFLAGS="-Zmiri-tree-borrows" cargo +nightly miri test
 ```
 
 ---
 
-## ⚠️ Miri 的局限性
+## ⚠️ Miri 的局限性 {#miri-的局限性}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -453,13 +453,13 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo +nightly miri test
 
 ---
 
-## 🔧 CI 集成
+## 🔧 CI 集成 {#ci-集成}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 由于 Miri 仅支持 nightly，CI 配置需要单独设置：
 
-### GitHub Actions 示例
+### GitHub Actions 示例 {#github-actions-示例}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -487,7 +487,7 @@ jobs:
           cargo +nightly miri test
 ```
 
-### 策略建议
+### 策略建议 {#策略建议}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -506,7 +506,7 @@ CI 策略矩阵:
 
 ---
 
-## 📖 参考文献
+## 📖 参考文献 {#参考文献}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -550,7 +550,7 @@ CI 策略矩阵:
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -559,7 +559,7 @@ CI 策略矩阵:
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Undefined Behavior](https://en.wikipedia.org/wiki/Undefined_Behavior)**
 > **来源: [Miri Documentation](https://github.com/rust-lang/miri)**

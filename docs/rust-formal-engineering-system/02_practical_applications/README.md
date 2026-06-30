@@ -1,4 +1,4 @@
-# 实践应用
+# 实践应用 {#实践应用}
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -16,7 +16,7 @@
 
 ---
 
-## 目录结构
+## 目录结构 {#目录结构}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -27,11 +27,11 @@
 
 ---
 
-## 核心实践领域
+## 核心实践领域 {#核心实践领域}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 内存管理
+### 内存管理 {#内存管理}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -51,7 +51,7 @@ fn memory_management() {
 }
 ```
 
-### 性能优化
+### 性能优化 {#性能优化}
 
 ```rust
 // 零成本抽象
@@ -78,7 +78,7 @@ fn simd_operations() {
 
 ---
 
-## 与核心文档的关联
+## 与核心文档的关联 {#与核心文档的关联}
 
 | 本文档 | 核心文档 | 关系 |
 | :--- | :--- | :--- |
@@ -98,7 +98,7 @@ fn simd_operations() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

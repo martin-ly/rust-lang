@@ -1,4 +1,4 @@
-# 网络编程快速参考卡片
+# 网络编程快速参考卡片 {#网络编程快速参考卡片}
 
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
@@ -6,50 +6,50 @@
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [网络编程快速参考卡片](#网络编程快速参考卡片)
-  - [📑 目录](#-目录)
-  - [🚀 快速开始](#-快速开始)
-    - [HTTP 客户端](#http-客户端)
+  - [📑 目录](#目录)
+  - [🚀 快速开始](#快速开始)
+    - [HTTP 客户端](#http-客户端-1)
     - [TCP 服务器](#tcp-服务器)
-  - [📋 常用 API](#-常用-api)
+  - [📋 常用 API](#常用-api)
     - [HTTP 客户端](#http-客户端-1)
     - [TCP/UDP](#tcpudp)
     - [WebSocket](#websocket)
     - [DNS 解析](#dns-解析)
-  - [🔧 配置选项](#-配置选项)
+  - [🔧 配置选项](#配置选项)
     - [HTTP 客户端配置](#http-客户端配置)
     - [TCP 服务器配置](#tcp-服务器配置)
-  - [⚡ 异步模式](#-异步模式)
+  - [⚡ 异步模式](#异步模式)
     - [并发处理多个请求](#并发处理多个请求)
     - [流式处理](#流式处理)
-  - [🐛 错误处理](#-错误处理)
-  - [🔒 安全特性](#-安全特性)
+  - [🐛 错误处理](#错误处理)
+  - [🔒 安全特性](#安全特性)
     - [HTTPS/TLS](#httpstls)
     - [认证](#认证)
-  - [📊 性能优化](#-性能优化)
+  - [📊 性能优化](#性能优化)
     - [连接池](#连接池)
     - [压缩](#压缩)
-  - [🚫 反例速查](#-反例速查)
+  - [🚫 反例速查](#反例速查)
     - [反例 1: 忽略连接错误](#反例-1-忽略连接错误)
     - [反例 2: 未设置超时导致无限阻塞](#反例-2-未设置超时导致无限阻塞)
-  - [📚 相关文档](#-相关文档)
-  - [🧩 相关示例代码](#-相关示例代码)
-  - [🎯 使用场景](#-使用场景)
+  - [📚 相关文档](#相关文档)
+  - [🧩 相关示例代码](#相关示例代码)
+  - [🎯 使用场景](#使用场景)
     - [场景 1: REST API 客户端](#场景-1-rest-api-客户端)
     - [场景 2: 实时聊天服务器](#场景-2-实时聊天服务器)
     - [场景 3: 高性能代理服务器](#场景-3-高性能代理服务器)
-  - [📐 形式化方法链接](#-形式化方法链接)
+  - [📐 形式化方法链接](#形式化方法链接)
     - [理论基础](#理论基础)
     - [形式化定理](#形式化定理)
-  - [📚 相关资源](#-相关资源)
+  - [📚 相关资源](#相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
     - [相关速查卡](#相关速查卡)
-  - [🆕 Rust 1.95+ 特性整合](#-rust-195-特性整合)
+  - [🆕 Rust 1.95+ 特性整合](#rust-195-特性整合)
     - [核心特性速查](#核心特性速查)
   - [Rust 1.95+ 在网络编程中的深度应用](#rust-195-在网络编程中的深度应用)
     - [ControlFlow 在请求处理管道中的应用](#controlflow-在请求处理管道中的应用)
@@ -66,11 +66,11 @@
 
 ---
 
-## 🚀 快速开始
+## 🚀 快速开始 {#快速开始}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### HTTP 客户端
+### HTTP 客户端 {#http-客户端-1}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -95,7 +95,7 @@ let response = client
     .await?;
 ```
 
-### TCP 服务器
+### TCP 服务器 {#tcp-服务器}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -127,11 +127,11 @@ loop {
 
 ---
 
-## 📋 常用 API
+## 📋 常用 API {#常用-api}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### HTTP 客户端
+### HTTP 客户端 {#http-客户端-1}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -146,7 +146,7 @@ loop {
 | JSON 数据 | `.json(data)`         | 发送 JSON 数据   |
 | 表单数据  | `.form(data)`         | 发送表单数据     |
 
-### TCP/UDP
+### TCP/UDP {#tcpudp}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -158,7 +158,7 @@ loop {
 | 接收 | `recv()`               | `recv_from()`          |
 | 发送 | `send()`               | `send_to()`            |
 
-### WebSocket
+### WebSocket {#websocket}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -183,7 +183,7 @@ if let Some(msg) = ws.recv().await? {
 }
 ```
 
-### DNS 解析
+### DNS 解析 {#dns-解析}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -209,11 +209,11 @@ for ip in ips {
 
 ---
 
-## 🔧 配置选项
+## 🔧 配置选项 {#配置选项}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### HTTP 客户端配置
+### HTTP 客户端配置 {#http-客户端配置}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -227,7 +227,7 @@ let client = HttpClient::builder()
     .build()?;
 ```
 
-### TCP 服务器配置
+### TCP 服务器配置 {#tcp-服务器配置}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -240,11 +240,11 @@ let listener = TcpListener::bind("127.0.0.1:8080")
 
 ---
 
-## ⚡ 异步模式
+## ⚡ 异步模式 {#异步模式}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 并发处理多个请求
+### 并发处理多个请求 {#并发处理多个请求}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -264,7 +264,7 @@ let futures = urls.into_iter().map(|url| {
 let results = future::join_all(futures).await;
 ```
 
-### 流式处理
+### 流式处理 {#流式处理}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -281,7 +281,7 @@ while let Some(chunk) = stream.next().await {
 
 ---
 
-## 🐛 错误处理
+## 🐛 错误处理 {#错误处理}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -304,11 +304,11 @@ match client.get(url).await {
 
 ---
 
-## 🔒 安全特性
+## 🔒 安全特性 {#安全特性}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### HTTPS/TLS
+### HTTPS/TLS {#httpstls}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -319,7 +319,7 @@ let client = HttpClient::builder()
     .build()?;
 ```
 
-### 认证
+### 认证 {#认证}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -341,11 +341,11 @@ let response = client
 
 ---
 
-## 📊 性能优化
+## 📊 性能优化 {#性能优化}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 连接池
+### 连接池 {#连接池}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -356,7 +356,7 @@ let client = HttpClient::builder()
     .build()?;
 ```
 
-### 压缩
+### 压缩 {#压缩}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -370,11 +370,11 @@ let response = client
 
 ---
 
-## 🚫 反例速查
+## 🚫 反例速查 {#反例速查}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 反例 1: 忽略连接错误
+### 反例 1: 忽略连接错误 {#反例-1-忽略连接错误}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -394,7 +394,7 @@ let stream = TcpStream::connect("127.0.0.1:8080")?;
 
 ---
 
-### 反例 2: 未设置超时导致无限阻塞
+### 反例 2: 未设置超时导致无限阻塞 {#反例-2-未设置超时导致无限阻塞}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -411,14 +411,14 @@ stream.read(&mut buf);  // ❌ 可能永久阻塞
 
 ---
 
-## 📚 相关文档
+## 📚 相关文档 {#相关文档}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [网络模块完整文档](../../../crates/c10_networks/docs/README.md)
 - [网络模块 README](../../../crates/c10_networks/README.md)
 
-## 🧩 相关示例代码
+## 🧩 相关示例代码 {#相关示例代码}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -433,11 +433,11 @@ stream.read(&mut buf);  // ❌ 可能永久阻塞
 
 ---
 
-## 🎯 使用场景
+## 🎯 使用场景 {#使用场景}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 场景 1: REST API 客户端
+### 场景 1: REST API 客户端 {#场景-1-rest-api-客户端}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -475,7 +475,7 @@ async fn create_user(client: &Client, name: &str, email: &str) -> Result<UserRes
 }
 ```
 
-### 场景 2: 实时聊天服务器
+### 场景 2: 实时聊天服务器 {#场景-2-实时聊天服务器}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -519,7 +519,7 @@ async fn chat_server() -> anyhow::Result<()> {
 }
 ```
 
-### 场景 3: 高性能代理服务器
+### 场景 3: 高性能代理服务器 {#场景-3-高性能代理服务器}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -552,11 +552,11 @@ async fn proxy_server() -> io::Result<()> {
 
 ---
 
-## 📐 形式化方法链接
+## 📐 形式化方法链接 {#形式化方法链接}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 理论基础
+### 理论基础 {#理论基础}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -567,7 +567,7 @@ async fn proxy_server() -> io::Result<()> {
 | **生命周期** | lifetime_formalization | 连接引用有效性 |
 | **并发安全** | [borrow_checker_proof](../../research_notes/formal_methods/10_borrow_checker_proof.md) | 并发访问数据竞争自由 |
 
-### 形式化定理
+### 形式化定理 {#形式化定理}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -577,18 +577,18 @@ async fn proxy_server() -> io::Result<()> {
 
 ---
 
-## 📚 相关资源
+## 📚 相关资源 {#相关资源}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 官方文档
+### 官方文档 {#官方文档}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [std::net 文档](https://doc.rust-lang.org/std/net/)
 - [Tokio 网络文档](https://tokio.rs/)
 
-### 项目内部文档
+### 项目内部文档 {#项目内部文档}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -598,7 +598,7 @@ async fn proxy_server() -> io::Result<()> {
 - [WebSocket 指南](../../../crates/c10_networks/docs/tier_02_guides/03_WebSocket实时通信.md)
 - [形式化方法研究](../../../archive/research_notes_2026_06_25/formal_methods/README.md)
 
-### 相关速查卡
+### 相关速查卡 {#相关速查卡}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -614,12 +614,12 @@ async fn proxy_server() -> io::Result<()> {
 
 ---
 
-## 🆕 Rust 1.95+ 特性整合
+## 🆕 Rust 1.95+ 特性整合 {#rust-195-特性整合}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 > **适用版本**: Rust 1.96.0+
 
-### 核心特性速查
+### 核心特性速查 {#核心特性速查}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -662,12 +662,12 @@ let gamma = f64::consts::EULER_GAMMA;
 
 ---
 
-## Rust 1.95+ 在网络编程中的深度应用
+## Rust 1.95+ 在网络编程中的深度应用 {#rust-195-在网络编程中的深度应用}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 > **适用版本**: Rust 1.96.0+ | **实际场景**: 网络编程开发
 
-### ControlFlow 在请求处理管道中的应用
+### ControlFlow 在请求处理管道中的应用 {#controlflow-在请求处理管道中的应用}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -683,7 +683,7 @@ pub fn process_request(req: Request) -> ControlFlow<Response, Request> {
 }
 ```
 
-### LazyLock 在连接池管理中的应用
+### LazyLock 在连接池管理中的应用 {#lazylock-在连接池管理中的应用}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -703,7 +703,7 @@ pub fn get_connection() -> Option<Connection> {
 }
 ```
 
-### 性能提升总结
+### 性能提升总结 {#性能提升总结}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -733,7 +733,7 @@ pub fn get_connection() -> Option<Connection> {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -742,7 +742,7 @@ pub fn get_connection() -> Option<Connection> {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

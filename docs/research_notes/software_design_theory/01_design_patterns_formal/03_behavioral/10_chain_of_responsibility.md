@@ -1,4 +1,4 @@
-# Chain of Responsibility 形式化分析
+# Chain of Responsibility 形式化分析 {#chain-of-responsibility-形式化分析}
 
 > **概念族**: 软件设计 / 设计模式
 
@@ -24,7 +24,7 @@
 
 > **权威来源**: [Rust Design Patterns – Behavioral](https://rust-unofficial.github.io/patterns/patterns/behavioural/index.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -33,7 +33,7 @@
 >
 
 - [Chain of Responsibility 形式化分析](#chain-of-responsibility-形式化分析)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [权威来源对照](#权威来源对照)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Chain of Responsibility 结构）](#def-11chain-of-responsibility-结构)
@@ -44,7 +44,7 @@
     - [推论 CR-C1（纯 Safe Chain）](#推论-cr-c1纯-safe-chain)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
-  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196--edition-2024-代码示例更新)
+  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196-edition-2024-代码示例更新)
     - [Edition 2024 关键兼容点](#edition-2024-关键兼容点)
   - [Rust 所有权、借用、生命周期与 trait 系统约束分析](#rust-所有权借用生命周期与-trait-系统约束分析)
     - [所有权约束](#所有权约束)
@@ -76,7 +76,7 @@
   - [思维导图](#思维导图)
   - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -102,7 +102,7 @@
 
 ---
 
-## 权威来源对照
+## 权威来源对照 {#权威来源对照}
 
 >
 
@@ -128,13 +128,13 @@
 
 ---
 
-## 形式化定义
+## 形式化定义 {#形式化定义}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Def 1.1（Chain of Responsibility 结构）
+### Def 1.1（Chain of Responsibility 结构） {#def-11chain-of-responsibility-结构}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -158,7 +158,7 @@ $$\mathcal{CR} = \langle H, R, \mathit{next}: \mathrm{Option}\langle \mathrm{Box
 
 ---
 
-### Axiom CR1（链有穷公理）
+### Axiom CR1（链有穷公理） {#axiom-cr1链有穷公理}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -170,7 +170,7 @@ $$\forall h: H,\, \text{处理器链有穷；无环}$$
 
 链有穷；无环。
 
-### Axiom CR2（请求传递公理）
+### Axiom CR2（请求传递公理） {#axiom-cr2请求传递公理}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -184,7 +184,7 @@ $$\mathit{handle}(h, r) \text{ 不处理 } \implies \mathit{next}(h) \neq \mathr
 
 ---
 
-### 定理 CR-T1（链无悬垂定理）
+### 定理 CR-T1（链无悬垂定理） {#定理-cr-t1链无悬垂定理}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -220,7 +220,7 @@ $$\mathit{handle}(h, r) \text{ 不处理 } \implies \mathit{next}(h) \neq \mathr
 
 ---
 
-### 定理 CR-T2（递归处理安全定理）
+### 定理 CR-T2（递归处理安全定理） {#定理-cr-t2递归处理安全定理}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -264,7 +264,7 @@ $$\mathit{handle}(h, r) \text{ 不处理 } \implies \mathit{next}(h) \neq \mathr
 
 ---
 
-### 推论 CR-C1（纯 Safe Chain）
+### 推论 CR-C1（纯 Safe Chain） {#推论-cr-c1纯-safe-chain}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -288,7 +288,7 @@ Chain 为纯 Safe；`Option<Box<Handler>>` 链式委托，无 `unsafe`。
 
 ---
 
-### 概念定义-属性关系-解释论证 层次汇总
+### 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -308,7 +308,7 @@ Chain 为纯 Safe；`Option<Box<Handler>>` 链式委托，无 `unsafe`。
 
 ---
 
-## Rust 实现与代码示例
+## Rust 实现与代码示例 {#rust-实现与代码示例}
 
 >
 
@@ -382,7 +382,7 @@ h1.handle(&"B".into());  // 委托至 h2
 
 ---
 
-## Rust 1.96+ / Edition 2024 代码示例更新
+## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
 
 >
 
@@ -438,7 +438,7 @@ fn main() {
 
 ```
 
-### Edition 2024 关键兼容点
+### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
 
@@ -454,25 +454,25 @@ fn main() {
 
 ---
 
-## Rust 所有权、借用、生命周期与 trait 系统约束分析
+## Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}
 
 >
 
 > **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
 
-### 所有权约束
+### 所有权约束 {#所有权约束}
 
 链节可拥有下一个处理者 `Box<dyn Handler>`，形成递归所有权链；链释放时递归析构。
 
-### 借用与生命周期约束
+### 借用与生命周期约束 {#借用与生命周期约束}
 
 处理请求只需要 `&self` 与 `&str`，不转移所有权；`Option<Box<dyn Handler>>` 通过 `as_ref()` 获取临时借用。
 
-### trait 系统约束
+### trait 系统约束 {#trait-系统约束}
 
 `Handler` trait 统一处理接口；trait object 支持异构处理者。`Option` 表示链尾。
 
-### 与 Rust 类型系统的综合联系
+### 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系}
 
 | Rust 机制 | 本模式使用方式 | 保证 |
 
@@ -490,13 +490,13 @@ fn main() {
 
 ---
 
-## 完整证明
+## 完整证明 {#完整证明}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 形式化论证链
+### 形式化论证链 {#形式化论证链}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -530,7 +530,7 @@ borrow_checker_proof
 
 ```
 
-### 与 Rust 类型系统的联系
+### 与 Rust 类型系统的联系 {#与-rust-类型系统的联系}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -546,7 +546,7 @@ borrow_checker_proof
 
 | 借用规则 | 委托安全 | 编译期检查 |
 
-### 内存安全保证
+### 内存安全保证 {#内存安全保证}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -560,13 +560,13 @@ borrow_checker_proof
 
 ---
 
-## 形式化属性：不变式、前置/后置条件与安全边界
+## 形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}
 
 >
 
 > **来源: [Formal Methods – Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)** | **来源: [Rust API Guidelines – Safety](https://rust-lang.github.io/api-guidelines/safety.html)**
 
-### 不变式（Invariants）
+### 不变式（Invariants） {#不变式invariants}
 
 1. 请求按链顺序传递。
 
@@ -574,7 +574,7 @@ borrow_checker_proof
 
 3. 链尾返回无处理结果。
 
-### 前置条件（Preconditions）
+### 前置条件（Preconditions） {#前置条件preconditions}
 
 1. 链已正确组装。
 
@@ -582,7 +582,7 @@ borrow_checker_proof
 
 3. 处理者不形成循环链。
 
-### 后置条件（Postconditions）
+### 后置条件（Postconditions） {#后置条件postconditions}
 
 1. 返回第一个匹配处理结果或 `None`。
 
@@ -590,11 +590,11 @@ borrow_checker_proof
 
 3. 请求处理顺序与链一致。
 
-### 安全边界（Safety Boundary）
+### 安全边界（Safety Boundary） {#安全边界safety-boundary}
 
 纯 Safe。需避免循环链导致无限递归或栈溢出；长链处理需注意递归深度。
 
-### 形式化规约汇总
+### 形式化规约汇总 {#形式化规约汇总}
 
 ```text
 
@@ -610,7 +610,7 @@ borrow_checker_proof
 
 ---
 
-## 典型场景
+## 典型场景 {#典型场景}
 
 >
 
@@ -630,7 +630,7 @@ borrow_checker_proof
 
 ---
 
-## 完整场景示例：HTTP 中间件链
+## 完整场景示例：HTTP 中间件链 {#完整场景示例http-中间件链}
 
 >
 
@@ -716,7 +716,7 @@ let chain = LogHandler {
 
 ---
 
-## 相关模式
+## 相关模式 {#相关模式}
 
 >
 
@@ -734,7 +734,7 @@ let chain = LogHandler {
 
 ---
 
-## 实现变体
+## 实现变体 {#实现变体}
 
 >
 
@@ -752,13 +752,13 @@ let chain = LogHandler {
 
 ---
 
-## 反例：常见误用及编译器错误
+## 反例：常见误用及编译器错误 {#反例常见误用及编译器错误}
 
 >
 
 > **来源: [Rust By Example – Error Handling](https://doc.rust-lang.org/rust-by-example/error.html)** | **来源: [Rust Compiler Error Index](https://doc.rust-lang.org/error_codes/error-index.html)**
 
-### 反例 1：循环链导致栈溢出
+### 反例 1：循环链导致栈溢出 {#反例-1循环链导致栈溢出}
 
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
@@ -772,7 +772,7 @@ h1.handle("x"); // stack overflow
 
 ```
 
-### 反例 2：trait object 不满足对象安全
+### 反例 2：trait object 不满足对象安全 {#反例-2trait-object-不满足对象安全}
 
 > 以下代码故意展示编译失败，用于说明对应反例。
 
@@ -786,7 +786,7 @@ trait Handler { fn handle<T>(&self, req: T); }
 
 **编译器错误**：`cannot be made into an object`。
 
-### 反例 3：请求生命周期不足
+### 反例 3：请求生命周期不足 {#反例-3请求生命周期不足}
 
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
@@ -800,7 +800,7 @@ fn handle(&self, request: &str) -> Option<String> { Some(request.into()) }
 
 ---
 
-## 选型决策树
+## 选型决策树 {#选型决策树}
 
 >
 
@@ -822,7 +822,7 @@ fn handle(&self, request: &str) -> Option<String> { Some(request.into()) }
 
 ---
 
-## 与 GoF 对比
+## 与 GoF 对比 {#与-gof-对比}
 
 >
 
@@ -840,7 +840,7 @@ fn handle(&self, request: &str) -> Option<String> { Some(request.into()) }
 
 ---
 
-## 边界
+## 边界 {#边界}
 
 >
 
@@ -858,7 +858,7 @@ fn handle(&self, request: &str) -> Option<String> { Some(request.into()) }
 
 ---
 
-## 与 Rust 1.93 的对应
+## 与 Rust 1.93 的对应 {#与-rust-193-的对应}
 
 >
 
@@ -874,7 +874,7 @@ fn handle(&self, request: &str) -> Option<String> { Some(request.into()) }
 
 ---
 
-## 思维导图
+## 思维导图 {#思维导图}
 
 >
 
@@ -924,7 +924,7 @@ mindmap
 
 ---
 
-## 与其他模式的关系图
+## 与其他模式的关系图 {#与其他模式的关系图}
 
 >
 
@@ -952,7 +952,7 @@ graph LR
 
 ---
 
-## 实质内容五维自检
+## 实质内容五维自检 {#实质内容五维自检}
 
 >
 
@@ -976,7 +976,7 @@ graph LR
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -986,13 +986,13 @@ graph LR
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -1008,7 +1008,7 @@ graph LR
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -1020,7 +1020,7 @@ graph LR
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -1054,7 +1054,7 @@ graph LR
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -1066,7 +1066,7 @@ graph LR
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 

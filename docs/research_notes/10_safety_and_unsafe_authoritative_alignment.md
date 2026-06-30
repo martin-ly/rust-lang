@@ -1,4 +1,4 @@
-# 安全与 unsafe 权威来源对齐矩阵
+# 安全与 unsafe 权威来源对齐矩阵 {#安全与-unsafe-权威来源对齐矩阵}
 
 > **概念族**: 权威来源对齐 / 安全 / unsafe
 > **内容分级**: [核心级]
@@ -11,7 +11,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [安全与 unsafe 权威来源对齐矩阵](#安全与-unsafe-权威来源对齐矩阵)
   - [目录](#目录)
@@ -26,13 +26,13 @@
 
 ---
 
-## 一、对齐说明
+## 一、对齐说明 {#一对齐说明}
 
 本文档将 `docs/research_notes/` 中关于 Rust 安全保证、unsafe 边界、内存安全、并发安全、FFI 安全的内容与 P0/P1/P2 权威来源建立映射，形成跨层级的安全权威来源网络。
 
 ---
 
-## 二、P0 官方权威
+## 二、P0 官方权威 {#二p0-官方权威}
 
 | 权威来源 | 链接 | 项目文档 | 覆盖主题 |
 |----------|------|----------|----------|
@@ -44,7 +44,7 @@
 
 ---
 
-## 三、P1 学术权威
+## 三、P1 学术权威 {#三p1-学术权威}
 
 | 权威来源 | 机构 | 项目文档 | 覆盖主题 |
 |----------|------|----------|----------|
@@ -57,7 +57,7 @@
 
 ---
 
-## 四、P2 社区与行业权威
+## 四、P2 社区与行业权威 {#四p2-社区与行业权威}
 
 | 权威来源 | 类型 | 项目文档 | 覆盖主题 |
 |----------|------|----------|----------|
@@ -68,7 +68,7 @@
 
 ---
 
-## 五、安全边界映射
+## 五、安全边界映射 {#五安全边界映射}
 
 | 安全边界 | 官方来源 | 学术支撑 | 项目反例 |
 |----------|----------|----------|----------|
@@ -81,7 +81,7 @@
 
 ---
 
-## 六、与项目文档的映射
+## 六、与项目文档的映射 {#六与项目文档的映射}
 
 | 项目文档 | 覆盖安全主题 | 权威来源 |
 |----------|--------------|----------|
@@ -94,7 +94,7 @@
 
 ---
 
-## 七、未覆盖缺口
+## 七、未覆盖缺口 {#七未覆盖缺口}
 
 1. `unsafe_op_in_unsafe_fn` 默认启用后的反例可细化。
 2. Miri 与 Kani 在项目示例中的集成步骤可补充。
@@ -102,7 +102,7 @@
 
 > **权威来源**: [Rust Book Ch 19](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) | [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) | [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) | [Miri](https://github.com/rust-lang/miri) | [Kani](https://model-checking.github.io/kani/)
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
 - [Unsafe Code Guidelines 对齐](10_unsafe_code_guidelines_alignment.md)

@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 把“怎么让 Cargo 从镜像/本地目录/离线缓存下载依赖”系统化，区分 source replacement、`[patch]` 与私有 registry 的适用边界。
-> **前置概念**: [Cargo Dependency Resolution](60_cargo_dependency_resolution.md) · [Cargo Registries and Publishing](62_cargo_registries_and_publishing.md)
+> **前置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **后置概念**: [Cargo Authentication and Cache](63_cargo_authentication_and_cache.md) · [DevOps and CI/CD](28_devops_and_ci_cd.md)
 
 ---

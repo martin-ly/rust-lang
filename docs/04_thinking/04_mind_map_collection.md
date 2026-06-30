@@ -1,4 +1,4 @@
-# Rust 思维导图集合
+# Rust 思维导图集合 {#rust-思维导图集合}
 
 > **分级**: [B]
 > **Bloom 层级**: L4-L5 (分析/评价)
@@ -10,14 +10,14 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 思维导图集合](#rust-思维导图集合)
-  - [📑 目录](#-目录)
-  - [🎯 文档概述 {#-文档概述}](#-文档概述--文档概述)
-  - [🗺️ 核心概念思维导图 {#️-核心概念思维导图}](#️-核心概念思维导图-️-核心概念思维导图)
+  - [📑 目录](#目录)
+  - [🎯 文档概述](#文档概述)
+  - [🗺️ 核心概念思维导图](#核心概念思维导图)
     - [1. Rust 语言核心思维导图](#1-rust-语言核心思维导图)
     - [2. 所有权系统思维导图](#2-所有权系统思维导图)
     - [3. 借用系统思维导图](#3-借用系统思维导图)
@@ -30,17 +30,17 @@
     - [10. 形式化与语义思维导图](#10-形式化与语义思维导图)
     - [11. 理论体系与论证体系结构思维导图](#11-理论体系与论证体系结构思维导图)
     - [12. 设计机制论证思维导图](#12-设计机制论证思维导图)
-  - [📊 模块知识思维导图 {#-模块知识思维导图}](#-模块知识思维导图--模块知识思维导图)
+  - [📊 模块知识思维导图](#模块知识思维导图)
     - [1. C01 所有权与借用思维导图](#1-c01-所有权与借用思维导图)
     - [2. C02 类型系统思维导图](#2-c02-类型系统思维导图)
     - [3. C05 线程与并发思维导图](#3-c05-线程与并发思维导图)
     - [4. C06 异步编程思维导图](#4-c06-异步编程思维导图)
     - [5. C07 进程管理思维导图](#5-c07-进程管理思维导图)
     - [6. C08 算法与数据结构思维导图](#6-c08-算法与数据结构思维导图)
-  - [🔗 知识关联思维导图 {#-知识关联思维导图}](#-知识关联思维导图--知识关联思维导图)
-  - [📚 相关文档 {#-相关文档}](#-相关文档--相关文档)
+  - [🔗 知识关联思维导图](#知识关联思维导图)
+  - [📚 相关文档](#相关文档)
     - [理论基础](#理论基础)
-    - [相关文档](#相关文档)
+    - [相关文档](#相关文档-2)
   - [Rust 1.95+ 思维表征更新](#rust-195-思维表征更新)
     - [新增思维表征](#新增思维表征)
     - [示例](#示例)
@@ -48,11 +48,11 @@
     - [本文档的Rust 1.95+更新要点](#本文档的rust-195更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档-1)
+      - [相关文档](#相关文档-2)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🎯 文档概述 {#-文档概述}
+## 🎯 文档概述 {#文档概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -60,11 +60,11 @@
 
 ---
 
-## 🗺️ 核心概念思维导图 {#️-核心概念思维导图}
+## 🗺️ 核心概念思维导图 {#核心概念思维导图}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. Rust 语言核心思维导图
+### 1. Rust 语言核心思维导图 {#1-rust-语言核心思维导图}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -125,7 +125,7 @@ mindmap
         ? 操作符
 ```
 
-### 2. 所有权系统思维导图
+### 2. 所有权系统思维导图 {#2-所有权系统思维导图}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -177,7 +177,7 @@ mindmap
         运行时借用检查
 ```
 
-### 3. 借用系统思维导图
+### 3. 借用系统思维导图 {#3-借用系统思维导图}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -240,7 +240,7 @@ mindmap
         多读单写
 ```
 
-### 4. 生命周期系统思维导图
+### 4. 生命周期系统思维导图 {#4-生命周期系统思维导图}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -287,7 +287,7 @@ mindmap
         T: Clone + 'a
 ```
 
-### 5. 泛型系统思维导图
+### 5. 泛型系统思维导图 {#5-泛型系统思维导图}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -338,7 +338,7 @@ mindmap
       代码膨胀
 ```
 
-### 6. Trait 系统思维导图
+### 6. Trait 系统思维导图 {#6-trait-系统思维导图}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -407,7 +407,7 @@ mindmap
         Sized
 ```
 
-### 7. 并发编程思维导图
+### 7. 并发编程思维导图 {#7-并发编程思维导图}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -473,7 +473,7 @@ mindmap
         等待/通知
 ```
 
-### 8. 异步编程思维导图
+### 8. 异步编程思维导图 {#8-异步编程思维导图}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -534,7 +534,7 @@ mindmap
       取消安全
 ```
 
-### 9. 系统编程思维导图
+### 9. 系统编程思维导图 {#9-系统编程思维导图}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -595,7 +595,7 @@ mindmap
         缓存机制
 ```
 
-### 10. 形式化与语义思维导图
+### 10. 形式化与语义思维导图 {#10-形式化与语义思维导图}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -644,7 +644,7 @@ mindmap
       边界违反 → 反例索引
 ```
 
-### 11. 理论体系与论证体系结构思维导图
+### 11. 理论体系与论证体系结构思维导图 {#11-理论体系与论证体系结构思维导图}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -700,7 +700,7 @@ mindmap
         FFI
 ```
 
-### 12. 设计机制论证思维导图
+### 12. 设计机制论证思维导图 {#12-设计机制论证思维导图}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -765,11 +765,11 @@ mindmap
 
 ---
 
-## 📊 模块知识思维导图 {#-模块知识思维导图}
+## 📊 模块知识思维导图 {#模块知识思维导图}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 1. C01 所有权与借用思维导图
+### 1. C01 所有权与借用思维导图 {#1-c01-所有权与借用思维导图}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -810,7 +810,7 @@ mindmap
       自定义智能指针
 ```
 
-### 2. C02 类型系统思维导图
+### 2. C02 类型系统思维导图 {#2-c02-类型系统思维导图}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -854,7 +854,7 @@ mindmap
         type Alias = Type
 ```
 
-### 3. C05 线程与并发思维导图
+### 3. C05 线程与并发思维导图 {#3-c05-线程与并发思维导图}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -898,7 +898,7 @@ mindmap
       无锁栈
 ```
 
-### 4. C06 异步编程思维导图
+### 4. C06 异步编程思维导图 {#4-c06-异步编程思维导图}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -938,7 +938,7 @@ mindmap
       CSP模式
 ```
 
-### 5. C07 进程管理思维导图
+### 5. C07 进程管理思维导图 {#5-c07-进程管理思维导图}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -972,7 +972,7 @@ mindmap
       I/O优化
 ```
 
-### 6. C08 算法与数据结构思维导图
+### 6. C08 算法与数据结构思维导图 {#6-c08-算法与数据结构思维导图}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -1009,7 +1009,7 @@ mindmap
 
 ---
 
-## 🔗 知识关联思维导图 {#-知识关联思维导图}
+## 🔗 知识关联思维导图 {#知识关联思维导图}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -1048,11 +1048,11 @@ mindmap
 
 ---
 
-## 📚 相关文档 {#-相关文档}
+## 📚 相关文档 {#相关文档}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 理论基础
+### 理论基础 {#理论基础}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -1060,7 +1060,7 @@ mindmap
 - [10_language_semantics_expressiveness.md](../../archive/research_notes_2026_06_25/10_language_semantics_expressiveness.md) - 语言语义与表达能力
 - [10_theoretical_and_argumentation_system_architecture.md](../../archive/research_notes_2026_06_25/10_theoretical_and_argumentation_system_architecture.md) - 理论体系架构
 
-### 相关文档
+### 相关文档 {#相关文档-2}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -1080,13 +1080,13 @@ mindmap
 
 ---
 
-## Rust 1.95+ 思维表征更新
+## Rust 1.95+ 思维表征更新 {#rust-195-思维表征更新}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.96.0+
 
-### 新增思维表征
+### 新增思维表征 {#新增思维表征}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -1098,7 +1098,7 @@ Rust 新特性可扩展思维表征方式：
 | ControlFlow | 决策树 | 控制流的提前终止决策 |
 | LazyCell/LazyLock | 状态图 | 延迟初始化的状态转换 |
 
-### 示例
+### 示例 {#示例}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -1115,20 +1115,20 @@ ust
 
 ---
 
-## Rust 1.95+ 持续更新更新
+## Rust 1.95+ 持续更新更新 {#rust-195-持续更新更新}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.95+更新要点
+### 本文档的Rust 1.95+更新要点 {#本文档的rust-195更新要点}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 本文档已针对 **Rust 1.95+** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -1137,7 +1137,7 @@ ust
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -1145,7 +1145,7 @@ ust
 - ✅ 兼容Edition 2024
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档-2}
 
 - [Rust 1.94 特性速查（已归档）
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
@@ -1168,7 +1168,7 @@ ust
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -1177,7 +1177,7 @@ ust
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

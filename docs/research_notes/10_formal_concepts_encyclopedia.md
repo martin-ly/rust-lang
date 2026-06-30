@@ -1,4 +1,4 @@
-# Rust形式化概念百科
+# Rust形式化概念百科 {#rust形式化概念百科}
 
 > **概念族**: 综合研究
 
@@ -24,7 +24,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 >
 
@@ -63,8 +63,8 @@
     - [A.1 所有权反例](#a1-所有权反例)
     - [A.2 借用反例](#a2-借用反例)
     - [A.3 Send/Sync反例](#a3-sendsync反例)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 更新](#rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -73,13 +73,13 @@
 
 ---
 
-## 一、所有权与借用
+## 一、所有权与借用 {#一所有权与借用}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1.1 所有权 (Ownership)
+### 1.1 所有权 (Ownership) {#11-所有权-ownership}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -87,7 +87,7 @@
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-#### 概念定义
+#### 概念定义 {#概念定义}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -113,7 +113,7 @@
 
 - **生命周期绑定**: 值的生命周期与所有者的作用域绑定
 
-#### 所有权转移 (Move)
+#### 所有权转移 (Move) {#所有权转移-move}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -145,7 +145,7 @@ Move(x, y, v):
 
 ```
 
-#### 复制 (Copy)
+#### 复制 (Copy) {#复制-copy}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -173,7 +173,7 @@ println!("{}", x);  // OK
 
 ---
 
-### 1.2 借用 (Borrowing)
+### 1.2 借用 (Borrowing) {#12-借用-borrowing}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -181,7 +181,7 @@ println!("{}", x);  // OK
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-#### 不可变借用 (&T)
+#### 不可变借用 (&T) {#不可变借用-t}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -213,7 +213,7 @@ println!("{}", x);  // OK
 
 - 原所有者不能修改数据
 
-#### 可变借用 (&mut T)
+#### 可变借用 (&mut T) {#可变借用-mut-t}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -245,7 +245,7 @@ println!("{}", x);  // OK
 
 - 原所有者暂时不能访问数据
 
-#### 借用规则总结
+#### 借用规则总结 {#借用规则总结}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -259,7 +259,7 @@ println!("{}", x);  // OK
 
 ---
 
-### 1.3 生命周期 (Lifetime)
+### 1.3 生命周期 (Lifetime) {#13-生命周期-lifetime}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -303,13 +303,13 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ---
 
-## 二、类型系统
+## 二、类型系统 {#二类型系统}
 
 >
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 2.1 类型安全
+### 2.1 类型安全 {#21-类型安全}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -329,7 +329,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ```
 
-### 2.2 型变 (Variance)
+### 2.2 型变 (Variance) {#22-型变-variance}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -353,7 +353,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 - 不变：必须完全相同
 
-### 2.3 Trait系统
+### 2.3 Trait系统 {#23-trait系统}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -391,13 +391,13 @@ impl Trait: 静态分发，编译时确定
 
 ---
 
-## 三、生命周期
+## 三、生命周期 {#三生命周期}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 3.1 生命周期省略规则
+### 3.1 生命周期省略规则 {#31-生命周期省略规则}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -409,7 +409,7 @@ Rust编译器会自动推断生命周期，遵循以下规则：
 
 **规则 3**: 如果有多个输入生命周期，但一个是`&self`或`&mut self`，则`self`的生命周期赋给所有输出
 
-### 3.2 生命周期边界
+### 3.2 生命周期边界 {#32-生命周期边界}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -425,13 +425,13 @@ Rust编译器会自动推断生命周期，遵循以下规则：
 
 ---
 
-## 四、并发与异步
+## 四、并发与异步 {#四并发与异步}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 4.1 Send与Sync
+### 4.1 Send与Sync {#41-send与sync}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -473,7 +473,7 @@ Rust编译器会自动推断生命周期，遵循以下规则：
 
 | `RefCell<T>` | ✅ | ❌ | 运行时借用 |
 
-### 4.2 异步与Future
+### 4.2 异步与Future {#42-异步与future}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -511,13 +511,13 @@ Wake -> poll() -> ...
 
 ---
 
-## 五、分布式模式
+## 五、分布式模式 {#五分布式模式}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 5.1 Saga模式
+### 5.1 Saga模式 {#51-saga模式}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -557,7 +557,7 @@ Saga = [LocalTx₁, LocalTx₂, ..., LocalTxₙ]
 
 ```
 
-### 5.2 CQRS模式
+### 5.2 CQRS模式 {#52-cqrs模式}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -583,7 +583,7 @@ Query   ← Read Model ← Projector
 
 - 事件溯源
 
-### 5.3 熔断器模式
+### 5.3 熔断器模式 {#53-熔断器模式}
 
 >
 
@@ -605,13 +605,13 @@ Closed (正常) --失败率>阈值--> Open (熔断)
 
 ---
 
-## 六、工作流
+## 六、工作流 {#六工作流}
 
 >
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 6.1 状态机工作流
+### 6.1 状态机工作流 {#61-状态机工作流}
 
 >
 
@@ -635,7 +635,7 @@ F: 终结状态集合
 
 ```
 
-### 6.2 补偿事务
+### 6.2 补偿事务 {#62-补偿事务}
 
 >
 
@@ -661,13 +661,13 @@ T₁, T₂, T₃ 失败 → C₂, C₁
 
 ---
 
-## 附录：反例索引
+## 附录：反例索引 {#附录反例索引}
 
 >
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### A.1 所有权反例
+### A.1 所有权反例 {#a1-所有权反例}
 
 >
 
@@ -693,7 +693,7 @@ println!("{}", x);  // 错误: value borrowed here after move
 
 ```
 
-### A.2 借用反例
+### A.2 借用反例 {#a2-借用反例}
 
 >
 
@@ -729,7 +729,7 @@ let r;
 
 ```
 
-### A.3 Send/Sync反例
+### A.3 Send/Sync反例 {#a3-sendsync反例}
 
 >
 
@@ -765,7 +765,7 @@ thread::spawn(move || {
 
 ---
 
-## 🆕 Rust 1.94 更新
+## 🆕 Rust 1.94 更新 {#rust-194-更新}
 
 >
 
@@ -779,7 +779,7 @@ thread::spawn(move || {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -789,7 +789,7 @@ thread::spawn(move || {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -797,7 +797,7 @@ thread::spawn(move || {
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -811,7 +811,7 @@ thread::spawn(move || {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -821,7 +821,7 @@ thread::spawn(move || {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -853,7 +853,7 @@ thread::spawn(move || {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 

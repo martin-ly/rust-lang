@@ -1,4 +1,4 @@
-# 质量保障 {#-质量保障维度}
+# 质量保障 {#质量保障}
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -10,24 +10,24 @@
 
 ---
 
-## 📋 目录 {#-目录}
+## 📋 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [质量保障 {#-质量保障维度}](#质量保障--质量保障维度)
-  - [📋 目录 {#-目录}](#-目录--目录)
-  - [🎯 宗旨 {#-宗旨}](#-宗旨--宗旨)
-  - [📐 质量保障维度](#-质量保障维度)
-  - [📚 核心文档 {#-核心文档}](#-核心文档--核心文档)
-  - [🔬 形式化验证衔接 {#-形式化验证衔接}](#-形式化验证衔接--形式化验证衔接)
-  - [✅ 质量检查清单 {#-质量检查清单}](#-质量检查清单--质量检查清单)
+- [质量保障](#质量保障)
+  - [📋 目录](#目录)
+  - [🎯 宗旨](#宗旨)
+  - [📐 质量保障维度](#质量保障维度)
+  - [📚 核心文档](#核心文档)
+  - [🔬 形式化验证衔接](#形式化验证衔接)
+  - [✅ 质量检查清单](#质量检查清单)
   - [代码质量示例](#代码质量示例)
     - [测试最佳实践](#测试最佳实践)
     - [MIRI 检测示例](#miri-检测示例)
     - [基准测试示例](#基准测试示例)
     - [代码覆盖率示例](#代码覆盖率示例)
     - [形式化验证示例](#形式化验证示例)
-  - [🔗 与 research\_notes 衔接](#-与-research_notes-衔接)
+  - [🔗 与 research\_notes 衔接](#与-research_notes-衔接)
   - [形式化方法](#形式化方法)
   - [知识结构思维导图](#知识结构思维导图)
   - [与核心文档的关联](#与核心文档的关联)
@@ -35,7 +35,7 @@
 
 ---
 
-## 🎯 宗旨 {#-宗旨}
+## 🎯 宗旨 {#宗旨}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -48,7 +48,7 @@
 
 ---
 
-## 📐 质量保障维度
+## 📐 质量保障维度 {#质量保障维度}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -62,7 +62,7 @@
 
 ---
 
-## 📚 核心文档 {#-核心文档}
+## 📚 核心文档 {#核心文档}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -71,7 +71,7 @@
 
 ---
 
-## 🔬 形式化验证衔接 {#-形式化验证衔接}
+## 🔬 形式化验证衔接 {#形式化验证衔接}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -84,7 +84,7 @@
 
 ---
 
-## ✅ 质量检查清单 {#-质量检查清单}
+## ✅ 质量检查清单 {#质量检查清单}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -97,11 +97,11 @@
 
 ---
 
-## 代码质量示例
+## 代码质量示例 {#代码质量示例}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 测试最佳实践
+### 测试最佳实践 {#测试最佳实践}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -156,7 +156,7 @@ fuzz_target!(|data: &[u8]| {
 });
 ```
 
-### MIRI 检测示例
+### MIRI 检测示例 {#miri-检测示例}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -200,7 +200,7 @@ mod miri_tests {
 }
 ```
 
-### 基准测试示例
+### 基准测试示例 {#基准测试示例}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -226,26 +226,26 @@ criterion_group!(benches, criterion_benchmark);
 criterion_main!(benches);
 ```
 
-### 代码覆盖率示例
+### 代码覆盖率示例 {#代码覆盖率示例}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# 使用 tarpaulin 生成覆盖率报告
+# 使用 tarpaulin 生成覆盖率报告 {#使用-tarpaulin-生成覆盖率报告}
 cargo install cargo-tarpaulin
 cargo tarpaulin --out Html
 
-# 使用 llvm-cov
+# 使用 llvm-cov {#使用-llvm-cov}
 cargo install cargo-llvm-cov
 cargo llvm-cov --html
 
-# CI 中的覆盖率检查
+# CI 中的覆盖率检查 {#ci-中的覆盖率检查}
 cargo tarpaulin --fail-under 80  # 覆盖率必须 >= 80%
 ```
 
-### 形式化验证示例
+### 形式化验证示例 {#形式化验证示例}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -290,7 +290,7 @@ mod contracts {
 
 ---
 
-## 🔗 与 research_notes 衔接
+## 🔗 与 research_notes 衔接 {#与-research_notes-衔接}
 
 | 文档 | 用途 | 路径 |
 | :--- | :--- | :--- |
@@ -307,7 +307,7 @@ mod contracts {
 
 ---
 
-## 形式化方法
+## 形式化方法 {#形式化方法}
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -319,7 +319,7 @@ mod contracts {
 
 ---
 
-## 知识结构思维导图
+## 知识结构思维导图 {#知识结构思维导图}
 
 ```mermaid
 mindmap
@@ -349,7 +349,7 @@ mindmap
       覆盖率检查
 ```
 
-## 与核心文档的关联
+## 与核心文档的关联 {#与核心文档的关联}
 
 | 本文档 | 核心文档 | 关系 |
 | :--- | :--- | :--- |
@@ -372,7 +372,7 @@ mindmap
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 > **来源: [Coq Reference Manual](https://coq.inria.fr/doc/)**

@@ -1,4 +1,4 @@
-# 定理与证明策略汇编
+# 定理与证明策略汇编 {#定理与证明策略汇编}
 
 > **概念族**: 形式化方法
 
@@ -36,12 +36,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [定理与证明策略汇编](#定理与证明策略汇编)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [核心定理索引](#核心定理索引)
   - [一、所有权唯一性定理 (T-OW2)](#一所有权唯一性定理-t-ow2)
     - [1.1 定理陈述](#11-定理陈述)
@@ -55,7 +55,7 @@
     - [2.4 直观理解](#24-直观理解)
   - [三、类型安全定理 (T-TY3)](#三类型安全定理-t-ty3)
     - [3.1 定理陈述](#31-定理陈述)
-    - [3.2 证明策略：进展 + 保持](#32-证明策略进展--保持)
+    - [3.2 证明策略：进展 + 保持](#32-证明策略进展-保持)
     - [3.3 进展性 (T-TY1)](#33-进展性-t-ty1)
     - [3.4 保持性 (T-TY2)](#34-保持性-t-ty2)
     - [3.5 直观理解](#35-直观理解)
@@ -69,11 +69,11 @@
     - [6.1 核心定理学术来源映射](#61-核心定理学术来源映射)
     - [6.2 证明技术与学术方法对应](#62-证明技术与学术方法对应)
   - [七、与机器证明的关系](#七与机器证明的关系)
-    - [L1 → L2 → L3 映射](#l1--l2--l3-映射)
+    - [L1 → L2 → L3 映射](#l1-l2-l3-映射)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 核心定理索引
+## 核心定理索引 {#核心定理索引}
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -95,11 +95,11 @@
 
 ---
 
-## 一、所有权唯一性定理 (T-OW2)
+## 一、所有权唯一性定理 (T-OW2) {#一所有权唯一性定理-t-ow2}
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1.1 定理陈述
+### 1.1 定理陈述 {#11-定理陈述}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -111,7 +111,7 @@
 
 **自然语言**: 每个值在任意时刻只有一个所有者。
 
-### 1.2 证明策略
+### 1.2 证明策略 {#12-证明策略}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -141,7 +141,7 @@
 
 ```
 
-### 1.3 详细证明思路
+### 1.3 详细证明思路 {#13-详细证明思路}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -231,7 +231,7 @@ post: v被释放，x变为Dropped
 
 **关键引理**: 每个操作都是原子性的，不会出现中间状态。
 
-### 1.4 推论
+### 1.4 推论 {#14-推论}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -245,13 +245,13 @@ post: v被释放，x变为Dropped
 
 ---
 
-## 二、数据竞争自由定理 (T-BR1)
+## 二、数据竞争自由定理 (T-BR1) {#二数据竞争自由定理-t-br1}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 定理陈述
+### 2.1 定理陈述 {#21-定理陈述}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -269,7 +269,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 ```
 
-### 2.2 证明策略
+### 2.2 证明策略 {#22-证明策略}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -295,7 +295,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 ```
 
-### 2.3 详细证明思路
+### 2.3 详细证明思路 {#23-详细证明思路}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -361,7 +361,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 **关键观察**: 借用检查器在编译时强制执行上述规则。
 
-### 2.4 直观理解
+### 2.4 直观理解 {#24-直观理解}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -379,13 +379,13 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 ---
 
-## 三、类型安全定理 (T-TY3)
+## 三、类型安全定理 (T-TY3) {#三类型安全定理-t-ty3}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 3.1 定理陈述
+### 3.1 定理陈述 {#31-定理陈述}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -405,7 +405,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 - T-TY2 (保持性): 求值保持类型
 
-### 3.2 证明策略：进展 + 保持
+### 3.2 证明策略：进展 + 保持 {#32-证明策略进展-保持}
 
 >
 
@@ -423,7 +423,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 ```
 
-### 3.3 进展性 (T-TY1)
+### 3.3 进展性 (T-TY1) {#33-进展性-t-ty1}
 
 >
 
@@ -469,7 +469,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 ```
 
-### 3.4 保持性 (T-TY2)
+### 3.4 保持性 (T-TY2) {#34-保持性-t-ty2}
 
 >
 
@@ -515,7 +515,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 ```
 
-### 3.5 直观理解
+### 3.5 直观理解 {#35-直观理解}
 
 >
 
@@ -545,13 +545,13 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 ---
 
-## 四、生命周期有效性定理 (T-LF2)
+## 四、生命周期有效性定理 (T-LF2) {#四生命周期有效性定理-t-lf2}
 
 >
 
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 4.1 定理陈述
+### 4.1 定理陈述 {#41-定理陈述}
 
 >
 
@@ -567,7 +567,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 ```
 
-### 4.2 证明策略
+### 4.2 证明策略 {#42-证明策略}
 
 >
 
@@ -603,13 +603,13 @@ T: 'a  表示 T中所有引用都存活至少'a
 
 ---
 
-## 五、证明技术总结
+## 五、证明技术总结 {#五证明技术总结}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 5.1 常用证明技术
+### 5.1 常用证明技术 {#51-常用证明技术}
 
 >
 
@@ -629,7 +629,7 @@ T: 'a  表示 T中所有引用都存活至少'a
 
 | **构造法** | 存在性命题 | 存在类型安全求值 |
 
-### 5.2 证明检查清单
+### 5.2 证明检查清单 {#52-证明检查清单}
 
 >
 
@@ -649,7 +649,7 @@ T: 'a  表示 T中所有引用都存活至少'a
 
 ---
 
-## 六、证明策略与学术来源对照
+## 六、证明策略与学术来源对照 {#六证明策略与学术来源对照}
 
 >
 
@@ -667,7 +667,7 @@ T: 'a  表示 T中所有引用都存活至少'a
 
 > **来源: [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)**
 
-### 6.1 核心定理学术来源映射
+### 6.1 核心定理学术来源映射 {#61-核心定理学术来源映射}
 
 | 本项目定理 | 证明策略 | 学术来源定理/方法 | 对照说明 |
 
@@ -685,7 +685,7 @@ T: 'a  表示 T中所有引用都存活至少'a
 
 | SYNC-T1 Sync 安全 | 等价推导 | 同上 | `&T: Send` 当且仅当 `T: Sync` |
 
-### 6.2 证明技术与学术方法对应
+### 6.2 证明技术与学术方法对应 {#62-证明技术与学术方法对应}
 
 | 本项目技术 | 学术对应 | 适用定理 |
 
@@ -705,13 +705,13 @@ T: 'a  表示 T中所有引用都存活至少'a
 
 | 案例分析 | 操作语义规则穷举 | T-OW2、T-TY2 |
 
-## 七、与机器证明的关系
+## 七、与机器证明的关系 {#七与机器证明的关系}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### L1 → L2 → L3 映射
+### L1 → L2 → L3 映射 {#l1-l2-l3-映射}
 
 >
 
@@ -753,7 +753,7 @@ T: 'a  表示 T中所有引用都存活至少'a
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -765,7 +765,7 @@ T: 'a  表示 T中所有引用都存活至少'a
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 

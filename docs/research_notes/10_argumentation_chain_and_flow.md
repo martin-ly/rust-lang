@@ -1,4 +1,4 @@
-# 论证脉络关系与论证思路
+# 论证脉络关系与论证思路 {#论证脉络关系与论证思路}
 
 > **概念族**: 论证体系
 
@@ -24,12 +24,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [论证脉络关系与论证思路](#论证脉络关系与论证思路)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、论证思路总览](#一论证思路总览)
     - [1.1 论证五步法](#11-论证五步法)
     - [1.2 论证流向（双向）](#12-论证流向双向)
@@ -45,9 +45,9 @@
     - [4.1 示例：为何「所有权唯一性」⇒「数据竞争自由」？](#41-示例为何所有权唯一性数据竞争自由)
     - [4.2 示例：为何「组合保持内存安全」？](#42-示例为何组合保持内存安全)
   - [五、与现有文档的衔接](#五与现有文档的衔接)
-  - [🆕 Rust 1.94 研究更新](#-rust-194-研究更新)
+  - [🆕 Rust 1.94 研究更新](#rust-194-研究更新)
     - [核心研究点](#核心研究点)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -55,13 +55,13 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 一、论证思路总览
+## 一、论证思路总览 {#一论证思路总览}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1.1 论证五步法
+### 1.1 论证五步法 {#11-论证五步法}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -87,7 +87,7 @@
 
 ```
 
-### 1.2 论证流向（双向）
+### 1.2 论证流向（双向） {#12-论证流向双向}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -169,13 +169,13 @@
 
 ---
 
-## 二、论证脉络关系图
+## 二、论证脉络关系图 {#二论证脉络关系图}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 概念→公理→定理→推论 DAG
+### 2.1 概念→公理→定理→推论 DAG {#21-概念公理定理推论-dag}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -253,7 +253,7 @@ ownership T3            borrow T2                 type T2
 
 ```
 
-### 2.2 三大支柱论证衔接
+### 2.2 三大支柱论证衔接 {#22-三大支柱论证衔接}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -289,7 +289,7 @@ type T3 ────────────────────────
 
 ```
 
-### 2.3 域间定理推导链（显式）
+### 2.3 域间定理推导链（显式） {#23-域间定理推导链显式}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -321,13 +321,13 @@ type T3 ────────────────────────
 
 ---
 
-## 三、文档间论证关系
+## 三、文档间论证关系 {#三文档间论证关系}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 3.1 文档依赖图（论证流向）
+### 3.1 文档依赖图（论证流向） {#31-文档依赖图论证流向}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -395,7 +395,7 @@ software_design_theory
 
 ```
 
-### 3.2 文档引用关系表
+### 3.2 文档引用关系表 {#32-文档引用关系表}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -423,7 +423,7 @@ software_design_theory
 
 | 06_boundary_analysis | 决策 | 04_expressiveness_boundary、formal_methods | 并发选型论证 |
 
-### 3.3 论证链条索引（按问题查）
+### 3.3 论证链条索引（按问题查） {#33-论证链条索引按问题查}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -453,13 +453,13 @@ software_design_theory
 
 ---
 
-## 四、论证思路示例
+## 四、论证思路示例 {#四论证思路示例}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 4.1 示例：为何「所有权唯一性」⇒「数据竞争自由」？
+### 4.1 示例：为何「所有权唯一性」⇒「数据竞争自由」？ {#41-示例为何所有权唯一性数据竞争自由}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -479,7 +479,7 @@ software_design_theory
 
 **文档链**：ownership_model → borrow_checker_proof → FORMAL_FULL_MODEL_OVERVIEW §1.3
 
-### 4.2 示例：为何「组合保持内存安全」？
+### 4.2 示例：为何「组合保持内存安全」？ {#42-示例为何组合保持内存安全}
 
 >
 
@@ -501,7 +501,7 @@ software_design_theory
 
 ---
 
-## 五、与现有文档的衔接
+## 五、与现有文档的衔接 {#五与现有文档的衔接}
 
 >
 
@@ -531,13 +531,13 @@ software_design_theory
 
 ---
 
-## 🆕 Rust 1.94 研究更新
+## 🆕 Rust 1.94 研究更新 {#rust-194-研究更新}
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.96.0+
 
-### 核心研究点
+### 核心研究点 {#核心研究点}
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -555,7 +555,7 @@ software_design_theory
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -563,13 +563,13 @@ software_design_theory
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -583,7 +583,7 @@ software_design_theory
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -593,7 +593,7 @@ software_design_theory
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -625,7 +625,7 @@ software_design_theory
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -637,7 +637,7 @@ software_design_theory
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
 

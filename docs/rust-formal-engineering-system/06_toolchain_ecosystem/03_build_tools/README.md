@@ -12,7 +12,7 @@
 
 ---
 
-## 构建脚本（build.rs）
+## 构建脚本（build.rs） {#构建脚本buildrs}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -42,7 +42,7 @@ fn main() {
 }
 ```
 
-### 平台特定构建
+### 平台特定构建 {#平台特定构建}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -70,7 +70,7 @@ fn main() {
 }
 ```
 
-### 代码生成构建脚本
+### 代码生成构建脚本 {#代码生成构建脚本}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -100,47 +100,47 @@ pub const FEATURES: &[&str] = &["std", "alloc"];
 // include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 ```
 
-### 常用构建工具
+### 常用构建工具 {#常用构建工具}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# cargo-make：任务运行器
+# cargo-make：任务运行器 {#cargo-make任务运行器}
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 cargo install cargo-make
 cargo make build
 cargo make test
 
-# just：命令运行器
+# just：命令运行器 {#just命令运行器}
 cargo install just
 just build
 just test
 
-# cross：交叉编译
+# cross：交叉编译 {#cross交叉编译}
 cargo install cross
 cross build --target aarch64-unknown-linux-gnu
 
-# cargo-chef：Docker 构建优化
+# cargo-chef：Docker 构建优化 {#cargo-chefdocker-构建优化}
 cargo install cargo-chef
 cargo chef prepare
 cargo chef cook --release
 
-# wasm-pack：WASM 构建
+# wasm-pack：WASM 构建 {#wasm-packwasm-构建}
 cargo install wasm-pack
 wasm-pack build --target web
 ```
 
-### Makefile.toml (cargo-make)
+### Makefile.toml (cargo-make) {#makefiletoml-cargo-make}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
-# Makefile.toml
+# Makefile.toml {#makefiletoml}
 [config]
 default_to_workspace = false
 
@@ -167,56 +167,56 @@ dependencies = ["test"]
 dependencies = ["format", "lint", "test", "build"]
 ```
 
-### Justfile 示例
+### Justfile 示例 {#justfile-示例}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```makefile
-# Justfile
+# Justfile {#justfile}
 
-# 默认配方
+# 默认配方 {#默认配方}
 default:
     @just --list
 
-# 格式化代码
+# 格式化代码 {#格式化代码}
 fmt:
     cargo fmt
 
-# 运行 linter
+# 运行 linter {#运行-linter}
 lint:
     cargo clippy -- -D warnings
 
-# 运行测试
+# 运行测试 {#运行测试}
 test:
     cargo test
 
-# 构建发布版本
+# 构建发布版本 {#构建发布版本}
 build:
     cargo build --release
 
-# 运行所有检查
+# 运行所有检查 {#运行所有检查}
 check: fmt lint test
 
-# 清理构建产物
+# 清理构建产物 {#清理构建产物}
 clean:
     cargo clean
     rm -rf target/
 
-# 发布（带确认）
+# 发布（带确认） {#发布带确认}
 release: check
     @echo "Ready for release!"
 ```
 
-### 交叉编译配置
+### 交叉编译配置 {#交叉编译配置}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
-# .cargo/config.toml
+# .cargo/config.toml {#cargoconfigtoml}
 [target.aarch64-unknown-linux-gnu]
 linker = "aarch64-linux-gnu-gcc"
 
@@ -230,7 +230,7 @@ runner = "wasm-bindgen-test-runner"
 target = "x86_64-unknown-linux-musl"  # 静态链接
 ```
 
-### 条件编译完整示例
+### 条件编译完整示例 {#条件编译完整示例}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -268,7 +268,7 @@ mod sync_impl {
 
 ---
 
-## 形式化方法
+## 形式化方法 {#形式化方法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -279,7 +279,7 @@ mod sync_impl {
 | 借用检查器证明 | 借用检查器形式化 | [../../../research_notes/formal_methods/10_borrow_checker_proof.md](../../../research_notes/formal_methods/10_borrow_checker_proof.md) |
 | 证明索引 | 形式化证明集合 | [../../../research_notes/10_proof_index.md](../../../../archive/research_notes_2026_06_25/10_proof_index.md) |
 
-## 相关研究笔记
+## 相关研究笔记 {#相关研究笔记}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -312,7 +312,7 @@ mod sync_impl {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
 > **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**

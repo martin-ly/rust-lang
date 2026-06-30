@@ -1,4 +1,4 @@
-# 异步执行模型形式化
+# 异步执行模型形式化 {#异步执行模型形式化}
 
 > **概念族**: 软件设计 / 执行模型
 
@@ -24,7 +24,7 @@
 
 > **权威来源**: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) | [Tokio Tutorial](https://tokio.rs/tokio/tutorial) | [Rayon Docs](https://docs.rs/rayon/latest/rayon/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -33,7 +33,7 @@
 >
 
 - [异步执行模型形式化](#异步执行模型形式化)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [形式化定义](#形式化定义)
   - [操作语义（简化）](#操作语义简化)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
@@ -51,7 +51,7 @@
   - [边界](#边界)
   - [与 Rust 1.93 的对应](#与-rust-193-的对应)
   - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -73,7 +73,7 @@
 
 ---
 
-## 形式化定义
+## 形式化定义 {#形式化定义}
 
 >
 
@@ -111,7 +111,7 @@ $\mathit{async}\, \{ e \}$ 产生 $\mathrm{Future}\langle \tau \rangle$，其中
 
 ---
 
-## 操作语义（简化）
+## 操作语义（简化） {#操作语义简化}
 
 >
 
@@ -131,7 +131,7 @@ await Pending     →  suspend（挂起，稍后继续）
 
 ---
 
-## Rust 实现与代码示例
+## Rust 实现与代码示例 {#rust-实现与代码示例}
 
 >
 
@@ -223,7 +223,7 @@ impl SelfReferential {
 
 ---
 
-## 典型场景
+## 典型场景 {#典型场景}
 
 >
 
@@ -243,7 +243,7 @@ impl SelfReferential {
 
 ---
 
-## 与同步/并发对比
+## 与同步/并发对比 {#与同步并发对比}
 
 >
 
@@ -261,13 +261,13 @@ impl SelfReferential {
 
 ---
 
-## 运行时与任务调度
+## 运行时与任务调度 {#运行时与任务调度}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Waker 与 Executor
+### Waker 与 Executor {#waker-与-executor}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -303,7 +303,7 @@ Future 执行流程（简化）：
 
 ```
 
-### 多任务组合
+### 多任务组合 {#多任务组合}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -323,7 +323,7 @@ Future 执行流程（简化）：
 
 | `spawn` | 后台任务，不等待 | `tokio::spawn(async { ... })` |
 
-### Stream、异步迭代与背压
+### Stream、异步迭代与背压 {#stream异步迭代与背压}
 
 > **来源: [Rust Reference – Async/Await](https://doc.rust-lang.org/reference/expressions/await-expr.html)**
 
@@ -351,7 +351,7 @@ use futures::stream::Stream;
 
 | 转换 | `StreamExt::map`、`filter`、`fold` | 惰性异步组合 |
 
-### 取消安全（Cancellation Safety）
+### 取消安全（Cancellation Safety） {#取消安全cancellation-safety}
 
 > **来源: [Tokio Docs – Cancellation Safety](https://docs.rs/tokio/latest/tokio/macro.select.html#cancellation-safety)**
 
@@ -371,7 +371,7 @@ use futures::stream::Stream;
 
 **实践**：优先使用 channel 的取消安全 API；对状态敏感操作使用 `tokio_util::sync::CancellationToken` + 结构化取消。
 
-### 结构化并发（Structured Concurrency）
+### 结构化并发（Structured Concurrency） {#结构化并发structured-concurrency}
 
 > **来源: [Tokio Docs – Spawning](https://tokio.rs/tokio/tutorial/spawning)**
 
@@ -415,7 +415,7 @@ async fn parent() -> Result<(), Error> {
 
 | `CancellationToken` | 协作式取消传播 |
 
-### 错误传播与取消
+### 错误传播与取消 {#错误传播与取消}
 
 > **来源: [Tokio Tutorial](https://tokio.rs/tokio/tutorial)**
 
@@ -449,7 +449,7 @@ handle.abort();  // 显式取消
 
 ---
 
-## 运行时选型
+## 运行时选型 {#运行时选型}
 
 >
 
@@ -469,7 +469,7 @@ handle.abort();  // 显式取消
 
 ---
 
-## 反例与边界
+## 反例与边界 {#反例与边界}
 
 >
 
@@ -489,7 +489,7 @@ handle.abort();  // 显式取消
 
 ---
 
-## 边界
+## 边界 {#边界}
 
 >
 
@@ -507,7 +507,7 @@ handle.abort();  // 显式取消
 
 ---
 
-## 与 Rust 1.93 的对应
+## 与 Rust 1.93 的对应 {#与-rust-193-的对应}
 
 >
 
@@ -523,7 +523,7 @@ handle.abort();  // 显式取消
 
 ---
 
-## 实质内容五维自检
+## 实质内容五维自检 {#实质内容五维自检}
 
 >
 
@@ -547,7 +547,7 @@ handle.abort();  // 显式取消
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -555,13 +555,13 @@ handle.abort();  // 显式取消
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -577,7 +577,7 @@ handle.abort();  // 显式取消
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -589,7 +589,7 @@ handle.abort();  // 显式取消
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -623,7 +623,7 @@ handle.abort();  // 显式取消
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -635,7 +635,7 @@ handle.abort();  // 显式取消
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)**
 

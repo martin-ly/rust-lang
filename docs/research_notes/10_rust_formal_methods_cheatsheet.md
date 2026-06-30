@@ -1,4 +1,4 @@
-# Rust形式化方法速查卡
+# Rust形式化方法速查卡 {#rust形式化方法速查卡}
 >
 > **概念族**: 形式化方法
 
@@ -14,12 +14,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust形式化方法速查卡](#rust形式化方法速查卡)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [核心概念速查](#核心概念速查)
     - [所有权规则](#所有权规则)
     - [借用规则](#借用规则)
@@ -28,7 +28,7 @@
     - [省略规则](#省略规则)
   - [Send/Sync速查](#sendsync速查)
   - [核心定理速查](#核心定理速查)
-  - [证明技术速查](#证明技术速查)
+  - [证明技术速查](#证明技术速查-1)
   - [验证工具速查](#验证工具速查)
   - [设计模式速查](#设计模式速查)
     - [创建型](#创建型)
@@ -64,7 +64,7 @@
     - [进阶者 (4-8周)](#进阶者-4-8周)
     - [专家 (8-24周)](#专家-8-24周)
   - [文档导航](#文档导航)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -72,11 +72,11 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 核心概念速查
+## 核心概念速查 {#核心概念速查}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 所有权规则
+### 所有权规则 {#所有权规则}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -96,7 +96,7 @@ let s1 = s;  // s所有权移动到s1，s失效
 let len = calculate_length(&s1);  // 借用s1
 ```
 
-### 借用规则
+### 借用规则 {#借用规则}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -110,11 +110,11 @@ let len = calculate_length(&s1);  // 借用s1
 
 ---
 
-## 生命周期速查
+## 生命周期速查 {#生命周期速查}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 语法
+### 语法 {#语法}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -132,7 +132,7 @@ where 'a: 'b  // 'a 至少和 'b 一样长
 struct Parser<'a> { input: &'a str }
 ```
 
-### 省略规则
+### 省略规则 {#省略规则}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -144,7 +144,7 @@ struct Parser<'a> { input: &'a str }
 
 ---
 
-## Send/Sync速查
+## Send/Sync速查 {#sendsync速查}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -161,7 +161,7 @@ struct Parser<'a> { input: &'a str }
 
 ---
 
-## 核心定理速查
+## 核心定理速查 {#核心定理速查}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -176,7 +176,7 @@ struct Parser<'a> { input: &'a str }
 
 ---
 
-## 证明技术速查
+## 证明技术速查 {#证明技术速查-1}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -190,7 +190,7 @@ struct Parser<'a> { input: &'a str }
 
 ---
 
-## 验证工具速查
+## 验证工具速查 {#验证工具速查}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -203,11 +203,11 @@ struct Parser<'a> { input: &'a str }
 
 ---
 
-## 设计模式速查
+## 设计模式速查 {#设计模式速查}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 创建型
+### 创建型 {#创建型}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -217,7 +217,7 @@ struct Parser<'a> { input: &'a str }
 | Builder | 复杂构造 | 消费式builder |
 | Singleton | 唯一实例 | `LazyLock` |
 
-### 结构型
+### 结构型 {#结构型}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -227,7 +227,7 @@ struct Parser<'a> { input: &'a str }
 | Decorator | 动态增强 | Trait对象 |
 | Proxy | 访问控制 | 智能指针 |
 
-### 行为型
+### 行为型 {#行为型}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -239,11 +239,11 @@ struct Parser<'a> { input: &'a str }
 
 ---
 
-## unsafe速查
+## unsafe速查 {#unsafe速查}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 安全承诺
+### 安全承诺 {#安全承诺}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -256,7 +256,7 @@ unsafe {
 }
 ```
 
-### 常见unsafe操作
+### 常见unsafe操作 {#常见unsafe操作}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -269,11 +269,11 @@ unsafe {
 
 ---
 
-## 异步速查
+## 异步速查 {#异步速查}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### Future基础
+### Future基础 {#future基础}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -286,7 +286,7 @@ fn foo() -> impl Future<Output = i32> {
 }
 ```
 
-### 组合操作
+### 组合操作 {#组合操作}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -297,7 +297,7 @@ fn foo() -> impl Future<Output = i32> {
 | `select!` | 竞赛等待 | `select!(f1, f2)` |
 | `spawn` | 后台任务 | `tokio::spawn(future)` |
 
-### 取消安全
+### 取消安全 {#取消安全}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -312,11 +312,11 @@ async fn safe_write(path: &str, data: &[u8]) {
 
 ---
 
-## 并发模式速查
+## 并发模式速查 {#并发模式速查}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 共享状态
+### 共享状态 {#共享状态}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -331,7 +331,7 @@ data.read().unwrap();
 data.write().unwrap().push(1);
 ```
 
-### 消息传递
+### 消息传递 {#消息传递}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -348,7 +348,7 @@ tx.send("hello").unwrap();
 
 ---
 
-## 常见错误速查
+## 常见错误速查 {#常见错误速查}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -361,7 +361,7 @@ tx.send("hello").unwrap();
 
 ---
 
-## 资源导航
+## 资源导航 {#资源导航}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -374,11 +374,11 @@ tx.send("hello").unwrap();
 
 ---
 
-## 核心概念 (Core Concepts)
+## 核心概念 (Core Concepts) {#核心概念-core-concepts}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 所有权三规则
+### 所有权三规则 {#所有权三规则}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -388,7 +388,7 @@ tx.send("hello").unwrap();
 3. 所有权可以转移(Move)或借用(Borrow)
 ```
 
-### 借用两规则
+### 借用两规则 {#借用两规则}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -397,7 +397,7 @@ tx.send("hello").unwrap();
 规则2: 引用必须始终有效（不能悬垂）
 ```
 
-### 生命周期关系
+### 生命周期关系 {#生命周期关系}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -409,7 +409,7 @@ T: 'a   →  T中所有引用存活至少 'a
 
 ---
 
-## 核心定理 (Core Theorems)
+## 核心定理 (Core Theorems) {#核心定理-core-theorems}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -422,7 +422,7 @@ T: 'a   →  T中所有引用存活至少 'a
 
 ---
 
-## Send与Sync矩阵
+## Send与Sync矩阵 {#send与sync矩阵}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -443,7 +443,7 @@ T: 'a   →  T中所有引用存活至少 'a
 
 ---
 
-## 型变规则 (Variance)
+## 型变规则 (Variance) {#型变规则-variance}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -460,7 +460,7 @@ T: 'a   →  T中所有引用存活至少 'a
 
 ---
 
-## 分布式模式速查
+## 分布式模式速查 {#分布式模式速查}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -474,11 +474,11 @@ T: 'a   →  T中所有引用存活至少 'a
 
 ---
 
-## 常见错误与修复
+## 常见错误与修复 {#常见错误与修复}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 错误1: 使用已移动值
+### 错误1: 使用已移动值 {#错误1-使用已移动值}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -494,7 +494,7 @@ let y = x.clone();   // 克隆
 let y = &x;          // 借用
 ```
 
-### 错误2: 借用冲突
+### 错误2: 借用冲突 {#错误2-借用冲突}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -513,7 +513,7 @@ println!("{}", r1);
 let r2 = &mut x;  // OK
 ```
 
-### 错误3: Rc跨线程
+### 错误3: Rc跨线程 {#错误3-rc跨线程}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -533,7 +533,7 @@ thread::spawn(move || {
 
 ---
 
-## 证明技术速查
+## 证明技术速查 {#证明技术速查-1}
 
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -547,11 +547,11 @@ thread::spawn(move || {
 
 ---
 
-## 学习路径速查
+## 学习路径速查 {#学习路径速查}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 初学者 (2-4周)
+### 初学者 (2-4周) {#初学者-2-4周}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -559,7 +559,7 @@ thread::spawn(move || {
 所有权 → 借用 → 生命周期 → Send/Sync
 ```
 
-### 进阶者 (4-8周)
+### 进阶者 (4-8周) {#进阶者-4-8周}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -567,7 +567,7 @@ thread::spawn(move || {
 形式化定义 → 核心定理 → 型变 → 证明思路
 ```
 
-### 专家 (8-24周)
+### 专家 (8-24周) {#专家-8-24周}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -577,7 +577,7 @@ Coq → Iris → RustBelt → 工具开发
 
 ---
 
-## 文档导航
+## 文档导航 {#文档导航}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -595,19 +595,19 @@ Coq → Iris → RustBelt → 工具开发
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -616,7 +616,7 @@ Coq → Iris → RustBelt → 工具开发
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -624,7 +624,7 @@ Coq → Iris → RustBelt → 工具开发
 - ✅ 兼容Edition 2024
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 - Rust 1.94 特性速查
@@ -648,7 +648,7 @@ Coq → Iris → RustBelt → 工具开发
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -657,7 +657,7 @@ Coq → Iris → RustBelt → 工具开发
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 > **来源: [Coq Reference](https://coq.inria.fr/doc/)**

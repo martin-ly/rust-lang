@@ -1,4 +1,4 @@
-# 部署指南
+# 部署指南 {#部署指南}
 
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
@@ -6,7 +6,7 @@
 
 本文档介绍如何将本项目部署到不同环境。
 
-## 目录
+## 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -32,48 +32,48 @@
   - [参考](#参考)
   - [权威来源索引](#权威来源索引)
 
-## Docker 部署
+## Docker 部署 {#docker-部署}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 单机部署
+### 单机部署 {#单机部署}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# 构建镜像
+# 构建镜像 {#构建镜像}
 docker build -t rust-lang:latest .
 
-# 运行容器
+# 运行容器 {#运行容器}
 docker run -d -p 8080:8080 --name rust-lang rust-lang:latest
 ```
 
-### 使用 Docker Compose
+### 使用 Docker Compose {#使用-docker-compose}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
-# 启动所有服务
+# 启动所有服务 {#启动所有服务}
 docker-compose up -d
 
-# 查看状态
+# 查看状态 {#查看状态}
 docker-compose ps
 ```
 
 更多详情参见 [06_docker_guide.md](06_docker_guide.md)
 
-## Kubernetes 部署
+## Kubernetes 部署 {#kubernetes-部署}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 前置要求
+### 前置要求 {#前置要求}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - Kubernetes 集群 (1.20+)
 - kubectl 已配置
 
-### 部署步骤
+### 部署步骤 {#部署步骤}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -102,7 +102,7 @@ docker-compose ps
    kubectl get svc rust-lang-service
    ```
 
-### 扩展副本
+### 扩展副本 {#扩展副本}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -110,7 +110,7 @@ docker-compose ps
 kubectl scale deployment rust-lang-deployment --replicas=5
 ```
 
-### 更新镜像
+### 更新镜像 {#更新镜像}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -118,7 +118,7 @@ kubectl scale deployment rust-lang-deployment --replicas=5
 kubectl set image deployment/rust-lang-deployment rust-lang=rust-lang:v2.0
 ```
 
-### 查看日志
+### 查看日志 {#查看日志}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -126,11 +126,11 @@ kubectl set image deployment/rust-lang-deployment rust-lang=rust-lang:v2.0
 kubectl logs -f deployment/rust-lang-deployment
 ```
 
-## Nix 部署
+## Nix 部署 {#nix-部署}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 使用 Nix 构建
+### 使用 Nix 构建 {#使用-nix-构建}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -138,7 +138,7 @@ kubectl logs -f deployment/rust-lang-deployment
 nix build
 ```
 
-### 运行 Nix 开发 Shell
+### 运行 Nix 开发 Shell {#运行-nix-开发-shell}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -148,11 +148,11 @@ nix develop
 
 更多详情参见 [01_nix_setup.md](01_nix_setup.md)
 
-## 环境配置
+## 环境配置 {#环境配置}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 生产环境变量
+### 生产环境变量 {#生产环境变量}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -162,7 +162,7 @@ nix develop
 | `RUST_BACKTRACE` | 错误回溯 | 否 |
 | `APP_ENVIRONMENT` | 运行环境 | 是 |
 
-## 健康检查
+## 健康检查 {#健康检查}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -171,7 +171,7 @@ nix develop
 - `/health` - 存活检查
 - `/ready` - 就绪检查
 
-## 监控
+## 监控 {#监控}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -181,7 +181,7 @@ nix develop
 - **Grafana**: 可视化监控
 - **Loki**: 日志聚合
 
-## 安全建议
+## 安全建议 {#安全建议}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -191,7 +191,7 @@ nix develop
 4. 启用网络策略
 5. 使用 Secrets 管理敏感信息
 
-## 参考
+## 参考 {#参考}
 
 - [Docker 官方文档](https://docs.docker.com/)
 - [Kubernetes 官方文档](https://kubernetes.io/docs/)
@@ -210,7 +210,7 @@ nix develop
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

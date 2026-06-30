@@ -1,4 +1,4 @@
-# Embassy 异步嵌入式框架深度指南
+# Embassy 异步嵌入式框架深度指南 {#embassy-异步嵌入式框架深度指南}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 >
@@ -10,12 +10,12 @@
 > **后置延伸**: [concept L6 嵌入式](../../concept/06_ecosystem/22_embedded_systems.md)
 > **跨层映射**: L3 async → L6 嵌入式工程映射
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Embassy 异步嵌入式框架深度指南](#embassy-异步嵌入式框架深度指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 引言](#1-引言)
   - [2. 裸机 async executor 架构](#2-裸机-async-executor-架构)
     - [2.1 单线程 Executor 设计](#21-单线程-executor-设计)
@@ -29,7 +29,7 @@
     - [4.1 实时性光谱](#41-实时性光谱)
     - [4.2 互操作模式](#42-互操作模式)
   - [5. svd2rust PAC 生成工作流](#5-svd2rust-pac-生成工作流)
-    - [5.1 SVD → Rust 的类型安全映射](#51-svd--rust-的类型安全映射)
+    - [5.1 SVD → Rust 的类型安全映射](#51-svd-rust-的类型安全映射)
     - [5.2 Peripherals 单例模式](#52-peripherals-单例模式)
     - [5.3 unsafe 边界封装](#53-unsafe-边界封装)
   - [6. defmt 高效日志系统](#6-defmt-高效日志系统)
@@ -53,7 +53,7 @@
 
 ---
 
-## 1. 引言
+## 1. 引言 {#1-引言}
 
 > [来源: [Embassy Book](https://embassy.dev/book/)]
 
@@ -73,7 +73,7 @@ Embassy 是 Rust 嵌入式生态中**异步优先 (async-first)** 的 dominant f
 
 ---
 
-## 2. 裸机 async executor 架构
+## 2. 裸机 async executor 架构 {#2-裸机-async-executor-架构}
 
 > [来源: [Embassy Book - Executor](https://embassy.dev/book/dev/runtime.html)]
 
@@ -99,7 +99,7 @@ graph TB
     style W fill:#e3f2fd
 ```
 
-### 2.1 单线程 Executor 设计
+### 2.1 单线程 Executor 设计 {#21-单线程-executor-设计}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -128,7 +128,7 @@ pub fn run(&'static mut self) -> ! {
 
 > [来源: [Embassy 源码 - embassy-executor](https://github.com/embassy-rs/embassy)]
 
-### 2.2 Waker 的中断实现
+### 2.2 Waker 的中断实现 {#22-waker-的中断实现}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -159,7 +159,7 @@ fn TIM2() {
 
 > [来源: [Embassy Book - Time](https://embassy.dev/book/dev/time.html)]
 
-### 2.3 任务调度模型
+### 2.3 任务调度模型 {#23-任务调度模型}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -199,11 +199,11 @@ async fn sensor_task(adc: ADC1) {
 
 ---
 
-## 3. HAL 抽象层设计
+## 3. HAL 抽象层设计 {#3-hal-抽象层设计}
 
 > [来源: [embedded-hal 文档](https://docs.rs/embedded-hal/latest/embedded_hal/)]
 
-### 3.1 embassy-hal trait 体系
+### 3.1 embassy-hal trait 体系 {#31-embassy-hal-trait-体系}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -249,7 +249,7 @@ pub trait UartRx<'a, T: Instance> {
 
 > [来源: [embassy-embedded-hal 文档](https://docs.rs/embassy-embedded-hal/latest/embassy_embedded_hal/)]
 
-### 3.2 embedded-hal 1.0 兼容性
+### 3.2 embedded-hal 1.0 兼容性 {#32-embedded-hal-10-兼容性}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -266,7 +266,7 @@ pub trait UartRx<'a, T: Instance> {
 
 > [来源: [embedded-hal 1.0 发布说明](https://github.com/rust-embedded/embedded-hal)]
 
-### 3.3 驱动可移植性
+### 3.3 驱动可移植性 {#33-驱动可移植性}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -297,11 +297,11 @@ where
 
 ---
 
-## 4. 与 RTIC 的对比与互操作
+## 4. 与 RTIC 的对比与互操作 {#4-与-rtic-的对比与互操作}
 
 > [来源: [RTIC Book](https://rtic-rs.github.io/book/)] · [Embassy Book](https://embassy.dev/book/)]
 
-### 4.1 实时性光谱
+### 4.1 实时性光谱 {#41-实时性光谱}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -327,7 +327,7 @@ graph LR
 
 > [来源: [RTIC Book - Scheduling](https://rtic-rs.github.io/book/)]
 
-### 4.2 互操作模式
+### 4.2 互操作模式 {#42-互操作模式}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -398,13 +398,13 @@ async fn tcp_server_task() {
 
 ---
 
-## 5. svd2rust PAC 生成工作流
+## 5. svd2rust PAC 生成工作流 {#5-svd2rust-pac-生成工作流}
 
 > [来源: [svd2rust 文档](https://docs.rs/svd2rust/latest/svd2rust/)]
 
 SVD (System View Description) 是 ARM 定义的 XML 格式，描述微控制器的完整寄存器映射。`svd2rust` 将此描述转换为类型安全的 Rust PAC (Peripheral Access Crate)。
 
-### 5.1 SVD → Rust 的类型安全映射
+### 5.1 SVD → Rust 的类型安全映射 {#51-svd-rust-的类型安全映射}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -440,7 +440,7 @@ svd2rust 生成的 Rust API:
 
 > [来源: [svd2rust 使用指南](https://docs.rs/svd2rust/latest/svd2rust/)]
 
-### 5.2 Peripherals 单例模式
+### 5.2 Peripherals 单例模式 {#52-peripherals-单例模式}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -470,7 +470,7 @@ let p = Peripherals::take().unwrap(); // 第一次调用成功
 
 > [来源: [Rust Embedded Book - Singletons](https://docs.rust-embedded.org/book/peripherals/singletons.html)]
 
-### 5.3 unsafe 边界封装
+### 5.3 unsafe 边界封装 {#53-unsafe-边界封装}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -497,13 +497,13 @@ led.set_high(); // 完全 safe，内部封装了 unsafe 边界
 
 ---
 
-## 6. defmt 高效日志系统
+## 6. defmt 高效日志系统 {#6-defmt-高效日志系统}
 
 > [来源: [defmt 文档](https://defmt.ferrous-systems.com/)]
 
 `defmt` (deferred formatting) 是嵌入式 Rust 的日志框架，针对资源受限环境进行了极致优化。
 
-### 6.1 字符串表架构
+### 6.1 字符串表架构 {#61-字符串表架构}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -547,14 +547,14 @@ info!("Temperature: {}°C, Humidity: {}%", temp, humidity);
 
 > [来源: [defmt Book](https://defmt.ferrous-systems.com/)]
 
-### 6.2 编译时过滤
+### 6.2 编译时过滤 {#62-编译时过滤}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 defmt 支持通过环境变量在**编译期**过滤日志级别，被过滤的日志不会进入二进制：
 
 ```toml
-# .cargo/config.toml
+# .cargo/config.toml {#cargoconfigtoml}
 [env]
 DEFMT_LOG = "info"  # 只编译 info 及以上级别日志
 ```
@@ -578,11 +578,11 @@ info!("Sensor reading: {}", value);            // 保留
 
 ---
 
-## 7. 代码示例
+## 7. 代码示例 {#7-代码示例}
 
 > [来源: [Embassy 示例代码](https://github.com/embassy-rs/embassy/tree/main/examples)]
 
-### 7.1 异步 LED 闪烁
+### 7.1 异步 LED 闪烁 {#71-异步-led-闪烁}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -614,7 +614,7 @@ async fn main(_spawner: Spawner) {
 
 > [来源: [Embassy STM32 Examples](https://github.com/embassy-rs/embassy/tree/main/examples/stm32f4)]
 
-### 7.2 异步 UART 收发
+### 7.2 异步 UART 收发 {#72-异步-uart-收发}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -668,7 +668,7 @@ async fn main(spawner: Spawner) {
 
 > [来源: [Embassy UART 文档](https://docs.rs/embassy-stm32/latest/embassy_stm32/usart/)]
 
-### 7.3 SPI DMA 传输
+### 7.3 SPI DMA 传输 {#73-spi-dma-传输}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -705,7 +705,7 @@ async fn main(_spawner: Spawner) {
 
 > [来源: [Embassy SPI 文档](https://docs.rs/embassy-stm32/latest/embassy_stm32/spi/)]
 
-### 7.4 ESP32 WiFi 连接
+### 7.4 ESP32 WiFi 连接 {#74-esp32-wifi-连接}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -798,7 +798,7 @@ async fn main(spawner: Spawner) {
 
 ---
 
-## 8. 权威来源索引
+## 8. 权威来源索引 {#8-权威来源索引}
 
 > [来源: [Embassy Book](https://embassy.dev/book/)]
 > [来源: [RTIC Book](https://rtic-rs.github.io/book/)]
@@ -821,7 +821,7 @@ async fn main(spawner: Spawner) {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [crates.io](https://crates.io/)]**
 >

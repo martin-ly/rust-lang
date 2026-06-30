@@ -1,4 +1,4 @@
-# Rust 应用分析论证视图
+# Rust 应用分析论证视图 {#rust-应用分析论证视图}
 
 > **分级**: [B]
 > **Bloom 层级**: L4-L5 (分析/评价)
@@ -9,7 +9,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -30,7 +30,7 @@
   - [跨场景选型矩阵（表格式）](#跨场景选型矩阵表格式)
   - [选型冲突与化解](#选型冲突与化解)
   - [与形式化体系衔接](#与形式化体系衔接)
-  - [相关文档](#相关文档)
+  - [相关文档](#相关文档-1)
   - [Rust 1.95+ 思维表征更新](#rust-195-思维表征更新)
     - [新增思维表征](#新增思维表征)
     - [示例](#示例)
@@ -43,7 +43,7 @@
 
 ---
 
-## 应用场景选型决策树
+## 应用场景选型决策树 {#应用场景选型决策树}
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -63,7 +63,7 @@
 
 ---
 
-## CLI 工具
+## CLI 工具 {#cli-工具}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -79,7 +79,7 @@
 
 ---
 
-## Web 服务
+## Web 服务 {#web-服务}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -96,7 +96,7 @@
 
 ---
 
-## 系统编程
+## 系统编程 {#系统编程}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -111,7 +111,7 @@
 
 ---
 
-## 嵌入式
+## 嵌入式 {#嵌入式}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -126,7 +126,7 @@
 
 ---
 
-## 分布式系统
+## 分布式系统 {#分布式系统}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -141,7 +141,7 @@
 
 ---
 
-## 数据科学
+## 数据科学 {#数据科学}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -157,7 +157,7 @@
 
 ---
 
-## 游戏引擎
+## 游戏引擎 {#游戏引擎}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -173,7 +173,7 @@
 
 ---
 
-## 区块链与智能合约
+## 区块链与智能合约 {#区块链与智能合约}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -189,7 +189,7 @@
 
 ---
 
-## WASM 与跨平台
+## WASM 与跨平台 {#wasm-与跨平台}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -205,7 +205,7 @@
 
 ---
 
-## DevOps 与 CI
+## DevOps 与 CI {#devops-与-ci}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -220,7 +220,7 @@
 
 ---
 
-## 跨场景选型矩阵
+## 跨场景选型矩阵 {#跨场景选型矩阵}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -260,7 +260,7 @@ flowchart LR
 
 ---
 
-## 跨场景选型矩阵（表格式）
+## 跨场景选型矩阵（表格式） {#跨场景选型矩阵表格式}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -276,7 +276,7 @@ flowchart LR
 
 ---
 
-## 选型冲突与化解
+## 选型冲突与化解 {#选型冲突与化解}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -288,7 +288,7 @@ flowchart LR
 
 ---
 
-## 与形式化体系衔接
+## 与形式化体系衔接 {#与形式化体系衔接}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -301,7 +301,7 @@ flowchart LR
 
 ---
 
-## 相关文档
+## 相关文档 {#相关文档-1}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -314,13 +314,13 @@ flowchart LR
 
 ---
 
-## Rust 1.95+ 思维表征更新
+## Rust 1.95+ 思维表征更新 {#rust-195-思维表征更新}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.96.0+
 
-### 新增思维表征
+### 新增思维表征 {#新增思维表征}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -332,7 +332,7 @@ Rust 新特性可扩展思维表征方式：
 | ControlFlow | 决策树 | 控制流的提前终止决策 |
 | LazyCell/LazyLock | 状态图 | 延迟初始化的状态转换 |
 
-### 示例
+### 示例 {#示例}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -348,20 +348,20 @@ Rust 新特性可扩展思维表征方式：
 
 ---
 
-## Rust 1.95+ 持续更新更新
+## Rust 1.95+ 持续更新更新 {#rust-195-持续更新更新}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.95+更新要点
+### 本文档的Rust 1.95+更新要点 {#本文档的rust-195更新要点}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 本文档已针对 **Rust 1.95+** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -372,7 +372,7 @@ Rust 新特性可扩展思维表征方式：
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -382,7 +382,7 @@ Rust 新特性可扩展思维表征方式：
 - ✅ 兼容Edition 2024
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档-1}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -403,7 +403,7 @@ Rust 新特性可扩展思维表征方式：
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

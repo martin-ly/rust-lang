@@ -1,4 +1,4 @@
-# 所有权与借用反例边界
+# 所有权与借用反例边界 {#所有权与借用反例边界}
 
 > **内容分级**: [核心级]
 > **层级**: L6 (反例边界)
@@ -11,34 +11,34 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [所有权与借用反例边界](#所有权与借用反例边界)
   - [目录](#目录)
   - [1. 使用已移动的值](#1-使用已移动的值)
-    - [现象](#现象)
-    - [编译器错误](#编译器错误)
-    - [修复方案](#修复方案)
+    - [现象](#现象-6)
+    - [编译器错误](#编译器错误-5)
+    - [修复方案](#修复方案-6)
   - [2. 同一作用域内多次可变借用](#2-同一作用域内多次可变借用)
-    - [现象](#现象-1)
-    - [编译器错误](#编译器错误-1)
-    - [修复方案](#修复方案-1)
+    - [现象](#现象-6)
+    - [编译器错误](#编译器错误-5)
+    - [修复方案](#修复方案-6)
   - [3. 可变与不可变借用重叠](#3-可变与不可变借用重叠)
-    - [现象](#现象-2)
-    - [编译器错误](#编译器错误-2)
-    - [修复方案](#修复方案-2)
+    - [现象](#现象-6)
+    - [编译器错误](#编译器错误-5)
+    - [修复方案](#修复方案-6)
   - [4. 返回悬垂引用](#4-返回悬垂引用)
-    - [现象](#现象-3)
-    - [编译器错误](#编译器错误-3)
-    - [修复方案](#修复方案-3)
+    - [现象](#现象-6)
+    - [编译器错误](#编译器错误-5)
+    - [修复方案](#修复方案-6)
   - [5. 自引用结构体被移动](#5-自引用结构体被移动)
-    - [现象](#现象-4)
-    - [编译器错误](#编译器错误-4)
-    - [修复方案](#修复方案-4)
-  - [6. 错误实现 Send / Sync](#6-错误实现-send--sync)
-    - [现象](#现象-5)
+    - [现象](#现象-6)
+    - [编译器错误](#编译器错误-5)
+    - [修复方案](#修复方案-6)
+  - [6. 错误实现 Send / Sync](#6-错误实现-send-sync)
+    - [现象](#现象-6)
     - [后果](#后果)
-    - [修复方案](#修复方案-5)
+    - [修复方案](#修复方案-6)
   - [7. 生命周期参数不足](#7-生命周期参数不足)
     - [现象](#现象-6)
     - [编译器错误](#编译器错误-5)
@@ -51,9 +51,9 @@
 
 ---
 
-## 1. 使用已移动的值
+## 1. 使用已移动的值 {#1-使用已移动的值}
 
-### 现象
+### 现象 {#现象-6}
 
 ```rust
 let s = String::from("hello");
@@ -61,13 +61,13 @@ let t = s;
 println!("{}", s); // ❌ s 已移动
 ```
 
-### 编译器错误
+### 编译器错误 {#编译器错误-5}
 
 ```text
 error[E0382]: borrow of moved value: `s`
 ```
 
-### 修复方案
+### 修复方案 {#修复方案-6}
 
 - 使用 `clone()` 显式复制堆数据。
 - 使用引用 `&s` 避免移动。
@@ -75,9 +75,9 @@ error[E0382]: borrow of moved value: `s`
 
 ---
 
-## 2. 同一作用域内多次可变借用
+## 2. 同一作用域内多次可变借用 {#2-同一作用域内多次可变借用}
 
-### 现象
+### 现象 {#现象-6}
 
 ```rust
 let mut v = vec![1, 2, 3];
@@ -86,22 +86,22 @@ let b = &mut v; // ❌ 第二个可变借用
 a.push(4);
 ```
 
-### 编译器错误
+### 编译器错误 {#编译器错误-5}
 
 ```text
 error[E0499]: cannot borrow `v` as mutable more than once at a time
 ```
 
-### 修复方案
+### 修复方案 {#修复方案-6}
 
 - 缩小借用作用域，使两次借用不重叠。
 - 按索引或 split 分割集合，如 `split_first_mut()`。
 
 ---
 
-## 3. 可变与不可变借用重叠
+## 3. 可变与不可变借用重叠 {#3-可变与不可变借用重叠}
 
-### 现象
+### 现象 {#现象-6}
 
 ```rust
 let mut v = vec![1, 2, 3];
@@ -110,22 +110,22 @@ v.push(4); // ❌ 不可变借用 first 仍有效
 println!("{}", first);
 ```
 
-### 编译器错误
+### 编译器错误 {#编译器错误-5}
 
 ```text
 error[E0502]: cannot borrow `v` as mutable because it is also borrowed as immutable
 ```
 
-### 修复方案
+### 修复方案 {#修复方案-6}
 
 - 将读取操作提前到修改之前完成。
 - 使用临时作用域隔离不可变借用。
 
 ---
 
-## 4. 返回悬垂引用
+## 4. 返回悬垂引用 {#4-返回悬垂引用}
 
-### 现象
+### 现象 {#现象-6}
 
 ```rust
 fn dangling() -> &String {
@@ -134,14 +134,14 @@ fn dangling() -> &String {
 }
 ```
 
-### 编译器错误
+### 编译器错误 {#编译器错误-5}
 
 ```text
 error[E0106]: missing lifetime specifier
 error[E0515]: cannot return reference to local variable `s`
 ```
 
-### 修复方案
+### 修复方案 {#修复方案-6}
 
 - 返回拥有所有权的值 `String`。
 - 使用生命周期参数将输入引用与输出引用关联。
@@ -149,9 +149,9 @@ error[E0515]: cannot return reference to local variable `s`
 
 ---
 
-## 5. 自引用结构体被移动
+## 5. 自引用结构体被移动 {#5-自引用结构体被移动}
 
-### 现象
+### 现象 {#现象-6}
 
 ```rust
 struct Parser {
@@ -162,7 +162,7 @@ struct Parser {
 
 `Parser` 被移动后，`current` 仍指向旧地址，导致悬垂。
 
-### 编译器错误
+### 编译器错误 {#编译器错误-5}
 
 ```text
 error[E0106]: missing lifetime specifier
@@ -170,7 +170,7 @@ error[E0106]: missing lifetime specifier
 
 （因为无法表达自引用生命周期）
 
-### 修复方案
+### 修复方案 {#修复方案-6}
 
 - 使用索引 `usize` 代替引用。
 - 使用 `Pin<Box<Self>>` 配合 unsafe 保证不再移动。
@@ -180,9 +180,9 @@ error[E0106]: missing lifetime specifier
 
 ---
 
-## 6. 错误实现 Send / Sync
+## 6. 错误实现 Send / Sync {#6-错误实现-send-sync}
 
-### 现象
+### 现象 {#现象-6}
 
 ```rust
 use std::sync::Arc;
@@ -202,20 +202,20 @@ fn main() {
 }
 ```
 
-### 后果
+### 后果 {#后果}
 
 运行时数据竞争、未定义行为（UB）。编译器不会报错，因为 `unsafe impl` 是用户承诺。
 
-### 修复方案
+### 修复方案 {#修复方案-6}
 
 - 除非完全理解不变量，否则不要手动实现 `Send` / `Sync`。
 - 使用 `std::sync::Mutex`、`RwLock`、`Atomic*` 等线程安全原语包装非线程安全状态。
 
 ---
 
-## 7. 生命周期参数不足
+## 7. 生命周期参数不足 {#7-生命周期参数不足}
 
-### 现象
+### 现象 {#现象-6}
 
 ```rust
 fn longest(x: &str, y: &str) -> &str {
@@ -223,13 +223,13 @@ fn longest(x: &str, y: &str) -> &str {
 }
 ```
 
-### 编译器错误
+### 编译器错误 {#编译器错误-5}
 
 ```text
 error[E0106]: missing lifetime specifier
 ```
 
-### 修复方案
+### 修复方案 {#修复方案-6}
 
 ```rust
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
@@ -241,7 +241,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ---
 
-## 总结
+## 总结 {#总结}
 
 | 反例 | 违反规则 | 典型错误码 | 修复方向 |
 |------|----------|------------|----------|
@@ -255,7 +255,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 > **权威来源**: [Rust Reference – Ownership](https://doc.rust-lang.org/reference/ownership.html) | [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) | [The Rust Programming Language – Ch 4](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) | [The Rust Programming Language – Ch 10](https://doc.rust-lang.org/book/ch10-00-generics.html) | [Rustonomicon – Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) | [Pin and Suffering](https://blog.yoshuawuyts.com/pin-streams/)
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [所有权模型](10_ownership_model.md)
 - [借用检查器证明](10_borrow_checker_proof.md)
@@ -267,7 +267,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ---
 
-## RFC 参考
+## RFC 参考 {#rfc-参考}
 
 > **来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)**
 
@@ -277,7 +277,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 - [RFC 2094: Non-lexical lifetimes](https://rust-lang.github.io/rfcs/2094-nll.html)
 - [RFC 1858: Immovable types](https://github.com/rust-lang/rfcs/pull/1858)
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
 本反例汇编参考以下 P1/P1.5/P2 权威来源：
 
@@ -285,7 +285,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 - [Stacked Borrows](https://plv.mpi-sws.org/rustbos/)
 - [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
 
-## 社区权威参考
+## 社区权威参考 {#社区权威参考}
 
 - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
 - [This Week in Rust](https://this-week-in-rust.org/)

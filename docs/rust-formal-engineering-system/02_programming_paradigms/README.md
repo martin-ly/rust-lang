@@ -1,4 +1,4 @@
-# 编程范式
+# 编程范式 {#编程范式}
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -17,7 +17,7 @@
 
 ---
 
-## 目录结构
+## 目录结构 {#目录结构}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -27,7 +27,7 @@
 | [02_async/](02_async/README.md) | 异步编程模型 |
 | [09_actor_model/](09_actor_model/README.md) | Actor 模型实现 |
 
-### 文档
+### 文档 {#文档}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -37,11 +37,11 @@
 
 ---
 
-## 编程范式概览
+## 编程范式概览 {#编程范式概览}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 同步编程
+### 同步编程 {#同步编程}
 
 ```rust,ignore
 // 顺序执行，确定性行为
@@ -53,7 +53,7 @@ fn synchronous_example() {
 }
 ```
 
-### 异步编程
+### 异步编程 {#异步编程}
 
 ```rust,ignore
 use tokio::time::{sleep, Duration};
@@ -79,7 +79,7 @@ async fn async_operation2() -> String {
 }
 ```
 
-### 并发编程
+### 并发编程 {#并发编程}
 
 ```rust
 use std::thread;
@@ -100,7 +100,7 @@ fn concurrent_example() {
 
 ---
 
-## 与核心文档的关联
+## 与核心文档的关联 {#与核心文档的关联}
 
 | 本文档 | 核心文档 | 关系 |
 | :--- | :--- | :--- |
@@ -120,7 +120,7 @@ fn concurrent_example() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

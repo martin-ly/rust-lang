@@ -1,4 +1,4 @@
-# API 使用指南
+# API 使用指南 {#api-使用指南}
 
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
@@ -8,12 +8,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [API 使用指南](#api-使用指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [快速开始](#快速开始)
     - [添加依赖](#添加依赖)
     - [基本使用](#基本使用)
@@ -32,11 +32,11 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 快速开始
+## 快速开始 {#快速开始}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 添加依赖
+### 添加依赖 {#添加依赖}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -48,7 +48,7 @@ c01_ownership_borrow_scope = { path = "../crates/c01_ownership_borrow_scope" }
 c02_type_system = { path = "../crates/c02_type_system" }
 ```
 
-### 基本使用
+### 基本使用 {#基本使用}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -64,11 +64,11 @@ fn main() {
 
 ---
 
-## Crate API 概览
+## Crate API 概览 {#crate-api-概览}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### c01_ownership_borrow_scope
+### c01_ownership_borrow_scope {#c01_ownership_borrow_scope}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -79,7 +79,7 @@ fn main() {
 | smart_pointers | BoxDemo, RcDemo | 智能指针 |
 | lifetime | LifetimeDemo | 生命周期 |
 
-### c02_type_system
+### c02_type_system {#c02_type_system}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -90,7 +90,7 @@ fn main() {
 | generics | GenericDemo | 泛型基础 |
 | traits | TraitDemo | Trait 系统 |
 
-### c04_generic
+### c04_generic {#c04_generic}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -100,7 +100,7 @@ fn main() {
 | generics | Container | 泛型容器 |
 | gat | ContainerFamily | GAT 示例 |
 
-### c05_threads
+### c05_threads {#c05_threads}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -110,7 +110,7 @@ fn main() {
 | synchronization | MutexWrapper | 互斥锁包装 |
 | lock_free | LockFreeQueue | 无锁队列 |
 
-### c06_async
+### c06_async {#c06_async}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -120,7 +120,7 @@ fn main() {
 | streams | StreamProcessor | 流处理 |
 | web_frameworks | AxumServer | Web 服务器 |
 
-### c08_algorithms
+### c08_algorithms {#c08_algorithms}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -132,11 +132,11 @@ fn main() {
 
 ---
 
-## 最佳实践
+## 最佳实践 {#最佳实践}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 错误处理
+### 错误处理 {#错误处理}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -149,7 +149,7 @@ fn do_something() -> Result<i32> {
 }
 ```
 
-### 异步代码
+### 异步代码 {#异步代码}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -162,7 +162,7 @@ async fn main() {
 }
 ```
 
-### 并发控制
+### 并发控制 {#并发控制}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -175,7 +175,7 @@ let data = Arc::new(Mutex::new(Vec::new()));
 
 ---
 
-## 参考文档
+## 参考文档 {#参考文档}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -200,7 +200,7 @@ let data = Arc::new(Mutex::new(Vec::new()));
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -208,7 +208,7 @@ let data = Arc::new(Mutex::new(Vec::new()));
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

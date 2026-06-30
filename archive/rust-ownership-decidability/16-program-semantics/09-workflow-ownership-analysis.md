@@ -1,7 +1,6 @@
 # 工作流控制模式与 Rust 所有权系统交叉分析
 >
 > **最后更新**: 2026-06-09
-
 > **内容分级**: [归档级]
 >
 > **分级**: [C]
@@ -9,7 +8,13 @@
 
 ## 目录
 
-> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)** · **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)** · **来源: [Russell 2006](https://www.workflowpatterns.com/)** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [Tokio Docs](https://tokio.rs/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)** ·
+> **来源: [van der Aalst 2003](https://www.workflowpatterns.com/)** ·
+> **来源: [Russell 2006](https://www.workflowpatterns.com/)** ·
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** ·
+> **来源: [Tokio Docs](https://tokio.rs/)** ·
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+>
 
 - [工作流控制模式与 Rust 所有权系统交叉分析](#工作流控制模式与-rust-所有权系统交叉分析)
   - [目录](#目录)
@@ -50,7 +55,12 @@
 
 ## 1. 引言
 
-> **[来源: Workflow Patterns Initiative - workflowpatterns.com]** · **来源: [van der Aalst et al. (2003)](https://www.workflowpatterns.com/)** · **来源: [Russell et al. (2006)](https://www.workflowpatterns.com/)** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [TRPL Ch. 4, 8, 16](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
+> **[来源: Workflow Patterns Initiative - workflowpatterns.com]** ·
+> **来源: [van der Aalst et al. (2003)](https://www.workflowpatterns.com/)** ·
+> **来源: [Russell et al. (2006)](https://www.workflowpatterns.com/)** ·
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** ·
+> **来源: [TRPL Ch. 4, 8, 16](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
+>
 
 **工作流控制模式（Workflow Control Patterns, WCP）** 由 van der Aalst 等人于 2003 年系统提出，后经 Russell 等人于 2006 年扩展为 43 个模式，描述业务流程中活动之间的控制流关系。Rust 的所有权系统核心规则可形式化为：
 
@@ -179,7 +189,13 @@ graph LR
 | WCP42 | Interleaved Routing | 🟡 | `Mutex`、交错调度器 |
 | WCP43 | Explicit Termination | 🟢 | `return`、`std::process::exit` |
 
-> **来源: [Workflow Patterns Initiative](https://www.workflowpatterns.com/)** · **来源: [Rust Reference - std::sync/std::thread](https://doc.rust-lang.org/reference/)**
+> **来源:
+>
+> [Workflow Patterns Initiative](https://www.workflowpatterns.com/)** ·
+>
+> **来源:
+>
+> [Rust Reference - std::sync/std::thread](https://doc.rust-lang.org/reference/)**
 
 ---
 

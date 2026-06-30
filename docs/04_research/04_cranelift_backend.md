@@ -1,4 +1,4 @@
-# Cranelift 后端编译加速跟踪报告
+# Cranelift 后端编译加速跟踪报告 {#cranelift-后端编译加速跟踪报告}
 
 > **分级**: [B]
 > **Bloom 层级**: L4-L5 (分析/评价)
@@ -9,12 +9,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Cranelift 后端编译加速跟踪报告](#cranelift-后端编译加速跟踪报告)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. Cranelift 简介](#1-cranelift-简介)
     - [1.1 项目起源](#11-项目起源)
     - [1.2 架构位置](#12-架构位置)
@@ -40,7 +40,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 1. Cranelift 简介
+## 1. Cranelift 简介 {#1-cranelift-简介}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -50,7 +50,7 @@
 - **增量编译友好**: 更适合开发迭代场景
 - **轻量级架构**: 更少的内存占用，更短的启动时间
 
-### 1.1 项目起源
+### 1.1 项目起源 {#11-项目起源}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -67,7 +67,7 @@
 2025  持续优化中，目标: debug 构建速度提升 20-50%
 ```
 
-### 1.2 架构位置
+### 1.2 架构位置 {#12-架构位置}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -106,11 +106,11 @@ Standard (LLVM backend):           Cranelift backend:
 
 ---
 
-## 2. Cranelift 与 LLVM 的对比
+## 2. Cranelift 与 LLVM 的对比 {#2-cranelift-与-llvm-的对比}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 设计哲学差异
+### 2.1 设计哲学差异 {#21-设计哲学差异}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -126,7 +126,7 @@ Standard (LLVM backend):           Cranelift backend:
 | **代码体积** | 优化后较小 | 可能略大 (优化较少) |
 | **调试信息** | 完善 | 基础支持 |
 
-### 2.2 适用场景矩阵
+### 2.2 适用场景矩阵 {#22-适用场景矩阵}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -141,7 +141,7 @@ Standard (LLVM backend):           Cranelift backend:
 | 交叉编译 | **LLVM** | 平台支持更广 |
 | WebAssembly | **Cranelift** | 原生 Wasm 支持 |
 
-### 2.3 性能数据对比
+### 2.3 性能数据对比 {#23-性能数据对比}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -160,11 +160,11 @@ Standard (LLVM backend):           Cranelift backend:
 
 ---
 
-## 3. Rust 中启用 Cranelift 后端
+## 3. Rust 中启用 Cranelift 后端 {#3-rust-中启用-cranelift-后端}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 3.1 必要条件
+### 3.1 必要条件 {#31-必要条件}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -174,14 +174,14 @@ Standard (LLVM backend):           Cranelift backend:
 2. **安装 Cranelift 编译器后端**
 
 ```bash
-# 安装 nightly
+# 安装 nightly {#安装-nightly}
 rustup toolchain install nightly
 
-# 安装 Cranelift 组件
+# 安装 Cranelift 组件 {#安装-cranelift-组件}
 rustup component add rustc-codegen-cranelift-preview --toolchain nightly
 ```
 
-### 3.2 项目级配置
+### 3.2 项目级配置 {#32-项目级配置}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -204,39 +204,39 @@ codegen-backend = "cranelift"
 codegen-backend = "cranelift"
 ```
 
-### 3.3 单次编译配置
+### 3.3 单次编译配置 {#33-单次编译配置}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# 单次使用 Cranelift 构建
+# 单次使用 Cranelift 构建 {#单次使用-cranelift-构建}
 RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build
 
-# 或指定 dev profile
+# 或指定 dev profile {#或指定-dev-profile}
 cargo +nightly build --profile dev
 ```
 
-### 3.4 验证是否生效
+### 3.4 验证是否生效 {#34-验证是否生效}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
-# 编译时输出会显示使用的后端
+# 编译时输出会显示使用的后端 {#编译时输出会显示使用的后端}
 RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build -v
 
-# 预期输出包含:
-# Running `rustc ... -Zcodegen-backend=cranelift ...`
+# 预期输出包含: {#预期输出包含}
+# Running `rustc ... -Zcodegen-backend=cranelift ...` {#running-rustc--zcodegen-backendcranelift}
 ```
 
 ---
 
-## 4. 已知限制与注意事项
+## 4. 已知限制与注意事项 {#4-已知限制与注意事项}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 4.1 当前限制 (2026-04)
+### 4.1 当前限制 (2026-04) {#41-当前限制-2026-04}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -250,7 +250,7 @@ RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build -v
 | 某些 SIMD 指令 | ⚠️ 部分支持 | 正在完善中 |
 | proc-macro | ✅ 支持 | 通过 fallback 到 LLVM |
 
-### 4.2 与本项目的集成建议
+### 4.2 与本项目的集成建议 {#42-与本项目的集成建议}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -262,11 +262,11 @@ RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build -v
 
 ---
 
-## 5. 配置模板
+## 5. 配置模板 {#5-配置模板}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 5.1 推荐的 `.cargo/config.toml` 配置
+### 5.1 推荐的 `.cargo/config.toml` 配置 {#51-推荐的-cargoconfigtoml-配置}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -274,45 +274,45 @@ RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build -v
 
 ```toml
 [unstable]
-# 已存在的配置...
+# 已存在的配置... {#已存在的配置}
 check-cfg = true
-# 新增: 启用 codegen-backend 不稳定特性
+# 新增: 启用 codegen-backend 不稳定特性 {#新增-启用-codegen-backend-不稳定特性}
 codegen-backend = true
 
 [profile.dev]
-# 现有优化配置...
-# 新增 Cranelift 后端 (仅 nightly)
-# 注意: 取消注释以下行以启用，需要 nightly 工具链
-# codegen-backend = "cranelift"
+# 现有优化配置... {#现有优化配置}
+# 新增 Cranelift 后端 (仅 nightly) {#新增-cranelift-后端-仅-nightly}
+# 注意: 取消注释以下行以启用，需要 nightly 工具链 {#注意-取消注释以下行以启用需要-nightly-工具链}
+# codegen-backend = "cranelift" {#codegen-backend-cranelift}
 ```
 
 > 由于 Cranelift 需要 nightly，且本项目使用 stable 1.96 作为默认工具链，
 > 建议在 `.cargo/config.toml` 中注释掉 Cranelift 配置，
 > 需要时在命令行显式启用。
 
-### 5.2 快速切换脚本
+### 5.2 快速切换脚本 {#52-快速切换脚本}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```powershell
-# enable-cranelift.ps1 (PowerShell)
+# enable-cranelift.ps1 (PowerShell) {#enable-craneliftps1-powershell}
 $env:RUSTFLAGS="-Zcodegen-backend=cranelift"
 cargo +nightly build
 ```
 
 ```bash
-# enable-cranelift.sh (Bash)
+# enable-cranelift.sh (Bash) {#enable-craneliftsh-bash}
 export RUSTFLAGS="-Zcodegen-backend=cranelift"
 cargo +nightly build
 ```
 
 ---
 
-## 6. 跟踪状态
+## 6. 跟踪状态 {#6-跟踪状态}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 6.1 关键 Issue 与 PR
+### 6.1 关键 Issue 与 PR {#61-关键-issue-与-pr}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -322,7 +322,7 @@ cargo +nightly build
 | rust-lang/rust#122852 | 已合并 | `codegen-backend` 不稳定标志 |
 | bjorn3/rustc_codegen_cranelift | 活跃 | 社区驱动的 Cranelift 后端实现 |
 
-### 6.2 预计稳定化时间
+### 6.2 预计稳定化时间 {#62-预计稳定化时间}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -332,7 +332,7 @@ cargo +nightly build
 
 ---
 
-## 7. 参考文献
+## 7. 参考文献 {#7-参考文献}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -373,7 +373,7 @@ cargo +nightly build
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -383,7 +383,7 @@ cargo +nightly build
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

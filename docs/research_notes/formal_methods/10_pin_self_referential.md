@@ -16,7 +16,7 @@
 
 ---
 
-# Pin 和自引用类型形式化
+# Pin 和自引用类型形式化 {#pin-和自引用类型形式化}
 
 > **内容分级**: [归档级]
 
@@ -40,18 +40,18 @@
 
 ---
 
-## 📊 目录 {#-目录}
+## 📊 目录 {#目录}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Pin 和自引用类型形式化](#pin-和自引用类型形式化)
-  - [📊 目录 {#-目录}](#-目录--目录)
-  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
+  - [📊 目录](#目录)
+  - [🎯 研究目标](#研究目标)
     - [核心问题](#核心问题)
     - [预期成果](#预期成果)
-  - [📚 理论基础 {#-理论基础}](#-理论基础--理论基础)
+  - [📚 理论基础](#理论基础)
     - [Pin 类型](#pin-类型)
     - [自引用类型](#自引用类型)
     - [移动语义与 Pin](#移动语义与-pin)
@@ -59,7 +59,7 @@
     - [堆与栈固定：使用场景区分与设计论证](#堆与栈固定使用场景区分与设计论证)
     - [理论背景](#理论背景)
   - [权威来源对齐](#权威来源对齐)
-  - [🔬 形式化定义 {#-形式化定义}](#-形式化定义--形式化定义)
+  - [🔬 形式化定义](#形式化定义)
     - [1. Pin 类型形式化](#1-pin-类型形式化)
     - [2. 自引用类型形式化](#2-自引用类型形式化)
     - [3. Pin 保证](#3-pin-保证)
@@ -67,33 +67,33 @@
     - [3.2 Drop 与 Pin 的交互](#32-drop-与-pin-的交互)
     - [3.3 Pin 投影规则](#33-pin-投影规则)
     - [Rust 对应](#rust-对应)
-  - [⚠️ 反例：违反 Pin 规则 {#️-反例违反-pin-规则}](#️-反例违反-pin-规则-️-反例违反-pin-规则)
-  - [🌳 公理-定理证明树 {#-公理-定理证明树}](#-公理-定理证明树--公理-定理证明树)
+  - [⚠️ 反例：违反 Pin 规则](#反例违反-pin-规则)
+  - [🌳 公理-定理证明树](#公理-定理证明树)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
-  - [✅ 证明目标 {#-证明目标}](#-证明目标--证明目标)
+  - [✅ 证明目标](#证明目标)
     - [待证明的性质](#待证明的性质)
     - [证明方法](#证明方法)
-  - [💻 代码示例与实践 {#-代码示例与实践}](#-代码示例与实践--代码示例与实践)
+  - [💻 代码示例与实践](#代码示例与实践)
     - [示例 1: Pin 基础](#示例-1-pin-基础)
     - [示例 2: 自引用结构](#示例-2-自引用结构)
     - [示例 3: Future 和 Pin](#示例-3-future-和-pin)
     - [示例 4: 自引用结构体](#示例-4-自引用结构体)
     - [示例 5: Pin 投影](#示例-5-pin-投影)
-  - [📖 参考文献 {#-参考文献}](#-参考文献--参考文献)
+  - [📖 参考文献](#参考文献)
     - [学术论文（国际权威）](#学术论文国际权威)
     - [官方文档](#官方文档)
     - [相关代码](#相关代码)
     - [工具资源](#工具资源)
-  - [🔄 研究进展 {#-研究进展}](#-研究进展--研究进展)
-    - [已完成 ✅ {#已完成-}](#已完成--已完成-)
+  - [🔄 研究进展](#研究进展)
+    - [已完成 ✅](#已完成)
     - [进行中 🔄（已完成）](#进行中-已完成)
     - [计划中 📋（已完成）](#计划中-已完成)
-  - [🔗 系统集成与实际应用 {#-系统集成与实际应用}](#-系统集成与实际应用--系统集成与实际应用)
+  - [🔗 系统集成与实际应用](#系统集成与实际应用)
     - [与异步系统的集成](#与异步系统的集成)
     - [与生命周期的集成](#与生命周期的集成)
     - [实际应用案例](#实际应用案例)
     - [相关思维表征](#相关思维表征)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -102,7 +102,7 @@
 
 ---
 
-## 🎯 研究目标 {#-研究目标}
+## 🎯 研究目标 {#研究目标}
 
 >
 
@@ -110,7 +110,7 @@
 
 本研究的目的是形式化定义 Rust 的 Pin 类型和自引用类型，并证明其安全性。
 
-### 核心问题
+### 核心问题 {#核心问题}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -124,7 +124,7 @@
 
 3. **Pin 保证**: Pin 如何保证内存位置的稳定性？
 
-### 预期成果
+### 预期成果 {#预期成果}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -140,13 +140,13 @@
 
 ---
 
-## 📚 理论基础 {#-理论基础}
+## 📚 理论基础 {#理论基础}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Pin 类型
+### Pin 类型 {#pin-类型}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -160,7 +160,7 @@
 
 **Pin 保证**: 对于非 `Unpin` 类型，Pin 保证被 Pin 的值在内存中的位置不会改变，从而保证自引用类型的安全性。
 
-### 自引用类型
+### 自引用类型 {#自引用类型}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -176,7 +176,7 @@
 
 **解决方案**: 使用 Pin 防止移动，确保自引用类型的内存位置稳定。
 
-### 移动语义与 Pin
+### 移动语义与 Pin {#移动语义与-pin}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -188,7 +188,7 @@
 
 **Pin 约束**: Pin 通过类型系统限制了对被 Pin 值的操作，防止可能导致移动的操作。
 
-### 相关概念
+### 相关概念 {#相关概念}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -222,7 +222,7 @@ $。
 
 **Pin 投影 (Pin Projection)**: 从被 Pin 的结构体中获取被 Pin 的字段。Pin 投影需要特殊处理，确保安全性。
 
-### 堆与栈固定：使用场景区分与设计论证
+### 堆与栈固定：使用场景区分与设计论证 {#堆与栈固定使用场景区分与设计论证}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -246,7 +246,7 @@ $。
 
 **决策树**：$T : \text{Unpin}$ → 栈固定；$T \not: \text{Unpin}$（自引用）→ 堆固定。详见 [DESIGN_MECHANISM_RATIONALE](../10_design_mechanism_rationale.md)。
 
-### 理论背景
+### 理论背景 {#理论背景}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -260,7 +260,7 @@ $。
 
 **内存安全理论**: Pin 是 Rust 内存安全保证的重要组成部分，确保自引用类型的安全性。
 
-## 权威来源对齐
+## 权威来源对齐 {#权威来源对齐}
 
 >
 
@@ -280,13 +280,13 @@ $。
 
 ---
 
-## 🔬 形式化定义 {#-形式化定义}
+## 🔬 形式化定义 {#形式化定义}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 1. Pin 类型形式化
+### 1. Pin 类型形式化 {#1-pin-类型形式化}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -296,7 +296,7 @@ $。
 
 **定义 1.3 (Pin 保证)**: Pin 保证对于非 `Unpin` 类型，被 Pin 的值在内存中的位置不会改变。
 
-### 2. 自引用类型形式化
+### 2. 自引用类型形式化 {#2-自引用类型形式化}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -308,7 +308,7 @@ $$T = \{\text{field}_1 : \tau_1, \ldots, \text{field}_n : \&'a \tau_i\}$$
 
 **定义 2.2 (自引用约束)**: 对于自引用类型 $T$，生命周期 $'a$ 必须与 $T$ 的生命周期相关，确保引用有效。
 
-### 3. Pin 保证
+### 3. Pin 保证 {#3-pin-保证}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -344,7 +344,7 @@ $$T = \{\text{field}_1 : \tau_1, \ldots, \text{field}_n : \&'a \tau_i\}$$
 
 - 自引用类型的安全性依赖于 Pin 保证
 
-### 3.1 Unpin Trait 定义
+### 3.1 Unpin Trait 定义 {#31-unpin-trait-定义}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -378,7 +378,7 @@ $$
 
 $$
 
-### 3.2 Drop 与 Pin 的交互
+### 3.2 Drop 与 Pin 的交互 {#32-drop-与-pin-的交互}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -416,7 +416,7 @@ $$
 
 $$
 
-### 3.3 Pin 投影规则
+### 3.3 Pin 投影规则 {#33-pin-投影规则}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -472,7 +472,7 @@ $$
 
 ---
 
-### Rust 对应
+### Rust 对应 {#rust-对应}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -486,7 +486,7 @@ $$
 
 ---
 
-## ⚠️ 反例：违反 Pin 规则 {#️-反例违反-pin-规则}
+## ⚠️ 反例：违反 Pin 规则 {#反例违反-pin-规则}
 
 >
 
@@ -506,7 +506,7 @@ $$
 
 ---
 
-## 🌳 公理-定理证明树 {#-公理-定理证明树}
+## 🌳 公理-定理证明树 {#公理-定理证明树}
 
 >
 
@@ -542,7 +542,7 @@ Pin 安全性证明树
 
 ```
 
-### 概念定义-属性关系-解释论证 层次汇总
+### 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -558,13 +558,13 @@ Pin 安全性证明树
 
 ---
 
-## ✅ 证明目标 {#-证明目标}
+## ✅ 证明目标 {#证明目标}
 
 >
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 待证明的性质
+### 待证明的性质 {#待证明的性质}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -574,7 +574,7 @@ Pin 安全性证明树
 
 3. **Future 安全性**: Future 使用 Pin 保证安全性
 
-### 证明方法
+### 证明方法 {#证明方法}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -586,13 +586,13 @@ Pin 安全性证明树
 
 ---
 
-## 💻 代码示例与实践 {#-代码示例与实践}
+## 💻 代码示例与实践 {#代码示例与实践}
 
 >
 
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 示例 1: Pin 基础
+### 示例 1: Pin 基础 {#示例-1-pin-基础}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -638,7 +638,7 @@ fn main() {
 
 - $\text{Pin}[\&mut \text{MyStruct}]$ 不阻止移动，因为实现了 `Unpin`
 
-### 示例 2: 自引用结构
+### 示例 2: 自引用结构 {#示例-2-自引用结构}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -708,7 +708,7 @@ impl SelfReferential {
 
 - Pin 保证: $\text{Pin}[\Box[\text{SelfReferential}]]$ 保证内存位置稳定
 
-### 示例 3: Future 和 Pin
+### 示例 3: Future 和 Pin {#示例-3-future-和-pin}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -780,7 +780,7 @@ async fn use_future() {
 
 - `Box::pin` 在堆上固定 Future
 
-### 示例 4: 自引用结构体
+### 示例 4: 自引用结构体 {#示例-4-自引用结构体}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -870,7 +870,7 @@ fn use_self_referential() {
 
 - Pin 保证结构体不会被移动，指针始终有效
 
-### 示例 5: Pin 投影
+### 示例 5: Pin 投影 {#示例-5-pin-投影}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -976,13 +976,13 @@ async fn use_future() {
 
 ---
 
-## 📖 参考文献 {#-参考文献}
+## 📖 参考文献 {#参考文献}
 
 >
 
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 学术论文（国际权威）
+### 学术论文（国际权威） {#学术论文国际权威}
 
 >
 
@@ -1006,7 +1006,7 @@ async fn use_future() {
 
    - 与本目录: Pin 与 Future、自引用、!Unpin 对应；Rust 官方采纳 2025
 
-### 官方文档
+### 官方文档 {#官方文档}
 
 >
 
@@ -1020,7 +1020,7 @@ async fn use_future() {
 
 - [Future Trait](https://doc.rust-lang.org/std/future/trait.Future.html)
 
-### 相关代码
+### 相关代码 {#相关代码}
 
 >
 
@@ -1030,7 +1030,7 @@ async fn use_future() {
 
 - [异步 Future 实现](../../../crates/c06_async/README.md)
 
-### 工具资源
+### 工具资源 {#工具资源}
 
 >
 
@@ -1042,13 +1042,13 @@ async fn use_future() {
 
 ---
 
-## 🔄 研究进展 {#-研究进展}
+## 🔄 研究进展 {#研究进展}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 已完成 ✅ {#已完成-}
+### 已完成 ✅ {#已完成}
 
 >
 
@@ -1066,7 +1066,7 @@ async fn use_future() {
 
 - [x] 完善 Pin 保证定理的证明思路
 
-### 进行中 🔄（已完成）
+### 进行中 🔄（已完成） {#进行中-已完成}
 
 >
 
@@ -1074,7 +1074,7 @@ async fn use_future() {
 
 - [x] 完整的形式化定义（§1–3 Pin 类型、自引用、Pin 保证）、Pin 保证与自引用安全已纳入定理 2–3 及证明思路
 
-### 计划中 📋（已完成）
+### 计划中 📋（已完成） {#计划中-已完成}
 
 >
 
@@ -1084,13 +1084,13 @@ async fn use_future() {
 
 ---
 
-## 🔗 系统集成与实际应用 {#-系统集成与实际应用}
+## 🔗 系统集成与实际应用 {#系统集成与实际应用}
 
 >
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 与异步系统的集成
+### 与异步系统的集成 {#与异步系统的集成}
 
 >
 
@@ -1102,7 +1102,7 @@ async fn use_future() {
 
 形式化：$\text{Pin}[P] \rightarrow \neg \text{move}(\text{target}(P))$。
 
-### 与生命周期的集成
+### 与生命周期的集成 {#与生命周期的集成}
 
 >
 
@@ -1112,7 +1112,7 @@ async fn use_future() {
 
 与 lifetime_formalization 的 outlives、NLL 兼容。
 
-### 实际应用案例
+### 实际应用案例 {#实际应用案例}
 
 >
 
@@ -1126,7 +1126,7 @@ async fn use_future() {
 
 ---
 
-### 相关思维表征
+### 相关思维表征 {#相关思维表征}
 
 >
 
@@ -1156,7 +1156,7 @@ async fn use_future() {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -1166,7 +1166,7 @@ async fn use_future() {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -1174,7 +1174,7 @@ async fn use_future() {
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -1188,7 +1188,7 @@ async fn use_future() {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -1198,7 +1198,7 @@ async fn use_future() {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -1230,7 +1230,7 @@ async fn use_future() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Pointer (computer programming)](https://en.wikipedia.org/wiki/Pointer_(computer_programming))**
 

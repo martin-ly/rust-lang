@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 把 `Cargo.toml` 的核心字段按用途整理成可速查的参考表，方便快速查阅而非从头阅读。
-> **前置概念**: [Cargo Toolchain](01_toolchain.md) · [Cargo Dependency Resolution](60_cargo_dependency_resolution.md) · [Cargo Build Scripts](59_cargo_build_scripts.md)
+> **前置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **后置概念**: [Cargo Profiles and Lints](65_cargo_profiles_and_lints.md) · [Cargo Source Replacement](61_cargo_source_replacement.md)
 
 ---

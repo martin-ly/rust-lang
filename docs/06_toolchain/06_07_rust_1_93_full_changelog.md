@@ -1,4 +1,4 @@
-# Rust 1.93 完整变更清单
+# Rust 1.93 完整变更清单 {#rust-193-完整变更清单}
 
 > **分级**: [A]
 > **Bloom 层级**: L3 (应用)
@@ -12,7 +12,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -29,7 +29,7 @@
     - [const\_item\_interior\_mutations lint（warn-by-default）](#const_item_interior_mutations-lintwarn-by-default)
     - [function\_casts\_as\_integer lint（warn-by-default）](#function_casts_as_integer-lintwarn-by-default)
   - [编译器](#编译器)
-    - [-C jump-tables=bool 稳定化](#-c-jump-tablesbool-稳定化)
+    - [-C jump-tables=bool 稳定化](#c-jump-tablesbool-稳定化)
   - [平台支持](#平台支持)
     - [riscv64a23-unknown-linux-gnu Tier 2](#riscv64a23-unknown-linux-gnu-tier-2)
     - [musl 1.2.5](#musl-125)
@@ -44,7 +44,7 @@
     - [cargo tree --format 长格式](#cargo-tree---format-长格式)
     - [cargo clean --workspace](#cargo-clean---workspace)
   - [Rustdoc](#rustdoc)
-    - [移除 #!\[doc(document\_private\_items)\]](#移除-docdocument_private_items)
+    - [移除 #!\[doc(document\_private\_items)\] {#移除-docdocument\_private\_items}](#移除-docdocument_private_items-移除-docdocument_private_items)
     - [宏搜索过滤](#宏搜索过滤)
     - [import 搜索过滤](#import-搜索过滤)
     - [文档属性校验](#文档属性校验)
@@ -55,16 +55,15 @@
     - [Ferrocene 规范引用](#ferrocene-规范引用)
   - [完整特性代码示例](#完整特性代码示例)
   - [Rust 1.95+ 更新](#rust-195-更新)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [权威来源索引](#权威来源索引)
 
 ---
 
-## 语言特性
+## 语言特性 {#语言特性}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### s390x vector 特性与 is_s390x_feature_detected
+### s390x vector 特性与 is_s390x_feature_detected {#s390x-vector-特性与-is_s390x_feature_detected}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -88,7 +87,7 @@ fn check_vector_support() {
 
 ---
 
-### C-style variadic for system ABI
+### C-style variadic for system ABI {#c-style-variadic-for-system-abi}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -106,7 +105,7 @@ extern "system" {
 
 ---
 
-### cfg 谓词使用关键词报错
+### cfg 谓词使用关键词报错 {#cfg-谓词使用关键词报错}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -118,7 +117,7 @@ extern "system" {
 
 ---
 
-### asm_cfg（asm! 行上 cfg）
+### asm_cfg（asm! 行上 cfg） {#asm_cfgasm-行上-cfg}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -132,7 +131,7 @@ extern "system" {
 
 ---
 
-### const-eval 指针字节复制
+### const-eval 指针字节复制 {#const-eval-指针字节复制}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -144,7 +143,7 @@ extern "system" {
 
 ---
 
-### LUB coercion 修正
+### LUB coercion 修正 {#lub-coercion-修正}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -156,7 +155,7 @@ extern "system" {
 
 ---
 
-### const 含 mutable ref 到 static
+### const 含 mutable ref 到 static {#const-含-mutable-ref-到-static}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -168,7 +167,7 @@ extern "system" {
 
 ---
 
-### const_item_interior_mutations lint（warn-by-default）
+### const_item_interior_mutations lint（warn-by-default） {#const_item_interior_mutations-lintwarn-by-default}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -180,7 +179,7 @@ extern "system" {
 
 ---
 
-### function_casts_as_integer lint（warn-by-default）
+### function_casts_as_integer lint（warn-by-default） {#function_casts_as_integer-lintwarn-by-default}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -192,11 +191,11 @@ extern "system" {
 
 ---
 
-## 编译器
+## 编译器 {#编译器}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### -C jump-tables=bool 稳定化
+### -C jump-tables=bool 稳定化 {#c-jump-tablesbool-稳定化}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -210,11 +209,11 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ---
 
-## 平台支持
+## 平台支持 {#平台支持}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### riscv64a23-unknown-linux-gnu Tier 2
+### riscv64a23-unknown-linux-gnu Tier 2 {#riscv64a23-unknown-linux-gnu-tier-2}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -224,7 +223,7 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ---
 
-### musl 1.2.5
+### musl 1.2.5 {#musl-125}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -232,11 +231,11 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ---
 
-## 标准库
+## 标准库 {#标准库}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### Copy 不再使用 specialization
+### Copy 不再使用 specialization {#copy-不再使用-specialization}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -246,7 +245,7 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ---
 
-### 全局分配器 thread_local 支持
+### 全局分配器 thread_local 支持 {#全局分配器-thread_local-支持}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -254,7 +253,7 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ---
 
-### BTree::append 行为变更
+### BTree::append 行为变更 {#btreeappend-行为变更}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -264,7 +263,7 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ---
 
-### vec::IntoIter 不再要求 T: RefUnwindSafe
+### vec::IntoIter 不再要求 T: RefUnwindSafe {#vecintoiter-不再要求-t-refunwindsafe}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -274,7 +273,7 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ---
 
-### 稳定化 API
+### 稳定化 API {#稳定化-api}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -282,11 +281,11 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ---
 
-## Cargo
+## Cargo {#cargo}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### CARGO_CFG_DEBUG_ASSERTIONS
+### CARGO_CFG_DEBUG_ASSERTIONS {#cargo_cfg_debug_assertions}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -296,7 +295,7 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ---
 
-### cargo tree --format 长格式
+### cargo tree --format 长格式 {#cargo-tree---format-长格式}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -306,7 +305,7 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ---
 
-### cargo clean --workspace
+### cargo clean --workspace {#cargo-clean---workspace}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -320,11 +319,11 @@ cargo clean --workspace
 
 ---
 
-## Rustdoc
+## Rustdoc {#rustdoc}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 移除 #![doc(document_private_items)]
+### 移除 #![doc(document_private_items)] {#移除-docdocument_private_items}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -334,7 +333,7 @@ cargo clean --workspace
 
 ---
 
-### 宏搜索过滤
+### 宏搜索过滤 {#宏搜索过滤}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -344,7 +343,7 @@ cargo clean --workspace
 
 ---
 
-### import 搜索过滤
+### import 搜索过滤 {#import-搜索过滤}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -354,7 +353,7 @@ cargo clean --workspace
 
 ---
 
-### 文档属性校验
+### 文档属性校验 {#文档属性校验}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -364,7 +363,7 @@ cargo clean --workspace
 
 ---
 
-## 相关文档
+## 相关文档 {#相关文档}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -375,11 +374,11 @@ cargo clean --workspace
 
 ---
 
-## 形式化规范与参考
+## 形式化规范与参考 {#形式化规范与参考}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 类型系统形式化
+### 类型系统形式化 {#类型系统形式化}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -391,7 +390,7 @@ cargo clean --workspace
 | const-eval | [Constant Evaluation](https://doc.rust-lang.org/reference/const_eval.html) | Rust Reference |
 | LUB coercion | [Type Coercions](https://doc.rust-lang.org/reference/type-coercions.html) | Rust Reference |
 
-### 内存模型形式化
+### 内存模型形式化 {#内存模型形式化}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -399,7 +398,7 @@ cargo clean --workspace
 - [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) - Rust 别名模型
 - [Tree Borrows](https://perso.crans.org/vanille/treebor/) - 替代别名模型
 
-### Ferrocene 规范引用
+### Ferrocene 规范引用 {#ferrocene-规范引用}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -409,7 +408,7 @@ cargo clean --workspace
 
 ---
 
-## 完整特性代码示例
+## 完整特性代码示例 {#完整特性代码示例}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -708,7 +707,7 @@ mod tests {
 
 ---
 
-## Rust 1.95+ 更新
+## Rust 1.95+ 更新 {#rust-195-更新}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -739,7 +738,7 @@ Rust 1.95+ 重要更新：
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Rust Release Notes](https://github.com/rust-lang/rust/blob/master/RELEASES.md)**
 

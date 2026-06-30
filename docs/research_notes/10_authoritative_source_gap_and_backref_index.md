@@ -1,4 +1,4 @@
-# 权威来源缺口与反向追溯索引
+# 权威来源缺口与反向追溯索引 {#权威来源缺口与反向追溯索引}
 
 > **概念族**: 权威来源对齐 / 缺口分析 / 反向追溯
 >
@@ -27,10 +27,10 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 - [权威来源缺口与反向追溯索引](#权威来源缺口与反向追溯索引)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、反向追溯机制说明](#一反向追溯机制说明)
   - [二、已建立反向追溯的权威来源](#二已建立反向追溯的权威来源)
     - [2.1 P0 官方来源](#21-p0-官方来源)
@@ -51,7 +51,7 @@
 
 ---
 
-## 一、反向追溯机制说明
+## 一、反向追溯机制说明 {#一反向追溯机制说明}
 
 反向追溯（back-reference）是权威来源对齐网络的双向链路：
 
@@ -68,9 +68,9 @@
 
 ---
 
-## 二、已建立反向追溯的权威来源
+## 二、已建立反向追溯的权威来源 {#二已建立反向追溯的权威来源}
 
-### 2.1 P0 官方来源
+### 2.1 P0 官方来源 {#21-p0-官方来源}
 
 | 权威来源 | 关键章节/入口 | 项目文档 |
 |----------|--------------|----------|
@@ -88,7 +88,7 @@
 | [Ferrocene Language Specification](https://spec.ferrocene.dev/) | 语义规范、安全关键认证 | [10_ferrocene_fls_alignment.md](10_ferrocene_fls_alignment.md) |
 | [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) | HIR/MIR、名称解析、类型推断、借用检查 | [10_rustc_dev_guide_alignment.md](10_rustc_dev_guide_alignment.md) |
 
-### 2.2 P1 学术/形式化来源
+### 2.2 P1 学术/形式化来源 {#22-p1-学术形式化来源}
 
 | 权威来源 | 机构/作者 | 项目文档 |
 |----------|----------|----------|
@@ -100,7 +100,7 @@
 | [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3) | 多机构 | [10_rustsem_semantics.md](10_rustsem_semantics.md) |
 | [IEEE/ACM/arXiv/Springer 学术资源](https://dl.acm.org/) | 多机构 | [10_academic_papers_alignment.md](10_academic_papers_alignment.md) |
 
-### 2.3 P2 社区/生态来源
+### 2.3 P2 社区/生态来源 {#23-p2-社区生态来源}
 
 | 权威来源 | 类型 | 项目文档 |
 |----------|------|----------|
@@ -112,9 +112,9 @@
 
 ---
 
-## 三、尚未建立对齐的缺口
+## 三、尚未建立对齐的缺口 {#三尚未建立对齐的缺口}
 
-### 3.1 Rust Reference 缺口
+### 3.1 Rust Reference 缺口 {#31-rust-reference-缺口}
 
 | Reference 章节 | 当前覆盖 | 缺口说明 | 建议项目文档 |
 |----------------|----------|----------|--------------|
@@ -123,7 +123,7 @@
 | [模式匹配细节](https://doc.rust-lang.org/reference/patterns.html) | 分散 | 缺少 refutability、match ergonomics、bindings 到项目文档的反向索引 | [10_core_features_full_chain.md](10_core_features_full_chain.md) |
 | [链接与 crate-type](https://doc.rust-lang.org/reference/linkage.html) | [formal_modules/20_linkage_and_symbols.md](formal_modules/20_linkage_and_symbols.md) | 缺少 `dylib`/`staticlib`/`cdylib` 安全契约的精确反向索引 | [formal_modules/20_linkage_and_symbols.md](formal_modules/20_linkage_and_symbols.md) |
 
-### 3.2 Rust By Example 缺口
+### 3.2 Rust By Example 缺口 {#32-rust-by-example-缺口}
 
 | RBE 章节 | 当前覆盖 | 缺口说明 | 建议项目文档 |
 |----------|----------|----------|--------------|
@@ -131,7 +131,7 @@
 | [Std Library Types](https://doc.rust-lang.org/rust-by-example/std.html) | 未系统对齐 | `HashMap`、`VecDeque`、`Rc`/`Arc` 示例未映射到项目 std 对齐文档 | [10_std_library_alignment.md](10_std_library_alignment.md) |
 | [Crates](https://doc.rust-lang.org/rust-by-example/crates.html) | 未系统对齐 | crate 类型、模块树与项目 crate 架构文档未建立反向索引 | [software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) |
 
-### 3.3 学术论文与形式化证明缺口
+### 3.3 学术论文与形式化证明缺口 {#33-学术论文与形式化证明缺口}
 
 | 论文/工具 | 当前覆盖 | 缺口说明 | 优先级 |
 |-----------|----------|----------|--------|
@@ -141,7 +141,7 @@
 | coq-of-rust 证明脚本 | [10_coq_of_rust_integration_plan.md](10_coq_of_rust_integration_plan.md) | 缺少具体 Coq 证明脚本与项目定理映射 | P2 |
 | Oxide 独立章节 | 引用多处 | 无独立文档，需创建 `type_theory/10_oxide_formalization.md` | P1 |
 
-### 3.4 社区与生态来源缺口
+### 3.4 社区与生态来源缺口 {#34-社区与生态来源缺口}
 
 | 来源 | 当前覆盖 | 缺口说明 | 优先级 |
 |------|----------|----------|--------|
@@ -152,23 +152,23 @@
 
 ---
 
-## 四、补全优先级
+## 四、补全优先级 {#四补全优先级}
 
-### P0：下一季度必须完成
+### P0：下一季度必须完成 {#p0下一季度必须完成}
 
 1. **Rust Reference 核心缺口**：补齐 `const` 求值、宏 hygiene、模式匹配细节到项目文档的反向索引。
 2. **unsafe / 借用 / 类型核心安全**：更新 Tree Borrows 默认模型，补充 `MaybeUninit`、raw pointer 边界反例。
 3. **RustBelt 核心定理映射**：将 RustBelt 所有权/借用定理映射到 `10_proof_tree_ownership.md`、`10_proof_tree_borrow.md`。
 4. **形式化工具 1.96 兼容性**：更新 Kani、Miri、Tree Borrows、RustBelt 对 Rust 1.96 / 2024 Edition 的支持状态。
 
-### P1：半年内完成
+### P1：半年内完成 {#p1半年内完成}
 
 1. **学术论文精确映射**：补齐 Tree Borrows、Oxide、Aeneas 到项目反例和证明树的逐项映射。
 2. **Rust Reference 进阶章节**：链接、crate-type、visibility、name resolution 反向索引。
 3. **Rust By Example 系统对齐**：建立 Testing、Std Library Types、Crates 与项目文档的反向索引。
 4. **Oxide 独立形式化文档**：创建 `type_theory/10_oxide_formalization.md`，与生命周期/方差文档交叉引用。
 
-### P2：一年内完成
+### P2：一年内完成 {#p2一年内完成}
 
 1. **社区来源增强**：API Guidelines、Rust Design Patterns 结构型/并发模式、Rust Performance Book SIMD/Cache 章节。
 2. **博客与周报固定索引**：为 This Week in Rust、Inside Rust Blog 建立季度归档反向索引。
@@ -176,7 +176,7 @@
 
 ---
 
-## 五、项目文档映射
+## 五、项目文档映射 {#五项目文档映射}
 
 | 本文档主题 | 关联项目文档 | 说明 |
 |------------|--------------|------|
@@ -192,7 +192,7 @@
 
 ---
 
-## 六、维护清单
+## 六、维护清单 {#六维护清单}
 
 - [ ] 每季度运行 `scripts/maintenance/check_authoritative_source_gaps.py`，更新本索引的缺口状态。
 - [ ] Rust 新版本发布后 2 周内，检查 P0 来源是否新增或变更章节，并更新反向索引。
@@ -202,7 +202,7 @@
 
 > **权威来源**: [Rust Official Docs](https://doc.rust-lang.org/) | [Rust RFCs](https://rust-lang.github.io/rfcs/) | [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) | [RustBelt](https://plv.mpi-sws.org/rustbelt/) | [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
 - [权威来源对齐缺口矩阵](10_authoritative_alignment_gap_matrix.md)

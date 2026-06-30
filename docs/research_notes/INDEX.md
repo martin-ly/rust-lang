@@ -1,4 +1,4 @@
-# 研究笔记完整索引
+# 研究笔记完整索引 {#研究笔记完整索引}
 >
 > **概念族**: 元/导航/索引
 > **内容分级**: [归档级]
@@ -19,27 +19,27 @@
 
 ---
 
-## 📊 目录 {#-目录}
+## 📊 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [研究笔记完整索引](#研究笔记完整索引)
-  - [📊 目录 {#-目录}](#-目录--目录)
-  - [📐 文档分类体系 {#-文档分类体系}](#-文档分类体系--文档分类体系)
-  - [📚 核心文档索引 {#-核心文档索引}](#-核心文档索引--核心文档索引)
+  - [📊 目录](#目录)
+  - [📐 文档分类体系](#文档分类体系)
+  - [📚 核心文档索引](#核心文档索引)
     - [导航和索引](#导航和索引)
     - [进展跟踪](#进展跟踪)
     - [方法论和指南](#方法论和指南)
     - [实际应用](#实际应用)
     - [贡献和质量](#贡献和质量)
-  - [🔬 研究笔记索引 {#-研究笔记索引}](#-研究笔记索引--研究笔记索引)
+  - [🔬 研究笔记索引](#研究笔记索引)
     - [形式化方法研究](#形式化方法研究)
     - [形式化模块系统](#形式化模块系统)
     - [类型理论研究](#类型理论研究)
     - [实验研究](#实验研究)
     - [软件设计理论研究](#软件设计理论研究)
     - [综合研究](#综合研究)
-  - [🔍 按主题分类 {#-按主题分类}](#-按主题分类--按主题分类)
+  - [🔍 按主题分类](#按主题分类)
     - [所有权和借用](#所有权和借用)
     - [类型系统](#类型系统)
     - [生命周期](#生命周期)
@@ -47,18 +47,18 @@
     - [安全与 unsafe](#安全与-unsafe)
     - [设计模式与工程](#设计模式与工程)
     - [性能优化](#性能优化)
-    - [实际应用 {#实际应用-1}](#实际应用-实际应用-1)
+    - [实际应用](#实际应用-1)
     - [版本与特性](#版本与特性)
-  - [📈 统计信息 {#-统计信息}](#-统计信息--统计信息)
+  - [📈 统计信息](#统计信息)
     - [文档统计](#文档统计)
     - [研究领域统计](#研究领域统计)
     - [状态统计](#状态统计)
     - [覆盖主题](#覆盖主题)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
+  - [🔗 相关资源](#相关资源)
     - [核心文档](#核心文档)
     - [目录索引](#目录索引)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 更新](#rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -67,7 +67,7 @@
 
 ---
 
-## 📐 文档分类体系 {#-文档分类体系}
+## 📐 文档分类体系 {#文档分类体系}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -81,11 +81,11 @@
 
 ---
 
-## 📚 核心文档索引 {#-核心文档索引}
+## 📚 核心文档索引 {#核心文档索引}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 导航和索引
+### 导航和索引 {#导航和索引}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -454,7 +454,7 @@
 
 - 1.94+ 发布后：对比、更新 RUST_XXX、补新特性；检查清单
 
-### 进展跟踪
+### 进展跟踪 {#进展跟踪}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -504,7 +504,7 @@
    - 参考文献部分完善
    - 完善检查清单
 
-### 方法论和指南
+### 方法论和指南 {#方法论和指南}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -536,7 +536,7 @@
    - 四维缺口分类、论证缺口追踪矩阵
    - 设计理由缺口追踪矩阵、思维表征覆盖矩阵
 
-### 实际应用
+### 实际应用 {#实际应用}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -548,7 +548,7 @@
    - 并发系统案例
    - 嵌入式系统案例
 
-### 贡献和质量
+### 贡献和质量 {#贡献和质量}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -578,11 +578,11 @@
 
 ---
 
-## 🔬 研究笔记索引 {#-研究笔记索引}
+## 🔬 研究笔记索引 {#研究笔记索引}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 形式化方法研究
+### 形式化方法研究 {#形式化方法研究}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -635,7 +635,7 @@
    - 状态: ✅ 六篇全覆盖
    - 关键词: 完备性、六维、formal_methods、自检
 
-### 形式化模块系统
+### 形式化模块系统 {#形式化模块系统}
 
 > **来源: [Rust Reference – Items and Modules](https://doc.rust-lang.org/reference/items.html)**
 
@@ -679,7 +679,7 @@
 
 ---
 
-### 类型理论研究
+### 类型理论研究 {#类型理论研究}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -719,7 +719,7 @@
 
 ---
 
-### 实验研究
+### 实验研究 {#实验研究}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -754,7 +754,7 @@
 
 ---
 
-### 软件设计理论研究
+### 软件设计理论研究 {#软件设计理论研究}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -808,7 +808,7 @@
     - serde、tower、tokio、axum、bevy、wgpu 等 crate 架构深度分析
     - 状态: ✅ 已完成权威国际化来源对齐升级（Rust 1.96.0+ / Edition 2024）
 
-### 综合研究
+### 综合研究 {#综合研究}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -824,9 +824,9 @@
 
 ---
 
-## 🔍 按主题分类 {#-按主题分类}
+## 🔍 按主题分类 {#按主题分类}
 
-### 所有权和借用
+### 所有权和借用 {#所有权和借用}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -835,7 +835,7 @@
 - [Pin 和自引用类型形式化](formal_methods/10_pin_self_referential.md)
 - [所有权与借用反例边界](formal_methods/60_ownership_counterexamples.md)
 
-### 类型系统
+### 类型系统 {#类型系统}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -846,14 +846,14 @@
 - [型变理论](type_theory/10_variance_theory.md)
 - [类型系统反例边界](type_theory/60_type_system_counterexamples.md)
 
-### 生命周期
+### 生命周期 {#生命周期}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 - 生命周期形式化（形式化方法）
 - [生命周期形式化（类型理论）](type_theory/10_lifetime_formalization.md)
 
-### 异步和并发
+### 异步和并发 {#异步和并发}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -862,7 +862,7 @@
 - [执行模型](software_design_theory/03_execution_models/README.md)（同步/异步/并发/并行/分布式）
 - [并发与异步反例边界](formal_methods/60_concurrency_async_counterexamples.md)
 
-### 安全与 unsafe
+### 安全与 unsafe {#安全与-unsafe}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -871,7 +871,7 @@
 - [07_anti_patterns 反模式](software_design_theory/07_anti_patterns.md)
 - [Unsafe 与 FFI 反例边界](formal_methods/60_unsafe_counterexamples.md)
 
-### 设计模式与工程
+### 设计模式与工程 {#设计模式与工程}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -883,7 +883,7 @@
 - [Crate 架构反例边界](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md)
 - [工作流/组合工程/分布式反例边界](software_design_theory/60_workflow_compositional_distributed_counterexamples.md)
 
-### 性能优化
+### 性能优化 {#性能优化}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -900,7 +900,7 @@
 - [实际应用案例研究](10_practical_applications.md)
 - [研究方法论](10_research_methodology.md)
 
-### 版本与特性
+### 版本与特性 {#版本与特性}
 
 - [Rust 1.93 语言特性全面分析](10_rust_193_language_features_comprehensive_analysis.md)
 - [Rust 1.92 研究更新](10_rust_192_research_update_2025_12_11.md)、[Rust 1.91 研究更新](10_rust_191_research_update_2025_11_15.md)
@@ -908,30 +908,30 @@
 
 ---
 
-## 📈 统计信息 {#-统计信息}
+## 📈 统计信息 {#统计信息}
 
-### 文档统计
+### 文档统计 {#文档统计}
 
 - **总文档数**: 31个
 - **核心文档**: 11个
 - **研究笔记**: 17个
 - **目录索引**: 3个
 
-### 研究领域统计
+### 研究领域统计 {#研究领域统计}
 
 - **形式化方法**: 5个研究笔记
 - **类型理论**: 5个研究笔记
 - **实验研究**: 5个研究笔记
 - **综合研究**: 2个研究笔记
 
-### 状态统计
+### 状态统计 {#状态统计}
 
 - **已完成**: 20个（核心文档和索引）
 - **已完成**: 17个（所有研究笔记，100%）
 - **规划中**: 0个
 - **总计**: 40个文档
 
-### 覆盖主题
+### 覆盖主题 {#覆盖主题}
 
 - ✅ 所有权系统
 - ✅ 借用检查器
@@ -950,16 +950,16 @@
 
 ---
 
-## 🔗 相关资源 {#-相关资源}
+## 🔗 相关资源 {#相关资源}
 
-### 核心文档
+### 核心文档 {#核心文档}
 
 - [主索引](README.md)
 - [快速参考](10_quick_reference.md)
 - [研究路线图](10_research_roadmap.md)
 - [系统总结](10_system_summary.md)
 
-### 目录索引
+### 目录索引 {#目录索引}
 
 - [形式化方法索引](formal_methods/README.md)
 - [类型理论索引](type_theory/README.md)
@@ -973,7 +973,7 @@
 
 ---
 
-## 🆕 Rust 1.94 更新
+## 🆕 Rust 1.94 更新 {#rust-194-更新}
 
 > **适用版本**: Rust 1.96.0+
 
@@ -983,16 +983,16 @@
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -1001,7 +1001,7 @@
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -1009,7 +1009,7 @@
 - ✅ 兼容Edition 2024
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 - Rust 1.94 特性速查
@@ -1033,7 +1033,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

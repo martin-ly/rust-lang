@@ -1,4 +1,4 @@
-# 项目文档体系分工协议
+# 项目文档体系分工协议 {#项目文档体系分工协议}
 
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
@@ -10,17 +10,17 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 - [项目文档体系分工协议](#项目文档体系分工协议)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 背景与目的](#1-背景与目的)
   - [2. 四大文档体系定位](#2-四大文档体系定位)
-    - [2.1 `knowledge/` — 面向学习者的分层教程](#21-knowledge--面向学习者的分层教程)
-    - [2.2 `docs/05_guides/` — 面向开发者的专题查阅指南](#22-docs05_guides--面向开发者的专题查阅指南)
-    - [2.3 `docs/02_reference/` — 速查卡与边界特例](#23-docs02_reference--速查卡与边界特例)
-    - [2.4 `docs/research_notes/` — 学术与形式化内容](#24-docsresearch_notes--学术与形式化内容)
-    - [2.5 `docs/content/` — 学术与场景化内容](#25-docscontent--学术与场景化内容)
+    - [2.1 `knowledge/` — 面向学习者的分层教程](#21-knowledge-面向学习者的分层教程)
+    - [2.2 `docs/05_guides/` — 面向开发者的专题查阅指南](#22-docs05_guides-面向开发者的专题查阅指南)
+    - [2.3 `docs/02_reference/` — 速查卡与边界特例](#23-docs02_reference-速查卡与边界特例)
+    - [2.4 `docs/research_notes/` — 学术与形式化内容](#24-docsresearch_notes-学术与形式化内容)
+    - [2.5 `docs/content/` — 学术与场景化内容](#25-docscontent-学术与场景化内容)
   - [3. 重复消除规则](#3-重复消除规则)
     - [3.1 禁止重复清单](#31-禁止重复清单)
     - [3.2 交叉引用规范](#32-交叉引用规范)
@@ -32,7 +32,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 1. 背景与目的
+## 1. 背景与目的 {#1-背景与目的}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -40,11 +40,11 @@
 
 ---
 
-## 2. 四大文档体系定位
+## 2. 四大文档体系定位 {#2-四大文档体系定位}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 `knowledge/` — 面向学习者的分层教程
+### 2.1 `knowledge/` — 面向学习者的分层教程 {#21-knowledge-面向学习者的分层教程}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
@@ -71,7 +71,7 @@
 
 ---
 
-### 2.2 `docs/05_guides/` — 面向开发者的专题查阅指南
+### 2.2 `docs/05_guides/` — 面向开发者的专题查阅指南 {#22-docs05_guides-面向开发者的专题查阅指南}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -101,7 +101,7 @@
 
 ---
 
-### 2.3 `docs/02_reference/` — 速查卡与边界特例
+### 2.3 `docs/02_reference/` — 速查卡与边界特例 {#23-docs02_reference-速查卡与边界特例}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -116,7 +116,7 @@
 
 ---
 
-### 2.4 `docs/research_notes/` — 学术与形式化内容
+### 2.4 `docs/research_notes/` — 学术与形式化内容 {#24-docsresearch_notes-学术与形式化内容}
 
 **核心定位**: 形式化方法、类型理论、软件设计理论、证明索引。
 
@@ -129,7 +129,7 @@
 
 ---
 
-### 2.5 `docs/content/` — 学术与场景化内容
+### 2.5 `docs/content/` — 学术与场景化内容 {#25-docscontent-学术与场景化内容}
 
 **核心定位**: 学术研究（Tree Borrows、Coq 形式化）、知识表征矩阵、应用场景案例。
 
@@ -141,9 +141,9 @@
 
 ---
 
-## 3. 重复消除规则
+## 3. 重复消除规则 {#3-重复消除规则}
 
-### 3.1 禁止重复清单
+### 3.1 禁止重复清单 {#31-禁止重复清单}
 
 以下主题在 `docs/` 和 `knowledge/` 中**不得同时存在详细教程**。选择保留一个，另一个改为精简概述或重定向：
 
@@ -156,7 +156,7 @@
 | 性能优化 | `knowledge/03_advanced/performance_optimization.md` | `05_guides/` 保留专题指南 | 保留教程 |
 | 设计模式 | `knowledge/04_expert/` | `05_guides/` 保留专题指南 | 保留教程 |
 
-### 3.2 交叉引用规范
+### 3.2 交叉引用规范 {#32-交叉引用规范}
 
 - `knowledge/` 中提及专题深度内容时，必须链接到 `docs/05_guides/` 或 `docs/02_reference/`
 - `docs/05_guides/` 中提及基础知识时，必须链接到 `knowledge/` 对应层级
@@ -164,9 +164,9 @@
 
 ---
 
-## 4. 版本标注统一规范
+## 4. 版本标注统一规范 {#4-版本标注统一规范}
 
-### 4.1 必须标注的位置
+### 4.1 必须标注的位置 {#41-必须标注的位置}
 
 以下文件顶部必须包含版本声明：
 
@@ -177,7 +177,7 @@
 > **状态**: 🟡 进行中 / ✅ 已完成 / 🔴 待更新
 ```
 
-### 4.2 必须包含版本声明的文件
+### 4.2 必须包含版本声明的文件 {#42-必须包含版本声明的文件}
 
 - `docs/00_master_index.md`
 - `docs/10_terminology_standard.md`
@@ -190,7 +190,7 @@
 
 ---
 
-## 5. 评审与更新机制
+## 5. 评审与更新机制 {#5-评审与更新机制}
 
 | 检查项 | 频率 | 负责人 |
 |--------|------|--------|
@@ -202,7 +202,7 @@
 
 ---
 
-## 6. 相关文档
+## 6. 相关文档 {#6-相关文档}
 
 - `00_documentation_lifecycle.md` — 文档生命周期管理制度
 - `DOCS_STRUCTURE_OVERVIEW.md` — 完整结构总览
@@ -225,13 +225,13 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [上级目录](../README.md)
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

@@ -11,12 +11,12 @@
 > **后置概念**: N/A
 ---
 
-> **来源**:
+> **来源**: · [Unsafe Rust](03_unsafe.md)
 > [The Rust Programming Language — Ch19 Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
 > [Rust Reference — Unsafe Operations](https://doc.rust-lang.org/reference/unsafe-blocks.html)
 >
-> **前置概念**:
+> **前置概念**: [Error Handling](../02_intermediate/04_error_handling.md)
 > [Unsafe Rust](03_unsafe.md) ·
 > [Ownership](../01_foundation/01_ownership.md) ·
 > [Borrowing](../01_foundation/02_borrowing.md)

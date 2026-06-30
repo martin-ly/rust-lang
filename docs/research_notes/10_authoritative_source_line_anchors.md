@@ -1,4 +1,4 @@
-# 权威来源行号锚点索引
+# 权威来源行号锚点索引 {#权威来源行号锚点索引}
 
 > **概念族**: 权威来源对齐 / 行号锚点
 > **内容分级**: [核心级]
@@ -12,7 +12,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [权威来源行号锚点索引](#权威来源行号锚点索引)
   - [目录](#目录)
@@ -28,13 +28,13 @@
 
 ---
 
-## 一、索引说明
+## 一、索引说明 {#一索引说明}
 
 本文档为项目核心概念建立到国际化权威来源的**行号级 GitHub 锚点**，每个条目给出：概念名称、权威来源、精确到行号的 `blob/main/...#L` 链接，以及对应的本项目文档。行号基于各权威仓库当前 `main`/`master` 分支的最新源码结构；若后续源码重构导致行号偏移，可结合 [10_authoritative_source_version_tracking.md](10_authoritative_source_version_tracking.md) 进行版本校验。
 
 ---
 
-## 二、The Rust Programming Language
+## 二、The Rust Programming Language {#二the-rust-programming-language}
 
 | 概念 | 权威来源 | 行号锚点链接 | 对应项目文档 |
 |------|----------|--------------|--------------|
@@ -48,7 +48,7 @@
 
 ---
 
-## 三、Rust Reference
+## 三、Rust Reference {#三rust-reference}
 
 | 概念 | 权威来源 | 行号锚点链接 | 对应项目文档 |
 |------|----------|--------------|--------------|
@@ -59,7 +59,7 @@
 
 ---
 
-## 四、Rustonomicon
+## 四、Rustonomicon {#四rustonomicon}
 
 | 概念 | 权威来源 | 行号锚点链接 | 对应项目文档 |
 |------|----------|--------------|--------------|
@@ -70,7 +70,7 @@
 
 ---
 
-## 五、Unsafe Code Guidelines
+## 五、Unsafe Code Guidelines {#五unsafe-code-guidelines}
 
 | 概念 | 权威来源 | 行号锚点链接 | 对应项目文档 |
 |------|----------|--------------|--------------|
@@ -81,7 +81,7 @@
 
 ---
 
-## 六、RFCs
+## 六、RFCs {#六rfcs}
 
 > 注：Rust RFC 仓库中不存在编号 `1858` 的已接受 RFC，因此以下索引使用相邻关键 RFC `1857`（stabilize-drop-order）作为替代，并保留 `2094`、`2394`、`2580`、`3516`。
 
@@ -100,7 +100,7 @@
 
 ---
 
-## 七、未覆盖缺口
+## 七、未覆盖缺口 {#七未覆盖缺口}
 
 1. **Book 后续章节**：ch12/ch13/ch17/ch18/ch19/ch20 等章节的代码清单尚未逐行锚定。
 2. **Reference 深层章节**：items、types、expressions 子目录下的具体语法条目尚未逐条建立行号锚点。
@@ -111,7 +111,7 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [10_authoritative_source_alignment_network.md](10_authoritative_source_alignment_network.md) — 权威来源对齐网络总入口
 - [10_knowledge_graph_index.md](10_knowledge_graph_index.md) — 知识图谱索引（含本文档作为行号锚点依据）
@@ -122,7 +122,7 @@
 - [10_rfc_alignment_index.md](10_rfc_alignment_index.md) — RFC 对齐索引
 - [10_authoritative_source_version_tracking.md](10_authoritative_source_version_tracking.md) — 权威来源版本跟踪
 
-## 社区权威参考
+## 社区权威参考 {#社区权威参考}
 
 - [This Week in Rust](https://this-week-in-rust.org/)
 - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)

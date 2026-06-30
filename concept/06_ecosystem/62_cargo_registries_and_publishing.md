@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 把“怎么把 crate 发布到 crates.io / 私有 registry、registry 内部如何索引、认证如何工作”系统化。
-> **前置概念**: [Cargo Toolchain](01_toolchain.md) · [Cargo Dependency Resolution](60_cargo_dependency_resolution.md) · [Cargo Build Scripts](59_cargo_build_scripts.md)
+> **前置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **后置概念**: [Supply Chain Security](25_cargo_security_cves.md) · [Cargo Toolchain](01_toolchain.md)
 
 ---

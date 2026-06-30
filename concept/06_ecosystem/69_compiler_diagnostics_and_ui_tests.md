@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **F** — Formal
 > **双维定位**: F×Inf — 编译器基础设施
 > **定位**: 把“rustc 的错误信息是怎么构造的、如何测试错误输出”讲清楚，为贡献 rustc 或编写自定义 lint 打下基础。
-> **前置概念**: [Rustc Query System](../04_formal/19_rustc_query_system.md) · [Rustc Driver and Stable MIR](68_rustc_driver_and_stable_mir.md)
+> **前置概念**: [安全边界](../05_comparative/04_safety_boundaries.md)
 > **后置概念**: [Rustc Bootstrap](70_rustc_bootstrap.md) · [Compiler Infrastructure](47_compiler_infrastructure.md)
 
 ---

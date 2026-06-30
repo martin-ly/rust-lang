@@ -1,4 +1,4 @@
-# 研究资源汇总
+# 研究资源汇总 {#研究资源汇总}
 
 > **概念族**: 参考资源
 
@@ -20,7 +20,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -29,35 +29,35 @@
 >
 
 - [研究资源汇总](#研究资源汇总)
-  - [📑 目录](#-目录)
-  - [📚 学术资源 {#-学术资源}](#-学术资源--学术资源)
+  - [📑 目录](#目录)
+  - [📚 学术资源](#学术资源)
     - [形式化方法相关论文](#形式化方法相关论文)
     - [类型理论相关论文](#类型理论相关论文)
     - [性能优化相关论文](#性能优化相关论文)
-  - [📖 官方文档 {#-官方文档}](#-官方文档--官方文档)
+  - [📖 官方文档](#官方文档)
     - [Rust 官方文档](#rust-官方文档)
     - [Rust 编译器文档](#rust-编译器文档)
     - [Rust 工具文档](#rust-工具文档)
-  - [🛠️ 工具资源 {#️-工具资源}](#️-工具资源-️-工具资源)
+  - [🛠️ 工具资源](#工具资源)
     - [形式化验证工具](#形式化验证工具)
     - [性能分析工具](#性能分析工具)
     - [内存分析工具](#内存分析工具)
     - [代码分析工具](#代码分析工具)
-  - [📝 社区资源 {#-社区资源}](#-社区资源--社区资源)
+  - [📝 社区资源](#社区资源)
     - [社区论坛](#社区论坛)
     - [社区项目](#社区项目)
-  - [🎓 学习资源 {#-学习资源}](#-学习资源--学习资源)
+  - [🎓 学习资源](#学习资源)
     - [在线课程](#在线课程)
     - [书籍](#书籍)
-  - [📰 新闻和博客 {#-新闻和博客}](#-新闻和博客--新闻和博客)
+  - [📰 新闻和博客](#新闻和博客)
     - [官方博客](#官方博客)
     - [社区博客](#社区博客)
   - [资源与形式化衔接](#资源与形式化衔接)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
+  - [🔗 相关资源](#相关资源)
     - [核心文档](#核心文档)
     - [研究笔记](#研究笔记)
     - [形式化证明体系（2026-02-14）](#形式化证明体系2026-02-14)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -65,13 +65,13 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 📚 学术资源 {#-学术资源}
+## 📚 学术资源 {#学术资源}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 形式化方法相关论文
+### 形式化方法相关论文 {#形式化方法相关论文}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -107,7 +107,7 @@
 
    - 链接: 项目主页
 
-### 类型理论相关论文
+### 类型理论相关论文 {#类型理论相关论文}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -141,7 +141,7 @@
 
    - 形式化衔接: [00_completeness_gaps](formal_methods/00_completeness_gaps.md)、[PROOF_INDEX](10_proof_index.md)
 
-### 性能优化相关论文
+### 性能优化相关论文 {#性能优化相关论文}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -167,13 +167,13 @@
 
 ---
 
-## 📖 官方文档 {#-官方文档}
+## 📖 官方文档 {#官方文档}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Rust 官方文档
+### Rust 官方文档 {#rust-官方文档}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -211,7 +211,7 @@
 
   - 描述: Rust 版本指南
 
-### Rust 编译器文档
+### Rust 编译器文档 {#rust-编译器文档}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -231,7 +231,7 @@
 
   - 描述: Rust 语言设计提案
 
-### Rust 工具文档
+### Rust 工具文档 {#rust-工具文档}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -253,13 +253,13 @@
 
 ---
 
-## 🛠️ 工具资源 {#️-工具资源}
+## 🛠️ 工具资源 {#工具资源}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 形式化验证工具
+### 形式化验证工具 {#形式化验证工具}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -299,7 +299,7 @@
 
   - 相关: [工具使用指南 - Kani](10_tools_guide.md#kani)
 
-### 性能分析工具
+### 性能分析工具 {#性能分析工具}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -327,7 +327,7 @@
 
   - 相关: [工具使用指南 - flamegraph](10_tools_guide.md#flamegraph)
 
-### 内存分析工具
+### 内存分析工具 {#内存分析工具}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -355,7 +355,7 @@
 
   - 相关: [工具使用指南 - heaptrack](10_tools_guide.md#heaptrack)
 
-### 代码分析工具
+### 代码分析工具 {#代码分析工具}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -385,13 +385,13 @@
 
 ---
 
-## 📝 社区资源 {#-社区资源}
+## 📝 社区资源 {#社区资源}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 社区论坛
+### 社区论坛 {#社区论坛}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -413,7 +413,7 @@
 
   - 描述: Rust 社区讨论
 
-### 社区项目
+### 社区项目 {#社区项目}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -431,13 +431,13 @@
 
 ---
 
-## 🎓 学习资源 {#-学习资源}
+## 🎓 学习资源 {#学习资源}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 在线课程
+### 在线课程 {#在线课程}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -453,7 +453,7 @@
 
   - 描述: Rust 实践练习
 
-### 书籍
+### 书籍 {#书籍}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -479,13 +479,13 @@
 
 ---
 
-## 📰 新闻和博客 {#-新闻和博客}
+## 📰 新闻和博客 {#新闻和博客}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 官方博客
+### 官方博客 {#官方博客}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -501,7 +501,7 @@
 
   - 描述: Rust 内部开发博客
 
-### 社区博客
+### 社区博客 {#社区博客}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -519,7 +519,7 @@
 
 ---
 
-## 资源与形式化衔接
+## 资源与形式化衔接 {#资源与形式化衔接}
 
 >
 
@@ -529,7 +529,7 @@
 
 | :--- | :--- | :--- |
 
-| RustBelt、Stacked Borrows | [ownership_model](formal_methods/10_ownership_model.md)、[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md)、[coq_skeleton](../deprecated/coq_skeleton/README.md)、[RUSTBELT_ALIGNMENT](10_rustbelt_alignment.md) | OW1、T2/T3、CHAN-T1、MUTEX-T1；Coq T-OW2 骨架 |
+| RustBelt、Stacked Borrows | [ownership_model](formal_methods/10_ownership_model.md)、[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md)、[coq_skeleton](../../archive/deprecated/coq_skeleton/README.md)、[RUSTBELT_ALIGNMENT](10_rustbelt_alignment.md) | OW1、T2/T3、CHAN-T1、MUTEX-T1；Coq T-OW2 骨架 |
 
 | Rust 类型系统研究 | [type_system_foundations](type_theory/10_type_system_foundations.md)、[trait_system_formalization](type_theory/10_trait_system_formalization.md) | 类型保持、coherence、RPITIT |
 
@@ -547,13 +547,13 @@
 
 ---
 
-## 🔗 相关资源 {#-相关资源}
+## 🔗 相关资源 {#相关资源}
 
 >
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 核心文档
+### 核心文档 {#核心文档}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -563,7 +563,7 @@
 
 - [术语表](10_glossary.md) - 专业术语解释
 
-### 研究笔记
+### 研究笔记 {#研究笔记}
 
 >
 
@@ -575,7 +575,7 @@
 
 - [实验研究](experiments/README.md) - 实验研究索引
 
-### 形式化证明体系（2026-02-14）
+### 形式化证明体系（2026-02-14） {#形式化证明体系2026-02-14}
 
 >
 
@@ -589,7 +589,7 @@
 
 - [核心定理完整证明](10_core_theorems_full_proofs.md) - L2 级 ownership T2、borrow T1、type T3
 
-- [Coq 证明骨架](../deprecated/coq_skeleton/README.md) - T-OW2 所有权唯一性
+- [Coq 证明骨架](../../archive/deprecated/coq_skeleton/README.md) - T-OW2 所有权唯一性
 
 - L3 实施指南 - Coq/Isabelle 补全路线（已归档）
 
@@ -603,7 +603,7 @@
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -613,7 +613,7 @@
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -621,7 +621,7 @@
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -635,7 +635,7 @@
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -645,7 +645,7 @@
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -677,7 +677,7 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -689,7 +689,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

@@ -1,4 +1,4 @@
-# Coq/Isabelle 证明脚手架
+# Coq/Isabelle 证明脚手架 {#coqisabelle-证明脚手架}
 
 > **概念族**: 形式化方法
 
@@ -18,7 +18,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -27,7 +27,7 @@
 >
 
 - [Coq/Isabelle 证明脚手架](#coqisabelle-证明脚手架)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [Coq 脚手架](#coq-脚手架)
     - [所有权模型](#所有权模型)
@@ -37,8 +37,8 @@
   - [证明策略](#证明策略)
     - [所有权证明策略](#所有权证明策略)
     - [借用检查策略](#借用检查策略)
-  - [相关文档](#相关文档)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [相关文档](#相关文档-1)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -46,7 +46,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 概述
+## 概述 {#概述}
 
 >
 
@@ -54,13 +54,13 @@
 
 本文档提供 Coq 和 Isabelle 证明助手的脚手架代码，用于形式化验证 Rust 的核心属性。
 
-## Coq 脚手架
+## Coq 脚手架 {#coq-脚手架}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 所有权模型
+### 所有权模型 {#所有权模型}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -94,7 +94,7 @@ Inductive transfer_ownership (v: variable) (o: Ownership) : Prop :=
 
 ```
 
-### 借用规则
+### 借用规则 {#借用规则}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -122,13 +122,13 @@ Inductive valid_borrow (r: reference) (ctx: context) : Prop :=
 
 ```
 
-## Isabelle 脚手架
+## Isabelle 脚手架 {#isabelle-脚手架}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 类型系统
+### 类型系统 {#类型系统}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -168,13 +168,13 @@ end
 
 ```
 
-## 证明策略
+## 证明策略 {#证明策略}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 所有权证明策略
+### 所有权证明策略 {#所有权证明策略}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -192,7 +192,7 @@ Ltac prove_ownership :=
 
 ```
 
-### 借用检查策略
+### 借用检查策略 {#借用检查策略}
 
 >
 
@@ -214,7 +214,7 @@ Ltac check_borrow :=
 
 ```
 
-## 相关文档
+## 相关文档 {#相关文档-1}
 
 >
 
@@ -224,11 +224,11 @@ Ltac check_borrow :=
 
 - [证明索引](10_proof_index.md)
 
-- [Coq 骨架](../deprecated/coq_skeleton/README.md)
+- [Coq 骨架](../../archive/deprecated/coq_skeleton/README.md)
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -238,7 +238,7 @@ Ltac check_borrow :=
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -246,7 +246,7 @@ Ltac check_borrow :=
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -260,7 +260,7 @@ Ltac check_borrow :=
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -270,7 +270,7 @@ Ltac check_borrow :=
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档-1}
 
 - Rust 1.94 迁移指南
 
@@ -302,7 +302,7 @@ Ltac check_borrow :=
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -314,7 +314,7 @@ Ltac check_borrow :=
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 

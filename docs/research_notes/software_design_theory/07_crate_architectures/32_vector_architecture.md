@@ -8,7 +8,7 @@
 
 ---
 
-# vector Crate 架构解构
+# vector Crate 架构解构 {#vector-crate-架构解构}
 
 > **最后更新**: 2026-06-29
 >
@@ -24,7 +24,7 @@
 
 ---
 
-## 1. 引言：Rust 向量最近邻搜索的生态定位
+## 1. 引言：Rust 向量最近邻搜索的生态定位 {#1-引言rust-向量最近邻搜索的生态定位}
 
 > **[来源: [vector crates.io](https://crates.io/crates/vector)]**
 
@@ -57,11 +57,11 @@ let neighbors = index.search(&vectors, &[5.0, 5.0], 2);
 
 ---
 
-## 2. 核心 API 架构
+## 2. 核心 API 架构 {#2-核心-api-架构}
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 2.1 极简两阶段模型
+### 2.1 极简两阶段模型 {#21-极简两阶段模型}
 
 ```mermaid
 graph LR
@@ -81,7 +81,7 @@ graph LR
 
 > [来源: [vector Vector Docs](https://docs.rs/vector/latest/vector/trait.Vector.html)]
 
-### 2.2 索引构建参数
+### 2.2 索引构建参数 {#22-索引构建参数}
 
 `Index::build` 接收四个参数：
 
@@ -96,7 +96,7 @@ let index = Index::build(&vectors, 16, 200, 42);
 
 > [来源: [HNSW Algorithm Parameters](https://arxiv.org/abs/1603.09320)]
 
-### 2.3 搜索接口
+### 2.3 搜索接口 {#23-搜索接口}
 
 搜索返回最近邻的索引与距离：
 
@@ -109,7 +109,7 @@ let (indices, distances): (Vec<_>, Vec<_>) = index
 
 > [来源: [vector search Docs](https://docs.rs/vector/latest/vector/struct.Index.html#method.search)]
 
-### 2.4 与外部嵌入模型组合
+### 2.4 与外部嵌入模型组合 {#24-与外部嵌入模型组合}
 
 `vector` crate 本身不生成 embedding，通常与语言模型、CV 模型或专用 embedding crate 组合：
 
@@ -124,7 +124,7 @@ let hits = index.search(&embeddings, &query_embedding, 5);
 
 ---
 
-## 3. 类型系统利用
+## 3. 类型系统利用 {#3-类型系统利用}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -139,7 +139,7 @@ let hits = index.search(&embeddings, &query_embedding, 5);
 
 ---
 
-## 4. 反例边界
+## 4. 反例边界 {#4-反例边界}
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -156,7 +156,7 @@ let hits = index.search(&embeddings, &query_embedding, 5);
 
 ---
 
-## 5. 代码示例锚点
+## 5. 代码示例锚点 {#5-代码示例锚点}
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -168,7 +168,7 @@ let hits = index.search(&embeddings, &query_embedding, 5);
 
 ---
 
-## 6. 相关架构与延伸阅读
+## 6. 相关架构与延伸阅读 {#6-相关架构与延伸阅读}
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -179,7 +179,7 @@ let hits = index.search(&embeddings, &query_embedding, 5);
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [vector crates.io](https://crates.io/crates/vector)]**
 >
@@ -197,7 +197,7 @@ let hits = index.search(&embeddings, &query_embedding, 5);
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
 > **P0（官方/必读）**:
 >
@@ -216,7 +216,7 @@ let hits = index.search(&embeddings, &query_embedding, 5);
 > - [来源: [pgvector](https://github.com/pgvector/pgvector)] — 生产级向量数据库对比参考
 > - [来源: [This Week in Rust](https://this-week-in-rust.org/)]
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

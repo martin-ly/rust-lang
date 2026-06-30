@@ -1,4 +1,4 @@
-# Linkage 与符号机制
+# Linkage 与符号机制 {#linkage-与符号机制}
 
 > **概念族**: 形式化模块
 
@@ -20,7 +20,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [Linkage 与符号机制](#linkage-与符号机制)
   - [目录](#目录)
@@ -30,7 +30,7 @@
   - [解释与论证](#解释与论证)
     - [为什么 Rust 默认要 name mangling](#为什么-rust-默认要-name-mangling)
     - [`extern crate` 的演进](#extern-crate-的演进)
-    - [`#[linkage = "internal"]` 与 `static`](#linkage--internal-与-static)
+    - [`#[linkage = "internal"]` 与 `static` {#linkage-internal-与-static}](#linkage--internal-与-static-linkage-internal-与-static)
   - [Rust 示例](#rust-示例)
     - [1. 基本 FFI 导出](#1-基本-ffi-导出)
     - [2. `extern crate` 别名（Rust 2018+ 场景）](#2-extern-crate-别名rust-2018-场景)
@@ -41,13 +41,13 @@
 
 ---
 
-## 研究目标
+## 研究目标 {#研究目标}
 
 明确 Rust crate 在编译、链接阶段的符号可见性与 linkage 规则，区分语言级可见性（visibility）与链接器级符号可见性（symbol visibility / linkage），为 unsafe FFI、动态库、嵌入式等场景提供形式化参考。
 
 ---
 
-## 概念定义
+## 概念定义 {#概念定义}
 
 | 术语 | 定义 |
 
@@ -75,7 +75,7 @@
 
 ---
 
-## 属性关系
+## 属性关系 {#属性关系}
 
 ```text
 
@@ -121,13 +121,13 @@ Source Crate
 
 ---
 
-## 解释与论证
+## 解释与论证 {#解释与论证}
 
-### 为什么 Rust 默认要 name mangling
+### 为什么 Rust 默认要 name mangling {#为什么-rust-默认要-name-mangling}
 
 Name mangling 把模块路径、泛型参数、crate 哈希等信息编码到符号名中，以支持重载（函数名相同但签名不同）、泛型单态化和 crate 内唯一性。`#[no_mangle]` 关闭这一机制，代价是失去重载与泛型信息，因此通常只用于无泛型的 `extern "C"` 函数。
 
-### `extern crate` 的演进
+### `extern crate` 的演进 {#extern-crate-的演进}
 
 - Rust 2015：必须通过 `extern crate foo;` 引入依赖。
 
@@ -137,7 +137,7 @@ Name mangling 把模块路径、泛型参数、crate 哈希等信息编码到符
 
 形式化地看，`extern crate` 在 name resolution 阶段向 crate root 注入一个外部 crate 名称空间，而 `use` 是在该名称空间内创建局部别名。
 
-### `#[linkage = "internal"]` 与 `static`
+### `#[linkage = "internal"]` 与 `static` {#linkage-internal-与-static}
 
 LLVM 的 `internal` linkage 表示符号仅在当前编译单元内可见。Rust 中的 `const` 与 `static` 若未被 `pub` 或 `#[no_mangle]` 暴露，通常会被优化为内部链接，但这不是语言级保证。`#[linkage]` 属性属于 unstable feature，需要 nightly。
 
@@ -145,9 +145,9 @@ LLVM 的 `internal` linkage 表示符号仅在当前编译单元内可见。Rust
 
 ---
 
-## Rust 示例
+## Rust 示例 {#rust-示例}
 
-### 1. 基本 FFI 导出
+### 1. 基本 FFI 导出 {#1-基本-ffi-导出}
 
 ```rust
 
@@ -173,7 +173,7 @@ crate-type = ["cdylib"]
 
 ```
 
-### 2. `extern crate` 别名（Rust 2018+ 场景）
+### 2. `extern crate` 别名（Rust 2018+ 场景） {#2-extern-crate-别名rust-2018-场景}
 
 ```rust
 
@@ -187,7 +187,7 @@ pub use new_name::SomeType;
 
 ```
 
-### 3. 显式符号名
+### 3. 显式符号名 {#3-显式符号名}
 
 ```rust
 
@@ -203,7 +203,7 @@ pub extern "C" fn add(a: i32, b: i32) -> i32 {
 
 ---
 
-## 反例与边界
+## 反例与边界 {#反例与边界}
 
 | 场景 | 代码 | 结果 |
 
@@ -221,7 +221,7 @@ pub extern "C" fn add(a: i32, b: i32) -> i32 {
 
 ---
 
-## 权威来源对照表
+## 权威来源对照表 {#权威来源对照表}
 
 | 概念 | Rust Reference | Rustonomicon | Ferrocene FLS | 备注 |
 
@@ -241,7 +241,7 @@ pub extern "C" fn add(a: i32, b: i32) -> i32 {
 
 ---
 
-## 学术/社区来源参考
+## 学术/社区来源参考 {#学术社区来源参考}
 
 > **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 > **来源**: [Aeneas](https://aeneas-verification.github.io/)

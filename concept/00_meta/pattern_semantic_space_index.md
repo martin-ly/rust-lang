@@ -9,7 +9,7 @@
 > **双维定位**: C×Ana / C×Eva
 > **前置概念**: [Patterns](../06_ecosystem/02_patterns.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Pattern Composition Algebra](../06_ecosystem/35_pattern_composition_algebra.md) · [Algorithm-Pattern Semantic Bridge](semantic_bridge_algorithms_patterns.md)
-> **主要来源**: [GoF — Design Patterns] · [POSA] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+> **主要来源**: [GoF — Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns) · [POSA](https://en.wikipedia.org/wiki/Pattern-Oriented_Software_Architecture) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 ---
 
 > **Bloom 层级**: 理解 → 分析 → 评价

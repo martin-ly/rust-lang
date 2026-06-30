@@ -13,7 +13,7 @@
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×Eva
 > **前置依赖**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [形式化验证](../04_formal/05_verification_toolchain.md)
-> **后置延伸**: [BorrowSanitizer](32_borrow_sanitizer_preview.md) · [AutoVerus/Verus](33_autoverus_preview.md)
+> **后置延伸**: [BorrowSanitizer](20_borrowsanitizer_preview.md) · [AutoVerus/Verus](33_autoverus_preview.md)
 >
 > **来源**: [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [safety-tool slides](https://os-checker.github.io/slides/safety-tags)
 
@@ -153,5 +153,5 @@ B
 - [Unsafe Rust](../03_advanced/03_unsafe.md)
 - [形式化验证工具生态](../06_ecosystem/47_formal_verification_tools.md)
 - [Safety Tags 深度](../04_formal/33_safety_tags_in_formal.md)
-- [BorrowSanitizer 预览](32_borrow_sanitizer_preview.md) · [深度](../04_formal/34_borrow_sanitizer_in_formal.md)
+- [BorrowSanitizer 预览](20_borrowsanitizer_preview.md) · [深度](../04_formal/34_borrow_sanitizer_in_formal.md)
 - [AutoVerus/Verus 预览](33_autoverus_preview.md) · [深度](../04_formal/24_autoverus.md)

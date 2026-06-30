@@ -1,4 +1,4 @@
-# 充分表达 vs 非充分表达边界矩阵
+# 充分表达 vs 非充分表达边界矩阵 {#充分表达-vs-非充分表达边界矩阵}
 
 > **概念族**: 软件设计 / 边界系统
 
@@ -24,7 +24,7 @@
 
 > **权威来源**: [Rustonomicon](https://doc.rust-lang.org/nomicon/) | [Rust Reference](https://doc.rust-lang.org/reference/) | [Ferrocene Language Specification](https://spec.ferrocene.dev/) | [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -33,15 +33,15 @@
 >
 
 - [充分表达 vs 非充分表达边界矩阵](#充分表达-vs-非充分表达边界矩阵)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [形式化定义与公理](#形式化定义与公理)
   - [反例：违反表达边界](#反例违反表达边界)
   - [定义（非形式化对照）](#定义非形式化对照)
-  - [设计模式 × 表达边界](#设计模式--表达边界)
+  - [设计模式 × 表达边界](#设计模式-表达边界)
     - [创建型（5）](#创建型5)
     - [结构型（7）](#结构型7)
     - [行为型（11）](#行为型11)
-  - [执行模型 × 表达边界](#执行模型--表达边界)
+  - [执行模型 × 表达边界](#执行模型-表达边界)
   - [近似表达详解](#近似表达详解)
   - [等价表达示例](#等价表达示例)
   - [不可表达边界说明](#不可表达边界说明)
@@ -54,7 +54,7 @@
     - [示例 2：观察者模式](#示例-2观察者模式)
     - [示例 3：多继承不可表达](#示例-3多继承不可表达)
   - [引用](#引用)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -72,7 +72,7 @@
 
 ---
 
-## 形式化定义与公理
+## 形式化定义与公理 {#形式化定义与公理}
 
 >
 
@@ -158,7 +158,7 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 
 ---
 
-## 反例：违反表达边界
+## 反例：违反表达边界 {#反例违反表达边界}
 
 >
 
@@ -176,7 +176,7 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 
 ---
 
-## 定义（非形式化对照）
+## 定义（非形式化对照） {#定义非形式化对照}
 
 >
 
@@ -194,13 +194,13 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 
 ---
 
-## 设计模式 × 表达边界
+## 设计模式 × 表达边界 {#设计模式-表达边界}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 创建型（5）
+### 创建型（5） {#创建型5}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -222,7 +222,7 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 
 | Singleton | 近似表达 | 无全局可变，用 OnceLock 等替代 |
 
-### 结构型（7）
+### 结构型（7） {#结构型7}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -248,7 +248,7 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 
 | Proxy | 等价表达 | 委托、延迟 |
 
-### 行为型（11）
+### 行为型（11） {#行为型11}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -284,7 +284,7 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 
 ---
 
-## 执行模型 × 表达边界
+## 执行模型 × 表达边界 {#执行模型-表达边界}
 
 >
 
@@ -306,7 +306,7 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 
 ---
 
-## 近似表达详解
+## 近似表达详解 {#近似表达详解}
 
 >
 
@@ -332,7 +332,7 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 
 ---
 
-## 等价表达示例
+## 等价表达示例 {#等价表达示例}
 
 >
 
@@ -354,7 +354,7 @@ struct MergeSort; impl SortStrategy for MergeSort { ... }
 
 ---
 
-## 不可表达边界说明
+## 不可表达边界说明 {#不可表达边界说明}
 
 >
 
@@ -374,7 +374,7 @@ struct MergeSort; impl SortStrategy for MergeSort { ... }
 
 ---
 
-## 从 OOP 迁移建议
+## 从 OOP 迁移建议 {#从-oop-迁移建议}
 
 >
 
@@ -398,7 +398,7 @@ struct MergeSort; impl SortStrategy for MergeSort { ... }
 
 ---
 
-## Adapter 等价表达示例
+## Adapter 等价表达示例 {#adapter-等价表达示例}
 
 >
 
@@ -438,7 +438,7 @@ impl Target for Adapter {
 
 ---
 
-## Composite 等价表达示例
+## Composite 等价表达示例 {#composite-等价表达示例}
 
 >
 
@@ -478,7 +478,7 @@ impl Node {
 
 ---
 
-## 不可表达边界说明（扩展）
+## 不可表达边界说明（扩展） {#不可表达边界说明扩展}
 
 >
 
@@ -502,13 +502,13 @@ impl Node {
 
 ---
 
-## 场景化决策示例（层次推进）
+## 场景化决策示例（层次推进） {#场景化决策示例层次推进}
 
 >
 
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 示例 1：OOP 继承迁移
+### 示例 1：OOP 继承迁移 {#示例-1oop-继承迁移}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -526,7 +526,7 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 
 ```
 
-### 示例 2：观察者模式
+### 示例 2：观察者模式 {#示例-2观察者模式}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -534,7 +534,7 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 
 **决策**：Rust 用 channel → $\mathit{ExprB} = \mathrm{Approx}$；消息传递替代回调，语义等价。
 
-### 示例 3：多继承不可表达
+### 示例 3：多继承不可表达 {#示例-3多继承不可表达}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -544,7 +544,7 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 
 ---
 
-## 引用
+## 引用 {#引用}
 
 >
 
@@ -558,7 +558,7 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -568,13 +568,13 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -590,7 +590,7 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -602,7 +602,7 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -634,7 +634,7 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -646,7 +646,7 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 

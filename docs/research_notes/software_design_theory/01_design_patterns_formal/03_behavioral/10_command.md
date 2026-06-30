@@ -1,4 +1,4 @@
-# Command 形式化分析
+# Command 形式化分析 {#command-形式化分析}
 
 > **概念族**: 软件设计 / 设计模式
 
@@ -24,14 +24,14 @@
 
 > **权威来源**: [Rust Design Patterns – Behavioral](https://rust-unofficial.github.io/patterns/patterns/behavioural/index.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
-## 📊 目录 {#-目录}
+## 📊 目录 {#目录}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Command 形式化分析](#command-形式化分析)
-  - [📊 目录 {#-目录}](#-目录--目录)
+  - [📊 目录](#目录)
   - [权威来源对照](#权威来源对照)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Command 结构）](#def-11command-结构)
@@ -42,7 +42,7 @@
     - [推论 CM-C1（纯 Safe Command）](#推论-cm-c1纯-safe-command)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
-  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196--edition-2024-代码示例更新)
+  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196-edition-2024-代码示例更新)
     - [Edition 2024 关键兼容点](#edition-2024-关键兼容点)
   - [Rust 所有权、借用、生命周期与 trait 系统约束分析](#rust-所有权借用生命周期与-trait-系统约束分析)
     - [所有权约束](#所有权约束)
@@ -74,7 +74,7 @@
   - [思维导图](#思维导图)
   - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -84,7 +84,7 @@
 
 ---
 
-## 权威来源对照
+## 权威来源对照 {#权威来源对照}
 
 >
 
@@ -110,13 +110,13 @@
 
 ---
 
-## 形式化定义
+## 形式化定义 {#形式化定义}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Def 1.1（Command 结构）
+### Def 1.1（Command 结构） {#def-11command-结构}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -140,7 +140,7 @@ $$\mathcal{CM} = \langle C, \mathit{execute}: C \rightarrow \mathrm{Result}\lang
 
 ---
 
-### Axiom CM1（可存储公理）
+### Axiom CM1（可存储公理） {#axiom-cm1可存储公理}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -152,7 +152,7 @@ $$\forall c: C,\, c\text{ 可存储；可 defer 执行}$$
 
 命令对象可存储；可 defer 执行。
 
-### Axiom CM2（闭包即命令公理）
+### Axiom CM2（闭包即命令公理） {#axiom-cm2闭包即命令公理}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -166,7 +166,7 @@ $$\text{闭包 }\mathit{Fn}() \text{ 或 } \mathit{FnOnce}() \text{ 即命令；
 
 ---
 
-### 定理 CM-T1（闭包类型安全定理）
+### 定理 CM-T1（闭包类型安全定理） {#定理-cm-t1闭包类型安全定理}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -190,7 +190,7 @@ $$\text{闭包 }\mathit{Fn}() \text{ 或 } \mathit{FnOnce}() \text{ 即命令；
 
 ---
 
-### 定理 CM-T2（存储与跨线程定理）
+### 定理 CM-T2（存储与跨线程定理） {#定理-cm-t2存储与跨线程定理}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -214,7 +214,7 @@ $$\text{闭包 }\mathit{Fn}() \text{ 或 } \mathit{FnOnce}() \text{ 即命令；
 
 ---
 
-### 推论 CM-C1（纯 Safe Command）
+### 推论 CM-C1（纯 Safe Command） {#推论-cm-c1纯-safe-command}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -238,7 +238,7 @@ Command 为纯 Safe；闭包或 trait 封装操作，无 `unsafe`。
 
 ---
 
-### 概念定义-属性关系-解释论证 层次汇总
+### 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -258,7 +258,7 @@ Command 为纯 Safe；闭包或 trait 封装操作，无 `unsafe`。
 
 ---
 
-## Rust 实现与代码示例
+## Rust 实现与代码示例 {#rust-实现与代码示例}
 
 >
 
@@ -360,7 +360,7 @@ impl ReversibleCommand for IncrementCommand {
 
 ---
 
-## Rust 1.96+ / Edition 2024 代码示例更新
+## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
 
 >
 
@@ -424,7 +424,7 @@ fn main() {
 
 ```
 
-### Edition 2024 关键兼容点
+### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
 
@@ -440,25 +440,25 @@ fn main() {
 
 ---
 
-## Rust 所有权、借用、生命周期与 trait 系统约束分析
+## Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}
 
 >
 
 > **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
 
-### 所有权约束
+### 所有权约束 {#所有权约束}
 
 命令对象通常为拥有值，`Invoker` 通过 `Box<dyn Command>` 持有历史；`execute` 接收 `&self` 以支持多次调用与撤销。
 
-### 借用与生命周期约束
+### 借用与生命周期约束 {#借用与生命周期约束}
 
 命令通过 `Rc<RefCell<T>>` 共享并修改接收者；运行时借用检查保证同一时刻只有一个可变借用。
 
-### trait 系统约束
+### trait 系统约束 {#trait-系统约束}
 
 `Command` trait 统一 `execute`/`undo` 接口；`Box<dyn Command>` 支持异构命令入栈。
 
-### 与 Rust 类型系统的综合联系
+### 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系}
 
 | Rust 机制 | 本模式使用方式 | 保证 |
 
@@ -476,13 +476,13 @@ fn main() {
 
 ---
 
-## 完整证明
+## 完整证明 {#完整证明}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 形式化论证链
+### 形式化论证链 {#形式化论证链}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -520,7 +520,7 @@ Send/Sync
 
 ```
 
-### 与 Rust 类型系统的联系
+### 与 Rust 类型系统的联系 {#与-rust-类型系统的联系}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -536,7 +536,7 @@ Send/Sync
 
 | trait | 可撤销命令 | 接口一致性 |
 
-### 内存安全保证
+### 内存安全保证 {#内存安全保证}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -550,13 +550,13 @@ Send/Sync
 
 ---
 
-## 形式化属性：不变式、前置/后置条件与安全边界
+## 形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}
 
 >
 
 > **来源: [Formal Methods – Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)** | **来源: [Rust API Guidelines – Safety](https://rust-lang.github.io/api-guidelines/safety.html)**
 
-### 不变式（Invariants）
+### 不变式（Invariants） {#不变式invariants}
 
 1. 命令封装完整操作信息。
 
@@ -564,7 +564,7 @@ Send/Sync
 
 3. 命令历史顺序记录执行顺序。
 
-### 前置条件（Preconditions）
+### 前置条件（Preconditions） {#前置条件preconditions}
 
 1. 接收者状态满足命令执行前提。
 
@@ -572,7 +572,7 @@ Send/Sync
 
 3. 多线程场景使用线程安全共享类型。
 
-### 后置条件（Postconditions）
+### 后置条件（Postconditions） {#后置条件postconditions}
 
 1. 执行后接收者状态按命令语义更新。
 
@@ -580,11 +580,11 @@ Send/Sync
 
 3. 命令对象保持可复用。
 
-### 安全边界（Safety Boundary）
+### 安全边界（Safety Boundary） {#安全边界safety-boundary}
 
 通常纯 Safe。使用 `RefCell`/`Mutex` 时需注意运行时借用规则；`unsafe` 仅出现在接收者底层实现。
 
-### 形式化规约汇总
+### 形式化规约汇总 {#形式化规约汇总}
 
 ```text
 
@@ -600,7 +600,7 @@ Send/Sync
 
 ---
 
-## 典型场景
+## 典型场景 {#典型场景}
 
 >
 
@@ -620,7 +620,7 @@ Send/Sync
 
 ---
 
-## 完整场景示例：可撤销文本编辑器
+## 完整场景示例：可撤销文本编辑器 {#完整场景示例可撤销文本编辑器}
 
 >
 
@@ -716,7 +716,7 @@ impl Editor {
 
 ---
 
-## 相关模式
+## 相关模式 {#相关模式}
 
 >
 
@@ -734,7 +734,7 @@ impl Editor {
 
 ---
 
-## 实现变体
+## 实现变体 {#实现变体}
 
 >
 
@@ -754,13 +754,13 @@ impl Editor {
 
 ---
 
-## 反例：常见误用及编译器错误
+## 反例：常见误用及编译器错误 {#反例常见误用及编译器错误}
 
 >
 
 > **来源: [Rust By Example – Error Handling](https://doc.rust-lang.org/rust-by-example/error.html)** | **来源: [Rust Compiler Error Index](https://doc.rust-lang.org/error_codes/error-index.html)**
 
-### 反例 1：undo 与 execute 不匹配
+### 反例 1：undo 与 execute 不匹配 {#反例-1undo-与-execute-不匹配}
 
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
@@ -778,7 +778,7 @@ impl Command for AddText {
 
 **风险**：撤销过度，破坏接收者状态。
 
-### 反例 2：命令历史持有已移动接收者
+### 反例 2：命令历史持有已移动接收者 {#反例-2命令历史持有已移动接收者}
 
 > 以下代码故意展示编译失败，用于说明对应反例。
 
@@ -796,7 +796,7 @@ doc.borrow_mut().push_str("x"); // 错误
 
 **编译器错误**：`use of moved value: doc`。
 
-### 反例 3：RefCell 运行时借用冲突
+### 反例 3：RefCell 运行时借用冲突 {#反例-3refcell-运行时借用冲突}
 
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
@@ -812,7 +812,7 @@ cmd.execute(); // 尝试可变借用，panic
 
 ---
 
-## 选型决策树
+## 选型决策树 {#选型决策树}
 
 >
 
@@ -834,7 +834,7 @@ cmd.execute(); // 尝试可变借用，panic
 
 ---
 
-## 与 GoF 对比
+## 与 GoF 对比 {#与-gof-对比}
 
 >
 
@@ -852,7 +852,7 @@ cmd.execute(); // 尝试可变借用，panic
 
 ---
 
-## 边界
+## 边界 {#边界}
 
 >
 
@@ -870,7 +870,7 @@ cmd.execute(); // 尝试可变借用，panic
 
 ---
 
-## 与 Rust 1.93 的对应
+## 与 Rust 1.93 的对应 {#与-rust-193-的对应}
 
 >
 
@@ -886,7 +886,7 @@ cmd.execute(); // 尝试可变借用，panic
 
 ---
 
-## 思维导图
+## 思维导图 {#思维导图}
 
 >
 
@@ -936,7 +936,7 @@ mindmap
 
 ---
 
-## 与其他模式的关系图
+## 与其他模式的关系图 {#与其他模式的关系图}
 
 >
 
@@ -968,7 +968,7 @@ graph LR
 
 ---
 
-## 实质内容五维自检
+## 实质内容五维自检 {#实质内容五维自检}
 
 >
 
@@ -992,7 +992,7 @@ graph LR
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -1002,13 +1002,13 @@ graph LR
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -1024,7 +1024,7 @@ graph LR
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -1036,7 +1036,7 @@ graph LR
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -1070,7 +1070,7 @@ graph LR
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -1082,7 +1082,7 @@ graph LR
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 

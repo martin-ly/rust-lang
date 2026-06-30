@@ -1,4 +1,4 @@
-# 2026年Rust生态系统全面梳理（含26处国际权威引用）
+# 2026年Rust生态系统全面梳理（含26处国际权威引用） {#2026年rust生态系统全面梳理含26处国际权威引用}
 
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
@@ -10,12 +10,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [2026年Rust生态系统全面梳理（含26处国际权威引用）](#2026年rust生态系统全面梳理含26处国际权威引用)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [执行摘要](#执行摘要)
   - [1. 工具链现状（权威版本）](#1-工具链现状权威版本)
     - [1.1 Rust编译器](#11-rust编译器)
@@ -52,7 +52,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 执行摘要
+## 执行摘要 {#执行摘要}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -73,11 +73,11 @@
 
 ---
 
-## 1. 工具链现状（权威版本）
+## 1. 工具链现状（权威版本） {#1-工具链现状权威版本}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1.1 Rust编译器
+### 1.1 Rust编译器 {#11-rust编译器}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -87,13 +87,13 @@
 | cargo | 1.94.0 | 2026-03-05 | [Releases.rs](https://releases.rs/docs/1.94.0/) [^2] |
 | rust-analyzer | 1.94.0 | 2026-03-05 | [Official Release](https://rust-analyzer.github.io/) [^21] |
 
-### 1.2 Rust 1.94核心特性（官方确认）
+### 1.2 Rust 1.94核心特性（官方确认） {#12-rust-194核心特性官方确认}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-#### array_windows方法
+#### array_windows方法 {#array_windows方法}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -113,7 +113,7 @@ s.as_bytes().array_windows().any(|[a1, b1, b2, a2]| ...)
 s.as_bytes().windows(4).any(|w| ...)
 ```
 
-#### LazyCell/LazyLock API稳定化
+#### LazyCell/LazyLock API稳定化 {#lazycelllazylock-api稳定化}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -126,7 +126,7 @@ s.as_bytes().windows(4).any(|w| ...)
 
 来源: [releases.rs - 1.94.0](https://releases.rs/docs/1.94.0/)
 
-#### AVX-512 FP16 Intrinsics
+#### AVX-512 FP16 Intrinsics {#avx-512-fp16-intrinsics}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -143,11 +143,11 @@ s.as_bytes().windows(4).any(|w| ...)
 
 ---
 
-## 2. Tree Borrows权威论证
+## 2. Tree Borrows权威论证 {#2-tree-borrows权威论证}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 学术认可 [^5] [^20]
+### 2.1 学术认可 [^5] [^20] {#21-学术认可-5-20}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -167,7 +167,7 @@ DOI: 10.1145/3735592
 > "Tree Borrows takes a different approach to defining when aliasing is allowed. Instead of tracking stack-based permissions, it tracks permissions in a tree structure."
 > —— **PLDI 2025 Program Committee** [^20]
 
-### 2.2 Miri学术认可
+### 2.2 Miri学术认可 {#22-miri学术认可}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -187,13 +187,13 @@ In POPL 2026.
 DOI: 10.1145/3704904
 ```
 
-### 2.3 Tree Borrows核心优势
+### 2.3 Tree Borrows核心优势 {#23-tree-borrows核心优势}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-#### 实验数据（PLDI 2025）
+#### 实验数据（PLDI 2025） {#实验数据pldi-2025}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
@@ -224,11 +224,11 @@ DOI: 10.1145/3704904
 
 ---
 
-## 3. Linux内核永久采用Rust [^13] [^18]
+## 3. Linux内核永久采用Rust [^13] [^18] {#3-linux内核永久采用rust-13-18}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 3.1 官方宣布
+### 3.1 官方宣布 {#31-官方宣布}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -243,7 +243,7 @@ DOI: 10.1145/3704904
 > "Rust is a systems programming language that provides memory safety guarantees. The Rust support in the Linux kernel is maintained by the Rust for Linux project."
 > —— **Linux Kernel Documentation**, kernel.org [^18]
 
-### 3.2 关键里程碑
+### 3.2 关键里程碑 {#32-关键里程碑}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -266,7 +266,7 @@ DOI: 10.1145/3704904
 > "Rust驱动比C驱动更安全"
 > —— Greg Kroah-Hartman, Linux内核维护者
 
-### 3.3 Rust基金会安全计划 [^15]
+### 3.3 Rust基金会安全计划 [^15] {#33-rust基金会安全计划-15}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -279,7 +279,7 @@ DOI: 10.1145/3704904
 - crates.io安全改进
 - 安全响应工作组支持
 
-### 3.4 供应链安全与CVE跟踪 [^23] [^24] [^25]
+### 3.4 供应链安全与CVE跟踪 [^23] [^24] [^25] {#34-供应链安全与cve跟踪-23-24-25}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -305,11 +305,11 @@ DOI: 10.1145/3704904
 
 ---
 
-## 4. 企业采用案例
+## 4. 企业采用案例 {#4-企业采用案例}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 4.1 Google [^16]
+### 4.1 Google [^16] {#41-google-16}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -321,7 +321,7 @@ DOI: 10.1145/3704904
 - **回滚率**: Rust代码4倍低于C/C++
 - **代码审查**: 减少25%审查时间
 
-### 4.2 Microsoft [^17]
+### 4.2 Microsoft [^17] {#42-microsoft-17}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -333,7 +333,7 @@ DOI: 10.1145/3704904
 - **SymCrypt**: 加密库重写中，含形式化验证
 - **Hyperlight VM**: 1-2ms启动时间的微VM
 
-### 4.3 其他企业 [^14] [^19]
+### 4.3 其他企业 [^14] [^19] {#43-其他企业-14-19}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -347,11 +347,11 @@ DOI: 10.1145/3704904
 
 ---
 
-## 5. Edition 2024权威指南
+## 5. Edition 2024权威指南 {#5-edition-2024权威指南}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 3.1 官方发布
+### 3.1 官方发布 {#31-官方发布}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -359,7 +359,7 @@ DOI: 10.1145/3704904
 >
 > —— **The Rust Programming Language Blog**, 2025-02-20 [^9]
 
-### 3.2 gen关键字（RFC #3513）
+### 3.2 gen关键字（RFC #3513） {#32-gen关键字rfc-3513}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -367,7 +367,7 @@ DOI: 10.1145/3704904
 >
 > —— **The Rust Edition Guide** [^10]
 
-### 3.3 Edition 2024迁移实践
+### 3.3 Edition 2024迁移实践 {#33-edition-2024迁移实践}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -387,11 +387,11 @@ DOI: 10.1145/3704904
 
 ---
 
-## 4. 引用来源汇总
+## 4. 引用来源汇总 {#4-引用来源汇总}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 学术论文
+### 学术论文 {#学术论文}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -449,11 +449,11 @@ DOI: 10.1145/3704904
 
 ---
 
-## 5. 项目对齐状态
+## 5. 项目对齐状态 {#5-项目对齐状态}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 5.1 已对齐内容
+### 5.1 已对齐内容 {#51-已对齐内容}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -475,7 +475,7 @@ DOI: 10.1145/3704904
 | crates.io安全改进 | ✅ 已记录 | [^25] [^26] |
 | TUF供应链安全 | ✅ 已记录 | [^26] |
 
-### 5.2 权威引用统计
+### 5.2 权威引用统计 {#52-权威引用统计}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -497,7 +497,7 @@ DOI: 10.1145/3704904
 
 ---
 
-## 6. 结论
+## 6. 结论 {#6-结论}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -511,7 +511,7 @@ DOI: 10.1145/3704904
 - **行业权威** - Phoronix, HotHardware硬件报道
 - **安全公告** - MITRE CVE数据库, Rust安全响应工作组
 
-### 6.1 国际权威覆盖度
+### 6.1 国际权威覆盖度 {#61-国际权威覆盖度}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -527,7 +527,7 @@ DOI: 10.1145/3704904
 
 **国际权威对齐度**: **100%** - 所有26处引用均来自国际权威来源
 
-### 6.2 权威来源分类
+### 6.2 权威来源分类 {#62-权威来源分类}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -602,7 +602,7 @@ DOI: 10.1145/3704904
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -610,7 +610,7 @@ DOI: 10.1145/3704904
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

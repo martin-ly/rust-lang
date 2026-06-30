@@ -1,4 +1,4 @@
-# 形式化验证工具实战对齐矩阵
+# 形式化验证工具实战对齐矩阵 {#形式化验证工具实战对齐矩阵}
 
 > **概念族**: 权威来源对齐 / 形式化验证工具
 > **内容分级**: [核心级]
@@ -11,7 +11,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [形式化验证工具实战对齐矩阵](#形式化验证工具实战对齐矩阵)
   - [目录](#目录)
@@ -28,13 +28,13 @@
 
 ---
 
-## 一、对齐说明
+## 一、对齐说明 {#一对齐说明}
 
 本文档将 `docs/research_notes/` 中的核心概念、定理、反例与主流 Rust 形式化验证工具（Aeneas、coq-of-rust、Kani、Prusti、Creusot）的实战能力建立映射，帮助读者理解「哪些项目内容可被哪些工具验证」。
 
 ---
 
-## 二、Aeneas
+## 二、Aeneas {#二aeneas}
 
 | 工具特性 | 项目对应内容 | 可验证性 | 备注 |
 |----------|--------------|----------|------|
@@ -48,7 +48,7 @@
 
 ---
 
-## 三、coq-of-rust
+## 三、coq-of-rust {#三coq-of-rust}
 
 | 工具特性 | 项目对应内容 | 可验证性 | 备注 |
 |----------|--------------|----------|------|
@@ -61,7 +61,7 @@
 
 ---
 
-## 四、Kani
+## 四、Kani {#四kani}
 
 | 工具特性 | 项目对应内容 | 可验证性 | 备注 |
 |----------|--------------|----------|------|
@@ -75,20 +75,20 @@
 
 ---
 
-## 五、Prusti
+## 五、Prusti {#五prusti}
 
 | 工具特性 | 项目对应内容 | 可验证性 | 备注 |
 |----------|--------------|----------|------|
 | 基于 Viper 的合约验证 | [10_verification_tools_matrix.md](10_verification_tools_matrix.md) | ✅ 高 | 需要写前置/后置条件 |
 | 所有权 / 借用 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | ✅ 高 | 自动处理借用 |
-| Loop 不变量 | [crates/c08_algorithms/](../crates/c08_algorithms/README.md) | ✅ 高 | 适合算法验证 |
+| Loop 不变量 | [crates/c08_algorithms/](../../crates/c08_algorithms/README.md) | ✅ 高 | 适合算法验证 |
 | Trait 合约 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | 🔄 中 | 需要写抽象谓词 |
 
 > **权威来源**: [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html)
 
 ---
 
-## 六、Creusot
+## 六、Creusot {#六creusot}
 
 | 工具特性 | 项目对应内容 | 可验证性 | 备注 |
 |----------|--------------|----------|------|
@@ -101,7 +101,7 @@
 
 ---
 
-## 七、工具对比与选型
+## 七、工具对比与选型 {#七工具对比与选型}
 
 | 工具 | 适合验证 | 不适合验证 | 学习曲线 |
 |------|----------|------------|----------|
@@ -113,7 +113,7 @@
 
 ---
 
-## 八、未覆盖缺口
+## 八、未覆盖缺口 {#八未覆盖缺口}
 
 1. 各工具的具体 `.rs` 示例文件可补充到 `examples/` 或 `crates/`。
 2. 工具版本兼容性（Aeneas 0.x、Kani 0.x 等）需持续更新。
@@ -124,20 +124,20 @@
 
 ---
 
-## 九、示例 crate
+## 九、示例 crate {#九示例-crate}
 
-为降低工具上手门槛，项目在 [`crates/c15_verification_tools`](../crates/c15_verification_tools/README.md) 中提供了可直接编译的示例：
+为降低工具上手门槛，项目在 [`crates/c15_verification_tools`](../../crates/c15_verification_tools/README.md) 中提供了可直接编译的示例：
 
 | 工具 | 示例文件 | 说明 |
 |------|----------|------|
 | Kani | [`kani_example.rs`](../../crates/c15_verification_tools/examples/kani_example.rs) | `safe_add` 溢出检查、`index_bounds` 数组越界检查 |
 | Aeneas | [`aeneas_example.rs`](../../crates/c15_verification_tools/examples/aeneas_example.rs) | 递归求和与有序链表插入 |
 | Prusti | [`prusti_example.rs`](../../crates/c15_verification_tools/examples/prusti_example.rs) | `abs`、`max`、`sum` 前置/后置条件 |
-| 总览 | [`README.md`](../crates/c15_verification_tools/README.md) | 官方文档链接、安装与运行命令 |
+| 总览 | [`README.md`](../../crates/c15_verification_tools/README.md) | 官方文档链接、安装与运行命令 |
 
-普通 `cargo check -p c15_verification_tools` 即可通过；各工具验证命令见 [`README.md`](../crates/c15_verification_tools/README.md)。
+普通 `cargo check -p c15_verification_tools` 即可通过；各工具验证命令见 [`README.md`](../../crates/c15_verification_tools/README.md)。
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
 - [国际形式化验证索引](10_international_formal_verification_index.md)

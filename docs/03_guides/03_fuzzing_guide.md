@@ -1,4 +1,4 @@
-# cargo-fuzz 模糊测试入门指南
+# cargo-fuzz 模糊测试入门指南 {#cargo-fuzz-模糊测试入门指南}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
@@ -15,12 +15,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [cargo-fuzz 模糊测试入门指南](#cargo-fuzz-模糊测试入门指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 什么是模糊测试（Fuzzing）？](#1-什么是模糊测试fuzzing)
     - [为什么 Rust 需要 Fuzzing？](#为什么-rust-需要-fuzzing)
   - [2. 工具链安装](#2-工具链安装)
@@ -29,7 +29,7 @@
     - [编写 Fuzz Target](#编写-fuzz-target)
     - [运行 Fuzzer](#运行-fuzzer)
   - [4. 本项目 Fuzz Target](#4-本项目-fuzz-target)
-    - [c08\_algorithms —— 解析器模糊测试](#c08_algorithms--解析器模糊测试)
+    - [c08\_algorithms —— 解析器模糊测试](#c08_algorithms-解析器模糊测试)
     - [注册到 fuzz/Cargo.toml](#注册到-fuzzcargotoml)
   - [5. 高级技巧](#5-高级技巧)
     - [结构化 Fuzzing](#结构化-fuzzing)
@@ -40,13 +40,13 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 1. 什么是模糊测试（Fuzzing）？
+## 1. 什么是模糊测试（Fuzzing）？ {#1-什么是模糊测试fuzzing}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 模糊测试是一种自动化的软件测试技术，通过向程序输入大量随机或半随机的数据，来发现崩溃、断言失败、内存错误等异常行为。
 
-### 为什么 Rust 需要 Fuzzing？
+### 为什么 Rust 需要 Fuzzing？ {#为什么-rust-需要-fuzzing}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -65,15 +65,15 @@ Rust 的所有权系统防止了大部分内存安全问题，但以下场景仍
 
 ---
 
-## 2. 工具链安装
+## 2. 工具链安装 {#2-工具链安装}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# 安装 cargo-fuzz（需要 nightly Rust）
+# 安装 cargo-fuzz（需要 nightly Rust） {#安装-cargo-fuzz需要-nightly-rust}
 cargo install cargo-fuzz --locked
 
-# 验证安装
+# 验证安装 {#验证安装}
 cargo fuzz --version
 ```
 
@@ -81,11 +81,11 @@ cargo fuzz --version
 
 ---
 
-## 3. 快速开始
+## 3. 快速开始 {#3-快速开始}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 初始化 fuzz 项目
+### 初始化 fuzz 项目 {#初始化-fuzz-项目}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -103,7 +103,7 @@ fuzz/
     └── lib.rs          # 生成的示例 fuzz target
 ```
 
-### 编写 Fuzz Target
+### 编写 Fuzz Target {#编写-fuzz-target}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -139,31 +139,31 @@ fuzz_target!(|data: &[u8]| {
 });
 ```
 
-### 运行 Fuzzer
+### 运行 Fuzzer {#运行-fuzzer}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
 ```bash
-# 运行特定的 fuzz target
+# 运行特定的 fuzz target {#运行特定的-fuzz-target}
 cargo fuzz run sort_fuzzer
 
-# 设置超时（秒）
+# 设置超时（秒） {#设置超时秒}
 cargo fuzz run sort_fuzzer -- -max_total_time=300
 
-# 使用多个 job 并行
+# 使用多个 job 并行 {#使用多个-job-并行}
 cargo fuzz run sort_fuzzer -- -jobs=4 -workers=4
 
-# 从已有的 corpus 继续
+# 从已有的 corpus 继续 {#从已有的-corpus-继续}
 cargo fuzz run sort_fuzzer corpus/
 ```
 
 ---
 
-## 4. 本项目 Fuzz Target
+## 4. 本项目 Fuzz Target {#4-本项目-fuzz-target}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### c08_algorithms —— 解析器模糊测试
+### c08_algorithms —— 解析器模糊测试 {#c08_algorithms-解析器模糊测试}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -195,7 +195,7 @@ fuzz_target!(|data: &[u8]| {
 });
 ```
 
-### 注册到 fuzz/Cargo.toml
+### 注册到 fuzz/Cargo.toml {#注册到-fuzzcargotoml}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -209,11 +209,11 @@ doc = false
 
 ---
 
-## 5. 高级技巧
+## 5. 高级技巧 {#5-高级技巧}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 结构化 Fuzzing
+### 结构化 Fuzzing {#结构化-fuzzing}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -240,35 +240,35 @@ fuzz_target!(|packet: Packet| {
 });
 ```
 
-### 与 Miri 结合
+### 与 Miri 结合 {#与-miri-结合}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```bash
-# 先用 fuzzer 找到崩溃输入，再用 Miri 分析根本原因
+# 先用 fuzzer 找到崩溃输入，再用 Miri 分析根本原因 {#先用-fuzzer-找到崩溃输入再用-miri-分析根本原因}
 cargo fuzz run target_name
-# 崩溃后，corpus 目录会保存触发崩溃的输入
+# 崩溃后，corpus 目录会保存触发崩溃的输入 {#崩溃后corpus-目录会保存触发崩溃的输入}
 MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test -- crash_input
 ```
 
-### 覆盖率引导
+### 覆盖率引导 {#覆盖率引导}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```bash
-# 生成覆盖率报告
+# 生成覆盖率报告 {#生成覆盖率报告}
 cargo fuzz coverage target_name
-# 输出在 fuzz/coverage/
+# 输出在 fuzz/coverage/ {#输出在-fuzzcoverage}
 ```
 
 ---
 
-## 6. CI 集成
+## 6. CI 集成 {#6-ci-集成}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```yaml
-# .github/workflows/fuzzing.yml（片段）
+# .github/workflows/fuzzing.yml（片段） {#githubworkflowsfuzzingyml片段}
 fuzzing:
   name: Fuzz Tests
   runs-on: ubuntu-latest
@@ -287,7 +287,7 @@ fuzzing:
 
 ---
 
-## 7. 参考资源
+## 7. 参考资源 {#7-参考资源}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -314,7 +314,7 @@ fuzzing:
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -322,7 +322,7 @@ fuzzing:
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

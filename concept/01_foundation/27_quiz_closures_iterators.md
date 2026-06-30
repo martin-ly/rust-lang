@@ -13,7 +13,7 @@
 > **后置概念**: N/A
 ---
 
-> **来源**:
+> **来源**: · [自测题库](../00_meta/self_assessment.md)
 > [The Rust Programming Language — Ch13 Closures](https://doc.rust-lang.org/book/ch13-01-closures.html) ·
 > [The Rust Programming Language — Ch13 Iterators](https://doc.rust-lang.org/book/ch13-01-closures.html) ·
 > [Rust Reference — Closures](https://doc.rust-lang.org/reference/expressions/closure-expr.html)

@@ -1,4 +1,4 @@
-# 社区最佳实践对齐矩阵
+# 社区最佳实践对齐矩阵 {#社区最佳实践对齐矩阵}
 
 > **概念族**: 权威来源对齐 / 社区最佳实践
 > **内容分级**: [核心级]
@@ -11,7 +11,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [社区最佳实践对齐矩阵](#社区最佳实践对齐矩阵)
   - [目录](#目录)
@@ -19,20 +19,20 @@
   - [二、API Guidelines](#二api-guidelines)
   - [三、Rust Design Patterns](#三rust-design-patterns)
   - [四、Rust Performance Book](#四rust-performance-book)
-  - [五、This Week in Rust / Inside Rust Blog](#五this-week-in-rust--inside-rust-blog)
+  - [五、This Week in Rust / Inside Rust Blog](#五this-week-in-rust-inside-rust-blog)
   - [六、未覆盖缺口](#六未覆盖缺口)
   - [相关概念](#相关概念)
   - [学术权威参考](#学术权威参考)
 
 ---
 
-## 一、对齐说明
+## 一、对齐说明 {#一对齐说明}
 
 本文档将 `docs/research_notes/` 中的设计模式、代码实践、性能优化内容与社区权威最佳实践建立映射，覆盖 [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)、[Rust Design Patterns](https://rust-unofficial.github.io/patterns/)、[Rust Performance Book](https://nnethercote.github.io/perf-book/) 等来源。
 
 ---
 
-## 二、API Guidelines
+## 二、API Guidelines {#二api-guidelines}
 
 | API Guidelines 章节 | 项目文档 | 状态 | 备注 |
 |---------------------|----------|------|------|
@@ -44,7 +44,7 @@
 
 ---
 
-## 三、Rust Design Patterns
+## 三、Rust Design Patterns {#三rust-design-patterns}
 
 | Design Patterns 章节 | 项目文档 | 状态 | 备注 |
 |----------------------|----------|------|------|
@@ -55,7 +55,7 @@
 
 ---
 
-## 四、Rust Performance Book
+## 四、Rust Performance Book {#四rust-performance-book}
 
 | Performance Book 章节 | 项目文档 | 状态 | 备注 |
 |-----------------------|----------|------|------|
@@ -66,7 +66,7 @@
 
 ---
 
-## 五、This Week in Rust / Inside Rust Blog
+## 五、This Week in Rust / Inside Rust Blog {#五this-week-in-rust-inside-rust-blog}
 
 | 来源 | 用途 | 项目文档 | 状态 |
 |------|------|----------|------|
@@ -75,7 +75,7 @@
 
 ---
 
-## 六、未覆盖缺口
+## 六、未覆盖缺口 {#六未覆盖缺口}
 
 1. API Guidelines 中「Ergonomic」、「Flexibility」等章节可进一步映射。
 2. Rust Design Patterns 中「Structural Patterns」与项目设计模式文档的映射可细化。
@@ -83,7 +83,7 @@
 
 > **权威来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [Rust Performance Book](https://nnethercote.github.io/perf-book/)
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
 - [设计模式反例](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md)
@@ -92,7 +92,7 @@
 
 ---
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 本对齐矩阵同时参考以下 P1 学术权威来源，以形成完整的官方-学术对照网络：
 

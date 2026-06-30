@@ -1,4 +1,4 @@
-# 认知论证框架
+# 认知论证框架 {#认知论证框架}
 
 > **概念族**: 论证体系
 
@@ -22,12 +22,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [认知论证框架](#认知论证框架)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、论证层次模型](#一论证层次模型)
     - [三层论证体系](#三层论证体系)
     - [本项目定位](#本项目定位)
@@ -49,9 +49,9 @@
     - [与Rust官方文档的区别](#与rust官方文档的区别)
   - [七、持续改进机制](#七持续改进机制)
     - [反馈收集](#反馈收集)
-  - [🆕 Rust 1.94 研究更新](#-rust-194-研究更新)
+  - [🆕 Rust 1.94 研究更新](#rust-194-研究更新)
     - [核心研究点](#核心研究点)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -59,13 +59,13 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 一、论证层次模型
+## 一、论证层次模型 {#一论证层次模型}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 三层论证体系
+### 三层论证体系 {#三层论证体系}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -109,7 +109,7 @@
 
 ```
 
-### 本项目定位
+### 本项目定位 {#本项目定位}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -129,13 +129,13 @@
 
 ---
 
-## 二、认知设计原则
+## 二、认知设计原则 {#二认知设计原则}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 原则1: 渐进式披露
+### 原则1: 渐进式披露 {#原则1-渐进式披露}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -195,7 +195,7 @@
 
 ```
 
-### 原则2: 多模态表征
+### 原则2: 多模态表征 {#原则2-多模态表征}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -221,7 +221,7 @@
 
 | **反例** | 边界理解 | 编译错误示例 |
 
-### 原则3: 脚手架理论
+### 原则3: 脚手架理论 {#原则3-脚手架理论}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -253,13 +253,13 @@
 
 ---
 
-## 三、文档类型与认知功能
+## 三、文档类型与认知功能 {#三文档类型与认知功能}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 文档分类矩阵
+### 文档分类矩阵 {#文档分类矩阵}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -285,7 +285,7 @@
 
 | **速查卡** | 快速参考 | 实践者 | Cheat Sheet |
 
-### 认知负荷管理
+### 认知负荷管理 {#认知负荷管理}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -313,13 +313,13 @@
 
 ---
 
-## 四、形式化 vs 可理解性平衡
+## 四、形式化 vs 可理解性平衡 {#四形式化-vs-可理解性平衡}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 平衡策略
+### 平衡策略 {#平衡策略}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -353,7 +353,7 @@
 
 ```
 
-### 具体实践
+### 具体实践 {#具体实践}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -397,13 +397,13 @@
 
 ---
 
-## 五、论证质量评估
+## 五、论证质量评估 {#五论证质量评估}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 评估维度
+### 评估维度 {#评估维度}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -423,7 +423,7 @@
 
 | **实用性** | 实践价值 | 对编程是否有指导意义？ |
 
-### 评估检查清单
+### 评估检查清单 {#评估检查清单}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -461,13 +461,13 @@
 
 ---
 
-## 六、与其他形式化工作的区别
+## 六、与其他形式化工作的区别 {#六与其他形式化工作的区别}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 本项目 vs 传统形式化验证
+### 本项目 vs 传统形式化验证 {#本项目-vs-传统形式化验证}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -485,7 +485,7 @@
 
 | **价值** | 数学保证 | 教育 + 工程指导 |
 
-### 与Rust官方文档的区别
+### 与Rust官方文档的区别 {#与rust官方文档的区别}
 
 >
 
@@ -505,13 +505,13 @@
 
 ---
 
-## 七、持续改进机制
+## 七、持续改进机制 {#七持续改进机制}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 反馈收集
+### 反馈收集 {#反馈收集}
 
 >
 
@@ -547,13 +547,13 @@
 
 ---
 
-## 🆕 Rust 1.94 研究更新
+## 🆕 Rust 1.94 研究更新 {#rust-194-研究更新}
 
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.96.0+
 
-### 核心研究点
+### 核心研究点 {#核心研究点}
 
 >
 
@@ -573,7 +573,7 @@
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -581,7 +581,7 @@
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -589,7 +589,7 @@
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -603,7 +603,7 @@
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -613,7 +613,7 @@
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -645,7 +645,7 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -655,7 +655,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 

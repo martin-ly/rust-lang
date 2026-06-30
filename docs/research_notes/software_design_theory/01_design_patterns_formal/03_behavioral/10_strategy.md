@@ -1,4 +1,4 @@
-# Strategy 形式化分析
+# Strategy 形式化分析 {#strategy-形式化分析}
 
 > **概念族**: 软件设计 / 设计模式
 
@@ -24,14 +24,14 @@
 
 > **权威来源**: [Rust Design Patterns – Behavioral](https://rust-unofficial.github.io/patterns/patterns/behavioural/index.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
-## 📊 目录 {#-目录}
+## 📊 目录 {#目录}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Strategy 形式化分析](#strategy-形式化分析)
-  - [📊 目录 {#-目录}](#-目录--目录)
+  - [📊 目录](#目录)
   - [权威来源对照](#权威来源对照)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Strategy 结构）](#def-11strategy-结构)
@@ -42,7 +42,7 @@
     - [推论 SR-C1（纯 Safe Strategy）](#推论-sr-c1纯-safe-strategy)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
-  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196--edition-2024-代码示例更新)
+  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196-edition-2024-代码示例更新)
     - [Edition 2024 关键兼容点](#edition-2024-关键兼容点)
   - [Rust 所有权、借用、生命周期与 trait 系统约束分析](#rust-所有权借用生命周期与-trait-系统约束分析)
     - [所有权约束](#所有权约束)
@@ -72,7 +72,7 @@
   - [思维导图](#思维导图)
   - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -82,7 +82,7 @@
 
 ---
 
-## 权威来源对照
+## 权威来源对照 {#权威来源对照}
 
 >
 
@@ -108,13 +108,13 @@
 
 ---
 
-## 形式化定义
+## 形式化定义 {#形式化定义}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Def 1.1（Strategy 结构）
+### Def 1.1（Strategy 结构） {#def-11strategy-结构}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -138,7 +138,7 @@ $$\mathcal{SG} = \langle C, S, \mathit{execute}: C \rightarrow R \rangle$$
 
 ---
 
-### Axiom SR1（接口一致公理）
+### Axiom SR1（接口一致公理） {#axiom-sr1接口一致公理}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -150,7 +150,7 @@ $$\forall s_1, s_2: S,\, s_1: \mathcal{T} \land s_2: \mathcal{T} \implies \mathi
 
 策略接口一致；不同策略对相同输入类型产生相同输出类型。
 
-### Axiom SR2（所有权独立公理）
+### Axiom SR2（所有权独立公理） {#axiom-sr2所有权独立公理}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -164,7 +164,7 @@ $$\Omega(S) \cap \Omega(C) = \emptyset \text{ 或 } C \text{ 拥有 } S$$
 
 ---
 
-### 定理 SR-T1（trait 多态安全定理）
+### 定理 SR-T1（trait 多态安全定理） {#定理-sr-t1trait-多态安全定理}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -200,7 +200,7 @@ trait 定义策略接口；`impl Trait` 或 `dyn Trait` 实现多态；由 [trai
 
 ---
 
-### 定理 SR-T2（借用互斥定理）
+### 定理 SR-T2（借用互斥定理） {#定理-sr-t2借用互斥定理}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -242,7 +242,7 @@ trait 定义策略接口；`impl Trait` 或 `dyn Trait` 实现多态；由 [trai
 
 ---
 
-### 推论 SR-C1（纯 Safe Strategy）
+### 推论 SR-C1（纯 Safe Strategy） {#推论-sr-c1纯-safe-strategy}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -266,7 +266,7 @@ Strategy 为纯 Safe；trait 多态策略，无 `unsafe`。
 
 ---
 
-### 概念定义-属性关系-解释论证 层次汇总
+### 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -286,7 +286,7 @@ Strategy 为纯 Safe；trait 多态策略，无 `unsafe`。
 
 ---
 
-## Rust 实现与代码示例
+## Rust 实现与代码示例 {#rust-实现与代码示例}
 
 >
 
@@ -352,7 +352,7 @@ assert_eq!(ctx.run(), 6);
 
 ---
 
-## Rust 1.96+ / Edition 2024 代码示例更新
+## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
 
 >
 
@@ -412,7 +412,7 @@ fn main() {
 
 ```
 
-### Edition 2024 关键兼容点
+### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
 
@@ -428,25 +428,25 @@ fn main() {
 
 ---
 
-## Rust 所有权、借用、生命周期与 trait 系统约束分析
+## Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}
 
 >
 
 > **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
 
-### 所有权约束
+### 所有权约束 {#所有权约束}
 
 策略可由上下文拥有（`Box<dyn Strategy>`）或引用（`&dyn Strategy`）。引用版本生命周期受限；拥有版本支持运行时切换。
 
-### 借用与生命周期约束
+### 借用与生命周期约束 {#借用与生命周期约束}
 
 `pay(&self)` 只读调用策略；上下文无需可变即可执行策略，除非需要动态替换策略。
 
-### trait 系统约束
+### trait 系统约束 {#trait-系统约束}
 
 `Strategy` trait 定义算法接口；泛型参数提供零成本静态分发，`dyn Trait` 提供运行时多态。
 
-### 与 Rust 类型系统的综合联系
+### 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系}
 
 | Rust 机制 | 本模式使用方式 | 保证 |
 
@@ -464,13 +464,13 @@ fn main() {
 
 ---
 
-## 完整证明
+## 完整证明 {#完整证明}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 形式化论证链
+### 形式化论证链 {#形式化论证链}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -506,13 +506,13 @@ borrow_checker_proof
 
 ---
 
-## 形式化属性：不变式、前置/后置条件与安全边界
+## 形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}
 
 >
 
 > **来源: [Formal Methods – Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)** | **来源: [Rust API Guidelines – Safety](https://rust-lang.github.io/api-guidelines/safety.html)**
 
-### 不变式（Invariants）
+### 不变式（Invariants） {#不变式invariants}
 
 1. 策略族行为可互换。
 
@@ -520,7 +520,7 @@ borrow_checker_proof
 
 3. 策略不修改上下文不变式。
 
-### 前置条件（Preconditions）
+### 前置条件（Preconditions） {#前置条件preconditions}
 
 1. 策略已实现对应 trait。
 
@@ -528,7 +528,7 @@ borrow_checker_proof
 
 3. 输入参数满足策略约束。
 
-### 后置条件（Postconditions）
+### 后置条件（Postconditions） {#后置条件postconditions}
 
 1. 按选中策略执行算法。
 
@@ -536,11 +536,11 @@ borrow_checker_proof
 
 3. 上下文状态保持一致。
 
-### 安全边界（Safety Boundary）
+### 安全边界（Safety Boundary） {#安全边界safety-boundary}
 
 纯 Safe。策略模式通过 trait 抽象实现；若策略内部使用 `unsafe`，需保持 Safe 契约。
 
-### 形式化规约汇总
+### 形式化规约汇总 {#形式化规约汇总}
 
 ```text
 
@@ -556,7 +556,7 @@ borrow_checker_proof
 
 ---
 
-## 典型场景
+## 典型场景 {#典型场景}
 
 >
 
@@ -576,7 +576,7 @@ borrow_checker_proof
 
 ---
 
-## 完整场景示例：压缩格式策略
+## 完整场景示例：压缩格式策略 {#完整场景示例压缩格式策略}
 
 >
 
@@ -632,7 +632,7 @@ impl<S: CompressStrategy> Exporter<S> {
 
 ---
 
-## 相关模式
+## 相关模式 {#相关模式}
 
 >
 
@@ -650,7 +650,7 @@ impl<S: CompressStrategy> Exporter<S> {
 
 ---
 
-## 实现变体
+## 实现变体 {#实现变体}
 
 >
 
@@ -668,13 +668,13 @@ impl<S: CompressStrategy> Exporter<S> {
 
 ---
 
-## 反例：常见误用及编译器错误
+## 反例：常见误用及编译器错误 {#反例常见误用及编译器错误}
 
 >
 
 > **来源: [Rust By Example – Error Handling](https://doc.rust-lang.org/rust-by-example/error.html)** | **来源: [Rust Compiler Error Index](https://doc.rust-lang.org/error_codes/error-index.html)**
 
-### 反例 1：引用策略生命周期不足
+### 反例 1：引用策略生命周期不足 {#反例-1引用策略生命周期不足}
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
 
@@ -692,7 +692,7 @@ fn make_cart() -> ShoppingCart<'static> {
 
 **编译器错误**：`cannot return value referencing local variable card`。
 
-### 反例 2：策略需要 &mut 但上下文为 &self
+### 反例 2：策略需要 &mut 但上下文为 &self {#反例-2策略需要-mut-但上下文为-self}
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
 
@@ -710,7 +710,7 @@ impl Context {
 
 **编译器错误**：无法通过 &self 获取 &mut。
 
-### 反例 3：泛型策略导致代码膨胀
+### 反例 3：泛型策略导致代码膨胀 {#反例-3泛型策略导致代码膨胀}
 
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
@@ -724,7 +724,7 @@ struct Context<S: Strategy> { strategy: S }
 
 ---
 
-## 选型决策树
+## 选型决策树 {#选型决策树}
 
 >
 
@@ -746,7 +746,7 @@ struct Context<S: Strategy> { strategy: S }
 
 ---
 
-## 与 GoF 对比
+## 与 GoF 对比 {#与-gof-对比}
 
 >
 
@@ -764,7 +764,7 @@ struct Context<S: Strategy> { strategy: S }
 
 ---
 
-## 边界
+## 边界 {#边界}
 
 >
 
@@ -782,7 +782,7 @@ struct Context<S: Strategy> { strategy: S }
 
 ---
 
-## 与 Rust 1.93 的对应
+## 与 Rust 1.93 的对应 {#与-rust-193-的对应}
 
 >
 
@@ -798,7 +798,7 @@ struct Context<S: Strategy> { strategy: S }
 
 ---
 
-## 思维导图
+## 思维导图 {#思维导图}
 
 >
 
@@ -848,7 +848,7 @@ mindmap
 
 ---
 
-## 与其他模式的关系图
+## 与其他模式的关系图 {#与其他模式的关系图}
 
 >
 
@@ -876,7 +876,7 @@ graph LR
 
 ---
 
-## 实质内容五维自检
+## 实质内容五维自检 {#实质内容五维自检}
 
 >
 
@@ -900,7 +900,7 @@ graph LR
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -910,13 +910,13 @@ graph LR
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -932,7 +932,7 @@ graph LR
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -944,7 +944,7 @@ graph LR
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -978,7 +978,7 @@ graph LR
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -990,7 +990,7 @@ graph LR
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 

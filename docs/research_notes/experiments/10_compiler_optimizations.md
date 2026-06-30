@@ -1,4 +1,4 @@
-# 编译器优化研究
+# 编译器优化研究 {#编译器优化研究}
 
 > **概念族**: 实验研究
 > **内容分级**: [归档级]
@@ -13,56 +13,56 @@
 >
 > **权威来源**: [rustc Book](https://doc.rust-lang.org/rustc/) | [The Rust Performance Book](https://nnethercote.github.io/perf-book/) | [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Standard Library](https://doc.rust-lang.org/std/)
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 
 - [编译器优化研究](#编译器优化研究)
-  - [📑 目录](#-目录)
-  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
+  - [📑 目录](#目录)
+  - [🎯 研究目标](#研究目标)
     - [核心问题](#核心问题)
     - [预期成果](#预期成果)
   - [形式化论证（与类型系统衔接）](#形式化论证与类型系统衔接)
-  - [📚 理论基础 {#-理论基础}](#-理论基础--理论基础)
+  - [📚 理论基础](#理论基础)
     - [相关概念](#相关概念)
       - [rustc 优化选项（Rust 1.96+）](#rustc-优化选项rust-196)
     - [理论背景](#理论背景)
-  - [🔬 实验设计 {#-实验设计}](#-实验设计--实验设计)
+  - [🔬 实验设计](#实验设计)
     - [1. 优化级别比较](#1-优化级别比较)
     - [2. 内联优化分析](#2-内联优化分析)
     - [3. 循环优化分析](#3-循环优化分析)
-    - [Rust 1.96+ / Edition 2024 工具链](#rust-196--edition-2024-工具链)
-  - [💻 代码示例 {#-代码示例}](#-代码示例--代码示例)
+    - [Rust 1.96+ / Edition 2024 工具链](#rust-196-edition-2024-工具链)
+  - [💻 代码示例](#代码示例)
     - [示例 1：内联优化测试](#示例-1内联优化测试)
     - [示例 2：循环优化测试](#示例-2循环优化测试)
     - [示例 3：死代码消除测试](#示例-3死代码消除测试)
-  - [💻 代码示例（完整基准测试）](#-代码示例完整基准测试)
+  - [💻 代码示例（完整基准测试）](#代码示例完整基准测试)
     - [示例 1：优化级别比较](#示例-1优化级别比较)
     - [示例 2：内联优化](#示例-2内联优化)
     - [示例 3：循环优化](#示例-3循环优化)
     - [示例 4：死代码消除](#示例-4死代码消除)
-  - [📊 实验结果 {#-实验结果}](#-实验结果--实验结果)
+  - [📊 实验结果](#实验结果)
     - [优化级别效果](#优化级别效果)
     - [内联优化效果](#内联优化效果)
     - [结果分析模板](#结果分析模板)
-  - [📋 数据收集执行指南 {#-数据收集执行指南}](#-数据收集执行指南--数据收集执行指南)
+  - [📋 数据收集执行指南](#数据收集执行指南)
     - [环境要求](#环境要求)
     - [执行步骤](#执行步骤)
-  - [📐 优化建议与工具改进 {#-优化建议与工具改进}](#-优化建议与工具改进--优化建议与工具改进)
+  - [📐 优化建议与工具改进](#优化建议与工具改进)
     - [优化建议](#优化建议)
     - [工具改进](#工具改进)
     - [优化报告](#优化报告)
-  - [🔗 系统集成与实际应用 {#-系统集成与实际应用}](#-系统集成与实际应用--系统集成与实际应用)
+  - [🔗 系统集成与实际应用](#系统集成与实际应用)
     - [与类型系统的集成](#与类型系统的集成)
     - [与实验研究的集成](#与实验研究的集成)
     - [实际应用案例](#实际应用案例)
-  - [📖 参考文献 {#-参考文献}](#-参考文献--参考文献)
+  - [📖 参考文献](#参考文献)
     - [学术论文](#学术论文)
     - [官方文档](#官方文档)
     - [工具资源](#工具资源)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -80,7 +80,7 @@
 
 ---
 
-## 🎯 研究目标 {#-研究目标}
+## 🎯 研究目标 {#研究目标}
 
 >
 
@@ -96,7 +96,7 @@
 
 4. **死代码消除**：分析死代码消除的效果
 
-### 核心问题
+### 核心问题 {#核心问题}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -110,7 +110,7 @@
 
 3. **如何编写编译器友好的代码？**
 
-### 预期成果
+### 预期成果 {#预期成果}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -126,7 +126,7 @@
 
 ---
 
-## 形式化论证（与类型系统衔接）
+## 形式化论证（与类型系统衔接） {#形式化论证与类型系统衔接}
 
 >
 
@@ -148,13 +148,13 @@
 
 ---
 
-## 📚 理论基础 {#-理论基础}
+## 📚 理论基础 {#理论基础}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 相关概念
+### 相关概念 {#相关概念}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -174,7 +174,7 @@
 
 - **常量折叠（Constant Folding）**：在编译时计算常量表达式
 
-#### rustc 优化选项（Rust 1.96+）
+#### rustc 优化选项（Rust 1.96+） {#rustc-优化选项rust-196}
 
 > **来源: [rustc Book – Optimization Levels](https://doc.rust-lang.org/rustc/codegen-options/index.html#optimization-level)**
 
@@ -198,7 +198,7 @@ Rust 编译器提供以下核心优化手段：
 
 > **注意**：优化不改变程序语义（由类型系统与 MIR 优化保证）；优化效果（速度、体积）需通过 Criterion 等基准测试量化。
 
-### 理论背景
+### 理论背景 {#理论背景}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -216,13 +216,13 @@ Rust 编译器提供以下核心优化手段：
 
 ---
 
-## 🔬 实验设计 {#-实验设计}
+## 🔬 实验设计 {#实验设计}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 优化级别比较
+### 1. 优化级别比较 {#1-优化级别比较}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -242,7 +242,7 @@ Rust 编译器提供以下核心优化手段：
 
 - `-Os` (优化大小) vs `-O2`
 
-### 2. 内联优化分析
+### 2. 内联优化分析 {#2-内联优化分析}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -260,7 +260,7 @@ Rust 编译器提供以下核心优化手段：
 
 - `#[inline]` 提示的效果
 
-### 3. 循环优化分析
+### 3. 循环优化分析 {#3-循环优化分析}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -276,7 +276,7 @@ Rust 编译器提供以下核心优化手段：
 
 ---
 
-### Rust 1.96+ / Edition 2024 工具链
+### Rust 1.96+ / Edition 2024 工具链 {#rust-196-edition-2024-工具链}
 
 > **来源: [rustc Book](https://doc.rust-lang.org/rustc/)**
 
@@ -304,13 +304,13 @@ Rust 编译器提供以下核心优化手段：
 
 - **可重复性**：固定 `rust-toolchain.toml`、提交 `Cargo.lock`、记录 `opt-level` / `lto` / `codegen-units` 配置。
 
-## 💻 代码示例 {#-代码示例}
+## 💻 代码示例 {#代码示例}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 示例 1：内联优化测试
+### 示例 1：内联优化测试 {#示例-1内联优化测试}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -354,7 +354,7 @@ fn test_inlining() {
 
 - 内联可以减少函数调用开销
 
-### 示例 2：循环优化测试
+### 示例 2：循环优化测试 {#示例-2循环优化测试}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -384,7 +384,7 @@ fn loop_optimization() {
 
 - 常量折叠：编译时计算常量表达式
 
-### 示例 3：死代码消除测试
+### 示例 3：死代码消除测试 {#示例-3死代码消除测试}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -406,7 +406,7 @@ fn dead_code_elimination() {
 
 ```
 
-## 💻 代码示例（完整基准测试）
+## 💻 代码示例（完整基准测试） {#代码示例完整基准测试}
 
 >
 
@@ -414,7 +414,7 @@ fn dead_code_elimination() {
 
 以下为含 Criterion 的完整基准测试代码，可与上方简化示例对照；运行 `cargo bench` 可复现「实验结果」中的示例数据。
 
-### 示例 1：优化级别比较
+### 示例 1：优化级别比较 {#示例-1优化级别比较}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -462,7 +462,7 @@ criterion_main!(benches);
 
 ```
 
-### 示例 2：内联优化
+### 示例 2：内联优化 {#示例-2内联优化}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -550,7 +550,7 @@ criterion_main!(benches);
 
 ```
 
-### 示例 3：循环优化
+### 示例 3：循环优化 {#示例-3循环优化}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -618,7 +618,7 @@ fn sum_array_unrolled(arr: &[i32]) -> i32 {
 
 ```
 
-### 示例 4：死代码消除
+### 示例 4：死代码消除 {#示例-4死代码消除}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -658,13 +658,13 @@ fn dead_code_example() {
 
 ---
 
-## 📊 实验结果 {#-实验结果}
+## 📊 实验结果 {#实验结果}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 优化级别效果
+### 优化级别效果 {#优化级别效果}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -692,7 +692,7 @@ fn dead_code_example() {
 
 - `-Os` 优化代码大小，但可能牺牲性能
 
-### 内联优化效果
+### 内联优化效果 {#内联优化效果}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -716,7 +716,7 @@ fn dead_code_example() {
 
 - 需要权衡性能和代码大小
 
-### 结果分析模板
+### 结果分析模板 {#结果分析模板}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -760,13 +760,13 @@ fn dead_code_example() {
 
 ---
 
-## 📋 数据收集执行指南 {#-数据收集执行指南}
+## 📋 数据收集执行指南 {#数据收集执行指南}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 环境要求
+### 环境要求 {#环境要求}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -774,7 +774,7 @@ fn dead_code_example() {
 
 - 建议关掉无关后台、固定 CPU 频率，多次运行取中位数
 
-### 执行步骤
+### 执行步骤 {#执行步骤}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -788,13 +788,13 @@ fn dead_code_example() {
 
 ---
 
-## 📐 优化建议与工具改进 {#-优化建议与工具改进}
+## 📐 优化建议与工具改进 {#优化建议与工具改进}
 
 >
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 优化建议
+### 优化建议 {#优化建议}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -806,7 +806,7 @@ fn dead_code_example() {
 
 - **Rust 1.96+**：关注 codegen 与 LTO 的变更，重跑基准以更新基线。
 
-### 工具改进
+### 工具改进 {#工具改进}
 
 >
 
@@ -818,7 +818,7 @@ fn dead_code_example() {
 
 - **opt-report**：`-C llvm-args=-opt-report` 可辅助理解 LLVM 优化决策（若需深入）。
 
-### 优化报告
+### 优化报告 {#优化报告}
 
 >
 
@@ -828,13 +828,13 @@ fn dead_code_example() {
 
 ---
 
-## 🔗 系统集成与实际应用 {#-系统集成与实际应用}
+## 🔗 系统集成与实际应用 {#系统集成与实际应用}
 
 >
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 与类型系统的集成
+### 与类型系统的集成 {#与类型系统的集成}
 
 >
 
@@ -844,7 +844,7 @@ fn dead_code_example() {
 
 - **Trait 系统**：见 [10_trait_system_formalization.md](../type_theory/10_trait_system_formalization.md)。动态分发 (`dyn`) vs 静态分发对 `#[inline]` 与优化级别敏感，可纳入对照实验。
 
-### 与实验研究的集成
+### 与实验研究的集成 {#与实验研究的集成}
 
 >
 
@@ -854,7 +854,7 @@ fn dead_code_example() {
 
 - **内存分析**：见 [10_memory_analysis.md](10_memory_analysis.md)。`opt-level` 影响内联与栈使用，分析内存时需固定编译选项。
 
-### 实际应用案例
+### 实际应用案例 {#实际应用案例}
 
 >
 
@@ -868,13 +868,13 @@ fn dead_code_example() {
 
 ---
 
-## 📖 参考文献 {#-参考文献}
+## 📖 参考文献 {#参考文献}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 学术论文
+### 学术论文 {#学术论文}
 
 >
 
@@ -886,7 +886,7 @@ fn dead_code_example() {
 
    - 摘要: LLVM 编译器框架
 
-### 官方文档
+### 官方文档 {#官方文档}
 
 >
 
@@ -906,7 +906,7 @@ fn dead_code_example() {
 
 - [Compiler Explorer](https://godbolt.org/) - 在线对比汇编输出
 
-### 工具资源
+### 工具资源 {#工具资源}
 
 >
 
@@ -926,7 +926,7 @@ fn dead_code_example() {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -934,13 +934,13 @@ fn dead_code_example() {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -954,7 +954,7 @@ fn dead_code_example() {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -964,7 +964,7 @@ fn dead_code_example() {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -996,7 +996,7 @@ fn dead_code_example() {
 
 ---
 
-## 权威来源对照表
+## 权威来源对照表 {#权威来源对照表}
 
 | 概念/方法 | 权威来源 URL | 章节/要点 |
 
@@ -1016,7 +1016,7 @@ fn dead_code_example() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

@@ -1,4 +1,4 @@
-# Formal Modules / 形式化模块系统
+# Formal Modules / 形式化模块系统 {#formal-modules-形式化模块系统}
 >
 > **概念族**: 形式化模块
 
@@ -13,9 +13,9 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
-- [Formal Modules / 形式化模块系统](#formal-modules--形式化模块系统)
+- [Formal Modules / 形式化模块系统](#formal-modules-形式化模块系统)
   - [目录](#目录)
   - [研究目标](#研究目标)
   - [当前内容](#当前内容)
@@ -26,7 +26,7 @@
 
 ---
 
-## 研究目标
+## 研究目标 {#研究目标}
 
 本目录聚焦于 **Rust 模块系统（modules / crates / visibility / linkage）** 的规范化定义与形式化语义，旨在：
 
@@ -37,7 +37,7 @@
 
 ---
 
-## 当前内容
+## 当前内容 {#当前内容}
 
 | 文件 | 说明 | 状态 |
 | :--- | :--- | :--- |
@@ -50,7 +50,7 @@
 
 ---
 
-## 计划补充内容
+## 计划补充内容 {#计划补充内容}
 
 - [x] **模块系统规范梳理**：crate、module、path、use、visibility（`pub`、`pub(crate)`、`pub(super)`、`pub(in path)`）的完整规则。
 - [x] **Linkage 与名称解析**：`extern crate`、crate-type、`#[no_mangle]`、符号可见性、链接时边界。
@@ -62,11 +62,11 @@
 
 > **权威来源**: [Rust Reference – Items and Modules](https://doc.rust-lang.org/reference/items.html) | [Rust Reference – Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html) | [The Rust Programming Language – Packages, Crates, and Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) | [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) | [Ferrocene Language Specification](https://spec.ferrocene.dev/) | [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 
-## 权威来源
+## 权威来源 {#权威来源}
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [知识图谱索引](../10_knowledge_graph_index.md) — 模块系统在整个知识体系中的层级定位与关系边
 - [跨文档映射网络](../10_cross_reference_index.md) — 层级-主题-文档三维矩阵
@@ -78,7 +78,7 @@
 
 ---
 
-## 学术/社区来源参考
+## 学术/社区来源参考 {#学术社区来源参考}
 
 > **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 > **来源**: [Aeneas](https://aeneas-verification.github.io/)

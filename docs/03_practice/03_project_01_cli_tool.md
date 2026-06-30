@@ -1,4 +1,4 @@
-# 实践项目 01: 命令行工具
+# 实践项目 01: 命令行工具 {#实践项目-01-命令行工具}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
@@ -9,12 +9,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 01: 命令行工具](#实践项目-01-命令行工具)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [项目目标](#项目目标)
   - [功能需求](#功能需求)
     - [基本功能](#基本功能)
@@ -37,7 +37,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 项目目标
+## 项目目标 {#项目目标}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -45,11 +45,11 @@
 
 ---
 
-## 功能需求
+## 功能需求 {#功能需求}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 基本功能
+### 基本功能 {#基本功能}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -61,7 +61,7 @@
 - [ ] 删除待办: `todo delete 1`
 - [ ] 数据持久化到文件
 
-### 扩展功能
+### 扩展功能 {#扩展功能}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -71,11 +71,11 @@
 
 ---
 
-## 学习要点
+## 学习要点 {#学习要点}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 1. 所有权和借用
+### 1. 所有权和借用 {#1-所有权和借用}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -86,7 +86,7 @@ fn add_todo(todos: &mut Vec<String>, item: String) {
 }
 ```
 
-### 2. 错误处理
+### 2. 错误处理 {#2-错误处理}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -98,7 +98,7 @@ fn load_todos() -> Result<Vec<String>, std::io::Error> {
 }
 ```
 
-### 3. 文件IO
+### 3. 文件IO {#3-文件io}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -118,7 +118,7 @@ fn save_todos(todos: &[String]) -> std::io::Result<()> {
 
 ---
 
-## 项目结构
+## 项目结构 {#项目结构}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -134,11 +134,11 @@ todo-cli/
 
 ---
 
-## 实现步骤
+## 实现步骤 {#实现步骤}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 步骤 1: 创建项目
+### 步骤 1: 创建项目 {#步骤-1-创建项目}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -147,7 +147,7 @@ cargo new todo-cli
 cd todo-cli
 ```
 
-### 步骤 2: 定义数据结构
+### 步骤 2: 定义数据结构 {#步骤-2-定义数据结构}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -161,7 +161,7 @@ struct Todo {
 }
 ```
 
-### 步骤 3: 实现存储
+### 步骤 3: 实现存储 {#步骤-3-实现存储}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -194,7 +194,7 @@ impl TodoStorage {
 }
 ```
 
-### 步骤 4: 实现命令处理
+### 步骤 4: 实现命令处理 {#步骤-4-实现命令处理}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -217,7 +217,7 @@ pub fn list(storage: &TodoStorage) {
 }
 ```
 
-### 步骤 5: 主程序
+### 步骤 5: 主程序 {#步骤-5-主程序}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -256,33 +256,33 @@ fn main() {
 
 ---
 
-## 测试验证
+## 测试验证 {#测试验证}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 手动测试
+### 手动测试 {#手动测试}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
-# 编译
+# 编译 {#编译}
 cargo build --release
 
-# 添加待办
+# 添加待办 {#添加待办}
 ./target/release/todo-cli add "买牛奶"
 ./target/release/todo-cli add "写代码"
 
-# 列出待办
+# 列出待办 {#列出待办}
 ./target/release/todo-cli list
 
-# 预期输出:
-# 1. 买牛奶
-# 2. 写代码
+# 预期输出: {#预期输出}
+# 1. 买牛奶 {#1-买牛奶}
+# 2. 写代码 {#2-写代码}
 ```
 
 ---
 
-## 参考实现
+## 参考实现 {#参考实现}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -290,7 +290,7 @@ cargo build --release
 
 ---
 
-## 下一步
+## 下一步 {#下一步}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -311,7 +311,7 @@ cargo build --release
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -320,7 +320,7 @@ cargo build --release
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

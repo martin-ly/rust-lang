@@ -1,4 +1,4 @@
-# Rust 生产实践指南
+# Rust 生产实践指南 {#rust-生产实践指南}
 
 > **分级**: [B]
 > **Bloom 层级**: L3-L4 (应用/分析)
@@ -9,19 +9,19 @@
 
 ---
 
-## 📋 目录
+## 📋 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Rust 生产实践指南](#rust-生产实践指南)
-  - [📋 目录](#-目录)
-  - [🎯 目标](#-目标)
-  - [📊 生产就绪检查清单](#-生产就绪检查清单)
+  - [📋 目录](#目录)
+  - [🎯 目标](#目标)
+  - [📊 生产就绪检查清单](#生产就绪检查清单)
     - [功能完整性](#功能完整性)
     - [可观测性](#可观测性)
     - [安全性](#安全性)
     - [性能](#性能)
-  - [🐳 部署](#-部署)
+  - [🐳 部署](#部署)
     - [Docker 优化](#docker-优化)
       - [多阶段构建](#多阶段构建)
       - [镜像优化技巧](#镜像优化技巧)
@@ -31,32 +31,32 @@
     - [Serverless](#serverless)
       - [AWS Lambda](#aws-lambda)
       - [Cargo Lambda](#cargo-lambda)
-  - [📈 监控与可观测性](#-监控与可观测性)
+  - [📈 监控与可观测性](#监控与可观测性)
     - [指标收集](#指标收集)
       - [Prometheus 集成](#prometheus-集成)
     - [分布式追踪](#分布式追踪)
-      - [OpenTelemetry + Jaeger](#opentelemetry--jaeger)
-  - [🔒 安全](#-安全)
+      - [OpenTelemetry + Jaeger](#opentelemetry-jaeger)
+  - [🔒 安全](#安全)
     - [依赖审计](#依赖审计)
     - [密钥管理](#密钥管理)
       - [AWS Secrets Manager](#aws-secrets-manager)
-  - [⚡ 性能优化](#-性能优化)
+  - [⚡ 性能优化](#性能优化)
     - [性能分析](#性能分析)
       - [Criterion 基准测试](#criterion-基准测试)
       - [flamegraph](#flamegraph)
     - [内存优化](#内存优化)
       - [内存分析工具](#内存分析工具)
       - [优化技巧](#优化技巧)
-  - [🛡️ 可靠性](#️-可靠性)
+  - [🛡️ 可靠性](#可靠性)
     - [熔断器模式](#熔断器模式)
     - [优雅降级](#优雅降级)
-  - [🔗 参考资源](#-参考资源)
+  - [🔗 参考资源](#参考资源)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
 ---
 
-## 🎯 目标
+## 🎯 目标 {#目标}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -69,11 +69,11 @@
 
 ---
 
-## 📊 生产就绪检查清单
+## 📊 生产就绪检查清单 {#生产就绪检查清单}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 功能完整性
+### 功能完整性 {#功能完整性}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -87,7 +87,7 @@
 - [ ] 健康检查端点实现
 - [ ] 优雅关闭机制
 
-### 可观测性
+### 可观测性 {#可观测性}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -99,7 +99,7 @@
 - [ ] 性能基准测试
 - [ ] 告警规则配置
 
-### 安全性
+### 安全性 {#安全性}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -111,7 +111,7 @@
 - [ ] 敏感数据加密存储
 - [ ] TLS 配置正确
 
-### 性能
+### 性能 {#性能}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -125,35 +125,35 @@
 
 ---
 
-## 🐳 部署
+## 🐳 部署 {#部署}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Docker 优化
+### Docker 优化 {#docker-优化}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-#### 多阶段构建
+#### 多阶段构建 {#多阶段构建}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```dockerfile
-# 构建阶段
+# 构建阶段 {#构建阶段}
 FROM rust:1.95-slim as builder
 
 WORKDIR /app
 COPY Cargo.toml Cargo.lock ./
 COPY src ./src
 
-# 缓存依赖
+# 缓存依赖 {#缓存依赖}
 RUN cargo build --release && \
     rm -rf src/
 
-# 生产镜像
+# 生产镜像 {#生产镜像}
 FROM gcr.io/distroless/cc-debian12
 
 COPY --from=builder /app/target/release/myapp /app/
@@ -165,7 +165,7 @@ USER nonroot:nonroot
 ENTRYPOINT ["/app/myapp"]
 ```
 
-#### 镜像优化技巧
+#### 镜像优化技巧 {#镜像优化技巧}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -180,7 +180,7 @@ ENTRYPOINT ["/app/myapp"]
 | cargo-chef | 依赖缓存 | 中 |
 
 ```dockerfile
-# 使用 cargo-chef 优化缓存
+# 使用 cargo-chef 优化缓存 {#使用-cargo-chef-优化缓存}
 FROM lukemathwalker/cargo-chef:latest-rust-1.95 as chef
 WORKDIR /app
 
@@ -190,9 +190,9 @@ RUN cargo chef prepare --recipe-path recipe.json
 
 FROM chef as builder
 COPY --from=planner /app/recipe.json recipe.json
-# 构建依赖（缓存层）
+# 构建依赖（缓存层） {#构建依赖缓存层}
 RUN cargo chef cook --release --recipe-path recipe.json
-# 构建应用
+# 构建应用 {#构建应用}
 COPY . .
 RUN cargo build --release --bin app
 
@@ -203,11 +203,11 @@ ENTRYPOINT ["/usr/local/bin/app"]
 
 ---
 
-### Kubernetes
+### Kubernetes {#kubernetes}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
-#### 基础部署
+#### 基础部署 {#基础部署}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -256,7 +256,7 @@ spec:
               command: ["/bin/sh", "-c", "sleep 10"]
 ```
 
-#### HPA 配置
+#### HPA 配置 {#hpa-配置}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -296,11 +296,11 @@ spec:
 
 ---
 
-### Serverless
+### Serverless {#serverless}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-#### AWS Lambda
+#### AWS Lambda {#aws-lambda}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -325,30 +325,30 @@ async fn handler(event: LambdaEvent<Value>) -> Result<Value, Error> {
 }
 ```
 
-#### Cargo Lambda
+#### Cargo Lambda {#cargo-lambda}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```bash
-# 安装
+# 安装 {#安装}
 cargo install cargo-lambda
 
-# 构建
+# 构建 {#构建}
 cargo lambda build --release --target x86_64-unknown-linux-musl
 
-# 部署
+# 部署 {#部署-1}
 cargo lambda deploy --region us-east-1
 ```
 
 ---
 
-## 📈 监控与可观测性
+## 📈 监控与可观测性 {#监控与可观测性}
 
-### 指标收集
+### 指标收集 {#指标收集}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
-#### Prometheus 集成
+#### Prometheus 集成 {#prometheus-集成}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -395,11 +395,11 @@ async fn metrics_middleware<B>(
 }
 ```
 
-### 分布式追踪
+### 分布式追踪 {#分布式追踪}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-#### OpenTelemetry + Jaeger
+#### OpenTelemetry + Jaeger {#opentelemetry-jaeger}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -435,23 +435,23 @@ async fn process_user_request(user_id: u64) -> Result<(), Error> {
 
 ---
 
-## 🔒 安全
+## 🔒 安全 {#安全}
 
-### 依赖审计
+### 依赖审计 {#依赖审计}
 
 ```bash
-# 安装 cargo-audit
+# 安装 cargo-audit {#安装-cargo-audit}
 cargo install cargo-audit
 
-# 运行审计
+# 运行审计 {#运行审计}
 cargo audit
 
-# 集成到 CI
+# 集成到 CI {#集成到-ci}
 cargo audit --deny warnings
 ```
 
 ```yaml
-# .github/workflows/security.yml
+# .github/workflows/security.yml {#githubworkflowssecurityyml}
 name: Security Audit
 on:
   schedule:
@@ -471,9 +471,9 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-### 密钥管理
+### 密钥管理 {#密钥管理}
 
-#### AWS Secrets Manager
+#### AWS Secrets Manager {#aws-secrets-manager}
 
 ```rust,ignore
 use aws_sdk_secretsmanager::Client;
@@ -494,11 +494,11 @@ async fn get_database_url() -> Result<String, Error> {
 
 ---
 
-## ⚡ 性能优化
+## ⚡ 性能优化 {#性能优化}
 
-### 性能分析
+### 性能分析 {#性能分析}
 
-#### Criterion 基准测试
+#### Criterion 基准测试 {#criterion-基准测试}
 
 ```rust,ignore
 use criterion::{criterion_group, criterion_main, Criterion};
@@ -519,33 +519,33 @@ criterion_group!(benches, criterion_benchmark);
 criterion_main!(benches);
 ```
 
-#### flamegraph
+#### flamegraph {#flamegraph}
 
 ```bash
 cargo install flamegraph
 
-# 运行并生成火焰图
+# 运行并生成火焰图 {#运行并生成火焰图}
 cargo flamegraph --bin myapp
 
-# 在容器中使用
+# 在容器中使用 {#在容器中使用}
 perf record -F 99 -g -- ./myapp
 cargo flamegraph --perfdata perf.data
 ```
 
-### 内存优化
+### 内存优化 {#内存优化}
 
-#### 内存分析工具
+#### 内存分析工具 {#内存分析工具}
 
 ```bash
-# heaptrack
+# heaptrack {#heaptrack}
 cargo install heaptrack
 heaptrack ./target/release/myapp
 
-# valgrind (开发环境)
+# valgrind (开发环境) {#valgrind-开发环境}
 valgrind --tool=massif ./target/release/myapp
 ```
 
-#### 优化技巧
+#### 优化技巧 {#优化技巧}
 
 | 技术 | 效果 | 场景 |
 |------|------|------|
@@ -556,9 +556,9 @@ valgrind --tool=massif ./target/release/myapp
 
 ---
 
-## 🛡️ 可靠性
+## 🛡️ 可靠性 {#可靠性}
 
-### 熔断器模式
+### 熔断器模式 {#熔断器模式}
 
 ```rust,ignore
 use std::sync::Arc;
@@ -634,7 +634,7 @@ impl CircuitBreaker {
 }
 ```
 
-### 优雅降级
+### 优雅降级 {#优雅降级}
 
 ```rust,ignore
 use std::sync::atomic::{AtomicBool, Ordering};
@@ -673,7 +673,7 @@ impl Service {
 
 ---
 
-## 🔗 参考资源
+## 🔗 参考资源 {#参考资源}
 
 - [The Twelve-Factor App](https://12factor.net/)
 - [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
@@ -699,14 +699,14 @@ impl Service {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [Kubernetes 部署指南](../../../knowledge/06_ecosystem/deployment/01_kubernetes_deployment_guide.md)
 - [Content 总览](../README.md)
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

@@ -1,4 +1,4 @@
-# `assert_matches!` / `debug_assert_matches!` 速查指南
+# `assert_matches!` / `debug_assert_matches!` 速查指南 {#assert_matches-debug_assert_matches-速查指南}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
@@ -15,12 +15,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [`assert_matches!` / `debug_assert_matches!` 速查指南](#assert_matches--debug_assert_matches-速查指南)
-  - [📑 目录](#-目录)
+- [`assert_matches!` / `debug_assert_matches!` 速查指南](#assert_matches-debug_assert_matches-速查指南)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [语法](#语法)
   - [对比：`assert!` vs `assert_matches!`](#对比assert-vs-assert_matches)
@@ -32,12 +32,12 @@
     - [3. 嵌套模式](#3-嵌套模式)
     - [4. `Option` 断言](#4-option-断言)
   - [`debug_assert_matches!`](#debug_assert_matches)
-  - [与 `assert!` + `matches!` 的关系](#与-assert--matches-的关系)
+  - [与 `assert!` + `matches!` 的关系](#与-assert-matches-的关系)
   - [迁移指南](#迁移指南)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 概述
+## 概述 {#概述}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** ✅
 
@@ -45,7 +45,7 @@
 
 ---
 
-## 语法
+## 语法 {#语法}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -59,11 +59,11 @@ debug_assert_matches!(expression, pattern); // 仅 debug 构建触发
 
 ---
 
-## 对比：`assert!` vs `assert_matches!`
+## 对比：`assert!` vs `assert_matches!` {#对比assert-vs-assert_matches}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 旧方式（1.95 及之前）
+### 旧方式（1.95 及之前） {#旧方式195-及之前}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -82,7 +82,7 @@ if let Ok(config) = result {
 }
 ```
 
-### 新方式（1.96+）
+### 新方式（1.96+） {#新方式196}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -103,11 +103,11 @@ assert_matches!(
 
 ---
 
-## 典型用例
+## 典型用例 {#典型用例}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 1. `Result` 断言
+### 1. `Result` 断言 {#1-result-断言}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -119,7 +119,7 @@ fn test_file_open() {
 }
 ```
 
-### 2. 枚举变体验证
+### 2. 枚举变体验证 {#2-枚举变体验证}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -143,7 +143,7 @@ fn test_state_machine() {
 }
 ```
 
-### 3. 嵌套模式
+### 3. 嵌套模式 {#3-嵌套模式}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -156,7 +156,7 @@ fn test_nested_result() {
 }
 ```
 
-### 4. `Option` 断言
+### 4. `Option` 断言 {#4-option-断言}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -170,7 +170,7 @@ fn test_cache_hit() {
 
 ---
 
-## `debug_assert_matches!`
+## `debug_assert_matches!` {#debug_assert_matches}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -187,7 +187,7 @@ fn critical_path(data: &Packet) {
 
 ---
 
-## 与 `assert!` + `matches!` 的关系
+## 与 `assert!` + `matches!` 的关系 {#与-assert-matches-的关系}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -208,16 +208,16 @@ assert_matches!(result, Ok(_));
 
 ---
 
-## 迁移指南
+## 迁移指南 {#迁移指南}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
-# 搜索项目中常见的 assert!(matches!(...)) 模式
+# 搜索项目中常见的 assert!(matches!(...)) 模式 {#搜索项目中常见的-assertmatches-模式}
 grep -rn "assert!(matches!" crates/ --include="*.rs"
 
-# 替换为 assert_matches!
-# Before:
+# 替换为 assert_matches! {#替换为-assert_matches}
+# Before: {#before}
 assert!(matches!(result, Ok(Config { key: "test", .. })));
 
 // After:
@@ -239,7 +239,7 @@ assert_matches!(result, Ok(Config { key: "test", .. }));
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -248,7 +248,7 @@ assert_matches!(result, Ok(Config { key: "test", .. }));
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

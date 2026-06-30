@@ -1,4 +1,4 @@
-# Rust 研究笔记：完整总结综合
+# Rust 研究笔记：完整总结综合 {#rust-研究笔记完整总结综合}
 >
 > **概念族**: 元/导航/索引
 
@@ -17,12 +17,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 研究笔记：完整总结综合](#rust-研究笔记完整总结综合)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、项目全貌（一句话）](#一项目全貌一句话)
   - [二、三大支柱概览](#二三大支柱概览)
   - [三、全项目知识地图](#三全项目知识地图)
@@ -31,9 +31,9 @@
   - [五、各文档职责与定位](#五各文档职责与定位)
   - [六、推荐阅读路径](#六推荐阅读路径)
   - [七、完成度与缺口](#七完成度与缺口)
-  - [🆕 Rust 1.96.0+ / Edition 2024 研究更新](#-rust-1960--edition-2024-研究更新)
+  - [🆕 Rust 1.96.0+ / Edition 2024 研究更新](#rust-1960-edition-2024-研究更新)
     - [核心研究点](#核心研究点)
-  - [🆕 Rust 1.96.0+ / Edition 2024 权威国际化升级说明](#-rust-1960--edition-2024-权威国际化升级说明)
+  - [🆕 Rust 1.96.0+ / Edition 2024 权威国际化升级说明](#rust-1960-edition-2024-权威国际化升级说明)
     - [升级要点](#升级要点)
       - [权威来源对齐](#权威来源对齐)
       - [形式化来源对照](#形式化来源对照)
@@ -41,7 +41,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 一、项目全貌（一句话）
+## 一、项目全貌（一句话） {#一项目全貌一句话}
 >
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
@@ -53,7 +53,7 @@
 
 ---
 
-## 二、三大支柱概览
+## 二、三大支柱概览 {#二三大支柱概览}
 >
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
@@ -67,7 +67,7 @@
 
 ---
 
-## 三、全项目知识地图
+## 三、全项目知识地图 {#三全项目知识地图}
 >
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
@@ -95,7 +95,7 @@
    ARGUMENTATION_GAP_INDEX                            ← 论证缺口
 ```
 
-### 3.1 按领域一句话
+### 3.1 按领域一句话 {#31-按领域一句话}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -119,7 +119,7 @@
 
 ---
 
-## 四、论证脉络关系总览
+## 四、论证脉络关系总览 {#四论证脉络关系总览}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -144,7 +144,7 @@
 
 ---
 
-## 五、各文档职责与定位
+## 五、各文档职责与定位 {#五各文档职责与定位}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -165,7 +165,7 @@
 
 ---
 
-## 六、推荐阅读路径
+## 六、推荐阅读路径 {#六推荐阅读路径}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -179,7 +179,7 @@
 
 ---
 
-## 七、完成度与缺口
+## 七、完成度与缺口 {#七完成度与缺口}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -193,7 +193,7 @@
 | **格式统一与 Rust 1.93 对齐** | ✅ 100%：元信息全库补全、92 项→落点文档、[RUST_193_COUNTEREXAMPLES_INDEX](10_rust_193_counterexamples_index.md)、权威来源约定、CONTRIBUTING/MAINTENANCE_GUIDE 门禁与季度复核；见 FORMAT_AND_CONTENT_ALIGNMENT_PLAN |
 | **docs 全结构梳理** | ✅ 100%：DOCS_STRUCTURE_OVERVIEW 按本格式 100% 覆盖 docs；各子目录 README 元信息、双向链接、验证清单完整 |
 | **设计模式/分布式/工作流全面论证** | ✅ 100%：[COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](software_design_theory/10_comprehensive_argumentation_gap_analysis_and_plan.md) D1–D3 全部交付；CE-PAT1、EB-DET1、反例映射、模式 DAG、分布式模式形式化、工作流形式化 |
-| L3 机器证明 | 📦 已归档（[archive/deprecated/](../archive/deprecated/README.md)）；聚焦 L2 数学风格 + Rust 示例 |
+| L3 机器证明 | 📦 已归档（[archive/deprecated/](../../archive/deprecated/README.md)）；聚焦 L2 数学风格 + Rust 示例 |
 | Aeneas/coq-of-rust 对接 | 📦 已归档；保留为国际对标参考 |
 
 ---
@@ -203,13 +203,13 @@
 
 ---
 
-## 🆕 Rust 1.96.0+ / Edition 2024 研究更新
+## 🆕 Rust 1.96.0+ / Edition 2024 研究更新 {#rust-1960-edition-2024-研究更新}
 >
 > **来源**: [Rust Edition Guide - Rust 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-06-29
 
-### 核心研究点
+### 核心研究点 {#核心研究点}
 
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
 
@@ -225,7 +225,7 @@
 
 ---
 
-## 🆕 Rust 1.96.0+ / Edition 2024 权威国际化升级说明
+## 🆕 Rust 1.96.0+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明}
 >
 > **来源**: [Rust Edition Guide - Rust 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)
@@ -233,13 +233,13 @@
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-06-29
 
-### 升级要点
+### 升级要点 {#升级要点}
 
 > **来源**: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
 本文档已完成权威国际化来源对齐升级：将泛化的 "Rust Official Docs" 替换为官方具体章节/模块/API 链接，并补充 P1 形式化来源对照。
 
-#### 权威来源对齐
+#### 权威来源对齐 {#权威来源对齐}
 
 | 来源类型 | 具体链接 | 用途 |
 | :--- | :--- | :--- |
@@ -249,7 +249,7 @@
 | **Rust Standard Library** | [std](https://doc.rust-lang.org/std/)、[Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html)、[HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html)、[Result](https://doc.rust-lang.org/std/result/enum.Result.html)、[Future](https://doc.rust-lang.org/std/future/trait.Future.html)、[Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)、[thread](https://doc.rust-lang.org/std/thread/)、[sync](https://doc.rust-lang.org/std/sync/) | API/模块级别参考 |
 | **Rust Edition Guide** | [Edition Guide](https://doc.rust-lang.org/edition-guide/)、[Rust 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) | 版本差异与迁移 |
 
-#### 形式化来源对照
+#### 形式化来源对照 {#形式化来源对照}
 
 > **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/) / [Aeneas](https://aeneas-verification.github.io/) / [Ferrocene FLS](https://spec.ferrocene.dev/)
 
@@ -260,7 +260,7 @@
 | 类型系统/Trait | ✓ Iris 语义 | ✓ 类型系统提取 | ✓ 规范 § 类型 |
 | 异步/Pin | ✓ 扩展模型 | 部分支持 | ✓ 规范 § 表达式 |
 
-#### 版本与生态更新
+#### 版本与生态更新 {#版本与生态更新}
 
 - 所有概念、示例与最佳实践统一对齐 **Rust 1.96.0+ (Edition 2024)**。
 - 生态引用已更新：async-std → Tokio / smol；wasm32-wasi → wasm32-wasip1 / wasm32-wasip2（详见 [10_application_trees.md](10_application_trees.md)）。
@@ -284,7 +284,7 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -293,7 +293,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

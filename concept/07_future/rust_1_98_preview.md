@@ -282,7 +282,7 @@ fn demo_198_apis() {
 ### 2.3 Nightly 探测结果（2026-06-28）
 
 > 探测脚本: [`scripts/probe_rust_198_apis.rs`](../../../scripts/probe_rust_198_apis.rs)
-> 完整报告: [`reports/RUST_198_NIGHTLY_PROBE_2026_06_28.md`](../../../reports/RUST_198_NIGHTLY_PROBE_2026_06_28.md)
+> 完整报告: [`reports/RUST_198_NIGHTLY_PROBE_2026_06_28.md`](../../reports/RUST_198_NIGHTLY_PROBE_2026_06_28.md)
 
 使用 `rustc 1.98.0-nightly (2026-06-26)` 对 17 项候选 API 进行无 feature gate 编译探测：
 

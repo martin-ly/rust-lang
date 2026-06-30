@@ -5,7 +5,7 @@
 
 # Miri：Rust 未定义行为动态检测器
 
-> **EN**: Miri
+> **EN**: Miri: Rust Undefined Behavior Detector
 > **Summary**: Miri is Rust's official MIR interpreter for detecting undefined behavior in unsafe and safe Rust code. Covers installation, common UB classes, Stacked Borrows vs Tree Borrows, and integration with existing crate tests.
 > **受众**: [进阶 / 工程 / 形式化]
 > **Bloom 层级**: 理解 → 应用 → 分析

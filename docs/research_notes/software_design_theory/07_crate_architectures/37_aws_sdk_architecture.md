@@ -8,7 +8,7 @@
 
 ---
 
-# aws-sdk-rust 架构解构
+# aws-sdk-rust 架构解构 {#aws-sdk-rust-架构解构}
 
 > **最后更新**: 2026-06-29
 >
@@ -24,7 +24,7 @@
 
 ---
 
-## 1. 引言：aws-sdk-rust 的生态定位
+## 1. 引言：aws-sdk-rust 的生态定位 {#1-引言aws-sdk-rust-的生态定位}
 
 > **[来源: [aws-sdk-rust GitHub](https://github.com/awslabs/aws-sdk-rust)]**
 
@@ -62,7 +62,7 @@ println!("buckets = {:?}", resp.buckets());
 
 ---
 
-## 2. 核心 API 与概念
+## 2. 核心 API 与概念 {#2-核心-api-与概念}
 
 > **[来源: [aws-config docs.rs](https://docs.rs/aws-config/latest/aws_config/)]**
 
@@ -79,7 +79,7 @@ println!("buckets = {:?}", resp.buckets());
 
 > [来源: [aws-sdk-s3 docs.rs](https://docs.rs/aws-sdk-s3/latest/aws_sdk_s3/client/struct.Client.html)]
 
-### 2.1 配置加载流水线
+### 2.1 配置加载流水线 {#21-配置加载流水线}
 
 `aws_config::from_env()` 构建一个 `ConfigLoader`，它会按标准顺序（环境变量 → `~/.aws/config` → IMDS 等）加载区域和凭证。加载完成后生成 `SdkConfig`，可被多个服务 Client 共享。
 
@@ -95,7 +95,7 @@ let dynamodb = aws_sdk_dynamodb::Client::new(&sdk_config);
 
 > [来源: [AWS SDK for Rust Config](https://docs.aws.amazon.com/sdk-for-rust/latest/dg/configure.html)]
 
-### 2.2 强类型操作构造器
+### 2.2 强类型操作构造器 {#22-强类型操作构造器}
 
 每个 AWS API 操作都是一个 Builder，链式调用设置请求参数后通过 `.send().await` 发起调用。这种模式将参数验证与请求构造分离，并利用 Rust 类型系统防止缺失必填字段。
 
@@ -110,7 +110,7 @@ let resp = client
 
 > [来源: [aws-sdk-s3 operation docs](https://docs.rs/aws-sdk-s3/latest/aws_sdk_s3/operation/get_object/index.html)]
 
-### 2.3 分页与流式响应
+### 2.3 分页与流式响应 {#23-分页与流式响应}
 
 分页 API（如 `list_objects_v2`）通常返回 `Paginator`，可调用 `.items()` 获取按页聚合的流；流式下载（如 `get_object`）通过 `ByteStream` 提供异步字节流。
 
@@ -127,7 +127,7 @@ while let Some(obj) = paginator.next().await {
 
 ---
 
-## 3. 反例边界
+## 3. 反例边界 {#3-反例边界}
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -145,7 +145,7 @@ while let Some(obj) = paginator.next().await {
 
 ---
 
-## 4. 类型系统利用
+## 4. 类型系统利用 {#4-类型系统利用}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -163,7 +163,7 @@ while let Some(obj) = paginator.next().await {
 
 ---
 
-## 5. 代码示例锚点
+## 5. 代码示例锚点 {#5-代码示例锚点}
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -175,7 +175,7 @@ while let Some(obj) = paginator.next().await {
 
 ---
 
-## 6. 相关架构与延伸阅读
+## 6. 相关架构与延伸阅读 {#6-相关架构与延伸阅读}
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -187,7 +187,7 @@ while let Some(obj) = paginator.next().await {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [aws-sdk-rust GitHub](https://github.com/awslabs/aws-sdk-rust)]**
 >
@@ -205,7 +205,7 @@ while let Some(obj) = paginator.next().await {
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
 > **P0（官方/必读）**:
 >
@@ -224,7 +224,7 @@ while let Some(obj) = paginator.next().await {
 > - [来源: [AWS SDK Rust Examples](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/rustv1)]
 > - [来源: [This Week in Rust](https://this-week-in-rust.org/)]
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

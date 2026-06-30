@@ -1,4 +1,4 @@
-# 形式化内容总索引
+# 形式化内容总索引 {#形式化内容总索引}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
@@ -10,10 +10,10 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 - [形式化内容总索引](#形式化内容总索引)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 索引说明](#1-索引说明)
   - [2. 按主题索引](#2-按主题索引)
     - [2.1 所有权与借用形式化](#21-所有权与借用形式化)
@@ -28,7 +28,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 1. 索引说明
+## 1. 索引说明 {#1-索引说明}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -41,11 +41,11 @@
 
 ---
 
-## 2. 按主题索引
+## 2. 按主题索引 {#2-按主题索引}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 所有权与借用形式化
+### 2.1 所有权与借用形式化 {#21-所有权与借用形式化}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -58,7 +58,7 @@
 
 **建议**: 优先阅读 `rust-ownership-decidability/` 侧内容，更系统、更完整。
 
-### 2.2 类型理论
+### 2.2 类型理论 {#22-类型理论}
 
 | 深度 | 位置 | 说明 |
 |------|------|------|
@@ -68,7 +68,7 @@
 
 **建议**: 类型理论通用基础读 `research_notes/`，Rust 特定深入读 `rust-ownership-decidability/`。
 
-### 2.3 并发与异步形式化
+### 2.3 并发与异步形式化 {#23-并发与异步形式化}
 
 | 深度 | 位置 | 说明 |
 |------|------|------|
@@ -77,7 +77,7 @@
 | ⭐⭐ 异步状态机 | [`research_notes/formal_methods/10_async_state_machine.md`](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) | 异步状态机形式化 |
 | ⭐⭐ Send/Sync | [`research_notes/formal_methods/10_send_sync_formalization.md`](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | Send/Sync 形式化 |
 
-### 2.4 设计模式形式化
+### 2.4 设计模式形式化 {#24-设计模式形式化}
 
 | 深度 | 位置 | 说明 |
 |------|------|------|
@@ -85,7 +85,7 @@
 | ⭐⭐ 通用形式化 | [`research_notes/software_design_theory/01_design_patterns_formal/`](../research_notes/software_design_theory/01_design_patterns_formal) | 23 种设计模式形式化 |
 | ⭐⭐ 工作流引擎 | [`research_notes/software_design_theory/02_workflow/`](../research_notes/software_design_theory/02_workflow) | 工作流状态机、补偿链、长事务 |
 
-### 2.5 验证工具
+### 2.5 验证工具 {#25-验证工具}
 
 | 工具 | 位置 | 状态 |
 |------|------|------|
@@ -93,7 +93,7 @@
 | Miri | `research_notes/formal_methods/MIRI_EXECUTION_MODEL.md` | 执行模型分析 |
 | Tree Borrows | `research_notes/formal_methods/tree_borrows_analysis.md` | 别名模型 |
 
-### 2.6 案例研究
+### 2.6 案例研究 {#26-案例研究}
 
 | 领域 | 位置 |
 |------|------|
@@ -109,7 +109,7 @@
 
 ---
 
-## 3. 快速决策树
+## 3. 快速决策树 {#3-快速决策树}
 
 ```text
 你想找什么？
@@ -132,7 +132,7 @@
 
 ---
 
-## 4. 维护记录
+## 4. 维护记录 {#4-维护记录}
 
 | 日期 | 操作 | 负责人 |
 |------|------|--------|
@@ -140,7 +140,7 @@
 
 ---
 
-## 5. 相关文档
+## 5. 相关文档 {#5-相关文档}
 
 - [`00_rust_ownership_decidability_integration_plan.md`](00_rust_ownership_decidability_integration_plan.md) — 整合计划详情
 - [`00_documentation_division_of_labor.md`](00_documentation_division_of_labor.md) — 文档体系分工协议
@@ -160,13 +160,13 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [上级目录](../README.md)
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 > **来源: [Coq Reference Manual](https://coq.inria.fr/doc/)**

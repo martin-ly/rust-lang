@@ -1,4 +1,4 @@
-# 研究笔记快速查找
+# 研究笔记快速查找 {#研究笔记快速查找}
 
 > **概念族**: 综合研究
 
@@ -22,7 +22,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -31,43 +31,43 @@
 >
 
 - [研究笔记快速查找](#研究笔记快速查找)
-  - [📑 目录](#-目录)
-  - [🎯 使用说明 {#-使用说明}](#-使用说明--使用说明)
-  - [🔍 按关键词查找 {#-按关键词查找}](#-按关键词查找--按关键词查找)
+  - [📑 目录](#目录)
+  - [🎯 使用说明](#使用说明)
+  - [🔍 按关键词查找](#按关键词查找)
     - [形式语言与形式证明](#形式语言与形式证明)
     - [所有权和借用](#所有权和借用)
-    - [类型系统](#类型系统)
-    - [生命周期](#生命周期)
+    - [类型系统](#类型系统-1)
+    - [生命周期](#生命周期-1)
     - [异步和并发](#异步和并发)
     - [性能优化](#性能优化)
     - [宏系统](#宏系统)
-  - [📚 按研究领域查找 {#-按研究领域查找}](#-按研究领域查找--按研究领域查找)
+  - [📚 按研究领域查找](#按研究领域查找)
     - [形式化方法](#形式化方法)
     - [类型理论](#类型理论)
     - [软件设计理论](#软件设计理论)
     - [实验研究](#实验研究)
     - [综合研究](#综合研究)
-  - [🎯 按研究目标查找 {#-按研究目标查找}](#-按研究目标查找--按研究目标查找)
+  - [🎯 按研究目标查找](#按研究目标查找)
     - [我想看完整总结与论证脉络](#我想看完整总结与论证脉络)
     - [我想看批判性意见与改进计划](#我想看批判性意见与改进计划)
     - [我想证明某个性质](#我想证明某个性质)
     - [我想理解某个概念](#我想理解某个概念)
     - [我想优化性能](#我想优化性能)
     - [我想学习研究方法](#我想学习研究方法)
-  - [📊 按优先级查找 {#-按优先级查找}](#-按优先级查找--按优先级查找)
+  - [📊 按优先级查找](#按优先级查找)
     - [高优先级研究](#高优先级研究)
     - [中优先级研究](#中优先级研究)
     - [低优先级研究](#低优先级研究)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
+  - [🔗 相关资源](#相关资源)
     - [核心文档](#核心文档)
     - [进展跟踪](#进展跟踪)
     - [工具和指南](#工具和指南)
-  - [🌍 权威国际化资源链接](#-权威国际化资源链接)
+  - [🌍 权威国际化资源链接](#权威国际化资源链接)
     - [Rust Reference 核心章节](#rust-reference-核心章节)
     - [The Rust Programming Language 核心章节](#the-rust-programming-language-核心章节)
-    - [Rust Standard Library 核心 API / 模块](#rust-standard-library-核心-api--模块)
-    - [Rust By Example / Rust Cookbook / cheats.rs](#rust-by-example--rust-cookbook--cheatsrs)
-    - [快速查找专属语言 / API 链接](#快速查找专属语言--api-链接)
+    - [Rust Standard Library 核心 API / 模块](#rust-standard-library-核心-api-模块)
+    - [Rust By Example / Rust Cookbook / cheats.rs](#rust-by-example-rust-cookbook-cheatsrs)
+    - [快速查找专属语言 / API 链接](#快速查找专属语言-api-链接)
       - [所有权与借用](#所有权与借用)
       - [类型系统](#类型系统-1)
       - [异步与并发](#异步与并发)
@@ -76,7 +76,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🎯 使用说明 {#-使用说明}
+## 🎯 使用说明 {#使用说明}
 
 >
 
@@ -100,13 +100,13 @@
 
 ---
 
-## 🔍 按关键词查找 {#-按关键词查找}
+## 🔍 按关键词查找 {#按关键词查找}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 形式语言与形式证明
+### 形式语言与形式证明 {#形式语言与形式证明}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -126,7 +126,7 @@
 
 | 操作语义   | [形式语言与形式证明](10_formal_language_and_proofs.md)      | ✅ 100% |
 
-### 所有权和借用
+### 所有权和借用 {#所有权和借用}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -148,7 +148,7 @@
 
 | 内存安全   | [所有权模型形式化](formal_methods/10_ownership_model.md)    | ✅ 100% |
 
-### 类型系统
+### 类型系统 {#类型系统-1}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -184,7 +184,7 @@
 
 | 逆变       | [型变理论](type_theory/10_variance_theory.md)                    | ✅ 100% |
 
-### 生命周期
+### 生命周期 {#生命周期-1}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -204,7 +204,7 @@
 
 | 区域类型     | [生命周期形式化](type_theory/10_lifetime_formalization.md)    | ✅ 100% |
 
-### 异步和并发
+### 异步和并发 {#异步和并发}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -236,7 +236,7 @@
 
 | formal_methods 完备性 | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](formal_methods/10_formal_methods_completeness_checklist.md) | ✅ 六篇×六维自检（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类） |
 
-### 性能优化
+### 性能优化 {#性能优化}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -258,7 +258,7 @@
 
 | 优化       | [编译器优化](experiments/10_compiler_optimizations.md)   | ✅ 100% |
 
-### 宏系统
+### 宏系统 {#宏系统}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -280,13 +280,13 @@
 
 ---
 
-## 📚 按研究领域查找 {#-按研究领域查找}
+## 📚 按研究领域查找 {#按研究领域查找}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 形式化方法
+### 形式化方法 {#形式化方法}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -308,7 +308,7 @@
 
 | [Pin 和自引用类型形式化](formal_methods/10_pin_self_referential.md) | 形式化定义 Pin 类型和自引用类型，证明安全性 | ✅ 已完成 | 100%   |
 
-### 类型理论
+### 类型理论 {#类型理论}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -330,7 +330,7 @@
 
 | [型变理论](type_theory/10_variance_theory.md)                    | 深入理解型变理论，形式化定义型变规则     | ✅ 已完成 | 100%   |
 
-### 软件设计理论
+### 软件设计理论 {#软件设计理论}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -354,7 +354,7 @@
 
 | [反模式与边界](software_design_theory/07_anti_patterns.md)                | 13 反例、反模式分类、规避策略      | ✅ 已完成 | 100%   |
 
-### 实验研究
+### 实验研究 {#实验研究}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -374,7 +374,7 @@
 
 | [宏展开性能分析](experiments/10_macro_expansion_performance.md) | 分析宏展开性能，识别性能瓶颈                     | ✅ 已完成 | 100%   |
 
-### 综合研究
+### 综合研究 {#综合研究}
 
 >
 
@@ -392,13 +392,13 @@
 
 ---
 
-## 🎯 按研究目标查找 {#-按研究目标查找}
+## 🎯 按研究目标查找 {#按研究目标查找}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 我想看完整总结与论证脉络
+### 我想看完整总结与论证脉络 {#我想看完整总结与论证脉络}
 
 >
 
@@ -408,7 +408,7 @@
 
 - **论证脉络关系** → [ARGUMENTATION_CHAIN_AND_FLOW](10_argumentation_chain_and_flow.md)（论证五步法、概念→定理 DAG、文档依赖、论证思路示例）
 
-### 我想看批判性意见与改进计划
+### 我想看批判性意见与改进计划 {#我想看批判性意见与改进计划}
 
 >
 
@@ -420,7 +420,7 @@
 
 - **层次化映射总结** → [HIERARCHICAL_MAPPING_AND_SUMMARY](10_hierarchical_mapping_and_summary.md)（文档树、概念族↔文档↔Def/定理、文档↔思维表征、文档依赖）
 
-### 我想证明某个性质
+### 我想证明某个性质 {#我想证明某个性质}
 
 >
 
@@ -432,7 +432,7 @@
 
 - **核心定理完整证明** → [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md)（L2 级 ownership T2、borrow T1、type T3）
 
-- **Coq 证明骨架** → [archive/deprecated/coq_skeleton](../archive/deprecated/coq_skeleton/README.md)（T-OW2）、[COQ_ISABELLE_PROOF_SCAFFOLDING](../archive/deprecated/README.md)（已归档）
+- **Coq 证明骨架** → [archive/deprecated/coq_skeleton](../../archive/deprecated/coq_skeleton/README.md)（T-OW2）、[COQ_ISABELLE_PROOF_SCAFFOLDING](../../archive/deprecated/README.md)（已归档）
 
 - **国际对标** → [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](10_international_formal_verification_index.md)、[RUSTBELT_ALIGNMENT](10_rustbelt_alignment.md)
 
@@ -454,7 +454,7 @@
 
 - **形式化方法完备性** → [formal_methods 完备性缺口](formal_methods/00_completeness_gaps.md)（Phase 1–6 100%）
 
-### 我想理解某个概念
+### 我想理解某个概念 {#我想理解某个概念}
 
 >
 
@@ -490,7 +490,7 @@
 
 - **反模式与边界** → [13 反例、规避策略](software_design_theory/07_anti_patterns.md)
 
-### 我想优化性能
+### 我想优化性能 {#我想优化性能}
 
 >
 
@@ -508,7 +508,7 @@
 
 - **宏优化** → [宏展开性能分析](experiments/10_macro_expansion_performance.md)
 
-### 我想学习研究方法
+### 我想学习研究方法 {#我想学习研究方法}
 
 >
 
@@ -526,13 +526,13 @@
 
 ---
 
-## 📊 按优先级查找 {#-按优先级查找}
+## 📊 按优先级查找 {#按优先级查找}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 高优先级研究
+### 高优先级研究 {#高优先级研究}
 
 >
 
@@ -548,7 +548,7 @@
 
 4. [类型系统基础](type_theory/10_type_system_foundations.md) - 40% 完成度
 
-### 中优先级研究
+### 中优先级研究 {#中优先级研究}
 
 >
 
@@ -576,7 +576,7 @@
 
 10. [型变理论](type_theory/10_variance_theory.md) - 30% 完成度
 
-### 低优先级研究
+### 低优先级研究 {#低优先级研究}
 
 >
 
@@ -592,13 +592,13 @@
 
 ---
 
-## 🔗 相关资源 {#-相关资源}
+## 🔗 相关资源 {#相关资源}
 
 >
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 核心文档
+### 核心文档 {#核心文档}
 
 >
 
@@ -612,7 +612,7 @@
 
 - [研究路线图](10_research_roadmap.md)
 
-### 进展跟踪
+### 进展跟踪 {#进展跟踪}
 
 >
 
@@ -624,7 +624,7 @@
 
 - [系统统计报告](10_statistics.md)
 
-### 工具和指南
+### 工具和指南 {#工具和指南}
 
 >
 
@@ -646,7 +646,7 @@
 
 ---
 
-## 🌍 权威国际化资源链接
+## 🌍 权威国际化资源链接 {#权威国际化资源链接}
 
 >
 
@@ -664,7 +664,7 @@
 
 本节为速查内容提供官方权威来源与社区经典参考的直通链接，便于深入验证与扩展阅读。
 
-### Rust Reference 核心章节
+### Rust Reference 核心章节 {#rust-reference-核心章节}
 
 - [Reference 首页](https://doc.rust-lang.org/reference/)
 
@@ -678,7 +678,7 @@
 
 - [Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html)
 
-### The Rust Programming Language 核心章节
+### The Rust Programming Language 核心章节 {#the-rust-programming-language-核心章节}
 
 - [TRPL 首页](https://doc.rust-lang.org/book/)
 
@@ -696,7 +696,7 @@
 
 - [Ch. 19 - Advanced Features / Macros](https://doc.rust-lang.org/book/ch19-06-macros.html)
 
-### Rust Standard Library 核心 API / 模块
+### Rust Standard Library 核心 API / 模块 {#rust-standard-library-核心-api-模块}
 
 - [std 首页](https://doc.rust-lang.org/std/)
 
@@ -712,7 +712,7 @@
 
 - [std::marker (Send / Sync / PhantomData)](https://doc.rust-lang.org/std/marker/)
 
-### Rust By Example / Rust Cookbook / cheats.rs
+### Rust By Example / Rust Cookbook / cheats.rs {#rust-by-example-rust-cookbook-cheatsrs}
 
 - [Rust By Example 首页](https://doc.rust-lang.org/rust-by-example/)
 
@@ -722,13 +722,13 @@
 
 ---
 
-### 快速查找专属语言 / API 链接
+### 快速查找专属语言 / API 链接 {#快速查找专属语言-api-链接}
 
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-#### 所有权与借用
+#### 所有权与借用 {#所有权与借用}
 
 - [Reference - Memory allocation and lifetime](https://doc.rust-lang.org/reference/memory-model.html#memory-allocation-and-lifetime)
 
@@ -742,7 +742,7 @@
 
 - [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html)
 
-#### 类型系统
+#### 类型系统 {#类型系统-1}
 
 - [Reference - Types](https://doc.rust-lang.org/reference/types.html)
 
@@ -754,7 +754,7 @@
 
 - [std::marker (Send / Sync / Copy / Sized)](https://doc.rust-lang.org/std/marker/)
 
-#### 异步与并发
+#### 异步与并发 {#异步与并发}
 
 - [TRPL Ch. 17 - Async / Await](https://doc.rust-lang.org/book/ch17-00-async-await.html)
 
@@ -766,7 +766,7 @@
 
 - [std::thread](https://doc.rust-lang.org/std/thread/)
 
-#### 生命周期
+#### 生命周期 {#生命周期-1}
 
 - [Reference - Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html)
 
@@ -774,7 +774,7 @@
 
 - [cheats.rs - Lifetimes](https://cheats.rs/#lifetimes)
 
-#### 宏与错误处理
+#### 宏与错误处理 {#宏与错误处理}
 
 - [Reference - Macros](https://doc.rust-lang.org/reference/macros.html)
 
@@ -786,7 +786,7 @@
 
 - [std::option::Option](https://doc.rust-lang.org/std/option/)
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -798,7 +798,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

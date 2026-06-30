@@ -1,4 +1,4 @@
-# 决策树/推理树标准模板
+# 决策树/推理树标准模板 {#决策树推理树标准模板}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
@@ -9,10 +9,10 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 - [决策树/推理树标准模板](#决策树推理树标准模板)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [ASCII 模板](#ascii-模板)
   - [Mermaid 模板](#mermaid-模板)
   - [使用示例：选择引用类型](#使用示例选择引用类型)
@@ -20,7 +20,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## ASCII 模板
+## ASCII 模板 {#ascii-模板}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -54,7 +54,7 @@
 
 ---
 
-## Mermaid 模板
+## Mermaid 模板 {#mermaid-模板}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -85,7 +85,7 @@ graph TD
 
 ---
 
-## 使用示例：选择引用类型
+## 使用示例：选择引用类型 {#使用示例选择引用类型}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -120,7 +120,7 @@ graph TD
 
 ---
 
-## 设计规则
+## 设计规则 {#设计规则}
 
 1. **每个判断节点必须是可回答的**: 条件必须量化或有明确边界
 2. **叶子节点必须 actionable**: 不能是"视情况而定"，必须是具体推荐
@@ -140,7 +140,7 @@ graph TD
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [特性跟踪模板](00_rust_feature_tracking_template.md)
 - [概念文档模板](00_template_concept_doc.md)
@@ -148,7 +148,7 @@ graph TD
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**

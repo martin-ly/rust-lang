@@ -1,4 +1,4 @@
-# Rust 1.96 特性速查表
+# Rust 1.96 特性速查表 {#rust-196-特性速查表}
 
 > **内容重叠提示**: 本文与 [`knowledge/06_ecosystem/emerging/05_rust_1_96.md`](../../../knowledge/06_ecosystem/emerging/05_rust_1_96.md) 内容高度重叠。`concept/` 版本为项目权威主轨；本文保留作为快速参考。
 > **分级**: [A]
@@ -18,7 +18,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -48,11 +48,11 @@
 
 ---
 
-## if let guards 语法
+## if let guards 语法 {#if-let-guards-语法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 基本语法
+### 基本语法 {#基本语法}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -65,7 +65,7 @@ match value {
 }
 ```
 
-### 链式守卫
+### 链式守卫 {#链式守卫}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -84,7 +84,7 @@ match event {
 }
 ```
 
-### 对比表
+### 对比表 {#对比表}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -94,7 +94,7 @@ match event {
 | 嵌套守卫 | 多层 if 嵌套 | 链式 `if let ... && let ...` |
 | 组合条件 | `if let Some(x) = opt && x > 0` 不支持 | `pattern if let Some(x) = opt && x > 0 =>` |
 
-### 代码示例
+### 代码示例 {#代码示例}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -125,11 +125,11 @@ match message {
 
 ---
 
-## Range 类型对比
+## Range 类型对比 {#range-类型对比}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 类型总览
+### 类型总览 {#类型总览}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -142,7 +142,7 @@ match message {
 | `RangeInclusive` | `a..=b` | ✅ | ✅ | ✅ |
 | `RangeToInclusive` | `..=b` | N/A | ✅ | ❌ |
 
-### 使用场景速查
+### 使用场景速查 {#使用场景速查}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -167,7 +167,7 @@ vec.drain(0..5);               // 移除 0-4
 vec.get(0..=5);                // 获取 0-5
 ```
 
-### Range 方法
+### Range 方法 {#range-方法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -181,11 +181,11 @@ vec.get(0..=5);                // 获取 0-5
 
 ---
 
-## 新 Lint 规则
+## 新 Lint 规则 {#新-lint-规则}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Rust 1.96 新增 Lints
+### Rust 1.96 新增 Lints {#rust-196-新增-lints}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -195,7 +195,7 @@ vec.get(0..=5);                // 获取 0-5
 | `redundant_guards` | Warn | 冗余的 match 守卫 | 简化守卫条件 |
 | `opaque_hidden_inferred_bound` | Warn | 不透明类型隐藏推断边界 | 显式指定类型边界 |
 
-### 配置方式
+### 配置方式 {#配置方式}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -207,35 +207,35 @@ vec.get(0..=5);                // 获取 0-5
 ```
 
 ```toml
-# 在 Cargo.toml
+# 在 Cargo.toml {#在-cargotoml}
 [lints.rust]
 unused_tuple_struct_fields = "warn"
 redundant_guards = "warn"
 opaque_hidden_inferred_bound = "allow"
 ```
 
-### 命令行使用
+### 命令行使用 {#命令行使用}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```bash
-# 启用特定 lint
+# 启用特定 lint {#启用特定-lint}
 cargo build -- -W unused_tuple_struct_fields
 
-# 禁用特定 lint
+# 禁用特定 lint {#禁用特定-lint}
 cargo build -- -A redundant_guards
 
-# 将 lint 视为错误
+# 将 lint 视为错误 {#将-lint-视为错误}
 cargo build -- -D unused_tuple_struct_fields
 ```
 
 ---
 
-## 快速参考示例
+## 快速参考示例 {#快速参考示例}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### if let guards 模板
+### if let guards 模板 {#if-let-guards-模板}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -265,7 +265,7 @@ match value {
 }
 ```
 
-### Range 常用模式
+### Range 常用模式 {#range-常用模式}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -291,7 +291,7 @@ match age {
 }
 ```
 
-### PinCoerceUnsized 快速使用（nightly 前瞻，实验性）
+### PinCoerceUnsized 快速使用（nightly 前瞻，实验性） {#pincoerceunsized-快速使用nightly-前瞻实验性}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 > ⚠️ `PinCoerceUnsized` 是 **nightly-only** 实验性特性，需要 nightly 编译器和对应 feature gate，当前 stable 不支持。
@@ -315,7 +315,7 @@ async fn demo() {
 }
 ```
 
-### 元组 Coercion 示例
+### 元组 Coercion 示例 {#元组-coercion-示例}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -336,7 +336,7 @@ let wide: (i64, i64) = widen(narrow);
 
 ---
 
-## 迁移检查清单
+## 迁移检查清单 {#迁移检查清单}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -349,7 +349,7 @@ let wide: (i64, i64) = widen(narrow);
 
 ---
 
-## 相关链接
+## 相关链接 {#相关链接}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -374,7 +374,7 @@ let wide: (i64, i64) = widen(narrow);
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**

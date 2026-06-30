@@ -1,18 +1,18 @@
-# 🔗 文档交叉引用指南 {#-文档交叉引用指南}
+# 🔗 文档交叉引用指南 {#文档交叉引用指南}
 
 > **分级**: [A]
 > **Bloom 层级**: L4-L5 (分析/评价)
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [🔗 文档交叉引用指南 {#-文档交叉引用指南}](#-文档交叉引用指南--文档交叉引用指南)
-  - [📑 目录](#-目录)
-  - [🗺️ 文档网络总览 {#-文档网络总览}](#️-文档网络总览--文档网络总览)
+- [🔗 文档交叉引用指南](#文档交叉引用指南)
+  - [📑 目录](#目录)
+  - [🗺️ 文档网络总览](#文档网络总览)
     - [全文档依赖图](#全文档依赖图)
     - [文档层次结构](#文档层次结构)
-  - [🔄 核心模块交叉引用 {#-核心模块交叉引用}](#-核心模块交叉引用--核心模块交叉引用)
+  - [🔄 核心模块交叉引用](#核心模块交叉引用)
     - [C01 - 所有权与借用](#c01---所有权与借用)
     - [C02 - 类型系统](#c02---类型系统)
     - [C03 - 控制流与函数](#c03---控制流与函数)
@@ -25,15 +25,15 @@
     - [C10 - 网络编程](#c10---网络编程)
     - [C11 - 宏系统](#c11---宏系统)
     - [C12 - WASM](#c12---wasm)
-  - [📚 研究笔记交叉引用 {#-研究笔记交叉引用}](#-研究笔记交叉引用--研究笔记交叉引用)
+  - [📚 研究笔记交叉引用](#研究笔记交叉引用)
     - [形式化方法研究](#形式化方法研究)
     - [类型理论研究](#类型理论研究)
     - [软件设计理论](#软件设计理论)
     - [三大支柱交叉映射](#三大支柱交叉映射)
-  - [📖 速查卡交叉引用 {#-速查卡交叉引用}](#-速查卡交叉引用--速查卡交叉引用)
-    - [速查卡 ↔ 指南映射](#速查卡--指南映射)
-    - [速查卡 ↔ 研究笔记映射](#速查卡--研究笔记映射)
-  - [🧭 导航指南 {#-导航指南}](#-导航指南--导航指南)
+  - [📖 速查卡交叉引用](#速查卡交叉引用)
+    - [速查卡 ↔ 指南映射](#速查卡-指南映射)
+    - [速查卡 ↔ 研究笔记映射](#速查卡-研究笔记映射)
+  - [🧭 导航指南](#导航指南)
     - [按角色导航](#按角色导航)
       - [初学者路径](#初学者路径)
       - [开发者路径](#开发者路径)
@@ -45,10 +45,10 @@
       - [类型系统主题](#类型系统主题)
       - [设计模式主题](#设计模式主题)
     - [快速查找路径](#快速查找路径)
-  - [🌐 文档依赖图 {#-文档依赖图}](#-文档依赖图--文档依赖图)
+  - [🌐 文档依赖图](#文档依赖图)
     - [层次依赖](#层次依赖)
     - [横向关联](#横向关联)
-  - [✅ 双向链接验证 {#-双向链接验证}](#-双向链接验证--双向链接验证)
+  - [✅ 双向链接验证](#双向链接验证)
     - [验证清单](#验证清单)
     - [链接完整性检查](#链接完整性检查)
   - [最佳实践](#最佳实践)
@@ -57,7 +57,7 @@
     - [3. 维护链接完整性](#3-维护链接完整性)
     - [4. 添加交叉引用到速查卡](#4-添加交叉引用到速查卡)
     - [5. 添加交叉引用到指南](#5-添加交叉引用到指南)
-  - [📚 相关资源 {#-相关资源}](#-相关资源--相关资源)
+  - [📚 相关资源](#相关资源)
     - [核心交叉引用文档](#核心交叉引用文档)
     - [快速入口](#快速入口)
   - [Rust 1.95+ 持续更新更新](#rust-195-持续更新更新)
@@ -77,11 +77,11 @@
 
 ---
 
-## 🗺️ 文档网络总览 {#-文档网络总览}
+## 🗺️ 文档网络总览 {#文档网络总览}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 全文档依赖图
+### 全文档依赖图 {#全文档依赖图}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -126,7 +126,7 @@
 └─────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 文档层次结构
+### 文档层次结构 {#文档层次结构}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -174,11 +174,11 @@ docs/
 
 ---
 
-## 🔄 核心模块交叉引用 {#-核心模块交叉引用}
+## 🔄 核心模块交叉引用 {#核心模块交叉引用}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### C01 - 所有权与借用
+### C01 - 所有权与借用 {#c01---所有权与借用}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -198,7 +198,7 @@ ownership_cheatsheet → ownership_model ↔ borrow_checker_proof ↔ lifetime_f
 UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 ```
 
-### C02 - 类型系统
+### C02 - 类型系统 {#c02---类型系统}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -210,7 +210,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | **指南** | [05_advanced_topics_deep_dive.md](../05_guides/05_advanced_topics_deep_dive.md) | ← [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) ← [advanced_types](../../archive/research_notes_2026_06_25/type_theory/10_advanced_types.md) |
 | **思维表征** | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/04_multi_dimensional_concept_matrix.md) §2 | ←→ [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) ←→ [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) §3 |
 
-### C03 - 控制流与函数
+### C03 - 控制流与函数 {#c03---控制流与函数}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -221,7 +221,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | **形式化** | [formal_methods/README.md](../../archive/research_notes_2026_06_25/formal_methods/README.md) §A-CF1 | ←→ [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) §MATCH/FOR/QUERY |
 | **指南** | [05_macro_system_usage_guide.md](../05_guides/05_macro_system_usage_guide.md) | ← [control_flow](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) |
 
-### C04 - 泛型编程
+### C04 - 泛型编程 {#c04---泛型编程}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -232,7 +232,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | **形式化** | [10_trait_system_formalization.md](../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) | ←→ [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) ←→ [variance_theory](../research_notes/type_theory/10_variance_theory.md) |
 | **指南** | [05_advanced_topics_deep_dive.md](../05_guides/05_advanced_topics_deep_dive.md) | ← [trait_system_formalization](../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) |
 
-### C05 - 线程与并发
+### C05 - 线程与并发 {#c05---线程与并发}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -244,7 +244,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | **指南** | [05_threads_concurrency_usage_guide.md](../05_guides/05_threads_concurrency_usage_guide.md) | ← [send_sync_formalization](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) ← [06_boundary_analysis](../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/06_boundary_analysis.md) |
 | **思维表征** | [DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md) §并发选型 | ←→ [06_boundary_analysis](../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/06_boundary_analysis.md) |
 
-### C06 - 异步编程
+### C06 - 异步编程 {#c06---异步编程}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -256,7 +256,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | **指南** | [05_async_programming_usage_guide.md](../05_guides/05_async_programming_usage_guide.md) | ← [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) ← [pin_self_referential](../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md) |
 | **思维表征** | [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) §5 | ←→ [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) |
 
-### C07 - 进程管理
+### C07 - 进程管理 {#c07---进程管理}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -266,7 +266,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | **速查卡** | [02_process_management_cheatsheet.md](../02_reference/quick_reference/02_process_management_cheatsheet.md) | → [05_guides/CLI_APPLICATIONS_GUIDE](../05_guides/05_cli_applications_guide.md) → [SAFE_UNSAFE_ANALYSIS](../research_notes/10_safe_unsafe_comprehensive_analysis.md) |
 | **指南** | [05_cli_applications_guide.md](../05_guides/05_cli_applications_guide.md) | ← [process_management_cheatsheet](../02_reference/quick_reference/02_process_management_cheatsheet.md) |
 
-### C08 - 算法与数据结构
+### C08 - 算法与数据结构 {#c08---算法与数据结构}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -276,7 +276,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | **速查卡** | [02_algorithms_cheatsheet.md](../02_reference/quick_reference/02_algorithms_cheatsheet.md) | → [ownership_model](../research_notes/formal_methods/10_ownership_model.md) §智能指针 → [05_guides/PERFORMANCE_TUNING_GUIDE](../05_guides/05_performance_tuning_guide.md) |
 | **指南** | [05_performance_tuning_guide.md](../05_guides/05_performance_tuning_guide.md) | ← [algorithms_cheatsheet](../02_reference/quick_reference/02_algorithms_cheatsheet.md) |
 
-### C09 - 设计模式
+### C09 - 设计模式 {#c09---设计模式}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -288,7 +288,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | **指南** | [05_design_patterns_usage_guide.md](../05_guides/05_design_patterns_usage_guide.md) | ← [01_design_patterns_formal](../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/README.md) ← [04_compositional_engineering](../../archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/README.md) |
 | **思维表征** | [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) §设计模式 | ←→ [01_design_patterns_formal](../../archive/research_notes_2026_06_25/software_design_theory/01_design_patterns_formal/README.md) |
 
-### C10 - 网络编程
+### C10 - 网络编程 {#c10---网络编程}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -298,7 +298,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | **速查卡** | [02_network_programming_cheatsheet.md](../02_reference/quick_reference/02_network_programming_cheatsheet.md) | → [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) → [send_sync_formalization](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) |
 | **指南** | [05_async_programming_usage_guide.md](../05_guides/05_async_programming_usage_guide.md) | ← [network_programming_cheatsheet](../02_reference/quick_reference/02_network_programming_cheatsheet.md) |
 
-### C11 - 宏系统
+### C11 - 宏系统 {#c11---宏系统}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -308,7 +308,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | **速查卡** | macros_cheatsheet.md | → [MACRO_SYSTEM_USAGE_GUIDE](../05_guides/05_macro_system_usage_guide.md) → [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) |
 | **指南** | [05_macro_system_usage_guide.md](../05_guides/05_macro_system_usage_guide.md) | ← macros_cheatsheet |
 
-### C12 - WASM
+### C12 - WASM {#c12---wasm}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -320,11 +320,11 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 
 ---
 
-## 📚 研究笔记交叉引用 {#-研究笔记交叉引用}
+## 📚 研究笔记交叉引用 {#研究笔记交叉引用}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 形式化方法研究
+### 形式化方法研究 {#形式化方法研究}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -337,7 +337,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | [pin_self_referential](../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md) | → async_state_machine → advanced_types → PROOF_INDEX | ← async_state_machine ← 05_guides/ASYNC_PROGRAMMING ← SAFE_DECIDABLE_MECHANISMS |
 | [send_sync_formalization](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | → async_state_machine → 06_boundary_analysis → PROOF_INDEX | ← async_state_machine ← borrow_checker_proof ← 05_guides/THREADS_CONCURRENCY |
 
-### 类型理论研究
+### 类型理论研究 {#类型理论研究}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -349,7 +349,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | [advanced_types](../../archive/research_notes_2026_06_25/type_theory/10_advanced_types.md) | → type_system_foundations → trait_system_formalization → pin_self_referential | ← trait_system_formalization ← pin_self_referential ← 05_guides/ADVANCED_TOPICS |
 | [lifetime_formalization](../research_notes/type_theory/10_lifetime_formalization.md) | → variance_theory → formal_methods/lifetime → CORE_THEOREMS | ← type_system_foundations ← trait_system_formalization ← 02_reference/quick_reference/type_system |
 
-### 软件设计理论
+### 软件设计理论 {#软件设计理论}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -361,7 +361,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | [04_compositional_engineering](../../archive/research_notes_2026_06_25/software_design_theory/04_compositional_engineering/README.md) | → ownership_model → borrow_checker_proof → type_system_foundations | ← 01_design_patterns ← 03_execution_models ← 05_guides/CROSS_MODULE_INTEGRATION |
 | [05_boundary_system](../../archive/research_notes_2026_06_25/software_design_theory/05_boundary_system/README.md) | → 01_design_patterns → safe_unsafe_matrix → 06_boundary_analysis | ← 01_design_patterns ← SAFE_UNSAFE_ANALYSIS |
 
-### 三大支柱交叉映射
+### 三大支柱交叉映射 {#三大支柱交叉映射}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -413,11 +413,11 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 
 ---
 
-## 📖 速查卡交叉引用 {#-速查卡交叉引用}
+## 📖 速查卡交叉引用 {#速查卡交叉引用}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 速查卡 ↔ 指南映射
+### 速查卡 ↔ 指南映射 {#速查卡-指南映射}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -444,7 +444,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) | [MACRO_SYSTEM_USAGE_GUIDE](../05_guides/05_macro_system_usage_guide.md) | 控制流 ↔ 宏系统 |
 | [ai_ml_cheatsheet](../02_reference/quick_reference/02_ai_ml_cheatsheet.md) | [AI_RUST_ECOSYSTEM_GUIDE](../05_guides/05_ai_rust_ecosystem_guide.md) | AI速查 ↔ AI生态 |
 
-### 速查卡 ↔ 研究笔记映射
+### 速查卡 ↔ 研究笔记映射 {#速查卡-研究笔记映射}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -462,15 +462,15 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 
 ---
 
-## 🧭 导航指南 {#-导航指南}
+## 🧭 导航指南 {#导航指南}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 按角色导航
+### 按角色导航 {#按角色导航}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-#### 初学者路径
+#### 初学者路径 {#初学者路径}
 
 ```text
 01_learning/01_learning_path_planning.md
@@ -488,7 +488,7 @@ crates/c01_ownership_borrow_scope/docs/
 05_guides/10_best_practices.md
 ```
 
-#### 开发者路径
+#### 开发者路径 {#开发者路径}
 
 ```text
 02_reference/quick_reference/ (按需选择速查卡)
@@ -502,7 +502,7 @@ research_notes/formal_methods/ (深入形式化)
 crates/*/examples/ (代码示例)
 ```
 
-#### 研究者路径
+#### 研究者路径 {#研究者路径}
 
 ```text
 research_notes/10_00_comprehensive_summary.md
@@ -518,7 +518,7 @@ research_notes/10_core_theorems_full_proofs.md
 04_thinking/04_proof_graph_network.md
 ```
 
-#### 维护者路径
+#### 维护者路径 {#维护者路径}
 
 ```text
 07_project/07_project_architecture_guide.md
@@ -532,11 +532,11 @@ research_notes/10_cross_reference_index.md
 07_project/07_task_index.md
 ```
 
-### 按主题导航
+### 按主题导航 {#按主题导航}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-#### 内存安全主题
+#### 内存安全主题 {#内存安全主题}
 
 ```text
 ownership_cheatsheet → ownership_model → borrow_checker_proof → lifetime_formalization
@@ -544,7 +544,7 @@ ownership_cheatsheet → ownership_model → borrow_checker_proof → lifetime_f
 UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 ```
 
-#### 并发编程主题
+#### 并发编程主题 {#并发编程主题}
 
 ```text
 threads_concurrency_cheatsheet → async_patterns
@@ -556,7 +556,7 @@ send_sync_formalization ←────→ async_state_machine
 THREADS_CONCURRENCY_USAGE_GUIDE / ASYNC_PROGRAMMING_USAGE_GUIDE
 ```
 
-#### 类型系统主题
+#### 类型系统主题 {#类型系统主题}
 
 ```text
 type_system → generics_cheatsheet
@@ -568,7 +568,7 @@ variance_theory ←──────→ advanced_types
 ADVANCED_TOPICS_DEEP_DIVE
 ```
 
-#### 设计模式主题
+#### 设计模式主题 {#设计模式主题}
 
 ```text
 design_patterns_cheatsheet
@@ -582,7 +582,7 @@ DESIGN_PATTERNS_USAGE_GUIDE
 CROSS_MODULE_INTEGRATION_EXAMPLES
 ```
 
-### 快速查找路径
+### 快速查找路径 {#快速查找路径}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -597,11 +597,11 @@ CROSS_MODULE_INTEGRATION_EXAMPLES
 
 ---
 
-## 🌐 文档依赖图 {#-文档依赖图}
+## 🌐 文档依赖图 {#文档依赖图}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 层次依赖
+### 层次依赖 {#层次依赖}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -660,7 +660,7 @@ graph TB
     style MASTER fill:#bbf,stroke:#333,stroke-width:4px
 ```
 
-### 横向关联
+### 横向关联 {#横向关联}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -712,11 +712,11 @@ graph TB
 
 ---
 
-## ✅ 双向链接验证 {#-双向链接验证}
+## ✅ 双向链接验证 {#双向链接验证}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 验证清单
+### 验证清单 {#验证清单}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -732,7 +732,7 @@ graph TB
 | PROOF_INDEX ↔ 所有形式化文档 | 检查证明索引完整性 | 全部链接 | ✅ |
 | CROSS_REFERENCE_INDEX ↔ 所有主要文档 | 检查映射网络完整性 | 全部链接 | ✅ |
 
-### 链接完整性检查
+### 链接完整性检查 {#链接完整性检查}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -776,11 +776,11 @@ struct LinkValidator {
 
 ---
 
-## 最佳实践
+## 最佳实践 {#最佳实践}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 1. 使用相对路径
+### 1. 使用相对路径 {#1-使用相对路径}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -797,7 +797,7 @@ struct LinkValidator {
 [类型系统速查卡](../02_reference/quick_reference/02_type_system.md)
 ```
 
-### 2. 提供描述性链接文本
+### 2. 提供描述性链接文本 {#2-提供描述性链接文本}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -813,7 +813,7 @@ struct LinkValidator {
 点击 [这里](../02_reference/quick_reference/02_type_system.md)
 ```
 
-### 3. 维护链接完整性
+### 3. 维护链接完整性 {#3-维护链接完整性}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -822,7 +822,7 @@ struct LinkValidator {
 - 修复断开的链接
 - 使用 CROSS_REFERENCE_INDEX 验证双向链接
 
-### 4. 添加交叉引用到速查卡
+### 4. 添加交叉引用到速查卡 {#4-添加交叉引用到速查卡}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -833,7 +833,7 @@ struct LinkValidator {
 - 相关速查卡
 - 官方文档
 
-### 5. 添加交叉引用到指南
+### 5. 添加交叉引用到指南 {#5-添加交叉引用到指南}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -845,11 +845,11 @@ struct LinkValidator {
 
 ---
 
-## 📚 相关资源 {#-相关资源}
+## 📚 相关资源 {#相关资源}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 核心交叉引用文档
+### 核心交叉引用文档 {#核心交叉引用文档}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -862,7 +862,7 @@ struct LinkValidator {
 | **ARGUMENTATION_CHAIN** | 论证脉络关系 | [research_notes/10_argumentation_chain_and_flow.md](../../archive/research_notes_2026_06_25/10_argumentation_chain_and_flow.md) |
 | **00_COMPREHENSIVE_SUMMARY** | 完整总结综合 | [research_notes/10_00_comprehensive_summary.md](../../archive/research_notes_2026_06_25/10_00_comprehensive_summary.md) |
 
-### 快速入口
+### 快速入口 {#快速入口}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -880,20 +880,20 @@ struct LinkValidator {
 
 ---
 
-## Rust 1.95+ 持续更新更新
+## Rust 1.95+ 持续更新更新 {#rust-195-持续更新更新}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.95+更新要点
+### 本文档的Rust 1.95+更新要点 {#本文档的rust-195更新要点}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 本文档已针对 **Rust 1.95+** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -902,7 +902,7 @@ struct LinkValidator {
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -910,7 +910,7 @@ struct LinkValidator {
 - ✅ 兼容Edition 2024
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.95+ 迁移指南
 - Rust 1.94 特性速查（已归档）
@@ -934,7 +934,7 @@ struct LinkValidator {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -943,7 +943,7 @@ struct LinkValidator {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**

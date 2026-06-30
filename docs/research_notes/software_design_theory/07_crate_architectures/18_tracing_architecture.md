@@ -1,4 +1,4 @@
-# Tracing Crate 架构解构
+# Tracing Crate 架构解构 {#tracing-crate-架构解构}
 
 >
 
@@ -24,7 +24,7 @@
 
 ---
 
-## 1. 引言：Rust 可观测性生态的基石
+## 1. 引言：Rust 可观测性生态的基石 {#1-引言rust-可观测性生态的基石}
 
 Tracing 是由 Tokio 团队开发的**结构化诊断与遥测框架**，年下载量超过 1.5 亿次 来源: [crates.io 统计, 2025](https://crates.io/)。
 
@@ -80,13 +80,13 @@ async fn process_request(req: Request) -> Response {
 
 ---
 
-## 2. 核心架构
+## 2. 核心架构 {#2-核心架构}
 
 >
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 2.1 整体架构
+### 2.1 整体架构 {#21-整体架构}
 
 >
 
@@ -156,7 +156,7 @@ graph TB
 
 > [来源: Tracing Docs — Subscriber](https://docs.rs/tracing-subscriber/latest/tracing_subscriber/)
 
-### 2.2 Span 生命周期状态机
+### 2.2 Span 生命周期状态机 {#22-span-生命周期状态机}
 
 >
 
@@ -216,13 +216,13 @@ stateDiagram-v2
 
 ---
 
-## 3. 类型系统关键利用
+## 3. 类型系统关键利用 {#3-类型系统关键利用}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 3.1 `Value` Trait：类型安全的结构化字段
+### 3.1 `Value` Trait：类型安全的结构化字段 {#31-value-trait类型安全的结构化字段}
 
 >
 
@@ -266,7 +266,7 @@ info!(data = vec![1,2,3]);      // ❌ 编译错误：Vec<i32> 未实现 Value
 
 > [来源: Tracing Docs — `Value` trait](https://docs.rs/tracing-core/latest/tracing_core/field/trait.Value.html)
 
-### 3.2 `#[instrument]` 宏：零成本自动埋点
+### 3.2 `#[instrument]` 宏：零成本自动埋点 {#32-instrument-宏零成本自动埋点}
 
 >
 
@@ -306,7 +306,7 @@ async fn handle_request(req: Request, _ctx: Context) -> Result<Response, Error> 
 
 > [来源: Tracing Docs — `#[instrument]`](https://docs.rs/tracing/latest/tracing/attr.instrument.html)
 
-### 3.3 `Layer` 组合：Tower 模式的遥测复用
+### 3.3 `Layer` 组合：Tower 模式的遥测复用 {#33-layer-组合tower-模式的遥测复用}
 
 >
 
@@ -352,13 +352,13 @@ subscriber.init();
 
 ---
 
-## 4. 零成本抽象证明
+## 4. 零成本抽象证明 {#4-零成本抽象证明}
 
 >
 
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 4.1 无操作 (No-op) 路径
+### 4.1 无操作 (No-op) 路径 {#41-无操作-no-op-路径}
 
 >
 
@@ -404,7 +404,7 @@ subscriber.init();
 
 > [来源: Rust Reference — Dead Code Elimination](https://doc.rust-lang.org/rustc/codegen-options/index.html)
 
-### 4.2 静态 Metadata
+### 4.2 静态 Metadata {#42-静态-metadata}
 
 >
 
@@ -446,13 +446,13 @@ static MY_EVENT_METADATA: Metadata<'static> = Metadata::new(
 
 ---
 
-## 5. 安全保证机制
+## 5. 安全保证机制 {#5-安全保证机制}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 5.1 `Send` / `Sync` 与跨线程 Span 传递
+### 5.1 `Send` / `Sync` 与跨线程 Span 传递 {#51-send-sync-与跨线程-span-传递}
 
 >
 
@@ -486,7 +486,7 @@ std::thread::spawn(move || {
 
 > [来源: Tracing Docs — Thread Safety](https://docs.rs/tracing/latest/tracing/span/struct.Span.html)
 
-### 5.2 内存安全：无泄漏保证
+### 5.2 内存安全：无泄漏保证 {#52-内存安全无泄漏保证}
 
 >
 
@@ -526,7 +526,7 @@ struct Inner {
 
 ---
 
-## 6. 与 OpenTelemetry 的集成
+## 6. 与 OpenTelemetry 的集成 {#6-与-opentelemetry-的集成}
 
 >
 
@@ -588,7 +588,7 @@ sequenceDiagram
 
 ---
 
-## 7. 性能特征对比
+## 7. 性能特征对比 {#7-性能特征对比}
 
 >
 
@@ -614,7 +614,7 @@ sequenceDiagram
 
 ---
 
-## 相关架构与延伸阅读
+## 相关架构与延伸阅读 {#相关架构与延伸阅读}
 
 >
 
@@ -634,7 +634,7 @@ sequenceDiagram
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -664,13 +664,13 @@ sequenceDiagram
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 > **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 > **来源**: [This Week in Rust](https://this-week-in-rust.org/)
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

@@ -1,4 +1,4 @@
-# 🎯 Rust 智能指针速查卡
+# 🎯 Rust 智能指针速查卡 {#rust-智能指针速查卡}
 
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
@@ -6,71 +6,71 @@
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [🎯 Rust 智能指针速查卡](#-rust-智能指针速查卡)
-  - [📑 目录](#-目录)
-  - [🎯 智能指针概览](#-智能指针概览)
-  - [📦 `Box<T>` - 堆分配](#-boxt---堆分配)
-    - [基本用法](#基本用法)
-    - [使用场景](#使用场景)
-    - [API](#api)
-  - [🔗 `Rc<T>` - 引用计数（单线程）](#-rct---引用计数单线程)
-    - [基本用法](#基本用法-1)
-    - [使用场景](#使用场景-1)
-    - [API](#api-1)
-  - [🔗 `Arc<T>` - 原子引用计数（多线程）](#-arct---原子引用计数多线程)
-    - [基本用法](#基本用法-2)
-    - [使用场景](#使用场景-2)
-    - [API](#api-2)
-  - [🔓 `RefCell<T>` - 内部可变性（单线程）](#-refcellt---内部可变性单线程)
-    - [基本用法](#基本用法-3)
-    - [使用场景](#使用场景-3)
-    - [API](#api-3)
-    - [运行时借用检查](#运行时借用检查)
-  - [🔒 `Mutex<T>` - 互斥锁（多线程）](#-mutext---互斥锁多线程)
-    - [基本用法](#基本用法-4)
-    - [使用场景](#使用场景-4)
-    - [API](#api-4)
-  - [🔓 `RwLock<T>` - 读写锁（多线程）](#-rwlockt---读写锁多线程)
-    - [基本用法](#基本用法-5)
-    - [使用场景](#使用场景-5)
-    - [API](#api-5)
-  - [🔗 `Weak<T>` - 弱引用](#-weakt---弱引用)
+- [🎯 Rust 智能指针速查卡](#rust-智能指针速查卡)
+  - [📑 目录](#目录)
+  - [🎯 智能指针概览](#智能指针概览)
+  - [📦 `Box<T>` - 堆分配](#boxt---堆分配)
     - [基本用法](#基本用法-6)
     - [使用场景](#使用场景-6)
     - [API](#api-6)
-  - [🔄 组合模式](#-组合模式)
+  - [🔗 `Rc<T>` - 引用计数（单线程）](#rct---引用计数单线程)
+    - [基本用法](#基本用法-6)
+    - [使用场景](#使用场景-6)
+    - [API](#api-6)
+  - [🔗 `Arc<T>` - 原子引用计数（多线程）](#arct---原子引用计数多线程)
+    - [基本用法](#基本用法-6)
+    - [使用场景](#使用场景-6)
+    - [API](#api-6)
+  - [🔓 `RefCell<T>` - 内部可变性（单线程）](#refcellt---内部可变性单线程)
+    - [基本用法](#基本用法-6)
+    - [使用场景](#使用场景-6)
+    - [API](#api-6)
+    - [运行时借用检查](#运行时借用检查)
+  - [🔒 `Mutex<T>` - 互斥锁（多线程）](#mutext---互斥锁多线程)
+    - [基本用法](#基本用法-6)
+    - [使用场景](#使用场景-6)
+    - [API](#api-6)
+  - [🔓 `RwLock<T>` - 读写锁（多线程）](#rwlockt---读写锁多线程)
+    - [基本用法](#基本用法-6)
+    - [使用场景](#使用场景-6)
+    - [API](#api-6)
+  - [🔗 `Weak<T>` - 弱引用](#weakt---弱引用)
+    - [基本用法](#基本用法-6)
+    - [使用场景](#使用场景-6)
+    - [API](#api-6)
+  - [🔄 组合模式](#组合模式)
     - [`Rc<RefCell<T>>` - 单线程内部可变性](#rcrefcellt---单线程内部可变性)
     - [`Arc<Mutex<T>>` - 多线程共享可变数据](#arcmutext---多线程共享可变数据)
     - [`Arc<RwLock<T>>` - 多线程读写锁](#arcrwlockt---多线程读写锁)
     - [`Rc<RefCell<Vec<T>>>` - 共享可变向量](#rcrefcellvect---共享可变向量)
-  - [💡 代码示例](#-代码示例)
+  - [💡 代码示例](#代码示例)
     - [示例 1: 实现链表](#示例-1-实现链表)
     - [示例 2: 带父指针的树结构（避免循环引用）](#示例-2-带父指针的树结构避免循环引用)
     - [示例 3: 自定义智能指针](#示例-3-自定义智能指针)
     - [示例 4: LazyCell 和 LazyLock（Rust 1.80+，Rust 1.95+ 增强）](#示例-4-lazycell-和-lazylockrust-180rust-195-增强)
       - [Rust 1.95+ 新增 API](#rust-195-新增-api)
-      - [性能对比](#性能对比)
+      - [性能对比](#性能对比-1)
       - [使用建议](#使用建议)
     - [示例 5: 使用 Pin 的自引用结构](#示例-5-使用-pin-的自引用结构)
-  - [🎯 使用场景](#-使用场景)
+  - [🎯 使用场景](#使用场景-7)
     - [场景: 图结构实现](#场景-图结构实现)
-  - [🎯 选择指南](#-选择指南)
+  - [🎯 选择指南](#选择指南)
     - [决策树](#决策树)
     - [性能对比](#性能对比-1)
     - [常见组合](#常见组合)
-  - [🚫 反例速查](#-反例速查)
+  - [🚫 反例速查](#反例速查)
     - [反例 1: Rc 用于多线程](#反例-1-rc-用于多线程)
     - [反例 2: RefCell 在已借出时再次借用](#反例-2-refcell-在已借出时再次借用)
     - [反例 3: 循环引用导致内存泄漏](#反例-3-循环引用导致内存泄漏)
     - [反例 4: 错误地使用 Mutex 守卫](#反例-4-错误地使用-mutex-守卫)
     - [反例 5: Pin 误用导致未定义行为](#反例-5-pin-误用导致未定义行为)
-  - [📚 相关文档](#-相关文档)
-  - [🧩 相关示例代码](#-相关示例代码)
-  - [📚 相关资源](#-相关资源)
+  - [📚 相关文档](#相关文档)
+  - [🧩 相关示例代码](#相关示例代码)
+  - [📚 相关资源](#相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
     - [形式化理论与类型系统](#形式化理论与类型系统)
@@ -86,7 +86,7 @@
 
 ---
 
-## 🎯 智能指针概览
+## 🎯 智能指针概览 {#智能指针概览}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -108,11 +108,11 @@
 
 ---
 
-## 📦 `Box<T>` - 堆分配
+## 📦 `Box<T>` - 堆分配 {#boxt---堆分配}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 基本用法
+### 基本用法 {#基本用法-6}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -133,7 +133,7 @@ fn print_value(b: Box<i32>) {
 }
 ```
 
-### 使用场景
+### 使用场景 {#使用场景-6}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -161,7 +161,7 @@ fn take_ownership(b: Box<i32>) {
 }
 ```
 
-### API
+### API {#api-6}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -183,11 +183,11 @@ let value = *b; // 或 Box::into_inner(b)
 
 ---
 
-## 🔗 `Rc<T>` - 引用计数（单线程）
+## 🔗 `Rc<T>` - 引用计数（单线程） {#rct---引用计数单线程}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 基本用法
+### 基本用法 {#基本用法-6}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -209,7 +209,7 @@ println!("{}", *b);
 println!("count: {}", Rc::strong_count(&a));
 ```
 
-### 使用场景
+### 使用场景 {#使用场景-6}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -231,7 +231,7 @@ let child1 = Rc::clone(&node);
 let child2 = Rc::clone(&node);
 ```
 
-### API
+### API {#api-6}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -262,11 +262,11 @@ let value = *rc;
 
 ---
 
-## 🔗 `Arc<T>` - 原子引用计数（多线程）
+## 🔗 `Arc<T>` - 原子引用计数（多线程） {#arct---原子引用计数多线程}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 基本用法
+### 基本用法 {#基本用法-6}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -290,7 +290,7 @@ handle1.join().unwrap();
 handle2.join().unwrap();
 ```
 
-### 使用场景
+### 使用场景 {#使用场景-6}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -315,7 +315,7 @@ for handle in handles {
 }
 ```
 
-### API
+### API {#api-6}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -330,11 +330,11 @@ let count = Arc::strong_count(&arc);
 
 ---
 
-## 🔓 `RefCell<T>` - 内部可变性（单线程）
+## 🔓 `RefCell<T>` - 内部可变性（单线程） {#refcellt---内部可变性单线程}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 基本用法
+### 基本用法 {#基本用法-6}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -353,7 +353,7 @@ let mut r = data.borrow_mut();
 *r += 1;
 ```
 
-### 使用场景
+### 使用场景 {#使用场景-6}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -374,7 +374,7 @@ impl Counter {
 }
 ```
 
-### API
+### API {#api-6}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -395,7 +395,7 @@ let r = cell.try_borrow_mut();      // Result<RefMut<T>, BorrowMutError>
 let value = cell.into_inner();
 ```
 
-### 运行时借用检查
+### 运行时借用检查 {#运行时借用检查}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -414,11 +414,11 @@ let r3 = cell.borrow_mut();  // OK
 
 ---
 
-## 🔒 `Mutex<T>` - 互斥锁（多线程）
+## 🔒 `Mutex<T>` - 互斥锁（多线程） {#mutext---互斥锁多线程}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 基本用法
+### 基本用法 {#基本用法-6}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -445,7 +445,7 @@ for handle in handles {
 println!("Result: {}", *counter.lock().unwrap());
 ```
 
-### 使用场景
+### 使用场景 {#使用场景-6}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -466,7 +466,7 @@ impl SharedData {
 }
 ```
 
-### API
+### API {#api-6}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -488,11 +488,11 @@ let value = *guard;
 
 ---
 
-## 🔓 `RwLock<T>` - 读写锁（多线程）
+## 🔓 `RwLock<T>` - 读写锁（多线程） {#rwlockt---读写锁多线程}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 基本用法
+### 基本用法 {#基本用法-6}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -526,7 +526,7 @@ for handle in handles {
 writer.join().unwrap();
 ```
 
-### 使用场景
+### 使用场景 {#使用场景-6}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -551,7 +551,7 @@ impl Cache {
 }
 ```
 
-### API
+### API {#api-6}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -571,11 +571,11 @@ let w = rwlock.try_write();          // Result<RwLockWriteGuard<T>, TryLockError
 
 ---
 
-## 🔗 `Weak<T>` - 弱引用
+## 🔗 `Weak<T>` - 弱引用 {#weakt---弱引用}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 基本用法
+### 基本用法 {#基本用法-6}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -601,7 +601,7 @@ drop(strong);
 assert!(weak.upgrade().is_none());
 ```
 
-### 使用场景
+### 使用场景 {#使用场景-6}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -631,7 +631,7 @@ let branch = Rc::new(Node {
 *leaf.parent.borrow_mut() = Rc::downgrade(&branch);
 ```
 
-### API
+### API {#api-6}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -651,11 +651,11 @@ let weak_count = weak.weak_count();
 
 ---
 
-## 🔄 组合模式
+## 🔄 组合模式 {#组合模式}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### `Rc<RefCell<T>>` - 单线程内部可变性
+### `Rc<RefCell<T>>` - 单线程内部可变性 {#rcrefcellt---单线程内部可变性}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -675,7 +675,7 @@ let data2 = Rc::clone(&data);
 println!("{}", *data.borrow()); // 8
 ```
 
-### `Arc<Mutex<T>>` - 多线程共享可变数据
+### `Arc<Mutex<T>>` - 多线程共享可变数据 {#arcmutext---多线程共享可变数据}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -698,7 +698,7 @@ for handle in handles {
 }
 ```
 
-### `Arc<RwLock<T>>` - 多线程读写锁
+### `Arc<RwLock<T>>` - 多线程读写锁 {#arcrwlockt---多线程读写锁}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -725,7 +725,7 @@ thread::spawn(move || {
 });
 ```
 
-### `Rc<RefCell<Vec<T>>>` - 共享可变向量
+### `Rc<RefCell<Vec<T>>>` - 共享可变向量 {#rcrefcellvect---共享可变向量}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -746,11 +746,11 @@ println!("{:?}", vec.borrow()); // [1, 2, 3, 4, 5]
 
 ---
 
-## 💡 代码示例
+## 💡 代码示例 {#代码示例}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 示例 1: 实现链表
+### 示例 1: 实现链表 {#示例-1-实现链表}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -799,7 +799,7 @@ list.push_front(3);
 assert_eq!(list.pop_front(), Some(3));
 ```
 
-### 示例 2: 带父指针的树结构（避免循环引用）
+### 示例 2: 带父指针的树结构（避免循环引用） {#示例-2-带父指针的树结构避免循环引用}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -844,7 +844,7 @@ if let Some(parent) = child.get_parent() {
 // 当 root 被 drop 后，child 的 parent 自动变为 None
 ```
 
-### 示例 3: 自定义智能指针
+### 示例 3: 自定义智能指针 {#示例-3-自定义智能指针}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -882,7 +882,7 @@ let m = MyBox::new(String::from("Rust"));
 hello(&m);  // 自动解引用 &MyBox<String> -> &String -> &str
 ```
 
-### 示例 4: LazyCell 和 LazyLock（Rust 1.80+，Rust 1.95+ 增强）
+### 示例 4: LazyCell 和 LazyLock（Rust 1.80+，Rust 1.95+ 增强） {#示例-4-lazycell-和-lazylockrust-180rust-195-增强}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -911,7 +911,7 @@ fn main() {
 }
 ```
 
-#### Rust 1.95+ 新增 API
+#### Rust 1.95+ 新增 API {#rust-195-新增-api}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -1003,7 +1003,7 @@ impl AppConfig {
 }
 ```
 
-#### 性能对比
+#### 性能对比 {#性能对比-1}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -1013,7 +1013,7 @@ impl AppConfig {
 | 未初始化读取 | 触发初始化 | 返回 None | 避免不必要初始化 |
 | 并发读取 | 锁竞争 | 无锁 | **显著降低延迟** |
 
-#### 使用建议
+#### 使用建议 {#使用建议}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -1021,7 +1021,7 @@ impl AppConfig {
 - **单线程缓存**: 使用 `LazyCell` + `force_mut()` 实现延迟初始化+可变更新
 - **性能关键路径**: 先用 `get()` 检查，避免不必要的锁操作
 
-### 示例 5: 使用 Pin 的自引用结构
+### 示例 5: 使用 Pin 的自引用结构 {#示例-5-使用-pin-的自引用结构}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -1065,11 +1065,11 @@ println!("{}", data.get_data());
 
 ---
 
-## 🎯 使用场景
+## 🎯 使用场景 {#使用场景-7}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 场景: 图结构实现
+### 场景: 图结构实现 {#场景-图结构实现}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -1139,11 +1139,11 @@ impl<T> Graph<T> {
 
 ---
 
-## 🎯 选择指南
+## 🎯 选择指南 {#选择指南}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 决策树
+### 决策树 {#决策树}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -1163,7 +1163,7 @@ impl<T> Graph<T> {
         └─ 否 → 使用普通引用
 ```
 
-### 性能对比
+### 性能对比 {#性能对比-1}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -1175,7 +1175,7 @@ impl<T> Graph<T> {
 | `Mutex<T>`   | 锁开销       | ✅       | 运行时检查 |
 | `RwLock<T>`  | 锁开销       | ✅       | 运行时检查 |
 
-### 常见组合
+### 常见组合 {#常见组合}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -1187,11 +1187,11 @@ impl<T> Graph<T> {
 
 ---
 
-## 🚫 反例速查
+## 🚫 反例速查 {#反例速查}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 反例 1: Rc 用于多线程
+### 反例 1: Rc 用于多线程 {#反例-1-rc-用于多线程}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -1215,7 +1215,7 @@ thread::spawn(move || println!("{}", arc));
 
 ---
 
-### 反例 2: RefCell 在已借出时再次借用
+### 反例 2: RefCell 在已借出时再次借用 {#反例-2-refcell-在已借出时再次借用}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -1239,7 +1239,7 @@ let g2 = r.borrow();
 
 ---
 
-### 反例 3: 循环引用导致内存泄漏
+### 反例 3: 循环引用导致内存泄漏 {#反例-3-循环引用导致内存泄漏}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -1279,7 +1279,7 @@ struct Node {
 
 ---
 
-### 反例 4: 错误地使用 Mutex 守卫
+### 反例 4: 错误地使用 Mutex 守卫 {#反例-4-错误地使用-mutex-守卫}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -1309,7 +1309,7 @@ let first = {
 
 ---
 
-### 反例 5: Pin 误用导致未定义行为
+### 反例 5: Pin 误用导致未定义行为 {#反例-5-pin-误用导致未定义行为}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -1359,14 +1359,14 @@ impl Unmovable {
 
 ---
 
-## 📚 相关文档
+## 📚 相关文档 {#相关文档}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [所有权与智能指针文档](../../../crates/c01_ownership_borrow_scope/docs/README.md)
 - [智能指针 API 参考](../../../crates/c01_ownership_borrow_scope/docs/tier_03_references/05_智能指针API参考.md)
 
-## 🧩 相关示例代码
+## 🧩 相关示例代码 {#相关示例代码}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -1378,18 +1378,18 @@ impl Unmovable {
 
 ---
 
-## 📚 相关资源
+## 📚 相关资源 {#相关资源}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 官方文档
+### 官方文档 {#官方文档}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [Rust 智能指针文档](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)
 - [Rust Reference - Smart Pointers](https://doc.rust-lang.org/reference/types/pointer.html)
 
-### 项目内部文档
+### 项目内部文档 {#项目内部文档}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -1397,7 +1397,7 @@ impl Unmovable {
 - [智能指针示例](../../../crates/c01_ownership_borrow_scope/examples/README.md)
 - [所有权系统研究](../../research_notes/formal_methods/10_ownership_model.md)
 
-### 形式化理论与类型系统
+### 形式化理论与类型系统 {#形式化理论与类型系统}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -1407,7 +1407,7 @@ impl Unmovable {
 - [Send/Sync 形式化](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) — 线程安全 trait 形式化
 - [类型系统基础](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) — 智能指针类型理论
 
-### 相关速查卡
+### 相关速查卡 {#相关速查卡}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -1441,7 +1441,7 @@ impl Unmovable {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -1450,7 +1450,7 @@ impl Unmovable {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

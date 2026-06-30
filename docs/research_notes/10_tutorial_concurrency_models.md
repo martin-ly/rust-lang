@@ -18,7 +18,7 @@
 
 ---
 
-# 教程：并发模型
+# 教程：并发模型 {#教程并发模型}
 
 > **内容分级**: [归档级]
 
@@ -40,7 +40,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -49,7 +49,7 @@
 >
 
 - [教程：并发模型](#教程并发模型)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [引言](#引言)
   - [第一部分：并发基础](#第一部分并发基础)
     - [并发 vs 并行](#并发-vs-并行)
@@ -73,25 +73,25 @@
     - [选择合适的并发模型](#选择合适的并发模型)
     - [避免常见陷阱](#避免常见陷阱)
   - [第一部分：OS线程](#第一部分os线程)
-    - [何时使用](#何时使用)
+    - [何时使用](#何时使用-3)
   - [第二部分：异步/任务](#第二部分异步任务)
-    - [何时使用](#何时使用-1)
+    - [何时使用](#何时使用-3)
   - [第三部分：数据并行](#第三部分数据并行)
-    - [何时使用](#何时使用-2)
+    - [何时使用](#何时使用-3)
   - [第四部分：Actor模型](#第四部分actor模型)
     - [何时使用](#何时使用-3)
   - [第五部分：选择决策](#第五部分选择决策)
   - [总结](#总结)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
   - [权威来源索引](#权威来源索引-1)
 
-## 引言
+## 引言 {#引言}
 
 >
 
@@ -103,13 +103,13 @@ Rust提供了多种并发模型，从传统的线程到现代的异步编程。
 
 ---
 
-## 第一部分：并发基础
+## 第一部分：并发基础 {#第一部分并发基础}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 并发 vs 并行
+### 并发 vs 并行 {#并发-vs-并行}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -151,7 +151,7 @@ Rust提供了多种并发模型，从传统的线程到现代的异步编程。
 
 ```
 
-### Send 和 Sync
+### Send 和 Sync {#send-和-sync}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -189,13 +189,13 @@ pub unsafe auto trait Sync {}
 
 ---
 
-## 第二部分：线程模型
+## 第二部分：线程模型 {#第二部分线程模型}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 创建线程
+### 创建线程 {#创建线程}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -233,7 +233,7 @@ handle.join().unwrap();
 
 ```
 
-### 线程间通信
+### 线程间通信 {#线程间通信}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -273,7 +273,7 @@ println!("Got: {}", received);
 
 ```
 
-### 共享状态
+### 共享状态 {#共享状态}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -327,13 +327,13 @@ println!("Result: {}", *counter.lock().unwrap()); // 10
 
 ---
 
-## 第三部分：同步原语
+## 第三部分：同步原语 {#第三部分同步原语}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Mutex vs RwLock
+### Mutex vs RwLock {#mutex-vs-rwlock}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -379,7 +379,7 @@ let r2 = data.read().unwrap();
 
 ```
 
-### 原子操作
+### 原子操作 {#原子操作}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -431,13 +431,13 @@ counter.compare_exchange(current, new, Ordering::Acquire, Ordering::Relaxed);
 
 ---
 
-## 第四部分：异步模型
+## 第四部分：异步模型 {#第四部分异步模型}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### Future基础
+### Future基础 {#future基础}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -463,7 +463,7 @@ let result = f.await;  // 在async上下文中执行
 
 ```
 
-### async/await
+### async/await {#asyncawait}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -501,7 +501,7 @@ async fn fetch_multiple() -> Result<(), Error> {
 
 ```
 
-### 运行时选择
+### 运行时选择 {#运行时选择}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -519,13 +519,13 @@ async fn fetch_multiple() -> Result<(), Error> {
 
 ---
 
-## 第五部分：并发模式
+## 第五部分：并发模式 {#第五部分并发模式}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### Fork-Join
+### Fork-Join {#fork-join}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -553,7 +553,7 @@ let (a, b) = rayon::join(
 
 ```
 
-### 生产者-消费者
+### 生产者-消费者 {#生产者-消费者}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -597,7 +597,7 @@ thread::spawn(move || {
 
 ```
 
-### Actor模型
+### Actor模型 {#actor模型}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -655,13 +655,13 @@ impl Handler<MyMessage> for MyActor {
 
 ---
 
-## 第六部分：最佳实践
+## 第六部分：最佳实践 {#第六部分最佳实践}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 选择合适的并发模型
+### 选择合适的并发模型 {#选择合适的并发模型}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -677,7 +677,7 @@ impl Handler<MyMessage> for MyActor {
 
 | 复杂状态 | Actor | 隔离性，容错 |
 
-### 避免常见陷阱
+### 避免常见陷阱 {#避免常见陷阱}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -729,13 +729,13 @@ async fn good2() {
 
 ---
 
-## 第一部分：OS线程
+## 第一部分：OS线程 {#第一部分os线程}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 何时使用
+### 何时使用 {#何时使用-3}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -769,13 +769,13 @@ let result = handle.join().unwrap();
 
 ---
 
-## 第二部分：异步/任务
+## 第二部分：异步/任务 {#第二部分异步任务}
 
 >
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 何时使用
+### 何时使用 {#何时使用-3}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -811,13 +811,13 @@ async fn main() {
 
 ---
 
-## 第三部分：数据并行
+## 第三部分：数据并行 {#第三部分数据并行}
 
 >
 
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 何时使用
+### 何时使用 {#何时使用-3}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -845,13 +845,13 @@ let sum: i32 = (0..1_000_000)
 
 ---
 
-## 第四部分：Actor模型
+## 第四部分：Actor模型 {#第四部分actor模型}
 
 >
 
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 何时使用
+### 何时使用 {#何时使用-3}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -899,7 +899,7 @@ impl Handler<Message> for MyActor {
 
 ---
 
-## 第五部分：选择决策
+## 第五部分：选择决策 {#第五部分选择决策}
 
 >
 
@@ -931,7 +931,7 @@ impl Handler<Message> for MyActor {
 
 ---
 
-## 总结
+## 总结 {#总结}
 
 >
 
@@ -957,7 +957,7 @@ impl Handler<Message> for MyActor {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -967,13 +967,13 @@ impl Handler<Message> for MyActor {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -989,7 +989,7 @@ impl Handler<Message> for MyActor {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -1001,7 +1001,7 @@ impl Handler<Message> for MyActor {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -1033,7 +1033,7 @@ impl Handler<Message> for MyActor {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -1045,7 +1045,7 @@ impl Handler<Message> for MyActor {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引-1}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -1071,7 +1071,7 @@ impl Handler<Message> for MyActor {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引-1}
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 

@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 把“如何扩展 Cargo”讲清楚：从自定义子命令约定到常用插件选型，覆盖 Cargo 的工具集成接口。
-> **前置概念**: [Cargo Toolchain](01_toolchain.md) · [Cargo Manifest Reference](64_cargo_manifest_reference.md)
+> **前置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **后置概念**: [Cargo Security CVEs](25_cargo_security_cves.md) · [DevOps and CI/CD](28_devops_and_ci_cd.md)
 
 ---

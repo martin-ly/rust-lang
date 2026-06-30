@@ -1,4 +1,4 @@
-# Ratatui Crate 架构解构
+# Ratatui Crate 架构解构 {#ratatui-crate-架构解构}
 
 >
 
@@ -24,7 +24,7 @@
 
 ---
 
-## 1. 引言：Rust TUI 生态的新标杆
+## 1. 引言：Rust TUI 生态的新标杆 {#1-引言rust-tui-生态的新标杆}
 
 Ratatui 是 Rust 生态中增长最快的**终端用户界面 (TUI)** 框架，年下载量超过 3000 万次 来源: [crates.io 统计, 2025](https://crates.io/)。
 
@@ -90,13 +90,13 @@ fn main() -> std::io::Result<()> {
 
 ---
 
-## 2. 核心架构
+## 2. 核心架构 {#2-核心架构}
 
 >
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 2.1 整体架构
+### 2.1 整体架构 {#21-整体架构}
 
 >
 
@@ -180,7 +180,7 @@ graph LR
 
 > [来源: Ratatui Docs — Concepts](https://ratatui.rs/concepts/)
 
-### 2.2 Buffer 与 Cell 的内存模型
+### 2.2 Buffer 与 Cell 的内存模型 {#22-buffer-与-cell-的内存模型}
 
 >
 
@@ -228,13 +228,13 @@ pub struct Cell {
 
 ---
 
-## 3. 类型系统关键利用
+## 3. 类型系统关键利用 {#3-类型系统关键利用}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 3.1 `Widget` Trait：声明式组合的基石
+### 3.1 `Widget` Trait：声明式组合的基石 {#31-widget-trait声明式组合的基石}
 
 >
 
@@ -278,7 +278,7 @@ impl Widget for Block<'_> {
 
 > [来源: Ratatui Widget Docs](https://docs.rs/ratatui/latest/ratatui/widgets/trait.Widget.html)
 
-### 3.2 `StatefulWidget`：有状态组件的借用模式
+### 3.2 `StatefulWidget`：有状态组件的借用模式 {#32-statefulwidget有状态组件的借用模式}
 
 >
 
@@ -322,7 +322,7 @@ frame.render_stateful_widget(list, area, &mut list_state);
 
 > [来源: Ratatui StatefulWidget Docs](https://docs.rs/ratatui/latest/ratatui/widgets/trait.StatefulWidget.html)
 
-### 3.3 `Layout` 约束系统：编译期不可解，运行期可靠
+### 3.3 `Layout` 约束系统：编译期不可解，运行期可靠 {#33-layout-约束系统编译期不可解运行期可靠}
 
 >
 
@@ -372,13 +372,13 @@ let layout = Layout::default()
 
 ---
 
-## 4. 渲染管线与差分算法
+## 4. 渲染管线与差分算法 {#4-渲染管线与差分算法}
 
 >
 
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 4.1 差分渲染的核心逻辑
+### 4.1 差分渲染的核心逻辑 {#41-差分渲染的核心逻辑}
 
 >
 
@@ -444,13 +444,13 @@ impl Terminal {
 
 ---
 
-## 5. Backend 抽象与可移植性
+## 5. Backend 抽象与可移植性 {#5-backend-抽象与可移植性}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 5.1 `Backend` Trait
+### 5.1 `Backend` Trait {#51-backend-trait}
 
 >
 
@@ -504,7 +504,7 @@ pub trait Backend {
 
 > [来源: Ratatui Backend Docs](https://docs.rs/ratatui/latest/ratatui/backend/trait.Backend.html)
 
-### 5.2 测试策略：纯函数的 UI 验证
+### 5.2 测试策略：纯函数的 UI 验证 {#52-测试策略纯函数的-ui-验证}
 
 >
 
@@ -562,13 +562,13 @@ fn test_ui_renders_correctly() {
 
 ---
 
-## 6. 与生态的集成
+## 6. 与生态的集成 {#6-与生态的集成}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 6.1 异步事件循环
+### 6.1 异步事件循环 {#61-异步事件循环}
 
 >
 
@@ -616,7 +616,7 @@ loop {
 
 ---
 
-## 相关架构与延伸阅读
+## 相关架构与延伸阅读 {#相关架构与延伸阅读}
 
 >
 
@@ -634,7 +634,7 @@ loop {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -664,13 +664,13 @@ loop {
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 > **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 > **来源**: [This Week in Rust](https://this-week-in-rust.org/)
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

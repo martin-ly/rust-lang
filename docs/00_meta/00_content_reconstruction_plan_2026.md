@@ -7,7 +7,7 @@
 
 ---
 
-# Rust 知识体系内容重构总体规划
+# Rust 知识体系内容重构总体规划 {#rust-知识体系内容重构总体规划}
 
 > **分级**: [B]
 > **Bloom 层级**: L2 (理解)
@@ -17,17 +17,17 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 - [Rust 知识体系内容重构总体规划](#rust-知识体系内容重构总体规划)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、内容标准模板（Concept Document Standard Template）](#一内容标准模板concept-document-standard-template)
     - [模块 1: 概念定义（Concept Definition）](#模块-1-概念定义concept-definition)
     - [模块 2: 属性清单（Property Inventory）](#模块-2-属性清单property-inventory)
     - [模块 3: 概念依赖图（Concept Dependency Graph）](#模块-3-概念依赖图concept-dependency-graph)
     - [模块 4: 机制解释（Mechanistic Explanation）](#模块-4-机制解释mechanistic-explanation)
     - [模块 5: 正例集（Positive Examples）](#模块-5-正例集positive-examples)
-    - [模块 6: 反例集（Counterexamples \& Anti-patterns）](#模块-6-反例集counterexamples--anti-patterns)
+    - [模块 6: 反例集（Counterexamples \& Anti-patterns）](#模块-6-反例集counterexamples-anti-patterns)
     - [模块 7: 思维表征套件（Multi-modal Representations）](#模块-7-思维表征套件multi-modal-representations)
     - [模块 8: 国际化对齐（International Alignment）](#模块-8-国际化对齐international-alignment)
     - [模块 9: 设计权衡分析（Trade-off Analysis）](#模块-9-设计权衡分析trade-off-analysis)
@@ -54,13 +54,13 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 一、内容标准模板（Concept Document Standard Template）
+## 一、内容标准模板（Concept Document Standard Template） {#一内容标准模板concept-document-standard-template}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 每篇核心知识文档必须包含以下 10 个模块。缺失任一模块视为"未完成"。
 
-### 模块 1: 概念定义（Concept Definition）
+### 模块 1: 概念定义（Concept Definition） {#模块-1-概念定义concept-definition}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -78,7 +78,7 @@
 - 操作："赋值转移、函数传参转移、作用域结束自动调用 Drop"
 - 形式化直觉："Affine Type System 的 Rust 实现：每个值至少有一个 owner，至多有一个 owner，owner 离开作用域时析构"
 
-### 模块 2: 属性清单（Property Inventory）
+### 模块 2: 属性清单（Property Inventory） {#模块-2-属性清单property-inventory}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -90,7 +90,7 @@
 |--------|------|------|------|----------|
 | e.g. `Copy` 的传递性 | 关系属性 | bool | 仅当所有字段都实现 Copy | `struct Wrapper(String)` 不实现 Copy |
 
-### 模块 3: 概念依赖图（Concept Dependency Graph）
+### 模块 3: 概念依赖图（Concept Dependency Graph） {#模块-3-概念依赖图concept-dependency-graph}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -109,7 +109,7 @@ graph TD
     style F fill:#bbf,stroke:#333
 ```
 
-### 模块 4: 机制解释（Mechanistic Explanation）
+### 模块 4: 机制解释（Mechanistic Explanation） {#模块-4-机制解释mechanistic-explanation}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -121,7 +121,7 @@ graph TD
 - **内存模型视角**：Stacked Borrows / Tree Borrows / LLVM IR 层面的体现
 - **运行时视角**：vtable 布局、monomorphization 结果、零成本抽象的物理含义
 
-### 模块 5: 正例集（Positive Examples）
+### 模块 5: 正例集（Positive Examples） {#模块-5-正例集positive-examples}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -133,7 +133,7 @@ graph TD
 2. **Realistic**：接近真实场景的用法
 3. **Production-grade**：包含错误处理、边界条件、性能考量
 
-### 模块 6: 反例集（Counterexamples & Anti-patterns）
+### 模块 6: 反例集（Counterexamples & Anti-patterns） {#模块-6-反例集counterexamples-anti-patterns}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -147,7 +147,7 @@ graph TD
 4. **修复方案**（至少 2 种，含 trade-off 分析）
 5. **抽象原则**（从该反例提炼出的通用模式）
 
-### 模块 7: 思维表征套件（Multi-modal Representations）
+### 模块 7: 思维表征套件（Multi-modal Representations） {#模块-7-思维表征套件multi-modal-representations}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -164,7 +164,7 @@ graph TD
 | 内存布局图 | 栈/堆、指针关系 | ASCII / SVG |
 | 推理判断树 | 编译器推导过程 | ASCII / Mermaid |
 
-### 模块 8: 国际化对齐（International Alignment）
+### 模块 8: 国际化对齐（International Alignment） {#模块-8-国际化对齐international-alignment}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -175,7 +175,7 @@ graph TD
 - **社区权威**：Niko Matsakis, Ralf Jung, Jon Gjengset, Without Boats 等的关键文章/演讲
 - **跨语言对比**：与 C++/Haskell/Ada/Go 的同质概念对比（如适用）
 
-### 模块 9: 设计权衡分析（Trade-off Analysis）
+### 模块 9: 设计权衡分析（Trade-off Analysis） {#模块-9-设计权衡分析trade-off-analysis}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -187,7 +187,7 @@ graph TD
 2. 该设计的成本是什么？（编译时间、学习曲线、表达力限制）
 3. 什么场景下这个设计是次优的？（承认限制，而非盲目推崇）
 
-### 模块 10: 自我检测与练习（Self-assessment）
+### 模块 10: 自我检测与练习（Self-assessment） {#模块-10-自我检测与练习self-assessment}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -201,15 +201,15 @@ graph TD
 
 ---
 
-## 二、双轨并行执行路线图
+## 二、双轨并行执行路线图 {#二双轨并行执行路线图}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 轨道 A：核心知识体系重构（Track A: Core Knowledge）
+### 轨道 A：核心知识体系重构（Track A: Core Knowledge） {#轨道-a核心知识体系重构track-a-core-knowledge}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
-#### Phase A1: P0 急救（第 1-2 周）
+#### Phase A1: P0 急救（第 1-2 周） {#phase-a1-p0-急救第-1-2-周}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -222,7 +222,7 @@ graph TD
 | P0 | `03_advanced/unsafe/unsafe_rust.md` | ~? | 600+ | 不变量契约、裸指针语义、 Miri验证、unsafe guidelines、SAFETY注释规范 | 决策树+反例集 |
 | P0 | `03_advanced/async/async_closure.md` | ~? | 400+ | async move闭包捕获、Fn/FnMut/FnOnce与async的交叉、spawn中的闭包 | 对比矩阵 |
 
-#### Phase A2: 中级层加固（第 3-4 周）
+#### Phase A2: 中级层加固（第 3-4 周） {#phase-a2-中级层加固第-3-4-周}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -233,7 +233,7 @@ graph TD
 | P1 | `01_fundamentals/lifetimes.md` | ~? | 500+ | 区域推理、reborrow机制、HRTB、lifetime variance、NLL与Polonius演进 | 推理树+状态图 |
 | P1 | `02_intermediate/smart_pointers.md` | ~? | 500+ | `Box/Rc/Arc/RefCell`内部可变性矩阵、`Pin<Box<Self>>`、Weak引用循环 | 矩阵+内存图 |
 
-#### Phase A3: 高级层补全（第 5-6 周）
+#### Phase A3: 高级层补全（第 5-6 周） {#phase-a3-高级层补全第-5-6-周}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -244,7 +244,7 @@ graph TD
 | P2 | `03_advanced/unsafe/ffi.md` | ABI边界、bindgen、cbindgen、panic跨边界、内存布局对齐 | 矩阵+反例 |
 | P2 | `03_advanced/concurrency/atomics.md` | 内存序决策树、Release-Acquire语义、SeqCst成本、portable atomic | 决策树+矩阵 |
 
-#### Phase A4: 专家层重构（第 7-8 周）
+#### Phase A4: 专家层重构（第 7-8 周） {#phase-a4-专家层重构第-7-8-周}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -256,11 +256,11 @@ graph TD
 
 ---
 
-### 轨道 B：safety_critical 持续演进（Track B: Safety Critical）
+### 轨道 B：safety_critical 持续演进（Track B: Safety Critical） {#轨道-bsafety_critical-持续演进track-b-safety-critical}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
-#### Phase B1: 表征范式标准化（与 Track A Phase A1 同步）
+#### Phase B1: 表征范式标准化（与 Track A Phase A1 同步） {#phase-b1-表征范式标准化与-track-a-phase-a1-同步}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -270,7 +270,7 @@ graph TD
 - `safety_critical/03_decision_trees/` → 提炼为 `docs/00_meta/00_template_decision_tree.md`
 - `safety_critical/01_mind_maps/` → 提炼为 `docs/00_meta/TEMPLATE_MIND_MAP.md`
 
-#### Phase B2: 跨轨关联（第 3-4 周）
+#### Phase B2: 跨轨关联（第 3-4 周） {#phase-b2-跨轨关联第-3-4-周}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -280,7 +280,7 @@ graph TD
 - `10_formal_verification_practical_guide.md` → 链接到 `tree_borrows.md` 的内存模型
 - `10_toolchain_setup_guide.md` → 链接到 `async_await.md` 的运行时选择（如安全关键异步）
 
-#### Phase B3: 标准对齐深化（第 5-8 周）
+#### Phase B3: 标准对齐深化（第 5-8 周） {#phase-b3-标准对齐深化第-5-8-周}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -289,9 +289,9 @@ graph TD
 
 ---
 
-## 三、质量控制与验收标准
+## 三、质量控制与验收标准 {#三质量控制与验收标准}
 
-### 3.1 自动化检查清单
+### 3.1 自动化检查清单 {#31-自动化检查清单}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -304,7 +304,7 @@ graph TD
 - [ ] 概念依赖图包含上下游链接
 - [ ] 代码示例可通过 `rustfmt` 且逻辑正确
 
-### 3.2 人工审阅维度
+### 3.2 人工审阅维度 {#32-人工审阅维度}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -315,9 +315,9 @@ graph TD
 
 ---
 
-## 四、第一批交付计划（P0 急救包）
+## 四、第一批交付计划（P0 急救包） {#四第一批交付计划p0-急救包}
 
-### 交付 1: `async_await.md` 重构
+### 交付 1: `async_await.md` 重构 {#交付-1-async_awaitmd-重构}
 
 **当前问题诊断**：
 
@@ -346,7 +346,7 @@ graph TD
 9. **Trade-off**：poll vs callback vs green thread、编译时状态机 vs 运行时开销
 10. **练习**：实现一个自定义 Future、修复 Send 错误、设计取消安全函数
 
-### 交付 2: `threads.md` 重构
+### 交付 2: `threads.md` 重构 {#交付-2-threadsmd-重构}
 
 **当前问题诊断**：
 
@@ -379,7 +379,7 @@ graph TD
 9. **Trade-off**：OS threads vs green threads、async vs threaded I/O、线程池大小选择
 10. **练习**：实现线程池、修复 Send/Sync 错误、分析死锁场景
 
-### 交付 3: `unsafe_rust.md` 重构
+### 交付 3: `unsafe_rust.md` 重构 {#交付-3-unsafe_rustmd-重构}
 
 **当前问题诊断**：
 
@@ -413,7 +413,7 @@ graph TD
 
 ---
 
-## 五、风险与应对
+## 五、风险与应对 {#五风险与应对}
 
 | 风险 | 影响 | 应对策略 |
 |------|------|----------|
@@ -425,7 +425,7 @@ graph TD
 
 ---
 
-## 六、立即行动项（Next Steps）
+## 六、立即行动项（Next Steps） {#六立即行动项next-steps}
 
 1. **确认本计划**：你确认后，我立即开始 Phase A1 + Phase B1 的并行执行
 2. **输出模板规范**：生成 `docs/00_meta/TEMPLATE_*.md` 作为后续所有文档的强制标准
@@ -454,13 +454,13 @@ graph TD
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [上级目录](../README.md)
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

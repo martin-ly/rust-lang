@@ -5,7 +5,7 @@
 
 # Kani：Rust 有界模型检查器
 
-> **EN**: Kani
+> **EN**: Kani: Rust Bounded Model Checker
 > **Summary**: Kani is an AWS-developed bounded model checker for Rust. It verifies properties over all possible inputs and execution paths within bounds using `#[kani::proof]` harnesses, function contracts, loop contracts, and autoharness generation.
 > **受众**: [进阶 / 工程 / 形式化]
 > **Bloom 层级**: 理解 → 应用 → 分析

@@ -1,4 +1,4 @@
-# 跨模块学习路线图
+# 跨模块学习路线图 {#跨模块学习路线图}
 
 > **分级**: [A]
 > **Bloom 层级**: L1-L2 (记忆/理解)
@@ -10,33 +10,33 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [跨模块学习路线图](#跨模块学习路线图)
-  - [📑 目录](#-目录)
-  - [🗺️ 7 条定制化学习路径](#️-7-条定制化学习路径)
+  - [📑 目录](#目录)
+  - [🗺️ 7 条定制化学习路径](#7-条定制化学习路径)
     - [路径 1: 零基础入门](#路径-1-零基础入门)
     - [路径 2: 有编程经验](#路径-2-有编程经验)
     - [路径 3: 系统程序员](#路径-3-系统程序员)
     - [路径 4: Web 开发者](#路径-4-web-开发者)
     - [路径 5: Rust 1.95/1.96 特性探索者](#路径-5-rust-195196-特性探索者)
-  - [🆕 Rust 1.95/1.96 特性在各模块中的应用](#-rust-195196-特性在各模块中的应用)
-    - [C01 所有权与借用 → 1.96 并发安全](#c01-所有权与借用--196-并发安全)
-    - [C04 泛型 → async Fn Trait (≥1.85, Ed 2024)](#c04-泛型--async-fn-trait-185-ed-2024)
-    - [C05 线程 → 1.96 线程改进](#c05-线程--196-线程改进)
-    - [C08 算法 → isqrt (≥1.84)](#c08-算法--isqrt-184)
-  - [🔗 关联学习建议](#-关联学习建议)
+  - [🆕 Rust 1.95/1.96 特性在各模块中的应用](#rust-195196-特性在各模块中的应用)
+    - [C01 所有权与借用 → 1.96 并发安全](#c01-所有权与借用-196-并发安全)
+    - [C04 泛型 → async Fn Trait (≥1.85, Ed 2024)](#c04-泛型-async-fn-trait-185-ed-2024)
+    - [C05 线程 → 1.96 线程改进](#c05-线程-196-线程改进)
+    - [C08 算法 → isqrt (≥1.84)](#c08-算法-isqrt-184)
+  - [🔗 关联学习建议](#关联学习建议)
     - [学习路线 A: 数学与算法方向](#学习路线-a-数学与算法方向)
     - [学习路线 B: 并发与数据结构方向](#学习路线-b-并发与数据结构方向)
     - [学习路线 C: 异步编程方向](#学习路线-c-异步编程方向)
     - [学习路线 D: 系统编程方向](#学习路线-d-系统编程方向)
-  - [📋 新特性快速参考表](#-新特性快速参考表)
+  - [📋 新特性快速参考表](#新特性快速参考表)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🗺️ 7 条定制化学习路径
+## 🗺️ 7 条定制化学习路径 {#7-条定制化学习路径}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
 > **来源: [Wikipedia - Learning Path](https://en.wikipedia.org/wiki/Learning_Path)** ·
@@ -44,7 +44,7 @@
 > **[来源: ACM - Computing Education Research]** · **[来源: IEEE - Competency Frameworks]**
 >
 
-### 路径 1: 零基础入门
+### 路径 1: 零基础入门 {#路径-1-零基础入门}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -54,7 +54,7 @@
 C01 → C02 → C03 → 项目
 ```
 
-### 路径 2: 有编程经验
+### 路径 2: 有编程经验 {#路径-2-有编程经验}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
@@ -64,7 +64,7 @@ C01 → C02 → C03 → 项目
 C01 → C04 → C05 → 项目
 ```
 
-### 路径 3: 系统程序员
+### 路径 3: 系统程序员 {#路径-3-系统程序员}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -72,7 +72,7 @@ C01 → C04 → C05 → 项目
 C01 → C07 → C08 → C10
 ```
 
-### 路径 4: Web 开发者
+### 路径 4: Web 开发者 {#路径-4-web-开发者}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -80,7 +80,7 @@ C01 → C07 → C08 → C10
 C01 → C06 → C10 → C12
 ```
 
-### 路径 5: Rust 1.95/1.96 特性探索者
+### 路径 5: Rust 1.95/1.96 特性探索者 {#路径-5-rust-195196-特性探索者}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -90,11 +90,11 @@ isqrt → get_disjoint_mut → async Fn → 综合项目
 
 ---
 
-## 🆕 Rust 1.95/1.96 特性在各模块中的应用
+## 🆕 Rust 1.95/1.96 特性在各模块中的应用 {#rust-195196-特性在各模块中的应用}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### C01 所有权与借用 → 1.96 并发安全
+### C01 所有权与借用 → 1.96 并发安全 {#c01-所有权与借用-196-并发安全}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -122,7 +122,7 @@ fn ownership_with_196_features() {
 
 **学习建议**: 结合 C01 的所有权概念理解 `get_disjoint_mut` 的编译时安全检查。
 
-### C04 泛型 → async Fn Trait (≥1.85, Ed 2024)
+### C04 泛型 → async Fn Trait (≥1.85, Ed 2024) {#c04-泛型-async-fn-trait-185-ed-2024}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -145,7 +145,7 @@ trait OldProcessor {
 
 **学习建议**: 在学习 C04 泛型时，尝试用 1.85 的 `async Fn` 语法重构异步代码。
 
-### C05 线程 → 1.96 线程改进
+### C05 线程 → 1.96 线程改进 {#c05-线程-196-线程改进}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -176,7 +176,7 @@ static CONFIG: LazyLock<String> = LazyLock::new(|| {
 
 **学习建议**: C05 线程基础 → 1.95+ LazyLock → thread::Builder 高级控制
 
-### C08 算法 → isqrt (≥1.84)
+### C08 算法 → isqrt (≥1.84) {#c08-算法-isqrt-184}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -215,11 +215,11 @@ fn triangle_inequality(points: &[(f64, f64)]) -> bool {
 
 ---
 
-## 🔗 关联学习建议
+## 🔗 关联学习建议 {#关联学习建议}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 学习路线 A: 数学与算法方向
+### 学习路线 A: 数学与算法方向 {#学习路线-a-数学与算法方向}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -235,7 +235,7 @@ C08 高级算法 ────────┘
 
 **推荐项目**: 数字信号处理器、几何计算库
 
-### 学习路线 B: 并发与数据结构方向
+### 学习路线 B: 并发与数据结构方向 {#学习路线-b-并发与数据结构方向}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -251,7 +251,7 @@ C05 高级并发模式 ────────────┘
 
 **推荐项目**: 高性能缓存系统、并发任务调度器
 
-### 学习路线 C: 异步编程方向
+### 学习路线 C: 异步编程方向 {#学习路线-c-异步编程方向}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -267,7 +267,7 @@ Tokio 生态 ────────────┘
 
 **推荐项目**: REST API 服务、实时数据处理管道
 
-### 学习路线 D: 系统编程方向
+### 学习路线 D: 系统编程方向 {#学习路线-d-系统编程方向}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -285,7 +285,7 @@ C07 高级系统编程 ────────────┘
 
 ---
 
-## 📋 新特性快速参考表
+## 📋 新特性快速参考表 {#新特性快速参考表}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -314,7 +314,7 @@ C07 高级系统编程 ────────────┘
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -323,7 +323,7 @@ C07 高级系统编程 ────────────┘
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

@@ -1,4 +1,4 @@
-# 所有权证明树 (Proof Tree: Ownership)
+# 所有权证明树 (Proof Tree: Ownership) {#所有权证明树-proof-tree-ownership}
 
 > **概念族**: 形式化方法
 
@@ -22,7 +22,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -31,19 +31,19 @@
 >
 
 - [所有权证明树 (Proof Tree: Ownership)](#所有权证明树-proof-tree-ownership)
-  - [📑 目录](#-目录)
-  - [🌳 定理陈述](#-定理陈述)
-  - [🌿 证明树结构](#-证明树结构)
-  - [📋 详细证明](#-详细证明)
+  - [📑 目录](#目录)
+  - [🌳 定理陈述](#定理陈述)
+  - [🌿 证明树结构](#证明树结构)
+  - [📋 详细证明](#详细证明)
     - [基础情形 (Base Case)](#基础情形-base-case)
     - [归纳步骤 (Inductive Step)](#归纳步骤-inductive-step)
-  - [🔍 关键引理](#-关键引理)
+  - [🔍 关键引理](#关键引理)
     - [Lemma 1: 移动后原所有者不可用](#lemma-1-移动后原所有者不可用)
     - [Lemma 2: 借用不转移所有权](#lemma-2-借用不转移所有权)
-  - [🎯 Rust 代码验证](#-rust-代码验证)
-  - [📊 证明复杂度](#-证明复杂度)
-  - [🔗 相关证明](#-相关证明)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🎯 Rust 代码验证](#rust-代码验证)
+  - [📊 证明复杂度](#证明复杂度)
+  - [🔗 相关证明](#相关证明)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -51,7 +51,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🌳 定理陈述
+## 🌳 定理陈述 {#定理陈述}
 
 >
 
@@ -67,7 +67,7 @@
 
 ---
 
-## 🌿 证明树结构
+## 🌿 证明树结构 {#证明树结构}
 
 >
 
@@ -141,13 +141,13 @@ T-OW1: 所有权唯一性
 
 ---
 
-## 📋 详细证明
+## 📋 详细证明 {#详细证明}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 基础情形 (Base Case)
+### 基础情形 (Base Case) {#基础情形-base-case}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -163,7 +163,7 @@ let r = Resource::new();
 
 ```
 
-### 归纳步骤 (Inductive Step)
+### 归纳步骤 (Inductive Step) {#归纳步骤-inductive-step}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -181,13 +181,13 @@ let b = a;  // move
 
 ---
 
-## 🔍 关键引理
+## 🔍 关键引理 {#关键引理}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### Lemma 1: 移动后原所有者不可用
+### Lemma 1: 移动后原所有者不可用 {#lemma-1-移动后原所有者不可用}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -213,7 +213,7 @@ Proof:
 
 ```
 
-### Lemma 2: 借用不转移所有权
+### Lemma 2: 借用不转移所有权 {#lemma-2-借用不转移所有权}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -239,7 +239,7 @@ Proof:
 
 ---
 
-## 🎯 Rust 代码验证
+## 🎯 Rust 代码验证 {#rust-代码验证}
 
 >
 
@@ -283,7 +283,7 @@ fn ownership_uniqueness_theorem() {
 
 ---
 
-## 📊 证明复杂度
+## 📊 证明复杂度 {#证明复杂度}
 
 >
 
@@ -303,7 +303,7 @@ fn ownership_uniqueness_theorem() {
 
 ---
 
-## 🔗 相关证明
+## 🔗 相关证明 {#相关证明}
 
 >
 
@@ -317,7 +317,7 @@ fn ownership_uniqueness_theorem() {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -327,7 +327,7 @@ fn ownership_uniqueness_theorem() {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -335,7 +335,7 @@ fn ownership_uniqueness_theorem() {
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -349,7 +349,7 @@ fn ownership_uniqueness_theorem() {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -359,7 +359,7 @@ fn ownership_uniqueness_theorem() {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -391,7 +391,7 @@ fn ownership_uniqueness_theorem() {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -403,7 +403,7 @@ fn ownership_uniqueness_theorem() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

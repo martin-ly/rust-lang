@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 把“Cargo 如何安全地存 token、如何组织缓存、如何加速构建”系统化，补齐 registry 之后的工程实践闭环。
-> **前置概念**: [Cargo Registries and Publishing](62_cargo_registries_and_publishing.md) · [Cargo Source Replacement](61_cargo_source_replacement.md)
+> **前置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **后置概念**: [Cargo Security CVEs](25_cargo_security_cves.md) · [DevOps and CI/CD](28_devops_and_ci_cd.md)
 
 ---

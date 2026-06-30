@@ -1,4 +1,4 @@
-# Event Sourcing 模式形式化定义
+# Event Sourcing 模式形式化定义 {#event-sourcing-模式形式化定义}
 
 > **概念族**: 软件设计 / 分布式模式
 
@@ -30,7 +30,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -39,7 +39,7 @@
 >
 
 - [Event Sourcing 模式形式化定义](#event-sourcing-模式形式化定义)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 概念定义 (Def)](#1-概念定义-def)
     - [Def ES1: Event Sourcing](#def-es1-event-sourcing)
     - [Def ES2: 事件不变性](#def-es2-事件不变性)
@@ -53,7 +53,7 @@
     - [Theorem ES2: 审计完整性](#theorem-es2-审计完整性)
   - [4. Rust 实现示例](#4-rust-实现示例)
   - [5. 与 CQRS 的关系](#5-与-cqrs-的关系)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -61,13 +61,13 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 1. 概念定义 (Def)
+## 1. 概念定义 (Def) {#1-概念定义-def}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Def ES1: Event Sourcing
+### Def ES1: Event Sourcing {#def-es1-event-sourcing}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -93,7 +93,7 @@ EventSourcing := (E, S, apply, snapshot)
 
 ```
 
-### Def ES2: 事件不变性
+### Def ES2: 事件不变性 {#def-es2-事件不变性}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -109,7 +109,7 @@ EventSourcing := (E, S, apply, snapshot)
 
 事件一旦创建，不可修改。
 
-### Def ES3: 状态重建
+### Def ES3: 状态重建 {#def-es3-状态重建}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -125,13 +125,13 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 
 ---
 
-## 2. 基本假设 (Axiom)
+## 2. 基本假设 (Axiom) {#2-基本假设-axiom}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### Axiom ES1: 事件顺序性
+### Axiom ES1: 事件顺序性 {#axiom-es1-事件顺序性}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -143,7 +143,7 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 
 事件按时间顺序存储。
 
-### Axiom ES2: 应用函数确定性
+### Axiom ES2: 应用函数确定性 {#axiom-es2-应用函数确定性}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -155,7 +155,7 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 
 给定相同状态和事件，结果总是相同。
 
-### Axiom ES3: 版本控制
+### Axiom ES3: 版本控制 {#axiom-es3-版本控制}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -169,13 +169,13 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 
 ---
 
-## 3. 定理 (Theorem)
+## 3. 定理 (Theorem) {#3-定理-theorem}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### Theorem ES1: 状态可重现性
+### Theorem ES1: 状态可重现性 {#theorem-es1-状态可重现性}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -195,7 +195,7 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 
 4. 因此给定相同事件序列，总能重建相同状态
 
-### Theorem ES2: 审计完整性
+### Theorem ES2: 审计完整性 {#theorem-es2-审计完整性}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -215,7 +215,7 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 
 ---
 
-## 4. Rust 实现示例
+## 4. Rust 实现示例 {#4-rust-实现示例}
 
 >
 
@@ -323,7 +323,7 @@ impl<A: Aggregate> EventSourcedRepository<A> {
 
 ---
 
-## 5. 与 CQRS 的关系
+## 5. 与 CQRS 的关系 {#5-与-cqrs-的关系}
 
 >
 
@@ -365,7 +365,7 @@ impl<A: Aggregate> EventSourcedRepository<A> {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -373,7 +373,7 @@ impl<A: Aggregate> EventSourcedRepository<A> {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -381,7 +381,7 @@ impl<A: Aggregate> EventSourcedRepository<A> {
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -395,7 +395,7 @@ impl<A: Aggregate> EventSourcedRepository<A> {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -405,7 +405,7 @@ impl<A: Aggregate> EventSourcedRepository<A> {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -437,7 +437,7 @@ impl<A: Aggregate> EventSourcedRepository<A> {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -449,7 +449,7 @@ impl<A: Aggregate> EventSourcedRepository<A> {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Event Sourcing](https://en.wikipedia.org/wiki/Event_Sourcing)**
 

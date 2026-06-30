@@ -12,7 +12,7 @@
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
 
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [验证工具链](05_verification_toolchain.md)
 > **后置概念**: N/A
 ---
 
@@ -23,7 +23,7 @@
 > [Creusot](https://github.com/creusot-rs/creusot) ·
 > [Verus](https://github.com/verus-lang/verus)
 >
-> **前置概念**:
+> **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md)
 > [Linear Logic](01_linear_logic.md) ·
 > [RustBelt](04_rustbelt.md) ·
 > [Separation Logic](11_separation_logic.md) ·

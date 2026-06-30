@@ -1,4 +1,4 @@
-# 形式化工具中的模块与私有性映射
+# 形式化工具中的模块与私有性映射 {#形式化工具中的模块与私有性映射}
 
 > **概念族**: 形式化模块
 
@@ -20,7 +20,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [形式化工具中的模块与私有性映射](#形式化工具中的模块与私有性映射)
   - [目录](#目录)
@@ -42,13 +42,13 @@
 
 ---
 
-## 研究目标
+## 研究目标 {#研究目标}
 
 对照 Rust 形式化验证生态中的主流工具——Aeneas、coq-of-rust、RustBelt——分析它们如何处理 crate、module 与 visibility 等封装边界，明确这些工具在证明中对外部上下文的假设与限制。
 
 ---
 
-## 概念定义
+## 概念定义 {#概念定义}
 
 | 术语 | 定义 |
 
@@ -76,7 +76,7 @@
 
 ---
 
-## 属性关系
+## 属性关系 {#属性关系}
 
 ```text
 
@@ -136,9 +136,9 @@ Rust Source
 
 ---
 
-## 解释与论证
+## 解释与论证 {#解释与论证}
 
-### 为什么形式化工具需要处理模块边界
+### 为什么形式化工具需要处理模块边界 {#为什么形式化工具需要处理模块边界}
 
 Rust 的模块系统不仅是代码组织工具，更是安全契约的载体。形式化验证若要证明“crate 的公开 API 安全”，必须知道哪些函数/类型是外部可调用的。可见性信息帮助工具确定证明义务的范围：
 
@@ -146,15 +146,15 @@ Rust 的模块系统不仅是代码组织工具，更是安全契约的载体。
 
 - **Private items**：只要保证不破坏 public items 的不变式即可，内部细节可被抽象。
 
-### Aeneas 中的模块处理
+### Aeneas 中的模块处理 {#aeneas-中的模块处理}
 
 Aeneas 对 Rust 进行 borrow-checker 语义提取，生成 Low-Level Borrow Calculus（LLBC）。在 LLBC 中，crate 被表示为若干模块，每个函数有唯一的全局名称。Aeneas 目前主要处理 safe Rust，unsafe 代码需要被建模为外部函数（opaque）或手动给出规范。
 
-### coq-of-rust 中的模块处理
+### coq-of-rust 中的模块处理 {#coq-of-rust-中的模块处理}
 
 coq-of-rust 将 Rust 代码几乎一一对应地翻译为 Coq。Rust 的 `mod` 结构被保留为 Coq 的 `Module`，`use` 被处理为 Coq 的 `Import`。由于 Coq 本身也有模块系统，这种映射相对自然。私有性在 Coq 中不完全强制，但工具生成的接口层可以通过参数化类型模拟可见性约束。
 
-### RustBelt 中的抽象与封装
+### RustBelt 中的抽象与封装 {#rustbelt-中的抽象与封装}
 
 RustBelt 的核心贡献是证明标准库中 unsafe 代码的安全性。它不直接处理整个 crate，而是聚焦于关键抽象（如 `Rc`、`Arc`、`Cell`、`Mutex`）。私有字段在 Iris 中被建模为内部资源，公开 API 提供获取/释放这些资源的规则。模块可见性在这里体现为：外部证明只能使用公开 API 的规范，不能窥探私有资源。
 
@@ -162,9 +162,9 @@ RustBelt 的核心贡献是证明标准库中 unsafe 代码的安全性。它不
 
 ---
 
-## Rust 示例
+## Rust 示例 {#rust-示例}
 
-### 1. 抽象后的公开 API（Aeneas 风格）
+### 1. 抽象后的公开 API（Aeneas 风格） {#1-抽象后的公开-apiaeneas-风格}
 
 ```rust
 
@@ -216,7 +216,7 @@ impl BoundedCounter {
 
 Aeneas 可为此生成 Lean 函数，后置条件包括 `value <= 100`；私有字段 `value` 在规范中被抽象为 ghost state。
 
-### 2. coq-of-rust 翻译概念
+### 2. coq-of-rust 翻译概念 {#2-coq-of-rust-翻译概念}
 
 ```coq
 
@@ -238,7 +238,7 @@ End BoundedCounter.
 
 ```
 
-### 3. RustBelt 风格的规范
+### 3. RustBelt 风格的规范 {#3-rustbelt-风格的规范}
 
 ```text
 
@@ -262,7 +262,7 @@ End BoundedCounter.
 
 ---
 
-## 反例与边界
+## 反例与边界 {#反例与边界}
 
 | 场景 | 工具 | 限制 |
 
@@ -282,7 +282,7 @@ End BoundedCounter.
 
 ---
 
-## 权威来源对照表
+## 权威来源对照表 {#权威来源对照表}
 
 | 工具 | 论文/文档 | 处理方式 | 模块/私有性映射 |
 
@@ -302,7 +302,7 @@ End BoundedCounter.
 
 ---
 
-## 学术/社区来源参考
+## 学术/社区来源参考 {#学术社区来源参考}
 
 > **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 > **来源**: [Aeneas](https://aeneas-verification.github.io/)

@@ -1,4 +1,4 @@
-# L3机器可检查证明实施指南
+# L3机器可检查证明实施指南 {#l3机器可检查证明实施指南}
 
 > **概念族**: 形式化方法
 
@@ -20,7 +20,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -29,12 +29,12 @@
 >
 
 - [L3机器可检查证明实施指南](#l3机器可检查证明实施指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、L3证明概述](#一l3证明概述)
     - [1.1 证明深度层级](#11-证明深度层级)
     - [1.2 L3证明目标](#12-l3证明目标)
   - [二、工具链选择](#二工具链选择)
-    - [2.1 推荐方案: Coq + Iris](#21-推荐方案-coq--iris)
+    - [2.1 推荐方案: Coq + Iris](#21-推荐方案-coq-iris)
     - [2.2 环境搭建](#22-环境搭建)
   - [三、T-OW2所有权唯一性L3证明](#三t-ow2所有权唯一性l3证明)
     - [3.1 定理回顾](#31-定理回顾)
@@ -55,7 +55,7 @@
     - [7.1 Coq文件编译验证](#71-coq文件编译验证)
     - [7.2 证明完整性检查](#72-证明完整性检查)
   - [八、里程碑](#八里程碑)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -63,13 +63,13 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 一、L3证明概述
+## 一、L3证明概述 {#一l3证明概述}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1.1 证明深度层级
+### 1.1 证明深度层级 {#11-证明深度层级}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -89,7 +89,7 @@
 
 | L4 | 自动化生成 | 从代码自动生成证明 | 是 | 未来 |
 
-### 1.2 L3证明目标
+### 1.2 L3证明目标 {#12-l3证明目标}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -107,13 +107,13 @@
 
 ---
 
-## 二、工具链选择
+## 二、工具链选择 {#二工具链选择}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 推荐方案: Coq + Iris
+### 2.1 推荐方案: Coq + Iris {#21-推荐方案-coq-iris}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -129,7 +129,7 @@
 
 3. 有丰富的Rust相关证明基础设施
 
-### 2.2 环境搭建
+### 2.2 环境搭建 {#22-环境搭建}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -139,7 +139,7 @@
 
 ```bash
 
-# 使用OPAM安装Coq
+# 使用OPAM安装Coq {#使用opam安装coq}
 
 
 
@@ -153,7 +153,7 @@ opam install coq.8.18.0
 
 
 
-# 安装Iris
+# 安装Iris {#安装iris}
 
 opam repo add coq-released https://coq.inria.fr/opam/released
 
@@ -163,7 +163,7 @@ opam install coq-iris
 
 
 
-# 验证安装
+# 验证安装 {#验证安装}
 
 coqtop --version
 
@@ -171,13 +171,13 @@ coqtop --version
 
 ---
 
-## 三、T-OW2所有权唯一性L3证明
+## 三、T-OW2所有权唯一性L3证明 {#三t-ow2所有权唯一性l3证明}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 3.1 定理回顾
+### 3.1 定理回顾 {#31-定理回顾}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -187,7 +187,7 @@ coqtop --version
 
 **T-OW2 (所有权唯一性)**: 对于任何值v，在任意时刻，最多存在一个变量x使得所有权状态为Owned且绑定值为v。
 
-### 3.2 Iris中的状态表示
+### 3.2 Iris中的状态表示 {#32-iris中的状态表示}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -251,7 +251,7 @@ Definition ownership_unique (σ : State) : Prop :=
 
 ```
 
-### 3.3 状态转移规则
+### 3.3 状态转移规则 {#33-状态转移规则}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -321,7 +321,7 @@ Inductive reachable : State -> Prop :=
 
 ```
 
-### 3.4 主定理证明骨架
+### 3.4 主定理证明骨架 {#34-主定理证明骨架}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -389,19 +389,19 @@ Admitted.
 
 ---
 
-## 四、T-BR1数据竞争自由L3证明
+## 四、T-BR1数据竞争自由L3证明 {#四t-br1数据竞争自由l3证明}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 4.1 定理回顾
+### 4.1 定理回顾 {#41-定理回顾}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **T-BR1 (数据竞争自由)**: 借用检查器保证程序是数据竞争自由的。
 
-### 4.2 并发模型形式化
+### 4.2 并发模型形式化 {#42-并发模型形式化}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -453,7 +453,7 @@ Definition data_race_free (accesses : list (nat * Loc * Access)) : Prop :=
 
 ```
 
-### 4.3 主定理证明骨架
+### 4.3 主定理证明骨架 {#43-主定理证明骨架}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -501,13 +501,13 @@ Admitted.
 
 ---
 
-## 五、T-TY3类型安全L3证明
+## 五、T-TY3类型安全L3证明 {#五t-ty3类型安全l3证明}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 5.1 类型系统形式化
+### 5.1 类型系统形式化 {#51-类型系统形式化}
 
 >
 
@@ -585,7 +585,7 @@ where "Gamma '|-' e ':' tau" := (typed Gamma e tau).
 
 ```
 
-### 5.2 进展性定理
+### 5.2 进展性定理 {#52-进展性定理}
 
 >
 
@@ -647,13 +647,13 @@ Admitted.
 
 ---
 
-## 六、与Aeneas工具链对接
+## 六、与Aeneas工具链对接 {#六与aeneas工具链对接}
 
 >
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 6.1 安装Aeneas
+### 6.1 安装Aeneas {#61-安装aeneas}
 
 >
 
@@ -661,7 +661,7 @@ Admitted.
 
 ```bash
 
-# 克隆仓库
+# 克隆仓库 {#克隆仓库}
 
 git clone https://github.com/AeneasVerif/aeneas.git
 
@@ -669,19 +669,19 @@ cd aeneas
 
 
 
-# 设置Charon
+# 设置Charon {#设置charon}
 
 make setup-charon
 
 
 
-# 构建
+# 构建 {#构建}
 
 make
 
 ```
 
-### 6.2 Rust到Lean翻译示例
+### 6.2 Rust到Lean翻译示例 {#62-rust到lean翻译示例}
 
 >
 
@@ -689,7 +689,7 @@ make
 
 ```bash
 
-# Rust代码
+# Rust代码 {#rust代码}
 
 cat > example.rs << 'EOF'
 
@@ -703,13 +703,13 @@ EOF
 
 
 
-# 生成LLBC
+# 生成LLBC {#生成llbc}
 
 charon cargo --preset=aeneas
 
 
 
-# 翻译成Lean
+# 翻译成Lean {#翻译成lean}
 
 ./bin/aeneas -backend lean example.llbc
 
@@ -717,13 +717,13 @@ charon cargo --preset=aeneas
 
 ---
 
-## 七、验证与测试
+## 七、验证与测试 {#七验证与测试}
 
 >
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 7.1 Coq文件编译验证
+### 7.1 Coq文件编译验证 {#71-coq文件编译验证}
 
 >
 
@@ -739,7 +739,7 @@ make
 
 ```
 
-### 7.2 证明完整性检查
+### 7.2 证明完整性检查 {#72-证明完整性检查}
 
 >
 
@@ -747,15 +747,15 @@ make
 
 ```bash
 
-# 检查Admitted数量
+# 检查Admitted数量 {#检查admitted数量}
 
 grep -r "Admitted" *.v | wc -l
 
-# 目标: 0
+# 目标: 0 {#目标-0}
 
 
 
-# 检查Qed数量
+# 检查Qed数量 {#检查qed数量}
 
 grep -r "Qed" *.v | wc -l
 
@@ -763,7 +763,7 @@ grep -r "Qed" *.v | wc -l
 
 ---
 
-## 八、里程碑
+## 八、里程碑 {#八里程碑}
 
 >
 
@@ -795,7 +795,7 @@ grep -r "Qed" *.v | wc -l
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -805,7 +805,7 @@ grep -r "Qed" *.v | wc -l
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -813,7 +813,7 @@ grep -r "Qed" *.v | wc -l
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -827,7 +827,7 @@ grep -r "Qed" *.v | wc -l
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -837,7 +837,7 @@ grep -r "Qed" *.v | wc -l
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -869,7 +869,7 @@ grep -r "Qed" *.v | wc -l
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -881,7 +881,7 @@ grep -r "Qed" *.v | wc -l
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 

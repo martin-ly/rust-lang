@@ -1,4 +1,4 @@
-# Rust 与 C++/Go/Python 跨语言对比
+# Rust 与 C++/Go/Python 跨语言对比 {#rust-与-cgopython-跨语言对比}
 
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)
@@ -17,7 +17,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -37,14 +37,14 @@
     - [类型系统形式化对比](#类型系统形式化对比)
   - [生态与工具链](#生态与工具链)
     - [工具链代码对比示例](#工具链代码对比示例)
-  - [📊 综合对比矩阵](#-综合对比矩阵)
-  - [🔗 形式化文档链接](#-形式化文档链接)
+  - [📊 综合对比矩阵](#综合对比矩阵)
+  - [🔗 形式化文档链接](#形式化文档链接)
     - [Rust 形式化基础](#rust-形式化基础)
-    - [权威来源索引](#权威来源索引)
+    - [权威来源索引](#权威来源索引-1)
       - [Rust（一级来源）](#rust一级来源)
       - [C++（一级/二级来源）](#c一级二级来源)
       - [Go（一级来源）](#go一级来源)
-      - [Haskell（二级来源，Trait / 类型系统对标）](#haskell二级来源trait--类型系统对标)
+      - [Haskell（二级来源，Trait / 类型系统对标）](#haskell二级来源trait-类型系统对标)
       - [Python（三级来源）](#python三级来源)
   - [相关文档](#相关文档)
   - [Rust 1.95+ 更新](#rust-195-更新)
@@ -52,7 +52,7 @@
 
 ---
 
-## 内存管理
+## 内存管理 {#内存管理}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -62,7 +62,7 @@
 | 零成本 | 是 | 可选 | 否 | 否 |
 | 学习曲线 | 高 | 高 | 低 | 低 |
 
-### 内存管理代码对比示例
+### 内存管理代码对比示例 {#内存管理代码对比示例}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -116,7 +116,7 @@ func main() {
 ```
 
 ```python
-# Python: GC 自动管理
+# Python: GC 自动管理 {#python-gc-自动管理}
 def process_string(s):
     print(s)
 
@@ -125,7 +125,7 @@ process_string(s)  # 引用传递
 print(s)           # 仍然可用
 ```
 
-### 内存管理形式化对比
+### 内存管理形式化对比 {#内存管理形式化对比}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -148,7 +148,7 @@ print(s)           # 仍然可用
 
 ---
 
-## 并发模型
+## 并发模型 {#并发模型}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -158,7 +158,7 @@ print(s)           # 仍然可用
 | 数据竞争 | 编译期禁止 | 需手动同步 | 通道优先 | GIL 限制 |
 | 推荐 | 所有权 + Send/Sync | 各显其能 | CSP/goroutine | 多进程/asyncio |
 
-### 并发代码对比示例
+### 并发代码对比示例 {#并发代码对比示例}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -235,7 +235,7 @@ go func() {
 ```
 
 ```python
-# Python: GIL 限制真正的并行
+# Python: GIL 限制真正的并行 {#python-gil-限制真正的并行}
 import threading
 
 counter = 0
@@ -255,7 +255,7 @@ t2.join()
 print(f"结果: {counter}")
 ```
 
-### 并发模型形式化对比
+### 并发模型形式化对比 {#并发模型形式化对比}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -279,7 +279,7 @@ print(f"结果: {counter}")
 
 ---
 
-## 错误处理
+## 错误处理 {#错误处理}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -288,7 +288,7 @@ print(f"结果: {counter}")
 | 必须处理 | 是（编译期） | 否 | 习惯性 | 否 |
 | 传播 | ? 操作符 | throw/catch | if err | raise |
 
-### 错误处理代码对比示例
+### 错误处理代码对比示例 {#错误处理代码对比示例}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -377,7 +377,7 @@ func main() {
 ```
 
 ```python
-# Python: 异常处理
+# Python: 异常处理 {#python-异常处理}
 def read_and_parse(filename):
     try:
         with open(filename, 'r') as f:
@@ -396,7 +396,7 @@ except Exception as e:
     print(f"错误: {e}")
 ```
 
-### 错误处理形式化对比
+### 错误处理形式化对比 {#错误处理形式化对比}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -419,7 +419,7 @@ except Exception as e:
 
 ---
 
-## 类型系统
+## 类型系统 {#类型系统}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -428,7 +428,7 @@ except Exception as e:
 | 泛型 | 单态化 | 模板 | 1.18+ 泛型 | 不适用 |
 | 推断 | 强 | 有 | 有 | 无 |
 
-### 泛型代码对比示例
+### 泛型代码对比示例 {#泛型代码对比示例}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -480,15 +480,15 @@ func max[T constraints.Ordered](a, b T) T {
 <!-- markdown-link-check-enable -->
 
 ```python
-# Python: 动态类型，无泛型
+# Python: 动态类型，无泛型 {#python-动态类型无泛型}
 def max_val(a, b):
     return a if a > b else b
 
-# 使用
+# 使用 {#使用}
 result = max_val(10, 20)
 ```
 
-### 类型系统形式化对比
+### 类型系统形式化对比 {#类型系统形式化对比}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -511,7 +511,7 @@ result = max_val(10, 20)
 
 ---
 
-## 生态与工具链
+## 生态与工具链 {#生态与工具链}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -520,14 +520,14 @@ result = max_val(10, 20)
 | 构建 | cargo build | CMake/MSBuild | go build | 无统一 |
 | 文档 | rustdoc | Doxygen | godoc | Sphinx |
 
-### 工具链代码对比示例
+### 工具链代码对比示例 {#工具链代码对比示例}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 **场景：创建一个新项目并添加依赖**:
 
 ```bash
-# Rust: 使用 Cargo
+# Rust: 使用 Cargo {#rust-使用-cargo}
 $ cargo new my_project
 $ cd my_project
 $ cargo add serde tokio
@@ -537,16 +537,16 @@ $ cargo doc
 ```
 
 ```bash
-# C++: 使用 CMake + Conan
+# C++: 使用 CMake + Conan {#c-使用-cmake-conan}
 $ mkdir my_project && cd my_project
 $ conan new cmake_lib -d name=my_project -d version=1.0
-# 编辑 CMakeLists.txt 和 conanfile.txt 添加依赖
+# 编辑 CMakeLists.txt 和 conanfile.txt 添加依赖 {#编辑-cmakeliststxt-和-conanfiletxt-添加依赖}
 $ conan install . --build=missing
 $ cmake --build build
 ```
 
 ```bash
-# Go: 使用 go modules
+# Go: 使用 go modules {#go-使用-go-modules}
 $ mkdir my_project && cd my_project
 $ go mod init my_project
 $ go get github.com/gin-gonic/gin
@@ -555,7 +555,7 @@ $ go test ./...
 ```
 
 ```bash
-# Python: 使用 pip + venv
+# Python: 使用 pip + venv {#python-使用-pip-venv}
 $ mkdir my_project && cd my_project
 $ python -m venv venv
 $ source venv/bin/activate
@@ -565,7 +565,7 @@ $ python -m pytest
 
 ---
 
-## 📊 综合对比矩阵
+## 📊 综合对比矩阵 {#综合对比矩阵}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -581,11 +581,11 @@ $ python -m pytest
 
 ---
 
-## 🔗 形式化文档链接
+## 🔗 形式化文档链接 {#形式化文档链接}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### Rust 形式化基础
+### Rust 形式化基础 {#rust-形式化基础}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -598,11 +598,11 @@ $ python -m pytest
 | 异步 | [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) | T6.1-T6.3 |
 | 类型系统 | [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | T1-T3 类型安全 |
 
-### 权威来源索引
+### 权威来源索引 {#权威来源索引-1}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-#### Rust（一级来源）
+#### Rust（一级来源） {#rust一级来源}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -612,7 +612,7 @@ $ python -m pytest
 - [RustBelt: POPL 2018](https://plv.mpi-sws.org/rustbelt/) —— 内存安全的机器验证证明
 - [Ralf Jung, "The Meaning of Memory Safety", PLArch 2021](https://www.ralfj.de/blog/2021/04/14/memory-safety.html) —— 内存安全精确定义
 
-#### C++（一级/二级来源）
+#### C++（一级/二级来源） {#c一级二级来源}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -620,7 +620,7 @@ $ python -m pytest
 - [cppreference.com](https://en.cppreference.com/) —— 社区维护的标准参考
 - [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines.html) —— Bjarne Stroustrup 主导的最佳实践
 
-#### Go（一级来源）
+#### Go（一级来源） {#go一级来源}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -628,7 +628,7 @@ $ python -m pytest
 - [The Go Memory Model](https://go.dev/ref/mem) —— 内存模型与并发语义
 - [Effective Go](https://go.dev/doc/effective_go) —— 官方惯用写法指南
 
-#### Haskell（二级来源，Trait / 类型系统对标）
+#### Haskell（二级来源，Trait / 类型系统对标） {#haskell二级来源trait-类型系统对标}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -636,14 +636,14 @@ $ python -m pytest
 - [Typeclassopedia](https://wiki.haskell.org/Typeclassopedia) —— Type Classes 与 Rust Trait 的理论同源
 - [Wadler, "Theorems for Free!", FPCA 1989](https://homepages.inf.ed.ac.uk/wadler/papers/free/theorems_for_free.pdf) —— 参数多态的形式化性质
 
-#### Python（三级来源）
+#### Python（三级来源） {#python三级来源}
 
 - [Python Language Reference](https://docs.python.org/3/reference/) —— 语言参考
 - [Python Data Model](https://docs.python.org/3/reference/datamodel.html) —— 对象模型与引用语义
 
 ---
 
-## 相关文档
+## 相关文档 {#相关文档}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -654,7 +654,7 @@ $ python -m pytest
 
 ---
 
-## Rust 1.95+ 更新
+## Rust 1.95+ 更新 {#rust-195-更新}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 > **适用版本**: Rust 1.96.0+
@@ -669,7 +669,7 @@ $ python -m pytest
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引-1}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**

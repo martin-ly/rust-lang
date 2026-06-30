@@ -1,4 +1,4 @@
-# Rust Research Notes: 全面系统梳理与100%完成计划
+# Rust Research Notes: 全面系统梳理与100%完成计划 {#rust-research-notes-全面系统梳理与100完成计划}
 
 > **概念族**: 综合系统化框架
 
@@ -22,7 +22,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -31,7 +31,7 @@
 >
 
 - [Rust Research Notes: 全面系统梳理与100%完成计划](#rust-research-notes-全面系统梳理与100完成计划)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、执行摘要](#一执行摘要)
     - [1.1 项目背景](#11-项目背景)
     - [1.2 当前完成度评估](#12-当前完成度评估)
@@ -98,7 +98,7 @@
     - [9.2 术语表](#92-术语表)
     - [9.3 变更日志](#93-变更日志)
   - [思维导图：本计划全貌](#思维导图本计划全貌)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -106,13 +106,13 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 一、执行摘要
+## 一、执行摘要 {#一执行摘要}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1.1 项目背景
+### 1.1 项目背景 {#11-项目背景}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -132,7 +132,7 @@
 
 5. **国际对标缺口**: 与 RustBelt、Aeneas 等权威成果的对接不足
 
-### 1.2 当前完成度评估
+### 1.2 当前完成度评估 {#12-当前完成度评估}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -160,7 +160,7 @@
 
 | **反例系统** | 65% | 100% | 35% |
 
-### 1.3 核心结论
+### 1.3 核心结论 {#13-核心结论}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -176,13 +176,13 @@
 
 ---
 
-## 二、现状全面分析
+## 二、现状全面分析 {#二现状全面分析}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 文档体系结构
+### 2.1 文档体系结构 {#21-文档体系结构}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -266,7 +266,7 @@ research_notes/
 
 ```
 
-### 2.2 形式化论证覆盖度评估
+### 2.2 形式化论证覆盖度评估 {#22-形式化论证覆盖度评估}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -274,7 +274,7 @@ research_notes/
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-#### 2.2.1 formal_methods 覆盖度
+#### 2.2.1 formal_methods 覆盖度 {#221-formal_methods-覆盖度}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -306,7 +306,7 @@ research_notes/
 
 - ❌ **缺失**: L3机器可检查证明、Coq/Iris实现
 
-#### 2.2.2 type_theory 覆盖度
+#### 2.2.2 type_theory 覆盖度 {#222-type_theory-覆盖度}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -336,7 +336,7 @@ research_notes/
 
 - ❌ **范畴论对应**: 指称语义的范畴论解释未形式化
 
-#### 2.2.3 software_design_theory 覆盖度
+#### 2.2.3 software_design_theory 覆盖度 {#223-software_design_theory-覆盖度}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -358,11 +358,11 @@ research_notes/
 
 | 组合工程 | CE-T1-T3 | 实例推导、有效性证明 |
 
-### 2.3 思维表征覆盖度评估
+### 2.3 思维表征覆盖度评估 {#23-思维表征覆盖度评估}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
-#### 2.3.1 思维导图覆盖
+#### 2.3.1 思维导图覆盖 {#231-思维导图覆盖}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -382,7 +382,7 @@ research_notes/
 
 | 分布式/工作流 | ⚠️ | ❌ | ❌ | 需新建 |
 
-#### 2.3.2 多维矩阵覆盖
+#### 2.3.2 多维矩阵覆盖 {#232-多维矩阵覆盖}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -402,7 +402,7 @@ research_notes/
 
 | Trait系统特性矩阵 | ⚠️ | 完整覆盖 |
 
-#### 2.3.3 证明树与决策树覆盖
+#### 2.3.3 证明树与决策树覆盖 {#233-证明树与决策树覆盖}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -422,11 +422,11 @@ research_notes/
 
 | 分布式架构选型决策树 | 0 | ❌ 需新建 |
 
-### 2.4 论证缺口详细识别
+### 2.4 论证缺口详细识别 {#24-论证缺口详细识别}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
-#### 2.4.1 定义层缺口 (D1/D2)
+#### 2.4.1 定义层缺口 (D1/D2) {#241-定义层缺口-d1d2}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -442,7 +442,7 @@ research_notes/
 
 | D2-01 | 组合法则依赖链显式化 | P1 | ⚠️ |
 
-#### 2.4.2 关系层缺口 (R1/R2)
+#### 2.4.2 关系层缺口 (R1/R2) {#242-关系层缺口-r1r2}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -456,7 +456,7 @@ research_notes/
 
 | R2-01 | 设计模式边界反例系统 | P1 | ⚠️ |
 
-#### 2.4.3 证明层缺口 (P1/P2)
+#### 2.4.3 证明层缺口 (P1/P2) {#243-证明层缺口-p1p2}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -472,13 +472,13 @@ research_notes/
 
 ---
 
-## 三、国际权威对标分析
+## 三、国际权威对标分析 {#三国际权威对标分析}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 3.1 RustBelt 对标
+### 3.1 RustBelt 对标 {#31-rustbelt-对标}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -510,7 +510,7 @@ research_notes/
 
 4. 识别可复用的证明模式
 
-### 3.2 Aeneas 对标
+### 3.2 Aeneas 对标 {#32-aeneas-对标}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -540,7 +540,7 @@ research_notes/
 
 4. 建立自动化对接流程
 
-### 3.3 其他验证工具对标
+### 3.3 其他验证工具对标 {#33-其他验证工具对标}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -560,13 +560,13 @@ research_notes/
 
 ---
 
-## 四、缺口分类与优先级
+## 四、缺口分类与优先级 {#四缺口分类与优先级}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 4.1 缺口四维分类体系
+### 4.1 缺口四维分类体系 {#41-缺口四维分类体系}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -616,7 +616,7 @@ research_notes/
 
 ```
 
-### 4.2 优先级矩阵
+### 4.2 优先级矩阵 {#42-优先级矩阵}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -646,13 +646,13 @@ research_notes/
 
 ---
 
-## 五、100%完成路线图
+## 五、100%完成路线图 {#五100完成路线图}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 5.1 阶段规划总览
+### 5.1 阶段规划总览 {#51-阶段规划总览}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -698,11 +698,11 @@ Phase 4 (持续): 维护与扩展
 
 ```
 
-### 5.2 详细任务分解
+### 5.2 详细任务分解 {#52-详细任务分解}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-#### Phase 1: 基础补全阶段 (Week 1-8)
+#### Phase 1: 基础补全阶段 (Week 1-8) {#phase-1-基础补全阶段-week-1-8}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -744,7 +744,7 @@ Phase 4 (持续): 维护与扩展
 
 | P1-T10 | 反例系统标准化 | 统一反例格式与索引 | 10h |
 
-#### Phase 2: 深度证明阶段 (Week 9-16)
+#### Phase 2: 深度证明阶段 (Week 9-16) {#phase-2-深度证明阶段-week-9-16}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -786,7 +786,7 @@ Phase 4 (持续): 维护与扩展
 
 | P2-T10 | 工作流引擎形式化 | 表达力定理 | 15h |
 
-#### Phase 3: 工具对接阶段 (Week 17-24)
+#### Phase 3: 工具对接阶段 (Week 17-24) {#phase-3-工具对接阶段-week-17-24}
 
 **Week 17-20: Aeneas工具链对接**:
 
@@ -816,17 +816,17 @@ Phase 4 (持续): 维护与扩展
 
 ---
 
-## 六、思维表征完善计划
+## 六、思维表征完善计划 {#六思维表征完善计划}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 6.1 思维导图体系
+### 6.1 思维导图体系 {#61-思维导图体系}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-#### 6.1.1 全局思维导图
+#### 6.1.1 全局思维导图 {#611-全局思维导图}
 
 ```text
 
@@ -854,7 +854,7 @@ Phase 4 (持续): 维护与扩展
 
 ```
 
-#### 6.1.2 概念层级思维导图（需新建/完善）
+#### 6.1.2 概念层级思维导图（需新建/完善） {#612-概念层级思维导图需新建完善}
 
 | 导图名称 | 当前状态 | 行动计划 | 优先级 |
 
@@ -872,13 +872,13 @@ Phase 4 (持续): 维护与扩展
 
 | 证明技术概念族谱 | ❌ | 新建 | P2 |
 
-### 6.2 多维矩阵体系
+### 6.2 多维矩阵体系 {#62-多维矩阵体系}
 
 >
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-#### 6.2.1 核心矩阵（已存在，需更新）
+#### 6.2.1 核心矩阵（已存在，需更新） {#621-核心矩阵已存在需更新}
 
 | 矩阵名称 | 当前状态 | 更新内容 | 优先级 |
 
@@ -890,7 +890,7 @@ Phase 4 (持续): 维护与扩展
 
 | 证明完成度 vs 论证缺口 | ✅ | 细化到具体定理 | P2 |
 
-#### 6.2.2 扩展矩阵（需新建）
+#### 6.2.2 扩展矩阵（需新建） {#622-扩展矩阵需新建}
 
 | 矩阵名称 | 描述 | 优先级 |
 
@@ -904,13 +904,13 @@ Phase 4 (持续): 维护与扩展
 
 | 验证工具对比矩阵 | Kani/Prusti/Creusot/... | P2 |
 
-### 6.3 证明树与决策树
+### 6.3 证明树与决策树 {#63-证明树与决策树}
 
 >
 
 > **[来源: [crates.io](https://crates.io/)]**
 
-#### 6.3.1 证明树完善
+#### 6.3.1 证明树完善 {#631-证明树完善}
 
 ```text
 
@@ -946,7 +946,7 @@ Phase 4 (持续): 维护与扩展
 
 3. 添加证明复杂度评估
 
-#### 6.3.2 决策树完善
+#### 6.3.2 决策树完善 {#632-决策树完善}
 
 | 决策树名称 | 当前状态 | 完善内容 | 优先级 |
 
@@ -964,13 +964,13 @@ Phase 4 (持续): 维护与扩展
 
 | 验证工具选型决策树 | ❌ | 新建 | P2 |
 
-### 6.4 应用树图
+### 6.4 应用树图 {#64-应用树图}
 
 >
 
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-#### 6.4.1 应用场景映射树（需新建）
+#### 6.4.1 应用场景映射树（需新建） {#641-应用场景映射树需新建}
 
 ```text
 
@@ -1022,19 +1022,19 @@ Rust应用场景
 
 ---
 
-## 七、可持续推进机制
+## 七、可持续推进机制 {#七可持续推进机制}
 
 >
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 7.1 质量保证机制
+### 7.1 质量保证机制 {#71-质量保证机制}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-#### 7.1.1 代码/证明审查流程
+#### 7.1.1 代码/证明审查流程 {#711-代码证明审查流程}
 
 ```text
 
@@ -1060,7 +1060,7 @@ Rust应用场景
 
 ```
 
-#### 7.1.2 定期检查清单
+#### 7.1.2 定期检查清单 {#712-定期检查清单}
 
 **每任务检查清单**:
 
@@ -1102,13 +1102,13 @@ Rust应用场景
 
 - [ ] 社区反馈处理
 
-### 7.2 版本演进机制
+### 7.2 版本演进机制 {#72-版本演进机制}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-#### 7.2.1 Rust版本跟进流程
+#### 7.2.1 Rust版本跟进流程 {#721-rust版本跟进流程}
 
 ```text
 
@@ -1168,7 +1168,7 @@ Rust新版本发布
 
 ```
 
-#### 7.2.2 文档维护责任矩阵
+#### 7.2.2 文档维护责任矩阵 {#722-文档维护责任矩阵}
 
 | 文档领域 | 主要维护者 | 备份维护者 | 更新频率 |
 
@@ -1184,13 +1184,13 @@ Rust新版本发布
 
 | 框架文档 | TBD | TBD | 按需 |
 
-### 7.3 社区协作机制
+### 7.3 社区协作机制 {#73-社区协作机制}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-#### 7.3.1 贡献者引导流程
+#### 7.3.1 贡献者引导流程 {#731-贡献者引导流程}
 
 ```text
 
@@ -1230,7 +1230,7 @@ Rust新版本发布
 
 ```
 
-#### 7.3.2 知识分享机制
+#### 7.3.2 知识分享机制 {#732-知识分享机制}
 
 - **月度研究笔记**: 每月发布研究进展
 
@@ -1240,19 +1240,19 @@ Rust新版本发布
 
 ---
 
-## 八、验收标准与验证方法
+## 八、验收标准与验证方法 {#八验收标准与验证方法}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 8.1 100%完成验收标准
+### 8.1 100%完成验收标准 {#81-100完成验收标准}
 
 >
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-#### 8.1.1 形式化论证验收标准
+#### 8.1.1 形式化论证验收标准 {#811-形式化论证验收标准}
 
 | 维度 | 验收标准 | 验证方法 |
 
@@ -1268,7 +1268,7 @@ Rust新版本发布
 
 | **机器层** | T-OW2/T-BR1/T-TY3有L3证明 | Coq编译通过 |
 
-#### 8.1.2 思维表征验收标准
+#### 8.1.2 思维表征验收标准 {#812-思维表征验收标准}
 
 | 维度 | 验收标准 | 验证方法 |
 
@@ -1284,7 +1284,7 @@ Rust新版本发布
 
 | **反例索引** | 所有边界有反例 | 自动检查 + 人工审查 |
 
-#### 8.1.3 工具对接验收标准
+#### 8.1.3 工具对接验收标准 {#813-工具对接验收标准}
 
 | 维度 | 验收标准 | 验证方法 |
 
@@ -1296,17 +1296,17 @@ Rust新版本发布
 
 | **国际对标** | 与RustBelt主要定理有映射 | 专家审查 |
 
-### 8.2 验证自动化
+### 8.2 验证自动化 {#82-验证自动化}
 
 >
 
 > **[来源: [crates.io](https://crates.io/)]**
 
-#### 8.2.1 持续集成检查
+#### 8.2.1 持续集成检查 {#821-持续集成检查}
 
 ```yaml
 
-# 建议的CI配置
+# 建议的CI配置 {#建议的ci配置}
 
 verification_pipeline:
 
@@ -1340,7 +1340,7 @@ verification_pipeline:
 
 ```
 
-#### 8.2.2 质量仪表板
+#### 8.2.2 质量仪表板 {#822-质量仪表板}
 
 建议建立质量仪表板，实时显示：
 
@@ -1356,13 +1356,13 @@ verification_pipeline:
 
 ---
 
-## 九、附录
+## 九、附录 {#九附录}
 
 >
 
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 9.1 关键资源索引
+### 9.1 关键资源索引 {#91-关键资源索引}
 
 >
 
@@ -1382,7 +1382,7 @@ verification_pipeline:
 
 | Tree Borrows | <https://plv.mpi-sws.org/rustbelt/stacked-borrows/> | 借用模型最新研究 |
 
-### 9.2 术语表
+### 9.2 术语表 {#92-术语表}
 
 >
 
@@ -1408,7 +1408,7 @@ verification_pipeline:
 
 | **Corollary** | 推论：由定理直接推导 |
 
-### 9.3 变更日志
+### 9.3 变更日志 {#93-变更日志}
 
 >
 
@@ -1430,7 +1430,7 @@ verification_pipeline:
 
 ---
 
-## 思维导图：本计划全貌
+## 思维导图：本计划全貌 {#思维导图本计划全貌}
 
 >
 
@@ -1476,7 +1476,7 @@ verification_pipeline:
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -1486,7 +1486,7 @@ verification_pipeline:
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -1494,7 +1494,7 @@ verification_pipeline:
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -1508,7 +1508,7 @@ verification_pipeline:
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -1518,7 +1518,7 @@ verification_pipeline:
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -1550,7 +1550,7 @@ verification_pipeline:
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -1562,7 +1562,7 @@ verification_pipeline:
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

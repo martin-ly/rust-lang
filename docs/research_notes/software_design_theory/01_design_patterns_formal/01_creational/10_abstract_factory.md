@@ -1,4 +1,4 @@
-# Abstract Factory 形式化分析
+# Abstract Factory 形式化分析 {#abstract-factory-形式化分析}
 
 > **概念族**: 软件设计 / 设计模式
 
@@ -24,14 +24,14 @@
 
 > **权威来源**: [Rust Design Patterns – Creational](https://rust-unofficial.github.io/patterns/patterns/creational/index.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
-## 📊 目录 {#-目录}
+## 📊 目录 {#目录}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Abstract Factory 形式化分析](#abstract-factory-形式化分析)
-  - [📊 目录 {#-目录}](#-目录--目录)
+  - [📊 目录](#目录)
   - [权威来源对照](#权威来源对照)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Abstract Factory 结构）](#def-11abstract-factory-结构)
@@ -42,7 +42,7 @@
     - [推论 AF-C1（纯 Safe 抽象工厂）](#推论-af-c1纯-safe-抽象工厂)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
-  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196--edition-2024-代码示例更新)
+  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196-edition-2024-代码示例更新)
     - [Edition 2024 关键兼容点](#edition-2024-关键兼容点)
   - [Rust 所有权、借用、生命周期与 trait 系统约束分析](#rust-所有权借用生命周期与-trait-系统约束分析)
     - [所有权约束](#所有权约束)
@@ -73,7 +73,7 @@
   - [思维导图](#思维导图)
   - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -83,7 +83,7 @@
 
 ---
 
-## 权威来源对照
+## 权威来源对照 {#权威来源对照}
 
 >
 
@@ -109,13 +109,13 @@
 
 ---
 
-## 形式化定义
+## 形式化定义 {#形式化定义}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Def 1.1（Abstract Factory 结构）
+### Def 1.1（Abstract Factory 结构） {#def-11abstract-factory-结构}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -139,7 +139,7 @@ $$\mathcal{AF} = \langle \mathcal{F}, \{T_i\}_{i=1}^n, \{\mathit{create}_i: \mat
 
 ---
 
-### Axiom AF1（产品族一致性公理）
+### Axiom AF1（产品族一致性公理） {#axiom-af1产品族一致性公理}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -151,7 +151,7 @@ $$\forall f: \mathcal{F},\, \mathit{create}_1(f) : T_1 \land \mathit{create}_2(f
 
 同一工厂创建的产品族类型一致；不同工厂可产生不同实现族。
 
-### Axiom AF2（所有权转移公理）
+### Axiom AF2（所有权转移公理） {#axiom-af2所有权转移公理}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -165,7 +165,7 @@ $$\Omega(\mathit{create}_i(f)) \cap \Omega(f) = \emptyset$$
 
 ---
 
-### 定理 AF-T1（关联类型安全定理）
+### 定理 AF-T1（关联类型安全定理） {#定理-af-t1关联类型安全定理}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -217,7 +217,7 @@ $$\Omega(\mathit{create}_i(f)) \cap \Omega(f) = \emptyset$$
 
 ---
 
-### 定理 AF-T2（产品族完整性定理）
+### 定理 AF-T2（产品族完整性定理） {#定理-af-t2产品族完整性定理}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -249,7 +249,7 @@ $$\Omega(\mathit{create}_i(f)) \cap \Omega(f) = \emptyset$$
 
 ---
 
-### 推论 AF-C1（纯 Safe 抽象工厂）
+### 推论 AF-C1（纯 Safe 抽象工厂） {#推论-af-c1纯-safe-抽象工厂}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -273,7 +273,7 @@ Abstract Factory 为纯 Safe；trait 多态工厂、产品所有权转移，无 
 
 ---
 
-### 概念定义-属性关系-解释论证 层次汇总
+### 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -293,7 +293,7 @@ Abstract Factory 为纯 Safe；trait 多态工厂、产品所有权转移，无 
 
 ---
 
-## Rust 实现与代码示例
+## Rust 实现与代码示例 {#rust-实现与代码示例}
 
 >
 
@@ -361,7 +361,7 @@ impl GuiFactory for WinFactory {
 
 ---
 
-## Rust 1.96+ / Edition 2024 代码示例更新
+## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
 
 >
 
@@ -441,7 +441,7 @@ fn main() {
 
 ```
 
-### Edition 2024 关键兼容点
+### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
 
@@ -457,25 +457,25 @@ fn main() {
 
 ---
 
-## Rust 所有权、借用、生命周期与 trait 系统约束分析
+## Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}
 
 >
 
 > **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
 
-### 所有权约束
+### 所有权约束 {#所有权约束}
 
 工厂方法通常接收 `&self`，产品以拥有值形式返回，所有权从工厂转移至调用者；工厂本身保持存活，供后续创建。
 
-### 借用与生命周期约束
+### 借用与生命周期约束 {#借用与生命周期约束}
 
 由于 `&self` 仅创建不可变借用，工厂可在多个调用间共享；返回的产品不携带工厂生命周期，避免悬垂引用。
 
-### trait 系统约束
+### trait 系统约束 {#trait-系统约束}
 
 关联类型 `type B: Button` 在编译期固定产品族；`impl Trait` 或泛型参数 `F: GuiFactory` 提供零成本抽象。
 
-### 与 Rust 类型系统的综合联系
+### 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系}
 
 | Rust 机制 | 本模式使用方式 | 保证 |
 
@@ -493,13 +493,13 @@ fn main() {
 
 ---
 
-## 完整证明
+## 完整证明 {#完整证明}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 形式化论证链
+### 形式化论证链 {#形式化论证链}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -533,7 +533,7 @@ ownership_model T2
 
 ```
 
-### 与 Rust 类型系统的联系
+### 与 Rust 类型系统的联系 {#与-rust-类型系统的联系}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -549,7 +549,7 @@ ownership_model T2
 
 | 所有权系统 | 产品转移 | 无悬垂/重复释放 |
 
-### 内存安全保证
+### 内存安全保证 {#内存安全保证}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -563,13 +563,13 @@ ownership_model T2
 
 ---
 
-## 形式化属性：不变式、前置/后置条件与安全边界
+## 形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}
 
 >
 
 > **来源: [Formal Methods – Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)** | **来源: [Rust API Guidelines – Safety](https://rust-lang.github.io/api-guidelines/safety.html)**
 
-### 不变式（Invariants）
+### 不变式（Invariants） {#不变式invariants}
 
 1. 同一工厂实例创建的产品族实现风格一致。
 
@@ -577,7 +577,7 @@ ownership_model T2
 
 3. 工厂不持有产品的反向引用。
 
-### 前置条件（Preconditions）
+### 前置条件（Preconditions） {#前置条件preconditions}
 
 1. 工厂类型已实现 `GuiFactory`。
 
@@ -585,7 +585,7 @@ ownership_model T2
 
 3. 调用方拥有对工厂的有效引用或所有权。
 
-### 后置条件（Postconditions）
+### 后置条件（Postconditions） {#后置条件postconditions}
 
 1. 返回的产品为调用者所有。
 
@@ -593,11 +593,11 @@ ownership_model T2
 
 3. 无法通过类型系统混用不同族产品。
 
-### 安全边界（Safety Boundary）
+### 安全边界（Safety Boundary） {#安全边界safety-boundary}
 
 本模式为 **纯 Safe**；无需 `unsafe`。唯一潜在风险是工厂内部使用 `unsafe` 分配资源，但应封装为 Safe API。
 
-### 形式化规约汇总
+### 形式化规约汇总 {#形式化规约汇总}
 
 ```text
 
@@ -613,7 +613,7 @@ ownership_model T2
 
 ---
 
-## 典型场景
+## 典型场景 {#典型场景}
 
 >
 
@@ -633,7 +633,7 @@ ownership_model T2
 
 ---
 
-## 相关模式
+## 相关模式 {#相关模式}
 
 >
 
@@ -651,7 +651,7 @@ ownership_model T2
 
 ---
 
-## 实现变体
+## 实现变体 {#实现变体}
 
 >
 
@@ -669,13 +669,13 @@ ownership_model T2
 
 ---
 
-## 反例：常见误用及编译器错误
+## 反例：常见误用及编译器错误 {#反例常见误用及编译器错误}
 
 >
 
 > **来源: [Rust By Example – Error Handling](https://doc.rust-lang.org/rust-by-example/error.html)** | **来源: [Rust Compiler Error Index](https://doc.rust-lang.org/error_codes/error-index.html)**
 
-### 反例 1：混用不同族产品
+### 反例 1：混用不同族产品 {#反例-1混用不同族产品}
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
 
@@ -701,7 +701,7 @@ let ui: (WinButton, MacDialog) = (
 
 **原因**：关联类型保证一个泛型上下文内产品族一致；跨工厂混用违反 Axiom AF1。
 
-### 反例 2：缺失 trait bound 导致方法不可用
+### 反例 2：缺失 trait bound 导致方法不可用 {#反例-2缺失-trait-bound-导致方法不可用}
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
 
@@ -727,7 +727,7 @@ fn use_button<F: GuiFactory>(f: &F) {
 
 **修复**：`type B: Button;`。
 
-### 反例 3：试图返回工厂局部借用
+### 反例 3：试图返回工厂局部借用 {#反例-3试图返回工厂局部借用}
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
 
@@ -751,7 +751,7 @@ impl GuiFactory for BadFactory {
 
 ---
 
-## 选型决策树
+## 选型决策树 {#选型决策树}
 
 >
 
@@ -771,7 +771,7 @@ impl GuiFactory for BadFactory {
 
 ---
 
-## 与 GoF 对比
+## 与 GoF 对比 {#与-gof-对比}
 
 >
 
@@ -789,7 +789,7 @@ impl GuiFactory for BadFactory {
 
 ---
 
-## 边界
+## 边界 {#边界}
 
 >
 
@@ -807,7 +807,7 @@ impl GuiFactory for BadFactory {
 
 ---
 
-## 与 Rust 1.93 的对应
+## 与 Rust 1.93 的对应 {#与-rust-193-的对应}
 
 >
 
@@ -823,7 +823,7 @@ impl GuiFactory for BadFactory {
 
 ---
 
-## 思维导图
+## 思维导图 {#思维导图}
 
 >
 
@@ -877,7 +877,7 @@ mindmap
 
 ---
 
-## 与其他模式的关系图
+## 与其他模式的关系图 {#与其他模式的关系图}
 
 >
 
@@ -909,7 +909,7 @@ graph LR
 
 ---
 
-## 实质内容五维自检
+## 实质内容五维自检 {#实质内容五维自检}
 
 >
 
@@ -933,7 +933,7 @@ graph LR
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -943,13 +943,13 @@ graph LR
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -965,7 +965,7 @@ graph LR
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -977,7 +977,7 @@ graph LR
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -1011,7 +1011,7 @@ graph LR
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -1023,7 +1023,7 @@ graph LR
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 

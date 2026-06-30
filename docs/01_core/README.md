@@ -10,7 +10,7 @@
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 TRPL、Rust Reference、Rustonomicon 来源标注 [来源: Authority Source Sprint Batch 8]
 
-# Rust 核心概念 (Core Concepts)
+# Rust 核心概念 (Core Concepts) {#rust-核心概念-core-concepts}
 
 > **Bloom 层级**: L1-L2 (记忆/理解)
 > **Rust 版本**: 1.96.0+
@@ -20,19 +20,19 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Rust 核心概念 (Core Concepts)](#rust-核心概念-core-concepts)
   - [目录](#目录)
   - [1. 所有权 (Ownership)](#1-所有权-ownership)
-    - [概念定义](#概念定义)
+    - [概念定义](#概念定义-2)
     - [所有权规则](#所有权规则)
     - [移动语义 (Move Semantics)](#移动语义-move-semantics)
     - [Copy 类型](#copy-类型)
-  - [2. 借用与引用 (Borrowing \& References)](#2-借用与引用-borrowing--references)
-    - [概念定义](#概念定义-1)
+  - [2. 借用与引用 (Borrowing \& References)](#2-借用与引用-borrowing-references)
+    - [概念定义](#概念定义-2)
     - [借用规则](#借用规则)
     - [悬垂引用防护](#悬垂引用防护)
   - [3. 生命周期 (Lifetimes)](#3-生命周期-lifetimes)
@@ -54,11 +54,11 @@
 
 ---
 
-## 1. 所有权 (Ownership)
+## 1. 所有权 (Ownership) {#1-所有权-ownership}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 概念定义
+### 概念定义 {#概念定义-2}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -73,7 +73,7 @@
 } // s 离开作用域，"hello" 被释放
 ```
 
-### 所有权规则
+### 所有权规则 {#所有权规则}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -81,7 +81,7 @@
 2. 同一时间只能有一个所有者
 3. 所有者离开作用域，值被丢弃
 
-### 移动语义 (Move Semantics)
+### 移动语义 (Move Semantics) {#移动语义-move-semantics}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -91,7 +91,7 @@ let s2 = s1; // s1 的所有权移动到 s2
 // println!("{}", s1); // ❌ 编译错误：s1 已失效
 ```
 
-### Copy 类型
+### Copy 类型 {#copy-类型}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -112,11 +112,11 @@ println!("x = {}, y = {}", x, y); // ✅
 
 ---
 
-## 2. 借用与引用 (Borrowing & References)
+## 2. 借用与引用 (Borrowing & References) {#2-借用与引用-borrowing-references}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 概念定义
+### 概念定义 {#概念定义-2}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -132,7 +132,7 @@ let len = calculate_length(&s1); // 不可变借用
 println!("'{}' 的长度是 {}", s1, len); // ✅ s1 仍然有效
 ```
 
-### 借用规则
+### 借用规则 {#借用规则}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -153,7 +153,7 @@ let r3 = &mut s; // ✅ r1, r2 不再使用，可变借用合法
 r3.push_str(" world");
 ```
 
-### 悬垂引用防护
+### 悬垂引用防护 {#悬垂引用防护}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -168,11 +168,11 @@ fn dangle() -> &String { // ❌ 编译错误
 
 ---
 
-## 3. 生命周期 (Lifetimes)
+## 3. 生命周期 (Lifetimes) {#3-生命周期-lifetimes}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 概念定义
+### 概念定义 {#概念定义-2}
 
 生命周期是 Rust 借用检查器使用的**形式化标注**，描述引用的有效范围。
 
@@ -183,7 +183,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 }
 ```
 
-### 生命周期省略规则 (Elision Rules)
+### 生命周期省略规则 (Elision Rules) {#生命周期省略规则-elision-rules}
 
 编译器自动推断常见模式：
 
@@ -191,7 +191,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 2. 如果只有一个输入生命周期，它分配给所有输出生命周期
 3. 如果有 `&self` 或 `&mut self`，其生命周期分配给所有输出
 
-### `'static` 生命周期
+### `'static` 生命周期 {#static-生命周期}
 
 `'static` 表示**整个程序运行期间**有效：
 
@@ -203,9 +203,9 @@ let s: &'static str = "我是字符串字面量，存储在二进制中";
 
 ---
 
-## 4. 类型系统基础 (Type System Basics)
+## 4. 类型系统基础 (Type System Basics) {#4-类型系统基础-type-system-basics}
 
-### 核心类型分类
+### 核心类型分类 {#核心类型分类}
 
 | 类别 | 类型 | 说明 |
 |------|------|------|
@@ -216,7 +216,7 @@ let s: &'static str = "我是字符串字面量，存储在二进制中";
 | 函数 | `fn(T) -> U` | 函数指针 |
 | trait 对象 | `dyn Trait` | 动态分发 |
 
-### 泛型与 Trait
+### 泛型与 Trait {#泛型与-trait}
 
 ```rust
 // 泛型函数
@@ -238,7 +238,7 @@ fn notify<T: Summary>(item: &T) {
 }
 ```
 
-### Rust 2024 Edition 类型系统增强
+### Rust 2024 Edition 类型系统增强 {#rust-2024-edition-类型系统增强}
 
 - **RPIT lifetime capture rules**: `impl Trait` 的默认生命周期捕获更精确
 - **`use<..>` precise capturing**: 显式控制哪些泛型参数被捕获（实验性演进）
@@ -246,9 +246,9 @@ fn notify<T: Summary>(item: &T) {
 
 ---
 
-## 5. 内存安全保证 (Memory Safety Guarantees)
+## 5. 内存安全保证 (Memory Safety Guarantees) {#5-内存安全保证-memory-safety-guarantees}
 
-### Rust 消除的内存错误类别
+### Rust 消除的内存错误类别 {#rust-消除的内存错误类别}
 
 | 错误类型 | C/C++ 状态 | Rust 防护 |
 |---------|-----------|----------|
@@ -259,7 +259,7 @@ fn notify<T: Summary>(item: &T) {
 | 悬垂指针 | 常见漏洞 | ✅ 生命周期检查防止 |
 | 空指针解引用 | 常见漏洞 | ✅ `Option<T>` + 强制处理 |
 
-### unsafe Rust
+### unsafe Rust {#unsafe-rust}
 
 当需要绕过编译器检查时，使用 `unsafe` 块：
 
@@ -276,7 +276,7 @@ unsafe {
 
 ---
 
-## 6. 与 Wikipedia 概念对齐
+## 6. 与 Wikipedia 概念对齐 {#6-与-wikipedia-概念对齐}
 
 | Rust 概念 | Wikipedia 对应条目 | 核心属性 | Rust 特定实现 |
 |----------|-------------------|---------|-------------|
@@ -290,7 +290,7 @@ unsafe {
 
 ---
 
-## 学习路径
+## 学习路径 {#学习路径}
 
 ```text
 初学者
@@ -317,7 +317,7 @@ unsafe {
 
 ---
 
-## 相关链接
+## 相关链接 {#相关链接}
 
 - [c01_ownership_borrow_scope](../../crates/c01_ownership_borrow_scope) - 所有权 crate 深度示例
 - [c02_type_system](../../crates/c02_type_system) - 类型系统 crate
@@ -335,13 +335,13 @@ unsafe {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [所有权、借用与生命周期详解](01_ownership_borrowing_lifetimes.md)
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**

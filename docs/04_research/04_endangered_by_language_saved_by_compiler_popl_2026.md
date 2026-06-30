@@ -1,4 +1,4 @@
-# Endangered by Language, Saved by Compiler (POPL 2026) 研究笔记
+# Endangered by Language, Saved by Compiler (POPL 2026) 研究笔记 {#endangered-by-language-saved-by-compiler-popl-2026-研究笔记}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
@@ -11,7 +11,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -40,7 +40,7 @@
 
 ---
 
-## 1. 论文信息
+## 1. 论文信息 {#1-论文信息}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -64,11 +64,11 @@
 
 ---
 
-## 2. 核心论点
+## 2. 核心论点 {#2-核心论点}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 论文核心命题
+### 2.1 论文核心命题 {#21-论文核心命题}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -80,7 +80,7 @@
 
 这意味着，语言的**形式化语义**与**编译器实际生成的代码**之间存在着重要的安全鸿沟。编译器不仅负责代码生成，更在某种程度上"修补"了语言语义中的安全漏洞。
 
-### 2.2 具体案例
+### 2.2 具体案例 {#22-具体案例}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -108,11 +108,11 @@ flowchart TD
 
 ---
 
-## 3. 与 Rust 的关系
+## 3. 与 Rust 的关系 {#3-与-rust-的关系}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 3.1 Rust 的所有权系统：编译期消除运行时错误
+### 3.1 Rust 的所有权系统：编译期消除运行时错误 {#31-rust-的所有权系统编译期消除运行时错误}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -131,7 +131,7 @@ flowchart LR
     F --> G[零开销保证]
 ```
 
-### 3.2 Rust 的编译器"拯救"机制
+### 3.2 Rust 的编译器"拯救"机制 {#32-rust-的编译器拯救机制}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -146,7 +146,7 @@ Rust 编译器 (`rustc`) 的以下组件扮演了论文中"saved by compiler"的
 | `MIRI` (解释器) | 未定义行为检测 | 运行时语义模拟 |
 | `Drop Check` | 悬垂引用、use-after-move | 析构顺序分析 |
 
-### 3.3 关键差异
+### 3.3 关键差异 {#33-关键差异}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -160,11 +160,11 @@ Rust 编译器 (`rustc`) 的以下组件扮演了论文中"saved by compiler"的
 
 ---
 
-## 4. 跨语言对比：C/C++ 的教训
+## 4. 跨语言对比：C/C++ 的教训 {#4-跨语言对比cc-的教训}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 4.1 C 语言中的典型案例
+### 4.1 C 语言中的典型案例 {#41-c-语言中的典型案例}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -186,7 +186,7 @@ free(p);
 - 跨编译器（GCC vs Clang）行为不一致
 - 微小的代码改动可能破坏优化的前提条件
 
-### 4.2 C++ 的 `std::unique_ptr`
+### 4.2 C++ 的 `std::unique_ptr` {#42-c-的-stdunique_ptr}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -211,11 +211,11 @@ flowchart LR
 
 ---
 
-## 5. 实践意义
+## 5. 实践意义 {#5-实践意义}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 5.1 对安全关键系统开发的启示
+### 5.1 对安全关键系统开发的启示 {#51-对安全关键系统开发的启示}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -228,7 +228,7 @@ flowchart LR
 | 医疗设备 | 静态分析工具补漏 | 类型系统内置安全属性 |
 | 操作系统内核 | 内核模式隔离 | `Rust for Linux` 减少 `unsafe` |
 
-### 5.2 从"偶然安全"到"必然安全"
+### 5.2 从"偶然安全"到"必然安全" {#52-从偶然安全到必然安全}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -240,11 +240,11 @@ flowchart LR
 
 ---
 
-## 6. 学术脉络：从 RustBelt 到 VerusBelt
+## 6. 学术脉络：从 RustBelt 到 VerusBelt {#6-学术脉络从-rustbelt-到-verusbelt}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 6.1 技术谱系
+### 6.1 技术谱系 {#61-技术谱系}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -263,7 +263,7 @@ flowchart TD
     K --> L[Rust 类型系统的设计哲学]
 ```
 
-### 6.2 各组件的角色
+### 6.2 各组件的角色 {#62-各组件的角色}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -275,7 +275,7 @@ flowchart TD
 | `VerusBelt` | 证明 Verus 扩展的语义正确性 | 将形式化验证推向工业应用 |
 | **本论文** | 分析编译器优化的安全效应 | 警示"偶然安全"的局限性 |
 
-### 6.3 论文在学术脉络中的定位
+### 6.3 论文在学术脉络中的定位 {#63-论文在学术脉络中的定位}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -289,7 +289,7 @@ flowchart TD
 
 ---
 
-## 7. 引用信息
+## 7. 引用信息 {#7-引用信息}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -352,7 +352,7 @@ Programming Languages (POPL 2026).
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
 > **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**

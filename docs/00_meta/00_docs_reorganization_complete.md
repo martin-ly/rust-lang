@@ -1,4 +1,4 @@
-# Docs目录重组完成报告
+# Docs目录重组完成报告 {#docs目录重组完成报告}
 
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
@@ -8,18 +8,18 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 - [Docs目录重组完成报告](#docs目录重组完成报告)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [重组成果](#重组成果)
     - [最终docs结构](#最终docs结构)
     - [重组前后对比](#重组前后对比)
     - [文档分类](#文档分类)
-      - [🔬 生态与权威 (3个)](#-生态与权威-3个)
-      - [🚀 学习与路径 (4个)](#-学习与路径-4个)
-      - [📝 迁移与规划 (2个)](#-迁移与规划-2个)
-      - [📖 索引与标准 (3个)](#-索引与标准-3个)
+      - [🔬 生态与权威 (3个)](#生态与权威-3个)
+      - [🚀 学习与路径 (4个)](#学习与路径-4个)
+      - [📝 迁移与规划 (2个)](#迁移与规划-2个)
+      - [📖 索引与标准 (3个)](#索引与标准-3个)
   - [归档文件](#归档文件)
   - [导航体验](#导航体验)
     - [快速入口](#快速入口)
@@ -27,11 +27,11 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 重组成果
+## 重组成果 {#重组成果}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 最终docs结构
+### 最终docs结构 {#最终docs结构}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -65,7 +65,7 @@ docs/
     └── ...
 ```
 
-### 重组前后对比
+### 重组前后对比 {#重组前后对比}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -75,27 +75,27 @@ docs/
 | 报告类文档 | 27个 | 0 | **归档** |
 | 核心文档 | 13个 | 12 | **精简** |
 
-### 文档分类
+### 文档分类 {#文档分类}
 
-#### 🔬 生态与权威 (3个)
+#### 🔬 生态与权威 (3个) {#生态与权威-3个}
 
 - `2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW.md`
 - `10_2026_rust_ecosystem_comprehensive_review_with_citations.md`
 - `10_authoritative_sources_and_citations.md`
 
-#### 🚀 学习与路径 (4个)
+#### 🚀 学习与路径 (4个) {#学习与路径-4个}
 
 - `01_learning_path_guide_2025_10_24.md`
 - `01_cross_module_learning_roadmap_2025_10_25.md`
 - `01_cross_module_navigation.md`
 - `03_cross_module_practical_projects_2025_10_25.md`
 
-#### 📝 迁移与规划 (2个)
+#### 📝 迁移与规划 (2个) {#迁移与规划-2个}
 
 - `10_migration_guide_2026.md`
 - `COMPREHENSIVE_EXTENSION_DEEPENING_PLAN_2026_03.md`
 
-#### 📖 索引与标准 (3个)
+#### 📖 索引与标准 (3个) {#索引与标准-3个}
 
 - `10_00_master_index.md`
 - `README.md`
@@ -103,15 +103,15 @@ docs/
 
 ---
 
-## 归档文件
+## 归档文件 {#归档文件}
 
 共归档 **28个** 过程性报告文件到 `archive/` 目录。
 
 ---
 
-## 导航体验
+## 导航体验 {#导航体验}
 
-### 快速入口
+### 快速入口 {#快速入口}
 
 | 我想... | 阅读... |
 |---------|---------|
@@ -123,7 +123,7 @@ docs/
 
 ---
 
-## 状态
+## 状态 {#状态}
 
 ✅ **重组完成** - docs目录已清晰组织
 
@@ -144,13 +144,13 @@ docs/
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [上级目录](../README.md)
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**

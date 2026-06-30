@@ -1,4 +1,4 @@
-# 内存分析研究
+# 内存分析研究 {#内存分析研究}
 
 > **概念族**: 实验研究
 
@@ -24,7 +24,7 @@
 
 > **权威来源**: [The Rust Performance Book](https://nnethercote.github.io/perf-book/) | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Standard Library](https://doc.rust-lang.org/std/)
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -33,46 +33,46 @@
 >
 
 - [内存分析研究](#内存分析研究)
-  - [📑 目录](#-目录)
-  - [📊 目录 {#-目录}](#-目录--目录)
-  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
+  - [📑 目录](#目录)
+  - [📊 目录](#目录-1)
+  - [🎯 研究目标](#研究目标)
     - [核心问题](#核心问题)
     - [预期成果](#预期成果)
-  - [📚 理论基础 {#-理论基础}](#-理论基础--理论基础)
+  - [📚 理论基础](#理论基础)
     - [相关概念](#相关概念)
     - [理论背景](#理论背景)
       - [Rust Performance Book 内存视角](#rust-performance-book-内存视角)
     - [形式化论证与实验衔接](#形式化论证与实验衔接)
-  - [🔬 实验设计 {#-实验设计}](#-实验设计--实验设计)
+  - [🔬 实验设计](#实验设计)
     - [1. 内存分配模式分析](#1-内存分配模式分析)
     - [2. 内存泄漏检测](#2-内存泄漏检测)
     - [3. 内存碎片化分析](#3-内存碎片化分析)
-    - [Rust 1.96+ / Edition 2024 工具链](#rust-196--edition-2024-工具链)
-  - [💻 代码示例 {#-代码示例}](#-代码示例--代码示例)
+    - [Rust 1.96+ / Edition 2024 工具链](#rust-196-edition-2024-工具链)
+  - [💻 代码示例](#代码示例)
     - [示例 1：内存使用分析](#示例-1内存使用分析)
     - [示例 2：Vec 增长模式分析](#示例-2vec-增长模式分析)
     - [示例 3：内存泄漏检测](#示例-3内存泄漏检测)
     - [示例 4：内存布局分析](#示例-4内存布局分析)
-  - [📊 实验结果 {#-实验结果}](#-实验结果--实验结果)
+  - [📊 实验结果](#实验结果)
     - [Vec 增长模式](#vec-增长模式)
     - [内存泄漏检测](#内存泄漏检测)
     - [结果分析模板](#结果分析模板)
-  - [📋 数据收集执行指南 {#-数据收集执行指南}](#-数据收集执行指南--数据收集执行指南)
+  - [📋 数据收集执行指南](#数据收集执行指南)
     - [环境要求](#环境要求)
     - [执行步骤](#执行步骤)
-  - [📐 内存优化建议与工具改进 {#-内存优化建议与工具改进}](#-内存优化建议与工具改进--内存优化建议与工具改进)
+  - [📐 内存优化建议与工具改进](#内存优化建议与工具改进)
     - [内存优化建议](#内存优化建议)
     - [工具改进](#工具改进)
     - [内存报告](#内存报告)
-  - [🔗 系统集成与实际应用 {#-系统集成与实际应用}](#-系统集成与实际应用--系统集成与实际应用)
+  - [🔗 系统集成与实际应用](#系统集成与实际应用)
     - [与形式化方法的集成](#与形式化方法的集成)
     - [与实验研究的集成](#与实验研究的集成)
     - [实际应用案例](#实际应用案例)
-  - [📖 参考文献 {#-参考文献}](#-参考文献--参考文献)
+  - [📖 参考文献](#参考文献)
     - [学术论文](#学术论文)
     - [官方文档](#官方文档)
     - [工具资源](#工具资源)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -90,53 +90,53 @@
 
 ---
 
-## 📊 目录 {#-目录}
+## 📊 目录 {#目录-1}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [内存分析研究](#内存分析研究)
-  - [📑 目录](#-目录)
-  - [📊 目录 {#-目录}](#-目录--目录)
-  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
+  - [📑 目录](#目录)
+  - [📊 目录](#目录-1)
+  - [🎯 研究目标](#研究目标)
     - [核心问题](#核心问题)
     - [预期成果](#预期成果)
-  - [📚 理论基础 {#-理论基础}](#-理论基础--理论基础)
+  - [📚 理论基础](#理论基础)
     - [相关概念](#相关概念)
     - [理论背景](#理论背景)
       - [Rust Performance Book 内存视角](#rust-performance-book-内存视角)
     - [形式化论证与实验衔接](#形式化论证与实验衔接)
-  - [🔬 实验设计 {#-实验设计}](#-实验设计--实验设计)
+  - [🔬 实验设计](#实验设计)
     - [1. 内存分配模式分析](#1-内存分配模式分析)
     - [2. 内存泄漏检测](#2-内存泄漏检测)
     - [3. 内存碎片化分析](#3-内存碎片化分析)
-    - [Rust 1.96+ / Edition 2024 工具链](#rust-196--edition-2024-工具链)
-  - [💻 代码示例 {#-代码示例}](#-代码示例--代码示例)
+    - [Rust 1.96+ / Edition 2024 工具链](#rust-196-edition-2024-工具链)
+  - [💻 代码示例](#代码示例)
     - [示例 1：内存使用分析](#示例-1内存使用分析)
     - [示例 2：Vec 增长模式分析](#示例-2vec-增长模式分析)
     - [示例 3：内存泄漏检测](#示例-3内存泄漏检测)
     - [示例 4：内存布局分析](#示例-4内存布局分析)
-  - [📊 实验结果 {#-实验结果}](#-实验结果--实验结果)
+  - [📊 实验结果](#实验结果)
     - [Vec 增长模式](#vec-增长模式)
     - [内存泄漏检测](#内存泄漏检测)
     - [结果分析模板](#结果分析模板)
-  - [📋 数据收集执行指南 {#-数据收集执行指南}](#-数据收集执行指南--数据收集执行指南)
+  - [📋 数据收集执行指南](#数据收集执行指南)
     - [环境要求](#环境要求)
     - [执行步骤](#执行步骤)
-  - [📐 内存优化建议与工具改进 {#-内存优化建议与工具改进}](#-内存优化建议与工具改进--内存优化建议与工具改进)
+  - [📐 内存优化建议与工具改进](#内存优化建议与工具改进)
     - [内存优化建议](#内存优化建议)
     - [工具改进](#工具改进)
     - [内存报告](#内存报告)
-  - [🔗 系统集成与实际应用 {#-系统集成与实际应用}](#-系统集成与实际应用--系统集成与实际应用)
+  - [🔗 系统集成与实际应用](#系统集成与实际应用)
     - [与形式化方法的集成](#与形式化方法的集成)
     - [与实验研究的集成](#与实验研究的集成)
     - [实际应用案例](#实际应用案例)
-  - [📖 参考文献 {#-参考文献}](#-参考文献--参考文献)
+  - [📖 参考文献](#参考文献)
     - [学术论文](#学术论文)
     - [官方文档](#官方文档)
     - [工具资源](#工具资源)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -146,7 +146,7 @@
 
 ---
 
-## 🎯 研究目标 {#-研究目标}
+## 🎯 研究目标 {#研究目标}
 
 >
 
@@ -162,7 +162,7 @@
 
 4. **内存安全验证**：验证 Rust 内存安全保证
 
-### 核心问题
+### 核心问题 {#核心问题}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -176,7 +176,7 @@
 
 3. **内存碎片化对性能的影响如何？**
 
-### 预期成果
+### 预期成果 {#预期成果}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -192,13 +192,13 @@
 
 ---
 
-## 📚 理论基础 {#-理论基础}
+## 📚 理论基础 {#理论基础}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 相关概念
+### 相关概念 {#相关概念}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -218,7 +218,7 @@
 
 - **内存碎片化（Memory Fragmentation）**：内存被分割成小块，无法有效利用
 
-### 理论背景
+### 理论背景 {#理论背景}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -234,7 +234,7 @@
 
 - **所有权系统**：编译时内存管理（Rust 核心特性）
 
-#### Rust Performance Book 内存视角
+#### Rust Performance Book 内存视角 {#rust-performance-book-内存视角}
 
 > **来源: [The Rust Performance Book – Memory](https://nnethercote.github.io/perf-book/memory.html)**
 
@@ -250,7 +250,7 @@ Rust 的内存性能优化可从以下维度切入：
 
 - **引用局部性**：优先使用连续容器（`Vec`、`VecDeque`）而非 `LinkedList`，提升缓存命中率。
 
-### 形式化论证与实验衔接
+### 形式化论证与实验衔接 {#形式化论证与实验衔接}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -286,13 +286,13 @@ Rust 的内存性能优化可从以下维度切入：
 
 ---
 
-## 🔬 实验设计 {#-实验设计}
+## 🔬 实验设计 {#实验设计}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 内存分配模式分析
+### 1. 内存分配模式分析 {#1-内存分配模式分析}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -312,7 +312,7 @@ Rust 的内存性能优化可从以下维度切入：
 
 - 自定义类型内存布局分析
 
-### 2. 内存泄漏检测
+### 2. 内存泄漏检测 {#2-内存泄漏检测}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -330,7 +330,7 @@ Rust 的内存性能优化可从以下维度切入：
 
 - 全局状态内存泄漏
 
-### 3. 内存碎片化分析
+### 3. 内存碎片化分析 {#3-内存碎片化分析}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -344,7 +344,7 @@ Rust 的内存性能优化可从以下维度切入：
 
 ---
 
-### Rust 1.96+ / Edition 2024 工具链
+### Rust 1.96+ / Edition 2024 工具链 {#rust-196-edition-2024-工具链}
 
 > **来源: [The Rust Performance Book – Memory](https://nnethercote.github.io/perf-book/memory.html)**
 
@@ -364,13 +364,13 @@ Rust 的内存性能优化可从以下维度切入：
 
 - **可重复性**：固定 `rust-toolchain.toml`、提交 `Cargo.lock`、记录分配器版本与操作系统。
 
-## 💻 代码示例 {#-代码示例}
+## 💻 代码示例 {#代码示例}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 示例 1：内存使用分析
+### 示例 1：内存使用分析 {#示例-1内存使用分析}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -448,7 +448,7 @@ fn analyze_memory_usage() {
 
 ```
 
-### 示例 2：Vec 增长模式分析
+### 示例 2：Vec 增长模式分析 {#示例-2vec-增长模式分析}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -494,7 +494,7 @@ fn analyze_vec_growth() {
 
 ```
 
-### 示例 3：内存泄漏检测
+### 示例 3：内存泄漏检测 {#示例-3内存泄漏检测}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -598,7 +598,7 @@ impl SafeNode {
 
 ```
 
-### 示例 4：内存布局分析
+### 示例 4：内存布局分析 {#示例-4内存布局分析}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -638,13 +638,13 @@ fn analyze_memory_layout() {
 
 ---
 
-## 📊 实验结果 {#-实验结果}
+## 📊 实验结果 {#实验结果}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### Vec 增长模式
+### Vec 增长模式 {#vec-增长模式}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -656,7 +656,7 @@ fn analyze_memory_layout() {
 
 - 增长策略平衡了内存使用和性能
 
-### 内存泄漏检测
+### 内存泄漏检测 {#内存泄漏检测}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -668,7 +668,7 @@ fn analyze_memory_layout() {
 
 - 需要仔细设计数据结构避免循环引用
 
-### 结果分析模板
+### 结果分析模板 {#结果分析模板}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -708,13 +708,13 @@ fn analyze_memory_layout() {
 
 ---
 
-## 📋 数据收集执行指南 {#-数据收集执行指南}
+## 📋 数据收集执行指南 {#数据收集执行指南}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 环境要求
+### 环境要求 {#环境要求}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -722,7 +722,7 @@ fn analyze_memory_layout() {
 
 - **dhat**：`cargo add dhat` 或使用 `#[global_allocator]` + 自定义 TrackingAllocator
 
-### 执行步骤
+### 执行步骤 {#执行步骤}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -736,13 +736,13 @@ fn analyze_memory_layout() {
 
 ---
 
-## 📐 内存优化建议与工具改进 {#-内存优化建议与工具改进}
+## 📐 内存优化建议与工具改进 {#内存优化建议与工具改进}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 内存优化建议
+### 内存优化建议 {#内存优化建议}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -754,7 +754,7 @@ fn analyze_memory_layout() {
 
 - **分配器**：Rust 1.96+ 的 `thread_local` 全局分配器可降低多线程分配竞争。
 
-### 工具改进
+### 工具改进 {#工具改进}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -764,7 +764,7 @@ fn analyze_memory_layout() {
 
 - **heaptrack/dhat**：用于定位热点分配与碎片化；可导出与「结果分析模板」对接的指标。
 
-### 内存报告
+### 内存报告 {#内存报告}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -772,13 +772,13 @@ fn analyze_memory_layout() {
 
 ---
 
-## 🔗 系统集成与实际应用 {#-系统集成与实际应用}
+## 🔗 系统集成与实际应用 {#系统集成与实际应用}
 
 >
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 与形式化方法的集成
+### 与形式化方法的集成 {#与形式化方法的集成}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -786,7 +786,7 @@ fn analyze_memory_layout() {
 
 - **借用检查器**：见 [10_borrow_checker_proof.md](../formal_methods/10_borrow_checker_proof.md)。引用与生命周期不影响堆分配量，但可通过 Miri 与借用规则共同保证无 UB。
 
-### 与实验研究的集成
+### 与实验研究的集成 {#与实验研究的集成}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -794,7 +794,7 @@ fn analyze_memory_layout() {
 
 - **编译器优化**：见 [10_compiler_optimizations.md](10_compiler_optimizations.md)。`-C link-dead-code`、`opt-level` 会影响可执行体大小与分配内联，分析时需固定编译选项。
 
-### 实际应用案例
+### 实际应用案例 {#实际应用案例}
 
 >
 
@@ -808,13 +808,13 @@ fn analyze_memory_layout() {
 
 ---
 
-## 📖 参考文献 {#-参考文献}
+## 📖 参考文献 {#参考文献}
 
 >
 
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 学术论文
+### 学术论文 {#学术论文}
 
 >
 
@@ -826,7 +826,7 @@ fn analyze_memory_layout() {
 
    - 摘要: Rust 内存安全机制
 
-### 官方文档
+### 官方文档 {#官方文档}
 
 >
 
@@ -846,7 +846,7 @@ fn analyze_memory_layout() {
 
 - [The Rust Programming Language](https://doc.rust-lang.org/book/) - Rust 官方教程
 
-### 工具资源
+### 工具资源 {#工具资源}
 
 >
 
@@ -868,7 +868,7 @@ fn analyze_memory_layout() {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -876,7 +876,7 @@ fn analyze_memory_layout() {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -884,7 +884,7 @@ fn analyze_memory_layout() {
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -898,7 +898,7 @@ fn analyze_memory_layout() {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -908,7 +908,7 @@ fn analyze_memory_layout() {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -940,7 +940,7 @@ fn analyze_memory_layout() {
 
 ---
 
-## 权威来源对照表
+## 权威来源对照表 {#权威来源对照表}
 
 | 概念/方法 | 权威来源 URL | 章节/要点 |
 
@@ -958,7 +958,7 @@ fn analyze_memory_layout() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

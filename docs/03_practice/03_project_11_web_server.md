@@ -1,4 +1,4 @@
-# 实践项目 11: HTTP Web服务器
+# 实践项目 11: HTTP Web服务器 {#实践项目-11-http-web服务器}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
@@ -9,12 +9,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 11: HTTP Web服务器](#实践项目-11-http-web服务器)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [项目目标](#项目目标)
   - [功能需求](#功能需求)
   - [学习要点](#学习要点)
@@ -23,7 +23,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 项目目标
+## 项目目标 {#项目目标}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -31,7 +31,7 @@
 
 ---
 
-## 功能需求
+## 功能需求 {#功能需求}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -44,11 +44,11 @@
 
 ---
 
-## 学习要点
+## 学习要点 {#学习要点}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### HTTP解析
+### HTTP解析 {#http解析}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -67,7 +67,7 @@ async fn handle_request(stream: &mut tokio::net::TcpStream) {
 
 ---
 
-## 参考实现
+## 参考实现 {#参考实现}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -90,7 +90,7 @@ async fn handle_request(stream: &mut tokio::net::TcpStream) {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -99,7 +99,7 @@ async fn handle_request(stream: &mut tokio::net::TcpStream) {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Web Framework](https://en.wikipedia.org/wiki/Web_Framework)**
 > **来源: [axum.rs Documentation](https://docs.rs/axum/latest/axum/)**

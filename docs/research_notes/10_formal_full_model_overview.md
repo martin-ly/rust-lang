@@ -1,4 +1,4 @@
-# Rust 形式化全模型：统一形式系统入口
+# Rust 形式化全模型：统一形式系统入口 {#rust-形式化全模型统一形式系统入口}
 
 > **概念族**: 形式化方法
 
@@ -24,7 +24,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -33,7 +33,7 @@
 >
 
 - [Rust 形式化全模型：统一形式系统入口](#rust-形式化全模型统一形式系统入口)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、统一形式系统总览](#一统一形式系统总览)
     - [1.1 核心机制与公理层](#11-核心机制与公理层)
     - [1.2 定理依赖 DAG（简化）](#12-定理依赖-dag简化)
@@ -47,8 +47,8 @@
   - [三、与各子文档的映射](#三与各子文档的映射)
   - [四、抽象层次对应](#四抽象层次对应)
   - [五、相关文档](#五相关文档)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 更新](#rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -56,13 +56,13 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 一、统一形式系统总览
+## 一、统一形式系统总览 {#一统一形式系统总览}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1.1 核心机制与公理层
+### 1.1 核心机制与公理层 {#11-核心机制与公理层}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -96,7 +96,7 @@
 
 | **变量** | Def 1.4 绑定、Def 1.5 遮蔽 | [ownership_model](formal_methods/10_ownership_model.md) |
 
-### 1.2 定理依赖 DAG（简化）
+### 1.2 定理依赖 DAG（简化） {#12-定理依赖-dag简化}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -152,7 +152,7 @@
 
 ```
 
-### 1.3 域间定理推导链（显式）
+### 1.3 域间定理推导链（显式） {#13-域间定理推导链显式}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -170,7 +170,7 @@
 
 | send_sync SEND-T1/SYNC-T1 → async T6.2、SPAWN-T1 | 跨线程转移/共享安全 ⇒ 并发安全 | 与 borrow T1 一致、spawn/Future 数据竞争自由 |
 
-### 1.4 公理→组合定理 DAG（支柱 1+3 衔接）
+### 1.4 公理→组合定理 DAG（支柱 1+3 衔接） {#14-公理组合定理-dag支柱-13-衔接}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -224,13 +224,13 @@
 
 ---
 
-## 二、公理列表（统一编号）
+## 二、公理列表（统一编号） {#二公理列表统一编号}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 2.1 内存与所有权
+### 2.1 内存与所有权 {#21-内存与所有权}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -252,7 +252,7 @@
 
 | A-BR4 | 借用作用域约束 | borrow 规则 8 |
 
-### 2.2 生命周期与类型
+### 2.2 生命周期与类型 {#22-生命周期与类型}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -274,7 +274,7 @@
 
 | A-VAR3 | 不变：$F[S] \not<: F[T]$ | variance Def 3.1 |
 
-### 2.3 控制流与变量
+### 2.3 控制流与变量 {#23-控制流与变量}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -288,7 +288,7 @@
 
 | A-SHADOW1 | 变量遮蔽使旧绑定不可访问；隐式 drop | ownership Def 1.5 |
 
-### 2.4 异步与 Pin
+### 2.4 异步与 Pin {#24-异步与-pin}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -306,7 +306,7 @@
 
 ---
 
-## 三、与各子文档的映射
+## 三、与各子文档的映射 {#三与各子文档的映射}
 
 >
 
@@ -338,7 +338,7 @@
 
 ---
 
-## 四、抽象层次对应
+## 四、抽象层次对应 {#四抽象层次对应}
 
 >
 
@@ -356,7 +356,7 @@
 
 ---
 
-## 五、相关文档
+## 五、相关文档 {#五相关文档}
 
 >
 
@@ -382,7 +382,7 @@
 
 ---
 
-## 🆕 Rust 1.94 更新
+## 🆕 Rust 1.94 更新 {#rust-194-更新}
 
 >
 
@@ -396,7 +396,7 @@
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -406,13 +406,13 @@
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -428,7 +428,7 @@
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -438,7 +438,7 @@
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -470,7 +470,7 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -482,7 +482,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 

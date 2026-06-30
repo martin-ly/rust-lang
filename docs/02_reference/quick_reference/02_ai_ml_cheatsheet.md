@@ -1,6 +1,6 @@
-<a id="-rust-aiml-速查卡"></a>
+<a id="rust-aiml-速查卡"></a>
 
-# 🤖 Rust AI/ML 速查卡
+# 🤖 Rust AI/ML 速查卡 {#rust-aiml-速查卡}
 
 > **分级**: [A]
 > **快速参考** | [AI+Rust 生态指南](../../05_guides/05_ai_rust_ecosystem_guide.md) | [AI 辅助编程](../../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md)
@@ -11,16 +11,16 @@
 
 ---
 
-## 📋 目录
+## 📋 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [🤖 Rust AI/ML 速查卡](#-rust-aiml-速查卡)
-  - [📋 目录](#-目录)
+- [🤖 Rust AI/ML 速查卡](#rust-aiml-速查卡)
+  - [📋 目录](#目录)
   - [框架选型](#框架选型)
   - [Burn 快速入门](#burn-快速入门)
     - [示例 1: 张量基础操作](#示例-1-张量基础操作)
-  - [📑 目录](#-目录-1)
+  - [📑 目录](#目录-1)
     - [示例 2: 简单神经网络](#示例-2-简单神经网络)
     - [示例 3: 模型推理](#示例-3-模型推理)
   - [Candle 快速入门](#candle-快速入门)
@@ -30,13 +30,13 @@
     - [示例 6: 使用 llm crate 进行本地推理](#示例-6-使用-llm-crate-进行本地推理)
     - [框架选型表](#框架选型表)
   - [与 C01–C12 关联](#与-c01c12-关联)
-  - [🎯 使用场景](#-使用场景)
+  - [🎯 使用场景](#使用场景)
     - [场景 1: 图像分类服务](#场景-1-图像分类服务)
     - [场景 2: 实时文本生成](#场景-2-实时文本生成)
-  - [📐 形式化方法链接](#-形式化方法链接)
+  - [📐 形式化方法链接](#形式化方法链接)
     - [理论基础](#理论基础)
     - [形式化定理](#形式化定理)
-  - [🚫 反例速查](#-反例速查)
+  - [🚫 反例速查](#反例速查)
     - [反例 1: 混淆不同框架的 API](#反例-1-混淆不同框架的-api)
     - [反例 2: 未根据场景选择后端](#反例-2-未根据场景选择后端)
     - [反例 3: 忽略依赖版本兼容性](#反例-3-忽略依赖版本兼容性)
@@ -56,7 +56,7 @@
 
 ---
 
-## 框架选型
+## 框架选型 {#框架选型}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -68,18 +68,18 @@
 
 ---
 
-## Burn 快速入门
+## Burn 快速入门 {#burn-快速入门}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 示例 1: 张量基础操作
+### 示例 1: 张量基础操作 {#示例-1-张量基础操作}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
-# Cargo.toml
+# Cargo.toml {#cargotoml-1}
 
 > **Bloom 层级**: L2 (理解)
 [dependencies]
@@ -112,16 +112,16 @@ fn main() {
 }
 ```
 
-## 📑 目录
+## 📑 目录 {#目录-1}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [🤖 Rust AI/ML 速查卡](#-rust-aiml-速查卡)
-  - [📋 目录](#-目录)
+- [🤖 Rust AI/ML 速查卡](#rust-aiml-速查卡)
+  - [📋 目录](#目录)
   - [框架选型](#框架选型)
   - [Burn 快速入门](#burn-快速入门)
     - [示例 1: 张量基础操作](#示例-1-张量基础操作)
-  - [📑 目录](#-目录-1)
+  - [📑 目录](#目录-1)
     - [示例 2: 简单神经网络](#示例-2-简单神经网络)
     - [示例 3: 模型推理](#示例-3-模型推理)
   - [Candle 快速入门](#candle-快速入门)
@@ -131,13 +131,13 @@ fn main() {
     - [示例 6: 使用 llm crate 进行本地推理](#示例-6-使用-llm-crate-进行本地推理)
     - [框架选型表](#框架选型表)
   - [与 C01–C12 关联](#与-c01c12-关联)
-  - [🎯 使用场景](#-使用场景)
+  - [🎯 使用场景](#使用场景)
     - [场景 1: 图像分类服务](#场景-1-图像分类服务)
     - [场景 2: 实时文本生成](#场景-2-实时文本生成)
-  - [📐 形式化方法链接](#-形式化方法链接)
+  - [📐 形式化方法链接](#形式化方法链接)
     - [理论基础](#理论基础)
     - [形式化定理](#形式化定理)
-  - [🚫 反例速查](#-反例速查)
+  - [🚫 反例速查](#反例速查)
     - [反例 1: 混淆不同框架的 API](#反例-1-混淆不同框架的-api)
     - [反例 2: 未根据场景选择后端](#反例-2-未根据场景选择后端)
     - [反例 3: 忽略依赖版本兼容性](#反例-3-忽略依赖版本兼容性)
@@ -155,7 +155,7 @@ fn main() {
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-### 示例 2: 简单神经网络
+### 示例 2: 简单神经网络 {#示例-2-简单神经网络}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -195,7 +195,7 @@ impl<B: burn::tensor::backend::Backend> Net<B> {
 }
 ```
 
-### 示例 3: 模型推理
+### 示例 3: 模型推理 {#示例-3-模型推理}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -221,18 +221,18 @@ fn inference<B: burn::tensor::backend::Backend>(
 
 ---
 
-## Candle 快速入门
+## Candle 快速入门 {#candle-快速入门}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 示例 4: 张量操作
+### 示例 4: 张量操作 {#示例-4-张量操作}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
-# Cargo.toml
+# Cargo.toml {#cargotoml-1}
 [dependencies]
 candle-core = "0.8"
 candle-nn = "0.8"
@@ -260,7 +260,7 @@ fn main() -> Result<()> {
 }
 ```
 
-### 示例 5: 加载 Hugging Face 模型
+### 示例 5: 加载 Hugging Face 模型 {#示例-5-加载-hugging-face-模型}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -296,11 +296,11 @@ fn load_model(model_id: &str) -> Result<()> {
 
 ---
 
-## LLM 推理
+## LLM 推理 {#llm-推理}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 示例 6: 使用 llm crate 进行本地推理
+### 示例 6: 使用 llm crate 进行本地推理 {#示例-6-使用-llm-crate-进行本地推理}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -349,7 +349,7 @@ fn llm_inference() -> anyhow::Result<()> {
 }
 ```
 
-### 框架选型表
+### 框架选型表 {#框架选型表}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -361,7 +361,7 @@ fn llm_inference() -> anyhow::Result<()> {
 
 ---
 
-## 与 C01–C12 关联
+## 与 C01–C12 关联 {#与-c01c12-关联}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -375,11 +375,11 @@ fn llm_inference() -> anyhow::Result<()> {
 
 ---
 
-## 🎯 使用场景
+## 🎯 使用场景 {#使用场景}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 场景 1: 图像分类服务
+### 场景 1: 图像分类服务 {#场景-1-图像分类服务}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -403,7 +403,7 @@ impl ImageClassifier {
 }
 ```
 
-### 场景 2: 实时文本生成
+### 场景 2: 实时文本生成 {#场景-2-实时文本生成}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -429,11 +429,11 @@ async fn stream_generate<B: Backend>(
 
 ---
 
-## 📐 形式化方法链接
+## 📐 形式化方法链接 {#形式化方法链接}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 理论基础
+### 理论基础 {#理论基础}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -444,7 +444,7 @@ async fn stream_generate<B: Backend>(
 | **Send/Sync** | [send_sync_formalization](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | 多线程训练的安全性 |
 | **生命周期** | lifetime_formalization | 模型引用有效性 |
 
-### 形式化定理
+### 形式化定理 {#形式化定理}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -454,11 +454,11 @@ async fn stream_generate<B: Backend>(
 
 ---
 
-## 🚫 反例速查
+## 🚫 反例速查 {#反例速查}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 反例 1: 混淆不同框架的 API
+### 反例 1: 混淆不同框架的 API {#反例-1-混淆不同框架的-api}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -493,7 +493,7 @@ impl<B: Backend, const D: usize> TensorOps for Tensor<B, D> { ... }
 
 ---
 
-### 反例 2: 未根据场景选择后端
+### 反例 2: 未根据场景选择后端 {#反例-2-未根据场景选择后端}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -530,14 +530,14 @@ fn fast_inference() {
 
 ---
 
-### 反例 3: 忽略依赖版本兼容性
+### 反例 3: 忽略依赖版本兼容性 {#反例-3-忽略依赖版本兼容性}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **错误示例**:
 
 ```toml
-# ❌ 混用不兼容的 burn 与 burn-ndarray 版本
+# ❌ 混用不兼容的 burn 与 burn-ndarray 版本 {#混用不兼容的-burn-与-burn-ndarray-版本}
 [dependencies]
 burn = "0.18"
 burn-ndarray = "0.20"  # 版本不一致易导致编译错误
@@ -548,7 +548,7 @@ burn-ndarray = "0.20"  # 版本不一致易导致编译错误
 **修正**: 保持主库与后端扩展版本一致。
 
 ```toml
-# ✅ 使用 workspace 统一版本
+# ✅ 使用 workspace 统一版本 {#使用-workspace-统一版本}
 [workspace.dependencies]
 burn = "0.20"
 burn-ndarray = "0.20"
@@ -561,7 +561,7 @@ burn-ndarray = { workspace = true }
 
 ---
 
-### 反例 4: 内存泄漏 - 循环引用张量缓存
+### 反例 4: 内存泄漏 - 循环引用张量缓存 {#反例-4-内存泄漏---循环引用张量缓存}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -595,7 +595,7 @@ struct TensorCache {
 
 ---
 
-### 反例 5: 边界情况 - 空张量操作
+### 反例 5: 边界情况 - 空张量操作 {#反例-5-边界情况---空张量操作}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -626,7 +626,7 @@ fn normalize(tensor: &Tensor) -> Option<Tensor> {
 
 ---
 
-## 相关文档
+## 相关文档 {#相关文档}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -634,7 +634,7 @@ fn normalize(tensor: &Tensor) -> Option<Tensor> {
 - [AI 辅助编程](../../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md)
 - [Burn](https://burn.dev/) | [Candle](https://github.com/huggingface/candle) | [llm](https://docs.rs/llm)
 
-## 相关示例代码
+## 相关示例代码 {#相关示例代码}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -646,14 +646,14 @@ AI/ML 示例代码位于指南与外部仓库，可直接参考：
 
 ---
 
-## Rust 1.95+ 在 AI/ML 中的深度应用
+## Rust 1.95+ 在 AI/ML 中的深度应用 {#rust-195-在-aiml-中的深度应用}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 > **适用版本**: Rust 1.96.0+ | **实际场景**: 机器学习推理与训练
 
 ---
 
-### array_windows 在特征工程中的应用
+### array_windows 在特征工程中的应用 {#array_windows-在特征工程中的应用}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -686,7 +686,7 @@ pub fn extract_time_window_features(signal: &[f32]) -> Vec<WindowFeatures> {
 
 ---
 
-### LazyLock 在模型缓存中的应用
+### LazyLock 在模型缓存中的应用 {#lazylock-在模型缓存中的应用}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -716,7 +716,7 @@ pub fn batch_classify(images: Vec<Vec<f32>>) -> Vec<Vec<f32>> {
 
 ---
 
-### ControlFlow 在训练管道中的应用
+### ControlFlow 在训练管道中的应用 {#controlflow-在训练管道中的应用}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -746,7 +746,7 @@ pub fn training_step<B: Backend>(
 
 ---
 
-### 数学常量在超参数优化中的应用
+### 数学常量在超参数优化中的应用 {#数学常量在超参数优化中的应用}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -774,7 +774,7 @@ pub fn harmonic_lr_schedule(initial_lr: f64, epoch: usize) -> f64 {
 
 ---
 
-### 生产场景：实时推荐系统
+### 生产场景：实时推荐系统 {#生产场景实时推荐系统}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -814,7 +814,7 @@ impl RecommendationService {
 
 ---
 
-### 总结
+### 总结 {#总结}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -840,7 +840,7 @@ impl RecommendationService {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -849,7 +849,7 @@ impl RecommendationService {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

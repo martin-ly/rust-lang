@@ -1,4 +1,4 @@
-# Template Method 形式化分析
+# Template Method 形式化分析 {#template-method-形式化分析}
 
 > **概念族**: 软件设计 / 设计模式
 
@@ -24,14 +24,14 @@
 
 > **权威来源**: [Rust Design Patterns – Behavioral](https://rust-unofficial.github.io/patterns/patterns/behavioural/index.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
-## 📊 目录 {#-目录}
+## 📊 目录 {#目录}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Template Method 形式化分析](#template-method-形式化分析)
-  - [📊 目录 {#-目录}](#-目录--目录)
+  - [📊 目录](#目录)
   - [权威来源对照](#权威来源对照)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Template Method 结构）](#def-11template-method-结构)
@@ -42,7 +42,7 @@
     - [推论 TM-C1（近似表达）](#推论-tm-c1近似表达)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
-  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196--edition-2024-代码示例更新)
+  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196-edition-2024-代码示例更新)
     - [Edition 2024 关键兼容点](#edition-2024-关键兼容点)
   - [Rust 所有权、借用、生命周期与 trait 系统约束分析](#rust-所有权借用生命周期与-trait-系统约束分析)
     - [所有权约束](#所有权约束)
@@ -72,7 +72,7 @@
   - [思维导图](#思维导图)
   - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -82,7 +82,7 @@
 
 ---
 
-## 权威来源对照
+## 权威来源对照 {#权威来源对照}
 
 >
 
@@ -108,13 +108,13 @@
 
 ---
 
-## 形式化定义
+## 形式化定义 {#形式化定义}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Def 1.1（Template Method 结构）
+### Def 1.1（Template Method 结构） {#def-11template-method-结构}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -138,7 +138,7 @@ $$\mathcal{TM} = \langle T, \mathit{template}: T \rightarrow R, \{h_i: T \righta
 
 ---
 
-### Axiom TM1（骨架不变公理）
+### Axiom TM1（骨架不变公理） {#axiom-tm1骨架不变公理}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -150,7 +150,7 @@ $$\forall t: T,\, \mathit{template}(t)\text{ 的调用顺序固定；仅 }h_i\te
 
 骨架不变；钩子可定制。
 
-### Axiom TM2（钩子可选公理）
+### Axiom TM2（钩子可选公理） {#axiom-tm2钩子可选公理}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -164,7 +164,7 @@ $$h_i\text{ 可有无默认实现；}\mathit{impl}\text{ 可选择性覆盖}$$
 
 ---
 
-### 定理 TM-T1（trait 默认方法定理）
+### 定理 TM-T1（trait 默认方法定理） {#定理-tm-t1trait-默认方法定理}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -212,7 +212,7 @@ trait 默认方法：`fn template(&self) { self.hook1(); self.hook2(); }`；由 
 
 ---
 
-### 定理 TM-T2（骨架不变性定理）
+### 定理 TM-T2（骨架不变性定理） {#定理-tm-t2骨架不变性定理}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -234,7 +234,7 @@ trait 默认方法：`fn template(&self) { self.hook1(); self.hook2(); }`；由 
 
 ---
 
-### 推论 TM-C1（近似表达）
+### 推论 TM-C1（近似表达） {#推论-tm-c1近似表达}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -256,7 +256,7 @@ Template Method 与 [expressive_inexpressive_matrix](../../05_boundary_system/10
 
 ---
 
-### 概念定义-属性关系-解释论证 层次汇总
+### 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -276,7 +276,7 @@ Template Method 与 [expressive_inexpressive_matrix](../../05_boundary_system/10
 
 ---
 
-## Rust 实现与代码示例
+## Rust 实现与代码示例 {#rust-实现与代码示例}
 
 >
 
@@ -338,7 +338,7 @@ assert_eq!(a.template(), "A1A2");
 
 ---
 
-## Rust 1.96+ / Edition 2024 代码示例更新
+## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
 
 >
 
@@ -396,7 +396,7 @@ fn main() {
 
 ```
 
-### Edition 2024 关键兼容点
+### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
 
@@ -412,25 +412,25 @@ fn main() {
 
 ---
 
-## Rust 所有权、借用、生命周期与 trait 系统约束分析
+## Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}
 
 >
 
 > **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
 
-### 所有权约束
+### 所有权约束 {#所有权约束}
 
 默认方法 `mine(&self)` 按模板调用 hook；hook 方法通常为 `&self`，参数/返回值的所有权按需求转移。
 
-### 借用与生命周期约束
+### 借用与生命周期约束 {#借用与生命周期约束}
 
 模板方法内部按顺序调用 hook；借用检查器保证 hook 之间的借用不冲突（参数/返回值不重叠生命周期）。
 
-### trait 系统约束
+### trait 系统约束 {#trait-系统约束}
 
 trait 默认方法实现模板，无默认实现的方法作为必须 hook；子类型通过 `impl Trait` 定制行为。
 
-### 与 Rust 类型系统的综合联系
+### 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系}
 
 | Rust 机制 | 本模式使用方式 | 保证 |
 
@@ -448,13 +448,13 @@ trait 默认方法实现模板，无默认实现的方法作为必须 hook；子
 
 ---
 
-## 完整证明
+## 完整证明 {#完整证明}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 形式化论证链
+### 形式化论证链 {#形式化论证链}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -486,13 +486,13 @@ Axiom TM2 (钩子可选)
 
 ---
 
-## 形式化属性：不变式、前置/后置条件与安全边界
+## 形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}
 
 >
 
 > **来源: [Formal Methods – Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)** | **来源: [Rust API Guidelines – Safety](https://rust-lang.github.io/api-guidelines/safety.html)**
 
-### 不变式（Invariants）
+### 不变式（Invariants） {#不变式invariants}
 
 1. 模板算法步骤固定。
 
@@ -500,7 +500,7 @@ Axiom TM2 (钩子可选)
 
 3. 模板方法不被子类覆盖（Rust trait 中不可覆盖默认方法）。
 
-### 前置条件（Preconditions）
+### 前置条件（Preconditions） {#前置条件preconditions}
 
 1. 具体类型实现模板 trait。
 
@@ -508,7 +508,7 @@ Axiom TM2 (钩子可选)
 
 3. 模板方法调用方持有 `&self`。
 
-### 后置条件（Postconditions）
+### 后置条件（Postconditions） {#后置条件postconditions}
 
 1. 按固定步骤执行算法。
 
@@ -516,11 +516,11 @@ Axiom TM2 (钩子可选)
 
 3. 不泄露中间资源。
 
-### 安全边界（Safety Boundary）
+### 安全边界（Safety Boundary） {#安全边界safety-boundary}
 
 纯 Safe。模板方法通过 trait 默认方法实现；hook 实现需遵守 trait 文档契约。
 
-### 形式化规约汇总
+### 形式化规约汇总 {#形式化规约汇总}
 
 ```text
 
@@ -536,7 +536,7 @@ Axiom TM2 (钩子可选)
 
 ---
 
-## 典型场景
+## 典型场景 {#典型场景}
 
 >
 
@@ -554,7 +554,7 @@ Axiom TM2 (钩子可选)
 
 ---
 
-## 完整场景示例：数据导入流水线
+## 完整场景示例：数据导入流水线 {#完整场景示例数据导入流水线}
 
 >
 
@@ -618,7 +618,7 @@ impl DataImport for CsvImport {
 
 ---
 
-## 相关模式
+## 相关模式 {#相关模式}
 
 >
 
@@ -636,7 +636,7 @@ impl DataImport for CsvImport {
 
 ---
 
-## 实现变体
+## 实现变体 {#实现变体}
 
 >
 
@@ -654,13 +654,13 @@ impl DataImport for CsvImport {
 
 ---
 
-## 反例：常见误用及编译器错误
+## 反例：常见误用及编译器错误 {#反例常见误用及编译器错误}
 
 >
 
 > **来源: [Rust By Example – Error Handling](https://doc.rust-lang.org/rust-by-example/error.html)** | **来源: [Rust Compiler Error Index](https://doc.rust-lang.org/error_codes/error-index.html)**
 
-### 反例 1：覆盖默认模板方法
+### 反例 1：覆盖默认模板方法 {#反例-1覆盖默认模板方法}
 
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
@@ -676,7 +676,7 @@ impl DataMiner for BadMiner {
 
 Rust 中允许，但违背模板方法意图。
 
-### 反例 2：Hook 签名不匹配
+### 反例 2：Hook 签名不匹配 {#反例-2hook-签名不匹配}
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
 
@@ -692,7 +692,7 @@ impl DataMiner for PdfMiner {
 
 **编译器错误**：`method open has an incompatible type for trait`。
 
-### 反例 3：模板中保留中间借用
+### 反例 3：模板中保留中间借用 {#反例-3模板中保留中间借用}
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
 
@@ -718,7 +718,7 @@ trait DataMiner {
 
 ---
 
-## 选型决策树
+## 选型决策树 {#选型决策树}
 
 >
 
@@ -740,7 +740,7 @@ trait DataMiner {
 
 ---
 
-## 与 GoF 对比
+## 与 GoF 对比 {#与-gof-对比}
 
 >
 
@@ -758,7 +758,7 @@ trait DataMiner {
 
 ---
 
-## 边界
+## 边界 {#边界}
 
 >
 
@@ -776,7 +776,7 @@ trait DataMiner {
 
 ---
 
-## 与 Rust 1.93 的对应
+## 与 Rust 1.93 的对应 {#与-rust-193-的对应}
 
 >
 
@@ -792,7 +792,7 @@ trait DataMiner {
 
 ---
 
-## 思维导图
+## 思维导图 {#思维导图}
 
 >
 
@@ -844,7 +844,7 @@ mindmap
 
 ---
 
-## 与其他模式的关系图
+## 与其他模式的关系图 {#与其他模式的关系图}
 
 >
 
@@ -872,7 +872,7 @@ graph LR
 
 ---
 
-## 实质内容五维自检
+## 实质内容五维自检 {#实质内容五维自检}
 
 >
 
@@ -896,7 +896,7 @@ graph LR
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -906,13 +906,13 @@ graph LR
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -928,7 +928,7 @@ graph LR
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -940,7 +940,7 @@ graph LR
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -974,7 +974,7 @@ graph LR
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -986,7 +986,7 @@ graph LR
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 

@@ -8,7 +8,7 @@
 
 > 核心结论请优先查阅 `concept/` 与 `knowledge/`。
 
-# 型变理论
+# 型变理论 {#型变理论}
 
 > **内容分级**: [归档级]
 
@@ -18,7 +18,7 @@
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -27,30 +27,30 @@
 >
 
 - [型变理论](#型变理论)
-  - [📑 目录](#-目录)
-  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
+  - [📑 目录](#目录)
+  - [🎯 研究目标](#研究目标)
     - [核心问题](#核心问题)
     - [预期成果](#预期成果)
-  - [📚 理论基础 {#-理论基础}](#-理论基础--理论基础)
+  - [📚 理论基础](#理论基础)
     - [子类型关系](#子类型关系)
     - [型变的基本概念](#型变的基本概念)
     - [Rust 中的型变](#rust-中的型变)
     - [相关概念](#相关概念)
     - [理论背景](#理论背景)
-  - [🔬 形式化定义 {#-形式化定义}](#-形式化定义--形式化定义)
+  - [🔬 形式化定义](#形式化定义)
     - [1. 协变 (Covariance)](#1-协变-covariance)
     - [2. 逆变 (Contravariance)](#2-逆变-contravariance)
     - [3. 不变 (Invariance)](#3-不变-invariance)
     - [4. 型变规则](#4-型变规则)
-  - [⚠️ 反例：型变规则必要性](#️-反例型变规则必要性)
+  - [⚠️ 反例：型变规则必要性](#反例型变规则必要性)
     - [反例 1：`&mut T` 若协变则悬垂引用](#反例-1mut-t-若协变则悬垂引用)
     - [反例 2：函数参数若协变则悬垂](#反例-2函数参数若协变则悬垂)
     - [反例 3：`Cell<T>` 若协变则悬垂](#反例-3cellt-若协变则悬垂)
-  - [🌳 公理-定理证明树 {#-公理-定理证明树}](#-公理-定理证明树--公理-定理证明树)
-  - [✅ 证明目标 {#-证明目标}](#-证明目标--证明目标)
+  - [🌳 公理-定理证明树](#公理-定理证明树)
+  - [✅ 证明目标](#证明目标)
     - [待证明的性质](#待证明的性质)
     - [证明方法](#证明方法)
-  - [💻 代码示例与实践 {#-代码示例与实践}](#-代码示例与实践--代码示例与实践)
+  - [💻 代码示例与实践](#代码示例与实践)
     - [示例 1: 协变类型](#示例-1-协变类型)
     - [示例 2: 逆变类型](#示例-2-逆变类型)
     - [示例 3: 不变类型](#示例-3-不变类型)
@@ -61,20 +61,20 @@
   - [五、型变与国际形式化来源](#五型变与国际形式化来源)
     - [型变在形式化工作中的角色](#型变在形式化工作中的角色)
     - [来自 RustBelt/Oxide 的额外证据](#来自-rustbeltoxide-的额外证据)
-  - [📖 参考文献 {#-参考文献}](#-参考文献--参考文献)
+  - [📖 参考文献](#参考文献)
     - [学术论文](#学术论文)
     - [官方文档](#官方文档)
     - [相关代码](#相关代码)
     - [工具资源](#工具资源)
-  - [🔄 研究进展 {#-研究进展}](#-研究进展--研究进展)
-    - [已完成 ✅ {#已完成-}](#已完成--已完成-)
+  - [🔄 研究进展](#研究进展)
+    - [已完成 ✅](#已完成)
     - [进行中 🔄（已完成）](#进行中-已完成)
     - [计划中 📋（已完成）](#计划中-已完成)
-  - [🔗 系统集成与实际应用 {#-系统集成与实际应用}](#-系统集成与实际应用--系统集成与实际应用)
+  - [🔗 系统集成与实际应用](#系统集成与实际应用)
     - [与类型系统的集成](#与类型系统的集成)
-    - [组合法则：类型 + 生命周期 + 型变](#组合法则类型--生命周期--型变)
+    - [组合法则：类型 + 生命周期 + 型变](#组合法则类型-生命周期-型变)
     - [实际应用案例](#实际应用案例)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -93,7 +93,7 @@
 
 ---
 
-## 🎯 研究目标 {#-研究目标}
+## 🎯 研究目标 {#研究目标}
 
 >
 
@@ -101,7 +101,7 @@
 
 本研究的目的是深入理解 Rust 的型变（Variance）理论，并形式化定义型变规则。
 
-### 核心问题
+### 核心问题 {#核心问题}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -115,7 +115,7 @@
 
 3. **型变与内存安全**: 型变如何保证内存安全？
 
-### 预期成果
+### 预期成果 {#预期成果}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -131,13 +131,13 @@
 
 ---
 
-## 📚 理论基础 {#-理论基础}
+## 📚 理论基础 {#理论基础}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 子类型关系
+### 子类型关系 {#子类型关系}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -157,7 +157,7 @@
 
 - **传递性**: $\forall S, T, U. S <: T \land T <: U \Rightarrow S <: U$
 
-### 型变的基本概念
+### 型变的基本概念 {#型变的基本概念}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -179,7 +179,7 @@
 
 - **不变 (Invariance)**: $S <: T$ 不导致 $F[S]$ 和 $F[T]$ 之间的子类型关系
 
-### Rust 中的型变
+### Rust 中的型变 {#rust-中的型变}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -193,7 +193,7 @@
 
 **内存安全**: Rust 的型变规则设计是为了保证内存安全，防止悬垂引用和数据竞争。
 
-### 相关概念
+### 相关概念 {#相关概念}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -213,7 +213,7 @@
 
 **函数类型型变**: 函数类型的参数是逆变的，返回值是协变的。这保证了函数调用的类型安全。
 
-### 理论背景
+### 理论背景 {#理论背景}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -231,13 +231,13 @@
 
 ---
 
-## 🔬 形式化定义 {#-形式化定义}
+## 🔬 形式化定义 {#形式化定义}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 协变 (Covariance)
+### 1. 协变 (Covariance) {#1-协变-covariance}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -275,7 +275,7 @@ $$\text{Cov}[F] \Leftrightarrow \forall S, T. S <: T \Rightarrow F[S] <: F[T]$$
 
 - 子类型关系保证类型安全
 
-### 2. 逆变 (Contravariance)
+### 2. 逆变 (Contravariance) {#2-逆变-contravariance}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -315,7 +315,7 @@ $$
 
 - 函数参数逆变保证了函数调用的类型安全
 
-### 3. 不变 (Invariance)
+### 3. 不变 (Invariance) {#3-不变-invariance}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -379,7 +379,7 @@ $$\text{Inv}[F] \Leftrightarrow \forall S, T. (S <: T \land S \neq T) \Rightarro
 
 - 返回值协变：如果 $U <: V$，则 `fn(T) -> U` 可以替换 `fn(T) -> V`
 
-### 4. 型变规则
+### 4. 型变规则 {#4-型变规则}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -403,7 +403,7 @@ $$\text{Inv}[F] \Leftrightarrow \forall S, T. (S <: T \land S \neq T) \Rightarro
 
 ---
 
-## ⚠️ 反例：型变规则必要性
+## ⚠️ 反例：型变规则必要性 {#反例型变规则必要性}
 
 >
 
@@ -411,7 +411,7 @@ $$\text{Inv}[F] \Leftrightarrow \forall S, T. (S <: T \land S \neq T) \Rightarro
 
 以下反例说明，若违反型变规则将导致内存安全漏洞。
 
-### 反例 1：`&mut T` 若协变则悬垂引用
+### 反例 1：`&mut T` 若协变则悬垂引用 {#反例-1mut-t-若协变则悬垂引用}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -451,7 +451,7 @@ fn evil(mut r: &mut &'a str) {
 
 **结论**：`&mut T` 必须不变。若协变，可变引用可写入「更短生命周期」的值，导致悬垂。
 
-### 反例 2：函数参数若协变则悬垂
+### 反例 2：函数参数若协变则悬垂 {#反例-2函数参数若协变则悬垂}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -459,7 +459,7 @@ fn evil(mut r: &mut &'a str) {
 
 **反例**：期待 `fn(&'static str) -> ()` 的上下文若接受 `fn(&'a str) -> ()`，则调用者可传入 `&'static` 实参，但实际函数可能将引用存储到短生命周期位置，导致悬垂。故参数必须逆变。
 
-### 反例 3：`Cell<T>` 若协变则悬垂
+### 反例 3：`Cell<T>` 若协变则悬垂 {#反例-3cellt-若协变则悬垂}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -469,7 +469,7 @@ fn evil(mut r: &mut &'a str) {
 
 ---
 
-## 🌳 公理-定理证明树 {#-公理-定理证明树}
+## 🌳 公理-定理证明树 {#公理-定理证明树}
 
 >
 
@@ -559,13 +559,13 @@ fn evil(mut r: &mut &'a str) {
 
 ---
 
-## ✅ 证明目标 {#-证明目标}
+## ✅ 证明目标 {#证明目标}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 待证明的性质
+### 待证明的性质 {#待证明的性质}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -575,7 +575,7 @@ fn evil(mut r: &mut &'a str) {
 
 3. **内存安全**: 型变规则保证内存安全
 
-### 证明方法
+### 证明方法 {#证明方法}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -587,13 +587,13 @@ fn evil(mut r: &mut &'a str) {
 
 ---
 
-## 💻 代码示例与实践 {#-代码示例与实践}
+## 💻 代码示例与实践 {#代码示例与实践}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 示例 1: 协变类型
+### 示例 1: 协变类型 {#示例-1-协变类型}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -639,7 +639,7 @@ fn covariant_example() {
 
 - `Box<T>` 在 $T$ 上是协变的
 
-### 示例 2: 逆变类型
+### 示例 2: 逆变类型 {#示例-2-逆变类型}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -707,7 +707,7 @@ fn contravariant_example() {
 
 - `&str <: &'static str \Rightarrow fn(&'static str) <: fn(&str)`
 
-### 示例 3: 不变类型
+### 示例 3: 不变类型 {#示例-3-不变类型}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -757,7 +757,7 @@ fn invariant_example() {
 
 - 不变性保证内存安全
 
-### 示例 4: PhantomData 与型变
+### 示例 4: PhantomData 与型变 {#示例-4-phantomdata-与型变}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -857,7 +857,7 @@ fn phantom_example() {
 
 - 使用 `PhantomData` 可以控制类型的型变行为
 
-### 示例 5: 函数指针型变
+### 示例 5: 函数指针型变 {#示例-5-函数指针型变}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -927,7 +927,7 @@ fn function_pointer_variance() {
 
 - 这保证了类型安全
 
-### 示例 6: 型变与内存安全
+### 示例 6: 型变与内存安全 {#示例-6-型变与内存安全}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -985,7 +985,7 @@ fn variance_memory_safety() {
 
 - 不变保证可变引用的唯一性
 
-### 示例 7: 实际应用场景
+### 示例 7: 实际应用场景 {#示例-7-实际应用场景}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -1097,13 +1097,13 @@ fn use_contravariant_callback() {
 
 ---
 
-## 五、型变与国际形式化来源
+## 五、型变与国际形式化来源 {#五型变与国际形式化来源}
 
 >
 
 > **学术来源**: [Oxide (ICFP 2023 / arXiv:1903.00982)](https://arxiv.org/abs/1903.00982) · [RustBelt (POPL 2018)](https://doi.org/10.1145/3158154) · [Tree Borrows (PLDI 2025)](https://doi.org/10.1145/3735592)
 
-### 型变在形式化工作中的角色
+### 型变在形式化工作中的角色 {#型变在形式化工作中的角色}
 
 | 形式化工作 | 涉及的型变/子类型构造 | 与本文档对应 |
 
@@ -1115,19 +1115,19 @@ fn use_contravariant_callback() {
 
 | **Tree Borrows** | 借用树中只读节点可共享 ↔ 协变；写节点独占 ↔ 不变 | 反例 1 / 反例 3 |
 
-### 来自 RustBelt/Oxide 的额外证据
+### 来自 RustBelt/Oxide 的额外证据 {#来自-rustbeltoxide-的额外证据}
 
 RustBelt 的证明表明：若 `&mut T` 对 `T` 允许协变，则可通过 ghost-state 伪造一个「长生命周期引用实际指向短生命周期数据」的资源，破坏 Iris 不变式。Oxide 则从类型系统角度说明：一旦允许 `&mut T` 协变，progress/preservation 证明中「值在栈上保持良型」的引理将失效。
 
 因此，型变规则不仅是 Rust 编译器的实现选择，也是保证**语义类型安全**的必要条件。
 
-## 📖 参考文献 {#-参考文献}
+## 📖 参考文献 {#参考文献}
 
 >
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 学术论文
+### 学术论文 {#学术论文}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -1145,7 +1145,7 @@ RustBelt 的证明表明：若 `&mut T` 对 `T` 允许协变，则可通过 ghos
 
    - 摘要: Rust 型变系统的设计和实现
 
-### 官方文档
+### 官方文档 {#官方文档}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -1155,7 +1155,7 @@ RustBelt 的证明表明：若 `&mut T` 对 `T` 允许协变，则可通过 ghos
 
 - [型变理论（本篇）](10_variance_theory.md)
 
-### 相关代码
+### 相关代码 {#相关代码}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -1165,7 +1165,7 @@ RustBelt 的证明表明：若 `&mut T` 对 `T` 允许协变，则可通过 ghos
 
 - [形式化工程系统 - 型变](../../../archive/docs/c_class_audit_2026_06_08/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/06_variance.md)
 
-### 工具资源
+### 工具资源 {#工具资源}
 
 >
 
@@ -1177,13 +1177,13 @@ RustBelt 的证明表明：若 `&mut T` 对 `T` 允许协变，则可通过 ghos
 
 ---
 
-## 🔄 研究进展 {#-研究进展}
+## 🔄 研究进展 {#研究进展}
 
 >
 
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 已完成 ✅ {#已完成-}
+### 已完成 ✅ {#已完成}
 
 >
 
@@ -1203,7 +1203,7 @@ RustBelt 的证明表明：若 `&mut T` 对 `T` 允许协变，则可通过 ghos
 
 - [x] 添加函数类型型变定理（定理 4）
 
-### 进行中 🔄（已完成）
+### 进行中 🔄（已完成） {#进行中-已完成}
 
 >
 
@@ -1211,7 +1211,7 @@ RustBelt 的证明表明：若 `&mut T` 对 `T` 允许协变，则可通过 ghos
 
 - [x] 完整的形式化定义（§1–4 协变、逆变、不变、型变规则）、定理 1–4 覆盖型变规则与安全性；型变与内存安全已蕴含于 `&mut T` 不变、`fn(T)` 逆变等规则及借用检查。
 
-### 计划中 📋（已完成）
+### 计划中 📋（已完成） {#计划中-已完成}
 
 >
 
@@ -1221,13 +1221,13 @@ RustBelt 的证明表明：若 `&mut T` 对 `T` 允许协变，则可通过 ghos
 
 ---
 
-## 🔗 系统集成与实际应用 {#-系统集成与实际应用}
+## 🔗 系统集成与实际应用 {#系统集成与实际应用}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 与类型系统的集成
+### 与类型系统的集成 {#与类型系统的集成}
 
 >
 
@@ -1239,7 +1239,7 @@ RustBelt 的证明表明：若 `&mut T` 对 `T` 允许协变，则可通过 ghos
 
 的 subtyping 及 [lifetime_formalization](10_lifetime_formalization.md) 的 $\ell <:$ 一致。
 
-### 组合法则：类型 + 生命周期 + 型变
+### 组合法则：类型 + 生命周期 + 型变 {#组合法则类型-生命周期-型变}
 
 >
 
@@ -1257,7 +1257,7 @@ RustBelt 的证明表明：若 `&mut T` 对 `T` 允许协变，则可通过 ghos
 
 多参数组合时取各参数型变的乘积（协变×协变=协变等）。
 
-### 实际应用案例
+### 实际应用案例 {#实际应用案例}
 
 >
 
@@ -1279,7 +1279,7 @@ RustBelt 的证明表明：若 `&mut T` 对 `T` 允许协变，则可通过 ghos
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -1289,7 +1289,7 @@ RustBelt 的证明表明：若 `&mut T` 对 `T` 允许协变，则可通过 ghos
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -1297,7 +1297,7 @@ RustBelt 的证明表明：若 `&mut T` 对 `T` 允许协变，则可通过 ghos
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -1311,7 +1311,7 @@ RustBelt 的证明表明：若 `&mut T` 对 `T` 允许协变，则可通过 ghos
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -1321,7 +1321,7 @@ RustBelt 的证明表明：若 `&mut T` 对 `T` 允许协变，则可通过 ghos
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -1353,7 +1353,7 @@ RustBelt 的证明表明：若 `&mut T` 对 `T` 允许协变，则可通过 ghos
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Covariance and Contravariance](https://en.wikipedia.org/wiki/Covariance_and_Contravariance)**
 

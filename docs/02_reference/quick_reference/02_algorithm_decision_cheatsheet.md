@@ -1,4 +1,4 @@
-# 算法选择决策树速查卡
+# 算法选择决策树速查卡 {#算法选择决策树速查卡}
 
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
@@ -11,21 +11,21 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [算法选择决策树速查卡](#算法选择决策树速查卡)
-  - [📑 目录](#-目录)
-  - [📊 排序算法](#-排序算法)
-  - [📊 搜索算法](#-搜索算法)
-  - [📊 图算法](#-图算法)
-  - [📊 动态规划](#-动态规划)
-  - [🔗 参考](#-参考)
+  - [📑 目录](#目录)
+  - [📊 排序算法](#排序算法)
+  - [📊 搜索算法](#搜索算法)
+  - [📊 图算法](#图算法)
+  - [📊 动态规划](#动态规划)
+  - [🔗 参考](#参考)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 📊 排序算法
+## 📊 排序算法 {#排序算法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -44,7 +44,7 @@
 
 ---
 
-## 📊 搜索算法
+## 📊 搜索算法 {#搜索算法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -57,7 +57,7 @@
 
 ---
 
-## 📊 图算法
+## 📊 图算法 {#图算法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -72,7 +72,7 @@
 
 ---
 
-## 📊 动态规划
+## 📊 动态规划 {#动态规划}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -91,7 +91,7 @@
 
 ---
 
-## 🔗 参考
+## 🔗 参考 {#参考}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -120,7 +120,7 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -129,7 +129,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**

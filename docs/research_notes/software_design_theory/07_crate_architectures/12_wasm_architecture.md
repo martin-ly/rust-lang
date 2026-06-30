@@ -1,4 +1,4 @@
-# WebAssembly 互操作架构
+# WebAssembly 互操作架构 {#webassembly-互操作架构}
 
 > **内容分级**: [归档级]
 >
@@ -14,9 +14,9 @@
 
 ---
 
-## 说明
+## 说明 {#说明}
 
-本文档为 `c12_wasm` crate 的架构占位与索引入口，详细实现参见 [crates/c12_wasm](../../../crates/c12_wasm/README.md)。
+本文档为 `c12_wasm` crate 的架构占位与索引入口，详细实现参见 [crates/c12_wasm](../../../../crates/c12_wasm/README.md)。
 
 > **来源: [The Rust and WebAssembly Book](https://rustwasm.github.io/docs/book/)**
 

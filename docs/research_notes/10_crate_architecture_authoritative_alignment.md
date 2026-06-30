@@ -1,4 +1,4 @@
-# Crate 架构权威来源对齐矩阵
+# Crate 架构权威来源对齐矩阵 {#crate-架构权威来源对齐矩阵}
 
 > **概念族**: 权威来源对齐 / Crate 架构
 > **内容分级**: [核心级]
@@ -11,14 +11,14 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [Crate 架构权威来源对齐矩阵](#crate-架构权威来源对齐矩阵)
   - [目录](#目录)
   - [一、对齐说明](#一对齐说明)
   - [二、P0 官方来源对齐](#二p0-官方来源对齐)
     - [2.1 Cargo Book](#21-cargo-book)
-    - [2.2 Rust Reference – Items and Crates](#22-rust-reference--items-and-crates)
+    - [2.2 Rust Reference – Items and Crates](#22-rust-reference-items-and-crates)
     - [2.3 Rust API Guidelines](#23-rust-api-guidelines)
   - [三、P2 社区来源对齐](#三p2-社区来源对齐)
     - [3.1 Rust Design Patterns](#31-rust-design-patterns)
@@ -27,7 +27,7 @@
     - [3.4 crates.io 政策](#34-cratesio-政策)
   - [四、Crate 架构主题覆盖](#四crate-架构主题覆盖)
     - [4.1 Workspace 组织](#41-workspace-组织)
-    - [4.2 Public / Private API](#42-public--private-api)
+    - [4.2 Public / Private API](#42-public-private-api)
     - [4.3 Feature 设计](#43-feature-设计)
     - [4.4 错误类型](#44-错误类型)
     - [4.5 日志与 Tracing](#45-日志与-tracing)
@@ -42,7 +42,7 @@
 
 ---
 
-## 一、对齐说明
+## 一、对齐说明 {#一对齐说明}
 
 本文档将 `docs/research_notes/` 中关于 **Crate 架构** 的内容与 P0 官方、P2 社区权威来源建立映射，覆盖 workspace 组织、公开/私有 API 边界、feature 设计、错误处理、日志、配置、CLI、库/二进制拆分、MSRV 策略等关键工程主题。目标是为项目中的 crate 架构决策提供可追溯的权威依据。
 
@@ -50,9 +50,9 @@
 
 ---
 
-## 二、P0 官方来源对齐
+## 二、P0 官方来源对齐 {#二p0-官方来源对齐}
 
-### 2.1 Cargo Book
+### 2.1 Cargo Book {#21-cargo-book}
 
 | Cargo Book 章节 | 项目文档 | 状态 | 备注 |
 |-----------------|----------|------|------|
@@ -64,7 +64,7 @@
 | [rust-version field](https://doc.rust-lang.org/cargo/reference/manifest.html#the-rust-version-field) | [10_version_evolution_alignment.md](10_version_evolution_alignment.md) | ✅ | MSRV 声明机制 |
 | [Config Profiles](https://doc.rust-lang.org/cargo/reference/profiles.html) | [Cargo.toml](../../Cargo.toml) | ✅ | dev/release 优化配置 |
 
-### 2.2 Rust Reference – Items and Crates
+### 2.2 Rust Reference – Items and Crates {#22-rust-reference-items-and-crates}
 
 | Rust Reference 章节 | 项目文档 | 状态 | 备注 |
 |---------------------|----------|------|------|
@@ -73,7 +73,7 @@
 | [Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) §4 | ✅ | `pub`、`pub(crate)`、`pub(in path)` |
 | [Use declarations](https://doc.rust-lang.org/reference/items/use-declarations.html) | [formal_modules/70_module_patterns_and_refactoring.md](formal_modules/70_module_patterns_and_refactoring.md) §4 | ✅ | 重导出与 API 塑形 |
 
-### 2.3 Rust API Guidelines
+### 2.3 Rust API Guidelines {#23-rust-api-guidelines}
 
 | API Guidelines 章节 | 项目文档 | 状态 | 备注 |
 |---------------------|----------|------|------|
@@ -85,9 +85,9 @@
 
 ---
 
-## 三、P2 社区来源对齐
+## 三、P2 社区来源对齐 {#三p2-社区来源对齐}
 
-### 3.1 Rust Design Patterns
+### 3.1 Rust Design Patterns {#31-rust-design-patterns}
 
 | Design Patterns 章节 | 项目文档 | 状态 | 备注 |
 |----------------------|----------|------|------|
@@ -96,14 +96,14 @@
 | [Builder](https://rust-unofficial.github.io/patterns/patterns/creational/builder.html) | [software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) §四 | ✅ | Clap / Reqwest 风格 Builder |
 | [Strategy](https://rust-unofficial.github.io/patterns/patterns/behavioural/strategy.html) | [software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) §四 | ✅ | Wgpu / Tower 后端抽象 |
 
-### 3.2 Rust Modules Guide
+### 3.2 Rust Modules Guide {#32-rust-modules-guide}
 
 | 来源 | 项目文档 | 状态 | 备注 |
 |------|----------|------|------|
 | [Rust Modules Guide](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) | [formal_modules/70_module_patterns_and_refactoring.md](formal_modules/70_module_patterns_and_refactoring.md) | ✅ | 模块分层、职责划分 |
 | [Cargo Guide – Project Layout](https://doc.rust-lang.org/cargo/guide/project-layout.html) | [formal_modules/10_module_system_specification.md](formal_modules/10_module_system_specification.md) §2 | ✅ | package 目录结构 |
 
-### 3.3 SemVer 与 cargo book 实战
+### 3.3 SemVer 与 cargo book 实战 {#33-semver-与-cargo-book-实战}
 
 | 来源 | 项目文档 | 状态 | 备注 |
 |------|----------|------|------|
@@ -111,7 +111,7 @@
 | [cargo-public-api](https://github.com/EmbarkStudios/cargo-public-api) 实战 | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) §7 | ✅ | API 变化检测 |
 | [cargo-hack](https://github.com/taiki-e/cargo-hack) 实战 | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) §5 | ✅ | feature 组合测试 |
 
-### 3.4 crates.io 政策
+### 3.4 crates.io 政策 {#34-cratesio-政策}
 
 | 来源 | 项目文档 | 状态 | 备注 |
 |------|----------|------|------|
@@ -120,9 +120,9 @@
 
 ---
 
-## 四、Crate 架构主题覆盖
+## 四、Crate 架构主题覆盖 {#四crate-架构主题覆盖}
 
-### 4.1 Workspace 组织
+### 4.1 Workspace 组织 {#41-workspace-组织}
 
 | 主题 | 权威来源 | 项目文档 | 状态 |
 |------|----------|----------|------|
@@ -130,7 +130,7 @@
 | 统一依赖版本 | [Workspace Dependencies](https://doc.rust-lang.org/cargo/reference/workspaces.html#the-dependencies-table) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) §6 | ✅ |
 | 循环依赖规避 | [Cargo Book – Resolver](https://doc.rust-lang.org/cargo/reference/resolver.html) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) §1 | ✅ |
 
-### 4.2 Public / Private API
+### 4.2 Public / Private API {#42-public-private-api}
 
 | 主题 | 权威来源 | 项目文档 | 状态 |
 |------|----------|----------|------|
@@ -138,7 +138,7 @@
 | Sealed trait | [Rust API Guidelines – Future-proofing](https://rust-lang.github.io/api-guidelines/future-proofing.html) | [formal_modules/70_module_patterns_and_refactoring.md](formal_modules/70_module_patterns_and_refactoring.md) §3 | ✅ |
 | 内部类型不外泄 | [Rust API Guidelines – Type Safety](https://rust-lang.github.io/api-guidelines/type-safety.html) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) §3 | ✅ |
 
-### 4.3 Feature 设计
+### 4.3 Feature 设计 {#43-feature-设计}
 
 | 主题 | 权威来源 | 项目文档 | 状态 |
 |------|----------|----------|------|
@@ -146,7 +146,7 @@
 | Feature resolver v2/v3 | [The Features 2.0 Resolver](https://doc.rust-lang.org/cargo/reference/features.html#feature-resolver-version-2) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) §5 | ✅ |
 | 可选依赖 | [Optional Dependencies](https://doc.rust-lang.org/cargo/reference/features.html#optional-dependencies) | [software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) §二 | ✅ |
 
-### 4.4 错误类型
+### 4.4 错误类型 {#44-错误类型}
 
 | 主题 | 权威来源 | 项目文档 | 状态 |
 |------|----------|----------|------|
@@ -154,7 +154,7 @@
 | thiserror / anyhow | [thiserror docs](https://docs.rs/thiserror) / [anyhow docs](https://docs.rs/anyhow) | [crates/common/README.md](../../crates/common/README.md) | 🔄 |
 | 库错误 vs 应用错误 | [Rust API Guidelines – Errors](https://rust-lang.github.io/api-guidelines/interoperability.html#c-fail) | [10_error_handling_network_web_alignment.md](10_error_handling_network_web_alignment.md) | ✅ |
 
-### 4.5 日志与 Tracing
+### 4.5 日志与 Tracing {#45-日志与-tracing}
 
 | 主题 | 权威来源 | 项目文档 | 状态 |
 |------|----------|----------|------|
@@ -162,7 +162,7 @@
 | `tracing` 架构 | [tokio.rs – tracing](https://tokio.rs/tokio/topics/tracing) | [software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) §二 | ✅ |
 | 结构化日志 | [Tracing – Spans](https://docs.rs/tracing) | [software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) §四 | ✅ |
 
-### 4.6 配置管理
+### 4.6 配置管理 {#46-配置管理}
 
 | 主题 | 权威来源 | 项目文档 | 状态 |
 |------|----------|----------|------|
@@ -170,7 +170,7 @@
 | 配置文件序列化 | [Serde docs](https://serde.rs/) | [software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) §二 | ✅ |
 | `LazyLock` 全局配置 | [Rust Standard Library](https://doc.rust-lang.org/std/sync/struct.LazyLock.html) | [10_rust_194_research_update.md](10_rust_194_research_update.md) | ✅ |
 
-### 4.7 CLI 设计
+### 4.7 CLI 设计 {#47-cli-设计}
 
 | 主题 | 权威来源 | 项目文档 | 状态 |
 |------|----------|----------|------|
@@ -178,7 +178,7 @@
 | CLI 12-factor | [Rust CLI Book](https://rust-cli.github.io/book/index.html) | [software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) §六 | ✅ |
 | 二进制入口与 lib 共享 | [Cargo Book – Targets](https://doc.rust-lang.org/cargo/reference/cargo-targets.html) | [formal_modules/60_module_counterexamples.md](formal_modules/60_module_counterexamples.md) §6 | ✅ |
 
-### 4.8 库 vs 二进制
+### 4.8 库 vs 二进制 {#48-库-vs-二进制}
 
 | 主题 | 权威来源 | 项目文档 | 状态 |
 |------|----------|----------|------|
@@ -186,7 +186,7 @@
 | Crate types | [Cargo Book – crate-type](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#the-crate-type-field) | [formal_modules/20_linkage_and_symbols.md](formal_modules/20_linkage_and_symbols.md) §3 | ✅ |
 | 一个 package 多个 bin | [Cargo Targets](https://doc.rust-lang.org/cargo/reference/cargo-targets.html) | [crates/common/README.md](../../crates/common/README.md) | 🔄 |
 
-### 4.9 MSRV 策略
+### 4.9 MSRV 策略 {#49-msrv-策略}
 
 | 主题 | 权威来源 | 项目文档 | 状态 |
 |------|----------|----------|------|
@@ -196,7 +196,7 @@
 
 ---
 
-## 五、项目文档映射
+## 五、项目文档映射 {#五项目文档映射}
 
 | 文档 | 作用 |
 |------|------|
@@ -212,7 +212,7 @@
 
 ---
 
-## 六、未覆盖缺口
+## 六、未覆盖缺口 {#六未覆盖缺口}
 
 1. **具体 crate 的 workspace 拆分案例**：当前以反例和主索引为主，缺少一个真实 multi-crate workspace 的逐步演进示例。
 2. **feature 组合测试自动化**：`cargo-hack` 与 CI 集成的详细脚本未单独成文。
@@ -223,7 +223,7 @@
 
 > **权威来源**: [Cargo Book](https://doc.rust-lang.org/cargo/) | [Rust Reference](https://doc.rust-lang.org/reference/) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [crates.io policies](https://crates.io/policies)
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
 - [Cargo Book 对齐矩阵](10_cargo_book_alignment.md)
@@ -237,7 +237,7 @@
 
 ---
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 本对齐矩阵同时参考以下 P1 学术权威来源，以形成完整的官方-学术对照网络：
 

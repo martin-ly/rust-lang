@@ -1,4 +1,4 @@
-# Rust 1.98 Nightly 前瞻速查表
+# Rust 1.98 Nightly 前瞻速查表 {#rust-198-nightly-前瞻速查表}
 
 > **分级**: [A]
 > **Bloom 层级**: L3 (应用)
@@ -13,14 +13,14 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [Rust 1.98 Nightly 前瞻速查表](#rust-198-nightly-前瞻速查表)
   - [目录](#目录)
   - [语言特性](#语言特性)
-    - [`gen` 块 — 原生生成器](#gen-块--原生生成器)
-    - [`for await` — 异步迭代语法糖](#for-await--异步迭代语法糖)
-    - [`derive(CoercePointee)` — 智能指针自动推导](#derivecoercepointee--智能指针自动推导)
+    - [`gen` 块 — 原生生成器](#gen-块-原生生成器)
+    - [`for await` — 异步迭代语法糖](#for-await-异步迭代语法糖)
+    - [`derive(CoercePointee)` — 智能指针自动推导](#derivecoercepointee-智能指针自动推导)
     - [`never_type` 推进稳定化](#never_type-推进稳定化)
     - [函数对齐 `#[rustc_align]`](#函数对齐-rustc_align)
     - [调试断点 `breakpoint`](#调试断点-breakpoint)
@@ -34,12 +34,12 @@
 
 ---
 
-## 语言特性
+## 语言特性 {#语言特性}
 
 > **[来源: Rust Nightly Documentation](https://doc.rust-lang.org/nightly/std/ops/trait.Iterator.html)**
 > **[来源: RFC 3513 — gen blocks](https://rust-lang.github.io/rfcs/3513-gen-blocks.html)**
 
-### `gen` 块 — 原生生成器
+### `gen` 块 — 原生生成器 {#gen-块-原生生成器}
 
 `gen { yield ... }` 提供了一种直观的方式构造惰性迭代器，无需显式实现 `Iterator` trait 或使用 `std::iter::from_fn`。
 
@@ -70,7 +70,7 @@ for x in fibonacci().take(10) {
 
 ---
 
-### `for await` — 异步迭代语法糖
+### `for await` — 异步迭代语法糖 {#for-await-异步迭代语法糖}
 
 `for await x in stream` 是 `while let Some(x) = stream.next().await` 的语法糖，
 配合 `AsyncIterator` trait 使用。
@@ -109,7 +109,7 @@ async fn sum_stream() -> i32 {
 
 ---
 
-### `derive(CoercePointee)` — 智能指针自动推导
+### `derive(CoercePointee)` — 智能指针自动推导 {#derivecoercepointee-智能指针自动推导}
 
 RFC 3621 的实现。通过 `#[derive(CoercePointee)]` 自动生成 `CoerceUnsized` 实现，
 使自定义智能指针支持 `T` → `dyn Trait` 的自动强制转换。
@@ -136,7 +136,7 @@ impl<'a, T: ?Sized> Deref for MyBox<'a, T> {
 
 ---
 
-### `never_type` 推进稳定化
+### `never_type` 推进稳定化 {#never_type-推进稳定化}
 
 `!` (never type) 的稳定化 PR (#155499) 正在进行中。nightly 1.98 中：
 
@@ -161,7 +161,7 @@ fn exhaustive_match(r: Result<i32, !>) -> i32 {
 
 ---
 
-### 函数对齐 `#[rustc_align]`
+### 函数对齐 `#[rustc_align]` {#函数对齐-rustc_align}
 
 控制函数在内存中的起始地址对齐，对 I-cache 优化和 SIMD 入口对齐有意义。
 
@@ -179,7 +179,7 @@ pub fn simd_aligned_entry() -> i32 { 0 }
 
 ---
 
-### 调试断点 `breakpoint`
+### 调试断点 `breakpoint` {#调试断点-breakpoint}
 
 `core::intrinsics::breakpoint()` 生成架构相关的断点指令，用于调试器 hook。
 
@@ -195,7 +195,7 @@ pub fn debug_pause() {
 
 ---
 
-## 核心标准库 API (进行中稳定化)
+## 核心标准库 API (进行中稳定化) {#核心标准库-api-进行中稳定化}
 
 > **[来源: Rust Standard Library — Unstable Features](https://doc.rust-lang.org/nightly/std/)**
 > **[来源: Rust Release Tracking](https://releases.rs/)**
@@ -218,11 +218,11 @@ pub fn debug_pause() {
 
 ---
 
-## 快速参考示例
+## 快速参考示例 {#快速参考示例}
 
 > **[来源: Rust Nightly Documentation](https://doc.rust-lang.org/nightly/)**
 
-### 惰性斐波那契序列
+### 惰性斐波那契序列 {#惰性斐波那契序列}
 
 ```rust
 #![feature(gen_blocks, yield_expr)]
@@ -241,7 +241,7 @@ assert_eq!(fibonacci().take(6).collect::<Vec<_>>(),
            vec![0, 1, 1, 2, 3, 5]);
 ```
 
-### 异步流求和
+### 异步流求和 {#异步流求和}
 
 ```rust
 #![feature(async_iterator, async_for_loop)]
@@ -255,7 +255,7 @@ async fn sum_async<I: AsyncIterator<Item = i32>>(iter: I) -> i32 {
 }
 ```
 
-### 自定义智能指针
+### 自定义智能指针 {#自定义智能指针}
 
 ```rust
 #![feature(derive_coerce_pointee)]
@@ -275,7 +275,7 @@ impl<'a, T: ?Sized> Deref for SmartPtr<'a, T> {
 
 ---
 
-## Feature Gate 清单
+## Feature Gate 清单 {#feature-gate-清单}
 
 > **[来源: The Unstable Book](https://doc.rust-lang.org/nightly/unstable-book/index.html)**
 
@@ -302,7 +302,7 @@ impl<'a, T: ?Sized> Deref for SmartPtr<'a, T> {
 
 ---
 
-## 相关链接
+## 相关链接 {#相关链接}
 
 - [Rust 1.97 特性速查表](02_rust_197_features_cheatsheet.md)
 - [Rust 1.96 特性速查表](02_rust_196_features_cheatsheet.md)

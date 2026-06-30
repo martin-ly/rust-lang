@@ -1,4 +1,4 @@
-# Rust 概念关联网络
+# Rust 概念关联网络 {#rust-概念关联网络}
 >
 > **概念族**: 概念框架
 
@@ -15,24 +15,24 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 概念关联网络](#rust-概念关联网络)
-  - [📑 目录](#-目录)
-  - [🎯 概述 {#-概述}](#-概述--概述)
+  - [📑 目录](#目录)
+  - [🎯 概述](#概述)
   - [概念节点定义](#概念节点定义)
     - [L1: 元概念节点](#l1-元概念节点)
     - [L2: 核心概念族节点](#l2-核心概念族节点)
     - [L3: 具体概念节点](#l3-具体概念节点)
     - [L4: 实现机制节点](#l4-实现机制节点)
   - [关系类型定义](#关系类型定义)
-    - [等价关系 ≡ {#等价关系-}](#等价关系--等价关系-)
-    - [蕴含关系 ⇒ {#蕴含关系-}](#蕴含关系--蕴含关系-)
-    - [互斥关系 ⊥ {#互斥关系-}](#互斥关系--互斥关系-)
-    - [组合关系 ∘ {#组合关系-}](#组合关系--组合关系-)
-    - [层次关系 ⊂ {#层次关系-}](#层次关系--层次关系-)
+    - [等价关系 ≡](#等价关系)
+    - [蕴含关系 ⇒](#蕴含关系)
+    - [互斥关系 ⊥](#互斥关系)
+    - [组合关系 ∘](#组合关系)
+    - [层次关系 ⊂](#层次关系)
   - [关联矩阵](#关联矩阵)
     - [L1-L2 关联矩阵](#l1-l2-关联矩阵)
     - [L2-L3 关联矩阵](#l2-l3-关联矩阵)
@@ -44,28 +44,27 @@
     - [并发概念子图](#并发概念子图)
   - [导航索引](#导航索引)
     - [概念到文档映射](#概念到文档映射)
-      - [L1 元概念 → 文档](#l1-元概念--文档)
-      - [L2 核心概念 → 文档](#l2-核心概念--文档)
-      - [L3 具体概念 → 文档](#l3-具体概念--文档)
+      - [L1 元概念 → 文档](#l1-元概念-文档)
+      - [L2 核心概念 → 文档](#l2-核心概念-文档)
+      - [L3 具体概念 → 文档](#l3-具体概念-文档)
     - [概念间导航路径](#概念间导航路径)
       - [路径1: 从代码问题到形式化理论](#路径1-从代码问题到形式化理论)
       - [路径2: 从并发需求到实现机制](#路径2-从并发需求到实现机制)
       - [路径3: 从泛型到类型安全](#路径3-从泛型到类型安全)
       - [路径4: 互斥关系处理路径](#路径4-互斥关系处理路径)
-  - [📊 关系统计 {#-关系统计}](#-关系统计--关系统计)
-  - [📚 相关文档 {#-相关文档}](#-相关文档--相关文档)
-  - [🆕 Rust 1.94 研究更新](#-rust-194-研究更新)
+  - [📊 关系统计](#关系统计)
+  - [📚 相关文档](#相关文档)
+  - [🆕 Rust 1.94 研究更新](#rust-194-研究更新)
     - [核心研究点](#核心研究点)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+      - [相关文档](#相关文档-1)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🎯 概述 {#-概述}
+## 🎯 概述 {#概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -78,11 +77,11 @@
 
 ---
 
-## 概念节点定义
+## 概念节点定义 {#概念节点定义}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### L1: 元概念节点
+### L1: 元概念节点 {#l1-元概念节点}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -96,7 +95,7 @@
 | M4 | 内存安全 | 无悬垂指针、无数据竞争 | {抽象度: 高, 跨语言: 部分} |
 | M5 | 抽象能力 | 代码复用和接口定义 | {抽象度: 高, 跨语言: 是} |
 
-### L2: 核心概念族节点
+### L2: 核心概念族节点 {#l2-核心概念族节点}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -119,7 +118,7 @@
 | C13 | 异步编程 | 并发族 | 协作式多任务 | {核心: 是, 独特: 部分} |
 | C14 | 同步原语 | 并发族 | 线程间同步机制 | {核心: 是, 独特: 否} |
 
-### L3: 具体概念节点
+### L3: 具体概念节点 {#l3-具体概念节点}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -146,7 +145,7 @@
 | S17 | Pin/Unpin | C13 | 固定内存位置 | {具体度: 中} |
 | S18 | Send/Sync | C12 | 线程安全标记 | {具体度: 高} |
 
-### L4: 实现机制节点
+### L4: 实现机制节点 {#l4-实现机制节点}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -166,11 +165,11 @@
 
 ---
 
-## 关系类型定义
+## 关系类型定义 {#关系类型定义}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 等价关系 ≡ {#等价关系-}
+### 等价关系 ≡ {#等价关系}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -187,7 +186,7 @@
 
 **形式化**: A ≡ B ⟺ ∀x: x ∈ A ⟺ x ∈ B
 
-### 蕴含关系 ⇒ {#蕴含关系-}
+### 蕴含关系 ⇒ {#蕴含关系}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -210,7 +209,7 @@
 
 **形式化**: A ⇒ B ⟺ A → B (逻辑蕴含)
 
-### 互斥关系 ⊥ {#互斥关系-}
+### 互斥关系 ⊥ {#互斥关系}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -229,7 +228,7 @@
 
 **形式化**: A ⊥ B ⟺ ¬(A ∧ B) (逻辑互斥)
 
-### 组合关系 ∘ {#组合关系-}
+### 组合关系 ∘ {#组合关系}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -250,7 +249,7 @@
 
 **形式化**: A ∘ B = C ⟺ C = f(A, B) (组合函数)
 
-### 层次关系 ⊂ {#层次关系-}
+### 层次关系 ⊂ {#层次关系}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -275,11 +274,11 @@
 
 ---
 
-## 关联矩阵
+## 关联矩阵 {#关联矩阵}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### L1-L2 关联矩阵
+### L1-L2 关联矩阵 {#l1-l2-关联矩阵}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -296,7 +295,7 @@
 - 1 = 直接关联（层次包含或等价关系）
 - 0 = 无直接关联
 
-### L2-L3 关联矩阵
+### L2-L3 关联矩阵 {#l2-l3-关联矩阵}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -317,7 +316,7 @@
 | **C13 异步编程** | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 1 | 0 |
 | **C14 同步原语** | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 
-### L3-L4 关联矩阵
+### L3-L4 关联矩阵 {#l3-l4-关联矩阵}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -344,11 +343,11 @@
 
 ---
 
-## 知识图谱
+## 知识图谱 {#知识图谱}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 全局概念图谱
+### 全局概念图谱 {#全局概念图谱}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -442,7 +441,7 @@ graph TB
     C8 -.->|组合| M4
 ```
 
-### 所有权概念子图
+### 所有权概念子图 {#所有权概念子图}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -473,7 +472,7 @@ graph TB
     style C7 fill:#ffebee
 ```
 
-### 类型系统概念子图
+### 类型系统概念子图 {#类型系统概念子图}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -498,7 +497,7 @@ graph LR
     style I3 fill:#fff3e0
 ```
 
-### 并发概念子图
+### 并发概念子图 {#并发概念子图}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -527,15 +526,15 @@ graph TB
 
 ---
 
-## 导航索引
+## 导航索引 {#导航索引}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 概念到文档映射
+### 概念到文档映射 {#概念到文档映射}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-#### L1 元概念 → 文档
+#### L1 元概念 → 文档 {#l1-元概念-文档}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -547,7 +546,7 @@ graph TB
 | M4 内存安全 | [10_ownership_model.md](formal_methods/10_ownership_model.md) | 形式化 | 10_borrow_checker_proof.md |
 | M5 抽象能力 | [10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | 形式化 | 10_type_system_foundations.md |
 
-#### L2 核心概念 → 文档
+#### L2 核心概念 → 文档 {#l2-核心概念-文档}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -561,7 +560,7 @@ graph TB
 | C13 异步编程 | [10_async_state_machine.md](formal_methods/10_async_state_machine.md) | 形式化 | 05_async_programming_usage_guide.md |
 | C12 并发 | [10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) | 形式化 | threads_concurrency_usage_guide.md |
 
-#### L3 具体概念 → 文档
+#### L3 具体概念 → 文档 {#l3-具体概念-文档}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -577,11 +576,11 @@ graph TB
 | S15 async/await | [05_async_programming_usage_guide.md](../05_guides/05_async_programming_usage_guide.md) | 指南 | examples/async/ |
 | S18 Send/Sync | [10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) | 形式化 | examples/concurrency/ |
 
-### 概念间导航路径
+### 概念间导航路径 {#概念间导航路径}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-#### 路径1: 从代码问题到形式化理论
+#### 路径1: 从代码问题到形式化理论 {#路径1-从代码问题到形式化理论}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -611,7 +610,7 @@ M4 内存安全 ← 形式化定理证明
 10_ownership_model.md (L2-L1)
 ```
 
-#### 路径2: 从并发需求到实现机制
+#### 路径2: 从并发需求到实现机制 {#路径2-从并发需求到实现机制}
 
 ```text
 并发需求
@@ -639,7 +638,7 @@ threads_concurrency_usage_guide.md (L3-L5)
 10_async_state_machine.md (L4)
 ```
 
-#### 路径3: 从泛型到类型安全
+#### 路径3: 从泛型到类型安全 {#路径3-从泛型到类型安全}
 
 ```text
 泛型代码
@@ -667,7 +666,7 @@ M2 类型安全 ← 形式化证明
 10_lifetime_formalization.md (L2-L4)
 ```
 
-#### 路径4: 互斥关系处理路径
+#### 路径4: 互斥关系处理路径 {#路径4-互斥关系处理路径}
 
 ```text
 C6 共享借用 ⊥ C7 可变借用
@@ -688,7 +687,7 @@ C6 共享借用 ⊥ C7 可变借用
 
 ---
 
-## 📊 关系统计 {#-关系统计}
+## 📊 关系统计 {#关系统计}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -704,7 +703,7 @@ C6 共享借用 ⊥ C7 可变借用
 
 ---
 
-## 📚 相关文档 {#-相关文档}
+## 📚 相关文档 {#相关文档}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -723,13 +722,13 @@ C6 共享借用 ⊥ C7 可变借用
 
 ---
 
-## 🆕 Rust 1.94 研究更新
+## 🆕 Rust 1.94 研究更新 {#rust-194-研究更新}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.96.0+
 
-### 核心研究点
+### 核心研究点 {#核心研究点}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -744,20 +743,20 @@ C6 共享借用 ⊥ C7 可变借用
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -766,7 +765,7 @@ C6 共享借用 ⊥ C7 可变借用
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -774,7 +773,7 @@ C6 共享借用 ⊥ C7 可变借用
 - ✅ 兼容Edition 2024
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档-1}
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查
@@ -797,7 +796,7 @@ C6 共享借用 ⊥ C7 可变借用
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -806,7 +805,7 @@ C6 共享借用 ⊥ C7 可变借用
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

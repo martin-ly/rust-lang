@@ -1,4 +1,4 @@
-# Rust 决策图网 / Decision Graph Network
+# Rust 决策图网 / Decision Graph Network {#rust-决策图网-decision-graph-network}
 
 > **分级**: [B]
 > **Bloom 层级**: L4-L5 (分析/评价)
@@ -9,52 +9,52 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Rust 决策图网 / Decision Graph Network](#rust-决策图网--decision-graph-network)
-  - [📑 目录](#-目录)
-  - [🎯 决策图网概述 {#-决策图网概述}](#-决策图网概述--决策图网概述)
+- [Rust 决策图网 / Decision Graph Network](#rust-决策图网-decision-graph-network)
+  - [📑 目录](#目录)
+  - [🎯 决策图网概述](#决策图网概述)
     - [核心属性](#核心属性)
     - [应用场景](#应用场景)
-  - [🚀 核心决策流程 {#-核心决策流程}](#-核心决策流程--核心决策流程)
-  - [📦 模块化决策树 {#-模块化决策树}](#-模块化决策树--模块化决策树)
+  - [🚀 核心决策流程](#核心决策流程)
+  - [📦 模块化决策树](#模块化决策树)
     - [1. 所有权与借用决策树](#1-所有权与借用决策树)
     - [2. 类型系统决策树](#2-类型系统决策树)
     - [3. 控制流决策树](#3-控制流决策树)
     - [4. 异步编程决策树](#4-异步编程决策树)
     - [5. Pin 使用场景决策树](#5-pin-使用场景决策树)
     - [6. 表达能力边界决策树](#6-表达能力边界决策树)
-  - [🔧 技术选型决策树 {#-技术选型决策树}](#-技术选型决策树--技术选型决策树)
+  - [🔧 技术选型决策树](#技术选型决策树)
     - [集合类型选择](#集合类型选择)
     - [错误处理策略选择](#错误处理策略选择)
     - [并发模型选择](#并发模型选择)
     - [序列化库选择](#序列化库选择)
     - [Web框架选择](#web框架选择)
     - [数据库访问选择](#数据库访问选择)
-  - [🐛 调试决策树 {#-调试决策树}](#-调试决策树--调试决策树)
+  - [🐛 调试决策树](#调试决策树)
     - [编译错误调试](#编译错误调试)
     - [运行时错误调试](#运行时错误调试)
     - [性能问题调试](#性能问题调试)
     - [内存问题调试](#内存问题调试)
-  - [⚡ 优化决策树 {#-优化决策树}](#-优化决策树--优化决策树)
+  - [⚡ 优化决策树](#优化决策树)
     - [CPU优化决策树](#cpu优化决策树)
     - [内存优化决策树](#内存优化决策树)
     - [I/O优化决策树](#io优化决策树)
     - [编译优化决策树](#编译优化决策树)
-  - [📚 学习路径决策树 {#-学习路径决策树}](#-学习路径决策树--学习路径决策树)
+  - [📚 学习路径决策树](#学习路径决策树)
     - [新手学习路径](#新手学习路径)
     - [有经验开发者路径](#有经验开发者路径)
     - [专项技能提升路径](#专项技能提升路径)
-  - [📊 决策矩阵总结 {#-决策矩阵总结}](#-决策矩阵总结--决策矩阵总结)
+  - [📊 决策矩阵总结](#决策矩阵总结)
     - [快速决策参考](#快速决策参考)
-  - [🔗 相关文档 {#-相关文档}](#-相关文档--相关文档)
+  - [🔗 相关文档](#相关文档)
     - [设计机制论证](#设计机制论证)
     - [表达能力与边界](#表达能力与边界)
     - [证明与安全](#证明与安全)
     - [分布式与工作流决策树（formal\_methods 独立）](#分布式与工作流决策树formal_methods-独立)
-    - [相关文档](#相关文档)
+    - [相关文档](#相关文档-2)
   - [Rust 1.95+ 思维表征更新](#rust-195-思维表征更新)
     - [新增思维表征](#新增思维表征)
     - [示例](#示例)
@@ -62,17 +62,17 @@
     - [本文档的Rust 1.95+更新要点](#本文档的rust-195更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档-1)
+      - [相关文档](#相关文档-2)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🎯 决策图网概述 {#-决策图网概述}
+## 🎯 决策图网概述 {#决策图网概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **决策图网 (Decision Graph Network)** 是一种结构化的决策支持工具，通过树状结构和图网络展示不同场景下的技术选择路径。
 
-### 核心属性
+### 核心属性 {#核心属性}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -83,7 +83,7 @@
 3. **可追溯** - 决策路径清晰可追溯
 4. **可扩展** - 支持添加新的决策节点
 
-### 应用场景
+### 应用场景 {#应用场景}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -96,7 +96,7 @@
 
 ---
 
-## 🚀 核心决策流程 {#-核心决策流程}
+## 🚀 核心决策流程 {#核心决策流程}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -132,11 +132,11 @@ graph TD
 
 ---
 
-## 📦 模块化决策树 {#-模块化决策树}
+## 📦 模块化决策树 {#模块化决策树}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 所有权与借用决策树
+### 1. 所有权与借用决策树 {#1-所有权与借用决策树}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -176,7 +176,7 @@ graph TD
     style RcRefCell fill:#e1ffe1
 ```
 
-### 2. 类型系统决策树
+### 2. 类型系统决策树 {#2-类型系统决策树}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -204,7 +204,7 @@ graph TD
     style AssocType fill:#e1ffe1
 ```
 
-### 3. 控制流决策树
+### 3. 控制流决策树 {#3-控制流决策树}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -237,7 +237,7 @@ graph TD
     style ResultType fill:#e1ffe1
 ```
 
-### 4. 异步编程决策树
+### 4. 异步编程决策树 {#4-异步编程决策树}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -272,7 +272,7 @@ graph TD
     style Concurrent fill:#e1ffe1
 ```
 
-### 5. Pin 使用场景决策树
+### 5. Pin 使用场景决策树 {#5-pin-使用场景决策树}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -307,7 +307,7 @@ graph TD
     style HeapPin fill:#fff5e1
 ```
 
-### 6. 表达能力边界决策树
+### 6. 表达能力边界决策树 {#6-表达能力边界决策树}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -346,11 +346,11 @@ graph TD
 
 ---
 
-## 🔧 技术选型决策树 {#-技术选型决策树}
+## 🔧 技术选型决策树 {#技术选型决策树}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 集合类型选择
+### 集合类型选择 {#集合类型选择}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -386,7 +386,7 @@ graph TD
     style HashMap fill:#e1ffe1
 ```
 
-### 错误处理策略选择
+### 错误处理策略选择 {#错误处理策略选择}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -420,7 +420,7 @@ graph TD
     style ThisError fill:#e1ffe1
 ```
 
-### 并发模型选择
+### 并发模型选择 {#并发模型选择}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -455,7 +455,7 @@ graph TD
     style Rayon fill:#e1ffe1
 ```
 
-### 序列化库选择
+### 序列化库选择 {#序列化库选择}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -485,7 +485,7 @@ graph TD
     style SerdeJson fill:#e1ffe1
 ```
 
-### Web框架选择
+### Web框架选择 {#web框架选择}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -522,7 +522,7 @@ graph TD
     style Tonic fill:#e1ffe1
 ```
 
-### 数据库访问选择
+### 数据库访问选择 {#数据库访问选择}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -562,11 +562,11 @@ graph TD
 
 ---
 
-## 🐛 调试决策树 {#-调试决策树}
+## 🐛 调试决策树 {#调试决策树}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 编译错误调试
+### 编译错误调试 {#编译错误调试}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -601,7 +601,7 @@ graph TD
     style BorrowErr fill:#fff5e1
 ```
 
-### 运行时错误调试
+### 运行时错误调试 {#运行时错误调试}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -634,7 +634,7 @@ graph TD
     style Start fill:#ffe1e1
 ```
 
-### 性能问题调试
+### 性能问题调试 {#性能问题调试}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -667,7 +667,7 @@ graph TD
     style Start fill:#fff5e1
 ```
 
-### 内存问题调试
+### 内存问题调试 {#内存问题调试}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -704,11 +704,11 @@ graph TD
 
 ---
 
-## ⚡ 优化决策树 {#-优化决策树}
+## ⚡ 优化决策树 {#优化决策树}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### CPU优化决策树
+### CPU优化决策树 {#cpu优化决策树}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -745,7 +745,7 @@ graph TD
     style Algorithm fill:#e1ffe1
 ```
 
-### 内存优化决策树
+### 内存优化决策树 {#内存优化决策树}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -780,7 +780,7 @@ graph TD
     style ReduceAlloc fill:#e1ffe1
 ```
 
-### I/O优化决策树
+### I/O优化决策树 {#io优化决策树}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -814,7 +814,7 @@ graph TD
     style FileIO fill:#e1ffe1
 ```
 
-### 编译优化决策树
+### 编译优化决策树 {#编译优化决策树}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -851,11 +851,11 @@ graph TD
 
 ---
 
-## 📚 学习路径决策树 {#-学习路径决策树}
+## 📚 学习路径决策树 {#学习路径决策树}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 新手学习路径
+### 新手学习路径 {#新手学习路径}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -895,7 +895,7 @@ graph TD
     style Advanced fill:#fff5e1
 ```
 
-### 有经验开发者路径
+### 有经验开发者路径 {#有经验开发者路径}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -938,7 +938,7 @@ graph TD
     style CommonCore fill:#e1ffe1
 ```
 
-### 专项技能提升路径
+### 专项技能提升路径 {#专项技能提升路径}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -984,11 +984,11 @@ graph TD
 
 ---
 
-## 📊 决策矩阵总结 {#-决策矩阵总结}
+## 📊 决策矩阵总结 {#决策矩阵总结}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 快速决策参考
+### 快速决策参考 {#快速决策参考}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -1005,39 +1005,39 @@ graph TD
 
 ---
 
-## 🔗 相关文档 {#-相关文档}
+## 🔗 相关文档 {#相关文档}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 设计机制论证
+### 设计机制论证 {#设计机制论证}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 - [DESIGN_MECHANISM_RATIONALE](../../archive/research_notes_2026_06_25/10_design_mechanism_rationale.md) - Pin 堆/栈区分、设计机制论证
 - [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../../archive/research_notes_2026_06_25/10_theoretical_and_argumentation_system_architecture.md) - 理论体系架构
 
-### 表达能力与边界
+### 表达能力与边界 {#表达能力与边界}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../archive/research_notes_2026_06_25/10_language_semantics_expressiveness.md) - 表达能力边界
 - [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../../archive/research_notes_2026_06_25/10_safe_decidable_mechanisms_overview.md) - 安全可判定机制
 
-### 证明与安全
+### 证明与安全 {#证明与安全}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 - [04_proof_graph_network.md](04_proof_graph_network.md) - 证明图网详细文档
 - [10_proof_index.md](../../archive/research_notes_2026_06_25/10_proof_index.md) - 形式化证明索引
 
-### 分布式与工作流决策树（formal_methods 独立）
+### 分布式与工作流决策树（formal_methods 独立） {#分布式与工作流决策树formal_methods-独立}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - [DISTRIBUTED_ARCHITECTURE_DECISION_TREE](../../archive/research_notes_2026_06_25/10_distributed_architecture_decision_tree.md) - 分布式架构选型（Saga/CQRS/熔断器）
 - WORKFLOW_ENGINE_DECISION_TREE - 工作流引擎选型（Temporal/自研/状态机）
 
-### 相关文档
+### 相关文档 {#相关文档-2}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -1053,13 +1053,13 @@ graph TD
 
 ---
 
-## Rust 1.95+ 思维表征更新
+## Rust 1.95+ 思维表征更新 {#rust-195-思维表征更新}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 > **适用版本**: Rust 1.96.0+
 
-### 新增思维表征
+### 新增思维表征 {#新增思维表征}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -1071,7 +1071,7 @@ Rust 新特性可扩展思维表征方式：
 | ControlFlow | 决策树 | 控制流的提前终止决策 |
 | LazyCell/LazyLock | 状态图 | 延迟初始化的状态转换 |
 
-### 示例
+### 示例 {#示例}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -1088,20 +1088,20 @@ ust
 
 ---
 
-## Rust 1.95+ 持续更新更新
+## Rust 1.95+ 持续更新更新 {#rust-195-持续更新更新}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.95+更新要点
+### 本文档的Rust 1.95+更新要点 {#本文档的rust-195更新要点}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 本文档已针对 **Rust 1.95+** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -1112,7 +1112,7 @@ ust
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -1122,7 +1122,7 @@ ust
 - ✅ 兼容Edition 2024
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档-2}
 
 - [Rust 1.94 特性速查（已归档）
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
@@ -1149,7 +1149,7 @@ ust
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -1158,7 +1158,7 @@ ust
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

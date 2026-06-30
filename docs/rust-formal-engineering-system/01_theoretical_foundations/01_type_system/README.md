@@ -1,4 +1,4 @@
-# 类型系统理论
+# 类型系统理论 {#类型系统理论}
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -14,7 +14,7 @@
 - [型变理论](../../../research_notes/type_theory/10_variance_theory.md)
 - 生命周期形式化
 
-## 知识结构思维导图
+## 知识结构思维导图 {#知识结构思维导图}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -39,7 +39,7 @@ mindmap
       空指针安全
 ```
 
-## 与核心文档的关联
+## 与核心文档的关联 {#与核心文档的关联}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -51,7 +51,7 @@ mindmap
 
 ---
 
-## 形式化链接
+## 形式化链接 {#形式化链接}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -66,9 +66,9 @@ mindmap
 
 ---
 
-## 类型系统核心概念
+## 类型系统核心概念 {#类型系统核心概念}
 
-### 类型即命题（Curry-Howard 对应）
+### 类型即命题（Curry-Howard 对应） {#类型即命题curry-howard-对应}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -99,7 +99,7 @@ fn implication(x: i32) -> String {
 }
 ```
 
-### 泛型与参数多态
+### 泛型与参数多态 {#泛型与参数多态}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -135,7 +135,7 @@ impl<T> ContainerTrait for Container<T> {
 }
 ```
 
-### 型变（Variance）
+### 型变（Variance） {#型变variance}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -170,7 +170,7 @@ fn invariance(x: &mut &'static str) {
 // fn(T) -> U : 对 T 逆变，对 U 协变
 ```
 
-### 类型推导
+### 类型推导 {#类型推导}
 
 ```rust,ignore
 // Hindley-Milner 类型推导的 Rust 实现
@@ -199,7 +199,7 @@ fn mixed_inference<T: Default>(items: &[T]) -> Vec<T> {
 }
 ```
 
-### 类型安全保证
+### 类型安全保证 {#类型安全保证}
 
 ```rust
 // 类型系统防止的操作
@@ -236,7 +236,7 @@ fn type_safety() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 

@@ -1,4 +1,4 @@
-# Rust 1.96.0 研究更新报告
+# Rust 1.96.0 研究更新报告 {#rust-1960-研究更新报告}
 >
 > **概念族**: 版本特性
 
@@ -16,41 +16,41 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.96.0 研究更新报告](#rust-1960-研究更新报告)
-  - [📑 目录](#-目录)
-  - [🎯 概述](#-概述)
+  - [📑 目录](#目录)
+  - [🎯 概述](#概述)
     - [主要更新](#主要更新)
-  - [📊 特性分析](#-特性分析)
+  - [📊 特性分析](#特性分析)
     - [1. ControlFlow 形式化分析](#1-controlflow-形式化分析)
     - [2. Edition 2024 语义变化](#2-edition-2024-语义变化)
     - [3. Rust 1.95 研究更新](#3-rust-195-研究更新)
       - [3.1 `if let` guards on match arms](#31-if-let-guards-on-match-arms)
       - [3.2 `cfg_select!` 宏](#32-cfg_select-宏)
-      - [3.3 PowerPC / PowerPC64 inline asm](#33-powerpc--powerpc64-inline-asm)
+      - [3.3 PowerPC / PowerPC64 inline asm](#33-powerpc-powerpc64-inline-asm)
     - [4. Rust 1.96 研究更新](#4-rust-196-研究更新)
       - [4.1 `core::range` 新类型](#41-corerange-新类型)
       - [4.2 `assert_matches!`](#42-assert_matches)
       - [4.3 Cargo 安全修复](#43-cargo-安全修复)
       - [4.4 WebAssembly 链接行为](#44-webassembly-链接行为)
-  - [📅 Edition 2024 集成分析](#-edition-2024-集成分析)
+  - [📅 Edition 2024 集成分析](#edition-2024-集成分析)
     - [迁移路径](#迁移路径)
     - [形式化影响](#形式化影响)
-  - [🔬 形式化方法影响](#-形式化方法影响)
+  - [🔬 形式化方法影响](#形式化方法影响)
     - [类型系统](#类型系统)
     - [所有权系统](#所有权系统)
-  - [📈 与 1.93 版本对比分析](#-与-193-版本对比分析)
-  - [📚 代码示例与研究场景](#-代码示例与研究场景)
+  - [📈 与 1.93 版本对比分析](#与-193-版本对比分析)
+  - [📚 代码示例与研究场景](#代码示例与研究场景)
     - [ControlFlow 模式](#controlflow-模式)
     - [MaybeUninit 安全模式](#maybeuninit-安全模式)
-  - [🔗 相关资源](#-相关资源)
+  - [🔗 相关资源](#相关资源)
     - [外部链接](#外部链接)
     - [内部代码](#内部代码)
     - [项目文档](#项目文档)
-  - [✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）](#-权威国际化来源对齐升级摘要rust-1960--edition-2024)
+  - [✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）](#权威国际化来源对齐升级摘要rust-1960-edition-2024)
     - [本次升级要点](#本次升级要点)
       - [新增 Rust 1.96.0 特性](#新增-rust-1960-特性)
       - [新增 Rust 1.95.0 特性](#新增-rust-1950-特性)
@@ -58,13 +58,13 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🎯 概述
+## 🎯 概述 {#概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本文档记录 Rust 1.96.0 版本对研究笔记系统的影响。
 
-### 主要更新
+### 主要更新 {#主要更新}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
@@ -81,11 +81,11 @@
 
 ---
 
-## 📊 特性分析
+## 📊 特性分析 {#特性分析}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. ControlFlow 形式化分析
+### 1. ControlFlow 形式化分析 {#1-controlflow-形式化分析}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
@@ -132,7 +132,7 @@ fn find_negative(numbers: &[i32]) -> Option<i32> {
 }
 ```
 
-### 2. Edition 2024 语义变化
+### 2. Edition 2024 语义变化 {#2-edition-2024-语义变化}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
@@ -151,12 +151,12 @@ Edition 2024 引入了以下语义变化：
 | Tail expr drop | 尾表达式 drop 顺序调整 | [Edition 2024 Guide - Tail Expr Drop Order](https://doc.rust-lang.org/edition-guide/rust-2024/temporary-tail-expr-drop-order.html) |
 | `unsafe_op_in_unsafe_fn` | 默认启用 | [Rust Reference - Unsafe Operations](https://doc.rust-lang.org/reference/unsafe-keyword.html)、[RFC 2585](https://rust-lang.github.io/rfcs/2585-unsafe-block-in-unsafe-fn.html) |
 
-### 3. Rust 1.95 研究更新
+### 3. Rust 1.95 研究更新 {#3-rust-195-研究更新}
 
 > **来源: [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)**
 > **来源: [releases.rs 1.95.0](https://releases.rs/docs/1.95.0/)**
 
-#### 3.1 `if let` guards on match arms
+#### 3.1 `if let` guards on match arms {#31-if-let-guards-on-match-arms}
 
 > **来源: [Rust Reference - Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards)**
 >
@@ -172,7 +172,7 @@ match value {
 }
 ```
 
-#### 3.2 `cfg_select!` 宏
+#### 3.2 `cfg_select!` 宏 {#32-cfg_select-宏}
 
 > **来源: [Rust Reference - cfg_select!](https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg_select-macro)**
 >
@@ -186,7 +186,7 @@ cfg_select! {
 }
 ```
 
-#### 3.3 PowerPC / PowerPC64 inline asm
+#### 3.3 PowerPC / PowerPC64 inline asm {#33-powerpc-powerpc64-inline-asm}
 
 > **来源: [Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)**
 >
@@ -203,13 +203,13 @@ unsafe {
 }
 ```
 
-### 4. Rust 1.96 研究更新
+### 4. Rust 1.96 研究更新 {#4-rust-196-研究更新}
 
 > **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
 > **来源: [releases.rs 1.96.0](https://releases.rs/docs/1.96.0/)**
 > **来源: [RFC 3550 - New Range Types](https://rust-lang.github.io/rfcs/3550-new-range.html)**
 
-#### 4.1 `core::range` 新类型
+#### 4.1 `core::range` 新类型 {#41-corerange-新类型}
 
 > **来源: [RFC 3550 - New Range Types](https://rust-lang.github.io/rfcs/3550-new-range.html)**
 >
@@ -227,7 +227,7 @@ for i in r { print!("{} ", i); }
 for i in r2 { print!("{} ", i); }
 ```
 
-#### 4.2 `assert_matches!`
+#### 4.2 `assert_matches!` {#42-assert_matches}
 
 > **来源: [core::assert_matches::assert_matches](https://doc.rust-lang.org/stable/core/assert_matches/macro.assert_matches.html)**
 >
@@ -242,7 +242,7 @@ let result: Result<i32, &str> = Ok(42);
 assert_matches!(result, Ok(x) if x > 0);
 ```
 
-#### 4.3 Cargo 安全修复
+#### 4.3 Cargo 安全修复 {#43-cargo-安全修复}
 
 > **来源: [Cargo Security Advisories](https://github.com/rust-lang/cargo/security/advisories)**
 >
@@ -252,7 +252,7 @@ assert_matches!(result, Ok(x) if x > 0);
 - **CVE-2026-5222**: 修复 URL 规范化后的认证问题
 - crates.io 用户不受影响
 
-#### 4.4 WebAssembly 链接行为
+#### 4.4 WebAssembly 链接行为 {#44-webassembly-链接行为}
 
 > **来源: [Rust Reference - Linkage](https://doc.rust-lang.org/reference/linkage.html)**
 >
@@ -262,25 +262,25 @@ Rust 1.96.0 不再默认传递 `--allow-undefined`；未定义符号现在会直
 
 ---
 
-## 📅 Edition 2024 集成分析
+## 📅 Edition 2024 集成分析 {#edition-2024-集成分析}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 迁移路径
+### 迁移路径 {#迁移路径}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# 创建新项目
+# 创建新项目 {#创建新项目}
 cargo new --edition 2024 my_project
 
-# 现有项目迁移
+# 现有项目迁移 {#现有项目迁移}
 cargo fix --edition
 ```
 
-### 形式化影响
+### 形式化影响 {#形式化影响}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -292,11 +292,11 @@ cargo fix --edition
 
 ---
 
-## 🔬 形式化方法影响
+## 🔬 形式化方法影响 {#形式化方法影响}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 类型系统
+### 类型系统 {#类型系统}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -306,7 +306,7 @@ cargo fix --edition
 - Edition 2024 新特性的类型检查
 - 1.95 `if let` guards 对模式匹配语义的影响
 
-### 所有权系统
+### 所有权系统 {#所有权系统}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -315,7 +315,7 @@ cargo fix --edition
 
 ---
 
-## 📈 与 1.93 版本对比分析
+## 📈 与 1.93 版本对比分析 {#与-193-版本对比分析}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -333,11 +333,11 @@ cargo fix --edition
 
 ---
 
-## 📚 代码示例与研究场景
+## 📚 代码示例与研究场景 {#代码示例与研究场景}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### ControlFlow 模式
+### ControlFlow 模式 {#controlflow-模式}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -363,7 +363,7 @@ impl Validator {
 }
 ```
 
-### MaybeUninit 安全模式
+### MaybeUninit 安全模式 {#maybeuninit-安全模式}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 >
@@ -388,11 +388,11 @@ fn initialize_array<T: Copy, const N: usize>(value: T) -> [T; N] {
 
 ---
 
-## 🔗 相关资源
+## 🔗 相关资源 {#相关资源}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 外部链接
+### 外部链接 {#外部链接}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -404,13 +404,13 @@ fn initialize_array<T: Copy, const N: usize>(value: T) -> [T; N] {
 - [Rust Standard Library - assert_matches](https://doc.rust-lang.org/stable/core/assert_matches/macro.assert_matches.html)
 - [Edition 2024 Guide](https://doc.rust-lang.org/edition-guide/rust-2024/)
 
-### 内部代码
+### 内部代码 {#内部代码}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 1.94 特性示例](../../crates/c01_ownership_borrow_scope/src/rust_194_features.rs)
 
-### 项目文档
+### 项目文档 {#项目文档}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -429,7 +429,7 @@ fn initialize_array<T: Copy, const N: usize>(value: T) -> [T; N] {
 
 ---
 
-## ✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）
+## ✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024） {#权威国际化来源对齐升级摘要rust-1960-edition-2024}
 
 > **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
 > **来源: [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)**
@@ -437,11 +437,11 @@ fn initialize_array<T: Copy, const N: usize>(value: T) -> [T; N] {
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **升级日期**: 2026-06-29
 
-### 本次升级要点
+### 本次升级要点 {#本次升级要点}
 
 本文档已完成权威国际化来源对齐升级，统一版本基准为 **Rust 1.96.0+ / Edition 2024**，同时保留 1.93/1.94 历史分析章节。
 
-#### 新增 Rust 1.96.0 特性
+#### 新增 Rust 1.96.0 特性 {#新增-rust-1960-特性}
 
 | 特性 | 来源 | 说明 |
 | :--- | :--- | :--- |
@@ -450,7 +450,7 @@ fn initialize_array<T: Copy, const N: usize>(value: T) -> [T; N] {
 | Cargo CVE-2026-5223 / CVE-2026-5222 修复 | [Cargo 安全公告](https://github.com/rust-lang/cargo/security/advisories)、[Rust Blog 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) | 第三方 registry tarball symlink 与 URL 规范化修复 |
 | WebAssembly 链接行为变更 | [Rust Blog 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) | 不再默认传递 `--allow-undefined` |
 
-#### 新增 Rust 1.95.0 特性
+#### 新增 Rust 1.95.0 特性 {#新增-rust-1950-特性}
 
 | 特性 | 来源 | 说明 |
 | :--- | :--- | :--- |
@@ -459,7 +459,7 @@ fn initialize_array<T: Copy, const N: usize>(value: T) -> [T; N] {
 | PowerPC / PowerPC64 内联汇编稳定化 | [Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)、[Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | 稳定 inline assembly for PowerPC |
 | `--remap-path-scope` | [Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | 控制路径重映射作用域 |
 
-#### 权威来源对齐
+#### 权威来源对齐 {#权威来源对齐}
 
 - Rust release notes（releases.rs）
 - Rust Blog 对应版本发布公告
@@ -469,7 +469,7 @@ fn initialize_array<T: Copy, const N: usize>(value: T) -> [T; N] {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -478,7 +478,7 @@ fn initialize_array<T: Copy, const N: usize>(value: T) -> [T; N] {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

@@ -1,4 +1,4 @@
-# 反模式与边界
+# 反模式与边界 {#反模式与边界}
 
 > **概念族**: 软件设计 / 反模式
 
@@ -24,7 +24,7 @@
 
 > **权威来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -33,7 +33,7 @@
 >
 
 - [反模式与边界](#反模式与边界)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [宗旨](#宗旨)
   - [一、反模式与安全边界](#一反模式与安全边界)
     - [1.1 形式化定义](#11-形式化定义)
@@ -54,7 +54,7 @@
     - [场景 3：单产品却用 Abstract Factory](#场景-3单产品却用-abstract-factory)
     - [场景 4：无共享用 Flyweight](#场景-4无共享用-flyweight)
     - [场景 5：错误类型用 unwrap](#场景-5错误类型用-unwrap)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -72,7 +72,7 @@
 
 ---
 
-## 宗旨
+## 宗旨 {#宗旨}
 
 >
 
@@ -82,13 +82,13 @@
 
 ---
 
-## 一、反模式与安全边界
+## 一、反模式与安全边界 {#一反模式与安全边界}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1.1 形式化定义
+### 1.1 形式化定义 {#11-形式化定义}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -100,7 +100,7 @@
 
 **Axiom AP1**：反模式导致 UB、数据竞争、或逻辑错误；与 [safe_unsafe_matrix](05_boundary_system/10_safe_unsafe_matrix.md) SBM-T2、SBM-L2 衔接。
 
-### 1.2 反模式分类
+### 1.2 反模式分类 {#12-反模式分类}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -122,7 +122,9 @@
 
 ---
 
-## 二、13 反例索引（与 [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md) 衔接）
+## 二、13 反例索引（与 FORMAL_PROOF_SYSTEM_GUIDE 衔接） {#二13-反例索引与-formal_proof_system_guide-衔接}
+
+> 参见：[FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md)
 
 >
 
@@ -158,13 +160,13 @@
 
 ---
 
-## 三、常见反模式详解（含代码示例）
+## 三、常见反模式详解（含代码示例） {#三常见反模式详解含代码示例}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 3.1 所有权反模式
+### 3.1 所有权反模式 {#31-所有权反模式}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -222,7 +224,7 @@ a.borrow_mut().next = Some(b.clone());  // 环：a → b → a
 
 ```
 
-### 3.2 借用反模式
+### 3.2 借用反模式 {#32-借用反模式}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -280,7 +282,7 @@ fn process(data: &Vec<String>) -> Vec<String> {
 
 ```
 
-### 3.3 设计模式反模式
+### 3.3 设计模式反模式 {#33-设计模式反模式}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -324,7 +326,7 @@ where
 
 ```
 
-### 3.4 并发反模式
+### 3.4 并发反模式 {#34-并发反模式}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -344,7 +346,7 @@ where
 
 ---
 
-## 四、反模式与三维边界
+## 四、反模式与三维边界 {#四反模式与三维边界}
 
 >
 
@@ -364,7 +366,7 @@ where
 
 ---
 
-## 五、反模式规避策略（实质指南）
+## 五、反模式规避策略（实质指南） {#五反模式规避策略实质指南}
 
 >
 
@@ -386,7 +388,7 @@ where
 
 ---
 
-## 六、与 05_boundary_system 衔接
+## 六、与 05_boundary_system 衔接 {#六与-05_boundary_system-衔接}
 
 >
 
@@ -400,7 +402,7 @@ where
 
 ---
 
-## 七、引用
+## 七、引用 {#七引用}
 
 >
 
@@ -414,13 +416,13 @@ where
 
 ---
 
-## 八、完整规避示例（场景→反模式→正确写法）
+## 八、完整规避示例（场景→反模式→正确写法） {#八完整规避示例场景反模式正确写法}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 场景 1：需要共享可变
+### 场景 1：需要共享可变 {#场景-1需要共享可变}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -456,7 +458,7 @@ thread::spawn(move || {
 
 ```
 
-### 场景 2：迭代中修改
+### 场景 2：迭代中修改 {#场景-2迭代中修改}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -472,7 +474,7 @@ v.extend(to_add);
 
 ```
 
-### 场景 3：单产品却用 Abstract Factory
+### 场景 3：单产品却用 Abstract Factory {#场景-3单产品却用-abstract-factory}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -490,7 +492,7 @@ trait Creator {
 
 ```
 
-### 场景 4：无共享用 Flyweight
+### 场景 4：无共享用 Flyweight {#场景-4无共享用-flyweight}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -504,7 +506,7 @@ let item = Item::new();  // 无需缓存
 
 ```
 
-### 场景 5：错误类型用 unwrap
+### 场景 5：错误类型用 unwrap {#场景-5错误类型用-unwrap}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -530,7 +532,7 @@ let x = match result {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -540,13 +542,13 @@ let x = match result {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -562,7 +564,7 @@ let x = match result {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -574,7 +576,7 @@ let x = match result {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -606,7 +608,7 @@ let x = match result {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -618,7 +620,7 @@ let x = match result {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 

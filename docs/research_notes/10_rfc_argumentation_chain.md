@@ -1,4 +1,4 @@
-# RFC 深度论证链索引
+# RFC 深度论证链索引 {#rfc-深度论证链索引}
 
 > **概念族**: 权威来源对齐 / RFC / 论证链
 > **内容分级**: [核心级]
@@ -11,22 +11,22 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [RFC 深度论证链索引](#rfc-深度论证链索引)
   - [目录](#目录)
   - [一、对齐说明](#一对齐说明)
   - [二、所有权与借用 RFC 链](#二所有权与借用-rfc-链)
-    - [RFC 1859 — Non-Lexical Lifetimes](#rfc-1859--non-lexical-lifetimes)
-    - [RFC 2094 — NLL (Non-Lexical Lifetimes) 完整实现](#rfc-2094--nll-non-lexical-lifetimes-完整实现)
+    - [RFC 1859 — Non-Lexical Lifetimes](#rfc-1859-non-lexical-lifetimes)
+    - [RFC 2094 — NLL (Non-Lexical Lifetimes) 完整实现](#rfc-2094-nll-non-lexical-lifetimes-完整实现)
   - [三、类型系统 RFC 链](#三类型系统-rfc-链)
-    - [RFC 0738 — Variance](#rfc-0738--variance)
-    - [RFC 0195 — Associated Items](#rfc-0195--associated-items)
+    - [RFC 0738 — Variance](#rfc-0738-variance)
+    - [RFC 0195 — Associated Items](#rfc-0195-associated-items)
   - [四、异步与并发 RFC 链](#四异步与并发-rfc-链)
-    - [RFC 2394 — async/await](#rfc-2394--asyncawait)
+    - [RFC 2394 — async/await](#rfc-2394-asyncawait)
   - [五、Edition 与工具链 RFC 链](#五edition-与工具链-rfc-链)
-    - [RFC 2052 — Epochs / Editions](#rfc-2052--epochs--editions)
-    - [RFC 2957 — Cargo Features 2.0](#rfc-2957--cargo-features-20)
+    - [RFC 2052 — Epochs / Editions](#rfc-2052-epochs-editions)
+    - [RFC 2957 — Cargo Features 2.0](#rfc-2957-cargo-features-20)
   - [六、论证模式总结](#六论证模式总结)
   - [七、未覆盖缺口](#七未覆盖缺口)
   - [相关概念](#相关概念)
@@ -35,15 +35,15 @@
 
 ---
 
-## 一、对齐说明
+## 一、对齐说明 {#一对齐说明}
 
 本文档将关键 Rust RFC 的 **Motivation → Design → Drawbacks → Rationale → Alternatives** 论证链与 `docs/research_notes/` 中的概念定义、反例边界、形式化证明建立映射，揭示 Rust 语言设计决策与项目知识体系之间的深层关联。
 
 ---
 
-## 二、所有权与借用 RFC 链
+## 二、所有权与借用 RFC 链 {#二所有权与借用-rfc-链}
 
-### RFC 1859 — Non-Lexical Lifetimes
+### RFC 1859 — Non-Lexical Lifetimes {#rfc-1859-non-lexical-lifetimes}
 
 | 论证环节 | RFC 内容 | 项目文档 | 备注 |
 |----------|----------|----------|------|
@@ -51,7 +51,7 @@
 | Design | 基于 CFG 的数据流分析 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | NLL 算法 |
 | Rationale | 提高表达能力而不损失安全 | [formal_methods/60_ownership_counterexamples.md](formal_methods/60_ownership_counterexamples.md) | 反例仍被正确拒绝 |
 
-### RFC 2094 — NLL (Non-Lexical Lifetimes) 完整实现
+### RFC 2094 — NLL (Non-Lexical Lifetimes) 完整实现 {#rfc-2094-nll-non-lexical-lifetimes-完整实现}
 
 | 论证环节 | RFC 内容 | 项目文档 | 备注 |
 |----------|----------|----------|------|
@@ -60,9 +60,9 @@
 
 ---
 
-## 三、类型系统 RFC 链
+## 三、类型系统 RFC 链 {#三类型系统-rfc-链}
 
-### RFC 0738 — Variance
+### RFC 0738 — Variance {#rfc-0738-variance}
 
 | 论证环节 | RFC 内容 | 项目文档 | 备注 |
 |----------|----------|----------|------|
@@ -70,7 +70,7 @@
 | Design | 定义协变/逆变/不变规则 | [type_theory/10_variance_theory.md](type_theory/10_variance_theory.md) | 型变表 |
 | Rationale | 防止通过子类型破坏不变量 | [type_theory/60_type_system_counterexamples.md](type_theory/60_type_system_counterexamples.md) §1 | 型变误用反例 |
 
-### RFC 0195 — Associated Items
+### RFC 0195 — Associated Items {#rfc-0195-associated-items}
 
 | 论证环节 | RFC 内容 | 项目文档 | 备注 |
 |----------|----------|----------|------|
@@ -79,9 +79,9 @@
 
 ---
 
-## 四、异步与并发 RFC 链
+## 四、异步与并发 RFC 链 {#四异步与并发-rfc-链}
 
-### RFC 2394 — async/await
+### RFC 2394 — async/await {#rfc-2394-asyncawait}
 
 | 论证环节 | RFC 内容 | 项目文档 | 备注 |
 |----------|----------|----------|------|
@@ -92,9 +92,9 @@
 
 ---
 
-## 五、Edition 与工具链 RFC 链
+## 五、Edition 与工具链 RFC 链 {#五edition-与工具链-rfc-链}
 
-### RFC 2052 — Epochs / Editions
+### RFC 2052 — Epochs / Editions {#rfc-2052-epochs-editions}
 
 | 论证环节 | RFC 内容 | 项目文档 | 备注 |
 |----------|----------|----------|------|
@@ -102,7 +102,7 @@
 | Design | edition 关键字、cargo fix | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) §6 | 迁移工具 |
 | Rationale | 渐进式演进 | [10_version_evolution_counterexamples.md](10_version_evolution_counterexamples.md) | 版本迁移反例 |
 
-### RFC 2957 — Cargo Features 2.0
+### RFC 2957 — Cargo Features 2.0 {#rfc-2957-cargo-features-20}
 
 | 论证环节 | RFC 内容 | 项目文档 | 备注 |
 |----------|----------|----------|------|
@@ -111,7 +111,7 @@
 
 ---
 
-## 六、论证模式总结
+## 六、论证模式总结 {#六论证模式总结}
 
 | 模式 | 描述 | 典型 RFC |
 |------|------|----------|
@@ -122,7 +122,7 @@
 
 ---
 
-## 七、未覆盖缺口
+## 七、未覆盖缺口 {#七未覆盖缺口}
 
 1. 宏系统 RFC（macro hygiene、proc-macro）的论证链可进一步展开。
 2. const 泛型、const eval 相关 RFC 的动机与设计可补充。
@@ -130,7 +130,7 @@
 
 > **权威来源**: [Rust RFCs](https://rust-lang.github.io/rfcs/)
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
 - [RFC 对齐索引](10_rfc_alignment_index.md)
@@ -139,7 +139,7 @@
 
 ---
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 本对齐矩阵同时参考以下 P1 学术权威来源，以形成完整的官方-学术对照网络：
 
@@ -148,7 +148,7 @@
 - [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
 - [Aeneas](https://aeneas-verification.github.io/)
 
-## 社区权威参考
+## 社区权威参考 {#社区权威参考}
 
 - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
 - [This Week in Rust](https://this-week-in-rust.org/)

@@ -1,4 +1,4 @@
-# 宏展开性能研究
+# 宏展开性能研究 {#宏展开性能研究}
 
 > **概念族**: 实验研究
 
@@ -24,7 +24,7 @@
 
 > **权威来源**: [Rust Reference – Macros](https://doc.rust-lang.org/reference/macros.html) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [The Little Book of Rust Macros](https://veykril.github.io/tlborm/) | [Rust Standard Library](https://doc.rust-lang.org/std/)
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -33,43 +33,43 @@
 >
 
 - [宏展开性能研究](#宏展开性能研究)
-  - [📑 目录](#-目录)
-  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
+  - [📑 目录](#目录)
+  - [🎯 研究目标](#研究目标)
     - [核心问题](#核心问题)
     - [预期成果](#预期成果)
-  - [📚 理论基础 {#-理论基础}](#-理论基础--理论基础)
+  - [📚 理论基础](#理论基础)
     - [形式化论证与实验衔接](#形式化论证与实验衔接)
     - [相关概念](#相关概念)
     - [理论背景](#理论背景)
-      - [Rust 1.96+ / Edition 2024 宏特性](#rust-196--edition-2024-宏特性)
-  - [🔬 实验设计 {#-实验设计}](#-实验设计--实验设计)
+      - [Rust 1.96+ / Edition 2024 宏特性](#rust-196-edition-2024-宏特性)
+  - [🔬 实验设计](#实验设计)
     - [1. 编译时间测试](#1-编译时间测试)
     - [2. 代码生成效率测试](#2-代码生成效率测试)
     - [3. 宏展开开销分析](#3-宏展开开销分析)
-    - [Rust 1.96+ / Edition 2024 工具链](#rust-196--edition-2024-工具链)
-  - [💻 代码示例 {#-代码示例}](#-代码示例--代码示例)
+    - [Rust 1.96+ / Edition 2024 工具链](#rust-196-edition-2024-工具链)
+  - [💻 代码示例](#代码示例)
     - [示例 1：声明式宏性能测试](#示例-1声明式宏性能测试)
     - [示例 2：过程宏性能测试](#示例-2过程宏性能测试)
     - [示例 3：宏展开时间测量](#示例-3宏展开时间测量)
-  - [📊 实验结果 {#-实验结果}](#-实验结果--实验结果)
+  - [📊 实验结果](#实验结果)
     - [1. 编译时间对比](#1-编译时间对比)
     - [2. 代码生成效率](#2-代码生成效率)
     - [结果分析模板](#结果分析模板)
-  - [📋 数据收集执行指南 {#-数据收集执行指南}](#-数据收集执行指南--数据收集执行指南)
+  - [📋 数据收集执行指南](#数据收集执行指南)
     - [环境要求](#环境要求)
     - [执行步骤](#执行步骤)
-  - [📐 性能优化建议与工具改进 {#-性能优化建议与工具改进}](#-性能优化建议与工具改进--性能优化建议与工具改进)
+  - [📐 性能优化建议与工具改进](#性能优化建议与工具改进)
     - [性能优化建议](#性能优化建议)
     - [工具改进](#工具改进)
     - [性能报告](#性能报告)
-  - [🔗 系统集成与实际应用 {#-系统集成与实际应用}](#-系统集成与实际应用--系统集成与实际应用)
+  - [🔗 系统集成与实际应用](#系统集成与实际应用)
     - [与类型系统的集成](#与类型系统的集成)
     - [与实验研究的集成](#与实验研究的集成)
     - [实际应用案例](#实际应用案例)
-  - [📖 参考文献 {#-参考文献}](#-参考文献--参考文献)
+  - [📖 参考文献](#参考文献)
     - [官方文档](#官方文档)
     - [工具资源](#工具资源)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -87,7 +87,7 @@
 
 ---
 
-## 🎯 研究目标 {#-研究目标}
+## 🎯 研究目标 {#研究目标}
 
 >
 
@@ -103,7 +103,7 @@
 
 4. **优化策略**：宏展开性能优化方法
 
-### 核心问题
+### 核心问题 {#核心问题}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -117,7 +117,7 @@
 
 3. **如何优化宏展开性能？**
 
-### 预期成果
+### 预期成果 {#预期成果}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -133,13 +133,13 @@
 
 ---
 
-## 📚 理论基础 {#-理论基础}
+## 📚 理论基础 {#理论基础}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 形式化论证与实验衔接
+### 形式化论证与实验衔接 {#形式化论证与实验衔接}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -171,7 +171,7 @@
 
 **引用**：[experiments/README](README.md) 定理 EX-T1；[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md) 宏相关特性。
 
-### 相关概念
+### 相关概念 {#相关概念}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -191,7 +191,7 @@
 
 - **代码膨胀**：宏展开后代码大小的增加
 
-### 理论背景
+### 理论背景 {#理论背景}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -209,7 +209,7 @@
 
 4. **代码生成阶段**：生成最终代码
 
-#### Rust 1.96+ / Edition 2024 宏特性
+#### Rust 1.96+ / Edition 2024 宏特性 {#rust-196-edition-2024-宏特性}
 
 > **来源: [Rust Reference – Macros](https://doc.rust-lang.org/reference/macros.html)**
 
@@ -227,13 +227,13 @@
 
 ---
 
-## 🔬 实验设计 {#-实验设计}
+## 🔬 实验设计 {#实验设计}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 编译时间测试
+### 1. 编译时间测试 {#1-编译时间测试}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -261,7 +261,7 @@
 
 - 类型检查时间
 
-### 2. 代码生成效率测试
+### 2. 代码生成效率测试 {#2-代码生成效率测试}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -287,7 +287,7 @@
 
 - 优化效果
 
-### 3. 宏展开开销分析
+### 3. 宏展开开销分析 {#3-宏展开开销分析}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -311,7 +311,7 @@
 
 ---
 
-### Rust 1.96+ / Edition 2024 工具链
+### Rust 1.96+ / Edition 2024 工具链 {#rust-196-edition-2024-工具链}
 
 > **来源: [The Rust Reference – Macros](https://doc.rust-lang.org/reference/macros.html)**
 
@@ -331,13 +331,13 @@
 
 - **可重复性**：固定 `rust-toolchain.toml`、提交 `Cargo.lock`、使用同一套 `#[derive]` 集合做对照。
 
-## 💻 代码示例 {#-代码示例}
+## 💻 代码示例 {#代码示例}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 示例 1：声明式宏性能测试
+### 示例 1：声明式宏性能测试 {#示例-1声明式宏性能测试}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -417,7 +417,7 @@ fn benchmark_complex_macro() {
 
 ```
 
-### 示例 2：过程宏性能测试
+### 示例 2：过程宏性能测试 {#示例-2过程宏性能测试}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -457,7 +457,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 ```
 
-### 示例 3：宏展开时间测量
+### 示例 3：宏展开时间测量 {#示例-3宏展开时间测量}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -485,13 +485,13 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 ---
 
-## 📊 实验结果 {#-实验结果}
+## 📊 实验结果 {#实验结果}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 1. 编译时间对比
+### 1. 编译时间对比 {#1-编译时间对比}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -523,7 +523,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 - 复杂宏显著增加编译时间
 
-### 2. 代码生成效率
+### 2. 代码生成效率 {#2-代码生成效率}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -547,7 +547,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 - 优化后性能差异很小
 
-### 结果分析模板
+### 结果分析模板 {#结果分析模板}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -591,13 +591,13 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 ---
 
-## 📋 数据收集执行指南 {#-数据收集执行指南}
+## 📋 数据收集执行指南 {#数据收集执行指南}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 环境要求
+### 环境要求 {#环境要求}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -605,7 +605,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 - 建议 `cargo clean` 后测量冷编译；增量编译需固定 `touch` 策略
 
-### 执行步骤
+### 执行步骤 {#执行步骤}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -621,13 +621,13 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 ---
 
-## 📐 性能优化建议与工具改进 {#-性能优化建议与工具改进}
+## 📐 性能优化建议与工具改进 {#性能优化建议与工具改进}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 性能优化建议
+### 性能优化建议 {#性能优化建议}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -639,7 +639,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 - **Rust 1.96+**：关注 rustc 的宏展开与 metadata 性能，重测以更新基线。
 
-### 工具改进
+### 工具改进 {#工具改进}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -649,7 +649,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 - **cargo-bench**：对「宏 vs 手写」做稳定 bench，纳入 CI 防止宏引入性能回退。
 
-### 性能报告
+### 性能报告 {#性能报告}
 
 >
 
@@ -659,13 +659,13 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 ---
 
-## 🔗 系统集成与实际应用 {#-系统集成与实际应用}
+## 🔗 系统集成与实际应用 {#系统集成与实际应用}
 
 >
 
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 与类型系统的集成
+### 与类型系统的集成 {#与类型系统的集成}
 
 >
 
@@ -675,7 +675,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 - **Trait 系统**：见 [10_trait_system_formalization.md](../type_theory/10_trait_system_formalization.md)。派生宏（`#[derive]`）生成 trait 实现，其正确性与 hygiene 可对照 Trait 形式化；`Serialize`/`Deserialize` 等是过程宏的典型应用。
 
-### 与实验研究的集成
+### 与实验研究的集成 {#与实验研究的集成}
 
 >
 
@@ -685,7 +685,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 - **性能基准测试**：见 [10_performance_benchmarks.md](10_performance_benchmarks.md)。宏生成代码的运行时 bench 可纳入同一 `cargo bench` 流程；编译时间可用 `time cargo build` 与 CI 集成。
 
-### 实际应用案例
+### 实际应用案例 {#实际应用案例}
 
 >
 
@@ -699,13 +699,13 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 ---
 
-## 📖 参考文献 {#-参考文献}
+## 📖 参考文献 {#参考文献}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 官方文档
+### 官方文档 {#官方文档}
 
 >
 
@@ -727,7 +727,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 - [Cargo Reference – Timings](https://doc.rust-lang.org/cargo/reference/timings.html) - `--timings` 编译时间可视化
 
-### 工具资源
+### 工具资源 {#工具资源}
 
 >
 
@@ -747,7 +747,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -755,13 +755,13 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -775,7 +775,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -785,7 +785,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -817,7 +817,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 ---
 
-## 权威来源对照表
+## 权威来源对照表 {#权威来源对照表}
 
 | 概念/方法 | 权威来源 URL | 章节/要点 |
 
@@ -835,7 +835,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 | Cargo Build Timings | [Cargo Reference](https://doc.rust-lang.org/cargo/reference/timings.html) | `--timings`、编译时间可视化 |
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Macro (computer science)](https://en.wikipedia.org/wiki/Macro_(computer_science))**
 

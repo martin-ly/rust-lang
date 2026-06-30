@@ -1,4 +1,4 @@
-# 学习路径与面试题权威来源对齐矩阵
+# 学习路径与面试题权威来源对齐矩阵 {#学习路径与面试题权威来源对齐矩阵}
 
 > **概念族**: 权威来源对齐 / 学习路径 / 面试评估
 > **内容分级**: [核心级]
@@ -11,7 +11,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [学习路径与面试题权威来源对齐矩阵](#学习路径与面试题权威来源对齐矩阵)
   - [目录](#目录)
@@ -41,7 +41,7 @@
 
 ---
 
-## 一、对齐说明
+## 一、对齐说明 {#一对齐说明}
 
 本文档将 Rust 学习路径、面试评估题目与国际化权威来源建立系统映射，覆盖官方教程、交互式示例、练习项目、标准库文档、中文/日文社区资源以及 Exercism 等实践平台。对齐目标：
 
@@ -53,9 +53,9 @@
 
 ---
 
-## 二、官方学习资源对齐
+## 二、官方学习资源对齐 {#二官方学习资源对齐}
 
-### The Rust Programming Language (TRPL)
+### The Rust Programming Language (TRPL) {#the-rust-programming-language-trpl}
 
 | TRPL 章节 | 学习主题 | 对应 Bloom 层级 | 项目文档 | 权威来源链接 |
 |-----------|----------|-----------------|----------|--------------|
@@ -67,7 +67,7 @@
 | Ch 17: 异步编程基础 | async/await、Future、Pin | L3-L5 | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | [TRPL Ch 17](https://doc.rust-lang.org/book/ch17-00-async-await.html) |
 | Ch 20: 高级特性 | Unsafe Rust、宏、高级 Trait/类型 | L4-L6 | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md) | [TRPL Ch 20](https://doc.rust-lang.org/book/ch20-00-advanced-features.html) |
 
-### Rust By Example
+### Rust By Example {#rust-by-example}
 
 | RBE 章节 | 学习主题 | 对应 Bloom 层级 | 项目文档 | 权威来源链接 |
 |----------|----------|-----------------|----------|--------------|
@@ -77,7 +77,7 @@
 | Threads / Channels / Async | 并发与异步示例 | L3-L5 | [crates/c05_threads/README.md](../../crates/c05_threads/README.md)、[crates/c06_async/README.md](../../crates/c06_async/README.md) | [RBE Std misc](https://doc.rust-lang.org/rust-by-example/std_misc.html) |
 | Unsafe / FFI / Macros | unsafe、FFI、宏 | L4-L6 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md)、[crates/c11_macro_system/README.md](../../crates/c11_macro_system/README.md) | [RBE Unsafe](https://doc.rust-lang.org/rust-by-example/unsafe.html) |
 
-### Rustlings
+### Rustlings {#rustlings}
 
 | Rustlings 模块 | 学习主题 | 对应 Bloom 层级 | 项目文档 | 权威来源链接 |
 |----------------|----------|-----------------|----------|--------------|
@@ -88,7 +88,7 @@
 | tests / iterators / threads | 测试、迭代器、线程 | L3-L4 | [crates/c05_threads/README.md](../../crates/c05_threads/README.md)、[crates/c08_algorithms/README.md](../../crates/c08_algorithms/README.md) | [rustlings exercises](https://github.com/rust-lang/rustlings) |
 | smart_pointers / conversions / clippy | 智能指针、类型转换、Clippy | L3-L5 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) §Def 4.1-4.5 | [rustlings exercises](https://github.com/rust-lang/rustlings) |
 
-### Standard Library 文档
+### Standard Library 文档 {#standard-library-文档}
 
 | std 模块 | 学习主题 | 对应 Bloom 层级 | 项目文档 | 权威来源链接 |
 |----------|----------|-----------------|----------|--------------|
@@ -100,9 +100,9 @@
 
 ---
 
-## 三、社区学习资源对齐
+## 三、社区学习资源对齐 {#三社区学习资源对齐}
 
-### Rust 语言圣经 (course.rs)
+### Rust 语言圣经 (course.rs) {#rust-语言圣经-coursers}
 
 | course.rs 章节 | 学习主题 | 对应 Bloom 层级 | 项目文档 | 权威来源链接 |
 |----------------|----------|-----------------|----------|--------------|
@@ -111,7 +111,7 @@
 | 泛型与特征 | 泛型、Trait、生命周期 | L3-L5 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | [course.rs 泛型](https://course.rs/basic/trait.html) |
 | 深入类型 | 智能指针、并发、异步 | L4-L6 | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md)、[formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | [course.rs 深入类型](https://course.rs/advance/) |
 
-### Rust 中文社区
+### Rust 中文社区 {#rust-中文社区}
 
 | 来源 | 用途 | 对应 Bloom 层级 | 项目文档 | 权威来源链接 |
 |------|------|-----------------|----------|--------------|
@@ -119,7 +119,7 @@
 | [Rust 语言中文翻译](https://kaisery.github.io/trpl-zh-cn/) | TRPL 中文版 | L1-L5 | [10_i18n_source_alignment.md](10_i18n_source_alignment.md) | [TRPL 中文](https://kaisery.github.io/trpl-zh-cn/) |
 | [Rust Reference 中文](https://rustwiki.org/zh-CN/reference/) | Reference 社区翻译 | L3-L6 | [10_i18n_source_alignment.md](10_i18n_source_alignment.md) | [Reference 中文](https://rustwiki.org/zh-CN/reference/) |
 
-### Rust Japan
+### Rust Japan {#rust-japan}
 
 | 来源 | 用途 | 对应 Bloom 层级 | 项目文档 | 权威来源链接 |
 |------|------|-----------------|----------|--------------|
@@ -127,7 +127,7 @@
 | [The Rust Programming Language 日本語版](https://doc.rust-jp.rs/book-ja/) | TRPL 日文版 | L1-L5 | [10_i18n_source_alignment.md](10_i18n_source_alignment.md) | [TRPL 日文](https://doc.rust-jp.rs/book-ja/) |
 | [Rust by Example 日本語版](https://doc.rust-jp.rs/rust-by-example-ja/) | RBE 日文版 | L1-L5 | [10_i18n_source_alignment.md](10_i18n_source_alignment.md) | [RBE 日文](https://doc.rust-jp.rs/rust-by-example-ja/) |
 
-### Exercism Rust track
+### Exercism Rust track {#exercism-rust-track}
 
 | Exercism 主题 | 学习主题 | 对应 Bloom 层级 | 项目文档 | 权威来源链接 |
 |---------------|----------|-----------------|----------|--------------|
@@ -138,9 +138,9 @@
 
 ---
 
-## 四、面试评估与权威来源映射
+## 四、面试评估与权威来源映射 {#四面试评估与权威来源映射}
 
-### 所有权
+### 所有权 {#所有权}
 
 | 常见面试题 | 核心考察点 | Bloom 层级 | 项目文档 | 权威来源 |
 |------------|------------|------------|----------|----------|
@@ -149,7 +149,7 @@
 | 为什么 `Rc` 不是 `Send`？ | 引用计数与线程安全 | L4-L5 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q5 | [TRPL Ch 16.4](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)、[Rustonomicon Send/Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) |
 | 所有权系统能否防止内存泄漏？ | 安全保证边界 | L5-L6 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q13 | [Rustonomicon Leakpocalypse](https://doc.rust-lang.org/nomicon/leaking.html) |
 
-### 借用与生命周期
+### 借用与生命周期 {#借用与生命周期}
 
 | 常见面试题 | 核心考察点 | Bloom 层级 | 项目文档 | 权威来源 |
 |------------|------------|------------|----------|----------|
@@ -159,7 +159,7 @@
 | 生命周期省略的三条规则是什么？ | 生命周期省略 | L3-L4 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q20 | [Rust Reference Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) |
 | `for<'a>` 高阶 Trait bound 如何理解？ | HRTB | L5-L6 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q21 | [Rust Reference HRTB](https://doc.rust-lang.org/reference/trait-bounds.html#higher-ranked-trait-bounds) |
 
-### 类型系统
+### 类型系统 {#类型系统}
 
 | 常见面试题 | 核心考察点 | Bloom 层级 | 项目文档 | 权威来源 |
 |------------|------------|------------|----------|----------|
@@ -168,7 +168,7 @@
 | 什么是 GAT？ | 泛型关联类型 | L5-L6 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q22 | [RFC 1590 GAT](https://rust-lang.github.io/rfcs/1590-generic-associated-types.html) |
 | 空指针优化（NPO）是什么？ | 布局优化 | L4-L5 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q24 | [Rust Reference Niche](https://doc.rust-lang.org/reference/type-layout.html#reprc-enums)、[Rustonomicon NPO](https://doc.rust-lang.org/nomicon/exotic-sizes.html#niche-values) |
 
-### 并发与异步
+### 并发与异步 {#并发与异步}
 
 | 常见面试题 | 核心考察点 | Bloom 层级 | 项目文档 | 权威来源 |
 |------------|------------|------------|----------|----------|
@@ -178,7 +178,7 @@
 | 什么是 `Pin`？为什么 async/await 需要它？ | 自引用与状态机 | L4-L6 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q11、Q32 | [Rustonomicon Pin](https://doc.rust-lang.org/nomicon/pin.html)、[Async Book Pin](https://rust-lang.github.io/async-book/04_pinning/01_chapter.html) |
 | 跨 await 持锁有什么风险？ | 异步并发安全 | L5-L6 | [10_interview_questions_collection.md](10_interview_questions_collection.md) Q33 | [Async Book Shared State](https://rust-lang.github.io/async-book/03_async_await/01_chapter.html) |
 
-### Unsafe 与 FFI
+### Unsafe 与 FFI {#unsafe-与-ffi}
 
 | 常见面试题 | 核心考察点 | Bloom 层级 | 项目文档 | 权威来源 |
 |------------|------------|------------|----------|----------|
@@ -187,7 +187,7 @@
 | `transmute` 的风险是什么？ | 类型布局与 UB | L5-L6 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §7 | [Rustonomicon Transmute](https://doc.rust-lang.org/nomicon/transmutes.html) |
 | FFI 调用时需要注意哪些内存协议？ | FFI 安全 | L5-L6 | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §6 | [Rustonomicon FFI](https://doc.rust-lang.org/nomicon/ffi.html)、[Unsafe Code Guidelines FFI](https://rust-lang.github.io/unsafe-code-guidelines/layout/ffi.html) |
 
-### 设计模式与工程实践
+### 设计模式与工程实践 {#设计模式与工程实践}
 
 | 常见面试题 | 核心考察点 | Bloom 层级 | 项目文档 | 权威来源 |
 |------------|------------|------------|----------|----------|
@@ -198,7 +198,7 @@
 
 ---
 
-## 五、Bloom 层级对应矩阵
+## 五、Bloom 层级对应矩阵 {#五bloom-层级对应矩阵}
 
 | 学习主题 | L1 记忆 | L2 理解 | L3 应用 | L4 分析 | L5 评价 | L6 创造 |
 |----------|---------|---------|---------|---------|---------|---------|
@@ -218,7 +218,7 @@
 
 ---
 
-## 六、与项目文档映射
+## 六、与项目文档映射 {#六与项目文档映射}
 
 | 本矩阵主题 | 对应项目文档 | 说明 |
 |------------|--------------|------|
@@ -234,7 +234,7 @@
 
 ---
 
-## 七、未覆盖缺口
+## 七、未覆盖缺口 {#七未覆盖缺口}
 
 1. **Rustlings 与项目 exercises 的自动化反向索引尚未建立**：目前为人工映射，可补充脚本生成「题目 → 项目文件」反向索引。
 2. **Exercism Rust track 概念练习与项目反例的逐题映射可细化**：特别是高级并发、unsafe、宏相关练习。
@@ -246,7 +246,7 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
 - [综合学习路径](10_learning_path_comprehensive.md)
@@ -258,7 +258,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)
 > **来源**: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)

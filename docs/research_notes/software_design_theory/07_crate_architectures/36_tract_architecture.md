@@ -8,7 +8,7 @@
 
 ---
 
-# tract Crate 架构解构
+# tract Crate 架构解构 {#tract-crate-架构解构}
 
 > **最后更新**: 2026-06-29
 >
@@ -24,7 +24,7 @@
 
 ---
 
-## 1. 引言：tract 的生态定位
+## 1. 引言：tract 的生态定位 {#1-引言tract-的生态定位}
 
 > **[来源: [tract-onnx crates.io](https://crates.io/crates/tract-onnx)]**
 
@@ -62,7 +62,7 @@ println!("output shape = {:?}", view.shape());
 
 ---
 
-## 2. 核心 API 与概念
+## 2. 核心 API 与概念 {#2-核心-api-与概念}
 
 > **[来源: [tract-core docs.rs](https://docs.rs/tract-core/latest/tract_core/)]**
 
@@ -79,7 +79,7 @@ println!("output shape = {:?}", view.shape());
 
 > [来源: [tract-onnx prelude docs](https://docs.rs/tract-onnx/latest/tract_onnx/prelude/index.html)]
 
-### 2.1 模型加载与优化流水线
+### 2.1 模型加载与优化流水线 {#21-模型加载与优化流水线}
 
 `tract` 将模型生命周期显式分为解析、优化、可运行三个阶段。开发者可在中间阶段检查或修改图，例如插入量化、裁剪子图、查看中间形状。
 
@@ -92,7 +92,7 @@ let model = tract_onnx::onnx()
 
 > [来源: [tract docs.rs – Onnx](https://docs.rs/tract-onnx/latest/tract_onnx/struct.Onnx.html)]
 
-### 2.2 程序化构造计算图
+### 2.2 程序化构造计算图 {#22-程序化构造计算图}
 
 除了加载外部模型，`tract_core` 还允许用 Rust 代码直接构造 `TypedModel`。这对单元测试、自定义算子验证和教学非常有用。
 
@@ -116,7 +116,7 @@ let outputs = plan.run(tvec![tensor1(&[1.0f32, 2.0, 3.0]).into()])?;
 
 > [来源: [tract-core examples](https://docs.rs/tract-core/latest/tract_core/index.html)]
 
-### 2.3 量化与体积优化
+### 2.3 量化与体积优化 {#23-量化与体积优化}
 
 `tract` 内置对 INT8/QU8 量化图的支持，并能在加载期完成权重布局转换。配合 `cargo` 的 `opt-level = z`/`strip`，可生成极小的端侧推理二进制。
 
@@ -124,7 +124,7 @@ let outputs = plan.run(tvec![tensor1(&[1.0f32, 2.0, 3.0]).into()])?;
 
 ---
 
-## 3. 反例边界
+## 3. 反例边界 {#3-反例边界}
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -142,7 +142,7 @@ let outputs = plan.run(tvec![tensor1(&[1.0f32, 2.0, 3.0]).into()])?;
 
 ---
 
-## 4. 类型系统利用
+## 4. 类型系统利用 {#4-类型系统利用}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -160,7 +160,7 @@ let outputs = plan.run(tvec![tensor1(&[1.0f32, 2.0, 3.0]).into()])?;
 
 ---
 
-## 5. 代码示例锚点
+## 5. 代码示例锚点 {#5-代码示例锚点}
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -172,7 +172,7 @@ let outputs = plan.run(tvec![tensor1(&[1.0f32, 2.0, 3.0]).into()])?;
 
 ---
 
-## 6. 相关架构与延伸阅读
+## 6. 相关架构与延伸阅读 {#6-相关架构与延伸阅读}
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -183,7 +183,7 @@ let outputs = plan.run(tvec![tensor1(&[1.0f32, 2.0, 3.0]).into()])?;
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [tract-onnx crates.io](https://crates.io/crates/tract-onnx)]**
 >
@@ -199,7 +199,7 @@ let outputs = plan.run(tvec![tensor1(&[1.0f32, 2.0, 3.0]).into()])?;
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
 > **P0（官方/必读）**:
 >
@@ -216,7 +216,7 @@ let outputs = plan.run(tvec![tensor1(&[1.0f32, 2.0, 3.0]).into()])?;
 > - [来源: [tract examples](https://github.com/snipsco/tract/tree/main/examples)]
 > - [来源: [This Week in Rust](https://this-week-in-rust.org/)]
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

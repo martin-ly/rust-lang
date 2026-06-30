@@ -1,4 +1,4 @@
-# 故障排查指南
+# 故障排查指南 {#故障排查指南}
 
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
@@ -13,36 +13,36 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [故障排查指南](#故障排查指南)
-  - [📑 目录](#-目录)
-  - [📋 概述](#-概述)
-  - [🔧 编译错误](#-编译错误)
+  - [📑 目录](#目录)
+  - [📋 概述](#概述)
+  - [🔧 编译错误](#编译错误)
     - [1. 所有权错误](#1-所有权错误)
     - [2. 生命周期错误](#2-生命周期错误)
     - [3. 类型不匹配](#3-类型不匹配)
-  - [🐛 运行时错误](#-运行时错误)
+  - [🐛 运行时错误](#运行时错误)
     - [1. Panic 错误](#1-panic-错误)
     - [2. 死锁](#2-死锁)
     - [3. 内存泄漏](#3-内存泄漏)
-  - [⚡ 性能问题](#-性能问题)
+  - [⚡ 性能问题](#性能问题)
     - [1. 编译时间过长](#1-编译时间过长)
     - [2. 运行时性能问题](#2-运行时性能问题)
-  - [🔌 网络问题](#-网络问题)
+  - [🔌 网络问题](#网络问题)
     - [1. 连接超时](#1-连接超时)
     - [2. DNS 解析失败](#2-dns-解析失败)
-  - [🧪 测试问题](#-测试问题)
+  - [🧪 测试问题](#测试问题)
     - [1. 测试失败](#1-测试失败)
     - [2. 异步测试问题](#2-异步测试问题)
-  - [📚 调试技巧](#-调试技巧)
+  - [📚 调试技巧](#调试技巧)
     - [1. 使用 println](#1-使用-println)
     - [2. 使用 dbg! 宏](#2-使用-dbg-宏)
     - [3. 使用调试器](#3-使用调试器)
     - [4. 使用日志](#4-使用日志)
-  - [🔍 常见问题 FAQ](#-常见问题-faq)
+  - [🔍 常见问题 FAQ](#常见问题-faq)
     - [Q: 如何查看详细的编译错误？](#q-如何查看详细的编译错误)
     - [Q: 如何清理编译缓存？](#q-如何清理编译缓存)
     - [Q: 如何更新依赖？](#q-如何更新依赖)
@@ -54,8 +54,8 @@
     - [场景3: 性能问题优化](#场景3-性能问题优化)
     - [场景4: 生产环境问题](#场景4-生产环境问题)
   - [形式化链接](#形式化链接)
-  - [📚 相关资源](#-相关资源)
-  - [🆕 Rust 1.95+ 特性](#-rust-195-特性)
+  - [📚 相关资源](#相关资源)
+  - [🆕 Rust 1.95+ 特性](#rust-195-特性)
     - [新特性概览](#新特性概览)
     - [代码示例](#代码示例)
   - [Rust 1.95+ 故障排查指南](#rust-195-故障排查指南)
@@ -65,7 +65,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 📋 概述
+## 📋 概述 {#概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -76,11 +76,11 @@
 
 ---
 
-## 🔧 编译错误
+## 🔧 编译错误 {#编译错误}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 所有权错误
+### 1. 所有权错误 {#1-所有权错误}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -113,7 +113,7 @@ let y = &x;  // 借用而非移动
 println!("{}", x);
 ```
 
-### 2. 生命周期错误
+### 2. 生命周期错误 {#2-生命周期错误}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -148,7 +148,7 @@ fn get_ref<'a>(s: &'a str) -> &'a str {
 }
 ```
 
-### 3. 类型不匹配
+### 3. 类型不匹配 {#3-类型不匹配}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -176,11 +176,11 @@ let x = "42".parse::<i32>().unwrap();
 
 ---
 
-## 🐛 运行时错误
+## 🐛 运行时错误 {#运行时错误}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. Panic 错误
+### 1. Panic 错误 {#1-panic-错误}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -210,7 +210,7 @@ if let Some(value) = arr.get(10) {
 }
 ```
 
-### 2. 死锁
+### 2. 死锁 {#2-死锁}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -234,7 +234,7 @@ let mutex2 = Arc::new(Mutex::new(0));
 // 所有线程都按相同顺序获取锁
 ```
 
-### 3. 内存泄漏
+### 3. 内存泄漏 {#3-内存泄漏}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -265,11 +265,11 @@ struct Node {
 
 ---
 
-## ⚡ 性能问题
+## ⚡ 性能问题 {#性能问题}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 编译时间过长
+### 1. 编译时间过长 {#1-编译时间过长}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -278,27 +278,27 @@ struct Node {
 **解决方案**:
 
 ```toml
-# Cargo.toml
+# Cargo.toml {#cargotoml}
 [profile.dev]
 incremental = true  # 启用增量编译
 
-# 使用 workspace 依赖
+# 使用 workspace 依赖 {#使用-workspace-依赖}
 [dependencies]
 serde = { workspace = true }
 ```
 
-### 2. 运行时性能问题
+### 2. 运行时性能问题 {#2-运行时性能问题}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **诊断工具**:
 
 ```bash
-# 使用 perf (Linux)
+# 使用 perf (Linux) {#使用-perf-linux}
 perf record --call-graph=dwarf ./target/release/my_app
 perf report
 
-# 使用 cargo-flamegraph
+# 使用 cargo-flamegraph {#使用-cargo-flamegraph}
 cargo flamegraph --bin my_app
 ```
 
@@ -311,11 +311,11 @@ cargo flamegraph --bin my_app
 
 ---
 
-## 🔌 网络问题
+## 🔌 网络问题 {#网络问题}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 1. 连接超时
+### 1. 连接超时 {#1-连接超时}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -340,7 +340,7 @@ match timeout(Duration::from_secs(5), connect()).await {
 }
 ```
 
-### 2. DNS 解析失败
+### 2. DNS 解析失败 {#2-dns-解析失败}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -411,11 +411,11 @@ while retries > 0 {
 
 ---
 
-## 🧪 测试问题
+## 🧪 测试问题 {#测试问题}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 1. 测试失败
+### 1. 测试失败 {#1-测试失败}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -426,7 +426,7 @@ while retries > 0 {
 3. 启用详细输出: `cargo test -- --nocapture`
 4. 检查测试环境
 
-### 2. 异步测试问题
+### 2. 异步测试问题 {#2-异步测试问题}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -450,11 +450,11 @@ async fn test_async() {
 
 ---
 
-## 📚 调试技巧
+## 📚 调试技巧 {#调试技巧}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 1. 使用 println
+### 1. 使用 println {#1-使用-println}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -462,7 +462,7 @@ async fn test_async() {
 println!("调试信息: {:?}", value);
 ```
 
-### 2. 使用 dbg! 宏
+### 2. 使用 dbg! 宏 {#2-使用-dbg-宏}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -470,19 +470,19 @@ println!("调试信息: {:?}", value);
 let value = dbg!(calculate_value());
 ```
 
-### 3. 使用调试器
+### 3. 使用调试器 {#3-使用调试器}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 ```bash
-# 使用 gdb
+# 使用 gdb {#使用-gdb}
 gdb ./target/debug/my_app
 
-# 使用 lldb (macOS)
+# 使用 lldb (macOS) {#使用-lldb-macos}
 lldb ./target/debug/my_app
 ```
 
-### 4. 使用日志
+### 4. 使用日志 {#4-使用日志}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -496,29 +496,29 @@ error!("错误: {}", value);
 
 ---
 
-## 🔍 常见问题 FAQ
+## 🔍 常见问题 FAQ {#常见问题-faq}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### Q: 如何查看详细的编译错误？
+### Q: 如何查看详细的编译错误？ {#q-如何查看详细的编译错误}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 A: 使用 `cargo build --verbose` 或 `RUST_BACKTRACE=1 cargo run`
 
-### Q: 如何清理编译缓存？
+### Q: 如何清理编译缓存？ {#q-如何清理编译缓存}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 A: 使用 `cargo clean` 清理所有编译产物
 
-### Q: 如何更新依赖？
+### Q: 如何更新依赖？ {#q-如何更新依赖}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 A: 使用 `cargo update` 更新依赖版本
 
-### Q: 如何查看依赖树？
+### Q: 如何查看依赖树？ {#q-如何查看依赖树}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -526,7 +526,7 @@ A: 使用 `cargo tree` 查看依赖关系
 
 ---
 
-## 错误码快速查找
+## 错误码快速查找 {#错误码快速查找}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -534,11 +534,11 @@ A: 使用 `cargo tree` 查看依赖关系
 
 ---
 
-## 使用场景
+## 使用场景 {#使用场景}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 场景1: 编译错误排查
+### 场景1: 编译错误排查 {#场景1-编译错误排查}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -548,7 +548,7 @@ A: 使用 `cargo tree` 查看依赖关系
 2. 根据错误类型查阅 [编译错误](#编译错误) 章节
 3. 使用 [调试技巧](#调试技巧) 辅助定位
 
-### 场景2: 运行时问题诊断
+### 场景2: 运行时问题诊断 {#场景2-运行时问题诊断}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -558,7 +558,7 @@ A: 使用 `cargo tree` 查看依赖关系
 - 查阅 [运行时错误](#运行时错误) 常见场景
 - 应用 [调试技巧](#调试技巧) 逐步定位
 
-### 场景3: 性能问题优化
+### 场景3: 性能问题优化 {#场景3-性能问题优化}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -568,7 +568,7 @@ A: 使用 `cargo tree` 查看依赖关系
 2. 参考 [05_performance_tuning_guide.md](05_performance_tuning_guide.md) 优化
 3. 检查是否存在 [编译时间过长](#1-编译时间过长) 问题
 
-### 场景4: 生产环境问题
+### 场景4: 生产环境问题 {#场景4-生产环境问题}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -580,7 +580,7 @@ A: 使用 `cargo tree` 查看依赖关系
 
 ---
 
-## 形式化链接
+## 形式化链接 {#形式化链接}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -598,7 +598,7 @@ A: 使用 `cargo tree` 查看依赖关系
 
 ---
 
-## 📚 相关资源
+## 📚 相关资源 {#相关资源}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -606,13 +606,13 @@ A: 使用 `cargo tree` 查看依赖关系
 - [Rust 常见问题](https://doc.rust-lang.org/book/appendix-06-translation.html)
 - [Rust 性能书](https://nnethercote.github.io/perf-book/)
 
-## 🆕 Rust 1.95+ 特性
+## 🆕 Rust 1.95+ 特性 {#rust-195-特性}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.96.0+
 
-### 新特性概览
+### 新特性概览 {#新特性概览}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -625,7 +625,7 @@ orce_mut()
 - **Peekable::next_if_map** - 条件映射迭代
 - **TryFrom<char> for usize** - Unicode 标量值转换
 
-### 代码示例
+### 代码示例 {#代码示例}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -654,13 +654,13 @@ let result = items.iter().try_for_each(|&n| {
 
 ---
 
-## Rust 1.95+ 故障排查指南
+## Rust 1.95+ 故障排查指南 {#rust-195-故障排查指南}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **适用版本**: Rust 1.96.0+
 
-### LazyLock 初始化问题排查
+### LazyLock 初始化问题排查 {#lazylock-初始化问题排查}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -682,7 +682,7 @@ pub fn get_config() -> Option<&'static Config> {
 }
 ```
 
-### array_windows 边界问题
+### array_windows 边界问题 {#array_windows-边界问题}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -707,7 +707,7 @@ fn process(data: &[i32]) -> Vec<i32> {
 }
 ```
 
-### ControlFlow 类型推断问题
+### ControlFlow 类型推断问题 {#controlflow-类型推断问题}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -755,7 +755,7 @@ fn search(items: &[i32]) -> ControlFlow<i32, ()> {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -764,7 +764,7 @@ fn search(items: &[i32]) -> ControlFlow<i32, ()> {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

@@ -208,7 +208,7 @@
 
 - **Creusot** (Creusot) [L4] — 基于 Why3 验证平台的 Rust 形式化验证工具，使用 ML 风格规范语言 — [Creusot Docs](https://creusot-rs.github.io/)
 
-- **Verus** (Verus) [L4] — 支持 Rust 的演绎验证与证明助手 — [Verus Docs](https://github.com/verus-lang/verusverus/guide/)
+- **Verus** (Verus) [L4] — 支持 Rust 的演绎验证与证明助手 — [Verus Docs](https://verus-lang.github.io/verus/guide/)
 
 - **Miri** (Miri) [L4] — 检测未定义行为的 Rust 中间表示解释器 — [Miri](https://github.com/rust-lang/miri)
 

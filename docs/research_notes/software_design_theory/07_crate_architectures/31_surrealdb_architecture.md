@@ -8,7 +8,7 @@
 
 ---
 
-# surrealdb Crate 架构解构
+# surrealdb Crate 架构解构 {#surrealdb-crate-架构解构}
 
 > **最后更新**: 2026-06-29
 >
@@ -24,7 +24,7 @@
 
 ---
 
-## 1. 引言：Rust SurrealDB 客户端的生态定位
+## 1. 引言：Rust SurrealDB 客户端的生态定位 {#1-引言rust-surrealdb-客户端的生态定位}
 
 > **[来源: [surrealdb crates.io](https://crates.io/crates/surrealdb)]**
 
@@ -58,11 +58,11 @@ let created: Vec<Person> = db.create("person").content(person).await?;
 
 ---
 
-## 2. 核心 API 架构
+## 2. 核心 API 架构 {#2-核心-api-架构}
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 2.1 引擎抽象：`Surreal<C: Connection>`
+### 2.1 引擎抽象：`Surreal<C: Connection>` {#21-引擎抽象surrealc-connection}
 
 ```mermaid
 graph TD
@@ -90,7 +90,7 @@ graph TD
 
 > [来源: [surrealdb Surreal Docs](https://docs.rs/surrealdb/latest/surrealdb/struct.Surreal.html)]
 
-### 2.2 CRUD 操作
+### 2.2 CRUD 操作 {#22-crud-操作}
 
 `surrealdb` 的 CRUD 方法高度泛化，支持动态文档与 serde 强类型两种风格：
 
@@ -118,7 +118,7 @@ let deleted: Option<Person> = db.delete(("person", "alice")).await?;
 
 > [来源: [surrealdb CRUD Docs](https://docs.rs/surrealdb/latest/surrealdb/struct.Surreal.html)]
 
-### 2.3 SurrealQL 查询与参数绑定
+### 2.3 SurrealQL 查询与参数绑定 {#23-surrealql-查询与参数绑定}
 
 对于复杂查询，使用 `.query()` 并绑定参数以避免字符串拼接和注入风险：
 
@@ -134,7 +134,7 @@ let adults: Vec<Person> = result.take(0)?;
 
 > [来源: [SurrealQL Documentation](https://docs.surrealdb.com/docs/surrealql)]
 
-### 2.4 远程连接：认证、命名空间与数据库
+### 2.4 远程连接：认证、命名空间与数据库 {#24-远程连接认证命名空间与数据库}
 
 SurrealDB 使用三层命名空间：`namespace` → `database` → `table`。`Surreal` 句柄通过 `signin` 获得权限，再通过 `use_ns` / `use_db` 选择上下文：
 
@@ -145,7 +145,7 @@ db.use_ns("rust_learning").use_db("c10_networks_demo").await?;
 
 > [来源: [surrealdb Authentication Docs](https://docs.rs/surrealdb/latest/surrealdb/opt/auth/index.html)]
 
-### 2.5 嵌入式引擎
+### 2.5 嵌入式引擎 {#25-嵌入式引擎}
 
 同一 crate 也支持无需外部服务的嵌入式模式：
 
@@ -160,7 +160,7 @@ db.use_ns("test").use_db("test").await?;
 
 ---
 
-## 3. 类型系统利用
+## 3. 类型系统利用 {#3-类型系统利用}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -176,7 +176,7 @@ db.use_ns("test").use_db("test").await?;
 
 ---
 
-## 4. 反例边界
+## 4. 反例边界 {#4-反例边界}
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -194,7 +194,7 @@ db.use_ns("test").use_db("test").await?;
 
 ---
 
-## 5. 代码示例锚点
+## 5. 代码示例锚点 {#5-代码示例锚点}
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -206,7 +206,7 @@ db.use_ns("test").use_db("test").await?;
 
 ---
 
-## 6. 相关架构与延伸阅读
+## 6. 相关架构与延伸阅读 {#6-相关架构与延伸阅读}
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -219,7 +219,7 @@ db.use_ns("test").use_db("test").await?;
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [surrealdb crates.io](https://crates.io/crates/surrealdb)]**
 >
@@ -237,7 +237,7 @@ db.use_ns("test").use_db("test").await?;
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
 > **P0（官方/必读）**:
 >
@@ -255,7 +255,7 @@ db.use_ns("test").use_db("test").await?;
 > - [来源: [SurrealDB Blog](https://surrealdb.com/blog)]
 > - [来源: [This Week in Rust](https://this-week-in-rust.org/)]
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

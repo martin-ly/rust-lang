@@ -1,4 +1,4 @@
-# Rust 1.97 特性速查表
+# Rust 1.97 特性速查表 {#rust-197-特性速查表}
 
 > **权威来源**: 本文对应权威来源为 [`concept/07_future/rust_1_97_preview.md`](../../../concept/07_future/rust_1_97_preview.md)。
 > 本文与权威来源内容高度重叠；`concept/` 版本为项目权威主轨，本文保留作为快速参考。
@@ -15,7 +15,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [Rust 1.97 特性速查表](#rust-197-特性速查表)
   - [目录](#目录)
@@ -41,11 +41,11 @@
 
 ---
 
-## 语言特性
+## 语言特性 {#语言特性}
 
 > **[来源: Rust 1.97 Release Notes](https://github.com/rust-lang/rust/releases/tag/1.97.0)**
 
-### AsyncFn* trait family 加入 prelude
+### AsyncFn* trait family 加入 prelude {#asyncfn-trait-family-加入-prelude}
 
 Rust 1.85.0 将 `AsyncFn`, `AsyncFnMut`, `AsyncFnOnce` 三个 trait 加入标准 prelude（所有 Edition），
 允许像使用普通闭包一样使用异步闭包，无需显式导入。
@@ -64,11 +64,11 @@ let result = call_async(async |x| x * 2, 21).await;
 
 ---
 
-## 核心标准库 API
+## 核心标准库 API {#核心标准库-api}
 
 > **[来源: Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-### 数值计算
+### 数值计算 {#数值计算}
 
 | API | 签名 | 说明 |
 |-----|------|------|
@@ -89,7 +89,7 @@ assert_eq!(16u32.isqrt(), 4);
 assert_eq!((-1i32).checked_isqrt(), None);
 ```
 
-### 指针与 Strict Provenance
+### 指针与 Strict Provenance {#指针与-strict-provenance}
 
 | API | 签名 | 说明 |
 |-----|------|------|
@@ -108,7 +108,7 @@ let shifted = ptr.with_addr(addr + 4);  // 保留 provenance，新地址
 let byte_off = unsafe { ptr.byte_add(4) }; // 按字节偏移
 ```
 
-### 网络/IP 地址
+### 网络/IP 地址 {#网络ip-地址}
 
 | API | 签名 | 说明 |
 |-----|------|------|
@@ -126,7 +126,7 @@ let b = Ipv4Addr::new(0, 0, 255, 255);
 let masked = a & b; // 192.168.0.0
 ```
 
-### 文件系统
+### 文件系统 {#文件系统}
 
 | API | 签名 | 说明 |
 |-----|------|------|
@@ -140,7 +140,7 @@ times.set_modified(SystemTime::now());
 file.set_times(times)?;
 ```
 
-### 错误处理
+### 错误处理 {#错误处理}
 
 | API | 说明 |
 |-----|------|
@@ -155,7 +155,7 @@ match err.kind() {
 }
 ```
 
-### 集合与迭代器
+### 集合与迭代器 {#集合与迭代器}
 
 | API | 说明 |
 |-----|------|
@@ -183,7 +183,7 @@ let none: Option<i32> = None;
 assert!(none.as_slice().is_empty());
 ```
 
-### 异步
+### 异步 {#异步}
 
 | API | 说明 |
 |-----|------|
@@ -195,7 +195,7 @@ let mut cx = Context::from_waker(&waker);
 let poll_result = future.poll(&mut cx);
 ```
 
-### 其他
+### 其他 {#其他}
 
 | API | 说明 |
 |-----|------|
@@ -206,7 +206,7 @@ let poll_result = future.poll(&mut cx);
 
 ---
 
-## Const 上下文稳定
+## Const 上下文稳定 {#const-上下文稳定}
 
 > **[来源: Rust Reference — Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html)**
 
@@ -228,7 +228,7 @@ let poll_result = future.poll(&mut cx);
 
 ---
 
-## Cargo 改进
+## Cargo 改进 {#cargo-改进}
 
 > **[来源: Cargo Documentation](https://doc.rust-lang.org/cargo/)**
 
@@ -250,11 +250,11 @@ fn main() {
 
 ---
 
-## 快速参考示例
+## 快速参考示例 {#快速参考示例}
 
 > **[来源: Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-### 二分搜索中点（无溢出）
+### 二分搜索中点（无溢出） {#二分搜索中点无溢出}
 
 ```rust
 fn binary_search_mid(low: usize, high: usize) -> usize {
@@ -262,7 +262,7 @@ fn binary_search_mid(low: usize, high: usize) -> usize {
 }
 ```
 
-### 异步闭包 trait 约束
+### 异步闭包 trait 约束 {#异步闭包-trait-约束}
 
 ```rust
 async fn process_items<F>(processor: F, items: Vec<i32>) -> Vec<i32>
@@ -277,7 +277,7 @@ where
 }
 ```
 
-### 严格 provenance 模式
+### 严格 provenance 模式 {#严格-provenance-模式}
 
 ```rust
 let ptr = &value as *const T;
@@ -288,7 +288,7 @@ let original = tagged.with_addr(addr);    // 恢复原始地址，保留 provena
 
 ---
 
-## 迁移检查清单
+## 迁移检查清单 {#迁移检查清单}
 
 > **[来源: Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)**
 
@@ -301,7 +301,7 @@ let original = tagged.with_addr(addr);    // 恢复原始地址，保留 provena
 
 ---
 
-## 相关链接
+## 相关链接 {#相关链接}
 
 - [Rust 1.97 Release Notes](https://blog.rust-lang.org/)
 - [Rust Standard Library](https://doc.rust-lang.org/std/)

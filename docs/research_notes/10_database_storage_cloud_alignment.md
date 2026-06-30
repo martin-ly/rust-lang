@@ -1,4 +1,4 @@
-# 数据库、存储与云原生生态权威来源对齐矩阵
+# 数据库、存储与云原生生态权威来源对齐矩阵 {#数据库存储与云原生生态权威来源对齐矩阵}
 
 > **概念族**: 权威来源对齐 / 数据库 / 存储 / 云原生
 > **内容分级**: [核心级]
@@ -11,16 +11,16 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [数据库、存储与云原生生态权威来源对齐矩阵](#数据库存储与云原生生态权威来源对齐矩阵)
   - [目录](#目录)
   - [一、对齐说明](#一对齐说明)
   - [二、关系型数据库](#二关系型数据库)
-  - [三、KV / 缓存 / NoSQL](#三kv--缓存--nosql)
+  - [三、KV / 缓存 / NoSQL](#三kv-缓存-nosql)
   - [四、消息队列](#四消息队列)
   - [五、云原生与可观测性](#五云原生与可观测性)
-  - [六、容器 / Docker / Kubernetes 部署参考](#六容器--docker--kubernetes-部署参考)
+  - [六、容器 / Docker / Kubernetes 部署参考](#六容器-docker-kubernetes-部署参考)
   - [七、与项目文档的映射](#七与项目文档的映射)
   - [八、未覆盖缺口](#八未覆盖缺口)
   - [相关概念](#相关概念)
@@ -28,7 +28,7 @@
 
 ---
 
-## 一、对齐说明
+## 一、对齐说明 {#一对齐说明}
 
 本文档将 `docs/research_notes/` 中的数据库、存储、分布式消息与云原生内容与 Rust 生态的权威来源建立映射。
 
@@ -44,7 +44,7 @@
 
 ---
 
-## 二、关系型数据库
+## 二、关系型数据库 {#二关系型数据库}
 
 | 库/框架 | 官方来源 | 项目文档 | 覆盖内容 |
 |---------|----------|----------|----------|
@@ -55,7 +55,7 @@
 
 ---
 
-## 三、KV / 缓存 / NoSQL
+## 三、KV / 缓存 / NoSQL {#三kv-缓存-nosql}
 
 | 库/框架 | 官方来源 | 项目文档 | 覆盖内容 |
 |---------|----------|----------|----------|
@@ -66,7 +66,7 @@
 
 ---
 
-## 四、消息队列
+## 四、消息队列 {#四消息队列}
 
 | 库/框架 | 官方来源 | 项目文档 | 覆盖内容 |
 |---------|----------|----------|----------|
@@ -76,7 +76,7 @@
 
 ---
 
-## 五、云原生与可观测性
+## 五、云原生与可观测性 {#五云原生与可观测性}
 
 | 库/框架 | 官方来源 | 项目文档 | 覆盖内容 |
 |---------|----------|----------|----------|
@@ -87,7 +87,7 @@
 
 ---
 
-## 六、容器 / Docker / Kubernetes 部署参考
+## 六、容器 / Docker / Kubernetes 部署参考 {#六容器-docker-kubernetes-部署参考}
 
 | 技术 | 权威来源 | 项目资源 | 说明 |
 |------|----------|----------|------|
@@ -100,7 +100,7 @@
 
 ---
 
-## 七、与项目文档的映射
+## 七、与项目文档的映射 {#七与项目文档的映射}
 
 | 项目文档 | 生态覆盖 | 权威来源 |
 |----------|----------|----------|
@@ -115,7 +115,7 @@
 
 ---
 
-## 八、未覆盖缺口
+## 八、未覆盖缺口 {#八未覆盖缺口}
 
 1. **SeaORM** 与 **rusqlite** 的专项架构解构文档尚未建立。
 2. **Redis Cluster**、**Sentinel** 模式与 Rust 客户端的完整映射。
@@ -131,7 +131,7 @@
 > **权威来源**: [Diesel](https://diesel.rs/) | [SQLx](https://github.com/launchbadge/sqlx) | [SeaORM](https://www.sea-ql.org/SeaORM/) | [rusqlite](https://github.com/rusqlite/rusqlite) | [redis-rs](https://github.com/redis-rs/redis-rs) | [mini-redis](https://github.com/tokio-rs/mini-redis) | [sled](https://github.com/spacejam/sled) | [mongodb-rust-driver](https://github.com/mongodb/mongo-rust-driver) | [rust-rdkafka](https://github.com/fede1024/rust-rdkafka) | [lapin](https://github.com/amqp-rs/lapin) | [nats.rs](https://github.com/nats-io/nats.rs) | [kube-rs](https://kube.rs/) | [opentelemetry-rust](https://github.com/open-telemetry/opentelemetry-rust) | [prometheus/client_rust](https://github.com/prometheus/client_rust) | [Envoy](https://github.com/envoyproxy/envoy) | [Kubernetes](https://kubernetes.io/docs/) | [Docker](https://docs.docker.com/)
 > **官方来源**: [Rust Standard Library](https://doc.rust-lang.org/std/)
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
 - [异步生态权威来源对齐](10_async_ecosystem_alignment.md)
@@ -142,7 +142,7 @@
 
 ---
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 本对齐矩阵同时参考以下 P1 学术权威来源，以形成完整的官方-学术对照网络：
 

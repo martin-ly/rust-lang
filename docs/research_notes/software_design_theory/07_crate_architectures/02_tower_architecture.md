@@ -1,4 +1,4 @@
-# Tower crate 架构解构
+# Tower crate 架构解构 {#tower-crate-架构解构}
 
 > **概念族**: 软件设计 / Crate 架构
 
@@ -14,7 +14,7 @@
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
-## 1. 引言
+## 1. 引言 {#1-引言}
 
 >
 
@@ -30,7 +30,7 @@ Tower 的设计哲学可以概括为：**请求即函数，中间件即高阶函
 
 ---
 
-## 2. 核心 Trait：`Service<Request>`
+## 2. 核心 Trait：`Service<Request>` {#2-核心-traitservicerequest}
 
 >
 
@@ -72,7 +72,7 @@ pub trait Service<Request> {
 
 > [来源: [Tower Service Trait](https://docs.rs/tower/latest/tower/trait.Service.html)]
 
-### 2.1 为什么需要 `poll_ready`？
+### 2.1 为什么需要 `poll_ready`？ {#21-为什么需要-poll_ready}
 
 >
 
@@ -126,7 +126,7 @@ where
 
 > [来源: [Tokio 文档 - Backpressure](https://tokio.rs/tokio/tutorial)]
 
-### 2.2 `Service` 的函子性质
+### 2.2 `Service` 的函子性质 {#22-service-的函子性质}
 
 >
 
@@ -160,7 +160,7 @@ graph LR
 
 ---
 
-## 3. `Layer` Trait：服务的函子
+## 3. `Layer` Trait：服务的函子 {#3-layer-trait服务的函子}
 
 >
 
@@ -186,7 +186,7 @@ pub trait Layer<S> {
 
 > [来源: [Tower Layer Trait](https://docs.rs/tower/latest/tower/trait.Layer.html)]
 
-### 3.1 Layer 的幺半群结构
+### 3.1 Layer 的幺半群结构 {#31-layer-的幺半群结构}
 
 >
 
@@ -236,7 +236,7 @@ let s2 = ServiceBuilder::new()
 
 > [来源: [抽象代数 - Monoid](https://en.wikipedia.org/wiki/Monoid)] · [Tower 源码](https://github.com/tower-rs/tower)]
 
-### 3.2 `ServiceBuilder`：声明式层组合
+### 3.2 `ServiceBuilder`：声明式层组合 {#32-servicebuilder声明式层组合}
 
 >
 
@@ -304,7 +304,7 @@ let service = ServiceBuilder::new()
 
 ---
 
-## 4. 背压传播机制
+## 4. 背压传播机制 {#4-背压传播机制}
 
 >
 
@@ -392,7 +392,7 @@ Client -> Timeout.poll_ready()
 
 ---
 
-## 5. 类型系统利用：零成本抽象的工程实现
+## 5. 类型系统利用：零成本抽象的工程实现 {#5-类型系统利用零成本抽象的工程实现}
 
 >
 
@@ -400,7 +400,7 @@ Client -> Timeout.poll_ready()
 
 Tower 的零成本承诺建立在 Rust 类型系统的三个支柱之上：
 
-### 5.1 关联类型消除输出类型歧义
+### 5.1 关联类型消除输出类型歧义 {#51-关联类型消除输出类型歧义}
 
 >
 
@@ -426,7 +426,7 @@ impl Service<HttpRequest> for MyHandler {
 
 > [来源: [Rust Reference - Associated Types](https://doc.rust-lang.org/reference/items/associated-items.html)]
 
-### 5.2 无装箱的 ServiceStack
+### 5.2 无装箱的 ServiceStack {#52-无装箱的-servicestack}
 
 >
 
@@ -472,7 +472,7 @@ let stack = ServiceBuilder::new()
 
 > [来源: [Rust Reference - Monomorphization](https://doc.rust-lang.org/reference/items/generics.html#monomorphization)]
 
-### 5.3 `Pin` 与自引用 Future
+### 5.3 `Pin` 与自引用 Future {#53-pin-与自引用-future}
 
 >
 
@@ -508,7 +508,7 @@ pub struct Timeout<S, Request> {
 
 ---
 
-## 6. 与函数式编程的对应
+## 6. 与函数式编程的对应 {#6-与函数式编程的对应}
 
 >
 
@@ -530,7 +530,7 @@ Tower 的抽象与函数式编程中的经典概念存在深刻对应：
 
 | **恒等函数** | `Identity` layer | `id :: a -> a` 的服务版本 |
 
-### 6.1 Kleisli Arrow 视角
+### 6.1 Kleisli Arrow 视角 {#61-kleisli-arrow-视角}
 
 >
 
@@ -562,7 +562,7 @@ Tower 的 `Service` 是其 Rust 模拟：
 
 ---
 
-## 7. 代码示例：完整中间件栈
+## 7. 代码示例：完整中间件栈 {#7-代码示例完整中间件栈}
 
 >
 
@@ -794,7 +794,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ---
 
-## 8. Tower 在生态中的位置
+## 8. Tower 在生态中的位置 {#8-tower-在生态中的位置}
 
 >
 
@@ -834,7 +834,7 @@ Tower 处于"抽象 sweet spot"——足够底层以支持任意请求-响应协
 
 ---
 
-## 9. 来源与扩展阅读
+## 9. 来源与扩展阅读 {#9-来源与扩展阅读}
 
 >
 
@@ -868,7 +868,7 @@ Tower 处于"抽象 sweet spot"——足够底层以支持任意请求-响应协
 
 ---
 
-## 相关架构与延伸阅读
+## 相关架构与延伸阅读 {#相关架构与延伸阅读}
 
 >
 
@@ -882,7 +882,7 @@ Tower 处于"抽象 sweet spot"——足够底层以支持任意请求-响应协
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -912,13 +912,13 @@ Tower 处于"抽象 sweet spot"——足够底层以支持任意请求-响应协
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 > **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 > **来源**: [This Week in Rust](https://this-week-in-rust.org/)
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

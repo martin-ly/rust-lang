@@ -1,4 +1,4 @@
-# 权威来源对齐 100% 完成路线图
+# 权威来源对齐 100% 完成路线图 {#权威来源对齐-100-完成路线图}
 
 > **概念族**: 权威来源对齐 / 100% 路线图
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
@@ -12,7 +12,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [权威来源对齐 100% 完成路线图](#权威来源对齐-100-完成路线图)
   - [目录](#目录)
@@ -29,7 +29,7 @@
 
 ---
 
-## 一、当前完成状态
+## 一、当前完成状态 {#一当前完成状态}
 
 根据 [`scripts/maintenance/authority_coverage_dashboard.py`](../../scripts/maintenance/authority_coverage_dashboard.py) 对 `docs/research_notes/` 全部 **311** 篇 Markdown 文件的扫描结果，权威来源对齐网络当前覆盖状态如下：
 
@@ -50,7 +50,7 @@
 
 ---
 
-## 二、已完成的里程碑
+## 二、已完成的里程碑 {#二已完成的里程碑}
 
 在制定本路线图之前，权威来源对齐网络已经达成以下关键里程碑：
 
@@ -69,7 +69,7 @@
 
 ---
 
-## 三、已补齐重点概念族及验证结果
+## 三、已补齐重点概念族及验证结果 {#三已补齐重点概念族及验证结果}
 
 本轮冲刺前，以下概念族是 P1/P2 覆盖率的主要缺口。通过 `p1_coverage_sprint.py`、`p2_coverage_sprint.py` 与手工补齐，已全部达成 100% 覆盖。
 
@@ -90,9 +90,9 @@
 
 ---
 
-## 四、冲刺阶段计划
+## 四、冲刺阶段计划 {#四冲刺阶段计划}
 
-### 阶段 1：P1 学术来源冲刺
+### 阶段 1：P1 学术来源冲刺 {#阶段-1p1-学术来源冲刺}
 
 **目标**：将 P1 学术/形式化来源覆盖率从 **86.5%** 提升至 **100%**。
 
@@ -112,7 +112,7 @@
 - [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
 - [Stacked Borrows](https://plv.mpi-sws.org/rustbos/)
 
-### 阶段 2：P2 社区来源冲刺
+### 阶段 2：P2 社区来源冲刺 {#阶段-2p2-社区来源冲刺}
 
 **目标**：将 P2 社区/生态来源覆盖率从 **84.8%** 提升至 **100%**。
 
@@ -132,7 +132,7 @@
 - [This Week in Rust](https://this-week-in-rust.org/)
 - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
 
-### 阶段 3：全层级对齐与质量门禁
+### 阶段 3：全层级对齐与质量门禁 {#阶段-3全层级对齐与质量门禁}
 
 **目标**：实现 **P0+P1+P2 同时覆盖 100%** 并通过全部质量门禁。
 
@@ -146,7 +146,7 @@
 
 ---
 
-## 五、自动化工具清单
+## 五、自动化工具清单 {#五自动化工具清单}
 
 权威来源对齐 100% 路线图依赖以下自动化工具链，所有脚本均位于 [`scripts/maintenance/`](../../scripts/maintenance/)：
 
@@ -164,7 +164,7 @@
 
 ---
 
-## 六、质量门禁
+## 六、质量门禁 {#六质量门禁}
 
 进入权威来源对齐 100% 完成状态前，必须通过以下质量门禁：
 
@@ -183,7 +183,7 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
 - [权威来源自动补全计划](10_authoritative_source_completion_plan.md)

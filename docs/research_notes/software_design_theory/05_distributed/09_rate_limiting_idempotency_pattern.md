@@ -1,4 +1,4 @@
-# 限流与幂等模式形式化定义
+# 限流与幂等模式形式化定义 {#限流与幂等模式形式化定义}
 
 > **概念族**: 软件设计 / 分布式模式 / 限流与幂等
 >
@@ -26,12 +26,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [限流与幂等模式形式化定义](#限流与幂等模式形式化定义)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 概念定义 (Def)](#1-概念定义-def)
     - [Def RL1: Rate Limiting（限流）](#def-rl1-rate-limiting限流)
     - [Def RL2: Token Bucket（令牌桶）](#def-rl2-token-bucket令牌桶)
@@ -55,23 +55,23 @@
     - [5.2 幂等键冲突](#52-幂等键冲突)
     - [5.3 分布式锁与幂等](#53-分布式锁与幂等)
   - [6. 算法选择建议](#6-算法选择建议)
-  - [🆕 Rust 1.96 深度整合更新](#-rust-196-深度整合更新)
+  - [🆕 Rust 1.96 深度整合更新](#rust-196-深度整合更新)
     - [本文档的 Rust 1.96 更新要点](#本文档的-rust-196-更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-    - [P0（核心官方 / 生产级文档）](#p0核心官方--生产级文档)
-    - [P1（行业最佳实践 / 权威工程指南）](#p1行业最佳实践--权威工程指南)
-    - [P2（学术 / 社区参考）](#p2学术--社区参考)
+    - [P0（核心官方 / 生产级文档）](#p0核心官方-生产级文档)
+    - [P1（行业最佳实践 / 权威工程指南）](#p1行业最佳实践-权威工程指南)
+    - [P2（学术 / 社区参考）](#p2学术-社区参考)
 
 ---
 
-## 1. 概念定义 (Def)
+## 1. 概念定义 (Def) {#1-概念定义-def}
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Def RL1: Rate Limiting（限流）
+### Def RL1: Rate Limiting（限流） {#def-rl1-rate-limiting限流}
 
 > **来源: [Tower Docs – RateLimit](https://docs.rs/tower/latest/tower/limit/rate/struct.RateLimit.html)**
 >
@@ -88,7 +88,7 @@ RateLimiter := (S, policy, classifier)
     classifier: Request → key  -- 按客户端、IP、接口等维度分组
 ```
 
-### Def RL2: Token Bucket（令牌桶）
+### Def RL2: Token Bucket（令牌桶） {#def-rl2-token-bucket令牌桶}
 
 > **来源: [Wikipedia - Token Bucket](https://en.wikipedia.org/wiki/Token_bucket)**
 
@@ -103,7 +103,7 @@ TokenBucket := (capacity, refill_rate, tokens)
 
 允许一定突发，但长期速率受 `refill_rate` 约束。
 
-### Def RL3: Leaky Bucket（漏桶）
+### Def RL3: Leaky Bucket（漏桶） {#def-rl3-leaky-bucket漏桶}
 
 > **来源: [Wikipedia - Leaky Bucket](https://en.wikipedia.org/wiki/Leaky_bucket)**
 
@@ -118,7 +118,7 @@ LeakyBucket := (capacity, leak_rate, queue)
 
 输出速率平滑，但可能引入排队延迟；超出容量则直接拒绝。
 
-### Def RL4: Fixed Window（固定窗口）
+### Def RL4: Fixed Window（固定窗口） {#def-rl4-fixed-window固定窗口}
 
 > **来源: [Wikipedia - Rate Limiting](https://en.wikipedia.org/wiki/Rate_limiting)**
 
@@ -133,7 +133,7 @@ FixedWindow := (window, limit, counter)
 
 实现简单，但在窗口边界处可能出现 **2×limit** 的突发流量。
 
-### Def RL5: Sliding Window（滑动窗口）
+### Def RL5: Sliding Window（滑动窗口） {#def-rl5-sliding-window滑动窗口}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -147,7 +147,7 @@ SlidingWindow := (window, limit, timestamps)
 
 通过维护最近一段时间内的请求时间戳，消除固定窗口的边界突发问题。
 
-### Def ID1: Idempotency（幂等性）
+### Def ID1: Idempotency（幂等性） {#def-id1-idempotency幂等性}
 
 > **来源: [IETF HTTP Semantics RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html)**
 >
@@ -161,7 +161,7 @@ Idempotent(Op) := ∀n ≥ 1. Opⁿ ≡ Op¹
 
 在分布式系统中，幂等性是重试、超时恢复、消息队列至少一次投递的前提。
 
-### Def ID2: Idempotency Key（幂等键）
+### Def ID2: Idempotency Key（幂等键） {#def-id2-idempotency-key幂等键}
 
 > **来源: [Stripe Idempotency](https://stripe.com/docs/api/idempotent_requests)**
 
@@ -179,11 +179,11 @@ IdempotencyKey := (client_id, scope, nonce, ttl)
 
 ---
 
-## 2. 基本假设 (Axiom)
+## 2. 基本假设 (Axiom) {#2-基本假设-axiom}
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### Axiom RL1: 容量非负
+### Axiom RL1: 容量非负 {#axiom-rl1-容量非负}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -193,7 +193,7 @@ capacity ≥ 0 ∧ limit ≥ 0
 
 限流器的容量与阈值必须为非负数。
 
-### Axiom RL2: 请求计数单调
+### Axiom RL2: 请求计数单调 {#axiom-rl2-请求计数单调}
 
 > **来源: [Tokio Time](https://docs.rs/tokio/latest/tokio/time/index.html)**
 
@@ -203,7 +203,7 @@ t₁ < t₂ → count(t₁) ≤ count(t₂)
 
 在不重置窗口的前提下，累计请求数不会减少。
 
-### Axiom ID1: 幂等键唯一性
+### Axiom ID1: 幂等键唯一性 {#axiom-id1-幂等键唯一性}
 
 > **来源: [Stripe Idempotency](https://stripe.com/docs/api/idempotent_requests)**
 
@@ -213,7 +213,7 @@ t₁ < t₂ → count(t₁) ≤ count(t₂)
 
 不同幂等键应对应不同的业务语义；键冲突将导致错误去重。
 
-### Axiom ID2: 幂等结果不变性
+### Axiom ID2: 幂等结果不变性 {#axiom-id2-幂等结果不变性}
 
 > **来源: [IEEE - Resilient Software Architecture](https://standards.ieee.org/)**
 
@@ -225,11 +225,11 @@ key = k ∧ ttl_not_expired(k) → result(k) 保持不变
 
 ---
 
-## 3. 定理 (Theorem)
+## 3. 定理 (Theorem) {#3-定理-theorem}
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### Theorem RL1: 令牌桶速率上界
+### Theorem RL1: 令牌桶速率上界 {#theorem-rl1-令牌桶速率上界}
 
 > **来源: [Wikipedia - Token Bucket](https://en.wikipedia.org/wiki/Token_bucket)**
 
@@ -243,7 +243,7 @@ lim_{T→∞} allowed(T) / T ≤ refill_rate
 2. 任意长时间段内，新增令牌总数 ≤ `refill_rate × T + capacity`。
 3. 因此单位时间通过的请求长期平均值不超过 `refill_rate`。
 
-### Theorem RL2: 滑动窗口无边界突发
+### Theorem RL2: 滑动窗口无边界突发 {#theorem-rl2-滑动窗口无边界突发}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -257,7 +257,7 @@ lim_{T→∞} allowed(T) / T ≤ refill_rate
 2. 仅当当前窗口内时间戳数量小于 `limit` 时才允许通过。
 3. 由于窗口是连续滑动的，不存在固定窗口的边界重置。
 
-### Theorem ID1: 幂等执行一致性
+### Theorem ID1: 幂等执行一致性 {#theorem-id1-幂等执行一致性}
 
 > **来源: [ACM - Fault-Tolerant Design Patterns](https://dl.acm.org/)**
 
@@ -273,7 +273,7 @@ lim_{T→∞} allowed(T) / T ≤ refill_rate
 
 ---
 
-## 4. Rust 实现示例
+## 4. Rust 实现示例 {#4-rust-实现示例}
 
 > **来源: [Tower Docs – RateLimit](https://docs.rs/tower/latest/tower/limit/rate/struct.RateLimit.html)**
 >
@@ -366,11 +366,11 @@ impl IdempotencyStore {
 
 ---
 
-## 5. 反例边界
+## 5. 反例边界 {#5-反例边界}
 
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
-### 5.1 限流误杀
+### 5.1 限流误杀 {#51-限流误杀}
 
 > **来源: [AWS Architecture Blog - Rate Limiting](https://docs.aws.amazon.com/)**
 
@@ -384,7 +384,7 @@ impl IdempotencyStore {
 - 限流维度应细化到 `user_id` / `api_key` / `IP`。
 - 应区分“硬限制”与“软限制”，为关键用户预留额度。
 
-### 5.2 幂等键冲突
+### 5.2 幂等键冲突 {#52-幂等键冲突}
 
 > **来源: [Stripe Idempotency](https://stripe.com/docs/api/idempotent_requests)**
 
@@ -402,7 +402,7 @@ impl IdempotencyStore {
 - 幂等键必须包含业务作用域，如 `"payment:{user_id}:{nonce}"`。
 - 客户端在收到响应前不得复用同一 key。
 
-### 5.3 分布式锁与幂等
+### 5.3 分布式锁与幂等 {#53-分布式锁与幂等}
 
 > **来源: [Redis Distributed Locks](https://redis.io/docs/manual/patterns/distributed-locks/)**
 
@@ -425,7 +425,7 @@ Instance 2: 执行完成，覆盖 key
 
 ---
 
-## 6. 算法选择建议
+## 6. 算法选择建议 {#6-算法选择建议}
 
 > **来源: [Tokio Tutorial](https://tokio.rs/tokio/tutorial)**
 
@@ -440,7 +440,7 @@ Instance 2: 执行完成，覆盖 key
 
 ---
 
-## 🆕 Rust 1.96 深度整合更新
+## 🆕 Rust 1.96 深度整合更新 {#rust-196-深度整合更新}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -448,9 +448,9 @@ Instance 2: 执行完成，覆盖 key
 
 > **更新日期**: 2026-06-29
 
-### 本文档的 Rust 1.96 更新要点
+### 本文档的 Rust 1.96 更新要点 {#本文档的-rust-196-更新要点}
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 |------|----------|----------|
@@ -459,7 +459,7 @@ Instance 2: 执行完成，覆盖 key
 | `DashMap` | 高并发幂等键存储 | §4 实现示例 |
 | `parking_lot::Mutex` | 低延迟限流状态同步 | §4 实现示例 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 - ✅ 使用 Rust 1.96 语法验证
 - ✅ 兼容 Edition 2024
@@ -485,7 +485,7 @@ Instance 2: 执行完成，覆盖 key
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -497,9 +497,9 @@ Instance 2: 执行完成，覆盖 key
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
-### P0（核心官方 / 生产级文档）
+### P0（核心官方 / 生产级文档） {#p0核心官方-生产级文档}
 
 > **来源: [Tower Docs - RateLimit](https://docs.rs/tower/latest/tower/limit/rate/struct.RateLimit.html)**
 
@@ -511,7 +511,7 @@ Instance 2: 执行完成，覆盖 key
 
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 
-### P1（行业最佳实践 / 权威工程指南）
+### P1（行业最佳实践 / 权威工程指南） {#p1行业最佳实践-权威工程指南}
 
 > **来源: [Stripe Idempotency](https://stripe.com/docs/api/idempotent_requests)**
 
@@ -519,7 +519,7 @@ Instance 2: 执行完成，覆盖 key
 
 > **来源: [Martin Fowler - Idempotent Receiver](https://martinfowler.com/)**
 
-### P2（学术 / 社区参考）
+### P2（学术 / 社区参考） {#p2学术-社区参考}
 
 > **来源: [Wikipedia - Token Bucket](https://en.wikipedia.org/wiki/Token_bucket)**
 

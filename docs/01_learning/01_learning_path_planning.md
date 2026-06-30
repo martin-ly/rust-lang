@@ -1,4 +1,4 @@
-# 学习路径规划文档
+# 学习路径规划文档 {#学习路径规划文档}
 
 > **分级**: [A]
 > **Bloom 层级**: L1-L2 (记忆/理解)
@@ -13,36 +13,36 @@
 
 ---
 
-## 📋 目录
+## 📋 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [学习路径规划文档](#学习路径规划文档)
-  - [📋 目录](#-目录)
-  - [📋 概述](#-概述)
-  - [🎯 学习路径分类](#-学习路径分类)
+  - [📋 目录](#目录)
+  - [📋 概述](#概述)
+  - [🎯 学习路径分类](#学习路径分类)
     - [路径 1: 完全新手（0 基础）](#路径-1-完全新手0-基础)
     - [路径 2: 有编程经验（其他语言）](#路径-2-有编程经验其他语言)
     - [路径 3: 中级开发者（有 Rust 基础）](#路径-3-中级开发者有-rust-基础)
     - [路径 4: 高级开发者（专家级）](#路径-4-高级开发者专家级)
-  - [📊 学习进度跟踪](#-学习进度跟踪)
+  - [📊 学习进度跟踪](#学习进度跟踪)
     - [进度检查清单](#进度检查清单)
       - [基础阶段（C01-C03）](#基础阶段c01-c03)
       - [进阶阶段（C04-C06）](#进阶阶段c04-c06)
       - [高级阶段（C07-C10）](#高级阶段c07-c10)
       - [专家阶段（C11-C12）](#专家阶段c11-c12)
       - [新特性与前沿阶段（本轮新增）](#新特性与前沿阶段本轮新增)
-  - [💻 学习路径代码示例](#-学习路径代码示例)
+  - [💻 学习路径代码示例](#学习路径代码示例)
     - [路径 1 代码示例：基础语法实践](#路径-1-代码示例基础语法实践)
     - [路径 2 代码示例：并发编程实践](#路径-2-代码示例并发编程实践)
     - [路径 3 代码示例：异步编程实践](#路径-3-代码示例异步编程实践)
     - [路径 4 代码示例：高级特性实践](#路径-4-代码示例高级特性实践)
-  - [🎯 学习建议](#-学习建议)
+  - [🎯 学习建议](#学习建议)
     - [1. 理论与实践结合](#1-理论与实践结合)
     - [2. 项目驱动学习](#2-项目驱动学习)
     - [3. 持续复习](#3-持续复习)
     - [4. 社区参与](#4-社区参与)
-  - [📚 推荐学习资源](#-推荐学习资源)
+  - [📚 推荐学习资源](#推荐学习资源)
     - [官方资源](#官方资源)
     - [项目资源](#项目资源)
     - [社区资源](#社区资源)
@@ -50,18 +50,18 @@
       - [Rust Programming Specialization (Duke University)](#rust-programming-specialization-duke-university)
       - [Programming in Rust (University of Colorado Boulder)](#programming-in-rust-university-of-colorado-boulder)
       - [Practical System Programming in Rust (Coursera Project)](#practical-system-programming-in-rust-coursera-project)
-  - [🔄 学习路径调整](#-学习路径调整)
+  - [🔄 学习路径调整](#学习路径调整)
     - [根据目标调整](#根据目标调整)
     - [根据时间调整](#根据时间调整)
-  - [📈 学习效果评估](#-学习效果评估)
+  - [📈 学习效果评估](#学习效果评估)
     - [自我评估](#自我评估)
     - [项目评估](#项目评估)
-  - [👤 四类学习者详细学习路径](#-四类学习者详细学习路径)
+  - [👤 四类学习者详细学习路径](#四类学习者详细学习路径)
     - [路径 A: 初学者（零编程基础）](#路径-a-初学者零编程基础)
     - [路径 B: 有经验的开发者（其他语言背景）](#路径-b-有经验的开发者其他语言背景)
     - [路径 C: 研究者（形式化方法方向）](#路径-c-研究者形式化方法方向)
     - [路径 D: 维护者/贡献者（Rust 生态方向）](#路径-d-维护者贡献者rust-生态方向)
-  - [📚 相关文档](#-相关文档)
+  - [📚 相关文档](#相关文档)
     - [学习支持](#学习支持)
     - [形式化研究（研究者路径）](#形式化研究研究者路径)
   - [Rust 1.95+ 学习路径](#rust-195-学习路径)
@@ -73,13 +73,13 @@
     - [本文档的Rust 1.95+更新要点](#本文档的rust-195更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
+      - [相关文档](#相关文档-1)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
 ---
 
-## 📋 概述
+## 📋 概述 {#概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -87,11 +87,11 @@
 
 ---
 
-## 🎯 学习路径分类
+## 🎯 学习路径分类 {#学习路径分类}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 路径 1: 完全新手（0 基础）
+### 路径 1: 完全新手（0 基础） {#路径-1-完全新手0-基础}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -125,7 +125,7 @@
 
 ---
 
-### 路径 2: 有编程经验（其他语言）
+### 路径 2: 有编程经验（其他语言） {#路径-2-有编程经验其他语言}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -173,7 +173,7 @@
 
 ---
 
-### 路径 3: 中级开发者（有 Rust 基础）
+### 路径 3: 中级开发者（有 Rust 基础） {#路径-3-中级开发者有-rust-基础}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -227,7 +227,7 @@
 
 ---
 
-### 路径 4: 高级开发者（专家级）
+### 路径 4: 高级开发者（专家级） {#路径-4-高级开发者专家级}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -272,17 +272,17 @@
 
 ---
 
-## 📊 学习进度跟踪
+## 📊 学习进度跟踪 {#学习进度跟踪}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 进度检查清单
+### 进度检查清单 {#进度检查清单}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-#### 基础阶段（C01-C03）
+#### 基础阶段（C01-C03） {#基础阶段c01-c03}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -294,7 +294,7 @@
 - [ ] 理解函数和闭包
 - [ ] 完成基础项目
 
-#### 进阶阶段（C04-C06）
+#### 进阶阶段（C04-C06） {#进阶阶段c04-c06}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
@@ -306,7 +306,7 @@
 - [ ] 掌握异步编程基础
 - [ ] 完成并发/异步项目
 
-#### 高级阶段（C07-C10）
+#### 高级阶段（C07-C10） {#高级阶段c07-c10}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -316,7 +316,7 @@
 - [ ] 掌握常用算法
 - [ ] 完成系统编程项目
 
-#### 专家阶段（C11-C12）
+#### 专家阶段（C11-C12） {#专家阶段c11-c12}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -325,7 +325,7 @@
 - [ ] 理解 Rust 内部机制
 - [ ] 完成专业领域项目
 
-#### 新特性与前沿阶段（本轮新增）
+#### 新特性与前沿阶段（本轮新增） {#新特性与前沿阶段本轮新增}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -337,11 +337,11 @@
 
 ---
 
-## 💻 学习路径代码示例
+## 💻 学习路径代码示例 {#学习路径代码示例}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 路径 1 代码示例：基础语法实践
+### 路径 1 代码示例：基础语法实践 {#路径-1-代码示例基础语法实践}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -364,7 +364,7 @@ fn calculate_length(s: &String) -> usize {
 }
 ```
 
-### 路径 2 代码示例：并发编程实践
+### 路径 2 代码示例：并发编程实践 {#路径-2-代码示例并发编程实践}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -386,7 +386,7 @@ fn main() {
 }
 ```
 
-### 路径 3 代码示例：异步编程实践
+### 路径 3 代码示例：异步编程实践 {#路径-3-代码示例异步编程实践}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -406,7 +406,7 @@ async fn main() {
 }
 ```
 
-### 路径 4 代码示例：高级特性实践
+### 路径 4 代码示例：高级特性实践 {#路径-4-代码示例高级特性实践}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -432,11 +432,11 @@ fn main() {
 
 ---
 
-## 🎯 学习建议
+## 🎯 学习建议 {#学习建议}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 1. 理论与实践结合
+### 1. 理论与实践结合 {#1-理论与实践结合}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -444,7 +444,7 @@ fn main() {
 - 完成每个模块的示例程序
 - 尝试修改示例代码，观察结果
 
-### 2. 项目驱动学习
+### 2. 项目驱动学习 {#2-项目驱动学习}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -452,7 +452,7 @@ fn main() {
 - 从简单项目开始，逐步增加复杂度
 - 参考项目示例，但尝试自己实现
 
-### 3. 持续复习
+### 3. 持续复习 {#3-持续复习}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -460,7 +460,7 @@ fn main() {
 - 使用速查卡快速复习
 - 参与代码审查和讨论
 
-### 4. 社区参与
+### 4. 社区参与 {#4-社区参与}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -470,11 +470,11 @@ fn main() {
 
 ---
 
-## 📚 推荐学习资源
+## 📚 推荐学习资源 {#推荐学习资源}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 官方资源
+### 官方资源 {#官方资源}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -482,7 +482,7 @@ fn main() {
 - [Rust Book](https://doc.rust-lang.org/book/)
 - [Rust by Example](https://doc.rust-lang.org/rust-by-example/)
 
-### 项目资源
+### 项目资源 {#项目资源}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -490,7 +490,7 @@ fn main() {
 - [使用指南](../05_guides/README.md)
 - 最佳实践指南
 
-### 社区资源
+### 社区资源 {#社区资源}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -498,11 +498,11 @@ fn main() {
 - [Rust 中文社区](https://rustcc.cn/)
 - [Rust 周报](https://this-week-in-rust.org/)
 
-### Coursera 在线课程
+### Coursera 在线课程 {#coursera-在线课程}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-#### Rust Programming Specialization (Duke University)
+#### Rust Programming Specialization (Duke University) {#rust-programming-specialization-duke-university}
 
 - **链接**: <https://www.coursera.org/specializations/rust-programming>
 - **内容**: Rust基础、数据结构、并发编程
@@ -517,14 +517,14 @@ fn main() {
   | Data Structures | C04 集合与错误 |
   | Concurrency | C08 并发编程 |
 
-#### Programming in Rust (University of Colorado Boulder)
+#### Programming in Rust (University of Colorado Boulder) {#programming-in-rust-university-of-colorado-boulder}
 
 - **链接**: <https://www.coursera.org/learn/programming-in-rust>
 - **内容**: Rust编程基础
 - **适合路径**: 路径 1: 完全新手（0 基础）
 - **与本文档对齐**: C01-C03 基础阶段
 
-#### Practical System Programming in Rust (Coursera Project)
+#### Practical System Programming in Rust (Coursera Project) {#practical-system-programming-in-rust-coursera-project}
 
 - **内容**: 系统编程实践
 - **适合路径**:
@@ -534,11 +534,11 @@ fn main() {
 
 ---
 
-## 🔄 学习路径调整
+## 🔄 学习路径调整 {#学习路径调整}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 根据目标调整
+### 根据目标调整 {#根据目标调整}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -547,7 +547,7 @@ fn main() {
 - **算法开发**: 重点学习 C08、C04
 - **嵌入式**: 重点学习 C01、C02、C11
 
-### 根据时间调整
+### 根据时间调整 {#根据时间调整}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -557,11 +557,11 @@ fn main() {
 
 ---
 
-## 📈 学习效果评估
+## 📈 学习效果评估 {#学习效果评估}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 自我评估
+### 自我评估 {#自我评估}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -570,7 +570,7 @@ fn main() {
 - 能够阅读和理解他人代码
 - 能够设计和实现项目
 
-### 项目评估
+### 项目评估 {#项目评估}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -581,11 +581,11 @@ fn main() {
 
 ---
 
-## 👤 四类学习者详细学习路径
+## 👤 四类学习者详细学习路径 {#四类学习者详细学习路径}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 路径 A: 初学者（零编程基础）
+### 路径 A: 初学者（零编程基础） {#路径-a-初学者零编程基础}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -630,7 +630,7 @@ fn main() {
 
 ---
 
-### 路径 B: 有经验的开发者（其他语言背景）
+### 路径 B: 有经验的开发者（其他语言背景） {#路径-b-有经验的开发者其他语言背景}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -688,7 +688,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 
 ---
 
-### 路径 C: 研究者（形式化方法方向）
+### 路径 C: 研究者（形式化方法方向） {#路径-c-研究者形式化方法方向}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -737,7 +737,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 
 ---
 
-### 路径 D: 维护者/贡献者（Rust 生态方向）
+### 路径 D: 维护者/贡献者（Rust 生态方向） {#路径-d-维护者贡献者rust-生态方向}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -776,11 +776,11 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 
 ---
 
-## 📚 相关文档
+## 📚 相关文档 {#相关文档}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 学习支持
+### 学习支持 {#学习支持}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -789,7 +789,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 - [故障排查指南](../05_guides/05_troubleshooting_guide.md)
 - [快速参考卡片](../02_reference/quick_reference/README.md)
 
-### 形式化研究（研究者路径）
+### 形式化研究（研究者路径） {#形式化研究研究者路径}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -806,12 +806,12 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 
 ---
 
-## Rust 1.95+ 学习路径
+## Rust 1.95+ 学习路径 {#rust-195-学习路径}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 > **适用版本**: Rust 1.96.0+
 
-### 1.95+ 新特性学习要点
+### 1.95+ 新特性学习要点 {#195-新特性学习要点}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -826,7 +826,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 | `Atomic::update` | ⭐⭐ | 第7周 |
 | `use<..>` precise capturing | ⭐⭐⭐ | 第8周 |
 
-### 本轮新增模块学习路径
+### 本轮新增模块学习路径 {#本轮新增模块学习路径}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -839,7 +839,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 | **content/emerging/** | 前沿特性跟踪 | 中级以上 | 路径 3+ 持续学习 | `content/emerging/README.md` |
 | **content/ecosystem/** | 生态深度 | 中级以上 | 路径 3+ 持续学习 | `content/ecosystem/README.md` |
 
-#### 学习路径递进关系
+#### 学习路径递进关系 {#学习路径递进关系}
 
 ```text
 初级 ──────────────────────────────────────────────────────────> 高级
@@ -872,7 +872,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
        └── SQLx 编译时检查
 ```
 
-### 学习资源
+### 学习资源 {#学习资源}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -883,19 +883,19 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 
 ---
 
-## Rust 1.95+ 持续更新更新
+## Rust 1.95+ 持续更新更新 {#rust-195-持续更新更新}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.95+更新要点
+### 本文档的Rust 1.95+更新要点 {#本文档的rust-195更新要点}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 本文档已针对 **Rust 1.95+** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -904,7 +904,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -912,7 +912,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 - ✅ 兼容Edition 2024
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档-1}
 
 - Rust 1.95+ 迁移指南
 - Rust 1.94 特性速查（已归档）
@@ -936,7 +936,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -945,7 +945,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **[来源: Rust Learning Resources]**

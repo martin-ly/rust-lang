@@ -1,4 +1,4 @@
-# 形式化验证整合指南
+# 形式化验证整合指南 {#形式化验证整合指南}
 
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
@@ -12,31 +12,31 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [形式化验证整合指南](#形式化验证整合指南)
-  - [📑 目录](#-目录)
-  - [🎯 概述](#-概述)
-  - [🧪 Miri - 内存安全验证](#-miri---内存安全验证)
+  - [📑 目录](#目录)
+  - [🎯 概述](#概述)
+  - [🧪 Miri - 内存安全验证](#miri---内存安全验证)
     - [Tree Borrows 模式](#tree-borrows-模式)
     - [代码示例](#代码示例)
     - [CI/CD 集成](#cicd-集成)
-  - [🔍 Kani - 模型检查](#-kani---模型检查)
+  - [🔍 Kani - 模型检查](#kani---模型检查)
     - [基础验证](#基础验证)
     - [高级特性](#高级特性)
-  - [📐 Prusti - 契约编程](#-prusti---契约编程)
+  - [📐 Prusti - 契约编程](#prusti---契约编程)
     - [前置/后置条件](#前置后置条件)
     - [循环不变量](#循环不变量)
-  - [🎓 工具选择决策树](#-工具选择决策树)
-  - [🔗 综合示例](#-综合示例)
+  - [🎓 工具选择决策树](#工具选择决策树)
+  - [🔗 综合示例](#综合示例)
     - [完整的验证套件](#完整的验证套件)
-  - [📊 验证覆盖率目标](#-验证覆盖率目标)
+  - [📊 验证覆盖率目标](#验证覆盖率目标)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🎯 概述
+## 🎯 概述 {#概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -58,30 +58,30 @@
 
 ---
 
-## 🧪 Miri - 内存安全验证
+## 🧪 Miri - 内存安全验证 {#miri---内存安全验证}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Miri 是 Rust 的解释器，可以检测未定义行为（UB）。
 
-### Tree Borrows 模式
+### Tree Borrows 模式 {#tree-borrows-模式}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# 使用 Tree Borrows（推荐）
+# 使用 Tree Borrows（推荐） {#使用-tree-borrows推荐}
 MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 
-# 使用 Stacked Borrows（兼容性测试）
+# 使用 Stacked Borrows（兼容性测试） {#使用-stacked-borrows兼容性测试}
 MIRIFLAGS="-Zmiri-stacked-borrows" cargo miri test
 
-# 严格模式（最严格检查）
+# 严格模式（最严格检查） {#严格模式最严格检查}
 MIRIFLAGS="-Zmiri-tree-borrows -Zmiri-tag-raw-pointers" cargo miri test
 ```
 
-### 代码示例
+### 代码示例 {#代码示例}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -128,14 +128,14 @@ fn test_tree_borrows_self_referential() {
 }
 ```
 
-### CI/CD 集成
+### CI/CD 集成 {#cicd-集成}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```yaml
-# .github/workflows/miri.yml
+# .github/workflows/miri.yml {#githubworkflowsmiriyml}
 name: Miri Tests
 
 on: [push, pull_request]
@@ -159,13 +159,13 @@ jobs:
 
 ---
 
-## 🔍 Kani - 模型检查
+## 🔍 Kani - 模型检查 {#kani---模型检查}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Kani 是 Rust 的模型检查器，用于验证属性。
 
-### 基础验证
+### 基础验证 {#基础验证}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -200,7 +200,7 @@ mod verification {
 }
 ```
 
-### 高级特性
+### 高级特性 {#高级特性}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -268,13 +268,13 @@ fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
 
 ---
 
-## 📐 Prusti - 契约编程
+## 📐 Prusti - 契约编程 {#prusti---契约编程}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Prusti 使用分离逻辑验证 Rust 代码。
 
-### 前置/后置条件
+### 前置/后置条件 {#前置后置条件}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -322,7 +322,7 @@ fn safe_get(array: &[i32], index: usize) -> i32 {
 }
 ```
 
-### 循环不变量
+### 循环不变量 {#循环不变量}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -386,7 +386,7 @@ fn binary_search_prusti(arr: &[i32], target: i32) -> Option<usize> {
 
 ---
 
-## 🎓 工具选择决策树
+## 🎓 工具选择决策树 {#工具选择决策树}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -416,11 +416,11 @@ fn binary_search_prusti(arr: &[i32], target: i32) -> Option<usize> {
 
 ---
 
-## 🔗 综合示例
+## 🔗 综合示例 {#综合示例}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 完整的验证套件
+### 完整的验证套件 {#完整的验证套件}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -552,7 +552,7 @@ mod miri_tests {
 
 ---
 
-## 📊 验证覆盖率目标
+## 📊 验证覆盖率目标 {#验证覆盖率目标}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -588,7 +588,7 @@ mod miri_tests {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -597,7 +597,7 @@ mod miri_tests {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 > **来源: [Coq Reference](https://coq.inria.fr/doc/)**

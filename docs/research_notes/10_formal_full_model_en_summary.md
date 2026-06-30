@@ -1,4 +1,4 @@
-# Rust Formal Full Model — English Summary
+# Rust Formal Full Model — English Summary {#rust-formal-full-model-english-summary}
 
 > **概念族**: 形式化方法
 
@@ -22,7 +22,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -30,25 +30,25 @@
 
 >
 
-- [Rust Formal Full Model — English Summary](#rust-formal-full-model--english-summary)
-  - [📑 目录](#-目录)
+- [Rust Formal Full Model — English Summary](#rust-formal-full-model-english-summary)
+  - [📑 目录](#目录)
   - [Overview](#overview)
   - [Core Mechanisms and Axiom Layer](#core-mechanisms-and-axiom-layer)
   - [Theorem Dependency DAG (Simplified)](#theorem-dependency-dag-simplified)
-  - [Axiom → Composition Theorem DAG (Pillars 1+3)](#axiom--composition-theorem-dag-pillars-13)
+  - [Axiom → Composition Theorem DAG (Pillars 1+3)](#axiom-composition-theorem-dag-pillars-13)
   - [Key Axioms (Unified Numbering)](#key-axioms-unified-numbering)
   - [Formal Language and Proofs](#formal-language-and-proofs)
   - [Related Documents](#related-documents)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 更新](#rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
   - [权威来源索引](#权威来源索引-1)
 
-## Overview
+## Overview {#overview}
 
 >
 
@@ -58,7 +58,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
 ---
 
-## Core Mechanisms and Axiom Layer
+## Core Mechanisms and Axiom Layer {#core-mechanisms-and-axiom-layer}
 
 >
 
@@ -90,7 +90,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
 ---
 
-## Theorem Dependency DAG (Simplified)
+## Theorem Dependency DAG (Simplified) {#theorem-dependency-dag-simplified}
 
 >
 
@@ -128,7 +128,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
 ---
 
-## Axiom → Composition Theorem DAG (Pillars 1+3)
+## Axiom → Composition Theorem DAG (Pillars 1+3) {#axiom-composition-theorem-dag-pillars-13}
 
 >
 
@@ -142,7 +142,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
 ---
 
-## Key Axioms (Unified Numbering)
+## Key Axioms (Unified Numbering) {#key-axioms-unified-numbering}
 
 >
 
@@ -174,7 +174,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
 ---
 
-## Formal Language and Proofs
+## Formal Language and Proofs {#formal-language-and-proofs}
 
 >
 
@@ -182,7 +182,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
 - [FORMAL_LANGUAGE_AND_PROOFS](10_formal_language_and_proofs.md) — Inference rules, operational semantics, judgment forms, formal proof derivations (mathematical level; complements Coq skeletons)
 
-## Related Documents
+## Related Documents {#related-documents}
 
 >
 
@@ -196,7 +196,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
 ---
 
-## 🆕 Rust 1.94 更新
+## 🆕 Rust 1.94 更新 {#rust-194-更新}
 
 >
 
@@ -210,7 +210,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -220,13 +220,13 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -242,7 +242,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -254,7 +254,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -288,7 +288,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引-1}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 
@@ -302,7 +302,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引-1}
 
 > **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
 

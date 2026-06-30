@@ -1,4 +1,4 @@
-# Circuit Breaker 模式形式化定义
+# Circuit Breaker 模式形式化定义 {#circuit-breaker-模式形式化定义}
 
 > **概念族**: 软件设计 / 分布式模式
 
@@ -30,7 +30,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -39,7 +39,7 @@
 >
 
 - [Circuit Breaker 模式形式化定义](#circuit-breaker-模式形式化定义)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 概念定义 (Def)](#1-概念定义-def)
     - [Def CB1: Circuit Breaker](#def-cb1-circuit-breaker)
     - [Def CB2: 状态转换](#def-cb2-状态转换)
@@ -53,7 +53,7 @@
     - [Theorem CB2: 自恢复](#theorem-cb2-自恢复)
   - [4. Rust 实现示例](#4-rust-实现示例)
   - [5. 配置建议](#5-配置建议)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -61,13 +61,13 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 1. 概念定义 (Def)
+## 1. 概念定义 (Def) {#1-概念定义-def}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Def CB1: Circuit Breaker
+### Def CB1: Circuit Breaker {#def-cb1-circuit-breaker}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -93,7 +93,7 @@ CircuitBreaker := (S, T, f_threshold, t_timeout)
 
 ```
 
-### Def CB2: 状态转换
+### Def CB2: 状态转换 {#def-cb2-状态转换}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -115,7 +115,7 @@ State_Transition :=
 
 ```
 
-### Def CB3: 故障计数器
+### Def CB3: 故障计数器 {#def-cb3-故障计数器}
 
 >
 
@@ -131,13 +131,13 @@ FailureCount(t) := |{r ∈ T | time(r) ∈ [t - window, t] ∧ result(r) = failu
 
 ---
 
-## 2. 基本假设 (Axiom)
+## 2. 基本假设 (Axiom) {#2-基本假设-axiom}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### Axiom CB1: 状态互斥
+### Axiom CB1: 状态互斥 {#axiom-cb1-状态互斥}
 
 >
 
@@ -151,7 +151,7 @@ FailureCount(t) := |{r ∈ T | time(r) ∈ [t - window, t] ∧ result(r) = failu
 
 任一时刻只处于一个状态。
 
-### Axiom CB2: 故障阈值正性
+### Axiom CB2: 故障阈值正性 {#axiom-cb2-故障阈值正性}
 
 >
 
@@ -165,7 +165,7 @@ f_threshold > 0
 
 阈值必须为正整数。
 
-### Axiom CB3: 超时单调性
+### Axiom CB3: 超时单调性 {#axiom-cb3-超时单调性}
 
 >
 
@@ -181,13 +181,13 @@ t₁ < t₂ → CanRetry(t₁) → CanRetry(t₂)
 
 ---
 
-## 3. 定理 (Theorem)
+## 3. 定理 (Theorem) {#3-定理-theorem}
 
 >
 
 > **[来源: [crates.io](https://crates.io/)]**
 
-### Theorem CB1: 故障隔离
+### Theorem CB1: 故障隔离 {#theorem-cb1-故障隔离}
 
 >
 
@@ -207,7 +207,7 @@ State = Open → ∀req. Reject(req)
 
 3. 下游服务被保护，不受故障影响
 
-### Theorem CB2: 自恢复
+### Theorem CB2: 自恢复 {#theorem-cb2-自恢复}
 
 >
 
@@ -231,7 +231,7 @@ State = Open ∧ (now - last_failure) > t_timeout
 
 ---
 
-## 4. Rust 实现示例
+## 4. Rust 实现示例 {#4-rust-实现示例}
 
 >
 
@@ -389,7 +389,7 @@ impl CircuitBreaker {
 
 ---
 
-## 5. 配置建议
+## 5. 配置建议 {#5-配置建议}
 
 >
 
@@ -415,7 +415,7 @@ impl CircuitBreaker {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -425,7 +425,7 @@ impl CircuitBreaker {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -433,7 +433,7 @@ impl CircuitBreaker {
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -447,7 +447,7 @@ impl CircuitBreaker {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -457,7 +457,7 @@ impl CircuitBreaker {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -489,7 +489,7 @@ impl CircuitBreaker {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -501,7 +501,7 @@ impl CircuitBreaker {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Circuit Breaker Pattern](https://en.wikipedia.org/wiki/Circuit_Breaker_Pattern)**
 

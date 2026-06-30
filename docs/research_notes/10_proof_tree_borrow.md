@@ -1,4 +1,4 @@
-# 借用证明树 (Proof Tree: Borrowing)
+# 借用证明树 (Proof Tree: Borrowing) {#借用证明树-proof-tree-borrowing}
 
 > **概念族**: 形式化方法
 
@@ -22,7 +22,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -31,18 +31,18 @@
 >
 
 - [借用证明树 (Proof Tree: Borrowing)](#借用证明树-proof-tree-borrowing)
-  - [📑 目录](#-目录)
-  - [🌳 定理陈述](#-定理陈述)
-  - [🌿 证明树结构](#-证明树结构)
-  - [📋 详细证明](#-详细证明)
+  - [📑 目录](#目录)
+  - [🌳 定理陈述](#定理陈述)
+  - [🌿 证明树结构](#证明树结构)
+  - [📋 详细证明](#详细证明)
     - [Lemma 1: 读取不修改](#lemma-1-读取不修改)
     - [Lemma 2: 独占访问](#lemma-2-独占访问)
     - [Lemma 3: 悬垂引用预防](#lemma-3-悬垂引用预防)
-  - [🎯 Rust 代码验证](#-rust-代码验证)
-  - [📊 借用检查器算法](#-借用检查器算法)
-  - [📊 证明复杂度](#-证明复杂度)
-  - [🔗 相关证明](#-相关证明)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🎯 Rust 代码验证](#rust-代码验证)
+  - [📊 借用检查器算法](#借用检查器算法)
+  - [📊 证明复杂度](#证明复杂度)
+  - [🔗 相关证明](#相关证明)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -50,7 +50,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🌳 定理陈述
+## 🌳 定理陈述 {#定理陈述}
 
 >
 
@@ -66,7 +66,7 @@
 
 ---
 
-## 🌿 证明树结构
+## 🌿 证明树结构 {#证明树结构}
 
 >
 
@@ -138,13 +138,13 @@ T-BR1: 借用安全性
 
 ---
 
-## 📋 详细证明
+## 📋 详细证明 {#详细证明}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Lemma 1: 读取不修改
+### Lemma 1: 读取不修改 {#lemma-1-读取不修改}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -168,7 +168,7 @@ Proof:
 
 ```
 
-### Lemma 2: 独占访问
+### Lemma 2: 独占访问 {#lemma-2-独占访问}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -192,7 +192,7 @@ Proof:
 
 ```
 
-### Lemma 3: 悬垂引用预防
+### Lemma 3: 悬垂引用预防 {#lemma-3-悬垂引用预防}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -218,7 +218,7 @@ Proof:
 
 ---
 
-## 🎯 Rust 代码验证
+## 🎯 Rust 代码验证 {#rust-代码验证}
 
 >
 
@@ -272,7 +272,7 @@ fn borrowing_safety_theorem() {
 
 ---
 
-## 📊 借用检查器算法
+## 📊 借用检查器算法 {#借用检查器算法}
 
 >
 
@@ -302,7 +302,7 @@ BorrowCheck(程序 P):
 
 ---
 
-## 📊 证明复杂度
+## 📊 证明复杂度 {#证明复杂度}
 
 >
 
@@ -322,7 +322,7 @@ BorrowCheck(程序 P):
 
 ---
 
-## 🔗 相关证明
+## 🔗 相关证明 {#相关证明}
 
 >
 
@@ -336,7 +336,7 @@ BorrowCheck(程序 P):
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -346,13 +346,13 @@ BorrowCheck(程序 P):
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -368,7 +368,7 @@ BorrowCheck(程序 P):
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -380,7 +380,7 @@ BorrowCheck(程序 P):
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -414,7 +414,7 @@ BorrowCheck(程序 P):
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -426,7 +426,7 @@ BorrowCheck(程序 P):
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 

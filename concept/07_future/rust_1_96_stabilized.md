@@ -23,7 +23,7 @@
 > **前置概念**:
 >
 > [Rust 版本跟踪](05_rust_version_tracking.md) ·
-> [Ranges](../02_intermediate/09_iterator_patterns.md) ·
+> [Ranges](../02_intermediate/15_iterator_patterns.md) ·
 > [Panic 与 unwind](../02_intermediate/04_error_handling.md)
 >
 > **后置概念**:

@@ -8,7 +8,7 @@
 
 ---
 
-# sentry Crate 架构解构
+# sentry Crate 架构解构 {#sentry-crate-架构解构}
 
 > **最后更新**: 2026-06-29
 >
@@ -24,7 +24,7 @@
 
 ---
 
-## 1. 引言：Rust Sentry 客户端的生态定位
+## 1. 引言：Rust Sentry 客户端的生态定位 {#1-引言rust-sentry-客户端的生态定位}
 
 > **[来源: [sentry crates.io](https://crates.io/crates/sentry)]**
 
@@ -56,11 +56,11 @@ sentry::capture_message("Hello World!", sentry::Level::Info);
 
 ---
 
-## 2. 核心 API 架构
+## 2. 核心 API 架构 {#2-核心-api-架构}
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 2.1 三层运行时模型：Client / Hub / Scope
+### 2.1 三层运行时模型：Client / Hub / Scope {#21-三层运行时模型client-hub-scope}
 
 ```mermaid
 graph TD
@@ -85,7 +85,7 @@ graph TD
 
 > [来源: [sentry Client Docs](https://docs.rs/sentry/latest/sentry/struct.Client.html)]
 
-### 2.2 初始化与 Guard
+### 2.2 初始化与 Guard {#22-初始化与-guard}
 
 `sentry::init` 接受多种配置形式（DSN 字符串、`ClientOptions`、tuple 等），返回的 guard 必须在作用域内保持存活：
 
@@ -99,7 +99,7 @@ let _guard = sentry::init(("https://key@sentry.io/42", sentry::ClientOptions {
 
 > [来源: [sentry init Docs](https://docs.rs/sentry/latest/sentry/fn.init.html)]
 
-### 2.3 错误与消息捕获
+### 2.3 错误与消息捕获 {#23-错误与消息捕获}
 
 ```rust,ignore
 sentry::capture_message("deployment completed", sentry::Level::Info);
@@ -111,7 +111,7 @@ if let Err(e) = do_something().await {
 
 > [来源: [sentry capture_error Docs](https://docs.rs/sentry/latest/sentry/fn.capture_error.html)]
 
-### 2.4 Scope 与 Breadcrumb
+### 2.4 Scope 与 Breadcrumb {#24-scope-与-breadcrumb}
 
 Scope 用于为当前或单次事件附加上下文：
 
@@ -132,7 +132,7 @@ sentry::configure_scope(|scope| {
 
 > [来源: [sentry Scope Docs](https://docs.rs/sentry/latest/sentry/struct.Scope.html)]
 
-### 2.5 性能监控：Transaction 与 Span
+### 2.5 性能监控：Transaction 与 Span {#25-性能监控transaction-与-span}
 
 ```rust,ignore
 let ctx = sentry::TransactionContext::new("process_order", "http.request");
@@ -148,7 +148,7 @@ tx.finish();
 
 ---
 
-## 3. 类型系统利用
+## 3. 类型系统利用 {#3-类型系统利用}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -164,7 +164,7 @@ tx.finish();
 
 ---
 
-## 4. 反例边界
+## 4. 反例边界 {#4-反例边界}
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -182,7 +182,7 @@ tx.finish();
 
 ---
 
-## 5. 代码示例锚点
+## 5. 代码示例锚点 {#5-代码示例锚点}
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -194,7 +194,7 @@ tx.finish();
 
 ---
 
-## 6. 相关架构与延伸阅读
+## 6. 相关架构与延伸阅读 {#6-相关架构与延伸阅读}
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -206,7 +206,7 @@ tx.finish();
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [sentry crates.io](https://crates.io/crates/sentry)]**
 >
@@ -224,7 +224,7 @@ tx.finish();
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
 > **P0（官方/必读）**:
 >
@@ -243,7 +243,7 @@ tx.finish();
 > - [来源: [Sentry Blog](https://blog.sentry.io/)]
 > - [来源: [This Week in Rust](https://this-week-in-rust.org/)]
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

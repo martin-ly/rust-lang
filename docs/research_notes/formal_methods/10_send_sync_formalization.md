@@ -1,4 +1,4 @@
-# Send/Sync 形式化
+# Send/Sync 形式化 {#sendsync-形式化}
 
 > **概念族**: 并发安全 / Send/Sync
 
@@ -26,29 +26,29 @@
 
 ---
 
-## 📊 目录 {#-目录}
+## 📊 目录 {#目录}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Send/Sync 形式化](#sendsync-形式化)
-  - [📊 目录 {#-目录}](#-目录--目录)
-  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
+  - [📊 目录](#目录)
+  - [🎯 研究目标](#研究目标)
     - [核心问题](#核心问题)
     - [预期成果](#预期成果)
-  - [📚 理论基础 {#-理论基础}](#-理论基础--理论基础)
+  - [📚 理论基础](#理论基础)
   - [权威来源对齐](#权威来源对齐)
-  - [🔬 形式化定义 {#-形式化定义} {#defs-send1send-sync1sendsync-形式化}](#-形式化定义--形式化定义-defs-send1send-sync1sendsync-形式化)
+  - [🔬 形式化定义 {#-形式化定义}](#形式化定义--形式化定义)
   - [定理与引理](#定理与引理)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
     - [Rust 对应](#rust-对应)
-  - [⚠️ 反例 {#️-反例}](#️-反例-️-反例)
-  - [🌳 公理-定理证明树 {#-公理-定理证明树}](#-公理-定理证明树--公理-定理证明树)
-  - [🔗 与 spawn/Future/Arc 衔接 {#-与-spawnfuturearc-衔接}](#-与-spawnfuturearc-衔接--与-spawnfuturearc-衔接)
+  - [⚠️ 反例](#反例)
+  - [🌳 公理-定理证明树](#公理-定理证明树)
+  - [🔗 与 spawn/Future/Arc 衔接](#与-spawnfuturearc-衔接)
     - [相关思维表征](#相关思维表征)
-  - [📖 参考文献 {#-参考文献}](#-参考文献--参考文献)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [📖 参考文献](#参考文献)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -59,7 +59,7 @@
 
 ---
 
-## 🎯 研究目标 {#-研究目标}
+## 🎯 研究目标 {#研究目标}
 
 >
 
@@ -67,7 +67,7 @@
 
 对 Rust 的 **Send** 与 **Sync** 做独立形式化：给出概念定义、属性关系、解释论证与形式证明，并与其他形式化文档（ownership、borrow、async、pin）衔接。
 
-### 核心问题
+### 核心问题 {#核心问题}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -81,7 +81,7 @@
 
 3. **与并发原语衔接**：thread::spawn、Future、Arc、通道、Mutex 如何依赖 Send/Sync？
 
-### 预期成果
+### 预期成果 {#预期成果}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -101,7 +101,7 @@
 
 ---
 
-## 📚 理论基础 {#-理论基础}
+## 📚 理论基础 {#理论基础}
 
 >
 
@@ -117,7 +117,7 @@
 
 **与 Rc/Arc/Cell 的关系**：见 [ownership_model](10_ownership_model.md) Def RC1/ARC1/CELL1。`Rc: !Send`（非原子计数）；`Arc: Send + Sync` 当 $T: \text{Send} + \text{Sync}$；`Cell: !Sync`（内部可变无同步）。
 
-## 权威来源对齐
+## 权威来源对齐 {#权威来源对齐}
 
 >
 
@@ -139,7 +139,7 @@
 
 ---
 
-## 🔬 形式化定义 {#-形式化定义} {#defs-send1send-sync1sendsync-形式化}
+## 🔬 形式化定义 {#-形式化定义} {#形式化定义--形式化定义}
 
 >
 
@@ -217,7 +217,7 @@ $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 
 ---
 
-## 定理与引理
+## 定理与引理 {#定理与引理}
 
 >
 
@@ -239,7 +239,7 @@ $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 
 *证明*：SPAWN1 要求闭包 `Send + 'static`；由 SEND-T1，捕获的 $T$ 转移至新线程后原线程不再访问，故满足数据竞争自由。∎
 
-### 概念定义-属性关系-解释论证 层次汇总
+### 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -259,7 +259,7 @@ $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 
 ---
 
-### Rust 对应
+### Rust 对应 {#rust-对应}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -277,7 +277,7 @@ $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 
 ---
 
-## ⚠️ 反例 {#️-反例}
+## ⚠️ 反例 {#反例}
 
 >
 
@@ -299,7 +299,7 @@ $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 
 ---
 
-## 🌳 公理-定理证明树 {#-公理-定理证明树}
+## 🌳 公理-定理证明树 {#公理-定理证明树}
 
 >
 
@@ -323,7 +323,7 @@ Def SEND1, SYNC1
 
 ---
 
-## 🔗 与 spawn/Future/Arc 衔接 {#-与-spawnfuturearc-衔接}
+## 🔗 与 spawn/Future/Arc 衔接 {#与-spawnfuturearc-衔接}
 
 >
 
@@ -339,7 +339,7 @@ Def SEND1, SYNC1
 
 ---
 
-### 相关思维表征
+### 相关思维表征 {#相关思维表征}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -359,7 +359,7 @@ Def SEND1, SYNC1
 
 ---
 
-## 📖 参考文献 {#-参考文献}
+## 📖 参考文献 {#参考文献}
 
 >
 
@@ -385,7 +385,7 @@ Def SEND1, SYNC1
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -395,13 +395,13 @@ Def SEND1, SYNC1
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -417,7 +417,7 @@ Def SEND1, SYNC1
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -429,7 +429,7 @@ Def SEND1, SYNC1
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -463,7 +463,7 @@ Def SEND1, SYNC1
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -475,7 +475,7 @@ Def SEND1, SYNC1
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -497,7 +497,7 @@ Def SEND1, SYNC1
 
 ---
 
-## 社区权威参考
+## 社区权威参考 {#社区权威参考}
 
 - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
 - [This Week in Rust](https://this-week-in-rust.org/)

@@ -1,4 +1,4 @@
-# RustBelt 逐章对标
+# RustBelt 逐章对标 {#rustbelt-逐章对标}
 
 > **概念族**: 国际化形式化对齐
 
@@ -10,7 +10,7 @@
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -19,7 +19,7 @@
 >
 
 - [RustBelt 逐章对标](#rustbelt-逐章对标)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、RustBelt 论文结构（附录形式化）](#一rustbelt-论文结构附录形式化)
   - [二、逐章对标详情](#二逐章对标详情)
     - [2.1 所有权与借用（RustBelt 核心）](#21-所有权与借用rustbelt-核心)
@@ -27,7 +27,7 @@
     - [2.3 扩展（RustBelt Meets Relaxed Memory, POPL 2020）](#23-扩展rustbelt-meets-relaxed-memory-popl-2020)
   - [三、覆盖度汇总](#三覆盖度汇总)
   - [四、补全路线图](#四补全路线图)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -50,7 +50,7 @@
 
 ---
 
-## 一、RustBelt 论文结构（附录形式化）
+## 一、RustBelt 论文结构（附录形式化） {#一rustbelt-论文结构附录形式化}
 
 >
 
@@ -80,7 +80,7 @@
 
 | **Send/Sync** | 并发 trait | async_state_machine T6.2、SPAWN-T1 | 已覆盖 |
 
-| **Iris 分离逻辑** | 机器可检查证明框架 | [coq_skeleton](../deprecated/coq_skeleton/README.md)（T-OW2 骨架，证明 Admitted） | 部分 |
+| **Iris 分离逻辑** | 机器可检查证明框架 | [coq_skeleton](../../archive/deprecated/coq_skeleton/README.md)（T-OW2 骨架，证明 Admitted） | 部分 |
 
 | **MIR 级建模** | 中间表示级语义 | 无 | 未覆盖 |
 
@@ -88,13 +88,13 @@
 
 ---
 
-## 二、逐章对标详情
+## 二、逐章对标详情 {#二逐章对标详情}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 所有权与借用（RustBelt 核心）
+### 2.1 所有权与借用（RustBelt 核心） {#21-所有权与借用rustbelt-核心}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -106,7 +106,7 @@
 
 | :--- | :--- | :--- |
 
-| 唯一所有者 | ownership T2、A-OW1、[coq_skeleton](../deprecated/coq_skeleton/README.md) | Coq 骨架已创建，证明待补全 |
+| 唯一所有者 | ownership T2、A-OW1、[coq_skeleton](../../archive/deprecated/coq_skeleton/README.md) | Coq 骨架已创建，证明待补全 |
 
 | 移动语义 | ownership 规则 2、A-OW2 | 语言级有，MIR 级无 |
 
@@ -114,7 +114,7 @@
 
 | 生命周期 outlives | lifetime LF-T1–T3 | 无 Iris lifetime 逻辑 |
 
-### 2.2 类型系统
+### 2.2 类型系统 {#22-类型系统}
 
 >
 
@@ -130,7 +130,7 @@
 
 | 类型安全 | type_system T3 | 同上；见 [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) §4 |
 
-### 2.3 扩展（RustBelt Meets Relaxed Memory, POPL 2020）
+### 2.3 扩展（RustBelt Meets Relaxed Memory, POPL 2020） {#23-扩展rustbelt-meets-relaxed-memory-popl-2020}
 
 >
 
@@ -148,7 +148,7 @@
 
 ---
 
-## 三、覆盖度汇总
+## 三、覆盖度汇总 {#三覆盖度汇总}
 
 >
 
@@ -174,7 +174,7 @@
 
 ---
 
-## 四、补全路线图
+## 四、补全路线图 {#四补全路线图}
 
 >
 
@@ -182,7 +182,7 @@
 
 1. **短期**：保持语言级形式化与 RustBelt 概念对齐；在 PROOF_INDEX 中标注 RustBelt 对应章节
 
-2. **中期**：补全 [coq_skeleton](../deprecated/coq_skeleton/README.md) Admitted 证明；扩展 T-BR1/T-TY3 骨架（见 [COQ_ISABELLE_PROOF_SCAFFOLDING](10_coq_isabelle_proof_scaffolding.md)、[AENEAS_INTEGRATION_PLAN](10_aeneas_integration_plan.md)、[COQ_OF_RUST_INTEGRATION_PLAN](10_coq_of_rust_integration_plan.md)）
+2. **中期**：补全 [coq_skeleton](../../archive/deprecated/coq_skeleton/README.md) Admitted 证明；扩展 T-BR1/T-TY3 骨架（见 [COQ_ISABELLE_PROOF_SCAFFOLDING](10_coq_isabelle_proof_scaffolding.md)、[AENEAS_INTEGRATION_PLAN](10_aeneas_integration_plan.md)、[COQ_OF_RUST_INTEGRATION_PLAN](10_coq_of_rust_integration_plan.md)）
 
 3. **长期**：若资源允许，对标 RustBelt Meets Relaxed Memory，补全原子操作与 Arc 松弛内存形式化
 
@@ -194,7 +194,7 @@
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -204,7 +204,7 @@
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -212,7 +212,7 @@
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -226,7 +226,7 @@
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -236,7 +236,7 @@
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -266,7 +266,7 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -276,7 +276,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
@@ -290,8 +290,8 @@
 ---
 ---
 
-## 多语言术语参考
+## 多语言术语参考 {#多语言术语参考}
 
-> **来源: [国际化术语库](../data/i18n_terminology.yaml)**
+> **来源: [国际化术语库](../../data/i18n_terminology.yaml)**
 
-本文档涉及的英/中/日关键术语参见项目统一术语库 [`data/i18n_terminology.yaml`](../data/i18n_terminology.yaml)。
+本文档涉及的英/中/日关键术语参见项目统一术语库 [`data/i18n_terminology.yaml`](../../data/i18n_terminology.yaml)。

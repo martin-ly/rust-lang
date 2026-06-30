@@ -1,4 +1,4 @@
-# Wgpu Crate 架构解构
+# Wgpu Crate 架构解构 {#wgpu-crate-架构解构}
 
 >
 
@@ -18,7 +18,7 @@
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
-## 1. 引言
+## 1. 引言 {#1-引言}
 
 >
 
@@ -56,7 +56,7 @@ async fn run() {
 
 ---
 
-## 2. 核心抽象层级
+## 2. 核心抽象层级 {#2-核心抽象层级}
 
 >
 
@@ -118,7 +118,7 @@ graph TB
 
 ```
 
-### 2.1 `Instance`：入口点
+### 2.1 `Instance`：入口点 {#21-instance入口点}
 
 >
 
@@ -140,7 +140,7 @@ let instance = wgpu::Instance::new(wgpu::InstanceDescriptor {
 
 ```
 
-### 2.2 `Adapter`：物理 GPU 抽象
+### 2.2 `Adapter`：物理 GPU 抽象 {#22-adapter物理-gpu-抽象}
 
 >
 
@@ -178,7 +178,7 @@ println!("驱动: {}", info.driver);
 
 ```
 
-### 2.3 `Device` 与 `Queue`：逻辑设备与命令队列
+### 2.3 `Device` 与 `Queue`：逻辑设备与命令队列 {#23-device-与-queue逻辑设备与命令队列}
 
 >
 
@@ -224,13 +224,13 @@ let (device, queue) = adapter
 
 ---
 
-## 3. 类型安全 GPU 编程
+## 3. 类型安全 GPU 编程 {#3-类型安全-gpu-编程}
 
 >
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 3.1 `BindGroup` 的类型安全绑定
+### 3.1 `BindGroup` 的类型安全绑定 {#31-bindgroup-的类型安全绑定}
 
 >
 
@@ -332,7 +332,7 @@ let bind_group = device.create_bind_group(&wgpu::BindGroupDescriptor {
 
 如果 `BindGroup` 中的资源类型与 `BindGroupLayoutEntry` 不匹配（例如将 `TextureView` 绑定到期望 `Buffer` 的槽位），`create_bind_group` 调用会在创建期即报错，而非在着色器运行时产生未定义行为。
 
-### 3.2 着色器验证：Naga 编译器
+### 3.2 着色器验证：Naga 编译器 {#32-着色器验证naga-编译器}
 
 >
 
@@ -436,13 +436,13 @@ Naga 在 `create_shader_module` 时执行完整的静态分析：类型检查、
 
 ---
 
-## 4. 内存模型
+## 4. 内存模型 {#4-内存模型}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 4.1 显式内存管理
+### 4.1 显式内存管理 {#41-显式内存管理}
 
 >
 
@@ -518,7 +518,7 @@ let depth_texture = device.create_texture(&wgpu::TextureDescriptor {
 
 ```
 
-### 4.2 内存屏障与同步
+### 4.2 内存屏障与同步 {#42-内存屏障与同步}
 
 >
 
@@ -616,13 +616,13 @@ queue.submit(std::iter::once(encoder.finish()));
 
 ---
 
-## 5. 异步渲染与显示
+## 5. 异步渲染与显示 {#5-异步渲染与显示}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 5.1 Surface 渲染循环
+### 5.1 Surface 渲染循环 {#51-surface-渲染循环}
 
 >
 
@@ -678,7 +678,7 @@ fn render(&mut self) -> Result<(), wgpu::SurfaceError> {
 
 ```
 
-### 5.2 异步原语与平台差异
+### 5.2 异步原语与平台差异 {#52-异步原语与平台差异}
 
 >
 
@@ -716,13 +716,13 @@ pub async fn run() {
 
 ---
 
-## 6. 跨平台抽象
+## 6. 跨平台抽象 {#6-跨平台抽象}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 6.1 运行时后端选择
+### 6.1 运行时后端选择 {#61-运行时后端选择}
 
 >
 
@@ -762,7 +762,7 @@ let instance = wgpu::Instance::new(wgpu::InstanceDescriptor {
 
 | Web | WebGPU | WebGL2 |
 
-### 6.2 编译期特性控制
+### 6.2 编译期特性控制 {#62-编译期特性控制}
 
 >
 
@@ -826,13 +826,13 @@ graph LR
 
 ---
 
-## 7. 渲染管线配置
+## 7. 渲染管线配置 {#7-渲染管线配置}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 7.1 `RenderPipeline` 的完整配置
+### 7.1 `RenderPipeline` 的完整配置 {#71-renderpipeline-的完整配置}
 
 >
 
@@ -914,7 +914,7 @@ let render_pipeline = device.create_render_pipeline(&wgpu::RenderPipelineDescrip
 
 所有管线状态（光栅化规则、深度测试、混合模式、裁剪模式）在 `create_render_pipeline` 时冻结为不可变对象，运行时切换管线只需调用 `set_pipeline()`，无需逐状态重新设置。
 
-### 7.2 计算管线
+### 7.2 计算管线 {#72-计算管线}
 
 >
 
@@ -954,7 +954,7 @@ compute_pass.dispatch_workgroups(256, 1, 1);
 
 ---
 
-## 8. 来源
+## 8. 来源 {#8-来源}
 
 >
 
@@ -972,7 +972,7 @@ compute_pass.dispatch_workgroups(256, 1, 1);
 
 ---
 
-## 相关架构与延伸阅读
+## 相关架构与延伸阅读 {#相关架构与延伸阅读}
 
 >
 
@@ -984,7 +984,7 @@ compute_pass.dispatch_workgroups(256, 1, 1);
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -1004,13 +1004,13 @@ compute_pass.dispatch_workgroups(256, 1, 1);
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 > **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 > **来源**: [This Week in Rust](https://this-week-in-rust.org/)
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

@@ -8,16 +8,16 @@
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Edition Guide、RFC 2052 来源标注 [来源: Authority Source Sprint Batch 8]
 
-# Rust 2024 Edition `Future` in Prelude 影响分析
+# Rust 2024 Edition `Future` in Prelude 影响分析 {#rust-2024-edition-future-in-prelude-影响分析}
 
 > **Bloom 层级**: L2-L3 (理解/应用)
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 2024 Edition `Future` in Prelude 影响分析](#rust-2024-edition-future-in-prelude-影响分析)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [变化详情](#变化详情)
     - [之前（Rust 2021 及之前）](#之前rust-2021-及之前)
@@ -40,17 +40,17 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 概述
+## 概述 {#概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Rust 2024 Edition 将 `std::future::Future` trait 添加到标准库 prelude 中。这意味着在 Edition 2024 下，`Future` trait 无需显式导入即可直接使用。
 
-## 变化详情
+## 变化详情 {#变化详情}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 之前（Rust 2021 及之前）
+### 之前（Rust 2021 及之前） {#之前rust-2021-及之前}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -68,7 +68,7 @@ fn box_future() -> Box<dyn Future<Output = i32>> {
 }
 ```
 
-### 之后（Rust 2024 Edition）
+### 之后（Rust 2024 Edition） {#之后rust-2024-edition}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -83,11 +83,11 @@ fn box_future() -> Box<dyn Future<Output = i32>> {
 }
 ```
 
-## 影响分析
+## 影响分析 {#影响分析}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 正面影响
+### 正面影响 {#正面影响}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -95,11 +95,11 @@ fn box_future() -> Box<dyn Future<Output = i32>> {
 2. **学习曲线降低**：新手无需了解 prelude 与 `Future` 的关系
 3. **与 async/await 对称**：`async` 和 `await` 已经是关键字，`Future` 自然应可见
 
-### 潜在冲突
+### 潜在冲突 {#潜在冲突}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-#### 冲突 1：自定义 `Future` trait
+#### 冲突 1：自定义 `Future` trait {#冲突-1自定义-future-trait}
 
 如果项目中定义了与标准库同名的 `Future` trait：
 
@@ -137,7 +137,7 @@ impl StdFuture for MyTask {
 }
 ```
 
-#### 冲突 2：第三方库中的 `Future` 类型
+#### 冲突 2：第三方库中的 `Future` 类型 {#冲突-2第三方库中的-future-类型}
 
 某些旧版库可能导出自己的 `Future` 类型：
 
@@ -153,17 +153,17 @@ use std::future::Future as StdFuture;
 use some_legacy_lib::Future as LegacyFuture;
 ```
 
-#### 冲突 3：宏展开中的名称冲突
+#### 冲突 3：宏展开中的名称冲突 {#冲突-3宏展开中的名称冲突}
 
 某些宏可能生成 `Future` 相关的代码，在 prelude 自动导入后可能产生歧义。
 
 **解决方案**：在宏中使用全限定路径 `::std::future::Future`。
 
-## 迁移建议
+## 迁移建议 {#迁移建议}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 对于应用开发者
+### 对于应用开发者 {#对于应用开发者}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -178,7 +178,7 @@ use std::future::Future;
 
 1. **检查自定义 trait 名称**：如果定义了 `Future` trait，考虑重命名或使用全限定路径
 
-### 对于库开发者
+### 对于库开发者 {#对于库开发者}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -186,7 +186,7 @@ use std::future::Future;
 2. **避免定义 `Future` trait**：除非必要，否则不要定义与标准库冲突的 trait 名称
 3. **文档更新**：在文档中说明库对 Rust 版本的要求
 
-### 迁移检查清单
+### 迁移检查清单 {#迁移检查清单}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -196,11 +196,11 @@ use std::future::Future;
 - [ ] 运行 `cargo check` 和 `cargo test` 确认无编译错误
 - [ ] 更新团队编码规范，说明 prelude 的变化
 
-## 技术细节
+## 技术细节 {#技术细节}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### Prelude 包含的内容
+### Prelude 包含的内容 {#prelude-包含的内容}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -219,7 +219,7 @@ where
 }
 ```
 
-### 与 `async/await` 的关系
+### 与 `async/await` 的关系 {#与-asyncawait-的关系}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -229,7 +229,7 @@ where
 - `.await` 操作依赖 `Future::poll` 方法
 - 异步运行时（Tokio、smol 等）围绕 `Future` trait 构建
 
-## 版本兼容性
+## 版本兼容性 {#版本兼容性}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -239,7 +239,7 @@ where
 | >= 1.85   | 2021    | 否                     |
 | >= 1.85   | 2024    | 是                     |
 
-## 参考资源
+## 参考资源 {#参考资源}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -259,7 +259,7 @@ where
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -267,7 +267,7 @@ where
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Rust Reference - Prelude](https://doc.rust-lang.org/reference/)**
 > **来源: [Rust Reference - Future Trait](https://doc.rust-lang.org/reference/)**

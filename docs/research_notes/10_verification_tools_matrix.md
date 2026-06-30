@@ -1,4 +1,4 @@
-# 验证工具对比矩阵
+# 验证工具对比矩阵 {#验证工具对比矩阵}
 
 > **概念族**: 安全 / 验证
 
@@ -18,7 +18,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -27,7 +27,7 @@
 >
 
 - [验证工具对比矩阵](#验证工具对比矩阵)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [工具对比总览](#工具对比总览)
   - [详细对比](#详细对比)
     - [1. Miri - 内存安全检查器](#1-miri---内存安全检查器)
@@ -40,8 +40,8 @@
   - [与 Rust 版本兼容性](#与-rust-版本兼容性)
   - [集成示例](#集成示例)
     - [CI/CD 配置](#cicd-配置)
-  - [相关文档](#相关文档)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [相关文档](#相关文档-1)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -49,7 +49,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 工具对比总览
+## 工具对比总览 {#工具对比总览}
 
 >
 
@@ -73,13 +73,13 @@
 
 ---
 
-## 详细对比
+## 详细对比 {#详细对比}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. Miri - 内存安全检查器
+### 1. Miri - 内存安全检查器 {#1-miri---内存安全检查器}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -125,7 +125,7 @@ miri run  # 或 cargo miri test
 
 ```
 
-### 2. Kani - 位精确模型检查器
+### 2. Kani - 位精确模型检查器 {#2-kani---位精确模型检查器}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -165,7 +165,7 @@ fn check_vector_push() {
 
 | 终止性 | ✅ | 可配置 |
 
-### 3. Prusti - 契约式验证
+### 3. Prusti - 契约式验证 {#3-prusti---契约式验证}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -203,13 +203,13 @@ fn find_min(arr: &[i32]) -> usize {
 
 ---
 
-## 验证能力矩阵
+## 验证能力矩阵 {#验证能力矩阵}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 功能覆盖对比
+### 功能覆盖对比 {#功能覆盖对比}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -259,7 +259,7 @@ graph TD
 
 ```
 
-### 性能与可扩展性
+### 性能与可扩展性 {#性能与可扩展性}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -277,7 +277,7 @@ graph TD
 
 ---
 
-## 选择决策树
+## 选择决策树 {#选择决策树}
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -305,7 +305,7 @@ graph TD
 
 ---
 
-## 与 Rust 版本兼容性
+## 与 Rust 版本兼容性 {#与-rust-版本兼容性}
 
 >
 
@@ -325,19 +325,19 @@ graph TD
 
 ---
 
-## 集成示例
+## 集成示例 {#集成示例}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### CI/CD 配置
+### CI/CD 配置 {#cicd-配置}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 ```yaml
 
-# .github/workflows/verification.yml
+# .github/workflows/verification.yml {#githubworkflowsverificationyml}
 
 name: Formal Verification
 
@@ -377,7 +377,7 @@ jobs:
 
 ---
 
-## 相关文档
+## 相关文档 {#相关文档-1}
 
 >
 
@@ -397,7 +397,7 @@ jobs:
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -405,13 +405,13 @@ jobs:
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -427,7 +427,7 @@ jobs:
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -437,7 +437,7 @@ jobs:
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档-1}
 
 - Rust 1.94 迁移指南
 
@@ -469,7 +469,7 @@ jobs:
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -481,7 +481,7 @@ jobs:
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 

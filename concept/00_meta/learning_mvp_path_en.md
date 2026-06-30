@@ -4,7 +4,9 @@
 > **Estimated Time**: 35–45 hours (≈ 3 weeks at 2 hours/day)
 > **End Goal**: Independently write a multi-threaded command-line tool (CLI)
 > **Design Principle**: Every stage must have runnable code; every concept must have corresponding exercises
+> **主要来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Cargo Book](https://doc.rust-lang.org/cargo/)
 
+> ⚠️ **草案状态**: 本文件为英文 MVP 路径草案，其中部分链接指向的概念文件编号/名称可能与当前 `concept/` 目录结构不一致。请以中文版 [`learning_mvp_path.md`](./learning_mvp_path.md) 为权威学习路径。
 ---
 
 ## Path Overview
@@ -42,9 +44,9 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 |:---|:---:|:---|
 | Install Rust via rustup | 15m | `rustc --version` shows ≥ 1.96.0 |
 | Configure IDE (rust-analyzer) | 15m | Auto-completion works for `Vec::` |
-| Read [concept/01_foundation/00_hello_world.md](concept/01_foundation/00_hello_world.md) | 30m | Can explain `fn main()`, `println!` |
+| Read `concept/01_foundation/00_hello_world.md` | 30m | Can explain `fn main()`, `println!` |
 | Write a temperature converter | 30m | `cargo run` produces correct output |
-| Complete [exercises/src/ownership_borrowing/](exercises/src/ownership_borrowing) intro | 30m | `cargo test` passes first 3 tests |
+| Complete [exercises/src/ownership_borrowing/](../../exercises/src/ownership_borrowing) intro | 30m | `cargo test` passes first 3 tests |
 
 **Key Concepts**: `rustc`, `cargo`, `fn`, `let`, mutability, macros.
 
@@ -52,10 +54,10 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 | Task | Time | Verification |
 |:---|:---:|:---|
-| Read [concept/01_foundation/01_ownership.md](concept/01_foundation/01_ownership.md) | 45m | Can draw ownership transfer diagrams |
-| Read [concept/01_foundation/02_move_semantics.md](concept/01_foundation/02_move_semantics.md) | 30m | Predicts move vs. copy correctly |
+| Read [concept/01_foundation/01_ownership.md](../01_foundation/01_ownership.md) | 45m | Can draw ownership transfer diagrams |
+| Read `concept/01_foundation/02_move_semantics.md` | 30m | Predicts move vs. copy correctly |
 | Solve rustlings `move_semantics` exercises | 30m | All tests pass |
-| Take [L1 Ownership Quiz](concept/01_foundation/20_quiz_ownership.md) | 15m | Score ≥ 3/4 |
+| Take `L1 Ownership Quiz` | 15m | Score ≥ 3/4 |
 
 **Key Concepts**: Ownership rules, `Copy` vs. `Drop`, move semantics, `clone()`.
 
@@ -63,8 +65,8 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 | Task | Time | Verification |
 |:---|:---:|:---|
-| Read [concept/01_foundation/03_borrowing.md](concept/01_foundation/03_borrowing.md) | 45m | Explains `&T` vs. `&mut T` |
-| Read [concept/01_foundation/04_lifetimes_intro.md](concept/01_foundation/04_lifetimes_intro.md) | 30m | Understands lifetime elision rules |
+| Read `concept/01_foundation/03_borrowing.md` | 45m | Explains `&T` vs. `&mut T` |
+| Read `concept/01_foundation/04_lifetimes_intro.md` | 30m | Understands lifetime elision rules |
 | Solve rustlings `references` exercises | 30m | All tests pass |
 | Debug borrow checker errors (intentional) | 15m | Fixes 3 compiler errors independently |
 
@@ -74,10 +76,10 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 | Task | Time | Verification |
 |:---|:---:|:---|
-| Read [concept/01_foundation/05_basic_types.md](concept/01_foundation/05_basic_types.md) | 30m | Knows `i32` vs. `u32`, `f64` vs. `f32` |
-| Read [concept/01_foundation/06_collections.md](concept/01_foundation/06_collections.md) | 30m | Uses `Vec`, `HashMap`, `HashSet` correctly |
+| Read `concept/01_foundation/05_basic_types.md` | 30m | Knows `i32` vs. `u32`, `f64` vs. `f32` |
+| Read `concept/01_foundation/06_collections.md` | 30m | Uses `Vec`, `HashMap`, `HashSet` correctly |
 | Practice: Word frequency counter | 45m | Handles file I/O, counts words accurately |
-| Take [L1 Collections Quiz](concept/01_foundation/21_quiz_collections.md) | 15m | Score ≥ 3/4 |
+| Take `L1 Collections Quiz` | 15m | Score ≥ 3/4 |
 
 **Key Concepts**: Scalar types, compound types, `Vec`, `HashMap`, iterators.
 
@@ -88,7 +90,7 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 | Build a text file analyzer | 2h | Counts lines/words/chars, finds top words |
 | Write unit tests for the analyzer | 1h | ≥ 80% test coverage |
 | Code review checklist | 30m | No `unwrap()` in production paths |
-| Reflect: Fill [Learning Journal](docs/01_learning/learning_journal_template.md) | 30m | Identifies 3 weak points to improve |
+| Reflect: Fill `Learning Journal` | 30m | Identifies 3 weak points to improve |
 
 ---
 
@@ -98,8 +100,8 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 | Task | Time | Verification |
 |:---|:---:|:---|
-| Read [concept/02_intermediate/02_structs.md](concept/02_intermediate/02_structs.md) | 30m | Defines structs with methods |
-| Read [concept/02_intermediate/03_enums.md](concept/02_intermediate/03_enums.md) | 30m | Models state machines with enums |
+| Read `concept/02_intermediate/02_structs.md` | 30m | Defines structs with methods |
+| Read `concept/02_intermediate/03_enums.md` | 30m | Models state machines with enums |
 | Practice: JSON-like data structure | 45m | Recursive enums, pattern matching |
 | Solve rustlings `enums` + `pattern_matching` | 15m | All tests pass |
 
@@ -109,10 +111,10 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 | Task | Time | Verification |
 |:---|:---:|:---|
-| Read [concept/02_intermediate/01_traits.md](concept/02_intermediate/01_traits.md) | 45m | Implements custom trait |
-| Read [concept/02_intermediate/06_generics.md](concept/02_intermediate/06_generics.md) | 30m | Writes generic `fn` and generic `struct` |
+| Read [concept/02_intermediate/01_traits.md](../02_intermediate/01_traits.md) | 45m | Implements custom trait |
+| Read `concept/02_intermediate/06_generics.md` | 30m | Writes generic `fn` and generic `struct` |
 | Practice: Generic `Stack<T>` | 30m | Works for `i32`, `String`, custom types |
-| Take [L2 Traits Quiz](concept/02_intermediate/17_quiz_traits.md) | 15m | Score ≥ 3/4 |
+| Take `L2 Traits Quiz` | 15m | Score ≥ 3/4 |
 
 **Key Concepts**: Trait definitions, `impl Trait for Type`, trait bounds, generic parameters.
 
@@ -120,8 +122,8 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 | Task | Time | Verification |
 |:---|:---:|:---|
-| Read [concept/02_intermediate/04_error_handling.md](concept/02_intermediate/04_error_handling.md) | 45m | Chooses between `Result` and `panic!` |
-| Read [concept/02_intermediate/05_assert_matches.md](concept/02_intermediate/05_assert_matches.md) | 15m | Uses `assert_matches!` in tests |
+| Read [concept/02_intermediate/04_error_handling.md](../02_intermediate/04_error_handling.md) | 45m | Chooses between `Result` and `panic!` |
+| Read [concept/02_intermediate/05_assert_matches.md](../02_intermediate/05_assert_matches.md) | 15m | Uses `assert_matches!` in tests |
 | Practice: File parser with error propagation | 45m | Uses `?` operator, custom error type |
 | Solve rustlings `error_handling` | 15m | All tests pass |
 
@@ -131,8 +133,8 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 | Task | Time | Verification |
 |:---|:---:|:---|
-| Read [concept/01_foundation/11_modules_and_paths.md](concept/01_foundation/11_modules_and_paths.md) | 30m | Organizes code into modules |
-| Read [docs/06_toolchain/06_cargo_workspace_guide.md](docs/06_toolchain/06_cargo_workspace_guide.md) | 30m | Creates multi-crate workspace |
+| Read [concept/01_foundation/11_modules_and_paths.md](../01_foundation/11_modules_and_paths.md) | 30m | Organizes code into modules |
+| Read `docs/06_toolchain/06_cargo_workspace_guide.md` | 30m | Creates multi-crate workspace |
 | Practice: Split analyzer into lib + bin | 45m | `cargo test` and `cargo run` work |
 | Configure `Cargo.toml`: dependencies, features | 15m | Adds `clap`, `serde` correctly |
 
@@ -155,10 +157,10 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 | Task | Time | Verification |
 |:---|:---:|:---|
-| Read [concept/03_advanced/01_concurrency.md](concept/03_advanced/01_concurrency.md) | 45m | Explains `spawn`, `join`, `Mutex`, `Arc` |
-| Read [concept/03_advanced/10_concurrency_patterns.md](concept/03_advanced/10_concurrency_patterns.md) §1–2 | 30m | Identifies deadlock risks |
+| Read [concept/03_advanced/01_concurrency.md](../03_advanced/01_concurrency.md) | 45m | Explains `spawn`, `join`, `Mutex`, `Arc` |
+| Read [concept/03_advanced/10_concurrency_patterns.md](../03_advanced/10_concurrency_patterns.md) §1–2 | 30m | Identifies deadlock risks |
 | Practice: Parallel word count | 30m | Uses `rayon` or manual threads |
-| Take [L3 Concurrency Quiz](concept/03_advanced/21_quiz_concurrency_async.md) §1–2 | 15m | Score ≥ 3/4 |
+| Take [L3 Concurrency Quiz](../03_advanced/21_quiz_concurrency_async.md) §1–2 | 15m | Score ≥ 3/4 |
 
 **Key Concepts**: `std::thread`, `Mutex`, `Arc`, `RwLock`, data races, deadlocks.
 
@@ -166,7 +168,7 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 | Task | Time | Verification |
 |:---|:---:|:---|
-| Read [concept/03_advanced/10_concurrency_patterns.md](concept/03_advanced/10_concurrency_patterns.md) §3–4 | 45m | Implements producer-consumer pattern |
+| Read [concept/03_advanced/10_concurrency_patterns.md](../03_advanced/10_concurrency_patterns.md) §3–4 | 45m | Implements producer-consumer pattern |
 | Practice: Multi-stage pipeline | 45m | Bounded channels, backpressure |
 | Debug: Channel closed errors | 15m | Handles `SendError` gracefully |
 | Benchmark: Channel vs. Mutex | 15m | Measures throughput difference |
@@ -177,10 +179,10 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 | Task | Time | Verification |
 |:---|:---:|:---|
-| Read [concept/03_advanced/02_async.md](concept/03_advanced/02_async.md) | 45m | Explains `Future`, `.await`, executor |
-| Read [concept/03_advanced/02_async_patterns.md](concept/03_advanced/02_async_patterns.md) §1–2 | 30m | Uses `tokio::select!` for timeouts |
+| Read [concept/03_advanced/02_async.md](../03_advanced/02_async.md) | 45m | Explains `Future`, `.await`, executor |
+| Read [concept/03_advanced/02_async_patterns.md](../03_advanced/02_async_patterns.md) §1–2 | 30m | Uses `tokio::select!` for timeouts |
 | Practice: Async HTTP client | 30m | Fetches 3 URLs concurrently |
-| Take [L3 Async Quiz](concept/03_advanced/21_quiz_concurrency_async.md) §3–4 | 15m | Score ≥ 2/3 |
+| Take [L3 Async Quiz](../03_advanced/21_quiz_concurrency_async.md) §3–4 | 15m | Score ≥ 2/3 |
 
 **Key Concepts**: `async fn`, `.await`, `tokio`, `Future`, cancellation safety.
 
@@ -188,7 +190,7 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 | Task | Time | Verification |
 |:---|:---:|:---|
-| Read [docs/03_guides/03_cli_development_guide.md](docs/03_guides/03_cli_development_guide.md) | 30m | Knows `clap` derive API |
+| Read `docs/03_guides/03_cli_development_guide.md` | 30m | Knows `clap` derive API |
 | Design: File search tool (`grep`-like) | 30m | Spec: regex, recursive, line numbers |
 | Implement core functionality | 45m | `cargo run -- "pattern" file.txt` works |
 | Add tests for edge cases | 15m | Empty files, binary files, unicode |
@@ -213,20 +215,20 @@ Week 3: Concurrency & CLI Project (12h) [Required]
 
 | Topic | File | Bloom Level |
 |:---|:---|:---:|
-| Ownership | [concept/01_foundation/01_ownership.md](concept/01_foundation/01_ownership.md) | Understand |
-| Borrowing | [concept/01_foundation/03_borrowing.md](concept/01_foundation/03_borrowing.md) | Understand |
-| Traits | [concept/02_intermediate/01_traits.md](concept/02_intermediate/01_traits.md) | Apply |
-| Error Handling | [concept/02_intermediate/04_error_handling.md](concept/02_intermediate/04_error_handling.md) | Apply |
-| Concurrency | [concept/03_advanced/01_concurrency.md](concept/03_advanced/01_concurrency.md) | Apply |
+| Ownership | [concept/01_foundation/01_ownership.md](../01_foundation/01_ownership.md) | Understand |
+| Borrowing | `concept/01_foundation/03_borrowing.md` | Understand |
+| Traits | [concept/02_intermediate/01_traits.md](../02_intermediate/01_traits.md) | Apply |
+| Error Handling | [concept/02_intermediate/04_error_handling.md](../02_intermediate/04_error_handling.md) | Apply |
+| Concurrency | [concept/03_advanced/01_concurrency.md](../03_advanced/01_concurrency.md) | Apply |
 
 ### Cheat Sheets
 
 | Topic | File |
 |:---|:---|
-| Ownership & Borrowing | [docs/02_reference/quick_reference/02_ownership_borrowing_cheatsheet.md](docs/02_reference/quick_reference/02_ownership_borrowing_cheatsheet.md) |
-| Type System | [docs/02_reference/quick_reference/02_type_system.md](docs/02_reference/quick_reference/02_type_system.md) |
-| Collections & Iterators | [docs/02_reference/quick_reference/02_collections_iterators_cheatsheet.md](docs/02_reference/quick_reference/02_collections_iterators_cheatsheet.md) |
-| Error Handling | [docs/02_reference/quick_reference/02_error_handling_cheatsheet.md](docs/02_reference/quick_reference/02_error_handling_cheatsheet.md) |
+| Ownership & Borrowing | `docs/02_reference/quick_reference/02_ownership_borrowing_cheatsheet.md` |
+| Type System | [docs/02_reference/quick_reference/02_type_system.md](../../docs/02_reference/quick_reference/02_type_system.md) |
+| Collections & Iterators | [docs/02_reference/quick_reference/02_collections_iterators_cheatsheet.md](../../docs/02_reference/quick_reference/02_collections_iterators_cheatsheet.md) |
+| Error Handling | [docs/02_reference/quick_reference/02_error_handling_cheatsheet.md](../../docs/02_reference/quick_reference/02_error_handling_cheatsheet.md) |
 
 ### Exercise Sources
 
@@ -253,9 +255,9 @@ After completing this path, you should be able to:
 
 **Next Steps**:
 
-- **Systems Programming**: [concept/03_advanced/13_inline_assembly.md](concept/03_advanced/13_inline_assembly.md) + [crates/c13_embedded/](crates/c13_embedded)
-- **Web Backend**: [concept/03_advanced/02_async.md](concept/03_advanced/02_async.md) + [crates/c10_networks/](crates/c10_networks)
-- **Formal Verification**: [concept/04_formal/03_ownership_formal.md](concept/04_formal/03_ownership_formal.md) + [concept/04_formal/05_verification_toolchain.md](concept/04_formal/05_verification_toolchain.md)
+- **Systems Programming**: [concept/03_advanced/13_inline_assembly.md](../03_advanced/13_inline_assembly.md) + [crates/c13_embedded/](crates/c13_embedded)
+- **Web Backend**: [concept/03_advanced/02_async.md](../03_advanced/02_async.md) + [crates/c10_networks/](crates/c10_networks)
+- **Formal Verification**: [concept/04_formal/03_ownership_formal.md](../04_formal/03_ownership_formal.md) + [concept/04_formal/05_verification_toolchain.md](../04_formal/05_verification_toolchain.md)
 
 ---
 

@@ -1,4 +1,4 @@
-# 研究工具使用指南
+# 研究工具使用指南 {#研究工具使用指南}
 >
 > **概念族**: 方法论 / 工具 / 指南
 
@@ -13,50 +13,50 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [研究工具使用指南](#研究工具使用指南)
-  - [📑 目录](#-目录)
-  - [🎯 工具分类 {#-工具分类}](#-工具分类--工具分类)
-  - [🔬 形式化验证工具 {#-形式化验证工具}](#-形式化验证工具--形式化验证工具)
+  - [📑 目录](#目录)
+  - [🎯 工具分类](#工具分类)
+  - [🔬 形式化验证工具](#形式化验证工具)
     - [Prusti](#prusti)
     - [Kani](#kani)
     - [Creusot](#creusot)
     - [Aeneas](#aeneas)
     - [Verus](#verus)
     - [可选进阶：Coq/Lean](#可选进阶coqlean)
-  - [⚡ 性能分析工具 {#-性能分析工具}](#-性能分析工具--性能分析工具)
+  - [⚡ 性能分析工具](#性能分析工具)
     - [Criterion.rs](#criterionrs)
     - [perf](#perf)
     - [flamegraph](#flamegraph)
-  - [🔍 内存分析工具 {#-内存分析工具}](#-内存分析工具--内存分析工具)
+  - [🔍 内存分析工具](#内存分析工具)
     - [Miri](#miri)
     - [Valgrind](#valgrind)
     - [heaptrack](#heaptrack)
-  - [🧪 测试工具 {#-测试工具}](#-测试工具--测试工具)
+  - [🧪 测试工具](#测试工具)
     - [cargo test](#cargo-test)
     - [proptest](#proptest)
     - [loom](#loom)
-  - [📚 代码分析工具 {#-代码分析工具}](#-代码分析工具--代码分析工具)
+  - [📚 代码分析工具](#代码分析工具)
     - [Clippy](#clippy)
     - [rust-analyzer](#rust-analyzer)
     - [cargo-expand](#cargo-expand)
-  - [💡 使用建议 {#-使用建议}](#-使用建议--使用建议)
+  - [💡 使用建议](#使用建议)
     - [工具选择](#工具选择)
     - [工具组合](#工具组合)
     - [最佳实践](#最佳实践)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
-  - [📚 Cargo Book 与 rustc dev guide 权威章节](#-cargo-book-与-rustc-dev-guide-权威章节)
+  - [🔗 相关资源](#相关资源)
+  - [📚 Cargo Book 与 rustc dev guide 权威章节](#cargo-book-与-rustc-dev-guide-权威章节)
     - [Cargo Book 重点章节](#cargo-book-重点章节)
     - [rustc dev guide 重点章节](#rustc-dev-guide-重点章节)
-  - [🆕 权威国际化内容升级 (Rust 1.96.0+) {#-权威国际化内容升级}](#-权威国际化内容升级-rust-1960--权威国际化内容升级)
+  - [🆕 权威国际化内容升级 (Rust 1.96.0+)](#权威国际化内容升级-rust-1960)
     - [本次升级要点](#本次升级要点)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🎯 工具分类 {#-工具分类}
+## 🎯 工具分类 {#工具分类}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -70,13 +70,13 @@
 
 ---
 
-## 🔬 形式化验证工具 {#-形式化验证工具}
+## 🔬 形式化验证工具 {#形式化验证工具}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**主推路径**：Prusti、Kani（Rust 原生验证，无需学习专业形式化语言）。Coq/Lean 为可选进阶研究，见 [archive/deprecated/](../archive/deprecated/README.md)。
+**主推路径**：Prusti、Kani（Rust 原生验证，无需学习专业形式化语言）。Coq/Lean 为可选进阶研究，见 [archive/deprecated/](../../archive/deprecated/README.md)。
 
-### Prusti
+### Prusti {#prusti}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -87,10 +87,10 @@
 **安装**:
 
 ```bash
-# 安装 Prusti
+# 安装 Prusti {#安装-prusti}
 cargo install prusti-launch
 
-# 验证安装
+# 验证安装 {#验证安装-2}
 cargo prusti --version
 ```
 
@@ -115,10 +115,10 @@ fn abs(x: i32) -> i32 {
 **运行验证**:
 
 ```bash
-# 验证整个项目
+# 验证整个项目 {#验证整个项目-1}
 cargo prusti
 
-# 验证特定文件
+# 验证特定文件 {#验证特定文件}
 cargo prusti --file src/lib.rs
 ```
 
@@ -134,7 +134,7 @@ cargo prusti --file src/lib.rs
 
 ---
 
-### Kani
+### Kani {#kani}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -145,10 +145,10 @@ cargo prusti --file src/lib.rs
 **安装**:
 
 ```bash
-# 安装 Kani
+# 安装 Kani {#安装-kani}
 cargo install kani-verifier
 
-# 验证安装
+# 验证安装 {#验证安装-2}
 cargo kani --version
 ```
 
@@ -170,10 +170,10 @@ fn abs(x: i32) -> i32 {
 **运行验证**:
 
 ```bash
-# 验证整个项目
+# 验证整个项目 {#验证整个项目-1}
 cargo kani
 
-# 验证特定函数
+# 验证特定函数 {#验证特定函数}
 cargo kani --function test_abs
 ```
 
@@ -190,7 +190,7 @@ cargo kani --function test_abs
 
 ---
 
-### Creusot
+### Creusot {#creusot}
 
 > **来源**: [Creusot](https://creusot-rs.github.io/)
 >
@@ -201,7 +201,7 @@ cargo kani --function test_abs
 **安装**:
 
 ```bash
-# 需要 OPAM、Why3、Alt-Ergo 等辅助工具
+# 需要 OPAM、Why3、Alt-Ergo 等辅助工具 {#需要-opamwhy3alt-ergo-等辅助工具}
 git clone https://github.com/creusot-rs/creusot.git
 cd creusot
 cargo install --path creusot-rustc
@@ -230,7 +230,7 @@ fn increment(x: i32) -> i32 {
 
 ---
 
-### Aeneas
+### Aeneas {#aeneas}
 
 > **来源**: [Aeneas](https://aeneas-verif.github.io/aeneas/)
 >
@@ -241,9 +241,9 @@ fn increment(x: i32) -> i32 {
 **安装与使用**:
 
 ```bash
-# 1. 用 Charon 生成 .llbc
+# 1. 用 Charon 生成 .llbc {#1-用-charon-生成-llbc}
 charon cargo --preset=aeneas
-# 2. 用 Aeneas 翻译到目标证明助手
+# 2. 用 Aeneas 翻译到目标证明助手 {#2-用-aeneas-翻译到目标证明助手}
 ./bin/aeneas -backend lean|coq|fstar|hol4 file.llbc
 ```
 
@@ -257,7 +257,7 @@ charon cargo --preset=aeneas
 
 ---
 
-### Verus
+### Verus {#verus}
 
 > **来源**: [Verus](https://verus-lang.github.io/verus/)
 
@@ -268,7 +268,7 @@ charon cargo --preset=aeneas
 ```bash
 git clone https://github.com/verus-lang/verus.git
 cd verus/source
-# 按仓库 README 安装依赖并运行 vargo build
+# 按仓库 README 安装依赖并运行 vargo build {#按仓库-readme-安装依赖并运行-vargo-build}
 ```
 
 **基本使用**:
@@ -296,24 +296,24 @@ verus! {
 
 ---
 
-### 可选进阶：Coq/Lean
+### 可选进阶：Coq/Lean {#可选进阶coqlean}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **说明**：Coq、Lean 为专业形式化证明语言，需额外学习成本。
-本项目已归档 Coq 骨架与 Aeneas 对接计划至 [archive/deprecated/](../archive/deprecated/README.md)。
+本项目已归档 Coq 骨架与 Aeneas 对接计划至 [archive/deprecated/](../../archive/deprecated/README.md)。
 主路径聚焦 **数学风格形式化论证 + Rust 示例**（见 [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md)）。
 若需机器可检查证明，可参考 Prusti/Kani 或国际对标 [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](10_international_formal_verification_index.md)。
 
 ---
 
-## ⚡ 性能分析工具 {#-性能分析工具}
+## ⚡ 性能分析工具 {#性能分析工具}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Criterion.rs
+### Criterion.rs {#criterionrs}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -324,7 +324,7 @@ verus! {
 **安装**:
 
 ```toml
-# Cargo.toml
+# Cargo.toml {#cargotoml-2}
 [dev-dependencies]
 criterion = { version = "0.5", features = ["html_reports"] }
 
@@ -369,7 +369,7 @@ cargo bench
 
 ---
 
-### perf
+### perf {#perf}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
@@ -380,26 +380,26 @@ cargo bench
 **安装**:
 
 ```bash
-# Ubuntu/Debian
+# Ubuntu/Debian {#ubuntudebian-3}
 sudo apt-get install linux-perf
 
-# 或使用包管理器
+# 或使用包管理器 {#或使用包管理器}
 sudo apt-get install perf
 ```
 
 **基本使用**:
 
 ```bash
-# 记录性能数据
+# 记录性能数据 {#记录性能数据}
 perf record ./target/release/my_program
 
-# 查看报告
+# 查看报告 {#查看报告-1}
 perf report
 
-# 实时监控
+# 实时监控 {#实时监控}
 perf top
 
-# 统计信息
+# 统计信息 {#统计信息}
 perf stat ./target/release/my_program
 ```
 
@@ -410,7 +410,7 @@ perf stat ./target/release/my_program
 
 ---
 
-### flamegraph
+### flamegraph {#flamegraph}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -421,21 +421,21 @@ perf stat ./target/release/my_program
 **安装**:
 
 ```bash
-# 安装 cargo-flamegraph
+# 安装 cargo-flamegraph {#安装-cargo-flamegraph}
 cargo install flamegraph
 
-# 或使用系统包管理器
-# Ubuntu/Debian
+# 或使用系统包管理器 {#或使用系统包管理器}
+# Ubuntu/Debian {#ubuntudebian-3}
 sudo apt-get install flamegraph
 ```
 
 **基本使用**:
 
 ```bash
-# 生成火焰图
+# 生成火焰图 {#生成火焰图}
 cargo flamegraph --bin my_program
 
-# 指定输出文件
+# 指定输出文件 {#指定输出文件}
 cargo flamegraph -o flamegraph.svg --bin my_program
 ```
 
@@ -446,11 +446,11 @@ cargo flamegraph -o flamegraph.svg --bin my_program
 
 ---
 
-## 🔍 内存分析工具 {#-内存分析工具}
+## 🔍 内存分析工具 {#内存分析工具}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Miri
+### Miri {#miri}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -459,20 +459,20 @@ cargo flamegraph -o flamegraph.svg --bin my_program
 **安装**:
 
 ```bash
-# 安装 Miri
+# 安装 Miri {#安装-miri}
 rustup component add miri
 
-# 验证安装
+# 验证安装 {#验证安装-2}
 miri --version
 ```
 
 **基本使用**:
 
 ```bash
-# 运行 Miri 检查
+# 运行 Miri 检查 {#运行-miri-检查}
 MIRIFLAGS="-Zmiri-tag-raw-pointers" cargo miri test
 
-# 运行特定测试
+# 运行特定测试 {#运行特定测试-1}
 cargo miri test --test my_test
 ```
 
@@ -489,7 +489,7 @@ cargo miri test --test my_test
 
 ---
 
-### Valgrind
+### Valgrind {#valgrind}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -498,20 +498,20 @@ cargo miri test --test my_test
 **安装**:
 
 ```bash
-# Ubuntu/Debian
+# Ubuntu/Debian {#ubuntudebian-3}
 sudo apt-get install valgrind
 
-# macOS (使用 Homebrew)
+# macOS (使用 Homebrew) {#macos-使用-homebrew}
 brew install valgrind
 ```
 
 **基本使用**:
 
 ```bash
-# 内存泄漏检测
+# 内存泄漏检测 {#内存泄漏检测}
 valgrind --leak-check=full ./target/release/my_program
 
-# 详细报告
+# 详细报告 {#详细报告}
 valgrind --tool=memcheck --leak-check=yes ./target/release/my_program
 ```
 
@@ -522,7 +522,7 @@ valgrind --tool=memcheck --leak-check=yes ./target/release/my_program
 
 ---
 
-### heaptrack
+### heaptrack {#heaptrack}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -531,10 +531,10 @@ valgrind --tool=memcheck --leak-check=yes ./target/release/my_program
 **安装**:
 
 ```bash
-# Ubuntu/Debian
+# Ubuntu/Debian {#ubuntudebian-3}
 sudo apt-get install heaptrack
 
-# 或从源码编译
+# 或从源码编译 {#或从源码编译-1}
 git clone https://github.com/KDE/heaptrack
 cd heaptrack
 mkdir build && cd build
@@ -546,10 +546,10 @@ sudo make install
 **基本使用**:
 
 ```bash
-# 跟踪程序
+# 跟踪程序 {#跟踪程序}
 heaptrack ./target/release/my_program
 
-# 查看报告
+# 查看报告 {#查看报告-1}
 heaptrack_gui heaptrack.my_program.12345.gz
 ```
 
@@ -560,11 +560,11 @@ heaptrack_gui heaptrack.my_program.12345.gz
 
 ---
 
-## 🧪 测试工具 {#-测试工具}
+## 🧪 测试工具 {#测试工具}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### cargo test
+### cargo test {#cargo-test}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -573,22 +573,22 @@ heaptrack_gui heaptrack.my_program.12345.gz
 **基本使用**:
 
 ```bash
-# 运行所有测试
+# 运行所有测试 {#运行所有测试}
 cargo test
 
-# 运行特定测试
+# 运行特定测试 {#运行特定测试-1}
 cargo test test_name
 
-# 显示输出
+# 显示输出 {#显示输出}
 cargo test -- --nocapture
 
-# 多线程测试
+# 多线程测试 {#多线程测试}
 cargo test -- --test-threads=1
 ```
 
 ---
 
-### proptest
+### proptest {#proptest}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -597,7 +597,7 @@ cargo test -- --test-threads=1
 **安装**:
 
 ```toml
-# Cargo.toml
+# Cargo.toml {#cargotoml-2}
 [dev-dependencies]
 proptest = "1.0"
 ```
@@ -622,7 +622,7 @@ proptest! {
 
 ---
 
-### loom
+### loom {#loom}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -631,7 +631,7 @@ proptest! {
 **安装**:
 
 ```toml
-# Cargo.toml
+# Cargo.toml {#cargotoml-2}
 [dev-dependencies]
 loom = "0.5"
 ```
@@ -663,11 +663,11 @@ mod tests {
 
 ---
 
-## 📚 代码分析工具 {#-代码分析工具}
+## 📚 代码分析工具 {#代码分析工具}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### Clippy
+### Clippy {#clippy}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -676,20 +676,20 @@ mod tests {
 **安装**:
 
 ```bash
-# 安装 Clippy
+# 安装 Clippy {#安装-clippy}
 rustup component add clippy
 ```
 
 **基本使用**:
 
 ```bash
-# 检查代码
+# 检查代码 {#检查代码}
 cargo clippy
 
-# 自动修复
+# 自动修复 {#自动修复}
 cargo clippy --fix
 
-# 显示所有警告
+# 显示所有警告 {#显示所有警告}
 cargo clippy -- -W clippy::all
 ```
 
@@ -700,7 +700,7 @@ cargo clippy -- -W clippy::all
 
 ---
 
-### rust-analyzer
+### rust-analyzer {#rust-analyzer}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -709,10 +709,10 @@ cargo clippy -- -W clippy::all
 **安装**:
 
 ```bash
-# 使用 rustup
+# 使用 rustup {#使用-rustup}
 rustup component add rust-analyzer
 
-# 或从源码编译
+# 或从源码编译 {#或从源码编译-1}
 git clone https://github.com/rust-lang/rust-analyzer.git
 cd rust-analyzer
 cargo xtask install --server
@@ -733,7 +733,7 @@ rust-analyzer 通常在 IDE 中自动使用，提供：
 
 ---
 
-### cargo-expand
+### cargo-expand {#cargo-expand}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -742,20 +742,20 @@ rust-analyzer 通常在 IDE 中自动使用，提供：
 **安装**:
 
 ```bash
-# 安装 cargo-expand
+# 安装 cargo-expand {#安装-cargo-expand}
 cargo install cargo-expand
 ```
 
 **基本使用**:
 
 ```bash
-# 展开宏
+# 展开宏 {#展开宏}
 cargo expand
 
-# 展开特定项
+# 展开特定项 {#展开特定项}
 cargo expand my_macro
 
-# 输出到文件
+# 输出到文件 {#输出到文件}
 cargo expand > expanded.rs
 ```
 
@@ -766,11 +766,11 @@ cargo expand > expanded.rs
 
 ---
 
-## 💡 使用建议 {#-使用建议}
+## 💡 使用建议 {#使用建议}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 工具选择
+### 工具选择 {#工具选择}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -782,7 +782,7 @@ cargo expand > expanded.rs
 - **代码质量** → Clippy, rust-analyzer
 - **测试** → cargo test, proptest, loom
 
-### 工具组合
+### 工具组合 {#工具组合}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -793,7 +793,7 @@ cargo expand > expanded.rs
 3. **内存分析组合**: Miri + Valgrind + heaptrack
 4. **代码质量组合**: Clippy + rust-analyzer + cargo-expand
 
-### 最佳实践
+### 最佳实践 {#最佳实践}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -804,7 +804,7 @@ cargo expand > expanded.rs
 
 ---
 
-## 🔗 相关资源 {#-相关资源}
+## 🔗 相关资源 {#相关资源}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -814,13 +814,13 @@ cargo expand > expanded.rs
 - [Rust 异步编程](https://rust-lang.github.io/async-book/)
 - [Rust 性能指南](https://nnethercote.github.io/perf-book/)
 
-## 📚 Cargo Book 与 rustc dev guide 权威章节
+## 📚 Cargo Book 与 rustc dev guide 权威章节 {#cargo-book-与-rustc-dev-guide-权威章节}
 
 > **来源**: [The Cargo Book](https://doc.rust-lang.org/cargo/)
 >
 > **来源**: [rustc dev guide](https://rustc-dev-guide.rust-lang.org/)
 
-### Cargo Book 重点章节
+### Cargo Book 重点章节 {#cargo-book-重点章节}
 
 | 章节 | 链接 | 用途 |
 | :--- | :--- | :--- |
@@ -831,7 +831,7 @@ cargo expand > expanded.rs
 | 发布到 crates.io | [publishing.html](https://doc.rust-lang.org/cargo/reference/publishing.html) | 版本发布与元数据 |
 | 环境变量 | [environment-variables.html](https://doc.rust-lang.org/cargo/reference/environment-variables.html) | `CARGO_*` 与构建环境 |
 
-### rustc dev guide 重点章节
+### rustc dev guide 重点章节 {#rustc-dev-guide-重点章节}
 
 | 章节 | 链接 | 用途 |
 | :--- | :--- | :--- |
@@ -852,14 +852,14 @@ cargo expand > expanded.rs
 
 ---
 
-## 🆕 权威国际化内容升级 (Rust 1.96.0+) {#-权威国际化内容升级}
+## 🆕 权威国际化内容升级 (Rust 1.96.0+) {#权威国际化内容升级-rust-1960}
 >
 > **来源**: [Rust Research Community]
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-06-29
 
-### 本次升级要点
+### 本次升级要点 {#本次升级要点}
 
 - 补充 Kani、Prusti、Miri、Creusot、Aeneas、Verus 的官方文档链接与版本信息。
 - 新增 Cargo Book、rustc dev guide 重点章节索引。
@@ -884,7 +884,7 @@ cargo expand > expanded.rs
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -893,7 +893,7 @@ cargo expand > expanded.rs
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Software Development Tool](https://en.wikipedia.org/wiki/Software_Development_Tool)**
 > **来源: [Wikipedia - Integrated Development Environment](https://en.wikipedia.org/wiki/Integrated_Development_Environment)**

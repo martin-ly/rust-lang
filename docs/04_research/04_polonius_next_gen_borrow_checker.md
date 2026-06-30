@@ -1,4 +1,4 @@
-# Polonius：下一代 Borrow Checker 深度解析
+# Polonius：下一代 Borrow Checker 深度解析 {#polonius下一代-borrow-checker-深度解析}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
@@ -10,7 +10,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -52,13 +52,13 @@
 
 ---
 
-## 1. 什么是 Polonius
+## 1. 什么是 Polonius {#1-什么是-polonius}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Polonius** 是 Rust 编译器 `rustc` 的下一代 borrow checker（借用检查器）核心算法。它得名于莎士比亚《哈姆雷特》中的角色波洛涅斯（Polonius），象征其对程序中"借用关系"的精细洞察。
 
-### 历史背景
+### 历史背景 {#历史背景}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -77,7 +77,7 @@ timeline
          : 基于 Datalog 的逻辑推断
 ```
 
-### 核心定位
+### 核心定位 {#核心定位}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -93,11 +93,11 @@ timeline
 
 ---
 
-## 2. 为什么需要 Polonius
+## 2. 为什么需要 Polonius {#2-为什么需要-polonius}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 NLL 的局限性
+### 2.1 NLL 的局限性 {#21-nll-的局限性}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -120,7 +120,7 @@ fn nll_limitation() {
 }
 ```
 
-### 2.2 Polonius 的核心改进
+### 2.2 Polonius 的核心改进 {#22-polonius-的核心改进}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -144,11 +144,11 @@ graph TD
 
 ---
 
-## 3. 核心原理：基于 Datalog 的生命周期推断
+## 3. 核心原理：基于 Datalog 的生命周期推断 {#3-核心原理基于-datalog-的生命周期推断}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 3.1 Datalog 简介
+### 3.1 Datalog 简介 {#31-datalog-简介}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
@@ -160,7 +160,7 @@ graph TD
 - **规则 (Rules)**：推导新事实的逻辑蕴含，如 `conflict(X, Y) :- borrow(X, Z), borrow(Y, Z), X != Y`
 - **查询 (Queries)**：从事实和规则中推导结论
 
-### 3.2 Polonius 的 Datalog 建模
+### 3.2 Polonius 的 Datalog 建模 {#32-polonius-的-datalog-建模}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -175,7 +175,7 @@ Polonius 将 Rust 程序中的借用关系建模为 Datalog 程序：
 | `loan_invalidated_at(L, P)` | 贷款 `L` 在程序点 `P` 被非法访问 |
 | `borrow_live_at(L, P)` | 贷款 `L` 在程序点 `P` 仍然存活 |
 
-### 3.3 关键推导规则
+### 3.3 关键推导规则 {#33-关键推导规则}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -197,7 +197,7 @@ error(P) :-
     loan_invalidated_at(L, P).
 ```
 
-### 3.4 Datafrog 引擎
+### 3.4 Datafrog 引擎 {#34-datafrog-引擎}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -218,11 +218,11 @@ flowchart LR
 
 ---
 
-## 4. 与 NLL 的对比
+## 4. 与 NLL 的对比 {#4-与-nll-的对比}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 4.1 编译通过的案例
+### 4.1 编译通过的案例 {#41-编译通过的案例}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -240,7 +240,7 @@ pub fn polonius_wins(vec: &mut Vec<i32>) -> i32 {
 }
 ```
 
-### 4.2 核心差异总结
+### 4.2 核心差异总结 {#42-核心差异总结}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -253,30 +253,30 @@ pub fn polonius_wins(vec: &mut Vec<i32>) -> i32 {
 
 ---
 
-## 5. 实际使用
+## 5. 实际使用 {#5-实际使用}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 5.1 在 Nightly 上启用 Polonius
+### 5.1 在 Nightly 上启用 Polonius {#51-在-nightly-上启用-polonius}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 ```bash
-# 使用 nightly 编译器
+# 使用 nightly 编译器 {#使用-nightly-编译器}
 rustup default nightly
 
-# 方式 1：命令行标志
+# 方式 1：命令行标志 {#方式-1命令行标志}
 rustc -Zpolonius your_code.rs
 
-# 方式 2：Cargo 环境变量
+# 方式 2：Cargo 环境变量 {#方式-2cargo-环境变量}
 RUSTFLAGS="-Zpolonius" cargo check
 
-# 方式 3：.cargo/config.toml
+# 方式 3：.cargo/config.toml {#方式-3cargoconfigtoml}
 [build]
 rustflags = ["-Zpolonius"]
 ```
 
-### 5.2 验证 Polonius 是否生效
+### 5.2 验证 Polonius 是否生效 {#52-验证-polonius-是否生效}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -299,24 +299,24 @@ pub fn test() {
 fn main() {}
 ```
 
-### 5.3 与 Miri 的联合使用
+### 5.3 与 Miri 的联合使用 {#53-与-miri-的联合使用}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```bash
-# Miri 检测运行时 UB，Polonius 检测编译期借用冲突
-# 两者互补：Polonius 通过 ≠ Miri 通过
+# Miri 检测运行时 UB，Polonius 检测编译期借用冲突 {#miri-检测运行时-ubpolonius-检测编译期借用冲突}
+# 两者互补：Polonius 通过 ≠ Miri 通过 {#两者互补polonius-通过-miri-通过}
 cargo +nightly miri test
 RUSTFLAGS="-Zpolonius" cargo +nightly check
 ```
 
 ---
 
-## 6. 当前限制与路线图
+## 6. 当前限制与路线图 {#6-当前限制与路线图}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 6.1 已知限制
+### 6.1 已知限制 {#61-已知限制}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -329,7 +329,7 @@ RUSTFLAGS="-Zpolonius" cargo +nightly check
 
 > **2026-05 最新动态**: Location-sensitive analysis 原型已在 nightly 可用 (`-Zpolonius=next`)，解决 NLL problem case #3（lending iterator 模式）。Project Goals 2026 将 Polonius Alpha 稳定化列为年度旗舰目标，由 Rust 基金会资助。[来源: [Rust Project Goals 2026 — Polonius](https://rust-lang.github.io/rust-project-goals/2026/polonius.html)]
 
-### 6.2 Rust 2026 Project Goals 中的定位
+### 6.2 Rust 2026 Project Goals 中的定位 {#62-rust-2026-project-goals-中的定位}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -348,7 +348,7 @@ gantt
     错误诊断改进      :c2, 2026-04, 12M
 ```
 
-### 6.3 与 Rust for Linux 的关系
+### 6.3 与 Rust for Linux 的关系 {#63-与-rust-for-linux-的关系}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -360,11 +360,11 @@ Polonius 的精确分析对内核代码尤为重要：
 
 ---
 
-## 7. 对 Rust 学习者的意义
+## 7. 对 Rust 学习者的意义 {#7-对-rust-学习者的意义}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 7.1 不需要立即学习的理由
+### 7.1 不需要立即学习的理由 {#71-不需要立即学习的理由}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -372,7 +372,7 @@ Polonius 的精确分析对内核代码尤为重要：
 - NLL 已覆盖 95%+ 的实际场景
 - 稳定版编译器暂不支持 `-Zpolonius`
 
-### 7.2 值得关注的理由
+### 7.2 值得关注的理由 {#72-值得关注的理由}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -380,7 +380,7 @@ Polonius 的精确分析对内核代码尤为重要：
 - **解决实际问题**：遇到 NLL 误报时，知道未来有解决方案
 - **学术研究**：Datalog 在编译器中的应用是 PL 领域的前沿方向
 
-### 7.3 学习路径建议
+### 7.3 学习路径建议 {#73-学习路径建议}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -399,11 +399,11 @@ flowchart TD
 
 ---
 
-## 8. 参考文献
+## 8. 参考文献 {#8-参考文献}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 官方资源
+### 官方资源 {#官方资源}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -412,14 +412,14 @@ flowchart TD
 - [Datafrog — Incremental Datalog Engine](https://github.com/rust-lang/datafrog)
 - [Niko Matsakis: An Overview of Polonius](https://smallcultfollowing.com/babysteps/blog/2019/01/17/polonius/)
 
-### 学术论文
+### 学术论文 {#学术论文}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - Matsakis N. D., et al. "Non-Lexical Lifetimes: Introduction to MIR-based Borrow Check." *Rustc Dev Guide*, 2018.
 - Arntzenius R. "Datafrog: Lightweight Datalog Engine in Rust." *RustConf*, 2018.
 
-### Rust Project Goals 2026
+### Rust Project Goals 2026 {#rust-project-goals-2026}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -428,7 +428,7 @@ flowchart TD
 
 ---
 
-## 复查记录
+## 复查记录 {#复查记录}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -453,7 +453,7 @@ flowchart TD
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -473,7 +473,7 @@ flowchart TD
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [NLL 与 Polonius (concept)](../../concept/03_advanced/08_nll_and_polonius.md) — 概念层 NLL → Polonius 演进分析，含三代借用检查器对比表
 - [Polonius 跟踪报告](04_polonius_tracking.md) — 本目录内的 Polonius 状态跟踪与技术细节

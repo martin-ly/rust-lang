@@ -1,4 +1,4 @@
-# Let Chains 全面指南
+# Let Chains 全面指南 {#let-chains-全面指南}
 
 > **分级**: [A]
 > **Bloom 层级**: L2 (Comprehension) — L3 (Application)
@@ -10,12 +10,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Let Chains 全面指南](#let-chains-全面指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [一、核心语法](#一核心语法)
     - [1.1 if let chains](#11-if-let-chains)
@@ -24,9 +24,9 @@
   - [二、语法规则与限制](#二语法规则与限制)
     - [2.1 绑定可见性](#21-绑定可见性)
     - [2.2 混合使用布尔条件和 let](#22-混合使用布尔条件和-let)
-    - [2.3 不能用 `||` 混合 let](#23-不能用--混合-let)
+    - [2.3 不能用 `||` 混合 let](#23-不能用-混合-let)
   - [三、与旧模式对比](#三与旧模式对比)
-    - [3.1 嵌套 if let → 扁平 let chains](#31-嵌套-if-let--扁平-let-chains)
+    - [3.1 嵌套 if let → 扁平 let chains](#31-嵌套-if-let-扁平-let-chains)
     - [3.2 match guard vs let chains](#32-match-guard-vs-let-chains)
   - [四、实战模式](#四实战模式)
     - [4.1 配置解析](#41-配置解析)
@@ -43,7 +43,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 概述
+## 概述 {#概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -55,11 +55,11 @@ Rust 1.95.0 稳定了 **let chains** 和 **if let guards**，允许在 `if`、`w
 
 ---
 
-## 一、核心语法
+## 一、核心语法 {#一核心语法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1.1 if let chains
+### 1.1 if let chains {#11-if-let-chains}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -84,7 +84,7 @@ if let Some(a) = opt_a {
 }
 ```
 
-### 1.2 while let chains
+### 1.2 while let chains {#12-while-let-chains}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -97,7 +97,7 @@ while let Some(a) = iter_a.next() && let Some(b) = iter_b.next() {
 }
 ```
 
-### 1.3 if let guards in match
+### 1.3 if let guards in match {#13-if-let-guards-in-match}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -116,11 +116,11 @@ fn classify(msg: Option<String>) -> String {
 
 ---
 
-## 二、语法规则与限制
+## 二、语法规则与限制 {#二语法规则与限制}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 2.1 绑定可见性
+### 2.1 绑定可见性 {#21-绑定可见性}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -137,7 +137,7 @@ if let Some(entry) = map.get("key") && let Ok(num) = entry.parse::<i32>() {
 }
 ```
 
-### 2.2 混合使用布尔条件和 let
+### 2.2 混合使用布尔条件和 let {#22-混合使用布尔条件和-let}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -150,7 +150,7 @@ if flag && let Some(n) = opt && n > 5 {
 }
 ```
 
-### 2.3 不能用 `||` 混合 let
+### 2.3 不能用 `||` 混合 let {#23-不能用-混合-let}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -167,11 +167,11 @@ if let Some(a) = opt_a || let Some(b) = opt_b {
 
 ---
 
-## 三、与旧模式对比
+## 三、与旧模式对比 {#三与旧模式对比}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 3.1 嵌套 if let → 扁平 let chains
+### 3.1 嵌套 if let → 扁平 let chains {#31-嵌套-if-let-扁平-let-chains}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -181,7 +181,7 @@ if let Some(a) = opt_a || let Some(b) = opt_b {
 | Option + Result | `if let Some(s) = opt { if let Ok(n) = s.parse() { ... } }` | `if let Some(s) = opt && let Ok(n) = s.parse() { ... }` |
 | 循环配对 | `while let Some(a) = iter_a.next() { let b = iter_b.next(); if let Some(b) = b { ... } }` | `while let Some(a) = iter_a.next() && let Some(b) = iter_b.next() { ... }` |
 
-### 3.2 match guard vs let chains
+### 3.2 match guard vs let chains {#32-match-guard-vs-let-chains}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -209,11 +209,11 @@ if let Some(ref s) = value && let Ok(n) = s.parse::<i32>() {
 
 ---
 
-## 四、实战模式
+## 四、实战模式 {#四实战模式}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 4.1 配置解析
+### 4.1 配置解析 {#41-配置解析}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -231,7 +231,7 @@ fn get_timeout(config: &std::collections::HashMap<String, String>) -> Option<u64
 }
 ```
 
-### 4.2 异步条件等待
+### 4.2 异步条件等待 {#42-异步条件等待}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -248,7 +248,7 @@ async fn wait_for_state(rx: &mut watch::Receiver<Option<String>>) {
 }
 ```
 
-### 4.3 错误累积报告
+### 4.3 错误累积报告 {#43-错误累积报告}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -268,11 +268,11 @@ fn validate_user(name: Option<&str>, age: Option<&str>) -> Result<(), String> {
 
 ---
 
-## 五、常见陷阱
+## 五、常见陷阱 {#五常见陷阱}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 5.1 陷阱 1：`||` 的误解
+### 5.1 陷阱 1：`||` 的误解 {#51-陷阱-1-的误解}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -289,7 +289,7 @@ match (opt_a, opt_b) {
 }
 ```
 
-### 5.2 陷阱 2：所有权与借用冲突
+### 5.2 陷阱 2：所有权与借用冲突 {#52-陷阱-2所有权与借用冲突}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -309,7 +309,7 @@ if let Some(ref s) = msg && s.len() > 3 {
 // msg 仍然可用
 ```
 
-### 5.3 陷阱 3：变量遮蔽的意外
+### 5.3 陷阱 3：变量遮蔽的意外 {#53-陷阱-3变量遮蔽的意外}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -322,7 +322,7 @@ if let Some(x) = x && x > 5 {
 }
 ```
 
-### 5.4 陷阱 4：与早期返回混用
+### 5.4 陷阱 4：与早期返回混用 {#54-陷阱-4与早期返回混用}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -354,7 +354,7 @@ fn process(data: Option<&str>) -> Result<i32, String> {
 
 ---
 
-## 六、版本兼容
+## 六、版本兼容 {#六版本兼容}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -368,7 +368,7 @@ fn process(data: Option<&str>) -> Result<i32, String> {
 
 ---
 
-## 七、快速参考卡
+## 七、快速参考卡 {#七快速参考卡}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -386,7 +386,7 @@ fn process(data: Option<&str>) -> Result<i32, String> {
 
 ---
 
-## 八、延伸阅读
+## 八、延伸阅读 {#八延伸阅读}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -404,7 +404,7 @@ fn process(data: Option<&str>) -> Result<i32, String> {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -412,7 +412,7 @@ fn process(data: Option<&str>) -> Result<i32, String> {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
 

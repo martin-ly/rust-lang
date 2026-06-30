@@ -1,4 +1,4 @@
-# 实践项目 02: 文件处理器
+# 实践项目 02: 文件处理器 {#实践项目-02-文件处理器}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
@@ -9,7 +9,7 @@
 
 ---
 
-## 项目目标
+## 项目目标 {#项目目标}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -17,7 +17,7 @@
 
 ---
 
-## 功能需求
+## 功能需求 {#功能需求}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -28,11 +28,11 @@
 
 ---
 
-## 学习要点
+## 学习要点 {#学习要点}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 文件系统操作
+### 文件系统操作 {#文件系统操作}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -48,7 +48,7 @@ fn get_file_info(path: &Path) -> std::io::Result<()> {
 }
 ```
 
-### 目录遍历
+### 目录遍历 {#目录遍历}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -67,7 +67,7 @@ fn list_files(dir: &str) -> std::io::Result<Vec<String>> {
 
 ---
 
-## 参考实现
+## 参考实现 {#参考实现}
 
 完整参考实现位于: `examples/file-processor/`
 
@@ -88,7 +88,7 @@ fn list_files(dir: &str) -> std::io::Result<Vec<String>> {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**

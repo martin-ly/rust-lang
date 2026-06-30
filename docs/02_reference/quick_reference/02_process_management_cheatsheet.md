@@ -8,7 +8,7 @@
 
 ---
 
-# 进程管理快速参考卡片
+# 进程管理快速参考卡片 {#进程管理快速参考卡片}
 
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
@@ -16,42 +16,42 @@
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [专家级]
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [进程管理快速参考卡片](#进程管理快速参考卡片)
-  - [📑 目录](#-目录)
-  - [🚀 快速开始](#-快速开始)
+  - [📑 目录](#目录)
+  - [🚀 快速开始](#快速开始)
     - [基本使用](#基本使用)
-  - [📋 常用 API](#-常用-api)
+  - [📋 常用 API](#常用-api)
     - [进程管理](#进程管理)
     - [异步进程管理](#异步进程管理)
     - [IPC 通信](#ipc-通信)
     - [同步原语](#同步原语)
-  - [🔧 配置选项](#-配置选项)
+  - [🔧 配置选项](#配置选项)
     - [ProcessConfig](#processconfig)
     - [跨平台注意事项](#跨平台注意事项)
-  - [⚡ 性能优化](#-性能优化)
+  - [⚡ 性能优化](#性能优化)
     - [启用性能监控](#启用性能监控)
-  - [🐛 错误处理](#-错误处理)
-  - [🚫 反例速查](#-反例速查)
+  - [🐛 错误处理](#错误处理)
+  - [🚫 反例速查](#反例速查)
     - [反例 1: 不检查子进程退出状态](#反例-1-不检查子进程退出状态)
     - [反例 2: 在 Unix 信号处理中调用非 async-signal-safe 函数](#反例-2-在-unix-信号处理中调用非-async-signal-safe-函数)
-  - [📚 相关文档](#-相关文档)
-  - [🧩 相关示例代码](#-相关示例代码)
-  - [🎯 使用场景](#-使用场景)
+  - [📚 相关文档](#相关文档)
+  - [🧩 相关示例代码](#相关示例代码)
+  - [🎯 使用场景](#使用场景)
     - [场景 1: 构建任务调度器](#场景-1-构建任务调度器)
     - [场景 2: 安全沙箱执行](#场景-2-安全沙箱执行)
     - [场景 3: 进程监控与自动重启](#场景-3-进程监控与自动重启)
-  - [📐 形式化方法链接](#-形式化方法链接)
+  - [📐 形式化方法链接](#形式化方法链接)
     - [理论基础](#理论基础)
     - [形式化定理](#形式化定理)
-  - [📚 相关资源](#-相关资源)
+  - [📚 相关资源](#相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
     - [相关速查卡](#相关速查卡)
-  - [🆕 Rust 1.95+ 特性整合](#-rust-195-特性整合)
+  - [🆕 Rust 1.95+ 特性整合](#rust-195-特性整合)
     - [核心特性速查](#核心特性速查)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -64,11 +64,11 @@
 
 ---
 
-## 🚀 快速开始
+## 🚀 快速开始 {#快速开始}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 基本使用
+### 基本使用 {#基本使用}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -104,11 +104,11 @@ manager.kill(pid)?;
 
 ---
 
-## 📋 常用 API
+## 📋 常用 API {#常用-api}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 进程管理
+### 进程管理 {#进程管理}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -121,7 +121,7 @@ manager.kill(pid)?;
 | 等待进程 | `wait(pid)`     | 等待进程结束 |
 | 列出所有 | `list_all()`    | 获取所有进程 |
 
-### 异步进程管理
+### 异步进程管理 {#异步进程管理}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -145,7 +145,7 @@ let output = manager.read_stdout(pid).await?;
 manager.wait_with_timeout(pid, Duration::from_secs(5)).await?;
 ```
 
-### IPC 通信
+### IPC 通信 {#ipc-通信}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -166,7 +166,7 @@ let memory = ipc.create_shared_memory("my_memory", 1024)?;
 let queue = ipc.create_message_queue("my_queue", 100)?;
 ```
 
-### 同步原语
+### 同步原语 {#同步原语}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -189,11 +189,11 @@ let rwlock = sync.create_rwlock("my_rwlock")?;
 
 ---
 
-## 🔧 配置选项
+## 🔧 配置选项 {#配置选项}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### ProcessConfig
+### ProcessConfig {#processconfig}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -212,7 +212,7 @@ ProcessConfig {
 }
 ```
 
-### 跨平台注意事项
+### 跨平台注意事项 {#跨平台注意事项}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -231,11 +231,11 @@ ProcessConfig {
 
 ---
 
-## ⚡ 性能优化
+## ⚡ 性能优化 {#性能优化}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 启用性能监控
+### 启用性能监控 {#启用性能监控}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -257,7 +257,7 @@ let result = manager.optimize_memory().await;
 
 ---
 
-## 🐛 错误处理
+## 🐛 错误处理 {#错误处理}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -274,11 +274,11 @@ match manager.spawn(config) {
 
 ---
 
-## 🚫 反例速查
+## 🚫 反例速查 {#反例速查}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 反例 1: 不检查子进程退出状态
+### 反例 1: 不检查子进程退出状态 {#反例-1-不检查子进程退出状态}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -300,7 +300,7 @@ assert!(status.success());
 
 ---
 
-### 反例 2: 在 Unix 信号处理中调用非 async-signal-safe 函数
+### 反例 2: 在 Unix 信号处理中调用非 async-signal-safe 函数 {#反例-2-在-unix-信号处理中调用非-async-signal-safe-函数}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -318,14 +318,14 @@ fn handler(_: i32) {
 
 ---
 
-## 📚 相关文档
+## 📚 相关文档 {#相关文档}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [进程管理完整文档](../../../crates/c07_process/docs/README.md)
 - [进程管理 README](../../../crates/c07_process/README.md)
 
-## 🧩 相关示例代码
+## 🧩 相关示例代码 {#相关示例代码}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -339,11 +339,11 @@ fn handler(_: i32) {
 
 ---
 
-## 🎯 使用场景
+## 🎯 使用场景 {#使用场景}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 场景 1: 构建任务调度器
+### 场景 1: 构建任务调度器 {#场景-1-构建任务调度器}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -419,7 +419,7 @@ impl TaskScheduler {
 }
 ```
 
-### 场景 2: 安全沙箱执行
+### 场景 2: 安全沙箱执行 {#场景-2-安全沙箱执行}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -446,7 +446,7 @@ fn sandboxed_execute(program: &str, args: &[&str]) -> std::io::Result<std::proce
 }
 ```
 
-### 场景 3: 进程监控与自动重启
+### 场景 3: 进程监控与自动重启 {#场景-3-进程监控与自动重启}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -501,11 +501,11 @@ impl ProcessMonitor {
 
 ---
 
-## 📐 形式化方法链接
+## 📐 形式化方法链接 {#形式化方法链接}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 理论基础
+### 理论基础 {#理论基础}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -515,7 +515,7 @@ impl ProcessMonitor {
 | **异步状态机** | [async_state_machine](../../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) | 异步进程管理语义 |
 | **Send/Sync** | [send_sync_formalization](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | 跨线程进程句柄安全 |
 
-### 形式化定理
+### 形式化定理 {#形式化定理}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -525,18 +525,18 @@ impl ProcessMonitor {
 
 ---
 
-## 📚 相关资源
+## 📚 相关资源 {#相关资源}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 官方文档
+### 官方文档 {#官方文档}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 - [std::process 文档](https://doc.rust-lang.org/std/process/)
 - [std::io 文档](https://doc.rust-lang.org/std/io/)
 
-### 项目内部文档
+### 项目内部文档 {#项目内部文档}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -545,7 +545,7 @@ impl ProcessMonitor {
 - [性能优化指南](../../../crates/c07_process/docs/performance_optimization_usage_guide.md)
 - [形式化方法研究](../../../archive/research_notes_2026_06_25/formal_methods/README.md)
 
-### 相关速查卡
+### 相关速查卡 {#相关速查卡}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -561,12 +561,12 @@ impl ProcessMonitor {
 
 ---
 
-## 🆕 Rust 1.95+ 特性整合
+## 🆕 Rust 1.95+ 特性整合 {#rust-195-特性整合}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 > **适用版本**: Rust 1.96.0+
 
-### 核心特性速查
+### 核心特性速查 {#核心特性速查}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -620,7 +620,7 @@ let gamma = f64::consts::EULER_GAMMA;
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -629,7 +629,7 @@ let gamma = f64::consts::EULER_GAMMA;
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

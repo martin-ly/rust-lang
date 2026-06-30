@@ -1,4 +1,4 @@
-# Rust 1.93 语言特性全面分析：设计论证与形式化
+# Rust 1.93 语言特性全面分析：设计论证与形式化 {#rust-193-语言特性全面分析设计论证与形式化}
 >
 > **概念族**: 版本特性
 
@@ -17,16 +17,16 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.93 语言特性全面分析：设计论证与形式化](#rust-193-语言特性全面分析设计论证与形式化)
-  - [📑 目录](#-目录)
-  - [📚 权威来源对齐 {#-权威来源对齐}](#-权威来源对齐--权威来源对齐)
-  - [📋 目录 {#-目录}](#-目录--目录)
-  - [🎯 文档宗旨 {#-文档宗旨}](#-文档宗旨--文档宗旨)
-  - [📐 特性覆盖矩阵总览 {#-特性覆盖矩阵总览}](#-特性覆盖矩阵总览--特性覆盖矩阵总览)
+  - [📑 目录](#目录)
+  - [📚 权威来源对齐](#权威来源对齐)
+  - [📋 目录](#目录-1)
+  - [🎯 文档宗旨](#文档宗旨)
+  - [📐 特性覆盖矩阵总览](#特性覆盖矩阵总览)
   - [特性→Def/Axiom/Theorem 映射表（兼 92 项→推荐落点文档）](#特性defaxiomtheorem-映射表兼-92-项推荐落点文档)
   - [1. 内存与所有权族](#1-内存与所有权族)
   - [2. 类型系统族](#2-类型系统族)
@@ -39,16 +39,16 @@
   - [9. FFI 与不安全族](#9-ffi-与不安全族)
   - [10. Rust 1.93 新增/变更特性](#10-rust-193-新增变更特性)
   - [11. Rust 1.95/1.96 新增/变更特性](#11-rust-195196-新增变更特性)
-  - [📚 相关文档 {#-相关文档}](#-相关文档--相关文档)
-  - [✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）](#-权威国际化来源对齐升级摘要rust-1960--edition-2024)
+  - [📚 相关文档](#相关文档)
+  - [✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）](#权威国际化来源对齐升级摘要rust-1960-edition-2024)
     - [本次升级要点](#本次升级要点)
       - [新增 Rust 1.96.0 特性](#新增-rust-1960-特性)
       - [新增 Rust 1.95.0 特性](#新增-rust-1950-特性)
-      - [权威来源对齐](#权威来源对齐)
+      - [权威来源对齐](#权威来源对齐-1)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 📚 权威来源对齐<a id="权威来源对齐"></a> {#-权威来源对齐}
+## 📚 权威来源对齐 {#权威来源对齐}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -69,17 +69,17 @@
 
 ---
 
-## 📋 目录<a id="目录"></a> {#-目录}
+## 📋 目录 {#目录-1}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 <!-- markdownlint-disable MD051 -->
 - [Rust 1.93 语言特性全面分析：设计论证与形式化](#rust-193-语言特性全面分析设计论证与形式化)
-  - [📑 目录](#-目录)
-  - [📚 权威来源对齐 {#-权威来源对齐}](#-权威来源对齐--权威来源对齐)
-  - [📋 目录 {#-目录}](#-目录--目录)
-  - [🎯 文档宗旨 {#-文档宗旨}](#-文档宗旨--文档宗旨)
-  - [📐 特性覆盖矩阵总览 {#-特性覆盖矩阵总览}](#-特性覆盖矩阵总览--特性覆盖矩阵总览)
+  - [📑 目录](#目录)
+  - [📚 权威来源对齐](#权威来源对齐)
+  - [📋 目录](#目录-1)
+  - [🎯 文档宗旨](#文档宗旨)
+  - [📐 特性覆盖矩阵总览](#特性覆盖矩阵总览)
   - [特性→Def/Axiom/Theorem 映射表（兼 92 项→推荐落点文档）](#特性defaxiomtheorem-映射表兼-92-项推荐落点文档)
   - [1. 内存与所有权族](#1-内存与所有权族)
   - [2. 类型系统族](#2-类型系统族)
@@ -92,19 +92,19 @@
   - [9. FFI 与不安全族](#9-ffi-与不安全族)
   - [10. Rust 1.93 新增/变更特性](#10-rust-193-新增变更特性)
   - [11. Rust 1.95/1.96 新增/变更特性](#11-rust-195196-新增变更特性)
-  - [📚 相关文档 {#-相关文档}](#-相关文档--相关文档)
-  - [✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）](#-权威国际化来源对齐升级摘要rust-1960--edition-2024)
+  - [📚 相关文档](#相关文档)
+  - [✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）](#权威国际化来源对齐升级摘要rust-1960-edition-2024)
     - [本次升级要点](#本次升级要点)
       - [新增 Rust 1.96.0 特性](#新增-rust-1960-特性)
       - [新增 Rust 1.95.0 特性](#新增-rust-1950-特性)
-      - [权威来源对齐](#权威来源对齐)
+      - [权威来源对齐](#权威来源对齐-1)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 <!-- markdownlint-enable MD051 -->
 
 ---
 
-## 🎯 文档宗旨<a id="文档宗旨"></a> {#-文档宗旨}
+## 🎯 文档宗旨 {#文档宗旨}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -116,7 +116,7 @@
 
 ---
 
-## 📐 特性覆盖矩阵总览<a id="特性覆盖矩阵总览"></a> {#-特性覆盖矩阵总览}
+## 📐 特性覆盖矩阵总览 {#特性覆盖矩阵总览}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -136,7 +136,7 @@
 
 ---
 
-## 特性→Def/Axiom/Theorem 映射表（兼 92 项→推荐落点文档）
+## 特性→Def/Axiom/Theorem 映射表（兼 92 项→推荐落点文档） {#特性defaxiomtheorem-映射表兼-92-项推荐落点文档}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -185,7 +185,7 @@
 
 ---
 
-## 1. 内存与所有权族
+## 1. 内存与所有权族 {#1-内存与所有权族}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -206,7 +206,7 @@
 
 ---
 
-## 2. 类型系统族
+## 2. 类型系统族 {#2-类型系统族}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -230,7 +230,7 @@
 
 ---
 
-## 3. Trait 与多态族
+## 3. Trait 与多态族 {#3-trait-与多态族}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -249,7 +249,7 @@
 
 ---
 
-## 4. 控制流与模式匹配族
+## 4. 控制流与模式匹配族 {#4-控制流与模式匹配族}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -266,7 +266,7 @@
 
 ---
 
-## 5. 并发与异步族
+## 5. 并发与异步族 {#5-并发与异步族}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -283,7 +283,7 @@
 
 ---
 
-## 6. 宏与元编程族
+## 6. 宏与元编程族 {#6-宏与元编程族}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -297,7 +297,7 @@
 
 ---
 
-## 7. 模块与可见性族
+## 7. 模块与可见性族 {#7-模块与可见性族}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -310,7 +310,7 @@
 
 ---
 
-## 8. 常量与编译期族
+## 8. 常量与编译期族 {#8-常量与编译期族}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -325,7 +325,7 @@
 
 ---
 
-## 9. FFI 与不安全族
+## 9. FFI 与不安全族 {#9-ffi-与不安全族}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -340,7 +340,7 @@
 
 ---
 
-## 10. Rust 1.93 新增/变更特性
+## 10. Rust 1.93 新增/变更特性 {#10-rust-193-新增变更特性}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -369,7 +369,7 @@
 
 ---
 
-## 11. Rust 1.95/1.96 新增/变更特性
+## 11. Rust 1.95/1.96 新增/变更特性 {#11-rust-195196-新增变更特性}
 
 > **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
 > **来源: [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)**
@@ -402,7 +402,7 @@
 
 ---
 
-## 📚 相关文档<a id="相关文档"></a> {#-相关文档}
+## 📚 相关文档 {#相关文档}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -417,7 +417,7 @@
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](10_language_semantics_expressiveness.md) | 构造性语义、表达能力边界 |
 | [toolchain/07_rust_1.93_full_changelog](../06_toolchain/06_07_rust_1_93_full_changelog.md) | Rust 1.93 完整变更清单 |
 | [toolchain/09_rust_1.93_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md) | Rust 1.93 兼容性深度解析 |
-| [toolchain/10_rust_1.89_to_1.93_cumulative_features_overview](../archive/2026_05_historical_docs/10_rust_1.89_to_1.93_cumulative_features_overview.md) | 1.89→1.93 累积特性总览 |
+| [toolchain/10_rust_1.89_to_1.93_cumulative_features_overview](../../archive/docs/2026_05_historical_docs/10_rust_1.89_to_1.93_cumulative_features_overview.md) | 1.89→1.93 累积特性总览 |
 
 ---
 
@@ -427,7 +427,7 @@
 
 ---
 
-## ✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）
+## ✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024） {#权威国际化来源对齐升级摘要rust-1960-edition-2024}
 
 > **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
 > **来源: [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)**
@@ -435,11 +435,11 @@
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **升级日期**: 2026-06-29
 
-### 本次升级要点
+### 本次升级要点 {#本次升级要点}
 
 本文档已完成权威国际化来源对齐升级，统一版本基准为 **Rust 1.96.0+ / Edition 2024**，同时保留 1.93/1.94 历史分析章节。
 
-#### 新增 Rust 1.96.0 特性
+#### 新增 Rust 1.96.0 特性 {#新增-rust-1960-特性}
 
 | 特性 | 来源 | 说明 |
 | :--- | :--- | :--- |
@@ -455,7 +455,7 @@
 | Cargo `target.'cfg(..)'.rustdocflags` | [cargo#16846](https://github.com/rust-lang/cargo/pull/16846) | 按 cfg 设置 rustdocflags |
 | dependency 同时指定 git 与 alternate registry | [cargo#16810](https://github.com/rust-lang/cargo/pull/16810) | 本地 git，发布 registry |
 
-#### 新增 Rust 1.95.0 特性
+#### 新增 Rust 1.95.0 特性 {#新增-rust-1950-特性}
 
 | 特性 | 来源 | 说明 |
 | :--- | :--- | :--- |
@@ -470,7 +470,7 @@
 | `bool: TryFrom<{integer}>` | [bool: TryFrom<{integer}>](https://doc.rust-lang.org/stable/std/primitive.bool.html#impl-TryFrom%3Cu128%3E-for-bool) | 整数到布尔安全转换 |
 | `AtomicPtr::update` / `try_update` | [AtomicPtr::update](https://doc.rust-lang.org/stable/std/sync/atomic/struct.AtomicPtr.html#method.update) | 原子指针更新 |
 
-#### 权威来源对齐
+#### 权威来源对齐 {#权威来源对齐-1}
 
 - Rust release notes（releases.rs）
 - Rust Blog 对应版本发布公告
@@ -480,7 +480,7 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -489,7 +489,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

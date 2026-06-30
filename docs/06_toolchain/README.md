@@ -13,37 +13,37 @@
 
 ---
 
-## 快速开始
+## 快速开始 {#快速开始}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# 创建新项目
+# 创建新项目 {#创建新项目}
 
 > **Bloom 层级**: L3 (应用)
 cargo new my_project
 cd my_project
 
-# 构建项目
+# 构建项目 {#构建项目}
 cargo build
 cargo build --release
 
-# 运行测试
+# 运行测试 {#运行测试}
 cargo test
 
-# 检查代码
+# 检查代码 {#检查代码}
 cargo check
 cargo clippy
 
-# 格式化代码
+# 格式化代码 {#格式化代码}
 cargo fmt
 
-# 生成文档
+# 生成文档 {#生成文档}
 cargo doc --open
 ```
 
 ```toml
-# Cargo.toml 配置示例
+# Cargo.toml 配置示例 {#cargotoml-配置示例}
 [package]
 name = "my-project"
 version = "0.1.0"
@@ -61,7 +61,7 @@ lto = true
 
 ---
 
-## 🔬 形式化理论
+## 🔬 形式化理论 {#形式化理论}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -76,7 +76,7 @@ lto = true
 
 ---
 
-## 🎯 文档说明
+## 🎯 文档说明 {#文档说明}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -86,17 +86,17 @@ lto = true
 
 ---
 
-## 📋 文档目录
+## 📋 文档目录 {#文档目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 核心工具链文档
+### 核心工具链文档 {#核心工具链文档}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-#### 0. Rust 2024 Edition 学习影响 🆕
+#### 0. Rust 2024 Edition 学习影响 🆕 {#0-rust-2024-edition-学习影响}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -110,7 +110,7 @@ lto = true
 
 **适用场景**: 理解 2024 Edition 对学习的影响；从 2021 迁移
 
-#### 1. [编译器特性与优化](01_compiler_features.md)
+#### 1. [编译器特性与优化](01_compiler_features.md) {#1-编译器特性与优化01_compiler_featuresmd}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -133,7 +133,7 @@ lto = true
 - 生产环境配置
 - 调试和 profiling
 
-#### 2. Cargo 工作空间与依赖管理
+#### 2. Cargo 工作空间与依赖管理 {#2-cargo-工作空间与依赖管理}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -155,7 +155,7 @@ lto = true
 - 大型项目架构
 - CI/CD 集成
 
-#### 3. [Rustdoc 高级功能](03_rustdoc_advanced.md)
+#### 3. [Rustdoc 高级功能](03_rustdoc_advanced.md) {#3-rustdoc-高级功能03_rustdoc_advancedmd}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -177,7 +177,7 @@ lto = true
 - 文档质量提升
 - 文档部署
 
-#### 4. [Rust 1.96.0 稳定特性综述](06_22_rust_1_96_features.md) 🆕
+#### 4. [Rust 1.96.0 稳定特性综述](06_22_rust_1_96_features.md) 🆕 {#4-rust-1960-稳定特性综述06_22_rust_1_96_featuresmd}
 
 > **来源: [Rust Blog](https://blog.rust-lang.org/)**
 >
@@ -199,7 +199,7 @@ lto = true
 - 升级项目到 1.96+
 - 学习 range 类型演进与测试断言改进
 
-#### 5. Rust 1.91 vs 1.90 全面对比分析（对齐官方发布说明）
+#### 5. Rust 1.91 vs 1.90 全面对比分析（对齐官方发布说明） {#5-rust-191-vs-190-全面对比分析对齐官方发布说明}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -211,7 +211,7 @@ lto = true
 - ✅ **新的 lint（1.91）**：`dangling_pointers_from_locals`（warn-by-default）
 - ✅ **验证建议**：工作区 `check/test/doc-test` 的最小验证命令集
 
-#### 6. [Rust 1.93 vs 1.92 全面对比分析](06_05_rust_1_93_vs_1_92_comparison.md) 🆕
+#### 6. [Rust 1.93 vs 1.92 全面对比分析](06_05_rust_1_93_vs_1_92_comparison.md) 🆕 {#6-rust-193-vs-192-全面对比分析06_05_rust_1_93_vs_1_92_comparisonmd}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -235,15 +235,15 @@ lto = true
 
 ---
 
-## 🔍 快速导航
+## 🔍 快速导航 {#快速导航}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 按主题分类
+### 按主题分类 {#按主题分类}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-#### 性能优化
+#### 性能优化 {#性能优化}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -252,7 +252,7 @@ lto = true
 - [PGO](01_compiler_features.md#5-profile-guided-optimization-pgo)
 - [代码生成优化](01_compiler_features.md#6-代码生成选项)
 
-#### 构建系统
+#### 构建系统 {#构建系统}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -261,7 +261,7 @@ lto = true
 - Feature 管理
 - 构建优化
 
-#### 文档生成
+#### 文档生成 {#文档生成}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -272,9 +272,9 @@ lto = true
 
 ---
 
-## 🆕 Rust 版本新特性
+## 🆕 Rust 版本新特性 {#rust-版本新特性}
 
-### Rust 1.93 主要改进 🆕
+### Rust 1.93 主要改进 🆕 {#rust-193-主要改进}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -290,7 +290,7 @@ lto = true
 
 **文档**: [06_05_rust_1_93_vs_1_92_comparison.md](06_05_rust_1_93_vs_1_92_comparison.md)
 
-#### 6. Rust 1.93 兼容性注意事项 🆕
+#### 6. Rust 1.93 兼容性注意事项 🆕 {#6-rust-193-兼容性注意事项}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -306,7 +306,7 @@ lto = true
 - 升级到 Rust 1.93 前的兼容性检查
 - 迁移问题排查
 
-#### 7. [Rust 1.93 兼容性深度解析](06_09_rust_1_93_compatibility_deep_dive.md) 🆕
+#### 7. [Rust 1.93 兼容性深度解析](06_09_rust_1_93_compatibility_deep_dive.md) 🆕 {#7-rust-193-兼容性深度解析06_09_rust_1_93_compatibility_deep_divemd}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -328,7 +328,7 @@ lto = true
 
 ---
 
-### Rust 1.95+ 主要改进 🆕
+### Rust 1.95+ 主要改进 🆕 {#rust-195-主要改进}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -350,7 +350,7 @@ lto = true
 
 ---
 
-### Rust 1.91 主要改进
+### Rust 1.91 主要改进 {#rust-191-主要改进}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -367,11 +367,11 @@ lto = true
 
 ---
 
-### Rust 1.54+ 新特性
+### Rust 1.54+ 新特性 {#rust-154-新特性}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
-#### 1. 增量编译默认启用
+#### 1. 增量编译默认启用 {#1-增量编译默认启用}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -387,7 +387,7 @@ lto = true
 
 ---
 
-#### 2. Rustdoc JSON 输出改进
+#### 2. Rustdoc JSON 输出改进 {#2-rustdoc-json-输出改进}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -403,14 +403,14 @@ lto = true
 
 ---
 
-## 🚀 快速开始
+## 🚀 快速开始 {#快速开始-1}
 
-### 生产环境优化配置
+### 生产环境优化配置 {#生产环境优化配置}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```toml
-# Cargo.toml
+# Cargo.toml {#cargotoml}
 [profile.release]
 opt-level = 3
 lto = "fat"
@@ -423,12 +423,12 @@ strip = true
 
 ---
 
-### 创建 Workspace 项目
+### 创建 Workspace 项目 {#创建-workspace-项目}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```toml
-# 根 Cargo.toml
+# 根 Cargo.toml {#根-cargotoml}
 [workspace]
 members = ["crate-a", "crate-b"]
 resolver = "2"
@@ -442,7 +442,7 @@ tokio = { version = "1.0", features = ["full"] }
 
 ---
 
-### 编写高质量文档
+### 编写高质量文档 {#编写高质量文档}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -472,7 +472,7 @@ pub fn function(a: i32, b: i32) -> i32 {
 
 ---
 
-## 📊 工具链对比
+## 📊 工具链对比 {#工具链对比}
 
 本节只列出**官方 release post 明确强调**的差异（避免把“推测/通用经验”写成版本事实）。其余细节请以官方详细 release notes 为准。
 
@@ -487,9 +487,9 @@ pub fn function(a: i32, b: i32) -> i32 {
 
 ---
 
-## 🔗 相关资源
+## 🔗 相关资源 {#相关资源}
 
-### 内部文档
+### 内部文档 {#内部文档}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -512,7 +512,7 @@ pub fn function(a: i32, b: i32) -> i32 {
 - [Cranelift 后端指南](06_cranelift_backend_guide.md) ⭐ (Rust 1.96+)
 - [TOML v1.1 Cargo 指南](06_toml_v11_cargo_guide.md) ⭐ (Cargo 1.96+)
 
-### 官方资源
+### 官方资源 {#官方资源}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -520,16 +520,16 @@ pub fn function(a: i32, b: i32) -> i32 {
 - [Cargo Book](https://doc.rust-lang.org/cargo/)
 - [Rustdoc Book](https://doc.rust-lang.org/rustdoc/)
 
-### 相关模块
+### 相关模块 {#相关模块}
 
 - [C08 Algorithms - 算法优化](../../crates/c08_algorithms/docs/README.md)
 - **注意**: 当前项目包含 c01-c12 共 12 个学习模块
 
 ---
 
-## 💡 最佳实践
+## 💡 最佳实践 {#最佳实践}
 
-### 开发环境
+### 开发环境 {#开发环境}
 
 ```toml
 [profile.dev]
@@ -538,7 +538,7 @@ incremental = true     # 增量编译
 debug = 2              # 完整调试信息
 ```
 
-### 生产环境
+### 生产环境 {#生产环境}
 
 ```toml
 [profile.release]
@@ -548,11 +548,11 @@ codegen-units = 1      # 单一代码生成单元
 strip = true          # 移除符号表
 ```
 
-### Workspace 管理
+### Workspace 管理 {#workspace-管理}
 
 ```toml
 [workspace.dependencies]
-# 统一管理依赖版本
+# 统一管理依赖版本 {#统一管理依赖版本}
 serde = { version = "1.0", features = ["derive"] }
 
 [workspace]
@@ -561,9 +561,9 @@ resolver = "2"  # 使用 Resolver 2
 
 ---
 
-## ⚠️ 常见陷阱
+## ⚠️ 常见陷阱 {#常见陷阱}
 
-### 1. 编译时间过长
+### 1. 编译时间过长 {#1-编译时间过长}
 
 **问题**: Fat LTO 导致编译时间过长
 
@@ -577,7 +577,7 @@ resolver = "2"  # 使用 Resolver 2
 
 ---
 
-### 2. 依赖版本冲突
+### 2. 依赖版本冲突 {#2-依赖版本冲突}
 
 **问题**: 不同 crate 使用不同版本的依赖
 
@@ -592,7 +592,7 @@ tokio = { version = "1.0", features = ["full"] }
 
 ---
 
-### 3. 文档链接失效
+### 3. 文档链接失效 {#3-文档链接失效}
 
 **问题**: Intra-doc links 断开
 
@@ -602,9 +602,9 @@ tokio = { version = "1.0", features = ["full"] }
 
 ---
 
-## 📈 性能基准
+## 📈 性能基准 {#性能基准}
 
-### 编译时间对比
+### 编译时间对比 {#编译时间对比}
 
 | 配置           | 清洁构建 | 增量构建 | 说明     |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -616,23 +616,23 @@ tokio = { version = "1.0", features = ["full"] }
 
 ---
 
-## 🛠️ 推荐工具
+## 🛠️ 推荐工具 {#推荐工具}
 
-### 编译相关
+### 编译相关 {#编译相关}
 
 - **sccache**: 编译缓存
 - **cargo-bloat**: 分析二进制大小
 - **cargo-llvm-lines**: 分析 LLVM IR
 - **cargo-asm**: 查看汇编代码
 
-### 依赖管理
+### 依赖管理 {#依赖管理}
 
 - **cargo-edit**: 管理依赖
 - **cargo-audit**: 安全审计
 - **cargo-deny**: 依赖策略检查
 - **cargo-tree**: 依赖树可视化
 
-### 文档生成工具
+### 文档生成工具 {#文档生成工具}
 
 - **mdBook**: 书籍格式文档
 - **cargo-readme**: 生成 README
@@ -640,9 +640,9 @@ tokio = { version = "1.0", features = ["full"] }
 
 ---
 
-## 🎯 学习路径
+## 🎯 学习路径 {#学习路径}
 
-### 初学者
+### 初学者 {#初学者}
 
 1. 了解基础编译流程
 2. 学习 Cargo 基础命令
@@ -650,7 +650,7 @@ tokio = { version = "1.0", features = ["full"] }
 
 **推荐**: 先阅读每个文档的"概览"和"基础用法"部分
 
-### 中级开发者
+### 中级开发者 {#中级开发者}
 
 1. 配置编译优化
 2. 管理 Workspace 项目
@@ -658,7 +658,7 @@ tokio = { version = "1.0", features = ["full"] }
 
 **推荐**: 深入阅读"优化"和"高级特性"章节
 
-### 高级开发者
+### 高级开发者 {#高级开发者}
 
 1. 实施 PGO
 2. 自定义构建流程
@@ -675,11 +675,11 @@ tokio = { version = "1.0", features = ["full"] }
 
 ---
 
-## 🆕 Rust 1.95+ 特性整合
+## 🆕 Rust 1.95+ 特性整合 {#rust-195-特性整合}
 
 > **适用版本**: Rust 1.96.0+
 
-### 核心特性速查
+### 核心特性速查 {#核心特性速查}
 
 ```rust,ignore
 // array_windows - 零分配滑动窗口
@@ -730,7 +730,7 @@ let gamma = f64::consts::EULER_GAMMA;
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

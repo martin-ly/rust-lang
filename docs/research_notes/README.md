@@ -1,4 +1,4 @@
-# 🔬 Rust 研究笔记
+# 🔬 Rust 研究笔记 {#rust-研究笔记}
 >
 > **概念族**: 元/导航/索引
 
@@ -14,7 +14,7 @@
 
 ---
 
-## ⚠️ 当前状态说明
+## ⚠️ 当前状态说明 {#当前状态说明}
 
 > **2026-06-29 更新**
 
@@ -27,7 +27,7 @@
 
 ---
 
-## 🚀 从这里开始
+## 🚀 从这里开始 {#从这里开始}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -51,7 +51,7 @@
 
 ---
 
-## 📊 目录结构
+## 📊 目录结构 {#目录结构}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -104,14 +104,14 @@ research_notes/                  # 主索引、组织说明与正在升级的核
     ├── 10_concurrency_performance.md
     └── 10_macro_expansion_performance.md
 
-# 根目录还包含 130+ 篇核心文档与扩展索引（已从 archive/research_notes_2026_06_25/ 迁回，详见 INDEX.md）
-# 例如：10_00_organization_and_navigation、10_proof_index、10_authoritative_alignment_guide、
-#       10_international_formal_verification_index、10_authoritative_alignment_gap_matrix 等
+# 根目录还包含 130+ 篇核心文档与扩展索引（已从 archive/research_notes_2026_06_25/ 迁回，详见 INDEX.md） {#根目录还包含-130-篇核心文档与扩展索引已从-archiveresearch_notes_2026_06_25-迁回详见-indexmd}
+# 例如：10_00_organization_and_navigation、10_proof_index、10_authoritative_alignment_guide、 {#例如10_00_organization_and_navigation10_proof_index10_authoritative_alignment_guide}
+# 10_international_formal_verification_index、10_authoritative_alignment_gap_matrix 等 {#10_international_formal_verification_index10_authoritative_alignment_gap_matrix-等}
 ```
 
 ---
 
-## 🎯 研究目标
+## 🎯 研究目标 {#研究目标}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -125,11 +125,11 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 ---
 
-## 📚 研究方向
+## 📚 研究方向 {#研究方向}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 形式化方法 (formal_methods/)
+### 1. 形式化方法 (formal_methods/) {#1-形式化方法-formal_methods}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -202,7 +202,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 ---
 
-### 2. 类型理论 (type_theory/)
+### 2. 类型理论 (type_theory/) {#2-类型理论-type_theory}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -230,7 +230,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 ---
 
-### 3. 实验研究 (experiments/)
+### 3. 实验研究 (experiments/) {#3-实验研究-experiments}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -258,11 +258,11 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 ---
 
-## 🔗 相关资源
+## 🔗 相关资源 {#相关资源}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 核心文档
+### 核心文档 {#核心文档}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -272,7 +272,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 - [研究议程](../rust-formal-engineering-system/09_research_agenda/04_research_methods/README.md) - 形式化工程系统研究方法
 - [个人索引](../../archive/docs/temp/README.md) - 归档目录（历史文档）
 
-### 代码实现
+### 代码实现 {#代码实现}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -282,7 +282,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 - [类型系统实现](../../crates/c02_type_system/src/README.md)
 - [异步系统实现](../../crates/c06_async/docs/README.md)
 
-### 学习资源
+### 学习资源 {#学习资源}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -296,7 +296,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 ## 📝 研究笔记规范 {#研究笔记规范}
 
-### 文档格式
+### 文档格式 {#文档格式}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -331,15 +331,15 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 ---
 
-## 🚀 快速开始
+## 🚀 快速开始 {#快速开始}
 
-### 新用户入门
+### 新用户入门 {#新用户入门}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 **第一次使用？** 请先阅读 [快速入门指南](10_getting_started.md)！
 
-### 开始新的研究主题
+### 开始新的研究主题 {#开始新的研究主题}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -351,7 +351,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 6. 更新对应目录的 README.md
 7. 在本索引文件中添加链接
 
-### 贡献研究笔记
+### 贡献研究笔记 {#贡献研究笔记}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -374,9 +374,9 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 ---
 
-## 📊 研究进展
+## 📊 研究进展 {#研究进展}
 
-### 已完成 ✅ (17个研究笔记，100%)
+### 已完成 ✅ (17个研究笔记，100%) {#已完成-17个研究笔记100}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -411,9 +411,9 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 ---
 
-## 🆕 Rust 1.93.1 研究更新 🆕
+## 🆕 Rust 1.93.1 研究更新 🆕 {#rust-1931-研究更新}
 
-### 最新研究内容
+### 最新研究内容 {#最新研究内容}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -446,9 +446,9 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 ---
 
-## Rust 1.91.1 / 1.92.0 研究更新（历史）
+## Rust 1.91.1 / 1.92.0 研究更新（历史） {#rust-1911-1920-研究更新历史}
 
-### 历史研究内容
+### 历史研究内容 {#历史研究内容}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -480,9 +480,9 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 ---
 
-## 📚 综合研究主题
+## 📚 综合研究主题 {#综合研究主题}
 
-### 实际应用案例研究
+### 实际应用案例研究 {#实际应用案例研究}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -499,7 +499,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 ---
 
-### 研究方法论
+### 研究方法论 {#研究方法论}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -517,7 +517,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 ---
 
-## 🗺️ 快速导航
+## 🗺️ 快速导航 {#快速导航}
 
 - [快速查找](10_quick_find.md) - 研究笔记快速查找工具（按关键词、领域、目标、优先级）
 - [快速参考](10_quick_reference.md) - 按主题快速查找研究笔记
@@ -537,23 +537,23 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 
 ---
 
-## 🔍 搜索研究笔记
+## 🔍 搜索研究笔记 {#搜索研究笔记}
 
 使用以下方式查找研究内容：
 
 ```bash
-# 搜索关键词
+# 搜索关键词 {#搜索关键词}
 grep -r "关键词" docs/research_notes/
 
-# 查找特定主题
+# 查找特定主题 {#查找特定主题}
 find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 ```
 
 ---
 
-## 📞 联系方式
+## 📞 联系方式 {#联系方式}
 
-### 获取帮助
+### 获取帮助 {#获取帮助}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -574,7 +574,7 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 
 ---
 
-## 🆕 Rust 1.94 更新
+## 🆕 Rust 1.94 更新 {#rust-194-更新}
 
 > **最新版本**: Rust 1.96.0 (2026-03-05)
 
@@ -588,18 +588,18 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -610,7 +610,7 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -620,7 +620,7 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 - ✅ 兼容Edition 2024
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -646,7 +646,7 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

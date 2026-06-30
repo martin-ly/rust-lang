@@ -1,4 +1,4 @@
-# 边界体系统一分析
+# 边界体系统一分析 {#边界体系统一分析}
 
 > **概念族**: 软件设计 / 边界系统
 
@@ -26,7 +26,7 @@
 
 ---
 
-## 宗旨
+## 宗旨 {#宗旨}
 
 >
 
@@ -46,7 +46,7 @@
 
 ---
 
-## 形式化定义
+## 形式化定义 {#形式化定义}
 
 >
 
@@ -72,7 +72,7 @@
 
 ---
 
-## 文档索引
+## 文档索引 {#文档索引}
 
 >
 
@@ -90,7 +90,7 @@
 
 ---
 
-## 三维边界快速参考
+## 三维边界快速参考 {#三维边界快速参考}
 
 >
 
@@ -106,7 +106,7 @@
 
 | 表达 | 等价 / 近似 / 不可表达 | 相对 GoF/OOP 语义 |
 
-## 使用流程
+## 使用流程 {#使用流程}
 
 >
 
@@ -122,7 +122,7 @@
 
 ---
 
-## 快速决策
+## 快速决策 {#快速决策}
 
 >
 
@@ -142,7 +142,7 @@
 
 ---
 
-## 模式选取决策依据（实质指南）
+## 模式选取决策依据（实质指南） {#模式选取决策依据实质指南}
 
 >
 
@@ -166,7 +166,7 @@
 
 ---
 
-## 模式选取与边界判定完整示例（实质内容）
+## 模式选取与边界判定完整示例（实质内容） {#模式选取与边界判定完整示例实质内容}
 
 >
 
@@ -186,13 +186,13 @@
 
 ---
 
-## 场景化 Safe 决策示例（实质内容）
+## 场景化 Safe 决策示例（实质内容） {#场景化-safe-决策示例实质内容}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 示例 1：需全局唯一配置
+### 示例 1：需全局唯一配置 {#示例-1需全局唯一配置}
 
 >
 
@@ -204,7 +204,7 @@
 
 **结论**：`OnceLock<Config>`，零 unsafe。
 
-### 示例 2：需跨线程共享缓存
+### 示例 2：需跨线程共享缓存 {#示例-2需跨线程共享缓存}
 
 >
 
@@ -216,7 +216,7 @@
 
 **结论**：`Arc<RwLock<HashMap<K, V>>>` 或 `dashmap`，零 unsafe。
 
-### 示例 3：需 FFI 调用 C 库
+### 示例 3：需 FFI 调用 C 库 {#示例-3需-ffi-调用-c-库}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -228,25 +228,25 @@
 
 ---
 
-## 与顶层衔接
+## 与顶层衔接 {#与顶层衔接}
 
 本边界体系与 [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../10_safe_unsafe_comprehensive_analysis.md) 衔接，扩展至设计模式与执行模型维度。
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -262,7 +262,7 @@
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -272,7 +272,7 @@
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -304,7 +304,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -322,13 +322,13 @@
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
 - [Aeneas](https://aeneas-verification.github.io/)
 
-## 社区权威参考
+## 社区权威参考 {#社区权威参考}
 
 - [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 - [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)

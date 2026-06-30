@@ -1,4 +1,4 @@
-# 异步编程使用指南
+# 异步编程使用指南 {#异步编程使用指南}
 
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
@@ -12,17 +12,17 @@
 > **受众**: [专家] / [研究者]
 > **内容分级**: [研究者级]
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [异步编程使用指南](#异步编程使用指南)
-  - [📑 目录](#-目录)
-  - [📋 概述](#-概述)
-  - [🚀 快速开始](#-快速开始)
+  - [📑 目录](#目录)
+  - [📋 概述](#概述)
+  - [🚀 快速开始](#快速开始)
     - [基本异步函数](#基本异步函数)
     - [并发执行](#并发执行)
-  - [📊 核心功能](#-核心功能)
+  - [📊 核心功能](#核心功能)
     - [1. Future Trait](#1-future-trait)
     - [2. 异步运行时](#2-异步运行时)
       - [Tokio 运行时](#tokio-运行时)
@@ -36,42 +36,42 @@
       - [基础语法](#基础语法)
       - [与旧范式对比](#与旧范式对比)
       - [在异步编程中的应用](#在异步编程中的应用)
-  - [⚡ 性能优化](#-性能优化)
+  - [⚡ 性能优化](#性能优化)
     - [1. 使用 select! 宏](#1-使用-select-宏)
     - [2. 使用 Stream](#2-使用-stream)
     - [3. 背压处理](#3-背压处理)
-  - [🔧 错误处理](#-错误处理)
+  - [🔧 错误处理](#错误处理)
     - [异步错误传播](#异步错误传播)
     - [Rust 1.95+ ControlFlow API 高级错误控制](#rust-195-controlflow-api-高级错误控制)
       - [为什么使用 ControlFlow？](#为什么使用-controlflow)
       - [异步流控制：批量任务处理](#异步流控制批量任务处理)
       - [递归遍历与短路求值](#递归遍历与短路求值)
-      - [ControlFlow 与 Try  trait 集成](#controlflow-与-try--trait-集成)
+      - [ControlFlow 与 Try  trait 集成](#controlflow-与-try-trait-集成)
       - [组合模式：ControlFlow 管道](#组合模式controlflow-管道)
-  - [🏗️ 异步编程模式（5+ 完整示例）](#️-异步编程模式5-完整示例)
+  - [🏗️ 异步编程模式（5+ 完整示例）](#异步编程模式5-完整示例)
     - [模式 1: 取消与超时处理](#模式-1-取消与超时处理)
     - [模式 2: 限流与速率控制](#模式-2-限流与速率控制)
     - [模式 3: 重试与退避策略](#模式-3-重试与退避策略)
     - [模式 4: 批处理与缓冲](#模式-4-批处理与缓冲)
     - [模式 5: 断路器模式](#模式-5-断路器模式)
-  - [🌍 真实应用场景](#-真实应用场景)
+  - [🌍 真实应用场景](#真实应用场景)
     - [场景 1: Web 服务器实现](#场景-1-web-服务器实现)
     - [场景 2: 数据处理管道](#场景-2-数据处理管道)
     - [场景 3: 实时消息系统](#场景-3-实时消息系统)
-  - [🐛 常见问题与解决方案](#-常见问题与解决方案)
+  - [🐛 常见问题与解决方案](#常见问题与解决方案)
     - [问题 1: 阻塞运行时](#问题-1-阻塞运行时)
     - [问题 2: Future 必须 Send](#问题-2-future-必须-send)
     - [问题 3: 持有锁跨越 await 点](#问题-3-持有锁跨越-await-点)
     - [问题 4: 忘记处理 Cancel Safety](#问题-4-忘记处理-cancel-safety)
     - [问题 5: 递归 async 函数](#问题-5-递归-async-函数)
-  - [📚 相关文档](#-相关文档)
-  - [🆕 Rust 1.95+ 特性](#-rust-195-特性)
+  - [📚 相关文档](#相关文档)
+  - [🆕 Rust 1.95+ 特性](#rust-195-特性)
     - [ControlFlow 在异步编程中的应用](#controlflow-在异步编程中的应用)
     - [Peekable 迭代器增强](#peekable-迭代器增强)
     - [`cfg_select!` 在异步配置中的应用](#cfg_select-在异步配置中的应用)
       - [跨平台异步运行时配置](#跨平台异步运行时配置)
       - [特性门控的异步模块加载](#特性门控的异步模块加载)
-  - [🔗 形式化引用](#-形式化引用)
+  - [🔗 形式化引用](#形式化引用)
   - [思维导图：异步编程全景](#思维导图异步编程全景)
   - [决策树：运行时选择](#决策树运行时选择)
   - [权威来源索引](#权威来源索引)
@@ -86,7 +86,7 @@
 
 ---
 
-## 📋 概述
+## 📋 概述 {#概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -99,11 +99,11 @@
 
 ---
 
-## 🚀 快速开始
+## 🚀 快速开始 {#快速开始}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 基本异步函数
+### 基本异步函数 {#基本异步函数}
 
 > **来源: [Rust Reference - async/await](https://doc.rust-lang.org/reference/items/functions.html#async-functions)**
 >
@@ -124,7 +124,7 @@ async fn main() {
 }
 ```
 
-### 并发执行
+### 并发执行 {#并发执行}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -158,11 +158,11 @@ async fn main() {
 
 ---
 
-## 📊 核心功能
+## 📊 核心功能 {#核心功能}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. Future Trait
+### 1. Future Trait {#1-future-trait}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -193,13 +193,13 @@ async fn main() {
 }
 ```
 
-### 2. 异步运行时
+### 2. 异步运行时 {#2-异步运行时}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-#### Tokio 运行时
+#### Tokio 运行时 {#tokio-运行时}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -215,7 +215,7 @@ rt.block_on(async {
 });
 ```
 
-#### 自定义运行时配置
+#### 自定义运行时配置 {#自定义运行时配置}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -232,13 +232,13 @@ let rt = Builder::new_multi_thread()
     .unwrap();
 ```
 
-### 3. 异步 I/O
+### 3. 异步 I/O {#3-异步-io}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-#### 文件 I/O
+#### 文件 I/O {#文件-io}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -259,7 +259,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-#### 网络 I/O
+#### 网络 I/O {#网络-io}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -290,7 +290,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-### 4. Reactor 模式
+### 4. Reactor 模式 {#4-reactor-模式}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -308,7 +308,7 @@ reactor.register_handler(EventType::Read, |event| {
 reactor.run().await;
 ```
 
-### 5. Actor 模式
+### 5. Actor 模式 {#5-actor-模式}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -338,7 +338,7 @@ async fn main() {
 }
 ```
 
-### 6. Async Closures
+### 6. Async Closures {#6-async-closures}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -348,7 +348,7 @@ async fn main() {
 Rust 1.85 稳定了 async closures，引入了 `AsyncFn`、`AsyncFnMut`、`AsyncFnOnce` trait family，
 解决了旧范式 `|| async move { ... }` 的三大痛点：强制 move、Send bound 表达困难、类型系统不统一。
 
-#### 基础语法
+#### 基础语法 {#基础语法}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -371,7 +371,7 @@ let moved = async move |x: i32| {
 };
 ```
 
-#### 与旧范式对比
+#### 与旧范式对比 {#与旧范式对比}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -383,7 +383,7 @@ let moved = async move |x: i32| {
 | **Trait 实现** | `FnOnce` / `Fn` / `FnMut` | `AsyncFnOnce` / `AsyncFn` / `AsyncFnMut` |
 | **Send bound** | 复杂（需显式标注） | 自动推断（通过关联类型） |
 
-#### 在异步编程中的应用
+#### 在异步编程中的应用 {#在异步编程中的应用}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -413,11 +413,11 @@ assert_eq!(evens, vec![2, 4]);
 
 ---
 
-## ⚡ 性能优化
+## ⚡ 性能优化 {#性能优化}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 使用 select! 宏
+### 1. 使用 select! 宏 {#1-使用-select-宏}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -440,7 +440,7 @@ async fn main() {
 }
 ```
 
-### 2. 使用 Stream
+### 2. 使用 Stream {#2-使用-stream}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -457,7 +457,7 @@ async fn main() {
 }
 ```
 
-### 3. 背压处理
+### 3. 背压处理 {#3-背压处理}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -480,11 +480,11 @@ while let Some(value) = rx.recv().await {
 
 ---
 
-## 🔧 错误处理
+## 🔧 错误处理 {#错误处理}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 异步错误传播
+### 异步错误传播 {#异步错误传播}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -506,7 +506,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
 }
 ```
 
-### Rust 1.95+ ControlFlow API 高级错误控制
+### Rust 1.95+ ControlFlow API 高级错误控制 {#rust-195-controlflow-api-高级错误控制}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -519,7 +519,7 @@ pub enum ControlFlow<B, C = ()> {
 }
 ```
 
-#### 为什么使用 ControlFlow？
+#### 为什么使用 ControlFlow？ {#为什么使用-controlflow}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -531,7 +531,7 @@ pub enum ControlFlow<B, C = ()> {
 | 错误恢复决策 | ⚠️ 只能返回 | ✅ `Break(RecoverStrategy)` |
 | 部分成功累积 | ❌ 不支持 | ✅ `Continue(partial)` |
 
-#### 异步流控制：批量任务处理
+#### 异步流控制：批量任务处理 {#异步流控制批量任务处理}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -660,7 +660,7 @@ async fn schedule_retry(items: Vec<(String, String)>) {
 }
 ```
 
-#### 递归遍历与短路求值
+#### 递归遍历与短路求值 {#递归遍历与短路求值}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -723,7 +723,7 @@ async fn find_node_by_value() {
 }
 ```
 
-#### ControlFlow 与 Try  trait 集成
+#### ControlFlow 与 Try  trait 集成 {#controlflow-与-try-trait-集成}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -769,7 +769,7 @@ async fn fold_all_errors<T, E>(
 }
 ```
 
-#### 组合模式：ControlFlow 管道
+#### 组合模式：ControlFlow 管道 {#组合模式controlflow-管道}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -855,11 +855,11 @@ impl Response {
 
 ---
 
-## 🏗️ 异步编程模式（5+ 完整示例）
+## 🏗️ 异步编程模式（5+ 完整示例） {#异步编程模式5-完整示例}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 模式 1: 取消与超时处理
+### 模式 1: 取消与超时处理 {#模式-1-取消与超时处理}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -882,7 +882,7 @@ async fn with_timeout() -> Result<String, &'static str> {
 }
 ```
 
-### 模式 2: 限流与速率控制
+### 模式 2: 限流与速率控制 {#模式-2-限流与速率控制}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -940,7 +940,7 @@ impl TokenBucket {
 }
 ```
 
-### 模式 3: 重试与退避策略
+### 模式 3: 重试与退避策略 {#模式-3-重试与退避策略}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -989,7 +989,7 @@ where
 }
 ```
 
-### 模式 4: 批处理与缓冲
+### 模式 4: 批处理与缓冲 {#模式-4-批处理与缓冲}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -1046,7 +1046,7 @@ impl<T: Send + 'static> BatchProcessor<T> {
 }
 ```
 
-### 模式 5: 断路器模式
+### 模式 5: 断路器模式 {#模式-5-断路器模式}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -1133,11 +1133,11 @@ impl CircuitBreaker {
 
 ---
 
-## 🌍 真实应用场景
+## 🌍 真实应用场景 {#真实应用场景}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 场景 1: Web 服务器实现
+### 场景 1: Web 服务器实现 {#场景-1-web-服务器实现}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -1245,7 +1245,7 @@ struct CreateUserRequest {
 }
 ```
 
-### 场景 2: 数据处理管道
+### 场景 2: 数据处理管道 {#场景-2-数据处理管道}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -1376,7 +1376,7 @@ async fn store_batch(batch: &[ProcessedData]) -> Result<(), Box<dyn std::error::
 }
 ```
 
-### 场景 3: 实时消息系统
+### 场景 3: 实时消息系统 {#场景-3-实时消息系统}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -1514,11 +1514,11 @@ use tokio::sync::RwLock;
 
 ---
 
-## 🐛 常见问题与解决方案
+## 🐛 常见问题与解决方案 {#常见问题与解决方案}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 问题 1: 阻塞运行时
+### 问题 1: 阻塞运行时 {#问题-1-阻塞运行时}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -1546,7 +1546,7 @@ async fn blocking_operation() -> String {
 }
 ```
 
-### 问题 2: Future 必须 Send
+### 问题 2: Future 必须 Send {#问题-2-future-必须-send}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -1572,7 +1572,7 @@ async fn good_example() {
 }
 ```
 
-### 问题 3: 持有锁跨越 await 点
+### 问题 3: 持有锁跨越 await 点 {#问题-3-持有锁跨越-await-点}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -1607,7 +1607,7 @@ async fn better_example(mutex: &std::sync::Mutex<String>) {
 }
 ```
 
-### 问题 4: 忘记处理 Cancel Safety
+### 问题 4: 忘记处理 Cancel Safety {#问题-4-忘记处理-cancel-safety}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -1639,7 +1639,7 @@ async fn cancel_safe() {
 }
 ```
 
-### 问题 5: 递归 async 函数
+### 问题 5: 递归 async 函数 {#问题-5-递归-async-函数}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -1674,7 +1674,7 @@ fn recursive_good(n: i32) -> Pin<Box<dyn Future<Output = i32> + Send>> {
 
 ---
 
-## 📚 相关文档
+## 📚 相关文档 {#相关文档}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -1686,13 +1686,13 @@ fn recursive_good(n: i32) -> Pin<Box<dyn Future<Output = i32> + Send>> {
 
 ---
 
-## 🆕 Rust 1.95+ 特性
+## 🆕 Rust 1.95+ 特性 {#rust-195-特性}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 > **适用版本**: Rust 1.96.0+
 
-### ControlFlow 在异步编程中的应用
+### ControlFlow 在异步编程中的应用 {#controlflow-在异步编程中的应用}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -1727,7 +1727,7 @@ async fn find_negative(items: &[i32]) -> Option<i32> {
 }
 ```
 
-### Peekable 迭代器增强
+### Peekable 迭代器增强 {#peekable-迭代器增强}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -1747,14 +1747,14 @@ async fn parse_number(chars: &mut Peekable<impl Iterator<Item = char>>) -> Optio
 }
 ```
 
-### `cfg_select!` 在异步配置中的应用
+### `cfg_select!` 在异步配置中的应用 {#cfg_select-在异步配置中的应用}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 Rust 1.95 稳定的 `cfg_select!` 宏可以在表达式位置进行多分支条件编译，
 在异步编程中常用于跨平台运行时配置和特性门控。
 
-#### 跨平台异步运行时配置
+#### 跨平台异步运行时配置 {#跨平台异步运行时配置}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -1788,7 +1788,7 @@ async fn create_runtime() -> tokio::runtime::Runtime {
 }
 ```
 
-#### 特性门控的异步模块加载
+#### 特性门控的异步模块加载 {#特性门控的异步模块加载}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -1814,7 +1814,7 @@ async fn fetch_data(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 
 ---
 
-## 🔗 形式化引用
+## 🔗 形式化引用 {#形式化引用}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -1854,7 +1854,7 @@ async fn fetch_data(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 
 ---
 
-## 思维导图：异步编程全景
+## 思维导图：异步编程全景 {#思维导图异步编程全景}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -1878,7 +1878,7 @@ graph TD
 
 ---
 
-## 决策树：运行时选择
+## 决策树：运行时选择 {#决策树运行时选择}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -1895,7 +1895,7 @@ graph TD
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 > **来源: [Wikipedia - Cooperative Multitasking](https://en.wikipedia.org/wiki/Cooperative_Multitasking)**

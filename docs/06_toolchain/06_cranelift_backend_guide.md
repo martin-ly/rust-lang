@@ -1,4 +1,4 @@
-# Cranelift 后端实用指南
+# Cranelift 后端实用指南 {#cranelift-后端实用指南}
 
 > **分级**: [A]
 > **Bloom 层级**: L3 (应用)
@@ -12,38 +12,38 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Cranelift 后端实用指南](#cranelift-后端实用指南)
-  - [📑 目录](#-目录)
-  - [🚀 什么是 Cranelift](#-什么是-cranelift)
-  - [⏱️ 为什么 Cranelift 重要](#️-为什么-cranelift-重要)
-  - [⚙️ 安装与配置](#️-安装与配置)
+  - [📑 目录](#目录)
+  - [🚀 什么是 Cranelift](#什么是-cranelift)
+  - [⏱️ 为什么 Cranelift 重要](#为什么-cranelift-重要)
+  - [⚙️ 安装与配置](#安装与配置)
     - [1. 安装组件](#1-安装组件)
     - [2. 项目级配置](#2-项目级配置)
     - [3. 单次编译](#3-单次编译)
     - [4. 验证生效](#4-验证生效)
-  - [⚖️ LLVM vs Cranelift 对比](#️-llvm-vs-cranelift-对比)
+  - [⚖️ LLVM vs Cranelift 对比](#llvm-vs-cranelift-对比)
     - [设计哲学](#设计哲学)
     - [支持平台](#支持平台)
     - [优化级别](#优化级别)
-  - [📊 当前状态](#-当前状态)
+  - [📊 当前状态](#当前状态)
     - [Rust 2026 Project Goal 关联](#rust-2026-project-goal-关联)
     - [已知限制 (2026-05)](#已知限制-2026-05)
-  - [✅ 何时使用 vs 🚫 何时不使用](#-何时使用-vs--何时不使用)
-    - [✅ 推荐使用 Cranelift](#-推荐使用-cranelift)
-    - [🚫 不推荐使用 Cranelift](#-不推荐使用-cranelift)
-  - [🔧 实战配置模板](#-实战配置模板)
+  - [✅ 何时使用 vs 🚫 何时不使用](#何时使用-vs-何时不使用)
+    - [✅ 推荐使用 Cranelift](#推荐使用-cranelift)
+    - [🚫 不推荐使用 Cranelift](#不推荐使用-cranelift)
+  - [🔧 实战配置模板](#实战配置模板)
     - [推荐 `.cargo/config.toml`](#推荐-cargoconfigtoml)
     - [快速切换脚本](#快速切换脚本)
     - [Makefile 集成](#makefile-集成)
-  - [📖 参考文献](#-参考文献)
+  - [📖 参考文献](#参考文献)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🚀 什么是 Cranelift
+## 🚀 什么是 Cranelift {#什么是-cranelift}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -84,7 +84,7 @@ Cranelift 作为 `rustc` 的后端，项目代号通常为 `cg_clif` (`rustc_cod
 
 ---
 
-## ⏱️ 为什么 Cranelift 重要
+## ⏱️ 为什么 Cranelift 重要 {#为什么-cranelift-重要}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -107,25 +107,25 @@ Cranelift debug: █████████████████████
 
 ---
 
-## ⚙️ 安装与配置
+## ⚙️ 安装与配置 {#安装与配置}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 安装组件
+### 1. 安装组件 {#1-安装组件}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# 确保已安装 nightly 工具链
+# 确保已安装 nightly 工具链 {#确保已安装-nightly-工具链}
 rustup toolchain install nightly
 
-# 安装 Cranelift 编译器组件
+# 安装 Cranelift 编译器组件 {#安装-cranelift-编译器组件}
 rustup component add rustc-codegen-cranelift-preview --toolchain nightly
 ```
 
-### 2. 项目级配置
+### 2. 项目级配置 {#2-项目级配置}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -148,7 +148,7 @@ codegen-backend = "cranelift"
 codegen-backend = "cranelift"
 ```
 
-### 3. 单次编译
+### 3. 单次编译 {#3-单次编译}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -157,15 +157,15 @@ codegen-backend = "cranelift"
 无需修改项目配置，通过环境变量单次使用：
 
 ```bash
-# PowerShell
+# PowerShell {#powershell}
 $env:RUSTFLAGS="-Zcodegen-backend=cranelift"
 cargo +nightly build
 
-# Bash / Linux
+# Bash / Linux {#bash-linux}
 RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build
 ```
 
-### 4. 验证生效
+### 4. 验证生效 {#4-验证生效}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -174,17 +174,17 @@ RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build
 ```bash
 cargo +nightly build -v
 
-# 预期输出包含:
-# Running `rustc ... -Zcodegen-backend=cranelift ...`
+# 预期输出包含: {#预期输出包含}
+# Running `rustc ... -Zcodegen-backend=cranelift ...` {#running-rustc--zcodegen-backendcranelift}
 ```
 
 ---
 
-## ⚖️ LLVM vs Cranelift 对比
+## ⚖️ LLVM vs Cranelift 对比 {#llvm-vs-cranelift-对比}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 设计哲学
+### 设计哲学 {#设计哲学}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -199,7 +199,7 @@ cargo +nightly build -v
 | **代码体积** | 优化后紧凑 | debug 构建略大 |
 | **调试信息** | 完善精确 | 基础支持 |
 
-### 支持平台
+### 支持平台 {#支持平台}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -215,7 +215,7 @@ cargo +nightly build -v
 | `i686` | ✅ | ❌ |
 | 嵌入式目标 | ✅ 广泛 | ❌ 有限 |
 
-### 优化级别
+### 优化级别 {#优化级别}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -245,7 +245,7 @@ cargo +nightly build -v
 
 ---
 
-## 📊 当前状态
+## 📊 当前状态 {#当前状态}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -262,7 +262,7 @@ Cranelift 作为 rustc 后端的时间线:
 2026  Rust 2026 Project Goal: 编译时间优化 (Cranelift 是核心策略之一)
 ```
 
-### Rust 2026 Project Goal 关联
+### Rust 2026 Project Goal 关联 {#rust-2026-project-goal-关联}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -272,7 +272,7 @@ Cranelift 后端是 Rust 2026 年 **"开发者体验优化"** 项目目标的关
 - 评估 Cranelift 的稳定化路径
 - 可能的未来：debug 模式默认使用 Cranelift
 
-### 已知限制 (2026-05)
+### 已知限制 (2026-05) {#已知限制-2026-05}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -288,11 +288,11 @@ Cranelift 后端是 Rust 2026 年 **"开发者体验优化"** 项目目标的关
 
 ---
 
-## ✅ 何时使用 vs 🚫 何时不使用
+## ✅ 何时使用 vs 🚫 何时不使用 {#何时使用-vs-何时不使用}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### ✅ 推荐使用 Cranelift
+### ✅ 推荐使用 Cranelift {#推荐使用-cranelift}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -304,7 +304,7 @@ Cranelift 后端是 Rust 2026 年 **"开发者体验优化"** 项目目标的关
 | **WebAssembly 目标** | Cranelift 的原始强项 |
 | **教学/学习** | 编译快，适合频繁实验 |
 
-### 🚫 不推荐使用 Cranelift
+### 🚫 不推荐使用 Cranelift {#不推荐使用-cranelift}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -330,13 +330,13 @@ flowchart TD
 
 ---
 
-## 🔧 实战配置模板
+## 🔧 实战配置模板 {#实战配置模板}
 >
 > ⚠️ **风险警告**: 以下配置基于 `rustc_codegen_cranelift` 实验性后端。由于 Rust Project Goals 2026 已将 Cranelift 生产就绪目标标记为 **因资金不足停滞**，长期维护存疑。建议仅用于短期实验，生产环境请继续使用 LLVM。
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 推荐 `.cargo/config.toml`
+### 推荐 `.cargo/config.toml` {#推荐-cargoconfigtoml}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -347,17 +347,17 @@ codegen-backend = true
 [profile.dev]
 codegen-backend = "cranelift"
 
-# Release 保持 LLVM
+# Release 保持 LLVM {#release-保持-llvm}
 [profile.release]
-# 不设置 codegen-backend，默认使用 LLVM
+# 不设置 codegen-backend，默认使用 LLVM {#不设置-codegen-backend默认使用-llvm}
 ```
 
-### 快速切换脚本
+### 快速切换脚本 {#快速切换脚本}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```powershell
-# enable-cranelift.ps1
+# enable-cranelift.ps1 {#enable-craneliftps1}
 Write-Host "使用 Cranelift 后端构建 (debug)..."
 $env:RUSTFLAGS = "-Zcodegen-backend=cranelift"
 cargo +nightly build
@@ -365,13 +365,13 @@ cargo +nightly build
 
 ```bash
 #!/bin/bash
-# enable-cranelift.sh
+# enable-cranelift.sh {#enable-craneliftsh}
 echo "使用 Cranelift 后端构建 (debug)..."
 export RUSTFLAGS="-Zcodegen-backend=cranelift"
 cargo +nightly build
 ```
 
-### Makefile 集成
+### Makefile 集成 {#makefile-集成}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -390,7 +390,7 @@ test-dev:
 
 ---
 
-## 📖 参考文献
+## 📖 参考文献 {#参考文献}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -431,7 +431,7 @@ test-dev:
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -440,7 +440,7 @@ test-dev:
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
 > **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**

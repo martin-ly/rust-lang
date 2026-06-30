@@ -1,15 +1,15 @@
-# 模块知识结构补充指南
+# 模块知识结构补充指南 {#模块知识结构补充指南}
 
 > **分级**: [A]
 > **Bloom 层级**: L4-L5 (分析/评价)
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [模块知识结构补充指南](#模块知识结构补充指南)
-  - [📑 目录](#-目录)
-  - [🎯 文档概述](#-文档概述)
+  - [📑 目录](#目录)
+  - [🎯 文档概述](#文档概述)
   - [代码示例](#代码示例)
     - [概念定义生成器](#概念定义生成器)
     - [知识结构批量生成器](#知识结构批量生成器)
@@ -17,54 +17,54 @@
   - [形式化链接](#形式化链接)
     - [研究笔记关联](#研究笔记关联)
     - [实施场景](#实施场景)
-  - [📐 知识结构补充模板](#-知识结构补充模板)
+  - [📐 知识结构补充模板](#知识结构补充模板)
     - [1. 概念定义补充](#1-概念定义补充)
-      - [模板](#模板)
+      - [模板](#模板-8)
       - [示例：异步编程](#示例异步编程)
     - [2. 属性特征补充](#2-属性特征补充)
-      - [模板](#模板-1)
+      - [模板](#模板-8)
     - [3. 关系连接补充](#3-关系连接补充)
-      - [模板](#模板-2)
+      - [模板](#模板-8)
     - [4. 解释论证补充](#4-解释论证补充)
-      - [模板](#模板-3)
+      - [模板](#模板-8)
     - [5. 形式证明补充](#5-形式证明补充)
-      - [模板](#模板-4)
-  - [🗺️ 思维表征方式补充](#️-思维表征方式补充)
+      - [模板](#模板-8)
+  - [🗺️ 思维表征方式补充](#思维表征方式补充)
     - [1. 思维导图补充](#1-思维导图补充)
-      - [模板](#模板-5)
+      - [模板](#模板-8)
     - [2. 概念矩阵补充](#2-概念矩阵补充)
-      - [模板](#模板-6)
+      - [模板](#模板-8)
     - [3. 决策图网补充](#3-决策图网补充)
-      - [模板](#模板-7)
+      - [模板](#模板-8)
     - [4. 证明图网补充](#4-证明图网补充)
       - [模板](#模板-8)
-  - [📊 模块文档知识结构](#-模块文档知识结构)
+  - [📊 模块文档知识结构](#模块文档知识结构)
     - [1. C01: 所有权与借用](#1-c01-所有权与借用)
-      - [核心概念知识结构](#核心概念知识结构)
+      - [核心概念知识结构](#核心概念知识结构-9)
     - [2. C02: 类型系统](#2-c02-类型系统)
-      - [核心概念知识结构](#核心概念知识结构-1)
+      - [核心概念知识结构](#核心概念知识结构-9)
     - [3. C05: 线程与并发](#3-c05-线程与并发)
-      - [核心概念知识结构](#核心概念知识结构-2)
+      - [核心概念知识结构](#核心概念知识结构-9)
     - [4. C06: 异步编程](#4-c06-异步编程)
-      - [核心概念知识结构](#核心概念知识结构-3)
+      - [核心概念知识结构](#核心概念知识结构-9)
     - [5. C07: 进程管理](#5-c07-进程管理)
-      - [核心概念知识结构](#核心概念知识结构-4)
+      - [核心概念知识结构](#核心概念知识结构-9)
     - [6. C08: 算法与数据结构](#6-c08-算法与数据结构)
-      - [核心概念知识结构](#核心概念知识结构-5)
+      - [核心概念知识结构](#核心概念知识结构-9)
     - [7. C09: 设计模式](#7-c09-设计模式)
-      - [核心概念知识结构](#核心概念知识结构-6)
+      - [核心概念知识结构](#核心概念知识结构-9)
     - [8. C10: 网络编程](#8-c10-网络编程)
-      - [核心概念知识结构](#核心概念知识结构-7)
+      - [核心概念知识结构](#核心概念知识结构-9)
     - [9. C11: 宏系统](#9-c11-宏系统)
-      - [核心概念知识结构](#核心概念知识结构-8)
+      - [核心概念知识结构](#核心概念知识结构-9)
     - [10. C12: WASM](#10-c12-wasm)
       - [核心概念知识结构](#核心概念知识结构-9)
-  - [📚 相关文档](#-相关文档)
+  - [📚 相关文档](#相关文档)
   - [Rust 1.95+ 持续更新更新](#rust-195-持续更新更新)
     - [本文档的Rust 1.95+更新要点](#本文档的rust-195更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
+      - [相关文档](#相关文档-1)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -75,7 +75,7 @@
 
 ---
 
-## 🎯 文档概述
+## 🎯 文档概述 {#文档概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -83,11 +83,11 @@
 
 ---
 
-## 代码示例
+## 代码示例 {#代码示例}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 概念定义生成器
+### 概念定义生成器 {#概念定义生成器}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -179,7 +179,7 @@ fn main() {
 }
 ```
 
-### 知识结构批量生成器
+### 知识结构批量生成器 {#知识结构批量生成器}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -275,7 +275,7 @@ fn main() {
 }
 ```
 
-### 思维表征模板生成器
+### 思维表征模板生成器 {#思维表征模板生成器}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -368,11 +368,11 @@ fn main() {
 
 ---
 
-## 形式化链接
+## 形式化链接 {#形式化链接}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 研究笔记关联
+### 研究笔记关联 {#研究笔记关联}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -383,7 +383,7 @@ fn main() {
 - **决策图网**: [04_decision_graph_network.md](../04_thinking/04_decision_graph_network.md) - 技术选型决策模板
 - **思维导图**: [04_mind_map_collection.md](../04_thinking/04_mind_map_collection.md) - 思维导图集合
 
-### 实施场景
+### 实施场景 {#实施场景}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -397,22 +397,22 @@ fn main() {
 
 ---
 
-## 📐 知识结构补充模板
+## 📐 知识结构补充模板 {#知识结构补充模板}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 概念定义补充
+### 1. 概念定义补充 {#1-概念定义补充}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-#### 模板
+#### 模板 {#模板-8}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```markdown
-### 概念定义
+### 概念定义 {#概念定义-1}
 
 > **[来源: POPL - Programming Languages Research]**
 
@@ -432,12 +432,12 @@ fn main() {
 - [相关概念2]
 ```
 
-#### 示例：异步编程
+#### 示例：异步编程 {#示例异步编程}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 ```markdown
-### 概念定义
+### 概念定义 {#概念定义-1}
 
 > **[来源: PLDI - Programming Language Design]**
 
@@ -459,16 +459,16 @@ fn main() {
 - 并发执行
 ```
 
-### 2. 属性特征补充
+### 2. 属性特征补充 {#2-属性特征补充}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-#### 模板
+#### 模板 {#模板-8}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 ```markdown
-### 属性特征
+### 属性特征 {#属性特征}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -489,16 +489,16 @@ fn main() {
 - **适用场景**: [场景描述]
 ```
 
-### 3. 关系连接补充
+### 3. 关系连接补充 {#3-关系连接补充}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
-#### 模板
+#### 模板 {#模板-8}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```markdown
-### 关系连接
+### 关系连接 {#关系连接}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -519,16 +519,16 @@ fn main() {
 - [概念A] --[implements]--> [概念B]
 ```
 
-### 4. 解释论证补充
+### 4. 解释论证补充 {#4-解释论证补充}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-#### 模板
+#### 模板 {#模板-8}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 ```markdown
-### 解释论证
+### 解释论证 {#解释论证}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -551,16 +551,16 @@ fn main() {
 - **性能保证**: [性能特性]
 ```
 
-### 5. 形式证明补充
+### 5. 形式证明补充 {#5-形式证明补充}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
-#### 模板
+#### 模板 {#模板-8}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```markdown
-### 形式证明
+### 形式证明 {#形式证明}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -585,15 +585,15 @@ fn main() {
 
 ---
 
-## 🗺️ 思维表征方式补充
+## 🗺️ 思维表征方式补充 {#思维表征方式补充}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 1. 思维导图补充
+### 1. 思维导图补充 {#1-思维导图补充}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
-#### 模板
+#### 模板 {#模板-8}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -612,16 +612,16 @@ fn main() {
     ```
 ````
 
-### 2. 概念矩阵补充
+### 2. 概念矩阵补充 {#2-概念矩阵补充}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
-#### 模板
+#### 模板 {#模板-8}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```markdown
-### 概念矩阵
+### 概念矩阵 {#概念矩阵}
 
 > **[来源: POPL - Programming Languages Research]**
 
@@ -630,11 +630,11 @@ fn main() {
 | 概念B | 属性1 | 属性2 | 评估结果 |
 ```
 
-### 3. 决策图网补充
+### 3. 决策图网补充 {#3-决策图网补充}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-#### 模板
+#### 模板 {#模板-8}
 
 ````markdown
     ### 决策图网
@@ -648,11 +648,11 @@ fn main() {
     ```
 ````
 
-### 4. 证明图网补充
+### 4. 证明图网补充 {#4-证明图网补充}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-#### 模板
+#### 模板 {#模板-8}
 
 ````markdown
     ### 证明图网
@@ -668,15 +668,15 @@ fn main() {
 
 ---
 
-## 📊 模块文档知识结构
+## 📊 模块文档知识结构 {#模块文档知识结构}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 1. C01: 所有权与借用
+### 1. C01: 所有权与借用 {#1-c01-所有权与借用}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-#### 核心概念知识结构
+#### 核心概念知识结构 {#核心概念知识结构-9}
 
 **所有权 (Ownership)**:
 
@@ -690,11 +690,11 @@ fn main() {
 - **属性**: 不可变借用、可变借用、借用规则
 - **关系**: 依赖所有权、与生命周期相关
 
-### 2. C02: 类型系统
+### 2. C02: 类型系统 {#2-c02-类型系统}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-#### 核心概念知识结构
+#### 核心概念知识结构 {#核心概念知识结构-9}
 
 **泛型 (Generics)**:
 
@@ -708,11 +708,11 @@ fn main() {
 - **属性**: 方法定义、默认实现、关联类型
 - **关系**: 与泛型、类型系统相关
 
-### 3. C05: 线程与并发
+### 3. C05: 线程与并发 {#3-c05-线程与并发}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-#### 核心概念知识结构
+#### 核心概念知识结构 {#核心概念知识结构-9}
 
 **线程 (Thread)**:
 
@@ -726,11 +726,11 @@ fn main() {
 - **属性**: 通道、发送者、接收者
 - **关系**: 与并发、共享状态相关
 
-### 4. C06: 异步编程
+### 4. C06: 异步编程 {#4-c06-异步编程}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-#### 核心概念知识结构
+#### 核心概念知识结构 {#核心概念知识结构-9}
 
 **Future**:
 
@@ -744,11 +744,11 @@ fn main() {
 - **属性**: 异步函数、await 表达式
 - **关系**: 与 Future、运行时相关
 
-### 5. C07: 进程管理
+### 5. C07: 进程管理 {#5-c07-进程管理}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-#### 核心概念知识结构
+#### 核心概念知识结构 {#核心概念知识结构-9}
 
 **进程 (Process)**:
 
@@ -772,11 +772,11 @@ fn main() {
 - **属性**: 信号类型、处理函数、阻塞/忽略
 - **关系**: 与进程、IPC、Unix 系统调用相关
 
-### 6. C08: 算法与数据结构
+### 6. C08: 算法与数据结构 {#6-c08-算法与数据结构}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-#### 核心概念知识结构
+#### 核心概念知识结构 {#核心概念知识结构-9}
 
 **算法 (Algorithm)**:
 
@@ -790,11 +790,11 @@ fn main() {
 - **属性**: 线性、树形、图形结构
 - **关系**: 与算法、性能相关
 
-### 7. C09: 设计模式
+### 7. C09: 设计模式 {#7-c09-设计模式}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-#### 核心概念知识结构
+#### 核心概念知识结构 {#核心概念知识结构-9}
 
 **创建型模式 (Creational Patterns)**:
 
@@ -808,11 +808,11 @@ fn main() {
 - **属性**: 适配器、装饰器、外观
 - **关系**: 与创建型、行为型模式相关
 
-### 8. C10: 网络编程
+### 8. C10: 网络编程 {#8-c10-网络编程}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-#### 核心概念知识结构
+#### 核心概念知识结构 {#核心概念知识结构-9}
 
 **网络协议 (Network Protocol)**:
 
@@ -826,11 +826,11 @@ fn main() {
 - **属性**: 异步读写、事件驱动
 - **关系**: 与异步编程、网络编程相关
 
-### 9. C11: 宏系统
+### 9. C11: 宏系统 {#9-c11-宏系统}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-#### 核心概念知识结构
+#### 核心概念知识结构 {#核心概念知识结构-9}
 
 **声明宏 (Declarative Macros)**:
 
@@ -852,11 +852,11 @@ fn main() {
 - **属性**: 本地变量与宏内部变量隔离
 - **关系**: 与宏系统、过程宏、编译器实现相关
 
-### 10. C12: WASM
+### 10. C12: WASM {#10-c12-wasm}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-#### 核心概念知识结构
+#### 核心概念知识结构 {#核心概念知识结构-9}
 
 **WebAssembly (WASM)**:
 
@@ -872,7 +872,7 @@ fn main() {
 
 ---
 
-## 📚 相关文档
+## 📚 相关文档 {#相关文档}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -890,20 +890,20 @@ fn main() {
 
 ---
 
-## Rust 1.95+ 持续更新更新
+## Rust 1.95+ 持续更新更新 {#rust-195-持续更新更新}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.95+更新要点
+### 本文档的Rust 1.95+更新要点 {#本文档的rust-195更新要点}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 本文档已针对 **Rust 1.95+** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -912,7 +912,7 @@ fn main() {
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -920,7 +920,7 @@ fn main() {
 - ✅ 兼容Edition 2024
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档-1}
 
 - Rust 1.95+ 迁移指南
 - Rust 1.94 特性速查（已归档）
@@ -944,7 +944,7 @@ fn main() {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -953,7 +953,7 @@ fn main() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Modular Programming](https://en.wikipedia.org/wiki/Modular_Programming)**
 > **来源: [Wikipedia - Software Component](https://en.wikipedia.org/wiki/Software_Component)**

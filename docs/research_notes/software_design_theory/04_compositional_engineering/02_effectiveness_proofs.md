@@ -1,4 +1,4 @@
-# 组合软件工程有效性定理与证明
+# 组合软件工程有效性定理与证明 {#组合软件工程有效性定理与证明}
 
 > **概念族**: 软件设计 / 组合工程
 
@@ -24,7 +24,7 @@
 
 > **权威来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [Tower Docs](https://docs.rs/tower/latest/tower/) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -33,7 +33,7 @@
 >
 
 - [组合软件工程有效性定理与证明](#组合软件工程有效性定理与证明)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [公理与定义](#公理与定义)
   - [定理陈述与证明](#定理陈述与证明)
     - [定理 CE-T1（组合保持内存安全）](#定理-ce-t1组合保持内存安全)
@@ -51,7 +51,7 @@
     - [组合反例详解（何时定理不成立）](#组合反例详解何时定理不成立)
     - [完整应用链示例：三层架构](#完整应用链示例三层架构)
   - [与 PROOF\_INDEX 衔接](#与-proof_index-衔接)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -69,7 +69,7 @@
 
 ---
 
-## 公理与定义
+## 公理与定义 {#公理与定义}
 
 >
 
@@ -89,13 +89,13 @@
 
 ---
 
-## 定理陈述与证明
+## 定理陈述与证明 {#定理陈述与证明}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 定理 CE-T1（组合保持内存安全）
+### 定理 CE-T1（组合保持内存安全） {#定理-ce-t1组合保持内存安全}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -121,7 +121,7 @@
 
 ---
 
-### 定理 CE-T2（组合保持数据竞争自由）
+### 定理 CE-T2（组合保持数据竞争自由） {#定理-ce-t2组合保持数据竞争自由}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -143,7 +143,7 @@
 
 ---
 
-### 定理 CE-T3（组合保持类型安全）
+### 定理 CE-T3（组合保持类型安全） {#定理-ce-t3组合保持类型安全}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -165,7 +165,7 @@
 
 ---
 
-## 引理与推论
+## 引理与推论 {#引理与推论}
 
 >
 
@@ -181,7 +181,7 @@
 
 **推论 CE-C2（组合反例）**：若 $M_n$ 的 `pub` API 泄漏 `unsafe` 或违反借用规则，则 CE-T1 或 CE-T2 不成立；组合后可能 UB。
 
-### 概念定义-属性关系-解释论证 层次汇总
+### 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -201,7 +201,7 @@
 
 ---
 
-## 定理 CE-PAT1（模式组合 CE 保持）
+## 定理 CE-PAT1（模式组合 CE 保持） {#定理-ce-pat1模式组合-ce-保持}
 
 >
 
@@ -233,7 +233,7 @@
 
 ---
 
-## 代码示例：模块组合
+## 代码示例：模块组合 {#代码示例模块组合}
 
 >
 
@@ -287,7 +287,7 @@ fn main() {
 
 ---
 
-## 定理应用示例
+## 定理应用示例 {#定理应用示例}
 
 >
 
@@ -305,7 +305,7 @@ fn main() {
 
 ---
 
-## 中间件栈有效性定理
+## 中间件栈有效性定理 {#中间件栈有效性定理}
 
 > **来源: [Tower Docs](https://docs.rs/tower/latest/tower/)**
 
@@ -331,7 +331,7 @@ fn main() {
 
 ---
 
-## 验证方法
+## 验证方法 {#验证方法}
 
 >
 
@@ -351,13 +351,13 @@ fn main() {
 
 ---
 
-## 组合有效性验证工作流（实质指南）
+## 组合有效性验证工作流（实质指南） {#组合有效性验证工作流实质指南}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 新增模块纳入组合时的检查清单
+### 新增模块纳入组合时的检查清单 {#新增模块纳入组合时的检查清单}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -377,7 +377,7 @@ fn main() {
 
 | 6 | 依赖图无环：`cargo tree` 检查 | Def 1.3 |
 
-### 组合反例详解（何时定理不成立）
+### 组合反例详解（何时定理不成立） {#组合反例详解何时定理不成立}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -395,7 +395,7 @@ fn main() {
 
 | 泛型约束不一致 | CE-T3 | `impl<T: Trait> Service for T` 与 `Service<U>` 边界冲突 |
 
-### 完整应用链示例：三层架构
+### 完整应用链示例：三层架构 {#完整应用链示例三层架构}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -469,7 +469,7 @@ impl<S: OrderServiceTrait> OrderController<S> {
 
 ---
 
-## 与 PROOF_INDEX 衔接
+## 与 PROOF_INDEX 衔接 {#与-proof_index-衔接}
 
 >
 
@@ -479,7 +479,7 @@ impl<S: OrderServiceTrait> OrderController<S> {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -489,13 +489,13 @@ impl<S: OrderServiceTrait> OrderController<S> {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -509,7 +509,7 @@ impl<S: OrderServiceTrait> OrderController<S> {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -519,7 +519,7 @@ impl<S: OrderServiceTrait> OrderController<S> {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -549,7 +549,7 @@ impl<S: OrderServiceTrait> OrderController<S> {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -561,7 +561,7 @@ impl<S: OrderServiceTrait> OrderController<S> {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 

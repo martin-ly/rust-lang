@@ -1,4 +1,4 @@
-# 长事务模式形式化定义
+# 长事务模式形式化定义 {#长事务模式形式化定义}
 
 > **概念族**: 软件设计 / 工作流模式 / 长事务 / Saga
 
@@ -26,10 +26,10 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 - [长事务模式形式化定义](#长事务模式形式化定义)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 问题定义与动机](#1-问题定义与动机)
   - [2. 核心概念](#2-核心概念)
   - [3. 形式化定义](#3-形式化定义)
@@ -49,7 +49,7 @@
 
 ---
 
-## 1. 问题定义与动机
+## 1. 问题定义与动机 {#1-问题定义与动机}
 
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
@@ -63,7 +63,7 @@
 
 ---
 
-## 2. 核心概念
+## 2. 核心概念 {#2-核心概念}
 
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
 
@@ -75,11 +75,11 @@
 
 ---
 
-## 3. 形式化定义
+## 3. 形式化定义 {#3-形式化定义}
 
 > **来源**: [Rust Official Docs](https://doc.rust-lang.org/)
 
-### Def LT1: 长事务
+### Def LT1: 长事务 {#def-lt1-长事务}
 
 一个长事务是四元组
 
@@ -94,7 +94,7 @@ LRT := (W, R, P, C)
 - `P`：持久化状态存储。
 - `C`：协调器，负责按 `R` 调度工作项并在失败时触发补偿。
 
-### Axiom LT1: 局部提交可见性
+### Axiom LT1: 局部提交可见性 {#axiom-lt1-局部提交可见性}
 
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
 
@@ -104,7 +104,7 @@ LRT := (W, R, P, C)
 ∀ w ∈ W, committed(w) → observable(w)
 ```
 
-### Axiom LT2: 持久化可靠性
+### Axiom LT2: 持久化可靠性 {#axiom-lt2-持久化可靠性}
 
 > **来源**: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)
 
@@ -114,7 +114,7 @@ LRT := (W, R, P, C)
 ∀ w ∈ W, scheduled(w) ∨ completed(w) ∨ compensated(w) → persisted(state(w))
 ```
 
-### Theorem LT1: 业务一致性
+### Theorem LT1: 业务一致性 {#theorem-lt1-业务一致性}
 
 > **来源**: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)
 
@@ -132,7 +132,7 @@ LRT := (W, R, P, C)
 3. 按逆序补偿该集合，等价于从叶节点向根节点回滚。
 4. 每一步补偿由 Axiom CC1（补偿可逆性）保证语义撤销，最终回到初始状态。
 
-### Theorem LT2: 故障可恢复性
+### Theorem LT2: 故障可恢复性 {#theorem-lt2-故障可恢复性}
 
 > **来源**: [Rust Standard Library](https://doc.rust-lang.org/std/)
 
@@ -147,7 +147,7 @@ LRT := (W, R, P, C)
 
 ---
 
-## 4. Rust 实现方案
+## 4. Rust 实现方案 {#4-rust-实现方案}
 
 > **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 
@@ -310,11 +310,11 @@ fn main() {
 
 ---
 
-## 5. 反例与边界
+## 5. 反例与边界 {#5-反例与边界}
 
 > **来源**: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)
 
-### 反例 1：未持久化状态导致重复执行
+### 反例 1：未持久化状态导致重复执行 {#反例-1未持久化状态导致重复执行}
 
 ```rust,ignore
 struct BadCoordinator { items: Vec<WorkItem>, executed: Vec<String> }
@@ -337,7 +337,7 @@ impl BadCoordinator {
 - 将每个工作项的状态写入持久化存储（数据库、文件、事件日志）。
 - 工作项实现幂等，重复执行不会产生副作用。
 
-### 反例 2：循环依赖
+### 反例 2：循环依赖 {#反例-2循环依赖}
 
 ```rust,ignore
 let items = vec![
@@ -351,7 +351,7 @@ let order = topo_order(&items); // Err: DependencyCycle
 
 **修复**：在定义工作项时通过 DAG 约束依赖；启动前显式检测循环。
 
-### 边界：超时与重试
+### 边界：超时与重试 {#边界超时与重试}
 
 长事务中的外部调用可能超时。若未设置超时：
 
@@ -366,7 +366,7 @@ let order = topo_order(&items); // Err: DependencyCycle
 
 ---
 
-## 6. 与其他模式的关系
+## 6. 与其他模式的关系 {#6-与其他模式的关系}
 
 > **来源**: [crates.io](https://crates.io/)
 
@@ -380,7 +380,7 @@ let order = topo_order(&items); // Err: DependencyCycle
 
 ---
 
-## 7. 权威来源索引
+## 7. 权威来源索引 {#7-权威来源索引}
 
 > **P0 权威来源（Rust 官方）**:
 >
@@ -403,7 +403,7 @@ let order = topo_order(&items); // Err: DependencyCycle
 
 ---
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [Aeneas](https://aeneas-verification.github.io/)
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)

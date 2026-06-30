@@ -1,4 +1,4 @@
-# Factory Method 形式化分析
+# Factory Method 形式化分析 {#factory-method-形式化分析}
 
 > **概念族**: 软件设计 / 设计模式
 
@@ -26,14 +26,14 @@
 
 ---
 
-## 📊 目录 {#-目录}
+## 📊 目录 {#目录}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Factory Method 形式化分析](#factory-method-形式化分析)
-  - [📊 目录 {#-目录}](#-目录--目录)
+  - [📊 目录](#目录)
   - [权威来源对照](#权威来源对照)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Factory Method 结构）](#def-11factory-method-结构)
@@ -44,7 +44,7 @@
     - [推论 FM-C1（纯 Safe Factory）](#推论-fm-c1纯-safe-factory)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
-  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196--edition-2024-代码示例更新)
+  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196-edition-2024-代码示例更新)
     - [Edition 2024 关键兼容点](#edition-2024-关键兼容点)
   - [Rust 所有权、借用、生命周期与 trait 系统约束分析](#rust-所有权借用生命周期与-trait-系统约束分析)
     - [所有权约束](#所有权约束)
@@ -76,7 +76,7 @@
   - [思维导图](#思维导图)
   - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -86,7 +86,7 @@
 
 ---
 
-## 权威来源对照
+## 权威来源对照 {#权威来源对照}
 
 >
 
@@ -112,13 +112,13 @@
 
 ---
 
-## 形式化定义
+## 形式化定义 {#形式化定义}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Def 1.1（Factory Method 结构）
+### Def 1.1（Factory Method 结构） {#def-11factory-method-结构}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -142,7 +142,7 @@ $$\mathcal{F} = \langle C, T, \mathit{factory}: C \rightarrow T \rangle$$
 
 ---
 
-### Axiom FM1（返回类型一致性公理）
+### Axiom FM1（返回类型一致性公理） {#axiom-fm1返回类型一致性公理}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -154,7 +154,7 @@ $$\forall c: C,\, \mathit{factory}(c) : T \land \neg(\mathit{factory}(c) = \math
 
 工厂方法返回类型与产品类型一致；无空指针或无效值。
 
-### Axiom FM2（所有权独立公理）
+### Axiom FM2（所有权独立公理） {#axiom-fm2所有权独立公理}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -168,7 +168,7 @@ $$\Omega(\mathit{factory}(c)) \cap \Omega(c) = \emptyset \land \Omega(\mathit{fa
 
 ---
 
-### 定理 FM-T1（类型保持定理）
+### 定理 FM-T1（类型保持定理） {#定理-fm-t1类型保持定理}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -198,7 +198,7 @@ $$\Omega(\mathit{factory}(c)) \cap \Omega(c) = \emptyset \land \Omega(\mathit{fa
 
 ---
 
-### 定理 FM-T2（所有权安全定理）
+### 定理 FM-T2（所有权安全定理） {#定理-fm-t2所有权安全定理}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -234,7 +234,7 @@ $$\Omega(\mathit{factory}(c)) \cap \Omega(c) = \emptyset \land \Omega(\mathit{fa
 
 ---
 
-### 推论 FM-C1（纯 Safe Factory）
+### 推论 FM-C1（纯 Safe Factory） {#推论-fm-c1纯-safe-factory}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -258,7 +258,7 @@ Factory Method 为纯 Safe；仅用 trait、impl、`Box`，无 unsafe。
 
 ---
 
-### 概念定义-属性关系-解释论证 层次汇总
+### 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -278,7 +278,7 @@ Factory Method 为纯 Safe；仅用 trait、impl、`Box`，无 unsafe。
 
 ---
 
-## Rust 实现与代码示例
+## Rust 实现与代码示例 {#rust-实现与代码示例}
 
 >
 
@@ -348,7 +348,7 @@ assert_eq!(product.operation(), "Product A");
 
 ---
 
-## Rust 1.96+ / Edition 2024 代码示例更新
+## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
 
 >
 
@@ -426,7 +426,7 @@ fn main() {
 
 ```
 
-### Edition 2024 关键兼容点
+### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
 
@@ -442,25 +442,25 @@ fn main() {
 
 ---
 
-## Rust 所有权、借用、生命周期与 trait 系统约束分析
+## Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}
 
 >
 
 > **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
 
-### 所有权约束
+### 所有权约束 {#所有权约束}
 
 `factory_method(&self) -> Self::P` 转移产品所有权；Creator 保持共享，产品独立生命周期。
 
-### 借用与生命周期约束
+### 借用与生命周期约束 {#借用与生命周期约束}
 
 工厂方法通常只需要 `&self`，允许同一 Creator 实例被多次调用而无需可变借用。
 
-### trait 系统约束
+### trait 系统约束 {#trait-系统约束}
 
 关联类型 `type P: Product` 在编译期绑定具体产品；默认方法 `some_operation` 可复用工厂逻辑。
 
-### 与 Rust 类型系统的综合联系
+### 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系}
 
 | Rust 机制 | 本模式使用方式 | 保证 |
 
@@ -478,13 +478,13 @@ fn main() {
 
 ---
 
-## 完整证明
+## 完整证明 {#完整证明}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 形式化论证链
+### 形式化论证链 {#形式化论证链}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -518,7 +518,7 @@ ownership_model T2
 
 ```
 
-### 与 Rust 类型系统的联系
+### 与 Rust 类型系统的联系 {#与-rust-类型系统的联系}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -534,7 +534,7 @@ ownership_model T2
 
 | 所有权转移 | 返回 `Box` | 无悬垂指针 |
 
-### 内存安全保证
+### 内存安全保证 {#内存安全保证}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -548,13 +548,13 @@ ownership_model T2
 
 ---
 
-## 形式化属性：不变式、前置/后置条件与安全边界
+## 形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}
 
 >
 
 > **来源: [Formal Methods – Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)** | **来源: [Rust API Guidelines – Safety](https://rust-lang.github.io/api-guidelines/safety.html)**
 
-### 不变式（Invariants）
+### 不变式（Invariants） {#不变式invariants}
 
 1. 每个 Creator impl 绑定唯一产品类型。
 
@@ -562,7 +562,7 @@ ownership_model T2
 
 3. Creator 不持有产品的反向引用。
 
-### 前置条件（Preconditions）
+### 前置条件（Preconditions） {#前置条件preconditions}
 
 1. Creator trait 已实现。
 
@@ -570,7 +570,7 @@ ownership_model T2
 
 3. 调用方持有 Creator 引用或所有权。
 
-### 后置条件（Postconditions）
+### 后置条件（Postconditions） {#后置条件postconditions}
 
 1. 返回的产品为调用者所有。
 
@@ -578,11 +578,11 @@ ownership_model T2
 
 3. 同一 Creator 可重复创建产品。
 
-### 安全边界（Safety Boundary）
+### 安全边界（Safety Boundary） {#安全边界safety-boundary}
 
 纯 Safe。工厂方法依赖 trait 与关联类型，无 `unsafe` 需求。
 
-### 形式化规约汇总
+### 形式化规约汇总 {#形式化规约汇总}
 
 ```text
 
@@ -598,7 +598,7 @@ ownership_model T2
 
 ---
 
-## 典型场景
+## 典型场景 {#典型场景}
 
 >
 
@@ -616,7 +616,7 @@ ownership_model T2
 
 ---
 
-## 相关模式
+## 相关模式 {#相关模式}
 
 >
 
@@ -634,7 +634,7 @@ ownership_model T2
 
 ---
 
-## 实现变体
+## 实现变体 {#实现变体}
 
 >
 
@@ -652,13 +652,13 @@ ownership_model T2
 
 ---
 
-## 反例：常见误用及编译器错误
+## 反例：常见误用及编译器错误 {#反例常见误用及编译器错误}
 
 >
 
 > **来源: [Rust By Example – Error Handling](https://doc.rust-lang.org/rust-by-example/error.html)** | **来源: [Rust Compiler Error Index](https://doc.rust-lang.org/error_codes/error-index.html)**
 
-### 反例 1：关联类型未实现 Product
+### 反例 1：关联类型未实现 Product {#反例-1关联类型未实现-product}
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
 
@@ -676,7 +676,7 @@ impl Creator for CreatorA {
 
 **编译器错误**：`the trait bound String: Product is not satisfied`。
 
-### 反例 2：返回借用导致生命周期错误
+### 反例 2：返回借用导致生命周期错误 {#反例-2返回借用导致生命周期错误}
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
 
@@ -696,7 +696,7 @@ impl Creator for CreatorWithLocal {
 
 **编译器错误**：`missing lifetime specifier`。
 
-### 反例 3：默认方法中可变修改 Creator
+### 反例 3：默认方法中可变修改 Creator {#反例-3默认方法中可变修改-creator}
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
 
@@ -718,7 +718,7 @@ trait Creator {
 
 ---
 
-## 与理论衔接
+## 与理论衔接 {#与理论衔接}
 
 >
 
@@ -736,7 +736,7 @@ trait Creator {
 
 ---
 
-## 选型决策树
+## 选型决策树 {#选型决策树}
 
 >
 
@@ -758,7 +758,7 @@ trait Creator {
 
 ---
 
-## 与 GoF 对比
+## 与 GoF 对比 {#与-gof-对比}
 
 >
 
@@ -776,7 +776,7 @@ trait Creator {
 
 ---
 
-## 边界
+## 边界 {#边界}
 
 >
 
@@ -794,7 +794,7 @@ trait Creator {
 
 ---
 
-## 与 Rust 1.93 的对应
+## 与 Rust 1.93 的对应 {#与-rust-193-的对应}
 
 >
 
@@ -810,7 +810,7 @@ trait Creator {
 
 ---
 
-## 思维导图
+## 思维导图 {#思维导图}
 
 >
 
@@ -858,7 +858,7 @@ mindmap
 
 ---
 
-## 与其他模式的关系图
+## 与其他模式的关系图 {#与其他模式的关系图}
 
 >
 
@@ -890,7 +890,7 @@ graph LR
 
 ---
 
-## 实质内容五维自检
+## 实质内容五维自检 {#实质内容五维自检}
 
 >
 
@@ -914,7 +914,7 @@ graph LR
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -924,13 +924,13 @@ graph LR
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -946,7 +946,7 @@ graph LR
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -958,7 +958,7 @@ graph LR
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -992,7 +992,7 @@ graph LR
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -1004,7 +1004,7 @@ graph LR
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 

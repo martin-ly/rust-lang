@@ -1,4 +1,4 @@
-# Rust RFC 对齐索引
+# Rust RFC 对齐索引 {#rust-rfc-对齐索引}
 
 > **概念族**: 权威来源对齐 / RFC
 > **内容分级**: [核心级]
@@ -11,7 +11,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [Rust RFC 对齐索引](#rust-rfc-对齐索引)
   - [目录](#目录)
@@ -28,24 +28,24 @@
 
 ---
 
-## 一、对齐说明
+## 一、对齐说明 {#一对齐说明}
 
 本文档将 `docs/research_notes/` 中的核心概念、设计决策与 [Rust RFCs](https://rust-lang.github.io/rfcs/) 建立映射。RFC 是 Rust 语言与工具链设计的权威记录。
 
 ---
 
-## 二、核心语言 RFC
+## 二、核心语言 RFC {#二核心语言-rfc}
 
 | RFC | 主题 | 项目文档 | 状态 |
 |-----|------|----------|------|
 | [RFC 1859](https://rust-lang.github.io/rfcs/1859-non-lexical-lifetimes.html) — Non-Lexical Lifetimes | 借用检查器改进 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | ✅ |
 | [RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html) — NLL | 非词法生命周期 | [formal_methods/10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | ✅ |
-| [RFC 0380](https://rust-lang.github.io/rfcs/0380-stabilize-no-std.html) — `no_std` | 无 std 环境 | [crates/c13_embedded/](../crates/c13_embedded/README.md) | ✅ |
+| [RFC 0380](https://rust-lang.github.io/rfcs/0380-stabilize-no-std.html) — `no_std` | 无 std 环境 | [crates/c13_embedded/](../../crates/c13_embedded/README.md) | ✅ |
 | [RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html) — Specialization | Trait 特化 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | 🔄 |
 
 ---
 
-## 三、类型系统与 Trait RFC
+## 三、类型系统与 Trait RFC {#三类型系统与-trait-rfc}
 
 | RFC | 主题 | 项目文档 | 状态 |
 |-----|------|----------|------|
@@ -57,7 +57,7 @@
 
 ---
 
-## 四、异步与并发 RFC
+## 四、异步与并发 RFC {#四异步与并发-rfc}
 
 | RFC | 主题 | 项目文档 | 状态 |
 |-----|------|----------|------|
@@ -67,7 +67,7 @@
 
 ---
 
-## 五、Edition 与版本 RFC
+## 五、Edition 与版本 RFC {#五edition-与版本-rfc}
 
 | RFC | 主题 | 项目文档 | 状态 |
 |-----|------|----------|------|
@@ -76,7 +76,7 @@
 
 ---
 
-## 六、工具链 RFC
+## 六、工具链 RFC {#六工具链-rfc}
 
 | RFC | 主题 | 项目文档 | 状态 |
 |-----|------|----------|------|
@@ -85,7 +85,7 @@
 
 ---
 
-## 七、未覆盖缺口
+## 七、未覆盖缺口 {#七未覆盖缺口}
 
 1. 宏系统相关 RFC（如 `macro_rules!` hygiene、proc-macro）可进一步索引。
 2. const 泛型、const eval 相关 RFC 待随内容扩展补充。
@@ -93,7 +93,7 @@
 
 > **权威来源**: [Rust RFCs](https://rust-lang.github.io/rfcs/)
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [RFC 到反例自动化映射索引](10_rfc_to_counterexample_mapping.md)
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
@@ -103,7 +103,7 @@
 
 ---
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 本对齐矩阵同时参考以下 P1 学术权威来源，以形成完整的官方-学术对照网络：
 
@@ -112,7 +112,7 @@
 - [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
 - [Aeneas](https://aeneas-verification.github.io/)
 
-## 社区权威参考
+## 社区权威参考 {#社区权威参考}
 
 - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
 - [This Week in Rust](https://this-week-in-rust.org/)

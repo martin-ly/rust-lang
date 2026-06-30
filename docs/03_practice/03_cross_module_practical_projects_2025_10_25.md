@@ -1,4 +1,4 @@
-# 跨模块实战项目指南
+# 跨模块实战项目指南 {#跨模块实战项目指南}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
@@ -7,37 +7,36 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 - [跨模块实战项目指南](#跨模块实战项目指南)
-  - [📑 目录](#-目录)
-  - [🚀 10 个渐进式项目](#-10-个渐进式项目)
+  - [📑 目录](#目录)
+  - [🚀 10 个渐进式项目](#10-个渐进式项目)
     - [入门级](#入门级)
     - [进阶级](#进阶级)
     - [专家级](#专家级)
-  - [**状态**: ✅ 可用](#状态--可用)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🚀 10 个渐进式项目
+## 🚀 10 个渐进式项目 {#10-个渐进式项目}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 入门级
+### 入门级 {#入门级}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **命令行工具** (C01-C03)
 2. **文件处理器** (C01-C03)
 
-### 进阶级
+### 进阶级 {#进阶级}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 1. **并发下载器** (C05-C06)
 2. **聊天服务器** (C05-C06)
 
-### 专家级
+### 专家级 {#专家级}
 
 1. **Web 服务器** (C06-C10)
 2. **WASM 应用** (C11-C12)
@@ -62,14 +61,14 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [03_practice 目录](README.md)
 - [docs 索引](../README.md)
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**

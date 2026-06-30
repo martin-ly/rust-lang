@@ -16,12 +16,12 @@
 
 ---
 
-> **来源**:
+> **来源**: · [核心 Crate](../06_ecosystem/03_core_crates.md)
 > [Rust Project Goals — Ergonomic RC](https://rust-lang.github.io/rust-project-goals/2026/ergonomic-rc.html) ·
 > [rust-project-goals#107](https://github.com/rust-lang/rust-project-goals/issues/107) ·
 > [Rust Internals Forum](https://internals.rust-lang.org/)
 >
-> **前置概念**:
+> **前置概念**: [核心 Crate](../06_ecosystem/03_core_crates.md)
 > [Ownership](../01_foundation/01_ownership.md) ·
 > [Smart Pointers](../02_intermediate/12_smart_pointers.md) ·
 > [Unsafe](../03_advanced/03_unsafe.md)

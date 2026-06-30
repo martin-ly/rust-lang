@@ -1,4 +1,4 @@
-# QUIC / HTTP/3 指南
+# QUIC / HTTP/3 指南 {#quic-http3-指南}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
@@ -12,12 +12,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [QUIC / HTTP/3 指南](#quic--http3-指南)
-  - [📑 目录](#-目录)
+- [QUIC / HTTP/3 指南](#quic-http3-指南)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [QUIC 核心特性](#quic-核心特性)
   - [Rust 生态](#rust-生态)
@@ -25,14 +25,14 @@
   - [代码示例](#代码示例)
     - [QUIC 客户端（quinn）](#quic-客户端quinn)
     - [QUIC 服务器（quinn）](#quic-服务器quinn)
-    - [HTTP/3 客户端（h3 + quinn）](#http3-客户端h3--quinn)
+    - [HTTP/3 客户端（h3 + quinn）](#http3-客户端h3-quinn)
   - [与 HTTP/2 的对比](#与-http2-的对比)
   - [限制](#限制)
   - [参考](#参考)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 概述
+## 概述 {#概述}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -54,7 +54,7 @@ HTTP              HTTP              HTTP
 
 ---
 
-## QUIC 核心特性
+## QUIC 核心特性 {#quic-核心特性}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -68,7 +68,7 @@ HTTP              HTTP              HTTP
 
 ---
 
-## Rust 生态
+## Rust 生态 {#rust-生态}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -82,7 +82,7 @@ HTTP              HTTP              HTTP
 
 ---
 
-## 决策树
+## 决策树 {#决策树}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -102,11 +102,11 @@ HTTP              HTTP              HTTP
 
 ---
 
-## 代码示例
+## 代码示例 {#代码示例}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### QUIC 客户端（quinn）
+### QUIC 客户端（quinn） {#quic-客户端quinn}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -147,7 +147,7 @@ async fn quic_client(
 }
 ```
 
-### QUIC 服务器（quinn）
+### QUIC 服务器（quinn） {#quic-服务器quinn}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -191,7 +191,7 @@ async fn handle_connection(connection: quinn::Connection) {
 }
 ```
 
-### HTTP/3 客户端（h3 + quinn）
+### HTTP/3 客户端（h3 + quinn） {#http3-客户端h3-quinn}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -233,7 +233,7 @@ async fn http3_get(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 
 ---
 
-## 与 HTTP/2 的对比
+## 与 HTTP/2 的对比 {#与-http2-的对比}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -249,7 +249,7 @@ async fn http3_get(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 
 ---
 
-## 限制
+## 限制 {#限制}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -263,7 +263,7 @@ async fn http3_get(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 
 ---
 
-## 参考
+## 参考 {#参考}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -283,7 +283,7 @@ async fn http3_get(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -291,7 +291,7 @@ async fn http3_get(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

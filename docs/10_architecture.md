@@ -1,4 +1,4 @@
-# Rust 学习项目架构文档
+# Rust 学习项目架构文档 {#rust-学习项目架构文档}
 
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
@@ -9,7 +9,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)**
 
@@ -40,13 +40,13 @@
 
 ---
 
-## 项目概述
+## 项目概述 {#项目概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)**
 
 本项目是一个全面的 Rust 语言系统化学习资源，采用 Workspace 架构组织，包含 12 个核心学习 crate 和 1 个共享库 crate。
 
-### 设计原则
+### 设计原则 {#设计原则}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Rust Reference](https://doc.rust-lang.org/reference/)** · **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)** · **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)**
 
@@ -57,7 +57,7 @@
 
 ---
 
-## 架构总览
+## 架构总览 {#架构总览}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -126,11 +126,11 @@ graph TB
 
 ---
 
-## Crate 关系图
+## Crate 关系图 {#crate-关系图}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 详细依赖关系
+### 详细依赖关系 {#详细依赖关系}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -169,7 +169,7 @@ flowchart LR
     C06 --> TRACING
 ```
 
-### Crate 特性矩阵
+### Crate 特性矩阵 {#crate-特性矩阵}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -190,11 +190,11 @@ flowchart LR
 
 ---
 
-## 模块依赖图
+## 模块依赖图 {#模块依赖图}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 内部模块结构
+### 内部模块结构 {#内部模块结构}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -284,11 +284,11 @@ graph TB
 
 ---
 
-## 数据流图
+## 数据流图 {#数据流图}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 学习路径数据流
+### 学习路径数据流 {#学习路径数据流}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -325,7 +325,7 @@ flowchart LR
     G --> K
 ```
 
-### 运行时数据流（以异步模块为例）
+### 运行时数据流（以异步模块为例） {#运行时数据流以异步模块为例}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -350,11 +350,11 @@ sequenceDiagram
 
 ---
 
-## 架构决策记录
+## 架构决策记录 {#架构决策记录}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### ADR-001: Workspace 结构
+### ADR-001: Workspace 结构 {#adr-001-workspace-结构}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -369,7 +369,7 @@ sequenceDiagram
 - 统一依赖管理
 - 并行编译优化
 
-### ADR-002: Common Crate
+### ADR-002: Common Crate {#adr-002-common-crate}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -384,7 +384,7 @@ sequenceDiagram
 - 共享测试工具
 - 可配置特性标志
 
-### ADR-003: 渐进式特性
+### ADR-003: 渐进式特性 {#adr-003-渐进式特性}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -401,11 +401,11 @@ sequenceDiagram
 
 ---
 
-## 技术栈
+## 技术栈 {#技术栈}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 核心运行时
+### 核心运行时 {#核心运行时}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -413,14 +413,14 @@ sequenceDiagram
 - **Rayon**: 数据并行 (v1.11+)
 - **Crossbeam**: 并发原语 (v0.8+)
 
-### 序列化
+### 序列化 {#序列化}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - **Serde**: 通用序列化 (v1.0+)
 - **Serde JSON**: JSON 支持 (v1.0+)
 
-### 网络
+### 网络 {#网络}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -428,7 +428,7 @@ sequenceDiagram
 - **Tonic**: gRPC 框架 (v0.14+)
 - **Tungstenite**: WebSocket (v0.29+)
 
-### 日志与追踪
+### 日志与追踪 {#日志与追踪}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -437,7 +437,7 @@ sequenceDiagram
 
 ---
 
-## 参考资料
+## 参考资料 {#参考资料}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -462,7 +462,7 @@ sequenceDiagram
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

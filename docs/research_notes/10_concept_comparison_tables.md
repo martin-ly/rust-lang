@@ -1,4 +1,4 @@
-# 概念对比表汇编
+# 概念对比表汇编 {#概念对比表汇编}
 
 > **概念族**: 概念框架
 
@@ -22,7 +22,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -31,7 +31,7 @@
 >
 
 - [概念对比表汇编](#概念对比表汇编)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、所有权相关对比](#一所有权相关对比)
     - [Move vs Copy](#move-vs-copy)
     - [\&T vs \&mut T](#t-vs-mut-t)
@@ -63,9 +63,9 @@
     - [选择何种锁？](#选择何种锁)
     - [选择何种并发模型？](#选择何种并发模型)
     - [选择何种事务模式？](#选择何种事务模式)
-  - [🆕 Rust 1.94 研究更新](#-rust-194-研究更新)
+  - [🆕 Rust 1.94 研究更新](#rust-194-研究更新)
     - [核心研究点](#核心研究点)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -73,13 +73,13 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 一、所有权相关对比
+## 一、所有权相关对比 {#一所有权相关对比}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Move vs Copy
+### Move vs Copy {#move-vs-copy}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -103,7 +103,7 @@
 
 | **使用场景** | 转移资源所有权 | 简单值复制 |
 
-### &T vs &mut T
+### &T vs &mut T {#t-vs-mut-t}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -127,7 +127,7 @@
 
 | **类比** | 多人阅读 | 一个人修改 |
 
-### Box vs Rc vs Arc
+### Box vs Rc vs Arc {#box-vs-rc-vs-arc}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -151,7 +151,7 @@
 
 | **使用场景** | 堆分配唯一值 | 单线程共享 | 多线程共享 |
 
-### Cell vs RefCell vs Mutex vs RwLock
+### Cell vs RefCell vs Mutex vs RwLock {#cell-vs-refcell-vs-mutex-vs-rwlock}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -179,13 +179,13 @@
 
 ---
 
-## 二、类型系统对比
+## 二、类型系统对比 {#二类型系统对比}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### impl Trait vs dyn Trait
+### impl Trait vs dyn Trait {#impl-trait-vs-dyn-trait}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -211,7 +211,7 @@
 
 | **返回类型** | ✅ 支持 | ⚠️ 需要Box |
 
-### Sized vs ?Sized
+### Sized vs ?Sized {#sized-vs-sized}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -233,7 +233,7 @@
 
 | **使用场景** | 通用 | 特化场景 |
 
-### 型变对比
+### 型变对比 {#型变对比}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -261,13 +261,13 @@
 
 ---
 
-## 三、并发对比
+## 三、并发对比 {#三并发对比}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Send vs Sync
+### Send vs Sync {#send-vs-sync}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -291,7 +291,7 @@
 
 | **同时满足** | 可以 | 可以 |
 
-### thread::spawn vs tokio::spawn
+### thread::spawn vs tokio::spawn {#threadspawn-vs-tokiospawn}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -311,7 +311,7 @@
 
 | **阻塞操作** | 可以 | 必须避免 |
 
-### Mutex vs RwLock
+### Mutex vs RwLock {#mutex-vs-rwlock}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -335,13 +335,13 @@
 
 ---
 
-## 四、异步对比
+## 四、异步对比 {#四异步对比}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### async fn vs 普通fn
+### async fn vs 普通fn {#async-fn-vs-普通fn}
 
 >
 
@@ -363,7 +363,7 @@
 
 | **传染性** | 无 | 调用者需await |
 
-### Future vs Task
+### Future vs Task {#future-vs-task}
 
 >
 
@@ -383,7 +383,7 @@
 
 | **并发** | 单描述 | 可真正并行 |
 
-### Pin<&mut T> vs &mut T
+### Pin<&mut T> vs &mut T {#pinmut-t-vs-mut-t}
 
 >
 
@@ -405,13 +405,13 @@
 
 ---
 
-## 五、分布式模式对比
+## 五、分布式模式对比 {#五分布式模式对比}
 
 >
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### Saga vs 2PC
+### Saga vs 2PC {#saga-vs-2pc}
 
 >
 
@@ -435,7 +435,7 @@
 
 | **隔离性** | 弱 | 强 |
 
-### 编排式 vs 编制式 Saga
+### 编排式 vs 编制式 Saga {#编排式-vs-编制式-saga}
 
 >
 
@@ -457,7 +457,7 @@
 
 | **适用场景** | 流程固定 | 流程灵活 |
 
-### CQRS vs CRUD
+### CQRS vs CRUD {#cqrs-vs-crud}
 
 >
 
@@ -481,13 +481,13 @@
 
 ---
 
-## 六、工作流对比
+## 六、工作流对比 {#六工作流对比}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 编排 vs 编制
+### 编排 vs 编制 {#编排-vs-编制}
 
 >
 
@@ -509,7 +509,7 @@
 
 | **典型实现** | Temporal/Camunda | 事件驱动架构 |
 
-### 向后补偿 vs 向前补偿
+### 向后补偿 vs 向前补偿 {#向后补偿-vs-向前补偿}
 
 >
 
@@ -531,13 +531,13 @@
 
 ---
 
-## 七、证明层级对比
+## 七、证明层级对比 {#七证明层级对比}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### L1 vs L2 vs L3
+### L1 vs L2 vs L3 {#l1-vs-l2-vs-l3}
 
 >
 
@@ -563,13 +563,13 @@
 
 ---
 
-## 八、快速决策表
+## 八、快速决策表 {#八快速决策表}
 
 >
 
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 选择何种智能指针？
+### 选择何种智能指针？ {#选择何种智能指针}
 
 >
 
@@ -597,7 +597,7 @@
 
 ```
 
-### 选择何种锁？
+### 选择何种锁？ {#选择何种锁}
 
 >
 
@@ -619,7 +619,7 @@
 
 ```
 
-### 选择何种并发模型？
+### 选择何种并发模型？ {#选择何种并发模型}
 
 >
 
@@ -637,7 +637,7 @@ CPU密集型？
 
 ```
 
-### 选择何种事务模式？
+### 选择何种事务模式？ {#选择何种事务模式}
 
 >
 
@@ -677,7 +677,7 @@ CPU密集型？
 
 ---
 
-## 🆕 Rust 1.94 研究更新
+## 🆕 Rust 1.94 研究更新 {#rust-194-研究更新}
 
 >
 
@@ -685,7 +685,7 @@ CPU密集型？
 
 > **适用版本**: Rust 1.96.0+
 
-### 核心研究点
+### 核心研究点 {#核心研究点}
 
 >
 
@@ -705,7 +705,7 @@ CPU密集型？
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -715,7 +715,7 @@ CPU密集型？
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -723,7 +723,7 @@ CPU密集型？
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -737,7 +737,7 @@ CPU密集型？
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -747,7 +747,7 @@ CPU密集型？
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -779,7 +779,7 @@ CPU密集型？
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -791,7 +791,7 @@ CPU密集型？
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

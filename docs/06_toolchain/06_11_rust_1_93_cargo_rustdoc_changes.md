@@ -1,4 +1,4 @@
-# Rust 1.93 Cargo 与 Rustdoc 变更详解
+# Rust 1.93 Cargo 与 Rustdoc 变更详解 {#rust-193-cargo-与-rustdoc-变更详解}
 
 > **分级**: [A]
 > **创建日期**: 2026-02-12
@@ -8,7 +8,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -19,7 +19,7 @@
     - [cargo tree --format 长格式](#cargo-tree---format-长格式)
     - [cargo clean --workspace](#cargo-clean---workspace)
   - [Rustdoc 变更](#rustdoc-变更)
-    - [移除 #!\[doc(document\_private\_items)\]](#移除-docdocument_private_items)
+    - [移除 #!\[doc(document\_private\_items)\] {#移除-docdocument\_private\_items}](#移除-docdocument_private_items-移除-docdocument_private_items)
     - [宏搜索过滤](#宏搜索过滤)
     - [import 搜索过滤](#import-搜索过滤)
     - [文档属性校验](#文档属性校验)
@@ -27,16 +27,15 @@
   - [完整代码示例](#完整代码示例)
   - [形式化规范链接](#形式化规范链接)
   - [Rust 1.95+ 更新](#rust-195-更新)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [权威来源索引](#权威来源索引)
 
 ---
 
-## Cargo 变更
+## Cargo 变更 {#cargo-变更}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### CARGO_CFG_DEBUG_ASSERTIONS
+### CARGO_CFG_DEBUG_ASSERTIONS {#cargo_cfg_debug_assertions}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -52,7 +51,7 @@
 
 ---
 
-### cargo tree --format 长格式
+### cargo tree --format 长格式 {#cargo-tree---format-长格式}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -63,7 +62,7 @@
 **示例**：
 
 ```bash
-# 长格式变量示例
+# 长格式变量示例 {#长格式变量示例}
 
 > **Bloom 层级**: L3 (应用)
 cargo tree --format "{p} {l} {r}"
@@ -73,7 +72,7 @@ cargo tree --format "{p} {l} {r}"
 
 ---
 
-### cargo clean --workspace
+### cargo clean --workspace {#cargo-clean---workspace}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -84,7 +83,7 @@ cargo tree --format "{p} {l} {r}"
 **示例**：
 
 ```bash
-# 清理整个 workspace 的 target 目录
+# 清理整个 workspace 的 target 目录 {#清理整个-workspace-的-target-目录}
 cargo clean --workspace
 ```
 
@@ -92,11 +91,11 @@ cargo clean --workspace
 
 ---
 
-## Rustdoc 变更
+## Rustdoc 变更 {#rustdoc-变更}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 移除 #![doc(document_private_items)]
+### 移除 #![doc(document_private_items)] {#移除-docdocument_private_items}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -110,7 +109,7 @@ cargo clean --workspace
 
 ---
 
-### 宏搜索过滤
+### 宏搜索过滤 {#宏搜索过滤}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -124,7 +123,7 @@ cargo clean --workspace
 
 ---
 
-### import 搜索过滤
+### import 搜索过滤 {#import-搜索过滤}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -138,7 +137,7 @@ cargo clean --workspace
 
 ---
 
-### 文档属性校验
+### 文档属性校验 {#文档属性校验}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -149,16 +148,16 @@ cargo clean --workspace
 **解决方案**：检查并修正 crate 级文档属性配置。
 
 ```toml
-# Cargo.toml 示例
+# Cargo.toml 示例 {#cargotoml-示例}
 [package.metadata.docs.rs]
-# 确保这些属性有有效值
+# 确保这些属性有有效值 {#确保这些属性有有效值-1}
 ```
 
 **参考**：[PR #149197](https://github.com/rust-lang/rust/pull/149197)
 
 ---
 
-## 相关文档
+## 相关文档 {#相关文档}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -169,7 +168,7 @@ cargo clean --workspace
 
 ---
 
-## 完整代码示例
+## 完整代码示例 {#完整代码示例}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -259,21 +258,21 @@ pub mod cargo_tree_format {
     /// 生成依赖报告
     pub fn generate_dependency_report() -> String {
         r#"
-# 依赖报告生成脚本
+# 依赖报告生成脚本 {#依赖报告生成脚本}
 
-## 基础依赖树
+## 基础依赖树 {#基础依赖树}
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 cargo tree
 
-## 包含许可证信息
+## 包含许可证信息 {#包含许可证信息}
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 cargo tree --format "{p} [{l}]"
 
-## 仅显示生产依赖
+## 仅显示生产依赖 {#仅显示生产依赖}
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 cargo tree --edges normal
 
-## 显示重复依赖
+## 显示重复依赖 {#显示重复依赖}
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 cargo tree --duplicates
 "#
@@ -299,7 +298,7 @@ pub mod rustdoc_attr_validation {
     /// Cargo.toml 配置示例
     pub const CARGO_TOML_EXAMPLE: &str = r#"
 [package.metadata.docs.rs]
-# 确保这些属性有有效值
+# 确保这些属性有有效值 {#确保这些属性有有效值-1}
 all-features = true
 rustdoc-args = ["--cfg", "docsrs"]
 "#;
@@ -494,7 +493,7 @@ mod tests {
 
 ---
 
-## 形式化规范链接
+## 形式化规范链接 {#形式化规范链接}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -510,7 +509,7 @@ mod tests {
 
 ---
 
-## Rust 1.95+ 更新
+## Rust 1.95+ 更新 {#rust-195-更新}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -541,7 +540,7 @@ Rust 1.95+ 重要更新：
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Build Automation](https://en.wikipedia.org/wiki/Build_Automation)**
 

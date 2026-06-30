@@ -10,6 +10,7 @@
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Ownership](../01_foundation/01_ownership.md)
 > **后置概念**: [C/C++ → Rust Engineering Roadmap](cpp_rust_engineering_roadmap.md) · [Pattern Semantic Space Index](pattern_semantic_space_index.md)
 > **主要来源**: [Pierce TAPL] · [Harper PFPL] · [Felleisen & Flatt PLAI] · [Nottingham PL Semantics]
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/) · [RFCs](https://github.com/rust-lang/rfcs)
 ---
 
 > **Bloom 层级**: 理解 → 分析

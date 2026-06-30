@@ -1,4 +1,4 @@
-# Rust 编译器特性与优化
+# Rust 编译器特性与优化 {#rust-编译器特性与优化}
 
 > **分级**: [A]
 > **Bloom 层级**: L3 (应用)
@@ -18,13 +18,13 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 编译器特性与优化](#rust-编译器特性与优化)
-  - [📑 目录](#-目录)
-  - [🎯 文档说明](#-文档说明)
+  - [📑 目录](#目录)
+  - [🎯 文档说明](#文档说明)
   - [1. 编译器概览](#1-编译器概览)
     - [1.1 编译流程](#11-编译流程)
     - [1.2 编译器版本](#12-编译器版本)
@@ -76,16 +76,15 @@
     - [15.4 LTO 的形式化分析](#154-lto-的形式化分析)
     - [15.5 PGO 的形式化模型](#155-pgo-的形式化模型)
   - [16. 相关资源](#16-相关资源)
-    - [📚 官方文档](#-官方文档)
-    - [🔗 相关文档](#-相关文档)
-    - [🔗 形式化理论文档](#-形式化理论文档)
-    - [📦 推荐工具](#-推荐工具)
+    - [📚 官方文档](#官方文档)
+    - [🔗 相关文档](#相关文档)
+    - [🔗 形式化理论文档](#形式化理论文档)
+    - [📦 推荐工具](#推荐工具)
   - [Rust 1.96+ 更新](#rust-196-更新)
-  - [**最后更新**: 2026-06-08 (对齐 1.96 稳定版内容)](#最后更新-2026-06-08-对齐-196-稳定版内容)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🎯 文档说明
+## 🎯 文档说明 {#文档说明}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -95,11 +94,11 @@
 
 ---
 
-## 1. 编译器概览
+## 1. 编译器概览 {#1-编译器概览}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1.1 编译流程
+### 1.1 编译流程 {#11-编译流程}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -163,27 +162,27 @@
 
 ---
 
-### 1.2 编译器版本
+### 1.2 编译器版本 {#12-编译器版本}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# 查看编译器版本
+# 查看编译器版本 {#查看编译器版本}
 rustc --version
 
-# 查看详细版本信息
+# 查看详细版本信息 {#查看详细版本信息}
 rustc --version --verbose
 
-# 输出示例 (Rust 1.96.0):
-# rustc 1.96.0 (2026-05-28)
-# binary: rustc
-# commit-hash: abc123...
-# commit-date: 2026-05-28
-# host: x86_64-unknown-linux-gnu
-# release: 1.96.0
-# LLVM version: 21.0.0  (minimum external LLVM for building rustc from source is 21)
+# 输出示例 (Rust 1.96.0): {#输出示例-rust-1960}
+# rustc 1.96.0 (2026-05-28) {#rustc-1960-2026-05-28}
+# binary: rustc {#binary-rustc}
+# commit-hash: abc123... {#commit-hash-abc123}
+# commit-date: 2026-05-28 {#commit-date-2026-05-28}
+# host: x86_64-unknown-linux-gnu {#host-x86_64-unknown-linux-gnu}
+# release: 1.96.0 {#release-1960}
+# LLVM version: 21.0.0  (minimum external LLVM for building rustc from source is 21) {#llvm-version-2100-minimum-external-llvm-for-building-rustc-from-source-is-21}
 ```
 
 **查看编译器支持的目标平台**:
@@ -191,21 +190,21 @@ rustc --version --verbose
 ```bash
 rustc --print target-list
 
-# 常见目标:
-# x86_64-unknown-linux-gnu
-# x86_64-pc-windows-msvc
-# x86_64-apple-darwin
-# aarch64-unknown-linux-gnu
-# wasm32-unknown-unknown
+# 常见目标: {#常见目标}
+# x86_64-unknown-linux-gnu {#x86_64-unknown-linux-gnu}
+# x86_64-pc-windows-msvc {#x86_64-pc-windows-msvc}
+# x86_64-apple-darwin {#x86_64-apple-darwin}
+# aarch64-unknown-linux-gnu {#aarch64-unknown-linux-gnu}
+# wasm32-unknown-unknown {#wasm32-unknown-unknown}
 ```
 
 ---
 
-## 2. 增量编译 (Rust 1.54+)
+## 2. 增量编译 (Rust 1.54+) {#2-增量编译-rust-154}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 增量编译原理
+### 2.1 增量编译原理 {#21-增量编译原理}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -222,7 +221,7 @@ rustc --print target-list
 
 ---
 
-### 2.2 配置增量编译
+### 2.2 配置增量编译 {#22-配置增量编译}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -241,30 +240,30 @@ incremental = false  # 生产环境建议关闭
 **环境变量**:
 
 ```bash
-# 启用增量编译
+# 启用增量编译 {#启用增量编译}
 export CARGO_INCREMENTAL=1
 
-# 禁用增量编译
+# 禁用增量编译 {#禁用增量编译}
 export CARGO_INCREMENTAL=0
 
-# 指定增量编译缓存目录
+# 指定增量编译缓存目录 {#指定增量编译缓存目录}
 export CARGO_INCREMENTAL_DIR=/custom/cache/path
 ```
 
 **清理增量编译缓存**:
 
 ```bash
-# 清理所有缓存
+# 清理所有缓存 {#清理所有缓存}
 cargo clean
 
-# 清理增量编译缓存
+# 清理增量编译缓存 {#清理增量编译缓存}
 rm -rf target/debug/incremental
 rm -rf target/release/incremental
 ```
 
 ---
 
-### 2.3 性能影响
+### 2.3 性能影响 {#23-性能影响}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -285,11 +284,11 @@ rm -rf target/release/incremental
 
 ---
 
-## 3. 优化级别
+## 3. 优化级别 {#3-优化级别}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 3.1 基础优化级别
+### 3.1 基础优化级别 {#31-基础优化级别}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -315,7 +314,7 @@ opt-level = 3  # 最大优化 (最快运行)
 
 ---
 
-### 3.2 高级优化选项
+### 3.2 高级优化选项 {#32-高级优化选项}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -343,11 +342,11 @@ opt-level = 0  # 自己的 crate 保持无优化
 
 ---
 
-## 4. Link-Time Optimization (LTO)
+## 4. Link-Time Optimization (LTO) {#4-link-time-optimization-lto}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 4.1 LTO 类型
+### 4.1 LTO 类型 {#41-lto-类型}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -368,7 +367,7 @@ lto = "thin"
 ```toml
 [profile.release]
 lto = "fat"
-# 或
+# 或 {#或}
 lto = true
 ```
 
@@ -379,7 +378,7 @@ lto = true
 
 ---
 
-### 4.2 配置 LTO
+### 4.2 配置 LTO {#42-配置-lto}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -403,7 +402,7 @@ lto = true  # 所有依赖包也启用 LTO
 
 ---
 
-### 4.3 性能权衡
+### 4.3 性能权衡 {#43-性能权衡}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -422,11 +421,11 @@ lto = true  # 所有依赖包也启用 LTO
 
 ---
 
-## 5. Profile-Guided Optimization (PGO)
+## 5. Profile-Guided Optimization (PGO) {#5-profile-guided-optimization-pgo}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 5.1 PGO 工作流程
+### 5.1 PGO 工作流程 {#51-pgo-工作流程}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -453,33 +452,33 @@ lto = true  # 所有依赖包也启用 LTO
 
 ---
 
-### 5.2 实施 PGO
+### 5.2 实施 PGO {#52-实施-pgo}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **步骤 1: Instrumented 构建**:
 
 ```bash
-# 设置环境变量
+# 设置环境变量 {#设置环境变量}
 export RUSTFLAGS="-Cprofile-generate=/tmp/pgo-data"
 
-# 构建
+# 构建 {#构建}
 cargo build --release
 ```
 
 **步骤 2: 运行并收集数据**:
 
 ```bash
-# 运行程序 (使用典型工作负载)
+# 运行程序 (使用典型工作负载) {#运行程序-使用典型工作负载}
 ./target/release/my-app
 
-# 这将生成 /tmp/pgo-data/*.profraw 文件
+# 这将生成 /tmp/pgo-data/*.profraw 文件 {#这将生成-tmppgo-dataprofraw-文件}
 ```
 
 **步骤 3: 合并性能数据**:
 
 ```bash
-# 使用 llvm-profdata 合并
+# 使用 llvm-profdata 合并 {#使用-llvm-profdata-合并}
 llvm-profdata merge \
     -o /tmp/pgo-data/merged.profdata \
     /tmp/pgo-data/*.profraw
@@ -488,19 +487,19 @@ llvm-profdata merge \
 **步骤 4: 使用 PGO 数据重新构建**:
 
 ```bash
-# 清理之前的构建
+# 清理之前的构建 {#清理之前的构建}
 cargo clean
 
-# 设置使用 PGO 数据
+# 设置使用 PGO 数据 {#设置使用-pgo-数据}
 export RUSTFLAGS="-Cprofile-use=/tmp/pgo-data/merged.profdata"
 
-# 重新构建
+# 重新构建 {#重新构建}
 cargo build --release
 ```
 
 ---
 
-### 5.3 性能提升
+### 5.3 性能提升 {#53-性能提升}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -520,37 +519,37 @@ cargo build --release
 
 ---
 
-## 6. 代码生成选项
+## 6. 代码生成选项 {#6-代码生成选项}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 6.1 目标 CPU 和特性
+### 6.1 目标 CPU 和特性 {#61-目标-cpu-和特性}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 **指定目标 CPU**:
 
 ```bash
-# 针对本机 CPU 优化
+# 针对本机 CPU 优化 {#针对本机-cpu-优化}
 RUSTFLAGS="-C target-cpu=native" cargo build --release
 
-# 针对特定 CPU
+# 针对特定 CPU {#针对特定-cpu}
 RUSTFLAGS="-C target-cpu=haswell" cargo build --release
 
-# 查看支持的 CPU
+# 查看支持的 CPU {#查看支持的-cpu}
 rustc --print target-cpus
 ```
 
 **启用特定 CPU 特性**:
 
 ```bash
-# 启用 AVX2
+# 启用 AVX2 {#启用-avx2}
 RUSTFLAGS="-C target-feature=+avx2" cargo build --release
 
-# 启用多个特性
+# 启用多个特性 {#启用多个特性}
 RUSTFLAGS="-C target-feature=+avx2,+fma,+bmi2" cargo build --release
 
-# 查看支持的特性
+# 查看支持的特性 {#查看支持的特性}
 rustc --print target-features
 ```
 
@@ -564,28 +563,28 @@ rustflags = ["-C", "target-cpu=native"]
 
 ---
 
-### 6.2 代码模型
+### 6.2 代码模型 {#62-代码模型}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 ```bash
-# 小代码模型 (默认, < 2GB)
+# 小代码模型 (默认, < 2GB) {#小代码模型-默认-2gb}
 RUSTFLAGS="-C code-model=small" cargo build --release
 
-# 中等代码模型 (2-4GB)
+# 中等代码模型 (2-4GB) {#中等代码模型-2-4gb}
 RUSTFLAGS="-C code-model=medium" cargo build --release
 
-# 大代码模型 (> 4GB)
+# 大代码模型 (> 4GB) {#大代码模型-4gb}
 RUSTFLAGS="-C code-model=large" cargo build --release
 ```
 
 ---
 
-## 7. 调试信息
+## 7. 调试信息 {#7-调试信息}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 7.1 调试信息级别
+### 7.1 调试信息级别 {#71-调试信息级别}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -595,7 +594,7 @@ debug = 2  # 完整调试信息 (默认)
 
 [profile.release]
 debug = 0  # 无调试信息
-# 或保留部分调试信息用于 profiling
+# 或保留部分调试信息用于 profiling {#或保留部分调试信息用于-profiling}
 debug = 1  # 仅行号信息
 ```
 
@@ -608,14 +607,14 @@ debug = 1  # 仅行号信息
 
 ---
 
-### 7.2 分割调试信息
+### 7.2 分割调试信息 {#72-分割调试信息}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 ```toml
 [profile.release]
 split-debuginfo = "packed"  # macOS/Windows: 打包到单独文件
-# split-debuginfo = "unpacked"  # Linux: 分散到多个文件
+# split-debuginfo = "unpacked"  # Linux: 分散到多个文件 {#split-debuginfo-unpacked-linux-分散到多个文件}
 ```
 
 **平台差异**:
@@ -627,15 +626,15 @@ split-debuginfo = "packed"  # macOS/Windows: 打包到单独文件
 
 ---
 
-### 7.3 DWARF 版本
+### 7.3 DWARF 版本 {#73-dwarf-版本}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 ```bash
-# 使用 DWARF 5 (最新, 更小)
+# 使用 DWARF 5 (最新, 更小) {#使用-dwarf-5-最新-更小}
 RUSTFLAGS="-C debuginfo=2 -C dwarf-version=5" cargo build
 
-# 使用 DWARF 4 (兼容性更好)
+# 使用 DWARF 4 (兼容性更好) {#使用-dwarf-4-兼容性更好}
 RUSTFLAGS="-C debuginfo=2 -C dwarf-version=4" cargo build
 ```
 
@@ -643,11 +642,11 @@ RUSTFLAGS="-C debuginfo=2 -C dwarf-version=4" cargo build
 
 ---
 
-## 8. 编译缓存
+## 8. 编译缓存 {#8-编译缓存}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 8.1 Sccache
+### 8.1 Sccache {#81-sccache}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -660,13 +659,13 @@ cargo install sccache
 **配置**:
 
 ```bash
-# 设置为默认编译器包装器
+# 设置为默认编译器包装器 {#设置为默认编译器包装器}
 export RUSTC_WRAPPER=sccache
 
-# 查看缓存统计
+# 查看缓存统计 {#查看缓存统计}
 sccache --show-stats
 
-# 清理缓存
+# 清理缓存 {#清理缓存-1}
 sccache --stop-server
 ```
 
@@ -679,7 +678,7 @@ rustc-wrapper = "/path/to/sccache"
 
 ---
 
-### 8.2 配置缓存
+### 8.2 配置缓存 {#82-配置缓存}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -705,19 +704,19 @@ export SCCACHE_REGION="us-west-2"
 
 ---
 
-## 9. 编译时间优化
+## 9. 编译时间优化 {#9-编译时间优化}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 9.1 并行编译
+### 9.1 并行编译 {#91-并行编译}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 ```bash
-# 设置并行任务数
+# 设置并行任务数 {#设置并行任务数}
 cargo build -j 8
 
-# 或通过环境变量
+# 或通过环境变量 {#或通过环境变量}
 export CARGO_BUILD_JOBS=8
 ```
 
@@ -730,7 +729,7 @@ jobs = 8  # 默认为 CPU 核心数
 
 ---
 
-### 9.2 依赖优化
+### 9.2 依赖优化 {#92-依赖优化}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -738,12 +737,12 @@ jobs = 8  # 默认为 CPU 核心数
 
 ```toml
 [dependencies]
-# 仅使用需要的 feature
+# 仅使用需要的 feature {#仅使用需要的-feature}
 serde = { version = "1.0", features = ["derive"] }
 tokio = { version = "1.0", features = ["rt-multi-thread", "macros"] }
 
-# 避免不必要的依赖
-# ❌ regex = "1.0"
+# 避免不必要的依赖 {#避免不必要的依赖}
+# ❌ regex = "1.0" {#regex-10}
 ```
 
 **使用 workspace**:
@@ -752,14 +751,14 @@ tokio = { version = "1.0", features = ["rt-multi-thread", "macros"] }
 [workspace]
 members = ["crate1", "crate2", "crate3"]
 
-# 共享依赖版本
+# 共享依赖版本 {#共享依赖版本}
 [workspace.dependencies]
 tokio = { version = "1.0", features = ["full"] }
 ```
 
 ---
 
-### 9.3 代码组织
+### 9.3 代码组织 {#93-代码组织}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -786,11 +785,11 @@ pub mod everything_in_one_file; // 10000+ lines
 
 ---
 
-## 10. 编译器插件与扩展
+## 10. 编译器插件与扩展 {#10-编译器插件与扩展}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 10.1 Procedural Macros
+### 10.1 Procedural Macros {#101-procedural-macros}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -812,7 +811,7 @@ struct Data { /* ... */ }
 
 ---
 
-### 10.2 编译器内置工具
+### 10.2 编译器内置工具 {#102-编译器内置工具}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -836,22 +835,22 @@ cargo +nightly miri test
 
 ---
 
-## 11. 高级编译技术
+## 11. 高级编译技术 {#11-高级编译技术}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 11.1 Polly (LLVM 优化器)
+### 11.1 Polly (LLVM 优化器) {#111-polly-llvm-优化器}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 ```bash
-# 启用 Polly (实验性)
+# 启用 Polly (实验性) {#启用-polly-实验性}
 RUSTFLAGS="-C passes=polly" cargo build --release
 ```
 
 ---
 
-### 11.2 自定义构建脚本
+### 11.2 自定义构建脚本 {#112-自定义构建脚本}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -873,11 +872,11 @@ fn main() {
 
 ---
 
-## 12. 实战案例
+## 12. 实战案例 {#12-实战案例}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 12.1 生产环境优化配置
+### 12.1 生产环境优化配置 {#121-生产环境优化配置}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -898,14 +897,14 @@ opt-level = 0  # 构建脚本无需优化
 **构建命令**:
 
 ```bash
-# 使用 PGO
+# 使用 PGO {#使用-pgo}
 export RUSTFLAGS="-C target-cpu=native -C profile-use=merged.profdata"
 cargo build --release
 ```
 
 ---
 
-### 12.2 开发环境优化配置
+### 12.2 开发环境优化配置 {#122-开发环境优化配置}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -922,7 +921,7 @@ opt-level = 2          # 依赖包使用 O2
 
 ---
 
-## 13. 性能基准
+## 13. 性能基准 {#13-性能基准}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -936,27 +935,27 @@ opt-level = 2          # 依赖包使用 O2
 
 ---
 
-## 14. 故障排查
+## 14. 故障排查 {#14-故障排查}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 常见问题
+### 常见问题 {#常见问题}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **1. 编译错误: out of memory**:
 
 ```bash
-# 减少并行任务
+# 减少并行任务 {#减少并行任务}
 export CARGO_BUILD_JOBS=2
 
-# 或增加 swap 空间
+# 或增加 swap 空间 {#或增加-swap-空间}
 ```
 
 **2. 增量编译损坏**:
 
 ```bash
-# 清理缓存
+# 清理缓存 {#清理缓存-1}
 cargo clean
 rm -rf ~/.cargo/registry/cache
 ```
@@ -964,7 +963,7 @@ rm -rf ~/.cargo/registry/cache
 **3. LTO 失败**:
 
 ```toml
-# 尝试 thin LTO
+# 尝试 thin LTO {#尝试-thin-lto}
 [profile.release]
 lto = "thin"
 codegen-units = 16  # 增加代码生成单元
@@ -972,11 +971,11 @@ codegen-units = 16  # 增加代码生成单元
 
 ---
 
-## 15. 编译器特性的形式化分析
+## 15. 编译器特性的形式化分析 {#15-编译器特性的形式化分析}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 15.1 编译过程的形式化模型
+### 15.1 编译过程的形式化模型 {#151-编译过程的形式化模型}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -1021,7 +1020,7 @@ fn compile(source: SourceCode) -> Result<ObjectCode, CompileError> {
 }
 ```
 
-### 15.2 借用检查的形式化
+### 15.2 借用检查的形式化 {#152-借用检查的形式化}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -1065,7 +1064,7 @@ fn borrow_check_example() {
 }
 ```
 
-### 15.3 优化级别的形式化语义
+### 15.3 优化级别的形式化语义 {#153-优化级别的形式化语义}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -1120,7 +1119,7 @@ impl OptimizationLevel {
 }
 ```
 
-### 15.4 LTO 的形式化分析
+### 15.4 LTO 的形式化分析 {#154-lto-的形式化分析}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -1154,7 +1153,7 @@ pub fn caller_lto() -> i32 {
 }
 ```
 
-### 15.5 PGO 的形式化模型
+### 15.5 PGO 的形式化模型 {#155-pgo-的形式化模型}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -1194,11 +1193,11 @@ fn pgo_workflow() {
 
 ---
 
-## 16. 相关资源
+## 16. 相关资源 {#16-相关资源}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 📚 官方文档
+### 📚 官方文档 {#官方文档}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -1206,14 +1205,14 @@ fn pgo_workflow() {
 - [Cargo Book - Profiles](https://doc.rust-lang.org/cargo/reference/profiles.html)
 - [LLVM Documentation](https://llvm.org/docs/)
 
-### 🔗 相关文档
+### 🔗 相关文档 {#相关文档}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
 - 02_cargo_workspace_guide.md
 - [03_rustdoc_advanced.md](03_rustdoc_advanced.md)
 
-### 🔗 形式化理论文档
+### 🔗 形式化理论文档 {#形式化理论文档}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -1222,7 +1221,7 @@ fn pgo_workflow() {
 - [类型系统基础](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md)
 - 生命周期形式化
 
-### 📦 推荐工具
+### 📦 推荐工具 {#推荐工具}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -1241,7 +1240,7 @@ fn pgo_workflow() {
 
 ---
 
-## Rust 1.96+ 更新
+## Rust 1.96+ 更新 {#rust-196-更新}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -1266,7 +1265,7 @@ fn pgo_workflow() {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -1275,7 +1274,7 @@ fn pgo_workflow() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
 

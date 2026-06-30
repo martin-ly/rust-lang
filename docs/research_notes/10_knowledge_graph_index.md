@@ -1,4 +1,4 @@
-# 知识图谱索引
+# 知识图谱索引 {#知识图谱索引}
 
 > **内容分级**: [核心级]
 >
@@ -14,10 +14,10 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 - [知识图谱索引](#知识图谱索引)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、图谱说明](#一图谱说明)
   - [二、核心概念节点](#二核心概念节点)
     - [L1 元概念](#l1-元概念)
@@ -36,7 +36,7 @@
 
 ---
 
-## 一、图谱说明
+## 一、图谱说明 {#一图谱说明}
 
 本文档是 `docs/research_notes/` 的**知识图谱物理锚点**，以“六层两网一库”框架组织：
 
@@ -48,9 +48,9 @@
 
 ---
 
-## 二、核心概念节点
+## 二、核心概念节点 {#二核心概念节点}
 
-### L1 元概念
+### L1 元概念 {#l1-元概念}
 
 | 节点 | 说明 | 主文档 |
 |------|------|--------|
@@ -61,7 +61,7 @@
 | 抽象能力 | 泛型、Trait、模块、宏等组合抽象机制 | [type_theory/10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) |
 | 权威来源对齐 | 项目概念与国际化权威来源的映射与追溯 | [10_authoritative_source_alignment_network.md](10_authoritative_source_alignment_network.md) |
 
-### L2 核心概念族
+### L2 核心概念族 {#l2-核心概念族}
 
 | 节点 | 层级 | 主文档 | 反例 |
 |------|------|--------|------|
@@ -84,7 +84,7 @@
 | Crate 架构 | L2 | [software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md](software_design_theory/07_crate_architectures/00_crate_architecture_master_index.md) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) |
 | 算法练习 | L2-L4 | [10_algorithm_exercises_guide.md](10_algorithm_exercises_guide.md) | [exercises/src/algorithms/](../../exercises/src/algorithms/) |
 
-### L3 具体概念
+### L3 具体概念 {#l3-具体概念}
 
 > **说明**：L3 节点按 8 大主-topic 持续展开。以下模块系统相关节点已完成首批梳理，其余节点在阶段 2 继续补全。
 
@@ -115,10 +115,10 @@
 | `Mutex` / `RwLock` | 并发安全 | L3 | [formal_methods/10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §3 |
 | `Future` / `poll` | 异步 | L3-L4 | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §7 |
 | `Pin` 契约 | 异步 / 自引用 | L3-L4 | [formal_methods/10_pin_self_referential.md](formal_methods/10_pin_self_referential.md) | [formal_methods/60_concurrency_async_counterexamples.md](formal_methods/60_concurrency_async_counterexamples.md) §5 |
-| 裸指针 | unsafe / 内存 | L3 | [10_safe_unsafe_comprehensive_analysis.md](../10_safe_unsafe_comprehensive_analysis.md) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §1-§2 |
-| `unsafe impl` | unsafe / 并发 | L3 | [10_safe_unsafe_comprehensive_analysis.md](../10_safe_unsafe_comprehensive_analysis.md) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §5 |
-| `transmute` | unsafe / 类型 | L3 | [10_safe_unsafe_comprehensive_analysis.md](../10_safe_unsafe_comprehensive_analysis.md) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §7 |
-| FFI 内存协议 | unsafe / FFI | L3 | [10_safe_unsafe_comprehensive_analysis.md](../10_safe_unsafe_comprehensive_analysis.md) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §6 |
+| 裸指针 | unsafe / 内存 | L3 | [10_safe_unsafe_comprehensive_analysis.md](./10_safe_unsafe_comprehensive_analysis.md) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §1-§2 |
+| `unsafe impl` | unsafe / 并发 | L3 | [10_safe_unsafe_comprehensive_analysis.md](./10_safe_unsafe_comprehensive_analysis.md) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §5 |
+| `transmute` | unsafe / 类型 | L3 | [10_safe_unsafe_comprehensive_analysis.md](./10_safe_unsafe_comprehensive_analysis.md) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §7 |
+| FFI 内存协议 | unsafe / FFI | L3 | [10_safe_unsafe_comprehensive_analysis.md](./10_safe_unsafe_comprehensive_analysis.md) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) §6 |
 | 单例 / 全局状态 | 设计模式 | L3 | [software_design_theory/01_design_patterns_formal/README.md](software_design_theory/01_design_patterns_formal/README.md) | [software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §1 |
 | Observer / 生命周期 | 设计模式 | L3 | [software_design_theory/01_design_patterns_formal/README.md](software_design_theory/01_design_patterns_formal/README.md) | [software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §2 |
 | Builder / 类型状态 | 设计模式 | L3 | [software_design_theory/01_design_patterns_formal/README.md](software_design_theory/01_design_patterns_formal/README.md) | [software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md) §4 |
@@ -204,11 +204,11 @@
 | 行号级锚点索引 | 权威来源对齐 / 锚点 | L0-L7 | [10_authoritative_source_line_anchors.md](10_authoritative_source_line_anchors.md) | 各对齐文档 |
 | RFC 到反例映射 | 权威来源对齐 / RFC / 反例 | L0-L5 | [10_rfc_to_counterexample_mapping.md](10_rfc_to_counterexample_mapping.md) | 各 `60_*_counterexamples.md` |
 | 性能与测试权威来源对齐 | 权威来源对齐 / 性能 / 测试 | L0-L5 | [10_performance_and_testing_alignment.md](10_performance_and_testing_alignment.md) | [experiments/60_experiments_counterexamples.md](experiments/60_experiments_counterexamples.md) |
-| 宏/FFI/嵌入式生态权威来源对齐 | 权威来源对齐 / 宏 / FFI / 嵌入式 | L0-L5 | [10_macros_ffi_embedded_alignment.md](10_macros_ffi_embedded_alignment.md) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) / [crates/c13_embedded/README.md](../crates/c13_embedded/README.md) |
+| 宏/FFI/嵌入式生态权威来源对齐 | 权威来源对齐 / 宏 / FFI / 嵌入式 | L0-L5 | [10_macros_ffi_embedded_alignment.md](10_macros_ffi_embedded_alignment.md) | [formal_methods/60_unsafe_counterexamples.md](formal_methods/60_unsafe_counterexamples.md) / [crates/c13_embedded/README.md](../../crates/c13_embedded/README.md) |
 | 学术资源对齐索引 | 权威来源对齐 / 学术资源 | L0-L6 | [10_academic_papers_alignment.md](10_academic_papers_alignment.md) | [10_international_formal_verification_index.md](10_international_formal_verification_index.md) |
-| 错误处理与网络/Web 生态权威来源对齐 | 权威来源对齐 / 错误处理 / 网络 / Web | L0-L5 | [10_error_handling_network_web_alignment.md](10_error_handling_network_web_alignment.md) | [10_error_handling_cheatsheet.md](10_error_handling_cheatsheet.md) / [crates/c10_networks/README.md](../crates/c10_networks/README.md) |
-| 数据库、存储与云原生生态权威来源对齐 | 权威来源对齐 / 数据库 / 存储 / 云原生 | L0-L5 | [10_database_storage_cloud_alignment.md](10_database_storage_cloud_alignment.md) | [crates/c10_networks/README.md](../crates/c10_networks/README.md) |
-| CI/CD 与供应链安全权威来源对齐 | 权威来源对齐 / CI/CD / 供应链安全 | L0-L4 | [10_cicd_supply_chain_alignment.md](10_cicd_supply_chain_alignment.md) | [.github/workflows/ci.yml](../.github/workflows/ci.yml) |
+| 错误处理与网络/Web 生态权威来源对齐 | 权威来源对齐 / 错误处理 / 网络 / Web | L0-L5 | [10_error_handling_network_web_alignment.md](10_error_handling_network_web_alignment.md) | [10_error_handling_cheatsheet.md](10_error_handling_cheatsheet.md) / [crates/c10_networks/README.md](../../crates/c10_networks/README.md) |
+| 数据库、存储与云原生生态权威来源对齐 | 权威来源对齐 / 数据库 / 存储 / 云原生 | L0-L5 | [10_database_storage_cloud_alignment.md](10_database_storage_cloud_alignment.md) | [crates/c10_networks/README.md](../../crates/c10_networks/README.md) |
+| CI/CD 与供应链安全权威来源对齐 | 权威来源对齐 / CI/CD / 供应链安全 | L0-L4 | [10_cicd_supply_chain_alignment.md](10_cicd_supply_chain_alignment.md) | [.github/workflows/ci.yml](../../.github/workflows/ci.yml) |
 | 权威来源缺口与反向追溯索引 | 权威来源对齐 / 缺口分析 / 反向追溯 | L0-L7 | [10_authoritative_source_gap_and_backref_index.md](10_authoritative_source_gap_and_backref_index.md) | [10_authoritative_alignment_gap_matrix.md](10_authoritative_alignment_gap_matrix.md) / [10_authoritative_alignment_gap_analysis.md](10_authoritative_alignment_gap_analysis.md) |
 | Crate 架构权威来源对齐 | 权威来源对齐 / Crate 架构 | L0-L5 | [10_crate_architecture_authoritative_alignment.md](10_crate_architecture_authoritative_alignment.md) | [software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md](software_design_theory/07_crate_architectures/60_crate_architecture_counterexamples.md) |
 | 学习路径与面试题权威来源对齐 | 权威来源对齐 / 学习路径 / 面试评估 | L0-L5 | [10_learning_and_interview_alignment.md](10_learning_and_interview_alignment.md) | [10_interview_questions_collection.md](10_interview_questions_collection.md) |
@@ -219,7 +219,7 @@
 
 ---
 
-## 三、关系类型与符号对照
+## 三、关系类型与符号对照 {#三关系类型与符号对照}
 
 > **来源**:
 > [Rust Reference](https://doc.rust-lang.org/reference/) |
@@ -242,7 +242,7 @@
 
 > **映射规则**：符号网络的 ∘ 在本 KG 中根据语境拆分为 `composes_with`（强调语义组合）或 `depends_on`（强调实现依赖）；⊂ 拆分为 `refines`（强调更精确建模）或 `hierarchical`（强调层次包含）。
 
-## 四、关系边
+## 四、关系边 {#四关系边}
 
 | 关系类型 | 源节点 | 目标节点 | 说明 | 锚点文档 |
 |----------|--------|----------|------|----------|
@@ -448,9 +448,9 @@
 
 ---
 
-## 五、文档锚点
+## 五、文档锚点 {#五文档锚点}
 
-### 4.1 形式化证明锚点
+### 4.1 形式化证明锚点 {#41-形式化证明锚点}
 
 | 定理/定义 | 文档 | 锚点 |
 |-----------|------|------|
@@ -459,7 +459,7 @@
 | A-OW1–A-OW3 所有权公理 | [formal_methods/10_ownership_model.md](formal_methods/10_ownership_model.md) | § 公理 |
 | SEND-T1 / SYNC-T1 | [formal_methods/10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) | § 定理 |
 
-### 4.2 代码示例锚点
+### 4.2 代码示例锚点 {#42-代码示例锚点}
 
 | 主题 | crate / 示例 | 文件 |
 |------|--------------|------|
@@ -500,7 +500,7 @@
 
 ---
 
-## 六、8 大主-topic 入口
+## 六、8 大主-topic 入口 {#六8-大主-topic-入口}
 
 | 主-topic | 主文档 | 子主题索引 | 反例 |
 |----------|--------|------------|------|
@@ -515,7 +515,7 @@
 
 ---
 
-## 七、阶段推进状态
+## 七、阶段推进状态 {#七阶段推进状态}
 
 - **阶段 0 基线修复**: ✅ 完成
 - **阶段 1 知识图谱骨架**: ✅ 完成 — 统一索引、层级/概念族标注、核心节点与边已建立
@@ -535,7 +535,7 @@
 - **阶段 3 反例库建设**: 🔄 部分完成（通用反例 + 模块系统反例已建）
 - **阶段 4 版本演进嵌入**: ⏳ 待推进
 
-### 剩余细化项（阶段 4 收尾）
+### 剩余细化项（阶段 4 收尾） {#剩余细化项阶段-4-收尾}
 
 1. 关系边缺少文档行号锚点。
 2. 已建立示例文件级锚点，行号级锚点持续补充。
@@ -543,7 +543,7 @@
 
 ---
 
-## 八、权威来源索引
+## 八、权威来源索引 {#八权威来源索引}
 
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)
@@ -552,7 +552,7 @@
 > **来源**: [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
 > **来源**: [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
 >
-## 社区权威参考
+## 社区权威参考 {#社区权威参考}
 
 - [Rust 中文社区](https://rustcc.cn/)
 - [This Week in Rust](https://this-week-in-rust.org/)

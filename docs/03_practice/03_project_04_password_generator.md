@@ -1,4 +1,4 @@
-# 实践项目 04: 密码生成器
+# 实践项目 04: 密码生成器 {#实践项目-04-密码生成器}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
@@ -9,22 +9,21 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 04: 密码生成器](#实践项目-04-密码生成器)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [项目目标](#项目目标)
   - [功能需求](#功能需求)
   - [学习要点](#学习要点)
     - [随机数生成](#随机数生成)
   - [参考实现](#参考实现)
-  - [完整参考实现位于: `examples/password-generator/`](#完整参考实现位于-examplespassword-generator)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 项目目标
+## 项目目标 {#项目目标}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -32,7 +31,7 @@
 
 ---
 
-## 功能需求
+## 功能需求 {#功能需求}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -43,11 +42,11 @@
 
 ---
 
-## 学习要点
+## 学习要点 {#学习要点}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 随机数生成
+### 随机数生成 {#随机数生成}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -68,7 +67,7 @@ fn generate_password(length: usize) -> String {
 
 ---
 
-## 参考实现
+## 参考实现 {#参考实现}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -90,14 +89,14 @@ fn generate_password(length: usize) -> String {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [03_practice 目录](README.md)
 - [docs 索引](../README.md)
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**

@@ -145,7 +145,7 @@ stateDiagram-v2
 > [来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)]
 
 > **前置概念**: [Type System](06_subtype_variance.md)
-> **后置概念**: [Borrowing](Borrowing.md)
+> **后置概念**: [Borrowing](../01_foundation/02_borrowing.md)
 ---
 
 ## 一、权威定义（Definition）

@@ -1,4 +1,4 @@
-# Rust 1.95.0 特性与 API 速查表
+# Rust 1.95.0 特性与 API 速查表 {#rust-1950-特性与-api-速查表}
 
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)
@@ -10,12 +10,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 1.95.0 特性与 API 速查表](#rust-1950-特性与-api-速查表)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、语言特性](#一语言特性)
     - [1. `cfg_select!` 宏](#1-cfg_select-宏)
     - [2. `if let` guards on match arms](#2-if-let-guards-on-match-arms)
@@ -23,16 +23,16 @@
     - [4. PowerPC/PowerPC64 内联汇编稳定化](#4-powerpcpowerpc64-内联汇编稳定化)
   - [二、标准库新 API](#二标准库新-api)
     - [`core::range` 模块](#corerange-模块)
-    - [原子操作 — `update` / `try_update`](#原子操作--update--try_update)
-    - [集合 — 获取可变引用的插入操作](#集合--获取可变引用的插入操作)
-    - [裸指针 — 不安全转引用](#裸指针--不安全转引用)
-    - [布局计算 — `Layout` 新 API](#布局计算--layout-新-api)
-    - [提示 — `cold_path`](#提示--cold_path)
-    - [布尔转换 — `TryFrom<{integer}>`](#布尔转换--tryfrominteger)
+    - [原子操作 — `update` / `try_update`](#原子操作-update-try_update)
+    - [集合 — 获取可变引用的插入操作](#集合-获取可变引用的插入操作)
+    - [裸指针 — 不安全转引用](#裸指针-不安全转引用)
+    - [布局计算 — `Layout` 新 API](#布局计算-layout-新-api)
+    - [提示 — `cold_path`](#提示-cold_path)
+    - [布尔转换 — `TryFrom<{integer}>`](#布尔转换-tryfrominteger)
     - [`MaybeUninit` 数组互转](#maybeuninit-数组互转)
     - [`Cell` 数组引用](#cell-数组引用)
   - [三、编译器与平台](#三编译器与平台)
-    - [`--remap-path-scope` 稳定化](#--remap-path-scope-稳定化)
+    - [`--remap-path-scope` 稳定化](#remap-path-scope-稳定化)
     - [平台支持提升](#平台支持提升)
     - [重要兼容性变更](#重要兼容性变更)
   - [四、Const 上下文新稳定 API](#四const-上下文新稳定-api)
@@ -40,11 +40,11 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 一、语言特性
+## 一、语言特性 {#一语言特性}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. `cfg_select!` 宏
+### 1. `cfg_select!` 宏 {#1-cfg_select-宏}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -76,7 +76,7 @@ let arch_str = cfg_select! {
 };
 ```
 
-### 2. `if let` guards on match arms
+### 2. `if let` guards on match arms {#2-if-let-guards-on-match-arms}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -94,7 +94,7 @@ match value {
 }
 ```
 
-### 3. 路径段关键字重命名导入
+### 3. 路径段关键字重命名导入 {#3-路径段关键字重命名导入}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -104,7 +104,7 @@ match value {
 use std::keyword as kw;  // 重命名关键字路径段
 ```
 
-### 4. PowerPC/PowerPC64 内联汇编稳定化
+### 4. PowerPC/PowerPC64 内联汇编稳定化 {#4-powerpcpowerpc64-内联汇编稳定化}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -119,11 +119,11 @@ unsafe {
 
 ---
 
-## 二、标准库新 API
+## 二、标准库新 API {#二标准库新-api}
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### `core::range` 模块
+### `core::range` 模块 {#corerange-模块}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -143,7 +143,7 @@ for i in range {
 }
 ```
 
-### 原子操作 — `update` / `try_update`
+### 原子操作 — `update` / `try_update` {#原子操作-update-try_update}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -173,7 +173,7 @@ counter.update(Ordering::Relaxed, Ordering::Relaxed, |current| current + 1);
 | `AtomicI8` ~ `AtomicI64` | ✅ | ✅ |
 | `AtomicU8` ~ `AtomicU64` | ✅ | ✅ |
 
-### 集合 — 获取可变引用的插入操作
+### 集合 — 获取可变引用的插入操作 {#集合-获取可变引用的插入操作}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -201,7 +201,7 @@ let head = list.push_front_mut("hello");
 head.push_str(" world");
 ```
 
-### 裸指针 — 不安全转引用
+### 裸指针 — 不安全转引用 {#裸指针-不安全转引用}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -217,7 +217,7 @@ let mut_ptr: *mut String = &mut String::from("hi");
 let m: &mut String = unsafe { mut_ptr.as_mut_unchecked() };
 ```
 
-### 布局计算 — `Layout` 新 API
+### 布局计算 — `Layout` 新 API {#布局计算-layout-新-api}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -240,7 +240,7 @@ let packed = layout.repeat_packed(10);
 let extended = layout.extend_packed(Layout::new::<u8>()).unwrap().0;
 ```
 
-### 提示 — `cold_path`
+### 提示 — `cold_path` {#提示-cold_path}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 > 📎 可运行示例: [`crates/c02_type_system/examples/cold_path_demo.rs`](../../../crates/c02_type_system/examples/cold_path_demo.rs)
@@ -258,7 +258,7 @@ fn handle_error(e: Option<&str>) {
 }
 ```
 
-### 布尔转换 — `TryFrom<{integer}>`
+### 布尔转换 — `TryFrom<{integer}>` {#布尔转换-tryfrominteger}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 > 📎 可运行示例: [`crates/c02_type_system/examples/bool_try_from_demo.rs`](../../../crates/c02_type_system/examples/bool_try_from_demo.rs)
@@ -269,7 +269,7 @@ let b0: bool = bool::try_from(0u8).unwrap(); // false
 let err = bool::try_from(2u8); // Err(()) — 仅 0 和 1 有效
 ```
 
-### `MaybeUninit` 数组互转
+### `MaybeUninit` 数组互转 {#maybeuninit-数组互转}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > 📎 可运行示例: [`crates/c01_ownership_borrow_scope/examples/maybeuninit_cell_array_demo.rs`](../../../crates/c01_ownership_borrow_scope/examples/maybeuninit_cell_array_demo.rs)
@@ -284,7 +284,7 @@ let uninit_arr: MaybeUninit<[i32; 3]> = MaybeUninit::from(arr);
 let back: [MaybeUninit<i32>; 3] = uninit_arr.into();
 ```
 
-### `Cell` 数组引用
+### `Cell` 数组引用 {#cell-数组引用}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 > 📎 可运行示例: [`crates/c01_ownership_borrow_scope/examples/maybeuninit_cell_array_demo.rs`](../../../crates/c01_ownership_borrow_scope/examples/maybeuninit_cell_array_demo.rs)
@@ -299,11 +299,11 @@ let ref_slice: &[Cell<i32>] = cell_arr.as_ref();
 
 ---
 
-## 三、编译器与平台
+## 三、编译器与平台 {#三编译器与平台}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### `--remap-path-scope` 稳定化
+### `--remap-path-scope` 稳定化 {#remap-path-scope-稳定化}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -313,7 +313,7 @@ let ref_slice: &[Cell<i32>] = cell_arr.as_ref();
 rustc --remap-path-scope=macro,sysroot -Z remap-path-prefix=/home/user=/project
 ```
 
-### 平台支持提升
+### 平台支持提升 {#平台支持提升}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -327,7 +327,7 @@ rustc --remap-path-scope=macro,sysroot -Z remap-path-prefix=/home/user=/project
 | `aarch64-apple-visionos` | Tier 2 |
 | `aarch64-apple-visionos-sim` | Tier 2 |
 
-### 重要兼容性变更
+### 重要兼容性变更 {#重要兼容性变更}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -337,7 +337,7 @@ rustc --remap-path-scope=macro,sysroot -Z remap-path-prefix=/home/user=/project
 
 ---
 
-## 四、Const 上下文新稳定 API
+## 四、Const 上下文新稳定 API {#四const-上下文新稳定-api}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -357,7 +357,7 @@ const fn check_control(cf: ControlFlow<i32, ()>) -> bool {
 
 ---
 
-## 五、与 Rust 2024 Edition 的关联
+## 五、与 Rust 2024 Edition 的关联 {#五与-rust-2024-edition-的关联}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -387,7 +387,7 @@ Rust 1.95.0 发布时，Rust 2024 Edition 已稳定 3 个月（自 1.85.0）。1
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -396,7 +396,7 @@ Rust 1.95.0 发布时，Rust 2024 Edition 已稳定 3 个月（自 1.85.0）。1
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

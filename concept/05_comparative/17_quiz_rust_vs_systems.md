@@ -12,12 +12,12 @@
 > **后置概念**: N/A
 ---
 
-> **来源**:
+> **来源**: · [Rust vs C++](01_rust_vs_cpp.md)
 > [Rust vs C++ — Rust Book](https://doc.rust-lang.org/nomicon/) ·
 > [Rust vs Go — Official Comparisons](https://go.dev/doc/) ·
 > [The C Programming Language — K&R]
 >
-> **前置概念**:
+> **前置概念**: [所有权形式化](../04_formal/03_ownership_formal.md)
 > [Rust vs C++](01_rust_vs_cpp.md) ·
 > [Rust vs Go](02_rust_vs_go.md)
 

@@ -1,4 +1,4 @@
-# 📚 形式化证明文档索引 {#-形式化证明文档索引}
+# 📚 形式化证明文档索引 {#形式化证明文档索引}
 >
 > **概念族**: 形式化方法
 
@@ -13,16 +13,16 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [📚 形式化证明文档索引 {#-形式化证明文档索引}](#-形式化证明文档索引--形式化证明文档索引)
-  - [📑 目录](#-目录)
-  - [🔢 公理编号规范 (Axiom Numbering Convention) {#-公理编号规范-axiom-numbering-convention}](#-公理编号规范-axiom-numbering-convention--公理编号规范-axiom-numbering-convention)
-  - [📐 证明深度层次 (Proof Depth) {#-证明深度层次-proof-depth}](#-证明深度层次-proof-depth--证明深度层次-proof-depth)
-  - [🎯 索引说明 {#-索引说明}](#-索引说明--索引说明)
-  - [📚 按研究领域分类 {#-按研究领域分类}](#-按研究领域分类--按研究领域分类)
+- [📚 形式化证明文档索引](#形式化证明文档索引)
+  - [📑 目录](#目录)
+  - [🔢 公理编号规范 (Axiom Numbering Convention)](#公理编号规范-axiom-numbering-convention)
+  - [📐 证明深度层次 (Proof Depth)](#证明深度层次-proof-depth)
+  - [🎯 索引说明](#索引说明)
+  - [📚 按研究领域分类](#按研究领域分类)
     - [所有权与借用](#所有权与借用)
       - [所有权模型形式化](#所有权模型形式化)
       - [借用检查器证明](#借用检查器证明)
@@ -50,30 +50,30 @@
       - [形式化验证指南](#形式化验证指南)
       - [质量检查清单](#质量检查清单)
       - [执行模型扩展（引理/推论）](#执行模型扩展引理推论)
-  - [📐 按证明深度导航 {#-按证明深度导航}](#-按证明深度导航--按证明深度导航)
-  - [🌍 国际机器可检查证明对标 {#-国际机器可检查证明对标}](#-国际机器可检查证明对标--国际机器可检查证明对标)
+  - [📐 按证明深度导航](#按证明深度导航)
+  - [🌍 国际机器可检查证明对标](#国际机器可检查证明对标)
     - [核心定理对标表](#核心定理对标表)
     - [工具链映射说明](#工具链映射说明)
-  - [📖 Ferrocene FLS 与 Rust Reference 精确章节 {#-ferrocene-fls-与-rust-reference-精确章节}](#-ferrocene-fls-与-rust-reference-精确章节--ferrocene-fls-与-rust-reference-精确章节)
-  - [🔬 按证明类型分类 {#-按证明类型分类}](#-按证明类型分类--按证明类型分类)
+  - [📖 Ferrocene FLS 与 Rust Reference 精确章节](#ferrocene-fls-与-rust-reference-精确章节)
+  - [🔬 按证明类型分类](#按证明类型分类)
     - [唯一性证明](#唯一性证明)
     - [安全性证明](#安全性证明)
     - [正确性证明](#正确性证明)
-  - [📈 证明完成度统计 {#-证明完成度统计}](#-证明完成度统计--证明完成度统计)
+  - [📈 证明完成度统计](#证明完成度统计)
     - [按研究领域统计](#按研究领域统计)
     - [按证明类型统计](#按证明类型统计)
     - [按证明深度统计](#按证明深度统计)
     - [按证明方法统计](#按证明方法统计)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
+  - [🔗 相关资源](#相关资源)
     - [核心文档](#核心文档)
     - [形式化方法研究](#形式化方法研究)
     - [类型理论研究](#类型理论研究)
-    - [软件设计理论 {#软件设计理论-1}](#软件设计理论-软件设计理论-1)
+    - [软件设计理论](#软件设计理论-1)
     - [工具资源](#工具资源)
     - [思维表征文档中的证明树](#思维表征文档中的证明树)
   - [相关概念](#相关概念)
 
-## 🔢 公理编号规范 (Axiom Numbering Convention) {#-公理编号规范-axiom-numbering-convention}
+## 🔢 公理编号规范 (Axiom Numbering Convention) {#公理编号规范-axiom-numbering-convention}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -94,7 +94,7 @@
 
 ---
 
-## 📐 证明深度层次 (Proof Depth) {#-证明深度层次-proof-depth}
+## 📐 证明深度层次 (Proof Depth) {#证明深度层次-proof-depth}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -110,7 +110,7 @@
 
 ---
 
-## 🎯 索引说明 {#-索引说明}
+## 🎯 索引说明 {#索引说明}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -131,17 +131,17 @@
 
 ---
 
-## 📚 按研究领域分类 {#-按研究领域分类}
+## 📚 按研究领域分类 {#按研究领域分类}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 所有权与借用
+### 所有权与借用 {#所有权与借用}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-#### 所有权模型形式化
+#### 所有权模型形式化 {#所有权模型形式化}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -203,7 +203,7 @@
     - **形式化表示**: const 含 &mut static 需显式 unsafe
     - **证明位置**: [10_ownership_model.md](formal_methods/10_ownership_model.md)
 
-#### 借用检查器证明
+#### 借用检查器证明 {#借用检查器证明}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -264,13 +264,13 @@
 
 ---
 
-### 生命周期
+### 生命周期 {#生命周期}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-#### 生命周期形式化
+#### 生命周期形式化 {#生命周期形式化}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -301,13 +301,13 @@
 
 ---
 
-### 类型系统
+### 类型系统 {#类型系统}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-#### 类型系统基础
+#### 类型系统基础 {#类型系统基础}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -365,11 +365,11 @@
 11. **Def NEWTYPE1、定理 NEWTYPE-T1（repr(transparent)）** ✅ — 零成本包装；[证明位置](type_theory/10_type_system_foundations.md)
 12. **Def DEREF-NULL1（deref_nullptr deny）** ✅ — 1.93 裸指针解引用 lint；[证明位置](type_theory/10_type_system_foundations.md)
 
-### 异步状态机与 Pin
+### 异步状态机与 Pin {#异步状态机与-pin}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
-#### 异步状态机形式化
+#### 异步状态机形式化 {#异步状态机形式化}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -396,7 +396,7 @@
    - **形式化表示**: Send 约束保证 spawn 数据竞争自由
    - **证明位置**: [10_async_state_machine.md](formal_methods/10_async_state_machine.md)
 
-#### Pin 和自引用类型形式化
+#### Pin 和自引用类型形式化 {#pin-和自引用类型形式化}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -419,11 +419,11 @@
    - **证明方法**: 安全条件 + Pin 保证
    - **证明位置**: [10_pin_self_referential.md](formal_methods/10_pin_self_referential.md)
 
-### 类型理论扩展
+### 类型理论扩展 {#类型理论扩展}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
-#### Trait 系统形式化
+#### Trait 系统形式化 {#trait-系统形式化}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -442,7 +442,7 @@
 9. **Def DYN-IMPL1、定理 DYN-T1、推论 DYN-C1（impl/dyn 可替换边界）** ✅ — 对象安全条件下 impl T 与 dyn T 可替换条件；[证明位置](type_theory/10_trait_system_formalization.md)
 10. **Def TRAIT-GAT1、Def SPEC1、定理 SPEC-T1（Trait+GAT、specialization）** ✅ — 泛型+GAT 解析优先级、specialization 与 coherence；[证明位置](type_theory/10_trait_system_formalization.md)
 
-#### 型变理论
+#### 型变理论 {#型变理论}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -457,7 +457,7 @@
 5. **定理 VAR-COM-T1（三元组合传递）** ✅ — 类型+生命周期+型变组合；$F[\tau_1] <: F[\tau_2]$ 由型变构造子决定；[证明位置](type_theory/10_variance_theory.md)
 6. **推论 VAR-COM-C1** ✅ — 多参数型变取乘积；[证明位置](type_theory/10_variance_theory.md)
 
-#### 类型理论完备性缺口
+#### 类型理论完备性缺口 {#类型理论完备性缺口}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -471,7 +471,7 @@
 
 **缺口索引**: Rust 1.93 类型系统、组合法则、Trait 特性缺口列表；补全路线图。
 
-#### 类型构造能力
+#### 类型构造能力 {#类型构造能力}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -484,7 +484,7 @@
 3. **引理 TCON-L1 (推断失败可判定)** ✅ — 歧义/不可推断 ⇒ Multi 或 Impossible；[证明位置](type_theory/10_construction_capability.md)
 4. **推论 TCON-C1** ✅ — 良型程序添加注解后构造路径唯一；[证明位置](type_theory/10_construction_capability.md)
 
-#### 高级类型特性
+#### 高级类型特性 {#高级类型特性}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -502,7 +502,7 @@
 8. **Def CONST-EVAL1、定理 CONST-EVAL-T1（const 求值失败）** ✅ — const 表达式求值失败即类型错误；[证明位置](type_theory/10_advanced_types.md)
 9. **Def CONST-MUT1、Def EXIST1（const &mut static、existential type）** ✅ — 1.93 const、存在类型；[证明位置](type_theory/10_advanced_types.md)
 
-#### 软件设计理论
+#### 软件设计理论 {#软件设计理论}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -539,7 +539,7 @@
 3. **Def TS1、定理 TS-T1** ✅ — 类型状态与 Builder B-T2 一致；[证明位置](software_design_theory/06_rust_idioms.md)
 4. **Def AP1、Axiom AP1** ✅ — 反模式形式化；13 反例索引；[证明位置](software_design_theory/07_anti_patterns.md)
 
-#### 边界系统
+#### 边界系统 {#边界系统}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -557,7 +557,7 @@
 8. **推论 EB-DET-C1 (控制确定性判定)** ✅ — 需求→模型选型；[证明位置](software_design_theory/03_execution_models/06_boundary_analysis.md)
 9. **Def SB1、定理 SB1–SB3、推论 SB-C1、引理 SB-L1 (边界冲突可化解)** ✅ — 语义边界图；证明位置
 
-#### 语义与表达能力
+#### 语义与表达能力 {#语义与表达能力}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -569,7 +569,7 @@
 2. **引理 EB-L1 (边界互斥)** ✅ — 各机制独立
 3. **推论 EB-C1/C2** ✅ — 通过 cargo check 且无 unsafe 则满足 EB1–EB3；边界可静态校验
 
-#### 顶层框架
+#### 顶层框架 {#顶层框架}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -585,7 +585,7 @@
 6. **定理 USF-T1 (框架一致性)** ✅ — 跨文档概念引用一致
 7. **推论 USF-C1** ✅ — 反例索引与各模块反例对应
 
-#### 实际应用案例
+#### 实际应用案例 {#实际应用案例}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -598,7 +598,7 @@
 3. **引理 PA-L1 (unsafe 案例边界)** ✅ — unsafe 案例与定理一致 ⟺ 满足安全抽象契约；[证明位置](10_practical_applications.md)
 4. **推论 PA-C1** ✅ — 案例可追溯至 PROOF_INDEX 论证链
 
-#### 设计机制论证
+#### 设计机制论证 {#设计机制论证}
 
 **文档**: [DESIGN_MECHANISM_RATIONALE](10_design_mechanism_rationale.md)
 
@@ -609,7 +609,7 @@
 3. **定理 OR-T1 (显式错误处理)** ✅ — 无 unwrap 则 None/Err 必被处理；[证明位置](10_design_mechanism_rationale.md)
 4. **推论 OR-C1** ✅ — Option/Result 与构造性逻辑 $T \lor E$ 对应
 
-#### 研究方法论
+#### 研究方法论 {#研究方法论}
 
 **文档**: [research_methodology](10_research_methodology.md)
 
@@ -619,7 +619,7 @@
 2. **定理 RM-T1 (方法衔接)** ✅ — 研究结果可追溯至 PROOF_INDEX 论证链
 3. **推论 RM-C1** ✅ — 新研究应建立与已有定理的衔接
 
-#### 实验与形式化衔接
+#### 实验与形式化衔接 {#实验与形式化衔接}
 
 **文档**: [experiments/README](experiments/README.md)、[compiler_optimizations](experiments/10_compiler_optimizations.md)、[memory_analysis](experiments/10_memory_analysis.md)、[performance_benchmarks](experiments/10_performance_benchmarks.md)、[concurrency_performance](experiments/10_concurrency_performance.md)、[macro_expansion_performance](experiments/10_macro_expansion_performance.md)
 
@@ -644,7 +644,7 @@
 17. **推论 MP-C1** ✅ — 宏展开耗时可实验测量；[证明位置](experiments/10_macro_expansion_performance.md)
 18. **推论 CO-C1** ✅ — 优化级别比较为性能实验；[证明位置](experiments/10_compiler_optimizations.md)
 
-#### 形式化验证指南
+#### 形式化验证指南 {#形式化验证指南}
 
 **文档**: [FORMAL_VERIFICATION_GUIDE](10_formal_verification_guide.md)
 
@@ -655,7 +655,7 @@
 3. **引理 FV-L1 (六类验证覆盖)** ✅ — 六类对应 formal_methods 核心机制
 4. **推论 FV-C1** ✅ — 任务清单完成 ⇔ 六类均有机器可检查证明
 
-#### 质量检查清单
+#### 质量检查清单 {#质量检查清单}
 
 **文档**: [QUALITY_CHECKLIST](10_quality_checklist.md)
 
@@ -665,7 +665,7 @@
 2. **定理 QC-T1 (质量蕴涵可追溯)** ✅ — 质量完备 ⇒ 论断可追溯至 PROOF_INDEX
 3. **推论 QC-C1** ✅ — 新笔记应满足清单 + 形式化衔接
 
-#### 执行模型扩展（引理/推论）
+#### 执行模型扩展（引理/推论） {#执行模型扩展引理推论}
 
 **文档**: [02_async](software_design_theory/03_execution_models/02_async.md)、[03_concurrent](software_design_theory/03_execution_models/03_concurrent.md)、[04_parallel](software_design_theory/03_execution_models/04_parallel.md)、[05_distributed](software_design_theory/03_execution_models/05_distributed.md)
 
@@ -682,7 +682,7 @@
 
 ---
 
-## 📐 按证明深度导航 {#-按证明深度导航}
+## 📐 按证明深度导航 {#按证明深度导航}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -690,11 +690,11 @@
 | :--- | :--- |
 | **L1** | 所有权 T3、借用 T2、生命周期 LF-T1–T3、类型 T1/T2/T4/T5、异步 T6.1–T6.3、Pin T1–T3、Trait T1–T3、设计模式推论、实验定理 |
 | **L2** | 所有权 T2、借用 T1、类型 T3（见 [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md)）；型变 T1–T4、组合工程 CE-T1–T3、边界 BMP-T1/T2 |
-| **L3** | Coq 骨架已创建 [coq_skeleton/OWNERSHIP_UNIQUENESS.v](coq_skeleton/OWNERSHIP_UNIQUENESS.v)（证明 Admitted）；补全见 [COQ_ISABELLE_PROOF_SCAFFOLDING](10_coq_isabelle_proof_scaffolding.md)、[L3_MACHINE_PROOF_GUIDE](10_l3_machine_proof_guide.md) |
+| **L3** | Coq 骨架已创建 [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../../archive/deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v)（证明 Admitted）；补全见 [COQ_ISABELLE_PROOF_SCAFFOLDING](10_coq_isabelle_proof_scaffolding.md)、[L3_MACHINE_PROOF_GUIDE](10_l3_machine_proof_guide.md) |
 
 ---
 
-## 🌍 国际机器可检查证明对标 {#-国际机器可检查证明对标}
+## 🌍 国际机器可检查证明对标 {#国际机器可检查证明对标}
 >
 > **来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)**
 >
@@ -710,7 +710,7 @@
 
 本索引将 L1/L2/L3 证明与国际权威形式化成果逐定理对标，明确本项目证明在国际研究坐标系中的位置与差距。
 
-### 核心定理对标表
+### 核心定理对标表 {#核心定理对标表}
 
 | 本项目定理 | 证明深度 | RustBelt (Iris/Coq) | Aeneas (Lean/Coq/F*) | Kani | Verus | Creusot | 差距 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -725,7 +725,7 @@
 | **Trait T1–T3 / coherence** | L1/L2 | trait object 规范 | impl 解析可验证 | 不适用 | 可验证 trait 不变式 | 可验证 | 无 trait resolution L3 |
 | **型变 T1–T4** | L2 | 类型构造子规则 | 自动保持 | 不适用 | 可表达 | 可表达 | 无型变算法 L3 |
 
-### 工具链映射说明
+### 工具链映射说明 {#工具链映射说明}
 
 - **RustBelt (POPL 2018) + Tree Borrows (PLDI 2025)**：提供所有权、借用、核心库类型的 L3 机器证明基准。本项目 `T-OW2`、`T-BR1`、`T-TY3` 在概念上与其对齐，但缺少 Iris/Rocq 可检查证明。
 - **Aeneas (ICFP 2022/2023)**：针对 Safe Rust 的函数式翻译验证，适合将本项目 L2 证明提升到 Lean/Coq/F*。`T-OW2`、`T-TY3` 的 Safe Rust 实例可直接翻译。
@@ -733,7 +733,7 @@
 - **Verus**：通过线性 ghost 类型和 SMT 验证系统代码，可覆盖 `SEND-T1`、`SYNC-T1`、并发原语及部分 `unsafe` 封装。
 - **Creusot**：基于 Why3 的演绎验证，适合 `T-TY3`、函数合约、循环不变式的教学级形式化。
 
-## 📖 Ferrocene FLS 与 Rust Reference 精确章节 {#-ferrocene-fls-与-rust-reference-精确章节}
+## 📖 Ferrocene FLS 与 Rust Reference 精确章节 {#ferrocene-fls-与-rust-reference-精确章节}
 >
 > **来源: [Ferrocene FLS](https://spec.ferrocene.dev/)**
 >
@@ -756,11 +756,11 @@
 
 ---
 
-## 🔬 按证明类型分类 {#-按证明类型分类}
+## 🔬 按证明类型分类 {#按证明类型分类}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 唯一性证明
+### 唯一性证明 {#唯一性证明}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -768,7 +768,7 @@
   - 方法：结构归纳法
   - 结果：每个值最多有一个所有者
 
-### 安全性证明
+### 安全性证明 {#安全性证明}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -789,7 +789,7 @@
 - ✅ **协变、逆变、不变、函数类型型变** ([10_variance_theory.md](type_theory/10_variance_theory.md))
 - ✅ **GAT、const 泛型、受限依赖类型安全** ([10_advanced_types.md](type_theory/10_advanced_types.md))
 
-### 正确性证明
+### 正确性证明 {#正确性证明}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -805,11 +805,11 @@
 
 ---
 
-## 📈 证明完成度统计 {#-证明完成度统计}
+## 📈 证明完成度统计 {#证明完成度统计}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 按研究领域统计
+### 按研究领域统计 {#按研究领域统计}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -833,7 +833,7 @@
 | 执行模型扩展     | 8个      | 100%     | ✅ 完成 |
 | **总计**         | **105+** | **100%** | ✅      |
 
-### 按证明类型统计
+### 按证明类型统计 {#按证明类型统计}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -844,7 +844,7 @@
 | 正确性证明 | 11个     | 100%     | ✅ 完成 |
 | **总计**   | **29个** | **100%** | ✅      |
 
-### 按证明深度统计
+### 按证明深度统计 {#按证明深度统计}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -856,7 +856,7 @@
 
 **L2 示例**: 型变定理 1–4、组合工程 CE-T1–T3、边界系统 BMP-T1/T2、variance_theory 完整证明。
 
-### 按证明方法统计
+### 按证明方法统计 {#按证明方法统计}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -872,11 +872,11 @@
 
 ---
 
-## 🔗 相关资源 {#-相关资源}
+## 🔗 相关资源 {#相关资源}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 核心文档
+### 核心文档 {#核心文档}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -893,7 +893,7 @@
 - [研究任务清单](10_task_checklist.md)
 - [形式化工具验证指南](10_formal_verification_guide.md)（✅ 指南 100% 完成）
 
-### 形式化方法研究
+### 形式化方法研究 {#形式化方法研究}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -905,7 +905,7 @@
 - [异步状态机形式化](formal_methods/10_async_state_machine.md)
 - [Pin 和自引用类型形式化](formal_methods/10_pin_self_referential.md)
 
-### 类型理论研究
+### 类型理论研究 {#类型理论研究}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -925,7 +925,7 @@
 - [设计模式形式化](software_design_theory/01_design_patterns_formal/README.md)
 - [组合软件工程有效性](software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md)（定理 CE-T1、CE-T2、CE-T3）
 
-### 工具资源
+### 工具资源 {#工具资源}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -933,7 +933,7 @@
 - Agda: 依赖类型编程语言
 - Iris: 分离逻辑框架
 
-### 思维表征文档中的证明树
+### 思维表征文档中的证明树 {#思维表征文档中的证明树}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -969,7 +969,7 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 

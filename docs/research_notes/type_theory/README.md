@@ -8,7 +8,7 @@
 
 > 核心结论请优先查阅 `concept/` 与 `knowledge/`。
 
-# 🔬 类型理论研究 {#-类型理论研究}
+# 🔬 类型理论研究 {#类型理论研究}
 
 > **内容分级**: [归档级]
 
@@ -32,17 +32,17 @@
 
 ---
 
-## 📊 目录 {#-目录}
+## 📊 目录 {#目录}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [🔬 类型理论研究 {#-类型理论研究}](#-类型理论研究--类型理论研究)
-  - [📊 目录 {#-目录}](#-目录--目录)
+- [🔬 类型理论研究](#类型理论研究)
+  - [📊 目录](#目录)
   - [完备性声明](#完备性声明)
-  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
-  - [📚 研究主题 {#-研究主题}](#-研究主题--研究主题)
+  - [🎯 研究目标](#研究目标)
+  - [📚 研究主题](#研究主题)
     - [1. 类型系统基础](#1-类型系统基础)
     - [1b. 类型构造能力](#1b-类型构造能力)
     - [2. Trait 系统形式化](#2-trait-系统形式化)
@@ -52,23 +52,23 @@
   - [形式化论证汇总](#形式化论证汇总)
   - [权威来源索引与最新形式化成果导航](#权威来源索引与最新形式化成果导航)
     - [权威来源分级（P0/P1/P2）](#权威来源分级p0p1p2)
-    - [类型理论研究主题 ↔ 国际成果导航](#类型理论研究主题--国际成果导航)
+    - [类型理论研究主题 ↔ 国际成果导航](#类型理论研究主题-国际成果导航)
     - [推荐阅读路径](#推荐阅读路径)
   - [公理-定理形式化索引](#公理-定理形式化索引)
-  - [📝 研究笔记 {#-研究笔记}](#-研究笔记--研究笔记)
-    - [已完成 ✅ {#已完成-}](#已完成--已完成-)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
+  - [📝 研究笔记](#研究笔记)
+    - [已完成 ✅](#已完成)
+  - [🔗 相关资源](#相关资源)
     - [核心文档](#核心文档)
     - [代码实现](#代码实现)
     - [学术资源](#学术资源)
-  - [📖 研究方法 {#-研究方法}](#-研究方法--研究方法)
+  - [📖 研究方法](#研究方法)
     - [类型理论工具](#类型理论工具)
     - [类型理论方法](#类型理论方法)
     - [证明策略](#证明策略)
-  - [🚀 快速开始 {#-快速开始}](#-快速开始--快速开始)
+  - [🚀 快速开始](#快速开始)
     - [创建新的研究笔记](#创建新的研究笔记)
     - [研究流程](#研究流程)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -78,15 +78,15 @@
 
 ---
 
-## 完备性声明
+## 完备性声明 {#完备性声明}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**本目录核心缺口已补全，全部缺口均有 Def 占位**。详见 [00_completeness_gaps](../../../../../../../formal_methods/00_completeness_gaps.md)：
+**本目录核心缺口已补全，全部缺口均有 Def 占位**。详见 [00_completeness_gaps](../formal_methods/00_completeness_gaps.md)：
 
-- **Rust 1.93 类型系统特性**：LUB coercion、Copy specialization、offset_of!、never_type、type ascription、newtype、deref_nullptr ✅ Def 已补全；const &mut static、existential 等见 [00_completeness_gaps](../../../../../../../formal_methods/00_completeness_gaps.md)
+- **Rust 1.93 类型系统特性**：LUB coercion、Copy specialization、offset_of!、never_type、type ascription、newtype、deref_nullptr ✅ Def 已补全；const &mut static、existential 等见 [00_completeness_gaps](../formal_methods/00_completeness_gaps.md)
 
 - **组合法则**：Trait coherence、类型+生命周期+型变、negative impls、impl/dyn 边界、const 求值失败 ✅ 已补全；孤儿规则放宽为倡议未稳定
 
@@ -94,7 +94,7 @@
 
 ---
 
-## 🎯 研究目标 {#-研究目标}
+## 🎯 研究目标 {#研究目标}
 
 >
 
@@ -112,13 +112,13 @@
 
 ---
 
-## 📚 研究主题 {#-研究主题}
+## 📚 研究主题 {#研究主题}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 类型系统基础
+### 1. 类型系统基础 {#1-类型系统基础}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -138,7 +138,7 @@
 
 **状态**: ✅ 已完成 (100%)
 
-### 1b. 类型构造能力
+### 1b. 类型构造能力 {#1b-类型构造能力}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -158,7 +158,7 @@
 
 ---
 
-### 2. Trait 系统形式化
+### 2. Trait 系统形式化 {#2-trait-系统形式化}
 
 >
 
@@ -178,7 +178,7 @@
 
 ---
 
-### 3. 生命周期形式化
+### 3. 生命周期形式化 {#3-生命周期形式化}
 
 >
 
@@ -198,7 +198,7 @@
 
 ---
 
-### 4. 高级类型特性
+### 4. 高级类型特性 {#4-高级类型特性}
 
 >
 
@@ -218,7 +218,7 @@
 
 ---
 
-### 5. 型变理论
+### 5. 型变理论 {#5-型变理论}
 
 >
 
@@ -236,13 +236,13 @@
 
 **状态**: ✅ 已完成 (100%)
 
-**论证增强**: 已补充完整证明、反例、公理-定理证明树；详见 [FORMAL_PROOF_SYSTEM_GUIDE](../../10_formal_proof_system_guide.md)
+**论证增强**: 已补充完整证明、反例、公理-定理证明树；详见 [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md)
 
 **Trait 系统、高级类型、类型系统基础**：均已补充反例、公理-定理证明树，论证系统 100% 完成
 
 ---
 
-## 形式化论证汇总
+## 形式化论证汇总 {#形式化论证汇总}
 
 >
 
@@ -256,19 +256,19 @@
 
 *证明*：由 type_system T1–T3、trait 对象安全、lifetime T2、variance T1–T4；良型 + 各定理 ⇒ 类型安全。∎
 
-**定理 TT-T2（缺口 Def 占位）**：$\mathcal{T}$ 对 Rust 1.93 类型系统存在 [00_completeness_gaps](../../../../../../../formal_methods/00_completeness_gaps.md) 所列缺口；**阶段 1–7 已补全 Def 占位**（LUB、Copy、coherence、RPITIT、组合法则、offset_of!、const、孤儿规则等均有 Def）。
+**定理 TT-T2（缺口 Def 占位）**：$\mathcal{T}$ 对 Rust 1.93 类型系统存在 [00_completeness_gaps](../formal_methods/00_completeness_gaps.md) 所列缺口；**阶段 1–7 已补全 Def 占位**（LUB、Copy、coherence、RPITIT、组合法则、offset_of!、const、孤儿规则等均有 Def）。
 
-*证明*：由 [00_completeness_gaps](../../../../../../../formal_methods/00_completeness_gaps.md) 定理 CGI-T1；缺口项均有 Def 占位。∎
+*证明*：由 [00_completeness_gaps](../formal_methods/00_completeness_gaps.md) 定理 CGI-T1；缺口项均有 Def 占位。∎
 
 ---
 
-## 权威来源索引与最新形式化成果导航
+## 权威来源索引与最新形式化成果导航 {#权威来源索引与最新形式化成果导航}
 
 >
 
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) · [Oxide](https://arxiv.org/abs/1903.00982) · [Tree Borrows](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) · [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
 
-### 权威来源分级（P0/P1/P2）
+### 权威来源分级（P0/P1/P2） {#权威来源分级p0p1p2}
 
 | 级别 | 类型 | 代表来源 | 对齐要求 |
 
@@ -280,7 +280,7 @@
 
 | **P2** | 社区/工具权威 | Miri、Kani、Prusti、coq-of-rust、Rust By Example、Clippy | 工具映射与实践示例 |
 
-### 类型理论研究主题 ↔ 国际成果导航
+### 类型理论研究主题 ↔ 国际成果导航 {#类型理论研究主题-国际成果导航}
 
 | 主题 | 核心文档 | 国际形式化成果 | 工具链 |
 
@@ -298,7 +298,7 @@
 
 | 借用检查器 | `formal_methods/10_borrow_checker_proof.md` | Tree Borrows、Oxide | Miri、Kani |
 
-### 推荐阅读路径
+### 推荐阅读路径 {#推荐阅读路径}
 
 1. **入门**: Rust Reference + TRPL → 本目录类型系统基础/生命周期/型变。
 
@@ -306,13 +306,13 @@
 
 3. **专家**: Tree Borrows + RustSEM → 别名模型与可执行语义；Aeneas / Verus / Creusot → 工具链验证。
 
-## 公理-定理形式化索引
+## 公理-定理形式化索引 {#公理-定理形式化索引}
 
 | 文档 | 核心公理/定理 | 证明要点 | 缺口 |
 
 | :--- | :--- | :--- | :--- |
 
-| [00_completeness_gaps](../../../../../../../formal_methods/00_completeness_gaps.md) | Def CGI、Axiom CGI1、CGI-T1 | 不完备性形式化 | 缺口索引 |
+| [00_completeness_gaps](../formal_methods/00_completeness_gaps.md) | Def CGI、Axiom CGI1、CGI-T1 | 不完备性形式化 | 缺口索引 |
 
 | [type_system_foundations](10_type_system_foundations.md) | T1–T5、LUB-T1、COP-T1、OFFSET-T1、ASC-T1、BOT-T1、NEWTYPE-T1、DEREF-NULL1 | 良型不卡住、求值保型 | 类型推断歧义 |
 
@@ -326,15 +326,15 @@
 
 | [variance_theory](10_variance_theory.md) | T1–T4、VAR-COM-T1/C1 | 协变/逆变/不变、组合传递 | 三元组合已补全 |
 
-本索引与 [FORMAL_PROOF_SYSTEM_GUIDE](../../10_formal_proof_system_guide.md)、[PROOF_INDEX](../10_proof_index.md) 衔接。
+本索引与 [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md)、[PROOF_INDEX](../10_proof_index.md) 衔接。
 
-**缺口补全**：见 [00_completeness_gaps](../../../../../../../formal_methods/00_completeness_gaps.md) § 补全路线图。
+**缺口补全**：见 [00_completeness_gaps](../formal_methods/00_completeness_gaps.md) § 补全路线图。
 
 ---
 
-## 📝 研究笔记 {#-研究笔记}
+## 📝 研究笔记 {#研究笔记}
 
-### 已完成 ✅ {#已完成-}
+### 已完成 ✅ {#已完成}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -352,9 +352,9 @@
 
 ---
 
-## 🔗 相关资源 {#-相关资源}
+## 🔗 相关资源 {#相关资源}
 
-### 核心文档
+### 核心文档 {#核心文档}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -364,7 +364,7 @@
 
 - [类型系统速查卡](../../02_reference/quick_reference/02_type_system.md)
 
-### 代码实现
+### 代码实现 {#代码实现}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -372,7 +372,7 @@
 
 - [类型系统示例](../../../crates/c02_type_system/examples/README.md)
 
-### 学术资源
+### 学术资源 {#学术资源}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -386,9 +386,9 @@
 
 ---
 
-## 📖 研究方法 {#-研究方法}
+## 📖 研究方法 {#研究方法}
 
-### 类型理论工具
+### 类型理论工具 {#类型理论工具}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -400,7 +400,7 @@
 
 - **Lean**: 现代类型理论证明器
 
-### 类型理论方法
+### 类型理论方法 {#类型理论方法}
 
 1. **简单类型 Lambda 演算**: 基础类型系统
 
@@ -410,7 +410,7 @@
 
 4. **范畴论**: 类型和函数的范畴论解释
 
-### 证明策略
+### 证明策略 {#证明策略}
 
 - **类型推导**: 自动推导表达式的类型
 
@@ -420,9 +420,9 @@
 
 ---
 
-## 🚀 快速开始 {#-快速开始}
+## 🚀 快速开始 {#快速开始}
 
-### 创建新的研究笔记
+### 创建新的研究笔记 {#创建新的研究笔记}
 
 1. 复制模板文件（如 `10_type_system_foundations.md`）
 
@@ -434,7 +434,7 @@
 
 5. 更新本 README 的链接
 
-### 研究流程
+### 研究流程 {#研究流程}
 
 1. **问题定义**: 明确要研究的类型系统特性
 
@@ -452,21 +452,21 @@
 
 **最后更新**: 2026-02-14
 
-**状态**: ✅ **核心缺口已补全**；全部缺口 Def 占位；见 [00_completeness_gaps](../../../../../../../formal_methods/00_completeness_gaps.md)
+**状态**: ✅ **核心缺口已补全**；全部缺口 Def 占位；见 [00_completeness_gaps](../formal_methods/00_completeness_gaps.md)
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -480,7 +480,7 @@
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -490,7 +490,7 @@
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -522,7 +522,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -532,7 +532,7 @@
 
 > **来源: [ACM - Type Systems](https://dl.acm.org/)**
 >
-## 社区权威参考
+## 社区权威参考 {#社区权威参考}
 
 - [This Week in Rust](https://this-week-in-rust.org/)
 - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)

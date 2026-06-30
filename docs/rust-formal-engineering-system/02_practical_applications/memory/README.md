@@ -1,4 +1,4 @@
-# 内存管理理论
+# 内存管理理论 {#内存管理理论}
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -8,7 +8,7 @@
 > **状态**: ✅ 已完成
 > 内容已整合至： 10_memory_analysis.md (研究笔记)
 
-## 知识结构思维导图
+## 知识结构思维导图 {#知识结构思维导图}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -33,7 +33,7 @@ mindmap
       性能优化
 ```
 
-## 与核心文档的关联
+## 与核心文档的关联 {#与核心文档的关联}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -46,11 +46,11 @@ mindmap
 
 ---
 
-## Rust 内存管理模型
+## Rust 内存管理模型 {#rust-内存管理模型}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 所有权驱动的内存管理
+### 所有权驱动的内存管理 {#所有权驱动的内存管理}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -69,7 +69,7 @@ fn heap_allocation() {
 }  // 自动调用 drop，释放堆内存
 ```
 
-### 智能指针
+### 智能指针 {#智能指针}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -107,7 +107,7 @@ fn refcell_demo() {
 }
 ```
 
-### 零成本抽象
+### 零成本抽象 {#零成本抽象}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -126,7 +126,7 @@ fn zero_cost_iter() {
 }
 ```
 
-### 自定义智能指针与 Drop  trait
+### 自定义智能指针与 Drop  trait {#自定义智能指针与-drop-trait}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -170,7 +170,7 @@ fn custom_smart_pointer_demo() {
 }
 ```
 
-### 内存池与对象复用
+### 内存池与对象复用 {#内存池与对象复用}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -217,7 +217,7 @@ fn object_pool_demo() {
 
 ---
 
-## 使用场景
+## 使用场景 {#使用场景}
 
 | 场景 | 内存管理策略 | 推荐类型 |
 | :--- | :--- | :--- |
@@ -232,9 +232,9 @@ fn object_pool_demo() {
 
 ---
 
-## 相关研究笔记
+## 相关研究笔记 {#相关研究笔记}
 
-### 实验分析
+### 实验分析 {#实验分析}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -243,14 +243,14 @@ fn object_pool_demo() {
 | 内存分析 | 内存使用分析实验 | 10_memory_analysis.md (研究笔记) |
 | 编译器优化 | 内存相关编译器优化 | 10_compiler_optimizations.md (研究笔记) |
 
-### 形式化方法
+### 形式化方法 {#形式化方法}
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | 所有权模型 | 所有权系统形式化 | 10_ownership_model.md (研究笔记) |
 | 生命周期形式化 | 生命周期系统理论 | 10_lifetime_formalization.md (研究笔记) |
 
-### 类型理论
+### 类型理论 {#类型理论}
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -258,7 +258,7 @@ fn object_pool_demo() {
 | 生命周期形式化 | 生命周期类型理论 | 10_lifetime_formalization.md (研究笔记) |
 | 方差理论 | 类型方差与内存安全 | 10_variance_theory.md (研究笔记) |
 
-### 安全分析
+### 安全分析 {#安全分析}
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -266,7 +266,7 @@ fn object_pool_demo() {
 
 ---
 
-## 相关 crates
+## 相关 crates {#相关-crates}
 
 | crate | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -285,7 +285,7 @@ fn object_pool_demo() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 

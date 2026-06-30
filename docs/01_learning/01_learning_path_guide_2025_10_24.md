@@ -1,4 +1,4 @@
-# 学习路径指南
+# 学习路径指南 {#学习路径指南}
 
 > **分级**: [A]
 > **Bloom 层级**: L1-L2 (记忆/理解)
@@ -10,35 +10,35 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [学习路径指南](#学习路径指南)
-  - [📑 目录](#-目录)
-  - [🗺️ 推荐学习路径](#️-推荐学习路径)
+  - [📑 目录](#目录)
+  - [🗺️ 推荐学习路径](#推荐学习路径)
     - [路径 1: 初学者 (4-6 周)](#路径-1-初学者-4-6-周)
     - [路径 2: 进阶开发者 (6-8 周)](#路径-2-进阶开发者-6-8-周)
     - [路径 3: 系统程序员 (8-12 周)](#路径-3-系统程序员-8-12-周)
     - [路径 4: Rust 1.95/1.96 特性专题 (2-3 周)](#路径-4-rust-195196-特性专题-2-3-周)
-  - [🆕 Rust 1.95/1.96 特性学习路径](#-rust-195196-特性学习路径)
+  - [🆕 Rust 1.95/1.96 特性学习路径](#rust-195196-特性学习路径)
     - [阶段 1: 快速上手 (第 1-2 天)](#阶段-1-快速上手-第-1-2-天)
     - [阶段 2: 深度理解 (第 3-5 天)](#阶段-2-深度理解-第-3-5-天)
     - [阶段 3: 综合应用 (第 6-7 天)](#阶段-3-综合应用-第-6-7-天)
-  - [📋 推荐学习顺序](#-推荐学习顺序)
+  - [📋 推荐学习顺序](#推荐学习顺序)
     - [对于初学者](#对于初学者)
     - [对于有经验的开发者](#对于有经验的开发者)
     - [对于系统程序员](#对于系统程序员)
-  - [🛠️ 实践项目建议](#️-实践项目建议)
+  - [🛠️ 实践项目建议](#实践项目建议)
     - [项目 1: 数学工具库 (初级)](#项目-1-数学工具库-初级)
     - [项目 2: 并发哈希表缓存 (中级)](#项目-2-并发哈希表缓存-中级)
     - [项目 3: 异步 Web 服务 (高级)](#项目-3-异步-web-服务-高级)
     - [项目 4: 系统监控工具 (专家)](#项目-4-系统监控工具-专家)
-  - [📚 关键资源](#-关键资源)
+  - [📚 关键资源](#关键资源)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🗺️ 推荐学习路径
+## 🗺️ 推荐学习路径 {#推荐学习路径}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
 > **来源: [Wikipedia - Educational Technology](https://en.wikipedia.org/wiki/Educational_Technology)** ·
@@ -47,7 +47,7 @@
 > **[来源: IEEE - Learning Outcome Standards]**
 >
 
-### 路径 1: 初学者 (4-6 周)
+### 路径 1: 初学者 (4-6 周) {#路径-1-初学者-4-6-周}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -59,7 +59,7 @@ C01 (所有权) → C02 (类型) → C03 (控制流)
   练习          练习          练习
 ```
 
-### 路径 2: 进阶开发者 (6-8 周)
+### 路径 2: 进阶开发者 (6-8 周) {#路径-2-进阶开发者-6-8-周}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -71,7 +71,7 @@ C04 (泛型) → C05 (并发) → C06 (异步)
   项目实战    项目实战    项目实战
 ```
 
-### 路径 3: 系统程序员 (8-12 周)
+### 路径 3: 系统程序员 (8-12 周) {#路径-3-系统程序员-8-12-周}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -81,7 +81,7 @@ C07 (进程) → C08 (算法) → C10 (网络) → C12 (WASM)
    系统工具    数据结构     网络服务     Web 应用
 ```
 
-### 路径 4: Rust 1.95/1.96 特性专题 (2-3 周)
+### 路径 4: Rust 1.95/1.96 特性专题 (2-3 周) {#路径-4-rust-195196-特性专题-2-3-周}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -104,11 +104,11 @@ C07 (进程) → C08 (算法) → C10 (网络) → C12 (WASM)
 
 ---
 
-## 🆕 Rust 1.95/1.96 特性学习路径
+## 🆕 Rust 1.95/1.96 特性学习路径 {#rust-195196-特性学习路径}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 阶段 1: 快速上手 (第 1-2 天)
+### 阶段 1: 快速上手 (第 1-2 天) {#阶段-1-快速上手-第-1-2-天}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -118,7 +118,7 @@ C07 (进程) → C08 (算法) → C10 (网络) → C12 (WASM)
 | `HashMap::get_disjoint_mut` (≥1.83) | ⭐⭐ 中等 | API 指南 | 优化并发数据结构 |
 | `async closures` (≥1.85, Ed 2024) | ⭐⭐⭐ 进阶 | 异步编程指南 | 重构异步代码 |
 
-### 阶段 2: 深度理解 (第 3-5 天)
+### 阶段 2: 深度理解 (第 3-5 天) {#阶段-2-深度理解-第-3-5-天}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -168,7 +168,7 @@ async fn use_async_fn_trait() {
 }
 ```
 
-### 阶段 3: 综合应用 (第 6-7 天)
+### 阶段 3: 综合应用 (第 6-7 天) {#阶段-3-综合应用-第-6-7-天}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -184,11 +184,11 @@ async fn use_async_fn_trait() {
 
 ---
 
-## 📋 推荐学习顺序
+## 📋 推荐学习顺序 {#推荐学习顺序}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 对于初学者
+### 对于初学者 {#对于初学者}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -202,7 +202,7 @@ async fn use_async_fn_trait() {
 5. 进阶: async/await + ≥1.85 async Fn 改进
 ```
 
-### 对于有经验的开发者
+### 对于有经验的开发者 {#对于有经验的开发者}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -216,7 +216,7 @@ async fn use_async_fn_trait() {
 4. 综合项目: 高性能服务器
 ```
 
-### 对于系统程序员
+### 对于系统程序员 {#对于系统程序员}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -232,11 +232,11 @@ async fn use_async_fn_trait() {
 
 ---
 
-## 🛠️ 实践项目建议
+## 🛠️ 实践项目建议 {#实践项目建议}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 项目 1: 数学工具库 (初级)
+### 项目 1: 数学工具库 (初级) {#项目-1-数学工具库-初级}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -255,7 +255,7 @@ async fn use_async_fn_trait() {
 
 **预计时间**: 2-3 天
 
-### 项目 2: 并发哈希表缓存 (中级)
+### 项目 2: 并发哈希表缓存 (中级) {#项目-2-并发哈希表缓存-中级}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -276,7 +276,7 @@ async fn use_async_fn_trait() {
 
 **预计时间**: 4-5 天
 
-### 项目 3: 异步 Web 服务 (高级)
+### 项目 3: 异步 Web 服务 (高级) {#项目-3-异步-web-服务-高级}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -297,7 +297,7 @@ async fn use_async_fn_trait() {
 
 **预计时间**: 1-2 周
 
-### 项目 4: 系统监控工具 (专家)
+### 项目 4: 系统监控工具 (专家) {#项目-4-系统监控工具-专家}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -320,7 +320,7 @@ async fn use_async_fn_trait() {
 
 ---
 
-## 📚 关键资源
+## 📚 关键资源 {#关键资源}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -340,7 +340,7 @@ async fn use_async_fn_trait() {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -349,7 +349,7 @@ async fn use_async_fn_trait() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

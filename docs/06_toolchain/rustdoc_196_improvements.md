@@ -1,4 +1,4 @@
-# Rustdoc 1.96 改进速览
+# Rustdoc 1.96 改进速览 {#rustdoc-196-改进速览}
 
 > **受众**: [进阶]
 > **内容分级**: [综述级]
@@ -9,7 +9,7 @@
 
 ---
 
-## 一、弃用说明渲染改进 (Deprecation Notes Rendering)
+## 一、弃用说明渲染改进 (Deprecation Notes Rendering) {#一弃用说明渲染改进-deprecation-notes-rendering}
 
 **变更**: 弃用说明（`#[deprecated = "..."]`）的 HTML 渲染方式变得更可预测。
 
@@ -29,7 +29,7 @@ pub fn old_method() {}
 
 ---
 
-## 二、`missing_doc_code_examples` lint 范围缩小
+## 二、`missing_doc_code_examples` lint 范围缩小 {#二missing_doc_code_examples-lint-范围缩小}
 
 **变更**: `missing_doc_code_examples` lint 不再在 **impl items** 上触发。
 
@@ -46,7 +46,7 @@ pub fn old_method() {}
 
 ---
 
-## 三、侧边栏方法分离 (Sidebar Separation)
+## 三、侧边栏方法分离 (Sidebar Separation) {#三侧边栏方法分离-sidebar-separation}
 
 **变更**: 在生成的 HTML 文档侧边栏中，**方法（Methods）**和**关联函数（Associated Functions）**现在分开显示。
 
@@ -64,7 +64,7 @@ pub fn old_method() {}
 
 ---
 
-## 四、兼容性注意
+## 四、兼容性注意 {#四兼容性注意}
 
 以上三项改进均为**纯文档体验优化**，不影响：
 

@@ -16,12 +16,12 @@
 > **后置概念**: N/A
 ---
 
-> **来源**:
+> **来源**: · [宏系统](04_macros.md)
 > [The Rust Programming Language — Ch19.5 Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) ·
 > [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/) ·
 > [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)
 >
-> **前置概念**:
+> **前置概念**: [宏模式](../02_intermediate/17_macro_patterns.md)
 > [Macros](04_macros.md) ·
 > [Proc Macros](07_proc_macro.md) ·
 > [Type System](../01_foundation/04_type_system.md)

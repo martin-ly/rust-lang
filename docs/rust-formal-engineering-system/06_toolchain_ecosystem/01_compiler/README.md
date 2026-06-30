@@ -12,11 +12,11 @@
 
 ---
 
-## Rust 编译器核心概念
+## Rust 编译器核心概念 {#rust-编译器核心概念}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 编译流程
+### 编译流程 {#编译流程}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -33,7 +33,7 @@
 // 8. LLVM 优化和代码生成
 ```
 
-### 编译器属性
+### 编译器属性 {#编译器属性}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -71,31 +71,31 @@ extern "C" {
 }
 ```
 
-### 编译器标志
+### 编译器标志 {#编译器标志}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 ```bash
-# 优化级别
+# 优化级别 {#优化级别}
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 rustc -C opt-level=0    # 无优化（调试）
 rustc -C opt-level=3    # 最大优化
 rustc -C opt-level=s    # 优化大小
 
-# 链接时优化
+# 链接时优化 {#链接时优化}
 rustc -C lto=fat        # 完整 LTO
 rustc -C lto=thin       # 轻量 LTO
 
-# 代码生成单元
+# 代码生成单元 {#代码生成单元}
 rustc -C codegen-units=1  # 单代码生成单元（最大优化）
 
-# 目标 CPU
+# 目标 CPU {#目标-cpu}
 rustc -C target-cpu=native  # 针对本机 CPU
 rustc -C target-cpu=haswell # 针对特定 CPU
 ```
 
-### 条件编译示例
+### 条件编译示例 {#条件编译示例}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -126,7 +126,7 @@ pub fn advanced_feature() {
 const _: () = assert!(std::mem::size_of::<usize>() == 8, "64-bit only");
 ```
 
-### 过程宏示例
+### 过程宏示例 {#过程宏示例}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -161,7 +161,7 @@ pub fn route(attr: TokenStream, item: TokenStream) -> TokenStream {
 }
 ```
 
-### 编译期计算
+### 编译期计算 {#编译期计算}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -189,7 +189,7 @@ impl<T, const N: usize> Array<T, N> {
 
 ---
 
-## 形式化方法
+## 形式化方法 {#形式化方法}
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -200,7 +200,7 @@ impl<T, const N: usize> Array<T, N> {
 | 借用检查器证明 | 借用检查器形式化 | [../../../research_notes/formal_methods/10_borrow_checker_proof.md](../../../research_notes/formal_methods/10_borrow_checker_proof.md) |
 | 证明索引 | 形式化证明集合 | [../../../research_notes/10_proof_index.md](../../../../archive/research_notes_2026_06_25/10_proof_index.md) |
 
-## 相关研究笔记
+## 相关研究笔记 {#相关研究笔记}
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -226,7 +226,7 @@ impl<T, const N: usize> Array<T, N> {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 > **来源: [Wikipedia - Model Checking](https://en.wikipedia.org/wiki/Model_Checking)**

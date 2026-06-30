@@ -1,4 +1,4 @@
-# RFC 实现状态追踪表
+# RFC 实现状态追踪表 {#rfc-实现状态追踪表}
 
 > **概念族**: 权威来源对齐 / RFC / 版本跟踪
 > **内容分级**: [核心级]
@@ -11,7 +11,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [RFC 实现状态追踪表](#rfc-实现状态追踪表)
   - [目录](#目录)
@@ -27,7 +27,7 @@
 
 ---
 
-## 一、追踪说明
+## 一、追踪说明 {#一追踪说明}
 
 本文档追踪与 `docs/research_notes/` 知识体系相关的 Rust RFC 的 **实现状态**（stable / in-progress / deprecated），帮助维护者判断哪些 RFC 需要在版本演进或对齐文档中更新。
 
@@ -39,7 +39,7 @@
 
 ---
 
-## 二、已稳定 RFC
+## 二、已稳定 RFC {#二已稳定-rfc}
 
 | RFC | 主题 | 稳定版本 | 项目文档 | 状态 |
 |-----|------|----------|----------|------|
@@ -56,7 +56,7 @@
 
 ---
 
-## 三、实现中 RFC
+## 三、实现中 RFC {#三实现中-rfc}
 
 | RFC | 主题 | 当前状态 | 项目文档 | 备注 |
 |-----|------|----------|----------|------|
@@ -67,7 +67,7 @@
 
 ---
 
-## 四、已废弃/替代 RFC
+## 四、已废弃/替代 RFC {#四已废弃替代-rfc}
 
 | RFC | 主题 | 状态 | 替代 | 项目文档 |
 |-----|------|------|------|----------|
@@ -75,7 +75,7 @@
 
 ---
 
-## 五、对项目文档的影响
+## 五、对项目文档的影响 {#五对项目文档的影响}
 
 | 影响类型 | RFC 示例 | 项目响应 |
 |----------|----------|----------|
@@ -86,7 +86,7 @@
 
 ---
 
-## 六、未覆盖缺口
+## 六、未覆盖缺口 {#六未覆盖缺口}
 
 1. 需要建立与 RFC 仓库的自动同步，检测新合并 RFC。
 2. 每个 RFC 的「项目响应」字段可进一步细化到具体文件行号。
@@ -94,7 +94,7 @@
 
 > **权威来源**: [Rust RFCs](https://rust-lang.github.io/rfcs/) | [Rust RFC Repository](https://github.com/rust-lang/rfcs) | [Rust Tracking Issues](https://github.com/rust-lang/rust/labels/C-tracking-issue)
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
 - [RFC 对齐索引](10_rfc_alignment_index.md)
@@ -105,7 +105,7 @@
 
 ---
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 本对齐矩阵同时参考以下 P1 学术权威来源，以形成完整的官方-学术对照网络：
 
@@ -114,7 +114,7 @@
 - [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
 - [Aeneas](https://aeneas-verification.github.io/)
 
-## 社区权威参考
+## 社区权威参考 {#社区权威参考}
 
 - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
 - [This Week in Rust](https://this-week-in-rust.org/)

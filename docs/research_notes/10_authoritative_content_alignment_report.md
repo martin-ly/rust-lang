@@ -1,4 +1,4 @@
-# 权威内容对齐全面检查报告
+# 权威内容对齐全面检查报告 {#权威内容对齐全面检查报告}
 
 > **概念族**: 权威来源对齐
 
@@ -24,7 +24,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -33,7 +33,7 @@
 >
 
 - [权威内容对齐全面检查报告](#权威内容对齐全面检查报告)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、权威来源清单](#一权威来源清单)
   - [二、Rust Book 2024 Edition 逐章对齐详情](#二rust-book-2024-edition-逐章对齐详情)
     - [Ch 1-3: 基础概念](#ch-1-3-基础概念)
@@ -55,7 +55,7 @@
   - [六、权威来源引用完整性](#六权威来源引用完整性)
     - [已引用来源](#已引用来源)
   - [七、修复执行清单](#七修复执行清单)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -63,7 +63,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 一、权威来源清单
+## 一、权威来源清单 {#一权威来源清单}
 
 >
 
@@ -87,7 +87,7 @@
 
 ---
 
-## 二、Rust Book 2024 Edition 逐章对齐详情
+## 二、Rust Book 2024 Edition 逐章对齐详情 {#二rust-book-2024-edition-逐章对齐详情}
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
 
@@ -99,7 +99,7 @@
 
 > **[来源: IEEE - Documentation Standards]**
 
-### Ch 1-3: 基础概念
+### Ch 1-3: 基础概念 {#ch-1-3-基础概念}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -133,7 +133,7 @@
 
 ---
 
-### Ch 4: 所有权 (核心章节)
+### Ch 4: 所有权 (核心章节) {#ch-4-所有权-核心章节}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -161,7 +161,7 @@
 
 ---
 
-### Ch 10-11: 泛型与Trait
+### Ch 10-11: 泛型与Trait {#ch-10-11-泛型与trait}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -181,7 +181,7 @@
 
 ---
 
-### Ch 15: 智能指针
+### Ch 15: 智能指针 {#ch-15-智能指针}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -209,7 +209,7 @@
 
 ---
 
-### Ch 16: 无畏并发
+### Ch 16: 无畏并发 {#ch-16-无畏并发}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -229,7 +229,7 @@
 
 ---
 
-### Ch 17: 异步编程 (2024 Edition新增)
+### Ch 17: 异步编程 (2024 Edition新增) {#ch-17-异步编程-2024-edition新增}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -257,13 +257,13 @@
 
 ---
 
-## 三、Rust Reference 1.94 对齐检查
+## 三、Rust Reference 1.94 对齐检查 {#三rust-reference-194-对齐检查}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 类型系统
+### 类型系统 {#类型系统}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -283,7 +283,7 @@
 
 | Const Generics | 10_const_evaluation.md | ✅ |
 
-### 所有权与借用
+### 所有权与借用 {#所有权与借用}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -299,7 +299,7 @@
 
 | Interior Mutability | 10_ownership_model.md Def 4.4 | ✅ |
 
-### 2024 Edition 特性
+### 2024 Edition 特性 {#2024-edition-特性}
 
 >
 
@@ -321,13 +321,13 @@
 
 ---
 
-## 四、差距汇总与修复计划
+## 四、差距汇总与修复计划 {#四差距汇总与修复计划}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### P0 高优先级 (本周修复)
+### P0 高优先级 (本周修复) {#p0-高优先级-本周修复}
 
 >
 
@@ -341,7 +341,7 @@
 
 | GAP-DEREF-01 | Deref trait形式化 | Ch 15.2 | 10_trait_system_formalization.md |
 
-### P1 中优先级 (下周修复)
+### P1 中优先级 (下周修复) {#p1-中优先级-下周修复}
 
 >
 
@@ -355,7 +355,7 @@
 
 | GAP-ASYNC-01 | Async Trait形式化 | Ch 17.5 | 10_async_state_machine.md 扩展 |
 
-### P2 低优先级 (后续版本)
+### P2 低优先级 (后续版本) {#p2-低优先级-后续版本}
 
 >
 
@@ -371,13 +371,13 @@
 
 ---
 
-## 五、版本更新检查
+## 五、版本更新检查 {#五版本更新检查}
 
 >
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 当前项目版本声明
+### 当前项目版本声明 {#当前项目版本声明}
 
 >
 
@@ -397,13 +397,13 @@
 
 ---
 
-## 六、权威来源引用完整性
+## 六、权威来源引用完整性 {#六权威来源引用完整性}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 已引用来源
+### 已引用来源 {#已引用来源}
 
 >
 
@@ -425,7 +425,7 @@
 
 ---
 
-## 七、修复执行清单
+## 七、修复执行清单 {#七修复执行清单}
 
 >
 
@@ -457,7 +457,7 @@
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -465,7 +465,7 @@
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -473,7 +473,7 @@
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -487,7 +487,7 @@
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -497,7 +497,7 @@
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -529,7 +529,7 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -541,7 +541,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

@@ -8,7 +8,7 @@
 
 ---
 
-# lapin Crate 架构解构
+# lapin Crate 架构解构 {#lapin-crate-架构解构}
 
 > **最后更新**: 2026-06-29
 >
@@ -24,7 +24,7 @@
 
 ---
 
-## 1. 引言：Rust RabbitMQ 客户端的生态定位
+## 1. 引言：Rust RabbitMQ 客户端的生态定位 {#1-引言rust-rabbitmq-客户端的生态定位}
 
 > **[来源: [lapin crates.io](https://crates.io/crates/lapin)]**
 
@@ -73,7 +73,7 @@ channel
 
 ---
 
-## 2. 核心概念
+## 2. 核心概念 {#2-核心概念}
 
 > **[来源: [RabbitMQ AMQP 0-9-1 Model Explained](https://www.rabbitmq.com/tutorials/amqp-concepts)]**
 
@@ -105,7 +105,7 @@ graph LR
 
 > [来源: [AMQP 0-9-1 Specification](https://www.rabbitmq.com/resources/specs/amqp0-9-1.pdf)]
 
-### 2.1 Publisher 与 Publisher Confirm
+### 2.1 Publisher 与 Publisher Confirm {#21-publisher-与-publisher-confirm}
 
 > **[来源: [RabbitMQ Publisher Confirms](https://www.rabbitmq.com/docs/confirms)]**
 
@@ -135,7 +135,7 @@ match confirm.await? {
 
 > [来源: [lapin publisher_confirm](https://docs.rs/lapin/latest/lapin/publisher_confirm/)]
 
-### 2.2 Consumer 与 ACK/NACK
+### 2.2 Consumer 与 ACK/NACK {#22-consumer-与-acknack}
 
 > **[来源: [RabbitMQ Consumers](https://www.rabbitmq.com/docs/consumers)]**
 
@@ -165,7 +165,7 @@ while let Some(delivery) = consumer.next().await {
 
 > [来源: [lapin Consumer](https://docs.rs/lapin/latest/lapin/consumer/struct.Consumer.html)]
 
-### 2.3 QoS Prefetch
+### 2.3 QoS Prefetch {#23-qos-prefetch}
 
 > **[来源: [RabbitMQ Consumer Prefetch](https://www.rabbitmq.com/docs/consumer-prefetch)]**
 
@@ -185,7 +185,7 @@ channel.basic_qos(10, BasicQosOptions::default()).await?;
 
 ---
 
-## 3. 交换机类型与路由模式
+## 3. 交换机类型与路由模式 {#3-交换机类型与路由模式}
 
 > **[来源: [RabbitMQ Exchanges](https://www.rabbitmq.com/docs/exchanges)]**
 
@@ -215,7 +215,7 @@ channel
 
 ---
 
-## 4. 错误处理与连接恢复
+## 4. 错误处理与连接恢复 {#4-错误处理与连接恢复}
 
 > **[来源: [RabbitMQ Connections](https://www.rabbitmq.com/docs/connections)]**
 
@@ -239,7 +239,7 @@ let conn = Connection::connect(&addr, props).await?;
 
 ---
 
-## 5. 反例边界
+## 5. 反例边界 {#5-反例边界}
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -258,7 +258,7 @@ let conn = Connection::connect(&addr, props).await?;
 
 ---
 
-## 6. 类型系统利用
+## 6. 类型系统利用 {#6-类型系统利用}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -276,7 +276,7 @@ let conn = Connection::connect(&addr, props).await?;
 
 ---
 
-## 7. 代码示例锚点
+## 7. 代码示例锚点 {#7-代码示例锚点}
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -289,7 +289,7 @@ let conn = Connection::connect(&addr, props).await?;
 
 ---
 
-## 8. 相关架构与延伸阅读
+## 8. 相关架构与延伸阅读 {#8-相关架构与延伸阅读}
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -301,7 +301,7 @@ let conn = Connection::connect(&addr, props).await?;
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [lapin crates.io](https://crates.io/crates/lapin)]**
 >
@@ -319,7 +319,7 @@ let conn = Connection::connect(&addr, props).await?;
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
 > **P0（官方/必读）**:
 >
@@ -337,7 +337,7 @@ let conn = Connection::connect(&addr, props).await?;
 > - [来源: [RabbitMQ Tutorials](https://www.rabbitmq.com/tutorials)]
 > - [来源: [This Week in Rust](https://this-week-in-rust.org/)]
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

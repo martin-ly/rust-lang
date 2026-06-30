@@ -12,30 +12,30 @@
 
 ---
 
-## 工具链核心组件
+## 工具链核心组件 {#工具链核心组件}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Rust 编译器 (rustc)
+### Rust 编译器 (rustc) {#rust-编译器-rustc}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# 基本编译
+# 基本编译 {#基本编译}
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 rustc main.rs                    # 编译单个文件
 rustc --crate-type lib lib.rs    # 编译为库
 rustc --crate-type bin main.rs   # 编译为二进制（默认）
 
-# 优化级别
+# 优化级别 {#优化级别}
 rustc -C opt-level=0 main.rs     # 无优化（快速编译）
 rustc -C opt-level=3 main.rs     # 最大优化
 rustc -C opt-level=s main.rs     # 优化大小
 
-# 目标平台
+# 目标平台 {#目标平台}
 rustc --target x86_64-unknown-linux-gnu main.rs
 rustc --target wasm32-unknown-unknown main.rs
 ```
@@ -66,14 +66,14 @@ fn error_path() {}
 fn important_result() -> i32 { 42 }
 ```
 
-### Cargo：构建系统与包管理器
+### Cargo：构建系统与包管理器 {#cargo构建系统与包管理器}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
-# Cargo.toml 完整示例
+# Cargo.toml 完整示例 {#cargotoml-完整示例}
 [package]
 name = "my-project"
 version = "0.1.0"
@@ -85,7 +85,7 @@ repository = "https://github.com/user/repo"
 rust-version = "1.96.0"
 
 [dependencies]
-# 依赖版本规范
+# 依赖版本规范 {#依赖版本规范}
 serde = "1.0"                    # 语义化版本
 serde = "=1.0.150"               # 精确版本
 serde = ">=1.0, <2.0"            # 范围
@@ -94,15 +94,15 @@ serde = { git = "https://github.com/serde-rs/serde" }  # Git 依赖
 serde = { path = "../serde" }    # 本地路径
 
 [dev-dependencies]
-# 仅开发时使用的依赖
+# 仅开发时使用的依赖 {#仅开发时使用的依赖}
 mockall = "0.12"
 
 [build-dependencies]
-# 构建脚本依赖
+# 构建脚本依赖 {#构建脚本依赖}
 cc = "1.0"
 
 [features]
-# 条件编译特性
+# 条件编译特性 {#条件编译特性}
 default = ["std"]
 std = []
 async = ["tokio"]
@@ -119,43 +119,43 @@ opt-level = 1
 incremental = true
 ```
 
-### 常用 Cargo 命令
+### 常用 Cargo 命令 {#常用-cargo-命令}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# 项目管理
+# 项目管理 {#项目管理}
 cargo new my-project         # 创建二进制项目
 cargo new --lib my-library   # 创建库项目
 cargo init                   # 在当前目录初始化
 
-# 构建
+# 构建 {#构建}
 cargo build                  # 调试构建
 cargo build --release        # 发布构建
 cargo build --all-targets    # 构建所有目标（bin, test, bench）
 cargo check                  # 快速检查（不生成代码）
 
-# 测试
+# 测试 {#测试}
 cargo test                   # 运行所有测试
 cargo test --lib             # 仅库测试
 cargo test --doc             # 文档测试
 cargo test <filter>          # 运行匹配的测试
 
-# 依赖管理
+# 依赖管理 {#依赖管理}
 cargo add serde              # 添加依赖
 cargo add --dev mockall      # 添加开发依赖
 cargo update                 # 更新 Cargo.lock
 cargo tree                   # 显示依赖树
 cargo tree -d                # 显示重复依赖
 
-# 文档
+# 文档 {#文档}
 cargo doc                    # 生成文档
 cargo doc --open             # 生成并打开
 cargo doc --no-deps          # 不生成依赖文档
 
-# 其他工具
+# 其他工具 {#其他工具}
 cargo fmt                    # 格式化代码
 cargo clippy                 # 运行 linter
 cargo fix                    # 自动修复警告
@@ -164,34 +164,34 @@ cargo publish                # 发布到 crates.io
 cargo install <crate>        # 安装二进制 crate
 ```
 
-### 代码质量工具
+### 代码质量工具 {#代码质量工具}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# Clippy：Rust 的 linter
+# Clippy：Rust 的 linter {#clippyrust-的-linter}
 cargo clippy
 cargo clippy --all-targets --all-features
 cargo clippy -- -D warnings  # 将警告视为错误
 
-# 配置 .clippy.toml 或 clippy.toml
-# allow = ["some_lint"]
-# warn = ["another_lint"]
-# deny = ["dangerous_lint"]
+# 配置 .clippy.toml 或 clippy.toml {#配置-clippytoml-或-clippytoml}
+# allow = ["some_lint"] {#allow-some_lint}
+# warn = ["another_lint"] {#warn-another_lint}
+# deny = ["dangerous_lint"] {#deny-dangerous_lint}
 
-# rustfmt：代码格式化
+# rustfmt：代码格式化 {#rustfmt代码格式化}
 cargo fmt
 cargo fmt -- --check         # CI 中使用
 
-# 配置 rustfmt.toml
-# edition = "2024"
-# max_width = 100
-# tab_spaces = 4
+# 配置 rustfmt.toml {#配置-rustfmttoml}
+# edition = "2024" {#edition-2024}
+# max_width = 100 {#max_width-100}
+# tab_spaces = 4 {#tab_spaces-4}
 ```
 
-### 形式化验证工具
+### 形式化验证工具 {#形式化验证工具}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -222,14 +222,14 @@ unsafe fn undefined_behavior_demo() {
 // }
 ```
 
-### 工作空间示例
+### 工作空间示例 {#工作空间示例}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```toml
-# 根 Cargo.toml - 工作空间配置
+# 根 Cargo.toml - 工作空间配置 {#根-cargotoml---工作空间配置}
 [workspace]
 members = ["crate-a", "crate-b", "crate-c"]
 resolver = "2"
@@ -246,7 +246,7 @@ authors = ["Team <team@example.com>"]
 license = "MIT OR Apache-2.0"
 ```
 
-### 构建脚本 (build.rs)
+### 构建脚本 (build.rs) {#构建脚本-buildrs}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
@@ -280,7 +280,7 @@ fn main() {
 
 ---
 
-## 形式化方法
+## 形式化方法 {#形式化方法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -293,7 +293,7 @@ fn main() {
 | Send/Sync 形式化 | 线程安全形式化定义 | [../../research_notes/formal_methods/10_send_sync_formalization.md](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) |
 | 证明索引 | 形式化证明集合 | [../../research_notes/10_proof_index.md](../../../archive/research_notes_2026_06_25/10_proof_index.md) |
 
-## 相关研究笔记
+## 相关研究笔记 {#相关研究笔记}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -312,7 +312,7 @@ fn main() {
 
 ---
 
-## 知识结构思维导图
+## 知识结构思维导图 {#知识结构思维导图}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -343,7 +343,7 @@ mindmap
       条件编译
 ```
 
-## 与核心文档的关联
+## 与核心文档的关联 {#与核心文档的关联}
 
 | 本文档 | 核心文档 | 关系 |
 | :--- | :--- | :--- |
@@ -368,7 +368,7 @@ mindmap
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Compiler Construction](https://en.wikipedia.org/wiki/Compiler_Construction)**
 > **来源: [Rust Compiler Team Blog](https://blog.rust-lang.org/inside-rust/)**

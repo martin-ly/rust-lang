@@ -1,4 +1,4 @@
-# Rust 概念层次体系框架
+# Rust 概念层次体系框架 {#rust-概念层次体系框架}
 >
 > **概念族**: 概念框架
 
@@ -14,13 +14,13 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 概念层次体系框架](#rust-概念层次体系框架)
-  - [📑 目录](#-目录)
-  - [🎯 概述 {#-概述}](#-概述--概述)
+  - [📑 目录](#目录)
+  - [🎯 概述](#概述)
   - [五层概念体系](#五层概念体系)
     - [L1: 元概念层](#l1-元概念层)
     - [L2: 核心概念族](#l2-核心概念族)
@@ -45,19 +45,18 @@
   - [概念与定理映射](#概念与定理映射)
     - [概念-定理对应表](#概念-定理对应表)
     - [定理层次 DAG](#定理层次-dag)
-  - [📚 相关文档 {#-相关文档}](#-相关文档--相关文档)
-  - [🆕 Rust 1.94 研究更新](#-rust-194-研究更新)
+  - [📚 相关文档](#相关文档)
+  - [🆕 Rust 1.94 研究更新](#rust-194-研究更新)
     - [核心研究点](#核心研究点)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+      - [相关文档](#相关文档-1)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🎯 概述 {#-概述}
+## 🎯 概述 {#概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -70,11 +69,11 @@
 
 ---
 
-## 五层概念体系
+## 五层概念体系 {#五层概念体系}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### L1: 元概念层
+### L1: 元概念层 {#l1-元概念层}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -98,7 +97,7 @@
 
 ---
 
-### L2: 核心概念族
+### L2: 核心概念族 {#l2-核心概念族}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -106,7 +105,7 @@
 
 **定义**: 由元概念派生，Rust 特有的核心概念集合
 
-#### L2.1: 所有权概念族
+#### L2.1: 所有权概念族 {#l21-所有权概念族}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
@@ -138,7 +137,7 @@
             └──→ 生命周期省略
 ```
 
-#### L2.2: 类型概念族
+#### L2.2: 类型概念族 {#l22-类型概念族}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -151,7 +150,7 @@
 | **Trait** | 行为抽象接口 | L2类型 → L3Trait | 10_trait_system_formalization.md |
 | **型变** | 子类型关系 | L2类型 → L3型变 | 10_variance_theory.md |
 
-#### L2.3: 并发概念族
+#### L2.3: 并发概念族 {#l23-并发概念族}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -165,7 +164,7 @@
 
 ---
 
-### L3: 具体概念
+### L3: 具体概念 {#l3-具体概念}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -173,7 +172,7 @@
 
 **定义**: 可直接教学和应用的具体 Rust 概念
 
-#### L3.1: 所有权具体概念
+#### L3.1: 所有权具体概念 {#l31-所有权具体概念}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -186,7 +185,7 @@
 | **作用域** | 变量的有效范围 | L2所有权 → L3作用域 | `{ let s = ...; }` |
 | **遮蔽(shadowing)** | 同名变量覆盖 | L2所有权 → L3遮蔽 | `let x = 5; let x = x + 1;` |
 
-#### L3.2: 借用具体概念
+#### L3.2: 借用具体概念 {#l32-借用具体概念}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -199,7 +198,7 @@
 | **解引用** | `*` 操作符解引用 | L2借用 → L3解引用 | `*r = String::from("y");` |
 | **重新借用** | 从借用创建新借用 | L2借用 → L3重新借用 | `let r2 = &*r;` |
 
-#### L3.3: 生命周期具体概念
+#### L3.3: 生命周期具体概念 {#l33-生命周期具体概念}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -211,7 +210,7 @@
 
 ---
 
-### L4: 实现机制
+### L4: 实现机制 {#l4-实现机制}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -256,13 +255,13 @@ graph TB
 
 ---
 
-### L5: 代码实践
+### L5: 代码实践 {#l5-代码实践}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 **定义**: 实际编写和运行的 Rust 代码
 
-#### L5.1: 基础代码模式
+#### L5.1: 基础代码模式 {#l51-基础代码模式}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -273,7 +272,7 @@ graph TB
 | **Builder** | L3方法调用 | `Config::new().port(8080).build()` | 复杂对象构建 |
 | **迭代器** | L3迭代 + L4单态化 | `vec.iter().map(...).collect()` | 数据处理 |
 
-#### L5.2: 高级代码模式
+#### L5.2: 高级代码模式 {#l52-高级代码模式}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -284,7 +283,7 @@ graph TB
 | **Pin + Unpin** | L2异步 + L4状态机 | `Pin<Box<dyn Future>>` | 自引用结构 |
 | **Actor模型** | L2并发 + L4消息队列 | `actor.send(Message).await` | 消息驱动并发 |
 
-#### L5.3: 代码-概念追溯
+#### L5.3: 代码-概念追溯 {#l53-代码-概念追溯}
 
 每个代码片段都可以追溯到概念层次：
 
@@ -298,11 +297,11 @@ println!("{}", r);               // L2: 借用规则
 
 ---
 
-## 层间关系映射
+## 层间关系映射 {#层间关系映射}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 自顶向下映射
+### 自顶向下映射 {#自顶向下映射}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -325,7 +324,7 @@ L4 实现机制 → 理解实现原理
 L5 代码实践 → 编写代码
 ```
 
-### 自底向上映射
+### 自底向上映射 {#自底向上映射}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -350,11 +349,11 @@ L1 元概念 → 理解本质原理
 
 ---
 
-## 概念与文档映射
+## 概念与文档映射 {#概念与文档映射}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 按层次组织的文档树
+### 按层次组织的文档树 {#按层次组织的文档树}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -389,7 +388,7 @@ L5 代码实践
 └── [代码示例]
 ```
 
-### 文档层次完整性检查表
+### 文档层次完整性检查表 {#文档层次完整性检查表}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -405,11 +404,11 @@ L5 代码实践
 
 ---
 
-## 概念与定理映射
+## 概念与定理映射 {#概念与定理映射}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 概念-定理对应表
+### 概念-定理对应表 {#概念-定理对应表}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -423,7 +422,7 @@ L5 代码实践
 | 异步安全性 | T6.1~T6.3 | 10_async_state_machine.md | ⚠️ 思路 |
 | Send/Sync 安全 | SEND-T1, SYNC-T1 | 10_send_sync_formalization.md | ✅ 完整 |
 
-### 定理层次 DAG
+### 定理层次 DAG {#定理层次-dag}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -463,7 +462,7 @@ graph BT
 
 ---
 
-## 📚 相关文档 {#-相关文档}
+## 📚 相关文档 {#相关文档}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -482,13 +481,13 @@ graph BT
 
 ---
 
-## 🆕 Rust 1.94 研究更新
+## 🆕 Rust 1.94 研究更新 {#rust-194-研究更新}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.96.0+
 
-### 核心研究点
+### 核心研究点 {#核心研究点}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -503,20 +502,20 @@ graph BT
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -525,7 +524,7 @@ graph BT
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -533,7 +532,7 @@ graph BT
 - ✅ 兼容Edition 2024
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档-1}
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查
@@ -556,7 +555,7 @@ graph BT
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -565,7 +564,7 @@ graph BT
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

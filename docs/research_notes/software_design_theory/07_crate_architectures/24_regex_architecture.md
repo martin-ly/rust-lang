@@ -13,7 +13,7 @@
 
 ---
 
-# regex Crate 架构解构
+# regex Crate 架构解构 {#regex-crate-架构解构}
 
 >
 
@@ -30,7 +30,7 @@
 
 ---
 
-## 1. 引言：Rust `regex` crate 的生态定位
+## 1. 引言：Rust `regex` crate 的生态定位 {#1-引言rust-regex-crate-的生态定位}
 
 >
 
@@ -63,13 +63,13 @@ assert!(re.is_match("2026-06-29"));
 
 ---
 
-## 2. 核心 API 架构
+## 2. 核心 API 架构 {#2-核心-api-架构}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 2.1 三层入口：`Regex` / `RegexBuilder` / `RegexSet`
+### 2.1 三层入口：`Regex` / `RegexBuilder` / `RegexSet` {#21-三层入口regex-regexbuilder-regexset}
 
 ```mermaid
 graph TD
@@ -95,7 +95,7 @@ graph TD
 
 > [来源: regex RegexBuilder Docs](https://docs.rs/regex/latest/regex/struct.RegexBuilder.html)
 
-### 2.2 匹配与捕获
+### 2.2 匹配与捕获 {#22-匹配与捕获}
 
 `Regex` 提供位置查询、分组捕获与命名捕获三种粒度：
 
@@ -114,7 +114,7 @@ assert_eq!(&caps["month"], "06");
 
 **关键设计**：`Captures` 通过生命周期借用输入字符串，避免匹配过程中的拷贝；`caps.name("year")` 返回 `Option<Match>`，强制调用者处理缺失的分组。
 
-### 2.3 命名捕获与迭代器
+### 2.3 命名捕获与迭代器 {#23-命名捕获与迭代器}
 
 正则对象本身实现 `Iterator` 相关方法，支持流式消费：
 
@@ -137,7 +137,7 @@ for ident in re.find_iter("let foo = bar + 1;") {
 | `split` | `Split` | 按匹配项切分 |
 | `splitn` | `SplitN` | 限制切分段数 |
 
-### 2.4 替换 API
+### 2.4 替换 API {#24-替换-api}
 
 `replace_all` 与 `replacen` 支持字符串与闭包两种替换策略：
 
@@ -157,7 +157,7 @@ let incremented = re.replace_all("a1b2c3", |caps: &regex::Captures| {
 
 **类型注意**：`replace_all` 返回 `Cow<str>`，当没有匹配时直接借用原字符串，无需分配。
 
-### 2.5 `RegexSet`：多模式并行匹配
+### 2.5 `RegexSet`：多模式并行匹配 {#25-regexset多模式并行匹配}
 
 `RegexSet` 适合"模式集合中任意一个是否命中"的场景，内部共享 NFA/DFA 构造：
 
@@ -178,7 +178,7 @@ assert!(matches.contains(&2));
 
 ---
 
-## 3. 性能特征
+## 3. 性能特征 {#3-性能特征}
 
 >
 
@@ -212,7 +212,7 @@ graph LR
 
 ---
 
-## 4. 反例边界
+## 4. 反例边界 {#4-反例边界}
 
 >
 
@@ -233,7 +233,7 @@ graph LR
 
 ---
 
-## 5. 类型系统利用
+## 5. 类型系统利用 {#5-类型系统利用}
 
 >
 
@@ -251,7 +251,7 @@ graph LR
 
 ---
 
-## 6. 代码示例锚点
+## 6. 代码示例锚点 {#6-代码示例锚点}
 
 >
 
@@ -266,7 +266,7 @@ graph LR
 
 ---
 
-## 7. 相关架构与延伸阅读
+## 7. 相关架构与延伸阅读 {#7-相关架构与延伸阅读}
 
 >
 
@@ -279,7 +279,7 @@ graph LR
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [regex crates.io](https://crates.io/crates/regex)]**
 
@@ -297,7 +297,7 @@ graph LR
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
 > **P0（官方/必读）**:
 >
@@ -317,7 +317,7 @@ graph LR
 > - [来源: [ripgrep – regex 应用案例](https://github.com/BurntSushi/ripgrep)]
 > - [来源: [This Week in Rust](https://this-week-in-rust.org/)]
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

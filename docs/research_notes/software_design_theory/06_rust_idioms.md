@@ -1,4 +1,4 @@
-# Rust 惯用模式与设计理论衔接
+# Rust 惯用模式与设计理论衔接 {#rust-惯用模式与设计理论衔接}
 
 > **概念族**: 软件设计 / 惯用法
 
@@ -24,7 +24,7 @@
 
 > **权威来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -33,7 +33,7 @@
 >
 
 - [Rust 惯用模式与设计理论衔接](#rust-惯用模式与设计理论衔接)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [宗旨](#宗旨)
   - [层次推进（阅读顺序）](#层次推进阅读顺序)
   - [一、RAII（资源获取即初始化）](#一raii资源获取即初始化)
@@ -72,7 +72,7 @@
     - [8.4 常见陷阱](#84-常见陷阱)
   - [九、智能指针选型决策](#九智能指针选型决策)
   - [十、引用](#十引用)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -89,7 +89,7 @@
 
 ---
 
-## 宗旨
+## 宗旨 {#宗旨}
 
 >
 
@@ -99,7 +99,7 @@
 
 ---
 
-## 层次推进（阅读顺序）
+## 层次推进（阅读顺序） {#层次推进阅读顺序}
 
 >
 
@@ -117,13 +117,13 @@
 
 ---
 
-## 一、RAII（资源获取即初始化）
+## 一、RAII（资源获取即初始化） {#一raii资源获取即初始化}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1.1 定义与形式化
+### 1.1 定义与形式化 {#11-定义与形式化}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -137,7 +137,7 @@
 
 **定理 RAII-T1**：RAII 实现等价于 ownership 规则 3；`Drop::drop` 在 `scope_end` 时调用；由 [ownership_model](../formal_methods/10_ownership_model.md) 定理 T3、BOX-T1。
 
-### 1.2 典型场景
+### 1.2 典型场景 {#12-典型场景}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -157,7 +157,7 @@
 
 | 内存 | `Box`、`Vec` | 与 ownership 直接对应 |
 
-### 1.3 完整代码示例
+### 1.3 完整代码示例 {#13-完整代码示例}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -209,7 +209,7 @@ let m = Mutex::new(0);
 
 ```
 
-### 1.4 常见陷阱
+### 1.4 常见陷阱 {#14-常见陷阱}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -227,7 +227,7 @@ let m = Mutex::new(0);
 
 | 忘记 `impl Drop` | 资源泄漏 | 显式 RAII 封装 |
 
-### 1.5 与设计模式衔接
+### 1.5 与设计模式衔接 {#15-与设计模式衔接}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -243,13 +243,13 @@ let m = Mutex::new(0);
 
 ---
 
-## 二、Newtype 模式
+## 二、Newtype 模式 {#二newtype-模式}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 定义与形式化
+### 2.1 定义与形式化 {#21-定义与形式化}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -263,7 +263,7 @@ let m = Mutex::new(0);
 
 **定理 NW-T1**：Newtype 满足 [ownership_model](../formal_methods/10_ownership_model.md) 规则 1–3；`T` 的 ownership 语义直接传递；由 Def 1.3 无环、接口一致。
 
-### 2.2 典型场景
+### 2.2 典型场景 {#22-典型场景}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -281,7 +281,7 @@ let m = Mutex::new(0);
 
 | 品牌类型 | `struct Branded<T>` | 类型安全 |
 
-### 2.3 完整代码示例
+### 2.3 完整代码示例 {#23-完整代码示例}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -333,7 +333,7 @@ impl std::ops::Add for Meter {
 
 ```
 
-### 2.4 常见陷阱
+### 2.4 常见陷阱 {#24-常见陷阱}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -347,7 +347,7 @@ impl std::ops::Add for Meter {
 
 | 泄漏内部类型 | 封装破坏 | 谨慎 `pub` |
 
-### 2.5 与设计模式衔接
+### 2.5 与设计模式衔接 {#25-与设计模式衔接}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -359,13 +359,13 @@ impl std::ops::Add for Meter {
 
 ---
 
-## 三、类型状态模式（Typed State）
+## 三、类型状态模式（Typed State） {#三类型状态模式typed-state}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 3.1 定义与形式化
+### 3.1 定义与形式化 {#31-定义与形式化}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -375,7 +375,7 @@ impl std::ops::Add for Meter {
 
 **定理 TS-T1**：类型状态与 [Builder](01_design_patterns_formal/01_creational/10_builder.md) B-T2 一致；类型状态 Builder 即 Def TS1 实例。
 
-### 3.2 典型场景
+### 3.2 典型场景 {#32-典型场景}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -389,7 +389,7 @@ impl std::ops::Add for Meter {
 
 | 解析阶段 | `Parser<Initial>` → `Parser<Parsing>` | 流程控制 |
 
-### 3.3 常见陷阱
+### 3.3 常见陷阱 {#33-常见陷阱}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -403,7 +403,7 @@ impl std::ops::Add for Meter {
 
 | 运行时分支 | 需 `dyn` | 优先编译期类型 |
 
-### 3.4 与设计模式衔接
+### 3.4 与设计模式衔接 {#34-与设计模式衔接}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -415,7 +415,7 @@ impl std::ops::Add for Meter {
 
 ---
 
-## 四、Builder 变体（与 GoF 对照）
+## 四、Builder 变体（与 GoF 对照） {#四builder-变体与-gof-对照}
 
 >
 
@@ -433,7 +433,7 @@ impl std::ops::Add for Meter {
 
 ---
 
-## 五、与 23/43 模型衔接
+## 五、与 23/43 模型衔接 {#五与-2343-模型衔接}
 
 >
 
@@ -455,13 +455,13 @@ impl std::ops::Add for Meter {
 
 ---
 
-## 六、Error handling 与 Result/? 惯用
+## 六、Error handling 与 Result/? 惯用 {#六error-handling-与-result-惯用}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 6.1 定义与形式化
+### 6.1 定义与形式化 {#61-定义与形式化}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -469,7 +469,7 @@ impl std::ops::Add for Meter {
 
 **定理 EH-T1**：`?` 与 [borrow_checker_proof](../formal_methods/10_borrow_checker_proof.md) Def QUERY1 一致；错误传播不违反借用规则。
 
-### 6.2 典型场景
+### 6.2 典型场景 {#62-典型场景}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -483,7 +483,7 @@ impl std::ops::Add for Meter {
 
 | 可选操作 | `Option` + `ok_or` | 与 Builder 必填校验衔接 |
 
-### 6.3 完整代码示例：错误传播链
+### 6.3 完整代码示例：错误传播链 {#63-完整代码示例错误传播链}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -541,7 +541,7 @@ fn load_or_default(path: &str) -> Result<u32, AppError> {
 
 ```
 
-### 6.4 常见陷阱
+### 6.4 常见陷阱 {#64-常见陷阱}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -557,13 +557,13 @@ fn load_or_default(path: &str) -> Result<u32, AppError> {
 
 ---
 
-## 七、Option/Result 组合模式
+## 七、Option/Result 组合模式 {#七optionresult-组合模式}
 
 >
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 7.1 定义与形式化
+### 7.1 定义与形式化 {#71-定义与形式化}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -571,7 +571,7 @@ fn load_or_default(path: &str) -> Result<u32, AppError> {
 
 **定理 OR-T1**：`Option`/`Result` 与 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../10_language_semantics_expressiveness.md) 构造性语义一致；无 null，无异常隐式传播。
 
-### 7.2 典型场景
+### 7.2 典型场景 {#72-典型场景}
 
 >
 
@@ -587,7 +587,7 @@ fn load_or_default(path: &str) -> Result<u32, AppError> {
 
 | 必填校验 | `opt.ok_or(Error::Missing)` | Builder 必填 |
 
-### 7.3 完整代码示例：配置解析链
+### 7.3 完整代码示例：配置解析链 {#73-完整代码示例配置解析链}
 
 >
 
@@ -635,7 +635,7 @@ fn combine_all() -> Option<u32> {
 
 ```
 
-### 7.4 与 Builder 必填校验衔接
+### 7.4 与 Builder 必填校验衔接 {#74-与-builder-必填校验衔接}
 
 >
 
@@ -671,13 +671,13 @@ impl ConfigBuilder {
 
 ---
 
-## 八、Cow（Clone-on-Write）模式
+## 八、Cow（Clone-on-Write）模式 {#八cowclone-on-write模式}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 8.1 定义与形式化
+### 8.1 定义与形式化 {#81-定义与形式化}
 
 >
 
@@ -687,7 +687,7 @@ impl ConfigBuilder {
 
 **定理 COW-T1**：Cow 与 ownership 规则一致；读时不转移所有权；写时取得独占所有权。
 
-### 8.2 典型场景
+### 8.2 典型场景 {#82-典型场景}
 
 >
 
@@ -703,7 +703,7 @@ impl ConfigBuilder {
 
 | 条件克隆 | 仅修改时克隆 | 延迟复制 |
 
-### 8.3 完整代码示例：字符串处理
+### 8.3 完整代码示例：字符串处理 {#83-完整代码示例字符串处理}
 
 >
 
@@ -765,7 +765,7 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 
 ```
 
-### 8.4 常见陷阱
+### 8.4 常见陷阱 {#84-常见陷阱}
 
 >
 
@@ -781,7 +781,7 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 
 ---
 
-## 九、智能指针选型决策
+## 九、智能指针选型决策 {#九智能指针选型决策}
 
 >
 
@@ -805,7 +805,7 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 
 ---
 
-## 十、引用
+## 十、引用 {#十引用}
 
 >
 
@@ -821,7 +821,7 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -831,7 +831,7 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -839,7 +839,7 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -853,7 +853,7 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -863,7 +863,7 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -895,7 +895,7 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 

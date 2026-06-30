@@ -1,4 +1,4 @@
-# 软件设计理论体系：主索引
+# 软件设计理论体系：主索引 {#软件设计理论体系主索引}
 
 > **概念族**: 软件设计理论
 
@@ -24,7 +24,7 @@
 
 > **权威来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -33,7 +33,7 @@
 >
 
 - [软件设计理论体系：主索引](#软件设计理论体系主索引)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、层次化索引](#一层次化索引)
     - [1.1 理论层次](#11-理论层次)
     - [1.2 依赖关系](#12-依赖关系)
@@ -51,7 +51,7 @@
   - [八、文档快速导航](#八文档快速导航)
   - [九、扩展阅读](#九扩展阅读)
   - [十、推进阶段](#十推进阶段)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -69,13 +69,13 @@
 
 ---
 
-## 一、层次化索引
+## 一、层次化索引 {#一层次化索引}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1.1 理论层次
+### 1.1 理论层次 {#11-理论层次}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -103,7 +103,7 @@
 
 ```
 
-### 1.2 依赖关系
+### 1.2 依赖关系 {#12-依赖关系}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -135,13 +135,13 @@
 
 ---
 
-## 二、边界化索引
+## 二、边界化索引 {#二边界化索引}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 2.1 三维边界
+### 2.1 三维边界 {#21-三维边界}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -155,7 +155,7 @@
 
 | **充分 vs 非充分表达** | 等价表达 / 近似表达 / 不可表达 | [expressive_inexpressive_matrix](05_boundary_system/10_expressive_inexpressive_matrix.md) |
 
-### 2.2 边界原则
+### 2.2 边界原则 {#22-边界原则}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -167,13 +167,13 @@
 
 ---
 
-## 三、扩展化路线
+## 三、扩展化路线 {#三扩展化路线}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 3.1 设计模式扩展
+### 3.1 设计模式扩展 {#31-设计模式扩展}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -185,7 +185,7 @@
 
 - 扩展 20（43 完全）：Repository、DTO、Event Sourcing 等已纳入 02_complete_43_catalog
 
-### 3.2 执行模型扩展
+### 3.2 执行模型扩展 {#32-执行模型扩展}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -195,7 +195,7 @@
 
 - **层次推进**：三阶段已完成；见 [CONTENT_ENHANCEMENT](../10_content_enhancement.md) 层次推进计划
 
-### 3.3 工作流模型扩展
+### 3.3 工作流模型扩展 {#33-工作流模型扩展}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -205,7 +205,7 @@
 
 ---
 
-## 四、层次推进学习路径
+## 四、层次推进学习路径 {#四层次推进学习路径}
 
 >
 
@@ -225,7 +225,7 @@
 
 ---
 
-## 五、层次推进实质内容深化路线
+## 五、层次推进实质内容深化路线 {#五层次推进实质内容深化路线}
 
 >
 
@@ -245,7 +245,7 @@
 
 ---
 
-## 六、内容概览
+## 六、内容概览 {#六内容概览}
 
 >
 
@@ -271,7 +271,7 @@
 
 ---
 
-## 七、学习与选型
+## 七、学习与选型 {#七学习与选型}
 
 >
 
@@ -293,7 +293,7 @@
 
 ---
 
-## 八、文档快速导航
+## 八、文档快速导航 {#八文档快速导航}
 
 >
 
@@ -321,7 +321,7 @@
 
 ---
 
-## 九、扩展阅读
+## 九、扩展阅读 {#九扩展阅读}
 
 >
 
@@ -335,7 +335,7 @@
 
 ---
 
-## 十、推进阶段
+## 十、推进阶段 {#十推进阶段}
 
 >
 
@@ -359,7 +359,7 @@
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -369,13 +369,13 @@
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -389,7 +389,7 @@
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -399,7 +399,7 @@
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -431,7 +431,7 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -441,7 +441,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Software Design Pattern](https://en.wikipedia.org/wiki/Software_Design_Pattern)**
 > **来源: [Wikipedia - Software Architecture](https://en.wikipedia.org/wiki/Software_Architecture)**

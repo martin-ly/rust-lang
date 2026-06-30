@@ -1,4 +1,4 @@
-# 同步编程范式
+# 同步编程范式 {#同步编程范式}
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -12,11 +12,11 @@
 
 ---
 
-## 同步编程核心概念
+## 同步编程核心概念 {#同步编程核心概念}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 线程与并发
+### 线程与并发 {#线程与并发}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -66,7 +66,7 @@ fn channel_communication() {
 }
 ```
 
-### 共享状态并发
+### 共享状态并发 {#共享状态并发}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -137,7 +137,7 @@ fn atomic_demo() {
 }
 ```
 
-### 线程同步原语
+### 线程同步原语 {#线程同步原语}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -191,7 +191,7 @@ fn condvar_demo() {
 }
 ```
 
-### Scoped 线程（无需 'static 生命周期）
+### Scoped 线程（无需 'static 生命周期） {#scoped-线程无需-static-生命周期}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -246,7 +246,7 @@ where
 }
 ```
 
-### 线程局部存储
+### 线程局部存储 {#线程局部存储}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -285,7 +285,7 @@ fn thread_local_demo() {
 
 ---
 
-## 使用场景
+## 使用场景 {#使用场景}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -302,11 +302,11 @@ fn thread_local_demo() {
 
 ---
 
-## 相关研究笔记
+## 相关研究笔记 {#相关研究笔记}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 软件设计理论
+### 软件设计理论 {#软件设计理论}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -318,7 +318,7 @@ fn thread_local_demo() {
 | 并发执行模型 | 并发模型理论 | [../../../research_notes/software_design_theory/03_execution_models/03_concurrent.md](../../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/03_concurrent.md) |
 | 并行执行模型 | 并行模型理论 | [../../../research_notes/software_design_theory/03_execution_models/04_parallel.md](../../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/04_parallel.md) |
 
-### 形式化方法
+### 形式化方法 {#形式化方法}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -329,7 +329,7 @@ fn thread_local_demo() {
 | Send/Sync 形式化 | 线程安全 trait 形式化 | [../../../research_notes/formal_methods/10_send_sync_formalization.md](../../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) |
 | 所有权模型 | 所有权与并发 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
 
-### 实验分析
+### 实验分析 {#实验分析}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -341,7 +341,7 @@ fn thread_local_demo() {
 
 ---
 
-## 相关 crates
+## 相关 crates {#相关-crates}
 
 | crate | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -361,7 +361,7 @@ fn thread_local_demo() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 

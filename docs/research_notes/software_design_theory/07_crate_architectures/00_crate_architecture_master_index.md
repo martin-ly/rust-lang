@@ -1,4 +1,6 @@
-> **⚠️ 历史文档提示**：本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
+> **⚠️ 历史文档提示**：
+>
+> 本文档包含 `async-std`、`wasm32-wasi` 等已归档或已重命名的生态引用。
 > 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
 > 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -9,7 +11,7 @@
 
 ---
 
-# Rust 工业级 Crate 架构解构总索引
+# Rust 工业级 Crate 架构解构总索引 {#rust-工业级-crate-架构解构总索引}
 
 > **内容分级**: [归档级]
 >
@@ -20,12 +22,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 工业级 Crate 架构解构总索引](#rust-工业级-crate-架构解构总索引)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、解构范围与选型标准](#一解构范围与选型标准)
   - [二、Crate 架构全景矩阵](#二crate-架构全景矩阵)
   - [三、按层次分类的架构图谱](#三按层次分类的架构图谱)
@@ -50,7 +52,7 @@
 
 ---
 
-## 一、解构范围与选型标准
+## 一、解构范围与选型标准 {#一解构范围与选型标准}
 
 > [来源: Rust Crate Ecosystem Analysis · crates.io download statistics]
 
@@ -70,7 +72,7 @@
 
 ---
 
-## 二、Crate 架构全景矩阵
+## 二、Crate 架构全景矩阵 {#二crate-架构全景矩阵}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -123,7 +125,7 @@
 
 ---
 
-## 三、按层次分类的架构图谱
+## 三、按层次分类的架构图谱 {#三按层次分类的架构图谱}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -273,7 +275,7 @@ graph TD
 
 ---
 
-## 四、设计模式横切分析
+## 四、设计模式横切分析 {#四设计模式横切分析}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -305,7 +307,7 @@ graph TD
 
 ---
 
-## 五、类型系统利用对比
+## 五、类型系统利用对比 {#五类型系统利用对比}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -472,11 +474,11 @@ graph TD
 
 ---
 
-## 六、学习路径推荐
+## 六、学习路径推荐 {#六学习路径推荐}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 路径 A：异步 Web 全栈（推荐优先级：高）
+### 路径 A：异步 Web 全栈（推荐优先级：高） {#路径-a异步-web-全栈推荐优先级高}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -487,7 +489,7 @@ graph TD
 5. **Salvo** / **ntex** → 了解二线框架的设计差异与适用场景（可选）
 6. **Askama** / **Maud** → 了解类型安全模板引擎的编译期渲染模型（可选）
 
-### 路径 B：数据密集型系统（推荐优先级：高）
+### 路径 B：数据密集型系统（推荐优先级：高） {#路径-b数据密集型系统推荐优先级高}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -504,7 +506,7 @@ graph TD
 11. **surrealdb** → 文档-图数据库与 SurrealQL
 12. **vector** → 向量最近邻搜索与嵌入检索
 
-### 路径 C：系统编程与图形（推荐优先级：中）
+### 路径 C：系统编程与图形（推荐优先级：中） {#路径-c系统编程与图形推荐优先级中}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -512,7 +514,7 @@ graph TD
 2. **Wgpu** → GPU 编程与显式内存管理
 3. **Bevy** → ECS 架构在游戏引擎中的极致运用
 
-### 路径 D：工具与 CLI（推荐优先级：中）
+### 路径 D：工具与 CLI（推荐优先级：中） {#路径-d工具与-cli推荐优先级中}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -520,7 +522,7 @@ graph TD
 2. **Serde** → 配置文件的序列化
 3. **Reqwest** → 与外部 API 的 HTTP 交互
 
-### 路径 E：分布式 RPC 与 WASM（推荐优先级：中）
+### 路径 E：分布式 RPC 与 WASM（推荐优先级：中） {#路径-e分布式-rpc-与-wasm推荐优先级中}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -528,7 +530,7 @@ graph TD
 2. **wasm-bindgen** → Rust/WASM 与 JS 生态的互操作
 3. **Tower** → 中间件组合与横切关注点
 
-### 路径 F：底层系统编程（推荐优先级：高）
+### 路径 F：底层系统编程（推荐优先级：高） {#路径-f底层系统编程推荐优先级高}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -536,7 +538,7 @@ graph TD
 2. **Tokio** → 基于 mio 的异步运行时构建
 3. **Crossbeam** → 无锁并发原语补充
 
-### 路径 H：缓存与分布式协调（推荐优先级：高）
+### 路径 H：缓存与分布式协调（推荐优先级：高） {#路径-h缓存与分布式协调推荐优先级高}
 >
 > **[来源: [Redis 官方文档](https://redis.io/documentation)]**
 
@@ -547,7 +549,7 @@ graph TD
 5. **Tokio** → 异步运行时基础
 6. **Crossbeam** → 无锁并发原语补充
 
-### 路径 I：云原生与 Kubernetes（推荐优先级：高）
+### 路径 I：云原生与 Kubernetes（推荐优先级：高） {#路径-i云原生与-kubernetes推荐优先级高}
 >
 > **[来源: [Kubernetes 官方文档](https://kubernetes.io/docs/home/)]**
 >
@@ -556,7 +558,7 @@ graph TD
 > 3. **Tokio** → 异步运行时基础
 > 4. **Tracing** → Operator 与控制器可观测性
 
-### 路径 G：可观测性与系统监控（推荐优先级：高）
+### 路径 G：可观测性与系统监控（推荐优先级：高） {#路径-g可观测性与系统监控推荐优先级高}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -566,7 +568,7 @@ graph TD
 4. **sentry** → 错误追踪、崩溃报告与性能监控
 5. **metrics** → 指标门面、Prometheus 导出与可观测性指标
 
-### 路径 J：GUI 与跨平台 UI（推荐优先级：中）
+### 路径 J：GUI 与跨平台 UI（推荐优先级：中） {#路径-jgui-与跨平台-ui推荐优先级中}
 >
 > **[来源: [areweguiyet.com](https://areweguiyet.com/)]**
 
@@ -575,7 +577,7 @@ graph TD
 3. **Tauri** → Web 技术封装桌面应用与 Command 桥接
 4. **Dioxus / Leptos** → 响应式组件与同构 Web 渲染
 
-### 路径 G：高性能并发与数据结构（推荐优先级：高）
+### 路径 G：高性能并发与数据结构（推荐优先级：高） {#路径-g高性能并发与数据结构推荐优先级高}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -585,7 +587,7 @@ graph TD
 
 ---
 
-## 七、与其他概念文件的交叉引用
+## 七、与其他概念文件的交叉引用 {#七与其他概念文件的交叉引用}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -628,7 +630,7 @@ graph TD
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [crates.io](https://crates.io/)]**
 >
@@ -646,13 +648,13 @@ graph TD
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 > **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 > **来源**: [This Week in Rust](https://this-week-in-rust.org/)
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

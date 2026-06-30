@@ -1,4 +1,4 @@
-# 性能优化理论
+# 性能优化理论 {#性能优化理论}
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -8,7 +8,7 @@
 > **状态**: ✅ 已完成
 > 内容已整合至： 10_performance_benchmarks.md (研究笔记)、05_performance_tuning_guide.md (指南)
 
-## 知识结构思维导图
+## 知识结构思维导图 {#知识结构思维导图}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
 > **来源: [Wikipedia - Performance Engineering](https://en.wikipedia.org/wiki/Performance_Engineering)** ·
@@ -42,7 +42,7 @@ mindmap
       性能分析
 ```
 
-## 与核心文档的关联
+## 与核心文档的关联 {#与核心文档的关联}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -55,11 +55,11 @@ mindmap
 
 ---
 
-## 性能优化核心概念
+## 性能优化核心概念 {#性能优化核心概念}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 零成本抽象
+### 零成本抽象 {#零成本抽象}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -86,7 +86,7 @@ fn manual_loop(data: &[i32]) -> i32 {
 }
 ```
 
-### 内存布局优化
+### 内存布局优化 {#内存布局优化}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -124,7 +124,7 @@ struct PackedLayout {
 }
 ```
 
-### SIMD 优化
+### SIMD 优化 {#simd-优化}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -148,7 +148,7 @@ fn simd_add(a: &[f32], b: &[f32], c: &mut [f32]) {
 }
 ```
 
-### 缓存友好性优化
+### 缓存友好性优化 {#缓存友好性优化}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -188,7 +188,7 @@ fn blocked_access(matrix: &mut [[f64; N]; N], block_size: usize) {
 }
 ```
 
-### 内联与分支预测提示
+### 内联与分支预测提示 {#内联与分支预测提示}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -220,7 +220,7 @@ fn error_handler(e: &str) {
 }
 ```
 
-### 无锁数据结构
+### 无锁数据结构 {#无锁数据结构}
 
 ```rust,ignore
 use std::sync::atomic::{AtomicU64, Ordering};
@@ -264,7 +264,7 @@ fn lock_free_queue_demo() {
 }
 ```
 
-### 基准测试
+### 基准测试 {#基准测试}
 
 ```rust,ignore
 // 使用 criterion 进行统计上可靠的基准测试
@@ -290,7 +290,7 @@ criterion_main!(benches);
 
 ---
 
-## 使用场景
+## 使用场景 {#使用场景}
 
 | 场景 | 优化策略 | 关键技术 |
 | :--- | :--- | :--- |
@@ -303,9 +303,9 @@ criterion_main!(benches);
 
 ---
 
-## 相关研究笔记与文档
+## 相关研究笔记与文档 {#相关研究笔记与文档}
 
-### 实验分析
+### 实验分析 {#实验分析}
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -313,14 +313,14 @@ criterion_main!(benches);
 | 编译器优化 | 编译器优化分析 | 10_compiler_optimizations.md (研究笔记) |
 | 并发性能 | 并发性能测试 | 10_concurrency_performance.md (研究笔记) |
 
-### 工具链
+### 工具链 {#工具链}
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | 编译器特性 | 编译器优化选项 | [../../06_toolchain_ecosystem/01_compiler/README.md](../../06_toolchain_ecosystem/01_compiler/README.md) |
 | 性能调优指南 | 实用优化技巧 | 05_performance_tuning_guide.md (指南) |
 
-### 形式化方法
+### 形式化方法 {#形式化方法}
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -328,7 +328,7 @@ criterion_main!(benches);
 
 ---
 
-## 相关 crates
+## 相关 crates {#相关-crates}
 
 | crate | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -347,7 +347,7 @@ criterion_main!(benches);
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Program Optimization](https://en.wikipedia.org/wiki/Program_Optimization)**
 > **[来源: Criterion.rs]**

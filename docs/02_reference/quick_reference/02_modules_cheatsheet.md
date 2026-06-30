@@ -1,4 +1,4 @@
-# 📦 Rust 模块系统速查卡
+# 📦 Rust 模块系统速查卡 {#rust-模块系统速查卡}
 
 > **分级**: [A]
 > **快速参考**
@@ -12,7 +12,7 @@
 
 ---
 
-## 📋 目录
+## 📋 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** ·
 > **来源: [Wikipedia - Modular Programming](https://en.wikipedia.org/wiki/Modular_Programming)** ·
@@ -20,75 +20,75 @@
 > **[来源: ACM - Module System Design]** ·
 > **[来源: IEEE - Software Modularity Standards]**
 
-- [📦 Rust 模块系统速查卡](#-rust-模块系统速查卡)
-  - [📋 目录](#-目录)
-  - [🎯 模块系统概览](#-模块系统概览)
-  - [📝 模块声明](#-模块声明)
+- [📦 Rust 模块系统速查卡](#rust-模块系统速查卡)
+  - [📋 目录](#目录)
+  - [🎯 模块系统概览](#模块系统概览)
+  - [📝 模块声明](#模块声明)
     - [内联模块](#内联模块)
     - [文件模块](#文件模块)
-    - [目录模块](#目录模块)
-  - [🔒 可见性控制](#-可见性控制)
+    - [目录模块](#目录模块-1)
+  - [🔒 可见性控制](#可见性控制)
     - [pub 关键字](#pub-关键字)
     - [受限可见性](#受限可见性)
     - [结构体可见性](#结构体可见性)
-  - [📥 use 语句](#-use-语句)
+  - [📥 use 语句](#use-语句)
     - [基本用法](#基本用法)
     - [导入项](#导入项)
     - [重命名](#重命名)
     - [嵌套导入](#嵌套导入)
     - [self 和 super](#self-和-super)
-  - [🛤️ 路径系统](#️-路径系统)
+  - [🛤️ 路径系统](#路径系统)
     - [绝对路径](#绝对路径)
     - [相对路径](#相对路径)
     - [路径简写](#路径简写)
-  - [📁 文件组织](#-文件组织)
+  - [📁 文件组织](#文件组织)
     - [单文件模块](#单文件模块)
     - [文件模块1](#文件模块1)
     - [目录模块](#目录模块-1)
     - [混合组织](#混合组织)
-  - [📦 Crate 系统](#-crate-系统)
+  - [📦 Crate 系统](#crate-系统)
     - [库 Crate](#库-crate)
     - [二进制 Crate](#二进制-crate)
     - [多个二进制文件](#多个二进制文件)
     - [外部 Crate](#外部-crate)
-  - [🎯 常用模式](#-常用模式)
+  - [🎯 常用模式](#常用模式)
     - [重导出](#重导出)
     - [条件编译](#条件编译)
     - [模块别名](#模块别名)
     - [私有模块](#私有模块)
     - [模块组织最佳实践](#模块组织最佳实践)
-  - [📚 路径规则速查](#-路径规则速查)
+  - [📚 路径规则速查](#路径规则速查)
     - [模块路径](#模块路径)
     - [use 路径](#use-路径)
-  - [🎓 常见模式](#-常见模式)
+  - [🎓 常见模式](#常见模式)
     - [模块初始化](#模块初始化)
     - [模块测试](#模块测试)
     - [特性模块](#特性模块)
-  - [🚫 反例速查](#-反例速查)
+  - [🚫 反例速查](#反例速查)
     - [反例 1: 循环引用导致编译失败](#反例-1-循环引用导致编译失败)
     - [反例 2: 在非 pub 项的路径上使用 pub](#反例-2-在非-pub-项的路径上使用-pub)
-  - [📚 相关文档](#-相关文档)
-  - [🧩 相关示例代码](#-相关示例代码)
-  - [📚 相关资源](#-相关资源)
+  - [📚 相关文档](#相关文档)
+  - [🧩 相关示例代码](#相关示例代码)
+  - [📚 相关资源](#相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
     - [相关速查卡](#相关速查卡)
-  - [💡 使用场景](#-使用场景)
+  - [💡 使用场景](#使用场景)
     - [场景 1: 分层架构组织](#场景-1-分层架构组织)
     - [场景 2: 特性门控模块](#场景-2-特性门控模块)
     - [场景 3: 私有实现细节](#场景-3-私有实现细节)
-  - [⚠️ 边界情况](#️-边界情况)
+  - [⚠️ 边界情况](#边界情况)
     - [边界 1: 模块可见性陷阱](#边界-1-模块可见性陷阱)
     - [边界 2: 重导出与命名空间](#边界-2-重导出与命名空间)
     - [边界 3: 循环依赖解决](#边界-3-循环依赖解决)
     - [形式化理论](#形式化理论)
-  - [🆕 Rust 1.95+ 特性整合](#-rust-195-特性整合)
+  - [🆕 Rust 1.95+ 特性整合](#rust-195-特性整合)
     - [核心特性速查](#核心特性速查)
   - [权威来源索引](#权威来源索引)
 
 ---
 
-## 🎯 模块系统概览
+## 🎯 模块系统概览 {#模块系统概览}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -107,11 +107,11 @@ Crate (包)
 
 ---
 
-## 📝 模块声明
+## 📝 模块声明 {#模块声明}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 内联模块
+### 内联模块 {#内联模块}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -135,7 +135,7 @@ fn main() {
 }
 ```
 
-### 文件模块
+### 文件模块 {#文件模块}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -161,7 +161,7 @@ fn private_function() {
 }
 ```
 
-### 目录模块
+### 目录模块 {#目录模块-1}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -194,11 +194,11 @@ pub fn sub_function() {
 
 ---
 
-## 🔒 可见性控制
+## 🔒 可见性控制 {#可见性控制}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### pub 关键字
+### pub 关键字 {#pub-关键字}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -217,7 +217,7 @@ mod my_module {
 }
 ```
 
-### 受限可见性
+### 受限可见性 {#受限可见性}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -239,7 +239,7 @@ mod my_module {
 }
 ```
 
-### 结构体可见性
+### 结构体可见性 {#结构体可见性}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -266,11 +266,11 @@ mod my_module {
 
 ---
 
-## 📥 use 语句
+## 📥 use 语句 {#use-语句}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 基本用法
+### 基本用法 {#基本用法}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -282,7 +282,7 @@ use std::collections::HashMap;
 let map = HashMap::new();
 ```
 
-### 导入项
+### 导入项 {#导入项}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -301,7 +301,7 @@ use std::collections::{HashMap, HashSet, BTreeMap};
 use std::collections::*;
 ```
 
-### 重命名
+### 重命名 {#重命名}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -312,7 +312,7 @@ use std::collections::HashMap as Map;
 let map = Map::new();
 ```
 
-### 嵌套导入
+### 嵌套导入 {#嵌套导入}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -325,7 +325,7 @@ use std::{
 };
 ```
 
-### self 和 super
+### self 和 super {#self-和-super}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -342,11 +342,11 @@ use crate::root_module;
 
 ---
 
-## 🛤️ 路径系统
+## 🛤️ 路径系统 {#路径系统}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 绝对路径
+### 绝对路径 {#绝对路径}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -358,7 +358,7 @@ use crate::my_module::my_function;
 use std::collections::HashMap;
 ```
 
-### 相对路径
+### 相对路径 {#相对路径}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -374,7 +374,7 @@ mod parent {
 }
 ```
 
-### 路径简写
+### 路径简写 {#路径简写}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -388,11 +388,11 @@ use std::collections::HashMap;
 
 ---
 
-## 📁 文件组织
+## 📁 文件组织 {#文件组织}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 单文件模块
+### 单文件模块 {#单文件模块}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -408,7 +408,7 @@ pub mod utils;
 pub mod models;
 ```
 
-### 文件模块1
+### 文件模块1 {#文件模块1}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -430,7 +430,7 @@ fn main() {
 }
 ```
 
-### 目录模块
+### 目录模块 {#目录模块-1}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -458,7 +458,7 @@ pub fn util_function() {}
 pub fn help() {}
 ```
 
-### 混合组织
+### 混合组织 {#混合组织}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -477,11 +477,11 @@ src/
 
 ---
 
-## 📦 Crate 系统
+## 📦 Crate 系统 {#crate-系统}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 库 Crate
+### 库 Crate {#库-crate}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -493,7 +493,7 @@ pub mod models;
 pub fn public_api() {}
 ```
 
-### 二进制 Crate
+### 二进制 Crate {#二进制-crate}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -506,7 +506,7 @@ fn main() {
 }
 ```
 
-### 多个二进制文件
+### 多个二进制文件 {#多个二进制文件}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -528,12 +528,12 @@ fn main() {
 }
 ```
 
-### 外部 Crate
+### 外部 Crate {#外部-crate}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
 ```toml
-# Cargo.toml
+# Cargo.toml {#cargotoml}
 
 > **Bloom 层级**: L2 (理解)
 [dependencies]
@@ -549,11 +549,11 @@ use tokio::runtime::Runtime;
 
 ---
 
-## 🎯 常用模式
+## 🎯 常用模式 {#常用模式}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 重导出
+### 重导出 {#重导出}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -567,7 +567,7 @@ mod internal {
 pub use internal::helper;
 ```
 
-### 条件编译
+### 条件编译 {#条件编译}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -584,7 +584,7 @@ mod tests {
 }
 ```
 
-### 模块别名
+### 模块别名 {#模块别名}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -596,7 +596,7 @@ pub type Map<K, V> = std::collections::HashMap<K, V>;
 use std::collections::HashMap as Map;
 ```
 
-### 私有模块
+### 私有模块 {#私有模块}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -612,7 +612,7 @@ pub mod public_module {
 }
 ```
 
-### 模块组织最佳实践
+### 模块组织最佳实践 {#模块组织最佳实践}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -636,11 +636,11 @@ pub fn public_api() {}
 
 ---
 
-## 📚 路径规则速查
+## 📚 路径规则速查 {#路径规则速查}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 模块路径
+### 模块路径 {#模块路径}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -656,7 +656,7 @@ super::module::item
 std::collections::HashMap
 ```
 
-### use 路径
+### use 路径 {#use-路径}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -676,11 +676,11 @@ use std::collections::*;
 
 ---
 
-## 🎓 常见模式
+## 🎓 常见模式 {#常见模式}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 模块初始化
+### 模块初始化 {#模块初始化}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -697,7 +697,7 @@ pub fn setup() {
 }
 ```
 
-### 模块测试
+### 模块测试 {#模块测试}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -713,7 +713,7 @@ mod tests {
 }
 ```
 
-### 特性模块
+### 特性模块 {#特性模块}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -731,11 +731,11 @@ mod sync_impl {
 
 ---
 
-## 🚫 反例速查
+## 🚫 反例速查 {#反例速查}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 反例 1: 循环引用导致编译失败
+### 反例 1: 循环引用导致编译失败 {#反例-1-循环引用导致编译失败}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -757,7 +757,7 @@ pub struct B { pub a: A }
 
 ---
 
-### 反例 2: 在非 pub 项的路径上使用 pub
+### 反例 2: 在非 pub 项的路径上使用 pub {#反例-2-在非-pub-项的路径上使用-pub}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -776,7 +776,7 @@ mod inner {
 
 ---
 
-## 📚 相关文档
+## 📚 相关文档 {#相关文档}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -786,7 +786,7 @@ mod inner {
 - [Workspace 模块示例：线程与并发模块 README](../../../crates/c05_threads/README.md)
 - [Workspace 模块示例：类型系统模块 README](../../../crates/c02_type_system/README.md)
 
-## 🧩 相关示例代码
+## 🧩 相关示例代码 {#相关示例代码}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -798,18 +798,18 @@ mod inner {
 - [C05 crate 根与模块组织](../../../crates/c05_threads/src/lib.rs)
 - [C10 crate 根与统一 API 组织](../../../crates/c10_networks/src/lib.rs)、[unified_api.rs](../../../crates/c10_networks/src/unified_api.rs)
 
-## 📚 相关资源
+## 📚 相关资源 {#相关资源}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 官方文档
+### 官方文档 {#官方文档}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust 模块系统文档](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)
 - [Cargo 文档](https://doc.rust-lang.org/cargo/)
 
-### 项目内部文档
+### 项目内部文档 {#项目内部文档}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -818,7 +818,7 @@ mod inner {
 - [Cargo 速查卡](02_cargo_cheatsheet.md) - Cargo 包管理
 - [字符串与格式化速查卡](02_strings_formatting_cheatsheet.md) - 模块中的字符串处理
 
-### 相关速查卡
+### 相关速查卡 {#相关速查卡}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -828,11 +828,11 @@ mod inner {
 
 ---
 
-## 💡 使用场景
+## 💡 使用场景 {#使用场景}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 场景 1: 分层架构组织
+### 场景 1: 分层架构组织 {#场景-1-分层架构组织}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -905,7 +905,7 @@ pub struct Post {
 }
 ```
 
-### 场景 2: 特性门控模块
+### 场景 2: 特性门控模块 {#场景-2-特性门控模块}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -962,7 +962,7 @@ pub fn read_file(path: &str) -> Result<String, std::io::Error> {
 }
 ```
 
-### 场景 3: 私有实现细节
+### 场景 3: 私有实现细节 {#场景-3-私有实现细节}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -1025,11 +1025,11 @@ mod tests {
 
 ---
 
-## ⚠️ 边界情况
+## ⚠️ 边界情况 {#边界情况}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 边界 1: 模块可见性陷阱
+### 边界 1: 模块可见性陷阱 {#边界-1-模块可见性陷阱}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -1053,7 +1053,7 @@ fn main() {
 }
 ```
 
-### 边界 2: 重导出与命名空间
+### 边界 2: 重导出与命名空间 {#边界-2-重导出与命名空间}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -1084,7 +1084,7 @@ fn main() {
 }
 ```
 
-### 边界 3: 循环依赖解决
+### 边界 3: 循环依赖解决 {#边界-3-循环依赖解决}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -1123,7 +1123,7 @@ fn main() {
 }
 ```
 
-### 形式化理论
+### 形式化理论 {#形式化理论}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -1140,12 +1140,12 @@ fn main() {
 
 ---
 
-## 🆕 Rust 1.95+ 特性整合
+## 🆕 Rust 1.95+ 特性整合 {#rust-195-特性整合}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 > **适用版本**: Rust 1.96.0+
 
-### 核心特性速查
+### 核心特性速查 {#核心特性速查}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -1199,7 +1199,7 @@ let gamma = f64::consts::EULER_GAMMA;
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Modular Programming](https://en.wikipedia.org/wiki/Modular_Programming)**
 > **来源: [Wikipedia - Software Component](https://en.wikipedia.org/wiki/Software_Component)**

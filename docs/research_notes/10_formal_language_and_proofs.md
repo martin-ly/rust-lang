@@ -1,4 +1,4 @@
-# 形式语言与形式证明
+# 形式语言与形式证明 {#形式语言与形式证明}
 
 > **概念族**: 形式化方法
 
@@ -24,7 +24,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -33,7 +33,7 @@
 >
 
 - [形式语言与形式证明](#形式语言与形式证明)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、形式语言总览](#一形式语言总览)
   - [二、语法（归纳定义）](#二语法归纳定义)
     - [2.1 核心表达式（简化）](#21-核心表达式简化)
@@ -55,8 +55,8 @@
     - [T-BR1 情况 1 的推导](#t-br1-情况-1-的推导)
   - [七、与 Coq 的对应](#七与-coq-的对应)
   - [八、引用](#八引用)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 更新](#rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -64,7 +64,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 一、形式语言总览
+## 一、形式语言总览 {#一形式语言总览}
 
 >
 
@@ -90,13 +90,13 @@
 
 ---
 
-## 二、语法（归纳定义）
+## 二、语法（归纳定义） {#二语法归纳定义}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 核心表达式（简化）
+### 2.1 核心表达式（简化） {#21-核心表达式简化}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -118,7 +118,7 @@ v \mathrel{::=} &\; n \mid \textbf{true} \mid \textbf{false} \mid \lambda x{:}\t
 
 $$
 
-### 2.2 所有权状态
+### 2.2 所有权状态 {#22-所有权状态}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -132,7 +132,7 @@ $$
 
 $$
 
-### 2.3 借用类型
+### 2.3 借用类型 {#23-借用类型}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -148,13 +148,13 @@ $$
 
 ---
 
-## 三、判定形式与推理规则
+## 三、判定形式与推理规则 {#三判定形式与推理规则}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 3.1 类型判定
+### 3.1 类型判定 {#31-类型判定}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -186,7 +186,7 @@ $$
 
 $$
 
-### 3.2 所有权状态判定
+### 3.2 所有权状态判定 {#32-所有权状态判定}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -208,7 +208,7 @@ $$
 
 $$
 
-### 3.3 借用判定
+### 3.3 借用判定 {#33-借用判定}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -236,13 +236,13 @@ $$
 
 ---
 
-## 四、操作语义（小步）
+## 四、操作语义（小步） {#四操作语义小步}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 4.1 类型系统归约
+### 4.1 类型系统归约 {#41-类型系统归约}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -278,7 +278,7 @@ $$
 
 $$
 
-### 4.2 所有权状态转换
+### 4.2 所有权状态转换 {#42-所有权状态转换}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -296,13 +296,13 @@ $$
 
 ---
 
-## 五、形式证明（数学级）
+## 五、形式证明（数学级） {#五形式证明数学级}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 5.1 定理 T-OW2（所有权唯一性）
+### 5.1 定理 T-OW2（所有权唯一性） {#51-定理-t-ow2所有权唯一性}
 
 >
 
@@ -326,7 +326,7 @@ $$
 
 由归纳，$\forall S: P(S)$。∎
 
-### 5.2 定理 T-BR1（数据竞争自由）
+### 5.2 定理 T-BR1（数据竞争自由） {#52-定理-t-br1数据竞争自由}
 
 >
 
@@ -354,7 +354,7 @@ $$
 
 故 $\neg\exists m,t_1,t_2: \text{DataRace}(m,t_1,t_2)$。∎
 
-### 5.3 定理 T-TY3（类型安全）
+### 5.3 定理 T-TY3（类型安全） {#53-定理-t-ty3类型安全}
 
 >
 
@@ -378,13 +378,13 @@ $$
 
 ---
 
-## 六、推导树示例
+## 六、推导树示例 {#六推导树示例}
 
 >
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### T-OW2 归纳步（move）的推导
+### T-OW2 归纳步（move）的推导 {#t-ow2-归纳步move的推导}
 
 >
 
@@ -406,7 +406,7 @@ $$
 
 $$
 
-### T-BR1 情况 1 的推导
+### T-BR1 情况 1 的推导 {#t-br1-情况-1-的推导}
 
 >
 
@@ -430,7 +430,7 @@ $$
 
 ---
 
-## 七、与 Coq 的对应
+## 七、与 Coq 的对应 {#七与-coq-的对应}
 
 >
 
@@ -454,7 +454,7 @@ $$
 
 ---
 
-## 八、引用
+## 八、引用 {#八引用}
 
 >
 
@@ -462,7 +462,7 @@ $$
 
 - [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) — 完整证明（L2）
 
-- [coq_skeleton](../deprecated/coq_skeleton/README.md) — Coq 骨架（L3）
+- [coq_skeleton](../../archive/deprecated/coq_skeleton/README.md) — Coq 骨架（L3）
 
 - [ownership_model](formal_methods/10_ownership_model.md)、[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md)、[type_system_foundations](type_theory/10_type_system_foundations.md)
 
@@ -474,7 +474,7 @@ $$
 
 ---
 
-## 🆕 Rust 1.94 更新
+## 🆕 Rust 1.94 更新 {#rust-194-更新}
 
 >
 
@@ -488,7 +488,7 @@ $$
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -498,7 +498,7 @@ $$
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -506,7 +506,7 @@ $$
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -520,7 +520,7 @@ $$
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -530,7 +530,7 @@ $$
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -562,7 +562,7 @@ $$
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -574,7 +574,7 @@ $$
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 

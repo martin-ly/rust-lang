@@ -13,7 +13,7 @@
 
 ---
 
-# rdkafka Crate 架构解构
+# rdkafka Crate 架构解构 {#rdkafka-crate-架构解构}
 
 > **最后更新**: 2026-06-29
 >
@@ -29,7 +29,7 @@
 
 ---
 
-## 1. 引言：Rust Kafka 客户端的生态定位
+## 1. 引言：Rust Kafka 客户端的生态定位 {#1-引言rust-kafka-客户端的生态定位}
 
 > **[来源: [rdkafka crates.io](https://crates.io/crates/rdkafka)]**
 
@@ -67,7 +67,7 @@ let status = producer.send(record, std::time::Duration::from_secs(5)).await?;
 
 ---
 
-## 2. 核心概念
+## 2. 核心概念 {#2-核心概念}
 
 > **[来源: [Apache Kafka Documentation](https://kafka.apache.org/documentation/)]**
 
@@ -102,11 +102,11 @@ graph LR
 
 ---
 
-## 3. 同步与异步 Producer
+## 3. 同步与异步 Producer {#3-同步与异步-producer}
 
 > **[来源: [rdkafka docs.rs – producer](https://docs.rs/rdkafka/latest/rdkafka/producer/)]**
 
-### 3.1 FutureProducer：异步发送与背压
+### 3.1 FutureProducer：异步发送与背压 {#31-futureproducer异步发送与背压}
 
 `FutureProducer` 是最常用的异步生产者。`send` 返回 `Future<Output = (i32, i64)>`，其中 `(partition, offset)` 表示消息成功写入的位置。通过 await 天然引入背压：当 librdkafka 内部队列满时，`send` future 会 pending，从而避免无限制堆积。
 
@@ -135,7 +135,7 @@ match producer.send(record, Duration::from_secs(5)).await {
 
 > [来源: [rdkafka FutureProducer](https://docs.rs/rdkafka/latest/rdkafka/producer/type.FutureProducer.html)]
 
-### 3.2 BaseProducer：同步/手动轮询
+### 3.2 BaseProducer：同步/手动轮询 {#32-baseproducer同步手动轮询}
 
 `BaseProducer` 提供更底层的控制，需要调用 `poll` 以触发 delivery callback。适合对发送延迟极度敏感或需要自定义批处理策略的场景。
 
@@ -154,7 +154,7 @@ producer.poll(Duration::from_millis(100));
 
 > [来源: [rdkafka BaseProducer](https://docs.rs/rdkafka/latest/rdkafka/producer/struct.BaseProducer.html)]
 
-### 3.3 幂等性与事务
+### 3.3 幂等性与事务 {#33-幂等性与事务}
 
 生产者的可靠性可通过 `enable.idempotence=true` 与 `transactional.id` 提升：
 
@@ -168,11 +168,11 @@ producer.poll(Duration::from_millis(100));
 
 ---
 
-## 4. Consumer Group 与 Offset 管理
+## 4. Consumer Group 与 Offset 管理 {#4-consumer-group-与-offset-管理}
 
 > **[来源: [Apache Kafka – Consumer Groups](https://kafka.apache.org/documentation/#consumerconfigs_group.id)]**
 
-### 4.1 StreamConsumer：基于 Stream 的拉取
+### 4.1 StreamConsumer：基于 Stream 的拉取 {#41-streamconsumer基于-stream-的拉取}
 
 `StreamConsumer` 将 Kafka 消息暴露为 `MessageStream<'_, T>`，与 `futures::Stream` 生态对齐。每个消息携带 `topic`、`partition`、`offset`、`payload`、`key` 与可选 `headers`。
 
@@ -207,7 +207,7 @@ while let Some(result) = consumer.stream().next().await {
 
 > [来源: [rdkafka StreamConsumer](https://docs.rs/rdkafka/latest/rdkafka/consumer/struct.StreamConsumer.html)]
 
-### 4.2 Consumer Group 的再均衡
+### 4.2 Consumer Group 的再均衡 {#42-consumer-group-的再均衡}
 
 当消费者加入或退出 Group 时，Kafka 会触发 **rebalance**，将 Partition 重新分配给存活成员。`rdkafka` 通过 `ConsumerContext` trait 暴露 `pre_rebalance` / `post_rebalance` 回调，常用于：
 
@@ -217,7 +217,7 @@ while let Some(result) = consumer.stream().next().await {
 
 > [来源: [Apache Kafka – Rebalance Protocol](https://kafka.apache.org/documentation/#consumer_rebalance)]
 
-### 4.3 Offset 提交策略
+### 4.3 Offset 提交策略 {#43-offset-提交策略}
 
 | 策略 | 配置 | 特点 |
 |:--|:--|:--|
@@ -231,7 +231,7 @@ while let Some(result) = consumer.stream().next().await {
 
 ---
 
-## 5. 错误处理与重试
+## 5. 错误处理与重试 {#5-错误处理与重试}
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -266,7 +266,7 @@ match producer.send(record, timeout).await {
 
 ---
 
-## 6. 反例边界
+## 6. 反例边界 {#6-反例边界}
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -284,7 +284,7 @@ match producer.send(record, timeout).await {
 
 ---
 
-## 7. 类型系统利用
+## 7. 类型系统利用 {#7-类型系统利用}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -301,7 +301,7 @@ match producer.send(record, timeout).await {
 
 ---
 
-## 8. 代码示例锚点
+## 8. 代码示例锚点 {#8-代码示例锚点}
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -314,7 +314,7 @@ match producer.send(record, timeout).await {
 
 ---
 
-## 9. 相关架构与延伸阅读
+## 9. 相关架构与延伸阅读 {#9-相关架构与延伸阅读}
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -326,7 +326,7 @@ match producer.send(record, timeout).await {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [rdkafka crates.io](https://crates.io/crates/rdkafka)]**
 >
@@ -344,7 +344,7 @@ match producer.send(record, timeout).await {
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
 > **P0（官方/必读）**:
 >
@@ -363,7 +363,7 @@ match producer.send(record, timeout).await {
 > - [来源: [Confluent Blog – Kafka Tutorials](https://developer.confluent.io/tutorials/)]
 > - [来源: [This Week in Rust](https://this-week-in-rust.org/)]
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

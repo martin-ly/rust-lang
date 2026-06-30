@@ -1,4 +1,4 @@
-# 实践项目 06: 并发下载器
+# 实践项目 06: 并发下载器 {#实践项目-06-并发下载器}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
@@ -9,12 +9,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 06: 并发下载器](#实践项目-06-并发下载器)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [项目目标](#项目目标)
   - [功能需求](#功能需求)
   - [学习要点](#学习要点)
@@ -24,7 +24,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 项目目标
+## 项目目标 {#项目目标}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -32,7 +32,7 @@
 
 ---
 
-## 功能需求
+## 功能需求 {#功能需求}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -43,11 +43,11 @@
 
 ---
 
-## 学习要点
+## 学习要点 {#学习要点}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 多线程下载
+### 多线程下载 {#多线程下载}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -74,7 +74,7 @@ fn download_concurrent(urls: Vec<String>) {
 }
 ```
 
-### 异步下载
+### 异步下载 {#异步下载}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -90,7 +90,7 @@ async fn download_async(url: &str) -> Result<Vec<u8>, reqwest::Error> {
 
 ---
 
-## 参考实现
+## 参考实现 {#参考实现}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -113,7 +113,7 @@ async fn download_async(url: &str) -> Result<Vec<u8>, reqwest::Error> {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -122,7 +122,7 @@ async fn download_async(url: &str) -> Result<Vec<u8>, reqwest::Error> {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 > **来源: [TRPL Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)**

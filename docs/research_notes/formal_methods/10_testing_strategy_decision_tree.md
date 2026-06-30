@@ -1,4 +1,4 @@
-# Rust 测试策略决策树
+# Rust 测试策略决策树 {#rust-测试策略决策树}
 
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 
@@ -20,7 +20,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -29,7 +29,7 @@
 >
 
 - [Rust 测试策略决策树](#rust-测试策略决策树)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [快速决策索引](#快速决策索引)
   - [一、测试类型选择决策树](#一测试类型选择决策树)
     - [1.1 单元测试 (Unit Tests)](#11-单元测试-unit-tests)
@@ -62,7 +62,7 @@
     - [7.1 Cargo.toml 测试配置](#71-cargotoml-测试配置)
     - [7.2 测试环境配置](#72-测试环境配置)
   - [八、参考资源](#八参考资源)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -70,7 +70,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 快速决策索引
+## 快速决策索引 {#快速决策索引}
 
 >
 
@@ -116,13 +116,13 @@
 
 ---
 
-## 一、测试类型选择决策树
+## 一、测试类型选择决策树 {#一测试类型选择决策树}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1.1 单元测试 (Unit Tests)
+### 1.1 单元测试 (Unit Tests) {#11-单元测试-unit-tests}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -296,7 +296,7 @@ mod tests {
 
 ---
 
-### 1.2 集成测试 (Integration Tests)
+### 1.2 集成测试 (Integration Tests) {#12-集成测试-integration-tests}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -488,7 +488,7 @@ pub async fn setup_test_db() -> Database {
 
 ---
 
-### 1.3 文档测试 (Doc Tests)
+### 1.3 文档测试 (Doc Tests) {#13-文档测试-doc-tests}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -716,7 +716,7 @@ impl Validator {
 
 ---
 
-### 1.4 基准测试 (Benchmarks)
+### 1.4 基准测试 (Benchmarks) {#14-基准测试-benchmarks}
 
 > **[来源: ACM - Systems Programming Languages]**
 
@@ -896,7 +896,7 @@ criterion = { version = "0.5", features = ["async_tokio"] }
 
 ---
 
-### 1.5 模糊测试 (Fuzz Testing)
+### 1.5 模糊测试 (Fuzz Testing) {#15-模糊测试-fuzz-testing}
 
 > **[来源: IEEE - Programming Language Standards]**
 
@@ -1000,31 +1000,31 @@ fuzz_target!(|data: &[u8]| {
 
 ```bash
 
-# 安装 cargo-fuzz
+# 安装 cargo-fuzz {#安装-cargo-fuzz}
 
 cargo install cargo-fuzz
 
 
 
-# 初始化模糊测试项目
+# 初始化模糊测试项目 {#初始化模糊测试项目}
 
 cargo fuzz init
 
 
 
-# 运行模糊测试（默认无限运行）
+# 运行模糊测试（默认无限运行） {#运行模糊测试默认无限运行}
 
 cargo fuzz run parser
 
 
 
-# 带超时运行
+# 带超时运行 {#带超时运行}
 
 cargo fuzz run parser -- -max_total_time=300
 
 
 
-# 复现特定崩溃
+# 复现特定崩溃 {#复现特定崩溃}
 
 cargo fuzz run parser crash-abc123
 
@@ -1032,7 +1032,7 @@ cargo fuzz run parser crash-abc123
 
 ---
 
-### 1.6 属性测试 (Property Testing)
+### 1.6 属性测试 (Property Testing) {#16-属性测试-property-testing}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -1220,13 +1220,13 @@ impl ReferenceStateMachine for MyStateMachine {
 
 ---
 
-## 二、测试工具选择矩阵
+## 二、测试工具选择矩阵 {#二测试工具选择矩阵}
 
 >
 
 > **[来源: Rust Official Docs]**
 
-### 2.1 工具对比表
+### 2.1 工具对比表 {#21-工具对比表}
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -1258,7 +1258,7 @@ impl ReferenceStateMachine for MyStateMachine {
 
 | **predicates** | 断言增强 | 复杂条件验证 | ⭐ 低 | 活跃 |
 
-### 2.2 异步测试：tokio-test
+### 2.2 异步测试：tokio-test {#22-异步测试tokio-test}
 
 > **[来源: POPL - Programming Languages Research]**
 
@@ -1364,7 +1364,7 @@ async fn test_timer_behavior() {
 
 ```
 
-### 2.3 模拟对象：mockall
+### 2.3 模拟对象：mockall {#23-模拟对象mockall}
 
 > **[来源: PLDI - Programming Language Design]**
 
@@ -1524,7 +1524,7 @@ pub struct UserService {
 
 ```
 
-### 2.4 快照测试：insta
+### 2.4 快照测试：insta {#24-快照测试insta}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -1646,31 +1646,31 @@ fn test_all_fixtures() {
 
 ```bash
 
-# 首次运行创建快照
+# 首次运行创建快照 {#首次运行创建快照}
 
 cargo test
 
 
 
-# 审查和接受快照变更
+# 审查和接受快照变更 {#审查和接受快照变更}
 
 cargo insta review
 
 
 
-# 接受所有快照
+# 接受所有快照 {#接受所有快照}
 
 cargo insta accept
 
 
 
-# 拒绝变更
+# 拒绝变更 {#拒绝变更}
 
 cargo insta reject
 
 ```
 
-### 2.5 基准测试：Criterion
+### 2.5 基准测试：Criterion {#25-基准测试criterion}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -1776,13 +1776,13 @@ criterion_main!(benches);
 
 ---
 
-## 三、测试策略维度
+## 三、测试策略维度 {#三测试策略维度}
 
 >
 
 > **[来源: Rust Official Docs]**
 
-### 3.1 测试金字塔
+### 3.1 测试金字塔 {#31-测试金字塔}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -1846,7 +1846,7 @@ my_project/
 
 ```
 
-### 3.2 覆盖率目标
+### 3.2 覆盖率目标 {#32-覆盖率目标}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -1866,7 +1866,7 @@ my_project/
 
 ```toml
 
-# tarpaulin.toml
+# tarpaulin.toml {#tarpaulintoml}
 
 [engine]
 
@@ -1896,7 +1896,7 @@ timeout = "300s"
 
 ```yaml
 
-# .github/workflows/coverage.yml
+# .github/workflows/coverage.yml {#githubworkflowscoverageyml}
 
 name: Coverage
 
@@ -1942,13 +1942,13 @@ jobs:
 
 ```
 
-### 3.3 CI 集成策略
+### 3.3 CI 集成策略 {#33-ci-集成策略}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 ```yaml
 
-# .github/workflows/test.yml
+# .github/workflows/test.yml {#githubworkflowstestyml}
 
 name: Test Suite
 
@@ -2096,7 +2096,7 @@ jobs:
 
 ```
 
-### 3.4 性能回归防护
+### 3.4 性能回归防护 {#34-性能回归防护}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -2176,13 +2176,13 @@ criterion_main!(benches);
 
 ---
 
-## 四、最佳实践
+## 四、最佳实践 {#四最佳实践}
 
 >
 
 > **[来源: Rust Official Docs]**
 
-### 4.1 测试组织结构
+### 4.1 测试组织结构 {#41-测试组织结构}
 
 > **[来源: ACM - Systems Programming Languages]**
 
@@ -2266,7 +2266,7 @@ mod tests {
 
 ```
 
-### 4.2 测试数据管理
+### 4.2 测试数据管理 {#42-测试数据管理}
 
 > **[来源: IEEE - Programming Language Standards]**
 
@@ -2400,7 +2400,7 @@ pub fn generate_test_users(count: usize) -> Vec<User> {
 
 ```
 
-### 4.3 异步测试模式
+### 4.3 异步测试模式 {#43-异步测试模式}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -2552,7 +2552,7 @@ async fn test_shared_state() {
 
 ```
 
-### 4.4 测试文档化
+### 4.4 测试文档化 {#44-测试文档化}
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -2664,7 +2664,7 @@ mod test_documentation {
 
 ---
 
-## 五、决策流程图
+## 五、决策流程图 {#五决策流程图}
 
 >
 
@@ -2748,73 +2748,73 @@ mod test_documentation {
 
 ---
 
-## 六、快速参考卡片
+## 六、快速参考卡片 {#六快速参考卡片}
 
 >
 
 > **[来源: Rust Official Docs]**
 
-### 6.1 常用命令
+### 6.1 常用命令 {#61-常用命令}
 
 > **[来源: POPL - Programming Languages Research]**
 
 ```bash
 
-# 运行所有测试
+# 运行所有测试 {#运行所有测试}
 
 cargo test
 
 
 
-# 仅运行单元测试
+# 仅运行单元测试 {#仅运行单元测试}
 
 cargo test --lib
 
 
 
-# 仅运行集成测试
+# 仅运行集成测试 {#仅运行集成测试}
 
 cargo test --test integration_test_name
 
 
 
-# 运行特定测试
+# 运行特定测试 {#运行特定测试}
 
 cargo test test_name_pattern
 
 
 
-# 文档测试
+# 文档测试 {#文档测试}
 
 cargo test --doc
 
 
 
-# 基准测试
+# 基准测试 {#基准测试-1}
 
 cargo bench
 
 
 
-# 覆盖率
+# 覆盖率 {#覆盖率}
 
 cargo tarpaulin
 
 
 
-# 模糊测试
+# 模糊测试 {#模糊测试}
 
 cargo fuzz run target_name
 
 
 
-# 性能分析
+# 性能分析 {#性能分析}
 
 cargo flamegraph
 
 ```
 
-### 6.2 常用属性
+### 6.2 常用属性 {#62-常用属性}
 
 > **[来源: PLDI - Programming Language Design]**
 
@@ -2838,13 +2838,13 @@ cargo flamegraph
 
 ---
 
-## 七、推荐配置模板
+## 七、推荐配置模板 {#七推荐配置模板}
 
 >
 
 > **[来源: Rust Official Docs]**
 
-### 7.1 Cargo.toml 测试配置
+### 7.1 Cargo.toml 测试配置 {#71-cargotoml-测试配置}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -2852,7 +2852,7 @@ cargo flamegraph
 
 [dev-dependencies]
 
-# 基础测试
+# 基础测试 {#基础测试}
 
 tokio-test = "0.4"
 
@@ -2860,31 +2860,31 @@ assert_matches = "1.5"
 
 
 
-# 模拟
+# 模拟 {#模拟}
 
 mockall = "0.12"
 
 
 
-# 快照测试
+# 快照测试 {#快照测试}
 
 insta = { version = "1.34", features = ["yaml", "json"] }
 
 
 
-# 属性测试
+# 属性测试 {#属性测试}
 
 proptest = "1.4"
 
 
 
-# 测试数据
+# 测试数据 {#测试数据}
 
 fake = { version = "2.9", features = ["derive"] }
 
 
 
-# CLI 测试
+# CLI 测试 {#cli-测试}
 
 assert_cmd = "2.0"
 
@@ -2892,13 +2892,13 @@ predicates = "3.0"
 
 
 
-# 基准测试
+# 基准测试 {#基准测试-1}
 
 criterion = { version = "0.5", features = ["async_tokio", "html_reports"] }
 
 
 
-# 并发测试控制
+# 并发测试控制 {#并发测试控制}
 
 serial_test = "3.0"
 
@@ -2932,7 +2932,7 @@ harness = false
 
 ```
 
-### 7.2 测试环境配置
+### 7.2 测试环境配置 {#72-测试环境配置}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -2988,7 +2988,7 @@ pub mod test_config {
 
 ---
 
-## 八、参考资源
+## 八、参考资源 {#八参考资源}
 
 >
 
@@ -3014,7 +3014,7 @@ pub mod test_config {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -3024,13 +3024,13 @@ pub mod test_config {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -3046,7 +3046,7 @@ pub mod test_config {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -3058,7 +3058,7 @@ pub mod test_config {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -3096,7 +3096,7 @@ pub mod test_config {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -3108,7 +3108,7 @@ pub mod test_config {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Software Testing](https://en.wikipedia.org/wiki/Software_Testing)**
 

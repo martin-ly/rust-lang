@@ -1,4 +1,4 @@
-# Mediator 形式化分析
+# Mediator 形式化分析 {#mediator-形式化分析}
 
 > **概念族**: 软件设计 / 设计模式
 
@@ -24,14 +24,14 @@
 
 > **权威来源**: [Rust Design Patterns – Behavioral](https://rust-unofficial.github.io/patterns/patterns/behavioural/index.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
-## 📊 目录 {#-目录}
+## 📊 目录 {#目录}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Mediator 形式化分析](#mediator-形式化分析)
-  - [📊 目录 {#-目录}](#-目录--目录)
+  - [📊 目录](#目录)
   - [权威来源对照](#权威来源对照)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Mediator 结构）](#def-11mediator-结构)
@@ -42,7 +42,7 @@
     - [推论 ME-C1（纯 Safe Mediator）](#推论-me-c1纯-safe-mediator)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
-  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196--edition-2024-代码示例更新)
+  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196-edition-2024-代码示例更新)
     - [Edition 2024 关键兼容点](#edition-2024-关键兼容点)
   - [Rust 所有权、借用、生命周期与 trait 系统约束分析](#rust-所有权借用生命周期与-trait-系统约束分析)
     - [所有权约束](#所有权约束)
@@ -72,7 +72,7 @@
   - [思维导图](#思维导图)
   - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -82,7 +82,7 @@
 
 ---
 
-## 权威来源对照
+## 权威来源对照 {#权威来源对照}
 
 >
 
@@ -108,13 +108,13 @@
 
 ---
 
-## 形式化定义
+## 形式化定义 {#形式化定义}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Def 1.1（Mediator 结构）
+### Def 1.1（Mediator 结构） {#def-11mediator-结构}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -138,7 +138,7 @@ $$\mathcal{ME} = \langle M, \{C_i\}_{i=1}^n, \mathit{mediate}: M \times C_i \tim
 
 ---
 
-### Axiom ME1（无直接耦合公理）
+### Axiom ME1（无直接耦合公理） {#axiom-me1无直接耦合公理}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -150,7 +150,7 @@ $$\forall i \neq j,\, C_i\text{ 不直接引用 }C_j\text{；仅通过 }M\text{ 
 
 同事间无直接耦合；仅通过中介通信。
 
-### Axiom ME2（无循环引用公理）
+### Axiom ME2（无循环引用公理） {#axiom-me2无循环引用公理}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -164,7 +164,7 @@ $$\text{避免循环引用；用 }\mathit{Weak}\text{ 或重构为无环}$$
 
 ---
 
-### 定理 ME-T1（循环引用避免定理）
+### 定理 ME-T1（循环引用避免定理） {#定理-me-t1循环引用避免定理}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -204,7 +204,7 @@ $$\text{避免循环引用；用 }\mathit{Weak}\text{ 或重构为无环}$$
 
 ---
 
-### 定理 ME-T2（消息路由安全定理）
+### 定理 ME-T2（消息路由安全定理） {#定理-me-t2消息路由安全定理}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -248,7 +248,7 @@ channel 或回调消息传递满足借用规则；无数据竞争。
 
 ---
 
-### 推论 ME-C1（纯 Safe Mediator）
+### 推论 ME-C1（纯 Safe Mediator） {#推论-me-c1纯-safe-mediator}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -272,7 +272,7 @@ Mediator 为纯 Safe；`Vec<Box<dyn Fn>>` 或 channel 路由，无 `unsafe`。
 
 ---
 
-### 概念定义-属性关系-解释论证 层次汇总
+### 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -292,7 +292,7 @@ Mediator 为纯 Safe；`Vec<Box<dyn Fn>>` 或 channel 路由，无 `unsafe`。
 
 ---
 
-## Rust 实现与代码示例
+## Rust 实现与代码示例 {#rust-实现与代码示例}
 
 >
 
@@ -344,7 +344,7 @@ m.broadcast("hello");
 
 ---
 
-## Rust 1.96+ / Edition 2024 代码示例更新
+## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
 
 >
 
@@ -408,7 +408,7 @@ fn main() {
 
 ```
 
-### Edition 2024 关键兼容点
+### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
 
@@ -424,25 +424,25 @@ fn main() {
 
 ---
 
-## Rust 所有权、借用、生命周期与 trait 系统约束分析
+## Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}
 
 >
 
 > **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
 
-### 所有权约束
+### 所有权约束 {#所有权约束}
 
 组件持有 Mediator（或发送端），Mediator 通过 channel 解耦组件间直接引用；消息所有权在发送时转移至 Mediator/接收端。
 
-### 借用与生命周期约束
+### 借用与生命周期约束 {#借用与生命周期约束}
 
 组件调用 `notify(&self, ...)` 无需可变借用，消息传递避免共享可变状态；接收端通过 `recv()` 获得消息所有权。
 
-### trait 系统约束
+### trait 系统约束 {#trait-系统约束}
 
 可定义 `Mediator` trait 规范 `notify` 接口；channel 实现是最常见的 Rust 中介者惯用法。
 
-### 与 Rust 类型系统的综合联系
+### 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系}
 
 | Rust 机制 | 本模式使用方式 | 保证 |
 
@@ -460,13 +460,13 @@ fn main() {
 
 ---
 
-## 完整证明
+## 完整证明 {#完整证明}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 形式化论证链
+### 形式化论证链 {#形式化论证链}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -502,13 +502,13 @@ ownership_model
 
 ---
 
-## 形式化属性：不变式、前置/后置条件与安全边界
+## 形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}
 
 >
 
 > **来源: [Formal Methods – Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)** | **来源: [Rust API Guidelines – Safety](https://rust-lang.github.io/api-guidelines/safety.html)**
 
-### 不变式（Invariants）
+### 不变式（Invariants） {#不变式invariants}
 
 1. 组件不直接引用其他组件。
 
@@ -516,7 +516,7 @@ ownership_model
 
 3. Mediator 维持一致的路由策略。
 
-### 前置条件（Preconditions）
+### 前置条件（Preconditions） {#前置条件preconditions}
 
 1. Mediator 与组件已初始化。
 
@@ -524,7 +524,7 @@ ownership_model
 
 3. 事件类型在组件间可理解。
 
-### 后置条件（Postconditions）
+### 后置条件（Postconditions） {#后置条件postconditions}
 
 1. 事件被正确路由到目标组件。
 
@@ -532,11 +532,11 @@ ownership_model
 
 3. 接收者根据事件更新状态。
 
-### 安全边界（Safety Boundary）
+### 安全边界（Safety Boundary） {#安全边界safety-boundary}
 
 纯 Safe。channel 实现保证无数据竞争；若 Mediator 内部使用 `unsafe`，需封装为 Safe API。
 
-### 形式化规约汇总
+### 形式化规约汇总 {#形式化规约汇总}
 
 ```text
 
@@ -552,7 +552,7 @@ ownership_model
 
 ---
 
-## 典型场景
+## 典型场景 {#典型场景}
 
 >
 
@@ -572,7 +572,7 @@ ownership_model
 
 ---
 
-## 完整场景示例：聊天室（channel 实现）
+## 完整场景示例：聊天室（channel 实现） {#完整场景示例聊天室channel-实现}
 
 >
 
@@ -624,7 +624,7 @@ fn run_room(rx: mpsc::Receiver<ChatMessage>) {
 
 ---
 
-## 相关模式
+## 相关模式 {#相关模式}
 
 >
 
@@ -642,7 +642,7 @@ fn run_room(rx: mpsc::Receiver<ChatMessage>) {
 
 ---
 
-## 实现变体
+## 实现变体 {#实现变体}
 
 >
 
@@ -660,13 +660,13 @@ fn run_room(rx: mpsc::Receiver<ChatMessage>) {
 
 ---
 
-## 反例：常见误用及编译器错误
+## 反例：常见误用及编译器错误 {#反例常见误用及编译器错误}
 
 >
 
 > **来源: [Rust By Example – Error Handling](https://doc.rust-lang.org/rust-by-example/error.html)** | **来源: [Rust Compiler Error Index](https://doc.rust-lang.org/error_codes/error-index.html)**
 
-### 反例 1：组件直接引用彼此
+### 反例 1：组件直接引用彼此 {#反例-1组件直接引用彼此}
 
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
@@ -680,7 +680,7 @@ struct B { a: Rc<RefCell<A>> }
 
 **风险**：循环引用，违背中介者解耦目的。
 
-### 反例 2：Mediator 持有组件可变引用导致借用冲突
+### 反例 2：Mediator 持有组件可变引用导致借用冲突 {#反例-2mediator-持有组件可变引用导致借用冲突}
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
 
@@ -692,7 +692,7 @@ struct Mediator { components: Vec<&mut Component> }
 
 **编译器错误**：无法构造生命周期正确的自引用集合。
 
-### 反例 3：channel 关闭后发送
+### 反例 3：channel 关闭后发送 {#反例-3channel-关闭后发送}
 
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
@@ -708,7 +708,7 @@ mediator.notify("btn", Event::Clicked); // send 返回 Err
 
 ---
 
-## 选型决策树
+## 选型决策树 {#选型决策树}
 
 >
 
@@ -730,7 +730,7 @@ mediator.notify("btn", Event::Clicked); // send 返回 Err
 
 ---
 
-## 与 GoF 对比
+## 与 GoF 对比 {#与-gof-对比}
 
 >
 
@@ -748,7 +748,7 @@ mediator.notify("btn", Event::Clicked); // send 返回 Err
 
 ---
 
-## 边界
+## 边界 {#边界}
 
 >
 
@@ -766,7 +766,7 @@ mediator.notify("btn", Event::Clicked); // send 返回 Err
 
 ---
 
-## 与 Rust 1.93 的对应
+## 与 Rust 1.93 的对应 {#与-rust-193-的对应}
 
 >
 
@@ -782,7 +782,7 @@ mediator.notify("btn", Event::Clicked); // send 返回 Err
 
 ---
 
-## 思维导图
+## 思维导图 {#思维导图}
 
 >
 
@@ -832,7 +832,7 @@ mindmap
 
 ---
 
-## 与其他模式的关系图
+## 与其他模式的关系图 {#与其他模式的关系图}
 
 >
 
@@ -860,7 +860,7 @@ graph LR
 
 ---
 
-## 实质内容五维自检
+## 实质内容五维自检 {#实质内容五维自检}
 
 >
 
@@ -884,7 +884,7 @@ graph LR
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -894,13 +894,13 @@ graph LR
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -916,7 +916,7 @@ graph LR
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -928,7 +928,7 @@ graph LR
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -962,7 +962,7 @@ graph LR
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -974,7 +974,7 @@ graph LR
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 

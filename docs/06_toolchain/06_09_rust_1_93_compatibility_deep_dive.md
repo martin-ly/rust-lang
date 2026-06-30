@@ -1,4 +1,4 @@
-# Rust 1.93 兼容性深度解析
+# Rust 1.93 兼容性深度解析 {#rust-193-兼容性深度解析}
 
 > **分级**: [A]
 > **创建日期**: 2026-02-12
@@ -8,7 +8,7 @@
 
 ---
 
-## 1.93.1 补丁版本说明
+## 1.93.1 补丁版本说明 {#1931-补丁版本说明}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -22,7 +22,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -31,10 +31,10 @@
   - [目录](#目录)
   - [pin\_v2 内置属性](#pin_v2-内置属性)
   - [Emscripten unwinding ABI 变更](#emscripten-unwinding-abi-变更)
-  - [#\[test\] 属性严格化](#test-属性严格化)
+  - [#\[test\] 属性严格化 {#test-属性严格化}](#test-属性严格化-test-属性严格化)
   - [offset\_of! 类型检查](#offset_of-类型检查)
   - [deref\_nullptr deny-by-default](#deref_nullptr-deny-by-default)
-  - [... 可变参数 future-incompat](#-可变参数-future-incompat)
+  - [... 可变参数 future-incompat](#可变参数-future-incompat)
   - [repr(C) enum 判别值警告](#reprc-enum-判别值警告)
   - [repr(transparent) 忽略 repr(C) 警告](#reprtransparent-忽略-reprc-警告)
   - [相关文档](#相关文档)
@@ -44,12 +44,11 @@
     - [生命周期形式化](#生命周期形式化)
   - [完整兼容性修复代码](#完整兼容性修复代码)
   - [Rust 1.95+ 更新](#rust-195-更新)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [权威来源索引](#权威来源索引)
 
 ---
 
-## pin_v2 内置属性
+## pin_v2 内置属性 {#pin_v2-内置属性}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -61,7 +60,7 @@
 
 ---
 
-## Emscripten unwinding ABI 变更
+## Emscripten unwinding ABI 变更 {#emscripten-unwinding-abi-变更}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -75,7 +74,7 @@
 **解决方案**：
 
 ```bash
-# 链接时传递 -fwasm-exceptions 给链接器
+# 链接时传递 -fwasm-exceptions 给链接器 {#链接时传递--fwasm-exceptions-给链接器}
 
 > **Bloom 层级**: L3 (应用)
 clang -fwasm-exceptions -o output.wasm rust_obj.o c_obj.o
@@ -95,7 +94,7 @@ rustc -Z wasm-emscripten-eh=false -Z build-std ...
 
 ---
 
-## #[test] 属性严格化
+## #[test] 属性严格化 {#test-属性严格化}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -143,7 +142,7 @@ mod tests {
 
 ---
 
-## offset_of! 类型检查
+## offset_of! 类型检查 {#offset_of-类型检查}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -166,7 +165,7 @@ let off = core::mem::offset_of!(NotWellFormed<dyn Send>, 0);
 
 ---
 
-## deref_nullptr deny-by-default
+## deref_nullptr deny-by-default {#deref_nullptr-deny-by-default}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -205,7 +204,7 @@ fn legacy_code() { ... }
 
 ---
 
-## ... 可变参数 future-incompat
+## ... 可变参数 future-incompat {#可变参数-future-incompat}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -235,7 +234,7 @@ extern "system" {
 
 ---
 
-## repr(C) enum 判别值警告
+## repr(C) enum 判别值警告 {#reprc-enum-判别值警告}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -259,7 +258,7 @@ enum LargeDiscriminant {
 
 ---
 
-## repr(transparent) 忽略 repr(C) 警告
+## repr(transparent) 忽略 repr(C) 警告 {#reprtransparent-忽略-reprc-警告}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -278,7 +277,7 @@ struct Wrapper(OtherReprC);  // 若 OtherReprC 为 repr(C) 且被忽略
 
 ---
 
-## 相关文档
+## 相关文档 {#相关文档}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -289,11 +288,11 @@ struct Wrapper(OtherReprC);  // 若 OtherReprC 为 repr(C) 且被忽略
 
 ---
 
-## 形式化分析
+## 形式化分析 {#形式化分析}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 类型系统影响分析
+### 类型系统影响分析 {#类型系统影响分析}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -304,7 +303,7 @@ struct Wrapper(OtherReprC);  // 若 OtherReprC 为 repr(C) 且被忽略
 | `repr(C)` enum | 枚举判别值范围限制 | 与 C 类型系统对齐 |
 | `repr(transparent)` | 布局传递性约束 | 确保单字段布局透明性 |
 
-### 内存安全形式化
+### 内存安全形式化 {#内存安全形式化}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -342,7 +341,7 @@ pub fn memory_safety_formalization() {
 }
 ```
 
-### 生命周期形式化
+### 生命周期形式化 {#生命周期形式化}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -376,7 +375,7 @@ pub mod lifetime_formalization {
 
 ---
 
-## 完整兼容性修复代码
+## 完整兼容性修复代码 {#完整兼容性修复代码}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -698,7 +697,7 @@ mod tests {
 
 ---
 
-## Rust 1.95+ 更新
+## Rust 1.95+ 更新 {#rust-195-更新}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -729,7 +728,7 @@ Rust 1.95+ 重要更新：
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
 

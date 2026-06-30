@@ -1,4 +1,4 @@
-# Rust 对齐知识综合指南
+# Rust 对齐知识综合指南 {#rust-对齐知识综合指南}
 
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)
@@ -28,12 +28,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 对齐知识综合指南](#rust-对齐知识综合指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、概念分类](#一概念分类)
   - [二、内存对齐（核心）](#二内存对齐核心)
     - [2.0 为何要对齐（Why Alignment Matters）](#20-为何要对齐why-alignment-matters)
@@ -63,7 +63,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 一、概念分类
+## 一、概念分类 {#一概念分类}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -77,11 +77,11 @@ Rust 项目中「对齐」一词在不同语境下有不同含义：
 
 ---
 
-## 二、内存对齐（核心）
+## 二、内存对齐（核心） {#二内存对齐核心}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.0 为何要对齐（Why Alignment Matters）
+### 2.0 为何要对齐（Why Alignment Matters） {#20-为何要对齐why-alignment-matters}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -99,7 +99,7 @@ Rust 项目中「对齐」一词在不同语境下有不同含义：
 
 ---
 
-### 2.1 基本概念
+### 2.1 基本概念 {#21-基本概念}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -127,7 +127,7 @@ assert_eq!(align_of::<Example>(), 8);
 assert_eq!(size_of::<Example>(), 24);
 ```
 
-### 2.2 常用 API
+### 2.2 常用 API {#22-常用-api}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -140,7 +140,7 @@ assert_eq!(size_of::<Example>(), 24);
 | `ptr::read_unaligned` | 读取未对齐内存（较慢） |
 | `Layout::from_size_align` | 构造自定义布局 |
 
-### 2.3 repr 与对齐（完整谱系）
+### 2.3 repr 与对齐（完整谱系） {#23-repr-与对齐完整谱系}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -175,7 +175,7 @@ struct CacheAligned { data: [u8; 64]; }
 struct CLayoutAligned { x: u64; y: u64; }
 ```
 
-### 2.4 字段重排序优化
+### 2.4 字段重排序优化 {#24-字段重排序优化}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -189,7 +189,7 @@ struct Bad { a: u8; b: u64; c: u8; }  // 24 bytes
 struct Good { b: u64; a: u8; c: u8; } // 16 bytes
 ```
 
-### 2.5 对齐计算（Rust 1.92+）
+### 2.5 对齐计算（Rust 1.92+） {#25-对齐计算rust-192}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -211,7 +211,7 @@ fn align_up_div_ceil(size: usize, alignment: NonZeroUsize) -> usize {
 }
 ```
 
-### 2.6 Layout API（自定义分配）
+### 2.6 Layout API（自定义分配） {#26-layout-api自定义分配}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
@@ -234,7 +234,7 @@ let aligned = layout.align_to(Layout::new::<u64>().align()).unwrap();
 
 *参考*: [std::alloc::Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html)
 
-### 2.7 平台差异
+### 2.7 平台差异 {#27-平台差异}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
@@ -247,7 +247,7 @@ let aligned = layout.align_to(Layout::new::<u64>().align()).unwrap();
 
 ---
 
-## 三、格式化对齐
+## 三、格式化对齐 {#三格式化对齐}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -264,11 +264,11 @@ println!("{:*>10}", x);  // 右对齐，* 填充
 
 ---
 
-## 四、unsafe 与对齐
+## 四、unsafe 与对齐 {#四unsafe-与对齐}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 4.1 裸指针解引用前提与 UB 情形
+### 4.1 裸指针解引用前提与 UB 情形 {#41-裸指针解引用前提与-ub-情形}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -283,7 +283,7 @@ println!("{:*>10}", x);  // 右对齐，* 填充
 
 **原则**：凡未显式标注 `_unaligned` 的指针操作，均要求正确对齐。
 
-### 4.2 未对齐访问
+### 4.2 未对齐访问 {#42-未对齐访问}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -300,7 +300,7 @@ fn parse_u64_unaligned(bytes: &[u8], offset: usize) -> u64 {
 }
 ```
 
-### 4.3 transmute 对齐约束
+### 4.3 transmute 对齐约束 {#43-transmute-对齐约束}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -322,11 +322,11 @@ let b: u32 = unsafe { std::mem::transmute::<u32, u32>(a) };
 
 ---
 
-## 五、缓存行对齐与并发
+## 五、缓存行对齐与并发 {#五缓存行对齐与并发}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 5.1 伪共享（False Sharing）
+### 5.1 伪共享（False Sharing） {#51-伪共享false-sharing}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -341,7 +341,7 @@ struct CacheLinePadded {
 }
 ```
 
-### 5.2 数据局部性：AoS vs SoA
+### 5.2 数据局部性：AoS vs SoA {#52-数据局部性aos-vs-soa}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -353,7 +353,7 @@ struct CacheLinePadded {
 
 *详见* [c01 09_性能优化参考](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/09_性能优化参考.md#32-缓存友好设计)
 
-### 5.3 工具验证与量化数据
+### 5.3 工具验证与量化数据 {#53-工具验证与量化数据}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -369,7 +369,7 @@ struct CacheLinePadded {
 
 ---
 
-## 六、权威来源（非技术对齐）
+## 六、权威来源（非技术对齐） {#六权威来源非技术对齐}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 > **说明**：此处「对齐」指项目文档与官方发布的一致性，与内存对齐无技术关联。技术读者可跳过。
@@ -378,7 +378,7 @@ struct CacheLinePadded {
 
 ---
 
-## 七、对齐选型决策树
+## 七、对齐选型决策树 {#七对齐选型决策树}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -402,11 +402,11 @@ struct CacheLinePadded {
 
 ---
 
-## 八、相关文档与示例
+## 八、相关文档与示例 {#八相关文档与示例}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 项目内文档
+### 项目内文档 {#项目内文档}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -418,7 +418,7 @@ struct CacheLinePadded {
 | 无锁编程 | [c05/04_lock_free_programming](../../crates/c05_threads/docs/04_lock_free_programming.md) |
 | 格式化对齐 | [strings_formatting_cheatsheet](quick_reference/02_strings_formatting_cheatsheet.md) |
 
-### 代码示例
+### 代码示例 {#代码示例}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -429,7 +429,7 @@ struct CacheLinePadded {
 | c05 | 并行算法中的缓存行对齐；`benches/false_sharing_bench` 伪共享基准 |
 | c08 | `rust_192_features` align_size |
 
-### 研究笔记
+### 研究笔记 {#研究笔记}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -445,7 +445,7 @@ struct CacheLinePadded {
 
 ---
 
-## Rust 1.95+ 更新
+## Rust 1.95+ 更新 {#rust-195-更新}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 > **适用版本**: Rust 1.96.0+
@@ -456,7 +456,7 @@ struct CacheLinePadded {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -465,7 +465,7 @@ struct CacheLinePadded {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

@@ -1,4 +1,4 @@
-# Rust for Linux：从实验到生产
+# Rust for Linux：从实验到生产 {#rust-for-linux从实验到生产}
 
 > **本文已合并到权威来源**：[`concept/07_future/19_rust_for_linux.md`](../../concept/07_future/19_rust_for_linux.md)
 >

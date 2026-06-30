@@ -8,7 +8,7 @@
 
 ---
 
-# Salvo Crate 架构解构
+# Salvo Crate 架构解构 {#salvo-crate-架构解构}
 
 > **最后更新**: 2026-06-29
 >
@@ -24,7 +24,7 @@
 
 ---
 
-## 1. 引言：Salvo 在 Rust Web 生态中的定位
+## 1. 引言：Salvo 在 Rust Web 生态中的定位 {#1-引言salvo-在-rust-web-生态中的定位}
 
 > **[来源: [Salvo 官方文档](https://salvo.rs/)]**
 
@@ -64,11 +64,11 @@ async fn main() {
 
 ---
 
-## 2. 核心 API 架构
+## 2. 核心 API 架构 {#2-核心-api-架构}
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 2.1 Router → Handler 请求管线
+### 2.1 Router → Handler 请求管线 {#21-router-handler-请求管线}
 
 ```mermaid
 graph LR
@@ -88,7 +88,7 @@ Salvo 的请求生命周期分为四层：
 
 > [来源: [salvo::routing 文档](https://docs.rs/salvo/latest/salvo/routing/index.html)]
 
-### 2.2 `#[handler]` 宏与零成本抽象
+### 2.2 `#[handler]` 宏与零成本抽象 {#22-handler-宏与零成本抽象}
 
 `#[handler]` 是 Salvo 类型系统的核心杠杆。它在编译期为函数生成 `Handler` trait 实现，避免手写 `Service` boilerplate：
 
@@ -107,7 +107,7 @@ async fn create_user(
 
 被修饰的函数可以按需声明 `&mut Request`、`&mut Response`、`&mut FlowCtrl`、`Depot` 等参数，宏在编译期生成对应的 trait 调用，无动态分发开销。
 
-### 2.3 路径参数与提取器
+### 2.3 路径参数与提取器 {#23-路径参数与提取器}
 
 Salvo 的路径参数通过 `Request::param::<T>(name)` 提取，`T` 需实现 `FromStr`：
 
@@ -125,7 +125,7 @@ let router = Router::with_path("greet/<name>").get(greet);
 
 对于 JSON/Query/Form，Salvo 提供 `req.parse_json::<T>()`、`req.query::<T>(name)` 等便捷方法，将 HTTP 协议的动态性限制在类型转换层。
 
-### 2.4 中间件：Handler 即中间件
+### 2.4 中间件：Handler 即中间件 {#24-中间件handler-即中间件}
 
 Salvo 没有独立的 Middleware trait，任何 `Handler` 都可以作为中间件通过 `hoop` 挂载：
 
@@ -145,7 +145,7 @@ let router = Router::new().hoop(logger).get(hello);
 
 ---
 
-## 3. 与 axum / actix-web 对比
+## 3. 与 axum / actix-web 对比 {#3-与-axum-actix-web-对比}
 
 > **[来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]**
 
@@ -169,7 +169,7 @@ let router = Router::new().hoop(logger).get(hello);
 
 ---
 
-## 4. 反例边界
+## 4. 反例边界 {#4-反例边界}
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -186,7 +186,7 @@ let router = Router::new().hoop(logger).get(hello);
 
 ---
 
-## 5. 代码示例锚点
+## 5. 代码示例锚点 {#5-代码示例锚点}
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -198,7 +198,7 @@ let router = Router::new().hoop(logger).get(hello);
 
 ---
 
-## 6. 相关概念
+## 6. 相关概念 {#6-相关概念}
 
 - [00_crate_architecture_master_index.md](00_crate_architecture_master_index.md) — Rust 工业级 Crate 架构总索引
 - [07_axum_architecture.md](07_axum_architecture.md) — Axum Web 框架架构
@@ -219,27 +219,27 @@ let router = Router::new().hoop(logger).get(hello);
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
-### P0 — 核心官方文档
+### P0 — 核心官方文档 {#p0-核心官方文档}
 
 > - [来源: [salvo docs.rs](https://docs.rs/salvo/latest/salvo/)]
 > - [来源: [Salvo 官方站点](https://salvo.rs/)]
 > - [来源: [salvo crates.io](https://crates.io/crates/salvo)]
 
-### P1 — 标准与生态文档
+### P1 — 标准与生态文档 {#p1-标准与生态文档}
 
 > - [来源: [Hyper 文档](https://docs.rs/hyper/latest/hyper/)]
 > - [来源: [Tower Service trait](https://docs.rs/tower-service/latest/tower_service/trait.Service.html)]
 > - [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
-### P2 — 仓库与社区文章
+### P2 — 仓库与社区文章 {#p2-仓库与社区文章}
 
 > - [来源: [salvo GitHub Repository](https://github.com/salvo-rs/salvo)]
 > - [来源: [This Week in Rust](https://this-week-in-rust.org/)]
 > - [来源: [Rust 中文社区](https://rustcc.cn/)]
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

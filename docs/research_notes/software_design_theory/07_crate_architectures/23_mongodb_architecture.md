@@ -13,7 +13,7 @@
 
 ---
 
-# mongodb-rust-driver Crate 架构解构
+# mongodb-rust-driver Crate 架构解构 {#mongodb-rust-driver-crate-架构解构}
 
 >
 
@@ -33,7 +33,7 @@
 
 ---
 
-## 1. 引言：Rust MongoDB 客户端的生态定位
+## 1. 引言：Rust MongoDB 客户端的生态定位 {#1-引言rust-mongodb-客户端的生态定位}
 
 >
 
@@ -69,13 +69,13 @@ coll.insert_one(doc! { "name": "rust", "score": 95 }).await?;
 
 ---
 
-## 2. 核心 API 架构
+## 2. 核心 API 架构 {#2-核心-api-架构}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 2.1 三层命名空间：Client / Database / Collection
+### 2.1 三层命名空间：Client / Database / Collection {#21-三层命名空间client-database-collection}
 
 ```mermaid
 graph TD
@@ -98,7 +98,7 @@ graph TD
 
 > [来源: mongodb-rust-driver Collection Docs](https://docs.rs/mongodb/latest/mongodb/struct.Collection.html)
 
-### 2.2 CRUD 操作：BSON 与强类型模型
+### 2.2 CRUD 操作：BSON 与强类型模型 {#22-crud-操作bson-与强类型模型}
 
 `Collection<T>` 通过 serde 支持两种使用方式：
 
@@ -124,7 +124,7 @@ let found = doc_coll.find_one(doc! { "name": "rust" }).await?;
 
 **关键设计**：`insert_one`/`find_one`/`update_one`/`delete_one` 等方法将 BSON 的动态性约束在 `Document` 类型与 serde 序列化边界内，业务层可获得静态类型保证。
 
-### 2.3 聚合管道（Aggregation Pipeline）
+### 2.3 聚合管道（Aggregation Pipeline） {#23-聚合管道aggregation-pipeline}
 
 聚合通过 `Vec<Document>` 描述管道阶段，返回 `Cursor<T>` 实现流式消费：
 
@@ -147,7 +147,7 @@ while let Some(doc) = cursor.try_next().await? {
 
 `Cursor` 同时实现 `Stream<Item = Result<T>>` 与 `advance()`/`deserialize_current()` 手动模式，兼容 `futures::StreamExt`/`TryStreamExt` 组合子。
 
-### 2.4 索引：类型安全的 `IndexModel`
+### 2.4 索引：类型安全的 `IndexModel` {#24-索引类型安全的-indexmodel}
 
 ```rust,ignore
 use mongodb::{IndexModel, options::IndexOptions};
@@ -164,7 +164,7 @@ coll.create_index(index).await?;
 
 索引模型使用 builder 模式避免字段缺失，并通过 `IndexOptions` 控制唯一性、TTL、部分索引等高级行为。
 
-### 2.5 变更流（Change Streams）
+### 2.5 变更流（Change Streams） {#25-变更流change-streams}
 
 变更流基于 MongoDB Oplog，提供副本集/分片集群上的事件订阅：
 
@@ -179,7 +179,7 @@ while let Some(event) = change_stream.next_if_any().await? {
 
 `ChangeStream` 内置断点续传：通过 `resume_token()` 获取恢复令牌，可在故障后使用 `resume_after`/`start_after` 选项重建流。
 
-### 2.6 事务与会话
+### 2.6 事务与会话 {#26-事务与会话}
 
 多文档事务通过 `ClientSession` 显式管理：
 
@@ -198,7 +198,7 @@ session.commit_transaction().await?;
 
 **重要边界**：事务需要副本集或分片集群；单节点 `mongod` 不支持多文档事务。
 
-### 2.7 连接池与客户端选项
+### 2.7 连接池与客户端选项 {#27-连接池与客户端选项}
 
 `ClientOptions` 控制连接池大小、读写关注、TLS、超时等关键参数：
 
@@ -218,7 +218,7 @@ let client = Client::with_options(opts)?;
 
 ---
 
-## 3. 类型系统利用
+## 3. 类型系统利用 {#3-类型系统利用}
 
 >
 
@@ -236,7 +236,7 @@ let client = Client::with_options(opts)?;
 
 ---
 
-## 4. 反例边界
+## 4. 反例边界 {#4-反例边界}
 
 >
 
@@ -258,7 +258,7 @@ let client = Client::with_options(opts)?;
 
 ---
 
-## 5. 代码示例锚点
+## 5. 代码示例锚点 {#5-代码示例锚点}
 
 >
 
@@ -273,7 +273,7 @@ let client = Client::with_options(opts)?;
 
 ---
 
-## 6. 相关架构与延伸阅读
+## 6. 相关架构与延伸阅读 {#6-相关架构与延伸阅读}
 
 >
 
@@ -288,7 +288,7 @@ let client = Client::with_options(opts)?;
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [mongodb-rust-driver crates.io](https://crates.io/crates/mongodb)]**
 
@@ -308,7 +308,7 @@ let client = Client::with_options(opts)?;
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
 > **P0（官方/必读）**:
 >
@@ -328,7 +328,7 @@ let client = Client::with_options(opts)?;
 > - [来源: [MongoDB Developer Center](https://www.mongodb.com/developer/)]
 > - [来源: [This Week in Rust](https://this-week-in-rust.org/)]
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

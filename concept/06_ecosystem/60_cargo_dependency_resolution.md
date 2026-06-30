@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 把“`cargo build` 时到底选了哪个版本、为什么选这个版本、特性如何合并”讲清楚。
-> **前置概念**: [Cargo Toolchain](01_toolchain.md) · [Semantic Versioning](https://semver.org/lang/zh-CN/) · [Traits](../02_intermediate/01_traits.md)
+> **前置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **后置概念**: [Cargo Build Scripts](59_cargo_build_scripts.md) · [Cargo Registries and Publishing](62_cargo_registries_and_publishing.md)
 
 ---

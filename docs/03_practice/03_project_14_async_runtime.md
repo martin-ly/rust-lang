@@ -1,4 +1,4 @@
-# 实践项目 14: 异步运行时原型
+# 实践项目 14: 异步运行时原型 {#实践项目-14-异步运行时原型}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
@@ -9,22 +9,21 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 14: 异步运行时原型](#实践项目-14-异步运行时原型)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [项目目标](#项目目标)
   - [功能需求](#功能需求)
   - [学习要点](#学习要点)
     - [自定义Future](#自定义future)
   - [参考实现](#参考实现)
-  - [完整参考实现位于: `examples/async-runtime/`](#完整参考实现位于-examplesasync-runtime)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 项目目标
+## 项目目标 {#项目目标}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -32,7 +31,7 @@
 
 ---
 
-## 功能需求
+## 功能需求 {#功能需求}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -44,11 +43,11 @@
 
 ---
 
-## 学习要点
+## 学习要点 {#学习要点}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 自定义Future
+### 自定义Future {#自定义future}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -73,7 +72,7 @@ impl Future for MyFuture {
 
 ---
 
-## 参考实现
+## 参考实现 {#参考实现}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -95,7 +94,7 @@ impl Future for MyFuture {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -104,7 +103,7 @@ impl Future for MyFuture {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 > **来源: [TRPL Ch. 17 - Async](https://doc.rust-lang.org/book/ch17-00-async-await.html)**

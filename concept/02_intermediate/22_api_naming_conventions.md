@@ -11,8 +11,8 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×App — 将社区约定应用于实际 API 设计
 > **定位**: 系统整理 Rust 标准库与生态中反复出现的命名模式，帮助学习者写出“看起来就像 Rust”的 API。
-> **前置概念**: [Traits](01_traits.md) · [Generics](02_generics.md) · [Common Traits](07_common_traits.md)
-> **后置概念**: [Design Patterns](../03_advanced/07_design_patterns.md) · [Type System Patterns](../03_advanced/06_type_system_patterns.md)
+> **前置概念**: [Traits](01_traits.md) · [Generics](02_generics.md) · [Common Traits](01_traits.md)
+> **后置概念**: [Design Patterns](../06_ecosystem/02_patterns.md) · [Type System Patterns](20_type_system_advanced.md)
 > **来源**: [Google Comprehensive Rust — Predictable API](https://google.github.io/comprehensive-rust/idiomatic/foundations-api-design/predictable-api.html) ·
 > [Rust API Guidelines — Naming](https://rust-lang.github.io/api-guidelines//naming.html) ·
 > [RFC 430 / rust-lang/api-guidelines](https://rust-lang.github.io/api-guidelines/)
@@ -396,4 +396,4 @@ impl From<(&str, u16)> for Config {
 
 ---
 
-> **过渡**: 掌握命名约定后，可进一步学习 [Type System Patterns](../03_advanced/06_type_system_patterns.md) 中的 Newtype、Typestate、RAII 等模式，将命名与类型设计结合起来。
+> **过渡**: 掌握命名约定后，可进一步学习 [Type System Patterns](20_type_system_advanced.md) 中的 Newtype、Typestate、RAII 等模式，将命名与类型设计结合起来。

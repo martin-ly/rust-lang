@@ -8,7 +8,7 @@
 
 ---
 
-# ⚡ Rust 异步编程速查卡
+# ⚡ Rust 异步编程速查卡 {#rust-异步编程速查卡}
 
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
@@ -16,72 +16,72 @@
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [专家级]
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [⚡ Rust 异步编程速查卡](#-rust-异步编程速查卡)
-  - [📑 目录](#-目录)
-  - [🧠 异步状态机思维导图](#-异步状态机思维导图)
-  - [📊 概念定义-属性关系-解释论证](#-概念定义-属性关系-解释论证)
-  - [🔬 异步状态机证明树](#-异步状态机证明树)
+- [⚡ Rust 异步编程速查卡](#rust-异步编程速查卡)
+  - [📑 目录](#目录)
+  - [🧠 异步状态机思维导图](#异步状态机思维导图)
+  - [📊 概念定义-属性关系-解释论证](#概念定义-属性关系-解释论证)
+  - [🔬 异步状态机证明树](#异步状态机证明树)
     - [异步执行决策树](#异步执行决策树)
-  - [🎯 核心概念](#-核心概念)
+  - [🎯 核心概念](#核心概念)
     - [Future Trait（核心抽象）](#future-trait核心抽象)
-  - [🚀 基本模式](#-基本模式)
+  - [🚀 基本模式](#基本模式)
     - [模式 1: async/await 基础](#模式-1-asyncawait-基础)
     - [模式 2: 并发执行](#模式-2-并发执行)
     - [模式 3: 选择第一个完成](#模式-3-选择第一个完成)
     - [模式 4: 超时控制](#模式-4-超时控制)
-  - [🏗️ 运行时对比](#️-运行时对比)
+  - [🏗️ 运行时对比](#运行时对比)
     - [Tokio（推荐，功能最全）](#tokio推荐功能最全)
     - [smol（轻量运行时）](#smol轻量运行时)
     - [smol（轻量级）](#smol轻量级)
-  - [🔄 常见并发模式](#-常见并发模式)
+  - [🔄 常见并发模式](#常见并发模式)
     - [模式 1: Fan-out（任务分发）](#模式-1-fan-out任务分发)
     - [模式 2: Stream 处理](#模式-2-stream-处理)
     - [模式 3: Actor 模式](#模式-3-actor-模式)
     - [模式 4: CSP 模式（Channel）](#模式-4-csp-模式channel)
-  - [🔐 共享状态](#-共享状态)
-    - [模式 1: Arc + Mutex](#模式-1-arc--mutex)
-    - [模式 2: Arc + RwLock（读多写少）](#模式-2-arc--rwlock读多写少)
-  - [🌐 网络编程模式](#-网络编程模式)
+  - [🔐 共享状态](#共享状态)
+    - [模式 1: Arc + Mutex](#模式-1-arc-mutex)
+    - [模式 2: Arc + RwLock（读多写少）](#模式-2-arc-rwlock读多写少)
+  - [🌐 网络编程模式](#网络编程模式)
     - [TCP Server](#tcp-server)
     - [HTTP Client](#http-client)
-  - [⚡ 性能优化](#-性能优化)
+  - [⚡ 性能优化](#性能优化)
     - [1. 批处理](#1-批处理)
     - [2. 连接池](#2-连接池)
     - [3. 取消任务](#3-取消任务)
-  - [⚠️ 常见陷阱](#️-常见陷阱)
+  - [⚠️ 常见陷阱](#常见陷阱)
     - [陷阱 1: 在 async 中使用标准库阻塞 API](#陷阱-1-在-async-中使用标准库阻塞-api)
     - [陷阱 2: 持有 MutexGuard 跨 await](#陷阱-2-持有-mutexguard-跨-await)
     - [陷阱 3: 忘记 spawn 导致串行](#陷阱-3-忘记-spawn-导致串行)
-  - [🚫 反例速查](#-反例速查)
+  - [🚫 反例速查](#反例速查)
     - [反例 1–2](#反例-12)
     - [反例 3: 忘记 spawn 导致串行](#反例-3-忘记-spawn-导致串行)
     - [反例 4: 持有锁跨越 await](#反例-4-持有锁跨越-await)
-  - [🎯 选择决策树](#-选择决策树)
-  - [📊 Tokio 完整功能](#-tokio-完整功能)
-  - [🔗 快速跳转](#-快速跳转)
+  - [🎯 选择决策树](#选择决策树)
+  - [📊 Tokio 完整功能](#tokio-完整功能)
+  - [🔗 快速跳转](#快速跳转)
     - [深入学习](#深入学习)
     - [代码示例](#代码示例)
     - [形式化理论](#形式化理论)
-  - [💡 使用场景](#-使用场景)
+  - [💡 使用场景](#使用场景)
     - [场景 1: Web 服务器并发处理](#场景-1-web-服务器并发处理)
     - [场景 2: 批量数据获取](#场景-2-批量数据获取)
     - [场景 3: 生产者-消费者模式](#场景-3-生产者-消费者模式)
-  - [⚠️ 边界情况](#️-边界情况)
+  - [⚠️ 边界情况](#边界情况)
     - [边界 1: 异步递归](#边界-1-异步递归)
     - [边界 2: 异步 Drop](#边界-2-异步-drop)
     - [边界 3: 限流与背压](#边界-3-限流与背压)
-  - [🆕 Rust 1.93.0 异步改进](#-rust-1930-异步改进)
+  - [🆕 Rust 1.93.0 异步改进](#rust-1930-异步改进)
     - [musl 1.2.5 DNS 解析改进](#musl-125-dns-解析改进)
   - [Rust 1.92.0 异步改进（历史）](#rust-1920-异步改进历史)
     - [异步迭代器性能提升](#异步迭代器性能提升)
     - [JIT 编译器优化](#jit-编译器优化)
-  - [📚 相关文档](#-相关文档)
-  - [🧩 相关示例代码](#-相关示例代码)
-  - [📚 相关资源](#-相关资源)
+  - [📚 相关文档](#相关文档)
+  - [🧩 相关示例代码](#相关示例代码)
+  - [📚 相关资源](#相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
     - [相关速查卡](#相关速查卡)
@@ -99,7 +99,7 @@
 
 ---
 
-## 🧠 异步状态机思维导图
+## 🧠 异步状态机思维导图 {#异步状态机思维导图}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -134,7 +134,7 @@ mindmap
 
 ---
 
-## 📊 概念定义-属性关系-解释论证
+## 📊 概念定义-属性关系-解释论证 {#概念定义-属性关系-解释论证}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -150,7 +150,7 @@ mindmap
 
 ---
 
-## 🔬 异步状态机证明树
+## 🔬 异步状态机证明树 {#异步状态机证明树}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -178,7 +178,7 @@ graph TD
     P --> L
 ```
 
-### 异步执行决策树
+### 异步执行决策树 {#异步执行决策树}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -203,11 +203,11 @@ graph TD
 
 ---
 
-## 🎯 核心概念
+## 🎯 核心概念 {#核心概念}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Future Trait（核心抽象）
+### Future Trait（核心抽象） {#future-trait核心抽象}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -227,11 +227,11 @@ pub enum Poll<T> {
 
 ---
 
-## 🚀 基本模式
+## 🚀 基本模式 {#基本模式}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 模式 1: async/await 基础
+### 模式 1: async/await 基础 {#模式-1-asyncawait-基础}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -251,7 +251,7 @@ async fn main() {
 
 ---
 
-### 模式 2: 并发执行
+### 模式 2: 并发执行 {#模式-2-并发执行}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -273,7 +273,7 @@ async fn main() {
 
 ---
 
-### 模式 3: 选择第一个完成
+### 模式 3: 选择第一个完成 {#模式-3-选择第一个完成}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -292,7 +292,7 @@ async fn operation() {
 
 ---
 
-### 模式 4: 超时控制
+### 模式 4: 超时控制 {#模式-4-超时控制}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -306,11 +306,11 @@ async fn fetch_with_timeout() -> Result<String, tokio::time::error::Elapsed> {
 
 ---
 
-## 🏗️ 运行时对比
+## 🏗️ 运行时对比 {#运行时对比}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### Tokio（推荐，功能最全）
+### Tokio（推荐，功能最全） {#tokio推荐功能最全}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -338,7 +338,7 @@ async fn main() { }
 
 ---
 
-### smol（轻量运行时）
+### smol（轻量运行时） {#smol轻量运行时}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -359,7 +359,7 @@ async fn main() {
 
 ---
 
-### smol（轻量级）
+### smol（轻量级） {#smol轻量级}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -381,11 +381,11 @@ fn main() {
 
 ---
 
-## 🔄 常见并发模式
+## 🔄 常见并发模式 {#常见并发模式}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 模式 1: Fan-out（任务分发）
+### 模式 1: Fan-out（任务分发） {#模式-1-fan-out任务分发}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -411,7 +411,7 @@ async fn fan_out(items: Vec<i32>) -> Vec<i32> {
 
 ---
 
-### 模式 2: Stream 处理
+### 模式 2: Stream 处理 {#模式-2-stream-处理}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -429,7 +429,7 @@ async fn process_stream() {
 
 ---
 
-### 模式 3: Actor 模式
+### 模式 3: Actor 模式 {#模式-3-actor-模式}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -455,7 +455,7 @@ impl Actor {
 
 ---
 
-### 模式 4: CSP 模式（Channel）
+### 模式 4: CSP 模式（Channel） {#模式-4-csp-模式channel}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -481,11 +481,11 @@ async fn csp_pattern() {
 
 ---
 
-## 🔐 共享状态
+## 🔐 共享状态 {#共享状态}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 模式 1: Arc + Mutex
+### 模式 1: Arc + Mutex {#模式-1-arc-mutex}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -517,7 +517,7 @@ async fn main() {
 
 ---
 
-### 模式 2: Arc + RwLock（读多写少）
+### 模式 2: Arc + RwLock（读多写少） {#模式-2-arc-rwlock读多写少}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -537,11 +537,11 @@ write.push(4);
 
 ---
 
-## 🌐 网络编程模式
+## 🌐 网络编程模式 {#网络编程模式}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### TCP Server
+### TCP Server {#tcp-server}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -571,7 +571,7 @@ async fn main() -> std::io::Result<()> {
 
 ---
 
-### HTTP Client
+### HTTP Client {#http-client}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -592,11 +592,11 @@ async fn main() -> Result<(), reqwest::Error> {
 
 ---
 
-## ⚡ 性能优化
+## ⚡ 性能优化 {#性能优化}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 1. 批处理
+### 1. 批处理 {#1-批处理}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -621,7 +621,7 @@ async fn batch_processor() {
 
 ---
 
-### 2. 连接池
+### 2. 连接池 {#2-连接池}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -639,7 +639,7 @@ async fn with_pool() {
 
 ---
 
-### 3. 取消任务
+### 3. 取消任务 {#3-取消任务}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -669,11 +669,11 @@ async fn cancellable_task() {
 
 ---
 
-## ⚠️ 常见陷阱
+## ⚠️ 常见陷阱 {#常见陷阱}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 陷阱 1: 在 async 中使用标准库阻塞 API
+### 陷阱 1: 在 async 中使用标准库阻塞 API {#陷阱-1-在-async-中使用标准库阻塞-api}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -691,7 +691,7 @@ async fn good() {
 
 ---
 
-### 陷阱 2: 持有 MutexGuard 跨 await
+### 陷阱 2: 持有 MutexGuard 跨 await {#陷阱-2-持有-mutexguard-跨-await}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -715,7 +715,7 @@ async fn good(mutex: Arc<Mutex<i32>>) {
 
 ---
 
-### 陷阱 3: 忘记 spawn 导致串行
+### 陷阱 3: 忘记 spawn 导致串行 {#陷阱-3-忘记-spawn-导致串行}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -736,19 +736,19 @@ async fn good() {
 
 ---
 
-## 🚫 反例速查
+## 🚫 反例速查 {#反例速查}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 采用统一模板：错误示例 → 原因 → 修正。与「常见陷阱」互补。
 
-### 反例 1–2
+### 反例 1–2 {#反例-12}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 见上方「陷阱 1」「陷阱 2」。
 
-### 反例 3: 忘记 spawn 导致串行
+### 反例 3: 忘记 spawn 导致串行 {#反例-3-忘记-spawn-导致串行}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -758,7 +758,7 @@ async fn good() {
 
 **修正**: 使用 `tokio::join!` 或 `tokio::spawn` 并发执行。
 
-### 反例 4: 持有锁跨越 await
+### 反例 4: 持有锁跨越 await {#反例-4-持有锁跨越-await}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -791,7 +791,7 @@ async fn good(mutex: Arc<Mutex<i32>>) {
 
 ---
 
-## 🎯 选择决策树
+## 🎯 选择决策树 {#选择决策树}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -813,7 +813,7 @@ async fn good(mutex: Arc<Mutex<i32>>) {
 
 ---
 
-## 📊 Tokio 完整功能
+## 📊 Tokio 完整功能 {#tokio-完整功能}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -834,11 +834,11 @@ tokio = { version = "1", features = [
 
 ---
 
-## 🔗 快速跳转
+## 🔗 快速跳转 {#快速跳转}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 深入学习
+### 深入学习 {#深入学习}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -846,7 +846,7 @@ tokio = { version = "1", features = [
 - [Tokio API 参考](../../../crates/c06_async/docs/tier_03_references/02_Tokio完整API参考.md)
 - [异步并发模式](../../../crates/c06_async/docs/tier_04_advanced/01_异步并发模式.md)
 
-### 代码示例
+### 代码示例 {#代码示例}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -854,7 +854,7 @@ tokio = { version = "1", features = [
 - [并发模式](../../../crates/c06_async/examples/comprehensive_async_patterns_2025.rs)
 - [Actor 模式](../../../crates/c06_async/src/actix/README.md)
 
-### 形式化理论
+### 形式化理论 {#形式化理论}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -865,11 +865,11 @@ tokio = { version = "1", features = [
 
 ---
 
-## 💡 使用场景
+## 💡 使用场景 {#使用场景}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 场景 1: Web 服务器并发处理
+### 场景 1: Web 服务器并发处理 {#场景-1-web-服务器并发处理}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -905,7 +905,7 @@ async fn main() -> std::io::Result<()> {
 }
 ```
 
-### 场景 2: 批量数据获取
+### 场景 2: 批量数据获取 {#场景-2-批量数据获取}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -946,7 +946,7 @@ async fn main() {
 }
 ```
 
-### 场景 3: 生产者-消费者模式
+### 场景 3: 生产者-消费者模式 {#场景-3-生产者-消费者模式}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -981,11 +981,11 @@ async fn main() {
 
 ---
 
-## ⚠️ 边界情况
+## ⚠️ 边界情况 {#边界情况}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 边界 1: 异步递归
+### 边界 1: 异步递归 {#边界-1-异步递归}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -1014,7 +1014,7 @@ async fn main() {
 }
 ```
 
-### 边界 2: 异步 Drop
+### 边界 2: 异步 Drop {#边界-2-异步-drop}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -1054,7 +1054,7 @@ async fn main() {
 }
 ```
 
-### 边界 3: 限流与背压
+### 边界 3: 限流与背压 {#边界-3-限流与背压}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -1089,11 +1089,11 @@ async fn main() {
 
 ---
 
-## 🆕 Rust 1.93.0 异步改进
+## 🆕 Rust 1.93.0 异步改进 {#rust-1930-异步改进}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### musl 1.2.5 DNS 解析改进
+### musl 1.2.5 DNS 解析改进 {#musl-125-dns-解析改进}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -1115,11 +1115,11 @@ let stream = TcpStream::connect("example.com:80")?;
 
 ---
 
-## Rust 1.92.0 异步改进（历史）
+## Rust 1.92.0 异步改进（历史） {#rust-1920-异步改进历史}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 异步迭代器性能提升
+### 异步迭代器性能提升 {#异步迭代器性能提升}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -1143,7 +1143,7 @@ async fn process_stream() {
 }
 ```
 
-### JIT 编译器优化
+### JIT 编译器优化 {#jit-编译器优化}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -1157,14 +1157,14 @@ async fn process_stream() {
 
 ---
 
-## 📚 相关文档
+## 📚 相关文档 {#相关文档}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [异步编程完整文档](../../../crates/c06_async/docs/README.md)
 - [异步编程 README](../../../crates/c06_async/README.md)
 
-## 🧩 相关示例代码
+## 🧩 相关示例代码 {#相关示例代码}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -1177,11 +1177,11 @@ async fn process_stream() {
 
 ---
 
-## 📚 相关资源
+## 📚 相关资源 {#相关资源}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 官方文档
+### 官方文档 {#官方文档}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -1189,14 +1189,14 @@ async fn process_stream() {
 - [Async Book](https://rust-lang.github.io/async-book/)
 - [Tokio 文档](https://tokio.rs/)
 
-### 项目内部文档
+### 项目内部文档 {#项目内部文档}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [异步编程完整文档](../../../crates/c06_async/docs/README.md)
 - [异步状态机研究](../../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md)
 
-### 相关速查卡
+### 相关速查卡 {#相关速查卡}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -1215,11 +1215,11 @@ async fn process_stream() {
 
 ---
 
-## Rust 1.95+ 异步模式
+## Rust 1.95+ 异步模式 {#rust-195-异步模式}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### ControlFlow 在异步错误处理中的应用
+### ControlFlow 在异步错误处理中的应用 {#controlflow-在异步错误处理中的应用}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -1246,7 +1246,7 @@ where
 }
 ```
 
-### LazyLock 在异步运行时配置中的应用
+### LazyLock 在异步运行时配置中的应用 {#lazylock-在异步运行时配置中的应用}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -1282,7 +1282,7 @@ pub fn get_async_config() -> Option<&'static AsyncConfig> {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 > **来源: [Wikipedia - Future/Promise](https://en.wikipedia.org/wiki/Future/Promise)**
@@ -1297,7 +1297,7 @@ pub fn get_async_config() -> Option<&'static AsyncConfig> {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 

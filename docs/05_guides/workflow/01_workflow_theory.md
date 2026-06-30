@@ -1,4 +1,4 @@
-# 14. 工作流理论与形式化模型
+# 14. 工作流理论与形式化模型 {#14-工作流理论与形式化模型}
 
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
@@ -10,7 +10,7 @@
 > **受众**: [专家] / [研究者]
 > **内容分级**: [研究者级]
 
-## 目录
+## 目录 {#目录}
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -56,11 +56,11 @@
     - [ControlFlow 在工作流执行控制中的应用](#controlflow-在工作流执行控制中的应用)
   - [权威来源索引](#权威来源索引)
 
-## 14.1 工作流基础理论
+## 14.1 工作流基础理论 {#141-工作流基础理论}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 14.1.1 工作流模型分类
+### 14.1.1 工作流模型分类 {#1411-工作流模型分类}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -95,7 +95,7 @@ W = (CF, DF, RM, EH)
 
 因此，W = (CF, DF, RM, EH) 可以完整表示 B。
 
-### 14.1.2 工作流形式化表示
+### 14.1.2 工作流形式化表示 {#1412-工作流形式化表示}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -119,7 +119,7 @@ W = (CF, DF, RM, EH)
 - sᵢ₊₁ 是通过执行某个活动从 sᵢ 转换得到
 - sₙ 是终止状态
 
-### 14.1.3 工作流语义模型
+### 14.1.3 工作流语义模型 {#1413-工作流语义模型}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -135,11 +135,11 @@ W = (CF, DF, RM, EH)
 **引理 14.1.1** (状态转换的确定性)
 对于工作流 W，如果所有决策节点的条件都是互斥的，则状态转换是确定性的。
 
-## 14.2 Rust工作流实现理论
+## 14.2 Rust工作流实现理论 {#142-rust工作流实现理论}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 14.2.1 异步机制与工作流同构性
+### 14.2.1 异步机制与工作流同构性 {#1421-异步机制与工作流同构性}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -179,7 +179,7 @@ Future类型 F 可以映射到工作流节点 N：
 F: Future<Output = T> → N: WorkflowNode<Output = T>
 ```
 
-### 14.2.2 类型系统映射
+### 14.2.2 类型系统映射 {#1422-类型系统映射}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -205,7 +205,7 @@ type ConditionalWorkflow<T> = Workflow<bool> -> Workflow<T> -> Workflow<T> -> Wo
 **定理 14.2.2** (类型安全的工作流组合)
 如果工作流 W₁: Workflow<T₁> 和 W₂: Workflow<T₂> 类型正确，则它们的组合 W₁ >> W₂ 也是类型安全的。
 
-### 14.2.3 状态机转换
+### 14.2.3 状态机转换 {#1423-状态机转换}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -247,11 +247,11 @@ impl Future for WorkflowState {
 }
 ```
 
-## 14.3 工作流形式化验证
+## 14.3 工作流形式化验证 {#143-工作流形式化验证}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 14.3.1 Petri网模型
+### 14.3.1 Petri网模型 {#1431-petri网模型}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -298,7 +298,7 @@ impl WorkflowPetriNet {
 }
 ```
 
-### 14.3.2 π演算模型
+### 14.3.2 π演算模型 {#1432-π演算模型}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -348,7 +348,7 @@ impl PiProcess {
 }
 ```
 
-### 14.3.3 时态逻辑验证
+### 14.3.3 时态逻辑验证 {#1433-时态逻辑验证}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -398,11 +398,11 @@ impl TemporalFormula {
 }
 ```
 
-## 14.4 AI与工作流融合理论
+## 14.4 AI与工作流融合理论 {#144-ai与工作流融合理论}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 14.4.1 认知循环模型
+### 14.4.1 认知循环模型 {#1441-认知循环模型}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -446,7 +446,7 @@ impl AIWorkflowCycle {
 }
 ```
 
-### 14.4.2 自洽续洽它洽机制
+### 14.4.2 自洽续洽它洽机制 {#1442-自洽续洽它洽机制}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -483,7 +483,7 @@ trait Collaborative {
 }
 ```
 
-### 14.4.3 演化式工作流代数
+### 14.4.3 演化式工作流代数 {#1443-演化式工作流代数}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -525,11 +525,11 @@ impl EvolutionaryWorkflowAlgebra {
 }
 ```
 
-## 14.5 工作流实现架构
+## 14.5 工作流实现架构 {#145-工作流实现架构}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 14.5.1 核心组件设计
+### 14.5.1 核心组件设计 {#1451-核心组件设计}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -599,7 +599,7 @@ impl WorkflowEngine {
 }
 ```
 
-### 14.5.2 分布式执行模型
+### 14.5.2 分布式执行模型 {#1452-分布式执行模型}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -652,7 +652,7 @@ impl DistributedWorkflow {
 }
 ```
 
-### 14.5.3 故障恢复机制
+### 14.5.3 故障恢复机制 {#1453-故障恢复机制}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -717,11 +717,11 @@ impl WorkflowEngine {
 }
 ```
 
-## 14.6 跨领域应用模型
+## 14.6 跨领域应用模型 {#146-跨领域应用模型}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 14.6.1 制造业工作流
+### 14.6.1 制造业工作流 {#1461-制造业工作流}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -774,7 +774,7 @@ impl ManufacturingWorkflow {
 }
 ```
 
-### 14.6.2 金融服务工作流
+### 14.6.2 金融服务工作流 {#1462-金融服务工作流}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -819,7 +819,7 @@ impl FinancialWorkflow {
 }
 ```
 
-### 14.6.3 智能家居工作流
+### 14.6.3 智能家居工作流 {#1463-智能家居工作流}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -870,11 +870,11 @@ impl SmartHomeWorkflow {
 }
 ```
 
-## 14.7 形式化证明与验证
+## 14.7 形式化证明与验证 {#147-形式化证明与验证}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 14.7.1 可达性分析
+### 14.7.1 可达性分析 {#1471-可达性分析}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -906,7 +906,7 @@ fn reachability_analysis(workflow: &Workflow, target_state: &State) -> bool {
 }
 ```
 
-### 14.7.2 死锁检测
+### 14.7.2 死锁检测 {#1472-死锁检测}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -943,7 +943,7 @@ impl Workflow {
 }
 ```
 
-### 14.7.3 活性验证
+### 14.7.3 活性验证 {#1473-活性验证}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -992,11 +992,11 @@ impl Workflow {
 }
 ```
 
-## 14.8 结论与展望
+## 14.8 结论与展望 {#148-结论与展望}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 14.8.1 理论贡献
+### 14.8.1 理论贡献 {#1481-理论贡献}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -1007,7 +1007,7 @@ impl Workflow {
 3. **AI融合**：提出了AI与工作流融合的认知循环模型
 4. **验证方法**：提供了可达性分析、死锁检测和活性验证的方法
 
-### 14.8.2 实践意义
+### 14.8.2 实践意义 {#1482-实践意义}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -1016,7 +1016,7 @@ impl Workflow {
 3. **并发安全**：所有权系统确保了并发执行的安全性
 4. **跨平台**：支持从嵌入式设备到云服务器的各种环境
 
-### 14.8.3 未来研究方向
+### 14.8.3 未来研究方向 {#1483-未来研究方向}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -1025,7 +1025,7 @@ impl Workflow {
 3. **认知工作流**：开发具有认知能力的工作流系统
 4. **形式化验证工具**：构建自动化的工作流验证工具链
 
-### 14.8.4 工业应用前景
+### 14.8.4 工业应用前景 {#1484-工业应用前景}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -1038,7 +1038,7 @@ impl Workflow {
 
 通过将形式化理论与Rust语言特性相结合，我们可以构建出既安全可靠又高效灵活的工作流系统，为数字化转型提供强有力的技术支撑。
 
-## 参考资料（权威来源）
+## 参考资料（权威来源） {#参考资料权威来源}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -1049,12 +1049,12 @@ impl Workflow {
 
 ---
 
-## Rust 1.95+ 工作流理论应用
+## Rust 1.95+ 工作流理论应用 {#rust-195-工作流理论应用}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 > **适用版本**: Rust 1.96.0+
 
-### array_windows 在工作流状态转换中的应用
+### array_windows 在工作流状态转换中的应用 {#array_windows-在工作流状态转换中的应用}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -1077,7 +1077,7 @@ fn analyze_state_transitions(states: &[WorkflowState]) -> Vec<StateTransition> {
 }
 ```
 
-### LazyLock 在工作流引擎配置中的应用
+### LazyLock 在工作流引擎配置中的应用 {#lazylock-在工作流引擎配置中的应用}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -1096,7 +1096,7 @@ pub fn get_engine_config() -> Option<&'static EngineConfig> {
 }
 ```
 
-### ControlFlow 在工作流执行控制中的应用
+### ControlFlow 在工作流执行控制中的应用 {#controlflow-在工作流执行控制中的应用}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -1150,7 +1150,7 @@ fn execute_workflow_steps(
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Workflow](https://en.wikipedia.org/wiki/Workflow)**
 > **来源: [Wikipedia - Software Development Process](https://en.wikipedia.org/wiki/Software_Development_Process)**

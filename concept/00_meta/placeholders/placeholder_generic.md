@@ -3,6 +3,8 @@
 > **EN**: Placeholder
 > **Summary**: This page is a generic placeholder for links in concept files that point to content not yet created.
 >
+> **主要来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [RFCs](https://github.com/rust-lang/rfcs)
+>
 > **状态**: 🚧 待创建
 ---
 

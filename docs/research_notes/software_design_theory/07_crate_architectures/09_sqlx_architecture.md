@@ -1,4 +1,4 @@
-# SQLx Crate 架构解构
+# SQLx Crate 架构解构 {#sqlx-crate-架构解构}
 
 >
 
@@ -18,7 +18,7 @@
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
-## 1. 引言
+## 1. 引言 {#1-引言}
 
 >
 
@@ -54,13 +54,13 @@ SQLx 支持 PostgreSQL、MySQL、SQLite 三大主流数据库，通过 `sqlx::Da
 
 ---
 
-## 2. 核心架构
+## 2. 核心架构 {#2-核心架构}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 2.1 过程宏：`query!()` 与 `query_as!()`
+### 2.1 过程宏：`query!()` 与 `query_as!()` {#21-过程宏query-与-query_as}
 
 >
 
@@ -140,7 +140,7 @@ let user: User = query_as!(User, "SELECT id, email FROM users WHERE id = $1", 1i
 
 > [来源: SQLx官方文档 — Query Macros](https://docs.rs/sqlx/latest/sqlx/macro.query.html)
 
-### 2.2 连接池抽象：`Pool<DB>`
+### 2.2 连接池抽象：`Pool<DB>` {#22-连接池抽象pooldb}
 
 >
 
@@ -218,7 +218,7 @@ graph TB
 
 > [来源: SQLx官方文档 — Pool](https://docs.rs/sqlx/latest/sqlx/struct.Pool.html)
 
-### 2.3 `Database` Trait 与后端抽象
+### 2.3 `Database` Trait 与后端抽象 {#23-database-trait-与后端抽象}
 
 >
 
@@ -258,13 +258,13 @@ pub trait Database: 'static + Sized + Send + Debug {
 
 ---
 
-## 3. 编译时查询验证
+## 3. 编译时查询验证 {#3-编译时查询验证}
 
 >
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 3.1 在线验证机制
+### 3.1 在线验证机制 {#31-在线验证机制}
 
 >
 
@@ -320,7 +320,7 @@ sequenceDiagram
 
 > [来源: Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)
 
-### 3.2 离线模式：`sqlx-data.json` 与 `SQLX_OFFLINE`
+### 3.2 离线模式：`sqlx-data.json` 与 `SQLX_OFFLINE` {#32-离线模式sqlx-datajson-与-sqlx_offline}
 
 >
 
@@ -332,13 +332,13 @@ SQLx 提供**离线模式**解决此问题：
 
 ```bash
 
-# 开发环境：生成查询元数据缓存
+# 开发环境：生成查询元数据缓存 {#开发环境生成查询元数据缓存}
 
 $ cargo sqlx prepare
 
 
 
-# 生成 sqlx-data.json，包含所有宏查询的数据库 schema 快照
+# 生成 sqlx-data.json，包含所有宏查询的数据库 schema 快照 {#生成-sqlx-datajson包含所有宏查询的数据库-schema-快照}
 
 $ ls -la .sqlx/
 
@@ -386,13 +386,13 @@ let users = sqlx::query_as!(User, "SELECT id, email FROM users")
 
 ---
 
-## 4. 类型映射与 `FromRow`
+## 4. 类型映射与 `FromRow` {#4-类型映射与-fromrow}
 
 >
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 4.1 SQL ↔ Rust 类型映射
+### 4.1 SQL ↔ Rust 类型映射 {#41-sql-rust-类型映射}
 
 >
 
@@ -448,7 +448,7 @@ struct User {
 
 ```
 
-### 4.2 `FromRow` Derive 宏
+### 4.2 `FromRow` Derive 宏 {#42-fromrow-derive-宏}
 
 >
 
@@ -510,13 +510,13 @@ impl<'r> sqlx::FromRow<'r, sqlx::postgres::PgRow> for User {
 
 ---
 
-## 5. 异步连接池内部机制
+## 5. 异步连接池内部机制 {#5-异步连接池内部机制}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 5.1 Pool 的状态机设计
+### 5.1 Pool 的状态机设计 {#51-pool-的状态机设计}
 
 >
 
@@ -588,7 +588,7 @@ PgPoolOptions::new()
 
 ```
 
-### 5.2 连接生命周期
+### 5.2 连接生命周期 {#52-连接生命周期}
 
 >
 
@@ -624,13 +624,13 @@ stateDiagram-v2
 
 ---
 
-## 6. 与 async/await 的集成
+## 6. 与 async/await 的集成 {#6-与-asyncawait-的集成}
 
 >
 
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 6.1 全异步 API 设计
+### 6.1 全异步 API 设计 {#61-全异步-api-设计}
 
 >
 
@@ -688,7 +688,7 @@ async fn main() -> Result<(), sqlx::Error> {
 
 `fetch()` 返回 `Stream<Item = Result<T, Error>>`，允许使用 `futures::TryStreamExt` 进行背压感知的流式处理，避免一次性加载大量数据至内存。
 
-### 6.2 事务支持
+### 6.2 事务支持 {#62-事务支持}
 
 >
 
@@ -732,7 +732,7 @@ tx.commit().await?;
 
 ---
 
-## 7. 与其他方案对比
+## 7. 与其他方案对比 {#7-与其他方案对比}
 
 >
 
@@ -758,7 +758,7 @@ tx.commit().await?;
 
 ---
 
-## 8. 来源
+## 8. 来源 {#8-来源}
 
 >
 
@@ -776,7 +776,7 @@ tx.commit().await?;
 
 ---
 
-## 相关架构与延伸阅读
+## 相关架构与延伸阅读 {#相关架构与延伸阅读}
 
 >
 
@@ -790,7 +790,7 @@ tx.commit().await?;
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -812,13 +812,13 @@ tx.commit().await?;
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 > **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 > **来源**: [This Week in Rust](https://this-week-in-rust.org/)
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

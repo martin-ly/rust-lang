@@ -9,7 +9,7 @@
   3. 删除此注释
 -->
 
-# {{标题}}
+# {{标题}} {#标题}
 
 > **Rust 版本**: {{ rust_version }}+ ({{ stability }})
 > **Edition**: {{ edition }}
@@ -19,28 +19,28 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [{{标题}}](#标题)
-  - [📑 目录](#-目录)
-  - [📋 版本标识](#-版本标识)
-  - [📝 特性概述](#-特性概述)
+  - [📑 目录](#目录)
+  - [📋 版本标识](#版本标识)
+  - [📝 特性概述](#特性概述)
     - [核心优势](#核心优势)
     - [使用场景](#使用场景)
-  - [💻 代码示例](#-代码示例)
+  - [💻 代码示例](#代码示例)
     - [基础用法](#基础用法)
     - [进阶用法](#进阶用法)
     - [生产级示例](#生产级示例)
   - [⚙️ 配置与选项](#配置与选项)
     - [Cargo.toml 配置](#cargotoml-配置)
     - [特性标志](#特性标志)
-  - [📊 性能特征](#-性能特征)
+  - [📊 性能特征](#性能特征)
     - [基准测试结果](#基准测试结果)
-  - [🔄 版本变更](#-版本变更)
+  - [🔄 版本变更](#版本变更)
     - [迁移指南](#迁移指南)
-  - [🔗 相关资源](#-相关资源)
+  - [🔗 相关资源](#相关资源)
     - [官方资源](#官方资源)
     - [项目内资源](#项目内资源)
     - [外部资源](#外部资源)
@@ -48,13 +48,13 @@
     - [已知限制](#已知限制)
     - [常见陷阱](#常见陷阱)
     - [兼容性问题](#兼容性问题)
-  - [🧪 测试用例](#-测试用例)
-  - [📚 深入阅读](#-深入阅读)
+  - [🧪 测试用例](#测试用例)
+  - [📚 深入阅读](#深入阅读)
     - [相关概念](#相关概念)
     - [设计模式](#设计模式)
   - [权威来源索引](#权威来源索引)
 
-## 📋 版本标识
+## 📋 版本标识 {#版本标识}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -68,13 +68,13 @@
 
 ---
 
-## 📝 特性概述
+## 📝 特性概述 {#特性概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 {{ feature_description }}
 
-### 核心优势
+### 核心优势 {#核心优势}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -84,7 +84,7 @@
 - {{ advantage_2 }}
 - {{ advantage_3 }}
 
-### 使用场景
+### 使用场景 {#使用场景}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -92,11 +92,11 @@
 
 ---
 
-## 💻 代码示例
+## 💻 代码示例 {#代码示例}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 基础用法
+### 基础用法 {#基础用法}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -107,7 +107,7 @@
 {{ basic_example }}
 ```
 
-### 进阶用法
+### 进阶用法 {#进阶用法}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -115,7 +115,7 @@
 {{ advanced_example }}
 ```
 
-### 生产级示例
+### 生产级示例 {#生产级示例}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -125,11 +125,11 @@
 
 ---
 
-## ⚙️ 配置与选项
+## ⚙️ 配置与选项 {#配置与选项}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### Cargo.toml 配置
+### Cargo.toml 配置 {#cargotoml-配置}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -141,7 +141,7 @@ rust-version = "{{ rust_version }}"  # 最低 Rust 版本要求
 edition = "{{ edition }}"
 ```
 
-### 特性标志
+### 特性标志 {#特性标志}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -153,7 +153,7 @@ default = []
 
 ---
 
-## 📊 性能特征
+## 📊 性能特征 {#性能特征}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -163,7 +163,7 @@ default = []
 | 运行时开销 | {{ runtime }} | {{ runtime_note }} |
 | 内存占用 | {{ memory }} | {{ memory_note }} |
 
-### 基准测试结果
+### 基准测试结果 {#基准测试结果}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -173,7 +173,7 @@ default = []
 
 ---
 
-## 🔄 版本变更
+## 🔄 版本变更 {#版本变更}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -182,7 +182,7 @@ default = []
 | {{ current_version }} | {{ current_change }} | {{ impact }} |
 | {{ prev_version }} | {{ prev_change }} | {{ prev_impact }} |
 
-### 迁移指南
+### 迁移指南 {#迁移指南}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -198,11 +198,11 @@ default = []
 
 ---
 
-## 🔗 相关资源
+## 🔗 相关资源 {#相关资源}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 官方资源
+### 官方资源 {#官方资源}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -211,7 +211,7 @@ default = []
 - RFC 文档: `{{ rfc_link }}`
 - 跟踪 Issue: `{{ tracking_issue }}`
 
-### 项目内资源
+### 项目内资源 {#项目内资源}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -219,7 +219,7 @@ default = []
 - 历史版本归档: `../../crates/{{ crate }}/src/archive/`
 - 相关 crate: `crates/{{ related_crate }}/`
 
-### 外部资源
+### 外部资源 {#外部资源}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -228,17 +228,17 @@ default = []
 
 ---
 
-## ⚠️ 注意事项
+## ⚠️ 注意事项 {#注意事项}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 已知限制
+### 已知限制 {#已知限制}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 {{ known_limitations }}
 
-### 常见陷阱
+### 常见陷阱 {#常见陷阱}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -250,7 +250,7 @@ default = []
 {{ correct_usage }}
 ```
 
-### 兼容性问题
+### 兼容性问题 {#兼容性问题}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -262,7 +262,7 @@ default = []
 
 ---
 
-## 🧪 测试用例
+## 🧪 测试用例 {#测试用例}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -285,18 +285,18 @@ mod tests {
 
 ---
 
-## 📚 深入阅读
+## 📚 深入阅读 {#深入阅读}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 相关概念
+### 相关概念 {#相关概念}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - {{ related_concept_1 }}: `{{ concept_link_1 }}`
 - {{ related_concept_2 }}: `{{ concept_link_2 }}`
 
-### 设计模式
+### 设计模式 {#设计模式}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -336,7 +336,7 @@ mod tests {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

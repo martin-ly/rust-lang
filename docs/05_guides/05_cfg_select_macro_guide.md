@@ -1,4 +1,4 @@
-# `cfg_select!` 宏完全指南
+# `cfg_select!` 宏完全指南 {#cfg_select-宏完全指南}
 
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/应用)
@@ -11,7 +11,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [`cfg_select!` 宏完全指南](#cfg_select-宏完全指南)
   - [目录](#目录)
@@ -27,13 +27,13 @@
     - [场景 4：与 `match` 结合](#场景-4与-match-结合)
   - [四、与 `#[cfg]` 的对比](#四与-cfg-的对比)
     - [什么时候用 `#[cfg]`？](#什么时候用-cfg)
-    - [什么时候用 `cfg_select!`？](#什么时候用-cfg_select)
+    - [什么时候用 `cfg_select!`？](#什么时候用-cfg)
   - [五、高级模式](#五高级模式)
     - [模式 1：嵌套 `cfg_select!`](#模式-1嵌套-cfg_select)
     - [模式 2：与 `cfg!` 宏对比](#模式-2与-cfg-宏对比)
     - [模式 3：在常量上下文中使用](#模式-3在常量上下文中使用)
   - [六、常见陷阱](#六常见陷阱)
-    - [陷阱 1：忘记 `_ =>` 兜底分支](#陷阱-1忘记-_--兜底分支)
+    - [陷阱 1：忘记 `_ =>` 兜底分支](#陷阱-1忘记-_-兜底分支)
     - [陷阱 2：分支类型不一致](#陷阱-2分支类型不一致)
     - [陷阱 3：在运行时条件中使用](#陷阱-3在运行时条件中使用)
     - [陷阱 4：过度使用导致可读性下降](#陷阱-4过度使用导致可读性下降)
@@ -42,14 +42,14 @@
 
 ---
 
-## 一、什么是 `cfg_select!`
+## 一、什么是 `cfg_select!` {#一什么是-cfg_select}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 `cfg_select!` 是 Rust 1.95.0 稳定化的编译期条件选择宏。
 它允许在表达式上下文中根据 `cfg` 条件选择不同的值，**无需代码重复**。
 
-### 核心解决的问题
+### 核心解决的问题 {#核心解决的问题}
 
 传统 `#[cfg]` 属性只能在**语句/项级别**使用：
 
@@ -76,7 +76,7 @@ let name = cfg_select! {
 
 ---
 
-## 二、基本语法
+## 二、基本语法 {#二基本语法}
 
 ```rust
 cfg_select! {
@@ -87,7 +87,7 @@ cfg_select! {
 }
 ```
 
-### 规则
+### 规则 {#规则}
 
 | 规则 | 说明 |
 |------|------|
@@ -96,7 +96,7 @@ cfg_select! {
 | 类型一致性 | 所有分支表达式类型必须相同 |
 | 求值时机 | **编译期**求值，零运行时开销 |
 
-### 最小示例
+### 最小示例 {#最小示例}
 
 ```rust
 use std::cfg_select;
@@ -113,9 +113,9 @@ fn main() {
 
 ---
 
-## 三、使用场景与示例
+## 三、使用场景与示例 {#三使用场景与示例}
 
-### 场景 1：平台相关的常量值
+### 场景 1：平台相关的常量值 {#场景-1平台相关的常量值}
 
 ```rust
 use std::cfg_select;
@@ -131,7 +131,7 @@ const LINE_ENDING: &'static str = cfg_select! {
 };
 ```
 
-### 场景 2：平台相关的类型别名
+### 场景 2：平台相关的类型别名 {#场景-2平台相关的类型别名}
 
 ```rust
 use std::cfg_select;
@@ -143,7 +143,7 @@ type NativeSocket = cfg_select! {
 };
 ```
 
-### 场景 3：功能特性的默认配置
+### 场景 3：功能特性的默认配置 {#场景-3功能特性的默认配置}
 
 ```rust
 use std::cfg_select;
@@ -155,7 +155,7 @@ const DEFAULT_BUFFER_SIZE: usize = cfg_select! {
 };
 ```
 
-### 场景 4：与 `match` 结合
+### 场景 4：与 `match` 结合 {#场景-4与-match-结合}
 
 ```rust
 use std::cfg_select;
@@ -185,7 +185,7 @@ fn handle_error(code: u32) -> &'static str {
 
 ---
 
-## 四、与 `#[cfg]` 的对比
+## 四、与 `#[cfg]` 的对比 {#四与-cfg-的对比}
 
 | 维度 | `#[cfg]` | `cfg_select!` |
 |------|---------|--------------|
@@ -196,12 +196,12 @@ fn handle_error(code: u32) -> &'static str {
 | **适用场景** | 条件编译整个模块/函数 | 条件选择值/小表达式 |
 | **运行时开销** | 零 | 零 |
 
-### 什么时候用 `#[cfg]`？
+### 什么时候用 `#[cfg]`？ {#什么时候用-cfg}
 
 - 整个函数/模块在不同平台完全不同
 - 需要条件编译掉大量代码以减少二进制体积
 
-### 什么时候用 `cfg_select!`？
+### 什么时候用 `cfg_select!`？ {#什么时候用-cfg_select}
 
 - 只需要根据条件选择**一个值**
 - 希望将平台差异集中在单一表达式中
@@ -209,9 +209,9 @@ fn handle_error(code: u32) -> &'static str {
 
 ---
 
-## 五、高级模式
+## 五、高级模式 {#五高级模式}
 
-### 模式 1：嵌套 `cfg_select!`
+### 模式 1：嵌套 `cfg_select!` {#模式-1嵌套-cfg_select}
 
 ```rust
 use std::cfg_select;
@@ -228,7 +228,7 @@ fn get_allocator() -> &'static str {
 }
 ```
 
-### 模式 2：与 `cfg!` 宏对比
+### 模式 2：与 `cfg!` 宏对比 {#模式-2与-cfg-宏对比}
 
 ```rust
 // cfg! 返回 bool，适合简单判断
@@ -245,7 +245,7 @@ let strategy = cfg_select! {
 };
 ```
 
-### 模式 3：在常量上下文中使用
+### 模式 3：在常量上下文中使用 {#模式-3在常量上下文中使用}
 
 ```rust
 use std::cfg_select;
@@ -265,9 +265,9 @@ const CACHE_LINE_SIZE: usize = cfg_select! {
 
 ---
 
-## 六、常见陷阱
+## 六、常见陷阱 {#六常见陷阱}
 
-### 陷阱 1：忘记 `_ =>` 兜底分支
+### 陷阱 1：忘记 `_ =>` 兜底分支 {#陷阱-1忘记-_-兜底分支}
 
 ```rust
 // ❌ 错误：缺少兜底分支
@@ -278,7 +278,7 @@ cfg_select! {
 }
 ```
 
-### 陷阱 2：分支类型不一致
+### 陷阱 2：分支类型不一致 {#陷阱-2分支类型不一致}
 
 ```rust
 // ❌ 错误：类型不匹配
@@ -288,7 +288,7 @@ cfg_select! {
 }
 ```
 
-### 陷阱 3：在运行时条件中使用
+### 陷阱 3：在运行时条件中使用 {#陷阱-3在运行时条件中使用}
 
 ```rust
 // ❌ 错误：cfg_select! 是编译期宏
@@ -298,7 +298,7 @@ cfg_select! {
 }
 ```
 
-### 陷阱 4：过度使用导致可读性下降
+### 陷阱 4：过度使用导致可读性下降 {#陷阱-4过度使用导致可读性下降}
 
 ```rust
 // ❌ 反面教材：过于复杂的嵌套
@@ -318,7 +318,7 @@ const VALUE: u32 = cfg_select! { ... };
 
 ---
 
-## 七、参考
+## 七、参考 {#七参考}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
@@ -330,7 +330,7 @@ const VALUE: u32 = cfg_select! { ... };
 | `#[cfg]` 参考 | <https://doc.rust-lang.org/reference/conditional-compilation.html> |
 | RFC (如适用) | 见 tracking issue |
 
-### 相关文档
+### 相关文档 {#相关文档}
 
 - [Rust 1.95 特性速查表](../02_reference/quick_reference/02_rust_195_features_cheatsheet.md)
 - [Rust 版本跟踪](../../concept/07_future/05_rust_version_tracking.md)

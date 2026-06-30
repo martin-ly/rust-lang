@@ -1,4 +1,4 @@
-# CI/CD 与供应链安全权威来源对齐矩阵
+# CI/CD 与供应链安全权威来源对齐矩阵 {#cicd-与供应链安全权威来源对齐矩阵}
 
 > **概念族**: 权威来源对齐 / CI/CD / 供应链安全
 > **内容分级**: [核心级]
@@ -11,7 +11,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [CI/CD 与供应链安全权威来源对齐矩阵](#cicd-与供应链安全权威来源对齐矩阵)
   - [目录](#目录)
@@ -37,7 +37,7 @@
   - [五、发布与签名](#五发布与签名)
     - [5.1 crates.io 政策与 token](#51-cratesio-政策与-token)
     - [5.2 GitHub Releases](#52-github-releases)
-    - [5.3 Attestation / Provenance](#53-attestation--provenance)
+    - [5.3 Attestation / Provenance](#53-attestation-provenance)
   - [六、项目文档映射](#六项目文档映射)
   - [七、未覆盖缺口](#七未覆盖缺口)
   - [相关概念](#相关概念)
@@ -45,7 +45,7 @@
 
 ---
 
-## 一、对齐说明
+## 一、对齐说明 {#一对齐说明}
 
 本文档将 `docs/research_notes/` 及项目代码库中的 CI/CD、测试质量、供应链安全、发布签名内容与国际化权威来源建立映射，确保：
 
@@ -56,9 +56,9 @@
 
 ---
 
-## 二、CI/CD 流水线
+## 二、CI/CD 流水线 {#二cicd-流水线}
 
-### 2.1 GitHub Actions
+### 2.1 GitHub Actions {#21-github-actions}
 
 | 权威来源/主题 | 项目工作流 | 状态 | 备注 |
 |---------------|------------|------|------|
@@ -68,28 +68,28 @@
 | [Scheduled workflows](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule) | [`.github/workflows/weekly_dependency_check.yml`](../../.github/workflows/weekly_dependency_check.yml) | ✅ | 依赖更新与安全检查 |
 | [Security hardening](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions) | [`.github/workflows/security_audit.yml`](../../.github/workflows/security_audit.yml) | ✅ | 权限最小化、 artifact 保留策略 |
 
-### 2.2 GitLab CI
+### 2.2 GitLab CI {#22-gitlab-ci}
 
 | 权威来源/主题 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
 | [GitLab CI/CD YAML](https://docs.gitlab.com/ee/ci/yaml/) | — | ⏳ | 项目当前以 GitHub Actions 为主，GitLab CI 模板待补充 |
 | [Rust GitLab CI templates](https://docs.gitlab.com/ee/ci/examples/rust.html) | — | ⏳ | 可移植的 fmt/clippy/test 模板 |
 
-### 2.3 cargo-make
+### 2.3 cargo-make {#23-cargo-make}
 
 | 权威来源/主题 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
 | [cargo-make Book](https://sagiegurari.github.io/cargo-make/) | — | ⏳ | 复杂任务编排脚本待引入 |
 | [Makefile.toml 任务定义](https://sagiegurari.github.io/cargo-make/#task-config-modifiers) | — | ⏳ | 可统一 dev/check/release 命令 |
 
-### 2.4 release-plz
+### 2.4 release-plz {#24-release-plz}
 
 | 权威来源/主题 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
 | [release-plz 文档](https://release-plz.ienalich.com/) | — | ⏳ | 自动化 changelog / PR / 发布 |
 | [release-plz GitHub Action](https://release-plz.ienalich.com/docs/github/) | — | ⏳ | 与 workspace 版本管理结合 |
 
-### 2.5 cargo-dist
+### 2.5 cargo-dist {#25-cargo-dist}
 
 | 权威来源/主题 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
@@ -98,30 +98,30 @@
 
 ---
 
-## 三、测试与质量
+## 三、测试与质量 {#三测试与质量}
 
-### 3.1 codecov
+### 3.1 codecov {#31-codecov}
 
 | 权威来源/主题 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
 | [Codecov Docs](https://docs.codecov.com/) | — | ⏳ | 覆盖率趋势与 PR 注释 |
 | [codecov/codecov-action](https://github.com/codecov/codecov-action) | — | ⏳ | 与 cargo-llvm-cov / tarpaulin 输出集成 |
 
-### 3.2 cargo-tarpaulin
+### 3.2 cargo-tarpaulin {#32-cargo-tarpaulin}
 
 | 权威来源/主题 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
 | [cargo-tarpaulin README](https://github.com/tarpaulin/tarpaulin) | — | ⏳ | 代码覆盖率收集 |
 | [Tarpaulin config](https://github.com/tarpaulin/tarpaulin?tab=readme-ov-file#config-file) | — | ⏳ | `.tarpaulin.toml` 待创建 |
 
-### 3.3 nextest
+### 3.3 nextest {#33-nextest}
 
 | 权威来源/主题 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
 | [nextest Book](https://nexte.st/) | [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml) | 🔄 | 当前使用 `cargo test`；nextest 替换可提升速度与重试能力 |
 | [nextest profile / retries](https://nexte.st/book/execution.html) | — | ⏳ | flakiness 重试与分区运行 |
 
-### 3.4 cargo-llvm-cov
+### 3.4 cargo-llvm-cov {#34-cargo-llvm-cov}
 
 | 权威来源/主题 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
@@ -130,9 +130,9 @@
 
 ---
 
-## 四、供应链安全
+## 四、供应链安全 {#四供应链安全}
 
-### 4.1 cargo-audit
+### 4.1 cargo-audit {#41-cargo-audit}
 
 | 权威来源/主题 | 项目文档/配置 | 状态 | 备注 |
 |---------------|---------------|------|------|
@@ -140,7 +140,7 @@
 | [Advisory DB](https://github.com/rustsec/advisory-db) | [`.cargo/audit.toml`](../../.cargo/audit.toml) | ✅ | 忽略项附影响评估与理由 |
 | [cargo audit 配置](https://github.com/rustsec/rustsec/blob/main/cargo-audit/README.md) | [`.cargo/audit.toml`](../../.cargo/audit.toml) | ✅ | `[advisories]` 忽略规则 |
 
-### 4.2 cargo-deny
+### 4.2 cargo-deny {#42-cargo-deny}
 
 | 权威来源/主题 | 项目文档/配置 | 状态 | 备注 |
 |---------------|---------------|------|------|
@@ -149,7 +149,7 @@
 | [Check licenses](https://embarkstudios.github.io/cargo-deny/checks/licenses/index.html) | — | 🔄 | 许可证合规矩阵待补充 |
 | [Check bans / sources](https://embarkstudios.github.io/cargo-deny/checks/bans/index.html) | — | 🔄 | 禁用 crate / 限制 registry 来源 |
 
-### 4.3 cargo-vet
+### 4.3 cargo-vet {#43-cargo-vet}
 
 | 权威来源/主题 | 项目文档/配置 | 状态 | 备注 |
 |---------------|---------------|------|------|
@@ -157,21 +157,21 @@
 | [Policy & criteria](https://mozilla.github.io/cargo-vet/config.html) | [`supply-chain/config.toml`](../../supply-chain/config.toml) | ✅ | `safe-to-deploy` / `safe-to-run` / `license` |
 | [Imports & audits](https://mozilla.github.io/cargo-vet/performing-audits.html) | `supply-chain/audits.toml` / `imports.lock` | ✅ | 本地 crate 免检策略 |
 
-### 4.4 Sigstore
+### 4.4 Sigstore {#44-sigstore}
 
 | 权威来源/主题 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
 | [Sigstore 文档](https://docs.sigstore.dev/) | — | ⏳ | cosign / gitsign 用于签名发布产物与 Git 提交 |
 | [Sigstore Rust 客户端](https://github.com/sigstore/sigstore-rs) | — | ⏳ | 与 crates.io / GitHub Releases 签名集成 |
 
-### 4.5 SLSA
+### 4.5 SLSA {#45-slsa}
 
 | 权威来源/主题 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
 | [SLSA Specification](https://slsa.dev/spec/v1.0/about) | — | ⏳ | Supply-chain Levels for Software Artifacts |
 | [SLSA GitHub Generator](https://github.com/slsa-framework/slsa-github-generator) | — | ⏳ | 达到 SLSA Build L3 的可复用 workflow |
 
-### 4.6 SBOM
+### 4.6 SBOM {#46-sbom}
 
 | 权威来源/主题 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
@@ -182,9 +182,9 @@
 
 ---
 
-## 五、发布与签名
+## 五、发布与签名 {#五发布与签名}
 
-### 5.1 crates.io 政策与 token
+### 5.1 crates.io 政策与 token {#51-cratesio-政策与-token}
 
 | 权威来源/主题 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
@@ -193,7 +193,7 @@
 | [API tokens](https://doc.rust-lang.org/cargo/reference/publishing.html#cargo-login) | — | 🔄 | 建议使用 fine-grained token 并存储于 GitHub Secrets |
 | [Crates.io 2FA / account security](https://crates.io/settings/tokens) | — | ⏳ | 发布账号安全策略 |
 
-### 5.2 GitHub Releases
+### 5.2 GitHub Releases {#52-github-releases}
 
 | 权威来源/主题 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
@@ -201,7 +201,7 @@
 | [Automated release notes](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes) | — | ⏳ | 与 release-plz / cargo-dist 结合 |
 | [GitHub Release Assets](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases) | — | ⏳ | 二进制、checksum、SBOM |
 
-### 5.3 Attestation / Provenance
+### 5.3 Attestation / Provenance {#53-attestation-provenance}
 
 | 权威来源/主题 | 项目文档 | 状态 | 备注 |
 |---------------|----------|------|------|
@@ -211,7 +211,7 @@
 
 ---
 
-## 六、项目文档映射
+## 六、项目文档映射 {#六项目文档映射}
 
 | 主题 | 项目内部锚点 | 说明 |
 |------|--------------|------|
@@ -226,7 +226,7 @@
 
 ---
 
-## 七、未覆盖缺口
+## 七、未覆盖缺口 {#七未覆盖缺口}
 
 1. **GitLab CI 模板**：项目当前使用 GitHub Actions，缺少可移植的 GitLab CI `.gitlab-ci.yml` 模板。
 2. **cargo-make / task runner**：未引入 `Makefile.toml` 统一本地开发、CI、发布命令。
@@ -241,7 +241,7 @@
 
 > **权威来源**: [GitHub Actions Docs](https://docs.github.com/en/actions) | [GitLab CI Docs](https://docs.gitlab.com/ee/ci/) | [Cargo Book](https://doc.rust-lang.org/cargo/) | [RustSec](https://rustsec.org/) | [cargo-deny](https://embarkstudios.github.io/cargo-deny/) | [cargo-vet](https://mozilla.github.io/cargo-vet/) | [Sigstore](https://www.sigstore.dev/) | [SLSA](https://slsa.dev/) | [SPDX](https://spdx.dev/) | [CycloneDX](https://cyclonedx.org/)
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
 - [知识图谱索引](10_knowledge_graph_index.md)
@@ -253,7 +253,7 @@
 
 ---
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 本对齐矩阵同时参考以下 P1 学术权威来源，以形成完整的官方-学术对照网络：
 

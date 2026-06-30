@@ -10,20 +10,20 @@
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 ISO C++20、cxx crate 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
 
-# C++ 互操作指南（cxx + bindgen）
+# C++ 互操作指南（cxx + bindgen） {#c-互操作指南cxx-bindgen}
 
 > **Bloom 层级**: L2-L3 (理解/应用)
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [C++ 互操作指南（cxx + bindgen）](#c-互操作指南cxx--bindgen)
-  - [📑 目录](#-目录)
+- [C++ 互操作指南（cxx + bindgen）](#c-互操作指南cxx-bindgen)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [cxx crate](#cxx-crate)
     - [核心理念](#核心理念)
-    - [工作流程](#工作流程)
+    - [工作流程](#工作流程-1)
     - [build.rs](#buildrs)
   - [bindgen](#bindgen)
     - [工作流程](#工作流程-1)
@@ -33,7 +33,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 概述
+## 概述 {#概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -42,11 +42,11 @@ Rust 与 C++ 的互操作主要有两条技术路线：
 1. **bindgen**: 从 C/C++ 头文件生成 Rust FFI 绑定（单向调用 C++）
 2. **cxx**: 安全、双向的 C++/Rust 桥接，编译时检查 ABI 兼容性
 
-## cxx crate
+## cxx crate {#cxx-crate}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 核心理念
+### 核心理念 {#核心理念}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -54,7 +54,7 @@ Rust 与 C++ 的互操作主要有两条技术路线：
 - **不透明类型**: C++ 类型对 Rust 不透明，Rust 通过 `UniquePtr<T>` 或 `Pin<&mut T>` 持有
 - **安全保证**: cxx 编译器自动生成桥接代码，禁止不安全的指针传递
 
-### 工作流程
+### 工作流程 {#工作流程-1}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -103,7 +103,7 @@ std::unique_ptr<Canvas> create_canvas() {
 }
 ```
 
-### build.rs
+### build.rs {#buildrs}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -115,11 +115,11 @@ fn main() {
 }
 ```
 
-## bindgen
+## bindgen {#bindgen}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 工作流程
+### 工作流程 {#工作流程-1}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -167,7 +167,7 @@ pub mod safe_wrapper {
 }
 ```
 
-## cxx vs bindgen 对比
+## cxx vs bindgen 对比 {#cxx-vs-bindgen-对比}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -180,7 +180,7 @@ pub mod safe_wrapper {
 | 构建集成 | build.rs 调用 cxx_build | build.rs 调用 bindgen |
 | 适用场景 | 新的 C++/Rust 混合项目 | 绑定现有的大型 C 库 |
 
-## 项目中的使用
+## 项目中的使用 {#项目中的使用}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -195,7 +195,7 @@ cxx_interop::explain_bindgen_workflow();
 
 启用 `cxx-interop` feature 后可尝试真实 cxx 桥接（需要 C++ 编译器）。
 
-## 参考
+## 参考 {#参考}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -216,7 +216,7 @@ cxx_interop::explain_bindgen_workflow();
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -224,7 +224,7 @@ cxx_interop::explain_bindgen_workflow();
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

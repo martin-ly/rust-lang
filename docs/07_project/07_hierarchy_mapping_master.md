@@ -1,4 +1,4 @@
-# 知识体系全局层次映射总表
+# 知识体系全局层次映射总表 {#知识体系全局层次映射总表}
 
 > **分级**: [A]
 > **Bloom 层级**: L4-L5 (分析/评价)
@@ -17,12 +17,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [知识体系全局层次映射总表](#知识体系全局层次映射总表)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、L0-L7 全局架构速查](#一l0-l7-全局架构速查)
   - [二、30 个核心文件层次映射矩阵](#二30-个核心文件层次映射矩阵)
   - [三、定理链全局索引](#三定理链全局索引)
@@ -34,7 +34,7 @@
 
 ---
 
-## 一、L0-L7 全局架构速查
+## 一、L0-L7 全局架构速查 {#一l0-l7-全局架构速查}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -109,7 +109,7 @@ graph TB
 
 ---
 
-## 二、30 个核心文件层次映射矩阵
+## 二、30 个核心文件层次映射矩阵 {#二30-个核心文件层次映射矩阵}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -148,7 +148,7 @@ graph TB
 
 ---
 
-## 三、定理链全局索引
+## 三、定理链全局索引 {#三定理链全局索引}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -174,7 +174,7 @@ graph TB
 
 ---
 
-## 四、跨层映射关系图谱
+## 四、跨层映射关系图谱 {#四跨层映射关系图谱}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -205,7 +205,7 @@ graph LR
 
 ---
 
-## 五、思维表征覆盖矩阵
+## 五、思维表征覆盖矩阵 {#五思维表征覆盖矩阵}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -221,7 +221,7 @@ graph LR
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -233,7 +233,7 @@ graph LR
 
 ---
 
-## 六、变更日志
+## 六、变更日志 {#六变更日志}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -243,7 +243,7 @@ graph LR
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**

@@ -1,4 +1,4 @@
-# 研究笔记系统总结
+# 研究笔记系统总结 {#研究笔记系统总结}
 >
 > **概念族**: 综合研究
 
@@ -13,16 +13,16 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [研究笔记系统总结](#研究笔记系统总结)
-  - [📑 目录](#-目录)
-  - [🎯 系统概览 {#-系统概览}](#-系统概览--系统概览)
+  - [📑 目录](#目录)
+  - [🎯 系统概览](#系统概览)
     - [系统目标](#系统目标)
     - [系统结构](#系统结构)
-  - [📚 文档统计 {#-文档统计}](#-文档统计--文档统计)
+  - [📚 文档统计](#文档统计)
     - [总体统计](#总体统计)
     - [核心文档详情](#核心文档详情)
     - [研究笔记详情](#研究笔记详情)
@@ -30,39 +30,39 @@
       - [类型理论研究 (5个)](#类型理论研究-5个)
       - [实验研究 (5个)](#实验研究-5个)
       - [综合研究 (2个)](#综合研究-2个)
-  - [🔬 研究主题覆盖 {#-研究主题覆盖}](#-研究主题覆盖--研究主题覆盖)
+  - [🔬 研究主题覆盖](#研究主题覆盖)
     - [形式化方法领域](#形式化方法领域)
     - [类型理论领域](#类型理论领域)
     - [实验研究领域](#实验研究领域)
     - [综合应用领域](#综合应用领域)
-  - [✅ 系统特点 {#-系统特点}](#-系统特点--系统特点)
+  - [✅ 系统特点](#系统特点)
     - [1. 完整性](#1-完整性)
     - [2. 规范性](#2-规范性)
     - [3. 可扩展性](#3-可扩展性)
     - [4. 实用性](#4-实用性)
-  - [🚀 使用指南 {#-使用指南}](#-使用指南--使用指南)
+  - [🚀 使用指南](#使用指南)
     - [新用户入门](#新用户入门)
     - [开始研究](#开始研究)
     - [贡献研究](#贡献研究)
-  - [📈 未来规划 {#-未来规划}](#-未来规划--未来规划)
+  - [📈 未来规划](#未来规划)
     - [短期目标 (1-3 个月)](#短期目标-1-3-个月)
     - [中期目标 (3-6 个月)](#中期目标-3-6-个月)
     - [长期目标 (6-12 个月)](#长期目标-6-12-个月)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
+  - [🔗 相关资源](#相关资源)
     - [核心文档](#核心文档)
     - [贡献和质量](#贡献和质量)
     - [外部资源](#外部资源)
-  - [💻 代码示例](#-代码示例)
+  - [💻 代码示例](#代码示例)
     - [示例 1: 研究笔记系统导航代码](#示例-1-研究笔记系统导航代码)
     - [示例 2: 研究进度跟踪代码](#示例-2-研究进度跟踪代码)
-  - [🔗 形式化链接](#-形式化链接)
+  - [🔗 形式化链接](#形式化链接)
     - [核心定理索引](#核心定理索引)
     - [Coq 证明骨架](#coq-证明骨架)
     - [系统集成文档](#系统集成文档)
-  - [📊 系统评估 {#-系统评估}](#-系统评估--系统评估)
+  - [📊 系统评估](#系统评估)
     - [完成度](#完成度)
     - [质量评级](#质量评级)
-  - [🆕 Rust 1.96.0+ / Edition 2024 权威国际化升级说明](#-rust-1960--edition-2024-权威国际化升级说明)
+  - [🆕 Rust 1.96.0+ / Edition 2024 权威国际化升级说明](#rust-1960-edition-2024-权威国际化升级说明)
     - [升级要点](#升级要点)
       - [权威来源对齐](#权威来源对齐)
       - [形式化来源对照](#形式化来源对照)
@@ -70,13 +70,13 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🎯 系统概览 {#-系统概览}
+## 🎯 系统概览 {#系统概览}
 >
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
 Rust 研究笔记系统是一个完整的 Rust 语言研究文档体系，旨在记录和推进 Rust 相关的深入研究。
 
-### 系统目标
+### 系统目标 {#系统目标}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
@@ -87,7 +87,7 @@ Rust 研究笔记系统是一个完整的 Rust 语言研究文档体系，旨在
 3. **实际应用**: 实际项目案例研究
 4. **方法论**: 研究方法和工具指南
 
-### 系统结构
+### 系统结构 {#系统结构}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
@@ -104,11 +104,11 @@ research_notes/
 
 ---
 
-## 📚 文档统计 {#-文档统计}
+## 📚 文档统计 {#文档统计}
 >
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
-### 总体统计
+### 总体统计 {#总体统计}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -121,7 +121,7 @@ research_notes/
 | **目录索引** | 3个  | ✅ 已完成        |
 | **总计**     | 46个 | -                |
 
-### 核心文档详情
+### 核心文档详情 {#核心文档详情}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -155,13 +155,13 @@ research_notes/
 26. **10_quick_find.md** - 研究笔记快速查找
 27. **10_content_enhancement.md** - 研究笔记内容完善指南
 
-### 研究笔记详情
+### 研究笔记详情 {#研究笔记详情}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
-#### 形式化方法研究 (5个)
+#### 形式化方法研究 (5个) {#形式化方法研究-5个}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
@@ -175,7 +175,7 @@ research_notes/
 | 10_lifetime_formalization.md | formal_methods/10_lifetime_formalization.md | T-LT1, T-LT2 |
 | 10_pin_self_referential.md | [formal_methods/10_pin_self_referential.md](formal_methods/10_pin_self_referential.md) | T-PN1, T-PN2, T-PN3 |
 
-#### 类型理论研究 (5个)
+#### 类型理论研究 (5个) {#类型理论研究-5个}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
@@ -189,7 +189,7 @@ research_notes/
 | 10_advanced_types.md | [type_theory/10_advanced_types.md](type_theory/10_advanced_types.md) | Def 1.1-3.2, AT-T1, AT-T2, AT-T3 |
 | 10_variance_theory.md | [type_theory/10_variance_theory.md](type_theory/10_variance_theory.md) | Def 1.1-3.1, T1-T4 |
 
-#### 实验研究 (5个)
+#### 实验研究 (5个) {#实验研究-5个}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
@@ -203,7 +203,7 @@ research_notes/
 | 10_concurrency_performance.md | [experiments/10_concurrency_performance.md](experiments/10_concurrency_performance.md) | 并发性能 |
 | 10_macro_expansion_performance.md | [experiments/10_macro_expansion_performance.md](experiments/10_macro_expansion_performance.md) | 宏展开性能 |
 
-#### 综合研究 (2个)
+#### 综合研究 (2个) {#综合研究-2个}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -214,11 +214,11 @@ research_notes/
 
 ---
 
-## 🔬 研究主题覆盖 {#-研究主题覆盖}
+## 🔬 研究主题覆盖 {#研究主题覆盖}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 形式化方法领域
+### 形式化方法领域 {#形式化方法领域}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -228,7 +228,7 @@ research_notes/
 - ✅ 生命周期系统
 - ✅ Pin 和自引用类型
 
-### 类型理论领域
+### 类型理论领域 {#类型理论领域}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -238,7 +238,7 @@ research_notes/
 - ✅ 高级类型特性（GATs、const 泛型）
 - ✅ 型变理论
 
-### 实验研究领域
+### 实验研究领域 {#实验研究领域}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -248,7 +248,7 @@ research_notes/
 - ✅ 并发性能
 - ✅ 宏展开性能
 
-### 综合应用领域
+### 综合应用领域 {#综合应用领域}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -257,11 +257,11 @@ research_notes/
 
 ---
 
-## ✅ 系统特点 {#-系统特点}
+## ✅ 系统特点 {#系统特点}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 1. 完整性
+### 1. 完整性 {#1-完整性}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -269,7 +269,7 @@ research_notes/
 - **结构清晰**: 分类明确，易于导航
 - **相互链接**: 文档之间形成知识网络
 
-### 2. 规范性
+### 2. 规范性 {#2-规范性}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -277,7 +277,7 @@ research_notes/
 - **质量标准**: 提供质量检查清单
 - **模板支持**: 提供研究笔记模板
 
-### 3. 可扩展性
+### 3. 可扩展性 {#3-可扩展性}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -285,7 +285,7 @@ research_notes/
 - **贡献指南**: 清晰的贡献流程
 - **持续更新**: 支持持续改进
 
-### 4. 实用性
+### 4. 实用性 {#4-实用性}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -295,11 +295,11 @@ research_notes/
 
 ---
 
-## 🚀 使用指南 {#-使用指南}
+## 🚀 使用指南 {#使用指南}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 新用户入门
+### 新用户入门 {#新用户入门}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -307,7 +307,7 @@ research_notes/
 2. 查看 [快速参考](10_quick_reference.md) 查找感兴趣的主题
 3. 参考 [研究路线图](10_research_roadmap.md) 了解研究计划
 
-### 开始研究
+### 开始研究 {#开始研究}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -315,7 +315,7 @@ research_notes/
 2. 遵循 [研究笔记规范](README.md#研究笔记规范)
 3. 使用 [质量检查清单](10_quality_checklist.md) 确保质量
 
-### 贡献研究
+### 贡献研究 {#贡献研究}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -325,11 +325,11 @@ research_notes/
 
 ---
 
-## 📈 未来规划 {#-未来规划}
+## 📈 未来规划 {#未来规划}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 短期目标 (1-3 个月)
+### 短期目标 (1-3 个月) {#短期目标-1-3-个月}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -342,7 +342,7 @@ research_notes/
   - ✅ 生命周期形式化 (100%)
 - [x] 开始性能实验研究 ✅ (5/5 实验 100%：性能基准、内存分析、编译器优化、并发性能、宏展开)
 
-### 中期目标 (3-6 个月)
+### 中期目标 (3-6 个月) {#中期目标-3-6-个月}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -350,7 +350,7 @@ research_notes/
 - [x] 建立完整的实验研究体系 ✅ (5/5 含数据收集指南与结果分析模板)
 - [x] 收集实际应用案例 ✅ (practical_applications 案例库与最佳实践 100%)
 
-### 长期目标 (6-12 个月)
+### 长期目标 (6-12 个月) {#长期目标-6-12-个月}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -360,11 +360,11 @@ research_notes/
 
 ---
 
-## 🔗 相关资源 {#-相关资源}
+## 🔗 相关资源 {#相关资源}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 核心文档
+### 核心文档 {#核心文档}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -379,7 +379,7 @@ research_notes/
 | 快速入门指南 | [10_getting_started.md](10_getting_started.md) | 入门指南 |
 | 常见问题解答 | [10_faq.md](10_faq.md) | FAQ |
 
-### 贡献和质量
+### 贡献和质量 {#贡献和质量}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -389,7 +389,7 @@ research_notes/
 | 质量检查清单 | [10_quality_checklist.md](10_quality_checklist.md) | 质量标准 |
 | 研究笔记模板 | [10_template.md](10_template.md) | 创建模板 |
 
-### 外部资源
+### 外部资源 {#外部资源}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -402,11 +402,11 @@ research_notes/
 
 ---
 
-## 💻 代码示例
+## 💻 代码示例 {#代码示例}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 示例 1: 研究笔记系统导航代码
+### 示例 1: 研究笔记系统导航代码 {#示例-1-研究笔记系统导航代码}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -457,7 +457,7 @@ fn main() {
 }
 ```
 
-### 示例 2: 研究进度跟踪代码
+### 示例 2: 研究进度跟踪代码 {#示例-2-研究进度跟踪代码}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -510,11 +510,11 @@ fn main() {
 
 ---
 
-## 🔗 形式化链接
+## 🔗 形式化链接 {#形式化链接}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 核心定理索引
+### 核心定理索引 {#核心定理索引}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -527,17 +527,17 @@ fn main() {
 | T6.1, T6.2, T6.3 | [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) | 10_async_state_machine.md |
 | T-PN1, T-PN2, T-PN3 | [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) | 10_pin_self_referential.md |
 
-### Coq 证明骨架
+### Coq 证明骨架 {#coq-证明骨架}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 定理 | Coq 文件 | 状态 |
 | :--- | :--- | :--- |
-| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 骨架已创建 |
-| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](../deprecated/coq_skeleton/BORROW_DATARACE_FREE.v) | 骨架已创建 |
-| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](../deprecated/coq_skeleton/TYPE_SAFETY.v) | 骨架已创建 |
+| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../../archive/deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 骨架已创建 |
+| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](../../archive/deprecated/coq_skeleton/BORROW_DATARACE_FREE.v) | 骨架已创建 |
+| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](../../archive/deprecated/coq_skeleton/TYPE_SAFETY.v) | 骨架已创建 |
 
-### 系统集成文档
+### 系统集成文档 {#系统集成文档}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -550,11 +550,11 @@ fn main() {
 
 ---
 
-## 📊 系统评估 {#-系统评估}
+## 📊 系统评估 {#系统评估}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 完成度
+### 完成度 {#完成度}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -591,7 +591,7 @@ fn main() {
 - 实际应用案例研究: 100%
 - 研究方法论: 100%
 
-### 质量评级
+### 质量评级 {#质量评级}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -613,7 +613,7 @@ fn main() {
 
 ---
 
-## 🆕 Rust 1.96.0+ / Edition 2024 权威国际化升级说明
+## 🆕 Rust 1.96.0+ / Edition 2024 权威国际化升级说明 {#rust-1960-edition-2024-权威国际化升级说明}
 >
 > **来源**: [Rust Edition Guide - Rust 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)
@@ -621,13 +621,13 @@ fn main() {
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-06-29
 
-### 升级要点
+### 升级要点 {#升级要点}
 
 > **来源**: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 
 本文档已完成权威国际化来源对齐升级：将泛化的 "Rust Official Docs" 替换为官方具体章节/模块/API 链接，并补充 P1 形式化来源对照。
 
-#### 权威来源对齐
+#### 权威来源对齐 {#权威来源对齐}
 
 | 来源类型 | 具体链接 | 用途 |
 | :--- | :--- | :--- |
@@ -637,7 +637,7 @@ fn main() {
 | **Rust Standard Library** | [std](https://doc.rust-lang.org/std/)、[Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html)、[HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html)、[Result](https://doc.rust-lang.org/std/result/enum.Result.html)、[Future](https://doc.rust-lang.org/std/future/trait.Future.html)、[Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)、[thread](https://doc.rust-lang.org/std/thread/)、[sync](https://doc.rust-lang.org/std/sync/) | API/模块级别参考 |
 | **Rust Edition Guide** | [Edition Guide](https://doc.rust-lang.org/edition-guide/)、[Rust 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) | 版本差异与迁移 |
 
-#### 形式化来源对照
+#### 形式化来源对照 {#形式化来源对照}
 
 > **来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/) / [Aeneas](https://aeneas-verification.github.io/) / [Ferrocene FLS](https://spec.ferrocene.dev/)
 
@@ -648,7 +648,7 @@ fn main() {
 | 类型系统/Trait | ✓ Iris 语义 | ✓ 类型系统提取 | ✓ 规范 § 类型 |
 | 异步/Pin | ✓ 扩展模型 | 部分支持 | ✓ 规范 § 表达式 |
 
-#### 版本与生态更新
+#### 版本与生态更新 {#版本与生态更新}
 
 - 所有概念、示例与最佳实践统一对齐 **Rust 1.96.0+ (Edition 2024)**。
 - 生态引用已更新：async-std → Tokio / smol；wasm32-wasi → wasm32-wasip1 / wasm32-wasip2（详见 [10_application_trees.md](10_application_trees.md)）。
@@ -672,7 +672,7 @@ fn main() {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -681,7 +681,7 @@ fn main() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

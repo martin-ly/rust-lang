@@ -1,4 +1,4 @@
-# 🔷 Rust 类型系统速查卡
+# 🔷 Rust 类型系统速查卡 {#rust-类型系统速查卡}
 
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
@@ -6,74 +6,74 @@
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [🔷 Rust 类型系统速查卡](#-rust-类型系统速查卡)
-  - [📑 目录](#-目录)
-  - [🎯 核心概念](#-核心概念)
+- [🔷 Rust 类型系统速查卡](#rust-类型系统速查卡)
+  - [📑 目录](#目录)
+  - [🎯 核心概念](#核心概念)
     - [类型安全三支柱](#类型安全三支柱)
-  - [📐 基本类型速查](#-基本类型速查)
+  - [📐 基本类型速查](#基本类型速查)
     - [标量类型](#标量类型)
     - [复合类型](#复合类型)
-  - [🏗️ Trait 系统](#️-trait-系统)
+  - [🏗️ Trait 系统](#trait-系统)
     - [定义与实现](#定义与实现)
     - [Trait 作为参数](#trait-作为参数)
     - [Trait 作为返回值](#trait-作为返回值)
-  - [🔄 类型转换](#-类型转换)
+  - [🔄 类型转换](#类型转换)
     - [From/Into](#frominto)
     - [TryFrom/TryInto（可失败转换）](#tryfromtryinto可失败转换)
     - [as 转换（基本类型）](#as-转换基本类型)
-  - [📦 泛型编程](#-泛型编程)
+  - [📦 泛型编程](#泛型编程)
     - [泛型函数](#泛型函数)
     - [泛型结构体](#泛型结构体)
     - [关联类型](#关联类型)
-  - [🎭 型变（Variance）](#-型变variance)
+  - [🎭 型变（Variance）](#型变variance)
     - [协变（Covariant）- \&T](#协变covariant--t)
     - [逆变（Contravariant）- fn(T)](#逆变contravariant--fnt)
     - [不变（Invariant）- \&mut T](#不变invariant--mut-t)
-  - [🔍 常用 Trait](#-常用-trait)
-    - [Debug \& Display](#debug--display)
-    - [Clone \& Copy](#clone--copy)
-    - [PartialEq \& Eq](#partialeq--eq)
-    - [PartialOrd \& Ord](#partialord--ord)
-  - [🧬 高级类型](#-高级类型)
+  - [🔍 常用 Trait](#常用-trait)
+    - [Debug \& Display](#debug-display)
+    - [Clone \& Copy](#clone-copy)
+    - [PartialEq \& Eq](#partialeq-eq)
+    - [PartialOrd \& Ord](#partialord-ord)
+  - [🧬 高级类型](#高级类型)
     - [类型别名](#类型别名)
     - [Never 类型](#never-类型)
     - [PhantomData（零大小类型标记）](#phantomdata零大小类型标记)
-  - [🎯 常见模式](#-常见模式)
+  - [🎯 常见模式](#常见模式)
     - [新类型模式（Newtype）](#新类型模式newtype)
     - [类型状态模式](#类型状态模式)
     - [Builder 模式（类型安全）](#builder-模式类型安全)
-  - [⚡ 性能提示](#-性能提示)
+  - [⚡ 性能提示](#性能提示)
     - [单态化（Monomorphization）](#单态化monomorphization)
     - [动态分派 vs 静态分派](#动态分派-vs-静态分派)
     - [内存对齐](#内存对齐)
-  - [🚫 反例速查](#-反例速查)
+  - [🚫 反例速查](#反例速查)
     - [反例 1: 为 Copy 类型实现 Clone 不一致](#反例-1-为-copy-类型实现-clone-不一致)
     - [反例 2: 生命周期省略导致悬垂引用](#反例-2-生命周期省略导致悬垂引用)
     - [反例 3: 混淆 Sized 与动态大小类型](#反例-3-混淆-sized-与动态大小类型)
-  - [🔗 快速跳转](#-快速跳转)
+  - [🔗 快速跳转](#快速跳转)
     - [深入学习](#深入学习)
     - [代码示例](#代码示例)
     - [形式化理论](#形式化理论)
-  - [💡 使用场景](#-使用场景)
+  - [💡 使用场景](#使用场景)
     - [场景 1: 状态机类型系统](#场景-1-状态机类型系统)
     - [场景 2: 类型安全的配置构建](#场景-2-类型安全的配置构建)
     - [场景 3: 零成本抽象的数据库查询](#场景-3-零成本抽象的数据库查询)
-  - [⚠️ 边界情况](#️-边界情况)
+  - [⚠️ 边界情况](#边界情况)
     - [边界 1: 动态大小类型 (DST)](#边界-1-动态大小类型-dst)
     - [边界 2: 递归类型与间接](#边界-2-递归类型与间接)
     - [边界 3: 生命周期子类型](#边界-3-生命周期子类型)
-  - [🆕 Rust 1.93.0 新特性](#-rust-1930-新特性)
+  - [🆕 Rust 1.93.0 新特性](#rust-1930-新特性)
     - [MaybeUninit API 增强](#maybeuninit-api-增强)
     - [切片到数组转换](#切片到数组转换)
   - [Rust 1.92.0 新特性（历史）](#rust-1920-新特性历史)
     - [const 上下文增强](#const-上下文增强)
-  - [📚 相关文档](#-相关文档)
-  - [🧩 相关示例代码](#-相关示例代码)
-  - [📚 相关资源](#-相关资源)
+  - [📚 相关文档](#相关文档)
+  - [🧩 相关示例代码](#相关示例代码)
+  - [📚 相关资源](#相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
     - [相关速查卡](#相关速查卡)
@@ -89,11 +89,11 @@
 
 ---
 
-## 🎯 核心概念
+## 🎯 核心概念 {#核心概念}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 类型安全三支柱
+### 类型安全三支柱 {#类型安全三支柱}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -107,11 +107,11 @@
 
 ---
 
-## 📐 基本类型速查
+## 📐 基本类型速查 {#基本类型速查}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 标量类型
+### 标量类型 {#标量类型}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -137,7 +137,7 @@ let h: char = '🦀';    // Unicode 字符
 
 ---
 
-### 复合类型
+### 复合类型 {#复合类型}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -159,11 +159,11 @@ let s2: String = String::from("world");  // 堆字符串
 
 ---
 
-## 🏗️ Trait 系统
+## 🏗️ Trait 系统 {#trait-系统}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 定义与实现
+### 定义与实现 {#定义与实现}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -193,7 +193,7 @@ impl Summary for Article {
 
 ---
 
-### Trait 作为参数
+### Trait 作为参数 {#trait-作为参数}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -221,7 +221,7 @@ where
 
 ---
 
-### Trait 作为返回值
+### Trait 作为返回值 {#trait-作为返回值}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -244,11 +244,11 @@ fn returns_trait_object() -> Box<dyn Summary> {
 
 ---
 
-## 🔄 类型转换
+## 🔄 类型转换 {#类型转换}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### From/Into
+### From/Into {#frominto}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -268,7 +268,7 @@ let my: MyType = 42.into();
 
 ---
 
-### TryFrom/TryInto（可失败转换）
+### TryFrom/TryInto（可失败转换） {#tryfromtryinto可失败转换}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -292,7 +292,7 @@ let pos = PositiveInt::try_from(42)?;
 
 ---
 
-### as 转换（基本类型）
+### as 转换（基本类型） {#as-转换基本类型}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -304,11 +304,11 @@ let c = 100i32 as u8;  // 100
 
 ---
 
-## 📦 泛型编程
+## 📦 泛型编程 {#泛型编程}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 泛型函数
+### 泛型函数 {#泛型函数}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -326,7 +326,7 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
 
 ---
 
-### 泛型结构体
+### 泛型结构体 {#泛型结构体}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -352,7 +352,7 @@ impl Point<f32> {
 
 ---
 
-### 关联类型
+### 关联类型 {#关联类型}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -374,11 +374,11 @@ impl Iterator for Counter {
 
 ---
 
-## 🎭 型变（Variance）
+## 🎭 型变（Variance） {#型变variance}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 协变（Covariant）- &T
+### 协变（Covariant）- &T {#协变covariant--t}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -394,7 +394,7 @@ where
 
 ---
 
-### 逆变（Contravariant）- fn(T)
+### 逆变（Contravariant）- fn(T) {#逆变contravariant--fnt}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -412,7 +412,7 @@ fn contravariant<'short, 'long>(
 
 ---
 
-### 不变（Invariant）- &mut T
+### 不变（Invariant）- &mut T {#不变invariant--mut-t}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -425,11 +425,11 @@ fn invariant<'a, 'b>(x: &'a mut i32, y: &'b mut i32) {
 
 ---
 
-## 🔍 常用 Trait
+## 🔍 常用 Trait {#常用-trait}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### Debug & Display
+### Debug & Display {#debug-display}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -450,7 +450,7 @@ println!("{}", p);    // Display
 
 ---
 
-### Clone & Copy
+### Clone & Copy {#clone-copy}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -469,7 +469,7 @@ let d2 = d1.clone();  // 显式克隆
 
 ---
 
-### PartialEq & Eq
+### PartialEq & Eq {#partialeq-eq}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -484,7 +484,7 @@ assert_eq!(p1, p2);
 
 ---
 
-### PartialOrd & Ord
+### PartialOrd & Ord {#partialord-ord}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -501,11 +501,11 @@ assert!(p1 < p2);
 
 ---
 
-## 🧬 高级类型
+## 🧬 高级类型 {#高级类型}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 类型别名
+### 类型别名 {#类型别名}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -520,7 +520,7 @@ fn distance() -> Kilometers {
 
 ---
 
-### Never 类型
+### Never 类型 {#never-类型}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -538,7 +538,7 @@ let x: i32 = if some_condition {
 
 ---
 
-### PhantomData（零大小类型标记）
+### PhantomData（零大小类型标记） {#phantomdata零大小类型标记}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -553,11 +553,11 @@ struct MyType<T> {
 
 ---
 
-## 🎯 常见模式
+## 🎯 常见模式 {#常见模式}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 新类型模式（Newtype）
+### 新类型模式（Newtype） {#新类型模式newtype}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -576,7 +576,7 @@ fn run(distance: Meters, time: Seconds) {
 
 ---
 
-### 类型状态模式
+### 类型状态模式 {#类型状态模式}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -612,7 +612,7 @@ door.open();  // ✅ OK
 
 ---
 
-### Builder 模式（类型安全）
+### Builder 模式（类型安全） {#builder-模式类型安全}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -656,11 +656,11 @@ impl EmailBuilder<Set<String>, Set<String>> {
 
 ---
 
-## ⚡ 性能提示
+## ⚡ 性能提示 {#性能提示}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 单态化（Monomorphization）
+### 单态化（Monomorphization） {#单态化monomorphization}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -680,7 +680,7 @@ generic("hello"); // 生成 generic::<&str>
 
 ---
 
-### 动态分派 vs 静态分派
+### 动态分派 vs 静态分派 {#动态分派-vs-静态分派}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -702,7 +702,7 @@ fn dynamic_dispatch(item: &dyn Summary) {
 
 ---
 
-### 内存对齐
+### 内存对齐 {#内存对齐}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -725,11 +725,11 @@ struct CacheAligned { data: [u8; 64]; }
 
 ---
 
-## 🚫 反例速查
+## 🚫 反例速查 {#反例速查}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 反例 1: 为 Copy 类型实现 Clone 不一致
+### 反例 1: 为 Copy 类型实现 Clone 不一致 {#反例-1-为-copy-类型实现-clone-不一致}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -755,7 +755,7 @@ struct Good {
 
 ---
 
-### 反例 2: 生命周期省略导致悬垂引用
+### 反例 2: 生命周期省略导致悬垂引用 {#反例-2-生命周期省略导致悬垂引用}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -780,7 +780,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ---
 
-### 反例 3: 混淆 Sized 与动态大小类型
+### 反例 3: 混淆 Sized 与动态大小类型 {#反例-3-混淆-sized-与动态大小类型}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -801,11 +801,11 @@ fn take_slice<T>(t: &[T]) {}
 
 ---
 
-## 🔗 快速跳转
+## 🔗 快速跳转 {#快速跳转}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 深入学习
+### 深入学习 {#深入学习}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -813,14 +813,14 @@ fn take_slice<T>(t: &[T]) {}
 - [型变详解](../../../crates/c02_type_system/docs/tier_03_references/02_类型型变参考.md)
 - [Trait 系统](../../../crates/c02_type_system/docs/tier_02_guides/04_Trait系统指南.md)
 
-### 代码示例
+### 代码示例 {#代码示例}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
 - [泛型示例](../../../crates/c02_type_system/examples/README.md)
 - [类型转换](../../../crates/c02_type_system/src/README.md)
 
-### 形式化理论
+### 形式化理论 {#形式化理论}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -834,11 +834,11 @@ fn take_slice<T>(t: &[T]) {}
 
 ---
 
-## 💡 使用场景
+## 💡 使用场景 {#使用场景}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 场景 1: 状态机类型系统
+### 场景 1: 状态机类型系统 {#场景-1-状态机类型系统}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -909,7 +909,7 @@ fn main() {
 }
 ```
 
-### 场景 2: 类型安全的配置构建
+### 场景 2: 类型安全的配置构建 {#场景-2-类型安全的配置构建}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -967,7 +967,7 @@ fn main() {
 }
 ```
 
-### 场景 3: 零成本抽象的数据库查询
+### 场景 3: 零成本抽象的数据库查询 {#场景-3-零成本抽象的数据库查询}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -1024,11 +1024,11 @@ fn main() {
 
 ---
 
-## ⚠️ 边界情况
+## ⚠️ 边界情况 {#边界情况}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 边界 1: 动态大小类型 (DST)
+### 边界 1: 动态大小类型 (DST) {#边界-1-动态大小类型-dst}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -1052,7 +1052,7 @@ fn main() {
 }
 ```
 
-### 边界 2: 递归类型与间接
+### 边界 2: 递归类型与间接 {#边界-2-递归类型与间接}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -1089,7 +1089,7 @@ fn main() {
 }
 ```
 
-### 边界 3: 生命周期子类型
+### 边界 3: 生命周期子类型 {#边界-3-生命周期子类型}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -1115,11 +1115,11 @@ fn main() {
 
 ---
 
-## 🆕 Rust 1.93.0 新特性
+## 🆕 Rust 1.93.0 新特性 {#rust-1930-新特性}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### MaybeUninit API 增强
+### MaybeUninit API 增强 {#maybeuninit-api-增强}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -1139,7 +1139,7 @@ let mutable: &mut String = unsafe { uninit.assume_init_mut() };
 unsafe { uninit.assume_init_drop() };
 ```
 
-### 切片到数组转换
+### 切片到数组转换 {#切片到数组转换}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -1153,11 +1153,11 @@ let array: &[i32; 4] = slice.as_array().unwrap();
 
 ---
 
-## Rust 1.92.0 新特性（历史）
+## Rust 1.92.0 新特性（历史） {#rust-1920-新特性历史}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### const 上下文增强
+### const 上下文增强 {#const-上下文增强}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -1177,14 +1177,14 @@ const REF: &i32 = &VALUE;  // ✅ 现在支持
 
 ---
 
-## 📚 相关文档
+## 📚 相关文档 {#相关文档}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [类型系统完整文档](../../../crates/c02_type_system/docs/README.md)
 - [类型系统 README](../../../crates/c02_type_system/README.md)
 
-## 🧩 相关示例代码
+## 🧩 相关示例代码 {#相关示例代码}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -1197,25 +1197,25 @@ const REF: &i32 = &VALUE;  // ✅ 现在支持
 
 ---
 
-## 📚 相关资源
+## 📚 相关资源 {#相关资源}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 官方文档
+### 官方文档 {#官方文档}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Rust 类型系统文档](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)
 - [Rust Reference - Types](https://doc.rust-lang.org/reference/types.html)
 
-### 项目内部文档
+### 项目内部文档 {#项目内部文档}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [类型系统完整文档](../../../crates/c02_type_system/docs/README.md)
 - [类型系统研究笔记](../../research_notes/type_theory/README.md)
 
-### 相关速查卡
+### 相关速查卡 {#相关速查卡}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -1234,7 +1234,7 @@ const REF: &i32 = &VALUE;  // ✅ 现在支持
 
 ---
 
-## Rust 1.95+ 更新
+## Rust 1.95+ 更新 {#rust-195-更新}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 > **适用版本**: Rust 1.96.0+
@@ -1265,7 +1265,7 @@ Rust 1.95+ 重要更新：
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -1274,7 +1274,7 @@ Rust 1.95+ 重要更新：
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 > **来源: [Wikipedia - Type Theory](https://en.wikipedia.org/wiki/Type_Theory)**

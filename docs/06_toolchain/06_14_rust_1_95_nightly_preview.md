@@ -1,4 +1,4 @@
-# Rust 1.95 Nightly 预览与实验特性
+# Rust 1.95 Nightly 预览与实验特性 {#rust-195-nightly-预览与实验特性}
 
 > **权威来源说明**: 本文为 Rust 1.95 相关内容的权威来源。
 > [knowledge/06_ecosystem/emerging/04_rust_1_95_preview.md](../../knowledge/06_ecosystem/emerging/04_rust_1_95_preview.md) 与 [knowledge/06_ecosystem/emerging/03_rust_1_95.md](../../knowledge/06_ecosystem/emerging/03_rust_1_95.md) 已重定向至此。
@@ -15,7 +15,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -33,7 +33,7 @@
     - [3. `fn_align` 属性](#3-fn_align-属性)
   - [标准库实验](#标准库实验)
     - [1. 严格指针来源 (Strict Provenance)](#1-严格指针来源-strict-provenance)
-    - [2. `offset_of_slice`](#2-offset_of_slice)
+    - [2. `offset_of_slice`](#2--cdebuginfo-compression)
     - [3. `MaybeUninit` 持续改进](#3-maybeuninit-持续改进)
   - [Cargo 实验](#cargo-实验)
     - [1. Build Dir 新布局](#1-build-dir-新布局)
@@ -46,12 +46,11 @@
     - [生产使用建议](#生产使用建议)
   - [相关文档](#相关文档)
   - [Rust 1.96+ 更新](#rust-196-更新)
-  - [**最后更新**: 2026-06-08 (对齐 1.96 稳定版内容)](#最后更新-2026-06-08-对齐-196-稳定版内容)
   - [权威来源索引](#权威来源索引)
 
 ---
 
-## 版本概览
+## 版本概览 {#版本概览}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -64,11 +63,11 @@
 
 ---
 
-## 实验性语言特性
+## 实验性语言特性 {#实验性语言特性}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 下一代 Trait 求解器 (next-solver)
+### 1. 下一代 Trait 求解器 (next-solver) {#1-下一代-trait-求解器-next-solver}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -99,7 +98,7 @@ where
 
 ---
 
-### 2. Async Drop
+### 2. Async Drop {#2-async-drop}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -131,7 +130,7 @@ impl AsyncDrop for AsyncResource {
 
 ---
 
-### 3. 生成器 (Generators)
+### 3. 生成器 (Generators) {#3-生成器-generators}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -162,7 +161,7 @@ let iter = std::iter::iter! {
 
 ---
 
-### 4. Pin 人体工学改进
+### 4. Pin 人体工学改进 {#4-pin-人体工学改进}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -185,11 +184,11 @@ use_pinned(pinned);  // 自动重新借用
 
 ---
 
-## 编译器实验
+## 编译器实验 {#编译器实验}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. `-Zinstrument-mcount`
+### 1. `-Zinstrument-mcount` {#1--zinstrument-mcount}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -205,7 +204,7 @@ rustc -Zinstrument-mcount program.rs
 
 ---
 
-### 2. `-Cdebuginfo-compression`
+### 2. `-Cdebuginfo-compression` {#2--cdebuginfo-compression}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -219,7 +218,7 @@ rustc -Cdebuginfo-compression=zlib program.rs
 
 ---
 
-### 3. `fn_align` 属性
+### 3. `fn_align` 属性 {#3-fn_align-属性}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -236,11 +235,11 @@ fn aligned_function() {
 
 ---
 
-## 标准库实验
+## 标准库实验 {#标准库实验}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 1. 严格指针来源 (Strict Provenance)
+### 1. 严格指针来源 (Strict Provenance) {#1-严格指针来源-strict-provenance}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -259,7 +258,7 @@ let addr = ptr.addr();
 
 ---
 
-### 2. `offset_of_slice`
+### 2. `offset_of_slice` {#2-offset_of_slice}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -274,7 +273,7 @@ let offset = offset_of!(Struct, field[0]);
 
 ---
 
-### 3. `MaybeUninit` 持续改进
+### 3. `MaybeUninit` 持续改进 {#3-maybeuninit-持续改进}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -286,11 +285,11 @@ let offset = offset_of!(Struct, field[0]);
 
 ---
 
-## Cargo 实验
+## Cargo 实验 {#cargo-实验}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 1. Build Dir 新布局
+### 1. Build Dir 新布局 {#1-build-dir-新布局}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -304,7 +303,7 @@ cargo build -Zbuild-dir-new-layout
 
 ---
 
-### 2. Section Timings
+### 2. Section Timings {#2-section-timings}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -318,11 +317,11 @@ cargo build --timings -Zsection-timings
 
 ---
 
-## 形式化研究机会
+## 形式化研究机会 {#形式化研究机会}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 高优先级研究主题
+### 高优先级研究主题 {#高优先级研究主题}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -334,7 +333,7 @@ cargo build --timings -Zsection-timings
 | Pin 重新借用 | 人体工学改进的安全边界 | [pin_self_referential](../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md) |
 | 严格指针来源 | 指针操作的严格语义 | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) |
 
-### 建议添加的形式化定义
+### 建议添加的形式化定义 {#建议添加的形式化定义}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -346,11 +345,11 @@ cargo build --timings -Zsection-timings
 
 ---
 
-## 风险与注意事项
+## 风险与注意事项 {#风险与注意事项}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 实验特性风险
+### 实验特性风险 {#实验特性风险}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -361,7 +360,7 @@ cargo build --timings -Zsection-timings
 | 性能回归 | 实验实现可能慢 | 使用 `--release` 测试 |
 | 形式化过期 | 形式化文档可能跟不上实现 | 标记为实验性 |
 
-### 生产使用建议
+### 生产使用建议 {#生产使用建议}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -386,7 +385,7 @@ cargo build --timings -Zsection-timings
 
 ---
 
-## 相关文档
+## 相关文档 {#相关文档}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -405,7 +404,7 @@ cargo build --timings -Zsection-timings
 
 ---
 
-## Rust 1.96+ 更新
+## Rust 1.96+ 更新 {#rust-196-更新}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -431,7 +430,7 @@ cargo build --timings -Zsection-timings
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Machine Learning](https://en.wikipedia.org/wiki/Machine_Learning)**
 

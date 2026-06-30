@@ -1,4 +1,4 @@
-# 插件架构模式（Plugin Architecture）
+# 插件架构模式（Plugin Architecture） {#插件架构模式plugin-architecture}
 
 > **概念族**: 软件设计 / 组合工程 / 插件架构
 >
@@ -34,15 +34,15 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 - [插件架构模式（Plugin Architecture）](#插件架构模式plugin-architecture)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、动机与应用场景](#一动机与应用场景)
   - [二、静态注册 vs 动态加载](#二静态注册-vs-动态加载)
     - [2.1 静态注册表（Static Registry）](#21-静态注册表static-registry)
     - [2.2 动态加载（Dynamic Loading）](#22-动态加载dynamic-loading)
-  - [三、Trait + Registry 设计模式](#三trait--registry-设计模式)
+  - [三、Trait + Registry 设计模式](#三trait-registry-设计模式)
   - [四、Rust 实现方案](#四rust-实现方案)
     - [4.1 共享插件接口 crate](#41-共享插件接口-crate)
     - [4.2 静态注册表示例](#42-静态注册表示例)
@@ -60,7 +60,7 @@
 
 ---
 
-## 一、动机与应用场景
+## 一、动机与应用场景 {#一动机与应用场景}
 
 > **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)**
 
@@ -79,11 +79,11 @@
 
 ---
 
-## 二、静态注册 vs 动态加载
+## 二、静态注册 vs 动态加载 {#二静态注册-vs-动态加载}
 
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
-### 2.1 静态注册表（Static Registry）
+### 2.1 静态注册表（Static Registry） {#21-静态注册表static-registry}
 
 所有插件在**编译期**确定，通过 `inventory`、`linkme` 等 crate 或手工注册表收集。
 
@@ -95,7 +95,7 @@
 | 部署 | 与主程序一起打包 |
 | 代表 crate | `inventory`、`linkme`、`ctor` |
 
-### 2.2 动态加载（Dynamic Loading）
+### 2.2 动态加载（Dynamic Loading） {#22-动态加载dynamic-loading}
 
 插件编译为动态库（`.so` / `.dll` / `.dylib`），主程序在**运行时**通过 `dlopen`/`dlsym` 加载。
 
@@ -109,7 +109,7 @@
 
 ---
 
-## 三、Trait + Registry 设计模式
+## 三、Trait + Registry 设计模式 {#三trait-registry-设计模式}
 
 > **来源: [Rust Reference – Traits](https://doc.rust-lang.org/reference/items/traits.html)**
 
@@ -142,11 +142,11 @@ impl PluginRegistry {
 
 ---
 
-## 四、Rust 实现方案
+## 四、Rust 实现方案 {#四rust-实现方案}
 
 > **来源: [Cargo Book – crate-type](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#the-crate-type-field)**
 
-### 4.1 共享插件接口 crate
+### 4.1 共享插件接口 crate {#41-共享插件接口-crate}
 
 为同时服务静态与动态方案，推荐将插件接口提取到独立的 **接口 crate**（interface crate）：
 
@@ -177,7 +177,7 @@ pub struct RawPlugin {
 pub const PLUGIN_ENTRY_NAME: &[u8] = b"plugin_entry\0";
 ```
 
-### 4.2 静态注册表示例
+### 4.2 静态注册表示例 {#42-静态注册表示例}
 
 ```rust
 // host/src/main.rs
@@ -198,7 +198,7 @@ fn main() {
 }
 ```
 
-### 4.3 动态加载示例
+### 4.3 动态加载示例 {#43-动态加载示例}
 
 ```rust,ignore
 // host/src/main.rs
@@ -229,11 +229,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ---
 
-## 五、代码示例
+## 五、代码示例 {#五代码示例}
 
 > **来源: [libloading docs](https://docs.rs/libloading/latest/libloading/)**
 
-### 示例 1：静态 Trait Registry
+### 示例 1：静态 Trait Registry {#示例-1静态-trait-registry}
 
 ```rust
 // 文件：crates/c09_design_pattern/examples/plugin_static_registry.rs
@@ -276,7 +276,7 @@ fn main() {
 }
 ```
 
-### 示例 2：使用 libloading 的动态插件
+### 示例 2：使用 libloading 的动态插件 {#示例-2使用-libloading-的动态插件}
 
 ```rust,ignore
 // 文件：crates/c09_design_pattern/examples/plugin_dynamic_loading.rs
@@ -313,11 +313,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ---
 
-## 六、反例边界
+## 六、反例边界 {#六反例边界}
 
 > **来源: [Rustonomicon – FFI](https://doc.rust-lang.org/nomicon/ffi.html)**
 
-### 6.1 ABI 不稳定
+### 6.1 ABI 不稳定 {#61-abi-不稳定}
 
 Rust 没有稳定的**类型布局 ABI**（struct 字段顺序、`dyn Trait` vtable 布局等）。跨动态库传递 `Box<dyn Trait>` 或自定义 `struct` 指针而不加 `#[repr(C)]` 会导致未定义行为。
 
@@ -326,7 +326,7 @@ Rust 没有稳定的**类型布局 ABI**（struct 字段顺序、`dyn Trait` vta
 | `pub struct Point { x: f64, y: f64 }` 跨动态库传递 | `#[repr(C)] pub struct Point { x: f64, y: f64 }` |
 | 直接传递 `Box<dyn Plugin>` | 仅传递 `extern "C"` 函数指针与原始指针 |
 
-### 6.2 生命周期管理
+### 6.2 生命周期管理 {#62-生命周期管理}
 
 动态库卸载后，若主程序仍持有库分配的指针，将形成悬垂指针。
 
@@ -343,7 +343,7 @@ println!("{}", CStr::from_ptr(ptr).to_str()?); // UB
 
 正确做法：确保 `Library` 句柄的生命周期覆盖所有从库中获取的指针，或使用拷贝后的值。
 
-### 6.3 版本兼容性
+### 6.3 版本兼容性 {#63-版本兼容性}
 
 插件与主程序分别编译时，若插件接口 crate 的语义版本不兼容，可能出现链接或运行时错误。
 
@@ -355,7 +355,7 @@ println!("{}", CStr::from_ptr(ptr).to_str()?); // UB
 
 ---
 
-## 七、验证清单
+## 七、验证清单 {#七验证清单}
 
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 
@@ -368,7 +368,7 @@ println!("{}", CStr::from_ptr(ptr).to_str()?); // UB
 
 ---
 
-## 八、权威来源索引
+## 八、权威来源索引 {#八权威来源索引}
 
 > **来源优先级说明**：
 >
@@ -388,7 +388,7 @@ println!("{}", CStr::from_ptr(ptr).to_str()?); // UB
 
 ---
 
-## 九、相关概念
+## 九、相关概念 {#九相关概念}
 
 | 概念 | 关系 | 文档 |
 | :--- | :--- | :--- |

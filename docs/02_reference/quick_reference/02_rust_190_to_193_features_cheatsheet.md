@@ -1,4 +1,4 @@
-# Rust 1.90–1.93 特性速查表
+# Rust 1.90–1.93 特性速查表 {#rust-190193-特性速查表}
 
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)
@@ -15,7 +15,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [Rust 1.90–1.93 特性速查表](#rust-190193-特性速查表)
   - [目录](#目录)
@@ -39,7 +39,7 @@
 
 ---
 
-## 快速参考
+## 快速参考 {#快速参考}
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -52,46 +52,46 @@
 
 ---
 
-## Rust 1.90 (2025-09)
+## Rust 1.90 (2025-09) {#rust-190-2025-09}
 
 > **[来源: [Rust Blog](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)]**
 
-### LLD 默认链接器
+### LLD 默认链接器 {#lld-默认链接器}
 
 `x86_64-unknown-linux-gnu` 目标默认使用 LLD 链接器，提升链接速度。
 
 ```toml
-# Cargo.toml（无需配置，默认生效）
-# 如需显式指定：
+# Cargo.toml（无需配置，默认生效） {#cargotoml无需配置默认生效}
+# 如需显式指定： {#如需显式指定}
 [target.x86_64-unknown-linux-gnu]
 linker = "lld"
 ```
 
-### `cargo publish --workspace`
+### `cargo publish --workspace` {#cargo-publish---workspace}
 
 一键发布 workspace 中所有可发布的 crate。
 
 ```bash
-# 发布 workspace 中所有符合条件的 crate
+# 发布 workspace 中所有符合条件的 crate {#发布-workspace-中所有符合条件的-crate}
 cargo publish --workspace
 
-#  dry-run 预览
+# dry-run 预览 {#dry-run-预览}
 cargo publish --workspace --dry-run
 ```
 
 ---
 
-## Rust 1.91 (2025-10)
+## Rust 1.91 (2025-10) {#rust-191-2025-10}
 
 > **[来源: [Rust Blog](https://blog.rust-lang.org/2025/10/30/Rust-1.91.0/)]**
 
-### 平台支持升级
+### 平台支持升级 {#平台支持升级}
 
 | 目标 | 变更 |
 |------|------|
 | `aarch64-pc-windows-msvc` | 升级为 **Tier 1** |
 
-### 新 Lint：`dangling_pointers_from_locals`
+### 新 Lint：`dangling_pointers_from_locals` {#新-lintdangling_pointers_from_locals}
 
 ```rust,ignore
 // ⚠️ warn-by-default
@@ -105,18 +105,18 @@ fn example() {
 
 ---
 
-## Rust 1.92 (2025-12)
+## Rust 1.92 (2025-12) {#rust-192-2025-12}
 
 > **[来源: [Rust Blog](https://blog.rust-lang.org/2025/12/11/Rust-1.92.0/)]**
 
-### Never 类型 Lint 严格化
+### Never 类型 Lint 严格化 {#never-类型-lint-严格化}
 
 | Lint | 旧级别 | 新级别 |
 |------|--------|--------|
 | `never_type_fallback_flowing_into_unsafe` | warn | **deny** |
 | `dependency_on_unit_never_type_fallback` | warn | **deny** |
 
-### 标准库新 API
+### 标准库新 API {#标准库新-api}
 
 | API | 说明 |
 |-----|------|
@@ -132,15 +132,15 @@ let zeroed: Box<u64> = Box::new_zeroed();
 
 ---
 
-## Rust 1.93 (2026-01)
+## Rust 1.93 (2026-01) {#rust-193-2026-01}
 
 > **[来源: [Rust Blog](https://blog.rust-lang.org/2026/01/xx/Rust-1.93.0/)]**
 
-### musl 1.2.5
+### musl 1.2.5 {#musl-125}
 
 musl 目标升级至 1.2.5，DNS 解析改进。
 
-### `asm_cfg`：汇编行级 cfg
+### `asm_cfg`：汇编行级 cfg {#asm_cfg汇编行级-cfg}
 
 ```rust
 #[cfg(any(target_arch = "x86_64", target_arch = "x86"))]
@@ -159,7 +159,7 @@ pub unsafe fn cpuid() {
 }
 ```
 
-### 标准库 API 稳定化
+### 标准库 API 稳定化 {#标准库-api-稳定化}
 
 | API | 说明 |
 |-----|------|
@@ -170,7 +170,7 @@ pub unsafe fn cpuid() {
 | `Duration::as_millis_f64` 等 | 浮点持续时间转换 |
 | `char::to_ascii_uppercase` / `to_ascii_lowercase` const | ASCII 大小写转换 const 化 |
 
-### 兼容性变更
+### 兼容性变更 {#兼容性变更}
 
 | 变更 | 影响 |
 |------|------|
@@ -180,7 +180,7 @@ pub unsafe fn cpuid() {
 
 ---
 
-## 迁移检查清单
+## 迁移检查清单 {#迁移检查清单}
 
 - [ ] 确认 Rust 版本 ≥ 1.96.0（本速查表为历史归档，特性已在 1.96.0 中稳定可用）
 - [ ] 检查 `dangling_pointers_from_locals` lint 警告
@@ -190,7 +190,7 @@ pub unsafe fn cpuid() {
 
 ---
 
-## 相关链接
+## 相关链接 {#相关链接}
 
 - [Rust 1.90.0 Release](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 - [Rust 1.91.0 Release](https://blog.rust-lang.org/2025/10/30/Rust-1.91.0/)

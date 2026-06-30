@@ -13,7 +13,7 @@
 > **后置概念**: [Ownership](23_quiz_ownership_borrowing.md)
 ---
 
-> **来源**:
+> **来源**: · [自测题库](../00_meta/self_assessment.md)
 > [The Rust Programming Language — Ch3 Common Programming Concepts](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html) ·
 > [The Rust Programming Language — Ch6 Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html) ·
 > [The Rust Programming Language — Ch18 Patterns](https://doc.rust-lang.org/book/ch18-00-patterns.html)

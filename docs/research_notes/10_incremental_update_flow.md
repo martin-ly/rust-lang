@@ -1,4 +1,4 @@
-# Rust 版本增量更新流程
+# Rust 版本增量更新流程 {#rust-版本增量更新流程}
 
 > **概念族**: 运维 / 更新日志
 
@@ -22,7 +22,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -31,7 +31,7 @@
 >
 
 - [Rust 版本增量更新流程](#rust-版本增量更新流程)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [触发条件](#触发条件)
   - [增量更新步骤](#增量更新步骤)
     - [1. 收集变更](#1-收集变更)
@@ -45,14 +45,14 @@
     - [场景 1：新语言特性研究](#场景-1新语言特性研究)
     - [场景 2：性能改进验证](#场景-2性能改进验证)
     - [场景 3：API 稳定化跟踪](#场景-3api-稳定化跟踪)
-  - [相关文档](#相关文档)
+  - [相关文档](#相关文档-1)
     - [核心流程文档](#核心流程文档)
     - [形式化方法文档](#形式化方法文档)
     - [更新记录文档](#更新记录文档)
     - [形式化证明文档](#形式化证明文档)
     - [研究笔记索引](#研究笔记索引)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 更新](#rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -60,7 +60,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 触发条件
+## 触发条件 {#触发条件}
 
 >
 
@@ -74,13 +74,13 @@
 
 ---
 
-## 增量更新步骤
+## 增量更新步骤 {#增量更新步骤}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 收集变更
+### 1. 收集变更 {#1-收集变更}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -94,7 +94,7 @@
 
 | 1.3 | 识别语言特性、库、工具链变更 | releases.rs § Language、Library、Compiler |
 
-### 2. 更新文档
+### 2. 更新文档 {#2-更新文档}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -116,7 +116,7 @@
 
 | 2.5 | [INDEX](INDEX.md)、[README](README.md) | 更新版本号、链接、统计 |
 
-### 3. 对齐权威
+### 3. 对齐权威 {#3-对齐权威}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -134,7 +134,7 @@
 
 | 3.3 | 更新 formal_methods README 权威来源快速链接 |
 
-### 4. 兼容性
+### 4. 兼容性 {#4-兼容性}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -152,13 +152,13 @@
 
 ---
 
-## 检查清单
+## 检查清单 {#检查清单}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 版本发布后
+### 版本发布后 {#版本发布后}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -178,7 +178,7 @@
 
 - [ ] CHANGELOG 已记录本次更新
 
-### 季度复核
+### 季度复核 {#季度复核}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -190,13 +190,13 @@
 
 ---
 
-## 研究场景与代码示例
+## 研究场景与代码示例 {#研究场景与代码示例}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 场景 1：新语言特性研究
+### 场景 1：新语言特性研究 {#场景-1新语言特性研究}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -244,7 +244,7 @@ fn lub_coercion_example() {
 
 ```
 
-### 场景 2：性能改进验证
+### 场景 2：性能改进验证 {#场景-2性能改进验证}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -302,7 +302,7 @@ fn performance_improvement_example() {
 
 ```
 
-### 场景 3：API 稳定化跟踪
+### 场景 3：API 稳定化跟踪 {#场景-3api-稳定化跟踪}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -352,13 +352,13 @@ fn api_stabilization_example() {
 
 ---
 
-## 相关文档
+## 相关文档 {#相关文档-1}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 核心流程文档
+### 核心流程文档 {#核心流程文档}
 
 >
 
@@ -374,7 +374,7 @@ fn api_stabilization_example() {
 
 | FEATURE_TEMPLATE | 新特性精简模板 | [10_feature_template.md](10_feature_template.md) |
 
-### 形式化方法文档
+### 形式化方法文档 {#形式化方法文档}
 
 >
 
@@ -388,7 +388,7 @@ fn api_stabilization_example() {
 
 | type_theory/00_completeness_gaps | 类型理论缺口 | [formal_methods/00_completeness_gaps.md](formal_methods/00_completeness_gaps.md) |
 
-### 更新记录文档
+### 更新记录文档 {#更新记录文档}
 
 >
 
@@ -404,7 +404,7 @@ fn api_stabilization_example() {
 
 | CHANGELOG | 更新日志 | [10_changelog.md](10_changelog.md) |
 
-### 形式化证明文档
+### 形式化证明文档 {#形式化证明文档}
 
 >
 
@@ -422,7 +422,7 @@ fn api_stabilization_example() {
 
 | SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS | 安全分析 | [10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md) |
 
-### 研究笔记索引
+### 研究笔记索引 {#研究笔记索引}
 
 >
 
@@ -448,7 +448,7 @@ fn api_stabilization_example() {
 
 ---
 
-## 🆕 Rust 1.94 更新
+## 🆕 Rust 1.94 更新 {#rust-194-更新}
 
 >
 
@@ -462,7 +462,7 @@ fn api_stabilization_example() {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -472,7 +472,7 @@ fn api_stabilization_example() {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -480,7 +480,7 @@ fn api_stabilization_example() {
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -494,7 +494,7 @@ fn api_stabilization_example() {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -504,7 +504,7 @@ fn api_stabilization_example() {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档-1}
 
 - Rust 1.94 迁移指南
 
@@ -536,7 +536,7 @@ fn api_stabilization_example() {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -548,7 +548,7 @@ fn api_stabilization_example() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

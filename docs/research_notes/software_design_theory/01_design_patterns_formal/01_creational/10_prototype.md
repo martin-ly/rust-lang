@@ -1,4 +1,4 @@
-# Prototype 形式化分析
+# Prototype 形式化分析 {#prototype-形式化分析}
 
 > **概念族**: 软件设计 / 设计模式
 
@@ -24,14 +24,14 @@
 
 > **权威来源**: [Rust Design Patterns – Creational](https://rust-unofficial.github.io/patterns/patterns/creational/index.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
-## 📊 目录 {#-目录}
+## 📊 目录 {#目录}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Prototype 形式化分析](#prototype-形式化分析)
-  - [📊 目录 {#-目录}](#-目录--目录)
+  - [📊 目录](#目录)
   - [权威来源对照](#权威来源对照)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Prototype 结构）](#def-11prototype-结构)
@@ -42,7 +42,7 @@
     - [推论 P-C1（Clone 安全使用）](#推论-p-c1clone-安全使用)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
-  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196--edition-2024-代码示例更新)
+  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196-edition-2024-代码示例更新)
     - [Edition 2024 关键兼容点](#edition-2024-关键兼容点)
   - [Rust 所有权、借用、生命周期与 trait 系统约束分析](#rust-所有权借用生命周期与-trait-系统约束分析)
     - [所有权约束](#所有权约束)
@@ -74,7 +74,7 @@
   - [思维导图](#思维导图)
   - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -84,7 +84,7 @@
 
 ---
 
-## 权威来源对照
+## 权威来源对照 {#权威来源对照}
 
 >
 
@@ -110,13 +110,13 @@
 
 ---
 
-## 形式化定义
+## 形式化定义 {#形式化定义}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Def 1.1（Prototype 结构）
+### Def 1.1（Prototype 结构） {#def-11prototype-结构}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -140,7 +140,7 @@ $$\mathcal{P} = \langle T, \mathit{clone}: T \rightarrow T \rangle$$
 
 ---
 
-### Axiom P1（独立副本公理）
+### Axiom P1（独立副本公理） {#axiom-p1独立副本公理}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -152,7 +152,7 @@ $$\forall t: T,\, \mathit{clone}(t) = t' \implies \Omega(t') \cap \Omega(t) = \e
 
 Clone 不改变原对象，产生独立副本；观察等价但所有权分离。
 
-### Axiom P2（引用语义公理）
+### Axiom P2（引用语义公理） {#axiom-p2引用语义公理}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -166,7 +166,7 @@ $$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$
 
 ---
 
-### 定理 P-T1（Clone 类型安全定理）
+### 定理 P-T1（Clone 类型安全定理） {#定理-p-t1clone-类型安全定理}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -202,7 +202,7 @@ $$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$
 
 ---
 
-### 定理 P-T2（借用安全定理）
+### 定理 P-T2（借用安全定理） {#定理-p-t2借用安全定理}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -244,7 +244,7 @@ $$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$
 
 ---
 
-### 推论 P-C1（Clone 安全使用）
+### 推论 P-C1（Clone 安全使用） {#推论-p-c1clone-安全使用}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -272,7 +272,7 @@ $$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$
 
 ---
 
-### 概念定义-属性关系-解释论证 层次汇总
+### 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -292,7 +292,7 @@ $$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$
 
 ---
 
-## Rust 实现与代码示例
+## Rust 实现与代码示例 {#rust-实现与代码示例}
 
 >
 
@@ -348,7 +348,7 @@ let copy = tree.clone();  // 递归 clone
 
 ---
 
-## Rust 1.96+ / Edition 2024 代码示例更新
+## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
 
 >
 
@@ -404,7 +404,7 @@ fn main() {
 
 ```
 
-### Edition 2024 关键兼容点
+### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
 
@@ -420,25 +420,25 @@ fn main() {
 
 ---
 
-## Rust 所有权、借用、生命周期与 trait 系统约束分析
+## Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}
 
 >
 
 > **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
 
-### 所有权约束
+### 所有权约束 {#所有权约束}
 
 `Clone` 创建拥有值副本；原对象仍有效。部分字段可复用 `Arc<str>` 等共享所有权类型降低克隆成本。
 
-### 借用与生命周期约束
+### 借用与生命周期约束 {#借用与生命周期约束}
 
 原型模式通常通过 `&self` 克隆，不转移原对象所有权；返回的新对象为调用者所有。
 
-### trait 系统约束
+### trait 系统约束 {#trait-系统约束}
 
 `Clone` 是 Rust 原型模式的核心 trait；`Copy` 提供更轻量按位复制，但仅适用于简单类型。
 
-### 与 Rust 类型系统的综合联系
+### 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系}
 
 | Rust 机制 | 本模式使用方式 | 保证 |
 
@@ -456,13 +456,13 @@ fn main() {
 
 ---
 
-## 完整证明
+## 完整证明 {#完整证明}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 形式化论证链
+### 形式化论证链 {#形式化论证链}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -496,7 +496,7 @@ ownership_model T2
 
 ```
 
-### 与 Rust 类型系统的联系
+### 与 Rust 类型系统的联系 {#与-rust-类型系统的联系}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -512,7 +512,7 @@ ownership_model T2
 
 | 所有权返回 | 新实例 | 独立生命周期 |
 
-### 内存安全保证
+### 内存安全保证 {#内存安全保证}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -526,13 +526,13 @@ ownership_model T2
 
 ---
 
-## 形式化属性：不变式、前置/后置条件与安全边界
+## 形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}
 
 >
 
 > **来源: [Formal Methods – Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)** | **来源: [Rust API Guidelines – Safety](https://rust-lang.github.io/api-guidelines/safety.html)**
 
-### 不变式（Invariants）
+### 不变式（Invariants） {#不变式invariants}
 
 1. 克隆对象与原对象类型相同。
 
@@ -540,7 +540,7 @@ ownership_model T2
 
 3. 原对象在克隆后保持有效。
 
-### 前置条件（Preconditions）
+### 前置条件（Preconditions） {#前置条件preconditions}
 
 1. 类型实现 `Clone`（或 `Copy`）。
 
@@ -548,7 +548,7 @@ ownership_model T2
 
 3. 内部引用字段的生命周期不依赖于被克隆实例的栈帧。
 
-### 后置条件（Postconditions）
+### 后置条件（Postconditions） {#后置条件postconditions}
 
 1. 返回独立副本。
 
@@ -556,11 +556,11 @@ ownership_model T2
 
 3. 修改副本不影响原对象。
 
-### 安全边界（Safety Boundary）
+### 安全边界（Safety Boundary） {#安全边界safety-boundary}
 
 纯 Safe。`Clone` 为 Safe trait；若自定义 `Clone` 需保证不破坏不变式，禁止在 `Clone` 中引入 `unsafe` 除非封装 Safe API。
 
-### 形式化规约汇总
+### 形式化规约汇总 {#形式化规约汇总}
 
 ```text
 
@@ -576,7 +576,7 @@ ownership_model T2
 
 ---
 
-## 典型场景
+## 典型场景 {#典型场景}
 
 >
 
@@ -594,7 +594,7 @@ ownership_model T2
 
 ---
 
-## 相关模式
+## 相关模式 {#相关模式}
 
 >
 
@@ -612,7 +612,7 @@ ownership_model T2
 
 ---
 
-## 实现变体
+## 实现变体 {#实现变体}
 
 >
 
@@ -630,13 +630,13 @@ ownership_model T2
 
 ---
 
-## 反例：常见误用及编译器错误
+## 反例：常见误用及编译器错误 {#反例常见误用及编译器错误}
 
 >
 
 > **来源: [Rust By Example – Error Handling](https://doc.rust-lang.org/rust-by-example/error.html)** | **来源: [Rust Compiler Error Index](https://doc.rust-lang.org/error_codes/error-index.html)**
 
-### 反例 1：未实现 Clone
+### 反例 1：未实现 Clone {#反例-1未实现-clone}
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
 
@@ -654,7 +654,7 @@ let db2 = db.clone(); // 错误
 
 **修复**：`#[derive(Clone)]` 或手动实现；若包含裸指针需用 `Arc` 等安全抽象。
 
-### 反例 2：浅拷贝导致共享可变状态
+### 反例 2：浅拷贝导致共享可变状态 {#反例-2浅拷贝导致共享可变状态}
 
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
@@ -676,7 +676,7 @@ b.cache.borrow_mut().push(1); // 同时影响 a
 
 **修复**：使用 `Arc<Mutex<T>>` 或深拷贝语义明确共享意图。
 
-### 反例 3：Copy 类型含非 Copy 字段
+### 反例 3：Copy 类型含非 Copy 字段 {#反例-3copy-类型含非-copy-字段}
 
 > 以下代码故意展示编译失败，用于说明对应反例。
 
@@ -692,7 +692,7 @@ struct Wrapper { data: String }
 
 ---
 
-## 与 Copy 的关系
+## 与 Copy 的关系 {#与-copy-的关系}
 
 >
 
@@ -714,7 +714,7 @@ struct Wrapper { data: String }
 
 ---
 
-## 选型决策树
+## 选型决策树 {#选型决策树}
 
 >
 
@@ -736,7 +736,7 @@ struct Wrapper { data: String }
 
 ---
 
-## 与 GoF 对比
+## 与 GoF 对比 {#与-gof-对比}
 
 >
 
@@ -754,7 +754,7 @@ struct Wrapper { data: String }
 
 ---
 
-## 边界
+## 边界 {#边界}
 
 >
 
@@ -772,7 +772,7 @@ struct Wrapper { data: String }
 
 ---
 
-## 与 Rust 1.93 的对应
+## 与 Rust 1.93 的对应 {#与-rust-193-的对应}
 
 >
 
@@ -788,7 +788,7 @@ struct Wrapper { data: String }
 
 ---
 
-## 思维导图
+## 思维导图 {#思维导图}
 
 >
 
@@ -838,7 +838,7 @@ mindmap
 
 ---
 
-## 与其他模式的关系图
+## 与其他模式的关系图 {#与其他模式的关系图}
 
 >
 
@@ -870,7 +870,7 @@ graph LR
 
 ---
 
-## 实质内容五维自检
+## 实质内容五维自检 {#实质内容五维自检}
 
 >
 
@@ -894,7 +894,7 @@ graph LR
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -904,13 +904,13 @@ graph LR
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -926,7 +926,7 @@ graph LR
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -938,7 +938,7 @@ graph LR
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -972,7 +972,7 @@ graph LR
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -984,7 +984,7 @@ graph LR
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 

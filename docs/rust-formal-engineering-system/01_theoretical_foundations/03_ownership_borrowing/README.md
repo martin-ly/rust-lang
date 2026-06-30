@@ -1,4 +1,4 @@
-# 所有权与借用理论
+# 所有权与借用理论 {#所有权与借用理论}
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -13,7 +13,7 @@
 - [借用检查器证明](../../../research_notes/formal_methods/10_borrow_checker_proof.md)
 - 生命周期形式化
 
-## 知识结构思维导图
+## 知识结构思维导图 {#知识结构思维导图}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -40,7 +40,7 @@ mindmap
       Sync Trait
 ```
 
-## 与核心文档的关联
+## 与核心文档的关联 {#与核心文档的关联}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -54,7 +54,7 @@ mindmap
 
 ---
 
-## 形式化链接
+## 形式化链接 {#形式化链接}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -68,11 +68,11 @@ mindmap
 
 ---
 
-## 所有权系统的形式化理解
+## 所有权系统的形式化理解 {#所有权系统的形式化理解}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 资源管理代数
+### 资源管理代数 {#资源管理代数}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -112,7 +112,7 @@ fn partial_use() {
 }
 ```
 
-### 借用检查器的形式化规则
+### 借用检查器的形式化规则 {#借用检查器的形式化规则}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -155,7 +155,7 @@ fn borrow_rules() {
 }
 ```
 
-### 非词法生命周期（NLL）
+### 非词法生命周期（NLL） {#非词法生命周期nll}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -187,7 +187,7 @@ fn nll_control_flow() {
 }
 ```
 
-### 内部可变性模式
+### 内部可变性模式 {#内部可变性模式}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -249,7 +249,7 @@ fn arc_mutex_demo() {
 }
 ```
 
-### 所有权与并发的形式化
+### 所有权与并发的形式化 {#所有权与并发的形式化}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -313,7 +313,7 @@ fn non_send_sync() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 

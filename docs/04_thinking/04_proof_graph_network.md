@@ -1,4 +1,4 @@
-# Rust 证明图网 / Proof Graph Network
+# Rust 证明图网 / Proof Graph Network {#rust-证明图网-proof-graph-network}
 
 > **分级**: [B]
 > **Bloom 层级**: L4-L5 (分析/评价)
@@ -10,53 +10,53 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Rust 证明图网 / Proof Graph Network](#rust-证明图网--proof-graph-network)
-  - [📑 目录](#-目录)
-  - [🎯 证明图网概述](#-证明图网概述)
+- [Rust 证明图网 / Proof Graph Network](#rust-证明图网-proof-graph-network)
+  - [📑 目录](#目录)
+  - [🎯 证明图网概述](#证明图网概述)
     - [核心属性](#核心属性)
     - [证明结构层次](#证明结构层次)
-  - [📐 证明结构说明](#-证明结构说明)
+  - [📐 证明结构说明](#证明结构说明)
     - [证明结构模板](#证明结构模板)
     - [Mermaid 证明图语法](#mermaid-证明图语法)
-  - [🔬 定理证明树](#-定理证明树)
+  - [🔬 定理证明树](#定理证明树)
     - [1. 公理→引理→定理→推论链](#1-公理引理定理推论链)
     - [2. MaybeUninit 安全性证明树](#2-maybeuninit-安全性证明树)
     - [3. 借用检查器安全性证明树](#3-借用检查器安全性证明树)
     - [4. 生命周期安全性证明树](#4-生命周期安全性证明树)
-  - [🛡️ 内存安全证明树](#️-内存安全证明树)
+  - [🛡️ 内存安全证明树](#内存安全证明树)
     - [内存安全定理](#内存安全定理)
     - [无数据竞争证明](#无数据竞争证明)
     - [无悬垂指针证明](#无悬垂指针证明)
     - [无双重释放证明](#无双重释放证明)
-  - [🔒 类型安全证明树](#-类型安全证明树)
+  - [🔒 类型安全证明树](#类型安全证明树)
     - [类型安全定理](#类型安全定理)
     - [类型一致性证明](#类型一致性证明)
     - [泛型单态化正确性证明](#泛型单态化正确性证明)
-  - [⚡ 异步证明树](#-异步证明树)
+  - [⚡ 异步证明树](#异步证明树)
     - [异步 Future 安全性证明树](#异步-future-安全性证明树)
-  - [🧵 并发安全证明树](#-并发安全证明树)
+  - [🧵 并发安全证明树](#并发安全证明树)
     - [Send/Sync 安全性证明](#sendsync-安全性证明)
     - [互斥访问保证证明](#互斥访问保证证明)
     - [数据竞争自由证明](#数据竞争自由证明)
-  - [🔗 特性组合证明](#-特性组合证明)
-    - [组合1: MaybeUninit + 调用追踪](#组合1-maybeuninit--调用追踪)
-    - [组合2: 关联类型多边界 + 自动特征](#组合2-关联类型多边界--自动特征)
-  - [💻 代码示例](#-代码示例)
+  - [🔗 特性组合证明](#特性组合证明)
+    - [组合1: MaybeUninit + 调用追踪](#组合1-maybeuninit-调用追踪)
+    - [组合2: 关联类型多边界 + 自动特征](#组合2-关联类型多边界-自动特征)
+  - [💻 代码示例](#代码示例)
     - [示例 1: MaybeUninit 安全性证明实现](#示例-1-maybeuninit-安全性证明实现)
     - [示例 2: 借用检查器规则的形式化表示](#示例-2-借用检查器规则的形式化表示)
     - [示例 3: 证明可视化工具](#示例-3-证明可视化工具)
-  - [🎯 使用场景](#-使用场景)
+  - [🎯 使用场景](#使用场景)
     - [何时使用证明图网](#何时使用证明图网)
     - [证明图网工作流](#证明图网工作流)
-  - [🔗 相关文档](#-相关文档)
+  - [🔗 相关文档](#相关文档)
     - [核心证明文档](#核心证明文档)
     - [理论基础](#理论基础)
     - [证明工具](#证明工具)
-    - [相关文档](#相关文档)
+    - [相关文档](#相关文档-2)
   - [Rust 1.95+ 思维表征更新](#rust-195-思维表征更新)
     - [新增思维表征](#新增思维表征)
     - [示例](#示例)
@@ -64,17 +64,17 @@
     - [本文档的Rust 1.95+更新要点](#本文档的rust-195更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档-1)
+      - [相关文档](#相关文档-2)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🎯 证明图网概述
+## 🎯 证明图网概述 {#证明图网概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **证明图网 (Proof Graph Network)** 是一种形式化的证明结构，用于展示从前提条件到结论的完整推理过程。
 
-### 核心属性
+### 核心属性 {#核心属性}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -85,7 +85,7 @@
 3. **可追溯** - 推理路径清晰可追溯
 4. **可组合** - 支持证明的组合和复用
 
-### 证明结构层次
+### 证明结构层次 {#证明结构层次}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -97,11 +97,11 @@
 
 ---
 
-## 📐 证明结构说明
+## 📐 证明结构说明 {#证明结构说明}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 证明结构模板
+### 证明结构模板 {#证明结构模板}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -115,7 +115,7 @@
 └── 推论: [应用结论]
 ```
 
-### Mermaid 证明图语法
+### Mermaid 证明图语法 {#mermaid-证明图语法}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -134,11 +134,11 @@ graph TD
 
 ---
 
-## 🔬 定理证明树
+## 🔬 定理证明树 {#定理证明树}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 公理→引理→定理→推论链
+### 1. 公理→引理→定理→推论链 {#1-公理引理定理推论链}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -217,7 +217,7 @@ graph TD
     style C5 fill:#ffe1e1
 ```
 
-### 2. MaybeUninit 安全性证明树
+### 2. MaybeUninit 安全性证明树 {#2-maybeuninit-安全性证明树}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -272,7 +272,7 @@ graph TD
     style G4 fill:#e1ffe1
 ```
 
-### 3. 借用检查器安全性证明树
+### 3. 借用检查器安全性证明树 {#3-借用检查器安全性证明树}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -319,7 +319,7 @@ graph TD
     style T3 fill:#ffe1e1
 ```
 
-### 4. 生命周期安全性证明树
+### 4. 生命周期安全性证明树 {#4-生命周期安全性证明树}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -370,7 +370,7 @@ graph TD
 
 ---
 
-## 🛡️ 内存安全证明树
+## 🛡️ 内存安全证明树 {#内存安全证明树}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -380,7 +380,7 @@ graph TD
 - 借用: [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) 定理 T1
 - 类型: [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) 定理 T1–T3
 
-### 内存安全定理
+### 内存安全定理 {#内存安全定理}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -451,7 +451,7 @@ graph TD
     style T4 fill:#e1ffe1
 ```
 
-### 无数据竞争证明
+### 无数据竞争证明 {#无数据竞争证明}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -496,7 +496,7 @@ graph TD
     style T1 fill:#ffe1e1
 ```
 
-### 无悬垂指针证明
+### 无悬垂指针证明 {#无悬垂指针证明}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -544,7 +544,7 @@ graph TD
     style T1 fill:#ffe1e1
 ```
 
-### 无双重释放证明
+### 无双重释放证明 {#无双重释放证明}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -600,13 +600,13 @@ graph TD
 
 ---
 
-## 🔒 类型安全证明树
+## 🔒 类型安全证明树 {#类型安全证明树}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **形式化对应**: [type_system_foundations](../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) 定理 T1（进展性）、T2（保持性）、T3（类型安全）。
 
-### 类型安全定理
+### 类型安全定理 {#类型安全定理}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -673,7 +673,7 @@ graph TD
     style T3 fill:#e1ffe1
 ```
 
-### 类型一致性证明
+### 类型一致性证明 {#类型一致性证明}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -720,7 +720,7 @@ graph TD
     style T1 fill:#ffe1e1
 ```
 
-### 泛型单态化正确性证明
+### 泛型单态化正确性证明 {#泛型单态化正确性证明}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -769,13 +769,13 @@ graph TD
 
 ---
 
-## ⚡ 异步证明树
+## ⚡ 异步证明树 {#异步证明树}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **形式化对应**: [async_state_machine](../../archive/research_notes_2026_06_25/formal_methods/10_async_state_machine.md) 定理 T6.1–T6.3、[pin_self_referential](../../archive/research_notes_2026_06_25/formal_methods/10_pin_self_referential.md) 定理 T1–T3。
 
-### 异步 Future 安全性证明树
+### 异步 Future 安全性证明树 {#异步-future-安全性证明树}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -818,11 +818,11 @@ graph TD
 
 ---
 
-## 🧵 并发安全证明树
+## 🧵 并发安全证明树 {#并发安全证明树}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Send/Sync 安全性证明
+### Send/Sync 安全性证明 {#sendsync-安全性证明}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -889,7 +889,7 @@ graph TD
     style T2 fill:#e1ffe1
 ```
 
-### 互斥访问保证证明
+### 互斥访问保证证明 {#互斥访问保证证明}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -936,7 +936,7 @@ graph TD
     style T1 fill:#ffe1e1
 ```
 
-### 数据竞争自由证明
+### 数据竞争自由证明 {#数据竞争自由证明}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -1005,11 +1005,11 @@ graph TD
 
 ---
 
-## 🔗 特性组合证明
+## 🔗 特性组合证明 {#特性组合证明}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 组合1: MaybeUninit + 调用追踪
+### 组合1: MaybeUninit + 调用追踪 {#组合1-maybeuninit-调用追踪}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -1047,7 +1047,7 @@ graph TD
     style C1 fill:#ffe1e1
 ```
 
-### 组合2: 关联类型多边界 + 自动特征
+### 组合2: 关联类型多边界 + 自动特征 {#组合2-关联类型多边界-自动特征}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -1089,11 +1089,11 @@ graph TD
 
 ---
 
-## 💻 代码示例
+## 💻 代码示例 {#代码示例}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 示例 1: MaybeUninit 安全性证明实现
+### 示例 1: MaybeUninit 安全性证明实现 {#示例-1-maybeuninit-安全性证明实现}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -1166,7 +1166,7 @@ mod tests {
 }
 ```
 
-### 示例 2: 借用检查器规则的形式化表示
+### 示例 2: 借用检查器规则的形式化表示 {#示例-2-借用检查器规则的形式化表示}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -1231,7 +1231,7 @@ mod borrow_checker_formalization {
 }
 ```
 
-### 示例 3: 证明可视化工具
+### 示例 3: 证明可视化工具 {#示例-3-证明可视化工具}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -1311,11 +1311,11 @@ fn create_maybeuninit_proof() -> ProofGraphNetwork {
 
 ---
 
-## 🎯 使用场景
+## 🎯 使用场景 {#使用场景}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 何时使用证明图网
+### 何时使用证明图网 {#何时使用证明图网}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -1328,7 +1328,7 @@ fn create_maybeuninit_proof() -> ProofGraphNetwork {
 | **代码审查** | 对照证明树检查代码 | 发现潜在安全问题 |
 | **学习理解** | 阅读证明树理解Rust安全性 | 深入理解语言设计 |
 
-### 证明图网工作流
+### 证明图网工作流 {#证明图网工作流}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -1356,11 +1356,11 @@ fn proof_validation_workflow() {
 
 ---
 
-## 🔗 相关文档
+## 🔗 相关文档 {#相关文档}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 核心证明文档
+### 核心证明文档 {#核心证明文档}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -1368,21 +1368,21 @@ fn proof_validation_workflow() {
 - [10_core_theorems_full_proofs.md](../../archive/research_notes_2026_06_25/10_core_theorems_full_proofs.md) - 核心定理完整证明
 - [10_formal_language_and_proofs.md](../../archive/research_notes_2026_06_25/10_formal_language_and_proofs.md) - 形式化语言与证明
 
-### 理论基础
+### 理论基础 {#理论基础}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 - [10_theoretical_and_argumentation_system_architecture.md](../../archive/research_notes_2026_06_25/10_theoretical_and_argumentation_system_architecture.md) - 理论体系架构
 - [10_language_semantics_expressiveness.md](../../archive/research_notes_2026_06_25/10_language_semantics_expressiveness.md) - 语言语义与表达能力
 
-### 证明工具
+### 证明工具 {#证明工具}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
 - [10_coq_of_rust_integration_plan.md](../../archive/research_notes_2026_06_25/10_coq_of_rust_integration_plan.md) - Coq 证明集成
 - [10_aeneas_integration_plan.md](../../archive/research_notes_2026_06_25/10_aeneas_integration_plan.md) - Aeneas 验证工具
 
-### 相关文档
+### 相关文档 {#相关文档-2}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -1399,13 +1399,13 @@ fn proof_validation_workflow() {
 
 ---
 
-## Rust 1.95+ 思维表征更新
+## Rust 1.95+ 思维表征更新 {#rust-195-思维表征更新}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 > **适用版本**: Rust 1.96.0+
 
-### 新增思维表征
+### 新增思维表征 {#新增思维表征}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -1417,7 +1417,7 @@ Rust 新特性可扩展思维表征方式：
 | ControlFlow | 决策树 | 控制流的提前终止决策 |
 | LazyCell/LazyLock | 状态图 | 延迟初始化的状态转换 |
 
-### 示例
+### 示例 {#示例}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -1434,20 +1434,20 @@ ust
 
 ---
 
-## Rust 1.95+ 持续更新更新
+## Rust 1.95+ 持续更新更新 {#rust-195-持续更新更新}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.95+更新要点
+### 本文档的Rust 1.95+更新要点 {#本文档的rust-195更新要点}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 本文档已针对 **Rust 1.95+** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -1458,7 +1458,7 @@ ust
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -1468,7 +1468,7 @@ ust
 - ✅ 兼容Edition 2024
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档-2}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -1498,7 +1498,7 @@ ust
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -1507,7 +1507,7 @@ ust
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Mathematical Proof](https://en.wikipedia.org/wiki/Mathematical_Proof)**
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**

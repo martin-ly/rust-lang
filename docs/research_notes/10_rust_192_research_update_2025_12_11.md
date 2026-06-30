@@ -1,4 +1,4 @@
-# Rust 1.92.0 研究更新报告（历史记录）
+# Rust 1.92.0 研究更新报告（历史记录） {#rust-1920-研究更新报告历史记录}
 
 > **概念族**: 版本特性
 
@@ -10,7 +10,7 @@
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -19,22 +19,22 @@
 >
 
 - [Rust 1.92.0 研究更新报告（历史记录）](#rust-1920-研究更新报告历史记录)
-  - [📑 目录](#-目录)
-  - [📋 概述](#-概述)
-  - [🎯 Rust 1.92.0 主要改进](#-rust-1920-主要改进)
+  - [📑 目录](#目录)
+  - [📋 概述](#概述)
+  - [🎯 Rust 1.92.0 主要改进](#rust-1920-主要改进)
     - [语言特性改进](#语言特性改进)
-  - [💻 代码示例与研究场景](#-代码示例与研究场景)
+  - [💻 代码示例与研究场景](#代码示例与研究场景)
     - [场景 1：`MaybeUninit` 安全使用模式](#场景-1maybeuninit-安全使用模式)
     - [场景 2：联合体原始引用访问](#场景-2联合体原始引用访问)
     - [场景 3：自动特征与 Sized 边界](#场景-3自动特征与-sized-边界)
     - [场景 4：高阶生命周期处理](#场景-4高阶生命周期处理)
     - [场景 5：关联项多边界](#场景-5关联项多边界)
-  - [📊 标准库 API 稳定化](#-标准库-api-稳定化)
-  - [📊 性能优化](#-性能优化)
-  - [📝 研究笔记系统更新](#-研究笔记系统更新)
+  - [📊 标准库 API 稳定化](#标准库-api-稳定化)
+  - [📊 性能优化](#性能优化)
+  - [📝 研究笔记系统更新](#研究笔记系统更新)
     - [已更新的文档](#已更新的文档)
     - [需要关注的研究方向](#需要关注的研究方向)
-  - [🔗 相关资源](#-相关资源)
+  - [🔗 相关资源](#相关资源)
     - [外部链接](#外部链接)
     - [内部代码](#内部代码)
     - [形式化文档](#形式化文档)
@@ -42,7 +42,7 @@
     - [Coq 证明骨架](#coq-证明骨架)
     - [相关研究笔记](#相关研究笔记)
     - [项目文档](#项目文档)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -62,7 +62,7 @@
 
 ---
 
-## 📋 概述
+## 📋 概述 {#概述}
 
 >
 
@@ -72,13 +72,13 @@
 
 ---
 
-## 🎯 Rust 1.92.0 主要改进
+## 🎯 Rust 1.92.0 主要改进 {#rust-1920-主要改进}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 语言特性改进
+### 语言特性改进 {#语言特性改进}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -142,13 +142,13 @@
 
 ---
 
-## 💻 代码示例与研究场景
+## 💻 代码示例与研究场景 {#代码示例与研究场景}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 场景 1：`MaybeUninit` 安全使用模式
+### 场景 1：`MaybeUninit` 安全使用模式 {#场景-1maybeuninit-安全使用模式}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -216,7 +216,7 @@ fn maybe_uninit_safety_research() {
 
 ```
 
-### 场景 2：联合体原始引用访问
+### 场景 2：联合体原始引用访问 {#场景-2联合体原始引用访问}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -284,7 +284,7 @@ fn union_raw_pointer_research() {
 
 ```
 
-### 场景 3：自动特征与 Sized 边界
+### 场景 3：自动特征与 Sized 边界 {#场景-3自动特征与-sized-边界}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -340,7 +340,7 @@ impl Container for Vec<i32> {
 
 ```
 
-### 场景 4：高阶生命周期处理
+### 场景 4：高阶生命周期处理 {#场景-4高阶生命周期处理}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -396,7 +396,7 @@ where
 
 ```
 
-### 场景 5：关联项多边界
+### 场景 5：关联项多边界 {#场景-5关联项多边界}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -446,7 +446,7 @@ impl MultiBound for MyStruct {
 
 ---
 
-## 📊 标准库 API 稳定化
+## 📊 标准库 API 稳定化 {#标准库-api-稳定化}
 
 >
 
@@ -490,7 +490,7 @@ fn api_stabilization_examples() {
 
 ---
 
-## 📊 性能优化
+## 📊 性能优化 {#性能优化}
 
 >
 
@@ -506,13 +506,13 @@ fn api_stabilization_examples() {
 
 ---
 
-## 📝 研究笔记系统更新
+## 📝 研究笔记系统更新 {#研究笔记系统更新}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 已更新的文档
+### 已更新的文档 {#已更新的文档}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -522,7 +522,7 @@ fn api_stabilization_examples() {
 
 - ✅ 特性说明已添加
 
-### 需要关注的研究方向
+### 需要关注的研究方向 {#需要关注的研究方向}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -552,19 +552,19 @@ fn api_stabilization_examples() {
 
 ---
 
-## 🔗 相关资源
+## 🔗 相关资源 {#相关资源}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 外部链接
+### 外部链接 {#外部链接}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
 - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
 
-### 内部代码
+### 内部代码 {#内部代码}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -576,7 +576,7 @@ fn api_stabilization_examples() {
 
 | Rust 1.92.0 示例代码 | `../../crates/c01_ownership_borrow_scope/examples/rust_192_features_demo.rs` | 示例代码（注：该文件不存在，相关功能示例请参考 `rust_189_features_examples.rs` 或 `rust_193_features_demo.rs`） |
 
-### 形式化文档
+### 形式化文档 {#形式化文档}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -592,7 +592,7 @@ fn api_stabilization_examples() {
 
 | 高阶生命周期 | [10_lifetime_formalization.md](type_theory/10_lifetime_formalization.md) | 生命周期形式化 |
 
-### 核心定理
+### 核心定理 {#核心定理}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -606,7 +606,7 @@ fn api_stabilization_examples() {
 
 | T-TY3 | [10_core_theorems_full_proofs.md](10_core_theorems_full_proofs.md) | 类型安全 |
 
-### Coq 证明骨架
+### Coq 证明骨架 {#coq-证明骨架}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -614,13 +614,13 @@ fn api_stabilization_examples() {
 
 | :--- | :--- | :--- |
 
-| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 骨架已创建 |
+| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../../archive/deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 骨架已创建 |
 
-| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](../deprecated/coq_skeleton/BORROW_DATARACE_FREE.v) | 骨架已创建 |
+| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](../../archive/deprecated/coq_skeleton/BORROW_DATARACE_FREE.v) | 骨架已创建 |
 
-| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](../deprecated/coq_skeleton/TYPE_SAFETY.v) | 骨架已创建 |
+| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](../../archive/deprecated/coq_skeleton/TYPE_SAFETY.v) | 骨架已创建 |
 
-### 相关研究笔记
+### 相关研究笔记 {#相关研究笔记}
 
 >
 
@@ -642,7 +642,7 @@ fn api_stabilization_examples() {
 
 | 实验研究 | 性能基准测试 | [experiments/10_performance_benchmarks.md](experiments/10_performance_benchmarks.md) |
 
-### 项目文档
+### 项目文档 {#项目文档}
 
 >
 
@@ -668,7 +668,7 @@ fn api_stabilization_examples() {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -678,7 +678,7 @@ fn api_stabilization_examples() {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -686,7 +686,7 @@ fn api_stabilization_examples() {
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -700,7 +700,7 @@ fn api_stabilization_examples() {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -710,7 +710,7 @@ fn api_stabilization_examples() {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -742,7 +742,7 @@ fn api_stabilization_examples() {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -754,7 +754,7 @@ fn api_stabilization_examples() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

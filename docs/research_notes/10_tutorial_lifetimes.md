@@ -1,4 +1,4 @@
-# 教程：理解生命周期
+# 教程：理解生命周期 {#教程理解生命周期}
 
 > **概念族**: 教程
 
@@ -24,7 +24,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -33,7 +33,7 @@
 >
 
 - [教程：理解生命周期](#教程理解生命周期)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [引言](#引言)
   - [第一部分：什么是生命周期？](#第一部分什么是生命周期)
     - [直观理解](#直观理解)
@@ -53,7 +53,7 @@
     - [NLL (非词法生命周期)](#nll-非词法生命周期)
     - [HRTB (高阶trait bound)](#hrtb-高阶trait-bound)
   - [总结](#总结)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -61,7 +61,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 引言
+## 引言 {#引言}
 
 >
 
@@ -73,13 +73,13 @@
 
 ---
 
-## 第一部分：什么是生命周期？
+## 第一部分：什么是生命周期？ {#第一部分什么是生命周期}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 直观理解
+### 直观理解 {#直观理解}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -103,7 +103,7 @@
 
 ```
 
-### 为什么需要生命周期？
+### 为什么需要生命周期？ {#为什么需要生命周期}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -131,13 +131,13 @@ let r;
 
 ---
 
-## 第二部分：生命周期语法
+## 第二部分：生命周期语法 {#第二部分生命周期语法}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 显式生命周期
+### 显式生命周期 {#显式生命周期}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -161,7 +161,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ```
 
-### 生命周期省略
+### 生命周期省略 {#生命周期省略}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -193,13 +193,13 @@ fn first_word(s: &str) -> &str { ... }
 
 ---
 
-## 第三部分：生命周期关系
+## 第三部分：生命周期关系 {#第三部分生命周期关系}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 'static 生命周期
+### 'static 生命周期 {#static-生命周期}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -219,7 +219,7 @@ let s: &'static str = "hello";
 
 ```
 
-### 子类型关系
+### 子类型关系 {#子类型关系}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -247,7 +247,7 @@ fn take_str<'a>(s: &'a str) {}
 
 ---
 
-## 第四部分：结构体中的生命周期
+## 第四部分：结构体中的生命周期 {#第四部分结构体中的生命周期}
 
 >
 
@@ -279,13 +279,13 @@ fn main() {
 
 ---
 
-## 第五部分：常见模式
+## 第五部分：常见模式 {#第五部分常见模式}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 模式1: 输入输出相同
+### 模式1: 输入输出相同 {#模式1-输入输出相同}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -299,7 +299,7 @@ fn identity<'a>(x: &'a str) -> &'a str {
 
 ```
 
-### 模式2: 多个独立生命周期
+### 模式2: 多个独立生命周期 {#模式2-多个独立生命周期}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -319,7 +319,7 @@ fn parse<'a, 'b>(
 
 ```
 
-### 模式3: 方法
+### 模式3: 方法 {#模式3-方法}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -339,13 +339,13 @@ impl<'a> Person<'a> {
 
 ---
 
-## 第六部分：高级话题
+## 第六部分：高级话题 {#第六部分高级话题}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### NLL (非词法生命周期)
+### NLL (非词法生命周期) {#nll-非词法生命周期}
 
 >
 
@@ -365,7 +365,7 @@ let z = &mut x;  // OK！NLL允许
 
 ```
 
-### HRTB (高阶trait bound)
+### HRTB (高阶trait bound) {#hrtb-高阶trait-bound}
 
 >
 
@@ -389,7 +389,7 @@ where
 
 ---
 
-## 总结
+## 总结 {#总结}
 
 >
 
@@ -437,7 +437,7 @@ where
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -447,7 +447,7 @@ where
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -455,7 +455,7 @@ where
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -469,7 +469,7 @@ where
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -479,7 +479,7 @@ where
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -511,7 +511,7 @@ where
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -523,7 +523,7 @@ where
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

@@ -1,4 +1,4 @@
-# 组合的形式化定义
+# 组合的形式化定义 {#组合的形式化定义}
 
 > **概念族**: 软件设计 / 组合工程
 
@@ -24,7 +24,7 @@
 
 > **权威来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [Tower Docs](https://docs.rs/tower/latest/tower/) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -33,7 +33,7 @@
 >
 
 - [组合的形式化定义](#组合的形式化定义)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [定义](#定义)
   - [公理](#公理)
   - [定理与引理（形式化论证）](#定理与引理形式化论证)
@@ -45,7 +45,7 @@
   - [Crate 组合](#crate-组合)
   - [组合反例](#组合反例)
   - [引用](#引用)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -63,7 +63,7 @@
 
 ---
 
-## 定义
+## 定义 {#定义}
 
 >
 
@@ -111,7 +111,7 @@ $M_1$ 依赖 $M_2$（记 $M_1 \prec M_2$）当且仅当 $M_1$ 引用 $M_2$ 的 `
 
 ---
 
-## 公理
+## 公理 {#公理}
 
 >
 
@@ -125,7 +125,7 @@ $M_1$ 依赖 $M_2$（记 $M_1 \prec M_2$）当且仅当 $M_1$ 引用 $M_2$ 的 `
 
 ---
 
-## 定理与引理（形式化论证）
+## 定理与引理（形式化论证） {#定理与引理形式化论证}
 
 >
 
@@ -157,7 +157,7 @@ $M_1$ 依赖 $M_2$（记 $M_1 \prec M_2$）当且仅当 $M_1$ 引用 $M_2$ 的 `
 
 ---
 
-## Rust 对应
+## Rust 对应 {#rust-对应}
 
 >
 
@@ -199,7 +199,7 @@ fn main() {
 
 ---
 
-## 中间件栈组合
+## 中间件栈组合 {#中间件栈组合}
 
 > **来源: [Tower Layer/Service Docs](https://docs.rs/tower/latest/tower/trait.Layer.html)**
 
@@ -235,7 +235,7 @@ let svc = ServiceBuilder::new()
 
 ---
 
-## 设计模式组合示例
+## 设计模式组合示例 {#设计模式组合示例}
 
 >
 
@@ -315,7 +315,7 @@ impl<S: Service> Service for Logging<S> {
 
 ---
 
-## 类型驱动组合（Type-Driven Composition）
+## 类型驱动组合（Type-Driven Composition） {#类型驱动组合type-driven-composition}
 
 > **来源: [Rust API Guidelines – Type Safety](https://rust-lang.github.io/api-guidelines/type-safety.html)**
 
@@ -367,7 +367,7 @@ impl Client<Configured> {
 
 ---
 
-## 零成本抽象示例
+## 零成本抽象示例 {#零成本抽象示例}
 
 > **来源: [Rust API Guidelines – Zero-Cost Abstractions](https://rust-lang.github.io/api-guidelines/performance.html)**
 
@@ -399,7 +399,7 @@ fn run_strategy<S: SortStrategy>(s: S, v: &mut [i32]) {
 
 ---
 
-## Crate 组合
+## Crate 组合 {#crate-组合}
 
 >
 
@@ -447,7 +447,7 @@ fn main() {
 
 ---
 
-## 组合反例
+## 组合反例 {#组合反例}
 
 >
 
@@ -465,7 +465,7 @@ fn main() {
 
 ---
 
-## 引用
+## 引用 {#引用}
 
 >
 
@@ -477,7 +477,7 @@ fn main() {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -487,7 +487,7 @@ fn main() {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -497,7 +497,7 @@ fn main() {
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -513,7 +513,7 @@ fn main() {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -525,7 +525,7 @@ fn main() {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -555,7 +555,7 @@ fn main() {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -566,7 +566,7 @@ fn main() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)**
 > **来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)**

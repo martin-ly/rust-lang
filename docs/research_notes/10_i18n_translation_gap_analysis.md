@@ -1,4 +1,4 @@
-# 国际化翻译版本差异检测与对齐指南
+# 国际化翻译版本差异检测与对齐指南 {#国际化翻译版本差异检测与对齐指南}
 
 > **概念族**: 权威来源对齐 / 国际化 / i18n
 > **内容分级**: [核心级]
@@ -11,7 +11,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [国际化翻译版本差异检测与对齐指南](#国际化翻译版本差异检测与对齐指南)
   - [目录](#目录)
@@ -31,13 +31,13 @@
 
 ---
 
-## 一、指南说明
+## 一、指南说明 {#一指南说明}
 
 本文档建立 `docs/research_notes/` 中核心概念与国际化多语言权威来源之间的**版本差异检测机制**，确保中文、日文等翻译版本与英文原版保持同步，并识别因翻译滞后导致的知识偏差。
 
 ---
 
-## 二、官方翻译版本现状
+## 二、官方翻译版本现状 {#二官方翻译版本现状}
 
 | 语言 | 来源 | 原版追踪 | 当前状态 | 项目映射 |
 |------|------|----------|----------|----------|
@@ -48,7 +48,7 @@
 
 ---
 
-## 三、版本差异检测维度
+## 三、版本差异检测维度 {#三版本差异检测维度}
 
 | 维度 | 检测内容 | 项目响应 |
 |------|----------|----------|
@@ -60,24 +60,24 @@
 
 ---
 
-## 四、自动化检测方法
+## 四、自动化检测方法 {#四自动化检测方法}
 
-### 4.1 基于 GitHub API 的版本对比
+### 4.1 基于 GitHub API 的版本对比 {#41-基于-github-api-的版本对比}
 
 ```bash
-# 获取原版与翻译仓库的最新 release/tag
+# 获取原版与翻译仓库的最新 release/tag {#获取原版与翻译仓库的最新-releasetag}
 curl -s https://api.github.com/repos/rust-lang/book/releases/latest | jq .tag_name
 curl -s https://api.github.com/repos/rust-lang-cn/book/releases/latest | jq .tag_name
 ```
 
-### 4.2 基于文件哈希的章节一致性检查
+### 4.2 基于文件哈希的章节一致性检查 {#42-基于文件哈希的章节一致性检查}
 
 ```bash
-# 对比原版与翻译的目录结构
+# 对比原版与翻译的目录结构 {#对比原版与翻译的目录结构}
 diff <(ls en/src) <(ls zh-CN/src)
 ```
 
-### 4.3 维护脚本
+### 4.3 维护脚本 {#43-维护脚本}
 
 已提供 `scripts/maintenance/check_i18n_translation_gap.py`：
 
@@ -96,7 +96,7 @@ python scripts/maintenance/check_i18n_translation_gap.py
 
 ---
 
-## 五、关键术语翻译一致性
+## 五、关键术语翻译一致性 {#五关键术语翻译一致性}
 
 | 英文术语 | 官方中文 | 官方日文 | 说明 |
 |----------|----------|----------|------|
@@ -114,7 +114,7 @@ python scripts/maintenance/check_i18n_translation_gap.py
 
 ---
 
-## 六、差异处理流程
+## 六、差异处理流程 {#六差异处理流程}
 
 ```text
 检测差异
@@ -134,7 +134,7 @@ python scripts/maintenance/check_i18n_translation_gap.py
 
 ---
 
-## 七、未覆盖缺口
+## 七、未覆盖缺口 {#七未覆盖缺口}
 
 1. 尚未实现 `check_i18n_translation_gap.py` 自动化脚本。
 2. 法语、德语、西班牙语等其他语言社区资源未建立版本跟踪。
@@ -142,7 +142,7 @@ python scripts/maintenance/check_i18n_translation_gap.py
 
 > **权威来源**: [TRPL 中文](https://kaisery.github.io/trpl-zh-cn/) | [TRPL 日文](https://doc.rust-jp.rs/book-ja/) | [rust-lang/book](https://github.com/rust-lang/book) | [rust-lang-cn/book](https://github.com/rust-lang-cn/book) | [rust-jp/book](https://github.com/rust-jp/book)
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
 - [国际化多语言来源对齐](10_i18n_source_alignment.md)
@@ -152,7 +152,7 @@ python scripts/maintenance/check_i18n_translation_gap.py
 
 ---
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 本对齐矩阵同时参考以下 P1 学术权威来源，以形成完整的官方-学术对照网络：
 
@@ -161,7 +161,7 @@ python scripts/maintenance/check_i18n_translation_gap.py
 - [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
 - [Aeneas](https://aeneas-verification.github.io/)
 
-## 社区权威参考
+## 社区权威参考 {#社区权威参考}
 
 - [Rust Book 中文](https://kaisery.github.io/trpl-zh-cn/)
 - [This Week in Rust](https://this-week-in-rust.org/)

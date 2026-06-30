@@ -1,4 +1,4 @@
-# 设计模式权威来源对齐矩阵
+# 设计模式权威来源对齐矩阵 {#设计模式权威来源对齐矩阵}
 
 > **概念族**: 权威来源对齐 / 设计模式
 > **内容分级**: [核心级]
@@ -11,7 +11,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [设计模式权威来源对齐矩阵](#设计模式权威来源对齐矩阵)
   - [目录](#目录)
@@ -27,13 +27,13 @@
 
 ---
 
-## 一、对齐说明
+## 一、对齐说明 {#一对齐说明}
 
 本文档将 `docs/research_notes/` 中的设计模式内容与权威来源建立映射，覆盖 GoF 经典模式、Rust 社区惯用法、企业级/分布式模式以及反模式。
 
 ---
 
-## 二、GoF 设计模式
+## 二、GoF 设计模式 {#二gof-设计模式}
 
 | GoF 模式 | 项目文档 | Rust 实现要点 |
 |----------|----------|---------------|
@@ -46,7 +46,7 @@
 
 ---
 
-## 三、Rust 惯用法与模式
+## 三、Rust 惯用法与模式 {#三rust-惯用法与模式}
 
 | 模式 | 来源 | 项目文档 | 备注 |
 |------|------|----------|------|
@@ -58,7 +58,7 @@
 
 ---
 
-## 四、企业级/分布式模式
+## 四、企业级/分布式模式 {#四企业级分布式模式}
 
 | 模式 | 来源 | 项目文档 | 备注 |
 |------|------|----------|------|
@@ -69,7 +69,7 @@
 
 ---
 
-## 五、反模式
+## 五、反模式 {#五反模式}
 
 | 反模式 | 来源 | 项目文档 | 备注 |
 |--------|------|----------|------|
@@ -79,7 +79,7 @@
 
 ---
 
-## 六、与项目文档的映射
+## 六、与项目文档的映射 {#六与项目文档的映射}
 
 | 项目文档 | 覆盖模式 | 权威来源 |
 |----------|----------|----------|
@@ -90,7 +90,7 @@
 
 ---
 
-## 七、未覆盖缺口
+## 七、未覆盖缺口 {#七未覆盖缺口}
 
 1. GoF 中 Structural Patterns（Composite、Decorator、Facade）与 Rust 的映射可细化。
 2. 并发模式（Thread Pool、Work Stealing）与 tokio/rayon 的对齐待扩展。
@@ -98,7 +98,7 @@
 
 > **权威来源**: [Refactoring Guru](https://refactoring.guru/design-patterns) | [GoF Book](https://en.wikipedia.org/wiki/Design_Patterns) | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | [microservices.io](https://microservices.io/) | [Release It!](https://pragprog.com/titles/mnee2/release-it-second-edition/)
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
 - [设计模式反例](software_design_theory/01_design_patterns_formal/60_design_patterns_counterexamples.md)
@@ -107,7 +107,7 @@
 
 ---
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 本对齐矩阵同时参考以下 P1 学术权威来源，以形成完整的官方-学术对照网络：
 

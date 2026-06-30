@@ -1,4 +1,4 @@
-# 所有权系统理论
+# 所有权系统理论 {#所有权系统理论}
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -13,7 +13,7 @@
 
 ---
 
-## 所有权的核心规则
+## 所有权的核心规则 {#所有权的核心规则}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -43,7 +43,7 @@ fn rule3() {
 }
 ```
 
-## 所有权与函数
+## 所有权与函数 {#所有权与函数}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -75,7 +75,7 @@ fn demo() {
 }
 ```
 
-## 相关研究笔记
+## 相关研究笔记 {#相关研究笔记-1}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -84,9 +84,9 @@ fn demo() {
 | 所有权模型 | 所有权系统的完整形式化模型 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
 | 借用检查器 | 借用检查的形式化证明 | [../../../research_notes/formal_methods/10_borrow_checker_proof.md](../../../research_notes/formal_methods/10_borrow_checker_proof.md) |
 
-## 更多代码示例
+## 更多代码示例 {#更多代码示例}
 
-### Copy 与 Clone 语义
+### Copy 与 Clone 语义 {#copy-与-clone-语义}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -135,7 +135,7 @@ fn custom_copy() {
 }
 ```
 
-### Drop 与资源管理
+### Drop 与资源管理 {#drop-与资源管理}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -184,7 +184,7 @@ fn raii_pattern() {
 }
 ```
 
-### 所有权与闭包
+### 所有权与闭包 {#所有权与闭包}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -240,7 +240,7 @@ fn call_fn_once<F: FnOnce()>(f: F) { f(); }
 
 ---
 
-## 相关研究笔记
+## 相关研究笔记 {#相关研究笔记-1}
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -262,7 +262,7 @@ fn call_fn_once<F: FnOnce()>(f: F) { f(); }
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 

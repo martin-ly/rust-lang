@@ -1,4 +1,4 @@
-# Google Rust 课程映射
+# Google Rust 课程映射 {#google-rust-课程映射}
 
 > **内容重叠提示**: 本文与 [`concept/00_meta/comprehensive_rust_mapping.md`](../../concept/00_meta/comprehensive_rust_mapping.md) 内容高度重叠。`concept/` 版本为项目权威主轨；本文保留作为学习映射。
 
@@ -10,7 +10,7 @@
 
 本文件映射 [Google Comprehensive Rust](https://google.github.io/comprehensive-rust/) 课程与本项目资源的对应关系。
 
-## 映射表
+## 映射表 {#映射表}
 
 | Google 课程章节 | 本项目对应资源 |
 |:---|:---|

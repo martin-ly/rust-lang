@@ -1,4 +1,4 @@
-# Rust 1.94 深度语义分析
+# Rust 1.94 深度语义分析 {#rust-194-深度语义分析}
 
 > **概念族**: 版本特性
 
@@ -24,7 +24,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -33,7 +33,7 @@
 >
 
 - [Rust 1.94 深度语义分析](#rust-194-深度语义分析)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. array\_windows - 数组窗口迭代的语义革命](#1-array_windows---数组窗口迭代的语义革命)
     - [1.1 形式化定义](#11-形式化定义)
     - [1.2 与 windows() 的语义对比](#12-与-windows-的语义对比)
@@ -82,7 +82,7 @@
     - [8.2 与 prelude 的兼容性](#82-与-prelude-的兼容性)
     - [8.3 形式化语义](#83-形式化语义)
   - [参考文献](#参考文献)
-  - [✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）](#-权威国际化来源对齐升级摘要rust-1960--edition-2024)
+  - [✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）](#权威国际化来源对齐升级摘要rust-1960-edition-2024)
     - [本次升级要点](#本次升级要点)
       - [新增 Rust 1.96.0 特性](#新增-rust-1960-特性)
       - [新增 Rust 1.95.0 特性](#新增-rust-1950-特性)
@@ -90,7 +90,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 1. array_windows - 数组窗口迭代的语义革命
+## 1. array_windows - 数组窗口迭代的语义革命 {#1-array_windows---数组窗口迭代的语义革命}
 
 >
 
@@ -100,7 +100,7 @@
 
 > **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html)**
 
-### 1.1 形式化定义
+### 1.1 形式化定义 {#11-形式化定义}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -120,7 +120,7 @@ where
 
 **语义**: 将动态切片 `&[T]` 转换为固定大小数组 `&[T; N]` 的迭代器。
 
-### 1.2 与 windows() 的语义对比
+### 1.2 与 windows() 的语义对比 {#12-与-windows-的语义对比}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -140,7 +140,7 @@ where
 
 | **迭代器类型** | `Windows<'_, T>` | `ArrayWindows<'_, T, N>` | 泛型约束更精确 |
 
-### 1.3 类型系统影响
+### 1.3 类型系统影响 {#13-类型系统影响}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -184,7 +184,7 @@ array_windows: &[T] → Iterator<Item = &[T; N]>  (N: 编译期常量)
 
 ```
 
-### 1.4 内存安全保证
+### 1.4 内存安全保证 {#14-内存安全保证}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -202,7 +202,7 @@ array_windows: &[T] → Iterator<Item = &[T; N]>  (N: 编译期常量)
 
 3. 模式匹配 `|[a, b, c]|` 编译期验证元素数量
 
-### 1.5 实际应用模式
+### 1.5 实际应用模式 {#15-实际应用模式}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -210,7 +210,7 @@ array_windows: &[T] → Iterator<Item = &[T; N]>  (N: 编译期常量)
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-#### 模式1: 滑动窗口检测
+#### 模式1: 滑动窗口检测 {#模式1-滑动窗口检测}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -272,7 +272,7 @@ mod tests {
 
 ```
 
-#### 模式2: 数值微分
+#### 模式2: 数值微分 {#模式2-数值微分}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -296,7 +296,7 @@ fn discrete_derivative(data: &[f64]) -> Vec<f64> {
 
 ```
 
-#### 模式3: 移动平均
+#### 模式3: 移动平均 {#模式3-移动平均}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -320,7 +320,7 @@ fn moving_average<const N: usize>(data: &[f64]) -> Vec<f64> {
 
 ```
 
-### 1.6 性能分析
+### 1.6 性能分析 {#16-性能分析}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -378,7 +378,7 @@ fn benchmark_windows(c: &mut Criterion) {
 
 ---
 
-## 2. ControlFlow - 控制流的形式化抽象
+## 2. ControlFlow - 控制流的形式化抽象 {#2-controlflow---控制流的形式化抽象}
 
 >
 
@@ -388,7 +388,7 @@ fn benchmark_windows(c: &mut Criterion) {
 
 > **来源: [Rust Reference - Range Expressions](https://doc.rust-lang.org/reference/expressions/range-expr.html)**
 
-### 2.1 类型定义与语义
+### 2.1 类型定义与语义 {#21-类型定义与语义}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -410,7 +410,7 @@ pub enum ControlFlow<B, C = ()> {
 
 - `Break(B)`: 提前终止，携带结果 `B`
 
-### 2.2 与 Option/Result 的语义对比
+### 2.2 与 Option/Result 的语义对比 {#22-与-optionresult-的语义对比}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -424,7 +424,7 @@ pub enum ControlFlow<B, C = ()> {
 
 | `ControlFlow<B, C>` | 控制流 (继续/终止) | 迭代控制 | 控制流Monad |
 
-### 2.3 代数性质
+### 2.3 代数性质 {#23-代数性质}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -472,11 +472,11 @@ where
 
 ```
 
-### 2.4 实际应用模式
+### 2.4 实际应用模式 {#24-实际应用模式}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
-#### 模式1: 提前搜索终止
+#### 模式1: 提前搜索终止 {#模式1-提前搜索终止}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -526,7 +526,7 @@ fn find_first_v2<T>(items: &[T], predicate: impl Fn(&T) -> bool) -> Option<&T> {
 
 ```
 
-#### 模式2: 带状态累积的提前终止
+#### 模式2: 带状态累积的提前终止 {#模式2-带状态累积的提前终止}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -558,7 +558,7 @@ fn validate_all<T, E>(
 
 ```
 
-#### 模式3: 嵌套迭代控制
+#### 模式3: 嵌套迭代控制 {#模式3-嵌套迭代控制}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -590,7 +590,7 @@ fn search_2d<T: Eq>(matrix: &[Vec<T>], target: &T) -> Option<(usize, usize)> {
 
 ```
 
-### 2.5 与异步结合
+### 2.5 与异步结合 {#25-与异步结合}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -642,7 +642,7 @@ where T: Clone
 
 ---
 
-## 3. LazyCell/LazyLock 新方法 - 延迟初始化的语义完善
+## 3. LazyCell/LazyLock 新方法 - 延迟初始化的语义完善 {#3-lazycelllazylock-新方法---延迟初始化的语义完善}
 
 >
 
@@ -656,11 +656,11 @@ where T: Clone
 
 > **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html)**
 
-### 3.1 API演进分析
+### 3.1 API演进分析 {#31-api演进分析}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
-#### 1.93 API (基础)
+#### 1.93 API (基础) {#193-api-基础}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -688,7 +688,7 @@ impl<T, F: FnOnce() -> T> Deref for LazyCell<T, F> {
 
 - 无法获取可变引用（不触发初始化）
 
-#### 1.94 API (完善)
+#### 1.94 API (完善) {#194-api-完善}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -716,7 +716,7 @@ impl<T, F> LazyCell<T, F> {
 
 ```
 
-### 3.2 语义分析
+### 3.2 语义分析 {#32-语义分析}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -732,11 +732,11 @@ impl<T, F> LazyCell<T, F> {
 
 | `force_mut()` | ✅ | `&mut T` | 首次访问+修改 |
 
-### 3.3 实际应用模式
+### 3.3 实际应用模式 {#33-实际应用模式}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
-#### 模式1: 条件初始化检查
+#### 模式1: 条件初始化检查 {#模式1-条件初始化检查}
 
 ```rust,ignore
 
@@ -818,7 +818,7 @@ fn load_from_disk() -> String {
 
 ```
 
-#### 模式2: 线程安全延迟初始化
+#### 模式2: 线程安全延迟初始化 {#模式2-线程安全延迟初始化}
 
 ```rust,ignore
 
@@ -858,7 +858,7 @@ fn record_metric(name: &str, value: f64) {
 
 ---
 
-## 4. Peekable 增强 - 迭代器组合子的语义扩展
+## 4. Peekable 增强 - 迭代器组合子的语义扩展 {#4-peekable-增强---迭代器组合子的语义扩展}
 
 >
 
@@ -868,7 +868,7 @@ fn record_metric(name: &str, value: f64) {
 
 > **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html)**
 
-### 4.1 next_if_map 语义
+### 4.1 next_if_map 语义 {#41-next_if_map-语义}
 
 >
 
@@ -894,7 +894,7 @@ impl<I: Iterator> Peekable<I> {
 
 **语义**: 条件消费 + 映射 的组合操作。
 
-### 4.2 与现有方法对比
+### 4.2 与现有方法对比 {#42-与现有方法对比}
 
 >
 
@@ -910,7 +910,7 @@ impl<I: Iterator> Peekable<I> {
 
 | `next_if_map(f)` | 条件消费+映射 | `Option<R>` |
 
-### 4.3 实际应用: 词法分析器
+### 4.3 实际应用: 词法分析器 {#43-实际应用-词法分析器}
 
 >
 
@@ -1000,7 +1000,7 @@ impl<I: Iterator<Item = char>> Lexer<I> {
 
 ---
 
-## 5. 数学常量 - 数值语义的精确化
+## 5. 数学常量 - 数值语义的精确化 {#5-数学常量---数值语义的精确化}
 
 >
 
@@ -1010,7 +1010,7 @@ impl<I: Iterator<Item = char>> Lexer<I> {
 
 > **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html)**
 
-### 5.1 新增常量
+### 5.1 新增常量 {#51-新增常量}
 
 >
 
@@ -1034,13 +1034,13 @@ pub const GOLDEN_RATIO: f64 = 1.6180339887498948482_f64;
 
 ```
 
-### 5.2 应用场景
+### 5.2 应用场景 {#52-应用场景}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-#### 欧拉-马歇罗尼常数
+#### 欧拉-马歇罗尼常数 {#欧拉-马歇罗尼常数}
 
 ```rust
 
@@ -1058,7 +1058,7 @@ fn harmonic_number_approx(n: u64) -> f64 {
 
 ```
 
-#### 黄金比例
+#### 黄金比例 {#黄金比例}
 
 ```rust
 
@@ -1120,7 +1120,7 @@ where F: Fn(f64) -> f64
 
 ---
 
-## 6. TOML 1.1 - 配置语义的现代化
+## 6. TOML 1.1 - 配置语义的现代化 {#6-toml-11---配置语义的现代化}
 
 >
 
@@ -1134,7 +1134,7 @@ where F: Fn(f64) -> f64
 
 > **来源: [Rust 1.94 Release Notes / Cargo Dev Cycle](https://blog.rust-lang.org/inside-rust/2026/02/18/this-development-cycle-in-cargo-1.94/)**
 
-### 6.1 关键变更
+### 6.1 关键变更 {#61-关键变更}
 
 >
 
@@ -1142,13 +1142,13 @@ where F: Fn(f64) -> f64
 
 ```toml
 
-# TOML 1.0: 内联表必须单行
+# TOML 1.0: 内联表必须单行 {#toml-10-内联表必须单行}
 
 serde = { version = "1.0", features = ["derive"] }
 
 
 
-# TOML 1.1: 支持多行内联表
+# TOML 1.1: 支持多行内联表 {#toml-11-支持多行内联表}
 
 serde = {
 
@@ -1166,7 +1166,7 @@ serde = {
 
 
 
-# TOML 1.1: 支持 include
+# TOML 1.1: 支持 include {#toml-11-支持-include}
 
 include = [
 
@@ -1178,7 +1178,7 @@ include = [
 
 ```
 
-### 6.2 Cargo.toml 应用
+### 6.2 Cargo.toml 应用 {#62-cargotoml-应用}
 
 >
 
@@ -1198,7 +1198,7 @@ rust-version = "1.96"
 
 
 
-# 多行依赖配置 (更清晰)
+# 多行依赖配置 (更清晰) {#多行依赖配置-更清晰}
 
 [dependencies]
 
@@ -1222,7 +1222,7 @@ serde = { version = "1.0", features = ["derive"] }
 
 
 
-# 条件包含配置文件
+# 条件包含配置文件 {#条件包含配置文件}
 
 include = [
 
@@ -1234,7 +1234,7 @@ include = [
 
 ---
 
-## 7. `core::range` - 范围类型的语义重构
+## 7. `core::range` - 范围类型的语义重构 {#7-corerange---范围类型的语义重构}
 
 >
 
@@ -1252,7 +1252,7 @@ include = [
 
 > **来源: [Rust Reference - Range Expressions](https://doc.rust-lang.org/reference/expressions/range-expr.html)**
 
-### 7.1 设计动机与语义
+### 7.1 设计动机与语义 {#71-设计动机与语义}
 
 旧 `std::ops::Range` 直接实现 `Iterator`，导致无法安全地实现 `Copy`（`Copy` Iterator 是常见 footgun）。RFC 3550 引入的新 `core::range` 类型通过**实现 `IntoIterator` 而非 `Iterator`** 解决这一矛盾。
 
@@ -1276,7 +1276,7 @@ RangeInclusive<Idx> = { x | start ≤ x ≤ end }
 
 - 公共 API 建议使用 `impl RangeBounds` 以同时接受新旧范围类型
 
-### 7.2 与 legacy 类型的语义对比
+### 7.2 与 legacy 类型的语义对比 {#72-与-legacy-类型的语义对比}
 
 | 维度 | `std::ops::Range` | `core::range::Range` |
 
@@ -1292,7 +1292,7 @@ RangeInclusive<Idx> = { x | start ≤ x ≤ end }
 
 | 推荐场景 | 历史代码 | 新代码、公共 API |
 
-### 7.3 实际语义影响
+### 7.3 实际语义影响 {#73-实际语义影响}
 
 ```rust
 
@@ -1316,7 +1316,7 @@ for i in r2 { print!("{}", i); } // 01234（仍可迭代）
 
 ---
 
-## 8. `assert_matches!` - 模式断言的诊断语义
+## 8. `assert_matches!` - 模式断言的诊断语义 {#8-assert_matches---模式断言的诊断语义}
 
 >
 
@@ -1330,7 +1330,7 @@ for i in r2 { print!("{}", i); } // 01234（仍可迭代）
 
 > **来源: [Rust Reference - Patterns](https://doc.rust-lang.org/reference/patterns.html)**
 
-### 8.1 语义定义
+### 8.1 语义定义 {#81-语义定义}
 
 `assert_matches!(value, pattern)` 在语义上等价于：
 
@@ -1344,7 +1344,7 @@ else { panic!("assertion failed: value = {:?}", value) }
 
 与 `assert!(matches!(value, pattern))` 相比，失败诊断输出 `value` 的完整 `Debug` 表示。
 
-### 8.2 与 prelude 的兼容性
+### 8.2 与 prelude 的兼容性 {#82-与-prelude-的兼容性}
 
 因与第三方 crate 中同名的 `assert_matches!` 宏冲突，该宏**未加入标准 prelude**，需要显式导入：
 
@@ -1354,7 +1354,7 @@ use core::assert_matches::assert_matches;
 
 ```
 
-### 8.3 形式化语义
+### 8.3 形式化语义 {#83-形式化语义}
 
 **定理 ASSERT-MATCH-1**: `assert_matches!(v, p)` 成功当且仅当存在替换 σ 使得 `v` 在 σ 下匹配 `p`。
 
@@ -1368,7 +1368,7 @@ assert_matches!(opt, Some(x) if x > 0);
 
 ---
 
-## 参考文献
+## 参考文献 {#参考文献}
 
 >
 
@@ -1416,7 +1416,7 @@ assert_matches!(opt, Some(x) if x > 0);
 
 ---
 
-## ✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）
+## ✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024） {#权威国际化来源对齐升级摘要rust-1960-edition-2024}
 
 > **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
 
@@ -1430,11 +1430,11 @@ assert_matches!(opt, Some(x) if x > 0);
 
 > **升级日期**: 2026-06-29
 
-### 本次升级要点
+### 本次升级要点 {#本次升级要点}
 
 本文档已完成权威国际化来源对齐升级，统一版本基准为 **Rust 1.96.0+ / Edition 2024**，同时保留 1.93/1.94 历史分析章节。
 
-#### 新增 Rust 1.96.0 特性
+#### 新增 Rust 1.96.0 特性 {#新增-rust-1960-特性}
 
 | 特性 | 来源 | 说明 |
 
@@ -1448,7 +1448,7 @@ assert_matches!(opt, Some(x) if x > 0);
 
 | WebAssembly 链接行为变更 | [Rust Blog 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) | 不再默认传递 `--allow-undefined` |
 
-#### 新增 Rust 1.95.0 特性
+#### 新增 Rust 1.95.0 特性 {#新增-rust-1950-特性}
 
 | 特性 | 来源 | 说明 |
 
@@ -1462,7 +1462,7 @@ assert_matches!(opt, Some(x) if x > 0);
 
 | `--remap-path-scope` | [Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | 控制路径重映射作用域 |
 
-#### 权威来源对齐
+#### 权威来源对齐 {#权威来源对齐}
 
 - Rust release notes（releases.rs）
 
@@ -1476,7 +1476,7 @@ assert_matches!(opt, Some(x) if x > 0);
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -1488,7 +1488,7 @@ assert_matches!(opt, Some(x) if x > 0);
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Rust Release Notes](https://doc.rust-lang.org/stable/releases.html)**
 

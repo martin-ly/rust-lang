@@ -1,4 +1,4 @@
-# 类型安全证明树 (Proof Tree: Type Safety)
+# 类型安全证明树 (Proof Tree: Type Safety) {#类型安全证明树-proof-tree-type-safety}
 
 > **概念族**: 形式化方法
 
@@ -22,7 +22,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -31,17 +31,17 @@
 >
 
 - [类型安全证明树 (Proof Tree: Type Safety)](#类型安全证明树-proof-tree-type-safety)
-  - [📑 目录](#-目录)
-  - [🌳 定理陈述](#-定理陈述)
-  - [🌿 证明树结构](#-证明树结构)
-  - [📋 关键引理](#-关键引理)
+  - [📑 目录](#目录)
+  - [🌳 定理陈述](#定理陈述)
+  - [🌿 证明树结构](#证明树结构)
+  - [📋 关键引理](#关键引理)
     - [Lemma 1: 替换保持类型 (Substitution)](#lemma-1-替换保持类型-substitution)
     - [Lemma 2: 模式匹配保持类型](#lemma-2-模式匹配保持类型)
-  - [🎯 Rust 代码验证](#-rust-代码验证)
-  - [📊 类型系统规则](#-类型系统规则)
-  - [📊 证明复杂度](#-证明复杂度)
-  - [🔗 相关证明](#-相关证明)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🎯 Rust 代码验证](#rust-代码验证)
+  - [📊 类型系统规则](#类型系统规则)
+  - [📊 证明复杂度](#证明复杂度)
+  - [🔗 相关证明](#相关证明)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -49,7 +49,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🌳 定理陈述
+## 🌳 定理陈述 {#定理陈述}
 
 >
 
@@ -69,7 +69,7 @@
 
 ---
 
-## 🌿 证明树结构
+## 🌿 证明树结构 {#证明树结构}
 
 >
 
@@ -167,13 +167,13 @@ T-TY1: 类型安全 (Progress + Preservation)
 
 ---
 
-## 📋 关键引理
+## 📋 关键引理 {#关键引理}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Lemma 1: 替换保持类型 (Substitution)
+### Lemma 1: 替换保持类型 (Substitution) {#lemma-1-替换保持类型-substitution}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -219,7 +219,7 @@ Proof (结构归纳):
 
 ```
 
-### Lemma 2: 模式匹配保持类型
+### Lemma 2: 模式匹配保持类型 {#lemma-2-模式匹配保持类型}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -253,7 +253,7 @@ Proof:
 
 ---
 
-## 🎯 Rust 代码验证
+## 🎯 Rust 代码验证 {#rust-代码验证}
 
 >
 
@@ -301,7 +301,7 @@ fn type_safety_theorem() {
 
 ---
 
-## 📊 类型系统规则
+## 📊 类型系统规则 {#类型系统规则}
 
 >
 
@@ -351,7 +351,7 @@ fn type_safety_theorem() {
 
 ---
 
-## 📊 证明复杂度
+## 📊 证明复杂度 {#证明复杂度}
 
 >
 
@@ -373,7 +373,7 @@ fn type_safety_theorem() {
 
 ---
 
-## 🔗 相关证明
+## 🔗 相关证明 {#相关证明}
 
 >
 
@@ -387,7 +387,7 @@ fn type_safety_theorem() {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -397,13 +397,13 @@ fn type_safety_theorem() {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -419,7 +419,7 @@ fn type_safety_theorem() {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -429,7 +429,7 @@ fn type_safety_theorem() {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -461,7 +461,7 @@ fn type_safety_theorem() {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -473,7 +473,7 @@ fn type_safety_theorem() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

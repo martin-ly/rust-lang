@@ -1,4 +1,4 @@
-# 无锁数据结构指南
+# 无锁数据结构指南 {#无锁数据结构指南}
 
 > **内容分级**: [核心级]
 >
@@ -14,10 +14,10 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 - [无锁数据结构指南](#无锁数据结构指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、核心概念](#一核心概念)
     - [1.1 什么是“无锁”](#11-什么是无锁)
     - [1.2 为什么需要内存回收](#12-为什么需要内存回收)
@@ -25,7 +25,7 @@
     - [2.1 算法描述](#21-算法描述)
     - [2.2 Rust 实现要点](#22-rust-实现要点)
     - [2.3 复杂度](#23-复杂度)
-  - [三、Michael-Scott Queue](#三michael-scott-queue)
+  - [三、Michael-Scott Queue](#三michael-scott-queue-1)
     - [三、Michael-Scott Queue](#三michael-scott-queue-1)
     - [3.1 算法描述](#31-算法描述)
     - [3.2 哨兵节点](#32-哨兵节点)
@@ -51,9 +51,9 @@
 
 ---
 
-## 一、核心概念
+## 一、核心概念 {#一核心概念}
 
-### 1.1 什么是“无锁”
+### 1.1 什么是“无锁” {#11-什么是无锁}
 
 无锁（lock-free）数据结构保证：**至少有一个线程**在有限步骤内完成操作，即使其他线程被抢占或崩溃。它不同于：
 
@@ -65,7 +65,7 @@
 
 > **来源**: [Rust Atomics and Locks](https://marabos.nl/atomics/) §2.3
 
-### 1.2 为什么需要内存回收
+### 1.2 为什么需要内存回收 {#12-为什么需要内存回收}
 
 在无锁结构中，一个节点被逻辑删除后，其他线程可能仍持有指向它的指针。若立即 `free`，则会产生**悬垂指针（dangling pointer）**。因此需要：
 
@@ -75,16 +75,16 @@
 
 ---
 
-## 二、Treiber Stack
+## 二、Treiber Stack {#二treiber-stack}
 
-### 2.1 算法描述
+### 2.1 算法描述 {#21-算法描述}
 
 Treiber Stack 是无锁 LIFO 栈的经典实现：
 
 1. `push(x)`：分配新节点 `n`，令 `n.next = head`，然后 CAS `head = n`。
 2. `pop()`：读取 `head`，若为空返回 `None`；否则 CAS `head = head.next`，返回 `head.data`。
 
-### 2.2 Rust 实现要点
+### 2.2 Rust 实现要点 {#22-rust-实现要点}
 
 ```rust
 // 代码锚点: crates/c08_algorithms/src/data_structure/lock_free_stack.rs
@@ -96,29 +96,29 @@ pub struct LockFreeStack<T> {
 - 节点使用 `Option<T>` 存储数据，弹出时 `take()` 避免重复释放。
 - 使用 `crossbeam-epoch` 的 `Guard` 保护读取，成功 CAS 后通过 `defer_unchecked` 延迟释放节点。
 
-### 2.3 复杂度
+### 2.3 复杂度 {#23-复杂度}
 
 - 时间：均摊 **O(1)**。
 - 空间：每个元素一个节点 + epoch 回收延迟。
 
 ---
 
-## 三、Michael-Scott Queue
+## 三、Michael-Scott Queue {#三michael-scott-queue-1}
 
-### 三、Michael-Scott Queue
+### 三、Michael-Scott Queue {#三michael-scott-queue-1}
 
-### 3.1 算法描述
+### 3.1 算法描述 {#31-算法描述}
 
 Michael-Scott Queue 是无锁 FIFO 队列：
 
 1. `enqueue(x)`：分配新节点 `n`；循环找到真实尾节点 `tail`（处理 lagging tail）；CAS `tail.next = n`；尝试 CAS `tail = n`。
 2. `dequeue()`：读取 `head` 与 `head.next`；若 `head == tail` 且 `next` 为空，则队列空；否则 CAS `head = next`，返回 `next.data`。
 
-### 3.2 哨兵节点
+### 3.2 哨兵节点 {#32-哨兵节点}
 
 使用一个初始哨兵节点，保证 `head` 与 `tail` 永不为空，简化空队列判断。
 
-### 3.3 Rust 实现要点
+### 3.3 Rust 实现要点 {#33-rust-实现要点}
 
 ```rust
 // 代码锚点: crates/c08_algorithms/src/data_structure/lock_free_queue.rs
@@ -131,16 +131,16 @@ pub struct LockFreeQueue<T> {
 - `enqueue` 需要帮助推进落后的 `tail`（helping 机制）。
 - `dequeue` 移动 `head` 后，旧哨兵节点与新头节点的数据都需要延迟释放。
 
-### 3.4 复杂度
+### 3.4 复杂度 {#34-复杂度}
 
 - 时间：均摊 **O(1)**。
 - 空间：每个元素一个节点 + 一个哨兵节点 + 回收延迟。
 
 ---
 
-## 四、Hazard Pointer 与 Epoch-Based Reclamation
+## 四、Hazard Pointer 与 Epoch-Based Reclamation {#四hazard-pointer-与-epoch-based-reclamation}
 
-### 4.1 Hazard Pointer 核心思想
+### 4.1 Hazard Pointer 核心思想 {#41-hazard-pointer-核心思想}
 
 每个线程维护一组“危险指针”：
 
@@ -148,7 +148,7 @@ pub struct LockFreeQueue<T> {
 2. 再次验证该节点仍属于数据结构。
 3. 释放内存前，扫描所有 hazard records，确认没有线程保护该指针。
 
-### 4.2 Epoch-Based Reclamation 桥接
+### 4.2 Epoch-Based Reclamation 桥接 {#42-epoch-based-reclamation-桥接}
 
 `crossbeam-epoch` 实现了与 Hazard Pointer 等价的安全保证：
 
@@ -163,7 +163,7 @@ pub struct HazardPointer {
 - `Guard` drop：自动 unpin，等效于清除 hazard pointer。
 - `defer_unchecked`：将节点延迟到安全 epoch 释放。
 
-### 4.3 选择桥接而非从零实现的原因
+### 4.3 选择桥接而非从零实现的原因 {#43-选择桥接而非从零实现的原因}
 
 生产级 Hazard Pointer 需要处理：
 
@@ -175,9 +175,9 @@ pub struct HazardPointer {
 
 ---
 
-## 五、ABA 问题
+## 五、ABA 问题 {#五aba-问题}
 
-### 5.1 问题定义
+### 5.1 问题定义 {#51-问题定义}
 
 ABA 问题：
 
@@ -187,7 +187,7 @@ ABA 问题：
 
 在 Treiber Stack 中，ABA 可能导致 `next` 指针指向已释放或错误节点。
 
-### 5.2 解决方案
+### 5.2 解决方案 {#52-解决方案}
 
 | 方案 | 原理 | 适用场景 |
 |------|------|----------|
@@ -202,9 +202,9 @@ ABA 问题：
 
 ---
 
-## 六、内存序选择
+## 六、内存序选择 {#六内存序选择}
 
-### 6.1 关键原则
+### 6.1 关键原则 {#61-关键原则}
 
 无锁算法中，内存序决定操作的可见性顺序：
 
@@ -216,7 +216,7 @@ ABA 问题：
 | `AcqRel` | 同时具有 Acquire 与 Release | CAS 读写同一原子变量 |
 | `SeqCst` | 全局顺序 | 通常不需要，性能代价高 |
 
-### 6.2 本实现的选择
+### 6.2 本实现的选择 {#62-本实现的选择}
 
 ```rust
 // push: 发布新节点
@@ -235,9 +235,9 @@ let next = head_ref.next.load(Acquire, guard);
 
 ---
 
-## 七、反例与边界
+## 七、反例与边界 {#七反例与边界}
 
-### 7.1 未实现内存回收的 Treiber Stack
+### 7.1 未实现内存回收的 Treiber Stack {#71-未实现内存回收的-treiber-stack}
 
 ```rust
 // 反例：弹出后立即 Box::from_raw 释放
@@ -251,7 +251,7 @@ let data = unsafe {
 
 **正确做法**：使用 `crossbeam-epoch` 延迟释放。
 
-### 7.2 错误内存序
+### 7.2 错误内存序 {#72-错误内存序}
 
 ```rust
 // 反例：使用 Relaxed 读取 head
@@ -262,7 +262,7 @@ let head = self.head.load(Relaxed, guard);
 
 **正确做法**：读取共享指针使用 `Acquire`。
 
-### 7.3 忽略 lagging tail
+### 7.3 忽略 lagging tail {#73-忽略-lagging-tail}
 
 ```rust
 // 反例：MS Queue 中直接 CAS tail.next，不帮助推进 tail
@@ -272,7 +272,7 @@ let head = self.head.load(Relaxed, guard);
 
 **正确做法**：enqueue/dequeue 都提供帮助推进逻辑。
 
-### 7.4 弹出后访问已释放数据
+### 7.4 弹出后访问已释放数据 {#74-弹出后访问已释放数据}
 
 ```rust
 // 反例：pop 中先 defer_delete，再读取数据
@@ -284,7 +284,7 @@ let head = self.head.load(Relaxed, guard);
 
 ---
 
-## 八、代码锚点
+## 八、代码锚点 {#八代码锚点}
 
 | 概念 | 文件 | 关键类型/函数 |
 |------|------|---------------|
@@ -296,7 +296,7 @@ let head = self.head.load(Relaxed, guard);
 
 ---
 
-## 九、权威来源索引
+## 九、权威来源索引 {#九权威来源索引}
 
 | 级别 | 来源 | 链接 | 对齐内容 |
 |------|------|------|----------|

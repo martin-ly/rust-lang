@@ -1,4 +1,4 @@
-# Rust形式化方法面试题集锦
+# Rust形式化方法面试题集锦 {#rust形式化方法面试题集锦}
 
 > **概念族**: 学习资源
 
@@ -22,7 +22,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -31,37 +31,37 @@
 >
 
 - [Rust形式化方法面试题集锦](#rust形式化方法面试题集锦)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [使用指南](#使用指南)
   - [一、所有权与借用 (20题)](#一所有权与借用-20题)
-    - [⭐ 基础题](#-基础题)
-    - [⭐⭐ 进阶题](#-进阶题)
-    - [⭐⭐⭐ 高级题](#-高级题)
-    - [⭐⭐⭐⭐ 专家题](#-专家题)
+    - [⭐ 基础题](#基础题-2)
+    - [⭐⭐ 进阶题](#进阶题-4)
+    - [⭐⭐⭐ 高级题](#高级题-4)
+    - [⭐⭐⭐⭐ 专家题](#专家题-3)
   - [二、类型系统 (15题)](#二类型系统-15题)
-    - [⭐ 基础题](#-基础题-1)
-    - [⭐⭐ 进阶题](#-进阶题-1)
-    - [⭐⭐⭐ 高级题](#-高级题-1)
-    - [⭐⭐⭐⭐ 专家题](#-专家题-1)
+    - [⭐ 基础题](#基础题-2)
+    - [⭐⭐ 进阶题](#进阶题-4)
+    - [⭐⭐⭐ 高级题](#高级题-4)
+    - [⭐⭐⭐⭐ 专家题](#专家题-3)
   - [三、并发与异步 (15题)](#三并发与异步-15题)
-    - [⭐ 基础题](#-基础题-2)
-    - [⭐⭐ 进阶题](#-进阶题-2)
-    - [⭐⭐⭐ 高级题](#-高级题-2)
-    - [⭐⭐⭐⭐ 专家题](#-专家题-2)
+    - [⭐ 基础题](#基础题-2)
+    - [⭐⭐ 进阶题](#进阶题-4)
+    - [⭐⭐⭐ 高级题](#高级题-4)
+    - [⭐⭐⭐⭐ 专家题](#专家题-3)
   - [四、形式化方法 (10题)](#四形式化方法-10题)
-    - [⭐⭐ 进阶题](#-进阶题-3)
-    - [⭐⭐⭐ 高级题](#-高级题-3)
+    - [⭐⭐ 进阶题](#进阶题-4)
+    - [⭐⭐⭐ 高级题](#高级题-4)
   - [五、分布式与工作流 (10题)](#五分布式与工作流-10题)
-    - [⭐⭐ 进阶题](#-进阶题-4)
-    - [⭐⭐⭐ 高级题](#-高级题-4)
+    - [⭐⭐ 进阶题](#进阶题-4)
+    - [⭐⭐⭐ 高级题](#高级题-4)
   - [六、系统设计题 (5题)](#六系统设计题-5题)
-    - [⭐⭐⭐⭐ 专家题](#-专家题-3)
+    - [⭐⭐⭐⭐ 专家题](#专家题-3)
   - [附录：自我评估](#附录自我评估)
     - [初学者 (答对15-25题)](#初学者-答对15-25题)
     - [进阶者 (答对25-35题)](#进阶者-答对25-35题)
     - [高级 (答对35-45题)](#高级-答对35-45题)
     - [专家 (答对45-50题)](#专家-答对45-50题)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -70,7 +70,7 @@
   - [权威来源索引](#权威来源索引)
   - [社区权威参考](#社区权威参考)
 
-## 使用指南
+## 使用指南 {#使用指南}
 
 >
 
@@ -88,13 +88,13 @@
 
 ---
 
-## 一、所有权与借用 (20题)
+## 一、所有权与借用 (20题) {#一所有权与借用-20题}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### ⭐ 基础题
+### ⭐ 基础题 {#基础题-2}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -188,7 +188,7 @@ let y = &x;
 
 ---
 
-### ⭐⭐ 进阶题
+### ⭐⭐ 进阶题 {#进阶题-4}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -286,7 +286,7 @@ println!("{}", r1);
 
 ---
 
-### ⭐⭐⭐ 高级题
+### ⭐⭐⭐ 高级题 {#高级题-4}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -382,7 +382,7 @@ let old = mem::replace(&mut a, new);  // a=new，返回旧值
 
 ---
 
-### ⭐⭐⭐⭐ 专家题
+### ⭐⭐⭐⭐ 专家题 {#专家题-3}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -470,13 +470,13 @@ drop: `if count.fetch_sub(1, Release) == 1 { 释放 }`
 
 ---
 
-## 二、类型系统 (15题)
+## 二、类型系统 (15题) {#二类型系统-15题}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### ⭐ 基础题
+### ⭐ 基础题 {#基础题-2}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -542,7 +542,7 @@ trait Iterator {
 
 ---
 
-### ⭐⭐ 进阶题
+### ⭐⭐ 进阶题 {#进阶题-4}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -604,7 +604,7 @@ F: for<'a> Fn(&'a str) -> &'a str
 
 ---
 
-### ⭐⭐⭐ 高级题
+### ⭐⭐⭐ 高级题 {#高级题-4}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -676,7 +676,7 @@ assert_eq!(size_of::<Option<&i32>>(), size_of::<&i32>());
 
 ---
 
-### ⭐⭐⭐⭐ 专家题
+### ⭐⭐⭐⭐ 专家题 {#专家题-3}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -714,13 +714,13 @@ let ptr: *const MySlice;  // 包含长度信息
 
 ---
 
-## 三、并发与异步 (15题)
+## 三、并发与异步 (15题) {#三并发与异步-15题}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### ⭐ 基础题
+### ⭐ 基础题 {#基础题-2}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -776,7 +776,7 @@ let ptr: *const MySlice;  // 包含长度信息
 
 ---
 
-### ⭐⭐ 进阶题
+### ⭐⭐ 进阶题 {#进阶题-4}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -850,7 +850,7 @@ enum FooFuture {
 
 ---
 
-### ⭐⭐⭐ 高级题
+### ⭐⭐⭐ 高级题 {#高级题-4}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -934,7 +934,7 @@ tokio::select! {
 
 ---
 
-### ⭐⭐⭐⭐ 专家题
+### ⭐⭐⭐⭐ 专家题 {#专家题-3}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -988,13 +988,13 @@ impl Runtime {
 
 ---
 
-## 四、形式化方法 (10题)
+## 四、形式化方法 (10题) {#四形式化方法-10题}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### ⭐⭐ 进阶题
+### ⭐⭐ 进阶题 {#进阶题-4}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -1042,7 +1042,7 @@ impl Runtime {
 
 ---
 
-### ⭐⭐⭐ 高级题
+### ⭐⭐⭐ 高级题 {#高级题-4}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -1082,13 +1082,13 @@ impl Runtime {
 
 ---
 
-## 五、分布式与工作流 (10题)
+## 五、分布式与工作流 (10题) {#五分布式与工作流-10题}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### ⭐⭐ 进阶题
+### ⭐⭐ 进阶题 {#进阶题-4}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -1140,7 +1140,7 @@ impl Runtime {
 
 ---
 
-### ⭐⭐⭐ 高级题
+### ⭐⭐⭐ 高级题 {#高级题-4}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -1178,13 +1178,13 @@ impl Runtime {
 
 ---
 
-## 六、系统设计题 (5题)
+## 六、系统设计题 (5题) {#六系统设计题-5题}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### ⭐⭐⭐⭐ 专家题
+### ⭐⭐⭐⭐ 专家题 {#专家题-3}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -1456,13 +1456,13 @@ trait EventStore {
 
 ---
 
-## 附录：自我评估
+## 附录：自我评估 {#附录自我评估}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 初学者 (答对15-25题)
+### 初学者 (答对15-25题) {#初学者-答对15-25题}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -1472,7 +1472,7 @@ trait EventStore {
 
 - 建议继续学习并发
 
-### 进阶者 (答对25-35题)
+### 进阶者 (答对25-35题) {#进阶者-答对25-35题}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -1482,7 +1482,7 @@ trait EventStore {
 
 - 建议学习形式化方法
 
-### 高级 (答对35-45题)
+### 高级 (答对35-45题) {#高级-答对35-45题}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -1492,7 +1492,7 @@ trait EventStore {
 
 - 建议参与开源
 
-### 专家 (答对45-50题)
+### 专家 (答对45-50题) {#专家-答对45-50题}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -1512,7 +1512,7 @@ trait EventStore {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -1522,13 +1522,13 @@ trait EventStore {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -1544,7 +1544,7 @@ trait EventStore {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -1556,7 +1556,7 @@ trait EventStore {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -1594,7 +1594,7 @@ trait EventStore {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -1606,7 +1606,7 @@ trait EventStore {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -1660,7 +1660,7 @@ trait EventStore {
 
 ---
 
-## 社区权威参考
+## 社区权威参考 {#社区权威参考}
 
 - [Rust 中文社区](https://rustcc.cn/)
 - [This Week in Rust](https://this-week-in-rust.org/)

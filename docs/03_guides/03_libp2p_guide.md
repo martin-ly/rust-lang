@@ -1,4 +1,4 @@
-# libp2p 指南
+# libp2p 指南 {#libp2p-指南}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
@@ -12,16 +12,16 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [libp2p 指南](#libp2p-指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [核心概念](#核心概念)
-    - [Multiaddr —— 统一的地址格式](#multiaddr--统一的地址格式)
-    - [PeerId —— 去中心化身份](#peerid--去中心化身份)
+    - [Multiaddr —— 统一的地址格式](#multiaddr-统一的地址格式)
+    - [PeerId —— 去中心化身份](#peerid-去中心化身份)
     - [核心协议](#核心协议)
   - [决策树](#决策树)
   - [代码示例](#代码示例)
@@ -35,7 +35,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 概述
+## 概述 {#概述}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)** · **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** ✅
 
@@ -58,11 +58,11 @@ libp2p 协议栈
 
 ---
 
-## 核心概念
+## 核心概念 {#核心概念}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### Multiaddr —— 统一的地址格式
+### Multiaddr —— 统一的地址格式 {#multiaddr-统一的地址格式}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -74,7 +74,7 @@ libp2p 使用 **multiaddr** 统一描述网络地址：
 /dns4/bootstrap.libp2p.io/tcp/443/wss  → WebSocket Secure
 ```
 
-### PeerId —— 去中心化身份
+### PeerId —— 去中心化身份 {#peerid-去中心化身份}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -84,7 +84,7 @@ PeerId = multihash(public_key)
 
 每个 libp2p 节点通过加密密钥对标识，无需中心化注册。
 
-### 核心协议
+### 核心协议 {#核心协议}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -99,7 +99,7 @@ PeerId = multihash(public_key)
 
 ---
 
-## 决策树
+## 决策树 {#决策树}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -119,11 +119,11 @@ PeerId = multihash(public_key)
 
 ---
 
-## 代码示例
+## 代码示例 {#代码示例}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 基础节点（rust-libp2p）
+### 基础节点（rust-libp2p） {#基础节点rust-libp2p}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -158,7 +158,7 @@ fn create_node() -> Result<Swarm<Ping>, Box<dyn std::error::Error>> {
 }
 ```
 
-### GossipSub 发布/订阅
+### GossipSub 发布/订阅 {#gossipsub-发布订阅}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -207,7 +207,7 @@ match event {
 }
 ```
 
-### Kademlia DHT 内容路由
+### Kademlia DHT 内容路由 {#kademlia-dht-内容路由}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -246,7 +246,7 @@ kademlia.get_record(Key::from(vec![1, 2, 3]));
 
 ---
 
-## 与中心化方案的对比
+## 与中心化方案的对比 {#与中心化方案的对比}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -261,7 +261,7 @@ kademlia.get_record(Key::from(vec![1, 2, 3]));
 
 ---
 
-## Rust 生态状态
+## Rust 生态状态 {#rust-生态状态}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -274,7 +274,7 @@ kademlia.get_record(Key::from(vec![1, 2, 3]));
 
 ---
 
-## 限制
+## 限制 {#限制}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -288,7 +288,7 @@ kademlia.get_record(Key::from(vec![1, 2, 3]));
 
 ---
 
-## 参考
+## 参考 {#参考}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -307,7 +307,7 @@ kademlia.get_record(Key::from(vec![1, 2, 3]));
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -315,7 +315,7 @@ kademlia.get_record(Key::from(vec![1, 2, 3]));
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Peer-to-Peer](https://en.wikipedia.org/wiki/Peer_to_Peer)**
 

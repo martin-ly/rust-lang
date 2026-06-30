@@ -1,20 +1,20 @@
 > **归档提示**: 本文档内容为研究笔记，自 2026-03 前后未再更新，于 2026-06-25 标记为归档参考。核心结论请优先查阅 `concept/` 与 `knowledge/`。
 > **概念族**: 安全 / 验证
 
-# Rust 安全与非安全全面论证与分析
+# Rust 安全与非安全全面论证与分析 {#rust-安全与非安全全面论证与分析}
 
 > **内容分级**: [归档级]
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 安全与非安全全面论证与分析](#rust-安全与非安全全面论证与分析)
-  - [📑 目录](#-目录)
-  - [🎯 文档宗旨 {#-文档宗旨}](#-文档宗旨--文档宗旨)
+  - [📑 目录](#目录)
+  - [🎯 文档宗旨](#文档宗旨)
   - [一、安全与非安全定义与边界](#一安全与非安全定义与边界)
     - [1.1 形式化定义](#11-形式化定义)
     - [1.2 边界图示](#12-边界图示)
@@ -38,12 +38,12 @@
   - [六、安全 vs 非安全多维矩阵](#六安全-vs-非安全多维矩阵)
     - [6.1 按维度](#61-按维度)
     - [6.2 按操作类型](#62-按操作类型)
-  - [📚 相关文档 {#-相关文档}](#-相关文档--相关文档)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [📚 相关文档](#相关文档)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
+      - [相关文档](#相关文档-1)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -55,7 +55,7 @@
 
 ---
 
-## 🎯 文档宗旨 {#-文档宗旨}
+## 🎯 文档宗旨 {#文档宗旨}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -69,11 +69,11 @@
 
 ---
 
-## 一、安全与非安全定义与边界
+## 一、安全与非安全定义与边界 {#一安全与非安全定义与边界}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1.1 形式化定义
+### 1.1 形式化定义 {#11-形式化定义}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -88,7 +88,7 @@ unsafe Rust 指包含 `unsafe` 块、调用 `unsafe fn` 或实现 `unsafe trait`
 **定义 1.3（安全边界）**
 安全边界 = 编译器可静态验证的保证范围。跨越边界即需程序员契约。
 
-### 1.2 边界图示
+### 1.2 边界图示 {#12-边界图示}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -117,7 +117,7 @@ unsafe Rust 指包含 `unsafe` 块、调用 `unsafe fn` 或实现 `unsafe trait`
 └──────────────────────────────────────────────────────────┘
 ```
 
-### 1.3 为何需要 unsafe？
+### 1.3 为何需要 unsafe？ {#13-为何需要-unsafe}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -135,11 +135,11 @@ unsafe Rust 指包含 `unsafe` 块、调用 `unsafe fn` 或实现 `unsafe trait`
 
 ---
 
-## 二、安全保证的形式化论证
+## 二、安全保证的形式化论证 {#二安全保证的形式化论证}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 安全保证定理汇总
+### 2.1 安全保证定理汇总 {#21-安全保证定理汇总}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -162,7 +162,7 @@ unsafe Rust 指包含 `unsafe` 块、调用 `unsafe fn` 或实现 `unsafe trait`
 
 **推论 SU-C1**：Safe 代码不触发 UB 当且仅当未调用违反契约的 unsafe；由 Def 1.1 与各 unsafe 契约。
 
-### 2.2 安全保证依赖链
+### 2.2 安全保证依赖链 {#22-安全保证依赖链}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -184,11 +184,11 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 ---
 
-## 三、unsafe 契约体系
+## 三、unsafe 契约体系 {#三unsafe-契约体系}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 3.1 契约形式
+### 3.1 契约形式 {#31-契约形式}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -199,7 +199,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 - $P$：前置条件（程序员必须保证）
 - $Q$：后置条件（编译器信任）
 
-### 3.2 典型 unsafe 操作契约表
+### 3.2 典型 unsafe 操作契约表 {#32-典型-unsafe-操作契约表}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -219,7 +219,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 | `Pin::new`（非 Unpin） | 调用者不移动 | 位置稳定 | - |
 | `Pin::get_unchecked_mut` | 满足 Unpin 或投影安全 | 可变引用 | - |
 
-### 3.3 契约违反后果
+### 3.3 契约违反后果 {#33-契约违反后果}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -227,11 +227,11 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 ---
 
-## 四、UB 分类与反例
+## 四、UB 分类与反例 {#四ub-分类与反例}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 4.1 UB 分类
+### 4.1 UB 分类 {#41-ub-分类}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -243,7 +243,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 | **FFI UB** | 外部 ABI 违反 | 错误 extern 签名、abi 不匹配 |
 | **未指定** | 实现定义 | 有符号溢出（release 可 wrap） |
 
-### 4.2 反例表
+### 4.2 反例表 {#42-反例表}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -257,7 +257,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 | 双重可变借用 | 借用规则 | 编译错误（安全子集内） |
 | 返回局部引用 | 生命周期 | 编译错误（安全子集内） |
 
-### 4.3 1.93 相关变更
+### 4.3 1.93 相关变更 {#43-193-相关变更}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -269,17 +269,17 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 ---
 
-## 五、安全抽象论证
+## 五、安全抽象论证 {#五安全抽象论证}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 5.1 定义
+### 5.1 定义 {#51-定义}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
 **安全抽象**：内部使用 unsafe，对外仅暴露安全 API，且若调用者仅用安全 API，则不会触发 UB。
 
-### 5.2 论证结构
+### 5.2 论证结构 {#52-论证结构}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -288,7 +288,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 3. **unsafe 正确性**：所有 unsafe 均在前置条件满足下调用
 4. **结论**：安全抽象正确 ⟺ 不变式 + 边界 + 正确 unsafe
 
-### 5.3 典型安全抽象
+### 5.3 典型安全抽象 {#53-典型安全抽象}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -300,7 +300,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 | `Mutex<T>` | 锁、内部可变 | 互斥 | lock、try_lock |
 | `String` | 与 Vec 类似 | UTF-8 | 所有 &str 方法 |
 
-### 5.4 安全抽象决策树
+### 5.4 安全抽象决策树 {#54-安全抽象决策树}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -317,11 +317,11 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 ---
 
-## 六、安全 vs 非安全多维矩阵
+## 六、安全 vs 非安全多维矩阵 {#六安全-vs-非安全多维矩阵}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 6.1 按维度
+### 6.1 按维度 {#61-按维度}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -333,7 +333,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 | **引用** | 生命周期、NLL | 裸指针无生命周期 | 引用有效性 vs 手动保证 |
 | **FFI** | 无 | extern、extern "C" | 无 vs 完全手动 |
 
-### 6.2 按操作类型
+### 6.2 按操作类型 {#62-按操作类型}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -350,7 +350,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 ---
 
-## 📚 相关文档 {#-相关文档}
+## 📚 相关文档 {#相关文档}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -371,19 +371,19 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -392,7 +392,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -400,7 +400,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 - ✅ 兼容Edition 2024
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档-1}
 
 - Rust 1.94 迁移指南
 - Rust 1.94 特性速查
@@ -424,7 +424,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -433,7 +433,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 > **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**

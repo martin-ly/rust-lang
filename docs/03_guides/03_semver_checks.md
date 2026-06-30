@@ -9,7 +9,7 @@
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 SemVer 2.0.0、cargo-semver-checks、Rust API Guidelines 来源标注 [来源: Authority Source Sprint Batch 8]
 
-# cargo-semver-checks 集成指南
+# cargo-semver-checks 集成指南 {#cargo-semver-checks-集成指南}
 
 > **Bloom 层级**: L2-L3 (理解/应用)
 
@@ -18,12 +18,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [cargo-semver-checks 集成指南](#cargo-semver-checks-集成指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 什么是 cargo-semver-checks？](#1-什么是-cargo-semver-checks)
     - [为什么需要它？](#为什么需要它)
     - [检测范围](#检测范围)
@@ -44,13 +44,13 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 1. 什么是 cargo-semver-checks？
+## 1. 什么是 cargo-semver-checks？ {#1-什么是-cargo-semver-checks}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)** · **来源: [Wikipedia - Semantic Versioning](https://en.wikipedia.org/wiki/Semantic_Versioning)** · **来源: [Wikipedia - Software Versioning](https://en.wikipedia.org/wiki/Software_Versioning)** · **[来源: ACM - API Evolution Management]** · **[来源: IEEE - Software Configuration Management]**
 
 **cargo-semver-checks** 是一个静态分析工具，用于检测 Rust crate 的公共 API 是否违反了语义化版本控制（Semantic Versioning）规则。
 
-### 为什么需要它？
+### 为什么需要它？ {#为什么需要它}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -67,7 +67,7 @@ Rust 生态严格遵循 SemVer：
 - 修改 trait 的默认实现行为
 - 删除或重命名公共项
 
-### 检测范围
+### 检测范围 {#检测范围}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -86,15 +86,15 @@ cargo-semver-checks 基于 rustdoc JSON 输出进行分析，可检测：
 
 ---
 
-## 2. 安装
+## 2. 安装 {#2-安装}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
-# 安装 cargo-semver-checks
+# 安装 cargo-semver-checks {#安装-cargo-semver-checks}
 cargo install cargo-semver-checks --locked
 
-# 验证安装
+# 验证安装 {#验证安装}
 cargo semver-checks --version
 ```
 
@@ -102,11 +102,11 @@ cargo semver-checks --version
 
 ---
 
-## 3. 基本使用
+## 3. 基本使用 {#3-基本使用}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 检查当前工作目录的 crate
+### 检查当前工作目录的 crate {#检查当前工作目录的-crate}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -115,7 +115,7 @@ cd crates/c10_networks
 cargo semver-checks
 ```
 
-### 检查 workspace 中的特定 crate
+### 检查 workspace 中的特定 crate {#检查-workspace-中的特定-crate}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -123,39 +123,39 @@ cargo semver-checks
 cargo semver-checks -p c10_networks
 ```
 
-### 与 baseline 版本比较
+### 与 baseline 版本比较 {#与-baseline-版本比较}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```bash
-# 与发布的最新版本比较（从 crates.io 获取）
+# 与发布的最新版本比较（从 crates.io 获取） {#与发布的最新版本比较从-cratesio-获取}
 cargo semver-checks -p c10_networks --baseline-version 0.1.0
 
-# 与 git 标签比较
+# 与 git 标签比较 {#与-git-标签比较}
 cargo semver-checks -p c10_networks --baseline-rev v0.1.0
 
-# 与另一个分支比较
+# 与另一个分支比较 {#与另一个分支比较}
 cargo semver-checks -p c10_networks --baseline-rev main
 ```
 
-### 本地开发工作流
+### 本地开发工作流 {#本地开发工作流}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```bash
-# 在发布前检查
-# 1. 确保当前版本号已正确更新
-# 2. 运行检查
+# 在发布前检查 {#在发布前检查}
+# 1. 确保当前版本号已正确更新 {#1-确保当前版本号已正确更新}
+# 2. 运行检查 {#2-运行检查}
 cargo semver-checks
 
-# 3. 如果报告了问题，评估是否真的是 breaking change
-# 4. 如果是 breaking change，更新 MAJOR 版本号
-# 5. 如果只是误报，记录原因
+# 3. 如果报告了问题，评估是否真的是 breaking change {#3-如果报告了问题评估是否真的是-breaking-change}
+# 4. 如果是 breaking change，更新 MAJOR 版本号 {#4-如果是-breaking-change更新-major-版本号}
+# 5. 如果只是误报，记录原因 {#5-如果只是误报记录原因}
 ```
 
 ---
 
-## 4. CI 集成
+## 4. CI 集成 {#4-ci-集成}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -181,7 +181,7 @@ semver-checks:
       run: cargo semver-checks --workspace
 ```
 
-### CI 策略
+### CI 策略 {#ci-策略}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -191,11 +191,11 @@ semver-checks:
 
 ---
 
-## 5. 处理误报和例外
+## 5. 处理误报和例外 {#5-处理误报和例外}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 场景 1: 新增字段但已使用 `#[non_exhaustive]`
+### 场景 1: 新增字段但已使用 `#[non_exhaustive]` {#场景-1-新增字段但已使用-non_exhaustive}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -207,17 +207,17 @@ pub struct Config {
 }
 ```
 
-### 场景 2: 有意进行 breaking change（MAJOR 版本升级）
+### 场景 2: 有意进行 breaking change（MAJOR 版本升级） {#场景-2-有意进行-breaking-changemajor-版本升级}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```bash
-# 在 CI 中允许（因为版本号已更新为 MAJOR）
+# 在 CI 中允许（因为版本号已更新为 MAJOR） {#在-ci-中允许因为版本号已更新为-major}
 cargo semver-checks --baseline-version 0.1.0
-# 如果当前版本是 1.0.0，则 breaking change 是预期的
+# 如果当前版本是 1.0.0，则 breaking change 是预期的 {#如果当前版本是-100则-breaking-change-是预期的}
 ```
 
-### 场景 3: 内部 API 被误判
+### 场景 3: 内部 API 被误判 {#场景-3-内部-api-被误判}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -229,7 +229,7 @@ pub fn __internal_helper() {} // semver-checks 会忽略此项
 
 ---
 
-## 6. 最佳实践
+## 6. 最佳实践 {#6-最佳实践}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -241,7 +241,7 @@ pub fn __internal_helper() {} // semver-checks 会忽略此项
 
 ---
 
-## 7. 参考资源
+## 7. 参考资源 {#7-参考资源}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -262,7 +262,7 @@ pub fn __internal_helper() {} // semver-checks 会忽略此项
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -270,7 +270,7 @@ pub fn __internal_helper() {} // semver-checks 会忽略此项
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

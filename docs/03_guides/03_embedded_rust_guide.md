@@ -1,4 +1,4 @@
-# 嵌入式 Rust 指南：Embassy vs RTIC
+# 嵌入式 Rust 指南：Embassy vs RTIC {#嵌入式-rust-指南embassy-vs-rtic}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
@@ -12,17 +12,17 @@
 > **受众**: [进阶] / [专家]
 > **内容分级**: [专家级]
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [嵌入式 Rust 指南：Embassy vs RTIC](#嵌入式-rust-指南embassy-vs-rtic)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [Embassy：异步嵌入式](#embassy异步嵌入式)
-    - [核心设计](#核心设计)
-    - [关键特性](#关键特性)
-    - [代码示例](#代码示例)
+    - [核心设计](#核心设计-1)
+    - [关键特性](#关键特性-1)
+    - [代码示例](#代码示例-1)
     - [多任务并发](#多任务并发)
   - [RTIC：实时中断驱动并发](#rtic实时中断驱动并发)
     - [核心设计](#核心设计-1)
@@ -46,7 +46,7 @@
 
 ---
 
-## 概述
+## 概述 {#概述}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -72,11 +72,11 @@
 
 ---
 
-## Embassy：异步嵌入式
+## Embassy：异步嵌入式 {#embassy异步嵌入式}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 核心设计
+### 核心设计 {#核心设计-1}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -99,7 +99,7 @@ main loop {           #[embassy_executor::main]
                       }
 ```
 
-### 关键特性
+### 关键特性 {#关键特性-1}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -111,7 +111,7 @@ main loop {           #[embassy_executor::main]
 | **stable Rust** | MSRV 1.75 | 无需 nightly |
 | **USB/TCP/BLE** | 协议栈完整 | 生产可用 |
 
-### 代码示例
+### 代码示例 {#代码示例-1}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -137,7 +137,7 @@ async fn main(_spawner: Spawner) {
 }
 ```
 
-### 多任务并发
+### 多任务并发 {#多任务并发}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -167,11 +167,11 @@ async fn consumer() {
 
 ---
 
-## RTIC：实时中断驱动并发
+## RTIC：实时中断驱动并发 {#rtic实时中断驱动并发}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 核心设计
+### 核心设计 {#核心设计-1}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -188,7 +188,7 @@ RTIC 调度模型:
 
 **关键洞察**: RTIC 不使用软件调度器，而是直接利用 NVIC (ARM) 或 PLIC (RISC-V) 的硬件优先级机制。
 
-### 关键特性
+### 关键特性 {#关键特性-1}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -200,7 +200,7 @@ RTIC 调度模型:
 | **1.0 稳定** | 生产可用 | 长期支持 |
 | **多核支持** | AMP 配置 | 对称多处理 |
 
-### 代码示例
+### 代码示例 {#代码示例-1}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -256,7 +256,7 @@ mod app {
 
 ---
 
-## Embassy vs RTIC 对比
+## Embassy vs RTIC 对比 {#embassy-vs-rtic-对比}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -274,7 +274,7 @@ mod app {
 
 ---
 
-## 决策树
+## 决策树 {#决策树}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -297,7 +297,7 @@ mod app {
 
 ---
 
-## 参考
+## 参考 {#参考}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -317,7 +317,7 @@ mod app {
 
 ---
 
-## 思维导图：嵌入式 Rust 生态全景
+## 思维导图：嵌入式 Rust 生态全景 {#思维导图嵌入式-rust-生态全景}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -341,7 +341,7 @@ graph TD
 
 ---
 
-## 决策树：嵌入式框架选择
+## 决策树：嵌入式框架选择 {#决策树嵌入式框架选择}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -360,7 +360,7 @@ graph TD
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Embedded System](https://en.wikipedia.org/wiki/Embedded_System)**
 

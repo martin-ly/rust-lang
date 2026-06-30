@@ -1,4 +1,4 @@
-# 依赖关系图
+# 依赖关系图 {#依赖关系图}
 
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
@@ -8,12 +8,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [依赖关系图](#依赖关系图)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [Crate 依赖图](#crate-依赖图)
     - [视觉表示](#视觉表示)
   - [依赖矩阵](#依赖矩阵)
@@ -34,11 +34,11 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## Crate 依赖图
+## Crate 依赖图 {#crate-依赖图}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 视觉表示
+### 视觉表示 {#视觉表示}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -95,7 +95,7 @@
 
 ---
 
-## 依赖矩阵
+## 依赖矩阵 {#依赖矩阵}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -117,11 +117,11 @@
 
 ---
 
-## 外部依赖统计
+## 外部依赖统计 {#外部依赖统计}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 核心运行时
+### 核心运行时 {#核心运行时}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -131,7 +131,7 @@
 | rayon | 1.11.0 | 数据并行 | c04, c05, c08, c09 |
 | crossbeam | 0.8.4 | 并发原语 | c05, c09 |
 
-### 序列化
+### 序列化 {#序列化}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -140,7 +140,7 @@
 | serde | 1.0.228 | 序列化框架 | 所有 crate |
 | serde_json | 1.0.140 | JSON 支持 | 所有 crate |
 
-### 网络
+### 网络 {#网络}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -151,7 +151,7 @@
 | reqwest | 0.13.2 | HTTP 客户端 | c06, c10 |
 | tokio-tungstenite | 0.29.0 | WebSocket | c10 |
 
-### WebAssembly
+### WebAssembly {#webassembly}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -161,7 +161,7 @@
 | js-sys | 0.3.94 | JS 绑定 | c12 |
 | web-sys | 0.3.94 | Web API | c12 |
 
-### 宏开发
+### 宏开发 {#宏开发}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -173,11 +173,11 @@
 
 ---
 
-## 依赖类型说明
+## 依赖类型说明 {#依赖类型说明}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 编译时依赖
+### 编译时依赖 {#编译时依赖}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -185,7 +185,7 @@
 - tonic-build - gRPC 代码生成
 - prost-build - Protobuf 编译
 
-### 运行时依赖
+### 运行时依赖 {#运行时依赖}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -193,7 +193,7 @@
 - serde - 序列化
 - 所有网络库
 
-### 可选依赖
+### 可选依赖 {#可选依赖}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -203,25 +203,25 @@
 
 ---
 
-## 依赖更新策略
+## 依赖更新策略 {#依赖更新策略}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 自动更新
+### 自动更新 {#自动更新}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - patch 版本: 自动接受
 - minor 版本: CI 通过后合并
 
-### 手动审查
+### 手动审查 {#手动审查}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - major 版本: 需要审查和测试
 - 安全更新: 优先处理
 
-### 锁定策略
+### 锁定策略 {#锁定策略}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -245,7 +245,7 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -253,7 +253,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**

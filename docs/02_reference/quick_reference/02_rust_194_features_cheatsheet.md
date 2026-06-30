@@ -1,4 +1,4 @@
-# Rust 1.94 引入特性速查卡（1.96+ 稳定可用）/ Rust 1.94 Features Cheatsheet (Stable in 1.96+)
+# Rust 1.94 引入特性速查卡（1.96+ 稳定可用）/ Rust 1.94 Features Cheatsheet (Stable in 1.96+) {#rust-194-引入特性速查卡196-稳定可用-rust-194-features-cheatsheet-stable-in-196}
 
 > **分级**: [A]
 > **引入版本**: 1.94.0 | **稳定版本**: 1.96.0+ (项目 MSRV)
@@ -10,18 +10,18 @@
 
 ---
 
-## 📋 目录
+## 📋 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Rust 1.94 引入特性速查卡（1.96+ 稳定可用）/ Rust 1.94 Features Cheatsheet (Stable in 1.96+)](#rust-194-引入特性速查卡196-稳定可用-rust-194-features-cheatsheet-stable-in-196)
-  - [📋 目录](#-目录)
-  - [🎯 快速参考](#-快速参考)
+  - [📋 目录](#目录)
+  - [🎯 快速参考](#快速参考)
   - [1. Array Windows（数组窗口）](#1-array-windows数组窗口)
     - [基本用法](#基本用法)
     - [滑动窗口平均值](#滑动窗口平均值)
     - [模式检测（ABBA）](#模式检测abba)
-  - [2. LazyCell \& LazyLock 新方法](#2-lazycell--lazylock-新方法)
+  - [2. LazyCell \& LazyLock 新方法](#2-lazycell-lazylock-新方法)
     - [LazyCell（单线程）](#lazycell单线程)
     - [LazyLock（多线程）](#lazylock多线程)
   - [3. 数学常量](#3-数学常量)
@@ -34,9 +34,9 @@
   - [5. char 到 usize 转换](#5-char-到-usize-转换)
     - [基本转换](#基本转换)
     - [应用场景](#应用场景)
-  - [🔧 完整示例](#-完整示例)
+  - [🔧 完整示例](#完整示例)
     - [综合示例：数据处理器](#综合示例数据处理器)
-  - [📚 相关资源](#-相关资源)
+  - [📚 相关资源](#相关资源)
   - [Rust 1.95+ 特性速查 - 完整版](#rust-195-特性速查---完整版)
     - [array\_windows](#array_windows)
     - [ControlFlow](#controlflow)
@@ -45,7 +45,7 @@
 
 ---
 
-## 🎯 快速参考
+## 🎯 快速参考 {#快速参考}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -61,11 +61,11 @@
 
 ---
 
-## 1. Array Windows（数组窗口）
+## 1. Array Windows（数组窗口） {#1-array-windows数组窗口}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 基本用法
+### 基本用法 {#基本用法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -78,7 +78,7 @@ for window in data.array_windows::<3>() {
 }
 ```
 
-### 滑动窗口平均值
+### 滑动窗口平均值 {#滑动窗口平均值}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -96,7 +96,7 @@ fn sliding_average(data: &[f64], window_size: usize) -> Vec<f64> {
 }
 ```
 
-### 模式检测（ABBA）
+### 模式检测（ABBA） {#模式检测abba}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -113,11 +113,11 @@ assert!(!has_abba_pattern("abcd"));
 
 ---
 
-## 2. LazyCell & LazyLock 新方法
+## 2. LazyCell & LazyLock 新方法 {#2-lazycell-lazylock-新方法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### LazyCell（单线程）
+### LazyCell（单线程） {#lazycell单线程}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -143,7 +143,7 @@ if let Some(value) = cell.get_mut() {
 let value: &mut String = LazyCell::force_mut(&cell);
 ```
 
-### LazyLock（多线程）
+### LazyLock（多线程） {#lazylock多线程}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -165,11 +165,11 @@ std::thread::spawn(|| {
 
 ---
 
-## 3. 数学常量
+## 3. 数学常量 {#3-数学常量}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 可用常量
+### 可用常量 {#可用常量}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -185,7 +185,7 @@ let gamma_f32 = f32::consts::EULER_GAMMA;
 let phi_f32 = f32::consts::GOLDEN_RATIO;
 ```
 
-### 黄金分割搜索
+### 黄金分割搜索 {#黄金分割搜索}
 
 ```rust,ignore
 fn golden_section_search<F>(f: F, a: f64, b: f64, eps: f64) -> f64
@@ -212,7 +212,7 @@ where
 }
 ```
 
-### 调和级数估算
+### 调和级数估算 {#调和级数估算}
 
 ```rust,ignore
 fn harmonic_approximation(n: usize) -> f64 {
@@ -223,9 +223,9 @@ fn harmonic_approximation(n: usize) -> f64 {
 
 ---
 
-## 4. Peekable 迭代器
+## 4. Peekable 迭代器 {#4-peekable-迭代器}
 
-### next_if_map
+### next_if_map {#next_if_map}
 
 ```rust,ignore
 use std::iter::Peekable;
@@ -246,7 +246,7 @@ assert_eq!(result, None);
 // iter 仍指向 4
 ```
 
-### 词法分析器示例
+### 词法分析器示例 {#词法分析器示例}
 
 ```rust,ignore
 struct Lexer<I: Iterator<Item = char>> {
@@ -276,9 +276,9 @@ impl<I: Iterator<Item = char>> Lexer<I> {
 
 ---
 
-## 5. char 到 usize 转换
+## 5. char 到 usize 转换 {#5-char-到-usize-转换}
 
-### 基本转换
+### 基本转换 {#基本转换}
 
 ```rust
 use std::convert::TryFrom;
@@ -296,7 +296,7 @@ assert_eq!(code, 0x1F980); // 129408
 let code = c as usize; // 简单但需注意溢出
 ```
 
-### 应用场景
+### 应用场景 {#应用场景}
 
 ```rust,ignore
 // 字符统计
@@ -324,9 +324,9 @@ impl CharMapper {
 
 ---
 
-## 🔧 完整示例
+## 🔧 完整示例 {#完整示例}
 
-### 综合示例：数据处理器
+### 综合示例：数据处理器 {#综合示例数据处理器}
 
 ```rust,ignore
 use std::cell::LazyCell;
@@ -380,7 +380,7 @@ impl DataProcessor {
 
 ---
 
-## 📚 相关资源
+## 📚 相关资源 {#相关资源}
 
 | 资源 | 链接 |
 |------|------|
@@ -408,9 +408,9 @@ impl DataProcessor {
 
 ---
 
-## Rust 1.95+ 特性速查 - 完整版
+## Rust 1.95+ 特性速查 - 完整版 {#rust-195-特性速查---完整版}
 
-### array_windows
+### array_windows {#array_windows}
 
 ```rust,ignore
 // 零分配滑动窗口
@@ -419,7 +419,7 @@ let sums: Vec<i32> = data.array_windows::<3>()
     .collect();
 ```
 
-### ControlFlow
+### ControlFlow {#controlflow}
 
 ```rust,ignore
 use std::ops::ControlFlow;
@@ -434,7 +434,7 @@ fn find_first_match(items: &[T]) -> ControlFlow<T, ()> {
 }
 ```
 
-### LazyLock
+### LazyLock {#lazylock}
 
 ```rust,ignore
 use std::sync::LazyLock;
@@ -447,7 +447,7 @@ pub fn get_config() -> Option<&'static Config> {
 }
 ```
 
-### 数学常量
+### 数学常量 {#数学常量}
 
 ```rust,ignore
 let phi = f64::consts::GOLDEN_RATIO;      // 黄金比例

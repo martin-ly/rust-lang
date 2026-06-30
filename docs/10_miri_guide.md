@@ -1,4 +1,4 @@
-# Miri 使用指南
+# Miri 使用指南 {#miri-使用指南}
 
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
@@ -6,7 +6,7 @@
 
 本文档介绍如何在项目中使用 Miri 进行内存安全测试。
 
-## 目录
+## 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -39,7 +39,7 @@
   - [更多资源](#更多资源)
   - [权威来源索引](#权威来源索引)
 
-## 什么是 Miri
+## 什么是 Miri {#什么是-miri}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -54,63 +54,63 @@ Miri 可以检测的问题：
 - **未初始化内存**: 读取未初始化的值
 - **类型违规**: 违反 Rust 类型系统的操作
 
-## 安装 Miri
+## 安装 Miri {#安装-miri}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# 添加 Miri 组件
+# 添加 Miri 组件 {#添加-miri-组件}
 rustup component add miri
 
-# 初始化 Miri
+# 初始化 Miri {#初始化-miri}
 cargo miri setup
 ```
 
-## 运行 Miri 测试
+## 运行 Miri 测试 {#运行-miri-测试}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 使用脚本运行
+### 使用脚本运行 {#使用脚本运行}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# Linux/macOS
+# Linux/macOS {#linuxmacos}
 ./scripts/run-miri.sh
 
-# Windows
+# Windows {#windows}
 scripts\run-miri.bat
 ```
 
-### 手动运行
+### 手动运行 {#手动运行}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# 运行所有 Miri 测试
+# 运行所有 Miri 测试 {#运行所有-miri-测试}
 cargo miri test --workspace -- miri_tests
 
-# 运行特定 crate 的 Miri 测试
+# 运行特定 crate 的 Miri 测试 {#运行特定-crate-的-miri-测试}
 cargo miri test -p c01_ownership_borrow_scope -- miri_tests
 
-# 使用 Tree Borrows 模型
+# 使用 Tree Borrows 模型 {#使用-tree-borrows-模型}
 MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 
-# 禁用隔离（允许文件系统/网络访问）
+# 禁用隔离（允许文件系统/网络访问） {#禁用隔离允许文件系统网络访问}
 MIRIFLAGS="-Zmiri-disable-isolation" cargo miri test
 ```
 
-## Tree Borrows vs Stacked Borrows
+## Tree Borrows vs Stacked Borrows {#tree-borrows-vs-stacked-borrows}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 Miri 支持两种别名模型来检查内存访问的有效性：
 
-### Stacked Borrows (默认)
+### Stacked Borrows (默认) {#stacked-borrows-默认}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -120,7 +120,7 @@ Miri 支持两种别名模型来检查内存访问的有效性：
 - 基于栈的借用跟踪
 - 与某些合法的 unsafe 模式不兼容
 
-### Tree Borrows (推荐)
+### Tree Borrows (推荐) {#tree-borrows-推荐}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -133,11 +133,11 @@ Miri 支持两种别名模型来检查内存访问的有效性：
 **推荐使用 Tree Borrows**: 它在保持安全性的同时，对合法的 unsafe 代码更友好。
 
 ```bash
-# 启用 Tree Borrows
+# 启用 Tree Borrows {#启用-tree-borrows}
 MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 ```
 
-### 关键区别示例
+### 关键区别示例 {#关键区别示例}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -154,11 +154,11 @@ let z = &mut *y;     // 重新借用
 
 在 Tree Borrows 中，重新借用创建的是**父子关系**，使用父引用是允许的。而在 Stacked Borrows 中，这会破坏借用栈。
 
-## 配置 Miri
+## 配置 Miri {#配置-miri}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 项目配置
+### 项目配置 {#项目配置}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -175,7 +175,7 @@ runner = "miri"
 MIRIFLAGS = { value = "-Zmiri-tree-borrows -Zmiri-disable-isolation", force = false }
 ```
 
-### Miri 环境变量
+### Miri 环境变量 {#miri-环境变量}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -185,32 +185,32 @@ MIRIFLAGS = { value = "-Zmiri-tree-borrows -Zmiri-disable-isolation", force = fa
 | `MIRI_BACKTRACE` | 完整 backtrace | `1` |
 | `MIRI_LOG` | 日志级别 | `info` |
 
-### 常用 Miri 选项
+### 常用 Miri 选项 {#常用-miri-选项}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
-# Tree Borrows 模型
+# Tree Borrows 模型 {#tree-borrows-模型}
 -Zmiri-tree-borrows
 
-# 标记裸指针
+# 标记裸指针 {#标记裸指针}
 -Zmiri-tag-raw-pointers
 
-# 禁用隔离（允许文件系统/网络）
+# 禁用隔离（允许文件系统/网络） {#禁用隔离允许文件系统网络}
 -Zmiri-disable-isolation
 
-# 检查内存泄漏
+# 检查内存泄漏 {#检查内存泄漏}
 -Zmiri-ignore-leaks
 
-# 控制地址空间布局随机化
+# 控制地址空间布局随机化 {#控制地址空间布局随机化}
 -Zmiri-disable-address-space-layout-randomization
 ```
 
-## 常见错误类型
+## 常见错误类型 {#常见错误类型}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### Use-after-free
+### Use-after-free {#use-after-free}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -228,7 +228,7 @@ unsafe {
 > ⚠️ **注意**: 以下 `static mut` 示例仅用于展示 Miri 检测数据竞争的能力。
 > `static mut` 在 Rust 2024 Edition 中引用已被禁止。实际代码应使用 `AtomicI32` 或 `Mutex`。
 
-### 数据竞争
+### 数据竞争 {#数据竞争}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -246,7 +246,7 @@ unsafe {
 }
 ```
 
-### 越界访问
+### 越界访问 {#越界访问}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -258,7 +258,7 @@ unsafe {
 }
 ```
 
-### 未初始化内存
+### 未初始化内存 {#未初始化内存}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -267,11 +267,11 @@ let x: i32;
 let _ = x; // 错误: 使用未初始化的值
 ```
 
-## Miri 测试结构
+## Miri 测试结构 {#miri-测试结构}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 测试文件位置
+### 测试文件位置 {#测试文件位置}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -285,7 +285,7 @@ crates/
 └── ...
 ```
 
-### 测试模块声明
+### 测试模块声明 {#测试模块声明}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -296,7 +296,7 @@ crates/
 pub mod miri_tests;
 ```
 
-### 测试组织
+### 测试组织 {#测试组织}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -343,7 +343,7 @@ fn test_use_after_free() {
 }
 ```
 
-### 标记 Miri 专用测试
+### 标记 Miri 专用测试 {#标记-miri-专用测试}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -363,7 +363,7 @@ mod non_miri_tests {
 }
 ```
 
-## 最佳实践
+## 最佳实践 {#最佳实践}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -387,7 +387,7 @@ mod non_miri_tests {
    - Miri 不支持所有系统调用
    - 某些代码可能需要 `#[cfg(not(miri))]`
 
-## 更多资源
+## 更多资源 {#更多资源}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -413,7 +413,7 @@ mod non_miri_tests {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

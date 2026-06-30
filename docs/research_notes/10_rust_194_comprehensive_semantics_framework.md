@@ -1,4 +1,4 @@
-# Rust 1.94 语义概念体系完整梳理
+# Rust 1.94 语义概念体系完整梳理 {#rust-194-语义概念体系完整梳理}
 
 > **概念族**: 综合系统化框架
 
@@ -24,7 +24,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -33,11 +33,11 @@
 >
 
 - [Rust 1.94 语义概念体系完整梳理](#rust-194-语义概念体系完整梳理)
-  - [📑 目录](#-目录)
-  - [🎯 语义基线概述](#-语义基线概述)
+  - [📑 目录](#目录)
+  - [🎯 语义基线概述](#语义基线概述)
     - [1.1 权威源对齐状态](#11-权威源对齐状态)
     - [1.2 Rust 1.94 语义演进摘要](#12-rust-194-语义演进摘要)
-  - [🧠 核心概念体系](#-核心概念体系)
+  - [🧠 核心概念体系](#核心概念体系)
     - [2.1 所有权系统语义](#21-所有权系统语义)
       - [2.1.1 所有权三规则 (Ownership Rules)](#211-所有权三规则-ownership-rules)
       - [2.1.2 借用语义 (Borrowing Semantics)](#212-借用语义-borrowing-semantics)
@@ -51,28 +51,28 @@
       - [2.3.2 内存顺序语义 (Memory Ordering)](#232-内存顺序语义-memory-ordering)
     - [2.4 控制流语义](#24-控制流语义)
       - [2.4.1 ControlFlow 语义 (Rust 1.94)](#241-controlflow-语义-rust-194)
-  - [📖 概念定义全集](#-概念定义全集)
+  - [📖 概念定义全集](#概念定义全集)
     - [3.1 所有权相关概念](#31-所有权相关概念)
     - [3.2 类型系统概念](#32-类型系统概念)
     - [3.3 并发概念](#33-并发概念)
-  - [📊 属性分析矩阵](#-属性分析矩阵)
+  - [📊 属性分析矩阵](#属性分析矩阵)
     - [4.1 语言特性属性矩阵](#41-语言特性属性矩阵)
     - [4.2 类型系统表达力矩阵](#42-类型系统表达力矩阵)
-  - [🕸️ 关系映射网络](#️-关系映射网络)
+  - [🕸️ 关系映射网络](#关系映射网络)
     - [5.1 概念关系图](#51-概念关系图)
     - [5.2 依赖关系矩阵](#52-依赖关系矩阵)
-  - [💡 示例/实例/反例库](#-示例实例反例库)
+  - [💡 示例/实例/反例库](#示例实例反例库)
     - [6.1 所有权语义示例](#61-所有权语义示例)
     - [6.2 Rust 1.94 特性示例](#62-rust-194-特性示例)
-  - [🆕 Rust 1.94 特性语义](#-rust-194-特性语义)
+  - [🆕 Rust 1.94 特性语义](#rust-194-特性语义)
     - [7.1 新 API 语义详解](#71-新-api-语义详解)
     - [7.2 语义影响分析](#72-语义影响分析)
-  - [🔬 形式化语义](#-形式化语义)
+  - [🔬 形式化语义](#形式化语义)
     - [8.1 操作语义 (Operational Semantics)](#81-操作语义-operational-semantics)
     - [8.2 类型规则 (Typing Rules)](#82-类型规则-typing-rules)
     - [8.3 可靠性定理 (Soundness Theorem)](#83-可靠性定理-soundness-theorem)
-  - [✅ 完成状态](#-完成状态)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [✅ 完成状态](#完成状态)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -80,13 +80,13 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🎯 语义基线概述
+## 🎯 语义基线概述 {#语义基线概述}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1.1 权威源对齐状态
+### 1.1 权威源对齐状态 {#11-权威源对齐状态}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -126,7 +126,7 @@
 
 ```
 
-### 1.2 Rust 1.94 语义演进摘要
+### 1.2 Rust 1.94 语义演进摘要 {#12-rust-194-语义演进摘要}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -152,13 +152,13 @@
 
 ---
 
-## 🧠 核心概念体系
+## 🧠 核心概念体系 {#核心概念体系}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 所有权系统语义
+### 2.1 所有权系统语义 {#21-所有权系统语义}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -166,7 +166,7 @@
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-#### 2.1.1 所有权三规则 (Ownership Rules)
+#### 2.1.1 所有权三规则 (Ownership Rules) {#211-所有权三规则-ownership-rules}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -212,7 +212,7 @@
 
 ```
 
-#### 2.1.2 借用语义 (Borrowing Semantics)
+#### 2.1.2 借用语义 (Borrowing Semantics) {#212-借用语义-borrowing-semantics}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -258,7 +258,7 @@
 
 ```
 
-#### 2.1.3 生命周期语义 (Lifetime Semantics)
+#### 2.1.3 生命周期语义 (Lifetime Semantics) {#213-生命周期语义-lifetime-semantics}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -318,7 +318,7 @@ trait Parser<'a> {
 
 ```
 
-### 2.2 类型系统语义
+### 2.2 类型系统语义 {#22-类型系统语义}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -326,7 +326,7 @@ trait Parser<'a> {
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-#### 2.2.1 类型层级 (Type Hierarchy)
+#### 2.2.1 类型层级 (Type Hierarchy) {#221-类型层级-type-hierarchy}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -398,7 +398,7 @@ trait Parser<'a> {
 
 ```
 
-#### 2.2.2 Trait 系统语义 (Trait System Semantics)
+#### 2.2.2 Trait 系统语义 (Trait System Semantics) {#222-trait-系统语义-trait-system-semantics}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -480,7 +480,7 @@ trait Borrow<'a, T: 'a> {
 
 ```
 
-#### 2.2.3 型变 (Variance)
+#### 2.2.3 型变 (Variance) {#223-型变-variance}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -542,11 +542,11 @@ fn variance_example() {
 
 ```
 
-### 2.3 并发模型语义
+### 2.3 并发模型语义 {#23-并发模型语义}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
-#### 2.3.1 Send 与 Sync 语义
+#### 2.3.1 Send 与 Sync 语义 {#231-send-与-sync-语义}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -634,7 +634,7 @@ fn sync_semantics<T: Sync>(value: &'static T) {
 
 ```
 
-#### 2.3.2 内存顺序语义 (Memory Ordering)
+#### 2.3.2 内存顺序语义 (Memory Ordering) {#232-内存顺序语义-memory-ordering}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -698,11 +698,11 @@ fn consumer() {
 
 ```
 
-### 2.4 控制流语义
+### 2.4 控制流语义 {#24-控制流语义}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
-#### 2.4.1 ControlFlow 语义 (Rust 1.94)
+#### 2.4.1 ControlFlow 语义 (Rust 1.94) {#241-controlflow-语义-rust-194}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -798,13 +798,13 @@ fn find_negative_semantic(numbers: &[i32]) -> Option<i32> {
 
 ---
 
-## 📖 概念定义全集
+## 📖 概念定义全集 {#概念定义全集}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 3.1 所有权相关概念
+### 3.1 所有权相关概念 {#31-所有权相关概念}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -826,7 +826,7 @@ fn find_negative_semantic(numbers: &[i32]) -> Option<i32> {
 
 | **内部可变性** | 通过不可变引用修改内容 | 运行时检查、RefCell/Mutex | 不可变引用→内部→可变访问 | `RefCell::new()` | 运行时panic |
 
-### 3.2 类型系统概念
+### 3.2 类型系统概念 {#32-类型系统概念}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -846,7 +846,7 @@ fn find_negative_semantic(numbers: &[i32]) -> Option<i32> {
 
 | **自动 Trait** | 编译器自动派生的 Trait | 结构化派生、marker | 字段有→类型有 | Send, Sync, Copy | 手动实现风险 |
 
-### 3.3 并发概念
+### 3.3 并发概念 {#33-并发概念}
 
 >
 
@@ -870,13 +870,13 @@ fn find_negative_semantic(numbers: &[i32]) -> Option<i32> {
 
 ---
 
-## 📊 属性分析矩阵
+## 📊 属性分析矩阵 {#属性分析矩阵}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 4.1 语言特性属性矩阵
+### 4.1 语言特性属性矩阵 {#41-语言特性属性矩阵}
 
 >
 
@@ -924,7 +924,7 @@ fn find_negative_semantic(numbers: &[i32]) -> Option<i32> {
 
 ```
 
-### 4.2 类型系统表达力矩阵
+### 4.2 类型系统表达力矩阵 {#42-类型系统表达力矩阵}
 
 >
 
@@ -952,13 +952,13 @@ fn find_negative_semantic(numbers: &[i32]) -> Option<i32> {
 
 ---
 
-## 🕸️ 关系映射网络
+## 🕸️ 关系映射网络 {#关系映射网络}
 
 >
 
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 5.1 概念关系图
+### 5.1 概念关系图 {#51-概念关系图}
 
 >
 
@@ -1048,7 +1048,7 @@ graph TB
 
 ```
 
-### 5.2 依赖关系矩阵
+### 5.2 依赖关系矩阵 {#52-依赖关系矩阵}
 
 >
 
@@ -1074,13 +1074,13 @@ graph TB
 
 ---
 
-## 💡 示例/实例/反例库
+## 💡 示例/实例/反例库 {#示例实例反例库}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 6.1 所有权语义示例
+### 6.1 所有权语义示例 {#61-所有权语义示例}
 
 >
 
@@ -1192,7 +1192,7 @@ fn mutable_borrow_conflict() {
 
 ```
 
-### 6.2 Rust 1.94 特性示例
+### 6.2 Rust 1.94 特性示例 {#62-rust-194-特性示例}
 
 >
 
@@ -1366,13 +1366,13 @@ fn lazy_semantic() {
 
 ---
 
-## 🆕 Rust 1.94 特性语义
+## 🆕 Rust 1.94 特性语义 {#rust-194-特性语义}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 7.1 新 API 语义详解
+### 7.1 新 API 语义详解 {#71-新-api-语义详解}
 
 >
 
@@ -1394,7 +1394,7 @@ fn lazy_semantic() {
 
 | `char→usize` | 类型转换 | `impl TryFrom<char> for usize` | Unicode 标量值转换 |
 
-### 7.2 语义影响分析
+### 7.2 语义影响分析 {#72-语义影响分析}
 
 >
 
@@ -1456,13 +1456,13 @@ fn lazy_semantic() {
 
 ---
 
-## 🔬 形式化语义
+## 🔬 形式化语义 {#形式化语义}
 
 >
 
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 8.1 操作语义 (Operational Semantics)
+### 8.1 操作语义 (Operational Semantics) {#81-操作语义-operational-semantics}
 
 >
 
@@ -1522,7 +1522,7 @@ fn lazy_semantic() {
 
 ```
 
-### 8.2 类型规则 (Typing Rules)
+### 8.2 类型规则 (Typing Rules) {#82-类型规则-typing-rules}
 
 >
 
@@ -1590,7 +1590,7 @@ fn lazy_semantic() {
 
 ```
 
-### 8.3 可靠性定理 (Soundness Theorem)
+### 8.3 可靠性定理 (Soundness Theorem) {#83-可靠性定理-soundness-theorem}
 
 >
 
@@ -1646,7 +1646,7 @@ fn lazy_semantic() {
 
 ---
 
-## ✅ 完成状态
+## ✅ 完成状态 {#完成状态}
 
 >
 
@@ -1700,7 +1700,7 @@ fn lazy_semantic() {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -1710,7 +1710,7 @@ fn lazy_semantic() {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -1718,7 +1718,7 @@ fn lazy_semantic() {
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -1732,7 +1732,7 @@ fn lazy_semantic() {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -1742,7 +1742,7 @@ fn lazy_semantic() {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -1774,7 +1774,7 @@ fn lazy_semantic() {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -1786,7 +1786,7 @@ fn lazy_semantic() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

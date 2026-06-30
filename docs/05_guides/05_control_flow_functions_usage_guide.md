@@ -1,4 +1,4 @@
-# 控制流与函数使用指南
+# 控制流与函数使用指南 {#控制流与函数使用指南}
 
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
@@ -14,29 +14,29 @@
 
 ---
 
-## 📋 目录
+## 📋 目录 {#目录}
 
 - [控制流与函数使用指南](#控制流与函数使用指南)
-  - [📋 目录](#-目录)
-  - [📋 概述](#-概述)
-  - [🚀 快速开始](#-快速开始)
-  - [📊 核心功能](#-核心功能)
+  - [📋 目录](#目录)
+  - [📋 概述](#概述)
+  - [🚀 快速开始](#快速开始)
+  - [📊 核心功能](#核心功能)
     - [1. 控制流模式](#1-控制流模式)
     - [2. 函数系统](#2-函数系统)
     - [3. 闭包](#3-闭包)
     - [4. 模式匹配](#4-模式匹配)
     - [5. if let guards (Rust 1.95.0)](#5-if-let-guards-rust-1950)
     - [6. 协程与生成器](#6-协程与生成器)
-  - [⚡ 性能优化](#-性能优化)
-  - [🔧 错误处理](#-错误处理)
-  - [🐛 常见问题与解决方案](#-常见问题与解决方案)
-  - [🔗 相关文档](#-相关文档)
+  - [⚡ 性能优化](#性能优化)
+  - [🔧 错误处理](#错误处理)
+  - [🐛 常见问题与解决方案](#常见问题与解决方案)
+  - [🔗 相关文档](#相关文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
 ---
 
-## 📋 概述
+## 📋 概述 {#概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -47,7 +47,7 @@
 
 ---
 
-## 🚀 快速开始
+## 🚀 快速开始 {#快速开始}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -69,11 +69,11 @@ fn main() {
 
 ---
 
-## 📊 核心功能
+## 📊 核心功能 {#核心功能}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 控制流模式
+### 1. 控制流模式 {#1-控制流模式}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -104,7 +104,7 @@ fn process_nested_options() {
 }
 ```
 
-### 2. 函数系统
+### 2. 函数系统 {#2-函数系统}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -124,7 +124,7 @@ fn conditional_execution() {
 }
 ```
 
-### 3. 闭包
+### 3. 闭包 {#3-闭包}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -147,7 +147,7 @@ fn closure_patterns() {
 }
 ```
 
-### 4. 模式匹配
+### 4. 模式匹配 {#4-模式匹配}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -169,7 +169,7 @@ fn advanced_matching() {
 }
 ```
 
-### 5. if let guards (Rust 1.95.0)
+### 5. if let guards (Rust 1.95.0) {#5-if-let-guards-rust-1950}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -217,7 +217,7 @@ fn process_message(msg: Message, current_user: Option<User>) {
 }
 ```
 
-### 6. 协程与生成器
+### 6. 协程与生成器 {#6-协程与生成器}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -240,7 +240,7 @@ fn async_control_flow() {
 
 ---
 
-## ⚡ 性能优化
+## ⚡ 性能优化 {#性能优化}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -253,7 +253,7 @@ fn async_control_flow() {
 
 ---
 
-## 🔧 错误处理
+## 🔧 错误处理 {#错误处理}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -277,7 +277,7 @@ fn robust_control_flow() -> ControlFlowResult<()> {
 
 ---
 
-## 🐛 常见问题与解决方案
+## 🐛 常见问题与解决方案 {#常见问题与解决方案}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -290,7 +290,7 @@ fn robust_control_flow() -> ControlFlowResult<()> {
 
 ---
 
-## 🔗 相关文档
+## 🔗 相关文档 {#相关文档}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -312,7 +312,7 @@ fn robust_control_flow() -> ControlFlowResult<()> {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -321,7 +321,7 @@ fn robust_control_flow() -> ControlFlowResult<()> {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**

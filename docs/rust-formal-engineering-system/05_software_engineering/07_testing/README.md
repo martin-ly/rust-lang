@@ -1,4 +1,4 @@
-# 测试
+# 测试 {#测试}
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -13,11 +13,11 @@
 
 ---
 
-## Rust 测试生态系统
+## Rust 测试生态系统 {#rust-测试生态系统}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 单元测试
+### 单元测试 {#单元测试}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -81,7 +81,7 @@ fn some_operation() -> Result<i32, String> {
 }
 ```
 
-### 集成测试
+### 集成测试 {#集成测试}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -97,7 +97,7 @@ fn test_add_integration() {
 }
 ```
 
-### 文档测试
+### 文档测试 {#文档测试}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -116,7 +116,7 @@ pub fn add(a: i32, b: i32) -> i32 {
 }
 ```
 
-### 属性测试
+### 属性测试 {#属性测试}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -149,7 +149,7 @@ fn add(a: i32, b: i32) -> i32 {
 }
 ```
 
-### 模拟与 Mock
+### 模拟与 Mock {#模拟与-mock}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -177,7 +177,7 @@ mod mock_tests {
 }
 ```
 
-### 形式化验证测试
+### 形式化验证测试 {#形式化验证测试}
 
 ```rust
 // 使用 Kani 进行形式化验证
@@ -214,7 +214,7 @@ mod contract_tests {
 }
 ```
 
-### 并发测试
+### 并发测试 {#并发测试}
 
 ```rust
 #[cfg(test)]
@@ -247,7 +247,7 @@ mod concurrency_tests {
 
 ---
 
-## 形式化方法
+## 形式化方法 {#形式化方法}
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -256,7 +256,7 @@ mod concurrency_tests {
 | 所有权模型形式化 | 所有权系统数学定义 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
 | 证明索引 | 形式化证明集合 | [../../../research_notes/10_proof_index.md](../../../../archive/research_notes_2026_06_25/10_proof_index.md) |
 
-## 相关文档
+## 相关文档 {#相关文档}
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -283,7 +283,7 @@ mod concurrency_tests {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Software Testing](https://en.wikipedia.org/wiki/Software_Testing)**
 

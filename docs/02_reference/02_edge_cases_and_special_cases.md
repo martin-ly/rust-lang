@@ -9,7 +9,7 @@
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、Rustonomicon 来源标注 [来源: Authority Source Sprint Batch 8]
 
-# Rust 边界条件与特例示例
+# Rust 边界条件与特例示例 {#rust-边界条件与特例示例}
 
 > **Bloom 层级**: L2 (理解)
 > **创建日期**: 2026-02-12
@@ -20,7 +20,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -28,13 +28,13 @@
   - [目录](#目录)
   - [集合边界](#集合边界)
     - [空 Vec 与零长度](#空-vec-与零长度)
-    - [空 HashMap / BTreeMap](#空-hashmap--btreemap)
+    - [空 HashMap / BTreeMap](#空-hashmap-btreemap)
     - [空切片](#空切片)
   - [算法特例](#算法特例)
     - [空输入的排序与搜索](#空输入的排序与搜索)
     - [单元素与双元素](#单元素与双元素)
   - [并发特例](#并发特例)
-    - [零个线程 / 空任务列表](#零个线程--空任务列表)
+    - [零个线程 / 空任务列表](#零个线程-空任务列表)
     - [通道已关闭](#通道已关闭)
     - [Mutex poison](#mutex-poison)
   - [数值溢出](#数值溢出)
@@ -73,15 +73,15 @@
       - [零大小类型 (ZST)](#零大小类型-zst)
     - [模式匹配边界](#模式匹配边界)
       - [穷尽性检查边界](#穷尽性检查边界)
-    - [并发边界](#并发边界)
+    - [并发边界](#并发边界-1)
       - [死锁边界](#死锁边界)
       - [Send/Sync 自动派生边界](#sendsync-自动派生边界)
-    - [unsafe 边界](#unsafe-边界)
+    - [unsafe 边界](#unsafe-边界-1)
       - [裸指针解引用边界](#裸指针解引用边界)
       - [未对齐指针边界](#未对齐指针边界)
     - [迭代器边界](#迭代器边界)
       - [迭代器失效边界](#迭代器失效边界)
-  - [🔗 形式化边界分析](#-形式化边界分析)
+  - [🔗 形式化边界分析](#形式化边界分析)
     - [所有权与借用边界](#所有权与借用边界)
     - [类型系统边界](#类型系统边界)
     - [并发边界](#并发边界-1)
@@ -94,11 +94,11 @@
 
 ---
 
-## 集合边界
+## 集合边界 {#集合边界}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 空 Vec 与零长度
+### 空 Vec 与零长度 {#空-vec-与零长度}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -113,7 +113,7 @@ empty.first();  // ✅ 返回 None
 empty.get(0);   // ✅ 返回 None
 ```
 
-### 空 HashMap / BTreeMap
+### 空 HashMap / BTreeMap {#空-hashmap-btreemap}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -127,7 +127,7 @@ map.get(&1);  // ✅ 返回 None，不 panic
 map.insert(1, "a");  // 插入后非空
 ```
 
-### 空切片
+### 空切片 {#空切片}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -141,11 +141,11 @@ slice.iter().next();  // ✅ 返回 None
 
 ---
 
-## 算法特例
+## 算法特例 {#算法特例}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 空输入的排序与搜索
+### 空输入的排序与搜索 {#空输入的排序与搜索}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -161,7 +161,7 @@ one.binary_search(&1);  // ✅ Ok(0)
 one.binary_search(&0);  // ✅ Err(0)
 ```
 
-### 单元素与双元素
+### 单元素与双元素 {#单元素与双元素}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -175,11 +175,11 @@ single.chunks(1).count();  // 1
 
 ---
 
-## 并发特例
+## 并发特例 {#并发特例}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 零个线程 / 空任务列表
+### 零个线程 / 空任务列表 {#零个线程-空任务列表}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -193,7 +193,7 @@ for h in handles {
 // ✅ 正常，无任务
 ```
 
-### 通道已关闭
+### 通道已关闭 {#通道已关闭}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -207,7 +207,7 @@ drop(tx);
 rx.recv();  // ✅ Err，表明通道已关闭
 ```
 
-### Mutex poison
+### Mutex poison {#mutex-poison}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -224,11 +224,11 @@ match mutex.lock() {
 
 ---
 
-## 数值溢出
+## 数值溢出 {#数值溢出}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 整数溢出（debug 下 panic）
+### 整数溢出（debug 下 panic） {#整数溢出debug-下-panic}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -239,7 +239,7 @@ let y = x.wrapping_add(1);  // ✅ 明确 wrapping，y = 0
 let z = x.saturating_add(1);  // ✅ 饱和，z = 255
 ```
 
-### 除零
+### 除零 {#除零}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -252,11 +252,11 @@ let y = x.checked_div(zero);  // ✅ None
 
 ---
 
-## 字符串与切片
+## 字符串与切片 {#字符串与切片}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 空字符串
+### 空字符串 {#空字符串}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -267,7 +267,7 @@ s.chars().next();  // None
 s.as_bytes();      // &[]
 ```
 
-### 字节边界上的字符切分
+### 字节边界上的字符切分 {#字节边界上的字符切分}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -282,7 +282,7 @@ for c in s.chars() {
 }
 ```
 
-### 零长度范围
+### 零长度范围 {#零长度范围}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -293,11 +293,11 @@ let sub = &s[2..2];  // ✅ ""
 
 ---
 
-## unsafe 与 FFI
+## unsafe 与 FFI {#unsafe-与-ffi}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 空指针解引用
+### 空指针解引用 {#空指针解引用}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -309,7 +309,7 @@ if !ptr.is_null() {
 }
 ```
 
-### FFI 边界：C 传入空指针
+### FFI 边界：C 传入空指针 {#ffi-边界c-传入空指针}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -327,7 +327,7 @@ fn safe_wrapper() -> Option<&'static Foo> {
 }
 ```
 
-### 悬垂引用典型反例
+### 悬垂引用典型反例 {#悬垂引用典型反例}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -344,11 +344,11 @@ fn good(x: &i32) -> &i32 { x }
 
 ---
 
-## WASM 特例
+## WASM 特例 {#wasm-特例}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 无 std 环境
+### 无 std 环境 {#无-std-环境}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -358,7 +358,7 @@ fn good(x: &i32) -> &i32 { x }
 // 使用 core / alloc
 ```
 
-### 阻塞 API 在 WASM
+### 阻塞 API 在 WASM {#阻塞-api-在-wasm}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -373,11 +373,11 @@ fn good(x: &i32) -> &i32 { x }
 
 ---
 
-## panic 边界
+## panic 边界 {#panic-边界}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### panic 与 unwrap
+### panic 与 unwrap {#panic-与-unwrap}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -391,7 +391,7 @@ let res: Result<i32, &str> = Err("error");
 res.unwrap_or_default();  // ✅ 或 map_err 处理
 ```
 
-### 断言边界
+### 断言边界 {#断言边界}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -403,11 +403,11 @@ v.get(10);  // ✅ 返回 None
 
 ---
 
-## 空 Future 与异步
+## 空 Future 与异步 {#空-future-与异步}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 空 select
+### 空 select {#空-select}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -423,7 +423,7 @@ tokio::select! {
 }
 ```
 
-### 已完成 Future
+### 已完成 Future {#已完成-future}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -436,11 +436,11 @@ let f = std::future::ready(42);
 
 ---
 
-## Rust 1.93 行为变更特例
+## Rust 1.93 行为变更特例 {#rust-193-行为变更特例}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### BTreeMap::append 行为变更
+### BTreeMap::append 行为变更 {#btreemapappend-行为变更}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -460,7 +460,7 @@ a.append(&mut b);
 assert_eq!(a.get(&1), Some(&"a"));
 ```
 
-### Copy specialization 移除
+### Copy specialization 移除 {#copy-specialization-移除}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -472,7 +472,7 @@ let v: Vec<i32> = vec![1, 2, 3];
 let v2 = v.clone();  // 可能受影响
 ```
 
-### vec::IntoIter 与 RefUnwindSafe
+### vec::IntoIter 与 RefUnwindSafe {#vecintoiter-与-refunwindsafe}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -489,15 +489,15 @@ assert_unwind_safe::<IntoIter<*mut i32>>();  // 1.93 可行
 
 ---
 
-## 更多边界情况代码示例
+## 更多边界情况代码示例 {#更多边界情况代码示例}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 所有权边界
+### 所有权边界 {#所有权边界}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-#### 部分移动后使用
+#### 部分移动后使用 {#部分移动后使用}
 
 ```rust
 struct Person {
@@ -525,7 +525,7 @@ fn partial_move() {
 }
 ```
 
-#### Copy 类型的隐式复制
+#### Copy 类型的隐式复制 {#copy-类型的隐式复制}
 
 ```rust
 fn copy_behavior() {
@@ -538,11 +538,11 @@ fn copy_behavior() {
 }
 ```
 
-### 生命周期边界
+### 生命周期边界 {#生命周期边界}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-#### 生命周期省略规则边界
+#### 生命周期省略规则边界 {#生命周期省略规则边界}
 
 ```rust
 // 省略规则适用的情况
@@ -561,7 +561,7 @@ fn mix_lifetimes<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
 }
 ```
 
-#### NLL (Non-Lexical Lifetimes) 边界
+#### NLL (Non-Lexical Lifetimes) 边界 {#nll-non-lexical-lifetimes-边界}
 
 ```rust
 fn nll_example() {
@@ -575,11 +575,11 @@ fn nll_example() {
 }
 ```
 
-### 泛型边界
+### 泛型边界 {#泛型边界}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-#### 递归类型大小边界
+#### 递归类型大小边界 {#递归类型大小边界}
 
 ```rust
 // ❌ 编译错误：递归类型大小无限
@@ -599,7 +599,7 @@ fn recursive_type() {
 }
 ```
 
-#### 零大小类型 (ZST)
+#### 零大小类型 (ZST) {#零大小类型-zst}
 
 ```rust
 use std::mem::size_of;
@@ -614,11 +614,11 @@ fn zero_sized_types() {
 }
 ```
 
-### 模式匹配边界
+### 模式匹配边界 {#模式匹配边界}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-#### 穷尽性检查边界
+#### 穷尽性检查边界 {#穷尽性检查边界}
 
 ```rust,ignore
 enum Option<T> {
@@ -653,11 +653,11 @@ fn at_binding(x: Option<i32>) -> i32 {
 }
 ```
 
-### 并发边界
+### 并发边界 {#并发边界-1}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-#### 死锁边界
+#### 死锁边界 {#死锁边界}
 
 ```rust
 use std::sync::{Mutex, MutexGuard};
@@ -677,7 +677,7 @@ fn deadlock_risk() {
 // ✅ 解决方案：一致的加锁顺序或使用 std::sync::LockGuard
 ```
 
-#### Send/Sync 自动派生边界
+#### Send/Sync 自动派生边界 {#sendsync-自动派生边界}
 
 ```rust
 use std::rc::Rc;
@@ -698,11 +698,11 @@ fn auto_trait_bounds() {
 }
 ```
 
-### unsafe 边界
+### unsafe 边界 {#unsafe-边界-1}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-#### 裸指针解引用边界
+#### 裸指针解引用边界 {#裸指针解引用边界}
 
 ```rust
 fn raw_pointer_edges() {
@@ -722,7 +722,7 @@ fn raw_pointer_edges() {
 }
 ```
 
-#### 未对齐指针边界
+#### 未对齐指针边界 {#未对齐指针边界}
 
 ```rust
 fn unaligned_pointer() {
@@ -740,11 +740,11 @@ fn unaligned_pointer() {
 }
 ```
 
-### 迭代器边界
+### 迭代器边界 {#迭代器边界}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-#### 迭代器失效边界
+#### 迭代器失效边界 {#迭代器失效边界}
 
 ```rust
 fn iterator_invalidation() {
@@ -763,11 +763,11 @@ fn iterator_invalidation() {
 
 ---
 
-## 🔗 形式化边界分析
+## 🔗 形式化边界分析 {#形式化边界分析}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 所有权与借用边界
+### 所有权与借用边界 {#所有权与借用边界}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -777,7 +777,7 @@ fn iterator_invalidation() {
 | 复制语义 | $\Gamma(y) = \text{copy}(\Gamma(x))$，原变量仍有效 | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) |
 | NLL | $\text{Scope}(r) = t_1, t_{\text{last\_use}}]$ | [lifetime_formalization |
 
-### 类型系统边界
+### 类型系统边界 {#类型系统边界}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -787,7 +787,7 @@ fn iterator_invalidation() {
 | ZST | $\text{size\_of}(T) = 0$ | [Rust Reference](https://doc.rust-lang.org/reference/dynamically-sized-types.html) |
 | 生命周期子类型 | $\ell_2 <: \ell_1 \leftrightarrow \ell_1 \supseteq \ell_2$ | lifetime_formalization |
 
-### 并发边界
+### 并发边界 {#并发边界-1}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -797,7 +797,7 @@ fn iterator_invalidation() {
 | Sync 边界 | $T: \text{Sync} \leftrightarrow \&T: \text{Send}$ | [send_sync_formalization](../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) |
 | 数据竞争 | $\text{DataRaceFree}(P)$ 编译期保证 | [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) |
 
-### unsafe 边界
+### unsafe 边界 {#unsafe-边界-1}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -809,11 +809,11 @@ fn iterator_invalidation() {
 
 ---
 
-## 相关文档
+## 相关文档 {#相关文档}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 速查卡
+### 速查卡 {#速查卡}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -822,7 +822,7 @@ fn iterator_invalidation() {
 - [线程与并发速查卡](quick_reference/02_threads_concurrency_cheatsheet.md)
 - [所有权速查卡](quick_reference/02_ownership_cheatsheet.md)
 
-### 形式化文档
+### 形式化文档 {#形式化文档}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -833,7 +833,7 @@ fn iterator_invalidation() {
 
 ---
 
-## Rust 1.95+ 更新
+## Rust 1.95+ 更新 {#rust-195-更新}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 > **适用版本**: Rust 1.96.0+
@@ -851,7 +851,7 @@ fn iterator_invalidation() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

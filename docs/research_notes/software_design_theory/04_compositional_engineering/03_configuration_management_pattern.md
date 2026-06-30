@@ -1,4 +1,4 @@
-# 配置管理模式（Configuration Management Pattern）
+# 配置管理模式（Configuration Management Pattern） {#配置管理模式configuration-management-pattern}
 
 > **概念族**: 软件设计 / 组合工程 / 配置管理
 >
@@ -30,10 +30,10 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 - [配置管理模式（Configuration Management Pattern）](#配置管理模式configuration-management-pattern)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [配置分层模型](#配置分层模型)
   - [Rust 配置 crate 选型](#rust-配置-crate-选型)
@@ -49,7 +49,7 @@
 
 ---
 
-## 概述
+## 概述 {#概述}
 
 > **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 
@@ -62,7 +62,7 @@
 
 ---
 
-## 配置分层模型
+## 配置分层模型 {#配置分层模型}
 
 > **来源**: [12-Factor App – Config](https://12factor.net/config)
 
@@ -79,7 +79,7 @@
 
 ---
 
-## Rust 配置 crate 选型
+## Rust 配置 crate 选型 {#rust-配置-crate-选型}
 
 > **来源**: [crates.io](https://crates.io/)
 
@@ -97,7 +97,7 @@
 
 ---
 
-## Rust 实现方案
+## Rust 实现方案 {#rust-实现方案}
 
 > **来源**: [config crate docs](https://docs.rs/config/latest/config/)
 
@@ -153,7 +153,7 @@ fn load_config() -> Result<AppConfig, config::ConfigError> {
 
 ---
 
-## 完整代码示例
+## 完整代码示例 {#完整代码示例}
 
 > **来源**: [config crate docs](https://docs.rs/config/latest/config/)
 
@@ -164,10 +164,10 @@ fn load_config() -> Result<AppConfig, config::ConfigError> {
 运行方式：
 
 ```bash
-# 仅使用默认值
+# 仅使用默认值 {#仅使用默认值}
 cargo run -p c07_process --example configuration_management_pattern
 
-# 使用环境变量覆盖
+# 使用环境变量覆盖 {#使用环境变量覆盖}
 cd crates/c07_process
 APP__SERVER__PORT=9000 APP__LOG_LEVEL=debug \
   cargo run --example configuration_management_pattern
@@ -181,11 +181,11 @@ APP__SERVER__PORT=9000 APP__LOG_LEVEL=debug \
 
 ---
 
-## 反例边界
+## 反例边界 {#反例边界}
 
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [config crate docs](https://docs.rs/config/latest/config/)
 
-### 1. 敏感信息泄露
+### 1. 敏感信息泄露 {#1-敏感信息泄露}
 
 **错误做法**：将数据库密码写入 `config/production.toml` 并提交到仓库。
 
@@ -213,7 +213,7 @@ impl std::fmt::Debug for Secrets {
 }
 ```
 
-### 2. 配置热加载竞态
+### 2. 配置热加载竞态 {#2-配置热加载竞态}
 
 **错误做法**：多线程共享可变 `Config` 并在收到文件变更通知时直接替换。
 
@@ -228,7 +228,7 @@ fn reload() {
 
 **正确做法**：使用 `Arc<RwLock<AppConfig>>` 或 `Arc<AtomicPtr<...>>` 保证读取者看到完整一致的快照；必要时引入版本号，旧任务继续使用旧配置。
 
-### 3. 类型不匹配
+### 3. 类型不匹配 {#3-类型不匹配}
 
 **错误做法**：环境变量值为 `"true"` 但目标字段为 `u16`，未启用 `try_parsing`。
 
@@ -240,7 +240,7 @@ struct ServerConfig { port: u16 }
 
 **正确做法**：启用 `Environment::try_parsing(true)`，或对字段使用自定义反序列化器处理空值/缺省值。
 
-### 4. 配置缺失未处理
+### 4. 配置缺失未处理 {#4-配置缺失未处理}
 
 **错误做法**：使用 `unwrap()` 直接崩溃，用户无法得知缺少哪个键。
 
@@ -252,7 +252,7 @@ let cfg: AppConfig = load_config().unwrap();
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源**: [权威来源对齐文档](../../10_authoritative_source_alignment_network.md)
 
@@ -270,7 +270,7 @@ let cfg: AppConfig = load_config().unwrap();
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 > **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 

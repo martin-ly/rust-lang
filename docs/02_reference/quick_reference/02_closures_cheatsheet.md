@@ -1,4 +1,4 @@
-# 闭包速查卡 (Closures Cheatsheet)
+# 闭包速查卡 (Closures Cheatsheet) {#闭包速查卡-closures-cheatsheet}
 
 > **分级**: [A]
 > **Bloom 层级**: L2 (理解)
@@ -10,12 +10,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [闭包速查卡 (Closures Cheatsheet)](#闭包速查卡-closures-cheatsheet)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [闭包基础](#闭包基础)
     - [定义闭包](#定义闭包)
     - [捕获环境](#捕获环境)
@@ -35,11 +35,11 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 闭包基础
+## 闭包基础 {#闭包基础}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 定义闭包
+### 定义闭包 {#定义闭包}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -60,7 +60,7 @@ let greet = |name| {
 };
 ```
 
-### 捕获环境
+### 捕获环境 {#捕获环境}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -86,7 +86,7 @@ let closure = move || println!("{}", s);
 
 ---
 
-## 闭包 Trait
+## 闭包 Trait {#闭包-trait}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -96,7 +96,7 @@ let closure = move || println!("{}", s);
 | `FnMut` | 可变借用捕获 | 可多次调用，需要可变引用 |
 | `FnOnce` | 移动捕获 | 只能调用一次 |
 
-### Trait 使用示例
+### Trait 使用示例 {#trait-使用示例}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -127,11 +127,11 @@ where
 
 ---
 
-## 常见用法
+## 常见用法 {#常见用法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 迭代器方法
+### 迭代器方法 {#迭代器方法}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
@@ -150,7 +150,7 @@ let evens: Vec<&i32> = nums.iter().filter(|x| *x % 2 == 0).collect();
 let sum = nums.iter().fold(0, |acc, x| acc + x);
 ```
 
-### 高阶函数
+### 高阶函数 {#高阶函数}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
@@ -169,7 +169,7 @@ where
 
 ---
 
-## 相关文档
+## 相关文档 {#相关文档}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -179,14 +179,14 @@ where
 
 ---
 
-## Rust 1.95+ 在闭包与函数式编程中的深度应用
+## Rust 1.95+ 在闭包与函数式编程中的深度应用 {#rust-195-在闭包与函数式编程中的深度应用}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 > **适用版本**: Rust 1.96.0+ | **实际场景**: 函数式编程模式
 
 ---
 
-### ControlFlow 在函数式控制流中的应用
+### ControlFlow 在函数式控制流中的应用 {#controlflow-在函数式控制流中的应用}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -296,7 +296,7 @@ where
 
 ---
 
-### LazyLock 在闭包工厂中的应用
+### LazyLock 在闭包工厂中的应用 {#lazylock-在闭包工厂中的应用}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -376,7 +376,7 @@ pub fn execute_pipeline(data: Data) -> Data {
 
 ---
 
-### array_windows 在函数式数据处理中的应用
+### array_windows 在函数式数据处理中的应用 {#array_windows-在函数式数据处理中的应用}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -454,7 +454,7 @@ pub trait WindowedIterator: Iterator {
 
 ---
 
-### 数学常量在函数式数值计算中的应用
+### 数学常量在函数式数值计算中的应用 {#数学常量在函数式数值计算中的应用}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -495,7 +495,7 @@ pub fn euler_smooth() -> impl Fn(f64) -> f64 {
 
 ---
 
-### 生产场景：事件处理系统
+### 生产场景：事件处理系统 {#生产场景事件处理系统}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -601,7 +601,7 @@ pub fn setup_processor() -> EventProcessor {
 
 ---
 
-### 总结
+### 总结 {#总结}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -627,7 +627,7 @@ pub fn setup_processor() -> EventProcessor {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -636,7 +636,7 @@ pub fn setup_processor() -> EventProcessor {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

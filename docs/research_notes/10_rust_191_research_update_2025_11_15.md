@@ -1,4 +1,4 @@
-# Rust 1.91.1 研究更新报告
+# Rust 1.91.1 研究更新报告 {#rust-1911-研究更新报告}
 
 > **概念族**: 版本特性
 
@@ -10,7 +10,7 @@
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -19,27 +19,27 @@
 >
 
 - [Rust 1.91.1 研究更新报告](#rust-1911-研究更新报告)
-  - [📑 目录](#-目录)
-  - [📋 概述](#-概述)
-  - [🎯 Rust 1.91.1 主要改进](#-rust-1911-主要改进)
+  - [📑 目录](#目录)
+  - [📋 概述](#概述)
+  - [🎯 Rust 1.91.1 主要改进](#rust-1911-主要改进)
     - [1. 异步迭代器改进](#1-异步迭代器改进)
     - [2. const 上下文增强](#2-const-上下文增强)
     - [3. JIT 编译器优化](#3-jit-编译器优化)
     - [4. 内存分配优化](#4-内存分配优化)
-  - [📝 需要更新的研究笔记](#-需要更新的研究笔记)
+  - [📝 需要更新的研究笔记](#需要更新的研究笔记)
     - [高优先级](#高优先级)
     - [中优先级](#中优先级)
-  - [🔄 更新计划](#-更新计划)
+  - [🔄 更新计划](#更新计划)
     - [第一阶段（本周）](#第一阶段本周)
     - [第二阶段（下周）](#第二阶段下周)
-  - [📚 相关资源](#-相关资源)
+  - [📚 相关资源](#相关资源)
     - [外部资源](#外部资源)
     - [内部文档](#内部文档)
     - [形式化链接](#形式化链接)
     - [核心定理](#核心定理)
     - [Coq 证明骨架](#coq-证明骨架)
     - [相关研究笔记](#相关研究笔记)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -59,7 +59,7 @@
 
 ---
 
-## 📋 概述
+## 📋 概述 {#概述}
 
 >
 
@@ -69,13 +69,13 @@
 
 ---
 
-## 🎯 Rust 1.91.1 主要改进
+## 🎯 Rust 1.91.1 主要改进 {#rust-1911-主要改进}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 异步迭代器改进
+### 1. 异步迭代器改进 {#1-异步迭代器改进}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -143,7 +143,7 @@ fn process(n: i32) -> impl Future<Output = ()> {
 
 ---
 
-### 2. const 上下文增强
+### 2. const 上下文增强 {#2-const-上下文增强}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -209,7 +209,7 @@ const fn with_static_ref() -> &'static mut i32 {
 
 ---
 
-### 3. JIT 编译器优化
+### 3. JIT 编译器优化 {#3-jit-编译器优化}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -269,7 +269,7 @@ async fn jit_optimized_async() -> i32 {
 
 ---
 
-### 4. 内存分配优化
+### 4. 内存分配优化 {#4-内存分配优化}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -339,13 +339,13 @@ fn small_object_allocation() {
 
 ---
 
-## 📝 需要更新的研究笔记
+## 📝 需要更新的研究笔记 {#需要更新的研究笔记}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 高优先级
+### 高优先级 {#高优先级}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -371,7 +371,7 @@ fn small_object_allocation() {
 
    - 分析新的优化策略
 
-### 中优先级
+### 中优先级 {#中优先级}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -393,13 +393,13 @@ fn small_object_allocation() {
 
 ---
 
-## 🔄 更新计划
+## 🔄 更新计划 {#更新计划}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 第一阶段（本周）
+### 第一阶段（本周） {#第一阶段本周}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -413,7 +413,7 @@ fn small_object_allocation() {
 
 - [ ] 更新编译器优化研究
 
-### 第二阶段（下周）
+### 第二阶段（下周） {#第二阶段下周}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -425,13 +425,13 @@ fn small_object_allocation() {
 
 ---
 
-## 📚 相关资源
+## 📚 相关资源 {#相关资源}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 外部资源
+### 外部资源 {#外部资源}
 
 >
 
@@ -439,7 +439,7 @@ fn small_object_allocation() {
 
 - [Rust 1.91.1 发布说明](https://blog.rust-lang.org/2025/11/10/Rust-1.91.1/)
 
-### 内部文档
+### 内部文档 {#内部文档}
 
 >
 
@@ -461,7 +461,7 @@ fn small_object_allocation() {
 
 | 内存分析 | [./experiments/10_memory_analysis.md](experiments/10_memory_analysis.md) | 内存实验 |
 
-### 形式化链接
+### 形式化链接 {#形式化链接}
 
 >
 
@@ -477,7 +477,7 @@ fn small_object_allocation() {
 
 | 内存分配 | [10_ownership_model.md](formal_methods/10_ownership_model.md) | Axiom A1-A8 |
 
-### 核心定理
+### 核心定理 {#核心定理}
 
 >
 
@@ -493,7 +493,7 @@ fn small_object_allocation() {
 
 | T-TY3 | [10_core_theorems_full_proofs.md](10_core_theorems_full_proofs.md) | 类型安全 |
 
-### Coq 证明骨架
+### Coq 证明骨架 {#coq-证明骨架}
 
 >
 
@@ -503,13 +503,13 @@ fn small_object_allocation() {
 
 | :--- | :--- | :--- |
 
-| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 骨架已创建 |
+| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../../archive/deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 骨架已创建 |
 
-| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](../deprecated/coq_skeleton/BORROW_DATARACE_FREE.v) | 骨架已创建 |
+| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](../../archive/deprecated/coq_skeleton/BORROW_DATARACE_FREE.v) | 骨架已创建 |
 
-| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](../deprecated/coq_skeleton/TYPE_SAFETY.v) | 骨架已创建 |
+| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](../../archive/deprecated/coq_skeleton/TYPE_SAFETY.v) | 骨架已创建 |
 
-### 相关研究笔记
+### 相关研究笔记 {#相关研究笔记}
 
 >
 
@@ -539,7 +539,7 @@ fn small_object_allocation() {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -549,7 +549,7 @@ fn small_object_allocation() {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -557,7 +557,7 @@ fn small_object_allocation() {
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -571,7 +571,7 @@ fn small_object_allocation() {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -581,7 +581,7 @@ fn small_object_allocation() {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -613,7 +613,7 @@ fn small_object_allocation() {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -625,7 +625,7 @@ fn small_object_allocation() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

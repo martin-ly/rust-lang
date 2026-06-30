@@ -8,7 +8,7 @@
 
 ---
 
-# Maud Crate 架构解构
+# Maud Crate 架构解构 {#maud-crate-架构解构}
 
 > **最后更新**: 2026-06-29
 >
@@ -24,7 +24,7 @@
 
 ---
 
-## 1. 引言：Maud 在 Rust 模板生态中的定位
+## 1. 引言：Maud 在 Rust 模板生态中的定位 {#1-引言maud-在-rust-模板生态中的定位}
 
 > **[来源: [maud crates.io](https://crates.io/crates/maud)]**
 
@@ -60,11 +60,11 @@ fn main() {
 
 ---
 
-## 2. 核心 API 架构
+## 2. 核心 API 架构 {#2-核心-api-架构}
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 2.1 `html!` 过程宏
+### 2.1 `html!` 过程宏 {#21-html-过程宏}
 
 `html!` 是 Maud 的唯一核心入口。它将花括号内的 DSL 在编译期转换为 `Markup` 值：
 
@@ -97,7 +97,7 @@ DSL 规则：
 - `@for`、`@if`、`@match` 提供控制流。
 - 属性使用 `key="value"` 或 `key=(expr)` 形式。
 
-### 2.2 `Markup` 与 `Render` trait
+### 2.2 `Markup` 与 `Render` trait {#22-markup-与-render-trait}
 
 `html!` 返回 `Markup` 类型，可通过 `into_string()` 转为 `String`，也可直接作为 HTTP 响应：
 
@@ -116,7 +116,7 @@ impl Render for User {
 
 `Render` trait 允许自定义类型直接参与模板拼接，实现类型级别的组件化。
 
-### 2.3 渲染流程
+### 2.3 渲染流程 {#23-渲染流程}
 
 ```mermaid
 graph LR
@@ -129,7 +129,7 @@ graph LR
 
 由于宏在编译期完成所有工作，运行期只有字符串写入操作，无 AST 遍历或模板缓存。
 
-### 2.4 Web 框架集成
+### 2.4 Web 框架集成 {#24-web-框架集成}
 
 启用对应 feature 后，`Markup` 可直接作为响应：
 
@@ -150,7 +150,7 @@ async fn hello() -> impl axum::response::IntoResponse {
 
 ---
 
-## 3. 与 axum / actix-web 及同类模板引擎对比
+## 3. 与 axum / actix-web 及同类模板引擎对比 {#3-与-axum-actix-web-及同类模板引擎对比}
 
 > **[来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]**
 
@@ -174,7 +174,7 @@ async fn hello() -> impl axum::response::IntoResponse {
 
 ---
 
-## 4. 反例边界
+## 4. 反例边界 {#4-反例边界}
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -191,7 +191,7 @@ async fn hello() -> impl axum::response::IntoResponse {
 
 ---
 
-## 5. 代码示例锚点
+## 5. 代码示例锚点 {#5-代码示例锚点}
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -203,7 +203,7 @@ async fn hello() -> impl axum::response::IntoResponse {
 
 ---
 
-## 6. 相关概念
+## 6. 相关概念 {#6-相关概念}
 
 - [00_crate_architecture_master_index.md](00_crate_architecture_master_index.md) — Rust 工业级 Crate 架构总索引
 - [39_salvo_architecture.md](39_salvo_architecture.md) — Salvo Web 框架架构
@@ -224,27 +224,27 @@ async fn hello() -> impl axum::response::IntoResponse {
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
-### P0 — 核心官方文档
+### P0 — 核心官方文档 {#p0-核心官方文档}
 
 > - [来源: [maud docs.rs](https://docs.rs/maud/latest/maud/)]
 > - [来源: [maud book](https://maud.lambda.xyz/)]
 > - [来源: [maud crates.io](https://crates.io/crates/maud)]
 
-### P1 — 标准与生态文档
+### P1 — 标准与生态文档 {#p1-标准与生态文档}
 
 > - [来源: [Rust Reference - Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)]
 > - [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 > - [来源: [OWASP XSS Prevention](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)]
 
-### P2 — 仓库与社区文章
+### P2 — 仓库与社区文章 {#p2-仓库与社区文章}
 
 > - [来源: [maud GitHub Repository](https://github.com/lambda-fairy/maud)]
 > - [来源: [This Week in Rust](https://this-week-in-rust.org/)]
 > - [来源: [Rust 中文社区](https://rustcc.cn/)]
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas](https://aeneas-verification.github.io/)

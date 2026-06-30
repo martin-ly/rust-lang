@@ -1,4 +1,4 @@
-# AI + Rust 生态指南
+# AI + Rust 生态指南 {#ai-rust-生态指南}
 
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
@@ -13,12 +13,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [AI + Rust 生态指南](#ai--rust-生态指南)
-  - [📑 目录](#-目录)
+- [AI + Rust 生态指南](#ai-rust-生态指南)
+  - [📑 目录](#目录)
   - [文档定位](#文档定位)
   - [一、AI 辅助 Rust 开发](#一ai-辅助-rust-开发)
   - [二、Rust 构建 AI/ML 应用](#二rust-构建-aiml-应用)
@@ -28,7 +28,7 @@
   - [三、推荐学习路径](#三推荐学习路径)
     - [路径 A：AI 辅助学 Rust（先 AI 后 Rust）](#路径-aai-辅助学-rust先-ai-后-rust)
     - [路径 B：Rust 构建 AI（先 Rust 后 AI）](#路径-brust-构建-ai先-rust-后-ai)
-    - [路径 C：AI + Rust 双轨](#路径-cai--rust-双轨)
+    - [路径 C：AI + Rust 双轨](#路径-cai-rust-双轨)
   - [四、入门示例](#四入门示例)
     - [4.1 Candle 最小示例](#41-candle-最小示例)
     - [4.2 Candle 神经网络推理](#42-candle-神经网络推理)
@@ -54,11 +54,10 @@
     - [LazyLock 在模型缓存中的应用](#lazylock-在模型缓存中的应用)
     - [ControlFlow 在数据处理管道中的应用](#controlflow-在数据处理管道中的应用)
     - [数学常量在算法优化中的应用](#数学常量在算法优化中的应用)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 文档定位
+## 文档定位 {#文档定位}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -68,7 +67,7 @@
 
 ---
 
-## 一、AI 辅助 Rust 开发
+## 一、AI 辅助 Rust 开发 {#一ai-辅助-rust-开发}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -83,11 +82,11 @@
 
 ---
 
-## 二、Rust 构建 AI/ML 应用
+## 二、Rust 构建 AI/ML 应用 {#二rust-构建-aiml-应用}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 深度学习框架
+### 2.1 深度学习框架 {#21-深度学习框架}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -99,7 +98,7 @@
 | **Candle** | 神经网络推理/训练 | 简洁 API、Hugging Face 集成 | [GitHub](https://github.com/huggingface/candle) |
 | **tch-rs** | PyTorch 绑定 | Rust 调用 LibTorch | [docs.rs](https://docs.rs/crate/tch) |
 
-### 2.2 LLM 推理
+### 2.2 LLM 推理 {#22-llm-推理}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -111,7 +110,7 @@
 | **mistral.rs** | 高性能推理 | 模块化、量化、Vision 支持 |
 | **lm.rs** | 轻量推理 | CPU 优化、SIMD、rayon |
 
-### 2.3 与 C01–C12 的关联
+### 2.3 与 C01–C12 的关联 {#23-与-c01c12-的关联}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -127,11 +126,11 @@
 
 ---
 
-## 三、推荐学习路径
+## 三、推荐学习路径 {#三推荐学习路径}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 路径 A：AI 辅助学 Rust（先 AI 后 Rust）
+### 路径 A：AI 辅助学 Rust（先 AI 后 Rust） {#路径-aai-辅助学-rust先-ai-后-rust}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -141,7 +140,7 @@
 2. 结合 [RUSTLINGS_MAPPING](../../exercises/RUSTLINGS_MAPPING.md) 让 AI 推荐习题
 3. 遇到错误时附带 [ERROR_CODE_MAPPING](../02_reference/02_error_code_mapping.md)
 
-### 路径 B：Rust 构建 AI（先 Rust 后 AI）
+### 路径 B：Rust 构建 AI（先 Rust 后 AI） {#路径-brust-构建-ai先-rust-后-ai}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -151,7 +150,7 @@
 2. 学习 Candle 或 Burn 入门教程
 3. 实践：用 Candle 加载简单模型做推理
 
-### 路径 C：AI + Rust 双轨
+### 路径 C：AI + Rust 双轨 {#路径-cai-rust-双轨}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -163,16 +162,16 @@
 
 ---
 
-## 四、入门示例
+## 四、入门示例 {#四入门示例}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 4.1 Candle 最小示例
+### 4.1 Candle 最小示例 {#41-candle-最小示例}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
 ```toml
-# 新建项目: cargo new candle_demo && cd candle_demo
+# 新建项目: cargo new candle_demo && cd candle_demo {#新建项目-cargo-new-candle_demo-cd-candle_demo}
 [dependencies]
 candle-core = "0.8"
 candle-nn = "0.8"
@@ -190,7 +189,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-### 4.2 Candle 神经网络推理
+### 4.2 Candle 神经网络推理 {#42-candle-神经网络推理}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -220,7 +219,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-### 4.3 Burn 最小示例
+### 4.3 Burn 最小示例 {#43-burn-最小示例}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -259,7 +258,7 @@ fn main() {
 }
 ```
 
-### 4.4 使用 Candle 加载预训练模型
+### 4.4 使用 Candle 加载预训练模型 {#44-使用-candle-加载预训练模型}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -294,7 +293,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-### 4.5 本地 LLM 推理 (llm crate)
+### 4.5 本地 LLM 推理 (llm crate) {#45-本地-llm-推理-llm-crate}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -347,7 +346,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-### 4.6 并发数据加载器
+### 4.6 并发数据加载器 {#46-并发数据加载器}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -406,7 +405,7 @@ fn tokenize_and_embed(text: &str) -> Vec<f32> {
 
 ---
 
-## 五、RAG 索引建议
+## 五、RAG 索引建议 {#五rag-索引建议}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -424,11 +423,11 @@ fn tokenize_and_embed(text: &str) -> Vec<f32> {
 
 ---
 
-## 六、最佳实践
+## 六、最佳实践 {#六最佳实践}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 6.1 内存管理
+### 6.1 内存管理 {#61-内存管理}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -449,7 +448,7 @@ fn process_large_tensor() -> candle_core::Result<()> {
 }
 ```
 
-### 6.2 批量处理
+### 6.2 批量处理 {#62-批量处理}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -467,7 +466,7 @@ fn batch_inference(model: &dyn Model, inputs: &[Tensor]) -> Vec<Tensor> {
 }
 ```
 
-### 6.3 错误处理
+### 6.3 错误处理 {#63-错误处理}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -491,7 +490,7 @@ type Result<T> = std::result::Result<T, AIError>;
 
 ---
 
-## 七、后续计划（扩展方向）
+## 七、后续计划（扩展方向） {#七后续计划扩展方向}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -504,11 +503,11 @@ type Result<T> = std::result::Result<T, AIError>;
 
 ---
 
-## 八、使用场景
+## 八、使用场景 {#八使用场景}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 场景1: AI 辅助 Rust 学习
+### 场景1: AI 辅助 Rust 学习 {#场景1-ai-辅助-rust-学习}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -518,7 +517,7 @@ type Result<T> = std::result::Result<T, AIError>;
 - 让 AI 根据 [RUSTLINGS_MAPPING](../../exercises/RUSTLINGS_MAPPING.md) 推荐练习
 - 使用 AI 审查代码并提供改进建议
 
-### 场景2: 本地 LLM 推理服务
+### 场景2: 本地 LLM 推理服务 {#场景2-本地-llm-推理服务}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -529,7 +528,7 @@ type Result<T> = std::result::Result<T, AIError>;
 // 适用于：隐私敏感场景、离线环境、边缘设备
 ```
 
-### 场景3: 嵌入式 AI 推理
+### 场景3: 嵌入式 AI 推理 {#场景3-嵌入式-ai-推理}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -538,7 +537,7 @@ type Result<T> = std::result::Result<T, AIError>;
 - 使用 Candle 的轻量级特性
 - 结合 [嵌入式 Rust 指南](05_embedded_rust_guide.md) 进行边缘部署
 
-### 场景4: 生产级 ML Pipeline
+### 场景4: 生产级 ML Pipeline {#场景4-生产级-ml-pipeline}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -550,7 +549,7 @@ type Result<T> = std::result::Result<T, AIError>;
 
 ---
 
-## 九、形式化链接
+## 九、形式化链接 {#九形式化链接}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -568,7 +567,7 @@ type Result<T> = std::result::Result<T, AIError>;
 
 ---
 
-## 十、相关文档
+## 十、相关文档 {#十相关文档}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -581,13 +580,13 @@ type Result<T> = std::result::Result<T, AIError>;
 
 ---
 
-## Rust 1.95+ 在 AI/ML 开发中的应用
+## Rust 1.95+ 在 AI/ML 开发中的应用 {#rust-195-在-aiml-开发中的应用}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.96.0+
 
-### array_windows 在特征工程中的应用
+### array_windows 在特征工程中的应用 {#array_windows-在特征工程中的应用}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -613,7 +612,7 @@ pub fn sliding_predict(model: &Model, data: &[f32]) -> Vec<f32> {
 }
 ```
 
-### LazyLock 在模型缓存中的应用
+### LazyLock 在模型缓存中的应用 {#lazylock-在模型缓存中的应用}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -636,7 +635,7 @@ pub fn quick_inference(input: &[f32]) -> Option<Vec<f32>> {
 }
 ```
 
-### ControlFlow 在数据处理管道中的应用
+### ControlFlow 在数据处理管道中的应用 {#controlflow-在数据处理管道中的应用}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -664,7 +663,7 @@ fn preprocess_pipeline(
 }
 ```
 
-### 数学常量在算法优化中的应用
+### 数学常量在算法优化中的应用 {#数学常量在算法优化中的应用}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -720,7 +719,7 @@ pub fn golden_ratio_search_lr(
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -729,7 +728,7 @@ pub fn golden_ratio_search_lr(
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

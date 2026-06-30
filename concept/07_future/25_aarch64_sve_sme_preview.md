@@ -18,7 +18,7 @@
 
 ---
 
-> **来源**:
+> **来源**: · [嵌入式系统](../06_ecosystem/22_embedded_systems.md)
 >
 > [Tracking Issue #145052 — Scalable Vectors](https://github.com/rust-lang/rust/issues/145052) ·
 > [RFC #3838 — Scalable Vectors](https://github.com/rust-lang/rfcs/pull/3838) ·

@@ -1,4 +1,4 @@
-# Rayon Crate 架构解构
+# Rayon Crate 架构解构 {#rayon-crate-架构解构}
 
 >
 
@@ -28,7 +28,7 @@
 
 ---
 
-## 1. 引言
+## 1. 引言 {#1-引言}
 
 >
 
@@ -58,13 +58,13 @@ Rayon 不引入新的并发原语（如锁或通道），而是**复用 Rust 已
 
 ---
 
-## 2. 核心抽象
+## 2. 核心抽象 {#2-核心抽象}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 2.1 `ParallelIterator` Trait
+### 2.1 `ParallelIterator` Trait {#21-paralleliterator-trait}
 
 >
 
@@ -128,7 +128,7 @@ pub trait ParallelIterator: Sized + Send {
 
 这不是运行时检查，而是编译期由 Rust 类型系统强制保证的。
 
-### 2.2 从 `Iterator` 到 `ParallelIterator`
+### 2.2 从 `Iterator` 到 `ParallelIterator` {#22-从-iterator-到-paralleliterator}
 
 >
 
@@ -164,7 +164,7 @@ let sum: u64 = (0..1_000_000)
 
 Rayon 的 `ParallelIterator` 支持几乎所有标准库迭代器方法：`map`、`filter`、`fold`、`reduce`、`sum`、`min_by`、`collect`、`find_any` 等。其中 `find_any` 和 `position_any` 是并行特化的（返回"任意"匹配结果即可，无需确定性顺序）。
 
-### 2.3 `join(f, g)` — 分叉-汇合并行
+### 2.3 `join(f, g)` — 分叉-汇合并行 {#23-joinf-g-分叉-汇合并行}
 
 >
 
@@ -208,7 +208,7 @@ fn fibonacci(n: u32) -> u32 {
 
 ---
 
-## 3. 工作窃取调度
+## 3. 工作窃取调度 {#3-工作窃取调度}
 
 >
 
@@ -216,7 +216,7 @@ fn fibonacci(n: u32) -> u32 {
 
 Rayon 的性能魔法来自其工作窃取调度器。理解这一机制，是正确使用 Rayon 的关键。
 
-### 3.1 线程池架构
+### 3.1 线程池架构 {#31-线程池架构}
 
 >
 
@@ -298,7 +298,7 @@ flowchart TD
 
 ```
 
-### 3.2 工作窃取的三条规则
+### 3.2 工作窃取的三条规则 {#32-工作窃取的三条规则}
 
 >
 
@@ -318,7 +318,7 @@ flowchart TD
 
 > [来源: Rayon 文档 — ThreadPool](https://docs.rs/rayon/latest/rayon/struct.ThreadPool.html)
 
-### 3.3 为什么工作窃取高效？
+### 3.3 为什么工作窃取高效？ {#33-为什么工作窃取高效}
 
 >
 
@@ -332,7 +332,7 @@ flowchart TD
 
 ---
 
-## 4. 类型安全保证
+## 4. 类型安全保证 {#4-类型安全保证}
 
 >
 
@@ -340,7 +340,7 @@ flowchart TD
 
 Rayon 将 Rust 的所有权系统发挥到极致，在编译期消除数据并行中的所有风险。
 
-### 4.1 `Send` 与 `Sync` 的强制约束
+### 4.1 `Send` 与 `Sync` 的强制约束 {#41-send-与-sync-的强制约束}
 
 >
 
@@ -368,7 +368,7 @@ let bad: Vec<Rc<i32>> = vec![Rc::new(1)];
 
 > [来源: Rust Reference — Send and Sync](https://doc.rust-lang.org/reference/special-types-and-traits.html)
 
-### 4.2 `ParallelIterator` 的 trait bounds
+### 4.2 `ParallelIterator` 的 trait bounds {#42-paralleliterator-的-trait-bounds}
 
 >
 
@@ -396,7 +396,7 @@ pub trait ParallelIterator: Sized + Send {
 
 这些约束保证了：**在 Rayon 的并行迭代中，不可能出现数据竞争**。
 
-### 4.3 可变并行迭代：`par_iter_mut()`
+### 4.3 可变并行迭代：`par_iter_mut()` {#43-可变并行迭代par_iter_mut}
 
 >
 
@@ -422,7 +422,7 @@ nums.par_iter_mut().for_each(|x| {
 
 ---
 
-## 5. 与标准库的集成
+## 5. 与标准库的集成 {#5-与标准库的集成}
 
 >
 
@@ -430,7 +430,7 @@ nums.par_iter_mut().for_each(|x| {
 
 Rayon 通过扩展 trait（`ParallelSlice`、`ParallelSliceMut`、`ParallelIterator` 等）为标准库集合类型添加并行能力。
 
-### 5.1 `Vec` 的并行操作
+### 5.1 `Vec` 的并行操作 {#51-vec-的并行操作}
 
 >
 
@@ -470,7 +470,7 @@ let squares: Vec<u64> = data.into_par_iter()
 
 > [来源: Rayon 文档 — `ParallelSliceMut`](https://docs.rs/rayon/latest/rayon/slice/trait.ParallelSliceMut.html)
 
-### 5.2 零成本顺序回退
+### 5.2 零成本顺序回退 {#52-零成本顺序回退}
 
 >
 
@@ -514,13 +514,13 @@ fn parallel_sum(nums: &[u32]) -> u32 {
 
 ---
 
-## 6. `scope()` API 与自定义线程池
+## 6. `scope()` API 与自定义线程池 {#6-scope-api-与自定义线程池}
 
 >
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 6.1 `rayon::scope()` — 嵌套并行
+### 6.1 `rayon::scope()` — 嵌套并行 {#61-rayonscope-嵌套并行}
 
 >
 
@@ -572,7 +572,7 @@ fn process_data(data: &[u64]) -> Vec<u64> {
 
 > [来源: Rayon 文档 — `scope`](https://docs.rs/rayon/latest/rayon/fn.scope.html)
 
-### 6.2 `ThreadPoolBuilder` — 自定义线程池
+### 6.2 `ThreadPoolBuilder` — 自定义线程池 {#62-threadpoolbuilder-自定义线程池}
 
 >
 
@@ -622,7 +622,7 @@ pool.install(|| {
 
 ---
 
-## 7. 与标准库并行扩展的对比
+## 7. 与标准库并行扩展的对比 {#7-与标准库并行扩展的对比}
 
 >
 
@@ -646,7 +646,7 @@ pool.install(|| {
 
 ---
 
-## 8. 来源
+## 8. 来源 {#8-来源}
 
 >
 
@@ -680,7 +680,7 @@ pool.install(|| {
 
 ---
 
-## 相关架构与延伸阅读
+## 相关架构与延伸阅读 {#相关架构与延伸阅读}
 
 >
 
@@ -692,7 +692,7 @@ pool.install(|| {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -712,7 +712,7 @@ pool.install(|| {
 
 ---
 
-## 权威来源参考
+## 权威来源参考 {#权威来源参考}
 
 > **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 > **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)

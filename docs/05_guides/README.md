@@ -1,4 +1,4 @@
-# 扩展指南
+# 扩展指南 {#扩展指南}
 
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **最后更新**: 2026-06-09
@@ -8,9 +8,9 @@
 
 本目录收录 Rust 各专题领域的扩展指南，覆盖 AI 生态、算法、设计模式、性能调优、形式化验证等方向。
 
-## 文档索引
+## 文档索引 {#文档索引}
 
-### 核心专题
+### 核心专题 {#核心专题}
 
 - [CLI 应用开发指南](05_cli_applications_guide.md)
 - [异步编程使用指南](05_async_programming_usage_guide.md)
@@ -18,7 +18,7 @@
 - [测试与覆盖率指南](05_testing_coverage_guide.md)
 - [线程与并发使用指南](05_threads_concurrency_usage_guide.md)
 
-### 工具与验证
+### 工具与验证 {#工具与验证}
 
 - [Miri 实战指南](05_miri_practical_guide.md) — 检测未定义行为
 - [Kani 实战指南](05_kani_practical_guide.md) — Bounded Model Checker
@@ -26,7 +26,7 @@
 - [BorrowSanitizer 预览](../../concept/07_future/20_borrowsanitizer_preview.md)
 - [Safety Tags 预研指南](05_safety_tags_guide.md)
 
-### 生态与互操作
+### 生态与互操作 {#生态与互操作}
 
 - [AI + Rust 生态指南](05_ai_rust_ecosystem_guide.md)
 - [算法使用指南](05_algorithms_usage_guide.md)
@@ -36,7 +36,7 @@
 - [宏系统使用指南](05_macro_system_usage_guide.md)
 - [内联汇编完整指南](05_inline_assembly_guide.md)
 
-### 其他
+### 其他 {#其他}
 
 - [高级主题深度指南](05_advanced_topics_deep_dive.md)
 - [跨模块集成示例指南](05_cross_module_integration_examples.md)

@@ -1,4 +1,4 @@
-# 算法与数据结构快速参考卡片
+# 算法与数据结构快速参考卡片 {#算法与数据结构快速参考卡片}
 
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
@@ -6,54 +6,54 @@
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [算法与数据结构快速参考卡片](#算法与数据结构快速参考卡片)
-  - [📑 目录](#-目录)
-  - [🚀 快速开始](#-快速开始)
-    - [排序算法](#排序算法)
-    - [搜索算法](#搜索算法)
-  - [📋 常用算法](#-常用算法)
+  - [📑 目录](#目录)
+  - [🚀 快速开始](#快速开始)
+    - [排序算法](#排序算法-1)
+    - [搜索算法](#搜索算法-1)
+  - [📋 常用算法](#常用算法)
     - [排序算法](#排序算法-1)
     - [搜索算法](#搜索算法-1)
     - [图算法](#图算法)
     - [动态规划](#动态规划)
-  - [📊 数据结构](#-数据结构)
+  - [📊 数据结构](#数据结构)
     - [优先队列与 LRU](#优先队列与-lru)
     - [线段树](#线段树)
     - [哈希表](#哈希表)
     - [BTreeMap/BTreeSet 与 append（Rust 1.93）](#btreemapbtreeset-与-appendrust-193)
-  - [💡 代码示例](#-代码示例)
+  - [💡 代码示例](#代码示例)
     - [示例 1: 快速排序实现](#示例-1-快速排序实现)
     - [示例 2: 二分搜索实现](#示例-2-二分搜索实现)
     - [示例 3: 动态规划 - 最长公共子序列](#示例-3-动态规划---最长公共子序列)
     - [示例 4: 图的 BFS 和 DFS](#示例-4-图的-bfs-和-dfs)
     - [示例 5: 滑动窗口最大值](#示例-5-滑动窗口最大值)
-  - [🎯 使用场景](#-使用场景)
+  - [🎯 使用场景](#使用场景)
     - [场景: 日志分析系统](#场景-日志分析系统)
-  - [⚡ 并行算法](#-并行算法)
+  - [⚡ 并行算法](#并行算法)
     - [并行排序](#并行排序)
     - [并行搜索](#并行搜索)
-  - [🔧 算法选择指南](#-算法选择指南)
+  - [🔧 算法选择指南](#算法选择指南)
     - [排序选择](#排序选择)
     - [搜索选择](#搜索选择)
-  - [📈 性能优化技巧](#-性能优化技巧)
+  - [📈 性能优化技巧](#性能优化技巧)
     - [使用迭代器](#使用迭代器)
     - [避免不必要的分配](#避免不必要的分配)
-  - [🐛 常见错误](#-常见错误)
+  - [🐛 常见错误](#常见错误)
     - [越界访问](#越界访问)
     - [整数溢出](#整数溢出)
-  - [🚫 反例速查](#-反例速查)
+  - [🚫 反例速查](#反例速查)
     - [反例 1: 对未排序切片 binary\_search](#反例-1-对未排序切片-binary_search)
     - [反例 2: sort 与 sort\_by 混用导致不稳定](#反例-2-sort-与-sort_by-混用导致不稳定)
     - [反例 3: 递归深度过大导致栈溢出](#反例-3-递归深度过大导致栈溢出)
     - [反例 4: 整数溢出](#反例-4-整数溢出)
     - [反例 5: 不当使用递归导致重复计算](#反例-5-不当使用递归导致重复计算)
-  - [📚 相关文档](#-相关文档)
-  - [🧩 相关示例代码](#-相关示例代码)
-  - [📚 相关资源](#-相关资源)
+  - [📚 相关文档](#相关文档)
+  - [🧩 相关示例代码](#相关示例代码)
+  - [📚 相关资源](#相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
     - [形式化理论与类型系统](#形式化理论与类型系统)
@@ -76,11 +76,11 @@
 
 ---
 
-## 🚀 快速开始
+## 🚀 快速开始 {#快速开始}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 排序算法
+### 排序算法 {#排序算法-1}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -108,7 +108,7 @@ sort_parallel(&mut data, SortingAlgo::Quick);
 println!("Parallel sorted: {:?}", data);
 ```
 
-### 搜索算法
+### 搜索算法 {#搜索算法-1}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -139,11 +139,11 @@ if let Some(index) = parallel_search(&data, &7) {
 
 ---
 
-## 📋 常用算法
+## 📋 常用算法 {#常用算法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 排序算法
+### 排序算法 {#排序算法-1}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -159,7 +159,7 @@ if let Some(index) = parallel_search(&data, &7) {
 | 插入排序 | O(n²)      | O(1)       | 稳定   | 小数据集   |
 | 选择排序 | O(n²)      | O(1)       | 不稳定 | 简单场景   |
 
-### 搜索算法
+### 搜索算法 {#搜索算法-1}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -170,7 +170,7 @@ if let Some(index) = parallel_search(&data, &7) {
 | 线性搜索 | O(n)         | O(1)       | 无             |
 | 插值搜索 | O(log log n) | O(1)       | 均匀分布已排序 |
 
-### 图算法
+### 图算法 {#图算法}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -205,7 +205,7 @@ println!("Distances: {:?}", distances);
 println!("Predecessors: {:?}", predecessors);
 ```
 
-### 动态规划
+### 动态规划 {#动态规划}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -230,11 +230,11 @@ println!("Max knapsack value: {}", max_value);
 
 ---
 
-## 📊 数据结构
+## 📊 数据结构 {#数据结构}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 优先队列与 LRU
+### 优先队列与 LRU {#优先队列与-lru}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -264,7 +264,7 @@ println!("{:?}", cache.get(&"a"));
 cache.put("c", 3); // 淘汰最早未使用的条目
 ```
 
-### 线段树
+### 线段树 {#线段树}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -284,7 +284,7 @@ st.update_point(2, 10);
 println!("After update, Sum[1..3] = {}", st.query_sum(1, 3));
 ```
 
-### 哈希表
+### 哈希表 {#哈希表}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -300,7 +300,7 @@ if let Some(value) = map.get("key1") {
 }
 ```
 
-### BTreeMap/BTreeSet 与 append（Rust 1.93）
+### BTreeMap/BTreeSet 与 append（Rust 1.93） {#btreemapbtreeset-与-appendrust-193}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -309,11 +309,11 @@ if let Some(value) = map.get("key1") {
 
 ---
 
-## 💡 代码示例
+## 💡 代码示例 {#代码示例}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 示例 1: 快速排序实现
+### 示例 1: 快速排序实现 {#示例-1-快速排序实现}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -350,7 +350,7 @@ quicksort(&mut data);
 assert_eq!(data, vec![11, 12, 22, 25, 34, 64, 90]);
 ```
 
-### 示例 2: 二分搜索实现
+### 示例 2: 二分搜索实现 {#示例-2-二分搜索实现}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -376,7 +376,7 @@ assert_eq!(binary_search(&arr, &7), Some(3));
 assert_eq!(binary_search(&arr, &4), None);
 ```
 
-### 示例 3: 动态规划 - 最长公共子序列
+### 示例 3: 动态规划 - 最长公共子序列 {#示例-3-动态规划---最长公共子序列}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -421,7 +421,7 @@ fn lcs(s1: &str, s2: &str) -> String {
 assert_eq!(lcs("ABCDGH", "AEDFHR"), "ADH");
 ```
 
-### 示例 4: 图的 BFS 和 DFS
+### 示例 4: 图的 BFS 和 DFS {#示例-4-图的-bfs-和-dfs}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -491,7 +491,7 @@ println!("BFS: {:?}", g.bfs(0));
 println!("DFS: {:?}", g.dfs(0));
 ```
 
-### 示例 5: 滑动窗口最大值
+### 示例 5: 滑动窗口最大值 {#示例-5-滑动窗口最大值}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -539,11 +539,11 @@ assert_eq!(max_sliding_window(&nums, 3), vec![3, 3, 5, 5, 6, 7]);
 
 ---
 
-## 🎯 使用场景
+## 🎯 使用场景 {#使用场景}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 场景: 日志分析系统
+### 场景: 日志分析系统 {#场景-日志分析系统}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -603,11 +603,11 @@ impl LogAnalyzer {
 
 ---
 
-## ⚡ 并行算法
+## ⚡ 并行算法 {#并行算法}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 并行排序
+### 并行排序 {#并行排序}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -621,7 +621,7 @@ data.par_sort();
 println!("Sorted: {:?}", data);
 ```
 
-### 并行搜索
+### 并行搜索 {#并行搜索}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -639,11 +639,11 @@ if let Some(&value) = found {
 
 ---
 
-## 🔧 算法选择指南
+## 🔧 算法选择指南 {#算法选择指南}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 排序选择
+### 排序选择 {#排序选择}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -653,7 +653,7 @@ if let Some(&value) = found {
 - **需要稳定性**: 归并排序
 - **内存受限**: 堆排序
 
-### 搜索选择
+### 搜索选择 {#搜索选择}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -664,11 +664,11 @@ if let Some(&value) = found {
 
 ---
 
-## 📈 性能优化技巧
+## 📈 性能优化技巧 {#性能优化技巧}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 使用迭代器
+### 使用迭代器 {#使用迭代器}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -680,7 +680,7 @@ let sum: i32 = data.iter()
     .sum();
 ```
 
-### 避免不必要的分配
+### 避免不必要的分配 {#避免不必要的分配}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -697,11 +697,11 @@ let mut buffer = Vec::with_capacity(1024);
 
 ---
 
-## 🐛 常见错误
+## 🐛 常见错误 {#常见错误}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 越界访问
+### 越界访问 {#越界访问}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -715,7 +715,7 @@ if let Some(value) = data.get(index) {
 }
 ```
 
-### 整数溢出
+### 整数溢出 {#整数溢出}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -729,11 +729,11 @@ let result = a.checked_add(b)?;
 
 ---
 
-## 🚫 反例速查
+## 🚫 反例速查 {#反例速查}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 反例 1: 对未排序切片 binary_search
+### 反例 1: 对未排序切片 binary_search {#反例-1-对未排序切片-binary_search}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -756,7 +756,7 @@ let _ = v.binary_search(&2);
 
 ---
 
-### 反例 2: sort 与 sort_by 混用导致不稳定
+### 反例 2: sort 与 sort_by 混用导致不稳定 {#反例-2-sort-与-sort_by-混用导致不稳定}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -774,7 +774,7 @@ v.sort_by(|a, b| a.1.cmp(&b.1));  // 可能破坏第一键顺序
 
 ---
 
-### 反例 3: 递归深度过大导致栈溢出
+### 反例 3: 递归深度过大导致栈溢出 {#反例-3-递归深度过大导致栈溢出}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -804,7 +804,7 @@ fn factorial(n: u64) -> u64 {
 
 ---
 
-### 反例 4: 整数溢出
+### 反例 4: 整数溢出 {#反例-4-整数溢出}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -827,7 +827,7 @@ let sum = a.checked_add(b).expect("overflow");
 
 ---
 
-### 反例 5: 不当使用递归导致重复计算
+### 反例 5: 不当使用递归导致重复计算 {#反例-5-不当使用递归导致重复计算}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -858,13 +858,13 @@ fn fib(n: usize) -> usize {
 
 ---
 
-## 📚 相关文档
+## 📚 相关文档 {#相关文档}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [完整文档](../../../crates/c08_algorithms/README.md)
 
-## 🧩 相关示例代码
+## 🧩 相关示例代码 {#相关示例代码}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -877,18 +877,18 @@ fn fib(n: usize) -> usize {
 - [算法复杂度演示](../../../crates/c08_algorithms/examples/algorithm_complexity_demo.rs)
 - [算法优化演示](../../../crates/c08_algorithms/examples/algorithm_optimization_demo.rs)
 
-## 📚 相关资源
+## 📚 相关资源 {#相关资源}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 官方文档
+### 官方文档 {#官方文档}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - [Rust 算法文档](https://doc.rust-lang.org/std/collections/)
 - [Iterator 文档](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
 
-### 项目内部文档
+### 项目内部文档 {#项目内部文档}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -896,7 +896,7 @@ fn fib(n: usize) -> usize {
 - [数据结构指南](../../../crates/c08_algorithms/docs/tier_02_guides/02_数据结构实践.md)
 - [性能优化](../../../crates/c08_algorithms/docs/tier_02_guides/04_性能优化实践.md)
 
-### 形式化理论与类型系统
+### 形式化理论与类型系统 {#形式化理论与类型系统}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -905,7 +905,7 @@ fn fib(n: usize) -> usize {
 - [执行模型边界分析](../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/06_boundary_analysis.md) — 算法复杂度与执行模型
 - [工作流安全完整模型](../../../archive/research_notes_2026_06_25/software_design_theory/02_workflow_safe_complete_models/README.md) — 算法正确性验证
 
-### 相关速查卡
+### 相关速查卡 {#相关速查卡}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -922,14 +922,14 @@ fn fib(n: usize) -> usize {
 
 ---
 
-## Rust 1.95+ 在算法中的深度应用
+## Rust 1.95+ 在算法中的深度应用 {#rust-195-在算法中的深度应用}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 > **适用版本**: Rust 1.96.0+ | **实际场景**: 算法优化与数值计算
 
 ---
 
-### array_windows 在滑动窗口算法中的应用
+### array_windows 在滑动窗口算法中的应用 {#array_windows-在滑动窗口算法中的应用}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -1010,7 +1010,7 @@ pub fn stream_anomaly_detection(data: &[f64]) -> Vec<usize> {
 
 ---
 
-### ControlFlow 在搜索算法中的应用
+### ControlFlow 在搜索算法中的应用 {#controlflow-在搜索算法中的应用}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -1131,7 +1131,7 @@ pub fn find_rotate_min(nums: &[i32]) -> Option<i32> {
 
 ---
 
-### LazyLock 在算法预处理中的应用
+### LazyLock 在算法预处理中的应用 {#lazylock-在算法预处理中的应用}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -1195,7 +1195,7 @@ pub fn select_algorithm(n: usize) -> Algorithm {
 
 ---
 
-### 数学常量在数值算法中的应用
+### 数学常量在数值算法中的应用 {#数学常量在数值算法中的应用}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -1263,7 +1263,7 @@ pub fn harmonic_number(n: u64) -> f64 {
 
 ---
 
-### 生产场景：实时数据处理管道
+### 生产场景：实时数据处理管道 {#生产场景实时数据处理管道}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -1328,7 +1328,7 @@ impl StreamProcessor {
 
 ---
 
-### 总结
+### 总结 {#总结}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -1354,7 +1354,7 @@ impl StreamProcessor {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -1363,7 +1363,7 @@ impl StreamProcessor {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

@@ -1,4 +1,4 @@
-# 项目架构指南
+# 项目架构指南 {#项目架构指南}
 
 > **分级**: [A]
 > **创建日期**: 2025-12-11
@@ -8,12 +8,12 @@
 
 ---
 
-## 📋 目录
+## 📋 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [项目架构指南](#项目架构指南)
-  - [📋 目录](#-目录)
+  - [📋 目录](#目录)
   - [代码示例](#代码示例)
     - [项目结构验证脚本](#项目结构验证脚本)
     - [模块依赖关系分析器](#模块依赖关系分析器)
@@ -21,53 +21,53 @@
   - [形式化链接](#形式化链接)
     - [研究笔记关联](#研究笔记关联)
     - [实施场景](#实施场景)
-  - [📋 概述](#-概述)
-  - [🏗️ 项目结构](#️-项目结构)
+  - [📋 概述](#概述)
+  - [🏗️ 项目结构](#项目结构)
     - [整体架构](#整体架构)
-  - [📦 模块设计](#-模块设计)
+  - [📦 模块设计](#模块设计)
     - [模块分层](#模块分层)
       - [Tier 1: 基础层（C01-C03）](#tier-1-基础层c01-c03)
       - [Tier 2: 进阶层（C04-C06）](#tier-2-进阶层c04-c06)
       - [Tier 3: 应用层（C07-C10）](#tier-3-应用层c07-c10)
       - [Tier 4: 专业层（C11-C12）](#tier-4-专业层c11-c12)
-  - [🔗 模块依赖关系](#-模块依赖关系)
+  - [🔗 模块依赖关系](#模块依赖关系)
     - [依赖图](#依赖图)
     - [依赖原则](#依赖原则)
-  - [📚 文档架构](#-文档架构)
+  - [📚 文档架构](#文档架构)
     - [4-Tier 文档体系](#4-tier-文档体系)
       - [Tier 1: 基础文档（Foundations）](#tier-1-基础文档foundations)
       - [Tier 2: 指南文档（Guides）](#tier-2-指南文档guides)
       - [Tier 3: 参考文档（References）](#tier-3-参考文档references)
       - [Tier 4: 高级文档（Advanced）](#tier-4-高级文档advanced)
-  - [🎯 设计原则](#-设计原则)
+  - [🎯 设计原则](#设计原则)
     - [1. 模块化原则](#1-模块化原则)
     - [2. 可扩展性原则](#2-可扩展性原则)
     - [3. 可维护性原则](#3-可维护性原则)
-  - [🔧 技术栈](#-技术栈)
+  - [🔧 技术栈](#技术栈)
     - [核心依赖](#核心依赖)
-  - [📊 性能考虑](#-性能考虑)
+  - [📊 性能考虑](#性能考虑)
     - [1. 编译优化](#1-编译优化)
     - [2. 运行时优化](#2-运行时优化)
     - [3. 内存管理](#3-内存管理)
-  - [🧪 测试策略](#-测试策略)
+  - [🧪 测试策略](#测试策略)
     - [测试层次](#测试层次)
     - [测试覆盖率目标](#测试覆盖率目标)
-  - [📚 相关文档](#-相关文档)
+  - [📚 相关文档](#相关文档)
   - [Rust 1.95+ 持续更新更新](#rust-195-持续更新更新)
     - [本文档的Rust 1.95+更新要点](#本文档的rust-195更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
+      - [相关文档](#相关文档-1)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
 ---
 
-## 代码示例
+## 代码示例 {#代码示例}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 项目结构验证脚本
+### 项目结构验证脚本 {#项目结构验证脚本}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -210,7 +210,7 @@ fn main() {
 }
 ```
 
-### 模块依赖关系分析器
+### 模块依赖关系分析器 {#模块依赖关系分析器}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -358,7 +358,7 @@ fn main() {
 }
 ```
 
-### 测试覆盖率报告生成器
+### 测试覆盖率报告生成器 {#测试覆盖率报告生成器}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -461,11 +461,11 @@ fn main() {
 
 ---
 
-## 形式化链接
+## 形式化链接 {#形式化链接}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 研究笔记关联
+### 研究笔记关联 {#研究笔记关联}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -475,7 +475,7 @@ fn main() {
 - **架构证明**: [04_proof_graph_network.md](../04_thinking/04_proof_graph_network.md) - 架构决策的形式化证明
 - **知识结构**: [KNOWLEDGE_STRUCTURE_FRAMEWORK.md](07_knowledge_structure_framework.md) - 知识依赖与模块关系
 
-### 实施场景
+### 实施场景 {#实施场景}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -489,7 +489,7 @@ fn main() {
 
 ---
 
-## 📋 概述
+## 📋 概述 {#概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -497,11 +497,11 @@ fn main() {
 
 ---
 
-## 🏗️ 项目结构
+## 🏗️ 项目结构 {#项目结构}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 整体架构
+### 整体架构 {#整体架构}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -532,15 +532,15 @@ rust-lang/
 
 ---
 
-## 📦 模块设计
+## 📦 模块设计 {#模块设计}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 模块分层
+### 模块分层 {#模块分层}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
-#### Tier 1: 基础层（C01-C03）
+#### Tier 1: 基础层（C01-C03） {#tier-1-基础层c01-c03}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -550,7 +550,7 @@ rust-lang/
 
 **特点**: 核心概念，所有学习者必须掌握
 
-#### Tier 2: 进阶层（C04-C06）
+#### Tier 2: 进阶层（C04-C06） {#tier-2-进阶层c04-c06}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -560,7 +560,7 @@ rust-lang/
 
 **特点**: 高级特性，中级开发者需要掌握
 
-#### Tier 3: 应用层（C07-C10）
+#### Tier 3: 应用层（C07-C10） {#tier-3-应用层c07-c10}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -571,7 +571,7 @@ rust-lang/
 
 **特点**: 实际应用，高级开发者需要掌握
 
-#### Tier 4: 专业层（C11-C12）
+#### Tier 4: 专业层（C11-C12） {#tier-4-专业层c11-c12}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -582,11 +582,11 @@ rust-lang/
 
 ---
 
-## 🔗 模块依赖关系
+## 🔗 模块依赖关系 {#模块依赖关系}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 依赖图
+### 依赖图 {#依赖图}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -604,7 +604,7 @@ C03 (控制流) ──┘                     ├──> C04 (泛型) ──┐
                                      │                  │                 │                  └──> C12 (WASM)
 ```
 
-### 依赖原则
+### 依赖原则 {#依赖原则}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -614,17 +614,17 @@ C03 (控制流) ──┘                     ├──> C04 (泛型) ──┐
 
 ---
 
-## 📚 文档架构
+## 📚 文档架构 {#文档架构}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 4-Tier 文档体系
+### 4-Tier 文档体系 {#4-tier-文档体系}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 每个模块遵循统一的 4-Tier 文档架构：
 
-#### Tier 1: 基础文档（Foundations）
+#### Tier 1: 基础文档（Foundations） {#tier-1-基础文档foundations}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -633,7 +633,7 @@ C03 (控制流) ──┘                     ├──> C04 (泛型) ──┐
 - 术语表
 - 常见问题
 
-#### Tier 2: 指南文档（Guides）
+#### Tier 2: 指南文档（Guides） {#tier-2-指南文档guides}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -642,7 +642,7 @@ C03 (控制流) ──┘                     ├──> C04 (泛型) ──┐
 - 代码示例集合
 - 实战项目集
 
-#### Tier 3: 参考文档（References）
+#### Tier 3: 参考文档（References） {#tier-3-参考文档references}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -651,7 +651,7 @@ C03 (控制流) ──┘                     ├──> C04 (泛型) ──┐
 - 性能优化参考
 - 跨平台参考
 
-#### Tier 4: 高级文档（Advanced）
+#### Tier 4: 高级文档（Advanced） {#tier-4-高级文档advanced}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -662,11 +662,11 @@ C03 (控制流) ──┘                     ├──> C04 (泛型) ──┐
 
 ---
 
-## 🎯 设计原则
+## 🎯 设计原则 {#设计原则}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 1. 模块化原则
+### 1. 模块化原则 {#1-模块化原则}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -674,7 +674,7 @@ C03 (控制流) ──┘                     ├──> C04 (泛型) ──┐
 - **高内聚**: 模块内部功能紧密相关
 - **低耦合**: 模块之间依赖最小化
 
-### 2. 可扩展性原则
+### 2. 可扩展性原则 {#2-可扩展性原则}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -682,7 +682,7 @@ C03 (控制流) ──┘                     ├──> C04 (泛型) ──┐
 - **插件架构**: 支持扩展和自定义
 - **版本兼容**: 保持向后兼容
 
-### 3. 可维护性原则
+### 3. 可维护性原则 {#3-可维护性原则}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -692,39 +692,39 @@ C03 (控制流) ──┘                     ├──> C04 (泛型) ──┐
 
 ---
 
-## 🔧 技术栈
+## 🔧 技术栈 {#技术栈}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 核心依赖
+### 核心依赖 {#核心依赖}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```toml
 [dependencies]
-# 异步运行时
+# 异步运行时 {#异步运行时}
 
 > **Bloom 层级**: L4-L5 (分析/评价)
 tokio = { version = "1.0", features = ["full"] }
 
-# 序列化
+# 序列化 {#序列化}
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 
-# 错误处理
+# 错误处理 {#错误处理}
 thiserror = "1.0"
 anyhow = "1.0"
 
-# 日志
+# 日志 {#日志}
 tracing = "0.1"
 tracing-subscriber = "0.3"
 ```
 
-## 📊 性能考虑
+## 📊 性能考虑 {#性能考虑}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 1. 编译优化
+### 1. 编译优化 {#1-编译优化}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -735,7 +735,7 @@ lto = true
 codegen-units = 1
 ```
 
-### 2. 运行时优化
+### 2. 运行时优化 {#2-运行时优化}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -744,7 +744,7 @@ codegen-units = 1
 - 使用迭代器而非循环
 - 避免不必要的克隆
 
-### 3. 内存管理
+### 3. 内存管理 {#3-内存管理}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -754,11 +754,11 @@ codegen-units = 1
 
 ---
 
-## 🧪 测试策略
+## 🧪 测试策略 {#测试策略}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 测试层次
+### 测试层次 {#测试层次}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -767,7 +767,7 @@ codegen-units = 1
 3. **文档测试**: 确保示例代码正确
 4. **性能测试**: 基准测试和性能分析
 
-### 测试覆盖率目标
+### 测试覆盖率目标 {#测试覆盖率目标}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -777,7 +777,7 @@ codegen-units = 1
 
 ---
 
-## 📚 相关文档
+## 📚 相关文档 {#相关文档}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -794,19 +794,19 @@ codegen-units = 1
 
 ---
 
-## Rust 1.95+ 持续更新更新
+## Rust 1.95+ 持续更新更新 {#rust-195-持续更新更新}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.95+更新要点
+### 本文档的Rust 1.95+更新要点 {#本文档的rust-195更新要点}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 本文档已针对 **Rust 1.95+** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -815,7 +815,7 @@ codegen-units = 1
 | `LazyLock/LazyCell` | 延迟初始化、全局配置管理 | 状态管理、配置 |
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -823,7 +823,7 @@ codegen-units = 1
 - ✅ 兼容Edition 2024
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档-1}
 
 - Rust 1.95+ 迁移指南
 - Rust 1.94 特性速查（已归档）
@@ -847,7 +847,7 @@ codegen-units = 1
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -856,7 +856,7 @@ codegen-units = 1
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

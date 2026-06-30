@@ -1,4 +1,4 @@
-# 权威内容对齐状态报告
+# 权威内容对齐状态报告 {#权威内容对齐状态报告}
 
 > **概念族**: 权威来源对齐
 
@@ -10,7 +10,7 @@
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -19,8 +19,8 @@
 >
 
 - [权威内容对齐状态报告](#权威内容对齐状态报告)
-  - [📑 目录](#-目录)
-  - [📊 对齐概览](#-对齐概览)
+  - [📑 目录](#目录)
+  - [📊 对齐概览](#对齐概览)
     - [对齐统计](#对齐统计)
     - [对齐维度覆盖](#对齐维度覆盖)
   - [P0: 官方权威对齐](#p0-官方权威对齐)
@@ -34,7 +34,7 @@
     - [Rust Design Patterns 对齐](#rust-design-patterns-对齐)
     - [API Guidelines 对齐](#api-guidelines-对齐)
   - [差异汇总](#差异汇总)
-    - [一致性差异 (📝 扩展)](#一致性差异--扩展)
+    - [一致性差异 (📝 扩展)](#一致性差异-扩展)
     - [无冲突](#无冲突)
   - [对齐标记示例](#对齐标记示例)
     - [标准标记格式](#标准标记格式)
@@ -43,7 +43,7 @@
     - [检查频率](#检查频率)
     - [更新响应](#更新响应)
   - [结论](#结论)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -63,13 +63,13 @@
 
 ---
 
-## 📊 对齐概览
+## 📊 对齐概览 {#对齐概览}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 对齐统计
+### 对齐统计 {#对齐统计}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -85,7 +85,7 @@
 
 | **总计** | **18** | **240+** | **100%** |
 
-### 对齐维度覆盖
+### 对齐维度覆盖 {#对齐维度覆盖}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -109,13 +109,13 @@
 
 ---
 
-## P0: 官方权威对齐
+## P0: 官方权威对齐 {#p0-官方权威对齐}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### The Rust Book 对齐
+### The Rust Book 对齐 {#the-rust-book-对齐}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -165,7 +165,7 @@
 
 | 20.0 项目 | 02_cargo_cheatsheet.md | ✅ 一致 | - |
 
-### Rust Reference 对齐
+### Rust Reference 对齐 {#rust-reference-对齐}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -193,7 +193,7 @@
 
 | Attributes | macros_cheatsheet.md | ✅ 一致 | - |
 
-### releases.rs 对齐
+### releases.rs 对齐 {#releasesrs-对齐}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -215,13 +215,13 @@
 
 ---
 
-## P1: 学术权威对齐
+## P1: 学术权威对齐 {#p1-学术权威对齐}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### RustBelt 对齐
+### RustBelt 对齐 {#rustbelt-对齐}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -243,7 +243,7 @@
 
 | 并发安全 | 10_send_sync_formalization.md | ✅ 一致 | Send/Sync |
 
-### 形式化方法对齐
+### 形式化方法对齐 {#形式化方法对齐}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -265,13 +265,13 @@
 
 ---
 
-## P2: 社区权威对齐
+## P2: 社区权威对齐 {#p2-社区权威对齐}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Rust Design Patterns 对齐
+### Rust Design Patterns 对齐 {#rust-design-patterns-对齐}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -293,7 +293,7 @@
 
 | Observer | design_patterns_cheatsheet.md | ✅ 一致 |
 
-### API Guidelines 对齐
+### API Guidelines 对齐 {#api-guidelines-对齐}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -311,13 +311,13 @@
 
 ---
 
-## 差异汇总
+## 差异汇总 {#差异汇总}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 一致性差异 (📝 扩展)
+### 一致性差异 (📝 扩展) {#一致性差异-扩展}
 
 >
 
@@ -337,7 +337,7 @@
 
 | 决策树 | 无直接对应 | 新增 | 项目特色 |
 
-### 无冲突
+### 无冲突 {#无冲突}
 
 >
 
@@ -347,13 +347,13 @@
 
 ---
 
-## 对齐标记示例
+## 对齐标记示例 {#对齐标记示例}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 标准标记格式
+### 标准标记格式 {#标准标记格式}
 
 >
 
@@ -371,7 +371,7 @@
 
 ```
 
-### 扩展标记格式
+### 扩展标记格式 {#扩展标记格式}
 
 >
 
@@ -397,13 +397,13 @@
 
 ---
 
-## 持续对齐机制
+## 持续对齐机制 {#持续对齐机制}
 
 >
 
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 检查频率
+### 检查频率 {#检查频率}
 
 >
 
@@ -423,7 +423,7 @@
 
 | RustBelt | 每半年 | 研究团队 | 2026-08-20 |
 
-### 更新响应
+### 更新响应 {#更新响应}
 
 >
 
@@ -437,7 +437,7 @@
 
 ---
 
-## 结论
+## 结论 {#结论}
 
 >
 
@@ -463,7 +463,7 @@
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -471,13 +471,13 @@
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -491,7 +491,7 @@
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -501,7 +501,7 @@
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -533,7 +533,7 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -545,7 +545,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

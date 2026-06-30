@@ -1,4 +1,4 @@
-# Proxy 形式化分析
+# Proxy 形式化分析 {#proxy-形式化分析}
 
 > **概念族**: 软件设计 / 设计模式
 
@@ -24,7 +24,7 @@
 
 > **权威来源**: [Rust Design Patterns – Structural](https://rust-unofficial.github.io/patterns/patterns/structural/index.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -33,7 +33,7 @@
 >
 
 - [Proxy 形式化分析](#proxy-形式化分析)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [权威来源对照](#权威来源对照)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Proxy 结构）](#def-11proxy-结构)
@@ -44,7 +44,7 @@
     - [推论 PR-C1（纯 Safe Proxy）](#推论-pr-c1纯-safe-proxy)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
-  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196--edition-2024-代码示例更新)
+  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196-edition-2024-代码示例更新)
     - [Edition 2024 关键兼容点](#edition-2024-关键兼容点)
   - [Rust 所有权、借用、生命周期与 trait 系统约束分析](#rust-所有权借用生命周期与-trait-系统约束分析)
     - [所有权约束](#所有权约束)
@@ -75,7 +75,7 @@
   - [思维导图](#思维导图)
   - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -101,7 +101,7 @@
 
 ---
 
-## 权威来源对照
+## 权威来源对照 {#权威来源对照}
 
 >
 
@@ -127,13 +127,13 @@
 
 ---
 
-## 形式化定义
+## 形式化定义 {#形式化定义}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Def 1.1（Proxy 结构）
+### Def 1.1（Proxy 结构） {#def-11proxy-结构}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -157,7 +157,7 @@ $$\mathcal{PR} = \langle P, T, \mathit{access}: P \times T, \mathit{delegate}: P
 
 ---
 
-### Axiom PR1（接口一致公理）
+### Axiom PR1（接口一致公理） {#axiom-pr1接口一致公理}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -169,7 +169,7 @@ $$\forall p: P,\, p: \mathrm{impl}\,T \land \mathit{behavior}(p) \equiv_{\mathrm
 
 代理与目标接口一致，可透明替换。
 
-### Axiom PR2（委托规则公理）
+### Axiom PR2（委托规则公理） {#axiom-pr2委托规则公理}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -183,7 +183,7 @@ $$\mathit{delegate}(p) \text{ 满足借用/所有权规则；无循环依赖}$$
 
 ---
 
-### 定理 PR-T1（委托安全定理）
+### 定理 PR-T1（委托安全定理） {#定理-pr-t1委托安全定理}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -233,7 +233,7 @@ $$\mathit{delegate}(p) \text{ 满足借用/所有权规则；无循环依赖}$$
 
 ---
 
-### 定理 PR-T2（访问控制定理）
+### 定理 PR-T2（访问控制定理） {#定理-pr-t2访问控制定理}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -275,7 +275,7 @@ $$\mathit{delegate}(p) \text{ 满足借用/所有权规则；无循环依赖}$$
 
 ---
 
-### 推论 PR-C1（纯 Safe Proxy）
+### 推论 PR-C1（纯 Safe Proxy） {#推论-pr-c1纯-safe-proxy}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -299,7 +299,7 @@ Proxy 为纯 Safe；`OnceLock` 延迟加载、委托调用，无 `unsafe`。
 
 ---
 
-### 概念定义-属性关系-解释论证 层次汇总
+### 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -319,7 +319,7 @@ Proxy 为纯 Safe；`OnceLock` 延迟加载、委托调用，无 `unsafe`。
 
 ---
 
-## Rust 实现与代码示例
+## Rust 实现与代码示例 {#rust-实现与代码示例}
 
 >
 
@@ -393,7 +393,7 @@ assert_eq!(p.request(), "real");
 
 ---
 
-## Rust 1.96+ / Edition 2024 代码示例更新
+## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
 
 >
 
@@ -473,7 +473,7 @@ fn main() {
 
 ```
 
-### Edition 2024 关键兼容点
+### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
 
@@ -489,25 +489,25 @@ fn main() {
 
 ---
 
-## Rust 所有权、借用、生命周期与 trait 系统约束分析
+## Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}
 
 >
 
 > **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
 
-### 所有权约束
+### 所有权约束 {#所有权约束}
 
 代理可拥有真实主题（如 `ProxyImage` 内部创建 `RealImage`），或持有其引用/标识符。拥有版本在代理生命周期内管理主题；引用版本需保证主题存活。
 
-### 借用与生命周期约束
+### 借用与生命周期约束 {#借用与生命周期约束}
 
 虚代理常使用内部可变性（`RefCell`）缓存真实对象；`display(&self)` 内部通过 `RefCell` 获取可变访问，运行时检查借用规则。
 
-### trait 系统约束
+### trait 系统约束 {#trait-系统约束}
 
 代理与真实主题实现同一 `Image` trait，客户端通过 trait 接口透明调用；可结合 `Arc`/`Mutex` 实现远程/保护代理。
 
-### 与 Rust 类型系统的综合联系
+### 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系}
 
 | Rust 机制 | 本模式使用方式 | 保证 |
 
@@ -525,13 +525,13 @@ fn main() {
 
 ---
 
-## 完整证明
+## 完整证明 {#完整证明}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 形式化论证链
+### 形式化论证链 {#形式化论证链}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -565,7 +565,7 @@ borrow_checker_proof
 
 ```
 
-### 与 Rust 类型系统的联系
+### 与 Rust 类型系统的联系 {#与-rust-类型系统的联系}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -581,7 +581,7 @@ borrow_checker_proof
 
 | `Mutex`/`RwLock` | 保护代理 | 访问控制 |
 
-### 内存安全保证
+### 内存安全保证 {#内存安全保证}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -595,13 +595,13 @@ borrow_checker_proof
 
 ---
 
-## 形式化属性：不变式、前置/后置条件与安全边界
+## 形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}
 
 >
 
 > **来源: [Formal Methods – Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)** | **来源: [Rust API Guidelines – Safety](https://rust-lang.github.io/api-guidelines/safety.html)**
 
-### 不变式（Invariants）
+### 不变式（Invariants） {#不变式invariants}
 
 1. 代理与主题实现相同接口。
 
@@ -609,7 +609,7 @@ borrow_checker_proof
 
 3. 代理不破坏主题语义。
 
-### 前置条件（Preconditions）
+### 前置条件（Preconditions） {#前置条件preconditions}
 
 1. 真实主题可正确构造。
 
@@ -617,7 +617,7 @@ borrow_checker_proof
 
 3. 访问控制代理需验证调用者权限。
 
-### 后置条件（Postconditions）
+### 后置条件（Postconditions） {#后置条件postconditions}
 
 1. 代理将调用转发给主题。
 
@@ -625,11 +625,11 @@ borrow_checker_proof
 
 3. 保护代理按策略放行或拒绝。
 
-### 安全边界（Safety Boundary）
+### 安全边界（Safety Boundary） {#安全边界safety-boundary}
 
 通常纯 Safe。若代理涉及 FFI、远程调用或裸指针缓存，需在 `unsafe` 边界内保持契约；`RefCell` 运行时借用违反会 panic。
 
-### 形式化规约汇总
+### 形式化规约汇总 {#形式化规约汇总}
 
 ```text
 
@@ -645,7 +645,7 @@ borrow_checker_proof
 
 ---
 
-## 典型场景
+## 典型场景 {#典型场景}
 
 >
 
@@ -665,7 +665,7 @@ borrow_checker_proof
 
 ---
 
-## 相关模式
+## 相关模式 {#相关模式}
 
 >
 
@@ -683,7 +683,7 @@ borrow_checker_proof
 
 ---
 
-## 实现变体
+## 实现变体 {#实现变体}
 
 >
 
@@ -701,13 +701,13 @@ borrow_checker_proof
 
 ---
 
-## 反例：常见误用及编译器错误
+## 反例：常见误用及编译器错误 {#反例常见误用及编译器错误}
 
 >
 
 > **来源: [Rust By Example – Error Handling](https://doc.rust-lang.org/rust-by-example/error.html)** | **来源: [Rust Compiler Error Index](https://doc.rust-lang.org/error_codes/error-index.html)**
 
-### 反例 1：RefCell 运行时借用冲突
+### 反例 1：RefCell 运行时借用冲突 {#反例-1refcell-运行时借用冲突}
 
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
@@ -725,7 +725,7 @@ proxy.display(); // panic：已有不可变借用，尝试可变借用
 
 **运行期 panic**：`already borrowed: BorrowMutError`。
 
-### 反例 2：代理生命周期短于主题
+### 反例 2：代理生命周期短于主题 {#反例-2代理生命周期短于主题}
 
 > 以下代码故意展示编译失败，用于说明对应反例。
 
@@ -741,7 +741,7 @@ fn make() -> Proxy<'static> { let r = RealImage::new(""); Proxy { subject: &r } 
 
 **编译器错误**：`cannot return value referencing local variable r`。
 
-### 反例 3：保护代理未验证权限
+### 反例 3：保护代理未验证权限 {#反例-3保护代理未验证权限}
 
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
@@ -759,7 +759,7 @@ impl Image for ProxyImage {
 
 ---
 
-## 选型决策树
+## 选型决策树 {#选型决策树}
 
 >
 
@@ -783,7 +783,7 @@ impl Image for ProxyImage {
 
 ---
 
-## 与 GoF 对比
+## 与 GoF 对比 {#与-gof-对比}
 
 >
 
@@ -801,7 +801,7 @@ impl Image for ProxyImage {
 
 ---
 
-## 边界
+## 边界 {#边界}
 
 >
 
@@ -819,7 +819,7 @@ impl Image for ProxyImage {
 
 ---
 
-## 与 Rust 1.93 的对应
+## 与 Rust 1.93 的对应 {#与-rust-193-的对应}
 
 >
 
@@ -835,7 +835,7 @@ impl Image for ProxyImage {
 
 ---
 
-## 思维导图
+## 思维导图 {#思维导图}
 
 >
 
@@ -887,7 +887,7 @@ mindmap
 
 ---
 
-## 与其他模式的关系图
+## 与其他模式的关系图 {#与其他模式的关系图}
 
 >
 
@@ -919,7 +919,7 @@ graph LR
 
 ---
 
-## 实质内容五维自检
+## 实质内容五维自检 {#实质内容五维自检}
 
 >
 
@@ -943,7 +943,7 @@ graph LR
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -953,13 +953,13 @@ graph LR
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -975,7 +975,7 @@ graph LR
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -987,7 +987,7 @@ graph LR
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -1019,7 +1019,7 @@ graph LR
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -1031,7 +1031,7 @@ graph LR
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 

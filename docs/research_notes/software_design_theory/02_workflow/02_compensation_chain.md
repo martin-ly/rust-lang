@@ -1,4 +1,4 @@
-# 补偿链模式形式化定义
+# 补偿链模式形式化定义 {#补偿链模式形式化定义}
 
 > **概念族**: 软件设计 / 工作流模式 / 补偿 / Saga
 
@@ -26,10 +26,10 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 - [补偿链模式形式化定义](#补偿链模式形式化定义)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 问题定义与动机](#1-问题定义与动机)
   - [2. 核心概念](#2-核心概念)
   - [3. 形式化定义](#3-形式化定义)
@@ -49,7 +49,7 @@
 
 ---
 
-## 1. 问题定义与动机
+## 1. 问题定义与动机 {#1-问题定义与动机}
 
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
@@ -59,7 +59,7 @@
 
 ---
 
-## 2. 核心概念
+## 2. 核心概念 {#2-核心概念}
 
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
 
@@ -72,11 +72,11 @@
 
 ---
 
-## 3. 形式化定义
+## 3. 形式化定义 {#3-形式化定义}
 
 > **来源**: [Rust Official Docs](https://doc.rust-lang.org/)
 
-### Def CC1: 补偿链
+### Def CC1: 补偿链 {#def-cc1-补偿链}
 
 一个补偿链是有序二元组序列
 
@@ -89,7 +89,7 @@ C := [(a₁, c₁), (a₂, c₂), ..., (aₙ, cₙ)]
 - `aᵢ`：第 `i` 步正向操作。
 - `cᵢ`：对应补偿操作，满足 `cᵢ ∘ aᵢ ≈ id`（在业务语义上等价于恒等操作）。
 
-### Axiom CC1: 补偿可逆性
+### Axiom CC1: 补偿可逆性 {#axiom-cc1-补偿可逆性}
 
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
 
@@ -99,7 +99,7 @@ C := [(a₁, c₁), (a₂, c₂), ..., (aₙ, cₙ)]
 ∀ i, state(cᵢ(aᵢ(s))) ≈ state(s)
 ```
 
-### Axiom CC2: 补偿幂等性
+### Axiom CC2: 补偿幂等性 {#axiom-cc2-补偿幂等性}
 
 > **来源**: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)
 
@@ -109,7 +109,7 @@ C := [(a₁, c₁), (a₂, c₂), ..., (aₙ, cₙ)]
 ∀ c ∈ C. exec(c, s) = s' → exec(c, s') = s'
 ```
 
-### Theorem CC1: 最终一致性
+### Theorem CC1: 最终一致性 {#theorem-cc1-最终一致性}
 
 > **来源**: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)
 
@@ -122,7 +122,7 @@ C := [(a₁, c₁), (a₂, c₂), ..., (aₙ, cₙ)]
 3. 依次执行 `cₖ, ..., c₁`，由 Axiom CC1 有 `cᵢ ∘ aᵢ ≈ id`。
 4. 因此 `sₖ'` = `c₁(...cₖ(sₖ)...) ≈ s₀`。
 
-### Theorem CC2: 补偿终止性
+### Theorem CC2: 补偿终止性 {#theorem-cc2-补偿终止性}
 
 > **来源**: [Rust Standard Library](https://doc.rust-lang.org/std/)
 
@@ -136,7 +136,7 @@ C := [(a₁, c₁), (a₂, c₂), ..., (aₙ, cₙ)]
 
 ---
 
-## 4. Rust 实现方案
+## 4. Rust 实现方案 {#4-rust-实现方案}
 
 > **来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 
@@ -271,11 +271,11 @@ fn main() {
 
 ---
 
-## 5. 反例与边界
+## 5. 反例与边界 {#5-反例与边界}
 
 > **来源**: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)
 
-### 反例 1：非幂等补偿
+### 反例 1：非幂等补偿 {#反例-1非幂等补偿}
 
 ```rust,ignore
 // 错误：重复释放库存会导致库存变为负数
@@ -300,7 +300,7 @@ async fn compensate_inventory(item_id: u64, idempotency_key: &str) {
 }
 ```
 
-### 反例 2：补偿顺序错误
+### 反例 2：补偿顺序错误 {#反例-2补偿顺序错误}
 
 ```rust,ignore
 // 错误：按正向顺序补偿
@@ -319,7 +319,7 @@ for &idx in self.completed.iter().rev() {
 }
 ```
 
-### 边界：补偿失败
+### 边界：补偿失败 {#边界补偿失败}
 
 补偿操作本身也可能失败（网络中断、下游服务不可用）。此时：
 
@@ -329,7 +329,7 @@ for &idx in self.completed.iter().rev() {
 
 ---
 
-## 6. 与其他模式的关系
+## 6. 与其他模式的关系 {#6-与其他模式的关系}
 
 > **来源**: [crates.io](https://crates.io/)
 
@@ -343,7 +343,7 @@ for &idx in self.completed.iter().rev() {
 
 ---
 
-## 7. 权威来源索引
+## 7. 权威来源索引 {#7-权威来源索引}
 
 > **P0 权威来源（Rust 官方）**:
 >
@@ -368,7 +368,7 @@ for &idx in self.completed.iter().rev() {
 
 ---
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 - [Aeneas](https://aeneas-verification.github.io/)
 - [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)

@@ -1,4 +1,4 @@
-# 实际应用案例研究
+# 实际应用案例研究 {#实际应用案例研究}
 >
 > **概念族**: 实际应用
 
@@ -12,17 +12,17 @@
 > **状态**: ✅ 已完成权威国际化来源对齐升级
 > **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Cargo Book](https://doc.rust-lang.org/cargo/) | [Tokio Docs](https://tokio.rs/tokio/tutorial) | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实际应用案例研究](#实际应用案例研究)
-  - [📑 目录](#-目录)
-  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
+  - [📑 目录](#目录)
+  - [🎯 研究目标](#研究目标)
     - [核心问题](#核心问题)
     - [预期成果](#预期成果)
   - [形式化论证与案例衔接](#形式化论证与案例衔接)
-  - [📚 案例分类 {#-案例分类}](#-案例分类--案例分类)
+  - [📚 案例分类](#案例分类)
     - [1. 系统编程案例](#1-系统编程案例)
       - [案例 1.1：Redox OS](#案例-11redox-os)
       - [案例 1.2：Tokio 异步运行时](#案例-12tokio-异步运行时)
@@ -35,34 +35,34 @@
     - [4. 嵌入式系统案例](#4-嵌入式系统案例)
       - [案例 4.1：Tock 嵌入式操作系统](#案例-41tock-嵌入式操作系统)
       - [案例 4.2：Drone 实时操作系统](#案例-42drone-实时操作系统)
-  - [💻 案例示例 {#-案例示例}](#-案例示例--案例示例)
+  - [💻 案例示例](#案例示例)
     - [案例 1：高性能 Web 服务器](#案例-1高性能-web-服务器)
     - [案例 2：并发数据处理系统](#案例-2并发数据处理系统)
     - [案例 3：内存安全的数据结构](#案例-3内存安全的数据结构)
       - [案例 1.3：Firecracker 微虚拟机](#案例-13firecracker-微虚拟机)
-  - [📊 案例分析 {#-案例分析}](#-案例分析--案例分析)
+  - [📊 案例分析](#案例分析)
     - [性能分析](#性能分析)
-    - [最佳实践总结 {#-最佳实践总结}](#最佳实践总结--最佳实践总结)
-  - [📊 最佳实践总结](#-最佳实践总结)
+    - [最佳实践总结](#最佳实践总结)
+  - [📊 最佳实践总结](#最佳实践总结-1)
     - [系统编程最佳实践](#系统编程最佳实践)
     - [网络应用最佳实践](#网络应用最佳实践)
     - [并发系统最佳实践](#并发系统最佳实践)
     - [嵌入式系统最佳实践](#嵌入式系统最佳实践)
-  - [📋 案例报告与应用指南 {#-案例报告与应用指南}](#-案例报告与应用指南--案例报告与应用指南)
+  - [📋 案例报告与应用指南](#案例报告与应用指南)
     - [案例报告模板](#案例报告模板)
     - [应用指南](#应用指南)
-  - [🔗 系统集成与案例索引 {#-系统集成与案例索引}](#-系统集成与案例索引--系统集成与案例索引)
+  - [🔗 系统集成与案例索引](#系统集成与案例索引)
     - [与形式化方法的关联](#与形式化方法的关联)
     - [与类型理论、实验研究的关联](#与类型理论实验研究的关联)
     - [案例快速索引](#案例快速索引)
     - [与形式化衔接的案例索引（层次推进）](#与形式化衔接的案例索引层次推进)
-  - [🌐 案例官方文档、源码与基准索引](#-案例官方文档源码与基准索引)
-  - [🧭 Rust 机制与官方文档对照](#-rust-机制与官方文档对照)
-  - [📖 参考文献 {#-参考文献}](#-参考文献--参考文献)
+  - [🌐 案例官方文档、源码与基准索引](#案例官方文档源码与基准索引)
+  - [🧭 Rust 机制与官方文档对照](#rust-机制与官方文档对照)
+  - [📖 参考文献](#参考文献)
     - [实际项目](#实际项目)
     - [相关文档](#相关文档)
     - [工具资源](#工具资源)
-  - [🆕 权威国际化内容升级 (Rust 1.96.0+) {#-权威国际化内容升级}](#-权威国际化内容升级-rust-1960--权威国际化内容升级)
+  - [🆕 权威国际化内容升级 (Rust 1.96.0+)](#权威国际化内容升级-rust-1960)
     - [本次升级要点](#本次升级要点)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -74,7 +74,7 @@
 
 ---
 
-## 🎯 研究目标 {#-研究目标}
+## 🎯 研究目标 {#研究目标}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -85,7 +85,7 @@
 3. **并发系统案例**：高并发服务、实时系统等
 4. **嵌入式系统案例**：IoT 设备、嵌入式应用等
 
-### 核心问题
+### 核心问题 {#核心问题}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -95,7 +95,7 @@
 2. **哪些 Rust 特性在实际应用中最为重要？**
 3. **实际项目中的最佳实践是什么？**
 
-### 预期成果
+### 预期成果 {#预期成果}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -107,7 +107,7 @@
 
 ---
 
-## 形式化论证与案例衔接
+## 形式化论证与案例衔接 {#形式化论证与案例衔接}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -131,11 +131,11 @@
 
 ---
 
-## 📚 案例分类 {#-案例分类}
+## 📚 案例分类 {#案例分类}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 系统编程案例
+### 1. 系统编程案例 {#1-系统编程案例}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -149,7 +149,7 @@
 
 **典型案例**：
 
-#### 案例 1.1：Redox OS
+#### 案例 1.1：Redox OS {#案例-11redox-os}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -204,7 +204,7 @@ impl Syscall {
 - 展示所有权系统在系统编程中的优势
 - 提供系统编程最佳实践
 
-#### 案例 1.2：Tokio 异步运行时
+#### 案例 1.2：Tokio 异步运行时 {#案例-12tokio-异步运行时}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 >
@@ -270,7 +270,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 - 零成本抽象
 - 系统级性能
 
-### 2. 网络应用案例
+### 2. 网络应用案例 {#2-网络应用案例}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -291,7 +291,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 **典型案例**：
 
-#### 案例 2.1：Actix-web 高性能 Web 框架
+#### 案例 2.1：Actix-web 高性能 Web 框架 {#案例-21actix-web-高性能-web-框架}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 >
@@ -339,7 +339,7 @@ async fn main() -> std::io::Result<()> {
 - 展示 Actor 模型的实际应用
 - 提供 Web 框架设计参考
 
-#### 案例 2.2：Linkerd 服务网格
+#### 案例 2.2：Linkerd 服务网格 {#案例-22linkerd-服务网格}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -364,7 +364,7 @@ async fn main() -> std::io::Result<()> {
 - 展示服务网格架构设计
 - 提供网络代理实现参考
 
-### 3. 并发系统案例
+### 3. 并发系统案例 {#3-并发系统案例}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -383,7 +383,7 @@ async fn main() -> std::io::Result<()> {
 
 **典型案例**：
 
-#### 案例 3.1：TiKV 分布式键值存储
+#### 案例 3.1：TiKV 分布式键值存储 {#案例-31tikv-分布式键值存储}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -435,7 +435,7 @@ impl TiKVEngine {
 - 展示并发安全的重要性
 - 提供分布式存储设计参考
 
-#### 案例 3.2：ScyllaDB Rust 驱动
+#### 案例 3.2：ScyllaDB Rust 驱动 {#案例-32scylladb-rust-驱动}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -454,7 +454,7 @@ impl TiKVEngine {
 - 查询构建器
 - 类型安全 API
 
-### 4. 嵌入式系统案例
+### 4. 嵌入式系统案例 {#4-嵌入式系统案例}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -473,7 +473,7 @@ impl TiKVEngine {
 
 **典型案例**：
 
-#### 案例 4.1：Tock 嵌入式操作系统
+#### 案例 4.1：Tock 嵌入式操作系统 {#案例-41tock-嵌入式操作系统}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -522,7 +522,7 @@ impl TockOS {
 - 展示 no_std 编程实践
 - 提供嵌入式系统设计参考
 
-#### 案例 4.2：Drone 实时操作系统
+#### 案例 4.2：Drone 实时操作系统 {#案例-42drone-实时操作系统}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -543,11 +543,11 @@ impl TockOS {
 
 ---
 
-## 💻 案例示例 {#-案例示例}
+## 💻 案例示例 {#案例示例}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 案例 1：高性能 Web 服务器
+### 案例 1：高性能 Web 服务器 {#案例-1高性能-web-服务器}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -632,7 +632,7 @@ async fn main() {
 - 合理使用缓存减少数据库压力
 - 使用连接池管理数据库连接
 
-### 案例 2：并发数据处理系统
+### 案例 2：并发数据处理系统 {#案例-2并发数据处理系统}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -697,7 +697,7 @@ async fn process_task(task: DataTask, worker_id: usize) {
 - 合理设置工作线程数量
 - 使用通道进行任务分发
 
-### 案例 3：内存安全的数据结构
+### 案例 3：内存安全的数据结构 {#案例-3内存安全的数据结构}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -786,7 +786,7 @@ impl<T> Drop for SafeVec<T> {
 - 正确实现 `Drop` trait 避免内存泄漏
 - 使用 unsafe 块时确保安全性
 
-#### 案例 1.3：Firecracker 微虚拟机
+#### 案例 1.3：Firecracker 微虚拟机 {#案例-13firecracker-微虚拟机}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -895,11 +895,11 @@ impl<T> Drop for SafeVec<T> {
 
 ---
 
-## 📊 案例分析 {#-案例分析}
+## 📊 案例分析 {#案例分析}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 性能分析
+### 性能分析 {#性能分析}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -915,7 +915,7 @@ impl<T> Drop for SafeVec<T> {
 - 可扩展性：线性扩展至 100+ 核心
 - 资源效率：CPU 利用率 > 90%
 
-### 最佳实践总结 {#-最佳实践总结}
+### 最佳实践总结 {#最佳实践总结}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -926,11 +926,11 @@ impl<T> Drop for SafeVec<T> {
 
 ---
 
-## 📊 最佳实践总结
+## 📊 最佳实践总结 {#最佳实践总结-1}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 系统编程最佳实践
+### 系统编程最佳实践 {#系统编程最佳实践}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -949,7 +949,7 @@ impl<T> Drop for SafeVec<T> {
    - 避免不必要的克隆
    - 使用零成本抽象
 
-### 网络应用最佳实践
+### 网络应用最佳实践 {#网络应用最佳实践}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -968,7 +968,7 @@ impl<T> Drop for SafeVec<T> {
    - 使用超时控制
    - 记录详细的错误日志
 
-### 并发系统最佳实践
+### 并发系统最佳实践 {#并发系统最佳实践}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -987,7 +987,7 @@ impl<T> Drop for SafeVec<T> {
    - 使用无锁数据结构
    - 优化缓存使用
 
-### 嵌入式系统最佳实践
+### 嵌入式系统最佳实践 {#嵌入式系统最佳实践}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -1008,11 +1008,11 @@ impl<T> Drop for SafeVec<T> {
 
 ---
 
-## 📋 案例报告与应用指南 {#-案例报告与应用指南}
+## 📋 案例报告与应用指南 {#案例报告与应用指南}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 案例报告模板
+### 案例报告模板 {#案例报告模板}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -1025,7 +1025,7 @@ impl<T> Drop for SafeVec<T> {
 5. **研究价值**：对形式化、类型理论、实验或方法论的启发
 6. **参考链接**：仓库、文档、博客
 
-### 应用指南
+### 应用指南 {#应用指南}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -1035,11 +1035,11 @@ impl<T> Drop for SafeVec<T> {
 
 ---
 
-## 🔗 系统集成与案例索引 {#-系统集成与案例索引}
+## 🔗 系统集成与案例索引 {#系统集成与案例索引}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 与形式化方法的关联
+### 与形式化方法的关联 {#与形式化方法的关联}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -1047,7 +1047,7 @@ impl<T> Drop for SafeVec<T> {
 - **借用检查器** [10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md)：TiKV、Actix、Linkerd 等并发与迭代场景，可对照借用规则验证无数据竞争。
 - **异步状态机** [10_async_state_machine.md](formal_methods/10_async_state_machine.md)：Tokio、Actix、ScyllaDB 驱动、案例 1–2 的 async 设计，可对应 Future/Poll/Waker 形式化。
 
-### 与类型理论、实验研究的关联
+### 与类型理论、实验研究的关联 {#与类型理论实验研究的关联}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -1055,7 +1055,7 @@ impl<T> Drop for SafeVec<T> {
 - **性能基准** [10_performance_benchmarks.md](experiments/10_performance_benchmarks.md)、**并发性能** [10_concurrency_performance.md](experiments/10_concurrency_performance.md)：案例 1–2 的吞吐、延迟、并发模式可与实验的「结果分析模板」对照，用于选型与调优。
 - **内存分析** [10_memory_analysis.md](experiments/10_memory_analysis.md)、**编译器优化** [10_compiler_optimizations.md](experiments/10_compiler_optimizations.md)：案例中的分配策略、`-O2`/LTO 等可与实验指南结合，做上线前检查。
 
-### 案例快速索引
+### 案例快速索引 {#案例快速索引}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -1067,7 +1067,7 @@ impl<T> Drop for SafeVec<T> {
 | 嵌入式   | Tock, Drone                   | 案例 4.1, 4.2       |
 | 综合示例 | Web 服务器, 数据处理, SafeVec | 案例 1, 2, 3        |
 
-### 与形式化衔接的案例索引（层次推进）
+### 与形式化衔接的案例索引（层次推进） {#与形式化衔接的案例索引层次推进}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -1087,7 +1087,7 @@ impl<T> Drop for SafeVec<T> {
 
 ---
 
-## 🌐 案例官方文档、源码与基准索引
+## 🌐 案例官方文档、源码与基准索引 {#案例官方文档源码与基准索引}
 >
 > **来源**: [Rust Official Docs](https://doc.rust-lang.org/)
 
@@ -1108,7 +1108,7 @@ impl<T> Drop for SafeVec<T> {
 
 > 建议：在引用性能数据时，应注明测试版本、硬件环境与负载模型；优先使用 TechEmpower 或项目官方 `benches/` 的可复现结果。
 
-## 🧭 Rust 机制与官方文档对照
+## 🧭 Rust 机制与官方文档对照 {#rust-机制与官方文档对照}
 >
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/)
 >
@@ -1131,11 +1131,11 @@ impl<T> Drop for SafeVec<T> {
 
 ---
 
-## 📖 参考文献 {#-参考文献}
+## 📖 参考文献 {#参考文献}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 实际项目
+### 实际项目 {#实际项目}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -1151,14 +1151,14 @@ impl<T> Drop for SafeVec<T> {
 - [Axum](https://docs.rs/axum/) - 模块化 Web 框架
 - [Rocket](https://rocket.rs/) - Web 框架
 
-### 相关文档
+### 相关文档 {#相关文档}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust 异步编程](https://rust-lang.github.io/async-book/)
 - [Rust 性能指南](https://nnethercote.github.io/perf-book/)
 
-### 工具资源
+### 工具资源 {#工具资源}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -1173,14 +1173,14 @@ impl<T> Drop for SafeVec<T> {
 
 ---
 
-## 🆕 权威国际化内容升级 (Rust 1.96.0+) {#-权威国际化内容升级}
+## 🆕 权威国际化内容升级 (Rust 1.96.0+) {#权威国际化内容升级-rust-1960}
 >
 > **来源**: [Rust Application Research Team]
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-06-29
 
-### 本次升级要点
+### 本次升级要点 {#本次升级要点}
 
 - 补充各案例官方文档、源码仓库与性能基准引用。
 - 新增 Rust 机制与 Rust Book、Nomicon、RFCs 的对照表。
@@ -1205,7 +1205,7 @@ impl<T> Drop for SafeVec<T> {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -1214,7 +1214,7 @@ impl<T> Drop for SafeVec<T> {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

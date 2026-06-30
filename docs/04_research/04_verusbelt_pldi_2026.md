@@ -1,4 +1,4 @@
-# VerusBelt (PLDI 2026) 研究笔记
+# VerusBelt (PLDI 2026) 研究笔记 {#verusbelt-pldi-2026-研究笔记}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
@@ -10,34 +10,34 @@
 
 ---
 
-## 📋 目录
+## 📋 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [VerusBelt (PLDI 2026) 研究笔记](#verusbelt-pldi-2026-研究笔记)
-  - [📋 目录](#-目录)
-  - [🔍 背景：Verus 验证框架](#-背景verus-验证框架)
-  - [📄 VerusBelt 论文概述](#-verusbelt-论文概述)
-  - [🧠 核心贡献](#-核心贡献)
+  - [📋 目录](#目录)
+  - [🔍 背景：Verus 验证框架](#背景verus-验证框架)
+  - [📄 VerusBelt 论文概述](#verusbelt-论文概述)
+  - [🧠 核心贡献](#核心贡献)
     - [1. 类型系统扩展的形式化](#1-类型系统扩展的形式化)
     - [2. 层叠语义 (Layered Semantics)](#2-层叠语义-layered-semantics)
     - [3. 擦除定理 (Erasure Theorem)](#3-擦除定理-erasure-theorem)
-  - [⚖️ 与相关工作的对比](#️-与相关工作的对比)
+  - [⚖️ 与相关工作的对比](#与相关工作的对比)
     - [VerusBelt vs RefinedRust](#verusbelt-vs-refinedrust)
     - [VerusBelt vs RustBelt](#verusbelt-vs-rustbelt)
     - [Verus 生态最新进展 (2025–2026)](#verus-生态最新进展-20252026)
-  - [🔧 对安全关键 Rust 的实践意义](#-对安全关键-rust-的实践意义)
+  - [🔧 对安全关键 Rust 的实践意义](#对安全关键-rust-的实践意义)
     - [1. 操作系统内核验证](#1-操作系统内核验证)
     - [2. 密码学实现验证](#2-密码学实现验证)
     - [3. 分布式系统协议](#3-分布式系统协议)
     - [4. 行业标准](#4-行业标准)
-  - [📖 引用信息](#-引用信息)
+  - [📖 引用信息](#引用信息)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
 ---
 
-## 🔍 背景：Verus 验证框架
+## 🔍 背景：Verus 验证框架 {#背景verus-验证框架}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -72,7 +72,7 @@ Verus 的三种函数模式：
 
 ---
 
-## 📄 VerusBelt 论文概述
+## 📄 VerusBelt 论文概述 {#verusbelt-论文概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -91,13 +91,13 @@ Verus 的三种函数模式：
 
 ---
 
-## 🧠 核心贡献
+## 🧠 核心贡献 {#核心贡献}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 VerusBelt 的主要技术贡献：
 
-### 1. 类型系统扩展的形式化
+### 1. 类型系统扩展的形式化 {#1-类型系统扩展的形式化}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -110,7 +110,7 @@ VerusBelt 的主要技术贡献：
 | `proof` 代码块 | 仅用于证明的计算 | 证明 proof 代码的擦除安全性 |
 | `spec` 函数 | 规范定义 | 形式化 spec 的纯函数语义 |
 
-### 2. 层叠语义 (Layered Semantics)
+### 2. 层叠语义 (Layered Semantics) {#2-层叠语义-layered-semantics}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -132,7 +132,7 @@ VerusBelt 语义层次:
 └─────────────────────────────────────┘
 ```
 
-### 3. 擦除定理 (Erasure Theorem)
+### 3. 擦除定理 (Erasure Theorem) {#3-擦除定理-erasure-theorem}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -140,11 +140,11 @@ VerusBelt 语义层次:
 
 ---
 
-## ⚖️ 与相关工作的对比
+## ⚖️ 与相关工作的对比 {#与相关工作的对比}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### VerusBelt vs RefinedRust
+### VerusBelt vs RefinedRust {#verusbelt-vs-refinedrust}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -158,7 +158,7 @@ VerusBelt 语义层次:
 | **适用场景** | 系统软件验证 | 协议/算法验证 |
 | **工业应用** | Microsoft 内部项目 | 学术研究为主 |
 
-### VerusBelt vs RustBelt
+### VerusBelt vs RustBelt {#verusbelt-vs-rustbelt}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -183,7 +183,7 @@ RustBelt (POPL 2018) ── 证明 Rust 所有权系统内存安全
       └──► RefinedRust ── 精炼类型系统实现
 ```
 
-### Verus 生态最新进展 (2025–2026)
+### Verus 生态最新进展 (2025–2026) {#verus-生态最新进展-20252026}
 
 > **[来源: KVerus arXiv 2026; AutoVerus OOPSLA 2025; Vest USENIX Security 2025]** Verus 验证框架的周边工具链在 2025–2026 年快速扩展，降低了证明门槛并扩展了验证覆盖。
 
@@ -199,13 +199,13 @@ RustBelt (POPL 2018) ── 证明 Rust 所有权系统内存安全
 
 ---
 
-## 🔧 对安全关键 Rust 的实践意义
+## 🔧 对安全关键 Rust 的实践意义 {#对安全关键-rust-的实践意义}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 VerusBelt 的研究成果对以下领域有直接影响：
 
-### 1. 操作系统内核验证
+### 1. 操作系统内核验证 {#1-操作系统内核验证}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -213,21 +213,21 @@ VerusBelt 的研究成果对以下领域有直接影响：
 - VerusBelt 为这类验证提供了语义正确性保证
 - 与 **Rust for Linux** 项目潜在关联：未来可能用 Verus 验证内核模块
 
-### 2. 密码学实现验证
+### 2. 密码学实现验证 {#2-密码学实现验证}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - 常量时间验证 (constant-time verification)
 - 防止侧信道漏洞的形式化保证
 
-### 3. 分布式系统协议
+### 3. 分布式系统协议 {#3-分布式系统协议}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - Verus 已用于验证分布式共识协议
 - VerusBelt 保证 proof 代码不会污染 exec 代码
 
-### 4. 行业标准
+### 4. 行业标准 {#4-行业标准}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -239,7 +239,7 @@ VerusBelt 的研究成果对以下领域有直接影响：
 
 ---
 
-## 📖 引用信息
+## 📖 引用信息 {#引用信息}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -297,7 +297,7 @@ Design and Implementation (PLDI 2026).
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -308,7 +308,7 @@ Design and Implementation (PLDI 2026).
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**

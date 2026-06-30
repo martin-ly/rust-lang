@@ -1,4 +1,4 @@
-# 生命周期管理理论
+# 生命周期管理理论 {#生命周期管理理论}
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -13,7 +13,7 @@
 
 ---
 
-## 形式化链接
+## 形式化链接 {#形式化链接}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -27,11 +27,11 @@
 
 ---
 
-## 生命周期的形式化模型
+## 生命周期的形式化模型 {#生命周期的形式化模型}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 生命周期作为区域（Region）
+### 生命周期作为区域（Region） {#生命周期作为区域region}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -69,7 +69,7 @@ fn constrained_lifetime<'a, 'b: 'a>(
 }
 ```
 
-### 生命周期省略规则（Lifetime Elision）
+### 生命周期省略规则（Lifetime Elision） {#生命周期省略规则lifetime-elision}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -98,7 +98,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 }
 ```
 
-### 生命周期边界与类型
+### 生命周期边界与类型 {#生命周期边界与类型}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -130,7 +130,7 @@ fn trait_object_lifetime() {
 }
 ```
 
-### 高级生命周期模式
+### 高级生命周期模式 {#高级生命周期模式}
 
 ```rust,ignore
 // 生命周期与泛型结合
@@ -174,7 +174,7 @@ fn self_referential_demo() {
 }
 ```
 
-### 生命周期的子类型关系
+### 生命周期的子类型关系 {#生命周期的子类型关系}
 
 ```rust
 // 协变（Covariance）：保持子类型方向
@@ -228,7 +228,7 @@ fn invariance(x: &mut &'static str) {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Variable Scope](https://en.wikipedia.org/wiki/Variable_Scope)**
 

@@ -1,4 +1,4 @@
-# 研究方法论
+# 研究方法论 {#研究方法论}
 >
 > **概念族**: 方法论 / 工具 / 指南
 
@@ -12,56 +12,56 @@
 > **状态**: ✅ 已完成权威国际化来源对齐升级
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Standard Library](https://doc.rust-lang.org/std/) | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | [Rust RFCs](https://rust-lang.github.io/rfcs/)
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [研究方法论](#研究方法论)
-  - [📑 目录](#-目录)
-  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
+  - [📑 目录](#目录)
+  - [🎯 研究目标](#研究目标)
     - [核心问题](#核心问题)
     - [预期成果](#预期成果)
   - [形式化论证汇总](#形式化论证汇总)
-  - [📚 研究方法 {#-研究方法}](#-研究方法--研究方法)
+  - [📚 研究方法](#研究方法)
     - [1. 形式化研究方法](#1-形式化研究方法)
     - [2. 实验研究方法](#2-实验研究方法)
     - [3. 实证研究方法](#3-实证研究方法)
     - [1.1 形式化研究方法详解](#11-形式化研究方法详解)
     - [Rust 形式化方法的国际论文与工具链](#rust-形式化方法的国际论文与工具链)
     - [Iris/RustBelt 风格 Coq 示例](#irisrustbelt-风格-coq-示例)
-    - [Lean 4 / Aeneas 后端示例](#lean-4--aeneas-后端示例)
+    - [Lean 4 / Aeneas 后端示例](#lean-4-aeneas-后端示例)
     - [相关概念](#相关概念)
     - [理论背景](#理论背景)
     - [4. 理论研究方法](#4-理论研究方法)
     - [2.1 实验研究方法要点](#21-实验研究方法要点)
     - [3.1 实证研究方法要点](#31-实证研究方法要点)
     - [4.1 理论研究方法要点](#41-理论研究方法要点)
-  - [🔬 研究工具 {#-研究工具}](#-研究工具--研究工具)
+  - [🔬 研究工具](#研究工具)
     - [分析工具](#分析工具)
     - [验证工具](#验证工具)
     - [实验工具](#实验工具)
     - [数据收集工具](#数据收集工具)
-  - [💻 实践指南 {#-实践指南}](#-实践指南--实践指南)
+  - [💻 实践指南](#实践指南)
     - [研究设计](#研究设计)
     - [数据收集](#数据收集)
     - [结果分析](#结果分析)
     - [报告撰写](#报告撰写)
-  - [📐 质量评估标准与研究模板 {#-质量评估标准与研究模板}](#-质量评估标准与研究模板--质量评估标准与研究模板)
+  - [📐 质量评估标准与研究模板](#质量评估标准与研究模板)
     - [质量评估标准](#质量评估标准)
     - [研究模板](#研究模板)
-  - [🔗 工具集成与案例研究索引 {#-工具集成与案例研究索引}](#-工具集成与案例研究索引--工具集成与案例研究索引)
+  - [🔗 工具集成与案例研究索引](#工具集成与案例研究索引)
     - [工具集成](#工具集成)
     - [工具使用要点](#工具使用要点)
     - [案例研究索引](#案例研究索引)
-  - [📖 参考文献 {#-参考文献}](#-参考文献--参考文献)
+  - [📖 参考文献](#参考文献)
     - [方法论文献](#方法论文献)
     - [工具文档](#工具文档)
     - [最佳实践](#最佳实践)
-  - [🔄 研究进展 {#-研究进展}](#-研究进展--研究进展)
-    - [已完成 ✅ {#已完成-}](#已完成--已完成-)
+  - [🔄 研究进展](#研究进展)
+    - [已完成 ✅](#已完成)
     - [进行中 🔄（已完成）](#进行中-已完成)
     - [计划中 📋（已完成）](#计划中-已完成)
-  - [🆕 权威国际化内容升级 (Rust 1.96.0+) {#-权威国际化内容升级}](#-权威国际化内容升级-rust-1960--权威国际化内容升级)
+  - [🆕 权威国际化内容升级 (Rust 1.96.0+)](#权威国际化内容升级-rust-1960)
     - [本次升级要点](#本次升级要点)
   - [权威来源索引](#权威来源索引)
 
@@ -72,13 +72,13 @@
 
 ---
 
-## 🎯 研究目标 {#-研究目标}
+## 🎯 研究目标 {#研究目标}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本研究旨在建立 Rust 研究的方法论体系，为 Rust 相关研究提供系统化的方法指导。
 
-### 核心问题
+### 核心问题 {#核心问题}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -88,7 +88,7 @@
 2. **工具选择**: 如何选择合适的研究工具？
 3. **质量保证**: 如何保证研究的质量和可靠性？
 
-### 预期成果
+### 预期成果 {#预期成果}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -100,7 +100,7 @@
 
 ---
 
-## 形式化论证汇总
+## 形式化论证汇总 {#形式化论证汇总}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -116,11 +116,11 @@
 
 ---
 
-## 📚 研究方法 {#-研究方法}
+## 📚 研究方法 {#研究方法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 形式化研究方法
+### 1. 形式化研究方法 {#1-形式化研究方法}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -145,7 +145,7 @@
 
 **优势**: 严格的数学证明，保证正确性
 
-### 2. 实验研究方法
+### 2. 实验研究方法 {#2-实验研究方法}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -170,7 +170,7 @@
 
 **优势**: 客观的数据支持，可重复验证
 
-### 3. 实证研究方法
+### 3. 实证研究方法 {#3-实证研究方法}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -186,7 +186,7 @@
 
 **优势**: 基于实际经验，具有实用价值
 
-### 1.1 形式化研究方法详解
+### 1.1 形式化研究方法详解 {#11-形式化研究方法详解}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 >
@@ -245,7 +245,7 @@ Proof.
 Qed.
 ```
 
-### Rust 形式化方法的国际论文与工具链
+### Rust 形式化方法的国际论文与工具链 {#rust-形式化方法的国际论文与工具链}
 >
 > **来源**: [Iris Project](https://iris-project.org/)
 >
@@ -260,7 +260,7 @@ Qed.
 - **Iris** (Jung et al., POPL 2015 / JFP 2018): 高阶并发分离逻辑框架，RustBelt 的证明基础。主页: <https://iris-project.org/>，Coq 实现: <https://gitlab.mpi-sws.org/iris/iris>。
 - **λRust** (RustBelt 的 Coq 形式化): RustBelt 在 Iris 中的操作语义与类型解释。源码: <https://gitlab.mpi-sws.org/iris/lambda-rust>。
 
-### Iris/RustBelt 风格 Coq 示例
+### Iris/RustBelt 风格 Coq 示例 {#irisrustbelt-风格-coq-示例}
 >
 > **来源**: [Iris Project](https://iris-project.org/)
 
@@ -282,7 +282,7 @@ Qed.
 
 > 说明：上述示例为示意性 Iris/Coq 代码，展示 RustBelt 如何将所有权建模为分离逻辑资源。完整可机器检查的证明请参考 [λRust](https://gitlab.mpi-sws.org/iris/lambda-rust) 与 [RustBelt 论文](https://plv.mpi-sws.org/rustbelt/popl18/paper.pdf)。
 
-### Lean 4 / Aeneas 后端示例
+### Lean 4 / Aeneas 后端示例 {#lean-4-aeneas-后端示例}
 >
 > **来源**: [Aeneas](https://aeneas-verif.github.io/aeneas/)
 
@@ -296,7 +296,7 @@ def take_max (a b : U32) : Result U32 :=
 
 > 说明：Aeneas 的 Lean 后端要求使用 Charon 生成 `.llbc` 文件，再在 Aeneas 中选择 `-backend lean`。详见 [Aeneas 文档](https://aeneas-verif.github.io/aeneas/) 与 [Charon](https://github.com/AeneasVerif/charon)。
 
-### 相关概念
+### 相关概念 {#相关概念}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -312,7 +312,7 @@ def take_max (a b : U32) : Result U32 :=
 
 **研究工具 (Research Tools)**: 用于研究的工具，包括形式化工具、性能分析工具等。
 
-### 理论背景
+### 理论背景 {#理论背景}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -333,7 +333,7 @@ def take_max (a b : U32) : Result U32 :=
 
 **工具**: 代码分析工具, 调查工具, 统计分析工具
 
-### 4. 理论研究方法
+### 4. 理论研究方法 {#4-理论研究方法}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -354,7 +354,7 @@ def take_max (a b : U32) : Result U32 :=
 
 **工具**: 数学工具, 形式化工具, 理论验证工具
 
-### 2.1 实验研究方法要点
+### 2.1 实验研究方法要点 {#21-实验研究方法要点}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -363,7 +363,7 @@ def take_max (a b : U32) : Result U32 :=
 - **可重复**：`cargo bench`、`criterion`、`--save-baseline`；记录环境与命令。
 - **详见**：[10_performance_benchmarks.md](experiments/10_performance_benchmarks.md) 的「数据收集执行指南」与「结果分析模板」。
 
-### 3.1 实证研究方法要点
+### 3.1 实证研究方法要点 {#31-实证研究方法要点}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -372,7 +372,7 @@ def take_max (a b : U32) : Result U32 :=
 - **模式**：归纳「所有权/借用/并发/异步」等在项目中的用法与坑点。
 - **详见**：[10_practical_applications.md](10_practical_applications.md) 的「案例报告模板」与「案例快速索引」。
 
-### 4.1 理论研究方法要点
+### 4.1 理论研究方法要点 {#41-理论研究方法要点}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -383,11 +383,11 @@ def take_max (a b : U32) : Result U32 :=
 
 ---
 
-## 🔬 研究工具 {#-研究工具}
+## 🔬 研究工具 {#研究工具}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 分析工具
+### 分析工具 {#分析工具}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -396,7 +396,7 @@ def take_max (a b : U32) : Result U32 :=
 - **性能分析工具**: perf, flamegraph, cargo-instruments
 - **内存分析工具**: heaptrack, dhat, memory profilers
 
-### 验证工具
+### 验证工具 {#验证工具}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -405,7 +405,7 @@ def take_max (a b : U32) : Result U32 :=
 - **形式化验证工具**: Prusti, Creusot, Kani
 - **测试工具**: cargo test, proptest, quickcheck
 
-### 实验工具
+### 实验工具 {#实验工具}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -414,7 +414,7 @@ def take_max (a b : U32) : Result U32 :=
 - **并发测试工具**: loom, stress tests
 - **压力测试工具**: wrk, ab, k6
 
-### 数据收集工具
+### 数据收集工具 {#数据收集工具}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -425,11 +425,11 @@ def take_max (a b : U32) : Result U32 :=
 
 ---
 
-## 💻 实践指南 {#-实践指南}
+## 💻 实践指南 {#实践指南}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 研究设计
+### 研究设计 {#研究设计}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -438,7 +438,7 @@ def take_max (a b : U32) : Result U32 :=
 3. **工具准备**: 准备必要的研究工具
 4. **计划制定**: 制定详细的研究计划
 
-### 数据收集
+### 数据收集 {#数据收集}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -447,7 +447,7 @@ def take_max (a b : U32) : Result U32 :=
 3. **质量控制**: 确保数据质量
 4. **数据存储**: 安全存储数据
 
-### 结果分析
+### 结果分析 {#结果分析}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -456,7 +456,7 @@ def take_max (a b : U32) : Result U32 :=
 3. **模式识别**: 识别数据模式
 4. **结论推导**: 推导研究结论
 
-### 报告撰写
+### 报告撰写 {#报告撰写}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -467,11 +467,11 @@ def take_max (a b : U32) : Result U32 :=
 
 ---
 
-## 📐 质量评估标准与研究模板 {#-质量评估标准与研究模板}
+## 📐 质量评估标准与研究模板 {#质量评估标准与研究模板}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 质量评估标准
+### 质量评估标准 {#质量评估标准}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -481,7 +481,7 @@ def take_max (a b : U32) : Result U32 :=
 - **交叉引用**：与 [formal_methods](formal_methods/README.md)、[type_theory](type_theory/README.md)、[experiments](experiments/README.md)、[practical_applications](10_practical_applications.md) 的关联明确。
 - **时效性**：注明 Rust 版本（如 1.93.1+）；若依赖未稳定特性，需标出。
 
-### 研究模板
+### 研究模板 {#研究模板}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -493,11 +493,11 @@ def take_max (a b : U32) : Result U32 :=
 
 ---
 
-## 🔗 工具集成与案例研究索引 {#-工具集成与案例研究索引}
+## 🔗 工具集成与案例研究索引 {#工具集成与案例研究索引}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 工具集成
+### 工具集成 {#工具集成}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -510,7 +510,7 @@ def take_max (a b : U32) : Result U32 :=
 - 可统一用 `cargo bench`、`cargo bloat`、`cargo expand`、`time cargo build`、Valgrind/Miri 等。
 - **与形式化**：Prusti、Creusot、Kani 的用法见各形式化文档的「工具验证」；Coq/Lean 示例见「1.1 形式化研究方法详解」。
 
-### 工具使用要点
+### 工具使用要点 {#工具使用要点}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -520,7 +520,7 @@ def take_max (a b : U32) : Result U32 :=
 - **Miri**：`cargo miri test`；`-Zmiri-tag-raw-pointers` 等见 Miri 文档。
 - **cargo expand / bloat**：宏展开与二进制体积分析；见 [macro_expansion_performance](experiments/10_macro_expansion_performance.md)。
 
-### 案例研究索引
+### 案例研究索引 {#案例研究索引}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -533,11 +533,11 @@ def take_max (a b : U32) : Result U32 :=
 
 ---
 
-## 📖 参考文献 {#-参考文献}
+## 📖 参考文献 {#参考文献}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 方法论文献
+### 方法论文献 {#方法论文献}
 >
 > **[来源: [Iris Project](https://iris-project.org/)]**
 
@@ -549,7 +549,7 @@ def take_max (a b : U32) : Result U32 :=
 - [RustHornBelt: A Semantic Foundation for Functional Verification of Rust Programs with Unsafe Code](https://people.mpi-sws.org/~dreyer/papers/rusthornbelt/paper.pdf) (Matsushita et al., PLDI 2022) — 带 `unsafe` 代码的功能正确性基础。
 - [λRust Coq Development](https://gitlab.mpi-sws.org/iris/lambda-rust) — RustBelt 在 Iris 中的操作语义与类型解释。
 
-### 工具文档
+### 工具文档 {#工具文档}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -562,7 +562,7 @@ def take_max (a b : U32) : Result U32 :=
 - [Verus](https://verus-lang.github.io/verus/) — 面向系统代码的 SMT 验证器
 - [Criterion.rs](https://bheisler.github.io/criterion.rs/book/) — 统计驱动基准测试
 
-### 最佳实践
+### 最佳实践 {#最佳实践}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -572,11 +572,11 @@ def take_max (a b : U32) : Result U32 :=
 
 ---
 
-## 🔄 研究进展 {#-研究进展}
+## 🔄 研究进展 {#研究进展}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 已完成 ✅ {#已完成-}
+### 已完成 ✅ {#已完成}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -585,7 +585,7 @@ def take_max (a b : U32) : Result U32 :=
 - [x] 实践指南框架
 - [x] 理论基础整理（包括理论背景和相关概念）
 
-### 进行中 🔄（已完成）
+### 进行中 🔄（已完成） {#进行中-已完成}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -593,7 +593,7 @@ def take_max (a b : U32) : Result U32 :=
 - [x] 工具使用教程（工具使用要点 + TOOLS_GUIDE、各实验指南）
 - [x] 案例研究（案例研究索引 + practical_applications）
 
-### 计划中 📋（已完成）
+### 计划中 📋（已完成） {#计划中-已完成}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -609,14 +609,14 @@ def take_max (a b : U32) : Result U32 :=
 
 ---
 
-## 🆕 权威国际化内容升级 (Rust 1.96.0+) {#-权威国际化内容升级}
+## 🆕 权威国际化内容升级 (Rust 1.96.0+) {#权威国际化内容升级-rust-1960}
 >
 > **来源**: [Rust Research Methodology Group]
 
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-06-29
 
-### 本次升级要点
+### 本次升级要点 {#本次升级要点}
 
 - 补充 Rust 形式化方法的国际权威论文索引：RustBelt、Aeneas、RustHorn、RustHornBelt、Iris。
 - Coq/Lean 示例对齐 Iris/RustBelt 的分离逻辑与生命周期逻辑。
@@ -642,7 +642,7 @@ def take_max (a b : U32) : Result U32 :=
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

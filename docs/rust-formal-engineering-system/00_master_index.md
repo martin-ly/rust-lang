@@ -1,17 +1,17 @@
-# Rust 形式化工程系统 - 主索引
+# Rust 形式化工程系统 - 主索引 {#rust-形式化工程系统---主索引}
 
 > **内容分级**: [归档级]
 > **说明**: 本文档为历史研究材料，最新内容请参阅 [knowledge/04_expert/safety_critical/02_rust_safety_critical_ecosystem_master_index.md](../../knowledge/04_expert/safety_critical/02_rust_safety_critical_ecosystem_master_index.md)
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 形式化工程系统 - 主索引](#rust-形式化工程系统---主索引)
-  - [📑 目录](#-目录)
-  - [🏛️ 理论体系与论证体系结构（顶层入口）](#️-理论体系与论证体系结构顶层入口)
+  - [📑 目录](#目录)
+  - [🏛️ 理论体系与论证体系结构（顶层入口）](#理论体系与论证体系结构顶层入口)
   - [理论基础 (01\_theoretical\_foundations)](#理论基础-01_theoretical_foundations)
     - [类型系统子路径](#类型系统子路径)
   - [编程范式 (02\_programming\_paradigms)](#编程范式-02_programming_paradigms)
@@ -23,7 +23,7 @@
   - [证明与公理→定理链](#证明与公理定理链)
   - [返回](#返回)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
   - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-20
@@ -34,7 +34,7 @@
 
 ---
 
-## 🏛️ 理论体系与论证体系结构（顶层入口）
+## 🏛️ 理论体系与论证体系结构（顶层入口） {#理论体系与论证体系结构顶层入口}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -44,7 +44,7 @@
 
 ---
 
-## 理论基础 (01_theoretical_foundations)
+## 理论基础 (01_theoretical_foundations) {#理论基础-01_theoretical_foundations}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -59,7 +59,7 @@
 | **09 形式化验证** | [research_notes/10_tools_guide.md](../../archive/research_notes_2026_06_25/10_tools_guide.md) | Prusti、Kani、Creusot |
 | **10 数学基础** | [research_notes/type_theory/](../research_notes/type_theory/README.md) | 类型理论与数学基础 |
 
-### 类型系统子路径
+### 类型系统子路径 {#类型系统子路径}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -71,7 +71,7 @@
 
 ---
 
-## 编程范式 (02_programming_paradigms)
+## 编程范式 (02_programming_paradigms) {#编程范式-02_programming_paradigms}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -83,7 +83,7 @@
 
 ---
 
-## 设计模式 (03_design_patterns)
+## 设计模式 (03_design_patterns) {#设计模式-03_design_patterns}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -93,7 +93,7 @@
 
 ---
 
-## 工具链生态 (06_toolchain_ecosystem)
+## 工具链生态 (06_toolchain_ecosystem) {#工具链生态-06_toolchain_ecosystem}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -105,7 +105,7 @@
 
 ---
 
-## 软件工程 (05_software_engineering)
+## 软件工程 (05_software_engineering) {#软件工程-05_software_engineering}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -115,7 +115,7 @@
 
 ---
 
-## 研究议程 (09_research_agenda)
+## 研究议程 (09_research_agenda) {#研究议程-09_research_agenda}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -124,7 +124,7 @@
 
 ---
 
-## 质量保障 (10_quality_assurance)
+## 质量保障 (10_quality_assurance) {#质量保障-10_quality_assurance}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -134,7 +134,7 @@
 
 ---
 
-## 证明与公理→定理链
+## 证明与公理→定理链 {#证明与公理定理链}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -144,7 +144,7 @@
 
 ---
 
-## 返回
+## 返回 {#返回}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -164,7 +164,7 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -173,7 +173,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引-1}
 
 > **来源: [Wikipedia - Formal Methods](https://en.wikipedia.org/wiki/Formal_Methods)**
 > **来源: [Coq Reference](https://coq.inria.fr/doc/)**
@@ -185,7 +185,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引-1}
 
 > **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
 >

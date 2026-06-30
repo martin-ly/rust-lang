@@ -7,7 +7,7 @@
 > **层级**: L1 基础概念
 > **A/S/P 标记**: C+S — Comparison + Structure
 > **双维定位**: C×Ana
-> **前置概念**: [Ownership](01_ownership.md) · [Variable Model](20_variable_model.md) · [Borrowing](02_borrowing.md)
+> **前置概念**: [Ownership](01_ownership.md) · [Variable Model](20_variable_model.md) · [Borrowing](02_borrowing.md) · [学习指南](../00_meta/learning_guide.md)
 > **后置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md) · [Construction](../02_intermediate/28_construction_and_initialization.md)
 > **主要来源**:
 >

@@ -1,4 +1,4 @@
-# 🔷 Rust 泛型编程速查卡
+# 🔷 Rust 泛型编程速查卡 {#rust-泛型编程速查卡}
 
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
@@ -6,62 +6,61 @@
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [🔷 Rust 泛型编程速查卡](#-rust-泛型编程速查卡)
-  - [📑 目录](#-目录)
-  - [🧠 泛型系统思维导图](#-泛型系统思维导图)
-  - [📊 概念定义-属性关系-解释论证](#-概念定义-属性关系-解释论证)
-  - [🔬 泛型系统证明树](#-泛型系统证明树)
-  - [🎯 核心概念](#-核心概念)
+- [🔷 Rust 泛型编程速查卡](#rust-泛型编程速查卡)
+  - [📑 目录](#目录)
+  - [🧠 泛型系统思维导图](#泛型系统思维导图)
+  - [📊 概念定义-属性关系-解释论证](#概念定义-属性关系-解释论证)
+  - [🔬 泛型系统证明树](#泛型系统证明树)
+  - [🎯 核心概念](#核心概念)
     - [泛型函数](#泛型函数)
     - [泛型结构体](#泛型结构体)
     - [泛型枚举](#泛型枚举)
-  - [📐 Trait 约束](#-trait-约束)
+  - [📐 Trait 约束](#trait-约束)
     - [基本约束](#基本约束)
     - [常见 Trait 约束](#常见-trait-约束)
-  - [🔧 高级特性](#-高级特性)
+  - [🔧 高级特性](#高级特性)
     - [关联类型](#关联类型)
     - [泛型关联类型 (GATs)](#泛型关联类型-gats)
     - [const 泛型](#const-泛型)
-  - [🎯 常见模式](#-常见模式)
+  - [🎯 常见模式](#常见模式)
     - [模式 1: 泛型函数](#模式-1-泛型函数)
     - [模式 2: 泛型方法](#模式-2-泛型方法)
     - [模式 3: 泛型 Trait 实现](#模式-3-泛型-trait-实现)
-  - [📚 性能考虑](#-性能考虑)
+  - [📚 性能考虑](#性能考虑)
     - [单态化 (Monomorphization)](#单态化-monomorphization)
-  - [🚫 反例速查](#-反例速查)
+  - [🚫 反例速查](#反例速查)
     - [反例 1: 遗漏 Trait 约束](#反例-1-遗漏-trait-约束)
     - [反例 2: 泛型与 trait 对象混用不当](#反例-2-泛型与-trait-对象混用不当)
-  - [📚 相关文档](#-相关文档)
-  - [🧩 相关示例代码](#-相关示例代码)
-  - [🔗 相关资源](#-相关资源)
-  - [🆕 Rust 1.93.0 泛型改进](#-rust-1930-泛型改进)
+  - [📚 相关文档](#相关文档)
+  - [🧩 相关示例代码](#相关示例代码)
+  - [🔗 相关资源](#相关资源)
+  - [🆕 Rust 1.93.0 泛型改进](#rust-1930-泛型改进)
     - [MaybeUninit 泛型支持增强](#maybeuninit-泛型支持增强)
   - [Rust 1.92.0 泛型改进（历史）](#rust-1920-泛型改进历史)
     - [const 上下文增强](#const-上下文增强)
-  - [📚 相关资源](#-相关资源-1)
+  - [📚 相关资源](#相关资源-1)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
     - [相关速查卡](#相关速查卡)
-  - [💡 使用场景](#-使用场景)
+  - [💡 使用场景](#使用场景)
     - [场景 1: 通用 Repository 模式](#场景-1-通用-repository-模式)
     - [场景 2: 类型安全的构建器](#场景-2-类型安全的构建器)
     - [场景 3: 泛型事件处理器](#场景-3-泛型事件处理器)
-  - [⚠️ 边界情况](#️-边界情况)
+  - [⚠️ 边界情况](#边界情况)
     - [边界 1: 孤儿规则 (Orphan Rule)](#边界-1-孤儿规则-orphan-rule)
     - [边界 2: 生命周期与泛型的交互](#边界-2-生命周期与泛型的交互)
     - [边界 3: 复杂 Trait 约束](#边界-3-复杂-trait-约束)
     - [形式化理论](#形式化理论)
-  - [🆕 Rust 1.95+ 特性整合](#-rust-195-特性整合)
+  - [🆕 Rust 1.95+ 特性整合](#rust-195-特性整合)
     - [核心特性速查](#核心特性速查)
   - [Rust 1.95+ 在泛型中的深度应用](#rust-195-在泛型中的深度应用)
     - [ControlFlow 在泛型约束中的应用](#controlflow-在泛型约束中的应用)
     - [LazyLock 在泛型常量中的应用](#lazylock-在泛型常量中的应用)
     - [性能提升总结](#性能提升总结)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -73,7 +72,7 @@
 
 ---
 
-## 🧠 泛型系统思维导图
+## 🧠 泛型系统思维导图 {#泛型系统思维导图}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -104,7 +103,7 @@ mindmap
 
 ---
 
-## 📊 概念定义-属性关系-解释论证
+## 📊 概念定义-属性关系-解释论证 {#概念定义-属性关系-解释论证}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -120,7 +119,7 @@ mindmap
 
 ---
 
-## 🔬 泛型系统证明树
+## 🔬 泛型系统证明树 {#泛型系统证明树}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -144,11 +143,11 @@ graph TD
 
 ---
 
-## 🎯 核心概念
+## 🎯 核心概念 {#核心概念}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 泛型函数
+### 泛型函数 {#泛型函数}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -167,7 +166,7 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
 }
 ```
 
-### 泛型结构体
+### 泛型结构体 {#泛型结构体}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -184,7 +183,7 @@ let integer = Point { x: 5, y: 10 };
 let float = Point { x: 1.0, y: 4.0 };
 ```
 
-### 泛型枚举
+### 泛型枚举 {#泛型枚举}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -204,11 +203,11 @@ enum Result<T, E> {
 
 ---
 
-## 📐 Trait 约束
+## 📐 Trait 约束 {#trait-约束}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 基本约束
+### 基本约束 {#基本约束}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -225,7 +224,7 @@ where
 }
 ```
 
-### 常见 Trait 约束
+### 常见 Trait 约束 {#常见-trait-约束}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -250,11 +249,11 @@ fn print<T: Display>(item: T) {
 
 ---
 
-## 🔧 高级特性
+## 🔧 高级特性 {#高级特性}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 关联类型
+### 关联类型 {#关联类型}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -266,7 +265,7 @@ trait Iterator {
 }
 ```
 
-### 泛型关联类型 (GATs)
+### 泛型关联类型 (GATs) {#泛型关联类型-gats}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -278,7 +277,7 @@ trait StreamingIterator {
 }
 ```
 
-### const 泛型
+### const 泛型 {#const-泛型}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -293,11 +292,11 @@ let arr: Array<i32, 5> = Array { data: [0; 5] };
 
 ---
 
-## 🎯 常见模式
+## 🎯 常见模式 {#常见模式}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 模式 1: 泛型函数
+### 模式 1: 泛型函数 {#模式-1-泛型函数}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -307,7 +306,7 @@ fn swap<T>(x: &mut T, y: &mut T) {
 }
 ```
 
-### 模式 2: 泛型方法
+### 模式 2: 泛型方法 {#模式-2-泛型方法}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -326,7 +325,7 @@ impl Point<f32> {
 }
 ```
 
-### 模式 3: 泛型 Trait 实现
+### 模式 3: 泛型 Trait 实现 {#模式-3-泛型-trait-实现}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -340,11 +339,11 @@ impl<T: Display> ToString for T {
 
 ---
 
-## 📚 性能考虑
+## 📚 性能考虑 {#性能考虑}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 单态化 (Monomorphization)
+### 单态化 (Monomorphization) {#单态化-monomorphization}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -362,11 +361,11 @@ let float = largest(&[1.0, 2.0]);   // 生成 largest_f64
 
 ---
 
-## 🚫 反例速查
+## 🚫 反例速查 {#反例速查}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 反例 1: 遗漏 Trait 约束
+### 反例 1: 遗漏 Trait 约束 {#反例-1-遗漏-trait-约束}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -398,7 +397,7 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
 
 ---
 
-### 反例 2: 泛型与 trait 对象混用不当
+### 反例 2: 泛型与 trait 对象混用不当 {#反例-2-泛型与-trait-对象混用不当}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -423,14 +422,14 @@ fn print_all(items: Vec<Box<dyn Display>>) {
 
 ---
 
-## 📚 相关文档
+## 📚 相关文档 {#相关文档}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [泛型编程完整文档](../../../crates/c04_generic/docs/README.md)
 - [泛型编程 README](../../../crates/c04_generic/README.md)
 
-## 🧩 相关示例代码
+## 🧩 相关示例代码 {#相关示例代码}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -441,7 +440,7 @@ fn print_all(items: Vec<Box<dyn Display>>) {
 - [类型状态与零成本抽象](../../../crates/c04_generic/examples/generic_type_state_demo.rs)、[generic_zero_cost_demo.rs](../../../crates/c04_generic/examples/generic_zero_cost_demo.rs)
 - [Rust 1.95/1.96 新特性](../../06_toolchain/06_19_rust_1_96_features.md)（详见 Rust 1.96 稳定特性全景）
 
-## 🔗 相关资源
+## 🔗 相关资源 {#相关资源}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -450,11 +449,11 @@ fn print_all(items: Vec<Box<dyn Display>>) {
 
 ---
 
-## 🆕 Rust 1.93.0 泛型改进
+## 🆕 Rust 1.93.0 泛型改进 {#rust-1930-泛型改进}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### MaybeUninit 泛型支持增强
+### MaybeUninit 泛型支持增强 {#maybeuninit-泛型支持增强}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -477,11 +476,11 @@ fn init_array<T, const N: usize>(init: impl Fn(usize) -> T) -> [T; N] {
 
 ---
 
-## Rust 1.92.0 泛型改进（历史）
+## Rust 1.92.0 泛型改进（历史） {#rust-1920-泛型改进历史}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### const 上下文增强
+### const 上下文增强 {#const-上下文增强}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -504,25 +503,25 @@ const REF: &i32 = &CONFIG;  // ✅ 现在支持
 
 ---
 
-## 📚 相关资源
+## 📚 相关资源 {#相关资源-1}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 官方文档
+### 官方文档 {#官方文档}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - [Rust 泛型文档](https://doc.rust-lang.org/book/ch10-00-generics.html)
 - [Rust Reference - Generics](https://doc.rust-lang.org/reference/items/generics.html)
 
-### 项目内部文档
+### 项目内部文档 {#项目内部文档}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
 - [泛型完整文档](../../../crates/c04_generic/docs/README.md)
 - [类型系统研究笔记](../../research_notes/type_theory/README.md)
 
-### 相关速查卡
+### 相关速查卡 {#相关速查卡}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -533,11 +532,11 @@ const REF: &i32 = &CONFIG;  // ✅ 现在支持
 
 ---
 
-## 💡 使用场景
+## 💡 使用场景 {#使用场景}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 场景 1: 通用 Repository 模式
+### 场景 1: 通用 Repository 模式 {#场景-1-通用-repository-模式}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -591,7 +590,7 @@ fn main() {
 }
 ```
 
-### 场景 2: 类型安全的构建器
+### 场景 2: 类型安全的构建器 {#场景-2-类型安全的构建器}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -651,7 +650,7 @@ fn main() {
 }
 ```
 
-### 场景 3: 泛型事件处理器
+### 场景 3: 泛型事件处理器 {#场景-3-泛型事件处理器}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -719,11 +718,11 @@ fn main() {
 
 ---
 
-## ⚠️ 边界情况
+## ⚠️ 边界情况 {#边界情况}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 边界 1: 孤儿规则 (Orphan Rule)
+### 边界 1: 孤儿规则 (Orphan Rule) {#边界-1-孤儿规则-orphan-rule}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -750,7 +749,7 @@ fn main() {
 }
 ```
 
-### 边界 2: 生命周期与泛型的交互
+### 边界 2: 生命周期与泛型的交互 {#边界-2-生命周期与泛型的交互}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -776,7 +775,7 @@ fn main() {
 }
 ```
 
-### 边界 3: 复杂 Trait 约束
+### 边界 3: 复杂 Trait 约束 {#边界-3-复杂-trait-约束}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -800,7 +799,7 @@ fn main() {
 }
 ```
 
-### 形式化理论
+### 形式化理论 {#形式化理论}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -815,12 +814,12 @@ fn main() {
 
 ---
 
-## 🆕 Rust 1.95+ 特性整合
+## 🆕 Rust 1.95+ 特性整合 {#rust-195-特性整合}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 > **适用版本**: Rust 1.96.0+
 
-### 核心特性速查
+### 核心特性速查 {#核心特性速查}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -863,12 +862,12 @@ let gamma = f64::consts::EULER_GAMMA;
 
 ---
 
-## Rust 1.95+ 在泛型中的深度应用
+## Rust 1.95+ 在泛型中的深度应用 {#rust-195-在泛型中的深度应用}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 > **适用版本**: Rust 1.96.0+ | **实际场景**: 泛型开发
 
-### ControlFlow 在泛型约束中的应用
+### ControlFlow 在泛型约束中的应用 {#controlflow-在泛型约束中的应用}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -894,7 +893,7 @@ where
 }
 ```
 
-### LazyLock 在泛型常量中的应用
+### LazyLock 在泛型常量中的应用 {#lazylock-在泛型常量中的应用}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -907,7 +906,7 @@ static TYPE_CACHE: LazyLock<HashMap<TypeId, String>> = LazyLock::new(|| {
 });
 ```
 
-### 性能提升总结
+### 性能提升总结 {#性能提升总结}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -936,7 +935,7 @@ static TYPE_CACHE: LazyLock<HashMap<TypeId, String>> = LazyLock::new(|| {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -945,7 +944,7 @@ static TYPE_CACHE: LazyLock<HashMap<TypeId, String>> = LazyLock::new(|| {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

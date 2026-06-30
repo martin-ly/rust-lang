@@ -1,4 +1,4 @@
-# WASM 快速参考卡片
+# WASM 快速参考卡片 {#wasm-快速参考卡片}
 
 > **分级**: [A]
 > **快速参考** | [完整文档](../../../crates/c12_wasm/docs/README.md) | [代码示例](../../../crates/c12_wasm/examples/README.md)
@@ -9,42 +9,42 @@
 
 ---
 
-## 📋 目录 {#-目录}
+## 📋 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [WASM 快速参考卡片](#wasm-快速参考卡片)
-  - [📋 目录 {#-目录}](#-目录--目录)
-  - [🚀 快速开始 {#-快速开始}](#-快速开始--快速开始)
+  - [📋 目录](#目录)
+  - [🚀 快速开始](#快速开始)
     - [基本设置](#基本设置)
-  - [📋 常用 API {#-常用-api}](#-常用-api--常用-api)
+  - [📋 常用 API](#常用-api)
     - [JavaScript 互操作](#javascript-互操作)
     - [处理对象](#处理对象)
     - [异步函数](#异步函数)
-  - [🔧 编译配置 {#-编译配置}](#-编译配置--编译配置)
+  - [🔧 编译配置](#编译配置)
     - [Cargo.toml](#cargotoml)
     - [编译命令](#编译命令)
-  - [🌐 在浏览器中使用 {#-在浏览器中使用}](#-在浏览器中使用--在浏览器中使用)
-  - [⚡ 性能优化 {#-性能优化}](#-性能优化--性能优化)
+  - [🌐 在浏览器中使用](#在浏览器中使用)
+  - [⚡ 性能优化](#性能优化)
     - [减小二进制大小](#减小二进制大小)
     - [使用 wasm-opt](#使用-wasm-opt)
-  - [🚫 反例速查 {#-反例速查}](#-反例速查--反例速查)
+  - [🚫 反例速查](#反例速查)
     - [反例 1: 在 wasm 中使用阻塞 API](#反例-1-在-wasm-中使用阻塞-api)
     - [反例 2: 忽略 JS 边界开销](#反例-2-忽略-js-边界开销)
-  - [📚 相关文档 {#-相关文档}](#-相关文档--相关文档)
-  - [🧩 相关示例代码 {#-相关示例代码}](#-相关示例代码--相关示例代码)
-  - [📚 相关资源 {#-相关资源}](#-相关资源--相关资源)
+  - [📚 相关文档](#相关文档)
+  - [🧩 相关示例代码](#相关示例代码)
+  - [📚 相关资源](#相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
-  - [🎯 使用场景 {#-使用场景}](#-使用场景--使用场景)
+  - [🎯 使用场景](#使用场景)
     - [场景 1: 浏览器图像处理器](#场景-1-浏览器图像处理器)
     - [场景 2: 实时数据可视化](#场景-2-实时数据可视化)
     - [场景 3: Web Worker 计算密集型任务](#场景-3-web-worker-计算密集型任务)
-  - [📐 形式化方法链接 {#-形式化方法链接}](#-形式化方法链接--形式化方法链接)
+  - [📐 形式化方法链接](#形式化方法链接)
     - [理论基础](#理论基础)
     - [形式化定理](#形式化定理)
     - [相关速查卡](#相关速查卡)
-  - [🆕 Rust 1.95+ 特性整合](#-rust-195-特性整合)
+  - [🆕 Rust 1.95+ 特性整合](#rust-195-特性整合)
     - [核心特性速查](#核心特性速查)
   - [Rust 1.95+ 在WASM中的深度应用](#rust-195-在wasm中的深度应用)
     - [array\_windows 在 WASM 图像处理中的应用](#array_windows-在-wasm-图像处理中的应用)
@@ -55,31 +55,31 @@
 
 ---
 
-## 🚀 快速开始 {#-快速开始}
+## 🚀 快速开始 {#快速开始}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 基本设置
+### 基本设置 {#基本设置}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# 安装 wasm-pack
+# 安装 wasm-pack {#安装-wasm-pack}
 
 > **Bloom 层级**: L2 (理解)
 cargo install wasm-pack
 
-# 创建项目
+# 创建项目 {#创建项目}
 wasm-pack new my-wasm-project
 ```
 
-## 📋 常用 API {#-常用-api}
+## 📋 常用 API {#常用-api}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### JavaScript 互操作
+### JavaScript 互操作 {#javascript-互操作}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -95,7 +95,7 @@ extern "C" {
 }
 ```
 
-### 处理对象
+### 处理对象 {#处理对象}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -117,7 +117,7 @@ impl Person {
 }
 ```
 
-### 异步函数
+### 异步函数 {#异步函数}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -136,11 +136,11 @@ pub async fn fetch_data(url: &str) -> Result<JsValue, JsValue> {
 
 ---
 
-## 🔧 编译配置 {#-编译配置}
+## 🔧 编译配置 {#编译配置}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Cargo.toml
+### Cargo.toml {#cargotoml}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -157,26 +157,26 @@ js-sys = "0.3"
 web-sys = { version = "0.3", features = ["Window"] }
 ```
 
-### 编译命令
+### 编译命令 {#编译命令}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# Web 目标
+# Web 目标 {#web-目标}
 wasm-pack build --target web
 
-# Node.js 目标
+# Node.js 目标 {#nodejs-目标}
 wasm-pack build --target nodejs
 
-# Bundler 目标
+# Bundler 目标 {#bundler-目标}
 wasm-pack build --target bundler
 ```
 
 ---
 
-## 🌐 在浏览器中使用 {#-在浏览器中使用}
+## 🌐 在浏览器中使用 {#在浏览器中使用}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -191,11 +191,11 @@ wasm-pack build --target bundler
 
 ---
 
-## ⚡ 性能优化 {#-性能优化}
+## ⚡ 性能优化 {#性能优化}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 减小二进制大小
+### 减小二进制大小 {#减小二进制大小}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -208,7 +208,7 @@ panic = "abort"
 strip = true
 ```
 
-### 使用 wasm-opt
+### 使用 wasm-opt {#使用-wasm-opt}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -218,11 +218,11 @@ wasm-opt -Os pkg/my_project_bg.wasm -o pkg/my_project_optimized.wasm
 
 ---
 
-## 🚫 反例速查 {#-反例速查}
+## 🚫 反例速查 {#反例速查}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 反例 1: 在 wasm 中使用阻塞 API
+### 反例 1: 在 wasm 中使用阻塞 API {#反例-1-在-wasm-中使用阻塞-api}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -241,7 +241,7 @@ fn bad() {
 
 ---
 
-### 反例 2: 忽略 JS 边界开销
+### 反例 2: 忽略 JS 边界开销 {#反例-2-忽略-js-边界开销}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -259,14 +259,14 @@ for i in 0..10000 {
 
 ---
 
-## 📚 相关文档 {#-相关文档}
+## 📚 相关文档 {#相关文档}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [WASM 完整文档](../../../crates/c12_wasm/docs/README.md)
 - [WASM README](../../../crates/c12_wasm/README.md)
 
-## 🧩 相关示例代码 {#-相关示例代码}
+## 🧩 相关示例代码 {#相关示例代码}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -280,11 +280,11 @@ for i in 0..10000 {
 
 ---
 
-## 📚 相关资源 {#-相关资源}
+## 📚 相关资源 {#相关资源}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 官方文档
+### 官方文档 {#官方文档}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -292,7 +292,7 @@ for i in 0..10000 {
 - [wasm-pack 文档](https://rustwasm.github.io/wasm-pack/)
 - [WebAssembly 官方文档](https://webassembly.org/)
 
-### 项目内部文档
+### 项目内部文档 {#项目内部文档}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -300,11 +300,11 @@ for i in 0..10000 {
 - [WASM 使用指南](../../05_guides/05_wasm_usage_guide.md)
 - [JavaScript 互操作](../../../crates/c12_wasm/docs/tier_02_guides/03_javascript_互操作.md)
 
-## 🎯 使用场景 {#-使用场景}
+## 🎯 使用场景 {#使用场景}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 场景 1: 浏览器图像处理器
+### 场景 1: 浏览器图像处理器 {#场景-1-浏览器图像处理器}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -348,7 +348,7 @@ impl ImageProcessor {
 }
 ```
 
-### 场景 2: 实时数据可视化
+### 场景 2: 实时数据可视化 {#场景-2-实时数据可视化}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -413,7 +413,7 @@ impl ChartRenderer {
 }
 ```
 
-### 场景 3: Web Worker 计算密集型任务
+### 场景 3: Web Worker 计算密集型任务 {#场景-3-web-worker-计算密集型任务}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -452,11 +452,11 @@ pub fn process_task(task_json: &str) -> String {
 
 ---
 
-## 📐 形式化方法链接 {#-形式化方法链接}
+## 📐 形式化方法链接 {#形式化方法链接}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 理论基础
+### 理论基础 {#理论基础}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -467,7 +467,7 @@ pub fn process_task(task_json: &str) -> String {
 | **Send/Sync** | [send_sync_formalization](../../../archive/research_notes_2026_06_25/formal_methods/10_send_sync_formalization.md) | Web Worker 安全 |
 | **类型系统** | [type_system_foundations](../../../archive/research_notes_2026_06_25/type_theory/10_type_system_foundations.md) | JS 绑定类型安全 |
 
-### 形式化定理
+### 形式化定理 {#形式化定理}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -477,7 +477,7 @@ pub fn process_task(task_json: &str) -> String {
 
 ---
 
-### 相关速查卡
+### 相关速查卡 {#相关速查卡}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -495,12 +495,12 @@ pub fn process_task(task_json: &str) -> String {
 
 ---
 
-## 🆕 Rust 1.95+ 特性整合
+## 🆕 Rust 1.95+ 特性整合 {#rust-195-特性整合}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 > **适用版本**: Rust 1.96.0+
 
-### 核心特性速查
+### 核心特性速查 {#核心特性速查}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -543,12 +543,12 @@ let gamma = f64::consts::EULER_GAMMA;
 
 ---
 
-## Rust 1.95+ 在WASM中的深度应用
+## Rust 1.95+ 在WASM中的深度应用 {#rust-195-在wasm中的深度应用}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 > **适用版本**: Rust 1.96.0+ | **实际场景**: WASM开发
 
-### array_windows 在 WASM 图像处理中的应用
+### array_windows 在 WASM 图像处理中的应用 {#array_windows-在-wasm-图像处理中的应用}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -564,7 +564,7 @@ pub fn apply_kernel(data: &[u8]) -> Vec<u8> {
 }
 ```
 
-### LazyLock 在 WASM 状态管理中的应用
+### LazyLock 在 WASM 状态管理中的应用 {#lazylock-在-wasm-状态管理中的应用}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -585,7 +585,7 @@ pub fn get_state() -> String {
 }
 ```
 
-### 性能提升总结
+### 性能提升总结 {#性能提升总结}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -615,7 +615,7 @@ pub fn get_state() -> String {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -624,7 +624,7 @@ pub fn get_state() -> String {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

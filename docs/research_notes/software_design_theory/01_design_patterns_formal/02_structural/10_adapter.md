@@ -1,4 +1,4 @@
-# Adapter 形式化分析
+# Adapter 形式化分析 {#adapter-形式化分析}
 
 > **概念族**: 软件设计 / 设计模式
 
@@ -24,7 +24,7 @@
 
 > **权威来源**: [Rust Design Patterns – Structural](https://rust-unofficial.github.io/patterns/patterns/structural/index.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -33,7 +33,7 @@
 >
 
 - [Adapter 形式化分析](#adapter-形式化分析)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [权威来源对照](#权威来源对照)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Adapter 结构）](#def-11adapter-结构)
@@ -44,7 +44,7 @@
     - [推论 AD-C1（纯 Safe Adapter）](#推论-ad-c1纯-safe-adapter)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
-  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196--edition-2024-代码示例更新)
+  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196-edition-2024-代码示例更新)
     - [Edition 2024 关键兼容点](#edition-2024-关键兼容点)
   - [Rust 所有权、借用、生命周期与 trait 系统约束分析](#rust-所有权借用生命周期与-trait-系统约束分析)
     - [所有权约束](#所有权约束)
@@ -76,7 +76,7 @@
   - [思维导图](#思维导图)
   - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -102,7 +102,7 @@
 
 ---
 
-## 权威来源对照
+## 权威来源对照 {#权威来源对照}
 
 >
 
@@ -128,13 +128,13 @@
 
 ---
 
-## 形式化定义
+## 形式化定义 {#形式化定义}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Def 1.1（Adapter 结构）
+### Def 1.1（Adapter 结构） {#def-11adapter-结构}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -158,7 +158,7 @@ $$\mathcal{AD} = \langle A, T, S, \mathit{adapt}: A \times S \rightarrow \mathrm
 
 ---
 
-### Axiom AD1（语义保持公理）
+### Axiom AD1（语义保持公理） {#axiom-ad1语义保持公理}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -170,7 +170,7 @@ $$\forall a: A,\, \mathit{op}_T(a) \equiv_{\mathrm{sem}} \mathit{op}_S(a.\mathit
 
 适配器不改变被适配对象语义，仅转换接口形式。
 
-### Axiom AD2（委托借用公理）
+### Axiom AD2（委托借用公理） {#axiom-ad2委托借用公理}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -184,7 +184,7 @@ $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用
 
 ---
 
-### 定理 AD-T1（所有权安全定理）
+### 定理 AD-T1（所有权安全定理） {#定理-ad-t1所有权安全定理}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -226,7 +226,7 @@ $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用
 
 ---
 
-### 定理 AD-T2（借用冲突避免定理）
+### 定理 AD-T2（借用冲突避免定理） {#定理-ad-t2借用冲突避免定理}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -276,7 +276,7 @@ $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用
 
 ---
 
-### 推论 AD-C1（纯 Safe Adapter）
+### 推论 AD-C1（纯 Safe Adapter） {#推论-ad-c1纯-safe-adapter}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -300,7 +300,7 @@ Adapter 为纯 Safe；仅用结构体包装、委托、`impl Trait`，无 `unsaf
 
 ---
 
-### 概念定义-属性关系-解释论证 层次汇总
+### 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -320,7 +320,7 @@ Adapter 为纯 Safe；仅用结构体包装、委托、`impl Trait`，无 `unsaf
 
 ---
 
-## Rust 实现与代码示例
+## Rust 实现与代码示例 {#rust-实现与代码示例}
 
 >
 
@@ -384,7 +384,7 @@ a.log("hello");
 
 ---
 
-## Rust 1.96+ / Edition 2024 代码示例更新
+## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
 
 >
 
@@ -454,7 +454,7 @@ fn main() {
 
 ```
 
-### Edition 2024 关键兼容点
+### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
 
@@ -470,25 +470,25 @@ fn main() {
 
 ---
 
-## Rust 所有权、借用、生命周期与 trait 系统约束分析
+## Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}
 
 >
 
 > **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
 
-### 所有权约束
+### 所有权约束 {#所有权约束}
 
 Adapter 拥有被适配者 `Adaptee`，或持有其引用。拥有版本使 Adapter 生命周期与 Adaptee 绑定；引用版本需显式生命周期。
 
-### 借用与生命周期约束
+### 借用与生命周期约束 {#借用与生命周期约束}
 
 委托方法通常接收 `&self` 并调用 `self.adaptee.specific_request()`，子借用的生命周期不超过 `&self`，无悬垂。
 
-### trait 系统约束
+### trait 系统约束 {#trait-系统约束}
 
 Adapter 实现 `Target` trait，将外部接口转换为目标接口；可结合泛型 `Adapter<T>` 支持多种被适配类型。
 
-### 与 Rust 类型系统的综合联系
+### 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系}
 
 | Rust 机制 | 本模式使用方式 | 保证 |
 
@@ -506,13 +506,13 @@ Adapter 实现 `Target` trait，将外部接口转换为目标接口；可结合
 
 ---
 
-## 完整证明
+## 完整证明 {#完整证明}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 形式化论证链
+### 形式化论证链 {#形式化论证链}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -546,7 +546,7 @@ borrow_checker_proof
 
 ```
 
-### 与 Rust 类型系统的联系
+### 与 Rust 类型系统的联系 {#与-rust-类型系统的联系}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -562,7 +562,7 @@ borrow_checker_proof
 
 | 所有权 | 拥有 $S$ | $S$ 生命周期绑定 |
 
-### 内存安全保证
+### 内存安全保证 {#内存安全保证}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -576,13 +576,13 @@ borrow_checker_proof
 
 ---
 
-## 形式化属性：不变式、前置/后置条件与安全边界
+## 形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}
 
 >
 
 > **来源: [Formal Methods – Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)** | **来源: [Rust API Guidelines – Safety](https://rust-lang.github.io/api-guidelines/safety.html)**
 
-### 不变式（Invariants）
+### 不变式（Invariants） {#不变式invariants}
 
 1. Adapter 语义等价于被适配者原始行为。
 
@@ -590,7 +590,7 @@ borrow_checker_proof
 
 3. 被适配者生命周期不短于 Adapter（引用版本）。
 
-### 前置条件（Preconditions）
+### 前置条件（Preconditions） {#前置条件preconditions}
 
 1. 被适配者方法在 Adapter 生命周期内有效。
 
@@ -598,7 +598,7 @@ borrow_checker_proof
 
 3. 多线程场景下被适配者满足 `Send`/`Sync`。
 
-### 后置条件（Postconditions）
+### 后置条件（Postconditions） {#后置条件postconditions}
 
 1. 目标接口调用正确委托给被适配者。
 
@@ -606,11 +606,11 @@ borrow_checker_proof
 
 3. Adapter 不泄漏内部被适配者可变引用。
 
-### 安全边界（Safety Boundary）
+### 安全边界（Safety Boundary） {#安全边界safety-boundary}
 
 纯 Safe。Adapter 本质是包装与委托；若被适配者本身使用 `unsafe`，需保证其 Safe 封装契约不被破坏。
 
-### 形式化规约汇总
+### 形式化规约汇总 {#形式化规约汇总}
 
 ```text
 
@@ -626,7 +626,7 @@ borrow_checker_proof
 
 ---
 
-## 典型场景
+## 典型场景 {#典型场景}
 
 >
 
@@ -646,7 +646,7 @@ borrow_checker_proof
 
 ---
 
-## 完整场景示例：第三方 HTTP 客户端适配
+## 完整场景示例：第三方 HTTP 客户端适配 {#完整场景示例第三方-http-客户端适配}
 
 >
 
@@ -716,7 +716,7 @@ fn fetch_data<H: HttpClient>(client: &H, url: &str) -> Result<String, Box<dyn st
 
 ---
 
-## 相关模式
+## 相关模式 {#相关模式}
 
 >
 
@@ -734,7 +734,7 @@ fn fetch_data<H: HttpClient>(client: &H, url: &str) -> Result<String, Box<dyn st
 
 ---
 
-## 实现变体
+## 实现变体 {#实现变体}
 
 >
 
@@ -752,13 +752,13 @@ fn fetch_data<H: HttpClient>(client: &H, url: &str) -> Result<String, Box<dyn st
 
 ---
 
-## 反例：常见误用及编译器错误
+## 反例：常见误用及编译器错误 {#反例常见误用及编译器错误}
 
 >
 
 > **来源: [Rust By Example – Error Handling](https://doc.rust-lang.org/rust-by-example/error.html)** | **来源: [Rust Compiler Error Index](https://doc.rust-lang.org/error_codes/error-index.html)**
 
-### 反例 1：返回被适配者内部可变引用
+### 反例 1：返回被适配者内部可变引用 {#反例-1返回被适配者内部可变引用}
 
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
@@ -774,7 +774,7 @@ impl Adapter {
 
 **风险**：破坏封装，Adapter 无法保证目标接口语义。
 
-### 反例 2：引用型 Adapter 生命周期不匹配
+### 反例 2：引用型 Adapter 生命周期不匹配 {#反例-2引用型-adapter-生命周期不匹配}
 
 > 以下代码故意展示编译失败，用于说明对应反例。
 
@@ -796,7 +796,7 @@ fn make() -> Adapter<'static> {
 
 **编译器错误**：`cannot return value referencing local variable local`。
 
-### 反例 3：委托链中出现可变借用冲突
+### 反例 3：委托链中出现可变借用冲突 {#反例-3委托链中出现可变借用冲突}
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
 
@@ -816,7 +816,7 @@ impl Target for Adapter {
 
 ---
 
-## 选型决策树
+## 选型决策树 {#选型决策树}
 
 >
 
@@ -838,7 +838,7 @@ impl Target for Adapter {
 
 ---
 
-## 与 GoF 对比
+## 与 GoF 对比 {#与-gof-对比}
 
 >
 
@@ -856,7 +856,7 @@ impl Target for Adapter {
 
 ---
 
-## 边界
+## 边界 {#边界}
 
 >
 
@@ -874,7 +874,7 @@ impl Target for Adapter {
 
 ---
 
-## 与 Rust 1.93 的对应
+## 与 Rust 1.93 的对应 {#与-rust-193-的对应}
 
 >
 
@@ -890,7 +890,7 @@ impl Target for Adapter {
 
 ---
 
-## 思维导图
+## 思维导图 {#思维导图}
 
 >
 
@@ -942,7 +942,7 @@ mindmap
 
 ---
 
-## 与其他模式的关系图
+## 与其他模式的关系图 {#与其他模式的关系图}
 
 >
 
@@ -974,7 +974,7 @@ graph LR
 
 ---
 
-## 实质内容五维自检
+## 实质内容五维自检 {#实质内容五维自检}
 
 >
 
@@ -998,7 +998,7 @@ graph LR
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -1008,13 +1008,13 @@ graph LR
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -1030,7 +1030,7 @@ graph LR
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -1042,7 +1042,7 @@ graph LR
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -1076,7 +1076,7 @@ graph LR
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -1088,7 +1088,7 @@ graph LR
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 

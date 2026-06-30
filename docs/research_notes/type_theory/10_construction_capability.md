@@ -1,4 +1,4 @@
-# 类型系统构造能力
+# 类型系统构造能力 {#类型系统构造能力}
 
 > **概念族**: 类型系统 / 表达能力
 
@@ -12,7 +12,7 @@
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -21,7 +21,7 @@
 >
 
 - [类型系统构造能力](#类型系统构造能力)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [文档宗旨](#文档宗旨)
   - [形式化定义](#形式化定义)
   - [TCON 矩阵](#tcon-矩阵)
@@ -30,8 +30,8 @@
   - [类型构造决策树](#类型构造决策树)
   - [确定性判定](#确定性判定)
   - [与已有证明衔接](#与已有证明衔接)
-  - [相关文档](#相关文档)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [相关文档](#相关文档-1)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -51,7 +51,7 @@
 
 ---
 
-## 文档宗旨
+## 文档宗旨 {#文档宗旨}
 
 >
 
@@ -67,7 +67,7 @@
 
 ---
 
-## 形式化定义
+## 形式化定义 {#形式化定义}
 
 >
 
@@ -97,7 +97,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 
 ---
 
-## TCON 矩阵
+## TCON 矩阵 {#tcon-矩阵}
 
 >
 
@@ -145,7 +145,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 
 ---
 
-## Rust 1.93 新增类型/表达式
+## Rust 1.93 新增类型/表达式 {#rust-193-新增类型表达式}
 
 >
 
@@ -173,7 +173,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 
 ---
 
-## 类型理论缺口对构造能力的影响
+## 类型理论缺口对构造能力的影响 {#类型理论缺口对构造能力的影响}
 
 >
 
@@ -197,7 +197,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 
 ---
 
-## 类型构造决策树
+## 类型构造决策树 {#类型构造决策树}
 
 >
 
@@ -267,7 +267,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 
 ---
 
-## 确定性判定
+## 确定性判定 {#确定性判定}
 
 >
 
@@ -299,7 +299,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 
 ---
 
-## 与已有证明衔接
+## 与已有证明衔接 {#与已有证明衔接}
 
 >
 
@@ -321,7 +321,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 
 ---
 
-## 相关文档
+## 相关文档 {#相关文档-1}
 
 >
 
@@ -349,7 +349,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -359,13 +359,13 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -381,7 +381,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -393,7 +393,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档-1}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -427,7 +427,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -439,7 +439,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Type Theory](https://en.wikipedia.org/wiki/Type_Theory)**
 

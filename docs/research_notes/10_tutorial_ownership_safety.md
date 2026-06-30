@@ -1,4 +1,4 @@
-# 教程：所有权与内存安全
+# 教程：所有权与内存安全 {#教程所有权与内存安全}
 
 > **概念族**: 教程
 
@@ -26,7 +26,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -35,8 +35,8 @@
 >
 
 - [教程：所有权与内存安全](#教程所有权与内存安全)
-  - [📑 目录](#-目录)
-  - [引言](#引言)
+  - [📑 目录](#目录)
+  - [引言](#引言-1)
   - [第一部分：为什么需要所有权](#第一部分为什么需要所有权)
     - [内存管理的困境](#内存管理的困境)
     - [Rust的解决方案](#rust的解决方案)
@@ -68,7 +68,7 @@
   - [第十部分：形式化视角](#第十部分形式化视角)
     - [所有权定理](#所有权定理)
     - [与形式化文档的关联](#与形式化文档的关联)
-  - [总结](#总结)
+  - [总结](#总结-1)
   - [引言](#引言-1)
   - [第一部分：问题是什么？](#第一部分问题是什么)
     - [C/C++中的内存错误](#cc中的内存错误)
@@ -94,7 +94,7 @@
   - [总结](#总结-1)
     - [所有权为什么安全？](#所有权为什么安全)
     - [下一步学习](#下一步学习)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -102,7 +102,7 @@
   - [权威来源索引](#权威来源索引)
   - [相关概念](#相关概念)
 
-## 引言
+## 引言 {#引言-1}
 
 >
 
@@ -114,13 +114,13 @@
 
 ---
 
-## 第一部分：为什么需要所有权
+## 第一部分：为什么需要所有权 {#第一部分为什么需要所有权}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 内存管理的困境
+### 内存管理的困境 {#内存管理的困境}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -158,7 +158,7 @@
 
 | Rust | 所有权系统 | 零成本抽象 | 学习曲线陡峭 |
 
-### Rust的解决方案
+### Rust的解决方案 {#rust的解决方案}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -208,13 +208,13 @@ fn makes_copy(i: i32) {
 
 ---
 
-## 第二部分：所有权规则
+## 第二部分：所有权规则 {#第二部分所有权规则}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 三大规则
+### 三大规则 {#三大规则}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -228,7 +228,7 @@ fn makes_copy(i: i32) {
 
 3. **当所有者离开作用域，值被丢弃**
 
-### 作用域与生命周期
+### 作用域与生命周期 {#作用域与生命周期}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -258,7 +258,7 @@ fn makes_copy(i: i32) {
 
 ```
 
-### 内存表示
+### 内存表示 {#内存表示}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -296,13 +296,13 @@ s离开作用域时:
 
 ---
 
-## 第三部分：移动语义
+## 第三部分：移动语义 {#第三部分移动语义}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 什么是移动
+### 什么是移动 {#什么是移动}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -330,7 +330,7 @@ println!("{}", s2);    // OK
 
 - 安全: 避免双重释放
 
-### 浅复制的问题(Copy vs Move)
+### 浅复制的问题(Copy vs Move) {#浅复制的问题copy-vs-move}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -364,13 +364,13 @@ let s2 = s1;                    // 移动: s1失效，只有s2释放
 
 ---
 
-## 第四部分：Copy trait
+## 第四部分：Copy trait {#第四部分copy-trait}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 哪些类型实现Copy
+### 哪些类型实现Copy {#哪些类型实现copy}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -400,7 +400,7 @@ println!("{}", x); // OK! x仍然有效
 
 ```
 
-### 自定义类型的Copy
+### 自定义类型的Copy {#自定义类型的copy}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -442,13 +442,13 @@ struct Container {
 
 ---
 
-## 第五部分：借用
+## 第五部分：借用 {#第五部分借用}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 为什么需要借用
+### 为什么需要借用 {#为什么需要借用}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -492,7 +492,7 @@ println!("{} 长度是 {}", s1, len);  // s1仍然可用!
 
 ```
 
-### 借用规则
+### 借用规则 {#借用规则}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -526,7 +526,7 @@ println!("{}", r1);  // r1最后使用在这里
 
 ```
 
-### 借用与作用域
+### 借用与作用域 {#借用与作用域}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -556,13 +556,13 @@ r2.push_str("!");
 
 ---
 
-## 第六部分：悬垂引用
+## 第六部分：悬垂引用 {#第六部分悬垂引用}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 编译器如何防止
+### 编译器如何防止 {#编译器如何防止}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -584,7 +584,7 @@ fn dangle() -> &String {  // 错误! 返回悬垂引用
 
 ```
 
-### 正确的做法
+### 正确的做法 {#正确的做法}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -614,13 +614,13 @@ fn first_word(s: &str) -> &str {
 
 ---
 
-## 第七部分：字符串切片
+## 第七部分：字符串切片 {#第七部分字符串切片}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### String vs &str
+### String vs &str {#string-vs-str}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -650,7 +650,7 @@ let world = &s[6..11];   // "world"
 
 ```
 
-### 字符串字面量
+### 字符串字面量 {#字符串字面量}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -666,13 +666,13 @@ let s: &'static str = "hello";  // 'static生命周期
 
 ---
 
-## 第八部分：实践模式
+## 第八部分：实践模式 {#第八部分实践模式}
 
 >
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 模式1: 所有权转移
+### 模式1: 所有权转移 {#模式1-所有权转移}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -696,7 +696,7 @@ let processed = process(data);  // 转移所有权
 
 ```
 
-### 模式2: 借用检查
+### 模式2: 借用检查 {#模式2-借用检查}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -726,7 +726,7 @@ let a2 = analyze(&data);  // 可以同时多次借用
 
 ```
 
-### 模式3: 可变借用
+### 模式3: 可变借用 {#模式3-可变借用}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -754,7 +754,7 @@ normalize(&mut data);  // 可变借用修改数据
 
 ---
 
-## 第九部分：常见错误
+## 第九部分：常见错误 {#第九部分常见错误}
 
 >
 
@@ -774,13 +774,13 @@ normalize(&mut data);  // 可变借用修改数据
 
 ---
 
-## 第十部分：形式化视角
+## 第十部分：形式化视角 {#第十部分形式化视角}
 
 >
 
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 所有权定理
+### 所有权定理 {#所有权定理}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -796,7 +796,7 @@ normalize(&mut data);  // 可变借用修改数据
 
 - 数据竞争
 
-### 与形式化文档的关联
+### 与形式化文档的关联 {#与形式化文档的关联}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -814,7 +814,7 @@ normalize(&mut data);  // 可变借用修改数据
 
 ---
 
-## 总结
+## 总结 {#总结-1}
 
 >
 
@@ -862,7 +862,7 @@ normalize(&mut data);  // 可变借用修改数据
 
 ```
 
-## 引言
+## 引言 {#引言-1}
 
 >
 
@@ -876,13 +876,13 @@ Rust的所有权系统是其最独特的特性。
 
 ---
 
-## 第一部分：问题是什么？
+## 第一部分：问题是什么？ {#第一部分问题是什么}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### C/C++中的内存错误
+### C/C++中的内存错误 {#cc中的内存错误}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -930,7 +930,7 @@ void leak() {
 
 - 难以调试
 
-### 传统解决方案的局限
+### 传统解决方案的局限 {#传统解决方案的局限}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -948,13 +948,13 @@ void leak() {
 
 ---
 
-## 第二部分：所有权的核心规则
+## 第二部分：所有权的核心规则 {#第二部分所有权的核心规则}
 
 >
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 规则很简单
+### 规则很简单 {#规则很简单}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -964,7 +964,7 @@ void leak() {
 
 3. **所有权可以转移(Move)或借用(Borrow)**
 
-### 直观理解：图书馆比喻
+### 直观理解：图书馆比喻 {#直观理解图书馆比喻}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -1000,13 +1000,13 @@ void leak() {
 
 ---
 
-## 第三部分：为什么这能保证安全？
+## 第三部分：为什么这能保证安全？ {#第三部分为什么这能保证安全}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 安全保证1：没有悬垂指针
+### 安全保证1：没有悬垂指针 {#安全保证1没有悬垂指针}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -1042,7 +1042,7 @@ Move(s1, s2, v) 后:
 
 ```
 
-### 安全保证2：没有双重释放
+### 安全保证2：没有双重释放 {#安全保证2没有双重释放}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -1074,7 +1074,7 @@ Move(s1, s2, v) 后:
 
 ```
 
-### 安全保证3：没有数据竞争
+### 安全保证3：没有数据竞争 {#安全保证3没有数据竞争}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -1128,13 +1128,13 @@ w.push(4);  // OK，没有其他引用
 
 ---
 
-## 第四部分：形式化视角
+## 第四部分：形式化视角 {#第四部分形式化视角}
 
 >
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 定理 T-OW2: 所有权唯一性
+### 定理 T-OW2: 所有权唯一性 {#定理-t-ow2-所有权唯一性}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -1154,7 +1154,7 @@ w.push(4);  // OK，没有其他引用
 
 ```
 
-### 定理 T-BR1: 数据竞争自由
+### 定理 T-BR1: 数据竞争自由 {#定理-t-br1-数据竞争自由}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -1176,13 +1176,13 @@ w.push(4);  // OK，没有其他引用
 
 ---
 
-## 第五部分：实际示例
+## 第五部分：实际示例 {#第五部分实际示例}
 
 >
 
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 示例1: 函数参数传递
+### 示例1: 函数参数传递 {#示例1-函数参数传递}
 
 >
 
@@ -1214,7 +1214,7 @@ fn main() {
 
 **安全保证**: `main`中的`s`不能再使用，防止悬垂引用。
 
-### 示例2: 返回值
+### 示例2: 返回值 {#示例2-返回值}
 
 >
 
@@ -1242,7 +1242,7 @@ fn main() {
 
 **安全保证**: 所有权链条清晰，内存管理正确。
 
-### 示例3: 借用临时使用
+### 示例3: 借用临时使用 {#示例3-借用临时使用}
 
 >
 
@@ -1276,13 +1276,13 @@ fn main() {
 
 ---
 
-## 第六部分：常见疑问
+## 第六部分：常见疑问 {#第六部分常见疑问}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### Q: 所有权检查有运行时开销吗？
+### Q: 所有权检查有运行时开销吗？ {#q-所有权检查有运行时开销吗}
 
 >
 
@@ -1298,7 +1298,7 @@ fn main() {
 
 ```
 
-### Q: 所有权系统限制太多？
+### Q: 所有权系统限制太多？ {#q-所有权系统限制太多}
 
 >
 
@@ -1314,7 +1314,7 @@ fn main() {
 
 99%的场景都有优雅的解决方案。
 
-### Q: 学习所有权很难？
+### Q: 学习所有权很难？ {#q-学习所有权很难}
 
 >
 
@@ -1330,13 +1330,13 @@ fn main() {
 
 ---
 
-## 总结
+## 总结 {#总结-1}
 
 >
 
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 所有权为什么安全？
+### 所有权为什么安全？ {#所有权为什么安全}
 
 >
 
@@ -1384,7 +1384,7 @@ fn main() {
 
 ```
 
-### 下一步学习
+### 下一步学习 {#下一步学习}
 
 >
 
@@ -1426,7 +1426,7 @@ fn main() {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -1436,7 +1436,7 @@ fn main() {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -1444,7 +1444,7 @@ fn main() {
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -1458,7 +1458,7 @@ fn main() {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -1468,7 +1468,7 @@ fn main() {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -1500,7 +1500,7 @@ fn main() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -1520,7 +1520,7 @@ fn main() {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 

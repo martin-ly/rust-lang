@@ -1,4 +1,4 @@
-# 🔀 Rust 线程与并发速查卡
+# 🔀 Rust 线程与并发速查卡 {#rust-线程与并发速查卡}
 
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
@@ -6,48 +6,48 @@
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [🔀 Rust 线程与并发速查卡](#-rust-线程与并发速查卡)
-  - [📑 目录](#-目录)
-  - [🧠 并发安全思维导图](#-并发安全思维导图)
-  - [📊 概念定义-属性关系-解释论证](#-概念定义-属性关系-解释论证)
-  - [🔬 并发安全证明树](#-并发安全证明树)
-  - [🎯 核心概念](#-核心概念)
+- [🔀 Rust 线程与并发速查卡](#rust-线程与并发速查卡)
+  - [📑 目录](#目录)
+  - [🧠 并发安全思维导图](#并发安全思维导图)
+  - [📊 概念定义-属性关系-解释论证](#概念定义-属性关系-解释论证)
+  - [🔬 并发安全证明树](#并发安全证明树)
+  - [🎯 核心概念](#核心概念)
     - [线程创建](#线程创建)
     - [作用域线程 (Rust 1.93.0+)](#作用域线程-rust-1930)
-  - [📐 同步原语](#-同步原语)
+  - [📐 同步原语](#同步原语)
     - [Mutex](#mutex)
     - [RwLock](#rwlock)
     - [Arc (原子引用计数)](#arc-原子引用计数)
-  - [🎯 消息传递](#-消息传递)
+  - [🎯 消息传递](#消息传递)
     - [Channel](#channel)
     - [多生产者](#多生产者)
-  - [🔧 无锁数据结构](#-无锁数据结构)
+  - [🔧 无锁数据结构](#无锁数据结构)
     - [Atomic 类型](#atomic-类型)
     - [内存顺序](#内存顺序)
-  - [💡 代码示例](#-代码示例)
+  - [💡 代码示例](#代码示例)
     - [示例 1: 线程池实现](#示例-1-线程池实现)
     - [示例 2: 条件变量使用](#示例-2-条件变量使用)
     - [示例 3: 屏障同步](#示例-3-屏障同步)
     - [示例 4: OnceLock 初始化（Rust 1.70+ 推荐）](#示例-4-oncelock-初始化rust-170-推荐)
     - [示例 5: 并发生产者-消费者（多对多）](#示例-5-并发生产者-消费者多对多)
-  - [🎯 使用场景](#-使用场景)
+  - [🎯 使用场景](#使用场景)
     - [场景: 高并发 Web 服务器](#场景-高并发-web-服务器)
-  - [🔍 死锁检测与运行时验证](#-死锁检测与运行时验证)
-  - [🚫 反例速查](#-反例速查)
+  - [🔍 死锁检测与运行时验证](#死锁检测与运行时验证)
+  - [🚫 反例速查](#反例速查)
     - [反例 1: 将非 Send 类型传入 spawn](#反例-1-将非-send-类型传入-spawn)
     - [反例 2: 死锁 - 重复获取同一 Mutex](#反例-2-死锁---重复获取同一-mutex)
     - [反例 3: 锁顺序不一致导致死锁](#反例-3-锁顺序不一致导致死锁)
     - [反例 4: 在持有锁时进行阻塞操作](#反例-4-在持有锁时进行阻塞操作)
-  - [📚 相关文档](#-相关文档)
-  - [🧩 相关示例代码](#-相关示例代码)
-  - [🔗 相关资源](#-相关资源)
-  - [🆕 Rust 1.93.0 并发改进](#-rust-1930-并发改进)
+  - [📚 相关文档](#相关文档)
+  - [🧩 相关示例代码](#相关示例代码)
+  - [🔗 相关资源](#相关资源)
+  - [🆕 Rust 1.93.0 并发改进](#rust-1930-并发改进)
     - [内存分配优化](#内存分配优化)
-  - [📚 相关资源](#-相关资源-1)
+  - [📚 相关资源](#相关资源-1)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
     - [形式化理论与决策树](#形式化理论与决策树)
@@ -67,7 +67,7 @@
 
 ---
 
-## 🧠 并发安全思维导图
+## 🧠 并发安全思维导图 {#并发安全思维导图}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -103,7 +103,7 @@ mindmap
 
 ---
 
-## 📊 概念定义-属性关系-解释论证
+## 📊 概念定义-属性关系-解释论证 {#概念定义-属性关系-解释论证}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -119,7 +119,7 @@ mindmap
 
 ---
 
-## 🔬 并发安全证明树
+## 🔬 并发安全证明树 {#并发安全证明树}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -150,11 +150,11 @@ graph TD
 
 ---
 
-## 🎯 核心概念
+## 🎯 核心概念 {#核心概念}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 线程创建
+### 线程创建 {#线程创建}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -171,7 +171,7 @@ let handle = thread::spawn(|| {
 handle.join().unwrap();
 ```
 
-### 作用域线程 (Rust 1.93.0+)
+### 作用域线程 (Rust 1.93.0+) {#作用域线程-rust-1930}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -191,11 +191,11 @@ thread::scope(|s| {
 
 ---
 
-## 📐 同步原语
+## 📐 同步原语 {#同步原语}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Mutex
+### Mutex {#mutex}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -212,7 +212,7 @@ let m = Mutex::new(5);
 }  // 锁自动释放
 ```
 
-### RwLock
+### RwLock {#rwlock}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -236,7 +236,7 @@ let lock = RwLock::new(5);
 }
 ```
 
-### Arc (原子引用计数)
+### Arc (原子引用计数) {#arc-原子引用计数}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -258,11 +258,11 @@ for i in 0..3 {
 
 ---
 
-## 🎯 消息传递
+## 🎯 消息传递 {#消息传递}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### Channel
+### Channel {#channel}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -278,7 +278,7 @@ thread::spawn(move || {
 let received = rx.recv().unwrap();
 ```
 
-### 多生产者
+### 多生产者 {#多生产者}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -303,11 +303,11 @@ for received in rx {
 
 ---
 
-## 🔧 无锁数据结构
+## 🔧 无锁数据结构 {#无锁数据结构}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### Atomic 类型
+### Atomic 类型 {#atomic-类型}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -320,7 +320,7 @@ counter.fetch_add(1, Ordering::SeqCst);
 let value = counter.load(Ordering::SeqCst);
 ```
 
-### 内存顺序
+### 内存顺序 {#内存顺序}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -349,11 +349,11 @@ Ordering::Relaxed
 
 ---
 
-## 💡 代码示例
+## 💡 代码示例 {#代码示例}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 示例 1: 线程池实现
+### 示例 1: 线程池实现 {#示例-1-线程池实现}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -415,7 +415,7 @@ for i in 0..8 {
 }
 ```
 
-### 示例 2: 条件变量使用
+### 示例 2: 条件变量使用 {#示例-2-条件变量使用}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -482,7 +482,7 @@ thread::spawn(move || {
 });
 ```
 
-### 示例 3: 屏障同步
+### 示例 3: 屏障同步 {#示例-3-屏障同步}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -507,7 +507,7 @@ for h in handles {
 }
 ```
 
-### 示例 4: OnceLock 初始化（Rust 1.70+ 推荐）
+### 示例 4: OnceLock 初始化（Rust 1.70+ 推荐） {#示例-4-oncelock-初始化rust-170-推荐}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -530,7 +530,7 @@ for h in handles {
 }
 ```
 
-### 示例 5: 并发生产者-消费者（多对多）
+### 示例 5: 并发生产者-消费者（多对多） {#示例-5-并发生产者-消费者多对多}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -571,11 +571,11 @@ for h in handles {
 
 ---
 
-## 🎯 使用场景
+## 🎯 使用场景 {#使用场景}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 场景: 高并发 Web 服务器
+### 场景: 高并发 Web 服务器 {#场景-高并发-web-服务器}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -642,7 +642,7 @@ fn main() {
 
 ---
 
-## 🔍 死锁检测与运行时验证
+## 🔍 死锁检测与运行时验证 {#死锁检测与运行时验证}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -659,11 +659,11 @@ fn main() {
 
 ---
 
-## 🚫 反例速查
+## 🚫 反例速查 {#反例速查}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 反例 1: 将非 Send 类型传入 spawn
+### 反例 1: 将非 Send 类型传入 spawn {#反例-1-将非-send-类型传入-spawn}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -689,7 +689,7 @@ thread::spawn(move || {
 
 ---
 
-### 反例 2: 死锁 - 重复获取同一 Mutex
+### 反例 2: 死锁 - 重复获取同一 Mutex {#反例-2-死锁---重复获取同一-mutex}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -712,7 +712,7 @@ let g = m.lock().unwrap();
 
 ---
 
-### 反例 3: 锁顺序不一致导致死锁
+### 反例 3: 锁顺序不一致导致死锁 {#反例-3-锁顺序不一致导致死锁}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -755,7 +755,7 @@ thread::spawn(move || {
 
 ---
 
-### 反例 4: 在持有锁时进行阻塞操作
+### 反例 4: 在持有锁时进行阻塞操作 {#反例-4-在持有锁时进行阻塞操作}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -790,14 +790,14 @@ thread::spawn(move || {
 
 ---
 
-## 📚 相关文档
+## 📚 相关文档 {#相关文档}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [线程与并发完整文档](../../../crates/c05_threads/docs/README.md)
 - [线程与并发 README](../../../crates/c05_threads/README.md)
 
-## 🧩 相关示例代码
+## 🧩 相关示例代码 {#相关示例代码}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -810,7 +810,7 @@ thread::spawn(move || {
 
 ---
 
-## 🔗 相关资源
+## 🔗 相关资源 {#相关资源}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -819,11 +819,11 @@ thread::spawn(move || {
 
 ---
 
-## 🆕 Rust 1.93.0 并发改进
+## 🆕 Rust 1.93.0 并发改进 {#rust-1930-并发改进}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 内存分配优化
+### 内存分配优化 {#内存分配优化}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -846,11 +846,11 @@ let shared_map: Arc<HashMap<i32, String>> = Arc::new(HashMap::new());
 
 ---
 
-## 📚 相关资源
+## 📚 相关资源 {#相关资源-1}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 官方文档
+### 官方文档 {#官方文档}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -858,14 +858,14 @@ let shared_map: Arc<HashMap<i32, String>> = Arc::new(HashMap::new());
 - [std::thread 文档](https://doc.rust-lang.org/std/thread/)
 - [std::sync 文档](https://doc.rust-lang.org/std/sync/)
 
-### 项目内部文档
+### 项目内部文档 {#项目内部文档}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 - [线程与并发完整文档](../../../crates/c05_threads/docs/README.md)
 - [并发研究笔记](../../research_notes/README.md)
 
-### 形式化理论与决策树
+### 形式化理论与决策树 {#形式化理论与决策树}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -873,7 +873,7 @@ let shared_map: Arc<HashMap<i32, String>> = Arc::new(HashMap::new());
 - [执行模型选型决策树](../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/06_boundary_analysis.md#决策树选择执行模型)
 - [确定性判定决策树](../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/06_boundary_analysis.md#确定性判定决策树) — 执行顺序→Sync/Async/Concurrent/Parallel 选型
 
-### 形式化理论与类型系统
+### 形式化理论与类型系统 {#形式化理论与类型系统}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -884,7 +884,7 @@ let shared_map: Arc<HashMap<i32, String>> = Arc::new(HashMap::new());
 - 生命周期形式化 — 借用与生命周期
 - [所有权模型](../../research_notes/formal_methods/10_ownership_model.md) — 所有权系统形式化基础
 
-### 相关速查卡
+### 相关速查卡 {#相关速查卡}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -900,11 +900,11 @@ let shared_map: Arc<HashMap<i32, String>> = Arc::new(HashMap::new());
 
 ---
 
-## Rust 1.95+ 并发特性
+## Rust 1.95+ 并发特性 {#rust-195-并发特性}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### LazyLock 在并发状态管理中的应用
+### LazyLock 在并发状态管理中的应用 {#lazylock-在并发状态管理中的应用}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -922,7 +922,7 @@ pub fn get_thread_config() -> Option<&'static ThreadPoolConfig> {
 }
 ```
 
-### array_windows 在并发数据处理中的应用
+### array_windows 在并发数据处理中的应用 {#array_windows-在并发数据处理中的应用}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -954,7 +954,7 @@ fn parallel_window_process(data: &[i32]) -> Vec<i32> {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -963,7 +963,7 @@ fn parallel_window_process(data: &[i32]) -> Vec<i32> {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Thread (computing)](https://en.wikipedia.org/wiki/Thread_(computing))**
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**

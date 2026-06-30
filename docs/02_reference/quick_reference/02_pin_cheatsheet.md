@@ -1,4 +1,4 @@
-# Pin 与自引用结构速查卡
+# Pin 与自引用结构速查卡 {#pin-与自引用结构速查卡}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 >
@@ -11,24 +11,24 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Pin 与自引用结构速查卡](#pin-与自引用结构速查卡)
-  - [📑 目录](#-目录)
-  - [🎯 核心概念](#-核心概念)
-  - [⚡ 代码模式](#-代码模式)
+  - [📑 目录](#目录)
+  - [🎯 核心概念](#核心概念)
+  - [⚡ 代码模式](#代码模式)
     - [栈固定](#栈固定)
     - [堆固定](#堆固定)
     - [自引用结构（概念）](#自引用结构概念)
     - [安全投影规则](#安全投影规则)
-  - [📊 Pin 使用决策树](#-pin-使用决策树)
-  - [🔗 参考](#-参考)
+  - [📊 Pin 使用决策树](#pin-使用决策树)
+  - [🔗 参考](#参考)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🎯 核心概念
+## 🎯 核心概念 {#核心概念}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -51,11 +51,11 @@ Pin<P> 的核心保证:
 
 ---
 
-## ⚡ 代码模式
+## ⚡ 代码模式 {#代码模式}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 栈固定
+### 栈固定 {#栈固定}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -66,7 +66,7 @@ let data = MyStruct::new();
 let pinned: Pin<&mut MyStruct> = pin!(data);
 ```
 
-### 堆固定
+### 堆固定 {#堆固定}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -74,7 +74,7 @@ let pinned: Pin<&mut MyStruct> = pin!(data);
 let pinned: Pin<Box<MyStruct>> = Box::pin(MyStruct::new());
 ```
 
-### 自引用结构（概念）
+### 自引用结构（概念） {#自引用结构概念}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -88,7 +88,7 @@ struct SelfRef {
 }
 ```
 
-### 安全投影规则
+### 安全投影规则 {#安全投影规则}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -106,7 +106,7 @@ impl MyStruct {
 
 ---
 
-## 📊 Pin 使用决策树
+## 📊 Pin 使用决策树 {#pin-使用决策树}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -123,7 +123,7 @@ impl MyStruct {
 
 ---
 
-## 🔗 参考
+## 🔗 参考 {#参考}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -152,7 +152,7 @@ impl MyStruct {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -161,7 +161,7 @@ impl MyStruct {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**

@@ -3,6 +3,8 @@
 > **EN**: Concept Consistency Audit Checklist
 > **Summary**: A lightweight checklist to verify that a concept file is internally consistent, correctly cross-referenced, and aligned with the project's pedagogical style.
 >
+> **主要来源**: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [RFCs](https://github.com/rust-lang/rfcs)
+>
 > **受众**: [贡献者]
 > **层级**: L0 元信息
 > **A/S/P 标记**: M — Meta

@@ -1,4 +1,4 @@
-# 📦 Rust 集合与迭代器速查卡
+# 📦 Rust 集合与迭代器速查卡 {#rust-集合与迭代器速查卡}
 
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
@@ -6,53 +6,53 @@
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [📦 Rust 集合与迭代器速查卡](#-rust-集合与迭代器速查卡)
-  - [📑 目录](#-目录)
-  - [📊 Vec（动态数组）](#-vec动态数组)
-    - [创建](#创建)
+- [📦 Rust 集合与迭代器速查卡](#rust-集合与迭代器速查卡)
+  - [📑 目录](#目录)
+  - [📊 Vec（动态数组）](#vec动态数组)
+    - [创建](#创建-2)
     - [添加元素](#添加元素)
     - [访问元素](#访问元素)
     - [修改元素](#修改元素)
     - [删除元素](#删除元素)
-    - [查询](#查询)
+    - [查询](#查询-2)
     - [切片操作](#切片操作)
-  - [🗺️ HashMap（哈希映射）](#️-hashmap哈希映射)
-    - [创建](#创建-1)
+  - [🗺️ HashMap（哈希映射）](#hashmap哈希映射)
+    - [创建](#创建-2)
     - [插入和更新](#插入和更新)
     - [访问](#访问)
     - [删除](#删除)
-    - [查询](#查询-1)
+    - [查询](#查询-2)
     - [迭代](#迭代)
-  - [🔢 HashSet（哈希集合）](#-hashset哈希集合)
+  - [🔢 HashSet（哈希集合）](#hashset哈希集合)
     - [创建](#创建-2)
     - [添加和删除](#添加和删除)
     - [查询](#查询-2)
     - [集合操作](#集合操作)
-  - [📚 其他集合](#-其他集合)
+  - [📚 其他集合](#其他集合)
     - [VecDeque（双端队列）](#vecdeque双端队列)
     - [切片 as\_array（Rust 1.93）](#切片-as_arrayrust-193)
     - [BTreeMap（有序映射）](#btreemap有序映射)
     - [BinaryHeap（优先队列）](#binaryheap优先队列)
-  - [🔄 迭代器基础](#-迭代器基础)
+  - [🔄 迭代器基础](#迭代器基础)
     - [三种迭代方式](#三种迭代方式)
     - [手动迭代](#手动迭代)
     - [范围类型（Rust 1.96+ stable）](#范围类型rust-196-stable)
-  - [🔧 迭代器适配器](#-迭代器适配器)
+  - [🔧 迭代器适配器](#迭代器适配器)
     - [转换适配器](#转换适配器)
     - [选择适配器](#选择适配器)
     - [组合适配器](#组合适配器)
     - [其他适配器](#其他适配器)
-  - [🍽️ 迭代器消费者](#️-迭代器消费者)
+  - [🍽️ 迭代器消费者](#迭代器消费者)
     - [收集](#收集)
     - [查找](#查找)
     - [聚合](#聚合)
     - [折叠](#折叠)
     - [其他消费者](#其他消费者)
-  - [🎯 常用模式](#-常用模式)
+  - [🎯 常用模式](#常用模式)
     - [转换和过滤](#转换和过滤)
     - [链式操作](#链式操作)
     - [分组](#分组)
@@ -60,28 +60,27 @@
     - [窗口操作](#窗口操作)
       - [Rust 1.95+ `array_windows()` - 零开销固定大小窗口](#rust-195-array_windows---零开销固定大小窗口)
       - [动态窗口 `windows()`](#动态窗口-windows)
-  - [💡 代码示例](#-代码示例)
+  - [💡 代码示例](#代码示例)
     - [示例 1: 自定义迭代器](#示例-1-自定义迭代器)
     - [示例 2: 实现 IntoIterator](#示例-2-实现-intoiterator)
     - [示例 3: 迭代器适配器链](#示例-3-迭代器适配器链)
     - [示例 4: 使用 Entry API 高效更新 HashMap](#示例-4-使用-entry-api-高效更新-hashmap)
     - [示例 5: LRU Cache 实现](#示例-5-lru-cache-实现)
-  - [🎯 使用场景](#-使用场景)
+  - [🎯 使用场景](#使用场景)
     - [场景: 数据处理管道](#场景-数据处理管道)
-  - [🚫 反例速查](#-反例速查)
+  - [🚫 反例速查](#反例速查)
     - [反例 1: 迭代时修改集合](#反例-1-迭代时修改集合)
     - [反例 2: 索引越界](#反例-2-索引越界)
     - [反例 3: 在迭代时修改集合（安全版本）](#反例-3-在迭代时修改集合安全版本)
     - [反例 4: 错误使用 drain](#反例-4-错误使用-drain)
     - [反例 5: HashMap 遍历顺序依赖](#反例-5-hashmap-遍历顺序依赖)
-  - [📚 相关文档](#-相关文档)
-  - [🧩 相关示例代码](#-相关示例代码)
-  - [📚 相关资源](#-相关资源)
+  - [📚 相关文档](#相关文档)
+  - [🧩 相关示例代码](#相关示例代码)
+  - [📚 相关资源](#相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
     - [形式化理论与类型系统](#形式化理论与类型系统)
     - [相关速查卡](#相关速查卡)
-  - [🎯 **掌握集合与迭代器，高效处理数据！**](#-掌握集合与迭代器高效处理数据)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -93,11 +92,11 @@
 
 ---
 
-## 📊 Vec（动态数组）
+## 📊 Vec（动态数组） {#vec动态数组}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 创建
+### 创建 {#创建-2}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -116,7 +115,7 @@ let vec = vec![0; 10]; // 10个0
 let mut vec = Vec::with_capacity(10);
 ```
 
-### 添加元素
+### 添加元素 {#添加元素}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -136,7 +135,7 @@ vec.extend([5, 6, 7]);
 vec.extend_from_slice(&[8, 9]);
 ```
 
-### 访问元素
+### 访问元素 {#访问元素}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -157,7 +156,7 @@ let first = vec.first(); // Option<&i32>
 let last = vec.last();   // Option<&i32>
 ```
 
-### 修改元素
+### 修改元素 {#修改元素}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -175,7 +174,7 @@ if let Some(x) = vec.get_mut(0) {
 }
 ```
 
-### 删除元素
+### 删除元素 {#删除元素}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -197,7 +196,7 @@ let item = vec.swap_remove(0);
 vec.clear();
 ```
 
-### 查询
+### 查询 {#查询-2}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -219,7 +218,7 @@ let has = vec.contains(&3);
 let cap = vec.capacity();
 ```
 
-### 切片操作
+### 切片操作 {#切片操作}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -238,11 +237,11 @@ let (left, right) = vec.split_at(2);
 
 ---
 
-## 🗺️ HashMap（哈希映射）
+## 🗺️ HashMap（哈希映射） {#hashmap哈希映射}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 创建
+### 创建 {#创建-2}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -260,7 +259,7 @@ let map: HashMap<_, _> = vec![("a", 1), ("b", 2)]
     .collect();
 ```
 
-### 插入和更新
+### 插入和更新 {#插入和更新}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -280,7 +279,7 @@ map.entry("key".to_string())
     .or_insert(1);            // 不存在时插入
 ```
 
-### 访问
+### 访问 {#访问}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -300,7 +299,7 @@ if let Some(v) = map.get_mut("key") {
 let value = map["key"];
 ```
 
-### 删除
+### 删除 {#删除}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -318,7 +317,7 @@ let entry = map.remove_entry("key"); // Option<(K, V)>
 map.clear();
 ```
 
-### 查询
+### 查询 {#查询-2}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -337,7 +336,7 @@ let length = map.len();
 let empty = map.is_empty();
 ```
 
-### 迭代
+### 迭代 {#迭代}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -369,11 +368,11 @@ for value in map.values_mut() {
 
 ---
 
-## 🔢 HashSet（哈希集合）
+## 🔢 HashSet（哈希集合） {#hashset哈希集合}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 创建
+### 创建 {#创建-2}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -387,7 +386,7 @@ let mut set: HashSet<i32> = HashSet::new();
 let set: HashSet<_> = vec![1, 2, 3].into_iter().collect();
 ```
 
-### 添加和删除
+### 添加和删除 {#添加和删除}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -405,7 +404,7 @@ set.remove(&1);
 set.clear();
 ```
 
-### 查询
+### 查询 {#查询-2}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -422,7 +421,7 @@ let length = set.len();
 let empty = set.is_empty();
 ```
 
-### 集合操作
+### 集合操作 {#集合操作}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -445,11 +444,11 @@ let symmetric_diff: HashSet<_> = set1.symmetric_difference(&set2).collect();
 
 ---
 
-## 📚 其他集合
+## 📚 其他集合 {#其他集合}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### VecDeque（双端队列）
+### VecDeque（双端队列） {#vecdeque双端队列}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -474,7 +473,7 @@ if let Some(v) = d.pop_back_if(|x| *x > 4) {
 }
 ```
 
-### 切片 as_array（Rust 1.93）
+### 切片 as_array（Rust 1.93） {#切片-as_arrayrust-193}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -483,7 +482,7 @@ let slice = &[1, 2, 3, 4];
 let array: Option<&[i32; 4]> = slice.as_array();
 ```
 
-### BTreeMap（有序映射）
+### BTreeMap（有序映射） {#btreemap有序映射}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -503,7 +502,7 @@ for (k, v) in &map {
 
 **Rust 1.93 注意**：`BTreeMap::append` 行为变更——若源与目标有相同 key，**不再覆盖**目标中的值，保留目标原有条目。需覆盖时请使用 `insert` 或 `entry` API。
 
-### BinaryHeap（优先队列）
+### BinaryHeap（优先队列） {#binaryheap优先队列}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -523,11 +522,11 @@ while let Some(max) = heap.pop() {
 
 ---
 
-## 🔄 迭代器基础
+## 🔄 迭代器基础 {#迭代器基础}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 三种迭代方式
+### 三种迭代方式 {#三种迭代方式}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -552,7 +551,7 @@ for item in vec.into_iter() {
 // vec 不再可用
 ```
 
-### 手动迭代
+### 手动迭代 {#手动迭代}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -567,7 +566,7 @@ while let Some(item) = iter.next() {
 
 ---
 
-### 范围类型（Rust 1.96+ stable）
+### 范围类型（Rust 1.96+ stable） {#范围类型rust-196-stable}
 
 > **[来源: [Rust 1.96 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html)]**
 
@@ -604,11 +603,11 @@ assert_eq!(iter.collect::<Vec<_>>(), vec![0, 1, 2, 3]);
 
 ---
 
-## 🔧 迭代器适配器
+## 🔧 迭代器适配器 {#迭代器适配器}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 转换适配器
+### 转换适配器 {#转换适配器}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -634,7 +633,7 @@ let flat: Vec<_> = nested.into_iter().flat_map(|v| v).collect();
 let flat: Vec<_> = nested.into_iter().flatten().collect();
 ```
 
-### 选择适配器
+### 选择适配器 {#选择适配器}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -657,7 +656,7 @@ let result: Vec<_> = vec.iter().skip_while(|&&x| x < 3).collect();
 let result: Vec<_> = vec.iter().step_by(2).collect();
 ```
 
-### 组合适配器
+### 组合适配器 {#组合适配器}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -676,7 +675,7 @@ let enumerated: Vec<_> = vec1.iter().enumerate().collect();
 // [(0, &1), (1, &2), (2, &3)]
 ```
 
-### 其他适配器
+### 其他适配器 {#其他适配器}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -698,11 +697,11 @@ let result: Vec<_> = vec.iter()
 
 ---
 
-## 🍽️ 迭代器消费者
+## 🍽️ 迭代器消费者 {#迭代器消费者}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 收集
+### 收集 {#收集}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -719,7 +718,7 @@ let (even, odd): (Vec<_>, Vec<_>) = vec.iter()
     .partition(|&&x| x % 2 == 0);
 ```
 
-### 查找
+### 查找 {#查找}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -739,7 +738,7 @@ let has = vec.iter().any(|&x| x > 10); // bool
 let all = vec.iter().all(|&x| x > 0); // bool
 ```
 
-### 聚合
+### 聚合 {#聚合}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -763,7 +762,7 @@ let min = vec.iter().min(); // Option<&i32>
 let max = vec.iter().max_by(|a, b| a.cmp(b));
 ```
 
-### 折叠
+### 折叠 {#折叠}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -781,7 +780,7 @@ let result: Result<i32, _> = vec.iter()
     .try_fold(0, |acc, x| Ok(acc + x));
 ```
 
-### 其他消费者
+### 其他消费者 {#其他消费者}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -803,11 +802,11 @@ let joined: String = vec.iter().map(|x| x.to_string()).collect();
 
 ---
 
-## 🎯 常用模式
+## 🎯 常用模式 {#常用模式}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 转换和过滤
+### 转换和过滤 {#转换和过滤}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -821,7 +820,7 @@ let result: Vec<_> = vec.iter()
     .collect();
 ```
 
-### 链式操作
+### 链式操作 {#链式操作}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -837,7 +836,7 @@ let result: Vec<_> = vec.iter()
     .collect();
 ```
 
-### 分组
+### 分组 {#分组}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -855,7 +854,7 @@ let grouped: HashMap<_, Vec<_>> = vec.iter()
     });
 ```
 
-### 去重
+### 去重 {#去重}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -877,11 +876,11 @@ let unique: Vec<_> = vec.iter()
     .collect();
 ```
 
-### 窗口操作
+### 窗口操作 {#窗口操作}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
-#### Rust 1.95+ `array_windows()` - 零开销固定大小窗口
+#### Rust 1.95+ `array_windows()` - 零开销固定大小窗口 {#rust-195-array_windows---零开销固定大小窗口}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -968,7 +967,7 @@ for [a, b, c] in data.array_windows::<3>() {
 }
 ```
 
-#### 动态窗口 `windows()`
+#### 动态窗口 `windows()` {#动态窗口-windows}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -988,11 +987,11 @@ let windows = sliding_windows(&vec, 3);
 
 ---
 
-## 💡 代码示例
+## 💡 代码示例 {#代码示例}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 示例 1: 自定义迭代器
+### 示例 1: 自定义迭代器 {#示例-1-自定义迭代器}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -1025,7 +1024,7 @@ let first_10: Vec<u64> = fib.take(10).collect();
 // [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 ```
 
-### 示例 2: 实现 IntoIterator
+### 示例 2: 实现 IntoIterator {#示例-2-实现-intoiterator}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -1062,7 +1061,7 @@ for book in &collection {
 }
 ```
 
-### 示例 3: 迭代器适配器链
+### 示例 3: 迭代器适配器链 {#示例-3-迭代器适配器链}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -1081,7 +1080,7 @@ let result: Vec<i32> = data
 assert_eq!(result, vec![16, 36, 64]);
 ```
 
-### 示例 4: 使用 Entry API 高效更新 HashMap
+### 示例 4: 使用 Entry API 高效更新 HashMap {#示例-4-使用-entry-api-高效更新-hashmap}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -1106,7 +1105,7 @@ let freq = word_frequency(text);
 assert_eq!(freq.get("the"), Some(&2));
 ```
 
-### 示例 5: LRU Cache 实现
+### 示例 5: LRU Cache 实现 {#示例-5-lru-cache-实现}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -1166,11 +1165,11 @@ assert_eq!(cache.get(&2), Some(&"b"));
 
 ---
 
-## 🎯 使用场景
+## 🎯 使用场景 {#使用场景}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 场景: 数据处理管道
+### 场景: 数据处理管道 {#场景-数据处理管道}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -1229,11 +1228,11 @@ fn time_window_aggregation(
 
 ---
 
-## 🚫 反例速查
+## 🚫 反例速查 {#反例速查}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 反例 1: 迭代时修改集合
+### 反例 1: 迭代时修改集合 {#反例-1-迭代时修改集合}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -1258,7 +1257,7 @@ let extra: Vec<_> = v.iter().cloned().collect();
 
 ---
 
-### 反例 2: 索引越界
+### 反例 2: 索引越界 {#反例-2-索引越界}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -1279,7 +1278,7 @@ let x = v.get(10);  // ✅ 返回 Option
 
 ---
 
-### 反例 3: 在迭代时修改集合（安全版本）
+### 反例 3: 在迭代时修改集合（安全版本） {#反例-3-在迭代时修改集合安全版本}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -1306,7 +1305,7 @@ v.retain(|&x| x % 2 != 0);  // ✅ 保留奇数
 
 ---
 
-### 反例 4: 错误使用 drain
+### 反例 4: 错误使用 drain {#反例-4-错误使用-drain}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -1332,7 +1331,7 @@ let mut v = vec![1, 2, 3, 4, 5];
 
 ---
 
-### 反例 5: HashMap 遍历顺序依赖
+### 反例 5: HashMap 遍历顺序依赖 {#反例-5-hashmap-遍历顺序依赖}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -1356,14 +1355,14 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 
 ---
 
-## 📚 相关文档
+## 📚 相关文档 {#相关文档}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [迭代器参考](../../../crates/c03_control_fn/docs/tier_03_references/02_迭代器参考.md)
 - [算法与数据结构文档](../../../crates/c08_algorithms/README.md)
 
-## 🧩 相关示例代码
+## 🧩 相关示例代码 {#相关示例代码}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -1375,11 +1374,11 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 
 ---
 
-## 📚 相关资源
+## 📚 相关资源 {#相关资源}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 官方文档
+### 官方文档 {#官方文档}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -1387,14 +1386,14 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 - [Iterator trait 文档](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
 - [Rust Reference - Collections](https://doc.rust-lang.org/reference/items/collections.html)
 
-### 项目内部文档
+### 项目内部文档 {#项目内部文档}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [完整迭代器参考](../../../crates/c03_control_fn/docs/tier_03_references/02_迭代器参考.md)
 - [集合研究笔记](../../research_notes/README.md)
 
-### 形式化理论与类型系统
+### 形式化理论与类型系统 {#形式化理论与类型系统}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -1404,7 +1403,7 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 - [所有权模型](../../research_notes/formal_methods/10_ownership_model.md) — 集合所有权转移形式化
 - [变型理论](../../research_notes/type_theory/10_variance_theory.md) — 集合协变/逆变
 
-### 相关速查卡
+### 相关速查卡 {#相关速查卡}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -1437,7 +1436,7 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -1446,7 +1445,7 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

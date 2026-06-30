@@ -1,4 +1,4 @@
-# 理论基础
+# 理论基础 {#理论基础}
 
 > **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
@@ -21,11 +21,11 @@
 
 ---
 
-## 核心理论概念
+## 核心理论概念 {#核心理论概念}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 所有权系统的数学基础
+### 所有权系统的数学基础 {#所有权系统的数学基础}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -51,7 +51,7 @@ fn copy_semantics() {
 }
 ```
 
-### 借用作为能力（Capability）
+### 借用作为能力（Capability） {#借用作为能力capability}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -75,7 +75,7 @@ fn capabilities_demo() {
 }
 ```
 
-### 生命周期作为区域（Region）
+### 生命周期作为区域（Region） {#生命周期作为区域region}
 
 生命周期可以形式化为程序执行中的时间区域：
 
@@ -100,7 +100,7 @@ impl<'input> Parser<'input> {
 }
 ```
 
-## 知识结构思维导图
+## 知识结构思维导图 {#知识结构思维导图}
 
 ```mermaid
 mindmap
@@ -120,7 +120,7 @@ mindmap
       证明与验证
 ```
 
-## 与核心文档的关联
+## 与核心文档的关联 {#与核心文档的关联}
 
 | 本文档 | 核心文档 | 关系 |
 | :--- | :--- | :--- |
@@ -131,9 +131,9 @@ mindmap
 
 ---
 
-## 形式化链接
+## 形式化链接 {#形式化链接}
 
-### 理论基础文档
+### 理论基础文档 {#理论基础文档}
 
 | 主题 | 文档路径 | 关键概念 |
 | :--- | :--- | :--- |
@@ -144,7 +144,7 @@ mindmap
 | **Trait 形式化** | [../../research_notes/type_theory/10_trait_system_formalization.md](../../../archive/research_notes_2026_06_25/type_theory/10_trait_system_formalization.md) | 类型类、关联类型 |
 | **型变理论** | [../../research_notes/type_theory/10_variance_theory.md](../../research_notes/type_theory/10_variance_theory.md) | 协变/逆变/不变规则 |
 
-### 证明与工具
+### 证明与工具 {#证明与工具}
 
 | 资源 | 路径 |
 | :--- | :--- |
@@ -165,7 +165,7 @@ mindmap
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

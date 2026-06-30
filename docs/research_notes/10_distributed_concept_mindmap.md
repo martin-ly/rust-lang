@@ -18,7 +18,7 @@
 
 ---
 
-# 分布式系统概念族谱
+# 分布式系统概念族谱 {#分布式系统概念族谱}
 
 > **内容分级**: [归档级]
 
@@ -36,7 +36,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -45,7 +45,7 @@
 >
 
 - [分布式系统概念族谱](#分布式系统概念族谱)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概念族谱概览](#概念族谱概览)
   - [核心概念详解](#核心概念详解)
     - [1. CAP 定理](#1-cap-定理)
@@ -57,8 +57,8 @@
   - [分布式模式实现](#分布式模式实现)
     - [1. 熔断器模式](#1-熔断器模式)
     - [2. 限流控制](#2-限流控制)
-  - [相关文档](#相关文档)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [相关文档](#相关文档-1)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -66,7 +66,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 概念族谱概览
+## 概念族谱概览 {#概念族谱概览}
 
 >
 
@@ -216,13 +216,13 @@ mindmap
 
 ---
 
-## 核心概念详解
+## 核心概念详解 {#核心概念详解}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. CAP 定理
+### 1. CAP 定理 {#1-cap-定理}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -260,7 +260,7 @@ struct DistributedSystem {
 
 ```
 
-### 2. 共识算法对比
+### 2. 共识算法对比 {#2-共识算法对比}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -274,7 +274,7 @@ struct DistributedSystem {
 
 | PBFT | 拜占庭容错 | 低 | 高 | - |
 
-### 3. 数据分区策略
+### 3. 数据分区策略 {#3-数据分区策略}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -312,13 +312,13 @@ impl ConsistentHash {
 
 ---
 
-## Rust 分布式系统工具链
+## Rust 分布式系统工具链 {#rust-分布式系统工具链}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 异步运行时对比
+### 异步运行时对比 {#异步运行时对比}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -348,7 +348,7 @@ graph LR
 
 ```
 
-### 关键库生态系统
+### 关键库生态系统 {#关键库生态系统}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -368,13 +368,13 @@ graph LR
 
 ---
 
-## 分布式模式实现
+## 分布式模式实现 {#分布式模式实现}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 1. 熔断器模式
+### 1. 熔断器模式 {#1-熔断器模式}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -412,7 +412,7 @@ enum CircuitState {
 
 ```
 
-### 2. 限流控制
+### 2. 限流控制 {#2-限流控制}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -464,7 +464,7 @@ impl RateLimiter {
 
 ---
 
-## 相关文档
+## 相关文档 {#相关文档-1}
 
 >
 
@@ -484,7 +484,7 @@ impl RateLimiter {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -494,7 +494,7 @@ impl RateLimiter {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -502,7 +502,7 @@ impl RateLimiter {
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -516,7 +516,7 @@ impl RateLimiter {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -526,7 +526,7 @@ impl RateLimiter {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档-1}
 
 - Rust 1.94 迁移指南
 
@@ -558,7 +558,7 @@ impl RateLimiter {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -570,7 +570,7 @@ impl RateLimiter {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Mind Map](https://en.wikipedia.org/wiki/Mind_Map)**
 

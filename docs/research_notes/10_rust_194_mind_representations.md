@@ -1,4 +1,4 @@
-# Rust 1.94 思维表征资产库
+# Rust 1.94 思维表征资产库 {#rust-194-思维表征资产库}
 >
 > **概念族**: 版本特性
 
@@ -16,35 +16,35 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.94 思维表征资产库](#rust-194-思维表征资产库)
-  - [📑 目录](#-目录)
-  - [🧠 1. 思维导图 (Mind Maps)](#-1-思维导图-mind-maps)
+  - [📑 目录](#目录)
+  - [🧠 1. 思维导图 (Mind Maps)](#1-思维导图-mind-maps)
     - [1.1 Rust 1.94 核心语义思维导图](#11-rust-194-核心语义思维导图)
     - [1.2 所有权语义思维导图](#12-所有权语义思维导图)
     - [1.3 类型系统思维导图](#13-类型系统思维导图)
-  - [📊 2. 多维矩阵对比 (Multi-dimensional Matrices)](#-2-多维矩阵对比-multi-dimensional-matrices)
+  - [📊 2. 多维矩阵对比 (Multi-dimensional Matrices)](#2-多维矩阵对比-multi-dimensional-matrices)
     - [2.1 所有权语义矩阵](#21-所有权语义矩阵)
     - [2.2 并发原语矩阵](#22-并发原语矩阵)
     - [2.3 错误处理策略矩阵](#23-错误处理策略矩阵)
     - [2.4 Rust 1.94/1.95/1.96 新特性影响矩阵](#24-rust-194195196-新特性影响矩阵)
     - [2.5 语言特性对比矩阵 (vs 其他语言)](#25-语言特性对比矩阵-vs-其他语言)
-  - [🌳 3. 决策树图 (Decision Trees)](#-3-决策树图-decision-trees)
+  - [🌳 3. 决策树图 (Decision Trees)](#3-决策树图-decision-trees)
     - [3.1 所有权选择决策树](#31-所有权选择决策树)
     - [3.2 错误处理策略决策树](#32-错误处理策略决策树)
     - [3.3 并发策略决策树](#33-并发策略决策树)
     - [3.4 泛型边界决策树](#34-泛型边界决策树)
     - [3.5 Rust 1.94 迭代器选择决策树](#35-rust-194-迭代器选择决策树)
-  - [🌲 4. 证明树图 (Proof Trees)](#-4-证明树图-proof-trees)
+  - [🌲 4. 证明树图 (Proof Trees)](#4-证明树图-proof-trees)
     - [4.1 内存安全性证明树](#41-内存安全性证明树)
     - [4.2 类型安全性证明树](#42-类型安全性证明树)
     - [4.3 线程安全性证明树](#43-线程安全性证明树)
     - [4.4 Rust 1.94 array\_windows 正确性证明](#44-rust-194-array_windows-正确性证明)
-  - [📈 5. 完整度评估](#-5-完整度评估)
-  - [✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）](#-权威国际化来源对齐升级摘要rust-1960--edition-2024)
+  - [📈 5. 完整度评估](#5-完整度评估)
+  - [✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）](#权威国际化来源对齐升级摘要rust-1960-edition-2024)
     - [本次升级要点](#本次升级要点)
       - [新增 Rust 1.96.0 特性](#新增-rust-1960-特性)
       - [新增 Rust 1.95.0 特性](#新增-rust-1950-特性)
@@ -52,11 +52,11 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🧠 1. 思维导图 (Mind Maps)
+## 🧠 1. 思维导图 (Mind Maps) {#1-思维导图-mind-maps}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1.1 Rust 1.94 核心语义思维导图
+### 1.1 Rust 1.94 核心语义思维导图 {#11-rust-194-核心语义思维导图}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -206,7 +206,7 @@ mindmap
 >
 > **来源: [Cargo Security Advisories](https://github.com/rust-lang/cargo/security/advisories)**
 
-### 1.2 所有权语义思维导图
+### 1.2 所有权语义思维导图 {#12-所有权语义思维导图}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -259,7 +259,7 @@ mindmap
         内部可变性
 ```
 
-### 1.3 类型系统思维导图
+### 1.3 类型系统思维导图 {#13-类型系统思维导图}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -318,11 +318,11 @@ mindmap
 
 ---
 
-## 📊 2. 多维矩阵对比 (Multi-dimensional Matrices)
+## 📊 2. 多维矩阵对比 (Multi-dimensional Matrices) {#2-多维矩阵对比-multi-dimensional-matrices}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 所有权语义矩阵
+### 2.1 所有权语义矩阵 {#21-所有权语义矩阵}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -338,7 +338,7 @@ mindmap
 | **运行时开销** | ❌ | ❌ | ❌ | ❌ | ❌ | ✅(计数) | ✅(原子计数) |
 | **编译期检查** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
 
-### 2.2 并发原语矩阵
+### 2.2 并发原语矩阵 {#22-并发原语矩阵}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -355,7 +355,7 @@ mindmap
 | Barrier | ✅ | N/A | ✅ | N/A | 同步点 | ✅ 稳定 |
 | `LazyLock<T>` | T:Send+Sync | T:Send+Sync | ⚠️ 初始化时 | N/A | 延迟初始化 | ✅ 1.94 增强 |
 
-### 2.3 错误处理策略矩阵
+### 2.3 错误处理策略矩阵 {#23-错误处理策略矩阵}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -376,7 +376,7 @@ mindmap
 >
 > **来源: [Iterator::try_for_each](https://doc.rust-lang.org/stable/std/iter/trait.Iterator.html#method.try_for_each)**
 
-### 2.4 Rust 1.94/1.95/1.96 新特性影响矩阵
+### 2.4 Rust 1.94/1.95/1.96 新特性影响矩阵 {#24-rust-194195196-新特性影响矩阵}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -400,7 +400,7 @@ mindmap
 | Cargo CVE-2026-5223 | 1.96 | 生态 | ✅ | N/A | N/A | N/A | ✅ | [Cargo Security Advisories](https://github.com/rust-lang/cargo/security/advisories) |
 | Cargo CVE-2026-5222 | 1.96 | 生态 | ✅ | N/A | N/A | N/A | ✅ | [Cargo Security Advisories](https://github.com/rust-lang/cargo/security/advisories) |
 
-### 2.5 语言特性对比矩阵 (vs 其他语言)
+### 2.5 语言特性对比矩阵 (vs 其他语言) {#25-语言特性对比矩阵-vs-其他语言}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -420,11 +420,11 @@ mindmap
 
 ---
 
-## 🌳 3. 决策树图 (Decision Trees)
+## 🌳 3. 决策树图 (Decision Trees) {#3-决策树图-decision-trees}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 3.1 所有权选择决策树
+### 3.1 所有权选择决策树 {#31-所有权选择决策树}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -458,7 +458,7 @@ graph TD
     Q -->|否| U[单一不可变借用 &T]
 ```
 
-### 3.2 错误处理策略决策树
+### 3.2 错误处理策略决策树 {#32-错误处理策略决策树}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -482,7 +482,7 @@ graph TD
     I -->|否| L[Result + try_fold<br/>collect]
 ```
 
-### 3.3 并发策略决策树
+### 3.3 并发策略决策树 {#33-并发策略决策树}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -508,7 +508,7 @@ graph TD
     L -->|否| N[Arc<T> 只读]
 ```
 
-### 3.4 泛型边界决策树
+### 3.4 泛型边界决策树 {#34-泛型边界决策树}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -536,7 +536,7 @@ graph TD
     I --> M
 ```
 
-### 3.5 Rust 1.94 迭代器选择决策树
+### 3.5 Rust 1.94 迭代器选择决策树 {#35-rust-194-迭代器选择决策树}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -565,11 +565,11 @@ graph TD
 
 ---
 
-## 🌲 4. 证明树图 (Proof Trees)
+## 🌲 4. 证明树图 (Proof Trees) {#4-证明树图-proof-trees}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 4.1 内存安全性证明树
+### 4.1 内存安全性证明树 {#41-内存安全性证明树}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -614,7 +614,7 @@ graph TD
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 4.2 类型安全性证明树
+### 4.2 类型安全性证明树 {#42-类型安全性证明树}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -656,7 +656,7 @@ graph TD
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 4.3 线程安全性证明树
+### 4.3 线程安全性证明树 {#43-线程安全性证明树}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -697,7 +697,7 @@ graph TD
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 4.4 Rust 1.94 array_windows 正确性证明
+### 4.4 Rust 1.94 array_windows 正确性证明 {#44-rust-194-array_windows-正确性证明}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -742,7 +742,7 @@ graph TD
 
 ---
 
-## 📈 5. 完整度评估
+## 📈 5. 完整度评估 {#5-完整度评估}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -790,7 +790,7 @@ graph TD
 
 ---
 
-## ✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024）
+## ✅ 权威国际化来源对齐升级摘要（Rust 1.96.0+ / Edition 2024） {#权威国际化来源对齐升级摘要rust-1960-edition-2024}
 
 > **来源: [Rust 1.96.0 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/)**
 > **来源: [Rust 1.95.0 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)**
@@ -798,11 +798,11 @@ graph TD
 > **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **升级日期**: 2026-06-29
 
-### 本次升级要点
+### 本次升级要点 {#本次升级要点}
 
 本文档已完成权威国际化来源对齐升级，统一版本基准为 **Rust 1.96.0+ / Edition 2024**，同时保留 1.93/1.94 历史分析章节。
 
-#### 新增 Rust 1.96.0 特性
+#### 新增 Rust 1.96.0 特性 {#新增-rust-1960-特性}
 
 | 特性 | 来源 | 说明 |
 | :--- | :--- | :--- |
@@ -811,7 +811,7 @@ graph TD
 | Cargo CVE-2026-5223 / CVE-2026-5222 修复 | [Cargo 安全公告](https://github.com/rust-lang/cargo/security/advisories)、[Rust Blog 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) | 第三方 registry tarball symlink 与 URL 规范化修复 |
 | WebAssembly 链接行为变更 | [Rust Blog 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) | 不再默认传递 `--allow-undefined` |
 
-#### 新增 Rust 1.95.0 特性
+#### 新增 Rust 1.95.0 特性 {#新增-rust-1950-特性}
 
 | 特性 | 来源 | 说明 |
 | :--- | :--- | :--- |
@@ -820,7 +820,7 @@ graph TD
 | PowerPC / PowerPC64 内联汇编稳定化 | [Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)、[Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | 稳定 inline assembly for PowerPC |
 | `--remap-path-scope` | [Rust Blog 1.95.0](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) | 控制路径重映射作用域 |
 
-#### 权威来源对齐
+#### 权威来源对齐 {#权威来源对齐}
 
 - Rust release notes（releases.rs）
 - Rust Blog 对应版本发布公告
@@ -830,7 +830,7 @@ graph TD
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -839,7 +839,7 @@ graph TD
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

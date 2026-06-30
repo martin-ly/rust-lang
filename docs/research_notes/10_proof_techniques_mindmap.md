@@ -1,4 +1,4 @@
-# 证明技术概念族谱
+# 证明技术概念族谱 {#证明技术概念族谱}
 
 > **概念族**: 形式化方法
 
@@ -18,7 +18,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -27,7 +27,7 @@
 >
 
 - [证明技术概念族谱](#证明技术概念族谱)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概念族谱概览](#概念族谱概览)
   - [核心证明技术](#核心证明技术)
     - [1. 归纳法](#1-归纳法)
@@ -39,8 +39,8 @@
   - [工具链集成](#工具链集成)
     - [验证工具能力对比](#验证工具能力对比)
     - [证明策略选择](#证明策略选择)
-  - [相关文档](#相关文档)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [相关文档](#相关文档-1)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -48,7 +48,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 概念族谱概览
+## 概念族谱概览 {#概念族谱概览}
 
 >
 
@@ -190,13 +190,13 @@ mindmap
 
 ---
 
-## 核心证明技术
+## 核心证明技术 {#核心证明技术}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 归纳法
+### 1. 归纳法 {#1-归纳法}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -244,7 +244,7 @@ mod proofs {
 
 ```
 
-### 2. 分离逻辑
+### 2. 分离逻辑 {#2-分离逻辑}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -270,7 +270,7 @@ fn separation_logic_example() {
 
 ```
 
-### 3. 双模拟
+### 3. 双模拟 {#3-双模拟}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -314,13 +314,13 @@ struct Action(String);
 
 ---
 
-## 程序逻辑
+## 程序逻辑 {#程序逻辑}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### Hoare 三元组
+### Hoare 三元组 {#hoare-三元组}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -368,7 +368,7 @@ fn find_max(slice: &[i32]) -> Option<&i32> {
 
 ```
 
-### Iris 框架概念
+### Iris 框架概念 {#iris-框架概念}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -386,13 +386,13 @@ fn find_max(slice: &[i32]) -> Option<&i32> {
 
 ---
 
-## 工具链集成
+## 工具链集成 {#工具链集成}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 验证工具能力对比
+### 验证工具能力对比 {#验证工具能力对比}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -422,7 +422,7 @@ graph LR
 
 ```
 
-### 证明策略选择
+### 证明策略选择 {#证明策略选择}
 
 >
 
@@ -444,7 +444,7 @@ graph LR
 
 ---
 
-## 相关文档
+## 相关文档 {#相关文档-1}
 
 >
 
@@ -464,7 +464,7 @@ graph LR
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -474,7 +474,7 @@ graph LR
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 >
 
@@ -482,7 +482,7 @@ graph LR
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -496,7 +496,7 @@ graph LR
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -506,7 +506,7 @@ graph LR
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档-1}
 
 - Rust 1.94 迁移指南
 
@@ -538,7 +538,7 @@ graph LR
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -550,7 +550,7 @@ graph LR
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Mind Map](https://en.wikipedia.org/wiki/Mind_Map)**
 > **来源: [Wikipedia - Concept Map](https://en.wikipedia.org/wiki/Concept_Map)**

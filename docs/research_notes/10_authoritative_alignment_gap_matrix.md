@@ -1,4 +1,4 @@
-# docs/research_notes 权威国际化对齐缺口矩阵
+# docs/research_notes 权威国际化对齐缺口矩阵 {#docsresearch_notes-权威国际化对齐缺口矩阵}
 >
 > **概念族**: 权威来源对齐
 
@@ -25,26 +25,26 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 - [docs/research\_notes 权威国际化对齐缺口矩阵](#docsresearch_notes-权威国际化对齐缺口矩阵)
-  - [📑 目录](#-目录)
-  - [📊 矩阵说明](#-矩阵说明)
-  - [🔬 experiments/ 实验主题](#-experiments-实验主题)
-  - [🧮 formal\_methods/ 形式化方法](#-formal_methods-形式化方法)
-  - [📐 type\_theory/ 类型理论](#-type_theory-类型理论)
-  - [📦 formal\_modules/ 形式化模块](#-formal_modules-形式化模块)
-  - [🏗️ software\_design\_theory/ 软件设计理论](#️-software_design_theory-软件设计理论)
-  - [🔧 形式化工具](#-形式化工具)
-  - [🗺️ 后续执行路线图](#️-后续执行路线图)
+  - [📑 目录](#目录)
+  - [📊 矩阵说明](#矩阵说明)
+  - [🔬 experiments/ 实验主题](#experiments-实验主题)
+  - [🧮 formal\_methods/ 形式化方法](#formal_methods-形式化方法)
+  - [📐 type\_theory/ 类型理论](#type_theory-类型理论)
+  - [📦 formal\_modules/ 形式化模块](#formal_modules-形式化模块)
+  - [🏗️ software\_design\_theory/ 软件设计理论](#software_design_theory-软件设计理论)
+  - [🔧 形式化工具](#形式化工具)
+  - [🗺️ 后续执行路线图](#后续执行路线图)
     - [P0：立即执行（官方来源与核心安全）](#p0立即执行官方来源与核心安全)
     - [P1：短期完善（学术来源与工程实践）](#p1短期完善学术来源与工程实践)
     - [P2：中期增强（社区来源与扩展主题）](#p2中期增强社区来源与扩展主题)
-  - [📚 权威来源索引](#-权威来源索引)
+  - [📚 权威来源索引](#权威来源索引)
 
 ---
 
-## 📊 矩阵说明
+## 📊 矩阵说明 {#矩阵说明}
 
 本矩阵按 **主题 → 当前文件 → P0 官方来源 → P1 学术/形式化来源 → P2 社区来源 → 已对齐内容 → 待补缺口 → 优先级 → 建议升级动作** 的维度展开，覆盖 `docs/research_notes/` 下实验、形式化方法、类型理论、形式化模块、软件设计理论与主流形式化工具共 6 大领域。每行至少标注一条权威来源链接，用于快速复核。
 
@@ -52,7 +52,7 @@
 
 ---
 
-## 🔬 experiments/ 实验主题
+## 🔬 experiments/ 实验主题 {#experiments-实验主题}
 
 | 主题 | 当前文件 | P0 官方来源 | P1 学术/形式化来源 | P2 社区来源 | 已对齐内容 | 待补缺口 | 优先级 | 建议升级动作 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -68,7 +68,7 @@
 
 ---
 
-## 🧮 formal_methods/ 形式化方法
+## 🧮 formal_methods/ 形式化方法 {#formal_methods-形式化方法}
 
 | 主题 | 当前文件 | P0 官方来源 | P1 学术/形式化来源 | P2 社区来源 | 已对齐内容 | 待补缺口 | 优先级 | 建议升级动作 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -83,7 +83,7 @@
 
 ---
 
-## 📐 type_theory/ 类型理论
+## 📐 type_theory/ 类型理论 {#type_theory-类型理论}
 
 | 主题 | 当前文件 | P0 官方来源 | P1 学术/形式化来源 | P2 社区来源 | 已对齐内容 | 待补缺口 | 优先级 | 建议升级动作 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -96,7 +96,7 @@
 
 ---
 
-## 📦 formal_modules/ 形式化模块
+## 📦 formal_modules/ 形式化模块 {#formal_modules-形式化模块}
 
 | 主题 | 当前文件 | P0 官方来源 | P1 学术/形式化来源 | P2 社区来源 | 已对齐内容 | 待补缺口 | 优先级 | 建议升级动作 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -112,7 +112,7 @@
 
 ---
 
-## 🏗️ software_design_theory/ 软件设计理论
+## 🏗️ software_design_theory/ 软件设计理论 {#software_design_theory-软件设计理论}
 
 | 主题 | 当前文件 | P0 官方来源 | P1 学术/形式化来源 | P2 社区来源 | 已对齐内容 | 待补缺口 | 优先级 | 建议升级动作 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -135,7 +135,7 @@
 
 ---
 
-## 🔧 形式化工具
+## 🔧 形式化工具 {#形式化工具}
 
 | 主题 | 当前文件 | P0 官方来源 | P1 学术/形式化来源 | P2 社区来源 | 已对齐内容 | 待补缺口 | 优先级 | 建议升级动作 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -157,9 +157,9 @@
 
 ---
 
-## 🗺️ 后续执行路线图
+## 🗺️ 后续执行路线图 {#后续执行路线图}
 
-### P0：立即执行（官方来源与核心安全）
+### P0：立即执行（官方来源与核心安全） {#p0立即执行官方来源与核心安全}
 
 1. **experiments/performance_benchmarks**：补充 Criterion 统计方法、Rust 1.96 `profile` 示例、CI 回归检测脚本。
 2. **experiments/memory_analysis**：增加 `std::alloc`/`Layout` 示例、Miri UB 检测流程、cache line 分析。
@@ -171,7 +171,7 @@
 8. **software_design_theory/05_boundary_system**：补充 `cbindgen`/`cxx` 与 Miri 检测组合示例。
 9. **形式化工具 RustBelt/Tree Borrows/Kani/Miri**：更新默认模型与 1.96 兼容性，补充标准库抽象证明纲要和 CI 模板。
 
-### P1：短期完善（学术来源与工程实践）
+### P1：短期完善（学术来源与工程实践） {#p1短期完善学术来源与工程实践}
 
 1. **experiments/compiler_optimizations**：增加 `rustc -Z print-mono-items` 示例、优化前后 MIR 对比。
 2. **experiments/macro_expansion_performance**：补充 proc-macro 编译时间基准、`tt-call`/`tt-muncher` 性能对比。
@@ -182,7 +182,7 @@
 7. **software_design_theory/04_compositional_engineering + 07_crate_architectures**：增加 semver 兼容性检查与 crate 依赖图。
 8. **形式化工具 Aeneas/coqo-of-rust/RustSEM/Oxide/Verus/Creusot**：更新 1.96 支持状态、补充 trait/并发/iterator 证明案例。
 
-### P2：中期增强（社区来源与扩展主题）
+### P2：中期增强（社区来源与扩展主题） {#p2中期增强社区来源与扩展主题}
 
 1. **software_design_theory/07_anti_patterns**：补充 clippy 自动检测映射、重构前后 Miri 验证示例。
 2. **形式化工具 Prusti**：标注维护状态，补充替代方案（Verus/Creusot）对比。
@@ -191,7 +191,7 @@
 
 ---
 
-## 📚 权威来源索引
+## 📚 权威来源索引 {#权威来源索引}
 
 | 级别 | 来源名称 | URL |
 | :--- | :--- | :--- |

@@ -1,4 +1,4 @@
-# Web 应用开发场景树
+# Web 应用开发场景树 {#web-应用开发场景树}
 
 > **分级**: [B]
 > **Bloom 层级**: L3-L4 (应用/分析)
@@ -8,20 +8,20 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Web 应用开发场景树](#web-应用开发场景树)
-  - [📑 目录](#-目录)
-  - [🌳 Web 应用场景树](#-web-应用场景树)
-  - [📊 RESTful API 场景](#-restful-api-场景)
+  - [📑 目录](#目录)
+  - [🌳 Web 应用场景树](#web-应用场景树)
+  - [📊 RESTful API 场景](#restful-api-场景)
     - [场景 1: CRUD API](#场景-1-crud-api)
-  - [🔗 相关文档](#-相关文档)
+  - [🔗 相关文档](#相关文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 🌳 Web 应用场景树
+## 🌳 Web 应用场景树 {#web-应用场景树}
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -55,11 +55,11 @@ graph TD
 
 ---
 
-## 📊 RESTful API 场景
+## 📊 RESTful API 场景 {#restful-api-场景}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 场景 1: CRUD API
+### 场景 1: CRUD API {#场景-1-crud-api}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -118,7 +118,7 @@ async fn get_user(Path(id): Path<Uuid>) -> Json<User> {
 
 ---
 
-## 🔗 相关文档
+## 🔗 相关文档 {#相关文档}
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -143,7 +143,7 @@ async fn get_user(Path(id): Path<Uuid>) -> Json<User> {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -151,7 +151,7 @@ async fn get_user(Path(id): Path<Uuid>) -> Json<User> {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Web Framework](https://en.wikipedia.org/wiki/Web_Framework)**
 > **来源: [axum.rs Documentation](https://docs.rs/axum/latest/axum/)**

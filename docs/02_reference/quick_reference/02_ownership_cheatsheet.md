@@ -1,4 +1,4 @@
-# 🦀 所有权系统速查卡
+# 🦀 所有权系统速查卡 {#所有权系统速查卡}
 
 > **分级**: [A]
 > **Bloom 层级**: L2-L3 (理解/速查)
@@ -6,71 +6,71 @@
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
 
-## 📋 目录
+## 📋 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [🦀 所有权系统速查卡](#-所有权系统速查卡)
-  - [📋 目录](#-目录)
-  - [🧠 所有权系统思维导图](#-所有权系统思维导图)
-  - [📊 概念定义-属性关系-解释论证](#-概念定义-属性关系-解释论证)
-  - [📐 三大规则（核心）](#-三大规则核心)
+- [🦀 所有权系统速查卡](#所有权系统速查卡)
+  - [📋 目录](#目录)
+  - [🧠 所有权系统思维导图](#所有权系统思维导图)
+  - [📊 概念定义-属性关系-解释论证](#概念定义-属性关系-解释论证)
+  - [📐 三大规则（核心）](#三大规则核心)
     - [所有权转移决策树](#所有权转移决策树)
-  - [🎯 常见模式速查](#-常见模式速查)
+  - [🎯 常见模式速查](#常见模式速查)
     - [模式 1: 所有权转移（Move）](#模式-1-所有权转移move)
     - [模式 2: 不可变借用（\&T）](#模式-2-不可变借用t)
     - [模式 3: 可变借用（\&mut T）](#模式-3-可变借用mut-t)
     - [模式 4: Clone（显式复制）](#模式-4-clone显式复制)
     - [模式 5: Copy 类型](#模式-5-copy-类型)
-  - [🌳 决策树](#-决策树)
-  - [⚡ 常见错误与解决](#-常见错误与解决)
+  - [🌳 决策树](#决策树)
+  - [⚡ 常见错误与解决](#常见错误与解决)
     - [错误 1: 借用检查器错误](#错误-1-借用检查器错误)
     - [错误 2: 悬垂引用](#错误-2-悬垂引用)
     - [错误 3: 循环中的借用](#错误-3-循环中的借用)
-  - [🏗️ 智能指针速查](#️-智能指针速查)
+  - [🏗️ 智能指针速查](#智能指针速查)
     - [`Box<T>` - 堆分配](#boxt---堆分配)
     - [`Rc<T>` - 引用计数（单线程）](#rct---引用计数单线程)
     - [`Arc<T>` - 原子引用计数（多线程）](#arct---原子引用计数多线程)
     - [`RefCell<T>` - 内部可变性（单线程）](#refcellt---内部可变性单线程)
     - [`Mutex<T>` - 互斥锁（多线程）](#mutext---互斥锁多线程)
-  - [🎓 生命周期速查](#-生命周期速查)
+  - [🎓 生命周期速查](#生命周期速查)
     - [基本语法](#基本语法)
     - [生命周期省略规则](#生命周期省略规则)
-  - [📊 性能提示](#-性能提示)
-    - [✅ 高效模式](#-高效模式)
-    - [⚠️ 低效模式](#️-低效模式)
-  - [🚫 反例速查](#-反例速查)
+  - [📊 性能提示](#性能提示)
+    - [✅ 高效模式](#高效模式)
+    - [⚠️ 低效模式](#低效模式)
+  - [🚫 反例速查](#反例速查)
     - [反例 1: 移动后使用](#反例-1-移动后使用)
     - [反例 2: 可变借用与不可变借用冲突](#反例-2-可变借用与不可变借用冲突)
     - [反例 3: 返回悬垂引用](#反例-3-返回悬垂引用)
-  - [🔗 快速跳转](#-快速跳转)
+  - [🔗 快速跳转](#快速跳转)
     - [深入学习](#深入学习)
     - [代码示例](#代码示例)
     - [形式化理论](#形式化理论)
-  - [💡 使用场景](#-使用场景)
+  - [💡 使用场景](#使用场景)
     - [场景 1: 配置解析器](#场景-1-配置解析器)
     - [场景 2: 缓存实现](#场景-2-缓存实现)
     - [场景 3: 读取文件并处理](#场景-3-读取文件并处理)
-  - [⚠️ 边界情况](#️-边界情况)
+  - [⚠️ 边界情况](#边界情况)
     - [边界 1: 自引用结构](#边界-1-自引用结构)
     - [边界 2: 跨线程所有权](#边界-2-跨线程所有权)
     - [边界 3: 循环引用与内存泄漏](#边界-3-循环引用与内存泄漏)
-  - [🆕 Rust 1.92.0 内存优化](#-rust-1920-内存优化)
+  - [🆕 Rust 1.92.0 内存优化](#rust-1920-内存优化)
     - [内存分配优化](#内存分配优化)
-  - [📚 相关文档](#-相关文档)
-  - [🧩 相关示例代码](#-相关示例代码)
-  - [📚 相关资源](#-相关资源)
+  - [📚 相关文档](#相关文档)
+  - [🧩 相关示例代码](#相关示例代码)
+  - [📚 相关资源](#相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
     - [相关速查卡](#相关速查卡)
-  - [🆕 Rust 1.95+ 特性整合](#-rust-195-特性整合)
+  - [🆕 Rust 1.95+ 特性整合](#rust-195-特性整合)
     - [核心特性速查](#核心特性速查)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
 ---
 
-## 🧠 所有权系统思维导图
+## 🧠 所有权系统思维导图 {#所有权系统思维导图}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -105,7 +105,7 @@ mindmap
 
 ---
 
-## 📊 概念定义-属性关系-解释论证
+## 📊 概念定义-属性关系-解释论证 {#概念定义-属性关系-解释论证}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -121,7 +121,7 @@ mindmap
 
 ---
 
-## 📐 三大规则（核心）
+## 📐 三大规则（核心） {#三大规则核心}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -131,7 +131,7 @@ mindmap
 3. 所有者离开作用域，值被自动 drop
 ```
 
-### 所有权转移决策树
+### 所有权转移决策树 {#所有权转移决策树}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 >
@@ -156,11 +156,11 @@ graph TD
 
 ---
 
-## 🎯 常见模式速查
+## 🎯 常见模式速查 {#常见模式速查}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 模式 1: 所有权转移（Move）
+### 模式 1: 所有权转移（Move） {#模式-1-所有权转移move}
 
 > **来源: [ACM](https://dl.acm.org/)**
 >
@@ -181,7 +181,7 @@ println!("{}", s2);    // ✅ OK
 
 ---
 
-### 模式 2: 不可变借用（&T）
+### 模式 2: 不可变借用（&T） {#模式-2-不可变借用t}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 >
@@ -205,7 +205,7 @@ println!("{}", s);  // ✅ s 仍然有效
 
 ---
 
-### 模式 3: 可变借用（&mut T）
+### 模式 3: 可变借用（&mut T） {#模式-3-可变借用mut-t}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -229,7 +229,7 @@ println!("{}", s);  // "hello world"
 
 ---
 
-### 模式 4: Clone（显式复制）
+### 模式 4: Clone（显式复制） {#模式-4-clone显式复制}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -245,7 +245,7 @@ println!("{} {}", s1, s2);  // ✅ 都有效
 
 ---
 
-### 模式 5: Copy 类型
+### 模式 5: Copy 类型 {#模式-5-copy-类型}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -267,7 +267,7 @@ println!("{} {}", x, y);  // ✅ 都有效
 
 ---
 
-## 🌳 决策树
+## 🌳 决策树 {#决策树}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -292,11 +292,11 @@ println!("{} {}", x, y);  // ✅ 都有效
 
 ---
 
-## ⚡ 常见错误与解决
+## ⚡ 常见错误与解决 {#常见错误与解决}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 错误 1: 借用检查器错误
+### 错误 1: 借用检查器错误 {#错误-1-借用检查器错误}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -319,7 +319,7 @@ s.push_str(" world");
 
 ---
 
-### 错误 2: 悬垂引用
+### 错误 2: 悬垂引用 {#错误-2-悬垂引用}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -346,7 +346,7 @@ fn no_dangle2<'a>(input: &'a String) -> &'a String {
 
 ---
 
-### 错误 3: 循环中的借用
+### 错误 3: 循环中的借用 {#错误-3-循环中的借用}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -367,11 +367,11 @@ v.extend(to_add);
 
 ---
 
-## 🏗️ 智能指针速查
+## 🏗️ 智能指针速查 {#智能指针速查}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### `Box<T>` - 堆分配
+### `Box<T>` - 堆分配 {#boxt---堆分配}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -380,7 +380,7 @@ let b = Box::new(5);
 // 用途：递归类型、大型数据、trait 对象
 ```
 
-### `Rc<T>` - 引用计数（单线程）
+### `Rc<T>` - 引用计数（单线程） {#rct---引用计数单线程}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -391,7 +391,7 @@ let b = Rc::clone(&a);  // 引用计数 +1
 // 用途：多重所有权（单线程）
 ```
 
-### `Arc<T>` - 原子引用计数（多线程）
+### `Arc<T>` - 原子引用计数（多线程） {#arct---原子引用计数多线程}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -402,7 +402,7 @@ let b = Arc::clone(&a);  // 线程安全的引用计数
 // 用途：多线程共享数据
 ```
 
-### `RefCell<T>` - 内部可变性（单线程）
+### `RefCell<T>` - 内部可变性（单线程） {#refcellt---内部可变性单线程}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -413,7 +413,7 @@ let data = RefCell::new(5);
 // 用途：运行时借用检查
 ```
 
-### `Mutex<T>` - 互斥锁（多线程）
+### `Mutex<T>` - 互斥锁（多线程） {#mutext---互斥锁多线程}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -429,11 +429,11 @@ let m = Mutex::new(5);
 
 ---
 
-## 🎓 生命周期速查
+## 🎓 生命周期速查 {#生命周期速查}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 基本语法
+### 基本语法 {#基本语法}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 
@@ -443,7 +443,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 }
 ```
 
-### 生命周期省略规则
+### 生命周期省略规则 {#生命周期省略规则}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
@@ -468,11 +468,11 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ---
 
-## 📊 性能提示
+## 📊 性能提示 {#性能提示}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### ✅ 高效模式
+### ✅ 高效模式 {#高效模式}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -495,7 +495,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
    process(&s);  // ✅ 而非 process(s.clone())
    ```
 
-### ⚠️ 低效模式
+### ⚠️ 低效模式 {#低效模式}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -513,11 +513,11 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ---
 
-## 🚫 反例速查
+## 🚫 反例速查 {#反例速查}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-### 反例 1: 移动后使用
+### 反例 1: 移动后使用 {#反例-1-移动后使用}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -541,7 +541,7 @@ println!("{}", s);
 
 ---
 
-### 反例 2: 可变借用与不可变借用冲突
+### 反例 2: 可变借用与不可变借用冲突 {#反例-2-可变借用与不可变借用冲突}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -568,7 +568,7 @@ let r2 = &mut v;  // r1 已离开作用域
 
 ---
 
-### 反例 3: 返回悬垂引用
+### 反例 3: 返回悬垂引用 {#反例-3-返回悬垂引用}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -594,11 +594,11 @@ fn no_dangle() -> String {
 
 ---
 
-## 🔗 快速跳转
+## 🔗 快速跳转 {#快速跳转}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 深入学习
+### 深入学习 {#深入学习}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -606,14 +606,14 @@ fn no_dangle() -> String {
 - [借用检查器详解](../../../crates/c01_ownership_borrow_scope/docs/tier_03_references/02_借用检查器详解.md)
 - [智能指针 API](../../../crates/c01_ownership_borrow_scope/docs/tier_03_references/05_智能指针API参考.md)
 
-### 代码示例
+### 代码示例 {#代码示例}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 - [综合示例](../../../crates/c01_ownership_borrow_scope/examples/comprehensive_ownership_examples.rs)
 - [智能指针示例](../../../crates/c01_ownership_borrow_scope/examples/comprehensive_ownership_examples.rs)
 
-### 形式化理论
+### 形式化理论 {#形式化理论}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -625,11 +625,11 @@ fn no_dangle() -> String {
 
 ---
 
-## 💡 使用场景
+## 💡 使用场景 {#使用场景}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 场景 1: 配置解析器
+### 场景 1: 配置解析器 {#场景-1-配置解析器}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -666,7 +666,7 @@ fn main() {
 }
 ```
 
-### 场景 2: 缓存实现
+### 场景 2: 缓存实现 {#场景-2-缓存实现}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -706,7 +706,7 @@ fn main() {
 }
 ```
 
-### 场景 3: 读取文件并处理
+### 场景 3: 读取文件并处理 {#场景-3-读取文件并处理}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -737,11 +737,11 @@ fn main() {
 
 ---
 
-## ⚠️ 边界情况
+## ⚠️ 边界情况 {#边界情况}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 边界 1: 自引用结构
+### 边界 1: 自引用结构 {#边界-1-自引用结构}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -762,7 +762,7 @@ struct SafeSelfReferential {
 }
 ```
 
-### 边界 2: 跨线程所有权
+### 边界 2: 跨线程所有权 {#边界-2-跨线程所有权}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -787,7 +787,7 @@ fn main() {
 }
 ```
 
-### 边界 3: 循环引用与内存泄漏
+### 边界 3: 循环引用与内存泄漏 {#边界-3-循环引用与内存泄漏}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -825,11 +825,11 @@ fn main() {
 
 ---
 
-## 🆕 Rust 1.92.0 内存优化
+## 🆕 Rust 1.92.0 内存优化 {#rust-1920-内存优化}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 内存分配优化
+### 内存分配优化 {#内存分配优化}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -857,14 +857,14 @@ for i in 0..1000 {
 
 ---
 
-## 📚 相关文档
+## 📚 相关文档 {#相关文档}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [所有权系统完整文档](../../../crates/c01_ownership_borrow_scope/docs/README.md)
 - [所有权系统 README](../../../crates/c01_ownership_borrow_scope/README.md)
 
-## 🧩 相关示例代码
+## 🧩 相关示例代码 {#相关示例代码}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -876,18 +876,18 @@ for i in 0..1000 {
 
 ---
 
-## 📚 相关资源
+## 📚 相关资源 {#相关资源}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 官方文档
+### 官方文档 {#官方文档}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Rust 所有权文档](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
 - [Rust Reference - Ownership](https://doc.rust-lang.org/reference/ownership.html)
 
-### 项目内部文档
+### 项目内部文档 {#项目内部文档}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -895,7 +895,7 @@ for i in 0..1000 {
 - [所有权形式化研究](../../research_notes/formal_methods/10_ownership_model.md)
 - 生命周期形式化
 
-### 相关速查卡
+### 相关速查卡 {#相关速查卡}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -915,12 +915,12 @@ for i in 0..1000 {
 
 ---
 
-## 🆕 Rust 1.95+ 特性整合
+## 🆕 Rust 1.95+ 特性整合 {#rust-195-特性整合}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 > **适用版本**: Rust 1.96.0+
 
-### 核心特性速查
+### 核心特性速查 {#核心特性速查}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -974,7 +974,7 @@ let gamma = f64::consts::EULER_GAMMA;
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -983,7 +983,7 @@ let gamma = f64::consts::EULER_GAMMA;
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 > **来源: [Wikipedia - Resource Management](https://en.wikipedia.org/wiki/Resource_Management)**

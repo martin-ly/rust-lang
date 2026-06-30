@@ -1,4 +1,4 @@
-# Microsoft Pragmatic Rust Guidelines 代码审查清单
+# Microsoft Pragmatic Rust Guidelines 代码审查清单 {#microsoft-pragmatic-rust-guidelines-代码审查清单}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
@@ -12,12 +12,12 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Microsoft Pragmatic Rust Guidelines 代码审查清单](#microsoft-pragmatic-rust-guidelines-代码审查清单)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [清单使用说明](#清单使用说明)
   - [1. 安全 (Safety)](#1-安全-safety)
     - [1.1 Unsafe 代码管理](#11-unsafe-代码管理)
@@ -45,7 +45,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 清单使用说明
+## 清单使用说明 {#清单使用说明}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -57,11 +57,11 @@
 
 ---
 
-## 1. 安全 (Safety)
+## 1. 安全 (Safety) {#1-安全-safety}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1.1 Unsafe 代码管理
+### 1.1 Unsafe 代码管理 {#11-unsafe-代码管理}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 >
@@ -75,7 +75,7 @@
 | S04 | 避免不必要的 `unsafe_code` 允许 | SHOULD | `Cargo.toml` `[workspace.lints.rust]` | 是否保持 `unsafe_code = "forbid"`？ |
 | S05 | 使用 Miri 验证 unsafe 代码 | SHOULD | `docs/03_guides/03_miri_guide.md` | 关键 unsafe 代码是否通过 Miri？ |
 
-### 1.2 输入验证
+### 1.2 输入验证 {#12-输入验证}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -86,7 +86,7 @@
 | S08 | 索引操作前必须验证边界 | MUST | `crates/c08_algorithms/src/` | 所有 `[i]` 索引是否有前置检查？ |
 | S09 | 字符串解析必须处理错误 | MUST | `exercises/src/error_handling/ex01_result_option.rs` | `parse()` 是否处理了 Err？ |
 
-### 1.3 并发安全
+### 1.3 并发安全 {#13-并发安全}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -99,11 +99,11 @@
 
 ---
 
-## 2. 性能 (Performance)
+## 2. 性能 (Performance) {#2-性能-performance}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 2.1 内存分配
+### 2.1 内存分配 {#21-内存分配}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -115,7 +115,7 @@
 | P04 | 避免不必要的 clone | SHOULD | `crates/c01_ownership_borrow_scope/src/copy_move/` | clone() 是否可以通过借用消除？ |
 | P05 | 使用 Cow<'_, str> 处理可选克隆 | MAY | `docs/02_reference/quick_reference/02_ownership_cheatsheet.md` | 读多写少场景是否使用了 Cow？ |
 
-### 2.2 迭代与集合
+### 2.2 迭代与集合 {#22-迭代与集合}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -126,7 +126,7 @@
 | P08 | 使用 Entry API 进行条件插入 | SHOULD | `crates/c02_type_system/src/type_composition/collection/hash_map.rs` | `contains_key` + `insert` 是否可用 `entry` 替代？ |
 | P09 | 大结构体使用 Box 减少栈压力 | MAY | `crates/c01_ownership_borrow_scope/src/ownership/` | 递归类型或大结构体是否使用了 Box？ |
 
-### 2.3 并发性能
+### 2.3 并发性能 {#23-并发性能}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -138,11 +138,11 @@
 
 ---
 
-## 3. 可读性 (Readability)
+## 3. 可读性 (Readability) {#3-可读性-readability}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 3.1 命名规范
+### 3.1 命名规范 {#31-命名规范}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -155,7 +155,7 @@
 | R05 | 布尔变量使用 `is_` / `has_` / `can_` 前缀 | SHOULD | `exercises/src/generics_traits/ex04_default_trait.rs` | `enable_logging` vs `logging`？ |
 | R06 | Result/Option 变量使用描述性名称 | SHOULD | `exercises/src/error_handling/ex03_error_propagation.rs` | `let content = fs::read_to_string(...)`？ |
 
-### 3.2 代码组织
+### 3.2 代码组织 {#32-代码组织}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -167,7 +167,7 @@
 | R10 | 相关代码垂直靠近 | SHOULD | `crates/c04_generic/src/trait_bound/` | 结构体定义是否靠近其 impl？ |
 | R11 | 优先使用方法链而非嵌套调用 | MAY | `exercises/src/type_system/ex04_generics_intro.rs` | `a.b().c().d()` vs `d(c(b(a)))`？ |
 
-### 3.3 注释与文档
+### 3.3 注释与文档 {#33-注释与文档}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -180,11 +180,11 @@
 
 ---
 
-## 4. API 设计
+## 4. API 设计 {#4-api-设计}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 4.1 类型设计
+### 4.1 类型设计 {#41-类型设计}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -196,7 +196,7 @@
 | A04 | 使用 Builder 模式构造复杂对象 | MAY | `crates/c09_design_pattern/` | 多参数构造是否有 Builder？ |
 | A05 | 实现 Default 减少构造函数参数 | SHOULD | `exercises/src/generics_traits/ex04_default_trait.rs` | 复杂结构体是否实现了 Default？ |
 
-### 4.2 错误设计
+### 4.2 错误设计 {#42-错误设计}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -206,7 +206,7 @@
 | A07 | 错误信息包含上下文 | SHOULD | `exercises/src/error_handling/ex03_error_propagation.rs` | `map_err` 是否添加了上下文？ |
 | A08 | 使用 thiserror/anyhow 减少样板 | MAY | `Cargo.toml` workspace deps | 是否使用了生态库简化错误处理？ |
 
-### 4.3 Trait 设计
+### 4.3 Trait 设计 {#43-trait-设计}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -218,11 +218,11 @@
 
 ---
 
-## 5. 命名规范补充
+## 5. 命名规范补充 {#5-命名规范补充}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-### 5.1 项目特定约定
+### 5.1 项目特定约定 {#51-项目特定约定}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -236,11 +236,11 @@
 
 ---
 
-## 审查清单速查表
+## 审查清单速查表 {#审查清单速查表}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-### 提交前自检（开发者）
+### 提交前自检（开发者） {#提交前自检开发者}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -252,7 +252,7 @@
 - [ ] unsafe 代码有 SAFETY 注释
 - [ ] 无 `todo!()` 遗留（除非明确标记为 WIP）
 
-### 代码审查（审查者）
+### 代码审查（审查者） {#代码审查审查者}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -264,7 +264,7 @@
 
 ---
 
-## 自动化检查
+## 自动化检查 {#自动化检查}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -280,7 +280,7 @@
 
 ---
 
-## 相关文档
+## 相关文档 {#相关文档}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -302,7 +302,7 @@
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -311,7 +311,7 @@
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

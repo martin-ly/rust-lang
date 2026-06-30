@@ -1,4 +1,4 @@
-# 算法使用指南
+# 算法使用指南 {#算法使用指南}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 >
@@ -15,15 +15,15 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [算法使用指南](#算法使用指南)
-  - [📑 目录](#-目录)
-  - [📋 概述](#-概述)
-  - [🚀 快速开始](#-快速开始)
-  - [📊 核心功能](#-核心功能)
+  - [📑 目录](#目录)
+  - [📋 概述](#概述)
+  - [🚀 快速开始](#快速开始)
+  - [📊 核心功能](#核心功能)
     - [1. 排序算法](#1-排序算法)
     - [2. 搜索算法](#2-搜索算法)
     - [3. 图算法](#3-图算法)
@@ -31,14 +31,14 @@
     - [5. 数据结构](#5-数据结构)
     - [6. 机器学习算法](#6-机器学习算法)
     - [7. LeetCode 分类实现](#7-leetcode-分类实现)
-  - [⚡ 并行与异步执行](#-并行与异步执行)
-  - [🔧 形式化验证](#-形式化验证)
-  - [🐛 常见问题与解决方案](#-常见问题与解决方案)
-  - [🔗 相关文档](#-相关文档)
+  - [⚡ 并行与异步执行](#并行与异步执行)
+  - [🔧 形式化验证](#形式化验证)
+  - [🐛 常见问题与解决方案](#常见问题与解决方案)
+  - [🔗 相关文档](#相关文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 📋 概述
+## 📋 概述 {#概述}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -49,7 +49,7 @@
 
 ---
 
-## 🚀 快速开始
+## 🚀 快速开始 {#快速开始}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -72,11 +72,11 @@ fn main() {
 
 ---
 
-## 📊 核心功能
+## 📊 核心功能 {#核心功能}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 1. 排序算法
+### 1. 排序算法 {#1-排序算法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -102,7 +102,7 @@ fn parallel_sort_example() {
 }
 ```
 
-### 2. 搜索算法
+### 2. 搜索算法 {#2-搜索算法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -124,7 +124,7 @@ fn searching_examples() {
 }
 ```
 
-### 3. 图算法
+### 3. 图算法 {#3-图算法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -148,7 +148,7 @@ fn graph_example() {
 }
 ```
 
-### 4. 动态规划
+### 4. 动态规划 {#4-动态规划}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -169,7 +169,7 @@ fn dp_examples() {
 }
 ```
 
-### 5. 数据结构
+### 5. 数据结构 {#5-数据结构}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -201,7 +201,7 @@ fn data_structure_examples() {
 }
 ```
 
-### 6. 机器学习算法
+### 6. 机器学习算法 {#6-机器学习算法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -230,7 +230,7 @@ fn ml_examples() {
 }
 ```
 
-### 7. LeetCode 分类实现
+### 7. LeetCode 分类实现 {#7-leetcode-分类实现}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -251,7 +251,7 @@ fn ml_examples() {
 
 ---
 
-## ⚡ 并行与异步执行
+## ⚡ 并行与异步执行 {#并行与异步执行}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
@@ -276,7 +276,7 @@ fn execution_mode_examples() {
 
 ---
 
-## 🔧 形式化验证
+## 🔧 形式化验证 {#形式化验证}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -301,7 +301,7 @@ fn verified_algorithms() {
 
 ---
 
-## 🐛 常见问题与解决方案
+## 🐛 常见问题与解决方案 {#常见问题与解决方案}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -315,7 +315,7 @@ fn verified_algorithms() {
 
 ---
 
-## 🔗 相关文档
+## 🔗 相关文档 {#相关文档}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -337,7 +337,7 @@ fn verified_algorithms() {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -346,7 +346,7 @@ fn verified_algorithms() {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**

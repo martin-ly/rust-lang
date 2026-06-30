@@ -1,4 +1,4 @@
-# 反例汇编 (Counter-Examples Compendium)
+# 反例汇编 (Counter-Examples Compendium) {#反例汇编-counter-examples-compendium}
 
 > **概念族**: 反例库
 
@@ -22,7 +22,7 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 
 >
 
@@ -31,7 +31,7 @@
 >
 
 - [反例汇编 (Counter-Examples Compendium)](#反例汇编-counter-examples-compendium)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [如何使用本文档](#如何使用本文档)
   - [一、所有权反例](#一所有权反例)
     - [反例 1.1: 使用已移动的值](#反例-11-使用已移动的值)
@@ -53,7 +53,7 @@
   - [八、从反例学习](#八从反例学习)
     - [反例的教育价值](#反例的教育价值)
     - [学习建议](#学习建议)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -61,7 +61,7 @@
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 如何使用本文档
+## 如何使用本文档 {#如何使用本文档}
 
 >
 
@@ -87,13 +87,13 @@
 
 ---
 
-## 一、所有权反例
+## 一、所有权反例 {#一所有权反例}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 反例 1.1: 使用已移动的值
+### 反例 1.1: 使用已移动的值 {#反例-11-使用已移动的值}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -191,7 +191,7 @@ Move(x, y, v) 后:
 
 ---
 
-### 反例 1.2: 部分移动后的使用
+### 反例 1.2: 部分移动后的使用 {#反例-12-部分移动后的使用}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -291,13 +291,13 @@ let Person { name, age } = p;
 
 ---
 
-## 二、借用反例
+## 二、借用反例 {#二借用反例}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 反例 2.1: 可变借用与不可变借用冲突
+### 反例 2.1: 可变借用与不可变借用冲突 {#反例-21-可变借用与不可变借用冲突}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -391,7 +391,7 @@ until r₁ is dropped
 
 ---
 
-### 反例 2.2: 多个可变借用
+### 反例 2.2: 多个可变借用 {#反例-22-多个可变借用}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -471,7 +471,7 @@ let r2 = &mut x;
 
 ---
 
-### 反例 2.3: 悬垂引用
+### 反例 2.3: 悬垂引用 {#反例-23-悬垂引用}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -559,13 +559,13 @@ lifetime(&s) ⊆ lifetime(s)
 
 ---
 
-## 三、生命周期反例
+## 三、生命周期反例 {#三生命周期反例}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 反例 3.1: 返回局部变量的引用
+### 反例 3.1: 返回局部变量的引用 {#反例-31-返回局部变量的引用}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -643,13 +643,13 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ---
 
-## 四、Send/Sync反例
+## 四、Send/Sync反例 {#四sendsync反例}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 反例 4.1: Rc跨线程
+### 反例 4.1: Rc跨线程 {#反例-41-rc跨线程}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -737,7 +737,7 @@ Arc<T>: Send because AtomicUsize operations are thread-safe
 
 ---
 
-### 反例 4.2: RefCell跨线程
+### 反例 4.2: RefCell跨线程 {#反例-42-refcell跨线程}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -815,13 +815,13 @@ thread::spawn(move || {
 
 ---
 
-## 五、异步反例
+## 五、异步反例 {#五异步反例}
 
 >
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 反例 5.1: 跨await持有锁
+### 反例 5.1: 跨await持有锁 {#反例-51-跨await持有锁}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -889,13 +889,13 @@ async fn good() {
 
 ---
 
-## 六、设计模式反例
+## 六、设计模式反例 {#六设计模式反例}
 
 >
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-### 反例 6.1: 尝试实现经典单例
+### 反例 6.1: 尝试实现经典单例 {#反例-61-尝试实现经典单例}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -955,7 +955,7 @@ fn get_instance() -> &'static Singleton {
 
 ---
 
-## 七、反例索引表
+## 七、反例索引表 {#七反例索引表}
 
 >
 
@@ -987,13 +987,13 @@ fn get_instance() -> &'static Singleton {
 
 ---
 
-## 八、从反例学习
+## 八、从反例学习 {#八从反例学习}
 
 >
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-### 反例的教育价值
+### 反例的教育价值 {#反例的教育价值}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -1005,7 +1005,7 @@ fn get_instance() -> &'static Singleton {
 
 4. **快速诊断**: 遇到错误能快速定位
 
-### 学习建议
+### 学习建议 {#学习建议}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -1027,7 +1027,7 @@ fn get_instance() -> &'static Singleton {
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -1037,13 +1037,13 @@ fn get_instance() -> &'static Singleton {
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 | 特性 | 应用场景 | 文档章节 |
 
@@ -1057,7 +1057,7 @@ fn get_instance() -> &'static Singleton {
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 本文档中的所有Rust代码示例均已：
 
@@ -1067,7 +1067,7 @@ fn get_instance() -> &'static Singleton {
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 - Rust 1.94 迁移指南
 
@@ -1099,7 +1099,7 @@ fn get_instance() -> &'static Singleton {
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -1111,7 +1111,7 @@ fn get_instance() -> &'static Singleton {
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 

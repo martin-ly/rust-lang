@@ -1,4 +1,4 @@
-# Rust for Linux：2026 年全景与工程实践
+# Rust for Linux：2026 年全景与工程实践 {#rust-for-linux2026-年全景与工程实践}
 >
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 
@@ -12,7 +12,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -45,7 +45,7 @@
 
 ---
 
-## 一、历史里程碑
+## 一、历史里程碑 {#一历史里程碑}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
@@ -68,11 +68,11 @@
 
 ---
 
-## 二、Rust 在内核中的定位
+## 二、Rust 在内核中的定位 {#二rust-在内核中的定位}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 2.1 设计哲学
+### 2.1 设计哲学 {#21-设计哲学}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -86,7 +86,7 @@
 | 调试成本 | 高（Use-after-free, 竞态） | 低（多数问题在编译期捕获） |
 | 与 C 互操作 | 原生 | 通过 `unsafe` FFI + bindgen |
 
-### 2.2 适用场景
+### 2.2 适用场景 {#22-适用场景}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -105,26 +105,26 @@
 
 ---
 
-## 三、内核 Rust 开发环境
+## 三、内核 Rust 开发环境 {#三内核-rust-开发环境}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 3.1 工具链要求
+### 3.1 工具链要求 {#31-工具链要求}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 ```bash
-# Rust 版本：通常需要特定 nightly 或内核绑定的 stable
+# Rust 版本：通常需要特定 nightly 或内核绑定的 stable {#rust-版本通常需要特定-nightly-或内核绑定的-stable}
 rustup component add rust-src
 
-# 内核配置
+# 内核配置 {#内核配置}
 make menuconfig
-# -> General setup -> Rust support (EXPERIMENTAL) [Y]
-# 注意：虽然 Rust 已结束实验阶段，但部分发行版内核仍保留此菜单名
+# -> General setup -> Rust support (EXPERIMENTAL) [Y] {#general-setup---rust-support-experimental-y}
+# 注意：虽然 Rust 已结束实验阶段，但部分发行版内核仍保留此菜单名 {#注意虽然-rust-已结束实验阶段但部分发行版内核仍保留此菜单名}
 
-# 编译
+# 编译 {#编译}
 make LLVM=1 -j$(nproc)
 ```
 
@@ -134,7 +134,7 @@ make LLVM=1 -j$(nproc)
 - 需要 `rust-src` 组件（用于构建 `core`/`alloc`）
 - 使用 LLVM 工具链而非 GCC（Rust 后端依赖 LLVM）
 
-### 3.2 最小示例：内核模块
+### 3.2 最小示例：内核模块 {#32-最小示例内核模块}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
 >
@@ -185,11 +185,11 @@ impl Drop for HelloRust {
 
 ---
 
-## 四、`kernel` Crate API 概览
+## 四、`kernel` Crate API 概览 {#四kernel-crate-api-概览}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 4.1 核心抽象
+### 4.1 核心抽象 {#41-核心抽象}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 >
@@ -209,7 +209,7 @@ pr_err!("error occurred: {:?}", e);
 static MY_DATA: Mutex<u32> = Mutex::new(0);
 ```
 
-### 4.2 内存管理
+### 4.2 内存管理 {#42-内存管理}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 >
@@ -228,7 +228,7 @@ buf.try_push(42)?;
 let data = Box::try_new(MyStruct { ... }, GFP_KERNEL)?;
 ```
 
-### 4.3 同步原语
+### 4.3 同步原语 {#43-同步原语}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -256,11 +256,11 @@ let shared = Arc::try_new(data, GFP_KERNEL)?;
 
 ---
 
-## 五、生产案例研究
+## 五、生产案例研究 {#五生产案例研究}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-### 5.1 Android Binder IPC（Google）
+### 5.1 Android Binder IPC（Google） {#51-android-binder-ipcgoogle}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -288,7 +288,7 @@ fn handle_transaction(transaction: &Transaction) -> Result<Reply> {
 }
 ```
 
-### 5.2 Asahi GPU 驱动（Apple Silicon）
+### 5.2 Asahi GPU 驱动（Apple Silicon） {#52-asahi-gpu-驱动apple-silicon}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
@@ -305,7 +305,7 @@ fn handle_transaction(transaction: &Transaction) -> Result<Reply> {
 - 利用 Rust 类型状态机管理 GPU 硬件状态转换
 - `unsafe` 块严格限制在 MMIO 寄存器访问层
 
-### 5.3 NVMe 驱动子系统
+### 5.3 NVMe 驱动子系统 {#53-nvme-驱动子系统}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -325,16 +325,16 @@ fn handle_transaction(transaction: &Transaction) -> Result<Reply> {
 
 ---
 
-## 六、与 C 内核模块的互操作
+## 六、与 C 内核模块的互操作 {#六与-c-内核模块的互操作}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 6.1 绑定生成（bindgen）
+### 6.1 绑定生成（bindgen） {#61-绑定生成bindgen}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ```bash
-# 内核自带 bindgen 配置
+# 内核自带 bindgen 配置 {#内核自带-bindgen-配置}
 make rust/bindings
 ```
 
@@ -350,7 +350,7 @@ pub struct file_operations {
 }
 ```
 
-### 6.2 调用约定与 ABI
+### 6.2 调用约定与 ABI {#62-调用约定与-abi}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -374,7 +374,7 @@ pub extern "C" fn rust_helper_process_data(data: *mut c_void, len: usize) -> c_i
 
 ---
 
-## 七、安全关键系统关联
+## 七、安全关键系统关联 {#七安全关键系统关联}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -395,11 +395,11 @@ Rust for Linux 与项目已有的安全关键系统知识体系直接相关：
 
 ---
 
-## 八、挑战与未来方向
+## 八、挑战与未来方向 {#八挑战与未来方向}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 8.1 当前挑战
+### 8.1 当前挑战 {#81-当前挑战}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -411,7 +411,7 @@ Rust for Linux 与项目已有的安全关键系统知识体系直接相关：
 | 社区审查 | 内核维护者需要学习 Rust | Rust 培训计划、 mentorship |
 | 社区争议升温 (2026-05) | Linus Torvalds 审慎表态；核心维护者质疑 Rust 抽象层复杂度；`unsafe` 封装 vs. C 可审查性之争 | 透明度提升、RFC 式讨论、渐进式替换策略 [来源: [LKML 2026-05](https://lore.kernel.org/lkml/)] |
 
-### 8.2 2026-2027 路线图
+### 8.2 2026-2027 路线图 {#82-2026-2027-路线图}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -422,7 +422,7 @@ Rust for Linux 与项目已有的安全关键系统知识体系直接相关：
 
 ---
 
-## 九、参考链接
+## 九、参考链接 {#九参考链接}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -453,7 +453,7 @@ Rust for Linux 与项目已有的安全关键系统知识体系直接相关：
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**

@@ -1,4 +1,4 @@
-# Rust Reference 分章节深度对齐
+# Rust Reference 分章节深度对齐 {#rust-reference-分章节深度对齐}
 
 > **概念族**: 权威来源对齐 / Rust Reference
 > **内容分级**: [核心级]
@@ -11,7 +11,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [Rust Reference 分章节深度对齐](#rust-reference-分章节深度对齐)
   - [目录](#目录)
@@ -32,13 +32,13 @@
 
 ---
 
-## 一、对齐说明
+## 一、对齐说明 {#一对齐说明}
 
 本文档是 [Rust Reference](https://doc.rust-lang.org/reference/) 的 **分章节深度对齐**，将 Reference 的每个主要部分与 `docs/research_notes/` 中的具体概念、机制、反例一一映射。相比 [10_rust_reference_alignment.md](10_rust_reference_alignment.md) 的概览式矩阵，本文档提供更细的粒度。
 
 ---
 
-## 二、前言与介绍
+## 二、前言与介绍 {#二前言与介绍}
 
 | Reference 章节 | 项目文档 | 对齐点 |
 |----------------|----------|--------|
@@ -47,7 +47,7 @@
 
 ---
 
-## 三、词法结构
+## 三、词法结构 {#三词法结构}
 
 | Reference 章节 | 项目文档 | 对齐点 |
 |----------------|----------|--------|
@@ -59,7 +59,7 @@
 
 ---
 
-## 四、类型系统
+## 四、类型系统 {#四类型系统}
 
 | Reference 章节 | 项目文档 | 对齐点 |
 |----------------|----------|--------|
@@ -72,20 +72,20 @@
 
 ---
 
-## 五、表达式
+## 五、表达式 {#五表达式}
 
 | Reference 章节 | 项目文档 | 对齐点 |
 |----------------|----------|--------|
-| [Expressions](https://doc.rust-lang.org/reference/expressions.html) | [crates/c03_control_fn/](../crates/c03_control_fn/README.md) | 表达式求值 |
+| [Expressions](https://doc.rust-lang.org/reference/expressions.html) | [crates/c03_control_fn/](../../crates/c03_control_fn/README.md) | 表达式求值 |
 | [Literal Expressions](https://doc.rust-lang.org/reference/expressions/literal-expr.html) | [type_theory/10_type_system_foundations.md](type_theory/10_type_system_foundations.md) | 字面量 |
 | [Block Expressions](https://doc.rust-lang.org/reference/expressions/block-expr.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | async 块、tail expr drop order |
-| [If / Match](https://doc.rust-lang.org/reference/expressions/if-expr.html) | [crates/c03_control_fn/](../crates/c03_control_fn/README.md) | 控制流 |
+| [If / Match](https://doc.rust-lang.org/reference/expressions/if-expr.html) | [crates/c03_control_fn/](../../crates/c03_control_fn/README.md) | 控制流 |
 | [Call Expressions](https://doc.rust-lang.org/reference/expressions/call-expr.html) | [formal_methods/10_async_state_machine.md](formal_methods/10_async_state_machine.md) | async fn 调用 |
-| [Closure Expressions](https://doc.rust-lang.org/reference/expressions/closure-expr.html) | [crates/c03_control_fn/](../crates/c03_control_fn/README.md) | 闭包 |
+| [Closure Expressions](https://doc.rust-lang.org/reference/expressions/closure-expr.html) | [crates/c03_control_fn/](../../crates/c03_control_fn/README.md) | 闭包 |
 
 ---
 
-## 六、Items
+## 六、Items {#六items}
 
 | Reference 章节 | 项目文档 | 对齐点 |
 |----------------|----------|--------|
@@ -99,7 +99,7 @@
 
 ---
 
-## 七、Attributes
+## 七、Attributes {#七attributes}
 
 | Reference 章节 | 项目文档 | 对齐点 |
 |----------------|----------|--------|
@@ -109,7 +109,7 @@
 
 ---
 
-## 八、Crates 与 Source Files
+## 八、Crates 与 Source Files {#八crates-与-source-files}
 
 | Reference 章节 | 项目文档 | 对齐点 |
 |----------------|----------|--------|
@@ -118,7 +118,7 @@
 
 ---
 
-## 九、Unsafe Rust
+## 九、Unsafe Rust {#九unsafe-rust}
 
 | Reference 章节 | 项目文档 | 对齐点 |
 |----------------|----------|--------|
@@ -128,7 +128,7 @@
 
 ---
 
-## 十、链接与 ABI
+## 十、链接与 ABI {#十链接与-abi}
 
 | Reference 章节 | 项目文档 | 对齐点 |
 |----------------|----------|--------|
@@ -137,7 +137,7 @@
 
 ---
 
-## 十一、未覆盖缺口
+## 十一、未覆盖缺口 {#十一未覆盖缺口}
 
 1. Reference 中 `const` 求值、模式匹配、宏的详细章节可进一步拆分。
 2. 每个对齐点可细化到具体文件行号。
@@ -145,7 +145,7 @@
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
 - [Rust Reference 对齐矩阵](10_rust_reference_alignment.md)
@@ -154,7 +154,7 @@
 
 ---
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 本对齐矩阵同时参考以下 P1 学术权威来源，以形成完整的官方-学术对照网络：
 
@@ -163,7 +163,7 @@
 - [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
 - [Aeneas](https://aeneas-verification.github.io/)
 
-## 社区权威参考
+## 社区权威参考 {#社区权威参考}
 
 - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
 - [This Week in Rust](https://this-week-in-rust.org/)

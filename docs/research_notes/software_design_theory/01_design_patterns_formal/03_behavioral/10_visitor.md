@@ -1,4 +1,4 @@
-# Visitor 形式化分析
+# Visitor 形式化分析 {#visitor-形式化分析}
 
 > **概念族**: 软件设计 / 设计模式
 
@@ -24,14 +24,14 @@
 
 > **权威来源**: [Rust Design Patterns – Behavioral](https://rust-unofficial.github.io/patterns/patterns/behavioural/index.html) | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rust Reference](https://doc.rust-lang.org/reference/)
 
-## 📊 目录 {#-目录}
+## 📊 目录 {#目录}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 - [Visitor 形式化分析](#visitor-形式化分析)
-  - [📊 目录 {#-目录}](#-目录--目录)
+  - [📊 目录](#目录)
   - [权威来源对照](#权威来源对照)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Visitor 结构）](#def-11visitor-结构)
@@ -41,7 +41,7 @@
     - [推论 VI-C1（近似表达）](#推论-vi-c1近似表达)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
-  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196--edition-2024-代码示例更新)
+  - [Rust 1.96+ / Edition 2024 代码示例更新](#rust-196-edition-2024-代码示例更新)
     - [Edition 2024 关键兼容点](#edition-2024-关键兼容点)
   - [Rust 所有权、借用、生命周期与 trait 系统约束分析](#rust-所有权借用生命周期与-trait-系统约束分析)
     - [所有权约束](#所有权约束)
@@ -71,7 +71,7 @@
   - [思维导图](#思维导图)
   - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -81,7 +81,7 @@
 
 ---
 
-## 权威来源对照
+## 权威来源对照 {#权威来源对照}
 
 >
 
@@ -107,13 +107,13 @@
 
 ---
 
-## 形式化定义
+## 形式化定义 {#形式化定义}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Def 1.1（Visitor 结构）
+### Def 1.1（Visitor 结构） {#def-11visitor-结构}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -137,7 +137,7 @@ $$\mathcal{VI} = \langle E, V, \mathit{visit}: V \times E \rightarrow R \rangle$
 
 ---
 
-### Axiom VI1（访问完备公理）
+### Axiom VI1（访问完备公理） {#axiom-vi1访问完备公理}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -151,7 +151,7 @@ $$\forall e: E,\, \exists v: V,\, \mathit{visit}(v, e)\text{ 有定义}$$
 
 ---
 
-### 定理 VI-T1（单分发完备定理）
+### 定理 VI-T1（单分发完备定理） {#定理-vi-t1单分发完备定理}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
@@ -193,7 +193,7 @@ Rust 用 `match` 单分发或 trait 模拟；无 OOP 风格双重分发，表达
 
 ---
 
-### 定理 VI-T2（穷尽匹配定理）
+### 定理 VI-T2（穷尽匹配定理） {#定理-vi-t2穷尽匹配定理}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
@@ -215,7 +215,7 @@ Rust 用 `match` 单分发或 trait 模拟；无 OOP 风格双重分发，表达
 
 ---
 
-### 推论 VI-C1（近似表达）
+### 推论 VI-C1（近似表达） {#推论-vi-c1近似表达}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
@@ -237,7 +237,7 @@ Visitor 与 [expressive_inexpressive_matrix](../../05_boundary_system/10_express
 
 ---
 
-### 概念定义-属性关系-解释论证 层次汇总
+### 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
@@ -257,7 +257,7 @@ Visitor 与 [expressive_inexpressive_matrix](../../05_boundary_system/10_express
 
 ---
 
-## Rust 实现与代码示例
+## Rust 实现与代码示例 {#rust-实现与代码示例}
 
 >
 
@@ -321,7 +321,7 @@ impl Visitor for PrintVisitor {
 
 ---
 
-## Rust 1.96+ / Edition 2024 代码示例更新
+## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
 
 >
 
@@ -395,7 +395,7 @@ fn main() {
 
 ```
 
-### Edition 2024 关键兼容点
+### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
 
@@ -411,25 +411,25 @@ fn main() {
 
 ---
 
-## Rust 所有权、借用、生命周期与 trait 系统约束分析
+## Rust 所有权、借用、生命周期与 trait 系统约束分析 {#rust-所有权借用生命周期与-trait-系统约束分析}
 
 >
 
 > **来源: [The Rust Programming Language – Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)** | **来源: [Rust Reference – Lifetimes](https://doc.rust-lang.org/reference/lifetime-meaning.html)**
 
-### 所有权约束
+### 所有权约束 {#所有权约束}
 
 访问者通常为 `&mut self` 以累加状态；元素 `accept(&self, ...)` 只读借用自身，将访问者可变借用传入。
 
-### 借用与生命周期约束
+### 借用与生命周期约束 {#借用与生命周期约束}
 
 双分派过程中：`shape.accept(&mut visitor)` 不可变借用 shape，可变借用 visitor；visitor 方法内部只读借用具体元素。
 
-### trait 系统约束
+### trait 系统约束 {#trait-系统约束}
 
 `Visitor` trait 定义每个元素类型的访问方法；`Shape` trait 定义 `accept` 实现双分派。
 
-### 与 Rust 类型系统的综合联系
+### 与 Rust 类型系统的综合联系 {#与-rust-类型系统的综合联系}
 
 | Rust 机制 | 本模式使用方式 | 保证 |
 
@@ -447,13 +447,13 @@ fn main() {
 
 ---
 
-## 完整证明
+## 完整证明 {#完整证明}
 
 >
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 形式化论证链
+### 形式化论证链 {#形式化论证链}
 
 > **来源: [ACM](https://dl.acm.org/)**
 
@@ -489,7 +489,7 @@ type_system
 
 ---
 
-## 完整场景示例：AST 美化打印
+## 完整场景示例：AST 美化打印 {#完整场景示例ast-美化打印}
 
 >
 
@@ -555,13 +555,13 @@ impl ExprVisitor<String> for PrettyPrint {
 
 ---
 
-## 形式化属性：不变式、前置/后置条件与安全边界
+## 形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}
 
 >
 
 > **来源: [Formal Methods – Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)** | **来源: [Rust API Guidelines – Safety](https://rust-lang.github.io/api-guidelines/safety.html)**
 
-### 不变式（Invariants）
+### 不变式（Invariants） {#不变式invariants}
 
 1. 每个具体元素对应一个 visit 方法。
 
@@ -569,7 +569,7 @@ impl ExprVisitor<String> for PrettyPrint {
 
 3. 访问者不破坏元素不变式。
 
-### 前置条件（Preconditions）
+### 前置条件（Preconditions） {#前置条件preconditions}
 
 1. 元素与访问者 trait 已实现。
 
@@ -577,7 +577,7 @@ impl ExprVisitor<String> for PrettyPrint {
 
 3. 元素集合在遍历期间有效。
 
-### 后置条件（Postconditions）
+### 后置条件（Postconditions） {#后置条件postconditions}
 
 1. 每个元素被正确访问。
 
@@ -585,11 +585,11 @@ impl ExprVisitor<String> for PrettyPrint {
 
 3. 元素状态不变（只读访问）。
 
-### 安全边界（Safety Boundary）
+### 安全边界（Safety Boundary） {#安全边界safety-boundary}
 
 纯 Safe。访问者模式常涉及 trait object 与双分派；新增元素类型需要修改 Visitor trait，破坏开闭原则，可用 enum 或 sealed trait 缓解。
 
-### 形式化规约汇总
+### 形式化规约汇总 {#形式化规约汇总}
 
 ```text
 
@@ -605,7 +605,7 @@ impl ExprVisitor<String> for PrettyPrint {
 
 ---
 
-## 典型场景
+## 典型场景 {#典型场景}
 
 >
 
@@ -625,7 +625,7 @@ impl ExprVisitor<String> for PrettyPrint {
 
 ---
 
-## 相关模式
+## 相关模式 {#相关模式}
 
 >
 
@@ -643,7 +643,7 @@ impl ExprVisitor<String> for PrettyPrint {
 
 ---
 
-## 实现变体
+## 实现变体 {#实现变体}
 
 >
 
@@ -661,13 +661,13 @@ impl ExprVisitor<String> for PrettyPrint {
 
 ---
 
-## 反例：常见误用及编译器错误
+## 反例：常见误用及编译器错误 {#反例常见误用及编译器错误}
 
 >
 
 > **来源: [Rust By Example – Error Handling](https://doc.rust-lang.org/rust-by-example/error.html)** | **来源: [Rust Compiler Error Index](https://doc.rust-lang.org/error_codes/error-index.html)**
 
-### 反例 1：新增元素类型未实现 visit
+### 反例 1：新增元素类型未实现 visit {#反例-1新增元素类型未实现-visit}
 
 > 以下代码展示运行期反例或不良设计，保留 `rust,ignore` 以避免执行。
 
@@ -685,7 +685,7 @@ impl Shape for Triangle {
 
 **风险**：编译通过但运行期未处理，破坏访问者契约。
 
-### 反例 2：访问者中可变借用元素
+### 反例 2：访问者中可变借用元素 {#反例-2访问者中可变借用元素}
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
 
@@ -701,7 +701,7 @@ impl Visitor for BadVisitor {
 
 **编译器错误**：trait 签名不匹配，`accept` 传入 `&Circle`。
 
-### 反例 3：遍历中修改元素集合
+### 反例 3：遍历中修改元素集合 {#反例-3遍历中修改元素集合}
 
 > 以下代码片段为示意性伪代码，非完整可编译示例。
 
@@ -715,7 +715,7 @@ for s in &shapes { s.accept(&mut visitor); shapes.push(...); }
 
 ---
 
-## 选型决策树
+## 选型决策树 {#选型决策树}
 
 >
 
@@ -737,7 +737,7 @@ for s in &shapes { s.accept(&mut visitor); shapes.push(...); }
 
 ---
 
-## 与 GoF 对比
+## 与 GoF 对比 {#与-gof-对比}
 
 >
 
@@ -755,7 +755,7 @@ for s in &shapes { s.accept(&mut visitor); shapes.push(...); }
 
 ---
 
-## 边界
+## 边界 {#边界}
 
 >
 
@@ -773,7 +773,7 @@ for s in &shapes { s.accept(&mut visitor); shapes.push(...); }
 
 ---
 
-## 与 Rust 1.93 的对应
+## 与 Rust 1.93 的对应 {#与-rust-193-的对应}
 
 >
 
@@ -789,7 +789,7 @@ for s in &shapes { s.accept(&mut visitor); shapes.push(...); }
 
 ---
 
-## 思维导图
+## 思维导图 {#思维导图}
 
 >
 
@@ -839,7 +839,7 @@ mindmap
 
 ---
 
-## 与其他模式的关系图
+## 与其他模式的关系图 {#与其他模式的关系图}
 
 >
 
@@ -867,7 +867,7 @@ graph LR
 
 ---
 
-## 实质内容五维自检
+## 实质内容五维自检 {#实质内容五维自检}
 
 >
 
@@ -891,7 +891,7 @@ graph LR
 
 ---
 
-## 🆕 Rust 1.94 深度整合更新
+## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}
 
 >
 
@@ -901,13 +901,13 @@ graph LR
 
 > **更新日期**: 2026-03-14
 
-### 本文档的Rust 1.94更新要点
+### 本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
-#### 核心特性应用
+#### 核心特性应用 {#核心特性应用}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 
@@ -923,7 +923,7 @@ graph LR
 
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
-#### 代码示例更新
+#### 代码示例更新 {#代码示例更新}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
@@ -935,7 +935,7 @@ graph LR
 
 - ✅ 通过标准库测试
 
-#### 相关文档
+#### 相关文档 {#相关文档}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
@@ -969,7 +969,7 @@ graph LR
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 >
 
@@ -981,7 +981,7 @@ graph LR
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Design Pattern](https://en.wikipedia.org/wiki/Design_Pattern)**
 

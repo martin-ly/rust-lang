@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **P** — Practice
 > **双维定位**: E×Tool — 工具链与生态系统
 > **定位**: 把“如何调优编译参数”和“如何在 Cargo.toml 中统一管理 lint”讲清楚，覆盖 Profile 与 Cargo 自有 lint 两层机制。
-> **前置概念**: [Cargo Manifest Reference](64_cargo_manifest_reference.md) · [Cargo Toolchain](01_toolchain.md)
+> **前置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > **后置概念**: [Cargo Authentication and Cache](63_cargo_authentication_and_cache.md) · [DevOps and CI/CD](28_devops_and_ci_cd.md)
 
 ---

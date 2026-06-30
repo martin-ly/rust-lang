@@ -1,4 +1,4 @@
-# 宏速查卡
+# 宏速查卡 {#宏速查卡}
 >
 > **概念族**: 速查卡
 
@@ -15,26 +15,26 @@
 
 ---
 
-## 📑 目录
+## 📑 目录 {#目录}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [宏速查卡](#宏速查卡)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [声明宏 (macro\_rules!)](#声明宏-macro_rules)
     - [基本语法](#基本语法)
     - [参数模式](#参数模式)
     - [重复模式](#重复模式)
     - [常见片段类型](#常见片段类型)
   - [过程宏](#过程宏)
-    - [派生宏](#派生宏)
-    - [属性宏](#属性宏)
+    - [派生宏](#派生宏-1)
+    - [属性宏](#属性宏-1)
     - [函数式宏](#函数式宏)
   - [常见宏示例](#常见宏示例)
     - [vec](#vec)
-    - [println! / format](#println--format)
+    - [println! / format](#println-format)
     - [assert](#assert)
-    - [todo! / unimplemented](#todo--unimplemented)
+    - [todo! / unimplemented](#todo-unimplemented)
     - [include](#include)
   - [宏调试技巧](#宏调试技巧)
     - [查看展开](#查看展开)
@@ -46,24 +46,24 @@
   - [常用宏](#常用宏)
   - [派生宏](#派生宏-1)
   - [属性宏](#属性宏-1)
-  - [🌍 权威国际化资源链接](#-权威国际化资源链接)
+  - [🌍 权威国际化资源链接](#权威国际化资源链接)
     - [Rust Reference 核心章节](#rust-reference-核心章节)
     - [The Rust Programming Language 核心章节](#the-rust-programming-language-核心章节)
-    - [Rust Standard Library 核心 API / 模块](#rust-standard-library-核心-api--模块)
-    - [Rust By Example / Rust Cookbook / cheats.rs](#rust-by-example--rust-cookbook--cheatsrs)
+    - [Rust Standard Library 核心 API / 模块](#rust-standard-library-核心-api-模块)
+    - [Rust By Example / Rust Cookbook / cheats.rs](#rust-by-example-rust-cookbook-cheatsrs)
     - [宏系统专属权威链接](#宏系统专属权威链接)
       - [Reference Macros](#reference-macros)
       - [Standard Library proc-macro](#standard-library-proc-macro)
-      - [Rust By Example / Cookbook / cheats.rs](#rust-by-example--cookbook--cheatsrs)
-      - [proc-macro RFC / rustc dev guide / Little Book](#proc-macro-rfc--rustc-dev-guide--little-book)
+      - [Rust By Example / Cookbook / cheats.rs](#rust-by-example-cookbook-cheatsrs)
+      - [proc-macro RFC / rustc dev guide / Little Book](#proc-macro-rfc-rustc-dev-guide-little-book)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
-## 声明宏 (macro_rules!)
+## 声明宏 (macro_rules!) {#声明宏-macro_rules}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 基本语法
+### 基本语法 {#基本语法}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -79,7 +79,7 @@ macro_rules! say_hello {
 say_hello!();  // 展开: println!("Hello!");
 ```
 
-### 参数模式
+### 参数模式 {#参数模式}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -102,7 +102,7 @@ print_value!(42);
 print_value!(1, 2);
 ```
 
-### 重复模式
+### 重复模式 {#重复模式}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -125,7 +125,7 @@ vec![1, 2, 3];
 vec![1, 2, 3,];  // 带结尾逗号
 ```
 
-### 常见片段类型
+### 常见片段类型 {#常见片段类型}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 >
@@ -146,11 +146,11 @@ vec![1, 2, 3,];  // 带结尾逗号
 
 ---
 
-## 过程宏
+## 过程宏 {#过程宏}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 派生宏
+### 派生宏 {#派生宏-1}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 >
@@ -173,7 +173,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 struct MyStruct;
 ```
 
-### 属性宏
+### 属性宏 {#属性宏-1}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 >
@@ -193,7 +193,7 @@ pub fn my_attr(args: TokenStream, input: TokenStream) -> TokenStream {
 fn my_func() {}
 ```
 
-### 函数式宏
+### 函数式宏 {#函数式宏}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 >
@@ -212,11 +212,11 @@ my_macro!(...);
 
 ---
 
-## 常见宏示例
+## 常见宏示例 {#常见宏示例}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### vec
+### vec {#vec}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 >
@@ -228,7 +228,7 @@ let v = vec![1, 2, 3];
 let v = vec![0; 5];  // [0, 0, 0, 0, 0]
 ```
 
-### println! / format
+### println! / format {#println-format}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
 
@@ -240,7 +240,7 @@ println!("{:.2}", float);  // 两位小数
 println!("{:>8}", text);   // 右对齐，宽度8
 ```
 
-### assert
+### assert {#assert}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -251,7 +251,7 @@ assert_ne!(a, b);
 assert!(cond, "message: {}", arg);  // 自定义消息
 ```
 
-### todo! / unimplemented
+### todo! / unimplemented {#todo-unimplemented}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
@@ -265,7 +265,7 @@ fn stub() {
 }
 ```
 
-### include
+### include {#include}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
 
@@ -277,23 +277,23 @@ include_bytes!("path/to/file.bin");  // 包含为&[u8]
 
 ---
 
-## 宏调试技巧
+## 宏调试技巧 {#宏调试技巧}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-### 查看展开
+### 查看展开 {#查看展开}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 ```bash
-# 查看宏展开
+# 查看宏展开 {#查看宏展开}
 cargo expand
 
-# 或 nightly
+# 或 nightly {#或-nightly}
 cargo rustc -- -Z unpretty=expanded
 ```
 
-### trace_macros
+### trace_macros {#trace_macros}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
@@ -307,7 +307,7 @@ trace_macros!(false);
 
 ---
 
-## 宏卫生性 (Hygiene)
+## 宏卫生性 (Hygiene) {#宏卫生性-hygiene}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -325,7 +325,7 @@ let four = using_a!(a / 10);  // 错误! a在宏外不可见
 
 ---
 
-## 递归宏
+## 递归宏 {#递归宏}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -341,7 +341,7 @@ count_exprs!(1, 2, 3);  // 3
 
 ---
 
-## 条件编译宏
+## 条件编译宏 {#条件编译宏}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
@@ -358,7 +358,7 @@ struct MyStruct;
 
 ---
 
-## 编译器内置宏
+## 编译器内置宏 {#编译器内置宏}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
@@ -375,7 +375,7 @@ struct MyStruct;
 
 ---
 
-## 常用宏
+## 常用宏 {#常用宏}
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
@@ -391,7 +391,7 @@ struct MyStruct;
 
 ---
 
-## 派生宏
+## 派生宏 {#派生宏-1}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -404,7 +404,7 @@ struct Point { x: i32, y: i32 }
 
 ---
 
-## 属性宏
+## 属性宏 {#属性宏-1}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
@@ -421,7 +421,7 @@ struct Point { x: i32, y: i32 }
 
 ---
 
-## 🌍 权威国际化资源链接
+## 🌍 权威国际化资源链接 {#权威国际化资源链接}
 >
 > **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -432,7 +432,7 @@ struct Point { x: i32, y: i32 }
 
 本节为速查内容提供官方权威来源与社区经典参考的直通链接，便于深入验证与扩展阅读。
 
-### Rust Reference 核心章节
+### Rust Reference 核心章节 {#rust-reference-核心章节}
 
 - [Reference 首页](https://doc.rust-lang.org/reference/)
 - [Types](https://doc.rust-lang.org/reference/types.html)
@@ -441,7 +441,7 @@ struct Point { x: i32, y: i32 }
 - [Statements](https://doc.rust-lang.org/reference/statements.html)
 - [Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html)
 
-### The Rust Programming Language 核心章节
+### The Rust Programming Language 核心章节 {#the-rust-programming-language-核心章节}
 
 - [TRPL 首页](https://doc.rust-lang.org/book/)
 - [Ch. 4 - Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
@@ -452,7 +452,7 @@ struct Point { x: i32, y: i32 }
 - [Ch. 16 - Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 - [Ch. 19 - Advanced Features / Macros](https://doc.rust-lang.org/book/ch19-06-macros.html)
 
-### Rust Standard Library 核心 API / 模块
+### Rust Standard Library 核心 API / 模块 {#rust-standard-library-核心-api-模块}
 
 - [std 首页](https://doc.rust-lang.org/std/)
 - [std::result](https://doc.rust-lang.org/std/result/)
@@ -462,7 +462,7 @@ struct Point { x: i32, y: i32 }
 - [std::panic](https://doc.rust-lang.org/std/panic/)
 - [std::marker (Send / Sync / PhantomData)](https://doc.rust-lang.org/std/marker/)
 
-### Rust By Example / Rust Cookbook / cheats.rs
+### Rust By Example / Rust Cookbook / cheats.rs {#rust-by-example-rust-cookbook-cheatsrs}
 
 - [Rust By Example 首页](https://doc.rust-lang.org/rust-by-example/)
 - [Rust Cookbook 首页](https://rust-lang-nursery.github.io/rust-cookbook/)
@@ -470,30 +470,30 @@ struct Point { x: i32, y: i32 }
 
 ---
 
-### 宏系统专属权威链接
+### 宏系统专属权威链接 {#宏系统专属权威链接}
 
 > **来源: [Rust Reference - Macros](https://doc.rust-lang.org/reference/macros.html)**
 > **来源: [TRPL Ch. 19 - Macros](https://doc.rust-lang.org/book/ch19-06-macros.html)**
 
-#### Reference Macros
+#### Reference Macros {#reference-macros}
 
 - [Macros](https://doc.rust-lang.org/reference/macros.html)
 - [Macro Rules](https://doc.rust-lang.org/reference/macros-by-example.html)
 - [Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)
 - [Derive Macros](https://doc.rust-lang.org/reference/attributes/derive.html)
 
-#### Standard Library proc-macro
+#### Standard Library proc-macro {#standard-library-proc-macro}
 
 - [std::proc_macro](https://doc.rust-lang.org/proc_macro/)
 - [proc_macro::TokenStream](https://doc.rust-lang.org/proc_macro/struct.TokenStream.html)
 
-#### Rust By Example / Cookbook / cheats.rs
+#### Rust By Example / Cookbook / cheats.rs {#rust-by-example-cookbook-cheatsrs}
 
 - [RBE - Macros](https://doc.rust-lang.org/rust-by-example/macros.html)
 - [RBE - macro_rules!](https://doc.rust-lang.org/rust-by-example/macros.html)
 - [cheats.rs - Macros](https://cheats.rs/#macros)
 
-#### proc-macro RFC / rustc dev guide / Little Book
+#### proc-macro RFC / rustc dev guide / Little Book {#proc-macro-rfc-rustc-dev-guide-little-book}
 
 - [RFC 1566 - Procedural Macros](https://rust-lang.github.io/rfcs/1566-proc-macros.html)
 - [rustc dev guide - Macro Expansion](https://rustc-dev-guide.rust-lang.org/macro-expansion.html)
@@ -501,7 +501,7 @@ struct Point { x: i32, y: i32 }
 - [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)
 - [The Little Book of Rust Macros - Syntax Extensions](https://veykril.github.io/tlborm/decl-macros/minutiae/fragment-specifiers.html)
 
-## 相关概念
+## 相关概念 {#相关概念}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
@@ -510,7 +510,7 @@ struct Point { x: i32, y: i32 }
 
 ---
 
-## 权威来源索引
+## 权威来源索引 {#权威来源索引}
 
 > **来源: [Wikipedia - Macro (computer science)](https://en.wikipedia.org/wiki/Macro_(computer_science))**
 > **来源: [TRPL Ch. 19 - Macros](https://doc.rust-lang.org/book/ch19-00-advanced-features.html)**

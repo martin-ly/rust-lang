@@ -1,4 +1,4 @@
-# 权威来源自动补全计划
+# 权威来源自动补全计划 {#权威来源自动补全计划}
 
 > **概念族**: 权威来源对齐 / 补全计划
 > **内容分级**: [核心级]
@@ -12,7 +12,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [权威来源自动补全计划](#权威来源自动补全计划)
   - [目录](#目录)
@@ -29,13 +29,13 @@
 
 ---
 
-## 一、背景与目标
+## 一、背景与目标 {#一背景与目标}
 
 本文档是 `docs/research_notes/` [权威来源对齐网络](10_authoritative_source_alignment_network.md)的持续改进计划。目标是通过自动化建议工具，系统性地发现并补齐研究笔记中 P0 官方、P1 学术、P2 社区三个层级的权威来源缺口，确保每个核心概念族都有可追溯、可验证的国际化权威来源支撑。
 
 ---
 
-## 二、当前覆盖率状态
+## 二、当前覆盖率状态 {#二当前覆盖率状态}
 
 根据 `scripts/maintenance/authority_coverage_dashboard.py` 对 `docs/research_notes/` 全部 309 篇 Markdown 文件的扫描结果：
 
@@ -55,7 +55,7 @@
 
 ---
 
-## 三、P0/P1/P2 缺口最大的概念族 TOP 10
+## 三、P0/P1/P2 缺口最大的概念族 TOP 10 {#三p0p1p2-缺口最大的概念族-top-10}
 
 按 `P0×100 + P1×10 + P2` 综合缺口服分排序，当前最需要补全的 10 个概念族如下：
 
@@ -76,11 +76,11 @@
 
 ---
 
-## 四、`suggest_authoritative_sources.py` 使用说明
+## 四、`suggest_authoritative_sources.py` 使用说明 {#四suggest_authoritative_sourcespy-使用说明}
 
 新脚本 `scripts/maintenance/suggest_authoritative_sources.py` 用于自动生成权威来源补全建议。
 
-### 功能
+### 功能 {#功能}
 
 - 递归读取 `docs/research_notes/` 下所有 Markdown 文件。
 - 按 `概念族` 元信息分组。
@@ -89,20 +89,20 @@
 - 输出 Markdown 报告，包含每个概念族下缺少各层级的文件及推荐链接。
 - 信息性工具，退出码始终为 0。
 
-### 命令行用法
+### 命令行用法 {#命令行用法}
 
 ```bash
-# 直接打印报告到标准输出
+# 直接打印报告到标准输出 {#直接打印报告到标准输出}
 python scripts/maintenance/suggest_authoritative_sources.py
 
-# 将报告写入指定 Markdown 文件
+# 将报告写入指定 Markdown 文件 {#将报告写入指定-markdown-文件}
 python scripts/maintenance/suggest_authoritative_sources.py --output=suggestions.md
 ```
 
-### 输出示例
+### 输出示例 {#输出示例}
 
 ```markdown
-### 形式化模块
+### 形式化模块 {#形式化模块}
 
 **检测关键词**：模块
 
@@ -119,7 +119,7 @@ python scripts/maintenance/suggest_authoritative_sources.py --output=suggestions
 
 ---
 
-## 五、下一阶段补全优先级
+## 五、下一阶段补全优先级 {#五下一阶段补全优先级}
 
 基于当前覆盖率与缺口分布，下一阶段补全按以下优先级推进：
 
@@ -142,7 +142,7 @@ python scripts/maintenance/suggest_authoritative_sources.py --output=suggestions
 
 ---
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
 - [权威来源对齐缺口分析](10_authoritative_alignment_gap_analysis.md)
@@ -150,7 +150,7 @@ python scripts/maintenance/suggest_authoritative_sources.py --output=suggestions
 - [知识图谱索引](10_knowledge_graph_index.md)
 - [研究笔记完整索引](INDEX.md)
 
-## 社区权威参考
+## 社区权威参考 {#社区权威参考}
 
 - [This Week in Rust](https://this-week-in-rust.org/)
 - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)

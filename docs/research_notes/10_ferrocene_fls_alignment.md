@@ -1,4 +1,4 @@
-# Ferrocene Language Specification 对齐矩阵
+# Ferrocene Language Specification 对齐矩阵 {#ferrocene-language-specification-对齐矩阵}
 
 > **概念族**: 权威来源对齐 / Ferrocene FLS
 > **内容分级**: [核心级]
@@ -11,7 +11,7 @@
 
 ---
 
-## 目录
+## 目录 {#目录}
 
 - [Ferrocene Language Specification 对齐矩阵](#ferrocene-language-specification-对齐矩阵)
   - [目录](#目录)
@@ -29,13 +29,13 @@
 
 ---
 
-## 一、对齐说明
+## 一、对齐说明 {#一对齐说明}
 
 [Ferrocene Language Specification (FLS)](https://spec.ferrocene.dev/) 是 Rust 的安全关键子集形式化规范，被用于 DO-178C / ISO 26262 等认证场景。本文档将 `docs/research_notes/` 中的概念与 FLS 章节建立映射，突出项目文档在可认证语义层面的覆盖度。
 
 ---
 
-## 二、词法与语法
+## 二、词法与语法 {#二词法与语法}
 
 | FLS 章节 | 项目文档 | 状态 | 备注 |
 |----------|----------|------|------|
@@ -44,7 +44,7 @@
 
 ---
 
-## 三、类型系统
+## 三、类型系统 {#三类型系统}
 
 | FLS 章节 | 项目文档 | 状态 | 备注 |
 |----------|----------|------|------|
@@ -55,7 +55,7 @@
 
 ---
 
-## 四、所有权与借用
+## 四、所有权与借用 {#四所有权与借用}
 
 | FLS 章节 | 项目文档 | 状态 | 备注 |
 |----------|----------|------|------|
@@ -65,7 +65,7 @@
 
 ---
 
-## 五、并发与 unsafe
+## 五、并发与 unsafe {#五并发与-unsafe}
 
 | FLS 章节 | 项目文档 | 状态 | 备注 |
 |----------|----------|------|------|
@@ -75,7 +75,7 @@
 
 ---
 
-## 六、Items 与 Modules
+## 六、Items 与 Modules {#六items-与-modules}
 
 | FLS 章节 | 项目文档 | 状态 | 备注 |
 |----------|----------|------|------|
@@ -85,7 +85,7 @@
 
 ---
 
-## 七、形式化标注
+## 七、形式化标注 {#七形式化标注}
 
 | FLS 章节 | 项目文档 | 状态 | 备注 |
 |----------|----------|------|------|
@@ -94,7 +94,7 @@
 
 ---
 
-## 八、未覆盖缺口
+## 八、未覆盖缺口 {#八未覆盖缺口}
 
 1. FLS 对 `const` 求值、模式匹配的细粒度规则可进一步展开。
 2. FLS 的「限制子集」与项目 unsafe/FFI 边界可建立更明确的子集映射。
@@ -102,7 +102,7 @@
 
 > **权威来源**: [Ferrocene Language Specification](https://spec.ferrocene.dev/)
 
-## 相关概念
+## 相关概念 {#相关概念}
 
 - [权威来源对齐网络总索引](10_authoritative_source_alignment_network.md)
 - [国际形式化验证索引](10_international_formal_verification_index.md)
@@ -112,7 +112,7 @@
 
 ---
 
-## 学术权威参考
+## 学术权威参考 {#学术权威参考}
 
 本对齐矩阵同时参考以下 P1 学术权威来源，以形成完整的官方-学术对照网络：
 
@@ -121,7 +121,7 @@
 - [RustSEM](https://link.springer.com/article/10.1007/s10703-024-00460-3)
 - [Aeneas](https://aeneas-verification.github.io/)
 
-## 社区权威参考
+## 社区权威参考 {#社区权威参考}
 
 - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
 - [This Week in Rust](https://this-week-in-rust.org/)

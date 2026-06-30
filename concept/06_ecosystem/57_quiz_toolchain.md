@@ -15,12 +15,12 @@
 > **后置概念**: N/A
 ---
 
-> **来源**: [Cargo Book](https://doc.rust-lang.org/cargo/) · [rustup](https://rust-lang.github.io/rustup/)
+> **来源**: [Cargo Book](https://doc.rust-lang.org/cargo/) · [rustup](https://rust-lang.github.io/rustup/) · [工具链](01_toolchain.md)
 > [Clippy Documentation](https://doc.rust-lang.org/clippy/) ·
 > [Miri Documentation](https://github.com/rust-lang/miri) ·
 > [Rustfmt Documentation](https://github.com/rust-lang/rustfmt)
 >
-> **前置概念**:
+> **前置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 > [Toolchain](01_toolchain.md) ·
 > Cargo Workspaces
 
