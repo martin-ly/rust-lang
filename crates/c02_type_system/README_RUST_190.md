@@ -80,7 +80,6 @@
     - [核心成就](#核心成就)
     - [技术亮点](#技术亮点)
     - [项目价值](#项目价值)
-  - [_感谢您对本项目的关注和支持！如有任何问题或建议，欢迎反馈。让我们一起推动Rust类型系统的发展！_ 🦀](#感谢您对本项目的关注和支持如有任何问题或建议欢迎反馈让我们一起推动rust类型系统的发展-)
 
 ## 🚀 项目概述
 
@@ -1569,6 +1568,7 @@ git push origin feature/your-feature-name
 ---
 
 _感谢您对本项目的关注和支持！如有任何问题或建议，欢迎反馈。让我们一起推动Rust类型系统的发展！_ 🦀
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

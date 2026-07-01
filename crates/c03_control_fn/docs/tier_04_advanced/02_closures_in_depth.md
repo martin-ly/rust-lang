@@ -48,7 +48,6 @@
     - [事件处理系统](#事件处理系统)
     - [惰性求值](#惰性求值)
     - [函数缓存（Memoization）](#函数缓存memoization)
-  - [**🚀 深入掌握Rust闭包，释放函数式编程的威力！** 🦀✨](#-深入掌握rust闭包释放函数式编程的威力-)
 
 ---
 
@@ -758,6 +757,7 @@ fn main() {
 ---
 
 **🚀 深入掌握Rust闭包，释放函数式编程的威力！** 🦀✨
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

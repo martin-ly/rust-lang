@@ -40,7 +40,6 @@
     - [官方文档](#官方文档)
     - [工具](#工具)
     - [最佳实践](#最佳实践)
-  - [_本指南持续更新中，欢迎反馈和建议！_ 🦀](#本指南持续更新中欢迎反馈和建议-)
 
 ---
 
@@ -673,6 +672,7 @@ cargo deps --all-deps | dot -Tpng > deps.png
 **适用于**: Rust 1.90+, Cargo 1.90+
 
 _本指南持续更新中，欢迎反馈和建议！_ 🦀
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

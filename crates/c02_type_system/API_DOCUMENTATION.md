@@ -67,7 +67,6 @@
     - [Cargo.toml 配置](#cargotoml-配置)
     - [特性标志](#特性标志)
   - [📚 相关资源](#-相关资源)
-  - [**维护者**: Rust 类型系统项目组](#维护者-rust-类型系统项目组)
 
 ## 📖 文档概述
 
@@ -839,6 +838,7 @@ wasm = []
 **文档版本**: 1.0
 **最后更新**: 2025年1月27日
 **维护者**: Rust 类型系统项目组
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

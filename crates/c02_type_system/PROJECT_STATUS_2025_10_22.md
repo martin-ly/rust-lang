@@ -25,7 +25,6 @@
     - [研究者](#研究者)
   - [🔧 维护状态](#-维护状态)
   - [📞 联系方式](#-联系方式)
-  - [**🦀 Rust Type System Documentation - 优质资源，随时可用！** ✨](#-rust-type-system-documentation---优质资源随时可用-)
 
 ## 🎊 项目完成公告
 
@@ -166,6 +165,7 @@ c02_type_system/docs/
 ---
 
 **🦀 Rust Type System Documentation - 优质资源，随时可用！** ✨
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

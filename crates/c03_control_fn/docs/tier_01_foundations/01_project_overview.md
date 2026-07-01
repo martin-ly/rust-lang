@@ -52,7 +52,6 @@
   - [🔄 维护信息](#-维护信息)
     - [更新计划](#更新计划)
     - [质量保证](#质量保证)
-  - [**🎯 开始探索Rust控制流与函数的精彩世界！** 🦀✨](#-开始探索rust控制流与函数的精彩世界-)
 
 ---
 
@@ -502,6 +501,7 @@ fn divide(a: i32, b: i32) -> Result<i32, String> {
 ---
 
 **🎯 开始探索Rust控制流与函数的精彩世界！** 🦀✨
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

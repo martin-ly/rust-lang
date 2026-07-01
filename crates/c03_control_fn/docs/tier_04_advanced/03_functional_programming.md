@@ -46,7 +46,6 @@
     - [Railway-Oriented Programming](#railway-oriented-programming)
     - [流式数据处理](#流式数据处理)
     - [函数式错误处理链](#函数式错误处理链)
-  - [**🎯 拥抱函数式编程，编写更简洁、更可靠的Rust代码！** 🦀✨](#-拥抱函数式编程编写更简洁更可靠的rust代码-)
 
 ---
 
@@ -739,6 +738,7 @@ fn main() {
 ---
 
 **🎯 拥抱函数式编程，编写更简洁、更可靠的Rust代码！** 🦀✨
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

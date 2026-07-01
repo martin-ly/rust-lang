@@ -291,6 +291,7 @@ cargo bench -p c04_generic
 ---
 
 [返回模块主页](../README.md) | [返回文档中心](../../docs/README.md)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
