@@ -38,6 +38,7 @@ where
 // 使用
 apply(|s| s);
 ```
+
 ---
 
 ## 2. 生命周期子类型
@@ -51,6 +52,7 @@ fn longest<'a>(x: &'a str, y: &'static str) -> &'a str {
     if x.len() > y.len() { x } else { y }
 }
 ```
+
 ---
 
 ## 3. 协变与逆变
@@ -65,6 +67,7 @@ fn covariant<'a, 'b: 'a>(x: &'a str) -> &'b str {
     x
 }
 ```
+
 ### 逆变 (Contravariance)
 
 ```rust
@@ -73,6 +76,7 @@ trait Trait<'a> {
     fn method(&self, x: &'a str);
 }
 ```
+
 ---
 
 ## 4. 生命周期约束
@@ -86,6 +90,7 @@ where
     x
 }
 ```
+
 ---
 
 ## 5. GAT (Generic Associated Types)
@@ -99,6 +104,7 @@ trait StreamingIterator {
     fn next(&mut self) -> Option<Self::Item<'_>>;
 }
 ```
+
 ---
 
 **相关文档**:

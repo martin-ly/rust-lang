@@ -67,6 +67,7 @@ macro_rules! create_vec {
 // 如果类型不匹配，错误消息会指向具体的宏展开位置
 let v: Vec<i32> = create_vec![1, 2, "three"]; // 更清晰的错误消息
 ```
+
 ### 2. 增强的 const 上下文（宏配置计算）
 
 Rust 1.92.0 增强了 const 上下文的支持，允许在宏中执行更多的编译时计算：
@@ -91,6 +92,7 @@ macro_rules! const_array {
 
 const ARR: [u8; calculate_size()] = const_array![calculate_size()];
 ```
+
 ### 3. 优化的编译器性能
 
 Rust 1.92.0 在编译器性能方面进行了优化：
@@ -125,6 +127,7 @@ fn test() {
     assert_eq_typed!(a, b); // 错误消息更加清晰
 }
 ```
+
 ### 示例 2: Const 上下文宏
 
 ```rust
@@ -137,6 +140,7 @@ macro_rules! const_initializer {
 
 const VALUE: i32 = const_initializer!(10); // 在 const 上下文中使用宏
 ```
+
 ---
 
 ## 迁移指南

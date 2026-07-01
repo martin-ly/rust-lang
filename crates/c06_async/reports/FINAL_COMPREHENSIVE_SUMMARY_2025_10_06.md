@@ -11,7 +11,7 @@
       - [📄 `docs/COMPREHENSIVE_ASYNC_KNOWLEDGE_CLASSIFICATION_2025.md` (15,000+ 字)](#-docscomprehensive_async_knowledge_classification_2025md-15000-字)
       - [📄 `docs/COMPREHENSIVE_ASYNC_IMPLEMENTATION_SUMMARY_2025.md` (3,000+ 字)](#-docscomprehensive_async_implementation_summary_2025md-3000-字)
       - [📄 `docs/异步编程全面梳理最终报告_2025_10_06.md` (3,000+ 字)](#-docs异步编程全面梳理最终报告_2025_10_06md-3000-字)
-      - [📄 `async_programming_comprehensive_review_readme_2025_10_06.md` (2,000+ 字)](#-异步编程全面梳理_readme_2025_10_06md-2000-字)
+      - [📄 `async_programming_comprehensive_review_readme_2025_10_06.md` (2,000+ 字)](#-async_programming_comprehensive_review_readme_2025_10_06md-2000-字)
     - [2. 核心示例文件 (2个，3,900+ 行代码)](#2-核心示例文件-2个3900-行代码)
       - [📄 `examples/reactor_pattern_comprehensive_2025.rs` (1,800+ 行)](#-examplesreactor_pattern_comprehensive_2025rs-1800-行)
       - [📄 `examples/actor_pattern_comprehensive_2025.rs` (2,100+ 行)](#-examplesactor_pattern_comprehensive_2025rs-2100-行)
@@ -173,6 +173,7 @@
    ├── 7.2 中级路径 (3-5周)
    └── 7.3 高级路径 (5-8周)
 ```
+
 **特点**:
 
 - ✅ 完整的知识体系分类
@@ -269,6 +270,7 @@
 // - 性能测试: 高吞吐量场景 (10,000 事件)
 // - 单元测试 (4个测试用例)
 ```
+
 **关键特性**:
 
 - ✅ 优先级调度 (BinaryHeap 实现)
@@ -334,6 +336,7 @@
 // - 性能测试: 高并发消息处理 (1,000 操作)
 // - 单元测试 (4个测试用例)
 ```
+
 **关键特性**:
 
 - ✅ 完整的 Actor 生命周期管理
@@ -370,6 +373,7 @@ Reactor = (EventQueue, Handlers, Demultiplexer, EventLoop)
 - Demultiplexer: Events → Event   事件分离器
 - EventLoop: () → ()              事件循环
 ```
+
 #### 核心不变量
 
 1. **单线程保证**: ∀ event ∈ EventQueue, process(event) 在同一线程执行
@@ -429,6 +433,7 @@ Actor = (State, Behavior, Mailbox, Address)
 - Mailbox: Queue<Message>           消息队列
 - Address: ActorRef                 Actor 引用
 ```
+
 #### 核心原则
 
 1. **封装性 (Encapsulation)**: Actor 的状态只能通过消息修改
@@ -447,6 +452,7 @@ Created → Started → Running → Stopping → Stopped
     ↓         ↓         ↓         ↓         ↓
   preStart  receive  receive  postStop   (终止)
 ```
+
 #### 监督策略
 
 1. **Resume**: 继续处理下一条消息
@@ -509,6 +515,7 @@ P ⊓ Q      : Choice
 ch!v       : Send value v on channel ch
 ch?x       : Receive value into x from channel ch
 ```
+
 #### 实现文件2
 
 - `examples/ultimate_async_theory_practice_2025.rs` (CSP 部分)
@@ -657,11 +664,13 @@ ch?x       : Receive value into x from channel ch
 ```bash
 cat async_programming_comprehensive_review_readme_2025_10_06.md
 ```
+
 ### 第二步: 阅读知识分类体系
 
 ```bash
 cat docs/COMPREHENSIVE_ASYNC_KNOWLEDGE_CLASSIFICATION_2025.md
 ```
+
 ### 第三步: 运行核心示例
 
 ```bash
@@ -671,11 +680,13 @@ cargo run --example reactor_pattern_comprehensive_2025
 # Actor 模式
 cargo run --example actor_pattern_comprehensive_2025
 ```
+
 ### 第四步: 查看最终报告
 
 ```bash
 cat docs/异步编程全面梳理最终报告_2025_10_06.md
 ```
+
 ### 第五步: 深入学习
 
 根据学习路径，逐步深入学习各个主题。
@@ -780,6 +791,7 @@ cargo run --example actor_pattern_comprehensive_2025
 # 5. 查看最终报告
 cat docs/异步编程全面梳理最终报告_2025_10_06.md
 ```
+
 **祝您学习愉快！Happy Learning!** 🎉
 ---
 

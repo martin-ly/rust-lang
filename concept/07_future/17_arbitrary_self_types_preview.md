@@ -79,6 +79,7 @@ impl MyType {
     // fn by_addr(self: *const Self) {}
 }
 ```
+
 ### 1.2 Arbitrary Self Types 提案
 >
 > **[来源: [Rust Internals Forum](https://internals.rust-lang.org/)]**
@@ -101,6 +102,7 @@ impl MyType {
     fn by_refcell(self: RefCell<Self>) {}
 }
 ```
+
 ---
 
 ## 二、技术细节
@@ -126,6 +128,7 @@ where
     T: Unsize<U>,
 {}
 ```
+
 ### 2.2 与 `Deref` 的关系
 
 ```rust,ignore
@@ -139,6 +142,7 @@ impl<T> Deref for KernelPtr<T> {
     }
 }
 ```
+
 ---
 
 ## 三、使用场景
@@ -168,6 +172,7 @@ impl Device {
     }
 }
 ```
+
 ### 场景 2：嵌入式寄存器映射
 
 ```rust,ignore
@@ -185,6 +190,7 @@ impl RegisterBlock {
     }
 }
 ```
+
 ### 场景 3：自定义智能指针
 
 ```rust,ignore
@@ -203,6 +209,7 @@ impl<T> TaggedPtr<T> {
     }
 }
 ```
+
 ---
 
 ## 四、反命题与边界分析
@@ -228,6 +235,7 @@ impl<T> TaggedPtr<T> {
 ├── 普通应用代码？ → 否，现有 self 类型已足够
 └── 需要 dyn Trait 支持？ → 确认 DispatchFromDyn 实现
 ```
+
 ---
 
 ## 五、演进路线

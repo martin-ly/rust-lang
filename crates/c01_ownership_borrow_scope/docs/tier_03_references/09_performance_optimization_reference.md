@@ -145,6 +145,7 @@ criterion = { version = "0.5", features = ["html_reports"] }
 name = "my_benchmark"
 harness = false
 ```
+
 ```rust
 // benches/my_benchmark.rs
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
@@ -164,11 +165,13 @@ fn criterion_benchmark(c: &mut Criterion) {
 criterion_group!(benches, criterion_benchmark);
 criterion_main!(benches);
 ```
+
 **运行基准测试**:
 
 ```bash
 cargo bench
 ```
+
 #### Flamegraph - 性能火焰图
 
 ```bash
@@ -180,6 +183,7 @@ cargo flamegraph --bin your_app
 
 # 输出: flamegraph.svg
 ```
+
 #### perf (Linux)
 
 ```bash
@@ -192,12 +196,14 @@ perf report
 # 生成火焰图
 perf script | stackcollapse-perf.pl | flamegraph.pl > perf.svg
 ```
+
 #### Instruments (macOS)
 
 ```bash
 # 使用 Instruments 进行性能分析
 instruments -t "Time Profiler" ./target/release/your_app
 ```
+
 #### cargo-asm - 查看生成的汇编
 
 ```bash
@@ -207,6 +213,7 @@ cargo install cargo-asm
 # 查看函数的汇编代码
 cargo asm your_crate::module::function
 ```
+
 ### 1.2 基准测试框架
 
 #### Criterion 高级用法
@@ -268,6 +275,7 @@ fn bench_comparison(c: &mut Criterion) {
 criterion_group!(benches, bench_with_input, bench_comparison);
 criterion_main!(benches);
 ```
+
 #### 统计分析
 
 Criterion 自动提供:
@@ -297,6 +305,7 @@ fn main() {
     }
 }
 ```
+
 #### 内存剖析
 
 ```bash
@@ -310,6 +319,7 @@ ms_print massif.out.*
 heaptrack ./target/release/your_app
 heaptrack_gui heaptrack.your_app.*.gz
 ```
+
 #### 缓存性能分析
 
 ```bash
@@ -319,6 +329,7 @@ perf stat -e cache-references,cache-misses ./target/release/your_app
 # 详细缓存分析
 perf stat -d ./target/release/your_app
 ```
+
 ---
 
 ## 2. 所有权系统性能影响
@@ -377,6 +388,7 @@ fn bench_move_copy_clone(c: &mut Criterion) {
 criterion_group!(benches, bench_move_copy_clone);
 criterion_main!(benches);
 ```
+
 **典型结果**:
 
 | 操作      | 数据大小 | 时间    | 说明          |
@@ -406,6 +418,7 @@ fn process_best(data: &mut Vec<i32>) {
     data.push(42);
 }
 ```
+
 ### 2.2 借用检查器开销
 
 #### 运行时开销
@@ -422,6 +435,7 @@ fn borrow_example(data: &Vec<i32>) -> i32 {
 //     return std::accumulate(data->begin(), data->end(), 0);
 // }
 ```
+
 **关键点**:
 
 - ✅ 借用检查器不生成任何运行时代码
@@ -458,6 +472,7 @@ fn bench_refcell_overhead(c: &mut Criterion) {
     group.finish();
 }
 ```
+
 **典型开销**: RefCell 增加约 5-10% 的开销（每次 borrow_mut）
 
 ### 2.3 生命周期标注优化
@@ -477,6 +492,7 @@ where 'b: 'a  // 'b 必须至少和 'a 一样长
 //     return strlen(x) > strlen(y) ? x : y;
 // }
 ```
+
 **关键点**:
 
 - ✅ 生命周期是零成本抽象
@@ -518,6 +534,7 @@ fn main() {
     // 节省 33% 内存！
 }
 ```
+
 #### 字段排序优化
 
 ```rust
@@ -540,12 +557,14 @@ struct Good {
 }
 // 总计: 16 bytes (节省 50%)
 ```
+
 #### 使用工具检查
 
 ```bash
 # 查看类型大小和布局
 cargo rustc -- -Z print-type-sizes
 ```
+
 #### #[repr] 属性
 
 ```rust
@@ -569,6 +588,7 @@ struct CacheAligned {
     data: [u8; 64],
 }
 ```
+
 ### 3.2 缓存友好设计
 
 #### CPU 缓存基础
@@ -581,6 +601,7 @@ L2 Cache: 256 KB-1 MB, ~12 cycles, 每核私有
 L3 Cache: 8-64 MB, ~40 cycles, 所有核共享
 主内存: GB级, ~100-300 cycles
 ```
+
 **缓存行**: 通常 64 字节
 
 #### 数据局部性优化
@@ -623,6 +644,7 @@ fn update_positions_good(particles: &mut ParticlesGood) {
     // 连续访问，每个缓存行都充分利用
 }
 ```
+
 **性能提升**: SoA 通常比 AoS 快 2-4x
 
 #### False Sharing 避免
@@ -663,6 +685,7 @@ fn bench_false_sharing() {
     // 测试会显示 GoodCounters 快很多
 }
 ```
+
 ### 3.3 内存分配优化
 
 #### 预分配容量
@@ -698,6 +721,7 @@ fn bench_allocation(c: &mut Criterion) {
 
 // 性能提升: 2-3x
 ```
+
 #### 重用分配
 
 ```rust
@@ -733,6 +757,7 @@ impl VecPool {
     }
 }
 ```
+
 #### 自定义分配器
 
 ```rust
@@ -763,6 +788,7 @@ fn main() {
     println!("Allocated: {} bytes", ALLOCATED.load(std::sync::atomic::Ordering::SeqCst));
 }
 ```
+
 ---
 
 ## 4. 编译器优化技巧
@@ -796,6 +822,7 @@ pub fn public_api(x: i32) -> i32 {
     x * 2
 }
 ```
+
 #### 查看内联效果
 
 ```bash
@@ -805,6 +832,7 @@ cargo asm --lib your_crate::function
 # 使用 LLVM IR
 cargo rustc --release -- --emit=llvm-ir
 ```
+
 ### 4.2 编译标志调优
 
 #### Cargo.toml 优化配置
@@ -833,6 +861,7 @@ incremental = false
 [profile.release.build-override]
 opt-level = 3
 ```
+
 #### CPU 特定优化
 
 ```toml
@@ -842,10 +871,12 @@ rustflags = [
     "-C", "target-cpu=native",  # 使用本机 CPU 特性
 ]
 ```
+
 ```bash
 # 命令行
 RUSTFLAGS="-C target-cpu=native" cargo build --release
 ```
+
 ### 4.3 LTO 和 PGO
 
 #### LTO (Link-Time Optimization)
@@ -856,6 +887,7 @@ lto = "fat"  # 完整 LTO (最慢但最优)
 # lto = "thin"  # 轻量 LTO (平衡)
 # lto = true  # 等于 "fat"
 ```
+
 **效果**: 通常 5-15% 性能提升
 
 #### PGO (Profile-Guided Optimization)
@@ -872,6 +904,7 @@ RUSTFLAGS="-Cprofile-generate=/tmp/pgo-data" \
 RUSTFLAGS="-Cprofile-use=/tmp/pgo-data/merged.profdata" \
     cargo build --release
 ```
+
 **效果**: 通常 10-30% 性能提升
 
 ---
@@ -921,6 +954,7 @@ use smallvec::SmallVec;
 let mut vec: SmallVec<[i32; 8]> = SmallVec::new();
 vec.push(1);  // 前8个元素在栈上
 ```
+
 ### 5.2 迭代器优化
 
 #### 迭代器 vs 循环
@@ -960,6 +994,7 @@ fn bench_iteration(c: &mut Criterion) {
 
 // 结果：完全相同的性能
 ```
+
 #### 并行迭代器
 
 ```rust
@@ -992,6 +1027,7 @@ fn expensive_computation(x: i32) -> i32 {
 
 // 并行可能快 4-8x (取决于核心数)
 ```
+
 ### 5.3 字符串处理优化
 
 #### 字符串连接
@@ -1049,6 +1085,7 @@ fn bench_string_concat(c: &mut Criterion) {
 // with_capacity: 5ms
 // join: 5ms
 ```
+
 ---
 
 ## 6. 并发性能优化
@@ -1078,6 +1115,7 @@ fn good_locking(data: Arc<Mutex<Vec<i32>>>, value: i32) {
     data.push(processed);
 }
 ```
+
 #### 分片锁
 
 ```rust
@@ -1121,6 +1159,7 @@ impl GoodCache {
     }
 }
 ```
+
 ### 6.2 无锁数据结构
 
 #### 原子操作
@@ -1149,6 +1188,7 @@ impl LockFreeCounter {
 
 // 比 Mutex<u64> 快 10-100x
 ```
+
 #### 无锁队列
 
 ```rust
@@ -1186,6 +1226,7 @@ fn lockfree_queue_example() {
     for c in consumers { c.join().unwrap(); }
 }
 ```
+
 ### 6.3 并行迭代器
 
 #### Rayon 并行化
@@ -1215,6 +1256,7 @@ fn parallel_example() {
 
 // 性能提升: 通常是核心数的 70-90%
 ```
+
 ---
 
 ## 7. 实战优化案例
@@ -1252,6 +1294,7 @@ fn good_json_processing(json_str: &str) -> Result<(), Box<dyn std::error::Error>
 // ✅ 使用 simd-json (更快)
 // use simd_json;
 ```
+
 ### 7.2 HTTP 服务器优化
 
 ```rust
@@ -1278,6 +1321,7 @@ async fn with_connection_pool(pool: &Pool, query: &str) -> Result<(), Box<dyn st
     Ok(())
 }
 ```
+
 ### 7.3 数据处理管道优化
 
 ```rust
@@ -1303,6 +1347,7 @@ async fn streaming_processing() {
     }).await;
 }
 ```
+
 ---
 
 ## 相关资源

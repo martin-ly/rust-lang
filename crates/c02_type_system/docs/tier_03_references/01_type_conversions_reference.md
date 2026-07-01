@@ -91,6 +91,7 @@ pub trait From<T>: Sized {
     fn from(value: T) -> Self;
 }
 ```
+
 **基本用法**:
 
 ```rust
@@ -113,6 +114,7 @@ fn main() {
     println!("Point: ({}, {})", point.x, point.y);
 }
 ```
+
 ### 1.2 Into Trait
 
 **定义**:
@@ -122,6 +124,7 @@ pub trait Into<T>: Sized {
     fn into(self) -> T;
 }
 ```
+
 **使用 Into**:
 
 ```rust
@@ -145,6 +148,7 @@ fn main() {
     println!("Point: ({}, {})", point.x, point.y);
 }
 ```
+
 ### 1.3 自动实现
 
 **From 蕴含 Into**:
@@ -170,6 +174,7 @@ fn main() {
     println!("Bytes: {:?}", bytes1);
 }
 ```
+
 ### 1.4 使用场景
 
 **API 设计**:
@@ -204,6 +209,7 @@ fn main() {
     println!("Connection 2: {}:{}", conn2.addr, conn2.port);
 }
 ```
+
 **错误转换**:
 
 ```rust
@@ -242,6 +248,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 2. TryFrom 和 TryInto
@@ -256,6 +263,7 @@ pub trait TryFrom<T>: Sized {
     fn try_from(value: T) -> Result<Self, Self::Error>;
 }
 ```
+
 **基本用法**:
 
 ```rust
@@ -289,6 +297,7 @@ fn main() {
     }
 }
 ```
+
 ### 2.2 错误处理
 
 **自定义错误类型**:
@@ -332,6 +341,7 @@ fn main() {
     }
 }
 ```
+
 ### 2.3 实际应用
 
 **数值范围限制**:
@@ -364,6 +374,7 @@ fn main() {
     // create_server(70000).unwrap(); // 会 panic
 }
 ```
+
 ### 2.4 高级应用模式
 
 **模式1：链式Try转换**:
@@ -412,6 +423,7 @@ fn main() {
     }
 }
 ```
+
 **模式2：批量Try转换**:
 
 ```rust
@@ -435,6 +447,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 3. AsRef 和 AsMut
@@ -452,6 +465,7 @@ pub trait AsMut<T: ?Sized> {
     fn as_mut(&mut self) -> &mut T;
 }
 ```
+
 **基本用法**:
 
 ```rust
@@ -466,6 +480,7 @@ fn main() {
     print_slice([1, 2, 3]);         // [i32; 3]
 }
 ```
+
 ### 3.2 通用 API 设计
 
 **文件路径**:
@@ -495,6 +510,7 @@ fn main() -> io::Result<()> {
     Ok(())
 }
 ```
+
 ### 3.3 常见用例
 
 **Boxed 切片**:
@@ -524,6 +540,7 @@ fn main() {
     process_bytes(vec![5, 6, 7]);
 }
 ```
+
 ---
 
 ## 4. Deref 和 DerefMut
@@ -538,6 +555,7 @@ pub trait Deref {
     fn deref(&self) -> &Self::Target;
 }
 ```
+
 **基本示例**:
 
 ```rust
@@ -567,6 +585,7 @@ fn main() {
     assert_eq!(5, *y);  // 解引用
 }
 ```
+
 ### 4.2 智能指针
 
 **自动解引用**:
@@ -583,6 +602,7 @@ fn main() {
     hello(&m);  // 编译器自动插入 deref
 }
 ```
+
 **Rc 和 Arc**:
 
 ```rust
@@ -596,6 +616,7 @@ fn main() {
     println!("Length: {}", len);
 }
 ```
+
 ### 4.3 Newtype 模式
 
 ```rust
@@ -619,6 +640,7 @@ fn main() {
     println!("Doubled: {}", doubled);
 }
 ```
+
 ---
 
 ## 5. Borrow 和 BorrowMut
@@ -632,6 +654,7 @@ pub trait Borrow<Borrowed: ?Sized> {
     fn borrow(&self) -> &Borrowed;
 }
 ```
+
 **基本用法**:
 
 ```rust
@@ -646,6 +669,7 @@ fn main() {
     println!("{:?}", map.get("key"));
 }
 ```
+
 ### 5.2 与 AsRef 的区别
 
 **Borrow vs AsRef**:
@@ -673,6 +697,7 @@ fn main() {
     check_asref(&s);
 }
 ```
+
 ---
 
 ## 6. ToOwned 和 Cow
@@ -687,6 +712,7 @@ pub trait ToOwned {
     fn to_owned(&self) -> Self::Owned;
 }
 ```
+
 **基本用法**:
 
 ```rust
@@ -698,6 +724,7 @@ fn main() {
     println!("Owned: {}", owned);
 }
 ```
+
 ### 6.2 写时克隆
 
 **Cow (Clone-on-Write)**:
@@ -728,6 +755,7 @@ fn main() {
     // 只在需要时才分配内存
 }
 ```
+
 **实际应用**:
 
 ```rust
@@ -752,6 +780,7 @@ fn main() {
     println!("{}", capitalize("Hello"));  // 不分配
 }
 ```
+
 ---
 
 ## 7. ToString 和 Display
@@ -781,6 +810,7 @@ fn main() {
     println!("{}", s);
 }
 ```
+
 ### 7.2 格式化输出
 
 **Debug vs Display**:
@@ -811,6 +841,7 @@ fn main() {
     println!("ToString: {}", person.to_string());
 }
 ```
+
 ---
 
 ## 8. as 类型转换
@@ -833,6 +864,7 @@ fn main() {
     println!("f: {}, i: {}", f, i);
 }
 ```
+
 ### 8.2 指针转换
 
 **裸指针**:
@@ -851,6 +883,7 @@ fn main() {
     println!("Address: 0x{:x}", addr);
 }
 ```
+
 ### 8.3 使用限制
 
 **不安全转换**:
@@ -872,6 +905,7 @@ fn main() {
     // let n = s as i32;  // 编译错误
 }
 ```
+
 ### 8.4 as转换的安全替代方案
 
 **安全的数值转换**:
@@ -897,6 +931,7 @@ fn safe_numeric_convert() {
     }
 }
 ```
+
 **指针转换的安全实践**:
 
 ```rust
@@ -912,6 +947,7 @@ fn safe_pointer_conversion() {
     // let wrong: &i64 = unsafe { &*(ptr as *const i64) };
 }
 ```
+
 ### 8.5 跨平台as转换注意事项
 
 **平台相关的大小**:
@@ -936,6 +972,7 @@ fn platform_specific_conversions() {
     println!("Portable: {}", portable);
 }
 ```
+
 ### 8.6 as转换的性能分析
 
 **性能对比**:
@@ -970,6 +1007,7 @@ fn main() {
 // as cast: 2ms    (最快，无检查)
 // TryFrom: 15ms   (有边界检查)
 ```
+
 ---
 
 ## 9. 转换最佳实践
@@ -993,6 +1031,7 @@ fn main() {
    ├─ 可能避免克隆？→ Cow
    └─ 转字符串？→ ToString/Display
 ```
+
 ### 9.2 性能考虑
 
 **零成本抽象**:
@@ -1016,6 +1055,7 @@ fn main() {
     // open_file_bad("file.txt".to_string());  // 分配
 }
 ```
+
 ### 9.3 API 设计
 
 **灵活的接口**:
@@ -1041,6 +1081,7 @@ fn main() {
     let _c2 = Config::new(String::from("custom"));  // 移动
 }
 ```
+
 ### 9.4 实战案例：通用数据处理器
 
 **案例：灵活的配置加载器**:
@@ -1098,6 +1139,7 @@ fn main() -> std::io::Result<()> {
     Ok(())
 }
 ```
+
 ### 9.5 常见错误模式与解决方案
 
 **错误1：不必要的克隆**:
@@ -1114,6 +1156,7 @@ fn process_string_good(s: &str) -> String {
     s.to_uppercase()  // 直接转换
 }
 ```
+
 **错误2：过度使用 Into**:
 
 ```rust
@@ -1129,6 +1172,7 @@ fn create_config_good(name: impl Into<String>) {
     // 类型更清晰
 }
 ```
+
 **错误3：忽略失败转换**:
 
 ```rust
@@ -1158,6 +1202,7 @@ fn main() {
     }
 }
 ```
+
 ### 9.6 高级转换技巧
 
 **技巧1：链式转换**:
@@ -1177,6 +1222,7 @@ fn main() {
     println!("{:?}", path);  // "/home/user"
 }
 ```
+
 **技巧2：条件转换**:
 
 ```rust
@@ -1200,6 +1246,7 @@ fn main() {
     println!("Allocated: {}", result2);  // HELLO
 }
 ```
+
 **技巧3：批量转换**:
 
 ```rust
@@ -1216,6 +1263,7 @@ fn main() {
     println!("{:?}", longs);
 }
 ```
+
 ### 9.7 性能基准测试
 
 **基准：不同转换方式的性能**:
@@ -1257,6 +1305,7 @@ fn main() {
 // to_string: 45ms   (堆分配)
 // String::from: 42ms (堆分配)
 ```
+
 **性能对比矩阵**:
 
 | 转换方式      | 分配 | 复杂度     | 用途     |
@@ -1308,6 +1357,7 @@ fn main() {
     println!("10 meters = {:.2} feet", feet.value);
 }
 ```
+
 **模式2：多格式数据转换**:
 
 ```rust
@@ -1351,6 +1401,7 @@ impl DataConverter {
     }
 }
 ```
+
 ### 9.9 类型转换与泛型
 
 **泛型转换函数**:
@@ -1388,6 +1439,7 @@ fn main() {
     println!("{:?}", strings);
 }
 ```
+
 ### 9.10 实际项目应用
 
 **案例：HTTP客户端的灵活API**:
@@ -1441,6 +1493,7 @@ fn main() {
     println!("{}", url2);
 }
 ```
+
 **案例：数据库查询构建器**:
 
 ```rust
@@ -1490,6 +1543,7 @@ fn main() {
     println!("{}", query.build());
 }
 ```
+
 ---
 
 ## 10. 总结

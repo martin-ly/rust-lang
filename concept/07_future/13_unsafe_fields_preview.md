@@ -102,6 +102,7 @@ unsafe {
     println!("processing...");
 }
 ```
+
 > **核心痛点**:
 >
 > 1. **审计困难**: `unsafe { }` 块中混合了安全和不安全代码，审计者需逐行辨别
@@ -133,6 +134,7 @@ graph TD
         K["x.unsafe_field.as_mut()"] --> L["访问 unsafe 字段自动需 unsafe 上下文"]
     end
 ```
+
 > **认知功能**: 此图对比块级 unsafe 与字段级 unsafe 的**审计粒度差异**——字段级 unsafe 将安全责任从"代码区域"下推到"数据结构定义"。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 对于包含原始指针（Raw Pointer）、手动内存管理字段的结构体（Struct），使用 `unsafe` 字段标记；纯安全字段保持普通声明。
@@ -163,6 +165,7 @@ Rust unsafe 模型的演进层次:
   - L1-L3: unsafe 的"原因"在代码中分散，需开发者记忆/注释
   - L4: unsafe 的"原因"在数据结构定义中集中，自文档化
 ```
+
 > **设计哲学**: `unsafe` 字段不是替代块级 unsafe，而是**补充**——将"数据结构层面的不安全"显式化，使 API 契约更清晰。
 > [来源: [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)]
 
@@ -195,6 +198,7 @@ impl RawBuffer {
     }
 }
 ```
+
 > **语义规则**:
 >
 > 1. `unsafe` 字段的**读/写/借用（Borrowing）**都需要 unsafe 上下文
@@ -221,6 +225,7 @@ unsafe 字段的不变量模式:
   // unsafe 字段的语义: 任何访问此字段的代码必须维持上述不变量
   // 编译器不验证不变量，但 unsafe 标记强制所有访问点显式声明"我知道契约"
 ```
+
 > **技术要点**: `unsafe` 字段是一种**轻量级契约机制**——它不像形式化验证那样证明不变量，但强制所有可能破坏不变量的代码路径通过 `unsafe` 块显式标记，便于人工审计。
 > [来源: [Unsafe Code Guidelines — Glossary](https://rust-lang.github.io/unsafe-code-guidelines//glossary.html)]
 
@@ -244,6 +249,7 @@ graph LR
         F -->|"生成报告"| G["审计者审查"]
     end
 ```
+
 > **认知功能**: 此图展示 unsafe fields 与 Safety Tags 的**互补关系**——unsafe fields 解决"哪些代码需要审查"的问题，Safety Tags 解决"如何自动验证"的问题。
 > **关键洞察**: unsafe fields 是 Safety Tags 的**前置基础设施**——没有字段级标记，自动化工具难以精确关联契约与代码位置。
 > [来源: [Safety Tags Preview](08_safety_tags_preview.md)]
@@ -281,6 +287,7 @@ graph LR
   }
   // value 的内部访问需 unsafe，initialized 状态检查安全
 ```
+
 > **最佳实践**: `unsafe` 字段应用于**维护外部不变量**的字段（如原始指针（Raw Pointer）、外部资源句柄）。纯内部计算状态不应标记为 unsafe。
 > [来源: [Rustonomicon — Data Layout](https://doc.rust-lang.org/nomicon/data.html)]
 
@@ -304,6 +311,7 @@ graph TD
     style TRUE fill:#c8e6c9
     style ALT fill:#fff3e0
 ```
+
 > **认知功能**: 此决策树帮助判断是否应将字段标记为 unsafe。核心判断标准是**外部可访问性**和**safe API 封装程度**。
 > **使用建议**: 公开结构体中所有原始指针字段都应 unsafe；私有结构体中若通过 safe 方法完全封装，可酌情省略。
 > **关键洞察**: unsafe 字段的价值与**封装程度**成反比——完全封装的内部字段不需要 unsafe 标记，因为外部无法直接访问。
@@ -335,6 +343,7 @@ graph TD
 ├── 但 Pin 的内存安全 [来源: [Rust Safety](https://www.rust-lang.org/policies/security)]保证与 unsafe 字段的契约是独立的
 └── 两者结合时，unsafe 块中需同时维持两种契约
 ```
+
 > **边界要点**: unsafe fields 是**语法糖级别的改进**，不改变 Rust 的安全模型本质。它只是将"哪个字段不安全"的信息从文档/注释下推到类型声明。
 > [来源: [Rust [RFC 3458](https://rust-lang.github.io/rfcs//3458-unsafe-fields.html) — Drawbacks](https://github.com/rust-lang/rfcs/pull/3458)]
 
@@ -374,6 +383,7 @@ graph TD
 | [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
 | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [Rust RFC 3458](https://github.com/rust-lang/rfcs/pull/3458) | ✅ 一级 | 官方 RFC，unsafe fields 设计 |
@@ -443,6 +453,7 @@ impl Buffer {
     }
 }
 ```
+
 > **修正**:
 > `unsafe fields`（实验性特性）允许将 struct 的特定字段标记为 unsafe，要求所有读写操作在 `unsafe` 块中进行。
 > 这比将整个类型标记为 unsafe（如 `std::mem::ManuallyDrop`）更细粒度：只有字段访问需要 `unsafe`，类型的构造和其他方法可以是安全的。
@@ -468,6 +479,7 @@ impl Drop for RawBuffer {
     }
 }
 ```
+
 > **修正**: `unsafe` 字段与 `Drop` 的交互是内存安全（Memory Safety）的关键边界。`Drop::drop` 必须处理字段可能处于的任何状态（已初始化、未初始化、已释放、部分初始化）。`unsafe` 字段的文档必须明确：1) 构造后是否总是初始化；2) `Drop` 是否总是有效；3) 是否存在 `into_raw` 模式转移所有权（Ownership）（类似 `Box::into_raw`，跳过 Drop）。Rust 的 `ManuallyDrop<T>` 和 `MaybeUninit<T>` 已部分解决此问题，但 `unsafe fields` 提供了更原生的语法。形式化上，`unsafe fields` 可建模为**部分类型**（partial types）：字段的存在性在类型层面追踪，编译器验证所有代码路径正确处理初始化/未初始化状态。这与 Rust 当前的初始化分析（flow-sensitive）扩展一致。来源: [Rustonomicon] · 来源: [Rust RFC 1892]
 
 ### 10.3 边界测试：unsafe 字段与 `#[repr(C)]` 的交互（编译错误）
@@ -487,6 +499,7 @@ fn main() {
     // println!("{:?}", w.ptr); // 语法未定
 }
 ```
+
 > **修正**: `unsafe fields` 是 Rust 的实验性特性，尚无稳定语法。设计讨论的核心问题：1) `unsafe` 字段的访问是否要求 `unsafe` 块（类似 `unsafe fn`）？2) `unsafe` 字段的初始化是否可在 safe 代码中完成？3) `#[repr(C)]` 和 `#[repr(transparent)]` 如何处理 `unsafe` 字段的对齐和布局？4) `unsafe` 字段与 `MaybeUninit` 的交互（部分初始化 struct）。这些问题的答案将决定 `unsafe fields` 的可用性和安全性保证。当前 workaround：使用 `unsafe` 访问器函数封装字段，或在 struct 级别使用 `unsafe` 块。这与 C 的结构体（所有字段无限制）或 Ada 的 `private` 类型（封装但无 unsafe 语义）不同——Rust 的 `unsafe fields` 试图在字段粒度引入安全边界。[来源: [Unsafe Fields RFC Draft](https://github.com/rust-lang/rfcs/)] · [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
 
 ### 10.4 边界测试：unsafe 字段与不变式的文档化（逻辑错误）
@@ -512,6 +525,7 @@ impl Buffer {
     }
 }
 ```
+
 > **修正**: `unsafe` 字段的核心价值是**显式化不变式**（invariant）：字段的维护是 unsafe 的，但公开 API 应保证不变式。上述代码中，`Buffer` 的不变式是 `data` 指向 `len` 字节的有效内存。`get` 方法若未检查 `index < len`，违反不变式，导致 UB。`unsafe` 字段要求：1) 所有公开方法维护不变式；2) `unsafe` 块的文档明确列出前置条件；3) `unsafe` 字段只在模块（Module）内部直接访问。这与 `Vec` 的实现（`buf` 指针、`len`、`cap` 是 private，外部无法破坏不变式）类似——`unsafe fields` 将这一模式提升到语法层面，使不变式的边界更清晰。这与 Eiffel 的 Design by Contract（前置/后置条件在语言层面）或 Ada 的 Spark（形式化验证不变式）类似——Rust 的 `unsafe fields` 是介于文档和形式化验证之间的实践。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 > **过渡**: Unsafe Fields 预研：字段级安全边界的精确标注 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Unsafe Fields 预研：字段级安全边界的精确标注 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

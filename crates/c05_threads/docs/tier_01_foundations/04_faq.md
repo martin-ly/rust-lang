@@ -73,6 +73,7 @@
     ├── 无锁编程
     └── NUMA 优化
 ```
+
 ---
 
 ## 目录
@@ -197,6 +198,7 @@
 ├── ⚡ 性能优化 (Q11-Q15)
 └── 🐛 调试技巧 (Q16-Q20)
 ```
+
 ### 快速跳转
 
 **基础概念**:
@@ -272,6 +274,7 @@ thread::spawn(move || {
     println!("{}", rc); // ❌ 错误：Rc 不是 Send
 });
 ```
+
 #### 常见类型
 
 | 类型                      | Send | Sync | 说明                            |
@@ -339,6 +342,7 @@ Arc<Mutex<T>>
 │   └─> Mutex: 同步访问（互斥锁）
 └─────> Arc: 共享所有权（原子引用计数）
 ```
+
 #### 1. `Arc` (Atomically Reference Counted)
 
 **职责**: 共享所有权
@@ -351,6 +355,7 @@ Arc<Mutex<T>>
 let data = Arc::new(...);
 let data_clone = Arc::clone(&data); // 只增加计数，非常快
 ```
+
 #### 2. `Mutex` (Mutual Exclusion)
 
 **职责**: 同步访问
@@ -364,6 +369,7 @@ let guard = mutex.lock().unwrap();
 *guard += 1; // 独占访问
 // guard 被 drop 时，锁自动释放
 ```
+
 #### 完整示例
 
 ```rust
@@ -389,6 +395,7 @@ for handle in handles {
 
 println!("结果: {}", *data.lock().unwrap()); // 输出: 结果: 10
 ```
+
 #### 为什么不是一个类型？
 
 因为它们解决不同的问题：
@@ -418,6 +425,7 @@ println!("结果: {}", *data.lock().unwrap()); // 输出: 结果: 10
     └─> 使用 async/await (异步并发)
         ✅ Web服务器、数据库查询、网络请求
 ```
+
 #### 使用 Rayon (数据并行)
 
 **场景**: 当你的任务是 **CPU 密集型**的
@@ -440,6 +448,7 @@ let sum: i32 = (0..1_000_000)
     .map(|x| expensive_computation(x))
     .sum();
 ```
+
 **优势**:
 
 - Rayon 会使用线程池榨干你所有的 CPU 核心来加速这些计算
@@ -472,6 +481,7 @@ for task in tasks {
     // 处理结果
 }
 ```
+
 **优势**:
 
 - CPU 大部分时间都在**等待** I/O 操作完成
@@ -511,6 +521,7 @@ counter.fetch_add(1, Ordering::SeqCst);
 // Mutex: 稍慢
 *mutex.lock().unwrap() += 1;
 ```
+
 对于非常简单的操作，`AtomicI32::fetch_add` 确实会比 `Mutex<i32>` 更快，因为它避免了锁的开销。
 
 #### 为什么不应该？
@@ -560,6 +571,7 @@ static COUNTER: AtomicUsize = AtomicUsize::new(0);
 // 简单的计数器：安全
 COUNTER.fetch_add(1, Ordering::SeqCst);
 ```
+
 **复杂场景**: 请使用高层抽象！
 
 #### 结论
@@ -602,6 +614,7 @@ let lock2 = lock2.lock().unwrap();
 // 线程A: lock1 -> lock2
 // 线程B: lock2 -> lock1  // 可能死锁！
 ```
+
 ##### 2. **超时机制**
 
 使用 `try_lock` 和超时：
@@ -619,6 +632,7 @@ if let Ok(lock1) = mutex1.try_lock() {
     }
 }
 ```
+
 ##### 3. **避免嵌套锁**
 
 尽量减少同时持有多个锁：
@@ -639,6 +653,7 @@ if let Ok(lock1) = mutex1.try_lock() {
 let data1 = lock1.lock().unwrap();
 let data2 = lock2.lock().unwrap(); // 潜在死锁
 ```
+
 ##### 4. **使用消息传递**
 
 完全避免共享状态：
@@ -653,6 +668,7 @@ thread::spawn(move || {
 
 let data = rx.recv().unwrap();
 ```
+
 ##### 5. **锁超时设置**
 
 使用 `parking_lot`的超时锁：
@@ -669,6 +685,7 @@ if let Some(guard) = mutex.try_lock_for(Duration::from_secs(1)) {
     // 超时处理
 }
 ```
+
 #### 检测方法
 
 - **运行时检测**: ThreadSanitizer, Valgrind
@@ -705,6 +722,7 @@ if let Some(guard) = mutex.try_lock_for(Duration::from_secs(1)) {
     ├── 异步 → tokio::sync::mpsc
     └── 同步 → std::sync::mpsc / crossbeam
 ```
+
 #### Channel 类型对比
 
 | 类型                   | 生产者 | 消费者 | 有界/无界 | 性能 | 使用场景   |
@@ -731,6 +749,7 @@ use std::sync::mpsc;
 let (tx, rx) = mpsc::channel();
 let (tx_bounded, rx_bounded) = mpsc::sync_channel(100);
 ```
+
 ##### 2. **crossbeam** (高性能)
 
 适用场景：
@@ -745,6 +764,7 @@ use crossbeam::channel;
 let (tx, rx) = channel::bounded(100);    // 有界
 let (tx, rx) = channel::unbounded();     // 无界
 ```
+
 ##### 3. **flume** (简洁API)
 
 适用场景：
@@ -759,6 +779,7 @@ use flume;
 let (tx, rx) = flume::bounded(100);
 let (tx, rx) = flume::unbounded();
 ```
+
 ##### 4. **tokio::sync::mpsc** (异步)
 
 适用场景：
@@ -775,6 +796,7 @@ let (tx, mut rx) = mpsc::channel(100);
 tx.send(data).await?;
 let data = rx.recv().await;
 ```
+
 #### 有界 vs 无界
 
 | 特性         | 有界 (Bounded)     | 无界 (Unbounded) |
@@ -804,6 +826,7 @@ let data = rx.recv().await;
 ├── 事件驱动 → Channel (消息传递)
 └── 复杂状态管理 → Actor模型
 ```
+
 #### 方案对比
 
 ##### 1. **`Arc<T>`** - 只读共享
@@ -822,6 +845,7 @@ for _ in 0..10 {
     });
 }
 ```
+
 **优点**:
 
 - ✅ 零运行时开销（只读）
@@ -848,6 +872,7 @@ for _ in 0..10 {
     });
 }
 ```
+
 **优点**:
 
 - ✅ 简单直接
@@ -875,6 +900,7 @@ let r2 = data.read().unwrap();
 let mut w = data.write().unwrap();
 w.push(4);
 ```
+
 **优点**:
 
 - ✅ 多个读者可以并发
@@ -902,6 +928,7 @@ thread::spawn(move || {
 // 消费者
 let data = rx.recv().unwrap();
 ```
+
 **优点**:
 
 - ✅ 完全解耦
@@ -938,6 +965,7 @@ let data = rx.recv().unwrap();
 ├── 混合型 → 测试并调整
 └── 不确定 → 从 CPU核心数 开始，逐步调整
 ```
+
 #### 详细指南
 
 ##### 1. **CPU密集型任务**
@@ -952,6 +980,7 @@ let pool = rayon::ThreadPoolBuilder::new()
     .build()
     .unwrap();
 ```
+
 **原因**:
 
 - CPU密集型任务受限于CPU计算能力
@@ -968,6 +997,7 @@ let num_threads = 2 * num_cpus::get();
 // 或使用更灵活的计算
 let num_threads = num_cpus::get() * (1 + wait_time / service_time);
 ```
+
 **原因**:
 
 - I/O密集型任务大部分时间在等待
@@ -982,6 +1012,7 @@ let num_threads = num_cpus::get() * (1 + wait_time / service_time);
 // 从一个合理的起点开始
 let num_threads = (num_cpus::get() as f64 * 1.5) as usize;
 ```
+
 **调整方法**:
 
 1. 监控CPU使用率
@@ -996,6 +1027,7 @@ use num_cpus;
 let logical_cores = num_cpus::get();        // 逻辑核心数（包括超线程）
 let physical_cores = num_cpus::get_physical(); // 物理核心数
 ```
+
 #### 实际例子1
 
 ##### Rayon (数据并行)
@@ -1012,6 +1044,7 @@ rayon::ThreadPoolBuilder::new()
     .build_global()
     .unwrap();
 ```
+
 ##### 自定义线程池
 
 ```rust
@@ -1028,6 +1061,7 @@ for i in 0..10 {
 
 pool.join();
 ```
+
 #### 动态调整
 
 对于负载变化的系统，考虑动态调整：
@@ -1040,6 +1074,7 @@ if cpu_usage < 50% {
     decrease_thread_pool_size();
 }
 ```
+
 #### 监控指标
 
 - **CPU使用率**: 应接近100%（CPU密集）或适中（I/O密集）
@@ -1089,12 +1124,14 @@ match handle1.join() {
 // handle2.join() 正常
 handle2.join().unwrap();
 ```
+
 输出：
 
 ```text
 线程2正常运行
 线程1 panic: Any { .. }
 ```
+
 #### 检测线程panic
 
 ##### 1. **使用 `join()`**
@@ -1112,6 +1149,7 @@ match handle.join() {
     }
 }
 ```
+
 ##### 2. **使用 `catch_unwind`**
 
 ```rust
@@ -1127,6 +1165,7 @@ match result {
     Err(e) => println!("捕获到panic"),
 }
 ```
+
 #### Mutex 中的panic
 
 **问题**: 如果线程在持有 `Mutex` 时panic，锁会被"poisoned"（污染）
@@ -1156,6 +1195,7 @@ match data.lock() {
     }
 }
 ```
+
 **处理poisoned锁**:
 
 ```rust
@@ -1171,6 +1211,7 @@ match mutex.lock() {
     }
 }
 ```
+
 #### 线程池中的panic
 
 **Rayon**: 自动传播panic到调用者
@@ -1192,6 +1233,7 @@ match result {
     Err(_) => println!("线程池中有panic"),
 }
 ```
+
 #### 最佳实践
 
 ##### 1. **总是检查 `join()` 的结果**
@@ -1203,6 +1245,7 @@ let handle = thread::spawn(|| {
 
 handle.join().expect("线程panic了");
 ```
+
 ##### 2. **使用 `catch_unwind` 隔离panic**
 
 ```rust
@@ -1218,6 +1261,7 @@ if result.is_err() {
     // 可能重试
 }
 ```
+
 ##### 3. **设置panic hook记录日志**
 
 ```rust
@@ -1228,6 +1272,7 @@ panic::set_hook(Box::new(|panic_info| {
     // 记录到日志系统
 }));
 ```
+
 ##### 4. **考虑使用 `Result` 而不是 panic**
 
 ```rust
@@ -1241,6 +1286,7 @@ fn task() {
     panic!("出错了");
 }
 ```
+
 #### 总结1
 
 | 场景             | 行为           | 处理方法           |
@@ -1298,6 +1344,7 @@ struct Counter {
     count: CachePadded<AtomicUsize>,
 }
 ```
+
 **参考**: [SIMD与并行优化](../tier_04_advanced/04_SIMD与并行优化.md)
 
 ---
@@ -1345,6 +1392,7 @@ RUSTFLAGS="-Z sanitizer=thread" cargo run
 # Miri
 cargo +nightly miri test
 ```
+
 ---
 
 #### Q17: 如何检测死锁？
@@ -1379,6 +1427,7 @@ let thread_name = thread::current().name().unwrap_or("unnamed");
 
 println!("[{}:{:?}] 消息", thread_name, thread_id);
 ```
+
 ---
 
 #### Q20: 如何测试并发代码？
@@ -1403,6 +1452,7 @@ mod tests {
     }
 }
 ```
+
 **参考**: [形式化验证](../tier_04_advanced/05_形式化验证.md)
 
 ---

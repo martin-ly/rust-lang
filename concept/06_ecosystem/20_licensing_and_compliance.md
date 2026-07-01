@@ -104,6 +104,7 @@ Rust 生态的许可证现状:
   ├── Rust 追求最大生态参与度
   └── 但 GPL crate 在生态中存在
 ```
+
 > **认知功能**: Rust 生态的**MIT/Apache-2.0 双许可**是**工程与法律权衡**的结果——它平衡了开发者自由、商业友好和法律保护。
 > [来源: [Rust License FAQ](https://www.rust-lang.org/policies/licenses)]
 
@@ -153,6 +154,7 @@ Rust 生态的许可证现状:
   // Licensed under the Apache License, Version 2.0
   // SPDX-License-Identifier: Apache-2.0
 ```
+
 > **许可证洞察**: **Apache-2.0 优于 MIT**——它提供**专利保护**，在专利诉讼频发的环境中更安全。
 > [来源: [Choose a License](https://choosealicense.com/licenses/)]
 
@@ -187,6 +189,7 @@ Rust 生态的许可证现状:
   ├── 专利风险评估
   └── 第三方代码归属
 ```
+
 > **传染洞察**: Rust 的**静态链接默认**使 GPL 传染问题**更严重**——使用 GPL crate 可能需要整个项目开源。
 > [来源: [GNU GPL FAQ — Static vs Dynamic](https://www.gnu.org/licenses/gpl-faq.html#StaticVsDynamic)]
 
@@ -235,6 +238,7 @@ Rust 许可证工具:
   ├── cargo deny check licenses
   └── 阻止合并不符合的 PR
 ```
+
 > **工具洞察**: **cargo-deny 是 Rust 许可证合规的标配**——它将许可证策略编码为配置，自动执行检查。
 > [来源: [cargo-deny Book](https://embarkstudios.github.io/cargo-deny/)]
 
@@ -279,6 +283,7 @@ MIT/Apache-2.0 双许可的实施:
   ├── 保留许可证文本
   └── 修改时注明变更
 ```
+
 > **双许可洞察**: **MIT OR Apache-2.0** 是 Rust 生态的**事实标准**——它最大化兼容性同时提供专利保护。
 > [来源: [Rust RFC — License](https://github.com/rust-lang/rfcs/pull/7)]
 
@@ -315,6 +320,7 @@ MIT/Apache-2.0 双许可的实施:
   ├── [ ] 检查 copyleft 依赖
   └── [ ] 定期审计（季度）
 ```
+
 > **商业洞察**: **Apache-2.0 是商业项目的安全选择**——它提供专利保护且不强制开源衍生作品。
 > [来源: [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0)]
 
@@ -349,6 +355,7 @@ GPL 项目:
   → MIT / Apache-2.0
   → 促进复现和引用
 ```
+
 > **模式矩阵**: **许可证选择是策略决策**——取决于项目目标、商业模式和风险偏好。
 > [来源: [Choose a License](https://choosealicense.com/)]
 
@@ -372,6 +379,7 @@ graph TD
     style APACHE fill:#c8e6c9
     style MIT fill:#c8e6c9
 ```
+
 > **认知功能**: **没有 universally best 许可证**——选择取决于项目哲学（自由软件 vs 开源 vs 专有）。
 > [来源: [OSI License Comparison](https://opensource.org/licenses)]
 
@@ -411,6 +419,7 @@ graph TD
 ├── 其他地区可能模糊
 └── 缓解: 咨询当地法务
 ```
+
 > **边界要点**: 许可证的边界主要与**兼容性**、**归属**、**默认版权**、**公司政策**和**国际法律**相关。
 > [来源: [SPDX License List](https://spdx.org/licenses/)]
 
@@ -454,6 +463,7 @@ graph TD
   ✅ 使用正确的 SPDX 表达式
      // "MIT OR Apache-2.0" 或 "MIT AND Apache-2.0"
 ```
+
 > **陷阱总结**: 许可证陷阱主要与**传递依赖**、**无许可证**、**兼容性**、**版权归属**和**SPDX 语法**相关。
 > [来源: [SPDX Specification](https://spdx.github.io/spdx-spec/)]
 
@@ -465,6 +475,7 @@ graph TD
 | [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
 | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [Choose a License](https://choosealicense.com/) | ✅ 一级 | 许可证选择指南 |
@@ -481,6 +492,7 @@ fn main() {
     println!("{:?}", data);
 }
 ```
+
 ## 相关概念文件
 
 - [Toolchain](01_toolchain.md) — 工具链
@@ -530,6 +542,7 @@ fn main() {
     println!("hello");
 }
 ```
+
 > **修正**: Rust 生态使用 `cargo-deny` 工具在 CI 中自动检查依赖树的许可证兼容性。GPL-3.0 具有"传染性"——链接 GPL 代码的项目必须也使用 GPL。MIT/Apache-2.0 双许可的 Rust 生态核心与 GPL 不兼容（单向：GPL 项目可用 MIT 代码，反之不可）。`cargo-deny` 配置允许显式允许/拒绝某些许可证，设置例外（exceptions），检查复制文件（sources copied into tree）。这与 npm 的 `license-checker` 或 Python 的 `pip-licenses` 类似，但 `cargo-deny` 集成在构建流程中，可在编译前阻止不合规依赖进入。企业合规要求：所有依赖必须经法务审批，`cargo-deny` 是实现"shift-left compliance"（左移合规）的关键工具。[来源: [cargo-deny Documentation](https://embarkstudios.github.io/cargo-deny/)] · [来源: [Open Source Initiative](https://opensource.org/licenses)]
 
 ### 10.2 边界测试：`#[forbid(unsafe_code)]` 与依赖的 unsafe（编译错误）
@@ -547,6 +560,7 @@ fn main() {
     some_crate::safe_api(); // 实际上安全，但底层 unsafe 不可见
 }
 ```
+
 > **修正**: `#![forbid(unsafe_code)]` 属性阻止当前 crate 中使用 `unsafe` 关键字，但不检查依赖。对于要求高安全保证的场景（如医疗、航空、金融），需要：1) `cargo-geiger` 统计依赖树中的 unsafe 代码比例；2) `cargo-vet` 审计依赖的供应链安全；3) `miri` 对关键依赖进行 UB 检测；4) `rustc` 的 `-Wunsafe-code` 标志。Rust 的 unsafe 边界是 crate 级别的——一个 crate 的 unsafe 实现可以为另一个 crate 提供安全抽象。合规策略应区分"自己写 unsafe"（高风险）和"使用经过审计的安全抽象"（低风险）。这与 C/C++ 项目的完全不可控 unsafe 代码不同——Rust 至少提供了统计和审计工具。[来源: [cargo-geiger Documentation](https://github.com/rust-secure-code/cargo-geiger)] · [来源: [cargo-vet Documentation](https://mozilla.github.io/cargo-vet/)]
 
 ### 10.6 边界测试：Copyleft 许可证的静态链接传染（法律合规风险）
@@ -563,6 +577,7 @@ fn main() {
     println!("proprietary code");
 }
 ```
+
 > **修正**: GPL（GNU General Public License）的 copyleft 条款要求：若程序链接 GPL 代码，整个程序必须也使用 GPL。Rust 的**静态链接**（默认）使这一条款更严格——所有依赖的代码被编译到同一二进制中，形成"衍生作品"。动态链接（`cdylib`、`dylib`）可能缓解，但 GPL 的解释仍有争议。解决方案：1) 避免依赖 GPL 库（使用 MIT/Apache-2.0 替代品）；2) 使用 `cargo-deny` 扫描依赖许可证；3) 法律审查（对于企业产品）。这与 C/C++ 的静态链接 GPL（同样风险）或 Python 的动态导入（解释器认为不形成衍生作品，但仍有争议）类似——许可证合规是软件供应链的重要环节，Rust 的静态链接默认增加了 copyleft 风险。[来源: [GPL FAQ](https://www.gnu.org/licenses/gpl-faq.html)] · [来源: [cargo-deny](https://embarkstudios.github.io/cargo-deny/)]
 
 ### 10.5 边界测试：GPL 传染与动态链接的边界（法律风险）
@@ -577,6 +592,7 @@ fn main() {
     // 根据 GPL，整个二进制需以 GPL 发布
 }
 ```
+
 > **修正**: Rust 默认**静态链接**所有依赖（包括标准库），这与 C/C++ 默认动态链接不同。GPL（及 AGPL）的"传染"条款：若程序包含 GPL 代码，整个程序需 GPL 兼容。Rust 的缓解：1) 使用 `dylib` crate type 动态链接 GPL 依赖（但 Rust 的 dylib 支持有限）；2) 避免使用 GPL 依赖，选择 MIT/Apache-2.0 替代品；3) 使用 `cargo-deny` 自动审计许可证兼容性。常见许可证兼容矩阵：MIT ↔ Apache-2.0（兼容）；MIT + GPL（MIT 代码可被 GPL 包含，但反之不行）；Apache-2.0 + GPL-2.0（不兼容，GPL-3.0 兼容）。企业合规工具链：`cargo-about`（生成许可证清单）、`cargo-deny`（禁止特定许可证）、`FOSSA`/`Snyk`（SaaS 扫描）。这与 npm 的 `license-checker` 或 Python 的 `pip-licenses` 类似——Rust 的静态链接使许可证合规更严格。[来源: [GNU GPL FAQ](https://www.gnu.org/licenses/gpl-faq.html)] · [来源: [cargo-deny](https://github.com/EmbarkStudios/cargo-deny)]
 
 ### 10.3 边界测试：GPL 传染与静态链接的法律风险（编译错误/法律问题）
@@ -593,6 +609,7 @@ fn main() {
     // 整个二进制需以 GPL-3.0 发布
 }
 ```
+
 > **修正**: Rust **默认静态链接**所有依赖（包括 std），这与 C/C++ 默认动态链接不同。GPL/AGPL 的"传染"条款：包含 GPL 代码的程序必须以 GPL 兼容许可证发布。缓解：1) 避免使用 GPL 依赖，选择 MIT/Apache-2.0 替代品；2) 使用 `cargo-deny` 自动审计许可证兼容性；3) `cargo-about` 生成许可证清单。许可证兼容矩阵：MIT ↔ Apache-2.0（兼容）；MIT + GPL（MIT 可被 GPL 包含，但反之不行）；Apache-2.0 + GPL-2.0（不兼容，GPL-3.0 兼容）。企业合规是 Rust 生产部署的必要步骤，尤其医疗、金融、航空等受监管行业。[来源: [GNU GPL FAQ](https://www.gnu.org/licenses/gpl-faq.html)] · [来源: [cargo-deny](https://github.com/EmbarkStudios/cargo-deny)] · [来源: [cargo-about](https://github.com/EmbarkStudios/cargo-about)]
 > **过渡**: 许可证与合规：Rust 项目的法律工程 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 许可证与合规：Rust 项目的法律工程 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

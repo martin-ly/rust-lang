@@ -146,6 +146,7 @@ fn main() {
     println!("Server: {}:{}", server.host, server.port);
 }
 ```
+
 ### Factory 模式
 
 ```rust
@@ -195,6 +196,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 2. 结构型模式
@@ -236,6 +238,7 @@ fn main() {
     adapter.log("INFO", "Application started");
 }
 ```
+
 ### Decorator 模式
 
 ```rust
@@ -279,6 +282,7 @@ fn main() {
     println!("{}", decorated_b.operation());
 }
 ```
+
 ---
 
 ## 3. 行为型模式
@@ -329,6 +333,7 @@ fn main() {
     println!("{}", gzip_compressor.compress_data(data));
 }
 ```
+
 ### Visitor 模式
 
 ```rust
@@ -391,6 +396,7 @@ fn main() {
     println!("Total area: {}", calculator.total_area);
 }
 ```
+
 ### Iterator 模式
 
 ```rust
@@ -427,6 +433,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 4. Rust 特有模式
@@ -467,6 +474,7 @@ fn main() -> io::Result<()> {
     Ok(())
 }
 ```
+
 ### Typestate 模式
 
 ```rust
@@ -525,6 +533,7 @@ fn main() {
     }
 }
 ```
+
 ### Extension Trait 模式
 
 ```rust
@@ -549,6 +558,7 @@ fn main() {
     println!("'hello' reversed: {}", "hello".reverse());
 }
 ```
+
 ---
 
 ## 5. 并发模式
@@ -614,6 +624,7 @@ fn main() {
     sender.send(Message::Stop).unwrap();
 }
 ```
+
 ---
 
 ## 6. 最佳实践
@@ -653,6 +664,7 @@ fn main() {
     car.start();
 }
 ```
+
 ### 使用 Trait 对象实现多态
 
 ```rust
@@ -690,6 +702,7 @@ fn main() {
     draw_all(&shapes);
 }
 ```
+
 ---
 
 ## 6. 错误处理模式
@@ -717,6 +730,7 @@ fn main() {
     }
 }
 ```
+
 ### 自定义错误类型
 
 **使用thiserror**:
@@ -751,6 +765,7 @@ fn fetch_data(key: &str) -> Result<String, DataStoreError> {
     })
 }
 ```
+
 ### Try trait模式
 
 ```rust
@@ -778,6 +793,7 @@ impl<T, E> Try for MyResult<T, E> {
     }
 }
 ```
+
 ---
 
 ## 7. 内存管理模式
@@ -825,6 +841,7 @@ fn main() {
     println!("{}, {}", num, string);
 }
 ```
+
 ### 对象池模式
 
 ```rust
@@ -887,6 +904,7 @@ impl<T> std::ops::Deref for PoolGuard<T> {
     }
 }
 ```
+
 ---
 
 ## 8. Trait对象模式
@@ -936,6 +954,7 @@ fn main() {
     println!("Total area: {}", total_area(&shapes));
 }
 ```
+
 ### 枚举分发（更高效）
 
 ```rust
@@ -960,6 +979,7 @@ fn total_area_enum(shapes: &[ShapeEnum]) -> f64 {
     shapes.iter().map(|s| s.area()).sum()
 }
 ```
+
 ---
 
 ## 9. 类型安全API设计
@@ -1007,6 +1027,7 @@ fn main() {
     // let sum = d1.value + d2.value;
 }
 ```
+
 ### Session Types
 
 ```rust
@@ -1058,6 +1079,7 @@ fn main() {
     println!("{}", session.access_protected_resource()); // ✅ OK
 }
 ```
+
 ---
 
 ## 10. 函数式模式
@@ -1099,6 +1121,7 @@ impl<T> Functor<T> for Option<T> {
     }
 }
 ```
+
 ### Lens模式（聚焦数据）
 
 ```rust
@@ -1149,6 +1172,7 @@ fn main() {
     println!("{}", new_person.name); // Bob
 }
 ```
+
 ### 10.1 高级函数式模式：Applicative与Monad深化
 
 **Applicative Functor模式**:
@@ -1219,6 +1243,7 @@ impl<T> ValidationResult<T> {
     }
 }
 ```
+
 **Monad Transformers模式**:
 
 ```rust
@@ -1263,6 +1288,7 @@ async fn get_user_profile_by_name(username: &str) -> Option<String> {
     fetch_user_profile(user_id).await
 }
 ```
+
 ### 10.2 Free Monad模式
 
 **Free Monad实现**:
@@ -1324,6 +1350,7 @@ impl Interpreter<FileOp<FileProgram<String>>, String> for RealFileSystem {
     }
 }
 ```
+
 ### 10.3 Zipper模式（高效导航）
 
 **Zipper数据结构**:
@@ -1403,6 +1430,7 @@ impl<T: Clone> Zipper<T> {
     }
 }
 ```
+
 ### 10.4 Optics模式（Prism与Iso）
 
 **Prism模式（处理Sum类型）**:
@@ -1442,6 +1470,7 @@ fn some_prism<T: Clone + 'static>() -> Prism<Option<T>, T> {
     )
 }
 ```
+
 **Iso模式（同构）**:
 
 ```rust
@@ -1486,6 +1515,7 @@ fn celsius_fahrenheit_iso() -> Iso<f64, f64> {
     )
 }
 ```
+
 ### 10.5 Reader Monad模式（依赖注入）
 
 **Reader Monad实现**:
@@ -1555,6 +1585,7 @@ fn connect_with_auth() -> Reader<Config, String> {
         })
 }
 ```
+
 ### 10.6 Writer Monad模式（日志累积）
 
 **Writer Monad实现**:
@@ -1646,6 +1677,7 @@ fn factorial_with_log(n: u64) -> Writer<String, u64> {
     }
 }
 ```
+
 ### 10.7 State Monad模式（状态转换）
 
 **State Monad实现**:
@@ -1734,6 +1766,7 @@ fn random_pair() -> State<RNG, (u64, u64)> {
     })
 }
 ```
+
 ### 10.8 并发模式深化
 
 **CSP (Communicating Sequential Processes) 模式**:
@@ -1769,6 +1802,7 @@ fn csp_pattern() {
     }
 }
 ```
+
 **STM (Software Transactional Memory) 风格**:
 
 ```rust
@@ -1811,6 +1845,7 @@ fn transfer(from: &Transaction<u64>, to: &Transaction<u64>, amount: u64) -> bool
     })
 }
 ```
+
 **Actor模式深化**:
 
 ```rust
@@ -1857,6 +1892,7 @@ impl CounterActor {
     }
 }
 ```
+
 ### 10.9 性能优化模式集
 
 **零拷贝模式**:
@@ -1881,6 +1917,7 @@ fn main() {
     // 没有发生复制
 }
 ```
+
 **延迟计算模式**:
 
 ```rust
@@ -1926,6 +1963,7 @@ fn main() {
     println!("Value: {}", lazy.force());  // 使用缓存结果
 }
 ```
+
 **内存池模式实战**:
 
 ```rust
@@ -1965,6 +2003,7 @@ impl<T> Pool<T> {
     }
 }
 ```
+
 ---
 
 ## 11. 总结

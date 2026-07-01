@@ -46,6 +46,7 @@ for (i, n) in fib.take(10).enumerate() {
     println!("fib[{}] = {}", i, n);
 }
 ```
+
 **核心优势**:
 
 - 状态隐式保存（无需手动 struct）
@@ -80,6 +81,7 @@ fn tree_dfs<T>(node: &TreeNode<T>) -> impl Iterator<Item = &T> {
     }
 }
 ```
+
 **关键区别**:
 
 | | `gen {}` | `async {}` | `iter::from_fn` |
@@ -110,6 +112,7 @@ impl Iterator for Fibonacci {
     }
 }
 ```
+
 ### 生成器版本
 
 ```rust
@@ -122,6 +125,7 @@ let fib = gen {
     }
 };
 ```
+
 **代码量减少 60%+**，状态管理自动化。
 
 ---
@@ -146,6 +150,7 @@ fn sensor_stream() -> impl Iterator<Item = Reading> {
     }
 }
 ```
+
 ---
 
 ## 🔄 实际用例
@@ -164,6 +169,7 @@ fn grep_lines(file: File, pattern: &str) -> impl Iterator<Item = String> + '_ {
     }
 }
 ```
+
 ### 组合生成器
 
 ```rust
@@ -177,6 +183,7 @@ fn flatten_nested<T>(nested: Vec<Vec<T>>) -> impl Iterator<Item = T> {
     }
 }
 ```
+
 ---
 
 ## ⚠️ 当前限制

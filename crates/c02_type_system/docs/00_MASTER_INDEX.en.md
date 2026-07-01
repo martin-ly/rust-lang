@@ -62,6 +62,7 @@ cargo run -p c02_type_system --example <example_name>
 # Run all tests
 cargo test -p c02_type_system
 ```
+
 ---
 
 ## Cheatsheet & Rustlings

@@ -52,6 +52,7 @@ cargo run -p c03_control_fn --example <example_name>
 # Run all tests
 cargo test -p c03_control_fn
 ```
+
 ---
 
 ## Related

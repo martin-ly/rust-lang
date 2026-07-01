@@ -37,6 +37,7 @@ fn main() {
     // const fn double<T: std::ops::Add>(x: T) -> T { x + x } // 错误
 }
 ```
+
 > **修正**:
 >
 > **Const traits** 是 Rust 常量求值的关键扩展：

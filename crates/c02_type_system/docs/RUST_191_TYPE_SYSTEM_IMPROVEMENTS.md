@@ -96,6 +96,7 @@ fn infer_type(expr: &str) -> String {
     }
 }
 ```
+
 **Rust 1.91**:
 
 ```rust
@@ -115,6 +116,7 @@ println!("缓存命中率: {:.2}%",
     (stats.cache_hits as f64 / stats.total_inferences as f64) * 100.0
 );
 ```
+
 #### 2. 优化的类型检查算法
 
 Rust 1.91 改进了类型检查的内部算法：
@@ -131,6 +133,7 @@ impl OptimizedTypeInferencer {
     }
 }
 ```
+
 ### 性能对比
 
 | 场景                   | Rust 1.90 | Rust 1.91 | 性能提升 |
@@ -172,6 +175,7 @@ fn main() {
     );
 }
 ```
+
 ---
 
 ## 增强的 const 上下文（类型推断改进）
@@ -195,6 +199,7 @@ Rust 1.91 允许在 const 上下文中进行更复杂的类型推断：
 const VALUE: i32 = 42;
 // 无法在 const 上下文中进行复杂的类型推断
 ```
+
 **Rust 1.91**:
 
 ```rust
@@ -209,6 +214,7 @@ const fn get_type<T>() -> &'static str {
     std::any::type_name::<T>()
 }
 ```
+
 #### 2. const 上下文中的类型操作
 
 ```rust
@@ -219,6 +225,7 @@ const fn const_type_inference() -> &'static str {
     TYPE  // Rust 1.91 支持在 const 上下文中返回类型信息
 }
 ```
+
 ### 实际应用场景
 
 #### 配置系统
@@ -244,6 +251,7 @@ impl ConfigSystem {
     }
 }
 ```
+
 ---
 
 ## 类型推断缓存机制
@@ -260,6 +268,7 @@ pub struct OptimizedTypeInferencer {
     statistics: TypeInferenceStatistics,
 }
 ```
+
 ### 缓存策略
 
 1. **键**: 表达式字符串
@@ -292,6 +301,7 @@ fn example() {
     // 推断 T 为 i32，U 为 &str
 }
 ```
+
 ### 性能对比1
 
 | 泛型复杂度          | Rust 1.90 | Rust 1.91 | 性能提升 |
@@ -316,6 +326,7 @@ const fn get_type_name<T>() -> &'static str {
 const INT_TYPE: &str = get_type_name::<i32>();
 const STR_TYPE: &str = get_type_name::<String>();
 ```
+
 ### 类型推断
 
 ```rust
@@ -326,6 +337,7 @@ const fn const_type_inference() -> &'static str {
     TYPE
 }
 ```
+
 ---
 
 ## 实际应用示例
@@ -352,6 +364,7 @@ fn high_performance_type_inference() {
     );
 }
 ```
+
 ### 示例 2: const 上下文类型系统
 
 ```rust
@@ -367,6 +380,7 @@ const fn create_typed_config() -> Config {
     }
 }
 ```
+
 ---
 
 ## 迁移指南
@@ -379,6 +393,7 @@ const fn create_typed_config() -> Config {
 rustup update stable
 rustc --version  # 应该显示 rustc 1.91.0
 ```
+
 #### 2. 利用新特性
 
 **使用优化的类型推断器**:
@@ -392,6 +407,7 @@ use c02_type_system::rust_191_features::type_checker_optimizations::OptimizedTyp
 let mut inferencer = OptimizedTypeInferencer::new();
 // 自动使用缓存，性能提升显著
 ```
+
 **使用 const 上下文中的类型系统**:
 
 ```rust
@@ -399,6 +415,7 @@ let mut inferencer = OptimizedTypeInferencer::new();
 const TYPE_INFO: &str = ConfigSystem::get_type_info();
 // 在 const 上下文中使用类型信息
 ```
+
 #### 3. 性能优化建议
 
 1. **利用类型推断缓存**: 重复的表达式会受益于缓存

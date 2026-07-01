@@ -142,6 +142,7 @@
 └── 实战案例
     └── 配置解析器
 ```
+
 ---
 
 ## 1. if 表达式
@@ -176,6 +177,7 @@ fn main() {
     }
 }
 ```
+
 **关键要点**:
 
 - 条件表达式必须是 `bool` 类型
@@ -218,6 +220,7 @@ fn classify_number(n: i32) -> &'static str {
     }
 }
 ```
+
 **关键要点**:
 
 - 所有分支必须返回相同类型
@@ -278,6 +281,7 @@ fn main() {
     println!("grade: {}, grade2: {}, grade3: {}", grade, grade2, grade3);
 }
 ```
+
 ### 1.4 嵌套 if
 
 有时需要嵌套使用 if：
@@ -337,6 +341,7 @@ fn check_driving_eligibility(age: u32, has_license: bool, is_sober: bool) {
     println!("可以驾驶");
 }
 ```
+
 ### 1.5 最佳实践
 
 ```rust
@@ -367,6 +372,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 2. match 表达式
@@ -420,6 +426,7 @@ fn main() {
     println!("结果: {}", result);
 }
 ```
+
 ### 2.2 模式匹配基础
 
 match 支持多种模式：
@@ -483,6 +490,7 @@ fn main() {
     }
 }
 ```
+
 ### 2.3 守卫条件
 
 使用 if 添加额外的条件：
@@ -532,6 +540,7 @@ fn main() {
     }
 }
 ```
+
 ### 2.4 匹配多个值
 
 ```rust
@@ -563,6 +572,7 @@ fn main() {
     }
 }
 ```
+
 ### 2.5 绑定模式
 
 使用 @ 绑定值：
@@ -610,6 +620,7 @@ fn main() {
     }
 }
 ```
+
 ### 2.6 完整性检查
 
 Rust 要求 match 必须穷尽所有可能：
@@ -663,6 +674,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 3. if let 表达式
@@ -707,6 +719,7 @@ fn main() {
     }
 }
 ```
+
 ### 3.2 链式 if let (Rust 1.92.0+)
 
 Rust 1.92.0 引入了链式 if let：
@@ -750,6 +763,7 @@ fn main() {
     }
 }
 ```
+
 ### 3.3 if let 与 else
 
 ```rust
@@ -792,6 +806,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 4. let else 语句 (Rust 1.65+)
@@ -841,6 +856,7 @@ fn check_divisor(b: i32) -> Result<(), String> {
     }
 }
 ```
+
 ### 4.2 使用场景
 
 let else 适合早期返回的场景：
@@ -899,6 +915,7 @@ fn main() {
     let _ = process_user(None, Some("Bob".to_string()));
 }
 ```
+
 ### 4.3 与其他模式的对比
 
 ```rust
@@ -935,6 +952,7 @@ fn main() {
     println!("v4: {}", v4);
 }
 ```
+
 ---
 
 ## 5. 条件语句对比
@@ -997,6 +1015,7 @@ fn main() {
     benchmark();
 }
 ```
+
 **性能结论**:
 
 - 在优化编译后，三者性能几乎相同
@@ -1044,6 +1063,7 @@ fn main() {
     let _ = process(value);
 }
 ```
+
 ---
 
 ## 6. 实战案例
@@ -1116,6 +1136,7 @@ fn main() {
     println!("Debug: {}", config.get_boolean("debug"));
 }
 ```
+
 ### 案例2: HTTP状态码处理
 
 ```rust
@@ -1207,6 +1228,7 @@ fn main() {
     handle_response(HttpStatus::from_code(500), None);
 }
 ```
+
 ### 案例3: 命令行参数解析
 
 ```rust
@@ -1291,6 +1313,7 @@ fn main() {
     }
 }
 ```
+
 ### 案例4: 状态机实现
 
 ```rust
@@ -1381,6 +1404,7 @@ fn main() {
     }
 }
 ```
+
 ### 案例5: 表达式求值器
 
 ```rust
@@ -1498,6 +1522,7 @@ fn main() {
     println!("优化后: {:?}", optimized);
 }
 ```
+
 ---
 
 ## 7. 常见陷阱
@@ -1525,6 +1550,7 @@ fn main() {
     println!("{}", result);
 }
 ```
+
 ### 7.2 忘记 else 分支
 
 ```rust
@@ -1551,6 +1577,7 @@ fn main() {
     println!("{}", result);
 }
 ```
+
 ### 7.3 不完整的 match
 
 ```rust
@@ -1575,6 +1602,7 @@ fn main() {
     }
 }
 ```
+
 ### 7.4 过度嵌套
 
 ```rust
@@ -1604,6 +1632,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 8. 最佳实践

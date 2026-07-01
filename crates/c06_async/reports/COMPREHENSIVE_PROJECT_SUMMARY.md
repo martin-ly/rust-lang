@@ -89,6 +89,7 @@ src/
 ├── utils/             # 实用工具函数
 └── advanced_tools/    # 高级异步工具库
 ```
+
 ### 2. 示例演示层
 
 ```text
@@ -105,6 +106,7 @@ examples/
 ├── async_testing_demo.rs            # 异步测试框架演示
 └── async_monitoring_demo.rs         # 异步监控和诊断工具演示
 ```
+
 ### 3. 测试和基准层
 
 ```text
@@ -114,6 +116,7 @@ benches/
 tests/
 └── 内置在各个示例中的测试
 ```
+
 ### 4. 文档层
 
 ```text
@@ -126,6 +129,7 @@ docs/
 ├── FINAL_PROJECT_ENHANCEMENT_SUMMARY.md    # 最终增强总结
 └── COMPREHENSIVE_PROJECT_SUMMARY.md  # 本文件
 ```
+
 ## 🎓 学习路径设计
 
 ### 初级路径（入门级）
@@ -230,6 +234,7 @@ cargo run --example comprehensive_async_demo
 # 查看所有可用示例
 ls examples/
 ```
+
 ### 学习建议
 
 1. **按顺序学习**: 按照初级→中级→高级的路径学习

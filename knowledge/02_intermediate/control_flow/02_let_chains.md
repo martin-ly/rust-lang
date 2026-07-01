@@ -41,6 +41,7 @@ if let Some(x) = opt && x > 0 && let Ok(y) = parse(x) {
     // ...
 }
 ```
+
 ## 核心优势
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -83,6 +84,7 @@ while let Some(packet) = stream.next()
     handle(data);
 }
 ```
+
 ## 完整示例
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -104,6 +106,7 @@ pub fn parse_and_validate(input: Option<&str>) -> Result<i32, &'static str> {
     }
 }
 ```
+
 ### 示例 2：多模式组合
 
 > **[来源: [crates.io](https://crates.io/)]**
@@ -122,6 +125,7 @@ pub fn combine_options(a: Option<i32>, b: Option<i32>, c: Result<i32, &str>) -> 
     }
 }
 ```
+
 ### 示例 3：配置解析
 
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -148,6 +152,7 @@ pub fn from_args(
     }
 }
 ```
+
 ### 示例 4：match 守卫
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -164,6 +169,7 @@ pub fn classify_value(value: Result<Option<&str>, &str>) -> &'static str {
     }
 }
 ```
+
 ## 适用场景
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -197,6 +203,7 @@ graph TD
     style H fill:#bfb,stroke:#333,stroke-width:2px
     style I fill:#bbf,stroke:#333,stroke-width:2px
 ```
+
 #### 承上（前置知识回溯）
 
 | 前置概念 | 所在文档 | 本章中使用的具体点 |
@@ -261,6 +268,7 @@ if let Some(x) = opt
         process  ← 单层结构，所有条件一目了然
     }
 ```
+
 ### 表征 B: 传统 vs let chains 复杂度矩阵
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -320,6 +328,7 @@ if let Some(headers) = response.headers() {
 }
 None
 ```
+
 <details>
 <summary>参考答案</summary>
 
@@ -333,6 +342,7 @@ if let Some(headers) = response.headers()
 }
 None
 ```
+
 </details>
 
 ---

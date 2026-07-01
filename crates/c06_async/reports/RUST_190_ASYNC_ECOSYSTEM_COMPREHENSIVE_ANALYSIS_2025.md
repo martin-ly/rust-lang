@@ -109,6 +109,7 @@ async fn optimized_async_function() -> Result<Data> {
     Ok(data)
 }
 ```
+
 #### 2.1.2 改进的异步块语法
 
 ```rust
@@ -120,6 +121,7 @@ let result = async {
     future1 + future2
 }.await;
 ```
+
 #### 2.1.3 异步 trait 稳定化
 
 ```rust
@@ -136,6 +138,7 @@ impl AsyncProcessor for MyProcessor {
     }
 }
 ```
+
 ### 2.2 编译器优化特性
 
 #### 2.2.1 Polonius 借用检查器改进
@@ -178,6 +181,7 @@ async fn tokio_optimized_server() -> Result<()> {
     }
 }
 ```
+
 #### 3.1.3 适用场景
 
 - **高并发服务器**: Web 服务器、API 网关
@@ -212,6 +216,7 @@ fn main() -> Result<()> {
     })
 }
 ```
+
 #### 3.2.3 适用场景
 
 - **CLI 工具**: 命令行应用程序
@@ -276,6 +281,7 @@ async fn structured_concurrency_example() -> Result<()> {
     Ok(())
 }
 ```
+
 #### 5.1.2 超时和取消机制
 
 ```rust
@@ -291,6 +297,7 @@ async fn timeout_and_cancellation_example() -> Result<()> {
     Ok(())
 }
 ```
+
 ### 5.2 错误处理和恢复
 
 #### 5.2.1 错误传播和上下文
@@ -310,6 +317,7 @@ async fn error_handling_example() -> Result<()> {
     Ok(())
 }
 ```
+
 #### 5.2.2 重试和退避策略
 
 ```rust
@@ -325,6 +333,7 @@ async fn retry_with_backoff() -> Result<()> {
     Ok(())
 }
 ```
+
 ### 5.3 性能优化技巧
 
 #### 5.3.1 背压控制
@@ -360,6 +369,7 @@ async fn backpressure_example() -> Result<()> {
     Ok(())
 }
 ```
+
 ## 6. 实际应用场景分析
 
 ### 6.1 Web 服务器开发
@@ -381,6 +391,7 @@ async fn web_server_example() -> Result<()> {
     Ok(())
 }
 ```
+
 ### 6.2 数据处理管道
 
 #### 6.2.1 流式数据处理
@@ -403,6 +414,7 @@ async fn stream_processing_example() -> Result<()> {
     Ok(())
 }
 ```
+
 ### 6.3 微服务架构
 
 #### 6.3.1 服务发现和负载均衡
@@ -428,6 +440,7 @@ impl ServiceRegistry {
     }
 }
 ```
+
 ## 7. 监控和可观测性
 
 ### 7.1 结构化日志
@@ -453,6 +466,7 @@ async fn observability_example() -> Result<()> {
     Ok(())
 }
 ```
+
 ### 7.2 指标收集
 
 ```rust
@@ -475,6 +489,7 @@ impl Metrics {
     }
 }
 ```
+
 ## 8. 测试和调试
 
 ### 8.1 异步测试
@@ -502,6 +517,7 @@ mod tests {
     }
 }
 ```
+
 ### 8.2 调试工具
 
 ```rust
@@ -517,6 +533,7 @@ async fn debug_example() -> Result<()> {
     Ok(())
 }
 ```
+
 ## 9. 迁移指南
 
 ### 9.1 从同步代码迁移

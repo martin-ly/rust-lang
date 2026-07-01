@@ -52,7 +52,10 @@
 /// - Does not support `||` (or) mixed with `let` (due to semantic complexity)
 /// - `||`（or ）and `let` （because complex ）
 pub fn process_option_chain(opt: Option<i32>) -> Option<i32> {
-    if let Some(x) = opt && x > 0 && x < 100 {
+    if let Some(x) = opt
+        && x > 0
+        && x < 100
+    {
         Some(x * 2)
     } else {
         None
@@ -62,7 +65,10 @@ pub fn process_option_chain(opt: Option<i32>) -> Option<i32> {
 pub fn while_let_chain_example() -> usize {
     let mut count = 0;
     let mut iter = [Some(1), Some(2), None, Some(3)].into_iter();
-    while let Some(x) = iter.next() && let Some(y) = x && y > 0 {
+    while let Some(x) = iter.next()
+        && let Some(y) = x
+        && y > 0
+    {
         count += y as usize;
     }
     count

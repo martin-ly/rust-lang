@@ -61,6 +61,7 @@
 类型系统  借用    并发安全  最佳实践
 编译器   生命周期  内存安全  性能优化
 ```
+
 ### 第二步：运行第一个示例（3分钟）
 
 ```bash
@@ -73,6 +74,7 @@ cargo run --example rust_190_rich_practical_examples
 # 运行所有测试
 cargo test --example rust_190_rich_practical_examples
 ```
+
 **期望输出**：23个测试全部通过 ✅
 
 ---
@@ -90,6 +92,7 @@ let s2 = s1;                      // 所有权转移给 s2
 // println!("{}", s1);            // ❌ s1 已失效
 println!("{}", s2);               // ✅ s2 有效
 ```
+
 **关键点**：
 
 - ✅ 每个值有唯一所有者
@@ -113,6 +116,7 @@ let mut s = String::from("hello");
 let r1 = &mut s;
 r1.push_str(" world");
 ```
+
 **关键点**：
 
 - ✅ 多个不可变借用 OR 一个可变借用
@@ -133,6 +137,7 @@ let s1 = String::from("long");
 let s2 = String::from("short");
 let result = longest(&s1, &s2);
 ```
+
 **关键点**：
 
 - ✅ 生命周期确保引用有效
@@ -155,6 +160,7 @@ cargo test --example rust_190_rich_practical_examples test_borrowing_rules_compl
 # 练习3：生命周期
 cargo test --example rust_190_rich_practical_examples test_basic_lifetime
 ```
+
 **挑战**：尝试修改示例，看看会产生什么错误，然后修复它们。
 
 ### Hour 2: 智能指针和并发
@@ -176,6 +182,7 @@ thread::spawn(move |
     println!("{:?}", arc);
 });
 ```
+
 **关键点**：
 
 - ✅ Box：独占所有权，堆分配
@@ -199,6 +206,7 @@ for _ in 0..10 {
     });
 }
 ```
+
 **关键点**：
 
 - ✅ Arc实现跨线程共享
@@ -215,6 +223,7 @@ for _ in 0..10 {
 # LRU缓存项目
 cargo run --example rust_190_rich_practical_examples
 ```
+
 阅读并理解：[LRU缓存完整实现](RUST_190_RICH_EXAMPLES_INTEGRATION.md#51-完整项目安全的并发缓存)
 
 ---
@@ -298,6 +307,7 @@ let s1 = String::from("hello");
 let s2 = s1.clone();
 println!("{}", s1);  // OK：s1仍有效
 ```
+
 **详细学习**：[示例2-2](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-2-所有权转移的各种场景)
 
 ### Q2: "cannot borrow as mutable"
@@ -320,6 +330,7 @@ let mut s = String::from("hello");
 }  // r1作用域结束
 let r2 = &mut s;  // OK：r1已结束
 ```
+
 **详细学习**：[示例2-4](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-4-可变借用深度解析)
 
 ### Q3: "lifetime may not live long enough"
@@ -341,6 +352,7 @@ fn no_dangle() -> String {
     s  // OK：转移所有权
 }
 ```
+
 **详细学习**：[示例2-7](RUST_190_RICH_EXAMPLES_INTEGRATION.md#示例2-7-高级生命周期模式)
 
 ---
@@ -386,6 +398,7 @@ fn no_dangle() -> String {
 2️⃣ 同时只能有一个所有者
 3️⃣ 所有者离开作用域时值被释放
 ```
+
 ### 借用规则
 
 ```text
@@ -395,6 +408,7 @@ fn no_dangle() -> String {
 
 3️⃣ 借用不能超过所有者的生命周期
 ```
+
 ### 智能指针选择
 
 ```text
@@ -405,6 +419,7 @@ fn no_dangle() -> String {
 多线程可变共享 → Arc<Mutex<T>>
 读多写少       → Arc<RwLock<T>>
 ```
+
 ---
 
 ## 🚀 下一步

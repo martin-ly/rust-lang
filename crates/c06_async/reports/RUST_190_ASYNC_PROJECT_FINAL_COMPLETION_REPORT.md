@@ -146,6 +146,7 @@ pub struct RuntimeAdapter {
     config: RuntimeConfig,
 }
 ```
+
 #### 2. 高级内存管理
 
 ```rust
@@ -158,6 +159,7 @@ pub struct MemoryPool<T> {
     allocated: Arc<AtomicUsize>,
 }
 ```
+
 #### 3. 生产级错误处理
 
 ```rust
@@ -169,6 +171,7 @@ pub struct RetryPolicy {
     backoff_multiplier: f64,
 }
 ```
+
 #### 4. 结构化并发
 
 ```rust
@@ -179,6 +182,7 @@ pub struct StructuredConcurrency {
     cancellation_token: CancellationToken,
 }
 ```
+
 ## 性能基准测试结果
 
 ### 异步操作性能对比

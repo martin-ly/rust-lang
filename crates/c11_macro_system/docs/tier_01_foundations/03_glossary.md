@@ -76,6 +76,7 @@ macro_rules! vec_of_strings {
     };
 }
 ```
+
 **特点**:
 
 - 语法简洁
@@ -100,6 +101,7 @@ pub fn my_trait_derive(input: TokenStream) -> TokenStream {
     // 处理 TokenStream
 }
 ```
+
 ---
 
 ## 🔧 声明宏术语
@@ -115,6 +117,7 @@ macro_rules! say_hello {
     };
 }
 ```
+
 ---
 
 ### Pattern Matching (模式匹配)
@@ -141,6 +144,7 @@ macro_rules! create_function {
     };
 }
 ```
+
 ---
 
 ### Repetition (重复)
@@ -158,6 +162,7 @@ macro_rules! sum {
 
 let result = sum!(1, 2, 3, 4); // 10
 ```
+
 **符号含义**:
 
 - `*` - 零次或多次
@@ -179,6 +184,7 @@ macro_rules! create_var {
 
 create_var!(x, 42); // let x = 42;
 ```
+
 ---
 
 ## ⚙️ 过程宏术语
@@ -196,6 +202,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
     input
 }
 ```
+
 **特点**:
 
 - 表示代码的 token 序列
@@ -213,6 +220,7 @@ struct MyStruct {
     field: i32,
 }
 ```
+
 **定义**:
 
 ```rust
@@ -221,6 +229,7 @@ pub fn my_trait_derive(input: TokenStream) -> TokenStream {
     // 生成 impl MyTrait for T {}
 }
 ```
+
 ---
 
 ### Attribute Macro (属性宏)
@@ -233,6 +242,7 @@ fn index() -> String {
     "Hello!".to_string()
 }
 ```
+
 **定义**:
 
 ```rust
@@ -243,6 +253,7 @@ pub fn route(attr: TokenStream, item: TokenStream) -> TokenStream {
     // 返回修改后的函数
 }
 ```
+
 ---
 
 ### Function-like Macro (函数式宏)
@@ -252,6 +263,7 @@ pub fn route(attr: TokenStream, item: TokenStream) -> TokenStream {
 ```rust
 let sql = sql!(SELECT * FROM users WHERE id = 1);
 ```
+
 **定义**:
 
 ```rust
@@ -260,6 +272,7 @@ pub fn sql(input: TokenStream) -> TokenStream {
     // 解析 SQL，生成代码
 }
 ```
+
 ---
 
 ### syn Crate
@@ -276,6 +289,7 @@ pub fn my_trait_derive(input: TokenStream) -> TokenStream {
     // ...
 }
 ```
+
 **功能**:
 
 - 解析 Rust 语法
@@ -300,6 +314,7 @@ let expanded = quote! {
     }
 };
 ```
+
 **功能**:
 
 - 使用类 Rust 语法生成代码
@@ -318,6 +333,7 @@ use proc_macro::Span;
 let span = Span::call_site(); // 宏调用位置
 let span = ident.span();       // 标识符位置
 ```
+
 **用途**:
 
 - 精确的错误提示
@@ -345,6 +361,7 @@ macro_rules! using_a {
 let a = 13;
 let result = using_a!(a + a); // 26，使用外部 a
 ```
+
 **保证**:
 
 - 宏内定义的标识符不泄露
@@ -360,6 +377,7 @@ let result = using_a!(a + a); // 26，使用外部 a
 // 这里是 call site
 my_macro!(some_input);
 ```
+
 **影响**:
 
 - Span 信息
@@ -378,6 +396,7 @@ macro_rules! my_macro {
     // ...
 }
 ```
+
 ---
 
 ### Mixed Site (混合点)
@@ -389,6 +408,7 @@ use proc_macro2::Span;
 
 let span = Span::mixed_site();
 ```
+
 ---
 
 ## 🛠️ 工具与库
@@ -402,6 +422,7 @@ cargo install cargo-expand
 cargo expand
 cargo expand my_module::my_function
 ```
+
 **用途**:
 
 - 调试宏
@@ -421,6 +442,7 @@ fn my_helper(input: TokenStream) -> TokenStream {
     // 可以在单元测试中调用
 }
 ```
+
 **优势**:
 
 - 可测试
@@ -440,6 +462,7 @@ fn ui_tests() {
     t.compile_fail("tests/ui/*.rs");
 }
 ```
+
 **用途**:
 
 - 测试宏的错误消息
@@ -479,6 +502,7 @@ LetStmt {
     }
 }
 ```
+
 **在宏中**:
 
 - syn 解析为 AST
@@ -500,6 +524,7 @@ html! {
     </div>
 }
 ```
+
 **实现方式**:
 
 - 函数式宏
@@ -525,6 +550,7 @@ let user = User::builder()
     .age(30)
     .build();
 ```
+
 ---
 
 ### Zero-Cost Abstraction (零成本抽象)
@@ -540,6 +566,7 @@ for x in vec {
     println!("{}", x);
 }
 ```
+
 **验证方式**:
 
 - 查看宏展开
@@ -555,6 +582,7 @@ for x in vec {
 ```rust
 const SIZE: usize = compute_size!(some_input);
 ```
+
 ---
 
 **上一步**: [主索引导航](02_navigation.md)

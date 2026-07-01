@@ -89,6 +89,7 @@ graph TD
     I --> J[连接池]
     J --> K[数据库]
 ```
+
 ---
 
 ## 💡 核心特性
@@ -122,6 +123,7 @@ async fn get_user(pool: &PgPool, user_id: i64) -> Result<User, sqlx::Error> {
     Ok(user)
 }
 ```
+
 **检查内容**:
 
 - SQL 语法正确性
@@ -150,6 +152,7 @@ struct UserWithPosts {
     avatar_url: Option<String>,
 }
 ```
+
 ### 异步原生
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -172,6 +175,7 @@ let (users, posts): (Vec<User>, Vec<Post>) = tokio::try_join!(
     sqlx::query_as::<_, Post>("SELECT * FROM posts").fetch_all(&pool),
 )?;
 ```
+
 ---
 
 ## 🚀 高级用法
@@ -217,6 +221,7 @@ impl Database {
     }
 }
 ```
+
 ### 事务处理
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -282,6 +287,7 @@ async fn nested_transaction_example(db: &Database) -> Result<(), sqlx::Error> {
     tx.commit().await
 }
 ```
+
 ### 查询构建
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -341,6 +347,7 @@ async fn bulk_insert_users(
     Ok(())
 }
 ```
+
 ### 迁移
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -364,6 +371,7 @@ CREATE TABLE IF NOT EXISTS posts (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 ```
+
 ```rust,ignore
 use sqlx::migrate;
 
@@ -373,6 +381,7 @@ async fn run_migrations(pool: &PgPool) -> Result<(), sqlx::migrate::MigrateError
         .await
 }
 ```
+
 ---
 
 ## 📊 性能优化
@@ -422,6 +431,7 @@ let pool = PgPoolOptions::new()
     .connect(&database_url)
     .await?;
 ```
+
 ---
 
 ## 🧪 测试
@@ -464,6 +474,7 @@ mod tests {
     }
 }
 ```
+
 ---
 
 ## 🔗 参考资源

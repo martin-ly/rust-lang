@@ -80,6 +80,7 @@ graph BT
     B --> E[Branch Coverage]
     E --> C
 ```
+
 > **认知功能**: 此图展示覆盖率等级的**层次包含关系**——高层覆盖隐含低层覆盖，但反之不成立。MC/DC 位于层次顶端，要求最严格。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 安全关键项目（航空、汽车、医疗）要求 MC/DC；一般项目语句覆盖或分支覆盖即可。
@@ -116,6 +117,7 @@ MC/DC（Modified Condition/Decision Coverage）要求：
 // (A=false, B=true, C=false)  → false && true  || false = false
 // ✅ A 独立影响
 ```
+
 > **形式化表述**: 设决策 `D = f(c₁, c₂, ..., cₙ)`，则 MC/DC 要求：
 > ∀i ∈ {1, ..., n}, ∃ 测试对 (t₁, t₂):
 > cᵢ(t₁) ≠ cᵢ(t₂) ∧ (∀j≠i, cⱼ(t₁) = cⱼ(t₂)) ∧ D(t₁) ≠ D(t₂)
@@ -140,6 +142,7 @@ Rust 编译器通过 `llvm-cov` 基础设施实现覆盖率检测。MC/DC 支持
 │   └── 报告生成: 待实现
 └── 🔴 MCC (Multiple Condition Coverage) — 无计划
 ```
+
 > **实现挑战**:
 >
 > 1. **短路求值**: `A && B` 中若 `A=false` 则 `B` 不执行，如何判定 B 的"独立影响"？
@@ -172,6 +175,7 @@ graph TD
     B -.->|独立影响| T3
     C -.->|独立影响| T5
 ```
+
 > **认知功能**: 此图展示 MC/DC 的核心机制——通过精心设计的测试用例对，验证每个条件是否**独立影响**决策结果。
 > **使用建议**: 编写 MC/DC 测试时，按此图方法为每个条件构造一对测试用例，确保三要素（条件变、其他不变、结果变）同时满足。
 > **关键洞察**: MC/DC 的测试用例数随条件数线性增长（n+1 对），而非 MCC 的指数增长（2ⁿ 对）。这是"修改后"（Modified）的含义——在完整条件覆盖和测试可行性之间取得平衡。
@@ -192,6 +196,7 @@ fn decision(a: bool, b: bool, c: bool) -> bool {
 // fn decision(b: bool, c: bool) -> bool { b || c }
 // 原条件 A 消失！MC/DC 如何验证？
 ```
+
 > **定理**: 编译器优化可能消除 MC/DC 要求的条件独立性验证目标。
 > **证明**: 常量传播将 `A && B` 中 `A=true` 替换为 `B`。此时原条件 A 不再存在于生成的代码中，MC/DC 要求验证 A 的独立影响变得不可能（或需要回溯到源代码级别）。
 > **解决方案**: MC/DC 插桩必须在**源代码级别**或**优化前 IR 级别**进行，而非优化后的机器码。
@@ -234,6 +239,7 @@ graph TD
     style ALT fill:#fff3e0
     style FALSE2 fill:#ffebee
 ```
+
 > **认知功能**: 此决策树帮助项目管理者判断是否需要 MC/DC。核心判断标准是安全等级和是否有形式化验证替代。
 > **使用建议**: DO-178C Level A/B 或 ISO 26262 ASIL-D 项目必须 MC/DC；低等级项目可用分支覆盖替代；使用 Kani/Creusot 形式化验证的项目可用证明替代测试覆盖。
 > **关键洞察**: MC/DC 不是目的，而是**安全论证的手段**。形式化验证提供更强的保证，在某些场景下可替代 MC/DC。
@@ -260,6 +266,7 @@ graph TD
 ├── 传统的条件覆盖分析不直接适用
 └── 需要扩展到状态机转换覆盖
 ```
+
 > **边界要点**: Rust 的独特语言特性（模式匹配（Pattern Matching）、短路求值、异步（Async）状态机）为 MC/DC 实现带来额外挑战，需要在通用 MC/DC 框架上扩展 Rust 特定的分析。
 
 ---
@@ -291,6 +298,7 @@ graph TD
 | [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
 | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [DO-178C / ED-12C](https://www.rtca.org/product/do-178c/) | ✅ 一级 | 航空软件标准，MC/DC 定义来源 |
@@ -357,6 +365,7 @@ mod tests {
     }
 }
 ```
+
 > **修正**:
 > MCDC（Modified Condition/Decision Coverage）是 DO-178C（航空软件认证标准）要求的覆盖率级别。
 > 它要求：
@@ -389,6 +398,7 @@ fn main() {
     println!("hello");
 }
 ```
+
 > **修正**:
 > LLVM 的覆盖率插桩（`-C instrument-coverage`）在编译期插入计数器代码，生成 `.profraw` 文件。
 > 该功能与某些编译器标志冲突：
@@ -421,6 +431,7 @@ fn test_mcdc_full() {
     // 缺少: c 独立变化（c=F 时 a=F, b=any, d=T → F F F T → F? 实际上 (F&&any)||(F&&T)=F）
 }
 ```
+
 > **修正**:
 > MC/DC 分析在短路逻辑下更复杂：条件 `c` 和 `d` 仅在 `a && b` 为假时求值，因此 `c` 的独立影响测试需要 `a = false`（或 `b = false`）且 `d = true`。
 > `complex_decision(false, false, false, true)` 返回 `false`，`complex_decision(false, false, true, true)` 返回 `true`——`c` 独立变化影响了结果。
@@ -445,6 +456,7 @@ fn main() {
     }
 }
 ```
+
 > **修正**:
 > LLVM 的 `instrument-coverage` 在 IR 级别插入计数器，对每个基本块（basic block）计数。
 > `#[inline(always)]` 函数在每个调用点展开，每个展开实例都有独立的计数器。

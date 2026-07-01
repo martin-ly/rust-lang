@@ -125,6 +125,7 @@
     ├── TT Munching
     └── Push-Down Accumulation
 ```
+
 ### 多维概念对比矩阵
 
 | 宏元编程技术               | 复杂度 | 性能   | 编译时开销 | 适用场景 | Rust 1.92.0 |
@@ -149,6 +150,7 @@
 │       │       │   ├── 是 → TT Munching
 │       │       │   └── 否 → 零成本抽象
 ```
+
 ---
 
 ## 1. 概述
@@ -213,6 +215,7 @@ impl<T> MyType<T> {
 // 零大小验证
 assert_eq!(std::mem::size_of::<MyType<String>>(), std::mem::size_of::<i32>());
 ```
+
 **PhantomData 的用途**：
 
 1. **类型安全标记**：区分不同状态或配置
@@ -273,6 +276,7 @@ fn type_safe_units() {
     println!("Total: {} meters", total_m.value);
 }
 ```
+
 ---
 
 ### 2.2 类型状态模式
@@ -347,6 +351,7 @@ fn typestate_example() {
     let safe = safe.add_item("More gold".to_string()).lock();
 }
 ```
+
 #### 2.2.2 宏生成的状态机
 
 ```rust
@@ -414,6 +419,7 @@ fn traffic_light_example() {
     // light.change_to_green(); // ❌ 编译错误：Red 状态不能直接变绿（需要先变黄）
 }
 ```
+
 ---
 
 ### 2.3 类型级计算
@@ -463,6 +469,7 @@ fn type_level_arithmetic() {
     assert_three::<OnePlusTwo>(); // ✅ 编译通过
 }
 ```
+
 #### 2.3.2 类型级布尔运算
 
 ```rust
@@ -504,6 +511,7 @@ impl Not for False {
     type Output = True;
 }
 ```
+
 ---
 
 ### 2.4 HList 异构列表
@@ -547,6 +555,7 @@ fn hlist_example() {
     println!("Second: {}", list.tail.head); // "hello"
 }
 ```
+
 #### 2.4.2 类型安全的 Get
 
 ```rust
@@ -587,6 +596,7 @@ fn hlist_indexing() {
     println!("First: {}, Second: {}", first, second);
 }
 ```
+
 ---
 
 ## 3. 编译期计算
@@ -617,6 +627,7 @@ fn const_generics_example() {
     println!("Array: {:?}", arr);
 }
 ```
+
 #### 3.1.2 编译期字符串操作
 
 ```rust
@@ -634,6 +645,7 @@ const GREETING_LEN: usize = str_len(GREETING); // 12
 // 编译期断言
 const _: () = assert!(GREETING_LEN == 12);
 ```
+
 ---
 
 ### 3.2 编译期断言
@@ -657,6 +669,7 @@ static_assert!(std::mem::align_of::<i32>() == 4);
 // ❌ 如果断言失败，编译会失败
 // static_assert!(1 + 1 == 3); // error: assertion failed
 ```
+
 #### 3.2.2 类型级断言
 
 ```rust
@@ -675,6 +688,7 @@ fn type_assertions() {
     // assert_same_type::<i32, u32>(); // ❌ 编译错误
 }
 ```
+
 ---
 
 ### 3.3 编译期优化
@@ -706,6 +720,7 @@ fn unrolled_loop() {
     println!("Sum: {}", sum);
 }
 ```
+
 #### 3.3.2 分支消除
 
 ```rust
@@ -732,6 +747,7 @@ fn optimized_function() {
     }
 }
 ```
+
 ---
 
 ### 3.4 宏驱动的代码生成
@@ -786,6 +802,7 @@ fn generated_code_example() {
     println!("Age: {}", person.get_age());
 }
 ```
+
 ---
 
 ## 4. 零成本抽象
@@ -810,6 +827,7 @@ fn caller() {
     let result = 1 + 2; // add() 被内联
 }
 ```
+
 #### 4.1.2 泛型单态化
 
 ```rust
@@ -826,6 +844,7 @@ fn monomorphization_example() {
     print_value("hello");   // 调用 print_value_str
 }
 ```
+
 ---
 
 ### 4.2 宏生成的零成本包装
@@ -867,6 +886,7 @@ fn newtype_example() {
     // 编译后的汇编与直接使用 u64 相同
 }
 ```
+
 ---
 
 ### 4.3 编译期多态
@@ -905,6 +925,7 @@ fn dynamic_dispatch(c: &dyn Compute) -> i32 {
     c.compute() // 运行时通过 vtable 查找
 }
 ```
+
 ---
 
 ## 5. 高级宏模式
@@ -924,6 +945,7 @@ macro_rules! count {
 // 使用示例
 const COUNT: usize = count!(a b c d e); // 5
 ```
+
 #### 5.1.1 解析逗号分隔列表
 
 ```rust
@@ -949,6 +971,7 @@ fn tt_munching_example() {
     println!("{:?}", list); // [1, 2, 3, 4, 5]
 }
 ```
+
 ---
 
 ### 5.2 Push-Down Accumulation
@@ -972,6 +995,7 @@ macro_rules! reverse {
 // 使用示例
 const REVERSED: (i32, i32, i32) = reverse!(1 2 3); // (3, 2, 1)
 ```
+
 ---
 
 ### 5.3 Internal Rules
@@ -999,6 +1023,7 @@ macro_rules! calculate {
 // 使用示例
 const RESULT: i32 = calculate!(+ 5 * 3 + 2); // 5 * 3 + 2 = 17
 ```
+
 ---
 
 ### 5.4 Callback 模式
@@ -1030,6 +1055,7 @@ fn callback_pattern() {
     println!("Sum: {}, Product: {}", SUM, PRODUCT);
 }
 ```
+
 ---
 
 ## 6. 实战案例
@@ -1120,6 +1146,7 @@ fn type_safe_builder() {
     // let invalid = UserBuilder::new().build(); // ❌ 编译错误：缺少必填字段
 }
 ```
+
 ---
 
 ### 6.2 编译期 SQL 验证
@@ -1157,6 +1184,7 @@ fn compile_time_sql() {
     // ❌ 编译错误：字段不存在
 }
 ```
+
 ---
 
 ### 6.3 零成本状态机
@@ -1210,6 +1238,7 @@ fn zero_cost_state_machine() {
     // conn.send_data(); // ❌ 编译错误：Disconnected 状态不能发送数据
 }
 ```
+
 ---
 
 ## 7. 相关资源

@@ -45,6 +45,7 @@ pub trait Iterator {
     // ... 更多方法
 }
 ```
+
 **核心方法**:
 
 ```rust
@@ -61,6 +62,7 @@ fn main() {
     assert_eq!(iter.size_hint(), (3, Some(3)));
 }
 ```
+
 ---
 
 ## 2. 适配器方法
@@ -103,6 +105,7 @@ fn main() {
     assert_eq!(flat, vec![1, 2, 3, 4]);
 }
 ```
+
 **选择适配器**:
 
 ```rust
@@ -130,6 +133,7 @@ fn main() {
     assert_eq!(result, vec![&1, &3, &5]);
 }
 ```
+
 **组合适配器**:
 
 ```rust
@@ -150,6 +154,7 @@ fn main() {
     assert_eq!(result, vec![(0, &1), (1, &2), (2, &3)]);
 }
 ```
+
 **检查适配器**:
 
 ```rust
@@ -170,6 +175,7 @@ fn main() {
     assert_eq!(iter.peek(), Some(&&2));
 }
 ```
+
 ---
 
 ## 3. 消费者方法
@@ -196,6 +202,7 @@ fn main() {
     assert_eq!(right, vec![2, 4, 6]);
 }
 ```
+
 **聚合方法**:
 
 ```rust
@@ -228,6 +235,7 @@ fn main() {
     assert_eq!(product, 120);
 }
 ```
+
 **查找方法**:
 
 ```rust
@@ -258,6 +266,7 @@ fn main() {
     assert_eq!(max, Some(&5));
 }
 ```
+
 **布尔方法**:
 
 ```rust
@@ -277,6 +286,7 @@ fn main() {
     assert!(!vec.iter().none(|&x| x > 4));
 }
 ```
+
 **计数方法**:
 
 ```rust
@@ -296,6 +306,7 @@ fn main() {
     assert_eq!(last, Some(&5));
 }
 ```
+
 ---
 
 ## 4. IntoIterator trait
@@ -310,6 +321,7 @@ pub trait IntoIterator {
     fn into_iter(self) -> Self::IntoIter;
 }
 ```
+
 **实现**:
 
 ```rust
@@ -337,6 +349,7 @@ fn main() {
     println!("{:?}", vec);
 }
 ```
+
 ---
 
 ## 5. 自定义迭代器
@@ -380,6 +393,7 @@ fn main() {
     assert_eq!(result, vec![1, 2, 3, 4, 5]);
 }
 ```
+
 **实现ExactSizeIterator**:
 
 ```rust
@@ -394,6 +408,7 @@ fn main() {
     assert_eq!(counter.len(), 5);
 }
 ```
+
 **实现DoubleEndedIterator**:
 
 ```rust
@@ -435,6 +450,7 @@ fn main() {
     assert_eq!(range.next_back(), Some(3));
 }
 ```
+
 ---
 
 ## 6. 性能特性
@@ -458,6 +474,7 @@ fn main() {
     assert_eq!(sum, sum2);
 }
 ```
+
 **延迟求值**:
 
 ```rust
@@ -483,6 +500,7 @@ fn main() {
     println!("result: {:?}", result);
 }
 ```
+
 **融合优化**:
 
 ```rust
@@ -499,6 +517,7 @@ fn main() {
     assert_eq!(result, vec![7, 9, 11]);
 }
 ```
+
 ---
 
 ## 7. 完整方法列表

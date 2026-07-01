@@ -129,6 +129,7 @@
     ├── Panic 处理
     └── 错误传播
 ```
+
 ---
 
 ## 1. 概述
@@ -175,6 +176,7 @@
 │ ✗ CPU 密集型计算 (阻塞事件循环)                     │
 └─────────────────────────────────────────────────────┘
 ```
+
 ---
 
 ## 2. 线程创建与启动
@@ -207,6 +209,7 @@ fn main() {
     println!("All threads finished");
 }
 ```
+
 **输出（顺序可能不同）：**
 
 ```text
@@ -215,6 +218,7 @@ Hello from spawned thread!
 Spawned thread finishing
 All threads finished
 ```
+
 ### 2.2 传递参数给线程
 
 由于闭包需要获取外部变量的所有权，需要使用 `move` 关键字：
@@ -244,6 +248,7 @@ fn main() {
     println!("Thread returned: {}", result);
 }
 ```
+
 ### 2.3 返回值处理
 
 线程通过 `JoinHandle::join()` 返回结果：
@@ -275,6 +280,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 3. 线程生命周期管理
@@ -304,6 +310,7 @@ fn main() {
     println!("Thread 2 joined");
 }
 ```
+
 ### 3.2 Detached Threads（游离线程）
 
 有时不需要等待线程完成，但需要确保主线程不会过早退出：
@@ -339,6 +346,7 @@ fn main() {
     println!("Main thread exiting");
 }
 ```
+
 ### 3.3 Thread Parking（线程挂起）
 
 ```rust
@@ -362,6 +370,7 @@ fn main() {
     parked_thread.join().unwrap();
 }
 ```
+
 ---
 
 ## 4. 线程配置与优化
@@ -388,6 +397,7 @@ fn main() {
     println!("Result: {}", result);
 }
 ```
+
 ### 4.2 线程池模式
 
 虽然标准库不提供线程池，但可以手动实现简单版本：
@@ -464,6 +474,7 @@ fn main() {
     thread::sleep(std::time::Duration::from_secs(1));
 }
 ```
+
 **推荐使用成熟的线程池库：**
 
 - [`rayon`](https://docs.rs/rayon) - 数据并行
@@ -489,6 +500,7 @@ fn main() {
     handle.join().unwrap();
 }
 ```
+
 ---
 
 ## 5. 错误处理与恢复
@@ -517,6 +529,7 @@ fn main() {
     }
 }
 ```
+
 ### 5.2 设置 Panic Hook
 
 ```rust
@@ -555,6 +568,7 @@ fn main() {
     println!("Main thread continuing...");
 }
 ```
+
 ### 5.3 线程安全的错误传播
 
 ```rust
@@ -597,6 +611,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 6. 最佳实践
@@ -623,6 +638,7 @@ fn main() {
     }
 }
 ```
+
 ### 6.2 避免过度线程化
 
 ```rust
@@ -668,6 +684,7 @@ fn main() {
     println!("Time: {:?}", good_start.elapsed());
 }
 ```
+
 ### 6.3 使用作用域线程避免所有权问题
 
 Rust 1.63+ 引入了 `std::thread::scope`，允许线程借用局部变量：
@@ -694,6 +711,7 @@ fn main() {
     println!("Results: {:?}", results);
 }
 ```
+
 ### 6.4 命名线程便于调试
 
 ```rust
@@ -717,6 +735,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 7. 实战案例
@@ -775,6 +794,7 @@ fn main() {
     println!("Processed in {:?}", start.elapsed());
 }
 ```
+
 ### 7.2 生产者-消费者模式
 
 ```rust
@@ -808,6 +828,7 @@ fn main() {
     consumer.join().unwrap();
 }
 ```
+
 ### 7.3 分批处理大数据
 
 ```rust
@@ -849,6 +870,7 @@ fn main() {
     println!("Total sum of squares: {}", total);
 }
 ```
+
 ---
 
 ## 8. 性能优化
@@ -888,6 +910,7 @@ fn main() {
     println!("Batched spawn: {:?}", start.elapsed());
 }
 ```
+
 ### 8.2 缓存行填充避免伪共享
 
 ```rust
@@ -942,6 +965,7 @@ fn main() {
     // 这里仅作示意
 }
 ```
+
 ### 8.3 使用 available_parallelism 动态调整
 
 ```rust
@@ -970,6 +994,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 9. 常见陷阱
@@ -997,6 +1022,7 @@ fn main() {
     handle.join().unwrap();
 }
 ```
+
 ### 9.2 不必要的 `Arc<Mutex<T>>`
 
 ```rust
@@ -1026,6 +1052,7 @@ fn main() {
     handle.join().unwrap();
 }
 ```
+
 ### 9.3 线程数量过多
 
 ```rust
@@ -1053,6 +1080,7 @@ fn main() {
     //     .collect();
 }
 ```
+
 ---
 
 ## 10. 参考资源

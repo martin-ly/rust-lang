@@ -30,6 +30,7 @@ fn process(data: &str) {
     // 直接使用引用
 }
 ```
+
 ---
 
 ## 2. Copy on Write (Cow)
@@ -45,6 +46,7 @@ fn process<'a>(input: &'a str) -> Cow<'a, str> {
     }
 }
 ```
+
 ---
 
 ## 3. 内存布局优化
@@ -64,6 +66,7 @@ struct Optimized {
     c: u8,    // 1 byte
 } // 总共 16 字节
 ```
+
 ---
 
 ## 4. 零拷贝优化
@@ -169,6 +172,7 @@ mod tests {
     }
 }
 ```
+
 ---
 
 ## 5. 移动语义优化
@@ -183,6 +187,7 @@ fn create_large() -> Vec<u8> {
     vec![0; 1024 * 1024] // 资源控制权转移给调用者
 }
 ```
+
 ---
 
 **相关文档**:

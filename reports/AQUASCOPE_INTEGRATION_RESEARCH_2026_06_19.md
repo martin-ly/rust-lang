@@ -49,6 +49,7 @@ cargo +nightly-2024-12-15 install aquascope_front \
   --tag v0.3.7 --locked
 cargo +nightly-2024-12-15 miri setup
 ```
+
 ### 2.1 关键发现：官方指定的 nightly 已不可用
 
 2026-06-19 实际执行时发现：
@@ -57,6 +58,7 @@ cargo +nightly-2024-12-15 miri setup
 $ rustup toolchain install nightly-2024-12-15
 error: no release found for 'nightly-2024-12-15'
 ```
+
 同样，`nightly-2023-08-25`（v0.3.4 所需）也已从 rustup 发布通道中移除。这意味着 **Aquascope 的“固定 nightly”安装路径在当前 rustup 环境下已断裂**。可能原因：
 
 1. rustup 仅保留最近几个月的 nightly manifest，旧 nightly 会被清理。
@@ -72,6 +74,7 @@ error: no release found for 'nightly-2024-12-15'
 ```bash
 cargo install mdbook-aquascope --version 0.4.0 --force
 ```
+
 **结果**：✅ 编译并安装成功（36.7s）。这说明 `mdbook-aquascope v0.4.0` 的预处理器本身可以在当前 nightly 上运行，不需要固定到旧 nightly。
 
 接下来继续验证 `aquascope_front`（即 `cargo-aquascope`）是否也能在当前 nightly 上安装并运行。
@@ -81,6 +84,7 @@ cargo install mdbook-aquascope --version 0.4.0 --force
 ```bash
 rustup component add rust-src rustc-dev llvm-tools-preview miri --toolchain nightly
 ```
+
 **第二次尝试结果**：❌ 仍失败。安装 `rustc-dev` 后，`rustc_utils` 与 `miri` 内部 API 与当前 nightly（2026-06-17）不兼容：
 
 - `rustc_utils` 中 `Unnormalized<TyCtxt<'_>, Ty<'_>>` 与 `Ty<'_>` 类型不匹配
@@ -97,12 +101,14 @@ v0.4.0 的 `rust-toolchain.toml` 指定：
 channel = "nightly-2026-05-01"
 components = ["rust-src", "rustc-dev", "llvm-tools-preview", "miri"]
 ```
+
 但实际安装时报错：
 
 ```text
 $ rustup toolchain install nightly-2026-05-01 -c rust-src -c rustc-dev -c llvm-tools-preview -c miri
 error: no release found for 'nightly-2026-05-01'
 ```
+
 截至 2026-06-19，Aquascope `main` 分支仍未更新该工具链锁定（仍为 `nightly-2026-05-01`）。
 
 ### 2.4 POC 结论
@@ -128,6 +134,7 @@ error: no release found for 'nightly-2026-05-01'
 ```toml
 [preprocessor.aquascope]
 ```
+
 然后在 Markdown 中使用特殊代码块：
 
 ````markdown
@@ -138,6 +145,7 @@ s.push_str("world");`[]`
 #}
 ```
 ````
+
 其中 `\`[]\`` 标记解释器应展示状态的步骤。
 
 ### 3.2 静态截图/嵌入（当前不可行）

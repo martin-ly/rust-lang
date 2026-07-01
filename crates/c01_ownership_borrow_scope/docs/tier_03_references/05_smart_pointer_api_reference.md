@@ -30,6 +30,7 @@ let b: Box<i32> = Box::from(5);
 // 内存布局
 // Box::new(x) 在堆上分配 x，栈上存储指针
 ```
+
 ---
 
 ## `Rc<T>` API
@@ -53,6 +54,7 @@ if let Some(data) = Rc::get_mut(&mut a) {
     *data += 1;
 }
 ```
+
 ---
 
 ## `Arc<T>` API
@@ -64,6 +66,7 @@ use std::sync::Arc;
 let a = Arc::new(5);
 let b = Arc::clone(&a);
 ```
+
 ---
 
 ## `RefCell<T>` API
@@ -85,6 +88,7 @@ let mut r = data.borrow_mut(); // RefMut<i32>
 let r = data.try_borrow(); // Result<Ref<i32>, BorrowError>
 let r = data.try_borrow_mut(); // Result<RefMut<i32>, BorrowMutError>
 ```
+
 ---
 
 ## `Weak<T>` API
@@ -106,6 +110,7 @@ if let Some(strong) = weak.upgrade() {
 let strong_count = weak.strong_count();
 let weak_count = weak.weak_count();
 ```
+
 ---
 
 **相关文档**:

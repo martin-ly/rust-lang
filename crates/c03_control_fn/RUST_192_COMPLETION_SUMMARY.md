@@ -234,6 +234,7 @@ cargo run --example rust_192_features_demo --features async
 # 如果启用 std 特性（并行处理）
 cargo run --example rust_192_features_demo --features std
 ```
+
 ### 运行测试
 
 ```bash
@@ -249,12 +250,14 @@ cargo test --test rust_192_comprehensive_tests --package c03_control_fn
 # 运行异步测试（需要 async 特性）
 cargo test --package c03_control_fn --features async
 ```
+
 ### 运行基准测试
 
 ```bash
 # 运行所有基准测试
 cargo bench --bench rust_192_benchmarks --package c03_control_fn
 ```
+
 ---
 
 ## 📈 代码质量

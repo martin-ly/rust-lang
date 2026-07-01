@@ -36,7 +36,6 @@
   - [关键经验](#关键经验)
     - [成功因素](#成功因素)
     - [量化指标](#量化指标)
-  - [**适用标准**: EN 50128:2011, EN 50129:2018, EN 50657:2019](#适用标准-en-501282011-en-501292018-en-506572019)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -803,6 +802,7 @@ mod verification {
 **案例日期**: 2023-2026
 **文档版本**: 1.0
 **适用标准**: EN 50128:2011, EN 50129:2018, EN 50657:2019
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -831,13 +831,9 @@ mod verification {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Machine Learning]**
-
 > **[来源: Wikipedia - Artificial Intelligence]**
-
 > **[来源: tch-rs Documentation]**
-
 > **[来源: ACM - AI Systems]**
-
 > **[来源: ISO 26262 - Functional Safety]**
 > **[来源: IEC 61508 - Safety Standards]**
 > **[来源: MISRA Rust Guidelines]**
@@ -846,7 +842,6 @@ mod verification {
 > **[来源: Wikipedia - Artificial Intelligence]**
 > **[来源: tch-rs Documentation]**
 > **[来源: ACM - AI Systems]**
-
 > **[来源: Wikipedia - Concurrency]**
 > **[来源: Wikipedia - Asynchronous I/O]**
 

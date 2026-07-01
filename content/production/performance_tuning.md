@@ -47,6 +47,7 @@ Rust 的零成本抽象承诺意味着：高级语义不必然带来运行时开
 ├─ 4. 验证: 基准测试对比 / 回归检测
 └─ 5. 部署: 选择正确的 release profile
 ```
+
 > **黄金法则**: "过早优化是万恶之源" — 先测量，再优化。
 
 ---
@@ -70,6 +71,7 @@ cargo flamegraph --bin myapp -- --port 8080
 # 使用 dtrace (macOS)
 cargo flamegraph --dtrace --bin myapp
 ```
+
 **火焰图解读**:
 
 ```text
@@ -82,6 +84,7 @@ cargo flamegraph --dtrace --bin myapp
 │  │  std::io::read_to_end  17%           │
 └─────────────────────────────────────────┘
 ```
+
 - **横轴**: 样本数量（越宽 = 占比越高）
 - **纵轴**: 调用栈深度
 - **颜色**: 无意义，仅区分相邻帧
@@ -106,6 +109,7 @@ perf stat -e cache-misses,cache-references,instructions,cycles \
 #  cache-misses / cache-references = 缓存 miss 率 (< 5% 为优)
 #  instructions / cycles = IPC (> 2.0 为优)
 ```
+
 ### cachegrind / callgrind
 
 Valgrind 工具集，精确统计缓存行为（无需 root）：
@@ -124,6 +128,7 @@ cg_annotate cachegrind.out.12345
 valgrind --tool=callgrind ./target/release/myapp
 kcachegrind callgrind.out.12345  # GUI 可视化
 ```
+
 | 工具 | 精度 | 开销 | 适用场景 |
 |------|------|------|----------|
 | **cargo-flamegraph** | 采样 | ~5% | 快速定位 CPU 热点 |
@@ -207,6 +212,7 @@ fn bench_sorts(c: &mut Criterion) {
 criterion_group!(benches, bench_sorts);
 criterion_main!(benches);
 ```
+
 **Cargo.toml 配置**:
 
 ```toml
@@ -217,6 +223,7 @@ harness = false
 [dev-dependencies]
 criterion = { workspace = true }
 ```
+
 ### 统计驱动的结果解读
 
 Criterion 使用稳健的统计方法：
@@ -227,6 +234,7 @@ sort_algorithms/bubble/1000
                         change: [-2.345% -1.234% -0.123%] (p = 0.02 < 0.05)
                         Performance has improved.
 ```
+
 - **时间区间**: 置信度 95% 的置信区间
 - **change**: 与上一次运行的对比（需保存基准）
 - **p 值**: < 0.05 表示变化具有统计显著性
@@ -243,6 +251,7 @@ cargo bench -- --baseline main
 
 # 输出报告: target/criterion/
 ```
+
 ---
 
 ## ⚙️ 编译优化 Profile 选择
@@ -294,6 +303,7 @@ strip = true
 panic = "abort"
 incremental = false
 ```
+
 ### Profile 决策矩阵
 
 | Profile | 编译速度 | 运行速度 | 二进制体积 | 调试能力 | 典型场景 |
@@ -323,6 +333,7 @@ cargo build --profile release-fast
 # 最小体积: 嵌入式场景
 cargo build --profile size
 ```
+
 ---
 
 ## 🧠 内存布局优化
@@ -371,6 +382,7 @@ fn update_positions_soa(p: &mut Particles, dt: f32) {
     }
 }
 ```
+
 | 布局 | 缓存效率 | 代码复杂度 | 适用场景 |
 |------|----------|------------|----------|
 | **AoS** | ⭐⭐ | ⭐⭐⭐ 简单 | 随机访问单个实体全字段 |
@@ -401,6 +413,7 @@ fn good_cache_access(matrix: &mut [[f32; 1024]; 1024]) {
     }
 }
 ```
+
 ### 结构体布局与对齐
 
 ```rust
@@ -429,6 +442,7 @@ fn main() {
     println!("GoodLayout: {} bytes", mem::size_of::<GoodLayout>());
 }
 ```
+
 ---
 
 ## 🔄 零成本抽象验证
@@ -454,6 +468,7 @@ pub fn sum_fold(arr: &[i32]) -> i32 {
     arr.iter().fold(0, |acc, x| acc + x)
 }
 ```
+
 **编译后机器码对比** (`opt-level = 3`):
 
 ```asm
@@ -466,6 +481,7 @@ sum_loop:
     cmp     rcx, rdx
     jb      sum_loop
 ```
+
 | 抽象层级 | 代码清晰度 | 优化潜力 | 实际性能 |
 |----------|------------|----------|----------|
 | 手写循环 | ⭐⭐ | ⭐⭐ | ⭐⭐⭐ |
@@ -504,6 +520,7 @@ pub fn explicit_simd(a: &[f32], b: &[f32], c: &mut [f32]) {
     // 处理尾部...
 }
 ```
+
 **向量化提示**:
 
 1. 使用 `assert!` 证明无别名和边界安全
@@ -549,6 +566,7 @@ pub fn explicit_simd(a: &[f32], b: &[f32], c: &mut [f32]) {
 └─ 优化后是否回归测试?
     └─ cargo bench --baseline main → 确保有提升且无功能损坏
 ```
+
 ---
 
 ## 🔗 参考资源

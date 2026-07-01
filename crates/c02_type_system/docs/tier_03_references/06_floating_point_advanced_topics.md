@@ -92,6 +92,7 @@ fn main() {
     println!("编译期计算结果: {}", CONST_OPERATIONS::ADD);
 }
 ```
+
 **关键点**：
 
 - ✅ 四则运算在 const 上下文中完全支持
@@ -128,6 +129,7 @@ const fn safe_sqrt_approx(x: f64) -> f64 {
     }
 }
 ```
+
 ---
 
 ## 2. NaN (Not-a-Number) 语义深度解析
@@ -157,6 +159,7 @@ fn main() {
     // 输出: 0x7FC00000
 }
 ```
+
 **NaN 分类**：
 
 - **静默 NaN (Quiet NaN, qNaN)**: 尾数最高位为1，传播时不触发异常
@@ -186,6 +189,7 @@ fn explore_nan_patterns() {
     println!("custom_nan.is_nan(): {}", custom_nan.is_nan());  // true
 }
 ```
+
 ### 2.2 NaN 的传播规则
 
 ```rust
@@ -218,6 +222,7 @@ fn nan_propagation_rules() {
     assert!((0.0 / 0.0).is_nan());
 }
 ```
+
 ### 2.3 NaN 的比较语义
 
 ```rust
@@ -247,6 +252,7 @@ fn nan_comparison_semantics() {
     // NaN 通常被放在开头或结尾
 }
 ```
+
 **在集合中的行为**：
 
 ```rust
@@ -267,6 +273,7 @@ fn nan_in_collections() {
     // 推荐: 浮点数作为键时，使用 ordered_float 等库
 }
 ```
+
 ### 2.4 NaN 在 const fn 中的行为
 
 ```rust
@@ -298,6 +305,7 @@ fn main() {
     println!("编译期 NaN 检测: {}", NAN_CHECK); // true
 }
 ```
+
 ---
 
 ## 3. 特殊浮点值处理
@@ -335,6 +343,7 @@ const fn compute_with_infinity(x: f64) -> f64 {
     }
 }
 ```
+
 ### 3.2 零值 (+0.0 vs -0.0)
 
 ```rust
@@ -368,6 +377,7 @@ const fn const_signed_zero_check(x: f64) -> bool {
     x.to_bits() == 0x8000_0000_0000_0000
 }
 ```
+
 ### 3.3 次正规数 (Subnormal Numbers)
 
 ```rust
@@ -404,6 +414,7 @@ const fn handle_subnormal(x: f64) -> f64 {
     }
 }
 ```
+
 ---
 
 ## 4. const fn 浮点操作实战
@@ -446,6 +457,7 @@ fn main() {
     println!("温度数组: {:?}", TEMPS);
 }
 ```
+
 ### 4.2 const fn 中的浮点分类
 
 ```rust
@@ -508,6 +520,7 @@ fn main() {
     }
 }
 ```
+
 ### 4.3 编译期错误检测
 
 ```rust
@@ -546,6 +559,7 @@ fn main() {
     println!("安全的比率: {}", RATIO);
 }
 ```
+
 ---
 
 ## 5. 浮点数位模式操作
@@ -597,6 +611,7 @@ fn main() {
     println!("π 的尾数: 0x{:013X}", PI_MANTISSA);
 }
 ```
+
 ### 5.2 NaN payload 访问
 
 ```rust
@@ -630,6 +645,7 @@ fn nan_payload() {
     println!("运算后 payload: {:?}", extract_nan_payload(result));
 }
 ```
+
 ### 5.3 位模式安全性
 
 ```rust
@@ -672,6 +688,7 @@ const fn safe_from_bits(bits: u64) -> f64 {
     }
 }
 ```
+
 ---
 
 ## 6. 实际应用场景
@@ -729,6 +746,7 @@ fn main() {
     println!("Kahan 求和: {}", kahan_summation(&clean_data));
 }
 ```
+
 ### 6.2 编译期物理常数定义
 
 ```rust
@@ -767,6 +785,7 @@ fn main() {
              VISIBLE_LIGHT_MIN_FREQ, VISIBLE_LIGHT_MAX_FREQ);
 }
 ```
+
 ### 6.3 嵌入式系统中的浮点优化
 
 ```rust
@@ -803,6 +822,7 @@ fn main() {
     println!("定点运算: 1.5 * 2.0 = {}", RESULT as f32 / SCALE as f32);
 }
 ```
+
 ---
 
 ## 7. 性能与陷阱
@@ -853,6 +873,7 @@ fn main() {
     benchmark_nan_checks(&data, 10000);
 }
 ```
+
 **性能建议**：
 
 - ✅ `is_nan()` 通常是最快的方法（编译器优化）
@@ -940,6 +961,7 @@ fn pitfall_division() {
     }
 }
 ```
+
 ### 7.3 浮点数精度深度分析
 
 **IEEE 754精度限制**:
@@ -959,6 +981,7 @@ fn precision_limits() {
     assert!(1.0_f32 + 1e-8_f32 == 1.0_f32);  // f32无法区分
 }
 ```
+
 **机器精度（Machine Epsilon）**:
 
 ```rust
@@ -976,6 +999,7 @@ fn machine_epsilon() {
     assert!(1.0 + epsilon_f64 / 2.0 == 1.0);
 }
 ```
+
 **相对误差分析**:
 
 ```rust
@@ -993,6 +1017,7 @@ fn relative_error_analysis() {
     assert!(relative_error < 1e-15);
 }
 ```
+
 ### 7.4 数值稳定性技术
 
 **技术1：避免灾难性抵消**:
@@ -1032,6 +1057,7 @@ fn main() {
     println!("稳定算法:   x1={:.15e}, x2={:.15e}", x1_stable, x2_stable);
 }
 ```
+
 **技术2：Kahan累加算法**:
 
 ```rust
@@ -1067,6 +1093,7 @@ fn compare_summation() {
     println!("差异: {:.15e}", (naive_sum - kahan).abs());
 }
 ```
+
 **技术3：递归关系的稳定性**:
 
 ```rust
@@ -1094,6 +1121,7 @@ fn backward_recurrence(n: usize) -> f64 {
     values[0]
 }
 ```
+
 ### 7.5 实战：高精度计算
 
 **案例1：计算数学常数π**:
@@ -1127,6 +1155,7 @@ fn main() {
     }
 }
 ```
+
 **案例2：矩阵运算的数值稳定性**:
 
 ```rust
@@ -1171,6 +1200,7 @@ impl Matrix {
     }
 }
 ```
+
 ### 7.6 浮点数调试技巧
 
 **技巧1：位模式检查**:
@@ -1212,6 +1242,7 @@ fn main() {
     debug_float(f64::MIN_POSITIVE);
 }
 ```
+
 **技巧2：浮点数比较辅助函数**:
 
 ```rust
@@ -1239,6 +1270,7 @@ fn test_comparisons() {
     assert!(approx_equal(1e-20, 0.0, 1e-10, 1e-15));
 }
 ```
+
 **技巧3：单元测试浮点代码**:
 
 ```rust
@@ -1276,6 +1308,7 @@ mod tests {
     }
 }
 ```
+
 ---
 
 ## 8. 实战案例集
@@ -1322,6 +1355,7 @@ fn test_money() {
     assert!((10.10 + 20.20) != 30.30);
 }
 ```
+
 ### 8.2 游戏引擎：向量运算优化
 
 ```rust
@@ -1397,6 +1431,7 @@ fn benchmark_normalization() {
     println!("加速比: {:.2}x", standard_time.as_secs_f64() / fast_time.as_secs_f64());
 }
 ```
+
 ### 8.3 科学计算：数值积分
 
 ```rust
@@ -1450,6 +1485,7 @@ fn test_integration() {
     println!("误差: {:.2e}", (result - exact).abs());
 }
 ```
+
 ### 8.4 图像处理：颜色空间转换
 
 ```rust
@@ -1523,6 +1559,7 @@ impl HSV {
     }
 }
 ```
+
 ### 8.5 机器学习：Softmax稳定实现
 
 ```rust
@@ -1554,6 +1591,7 @@ fn test_softmax() {
     assert!((stable.iter().sum::<f64>() - 1.0).abs() < 1e-10);
 }
 ```
+
 ---
 
 ## 9. 跨版本兼容性说明

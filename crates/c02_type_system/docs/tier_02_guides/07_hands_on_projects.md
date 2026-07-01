@@ -52,6 +52,7 @@
 └── 自定义 Iterator
     └── 关联类型
 ```
+
 ---
 
 ## 📋 项目概览
@@ -99,6 +100,7 @@ shape_system/
     ├── main.rs
     └── shapes.rs
 ```
+
 ### 核心代码实现
 
 #### `shapes.rs`
@@ -267,6 +269,7 @@ pub fn find_largest<T: Shape>(shapes: &[T]) -> Option<&T> {
     })
 }
 ```
+
 #### `main.rs`
 
 ```rust
@@ -355,6 +358,7 @@ fn main() {
     }
 }
 ```
+
 ### 测试方式
 
 ```bash
@@ -363,6 +367,7 @@ cd shape_system
 # 复制上述代码
 cargo run
 ```
+
 ### 预期输出
 
 ```text
@@ -417,6 +422,7 @@ cargo run
 圆形总面积: 43.98
 矩形总面积: 26.00
 ```
+
 ### 关键知识点
 
 1. **Trait 定义**: 定义共享行为
@@ -472,6 +478,7 @@ plugin_system/
         ├── validator.rs
         └── transformer.rs
 ```
+
 ### 核心代码实现2
 
 #### `plugin.rs`
@@ -577,6 +584,7 @@ impl Drop for PluginManager {
     }
 }
 ```
+
 #### `plugins/logger.rs`
 
 ```rust
@@ -617,6 +625,7 @@ impl Plugin for LoggerPlugin {
     }
 }
 ```
+
 #### `plugins/validator.rs`
 
 ```rust
@@ -657,6 +666,7 @@ impl Plugin for ValidatorPlugin {
     }
 }
 ```
+
 #### `plugins/transformer.rs`
 
 ```rust
@@ -705,6 +715,7 @@ impl Plugin for TransformerPlugin {
     }
 }
 ```
+
 #### `plugins/mod.rs`
 
 ```rust
@@ -712,6 +723,7 @@ pub mod logger;
 pub mod validator;
 pub mod transformer;
 ```
+
 #### `main.rs`2
 
 ```rust
@@ -810,6 +822,7 @@ fn main() {
     }
 }
 ```
+
 ### 测试方式2
 
 ```bash
@@ -818,6 +831,7 @@ cd plugin_system
 # 复制上述代码
 cargo run
 ```
+
 ### 预期输出2
 
 ```text
@@ -851,6 +865,7 @@ cargo run
 结果: Err("输入太短: 2 < 5")
 ...
 ```
+
 ### 关键知识点2
 
 1. **Trait 对象**: `Box<dyn Plugin>` 实现多态
@@ -941,6 +956,7 @@ impl Iterator for Fibonacci {
     }
 }
 ```
+
 _完整代码请参考项目文件_-
 
 ### 关键知识点3

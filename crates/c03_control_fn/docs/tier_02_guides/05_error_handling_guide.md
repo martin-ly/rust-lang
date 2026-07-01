@@ -143,6 +143,7 @@
 └── 错误传播
     └── ? 操作符链
 ```
+
 ---
 
 ## 1. 错误处理基础
@@ -171,6 +172,7 @@ fn main() {
     }
 }
 ```
+
 **关键区别**:
 
 - **Result**: 表示可能失败的操作
@@ -208,6 +210,7 @@ fn main() {
     // Result和Option在运行时没有额外开销
 }
 ```
+
 ---
 
 ## 2. Option类型
@@ -242,6 +245,7 @@ fn main() {
     println!("第十个: {:?}", tenth);
 }
 ```
+
 ### 2.2 Option方法
 
 Option提供丰富的方法：
@@ -298,6 +302,7 @@ fn main() {
     println!("旧值: {:?}, 新值: {:?}", old, opt);
 }
 ```
+
 ### 2.3 组合Option
 
 组合多个Option：
@@ -337,6 +342,7 @@ fn main() {
     println!("{:?}", result);
 }
 ```
+
 ---
 
 ## 3. Result类型
@@ -370,6 +376,7 @@ fn main() {
     }
 }
 ```
+
 ### 3.2 Result方法
 
 Result提供丰富的方法：
@@ -420,6 +427,7 @@ fn main() {
     println!("失败? {}", err.is_err());
 }
 ```
+
 ### 3.3 ?操作符
 
 ?操作符简化错误传播：
@@ -480,6 +488,7 @@ fn main() {
     println!("第一个字符: {:?}", result);
 }
 ```
+
 ---
 
 ## 4. panic宏
@@ -532,6 +541,7 @@ fn main() {
     let _ = divide_good(10, 2);
 }
 ```
+
 ### 4.2 unwrap和expect
 
 unwrap和expect会在错误时panic：
@@ -572,6 +582,7 @@ fn main() {
     println!("默认值: {}", value);
 }
 ```
+
 ### 4.3 panic处理
 
 设置panic hook：
@@ -604,6 +615,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 5. 自定义错误类型
@@ -648,6 +660,7 @@ fn main() {
     }
 }
 ```
+
 ### 5.2 Error trait
 
 实现Error trait：
@@ -692,6 +705,7 @@ fn main() {
     }
 }
 ```
+
 ### 5.3 错误转换
 
 使用From实现错误转换：
@@ -734,6 +748,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 6. 错误传播
@@ -769,6 +784,7 @@ fn main() {
     }
 }
 ```
+
 ### 6.2 ?操作符链
 
 链式使用?操作符：
@@ -795,6 +811,7 @@ fn main() {
     }
 }
 ```
+
 ### 6.3 多种错误类型
 
 处理多种错误类型：
@@ -842,6 +859,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 7. 实战案例
@@ -905,6 +923,7 @@ fn main() {
     }
 }
 ```
+
 ### 案例2: 网络请求
 
 ```rust
@@ -958,6 +977,7 @@ fn main() {
     }
 }
 ```
+
 ### 案例3: 配置管理
 
 ```rust
@@ -1034,6 +1054,7 @@ fn main() {
     }
 }
 ```
+
 ### 案例4: 数据验证
 
 ```rust
@@ -1154,6 +1175,7 @@ fn main() {
     }
 }
 ```
+
 ### 7.5 边界案例与进阶
 
 #### From/Into 错误映射
@@ -1183,6 +1205,7 @@ fn load_config(path: &str) -> Result<i32, AppError> {
     Ok(s.trim().parse()?)
 }
 ```
+
 #### anyhow vs thiserror 选型
 
 | 场景 | 推荐 | 说明 |
@@ -1194,6 +1217,7 @@ fn load_config(path: &str) -> Result<i32, AppError> {
 // 库（需 thiserror）：#[derive(Error)] pub enum LibError { Io(#[from] std::io::Error) }
 // 应用（需 anyhow）：fn main() -> Result<(), anyhow::Error> { ... }
 ```
+
 详见 [错误处理进阶](../tier_04_advanced/04_advanced_error_handling.md)。
 
 #### 早返回与 RAII
@@ -1209,6 +1233,7 @@ fn process(path: &str) -> Result<String, std::io::Error> {
     Ok(s)
 }
 ```
+
 **RAII**：资源在析构时自动释放，即使发生错误或 panic 也能保证清理：
 
 ```rust
@@ -1223,6 +1248,7 @@ fn with_guard() -> Result<(), std::io::Error> {
     Ok(())
 }
 ```
+
 详见 [错误处理进阶 - RAII 模式](../tier_04_advanced/04_advanced_error_handling.md#5-异常安全性)。
 
 ---
@@ -1288,6 +1314,7 @@ fn main() {
     let _ = good();
 }
 ```
+
 ---
 
 ## 10. 小结

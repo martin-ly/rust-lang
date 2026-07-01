@@ -123,6 +123,7 @@
     ├── 线程数配置
     └── 任务粒度
 ```
+
 ---
 
 ## 1. 概述
@@ -157,6 +158,7 @@
 │                                                      │
 └──────────────────────────────────────────────────────┘
 ```
+
 ### 1.2 Rayon 核心特性
 
 | 特性           | 说明                         |
@@ -172,6 +174,7 @@
 [dependencies]
 rayon = "1.10"
 ```
+
 ---
 
 ## 2. Rayon 并行迭代器
@@ -195,6 +198,7 @@ fn main() {
     println!("Parallel sum:   {} ({:?})", sum_par, start.elapsed());
 }
 ```
+
 ### 2.2 par_iter() 家族
 
 ```rust
@@ -219,6 +223,7 @@ fn main() {
     println!("Results: {:?}", results);
 }
 ```
+
 ### 2.3 并行 map/filter/reduce
 
 ```rust
@@ -250,6 +255,7 @@ fn main() {
     );
 }
 ```
+
 ### 2.4 链式操作
 
 ```rust
@@ -275,6 +281,7 @@ fn main() {
     println!("Result: {}", result);
 }
 ```
+
 ---
 
 ## 3. 并行集合操作
@@ -296,6 +303,7 @@ fn main() {
     assert!(numbers.windows(2).all(|w| w[0] <= w[1]));
 }
 ```
+
 ### 3.2 并行搜索
 
 ```rust
@@ -324,6 +332,7 @@ fn main() {
     println!("Found {} matches", matches.len());
 }
 ```
+
 ### 3.3 并行分区
 
 ```rust
@@ -340,6 +349,7 @@ fn main() {
     println!("Odds:  {} numbers", odds.len());
 }
 ```
+
 ---
 
 ## 4. 自定义并行任务
@@ -368,6 +378,7 @@ fn main() {
     println!("Fibonacci(30) = {}", result);
 }
 ```
+
 ### 4.2 使用 scope() 生成任务
 
 ```rust
@@ -388,6 +399,7 @@ fn main() {
     println!("Results: {:?}", results);
 }
 ```
+
 ### 4.3 使用 ThreadPool 自定义线程池
 
 ```rust
@@ -406,6 +418,7 @@ fn main() {
     });
 }
 ```
+
 ---
 
 ## 5. 分治算法
@@ -456,6 +469,7 @@ fn main() {
     assert!(numbers.windows(2).all(|w| w[0] <= w[1]));
 }
 ```
+
 ### 5.2 归并排序
 
 ```rust
@@ -505,6 +519,7 @@ fn main() {
     println!("Sorted successfully");
 }
 ```
+
 ---
 
 ## 6. 数据并行模式
@@ -536,6 +551,7 @@ fn main() {
     println!("Total words: {}", total);
 }
 ```
+
 ### 6.2 并行聚合
 
 ```rust
@@ -598,6 +614,7 @@ fn main() {
     }
 }
 ```
+
 ### 6.3 并行分组
 
 ```rust
@@ -636,6 +653,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 7. 性能调优
@@ -660,6 +678,7 @@ fn main() {
     println!("Sum: {}", sum);
 }
 ```
+
 ### 7.2 避免过小的任务
 
 ```rust
@@ -686,6 +705,7 @@ fn main() {
     println!("Expensive count: {}", expensive_count);
 }
 ```
+
 ### 7.3 基准测试
 
 ```rust
@@ -718,6 +738,7 @@ fn main() {
     });
 }
 ```
+
 ---
 
 ## 8. 最佳实践
@@ -743,6 +764,7 @@ fn main() {
     println!("Sum: {}", sum);
 }
 ```
+
 ### 8.2 避免不必要的并行
 
 ```rust
@@ -758,6 +780,7 @@ fn main() {
     let _: Vec<_> = numbers.iter().map(|x| x * 2).collect();
 }
 ```
+
 ### 8.3 配置线程池
 
 ```rust
@@ -779,6 +802,7 @@ fn main() {
     });
 }
 ```
+
 ---
 
 ## 9. 常见陷阱
@@ -806,6 +830,7 @@ fn main() {
     println!("Count: {}", count);
 }
 ```
+
 ### 9.2 非线程安全类型
 
 ```rust
@@ -828,6 +853,7 @@ fn main() {
     });
 }
 ```
+
 ---
 
 ## 10. 参考资源

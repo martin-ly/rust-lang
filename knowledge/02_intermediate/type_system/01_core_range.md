@@ -50,6 +50,7 @@ use core::range::RangeInclusive;
 let r = RangeInclusive::new(1, 10);
 // 等价于 std::ops 的 1..=10
 ```
+
 ### 2.2 遍历区间
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -62,6 +63,7 @@ for i in r {
     println!("{}", i);  // 1, 2, 3, 4, 5
 }
 ```
+
 ### 2.3 区间运算
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -73,6 +75,7 @@ fn overlap(a: &RangeInclusive<i32>, b: &RangeInclusive<i32>) -> bool {
     a.contains(b.start()) || b.contains(a.start())
 }
 ```
+
 ---
 
 ## 三、应用场景
@@ -92,6 +95,7 @@ fn page_range(total: u32, per_page: u32, page: u32) -> RangeInclusive<u32> {
     RangeInclusive::new(start, end)
 }
 ```
+
 ### 3.2 区间树
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -111,6 +115,7 @@ impl<T: Ord + Clone> IntervalTree<T> {
     }
 }
 ```
+
 ---
 
 ## 四、限制与反例
@@ -125,6 +130,7 @@ impl<T: Ord + Clone> IntervalTree<T> {
 let r = RangeInclusive::new(5, 3);  // start > end
 // 有效但迭代时为空
 ```
+
 ### ❌ 与旧 Range 的混淆
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -134,6 +140,7 @@ let r = RangeInclusive::new(5, 3);  // start > end
 let r = RangeInclusive::new(0, 5);
 assert_eq!(r.into_iter().count(), 6);  // 不是 5！
 ```
+
 ---
 
 ## 五、迁移指南
@@ -152,6 +159,7 @@ let new = RangeInclusive::new(1, 10);
 // 互转
 let from_old = core::range::RangeInclusive { start: *old.start(), last: *old.end() };
 ```
+
 ---
 
 ### 模块 3: 概念依赖图
@@ -173,6 +181,7 @@ graph TD
     style D fill:#f9f,stroke:#333,stroke-width:2px
     style F fill:#bfb,stroke:#333,stroke-width:2px
 ```
+
 #### 承上（前置知识回溯）
 
 | 前置概念 | 所在文档 | 本章中使用的具体点 |
@@ -206,6 +215,7 @@ core::range::RangeInclusive (1.96.0+):
   与 std::ops::RangeInclusive 语义相同
   位于 core::range 模块，为未来的 range 统一提供命名空间
 ```
+
 ---
 
 ## 📚 模块 8: 国际化对齐

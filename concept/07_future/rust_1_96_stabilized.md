@@ -48,6 +48,7 @@ let result: Result<i32, &str> = Ok(42);
 assert_matches!(result, Ok(n) if n > 0);
 debug_assert_matches!(result, Ok(n) if n > 0);
 ```
+
 - 未加入 prelude，需显式导入。
 - 失败时打印 `Debug` 表示，优于 `assert!(matches!(..))`。
 
@@ -90,6 +91,7 @@ impl Span {
     }
 }
 ```
+
 ### 2.2 `NonZero` 范围迭代
 
 稳定版本：**1.96.0**
@@ -102,6 +104,7 @@ let end = NonZeroU32::new(4).unwrap();
 let values: Vec<u32> = (start..=end).map(|nz| nz.get()).collect();
 assert_eq!(values, vec![1, 2, 3, 4]);
 ```
+
 ### 2.3 `From<T>` 扩展
 
 稳定版本：**1.96.0**
@@ -119,6 +122,7 @@ let _: AssertUnwindSafe<String> = AssertUnwindSafe::from(String::from("x"));
 let _: LazyCell<i32, fn() -> i32> = LazyCell::from(42);
 let _: LazyLock<i32, fn() -> i32> = LazyLock::from(2026);
 ```
+
 ### 2.4 `valid for read/write` 定义重构
 
 对内存模型中 "valid for read/write" 的定义进行了精确化：默认排除 null 指针，各方法单独声明例外。这主要影响 unsafe 代码的文档与形式化语义，对普通用户无直接 API 变化。
@@ -132,6 +136,7 @@ let _: LazyLock<i32, fn() -> i32> = LazyLock::from(2026);
 ```toml
 my-crate = { version = "1.2", registry = "internal", git = "https://github.com/myorg/my-crate" }
 ```
+
 ### 3.2 安全修复
 
 - **CVE-2026-5223**：拒绝含 symlink 的 tarball。
@@ -180,6 +185,7 @@ my-crate = { version = "1.2", registry = "internal", git = "https://github.com/m
 [dependencies]
 my-crate = { git = "https://github.com/example/my-crate", registry = "corp" }
 ```
+
 本地使用 git 版本，发布时使用 registry 版本。
 
 #### `target.'cfg(..)'.rustdocflags`
@@ -190,6 +196,7 @@ Cargo 1.96 支持按目标条件配置 `rustdoc` 标志，此前只能通过 `RU
 [target.'cfg(unix)']
 rustdocflags = ["--cfg", "docsrs"]
 ```
+
 与 `RUSTDOCFLAGS` 环境变量合并而非覆盖，但环境变量标志在命令行中更靠后，可能覆盖同名配置。
 
 ### 6.3 编译器改进
@@ -230,6 +237,7 @@ fn read_or_default<T: Copy>(ptr: *const T, fallback: T) -> T {
     }
 }
 ```
+
 #### JSON Target Spec 内部变更
 
 Rust 1.96 对内部 JSON target spec 做了收紧/调整，主要影响使用自定义目标或维护目标定义的开发者：
@@ -240,6 +248,7 @@ Rust 1.96 对内部 JSON target spec 做了收紧/调整，主要影响使用自
 ```bash
 rustc +nightly -Z unstable-options --print target-spec-json-schema
 ```
+
 ### 6.6 兼容性注意（完整列表）
 
 | 变更 | 影响范围 |

@@ -72,6 +72,7 @@ pub fn my_trait_derive_with_attr(input: TokenStream) -> TokenStream {
     input
 }
 ```
+
 **使用**:
 
 ```rust
@@ -81,6 +82,7 @@ struct MyStruct {
     field: i32,
 }
 ```
+
 ---
 
 ### 1.2 属性宏
@@ -96,6 +98,7 @@ pub fn my_attribute(attr: TokenStream, item: TokenStream) -> TokenStream {
     item
 }
 ```
+
 **使用**:
 
 ```rust
@@ -104,6 +107,7 @@ fn my_function() {
     // ...
 }
 ```
+
 ---
 
 ### 1.3 函数式宏
@@ -118,11 +122,13 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
     input
 }
 ```
+
 **使用**:
 
 ```rust
 my_macro!(arbitrary tokens here);
 ```
+
 ---
 
 ## 2. TokenStream
@@ -149,6 +155,7 @@ pub fn token_stream_demo(input: TokenStream) -> TokenStream {
     parsed
 }
 ```
+
 ---
 
 ### 2.2 创建与转换
@@ -170,6 +177,7 @@ stream.extend(vec![/* TokenTree */]);
 // 合并流
 let combined = [stream1, stream2].into_iter().collect::<TokenStream>();
 ```
+
 ---
 
 ### 2.3 遍历与操作
@@ -200,6 +208,7 @@ pub fn iterate_tokens(input: TokenStream) -> TokenStream {
     TokenStream::new()
 }
 ```
+
 ---
 
 ## 3. TokenTree
@@ -214,6 +223,7 @@ pub enum TokenTree {
     Group(Group),       // 分组 ()、[]、{}
 }
 ```
+
 ---
 
 ### 3.2 模式匹配
@@ -243,6 +253,7 @@ pub fn pattern_match(input: TokenStream) -> TokenStream {
     TokenStream::new()
 }
 ```
+
 ---
 
 ### 3.3 构建 TokenTree
@@ -263,6 +274,7 @@ let punct = TokenTree::Punct(Punct::new('+', Spacing::Alone));
 let stream = TokenStream::from_iter(vec![ident, punct, lit]);
 // 结果: foo + 42
 ```
+
 ---
 
 ## 4. Span
@@ -275,6 +287,7 @@ use proc_macro::Span;
 // Span 表示源代码位置
 pub struct Span { /* 内部实现 */ }
 ```
+
 ---
 
 ### 4.2 创建 Span
@@ -294,6 +307,7 @@ let mixed = Span::mixed_site();
 // 解析 span（从字符串解析时使用，Rust 1.45+）
 // let resolved = Span::resolved_at(call);
 ```
+
 **卫生性规则**:
 
 - `call_site()` - 最卫生，标识符来自调用点作用域
@@ -322,6 +336,7 @@ let joined = span1.join(span2);
 // 应用 span 到标识符
 let ident = Ident::new("my_var", span);
 ```
+
 ---
 
 ### 4.4 错误报告
@@ -341,6 +356,7 @@ pub fn error_example(input: TokenStream) -> TokenStream {
     error.into()
 }
 ```
+
 **使用 Diagnostic API** (nightly):
 
 ```rust
@@ -353,6 +369,7 @@ span.error("This is an error message")
     .help("Try this instead")
     .emit();
 ```
+
 ---
 
 ## 5. Ident
@@ -374,6 +391,7 @@ if syn::parse_str::<syn::Ident>(name).is_err() {
     eprintln!("{} is a keyword!", name);
 }
 ```
+
 ---
 
 ### 5.2 标识符操作
@@ -397,6 +415,7 @@ if ident.to_string() == "my_var" {
     println!("Match!");
 }
 ```
+
 ---
 
 ### 5.3 原始标识符
@@ -411,6 +430,7 @@ use proc_macro::Ident;
 let raw_ident = syn::Ident::new_raw("fn", Span::call_site());
 // 结果: r#fn
 ```
+
 ---
 
 ## 6. Literal
@@ -437,6 +457,7 @@ let char_lit = Literal::character('x');
 // 字节串
 let byte_string = Literal::byte_string(b"hello");
 ```
+
 ---
 
 ### 6.2 创建字面量
@@ -463,6 +484,7 @@ pub fn create_literals(_input: TokenStream) -> TokenStream {
     }.into()
 }
 ```
+
 ---
 
 ### 6.3 字面量操作
@@ -481,6 +503,7 @@ let span = lit.span();
 // 设置 span
 lit.set_span(new_span);
 ```
+
 ---
 
 ## 7. Punct
@@ -501,6 +524,7 @@ let arrow = vec![
 ];
 // 结果: ->
 ```
+
 ---
 
 ### 7.2 间距规则
@@ -511,6 +535,7 @@ pub enum Spacing {
     Joint,  // 后面紧邻下一个字符
 }
 ```
+
 **示例**:
 
 ```rust
@@ -526,6 +551,7 @@ let tokens = vec![
 let stream = TokenStream::from_iter(tokens);
 // 结果: ->=
 ```
+
 ---
 
 ## 8. Group
@@ -540,6 +566,7 @@ pub enum Delimiter {
     None,         // 隐式分组
 }
 ```
+
 ---
 
 ### 8.2 创建分组
@@ -562,6 +589,7 @@ let span = group.span();
 let span_open = group.span_open();
 let span_close = group.span_close();
 ```
+
 ---
 
 ## 9. Diagnostic API
@@ -592,6 +620,7 @@ pub fn diagnostic_demo(input: TokenStream) -> TokenStream {
     TokenStream::new()
 }
 ```
+
 ---
 
 ### 9.2 多 Span 诊断
@@ -607,6 +636,7 @@ Diagnostic::spanned(vec![span1, span2], Level::Error, "Multiple locations")
     .note("Second location")
     .emit();
 ```
+
 ---
 
 ### 9.3 诊断级别
@@ -619,6 +649,7 @@ pub enum Level {
     Help,
 }
 ```
+
 ---
 
 ## 10. proc_macro2
@@ -657,6 +688,7 @@ fn my_trait_impl(input: &syn::DeriveInput) -> TokenStream2 {
     }
 }
 ```
+
 ---
 
 ### 10.2 互操作
@@ -675,6 +707,7 @@ let ts1: TokenStream1 = ts2.into();
 
 // 双向转换无损
 ```
+
 ---
 
 **相关文档**:

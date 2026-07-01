@@ -112,6 +112,7 @@ Derive 宏开发指南
     ├── Builder 模式宏
     └── Debug 宏实现
 ```
+
 ---
 
 ## 1. Derive 宏概述
@@ -137,6 +138,7 @@ my_derive/
 └── src/
     └── lib.rs
 ```
+
 ### 2.2 Cargo.toml 配置
 
 ```toml
@@ -153,6 +155,7 @@ syn = { version = "2.0", features = ["full"] }
 quote = "1.0"
 proc-macro2 = "1.0"
 ```
+
 ### 2.3 基本框架
 
 ```rust
@@ -182,6 +185,7 @@ pub fn derive_my_trait(input: TokenStream) -> TokenStream {
     TokenStream::from(expanded)
 }
 ```
+
 ---
 
 ## 3. 解析结构体
@@ -217,6 +221,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
     TokenStream::new()
 }
 ```
+
 ### 3.2 解析属性
 
 ```rust
@@ -241,6 +246,7 @@ pub fn derive_with_attrs(input: TokenStream) -> TokenStream {
 // #[my_attr]
 // struct MyStruct { ... }
 ```
+
 ---
 
 ## 4. 生成代码
@@ -268,6 +274,7 @@ pub fn derive_default(input: TokenStream) -> TokenStream {
     TokenStream::from(expanded)
 }
 ```
+
 ### 4.2 泛型支持
 
 ```rust
@@ -296,6 +303,7 @@ pub fn derive_clone(input: TokenStream) -> TokenStream {
     TokenStream::from(expanded)
 }
 ```
+
 ---
 
 ## 5. 错误处理
@@ -323,6 +331,7 @@ pub fn derive_validate(input: TokenStream) -> TokenStream {
     TokenStream::new()
 }
 ```
+
 ### 5.2 字段错误
 
 ```rust
@@ -354,6 +363,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
     TokenStream::new()
 }
 ```
+
 ---
 
 ## 6. 实战案例
@@ -456,6 +466,7 @@ fn main() {
         .unwrap();
 }
 ```
+
 ### 6.2 Debug 宏实现
 
 ```rust
@@ -494,6 +505,7 @@ pub fn derive_debug(input: TokenStream) -> TokenStream {
     TokenStream::from(expanded)
 }
 ```
+
 ### 6.3 Serialize 宏
 
 ```rust
@@ -533,6 +545,7 @@ pub fn derive_serialize(input: TokenStream) -> TokenStream {
     TokenStream::from(expanded)
 }
 ```
+
 ---
 
 ## 7. 总结

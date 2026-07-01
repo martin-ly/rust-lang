@@ -107,6 +107,7 @@
     ├── HTTP 路由宏
     └── 异步重试宏
 ```
+
 ---
 
 ## 1. 属性宏概述
@@ -137,6 +138,7 @@ pub fn my_attribute(attr: TokenStream, item: TokenStream) -> TokenStream {
     item  // 返回原样
 }
 ```
+
 ### 2.2 使用属性宏
 
 ```rust
@@ -150,6 +152,7 @@ struct MyStruct {
     field: i32,
 }
 ```
+
 ---
 
 ## 3. 解析属性
@@ -172,6 +175,7 @@ pub fn route(attr: TokenStream, item: TokenStream) -> TokenStream {
     TokenStream::from(quote! { #input })
 }
 ```
+
 ### 3.2 自定义解析
 
 ```rust
@@ -209,6 +213,7 @@ pub fn route(attr: TokenStream, item: TokenStream) -> TokenStream {
 // #[route("GET", "/users")]
 // fn get_users() { }
 ```
+
 ---
 
 ## 4. 修改代码
@@ -245,6 +250,7 @@ pub fn trace(_attr: TokenStream, item: TokenStream) -> TokenStream {
 //     println!("Inside");
 // }
 ```
+
 ### 4.2 添加代码
 
 ```rust
@@ -286,6 +292,7 @@ pub fn cached(_attr: TokenStream, item: TokenStream) -> TokenStream {
     TokenStream::from(expanded)
 }
 ```
+
 ---
 
 ## 5. 实战案例
@@ -329,6 +336,7 @@ pub fn get(attr: TokenStream, item: TokenStream) -> TokenStream {
 //     "User list".to_string()
 // }
 ```
+
 ### 5.2 异步重试宏
 
 ```rust
@@ -367,6 +375,7 @@ pub fn retry(attr: TokenStream, item: TokenStream) -> TokenStream {
 //     Ok("data".to_string())
 // }
 ```
+
 ### 5.3 性能计时宏
 
 ```rust
@@ -397,6 +406,7 @@ pub fn timed(_attr: TokenStream, item: TokenStream) -> TokenStream {
 //     std::thread::sleep(std::time::Duration::from_secs(1));
 // }
 ```
+
 ### 5.4 数据验证宏
 
 ```rust
@@ -441,6 +451,7 @@ pub fn validate(_attr: TokenStream, item: TokenStream) -> TokenStream {
 //     email: String,
 // }
 ```
+
 ---
 
 ## 6. 总结

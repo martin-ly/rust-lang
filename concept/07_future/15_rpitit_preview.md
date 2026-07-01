@@ -43,6 +43,7 @@ impl Factory for MyFactory {
 
 fn main() {}
 ```
+
 > **修正**:
 > **RPITIT**（Return Position Impl Trait In Traits，稳定于 1.75.0）允许 trait 方法返回 `impl Trait`：
 >

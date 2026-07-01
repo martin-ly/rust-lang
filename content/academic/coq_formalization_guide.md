@@ -61,6 +61,7 @@ opam install coq-iris
 # 安装 stdpp (标准库扩展)
 opam install coq-stdpp
 ```
+
 ### 项目结构
 
 ```
@@ -78,6 +79,7 @@ rust_formalization/
 │   └── type_safety.v
 └── _CoqProject
 ```
+
 ---
 
 ## 💡 核心概念
@@ -128,6 +130,7 @@ Proof.
   intuition.
 Qed.
 ```
+
 ### 借用检查形式化
 
 ```coq
@@ -166,6 +169,7 @@ Proof.
   (* 证明：求值保持借用有效性 *)
 Admitted.
 ```
+
 ### 类型安全证明
 
 ```coq
@@ -248,6 +252,7 @@ Proof.
     contradiction.
 Qed.
 ```
+
 ---
 
 ## 🚀 高级主题
@@ -293,6 +298,7 @@ Proof.
   - iExact "HR".
 Qed.
 ```
+
 ### 并发验证
 
 ```coq
@@ -338,6 +344,7 @@ Proof.
   apply send_safe.
 Qed.
 ```
+
 ---
 
 ## 🔗 参考资源

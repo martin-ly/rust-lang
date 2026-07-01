@@ -41,6 +41,7 @@ unsafe {
     *ptr2 = 2;  // 使用 ptr2 — SB 认为这是 UB
 }
 ```
+
 **原因**: SB 将指针视为一个栈，任何使用都需要重新验证整个栈。当 `ptr1` 被使用后，`ptr2`（从 ptr1 派生）被视为无效。
 
 **Tree Borrows 的解决思路**: 将指针关系建模为**树结构**，兄弟节点之间不互相影响。
@@ -59,6 +60,7 @@ unsafe {
     │       └── ptr2 = ptr1.wrapping_add(1) (孙 — 不重叠区域)
     └── ptr3 = data.as_mut_ptr().add(8) (子 — 后半部分)
 ```
+
 **关键规则**: 兄弟节点（同一父节点的不同子节点）在访问不重叠内存时是独立的。
 
 ---
@@ -81,6 +83,7 @@ Reserved ──写访问──→ Active
    │              │      │
    └──子指针写──→ Disabled
 ```
+
 ---
 
 ### 3. 转换规则
@@ -97,6 +100,7 @@ unsafe {
     *ptr2 = 2;  // ptr2 也是 Active — 兄弟关系，互不干扰 ✅
 }
 ```
+
 **规则 2: 共享引用 (&T) 冻结子树**:
 
 ```rust
@@ -109,6 +113,7 @@ unsafe {
     // *raw = 0;              // ❌ UB: raw 已被 Frozen，不能写
 }
 ```
+
 **规则 3: 重新借用保持父子关系**:
 
 ```rust
@@ -119,6 +124,7 @@ let r2 = &mut *r1;  // r2 是 r1 的子节点
 *r2 = 1;  // r2 Active，r1 暂时挂起
 *r1 = 2;  // r1 重新 Active，r2 必须不再使用
 ```
+
 ---
 
 ## 📊 Tree Borrows vs Stacked Borrows
@@ -148,6 +154,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 # 对比 Stacked Borrows
 cargo miri test  # 默认 SB
 ```
+
 **项目中的 Miri 测试**: `crates/*/src/miri_tests.rs`
 
 ---
@@ -166,6 +173,7 @@ unsafe {
     }
 }
 ```
+
 ### 模式 2: 双指针技巧
 
 ```rust
@@ -184,6 +192,7 @@ fn partition<T: Ord>(arr: &mut [T]) -> usize {
     }
 }
 ```
+
 ### 陷阱: 父指针在子指针活跃时被使用
 
 ```rust
@@ -197,6 +206,7 @@ unsafe {
     *child = 3;      // UB: child 已 Disabled
 }
 ```
+
 **修复**: 确保父子指针的使用不交叉，或全部使用原始指针（无 &mut 中间层）。
 
 ---

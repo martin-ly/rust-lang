@@ -100,6 +100,7 @@ unsafe {
 // 读取值（必须确保已初始化）
 let value = unsafe { uninit.assume_init() };
 ```
+
 #### 2. 安全包装器模式
 
 ```rust
@@ -128,6 +129,7 @@ impl<T> SafeMaybeUninit<T> {
     }
 }
 ```
+
 ---
 
 ## 联合体原始引用
@@ -163,6 +165,7 @@ impl Rust192Union {
     }
 }
 ```
+
 ---
 
 ## 自动特征改进
@@ -189,6 +192,7 @@ pub trait Rust192Trait {
         Self::Item: Clone + Send; // 项边界优先
 }
 ```
+
 ---
 
 ## 零大小数组优化
@@ -220,6 +224,7 @@ impl<T> Rust192ZeroSizedArray<T> {
     }
 }
 ```
+
 ---
 
 ## 高阶生命周期增强
@@ -246,6 +251,7 @@ where
     println!("Result: {}", result);
 }
 ```
+
 ---
 
 ## 关联项多边界
@@ -270,6 +276,7 @@ pub trait Rust192MultipleBounds {
     fn process(&self, item: Self::Item) -> Self::Item;
 }
 ```
+
 ---
 
 ## 实际应用示例
@@ -287,6 +294,7 @@ fn safe_uninit_example() {
     println!("Value: {}", value);
 }
 ```
+
 ### 示例 2: 联合体字段访问
 
 ```rust
@@ -306,6 +314,7 @@ fn union_access_example() {
     }
 }
 ```
+
 ---
 
 ## 迁移指南
@@ -319,6 +328,7 @@ fn union_access_example() {
 [package]
 rust-version = "1.92"
 ```
+
 #### 2. 利用新特性
 
 - 使用文档化的 `MaybeUninit` 模式

@@ -51,11 +51,13 @@ fn process(s: &str) -> anyhow::Result<()> {
     Ok(())
 }
 ```
+
 #### 迭代器与闭包（补全）
 
 ```rust
 let sum: i64 = (0..1_000).filter(|x| x % 2 == 0).map(|x| x as i64).sum();
 ```
+
 #### 互链
 
 - 与 `c06_async`：错误传播与 `?` 在 `async fn` 中的使用、`Result<_, anyhow::Error>` 的边界

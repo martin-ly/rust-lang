@@ -134,6 +134,7 @@
 ```bash
 cargo run --example csp_pattern_comprehensive_2025
 ```
+
 **CSP vs Actor vs Reactor 对比**:
 
 | 特性 | CSP | Actor | Reactor |
@@ -239,6 +240,7 @@ cat async_programming_comprehensive_review_readme_2025_10_06.md
 # 5. 查看最终报告
 cat 异步编程全面梳理最终报告_2025_10_06.md
 ```
+
 ### 推荐学习顺序
 
 1. **第1周**: 阅读知识分类体系，理解整体架构

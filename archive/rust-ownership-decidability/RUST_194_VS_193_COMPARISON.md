@@ -64,7 +64,6 @@
     - [Immediate Actions (1.94)](#immediate-actions-194)
     - [Gradual Migration](#gradual-migration)
   - [8. References](#8-references)
-<a id="this-document-was-generated-based-on-official-rust-release-notes-and-verified-against-the-actual-compiler-behavior"></a>
   - [*This document was generated based on official Rust release notes and verified against the actual compiler behavior.*](#this-document-was-generated-based-on-official-rust-release-notes-and-verified-against-the-actual-compiler-behavior)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)

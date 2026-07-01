@@ -126,6 +126,7 @@
 └── 生命周期的型变
     └── 生命周期子类型
 ```
+
 ---
 
 ## 🎯 概述
@@ -152,6 +153,7 @@
 // - &'static T 是 &'a T 的子类型吗？ (协变)
 // - &'static mut T 是 &'a mut T 的子类型吗？ (不变)
 ```
+
 ### 1.2 子类型关系
 
 **生命周期子类型**:
@@ -172,6 +174,7 @@ fn main() {
     }
 }
 ```
+
 ### 1.3 型变的三种类型
 
 | 型变类型 | 符号 | 含义 | 示例 |
@@ -194,6 +197,7 @@ F 在其类型参数上是协变的，当且仅当：
 - 'static <: 'a
 - 因此 &'static T <: &'a T (协变)
 ```
+
 **逆变的数学定义**:
 
 ```text
@@ -204,6 +208,7 @@ F 在其类型参数上是逆变的，当且仅当：
 - 'a <: 'static
 - 因此 fn(&'static T) <: fn(&'a T) (逆变)
 ```
+
 **不变的数学定义**:
 
 ```text
@@ -214,6 +219,7 @@ F 在其类型参数上是不变的，当且仅当：
 - 'a <: 'static
 - 但 &'a mut T 和 &'static mut T 无法互相转换
 ```
+
 ### 1.5 型变规则的形式化证明
 
 **定理 1: 不可变引用的协变性是安全的**:
@@ -235,6 +241,7 @@ Proof (关于 T):
 4. 因此 x 可以安全地当作 &'a B 使用
 5. 即 &'a A <: &'a B ✓
 ```
+
 **定理 2: 可变引用必须是不变的**:
 
 ```text
@@ -251,6 +258,7 @@ Proof (反证法):
    - 当 'b 结束时，x 指向已释放的内存（悬垂指针）
 4. 矛盾！因此 &'a mut T 必须在 T 上不变 ✓
 ```
+
 **定理 3: 函数参数的逆变性**:
 
 ```text
@@ -265,6 +273,7 @@ Proof:
 6. 即 fn(B) <: fn(A) (关系反转)
 7. 所以 fn(T) 在 T 上逆变 ✓
 ```
+
 ### 1.6 Rust型变系统的设计权衡
 
 **设计原则**:
@@ -292,6 +301,7 @@ Proof:
 | Scala | +/- 符号 | 灵活但复杂 |
 | C++ | 无正式型变系统 | 依赖模板 |
 ```
+
 ### 1.7 型变与内存安全的关系
 
 **核心不变式**:
@@ -308,6 +318,7 @@ Proof:
 // 3. 不变性保证
 // ∀ r: &'a T. r 指向的数据在 'a 期间不会通过 &mut 被修改
 ```
+
 **型变如何保护内存安全**:
 
 ```rust
@@ -352,6 +363,7 @@ fn contravariance_safety() {
     // process(handler, &temporary);  // 实际中类型不完全匹配
 }
 ```
+
 ---
 
 ## 2. 协变 (Covariance)
@@ -370,6 +382,7 @@ fn main() {
     foo(s);  // ✅ 可以传递更长的生命周期
 }
 ```
+
 ### 2.2 示例
 
 **不可变引用是协变的**:
@@ -388,6 +401,7 @@ fn main() {
     println!("{}", result);
 }
 ```
+
 ### 2.3 常见协变类型
 
 ```rust
@@ -408,6 +422,7 @@ fn main() {
     let _: Rc<&str> = rc;  // ✅
 }
 ```
+
 ### 2.4 `Vec<T>` 协变的深度分析
 
 **为什么 `Vec<T>` 在 T 上协变是安全的？**
@@ -437,6 +452,7 @@ fn vec_readonly_methods() {
     let _iter = v.iter();                   // 迭代器也协变
 }
 ```
+
 **`Vec<T>` vs &mut [T] 的型变差异**:
 
 ```rust
@@ -454,6 +470,7 @@ fn vec_vs_slice() {
     // let r: &mut [&str] = &mut arr;  // ❌ 编译错误
 }
 ```
+
 ### 2.5 `Box<T>` 和智能指针的协变
 
 **`Box<T>` 协变的实际应用**:
@@ -480,6 +497,7 @@ fn main() {
     println!("{}", node.get());
 }
 ```
+
 **`Rc<T>` 和 `Arc<T>` 的协变**:
 
 ```rust
@@ -513,6 +531,7 @@ fn main() {
     arc_covariance();
 }
 ```
+
 ### 2.6 `Option<T>` 和 `Result<T, E>` 的协变
 
 **`Option<T>` 在 T 上协变**:
@@ -547,6 +566,7 @@ fn option_in_collections() {
     process(vec);
 }
 ```
+
 **Result<T, E> 在 T 和 E 上都协变**:
 
 ```rust
@@ -570,6 +590,7 @@ fn main() {
     result_covariance();
 }
 ```
+
 ---
 
 ## 3. 逆变 (Contravariance)
@@ -597,6 +618,7 @@ fn main() {
     apply(|s| println!("{}", s), "hello");
 }
 ```
+
 ### 3.3 实际应用
 
 **回调函数**:
@@ -624,6 +646,7 @@ fn main() {
     process(&logger, &data);
 }
 ```
+
 ---
 
 ## 4. 不变 (Invariance)
@@ -646,6 +669,7 @@ fn main() {
     // 如果允许，可能导致悬垂引用
 }
 ```
+
 **为什么不变是必要的**:
 
 ```rust
@@ -660,6 +684,7 @@ fn hypothetical_bad() {
     // 现在 x 指向已被销毁的 String！
 }
 ```
+
 ### 4.3 为什么需要不变
 
 **保证内存安全**:
@@ -679,6 +704,7 @@ fn main() {
     // println!("{}", long);  // 悬垂引用！
 }
 ```
+
 ### 4.4 `Cell<T>` 和 `RefCell<T>` 的不变性
 
 **`Cell<T>` 在 T 上不变**:
@@ -715,6 +741,7 @@ fn main() {
     why_cell_invariant();
 }
 ```
+
 **`RefCell<T>` 同样不变**:
 
 ```rust
@@ -745,6 +772,7 @@ fn main() {
     immutable_is_covariant();
 }
 ```
+
 ### 4.5 `UnsafeCell<T>` 的不变性
 
 **`UnsafeCell<T>` 是所有内部可变性的基础**:
@@ -788,6 +816,7 @@ fn main() {
     unsafe_cell_invariance();
 }
 ```
+
 ### 4.6 不变性的实际影响
 
 **案例 1: 缓存系统**:
@@ -827,6 +856,7 @@ fn main() {
     println!("{:?}", cache.get("key"));
 }
 ```
+
 **案例 2: 状态机**:
 
 ```rust
@@ -860,6 +890,7 @@ fn main() {
     // Cell 的不变性确保状态生命周期一致
 }
 ```
+
 ---
 
 ## 5. 生命周期的型变
@@ -880,6 +911,7 @@ fn main() {
     println!("{}", result);
 }
 ```
+
 ### 5.2 引用的型变
 
 ```rust
@@ -901,6 +933,7 @@ fn main() {
     println!("Value: {}", r.reference);
 }
 ```
+
 ### 5.3 复合类型的型变
 
 ```rust
@@ -919,6 +952,7 @@ fn main() {
     println!("{}", c.data);
 }
 ```
+
 ### 5.4 生命周期型变的实际案例
 
 **案例 1: 迭代器的生命周期型变**:
@@ -963,6 +997,7 @@ fn main() {
     }
 }
 ```
+
 **案例 2: 树结构的生命周期**:
 
 ```rust
@@ -995,6 +1030,7 @@ fn main() {
     println!("Child count: {}", root.children().len());
 }
 ```
+
 ### 5.5 生命周期型变的常见错误
 
 **错误 1: 混淆生命周期长度**:
@@ -1017,6 +1053,7 @@ where
     x  // ✅ 可以缩短生命周期
 }
 ```
+
 **错误 2: 不理解可变引用的不变性**:
 
 ```rust
@@ -1029,6 +1066,7 @@ fn demonstrate_mut_invariance() {
     // *r = &s2;  // 如果允许，会创建悬垂指针
 }
 ```
+
 ### 5.6 生命周期型变与泛型的组合
 
 **复杂型变场景**:
@@ -1069,6 +1107,7 @@ fn main() {
     println!("A: {}", complex.get_a());
 }
 ```
+
 ---
 
 ## 6. PhantomData
@@ -1106,6 +1145,7 @@ fn main() {
     };
 }
 ```
+
 ### 6.2 Drop Check
 
 **Drop Check 和型变**:
@@ -1129,6 +1169,7 @@ fn main() {
     };
 }
 ```
+
 ### 6.3 实际应用
 
 **所有权标记**:
@@ -1150,6 +1191,7 @@ fn main() {
     };
 }
 ```
+
 ---
 
 ## 7. 型变规则表
@@ -1191,6 +1233,7 @@ fn main() {
     print_vec(static_vec);
 }
 ```
+
 ### 案例 2: 智能指针
 
 ```rust
@@ -1210,6 +1253,7 @@ fn main() {
     let _rc_any: Rc<Node> = rc_static.clone();
 }
 ```
+
 ### 案例 3: 迭代器
 
 ```rust
@@ -1247,6 +1291,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 9. 常见陷阱
@@ -1271,6 +1316,7 @@ fn correct_example() {
     println!("{}", s);
 }
 ```
+
 **陷阱 2: 混淆 `Vec<T>` 和 &mut [T]**:
 
 ```rust
@@ -1288,6 +1334,7 @@ fn vec_vs_mut_slice() {
     // take_slice(&mut arr);  // ❌ 编译错误
 }
 ```
+
 ### 9.2 PhantomData 使用不当
 
 **陷阱 3: 错误的 PhantomData 标记**:
@@ -1313,6 +1360,7 @@ struct AlsoCorrect<T> {
     _marker: PhantomData<*const T>,  // 协变
 }
 ```
+
 **陷阱 4: 忘记 PhantomData 的 Drop Check 影响**:
 
 ```rust
@@ -1330,6 +1378,7 @@ struct SafeVersion<'a, T> {
     _phantom: PhantomData<&'a ()>,  // 只标记生命周期
 }
 ```
+
 ### 9.3 Drop 和型变冲突
 
 **陷阱 5: Drop实现影响型变**:
@@ -1358,6 +1407,7 @@ fn main() {
     demonstrate_drop_issue();
 }
 ```
+
 **陷阱 6: Drop Check 的微妙之处**:
 
 ```rust
@@ -1388,6 +1438,7 @@ fn main() {
     may_dangle_example();
 }
 ```
+
 ### 9.4 生命周期型变的常见错误
 
 **陷阱 7: 过度约束生命周期**:
@@ -1410,6 +1461,7 @@ where
     x
 }
 ```
+
 **陷阱 8: 混淆协变和逆变**:
 
 ```rust
@@ -1423,6 +1475,7 @@ fn contravariant_example<'a>(f: impl Fn(&'a str)) {
     // 如果 'static: 'a, 则 fn(&'a str) <: fn(&'static str)
 }
 ```
+
 ### 9.5 Cell 和 RefCell 的型变陷阱
 
 **陷阱 9: 误以为 Cell 协变**:
@@ -1441,6 +1494,7 @@ fn cell_trap() {
     // shrink_lifetime(cell);  // 编译错误（幸好）
 }
 ```
+
 **陷阱 10: RefCell 借用规则和型变**:
 
 ```rust
@@ -1463,6 +1517,7 @@ fn main() {
     refcell_trap();
 }
 ```
+
 ### 9.6 调试型变问题的技巧
 
 **技巧 1: 显式标注所有生命周期**:
@@ -1480,6 +1535,7 @@ where
     if x.len() > y.len() { x } else { y }
 }
 ```
+
 **技巧 2: 使用编译器错误信息**:
 
 ```rust
@@ -1490,6 +1546,7 @@ fn use_compiler_help() {
     // 错误信息会解释为什么 &mut 不是协变的
 }
 ```
+
 **技巧 3: 简化类型以理解问题**:
 
 ```rust
@@ -1503,6 +1560,7 @@ fn simplify_to_understand() {
     let _: Vec<Box<&'static str>> = vec![Box::new("hello")];  // ✅
 }
 ```
+
 ---
 
 ## 10. 总结

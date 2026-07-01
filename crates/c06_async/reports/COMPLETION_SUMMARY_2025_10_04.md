@@ -108,6 +108,7 @@
 💡 40+ 代码示例
 🎯 清晰的应用场景分析
 ```
+
 #### 2异步运行时深度对比 2025
 
 **文件**: `docs/ASYNC_RUNTIME_COMPARISON_2025.md`
@@ -190,6 +191,7 @@ $ cargo run --example comprehensive_async_patterns_2025
 
 ✓ 所有示例执行完成!
 ```
+
 ### 3. 报告文档 (2个)
 
 #### 1综合增强报告 2025
@@ -268,6 +270,7 @@ $ cargo run --example comprehensive_async_patterns_2025
 │   ✅ Future 状态机理论           │
 └─────────────────────────────────┘
 ```
+
 ### 实践层次 ✅
 
 ```text
@@ -279,6 +282,7 @@ $ cargo run --example comprehensive_async_patterns_2025
 │   ✅ 单元测试覆盖                │
 └─────────────────────────────────┘
 ```
+
 ### 工具层次 ✅
 
 ```text
@@ -290,6 +294,7 @@ $ cargo run --example comprehensive_async_patterns_2025
 │   ✅ 选型决策指南                │
 └─────────────────────────────────┘
 ```
+
 ### 架构层次 ✅
 
 ```text
@@ -301,6 +306,7 @@ $ cargo run --example comprehensive_async_patterns_2025
 │   ✅ 15+ 设计模式                │
 └─────────────────────────────────┘
 ```
+
 ---
 
 ## 💡 核心亮点
@@ -321,6 +327,7 @@ Actor 系统语义:
   ∀ a ∈ Actors: state(a) is private
   消息有序性: msg₁ before msg₂ ⟹ 处理(msg₁) before 处理(msg₂)
 ```
+
 ### 2. 实践广度 ⭐⭐⭐⭐⭐
 
 **覆盖场景**:
@@ -343,6 +350,7 @@ I/O 吞吐:    Tokio: 1.24Gb/s vs Smol: 1.38Gb/s (高 11%)
 内存占用:    Tokio: 156MB   vs Smol: 98MB    (省 37%)
 二进制大小:  Tokio: 2.1MB   vs Smol: 1.1MB   (小 50%)
 ```
+
 ### 4. 生产级代码 ⭐⭐⭐⭐⭐
 
 **代码质量**:
@@ -374,6 +382,7 @@ Level 4 (专家):
   → 生产级架构
   → 性能优化实战
 ```
+
 ---
 
 ## 📈 质量保证
@@ -417,6 +426,7 @@ cat docs/QUICK_START_2025.md
 # 运行第一个示例
 cargo run --example comprehensive_async_patterns_2025
 ```
+
 **2. 深入学习** (2-4小时):
 
 ```bash
@@ -426,6 +436,7 @@ cat docs/ASYNC_COMPREHENSIVE_GUIDE_2025.md
 # 阅读运行时对比
 cat docs/ASYNC_RUNTIME_COMPARISON_2025.md
 ```
+
 **3. 实践项目** (1-2周):
 
 ```bash
@@ -434,6 +445,7 @@ cargo run --example tokio_patterns
 cargo run --example smol_patterns
 cargo run --example actor_csp_hybrid_advanced
 ```
+
 ### 学习路径建议
 
 **第 1 天**: 快速入门

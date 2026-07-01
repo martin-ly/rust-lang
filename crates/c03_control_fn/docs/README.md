@@ -115,6 +115,7 @@ docs/
     ├── 闭包参考
     └── 错误处理参考
 ```
+
 ## 🎯 按主题浏览
 
 ### 条件控制与模式匹配
@@ -229,6 +230,7 @@ cargo run --example let_else_patterns_handbook
 # 运行实践示例
 cargo run --example error_handling_control_flow
 ```
+
 ### 测试验证
 
 ```bash
@@ -240,6 +242,7 @@ cargo test control_flow
 cargo test --test rust_189_features_tests
 cargo test --test rust_192_comprehensive_tests
 ```
+
 ### 性能测试
 
 ```bash
@@ -249,6 +252,7 @@ cargo bench
 # 查看性能报告
 cargo bench --bench rust_189_benchmarks
 ```
+
 ### 代码检查
 
 ```bash
@@ -261,6 +265,7 @@ cargo clippy
 # 生成文档
 cargo doc --open --package c03_control_fn
 ```
+
 ## 📊 学习进度检查
 
 ### 🔰 初学者检查点

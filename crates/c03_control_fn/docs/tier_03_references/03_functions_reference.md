@@ -48,6 +48,7 @@ function_parameters :=
 function_return_type :=
     "->" type
 ```
+
 **示例**:
 
 ```rust
@@ -94,6 +95,7 @@ fn main() {
     println!("{}", RESULT);
 }
 ```
+
 ---
 
 ## 2. 参数传递
@@ -139,6 +141,7 @@ fn main() {
     println!("{}", n);  // n仍可用
 }
 ```
+
 **参数模式**:
 
 ```rust
@@ -174,6 +177,7 @@ fn main() {
     println!("{}", sum(&[1, 2, 3, 4, 5]));
 }
 ```
+
 ---
 
 ## 3. 返回值
@@ -237,6 +241,7 @@ fn main() {
     print_message("hello");
 }
 ```
+
 **提前返回**:
 
 ```rust
@@ -268,6 +273,7 @@ fn main() {
     println!("{:?}", validate(5));
 }
 ```
+
 ---
 
 ## 4. 泛型函数
@@ -296,6 +302,7 @@ fn main() {
     println!("{:?}", p);
 }
 ```
+
 **trait约束**:
 
 ```rust
@@ -330,6 +337,7 @@ fn main() {
     complex("hello", 42);
 }
 ```
+
 **关联类型**:
 
 ```rust
@@ -364,6 +372,7 @@ fn main() {
     process_container(&container);
 }
 ```
+
 ---
 
 ## 5. 异步函数
@@ -395,6 +404,7 @@ fn main() {
     println!("异步函数需要运行时支持");
 }
 ```
+
 **异步trait方法**:
 
 ```rust
@@ -418,6 +428,7 @@ fn main() {
     println!("异步trait方法示例");
 }
 ```
+
 ---
 
 ## 6. 函数指针
@@ -458,6 +469,7 @@ fn main() {
     println!("{}", op(5, 6));
 }
 ```
+
 **fn vs Fn trait**:
 
 ```rust
@@ -477,6 +489,7 @@ fn main() {
     println!("{}", call_fn(|x| x + y, 5));  // OK
 }
 ```
+
 ---
 
 ## 7. 方法语法
@@ -529,6 +542,7 @@ fn main() {
     println!("{}", final_count);
 }
 ```
+
 **方法调用语法**:
 
 ```rust
@@ -559,6 +573,7 @@ fn main() {
     println!("距离: {}", dist1);
 }
 ```
+
 ---
 
 **最后更新**: 2025-12-11

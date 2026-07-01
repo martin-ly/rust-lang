@@ -139,6 +139,7 @@
 └── 错误诊断
     └── 错误消息改进
 ```
+
 ### 多维概念对比矩阵
 
 | 调试工具         | 易用性 | 功能 | 性能 | 适用场景   | Rust 1.92.0 |
@@ -161,6 +162,7 @@
 │       └── 需要可视化？
 │           └── 是 → 可视化工具
 ```
+
 ---
 
 ## 1. 概述
@@ -211,6 +213,7 @@ cargo expand my_module
 # 展开特定项
 cargo expand my_module::my_function
 ```
+
 #### 2.1.2 输出格式化
 
 ```bash
@@ -223,6 +226,7 @@ cargo expand > expanded.rs
 # 彩色输出（默认）
 cargo expand --color=always
 ```
+
 ---
 
 ### 2.2 过滤和聚焦
@@ -236,12 +240,14 @@ cargo expand --test my_test
 # 展开所有测试
 cargo expand --tests
 ```
+
 #### 2.2.2 按示例展开
 
 ```bash
 # 展开特定示例
 cargo expand --example my_example
 ```
+
 #### 2.2.3 按 Feature 展开
 
 ```bash
@@ -251,6 +257,7 @@ cargo expand --features my_feature
 # 禁用默认 features
 cargo expand --no-default-features --features minimal
 ```
+
 ---
 
 ### 2.3 比较差异
@@ -269,6 +276,7 @@ cargo expand > expanded_after.rs
 # 比较差异
 diff -u expanded_before.rs expanded_after.rs
 ```
+
 #### 2.3.2 自动化比较脚本
 
 ```bash
@@ -292,6 +300,7 @@ diff -u "$BEFORE" "$AFTER" | bat --language diff
 # 清理临时文件
 rm "$BEFORE" "$AFTER"
 ```
+
 ---
 
 ### 2.4 集成到工作流
@@ -319,6 +328,7 @@ jobs:
           name: expanded-code
           path: expanded.rs
 ```
+
 #### 2.4.2 Pre-commit Hook
 
 ```bash
@@ -334,6 +344,7 @@ fi
 
 echo "✅ Macro expansion successful"
 ```
+
 ---
 
 ## 3. 编译器插件开发
@@ -390,6 +401,7 @@ fn sysroot_path() -> String {
         .unwrap()
 }
 ```
+
 ---
 
 ### 3.2 自定义 Lint
@@ -425,6 +437,7 @@ impl EarlyLintPass for MyMacroLint {
     }
 }
 ```
+
 ---
 
 ### 3.3 编译器回调
@@ -469,6 +482,7 @@ impl Callbacks for DebugCallbacks {
     }
 }
 ```
+
 ---
 
 ## 4. 宏展开追踪
@@ -506,6 +520,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
     output.into()
 }
 ```
+
 #### 4.1.2 使用 tracing
 
 ```toml
@@ -513,6 +528,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 tracing = "0.1"
 tracing-subscriber = "0.3"
 ```
+
 ```rust
 use tracing::{info, debug, span, Level};
 
@@ -532,6 +548,7 @@ pub fn traced_macro(input: TokenStream) -> TokenStream {
     output.into()
 }
 ```
+
 ---
 
 ### 4.2 断点调试
@@ -556,6 +573,7 @@ lldb -- cargo build
 (lldb) step
 (lldb) next
 ```
+
 #### 4.2.2 VS Code 集成
 
 ```json
@@ -575,6 +593,7 @@ lldb -- cargo build
   ]
 }
 ```
+
 ---
 
 ### 4.3 可视化工具
@@ -590,6 +609,7 @@ syn-browser
 
 # 访问 http://localhost:8000
 ```
+
 **功能**：
 
 - 可视化 syn AST
@@ -611,6 +631,7 @@ cargo build --release --timings
 # 查看 HTML 报告
 open target/cargo-timings/cargo-timing.html
 ```
+
 **报告内容**：
 
 - 各 crate 编译时间
@@ -626,6 +647,7 @@ RUSTC_LOG=rustc_expand::trace_macros cargo build 2>&1 | tee expand.log
 # 过滤宏展开信息
 grep "trace_macros" expand.log
 ```
+
 ---
 
 ### 5.2 宏展开开销
@@ -648,6 +670,7 @@ pub fn timed_macro(input: TokenStream) -> TokenStream {
     output.into()
 }
 ```
+
 #### 5.1.2 基准测试
 
 ```bash
@@ -673,6 +696,7 @@ mod tests {
 # 测量编译时间
 hyperfine "cargo clean && cargo test --no-run"
 ```
+
 ---
 
 ### 5.3 优化瓶颈识别
@@ -688,6 +712,7 @@ cargo flamegraph --bin my_app
 
 # 查看 flamegraph.svg
 ```
+
 #### 5.3.2 perf 分析
 
 ```bash
@@ -695,6 +720,7 @@ cargo flamegraph --bin my_app
 perf record -g cargo build
 perf report
 ```
+
 ---
 
 ## 6. 错误诊断
@@ -725,6 +751,7 @@ fn validate_input(input: &syn::DeriveInput) -> Result<(), Error> {
 // 5  | struct MyStruct;
 //    |        ^^^^^^^^
 ```
+
 #### 6.1.2 多错误报告
 
 ```rust
@@ -760,6 +787,7 @@ match validate_all(&input) {
     }
 }
 ```
+
 ---
 
 ### 6.2 Span 管理
@@ -782,6 +810,7 @@ fn generate_with_span(field: &syn::Field) -> proc_macro2::TokenStream {
     }
 }
 ```
+
 #### 6.2.2 Span 组合
 
 ```rust
@@ -795,6 +824,7 @@ fn combine_spans(span1: Span, span2: Span) -> Span {
 let combined = combine_spans(ident_span, type_span);
 let error = Error::new(combined, "type mismatch");
 ```
+
 ---
 
 ### 6.3 诊断工具
@@ -805,6 +835,7 @@ let error = Error::new(combined, "type mismatch");
 [dependencies]
 proc-macro-error = "1.0"
 ```
+
 ```rust
 use proc_macro_error::{abort, proc_macro_error};
 
@@ -825,6 +856,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
     // 生成代码...
 }
 ```
+
 ---
 
 ## 7. 实战案例
@@ -844,6 +876,7 @@ my_complex_macro! {
 
 // 展开失败：trait bound `String: Copy` is not satisfied
 ```
+
 #### 7.1.2 调试步骤
 
 **步骤 1：展开宏**:
@@ -851,6 +884,7 @@ my_complex_macro! {
 ```bash
 cargo expand my_module::my_struct
 ```
+
 **步骤 2：定位问题**:
 
 ```rust
@@ -864,6 +898,7 @@ impl Clone for User {
     }
 }
 ```
+
 **步骤 3：修复宏**:
 
 ```rust
@@ -880,6 +915,7 @@ quote! {
     }
 }
 ```
+
 ---
 
 ### 7.2 性能瓶颈定位
@@ -896,6 +932,7 @@ quote! {
 cargo build --timings
 # 查看 HTML 报告，发现 `my_macro_derive` 耗时 2 分钟
 ```
+
 **步骤 2：分析单态化**:
 
 ```bash
@@ -903,6 +940,7 @@ cargo llvm-lines | grep my_macro_derive
 # 输出：
 # 50000 (49.3%)  1000 (40.3%)  my_macro_derive::generate<...>
 ```
+
 **步骤 3：优化宏**:
 
 ```rust
@@ -932,6 +970,7 @@ macro_rules! generate_impl {
     };
 }
 ```
+
 **结果**：编译时间降至 45 秒。
 
 ---

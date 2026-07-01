@@ -147,6 +147,7 @@
     ├── 语义化版本
     └── 向后兼容性
 ```
+
 ### 多维概念对比矩阵
 
 | 开发实践       | 重要性 | 复杂度 | 适用场景 | Rust 1.92.0 |
@@ -169,6 +170,7 @@
 └── 发布后
     └── 向后兼容性 → 弃用和迁移
 ```
+
 ---
 
 ## 1. 概述
@@ -216,6 +218,7 @@ rust-version = "1.70.0"  # 最低支持的 Rust 版本
 [package.metadata.docs.rs]
 rustc-args = ["--cfg", "docsrs"]
 ```
+
 #### 2.1.2 CI 测试 MSRV
 
 ```yaml
@@ -240,6 +243,7 @@ jobs:
           toolchain: ${{ matrix.rust }}
       - run: cargo test --all-features
 ```
+
 #### 2.1.3 MSRV 更新策略
 
 **保守策略**（推荐）：
@@ -255,6 +259,7 @@ v1.1.0 (MSRV 1.65) ✅ 不变
 v1.2.0 (MSRV 1.65) ✅ 不变
 v2.0.0 (MSRV 1.70) ✅ Major 版本可更新
 ```
+
 ---
 
 ### 2.2 Edition 兼容
@@ -273,6 +278,7 @@ proc-macro = true
 # 测试 Edition 2018 兼容性
 trybuild = "1.0"
 ```
+
 #### 2.2.2 Edition 特性隔离
 
 ```rust
@@ -295,6 +301,7 @@ pub fn public_api() {
     legacy_impl();
 }
 ```
+
 ---
 
 ### 2.3 依赖版本策略
@@ -312,6 +319,7 @@ proc-macro2 = "1.0"   # ✅ 固定 Major 版本
 trybuild = "1.0"
 prettyplease = "0.2"  # ✅ 开发依赖可以更灵活
 ```
+
 #### 2.3.2 可选依赖
 
 ```toml
@@ -322,6 +330,7 @@ serde = { version = "1.0", optional = true }
 default = []
 serde-support = ["serde"]
 ```
+
 ```rust
 #[cfg(feature = "serde-support")]
 use serde::{Serialize, Deserialize};
@@ -342,6 +351,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
     // ...
 }
 ```
+
 ---
 
 ### 2.4 弃用和迁移
@@ -363,6 +373,7 @@ pub fn new_api() {
     // ...
 }
 ```
+
 #### 2.4.2 迁移指南
 
 ````markdown
@@ -379,6 +390,7 @@ old_macro! {
 }
 ```
 ````
+
 **v2.0**:
 
 ```rust
@@ -386,6 +398,7 @@ new_macro! {
     field = "value"
 }
 ```
+
 #### 2. `Config` 结构体重命名
 
 | v1.x              | v2.0                     |
@@ -425,6 +438,7 @@ fn validate_field(field: &syn::Field) -> Result<(), Error> {
 // 5  |     name: String,
 //    |     ^^^^^^^^^^^^
 ```
+
 #### 3.1.2 多位置错误
 
 ```rust
@@ -447,6 +461,7 @@ fn check_consistency(field1: &syn::Field, field2: &syn::Field) -> Result<(), Err
     Ok(())
 }
 ```
+
 ---
 
 ### 3.2 帮助消息
@@ -457,6 +472,7 @@ fn check_consistency(field1: &syn::Field, field2: &syn::Field) -> Result<(), Err
 [dependencies]
 proc-macro-error = "1.0"
 ```
+
 ```rust
 use proc_macro_error::{abort, emit_error, proc_macro_error};
 
@@ -477,6 +493,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
     // ...
 }
 ```
+
 **输出**：
 
 ```text
@@ -489,6 +506,7 @@ error: expected at least one generic parameter
    = help: try: struct MyStruct<T> { ... }
    = note: generic parameters are required for this derive
 ```
+
 ---
 
 ### 3.3 多错误聚合
@@ -540,6 +558,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
     }
 }
 ```
+
 ---
 
 ### 3.4 友好错误文案
@@ -553,6 +572,7 @@ error: invalid input
 error: parse failed
 error: type error
 ```
+
 **✅ 好**：
 
 ```text
@@ -560,6 +580,7 @@ error: expected identifier, found keyword `type`
 error: field `name` must be of type `String`, found `i32`
 error: attribute `#[skip]` cannot be used with `#[rename]`
 ```
+
 #### 3.4.2 上下文信息
 
 ```rust
@@ -576,6 +597,7 @@ fn report_error(field: &syn::Field, expected: &str, found: &str) -> Error {
     )
 }
 ```
+
 ---
 
 ## 4. 文档生成
@@ -622,6 +644,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
     // ...
 }
 ````
+
 #### 4.1.2 展开示例
 
 ````rust
@@ -676,6 +699,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
     // ...
 }
 ````
+
 ---
 
 ### 4.2 示例代码
@@ -704,11 +728,13 @@ fn main() {
     println!("{:?}", config);
 }
 ```
+
 **运行示例**：
 
 ```bash
 cargo run --example basic
 ```
+
 ---
 
 ### 4.3 隐藏实现细节
@@ -726,6 +752,7 @@ pub mod __internal {
 
 // 用户文档中不会显示 __internal 模块
 ```
+
 #### 4.3.2 使用 #[doc(cfg(...))]
 
 ```rust
@@ -735,6 +762,7 @@ pub fn experimental_api() {
     // 仅在 "unstable" feature 启用时显示
 }
 ```
+
 ---
 
 ### 4.4 Doc Tests
@@ -756,6 +784,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
     // ...
 }
 ````
+
 #### 4.4.2 运行时测试
 
 ````rust
@@ -775,6 +804,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
     // ...
 }
 ````
+
 ---
 
 ## 5. 发布策略
@@ -799,6 +829,7 @@ version = "2.0.0-rc.1"  # Release Candidate
 # version = "2.0.0-alpha.1"  # Alpha
 # version = "2.0.0-beta.1"   # Beta
 ```
+
 ---
 
 ### 5.2 Changelog 管理
@@ -853,6 +884,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - 修复：在 `Option<T>` 字段的默认值问题
 ```
+
 ---
 
 ### 5.3 Breaking Changes 处理
@@ -872,6 +904,7 @@ pub fn old_api() {
 // v2.0.0: 移除旧 API
 // pub fn old_api() { /* 已移除 */ }
 ```
+
 #### 5.3.2 Cargo Features 隔离
 
 ```toml
@@ -880,6 +913,7 @@ default = ["new-api"]
 new-api = []
 legacy-api = []
 ```
+
 ```rust
 #[cfg(feature = "legacy-api")]
 pub fn old_api() {
@@ -891,6 +925,7 @@ pub fn new_api() {
     // ...
 }
 ```
+
 ---
 
 ### 5.4 CI/CD 集成
@@ -929,6 +964,7 @@ jobs:
           release_name: Release ${{ github.ref }}
           body_path: CHANGELOG.md
 ```
+
 ---
 
 ## 6. 维护策略
@@ -970,6 +1006,7 @@ jobs:
     - Crate 版本: `my_macro = "1.5.0"`
     - 操作系统: Ubuntu 22.04
 ````
+
 ---
 
 ### 6.2 安全更新
@@ -991,6 +1028,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions-rust-lang/audit-check@v1
 ```
+
 #### 6.2.2 依赖更新策略
 
 **定期更新**：
@@ -1010,6 +1048,7 @@ updates:
     schedule:
       interval: "weekly"
 ```
+
 ---
 
 ### 6.3 社区支持
@@ -1043,6 +1082,7 @@ v1.x (LTS)  → 维护至 2026-12-31
 v2.x (Current) → 当前稳定版
 v3.x (Next) → 开发中
 ```
+
 #### 6.4.2 向后兼容承诺
 
 **承诺**：
@@ -1074,6 +1114,7 @@ error: duplicate serde attribute `rename`
    |
    = note: remove the duplicate attribute
 ```
+
 ---
 
 ### 7.2 Tokio 宏的错误诊断
@@ -1099,6 +1140,7 @@ error: the async fn must be inside a tokio runtime
                // ...
            }
 ```
+
 ---
 
 ## 8. 相关资源

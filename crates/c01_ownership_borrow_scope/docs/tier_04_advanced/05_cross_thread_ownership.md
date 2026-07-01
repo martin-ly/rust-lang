@@ -33,6 +33,7 @@ impl<T: Send> Send for Box<T> {}
 // 不实现 Send
 impl<T> !Send for Rc<T> {}
 ```
+
 ### Sync trait
 
 ```rust
@@ -41,6 +42,7 @@ pub unsafe auto trait Sync {}
 
 // T 是 Sync 当且仅当 &T 是 Send
 ```
+
 ---
 
 ## 2. Arc + Mutex 模式
@@ -68,6 +70,7 @@ for handle in handles {
 
 println!("Result: {}", *data.lock().unwrap());
 ```
+
 ---
 
 ## 3. Scoped Threads
@@ -89,6 +92,7 @@ thread::scope(|s| {
 
 println!("{:?}", data);
 ```
+
 ---
 
 ## 4. Atomic 类型
@@ -116,6 +120,7 @@ for handle in handles {
 
 println!("Result: {}", counter.load(Ordering::SeqCst));
 ```
+
 ---
 
 ## 5. 无锁数据结构
@@ -128,6 +133,7 @@ let queue = Arc::new(ArrayQueue::new(100));
 
 // 无锁队列 - 高性能并发
 ```
+
 ---
 
 **相关文档**:

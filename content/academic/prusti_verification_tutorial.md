@@ -47,6 +47,7 @@ Prusti 是 Rust 的形式化验证工具，基于 [Viper](https://www.pm.inf.eth
 │         ✅ 证明通过 / ❌ 反例发现        │
 └─────────────────────────────────────────┘
 ```
+
 **验证维度**:
 
 - **功能正确性**: 输入 → 输出的数学保证
@@ -78,6 +79,7 @@ pub fn abs(x: i32) -> i32 {
     }
 }
 ```
+
 ### 循环不变量
 
 ```rust
@@ -101,6 +103,7 @@ pub fn array_sum(array: &[i32]) -> i32 {
     sum
 }
 ```
+
 ---
 
 ## 🔐 所有权与借用验证
@@ -118,6 +121,7 @@ pub fn swap<T>(a: &mut T, b: &mut T) {
     std::mem::swap(a, b);
 }
 ```
+
 **纯函数 (Pure Functions)**:
 
 ```rust
@@ -128,6 +132,7 @@ pub fn get(slice: &[i32], index: usize) -> i32 {
     slice[index]
 }
 ```
+
 ---
 
 ## 📐 高级规范
@@ -186,6 +191,7 @@ pub fn binary_search(array: &[i32], target: i32) -> Option<usize> {
     None
 }
 ```
+
 ---
 
 ## 🔄 与 Miri 对比

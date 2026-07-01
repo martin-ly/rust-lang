@@ -115,6 +115,7 @@ graph TB
     style Channel fill:#4ecdc4,color:#fff
     style Pattern fill:#95e1d3,color:#333
 ```
+
 ### 通道数据流图
 
 ```mermaid
@@ -137,6 +138,7 @@ sequenceDiagram
 
     Note over P1,C: Rust 1.92.0: 优化的通道性能
 ```
+
 ---
 
 ## 📊 通道类型多维对比
@@ -230,6 +232,7 @@ fn main() {
     // ...
 }
 ```
+
 `send` 方法返回一个 `Result<T, E>`，如果接收端已经被丢弃 (dropped)，发送操作会失败并返回一个错误。
 
 ### 2.2. 接收数据：`recv` 与 `try_recv`
@@ -256,6 +259,7 @@ fn main() {
 let received = rx.recv().unwrap();
 println!("主线程：接收到消息 '{}'", received);
 ```
+
 这个例子保证了主线程会等待工作线程完成它的发送任务。
 
 ## 3. 所有权与消息传递的交互
@@ -317,6 +321,7 @@ fn main() {
     }
 }
 ```
+
 当所有 `Sender` 的克隆都被丢弃后，接收端的迭代器 (`for received in rx`) 会优雅地结束。
 
 ## 4. 哲学批判性分析
@@ -362,6 +367,7 @@ graph LR
     style B2 fill:#51cf66,color:#fff
     style B4 fill:#51cf66,color:#fff
 ```
+
 ### 🚀 示例 1: Rust 1.92.0 改进的 MPSC 通道（自 Rust 1.90 引入）
 
 ```rust
@@ -411,6 +417,7 @@ fn main() {
     consumer.join().unwrap();
 }
 ```
+
 ### 🚀 示例 2: 有界通道与背压处理
 
 ```rust
@@ -453,6 +460,7 @@ fn main() {
     consumer.join().unwrap();
 }
 ```
+
 ### 🚀 示例 3: 多生产者模式
 
 ```rust
@@ -511,6 +519,7 @@ fn main() {
     println!("\n所有消息已处理!");
 }
 ```
+
 ### 📊 性能基准对比
 
 | 场景      | Rust 1.89 | Rust 1.90 | 改进    |
@@ -562,6 +571,7 @@ mindmap
         标准库
         成熟库
 ```
+
 ---
 
 ## 📋 快速参考

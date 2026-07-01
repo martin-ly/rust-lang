@@ -103,6 +103,7 @@ trait Printable {
     }
 }
 ```
+
 ### 1.2 带关联类型的 Trait
 
 ```rust
@@ -126,6 +127,7 @@ impl Iterator for Counter {
     }
 }
 ```
+
 ### 1.3 带泛型参数的 Trait
 
 ```rust
@@ -139,6 +141,7 @@ impl Convert<String> for i32 {
     }
 }
 ```
+
 ---
 
 ## 2. Trait 实现模式
@@ -164,6 +167,7 @@ fn main() {
     println!("{}", p);  // (3, 4)
 }
 ```
+
 ### 2.2 条件实现
 
 ```rust
@@ -179,6 +183,7 @@ impl<T: Display> Display for Wrapper<T> {
     }
 }
 ```
+
 ### 2.3 默认实现
 
 ```rust
@@ -197,6 +202,7 @@ impl Summary for NewsArticle {
     // 使用默认实现，不需要重写
 }
 ```
+
 ---
 
 ## 3. Trait 作为参数
@@ -208,6 +214,7 @@ pub fn notify<T: Summary>(item: &T) {
     println!("Breaking news! {}", item.summarize());
 }
 ```
+
 ### 3.2 impl Trait 语法
 
 ```rust
@@ -215,6 +222,7 @@ pub fn notify(item: &impl Summary) {
     println!("Breaking news! {}", item.summarize());
 }
 ```
+
 ### 3.3 多个 Trait Bound
 
 ```rust
@@ -233,6 +241,7 @@ where
     // ...
 }
 ```
+
 ---
 
 ## 4. Trait 对象实践
@@ -271,6 +280,7 @@ fn main() {
     draw_shape(&square);
 }
 ```
+
 ### 4.2 集合中的 Trait 对象
 
 ```rust
@@ -285,6 +295,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 5. 标准库 Trait 应用
@@ -302,6 +313,7 @@ fn duplicate<T: Clone>(item: T) -> (T, T) {
     (item.clone(), item.clone())
 }
 ```
+
 ### 5.2 Debug 和 Display
 
 ```rust
@@ -319,6 +331,7 @@ impl fmt::Display for Person {
     }
 }
 ```
+
 ### 5.3 PartialEq 和 Eq
 
 ```rust
@@ -332,6 +345,7 @@ fn compare_points(p1: Point, p2: Point) -> bool {
     p1 == p2
 }
 ```
+
 ---
 
 ## 6. 自定义 Trait 设计
@@ -357,6 +371,7 @@ trait ReadWrite: Readable + Writable {
     }
 }
 ```
+
 ### 6.2 关联类型 vs 泛型参数
 
 ```rust
@@ -371,6 +386,7 @@ trait Convert<T> {
     fn convert(&self) -> T;
 }
 ```
+
 ---
 
 ## 7. Trait 组合模式
@@ -400,6 +416,7 @@ impl Animal for Bird {
 
 impl Fly for Bird {}
 ```
+
 ### 7.2 Trait 继承
 
 ```rust
@@ -417,6 +434,7 @@ trait ColoredShape: Shape + Colored {
     }
 }
 ```
+
 ---
 
 ## 8. 实战案例
@@ -463,6 +481,7 @@ impl PluginManager {
     }
 }
 ```
+
 ### 8.2 案例2: 序列化系统
 
 ```rust
@@ -495,6 +514,7 @@ impl Deserialize for User {
     }
 }
 ```
+
 ### 8.3 案例3: 策略模式
 
 ```rust
@@ -538,6 +558,7 @@ impl PaymentProcessor {
     }
 }
 ```
+
 ---
 
 ## 9. 常见问题
@@ -551,6 +572,7 @@ trait NotObjectSafe {
     fn method() -> Self;  // ❌ 返回 Self
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -558,6 +580,7 @@ trait ObjectSafe {
     fn method(&self);  // ✅ 使用 &self
 }
 ```
+
 ### 问题2: 孤儿规则
 
 **错误**:
@@ -566,6 +589,7 @@ trait ObjectSafe {
 // ❌ 不能为外部类型实现外部 Trait
 impl Display for Vec<i32> {}
 ```
+
 **解决方案**:
 
 ```rust
@@ -576,6 +600,7 @@ impl Display for MyVec {
     // ...
 }
 ```
+
 ---
 
 ## 10. 最佳实践

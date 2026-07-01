@@ -94,6 +94,7 @@ let mr: &mut i32 = &mut 42;
 let bp: Box<i32> = Box::new(42);
 let rp: *const i32 = &42;
 ```
+
 ### 1.2 类型大小规范
 
 **Sized 类型**:
@@ -119,6 +120,7 @@ struct Point {
 let s: &str = "hello";  // 通过引用使用
 let slice: &[i32] = &[1, 2, 3];  // 通过切片使用
 ```
+
 ---
 
 ## 2. 类型推断规范
@@ -132,6 +134,7 @@ let x = 42;  // 推断为 i32
 let y = 3.14;  // 推断为 f64
 let z = "hello";  // 推断为 &str
 ```
+
 ### 2.2 函数类型推断
 
 函数参数和返回值的类型推断：
@@ -149,6 +152,7 @@ where
 let result = add(1, 2);  // T 推断为 i32
 let result2 = add(1.0, 2.0);  // T 推断为 f64
 ```
+
 ### 2.3 约束传播
 
 类型约束在推断中传播：
@@ -160,6 +164,7 @@ fn process<T: Clone>(item: T) -> T {
 
 let x = process(42);  // T 推断为 i32，必须实现 Clone
 ```
+
 ---
 
 ## 3. 类型检查规范
@@ -177,6 +182,7 @@ takes_i32(x);  // ✅ 类型匹配
 let y: i64 = 42;
 // takes_i32(y);  // ❌ 类型不匹配
 ```
+
 ### 3.2 子类型关系
 
 Rust 中的子类型关系：
@@ -189,6 +195,7 @@ fn longer<'a, 'b: 'a>(x: &'a str, y: &'b str) -> &'a str {
 
 // 'b: 'a 表示 'b 是 'a 的子类型（'b 生命周期更长）
 ```
+
 ### 3.3 类型强制转换
 
 自动类型强制转换：
@@ -206,6 +213,7 @@ fn takes_slice(s: &[i32]) {}
 let vec = vec![1, 2, 3];
 takes_slice(&vec);  // ✅ 自动强制转换
 ```
+
 ---
 
 ## 4. 类型转换规范
@@ -219,6 +227,7 @@ let x: i32 = 42;
 let y: i64 = x as i64;  // 显式转换
 let z: f64 = x as f64;  // 显式转换
 ```
+
 ### 4.2 From/Into Trait
 
 标准转换 Trait：
@@ -236,6 +245,7 @@ impl From<i32> for MyType {
 // 自动获得 Into
 let my: MyType = 42.into();
 ```
+
 ### 4.3 TryFrom/TryInto
 
 可能失败的转换：
@@ -255,6 +265,7 @@ impl TryFrom<i32> for SmallInt {
     }
 }
 ```
+
 ---
 
 ## 5. 泛型系统规范
@@ -279,6 +290,7 @@ struct Array<T, const N: usize> {
     data: [T; N],
 }
 ```
+
 ### 5.2 Trait Bound 规范
 
 Trait Bound 的语法和语义：
@@ -303,6 +315,7 @@ where
     // ...
 }
 ```
+
 ### 5.3 关联类型规范
 
 关联类型的使用规范：
@@ -323,6 +336,7 @@ impl Iterator for Counter {
     }
 }
 ```
+
 ---
 
 ## 6. Trait 系统规范
@@ -350,6 +364,7 @@ trait MyTrait {
     fn method(&self) -> Self::Associated;
 }
 ```
+
 ### 6.2 Trait 实现规范
 
 实现 Trait 的规则：
@@ -369,6 +384,7 @@ impl<T: Clone> MyTrait for Vec<T> {
     }
 }
 ```
+
 ### 6.3 对象安全规范
 
 Trait 对象安全的要求：
@@ -385,6 +401,7 @@ trait Unsafe {
     fn generic<T>(&self, t: T);  // ❌ 泛型方法
 }
 ```
+
 ---
 
 ## 7. 生命周期系统规范
@@ -411,6 +428,7 @@ impl<'a, T> Ref<'a, T> {
     }
 }
 ```
+
 ### 7.2 生命周期省略规则
 
 编译器自动推断生命周期的规则：
@@ -432,6 +450,7 @@ struct Ref<'a, 'b: 'a, T> {
 
 // 'b: 'a 表示 'b 生命周期至少和 'a 一样长
 ```
+
 ---
 
 ## 8. 类型安全保证
@@ -459,6 +478,7 @@ fn no_data_race() {
     println!("{}", first);
 }
 ```
+
 ### 8.2 类型安全
 
 类型系统防止类型错误：
@@ -470,6 +490,7 @@ fn type_safe() {
     let y: String = x.to_string();  // ✅ 显式转换
 }
 ```
+
 ---
 
 ## 9. 编译器行为规范
@@ -498,6 +519,7 @@ error[E0308]: mismatched types
  3 |     let x: i32 = "hello";
    |         ^ expected `i32`, found `&str`
 ```
+
 ---
 
 ## 10. 参考资源

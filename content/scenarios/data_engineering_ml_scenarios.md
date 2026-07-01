@@ -52,6 +52,7 @@ fn process_stream(events: &[Event]) -> DataFrame {
         .unwrap()
 }
 ```
+
 **关键决策**:
 
 - 框架: Polars（比 pandas 快 5–50x）
@@ -89,6 +90,7 @@ fn classify_image(model: &dyn Module, image: &[f32]) -> Result<usize> {
     Ok(max_idx)
 }
 ```
+
 **关键决策**:
 
 - 框架: Candle（Hugging Face，纯 Rust）或 `tflite-rs`
@@ -123,6 +125,7 @@ fn main() {
     println!("Solution: {:?}", x);
 }
 ```
+
 **关键决策**:
 
 - 框架: `ndarray` + `ndarray-linalg`（BLAS/LAPACK 绑定）

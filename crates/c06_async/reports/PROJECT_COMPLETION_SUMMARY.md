@@ -278,6 +278,7 @@ cargo test
 # 运行性能基准测试
 cargo bench
 ```
+
 ### 2. 运行演示
 
 ```bash
@@ -287,12 +288,14 @@ cargo run --example comprehensive_async_ecosystem_demo
 # 运行最终演示
 cargo run --example async_ecosystem_final_demo
 ```
+
 ### 3. 查看文档
 
 ```bash
 # 生成文档
 cargo doc --open
 ```
+
 ## 总结
 
 本项目成功完成了对Rust异步编程生态系统的全面分析，提供了：

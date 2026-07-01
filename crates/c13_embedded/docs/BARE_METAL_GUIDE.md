@@ -124,6 +124,7 @@ cargo install cargo-embed
 cargo install cargo-flash
 rustup component add llvm-tools-preview
 ```
+
 ### 2. QEMU（用于仿真）
 
 ```bash
@@ -137,6 +138,7 @@ brew install qemu
 # Windows
 # 从 https://www.qemu.org/download/#windows 下载安装包
 ```
+
 ### 3. 调试工具
 
 ```bash
@@ -146,6 +148,7 @@ sudo apt install gdb-multiarch
 # OpenOCD（用于真实硬件调试）
 sudo apt install openocd
 ```
+
 ### 4. 验证安装
 
 ```bash
@@ -155,6 +158,7 @@ rustup target list --installed | grep thumb
 # 检查 QEMU 版本
 qemu-system-arm --version
 ```
+
 ---
 
 ## 核心概念速查
@@ -188,6 +192,7 @@ cargo build -p c13_embedded --example qemu_demo \
     --target thumbv7m-none-eabi \
     --features c13_embedded/embedded
 ```
+
 ### 运行
 
 ```bash
@@ -198,6 +203,7 @@ qemu-system-arm \
     -nographic \
     -kernel target/thumbv7m-none-eabi/debug/examples/qemu_demo
 ```
+
 ### 调试
 
 ```bash
@@ -214,6 +220,7 @@ arm-none-eabi-gdb \
     target/thumbv7m-none-eabi/debug/examples/qemu_demo \
     -ex "target remote :1234"
 ```
+
 ---
 
 ## 模块对照索引

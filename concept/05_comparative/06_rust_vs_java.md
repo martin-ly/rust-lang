@@ -87,6 +87,7 @@ graph LR
         K["Java: 运行时债务"] -->|"学习成本低"| L["运行时不可预测"]
     end
 ```
+
 > **认知功能**: 此图对比 Rust 与 Java 的**内存管理债务转移**——Rust 将复杂性前移到编译期，Java 将其后移到运行时。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 延迟敏感场景（实时系统、高频交易、游戏引擎）选 Rust；快速迭代、延迟不敏感场景选 Java。
@@ -115,6 +116,7 @@ graph LR
   Rust 类型系统 ≈ 系统 F + 区域类型 + 线性类型
   Java 类型系统 ≈ 系统 F<: + 子类型多态 + 泛型擦除
 ```
+
 > **类型洞察**: Rust 的 `Option<T>` 和模式匹配（Pattern Matching）将**空值检查**从运行时异常转化为编译期错误。Java 的 `Optional<T>`（Java 8+）是类似的尝试，但因向后兼容性无法强制使用。
 > [来源: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html)] · [JLS — Types](https://docs.oracle.com/javase/specs/jls/se21/html/jls-4.html)
 
@@ -140,6 +142,7 @@ graph TD
         K["Java: 运行时"] -->|"约定 + 审查"| L["默认不安全"]
     end
 ```
+
 > **认知功能**: 此图对比两种语言的**并发安全（Concurrency Safety）模型**——Rust 通过类型系统（Send/Sync）在编译期消除数据竞争；Java 通过 JMM 和开发者约定在运行时管理并发。
 > **使用建议**: 高并发系统（微服务、网络服务）选 Rust（编译期安全）；遗留系统或需大量共享状态的系统选 Java（成熟的并发库生态）。
 > **关键洞察**: Rust 的 `Send`/`Sync` 是**类型系统（Type System）的并发安全（Concurrency Safety）标记**——与 Java 的 `synchronized` 不同，它们不引入运行时开销，只是编译期的约束检查。
@@ -195,6 +198,7 @@ graph TD
   - Rust 无异常开销（无栈展开成本，除非 panic）
   - Java 的异常创建有成本（填充栈跟踪）
 ```
+
 > **错误洞察**: Rust 的 `Result<T, E>` 将**错误处理（Error Handling）显式化**——调用者必须处理或传播错误。Java 的 checked exception 有类似目标，但 unchecked exception 的存在破坏了这一保证。
 > [来源: [Rust Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)] · [JLS — Exceptions](https://docs.oracle.com/javase/specs/jls/se21/html/jls-11.html)
 
@@ -212,6 +216,7 @@ fn identity<T>(x: T) -> T { x }
 // fn identity_string(x: String) -> String { x }
 // 零运行时开销，但二进制膨胀
 ```
+
 ```java
 // Java: 泛型擦除（Type Erasure）
 public static <T> T identity(T x) { return x; }
@@ -220,6 +225,7 @@ public static <T> T identity(T x) { return x; }
 // public static Object identity(Object x) { return x; }
 // 运行时类型信息丢失，需自动装箱/拆箱
 ```
+
 > **实现洞察**: Rust 单态化（Monomorphization）提供**类型特化的性能**（无装箱），但增加二进制大小。Java 擦除保持**二进制兼容性**（泛型（Generics）库可向后兼容），但引入装箱开销和运行时类型丢失。
 > [来源: [Rust Reference — Generics](https://doc.rust-lang.org/reference/items/generics.html)] · [JLS — Type Erasure](https://docs.oracle.com/javase/specs/jls/se21/html/jls-4.html#jls-4.6)
 
@@ -264,6 +270,7 @@ graph TD
     style FALSE1 fill:#ffebee
     style ALT fill:#fff3e0
 ```
+
 > **认知功能**: 此决策树评估 Rust 替代 Java 的可行性。核心判断标准是**生态依赖**和**团队能力**。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 新项目在系统层优先 Rust；遗留系统或强依赖 Java 生态的场景保持 Java；微服务层可渐进迁移。
@@ -296,6 +303,7 @@ graph TD
 ├── GraalVM Native Image 可将 Java 编译为原生（但非 Rust 替代）
 └── 实际趋势: 混合架构——Java 业务层 + Rust 性能关键路径
 ```
+
 > **边界要点**: Rust 和 Java 不是零和竞争，而是**互补共存**。未来的系统架构可能是多语言的——Rust 处理底层基础设施，Java/Kotlin 处理业务逻辑。
 > [来源: [Rust vs Java Industry Analysis](https://survey.stackoverflow.co/)]
 
@@ -326,6 +334,7 @@ Java → Rust 的渐进迁移策略:
   ├── 仅在新项目或彻底重构时考虑
   └── 大多数场景混合架构更实际
 ```
+
 > **迁移洞察**: 从 Java 到 Rust 的迁移应遵循**"性能热点优先"**原则——不是全部重写，而是识别并替换最关键的组件。
 > [来源: [Rust in Production — Migration Stories](https://rust-lang.github.io/rust-project-goals/)]
 
@@ -406,6 +415,7 @@ fn fixed() {
     let v = vec![Number::Int(42), Number::Float(3.14)];
 }
 ```
+
 > **Java 对比**: Java 的泛型通过**类型擦除**（type erasure）实现——编译后 `List<Integer>` 和 `List<String>` 都是 `List<Object>`，运行时无类型信息。Rust 通过**单态化**（monomorphization）实现泛型——为每个具体类型生成独立代码，`generic_id<i32>` 和 `generic_id<f64>` 是完全不同的函数。Java 的擦除允许运行时类型统一（`List<?>`），但无法获取泛型参数；Rust 的单态化提供零成本抽象（Zero-Cost Abstraction），但不同类型不能共存于同质集合（需用 `enum` 或 `Box<dyn Trait>`）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：Java 的 null 与 Rust 的 `Option`（编译错误）
@@ -425,6 +435,7 @@ fn fixed() {
     println!("{}", len);
 }
 ```
+
 > **Java 对比**: Java 的引用（Reference）类型默认可为 `null`——`String s = null;` 编译通过，但运行时 `s.length()` 抛出 `NullPointerException`。Rust 的 `Option<T>` 将可空性编码到类型中，`Some` 和 `None` 是两个不同的变体，`match` 强制处理两者。这与 Java 8+ 的 `Optional<T>` 类似，但 Rust 的 `Option` 是语言核心（零开销），而 Java 的 `Optional` 是库类（有对象包装开销）。Rust 消除了十亿美元错误（billion-dollar mistake）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：Java 的泛型擦除与 Rust 的单态化（编译错误）
@@ -447,6 +458,7 @@ fn main() {
     // process_strings(nums);
 }
 ```
+
 > **修正**: Java 的泛型使用**类型擦除**（type erasure）：编译后 `List<String>` 和 `List<Integer>` 都是 `List<Object>`，泛型信息仅用于编译期检查。Rust 使用**单态化**（monomorphization）：`Vec<String>` 和 `Vec<i32>` 编译为完全不同的机器码，无运行时类型信息。Java 的优势：二进制兼容性（泛型类只需编译一次）、反射可访问泛型信息（通过 `TypeToken`）。Rust 的优势：零成本抽象（Zero-Cost Abstraction）（无装箱、无类型检查）、编译期错误更精确。Java 的擦除导致运行时 `ClassCastException`，Rust 的单态化在编译期消除此类错误。这与 C++ 的模板（同样单态化）或 C# 的泛型（运行时实例化，保留类型信息）不同——Rust 选择了 C++ 的路径，但增加了类型推断（Type Inference）和 trait bound 的安全性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-01-syntax.html)] · [来源: [Java Generics Tutorial](https://docs.oracle.com/javase/tutorial/java/generics/)]
 
 ### 10.4 边界测试：Java 的 GC 与 Rust 的所有权的资源管理差异（编译错误）
@@ -474,6 +486,7 @@ fn main() {
     // 不是 file 的原作用域!
 }
 ```
+
 > **修正**: Java 的资源管理依赖**垃圾回收**（GC）：非内存资源（文件句柄、网络连接）通过 `try-finally` 或 `try-with-resources` 显式关闭，否则等待 GC 的**终结器**（finalizer，不确定时机）。Rust 的 `Drop` trait 提供**确定性析构**：资源在值离开作用域时立即释放，无 GC 延迟。但 Rust 的所有权移动改变析构时机：`let file2 = file;` 后，`file` 的所有权转移到 `file2`，`Drop` 在 `file2` 的作用域结束时调用。这与 C++ 的 RAII（同样确定性，但拷贝语义可能多次析构）或 Python 的 `with` 语句（确定性，但依赖开发者使用）不同——Rust 的所有权 + Drop 将资源管理与类型系统绑定，无需显式关闭（大部分情况），也无 GC 不确定性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)] · [来源: [Java Finalization](https://docs.oracle.com/javase/9/docs/api/java/lang/ref/Finalizer.html)]
 
 ### 10.3 边界测试：Java 的泛型擦除与 Rust 的单态化（编译后差异）
@@ -490,6 +503,7 @@ fn main() {
     // Java 的泛型擦除: List<Integer> 和 List<String> 运行时共享同一份代码
 }
 ```
+
 > **修正**: Rust 的**单态化**（monomorphization）：为每个具体类型生成独立的机器码。`process::<i32>` 和 `process::<&str>` 是两份代码。优势：零运行时开销（无装箱、无类型检查）；劣势：二进制膨胀（代码重复）。Java 的**类型擦除**（type erasure）：编译后 `List<Integer>` 和 `List<String>` 都是 `List<Object>`，运行时无类型信息。优势：二进制小、向后兼容；劣势：运行时 `ClassCastException`、无法 `new T()`、无原始类型特化。Rust 通过 `dyn Trait` 提供类型擦除选项（ fat pointer + vtable），但默认是单态化。这与 C++ 的模板（同样单态化）或 C# 的泛型（运行时特化，但共享代码）不同——Rust 在编译期完全单态化，性能最优但体积需权衡。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-01-syntax.html)] · [来源: [Rust Reference — Generic Items](https://doc.rust-lang.org/reference/items/generics.html)]
 
 ### 10.4 边界测试：Java 的 null 安全与 Rust 的 Option 编译期检查（编译错误）
@@ -511,6 +525,7 @@ fn main() {
     println!("{}", len);
 }
 ```
+
 > **修正**: Rust 的 `Option<T>` 消除了 **null 指针异常**：1) `None` 和 `Some(T)` 是不同的变体，编译器强制处理；2) `unwrap()` 在 `None` 时 panic（显式选择）；3) `?` 运算符传播 `None`（在返回 `Option` 的函数中）。Java 8+ 的 `Optional<T>` 类似，但：1) `Optional` 可仍为 `null`（`Optional` 本身是引用类型）；2) 不强制使用（编译器不检查）；3) 序列化问题。Kotlin 的 `T?`（可空类型）与 Rust 的 `Option<T>` 更接近，但 Kotlin 在 JVM 上运行时仍有 null（与 Java 互操作）。这与 Swift 的 `Optional<T>`（类似 Rust，但语法糖 `?`/`!`）或 Haskell 的 `Maybe a`（同样编译期强制处理）相同——Rust 的 `Option` 是类型系统的核心，非可选特性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)] · [来源: [Rust Reference — Option](https://doc.rust-lang.org/std/option/enum.Option.html)]
 
 ## 嵌入式测验（Embedded Quiz）

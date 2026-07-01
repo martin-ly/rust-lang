@@ -288,6 +288,7 @@ graph TD
     G --> G2[bindgen / cxx C/C++]
     G --> G3[wasm-bindgen WASM]
 ```
+
 > **认知功能**: 此图建立核心 crate 的全景认知地图，按数据/网络/运行时/工具/安全/FFI 六层组织生态组件。使用建议：选型时先定位功能域，再在该域内比较具体 crate。关键洞察：serde、tokio、clap 分别是各自领域的"生态标准"，优先默认选择可降低决策成本。[来源: 💡 原创分析]
 > [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)]
 
@@ -459,6 +460,7 @@ let sum: i32 = (0..1_000_000).into_par_iter().map(|x| x * x).sum();
 // 与标准库 API 几乎完全一致
 let max = vec.par_iter().max();
 ```
+
 | **特性** | **标准库** | **rayon** |
 |:---|:---|:---|
 | 迭代器（Iterator） | `iter()` | `par_iter()` |
@@ -483,6 +485,7 @@ let data = Mutex::new(0);
 *data.lock() += 1; // 自动 DerefMut，无需 unwrap
 // 无 poisoning：panic 时锁正常释放
 ```
+
 > **选型决策**: 当 `std::sync::Mutex` 成为性能瓶颈（高竞争场景）或二进制体积敏感（嵌入式）时，优先替换为 `parking_lot`。API 兼容度 > 95%，迁移成本极低。
 
 #### dashmap：并发 HashMap
@@ -495,6 +498,7 @@ map.insert("key", 42);
 // 并发读写无需外部 Mutex
 let value = map.get("key").map(|r| *r.value());
 ```
+
 | **维度** | `std::collections::HashMap` + `RwLock` | `dashmap` |
 |:---|:---|:---|
 | 并发度 | 全局锁 | 分片锁（默认 4 倍 CPU 核心数） |
@@ -530,6 +534,7 @@ graph TD
     style A4 fill:#ff9
     style A5 fill:#ff9
 ```
+
 > **认知功能**: 此图提供从"是否需要此功能"到具体决策的系统性判断框架。使用建议：优先验证 std 是否满足需求，再评估生态标准 crate 的安全审计状态。关键洞察：减少依赖是首要原则，但不应为了少依赖而放弃经过审计的标准 crate。[来源: 💡 原创分析]
 
 | **场景** | **用 std** | **用第三方** |
@@ -599,6 +604,7 @@ graph TD
     style F3 fill:#f96
     style T fill:#6f6
 ```
+
 > **认知功能**: 此图解构"下载量=质量"的直觉谬误，建立多维评估意识。使用建议：将下载量作为筛选入口，用 `cargo audit` 和 unsafe 审计作为硬性门槛。关键洞察：popularity 指标不能替代 security 验证，供应链安全需要主动审计。[来源: 💡 原创分析]
 
 ### 6.1 Crate 选型检查清单
@@ -740,6 +746,7 @@ fn main() {
     println!("roundtrip: {}", s);
 }
 ```
+
 ```rust
 // 模拟 tokio 的核心抽象：Future trait 的类型安全保证
 use std::future::Future;
@@ -767,6 +774,7 @@ fn main() {
     println!("Future type checked at compile time");
 }
 ```
+
 > **关键洞察**: serde 的 `derive(Serialize, Deserialize)` 在编译期生成与类型结构**同构**的编解码逻辑，保证运行时不会出现字段缺失或类型不匹配。tokio 的 `spawn` 将 `Future` 的所有权转移给运行时，利用 Rust 的所有权系统保证任务生命周期（Lifetimes）的安全。
 
 ---
@@ -836,6 +844,7 @@ async fn main() {
     axum::serve(listener, app).await.unwrap();
 }
 ```
+
 > **关键设计**：`State` 提取器共享 `PgPool`（基于 Arc 的克隆）；`#[instrument]` 自动生成 tracing span；`sqlx::query_as!` 编译期检查 SQL。
 
 ### 9.3 `cargo vet`：供应链安全审计
@@ -860,6 +869,7 @@ cargo vet certify tokio@1.37.0 --criteria safe-to-deploy
 # [imports.mozilla]
 # url = "https://raw.githubusercontent.com/mozilla/supply-chain/main/audits.toml"
 ```
+
 **与 `cargo audit` 对比**：
 
 | 工具 | 检测目标 | 机制 | CI 集成 |
@@ -891,6 +901,7 @@ fn App() -> impl IntoView {
     }
 }
 ```
+
 > **来源**: [Leptos 文档] · [Dioxus 文档] · [Yew 文档] · [Are We Web Yet]
 
 ### 9.5 嵌入式 Crate 生态
@@ -922,6 +933,7 @@ async fn main(_spawner: Spawner) {
     }
 }
 ```
+
 > **来源**: [Embedded Rust Book] · [embassy.dev] · [probe.rs] · [defmt docs]
 
 ---
@@ -962,6 +974,7 @@ fn main() {
         .run();
 }
 ```
+
 > **来源**: [Bevy 引擎文档] · [wgpu 文档] · [Rapier 物理引擎] · [Are We Game Yet]
 
 ### 9.7 ML 推理 Crate 生态
@@ -987,6 +1000,7 @@ fn main() -> anyhow::Result<()> {
     Ok(())
 }
 ```
+
 > **来源**: [Candle GitHub] · [Burn Book] · [Tract 文档] · [Hugging Face Rust]
 
 ---
@@ -1047,6 +1061,7 @@ graph TD
 
     style T1 fill:#6f6
 ```
+
 > **认知功能**: 此图识别标准库的能力边界，理解第三方 crate 存在的必要性。使用建议：async、序列化、HTTP 等场景必须使用生态 crate，避免重复造轮子。关键洞察：std 的设计哲学是"最小可用"，生态 crate 填补的是"生产就绪"的缺口。[来源: 💡 原创分析]
 
 ### 2. "下载量最高的crate总是最安全"
@@ -1076,6 +1091,7 @@ graph TD
 
     style T2 fill:#6f6
 ```
+
 > **认知功能**: 此图揭示 popularity 与安全性的非对称关系，强调供应链风险。使用建议：对高下载量 crate 仍需执行 `cargo audit` 和 `cargo vet`，关注维护者变更。关键洞察：下载量只反映使用广度，安全性取决于代码质量和审计深度。[来源: 💡 原创分析]
 
 ### 3. "所有场景都应该用最新版本"
@@ -1105,6 +1121,7 @@ graph TD
 
     style T3 fill:#6f6
 ```
+
 > **认知功能**: 此图打破"最新即最好"的升级执念，建立版本管理的策略思维。使用建议：评估 SemVer 破坏性变更和生态系统协调成本，LTS 场景保持保守。关键洞察：版本选择是风险收益权衡，Cargo.lock 的精确锁定比盲目升级更重要。[来源: 💡 原创分析]
 > **过渡: L6 → L1**
 >
@@ -1188,6 +1205,7 @@ fn main() {
     // let cfg: Config = serde_json::from_str(json).unwrap(); // panic!
 }
 ```
+
 > **修正**: `serde` 的 `Deserialize` derive 宏在编译期生成反序列化逻辑，运行时检查字段存在性。缺失字段返回 `Err`，不是编译错误。这与 Protobuf 的 schema 演化不同——serde 默认严格，不自动填充默认值。使用 `#[serde(default)]` 可使字段可选，使用 `#[serde(default = "default_port")]` 指定默认值。Rust 生态的序列化是"显式契约"——数据结构定义即契约，运行时验证契约一致性（Coherence）。[来源: [Serde Documentation](https://serde.rs/)]
 
 ### 10.2 边界测试：`tokio` 运行时未启动时调用 `spawn`（运行时 panic）
@@ -1208,6 +1226,7 @@ async fn main_fixed() {
     println!("{}", result);
 }
 ```
+
 > **修正**: Tokio 的 `spawn` 需要在活跃的运行时上下文中执行。运行时通过线程局部存储维护当前上下文。在主线程直接调用 `spawn` 而不启动运行时会 panic。这与 Go 的 `go` 关键字（隐式全局调度器）不同——Rust 的运行时是显式的，允许一个程序中同时存在多个隔离的运行时实例。这种显式性增加了代码量，但提供了更精细的控制（如为不同工作负载配置不同线程池）。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
 
 ### 10.3 边界测试：`thiserror` 与 `anyhow` 的混用（编译错误）
@@ -1231,6 +1250,7 @@ fn main() {
     let _ = may_fail();
 }
 ```
+
 > **修正**: `thiserror` 用于库（定义结构化错误类型），`anyhow` 用于应用（快速错误处理（Error Handling））。`anyhow::Result<T>` 是 `Result<T, anyhow::Error>` 的别名，`anyhow::Error` 可自动包裹任何实现 `std::error::Error` 的类型。`may_fail` 中 `?` 从 `std::io::Error` 转换为 `anyhow::Error` 是自动的（通过 `From`），但若函数签名是 `Result<T, AppError>`，`anyhow::Error` 不能自动转换。解决方案：1) 库函数返回 `thiserror` 类型，应用层用 `anyhow` 包裹；2) 统一使用 `anyhow`（牺牲结构化错误）；3) 统一使用 `thiserror`（增加样板）。这与 Go 的 `error` 接口（统一，无结构化）或 Java 的异常层次（结构化，但繁琐）不同——Rust 的错误生态提供分层选择，而非一刀切。来源: [thiserror Documentation] · 来源: [anyhow Documentation]
 
 ### 10.4 边界测试：`tokio` 与 `Tokio` 的 channel 不兼容（编译错误）
@@ -1247,6 +1267,7 @@ async fn tokio_task() {
     // tokio::sync::mpsc 依赖 tokio 的 reactor
 }
 ```
+
 > **修正**: `tokio::sync::mpsc` 的 `send`/`recv` 是异步方法，底层依赖 tokio 的 reactor（epoll/kqueue/IOCP）进行任务唤醒。在 Tokio 或 smol 的 runtime 上调用 tokio channel，可能导致任务永不唤醒（deadlock）或 panic。跨 runtime 的互操作性是 Rust 异步生态的分裂点：1) 计算型 future（无 I/O）可跨 runtime 使用；2) I/O 和定时器必须匹配 runtime；3) `async-compat` crate 提供适配层，但有开销。这与 Go 的单一 runtime（所有 goroutine 由 Go scheduler 管理）或 JavaScript 的单一事件循环不同——Rust 的异步生态允许多个 runtime 竞争，但要求开发者明确选择和隔离。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Tokio Documentation](https://docs.rs/Tokio/)]
 
 ### 10.5 边界测试：`rayon` 的线程池饥饿与任务粒度（运行时性能下降）
@@ -1266,6 +1287,7 @@ fn main() {
     println!("{}", sum);
 }
 ```
+
 > **修正**: `rayon` 是 Rust 的数据并行库，基于 work-stealing 线程池自动并行化迭代器。但**任务粒度**是关键：1) 任务太小（如 `x * 2`）→ 线程调度开销 > 并行收益；2) 任务太大 → 负载不均衡，某些线程空闲。`rayon` 的启发式：通过 `join` 递归分割任务，但无法控制最小分割粒度。优化：1) 使用 `par_chunks` 增加每任务工作量；2) 使用 `with_min_len(n)` 设置最小长度；3) 只在计算密集型操作中使用 `par_iter`（I/O 密集型用 `tokio`）。这与 Java 的 `ForkJoinPool`（类似 work-stealing）或 C++ 的 `std::execution::par`（C++17，类似抽象）类似——数据并行的性能取决于任务粒度，无万能配置。[来源: [rayon Documentation](https://docs.rs/rayon/)] · [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
 
 ### 10.3 边界测试：`thiserror` 与 `anyhow` 的错误类型混用（编译错误）
@@ -1292,6 +1314,7 @@ fn main() {
     println!("{:?}", result);
 }
 ```
+
 > **修正**: `thiserror` 用于**库**的错误类型定义（派生 `std::error::Error`），`anyhow` 用于**应用**的错误处理（动态类型擦除）。混用场景：1) 库返回 `thiserror` 定义的错误；2) 应用使用 `anyhow::Result` 聚合多个库的错误；3) `anyhow::Error::from(my_error)` 自动转换。`anyhow` 的 `Context` trait 添加错误上下文：`file.open("config.txt").context("failed to read config")?`。`thiserror` 的优势：结构化错误（可匹配具体变体）；`anyhow` 的优势：简洁、动态、自动回溯（backtrace）。这与 Go 的 `error` 接口（简单字符串，无链式上下文）或 Java 的异常链（`cause` 字段）类似——Rust 的错误生态分层明确：`thiserror` 用于类型化错误，`anyhow` 用于运行时错误处理。[来源: [thiserror](https://docs.rs/thiserror/)] · [来源: [anyhow](https://docs.rs/anyhow/)]
 
 ### 10.4 边界测试：`tokio` 的 runtime 与 `std::thread::spawn` 混用（运行时性能下降）
@@ -1314,4 +1337,5 @@ fn main() {
     });
 }
 ```
+
 > **修正**: `tokio` 的**任务调度**：1) `tokio::spawn` — 创建异步任务，由 tokio 的线程池调度（非阻塞）；2) `std::thread::spawn` — 创建 OS 线程，阻塞操作占用线程。混用问题：1) 阻塞操作（sleep、文件 IO、CPU 密集）占用 tokio worker 线程 → 其他 async 任务饥饿；2) 应使用 `tokio::task::spawn_blocking` 运行阻塞代码；3) 或使用 `tokio::fs` 替代 `std::fs`（异步文件 IO）。`tokio` 的线程池：默认 worker 线程数 = CPU 核心数，阻塞任务应 offload 到 blocking pool。这与 Go 的 goroutine（调度器自动处理阻塞，无需区分 async/sync）或 Java 的 `CompletableFuture`（默认使用 `ForkJoinPool`，同样需避免阻塞）不同——Rust 的 async runtime 要求开发者显式管理阻塞操作。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Async Rust](https://rust-lang.github.io/async-book/)]

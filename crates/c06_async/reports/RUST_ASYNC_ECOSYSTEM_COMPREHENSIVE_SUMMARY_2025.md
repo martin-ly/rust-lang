@@ -196,6 +196,7 @@ async fn main() {
     }).await;
 }
 ```
+
 #### 2. 多运行时集成模式
 
 ```rust
@@ -215,6 +216,7 @@ async fn multi_runtime_example() {
     }).await;
 }
 ```
+
 ### 异步同步转换机制
 
 #### 1. 异步到同步转换
@@ -229,6 +231,7 @@ fn sync_function() -> i32 {
     })
 }
 ```
+
 #### 2. 同步到异步转换
 
 ```rust
@@ -244,6 +247,7 @@ async fn async_function() -> i32 {
     result
 }
 ```
+
 ## 聚合组合设计模式
 
 ### 1. 适配器模式
@@ -262,6 +266,7 @@ impl<T> RuntimeAdapter<T> {
     }
 }
 ```
+
 ### 2. 装饰器模式
 
 ```rust
@@ -286,6 +291,7 @@ impl<T> AsyncTaskDecorator<T> {
     }
 }
 ```
+
 ### 3. 策略模式
 
 ```rust
@@ -309,6 +315,7 @@ impl RuntimeSelector {
     }
 }
 ```
+
 ### 4. 工厂模式
 
 ```rust
@@ -331,6 +338,7 @@ impl AsyncTaskFactory {
     }
 }
 ```
+
 ## 异步调试与日志设计
 
 ### 核心挑战
@@ -358,6 +366,7 @@ pub struct AsyncLogEntry {
     pub duration_ms: Option<u64>,
 }
 ```
+
 #### 2. 任务跟踪与上下文传播
 
 ```rust
@@ -391,6 +400,7 @@ impl AsyncTaskTracker {
     }
 }
 ```
+
 #### 3. 执行流跟踪
 
 ```rust
@@ -427,6 +437,7 @@ impl AsyncExecutionFlowManager {
     }
 }
 ```
+
 #### 4. 性能监控
 
 ```rust
@@ -451,6 +462,7 @@ impl AsyncPerformanceMonitor {
     }
 }
 ```
+
 ### 调试工具设计
 
 #### 1. 异步任务可视化
@@ -483,6 +495,7 @@ impl AsyncTaskVisualizer {
     }
 }
 ```
+
 #### 2. 实时监控面板
 
 ```rust
@@ -511,6 +524,7 @@ impl AsyncTaskMonitor {
     }
 }
 ```
+
 ## 实际应用场景与最佳实践
 
 ### 1. 微服务架构中的异步日志
@@ -548,6 +562,7 @@ impl MicroserviceLogger {
     }
 }
 ```
+
 ### 2. 高并发场景下的性能优化
 
 ```rust
@@ -596,6 +611,7 @@ impl HighConcurrencyManager {
     }
 }
 ```
+
 ## 性能对比与选择指南
 
 ### 性能基准测试结果
@@ -656,6 +672,7 @@ impl RuntimeMigrationAdapter {
     }
 }
 ```
+
 ## 总结与建议
 
 ### 关键发现

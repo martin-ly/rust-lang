@@ -133,6 +133,7 @@
 └── GATs
     └── 泛型关联类型
 ```
+
 ### 多维概念对比矩阵
 
 | 特性             | 复杂度 | 性能   | 类型安全 | 适用场景   | Rust 1.92.0 |
@@ -158,6 +159,7 @@
 │       │       │   ├── 是 → Pin + 自引用
 │       │       │   └── 否 → GATs
 ```
+
 ---
 
 ## 🎯 学习目标
@@ -210,6 +212,7 @@ fn example() {
     process_hrtb(|s| s);
 }
 ```
+
 ### HRTB 的实际应用
 
 **案例 1: 通用的迭代器映射**:
@@ -235,6 +238,7 @@ where
     items.into_iter().map(|s| mapper(s)).collect()
 }
 ```
+
 **案例 2: 闭包作为 Trait 边界**:
 
 ```rust
@@ -251,6 +255,7 @@ fn example() {
     call_with_data(|s| println!("{}", s));
 }
 ```
+
 ### HRTB 与生命周期推断
 
 ```rust
@@ -271,6 +276,7 @@ where
     println!("{:?}", result);
 }
 ```
+
 ---
 
 ## 2️⃣ 型变 (Variance) 和子类型 (Subtyping)
@@ -304,6 +310,7 @@ fn extend_lifetime<'short, 'long: 'short>(
     container
 }
 ```
+
 ### 逆变示例
 
 ```rust
@@ -317,6 +324,7 @@ fn contravariant_example() {
     short_fn(&short_data);
 }
 ```
+
 ### 不变示例
 
 ```rust
@@ -339,6 +347,7 @@ fn why_mut_is_invariant() {
     // *mut_ref = &String::from("temp")[..];  // 临时值，生命周期太短
 }
 ```
+
 ### 型变规则表
 
 | 类型             | 'a 的型变 | T 的型变 |
@@ -382,6 +391,7 @@ impl<'a> Parser<'a> {
     // 展开为: fn parse<'b>(&'b self) -> &'b str
 }
 ```
+
 ### 生命周期推断的局限性
 
 ```rust
@@ -395,6 +405,7 @@ fn fixed<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
 }
 ```
+
 ---
 
 ## 4️⃣ 复杂生命周期场景
@@ -434,6 +445,7 @@ fn example() {
     // parser.output 已经失效
 }
 ```
+
 ### 场景 2: 生命周期约束
 
 ```rust
@@ -456,6 +468,7 @@ where
     }
 }
 ```
+
 ### 场景 3: 生命周期与 Trait
 
 ```rust
@@ -485,6 +498,7 @@ where
     }
 }
 ```
+
 ---
 
 ## 5️⃣ 自引用结构体
@@ -504,6 +518,7 @@ where
 //     SelfReferential { data, ptr }  // 移动后 ptr 失效！
 // }
 ```
+
 ### 解决方案 1: Pin 和 PhantomPinned
 
 ```rust
@@ -544,6 +559,7 @@ impl SelfReferential {
     }
 }
 ```
+
 ### 解决方案 2: 使用 rental 模式
 
 ```rust
@@ -566,6 +582,7 @@ fn example() {
     my_struct.with_data_ref(|ref_| println!("{}", ref_));
 }
 ```
+
 ### 解决方案 3: 使用索引代替引用
 
 ```rust
@@ -597,6 +614,7 @@ struct Node {
     parent: Option<Handle>,
 }
 ```
+
 ---
 
 ## 6️⃣ GATs (Generic Associated Types)
@@ -636,6 +654,7 @@ impl<T: Clone> Container for OwnedContainer<T> {
     }
 }
 ```
+
 ### GATs 的高级应用
 
 **案例 1: 通用迭代器 Trait**:
@@ -668,6 +687,7 @@ impl<'data, T> LendingIterator for WindowsIterator<'data, T> {
     }
 }
 ```
+
 **案例 2: 异步 Trait**:
 
 ```rust
@@ -697,6 +717,7 @@ impl<T> AsyncIterator for AsyncStream<T> {
     }
 }
 ```
+
 ---
 
 ## 🎯 实战项目

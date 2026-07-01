@@ -170,6 +170,7 @@ cargo doc --open
 # 生成特定模块文档
 cargo doc --package c01_ownership_borrow_scope
 ```
+
 ### 🧪 测试运行
 
 ```bash
@@ -182,6 +183,7 @@ cargo test scope_tests
 # 运行示例
 cargo run --example advanced_scope_examples
 ```
+
 ### 📊 代码分析
 
 ```bash
@@ -194,6 +196,7 @@ cargo clippy
 # 安全检查
 cargo audit
 ```
+
 ## 🎯 核心特性
 
 ### ✨ 所有权系统

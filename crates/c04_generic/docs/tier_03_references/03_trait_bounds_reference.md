@@ -100,6 +100,7 @@
 └── 生命周期约束
     └── 静态生命周期约束
 ```
+
 ---
 
 ## 1. Trait Bounds 语法
@@ -115,6 +116,7 @@ TraitBound ::= '?'? 'for'<'LifetimeParams'>'? TypePath
 
 LifetimeParams ::= LIFETIME_OR_LABEL (',' LIFETIME_OR_LABEL)* ','?
 ```
+
 ### 1.2 基础约束语法
 
 ```rust
@@ -136,6 +138,7 @@ fn compare<T: PartialEq + Display>(a: T, b: T) {
     }
 }
 ```
+
 ### 1.3 约束位置
 
 ```rust
@@ -154,6 +157,7 @@ struct MyStruct<T: Clone> { }
 // 5. 类型别名
 type MyType<T: Display> = Vec<T>;
 ```
+
 ---
 
 ## 2. Where 子句完整语法
@@ -169,6 +173,7 @@ LifetimeWhereClauseItem ::= Lifetime ':' LifetimeBounds
 
 TypeBoundWhereClauseItem ::= 'for'<LifetimeParams>? Type ':' TypeParamBounds?
 ```
+
 ### 2.2 基础 Where 子句
 
 ```rust
@@ -189,6 +194,7 @@ where
     println!("{:?}, {}", t, u);
 }
 ```
+
 ### 2.3 关联类型约束
 
 ```rust
@@ -210,6 +216,7 @@ where
     format!("{}", value.into_iter().len())
 }
 ```
+
 ### 2.4 复杂 Where 子句
 
 ```rust
@@ -223,6 +230,7 @@ where
     V::from(t)
 }
 ```
+
 ---
 
 ## 3. 高阶 Trait Bounds (HRTB)
@@ -234,6 +242,7 @@ ForLifetimes ::= 'for' '<' LifetimeParams '>'
 
 HRTBound ::= ForLifetimes TraitBound
 ```
+
 **示例**:
 
 ```rust
@@ -250,6 +259,7 @@ fn example() {
     call_with_ref(|s| println!("{}", s));
 }
 ```
+
 ### 3.2 常见 HRTB 模式
 
 **模式 1: 函数指针**:
@@ -262,6 +272,7 @@ fn process(f: StringProcessor, s: &str) -> &str {
     f(s)
 }
 ```
+
 **模式 2: Fn Traits**:
 
 ```rust
@@ -283,6 +294,7 @@ where
     println!("{}", result);
 }
 ```
+
 **模式 3: 泛型关联类型**:
 
 ```rust
@@ -299,6 +311,7 @@ where
     println!("{}", processor.process("test"));
 }
 ```
+
 ### 3.3 HRTB 与生命周期的关系
 
 ```rust
@@ -320,6 +333,7 @@ where
     f("a very long string");
 }
 ```
+
 ---
 
 ## 4. 生命周期约束
@@ -352,6 +366,7 @@ where
     // ...
 }
 ```
+
 ### 4.2 静态生命周期约束
 
 ```rust
@@ -370,6 +385,7 @@ where
     "static string"
 }
 ```
+
 ---
 
 ## 5. 约束传播规则
@@ -389,6 +405,7 @@ impl<T: Clone> Container<T> {
     }
 }
 ```
+
 ### 5.2 额外约束
 
 ```rust
@@ -415,6 +432,7 @@ impl<T: Display> Container<T> {
     }
 }
 ```
+
 ### 5.3 约束组合
 
 ```rust
@@ -426,6 +444,7 @@ impl<T: Clone + Display> Container<T> {
     }
 }
 ```
+
 ---
 
 ## 6. 复杂约束示例
@@ -446,6 +465,7 @@ where
         .collect()
 }
 ```
+
 ### 6.2 多层关联类型约束
 
 ```rust
@@ -462,6 +482,7 @@ where
     }
 }
 ```
+
 ### 6.3 条件约束
 
 ```rust
@@ -479,6 +500,7 @@ where
     println!("{:?}", result.clone());
 }
 ```
+
 ### 6.4 递归约束
 
 ```rust
@@ -496,6 +518,7 @@ where
     }
 }
 ```
+
 ---
 
 ## 7. 约束速查表

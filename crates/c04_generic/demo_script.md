@@ -76,6 +76,7 @@ cd crates/c04_generic
 # 检查项目状态
 cargo check
 ```
+
 ### 2. 运行测试
 
 ```bash
@@ -87,6 +88,7 @@ cargo test -q rust_190_features
 # 预期结果：90 个测试全部通过
 # test result: ok. 90 passed; 0 failed; 0 ignored; 0 measured
 ```
+
 ### 3. 主程序演示
 
 ```bash
@@ -103,6 +105,7 @@ cargo run --bin c04_generic
 # - 类型推断
 # - 性能基准测试
 ```
+
 ## 📚 模块演示指南
 
 ### 模块 1: 基础泛型定义
@@ -130,6 +133,7 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
     // 实现逻辑
 }
 ```
+
 ### 模块 2: Trait 边界系统
 
 **目录**: `src/trait_bound/`
@@ -258,6 +262,7 @@ cargo test associated_type
 cargo test test_clone_example
 cargo test test_generic_trait
 ```
+
 ### 测试覆盖率
 
 ```bash
@@ -267,6 +272,7 @@ cargo install cargo-tarpaulin
 # 运行覆盖率测试
 cargo tarpaulin
 ```
+
 ## 📊 性能基准测试
 
 ### 运行基准测试
@@ -280,6 +286,7 @@ cargo run --bin c04_generic
 # - 并发性能
 # - 内存使用
 ```
+
 ### 预期性能指标
 
 - **排序性能**: 10000个整数排序 < 150μs
@@ -297,6 +304,7 @@ cargo clippy
 # 自动修复
 cargo clippy --fix --allow-dirty
 ```
+
 ### 代码格式化
 
 ```bash
@@ -306,6 +314,7 @@ cargo fmt
 # 检查格式
 cargo fmt -- --check
 ```
+
 ## 🎨 自定义演示
 
 ### 创建自定义示例
@@ -332,6 +341,7 @@ mod tests {
     }
 }
 ```
+
 ### 扩展主程序
 
 ```rust
@@ -339,6 +349,7 @@ mod tests {
 println!("\n=== 自定义模块演示 ===");
 c04_generic::your_module::demonstrate_custom_feature();
 ```
+
 ## 🚀 高级演示
 
 ### 1. 并发安全演示
@@ -350,6 +361,7 @@ cargo run --bin c04_generic
 # 观察 Send/Sync 模块的输出
 # 注意线程安全和数据竞争保护
 ```
+
 ### 2. 内存管理演示
 
 ```bash
@@ -357,6 +369,7 @@ cargo run --bin c04_generic
 # 观察 Drop trait 的自动资源清理
 # 注意内存泄漏防护
 ```
+
 ### 3. 类型系统演示
 
 ```bash
@@ -364,6 +377,7 @@ cargo run --bin c04_generic
 # 观察编译时类型检查
 # 注意类型安全的保证
 ```
+
 ## 📝 演示记录
 
 ### 记录要点

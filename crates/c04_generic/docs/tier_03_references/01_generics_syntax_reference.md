@@ -101,6 +101,7 @@
 └── BNF 语法
     └── 完整语法定义
 ```
+
 ---
 
 ## 1. 泛型类型参数语法
@@ -118,6 +119,7 @@ TypeParamBounds ::= TypeParamBound ('+' TypeParamBound)*
 
 TypeParamBound ::= Trait | Lifetime
 ```
+
 **示例**:
 
 ```rust
@@ -136,6 +138,7 @@ struct Config<T = String> { data: T }
 // 多重约束
 struct Printable<T: Display + Debug> { value: T }
 ```
+
 ### 1.2 类型参数命名约定
 
 | 惯例     | 用途     | 示例                      |
@@ -161,6 +164,7 @@ WhereClause ::= 'where' WhereClauseItem (',' WhereClauseItem)* ','?
 
 WhereClauseItem ::= Type ':' TypeParamBounds
 ```
+
 **示例**:
 
 ```rust
@@ -198,6 +202,7 @@ where
     }
 }
 ```
+
 ### 2.2 返回类型语法
 
 ```rust
@@ -216,6 +221,7 @@ fn wrap<T>(value: T) -> Option<T> {
     Some(value)
 }
 ```
+
 ---
 
 ## 3. 泛型结构体语法
@@ -231,6 +237,7 @@ NamedFields ::= '{' StructField (',' StructField)* ','? '}'
 
 StructField ::= FieldName ':' Type
 ```
+
 **示例**:
 
 ```rust
@@ -269,6 +276,7 @@ where
     u: U,
 }
 ```
+
 ### 3.2 可见性语法
 
 ```rust
@@ -282,6 +290,7 @@ pub(crate) struct Crate<T> {
     pub(crate) value: T,
 }
 ```
+
 ---
 
 ## 4. 泛型枚举语法
@@ -297,6 +306,7 @@ EnumVariant ::= Ident VariantKind?
 
 VariantKind ::= TupleVariant | StructVariant
 ```
+
 **示例**:
 
 ```rust
@@ -326,6 +336,7 @@ enum List<T> {
     Nil,
 }
 ```
+
 ---
 
 ## 5. 泛型实现语法
@@ -337,6 +348,7 @@ Implementation ::= 'impl' GenericParams? Type WhereClause? '{' AssociatedItem* '
 
 TraitImplementation ::= 'impl' GenericParams? Trait 'for' Type WhereClause? '{' AssociatedItem* '}'
 ```
+
 **示例**:
 
 ```rust
@@ -376,6 +388,7 @@ impl<T: Display> Display for Container<T> {
     }
 }
 ```
+
 ### 5.2 关联类型实现
 
 ```rust
@@ -396,6 +409,7 @@ impl Container for IntContainer {
     }
 }
 ```
+
 ---
 
 ## 6. Const 泛型语法
@@ -407,6 +421,7 @@ ConstParam ::= 'const' Ident ':' Type
 
 ConstGenericArg ::= BlockExpression | LiteralExpression | PathInExpression
 ```
+
 **示例**:
 
 ```rust
@@ -431,6 +446,7 @@ fn create_array<const N: usize>() -> [i32; N] {
     [0; N]
 }
 ```
+
 ### 6.2 const 泛型约束
 
 ```rust
@@ -442,6 +458,7 @@ where
     data: [T; ROWS * COLS],
 }
 ```
+
 ---
 
 ## 7. 完整 BNF 语法
@@ -483,6 +500,7 @@ GenericArgsConst ::= BlockExpression | LiteralExpression | PathInExpression
 
 GenericArgsBinding ::= Ident '=' Type
 ```
+
 ### 7.2 语法示例对照
 
 | 语法结构     | BNF                      | 示例               |
@@ -519,6 +537,7 @@ impl<T> Container<T> {
     }
 }
 ```
+
 ### 8.2 约束语法对比
 
 | 语法位置   | 语法                  | 使用场景               |
@@ -553,6 +572,7 @@ fn print4(value: &dyn Display) {
     println!("{}", value);
 }
 ```
+
 ### 8.3 类型参数位置规则
 
 ```rust
@@ -569,6 +589,7 @@ let x: <T> = /* ... */;          // 局部变量
 const C: <T> = /* ... */;        // 常量
 static S: <T> = /* ... */;       // 静态变量
 ```
+
 ### 8.4 Turbofish 语法 (`::<>`)
 
 ```rust
@@ -585,6 +606,7 @@ let v = <Vec<i32>>::from([1, 2, 3]);
 // 关联函数
 let value = <i32 as Default>::default();
 ```
+
 ### 8.5 约束传播规则
 
 ```rust
@@ -608,6 +630,7 @@ impl<T: Clone + Display> Container<T> {
     }
 }
 ```
+
 ---
 
 ## 📚 相关参考

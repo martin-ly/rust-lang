@@ -102,6 +102,7 @@ API 参考手册
     ├── AtomicUsize
     └── Ordering
 ```
+
 ---
 
 ## 1. std::thread 模块
@@ -115,6 +116,7 @@ API 参考手册
 ```rust
 pub struct Thread { /* fields omitted */ }
 ```
+
 **方法**:
 
 | 方法     | 签名                             | 说明               |
@@ -136,6 +138,7 @@ let handle = thread::spawn(|| {
 
 handle.join().unwrap();
 ```
+
 ---
 
 #### `JoinHandle<T>`
@@ -145,6 +148,7 @@ handle.join().unwrap();
 ```rust
 pub struct JoinHandle<T> { /* fields omitted */ }
 ```
+
 **方法**:
 
 | 方法          | 签名                            | 说明                      |
@@ -173,6 +177,7 @@ if !handle.is_finished() {
 let result = handle.join().unwrap();
 println!("Result: {}", result);
 ```
+
 ---
 
 #### Builder
@@ -182,6 +187,7 @@ println!("Result: {}", result);
 ```rust
 pub struct Builder { /* fields omitted */ }
 ```
+
 **方法**:
 
 | 方法           | 签名                                                      | 说明                |
@@ -206,6 +212,7 @@ let handle = builder.spawn(|| {
 
 handle.join().unwrap();
 ```
+
 ---
 
 #### ThreadId
@@ -215,6 +222,7 @@ handle.join().unwrap();
 ```rust
 pub struct ThreadId(/* fields omitted */);
 ```
+
 **特性**:
 
 - 实现 `Copy`, `Clone`, `Eq`, `Hash`
@@ -231,6 +239,7 @@ let mut map: HashMap<thread::ThreadId, String> = HashMap::new();
 let id = thread::current().id();
 map.insert(id, "Main thread".to_string());
 ```
+
 ---
 
 ### 1.2 核心函数
@@ -271,6 +280,7 @@ thread::yield_now();
 let parallelism = thread::available_parallelism().unwrap();
 println!("Available parallelism: {}", parallelism);
 ```
+
 ---
 
 ### 1.3 线程局部存储
@@ -291,11 +301,13 @@ fn main() {
     });
 }
 ```
+
 **`LocalKey<T>`**:
 
 ```rust
 pub struct LocalKey<T: 'static> { /* fields omitted */ }
 ```
+
 **方法**:
 
 - `with<F, R>(&'static self, f: F) -> R` - 访问线程局部变量
@@ -312,6 +324,7 @@ pub struct LocalKey<T: 'static> { /* fields omitted */ }
 ```rust
 pub struct Mutex<T: ?Sized> { /* fields omitted */ }
 ```
+
 **方法**:
 
 | 方法          | 签名                                                 | 说明                  |
@@ -327,6 +340,7 @@ pub struct Mutex<T: ?Sized> { /* fields omitted */ }
 ```rust
 pub struct MutexGuard<'a, T: ?Sized + 'a> { /* fields omitted */ }
 ```
+
 - 实现 `Deref<Target = T>` 和 `DerefMut`
 - Drop 时自动释放锁
 
@@ -354,6 +368,7 @@ for handle in handles {
 
 println!("Result: {}", *counter.lock().unwrap());
 ```
+
 ---
 
 ### 2.2 `RwLock<T>`
@@ -363,6 +378,7 @@ println!("Result: {}", *counter.lock().unwrap());
 ```rust
 pub struct RwLock<T: ?Sized> { /* fields omitted */ }
 ```
+
 **方法**:
 
 | 方法          | 签名                                                        | 说明            |
@@ -395,6 +411,7 @@ let lock = RwLock::new(5);
     assert_eq!(*w, 6);
 } // 写锁在这里释放
 ```
+
 ---
 
 ### 2.3 Condvar
@@ -404,6 +421,7 @@ let lock = RwLock::new(5);
 ```rust
 pub struct Condvar { /* fields omitted */ }
 ```
+
 **方法**:
 
 | 方法           | 签名                                                                                                                           | 说明              |
@@ -436,6 +454,7 @@ while !*started {
     started = cvar.wait(started).unwrap();
 }
 ```
+
 ---
 
 ### 2.4 Barrier
@@ -445,6 +464,7 @@ while !*started {
 ```rust
 pub struct Barrier { /* fields omitted */ }
 ```
+
 **方法**:
 
 | 方法   | 签名                                  | 说明             |
@@ -477,6 +497,7 @@ for handle in handles {
     handle.join().unwrap();
 }
 ```
+
 ---
 
 ### 2.5 Once / `OnceLock<T>`
@@ -488,6 +509,7 @@ for handle in handles {
 ```rust
 pub struct Once { /* fields omitted */ }
 ```
+
 **方法**:
 
 - `new() -> Once` - 创建
@@ -500,6 +522,7 @@ pub struct Once { /* fields omitted */ }
 ```rust
 pub struct OnceLock<T> { /* fields omitted */ }
 ```
+
 **方法**:
 
 - `new() -> OnceLock<T>` - 创建
@@ -526,6 +549,7 @@ fn main() {
     println!("{}", get_config()); // 不会重新初始化
 }
 ```
+
 ---
 
 ## 3. std::sync::mpsc 模块
@@ -581,6 +605,7 @@ thread::spawn(move || {
 
 assert_eq!(rx.recv().unwrap(), 10);
 ```
+
 ---
 
 ## 4. std::sync::atomic 模块
@@ -606,6 +631,7 @@ pub enum Ordering {
     SeqCst,     // 顺序一致性（最强）
 }
 ```
+
 ---
 
 ### 4.3 核心操作
@@ -650,6 +676,7 @@ for handle in handles {
 
 println!("Result: {}", counter.load(Ordering::Relaxed));
 ```
+
 ---
 
 ## 5. 常用模式和最佳实践
@@ -684,6 +711,7 @@ fn main() {
     assert!(std::ptr::eq(db1, db2));
 }
 ```
+
 ---
 
 ### 5.2 共享可变状态模式
@@ -740,6 +768,7 @@ fn main() {
     println!("Data: {:?}", state.data.lock().unwrap());
 }
 ```
+
 ---
 
 ### 5.3 工作窃取队列模式
@@ -822,6 +851,7 @@ fn work_stealing_example() {
     println!("Total processed: {}", total);
 }
 ```
+
 ---
 
 ### 5.4 生产者-消费者模式
@@ -906,6 +936,7 @@ fn producer_consumer_unbounded() {
     println!("Total items: {}", total);
 }
 ```
+
 ---
 
 ### 5.5 线程池模式
@@ -950,6 +981,7 @@ fn scoped_threads() {
     println!("All threads completed");
 }
 ```
+
 ---
 
 ### 5.6 原子操作模式
@@ -1014,6 +1046,7 @@ fn lockfree_counter_example() {
     println!("Final count: {}", counter.get());
 }
 ```
+
 ---
 
 ### 5.7 栅栏(Barrier)同步模式
@@ -1056,6 +1089,7 @@ fn barrier_example() {
     }
 }
 ```
+
 ---
 
 ### 5.8 读写锁优化模式
@@ -1140,6 +1174,7 @@ fn rwlock_cache_example() {
     }
 }
 ```
+
 ---
 
 ## 6. 参考链接

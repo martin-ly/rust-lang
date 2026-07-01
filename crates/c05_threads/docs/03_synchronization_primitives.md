@@ -91,6 +91,7 @@ graph TB
     style E1 fill:#c8e6c9
     style E2 fill:#c8e6c9
 ```
+
 ### 同步原语决策树
 
 ```mermaid
@@ -116,6 +117,7 @@ graph TD
     style Atomic fill:#c8e6c9
     style LockFree fill:#81c784
 ```
+
 ---
 
 ## 📊 同步原语多维对比矩阵
@@ -219,6 +221,7 @@ fn main() {
     // ...
 }
 ```
+
 ### 🚀 Rust 1.92.0 Mutex 性能示例
 
 ```rust
@@ -276,6 +279,7 @@ fn main() {
     assert_eq!(final_value, total_ops);
 }
 ```
+
 **输出示例**:
 
 ```text
@@ -290,6 +294,7 @@ fn main() {
 📊 吞吐量: 648297.42 ops/s
 ⚡ 平均延迟: 1.542µs/op
 ```
+
 ### 2.3. `Mutex` 的死锁风险
 
 尽管 RAII 模式能防止忘记释放锁，但 `Mutex` 仍然存在逻辑上的**死锁 (Deadlock)** 风险。
@@ -302,6 +307,7 @@ fn main() {
 // 如果线程 A 完成 lock(A) 后，线程 B 完成了 lock(B)，
 // 那么线程 A 将永远等待 B 释放锁，线程 B 也将永远等待 A 释放锁。
 ```
+
 避免死锁通常需要开发者保证所有线程都以相同的顺序获取锁。
 
 ## 3. `Arc<T>`：原子引用计数
@@ -355,6 +361,7 @@ fn main() {
     println!("Result: {}", *counter.lock().unwrap()); // 结果应为 10
 }
 ```
+
 ## 4. `RwLock<T>`：读写锁
 
 `Mutex<T>` 提供的是完全排他的访问。但在"读多写少"的场景下，允许多个线程同时读取数据是安全的，这可以显著提高并发性能。`RwLock<T>` (Read-Write Lock) 就是为此设计的。
@@ -446,6 +453,7 @@ fn main() {
     println!("🎯 读写比: {}:1", num_readers * reads_per_thread / (num_writers * writes_per_thread));
 }
 ```
+
 **输出示例**:
 
 ```text
@@ -464,6 +472,7 @@ fn main() {
 📊 写吞吐量: 38240.92 writes/s
 🎯 读写比: 40:1
 ```
+
 ### 📊 Mutex vs RwLock 性能对比
 
 | 场景              | Mutex      | RwLock     | 性能提升  |
@@ -552,6 +561,7 @@ mindmap
         迭代算法
         批处理
 ```
+
 ---
 
 ## 📋 快速参考
@@ -590,6 +600,7 @@ use std::sync::Condvar;
 let condvar = Condvar::new();
 condvar.notify_one(); // Rust 1.92.0 优化的唤醒机制（自 Rust 1.90 引入）
 ```
+
 ### Send/Sync 速查表
 
 | 类型         | Send                 | Sync                 | 说明         |
@@ -644,6 +655,7 @@ Rust 的共享状态并发提供了：
    // ✅ 正确：使用 RwLock
    let data = Arc::new(RwLock::new(config));
    ```
+
 2. **避免死锁**
 
    ```rust
@@ -655,6 +667,7 @@ Rust 的共享状态并发提供了：
    let locks = vec![&mutex_a, &mutex_b];
    locks.sort_by_key(|m| m as *const _ as usize);
    ```
+
 3. **最小化锁作用域**
 
    ```rust
@@ -670,6 +683,7 @@ Rust 的共享状态并发提供了：
        *data += result;
    }
    ```
+
 4. **使用 try_lock 避免阻塞**
 
    ```rust
@@ -679,6 +693,7 @@ Rust 的共享状态并发提供了：
        Err(_) => { /* 锁被占用，执行备选方案 */ }
    }
    ```
+
 ### 性能权衡
 
 ```mermaid
@@ -697,6 +712,7 @@ graph LR
     style D fill:#fff59d
     style E fill:#90caf9
 ```
+
 ### 学习路径
 
 1. **基础理解**（1-2天）

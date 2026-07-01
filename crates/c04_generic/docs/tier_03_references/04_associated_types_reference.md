@@ -100,6 +100,7 @@
 └── RPITIT
     └── 返回位置 impl Trait
 ```
+
 ---
 
 ## 1. 关联类型定义语法
@@ -111,6 +112,7 @@ AssociatedType ::= 'type' Ident GenericParams? (':' TypeParamBounds?)? WhereClau
 
 AssociatedTypeImpl ::= 'type' Ident GenericArgs? '=' Type
 ```
+
 ### 1.2 基础定义
 
 ```rust
@@ -132,6 +134,7 @@ trait Config {
     fn get_storage(&self) -> Self::Storage;
 }
 ```
+
 ### 1.3 实现关联类型
 
 ```rust
@@ -168,6 +171,7 @@ impl Config for CustomConfig {
     }
 }
 ```
+
 ---
 
 ## 2. 泛型关联类型 (GAT)
@@ -194,6 +198,7 @@ impl<T> Container for VecContainer<T> {
     }
 }
 ```
+
 ### 2.2 GAT 约束
 
 ```rust
@@ -215,6 +220,7 @@ trait Array {
     fn create<const N: usize>() -> Self::Item<N>;
 }
 ```
+
 ### 2.3 GAT 使用场景
 
 **场景 1: Streaming Iterator**:
@@ -245,6 +251,7 @@ impl<T> LendingIterator for WindowsIterator<T> {
     }
 }
 ```
+
 **场景 2: Async Trait**:
 
 ```rust
@@ -253,6 +260,7 @@ trait AsyncProcessor {
     fn process<'a>(&'a self, input: &'a str) -> Self::Future<'a>;
 }
 ```
+
 **场景 3: 高阶抽象**:
 
 ```rust
@@ -263,6 +271,7 @@ trait Functor {
         F: FnOnce(Self) -> U;
 }
 ```
+
 ---
 
 ## 3. 关联常量
@@ -274,6 +283,7 @@ AssociatedConst ::= 'const' Ident ':' Type ('=' Expression)?
 
 AssociatedConstImpl ::= 'const' Ident ':' Type '=' Expression
 ```
+
 ### 3.2 基础使用
 
 ```rust
@@ -302,6 +312,7 @@ fn check_range<T: Numeric + PartialOrd>(value: T) -> bool {
     value >= T::MIN && value <= T::MAX
 }
 ```
+
 ### 3.3 关联常量的高级用法
 
 ```rust
@@ -325,6 +336,7 @@ fn print_capacity<C: Container>() {
     println!("Capacity: {}", C::CAPACITY);
 }
 ```
+
 ---
 
 ## 4. RPITIT
@@ -360,6 +372,7 @@ impl Factory for StringFactory {
     }
 }
 ```
+
 ### 4.3 RPITIT 与关联类型的区别
 
 ```rust
@@ -385,6 +398,7 @@ fn use_factory2<F: Factory2>(f: &F) {
     println!("{}", result);
 }
 ```
+
 ### 4.4 RPITIT 的高级用法
 
 ```rust
@@ -409,6 +423,7 @@ trait AsyncComputer {
     fn compute(&self, x: i32) -> impl Future<Output = i32>;
 }
 ```
+
 ---
 
 ## 5. 关联类型约束
@@ -437,6 +452,7 @@ where
     println!("Length: {}", value.into_iter().len());
 }
 ```
+
 ### 5.2 嵌套关联类型约束
 
 ```rust
@@ -453,6 +469,7 @@ where
     }
 }
 ```
+
 ### 5.3 关联类型的等价约束
 
 ```rust
@@ -475,6 +492,7 @@ where
     // 实际使用上面的语法
 }
 ```
+
 ---
 
 ## 6. 完整使用模式
@@ -515,6 +533,7 @@ impl Database for PostgreSQL {
     }
 }
 ```
+
 ### 6.2 Parser Combinator
 
 ```rust
@@ -546,6 +565,7 @@ trait ParserExt: Parser + Sized {
     }
 }
 ```
+
 ### 6.3 异步迭代器
 
 ```rust
@@ -573,6 +593,7 @@ impl AsyncIterator for AsyncRange {
     }
 }
 ```
+
 ---
 
 ## 7. 速查表

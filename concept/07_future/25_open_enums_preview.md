@@ -106,6 +106,7 @@ fn handle(status: HttpStatus) {
     }
 }
 ```
+
 > **关键特性**: 封闭枚举的变体集合在编译期完全已知，编译器可执行**穷尽性检查**（exhaustiveness checking）。这是 Rust 模式匹配（Pattern Matching）安全性的基石。
 > [来源: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html)]
 
@@ -136,6 +137,7 @@ fn handle_error(kind: ErrorKind) {
     }
 }
 ```
+
 > **语义核心**: `#[non_exhaustive]` 不是"运行时开放"，而是**编译期契约的弱化**——它告诉编译器"这个枚举在未来版本可能添加新变体，不要对下游 crate 做穷尽性保证"。
 > [来源: [RFC 2008](https://github.com/rust-lang/rfcs/pull/2008)]
 
@@ -146,6 +148,7 @@ fn handle_error(kind: ErrorKind) {
 #[non_exhaustive] E 的表示:  E = μX.{V₁(τ₁), ..., Vₙ(τₙ), ⊥}
                               其中 ⊥ 代表"未来可能存在的未知变体"
 ```
+
 > **认知要点**: `#[non_exhaustive]` 在类型论中引入了**显式的不完全性标记**（⊥），使穷尽性检查从"证明完备"降级为"证明覆盖已知变体"。
 > [来源: 💡 原创分析]
 
@@ -168,6 +171,7 @@ extend enum Event {
     Scroll { delta: i32 },
 }
 ```
+
 **设计空间对比**:
 
 | 维度 | 封闭枚举 | `#[non_exhaustive]` | 真正的开放枚举 |
@@ -204,6 +208,7 @@ flowchart TD
         N1 --> N2 --> N3 --> N4
     end
 ```
+
 > **认知功能**: 此流程图对比展示 `#[non_exhaustive]` 对穷尽性检查的精确影响——它不改变枚举定义 crate 内的行为，仅影响**外部 crate** 的模式匹配。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 在评估是否对公共 API 枚举使用 `#[non_exhaustive]` 时，参考此图理解对下游用户的强制成本（必须保留 `_` 分支）。
@@ -222,6 +227,7 @@ pub enum Color { Red, Green, Blue }
 // 内存布局与封闭枚举完全相同
 // 大小: size_of::<Color>() == 1 byte（标签）
 ```
+
 > **定理**: `#[non_exhaustive]` 不改变枚举的内存布局、运行时性能或 ABI。
 > **证明**: 属性仅在编译期影响穷尽性检查的算法逻辑，不生成任何额外运行时代码。枚举的 LLVM IR 表示与无属性版本完全相同。
 > [来源: [Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes.html)]
@@ -256,6 +262,7 @@ fn process_external(r: Response) -> String {
     }
 }
 ```
+
 > **形式化规则**:
 >
 > - 设 `E` 为 `#[non_exhaustive]` 枚举，`V(E)` 为其变体集合
@@ -279,6 +286,7 @@ final case class Key(c: Char) extends Event
 // 在另一个文件中无法添加新变体（编译错误）
 // case class Scroll(delta: Int) extends Event  // ❌ 编译失败
 ```
+
 **与 Rust 对比**:
 
 - Scala `sealed` = Rust `enum`（封闭，但允许同模块（Module）扩展）
@@ -301,6 +309,7 @@ class EventClass e where
 
 data AnyEvent = forall e. EventClass e => AnyEvent e
 ```
+
 > **对比**: Haskell 通过**类型类（Type Class）** 和**存在类型（Existential Types）** 模拟开放枚举，运行时通过虚表（vtable）分派。Rust 的 `enum` + `match` 是编译期静态分派，零运行时开销。
 > [来源: [Haskell Wiki — Open data type](https://wiki.haskell.org/Extensible_datatypes)]
 
@@ -320,6 +329,7 @@ let handle_extended = function
   | `Key c -> "key"
   | `Scroll d -> "scroll"  (* 新变体，类型系统自动扩展 *)
 ```
+
 > **关键差异**: OCaml 的多态变体在**类型系统（Type System）层面**支持开放——变体集合是类型的子结构，可通过子类型关系扩展。Rust 的枚举类型是**名义类型**（nominal），变体与类型名强绑定，不支持此类扩展。
 > [来源: [OCaml Manual — Polymorphic Variants](https://ocaml.org/manual/polyvariant.html)]
 
@@ -337,6 +347,7 @@ graph LR
         D --> F["未来版本添加变体 = SemVer Major<br/>破坏向后兼容"]
     end
 ```
+
 > **认知功能**: 此图展示 Rust 当前处理枚举演进的**唯一官方路径**——`#[non_exhaustive]` 是向后兼容扩展枚举的编译器支持机制。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 设计公共 API 时，若枚举代表可能扩展的概念域（错误类型、协议消息、事件），优先使用 `#[non_exhaustive]`。
@@ -373,6 +384,7 @@ impl std::error::Error for DatabaseError {
     }
 }
 ```
+
 > **设计原则**: 错误枚举应始终使用 `#[non_exhaustive]`，因为错误场景必然随系统演进扩展。
 > [来源: [std::io::ErrorKind](https://doc.rust-lang.org/std/io/enum.ErrorKind.html)]
 
@@ -393,6 +405,7 @@ trait EventHandler {
     fn handle(&mut self, event: WindowEvent);
 }
 ```
+
 ---
 
 ### 4.3 配置/选项枚举
@@ -407,6 +420,7 @@ pub enum LogLevel {
     // 未来可能添加: Trace, Silent, ...
 }
 ```
+
 ---
 
 ## 五、反命题与边界分析
@@ -430,6 +444,7 @@ graph TD
     style FALSE1 fill:#ffebee
     style FALSE2 fill:#fff3e0
 ```
+
 > **认知功能**: 此决策树帮助 API 设计者判断何时应使用 `#[non_exhaustive]`，区分"适合"、"不适合"和"需谨慎"三种场景。
 > **使用建议**: 对公共库中的枚举类型，按此树决策；内部枚举（`pub(crate)`）通常不需要。
 > **关键洞察**: `#[non_exhaustive]` 的代价是**消除穷尽性检查的保护**——下游代码失去编译器对 match 完备性的验证。
@@ -463,6 +478,7 @@ pub enum ConstExample {
 }
 // const 赋值仍可用，但 match 仍需 _
 ```
+
 > **极限测试**: `#[non_exhaustive]` 的约束在**crate 边界**处生效，不跨模块（Module）边界。这是 Rust 模块系统的最小可见性单元原则的体现。
 > [来源: [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html)]
 
@@ -550,6 +566,7 @@ fn handle(status: HttpStatus) -> &'static str {
     }
 }
 ```
+
 > **修正**: `#[open_enum]`（实验性特性）标记枚举为"开放"——允许未来添加变体，或允许从整数值构造未知变体（如 `HttpStatus::from_raw(500)`）。
 > 这与 C 的枚举（底层是整数，可任意转换）或 Rust 的常规枚举（封闭、穷尽）都不同。
 > 开放枚举要求 match 必须包含 `_ => ...` 分支处理未知情况，强制开发者考虑前向兼容性。
@@ -578,6 +595,7 @@ fn main() {
     }
 }
 ```
+
 > **修正**:
 > 开放枚举的 `from_raw`（或 `try_from`）将整数转换为枚举值。
 > 对于未知值，行为由设计决定：
@@ -608,6 +626,7 @@ fn handle(status: Status) -> &'static str {
     }
 }
 ```
+
 > **修正**:
 > Open enum 的核心设计是**允许未知变体**，因此 `match` 必须包含 `_ => ...` 分支。这与常规 enum 的穷尽检查不同：
 > 常规 enum 无 `_` 分支是编译错误（遗漏变体），open enum 无 `_` 分支也是编译错误（未处理未知）。
@@ -638,6 +657,7 @@ fn from_raw(val: u8) -> Priority {
     Priority::from_raw(val)
 }
 ```
+
 > **修正**:
 > Open enum 的 `from_raw` 转换是设计难点：
 >
@@ -674,6 +694,7 @@ fn from_raw(val: u8) -> Priority {
 
 fn main() {}
 ```
+
 > **修正**: **Open enum**（RFC 开放中）允许枚举在**未来版本中添加新变体**，而不破坏现有代码的穷尽匹配。
 > 当前 Rust 的枚举是**封闭的**：添加新变体会使所有 `match` 编译错误（非穷尽）。
 > Open enum 的设计：

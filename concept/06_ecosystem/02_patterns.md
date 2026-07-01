@@ -127,6 +127,7 @@ graph TD
     E --> E2[Zero-cost Abstraction]
     E --> E3[Phantom Types]
 ```
+
 > **认知功能**: 提供设计模式的全景认知框架，帮助学习者建立"模式类型→具体问题→Rust实现"的三层检索路径。建议将其作为查阅具体模式前的导航图，快速定位问题所属的模式类别。
 > [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 > **关键洞察**: Rust特有模式（Typestate、Zero-cost Abstraction）并非GoF分类的补丁，而是所有权类型系统的自然涌现。
@@ -178,6 +179,7 @@ impl Invoker {
     }
 }
 ```
+
 **与其他语言对比**：
 
 - **Java/C++**: 通常依赖 GC 或智能指针（Smart Pointer）管理命令对象生命周期（Lifetimes）；Rust 需显式处理所有权，`Box<dyn Command>` 提供了堆分配动态分发。
@@ -221,6 +223,7 @@ mod ast {
     }
 }
 ```
+
 **Visitor 模式 UML 类图（Mermaid classDiagram）**: [来源: [Are We Game Yet](https://arewegameyet.rs/)]
 
 ```mermaid
@@ -263,6 +266,7 @@ classDiagram
     ExprVisitor <|.. PrintVisitor : 实现
     Expr ..> ExprVisitor : accept 调用
 ```
+
 > **认知功能**: 将Visitor模式的"双重分发"结构可视化，清晰呈现Expr（元素层次）与ExprVisitor（操作层次）的正交分离。建议在实现AST遍历或代码生成前对照此图验证接口设计。
 > **关键洞察**: enum变体替代继承层次，`accept`方法的泛型参数将运行时双重分发压缩为编译期单分发，消除虚函数表膨胀。
 > **思维表征说明**: `classDiagram` 是设计模式的**标准 UML 表达**——`--|>` 表示继承/变体关系，`<|..` 表示 trait 实现，`..>` 表示依赖关系。Visitor 模式的核心结构在此图中一目了然：Expr 是被访问的元素层次（enum 变体），ExprVisitor 是操作接口，EvalVisitor / PrintVisitor 是具体操作实现。这与 `graph TD` 流程图（展示概念关系）形成互补——类图展示的是**代码结构中的类型关系**。 [来源: GoF Design Patterns; UML 2.5 Class Diagram Standard]
@@ -313,6 +317,7 @@ impl<'a> ShoppingCart<'a> {
     }
 }
 ```
+
 **Rust 实现（静态分发 / 零成本）**：
 
 ```rust,ignore
@@ -326,6 +331,7 @@ impl<S: PaymentStrategy> ShoppingCart<S> {
     }
 }
 ```
+
 **与其他语言对比**：
 
 - **C++**: 模板（静态）+ 虚函数（动态）；Rust 的泛型单态化（Monomorphization）与 C++ 模板实例化类似，但类型检查更严格。
@@ -372,6 +378,7 @@ impl Connection {
     }
 }
 ```
+
 **Rust 实现（Typestate 编译期状态机）**：
 
 ```rust
@@ -399,6 +406,7 @@ impl Connection<Open> {
 // let conn = Connection::<Closed> { _state: PhantomData };
 // conn.send(b"hi"); // ❌ 编译错误
 ```
+
 **与其他语言对比**：
 
 - **C**: 通常用整数状态码 + `switch`，无类型安全，易遗漏状态处理。
@@ -442,6 +450,7 @@ impl PluginRegistry {
     }
 }
 ```
+
 **动态加载（libloading）**:
 
 ```rust,ignore
@@ -456,6 +465,7 @@ unsafe {
     let plugin = Box::from_raw(create());
 }
 ```
+
 > [来源: [Rust Foundation](https://foundation.rust-lang.org/)]
 
 **与其他语言对比**：
@@ -546,6 +556,7 @@ impl TemperatureDisplay {
     }
 }
 ```
+
 > [来源: [Rust in Production](https://www.rust-lang.org/)]
 
 **关键洞察**：`Weak<T>` 不增加引用计数，当 Subject 被释放时，`upgrade()` 返回 `None`，Observer 自动失效。这避免了 `Rc`/`Arc` 循环引用导致的内存泄漏。来源: [TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
@@ -593,6 +604,7 @@ async fn async_observer_example() {
     assert_eq!(rx2.recv().await.unwrap(), "event");
 }
 ```
+
 > [来源: [Rust FFI Guidelines](https://doc.rust-lang.org/nomicon/ffi.html)] · [Rust CLI Book](https://rust-cli.github.io/book/)
 
 **关键洞察**：`broadcast` 通道解耦了生产者和消费者的生命周期——接收者可以独立存在，即使发送者已关闭，`recv()` 会返回错误而非悬垂引用。[来源: Tokio Documentation]
@@ -639,6 +651,7 @@ async fn lightweight_observer_example() {
     listener.await; // 等待通知
 }
 ```
+
 > [来源: [Rust by Example](https://doc.rust-lang.org/rust-by-example/)]
 
 **关键洞察**：`event-listener` 使用无锁原子操作实现通知，相比 `Mutex<Vec<Callback>>` 减少了锁竞争，适用于高并发细粒度事件场景。[来源: event-listener crate docs]
@@ -678,6 +691,7 @@ impl ThreadSafeSubject {
     }
 }
 ```
+
 `Weak<T>` 在此起到关键作用：它允许 Observer 引用 Subject（或反之）而不增加强引用计数，从而保证当所有强引用消失时，资源可以被确定性释放。[来源: `../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md) · [`../02_intermediate/03_memory_management.md`](../02_intermediate/03_memory_management.md)
 
 > **来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)** 当需要共享所有权且可能存在循环引用时，优先使用 `Weak` 打破循环，避免内存泄漏。✅
@@ -713,6 +727,7 @@ fn display_system(mut reader: EventReader<TemperatureChanged>) {
     }
 }
 ```
+
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 **关键洞察**：Bevy 的事件系统消除了 Observer 与 Subject 之间的直接引用关系，将所有权交由 ECS 调度器统一管理，从根本上规避了循环引用问题。[来源: Bevy Engine Documentation]
@@ -765,6 +780,7 @@ impl<'a, T> LendingIterator for Windows<'a, T> {
     }
 }
 ```
+
 > **来源**: [RFC 1598 — GATs](https://github.com/rust-lang/rfcs/pull/1598) · [Rust Design Patterns] · 可信度: ✅
 
 #### Type Erasure（类型擦除）模式
@@ -787,6 +803,7 @@ struct WriterVTable {
 // 标准库中的类型擦除：Box<dyn Trait> / Arc<dyn Trait>
 // 零成本替代：enum 类型擦除（如 io::Write 的 Either<L, R>）
 ```
+
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **关键洞察**: `Box<dyn Write>` 是**动态擦除**，运行时通过 vtable 分发；`enum Either<L, R>` 是**静态擦除**，编译期确定分支，零运行时开销。
 [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
@@ -817,6 +834,7 @@ async fn server(mut rx: mpsc::Receiver<Request>, mut shutdown: mpsc::Receiver<()
     }
 }
 ```
+
 > **来源**: [Tokio Docs — Patterns] · [Async Rust Design Patterns] · 可信度: ✅
 
 ### 4.8 FFI 边界的安全封装深度案例
@@ -865,6 +883,7 @@ impl Drop for FooContext {
     }
 }
 ```
+
 > **关键洞察**: FFI 安全封装的三层防线——**前置条件检查**（输入验证）、**不变式维护**（生命周期（Lifetimes）管理）、**后置条件保证**（返回值校验）。Rust 的类型系统负责编码不变式，运行时检查负责验证前置条件。
 [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
@@ -928,6 +947,7 @@ fn load(path: &str) -> Result<Config, Error> {
     std::fs::read_to_string(path).context(ReadConfigSnafu { path })?;
 }
 ```
+
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **选型决策**: 编写库 → **thiserror**（生态最轻）；构建 CLI/终端应用 → **miette**（诊断美观）；复杂状态机/领域错误 → **snafu**（结构化上下文）。
 > **来源**: [thiserror docs] · [miette docs] · [snafu docs] · 可信度: ✅
@@ -975,6 +995,7 @@ fn to_json<T: serde::Serialize>(input: T) -> Result<Vec<u8>, serde_json::Error> 
     serde_json::to_vec(&input)
 }
 ```
+
 > [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 
 **成本分析**：
@@ -1041,6 +1062,7 @@ impl Transport {
     }
 }
 ```
+
 > [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
 
 **三次法则（Rule of Three）的 Rust 适配**：
@@ -1101,6 +1123,7 @@ fn run_command(cmd: Command) {
     } // 新增变体时编译器强制此处更新
 }
 ```
+
 **与 L1-L4 的关联**：Stringly typed 直接违背 [L1 类型系统](../01_foundation/04_type_system.md) 的核心原则——"使非法状态不可表示"（Making Illegal States Unrepresentable）。enum 的穷尽性检查是 Rust 编译期保证的关键机制，参见 [L1 类型系统](../01_foundation/04_type_system.md) §代数数据类型。
 
 > **来源**: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines//type-safety.html) · 可信度: ✅
@@ -1149,6 +1172,7 @@ struct App {
 // Handler 只依赖所需子集
 async fn handler(db: &DatabaseLayer, sessions: &SessionLayer) { /* ... */ }
 ```
+
 > [来源: [lib.rs](https://lib.rs/)]
 
 **Rust 对策**：
@@ -1202,6 +1226,7 @@ fn process_items(mut items: Vec<Item>) -> Vec<Processed> {
         .collect()
 }
 ```
+
 **Rust 对策**：
 
 | 症状 | 根因 | 重构策略 |
@@ -1237,6 +1262,7 @@ graph TD
     style C1_2 fill:#f66
     style T1 fill:#6f6
 ```
+
 > **认知功能**: 训练批判性思维，通过反例驱动的推理消解"设计模式=语言补丁"的极端认知。建议在评估语言设计时运用此框架：先列举反例，再收敛到修正命题。
 > **关键洞察**: Rust的类型系统消除了部分模式需求，但模式作为问题-解决方案的通用描述仍具有跨语言认知价值。
 
@@ -1255,6 +1281,7 @@ graph TD
     style C2_2 fill:#f66
     style T2 fill:#6f6
 ```
+
 > **认知功能**: 建立模式迁移的约束意识，防止盲目套用GoF模式导致的`dyn Trait`滥用。建议在将OOP模式翻译为Rust前，先检验其是否依赖继承或运行时多态。
 > **关键洞察**: 约30%的GoF模式需要范式转换（如Template Method→Trait默认方法），强行保留原始结构会丧失Rust的零成本优势。
 
@@ -1272,6 +1299,7 @@ graph TD
     style C3_2 fill:#f66
     style T3 fill:#6f6
 ```
+
 > **认知功能**: 提供可编码的决策层级，将经验驱动的模式选择转化为"类型约束→性能约束→工程经验"的系统过程。建议在技术评审中用此框架质疑"凭感觉"的架构决策。
 > **关键洞察**: Rust优先将经验问题编译为类型约束（如Typestate替代运行时状态检查），这本身就是"经验→类型系统（Type System）"的知识固化过程。
 
@@ -1315,6 +1343,7 @@ fn main() {
     // let door = door.close(); // 编译错误：door 已 move
 }
 ```
+
 > [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
 
 ```rust
@@ -1363,6 +1392,7 @@ fn main() {
     println!("{} {}", req.method, req.url);
 }
 ```
+
 > [来源: [crates.io](https://crates.io/)]
 > **关键洞察**: Typestate 模式利用泛型将运行时状态检查转化为编译期类型约束；Builder 模式利用所有权转移保证构造过程的原子性。两者都是 Rust 类型系统的**零成本抽象（Zero-Cost Abstraction）**——编译后无运行时开销。
 [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
@@ -1555,6 +1585,7 @@ impl Builder {
     }
 }
 ```
+
 > **修正**: Builder 的 `build()` 方法必须消费 `self`（而非 `&self`），以便转移内部字段的所有权。
 
 ### 12.2 边界测试：Singleton 在多线程中的不安全实现（编译错误）
@@ -1574,6 +1605,7 @@ static INSTANCE: Singleton = Singleton { data: RefCell::new(0) };
 use std::sync::Mutex;
 static INSTANCE_FIXED: Mutex<Singleton> = Mutex::new(Singleton { data: RefCell::new(0) });
 ```
+
 > **修正**: 全局状态必须使用 `Sync` 类型（`Mutex`、`RwLock`、`Atomic*`）。`RefCell`、`Cell` 等内部可变性类型不是 `Sync`。
 
 ### 12.3 边界测试：Newtype 模式的孤儿规则（编译错误）
@@ -1596,6 +1628,7 @@ impl std::fmt::Display for MyVec {
     }
 }
 ```
+
 > **修正**: 孤儿规则（Orphan Rule）禁止为外部 crate 的外部类型实现外部 trait。使用 Newtype 模式（`struct Wrapper(ExternalType)`）是标准解法。
 > **相关文件**: [问题图谱](../00_meta/problem_graph.md) · [能力图谱](../00_meta/competency_graph.md#三设计能力) · [Trait](../02_intermediate/01_traits.md)
 
@@ -1622,6 +1655,7 @@ impl ExprVisitor for Evaluator {
     fn visit_add(&mut self, _l: &Expr, _r: &Expr) { println!("+"); }
 }
 ```
+
 > **修正**: 访问者模式（Visitor Pattern）在 OOP 语言中用于解耦操作与数据结构，但 Rust 的**代数数据类型**（枚举（Enum） + 模式匹配（Pattern Matching））使访问者模式往往不必要。`Expr` 的求值直接用 `match` 更简洁：
 
 ```rust
@@ -1632,6 +1666,7 @@ fn eval(e: &Expr) -> i32 {
     }
 }
 ```
+
 访问者模式仅在"频繁添加新操作，不频繁添加新变体"时优势——Rust 的枚举匹配在"频繁添加新变体"时更有优势（编译器检查遗漏）。这与 Haskell 的代数数据类型（同样偏好模式匹配（Pattern Matching））或 Java 的 Visitor（因无枚举匹配而必需）不同——Rust 的类型系统使某些传统设计模式过时。[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch18-00-patterns.html)]
 
 ### 10.3 边界测试：builder 模式的链式调用与移动语义（编译错误）
@@ -1659,6 +1694,7 @@ fn main() {
     let _person = builder.build();
 }
 ```
+
 > **修正**: Builder 模式的**链式调用**在 Rust 中需处理所有权：`fn name(mut self, ...)` 消耗 `self` 并返回新的 `Self`，旧的 `self` 不可用。修复：1) `fn name(&mut self, ...)` — 借用，支持链式但不返回 `Self`（需分开调用：`builder.name(...); builder.age(...);`）；2) `fn name(mut self, ...) -> Self` — 消耗式，但要求一次性链式调用：`Builder::new().name(...).age(...).build()`；3) `fn name(self, ...) -> Self` — 无 `mut`，在函数内重新绑定。Rust 的 builder 模式通常采用**消耗式**（`mut self`），因为构建完成后 builder 不再需要。这与 Java 的 builder（总是返回 `this`，无所有权问题）或 Python 的 builder（同样无所有权）不同——Rust 的 builder 需显式处理移动语义。[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/print.html#builder)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ## 嵌入式测验（Embedded Quiz）
@@ -1709,6 +1745,7 @@ struct DoorOpen;
 impl DoorClosed { fn open(self) -> DoorOpen { DoorOpen } }
 impl DoorOpen { fn close(self) -> DoorClosed { DoorClosed } }
 ```
+
 - 只有 `DoorClosed` 能调用 `open`
 - 只有 `DoorOpen` 能调用 `close`
 - 错误的状态转换在编译期被拒绝
@@ -1743,6 +1780,7 @@ impl Builder {
 
 let person = Builder::new().name("Alice".into()).age(30).build();
 ```
+
 `mut self` 允许修改字段，返回 `Self` 支持链式调用。Builder 被消费（move）不是问题，因为构建完成后不再需要它。
 </details>
 
@@ -1756,6 +1794,7 @@ Newtype 模式的主要目的是什么？
 struct UserId(u64);
 struct ProductId(u64);
 ```
+
 - A. 减少内存占用
 - B. 在编译期区分不同语义，防止单位混淆
 - C. 让类型实现更多方法

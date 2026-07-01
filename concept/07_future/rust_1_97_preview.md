@@ -71,6 +71,7 @@ impl AsyncDrop for AsyncFile {
     }
 }
 ```
+
 ---
 
 ### 1.2 Return Type Notation (RTN)
@@ -95,6 +96,7 @@ where
     tokio::spawn(async move { p.process().await });
 }
 ```
+
 **深度文档**: [12_return_type_notation_preview.md](12_return_type_notation_preview.md)
 
 ---
@@ -128,6 +130,7 @@ impl MyFuture {
     }
 }
 ```
+
 **可能方向**:
 
 - **编译器派生**: `#[derive(PinProject)]` 进入标准库或 core，自动为 `!Unpin` 字段生成安全的投影
@@ -163,6 +166,7 @@ enum CCompatibleEnum {
     _  // 匿名变体：允许其他整数值
 }
 ```
+
 **意义**: 改善 Rust 与 C FFI 的 enum 互操作性，是 Rust for Linux 等项目的长期需求之一。
 
 **深度文档**: [25_open_enums_preview.md](25_open_enums_preview.md)
@@ -189,6 +193,7 @@ where
     pin.fill(0);
 }
 ```
+
 **关联**: Pin Ergonomics 的底层基础设施之一。若 Pin projection 进入标准库，reborrow trait 将提供泛型（Generics）层面的语义支撑。
 
 **资源**: [rust-lang/rust#125153](https://github.com/rust-lang/rust/issues/125153) (Pin ergonomics umbrella issue)
@@ -212,6 +217,7 @@ where
 ```bash
 RUSTFLAGS="-Zthreads=8" cargo build
 ```
+
 **深度文档**: [09_parallel_frontend_preview.md](09_parallel_frontend_preview.md)
 
 ---
@@ -232,6 +238,7 @@ RUSTFLAGS="-Zthreads=8" cargo build
 ```bash
 cargo +nightly build -Zcodegen-backend=cranelift
 ```
+
 **深度文档**: [16_cranelift_backend_preview.md](16_cranelift_backend_preview.md)
 
 ---
@@ -251,6 +258,7 @@ cargo +nightly build -Zcodegen-backend=cranelift
 ```bash
 cargo +nightly build -Zbuild-std=core,alloc,std --target x86_64-unknown-linux-gnu
 ```
+
 ---
 
 ## 三、形式化验证生态
@@ -315,6 +323,7 @@ cargo +nightly build -Zbuild-std=core,alloc,std --target x86_64-unknown-linux-gn
 ```bash
 RUSTFLAGS="-Zsanitizer=borrow" cargo +nightly test
 ```
+
 **意义**: 使 Tree Borrows 规则从理论验证工具走向工程实践，可在大型代码库中检测 `unsafe` 代码的别名违规。与 Kani (静态) 形成互补：BSan 动态发现实际执行路径上的违规，Kani 穷举所有可能路径。
 
 **深度文档**: [20_borrowsanitizer_preview.md](20_borrowsanitizer_preview.md) · [04_formal/22_modern_verification_tools.md](../04_formal/22_modern_verification_tools.md)
@@ -353,6 +362,7 @@ fn run_service(s: &dyn Service) {
     s.handle(req); // 编译器自动处理虚表调度
 }
 ```
+
 > **工程建议**：在 `dyn Trait` 需要异步方法的生产代码中，继续使用 `#[async_trait]`。AFIT（async fn in trait）已在 Rust 1.75+ stable，但仅适用于泛型/`impl Trait` 场景。
 
 ---
@@ -372,6 +382,7 @@ async gen fn counter_stream(max: usize) -> impl Stream<Item = usize> {
     }
 }
 ```
+
 ---
 
 ## 五、标准库演进
@@ -432,6 +443,7 @@ let mut deque = VecDeque::from([1, 2, 3, 4, 5]);
 deque.truncate_front(2);
 assert_eq!(deque.make_contiguous(), &[4, 5]); // 保留后部 2 个
 ```
+
 ---
 
 ### 5.3 VecDeque::retain_back
@@ -449,6 +461,7 @@ let mut deque = VecDeque::from([1, 2, 3, 4, 5]);
 deque.retain_back(|x| x % 2 == 0);
 assert_eq!(deque.make_contiguous(), &[2, 4]); // 保留偶数
 ```
+
 ---
 
 ### 5.4 NonZero 位操作 API 稳定化
@@ -466,6 +479,7 @@ assert_eq!(n.lowest_one(), 2);  // 最低 set bit 的索引
 // bit_width 返回同类型 NonZero，表示表示 self 所需的最少位数
 assert_eq!(n.bit_width(), NonZeroU32::new(5).unwrap()); // 0b10100 需要 5 bits
 ```
+
 **来源**: [PR #155147](https://github.com/rust-lang/rust/pull/155147) · [PR #155131](https://github.com/rust-lang/rust/pull/155131)
 
 ---
@@ -480,6 +494,7 @@ assert_eq!(n.bit_width(), NonZeroU32::new(5).unwrap()); // 0b10100 需要 5 bits
 const SPACE_CTRL: bool = ' '.is_control(); // false
 const NUL_CTRL: bool = '\0'.is_control();  // true
 ```
+
 **来源**: [PR #155528](https://github.com/rust-lang/rust/pull/155528)
 
 ---
@@ -500,6 +515,7 @@ let borrowed = cell.borrow();
 let mapped = RefCell::try_map(borrowed, |opt| opt.as_ref()).ok();
 // 若值为 None，try_map 返回 Err，原 borrow 保持不变
 ```
+
 ---
 
 ### 5.7 int_format_into
@@ -516,6 +532,7 @@ let n = 12345i32;
 let written = n.format_into(&mut buf);
 assert_eq!(&buf[..written], b"12345");
 ```
+
 ---
 
 ### 5.8 float_algebraic
@@ -532,6 +549,7 @@ fn fast_sum(a: f64, b: f64, c: f64) -> f64 {
     a.add_algebraic(b).add_algebraic(c)  // 编译器可能重排为 a + (b + c)
 }
 ```
+
 > ⚠️ 这会打破 IEEE 754 严格语义，仅在可接受精度损失的场景使用。
 >
 > **来源**: [Tracking Issue #136468](https://github.com/rust-lang/rust/issues/136468) · [Impl PR #136457](https://github.com/rust-lang/rust/pull/136457)
@@ -554,6 +572,7 @@ fn shuffle<T, R: RandomSource>(vec: &mut [T], rng: &mut R) { /* ... */ }
 let mut rng = DefaultRandomSource::new();
 shuffle(&mut data, &mut rng);
 ```
+
 ---
 
 ### 5.8 box_vec_non_null
@@ -573,6 +592,7 @@ let ptr: NonNull<i32> = Box::into_non_null(boxed);
 let vec = vec![1, 2, 3];
 let (ptr, len, cap): (NonNull<i32>, usize, usize) = Vec::into_non_null(vec);
 ```
+
 > **状态更新 (2026-06-28)**: 当前 nightly 上 `Vec::into_non_null` 方法尚不存在；`Box::into_non_null` 亦未探测到。示例使用 tracking issue 中的预期名称，发布日需以实际 API 为准。
 
 ---
@@ -593,6 +613,7 @@ pub unsafe extern "C" fn my_printf(fmt: *const c_char, mut args: ...) -> c_int {
     0
 }
 ```
+
 **典型场景**: 内核 printk、嵌入式日志、FFI 回调。
 
 ---

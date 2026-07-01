@@ -85,6 +85,7 @@ graph TB
     style C fill:#e8f5e9
     style D fill:#f3e5f5
 ```
+
 ### 并发模式决策树
 
 ```mermaid
@@ -114,6 +115,7 @@ graph TD
     style DivideConquer fill:#c8e6c9
     style ReactivePattern fill:#c8e6c9
 ```
+
 ---
 
 ## 📊 并发模式多维对比矩阵
@@ -210,6 +212,7 @@ async fn process_stream() {
     }
 }
 ```
+
 ### 2. 异步闭包模式
 
 利用Rust 1.89改进的异步闭包语法：
@@ -269,6 +272,7 @@ async fn example_usage() {
     println!("Results: {:?}", results);
 }
 ```
+
 ## 工作窃取模式
 
 ### 🚀 Rust 1.92.0 工作窃取性能提升（自 Rust 1.90 引入）
@@ -285,6 +289,7 @@ graph LR
     style B fill:#c8e6c9
     style C fill:#81c784
 ```
+
 ### 1. 高性能工作窃取调度器
 
 ```rust
@@ -349,6 +354,7 @@ pub struct Task {
     pub payload: Vec<u8>,
 }
 ```
+
 ### 2. 自适应工作分配
 
 ```rust
@@ -389,6 +395,7 @@ impl AdaptiveWorkDistributor {
     }
 }
 ```
+
 ### 🚀 示例：Rust 1.92.0 工作窃取实战（自 Rust 1.90 引入）
 
 ```rust
@@ -493,6 +500,7 @@ fn main() {
     println!("🎯 窃取比例: {:.1}%", (stolen_count as f64 / completed_count as f64) * 100.0);
 }
 ```
+
 ### 📊 工作窃取性能基准
 
 | 指标             | Rust 1.89 | Rust 1.90 | 提升     |
@@ -591,6 +599,7 @@ impl ParallelDivideAndConquer {
     }
 }
 ```
+
 ### 2. 流水线并发模式
 
 ```rust
@@ -681,6 +690,7 @@ pub fn example_pipeline() {
     }
 }
 ```
+
 ### 🚀 示例：Rust 1.90 高性能流水线
 
 ```rust
@@ -774,6 +784,7 @@ fn main() {
     println!("🎯 最终累积值: {}", final_value);
 }
 ```
+
 ### 📊 流水线模式性能对比
 
 | 阶段数 | 吞吐量 (items/s) | 延迟 | 内存占用 | 最佳场景   |
@@ -843,6 +854,7 @@ impl EventLoop {
     }
 }
 ```
+
 ---
 
 ## 💡 思维导图：并发模式选择策略
@@ -881,6 +893,7 @@ mindmap
         事件流
         复杂UI
 ```
+
 ---
 
 ## 📋 快速参考
@@ -928,6 +941,7 @@ use tokio::sync::mpsc;
 let (tx, mut rx) = mpsc::channel(100);
 tokio::spawn(async move { while let Some(event) = rx.recv().await { } });
 ```
+
 ---
 
 ## 总结
@@ -1021,6 +1035,7 @@ graph LR
     style C fill:#e8f5e9
     style D fill:#f3e5f5
 ```
+
 ---
 
 **📚 相关文档**:

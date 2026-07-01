@@ -130,6 +130,7 @@
     ├── 批量发送
     └── 背压处理
 ```
+
 ### 概念矩阵
 
 | Channel 类型        | 有界性    | 性能 | 背压 | 适用场景   |
@@ -170,6 +171,7 @@
 │                                                      │
 └──────────────────────────────────────────────────────┘
 ```
+
 ### 1.2 Rust Channel 类型
 
 | 类型                            | 特性             | 适用场景     |
@@ -202,6 +204,7 @@ fn main() {
     println!("Received: {:?}", received);
 }
 ```
+
 ---
 
 ## 2. 标准库 Channel
@@ -235,6 +238,7 @@ fn main() {
     println!("All messages received");
 }
 ```
+
 ### 2.2 send() 和 recv()
 
 ```rust
@@ -259,6 +263,7 @@ fn main() {
     }
 }
 ```
+
 ### 2.3 try_recv() 非阻塞接收
 
 ```rust
@@ -293,6 +298,7 @@ fn main() {
     }
 }
 ```
+
 ### 2.4 recv_timeout() 超时接收
 
 ```rust
@@ -315,6 +321,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 3. 多生产者单消费者
@@ -345,6 +352,7 @@ fn main() {
     }
 }
 ```
+
 ### 3.2 实战案例：并行任务收集
 
 ```rust
@@ -384,6 +392,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 4. Crossbeam Channel
@@ -412,6 +421,7 @@ fn main() {
     }
 }
 ```
+
 ### 4.2 有界 Channel 与背压
 
 ```rust
@@ -444,6 +454,7 @@ fn main() {
     consumer.join().unwrap();
 }
 ```
+
 ### 4.3 多生产者多消费者（MPMC）
 
 ```rust
@@ -482,6 +493,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 5. 无界 vs 有界 Channel
@@ -507,6 +519,7 @@ fn main() {
 │  • 示例：任务队列、限流系统                               │
 └─────────────────────────────────────────────────────────┘
 ```
+
 ### 5.2 内存使用对比
 
 ```rust
@@ -561,6 +574,7 @@ fn main() {
     benchmark_bounded();
 }
 ```
+
 ---
 
 ## 6. Select 操作
@@ -602,6 +616,7 @@ fn main() {
     }
 }
 ```
+
 ### 6.2 带超时的 Select
 
 ```rust
@@ -629,6 +644,7 @@ fn main() {
     }
 }
 ```
+
 ### 6.3 实战案例：工作窃取调度器
 
 ```rust
@@ -668,6 +684,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 7. 实战模式
@@ -723,6 +740,7 @@ fn main() {
     }
 }
 ```
+
 ### 7.2 管道模式（Pipeline）
 
 ```rust
@@ -785,6 +803,7 @@ fn main() {
     }
 }
 ```
+
 ### 7.3 扇出-扇入模式（Fan-out/Fan-in）
 
 ```rust
@@ -831,6 +850,7 @@ fn main() {
     println!("Collected {} results", results.len());
 }
 ```
+
 ### 7.4 发布-订阅模式
 
 ```rust
@@ -886,6 +906,7 @@ fn main() {
     thread::sleep(Duration::from_secs(1));
 }
 ```
+
 ---
 
 ## 8. 性能优化
@@ -950,6 +971,7 @@ fn main() {
     println!("Speedup:         {:.2}x", individual as f64 / batched as f64);
 }
 ```
+
 ### 8.2 选择合适的 Channel 实现
 
 ```rust
@@ -1009,6 +1031,7 @@ fn main() {
     println!("Speedup:    {:.2}x", std_time as f64 / crossbeam_time as f64);
 }
 ```
+
 ---
 
 ## 9. 最佳实践
@@ -1040,6 +1063,7 @@ fn main() {
     }
 }
 ```
+
 ### 9.2 处理发送失败
 
 ```rust
@@ -1062,6 +1086,7 @@ fn main() {
     }
 }
 ```
+
 ### 9.3 避免无界 Channel 的内存泄漏
 
 ```rust
@@ -1104,6 +1129,7 @@ fn main() {
     thread::sleep(Duration::from_secs(5));
 }
 ```
+
 ---
 
 ## 10. 参考资源

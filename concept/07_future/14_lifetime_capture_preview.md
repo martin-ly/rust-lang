@@ -37,6 +37,7 @@ fn make_iter<'a>(s: &'a str) -> impl Iterator<Item = char> + 'a {
 
 fn main() {}
 ```
+
 > **修正**:
 > **Precise capturing**（`use<'lt>` syntax）是 Rust 2024 edition 的关键特性：
 >

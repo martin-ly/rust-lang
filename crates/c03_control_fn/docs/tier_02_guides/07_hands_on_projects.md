@@ -52,6 +52,7 @@
 └── 表达式解析器
     └── 递归、闭包
 ```
+
 ---
 
 ## 📋 项目概览
@@ -137,6 +138,7 @@ fn calculate(expr: &str) -> Result<f64, String> {
     }
 }
 ```
+
 ### 测试输出
 
 ```text
@@ -153,6 +155,7 @@ fn calculate(expr: &str) -> Result<f64, String> {
 请输入表达式 (如: 5 + 3): 10 / 0
 ❌ 错误: 除数不能为零
 ```
+
 ---
 
 ## 项目2: 错误处理框架
@@ -315,6 +318,7 @@ fn main() -> Result<(), AppError> {
     Ok(())
 }
 ```
+
 ### 测试输出2
 
 ```text
@@ -334,6 +338,7 @@ fn main() -> Result<(), AppError> {
 ✅ 解析成功: 25
 ❌ 解析错误: invalid digit found in string
 ```
+
 ---
 
 ## 项目3: 表达式解析器
@@ -566,6 +571,7 @@ fn main() {
     }
 }
 ```
+
 ### 测试输出3
 
 ```text
@@ -579,6 +585,7 @@ fn main() {
   AST: BinaryOp { op: Add, left: Number(2.0), right: BinaryOp { ... } }
   ✅ 结果: 14
 ```
+
 ---
 
 ## 📝 总结

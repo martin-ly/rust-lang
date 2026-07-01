@@ -94,6 +94,7 @@ flowchart TD
     style PASS fill:#c8e6c9
     style FIX fill:#ffebee
 ```
+
 > **认知功能**: 此流程图将质量门禁从"静态检查清单"转化为**动态决策流程**。每次内容更新后，按修改类型触发相应的检查分支：形式化定义修改→跨层一致性检查；新增来源→格式验证；新增定理→矩阵完整性检查；新增示例→代码块规范。最终必须通过 `concept_consistency_auditor.py` 的 0 错误验证。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
@@ -239,6 +240,7 @@ python scripts/cross_concept_diff.py
 #   → reports/concept_consistency_report.md
 #   → reports/code_block_compile_report.md
 ```
+
 ---
 
 ## 八、审计周期 [来源: Rust 6 周发布周期驱动文档审计频率; 重大修改后立即执行审计，参照 AGENTS.md 维护规范第 4 条]

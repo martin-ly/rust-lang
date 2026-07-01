@@ -18,6 +18,7 @@ content/scenarios/
 ├── systems_infrastructure_scenarios.md    # 系统基础设施场景
 └── web_application_scenarios.md           # Web 应用场景
 ```
+
 ---
 
 ## 使用方式

@@ -55,6 +55,7 @@ macro_rules! vec_of_strings {
     };
 }
 ```
+
 **过程宏** 适用于：
 
 - 复杂的代码生成
@@ -65,6 +66,7 @@ macro_rules! vec_of_strings {
 #[derive(MyTrait)]
 struct MyStruct { }
 ```
+
 **建议**: 优先尝试声明宏，复杂需求再用过程宏。
 
 ---
@@ -92,6 +94,7 @@ let x = five!(); // 展开为 let x = 5;
 fn five() -> i32 { 5 }
 let x = five(); // 运行时调用函数
 ```
+
 ---
 
 ### Q3: 宏会影响性能吗？
@@ -119,6 +122,7 @@ let v = temp_vec;
 
 // 性能完全相同！
 ```
+
 **建议**: 合理使用宏，避免过度嵌套。
 
 ---
@@ -133,6 +137,7 @@ let v = temp_vec;
 cargo install cargo-expand
 cargo expand my_module
 ```
+
 **方法 2**: 使用 `dbg!` 和 `stringify!`
 
 ```rust
@@ -145,6 +150,7 @@ macro_rules! debug_macro {
     };
 }
 ```
+
 **方法 3**: 逐步简化
 
 ```rust
@@ -155,6 +161,7 @@ my_macro!(x);
 my_macro!(x, y);
 my_macro!(x, y, z);
 ```
+
 ---
 
 ### Q5: 声明宏的卫生性如何工作？
@@ -178,6 +185,7 @@ let a = 13;
 let result = using_a!(a + a); // 26，使用外部 a
 println!("a = {}", a); // 13，外部 a 未变
 ```
+
 **打破卫生性** (不推荐):
 
 ```rust
@@ -187,6 +195,7 @@ macro_rules! break_hygiene {
     };
 }
 ```
+
 ---
 
 ### Q6: 如何处理宏的多个分支？
@@ -215,6 +224,7 @@ let x = calculate!(2 + 3);  // 5
 let y = calculate!(2 * 3);  // 6
 let z = calculate!(42);     // 42
 ```
+
 **注意**: 更具体的模式放在前面。
 
 ---
@@ -228,6 +238,7 @@ let z = calculate!(42);     // 42
 ```bash
 cargo new my_macro --lib
 ```
+
 **步骤 2**: 配置 `Cargo.toml`
 
 ```toml
@@ -239,6 +250,7 @@ syn = { version = "2.0", features = ["full"] }
 quote = "1.0"
 proc-macro2 = "1.0"
 ```
+
 **步骤 3**: 编写宏
 
 ```rust
@@ -262,6 +274,7 @@ pub fn hello_macro_derive(input: TokenStream) -> TokenStream {
     TokenStream::from(expanded)
 }
 ```
+
 ---
 
 ### Q8: syn 和 quote 是必须的吗？
@@ -278,6 +291,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
     // ... 复杂的解析逻辑
 }
 ```
+
 **使用 syn/quote** (简单):
 
 ```rust
@@ -288,6 +302,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
     TokenStream::from(expanded)
 }
 ```
+
 **建议**: 除非特殊需求，否则使用 syn/quote。
 
 ---
@@ -308,6 +323,7 @@ fn test_macro() {
     // 验证宏生成的代码
 }
 ```
+
 **方法 2**: trybuild (测试编译错误)
 
 ```rust
@@ -318,6 +334,7 @@ fn ui_tests() {
     t.compile_fail("tests/ui/fail/*.rs");
 }
 ```
+
 **方法 3**: macrotest (快照测试)
 
 ```rust
@@ -326,6 +343,7 @@ fn test_macro_expansion() {
     macrotest::expand("tests/expand/*.rs");
 }
 ```
+
 ---
 
 ### Q10: 过程宏可以读取文件吗？
@@ -343,6 +361,7 @@ pub fn include_config(_item: TokenStream) -> TokenStream {
     // 处理配置...
 }
 ```
+
 **注意事项**:
 
 1. **路径问题**: 使用 `CARGO_MANIFEST_DIR` 环境变量
@@ -373,6 +392,7 @@ my_project/
 └── src/                # 主库
     └── lib.rs          # 重导出宏
 ```
+
 **主库重导出**:
 
 ```rust
@@ -382,6 +402,7 @@ pub use my_macro_derive::MyDerive;
 // 用户只需
 use my_project::MyDerive;
 ```
+
 ---
 
 ### Q12: 宏的错误消息如何优化？
@@ -396,6 +417,7 @@ macro_rules! only_two_args {
     };
 }
 ```
+
 **技巧 2**: 使用 Span
 
 ```rust
@@ -406,6 +428,7 @@ return syn::Error::new(span, "Field must be public")
     .to_compile_error()
     .into();
 ```
+
 **技巧 3**: 提供建议
 
 ```rust
@@ -414,6 +437,7 @@ return syn::Error::new(
     "Missing #[id] attribute. Try: #[derive(MyTrait)] #[id(1)]"
 ).to_compile_error().into();
 ```
+
 ---
 
 ### Q13: 如何发布宏库？
@@ -439,6 +463,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
     // ...
 }
 ````
+
 **步骤 2**: 添加测试
 
 ```rust
@@ -449,12 +474,14 @@ fn test_basic() { /* ... */ }
 #[test]
 fn test_edge_cases() { /* ... */ }
 ```
+
 **步骤 3**: 发布
 
 ```bash
 cargo publish --dry-run
 cargo publish
 ```
+
 **建议**:
 
 - 提供丰富示例
@@ -474,6 +501,7 @@ cargo publish
 ```rust
 #![recursion_limit = "256"]
 ```
+
 **解决方案 2**: 重构宏，减少递归
 
 ```rust
@@ -492,6 +520,7 @@ macro_rules! count {
     };
 }
 ```
+
 ---
 
 ### Q15: "cannot find macro" 错误如何解决？
@@ -507,6 +536,7 @@ macro_rules! my_macro {
     // ...
 }
 ```
+
 **解决方案 2**: 正确导入
 
 ```rust
@@ -517,12 +547,14 @@ use my_crate::my_macro;
 #[macro_use]
 extern crate my_crate;
 ```
+
 **解决方案 3**: 检查 Cargo.toml
 
 ```toml
 [dependencies]
 my_crate = "1.0"
 ```
+
 ---
 
 ### Q16: 为什么宏展开后有编译错误？
@@ -534,23 +566,27 @@ my_crate = "1.0"
    ```bash
    cargo expand
    ```
+
 2. **检查生成的代码**
 
    ```rust
    // 确保生成的代码是有效的 Rust 代码
    ```
+
 3. **验证作用域**
 
    ```rust
    // 确保使用的类型/trait 在作用域内
    use std::fmt::Display; // 如果生成的代码需要
    ```
+
 4. **检查卫生性问题**
 
    ```rust
    // 使用完整路径
    ::std::vec::Vec::new()
    ```
+
 ---
 
 ## 💡 高级话题
@@ -567,6 +603,7 @@ html! {
     </div>
 }
 ```
+
 **步骤 2**: 定义函数式宏
 
 ```rust
@@ -576,6 +613,7 @@ pub fn html(input: TokenStream) -> TokenStream {
     // 生成 Rust 代码
 }
 ```
+
 **步骤 3**: 自定义解析器
 
 ```rust
@@ -589,6 +627,7 @@ impl HtmlParser {
     }
 }
 ```
+
 ---
 
 ### Q18: 宏可以生成宏吗？
@@ -607,6 +646,7 @@ macro_rules! make_macro {
 make_macro!(greet);
 greet!(); // Hello from greet!
 ```
+
 **限制**:
 
 - 只能在同一作用域
@@ -623,11 +663,13 @@ greet!(); // Hello from greet!
 ```bash
 cargo expand my_module
 ```
+
 **验证方法 2**: LLVM IR 比较
 
 ```bash
 cargo rustc --release -- --emit llvm-ir
 ```
+
 **验证方法 3**: 基准测试
 
 ```rust
@@ -643,6 +685,7 @@ fn bench_macro(c: &mut Criterion) {
     });
 }
 ```
+
 **示例**: vec! 宏的零成本
 
 ```rust
@@ -658,6 +701,7 @@ let v = temp;
 
 // 生成完全相同的机器码！
 ```
+
 ---
 
 **上一步**: [术语表](03_glossary.md)

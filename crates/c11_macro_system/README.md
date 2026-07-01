@@ -75,6 +75,7 @@ macro_rules! vec_of_strings {
 
 let strings = vec_of_strings!["hello", "world"];
 ```
+
 ### 🔸 过程宏 (Procedural Macros)
 
 **派生宏 (Derive Macros)**:
@@ -86,17 +87,20 @@ struct Config {
     value: i32,
 }
 ```
+
 **属性宏 (Attribute Macros)**:
 
 ```rust
 #[route(GET, "/api/users")]
 fn get_users() -> Response { }
 ```
+
 **函数式宏 (Function-like Macros)**:
 
 ```rust
 let query = sql!("SELECT * FROM users WHERE id = ?");
 ```
+
 ---
 
 ## 🗂️ 模块结构
@@ -117,6 +121,7 @@ C11_macro_system/
 ├── tests/                          # 测试用例
 └── benches/                        # 基准测试
 ```
+
 ### 主 crate 与 proc 模块关系
 
 - **主 crate** (`c11_macro_system`): 导出 `declarative`（声明宏）、`utils`、Rust 1.91/1.92/1.93 特性。可直接 `use c11_macro_system::*` 使用声明宏。
@@ -189,6 +194,7 @@ C11_macro_system/
 ```bash
 cat docs/00_MASTER_INDEX.md
 ```
+
 ### 2. 运行示例
 
 ```bash
@@ -207,6 +213,7 @@ cargo run --example rust_192_features_demo
 # 查看所有示例
 cargo run --example --list
 ```
+
 **Rust 1.93.0 演示程序**展示了以下特性：
 
 - `rotate_right`: 在宏展开队列管理中实现高效的轮转
@@ -223,6 +230,7 @@ cargo test
 # 特定测试
 cargo test declarative_tests
 ```
+
 ---
 
 ## 📖 学习路径
@@ -299,6 +307,7 @@ macro_rules! double {
     ($x:expr) => { $x * 2 };
 }
 ```
+
 ---
 
 ## 🛠️ 开发工具
@@ -312,6 +321,7 @@ cargo install cargo-expand
 # 查看宏展开
 cargo expand --example 01_macro_rules_basics
 ```
+
 ### 调试技巧
 
 ```rust
@@ -319,6 +329,7 @@ cargo expand --example 01_macro_rules_basics
 #![feature(trace_macros)]
 trace_macros!(true);
 ```
+
 ---
 
 ## 📚 相关资源
@@ -364,6 +375,7 @@ trace_macros!(true);
 🧪 测试用例: 100+ 个
 🎯 练习项目: 5+ 个
 ```
+
 ---
 
 ## ⚡ 快速参考
@@ -397,6 +409,7 @@ macro_rules! count {
     ($x:expr, $($rest:expr),*) => { 1 + count!($($rest),*) };
 }
 ```
+
 ---
 
 ### 🔬 形式化理论

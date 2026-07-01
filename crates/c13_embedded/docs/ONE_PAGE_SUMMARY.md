@@ -39,6 +39,7 @@ cargo check -p c13_embedded
 # 嵌入式目标（需安装 target）
 cargo check -p c13_embedded --target thumbv7m-none-eabi --features embedded
 ```
+
 ---
 
 **文档版本**: 1.0

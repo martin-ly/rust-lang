@@ -56,6 +56,7 @@
 │  Networking     │ │  Macros         │ │  WebAssembly    │
 └─────────────────┘ └─────────────────┘ └─────────────────┘
 ```
+
 ---
 
 ## 🔗 核心依赖关系
@@ -99,23 +100,27 @@ C01 → C02 → C03 → C04 → C06 ─┬─▶ C10 (网络) ───┬─▶
                                └─▶ content/ecosystem/web_frameworks/
                                └─▶ content/scenarios/web_app/
 ```
+
 ### 路径 2: 系统编程
 
 ```text
 C01 → C02 → C05 ─┬─▶ C07 (进程) ─────┬─▶ content/production/
                  └─▶ C10 (网络) ─────┘
 ```
+
 ### 路径 3: 高性能计算
 
 ```text
 C01 → C02 → C04 → C05 ─┬─▶ C08 (算法) ──┬─▶ C12 (WASM SIMD)
                        └─▶ C06 (异步) ──┘
 ```
+
 ### 路径 4: 元编程与 DSL
 
 ```text
 C01 → C02 → C04 ─▶ C11 (宏系统) ─▶ content/emerging/
 ```
+
 ---
 
 ## 🔄 模块间代码示例
@@ -135,6 +140,7 @@ thread::spawn(move || {
     println!("{:?}", data_clone);
 });
 ```
+
 ### C04 → C06: 泛型与异步
 
 ```rust
@@ -144,6 +150,7 @@ async fn process<T: Send + 'static>(data: T) -> T {
     data
 }
 ```
+
 ### C05 → C10: 并发与网络
 
 ```rust
@@ -152,6 +159,7 @@ tokio::spawn(async {
     // 异步网络操作
 });
 ```
+
 ---
 
 ## 📖 文档交叉引用

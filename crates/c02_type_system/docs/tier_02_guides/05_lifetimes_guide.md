@@ -156,6 +156,7 @@
 └── HRTB
     └── 高阶 trait bounds
 ```
+
 ---
 
 ---
@@ -208,6 +209,7 @@ fn main() {
     // println!("r: {}", r); // 编译错误！x 已被销毁
 }                         // ---------+
 ```
+
 ```rust
 fn main() {
     let x = 5;            // ----------+-- 'b
@@ -218,6 +220,7 @@ fn main() {
                           // --+       |
 }                         // ----------+
 ```
+
 ### 1.2 为什么需要生命周期
 
 从引用一致性视角看，生命周期是**编译期逻辑证明**的组成部分，用于证明引用的有效性。
@@ -242,6 +245,7 @@ fn main() {
     println!("{}", s);
 }
 ```
+
 **2. 确保引用有效性**:
 
 ```rust
@@ -261,6 +265,7 @@ fn main() {
     println!("The longest string is {}", result);
 }
 ```
+
 ### 1.3 借用检查器
 
 **借用检查器** 是 Rust 编译器的一部分，负责验证所有引用都是有效的。从引用一致性视角看，借用检查器是**编译期逻辑证明系统**，通过约束求解而非内存状态检查来保证资源安全。
@@ -277,6 +282,7 @@ fn main() {
     // 借用检查器发现 'b < 'a，拒绝编译
 }
 ```
+
 ```rust
 fn main() {
     let x = 5;            // ----------+-- 'b
@@ -288,6 +294,7 @@ fn main() {
     // 'a <= 'b，编译通过
 }
 ```
+
 ---
 
 ## 2. 生命周期标注
@@ -301,6 +308,7 @@ fn main() {
 &'a i32     // 带显式生命周期的引用
 &'a mut i32 // 带显式生命周期的可变引用
 ```
+
 **生命周期标注不改变引用的生命周期，只是描述引用之间的关系**。
 
 ### 2.2 函数中的生命周期
@@ -327,6 +335,7 @@ fn main() {
     }
 }
 ```
+
 **生命周期含义**:
 
 - 返回值的生命周期与两个参数中生命周期较短的那个相同
@@ -353,6 +362,7 @@ fn main() {
     println!("First word: {}", word);
 }
 ```
+
 ### 2.3 多个生命周期参数
 
 ```rust
@@ -379,6 +389,7 @@ fn main() {
     println!("Longest: {}", result);
 }
 ```
+
 ---
 
 ## 3. 结构体中的生命周期
@@ -403,6 +414,7 @@ fn main() {
     println!("Excerpt: {}", i.part);
 }
 ```
+
 **生命周期约束**:
 
 ```rust
@@ -428,6 +440,7 @@ fn main() {
     // println!("Excerpt: {}", i.part);
 }
 ```
+
 ### 3.2 生命周期约束
 
 ```rust
@@ -449,6 +462,7 @@ fn main() {
     println!("Input: {}, Output: {}", ctx.input, ctx.output);
 }
 ```
+
 ### 3.3 方法中的生命周期
 
 ```rust
@@ -488,6 +502,7 @@ fn main() {
     println!("Part: {}", result);
 }
 ```
+
 ---
 
 ## 4. 生命周期省略规则
@@ -507,6 +522,7 @@ fn main() {
 // 变成
 // fn foo<'a, 'b>(x: &'a i32, y: &'b i32)
 ```
+
 **规则 2**: 如果只有一个输入生命周期参数，那么它被赋给所有输出生命周期参数。
 
 ```rust
@@ -514,6 +530,7 @@ fn main() {
 // 变成
 // fn foo<'a>(x: &'a i32) -> &'a i32
 ```
+
 **规则 3**: 如果有多个输入生命周期参数，但其中一个是 `&self` 或 `&mut self`，那么 `self` 的生命周期被赋给所有输出生命周期参数。
 
 ```rust
@@ -525,6 +542,7 @@ fn main() {
 //     fn method<'b>(&'a self, x: &'b i32) -> &'a i32
 // }
 ```
+
 ### 4.2 实际应用
 
 ```rust
@@ -561,6 +579,7 @@ fn main() {
     println!("Longest: {}", result);
 }
 ```
+
 ---
 
 ## 5. 静态生命周期
@@ -580,6 +599,7 @@ fn main() {
     println!("{}", s);
 }
 ```
+
 ### 5.2 使用场景
 
 **1. 字符串字面量**:
@@ -594,6 +614,7 @@ fn main() {
     println!("{}", greeting);
 }
 ```
+
 **2. 常量**:
 
 ```rust
@@ -605,6 +626,7 @@ fn main() {
     println!("Language: {}", LANGUAGE);
 }
 ```
+
 **3. 线程安全的全局数据**:
 
 ```rust
@@ -624,6 +646,7 @@ fn main() {
     println!("Counter: {}", *COUNTER.lock().unwrap());
 }
 ```
+
 **⚠️ 注意：不要滥用 'static**:
 
 ```rust
@@ -643,6 +666,7 @@ fn main() {
     println!("{}", result);
 }
 ```
+
 ### 5.3 'static vs &'static 详解
 
 **核心区别**:
@@ -669,6 +693,7 @@ fn main() {
     println!("{:?}", BYTES);
 }
 ```
+
 **Box::leak 创建 'static 引用**:
 
 ```rust
@@ -692,6 +717,7 @@ fn main() {
     println!("{:?}", v);
 }
 ```
+
 ### 5.4 T: 'static 约束深度解析
 
 `T: 'static` **不是**"T必须是'static"，而是"T不能包含非'static引用"。
@@ -719,6 +745,7 @@ fn main() {
     // print_type(&s);  // 编译错误
 }
 ```
+
 **实际应用：线程间传递数据**:
 
 ```rust
@@ -743,6 +770,7 @@ fn main() {
     spawn_with_data(s.clone());
 }
 ```
+
 ### 5.5 'static 常见误区
 
 **误区 1: 'static 意味着永远存活**:
@@ -762,6 +790,7 @@ fn correct() -> &'static str {
     "This is truly static"
 }
 ```
+
 **误区 2: 所有东西都需要 'static**:
 
 ```rust
@@ -783,6 +812,7 @@ fn main() {
     println!("Length: {}", len);
 }
 ```
+
 **误区 3: static 变量都是不可变的**:
 
 ```rust
@@ -805,6 +835,7 @@ fn main() {
     }
 }
 ```
+
 ### 5.6 'static 的实际应用
 
 **应用 1: 全局配置（推荐使用 OnceLock）**:
@@ -840,6 +871,7 @@ fn main() {
     println!("Max connections: {}", config.max_connections);
 }
 ```
+
 **应用 2: 缓存和惰性初始化**:
 
 ```rust
@@ -870,6 +902,7 @@ fn main() {
     println!("\nSame instance: {}", std::ptr::eq(data1, data2));
 }
 ```
+
 **应用 3: 避免'static的替代方案**:
 
 ```rust
@@ -910,6 +943,7 @@ fn main() {
     take_ownership(owned);
 }
 ```
+
 ---
 
 ## 6. 生命周期与泛型
@@ -949,6 +983,7 @@ fn main() {
     println!("The longest string is {}", result);
 }
 ```
+
 ### 6.2 生命周期边界
 
 ```rust
@@ -967,6 +1002,7 @@ fn main() {
     println!("Value: {}", r.value);
 }
 ```
+
 ---
 
 ## 7. 生命周期子类型
@@ -997,6 +1033,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     }
 }
 ```
+
 ### 7.2 生命周期关系
 
 ```rust
@@ -1016,6 +1053,7 @@ fn main() {
     println!("Result: {}", result);
 }
 ```
+
 ---
 
 ## 8. 高级生命周期特性
@@ -1039,6 +1077,7 @@ fn main() {
     higher_ranked(|x| println!("{}", x));
 }
 ```
+
 **实际应用**:
 
 ```rust
@@ -1068,6 +1107,7 @@ fn main() {
     use_parser(SimpleParser, "test");
 }
 ```
+
 ### 8.2 生命周期约束
 
 ```rust
@@ -1091,6 +1131,7 @@ fn main() {
     println!("Data: {}", result);
 }
 ```
+
 ### 8.3 生命周期与内部可变性
 
 内部可变性模式（如`Cell`/`RefCell`）与生命周期的交互：
@@ -1131,6 +1172,7 @@ fn main() {
     println!("Updated: {}", data.get());
 }
 ```
+
 ### 8.4 生命周期与闭包
 
 闭包捕获引用的生命周期规则：
@@ -1158,6 +1200,7 @@ fn main() {
     apply_to_refs(|s| s, "hello", "world");
 }
 ```
+
 ### 8.5 生命周期规避技巧
 
 **技巧 1: 使用 `Rc`/`Arc` 避免生命周期**
@@ -1195,6 +1238,7 @@ fn main() {
     println!("Children: {}", root.children.len());
 }
 ```
+
 **技巧 2: 重构为索引而非引用**:
 
 ```rust
@@ -1244,6 +1288,7 @@ fn main() {
     }
 }
 ```
+
 **技巧 3: 使用 `Cow` 灵活处理**
 
 ```rust
@@ -1270,6 +1315,7 @@ fn main() {
     println!("Result 2: {} (borrowed: {})", result2, matches!(result2, Cow::Borrowed(_)));
 }
 ```
+
 ### 8.6 生命周期与迭代器
 
 迭代器的生命周期模式：
@@ -1317,6 +1363,7 @@ fn main() {
     }
 }
 ```
+
 ### 8.7 生命周期与异步
 
 异步函数中的生命周期：
@@ -1361,6 +1408,7 @@ fn main() {
     println!("Data: {}", data);
 }
 ```
+
 ---
 
 ## 9. 实战案例
@@ -1405,6 +1453,7 @@ fn main() {
     println!("Letters: {:?}", letters);
 }
 ```
+
 ### 案例 2: 缓存系统
 
 ```rust
@@ -1443,6 +1492,7 @@ fn main() {
     }
 }
 ```
+
 ### 案例 3: 迭代器
 
 ```rust
@@ -1480,6 +1530,7 @@ fn main() {
     }
 }
 ```
+
 ### 案例 4: 自引用结构
 
 ```rust
@@ -1522,6 +1573,7 @@ fn main() {
     println!("Pointer: {}", s.get_pointer());
 }
 ```
+
 ---
 
 ## 10. 常见陷阱与最佳实践
@@ -1571,6 +1623,7 @@ fn main() {
     println!("{}", result);
 }
 ```
+
 ### 10.2 最佳实践
 
 ```rust
@@ -1625,6 +1678,7 @@ fn main() {
     println!("Name: {}", get_name());
 }
 ```
+
 ### 10.3 生命周期调试技巧
 
 **技巧 1: 显式标注生命周期以理解错误**:
@@ -1643,6 +1697,7 @@ where
     x  // 只能返回 x
 }
 ```
+
 **技巧 2: 使用单元测试验证生命周期**:
 
 ```rust
@@ -1665,6 +1720,7 @@ mod tests {
     }
 }
 ```
+
 **技巧 3: 使用编译器建议**:
 
 ```rust
@@ -1675,6 +1731,7 @@ fn example() {
     // 根据编译器提示逐步调整代码
 }
 ```
+
 ---
 
 ## 11. 总结

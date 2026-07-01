@@ -45,6 +45,7 @@ where
     }
 }
 ```
+
 ---
 
 ## 文档结构导航
@@ -98,6 +99,7 @@ enum Result<T, E> {
     Err(E),
 }
 ```
+
 ### 2. Trait 系统
 
 ```rust
@@ -118,6 +120,7 @@ fn render<T: Drawable>(item: &T) {
     item.draw();
 }
 ```
+
 ### 3. 关联类型
 
 ```rust
@@ -138,6 +141,7 @@ trait LendingIterator {
     fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
 }
 ```
+
 ### 4. 高级特性
 
 ```rust
@@ -162,6 +166,7 @@ impl<T: std::fmt::Display> ToString for T {
     }
 }
 ```
+
 ---
 
 ## 学习路径指引
@@ -270,6 +275,7 @@ cargo test --test rust_192_comprehensive_tests
 # 运行基准测试
 cargo bench -p c04_generic
 ```
+
 ### 外部资源
 
 - [The Rust Book - 泛型](https://doc.rust-lang.org/book/ch10-00-generics.html)

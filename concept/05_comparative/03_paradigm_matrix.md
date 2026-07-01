@@ -1,4 +1,6 @@
-> **内容分级**: [综述级]
+> **内容分级**:
+>
+> [综述级]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 
 # Paradigm Matrix: Multi-Language Formal Comparison（多语言范式对比矩阵）
@@ -43,6 +45,7 @@ Step 5: 多范式是优势还是负担？
 Step 6: 怎么在代码中选择范式？
     └─⟹ 以"零成本抽象 + 编译期安全"为准则，根据问题域选择最自然的表达方式
 ```
+
 > **递进逻辑**: 从"为什么对比"出发，经过"本质区别"和"类型系统（Type System）的作用"，聚焦到 Rust 的多范式统一策略，最后落脚到工程实践中的选择原则。
 
 ---
@@ -122,6 +125,7 @@ GC (Go/Java/Haskell/TS)
       └─⟹ 经验/审查/工具辅助检测
           └─⟹ 人易犯错，历史 bug 数据库可证
 ```
+
 > **过渡**: 从静态矩阵对比，到理解这些维度如何在历史演进中形成不同的设计哲学。
 
 ### 2.2 设计哲学谱系
@@ -132,6 +136,7 @@ GC (Go/Java/Haskell/TS)
 底层控制 ←──────────────────────────────→ 抽象安全
 Rust 独特位置: 同时拥有 "底层控制" 和 "编译期证明安全"
 ```
+
 ### 2.3 编程语言类型系统谱系图
 >
 
@@ -175,6 +180,7 @@ graph LR
     style HASKELL fill:#f9f
     style C fill:#fcc
 ```
+
 > **认知功能**:
 > 展示类型系统从"无类型"到"所有权（Ownership）类型"的历史演进脉络。
 > 将各语言的类型创新视为层层叠加的安全保证，而非孤立特性。
@@ -258,6 +264,7 @@ graph TD
     E --> E2[运行时抽象: Java/Go]
     E --> E3[惰性求值: Haskell]
 ```
+
 > **认知功能**: 从类型系统、内存模型、并发模型、抽象成本四个维度构建范式分类框架。根据问题域的约束优先级（安全/性能/并发）选择对应谱系分支。Rust 的独特性在于同时满足"高抽象安全"与"零运行时开销"这对传统矛盾。 [来源: 💡 原创分析]
 > **过渡**: 思维导图展示四谱系分类，Rust 的独特性在于同时满足一组强约束。
 
@@ -273,6 +280,7 @@ graph TD
   5. 工业级工具链
 证明: C/C++(1,4,5 ✗2,3) / Go/Java(2,3,5 ✗1,4) / Haskell(2,3 ✗1,4,5) / Zig(1,4,5 ✗2,3) / Rust(✓全部)
 ```
+
 > **过渡**: 不可压缩性定理确定 Rust 的坐标，一致性矩阵将其锚定到 L1-L4 知识体系。
 
 ## 六、定理一致性矩阵（范式定位）— 带 ⟹ 推理链
@@ -325,6 +333,7 @@ const fn / const 泛型
       └─⟹ 配置/数组大小/状态机转换静态确定
           └─⟹ 范式: 编译期元编程 (Compile-time Metaprogramming)
 ```
+
 > **一致性验证**: 6 条推理链满足：特性（起点）⟹ 机制（中点）⟹ 保证（终点）。这是 L5 对比层与 L4 形式化层之间的桥梁。
 > **过渡**: 一致性矩阵证明自洽性，但科学严谨性要求主动寻找反命题和边界条件。
 
@@ -348,6 +357,7 @@ graph TD
     style F3 fill:#f96
     style T fill:#ff9
 ```
+
 > **认知功能**: 通过决策树揭示"最优解"命题的边界条件，训练批判性思维。遇到"X 是最好的语言"论断时，用约束条件逐层分解反例。不存在普适最优，Rust 的竞争力取决于"硬实时/内核集成/开发速度"的具体权衡。 [来源: 💡 原创分析]
 
 ### 7.2 反命题: "Rust 是纯函数式语言"
@@ -368,6 +378,7 @@ graph TD
     style F6 fill:#f96
     style T2 fill:#ff9
 ```
+
 > **认知功能**: 澄清 Rust 的多范式本质，区分"支持函数式"与"纯函数式"。在 Rust 中按需使用函数式风格，但警惕 `mut`/`unsafe`/IO 的副作用。将 Rust 误判为纯函数式语言会导致 `unsafe` 边界和并发模型的系统性误用。 [来源: 💡 原创分析]
 > **边界分析**: Rust 借鉴了 Haskell/ML 的代数数据类型、模式匹配（Pattern Matching），但 `mut`/`unsafe`/无约束 IO 明确表明它不是纯函数式语言。误判这一点会导致 `unsafe` 边界和并发模型的误用。
 
@@ -389,6 +400,7 @@ graph TD
     style F9 fill:#f96
     style T3 fill:#ff9
 ```
+
 > **认知功能**: 揭示多范式的隐性成本——范式冲突、认知超载、风格分裂。在项目层面制定编码规范，限制同一模块（Module）内混用的范式数量。多范式的收益取决于一致性约束的强度，而非范式的数量。 [来源: 💡 原创分析]
 > **边界分析**: 多范式≠多收益。缺乏统一原则时，范式冲突会成为技术债务。成功的 Rust 项目通过编码规范、架构分层、代码审查来约束范式选择。
 
@@ -410,6 +422,7 @@ graph TD
     style F12 fill:#9cf
     style T4 fill:#ff9
 ```
+
 > **认知功能**: 将"限制"重新框架为"保护"，展示类型系统对 bug 类别的消除作用。用"非法状态不可表示"原则驱动类型设计，将不变式编码进类型。Curry-Howard 同构证明类型即命题——类型系统的约束无损于表达力，只排除错误程序。 [来源: 💡 原创分析]
 > **边界分析**: 类型系统限制"可编译的程序集合"，但排除的是运行时会出错的子集。`unsafe` 作为逃逸舱，恰恰证明类型系统是"默认安全网"而非牢笼。
 > **过渡**: 反命题分析划定了 Rust 范式选择的有效边界。超越这些边界，需要回到更基础的形式化工具和语言演进趋势中寻找答案。
@@ -450,6 +463,7 @@ graph TD
 
     style Rust fill:#f96
 ```
+
 > **认知功能**: 从命令式、函数式、托管、逻辑四个传统谱系定位 Rust 的交叉影响来源。将 Rust 的设计视为多谱系的融合实验，理解其 borrow checker 的跨范式创新。Rust 不是单一传统的继承者，而是系统/函数式/证明辅助三条线索的交汇点。 [来源: 💡 原创分析]
 
 ### 8.2 扩展对比矩阵（6 语言）
@@ -497,6 +511,7 @@ graph TD
   C:   Frama-C, Infer
   └─⟹ "编译期保证"从类型系统扩展到模型检查，Rust 的 trait 系统为此提供理想载体
 ```
+
 > **来源**: [Swift Evolution SE-0377] · [Odin Docs] · [Kotlin/Native Memory Model] · [PLDI 2024 Trends]
 
 ### 9.2 扩展语言矩阵（Swift、Kotlin、Odin）
@@ -555,6 +570,7 @@ graph TD
     style SWIFT fill:#f9f
     style ZIG fill:#f9f
 ```
+
 > **认知功能**: 将 Rust 锚定在系统编程、应用编程、函数式、移动/嵌入式四个交叉谱系的中心。根据目标平台的生态（Apple/嵌入式/JVM/C 生态）选择 Rust 的互操作策略。Rust 正从"系统语言"向"通用安全基础设施"扩展，其影响力通过 FFI、WASM、`no_std` 向全栈渗透。 [来源: 💡 原创分析]
 > **Rust 的范式坐标**:
 >
@@ -618,6 +634,7 @@ func main() {
     arr.push(4);            // ✅ 合法
 }
 ```
+
 > **对比 Rust**：Vale 消除了显式生命周期（Lifetimes）语法，但牺牲了部分表达能力（如自引用结构、HRTB）。它的目标是在 "Rust 的安全性" 和 "Go 的简洁性" 之间找到平衡点。
 
 **Hylo 的可变性控制**：
@@ -631,6 +648,7 @@ public fun main() {
     print(x.count)          // 3
 }
 ```
+
 > **对比 Rust**：Hylo 将 Rust 的 `&mut T` 替换为**参数修饰符**（`inout`），并默认使用值语义（类似 Swift）。这降低了学习曲线，但在大型数据结构场景下可能产生更多拷贝。
 
 **Mojo 的所有权 + Python 超集**：
@@ -646,6 +664,7 @@ fn borrow_read(x: borrowed String):
 fn borrow_mut(x: inout String):
     x += "!"  # 可变借用
 ```
+
 > **对比 Rust**：Mojo 的最大优势是**与 Python 生态完全兼容**（可直接导入 numpy、pandas），但所有权系统较 Rust 简化（无生命周期参数），主要面向 AI/ML 场景。
 > **来源**: [Vale 语言文档] · [Hylo 语言文档] · [Mojo 文档] · [Swift 6 Concurrency] · [Carbon 设计文档]
 
@@ -674,6 +693,7 @@ fn process(data: Vec<String>) -> Vec<String> {
     result  // data 仍可用
 }
 ```
+
 > **洞察**：AI 辅助编程**不会消除**对 Rust 所有权系统的理解需求——因为 AI 生成的代码仍需通过编译器检查。但 AI 可以显著降低**语法记忆成本**（如 `?` 运算符、`match` 模式、生命周期标注），让开发者更专注于架构设计。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
@@ -756,6 +776,7 @@ fn fixed() {
     println!("{}", sum);
 }
 ```
+
 > **修正**: Rust 的所有权系统在命令式编程（可变变量）和函数式编程（纯函数组合）之间建立了严格边界。闭包（Closures）捕获环境变量时，若需要可变访问，则外部不能同时访问该变量。`fold` 将可变状态封装为累加器参数，避免了共享可变状态的问题。这体现了 Rust 的多范式融合——命令式的性能（无闭包分配）与函数式的安全（无数据竞争）通过所有权系统统一。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：面向对象与 trait 的封装差异（编译错误）
@@ -786,6 +807,7 @@ mod inner_fixed {
     }
 }
 ```
+
 > **修正**: Rust 没有 `class` 关键字，封装通过模块（Module）（`mod`）和可见性修饰符（`pub`）实现。结构体（Struct）字段默认私有，方法默认私有。这与 Java/C++ 的"类即封装边界"不同——Rust 的封装边界是模块，一个模块内的多个类型可互相访问私有字段。trait 只定义行为接口，不包含字段。这种设计鼓励"组合优于继承"，通过 trait 实现多态，通过模块实现封装。来源: [The Rust Programming Language]
 
 ### 10.3 边界测试：多范式代码的 trait bound 爆炸（编译错误）
@@ -809,6 +831,7 @@ where
 //     T: Serialize + Deserialize + Clone + Debug + Send + Sync + Default + PartialEq,
 // { }
 ```
+
 > **修正**: Rust 的多范式特性（OOP 的 trait、函数式的高阶函数、过程式的显式控制流）在组合时产生**trait bound 爆炸**：复杂函数需要大量 trait bound 约束参数。解决方案：1) 使用**超级 trait**（`trait MyTrait: Serialize + Clone + Debug {}`）封装常用组合；2) 使用 `where` 从句替代内联 bound，提高可读性；3) 使用关联类型减少泛型（Generics）参数。这与 C++ 的 `concept`（C++20，类似超级 trait，`requires` 约束可组合）或 Haskell 的 typeclass 层次（`class (Eq a, Show a) => Ord a`）类似——Rust 的超级 trait 和 `where` 从句提供了管理复杂约束的工具，但需要显式设计。这与 Go 的隐式接口（无 bound，无爆炸）或 Java 的泛型通配符（`<? extends T & U>` 有限）不同——Rust 的显式约束是类型安全的代价。来源: [The Rust Programming Language] · 来源: [Rust API Guidelines]
 
 ### 10.4 边界测试：函数式与命令式的内存布局冲突（逻辑错误）
@@ -835,6 +858,7 @@ fn main() {
     imperative_style(&mut v3);
 }
 ```
+
 > **修正**: 函数式风格（不可变数据、转换生成新值）与命令式风格（可变状态、原地修改）在 Rust 中都有支持，但**所有权模型强制选择**。函数式风格消耗输入（`into_iter` 移动 `Vec`），命令式风格借用输入（`&mut Vec`）。混合使用时的常见错误：先移动后尝试借用。设计权衡：1) 函数式更安全（无别名，无副作用），但可能分配更多内存；2) 命令式更高效（原地修改），但增加认知负担（追踪状态变化）。Rust 的类型系统帮助做出明确选择：函数式 API 接受值（消耗），命令式 API 接受可变引用（Mutable Reference）。这与 Haskell 的纯函数（默认不可变，通过 Monad 模拟状态）或 C 的命令式（默认可变，无函数式支持）不同——Rust 在中间位置，两种范式都可用，但类型系统区分其行为。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)] · [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
 
 ### 10.3 边界测试：命令式与函数式风格的类型系统冲突（编译错误）
@@ -850,6 +874,7 @@ fn main() {
     println!("{} {:?}", sum, doubled);
 }
 ```
+
 > **修正**: `Iterator::map` 要求闭包实现 `Fn`（不修改捕获状态），因为 `map` 可能多次调用闭包（惰性迭代）。`|x| { sum += x; x * 2 }` 修改 `sum`，是 `FnMut`，不能传递给 `map`。修复：1) `for` 循环（命令式风格，直接修改状态）；2) `fold`（函数式累加：`v.iter().fold(0, |acc, x| acc + x)`）；3) `map` 后 `for_each`（消费迭代器（Iterator）并执行副作用）。Rust 的类型系统强制区分纯函数（`Fn`）和副作用函数（`FnMut`），这在 Haskell（纯函数默认，副作用用 Monad）或 C（无区分）中不同。Rust 的设计折中：允许副作用，但要求显式标注（`mut` 闭包（Closures）、可变引用（Mutable Reference）），编译器跟踪变化。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Closure Traits](https://doc.rust-lang.org/reference/types/closure.html)]
 
 ### 10.4 边界测试：命令式 mutable state 与函数式纯度的混合（编译错误/设计冲突）
@@ -869,6 +894,7 @@ fn main() {
     let doubled: Vec<i32> = v.iter().map(|x| x * 2).collect();
 }
 ```
+
 > **修正**: Rust 支持**命令式**和**函数式**风格的混合，但编译器强制所有权规则：闭包（Closures）捕获 `&mut v` 后，`v` 被借用，不能同时在 `iter()` 中使用（`iter()` 也需要 `&v`）。设计选择：1) **命令式**：`for` 循环 + `mut` 变量，直接修改状态；2) **函数式**：迭代器（Iterator）适配器 + 不可变数据，生成新集合；3) **混合**：`fold` 累积状态（`v.iter().fold(0, |acc, x| acc + x)`）。Rust 不强制纯度（如 Haskell），但类型系统使副作用显式（`mut` 标记、IO 返回 `Result`）。这与 Haskell 的 `IO` Monad（强制显式标记副作用）或 C 的隐式全局状态修改（无任何检查）不同——Rust 在中间地带：允许副作用，但要求显式控制。来源: [The Rust Programming Language] · 来源: [Rust Design Patterns]
 
 ## 嵌入式测验（Embedded Quiz）

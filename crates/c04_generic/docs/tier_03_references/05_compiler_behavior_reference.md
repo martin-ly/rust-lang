@@ -105,6 +105,7 @@
 └── Fat Pointer
     └── VTable 结构
 ```
+
 ---
 
 ## 1. Monomorphization (单态化)
@@ -146,6 +147,7 @@ fn main() {
     print_f64(3.14);
 }
 ```
+
 ### 1.3 优势与代价
 
 **优势**:
@@ -178,6 +180,7 @@ process(Some(42));        // 生成 process_option_i32
 
 // 结果：二进制中有4个 process 函数的副本
 ```
+
 ### 1.5 查看单态化结果
 
 ```bash
@@ -188,6 +191,7 @@ cargo bloat --release
 # 查看生成的符号
 rustc --emit=asm example.rs
 ```
+
 ---
 
 ## 2. 静态分发 vs 动态分发
@@ -206,6 +210,7 @@ fn print_static<T: Display>(value: &T) {
 print_static(&42);      // 调用 print_static::<i32>
 print_static(&"hello"); // 调用 print_static::<&str>
 ```
+
 **优势**:
 
 - 零运行时开销
@@ -231,6 +236,7 @@ fn print_dynamic(value: &dyn Display) {
 print_dynamic(&42);      // 通过 vtable 调用
 print_dynamic(&"hello"); // 通过 vtable 调用
 ```
+
 **优势**:
 
 - 代码大小小
@@ -293,6 +299,7 @@ fn benchmark() {
 // Static: 0ms (完全优化掉)
 // Dynamic: ~100ms (虚函数调用开销)
 ```
+
 ---
 
 ## 3. Type Erasure (类型擦除)
@@ -334,6 +341,7 @@ fn any_animal(animal: &dyn Animal) {
     animal.make_sound();
 }
 ```
+
 ### 3.3 类型擦除的限制
 
 ```rust
@@ -348,6 +356,7 @@ trait Shape {
     fn clone_box(&self) -> Box<dyn Shape>;  // ✅ 返回 trait object
 }
 ```
+
 ---
 
 ## 4. Fat Pointer 结构
@@ -393,6 +402,7 @@ let animal: &dyn Animal = &dog;
 assert_eq!(std::mem::size_of::<&Dog>(), 8);       // 普通引用：8 字节
 assert_eq!(std::mem::size_of::<&dyn Animal>(), 16); // Fat pointer：16 字节
 ```
+
 ### 4.3 VTable 结构
 
 ```text
@@ -407,6 +417,7 @@ VTable for Dog: Animal
 │ make_sound Fn        │ ─→ Dog::make_sound 实现
 └──────────────────────┘
 ```
+
 ### 4.4 多个 Trait 的 Fat Pointer
 
 ```rust
@@ -428,6 +439,7 @@ let a: &dyn Animal = &dog;  // 16 字节 (data + vtable)
 trait AnimalPet: Animal + Pet {}
 let ap: &dyn AnimalPet = &dog;  // 16 字节
 ```
+
 ---
 
 ## 5. 编译器优化
@@ -453,6 +465,7 @@ where
     vec.into_iter().map(f).collect()
 }
 ```
+
 ### 5.2 常量折叠
 
 ```rust
@@ -464,6 +477,7 @@ fn create_array<const N: usize>() -> [i32; N] {
 // 编译时完全确定
 let arr = create_array::<5>();  // 直接生成 [0, 0, 0, 0, 0]
 ```
+
 ### 5.3 死代码消除
 
 ```rust
@@ -476,6 +490,7 @@ fn maybe_use<T>(use_it: bool, value: T) {
 
 maybe_use(false, expensive_computation());  // 可能完全优化掉
 ```
+
 ---
 
 ## 6. 性能特性
@@ -494,6 +509,7 @@ let sum: i32 = (0..100).sum();
 
 // 两者生成相同的机器码 - 零成本抽象
 ```
+
 ### 6.2 性能基准测试
 
 ```rust
@@ -514,6 +530,7 @@ fn criterion_benchmark(c: &mut Criterion) {
 criterion_group!(benches, criterion_benchmark);
 criterion_main!(benches);
 ```
+
 ### 6.3 性能对比表
 
 | 特性     | 静态分发   | 动态分发    | 开销   |
@@ -545,6 +562,7 @@ fn process_known(value: i32) {
     // ...
 }
 ```
+
 ### 7.2 何时使用动态分发
 
 ```rust
@@ -570,6 +588,7 @@ fn print(values: &[&dyn Display]) {
     }
 }
 ```
+
 ### 7.3 代码大小优化
 
 ```rust
@@ -596,6 +615,7 @@ fn process<T: AsRef<[u8]>>(value: T) {
     process_impl(value.as_ref());
 }
 ```
+
 ### 7.4 编译时间优化
 
 ```rust
@@ -615,6 +635,7 @@ fn level1<T: Display>(value: T) {
     // ...
 }
 ```
+
 ---
 
 ## 📚 相关参考

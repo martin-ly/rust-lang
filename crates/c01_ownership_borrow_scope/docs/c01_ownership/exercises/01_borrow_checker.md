@@ -10,6 +10,7 @@ fn main() {
     println!("{} {}", r1, r2);
 }
 ```
+
 **任务**: 修复上述代码，使其能够编译通过。
 
 <details>
@@ -26,6 +27,7 @@ fn main() {
     println!("{}", r2);
 }
 ```
+
 </details>
 
 ## 练习 2: 生命周期标注
@@ -39,6 +41,7 @@ fn longest(x: &str, y: &str) -> &str {
     }
 }
 ```
+
 **任务**: 为上述函数添加适当的生命周期标注。
 
 <details>
@@ -53,6 +56,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     }
 }
 ```
+
 </details>
 
 ## 练习 3: 智能指针选择

@@ -119,6 +119,7 @@
     ├── oneshot
     └── mpsc
 ```
+
 ---
 
 ## 1. 概述
@@ -154,6 +155,7 @@
 │                                                        │
 └────────────────────────────────────────────────────────┘
 ```
+
 ### 1.2 适用场景
 
 | 场景       | 推荐方案              | 原因               |
@@ -221,6 +223,7 @@ async fn main() {
     println!("Async model: {:?}", start.elapsed());
 }
 ```
+
 ### 2.2 内存对比
 
 ```rust
@@ -237,6 +240,7 @@ fn main() {
     println!("Async is ~10000x more memory efficient for I/O tasks");
 }
 ```
+
 ### 2.3 决策树
 
 ```text
@@ -255,6 +259,7 @@ fn main() {
        └─ 混合 ──► 异步 + spawn_blocking
             (Web 服务 + 图像处理)
 ```
+
 ---
 
 ## 3. spawn_blocking 桥接
@@ -286,6 +291,7 @@ async fn main() {
     println!("Result: {}", result);
 }
 ```
+
 ### 3.2 多个阻塞任务
 
 ```rust
@@ -314,6 +320,7 @@ async fn main() {
     }
 }
 ```
+
 ### 3.3 限制阻塞任务数量
 
 ```rust
@@ -350,6 +357,7 @@ async fn main() {
     });
 }
 ```
+
 ---
 
 ## 4. 混合架构设计
@@ -404,6 +412,7 @@ async fn main() {
     }
 }
 ```
+
 ### 4.2 数据库 + 计算
 
 ```rust
@@ -447,6 +456,7 @@ async fn main() {
     println!("Analysis: {:?}", analysis);
 }
 ```
+
 ---
 
 ## 5. Tokio 线程池
@@ -478,6 +488,7 @@ fn main() {
     });
 }
 ```
+
 ### 5.2 Handle 跨线程使用
 
 ```rust
@@ -499,6 +510,7 @@ fn main() {
     t.join().unwrap();
 }
 ```
+
 ### 5.3 嵌套运行时
 
 ```rust
@@ -524,6 +536,7 @@ async fn main() {
     .unwrap();
 }
 ```
+
 ---
 
 ## 6. 通道互操作
@@ -555,6 +568,7 @@ async fn main() {
     }
 }
 ```
+
 ### 6.2 mpsc channel
 
 ```rust
@@ -583,6 +597,7 @@ async fn main() {
     }
 }
 ```
+
 ### 6.3 watch channel
 
 ```rust
@@ -614,6 +629,7 @@ async fn main() {
     }
 }
 ```
+
 ---
 
 ## 7. 实战案例
@@ -670,6 +686,7 @@ async fn main() {
     }
 }
 ```
+
 ### 7.2 混合任务调度器
 
 ```rust
@@ -746,6 +763,7 @@ async fn main() {
     scheduler.stats();
 }
 ```
+
 ---
 
 ## 8. 性能优化
@@ -775,6 +793,7 @@ async fn main() {
     }).await.unwrap().unwrap();
 }
 ```
+
 ### 8.2 批量处理
 
 ```rust
@@ -814,6 +833,7 @@ async fn main() {
     }
 }
 ```
+
 ---
 
 ## 9. 最佳实践
@@ -833,6 +853,7 @@ async fn main() {
     // 更轻量
 }
 ```
+
 ### 9.2 错误处理
 
 ```rust
@@ -861,6 +882,7 @@ async fn main() {
     }
 }
 ```
+
 ### 9.3 取消任务
 
 ```rust
@@ -887,6 +909,7 @@ async fn main() {
     }
 }
 ```
+
 ---
 
 ## 10. 参考资源

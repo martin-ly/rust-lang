@@ -99,6 +99,7 @@ fn compare_iterators<T: PartialEq>(iter1: impl Iterator<Item = T> + TrustedLen,
     iter1.eq(iter2)
 }
 ```
+
 #### 2. Iterator::eq 和 Iterator::eq_by 特化
 
 ```rust
@@ -109,6 +110,7 @@ let vec2 = vec![1, 2, 3, 4, 5];
 // 使用特化的 eq 方法（比手动循环快）
 let are_equal = vec1.iter().eq(vec2.iter());
 ```
+
 ### 实际应用场景
 
 #### 高性能迭代器比较
@@ -128,6 +130,7 @@ where
     a.iter().eq(b.iter())
 }
 ```
+
 ---
 
 ## 改进的错误处理
@@ -154,6 +157,7 @@ pub fn rust_192_must_use_result() -> Result<(), std::convert::Infallible> {
 // 使用 Infallible 作为 Never 类型的稳定替代
 let _ = rust_192_must_use_result(); // ✅ 不再警告
 ```
+
 #### 2. Never 类型 Lint 严格化
 
 ```rust
@@ -171,6 +175,7 @@ pub fn rust_192_never_type_example() {
     }
 }
 ```
+
 ### 实际应用
 
 ```rust
@@ -187,6 +192,7 @@ fn main() {
     let _ = process_result(); // ✅ 不再警告
 }
 ```
+
 ---
 
 ## 调用位置追踪增强
@@ -218,6 +224,7 @@ pub extern "Rust" fn rust_192_tracked_function(value: i32) -> i32 {
     value * 2
 }
 ```
+
 #### 2. Location::file_as_c_str
 
 ```rust
@@ -229,6 +236,7 @@ pub fn rust_192_location_file_as_c_str_example() {
     println!("File: {}", file_c_str);
 }
 ```
+
 ### 实际应用
 
 ```rust
@@ -239,6 +247,7 @@ fn debug_function(value: i32) {
     println!("Debug: {} at {}:{}", value, location.file(), location.line());
 }
 ```
+
 ---
 
 ## 切片操作增强
@@ -262,6 +271,7 @@ pub fn rust_192_rotate_right_example() {
     println!("Rotated right by 2: {:?}", vec); // [4, 5, 1, 2, 3]
 }
 ```
+
 ### 实际应用
 
 ```rust
@@ -270,6 +280,7 @@ fn rotate_buffer<T>(buffer: &mut [T], offset: usize) {
     buffer.rotate_right(offset);
 }
 ```
+
 ---
 
 ## iter::Repeat 改进
@@ -298,6 +309,7 @@ pub fn rust_192_repeat_example() {
     println!("Limited repeat: {:?}", limited);
 }
 ```
+
 ### 实际应用
 
 ```rust
@@ -310,6 +322,7 @@ fn safe_repeat_usage() {
     let values: Vec<i32> = repeat.take(10).collect();
 }
 ```
+
 ---
 
 ## 实际应用示例
@@ -330,6 +343,7 @@ fn main() {
     println!("Vectors are equal: {}", compare_vectors(&vec1, &vec2));
 }
 ```
+
 ### 示例 2: 使用改进的错误处理
 
 ```rust
@@ -346,6 +360,7 @@ fn main() {
     let _ = always_succeeds();
 }
 ```
+
 ### 示例 3: 使用调用位置追踪
 
 ```rust
@@ -360,6 +375,7 @@ fn main() {
     log_error("Something went wrong");
 }
 ```
+
 ---
 
 ## 迁移指南
@@ -373,6 +389,7 @@ fn main() {
 [package]
 rust-version = "1.92"
 ```
+
 #### 2. 利用新特性
 
 - 使用 `Iterator::eq` 替代手动循环比较

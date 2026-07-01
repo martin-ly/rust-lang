@@ -171,6 +171,7 @@ fn sync_function() -> Result<String, Box<dyn std::error::Error>> {
     tokio::runtime::Runtime::new()?.block_on(async_operation())
 }
 ```
+
 ### 同步到异步转换
 
 ```rust
@@ -185,6 +186,7 @@ async fn async_function() -> Result<String, Box<dyn std::error::Error>> {
     task::spawn_blocking(sync_operation).await?
 }
 ```
+
 ## 最佳实践
 
 ### 1. 运行时选择原则
@@ -228,6 +230,7 @@ async fn async_function() -> Result<String, Box<dyn std::error::Error>> {
 ```bash
 cargo run --example comprehensive_async_ecosystem_demo
 ```
+
 ### 2. 单独测试各个模块
 
 ```bash
@@ -240,6 +243,7 @@ cargo test --lib async_runtime_examples
 # 测试集成框架
 cargo test --lib async_integration_framework
 ```
+
 ## 总结
 
 Rust异步生态系统提供了多个成熟的运行时选择，每个都有其独特的优势和适用场景：

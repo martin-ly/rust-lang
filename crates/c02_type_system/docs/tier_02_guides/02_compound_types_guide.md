@@ -183,6 +183,7 @@
 └── 方法
     └── 结构体方法
 ```
+
 ---
 
 ## 📊 章节概览
@@ -234,6 +235,7 @@ Rust 复合类型
     ├── Option<T>
     └── Result<T, E>
 ```
+
 ---
 
 ## 2. 结构体 (Struct)
@@ -267,6 +269,7 @@ fn main() {
     println!("Username: {}", user1.username);
 }
 ```
+
 #### 可变性
 
 ```rust
@@ -291,6 +294,7 @@ struct User {
     sign_in_count: u64,
 }
 ```
+
 #### 字段初始化简写
 
 ```rust
@@ -320,6 +324,7 @@ fn main() {
     println!("User: {}", user1.username);
 }
 ```
+
 #### 结构体更新语法
 
 ```rust
@@ -349,6 +354,7 @@ fn main() {
     println!("User2: {}", user2.username);
 }
 ```
+
 ### 2.2 元组结构体
 
 #### 基本用法
@@ -370,6 +376,7 @@ fn main() {
     // let color: Color = origin; // 编译错误！
 }
 ```
+
 #### 实际应用
 
 ```rust
@@ -388,6 +395,7 @@ fn main() {
     println!("Speed: {} m/s", speed);
 }
 ```
+
 ### 2.3 单元结构体
 
 #### 基本概念
@@ -404,6 +412,7 @@ fn main() {
     println!("Size of AlwaysEqual: {} bytes", mem::size_of::<AlwaysEqual>());
 }
 ```
+
 #### 实际应用2
 
 ```rust
@@ -425,6 +434,7 @@ fn main() {
     logger.log("Application started");
 }
 ```
+
 ### 2.4 结构体方法
 
 #### 定义方法
@@ -486,6 +496,7 @@ fn main() {
     println!("Scaled: {:?}", rect3);
 }
 ```
+
 ### 2.5 关联函数
 
 #### 定义关联函数
@@ -520,6 +531,7 @@ fn main() {
     println!("Square: {:?}", rect2);
 }
 ```
+
 ### 2.6 结构体的可见性
 
 ```rust
@@ -558,6 +570,7 @@ fn main() {
     println!("Area: {}", circle.area());
 }
 ```
+
 ---
 
 ## 3. 枚举 (Enum)
@@ -592,6 +605,7 @@ fn route(ip_kind: IpAddrKind) {
     }
 }
 ```
+
 ### 3.2 带数据的枚举
 
 #### 基本形式
@@ -622,6 +636,7 @@ fn print_ip(ip: IpAddr) {
     }
 }
 ```
+
 #### 复杂枚举
 
 ```rust
@@ -661,6 +676,7 @@ fn process_message(msg: Message) {
     }
 }
 ```
+
 ### 3.3 Option 枚举
 
 #### 基本概念3
@@ -701,6 +717,7 @@ fn main() {
     println!("Value or default: {}", value);
 }
 ```
+
 #### Option 常用方法
 
 ```rust
@@ -725,6 +742,7 @@ fn main() {
     println!("Filtered: {:?}", c); // Some(5)
 }
 ```
+
 ### 3.4 Result 枚举
 
 #### 基本概念34
@@ -768,6 +786,7 @@ fn main() {
     println!("Result or default: {}", result);
 }
 ```
+
 #### Result 常用方法
 
 ```rust
@@ -801,6 +820,7 @@ fn main() {
     println!("Double: {:?}", double_number("42"));
 }
 ```
+
 ### 3.5 枚举方法
 
 ```rust
@@ -834,6 +854,7 @@ fn main() {
     println!("Is quit: {}", msg.is_quit());
 }
 ```
+
 ### 3.6 枚举的内存表示
 
 ```rust
@@ -858,6 +879,7 @@ fn main() {
     println!("Size of Box<i32>: {} bytes", mem::size_of::<Box<i32>>());
 }
 ```
+
 ---
 
 ## 4. 模式匹配
@@ -890,6 +912,7 @@ fn main() {
     println!("Value: {} cents", value_in_cents(coin));
 }
 ```
+
 #### 绑定值
 
 ```rust
@@ -924,6 +947,7 @@ fn main() {
     println!("Value: {} cents", value_in_cents(coin));
 }
 ```
+
 #### 匹配 Option
 
 ```rust
@@ -943,6 +967,7 @@ fn main() {
     println!("None: {:?}", none);
 }
 ```
+
 #### 通配模式
 
 ```rust
@@ -963,6 +988,7 @@ fn main() {
     }
 }
 ```
+
 ### 4.2 if let 表达式
 
 ```rust
@@ -989,6 +1015,7 @@ fn main() {
     }
 }
 ```
+
 ### 4.3 while let 循环
 
 ```rust
@@ -1005,6 +1032,7 @@ fn main() {
     }
 }
 ```
+
 ### 4.4 解构模式
 
 #### 解构结构体
@@ -1038,6 +1066,7 @@ fn main() {
     }
 }
 ```
+
 #### 解构枚举
 
 ```rust
@@ -1067,6 +1096,7 @@ fn main() {
     }
 }
 ```
+
 ### 4.5 匹配守卫
 
 ```rust
@@ -1089,6 +1119,7 @@ fn main() {
     }
 }
 ```
+
 ### 4.6 @ 绑定
 
 ```rust
@@ -1110,6 +1141,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 5. 结构体与枚举的对比
@@ -1189,6 +1221,7 @@ fn main() {
     }
 }
 ```
+
 ### 案例 2: 用户系统
 
 ```rust
@@ -1258,6 +1291,7 @@ fn main() {
     println!("Can post: {}", user.can_post());
 }
 ```
+
 ### 案例 3: 状态机
 
 ```rust
@@ -1324,6 +1358,7 @@ fn main() {
     println!("Status: {}", conn.get_status());
 }
 ```
+
 ### 案例 4: 错误处理
 
 ```rust
@@ -1387,6 +1422,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 7. 常见陷阱与最佳实践
@@ -1466,6 +1502,7 @@ fn main() {
     println!("BetterEnum size: {}", mem::size_of::<BetterEnum>());
 }
 ```
+
 ### 7.2 最佳实践
 
 ```rust
@@ -1543,6 +1580,7 @@ fn main() {
     println!("Status: {}", status);
 }
 ```
+
 ---
 
 ## 8. 性能考虑
@@ -1577,6 +1615,7 @@ fn main() {
     println!("Size of Box<Point>: {} bytes", mem::size_of::<Box<Point>>());
 }
 ```
+
 ### 8.2 性能优化
 
 ```rust
@@ -1608,6 +1647,7 @@ fn main() {
     println!("SmallEnum: {} bytes", mem::size_of::<SmallEnum>());
 }
 ```
+
 ### 8.4 综合实战案例：高性能配置管理系统
 
 **案例：类型安全的配置系统**:
@@ -1693,6 +1733,7 @@ fn main() {
     }
 }
 ```
+
 **性能优势**:
 
 - ✅ 零开销抽象：枚举的内存布局高效
@@ -1874,6 +1915,7 @@ fn json_example() {
     }
 }
 ```
+
 ---
 
 ### 案例 6: 状态机（游戏角色）
@@ -2023,6 +2065,7 @@ fn character_example() {
     println!("Final position: {:?}", hero.position);
 }
 ```
+
 ---
 
 ### 案例 7: 类型安全的单位系统
@@ -2124,6 +2167,7 @@ fn physics_example() {
     // let wrong = speed * distance;
 }
 ```
+
 ---
 
 ### 案例 8: 构建器模式（高级）
@@ -2298,6 +2342,7 @@ fn builder_example() -> Result<(), BuilderError> {
     Ok(())
 }
 ```
+
 ---
 
 ## 📊 性能优化进阶
@@ -2355,6 +2400,7 @@ fn layout_example() {
     // PackedLayout size: 10 bytes (但访问速度可能变慢)
 }
 ```
+
 ---
 
 ### 枚举判别式优化
@@ -2402,6 +2448,7 @@ fn discriminant_example() {
     println!("Error code: {}", code.as_u16());
 }
 ```
+
 ---
 
 ## 🔥 高级模式匹配技巧
@@ -2427,6 +2474,7 @@ fn process_media(msg: Message) {
     }
 }
 ```
+
 ---
 
 ### 范围模式
@@ -2450,6 +2498,7 @@ fn classify_char(c: char) -> &'static str {
     }
 }
 ```
+
 ---
 
 ### 嵌套匹配与解构
@@ -2483,6 +2532,7 @@ fn handle_response(response: Response) {
     }
 }
 ```
+
 ---
 
 ## 🎯 实战练习题
@@ -2556,6 +2606,7 @@ fn parser_example() {
     println!("Output: {:?}", parser.get_option("output"));
 }
 ```
+
 ---
 
 **更新日期**: 2025-10-24

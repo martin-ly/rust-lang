@@ -88,6 +88,7 @@ gen block 的泛化:
   // 返回 impl Iterator<Item = i32>
   // 内部: 状态机，在 yield 点挂起，返回下一个值
 ```
+
 > **核心洞察**: `async` 和 `gen` 共享相同的底层机制——**编译器生成的状态机**。区别仅在于:
 >
 > - `async`: 挂起时等待外部事件（Future 完成）
@@ -120,6 +121,7 @@ graph TD
     async --> 统一
     gen --> 统一
 ```
+
 > **认知功能**: 此图展示 `async` 和 `gen` 的**统一底层机制**——两者都是编译器状态机，区别仅在恢复触发条件和返回类型。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 需要惰性序列（大集合、无限流）时使用 gen；需要异步等待时使用 async；两者结合时使用 async gen。
@@ -151,6 +153,7 @@ graph TD
     };
     // 优势：任意控制流（循环、条件、递归），语法直观
 ```
+
 > **生态影响**: `gen` 块不会替代手动 `Iterator` 实现（性能关键场景仍需手动控制），但为**复杂迭代逻辑**提供了一种更直观的表达方式。
 > [来源: [Rust [RFC 3513](https://rust-lang.github.io/rfcs//3513-gen-blocks.html) — Motivation](https://github.com/rust-lang/rfcs/pull/3513)]
 
@@ -189,6 +192,7 @@ impl Iterator for FibGen {
     }
 }
 ```
+
 > **技术要点**: 生成器状态机与异步状态机共享编译器内部实现（`Generator` trait）。`yield` 点对应状态机的状态转换，与 `.await` 点的机制相同。
 > [来源: [Rust Compiler Dev Guide — Generators](https://rustc-dev-guide.rust-lang.org/)]
 
@@ -214,6 +218,7 @@ graph LR
         K["async gen { yield x; }"] -->|"返回"| L["impl Stream"]
     end
 ```
+
 > **认知功能**: 此图展示 gen block 与 Stream 的**对称关系**——`gen` 对应 `Iterator`，`async gen` 对应 `Stream`。
 > **使用建议**: 同步数据流使用 `gen`；异步数据流（如网络请求序列）使用 `async gen`。
 > **关键洞察**: `async gen` 解决了当前 Rust 中**异步迭代**的语法缺失——目前需要使用 `futures::stream::unfold` 或手动实现 `Stream` trait，语法繁琐。
@@ -278,6 +283,7 @@ graph LR
   for await item in async_gen { ... }
   // 类似 async for 语法，异步消费 Stream
 ```
+
 > **最佳实践**: `gen` 适用于**无法或不宜使用现有组合子**的复杂迭代逻辑；简单场景继续使用 `.map`/`.filter` 等组合子以获得更好的性能和可读性。
 > [来源: [Rust [RFC 3513](https://rust-lang.github.io/rfcs//3513-gen-blocks.html) — Examples](https://github.com/rust-lang/rfcs/pull/3513)]
 
@@ -302,6 +308,7 @@ graph TD
     style ALT1 fill:#fff3e0
     style ALT2 fill:#fff3e0
 ```
+
 > **认知功能**: 此决策树帮助判断是否使用 gen block。核心判断标准是**现有组合子是否足够**和**控制流复杂度**。
 > **使用建议**: 简单变换用组合子；复杂控制流用 gen；极端性能场景手动实现 Iterator。
 > **关键洞察**: gen block 的**性能开销**来自状态机转换和 Resume 参数传递。对于高频调用（如内层循环），手动 Iterator 可能快 10-30%。
@@ -333,6 +340,7 @@ graph TD
 ├── 但 async gen 返回 impl Stream，需要生态适配
 └── tokio/futures 等运行时需添加 async gen 支持
 ```
+
 > **边界要点**: gen block 的边界与 async fn 高度相似——两者共享状态机实现，因此面临相同的借用（Borrowing）检查、Pin 和清理挑战。
 > [来源: [Rust [RFC 3513](https://rust-lang.github.io/rfcs//3513-gen-blocks.html) — Drawbacks](https://github.com/rust-lang/rfcs/pull/3513)]
 
@@ -413,6 +421,7 @@ fn numbers() -> impl Iterator<Item = i32> {
     }
 }
 ```
+
 > **修正**:
 > `gen` 块（[RFC 3513](https://rust-lang.github.io/rfcs//3513-gen-blocks.html)，实验性）是 Rust 的生成器语法糖，编译器将 `yield` 表达式转换为状态机，自动生成 `Iterator` 实现。
 > `gen` 块的返回类型隐式为 `impl Iterator<Item = T>`，其中 `T` 是所有 `yield` 表达式的统一类型。
@@ -434,6 +443,7 @@ fn borrow_iter(data: &mut Vec<i32>) -> impl Iterator<Item = &i32> {
     }
 }
 ```
+
 > **修正**:
 > `gen` 块转换为状态机后，其 `next` 方法返回的引用（Reference）的生命周期（Lifetimes）与状态机本身绑定。
 > 若 `gen` 块借用了外部变量（如 `data: &mut Vec<i32>`），返回的引用（Reference）必须不超越 `data` 的生命周期。
@@ -454,6 +464,7 @@ fn self_referential_gen() -> impl Iterator<Item = &str> {
     }
 }
 ```
+
 > **修正**:
 > `gen` 块（实验性）编译为状态机，与 `async` 块类似。
 > 若 `gen` 块包含自引用（如 `yield &s` 中 `s` 是局部变量），生成的迭代器需要 `Pin` 保证不移动。
@@ -481,6 +492,7 @@ fn early_return() -> impl Iterator<Item = i32> {
     }
 }
 ```
+
 > **修正**:
 >
 > `gen` 块中的控制流（`return`、`break`、`continue`）语义是设计中的难点：

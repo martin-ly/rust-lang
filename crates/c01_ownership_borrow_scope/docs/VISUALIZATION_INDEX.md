@@ -105,6 +105,7 @@ graph TB
     style Doc3 fill:#fff5e1
     style Doc4 fill:#f5e1ff
 ```
+
 ## 📖 文档详细介绍
 
 ### 1. 知识图谱 (Knowledge Graph)
@@ -416,6 +417,7 @@ npm install -g @mermaid-js/mermaid-cli
 # 生成 SVG/PNG
 mmdc -i KNOWLEDGE_GRAPH.md -o output.svg
 ```
+
 #### 导出为图片
 
 ```bash
@@ -425,6 +427,7 @@ mmdc -i MULTIDIMENSIONAL_MATRIX.md -o matrix.png
 mmdc -i MIND_MAP.md -o mindmap.png
 mmdc -i CONCEPT_RELATIONSHIP_NETWORK.md -o network.png
 ```
+
 ## 🔗 与核心文档的关联
 
 ### 理论基础文档

@@ -62,6 +62,7 @@ macro_rules! vec_of_strings {
 
 let names = vec_of_strings!["Alice", "Bob", "Charlie"];
 ```
+
 ### 2. 过程宏 (Procedural Macros)
 
 - **Derive 宏**: 自动实现 trait
@@ -78,6 +79,7 @@ struct MyStruct;
 
 // 自动实现 HelloMacro trait
 ```
+
 **属性宏示例**:
 
 ```rust
@@ -86,11 +88,13 @@ fn index() -> String {
     "Hello, world!".to_string()
 }
 ```
+
 **函数式宏示例**:
 
 ```rust
 let sql = sql!(SELECT * FROM users WHERE id = 1);
 ```
+
 ### 3. 宏卫生性 (Hygiene)
 
 - **标识符卫生**: 宏内外标识符不冲突
@@ -112,6 +116,7 @@ macro_rules! using_a {
 let a = 13;
 let result = using_a!(a + a); // result = 26，使用外部的 a
 ```
+
 ### 4. 元编程 (Metaprogramming)
 
 - **代码生成**: 编译时生成代码
@@ -128,6 +133,7 @@ html! {
     </div>
 }
 ```
+
 ---
 
 ## 📚 学习路径
@@ -227,6 +233,7 @@ Tier 4: 高级层
 ├── 04_macro_debugging_in_depth.md
 └── 05_production_grade_macro_development.md
 ```
+
 ---
 
 ## 🔗 快速导航

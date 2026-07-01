@@ -85,6 +85,7 @@ Sea-ORM 适用场景:
 ├── ✅ 快速原型开发
 └── ❌ 极致性能要求的场景 (考虑 SQLx/Diesel)
 ```
+
 ---
 
 ## 🏗️ 架构设计
@@ -113,6 +114,7 @@ pub enum Relation {
     Comments,
 }
 ```
+
 ### 与 Diesel/SQLx 对比
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -145,6 +147,7 @@ sea-orm = { version = "1.0", features = [
 ] }
 tokio = { version = "1", features = ["full"] }
 ```
+
 ### CLI 工具
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -158,6 +161,7 @@ sea-orm-cli generate entity \
     -u postgres://user:pass@localhost/db \
     -o src/entities
 ```
+
 ---
 
 ## 📐 实体定义
@@ -192,6 +196,7 @@ pub enum Relation {}
 
 impl ActiveModelBehavior for ActiveModel {}
 ```
+
 ### 关系定义
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -244,6 +249,7 @@ impl Related<super::user::Entity> for Entity {
     }
 }
 ```
+
 ### 复合主键
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -259,6 +265,7 @@ pub struct Model {
     pub quantity: i32,
 }
 ```
+
 ---
 
 ## 💾 CRUD 操作
@@ -298,6 +305,7 @@ user::Entity::insert_many(users)
     .exec(&db)
     .await?;
 ```
+
 ### Read
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -329,6 +337,7 @@ let paginator = user::Entity::find()
 let users = paginator.fetch_page(0).await?;  // 第1页
 let num_pages = paginator.num_pages().await?;
 ```
+
 ### Update
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -353,6 +362,7 @@ user::Entity::update_many()
     .exec(&db)
     .await?;
 ```
+
 ### Delete
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -374,6 +384,7 @@ user::Entity::delete_many()
     .exec(&db)
     .await?;
 ```
+
 ---
 
 ## 🔗 关联查询
@@ -407,6 +418,7 @@ let result: Vec<(user::Model, Vec<(post::Model, Vec<comment::Model>)>)> =
         .all(&db)
         .await?;
 ```
+
 ### Lazy Loading
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -423,6 +435,7 @@ let posts: Vec<post::Model> = user.find_related(post::Entity)
     .all(&db)
     .await?;
 ```
+
 ---
 
 ## ⚡ 性能优化
@@ -447,6 +460,7 @@ opt.max_connections(100)
 
 let db = Database::connect(opt).await?;
 ```
+
 ### 查询优化
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -478,6 +492,7 @@ let results = db.query_all(
     )
 ).await?;
 ```
+
 ---
 
 ## 🧪 测试策略
@@ -512,6 +527,7 @@ mod tests {
     }
 }
 ```
+
 ---
 
 ## 🔗 参考资源

@@ -66,6 +66,7 @@
 规则 2: 同一时间只能有一个所有者
 规则 3: 所有者离开作用域时，值被自动释放
 ```
+
 **为什么需要**:
 
 - ✅ **无需垃圾回收器**: 编译时确定内存释放时机
@@ -83,6 +84,7 @@ fn main() {
     println!("{}", s2);               // ✅ s2 有效
 }  // s2 离开作用域，字符串被自动释放
 ```
+
 **关键理解**:
 
 - 所有权系统是 Rust 与其他语言的最大区别
@@ -124,6 +126,7 @@ let s2 = s1;  // s1 的所有权转移给 s2
 // println!("{}", s1);  // ❌ 错误：s1 已失效
 println!("{}", s2);      // ✅ s2 有效
 ```
+
 **如何选择**:
 
 | 需求             | 方案  | 示例             |
@@ -155,6 +158,7 @@ let x = value;
 let y = x;
 println!("{:?}", x);  // 如果能编译，说明是 Copy 类型
 ```
+
 **自定义 Copy 类型**:
 
 ```rust
@@ -168,6 +172,7 @@ let p1 = Point { x: 1, y: 2 };
 let p2 = p1;  // 复制
 println!("{} {}", p1.x, p2.x);  // ✅ 都有效
 ```
+
 **深入学习**: [所有权基础](../tier_02_guides/01_ownership_quick_start.md)
 
 ---
@@ -187,6 +192,7 @@ println!("{} {}", p1.x, p2.x);  // ✅ 都有效
 
 ✅ 引用必须总是有效的（不能悬垂）
 ```
+
 **示例解析**:
 
 ```rust
@@ -206,6 +212,7 @@ let r1 = &s;
 let r2 = &mut s;  // 错误：r1 仍在使用
 println!("{}", r1);
 ```
+
 **为什么有这些规则**:
 
 | 规则                           | 防止的问题 |
@@ -233,6 +240,7 @@ v.push(4);  // ❌ 如果允许，会发生什么？
 
 println!("{}", first);  // 危险：可能访问无效内存
 ```
+
 **Rust 的防护**:
 
 ```rust
@@ -243,6 +251,7 @@ let first = &v[0];
 
 println!("{}", first);
 ```
+
 **正确做法**:
 
 ```rust
@@ -255,6 +264,7 @@ let mut v = vec![1, 2, 3];
 
 v.push(4);  // ✅ 现在可以修改了
 ```
+
 **深入学习**: [借用检查器](../tier_02_guides/02_borrowing_practice_guide.md)
 
 ---
@@ -288,6 +298,7 @@ fn first_word(s: &str) -> &str {
     &s[..1]
 }
 ```
+
 **结构体中的生命周期**:
 
 ```rust
@@ -303,6 +314,7 @@ fn main() {
     // excerpt 的生命周期不能超过 novel
 }
 ```
+
 **深入学习**: [生命周期](../tier_02_guides/03_lifetimes_practice.md)
 
 ---
@@ -323,6 +335,7 @@ const MAX_SIZE: usize = 100;
 // 全局静态变量
 static GLOBAL_VAR: i32 = 42;
 ```
+
 **注意事项**:
 
 ```rust
@@ -338,6 +351,7 @@ fn leak_example() -> &'static str {
     Box::leak(Box::new(String::from("hello")))
 }
 ```
+
 **关键点**:
 
 - 大多数情况下不需要 `'static`
@@ -361,6 +375,7 @@ let s1 = String::from("hello");
 let s2 = s1;         // s1 被移动
 println!("{}", s1);  // ❌ 错误：s1 已失效
 ```
+
 **解决方案**:
 
 **方案 1: 使用引用（借用）**:
@@ -370,6 +385,7 @@ let s1 = String::from("hello");
 let s2 = &s1;  // 借用而非移动
 println!("{} {}", s1, s2);  // ✅ 都有效
 ```
+
 **方案 2: 克隆**:
 
 ```rust
@@ -377,6 +393,7 @@ let s1 = String::from("hello");
 let s2 = s1.clone();  // 深拷贝
 println!("{} {}", s1, s2);  // ✅ 都有效
 ```
+
 **方案 3: 重新设计**:
 
 ```rust
@@ -388,6 +405,7 @@ let s1 = String::from("hello");
 use_string(&s1);  // 传递引用
 println!("{}", s1);  // ✅ s1 仍有效
 ```
+
 ---
 
 ### Q9: "cannot borrow as mutable" 怎么解决？
@@ -405,6 +423,7 @@ s.push_str(" world");  // 错误
 let mut s = String::from("hello");
 s.push_str(" world");
 ```
+
 **原因 2: 已有不可变借用**:
 
 ```rust
@@ -420,6 +439,7 @@ let r = &s;
 println!("{}", r);  // r 最后一次使用
 s.push_str(" world");  // ✅ 现在可以了
 ```
+
 **原因 3: 多个可变借用**:
 
 ```rust
@@ -439,6 +459,7 @@ let mut s = String::from("hello");
 let r2 = &mut s;  // ✅ 现在可以了
 r2.push_str("!");
 ```
+
 ---
 
 ### Q10: "lifetime may not live long enough" 怎么理解？
@@ -454,6 +475,7 @@ fn dangle() -> &String {
     &s  // 错误：s 将被释放，引用会悬垂
 }
 ```
+
 **解决方案**:
 
 **方案 1: 返回所有权**:
@@ -464,6 +486,7 @@ fn no_dangle() -> String {
     s  // 转移所有权
 }
 ```
+
 **方案 2: 接受引用参数并返回引用**:
 
 ```rust
@@ -471,6 +494,7 @@ fn first_char(s: &str) -> &str {
     &s[..1]  // ✅ 返回值的生命周期与参数相同
 }
 ```
+
 **方案 3: 使用 'static**:
 
 ```rust
@@ -478,6 +502,7 @@ fn get_static() -> &'static str {
     "hello"  // 字符串字面量是 'static
 }
 ```
+
 ---
 
 ## 实践问题
@@ -507,6 +532,7 @@ println!("{:?}", data);   // ✅
 println!("{:?}", data2);  // ✅
 println!("{:?}", data3);  // ✅
 ```
+
 **多线程示例**:
 
 ```rust
@@ -532,6 +558,7 @@ for handle in handles {
 
 println!("Result: {}", *counter.lock().unwrap());
 ```
+
 **深入学习**: [智能指针系统](../tier_02_guides/05_smart_pointers_practice.md)
 
 ---
@@ -555,6 +582,7 @@ let data = RefCell::new(5);
 
 println!("{}", data.borrow());  // 6
 ```
+
 **多线程: Mutex**:
 
 ```rust
@@ -570,6 +598,7 @@ let data = Mutex::new(5);
 
 println!("{}", *data.lock().unwrap());  // 6
 ```
+
 **注意事项**:
 
 - ⚠️ 运行时检查有性能开销
@@ -601,6 +630,7 @@ fn process(data: &[i32]) {
     // ...
 }
 ```
+
 **策略 2: 使用 Cow (Clone-on-Write)**:
 
 ```rust
@@ -618,6 +648,7 @@ fn process(data: Cow<str>) -> Cow<str> {
     }
 }
 ```
+
 **策略 3: 使用 Arc 共享所有权**:
 
 ```rust
@@ -629,6 +660,7 @@ let large_data = Arc::new(vec![0; 1000000]);
 let data1 = Arc::clone(&large_data);  // 只增加引用计数
 let data2 = Arc::clone(&large_data);  // 不复制数据
 ```
+
 **深入学习**: [性能优化](../tier_03_references/09_performance_optimization_reference.md)
 
 ---
@@ -648,6 +680,7 @@ let v2 = v1;              // Move：只转移所有权，不复制数据
 // 2. 标记 v1 失效
 // 3. 堆上的数据不动
 ```
+
 **对比**:
 
 | 操作  | 开销   | 说明               |

@@ -87,6 +87,7 @@ fn function_name(param: i32) -> i32 {
     param * 2
 }
 ````
+
 ### 3. 理论论证准则
 
 **要求**：
@@ -126,6 +127,7 @@ fn function_name(param: i32) -> i32 {
 
 [优点、缺点、适用场景]
 ```
+
 ### 4. 术语使用规范
 
 **中英文对照**：
@@ -144,6 +146,7 @@ fn function_name(param: i32) -> i32 {
 Ownership 是 Rust 的核心特性。所有权系统确保...
 （前后术语不统一）
 ```
+
 **常用术语对照表**：
 
 | 英文             | 中文     | 说明 |
@@ -217,6 +220,7 @@ _最后更新：YYYY年MM月_
 _文档版本：vX.Y_
 _Rust 版本：1.XX+_
 ```
+
 ### 变更记录
 
 在文档底部维护变更历史：
@@ -234,6 +238,7 @@ _Rust 版本：1.XX+_
 
 - 初始版本发布
 ```
+
 ---
 
 **本标准解释权归 c03_control_fn 文档维护团队所有**-
@@ -243,6 +248,7 @@ _Rust 版本：1.XX+_
 _标准版本：v1.0_
 _发布日期：2025年1月_
 _适用范围：所有 c03_control_fn 模块文档_
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

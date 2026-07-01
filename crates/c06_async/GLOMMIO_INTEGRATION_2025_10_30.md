@@ -26,6 +26,7 @@
 [target.'cfg(target_os = "linux")'.dependencies]
 glommio = "0.9.0"
 ```
+
 - ✅ 添加了 Glommio 0.9.0 最新版本
 - ✅ 使用条件依赖，仅在 Linux 上编译
 - ✅ 避免了跨平台兼容性问题
@@ -55,6 +56,7 @@ glommio = "0.9.0"
 #[cfg(target_os = "linux")]
 pub mod glommio;
 ```
+
 ### 3. 综合示例 ✅
 
 **文件**: `examples/glommio_comprehensive_2025.rs` (435 行)
@@ -96,6 +98,7 @@ pub mod glommio;
 cargo run --example glommio_comprehensive_2025
 # 注意：仅支持 Linux 5.1+ (需要 io_uring)
 ```
+
 ### 4. 最佳实践文档 ✅
 
 **文件**: `docs/tier_02_guides/09_glommio_best_practices_2025.md` (810 行)
@@ -229,6 +232,7 @@ cargo run --example glommio_comprehensive_2025
    ```markdown
    - **Glommio**: 基于 io_uring 的极致性能运行时 (Linux 专用) ⭐ **NEW!**
    ```
+
 2. **示例运行部分** (新增):
 
    ```markdown
@@ -239,12 +243,14 @@ cargo run --example glommio_comprehensive_2025
      - 吞吐量 >2M req/s
      - 适用于高频交易、数据库引擎等
    ```
+
 3. **文档部分** (新增):
 
    ```markdown
    - **[Glommio 运行时对比分析 2025]** ⭐⭐⭐ **NEW! 2025-10-30**
    - **[Glommio 最佳实践指南 2025]** ⭐⭐⭐ **NEW! 2025-10-30**
    ```
+
 ### 8. 性能基准测试 ✅
 
 **文件**: `benches/glommio_benchmarks.rs` (470 行)
@@ -282,6 +288,7 @@ cargo run --example glommio_comprehensive_2025
 cargo bench --bench glommio_benchmarks
 # 仅在 Linux 上运行
 ```
+
 ## 📊 统计信息
 
 | 指标       | 数量           |
@@ -365,6 +372,7 @@ crates/c06_async/
 ├── README.md                     # ✅ 更新主文档
 └── GLOMMIO_INTEGRATION_2025_10_30.md  # ✅ 本报告
 ```
+
 ## 🚀 快速开始
 
 ### 1. 检查系统环境
@@ -379,6 +387,7 @@ cat /proc/sys/kernel/io_uring_disabled  # 应该为 0
 # 安装依赖
 sudo apt-get install liburing-dev
 ```
+
 ### 2. 运行示例
 
 ```bash
@@ -388,6 +397,7 @@ cargo run --example glommio_comprehensive_2025
 # 性能基准测试
 cargo bench --bench glommio_benchmarks
 ```
+
 ### 3. 阅读文档
 
 1. [快速入门](docs/tier_01_foundations/05_glommio_quick_start.md) - 5分钟上手
@@ -407,6 +417,7 @@ cargo bench --bench glommio_benchmarks
     ├─ 不需要丰富的第三方库
     └─ 高性能计算/金融/游戏服务器
 ```
+
 ### 选择其他运行时的场景
 
 ```text
@@ -424,6 +435,7 @@ cargo bench --bench glommio_benchmarks
     ├─ CLI 工具或嵌入式应用
     └─ 快速原型开发
 ```
+
 ## 🎓 学习路径
 
 1. **入门** (1-2天)

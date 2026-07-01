@@ -43,7 +43,6 @@
       - [ASIL B](#asil-b)
       - [ASIL C](#asil-c)
       - [ASIL D](#asil-d)
-  - [*安全完整性等级的正确选择是功能安全的基础，必须基于充分的风险分析。*](#安全完整性等级的正确选择是功能安全的基础必须基于充分的风险分析)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -568,6 +567,7 @@ impl AsilDProcessor {
 ---
 
 *安全完整性等级的正确选择是功能安全的基础，必须基于充分的风险分析。*
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -596,19 +596,12 @@ impl AsilDProcessor {
 ## 权威来源索引
 
 > **[来源: ISO 26262 - Functional Safety]**
-
 > **[来源: IEC 61508 - Safety Standards]**
-
 > **[来源: MISRA Rust Guidelines]**
-
 > **[来源: Ferrocene Language Specification]**
-
 > **[来源: Wikipedia - Decision Tree]**
-
 > **[来源: ACM - Decision Support Systems]**
-
 > **[来源: IEEE - Risk Analysis]**
-
 > **[来源: Rust API Guidelines]**
 
 ---

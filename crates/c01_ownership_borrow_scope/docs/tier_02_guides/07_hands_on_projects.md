@@ -111,6 +111,7 @@ simple_box/
     ├── main.rs
     └── simple_box.rs
 ```
+
 ### 核心代码实现
 
 #### `simple_box.rs`
@@ -189,6 +190,7 @@ impl<T> DerefMut for SimpleBox<T> {
     }
 }
 ```
+
 #### `main.rs`
 
 ```rust
@@ -252,6 +254,7 @@ fn take_ownership(boxed: SimpleBox<Vec<i32>>) -> Vec<i32> {
     boxed.into_inner()
 }
 ```
+
 ### 测试方式
 
 ```bash
@@ -260,6 +263,7 @@ cd simple_box
 # 复制上述代码
 cargo run
 ```
+
 ### 预期输出
 
 ```text
@@ -293,6 +297,7 @@ Debug: SimpleBox(42)
 
 ===== 程序结束 =====
 ```
+
 ### 关键知识点
 
 1. **所有权转移**: `SimpleBox` 拥有堆上数据的所有权
@@ -349,6 +354,7 @@ string_utils/
     ├── main.rs
     └── lib.rs
 ```
+
 ### 核心代码实现2
 
 #### `lib.rs`
@@ -472,6 +478,7 @@ impl<'a> Iterator for LineIterator<'a> {
     }
 }
 ```
+
 #### `main.rs`-
 
 ```rust
@@ -575,6 +582,7 @@ fn main() {
     }
 }
 ```
+
 ### 测试方式-
 
 ```bash
@@ -583,6 +591,7 @@ cd string_utils
 # 复制上述代码
 cargo run
 ```
+
 ### 预期输出-
 
 ```text
@@ -630,6 +639,7 @@ Line 3
   第2行: Line 2
   第3行: Line 3
 ```
+
 ### 关键知识点-
 
 1. **生命周期**: 返回的切片与输入有相同的生命周期
@@ -686,6 +696,7 @@ shared_container/
     ├── main.rs
     └── container.rs
 ```
+
 ### 核心代码实现3
 
 #### `container.rs`
@@ -830,6 +841,7 @@ impl Observer for StatsObserver {
     }
 }
 ```
+
 #### `main.rs`--
 
 ```rust
@@ -980,6 +992,7 @@ fn main() {
     }
 }
 ```
+
 ### 测试方式3
 
 ```bash
@@ -988,6 +1001,7 @@ cd shared_container
 # 复制上述代码
 cargo run
 ```
+
 ### 预期输出3
 
 ```text
@@ -1019,6 +1033,7 @@ cargo run
 链表: 3 2 1
 修改后: 3 20 1
 ```
+
 ### 关键知识点3
 
 1. **内部可变性**: `RefCell` 允许在不可变引用下修改数据

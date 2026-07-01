@@ -54,11 +54,13 @@
 ```bash
 cat INDEX.md
 ```
+
 ### 2. 查看快速入门
 
 ```bash
 cat async_programming_comprehensive_review_readme_2025_10_06.md
 ```
+
 ### 3. 运行示例
 
 ```bash
@@ -71,6 +73,7 @@ cargo run --example actor_pattern_comprehensive_2025
 # CSP 模式
 cargo run --example csp_pattern_comprehensive_2025
 ```
+
 ---
 
 ## 📖 核心文档

@@ -83,6 +83,7 @@ let y = 5.0; // f64
 let x: i32 = 5;
 let s: String = String::from("hello");
 ```
+
 **相关文档**: [基础类型指南](../tier_02_guides/01_basic_types_guide.md)
 
 ---
@@ -117,6 +118,7 @@ impl fmt::Display for Wrapper {
     }
 }
 ```
+
 **相关文档**: [设计模式集](../tier_04_advanced/05_design_patterns_collection.md)
 
 ---
@@ -162,6 +164,7 @@ impl Database<Unlocked> {
     }
 }
 ```
+
 **相关文档**: [性能优化参考](../tier_03_references/05_performance_optimization_reference.md)
 
 ---
@@ -187,6 +190,7 @@ fn process<T: Display>(item: T) {
 }
 // 编译后为每个具体类型生成代码
 ```
+
 **Trait 对象示例**:
 
 ```rust
@@ -195,6 +199,7 @@ fn process(item: &dyn Display) {
 }
 // 运行时动态分派
 ```
+
 **选择建议**:
 
 - 性能关键 → 泛型
@@ -226,6 +231,7 @@ fn foo<'a>(x: &'a str) -> &'a str { x }
 // 组合使用
 fn foo<'a, T>(x: &'a T) -> &'a T { x }
 ```
+
 **结构体示例**:
 
 ```rust
@@ -239,6 +245,7 @@ impl<'a, T> Container<'a, T> {
     }
 }
 ```
+
 **相关文档**: [生命周期指南](../tier_02_guides/05_lifetimes_guide.md)
 
 ---
@@ -262,6 +269,7 @@ fn create_array<T: Default, const N: usize>() -> [T; N] {
 let arr: Array<i32, 10> = Array { data: [0; 10] };
 let arr2 = create_array::<i32, 5>();
 ```
+
 **高级用法** (Rust 1.92.0+):
 
 ```rust
@@ -272,6 +280,7 @@ fn split_array<T, const N: usize, const M: usize>(
     // ...
 }
 ```
+
 **相关文档**: [高级泛型模式](../tier_04_advanced/02_advanced_generics_patterns.md)
 
 ---
@@ -303,6 +312,7 @@ impl<T: Display> ToString for T {
     }
 }
 ```
+
 **多重约束**:
 
 ```rust
@@ -314,6 +324,7 @@ where
     let _copy = item.clone();
 }
 ```
+
 **相关文档**: [Trait 系统指南](../tier_02_guides/04_trait_system_guide.md)
 
 ---
@@ -335,6 +346,7 @@ impl Iterator for Counter {
     fn next(&mut self) -> Option<u32> { /* ... */ }
 }
 ```
+
 **泛型参数** (一个实现多种类型):
 
 ```rust
@@ -347,6 +359,7 @@ trait Add<Rhs = Self> {
 impl Add<i32> for Point { /* ... */ }
 impl Add<f64> for Point { /* ... */ }
 ```
+
 **选择建议**:
 
 - 每个类型只有一种实现 → 关联类型
@@ -377,6 +390,7 @@ trait NotObjectSafe {
 // 编译错误：不能创建 trait 对象
 // let obj: Box<dyn NotObjectSafe> = ...;
 ```
+
 **安全示例**:
 
 ```rust
@@ -388,6 +402,7 @@ trait ObjectSafe {
 // OK: 可以创建 trait 对象
 let obj: Box<dyn ObjectSafe> = Box::new(MyType);
 ```
+
 **相关文档**: [Trait 系统指南](../tier_02_guides/04_trait_system_guide.md)
 
 ---
@@ -411,6 +426,7 @@ impl From<i32> for MyType {
 let x: MyType = MyType::from(42);
 let x: MyType = 42.into(); // Into 自动实现
 ```
+
 **As** (数值类型转换):
 
 ```rust
@@ -419,6 +435,7 @@ let y: i64 = x as i64; // 数值类型转换
 let ptr: *const i32 = &x;
 let addr = ptr as usize; // 指针转换
 ```
+
 **TryFrom/TryInto** (可能失败的转换):
 
 ```rust
@@ -436,6 +453,7 @@ impl TryFrom<i32> for PositiveNumber {
     }
 }
 ```
+
 **选择建议**:
 
 - 无损转换 → From/Into
@@ -469,6 +487,7 @@ hello(&s); // &String -> &str (Deref 强制转换)
 // 等价于
 hello(&(*s)); // 手动解引用
 ```
+
 **自定义 Deref**:
 
 ```rust
@@ -487,6 +506,7 @@ impl<T> Deref for MyBox<T> {
 let x = MyBox(5);
 assert_eq!(5, *x); // 调用 deref()
 ```
+
 **相关文档**: [类型转换参考](../tier_03_references/01_type_conversions_reference.md)
 
 ---
@@ -505,6 +525,7 @@ fn first_word(s: &str) -> &str {
     s.split_whitespace().next().unwrap()
 }
 ```
+
 **需要注解** (多个引用参数):
 
 ```rust
@@ -512,6 +533,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
 }
 ```
+
 **结构体中的引用**:
 
 ```rust
@@ -519,6 +541,7 @@ struct ImportantExcerpt<'a> {
     part: &'a str, // 必须标注生命周期
 }
 ```
+
 **生命周期省略规则**:
 
 1. 每个引用参数获得独立生命周期
@@ -553,6 +576,7 @@ fn take_static_trait(obj: Box<dyn MyTrait + 'static>) {
     // ...
 }
 ```
+
 **注意**: 'static 不意味着不可变：
 
 ```rust
@@ -562,6 +586,7 @@ static COUNTER: AtomicI32 = AtomicI32::new(0);
 
 COUNTER.fetch_add(1, Ordering::Relaxed); // 线程安全的原子操作
 ```
+
 **相关文档**: [生命周期指南](../tier_02_guides/05_lifetimes_guide.md)
 
 ---
@@ -579,6 +604,7 @@ struct SelfReferential {
     ptr: *const String, // 指向 data
 }
 ```
+
 **解决方案 1: 使用索引**:
 
 ```rust
@@ -587,6 +613,7 @@ struct Better {
     index: usize, // 使用索引代替指针
 }
 ```
+
 **解决方案 2: 使用 Pin**:
 
 ```rust
@@ -612,6 +639,7 @@ impl SelfRef {
     }
 }
 ```
+
 **相关文档**: [安全性参考](../tier_03_references/04_safety_reference.md)
 
 ---
@@ -642,6 +670,7 @@ fn forever() -> ! {
     }
 }
 ```
+
 **在 match 中**:
 
 ```rust
@@ -652,6 +681,7 @@ let value = match result {
     Err(e) => panic!("Error: {}", e), // ! 可以匹配任何类型
 };
 ```
+
 **实验性功能** (Rust 1.92.0):
 
 ```rust
@@ -660,6 +690,7 @@ let value = match result {
 let x: ! = loop {};
 let y: i32 = x; // ! 可以强制转换为任何类型
 ```
+
 **相关文档**: [基础类型指南](../tier_02_guides/01_basic_types_guide.md)
 
 ---
@@ -688,6 +719,7 @@ fn use_pinned(pinned: Pin<&mut SelfReferential>) {
     // pinned 保证不会移动
 }
 ```
+
 **Unpin**:
 
 - 大多数类型默认实现 Unpin
@@ -707,6 +739,7 @@ struct NotUnpin {
     _pin: PhantomPinned,
 }
 ```
+
 **相关文档**: [安全性参考](../tier_03_references/04_safety_reference.md)
 
 ---
@@ -744,6 +777,7 @@ struct Database<State = Locked> {
     _state: PhantomData<State>,
 }
 ```
+
 **作用**:
 
 - 编译器理解类型关系
@@ -774,6 +808,7 @@ fn process<T: Display>(item: T) {
     println!("{}", item); // 静态分派，可内联
 }
 ```
+
 **Trait 对象** (虚函数开销):
 
 ```rust
@@ -781,6 +816,7 @@ fn process(item: &dyn Display) {
     println!("{}", item); // 动态分派，虚表查找
 }
 ```
+
 **选择建议**:
 
 - 性能关键路径 → 泛型
@@ -812,6 +848,7 @@ fn process_many(items: Vec<Box<dyn Display>>) {
     }
 }
 ```
+
 **2. 提取非泛型部分**:
 
 ```rust
@@ -826,6 +863,7 @@ fn process_impl(item: &dyn Display) {
     println!("{}", item);
 }
 ```
+
 **3. 使用 const 泛型合并**:
 
 ```rust
@@ -838,6 +876,7 @@ fn create_array<const N: usize>() -> [i32; N] {
     [0; N]
 }
 ```
+
 **相关文档**: [性能优化参考](../tier_03_references/05_performance_optimization_reference.md)
 
 ---
@@ -889,6 +928,7 @@ impl Stack<NonEmpty> {
     }
 }
 ```
+
 **性能验证**:
 
 ```rust
@@ -898,6 +938,7 @@ let stack = Stack::new(); // Empty
 let stack = stack.push(42); // NonEmpty
 let (value, stack) = stack.pop(); // 回到 Empty
 ```
+
 **内存布局**:
 
 ```rust
@@ -906,6 +947,7 @@ assert_eq!(
     std::mem::size_of::<Vec<i32>>()
 ); // PhantomData 不占空间
 ```
+
 **相关文档**: [性能优化参考](../tier_03_references/05_performance_optimization_reference.md)
 
 ---

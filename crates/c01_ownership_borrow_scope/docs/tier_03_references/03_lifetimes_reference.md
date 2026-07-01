@@ -43,6 +43,7 @@ fn longest_with_announcement<'a, 'b>(
     if x.len() > y.len() { x } else { y }
 }
 ```
+
 ---
 
 ## 生命周期省略规则
@@ -55,6 +56,7 @@ fn first_word(s: &str) -> &str {
     &s[..1]
 }
 ```
+
 **规则 2**: 如果只有一个输入生命周期，它被应用到所有输出
 
 ```rust
@@ -62,6 +64,7 @@ fn process(s: &str) -> &str { s }
 // 等价于
 fn process<'a>(s: &'a str) -> &'a str { s }
 ```
+
 **规则 3**: 如果有多个输入生命周期，且其中一个是 `&self` 或 `&mut self`，则 `self` 的生命周期被应用到所有输出
 
 ```rust
@@ -72,6 +75,7 @@ impl<'a> ImportantExcerpt<'a> {
     }
 }
 ```
+
 ---
 
 ## 'static 生命周期
@@ -83,6 +87,7 @@ let s: &'static str = "I have a static lifetime.";
 // 全局变量
 static GLOBAL: &str = "global";
 ```
+
 ---
 
 **相关文档**:

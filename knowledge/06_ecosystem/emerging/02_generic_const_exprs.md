@@ -79,6 +79,7 @@ where
     data: [T; N * M],
 }
 ```
+
 ---
 
 ### 模块 1: 概念定义
@@ -102,6 +103,7 @@ struct Array<T, const N: usize> {
     data: [T; N],  // N 必须是简单的常量参数
 }
 ```
+
 **generic_const_exprs（不稳定）**:
 
 ```rust,ignore
@@ -112,6 +114,7 @@ where
     data: [T; N * M],
 }
 ```
+
 **允许的操作**: `+`、`-`、`*`、`/`、`<<`、`>>`、比较运算符，以及 `const fn` 调用。
 
 #### 1.3 形式化直觉
@@ -129,6 +132,7 @@ Matrix<i32, 3, 4> 的 transpose() 返回 Matrix<i32, 4, 3>:
   • where [i32; 4 * 3]: Sized
   • 即 [i32; 12]: Sized ✅
 ```
+
 编译器在单态化时求值这些表达式，确保类型正确性。
 
 ---
@@ -149,6 +153,7 @@ graph TD
     style B fill:#f9f,stroke:#333,stroke-width:2px
     style D fill:#bfb,stroke:#333,stroke-width:2px
 ```
+
 #### 承上（前置知识回溯）
 
 | 前置概念 | 所在文档 | 本章中使用的具体点 |
@@ -200,6 +205,7 @@ where
 // 使用
 let mat: Matrix<i32, 3, 4> = Matrix::new([0; 12]);  // 3 * 4 = 12
 ```
+
 ---
 
 ## 📐 语法详解
@@ -235,6 +241,7 @@ where
     }
 }
 ```
+
 ### 复杂表达式
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -261,6 +268,7 @@ where
 // 使用
 let arr: PowerOfTwoArray<i32, 3> = PowerOfTwoArray { data: [0; 8] };  // 2^3 = 8
 ```
+
 ### 类型级计算
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -285,6 +293,7 @@ where
     data: [T; FactorialImpl<N>::VALUE],
 }
 ```
+
 ---
 
 ## 🚀 实际应用
@@ -343,6 +352,7 @@ let a: Matrix<i32, 2, 3> = Matrix { data: [1, 2, 3, 4, 5, 6] };
 let b: Matrix<i32, 3, 2> = Matrix { data: [1, 2, 3, 4, 5, 6] };
 let c = a * b;  // Matrix<i32, 2, 2>
 ```
+
 ### 类型级数值计算
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -372,6 +382,7 @@ let arr: [i32; 5] = [1, 2, 3, 4, 5];
 let same: [i32; 5] = safe_convert(arr);  // ✅ 编译通过
 // let diff: [i32; 3] = safe_convert(arr);  // ❌ 编译错误
 ```
+
 ### 固定大小数据结构
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -417,6 +428,7 @@ where
 // 使用: B=4 表示 2-3-4 树
 let node: BTreeNode<i32, String, 4> = BTreeNode::new();
 ```
+
 ---
 
 ## ⚠️ 限制与注意事项
@@ -448,6 +460,7 @@ where
     [T; N * 2]: Sized,
 {}
 ```
+
 ### 递归限制
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -465,6 +478,7 @@ where
     next: Option<Box<Recursive<{ N - 1 }>>>,  // 注意递归
 }
 ```
+
 ---
 
 ## 🔄 与现有方案对比
@@ -507,6 +521,7 @@ where
 }
 // 优点: 编译时验证，零开销，类型安全
 ```
+
 ---
 
 ## 🗺️ 模块 7: 思维表征
@@ -548,6 +563,7 @@ generic_const_exprs 允许的操作:
   • [T; N - 1]: Sized — 当 N = 0 时数组大小为 -1，编译错误
   • 需要 N > 0 的额外约束
 ```
+
 ---
 
 ## 📚 模块 8: 国际化对齐
@@ -598,6 +614,7 @@ where
     [T; std::mem::size_of::<T>()]: Sized,
 {}
 ```
+
 <details>
 <summary>参考答案</summary>
 

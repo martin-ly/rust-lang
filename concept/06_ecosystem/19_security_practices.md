@@ -114,6 +114,7 @@ Rust 提供的安全保证:
   ├── unsafe 代码可能引入漏洞
   └── 供应链攻击（恶意依赖）
 ```
+
 **可编译示例** — 输入验证与密码强度检查：
 
 ```rust
@@ -151,6 +152,7 @@ fn check_password_strength(password: &str) -> Result<(), &'static str> {
     Ok(())
 }
 ```
+
 ```text
   安全层次:
   ┌─────────────────────────────────────────┐
@@ -163,6 +165,7 @@ fn check_password_strength(password: &str) -> Result<(), &'static str> {
   │  内存安全（所有权、借用、生命周期）      │
   └─────────────────────────────────────────┘
 ```
+
 > **认知功能**: Rust 消除了**一整类安全漏洞**（内存安全），但**逻辑安全**仍需开发者负责。
 > [来源: [Rust Secure Development Guide](https://anssi-fr.github.io/rust-guide/)]
 
@@ -198,6 +201,7 @@ unsafe 代码的安全策略:
   ├── 优秀 crate: <5% unsafe
   └── 某些领域（crypto, OS）不可避免更多
 ```
+
 > **unsafe 洞察**: **unsafe 不是"坏"的**——它是 Rust **必要的逃逸舱**，关键是**隔离、文档和审查**。
 > [来源: [Rust Secure Code Guidelines](https://anssi-fr.github.io/rust-guide/)]
 
@@ -235,6 +239,7 @@ Rust 供应链风险:
   ├── 对比 RustSec Advisory DB
   └── 报告 CVE 和严重程度
 ```
+
 > **供应链洞察**: **cargo-audit** 是 Rust 生态的**安全网**——它将已知漏洞的检测集成到开发工作流中。
 > [来源: [RustSec](https://rustsec.org/)]
 
@@ -302,6 +307,7 @@ where D: serde::Deserializer<'de>
     }
 }
 ```
+
 > **验证洞察**: **"解析而非验证"**是 Rust 安全的核心模式——通过类型系统（Type System）使非法状态不可表示。
 > [来源: [Parse Don't Validate](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)]
 
@@ -345,6 +351,7 @@ Rust 密码学生态:
   let mut key = [0u8; 32];
   OsRng.fill_bytes(&mut key);  // 密码学安全
 ```
+
 > **加密洞察**: Rust 的**类型系统（Type System）**防止了密码学中常见的**类型混淆错误**（如密钥和密文的混淆）。
 > [来源: [ring crate](https://docs.rs/ring/latest/ring/)]
 
@@ -388,6 +395,7 @@ Rust 安全审计工具:
   ├── 设置漏洞告警阈值
   └── 定期 Miri 检测
 ```
+
 > **审计洞察**: Rust 的**工具链生态**使安全审计可以**自动化**——从依赖漏洞到运行时（Runtime）未定义行为，覆盖完整攻击面。
 > [来源: [cargo-geiger](https://github.com/rust-secure-code/cargo-geiger)]
 
@@ -428,6 +436,7 @@ Secrets 管理:
   → 零拷贝（zeroize crate）
   → 不在日志中打印
 ```
+
 > **模式矩阵**: Rust 安全是**分层防御**——编译期保证 + 运行时验证 + 审计工具 + 开发实践。
 > [来源: [Rust Secure Code Guidelines](https://anssi-fr.github.io/rust-guide/)]
 
@@ -451,6 +460,7 @@ graph TD
     style SAFE_UNSAFE fill:#fff3e0
     style RISKY fill:#ffcdd2
 ```
+
 > **认知功能**: **Safe Rust 默认内存安全**，但**逻辑安全、供应链安全和 unsafe 代码**仍需主动管理。
 > [来源: [Rust Security Policy](https://www.rust-lang.org/policies/security)]
 
@@ -490,6 +500,7 @@ graph TD
 ├── 验证成本高
 └── 缓解: 关键路径形式化、其余测试覆盖
 ```
+
 > **边界要点**: Rust 安全的边界主要与**侧信道**、**逻辑漏洞**、**供应链**、**unsafe 传染**和**验证局限**相关。
 > [来源: [ANSSI Rust Guide](https://messervices.cyber.gouv.fr/documents-guides/anssi-guide-programming_rules_to_develop_secure_applications_with_rust-v1.0.pdf)]
 
@@ -533,6 +544,7 @@ graph TD
   ✅ 所有依赖都需审计
      // dev dependency 也可能被攻击
 ```
+
 > **陷阱总结**: 安全陷阱主要与**过度信任 safe Rust**、**unsafe 文档缺失**、**过时加密**、**日志泄露**和**依赖管理**相关。
 > [来源: [OWASP Top 10](https://owasp.org/www-project-top-ten/)]
 
@@ -699,6 +711,7 @@ cat -v .cursorrules CLAUDE.md AGENTS.md 2>/dev/null
 # 审计 build.rs 的异常网络/文件操作
 cargo deny check advisories
 ```
+
 > **来源**: [ByteIota — TrapDoor Supply Chain Attack](https://byteiota.com/trapdoor-supply-chain-attack-npm-pypi-crates/) · [Socket.dev](https://socket.dev/) · [JFrog 2026 Supply Chain Report] · 可信度: ✅
 
 ### 6.6 包注册表可持续性：Sustaining Package Registries Working Group（2026-05-06）
@@ -746,6 +759,7 @@ cargo deny check advisories
 # 或使用 cargo-audit（需要网络拉取 advisory-db）
 cargo audit
 ```
+
 ### 6.8 AI 安全工程师驻场计划：Alpha-Omega × Rust Foundation（2026-06-16）
 
 **[Rust Foundation / Alpha-Omega, 2026-06-16]** Rust Foundation 宣布，在 Alpha-Omega 资助下设立 **AI Security Engineer in Residence** 全职岗位，任命 **Jacob Finkelman**（网名 Eh2406，Cargo Team 成员、`pubgrub-rs` 维护者）担任首任工程师。
@@ -842,6 +856,7 @@ cargo audit
 | [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
 | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [ANSSI Rust Guide](https://anssi-fr.github.io/rust-guide/) | ✅ 一级 | 法国安全局指南 |
@@ -898,6 +913,7 @@ fn verify_password_fixed(input: &[u8], secret: &[u8]) -> bool {
     input.ct_eq(secret).into() // ✅ 常量时间
 }
 ```
+
 > **修正**: 安全关键代码（密码学、身份验证）必须防御**时序攻击**——攻击者通过测量执行时间推测密钥信息。Rust 的标准库不保证常量时间操作（优先性能），`subtle` crate 提供 `CtOption`、`ConstantTimeEq` 等原语。这与 C 的 OpenSSL（手动实现常量时间）或 Go 的 `crypto/subtle` 类似，但 Rust 的类型系统（Type System）可帮助区分常量时间和非常量时间操作。形式化验证工具可进一步证明常量时间属性。来源: [subtle Documentation]
 
 ### 10.2 边界测试：`unsafe` 代码的审计边界（编译错误）
@@ -916,6 +932,7 @@ fn safe_wrapper_fixed(ptr: *const u8, len: usize) -> Option<&[u8]> {
     Some(unsafe { std::slice::from_raw_parts(ptr, len) })
 }
 ```
+
 > **修正**: 安全审计的核心是识别和限制 `unsafe` 代码的边界。Rust 编译器强制 `unsafe` 操作必须在 `unsafe` 块内，使审计者能快速定位需要人工验证的代码。安全最佳实践：1) 最小化 unsafe 代码量；2) 将 unsafe 封装为 safe API；3) 使用 `#[deny(unsafe_code)]` 禁止 unsafe；4) 使用 `cargo-geiger` 统计 unsafe 依赖。这与 C/C++ 的"所有代码都可能 unsafe"不同——Rust 的安全边界是显式的、可度量的。[来源: [Rust Secure Code Guidelines](https://secure-code-guidelines.rust-lang.org/)]
 
 ### 10.3 边界测试：`zeroize` 与编译器优化的冲突（逻辑错误）
@@ -932,6 +949,7 @@ fn main() {
     // 需使用 Zeroizing 包装器或 volatile 写入
 }
 ```
+
 > **修正**: `zeroize` crate 安全清除敏感数据（密钥、密码），防止内存残留。但编译器的死存储消除（dead store elimination）可能优化掉 `zeroize` 调用——若 `secret` 在 `zeroize` 后不再使用，编译器认为写入无意义。`zeroize` 通过 `core::ptr::write_volatile` 和内存屏障防止优化，但早期版本或某些配置下仍可能失效。最佳实践：1) 使用 `Zeroizing<T>` 包装器（Drop 时自动 zeroize）；2) 在堆上分配敏感数据（`Box::new(secret)`），利用操作系统的清零或加密内存（如 Linux 的 `mlock` + `madvise(MADV_DONTDUMP)`）；3) 使用硬件支持（AES-NI 的密钥寄存器）。这与 C 的 `memset_s`（C11，标记为不优化）或 OpenSSL 的 `OPENSSL_cleanse` 类似——安全清除是密码学实现的细节，但至关重要。[来源: [zeroize Crate](https://docs.rs/zeroize/)] · [来源: [Rust Crypto WG](https://github.com/rustcrypto/)]
 
 ### 10.4 边界测试：依赖供应链的 typo-squatting（运行时安全风险）
@@ -947,6 +965,7 @@ fn main() {
     // 但内部窃取数据或植入后门
 }
 ```
+
 > **修正**: typo-squatting（域名/包名抢注）是供应链攻击的常见手段：攻击者注册与流行包名相似的名字（`serde-json` vs `serde_json`、`tokioo` vs `tokio`），等待开发者打错字。Rust 的 crates.io 有初步防护：1) 名称相似度检查（阻止过于相似的名称）；2) 下载统计异常监控；3) `cargo vet` 审计依赖。但完全防护不可能——开发者必须：1) 仔细检查 Cargo.toml 中的包名；2) 使用 `cargo tree` 检查依赖树中的可疑包；3) 锁定 Cargo.lock 并审计更新；4) 使用私有 registry（企业环境）。这与 npm 的 `event-stream` 事件（恶意包被下载数百万次）或 PyPI 的定期清理（删除恶意包）类似——开源生态的开放性是优势也是风险。[来源: [crates.io Policies](https://crates.io/policies)] · [来源: [cargo-vet Documentation](https://mozilla.github.io/cargo-vet/)]
 
 ### 10.7 边界测试：secret 在内存中的残留与 `zeroize`（运行时信息泄露）
@@ -959,6 +978,7 @@ fn main() {
     // 内存可能被后续分配读取，或在 core dump 中泄露
 }
 ```
+
 > **修正**: Rust 的 `drop` 释放内存但不**覆盖**（zeroize）内容——这是性能优化，但对敏感数据（密码、密钥、令牌）是安全风险。`zeroize` crate 提供 `Zeroize` trait，drop 时自动覆盖内存：`password.zeroize();`。更严格：使用 `secrecy` crate 包装敏感类型，禁止 `Debug`、`Display`，强制 zeroize。深层防护：1) `mlock` 防止交换到磁盘；2) `memfd_secret`（Linux）创建仅进程可见的匿名内存；3) 编译时防止 secret 进入 `.rodata`。这与 Go 的 `memset`（需手动调用，无自动 zeroize）或 C++ 的 `secure_allocator`（类似概念）不同——Rust 的类型系统可通过 wrapper 类型（`Secret<T>`）在编译期强制安全实践。[来源: [secrecy crate](https://docs.rs/secrecy/)] · [来源: [zeroize crate](https://docs.rs/zeroize/)] · [来源: [CWE-226: Sensitive Information in Resource Not Removed Before Reuse](https://cwe.mitre.org/data/definitions/226.html)]
 
 ### 10.3 边界测试：secret 在日志中的意外泄露（运行时信息泄露）
@@ -978,6 +998,7 @@ fn main() {
     // 风险场景:  panic 消息、错误链、日志框架的自动格式化
 }
 ```
+
 > **修正**: `secrecy` crate 的 `Secret<T>` 包装敏感类型：1) `Debug` 输出 `[REDACTED]`；2) `Display` 同样隐藏；3) `zeroize` on drop 覆盖内存。但泄露风险仍存在：1) `expose_secret()` 返回 `&T`，调用者可能复制或记录；2) `SecretString` 的 `as_str()` 暴露内部 `str`；3) 第三方库的 panic 消息可能包含 secret。深层防护：1) `mlock` 防止交换到磁盘；2) `memfd_secret`（Linux）创建仅进程可见的匿名内存；3) 编译时防止 secret 进入 `.rodata`。这与 Go 的 `string`（无自动 zeroize）或 C++ 的 `secure_allocator`（类似概念）不同——Rust 的类型系统可通过 wrapper 类型在编译期强制安全实践，但完全防泄露需系统性设计。[来源: [secrecy crate](https://docs.rs/secrecy/)] · [来源: [zeroize crate](https://docs.rs/zeroize/)] · [来源: [CWE-226](https://cwe.mitre.org/data/definitions/226.html)]
 > **过渡**: 安全 实践：Rust 代码的防御性编程 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 安全 实践：Rust 代码的防御性编程 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

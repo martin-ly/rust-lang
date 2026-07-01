@@ -139,6 +139,7 @@
 └── 子类型和型变
     └── 型变规则
 ```
+
 ### 多维概念对比矩阵
 
 | 类型系统特性 | 理论基础   | Rust 实现          | 性能   | Rust 1.92.0 |
@@ -165,6 +166,7 @@
 │       │       │   ├── 是 → GATs
 │       │       │   └── 否 → 基础类型
 ```
+
 ### 证明树图
 
 ```text
@@ -180,6 +182,7 @@
     ├── RustBelt 模型
     └── Oxide 演算
 ```
+
 ---
 
 ## 🎯 概述
@@ -227,6 +230,7 @@ Rust 的类型系统基于**仿射类型系统** (Affine Type System) 和 **Hind
     |           |         |          |           |
    无推导     部分推导   双向推导   HM推导   完全推导
 ```
+
 **Rust 的定位**：**强静态类型 + 仿射类型 + HM推断**
 
 **类型系统健全性**:
@@ -244,6 +248,7 @@ Theorem (Type Soundness):
 或
 2. e 发散 (无限循环)
 ```
+
 **Rust的类型健全性保证**:
 
 - ✅ 编译时类型检查
@@ -262,6 +267,7 @@ fn main() {
     println!("{}", y);
 }
 ```
+
 ### 1.2 Curry-Howard 同构
 
 **命题即类型，证明即程序**:
@@ -308,6 +314,7 @@ fn main() {
     let _either: Either<i32, String> = Either::Left(42);
 }
 ```
+
 **排中律与类型系统**:
 
 经典逻辑中的排中律 (A ∨ ¬A) 在类型系统中的对应：
@@ -328,6 +335,7 @@ fn bool_excluded_middle(b: bool) -> Either<(), fn(()) -> Never> {
     }
 }
 ```
+
 **双重否定消除**:
 
 ```rust
@@ -339,6 +347,7 @@ fn bool_excluded_middle(b: bool) -> Either<(), fn(()) -> Never> {
 
 // 但可以用continuation passing style模拟
 ```
+
 **类型即证明的实践**:
 
 ```rust
@@ -371,6 +380,7 @@ fn de_morgan<A, B>(
     }
 }
 ```
+
 ---
 
 ### 1.3 类型推导
@@ -398,6 +408,7 @@ HM类型推断是完全自动的类型推导系统，具有以下性质：
    - 将类型变量泛化为类型参数
    - let-polymorphism
 ```
+
 **Rust中的类型推断**:
 
 ```rust
@@ -413,6 +424,7 @@ fn main() {
     let _: std::slice::Iter<'_, i32> = z;
 }
 ```
+
 ---
 
 ## 2. Rust 的类型系统特性
@@ -433,6 +445,7 @@ fn main() {
     let _unused = String::from("not used");  // ✅
 }
 ```
+
 **对比线性类型**：值必须恰好使用一次
 
 ```rust
@@ -442,6 +455,7 @@ fn main() {
     // 不使用 x 也可以 ✅
 } // x dropped
 ```
+
 ### 2.2 HM 类型推断
 
 **Let-polymorphism**:
@@ -459,6 +473,7 @@ fn main() {
     // 需要明确泛型参数
 }
 ```
+
 **改进**:
 
 ```rust
@@ -471,6 +486,7 @@ fn main() {
     let _b = id(String::from("hello"));  // ✅
 }
 ```
+
 ### 2.3 类型安全保证
 
 **类型健全性** (Type Soundness):
@@ -495,6 +511,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 3. 高阶类型
@@ -509,6 +526,7 @@ Kind 分类:
 * -> * : 类型构造器 (Vec, Option)
 * -> * -> * : 二元类型构造器 (Result)
 ```
+
 **Rust 的局限**:
 
 ```rust
@@ -523,6 +541,7 @@ trait Functor {
     fn map<A, B>(self, f: fn(A) -> B) -> Self::Wrapped<B>;
 }
 ```
+
 ### 3.2 GATs (泛型关联类型)
 
 **Generic Associated Types**:
@@ -567,6 +586,7 @@ fn main() {
     }
 }
 ```
+
 ### 3.3 HRTB (高阶Trait边界)
 
 **Higher-Rank Trait Bounds**:
@@ -586,6 +606,7 @@ fn main() {
     apply(|x| x);  // ✅ 适用于任意生命周期
 }
 ```
+
 ### 3.4 高阶类型的实战应用
 
 **案例 1: 通用容器抽象**:
@@ -625,6 +646,7 @@ where
     container.iter().fold(0, |acc, &x| acc + x)
 }
 ```
+
 **案例 2: 异步抽象与 GAT**:
 
 ```rust
@@ -656,6 +678,7 @@ impl<T> AsyncStream for ChannelStream<T> {
     }
 }
 ```
+
 **案例 3: HRTB 在闭包中的高级应用**:
 
 ```rust
@@ -695,6 +718,7 @@ fn main() {
     println!("{}", output);
 }
 ```
+
 ### 3.5 Kind 系统的深度理解
 
 **Kind 的形式化定义**:
@@ -705,6 +729,7 @@ fn main() {
 κ ::= *                    (proper type)
     | κ₁ -> κ₂             (type constructor)
 ```
+
 **Rust 中的 Kind 体系**:
 
 | Rust 类型           | Kind            | 说明           |
@@ -771,6 +796,7 @@ fn main() {
     println!("{:?}", opt2);  // Some(84)
 }
 ```
+
 ---
 
 ## 4. 类型级编程
@@ -815,6 +841,7 @@ fn main() {
     let _: Five = Succ(PhantomData::<Succ<Succ<Succ<Succ<Zero>>>>>);
 }
 ```
+
 ### 4.2 Phantom Types
 
 **幻影类型用于编译时状态跟踪**:
@@ -867,6 +894,7 @@ fn main() {
     // open.write("World");  // ❌ 编译错误：已关闭
 }
 ```
+
 ### 4.3 状态机类型编码
 
 **类型安全的状态机**:
@@ -923,6 +951,7 @@ fn main() {
     // machine.process();  // ❌ 编译错误：已停止
 }
 ```
+
 ---
 
 ## 5. 子类型和型变
@@ -938,6 +967,7 @@ fn main() {
     let _local: &str = static_str;  // ✅ 'static 是 'a 的子类型
 }
 ```
+
 ### 5.2 型变规则
 
 **型变的形式化定义**:
@@ -964,6 +994,7 @@ fn main() {
    |
 '(empty)
 ```
+
 ---
 
 ## 6. 线性类型和仿射类型
@@ -985,6 +1016,7 @@ fn main() {
     // consume(s);  // ❌ 编译错误：s 已被移动
 }
 ```
+
 ### 6.2 仿射类型
 
 **仿射逻辑**：资源最多使用一次（可以不使用）
@@ -995,6 +1027,7 @@ fn main() {
     // 不使用 x 也可以 ✅
 } // x dropped，体现仿射性
 ```
+
 ### 6.3 所有权和借用的类型理论
 
 **所有权规则**:
@@ -1022,6 +1055,7 @@ fn main() {
     println!("{:?}", r3);
 }
 ```
+
 ---
 
 ## 7. 依赖类型模拟
@@ -1043,6 +1077,7 @@ fn main() {
     print_array(&[1, 2, 3, 4, 5]);
 }
 ```
+
 ### 7.2 类型级数值
 
 **类型安全的矩阵**:
@@ -1095,6 +1130,7 @@ fn main() {
     // let _bad = m1.mul(&m3);  // ❌ 编译错误：维度不匹配
 }
 ```
+
 ### 7.3 约束和验证
 
 **编译时验证**:
@@ -1123,6 +1159,7 @@ fn main() {
     println!("First: {}", ne.first());  // ✅ 不会 panic
 }
 ```
+
 **类型级约束与验证**:
 
 ```rust
@@ -1148,6 +1185,7 @@ fn matrix_multiply<const M: usize, const N: usize, const P: usize>(
     result
 }
 ```
+
 **依赖类型 vs Const Generics**:
 
 | 特性         | 依赖类型         | Const Generics |
@@ -1208,6 +1246,7 @@ pub fn safe_divide(dividend: i32, divisor: Positive) -> i32 {
     dividend / divisor.get()  // ✅ 保证divisor != 0，不会panic
 }
 ```
+
 ### 7.5 Liquid Types (液态类型) 模拟
 
 **Liquid Types** 通过SMT求解器自动推断精化条件，Rust中可以近似模拟：
@@ -1265,6 +1304,7 @@ impl<T, const SIZE: usize> SafeArray<T, SIZE> {
     }
 }
 ```
+
 ### 7.6 Session Types (会话类型) 模拟
 
 **会话类型** 在类型层面编码通信协议的状态机：
@@ -1333,6 +1373,7 @@ fn demo_session() {
     // _closed.send_message("oops");
 }
 ```
+
 ### 7.7 范畴论视角下的类型系统
 
 **范畴论** (Category Theory) 为类型系统提供了深刻的数学基础。
@@ -1360,6 +1401,7 @@ where
 // 1. Identity: fmap(id) = id
 // 2. Composition: fmap(g ∘ f) = fmap(g) ∘ fmap(f)
 ```
+
 **Monad (单子)** - 计算上下文的抽象：
 
 ```rust
@@ -1393,6 +1435,7 @@ fn compute() -> Option<i32> {
         .bind(|x| divide(x, 0))    // None（短路）
 }
 ```
+
 **Natural Transformation (自然变换)**：
 
 ```rust
@@ -1404,6 +1447,7 @@ fn vec_to_option<T>(vec: Vec<T>) -> Option<T> {
 // 自然性条件：
 // fmap_option(f) ∘ vec_to_option = vec_to_option ∘ fmap_vec(f)
 ```
+
 ### 7.8 代数数据类型 (ADT) 的深度理解
 
 **Sum Types (和类型) 的代数解释**:
@@ -1423,6 +1467,7 @@ enum Result<T, E> {
 
 // 代数性质：T + U ≅ U + T（交换律）
 ```
+
 **Product Types (积类型) 的代数解释**:
 
 ```rust
@@ -1435,6 +1480,7 @@ struct Pair<T, U>(T, U);
 // 3. T × 1 ≅ T（单位元）
 // 4. T × 0 ≅ 0（零元）
 ```
+
 **Recursive Types (递归类型)**:
 
 ```rust
@@ -1447,6 +1493,7 @@ enum List<T> {
 // 解递归方程：List<T> = 1 / (1 - T) = 1 + T + T² + T³ + ...
 // 表示：空列表 + 单元素列表 + 双元素列表 + ...
 ```
+
 **函数类型的代数**:
 
 ```rust
@@ -1458,6 +1505,7 @@ fn not(b: bool) -> bool { !b }
 fn always_true(_: bool) -> bool { true }
 fn always_false(_: bool) -> bool { false }
 ```
+
 ---
 
 ## 7.9 Rust类型系统的表达边界
@@ -1492,6 +1540,7 @@ where [(); M + N]:  // 证明 M+N 是有效的
 // fn first<T>(vec: Vec<T>) -> T
 //   requires !vec.is_empty()  // 无法表达（需运行时）
 ```
+
 **变通方案**:
 
 ```rust
@@ -1525,6 +1574,7 @@ impl<T: Ord> Sorted<T> {
     }
 }
 ```
+
 ---
 
 ## 8. 形式化验证
@@ -1540,6 +1590,7 @@ impl<T: Ord> Sorted<T> {
 e: 表达式
 T: 类型
 ```
+
 ### 8.2 类型保全性
 
 **Preservation Theorem**:
@@ -1548,6 +1599,7 @@ T: 类型
 如果 Γ ⊢ e : T 且 e → e'
 则 Γ ⊢ e' : T
 ```
+
 ### 8.3 进展性
 
 **Progress Theorem**:
@@ -1556,6 +1608,7 @@ T: 类型
 如果 ∅ ⊢ e : T
 则 e 是值 或 存在 e' 使得 e → e'
 ```
+
 **Rust 的类型安全**:
 
 ```rust
@@ -1566,6 +1619,7 @@ fn main() {
     println!("{}", y);  // 保证类型正确
 }
 ```
+
 **类型正确性的形式化定义**:
 
 ```text
@@ -1581,6 +1635,7 @@ Well-typed程序定义：
 示例：
 x:i32, y:i32 ⊢ x + y : i32
 ```
+
 **Rust类型正确性保证**:
 
 ```rust
@@ -1603,6 +1658,7 @@ fn test() {
     // let z: String = x;  // ❌ 编译错误
 }
 ```
+
 ---
 
 ### 8.2 类型保全性1
@@ -1616,6 +1672,7 @@ Theorem (Type Preservation):
 
 含义：程序执行一步后，类型保持不变
 ```
+
 **Rust中的保全性示例**:
 
 ```rust
@@ -1644,6 +1701,7 @@ fn call_preservation() {
     assert_eq!(result, 42);
 }
 ```
+
 **保全性证明草图**:
 
 ```text
@@ -1663,6 +1721,7 @@ Case: e₁ →ₛ e₁'
   IH: Γ ⊢ e₁ : T₁ implies Γ ⊢ e₁' : T₁
   Apply IH to each sub-expression...
 ```
+
 ---
 
 ### 8.3 进展性1
@@ -1676,6 +1735,7 @@ Theorem (Progress):
 
 含义：良类型的程序要么是值，要么可以继续执行（不会卡住）
 ```
+
 **Rust的进展性保证**:
 
 ```rust
@@ -1698,6 +1758,7 @@ fn progress_example() {
 //     let x = 42 + "hello";  // 类型错误，不会运行
 // }
 ```
+
 **进展性证明草图**:
 
 ```text
@@ -1718,6 +1779,7 @@ Case: ∅ ⊢ e₁ + e₂ : i32
 Case: ∅ ⊢ (λx.e₁) e₂ : T
   Similar reasoning...
 ```
+
 ---
 
 ### 8.4 内存安全性
@@ -1735,6 +1797,7 @@ Theorem (Memory Safety):
 
 Proof: 由所有权系统 + 借用检查器保证
 ```
+
 **形式化保证**:
 
 ```rust
@@ -1773,6 +1836,7 @@ fn no_double_free() {
     // drop(x);  // ❌ 编译错误：value moved
 }
 ```
+
 **类型健全性（Type Soundness）**:
 
 ```text
@@ -1787,6 +1851,7 @@ Theorem (Type Soundness = Progress + Preservation):
 - 良类型的Rust程序不会有未定义行为（UB）
 - 所有运行时错误都是有类型的（panic!）
 ```
+
 **实践中的健全性**:
 
 ```rust
@@ -1814,6 +1879,7 @@ unsafe fn escape_hatch() {
     let _y = *ptr;  // 可能不安全
 }
 ```
+
 ---
 
 ## 9. 总结

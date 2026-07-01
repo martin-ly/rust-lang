@@ -8,7 +8,8 @@
 ## 📚 官方资源映射
 
 | 官方资源 | 链接 | 与本模块对应 |
-| :--- | :--- | :--- || **The Rust Book** | [Ch. 10 Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html) | 泛型、Trait、生命周期 |
+| :--- | :--- | :--- |
+| **The Rust Book** | [Ch. 10 Generic Types, Traits, and Lifetimes](https://doc.rust-lang.org/book/ch10-00-generics.html) | 泛型、Trait、生命周期 |
 | **RBE 练习** | [Generics](https://doc.rust-lang.org/rust-by-example/generics.html) | 泛型语法实践 |
 | **Rust Reference** | [Trait and lifetime bounds](https://doc.rust-lang.org/reference/trait-bounds.html) | 泛型约束规范 |
 
@@ -289,6 +290,7 @@ docs/
     └── Rust 1.92.0 文档 🆕
         └── ./RUST_192_GENERIC_IMPROVEMENTS.md
 ```
+
 ---
 
 ## 🎓 推荐学习路径
@@ -329,7 +331,9 @@ docs/
 
 1. 最新特性 (Day 1-3)
    - [代码示例集合](tier_02_guides/06_code_examples.md) 🆕 - 完整代码示例
+
 - [Rust 1.92.0 综合梳理](RUST_192_GENERIC_IMPROVEMENTS.md) 🆕
+
 1. 项目实践 (Day 4-7)
    - 学习示例代码
    - 完成练习项目

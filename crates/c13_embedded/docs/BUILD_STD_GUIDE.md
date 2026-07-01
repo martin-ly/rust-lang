@@ -29,6 +29,7 @@
 rustup toolchain install nightly
 rustup component add rust-src --toolchain nightly
 ```
+
 ### 2. 配置 cargo
 
 在项目根目录的 `.cargo/config.toml` 中：
@@ -38,11 +39,13 @@ rustup component add rust-src --toolchain nightly
 build-std = ["core", "alloc", "compiler_builtins"]
 build-std-features = ["compiler-builtins-mem"]  # 使用 compiler-builtins 的 memcpy
 ```
+
 ### 3. 指定目标
 
 ```bash
 cargo +nightly build -Z build-std=core,alloc --target thumbv7m-none-eabi
 ```
+
 ### 4. Cargo.toml 配置
 
 ```toml
@@ -52,6 +55,7 @@ lto = true
 opt-level = "z"
 codegen-units = 1
 ```
+
 ## 稳定化进度跟踪
 
 | 里程碑 | 状态 | 说明 |
@@ -93,6 +97,7 @@ impl Uart<Initialized> {
     pub fn send(&mut self, data: &[u8]) { /* ... */ }
 }
 ```
+
 ### 寄存器访问模式
 
 ```rust
@@ -122,6 +127,7 @@ impl<T> Register<T> {
     }
 }
 ```
+
 ## 参考
 
 - [Cargo build-std 文档](https://doc.rust-lang.org/cargo/reference/unstable.html#build-std)

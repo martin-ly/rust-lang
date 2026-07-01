@@ -105,6 +105,7 @@ Trait 系统完整参考
 └── 孤儿规则
     └── 规则定义
 ```
+
 ---
 
 ## 1. Trait 定义语法
@@ -116,6 +117,7 @@ Trait ::= 'unsafe'? 'trait' Ident GenericParams? (':' TypeParamBounds?)? WhereCl
 
 AssociatedItem ::= OuterAttribute* (TypeAlias | ConstantItem | Function | MacroInvocationSemi)
 ```
+
 ### 1.2 基础定义
 
 ```rust
@@ -148,6 +150,7 @@ trait From<T> {
     fn from(value: T) -> Self;
 }
 ```
+
 ### 1.3 完整示例
 
 ```rust
@@ -168,6 +171,7 @@ where
     }
 }
 ```
+
 ---
 
 ## 2. Trait 实现语法
@@ -177,6 +181,7 @@ where
 ```bnf
 Implementation ::= 'unsafe'? 'impl' GenericParams? Trait 'for' Type WhereClause? '{' InnerAttribute* AssociatedItem* '}'
 ```
+
 **示例**:
 
 ```rust
@@ -204,6 +209,7 @@ impl<T: Display> Greet for Option<T> {
     }
 }
 ```
+
 ### 2.2 关联类型实现
 
 ```rust
@@ -225,6 +231,7 @@ impl Iterator for Counter {
     }
 }
 ```
+
 ---
 
 ## 3. 标准库核心 Trait
@@ -272,6 +279,7 @@ impl Clone for Point {
     }
 }
 ```
+
 ### 3.3 Display 和 Debug
 
 ```rust
@@ -306,6 +314,7 @@ impl fmt::Display for Person {
     }
 }
 ```
+
 ### 3.4 Default Trait
 
 ```rust
@@ -331,6 +340,7 @@ impl Default for Config {
 // 使用
 let config = Config::default();
 ```
+
 ### 3.5 PartialEq 和 Eq
 
 ```rust
@@ -361,6 +371,7 @@ impl PartialEq for Point {
 
 impl Eq for Point {}
 ```
+
 ### 3.6 PartialOrd 和 Ord
 
 ```rust
@@ -398,6 +409,7 @@ impl Ord for Point {
     }
 }
 ```
+
 ### 3.7 From 和 Into
 
 ```rust
@@ -429,6 +441,7 @@ impl From<i32> for String {
 let s: String = 42.into(); // 使用 Into
 let s = String::from(42);  // 使用 From
 ```
+
 ### 3.8 Iterator Trait
 
 ```rust
@@ -467,6 +480,7 @@ impl Iterator for Counter {
     }
 }
 ```
+
 ---
 
 ## 4. 对象安全性规则
@@ -498,6 +512,7 @@ let shapes: Vec<Box<dyn Draw>> = vec![
     Box::new(Rectangle { width: 10.0, height: 5.0 }),
 ];
 ```
+
 ### 4.3 不对象安全的 Trait
 
 ```rust
@@ -516,6 +531,7 @@ trait Sized {
     fn size() -> usize where Self: Sized;
 }
 ```
+
 ### 4.4 解决方案
 
 ```rust
@@ -530,6 +546,7 @@ trait Printable {
     fn clone(&self) -> Self where Self: Sized;
 }
 ```
+
 ---
 
 ## 5. Blanket Implementation
@@ -548,6 +565,7 @@ impl<T: Display> ToString for T {
 
 // 所有实现 Display 的类型自动获得 ToString
 ```
+
 ### 5.2 常见模式
 
 ```rust
@@ -587,6 +605,7 @@ impl<T: Process> Process for Option<T> {
     }
 }
 ```
+
 ---
 
 ## 6. 孤儿规则详解
@@ -613,12 +632,14 @@ impl MyTrait for Vec<i32> {}
 // ✅ 外部 trait + 自定义类型
 impl Display for MyType {}
 ```
+
 ### 6.3 不允许的实现
 
 ```rust
 // ❌ 外部 trait + 外部类型
 impl Display for Vec<i32> {}  // 编译错误
 ```
+
 ### 6.4 新类型模式绕过
 
 ```rust
@@ -640,6 +661,7 @@ impl Deref for MyVec {
     }
 }
 ```
+
 ---
 
 ## 7. Trait 速查表
@@ -684,6 +706,7 @@ Into<T>: From  (自动实现)
 AsRef<T>
 AsMut<T>
 ```
+
 ---
 
 ## 📚 相关参考

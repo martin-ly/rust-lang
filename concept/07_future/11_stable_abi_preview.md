@@ -37,6 +37,7 @@ pub extern "C" fn rust_function(x: i32) -> i32 {
 
 fn main() {}
 ```
+
 > **修正**:
 >
 > **稳定 ABI** 是 Rust 的长期目标：

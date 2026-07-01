@@ -48,6 +48,7 @@
 │    └─────────┘                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
+
 ### 核心实现
 >
 > **[来源: Rust Official Docs]**
@@ -158,6 +159,7 @@ impl Drop for ThreadPool {
     }
 }
 ```
+
 ### 关键要点
 
 1. **类型擦除**: 使用 `Box<dyn FnOnce() + Send + 'static>` 存储不同类型的闭包
@@ -203,6 +205,7 @@ impl Drop for ThreadPool {
 │  └─────────────────────────────────────────────────────┘  │
 └────────────────────────────────────────────────────────────┘
 ```
+
 ### 核心实现
 
 ```rust,ignore
@@ -359,6 +362,7 @@ async fn fetch_user_data(client: &AsyncHttpClient, user_id: u64) -> Result<Strin
     }
 }
 ```
+
 ### 关键要点
 
 1. **Builder 模式**: `RequestBuilder` 提供流畅的 API 用于构造请求
@@ -413,6 +417,7 @@ async fn fetch_user_data(client: &AsyncHttpClient, user_id: u64) -> Result<Strin
 │  └──────────────────────────────────────────────────────┘  │
 └──────────────────────────────────────────────────────────────┘
 ```
+
 ### 核心实现
 
 ```rust,ignore
@@ -602,6 +607,7 @@ impl<K, V> Clone for ThreadSafeLRUCache<K, V> {
     }
 }
 ```
+
 ### 关键要点
 
 1. **Unsafe Rust 的审慎使用**: 使用 `NonNull` 实现 O(1) 链表操作，但通过封装确保外部 API 安全
@@ -655,6 +661,7 @@ impl<K, V> Clone for ThreadSafeLRUCache<K, V> {
 │  └────────────────────────────────────────────────────────┘    │
 └────────────────────────────────────────────────────────────────┘
 ```
+
 ### 核心实现
 
 ```rust,ignore
@@ -892,6 +899,7 @@ impl PermissionManager {
     }
 }
 ```
+
 ### 关键要点
 
 1. **路径抽象**: 使用 `std::path::PathBuf` 和 `Component` 处理跨平台路径差异
@@ -955,6 +963,7 @@ impl PermissionManager {
 │  └────────────────┘ └─────────────┘ └─────────────────────┘    │
 └─────────────────────────────────────────────────────────────────┘
 ```
+
 ### 核心实现
 
 ```rust,ignore
@@ -1188,6 +1197,7 @@ fn example_usage() {
     error!("Failed to connect to database: {}", "connection timeout");
 }
 ```
+
 ### 关键要点
 
 1. **延迟格式化**: 使用闭包在真正需要时才格式化日志消息, 避免不必要的字符串分配

@@ -32,7 +32,6 @@
     - [6.1 自引用结构模式](#61-自引用结构模式)
   - [7. 模式选择决策树](#7-模式选择决策树)
   - [8. 模式与所有权的关系](#8-模式与所有权的关系)
-<a id="对齐来源-rust-book-rust-api-guidelines-crate文档"></a>
   - [**对齐来源**: Rust Book, Rust API Guidelines, crate文档](#对齐来源-rust-book-rust-api-guidelines-crate文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)

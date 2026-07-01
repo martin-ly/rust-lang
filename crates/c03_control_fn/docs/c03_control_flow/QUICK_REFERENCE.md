@@ -19,6 +19,7 @@ if number < 5 {
     println!("greater than 5");
 }
 ```
+
 ### if let
 
 ```rust
@@ -33,6 +34,7 @@ match option {
     _ => (),
 }
 ```
+
 ---
 
 ## 🔄 循环
@@ -48,6 +50,7 @@ let result = loop {
     }
 };
 ```
+
 ### while (条件循环)
 
 ```rust
@@ -57,6 +60,7 @@ while number != 0 {
     number -= 1;
 }
 ```
+
 ### while let
 
 ```rust
@@ -64,6 +68,7 @@ while let Some(value) = stack.pop() {
     println!("{}", value);
 }
 ```
+
 ### for (遍历)
 
 ```rust
@@ -81,6 +86,7 @@ for i in 0..=10 {       // 0 到 10 (包含)
     println!("{}", i);
 }
 ```
+
 ---
 
 ## 🎯 模式匹配
@@ -108,6 +114,7 @@ match value {
     _ => println!("other"),
 }
 ```
+
 ### 解构
 
 ```rust
@@ -132,6 +139,7 @@ match msg {
     Message::Write(text) => println!("Text: {}", text),
 }
 ```
+
 ---
 
 ## 🔀 控制流关键字
@@ -155,6 +163,7 @@ match msg {
     }
 }
 ```
+
 ---
 
 ## 📊 对比表

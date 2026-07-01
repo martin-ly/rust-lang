@@ -159,6 +159,7 @@
 └── 性能特征
     └── 单态化
 ```
+
 ---
 
 ## 📊 章节概览
@@ -238,6 +239,7 @@ fn main() {
     println!("The largest char is {}", result);
 }
 ```
+
 ### 1.2 泛型的优势
 
 **1. 代码复用**:
@@ -247,6 +249,7 @@ fn main() {
 let int_vec: Vec<i32> = vec![1, 2, 3];
 let string_vec: Vec<String> = vec![String::from("a"), String::from("b")];
 ```
+
 **2. 类型安全**:
 
 ```rust
@@ -254,6 +257,7 @@ let mut vec: Vec<i32> = Vec::new();
 vec.push(1);
 // vec.push("hello"); // 编译错误！类型不匹配
 ```
+
 **3. 零成本抽象**:
 
 ```rust
@@ -263,6 +267,7 @@ fn add<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
 }
 // 编译后等同于为每个具体类型生成专门的函数
 ```
+
 ### 1.3 泛型 vs 动态分发
 
 | 特性         | 泛型 (静态分发) | trait 对象 (动态分发) |
@@ -288,6 +293,7 @@ fn main() {
     process_dynamic(&42);    // 运行时通过 vtable 调用
 }
 ```
+
 ---
 
 ## 2. 泛型函数
@@ -315,6 +321,7 @@ fn main() {
     println!("string: {}", string);
 }
 ```
+
 **带约束的泛型函数**:
 
 ```rust
@@ -336,6 +343,7 @@ fn main() {
     println!("Max: {}", max(3.14, 2.71));
 }
 ```
+
 ### 2.2 多个类型参数
 
 ```rust
@@ -360,6 +368,7 @@ fn main() {
     println!("Triple: {:?}", t);
 }
 ```
+
 ### 2.3 类型推导
 
 ```rust
@@ -383,6 +392,7 @@ fn main() {
     println!("Sum: {}", sum);
 }
 ```
+
 ---
 
 ## 3. 泛型结构体
@@ -406,6 +416,7 @@ fn main() {
     println!("Float point: ({}, {})", float_point.x, float_point.y);
 }
 ```
+
 ### 3.2 泛型字段
 
 ```rust
@@ -437,6 +448,7 @@ fn main() {
     println!("Value: {}", int_container.get());
 }
 ```
+
 ### 3.3 多类型参数结构体
 
 ```rust
@@ -469,6 +481,7 @@ fn main() {
     println!("Pair: {:?}", pair2);
 }
 ```
+
 ---
 
 ## 4. 泛型枚举
@@ -495,6 +508,7 @@ fn main() {
     }
 }
 ```
+
 **Result<T, E>**:
 
 ```rust
@@ -513,6 +527,7 @@ fn main() {
     }
 }
 ```
+
 ### 4.2 自定义泛型枚举
 
 ```rust
@@ -540,6 +555,7 @@ fn main() {
     println!("Right: {:?}, is_right: {}", right, right.is_right());
 }
 ```
+
 **树结构**:
 
 ```rust
@@ -581,6 +597,7 @@ fn main() {
     println!("Tree: {:?}", tree);
 }
 ```
+
 ---
 
 ## 5. 泛型方法
@@ -622,6 +639,7 @@ fn main() {
     println!("Distance: {}", float_point.distance_from_origin());
 }
 ```
+
 ### 5.2 方法级别的类型参数
 
 ```rust
@@ -648,6 +666,7 @@ fn main() {
     println!("Mixed: ({:?}, {:?})", p3.x, p3.y);
 }
 ```
+
 ---
 
 ## 6. 泛型约束 (Trait Bounds)
@@ -679,6 +698,7 @@ fn main() {
     print_and_compare("apple", "banana");
 }
 ```
+
 ### 6.2 多重约束
 
 ```rust
@@ -702,6 +722,7 @@ fn main() {
     print_pair("hello", vec![1, 2, 3]);
 }
 ```
+
 ### 6.3 where 子句
 
 ```rust
@@ -733,6 +754,7 @@ fn main() {
     complex_function("hello", vec![1, 2, 3]);
 }
 ```
+
 **返回类型约束**:
 
 ```rust
@@ -747,6 +769,7 @@ fn main() {
     println!("{}", result);
 }
 ```
+
 ---
 
 ## 7. 关联类型
@@ -782,6 +805,7 @@ impl Container<String> for Vec<String> {
     }
 }
 ```
+
 **使用关联类型**:
 
 ```rust
@@ -811,6 +835,7 @@ fn main() {
     println!("First: {:?}", vec.get());
 }
 ```
+
 ### 7.2 实际应用
 
 **迭代器示例**:
@@ -853,6 +878,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 8. 生命周期泛型
@@ -882,6 +908,7 @@ fn main() {
     }
 }
 ```
+
 ### 8.2 生命周期与泛型结合
 
 从引用一致性视角看，生命周期与泛型的结合是**类型层面的逻辑关系证明**，用于表达资源控制权和访问能力的逻辑依赖关系。
@@ -940,6 +967,7 @@ fn main() {
     println!("Longest: {}", result);
 }
 ```
+
 ---
 
 ## 9. 常量泛型
@@ -971,6 +999,7 @@ fn main() {
     };
 }
 ```
+
 ### 9.2 实际应用
 
 ```rust
@@ -1013,6 +1042,7 @@ fn main() {
     println!("Buffer length: {}", buffer.len());
 }
 ```
+
 ### 9.3 常量泛型的高级用法
 
 **矩阵运算**:
@@ -1091,6 +1121,7 @@ fn main() {
     // let invalid = m1 * m3;  // 编译错误！
 }
 ```
+
 ### 9.4 常量泛型的实际应用场景
 
 **类型安全的网络协议**:
@@ -1147,6 +1178,7 @@ fn main() {
     // packet_v1.checksum_v2();  // 编译错误！
 }
 ```
+
 ---
 
 ## 10. 泛型的性能
@@ -1171,6 +1203,7 @@ fn main() {
 // fn add_i32(a: i32, b: i32) -> i32 { a + b }
 // fn add_f64(a: f64, b: f64) -> f64 { a + b }
 ```
+
 ### 10.2 代码膨胀
 
 ```rust
@@ -1188,6 +1221,7 @@ fn main() {
     process(vec![1, 2, 3]);
 }
 ```
+
 ### 10.3 性能优化
 
 ```rust
@@ -1222,6 +1256,7 @@ fn main() {
     println!("Size of function pointer: {}", mem::size_of::<fn()>());
 }
 ```
+
 ### 10.4 性能对比：泛型 vs trait对象
 
 **性能测试**:
@@ -1267,6 +1302,7 @@ fn main() {
     // 通常：泛型版本 ≈ trait对象版本的 80%-95%
 }
 ```
+
 ### 10.5 编译时间优化
 
 **减少单态化开销**:
@@ -1290,6 +1326,7 @@ fn large_processing<T: Clone + PartialEq + 'static>(data: Vec<T>) {
     large_processing_impl(erased);
 }
 ```
+
 ### 10.6 内存布局优化
 
 **零开销抽象验证**:
@@ -1319,6 +1356,7 @@ fn main() {
     println!("泛型没有额外的运行时开销！");
 }
 ```
+
 ---
 
 ## 11. 实战案例
@@ -1386,6 +1424,7 @@ fn main() {
     }
 }
 ```
+
 ### 案例 2: 构建器模式
 
 ```rust
@@ -1434,6 +1473,7 @@ fn main() {
     println!("Query: {:?}", query);
 }
 ```
+
 ### 案例 3: 状态机
 
 ```rust
@@ -1486,6 +1526,7 @@ fn main() {
     // door.open(); // 编译错误！锁着的门不能打开
 }
 ```
+
 ### 案例 4: 类型安全的 API
 
 ```rust
@@ -1540,6 +1581,7 @@ fn main() {
     // let total = Distance::<Kilometers>::new(100.0) + Distance::<Miles>::new(50.0); // 编译错误！
 }
 ```
+
 ---
 
 ## 12. 常见陷阱与最佳实践
@@ -1589,6 +1631,7 @@ fn main() {
     print(42);
 }
 ```
+
 ### 12.2 最佳实践
 
 ```rust
@@ -1642,6 +1685,7 @@ fn main() {
     println!("5 + 10 = {}", add_5(10));
 }
 ```
+
 ### 12.3 泛型API设计原则
 
 **原则 1: 最小化类型参数**:
@@ -1662,6 +1706,7 @@ struct Good<K, V> {
     data: HashMap<K, V>,
 }
 ```
+
 **原则 2: 优先使用trait约束**:
 
 ```rust
@@ -1681,6 +1726,7 @@ fn main() {
     process(std::iter::once(1));      // Iterator
 }
 ```
+
 **原则 3: 提供合理的默认实现**:
 
 ```rust
@@ -1697,6 +1743,7 @@ trait Container<T> {
     fn len(&self) -> usize;
 }
 ```
+
 ---
 
 ## 13. 总结

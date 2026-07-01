@@ -98,6 +98,7 @@ impl Container for NumberContainer {
     }
 }
 ```
+
 ### 1.2 关联类型 vs 泛型参数
 
 **使用泛型参数**:
@@ -114,6 +115,7 @@ impl Container<String> for MyContainer { /* ... */ }
 
 fn use_container(c: &impl Container<i32>) { } // 需要指定类型
 ```
+
 **使用关联类型**:
 
 ```rust
@@ -131,6 +133,7 @@ impl Container for MyContainer {
 
 fn use_container(c: &impl Container) { } // 不需要指定类型
 ```
+
 **关键区别**:
 
 | 特性     | 泛型参数   | 关联类型   |
@@ -150,6 +153,7 @@ trait MyTrait {
     type Output = String;   // 有默认值 (Rust 1.92.0+)
 }
 ```
+
 **实现关联类型**:
 
 ```rust
@@ -161,6 +165,7 @@ impl MyTrait for MyStruct {
     // Output 使用默认值 String
 }
 ```
+
 **使用关联类型**:
 
 ```rust
@@ -168,6 +173,7 @@ fn process<T: MyTrait>(value: T) -> T::Item {
     // 使用 T::Item 引用关联类型
 }
 ```
+
 ---
 
 ## 2. 关联类型的使用场景
@@ -209,6 +215,7 @@ fn main() {
     }
 }
 ```
+
 **自定义迭代器**:
 
 ```rust
@@ -237,6 +244,7 @@ fn main() {
     }
 }
 ```
+
 ### 2.2 图算法
 
 ```rust
@@ -266,6 +274,7 @@ impl Graph for SimpleGraph {
     }
 }
 ```
+
 ### 2.3 类型转换
 
 ```rust
@@ -291,6 +300,7 @@ fn main() {
     println!("{}", str_temp); // "25.5°C"
 }
 ```
+
 ---
 
 ## 3. 泛型关联类型 (GAT)
@@ -318,6 +328,7 @@ impl Container for VecContainer {
     }
 }
 ```
+
 ### 3.2 GAT 的使用场景
 
 **场景 1: 借用迭代器**:
@@ -349,6 +360,7 @@ impl<T> LendingIterator for WindowsIterator<T> {
     }
 }
 ```
+
 **场景 2: 异步迭代器**:
 
 ```rust
@@ -377,6 +389,7 @@ impl AsyncIterator for AsyncRange {
     }
 }
 ```
+
 ### 3.3 Streaming Iterator
 
 ```rust
@@ -419,6 +432,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 4. 关联常量
@@ -442,6 +456,7 @@ fn main() {
     println!("{} v{}", MyPlugin::NAME, MyPlugin::VERSION);
 }
 ```
+
 ### 4.2 实战案例
 
 **案例 1: 数组大小**:
@@ -475,6 +490,7 @@ fn main() {
     print_array_info::<Array8<i32>>();
 }
 ```
+
 **案例 2: 类型限制**:
 
 ```rust
@@ -502,6 +518,7 @@ fn main() {
     print_range::<u32>();
 }
 ```
+
 ---
 
 ## 5. 高级模式
@@ -538,6 +555,7 @@ fn main() {
     }
 }
 ```
+
 ### 5.2 关联类型的约束
 
 ```rust
@@ -564,6 +582,7 @@ fn print_processed<P: Processor>(processor: &P, item: P::Item) {
     println!("Result: {}", result);  // 可以使用 Display
 }
 ```
+
 ### 5.3 关联类型的默认值
 
 ```rust
@@ -592,6 +611,7 @@ impl Parser for IntParser {
     }
 }
 ```
+
 ---
 
 ## 6. RPITIT (Return Position Impl Trait In Traits)
@@ -629,6 +649,7 @@ fn main() {
     println!("{}", sf.create());
 }
 ```
+
 ### 6.2 实战案例
 
 **案例 1: 迭代器工厂**:
@@ -661,6 +682,7 @@ fn main() {
     }
 }
 ```
+
 **案例 2: 异步工厂**:
 
 ```rust
@@ -682,6 +704,7 @@ impl AsyncFactory for DelayedNumberFactory {
     }
 }
 ```
+
 ---
 
 ## 7. 实战综合案例
@@ -794,6 +817,7 @@ fn main() {
     use_database(&sqlite);
 }
 ```
+
 ### 7.2 案例 2：Parser Combinator
 
 ```rust
@@ -840,6 +864,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 8. 常见陷阱与最佳实践
@@ -860,6 +885,7 @@ trait Iterator {
     fn next(&mut self) -> Option<Self::Item>;
 }
 ```
+
 **错误 2: GAT 生命周期约束错误**:
 
 ```rust
@@ -875,6 +901,7 @@ trait LendingIterator {
     fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
 }
 ```
+
 **错误 3: 关联类型约束遗漏**:
 
 ```rust
@@ -892,6 +919,7 @@ where
     // 现在可以打印了
 }
 ```
+
 ### 8.2 最佳实践
 
 **1. 选择合适的抽象**:
@@ -908,6 +936,7 @@ trait Converter<From, To> {
     fn convert(&self, from: From) -> To;
 }
 ```
+
 **2. 为关联类型添加约束**:
 
 ```rust
@@ -917,6 +946,7 @@ trait Processor {
     fn process(&self, item: Self::Item) -> Self::Item;
 }
 ```
+
 **3. 提供合理的默认值**:
 
 ```rust
@@ -926,6 +956,7 @@ trait Config {
     fn get_storage(&self) -> Self::Storage;
 }
 ```
+
 **4. 使用 GAT 处理借用**:
 
 ```rust
@@ -935,6 +966,7 @@ trait LendingIterator {
     fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
 }
 ```
+
 ---
 
 ## 📚 延伸阅读
@@ -964,6 +996,7 @@ struct VecIter {
 
 // 你的实现
 ```
+
 **练习 2: 创建一个类型安全的构建器**:
 
 使用关联类型创建一个类型安全的构建器模式。

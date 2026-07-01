@@ -102,6 +102,7 @@ fn main() {
     }
 }
 ```
+
 ### 1.3 暴露 Rust 函数给 C
 
 ```rust
@@ -110,6 +111,7 @@ pub extern "C" fn rust_function(x: i32, y: i32) -> i32 {
     x + y
 }
 ```
+
 ---
 
 ## 2. C++ 互操作
@@ -131,6 +133,7 @@ mod ffi {
     }
 }
 ```
+
 ### 2.2 类型映射
 
 C++ 类型到 Rust 的映射：
@@ -161,6 +164,7 @@ fn my_module(_py: Python, m: &PyModule) -> PyResult<()> {
     Ok(())
 }
 ```
+
 ### 3.2 类型转换
 
 ```rust
@@ -171,6 +175,7 @@ fn process_dict(py: Python, dict: &PyDict) -> PyResult<()> {
     Ok(())
 }
 ```
+
 ---
 
 ## 4. JavaScript/WebAssembly 互操作
@@ -204,6 +209,7 @@ impl Person {
     }
 }
 ```
+
 ### 4.2 类型映射
 
 | Rust 类型      | JavaScript 类型 |
@@ -243,6 +249,7 @@ pub extern "system" fn Java_HelloWorld_greet(
     output.into_inner()
 }
 ```
+
 ---
 
 ## 6. Go 互操作
@@ -258,6 +265,7 @@ pub extern "C" fn rust_function(x: i32) -> i32 {
     x * 2
 }
 ```
+
 ```go
 // Go 侧
 /*
@@ -272,6 +280,7 @@ func main() {
     fmt.Println(result)
 }
 ```
+
 ---
 
 ## 7. 类型映射参考
@@ -311,6 +320,7 @@ pub unsafe fn unsafe_function(x: i32) -> i32 {
     unsafe_c_function(x)
 }
 ```
+
 ### 8.2 错误处理
 
 ```rust
@@ -330,6 +340,7 @@ pub fn get_error_message(ptr: *const c_char) -> Result<String, String> {
     }
 }
 ```
+
 ### 8.3 内存管理
 
 ```rust
@@ -351,6 +362,7 @@ impl Drop for CResource {
     }
 }
 ```
+
 ---
 
 ## 9. 常见问题
@@ -364,6 +376,7 @@ impl Drop for CResource {
 ```rust
 assert_eq!(std::mem::size_of::<i32>(), 4);
 ```
+
 ### 问题2: 调用约定不匹配
 
 **错误**: 函数调用约定不一致
@@ -374,6 +387,7 @@ assert_eq!(std::mem::size_of::<i32>(), 4);
 #[no_mangle]
 pub extern "C" fn function() {}  // C 调用约定
 ```
+
 ### 问题3: 字符串编码问题
 
 **错误**: UTF-8 和 C 字符串转换错误
@@ -386,6 +400,7 @@ use std::ffi::{CString, CStr};
 let c_str = CString::new("hello").unwrap();
 let rust_str = CStr::from_ptr(c_str.as_ptr()).to_str().unwrap();
 ```
+
 ---
 
 ## 10. 参考资源

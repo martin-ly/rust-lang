@@ -142,6 +142,7 @@ mindmap
       洋葱中间件[洋葱中间件<br/>横切关注点分离]
       ECS[ECS Archetype<br/>缓存友好布局]
 ```
+
 > **认知功能**: 本 mindmap 提供 Rust 惯用法的**七层抽象全景导航**，帮助读者建立「从语法糖到架构模式」的完整心智模型。
 > 建议将此图作为学习地图：新手聚焦 L0-L2 分支，专家关注 L5-L6 的并发与架构节点。
 > 关键洞察是惯用法层级与问题粒度正相关——词法级解决局部表达，架构级解决系统组织。[来源: 💡 原创分析]
@@ -182,6 +183,7 @@ L6 架构     Tower Service             服务态射复合                低开
             ECS Archetype             缓存友好数据布局            零成本      高
 ─────────────────────────────────────────────────────────────────────────────────────────
 ```
+
 ---
 
 ## 一、权威来源与谱系方法论
@@ -258,6 +260,7 @@ graph TD
     H --> H2[洋葱中间件]
     H --> H3[ECS Archetype]
 ```
+
 > **认知功能**: 此树状图将七层惯用法谱系转化为**可遍历的分类层级**，每层3个代表性节点构成最小完整集合。建议将其作为速查索引——当遇到具体代码场景时，可自上而下定位最匹配的惯用法层级。关键洞察是惯用法的「正交覆盖」：L0-L3 聚焦单线程正确性，L4-L6 聚焦性能与并发架构。[来源: 💡 原创分析]
 
 ---
@@ -284,6 +287,7 @@ fn read_file(path: &str) -> Result<String, io::Error> {
     }
 }
 ```
+
 **惯用**:
 
 ```rust,ignore
@@ -294,6 +298,7 @@ fn read_file(path: &str) -> Result<String, io::Error> {
     Ok(contents)
 }
 ```
+
 **等价性**: `?` 是 `match` 的局部语法糖，不改变控制流语义。编译后生成相同的 MIR。 来源: [Rust Reference §6.13, TRPL §9](https://doc.rust-lang.org/reference/)
 
 ### 3.2
@@ -315,6 +320,7 @@ fn classify(value: Option<Result<i32, Error>>) -> &'static str {
     }
 }
 ```
+
 **等价性**: `if let` guards 在语义上等价于嵌套 `match`，但减少了缩进层级和重复绑定。
 
 ### 3.3
@@ -334,6 +340,7 @@ match map.get(&key) {
     None => {},
 }
 ```
+
 ### 3.4
 
 > [来源: Rust Iterator docs] 链式方法调用
@@ -355,6 +362,7 @@ for &n in &numbers {
     }
 }
 ```
+
 ---
 
 ## 四、L1 类型级惯用法
@@ -377,6 +385,7 @@ impl Meters {
 
 // 零成本：编译后 Meters 和 u64 完全同构
 ```
+
 **等价性**: `struct Meters(u64)` 与 `u64` 在内存布局上完全等价（`#[repr(transparent)]` 保证），但类型系统（Type System）将其视为不兼容类型。
 
 ### 4.2
@@ -413,6 +422,7 @@ impl Client<Connected> {
 // let client = Client::connect("...").unwrap();
 // client.connect("..."); // 编译错误！Client<Connected> 无 connect 方法
 ```
+
 ### 4.3
 
 > 来源: [Rustonomicon §4.6](https://doc.rust-lang.org/nomicon/) PhantomData 标记
@@ -432,6 +442,7 @@ struct MyBox<T> {
     _marker: PhantomData<T>, // MyBox<T> 的变型与 T 一致（协变）
 }
 ```
+
 ### 4.4
 
 > 来源: [Rust Reference §6.28](https://doc.rust-lang.org/reference/) Zero-Sized Types (ZST)
@@ -455,6 +466,7 @@ impl FileHandle<WritePermission> {
     fn write(&mut self, buf: &[u8]) -> io::Result<usize> { /* ... */ }
 }
 ```
+
 ---
 
 ## 五、L2 接口级惯用法
@@ -481,6 +493,7 @@ fn connect(port: impl Into<Port>) {
 // 调用时可隐式转换
 connect(8080u16); // Into::into(8080u16)
 ```
+
 ### 5.2
 
 > 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) Deref/DerefMut 多态
@@ -503,6 +516,7 @@ impl<T> Deref for SmartBuffer<T> {
 let buf = SmartBuffer { data: vec![1, 2, 3] };
 let first = buf.first(); // 透明调用 [T]::first
 ```
+
 > **边界**: 过度使用 `Deref` 会导致「隐式转换陷阱」——用户可能意识不到正在通过代理调用。仅对「明显是某种类型的智能指针（Smart Pointer）/包装器」使用。 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
 ### 5.3
@@ -522,6 +536,7 @@ where
 // 1.95+ 精确捕获（precise capturing）:
 fn callback() -> impl Fn() + use<> { /* ... */ }
 ```
+
 ### 5.4
 
 > 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) Borrow/AsRef 参数化
@@ -538,6 +553,7 @@ greeting("Rust");              // &str
 greeting(&String::from("Rust")); // &String → 自动解引用为 &str
 greeting(&"Rust".to_owned());    // &String
 ```
+
 ---
 
 ## 六、L3 资源级惯用法
@@ -560,6 +576,7 @@ greeting(&"Rust".to_owned());    // &String
 // *data += 1;
 // mutex.unlock(); // 易遗漏！panic 时不会执行
 ```
+
 ### 6.2
 
 > [来源: scopeguard crate docs] Scopeguard 退出处理
@@ -577,6 +594,7 @@ fn critical_section() {
     // ... 可能 panic 的操作
 }
 ```
+
 ### 6.3
 
 > 来源: [RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html) Pin 不动性契约
@@ -606,6 +624,7 @@ impl SelfReferential {
     }
 }
 ```
+
 ### 6.4
 
 > 来源: [Rustonomicon §7, Rust std docs](https://doc.rust-lang.org/nomicon/) 内部可变性分层
@@ -640,6 +659,7 @@ let max_even: Option<i32> = numbers
 // 编译器可优化为等效的循环（甚至向量化）
 // 实际性能与手写循环等价或更优
 ```
+
 ### 7.2
 
 > 来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/) 递归 → 循环变换
@@ -666,6 +686,7 @@ fn sum_fold(nums: &[i32]) -> i32 {
     nums.iter().fold(0, |acc, &n| acc + n)
 }
 ```
+
 ### 7.3
 
 > [来源: Rust Style Guide] 早期返回与守卫子句
@@ -693,6 +714,7 @@ fn process(data: Option<&[u8]>) -> Result<Output, Error> {
 //     } else { Err(Error::EmptyInput) }
 // }
 ```
+
 ### 7.4
 
 > [来源: Rust docs, collect 方法] `collect` 与 Turbofish
@@ -705,6 +727,7 @@ let squares: Vec<i32> = (0..10).map(|n| n * n).collect();
 // 或利用类型推断（变量类型已指定）
 let squares = (0..10).map(|n| n * n).collect::<Vec<i32>>();
 ```
+
 ---
 
 ## 八、L5 并发级惯用法
@@ -730,6 +753,7 @@ struct LocalCache {
 
 // LocalCache 是 Send（若 T 是 Send），但不是 Sync
 ```
+
 ### 8.2
 
 > [来源: Hewitt 1973, Actix docs] Actor mailbox 单线程处理
@@ -757,6 +781,7 @@ impl Actor for CounterActor {
 }
 // 无需 Mutex！编译期保证单线程访问
 ```
+
 ### 8.3
 
 > [来源: Hoare CSP 1978, Rust std docs] CSP channel 所有权（Ownership）转移
@@ -774,6 +799,7 @@ tx.send(data).unwrap(); // data 的所有权转移到 channel
 
 let received = rx.recv().unwrap(); // 所有权从 channel 转移到 received
 ```
+
 ### 8.4
 
 > [来源: crossbeam-epoch docs] 无锁结构的 epoch 安全
@@ -797,6 +823,7 @@ fn pop<T>(head: &Atomic<Node<T>>) -> Option<T> {
     todo!()
 }
 ```
+
 ---
 
 ## 九、L6 架构级惯用法
@@ -819,6 +846,7 @@ trait Service<Request> {
 // Service 可复合：Service A → Service B → Service C
 // 对应范畴论中的态射复合：f ∘ g
 ```
+
 ### 9.2
 
 > [来源: Tower/Axum middleware docs] 洋葱中间件模式
@@ -837,6 +865,7 @@ let app = ServiceBuilder::new()
 // 请求流向：Trace → Compression → Validate → handler
 // 响应流向：handler → Validate → Compression → Trace
 ```
+
 ### 9.3
 
 > [来源: Bevy ECS docs, Data-Oriented Design] ECS 系统图与 Archetype
@@ -859,6 +888,7 @@ fn movement(mut query: Query<(&mut Position, &Velocity)>) {
 }
 // Archetype：所有同时有 Position + Velocity 的实体存储在连续内存中
 ```
+
 ### 9.4
 
 > [来源: Armstrong 2003, Erlang Error Kernel] 错误内核模式（Error Kernel）
@@ -887,6 +917,7 @@ impl Worker {
     }
 }
 ```
+
 ---
 
 ## 十、反惯用法
@@ -915,6 +946,7 @@ graph TD
     A --> O{是否用 &Vec<T> / &String 参数?}
     O -->|是| P["反惯用：用 &[T] / &str 替代"]
 ```
+
 > **认知功能**: 此判定树提供**代码审查的系统性检查清单**，将常见的反惯用模式转化为可执行的决策路径。建议在 CR（Code Review）时按节点逐项排查：从 Stringly Typed 到参数类型选择，形成结构化评审习惯。关键洞察是反惯用法往往源于「其他语言的习惯迁移」——判定树的核心作用是打破路径依赖。[来源: 💡 原创分析]
 
 ### 常见反惯用清单
@@ -972,6 +1004,7 @@ graph TD
     M -->|是| N[使用 Iterator 链]
     M -->|否| O[使用 Vec / 数组]
 ```
+
 > **认知功能**: 此决策树将惯用法选择转化为**基于问题特征的分类流程**，降低「面对空白该用什么」的决策焦虑。建议从根节点「需要处理错误？」开始，按实际场景逐层收敛到具体惯用法。关键洞察是惯用法选择的本质是**问题归类**而非记忆匹配——一旦建立「错误→控制→并发」的问题分类直觉，选择将变得自动化。[来源: 💡 原创分析]
 
 ### 12.2 惯用法效率-认知负荷象限图
@@ -1006,6 +1039,7 @@ quadrantChart
  "Mutex": [0.3, 0.5]
  "Arc": [0.3, 0.7]
 ```
+
 > **认知功能**: 此象限图将惯用法按**认知负荷**（学习成本）和**效率**（运行时开销）两个维度定位。右上象限（高认知·高效率）是"专家工具"——Pin、ECS、Tower Service 需要深度理解但带来架构级收益。左下象限（低认知·高效率）是"日常工具"——`?` 传播、match、Newtype 是每位 Rust 程序员应立即掌握的惯用法。右下象限几乎没有点，说明 Rust 的设计哲学避免了"高认知低收益"的陷阱。
 
 ### 12.3 惯用法效率矩阵
@@ -1091,6 +1125,7 @@ quadrantChart
     └─ 掌握：Tower Service 复合、ECS、错误内核、洋葱中间件
     └─ 标志：能为团队制定惯用法规范，评审代码时识别反模式
 ```
+
 > **思维表征说明**: 此认知路径将「七层惯用法谱系」转化为**渐进式学习阶梯**——不是要求初学者一次性掌握全部，而是根据经验匹配适当的抽象层级。这与 `inter_layer_topology.md` 的跨层认知路径和 `intra_layer_model_map.md` 的层内决策树形成三维导航：纵向（层间）、横向（层内）、深度（经验递进）。 [来源: Dreyfus 技能获取模型; Bloom 认知层级]
 
 ---
@@ -1132,6 +1167,7 @@ fn main() {
     }
 }
 ```
+
 > **修正**: `unwrap()` 是 Rust 中最常见的新手陷阱。它在 `None`/`Err` 上 panic，仅在确定值有效时使用。生产代码应使用 `match`、`if let` 或 `?` 运算符。`unwrap()` 在测试代码和原型开发中常见，但不应出现在健壮的生产代码中。Clippy 提供 `unwrap_used` lint 警告 `unwrap` 的使用。这与 Go 的 `if err != nil` 或 Swift 的 `try!` 类似——Rust 的 `unwrap` 是显式的"我知道这是安全的"断言，失败时立即崩溃而非静默传播错误。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：`clone` 的隐式成本（逻辑错误）
@@ -1153,6 +1189,7 @@ fn fixed() {
     println!("{:?}", processed); // ✅ 无克隆
 }
 ```
+
 > **修正**:
 >
 > Rust 的所有权系统强制开发者思考数据克隆的成本。
@@ -1185,6 +1222,7 @@ fn fixed() {
     println!("{}", s); // ✅ s 仍有效
 }
 ```
+
 > **修正**: `ref` 绑定模式在模式匹配（Pattern Matching）中创建引用，但在 `match s { ref t => ... }` 中，`s` 仍被按值匹配（转移所有权），而 `t` 是对被转移值的引用。这在逻辑上正确但语义令人困惑。惯用写法是 `match &s { t => ... }`——直接对引用进行匹配，清晰表达意图。Clippy lint `match_ref_pats` 建议将 `match x { ref y => ... }` 改写为 `match &x { y => ... }`。这是 Rust"显式优于隐式"原则的体现：让引用的创建位置一目了然。[来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)] · [来源: [Clippy Lints](https://rust-lang.github.io/rust-clippy//master/index.html)]
 
 ### 10.4 边界测试：`String` 与 `&str` 的类型不匹配（编译错误）
@@ -1202,6 +1240,7 @@ fn main() {
     // 但这里 name 被按值传递，类型不匹配
 }
 ```
+
 > **修正**: `String` 实现了 `Deref<Target = str>`，因此 `&String` 可自动解引用为 `&str`。但 `greet(name)` 传递的是 `String` 本身，而非 `&String`，自动解引用不适用。正确写法是 `greet(&name)`——显式获取引用，触发 `Deref` 强制转换。这是 Rust 类型系统的**自动解引用**（deref coercion）规则：仅当从引用到引用的转换时自动进行。`String` → `&str` 需要两步：`String` → `&String`（显式 `&`），然后 `&String` → `&str`（自动 `Deref`）。此规则避免了隐式转换带来的不可预测性，同时保持了表达力。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-02-deref.html)] · [来源: [Rust Reference — Type Coercions](https://doc.rust-lang.org/reference/type-coercions.html)]
 
 ### 10.5 边界测试：`Default::default()` 与类型推断的歧义（编译错误）
@@ -1222,6 +1261,7 @@ fn main() {
     };
 }
 ```
+
 > **修正**: `Default::default()` 是 Rust 中初始化值的惯用方法，但若上下文无法推断返回类型，编译错误。这与 `Vec::new()`（同样需要类型推断上下文）或 `Into::into()`（目标类型决定转换）类似。`Default` trait 的设计：提供类型的"零值"或"空值"，替代 C 的 `memset(&obj, 0, sizeof(obj))`（不安全，可能违反类型不变式）。`#[derive(Default)]` 为 struct 生成 `Default` 实现，所有字段也实现 `Default`。这与 C++ 的 `T()`（值初始化）或 Java 的 `new T()`（对象默认构造）不同——Rust 的 `Default` 是显式 trait，不隐式调用，类型安全。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/default/trait.Default.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.7 边界测试：`std::mem::replace` 与 `take` 的惯用选择（逻辑错误）
@@ -1240,6 +1280,7 @@ fn main() {
     println!("old: {}, new: {}", old, s);
 }
 ```
+
 > **修正**: `std::mem::replace` 将值替换为新值，返回旧值。`std::mem::take` 是 `replace(&mut t, T::default())` 的便捷方法，要求 `T: Default`。`take` 更惯用（语义清晰："取走并留默认值"），但仅适用于实现 `Default` 的类型。对于不实现 `Default` 的类型（如某些自定义 struct），必须使用 `replace` 并显式提供新值。这与 C++ 的 `std::exchange`（C++14，类似 `replace`）或 Swift 的 `swap`（交换两个值，非替换）不同——Rust 的 `take` 是获取所有权并留默认值的惯用模式，常见于 `Option::take`（取走 `Some`，留 `None`）。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/fn.take.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：`Default` 派生与手动实现的语义差异（逻辑错误）
@@ -1258,6 +1299,7 @@ fn main() {
     println!("{}:{}", config.host, config.port);
 }
 ```
+
 > **修正**: `#[derive(Default)]` 为所有字段调用 `Default::default()`，可能产生**语义无效**的默认值。`u16::default() = 0`，`String::default() = ""`。修复：1) **手动实现** `Default`：`impl Default for Config { fn default() -> Self { Self { port: 8080, host: "localhost".to_string() } } }`；2) **builder 模式**：强制显式设置关键字段；3) **`#[serde(default = "default_port")]`**：自定义反序列化默认值。`Default` 的设计目的：类型系统的"空值"概念，用于泛型代码（`Vec::resize_with`、`Option::unwrap_or_default`）。这与 C++ 的默认构造函数（类似，但可能执行复杂逻辑）或 Java 的 `null`（无默认值概念）不同——Rust 的 `Default` 是纯函数，无副作用，语义简单。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/default/trait.Default.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines//interoperability.html#c-common-traits)]
 > **过渡**: Rust 惯用法谱系全景（Idioms Spectrum） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 惯用法谱系全景（Idioms Spectrum） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

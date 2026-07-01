@@ -62,6 +62,7 @@ fn rule1() {
     // 每个资源在任意时刻都有唯一的所有者
 }
 ```
+
 **规则 2: 同一时间只能有一个所有者**:
 
 ```rust
@@ -73,6 +74,7 @@ fn rule2() {
     println!("{}", s2);     // ✅ 正确！s2 现在是所有者
 }
 ```
+
 **规则 3: 所有者离开作用域时，值被自动释放**:
 
 ```rust
@@ -85,6 +87,7 @@ fn rule3() {
     // s 在这里不可用
 }
 ```
+
 ### 1.2 为什么需要所有权
 
 **对比其他语言：**
@@ -120,6 +123,7 @@ fn takes_ownership(s: String) {
     println!("{}", s);
 } // s 在这里被释放
 ```
+
 ---
 
 ## 2. 变量的所有权
@@ -140,6 +144,7 @@ fn main() {
     println!("{}", s2);     // ✅ s2 有效
 }
 ```
+
 ### 2.2 所有权转移 (Move)
 
 **什么情况下发生 Move？**
@@ -167,6 +172,7 @@ fn gives_ownership() -> String {
     String::from("yours")
 } // 返回值的所有权转移给调用者
 ```
+
 ### 2.3 复制语义 (Copy)
 
 **哪些类型实现了 Copy？**
@@ -208,6 +214,7 @@ fn use_point() {
     println!("p1.x = {}, p2.x = {}", p1.x, p2.x);  // ✅ 两者都可用
 }
 ```
+
 **什么类型不能实现 Copy？**
 
 ```rust
@@ -221,6 +228,7 @@ struct Container {
 }
 // 不能 #[derive(Copy, Clone)]
 ```
+
 ---
 
 ## 3. 函数与所有权
@@ -247,12 +255,14 @@ fn calculate_length(s: &String) -> usize {
     s.len()
 } // s 在这里不会被 drop（因为只是借用）
 ```
+
 **所有权转移总结图：**
 
 ```text
 传入函数参数: 值 ──Move──→ 函数参数 ──函数结束──→ drop (除非返回)
 返回函数值: 函数内部 ──Move──→ 返回值 ──Move──→ 调用者
 ```
+
 ---
 
 ## 4. 返回值与所有权
@@ -277,6 +287,7 @@ fn takes_and_gives_back(s: String) -> String {
     s  // 返回传入的值
 }
 ```
+
 ---
 
 ## 5. 实战练习
@@ -305,6 +316,7 @@ fn answer2() {
     println!("{} {}", s, s2);  // ✅ 两者都可用
 }
 ```
+
 ### 练习 2: 实现一个简单的字符串交换函数
 
 ```rust
@@ -318,6 +330,7 @@ fn swap_strings() {
     println!("s1 = {}, s2 = {}", s1, s2);  // s1 = world, s2 = hello
 }
 ```
+
 ### 练习 3: 计算字符串长度后不丢失所有权
 
 ```rust
@@ -342,6 +355,7 @@ fn get_length_return(s: String) -> (String, usize) {
     (s, len)
 }
 ```
+
 ---
 
 ## 6. 常见错误与解决
@@ -362,6 +376,7 @@ fn fix1() {
     println!("{}", s);  // ✅
 }
 ```
+
 ### 错误 2: value used after move
 
 ```rust
@@ -386,6 +401,7 @@ fn borrow_value(s: &String) {
     println!("{}", s);
 }
 ```
+
 ---
 
 ## 7. 最佳实践
@@ -405,6 +421,7 @@ fn transfer_to_thread(data: String) {
     });
 }
 ```
+
 ### 7.2 何时使用 Copy
 
 ```rust
@@ -421,6 +438,7 @@ struct LargeData {
     buffer: [u8; 1024],
 }
 ```
+
 ### 7.3 何时使用 Clone
 
 ```rust
@@ -434,6 +452,7 @@ fn duplicate_data() {
     store(&backup);
 }
 ```
+
 ---
 
 ## ✅ 完成检查

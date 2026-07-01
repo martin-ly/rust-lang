@@ -29,6 +29,7 @@ pub enum Option<T> {
     Some(T),
 }
 ```
+
 **核心方法**:
 
 | 方法  | 签名  | 描述  | 示例  |
@@ -80,6 +81,7 @@ fn main() {
     assert_eq!(result, Some(85));
 }
 ```
+
 ---
 
 ## 2. Result类型
@@ -92,6 +94,7 @@ pub enum Result<T, E> {
     Err(E),
 }
 ```
+
 **核心方法**:
 
 | 方法           | 签名                                                | 描述               | 示例                                       |
@@ -144,6 +147,7 @@ fn main() {
     assert_eq!(result, Ok(85));
 }
 ```
+
 ---
 
 ## 3. Error trait
@@ -165,6 +169,7 @@ pub trait Error: Debug + Display {
     }
 }
 ```
+
 **实现示例**:
 
 ```rust
@@ -202,6 +207,7 @@ fn main() {
     println!("Debug: {:?}", error);
 }
 ```
+
 ---
 
 ## 4. ?操作符
@@ -211,6 +217,7 @@ fn main() {
 ```rust
 expression?
 ```
+
 **等价转换**:
 
 ```rust
@@ -226,6 +233,7 @@ match result {
     Err(err) => return Err(From::from(err)),
 }
 ```
+
 **使用规则**:
 
 ```rust
@@ -257,6 +265,7 @@ fn main() {
     let _ = complex_operation();
 }
 ```
+
 ---
 
 ## 5. panic机制
@@ -275,6 +284,7 @@ assert!(condition, "assertion failed");
 assert_eq!(left, right, "values not equal");
 assert_ne!(left, right, "values equal");
 ```
+
 **panic钩子**:
 
 ```rust
@@ -301,6 +311,7 @@ fn main() {
     }
 }
 ```
+
 **unwrap家族**:
 
 | 方法                | 行为                   | 使用场景           |
@@ -323,6 +334,7 @@ pub trait From<T> {
     fn from(T) -> Self;
 }
 ```
+
 **错误转换**:
 
 ```rust
@@ -362,6 +374,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 **完整方法对比表**:

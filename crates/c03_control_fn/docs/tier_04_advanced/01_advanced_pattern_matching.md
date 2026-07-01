@@ -113,6 +113,7 @@
 └── 或模式与范围
     └── 范围模式技巧
 ```
+
 ---
 
 ## 1. 复杂嵌套模式
@@ -162,6 +163,7 @@ fn main() {
     }
 }
 ```
+
 ### 组合结构体与枚举
 
 ```rust
@@ -215,6 +217,7 @@ fn main() {
     analyze_shape(&circle);
 }
 ```
+
 ---
 
 ## 2. 守卫与绑定
@@ -249,6 +252,7 @@ fn main() {
     }
 }
 ```
+
 ### @ 绑定高级用法
 
 ```rust
@@ -291,6 +295,7 @@ fn main() {
     }
 }
 ```
+
 ### 多重绑定
 
 ```rust
@@ -325,6 +330,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 3. 切片模式
@@ -358,6 +364,7 @@ fn main() {
     }
 }
 ```
+
 ### 复杂切片模式
 
 ```rust
@@ -398,6 +405,7 @@ fn main() {
     analyze_sequence(&[5, 4, 3, 2, 1]);
 }
 ```
+
 ### 字符串切片模式
 
 ```rust
@@ -422,6 +430,7 @@ fn main() {
     parse_command("delete id name email");
 }
 ```
+
 ---
 
 ## 4. 或模式与范围
@@ -457,6 +466,7 @@ fn main() {
     }
 }
 ```
+
 ### 范围模式技巧
 
 ```rust
@@ -490,6 +500,7 @@ fn main() {
     }
 }
 ```
+
 ### 或模式与守卫
 
 ```rust
@@ -511,6 +522,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 5. 引用模式
@@ -542,6 +554,7 @@ fn main() {
     println!("数据: {:?}", data);
 }
 ```
+
 ### 解引用模式
 
 ```rust
@@ -568,6 +581,7 @@ fn main() {
     }
 }
 ```
+
 ### 引用与所有权
 
 ```rust
@@ -597,6 +611,7 @@ fn main() {
     println!("{}", s);  // OK
 }
 ```
+
 ---
 
 ## 6. 结构化绑定
@@ -624,6 +639,7 @@ fn main() {
     println!("数字: {}", number);
 }
 ```
+
 ### if-let 与 while-let
 
 ```rust
@@ -652,6 +668,7 @@ fn main() {
     }
 }
 ```
+
 ### 函数参数模式
 
 ```rust
@@ -678,6 +695,7 @@ fn main() {
     println!("距离: {}", distance(p1, p2));
 }
 ```
+
 ---
 
 ## 7. 宏与模式
@@ -706,6 +724,7 @@ fn main() {
     println!("结果: {}", result);
 }
 ```
+
 ### 模式匹配宏
 
 ```rust
@@ -731,6 +750,7 @@ fn main() {
     println!("提取值: {}", value);
 }
 ```
+
 ---
 
 ## 8. 无可实例化类型模式匹配 (Rust 1.92.0)
@@ -760,6 +780,7 @@ fn main() {
     // let result = impossible_function(v);
 }
 ```
+
 **应用场景**：类型级别的不可能性证明
 
 ```rust
@@ -780,6 +801,7 @@ fn main() {
     }
 }
 ```
+
 **注意**：标准库在 Rust 1.82 中稳定化了 `core::convert::Infallible`，它就是一个无可实例化枚举。
 
 ### Never 类型 (!)
@@ -813,6 +835,7 @@ fn main() {
     println!("x: {}", x);
 }
 ```
+
 **Never 类型的模式匹配**：
 
 ```rust
@@ -838,6 +861,7 @@ fn main() {
     }
 }
 ```
+
 **Never 类型的子类型规则**：
 
 ```rust
@@ -857,6 +881,7 @@ fn demonstrate_never_coercion() {
 fn some_condition() -> bool { true }
 fn calculate() -> i32 { 42 }
 ```
+
 ### 省略不可达分支
 
 Rust 1.92.0 允许在模式匹配中省略无可实例化类型的分支：
@@ -890,6 +915,7 @@ fn demo_omit_branches() {
     // 不需要 else 分支
 }
 ```
+
 **更复杂的例子**：泛型函数中的不可达性
 
 ```rust
@@ -925,6 +951,7 @@ fn main() {
     println!("处理结果: {}", process_infallible_v2(result));
 }
 ```
+
 ### 编译器优化
 
 编译器对无可实例化类型有特殊的优化：
@@ -956,6 +983,7 @@ fn main() {
     println!("值: {}", value);
 }
 ```
+
 **LLVM 层面的优化**：
 
 ```rust
@@ -975,6 +1003,7 @@ pub fn extract_ok_optimized(r: Result<i32, Void>) -> i32 {
     unsafe { std::mem::transmute(r) }  // 仅用于说明，实际不需要 unsafe
 }
 ```
+
 ### 实际应用：状态机中的不可达状态
 
 ```rust
@@ -1029,6 +1058,7 @@ fn main() {
     // machine.restart();  // 这会 panic，类型系统无法阻止，但函数签名已表明
 }
 ```
+
 **最佳实践**：
 
 1. **使用 `core::convert::Infallible`** 而不是自定义空枚举（Rust 1.82+）
@@ -1064,6 +1094,7 @@ fn main() {
     }
 }
 ```
+
 ### 穷尽性与优化
 
 ```rust
@@ -1081,6 +1112,7 @@ fn main() {
     assert_eq!(result, result2);
 }
 ```
+
 ### 大型枚举优化
 
 ```rust
@@ -1098,6 +1130,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 **最后更新**: 2025-12-11

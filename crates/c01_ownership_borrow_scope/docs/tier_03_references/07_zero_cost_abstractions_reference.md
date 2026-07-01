@@ -167,6 +167,7 @@ for i in 0..1000 {
     }
 }
 ```
+
 **关键点**:
 
 - ✅ 抽象层不引入运行时开销
@@ -205,6 +206,7 @@ LLVM IR
     ↓ (LLVM 优化)
 机器码
 ```
+
 #### 关键优化
 
 1. **常量折叠 (Constant Folding)**
@@ -222,6 +224,7 @@ LLVM IR
        70  // 直接返回计算结果
    }
    ```
+
 2. **死代码消除 (Dead Code Elimination)**
 
    ```rust
@@ -240,6 +243,7 @@ LLVM IR
        // else 分支被完全移除
    }
    ```
+
 3. **内联 (Inlining)**
 
    ```rust
@@ -257,6 +261,7 @@ LLVM IR
        15  // 常量折叠 + 内联
    }
    ```
+
 4. **向量化 (Vectorization)**
 
    ```rust
@@ -267,6 +272,7 @@ LLVM IR
 
    // 编译器可能生成 SIMD 指令，一次处理多个元素
    ```
+
 #### 优化级别
 
 | 级别  | 标志             | 说明         | 使用场景     |
@@ -285,6 +291,7 @@ opt-level = 3
 lto = true  # Link-Time Optimization
 codegen-units = 1  # 更好的优化，但编译慢
 ```
+
 ### 1.3 与 C++ 的对比
 
 #### 零成本抽象对比
@@ -309,12 +316,14 @@ fn sum_rust(data: &[i32]) -> i32 {
     data.iter().sum()
 }
 ```
+
 ```cpp
 // C++
 int sum_cpp(const std::vector<int>& data) {
     return std::accumulate(data.begin(), data.end(), 0);
 }
 ```
+
 **性能**: 🤝 相同（都优化为高效的循环）
 
 **案例 2: 错误处理**:
@@ -334,6 +343,7 @@ fn caller() -> Result<i32, String> {
     Ok(result * 2)
 }
 ```
+
 ```cpp
 // C++ (异常有开销)
 int divide(int a, int b) {
@@ -353,6 +363,7 @@ int caller() {
     }
 }
 ```
+
 **性能**: 🦀 Rust 更优（Result 是零成本，C++ 异常有开销）
 
 ---
@@ -377,6 +388,7 @@ fn main() {
     let s = max("hello", "world"); // &str 版本
 }
 ```
+
 **编译器生成**:
 
 ```rust
@@ -399,6 +411,7 @@ fn main() {
     let s = max_str("hello", "world");
 }
 ```
+
 #### 优势
 
 ✅ **零运行时开销**: 无虚函数表查找
@@ -421,6 +434,7 @@ fn main() {
 // 编译器为每个类型组合生成独立的 HashMap 实现
 // HashMap_str_i32, HashMap_i32_str, etc.
 ```
+
 ### 2.2 单态化的成本
 
 #### 代码膨胀 (Code Bloat)
@@ -441,6 +455,7 @@ fn main() {
     // ... 每个类型都生成一份代码
 }
 ```
+
 **影响**:
 
 - ⚠️ **二进制大小增加**: 每个类型都有独立实现
@@ -460,6 +475,7 @@ cargo bloat --release
 # 查看单态化的影响
 cargo build --release -Z print-type-sizes
 ```
+
 ### 2.3 优化策略
 
 #### 策略 1: 提取非泛型逻辑
@@ -491,6 +507,7 @@ fn process<T: std::fmt::Debug>(items: Vec<T>) {
     process_footer();  // 只有一份代码
 }
 ```
+
 #### 策略 2: 使用 Trait 对象（当适合时）
 
 ```rust
@@ -512,6 +529,7 @@ fn dynamic_dispatch(items: Vec<Box<dyn std::fmt::Display>>) {
 // - 静态分发：更快，但代码更大
 // - 动态分发：代码小，但有虚函数开销
 ```
+
 #### 策略 3: 类型边界优化
 
 ```rust
@@ -525,6 +543,7 @@ fn process<T: std::fmt::Debug>(value: T) {
     println!("{:?}", value);
 }
 ```
+
 ---
 
 ## 3. 内联优化
@@ -561,6 +580,7 @@ fn compute() -> i32 {
     55  // 常量折叠
 }
 ```
+
 #### 内联的优势
 
 ✅ **消除函数调用开销**: 无需保存/恢复寄存器、跳转等
@@ -585,6 +605,7 @@ fn fast_path(x: i32) -> i32 {
     x * 2
 }
 ```
+
 **使用场景**:
 
 - ✅ 小函数（几行代码）
@@ -601,6 +622,7 @@ fn critical_tiny_function(x: i32) -> i32 {
     x + 1
 }
 ```
+
 **使用场景**:
 
 - ✅ 极小的关键函数
@@ -616,6 +638,7 @@ fn debugging_function() {
     // 调试时需要保留调用栈
 }
 ```
+
 **使用场景**:
 
 - 🔍 调试（保留调用栈）
@@ -630,6 +653,7 @@ pub fn public_api() {
     // ...
 }
 ```
+
 **关键点**:
 
 - ⚠️ 没有 `#[inline]` 的公共函数不会跨 crate 内联
@@ -675,6 +699,7 @@ pub fn complex_algorithm(data: &[i32]) -> Vec<i32> {
     // ... 50+ 行复杂逻辑
 }
 ```
+
 ---
 
 ## 4. Trait 对象 vs 泛型
@@ -694,6 +719,7 @@ fn main() {
     process_static("hello");   // 生成 process_static_str
 }
 ```
+
 **特点**:
 
 - ✅ 零运行时开销
@@ -713,6 +739,7 @@ fn main() {
     process_dynamic(&"hello");
 }
 ```
+
 **特点**:
 
 - ✅ 代码共享
@@ -747,6 +774,7 @@ for shape in shapes {
     shape.draw();  // 通过 vtable 查找并调用
 }
 ```
+
 **vtable 结构**:
 
 ```text
@@ -757,6 +785,7 @@ Box<dyn Draw>
            ├─ drop 函数指针
            └─ size/alignment 等元数据
 ```
+
 ### 4.2 性能对比
 
 #### 基准测试
@@ -799,6 +828,7 @@ fn benchmark(c: &mut Criterion) {
 criterion_group!(benches, benchmark);
 criterion_main!(benches);
 ```
+
 **典型结果**:
 
 | 方法         | 时间   | 相对性能    |
@@ -826,6 +856,7 @@ criterion_main!(benches);
                                           考虑泛型        使用 Trait 对象
                                        (有限类型)        (动态分发)
 ```
+
 #### 使用场景对比
 
 | 场景         | 推荐方案   | 原因             |
@@ -856,6 +887,7 @@ pub fn process_flexible(processor: &dyn Processor, data: &str) -> String {
 
 // 用户可根据需求选择
 ```
+
 ---
 
 ## 5. 迭代器优化
@@ -883,6 +915,7 @@ while i < 1000 {
     i += 1;
 }
 ```
+
 **为什么零成本**？
 
 1. ✅ **内联**: 所有迭代器方法都内联
@@ -935,6 +968,7 @@ fn benchmark(c: &mut Criterion) {
 criterion_group!(benches, benchmark);
 criterion_main!(benches);
 ```
+
 **典型结果**: 三者性能完全相同！
 
 ### 5.2 链式调用优化
@@ -966,6 +1000,7 @@ for x in data {
     }
 }
 ```
+
 **关键优化**:
 
 - ✅ **循环融合**: 多个操作合并为一个循环
@@ -989,6 +1024,7 @@ for item in iter.take(3) {
 }
 // 只会过滤和打印前3个满足条件的元素
 ```
+
 ### 5.3 迭代器 vs 循环
 
 #### 何时使用迭代器
@@ -1013,6 +1049,7 @@ let result = numbers
     .map(|x| x * x)
     .sum();
 ```
+
 #### 何时使用循环
 
 ⚠️ **考虑使用循环**:
@@ -1046,6 +1083,7 @@ for i in 0..data.len() {
     }
 }
 ```
+
 #### 性能对比示例
 
 ```rust
@@ -1070,6 +1108,7 @@ fn process_loop(data: &[i32]) -> Vec<i32> {
 
 // 性能：完全相同！
 ```
+
 ---
 
 ## 6. 所有权系统的零成本
@@ -1091,6 +1130,7 @@ fn process_data(data: &Vec<i32>) {
 //     printf("First: %d\n", (*data)[0]);
 // }
 ```
+
 **关键点**:
 
 - ✅ 无运行时借用跟踪
@@ -1105,12 +1145,14 @@ fn rust_version(data: &[i32]) -> i32 {
     data.iter().sum()  // 安全 + 零成本
 }
 ```
+
 ```cpp
 // C++: 同样性能，但无安全保证
 int cpp_version(const std::vector<int>& data) {
     return std::accumulate(data.begin(), data.end(), 0);
 }
 ```
+
 ### 6.2 Move 语义
 
 #### 零成本所有权转移
@@ -1133,6 +1175,7 @@ fn main() {
     // data 不再可用，编译时检查
 }
 ```
+
 **编译后**:
 
 ```text
@@ -1143,6 +1186,7 @@ Stack:
                           ↓
     函数接收 (8 bytes)
 ```
+
 **与 C++ 对比**:
 
 ```cpp
@@ -1155,6 +1199,7 @@ take_ownership(std::move(data));
 // Rust: 默认 move，编译时检查
 // C++: 需要显式 move，可能忘记
 ```
+
 #### 优化 Clone
 
 ```rust
@@ -1171,6 +1216,7 @@ fn process(mut data: Vec<i32>) -> Vec<i32> {
     data  // move 返回，零成本
 }
 ```
+
 ### 6.3 生命周期零成本
 
 #### 生命周期擦除
@@ -1187,6 +1233,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 //     return strlen(x) > strlen(y) ? x : y;
 // }
 ```
+
 **关键点**:
 
 - ✅ 生命周期只在编译时存在
@@ -1208,6 +1255,7 @@ fn process<'a, 'b>(data: ComplexRef<'a, 'b>) -> &'a str {
 
 // 编译后: 只是简单的指针操作，无开销
 ```
+
 ---
 
 ## 7. 实战案例分析
@@ -1241,6 +1289,7 @@ fn concat_best(strings: &[String]) -> String {
     strings.join("")
 }
 ```
+
 **性能对比** (1000 个字符串):
 
 | 方法          | 时间  | 分配次数 |
@@ -1286,6 +1335,7 @@ fn transform_best(mut numbers: Vec<i32>) -> Vec<i32> {
     numbers  // 零额外分配
 }
 ```
+
 ### 7.3 错误处理优化
 
 #### 案例: Result 传播
@@ -1321,6 +1371,7 @@ fn read_file_best(path: &str) -> Result<String, io::Error> {
     std::fs::read_to_string(path)
 }
 ```
+
 **关键点**:
 
 - `?` 操作符是零成本的（编译为简单的分支）

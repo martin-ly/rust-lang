@@ -95,6 +95,7 @@ async fn main() {
     formal_verification::deadlock_detection::demo_deadlock_scenario().await;
 }
 ```
+
 **形式化系统:**
 
 ```text
@@ -110,6 +111,7 @@ Hoare 三元组:
 度量函数 φ: State → ℕ
 ∀s. B(s) ⟹ φ(C(s)) < φ(s)
 ```
+
 ### 1. 异步语义理论 (`async_semantics_theory`)
 
 **核心内容:**
@@ -136,6 +138,7 @@ async fn main() {
     async_semantics_theory::monad_laws::verify_all().await;
 }
 ```
+
 **关键理论:**
 
 ```text
@@ -152,6 +155,7 @@ Monad 法则:
 2. 右单位元: m >>= return ≡ m
 3. 结合律: (m >>= f) >>= g ≡ m >>= (λx. f(x) >>= g)
 ```
+
 ### 2. 异步递归分析 (`async_recursion_analysis`)
 
 **核心内容:**
@@ -179,6 +183,7 @@ async fn main() {
     async_recursion_analysis::tree_traversal::verify_equivalence().await;
 }
 ```
+
 **关键技术:**
 
 ```rust
@@ -204,6 +209,7 @@ fn fibonacci(n: u64) -> Pin<Box<dyn Future<Output = u64> + Send>> {
     })
 }
 ```
+
 ### 3. Actor/Reactor 模式 (`actor_reactor_patterns`)
 
 **核心内容:**
@@ -231,6 +237,7 @@ async fn main() {
     actor_reactor_patterns::tokio_reactor_analysis::demo_event_loop().await;
 }
 ```
+
 **形式化定义:**
 
 ```text
@@ -246,6 +253,7 @@ Reactor = (EventDemultiplexer, EventHandlers, EventLoop)
 - EventHandlers: 处理器集合
 - EventLoop: 事件循环
 ```
+
 ### 4. CSP 模型对比 (`csp_model_comparison`)
 
 **核心内容:**
@@ -276,6 +284,7 @@ async fn main() {
     csp_model_comparison::pipeline::compare().await;
 }
 ```
+
 **对比表:**
 
 | 特性         | Golang    | Rust             |
@@ -303,6 +312,7 @@ cargo test --lib async_recursion_analysis
 cargo test --lib actor_reactor_patterns
 cargo test --lib csp_model_comparison
 ```
+
 ### 学习路径建议
 
 #### 1. 理论基础阶段 (1-2周)
@@ -353,6 +363,7 @@ cargo test --lib csp_model_comparison
 │  Ready  │
 └─────────┘
 ```
+
 ### Tokio 运行时架构
 
 ```text
@@ -373,6 +384,7 @@ cargo test --lib csp_model_comparison
 │  └──────────────────────────────────┘  │
 └─────────────────────────────────────────┘
 ```
+
 ## 🎓 学习资源
 
 ### 官方文档
@@ -430,6 +442,7 @@ cargo test csp_model_comparison
 # 运行性能基准测试
 cargo bench
 ```
+
 ## 📈 进度跟踪
 
 - [ ] 完成异步语义理论学习

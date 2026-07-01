@@ -123,6 +123,7 @@
     ├── vec! 宏
     └── DSL 示例
 ```
+
 ---
 
 ## 1. 声明宏概述
@@ -145,6 +146,7 @@ macro_rules! macro_name {
     };
 }
 ```
+
 ---
 
 ## 2. 基础语法
@@ -163,6 +165,7 @@ fn main() {
     hello!();  // 输出: Hello, macro!
 }
 ```
+
 ### 2.2 带参数宏
 
 ```rust
@@ -179,6 +182,7 @@ fn main() {
     say!(2 + 3);          // 输出: 5
 }
 ```
+
 ### 2.3 多分支宏
 
 ```rust
@@ -200,6 +204,7 @@ fn main() {
     assert_eq!(calculate!(1, 2, 3), 6);
 }
 ```
+
 ---
 
 ## 3. 模式匹配
@@ -231,6 +236,7 @@ fn main() {
     debug!(x + 10);   // 输出: x + 10 = 52
 }
 ```
+
 ### 3.3 类型匹配
 
 ```rust
@@ -245,6 +251,7 @@ fn main() {
     let v2 = create_vec!(String);
 }
 ```
+
 ---
 
 ## 4. 重复语法
@@ -263,6 +270,7 @@ fn main() {
     assert_eq!(v, vec!["a", "b", "c"]);
 }
 ```
+
 **重复语法**:
 
 - `$(...)*`: 零次或多次
@@ -286,6 +294,7 @@ fn main() {
     assert_eq!(m, vec![vec![1,2,3], vec![4,5,6]]);
 }
 ```
+
 ### 4.3 计数器
 
 ```rust
@@ -300,6 +309,7 @@ fn main() {
     assert_eq!(count!(a b c), 3);
 }
 ```
+
 ---
 
 ## 5. 递归宏
@@ -319,6 +329,7 @@ fn main() {
     assert_eq!(sum!(1, 2, 3, 4), 10);
 }
 ```
+
 ### 5.2 编译期斐波那契
 
 ```rust
@@ -333,6 +344,7 @@ macro_rules! fib {
 // 注意：这不是真正的编译期计算，只是语法展开
 // 实际使用应该用 const fn
 ```
+
 ### 5.3 树形结构
 
 ```rust
@@ -366,6 +378,7 @@ impl Node {
     }
 }
 ```
+
 ---
 
 ## 6. 卫生宏
@@ -390,6 +403,7 @@ fn main() {
     assert_eq!(result, 3);  // 2 (外部) + 1 (宏内部)
 }
 ```
+
 ### 6.2 破坏卫生性
 
 使用 `$` 前缀可以跨越卫生边界：
@@ -406,6 +420,7 @@ fn main() {
     println!("{}", x);  // 可以访问 x
 }
 ```
+
 ---
 
 ## 7. 实战案例
@@ -442,6 +457,7 @@ fn main() {
     let v3 = my_vec![0; 5];
 }
 ```
+
 ### 7.2 HashMap 初始化宏
 
 ```rust
@@ -467,6 +483,7 @@ fn main() {
     assert_eq!(map.get("a"), Some(&1));
 }
 ```
+
 ### 7.3 assert_matches! 宏
 
 ```rust
@@ -489,6 +506,7 @@ fn main() {
     // assert_matches!(x, None);  // 会 panic
 }
 ```
+
 ### 7.4 DSL 示例：SQL 查询
 
 ```rust
@@ -513,6 +531,7 @@ fn main() {
     // 输出: SELECT id, name, email FROM users WHERE age > 18
 }
 ```
+
 ### 7.5 测试宏
 
 ```rust
@@ -531,6 +550,7 @@ test_case!(test_add, 2 + 2 => 4);
 test_case!(test_sub, 5 - 3 => 2);
 test_case!(test_mul, 3 * 4 => 12);
 ```
+
 ---
 
 ## 8. 总结

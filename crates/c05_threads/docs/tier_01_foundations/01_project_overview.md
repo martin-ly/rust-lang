@@ -164,6 +164,7 @@
     ├── 工作窃取
     └── 并行算法
 ```
+
 ---
 
 ## 🎯 模块定位
@@ -249,6 +250,7 @@
     ├── SIMD 与并行优化
     └── 形式化验证
 ```
+
 ### 3. 六大核心模块
 
 #### 📦 **1. 并发控制** (`concurrency/`)
@@ -307,6 +309,7 @@ rustc --version  # 应显示 rustc 1.90.0 或更高
 # 在工作区根目录
 cd e:\_src\rust-lang
 ```
+
 ### 运行示例
 
 ```bash
@@ -322,6 +325,7 @@ cargo run -p c05_threads --example basic
 # 运行 Rust 1.92.0 特性演示
 cargo run -p c05_threads --example rust_192_features_demo
 ```
+
 ### Hello, Concurrent World
 
 ```rust
@@ -349,6 +353,7 @@ fn main() {
     // 输出: 处理后的数据: [2, 4, 6, 8, 10]
 }
 ```
+
 ---
 
 ## 📚 学习路径
@@ -501,6 +506,7 @@ flume = "0.11"
 # 异步运行时 (可选)
 tokio = { version = "1.47", features = ["full"], optional = true }
 ```
+
 ### 版本要求
 
 - **Rust**: 1.92.0+ (Edition 2024)
@@ -518,6 +524,7 @@ tokio = { version = "1.47", features = ["full"], optional = true }
 ```bash
 cargo bench -p c05_threads
 ```
+
 典型结果（参考）：
 
 | 操作                  | 吞吐量      | 延迟   |

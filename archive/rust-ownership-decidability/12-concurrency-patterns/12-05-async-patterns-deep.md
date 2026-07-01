@@ -57,6 +57,7 @@
     - [Formal Semantics](#formal-semantics)
     - [Rust 1.94 Features](#rust-194-features)
     - [Related Patterns](#related-patterns)
+  - [*This document is part of the Rust Ownership \& Decidability documentation series. For questions or contributions, refer to the project repository.*](#this-document-is-part-of-the-rust-ownership--decidability-documentation-series-for-questions-or-contributions-refer-to-the-project-repository)
   - [权威来源索引](#权威来源索引)
 
 ---

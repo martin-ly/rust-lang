@@ -32,6 +32,7 @@ crates/
 │   └── rust_192_features.rs
 ... (其他 crate 类似)
 ```
+
 ### 版本历史时间线
 
 | 版本 | 发布日期 | 状态 | 归档位置 |
@@ -57,6 +58,7 @@ crates/
 use c01_ownership_borrow_scope::rust_196_features::*;
 use c02_type_system::rust_196_features::*;
 ```
+
 ### 访问历史版本特性
 
 ```rust
@@ -66,6 +68,7 @@ use c01_ownership_borrow_scope::archive::rust_190_features::*;
 // 方式2: 直接访问 (向后兼容)
 use c01_ownership_borrow_scope::rust_190_features::*;
 ```
+
 ---
 
 ## 版本化策略
@@ -98,6 +101,7 @@ Rust 新版本发布
        ↓
 验证编译和测试
 ```
+
 ---
 
 ## Crate 版本覆盖情况

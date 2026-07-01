@@ -50,6 +50,7 @@ fn main() {
     let x = 10;          // ✅ 可以重新定义，不冲突
 }
 ```
+
 ---
 
 ## 2. 语法上下文 (Syntax Context)
@@ -64,6 +65,7 @@ fn main() {
 - 宏定义处的上下文
 - 混合上下文
 ```
+
 ### 2.2 上下文标记
 
 ```rust
@@ -79,6 +81,7 @@ fn main() {
     let x = 2;     // 不同的语法上下文，不会冲突
 }
 ```
+
 ---
 
 ## 3. 标识符分类
@@ -97,6 +100,7 @@ fn main() {
     println!("{}", x); // ✅ 使用绑定的 x
 }
 ```
+
 ### 3.2 引用 (Reference)
 
 ```rust
@@ -111,6 +115,7 @@ fn main() {
     reference!(y);     // y 引用外部的绑定
 }
 ```
+
 ### 3.3 标签 (Label)
 
 ```rust
@@ -124,6 +129,7 @@ fn main() {
     with_label!('outer);  // 标签也是卫生的
 }
 ```
+
 ---
 
 ## 4. 跨 Crate 卫生性
@@ -151,6 +157,7 @@ fn main() {
     let x = "from main";  // ✅ 不冲突，卫生性跨 crate 保持
 }
 ```
+
 ---
 
 ## 5. 打破卫生性 (故意)
@@ -167,6 +174,7 @@ pub fn unhygienic(input: TokenStream) -> TokenStream {
     input
 }
 ```
+
 ### 5.2 使用 `Span::call_site()`
 
 ```rust
@@ -179,6 +187,7 @@ pub fn call_site_example(input: TokenStream) -> TokenStream {
     input
 }
 ```
+
 ---
 
 ## 6. 实现细节
@@ -195,6 +204,7 @@ SyntaxContext 结构:
 - opaque: u32 (不透明上下文 ID)
 - transparent: Vec<Mark> (透明标记链)
 ```
+
 ### 6.2 标记 (Mark)
 
 ```text
@@ -204,6 +214,7 @@ Mark 表示宏展开层级:
 - Mark 2: 第二次宏展开（嵌套宏）
 ...
 ```
+
 ---
 
 ## 7. 最佳实践
@@ -225,6 +236,7 @@ macro_rules! bad_example {
     };
 }
 ```
+
 ### 7.2 文档说明
 
 ```rust
@@ -237,6 +249,7 @@ macro_rules! hygienic_macro {
     };
 }
 ```
+
 ---
 
 **维护者**: Rust 学习项目团队

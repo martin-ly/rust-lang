@@ -103,6 +103,7 @@
   │ 跨平台          │ 需交叉编译      │ 随处运行        │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **运行时洞察**: Rust 的**无运行时**设计与 JavaScript 的**重型运行时**形成鲜明对比——Rust 适合资源受限环境，JavaScript 适合快速部署。
 > [来源: [V8 Blog — JIT](https://v8.dev/blog/maglev)] · [来源: [TRPL — No Runtime](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)]
 
@@ -147,6 +148,7 @@
   function add(a: number, b: number): number { return a + b; }
   add(1, "2" as any);  // 编译通过，运行时仍可能出错
 ```
+
 > **类型洞察**: TypeScript 的"静态类型"是**开发时辅助**，不是**运行时保证**——`as any` 和 `JSON.parse` 可以绕过所有类型检查。Rust 的类型系统（Type System）在编译后仍然有效（通过生成的代码结构）。
 > [来源: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)] · [来源: [Rust Type System](https://doc.rust-lang.org/reference/type-system.html)]
 
@@ -180,6 +182,7 @@ graph LR
     RustMem --> WASM
     JSMem --> WASM
 ```
+
 > **认知功能**: 此图展示 Rust 和 JavaScript 的**内存模型差异**及 WASM 的**桥梁作用**。Rust 的确定性内存管理与 JS 的 GC 在 WASM 中通过线性内存交互。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **关键洞察**: WASM 是 Rust 和 JavaScript **共存的运行时**——Rust 编译为 WASM 模块（Module），JS 通过 JS API 调用，两者共享线性内存。
@@ -222,6 +225,7 @@ graph LR
   │                 │                 │ + Worker）      │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **异步洞察**: Rust 的 Future 是**惰性**的——创建时不会执行，需要运行时 poll。JavaScript 的 Promise 是**立即执行**的——创建时就开始执行。
 > [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)] · [来源: [MDN — Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)]
 
@@ -261,6 +265,7 @@ async function readFile(path) {
 // - Rust: 调用者必须处理或传播错误
 // - JS: 错误可以被忽略，导致未捕获异常
 ```
+
 > **错误处理（Error Handling）洞察**: Rust 的 `Result` 将错误提升为**类型**——编译器强制处理。JavaScript 的异常是**运行时控制流**——容易遗漏，导致生产环境崩溃。
 > [来源: [Rust Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)] · [来源: [MDN — try/catch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch)]
 
@@ -303,6 +308,7 @@ Rust + JavaScript + WASM 的工作模式:
   │ 字符串处理      │ 1x              │ 1-2x            │ 有限            │
   └─────────────────┴─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **WASM 洞察**: WASM 不是**替代 JavaScript**，而是**增强 JavaScript**——在计算密集型任务上用 Rust/WASM，在 DOM/I/O 上用 JavaScript。
 > [来源: [Rust and WASM Book](https://rustwasm.github.io/book/)] · [来源: [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/)]
 
@@ -341,6 +347,7 @@ CLI 工具:
   → Rust (Tauri) 或 Electron (JS)
   → Tauri: 小体积、Rust 后端；Electron: 大生态
 ```
+
 > **选型洞察**: Rust 和 JavaScript 的**最佳协作方式**是通过 WASM——各取所长，而非互相替代。
 > [来源: [Tauri](https://tauri.app/)] · [source: [Electron](https://www.electronjs.org/)]
 
@@ -364,6 +371,7 @@ graph TD
     style JS fill:#fff3e0
     style HYBRID fill:#e3f2fd
 ```
+
 > **认知功能**: 此决策树展示 WASM 的**适用边界**。WASM 不是 JavaScript 的替代品，而是**互补技术**。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **关键洞察**: 大多数现代 Web 应用应采用**混合架构**——JS 处理 UI 和 I/O，WASM 处理计算密集型任务。
@@ -405,6 +413,7 @@ graph TD
 ├── 复杂的异步交互可能导致意外行为
 └── 需要 careful 的桥接设计
 ```
+
 > **边界要点**: Rust/JS/WASM 的边界主要与**宿主环境限制**、**包体积**、**调试体验**、**GC 支持**和**异步语义**相关。
 > [source: [WASM Post-MVP](https://github.com/WebAssembly/proposals)]
 
@@ -449,6 +458,7 @@ graph TD
   ✅ 使用 TypedArray 共享内存
      // 零拷贝数据交换
 ```
+
 > **陷阱总结**: Rust/JS/WASM 的陷阱主要与**边界穿越开销**、**包体积**、**性能假设**、**错误处理（Error Handling）**和**内存管理**相关。
 > [source: [wasm-bindgen Best Practices](https://rustwasm.github.io/docs/wasm-bindgen/contributing/design/index.html)]
 
@@ -518,6 +528,7 @@ fn fixed() {
     println!("{}", n);
 }
 ```
+
 > **JavaScript 对比**: JavaScript 的隐式转换（coercion）允许 `"42" + 1 = "421"` 和 `"42" - 1 = 41`，导致大量意外行为。Rust 禁止所有隐式转换——字符串不能自动转为数字，数字不能自动转为字符串。`parse()` 返回 `Result`，强制处理解析失败。这与 TypeScript 的 `as number` 也不同——TypeScript 的类型断言在编译期检查，但运行期无保护；Rust 的 `parse()` 在运行期验证，返回 `Err` 而非静默失败。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：JavaScript 的闭包变量捕获与 Rust 的所有权（编译错误）
@@ -546,6 +557,7 @@ fn fixed() {
     println!("{}", count.get());
 }
 ```
+
 > **JavaScript 对比**: JavaScript 的闭包（Closures）捕获变量引用（Reference），允许在闭包内外同时修改同一变量（`var count = 0; function inc() { count++; }`）。Rust 的闭包根据修改方式捕获环境：若修改变量，则以 `&mut` 捕获，外部不能再访问该变量直到闭包释放。`Cell<T>` 通过内部可变性绕过此限制——`&Cell` 允许修改内部值，因为 `Cell` 禁止获取内部引用。这是 Rust 所有权系统与闭包交互的精妙设计。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：JavaScript 的 `this` 动态绑定与 Rust 的方法调用（编译错误）
@@ -571,6 +583,7 @@ fn main() {
     f();
 }
 ```
+
 > **修正**: JavaScript 的 `this` 是**动态绑定**的：函数作为方法调用时 `this` 是对象，作为普通函数调用时 `this` 是 `undefined`（严格模式）或全局对象。Rust 无 `this` 概念：方法调用 `c.increment()` 是 `Counter::increment(&mut c)` 的语法糖，`self` 是显式参数。提取方法为函数值需要闭包：`|| c.increment()` 捕获 `c` 的引用（Reference）。这与 Python 的 `self`（显式参数，但方法可作为 bound method 提取）或 C++ 的 `std::bind`/`lambda`（类似 Rust 闭包（Closures））不同——Rust 的方法无隐式绑定，所有参数显式传递，消除了 `this` 的歧义。JavaScript 的箭头函数（词法 `this`）解决了部分问题，但 Rust 从根本上避免了动态绑定。来源: [The Rust Programming Language] · 来源: [JavaScript this Keyword]
 
 ### 10.4 边界测试：JavaScript 的弱类型与 Rust 的强制类型（编译错误）
@@ -586,6 +599,7 @@ fn main() {
     println!("{}", y); // 8
 }
 ```
+
 > **修正**: JavaScript 的**弱类型**系统允许大量隐式转换：`"5" + 3` → `"53"`、`"5" - 3` → `2`、`true + 1` → `2`。这些规则复杂且易错（`[] + {}` → `"[object Object]"`）。Rust 是**强类型**的：几乎所有操作都要求操作数类型匹配，无隐式转换（`i32` → `u32` 需 `as`，`String` → `&str` 需 `&` 或 `Deref`）。这是设计哲学的根本差异：JavaScript 追求灵活和快速开发，Rust 追求安全和可维护。从 JavaScript 迁移到 Rust 的开发者常感"繁琐"，但类型错误在编译期被捕获，而非运行期成为 Heisenbug。这与 Python 的隐式转换（类似 JavaScript）或 Go 的强类型（类似 Rust，但有隐式接口实现）类似——Rust 在强类型谱系中属于最严格的一端。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] · [来源: [JavaScript Type Coercion](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Equality#type_coercion)]
 
 ## 嵌入式测验（Embedded Quiz）

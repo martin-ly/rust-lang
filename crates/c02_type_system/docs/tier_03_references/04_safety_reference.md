@@ -86,6 +86,7 @@ fn main() {
     println!("y: {}, z: {}", y, z);
 }
 ```
+
 ### 1.2 强类型系统
 
 **没有隐式转换**:
@@ -108,6 +109,7 @@ fn main() {
     process_number(y as i32);
 }
 ```
+
 ### 1.3 类型推断
 
 **编译时推断**:
@@ -129,6 +131,7 @@ fn main() {
     println!("{} {} {} {:?} {:?} {}", x, y, z, v, numbers, parsed);
 }
 ```
+
 ---
 
 ## 2. 内存安全
@@ -150,6 +153,7 @@ fn main() {
     // 防止双重释放
 } // s2 dropped, s1 已失效
 ```
+
 **防止悬垂指针**:
 
 ```rust
@@ -163,6 +167,7 @@ fn main() {
     // println!("{}", reference);  // 悬垂指针！
 }
 ```
+
 ### 2.2 借用检查
 
 **借用规则**:
@@ -189,6 +194,7 @@ fn main() {
     println!("{}", r3);
 }
 ```
+
 ### 2.3 生命周期
 
 **生命周期注解**:
@@ -215,6 +221,7 @@ fn main() {
     // println!("Longest: {}", result);
 }
 ```
+
 ### 2.4 移动语义与内存安全
 
 **移动vs复制**:
@@ -235,6 +242,7 @@ fn move_semantics() {
     println!("{}", s2);  // ✅
 }
 ```
+
 **部分移动**:
 
 ```rust
@@ -257,6 +265,7 @@ fn partial_move() {
     println!("name: {}, count: {}", name, count);  // ✅
 }
 ```
+
 **避免意外移动**:
 
 ```rust
@@ -280,6 +289,7 @@ fn borrows(s: &String) {
     println!("{}", s);
 }
 ```
+
 ### 2.5 内存安全的高级模式
 
 **模式1：内部可变性**:
@@ -313,6 +323,7 @@ fn main() {
     println!("Count: {}", counter.get());
 }
 ```
+
 **模式2：动态分配与Box**:
 
 ```rust
@@ -325,6 +336,7 @@ fn use_box() {
     println!("Size of Box: {} bytes", std::mem::size_of_val(&large));
 }
 ```
+
 **模式3：引用计数（Rc/Arc）**:
 
 ```rust
@@ -340,6 +352,7 @@ fn shared_ownership() {
     println!("Data: {}", data);
 }
 ```
+
 ### 2.6 内存安全实战案例
 
 **案例1：安全的链表实现**:
@@ -373,6 +386,7 @@ impl<T> LinkedList<T> {
     }
 }
 ```
+
 **案例2：内存池管理**:
 
 ```rust
@@ -404,6 +418,7 @@ impl<T: Default> MemoryPool<T> {
     }
 }
 ```
+
 ---
 
 ## 3. 线程安全
@@ -421,6 +436,7 @@ pub unsafe auto trait Sync {}
 
 // T: Sync ⇔ &T: Send
 ```
+
 **示例**:
 
 ```rust
@@ -442,6 +458,7 @@ fn main() {
     handle.join().unwrap();
 }
 ```
+
 **不满足 Send/Sync 的类型**:
 
 ```rust
@@ -465,6 +482,7 @@ fn main() {
     }).join().unwrap();
 }
 ```
+
 ### 3.2 数据竞争保护
 
 **Mutex 和 RwLock**:
@@ -493,6 +511,7 @@ fn main() {
     println!("Result: {}", *counter.lock().unwrap());
 }
 ```
+
 ### 3.3 并发原语
 
 **原子类型**:
@@ -523,6 +542,7 @@ fn main() {
     println!("Result: {}", counter.load(Ordering::SeqCst));
 }
 ```
+
 ### 3.4 线程安全的高级模式
 
 **模式1：无锁数据结构**:
@@ -569,6 +589,7 @@ impl<T> LockFreeStack<T> {
     }
 }
 ```
+
 **模式2：读写锁优化**:
 
 ```rust
@@ -627,6 +648,7 @@ fn main() {
     writer.join().unwrap();
 }
 ```
+
 **模式3：Channel通信模式**:
 
 ```rust
@@ -667,6 +689,7 @@ fn worker_thread_pattern() {
     worker.join().unwrap();
 }
 ```
+
 **模式4：线程池模式**:
 
 ```rust
@@ -729,6 +752,7 @@ impl Worker {
     }
 }
 ```
+
 ---
 
 ## 4. 空指针安全
@@ -761,6 +785,7 @@ fn main() {
     println!("{}", name);
 }
 ```
+
 ### 4.2 Result 类型
 
 **错误处理**:
@@ -783,6 +808,7 @@ fn main() {
     }
 }
 ```
+
 ### 4.3 消除 null
 
 **类型系统保证**:
@@ -804,6 +830,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 5. 内存布局安全
@@ -831,6 +858,7 @@ fn main() {
     process_slice(&[1, 2, 3]);
 }
 ```
+
 ### 5.2 对齐和填充
 
 **内存对齐**:
@@ -861,6 +889,7 @@ fn main() {
     println!("Mixed align: {}", mem::align_of::<Mixed>());   // 4
 }
 ```
+
 ### 5.3 repr 属性
 
 **控制内存布局**:
@@ -904,6 +933,7 @@ fn main() {
     println!("Aligned: {}", size_of::<AlignedRepr>());  // 16
 }
 ```
+
 ---
 
 ## 6. Unsafe 边界
@@ -933,6 +963,7 @@ fn main() {
     }
 }
 ```
+
 ### 6.2 安全抽象
 
 **封装 unsafe**:
@@ -982,6 +1013,7 @@ fn main() {
     }
 }
 ```
+
 ### 6.3 最佳实践
 
 **最小化 unsafe**:
@@ -1009,6 +1041,7 @@ fn main() {
     println!("Value: {}", value);
 }
 ```
+
 ---
 
 ## 7. 实战案例
@@ -1068,6 +1101,7 @@ fn main() {
     // published.edit(String::from("Cannot edit"));
 }
 ```
+
 ### 案例 2: 内存安全的缓冲区
 
 ```rust
@@ -1117,6 +1151,7 @@ fn main() {
     }
 }
 ```
+
 ### 案例 3: 线程安全的计数器
 
 ```rust
@@ -1171,6 +1206,7 @@ fn main() {
     println!("Final count: {}", counter.get());
 }
 ```
+
 ---
 
 ## 8. 常见安全陷阱
@@ -1188,6 +1224,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
 }
 ```
+
 **陷阱 2: 可变性和不可变性混用**:
 
 ```rust
@@ -1204,6 +1241,7 @@ fn main() {
     data.push(4);
 }
 ```
+
 **陷阱 3: Unsafe 边界泄漏**:
 
 ```rust
@@ -1218,6 +1256,7 @@ pub fn safe_api(value: &i32) -> i32 {
     *value
 }
 ```
+
 **陷阱 4: 数据竞争**:
 
 ```rust
@@ -1256,6 +1295,7 @@ fn safe_shared_counter() {
     }
 }
 ```
+
 **陷阱 5: 整数溢出**:
 
 ```rust
@@ -1275,6 +1315,7 @@ fn main() {
     println!("Safe add: {:?}", safe_add(200, 100)); // None
 }
 ```
+
 **陷阱 6: 悬垂引用**:
 
 ```rust
@@ -1294,6 +1335,7 @@ fn borrow_string(s: &String) -> &str {
     &s[..]
 }
 ```
+
 **陷阱 7: 内存泄漏（循环引用）**:
 
 ```rust
@@ -1335,6 +1377,7 @@ struct SafeNode {
     prev: Option<Weak<RefCell<SafeNode>>>,  // 使用Weak
 }
 ```
+
 **陷阱 8: 未检查的错误处理**:
 
 ```rust
@@ -1357,6 +1400,7 @@ fn read_file_safe(path: &str) -> std::io::Result<String> {
     Ok(contents)
 }
 ```
+
 **陷阱 9: Unsafe指针解引用**:
 
 ```rust
@@ -1394,6 +1438,7 @@ impl<T> SafePtr<T> {
     }
 }
 ```
+
 **陷阱 10: 字符串分片越界**:
 
 ```rust
@@ -1413,6 +1458,7 @@ fn main() {
     }
 }
 ```
+
 **陷阱 11: Send/Sync误用**:
 
 ```rust
@@ -1438,6 +1484,7 @@ fn good_arc_thread() {
     }).join().unwrap();
 }
 ```
+
 **陷阱 12: 生命周期省略误解**:
 
 ```rust
@@ -1459,6 +1506,7 @@ impl<'a, 'b> GoodStruct<'a, 'b> {
     }
 }
 ```
+
 **陷阱 13: 不当的clone使用**:
 
 ```rust
@@ -1478,6 +1526,7 @@ fn efficient_arc(data: Arc<Vec<u8>>) -> Arc<Vec<u8>> {
     Arc::clone(&data)  // 只增加引用计数
 }
 ```
+
 **陷阱 14: 拒绝服务（DoS）攻击**:
 
 ```rust
@@ -1504,6 +1553,7 @@ fn iterative_sum(n: u32) -> u32 {
     (0..=n).sum()
 }
 ```
+
 **陷阱 15: 侧信道攻击**:
 
 ```rust
@@ -1530,6 +1580,7 @@ fn secure_compare(a: &[u8], b: &[u8]) -> bool {
     result == 0
 }
 ```
+
 ---
 
 ## 9. 总结

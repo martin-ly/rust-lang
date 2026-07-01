@@ -104,6 +104,7 @@ fn make_exciting(s: &str) -> String {
     s3
 }
 ```
+
 - **Q1**: `make_exciting` 接收 `&str` 是否安全？返回值的所有权归谁？
 - **Q2**: 若调用者写下 `let s = String::from("hi"); let out = make_exciting(&s);`，`s` 在调用后是否仍可用？
 - **Q3**: 解释为什么 `s.replace(...)` 返回 `String` 而不是 `&str`。
@@ -117,6 +118,7 @@ fn main() {
     println!("{}", s[0]);
 }
 ```
+
 - **Q1**: 此代码能否编译？
 - **Q2**: 若在第 4 行后添加 `v.push(4);`，能否编译？
 - **Q3**: 用生命周期规则解释原因。

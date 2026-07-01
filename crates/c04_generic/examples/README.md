@@ -100,6 +100,7 @@ cargo run --example traits_basics
 # 运行高级泛型示例
 cargo run --example advanced_generics
 ```
+
 ### 运行实战示例
 
 ```bash
@@ -112,6 +113,7 @@ cargo run --example generic_gat_demo
 # 零成本抽象性能对比
 cargo run --example generic_zero_cost_demo
 ```
+
 ### 运行测试
 
 ```bash
@@ -124,6 +126,7 @@ cargo test --test rust_192_comprehensive_tests
 # 运行模块测试
 cargo test --lib rust_192_features
 ```
+
 ### 运行基准测试
 
 ```bash
@@ -133,6 +136,7 @@ cargo bench -p c04_generic
 # 运行 Rust 1.93.0 特性基准测试
 cargo bench --bench rust_192_benchmarks
 ```
+
 ---
 
 ## 学习建议
@@ -146,6 +150,7 @@ cargo bench --bench rust_192_benchmarks
    cargo run --example generic_functions
    cargo run --example generic_structs
    ```
+
    - 理解 `<T>` 语法
    - 学习泛型函数
    - 掌握泛型结构体
@@ -155,6 +160,7 @@ cargo bench --bench rust_192_benchmarks
    cargo run --example traits_basics
    cargo run --example trait_bounds
    ```
+
    - Trait 定义与实现
    - Trait 约束 (`T: Display`)
    - `where` 子句
@@ -167,6 +173,7 @@ cargo bench --bench rust_192_benchmarks
    cargo run --example advanced_generics
    cargo run --example trait_objects
    ```
+
    - 关联类型
    - Trait 对象 (`dyn Trait`)
    - 默认类型参数
@@ -175,6 +182,7 @@ cargo bench --bench rust_192_benchmarks
    ```bash
    cargo run --example generic_lifetimes
    ```
+
    - `T: 'a` 约束
    - 生命周期省略规则
    - 复杂生命周期场景
@@ -183,6 +191,7 @@ cargo bench --bench rust_192_benchmarks
    ```bash
    cargo run --example blanket_impls
    ```
+
    - `impl<T> Trait for T`
    - 标准库中的 blanket impl
 
@@ -194,6 +203,7 @@ cargo bench --bench rust_192_benchmarks
    cargo run --example gats
    cargo run --example generic_gat_demo
    ```
+
    - 泛型关联类型
    - 借用迭代器
    - 类型族
@@ -203,6 +213,7 @@ cargo bench --bench rust_192_benchmarks
    cargo run --example hrtb
    cargo run --example generic_hrtb_demo
    ```
+
    - `for<'a>` 语法
    - 高阶约束
    - 生命周期抽象
@@ -212,6 +223,7 @@ cargo bench --bench rust_192_benchmarks
    cargo run --example specialization
    cargo run --example generic_specialization_demo
    ```
+
    - `min_specialization`
    - 性能优化
    - 默认实现
@@ -220,6 +232,7 @@ cargo bench --bench rust_192_benchmarks
    ```bash
    cargo run --example rust_192_features_demo
    ```
+
    - 关联项的多个边界
    - 迭代器方法特化
    - 改进的类型推断
@@ -243,6 +256,7 @@ where
     println!("{}", item.clone());
 }
 ```
+
 ### 泛型结构体
 
 ```rust
@@ -261,6 +275,7 @@ impl<T: Add<Output = T>> Point<T, T> {
     }
 }
 ```
+
 ### Trait 与关联类型
 
 ```rust
@@ -277,6 +292,7 @@ trait LendingIterator {
     fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
 }
 ```
+
 ### HRTB 示例
 
 ```rust
@@ -289,6 +305,7 @@ where
     P: for<'a> Parser<'a>,
 { /* ... */ }
 ```
+
 ### 类型状态模式
 
 ```rust
@@ -309,6 +326,7 @@ impl Builder<Initialized> {
     fn build(self) -> Product { /* ... */ }
 }
 ```
+
 ---
 
 ## 相关文档
@@ -355,6 +373,7 @@ fn dynamic_process(item: &dyn Process) -> Output {
     item.process()  // vtable 查找
 }
 ```
+
 ---
 
 *示例基于 Rust 1.94+，Edition 2024*:

@@ -33,6 +33,7 @@
     ▼            ▼              ▼              ▼
 cargo run   多阶段构建      GHCR/DockerHub   Helm/Raw YAML
 ```
+
 **Rust 容器化优势**:
 
 - 静态链接二进制 → 最小镜像 (scratch/distroless)
@@ -60,6 +61,7 @@ EXPOSE 8080
 USER nonroot:nonroot
 ENTRYPOINT ["/usr/local/bin/myapp"]
 ```
+
 **镜像大小对比**:
 
 | 基础镜像 | 大小 | 适用场景 |
@@ -88,6 +90,7 @@ RUN cargo chef cook --release --recipe-path recipe.json
 COPY . .
 RUN cargo build --release
 ```
+
 ---
 
 ## ☸️ Kubernetes 资源配置
@@ -148,6 +151,7 @@ spec:
               drop:
                 - ALL
 ```
+
 ### 2. Service
 
 ```yaml
@@ -182,6 +186,7 @@ spec:
                 port:
                   number: 80
 ```
+
 ### 3. ConfigMap / Secret
 
 ```yaml
@@ -202,6 +207,7 @@ stringData:
   DATABASE_URL: "postgres://user:pass@db:5432/app"
   JWT_SECRET: "replace-me-in-production"
 ```
+
 ### 4. HorizontalPodAutoscaler
 
 ```yaml
@@ -237,6 +243,7 @@ spec:
           value: 100
           periodSeconds: 15
 ```
+
 ---
 
 ## 🔒 安全最佳实践
@@ -266,6 +273,7 @@ fn init_telemetry() {
         .init();
 }
 ```
+
 **推荐工具栈**:
 
 - **指标**: Prometheus + `metrics` crate

@@ -116,6 +116,7 @@
     ├── False Sharing
     └── 缓存行填充
 ```
+
 ---
 
 ## 1. 无锁编程基础
@@ -140,6 +141,7 @@
 │                                                      │
 └──────────────────────────────────────────────────────┘
 ```
+
 ---
 
 ### 1.2 为什么需要无锁编程
@@ -175,6 +177,7 @@ fn correct_increment(counter: &AtomicUsize) {
     counter.fetch_add(1, Ordering::Relaxed);
 }
 ```
+
 ---
 
 ## 2. 内存序详解
@@ -196,6 +199,7 @@ fn main() {
     println!("Counter: {}", value);
 }
 ```
+
 **特性**:
 
 - ✅ 保证原子性
@@ -225,6 +229,7 @@ fn consumer() {
     assert_eq!(DATA.load(Ordering::Relaxed), 42); // 保证能看到 42
 }
 ```
+
 **特性**:
 
 - `Release`: 确保之前的写操作对获取者可见
@@ -249,6 +254,7 @@ fn main() {
     println!("Old value: {}", old);
 }
 ```
+
 **特性**:
 
 - 同时具有 Acquire 和 Release 语义
@@ -278,6 +284,7 @@ fn thread2() {
 
 // SeqCst 保证所有线程看到一致的全局顺序
 ```
+
 **特性**:
 
 - 保证全局顺序一致性
@@ -309,6 +316,7 @@ fn thread2() {
 │                                                     │
 └─────────────────────────────────────────────────────┘
 ```
+
 **推荐原则**:
 
 1. 默认使用 `SeqCst`（安全第一）
@@ -348,6 +356,7 @@ fn main() {
     println!("Final count: {}", counter.load(Ordering::Relaxed));
 }
 ```
+
 ---
 
 ### 3.2 标志位
@@ -378,6 +387,7 @@ fn main() {
     worker.join().unwrap();
 }
 ```
+
 ---
 
 ### 3.3 Compare-And-Swap (CAS)
@@ -414,6 +424,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ### 3.4 读改写操作
@@ -447,6 +458,7 @@ fn main() {
     value.fetch_min(5, Ordering::Relaxed);
 }
 ```
+
 ---
 
 ## 4. 常见无锁数据结构
@@ -532,6 +544,7 @@ fn main() {
     println!("{:?}", stack.pop()); // Some(2)
 }
 ```
+
 ---
 
 ### 4.2 无锁队列（Michael-Scott Queue）
@@ -611,6 +624,7 @@ fn main() {
     // dequeue 实现略...
 }
 ```
+
 ---
 
 ### 4.3 无锁计数器
@@ -653,6 +667,7 @@ fn main() {
     println!("Count: {}", counter.get()); // 2
 }
 ```
+
 ---
 
 ## 5. ABA 问题
@@ -689,6 +704,7 @@ fn aba_problem_example() {
     );
 }
 ```
+
 ---
 
 ### 5.2 解决方案
@@ -741,6 +757,7 @@ impl VersionedPtr {
     }
 }
 ```
+
 **方案 2: 使用 crossbeam 的 epoch-based reclamation**:
 
 ```rust
@@ -776,6 +793,7 @@ fn push<T>(head: &Atomic<Node<T>>, data: T) {
     }
 }
 ```
+
 ---
 
 ## 6. Fence 操作
@@ -796,6 +814,7 @@ fn main() {
     y = 1;
 }
 ```
+
 ---
 
 ### 6.2 fence
@@ -820,6 +839,7 @@ fn reader() {
     assert_eq!(DATA.load(Ordering::Relaxed), 42);
 }
 ```
+
 ---
 
 ## 7. 性能考虑
@@ -844,6 +864,7 @@ struct GoodCounter {
     _pad2: [u8; 56],
 }
 ```
+
 ---
 
 ### 7.2 缓存行填充
@@ -868,6 +889,7 @@ fn main() {
     counter.value.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
 }
 ```
+
 ---
 
 ## 8. 推荐 Crates
@@ -885,6 +907,7 @@ queue.push(2).unwrap();
 
 assert_eq!(queue.pop(), Some(1));
 ```
+
 ---
 
 ### 8.2 parking_lot
@@ -897,6 +920,7 @@ use parking_lot::Mutex;
 let mutex = Mutex::new(0);
 *mutex.lock() += 1;
 ```
+
 ---
 
 ### 8.3 atomic
@@ -909,6 +933,7 @@ use atomic::Atomic;
 let value = Atomic::new(0u64);
 value.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
 ```
+
 ---
 
 ## 9. 参考资源

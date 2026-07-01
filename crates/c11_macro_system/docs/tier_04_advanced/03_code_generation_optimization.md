@@ -143,6 +143,7 @@
     ├── 常量折叠
     └── 死代码消除
 ```
+
 ### 多维概念对比矩阵
 
 | 优化技术         | 编译时间 | 代码大小 | 运行时性能 | 复杂度 | Rust 1.92.0 |
@@ -162,6 +163,7 @@
 │   ├── 代码大小 → 泛型特化 / 条件编译
 │   └── 运行时性能 → 常量折叠 / 死代码消除
 ```
+
 ---
 
 ## 1. 概述
@@ -222,6 +224,7 @@ macro_rules! good_gen {
     };
 }
 ```
+
 #### 2.1.2 添加文档注释
 
 ```rust
@@ -254,6 +257,7 @@ generate_with_docs!(Counter, "A simple counter struct");
 //     pub fn new(value: i32) -> Self { ... }
 // }
 ```
+
 ---
 
 ### 2.2 性能优化
@@ -277,6 +281,7 @@ macro_rules! generate_accessor {
     };
 }
 ```
+
 #### 2.2.2 避免不必要的分配
 
 ```rust
@@ -295,6 +300,7 @@ macro_rules! good_format {
     }};
 }
 ```
+
 ---
 
 ### 2.3 可调试性
@@ -311,6 +317,7 @@ fn generate_error(span: Span, message: &str) -> syn::Error {
 
 // 错误消息会指向原始宏调用位置
 ```
+
 #### 2.3.2 生成调试友好的代码
 
 ```rust
@@ -328,6 +335,7 @@ macro_rules! debug_wrapper {
     };
 }
 ```
+
 ---
 
 ### 2.4 代码规范
@@ -352,6 +360,7 @@ macro_rules! generate_struct {
     };
 }
 ```
+
 ---
 
 ## 3. 编译时间优化
@@ -379,6 +388,7 @@ macro_rules! good_repeat {
     };
 }
 ```
+
 #### 3.1.2 限制递归深度
 
 ```rust
@@ -396,6 +406,7 @@ macro_rules! limited_recursion {
     };
 }
 ```
+
 ---
 
 ### 3.2 减少单态化开销
@@ -429,6 +440,7 @@ struct Good<C: Config> {
     e: C::E,
 }
 ```
+
 #### 3.2.2 共享泛型实现
 
 ```rust
@@ -459,6 +471,7 @@ impl<T> Container<T> {
     }
 }
 ```
+
 ---
 
 ### 3.3 增量编译友好
@@ -487,6 +500,7 @@ macro_rules! good_macro {
     }};
 }
 ```
+
 #### 3.3.2 模块化宏定义
 
 ```rust
@@ -505,6 +519,7 @@ macro_rules! specialized_feature {
 #[macro_use]
 mod macros;
 ```
+
 ---
 
 ### 3.4 并行编译优化
@@ -520,6 +535,7 @@ mod macros;
 // B -> C
 // D -> E
 ```
+
 ---
 
 ## 4. 代码膨胀控制
@@ -549,6 +565,7 @@ impl Process for i32 {
     }
 }
 ```
+
 ---
 
 ### 4.2 条件编译
@@ -570,6 +587,7 @@ fn optimized_version() {
     // 标量实现（回退）
 }
 ```
+
 #### 4.2.2 目标平台优化
 
 ```rust
@@ -588,6 +606,7 @@ fn platform_specific() {
     // 通用实现
 }
 ```
+
 ---
 
 ### 4.3 共享代码路径
@@ -631,6 +650,7 @@ impl MyType<u32> {
     }
 }
 ```
+
 ---
 
 ### 4.4 静态 vs 动态分发
@@ -654,6 +674,7 @@ fn dynamic_dispatch(c: &dyn Compute) -> i32 {
     c.compute() // 运行时查找
 }
 ```
+
 ---
 
 ## 5. 高级优化技术
@@ -678,6 +699,7 @@ fn use_constant() {
     println!("Factorial: {}", FACT_10);
 }
 ```
+
 #### 5.1.2 常量传播
 
 ```rust
@@ -691,6 +713,7 @@ macro_rules! const_compute {
 // 使用示例
 let value = const_compute!(2 + 3 * 4); // 编译期计算为 14
 ```
+
 ---
 
 ### 5.2 死代码消除
@@ -712,6 +735,7 @@ debug_only! {
     println!("Debug info"); // Release 构建中完全移除
 }
 ```
+
 #### 5.2.2 Dead Code Elimination（DCE）
 
 ```rust
@@ -731,6 +755,7 @@ fn expensive_operation() {
     // 大量计算...
 }
 ```
+
 ---
 
 ### 5.3 循环展开
@@ -761,6 +786,7 @@ fn unrolled_loop(data: &mut [i32; 8]) {
     });
 }
 ```
+
 ---
 
 ### 5.4 SIMD 优化
@@ -776,6 +802,7 @@ fn vectorizable_loop(data: &mut [f32]) {
     }
 }
 ```
+
 #### 5.4.2 显式 SIMD
 
 ```rust
@@ -793,6 +820,7 @@ unsafe fn simd_multiply(a: &[f32], b: &[f32], result: &mut [f32]) {
     }
 }
 ```
+
 ---
 
 ## 6. 性能测量
@@ -808,6 +836,7 @@ cargo build --release --timings
 # 查看 HTML 报告
 # target/cargo-timings/cargo-timing.html
 ```
+
 #### 6.1.2 cargo-llvm-lines
 
 ```bash
@@ -817,6 +846,7 @@ cargo install cargo-llvm-lines
 # 分析 LLVM IR 行数（识别单态化膨胀）
 cargo llvm-lines | head -20
 ```
+
 **示例输出**：
 
 ```text
@@ -827,6 +857,7 @@ Lines        Copies  Function name
   3012 (3.0%)   18 (0.7%)  <alloc::vec::Vec<T> as core::ops::drop::Drop>::drop
   2591 (2.6%)   12 (0.5%)  <my_crate::MyType<T> as core::fmt::Display>::fmt
 ```
+
 ---
 
 ### 6.2 二进制大小分析
@@ -840,6 +871,7 @@ cargo install cargo-bloat
 # 分析二进制大小
 cargo bloat --release
 ```
+
 **示例输出**：
 
 ```text
@@ -847,6 +879,7 @@ File  .text     Size Crate Name
 0.5%   0.3%   4.5KiB  std  <alloc::vec::Vec<T> as core::ops::drop::Drop>::drop
 0.4%   0.2%   3.2KiB  myapp my_function
 ```
+
 #### 6.2.2 优化策略
 
 ```toml
@@ -857,6 +890,7 @@ lto = true         # 链接时优化
 codegen-units = 1  # 更好的优化（编译更慢）
 strip = true       # 剥离符号
 ```
+
 ---
 
 ### 6.3 运行时性能
@@ -871,6 +905,7 @@ criterion = "0.5"
 name = "my_benchmark"
 harness = false
 ```
+
 ```rust
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
@@ -886,6 +921,7 @@ fn benchmark_generated_code(c: &mut Criterion) {
 criterion_group!(benches, benchmark_generated_code);
 criterion_main!(benches);
 ```
+
 ---
 
 ## 7. 实战案例
@@ -910,6 +946,7 @@ macro_rules! serialize_bad {
     };
 }
 ```
+
 #### 7.1.2 优化后
 
 ```rust
@@ -933,6 +970,7 @@ macro_rules! serialize_good {
     };
 }
 ```
+
 ---
 
 ### 7.2 减少泛型膨胀
@@ -946,6 +984,7 @@ cargo llvm-lines | grep 'my_generic_function'
 # 输出：
 # 25000 (24.7%)  500 (20.1%)  my_generic_function<...>
 ```
+
 #### 7.2.2 解决方案
 
 ```rust
@@ -969,6 +1008,7 @@ pub fn my_generic_function<T: Display>(items: &[T]) {
     }
 }
 ```
+
 ---
 
 ## 8. 相关资源

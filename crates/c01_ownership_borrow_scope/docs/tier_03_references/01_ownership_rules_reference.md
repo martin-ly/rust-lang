@@ -47,6 +47,7 @@ let s = String::from("hello"); // s 是所有者
 // ❌ 不能有多个所有者（除非使用 Rc/Arc）
 // let s2 = s; // s 的所有权已转移
 ```
+
 **规则 2: 作用域结束释放**（引用一致性视角）:
 
 ```rust
@@ -55,6 +56,7 @@ let s = String::from("hello"); // s 是所有者
     // 使用 s
 } // s 离开作用域，自动调用 drop，资源被释放（编译期证明的资源生命周期）
 ```
+
 **规则 3: 转移后失效**:
 
 ```rust
@@ -63,6 +65,7 @@ let s2 = s1; // s1 的所有权转移给 s2
 // println!("{}", s1); // ❌ 编译错误: s1 已失效
 println!("{}", s2); // ✅ 正确
 ```
+
 ---
 
 ### 1.2 所有权转移规则
@@ -73,6 +76,7 @@ println!("{}", s2); // ✅ 正确
 let s1 = String::from("hello");
 let s2 = s1; // 所有权从 s1 转移到 s2
 ```
+
 **规则 5: 函数传参转移**:
 
 ```rust
@@ -84,6 +88,7 @@ let s = String::from("hello");
 take_ownership(s); // s 的所有权转移到函数
 // println!("{}", s); // ❌ 错误
 ```
+
 **规则 6: 函数返回转移**:
 
 ```rust
@@ -94,6 +99,7 @@ fn give_ownership() -> String {
 
 let s = give_ownership(); // s 获得所有权
 ```
+
 ---
 
 ## 📦 2. Move 语义
@@ -113,6 +119,7 @@ let v2 = v1; // 完整移动
 let b1 = Box::new(5);
 let b2 = b1; // 完整移动
 ```
+
 **移动后资源控制权转移**（引用一致性视角）:
 
 ```text
@@ -123,6 +130,7 @@ s1: [ptr]--> [h][e][l][l][o] (heap)
 s1: [无效]
 s2: [ptr]--> [h][e][l][l][o] (heap)
 ```
+
 ---
 
 ### 2.2 部分移动
@@ -147,6 +155,7 @@ let y = p.y; // Move (String 是 Move)
 // println!("{}", p.y); // ❌ y 已被移动
 // println!("{:?}", p);  // ❌ p 部分失效
 ```
+
 **元组部分移动**:
 
 ```rust
@@ -154,6 +163,7 @@ let t = (String::from("hello"), 42);
 let s = t.0; // Move
 // let n = t.1; // ❌ t 已部分失效
 ```
+
 ---
 
 ## 📋 3. Copy 语义
@@ -168,6 +178,7 @@ let x = 5;
 let y = x; // 复制 x 的值
 println!("x = {}, y = {}", x, y); // ✅ x 仍有效
 ```
+
 **规则 8: Copy 的约束**:
 
 - 必须实现 `Copy` trait
@@ -187,6 +198,7 @@ struct Data {
     name: String, // String 不是 Copy
 }
 ```
+
 ---
 
 ### 3.2 Copy 类型列表
@@ -222,6 +234,7 @@ let s1 = String::from("hello");
 let s2 = s1.clone(); // 显式深拷贝
 println!("s1 = {}, s2 = {}", s1, s2); // ✅ s1 仍有效
 ```
+
 **Clone vs Copy**:
 
 | 特性         | Copy     | Clone            |
@@ -248,6 +261,7 @@ let data = String::from("hello");
 process(data); // data 的所有权转移
 // println!("{}", data); // ❌ 错误
 ```
+
 ---
 
 ### 5.2 传引用 (by reference)
@@ -263,6 +277,7 @@ let data = String::from("hello");
 read(&data); // 借用，不转移所有权
 println!("{}", data); // ✅ data 仍有效
 ```
+
 **可变引用**:
 
 ```rust
@@ -274,6 +289,7 @@ let mut data = String::from("hello");
 modify(&mut data); // 可变借用
 println!("{}", data); // "hello, world"
 ```
+
 ---
 
 ## 🎯 6. 返回值规则
@@ -288,6 +304,7 @@ fn create() -> String {
 
 let data = create(); // data 获得所有权
 ```
+
 **规则 12: 返回引用必须有效**:
 
 ```rust
@@ -302,6 +319,7 @@ fn no_dangle() -> String {
     String::from("hello")
 }
 ```
+
 ---
 
 ## ⚙️ 7. 结构体所有权
@@ -320,6 +338,7 @@ let user = User {
 };
 // user 拥有 username 和 email
 ```
+
 **规则 14: 结构体移动**:
 
 ```rust
@@ -331,6 +350,7 @@ let user1 = User {
 let user2 = user1; // user1 整体移动
 // println!("{}", user1.username); // ❌ user1 已失效
 ```
+
 ---
 
 ## 📊 8. 集合所有权
@@ -346,6 +366,7 @@ let v = vec![
 
 drop(v); // v 和所有元素都被 drop
 ```
+
 **规则 16: 从集合移出元素**:
 
 ```rust
@@ -364,6 +385,7 @@ let s = v.remove(0);
 let mut v = vec![Some(String::from("a"))];
 let s = v[0].take(); // Option::take
 ```
+
 ---
 
 ## 🔍 9. 所有权检查时机
@@ -390,6 +412,7 @@ let s = String::from("hello");
 let s2 = s;
 // println!("{}", s); // ❌ use of moved value: `s`
 ```
+
 **解决方案**:
 
 ```rust
@@ -403,6 +426,7 @@ let s = String::from("hello");
 let s2 = &s;
 println!("{}, {}", s, s2); // ✅
 ```
+
 ---
 
 ### 错误 2: 部分移动后使用整体
@@ -412,6 +436,7 @@ let s = Some(String::from("hello"));
 let inner = s.unwrap();
 // println!("{:?}", s); // ❌ s 已被移动
 ```
+
 ---
 
 ### 错误 3: 函数参数移动
@@ -425,6 +450,7 @@ let s = String::from("hello");
 process(s);
 // process(s); // ❌ use of moved value
 ```
+
 **解决方案**:
 
 ```rust
@@ -437,6 +463,7 @@ let s = String::from("hello");
 process(&s);
 process(&s); // ✅ 可以多次调用
 ```
+
 ---
 
 **相关文档**:

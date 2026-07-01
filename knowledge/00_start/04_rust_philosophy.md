@@ -52,6 +52,7 @@ void dangling() {
     *ptr = 10;  // ❌ 未定义行为
 }
 ```
+
 #### Rust 的解决方案：所有权
 
 ```rust
@@ -61,6 +62,7 @@ fn safe() {
     // 编译器确保没有悬挂指针
 }
 ```
+
 **关键洞察**: 大多数内存错误在编译期就能被发现。
 
 ### 2. 零成本抽象
@@ -77,6 +79,7 @@ let sum: i32 = numbers.iter().map(|x| x * 2).sum();
 // 编译器优化后，等同于手写循环
 // 没有运行时开销！
 ```
+
 对比：
 
 - **Java**: 迭代器有虚拟调用开销
@@ -111,6 +114,7 @@ fn safe_share() {
     });
 }
 ```
+
 ### 4. 实用主义
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -148,6 +152,7 @@ Rust 不追求理论完美，而是解决实际问题：
 安全性:    Rust > Java > Python > C++
 性能:      Rust ≈ C++ > Java > Python
 ```
+
 **Rust 的选择**: 接受更高的学习门槛，换取编译期保证。
 
 ### 显式 vs 隐式
@@ -166,6 +171,7 @@ let s2 = s1;  // s1 不再可用
 // 生命周期显式（需要时）
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 ```
+
 **哲学**: "显式优于隐式"（来自 Python 之禅，Rust 同样遵循）
 
 ## 💡 实际意义

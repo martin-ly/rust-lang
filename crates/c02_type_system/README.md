@@ -25,6 +25,7 @@ src/
 ├── traits/             # Trait 系统
 └── advanced/           # 高级类型特性
 ```
+
 ## 主要类型和 Trait
 
 ### 核心 Trait
@@ -72,6 +73,7 @@ fn main() {
     println!("最大的数是 {}", largest(&numbers));
 }
 ```
+
 ### Trait 定义与实现
 
 ```rust
@@ -95,6 +97,7 @@ impl Summary for NewsArticle {
     }
 }
 ```
+
 ### 关联类型
 
 ```rust
@@ -121,6 +124,7 @@ impl Iterator for Counter {
     }
 }
 ```
+
 ## 依赖关系
 
 ### 上游依赖
@@ -142,6 +146,7 @@ serde = { workspace = true }
 tokio = { workspace = true }
 futures = { workspace = true }
 ```
+
 ## 运行方式
 
 ```bash
@@ -159,6 +164,7 @@ cargo run -p c02_type_system --example vec_push_mut_demo    # Vec::push_mut / in
 cargo run -p c02_type_system --example cold_path_demo       # core::hint::cold_path
 cargo run -p c02_type_system --example bool_try_from_demo   # bool: TryFrom<{integer}>
 ```
+
 ## 学习路径建议
 
 1. 掌握 `src/basic_types/` 中的基础类型

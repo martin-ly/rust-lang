@@ -176,6 +176,7 @@ let result = tokio::runtime::Runtime::new()
     .unwrap()
     .block_on(async_function());
 ```
+
 #### 同步到异步转换
 
 ```rust
@@ -185,6 +186,7 @@ let result = tokio::task::spawn_blocking(|| {
     heavy_computation()
 }).await?;
 ```
+
 ### 4.2 混合模式最佳实践
 
 ```rust
@@ -201,6 +203,7 @@ async fn hybrid_operation() -> Result<()> {
     Ok(())
 }
 ```
+
 ## 5. 聚合组合设计模式
 
 ### 5.1 顺序聚合模式

@@ -124,6 +124,7 @@
   ├── 运行时类型检查（downcast）
   └── 放弃优化，统一使用泛型实现
 ```
+
 > **核心问题**: Rust 的 **Coherence 规则**保证了 Trait 解析的确定性，但也限制了**为特定类型提供优化实现**的能力。
 > [来源: [Rust Reference — Coherence](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)]
 
@@ -158,6 +159,7 @@
   ├── &str 比 T 更特化
   └── 如果两个 impl 互不包含（如 i32 vs String），则不重叠
 ```
+
 > **认知功能**: 特化引入了**实现优先级**的概念——当多个 impl 适用时，编译器选择最精确（最特化）的那个。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **关键洞察**: 这与 C++ 的**模板特化**类似，但 Rust 的版本是**类型安全**的——特化在编译期解析，不会出现链接期错误。
@@ -187,6 +189,7 @@ graph TD
     style ALLOW fill:#fff3e0
     style SPECIFIC fill:#c8e6c9
 ```
+
 > **认知功能**: 此图展示特化如何**扩展但不破坏** Coherence。Orphan Rule（孤儿规则）仍然限制跨 crate 的 impl，但 Overlap Rule 在特化条件下被放宽。
 > **关键洞察**: 特化不改变**全局唯一性**——对于任何具体类型，编译器仍然能确定唯一的 impl（选择最特化的）。
 > [来源: [Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)]
@@ -226,6 +229,7 @@ impl<T: Debug> ToDebug for &T {
 // - 未标记 default 的方法不能被特化覆盖
 // - 这是特化的"契约边界"
 ```
+
 > **语法要点**: `default` 关键字是特化的**核心机制**——它标记了可以被特化覆盖的方法。没有 `default` 的方法在特化实现中必须保持兼容。
 > [来源: [Tracking Issue #31844](https://github.com/rust-lang/rust/issues/31844)]
 
@@ -257,6 +261,7 @@ impl Container for Vec<u8> {
 // - 这会影响依赖该 Trait 的其他代码
 // - 需要确保关联类型的特化不会破坏类型安全
 ```
+
 > **关联类型特化**: 关联类型的特化是特化中最复杂的部分——它涉及**类型等价性**和**投影归约**的形式化理论。
 > [来源: [Rust Blog — Specialization](https://blog.rust-lang.org/inside-rust/)]
 
@@ -288,6 +293,7 @@ impl Container for Vec<u8> {
   ├── 不允许部分特化（如 impl<T> for Vec<T> vs impl for Vec<u8>）
   └── min_specialization 已用于标准库内部
 ```
+
 > **实现洞察**: 特化的**稳定化挑战**不是语法设计，而是**类型系统（Type System）的 soundness**——确保在任何特化组合下，类型检查和 Trait 解析都保持正确。
 > [来源: [Chalk — Rust Trait Solver](https://github.com/rust-lang/chalk)]
 
@@ -314,6 +320,7 @@ impl Container for Vec<u8> {
   → 当前: dyn Trait 或 enum 手动分发
   → 未来: 静态特化分发（零成本）
 ```
+
 > **演进路径**: 特化稳定后将**消除大量宏（Macro）和运行时（Runtime）检查**——许多当前需要复杂 workaround 的模式将变得简单直接。
 > [来源: [Rust Internals — Specialization Status](https://internals.rust-lang.org/)]
 
@@ -336,6 +343,7 @@ graph TD
     style SAFE fill:#c8e6c9
     style DANGER fill:#ffcdd2
 ```
+
 > **认知功能**: 此决策树展示特化的**安全边界**。纯优化特化（不改变语义）是安全的；改变语义的特化可能导致意外行为。
 > **使用建议**: 遵循"**特化只优化，不改变语义**"原则——这是避免特化相关 bug 的最佳实践。
 > [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
@@ -374,6 +382,7 @@ graph TD
 ├── 这增加了特化判断的复杂度
 └── 当前 min_specialization 不支持 const 泛型特化
 ```
+
 > **边界要点**: 特化的边界主要与**孤儿规则（Orphan Rule）**、**跨 crate 一致性（Coherence）**、**GATs 交互**、**编译性能**和**const 泛型（Generics）**相关。这些边界是特化尚未稳定的主要原因。
 > [来源: [Chalk Design Notes](https://rust-lang.github.io/chalk/book/)]
 
@@ -419,6 +428,7 @@ graph TD
 
   ✅ 等待特化稳定化，或仅在内部工具中使用
 ```
+
 > **陷阱总结**: 特化的陷阱主要与**稳定性假设**、**语义一致性（Coherence）**、**default 标记**和**过度使用**相关。
 > [来源: [Rust Compiler Error E0520](https://doc.rust-lang.org/error_codes/E0520.html)]
 
@@ -484,6 +494,7 @@ impl Display for MyString {
 // 若同时: impl<T: Deref<Target=str>> Display for T { ... }
 // 会与 impl Display for String 重叠
 ```
+
 > **修正**: 特化（specialization）允许为泛型类型提供默认实现，并为特定类型提供更优实现。
 > 但重叠实现（overlapping impls）必须满足**特化序**（specialization order）：一个实现必须是另一个实现的严格子集。
 > `impl<T> Display for T` 是最通用的（顶层），`impl Display for String` 是特化的。
@@ -516,6 +527,7 @@ impl Process for i32 {
     }
 }
 ```
+
 > **修正**:
 > 特化中的 `default` 关键字标记"可被覆盖的方法"，但 Rust 目前不提供**显式调用父实现**的语法（类似 C++ 的 `Base::method()` 或 Java 的 `super.method()`）。
 > 这是设计决策：鼓励组合（composition）而非继承（inheritance）。
@@ -547,6 +559,7 @@ impl Container for Vec<u8> {
     }
 }
 ```
+
 > **修正**:
 > 特化（specialization）允许为特定类型提供更优实现，但**关联类型**的特化是复杂问题：默认实现声明 `type Item = T`，特化实现能否改为 `type Item = &[u8]`？
 > 这会破坏依赖 `Container::Item` 的代码——它们假设 `Vec<u8>: Container<Item = u8>`。
@@ -585,6 +598,7 @@ fn main() {
     (&s as &str).run(); // &str 的特化
 }
 ```
+
 > **修正**: 特化实现之间的**交互**是类型系统（Type System）的复杂点：`String` 和 `&str` 是不同的类型，各自特化合法。
 > 但 `String: Deref<Target=str>` 意味着 `&String` 可自动解引用（Reference）为 `&str`，在方法调用 `s.run()` 中，编译器选择 `String` 的特化（直接匹配），而非 `&str` 的特化（需 Deref）。
 > 若添加 `impl Process for &String`，则方法解析更复杂。
@@ -622,6 +636,7 @@ fn main() {
     println!("{}", 42i32.method());
 }
 ```
+
 > **修正**:
 > **Specialization** 允许为特定类型提供 trait 的**特化实现**，覆盖 blanket impl（`impl<T> Trait for T`）。
 > 设计挑战：

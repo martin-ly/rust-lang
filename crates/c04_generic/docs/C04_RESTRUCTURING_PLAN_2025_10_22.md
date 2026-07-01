@@ -76,6 +76,7 @@ c04_generic/docs/
 
 外部 reports/ 目录: 8个项目报告
 ```
+
 ### 1.2 现有优势
 
 ✅ **内容丰富度高**
@@ -177,6 +178,7 @@ c04_generic/docs/
     ├── C04_FRAMEWORK_COMPLETION_2025_10_22.md
     └── ... (其他项目报告)
 ```
+
 ### 2.2 核心特性对比
 
 | 维度         | C02 Type System | C03 Control Flow | **C04 Generic (目标)**         |

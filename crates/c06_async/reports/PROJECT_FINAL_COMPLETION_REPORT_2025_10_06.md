@@ -522,6 +522,7 @@ cat async_programming_comprehensive_review_readme_2025_10_06.md
 # 3. 运行第一个示例
 cargo run --example tokio_smoke
 ```
+
 ### 深入学习 (1-2周)
 
 ```bash
@@ -536,6 +537,7 @@ cargo run --example reactor_pattern_comprehensive_2025
 cargo run --example actor_pattern_comprehensive_2025
 cargo run --example csp_pattern_comprehensive_2025
 ```
+
 ### 实践应用 (1-2月)
 
 ```bash
@@ -549,6 +551,7 @@ cargo run --example async_debugging_monitoring_2025
 cargo run --example actor_csp_hybrid_advanced
 cargo run --example async_api_gateway_2025
 ```
+
 ---
 
 ## 🔮 未来展望

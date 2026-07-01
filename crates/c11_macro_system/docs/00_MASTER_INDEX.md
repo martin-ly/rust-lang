@@ -9,7 +9,8 @@
 ## 📚 官方资源映射
 
 | 官方资源 | 链接 | 与本模块对应 |
-| :--- | :--- | :--- || **The Rust Book** | [Ch. 19.5 Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) | 宏基础 |
+| :--- | :--- | :--- |
+| **The Rust Book** | [Ch. 19.5 Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) | 宏基础 |
 | **RBE 练习** | [Macros](https://doc.rust-lang.org/rust-by-example/macros.html) | 声明宏实践 |
 | **Rust Reference** | [Macros](https://doc.rust-lang.org/reference/macros.html) | 宏规范 |
 | **The Little Book of Rust Macros** | [dtolnay/rust-macros](https://danielkeep.github.io/tlborm/book/) | 宏深入 |
@@ -234,6 +235,7 @@ cargo run --example 02_pattern_matching
 cargo run --example 03_repetition
 cargo run --example 04_recursive_macros
 ```
+
 ### 示例列表
 
 | 示例                         | 主题       | 难度     |
@@ -352,6 +354,7 @@ cargo run --example 04_recursive_macros
 cargo install cargo-expand
 cargo expand --example 01_macro_rules_basics
 ```
+
 **rust-analyzer** - IDE支持
 
 - VSCode插件
@@ -366,11 +369,13 @@ cargo expand --example 01_macro_rules_basics
 #![feature(trace_macros)]
 trace_macros!(true);
 ```
+
 **log_syntax** - 打印语法
 
 ```rust
 #![feature(log_syntax)]
 ```
+
 ---
 
 ## 📚 相关资源
@@ -448,6 +453,7 @@ trace_macros!(true);
 ```bash
 cargo run --example 01_macro_rules_basics
 ```
+
 **最后更新**: 2025-12-11
 **维护者**: Rust学习社区
 ---

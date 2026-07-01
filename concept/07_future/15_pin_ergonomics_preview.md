@@ -52,6 +52,7 @@ graph LR
         D --> E[async fn in trait<br/>async drop<br/>Stream]
     end
 ```
+
 Rust 的 `async/await` 编译为**自引用（Reference）状态机**。如果状态机在内存中移动，内部指针将悬空。`Pin` 是 Rust 内存安全（Memory Safety）模型的关键扩展 —— 但它的人机工程学一直是社区最大痛点之一。
 
 ---
@@ -66,6 +67,7 @@ let mut pinned: Pin<&mut MyFuture> = ...;
 pinned.as_mut().poll(cx);   // ✅ 可以
 pinned.poll(cx);            // ❌ 不能自动 reborrow
 ```
+
 对比普通引用：
 
 ```rust,ignore
@@ -73,6 +75,7 @@ let mut r: &mut T = ...;
 use_ref(r);      // ✅ 自动 reborrow
 use_ref(r);      // ✅ 再次使用
 ```
+
 ### 2.2 `Reborrow` 和 `CoerceShared` Traits
 
 Project Goals 2026 正在推进两个核心 trait：
@@ -88,6 +91,7 @@ pub trait CoerceShared<To> {
     fn coerce_shared(&self) -> To;
 }
 ```
+
 **设计目标**:
 
 - `Reborrow`：允许 `Pin<&mut T>` 像普通 `&mut T` 一样自动 reborrow
@@ -101,6 +105,7 @@ let mut pinned: Pin<&mut MyFuture> = ...;
 pinned.poll(cx);           // ✅ 自动 reborrow
 let shared: Pin<&MyFuture> = &pinned;  // ✅ 自动 CoerceShared
 ```
+
 **当前状态** (2026-06):
 
 - 2025H2 已实现 `Reborrow` / `CoerceShared` trait 的单生命周期（Lifetimes） + trivial 内存布局原型
@@ -127,6 +132,7 @@ stream.next().await;  // ✅ 无需 as_mut()
 let pin mut foo = Foo { bar: Bar::new(), baz: 42 };
 let bar_ref: Pin<&mut Bar> = &pin mut foo.bar;  // ✅ 安全且无需宏
 ```
+
 ### 3.2 Pinned Fields
 
 ```rust,ignore
@@ -139,6 +145,7 @@ let pin mut foo = Foo { ... };
 let bar: Pin<&mut Bar> = &pin mut foo.bar;  // 自动 pin projection
 let baz: &mut Baz = &mut foo.baz;            // 普通借用
 ```
+
 **关键约束**: 类型含 pinned fields 时，不能显式实现 `Unpin` —— 只能通过 auto trait 机制推导。
 
 ### 3.3 Pinned Drop
@@ -151,6 +158,7 @@ impl Drop for Foo {
     }
 }
 ```
+
 **兼容性**: `Drop::drop` 不允许直接调用，因此改变签名不会破坏现有代码。
 
 ---
@@ -166,6 +174,7 @@ Field Projections 是 Rust for Linux 和 Beyond the `&` 的共同需求：
 let dma_buf: &mut DmaBuffer = ...;
 let header: &mut Header = &mut dma_buf.header;  // 当前需要 unsafe
 ```
+
 ### 4.2 设计空间
 
 | 方案 | 状态 | 适用场景 |
@@ -188,6 +197,7 @@ graph TD
     Q2 -->|是| A2["需要更严格的 Unpin 推导规则<br/>或放弃 pinned fields"]
     Q2 -->|否| A3["pin 关键字是最佳方案<br/>但 edition 迁移成本高"]
 ```
+
 ### 5.2 关键边界
 
 1. **Edition 兼容性**: `pin` 作为关键字需要在新的 Edition 中引入，不能破坏现有代码中的 `pin` 标识符。

@@ -98,6 +98,7 @@ void use_string_raii() {
     // 自动释放
 }
 ```
+
 **Rust**: 所有权
 
 ```rust
@@ -116,6 +117,7 @@ fn main() {
     use_string();
 }
 ```
+
 ### 空指针
 
 **C++**: null 可能导致崩溃
@@ -134,6 +136,7 @@ void process() {
     std::cout << *user << std::endl;  // ❌ 崩溃！
 }
 ```
+
 **Rust**: Option 强制处理
 
 ```rust
@@ -157,6 +160,7 @@ fn main() {
     process();
 }
 ```
+
 ---
 
 ## 2. Rust vs Haskell
@@ -174,6 +178,7 @@ add x y = x + y
 printNumber :: Int -> IO ()
 printNumber n = putStrLn (show n)
 ```
+
 **Rust**: 非纯，但可控
 
 ```rust
@@ -191,6 +196,7 @@ fn main() {
     print_number(3);
 }
 ```
+
 ### 高阶类型
 
 **Haskell**: 原生支持 HKT
@@ -204,6 +210,7 @@ instance Functor Maybe where
     fmap _ Nothing = Nothing
     fmap f (Just x) = Just (f x)
 ```
+
 **Rust**: 通过 Associated Types 模拟
 
 ```rust
@@ -235,6 +242,7 @@ fn main() {
     println!("{:?}", result);
 }
 ```
+
 ---
 
 ## 3. Rust vs Go
@@ -261,6 +269,7 @@ func main() {
     fmt.Println(content)
 }
 ```
+
 **Rust**: Result 类型
 
 ```rust
@@ -279,6 +288,7 @@ fn main() {
     }
 }
 ```
+
 ### 泛型
 
 **Go**: 1.18+ 泛型
@@ -297,6 +307,7 @@ func main() {
     fmt.Println(Max(1.5, 2.5))
 }
 ```
+
 **Rust**: 强大的泛型系统
 
 ```rust
@@ -310,6 +321,7 @@ fn main() {
     println!("{}", max(1.5, 2.5));
 }
 ```
+
 ### 3.1 Go vs Rust 深度对比
 
 **并发模型对比**:
@@ -347,6 +359,7 @@ func main() {
     }
 }
 ```
+
 **Rust async/await**:
 
 ```rust
@@ -385,6 +398,7 @@ async fn main() {
     }
 }
 ```
+
 **性能对比**:
 
 | 指标              | Go         | Rust       |
@@ -418,6 +432,7 @@ func save(w Writer, data []byte) {
     w.Write(data)
 }
 ```
+
 **Rust Trait（显式）**:
 
 ```rust
@@ -441,6 +456,7 @@ fn save<W: Writer>(w: &mut W, data: &[u8]) {
     w.write(data).ok();
 }
 ```
+
 **对比总结**:
 
 | 特性           | Go Interface     | Rust Trait |
@@ -474,6 +490,7 @@ void process() {
     System.out.println(user.length());  // ❌ NPE!
 }
 ```
+
 **Rust**: 编译时检查
 
 ```rust
@@ -496,6 +513,7 @@ fn main() {
     process();
 }
 ```
+
 ### 所有权 vs GC
 
 **Java**: 垃圾回收
@@ -517,6 +535,7 @@ void process() {
     // GC 自动回收
 }
 ```
+
 **Rust**: 所有权转移
 
 ```rust
@@ -538,6 +557,7 @@ fn main() {
     process();
 }
 ```
+
 ---
 
 ## 5. Rust vs Swift
@@ -562,6 +582,7 @@ func process() {
     // ARC 自动管理
 }
 ```
+
 **Rust**: 所有权
 
 ```rust
@@ -583,6 +604,7 @@ fn main() {
     process();
 }
 ```
+
 ### Optional
 
 **Swift**: Optional
@@ -604,6 +626,7 @@ func process() {
     }
 }
 ```
+
 **Rust**: Option
 
 ```rust
@@ -627,6 +650,7 @@ fn main() {
     process();
 }
 ```
+
 ### 5.1 Swift vs Rust 深度对比
 
 **协议 vs Trait对比**:
@@ -659,6 +683,7 @@ struct IntStack: Container {
     }
 }
 ```
+
 **Rust Trait**:
 
 ```rust
@@ -691,6 +716,7 @@ impl Container for IntStack {
     }
 }
 ```
+
 **内存管理深度对比**:
 
 **Swift ARC循环引用**:
@@ -722,6 +748,7 @@ class Apartment {
     }
 }
 ```
+
 **Rust所有权自然避免循环**:
 
 ```rust
@@ -754,6 +781,7 @@ impl Drop for PersonRef {
     }
 }
 ```
+
 **性能对比（纳秒级基准）**:
 
 | 操作           | Rust       | Swift |
@@ -790,6 +818,7 @@ func main() async {
     print(value)
 }
 ```
+
 **Rust Mutex + Arc**:
 
 ```rust
@@ -828,6 +857,7 @@ fn main() {
     println!("{}", counter.get_value());
 }
 ```
+
 **总结对比**:
 
 | 维度         | Swift                | Rust               |
@@ -861,6 +891,7 @@ function distance(p: Point): number {
 const p1 = { x: 3, y: 4, z: 5 }
 console.log(distance(p1)) // ✅ OK
 ```
+
 **Rust**: 名义类型
 
 ```rust
@@ -879,6 +910,7 @@ fn main() {
     println!("{}", distance(p1));
 }
 ```
+
 ### Null vs Option
 
 **TypeScript**: null/undefined
@@ -897,6 +929,7 @@ function process() {
   console.log(user?.length) // Optional chaining
 }
 ```
+
 **Rust**: Option
 
 ```rust
@@ -919,6 +952,7 @@ fn main() {
     process();
 }
 ```
+
 ### 6.1 TypeScript vs Rust 深度对比
 
 **类型安全性对比**:
@@ -943,6 +977,7 @@ function printPoint(p: Point) {
   // 但p可能有额外的属性！
 }
 ```
+
 **Rust严格类型匹配**:
 
 ```rust
@@ -966,6 +1001,7 @@ fn main() {
     print_point(p);
 }
 ```
+
 **运行时 vs 编译时检查**:
 
 **TypeScript（运行时无保证）**:
@@ -982,6 +1018,7 @@ function getUser(id: number): User | null {
 const user = getUser(1)
 console.log(user.name) // ❌ 运行时可能崩溃！
 ```
+
 **Rust（编译时强制处理）**:
 
 ```rust
@@ -1006,6 +1043,7 @@ fn main() {
     }
 }
 ```
+
 **性能对比（ms，越小越好）**:
 
 | 任务                | TypeScript (Node.js) | Rust  |
@@ -1065,6 +1103,7 @@ impl Calculator {
     }
 }
 ```
+
 **TypeScript侧调用**:
 
 ```typescript
@@ -1081,6 +1120,7 @@ calc.add(5)
 calc.add(3)
 console.log(calc.add(2)) // 10
 ```
+
 **使用场景建议**:
 
 | 场景     | 推荐语言          | 理由       |
@@ -1115,6 +1155,7 @@ def greet_typed(name: str) -> str:
 # 类型提示不阻止运行
 greet_typed(42)  # mypy会警告，但运行时不检查
 ```
+
 **Rust**: 静态强类型
 
 ```rust
@@ -1128,6 +1169,7 @@ fn main() {
     // println!("{}", greet(42));  // ❌ 编译错误
 }
 ```
+
 **PyO3互操作**:
 
 ```rust
@@ -1144,6 +1186,7 @@ fn my_module(_py: Python, m: &PyModule) -> PyResult<()> {
     Ok(())
 }
 ```
+
 ### 7.2 性能差异
 
 **基准测试对比**:
@@ -1166,6 +1209,7 @@ result = my_rust_lib.fast_compute(data)  # 100x faster
 # Python处理业务逻辑
 process_result(result)
 ```
+
 ### 7.3 互操作性
 
 **maturin工作流**:
@@ -1181,6 +1225,7 @@ maturin develop
 # Python中使用
 python -c "import my_project; print(my_project.hello())"
 ```
+
 ---
 
 ## 8. Rust vs Zig
@@ -1205,6 +1250,7 @@ pub fn main() !void {
     bytes[0] = 42;
 }
 ```
+
 **Rust**: 所有权自动管理
 
 ```rust
@@ -1216,6 +1262,7 @@ fn main() {
     // 自动释放
 }
 ```
+
 **关键差异**:
 
 | 特性         | Rust               | Zig               |
@@ -1247,6 +1294,7 @@ pub fn main() !void {
     std.debug.print("Result: {}\n", .{result});
 }
 ```
+
 **Rust**: Result枚举
 
 ```rust
@@ -1272,6 +1320,7 @@ fn main() -> Result<(), MyError> {
     Ok(())
 }
 ```
+
 ### 8.3 编译时计算
 
 **Zig**: comptime关键字
@@ -1288,6 +1337,7 @@ pub fn main() void {
     std.debug.print("Fib(10) = {}\n", .{result});
 }
 ```
+
 **Rust**: const fn
 
 ```rust
@@ -1315,6 +1365,7 @@ fn main() {
     println!("Fib(10) = {}", RESULT);
 }
 ```
+
 **编译时能力对比**:
 
 | 特性               | Rust                       | Zig                  |
@@ -1361,6 +1412,7 @@ fn main() {
   ├── 渐进类型: TypeScript
   └── 显式管理: Zig
 ```
+
 **内存管理策略**:
 
 | 语言        | 策略           | 优势          | 劣势         |
@@ -1433,6 +1485,7 @@ Swift (优化):    1.8  ██████▎
 Haskell (GHC):   4.5  ███████████████▊
 Python (CPython):120.0 (未显示，过长)
 ```
+
 **并发性能**:
 
 ```text
@@ -1446,6 +1499,7 @@ Haskell (GHC):   450,000  ██████████▊
 Swift (actor):   320,000  ███████▊
 Python (asyncio): 85,000  ██
 ```
+
 **编译时间对比**:
 
 ```text
@@ -1460,6 +1514,7 @@ Swift:           35  █████████████████▌
 Haskell (GHC):   60  ██████████████████████████████
 TypeScript:      3   █▌
 ```
+
 **运行时性能总分（满分100）**:
 
 | 语言       | 原始性能 | 优化潜力 | 内存效率 | 启动速度 | 综合得分 |
@@ -1492,6 +1547,7 @@ fn calculate() -> Result<f64, String> {
     Ok(y)
 }
 ```
+
 **Go**: 多返回值 + 手动检查
 
 ```go
@@ -1514,6 +1570,7 @@ func calculate() (float64, error) {
     return y, nil
 }
 ```
+
 **Haskell**: Either + do notation
 
 ```haskell
@@ -1527,6 +1584,7 @@ calculate = do
     y <- divide x 3.0
     return y
 ```
+
 **Java**: Exception + try-catch
 
 ```java
@@ -1547,6 +1605,7 @@ public static double calculate() throws ArithmeticException {
     }
 }
 ```
+
 **对比总结**:
 
 | 语言    | 错误传播  | 类型安全 | 强制处理   | 性能开销 | 可读性     |
@@ -1573,6 +1632,7 @@ let s2 = s1;  // s1 被移动，不再有效
     let s3 = String::from("world");
 }  // s3在此被drop
 ```
+
 **C++ RAII模式**:
 
 ```cpp
@@ -1594,6 +1654,7 @@ public:
     String(String&& other);       // 移动构造
 };
 ```
+
 **Swift ARC (自动引用计数)**:
 
 ```swift
@@ -1611,6 +1672,7 @@ class Node {
     }
 }
 ```
+
 **Go GC (垃圾回收)**:
 
 ```go
@@ -1625,6 +1687,7 @@ func createNode() *Node {
     // GC会自动回收
 }
 ```
+
 **各模型对比**:
 
 | 模型       | 语言    | 确定性    | 性能       | 安全性     | 复杂度     |
@@ -1644,6 +1707,7 @@ let doubled: Vec<_> = numbers.iter()
     .map(|x| x * 2)  // 闭包类型自动推断
     .collect();      // 推断目标类型
 ```
+
 **Haskell**: 全局Hindley-Milner推断
 
 ```haskell
@@ -1651,24 +1715,28 @@ let doubled: Vec<_> = numbers.iter()
 double xs = map (*2) xs
 -- 推断类型: (Num a) => [a] -> [a]
 ```
+
 **TypeScript**: 结构化类型推断
 
 ```typescript
 const numbers = [1, 2, 3] // number[]
 const doubled = numbers.map(x => x * 2) // 推断返回类型
 ```
+
 **Go**: 有限的局部推断
 
 ```go
 numbers := []int{1, 2, 3}  // 需要显式类型
 // 无法推断复杂的泛型类型
 ```
+
 **Swift**: 强类型推断
 
 ```swift
 let numbers = [1, 2, 3]  // [Int]
 let doubled = numbers.map { $0 * 2 }  // 推断闭包类型
 ```
+
 **推断能力排名**:
 
 1. **Haskell** (⭐⭐⭐⭐⭐) - 全局推断，几乎不需注解
@@ -1750,6 +1818,7 @@ let doubled = numbers.map { $0 * 2 }  // 推断闭包类型
   └────────────────────────→ 安全性
            Haskell ●
 ```
+
 **Rust优势**:
 
 - ✅ 零成本抽象

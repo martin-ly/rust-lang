@@ -25,6 +25,7 @@
 //     ptr: &str, // 指向 data 的引用
 // }
 ```
+
 ---
 
 ## 2. Pin 和 Unpin
@@ -68,6 +69,7 @@ impl SelfReferential {
     }
 }
 ```
+
 ---
 
 ## 3. 使用 ouroboros 库
@@ -87,6 +89,7 @@ let my_struct = MyStructBuilder {
     data_ref_builder: |data| data.as_str(),
 }.build();
 ```
+
 ---
 
 ## 4. Async 中的自引用
@@ -101,6 +104,7 @@ async fn async_self_ref() {
     println!("{}", data_ref);
 }
 ```
+
 ---
 
 **相关文档**:

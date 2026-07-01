@@ -70,6 +70,7 @@ pub fn example(x: i64) {}
 // 新版本（破坏变更，但当前无法自动检测）
 pub fn example(x: String) {}
 ```
+
 **GSoC 2026 项目**已将其列为正式项目（Crate ecosystem 类别），目标：
 
 - 设计并实现 type-checking lint 的基础设施

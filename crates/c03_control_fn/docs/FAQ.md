@@ -66,6 +66,7 @@ let result = match option {
     None => 0,
 };
 ```
+
 **2. 类型安全**:
 
 编译器强制所有分支返回相同类型：
@@ -77,6 +78,7 @@ let x = if condition { 1 } else { 0 };
 // ❌ 错误：类型不一致
 let x = if condition { 1 } else { "zero" };
 ```
+
 **相关**: [条件语句指南](tier_02_guides/01_conditionals_guide.md)
 
 ---
@@ -108,6 +110,7 @@ while i < numbers.len() {
     i += 1;
 }
 ```
+
 **相关**: [循环结构指南](tier_02_guides/02_loops_guide.md)
 
 ---
@@ -129,6 +132,7 @@ match some_option {
     None => {} // 必须处理
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -142,6 +146,7 @@ while let Some(value) = iterator.next() {
     println!("Got: {}", value);
 }
 ```
+
 **相关**: [高级模式匹配](tier_04_advanced/01_advanced_pattern_matching.md)
 
 ---
@@ -159,6 +164,7 @@ let Some(value) = some_option else {
 };
 // value 在这里可用
 ```
+
 **适用场景**:
 
 - 需要解包 Option/Result
@@ -176,6 +182,7 @@ fn process(data: Option<String>) -> Result<usize, String> {
     Ok(text.len())
 }
 ```
+
 **相关**: [高级模式匹配](tier_04_advanced/01_advanced_pattern_matching.md)
 
 ---
@@ -210,6 +217,7 @@ let z = vec![1, 2, 3];
 let consume_fn = || drop(z);
 consume_fn(); // 只能调用一次
 ```
+
 **相关**: [闭包深入](tier_04_advanced/02_closures_in_depth.md)
 
 ---
@@ -228,6 +236,7 @@ fn make_adder(x: i32) -> Box<dyn Fn(i32) -> i32> {
 let add5 = make_adder(5);
 println!("{}", add5(3)); // 8
 ```
+
 **方案2: impl Fn** (推荐):
 
 ```rust
@@ -238,6 +247,7 @@ fn make_adder(x: i32) -> impl Fn(i32) -> i32 {
 let add5 = make_adder(5);
 println!("{}", add5(3)); // 8
 ```
+
 **区别**:
 
 - `Box<dyn Fn>`: 运行时多态，堆分配
@@ -271,6 +281,7 @@ match read_file("config.txt") {
     Err(e) => eprintln!("Error: {}", e),
 }
 ```
+
 **使用 panic！**:
 
 - ✅ 编程错误（bug）
@@ -290,6 +301,7 @@ fn divide(a: i32, b: i32) -> i32 {
 // 或使用 assert
 assert!(b != 0, "Division by zero!");
 ```
+
 **相关**: [错误处理指南](tier_02_guides/05_error_handling_guide.md)
 
 ---
@@ -307,6 +319,7 @@ fn process() -> Result<String, Error> {
     Ok(content)
 }
 ```
+
 **展开后**:
 
 ```rust
@@ -324,6 +337,7 @@ fn process() -> Result<String, Error> {
     Ok(content)
 }
 ```
+
 **注意**: `?` 会自动调用 `From::from` 进行类型转换
 
 **相关**: [错误处理指南](tier_02_guides/05_error_handling_guide.md)
@@ -364,6 +378,7 @@ if condition {
     do_other();
 }
 ```
+
 **相关**: [性能优化](tier_04_advanced/05_性能优化.md)
 
 ---
@@ -383,6 +398,7 @@ let closure = || data.field;
 let field = data.field;
 let closure = || field;
 ```
+
 **策略2: 使用 impl Fn 而非 `Box<dyn Fn>`**:
 
 ```rust
@@ -396,6 +412,7 @@ fn make_fn() -> impl Fn(i32) -> i32 {
     |x| x * 2
 }
 ```
+
 **策略3: 内联**:
 
 ```rust
@@ -404,6 +421,7 @@ fn apply<F: Fn(i32) -> i32>(f: F, x: i32) -> i32 {
     f(x)
 }
 ```
+
 **相关**: [性能优化](tier_04_advanced/05_性能优化.md)
 
 ---

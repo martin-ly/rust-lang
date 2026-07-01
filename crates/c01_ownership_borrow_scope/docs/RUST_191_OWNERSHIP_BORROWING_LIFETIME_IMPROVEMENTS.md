@@ -96,6 +96,7 @@ fn check_borrow() {
     // 没有缓存，每次都重新计算
 }
 ```
+
 **Rust 1.91**:
 
 ```rust
@@ -117,6 +118,7 @@ let result2 = checker.create_borrow(
     BorrowType191::Immutable,
 );
 ```
+
 #### 2. 优化的借用检查算法
 
 Rust 1.91 改进了借用检查的内部算法，减少不必要的检查：
@@ -138,6 +140,7 @@ impl Rust191BorrowChecker {
     }
 }
 ```
+
 ### 性能对比
 
 | 场景                   | Rust 1.90 | Rust 1.91 | 性能提升 |
@@ -184,6 +187,7 @@ fn main() {
     );
 }
 ```
+
 ---
 
 ## 增强的 const 上下文（对生命周期的影响）
@@ -207,6 +211,7 @@ Rust 1.91 允许在 const 上下文中创建对非静态常量的引用，这对
 static S: i32 = 25;
 const C: &i32 = &S;  // ✅ 仅支持静态变量
 ```
+
 **Rust 1.91**:
 
 ```rust
@@ -215,6 +220,7 @@ const S: i32 = 25;
 const C: &i32 = &S;  // ✅ Rust 1.91 支持
 const D: &i32 = &42; // ✅ 可以直接引用字面量
 ```
+
 #### 2. const 上下文中的生命周期
 
 ```rust
@@ -231,6 +237,7 @@ let lifetime2 = inferencer.infer_lifetime("'b".to_string(), "const_scope".to_str
 let constraint_result = inferencer.check_lifetime_constraints(&lifetime1, &lifetime2);
 // 在 const 上下文中，这个检查会返回 true，允许更多的生命周期组合
 ```
+
 ### 实际应用场景
 
 #### 配置系统
@@ -250,6 +257,7 @@ fn create_buffer() -> Vec<u8> {
     vec![0u8; *SIZE_REF] // 使用 const 上下文中的引用
 }
 ```
+
 #### 常量生命周期参数
 
 ```rust
@@ -261,6 +269,7 @@ where
     if *x > *y { x } else { y }
 }
 ```
+
 ---
 
 ## 优化的内存分配器（所有权和内存管理改进）
@@ -286,6 +295,7 @@ for i in 0..1000 {
     // 使用后释放
 }
 ```
+
 **Rust 1.91**:
 
 ```rust
@@ -316,6 +326,7 @@ for i in 0..500 {
     // 这次分配会复用池中的对象，无需系统调用
 }
 ```
+
 #### 2. 性能对比
 
 | 对象大小    | Rust 1.90 | Rust 1.91 | 性能提升 |
@@ -340,6 +351,7 @@ let data = vec![1, 2, 3];
 let moved = transfer_ownership(data);
 // 在 Rust 1.91 中，这个操作更快
 ```
+
 ---
 
 ## 改进的生命周期推断（编译时优化）
@@ -373,6 +385,7 @@ println!("Cache hit rate: {:.2}%",
     (stats.cache_hits as f64 / stats.total_inferences as f64) * 100.0
 );
 ```
+
 #### 2. 优化的推断算法
 
 Rust 1.91 改进了生命周期推断的内部算法：
@@ -389,6 +402,7 @@ impl OptimizedLifetimeInferencer191 {
     }
 }
 ```
+
 ### 实际应用
 
 ```rust
@@ -401,6 +415,7 @@ where
     if x.len() > y.len() { x } else { y }
 }
 ```
+
 ---
 
 ## 实际应用示例
@@ -435,6 +450,7 @@ fn high_performance_borrow_check() {
     println!("Average check time: {} μs", stats.avg_check_time);
 }
 ```
+
 ### 示例 2: const 上下文中的配置
 
 ```rust
@@ -454,6 +470,7 @@ fn create_buffers() -> Vec<Vec<u8>> {
     buffers
 }
 ```
+
 ### 示例 3: 小对象高频分配
 
 ```rust
@@ -485,6 +502,7 @@ fn high_frequency_allocation() {
     );
 }
 ```
+
 ---
 
 ## 迁移指南
@@ -497,6 +515,7 @@ fn high_frequency_allocation() {
 rustup update stable
 rustc --version  # 应该显示 rustc 1.91.0
 ```
+
 #### 2. 利用新特性
 
 **使用改进的借用检查器**:
@@ -509,6 +528,7 @@ let mut checker = ImprovedBorrowChecker::new(); // Rust 1.90
 use c01_ownership_borrow_scope::Rust191BorrowChecker;
 let mut checker = Rust191BorrowChecker::new(); // Rust 1.91，带缓存优化
 ```
+
 **使用 const 上下文增强**:
 
 ```rust
@@ -521,6 +541,7 @@ const VALUE: i32 = 42;
 const REF: &i32 = &VALUE; // 可以引用 const
 const LITERAL_REF: &i32 = &100; // 可以直接引用字面量
 ```
+
 **使用优化的内存分配器**:
 
 ```rust
@@ -529,6 +550,7 @@ use c01_ownership_borrow_scope::OptimizedMemoryManager191;
 let mut manager = OptimizedMemoryManager191::new();
 // 小对象分配会自动使用对象池，性能提升 25-30%
 ```
+
 #### 3. 性能优化建议
 
 1. **利用借用检查器缓存**: 相同模式的借用会受益于缓存

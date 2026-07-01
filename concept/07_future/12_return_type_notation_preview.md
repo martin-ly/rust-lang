@@ -83,6 +83,7 @@ trait HealthCheck {
     async fn check(&mut self) -> bool;
 }
 ```
+
 调用者想把这个返回的 `Future` 传给 `tokio::spawn` 时，需要 `Send + 'static` 边界。但返回类型没有名字，传统写法 `T::CheckFuture: Send` 不适用。
 
 > **核心痛点**
@@ -116,6 +117,7 @@ where
     tokio::spawn(async move { hc.check().await });
 }
 ```
+
 `T::check(..)` 表示「调用 `T::check` 返回的类型」。`..` 占位符表示方法的泛型（Generics）参数由编译器推导。
 
 等价的关联类型 bound 写法：
@@ -125,6 +127,7 @@ fn spawn_check<T: HealthCheck<check(..): Send + 'static>>(mut hc: T) {
     tokio::spawn(async move { hc.check().await });
 }
 ```
+
 [来源: [Inside Rust Blog — Return type notation MVP: Call for testing!](https://blog.rust-lang.org/inside-rust/2024/09/26/rtn-call-for-testing.html)]
 
 ---
@@ -172,6 +175,7 @@ fn use_factory2<T: Factory<make(..): DoubleEndedIterator>>() {
     // ...
 }
 ```
+
 语义规则：
 
 - `..` 表示方法的所有泛型参数由调用处推导；目前仅支持生命周期（Lifetimes）泛型。
@@ -203,6 +207,7 @@ where
     T::plain(..): Send,
 {}
 ```
+
 [来源: [Tracking Issue #109417](https://github.com/rust-lang/rust/issues/109417)]
 
 ---
@@ -238,6 +243,7 @@ where
 trait SendService: Service<call(..): Send + 'static> {}
 impl<T: Service<call(..): Send + 'static>> SendService for T {}
 ```
+
 > **最佳实践**: 在 public async trait 中不要提前加 `+ Send`；让调用者通过 RTN 按需约束。这样 `SingleThreaded` 实现和 `Send` 实现可以共存。
 
 [来源: [RFC 3654 — Return Type Notation](https://rust-lang.github.io/rfcs/3654-return-type-notation.html)]
@@ -261,6 +267,7 @@ impl<T: Service<call(..): Send + 'static>> SendService for T {}
 命题: "public async trait 应该预先把返回 Future 约束为 Send"
 └── ⚠️ 不推荐 — 应通过 RTN 让调用者按需约束，保持实现灵活性
 ```
+
 ---
 
 ### 4.2 边界极限
@@ -283,6 +290,7 @@ impl<T: Service<call(..): Send + 'static>> SendService for T {}
 2026-05: Rust Project Goals 2026 将 "Prepare TAIT + RTN for stabilization" 列为目标
 未来:    完成下一代 trait solver 集成后，TAIT + RTN 一起稳定
 ```
+
 [来源: [Rust Project Goals 2026 — RTN](https://rust-lang.github.io/rust-project-goals/2026/rtn.html)]
 
 ---
@@ -333,6 +341,7 @@ struct Holder<T: HealthCheck> {
     fut: T::check(..),
 }
 ```
+
 **错误信息**: `RTN types are not yet allowed in this position`
 
 ---
@@ -351,6 +360,7 @@ where
     T::value(..): Send,
 {}
 ```
+
 **错误信息**: `return type notation is not allowed for methods that do not return impl Trait or async`
 
 ---
@@ -369,6 +379,7 @@ where
     F::make<T>(..): Send, // ❌ 当前不支持 type 泛型
 {}
 ```
+
 **错误信息**: `return type notation with generic type/const parameters is not yet supported`
 
 ---
@@ -387,6 +398,7 @@ where
     T::check(..): Send,
 {}
 ```
+
 **错误信息**: `return type notation is experimental (see issue #109417)`
 
 ---

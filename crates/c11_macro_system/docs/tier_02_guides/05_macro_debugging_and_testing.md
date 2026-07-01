@@ -97,6 +97,7 @@
     ├── 集成测试
     └── 编译失败测试
 ```
+
 ---
 
 ## 1. 调试工具
@@ -116,6 +117,7 @@ cargo expand module_name
 # 展开特定函数
 cargo expand function_name
 ```
+
 ### 1.2 println! 调试
 
 ```rust
@@ -132,6 +134,7 @@ pub fn debug_macro(input: TokenStream) -> TokenStream {
     output
 }
 ```
+
 ### 1.3 IDE 支持
 
 - **rust-analyzer**: 内联显示宏展开
@@ -175,6 +178,7 @@ impl std::clone::Clone for User {
     }
 }
 ```
+
 ### 2.2 部分展开
 
 ```bash
@@ -184,6 +188,7 @@ cargo expand --ugly  # 保留原始格式
 # 展开到文件
 cargo expand > expanded.rs
 ```
+
 ---
 
 ## 3. 错误处理
@@ -212,6 +217,7 @@ pub fn derive_my_trait(input: TokenStream) -> TokenStream {
     TokenStream::new()
 }
 ```
+
 ### 3.2 自定义错误消息
 
 ```rust
@@ -250,6 +256,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
     TokenStream::new()
 }
 ```
+
 ---
 
 ## 4. 测试策略
@@ -278,6 +285,7 @@ fn test_derive_builder() {
     assert_eq!(user.age, 30);
 }
 ```
+
 ### 4.2 编译失败测试
 
 ```rust
@@ -298,6 +306,7 @@ enum MyEnum {  // 应该编译失败
 
 fn main() {}
 ```
+
 ### 4.3 快照测试
 
 ```rust
@@ -320,6 +329,7 @@ fn test_expansion() {
     );
 }
 ```
+
 ---
 
 ## 5. 实战案例
@@ -356,6 +366,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
     TokenStream::new()
 }
 ```
+
 ### 5.2 错误诊断
 
 ```rust
@@ -383,6 +394,7 @@ pub fn route(attr: TokenStream, item: TokenStream) -> TokenStream {
     TokenStream::new()
 }
 ```
+
 ### 5.3 性能测试
 
 ```rust
@@ -406,6 +418,7 @@ fn bench_macro_expansion() {
     assert!(duration.as_millis() < 100, "Macro expansion took too long");
 }
 ```
+
 ---
 
 ## 6. 总结

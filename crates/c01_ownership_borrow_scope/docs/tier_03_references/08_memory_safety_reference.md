@@ -162,6 +162,7 @@ Rust 在编译时保证以下资源安全特性（引用一致性视角）:
        let value = *boxed;  // ✅ 安全
    }
    ```
+
 2. **无悬垂引用**（引用一致性视角）
 
    ```rust
@@ -177,6 +178,7 @@ Rust 在编译时保证以下资源安全特性（引用一致性视角）:
        s  // ✅ 所有权转移
    }
    ```
+
 3. **无数据竞争**
 
    ```rust
@@ -200,6 +202,7 @@ Rust 在编译时保证以下资源安全特性（引用一致性视角）:
    use std::sync::Arc;
    let data = Arc::new(Mutex::new(0));
    ```
+
 4. **无缓冲区溢出**
 
    ```rust
@@ -214,6 +217,7 @@ Rust 在编译时保证以下资源安全特性（引用一致性视角）:
        println!("Index out of bounds");
    }
    ```
+
 5. **无迭代器失效**
 
    ```rust
@@ -229,6 +233,7 @@ Rust 在编译时保证以下资源安全特性（引用一致性视角）:
        // vec.push(*item * 2);  // ❌ 编译错误：已有不可变借用
    }
    ```
+
 #### 内存安全层次
 
 ```text
@@ -253,6 +258,7 @@ Rust 在编译时保证以下资源安全特性（引用一致性视角）:
         - 完全无保护
         - 需要极度小心
 ```
+
 ### 1.2 内存安全边界
 
 #### Unsafe 边界
@@ -275,6 +281,7 @@ fn safe_read<T: Copy>(slice: &[T], index: usize) -> Option<T> {
     slice.get(index).copied()
 }
 ```
+
 #### 安全抽象
 
 ```rust
@@ -317,6 +324,7 @@ impl SafeBuffer {
     }
 }
 ```
+
 ### 1.3 常见内存错误预防
 
 #### 1. Use-After-Free
@@ -332,6 +340,7 @@ let ptr = Box::new(42);
 drop(ptr);
 // *ptr = 100;  // ❌ 编译错误：ptr 已 moved
 ```
+
 #### 2. Double-Free
 
 ```rust
@@ -345,6 +354,7 @@ let ptr = Box::new(42);
 drop(ptr);
 // drop(ptr);  // ❌ 编译错误：ptr 已 moved
 ```
+
 #### 3. Memory Leak
 
 ```rust
@@ -370,6 +380,7 @@ struct SafeNode {
     next: Option<Weak<RefCell<SafeNode>>>,
 }
 ```
+
 #### 4. Data Race
 
 ```rust
@@ -405,6 +416,7 @@ fn no_data_race() {
     handle.join().unwrap();
 }
 ```
+
 ---
 
 ## 2. 安全 Rust 最佳实践
@@ -441,6 +453,7 @@ impl Configuration {
     }
 }
 ```
+
 #### 模式 2: 借用优先
 
 ```rust
@@ -464,6 +477,7 @@ fn main() {
     flexible_api(String::from("owned string"));
 }
 ```
+
 #### 模式 3: Cow 模式
 
 ```rust
@@ -488,6 +502,7 @@ fn main() {
     let result2 = process_text(Cow::Borrowed(text2));  // 仅在需要时拷贝
 }
 ```
+
 ### 2.2 生命周期管理
 
 #### 最佳实践 1: 生命周期省略
@@ -506,6 +521,7 @@ impl MyStruct {
     }
 }
 ```
+
 #### 最佳实践 2: 避免复杂生命周期
 
 ```rust
@@ -530,6 +546,7 @@ struct OwnedStruct {
     field3: String,
 }
 ```
+
 #### 最佳实践 3: 生命周期边界
 
 ```rust
@@ -552,6 +569,7 @@ impl<'a, T: 'a> Cache<'a, T> {
     }
 }
 ```
+
 ### 2.3 类型安全设计
 
 #### 模式 1: 新类型模式
@@ -574,6 +592,7 @@ fn main() {
     // get_user(product_id);  // ❌ 编译错误：类型不匹配
 }
 ```
+
 #### 模式 2: 类型状态模式
 
 ```rust
@@ -626,6 +645,7 @@ fn main() {
     file.read().unwrap();  // ✅ OK
 }
 ```
+
 #### 模式 3: Builder 模式
 
 ```rust
@@ -675,6 +695,7 @@ impl ConfigBuilder {
     }
 }
 ```
+
 ---
 
 ## 3. Unsafe Rust 使用指南
@@ -698,6 +719,7 @@ fn sum_optimized(data: &[i32]) -> i32 {
     sum
 }
 ```
+
 ✅ **2. FFI 互操作**
 
 ```rust
@@ -709,6 +731,7 @@ pub fn safe_wrapper(x: i32) -> i32 {
     unsafe { c_function(x) }
 }
 ```
+
 ✅ **3. 底层数据结构**
 
 ```rust
@@ -730,6 +753,7 @@ impl<T> RingBuffer<T> {
     }
 }
 ```
+
 #### 避免使用场景
 
 ❌ **1. 绕过借用检查器**
@@ -743,6 +767,7 @@ unsafe {
 }
 // 应该重新设计代码，避免需要 unsafe
 ```
+
 ❌ **2. 过早优化**
 
 ```rust
@@ -758,6 +783,7 @@ fn safe_version(data: &[i32]) -> i32 {
     data.iter().sum()
 }
 ```
+
 ### 3.2 Unsafe 代码模式
 
 #### 模式 1: 最小化 Unsafe 边界
@@ -778,6 +804,7 @@ fn process_buffer(data: &[u8]) -> Vec<u8> {
     result
 }
 ```
+
 #### 模式 2: 文档化不变量
 
 ```rust
@@ -813,6 +840,7 @@ impl<T> RawWrapper<T> {
     }
 }
 ```
+
 #### 模式 3: Unsafe 函数 vs Unsafe 块
 
 ```rust
@@ -833,6 +861,7 @@ pub fn safe_read<T: Copy>(slice: &[T], index: usize) -> Option<T> {
     }
 }
 ```
+
 ### 3.3 Unsafe 代码审计
 
 #### 审计清单
@@ -877,6 +906,7 @@ fn good_ptr_deref(ptr: *const i32) -> Option<i32> {
     }
 }
 ```
+
 #### 审计工具
 
 ```bash
@@ -889,6 +919,7 @@ cargo clippy -- -W clippy::undocumented_unsafe_blocks
 # AddressSanitizer: 检测内存错误
 RUSTFLAGS="-Z sanitizer=address" cargo +nightly build
 ```
+
 ---
 
 ## 4. FFI 安全性
@@ -926,6 +957,7 @@ pub fn safe_strcmp(s1: &str, s2: &str) -> std::cmp::Ordering {
     }
 }
 ```
+
 #### 从 C 接收字符串
 
 ```rust
@@ -950,6 +982,7 @@ pub fn get_string() -> Result<String, std::str::Utf8Error> {
     }
 }
 ```
+
 #### 传递结构体给 C
 
 ```rust
@@ -968,6 +1001,7 @@ pub fn safe_process_point(p: &Point) {
     unsafe { process_point(p as *const Point) }
 }
 ```
+
 ### 4.2 内存布局保证
 
 #### Repr 属性
@@ -998,6 +1032,7 @@ struct Packed {
     b: u64,
 }
 ```
+
 #### 对齐和大小
 
 ```rust
@@ -1017,6 +1052,7 @@ fn check_layout() {
     assert_eq!(align_of::<Example>(), 8);
 }
 ```
+
 ### 4.3 FFI 最佳实践
 
 #### 最佳实践 1: 错误处理
@@ -1039,6 +1075,7 @@ pub extern "C" fn safe_ffi_function(x: i32) -> i32 {
     }
 }
 ```
+
 #### 最佳实践 2: 内存管理
 
 ```rust
@@ -1062,6 +1099,7 @@ pub extern "C" fn free_string(ptr: *mut c_char) {
     }
 }
 ```
+
 #### 最佳实践 3: 版本管理
 
 ```rust
@@ -1082,6 +1120,7 @@ pub extern "C" fn lib_function_v2(x: i32, y: i32) -> i32 {
     x * 2 + y
 }
 ```
+
 ---
 
 ## 5. 并发安全模式
@@ -1111,6 +1150,7 @@ use std::sync::Arc;
 let arc = Arc::new(5);
 thread::spawn(move || { println!("{}", arc); });  // OK
 ```
+
 #### 共享状态模式
 
 ```rust
@@ -1166,6 +1206,7 @@ fn arc_rwlock_pattern() {
     }
 }
 ```
+
 ### 5.2 Send 和 Sync
 
 #### 手动实现 Send/Sync
@@ -1188,6 +1229,7 @@ struct NotSendOrSync<T> {
     _marker: PhantomData<*const ()>,  // 阻止 Send/Sync
 }
 ```
+
 #### 常见类型的 Send/Sync 状态
 
 | 类型                 | Send           | Sync           | 说明           |
@@ -1227,6 +1269,7 @@ impl AtomicCounter {
     }
 }
 ```
+
 #### 内存顺序
 
 ```rust
@@ -1254,6 +1297,7 @@ fn memory_ordering_example() {
     assert_eq!(data.load(Ordering::Relaxed), 42);  // 保证可见性
 }
 ```
+
 ---
 
 ## 6. 内存泄漏预防
@@ -1295,6 +1339,7 @@ fn detect_cycle() {
     println!("node2 weak: {}", Rc::weak_count(&node2));      // 0
 }
 ```
+
 ### 6.2 资源管理模式
 
 #### RAII 模式
@@ -1320,6 +1365,7 @@ impl Drop for FileGuard {
     }
 }
 ```
+
 ### 6.3 Drop 最佳实践
 
 ```rust
@@ -1338,6 +1384,7 @@ impl Drop for CustomResource {
 
 // ⚠️ Drop 顺序：先内部字段，后自定义 Drop
 ```
+
 ---
 
 ## 7. 安全性审计和工具
@@ -1359,6 +1406,7 @@ cargo audit
 cargo install cargo-geiger
 cargo geiger
 ```
+
 ### 7.2 动态检测工具
 
 ```bash
@@ -1374,6 +1422,7 @@ RUSTFLAGS="-Z sanitizer=thread" cargo +nightly build
 # MemorySanitizer: 未初始化内存检测
 RUSTFLAGS="-Z sanitizer=memory" cargo +nightly build
 ```
+
 ### 7.3 安全性测试
 
 ```rust
@@ -1423,6 +1472,7 @@ mod tests {
     }
 }
 ```
+
 ---
 
 ## 相关资源

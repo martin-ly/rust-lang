@@ -67,6 +67,7 @@ pub enum DataStoreError {
     Unknown,
 }
 ```
+
 **自动实现**: `Error`, `Display`, `From<std::io::Error>`
 
 **库边界原则**:
@@ -79,6 +80,7 @@ pub fn parse_config(path: &str) -> Result<Config, DataStoreError> {
     Ok(config)
 }
 ```
+
 ---
 
 ## 📦 anyhow (应用开发)
@@ -98,6 +100,7 @@ fn get_cluster_info() -> Result<ClusterInfo> {
     Ok(cluster)
 }
 ```
+
 **特性**:
 
 - `anyhow::Result<T>` = `Result<T, anyhow::Error>`
@@ -128,6 +131,7 @@ struct MyError {
     bad_bit: SourceSpan,
 }
 ```
+
 **输出示例**:
 
 ```text
@@ -140,6 +144,7 @@ struct MyError {
    ╰────
   help: try doing it better next time?
 ```
+
 ---
 
 ## 🔄 使用模式
@@ -171,6 +176,7 @@ fn main() -> Result<()> {
     Ok(())
 }
 ```
+
 ### 从 anyhow 转换到 thiserror
 
 ```rust
@@ -183,6 +189,7 @@ pub enum FetchError { /* ... */ }
 
 fn fetch_data() -> Result<Data, FetchError> { /* ... */ }
 ```
+
 ---
 
 ## 📊 选择决策树
@@ -196,6 +203,7 @@ fn fetch_data() -> Result<Data, FetchError> { /* ... */ }
             ├── 是 ──→ miette
             └── 否 ──→ anyhow
 ```
+
 **组合使用**: `thiserror` 定义库错误 + `anyhow` 在应用层聚合
 
 ---

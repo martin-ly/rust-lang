@@ -14,6 +14,7 @@ mdbook build
 # 或指定输出目录
 mdbook build --dest-dir book
 ```
+
 ---
 
 ## 目录结构
@@ -31,6 +32,7 @@ book/
 ├── 07_future/         # L7 前沿趋势
 └── ...                # mdBook 生成的搜索、字体、CSS 等资源
 ```
+
 ---
 
 ## 与源文件的关系

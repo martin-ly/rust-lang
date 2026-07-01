@@ -153,6 +153,7 @@
 ```bash
 cargo run --example ultimate_async_theory_practice_2025
 ```
+
 #### `examples/tokio_smol_latest_features_2025.rs` (800+ 行)
 
 **Tokio 1.41+ 最新特性** (5个):
@@ -214,6 +215,7 @@ cargo run --example ultimate_async_theory_practice_2025
 ```bash
 cargo run --example tokio_smol_latest_features_2025
 ```
+
 ### 2. 完整文档
 
 #### `docs/ULTIMATE_ASYNC_GUIDE_2025_CN.md` (10,000+ 字)
@@ -420,6 +422,7 @@ while let Some(result) = set.join_next().await {
     process(result);
 }
 ```
+
 #### 1.2 错误处理技巧
 
 ```rust
@@ -430,6 +433,7 @@ async fn fetch_and_parse() -> Result<Data, Error> {
     Ok(data)
 }
 ```
+
 #### 1.3 上下文传播技巧
 
 ```rust
@@ -442,6 +446,7 @@ TRACE_ID.scope(id, async {
     // 所有调用自动获得 trace_id
 }).await
 ```
+
 ### 2. 设计惯用法 (Design Idioms)
 
 #### 2.1 Builder 模式惯用法
@@ -453,6 +458,7 @@ ClientBuilder::new()
     .retries(3)
     .build()
 ```
+
 #### 2.2 RAII 资源管理
 
 ```rust
@@ -467,6 +473,7 @@ impl Drop for Connection {
     }
 }
 ```
+
 #### 2.3 类型状态模式
 
 ```rust
@@ -486,6 +493,7 @@ impl Client<Connected> {
     async fn send(&self, data: &[u8]) { ... }
 }
 ```
+
 ### 3. 应用场景分类
 
 #### 3.1 Web 服务器
@@ -545,6 +553,7 @@ impl Client<Connected> {
 │  • Async I/O                                │
 └─────────────────────────────────────────────┘
 ```
+
 ### 2. 微服务架构示例
 
 ```text
@@ -568,6 +577,7 @@ impl Client<Connected> {
     │ Database │ │  Cache   │ │  Queue   │
     └──────────┘ └──────────┘ └──────────┘
 ```
+
 ---
 
 ## 📈 性能基准数据

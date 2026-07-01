@@ -3,8 +3,8 @@
 //! 本示例展示 Iced 0.14 的 Elm 架构：`Model`、`Message`、`update`、`view`。
 //! `cargo check` 时不启动窗口；真实运行时会创建跨平台 GUI。
 
-use iced::widget::{button, column, text};
 use iced::Element;
+use iced::widget::{button, column, text};
 
 /// 应用状态。
 #[derive(Default)]

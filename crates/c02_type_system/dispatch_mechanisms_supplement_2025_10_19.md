@@ -220,6 +220,7 @@
 struct Point { x: f64, y: f64 }
 trait Drawable { fn draw(&self); }
 ```
+
 ### 2. 转换（Conversion）
 
 **Rust**: 显式、安全
@@ -228,6 +229,7 @@ trait Drawable { fn draw(&self); }
 let y: i64 = x as i64;  // 显式
 let z = x.try_into()?;  // 可失败
 ```
+
 ### 3. 适配（Adaptation）
 
 **Rust**: Trait 系统
@@ -236,6 +238,7 @@ let z = x.try_into()?;  // 可失败
 impl Display for MyType { ... }
 impl PartialEq for MyType { ... }
 ```
+
 ### 4. 行为（Behavior）
 
 **Rust**: 零成本
@@ -244,6 +247,7 @@ impl PartialEq for MyType { ... }
 fn sum<T: Add>(items: &[T]) -> T { ... }
 // 编译后直接内联
 ```
+
 ---
 
 ## 💼 实战案例
@@ -259,6 +263,7 @@ fn process_static<S: Shape>(shapes: &[S]) { ... }
 // 动态分派：异构集合
 fn process_dynamic(shapes: &[Box<dyn Shape>]) { ... }
 ```
+
 ### 案例 2: 插件系统
 
 **动态分派的典型应用**：
@@ -268,6 +273,7 @@ struct PluginManager {
     plugins: Vec<Box<dyn Plugin>>,
 }
 ```
+
 ---
 
 ## ⚡ 性能基准测试
@@ -327,6 +333,7 @@ struct PluginManager {
 ├── 类型转换 ✅
 └── 分派机制 ❌ 缺失
 ```
+
 ### 更新后
 
 ```text
@@ -340,6 +347,7 @@ struct PluginManager {
     ├── 性能分析
     └── 设计指南
 ```
+
 ---
 
 ## 🎉 核心成就

@@ -117,6 +117,7 @@ print(42);              // T = i32
 print(3.14);            // T = f64
 print("hello".to_string());  // T = String
 ```
+
 **适合使用泛型的场景**:
 
 - 集合类型 (`Vec<T>`, `HashMap<K, V>`)
@@ -160,6 +161,7 @@ let y = add(1.0, 2.0);   // T = f64
 
 // 性能等同于手写专门的函数
 ```
+
 **对比 trait 对象**:
 
 ```rust
@@ -173,6 +175,7 @@ fn process_dyn(value: &dyn Display) {
     println!("{}", value);
 }
 ```
+
 **权衡**:
 
 - ✅ 运行时性能：与手写代码相同
@@ -221,6 +224,7 @@ let map1: HashMap<String, i32> = HashMap::new();
 // 等价于
 let map2: HashMap<String, i32, RandomState> = HashMap::new();
 ```
+
 **注意事项**:
 
 - 默认类型参数必须在非默认参数之后
@@ -272,6 +276,7 @@ where
     result
 }
 ```
+
 **当前限制** (Rust 1.92.0):
 
 - 只支持整数类型（`u8`, `u16`, `u32`, `u64`, `u128`, `usize`, `i8`, `i16`, `i32`, `i64`, `i128`, `isize`）
@@ -358,6 +363,7 @@ impl Shape for i32 {
     }
 }
 ```
+
 **与其他语言接口的对比**:
 
 | 特性         | Rust trait    | Java interface | C++ abstract class |
@@ -430,6 +436,7 @@ for animal in &animals {
     make_sound_dyn(animal.as_ref());  // 运行时确定调用哪个实现
 }
 ```
+
 **使用泛型的场景**:
 
 - ✅ 类型在编译时已知
@@ -499,6 +506,7 @@ trait ObjectSafe {
 // 可以创建 trait 对象
 let obj: &dyn ObjectSafe<AssocType = i32> = ...;
 ```
+
 **解决方法**:
 
 1. **为不对象安全的方法添加 `where Self: Sized`**:
@@ -518,6 +526,7 @@ let obj: &dyn ObjectSafe<AssocType = i32> = ...;
    obj.object_safe_method();  // ✅
    // obj.not_object_safe(42);  // ❌ 编译错误
    ```
+
 2. **使用泛型而不是 trait 对象**:
 
    ```rust
@@ -525,6 +534,7 @@ let obj: &dyn ObjectSafe<AssocType = i32> = ...;
        // 使用泛型，不需要对象安全
    }
    ```
+
    **检查对象安全性**:
 
    ```rust
@@ -538,6 +548,7 @@ let obj: &dyn ObjectSafe<AssocType = i32> = ...;
        assert_object_safe::<dyn MyTrait>();
    }
    ```
+
 **参考文档**: [`tier_03_references/02_trait_system_reference.md`](../tier_03_references/02_trait_system_reference.md)
 
 ---
@@ -590,6 +601,7 @@ impl Deref for MyVec {
 let v = MyVec(vec![1, 2, 3]);
 println!("Length: {}", v.len());  // 通过 Deref 调用 Vec::len
 ```
+
 **newtype 的优势**:
 
 1. ✅ 可以为外部类型实现外部 trait
@@ -637,6 +649,7 @@ impl Container for IntList {
 let mut list = IntList { items: vec![] };
 list.add(42);  // Item 必须是 i32
 ```
+
 **泛型参数**: 可以有多种实现
 
 ```rust
@@ -665,6 +678,7 @@ str_list.add("hello");
 impl Container<i32> for MyType { /* ... */ }
 impl Container<String> for MyType { /* ... */ }
 ```
+
 **对比总结**:
 
 | 维度           | 关联类型             | 泛型参数             |
@@ -718,6 +732,7 @@ struct MyIter<'data> {
 //     }
 // }
 ```
+
 **GAT 解决方案**:
 
 ```rust
@@ -748,6 +763,7 @@ impl<'data> LendingIterator for MyIter<'data> {
     }
 }
 ```
+
 **GAT 的应用场景**:
 
 1. **借用迭代器** (Lending Iterator)
@@ -768,6 +784,7 @@ trait GenericContainer {
     type Item<'a> where Self: 'a;
 }
 ```
+
 **注意事项**:
 
 - GAT 在 Rust 1.65+ 稳定
@@ -814,6 +831,7 @@ let map = HashMap::<String, i32>::new();
 // 部分指定类型
 let vec = Vec::<_>::new();  // 让编译器推断元素类型
 ```
+
 **何时需要 turbofish**:
 
 1. `parse()` 等转换函数
@@ -857,6 +875,7 @@ fn get_first<'a, T>(list: &'a [T]) -> Option<&'a T> {
     list.first()
 }
 ```
+
 **生命周期约束**:
 
 ```rust
@@ -877,6 +896,7 @@ struct Storage<'a, T: 'a> {
     value: T,
 }
 ```
+
 **结构体中的生命周期和泛型**:
 
 ```rust
@@ -894,6 +914,7 @@ impl<'a, T> Container<'a, T> {
     }
 }
 ```
+
 **参考文档**: [`tier_04_advanced/02_generics_and_lifetimes.md`](../tier_04_advanced/02_generics_and_lifetimes.md)
 
 ---
@@ -911,6 +932,7 @@ error[E0282]: type annotations needed
 2  |     let x = "42".parse().unwrap();
    |         ^ cannot infer type for type parameter `F`
 ```
+
 **解决方法**:
 
 ```rust
@@ -931,6 +953,7 @@ let y: i32 = x;  // 从这里推断 x 是 i32
 fn process(n: i32) {}
 process("42".parse().unwrap());  // 从参数类型推断
 ```
+
 **参考文档**: [`tier_02_guides/04_type_inference.md`](../tier_02_guides/04_type_inference.md)
 
 ---
@@ -942,6 +965,7 @@ process("42".parse().unwrap());  // 从参数类型推断
 ```text
 error[E0277]: the trait bound `MyType: Clone` is not satisfied
 ```
+
 **解决方法**:
 
 ```rust
@@ -981,6 +1005,7 @@ fn use_clone_ref<T: Clone>(value: &T) {
     let cloned = value.clone();
 }
 ```
+
 **常见 trait 约束错误**:
 
 - `Clone`: 使用 `#[derive(Clone)]` 或手动实现
@@ -1013,6 +1038,7 @@ fn use_clone_ref<T: Clone>(value: &T) {
        println!("{}", value);
    }
    ```
+
 2. **使用 #[inline] 属性**:
 
    ```rust
@@ -1027,6 +1053,7 @@ fn use_clone_ref<T: Clone>(value: &T) {
        value
    }
    ```
+
 3. **利用 const 泛型避免运行时检查**:
 
    ```rust
@@ -1041,6 +1068,7 @@ fn use_clone_ref<T: Clone>(value: &T) {
        // 编译时已知长度，无需检查
    }
    ```
+
 4. **避免不必要的泛型边界**:
 
    ```rust
@@ -1054,6 +1082,7 @@ fn use_clone_ref<T: Clone>(value: &T) {
        println!("{}", value);
    }
    ```
+
 **参考文档**: [`tier_04_advanced/03_zero_cost_abstractions.md`](../tier_04_advanced/03_zero_cost_abstractions.md)
 
 ---
@@ -1114,6 +1143,7 @@ fn main() {
     // door.enter();  // ❌ 编译错误：又变成 Closed 了
 }
 ```
+
 **参考文档**: [`tier_04_advanced/01_advanced_type_techniques.md`](../tier_04_advanced/01_advanced_type_techniques.md)
 
 ---
@@ -1144,6 +1174,7 @@ fn create_generic<T: Default>() -> T {
     T::default()
 }
 ```
+
 **impl Trait 的优势**:
 
 - ✅ 隐藏实现细节
@@ -1174,6 +1205,7 @@ fn create_generic<T: Default>() -> T {
    // ✅ 最小约束
    fn process<T: Display>(value: T) {}
    ```
+
 2. **提供默认类型参数**:
 
    ```rust
@@ -1182,6 +1214,7 @@ fn create_generic<T: Default>() -> T {
        value: Result<T, E>,
    }
    ```
+
 3. **使用 impl Trait 简化返回类型**:
 
    ```rust
@@ -1195,6 +1228,7 @@ fn create_generic<T: Default>() -> T {
        vec![1, 2, 3].into_iter()
    }
    ```
+
 4. **考虑使用关联类型而不是泛型参数**:
 
 ```rust
@@ -1209,6 +1243,7 @@ trait Iterator {
 //     fn next(&mut self) -> Option<T>;
 // }
 ```
+
 **参考文档**: [`tier_04_advanced/05_advanced_design_patterns.md`](../tier_04_advanced/05_advanced_design_patterns.md)
 
 ---
@@ -1236,6 +1271,7 @@ instance Functor Maybe where
     fmap f Nothing = Nothing
     fmap f (Just x) = Just (f x)
 ```
+
 **Rust 的近似实现** (使用 GAT):
 
 ```rust
@@ -1262,6 +1298,7 @@ let x = Some(42);
 let y = OptionFunctor::map(x, |n| n * 2);
 assert_eq!(y, Some(84));
 ```
+
 **限制**:
 
 - 不能像 Haskell 那样泛型地处理所有 Functor

@@ -135,6 +135,7 @@ graph TB
     style F fill:#4ecdc4,color:#fff
     style G fill:#95e1d3,color:#333
 ```
+
 ### 线程生命周期状态图
 
 ```mermaid
@@ -154,6 +155,7 @@ stateDiagram-v2
         - 改进的调度算法
     end note
 ```
+
 ---
 
 ## 📊 线程操作多维对比矩阵
@@ -236,6 +238,7 @@ graph TD
     style UsePool fill:#ffd43b,color:#333
     style UseSpawn fill:#ff8787,color:#fff
 ```
+
 ### 2.1 基本线程创建
 
 #### 2.1.1 简单线程创建（spawn）
@@ -269,6 +272,7 @@ fn main() {
     println!("\n线程返回: {}", result);
 }
 ```
+
 **输出示例**:
 
 ```text
@@ -285,6 +289,7 @@ fn main() {
 
 线程返回: 线程完成!
 ```
+
 #### 2.1.2 带参数的线程（move语义）
 
 ```rust
@@ -315,6 +320,7 @@ fn main() {
     println!("\n最终结果: {}", result);
 }
 ```
+
 #### 2.1.3 🚀 Rust 1.92.0 - 改进的作用域线程（自 Rust 1.90 引入）
 
 **Rust 1.92.0 的作用域线程提供了更安全的借用语义**（自 Rust 1.90 引入）：
@@ -351,6 +357,7 @@ fn main() {
     println!("\n主线程: 最终数据 {:?}", data);
 }
 ```
+
 **Rust 1.90 改进点**:
 
 - ✅ 更好的生命周期推断
@@ -390,6 +397,7 @@ fn main() {
     println!("\n主线程收到结果: {}", result);
 }
 ```
+
 **Builder 配置选项对比**:
 
 | 选项          | 默认值      | 推荐值       | 说明           |
@@ -443,6 +451,7 @@ fn main() {
     println!("\nResults: {:?}", results);
 }
 ```
+
 #### 2.2.2 🚀 Rust 1.90 - 改进的错误处理
 
 ```rust
@@ -477,6 +486,7 @@ fn main() {
     }
 }
 ```
+
 #### 2.2.3 🚀 高级：并行任务协调
 
 ```rust
@@ -542,6 +552,7 @@ fn main() {
     println!("\n平均耗时: {:?}", avg_time);
 }
 ```
+
 ## 3. 线程本地存储
 
 ### 3.1 ThreadLocal类型
@@ -579,6 +590,7 @@ fn main() {
     });
 }
 ```
+
 ## 4. 线程池基础
 
 ### 4.1 简单线程池
@@ -629,6 +641,7 @@ impl SimpleThreadPool {
     }
 }
 ```
+
 ## 5. 线程安全
 
 ### 5.1 Send和Sync特征
@@ -657,6 +670,7 @@ fn main() {
     handle.join().unwrap();
 }
 ```
+
 ## 6. 最佳实践
 
 ### 6.1 线程数选择
@@ -690,6 +704,7 @@ fn main() {
     }
 }
 ```
+
 ## 💡 Rust 1.90 性能基准对比
 
 ### 线程创建性能
@@ -718,6 +733,7 @@ fn benchmark_thread_creation() {
     println!("改进: {:.2}%", ((v189.as_nanos() - v190.as_nanos()) as f64 / v189.as_nanos() as f64) * 100.0);
 }
 ```
+
 **性能对比表**:
 
 | 操作           | Rust 1.89 | Rust 1.90 | 改进    |
@@ -781,6 +797,7 @@ mindmap
         线程绑定
         内存分配
 ```
+
 ---
 
 ## 📋 快速参考卡片
@@ -848,6 +865,7 @@ fn optimal_thread_count(task_type: TaskType) -> usize {
     }
 }
 ```
+
 #### 错误处理模式
 
 ```rust
@@ -856,6 +874,7 @@ let result = handle.join()
     .map_err(|e| format!("线程 panic: {:?}", e))?
     .map_err(|e| format!("任务失败: {}", e))?;
 ```
+
 #### 性能监控
 
 ```rust
@@ -866,6 +885,7 @@ let duration = start.elapsed();
 
 println!("线程耗时: {:?}", duration);
 ```
+
 ### 7.3 推荐学习路径
 
 1. **初学者** (1-2周)

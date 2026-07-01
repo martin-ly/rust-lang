@@ -165,6 +165,7 @@ impl Actor for EchoActor {
     }
 }
 ```
+
 ### 2. 高级Actor特性
 
 #### 2.1 监督策略
@@ -233,6 +234,7 @@ impl Supervisor {
     }
 }
 ```
+
 #### 2.2 路由Actor
 
 ```rust
@@ -294,6 +296,7 @@ impl<M: Send + Clone + 'static> RouterActor<M> {
     }
 }
 ```
+
 ## 高级通道通信
 
 ### 1. 类型安全通道
@@ -365,6 +368,7 @@ impl<T: Send + 'static> TypedReceiver<T> {
     }
 }
 ```
+
 ### 2. 背压控制通道
 
 ```rust
@@ -419,6 +423,7 @@ impl<T: Send + 'static> BackpressureChannel<T> {
     }
 }
 ```
+
 ## 发布订阅模式
 
 ### 1. 类型安全的事件总线
@@ -509,6 +514,7 @@ pub async fn example_event_bus() {
     });
 }
 ```
+
 ### 2. 异步事件流
 
 ```rust
@@ -565,6 +571,7 @@ pub async fn example_async_stream() {
     });
 }
 ```
+
 ## 总结
 
 Rust 1.89的消息传递模式提供了：

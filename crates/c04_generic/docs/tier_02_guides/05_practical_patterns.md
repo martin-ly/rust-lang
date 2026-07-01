@@ -132,6 +132,7 @@
 └── 类型级编程
     └── 编译时计算
 ```
+
 ---
 
 ## 📚 前置知识
@@ -209,6 +210,7 @@ fn main() {
     // door.open(); // ❌ 编译错误
 }
 ```
+
 ### 1.3 实战案例：HTTP 客户端
 
 ```rust
@@ -296,6 +298,7 @@ fn main() {
     // let invalid = HttpRequest::new().send(); // 缺少 method 和 url
 }
 ```
+
 ---
 
 ## 2. 构建器模式 (Builder Pattern)
@@ -369,6 +372,7 @@ fn main() {
     println!("{:?}", config);
 }
 ```
+
 ### 2.2 类型安全构建器
 
 ```rust
@@ -448,6 +452,7 @@ fn main() {
     // let invalid = ConfigBuilder::new().build();
 }
 ```
+
 ### 2.3 实战案例：配置构建器
 
 ```rust
@@ -532,6 +537,7 @@ fn main() {
     println!("{:?}", config);
 }
 ```
+
 ---
 
 ## 3. 新类型模式 (Newtype Pattern)
@@ -562,6 +568,7 @@ fn main() {
     // get_user(product_id);
 }
 ```
+
 ### 3.2 类型安全保证
 
 ```rust
@@ -601,6 +608,7 @@ fn main() {
     println!("Total: {} km", km.0);
 }
 ```
+
 ### 3.3 实战案例：单位系统
 
 ```rust
@@ -670,6 +678,7 @@ fn main() {
     println!("Sum: {:?}", sum);
 }
 ```
+
 ---
 
 ## 4. PhantomData 模式
@@ -702,6 +711,7 @@ fn main() {
     println!("Size of Container<String>: {}", std::mem::size_of::<Container<String>>());
 }
 ```
+
 ### 4.2 用途场景
 
 **场景 1: 类型状态模式**:
@@ -714,6 +724,7 @@ struct Door<State> {
     _state: PhantomData<State>,
 }
 ```
+
 **场景 2: 生命周期标记**:
 
 ```rust
@@ -722,6 +733,7 @@ struct Ref<'a, T> {
     _marker: PhantomData<&'a T>,
 }
 ```
+
 **场景 3: 类型级标记**:
 
 ```rust
@@ -733,6 +745,7 @@ struct Data<State> {
     _state: PhantomData<State>,
 }
 ```
+
 ### 4.3 实战案例：生命周期标记
 
 ```rust
@@ -762,6 +775,7 @@ fn main() {
     println!("Value: {}", ref_val.get());
 }
 ```
+
 ---
 
 ## 5. 策略模式 (Strategy Pattern)
@@ -829,6 +843,7 @@ fn main() {
     println!("{:?}", std::str::from_utf8(&decompressed).unwrap());
 }
 ```
+
 ### 5.2 实战案例：排序策略
 
 ```rust
@@ -898,6 +913,7 @@ fn main() {
     println!("{:?}", numbers);
 }
 ```
+
 ---
 
 ## 6. 访问者模式 (Visitor Pattern)
@@ -969,6 +985,7 @@ fn main() {
     println!("Sum: {}", sum_visitor.total);
 }
 ```
+
 ### 6.2 实战案例：AST 遍历
 
 ```rust
@@ -1042,6 +1059,7 @@ fn main() {
     println!("Result: {}", eval.stack[0]); // 90
 }
 ```
+
 ---
 
 ## 7. 适配器模式 (Adapter Pattern)
@@ -1086,6 +1104,7 @@ fn main() {
     client_code(&adapter);
 }
 ```
+
 ### 7.2 实战案例：IO 适配器
 
 ```rust
@@ -1130,6 +1149,7 @@ fn process_data<S: DataSource, D: DataSink>(
     Ok(())
 }
 ```
+
 ---
 
 ## 8. 类型级编程模式
@@ -1166,6 +1186,7 @@ fn main() {
     println!("Three = {}", Three::to_usize()); // 3
 }
 ```
+
 ### 8.2 类型级列表
 
 ```rust
@@ -1194,6 +1215,7 @@ fn main() {
     println!("List length: {}", MyList::len()); // 3
 }
 ```
+
 ### 8.3 实战案例：类型安全的 SQL 查询
 
 ```rust
@@ -1278,6 +1300,7 @@ fn main() {
     // let invalid = Query::new().from("users").build();
 }
 ```
+
 ---
 
 ## 9. 扩展 Trait 模式
@@ -1324,6 +1347,7 @@ fn main() {
     println!("Word count: {}", s2.word_count());
 }
 ```
+
 ### 9.2 实战案例：字符串扩展
 
 ```rust
@@ -1371,6 +1395,7 @@ fn main() {
     println!("{}", "CamelCaseString".snake_case()); // "camel_case_string"
 }
 ```
+
 ---
 
 ## 10. 综合实战案例
@@ -1442,6 +1467,7 @@ fn main() {
     let _ = client.post("/users", r#"{"name": "Alice"}"#);
 }
 ```
+
 ### 10.2 案例 2：插件系统
 
 ```rust
@@ -1522,6 +1548,7 @@ fn main() {
     registry.shutdown();
 }
 ```
+
 ---
 
 ## 11. 最佳实践
@@ -1549,6 +1576,7 @@ struct Config {
     port: u16,
 }
 ```
+
 ### 11.3 性能考虑
 
 - ✅ 类型状态模式是零成本抽象

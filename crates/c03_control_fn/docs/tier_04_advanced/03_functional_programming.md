@@ -103,6 +103,7 @@
 └── 函数组合
     └── 点自由风格
 ```
+
 ---
 
 ## 1. 不可变性与纯函数
@@ -140,6 +141,7 @@ fn main() {
     assert_eq!(numbers, vec![1, 2, 3, 4, 5]);
 }
 ```
+
 ### 持久化数据结构
 
 ```rust
@@ -190,6 +192,7 @@ fn main() {
     println!("list2 head: {:?}", list2.head());  // Some(4)
 }
 ```
+
 ---
 
 ## 2. 高阶函数
@@ -226,6 +229,7 @@ fn main() {
     println!("result: {}", result);
 }
 ```
+
 ### 自定义高阶函数
 
 ```rust
@@ -260,6 +264,7 @@ fn main() {
     println!("{:?}, {:?}, {}", doubled, even, sum);
 }
 ```
+
 ---
 
 ## 3. 函子与单子
@@ -292,6 +297,7 @@ fn main() {
     println!("{:?}", mapped);  // Some(84)
 }
 ```
+
 ### Monad (单子)
 
 ```rust
@@ -328,6 +334,7 @@ fn main() {
     println!("{:?}", result);  // Some(30)
 }
 ```
+
 ### Maybe Monad 模式
 
 ```rust
@@ -363,6 +370,7 @@ fn main() {
     println!("{:?}", failed);  // None
 }
 ```
+
 ---
 
 ## 4. 函数组合
@@ -404,6 +412,7 @@ fn main() {
     println!("{}", h(3));  // 37 ((3+1)*2)^2
 }
 ```
+
 ### 点自由风格（Point-Free Style）
 
 ```rust
@@ -428,6 +437,7 @@ fn main() {
     assert_eq!(result1, result2);
 }
 ```
+
 ---
 
 ## 5. 惰性求值
@@ -458,6 +468,7 @@ fn main() {
     println!("结果: {:?}", result);
 }
 ```
+
 ### 自定义惰性结构
 
 ```rust
@@ -497,6 +508,7 @@ fn main() {
     println!("{:?}", fib.take(10));
 }
 ```
+
 ---
 
 ## 6. 递归与尾递归
@@ -528,6 +540,7 @@ fn main() {
     println!("{}", factorial_tail(5));
 }
 ```
+
 ### 相互递归
 
 ```rust
@@ -550,6 +563,7 @@ fn main() {
     println!("5 is odd: {}", is_odd(5));
 }
 ```
+
 ---
 
 ## 7. 代数数据类型
@@ -583,6 +597,7 @@ fn main() {
     println!("Rectangle area: {}", area(&rect));
 }
 ```
+
 ### 积类型（Product Types）
 
 ```rust
@@ -613,6 +628,7 @@ fn main() {
     println!("Point: ({}, {})", cp.point.x, cp.point.y);
 }
 ```
+
 ---
 
 ## 8. 实战模式
@@ -657,6 +673,7 @@ fn main() {
     println!("{:?}", process(200));   // Err("年龄不合理")
 }
 ```
+
 ### 流式数据处理
 
 ```rust
@@ -676,6 +693,7 @@ fn main() {
     println!("{:?}", result);
 }
 ```
+
 ### 函数式错误处理链
 
 ```rust
@@ -711,6 +729,7 @@ fn main() {
     println!("{:?}", failed);  // None (100 > 100)
 }
 ```
+
 ---
 
 **最后更新**: 2025-12-11

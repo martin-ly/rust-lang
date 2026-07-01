@@ -30,6 +30,7 @@ fn main() {
     println!("{}", r.get());
 }
 ```
+
 > **修正**: **Bloom L7（创造）**
 > 在 Rust 中的含义：
 >

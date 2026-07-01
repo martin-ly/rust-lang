@@ -117,6 +117,7 @@ c04_generic/docs/
 ├── C04_RESTRUCTURING_PLAN_2025_10_22.md
 └── C04_FRAMEWORK_COMPLETION_2025_10_22.md (本报告)
 ```
+
 ### 完成进度
 
 | 阶段        | 内容        | 状态      | 完成度 |

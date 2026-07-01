@@ -57,6 +57,7 @@ WASM 1.0 (2017)
                     ├── 组件组合
                     └── 跨语言互操作
 ```
+
 > 项目内相关代码请见 [`crates/c12_wasm/src/component_model.rs`](../../crates/c12_wasm/src/component_model.rs)
 > 和 [`content/ecosystem/web_frameworks/`](../ecosystem/web_frameworks)。
 
@@ -106,6 +107,7 @@ impl Guest for Calculator {
 
 export!(Calculator);
 ```
+
 ### WIT 接口定义
 
 ```wit
@@ -132,6 +134,7 @@ world calculator {
     export ops;
 }
 ```
+
 ### wit-bindgen 绑定生成
 
 ```bash
@@ -147,6 +150,7 @@ cargo component build --target wasm32-wasip2
 
 # 输出: target/wasm32-wasip2/debug/my-calculator.wasm
 ```
+
 ---
 
 ## 🧬 WASM GC
@@ -166,6 +170,7 @@ After (WASM GC):
   Java/Kotlin ──→ 原生 WASM GC ──→ 轻量级 WASM
   Dart ──→ 原生 WASM GC ──→ 轻量级 WASM
 ```
+
 ### Rust 注意事项
 
 Rust **不使用** WASM GC（因为 Rust 有所有权系统），但 Rust 编译的 WASM 模块可以与 WASM GC 模块共存：
@@ -182,6 +187,7 @@ pub fn process_external_object(obj: JsValue) -> Result<JsValue, JsValue> {
     Ok(doc.create_element("div")?.into())
 }
 ```
+
 | 特性 | Rust WASM | GC 语言 WASM |
 |------|-----------|--------------|
 | 运行时开销 | 零 (无 GC) | GC 周期开销 |
@@ -208,12 +214,14 @@ pub fn parallel_sum(data: &[i32]) -> i32 {
     data.par_iter().sum()
 }
 ```
+
 **必要的 HTTP 响应头**：
 
 ```text
 Cross-Origin-Opener-Policy: same-origin
 Cross-Origin-Embedder-Policy: require-corp
 ```
+
 ### Rust 中的 WASM 线程
 
 ```toml
@@ -226,6 +234,7 @@ rayon = "1"
 [package.metadata.wasm-pack.profile.release]
 wasm-opt = ["-O4", "--enable-threads"]
 ```
+
 ```rust
 use wasm_bindgen_rayon::init_thread_pool;
 
@@ -246,6 +255,7 @@ pub fn matrix_multiply(a: Vec<f64>, b: Vec<f64>, n: usize) -> Vec<f64> {
     }).collect()
 }
 ```
+
 ---
 
 ## ⚡ 性能优化技巧
@@ -265,6 +275,7 @@ codegen-units = 1
 panic = "abort"
 strip = true
 ```
+
 | 优化选项 | 效果 | 适用场景 |
 |----------|------|----------|
 | `wasm-opt -O4` | -30% 体积 + 加速 | 所有发布构建 |
@@ -301,6 +312,7 @@ impl ImageProcessor {
     }
 }
 ```
+
 ---
 
 ## 🔧 Rust → WASM 构建工具链
@@ -320,6 +332,7 @@ wasm-pack build --target nodejs --release
 # 构建 (Bundler / Webpack)
 wasm-pack build --target bundler --release
 ```
+
 ### wasm-bindgen
 
 ```rust
@@ -350,6 +363,7 @@ impl Point {
     }
 }
 ```
+
 ### wasm-tools
 
 ```bash
@@ -373,6 +387,7 @@ wasm-tools component wit component.wasm
 # 反汇编查看
 wasm-tools print module.wasm > module.wat
 ```
+
 ### 工具链对比
 
 | 工具 | 定位 | 输入 | 输出 | 关键特性 |
@@ -397,6 +412,7 @@ Rust 源码
     │
     └── rustc --target wasm32-unknown-unknown ──→ wasm-tools validate
 ```
+
 ---
 
 ## 🔗 参考资源

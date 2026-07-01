@@ -71,6 +71,7 @@ expression_without_block :=
 block_expression :=
     "{" statements? expression? "}"
 ```
+
 **示例**:
 
 ```rust
@@ -98,6 +99,7 @@ fn expression1() -> i32 { 1 }
 fn expression2() -> i32 { 2 }
 fn expression3() -> i32 { 3 }
 ```
+
 ### 1.2 类型规则
 
 **规则1**: 条件必须是 `bool` 类型
@@ -115,6 +117,7 @@ fn main() {
     // if Some(5) { }
 }
 ```
+
 **规则2**: 所有分支类型必须相同
 
 ```rust
@@ -136,6 +139,7 @@ fn main() {
     // let x = if true { 1 };
 }
 ```
+
 **规则3**: 表达式形式必须有else分支
 
 ```rust
@@ -152,6 +156,7 @@ fn main() {
     // let x = if true { 1 };
 }
 ```
+
 ### 1.3 作用域规则
 
 ```rust
@@ -180,6 +185,7 @@ fn main() {
     // println!("{}", s);  // 错误：s已被移动
 }
 ```
+
 ### 1.4 求值顺序
 
 ```rust
@@ -213,6 +219,7 @@ fn main() {
     };
 }
 ```
+
 ---
 
 ## 2. match表达式参考
@@ -231,6 +238,7 @@ match_arms :=
 match_arm :=
     pattern ("|" pattern)* ("if" expression)?
 ```
+
 **示例**:
 
 ```rust
@@ -246,6 +254,7 @@ fn main() {
     }
 }
 ```
+
 ### 2.2 穷尽性检查
 
 **规则**: match必须穷尽所有可能的值
@@ -286,6 +295,7 @@ fn main() {
     // }
 }
 ```
+
 **不可达模式警告**:
 
 ```rust
@@ -305,6 +315,7 @@ fn main() {
     }
 }
 ```
+
 ### 2.3 守卫规则
 
 ```rust
@@ -342,6 +353,7 @@ fn main() {
     }
 }
 ```
+
 ### 2.4 绑定模式
 
 ```rust
@@ -379,6 +391,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 3. loop表达式参考
@@ -392,6 +405,7 @@ loop_expression :=
 loop_label :=
     "'" IDENTIFIER
 ```
+
 **示例**:
 
 ```rust
@@ -413,6 +427,7 @@ fn main() {
     }
 }
 ```
+
 ### 3.2 循环标签
 
 **标签规则**:
@@ -451,6 +466,7 @@ fn main() {
     }
 }
 ```
+
 ### 3.3 返回值
 
 ```rust
@@ -489,6 +505,7 @@ fn main() {
     // loop { }  // 永不返回，类型是!
 }
 ```
+
 ### 3.4 生命周期
 
 ```rust
@@ -517,6 +534,7 @@ fn main() {
     println!("{}", result);
 }
 ```
+
 ---
 
 ## 4. while表达式参考
@@ -527,6 +545,7 @@ fn main() {
 while_expression :=
     (loop_label ":")? "while" expression_without_block block_expression
 ```
+
 **示例**:
 
 ```rust
@@ -552,6 +571,7 @@ fn main() {
     }
 }
 ```
+
 ### 4.2 while let
 
 ```bnf
@@ -559,6 +579,7 @@ while_let_expression :=
     (loop_label ":")? "while" "let" pattern "=" expression_without_block
     block_expression
 ```
+
 **示例**:
 
 ```rust
@@ -581,6 +602,7 @@ fn main() {
     }
 }
 ```
+
 ### 4.3 条件求值
 
 ```rust
@@ -605,6 +627,7 @@ fn main() {
     println!("x={}, y={}", x, y);
 }
 ```
+
 ---
 
 ## 5. for表达式参考
@@ -616,6 +639,7 @@ for_expression :=
     (loop_label ":")? "for" pattern "in" expression_without_block
     block_expression
 ```
+
 **示例**:
 
 ```rust
@@ -636,6 +660,7 @@ fn main() {
     }
 }
 ```
+
 ### 5.2 IntoIterator
 
 **转换规则**:
@@ -671,6 +696,7 @@ fn main() {
     println!("{:?}", vec);
 }
 ```
+
 ### 5.3 模式绑定
 
 ```rust
@@ -706,6 +732,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 6. break和continue参考
@@ -716,6 +743,7 @@ fn main() {
 break_expression :=
     "break" (loop_label)? expression?
 ```
+
 **示例**:
 
 ```rust
@@ -747,12 +775,14 @@ fn main() {
     println!("{}", result);
 }
 ```
+
 ### 6.2 continue语法
 
 ```bnf
 continue_expression :=
     "continue" (loop_label)?
 ```
+
 **示例**:
 
 ```rust
@@ -776,6 +806,7 @@ fn main() {
     }
 }
 ```
+
 ### 6.3 标签使用
 
 ```rust
@@ -807,6 +838,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 7. 特殊控制流
@@ -833,6 +865,7 @@ fn main() {
     println!("{}", early_return(None));
 }
 ```
+
 ### 7.2 发散函数
 
 ```rust
@@ -857,6 +890,7 @@ fn main() {
     };
 }
 ```
+
 ### 7.3 never类型
 
 ```rust
@@ -886,6 +920,7 @@ fn main() {
     println!("{}", value);
 }
 ```
+
 ---
 
 ## 8. 性能考虑
@@ -937,6 +972,7 @@ fn main() {
     println!("{}", result);
 }
 ```
+
 ---
 
 ## 9. 编译器优化
@@ -968,6 +1004,7 @@ fn main() {
     println!("{}", factorial(5, 1));
 }
 ```
+
 ---
 
 ## 10. 参考表

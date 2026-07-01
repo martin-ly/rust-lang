@@ -123,6 +123,7 @@ Rust → Wasm 编译管线:
   └── Wasmtime: 独立运行时，WASI 系统调用接口
         [来源: [Wasmtime Runtime](https://docs.wasmtime.dev/)]
 ```
+
 > **编译保证**: Rust 的所有权（Ownership）检查、生命周期（Lifetimes）验证在 Wasm 目标上与 x86_64 目标**完全等价**。编译到 Wasm 不会降低内存安全（Memory Safety）保证——越界访问在 Wasm 运行时（Runtime）被捕获为 trap，而 Rust 在编译期已消除大部分此类错误。[来源: [WebAssembly Specification](https://webassembly.github.io/spec/)]
 
 ```mermaid
@@ -148,6 +149,7 @@ graph LR
     style 浏览器环境 fill:#e8f5e9
     style 互操作层 fill:#fff3e0
 ```
+
 > **架构洞察**: wasm-bindgen 在编译期生成 JS 胶水代码，负责 Rust 结构体（Struct）/枚举（Enum）与 JS 对象之间的**序列化/反序列化**。这一层是性能开销的主要来源之一。[来源: [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/)]
 
 ---
@@ -191,6 +193,7 @@ impl Point {
     }
 }
 ```
+
 > **互操作语义**: `#[wasm_bindgen]` 宏（Macro）在编译期展开为 `__wasm_bindgen_generated_fibonacci` 等 shim 函数，处理参数/返回值的 ABI 转换。复杂类型（如 `String`、`Vec<T>`）通过 Wasm 线性内存传递指针+长度，JS 端负责解码。[来源: [wasm-bindgen Guide](https://rustwasm.github.io/docs/wasm-bindgen/)]
 
 ```text
@@ -207,6 +210,7 @@ wasm-bindgen 的类型映射规则:
 │ 自定义 struct          │ object          │ 字段逐个序列化        │
 └─────────────────────────────────────────────────────────────────┘
 ```
+
 > **性能警示**: `String` 和 `Vec<u8>` 的跨边界传递涉及**内存拷贝与 UTF-8 编解码**。高频交互场景中，应优先使用数字类型或 `&[u8]` 视图，避免大量字符串传输。[来源: [TRPL — Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)]
 
 ---
@@ -236,6 +240,7 @@ wasm-pack 工作流:
   wasm-pack login && wasm-pack publish
   └── 将 Rust Wasm 包发布为 npm 包
 ```
+
 > **工程洞察**: wasm-pack 的 `--target` 参数决定输出格式：`bundler`（webpack/vite 使用 ES module）、`web`（浏览器原生 ES module）、`nodejs`（CommonJS）、`no-modules`（全局脚本）。选型直接影响集成方式。[来源: [wasm-pack Book](https://rustwasm.github.io/docs/wasm-pack/)]
 
 ---
@@ -267,6 +272,7 @@ fn Counter() -> Html {
     }
 }
 ```
+
 > **架构特征**: Yew 使用 `html!` 宏（Macro）在编译期将 JSX-like 语法转换为 Rust 代码，依赖 VDOM diff 算法更新 UI。这与 React 的运行时 diff 策略一致，适合从 React 生态迁移的开发者。来源: [Yew Framework]
 
 ---
@@ -294,6 +300,7 @@ fn Counter() -> impl IntoView {
     }
 }
 ```
+
 > **响应式洞察**: Leptos 的信号系统仅在依赖数据变化时更新具体 DOM 节点，而非重新渲染整个组件子树。在复杂 UI 中，这可以显著减少 Wasm↔JS 互操作调用次数。[来源: [Leptos Framework](https://leptos.dev/)]
 
 ---
@@ -336,6 +343,7 @@ fn Counter() -> impl IntoView {
   ├── 事件处理: 高频事件（mousemove、scroll）可能受互操作延迟影响
   └── 渲染管线: WebGPU/WebGL 调用在 Wasm 中与 JS 等价（同一 API）
 ```
+
 > **性能评价**: Wasm 的加速比高度依赖**工作负载类型**。纯数值计算受益最大；频繁与 JS/DOM 交互的场景，加速比被互操作开销侵蚀。不应假设 Wasm "总是更快"。[来源: [MDN — WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly)]
 
 ```mermaid
@@ -356,6 +364,7 @@ graph LR
     style D fill:#ffcdd2
     style F fill:#fff9c4
 ```
+
 > **架构评价**: 上图显示了 Wasm 在不同负载下的性能特征光谱。设计 Wasm 应用时，应将计算核心放在 Wasm，将高频 DOM/事件交互保留在 JS 层。[来源: [Wasmtime Security](https://docs.wasmtime.dev/security.html)]
 
 ---
@@ -380,6 +389,7 @@ Wasm 线性内存布局:
   │  增长边界  │  内存页（64KiB/页），通过 memory.grow 扩展 │
   └──────────────────────────────────────────────────────┘
 ```
+
 > **所有权映射**: Rust 的所有权系统在线性内存中映射为**编译期静态分析**——`Box<T>` 的 drop 调用释放堆内存，`Vec<T>` 的重新分配触发 `memory.grow`。Wasm 运行时的**边界检查**确保所有内存访问安全，与 Rust 的所有权保证形成**双层防御**。[来源: [WebAssembly Specification](https://webassembly.github.io/spec/)]
 
 ```rust,ignore
@@ -399,6 +409,7 @@ pub fn deallocate_vec(ptr: *mut u8, size: usize) {
     }
 }
 ```
+
 > **unsafe 警示**:
 > 上述代码展示了 JS ↔ Wasm 的**手动内存管理**模式。`std::mem::forget` 和 `from_raw_parts` 属于 unsafe 操作，错误使用会导致内存泄漏或 use-after-free。
 > 现代 wasm-bindgen 已提供 `#[wasm_bindgen(skip)]` 等安全封装，应避免手动管理。
@@ -427,6 +438,7 @@ pub fn deallocate_vec(ptr: *mut u8, size: usize) {
   ├── 通过 wasm.memory.buffer 创建视图
   └── 注意: Wasm 内存增长后旧视图失效
 ```
+
 > **优化策略**: 对于高频数据交换，使用 `Uint8Array` 视图直接读写 Wasm 线性内存，避免 wasm-bindgen 的自动序列化。这要求 Rust 端暴露固定布局的结构体（Struct）指针。[来源: [MDN — WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly)]
 
 ---
@@ -454,6 +466,7 @@ Rust Wasm 目标三元组对比:
 │   └── 适用: 将现有 C/Rust 项目快速移植到 Web                    │
 └─────────────────────────────────────────────────────────────────┘
 ```
+
 > **配置要点**: `wasm32-unknown-unknown` 是 Rust 前端框架（Yew/Leptos）的标准目标；`wasm32-wasip1` 或 `wasm32-wasip2` 是服务端 Wasm 的首选。两者 ABI 不兼容，不可混用。[来源: [Rustc Platform Support](https://doc.rust-lang.org/rustc/platform-support.html)]
 
 ---
@@ -479,6 +492,7 @@ Wasm 调试工具链:
   ├── wasm-bindgen-test: 浏览器环境中的单元测试
   └── js-sys/web-sys: 模拟浏览器 API 进行测试
 ```
+
 > **工程实践**: `console_error_panic_hook` 是必装依赖，它将 Rust panic 消息捕获并输出到浏览器控制台。否则，Wasm trap 只会显示模糊的 "unreachable" 错误。[来源: [Rust Wasm Book](https://rustwasm.github.io/book/)]
 
 ---
@@ -497,6 +511,7 @@ Wasm 调试工具链:
 ├── GC 优势: JS 的自动 GC 在小对象分配上可能优于 Wasm 手动分配
 └── 结论: 仅数值计算、加密、图像处理等计算密集型场景有明确优势
 ```
+
 **反命题 2**: "wasm-bindgen 消除了所有互操作复杂性"
 
 ```text
@@ -506,6 +521,7 @@ Wasm 调试工具链:
 ├── async/Promise 互操作需要 js-sys 封装，非完全透明
 └── 结论: wasm-bindgen 简化了 80% 场景，剩余 20% 仍需理解 ABI 边界
 ```
+
 **反命题 3**: "Yew/Leptos 可以替代所有 React/Vue 场景"
 
 ```text
@@ -515,6 +531,7 @@ Wasm 调试工具链:
 ├── 第三方库集成: 直接复用 React 组件困难（需 wasm-bindgen 封装）
 └── 结论: 适合性能敏感的新项目，遗留系统迁移成本高昂
 ```
+
 > **评价洞察**:
 > Rust Wasm 前端框架的技术优势明确，但工程 adoption 受生态成熟度、团队技能栈和遗留系统约束限制。
 > 理性选型应权衡技术收益与组织成本。
@@ -534,6 +551,7 @@ Wasm 调试工具链:
 └── 边界: 即使优化后，Yew/Leptos 基础 runtime 仍约 100-300KB
         对比: React 生产包约 40KB gzipped
 ```
+
 **边界 2: 多线程与 SharedArrayBuffer**
 
 ```rust
@@ -541,6 +559,7 @@ Wasm 调试工具链:
 // Rust std::thread 在 wasm32-unknown-unknown 上不可用
 // 替代方案: web-sys 绑定 Web Workers
 ```
+
 > **并发边界**:
 > 标准 Rust 线程模型在浏览器 Wasm 中不可用。`wasm-bindgen-rayon` 通过 Web Workers 实现数据并行，但初始化开销显著。
 > 这是 [并发模型](../03_advanced/01_concurrency.md) 在 Wasm 目标上的根本限制。
@@ -555,6 +574,7 @@ Rust panic in Wasm:
 ├── catch_unwind: 在 Wasm 中不可靠（unwind 实现不完整）
 └── 最佳实践: Result<T, E> 为主，避免 panic 作为控制流
 ```
+
 > **可靠性边界**:
 > Wasm MVP 没有标准化异常处理机制。Rust 的 panic 在 Wasm 中表现为实例级终止，而非可捕获异常。
 > 健壮的错误处理（Error Handling）应遵循 `Result` 传播模式。
@@ -587,6 +607,7 @@ Rust panic in Wasm:
   ✅ 浏览器前端 → wasm32-unknown-unknown + wasm-bindgen
   ✅ 服务端 Wasm → `wasm32-wasip1` 或 `wasm32-wasip2` + Wasmtime/WasmEdge
 ```
+
 > **陷阱总结**: Rust Wasm 开发的常见错误集中在**目标三元组选型**、**panic 处理**、**内存视图生命周期（Lifetimes）**、**主线程阻塞**和**宿主环境假设**五个维度。
 > [来源: [Rust Wasm Book](https://rustwasm.github.io/book/)]
 
@@ -655,6 +676,7 @@ fn main() {
     println!("{}", content);
 }
 ```
+
 > **修正**:
 > WASI（WebAssembly System Interface）是 Wasm 的模块化系统接口，设计原则是**能力安全**（capability-based security）。
 > Wasm 模块默认无权访问任何文件系统路径——运行时（wasmtime、wasmer）必须通过 `--dir=.` 参数**预打开**（preopen）目录，模块才能访问该目录下的文件。
@@ -688,6 +710,7 @@ impl Point {
     }
 }
 ```
+
 > **修正**:
 > `wasm-bindgen` 生成 Rust 与 JavaScript 之间的绑定代码，但只支持可映射到 JavaScript 类型的 Rust 类型。
 > 不支持的类型包括：裸指针（`*const T`、`*mut T`）、引用（Reference）（`&T` 在返回中有限支持）、泛型（Generics）、闭包（Closures）（有限支持）、大部分标准库类型（`Vec<T>` 支持，`HashMap` 不支持）。
@@ -716,6 +739,7 @@ fn main() {
     }
 }
 ```
+
 > **修正**:
 > `wee_alloc` 是 WASM 的轻量级分配器（~1KB 代码体积），但采用简单的链表分配策略，容易产生碎片。
 > WASM 的线性内存（Linear Memory）增长是单向的（只能增大，不能缩小），碎片导致内存 footprint 膨胀。
@@ -749,6 +773,7 @@ fn greet(p: Person) -> String {
     format!("Hello, {}!", p.name)
 }
 ```
+
 > **修正**:
 > WASM Component Model 是 WebAssembly 的模块化和互操作标准，使用 WIT（WASM Interface Types）定义接口。
 > `wit-bindgen` 将 WIT 文件生成 Rust 绑定代码，包括：
@@ -784,6 +809,7 @@ fn main() {
     // let file = types::Descriptor::open_at(&dir, "data.txt", ...);
 }
 ```
+
 > **修正**:
 > WASI Preview 2 是 WASM 的系统接口新一代标准，基于**组件模型**和**能力安全**（capability-based security）。
 > 与 WASI Preview 1 不同：
@@ -814,6 +840,7 @@ fn main() {
     }
 }
 ```
+
 > **修正**:
 > WebAssembly 的**线性内存**（linear memory）是单一连续的 byte 数组，默认初始大小 1-2 pages（64KB/page），最大 4GB。
 > Rust 的 `Vec` 和 `String` 在 WASM 中运行时：

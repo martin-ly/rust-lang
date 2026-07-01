@@ -13,6 +13,7 @@ c04_generic/
     ├── RUST_190_COMPREHENSIVE_GUIDE.md           [旧位置]
     └── [其他基础文档]
 ```
+
 ### 变化后
 
 ```text
@@ -31,6 +32,7 @@ c04_generic/
     │   └── FINAL_RUST_190_COMPLETION_REPORT.md   [新增]
     └── [其他基础文档]
 ```
+
 ---
 
 ## 📝 详细操作记录
@@ -42,6 +44,7 @@ c04_generic/
 ```bash
 mkdir -p e:\_src\rust-lang\crates\c04_generic\docs\06_rust_features
 ```
+
 **结果**: ✅ 目录创建成功
 
 ### 2. 移动现有文档

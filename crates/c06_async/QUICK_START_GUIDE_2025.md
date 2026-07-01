@@ -64,6 +64,7 @@
 docs/ULTIMATE_ASYNC_GUIDE_2025_CN.md
 # 章节: 1-4 (理论基础)
 ```
+
 **重点概念**:
 
 - Future 与状态机
@@ -80,6 +81,7 @@ cargo run --example tokio_smoke
 
 # 理解输出,观察异步执行顺序
 ```
+
 #### 3. 动手实践 (1 小时)
 
 创建你的第一个异步程序:
@@ -110,12 +112,14 @@ async fn main() {
     println!("结束");
 }
 ```
+
 运行:
 
 ```bash
 rustc --edition 2024 my_first_async.rs
 ./my_first_async
 ```
+
 ---
 
 ### 🏆 第二天: Actor/Reactor/CSP 模式 (3-4 小时)
@@ -127,6 +131,7 @@ rustc --edition 2024 my_first_async.rs
 docs/ULTIMATE_ASYNC_GUIDE_2025_CN.md
 # 重点: 三大并发模型对比
 ```
+
 **关键对比**:
 
 | 模式    | 通信方式 | 适用场景   | 代表库 |
@@ -140,6 +145,7 @@ docs/ULTIMATE_ASYNC_GUIDE_2025_CN.md
 # 终极理论实践指南 - 包含所有三种模式
 cargo run --example ultimate_async_theory_practice_2025
 ```
+
 **观察要点**:
 
 - Actor 的消息队列如何工作
@@ -164,6 +170,7 @@ cargo run --example ultimate_async_theory_practice_2025
 # Tokio 和 Smol 最新特性对比
 cargo run --example tokio_smol_latest_features_2025
 ```
+
 **学习重点**:
 
 - JoinSet 动态任务管理
@@ -206,6 +213,7 @@ cargo run --example tokio_smol_latest_features_2025
 cargo run --example ultimate_async_theory_practice_2025
 # 关注第4部分: 异步设计模式
 ```
+
 **模式清单**:
 
 - Builder (构建器)
@@ -235,6 +243,7 @@ cargo run --example async_api_gateway_2025
 # 微服务示例
 cargo run --example microservices_async_demo
 ```
+
 **生产级特性**:
 
 - Circuit Breaker (熔断器)
@@ -252,6 +261,7 @@ cargo run --example actor_csp_hybrid_advanced
 # 查看 Prometheus 指标
 # 浏览器打开: http://127.0.0.1:9898/metrics
 ```
+
 #### 3. 实战项目 (2+ 小时)
 
 构建一个简单的微服务:
@@ -276,6 +286,7 @@ thread::spawn(|| {
     thread::sleep(Duration::from_secs(1));
 });
 ```
+
 **异步**:
 
 ```rust
@@ -284,6 +295,7 @@ tokio::spawn(async {
     tokio::time::sleep(Duration::from_secs(1)).await;
 });
 ```
+
 **答案**: 异步任务轻量级,可以创建数百万个;线程重量级,通常只能几千个。
 
 ---
@@ -301,6 +313,7 @@ tokio::task::spawn_blocking(|| {
     std::thread::sleep(Duration::from_secs(1)); // OK
 });
 ```
+
 **答案**: 当执行 CPU 密集型或阻塞操作时,使用 `spawn_blocking`。
 
 ---
@@ -322,6 +335,7 @@ I/O 密集型?
   └─ 是 → CSP 模式
   └─ 否 → 简单的 async/await
 ```
+
 ---
 
 ### Q4: 如何调试异步代码?
@@ -343,6 +357,7 @@ async fn test_async_function() {
     assert_eq!(result, expected);
 }
 ```
+
 ---
 
 ### Q5: 内存泄漏怎么办?
@@ -362,6 +377,7 @@ valgrind --leak-check=full ./target/debug/your_app
 # heaptrack
 heaptrack ./target/debug/your_app
 ```
+
 ---
 
 ## 📚 推荐阅读顺序
@@ -464,6 +480,7 @@ cargo run --example ultimate_async_theory_practice_2025
 # 5. 阅读文档
 # 打开 docs/ULTIMATE_ASYNC_GUIDE_2025_CN.md
 ```
+
 ### 制定学习计划
 
 - **目标**: 在 1 个月内掌握 Rust 异步编程

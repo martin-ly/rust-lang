@@ -1,4 +1,6 @@
-> **生态状态提示**：本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
+> **生态状态提示**：
+>
+> 本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
 >
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
@@ -108,6 +110,7 @@ Actor          actix / ractor          Hewitt Actor 1973       无原生        
 事件驱动        mio / tokio::net        Reactor 模式            netpoller (集成)      部分     Rust 显式，Go 隐式集成运行时
 ─────────────────────────────────────────────────────────────────────────────────────────────────────────
 ```
+
 ---
 
 ## 一、权威来源与同构性方法论
@@ -146,6 +149,7 @@ graph TD
     D --> D1[async/await + 共享状态]
     D --> D2[Actor + 内部可变性]
 ```
+
 > **认知功能**: 建立执行模型的高层分类框架，帮助开发者根据通信范式（共享内存/消息传递/混合）快速定位技术选型区间。关键洞察：Rust 的 `async/await + 共享状态` 是独特的混合模型，兼具两种范式的表达力与复杂度。[来源: 💡 原创分析]
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
@@ -182,6 +186,7 @@ let handle = thread::spawn(|| {
 });
 handle.join().unwrap();
 ```
+
 **1:1 模型的判定性特征**:
 
 - 调度策略由 OS 决定，程序**不可预测**何时被抢占。
@@ -254,6 +259,7 @@ impl Future for ExampleFuture {
     }
 }
 ```
+
 ### 4.2 Poll 契约与 Waker 机制
 
 > **Poll 契约**: `Future::poll` 必须满足：
@@ -283,6 +289,7 @@ sequenceDiagram
         E->>F: 重新 poll(cx)
     end
 ```
+
 > **认知功能**: 可视化 Future 的惰性执行与唤醒协议，揭示异步调度的核心机制。使用建议：确保在 `Pending` 路径中正确注册 Waker，避免在 `poll` 中执行阻塞操作。关键洞察：Rust 异步的本质不是"运行"而是"被询问是否就绪"——这与 goroutine 的立即调度形成根本语义差异。[来源: 💡 原创分析]
 
 ### 4.3 与 Go goroutine 的本质差异
@@ -335,6 +342,7 @@ fn parallel_merge_sort<T: Ord + Send>(data: &mut [T]) {
     // merge...
 }
 ```
+
 **工作窃取的理论保证**:
 
 - **时间界**: T_p ≤ T_1/P + T_∞（P 处理器，T_1 串行时间，T_∞ 关键路径）。
@@ -378,6 +386,7 @@ thread::spawn(move || {
 
 let received = rx.recv().unwrap(); // 所有权转移到 received
 ```
+
 ### 6.2 与 Go channel 的同构与差异
 >
 
@@ -428,6 +437,7 @@ impl Handler<Increment> for MyActor {
 let addr: Addr<MyActor> = MyActor::create(|_| MyActor { state: 0 });
 addr.do_send(Increment); // 异步发送，编译期检查消息类型
 ```
+
 **Rust Actor 的安全保证**:
 
 - **mailbox 顺序性**: 每个 Actor 的消息按到达顺序串行处理，天然无数据竞争。
@@ -495,6 +505,7 @@ fn consumer() {
     assert_eq!(unsafe { DATA }, 42); // 安全：happens-before 保证
 }
 ```
+
 > **定理 T-EM-002（Acquire-Release 同步）**:
 > 若线程 A 执行 `store(x, Release)` 且线程 B 执行 `load(x, Acquire)` 并读取到该值，则线程 A 中所有**sequenced-before **于该 `store` 的内存写入，对线程 B 中所有** sequenced-after** 于该 `load` 的操作可见。
 > [来源: Boehm & Adve PLDI 2008; Batty et al., *Mathematizing C++ Concurrency*, POPL 2011]
@@ -568,6 +579,7 @@ CPS:               fn f(k: impl FnOnce(T) -> R) -> R {
                        g(|x| h(x, k))
                    }
 ```
+
 - **直接 → 状态机**: 编译器将每个 `.await` 点转换为状态机的一个状态转换。这是**语法变换**，语义保持。
 - **状态机 → CPS**: `poll(cx)` 中的 `Context` 携带了 Waker（即续体），`Pending` 返回等价于「保存当前续体，等待外部事件」。
 - **CPS → 直接**: CPS 的逆变换（defunctionalization）将续体重构为状态机的显式状态。
@@ -601,6 +613,7 @@ graph TD
 
     B -->|实时/延迟敏感| P[std::thread + 优先级<br/>或 async + 优先级 executor]
 ```
+
 > **认知功能**: 提供工程实践中的执行模型选型决策路径，将抽象理论转化为可操作的判断流程。使用建议：先判断任务类型（CPU/I/O/状态机/共享状态），再按数据依赖、连接规模、容错需求逐层细化。关键洞察：不存在"最佳"执行模型，只有与问题特征最匹配的模型——选型错误是并发系统性能瓶颈的常见根因。[来源: 💡 原创分析]
 
 ---
@@ -619,6 +632,7 @@ xychart-beta
     bar [0.6, 0.9, 0.9, 0.4, 0.9, 0.95, 0.9]
     bar [0.9, 0.8, 0.3, 0.9, 0.6, 0.4, 0.5]
 ```
+
 > 七维度：内存效率、启动速度、调度透明性、并行表达力、并发表达力、容错能力、生态一致性
 > **认知功能**: 多维量化对比不同语言/运行时的执行模型特征，将抽象权衡转化为可直观比较的形状。
 > 使用建议：用雷达图识别技术选型的核心 trade-off——Rust 强在内存效率与并行表达力，Go 强在调度透明性与生态一致性。
@@ -650,6 +664,7 @@ graph TD
     G2[Go sync.Mutex<br/>共享内存+同步] --- A
     G2 --- C
 ```
+
 > **认知功能**:
 > 将执行模型映射到"内存-计算-通信"正交维度，帮助理解不同语言抽象在模型空间中的占据位置。
 > 使用建议：当系统混合多种并发模型时，用三维空间定位各组件的交互界面与潜在冲突点。
@@ -742,6 +757,7 @@ fn main() {
     // panic!("intentional");
 }
 ```
+
 > **修正**:
 > Rust 支持两种 panic 策略：`unwind`（栈展开，调用 Drop）和 `abort`（直接终止进程，不调用 Drop）。
 > `unwind` 是默认策略，允许资源清理；
@@ -764,6 +780,7 @@ fn main() {
     // future.await; // 需要 async 上下文才能 .await
 }
 ```
+
 ```rust,compile_fail
 // ❌ 编译错误: 在非 async 上下文中使用 .await
 async fn async_task() {
@@ -796,6 +813,7 @@ fn main() {
     // OS 线程的栈与绿色线程的栈不兼容
 }
 ```
+
 > **修正**:
 > Rust 1.0 之前实验过绿色线程（M:N 调度，用户态线程），但最终移除，改为原生 OS 线程（1:1 调度）。
 > 绿色线程与 OS 线程的**执行模型同构性**不成立：
@@ -830,6 +848,7 @@ fn direct_style(x: i32) -> Result<String, String> {
     Ok(y.to_string())
 }
 ```
+
 > **修正**:
 > Rust 的 `?` 运算符是**隐式 CPS 变换**（continuation-passing style）：`expr?` 在 `Err` 时提前返回，在 `Ok` 时继续执行。
 > 编译器将 `?` 展开为 `match` 表达式，本质上是 CPS 的语法糖。
@@ -852,6 +871,7 @@ fn cps_factorial(n: u64, k: Box<dyn Fn(u64) -> u64>) -> u64 {
     }
 }
 ```
+
 > **修正**:
 > CPS（Continuation-Passing Style）将控制流转换为函数调用，每个"下一步"成为闭包（Closures）参数。
 > 上述代码中，`k` 是累积的闭包（Closures）链：每次递归包装一层 `move |r| k(n * r)`。`n = 100000` 时，闭包链深 10 万层，`k(1)` 调用时逐层展开，栈溢出。
@@ -878,6 +898,7 @@ fn main() {
     let _ = factorial(100000);
 }
 ```
+
 > **修正**: Rust **不保证**尾调用优化（TCO），即使代码在语法上是尾递归。
 > `n * factorial(n - 1)` 不是尾调用（乘法在递归返回后执行）。
 > 即使是真正的尾递归（`factorial(n, acc)`），Rust 编译器（LLVM 后端）可能优化也可能不优化——依赖优化级别和内联启发式。

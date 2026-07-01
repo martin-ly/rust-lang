@@ -67,6 +67,7 @@ fn basic_control_flow() {
     }
 }
 ```
+
 ### 1.2 try_for_each 模式
 
 ```rust
@@ -105,6 +106,7 @@ fn all<T>(items: &[T], predicate: impl Fn(&T) -> bool) -> bool {
     }).is_continue()
 }
 ```
+
 ### 1.3 嵌套 ControlFlow
 
 ```rust
@@ -146,6 +148,7 @@ fn process_items(items: &[Result<i32, String>]) -> ControlFlow<String, Vec<i32>>
     ControlFlow::Continue(results)
 }
 ```
+
 ---
 
 ## 生成器 (gen 关键字)
@@ -188,6 +191,7 @@ fn even_numbers(max: i32) -> impl Iterator<Item = i32> {
     }
 }
 ```
+
 ### 2.2 异步生成器
 
 ```rust
@@ -223,6 +227,7 @@ async fn fallible_stream() -> impl Iterator<Item = Result<String, std::io::Error
     }
 }
 ```
+
 ### 2.3 生成器与所有权
 
 ```rust
@@ -265,6 +270,7 @@ where
     }
 }
 ```
+
 ---
 
 ## 迭代器模式增强
@@ -329,6 +335,7 @@ trait ControlFlowIterator: Iterator + Sized {
 
 impl<I: Iterator> ControlFlowIterator for I {}
 ```
+
 ### 3.2 惰性求值链
 
 ```rust
@@ -382,6 +389,7 @@ impl<T, I: Iterator<Item = T>> LazyPipeline<T, I> {
     }
 }
 ```
+
 ---
 
 ## 实战应用
@@ -453,6 +461,7 @@ enum EventKind {
     Info,
 }
 ```
+
 ### 4.2 分页数据加载
 
 ```rust
@@ -537,6 +546,7 @@ fn main() {
     assert_eq!(items.len(), 25);
 }
 ```
+
 ### 4.3 递归生成器
 
 ```rust
@@ -595,6 +605,7 @@ impl<T> TreeNode<T> {
     }
 }
 ```
+
 ---
 
 ## 性能优化
@@ -635,6 +646,7 @@ fn benchmark_comparison() {
     // ControlFlow 版本通常更快，因为它避免了 String 分配
 }
 ```
+
 ---
 
 ## 相关文档

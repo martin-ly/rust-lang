@@ -95,6 +95,7 @@ cargo update             # 更新 lock 文件
 cargo tree               # 查看依赖树
 cargo audit              # 安全检查（需安装 cargo-audit）
 ```
+
 **`cargo check` vs `cargo build` 的关键差异**：
 
 | 命令 | 生成二进制 | 速度 | 适用场景 |
@@ -114,6 +115,7 @@ serde = "1.0"        # 兼容 1.0.x, 1.1.x, 1.2.x... (≠ 2.0.0)
 tokio = "~1.35.0"    # 仅兼容 1.35.x
 regex = ">=1.0, <2.0" # 显式范围
 ```
+
 Cargo 使用 **SemVer** 解析依赖版本：
 
 - `MAJOR.MINOR.PATCH`
@@ -168,6 +170,7 @@ graph TD
     style C fill:#bfb,stroke:#333,stroke-width:2px
     style K fill:#bbf,stroke:#333,stroke-width:2px
 ```
+
 #### 承上（前置知识回溯）
 
 | 前置概念 | 所在文档 | 本章中使用的具体点 |
@@ -221,6 +224,7 @@ opt-level = 3
 lto = true
 strip = true
 ```
+
 #### 4.2 Workspace 机制
 
 ```toml
@@ -233,6 +237,7 @@ resolver = "2"
 serde = "1.0"
 tokio = { version = "1.35", features = ["full"] }
 ```
+
 ```toml
 # app/Cargo.toml
 [package]
@@ -243,6 +248,7 @@ version = "0.1.0"
 lib-core = { path = "../lib-core" }
 serde = { workspace = true }  # 使用 workspace 统一版本
 ```
+
 #### 4.3 Profile 配置
 
 ```toml
@@ -259,6 +265,7 @@ codegen-units = 1      # 单代码生成单元（更好优化，更慢编译）
 panic = "abort"        # panic 时直接 abort（不 unwinding）
 strip = "symbols"      # 移除符号表
 ```
+
 ---
 
 ### 模块 5: 正例集
@@ -274,6 +281,7 @@ cd hello
 cargo run
 # Output: Hello, world!
 ```
+
 #### 5.2 Realistic
 
 添加依赖并启用 feature：
@@ -286,6 +294,7 @@ cargo add serde --features derive
 # [dependencies]
 # serde = { version = "1.0.203", features = ["derive"] }
 ```
+
 #### 5.3 Production-grade
 
 Workspace 项目结构：
@@ -303,6 +312,7 @@ my_project/
     ├── Cargo.toml
     └── src/lib.rs
 ```
+
 ```toml
 # 根 Cargo.toml
 [workspace]
@@ -321,6 +331,7 @@ thiserror = "1.0"
 [profile.release]
 lto = "thin"
 ```
+
 ---
 
 ### 模块 6: 反例集
@@ -335,6 +346,7 @@ lto = "thin"
 # .gitignore 中错误地包含了 Cargo.lock
 # 团队成员拉取代码后，可能安装不同版本的依赖
 ```
+
 **修复**: 二进制项目的 `Cargo.lock` **必须**提交到版本控制；库项目可以忽略（但推荐提交）。
 
 ---
@@ -347,6 +359,7 @@ lto = "thin"
 # 开发期每次修改都运行 cargo build
 # 编译时间 30s+，严重拖慢迭代速度
 ```
+
 **修复**:
 
 ```bash
@@ -356,6 +369,7 @@ cargo check
 # 确认可以运行后再 build
 cargo build --release
 ```
+
 ---
 
 ## 🗺️ 模块 7: 思维表征套件
@@ -392,6 +406,7 @@ cargo build --release
            ├─► 生成文档 ──► cargo doc --open
            └─► 发布到 crates.io ──► cargo publish
 ```
+
 ### 表征 B: Debug vs Release Profile 对比矩阵
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -496,6 +511,7 @@ edition = "2024"
 serde = "*"  # ❌ 问题?
 tokio = { version = "1.0", features = ["full", "rt-multi-thread"] }
 ```
+
 <details>
 <summary>参考答案</summary>
 
@@ -516,6 +532,7 @@ edition = "2024"
 serde = "1.0"      # 限制 major 版本
 tokio = { version = "1.0", features = ["full"] }
 ```
+
 </details>
 
 ### 开放设计题

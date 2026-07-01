@@ -124,6 +124,7 @@
     ├── Send/Sync
     └── Work-Stealing
 ```
+
 ---
 
 ## 📋 术语索引
@@ -137,6 +138,7 @@
 ├── 🔤 M-R: 消息与并行
 └── 🔤 S-Z: 安全与高级
 ```
+
 ---
 
 ### 核心概念 (A-D)
@@ -205,6 +207,7 @@ thread::spawn(move || {
     println!("数据: {:?}", data_clone);
 });
 ```
+
 **相关术语**: [`Rc<T>`](#rct-reference-counted), [`Mutex<T>`](#mutext-mutual-exclusion), [Send](#send-trait)
 
 ---
@@ -237,6 +240,7 @@ use std::sync::atomic::{AtomicI32, Ordering};
 let counter = AtomicI32::new(0);
 counter.fetch_add(1, Ordering::SeqCst);
 ```
+
 **相关术语**: [Lock-Free](#lock-free-无锁编程), [Memory Ordering](#memory-ordering-内存排序), [Mutex](#mutext-mutual-exclusion)
 
 ---
@@ -268,6 +272,7 @@ use flume::bounded;
 let (tx, rx) = bounded(10); // 有界通道提供背压
 tx.send(data).unwrap(); // 当缓冲区满时阻塞
 ```
+
 **相关术语**: [Channel](#channel-通道), [MPSC](#mpsc-multiple-producer-single-consumer)
 
 ---
@@ -306,6 +311,7 @@ for _ in 0..3 {
     });
 }
 ```
+
 **相关术语**: [Condvar](#condvar-condition-variable), [Barrier](#barrier-屏障)
 
 ---
@@ -338,6 +344,7 @@ let (tx, rx) = mpsc::channel();
 tx.send(42).unwrap();
 println!("{}", rx.recv().unwrap());
 ```
+
 **相关术语**: [MPSC](#mpsc-multiple-producer-single-consumer), [Message Passing](#message-passing-消息传递)
 
 ---
@@ -375,6 +382,7 @@ use std::thread;
 thread::spawn(|| println!("任务 1"));
 thread::spawn(|| println!("任务 2"));
 ```
+
 **相关术语**: [Parallelism](#parallelism-并行), [Async/Await](#asyncawait)
 
 ---
@@ -408,6 +416,7 @@ thread::spawn(|| println!("任务 2"));
 let mut x = 0;
 thread::spawn(|| x += 1); // 错误！无法编译
 ```
+
 **相关术语**: [Send](#send-trait), [Sync](#sync-trait), [Race Condition](#race-condition-竞态条件)
 
 ---
@@ -448,6 +457,7 @@ lock2.lock();
 lock2.lock(); // 如果顺序相反
 lock1.lock(); // 可能死锁
 ```
+
 **相关术语**: [Livelock](#livelock-活锁), [Mutex](#mutext-mutual-exclusion)
 
 ---
@@ -484,6 +494,7 @@ let atomic = Atomic::new(42);
 let guard = &epoch::pin();
 let ptr = atomic.load(Ordering::Acquire, guard);
 ```
+
 **相关术语**: [Hazard Pointers](#hazard-pointers), [Lock-Free](#lock-free-无锁编程)
 
 ---
@@ -573,6 +584,7 @@ impl LockFreeCounter {
     }
 }
 ```
+
 **相关术语**: [Atomics](#atomics-原子类型), [Memory Ordering](#memory-ordering-内存排序), [Epoch-based Reclamation](#epoch-based-reclamation)
 
 ---
@@ -610,6 +622,7 @@ flag.store(true, Ordering::Release);
 // 线程 2
 while !flag.load(Ordering::Acquire) {}
 ```
+
 **相关术语**: [Atomics](#atomics-原子类型), [Lock-Free](#lock-free-无锁编程)
 
 ---
@@ -653,6 +666,7 @@ thread::spawn(move || tx1.send(2).unwrap());
 
 println!("{}, {}", rx.recv().unwrap(), rx.recv().unwrap());
 ```
+
 **相关术语**: [Channel](#channel-通道), [Message Passing](#message-passing-消息传递)
 
 ---
@@ -698,6 +712,7 @@ let (tx, rx) = mpsc::channel();
 tx.send("Hello").unwrap();
 println!("{}", rx.recv().unwrap());
 ```
+
 **相关术语**: [Channel](#channel-通道), [MPSC](#mpsc-multiple-producer-single-consumer), [Actor Model](#actor-model)
 
 ---
@@ -726,6 +741,7 @@ use std::sync::{Arc, Mutex};
 
 let data = Arc::new(Mutex::new(0));
 ```
+
 **使用场景**:
 
 - 保护共享可变状态
@@ -751,6 +767,7 @@ let mutex = Mutex::new(0);
 
 println!("{}", *mutex.lock().unwrap());
 ```
+
 **相关术语**: [Arc](#arct-atomically-reference-counted), [RwLock](#rwlockt-read-write-lock), [Deadlock](#deadlock-死锁)
 
 ---
@@ -815,6 +832,7 @@ let sum: i32 = (0..1000)
     .map(|x| x * 2)
     .sum();
 ```
+
 **相关术语**: [Concurrency](#concurrency-并发), [Rayon](#rayon), [SIMD](#simd-single-instruction-multiple-data)
 
 ---
@@ -848,6 +866,7 @@ data.par_sort(); // 并行排序
 
 let sum: i32 = data.par_iter().sum(); // 并行求和
 ```
+
 **相关术语**: [Parallelism](#parallelism-并行), [Work-Stealing](#work-stealing-工作窃取)
 
 ---
@@ -894,6 +913,7 @@ let r2 = lock.read().unwrap();
 let mut w = lock.write().unwrap();
 *w += 1;
 ```
+
 **相关术语**: [Mutex](#mutext-mutual-exclusion), [Arc](#arct-atomically-reference-counted)
 
 ---
@@ -922,6 +942,7 @@ thread::spawn(move || {
     println!("{:?}", data); // 所有权转移到新线程
 });
 ```
+
 **不是 `Send` 的类型**:
 
 - `Rc<T>`: 非原子引用计数
@@ -973,6 +994,7 @@ thread::spawn(move || {
     *guard += 1;
 });
 ```
+
 **相关术语**: [Message Passing](#message-passing-消息传递), [Mutex](#mutext-mutual-exclusion)
 
 ---
@@ -1013,6 +1035,7 @@ unsafe {
     let c = _mm256_add_ps(a, b); // 8个浮点数同时相加
 }
 ```
+
 **相关术语**: [Parallelism](#parallelism-并行), [NUMA](#numa-non-uniform-memory-access)
 
 ---
@@ -1040,6 +1063,7 @@ thread::spawn(move || {
     println!("{:?}", *data_clone); // 共享引用
 });
 ```
+
 **不是 `Sync` 的类型**:
 
 - `Cell<T>`, `RefCell<T>`: 非线程安全的内部可变性
@@ -1079,6 +1103,7 @@ COUNTER.with(|c| {
     *c.borrow_mut() += 1;
 });
 ```
+
 **相关术语**: [Thread](#thread-线程)
 
 ---
@@ -1175,6 +1200,7 @@ while !*started {
 *lock.lock().unwrap() = true;
 cvar.notify_all();
 ```
+
 **相关术语**: [Mutex](#mutext-mutual-exclusion), [Barrier](#barrier-屏障)
 
 ---
@@ -1243,6 +1269,7 @@ let handle = thread::spawn(|| {
 
 handle.join().unwrap();
 ```
+
 **相关术语**: [Concurrency](#concurrency-并发), [Parallelism](#parallelism-并行)
 
 ---

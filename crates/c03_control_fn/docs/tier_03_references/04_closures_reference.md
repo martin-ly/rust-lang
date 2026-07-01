@@ -82,6 +82,7 @@
 └── 异步闭包
     └── async 闭包
 ```
+
 ---
 
 ## 1. 闭包语法
@@ -100,6 +101,7 @@ closure_parameters :=
 closure_param :=
     pattern (":" type)?
 ```
+
 **基本形式**:
 
 ```rust
@@ -134,6 +136,7 @@ fn main() {
     f6();
 }
 ```
+
 ---
 
 ## 2. 捕获机制
@@ -178,6 +181,7 @@ fn main() {
     // println!("z = {}", z);  // 错误：z已被移动
 }
 ```
+
 **捕获环境的最小化原则**:
 
 ```rust
@@ -200,6 +204,7 @@ fn main() {
     println!("point.y = {}", point.y);
 }
 ```
+
 ---
 
 ## 3. 闭包trait
@@ -223,6 +228,7 @@ pub trait Fn<Args>: FnMut<Args> {
     fn call(&self, args: Args) -> Self::Output;
 }
 ```
+
 **trait继承层次**:
 
 ```rust
@@ -257,6 +263,7 @@ fn main() {
     // fnonce_closure();  // 错误：只能调用一次
 }
 ```
+
 **作为参数**:
 
 ```rust
@@ -289,6 +296,7 @@ fn main() {
     call_fn_once(|| drop(s));
 }
 ```
+
 ---
 
 ## 4. move关键字
@@ -316,6 +324,7 @@ fn main() {
     // println!("{}", s);  // 错误：s已被移动
 }
 ```
+
 **move与线程**:
 
 ```rust
@@ -333,6 +342,7 @@ fn main() {
     // println!("{}", s);  // 错误：s已被移动
 }
 ```
+
 **move与Clone**:
 
 ```rust
@@ -348,6 +358,7 @@ fn main() {
     println!("{}", s);  // 原始值仍可用
 }
 ```
+
 ---
 
 ## 5. 生命周期
@@ -376,6 +387,7 @@ fn main() {
     */
 }
 ```
+
 **返回闭包的生命周期**:
 
 ```rust
@@ -398,6 +410,7 @@ fn main() {
     c2();
 }
 ```
+
 ---
 
 ## 6. 类型推断
@@ -421,6 +434,7 @@ fn main() {
     // let _: f64 = f(10.0);  // 错误：已推断为i32
 }
 ```
+
 **trait对象类型**:
 
 ```rust
@@ -442,6 +456,7 @@ fn main() {
     println!("{}", f3(10));
 }
 ```
+
 ---
 
 ## 7. 异步闭包
@@ -462,6 +477,7 @@ fn main() {
     println!("异步闭包需要运行时支持");
 }
 ```
+
 **async move闭包**:
 
 ```rust
@@ -479,6 +495,7 @@ fn main() {
     println!("异步move闭包");
 }
 ```
+
 ---
 
 **参考表**:

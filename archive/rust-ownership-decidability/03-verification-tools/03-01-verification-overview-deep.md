@@ -112,7 +112,6 @@
     - [Loom Counter-Examples (6 total)](#loom-counter-examples-6-total)
     - [Creusot Counter-Examples (4 total)](#creusot-counter-examples-4-total)
   - [Theorems Index](#theorems-index)
-<a id="end-of-document"></a>
   - [*End of Document*](#end-of-document)
   - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引-1)

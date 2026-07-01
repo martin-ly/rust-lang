@@ -91,6 +91,7 @@ Windows 线程模型
 ├── 线程池 API (Thread Pool API)
 └── I/O 完成端口 (IOCP)
 ```
+
 #### Linux
 
 ```text
@@ -100,6 +101,7 @@ Linux 线程模型
 ├── 轻量级进程 (LWP)
 └── epoll/io_uring 异步 I/O
 ```
+
 #### macOS
 
 ```text
@@ -109,6 +111,7 @@ macOS 线程模型
 ├── NSOperationQueue
 └── kqueue 异步 I/O
 ```
+
 ---
 
 ### 1.2 同步原语实现差异
@@ -129,6 +132,7 @@ fn mutex_example() {
     *m.lock().unwrap() += 1;
 }
 ```
+
 #### 平台差异示例
 
 ```rust
@@ -154,6 +158,7 @@ fn main() {
     platform_specific_mutex();
 }
 ```
+
 ---
 
 ### 1.3 性能特性对比
@@ -189,6 +194,7 @@ fn main() {
     benchmark_thread_creation();
 }
 ```
+
 #### 锁性能对比
 
 ```rust
@@ -229,6 +235,7 @@ fn main() {
     benchmark_mutex();
 }
 ```
+
 ---
 
 ## 2. Windows 平台特性
@@ -282,6 +289,7 @@ fn main() {
     println!("This example is Windows-only");
 }
 ```
+
 ---
 
 ### 2.2 Windows 同步对象
@@ -348,6 +356,7 @@ fn main() {
     println!("This example is Windows-only");
 }
 ```
+
 ---
 
 ### 2.3 Windows 特定优化
@@ -387,6 +396,7 @@ mod windows_iocp {
     // 注: 完整实现需要更多代码
 }
 ```
+
 ---
 
 ## 3. Linux 平台特性
@@ -430,6 +440,7 @@ fn main() {
     println!("This example is Linux-only");
 }
 ```
+
 ---
 
 ### 3.2 Linux 同步原语
@@ -502,6 +513,7 @@ fn main() {
     println!("This example is Linux-only");
 }
 ```
+
 ---
 
 ### 3.3 Linux 特定优化
@@ -551,6 +563,7 @@ fn main() {
     println!("This example is Linux-only");
 }
 ```
+
 ---
 
 ## 4. macOS 平台特性
@@ -613,6 +626,7 @@ fn main() {
     println!("This example is macOS-only");
 }
 ```
+
 ---
 
 ### 4.2 Grand Central Dispatch
@@ -660,6 +674,7 @@ fn main() {
     println!("This example is macOS-only");
 }
 ```
+
 ---
 
 ### 4.3 macOS 特定优化
@@ -697,6 +712,7 @@ fn main() {
     println!("This example is macOS-only");
 }
 ```
+
 ---
 
 ## 5. 条件编译策略
@@ -737,6 +753,7 @@ fn main() {
     println!("Thread count: {}", get_thread_count());
 }
 ```
+
 #### 目标架构
 
 ```rust
@@ -761,6 +778,7 @@ fn main() {
     arch_specific_optimization();
 }
 ```
+
 ---
 
 ### 5.2 平台抽象层
@@ -830,6 +848,7 @@ fn main() {
     handle.join();
 }
 ```
+
 ---
 
 ### 5.3 特性检测
@@ -871,6 +890,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 6. 移动平台并发
@@ -907,6 +927,7 @@ mod android_threads {
     }
 }
 ```
+
 #### Android 线程优先级
 
 ```rust
@@ -937,6 +958,7 @@ mod android_priority {
     }
 }
 ```
+
 ---
 
 ### 6.2 iOS 平台
@@ -966,6 +988,7 @@ mod ios_threads {
     }
 }
 ```
+
 #### iOS 后台执行限制
 
 ```rust
@@ -1003,6 +1026,7 @@ mod ios_background {
     }
 }
 ```
+
 ---
 
 ## 7. 跨平台最佳实践
@@ -1113,6 +1137,7 @@ fn main() {
     std::thread::sleep(std::time::Duration::from_secs(1));
 }
 ```
+
 ---
 
 ## 🔗 相关资源

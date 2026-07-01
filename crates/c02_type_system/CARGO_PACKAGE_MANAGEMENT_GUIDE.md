@@ -107,6 +107,7 @@ include = [
     "LICENSE",
 ]
 ```
+
 ### 依赖管理
 
 ```toml
@@ -148,6 +149,7 @@ proptest = "1.0"
 [build-dependencies]
 # cc = "1.0"
 ```
+
 ### 特性管理
 
 ```toml
@@ -176,6 +178,7 @@ performance = ["dep:criterion"]
 # 实验性特性
 experimental = []
 ```
+
 ### 构建配置
 
 ```toml
@@ -208,6 +211,7 @@ opt-level = 1
 opt-level = 3
 debug = false
 ```
+
 ---
 
 ## 🏗️ 工作空间管理
@@ -249,6 +253,7 @@ serde_json = "1.0"
 futures = "0.3"
 criterion = "0.7"
 ```
+
 ### 依赖继承
 
 ```toml
@@ -270,6 +275,7 @@ futures.workspace = true
 [dev-dependencies]
 criterion.workspace = true
 ```
+
 ### 工作空间命令
 
 ```bash
@@ -294,6 +300,7 @@ cargo clean --workspace
 # 发布特定包
 cargo publish -p c02_type_system
 ```
+
 ---
 
 ## ⚡ 性能优化
@@ -322,6 +329,7 @@ inherits = "release"
 debug = true
 strip = false
 ```
+
 ### 增量编译
 
 ```bash
@@ -338,6 +346,7 @@ cargo build -j 4
 export RUSTC_WRAPPER=sccache
 cargo build
 ```
+
 ### 缓存策略
 
 ```bash
@@ -358,6 +367,7 @@ cargo install cargo-cache
 cargo cache --info
 cargo cache --autoclean
 ```
+
 ---
 
 ## 🔒 依赖管理最佳实践
@@ -382,6 +392,7 @@ experimental-lib = { git = "https://github.com/user/repo", rev = "abc123" }
 [patch.crates-io]
 # some-crate = { path = "local-patches/some-crate" }
 ```
+
 ### 特性选择
 
 ```toml
@@ -400,6 +411,7 @@ async-support = { version = "1.0", optional = true }
 default = []
 full = ["async-support"]
 ```
+
 ### 安全审计
 
 ```bash
@@ -420,6 +432,7 @@ cargo audit --json
 [package.metadata.cargo-audit]
 ignore = ["RUSTSEC-2021-0001"]
 ```
+
 ---
 
 ## 📦 包发布指南
@@ -445,6 +458,7 @@ cargo doc --open --no-deps
 # 5. 发布前测试
 cargo publish --dry-run
 ```
+
 ### 发布流程
 
 ```bash
@@ -464,6 +478,7 @@ cargo publish
 # 5. 推送到 Git
 git push origin main --tags
 ```
+
 ### 文档集成
 
 ```toml
@@ -476,6 +491,7 @@ documentation = "https://docs.rs/c02_type_system"
 all-features = true
 rustdoc-args = ["--cfg", "docsrs"]
 ```
+
 ```rust
 // src/lib.rs
 #![doc = include_str!("../README.md")]
@@ -487,6 +503,7 @@ pub mod async_support {
     // ...
 }
 ```
+
 ---
 
 ## 🛠️ 常用命令
@@ -515,6 +532,7 @@ cargo check
 # 清理
 cargo clean
 ```
+
 ### 测试相关
 
 ```bash
@@ -536,6 +554,7 @@ cargo test --doc
 # 基准测试
 cargo bench
 ```
+
 ### 依赖管理1
 
 ```bash
@@ -561,6 +580,7 @@ cargo tree --depth 2
 cargo install cargo-outdated
 cargo outdated
 ```
+
 ---
 
 ## 🔍 故障排查
@@ -577,6 +597,7 @@ cargo tree --duplicates
 [patch.crates-io]
 problematic-crate = { version = "1.0" }
 ```
+
 #### 2. 特性不兼容
 
 ```bash
@@ -588,6 +609,7 @@ cargo check --no-default-features --features minimal
 default = ["std"]
 minimal = []
 ```
+
 #### 3. 构建缓存问题
 
 ```bash
@@ -596,6 +618,7 @@ cargo clean
 rm -rf target/
 cargo build
 ```
+
 ### 调试技巧
 
 ```bash
@@ -618,6 +641,7 @@ cargo build --timings
 cargo install cargo-deps
 cargo deps --all-deps | dot -Tpng > deps.png
 ```
+
 ---
 
 ## 📚 参考资料

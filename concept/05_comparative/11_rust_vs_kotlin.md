@@ -1,4 +1,6 @@
-> **生态状态提示**：本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
+> **生态状态提示**：
+>
+> 本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
 >
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
@@ -114,6 +116,7 @@
   ├── Rust 无逃逸口（必须处理）
   └── 两者都优于 Java 的可空性
 ```
+
 > **空安全洞察**: **Kotlin 的空安全是语法糖层面的改进，Rust 的 Option 是类型系统（Type System）的根本设计**——Rust 强制处理，Kotlin 允许逃逸。
 > [来源: [Kotlin Null Safety](https://kotlinlang.org/docs/null-safety.html)]
 
@@ -168,6 +171,7 @@
   ├── Rust 编译期安全保证
   └── Kotlin 协程调试更友好
 ```
+
 > **并发洞察**: **Kotlin 协程适合 I/O 密集型，Rust 适合计算密集型**——两者在不同场景各有优势。
 > [来源: [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)]
 
@@ -209,6 +213,7 @@
   │ 机器学习        │ ⚠️ 新兴         │ ⚠️ 新兴         │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **平台洞察**: **Kotlin 是 JVM 生态的最佳语言，Rust 是系统编程的最佳语言**——两者在各自主场无可替代。
 > [来源: [Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform.html)]
 
@@ -245,6 +250,7 @@
   ├── Rust 无运行时泛型开销
   └── 两者类型系统都强大
 ```
+
 > **类型洞察**: **Kotlin 的类型系统（Type System）服务于 JVM 互操作，Rust 的类型系统服务于零成本抽象（Zero-Cost Abstraction）**——设计目标不同。
 > [来源: [Kotlin Generics](https://kotlinlang.org/docs/generics.html)]
 
@@ -279,6 +285,7 @@
   ├── Kotlin 无 Orphan Rule
   └── Rust Orphan Rule 限制实现
 ```
+
 > **扩展洞察**: **Kotlin 扩展是语法层面的便利，Rust Trait 是语义层面的抽象**——Rust 更注重类型安全。
 > [来源: [Kotlin Extensions](https://kotlinlang.org/docs/extensions.html)]
 
@@ -314,6 +321,7 @@
   ├── Kotlin 更易学习
   └── Rust 更安全（所有权）
 ```
+
 > **协程洞察**: **Kotlin 协程是"易用优先"，Rust async 是"性能优先"**——两者代表了不同的设计权衡。
 > [来源: [Kotlin Coroutines Guide](https://kotlinlang.org/docs/coroutines-guide.html)]
 
@@ -348,6 +356,7 @@
   ├── Rust 编译更快（增量编译）
   └── Kotlin 启动慢（JVM 预热）
 ```
+
 > **构建洞察**: **Rust 的 Cargo 是语言工具链的典范**——简单、统一、快速，而 Kotlin 依赖复杂的 Gradle 生态。
 > [来源: [Kotlin Gradle](https://kotlinlang.org/docs/gradle.html)]
 
@@ -386,6 +395,7 @@
   ├── 嵌入任何语言
   └── 系统级控制
 ```
+
 > **互操作洞察**: **Kotlin 是 JVM 生态的"最佳公民"，Rust 是跨语言互操作的"通用胶水"**——两者互操作策略不同。
 > [来源: [Kotlin Interop](https://kotlinlang.org/docs/java-interop.html)]
 
@@ -421,6 +431,7 @@
   ├── Rust 类型推断更准确
   └── 两者都有出色的 IDE 支持
 ```
+
 > **工具链洞察**: **Kotlin 的 IntelliJ 支持是行业标杆，Rust 的 rust-analyzer 是开源社区奇迹**——两者都提供顶级开发体验。
 > [来源: [Kotlin Tools](https://kotlinlang.org/docs/command-line.html)]
 
@@ -445,6 +456,7 @@ graph TD
     style RUST fill:#c8e6c9
     style EITHER fill:#fff3e0
 ```
+
 > **认知功能**: **JVM/Android 选 Kotlin，系统/性能选 Rust**——两者在现代语言生态中互补而非竞争。
 > [来源: [Kotlin vs Rust Comparison](https://kotlinlang.org/docs/comparison-to-java.html)]
 
@@ -483,6 +495,7 @@ graph TD
 ├── Kotlin 企业库丰富
 └── Rust 系统库优质
 ```
+
 > **边界要点**: Rust vs Kotlin 的边界与**编译时间**、**运行时（Runtime）**、**学习曲线**、**元编程**和**生态**相关。
 > [来源: [Kotlin Roadmap](https://kotlinlang.org/docs/roadmap.html)]
 
@@ -528,6 +541,7 @@ graph TD
   ✅ 使用 @JvmInline value class
      // 减少装箱
 ```
+
 > **陷阱总结**: Rust vs Kotlin 的陷阱主要与**风格模仿**、**空安全**、**平台假设**、**并发模型**和**互操作**相关。
 > [来源: [Kotlin Documentation](https://kotlinlang.org/docs/home.html)]
 
@@ -553,6 +567,7 @@ fn main() {
     println!("{}", msg);
 }
 ```
+
 ## 相关概念文件
 
 - [Ownership](../01_foundation/01_ownership.md) — 所有权（Ownership）
@@ -605,6 +620,7 @@ fn fixed() -> Result<(), String> {
     Ok(())
 }
 ```
+
 > **Kotlin 对比**: Kotlin 的可空类型（`String?`）与 Rust 的 `Option<String>` 类似，但 Kotlin 提供 `?.`（安全调用）和 `?:`（Elvis 运算符）简化空值处理。Rust 的 `?` 运算符用于 `Result`/`Option` 传播，`.map()` 和 `unwrap_or()` 对应 Kotlin 的 `?.let` 和 `?:`。Kotlin 的 null safety 在编译期检查，但 JVM 运行时（Runtime）仍可能有 null（与 Java 互操作时）。Rust 的 `Option` 是枚举（Enum），无运行时 null——`None` 和 `Some` 在内存布局中明确区分（niche optimization）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：Kotlin 的 data class 与 Rust 的 derive（编译错误）
@@ -635,6 +651,7 @@ fn fixed() {
     assert_eq!(u1, u2);
 }
 ```
+
 > **Kotlin 对比**: Kotlin 的 `data class` 自动生成 `equals`、`hashCode`、`toString`、`copy`，默认支持解构和比较。Rust 的 `#[derive(...)]` 提供类似功能，但要求显式 opt-in——默认不生成任何 trait 实现。这体现了 Rust 的"显式优于隐式"哲学：只有声明了 `#[derive(Clone)]` 的类型才可 clone，避免了 Kotlin/Java 中意外深拷贝的性能问题。Rust 的 derive 在编译期展开，无运行时开销。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：Kotlin 的协程与 Rust 的 async 的调度模型差异（运行时死锁）
@@ -664,6 +681,7 @@ fn main() {
     // });
 }
 ```
+
 > **修正**: Kotlin 的协程由**调度器**（Dispatcher）管理：`Dispatchers.Default`（线程池）、`Dispatchers.IO`（IO 密集型线程池）、`Dispatchers.Main`（主线程）。协程可在调度器间切换（`withContext`）。Rust 的 async 更底层：`async` 块是惰性 future，需显式提交到 runtime（`tokio::spawn`、`async_std::task::spawn`）。Tokio 的 runtime 有**多线程**和**单线程**模式：多线程模式自动调度任务到可用线程，单线程模式（`current_thread`）要求任务显式 yield（`.await`）以允许其他任务运行。Kotlin 的协程更"自动"，Rust 的 async 更"显式"。这与 Go 的 goroutine（运行时自动调度）或 C# 的 `async/await`（Task Parallel Library 调度）类似——Rust 的 async 提供了最大控制权，但增加了认知负担。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Kotlin Coroutines Guide](https://kotlinlang.org/docs/coroutines-guide.html)]
 
 ### 10.4 边界测试：Kotlin 的 null safety 与 Rust 的 `Option` 的语法差异（编译错误）
@@ -684,6 +702,7 @@ fn main() {
     println!("{}", len);
 }
 ```
+
 > **修正**: Kotlin 的 **null safety** 通过编译期检查和语法糖（`?.`、`?:`、`!!`）实现：`.?` 安全调用（null 时返回 null），`?:` Elvis 运算符（null 时返回默认值），`!!` 非空断言（null 时 NPE）。Rust 的 `Option<T>` 提供相同的安全保证，但语法更冗长：`map`（`?.` 的等价）、`unwrap_or`（`?:` 的等价）、`unwrap`（`!!` 的等价，panic 而非 NPE）。Kotlin 的语法更简洁，Rust 的方法链更灵活（可组合任意转换）。两者都消除了 null 指针异常——Kotlin 在 JVM 层面将 `T?` 映射为 `T` 或 `null`，Rust 在类型层面将 `Option<T>` 与 `T` 区分。这与 Swift 的 `Optional`（类似 Kotlin，有 `?.` 和 `??`）或 TypeScript 的 `strictNullChecks`（编译期检查，但运行时仍是 JavaScript 的 null）类似——现代语言都在消除 null 的危害，实现方式各异。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)] · [来源: [Kotlin Null Safety](https://kotlinlang.org/docs/null-safety.html)]
 
 ### 10.3 边界测试：Kotlin 的 nullable 类型与 Rust 的 Option 显式处理（编译错误）
@@ -701,6 +720,7 @@ fn main() {
     // 或: let len = match s { Some(ref s) => s.len(), None => 0 };
 }
 ```
+
 > **修正**: Kotlin 的 **nullable 类型**（`String?`）在类型系统中标记可能为 null，但运行时与 `String` 相同（JVM 的引用（Reference）类型）。`?.`（安全调用）和 `?:`（Elvis 运算符）是语法糖，编译为 null 检查。Rust 的 `Option<T>` 是**枚举（Enum）**：`Some(T)` 或 `None`，占用额外空间（discriminant），但编译器优化（Niche Value Optimization）可使 `Option<&T>` 与 `&T` 同大小（用 null 指针表示 `None`）。Kotlin 的优势：与 Java 互操作、语法简洁；Rust 的优势：无 null 指针（`Option` 是显式枚举）、模式匹配（Pattern Matching）穷尽检查、零成本抽象（Zero-Cost Abstraction）（`Option<&T>` 无额外开销）。这与 TypeScript 的 `string | null`（联合类型，编译期检查）或 Haskell 的 `Maybe a`（类似 `Option`）相同——Rust 的 `Option` 是代数数据类型，非语言特殊的 null。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)] · [来源: [Kotlin Null Safety](https://kotlinlang.org/docs/null-safety.html)]
 
 ## 嵌入式测验（Embedded Quiz）

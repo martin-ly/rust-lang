@@ -1,4 +1,7 @@
-> **权威来源**: [Rust Platform Support 文档](https://doc.rust-lang.org/nightly/rustc/platform-support.html), [Rust Reference](https://doc.rust-lang.org/reference/)
+> **权威来源**:
+>
+> [Rust Platform Support 文档](https://doc.rust-lang.org/nightly/rustc/platform-support.html),
+> [Rust Reference](https://doc.rust-lang.org/reference/)
 > **分级**: [A]
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Platform Support 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
@@ -6,7 +9,6 @@
 # Rust 平台支持矩阵（截至 Rust 1.95.0）
 
 > **Bloom 层级**: L2 (理解)
-
 > **更新日期**: 2026-04-16
 > **Rust 版本**: 1.95.0 stable
 > **来源**: [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html)

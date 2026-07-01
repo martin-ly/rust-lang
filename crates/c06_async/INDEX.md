@@ -139,6 +139,7 @@
 ```bash
 cargo run --example reactor_pattern_comprehensive_2025
 ```
+
 **适用场景**:
 
 - Web 服务器 (HTTP/HTTPS)
@@ -164,6 +165,7 @@ cargo run --example reactor_pattern_comprehensive_2025
 ```bash
 cargo run --example actor_pattern_comprehensive_2025
 ```
+
 **适用场景**:
 
 - 分布式系统 (微服务)
@@ -189,6 +191,7 @@ cargo run --example actor_pattern_comprehensive_2025
 ```bash
 cargo run --example csp_pattern_comprehensive_2025
 ```
+
 **适用场景**:
 
 - 数据流水线 (ETL)

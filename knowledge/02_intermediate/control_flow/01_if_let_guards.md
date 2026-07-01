@@ -77,6 +77,7 @@ match value {
     _ => {}
 }
 ```
+
 **关键点**：
 
 - `if let Ok(y) = compute(x)` 出现在 `=>` 之前
@@ -101,6 +102,7 @@ match opt {
     _ => {}
 }
 ```
+
 两者语法几乎相同，只是出现的位置不同。
 
 ---
@@ -124,6 +126,7 @@ match config.get("timeout") {
     None => use_default_timeout(),
 }
 ```
+
 **新写法**（扁平化，逻辑清晰）：
 
 ```rust,ignore
@@ -134,6 +137,7 @@ match config.get("timeout") {
     _ => use_default_timeout(),
 }
 ```
+
 ### 3.2 AST 遍历与常量折叠
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -162,6 +166,7 @@ fn fold_constants(expr: Expr) -> Expr {
     }
 }
 ```
+
 ### 3.3 网络协议解析
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -186,6 +191,7 @@ fn handle_packet(pkt: Packet) {
     }
 }
 ```
+
 ---
 
 ## 四、重要限制：穷尽性检查
@@ -201,6 +207,7 @@ match opt {
     _ => {} // 必须自己确保 _ 分支兜底
 }
 ```
+
 **原因**：guard 条件是运行时求值的，编译器无法在编译期确定哪些值会匹配。
 
 这与普通 `if` guards 的行为完全一致：
@@ -212,6 +219,7 @@ match opt {
     _ => {}
 }
 ```
+
 ---
 
 ## 五、与 `if` guards 的行为一致性
@@ -253,6 +261,7 @@ match opt {
        None => None,
    }
    ```
+
 2. **穷尽性思考**：以下代码是否安全？为什么？
 
    ```rust,ignore
@@ -262,6 +271,7 @@ match opt {
        Inactive => println!("inactive"),
    }
    ```
+
 ---
 
 ---
@@ -287,6 +297,7 @@ graph TD
     style I fill:#bfb,stroke:#333,stroke-width:2px
     style K fill:#bbf,stroke:#333,stroke-width:2px
 ```
+
 #### 承上（前置知识回溯）
 
 | 前置概念 | 所在文档 | 本章中使用的具体点 |
@@ -326,6 +337,7 @@ match value {
 • guard 绑定变量 (y) → 仅在 guard 后续条件和 body 中可用
 • guard 是运行时求值 → 不参与穷尽性检查
 ```
+
 ---
 
 ## 📚 模块 8: 国际化对齐
@@ -369,6 +381,7 @@ match status {
     Inactive => println!("inactive"),
 }
 ```
+
 <details>
 <summary>参考答案</summary>
 
@@ -383,6 +396,7 @@ match status {
     Inactive => println!("inactive"),
 }
 ```
+
 </details>
 
 ---

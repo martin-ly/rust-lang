@@ -96,6 +96,7 @@ const fn:
   ├── Rust 1.64: let mut, 赋值
   └── 持续扩展中...
 ```
+
 > **认知功能**: **const fn 是 Rust 编译期编程的核心**——将运行时（Runtime）代码直接提升到编译期执行。
 > [来源: [Rust Reference — Const Functions](https://doc.rust-lang.org/reference/items/functions.html#const-functions)]
 
@@ -130,6 +131,7 @@ const 上下文:
   ├── 无 panic（需 const_panic）
   └── 无副作用
 ```
+
 > **上下文洞察**: **const 上下文是 Rust 编译期的"沙盒"**——安全但有界，逐步扩大能力范围。
 > [来源: [Rust Reference — Const Context](https://doc.rust-lang.org/reference/const_eval.html)]
 
@@ -174,6 +176,7 @@ Const Generics:
   ├── 类型安全（3x3 ≠ 4x4）
   └── 零运行时开销
 ```
+
 > **泛型洞察**: **Const Generics 是 Rust 类型系统（Type System）的里程碑**——数组大小进入类型系统，实现真正的编译期类型安全。
 > [来源: [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html)]
 
@@ -213,6 +216,7 @@ Const Generics:
   ├── 泛型函数
   └── trait 方法（有限支持）
 ```
+
 > **能力洞察**: **Rust 的编译期能力持续增长**——目标是 Turing-complete 的编译期计算。
 > [来源: [Rust Reference — Const Eval](https://doc.rust-lang.org/reference/const_eval.html)]
 
@@ -246,6 +250,7 @@ Const Generics:
   ├── const { expr } 块
   └── 任意位置的编译期计算
 ```
+
 > **不稳定洞察**: **不稳定特性代表了 Rust 编译期的未来方向**——const trait impl 是最关键的缺失能力。
 > [来源: [Rust Unstable Book](https://doc.rust-lang.org/unstable-book/index.html)]
 
@@ -292,6 +297,7 @@ Const Generics:
       const RESULT: u32 = A + B;
   }
 ```
+
 > **计算洞察**: **编译期计算将运行时开销转移到编译期**——牺牲编译时间换取运行时性能。
 > [来源: [Rust Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html)]
 
@@ -339,6 +345,7 @@ Const Generics:
   let f = f.close();
   // f.read(&mut buf); // 编译错误！File<false> 无 read 方法
 ```
+
 > **状态机洞察**: **类型状态机是 Rust 零成本类型安全的极致**——编译期保证正确的状态转换序列。
 > [来源: [Type State Pattern](https://rust-unofficial.github.io/patterns/)]
 
@@ -361,6 +368,7 @@ graph TD
     style RUNTIME fill:#c8e6c9
     style COMPILE fill:#c8e6c9
 ```
+
 > **认知功能**: **编译期计算只适用于静态已知的数据**——运行时输入必须用运行时计算。
 > [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
 
@@ -394,6 +402,7 @@ graph TD
 ├── usize::BITS 等平台相关值
 └── 缓解: 条件编译 #[cfg]
 ```
+
 > **边界要点**: 编译期执行的边界与**编译时间**、**表达能力**、**错误报告**、**生态兼容性**和**平台差异**相关。
 
 ---
@@ -440,6 +449,7 @@ graph TD
   ✅ 使用动态大小
      type DynMatrix = Matrix<f32, Dynamic, Dynamic>;
 ```
+
 > **陷阱总结**: 编译期执行的陷阱主要与**const/let 混淆**、**递归**、**限制忽略**、**浮点数**和**泛型（Generics）过度**相关。
 
 ---
@@ -462,6 +472,7 @@ fn main() {
     println!("{}", feature);
 }
 ```
+
 ## 相关概念文件
 
 - [Generics](../02_intermediate/02_generics.md) — 泛型
@@ -513,6 +524,7 @@ fn main() {
     println!("{:?}", v);
 }
 ```
+
 > **修正**:
 > `const fn` 在编译期执行，因此不能使用运行时才可用的功能：堆分配（`Box::new`、`Vec::new`）、I/O、随机数、线程、panic（Rust 1.57+ 允许 `const panic`）。
 > `vec![]` 宏（Macro）在底层调用 `Vec::new()` 和堆分配，因此不能在 `const fn` 中使用。
@@ -547,6 +559,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
     expanded.into()
 }
 ```
+
 > **修正**:
 > 过程宏（procedural macros）在编译期操作 TokenStream，将 Rust 代码作为数据变换。
 > `syn` crate 将 TokenStream 解析为 AST（`DeriveInput`、`ItemFn` 等），解析失败时产生编译错误。
@@ -571,6 +584,7 @@ fn main() {
     println!("{}", AREA);
 }
 ```
+
 > **修正**:
 > `const fn` 中的浮点数支持是渐进添加的：
 >
@@ -595,6 +609,7 @@ const fn build_map() -> std::collections::HashMap<i32, i32> {
     std::collections::HashMap::new()
 }
 ```
+
 > **修正**:
 > `const fn` 当前禁止堆分配（`Box::new`、`Vec::new`、`HashMap::new`），因为编译期的内存管理复杂：
 >
@@ -619,6 +634,7 @@ fn main() {
     println!("{}", AREA);
 }
 ```
+
 > **修正**:
 > `const fn` 的浮点运算：
 >

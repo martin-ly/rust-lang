@@ -170,6 +170,7 @@ graph TD
     F --> F2[Dev Tools<br/>rust-analyzer + cargo]
     F --> F3[Network Infra<br/>quinn + rustls]
 ```
+
 > **认知功能**: 建立 Rust 生态全景认知框架，将分散的领域按技术属性聚类为五大板块。作为技术选型的第一层过滤——先定位大类（Web/系统/数据/创意/基础设施），再深入具体栈。Rust 的核心优势并非均匀分布：系统编程和 CLI 最为成熟，GUI 和 ML 训练仍在快速追赶中。 [来源: [Are We Web Yet](https://www.arewewebyet.org/)]
 > [来源: 💡 原创分析]
 
@@ -530,6 +531,7 @@ fn main() -> ! {
     }
 }
 ```
+
 **选型决策**：
 
 - 需要 `alloc`（Vec、String）但无 std → 启用 `extern crate alloc`
@@ -575,6 +577,7 @@ fn main() -> Result<()> {
     Ok(())
 }
 ```
+
 > **关键洞察**: Rust CLI 的**分发优势**是其他语言难以比拟的——`cargo build --release` 生成单二进制，`cargo-dist` 自动打包 Windows `.msi`、macOS `.dmg`、Linux `.deb`。无需运行时、无依赖地狱。
 [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
 
@@ -612,6 +615,7 @@ fn move_player(
 // 2. With<Player> 过滤保证仅处理玩家实体
 // 3. 多个不重叠的 Query 可并行调度
 ```
+
 > **关键洞察**: Bevy 的调度器在**编译期分析系统签名**，构建数据依赖有向无环图（DAG），自动并行化无依赖的系统。这是 Rust 借用（Borrowing）检查器在**运行时调度**中的延伸应用。
 [来源: [Tokio Docs](https://tokio.rs/)]
 
@@ -658,6 +662,7 @@ graph TD
     style F4 fill:#f96
     style T fill:#ff9
 ```
+
 > **认知功能**: 训练批判性思维，通过反例迭代削弱"Rust 万能"的绝对化命题。在技术讨论中遇到过度推广时，可用此决策树定位反驳切入点。命题的成立性取决于约束条件的显式化——"适合"是性能、安全、开发速度、生态成熟度四维权衡的结果，而非二元判断。
 
 ### 6.1 各领域的 Rust 不适用场景
@@ -765,6 +770,7 @@ graph TD
     style A9 fill:#6f6
     style A10 fill:#6f6
 ```
+
 > **认知功能**: 将抽象的技术选型转化为可操作的决策路径，从约束出发而非从语言偏好出发。沿分支匹配具体领域栈时，应优先识别硬约束（性能/安全/并发）与软约束（开发速度/生态数量）的权重。当性能和安全中任意两项为硬约束时，Rust 通常是最佳选择；当开发速度为唯一约束时，混合架构（Python/Go 原型 + Rust 核心）往往更优。
 > **关键洞察**: 领域选择不是“Rust 是否适合”，而是**“约束优先级排序”**。当性能、安全、并发中任意两项为硬约束时，Rust 通常是最佳选择；当开发速度和生态数量为唯一约束时，其他语言可能更优。
 [来源: [Wikipedia — Software engineering](https://en.wikipedia.org/wiki/Software_engineering)]
@@ -854,6 +860,7 @@ fn main() {
     println!("Router type system verified");
 }
 ```
+
 > **关键洞察**: axum 的路由系统利用 Rust 的类型系统保证 handler 函数的签名与路由路径匹配——`Path<u32>` 提取器要求 URL 参数可解析为 `u32`，`Json` 返回类型要求响应可序列化。这些约束在编译期验证，而非运行时出错。 [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ---
@@ -888,6 +895,7 @@ fn main() {
     println!("{:?}", counts);  // {"apple": 2, "banana": 1}
 }
 ```
+
 > **迁移策略**：
 >
 > 1. **Phase 1**：用 PyO3 将 Rust 作为 Python 扩展模块（保留 Python 生态）
@@ -930,6 +938,7 @@ async fn main() {
     }
 }
 ```
+
 ### 9.2 "Rust 不适合" 的失败案例分析
 
 Rust 并非银弹。以下是真实场景中的**不适合案例**：
@@ -1008,6 +1017,7 @@ fn main() {
     println!("{:?}", row);
 }
 ```
+
 **Rust vs Python 科学计算性能对比**：
 
 | 任务 | Python (NumPy) | Rust (ndarray/faer) | 加速比 |
@@ -1045,6 +1055,7 @@ fn view(app: &App, frame: Frame) {
     draw.to_frame(app, &frame).unwrap();
 }
 ```
+
 > **来源**: [Nannou 文档] · [Rodio docs] · [vst-rs GitHub] · [Are We Audio Yet]
 
 ---
@@ -1097,6 +1108,7 @@ graph TD
 
     style T1 fill:#6f6
 ```
+
 > **认知功能**: 通过反例枚举（Enum）建立命题边界意识，避免将 Rust 的系统编程优势过度泛化到所有场景。初学者可用此图自我校准期望——Rust 是系统编程领域的升级方案，并非所有编程任务的最优解。四个反例覆盖开发速度、学习门槛、生态成熟度、脚本复杂度四个维度，恰好对应 Rust 在设计上为"正确性"所付出的权衡成本。
 
 ### 2. "Rust 在 Web 后端已经取代 Go/Java"
@@ -1126,6 +1138,7 @@ graph TD
 
     style T2 fill:#6f6
 ```
+
 > **认知功能**: 拆解具体领域的"取代"命题，区分"技术优势"与"市场/生态优势"。Web 后端的竞争不仅是性能和安全竞争，更是人才供给、框架数量、运维惯性的综合竞争。在团队技术选型讨论中，用此图区分"Rust 更快更安全"（技术事实）与"Rust 生态更丰富"（市场判断），避免混淆两类论证。
 
 ### 3. "嵌入式 Rust 完全替代 C"
@@ -1155,6 +1168,7 @@ graph TD
 
     style T3 fill:#6f6
 ```
+
 > **认知功能**: 揭示技术替代的非技术阻力——硬件覆盖率、行业认证、遗留代码、调试工具链成熟度是嵌入式领域切换语言的隐形壁垒。在嵌入式选型时，应先评估目标平台的 HAL 完整性和认证需求（如 FDA/DO-178C），再评估语言特性收益。Rust 的内存安全是充分条件而非必要条件；在已通过 MISRA-C 认证且运行稳定的项目中，切换语言的边际收益可能远低于迁移成本。
 > **过渡: L6 → L3**
 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -1386,6 +1400,7 @@ struct AppStateFixed {
     counter: Arc<i32>,
 }
 ```
+
 > **修正**: Web 服务器通常使用线程池或异步运行时处理并发请求。应用状态必须在多个线程间共享。`Rc<T>` 使用非原子引用计数，不能跨线程；`Arc<T>` 使用原子操作（Atomic Operations），是 `Send + Sync`。Rust 编译器在编译期验证这些约束——试图将 `Rc` 状态传递给多线程框架是编译错误。这与 Node.js 的全局状态（单线程事件循环）或 Python 的 GIL（全局解释器锁）不同——Rust 的并发安全（Concurrency Safety）通过类型系统静态保证，无运行时检查开销。[来源: [Actix Documentation](https://docs.rs/actix-web/)]
 
 ### 10.2 边界测试：游戏引擎中的 ECS 组件查询（编译错误）
@@ -1405,6 +1420,7 @@ fn main() {
     update(&mut pos, &vel);
 }
 ```
+
 > **修正**: ECS（Entity-Component-System）是游戏开发的核心架构。Rust 的 ECS 框架（Bevy、hecs、legion）利用类型系统保证查询安全：系统函数签名定义所需的组件组合，编译器验证查询与组件存储的一致性（Coherence）。若系统要求 `Query<&mut Position, &Velocity>`，但某实体缺少 `Velocity`，该实体自动被过滤出查询结果。这与 Unity 的反射式组件访问或 C++ 的手动类型转换不同——Rust 的 ECS 在编译期保证组件类型安全，运行时无类型检查开销。来源: [Bevy Documentation]
 
 ### 10.3 边界测试：嵌入式中的 `std` 依赖误用（编译错误）
@@ -1421,6 +1437,7 @@ fn main() {
     arr[0] = 1;
 }
 ```
+
 > **修正**: 嵌入式系统（ bare-metal、RTOS、WASM 微内核）通常使用 `#![no_std]`，禁用标准库 `std`（依赖操作系统：文件系统、网络、线程、堆分配）。`no_std`  crate 只能使用 `core`（基本类型、迭代器（Iterator）、选项/结果）和可选的 `alloc`（`Vec`、`String`、`Box`，需全局分配器）。常见错误：1) 依赖的 crate 使用了 `std`（即使是简单的 `println!`）；2) 使用了 `std::collections::HashMap`（需 `std` 的随机数生成器，嵌入式中改用 `heapless::LinearMap`）；3) 使用了 `std::time`（嵌入式中改用 `embassy_time` 或硬件定时器）。`cargo tree` 和 `cargo-nono` 工具帮助检查 `no_std` 兼容性。这与 C 的嵌入式开发（无标准库依赖，直接使用寄存器）或 Arduino 的 C++（简化标准库）类似——Rust 的 `no_std` 提供了现代类型系统在资源受限环境中的应用。[来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.4 边界测试：Web 服务中的阻塞操作与 async runtime 的冲突（运行时性能崩溃）
@@ -1439,6 +1456,7 @@ async fn handler() -> String {
     "done".to_string()
 }
 ```
+
 > **修正**: Async runtime（tokio）基于**协作式多任务** [历史: async-std [已归档]]：任务在 `.await` 点 yield 控制权，让 runtime 调度其他任务。
 > 若在 async 函数中执行**阻塞操作**（`std::thread::sleep`、`std::fs::read`、CPU 密集型计算、数据库同步查询），当前线程被阻塞，该线程上的所有任务都无法执行。
 > 在多线程 runtime 中，一个线程阻塞降低整体吞吐；在单线程 runtime 中，整个应用死锁。

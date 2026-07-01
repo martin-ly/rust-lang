@@ -23,6 +23,7 @@ pub trait Drop {
     fn drop(&mut self);
 }
 ```
+
 ### 基本使用
 
 ```rust
@@ -46,6 +47,7 @@ fn main() {
     println!("CustomSmartPointers created.");
 } // d 和 c 自动调用 drop
 ```
+
 ---
 
 ## RAII 模式
@@ -68,6 +70,7 @@ fn write_file() -> std::io::Result<()> {
     Ok(())
 } // file 自动关闭（Drop）
 ```
+
 ### 锁 RAII
 
 ```rust
@@ -79,6 +82,7 @@ let data = Mutex::new(0);
     *num += 1;
 } // 锁自动释放（Drop）
 ```
+
 ---
 
 ## Drop 顺序
@@ -106,6 +110,7 @@ fn main() {
 // Dropping Outer!
 // Dropping Inner!
 ```
+
 ---
 
 **相关文档**:

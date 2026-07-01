@@ -46,6 +46,7 @@
    let r1 = &s; // ✅
    let r2 = &s; // ✅
    ```
+
 2. **可变借用规则**: 只能有一个可变引用
 
    ```rust
@@ -53,6 +54,7 @@
    let r1 = &mut s; // ✅
    // let r2 = &mut s; // ❌ 编译错误
    ```
+
 3. **混合借用规则**: 不能同时有可变和不可变引用
 
    ```rust
@@ -60,6 +62,7 @@
    let r1 = &s; // ✅
    // let r2 = &mut s; // ❌ 编译错误
    ```
+
 ---
 
 ## 3. NLL (Non-Lexical Lifetimes)
@@ -80,6 +83,7 @@ println!("{} and {}", r1, r2);
 let r3 = &mut s; // ✅ NLL 允许
 println!("{}", r3);
 ```
+
 **传统作用域 vs NLL**:
 
 ```text
@@ -94,6 +98,7 @@ let r1 = &s;      ├── r1 生命周期开始
 println!("{}", r1); ┴── r1 最后一次使用，生命周期结束
 let r2 = &mut s;  ✅ 可以可变借用
 ```
+
 ---
 
 ## 4. 借用检查算法
@@ -117,6 +122,7 @@ fn main() {
     //              y 的借用仍在此处活跃
 }
 ```
+
 ---
 
 ## 5. 常见错误解析
@@ -130,6 +136,7 @@ let s = String::from("hello");
 let mut s = String::from("hello");
 s.push_str(", world"); // ✅
 ```
+
 ---
 
 ### 错误 2: Cannot borrow as mutable more than once
@@ -139,6 +146,7 @@ let mut s = String::from("hello");
 let r1 = &mut s;
 // let r2 = &mut s; // ❌ cannot borrow as mutable more than once
 ```
+
 ---
 
 ### 错误 3: Cannot borrow as mutable because it is also borrowed as immutable
@@ -149,6 +157,7 @@ let r1 = &s;
 // let r2 = &mut s; // ❌ cannot borrow
 println!("{}", r1);
 ```
+
 ---
 
 **相关文档**:

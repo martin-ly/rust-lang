@@ -65,6 +65,7 @@ impl<'a, T> LendingIterator for WindowIter<'a, T> {
     }
 }
 ```
+
 ### 类型族 (Type Families)
 
 ```rust
@@ -84,6 +85,7 @@ impl TypeFamily for OptionFamily {
     type Output<T> = Option<T>;
 }
 ```
+
 ### HList (异构列表)
 
 ```rust
@@ -98,6 +100,7 @@ trait HList {}
 impl HList for HNil {}
 impl<H, T: HList> HList for HCons<H, T> {}
 ```
+
 ---
 
 ## 🔧 实战技巧
@@ -117,6 +120,7 @@ struct RequestBuilder<Url, Method, Body> {
     headers: Vec<(String, String)>,
 }
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

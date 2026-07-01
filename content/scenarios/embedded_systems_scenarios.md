@@ -46,6 +46,7 @@ async fn main() {
     }
 }
 ```
+
 **关键决策**:
 
 - 框架: Embassy（异步低功耗管理）
@@ -100,6 +101,7 @@ mod app {
     }
 }
 ```
+
 **关键决策**:
 
 - 框架: RTIC（硬件优先级保证确定性）
@@ -150,6 +152,7 @@ fn state_machine(event: Event, state: &mut BcmState) -> Result<(), BcmError> {
     }
 }
 ```
+
 **关键决策**:
 
 - 工具链: Ferrocene（ISO 26262 认证）

@@ -52,6 +52,7 @@ cargo run -p c04_generic --example <example_name>
 # Run all tests
 cargo test -p c04_generic
 ```
+
 ---
 
 ## Related

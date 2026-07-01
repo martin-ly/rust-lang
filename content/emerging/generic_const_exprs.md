@@ -52,6 +52,7 @@ where
     data: [T; N * M],
 }
 ```
+
 ---
 
 ## 💡 核心概念
@@ -91,6 +92,7 @@ where
 // 使用
 let mat: Matrix<i32, 3, 4> = Matrix::new([0; 12]);  // 3 * 4 = 12
 ```
+
 ---
 
 ## 📐 语法详解
@@ -122,6 +124,7 @@ where
     }
 }
 ```
+
 ### 复杂表达式
 
 ```rust
@@ -146,6 +149,7 @@ where
 // 使用
 let arr: PowerOfTwoArray<i32, 3> = PowerOfTwoArray { data: [0; 8] };  // 2^3 = 8
 ```
+
 ### 类型级计算
 
 ```rust
@@ -168,6 +172,7 @@ where
     data: [T; FactorialImpl<N>::VALUE],
 }
 ```
+
 ---
 
 ## 🚀 实际应用
@@ -222,6 +227,7 @@ let a: Matrix<i32, 2, 3> = Matrix { data: [1, 2, 3, 4, 5, 6] };
 let b: Matrix<i32, 3, 2> = Matrix { data: [1, 2, 3, 4, 5, 6] };
 let c = a * b;  // Matrix<i32, 2, 2>
 ```
+
 ### 类型级数值计算
 
 ```rust
@@ -249,6 +255,7 @@ let arr: [i32; 5] = [1, 2, 3, 4, 5];
 let same: [i32; 5] = safe_convert(arr);  // ✅ 编译通过
 // let diff: [i32; 3] = safe_convert(arr);  // ❌ 编译错误
 ```
+
 ### 固定大小数据结构
 
 ```rust
@@ -292,6 +299,7 @@ where
 // 使用: B=4 表示 2-3-4 树
 let node: BTreeNode<i32, String, 4> = BTreeNode::new();
 ```
+
 ---
 
 ## ⚠️ 限制与注意事项
@@ -319,6 +327,7 @@ where
     [T; N * 2]: Sized,
 {}
 ```
+
 ### 递归限制
 
 ```rust
@@ -334,6 +343,7 @@ where
     next: Option<Box<Recursive<{ N - 1 }>>>,  // 注意递归
 }
 ```
+
 ---
 
 ## 🔄 与现有方案对比
@@ -372,6 +382,7 @@ where
 }
 // 优点: 编译时验证，零开销，类型安全
 ```
+
 ---
 
 ## 🔗 参考资源

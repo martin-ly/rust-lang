@@ -64,6 +64,7 @@ criterion = "0.5"
 name = "concurrency_bench"
 harness = false
 ```
+
 ```rust
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 use std::sync::{Arc, Mutex};
@@ -96,6 +97,7 @@ fn mutex_benchmark(c: &mut Criterion) {
 criterion_group!(benches, mutex_benchmark);
 criterion_main!(benches);
 ```
+
 ---
 
 ## 2. 同步原语性能对比
@@ -192,6 +194,7 @@ fn bench_atomic(c: &mut Criterion) {
 criterion_group!(benches, bench_mutex, bench_rwlock, bench_atomic);
 criterion_main!(benches);
 ```
+
 **结论**:
 
 - ✅ **Atomic**: 简单计数器最快
@@ -259,6 +262,7 @@ fn bench_crossbeam_unbounded(c: &mut Criterion) {
 criterion_group!(benches, bench_std_mpsc, bench_crossbeam_unbounded);
 criterion_main!(benches);
 ```
+
 **结论**:
 
 - ✅ **crossbeam**: 性能最好的通用选择
@@ -308,6 +312,7 @@ fn bench_atomic_orderings(c: &mut Criterion) {
 criterion_group!(benches, bench_atomic_orderings);
 criterion_main!(benches);
 ```
+
 **结论**:
 
 - ✅ `Relaxed` 最快（但不保证顺序）
@@ -383,6 +388,7 @@ fn bench_manual_threads(c: &mut Criterion) {
 criterion_group!(benches, bench_sequential, bench_rayon, bench_manual_threads);
 criterion_main!(benches);
 ```
+
 **结论**:
 
 - ✅ **Rayon**: 最佳性能/代码复杂度比
@@ -424,6 +430,7 @@ fn main() {
     benchmark_ordering(Ordering::SeqCst, "SeqCst");
 }
 ```
+
 ---
 
 ## 7. 线程数量影响
@@ -525,6 +532,7 @@ fn bench_connection_pool(c: &mut Criterion) {
 criterion_group!(benches, bench_connection_pool);
 criterion_main!(benches);
 ```
+
 **结论**:
 
 - ✅ 连接池可提升性能 5-6倍
@@ -631,6 +639,7 @@ fn work_stealing_queue_benchmark() {
     println!("Processed {} tasks", total);
 }
 ```
+
 **结论**:
 
 - ✅ 工作窃取可提升负载均衡性
@@ -700,6 +709,7 @@ fn bench_dashmap_cache(c: &mut Criterion) {
 criterion_group!(benches, bench_dashmap_cache);
 criterion_main!(benches);
 ```
+
 **结论**:
 
 - ✅ DashMap 在并发场景下性能优异
@@ -751,6 +761,7 @@ fn benchmark_platform() {
     println!("Time: {:?}", start.elapsed());
 }
 ```
+
 **平台特性对比**:
 
 | 特性       | Linux | macOS          | Windows           |
@@ -794,6 +805,7 @@ counter.store(1, Ordering::Relaxed);  // 在 x86-64 上实际接近 SeqCst
 counter.store(1, Ordering::Relaxed);  // 真正的 Relaxed
 fence(Ordering::SeqCst);               // 需要完整屏障
 ```
+
 **架构特性对比**:
 
 | 特性        | x86-64   | ARM64       | RISC-V |
@@ -846,6 +858,7 @@ fn benchmark_scalability() {
     }
 }
 ```
+
 **结论**:
 
 - ✅ 超线程可提供 20-30% 额外性能
@@ -908,6 +921,7 @@ fn bench_cache_effects(c: &mut Criterion) {
 criterion_group!(benches, bench_cache_effects);
 criterion_main!(benches);
 ```
+
 **性能差异**: 缓存友好代码可快 5-10倍
 
 ---
@@ -958,6 +972,7 @@ fn memory_bandwidth_test(num_threads: usize) {
     println!("{} threads: {:.2} GB/s, sum = {}", num_threads, bandwidth, total);
 }
 ```
+
 **结论**:
 
 - ✅ 4-8 线程后受内存带宽限制
@@ -987,6 +1002,7 @@ struct GoodCounter {
     counter2: AtomicUsize,
 }
 ```
+
 **性能差异测试**:
 
 ```rust
@@ -1019,6 +1035,7 @@ fn bench_false_sharing() {
     // Good 版本测试类似...
 }
 ```
+
 **性能影响**: 伪共享可导致性能下降 5-10倍
 
 ---
@@ -1044,6 +1061,7 @@ fn process_items_good(items: &[Item]) {
         .collect();  // 最后一次性收集
 }
 ```
+
 ---
 
 ### 13.3 忙等待
@@ -1069,6 +1087,7 @@ fn condvar_good() {
     }
 }
 ```
+
 ---
 
 ### 13.4 过度线程化
@@ -1093,6 +1112,7 @@ fn thread_pool(tasks: &[Task]) {
         .for_each(|task| process(task));
 }
 ```
+
 **性能影响**: 过多线程导致调度开销和内存浪费
 
 ---
@@ -1135,6 +1155,7 @@ fn expensive_task() -> Result<(), ()> {
     Ok(())
 }
 ```
+
 **指标示例**:
 
 | 指标                    | 类型      | 说明         | 阈值        |
@@ -1188,6 +1209,7 @@ fn process_task(_id: usize) {
     // 模拟任务处理
 }
 ```
+
 ---
 
 ### 14.3 锁竞争监控
@@ -1228,6 +1250,7 @@ impl<T> MonitoredMutex<T> {
     }
 }
 ```
+
 ---
 
 ## 9. 性能优化建议
@@ -1264,6 +1287,7 @@ impl<T> MonitoredMutex<T> {
    □ 需要背压用 bounded
    □ 异步场景用 tokio::mpsc
 ```
+
 ---
 
 ### 9.2 性能分析工具

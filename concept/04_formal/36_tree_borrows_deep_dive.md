@@ -44,6 +44,7 @@ let r1 = &mut x;
 let r2 = &mut x; // 重新借用
 *r1 = 1; // Stacked Borrows 可能认为 r1 已失效
 ```
+
 虽然安全 Rust 不会出现这种模式，但在 unsafe 代码、自引用（Reference）结构、某些 FFI 场景中，开发者需要更灵活的别名规则。
 
 ---
@@ -92,6 +93,7 @@ let r2 = &mut x; // 重新借用
 ```bash
 MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 ```
+
 自 Miri 某版本起，Tree Borrows 已成为默认模型。Stacked Borrows 仍可通过 `-Zmiri-stacked-borrows` 启用。
 
 ---

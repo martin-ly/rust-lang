@@ -110,6 +110,7 @@ const fn simple_add(a: u32, b: u32) -> u32 {
     a + b
 }
 ```
+
 **Rust 1.91**:
 
 ```rust
@@ -128,6 +129,7 @@ const CONST_VALUE: u32 = 10;
 const CONST_REF: &u32 = &CONST_VALUE;  // ✅ Rust 1.91
 const FACTORIAL_10: u32 = const_factorial(*CONST_REF);
 ```
+
 #### 2. const 配置系统
 
 ```rust
@@ -145,6 +147,7 @@ impl Config {
     pub const TOTAL_TIMEOUT_MS: u64 = *Self::RETRY_REF as u64 * Self::TIMEOUT_MS;
 }
 ```
+
 ### 实际应用场景
 
 #### 编译时配置系统
@@ -164,6 +167,7 @@ impl ControlFlowConfig {
     pub const TOTAL_MS: u64 = *Self::ITER_REF as u64 * Self::TIMEOUT_MS;
 }
 ```
+
 ---
 
 ## 改进的 ControlFlow
@@ -190,6 +194,7 @@ fn process(data: &[i32]) -> ControlFlow<(), i32> {
     // 错误信息较少
 }
 ```
+
 **Rust 1.91**:
 
 ```rust
@@ -209,6 +214,7 @@ fn validate_pipeline(data: &[i32]) -> ControlFlow<String, i32> {
     ControlFlow::Continue(sum)
 }
 ```
+
 #### 2. 早期退出循环
 
 ```rust
@@ -227,6 +233,7 @@ fn early_exit_loop(data: &[i32], max: i32) -> ControlFlow<String, Vec<i32>> {
     ControlFlow::Continue(result)
 }
 ```
+
 ### 实际应用
 
 ```rust
@@ -253,6 +260,7 @@ fn multi_level_validation(data: &[i32]) -> ControlFlow<String, i32> {
     ControlFlow::Continue(avg)
 }
 ```
+
 ---
 
 ## 函数性能优化
@@ -282,6 +290,7 @@ fn optimized_iterator_chain(data: &[i32]) -> Vec<i32> {
         .collect()
 }
 ```
+
 #### 2. 优化的递归函数
 
 ```rust
@@ -303,6 +312,7 @@ fn tail_recursive_factorial(n: u32, acc: u32) -> u32 {
     }
 }
 ```
+
 ### 性能对比
 
 | 操作         | Rust 1.90 | Rust 1.91 | 性能提升 |
@@ -340,6 +350,7 @@ const fn const_max(a: u32, b: u32) -> u32 {
 
 const MAX_VAL: u32 = const_max(10, 20);  // 编译时计算
 ```
+
 #### 2. 优化的模式匹配
 
 ```rust
@@ -353,6 +364,7 @@ fn optimized_pattern_matching(value: Option<i32>) -> String {
     }
 }
 ```
+
 #### 3. const 上下文中的模式匹配
 
 ```rust
@@ -365,6 +377,7 @@ const fn const_match(value: u32) -> u32 {
 
 const FACTORIAL_5: u32 = const_match(5);  // 编译时计算
 ```
+
 ---
 
 ## 优化的循环结构
@@ -394,6 +407,7 @@ fn optimized_for_loop(data: &[i32]) -> Vec<i32> {
     result
 }
 ```
+
 #### 2. const 上下文中的循环
 
 ```rust
@@ -410,6 +424,7 @@ const fn const_loop_sum(n: u32) -> u32 {
 
 const SUM_10: u32 = const_loop_sum(10);  // 编译时计算
 ```
+
 ---
 
 ## 函数调用优化
@@ -454,6 +469,7 @@ where
     }
 }
 ```
+
 #### 2. 优化的递归函数
 
 ```rust
@@ -470,6 +486,7 @@ fn optimized_power(base: i32, exp: u32) -> i32 {
     }
 }
 ```
+
 ---
 
 ## 闭包优化
@@ -501,6 +518,7 @@ fn optimized_closure_capture() -> Vec<i32> {
         .collect()
 }
 ```
+
 #### 2. 高阶函数优化
 
 ```rust
@@ -516,6 +534,7 @@ where
         .collect()
 }
 ```
+
 ---
 
 ## 实际应用示例
@@ -539,6 +558,7 @@ impl ControlFlowConfig {
     pub const TOTAL_MS: u64 = *Self::ITER_REF as u64 * Self::TIMEOUT_MS;
 }
 ```
+
 ### 示例 2: 使用改进的 ControlFlow
 
 ```rust
@@ -567,6 +587,7 @@ fn process_pipeline(data: &[i32]) -> ControlFlow<String, HashMap<String, i32>> {
     ControlFlow::Continue(stats)
 }
 ```
+
 ### 示例 3: 优化的迭代器链
 
 ```rust
@@ -582,6 +603,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
         .collect()
 }
 ```
+
 ---
 
 ## 迁移指南
@@ -594,6 +616,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 rustup update stable
 rustc --version  # 应该显示 rustc 1.91.0
 ```
+
 #### 2. 利用新特性
 
 **使用 const 上下文增强**:
@@ -607,6 +630,7 @@ const REF: &u32 = &VALUE; // 只能引用 static
 const VALUE: u32 = 10;
 const REF: &u32 = &VALUE; // 可以引用 const
 ```
+
 **使用改进的 ControlFlow**:
 
 ```rust
@@ -623,6 +647,7 @@ fn process() -> ControlFlow<String, i32> {
     ControlFlow::Continue(result)
 }
 ```
+
 **利用性能优化**:
 
 ```rust
@@ -633,6 +658,7 @@ let result: Vec<i32> = data.iter()
     .map(|&x| x * 2)
     .collect();
 ```
+
 ### 兼容性说明
 
 - Rust 1.91 向后兼容 Rust 1.90 的代码

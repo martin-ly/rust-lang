@@ -67,6 +67,7 @@ where
     todo!()
 }
 ```
+
 ---
 
 ## 📐 常量泛型表达式语法
@@ -100,6 +101,7 @@ where
     data: [T; N * 2 + 1],
 }
 ```
+
 ### 位运算与比较
 
 ```rust
@@ -122,6 +124,7 @@ where
     data: [T; W * H],
 }
 ```
+
 ### where 子句约束
 
 ```rust
@@ -163,6 +166,7 @@ where
     }
 }
 ```
+
 ---
 
 ## 🔢 类型级整数运算
@@ -196,6 +200,7 @@ let p: Permutations<i32, 5> = Permutations {
     items: [0; 120],
 };
 ```
+
 ### 类型级斐波那契
 
 ```rust
@@ -221,6 +226,7 @@ where
     data: [T; Fibonacci::<N>::VALUE],
 }
 ```
+
 ### 编译时类型断言
 
 ```rust
@@ -255,6 +261,7 @@ where
     data: [T; N],
 }
 ```
+
 ---
 
 ## 🔄 与稳定版 Workaround 对比
@@ -281,6 +288,7 @@ where
 // 使用繁琐: 需要引入类型别名
 type Mat3x4<T> = MatrixTypenum<T, U3, U4>;
 ```
+
 ### 宏方案
 
 ```rust
@@ -297,6 +305,7 @@ define_matrix!(Matrix3x3, 3, 3);
 define_matrix!(Matrix3x4, 3, 4);
 // 每对维度都需要单独定义
 ```
+
 ### 方案对比矩阵
 
 | 维度 | `generic_const_exprs` | `typenum` | 宏方案 |
@@ -343,6 +352,7 @@ where
 }
 // Recursive::<1000> 可能使编译器崩溃
 ```
+
 ---
 
 ## 📈 预计稳定时间与迁移建议
@@ -358,6 +368,7 @@ where
     ↓
 2027+: 生态系统迁移 (ndarray, nalgebra 等)
 ```
+
 ### 当前使用建议
 
 **新项目 (Nightly 可用)**:
@@ -375,6 +386,7 @@ where
     data: [T; N * M],
 }
 ```
+
 **稳定版项目 (现在)**:
 
 ```rust
@@ -395,6 +407,7 @@ impl<T, const N: usize, const M: usize> Matrix<T, N, M> {
     const CAPACITY: usize = N * M;
 }
 ```
+
 **迁移路径**:
 
 1. **现在**: 使用 `Vec` / `Box<[T]>` + `const_assert!` 模拟编译时检查

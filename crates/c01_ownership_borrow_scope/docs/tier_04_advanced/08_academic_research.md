@@ -153,6 +153,7 @@ Rust 学术研究
         ├─ 嵌入式系统
         └─ WebAssembly
 ```
+
 ### 1.2 顶级会议和期刊
 
 #### 编程语言
@@ -200,6 +201,7 @@ Rust 学术研究
 - 所有权 → 分离断言
 - unsafe → 逻辑不变量
 ```
+
 **影响**: 奠定了 Rust 形式化验证的基础
 
 #### 2. Oxide (ECOOP 2019)
@@ -221,6 +223,7 @@ Oxide 将 Rust 简化为：
 - 所有权转移
 - 借用和生命周期
 ```
+
 #### 3. Patina (2015)
 
 **标题**: "Patina: A Formalization of the Rust Programming Language"
@@ -332,6 +335,7 @@ fn split_at_mut(slice: &mut [i32], mid: usize)
     unsafe { /* ... */ }
 }
 ```
+
 **未来可能**:
 
 ```rust
@@ -342,6 +346,7 @@ fn split_at_mut(slice: &mut [i32], mid: usize)
     (&mut slice[..mid], &mut slice[mid..])  // 无 unsafe
 }
 ```
+
 **研究论文**: "Views: A Way for Pattern Matching to Cohabit with Data Abstraction" (Wadler, 1987)
 
 #### Dependent Types
@@ -356,6 +361,7 @@ fn get<n: usize>(arr: [i32; n], i: usize{i < n}) -> i32 {
     arr[i]  // 编译时保证不越界
 }
 ```
+
 **挑战**:
 
 - 类型推断复杂度
@@ -375,6 +381,7 @@ fn divide(a: i32, b: PositiveInt) -> i32 {
     a / b  // 安全：b 非零
 }
 ```
+
 ### 3.2 并发模型
 
 #### Session Types
@@ -393,6 +400,7 @@ fn client(chan: Channel<Protocol>) {
     chan.close();
 }
 ```
+
 **研究现状**: 探索阶段
 
 #### Actor Model
@@ -424,6 +432,7 @@ fn pure_function() -> i32 {
     42
 }
 ```
+
 **研究论文**: "Effect Handlers via Generalised Continuations" (Hillerström & Lindley, 2018)
 
 ---
@@ -549,6 +558,7 @@ fn polonius_improvement() {
     }
 }
 ```
+
 **研究内容**:
 
 - 基于数据流的分析
@@ -586,6 +596,7 @@ fn add_arrays<const N: usize>(
     result
 }
 ```
+
 **研究方向**: Dependent types 的实用子集
 
 ### 5.4 安全并发模型
@@ -652,6 +663,7 @@ fn add_arrays<const N: usize>(
 ```bash
 cargo +nightly miri run
 ```
+
 **研究用途**:
 
 - 测试语义

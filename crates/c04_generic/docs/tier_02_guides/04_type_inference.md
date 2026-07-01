@@ -96,6 +96,7 @@ let x: i32 = 5;
 let y: f64 = 3.14;
 let z: &str = "hello";
 ```
+
 **类型推断的优势**:
 
 - ✅ 减少样板代码
@@ -124,6 +125,7 @@ fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 ```
+
 ### 1.3 类型推断的限制
 
 **限制 1: 不能跨函数边界**:
@@ -139,6 +141,7 @@ fn create_vector() -> Vec<i32> {
     vec![1, 2, 3]
 }
 ```
+
 **限制 2: 需要足够的上下文**:
 
 ```rust
@@ -151,6 +154,7 @@ let v = Vec::<i32>::new();
 let mut v = Vec::new();
 v.push(42);  // 从使用推断出 Vec<i32>
 ```
+
 ---
 
 ## 2. 局部变量的类型推断
@@ -174,6 +178,7 @@ fn main() {
     let len = "hello".len(); // usize
 }
 ```
+
 ### 2.2 从使用处推断
 
 ```rust
@@ -192,6 +197,7 @@ fn process_vec(v: Vec<i32>) {
     println!("{:?}", v);
 }
 ```
+
 **推断链**:
 
 ```rust
@@ -206,6 +212,7 @@ fn transform<T: Clone>(v: Vec<T>) -> Vec<T> {
     v
 }
 ```
+
 ### 2.3 泛型类型的推断
 
 ```rust
@@ -227,6 +234,7 @@ fn main() {
     map.insert("key", 42);  // 第一个类型参数从使用推断
 }
 ```
+
 ---
 
 ## 3. 函数返回类型推断
@@ -248,6 +256,7 @@ fn get_value() {  // 错误
     42
 }
 ```
+
 ### 3.2 impl Trait 返回类型
 
 ```rust
@@ -271,6 +280,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 4. Turbofish 语法 (`::<>`)
@@ -288,6 +298,7 @@ value.method::<Type>(args)
 let v = Vec::<i32>::new();
 let result = parse::<i32>("42");
 ```
+
 ### 4.2 使用场景
 
 **场景 1: 类型无法推断**:
@@ -304,6 +315,7 @@ fn main() {
     let num = "42".parse::<i32>().unwrap();
 }
 ```
+
 **场景 2: 需要特定类型**:
 
 ```rust
@@ -320,6 +332,7 @@ fn main() {
     println!("{:?}", set);
 }
 ```
+
 **场景 3: 方法链中的类型**:
 
 ```rust
@@ -332,6 +345,7 @@ fn main() {
     println!("{:?}", result);
 }
 ```
+
 ### 4.3 实战案例
 
 **案例 1: 字符串解析**:
@@ -352,6 +366,7 @@ fn main() {
     }
 }
 ```
+
 **案例 2: 类型转换**:
 
 ```rust
@@ -368,6 +383,7 @@ fn main() {
     println!("{:?}, {:?}, {:?}", v1, v2, v3);
 }
 ```
+
 **案例 3: 泛型函数调用**:
 
 ```rust
@@ -388,6 +404,7 @@ fn main() {
     let default_value = <i32>::default();    // ✅ 也可以
 }
 ```
+
 ---
 
 ## 5. 类型标注技巧
@@ -412,6 +429,7 @@ fn main() {
     let x: f32 = 3.14;  // 明确使用 f32 而不是默认的 f64
 }
 ```
+
 ### 5.2 类型标注的位置
 
 **位置 1: 变量声明**:
@@ -420,6 +438,7 @@ fn main() {
 let x: i32 = 42;
 let v: Vec<String> = Vec::new();
 ```
+
 **位置 2: 函数参数和返回值**:
 
 ```rust
@@ -427,11 +446,13 @@ fn process(x: i32, y: f64) -> String {
     format!("{} {}", x, y)
 }
 ```
+
 **位置 3: 方法调用 (Turbofish)**:
 
 ```rust
 let result = "42".parse::<i32>().unwrap();
 ```
+
 **位置 4: 结构体字段**:
 
 ```rust
@@ -440,6 +461,7 @@ struct Config {
     retries: u32,
 }
 ```
+
 ### 5.3 最小化类型标注
 
 **使用 `_` 部分推断**:
@@ -461,6 +483,7 @@ fn main() {
         .collect();
 }
 ```
+
 **利用类型推断链**:
 
 ```rust
@@ -471,6 +494,7 @@ fn main() {
     let sum: i32 = doubled.iter().sum();  // 从 Vec<i32> 推断
 }
 ```
+
 ---
 
 ## 6. 泛型上下文中的类型推断
@@ -488,6 +512,7 @@ fn main() {
     let z = wrap(vec![1, 2]); // T = Vec<i32>
 }
 ```
+
 ### 6.2 从返回值推断
 
 ```rust
@@ -500,6 +525,7 @@ fn main() {
     let y: String = unwrap_or_default(None); // T = String
 }
 ```
+
 ### 6.3 推断的传播
 
 ```rust
@@ -516,6 +542,7 @@ fn main() {
     println!("{:?}", result);
 }
 ```
+
 ---
 
 ## 7. 常见的类型推断问题
@@ -530,6 +557,7 @@ fn main() {
     println!("{:?}", v);
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -543,6 +571,7 @@ let v = Vec::<i32>::new();
 let mut v = Vec::new();
 v.push(42);  // 推断为 Vec<i32>
 ```
+
 ### 7.2 推断不明确
 
 **问题**:
@@ -552,6 +581,7 @@ fn main() {
     let result = "42".parse().unwrap();  // 错误：parse 可以返回多种类型
 }
 ```
+
 **解决方案**:
 
 ```rust
@@ -565,6 +595,7 @@ let result = "42".parse::<i32>().unwrap();
 let result = "42".parse().unwrap();
 let doubled: i32 = result * 2;  // 推断 result 为 i32
 ```
+
 ### 7.3 整数和浮点数的默认推断
 
 ```rust
@@ -580,6 +611,7 @@ fn main() {
     let c: f32 = 3.14; // 使用类型标注
 }
 ```
+
 ---
 
 ## 8. 高级推断技巧
@@ -599,6 +631,7 @@ fn main() {
     // 类型别名使意图更清晰
 }
 ```
+
 ### 8.2 利用闭包的类型推断
 
 ```rust
@@ -614,6 +647,7 @@ fn main() {
     println!("{:?}", doubled);
 }
 ```
+
 ### 8.3 方法链中的推断
 
 ```rust
@@ -628,6 +662,7 @@ fn main() {
     println!("{:?}", result);
 }
 ```
+
 ---
 
 ## 9. 实战综合案例
@@ -657,6 +692,7 @@ fn main() {
     println!("{:?}", map2);
 }
 ```
+
 ### 9.2 案例 2：错误处理中的推断
 
 ```rust
@@ -686,6 +722,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 10. 最佳实践
@@ -714,6 +751,7 @@ fn internal_helper() {
     let v = vec![1, 2, 3];
 }
 ```
+
 ### 10.2 提高代码可读性
 
 ```rust
@@ -729,6 +767,7 @@ let r = calculate();
 // ✅ 清晰
 let response: ApiResponse = calculate();
 ```
+
 ### 10.3 避免过度标注
 
 ```rust
@@ -740,6 +779,7 @@ let message: String = format!("Hello, {}", name);
 let x = 5 + 10;  // 明显是 i32
 let message = format!("Hello, {}", name);  // 明显是 String
 ```
+
 ---
 
 ## 📚 延伸阅读
@@ -762,6 +802,7 @@ fn main() {
     println!("{:?}", first);
 }
 ```
+
 **练习 2: 使用 Turbofish**:
 
 ```rust
@@ -774,6 +815,7 @@ fn main() {
     println!("{:?}", parsed);
 }
 ```
+
 **练习 3: 最小化类型标注**:
 
 优化以下代码，移除不必要的类型标注：
@@ -786,6 +828,7 @@ fn main() {
     println!("{}", message);
 }
 ```
+
 ---
 
 ## 📝 小结

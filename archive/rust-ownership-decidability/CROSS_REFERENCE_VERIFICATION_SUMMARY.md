@@ -38,7 +38,6 @@
     - [File Distribution](#file-distribution)
   - [Verification Tool](#verification-tool)
   - [Conclusion](#conclusion)
-<a id="completed-2026-03-06"></a>
   - [*Completed: 2026-03-06*](#completed-2026-03-06)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)

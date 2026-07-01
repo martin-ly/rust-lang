@@ -115,6 +115,7 @@
 └── Sealed Traits
     └── 密封 Trait
 ```
+
 ### 多维概念对比矩阵
 
 | 泛型模式             | 复杂度 | 性能   | 类型安全 | 适用场景   | Rust 1.92.0 |
@@ -141,6 +142,7 @@
 │       │       │   ├── 是 → Extension Traits
 │       │       │   └── 否 → Visitor 模式
 ```
+
 ---
 
 ## 🎯 概述
@@ -240,6 +242,7 @@ fn main() {
     // let bad = Builder::<New>::new().build();
 }
 ```
+
 **复杂状态机**:
 
 ```rust
@@ -317,6 +320,7 @@ fn main() {
     let _closed = conn.close();
 }
 ```
+
 ---
 
 ## 2. 类型见证模式
@@ -370,6 +374,7 @@ fn main() {
     println!("First: {}", non_empty.first());  // ✅ 安全
 }
 ```
+
 **排序见证**:
 
 ```rust
@@ -417,6 +422,7 @@ fn main() {
     println!("{:?}", sorted.binary_search(&3));  // ✅ 安全
 }
 ```
+
 ### 2.1 类型见证高级应用
 
 **案例1：编译时排序证明**:
@@ -474,6 +480,7 @@ fn main() {
     println!("{:?}", result);
 }
 ```
+
 **案例2：类型安全的验证链**:
 
 ```rust
@@ -558,6 +565,7 @@ fn main() {
     user.save_to_database();
 }
 ```
+
 **案例3：编译时权限检查**:
 
 ```rust
@@ -654,6 +662,7 @@ fn main() {
     admin_resource.delete();
 }
 ```
+
 ---
 
 ## 3. Newtype 模式
@@ -681,6 +690,7 @@ fn main() {
     // println!("{}", get_user(product_id));  // ❌ 编译错误
 }
 ```
+
 **计量单位**:
 
 ```rust
@@ -725,6 +735,7 @@ fn main() {
     // let bad = distance1 + time;  // ❌ 编译错误：类型不匹配
 }
 ```
+
 ### 3.1 Newtype高级应用：金融系统类型安全
 
 **案例：防止货币错误的类型系统**:
@@ -843,6 +854,7 @@ fn main() {
     println!("After 10% discount: ${:.2}", discounted.amount());
 }
 ```
+
 **案例：类型安全的百分比计算**:
 
 ```rust
@@ -898,6 +910,7 @@ fn main() {
     assert!(Percentage::new(150.0).is_none());
 }
 ```
+
 ---
 
 ## 4. Visitor 模式
@@ -984,6 +997,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 5. Extension Traits
@@ -1011,6 +1025,7 @@ fn main() {
     println!("5 is odd: {}", 5.is_odd());
 }
 ```
+
 **泛型扩展**:
 
 ```rust
@@ -1041,6 +1056,7 @@ fn main() {
     println!("Sum: {}", sum);
 }
 ```
+
 ---
 
 ## 6. Sealed Traits
@@ -1080,6 +1096,7 @@ fn main() {
     println!("Double 3.14: {}", 3.14.double());
 }
 ```
+
 ---
 
 ## 7. 类型擦除
@@ -1140,6 +1157,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 8. 高级组合模式
@@ -1198,6 +1216,7 @@ fn main() {
     println!("{:?}", doubled);
 }
 ```
+
 **Monad 模拟**:
 
 ```rust
@@ -1238,6 +1257,7 @@ fn main() {
     println!("{:?}", error);  // None
 }
 ```
+
 ### 8.2 类型级编程
 
 **类型级自然数**:
@@ -1304,6 +1324,7 @@ fn main() {
     type Sum = <Two as Add<Three>>::Output;  // Sum = Five
 }
 ```
+
 **类型级布尔运算**:
 
 ```rust
@@ -1369,6 +1390,7 @@ fn main() {
     type Result3 = <False as Not>::Output;         // True
 }
 ```
+
 ### 8.3 依赖类型模拟
 
 **类型级长度的Vector**:
@@ -1455,6 +1477,7 @@ fn main() {
     // empty.first();  // ❌ 编译错误
 }
 ```
+
 **类型级矩阵尺寸**:
 
 ```rust
@@ -1520,6 +1543,7 @@ fn main() {
     // let bad = m1.mul(&m4);
 }
 ```
+
 ---
 
 ## 9. 性能优化模式
@@ -1546,6 +1570,7 @@ fn main() {
 // fn generic_add_i32(a: i32, b: i32) -> i32 { a + b }
 // fn generic_add_f64(a: f64, b: f64) -> f64 { a + b }
 ```
+
 **避免代码膨胀**:
 
 ```rust
@@ -1563,6 +1588,7 @@ fn process_dyn(items: &[&dyn std::fmt::Display]) {
     }
 }
 ```
+
 ### 9.2 内联优化
 
 **强制内联泛型函数**:
@@ -1591,6 +1617,7 @@ fn main() {
     println!("Sum: {}", sum);
 }
 ```
+
 ### 9.3 编译时计算
 
 **const泛型与编译时计算**:
@@ -1626,6 +1653,7 @@ fn main() {
     println!("Grid size: {}", grid.data.len());
 }
 ```
+
 **const trait bounds（实验性）**:
 
 ```rust
@@ -1652,6 +1680,7 @@ fn main() {
     println!("Computed at compile time: {}", RESULT);
 }
 ```
+
 ### 9.4 SIMD与泛型优化
 
 **使用泛型实现SIMD抽象**:
@@ -1701,6 +1730,7 @@ where
     sum
 }
 ```
+
 ### 9.5 泛型与异构编程
 
 **编译时代码生成**:
@@ -1746,6 +1776,7 @@ fn select_kernel() -> Box<dyn ComputeKernel> {
     }
 }
 ```
+
 ---
 
 ## 9.6 GAT高级应用案例
@@ -1790,6 +1821,7 @@ impl AsyncStream for MmapStream {
     }
 }
 ```
+
 ### 案例2：类型安全的数据库查询构建器
 
 ```rust
@@ -1864,6 +1896,7 @@ fn main() {
     // let invalid = QueryBuilder::new().where_clause("age > 18").build();
 }
 ```
+
 ### 案例3：类型安全的单位系统
 
 ```rust
@@ -1933,6 +1966,7 @@ fn main() {
     // let invalid = distance + time;
 }
 ```
+
 ---
 
 ## 9.7 类型级列表与异构集合
@@ -1985,6 +2019,7 @@ fn main() {
     println!("{}, {}, {}", x, y, z);
 }
 ```
+
 ---
 
 ## 10. 总结

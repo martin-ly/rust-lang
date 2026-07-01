@@ -104,6 +104,7 @@ fn process_macro(tokens: &[String]) -> Vec<String> {
         .collect()
 }
 ```
+
 **Rust 1.91**:
 
 ```rust
@@ -114,6 +115,7 @@ let tokens = vec!["token1".to_string(), "token2".to_string()];
 let processed = macro_jit_optimizations::process_macro_expansion(&tokens);
 // 性能提升约 15-25%
 ```
+
 #### 2. 性能对比
 
 | 场景       | Rust 1.90 | Rust 1.91 | 性能提升 |
@@ -144,6 +146,7 @@ Rust 1.91 允许在 const 上下文中创建对非静态常量的引用，这对
 static MAX_ARGS: usize = 64;
 const MAX_ARGS_REF: &usize = &MAX_ARGS;  // ✅ 仅支持静态变量
 ```
+
 **Rust 1.91**:
 
 ```rust
@@ -154,6 +157,7 @@ const MAX_MACRO_ARGS: usize = 64;
 const MAX_ARGS_REF: &usize = &MAX_MACRO_ARGS;  // ✅ Rust 1.91 支持
 const TOTAL_SIZE: usize = *MAX_ARGS_REF * 1024;  // ✅ 基于引用进行计算
 ```
+
 #### 2. 宏系统配置示例
 
 ```rust
@@ -168,6 +172,7 @@ const_macro_config::MacroConfigSystem::demonstrate();
 // 缓冲区大小: 4096 bytes
 // 总缓冲区大小: 262144 bytes
 ```
+
 ---
 
 ## 优化的内存分配器（宏数据结构优化）
@@ -191,6 +196,7 @@ use c11_macro_system::rust_191_features::macro_memory_optimizations;
 let objects = macro_memory_optimizations::create_small_macro_objects();
 // 创建大量小对象时，性能提升显著
 ```
+
 #### 2. 性能对比1
 
 | 对象大小    | Rust 1.90 | Rust 1.91 | 性能提升 |
@@ -234,6 +240,7 @@ println!("缓存命中率: {:.2}%",
     (stats.cache_hits as f64 / stats.total_requests as f64) * 100.0
 );
 ```
+
 #### 2. 性能影响
 
 | 场景     | Rust 1.90 | Rust 1.91 | 性能提升 |
@@ -276,6 +283,7 @@ println!("{}", error_message);
 // 实际: 3 个参数
 // 提示: 请检查宏调用处的参数数量
 ```
+
 #### 2. 错误修复建议
 
 ```rust
@@ -284,6 +292,7 @@ for suggestion in suggestions {
     println!("- {}", suggestion);
 }
 ```
+
 ---
 
 ## 过程宏编译优化（编译时间减少）
@@ -317,6 +326,7 @@ println!("缓存命中率: {:.2}%",
     (stats.cache_used as f64 / (stats.compiled_macros + stats.cache_used) as f64) * 100.0
 );
 ```
+
 #### 2. 性能影响5
 
 | 场景     | Rust 1.90 | Rust 1.91 | 性能提升 |
@@ -355,6 +365,7 @@ fn high_performance_macro_expansion() {
     );
 }
 ```
+
 ### 示例 2: const 上下文中的宏配置
 
 ```rust
@@ -376,6 +387,7 @@ fn create_macro_config() -> MacroConfig {
     }
 }
 ```
+
 ### 示例 3: 改进的错误处理
 
 ```rust
@@ -394,6 +406,7 @@ fn handle_macro_error(error: &improved_macro_errors::MacroError) {
     }
 }
 ```
+
 ---
 
 ## 迁移指南
@@ -406,6 +419,7 @@ fn handle_macro_error(error: &improved_macro_errors::MacroError) {
 rustup update stable
 rustc --version  # 应该显示 rustc 1.91.0
 ```
+
 #### 2. 利用新特性
 
 **使用 const 上下文增强**:
@@ -419,6 +433,7 @@ const MAX_ARGS_REF: &usize = &MAX_ARGS; // 只能引用 static
 const MAX_ARGS: usize = 64;
 const MAX_ARGS_REF: &usize = &MAX_ARGS; // 可以引用 const
 ```
+
 **使用宏展开缓存**:
 
 ```rust
@@ -427,6 +442,7 @@ use c11_macro_system::rust_191_features::macro_expansion_cache;
 let mut cache = macro_expansion_cache::MacroExpansionCache::new();
 // 宏展开会自动缓存，性能提升显著
 ```
+
 **使用改进的错误消息**:
 
 ```rust
@@ -434,6 +450,7 @@ let mut cache = macro_expansion_cache::MacroExpansionCache::new();
 use c11_macro_system::rust_191_features::improved_macro_errors;
 // 自动获得更详细的错误消息和修复建议
 ```
+
 #### 3. 性能优化建议
 
 1. **利用宏展开缓存**: 重复的宏展开会自动受益于缓存

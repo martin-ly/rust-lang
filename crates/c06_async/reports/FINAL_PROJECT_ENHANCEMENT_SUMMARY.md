@@ -184,6 +184,7 @@ crates/c06_async/
 ├── docs/                  # 文档（新增 1 个完整指南）
 └── README.md              # 项目说明（已更新）
 ```
+
 ## 🚀 使用方式
 
 ### 运行基础示例
@@ -198,6 +199,7 @@ cargo run --example runtime_comparison_demo
 # 最佳实践演示
 cargo run --example async_best_practices
 ```
+
 ### 运行高级示例
 
 ```bash
@@ -210,6 +212,7 @@ cargo run --example async_network_demo
 # 异步数据库和缓存演示
 cargo run --example async_database_demo
 ```
+
 ### 运行专业示例
 
 ```bash
@@ -219,12 +222,14 @@ cargo run --example async_performance_demo
 # 真实世界应用场景演示
 cargo run --example real_world_app_demo
 ```
+
 ### 阅读文档
 
 ```bash
 # 异步语义全面梳理指南
 cat docs/ASYNC_SEMANTICS_COMPREHENSIVE_GUIDE.md
 ```
+
 ## 🎉 项目价值
 
 ### 1. 教育价值

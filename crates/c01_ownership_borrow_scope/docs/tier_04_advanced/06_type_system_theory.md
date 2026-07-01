@@ -164,6 +164,7 @@
     ↓
 2020s: Formalization (RustBelt, Oxide)
 ```
+
 #### 关键里程碑
 
 1. **Simply Typed Lambda Calculus (STLC)**
@@ -197,6 +198,7 @@
     ├─ Python, JavaScript, Ruby
     └─ 优点: 灵活性, 快速原型
 ```
+
 #### 按类型强度
 
 | 分类       | 特点         | 示例              | Rust |
@@ -220,6 +222,7 @@ Substructural 类型系统
     └─ 有序类型 (Ordered Types)
         └─ 使用顺序固定
 ```
+
 ### 1.3 Rust 类型系统定位
 
 #### 理论定位
@@ -243,6 +246,7 @@ Rust 类型系统
         ├─ Trait (Ad-hoc Polymorphism)
         └─ 静态类型推断
 ```
+
 #### 与其他语言对比
 
 | 特性           | C/C++  | Java/C# | Haskell | Rust          |
@@ -275,6 +279,7 @@ Rust 类型系统
 - T 是类型
 - 约束: Γ 中的每个变量在 t 中最多出现一次
 ```
+
 **弱化规则 (Weakening)** - 允许不使用变量:
 
 ```text
@@ -282,6 +287,7 @@ Rust 类型系统
 ─────────────── (Weak)
 Γ, x:U ⊢ t : T
 ```
+
 **禁止 交换规则 (Exchange)** 和 **收缩规则 (Contraction)**:
 
 ```text
@@ -295,6 +301,7 @@ Rust 类型系统
 ─────────────────── (Contraction)
 Γ, x:T, x:T ⊢ t : U
 ```
+
 ### 2.2 Rust 的仿射实现
 
 #### 基本示例
@@ -319,6 +326,7 @@ fn weakening_example() {
     // s 在作用域结束时被丢弃
 }
 ```
+
 #### Copy Trait 的特殊性
 
 ```rust
@@ -335,6 +343,7 @@ fn copy_example() {
 // 这是通过特殊 trait 实现的例外
 // 只允许简单的按位复制类型
 ```
+
 #### 形式化规则
 
 ```text
@@ -359,6 +368,7 @@ Rust 所有权规则（仿射类型）:
 ─────────────── (Copy)
 Γ, y:T ⊢ [x↦y]t : U
 ```
+
 ### 2.3 与线性类型的关系
 
 #### 线性 vs 仿射
@@ -396,6 +406,7 @@ fn too_strict() {
     }
 }
 ```
+
 ---
 
 ## 3. 线性类型理论
@@ -414,6 +425,7 @@ fn too_strict() {
 线性加: A ⊕ B   (拥有 A 或 B)
 线性与: A & B   (可以选择 A 或 B)
 ```
+
 **与经典逻辑对比**:
 
 | 经典逻辑 | 线性逻辑 | 解释            |
@@ -435,6 +447,7 @@ fn too_strict() {
 资源 A         ←→  线性类型 A
 消耗           ←→  所有权转移
 ```
+
 ### 3.2 线性类型规则
 
 #### Lambda Calculus with Linear Types
@@ -454,6 +467,7 @@ Terms:
         | (t, t)      (对)
         | let (x, y) = t in t  (解构)
 ```
+
 **类型规则**:
 
 ```text
@@ -473,6 +487,7 @@ x:T ⊢ x : T
 
 关键: Γ₁ 和 Γ₂ 必须不相交（线性性）
 ```
+
 ### 3.3 在 Rust 中的表现
 
 #### 近似线性类型
@@ -510,6 +525,7 @@ fn linear_like() {
     let _data = resource.consume();
 }
 ```
+
 #### 使用 must_use 属性
 
 ```rust
@@ -536,6 +552,7 @@ fn must_use_example() {
     let result = resource.process();
 }
 ```
+
 ---
 
 ## 4. 区域推断算法
@@ -557,6 +574,7 @@ fn inferred_lifetime(x: &str) -> &str {
     x  // 编译器自动推断 'a
 }
 ```
+
 #### 生命周期推断规则
 
 **省略规则 (Elision Rules)**:
@@ -568,6 +586,7 @@ fn inferred_lifetime(x: &str) -> &str {
    // 等价于
    fn rule1<'a, 'b>(x: &'a str, y: &'b str) -> ...
    ```
+
 2. **如果只有一个输入生命周期，它被赋给所有输出生命周期**
 
    ```rust
@@ -575,6 +594,7 @@ fn inferred_lifetime(x: &str) -> &str {
    // 等价于
    fn rule2<'a>(x: &'a str) -> &'a str
    ```
+
 3. **如果有多个输入生命周期，但其中一个是 `&self` 或 `&mut self`，则 `self` 的生命周期被赋给所有输出生命周期**
 
    ```rust
@@ -584,6 +604,7 @@ fn inferred_lifetime(x: &str) -> &str {
        fn rule3<'a, 'b>(&'a self, other: &'b str) -> &'a str
    }
    ```
+
 ### 4.2 约束求解
 
 #### 生命周期约束系统
@@ -596,6 +617,7 @@ Constraints:
     'a = 'b     ('a 和 'b 相同)
     'a + 'b     ('a 和 'b 的交集)
 ```
+
 **约束求解示例**:
 
 ```rust
@@ -616,6 +638,7 @@ fn corrected<'a, 'b: 'a>(x: &'a str, y: &'b str) -> &'a str {
     }
 }
 ```
+
 #### 约束求解算法
 
 ```text
@@ -631,6 +654,7 @@ fn corrected<'a, 'b: 'a>(x: &'a str, y: &'b str) -> &'a str {
    - 如果无解: 报告借用检查错误
 4. 生成最小生命周期
 ```
+
 ### 4.3 NLL 算法
 
 #### Non-Lexical Lifetimes (NLL)
@@ -651,6 +675,7 @@ fn lexical_problem() {
     data.push(4);  // ❌ 错误: data 已被不可变借用
 }  // 借用结束
 ```
+
 **NLL 改进**:
 
 ```rust
@@ -665,6 +690,7 @@ fn nll_improvement() {
     data.push(4);  // ✅ OK: 借用已结束
 }
 ```
+
 #### NLL 算法概述
 
 **基于控制流图 (CFG) 的分析**:
@@ -675,6 +701,7 @@ fn nll_improvement() {
 3. 检查借用和访问的冲突
 4. 生成错误报告或通过检查
 ```
+
 **示例分析**:
 
 ```rust
@@ -699,6 +726,7 @@ fn nll_analysis() {
 // C: 借用集 = {}  (y 最后使用在 B)
 // D: 借用集 = {}
 ```
+
 ---
 
 ## 5. 所有权类型形式化
@@ -731,6 +759,7 @@ Terms t ::=
 
 Lifetimes 'a, 'b, ...
 ```
+
 #### 类型规则
 
 **所有权转移**:
@@ -741,6 +770,7 @@ Lifetimes 'a, 'b, ...
 ─────────────────────
 Γ - {x:τ}, y:τ ⊢ y : τ
 ```
+
 **不可变借用**:
 
 ```text
@@ -749,6 +779,7 @@ Lifetimes 'a, 'b, ...
 ─────────────────────
 Γ ⊢ &'a t : &'a τ
 ```
+
 **可变借用**:
 
 ```text
@@ -757,6 +788,7 @@ Lifetimes 'a, 'b, ...
 ────────────────────────────
 Γ ⊢ &'a mut t : &'a mut τ
 ```
+
 ### 5.2 借用系统形式化
 
 #### 借用规则
@@ -769,6 +801,7 @@ Lifetimes 'a, 'b, ...
 - 或者有一个可变引用 &'a mut T
 - 但不能同时存在
 ```
+
 **形式化**:
 
 ```text
@@ -779,12 +812,14 @@ Valid(Γ, 'a) iff:
         - 如果 x : &'a mut T, y : &'a mut T
           则 x = y
 ```
+
 **规则 2: 引用必须有效**:
 
 ```text
 如果 Γ ⊢ t : &'a τ，则:
     'a 包含 t 的所有使用点
 ```
+
 ### 5.3 健全性证明
 
 #### 类型安全性
@@ -795,18 +830,21 @@ Valid(Γ, 'a) iff:
 如果 ∅ ⊢ t : τ 且 t 不是值，
 则存在 t' 使得 t → t'
 ```
+
 **定理 (Preservation)**:
 
 ```text
 如果 Γ ⊢ t : τ 且 t → t'，
 则 Γ ⊢ t' : τ
 ```
+
 **推论 (Type Safety)**:
 
 ```text
 如果 ∅ ⊢ t : τ，
 则 t 不会陷入 stuck state
 ```
+
 #### 内存安全性
 
 **定理 (Memory Safety)**:
@@ -818,6 +856,7 @@ Valid(Γ, 'a) iff:
 3. 无使用后释放
 4. 无双重释放
 ```
+
 **证明草图**:
 
 ```text
@@ -828,6 +867,7 @@ Valid(Γ, 'a) iff:
   - Borrow: 创建引用，记录借用
   - 操作结束: 移除借用记录
 ```
+
 ---
 
 ## 6. Substructural 类型系统
@@ -845,6 +885,7 @@ Valid(Γ, 'a) iff:
 ─────────────────────────
 Γ₁, y:B, x:A, Γ₂ ⊢ t : C
 ```
+
 允许重排序假设。
 
 **2. 弱化规则 (Weakening)**:
@@ -854,6 +895,7 @@ Valid(Γ, 'a) iff:
 ─────────────────
 Γ, x:A ⊢ t : C
 ```
+
 允许添加未使用的假设。
 
 **3. 收缩规则 (Contraction)**:
@@ -863,6 +905,7 @@ Valid(Γ, 'a) iff:
 ───────────────────
 Γ, z:A ⊢ [x↦z,y↦z]t : C
 ```
+
 允许合并重复的假设。
 
 #### Substructural 分类
@@ -900,6 +943,7 @@ fn contraction() {
     // let z = x;  // ❌ 编译错误: x 已被移动
 }
 ```
+
 #### Copy Trait 的例外
 
 ```rust
@@ -913,6 +957,7 @@ fn copy_contraction() {
 // 这是通过特殊 trait 实现的受控违反
 trait Copy: Clone {}
 ```
+
 ### 6.3 与传统类型系统对比
 
 #### 传统类型系统 (C/Java)
@@ -930,6 +975,7 @@ void use_data(int* ptr) {
     // 是否应该释放 ptr？不清楚！
 }
 ```
+
 #### Rust Substructural 类型
 
 ```rust
@@ -949,6 +995,7 @@ fn borrow_data(data: &i32) {
     // 不负责释放，只是借用
 }
 ```
+
 #### 表现力对比
 
 | 能力             | 传统系统 | Rust |
@@ -988,6 +1035,7 @@ fn borrow_data(data: &i32) {
     ↓
 2020+: RustBelt (形式化验证)
 ```
+
 ### 7.2 Rust 的贡献
 
 #### 理论贡献
@@ -1037,6 +1085,7 @@ fn borrow_data(data: &i32) {
 - 更好的错误信息
 - 支持更多模式
 ```
+
 **类型系统扩展**:
 
 ```rust
@@ -1054,6 +1103,7 @@ fn view_types<'a>(data: &'a mut [i32]) -> (&'a i32, &'a mut [i32]) {
     // 分割借用的更好支持
 }
 ```
+
 ---
 
 ## 相关资源

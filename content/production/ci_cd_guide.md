@@ -46,6 +46,7 @@ Rust CI/CD 流水线:
     ├─ 交叉编译 (Linux/macOS/Windows)
     └─ 创建 GitHub Release + 上传制品
 ```
+
 **关键原则**:
 
 1. **快速失败**: fmt / clippy 放在最前面，快速拦截格式和风格问题
@@ -73,6 +74,7 @@ Rust CI/CD 流水线:
     restore-keys: |
       ${{ runner.os }}-cargo-
 ```
+
 **分层缓存策略**:
 
 | 缓存内容 | 路径 | 说明 |
@@ -131,6 +133,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
+
 **缓存优化对比**:
 
 | 方案 | 首次构建 | 缓存命中构建 | 配置复杂度 |
@@ -154,6 +157,7 @@ jobs:
     # 显示测试输出
     RUST_BACKTRACE: 1
 ```
+
 **测试分层**:
 
 ```yaml
@@ -188,6 +192,7 @@ jobs:
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
 ```
+
 ### cargo clippy
 
 ```yaml
@@ -197,6 +202,7 @@ jobs:
     # 将警告视为错误
     RUSTFLAGS: "-Dwarnings"
 ```
+
 **渐进式 lint 策略**:
 
 ```yaml
@@ -206,6 +212,7 @@ jobs:
 # 成熟仓库: 禁止警告
 - run: cargo clippy --all-targets --all-features -- -D warnings -D clippy::pedantic
 ```
+
 ### cargo audit
 
 检查依赖树中的已知安全漏洞：
@@ -222,18 +229,21 @@ jobs:
 - name: Run audit
   run: cargo audit
 ```
+
 **配置忽略** (`.cargo/audit.toml`):
 
 ```toml
 [advisories]
 ignore = ["RUSTSEC-2020-0071"]  # 已知但可接受的风险
 ```
+
 ### cargo fmt
 
 ```yaml
 - name: Check formatting
   run: cargo fmt --all -- --check
 ```
+
 ---
 
 ## 🌍 交叉编译
@@ -255,6 +265,7 @@ cross build --target x86_64-pc-windows-gnu --release
 # 编译 musl (静态链接)
 cross build --target x86_64-unknown-linux-musl --release
 ```
+
 ### GitHub Actions 矩阵交叉编译
 
 ```yaml
@@ -337,6 +348,7 @@ jobs:
           name: ${{ matrix.target }}
           path: '*.tar.gz'
 ```
+
 ---
 
 ## 📦 多平台发布矩阵
@@ -362,6 +374,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
+
 **完整 CI/CD 工作流汇总**:
 
 ```yaml
@@ -412,6 +425,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
+
 ---
 
 ## 🔗 参考资源

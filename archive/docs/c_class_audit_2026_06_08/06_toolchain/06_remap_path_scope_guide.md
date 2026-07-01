@@ -1,5 +1,3 @@
-<a id="--remap-path-scope-完全指南"></a>
-
 # `--remap-path-scope` 完全指南
 
 > **分级**: [A]

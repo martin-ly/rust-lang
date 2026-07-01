@@ -64,6 +64,7 @@ int temp = 1;
 int x = 2, y = 3;
 SWAP(x, y);  // ❌ temp 被覆盖！
 ```
+
 ---
 
 ### 1.2 为什么需要卫生性
@@ -84,6 +85,7 @@ macro_rules! bad_macro {
 let result = 10;
 let x = bad_macro!(result + 1);  // 如果不卫生会有问题
 ```
+
 **卫生性的好处**:
 
 1. 避免意外的名称冲突
@@ -107,6 +109,7 @@ let x = 0;      // x 有 "调用点" 上下文
 demo!();
 println!("{}", x);  // 0，使用调用点的 x
 ```
+
 **关键概念**:
 
 - 每个标识符都有关联的 **Span**
@@ -133,6 +136,7 @@ let temp = 10;
 let result = with_temp!(5);  // 15
 println!("temp = {}", temp); // 10，不受影响
 ```
+
 **规则**:
 
 - 宏内定义的局部变量 **不会** 泄露到外部
@@ -161,6 +165,7 @@ mod inner {
     // let result = call_helper!();  // 错误！
 }
 ```
+
 **规则**:
 
 - 宏内引用的函数/类型，在 **调用点** 解析
@@ -186,6 +191,7 @@ macro_rules! use_hashmap {
 let map = use_hashmap!();
 // let another = HashMap::new();  // 错误！HashMap 未导入
 ```
+
 **规则**:
 
 - `use` 语句在宏内生效
@@ -209,6 +215,7 @@ quote! {
     let #ident = 42;  // 使用调用点作用域
 }
 ```
+
 **效果**:
 
 ```rust
@@ -218,6 +225,7 @@ my_macro!();
 // 展开为（概念上）
 let result = 42;  // result 在调用点作用域
 ```
+
 ---
 
 ### 3.2 def_site()
@@ -235,6 +243,7 @@ quote! {
     let #ident = 42;  // internal_var 在宏定义作用域
 }
 ```
+
 **用途**:
 
 - 宏内部辅助变量
@@ -257,6 +266,7 @@ quote! {
     }
 }
 ```
+
 **特点**:
 
 - 对 `macro_rules!` 扩展更友好
@@ -281,6 +291,7 @@ macro_rules! outer {
 let x = outer!();  // 42
 // inner!();  // ❌ inner 不在作用域
 ```
+
 **规则**:
 
 - 宏可以定义宏
@@ -308,6 +319,7 @@ pub fn gen_code(_input: TokenStream) -> TokenStream {
 let x = gen_code!();
 // internal::helper();  // ❌ internal 不在外部作用域
 ```
+
 **规则**:
 
 - 宏生成的项（函数、结构体、模块）在展开位置可见
@@ -332,6 +344,7 @@ use my_crate::my_macro;
 
 let v = my_macro!();  // ✅ 即使未导入 Vec
 ```
+
 **最佳实践**:
 
 - 跨 crate 宏使用完整路径：`::std::...`
@@ -364,6 +377,7 @@ macro_rules! assert_eq_with_context {
     };
 }
 ```
+
 ---
 
 ### 5.2 声明宏技巧
@@ -385,6 +399,7 @@ with_context!({
     ctx.do_something();  // ❌ 实际不行，因为卫生性
 });
 ```
+
 **技巧 2: 显式参数**:
 
 ```rust
@@ -402,6 +417,7 @@ with_context!(ctx, {
     ctx.do_something();  // ✅ 可以访问
 });
 ```
+
 ---
 
 ### 5.3 过程宏技巧
@@ -427,6 +443,7 @@ pub fn inject_var(_attr: TokenStream, item: TokenStream) -> TokenStream {
     }.into()
 }
 ```
+
 ---
 
 ## 6. 常见问题
@@ -445,6 +462,7 @@ macro_rules! double {
 let value = 10;
 let result = double!(value);  // 20
 ```
+
 **注意**:
 
 - `$x:ident` 捕获标识符，保留其上下文
@@ -470,6 +488,7 @@ macro_rules! use_vec {
     };
 }
 ```
+
 ---
 
 ### 6.3 trait 解析
@@ -490,6 +509,7 @@ macro_rules! default_value {
     };
 }
 ```
+
 ---
 
 ## 7. 最佳实践
@@ -508,6 +528,7 @@ macro_rules! default_value {
        };
    }
    ```
+
 2. **使用完整路径**
 
    ```rust
@@ -517,6 +538,7 @@ macro_rules! default_value {
        };
    }
    ```
+
 3. **明确文档化非卫生行为**
 
    ```rust
@@ -527,6 +549,7 @@ macro_rules! default_value {
        };
    }
    ```
+
 ---
 
 ### 7.2 调试技巧
@@ -536,6 +559,7 @@ macro_rules! default_value {
 ```bash
 cargo expand my_module::my_function
 ```
+
 **技巧 2: 添加诊断**:
 
 ```rust
@@ -549,6 +573,7 @@ macro_rules! debug_hygiene {
     };
 }
 ```
+
 **技巧 3: 单元测试**:
 
 ```rust
@@ -559,6 +584,7 @@ fn test_hygiene() {
     assert_eq!(local, 10);  // 确保未被修改
 }
 ```
+
 ---
 
 ## 8. 高级主题
@@ -572,6 +598,7 @@ pub macro my_macro($e:expr) {
     $e * 2
 }
 ```
+
 **特性**:
 
 - 更好的卫生性控制

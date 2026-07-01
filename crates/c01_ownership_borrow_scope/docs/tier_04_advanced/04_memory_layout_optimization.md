@@ -35,6 +35,7 @@ struct Aligned {
 assert_eq!(mem::align_of::<Aligned>(), 8);
 assert_eq!(mem::size_of::<Aligned>(), 16);
 ```
+
 **常用 API**：`mem::align_of::<T>()`、`mem::size_of::<T>()`、`mem::align_of_val(v)`。
 
 ---
@@ -53,6 +54,7 @@ struct Packed {
 
 // size = 10 字节 (无填充)
 ```
+
 ---
 
 ## 3. #[repr(align(N))]
@@ -65,6 +67,7 @@ struct CacheAligned {
     data: [u8; 64],
 }
 ```
+
 ---
 
 ## 4. 字段重排序
@@ -80,6 +83,7 @@ struct Optimized {
     c: u8,
 }
 ```
+
 **建议**：大字段前置（u64 → u32 → u16 → u8）可减少填充。
 
 ---
@@ -91,6 +95,7 @@ struct ZeroSized; // size = 0
 
 let v = vec![ZeroSized; 1000]; // 无内存开销
 ```
+
 ---
 
 ## 6. 相关文档

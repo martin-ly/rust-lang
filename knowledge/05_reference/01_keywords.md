@@ -47,6 +47,7 @@ if x > 0 {
 // if 是表达式，可以返回值
 let abs = if x < 0 { -x } else { x };
 ```
+
 #### `match`
 >
 > **[来源: Rust Official Docs]**
@@ -62,6 +63,7 @@ match value {
     _ => println!("其他"),
 }
 ```
+
 #### `loop`
 >
 > **[来源: Rust Official Docs]**
@@ -77,6 +79,7 @@ let result = loop {
     }
 };
 ```
+
 #### `while`
 
 条件循环，在条件为真时持续执行。
@@ -88,6 +91,7 @@ while n != 0 {
     n -= 1;
 }
 ```
+
 #### `for`
 
 迭代循环，配合迭代器使用。这是最常用的循环形式。
@@ -101,6 +105,7 @@ for item in &collection {
     println!("{}", item);
 }
 ```
+
 #### `break`
 
 立即退出循环。可以带返回值（仅在 `loop` 中）或标签。
@@ -112,6 +117,7 @@ for item in &collection {
     }
 }
 ```
+
 #### `continue`
 
 跳过当前迭代，进入下一次循环。
@@ -124,6 +130,7 @@ for i in 0..10 {
     println!("奇数: {}", i);
 }
 ```
+
 ### 函数相关关键字
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -142,6 +149,7 @@ fn identity<T>(x: T) -> T {
     x
 }
 ```
+
 #### `return`
 
 从函数提前返回。Rust 更倾向于使用隐式返回。
@@ -154,6 +162,7 @@ fn divide(a: f64, b: f64) -> Option<f64> {
     Some(a / b)  // 隐式返回
 }
 ```
+
 #### `async` / `await`
 
 异步编程关键字（Rust 2018+）。`async` 创建异步块或函数，`await` 等待异步操作完成。
@@ -174,6 +183,7 @@ let closure = async || {
     println!("异步闭包");
 };
 ```
+
 #### `yield`
 
 生成器关键字（Rust 2024+，`gen` 块中使用），产生值并暂停执行。
@@ -191,6 +201,7 @@ for value in gen {
     println!("{}", value);  // 1, 2, 3
 }
 ```
+
 ### 类型系统关键字
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -211,6 +222,7 @@ struct Color(u8, u8, u8);
 // 单元结构体
 struct Marker;
 ```
+
 #### `enum`
 
 定义枚举类型，可以包含不同类型和数量的数据。
@@ -229,6 +241,7 @@ enum Result<T, E> {
     Err(E),
 }
 ```
+
 #### `trait`
 
 定义共享行为的接口，支持默认实现。
@@ -243,6 +256,7 @@ trait Drawable {
     }
 }
 ```
+
 #### `impl`
 
 为类型实现方法或 trait。
@@ -260,6 +274,7 @@ impl Drawable for Point {
     }
 }
 ```
+
 #### `type`
 
 类型别名，为现有类型创建新名称。
@@ -274,6 +289,7 @@ trait Iterator {
     fn next(&mut self) -> Option<Self::Item>;
 }
 ```
+
 #### `dyn`
 
 动态分发，用于 trait 对象。运行时确定具体类型。
@@ -287,6 +303,7 @@ fn draw_all(shapes: &[&dyn Drawable]) {
 
 let drawable: Box<dyn Drawable> = Box::new(Point::new(0.0, 0.0));
 ```
+
 ### 模块系统关键字
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -306,6 +323,7 @@ mod math {
 // 声明文件模块（对应 math.rs 或 math/mod.rs）
 mod math;
 ```
+
 #### `use`
 
 导入路径到作用域，支持多种导入形式。
@@ -316,6 +334,7 @@ use std::io::{self, Write};  // 导入 io 和 io::Write
 use std::fs::*;  // 通配导入
 use std::result::Result as StdResult;  // 重命名
 ```
+
 #### `crate`
 
 引用当前 crate 的根。
@@ -324,6 +343,7 @@ use std::result::Result as StdResult;  // 重命名
 use crate::config::Settings;
 pub(crate) fn internal_helper() {}  // crate 可见性
 ```
+
 #### `super`
 
 引用父模块。
@@ -339,6 +359,7 @@ mod parent {
     }
 }
 ```
+
 #### `extern`
 
 链接外部代码，用于 FFI（外部函数接口）。
@@ -351,6 +372,7 @@ extern "C" {
 #[no_mangle]
 pub extern "C" fn rust_function() {}
 ```
+
 #### `pub`
 
 公开可见性修饰符，可以限制可见范围。
@@ -361,6 +383,7 @@ pub(crate) fn crate_visible() {}   // crate 级别
 pub(super) fn parent_visible() {}  // 父模块级别
 pub(in crate::module) fn limited() {}  // 指定路径
 ```
+
 ### 变量与所有权关键字
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -378,6 +401,7 @@ let z: i32 = 20;
 let (a, b) = (1, 2);
 let Point { x, y } = point;
 ```
+
 #### `mut`
 
 可变修饰符，允许修改变量或引用。
@@ -390,6 +414,7 @@ fn push_value(vec: &mut Vec<i32>, val: i32) {
     vec.push(val);
 }
 ```
+
 #### `const`
 
 编译期常量，必须显式标注类型。
@@ -402,6 +427,7 @@ const fn square(x: i32) -> i32 {
     x * x
 }
 ```
+
 #### `static`
 
 静态生命周期变量，整个程序运行期间存在。
@@ -418,6 +444,7 @@ unsafe {
     *MUTABLE_STATIC.get() += 1;
 }
 ```
+
 #### `ref`
 
 通过引用绑定，常用于模式匹配。
@@ -430,6 +457,7 @@ match some_value {
     ref r => println!("引用: {:?}", r),
 }
 ```
+
 ### 其他关键字
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -448,6 +476,7 @@ unsafe {
 unsafe trait Sync {}
 unsafe impl Sync for MyType {}
 ```
+
 #### `as`
 
 类型转换和重命名。
@@ -458,6 +487,7 @@ let y: i64 = x as i64;
 
 use std::io::Error as IoError;
 ```
+
 #### `where`
 
 约束泛型参数，使代码更清晰。
@@ -470,6 +500,7 @@ where
     println!("{:?}", value);
 }
 ```
+
 #### `move`
 
 强制闭包获取所有权而非借用。
@@ -480,6 +511,7 @@ let closure = move || {
     println!("{:?}", data);  // 获取所有权
 };
 ```
+
 #### `self` / `Self`
 
 - `self`: 方法的第一个参数，表示实例
@@ -496,6 +528,7 @@ impl Rectangle {
     }
 }
 ```
+
 #### `in`
 
 用于 `for` 循环和可见性修饰。
@@ -504,6 +537,7 @@ impl Rectangle {
 for item in collection { }
 pub(in crate::outer) fn limited_visible() {}
 ```
+
 ---
 
 ## 保留关键字 (Reserved Keywords)
@@ -550,6 +584,7 @@ unsafe {
     let u = IntOrFloat { i: 1 };
 }
 ```
+
 #### `'static`
 
 静态生命周期，是最长的生命周期。
@@ -558,6 +593,7 @@ unsafe {
 let s: &'static str = "Hello, world!";
 fn require_static<T: 'static>(_: T) {}
 ```
+
 #### `macro_rules!`
 
 定义声明式宏。
@@ -568,6 +604,7 @@ macro_rules! say_hello {
     ($name:expr) => { println!("Hello, {}!", $name); };
 }
 ```
+
 ---
 
 ## 按类别分类速查
@@ -695,6 +732,7 @@ Rust 关键字体系
     ├── 布尔值 (true, false)
     └── 空值 (None, Some, Ok, Err 是 enum variant 非关键字)
 ```
+
 ### 模块 6: 反例集
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -714,6 +752,7 @@ println!("{}", r#fn);
 let func = 5;
 let pattern = 6;
 ```
+
 #### 6.2 混淆 `const` 与 `static`
 
 ```rust,ignore
@@ -729,6 +768,7 @@ unsafe {
     (*ARRAY.get())[0] = 42; // 明确使用 unsafe
 }
 ```
+
 #### 6.3 `ref` 绑定误用
 
 ```rust,ignore
@@ -745,6 +785,7 @@ if let Some(ref s) = opt {
     // s 为 &String，不获取所有权
 }
 ```
+
 ### 模块 7: 思维表征
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -767,6 +808,7 @@ if let Some(ref s) = opt {
 ├── 生命周期标注 → 'a ( lifetime 语法 )
 └── 原始指针解引用 → *ptr ( unsafe 内 )
 ```
+
 ### 模块 8: 国际化对齐
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**

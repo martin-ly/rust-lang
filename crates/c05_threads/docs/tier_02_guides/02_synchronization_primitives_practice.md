@@ -137,6 +137,7 @@
 └── Once 一次性初始化
     └── 延迟初始化
 ```
+
 ### 概念矩阵
 
 | 同步原语 | 互斥性 | 读写分离 | 性能       | 适用场景     |
@@ -171,6 +172,7 @@
 │                                                          │
 └──────────────────────────────────────────────────────────┘
 ```
+
 ### 1.2 选择指南
 
 | 场景         | 推荐原语               | 原因             |
@@ -210,6 +212,7 @@ fn main() {
     println!("Result: {}", *counter.lock().unwrap());
 }
 ```
+
 ---
 
 ## 2. Mutex：互斥锁
@@ -242,6 +245,7 @@ fn main() {
     println!("Final data: {:?}", *data.lock().unwrap());
 }
 ```
+
 ### 2.2 处理锁中毒（Poisoned Lock）
 
 当持有锁的线程 panic 时，锁会被"中毒"：
@@ -276,6 +280,7 @@ fn main() {
     println!("Final value: {}", *mutex.lock().unwrap());
 }
 ```
+
 ### 2.3 try_lock 避免阻塞
 
 ```rust
@@ -305,6 +310,7 @@ fn main() {
     t1.join().unwrap();
 }
 ```
+
 ### 2.4 作用域管理避免死锁
 
 ```rust
@@ -336,6 +342,7 @@ fn expensive_operation() {
     std::thread::sleep(std::time::Duration::from_millis(100));
 }
 ```
+
 ### 2.5 实战案例：线程安全计数器
 
 ```rust
@@ -384,6 +391,7 @@ fn main() {
     println!("Final count: {}", counter.get()); // 100000
 }
 ```
+
 ---
 
 ## 3. RwLock：读写锁
@@ -424,6 +432,7 @@ fn main() {
     println!("Final: {:?}", *data.read().unwrap());
 }
 ```
+
 ### 3.2 读写锁的性能优势
 
 ```rust
@@ -489,6 +498,7 @@ fn main() {
     println!("Speedup: {:.2}x", mutex_time as f64 / rwlock_time as f64);
 }
 ```
+
 ### 3.3 try_read 和 try_write
 
 ```rust
@@ -522,6 +532,7 @@ fn main() {
     println!("Write: {}", *w);
 }
 ```
+
 ### 3.4 实战案例：缓存系统
 
 ```rust
@@ -589,6 +600,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 4. Condvar：条件变量
@@ -631,6 +643,7 @@ fn main() {
     waiter.join().unwrap();
 }
 ```
+
 ### 4.2 生产者-消费者模式
 
 ```rust
@@ -696,6 +709,7 @@ fn main() {
     consumer.join().unwrap();
 }
 ```
+
 ### 4.3 等待超时
 
 ```rust
@@ -725,6 +739,7 @@ fn main() {
     waiter.join().unwrap();
 }
 ```
+
 ### 4.4 实战案例：线程池任务队列
 
 ```rust
@@ -815,6 +830,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 5. Barrier：屏障
@@ -851,6 +867,7 @@ fn main() {
     }
 }
 ```
+
 ### 5.2 实战案例：并行算法的同步点
 
 ```rust
@@ -893,6 +910,7 @@ fn main() {
     parallel_matrix_multiply(1000, 4);
 }
 ```
+
 ---
 
 ## 6. Once：一次性初始化
@@ -930,6 +948,7 @@ fn main() {
     }
 }
 ```
+
 ### 6.2 使用 OnceLock（Rust 1.70+）
 
 ```rust
@@ -958,6 +977,7 @@ fn main() {
     }
 }
 ```
+
 ### 6.3 延迟初始化复杂结构
 
 ```rust
@@ -997,6 +1017,7 @@ fn main() {
     println!("Host again: {}", get_config().get("host").unwrap());
 }
 ```
+
 ---
 
 ## 7. 性能对比与选择
@@ -1062,6 +1083,7 @@ fn main() {
     println!("Speedup: {:.2}x", mutex_time as f64 / atomic_time as f64);
 }
 ```
+
 ### 7.2 选择决策树
 
 ```text
@@ -1081,6 +1103,7 @@ fn main() {
             │
             └─ 需要条件等待 ──► Arc<(Mutex<T>, Condvar)>
 ```
+
 ---
 
 ## 8. 最佳实践
@@ -1130,6 +1153,7 @@ fn main() {
     println!("{}", db.good_query("SELECT *"));
 }
 ```
+
 ### 8.2 避免嵌套锁
 
 ```rust
@@ -1163,6 +1187,7 @@ fn main() {
     good_approach(&r1, &r2);
 }
 ```
+
 ### 8.3 使用 parking_lot 提升性能
 
 ```rust
@@ -1192,6 +1217,7 @@ fn main() {
     println!("Final: {}", *mutex.lock());
 }
 ```
+
 ---
 
 ## 9. 常见陷阱
@@ -1228,6 +1254,7 @@ fn main() {
     // t2.join().unwrap();
 }
 ```
+
 ### 9.2 过度同步
 
 ```rust
@@ -1264,6 +1291,7 @@ fn main() {
     println!("{}, {}, {}", info.name, info.age, info.email);
 }
 ```
+
 ---
 
 ## 10. 参考资源

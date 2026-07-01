@@ -162,6 +162,7 @@ fn main() {
     println!("p2: {:?}", p2);
 }
 ```
+
 **说明**:
 
 - **泛型参数**: 使用 `<T>` 声明泛型类型参数
@@ -192,6 +193,7 @@ num: 42, text: hello, flag: true
 p1: (42, "hello")
 p2: (3.14, true)
 ```
+
 ---
 
 ### 示例1.2: 泛型结构体
@@ -289,6 +291,7 @@ fn main() {
     println!("混合后的点: x = {}, y = {}", p3.x, p3.y);
 }
 ```
+
 **说明**:
 
 - **单类型参数**: `Point<T>` 所有字段使用相同类型
@@ -322,6 +325,7 @@ Wrapper: Wrapper { value: 42 }
 
 混合后的点: x = 5, y = c
 ```
+
 ---
 
 ### 示例1.3: 泛型枚举
@@ -433,6 +437,7 @@ fn main() {
     println!("二叉树: {:?}", tree);
 }
 ```
+
 **说明**:
 
 - **`Option<T>`**: 标准库中最常用的泛型枚举
@@ -466,6 +471,7 @@ right.is_right(): true
 
 二叉树: Node { value: 5, left: Node { value: 3, left: Empty, right: Empty }, right: Node { value: 7, left: Empty, right: Empty } }
 ```
+
 ---
 
 ### 示例1.4: Option和Result
@@ -583,6 +589,7 @@ fn main() {
     println!("Ok(None).transpose() = {:?}", y);
 }
 ```
+
 **说明**:
 
 - **map**: 转换 Option/Result 内部的值
@@ -623,6 +630,7 @@ Err("解析错误: invalid digit found in string")
 Ok(Some(5)).transpose() = Some(Ok(5))
 Ok(None).transpose() = None
 ```
+
 ---
 
 ### 示例1.5: 泛型方法
@@ -746,6 +754,7 @@ fn main() {
     println!("交换后: ({}, {})", swapped.first, swapped.second);
 }
 ```
+
 **说明**:
 
 - **泛型impl**: `impl<T>` 为所有T实现通用方法
@@ -777,6 +786,7 @@ fn main() {
 原始: (42, hello)
 交换后: (hello, 42)
 ```
+
 ---
 
 ### 示例1.6: 基础Trait约束
@@ -898,6 +908,7 @@ fn main() {
     process(numbers);
 }
 ```
+
 **说明**:
 
 - **impl Trait**: 简洁的 Trait 约束语法
@@ -948,6 +959,7 @@ Wrapper 包含: Hello
 第一个元素: 3
 最大元素: 9
 ```
+
 ---
 
 ## 🎓 Tier 2: 实践层示例
@@ -1058,6 +1070,7 @@ fn main() {
     println!("  ❌ 无法内联");
 }
 ```
+
 **说明**:
 
 - **静态分派**: 泛型在编译时确定类型，零成本
@@ -1105,6 +1118,7 @@ fn main() {
   ❌ 有虚函数表开销
   ❌ 无法内联
 ```
+
 ---
 
 ### 示例2.2: 关联类型详解
@@ -1284,6 +1298,7 @@ fn main() {
     println!("  ❌ 需要显式指定类型");
 }
 ```
+
 **说明**:
 
 - **关联类型**: 使用 `type Item` 定义
@@ -1329,6 +1344,7 @@ i32 转 String: 42
   ✅ 更灵活
   ❌ 需要显式指定类型
 ```
+
 ---
 
 ### 示例2.3: 泛型与生命周期
@@ -1457,6 +1473,7 @@ fn main() {
     }
 }
 ```
+
 **说明**:
 
 - **生命周期标注**: 泛型函数可能需要生命周期参数
@@ -1494,6 +1511,7 @@ Pair: (10, test)
 
 索引1的值: 2
 ```
+
 ---
 
 ### 示例2.4: 多Trait约束
@@ -1618,6 +1636,7 @@ fn main() {
     }
 }
 ```
+
 **说明**:
 
 - **+ 连接**: 使用 `T: Trait1 + Trait2` 语法
@@ -1661,6 +1680,7 @@ Wrapper(42)
 
 最大值: 9
 ```
+
 ---
 
 ### 示例2.5: Const泛型
@@ -1811,6 +1831,7 @@ fn main() {
     println!("Pop: {:?}", stack.pop());
 }
 ```
+
 **说明**:
 
 - **const 参数**: 使用 `const N: usize` 定义常量泛型
@@ -1850,6 +1871,7 @@ Stack 容量: 5
 Pop: Some(3)
 Pop: Some(2)
 ```
+
 ---
 
 ### 示例2.6: 默认类型参数
@@ -1997,6 +2019,7 @@ fn main() {
     println!("复杂包装: {} - {:?}", complex.primary, complex.secondary);
 }
 ```
+
 **说明**:
 
 - **默认值**: 使用 `T = DefaultType` 语法
@@ -2033,6 +2056,7 @@ ratio: 0.75
 简单包装: 42
 复杂包装: data - Some(123)
 ```
+
 ---
 
 ## 🚀 Tier 3: 高级层示例
@@ -2150,6 +2174,7 @@ fn main() {
     complex_hrtb(|a, b| a == b);
 }
 ```
+
 **说明**:
 
 - **for<'a>**: 对所有生命周期 'a 成立
@@ -2186,6 +2211,7 @@ fn main() {
 比较结果: false
 比较结果: false
 ```
+
 ---
 
 ### 示例3.2: 类型级编程
@@ -2350,6 +2376,7 @@ fn main() {
     println!("  ✅ 类型安全保证");
 }
 ```
+
 **说明**:
 
 - **类型作为值**: 在类型层面表示数据
@@ -2391,6 +2418,7 @@ True AND False = false
   ✅ 零运行时开销
   ✅ 类型安全保证
 ```
+
 ---
 
 ### 示例3.3: 泛型特化模拟
@@ -2534,6 +2562,7 @@ fn main() {
     println!("&str 容器: {}", vec_str.get());
 }
 ```
+
 **输出**:
 
 ```text
@@ -2559,6 +2588,7 @@ fn main() {
 i32 容器: 1
 &str 容器: a
 ```
+
 ---
 
 ### 示例3.4: GAT - 泛型关联类型
@@ -2691,6 +2721,7 @@ fn main() {
     println!("创建成员: {}", member.value);
 }
 ```
+
 **输出**:
 
 ```text
@@ -2718,6 +2749,7 @@ GAT 允许关联类型本身也是泛型的
 
 创建成员: 42
 ```
+
 ---
 
 ### 示例3.5: 类型状态模式
@@ -2910,6 +2942,7 @@ fn main() {
     let _file = file.close();
 }
 ```
+
 **输出**:
 
 ```text
@@ -2938,6 +2971,7 @@ fn main() {
 内容: file content
 关闭文件: Open -> Closed
 ```
+
 ---
 
 ### 示例3.6: 零成本抽象验证
@@ -3107,6 +3141,7 @@ fn main() {
     println!("\n抽象不等于性能损失！");
 }
 ```
+
 **输出**:
 
 ```text
@@ -3162,6 +3197,7 @@ MultiplyTwo(5) = 10
 
 抽象不等于性能损失！
 ```
+
 ---
 
 ## 📝 总结

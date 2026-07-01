@@ -107,6 +107,7 @@ perf top
 # 统计信息
 perf stat ./target/release/my_program
 ```
+
 #### Rust 程序优化
 
 ```rust
@@ -137,6 +138,7 @@ fn main() {
     }
 }
 ```
+
 #### perf 分析输出
 
 ```text
@@ -151,6 +153,7 @@ fn main() {
      8.76%  example   example             [.] alloc::vec::Vec::push
      3.21%  example   libc.so.6           [.] pthread_mutex_lock
 ```
+
 ---
 
 ### 1.2 Valgrind 套件
@@ -170,6 +173,7 @@ valgrind --tool=helgrind ./target/debug/my_program
 # 检测 DRD (数据竞争检测器)
 valgrind --tool=drd ./target/debug/my_program
 ```
+
 #### Cachegrind (缓存分析)
 
 ```bash
@@ -179,6 +183,7 @@ valgrind --tool=cachegrind ./target/release/my_program
 # 可视化结果
 kcachegrind cachegrind.out.12345
 ```
+
 #### Rust 示例
 
 ```rust
@@ -206,6 +211,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ### 1.3 flamegraph 火焰图
@@ -224,6 +230,7 @@ cargo flamegraph --bin my_program
 # 查看火焰图（自动在浏览器打开）
 # flamegraph.svg
 ```
+
 #### Rust 示例1
 
 ```rust
@@ -253,6 +260,7 @@ fn main() {
     println!("Result: {}", *result.lock().unwrap());
 }
 ```
+
 #### 火焰图解读
 
 ```text
@@ -262,6 +270,7 @@ fn main() {
 宽的横条 = 性能热点
 应优先优化
 ```
+
 ---
 
 ### 1.4 Rust 专用工具
@@ -287,10 +296,12 @@ fn criterion_benchmark(c: &mut Criterion) {
 criterion_group!(benches, criterion_benchmark);
 criterion_main!(benches);
 ```
+
 ```bash
 # 运行基准测试
 cargo bench
 ```
+
 #### cargo-bloat
 
 ```bash
@@ -303,6 +314,7 @@ cargo bloat --release
 # 查看 crate 大小
 cargo bloat --release --crates
 ```
+
 #### cargo-asm
 
 ```bash
@@ -312,6 +324,7 @@ cargo install cargo-asm
 # 查看函数汇编
 cargo asm --release my_crate::my_function
 ```
+
 ---
 
 ## 2. CPU Profiling 实战
@@ -351,6 +364,7 @@ fn expensive_work() {
     }
 }
 ```
+
 ---
 
 ### 2.2 插桩式 Profiling
@@ -409,6 +423,7 @@ fn task_b() {
     std::thread::sleep(std::time::Duration::from_micros(200));
 }
 ```
+
 ---
 
 ### 2.3 热点分析
@@ -464,6 +479,7 @@ fn main() {
     println!("Elapsed: {:?}", start.elapsed());
 }
 ```
+
 #### 优化后
 
 ```rust
@@ -485,6 +501,7 @@ fn main() {
     println!("Elapsed: {:?}", start.elapsed());
 }
 ```
+
 ---
 
 ## 3. 内存 Profiling 实战
@@ -512,12 +529,14 @@ fn main() {
     // 应该释放但没释放 10MB
 }
 ```
+
 ```bash
 valgrind --leak-check=full ./target/debug/example
 
 # 输出:
 # ==12345== 10,485,760 bytes in 10 blocks are definitely lost
 ```
+
 ---
 
 ### 3.2 内存分配分析
@@ -547,10 +566,12 @@ fn main() {
     println!("Data len: {}", data.len());
 }
 ```
+
 ```bash
 # 生成堆分析
 jeprof --show_bytes --pdf target/release/example jeprof.out.* > heap.pdf
 ```
+
 ---
 
 ### 3.3 堆分析
@@ -601,6 +622,7 @@ fn main() {
         ALLOCATED.load(Ordering::SeqCst) - DEALLOCATED.load(Ordering::SeqCst));
 }
 ```
+
 ---
 
 ## 4. 锁竞争分析与优化
@@ -670,6 +692,7 @@ fn main() {
     optimized_version();
 }
 ```
+
 ---
 
 ### 4.2 锁竞争可视化
@@ -743,6 +766,7 @@ fn main() {
     println!("Max wait time: {:?}", max_wait);
 }
 ```
+
 ---
 
 ### 4.3 优化策略
@@ -806,6 +830,7 @@ fn main() {
     println!("Done");
 }
 ```
+
 ---
 
 ## 5. 性能回归测试
@@ -853,6 +878,7 @@ fn mutex_benchmark(c: &mut Criterion) {
 criterion_group!(benches, mutex_benchmark);
 criterion_main!(benches);
 ```
+
 ```bash
 # 运行基准测试
 cargo bench
@@ -862,6 +888,7 @@ cargo bench --bench performance -- --save-baseline before
 # ... 修改代码 ...
 cargo bench --bench performance -- --baseline before
 ```
+
 ---
 
 ### 5.2 CI/CD 集成
@@ -902,6 +929,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           auto-push: true
 ```
+
 ---
 
 ### 5.3 性能监控
@@ -986,6 +1014,7 @@ fn main() {
     monitor.report();
 }
 ```
+
 ---
 
 ## 6. 优化迭代流程
@@ -1018,6 +1047,7 @@ fn main() {
 5. 迭代 (Iterate)
    └── 重复 1-4 直到达到目标
 ```
+
 #### 实战检查清单
 
 ```rust
@@ -1069,6 +1099,7 @@ fn main() {
     checklist.report();
 }
 ```
+
 ---
 
 ### 6.2 完整优化案例
@@ -1101,6 +1132,7 @@ fn slow_version() -> Duration {
     start.elapsed()
 }
 ```
+
 #### 优化版本 1：批量操作
 
 ```rust
@@ -1127,6 +1159,7 @@ fn optimized_v1() -> Duration {
     start.elapsed()
 }
 ```
+
 #### 优化版本 2：无锁设计
 
 ```rust
@@ -1163,6 +1196,7 @@ fn optimized_v2() -> Duration {
     start.elapsed()
 }
 ```
+
 #### 性能对比
 
 ```rust
@@ -1181,6 +1215,7 @@ fn main() {
         opt2, slow.as_micros() / opt2.as_micros());
 }
 ```
+
 ---
 
 ## 7. 最佳实践

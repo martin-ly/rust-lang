@@ -75,6 +75,7 @@ cargo install cargo-audit cargo-deny cargo-criterion
 # 运行测试确保环境正常
 cargo test
 ```
+
 #### 贡献流程
 
 1. **Fork 仓库**
@@ -85,6 +86,7 @@ cargo test
    ```bash
    git checkout -b feature/your-feature-name
    ```
+
 3. **开发新功能**
    - 遵循代码规范（见下方）
    - 添加适当的测试
@@ -98,12 +100,14 @@ cargo test
    cargo fmt --check
    cargo audit
    ```
+
 5. **提交更改**
 
    ```bash
    git add .
    git commit -m "feat: 添加新的异步特性示例"
    ```
+
 6. **创建 Pull Request**
    - 推送到您的 Fork
    - 创建 Pull Request 到主仓库
@@ -160,6 +164,7 @@ pub struct AsyncResourceManager {
     // ...
 }
 ````
+
 ### 3. 问题报告
 
 #### 报告 Bug
@@ -239,6 +244,7 @@ crates/c06_async/
 └── benches/              # 基准测试
     └── performance_benchmarks.rs
 ```
+
 ## 开发工具
 
 ### 推荐 IDE 配置
@@ -253,6 +259,7 @@ crates/c06_async/
   "rust-analyzer.rustfmt.extraArgs": ["--edition", "2021"]
 }
 ```
+
 #### IntelliJ IDEA / CLion
 
 - 安装 Rust 插件
@@ -278,6 +285,7 @@ cargo fmt --check                    # 格式化检查
 cargo audit                          # 安全审计
 cargo deny check                     # 许可证检查
 ```
+
 ## 社区准则
 
 ### 行为准则

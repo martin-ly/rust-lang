@@ -115,6 +115,7 @@ graph TB
     style D fill:#f3e5f5
     style E fill:#fce4ec
 ```
+
 ### 无锁算法决策树
 
 ```mermaid
@@ -142,6 +143,7 @@ graph TD
     style Stack fill:#90caf9
     style HashMap fill:#ce93d8
 ```
+
 ---
 
 ## 📊 无锁数据结构多维对比矩阵
@@ -276,6 +278,7 @@ impl AtomicCounter {
     }
 }
 ```
+
 #### 🚀 Rust 1.92.0 性能基准测试（自 Rust 1.90 引入）
 
 ```rust
@@ -353,6 +356,7 @@ fn main() {
              (num_threads * operations_per_thread) as f64 / duration.as_secs_f64() / 1_000_000.0);
 }
 ```
+
 **输出示例**:
 
 ```text
@@ -368,6 +372,7 @@ fn main() {
    耗时: 1.567s
    吞吐量: 5.11M ops/s
 ```
+
 ### 2.2 内存序
 
 #### 2.2.1 内存序类型
@@ -406,6 +411,7 @@ impl MemoryOrderExample {
     }
 }
 ```
+
 ## 3. 无锁队列
 
 ### 3.1 单生产者单消费者队列
@@ -476,6 +482,7 @@ impl<T> SPSCQueue<T> {
     }
 }
 ```
+
 ## 4. 无锁栈
 
 ### 4.1 基本无锁栈
@@ -553,6 +560,7 @@ impl<T> LockFreeStack<T> {
     }
 }
 ```
+
 ## 5. 无锁环形缓冲区
 
 ### 5.1 基本环形缓冲区
@@ -623,6 +631,7 @@ impl<T> RingBuffer<T> {
     }
 }
 ```
+
 ## 6. 无锁哈希表
 
 ### 6.1 链式哈希表
@@ -714,6 +723,7 @@ where
     }
 }
 ```
+
 ## 7. 无锁树结构
 
 ### 7.1 无锁二叉搜索树
@@ -777,6 +787,7 @@ where
     }
 }
 ```
+
 ## 8. 最佳实践
 
 ### 8.1 内存管理
@@ -824,6 +835,7 @@ impl<T> SafeMemoryManager<T> {
     }
 }
 ```
+
 ### 8.2 性能调优
 
 #### 8.2.1 缓存友好的数据结构
@@ -862,6 +874,7 @@ impl CacheFriendlyCounter {
     }
 }
 ```
+
 ---
 
 ## 💡 思维导图：无锁编程决策策略
@@ -916,6 +929,7 @@ mindmap
         指针保护
         复杂但灵活
 ```
+
 ---
 
 ## 📋 快速参考
@@ -948,6 +962,7 @@ counter.compare_exchange(old, new, Ordering::AcqRel, Ordering::Relaxed);
 // 5. SeqCst - 全局顺序一致性
 counter.fetch_add(1, Ordering::SeqCst);
 ```
+
 ### 无锁数据结构选择指南
 
 | 需求             | 推荐结构   | 理由             |
@@ -1018,6 +1033,7 @@ Rust 1.92.0 的无锁编程技术提供了（自 Rust 1.90 引入）：
    // ✅ 正确：最小必要同步
    counter.fetch_add(1, Ordering::Relaxed);
    ```
+
 2. **避免ABA问题**
 
    ```rust
@@ -1027,6 +1043,7 @@ Rust 1.92.0 的无锁编程技术提供了（自 Rust 1.90 引入）：
        version: usize,
    }
    ```
+
 3. **性能优化**
 
    ```rust
@@ -1036,6 +1053,7 @@ Rust 1.92.0 的无锁编程技术提供了（自 Rust 1.90 引入）：
        value: T,
    }
    ```
+
 4. **充分测试**
 
    ```rust
@@ -1046,6 +1064,7 @@ Rust 1.92.0 的无锁编程技术提供了（自 Rust 1.90 引入）：
        // 测试代码...
    }
    ```
+
 ### 性能权衡
 
 ```mermaid
@@ -1064,6 +1083,7 @@ graph LR
     style D fill:#fff59d
     style E fill:#ffab91
 ```
+
 ### 学习路径
 
 1. **基础理解**（2-3天）

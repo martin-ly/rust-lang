@@ -66,6 +66,7 @@ match token {
     _ => skip(),
 }
 ```
+
 **关键限制**: guard 中绑定的变量**不可**在 arm body 外部使用。
 
 **与 let chains 区别**: guard 是 match-arm 级别；let chains (1.88+) 是表达式级别。
@@ -86,6 +87,7 @@ let page_size = cfg_select! {
     _ => 4096_usize,
 };
 ```
+
 **适用场景**: 跨平台常量、条件表达式、特征门控逻辑。
 
 **项目示例**: `crates/c08_algorithms/src/rust_195_features.rs`
@@ -103,6 +105,7 @@ fn make_iter<'a>(s: &'a str) -> impl Iterator<Item = char> + 'a { ... }
 // 2024 Edition: 精确捕获
 fn make_iter<'a>(s: &'a str) -> impl Iterator<Item = char> + use<'a> { ... }
 ```
+
 **优势**: 减少不必要的约束、改善 API 演进兼容性。
 
 **项目示例**: `crates/c02_type_system/src/precise_capturing_guide.rs`
@@ -119,6 +122,7 @@ trait Producer {
     async fn fetch(&self) -> impl Product;  // AFIT
 }
 ```
+
 **项目示例**: `crates/c02_type_system/src/type_system_frontier.rs`
 
 ---
@@ -136,6 +140,7 @@ let counter = AtomicUsize::new(0);
 let new = counter.update(|old| old + 1);  // 无 CAS 循环
 let maybe = counter.try_update(|old| if old < 100 { Some(old + 1) } else { None });
 ```
+
 **项目示例**: `crates/c05_threads/src/rust_195_features.rs`
 
 ---
@@ -149,6 +154,7 @@ let mut vec = vec![1, 2, 3];
 let new_ref: &mut i32 = vec.push_mut(42);
 *new_ref *= 2;  // 立即修改新元素
 ```
+
 **项目示例**: `crates/c08_algorithms/src/rust_195_features.rs`
 
 ---
@@ -164,6 +170,7 @@ let mut deque = VecDeque::new();
 let front = deque.push_front_mut("first");
 *front = "FIRST";
 ```
+
 **项目示例**: `crates/c02_type_system/src/rust_195_features.rs`
 
 ---
@@ -179,6 +186,7 @@ let a = RangeInclusive::new(1, 5);
 let b = RangeInclusive::new(3, 7);
 assert!(a.intersects(&b));
 ```
+
 **项目示例**: `crates/c08_algorithms/src/rust_195_features.rs`
 
 ---
@@ -196,6 +204,7 @@ fn parse_number(s: &str) -> Result<i32, ParseError> {
     s.parse().map_err(|_| ParseError::Invalid)
 }
 ```
+
 **项目示例**: `crates/c07_process/src/rust_195_features.rs`
 
 ---
@@ -208,6 +217,7 @@ fn parse_number(s: &str) -> Result<i32, ParseError> {
 let flag: bool = true;
 let n: u8 = u8::try_from(flag).unwrap();  // 1
 ```
+
 **项目示例**: `crates/c03_control_fn/src/rust_195_features.rs`
 
 ---
@@ -252,6 +262,7 @@ match token {
     _ => skip(),
 }
 ```
+
 ### 嵌套 `cfg!` → `cfg_select!`
 
 ```rust
@@ -267,6 +278,7 @@ let size = cfg_select! {
     _ => 4096,
 };
 ```
+
 ### CAS 循环 → `Atomic::update`
 
 ```rust
@@ -281,6 +293,7 @@ loop {
 // ✅ Atomic::update
 let new = counter.update(|old| old + 1);
 ```
+
 ---
 
 ## 📁 项目内对应示例

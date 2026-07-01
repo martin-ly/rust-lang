@@ -92,6 +92,7 @@ thread::spawn(move |
 
 println!("{:?}", data);  // data 仍然有效
 ```
+
 **关键点**:
 
 - ✅ 线程安全（使用原子操作）
@@ -131,6 +132,7 @@ let r = &mut s;
 r.push_str(" world");
 // 只能有一个可变借用
 ```
+
 **借用规则**:
 
 ```text
@@ -140,6 +142,7 @@ r.push_str(" world");
 
 ❌ 不可变和可变借用不能同时存在
 ```
+
 **关键点**（引用一致性视角）:
 
 - ✅ 不转移资源控制权（逻辑转移，非物理内存）
@@ -168,6 +171,7 @@ let r2 = &mut s;  // ❌ 错误：不可变借用存在时不能可变借用
 
 println!("{}", r1);
 ```
+
 **Rust 1.31+ 的 NLL 改进**:
 
 ```rust
@@ -181,6 +185,7 @@ println!("{} {}", r1, r2);
 let r3 = &mut s;  // ✅ OK：r1 和 r2 不再使用
 println!("{}", r3);
 ```
+
 **关键点**（引用一致性视角）:
 
 - ✅ 编译期逻辑证明，零运行时开销（逻辑证明，非内存检查）
@@ -215,6 +220,7 @@ enum List {
 // Trait 对象
 let obj: Box<dyn ToString> = Box::new(42);
 ```
+
 **关键点**:
 
 - ✅ 独占所有权
@@ -254,6 +260,7 @@ struct Point {
     y: i32,
 }
 ```
+
 **关键点**:
 
 - ✅ 需要显式调用 `.clone()`
@@ -293,6 +300,7 @@ let p1 = Point { x: 1, y: 2 };
 let p2 = p1;  // 复制
 println!("{} {}", p1.x, p2.x);  // ✅ 都有效
 ```
+
 **实现条件**:
 
 - ✅ 所有字段都是 Copy
@@ -330,6 +338,7 @@ fn no_dangle() -> String {
     s  // 转移所有权
 }
 ```
+
 **关键点**（引用一致性视角）:
 
 - ✅ Rust 在编译期通过逻辑证防止悬垂引用（逻辑证明，非内存检查）
@@ -353,6 +362,7 @@ let m = Box::new(String::from("Rust"));
 hello(&m);  // &Box<String> → &String → &str
 // 编译器自动插入解引用
 ```
+
 **示例**:
 
 ```rust
@@ -371,6 +381,7 @@ impl<T> Deref for MyBox<T> {
 let x = MyBox(5);
 assert_eq!(5, *x);  // 调用 deref
 ```
+
 **关键点**:
 
 - ✅ 智能指针的核心 trait
@@ -390,6 +401,7 @@ pub trait Drop {
     fn drop(&mut self);
 }
 ```
+
 **示例**:
 
 ```rust
@@ -413,6 +425,7 @@ fn main() {
 // Created
 // Dropping: my stuff
 ```
+
 **关键点**:
 
 - ✅ RAII (Resource Acquisition Is Initialization)
@@ -424,6 +437,7 @@ fn main() {
 ```rust
 drop(c);  // 显式调用 std::mem::drop
 ```
+
 **深入学习**: [作用域管理](../tier_02_guides/04_scope_management_practice.md)
 
 ---
@@ -454,6 +468,7 @@ impl<'a> ImportantExcerpt<'a> {
     }
 }
 ```
+
 **生命周期省略规则**（引用一致性视角）:
 
 编译器在以下情况自动推导（逻辑推理，非时间追踪）：
@@ -475,6 +490,7 @@ fn first_word<'a>(s: &'a str) -> &'a str {
     &s[..1]
 }
 ```
+
 **特殊生命周期**:
 
 - `'static`: 程序整个生命周期（如字符串字面量）
@@ -506,6 +522,7 @@ let v1 = vec![1, 2, 3];
 let v2 = v1;  // Move
 // v1 不再有效
 ```
+
 **函数调用中的 Move**:
 
 ```rust
@@ -517,6 +534,7 @@ let s = String::from("hello");
 take_ownership(s);  // s 移动到函数
 // s 不再有效
 ```
+
 **返回值中的 Move**:
 
 ```rust
@@ -527,6 +545,7 @@ fn give_ownership() -> String {
 
 let s = give_ownership();  // s 获得所有权
 ```
+
 **关键点**（引用一致性视角）:
 
 - ✅ 默认语义（非 Copy 类型）（逻辑转移，非物理内存）
@@ -565,6 +584,7 @@ for handle in handles {
 println!("Result: {}", *counter.lock().unwrap());
 // 输出: Result: 10
 ```
+
 **关键点**:
 
 - ✅ 保证互斥访问
@@ -599,6 +619,7 @@ println!("{} {}", r1, r2);
 
 let r3 = &mut s;  // ❌ 错误：r1 和 r2 仍在作用域内
 ```
+
 **改进后（NLL）**:
 
 ```rust
@@ -613,6 +634,7 @@ println!("{} {}", r1, r2);
 let r3 = &mut s;  // ✅ OK：r1 和 r2 不再使用
 println!("{}", r3);
 ```
+
 **关键点**（引用一致性视角）:
 
 - ✅ 更灵活的借用规则（逻辑证明，非内存检查）
@@ -636,6 +658,7 @@ println!("{}", r3);
 规则 2: 同一时间只能有一个所有者（排他控制权）
 规则 3: 所有者离开作用域时，资源被自动释放（编译期证明的资源生命周期）
 ```
+
 **示例**:
 
 ```rust
@@ -648,6 +671,7 @@ let s1 = String::from("hello");
 let s2 = s1;  // 所有权转移
 // s1 不再有效，s2 是新所有者
 ```
+
 **优势**（引用一致性视角）:
 
 - ✅ 无需垃圾回收器（编译期证明，非运行时检查）
@@ -682,6 +706,7 @@ fn process_file() -> std::io::Result<()> {
     Ok(())
 }  // file 自动关闭（Drop::drop 被调用）
 ```
+
 **优势**:
 
 - ✅ 自动资源管理
@@ -717,6 +742,7 @@ println!("count: {}", Rc::strong_count(&a));  // 3
 drop(c);
 println!("count: {}", Rc::strong_count(&a));  // 2
 ```
+
 **关键点**:
 
 - ✅ 单线程共享所有权
@@ -750,6 +776,7 @@ let data = RefCell::new(5);
 
 println!("{}", data.borrow());  // 6
 ```
+
 **与普通引用对比**:
 
 | 特性     | 普通引用 | RefCell      |
@@ -775,6 +802,7 @@ let data2 = Rc::clone(&data);
 
 println!("{}", data.borrow());  // 7
 ```
+
 **关键点**:
 
 - ✅ 内部可变性
@@ -807,6 +835,7 @@ let r = &mut y;
 *r += 1;
 println!("{}", y);  // 6
 ```
+
 **引用规则**:
 
 ```text
@@ -816,6 +845,7 @@ println!("{}", y);  // 6
 
 ✅ 引用必须总是有效（不能悬垂）
 ```
+
 **关键点**（引用一致性视角）:
 
 - ✅ 不获取资源控制权（逻辑转移，非物理内存）
@@ -851,6 +881,7 @@ println!("{}", y);  // 6
 
 // s 在这里不可用
 ```
+
 **嵌套作用域**:
 
 ```rust
@@ -864,6 +895,7 @@ let outer = String::from("outer");
 println!("{}", outer);  // ✅ outer 仍有效
 // println!("{}", inner);  // ❌ 编译错误
 ```
+
 **关键点**（引用一致性视角）:
 
 - ✅ 自动资源管理（编译期证明，非运行时检查）
@@ -897,6 +929,7 @@ println!("{}", outer);  // ✅ outer 仍有效
 多线程可变共享 → Arc<Mutex<T>>
 读多写少 → Arc<RwLock<T>>
 ```
+
 **示例**:
 
 ```rust
@@ -910,6 +943,7 @@ let rc2 = Rc::clone(&rc);
 // Arc + Mutex: 跨线程共享可变
 let data = Arc::new(Mutex::new(0));
 ```
+
 **深入学习**: [智能指针系统](../tier_02_guides/05_smart_pointers_practice.md)
 
 ---
@@ -948,6 +982,7 @@ impl Counter {
 let counter = Counter { count: RefCell::new(0) };
 counter.increment();  // ✅ 通过不可变引用修改数据
 ```
+
 **关键点**:
 
 - ✅ 绕过编译时不可变性限制
@@ -985,6 +1020,7 @@ for x in [1, 2, 3, 4, 5].iter() {
     }
 }
 ```
+
 **关键点**:
 
 - ✅ 抽象不牺牲性能

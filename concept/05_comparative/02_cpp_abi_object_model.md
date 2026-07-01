@@ -111,6 +111,7 @@ struct Point {      // C++
 // 内存布局: [x: 8 bytes][y: 8 bytes]
 // 大小: 16 bytes, 对齐: 8 bytes
 ```
+
 ```rust
 #[repr(C)]
 struct Point {      // Rust
@@ -121,6 +122,7 @@ struct Point {      // Rust
 // 大小: 16 bytes, 对齐: 8 bytes
 // 与 C++ POD 完全一致！
 ```
+
 #### 3.1.2 含虚函数的类
 
 ```cpp
@@ -132,6 +134,7 @@ struct Shape {              // C++
 // 内存布局: [vptr: 8 bytes][id: 4 bytes][padding: 4 bytes]
 // 大小: 16 bytes, 对齐: 8 bytes
 ```
+
 **vptr 结构**: 指向 vtable 的指针，位于对象首地址。
 
 **vtable 结构**:
@@ -143,6 +146,7 @@ vtable for Shape:
   [2]: ~Shape()
   [3]: draw() = 0
 ```
+
 #### 3.1.3 多重继承
 
 ```cpp
@@ -153,12 +157,14 @@ struct C : A, B { virtual void fc(); int c; };
 // [A::vptr][A::a][padding][B::vptr][B::b][padding][C::c]
 // 两个 vptr！B 的虚函数通过 B::vptr 调用
 ```
+
 **对象切片（Object Slicing）问题**:
 
 ```cpp
 C c;
 A a = c; // 切片！只复制 A 部分，vptr 指向 A 的 vtable，B 部分丢失
 ```
+
 ### 3.2 Rust 对象模型
 
 #### 3.2.1 `dyn Trait` 的内存布局
@@ -174,6 +180,7 @@ let shape: &dyn Drawable = &circle;
 // 内存表示: [data_ptr: 8 bytes][vtable_ptr: 8 bytes]
 // 大小: 16 bytes（与 C++ 对象不同！）
 ```
+
 **Rust vtable 结构**:
 
 ```
@@ -184,6 +191,7 @@ vtable for dyn Drawable:
   [3]: Drawable::draw
   [4]: Drawable::bounds
 ```
+
 **关键差异**:
 
 | 维度 | C++ 虚函数 | Rust `dyn Trait` |
@@ -204,6 +212,7 @@ fn draw_shape(shape: &dyn Drawable) {
 // 不可能发生对象切片，因为 dyn Trait 不能按值传递
 // fn bad(shape: dyn Drawable) {} // ❌ 编译错误: trait objects must include `dyn`
 ```
+
 > **关键洞察**: Rust 通过禁止 `dyn Trait` 的值类型（必须配合 `&`、`Box` 或 `Rc` 使用），**在类型层面消除了对象切片（Slice）问题**。这是 Rust 设计优于 C++ 的核心工程决策之一。[来源: 💡 原创分析]
 
 ### 3.3 结构体内存布局对比
@@ -221,6 +230,7 @@ struct Padded {
 };
 // 大小: 24 bytes（C++ 默认布局）
 ```
+
 ```rust
 // Rust 默认布局（未指定 repr）
 struct Padded {
@@ -246,6 +256,7 @@ struct Packed {
 }
 // 大小: 10 bytes
 ```
+
 #### 3.3.2 字段重排
 
 | 语言 | 默认行为 | 控制方式 |
@@ -272,6 +283,7 @@ namespace math {
 // N4math3addE: 命名空间 math，函数 add
 // ii: 两个 int 参数
 ```
+
 ### 4.2 Rust 名称修饰
 
 Rust 也使用名称修饰，但格式不同：
@@ -283,6 +295,7 @@ mod math {
 // 修饰后（legacy）: _ZN4math3add17h<hash>E
 // 修饰后（v0，Rust 1.37+）: _RNvC<crate_hash>4math3add
 ```
+
 **关键差异**:
 
 - C++ 修饰名依赖参数类型（支持重载）
@@ -305,6 +318,7 @@ std::variant<int, float, std::string> value;
 // 大小: max(sizeof(int), sizeof(float), sizeof(string)) + tag
 // 通常: 32 bytes + 1 byte tag + padding = 40 bytes
 ```
+
 ### 5.2 Rust `enum`
 
 ```rust
@@ -325,6 +339,7 @@ enum Value {
 // 布局: [tag: 1][padding: 3][payload: 24][padding: 4]
 // 注意: String 的 24 bytes 包含 (ptr, len, cap)
 ```
+
 **关键差异**:
 
 | 维度 | C++ `std::variant` | Rust `enum` |
@@ -357,6 +372,7 @@ struct BigData {
     BigData& operator=(BigData&& other) noexcept { ... }
 };
 ```
+
 **ABI 问题**: C++ 的移动构造在 ABI 层面往往通过**拷贝省略（copy elision）**实现，而非真正的"移动"指令。编译器优化后，可能根本不调用移动构造函数。
 
 ### 6.2 Rust 移动与 ABI
@@ -377,6 +393,7 @@ fn main() {
                 // 编译器: d 被标记为 moved-from
 }
 ```
+
 **ABI 差异**:
 
 | 维度 | C++ Move | Rust Move |
@@ -410,6 +427,7 @@ ABI 要求:
   - 每个栈帧包含 unwind 元数据
   - 二进制体积增加 10-30%
 ```
+
 ### 7.2 Rust Panic ABI
 
 Rust 的 panic 有两种模式：
@@ -424,6 +442,7 @@ Rust 的 panic 有两种模式：
 [profile.release]
 panic = "abort"  // 二进制体积更小，无栈展开开销
 ```
+
 **关键差异**:
 
 | 维度 | C++ 异常 | Rust panic |
@@ -452,6 +471,7 @@ pub extern "C" fn get_point() -> Point {
     Point { x: 1.0, y: 2.0 }
 }
 ```
+
 ```cpp
 // C++ 端
 struct Point {
@@ -466,6 +486,7 @@ int main() {
     // 但如果 Rust 编译器重排字段（未来版本可能），p.x 和 p.y 将错误！
 }
 ```
+
 > **修正**: Rust 端必须使用 `#[repr(C)]`：
 >
 > ```rust
@@ -486,6 +507,7 @@ fn niche_optimization() {
     // std::optional<const int*> 的大小通常 > sizeof(int*)
 }
 ```
+
 ### 8.3 边界测试：dyn Trait 胖指针的 FFI 传递
 
 ```rust,ignore
@@ -502,6 +524,7 @@ pub struct CDrawable {
     vtable: *const c_void,
 }
 ```
+
 ---
 
 ## 九、跨语言 ABI 兼容性矩阵
@@ -559,6 +582,7 @@ fn use_both(obj: &(dyn Drawable + Clickable)) {
     obj.click();
 }
 ```
+
 > **C++ 对比**: C++ 支持多重继承，`class Button : public Drawable, public Clickable` 可直接创建包含两个基类子对象的对象。Rust 的 trait object（`dyn Trait`）只能包含一个"主 trait"，因为 vtable 只能存储一个主 trait 的方法指针。多 trait 组合需通过泛型（Generics）（`T: Drawable + Clickable`）或创建新的组合 trait（`trait Interactive: Drawable + Clickable {}`）。这与 C++ 的虚继承和菱形继承问题形成对比——Rust 的设计消除了 vtable 布局的复杂性，但限制了动态分发的灵活性。来源: [Rust Reference]
 
 ### 10.2 边界测试：C++ 的隐式构造 vs Rust 的显式构造（编译错误）
@@ -580,6 +604,7 @@ fn fixed() {
     let p = Point { x: 1, y: 2 }; // ✅ 显式构造
 }
 ```
+
 > **C++ 对比**: C++ 支持隐式构造函数（`Point(int x) : x(x), y(0) {}`），允许 `Point p = 5;` 这样的代码。这可能导致意外转换和性能问题（临时对象）。Rust 禁止隐式构造——必须显式写出字段名或使用构造函数函数。这消除了 C++ 中常见的"unexpected implicit conversion" bug，但增加了样板代码。Rust 的 `From`/`Into` trait 提供显式、可追踪的类型转换，编译器拒绝未实现的转换。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：C++ 虚函数表与 Rust trait 对象的 ABI 差异（运行时崩溃）
@@ -608,6 +633,7 @@ fn main() {
     // 但若尝试在 Rust 中手动解引用 vtable，布局不匹配导致崩溃
 }
 ```
+
 > **修正**: C++ 的虚函数表（vtable）和 Rust 的 trait 对象（`dyn Trait`）在概念上相似（动态分发），但**ABI 不兼容**。C++ 的 vtable 通常包含：1) type_info 指针（RTTI）；2) 虚析构函数；3) 虚函数指针。Rust 的 vtable 包含：1) drop 函数指针；2) 大小和对齐；3) trait 方法指针。布局不同，不能直接互操作。跨语言虚函数调用必须通过 C ABI（函数指针）或 `cxx` crate 的桥接层。这与 COM（Windows 的组件对象模型，定义了跨语言 vtable 标准）或 Swift 的 witness table（与 Rust 的 vtable 类似但不兼容）类似——语言间的动态分发需要显式适配层。Rust 的 `cbindgen` 生成 C 头文件时，不导出 trait 对象，只导出 `#[repr(C)]` struct 和函数指针。[来源: [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)] · [来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)]
 
 ### 10.4 边界测试：C++ 的 RAII 与 Rust 的 Drop 顺序差异（运行时 UB）
@@ -638,6 +664,7 @@ fn main() {
     // 但若涉及依赖（inner2 的 drop 依赖 inner1），两者都可能失败
 }
 ```
+
 > **修正**: Rust 和 C++ 的析构顺序相同：struct 的字段按**声明顺序的逆序**析构（最后声明的先析构），局部变量按声明顺序的逆序析构。但**依赖管理**不同：C++ 允许在析构函数中访问其他字段（通过 `this` 指针），Rust 的 `Drop` 只能访问自身字段。若 `inner2` 的 drop 逻辑需要 `inner1` 的数据，C++ 中可能侥幸成功（若 `inner1` 尚未析构），Rust 中必然失败（`inner1` 已析构，或 borrow checker 阻止访问）。这是 Rust 更严格的安全保证：drop 必须是自包含的，不能依赖其他字段的生命周期（Lifetimes）。这与 C++ 的"析构函数可做任何事"（包括访问已析构的成员，UB 但常见）不同——Rust 的 borrow checker 在 drop 边界上同样严格。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)] · [来源: [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)]
 
 ### 10.3 边界测试：C++ 的虚函数表与 Rust trait object 的内存布局差异（ABI 不兼容）
@@ -664,6 +691,7 @@ fn main() {
     // 直接 FFI 传递 trait object 到 C++ 不可行
 }
 ```
+
 > **修正**: Rust trait object（`dyn Trait`）的内存布局：**fat pointer** = 数据指针 + vtable 指针。C++ 虚函数：**单指针** = 对象指针（对象开头含 vptr）。两者不兼容：1) Rust 的 vtable 是独立的（对象外），C++ 的 vtable 指针在对象内；2) Rust 的 vtable 包含 drop、size、align 和方法指针，C++ 的 vtable 只含虚函数指针；3) 多重继承时 C++ 有多个 vptr，Rust 无多重继承（单继承 + trait）。跨语言互操作：1) C 接口（`extern "C"`）+ 手动 vtable；2) `cxx` crate（自动生成安全的 C++ 绑定）；3) `cbindgen`（生成 C 头文件）。这与 COM（Windows 的接口虚表，与 Rust 类似）或 Go 的 cgo（自动包装，但性能开销）不同——Rust 的 FFI 是零成本但需理解 ABI 差异。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)] · [来源: [cxx crate](https://cxx.rs/)]
 
 ---

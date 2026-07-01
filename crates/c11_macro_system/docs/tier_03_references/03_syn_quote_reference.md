@@ -79,6 +79,7 @@ syn = { version = "2.0", features = ["full", "extra-traits"] }
 # - "printing": 打印 trait
 # - "extra-traits": Debug/Eq/PartialEq
 ```
+
 ---
 
 ### 1.3 基本使用
@@ -104,6 +105,7 @@ pub fn my_trait(input: TokenStream) -> TokenStream {
     }.into()
 }
 ```
+
 ---
 
 ## 2. syn 解析 API
@@ -135,6 +137,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
     // ...
 }
 ```
+
 ---
 
 ### 2.2 DeriveInput
@@ -154,6 +157,7 @@ pub enum Data {
     Union(DataUnion),
 }
 ```
+
 **示例**:
 
 ```rust
@@ -199,6 +203,7 @@ pub fn my_trait(input: TokenStream) -> TokenStream {
     TokenStream::new()
 }
 ```
+
 ---
 
 ### 2.3 ItemFn
@@ -218,6 +223,7 @@ pub struct Signature {
     // ...
 }
 ```
+
 **示例**:
 
 ```rust
@@ -243,6 +249,7 @@ pub fn log_calls(_attr: TokenStream, item: TokenStream) -> TokenStream {
     quote::quote!(#func).into()
 }
 ```
+
 ---
 
 ### 2.4 自定义解析
@@ -283,6 +290,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 
 // 使用: my_macro!(FOO = 42);
 ```
+
 ---
 
 ## 3. syn 数据结构
@@ -299,6 +307,7 @@ pub enum Type {
     // ... 更多
 }
 ```
+
 **示例**:
 
 ```rust
@@ -320,6 +329,7 @@ fn get_inner_type(ty: &Type) -> Option<&Type> {
     None
 }
 ```
+
 ---
 
 ### 3.2 表达式 (Expr)
@@ -333,6 +343,7 @@ pub enum Expr {
     // ... 更多
 }
 ```
+
 ---
 
 ### 3.3 模式 (Pat)
@@ -345,6 +356,7 @@ pub enum Pat {
     // ... 更多
 }
 ```
+
 ---
 
 ### 3.4 路径 (Path)
@@ -359,6 +371,7 @@ pub struct PathSegment {
     pub arguments: PathArguments,
 }
 ```
+
 **示例**:
 
 ```rust
@@ -371,6 +384,7 @@ let path: Path = syn::parse_quote!(std::vec::Vec);
 let last_segment = path.segments.last().unwrap();
 assert_eq!(last_segment.ident, "Vec");
 ```
+
 ---
 
 ## 4. syn 属性处理
@@ -403,6 +417,7 @@ fn parse_attributes(attrs: &[Attribute]) {
     }
 }
 ```
+
 ---
 
 ### 4.2 NestedMeta
@@ -435,6 +450,7 @@ fn parse_derive_helper(attr: &Attribute) -> syn::Result<()> {
     Ok(())
 }
 ```
+
 ---
 
 ### 4.3 自定义属性参数
@@ -466,6 +482,7 @@ pub fn my_attr(attr: TokenStream, item: TokenStream) -> TokenStream {
 
 // 使用: #[my_attr(name = "value")]
 ```
+
 ---
 
 ## 5. quote 库概述
@@ -497,6 +514,7 @@ let expanded = quote! {
 
 // expanded 是 proc_macro2::TokenStream
 ```
+
 ---
 
 ## 6. quote! 宏详解
@@ -521,6 +539,7 @@ let output = quote! {
 //     value: i32,
 // }
 ```
+
 ---
 
 ### 6.2 重复 (#(...)\*)
@@ -547,6 +566,7 @@ let output = quote! {
 //     field3: bool
 // }
 ```
+
 **更复杂的重复**:
 
 ```rust
@@ -559,6 +579,7 @@ let output = quote! {
 
 // 结果: (let x: i32, let y: f64, let z: String)
 ```
+
 ---
 
 ### 6.3 条件生成
@@ -581,6 +602,7 @@ let output = quote! {
 
 // 结果: pub struct MyStruct { field: i32, }
 ```
+
 ---
 
 ## 7. quote_spanned
@@ -601,6 +623,7 @@ let expanded = quote_spanned! {field_span=>
 
 // 错误将指向原始 field 位置
 ```
+
 ---
 
 ### 7.2 错误位置
@@ -626,6 +649,7 @@ fn generate_impl(input: &syn::DeriveInput) -> proc_macro2::TokenStream {
     }
 }
 ```
+
 ---
 
 ## 8. ToTokens trait
@@ -657,6 +681,7 @@ let output = quote! {
     #my_type
 };
 ```
+
 ---
 
 ### 8.2 自定义类型转换
@@ -684,6 +709,7 @@ impl ToTokens for Config {
     }
 }
 ```
+
 ---
 
 ## 9. 常见模式
@@ -713,6 +739,7 @@ pub fn derive_my_trait(input: TokenStream) -> TokenStream {
     TokenStream::from(expanded)
 }
 ```
+
 ---
 
 ### 9.2 属性宏模式
@@ -742,6 +769,7 @@ pub fn my_attribute(_attr: TokenStream, item: TokenStream) -> TokenStream {
     TokenStream::from(expanded)
 }
 ```
+
 ---
 
 ### 9.3 函数宏模式
@@ -771,6 +799,7 @@ pub fn create_struct(input: TokenStream) -> TokenStream {
     TokenStream::from(expanded)
 }
 ```
+
 ---
 
 ## 10. 最佳实践
@@ -803,6 +832,7 @@ pub fn my_trait(input: TokenStream) -> TokenStream {
     TokenStream::new()
 }
 ```
+
 ---
 
 ### 10.2 性能优化
@@ -819,6 +849,7 @@ let output = items.iter()
     .map(|item| quote! { #item })
     .collect::<TokenStream>();
 ```
+
 ---
 
 ### 10.3 可测试性
@@ -862,6 +893,7 @@ mod tests {
     }
 }
 ```
+
 ---
 
 **相关文档**:

@@ -97,6 +97,7 @@ const fn compute<T: Add>(a: T, b: T) -> T {
     a.add(&b)  // ❌ 编译错误: 不能在 const fn 中调用 Trait 方法
 }
 ```
+
 > **核心痛点**:
 >
 > 1. `const fn` 的泛型参数只能使用**内建操作**（`+`, `-`, `*` 等），无法使用**抽象 Trait 接口**
@@ -124,6 +125,7 @@ graph TD
         F -->|"编译期调用"| I["无副作用 + 确定性"]
     end
 ```
+
 > **认知功能**: 此图展示 `const impl` 解决的核心问题——通过 `~const` 限定和 `const impl` 标记，将 Trait 方法调用引入常量上下文。
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **使用建议**: 对于需要在 `const fn` 中使用的 Trait，使用 `const impl` 实现；对于仅运行时（Runtime）使用的 Trait，保持普通 impl。
@@ -151,6 +153,7 @@ graph TD
   - T: ~const Add → T 在**编译期**也实现了 Add（即 const impl）
   - ~const 是"可选的 const"——如果 T 有 const impl，则在 const 上下文可用
 ```
+
 > **效果系统视角**: `~const` 是 Rust 向**显式效果追踪**迈出的第一步。未来可能扩展为 `~async`、`~unsafe` 等更通用的效果限定。
 > [来源: [Effects System Preview](04_effects_system.md)]
 
@@ -175,6 +178,7 @@ graph TD
   // 含义: 如果一个类型要实现 const Display，它必须也实现 const Debug
   //       但可以实现普通 Display 而不要求 const Debug
 ```
+
 > **技术要点**: `~const` 在 supertrait 约束中的含义是"如果在此 const 上下文中使用，则要求 const 版本"。这允许 Trait 层次结构在 const 和非 const 场景中复用。
 > [来源: [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html)]
 
@@ -215,6 +219,7 @@ graph TD
 ├── 方案: 默认非 const，显式 opt-in（const impl）
 └── 影响: 库作者需显式标记哪些 impl 支持编译期使用
 ```
+
 > **实现状态**: 截至 Rust 1.95+，`const_trait_impl` 在 nightly 可用，但语法和语义仍在演进。核心挑战是设计一个**不破坏现有代码**的迁移路径。
 > [来源: [Tracking Issue #67792](https://github.com/rust-lang/rust/issues/67792)]
 
@@ -238,6 +243,7 @@ graph TD
 ├── 优势: 零运行时开销，编译期预计算
 └── 示例: const 配置解析、编译期路由表生成
 ```
+
 > **工程意义**: Const Trait Impl 使 Rust 的**编译期编程**能力接近 C++ 模板元编程，但保持类型安全和可读性。
 > [来源: [Const Eval Working Group](https://github.com/rust-lang/const-eval)]
 
@@ -262,6 +268,7 @@ graph TD
     style FALSE1 fill:#ffebee
     style FALSE2 fill:#ffebee
 ```
+
 > **认知功能**: 此决策树帮助判断一个 Trait 是否适合提供 const impl。核心判断标准是**纯函数性**和**运行时独立性**。
 > **使用建议**: 数学运算、比较、拷贝等纯函数 Trait 优先 const impl；涉及 IO、随机数、全局状态的 Trait 不应 const impl。
 > **关键洞察**: `const` 在 Rust 中不仅是"编译期可执行"，更是"无副作用 + 确定性"的语义保证。这与函数式编程中的**纯函数**概念一致。
@@ -295,6 +302,7 @@ graph TD
 ├── 无限循环或复杂递归会在编译期被中断
 └── 诊断: 编译器提供 CTFE 回溯信息
 ```
+
 > **边界要点**: Const Trait Impl 的边界反映了 Rust 对**编译期计算**的保守态度——保证求值的终止性和确定性，宁可限制表达能力也不引入编译期非确定性。
 > [来源: [Const Eval Working Group — Limitations](https://github.com/rust-lang/const-eval)]
 
@@ -388,6 +396,7 @@ fn main() {
     println!("{}, {}", ORIGIN.x, ORIGIN.y);
 }
 ```
+
 > **修正**:
 > 在 const 上下文中（`const` 变量、`static` 变量、数组长度、`match` 分支守卫），只能调用 `const fn`。
 > 普通 `fn` 可能包含堆分配、I/O、panic 等运行时才允许的操作，因此不能在编译期执行。
@@ -409,6 +418,7 @@ const fn process<T: Compute>(x: T) -> i32 {
     x.compute()
 }
 ```
+
 > **修正**:
 > 在 `const trait impl` 之前，`const fn` 不能调用 trait 方法，因为无法保证实现是 const 的。
 > `const trait impl` 引入 `~const Trait` bound（"maybe const"）：`fn process<T: ~const Compute>(x: T) -> i32` 表示 `T` 可以是 const 或非 const 实现，但仅在 const 上下文中要求 const。
@@ -433,6 +443,7 @@ const fn sum<T: ~const Add>(a: T, b: T) -> T {
 // impl Add for i32 { fn add(&self, other: &Self) -> Self { self + other } }
 // const X: i32 = sum(1, 2); // 若 i32 的 Add 不是 const impl
 ```
+
 > **修正**:
 > `~const Trait`（"maybe const"）bound 是 `const trait impl` 的关键语法：它表示"此泛型参数可以是 const 或非 const 实现，但在 const 上下文中要求 const"。
 > 这增加了类型系统的维度：trait bound 现在需考虑"const 性"（constness）。
@@ -462,6 +473,7 @@ impl const ConstDefault for i32 {
 // 泛型约束: T: ~const ConstDefault
 // ~const 在 2024 edition 中语义仍在演进
 ```
+
 > **修正**:
 >
 > `const trait impl`（[RFC 2632](https://github.com/rust-lang/rfcs/pull/2632)）允许 trait 方法在 const 上下文中调用，
@@ -501,6 +513,7 @@ fn main() {
     let _x: i32 = use_const();
 }
 ```
+
 > **修正**:
 >
 > `~const`（"maybe const"）是 `const trait impl` 的关键语法：表示"若类型实现 const trait，则此函数可在 const 上下文中调用"。

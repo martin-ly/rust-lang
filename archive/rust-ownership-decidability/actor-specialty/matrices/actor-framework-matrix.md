@@ -25,7 +25,6 @@
   - [矩阵8: 监督策略对比](#矩阵8-监督策略对比)
   - [快速选择决策表](#快速选择决策表)
   - [性能基准参考](#性能基准参考)
-<a id="覆盖框架-actix-bastion-coerce-xtra-heph-stakker"></a>
   - [**覆盖框架**: Actix, Bastion, coerce, Xtra, Heph, Stakker](#覆盖框架-actix-bastion-coerce-xtra-heph-stakker)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)

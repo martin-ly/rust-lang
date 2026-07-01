@@ -32,12 +32,14 @@ let s1 = String::from("hello");
 let s2 = s1;  // 所有权转移
 // s1 不能再使用
 ```
+
 ### 2. 克隆
 
 ```rust
 let s1 = String::from("hello");
 let s2 = s1.clone();  // 深拷贝
 ```
+
 ### 3. 借用
 
 ```rust
@@ -45,6 +47,7 @@ fn calculate_length(s: &String) -> usize {
     s.len()
 }
 ```
+
 ### 4. 可变借用
 
 ```rust
@@ -52,6 +55,7 @@ fn change(s: &mut String) {
     s.push_str(" world");
 }
 ```
+
 ---
 
 ## 📝 生命周期标注
@@ -67,6 +71,7 @@ struct ImportantExcerpt<'a> {
     part: &'a str,
 }
 ```
+
 ---
 
 ## 🎯 智能指针选择

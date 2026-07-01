@@ -113,6 +113,7 @@
   │ 多态             │ 运行时动态分发  │ 静态/动态可选     │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **认知功能**: Ruby 和 Rust 代表**类型系统（Type System）的两个极端**——Ruby 将类型检查推迟到运行时（Runtime）以换取灵活性，Rust 在编译期完成所有检查以换取性能和安全性。
 > [来源: [Wikipedia — Duck Typing](https://en.wikipedia.org/wiki/Duck_typing)]
 
@@ -149,6 +150,7 @@
   │ 开发者负担      │ 无              │ 中（学习曲线）    │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **内存洞察**: Ruby 的 **GC 简化开发**，Rust 的 **所有权（Ownership）提供可预测性**——选择取决于应用场景对延迟和吞吐量的要求。
 > [来源: [Ruby GC Guide](https://tenderlovemaking.com/2009/12/18/writing-ruby-c-extensions-part-1/)]
 
@@ -202,6 +204,7 @@
   ├── 性能无损耗
   └── 类型安全
 ```
+
 > **元编程洞察**: Ruby 的 **运行时元编程**使 DSL 极其灵活，Rust 的 **编译期元编程**使 DSL 类型安全——两种哲学各有最佳应用场景。
 > [来源: [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html)]
 
@@ -239,6 +242,7 @@ Web 框架对比:
   │ 数据库迁移      │ 内置强大         │ 依赖外部 crate   │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **Web 洞察**: Ruby on Rails 仍是**快速原型和CRUD应用**的王者，Rust 框架更适合**高并发、低延迟**场景。
 > [来源: [Rails Guides](https://guides.rubyonrails.org/)]
 
@@ -274,6 +278,7 @@ Web 框架对比:
   ├── Rust: 精确控制内存布局
   └── 差距同样显著
 ```
+
 > **性能洞察**: Rust 比 Ruby **快 10-100 倍**——但这只在**计算密集型**场景重要。IO 密集型场景差距缩小。
 > [来源: [The Computer Language Benchmarks Game](https://benchmarksgame-team.pages.debian.net/benchmarksgame/)]
 
@@ -307,6 +312,7 @@ Web 框架对比:
   ├── 通过 FFI 或微服务集成
   └── 例如: Shopify 使用 Rust 处理关键路径
 ```
+
 > **速度洞察**: **"开发速度"和"执行速度"不是零和**——选择取决于产品阶段和性能需求。
 > [来源: [Shopify — Rust at Scale](https://shopify.engineering/shopify-rust-systems-programming)]
 
@@ -344,6 +350,7 @@ Rust + Ruby 的互补模式:
   ├── GitHub: Ruby on Rails + Go/Rust 服务
   └── Stripe: Ruby + 内部 Rust 工具
 ```
+
 > **互补洞察**: **Rust 和 Ruby 不是竞争关系**——在大型系统中，它们可以协同工作，各自发挥优势。
 > [来源: [Rust in Production](https://www.rust-lang.org/)]
 
@@ -367,6 +374,7 @@ graph TD
     style RUBY fill:#c8e6c9
     style EITHER fill:#fff3e0
 ```
+
 > **认知功能**: Rust 和 Ruby **服务于不同的需求谱系**——取代不是目标，**选择合适工具**才是。
 > [来源: [Rust Design FAQ](https://doc.rust-lang.org/rustc/what-is-rustc.html)]
 
@@ -406,6 +414,7 @@ graph TD
 ├── 需要不同的设计思路
 └── 缓解: 接受不同范式
 ```
+
 > **边界要点**: Rust vs Ruby 的边界主要与**学习曲线**、**生态成熟度**、**调试**、**部署**和**元编程**相关。
 > [来源: [Rust Learning Curve](https://learning-rust.github.io/)]
 
@@ -450,6 +459,7 @@ graph TD
   ✅ 使用 Result 和 ? 传播错误
      // Rust 的错误处理更严格
 ```
+
 > **陷阱总结**: Rust vs Ruby 的陷阱主要与**风格模仿**、**学习期望**、**过度优化**、**FFI 开销**和**错误处理（Error Handling）**相关。
 > [来源: [Rust FFI Guide](https://doc.rust-lang.org/nomicon/ffi.html)]
 
@@ -475,6 +485,7 @@ fn main() {
     println!("{}", msg);
 }
 ```
+
 ### 编译验证示例
 
 ```rust
@@ -488,6 +499,7 @@ fn main() {
     println!("{:?}", doubled);
 }
 ```
+
 ```rust
 fn main() {
     let mut sum = 0;
@@ -497,6 +509,7 @@ fn main() {
     println!("{}", sum);
 }
 ```
+
 ## 相关概念文件
 
 - [Type System](../01_foundation/04_type_system.md) — 类型系统（Type System）
@@ -553,6 +566,7 @@ fn print_length_fixed<T: HasLength>(x: T) {
     println!("{}", x.len()); // ✅ T 满足 HasLength
 }
 ```
+
 > **Ruby 对比**: Ruby 使用 duck typing——`x.len` 在运行时检查 `x` 是否有 `len` 方法，有则调用，无则抛出 `NoMethodError`。Rust 在编译期通过 trait bound 检查类型是否实现所需方法。Ruby 的灵活性允许更自由的元编程，但错误延迟到运行时；Rust 的严格性在编译期捕获错误，但要求预先定义接口。这与 Go 的隐式接口（structural typing）也不同——Rust 是 nominal typing，必须显式 `impl Trait for Type`。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：Ruby 的 open classes 与 Rust 的孤儿规则（编译错误）
@@ -570,6 +584,7 @@ impl Greet for String {
     }
 }
 ```
+
 > **Ruby 对比**: Ruby 的 open classes 允许在运行时修改任何类：`class String; def greet; ...; end; end`。Rust 的**孤儿规则（Orphan Rule）**（orphan rules）禁止为外部 crate 的类型实现外部 crate 的 trait——这避免了 impl 冲突（两个 crate 为同一类型实现同一 trait）。Rust 允许为外部类型实现本地 trait，或为本地类型实现外部 trait，但不能同时为外部。这与 C# 的扩展方法、Swift 的 extension 不同——Rust 优先考虑类型安全和社会化代码组织，牺牲了部分扩展灵活性。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.3 边界测试：Ruby 的 duck typing 与 Rust 的 trait bound（编译错误）
@@ -597,6 +612,7 @@ fn main() {
     // make_it_quack(Dog);
 }
 ```
+
 > **修正**: Ruby 的**鸭子类型**（duck typing）："如果它走起来像鸭子，叫起来像鸭子，那它就是鸭子"。`make_it_quack(dog)` 在运行时才检查 `dog.quack` 是否存在，不存在则抛 `NoMethodError`。Rust 的**静态分发**要求编译期证明类型实现 trait：`Dog` 未 `impl Quacks for Dog`，因此不能传入 `make_it_quack`。这是编译期 vs 运行期的根本差异：Rust 在编译期拒绝错误程序，Ruby 允许错误程序运行直到触发错误。Ruby 的优势：快速原型、灵活元编程。Rust 的优势：编译期保证、零成本抽象（Zero-Cost Abstraction）、IDE 支持（自动补全、重构）。这与 Go 的隐式接口（类似鸭子类型，但编译期检查）或 Python 的鸭子类型（运行期检查）不同——Rust 的 trait 是名义化的、编译期检查的契约。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html)] · [来源: [Duck Typing](https://en.wikipedia.org/wiki/Duck_typing)]
 
 ### 10.4 边界测试：Ruby 的 open classes 与 Rust 的孤儿规则（编译错误）
@@ -615,6 +631,7 @@ fn main() {
     // 这是为了防止不同 crate 对同一类型+trait 组合提供冲突实现
 }
 ```
+
 > **修正**: Ruby 的**开放类**（open classes）允许运行时修改任何类，包括标准库类。这提供了极大的灵活性（DSL、monkey patching），但也导致命名冲突和意外行为（两个 gem 为 `String` 添加同名方法）。Rust 的**孤儿规则**（orphan rule）禁止为外部类型实现外部 trait：至少类型或 trait 之一是本地定义的。这确保了 trait 实现的唯一性：给定 `(类型, trait)` 组合，全局只有一个实现。需要为外部类型扩展功能时，使用**newtype 模式**（`struct MyString(String)`）或**trait 包装**（定义本地 trait，为外部类型实现）。这与 Haskell 的 orphan instance（同样禁止，但可通过模块（Module）系统规避）或 Swift 的 extension（可为任何类型添加方法，但 protocol conformance 有类似限制）类似——Rust 的孤儿规则是全局一致性（Coherence）的保证。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html)] · [来源: [Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)]
 
 ### 10.3 边界测试：Ruby 的开放类与 Rust 的孤儿规则冲突（编译错误）
@@ -633,6 +650,7 @@ fn main() {
     "world".to_string().greet();
 }
 ```
+
 > **修正**: Rust 的**孤儿规则（Orphan Rule）**（orphan rules）要求：为类型 `T` 实现 trait `Trait` 时，`T` 或 `Trait` 至少有一个定义在当前 crate 中。这防止了：1) 两个 crate 为同一类型实现同一 trait（冲突实现）；2) 远程 crate 的类型被意外添加行为。Ruby 的**开放类**（open classes）允许任意扩展：`class String; def greet; ...; end; end`。Rust 的替代方案：1) **newtype 模式**：`struct MyString(String); impl Greet for MyString`；2) **wrapper trait**：`trait StringExt { fn greet(&self); } impl StringExt for String`。这与 Haskell 的孤儿实例（允许但警告，或需 `{-# OVERLAPPABLE #-}`）或 Swift 的 extension（允许为外部类型添加 protocol 实现，但需导入）不同——Rust 的孤儿规则在编译期强制执行，避免链接期冲突。[来源: [Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html)]
 
 ## 嵌入式测验（Embedded Quiz）

@@ -73,6 +73,7 @@ fn main() {
     println!("{}", s2); // 正确
 }
 ```
+
 **相关**: [01_theory/06_type_system_theory.md](tier_04_advanced/06_type_system_theory.md)
 
 ---
@@ -105,6 +106,7 @@ let s1 = String::from("hello");
 let s2 = s1; // 移动
 // println!("{}", s1); // 错误
 ```
+
 **相关**: [02_core/01_ownership_quick_start.md](tier_02_guides/01_ownership_quick_start.md)
 
 ---
@@ -135,6 +137,7 @@ let mut s = String::from("hello");
 let r1 = &s;
 let r2 = &mut s; // 错误
 ```
+
 **相关**: [02_core/02_borrowing_practice_guide.md](tier_02_guides/02_borrowing_practice_guide.md)
 
 ---
@@ -154,6 +157,7 @@ s.push_str(" world"); // 错误
 let mut s = String::from("hello");
 s.push_str(" world");
 ```
+
 **原因2: 已有不可变借用**:
 
 ```rust
@@ -170,6 +174,7 @@ let mut s = String::from("hello");
 } // r作用域结束
 s.push_str(" world");
 ```
+
 **原因3: 多个可变借用**:
 
 ```rust
@@ -187,6 +192,7 @@ let mut s = String::from("hello");
 let r2 = &mut s;
 r2.push_str("!");
 ```
+
 **相关**: [05_practice/03_common_pitfalls.md](tier_01_foundations/04_faq.md)
 
 ---
@@ -220,6 +226,7 @@ struct ImportantExcerpt<'a> {
     part: &'a str,
 }
 ```
+
 **生命周期省略规则**:
 
 1. 每个引用参数都有自己的生命周期
@@ -249,6 +256,7 @@ static GLOBAL_VAR: i32 = 42;
 // 泄漏的Box
 let leaked: &'static str = Box::leak(Box::new(String::from("hello")));
 ```
+
 **注意**: 不要过度使用 `'static`，大多数情况下应该使用适当的生命周期标注。
 
 **相关**: [03_advanced/03_lifetimes_reference.md](tier_03_references/03_lifetimes_reference.md)
@@ -269,6 +277,7 @@ char* dangle() {
     return local; // 返回局部变量地址！
 }
 ```
+
 **Rust编译时阻止**:
 
 ```rust
@@ -283,6 +292,7 @@ fn no_dangle() -> String {
     s // 转移所有权
 }
 ```
+
 **相关**: [04_safety/01_memory_safety.md](tier_03_references/08_memory_safety_reference.md)
 
 ---
@@ -303,6 +313,7 @@ struct Graph {
     nodes: Vec<Node>,
 }
 ```
+
 **方案2: 使用 Rc/Arc**:
 
 ```rust
@@ -313,6 +324,7 @@ struct Node {
     next: Option<Rc<Node>>,
 }
 ```
+
 **方案3: 使用 Pin（async需要）**:
 
 ```rust
@@ -339,6 +351,7 @@ impl SelfReferential {
     }
 }
 ```
+
 **相关**: [03_advanced/05_smart_pointer_api_reference.md](tier_03_references/05_smart_pointer_api_reference.md)
 
 ---
@@ -378,6 +391,7 @@ thread::spawn(move |
     data2.lock().unwrap().push(4);
 });
 ```
+
 **相关**: [03_advanced/05_smart_pointer_api_reference.md](tier_03_references/05_smart_pointer_api_reference.md)
 
 ---
@@ -399,6 +413,7 @@ fn process(data: &[i32]) {
     // ...
 }
 ```
+
 **策略2: 使用 Clone-on-Write (Cow)**:
 
 ```rust
@@ -412,6 +427,7 @@ fn process(data: Cow<str>) {
     }
 }
 ```
+
 **策略3: 使用 `&mut` 就地修改**
 
 ```rust
@@ -426,6 +442,7 @@ fn append(v: &mut Vec<i32>, value: i32) {
     v.push(value);
 }
 ```
+
 **相关**: [05_practice/04_performance_tuning.md](tier_03_references/09_performance_optimization_reference.md)
 
 ---

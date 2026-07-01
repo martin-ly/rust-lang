@@ -120,6 +120,7 @@ fn main() {
     println!("{}", person.describe());
 }
 ```
+
 ### 1.2 定义 Trait
 
 **语法格式**:
@@ -130,6 +131,7 @@ trait TraitName {
     fn another_method(&mut self, param: Type);
 }
 ```
+
 **示例 1: 简单 Trait**:
 
 ```rust
@@ -159,6 +161,7 @@ fn main() {
     println!("{}", fr.greet());
 }
 ```
+
 **示例 2: 带多个方法的 Trait**:
 
 ```rust
@@ -205,6 +208,7 @@ impl Shape for Rectangle {
     }
 }
 ```
+
 ### 1.3 实现 Trait
 
 **为自定义类型实现**:
@@ -225,12 +229,14 @@ impl Printable for Book {
     }
 }
 ```
+
 **为基本类型实现** (在新类型模式中讲解):
 
 ```rust
 // 不能直接为外部类型实现外部 trait
 // impl Display for Vec<T> { } // ❌ 错误
 ```
+
 ### 1.4 默认实现
 
 Trait 可以提供方法的默认实现：
@@ -269,6 +275,7 @@ fn main() {
     custom.log("Using custom");    // >>> Using custom
 }
 ```
+
 **默认实现调用其他方法**:
 
 ```rust
@@ -292,6 +299,7 @@ impl Summary for Article {
     // summarize 使用默认实现
 }
 ```
+
 ---
 
 ## 2. Trait 作为参数
@@ -308,6 +316,7 @@ fn main() {
     print_area(&circle);
 }
 ```
+
 ### 2.2 impl Trait 语法
 
 ```rust
@@ -323,6 +332,7 @@ fn main() {
     print_area(&rect);
 }
 ```
+
 **两种语法的区别**:
 
 ```rust
@@ -336,6 +346,7 @@ fn compare2<T: Shape>(a: &T, b: &T) {
     // a 和 b 必须是相同的类型
 }
 ```
+
 ### 2.3 多个 Trait Bound
 
 ```rust
@@ -355,6 +366,7 @@ where
     println!("T: {:?}, U: {:?}", t, u);
 }
 ```
+
 ---
 
 ## 3. Trait 作为返回值
@@ -390,6 +402,7 @@ fn main() {
     println!("{}", animal.make_sound());
 }
 ```
+
 ### 3.2 限制与注意事项
 
 **限制 1: 只能返回单一类型**:
@@ -413,6 +426,7 @@ fn get_animal(is_dog: bool) -> Box<dyn Animal> {
     }
 }
 ```
+
 **限制 2: 只能在函数签名中使用**:
 
 ```rust
@@ -431,6 +445,7 @@ struct Container {
     item: Box<dyn Animal>,
 }
 ```
+
 ---
 
 ## 4. Trait Object
@@ -472,6 +487,7 @@ fn main() {
     }
 }
 ```
+
 ### 4.2 创建 Trait Object
 
 **方式 1: `Box<dyn Trait>`**:
@@ -479,6 +495,7 @@ fn main() {
 ```rust
 let obj: Box<dyn Draw> = Box::new(Circle);
 ```
+
 **方式 2: &dyn Trait**:
 
 ```rust
@@ -491,6 +508,7 @@ fn main() {
     draw_shape(&circle);
 }
 ```
+
 **方式 3: `Rc<dyn Trait>` 或 `Arc<dyn Trait>`**
 
 ```rust
@@ -498,6 +516,7 @@ use std::rc::Rc;
 
 let obj: Rc<dyn Draw> = Rc::new(Circle);
 ```
+
 ### 4.3 对象安全 (Object Safety)
 
 **对象安全的 Trait 必须满足**:
@@ -515,6 +534,7 @@ trait ObjectSafe {
 // ✅ 可以创建 trait object
 let obj: Box<dyn ObjectSafe> = /* ... */;
 ```
+
 **示例 2: 不对象安全的 Trait**:
 
 ```rust
@@ -525,6 +545,7 @@ trait NotObjectSafe {
 // ❌ 错误：不能创建 trait object
 // let obj: Box<dyn NotObjectSafe> = /* ... */;
 ```
+
 **示例 3: 修复不对象安全的 Trait**:
 
 ```rust
@@ -541,6 +562,7 @@ where
     }
 }
 ```
+
 ---
 
 ## 5. 标记 Trait (Marker Traits)
@@ -556,6 +578,7 @@ fn send_to_thread<T: Send>(value: T) {
     });
 }
 ```
+
 **Sync**: 可以在多线程间安全共享引用
 
 ```rust
@@ -563,6 +586,7 @@ fn share_across_threads<T: Sync>(value: &T) {
     // 可以安全地在多个线程中共享 &T
 }
 ```
+
 **Copy**: 可以通过简单的位复制来复制
 
 ```rust
@@ -572,6 +596,7 @@ struct Point {
     y: i32,
 }
 ```
+
 **Sized**: 在编译时已知大小
 
 ```rust
@@ -584,6 +609,7 @@ fn generic_unsized<T: ?Sized>(value: &T) {
     // T 可能是 [i32] 或 dyn Trait
 }
 ```
+
 ### 5.2 自定义标记 Trait
 
 ```rust
@@ -597,6 +623,7 @@ fn process_trusted<T: Trusted>(data: T) {
     // 只处理标记为 Trusted 的类型
 }
 ```
+
 ---
 
 ## 6. Supertraits
@@ -630,6 +657,7 @@ impl Displayable for Document {
     }
 }
 ```
+
 ### 6.2 实战案例
 
 ```rust
@@ -662,6 +690,7 @@ fn main() {
     println!("{}", article.summarize());
 }
 ```
+
 ---
 
 ## 7. Blanket Implementations
@@ -687,6 +716,7 @@ fn main() {
     "hello".my_method(); // &str 实现了 Display
 }
 ```
+
 ### 7.2 实战案例
 
 **标准库示例: ToString**:
@@ -705,6 +735,7 @@ impl<T: Display> ToString for T {
 
 // 因此所有实现了 Display 的类型自动拥有 to_string 方法
 ```
+
 **自定义示例**:
 
 ```rust
@@ -723,6 +754,7 @@ fn main() {
     println!("{}", "hi".double_display());    // "hi hi"
 }
 ```
+
 ---
 
 ## 8. 孤儿规则与新类型模式
@@ -746,6 +778,7 @@ impl Display for MyVec { /* ... */ }
 trait MyTrait { }
 impl MyTrait for Vec<i32> { }
 ```
+
 ### 8.2 新类型模式 (Newtype Pattern)
 
 使用元组结构体包装外部类型：
@@ -769,6 +802,7 @@ fn main() {
     println!("{}", w); // [hello, world]
 }
 ```
+
 **访问内部值**:
 
 ```rust
@@ -798,6 +832,7 @@ fn main() {
     println!("Length: {}", w.len()); // 通过 Deref 访问 Vec 的方法
 }
 ```
+
 ---
 
 ## 9. Trait 的高级用法
@@ -835,6 +870,7 @@ fn main() {
     pair.cmp_display(); // The largest member is y = 20
 }
 ```
+
 ### 9.2 关联函数
 
 ```rust
@@ -859,6 +895,7 @@ fn main() {
     println!("{}", config.setting);
 }
 ```
+
 ---
 
 ## 10. 实战综合案例
@@ -921,6 +958,7 @@ fn main() {
     manager.execute_all();
 }
 ```
+
 ### 10.2 案例 2：类型转换系统
 
 ```rust
@@ -957,6 +995,7 @@ fn main() {
     println!("As f64: {:?}", float_result); // Ok(42.0)
 }
 ```
+
 ---
 
 ## 11. 常见陷阱与最佳实践
@@ -974,6 +1013,7 @@ let mut v = Vec::new();
 // ✅ 正确
 use std::io::Write;
 ```
+
 **错误 2: 混淆 impl Trait 和 dyn Trait**:
 
 ```rust
@@ -983,6 +1023,7 @@ fn static_dispatch() -> impl Display { 42 }
 // dyn Trait: 动态分发，运行时确定
 fn dynamic_dispatch() -> Box<dyn Display> { Box::new(42) }
 ```
+
 **错误 3: 违反孤儿规则**:
 
 ```rust
@@ -993,6 +1034,7 @@ fn dynamic_dispatch() -> Box<dyn Display> { Box::new(42) }
 struct MyVec(Vec<i32>);
 impl Display for MyVec { /* ... */ }
 ```
+
 ### 11.2 最佳实践
 
 **1. 优先使用 impl Trait (静态分发)**:
@@ -1004,6 +1046,7 @@ fn process(item: impl Display) { }
 // ⚠️ 仅在需要时使用：有运行时开销
 fn process(item: &dyn Display) { }
 ```
+
 **2. 为 trait 提供有意义的默认实现**:
 
 ```rust
@@ -1017,6 +1060,7 @@ trait Config {
     }
 }
 ```
+
 **3. 使用 where 子句提高可读性**:
 
 ```rust
@@ -1029,6 +1073,7 @@ where
     T: Display + Debug + Clone + PartialOrd,
 { }
 ```
+
 **4. 合理设计对象安全的 trait**:
 
 ```rust
@@ -1038,6 +1083,7 @@ trait ObjectSafe {
     // fn method(&self) -> Self; // ❌ 不对象安全
 }
 ```
+
 ---
 
 ## 📚 延伸阅读
@@ -1063,6 +1109,7 @@ impl Compare for i32 {
     // 你的代码
 }
 ```
+
 **练习 2: 创建一个插件系统**:
 
 设计一个支持动态加载的插件系统，插件需要有名称、版本和执行方法。

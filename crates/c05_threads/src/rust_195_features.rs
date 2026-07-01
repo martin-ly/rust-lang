@@ -17,8 +17,8 @@
 //! # References
 //! # reference
 
-use std::sync::atomic::{AtomicBool, AtomicI32, AtomicPtr, AtomicUsize, Ordering};
 use std::sync::Arc;
+use std::sync::atomic::{AtomicBool, AtomicI32, AtomicPtr, AtomicUsize, Ordering};
 use std::thread;
 
 // ============================================================================
@@ -80,11 +80,7 @@ impl AtomicUpdateExamples {
     /// condition ：when condition （try_update）
     pub fn try_increment_if_even(counter: &AtomicI32) -> Result<i32, i32> {
         counter.try_update(Ordering::SeqCst, Ordering::SeqCst, |old| {
-            if old % 2 == 0 {
-                Some(old + 1)
-            } else {
-                None
-            }
+            if old % 2 == 0 { Some(old + 1) } else { None }
         })
     }
 
@@ -102,11 +98,7 @@ impl AtomicUpdateExamples {
     /// 仅whenwhenbeforeas `false` 时设as `true`（一次性触发）。
     pub fn try_set_flag(flag: &AtomicBool) -> Result<bool, bool> {
         flag.try_update(Ordering::SeqCst, Ordering::SeqCst, |current| {
-            if current {
-                None
-            } else {
-                Some(true)
-            }
+            if current { None } else { Some(true) }
         })
     }
 

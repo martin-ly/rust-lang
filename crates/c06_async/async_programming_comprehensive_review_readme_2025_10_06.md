@@ -84,6 +84,7 @@ cat docs/COMPREHENSIVE_ASYNC_KNOWLEDGE_CLASSIFICATION_2025.md
 # 或在编辑器中打开
 code docs/COMPREHENSIVE_ASYNC_KNOWLEDGE_CLASSIFICATION_2025.md
 ```
+
 **包含内容**:
 
 - ✅ 语言特性分类 (Future, async/await, Pin, Stream, Waker)
@@ -101,6 +102,7 @@ code docs/COMPREHENSIVE_ASYNC_KNOWLEDGE_CLASSIFICATION_2025.md
 ```bash
 cargo run --example reactor_pattern_comprehensive_2025
 ```
+
 **特点**:
 
 - 1,800+ 行完整实现
@@ -120,11 +122,13 @@ cargo run --example reactor_pattern_comprehensive_2025
 === 性能测试: 高吞吐量场景 ===
 吞吐量: 8547.21 events/sec
 ```
+
 #### Actor 模式 (消息传递并发)
 
 ```bash
 cargo run --example actor_pattern_comprehensive_2025
 ```
+
 **特点**:
 
 - 2,100+ 行完整实现
@@ -144,11 +148,13 @@ cargo run --example actor_pattern_comprehensive_2025
 账户1最终余额: $650.00
 账户2最终余额: $750.00
 ```
+
 #### CSP 模式 (通道通信)
 
 ```bash
 cargo run --example csp_pattern_comprehensive_2025
 ```
+
 **特点**:
 
 - 1,100+ 行完整实现
@@ -171,6 +177,7 @@ cargo run --example csp_pattern_comprehensive_2025
 单生产者单消费者 (SPSC):
   吞吐量: 1,234,567.89 msg/s
 ```
+
 ### 3. 查看总结文档
 
 #### 实现总结 (英文)
@@ -178,6 +185,7 @@ cargo run --example csp_pattern_comprehensive_2025
 ```bash
 cat docs/COMPREHENSIVE_ASYNC_IMPLEMENTATION_SUMMARY_2025.md
 ```
+
 **包含内容**:
 
 - 执行概述
@@ -189,6 +197,7 @@ cat docs/COMPREHENSIVE_ASYNC_IMPLEMENTATION_SUMMARY_2025.md
 ```bash
 cat docs/ASYNC_PATTERNS_COMPARISON_2025.md
 ```
+
 **包含内容**:
 
 - 三大架构模式全面对比
@@ -209,6 +218,7 @@ cat docs/ASYNC_PATTERNS_COMPARISON_2025.md
 ```bash
 cat docs/异步编程全面梳理最终报告_2025_10_06.md
 ```
+
 **包含内容**:
 
 - 执行概述
@@ -237,6 +247,7 @@ docs/
 └── 异步编程全面梳理最终报告_2025_10_06.md              (2,000+ 字)
     └── 最终报告，包含学习路径和快速查找指南
 ```
+
 ### 核心示例 (2个，3,900+ 行代码)
 
 ```text
@@ -256,6 +267,7 @@ examples/
     ├── 第5部分: 实际应用示例 (银行账户)
     └── 第6部分: 示例和测试
 ```
+
 ---
 
 ## 🎨 核心内容概览
@@ -271,6 +283,7 @@ examples/
 ```text
 Reactor = (EventQueue, Handlers, Demultiplexer, EventLoop)
 ```
+
 **性质证明**:
 
 - ✅ 定理1: 活性 (Liveness)
@@ -295,6 +308,7 @@ Reactor = (EventQueue, Handlers, Demultiplexer, EventLoop)
 Actor = (State, Behavior, Mailbox, Address)
 Behavior: Message × S → (S, [Message], [Actor])
 ```
+
 **性质证明**:
 
 - ✅ 定理1: 消息传递的可靠性
@@ -320,6 +334,7 @@ Process = Sequential computation
 Channel = Typed communication link
 Operators: P || Q, P → Q, P ⊓ Q, ch!v, ch?x
 ```
+
 **实现**: `examples/ultimate_async_theory_practice_2025.rs` (CSP 部分)
 
 **适用场景**:
@@ -587,11 +602,13 @@ Operators: P || Q, P → Q, P ⊓ Q, ch!v, ch?x
    ```bash
    cargo run --example reactor_pattern_comprehensive_2025
    ```
+
 2. 运行 Actor 模式示例
 
    ```bash
    cargo run --example actor_pattern_comprehensive_2025
    ```
+
 3. 阅读代码，理解实现
 
 ### 第四步: 深入学习 (1-2周)
@@ -681,6 +698,7 @@ cargo run --example actor_pattern_comprehensive_2025
 # 4. 查看最终报告
 cat docs/异步编程全面梳理最终报告_2025_10_06.md
 ```
+
 **祝您学习愉快！Happy Learning!** 🎉
 
 ---

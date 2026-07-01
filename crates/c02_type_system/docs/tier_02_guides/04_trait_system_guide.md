@@ -173,6 +173,7 @@ Trait 系统指南
 └── 运算符重载
     └── 运算符 Trait
 ```
+
 ---
 
 ---
@@ -239,6 +240,7 @@ fn main() {
     println!("{}", article.summarize());
 }
 ```
+
 ### 1.2 Trait 的作用
 
 **1. 定义共享行为**:
@@ -263,6 +265,7 @@ impl Drawable for Rectangle {
     }
 }
 ```
+
 **2. 泛型约束**:
 
 ```rust
@@ -270,6 +273,7 @@ fn print_summary<T: Summary>(item: &T) {
     println!("Summary: {}", item.summarize());
 }
 ```
+
 **3. 代码复用**:
 
 ```rust
@@ -281,6 +285,7 @@ fn print_area<T: HasArea>(shape: &T) {
     println!("Area: {}", shape.area());
 }
 ```
+
 ### 1.3 Trait vs 接口
 
 | 特性           | Rust Trait    | Java 接口         | C++ 抽象类 |
@@ -310,6 +315,7 @@ trait MyTrait {
     }
 }
 ```
+
 **完整示例**:
 
 ```rust
@@ -325,6 +331,7 @@ trait Animal {
     }
 }
 ```
+
 ### 2.2 实现 Trait
 
 **为类型实现 Trait**:
@@ -377,6 +384,7 @@ fn main() {
     cat.describe();
 }
 ```
+
 ### 2.3 默认实现
 
 **默认实现可以调用其他方法**:
@@ -413,6 +421,7 @@ fn main() {
     println!("1 new tweet: {}", tweet.summarize());
 }
 ```
+
 ---
 
 ## 3. Trait 作为参数
@@ -453,6 +462,7 @@ fn main() {
     notify_v2(&article);
 }
 ```
+
 ### 3.2 impl Trait 语法
 
 ```rust
@@ -475,6 +485,7 @@ fn main() {
     print_value_generic(&3.14);
 }
 ```
+
 ### 3.3 多个 Trait Bound
 
 ```rust
@@ -504,6 +515,7 @@ fn main() {
     compare_v2(&"apple", &"banana");
 }
 ```
+
 ---
 
 ## 4. Trait 作为返回类型
@@ -537,6 +549,7 @@ fn main() {
     println!("{}", article.summarize());
 }
 ```
+
 ### 4.2 返回不同类型
 
 ```rust
@@ -591,6 +604,7 @@ fn main() {
     println!("{}", summary.summarize());
 }
 ```
+
 ---
 
 ## 5. Trait 对象
@@ -658,6 +672,7 @@ fn main() {
     screen.run();
 }
 ```
+
 ### 5.2 对象安全
 
 **对象安全的 Trait 必须满足**:
@@ -685,6 +700,7 @@ fn main() {
     // let _: Box<dyn NotSafe> = ...; // 编译错误！
 }
 ```
+
 ### 5.3 性能考虑
 
 ```rust
@@ -735,6 +751,7 @@ fn main() {
     println!("Dynamic dispatch: {:?}", start.elapsed());
 }
 ```
+
 ---
 
 ## 6. 派生 Trait
@@ -758,6 +775,7 @@ fn main() {
     println!("Less: {}", p1 < p2);    // PartialOrd
 }
 ```
+
 **常用可派生的 Trait**:
 
 - `Debug`: 格式化输出
@@ -790,6 +808,7 @@ fn main() {
     println!("{:?}", custom_config);
 }
 ```
+
 ---
 
 ## 7. 运算符重载
@@ -824,6 +843,7 @@ fn main() {
     println!("{:?} + {:?} = {:?}", p1, p2, p3);
 }
 ```
+
 **其他算术运算符**:
 
 ```rust
@@ -874,6 +894,7 @@ fn main() {
     println!("v1 * 2 = {:?}", v1 * 2.0);
 }
 ```
+
 ### 7.2 比较运算符
 
 ```rust
@@ -917,6 +938,7 @@ fn main() {
     println!("Alice > Bob: {}", alice > bob);
 }
 ```
+
 ### 7.3 索引运算符
 
 ```rust
@@ -946,6 +968,7 @@ fn main() {
     println!("matrix[1, 2] = {}", matrix[(1, 2)]);
 }
 ```
+
 ---
 
 ## 8. 高级 Trait 特性
@@ -991,6 +1014,7 @@ fn main() {
     }
 }
 ```
+
 ### 8.2 关联常量
 
 ```rust
@@ -1011,6 +1035,7 @@ fn main() {
     println!("E = {}", StandardMath::E);
 }
 ```
+
 ### 8.3 Super Traits
 
 ```rust
@@ -1051,6 +1076,7 @@ fn main() {
     happy_dog(&dog);
 }
 ```
+
 ### 8.4 完全限定语法
 
 ```rust
@@ -1094,6 +1120,7 @@ fn main() {
     <Human as Pilot>::fly(&person);
 }
 ```
+
 ---
 
 ## 9. 标准库常用 Trait
@@ -1131,6 +1158,7 @@ fn main() {
     println!("Pretty Debug: {:#?}", p);
 }
 ```
+
 ### 9.2 Clone 和 Copy
 
 ```rust
@@ -1163,6 +1191,7 @@ fn main() {
     println!("Point 2: {:?}", point2);
 }
 ```
+
 ### 9.3 Drop
 
 ```rust
@@ -1191,6 +1220,7 @@ fn main() {
     println!("Outer scope");
 } // r1 在这里被 drop
 ```
+
 ### 9.4 From 和 Into
 
 ```rust
@@ -1218,6 +1248,7 @@ fn main() {
     println!("Point: ({}, {})", p2.x, p2.y);
 }
 ```
+
 ### 9.5 Iterator
 
 ```rust
@@ -1251,6 +1282,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 10. 孤儿规则
@@ -1276,6 +1308,7 @@ impl std::fmt::Display for MyVec {
     }
 }
 ```
+
 ### 10.2 Newtype 模式
 
 ```rust
@@ -1299,6 +1332,7 @@ fn main() {
     println!("Wrapper: {}", w);
 }
 ```
+
 ---
 
 ## 11. 实战案例
@@ -1361,6 +1395,7 @@ fn main() {
     println!("Deserialized: {:?}", deserialized);
 }
 ```
+
 ### 案例 2: 插件系统
 
 ```rust
@@ -1439,6 +1474,7 @@ fn main() {
     manager.execute_all();
 }
 ```
+
 ### 案例 3: 状态模式
 
 ```rust
@@ -1543,6 +1579,7 @@ fn main() {
     println!("Published: {}", post.content());
 }
 ```
+
 ### 案例 4: 构建器模式
 
 ```rust
@@ -1625,6 +1662,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 12. 常见陷阱与最佳实践
@@ -1674,6 +1712,7 @@ fn main() {
     println!("Trait examples");
 }
 ```
+
 ### 12.2 最佳实践
 
 ```rust
@@ -1727,6 +1766,7 @@ fn main() {
     complex(42, "hello");
 }
 ```
+
 ---
 
 ## 13. 总结
@@ -1850,6 +1890,7 @@ async fn async_trait_example() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 ```
+
 ---
 
 ## 🎯 Trait对象高级应用
@@ -1987,6 +2028,7 @@ fn plugin_system_example() -> Result<(), String> {
     Ok(())
 }
 ```
+
 ---
 
 ## 📊 性能对比：静态 vs 动态分发
@@ -2051,6 +2093,7 @@ fn benchmark_dispatch() {
              dynamic_duration.as_nanos() as f64 / static_duration.as_nanos() as f64);
 }
 ```
+
 ---
 
 ## 🔧 标准库Trait深度应用
@@ -2107,6 +2150,7 @@ fn from_into_example() -> Result<(), AppError> {
     Ok(())
 }
 ```
+
 ---
 
 ### Iterator Trait 高级应用
@@ -2194,6 +2238,7 @@ fn iterator_example() {
     println!("Chained: {:?}", combined);
 }
 ```
+
 ---
 
 ## 🎨 Trait组合模式
@@ -2268,6 +2313,7 @@ fn mixin_example() -> Result<(), String> {
     Ok(())
 }
 ```
+
 ---
 
 ### 装饰器Trait模式
@@ -2328,6 +2374,7 @@ fn decorator_example() {
     decorated.log("Fully decorated");
 }
 ```
+
 ---
 
 ## 🧪 类型状态模式（高级）
@@ -2422,6 +2469,7 @@ fn typestate_example() {
     //     .build();
 }
 ```
+
 ---
 
 ## 🏆 完整实战案例：HTTP客户端
@@ -2535,6 +2583,7 @@ fn http_client_example() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 ```
+
 ---
 
 **更新日期**: 2025-10-24

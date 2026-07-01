@@ -92,6 +92,7 @@ fn take_ownership(s: String) {
     // 函数结束时,s 被 drop
 }
 ```
+
 **说明**:
 
 - **移动语义**: 当 `let s2 = s1` 时,所有权从 `s1` 转移到 `s2`
@@ -105,6 +106,7 @@ s1: hello
 s2: hello
 函数拥有: hello
 ```
+
 **关键点**:
 
 - 🎯 Rust 通过移动语义防止双重释放 (double free)
@@ -171,6 +173,7 @@ fn main() {
     println!("s3: {}, s4: {}", s3, s4);  // ✅ 都有效
 }
 ```
+
 **说明**:
 
 - **Copy 类型**: 栈上数据,拷贝廉价,自动 copy
@@ -189,6 +192,7 @@ v2: [1, 2, 3]
 int: 42, int2: 42
 s3: world, s4: world
 ```
+
 **类型对照表**:
 
 | 类型                         | Copy?  | 原因              |
@@ -239,6 +243,7 @@ fn calculate_length(s: &String) -> usize {
     // s 在这里离开作用域,但因为它不拥有数据,所以不会释放
 }
 ```
+
 **说明**:
 
 - **不可变借用**: 使用 `&` 创建引用,可以读取但不能修改
@@ -252,6 +257,7 @@ fn calculate_length(s: &String) -> usize {
 r1: hello world, r2: hello world, r3: hello world
 原始字符串: hello world
 ```
+
 **借用规则**:
 
 - ✅ 可以有任意多个不可变借用 `&T`
@@ -317,6 +323,7 @@ fn change(s: &mut String) {
     s.push_str(", world");
 }
 ```
+
 **说明**:
 
 - **可变借用**: 使用 `&mut` 创建可以修改的引用
@@ -333,6 +340,7 @@ r2 修改后: 12
 hello and hello
 hello world
 ```
+
 **关键规则**:
 
 - ✅ 可变借用 `&mut T` 可以修改数据
@@ -417,6 +425,7 @@ fn no_dangle() -> String {
     s  // 移动所有权出去
 }
 ```
+
 **说明**:
 
 - **NLL**: 非词法作用域生命周期,引用在最后一次使用后即可结束
@@ -441,6 +450,7 @@ no_dangle: hello
 hello and hello
 hello world
 ```
+
 **常见错误总结**:
 
 | 错误类型               | 原因               | 解决方案            |
@@ -504,6 +514,7 @@ fn first_word<'a>(s: &'a str, _other: &str) -> &'a str {
     s.split_whitespace().next().unwrap_or("")
 }
 ```
+
 **说明**:
 
 - **生命周期标注**: `'a` 是生命周期参数,表示引用的有效期
@@ -517,6 +528,7 @@ fn first_word<'a>(s: &'a str, _other: &str) -> &'a str {
 内部作用域: long string is long
 第一个单词: hello
 ```
+
 **生命周期规则**:
 
 - 🎯 返回的引用必须与某个输入参数的生命周期相关
@@ -603,6 +615,7 @@ fn longest_with_announcement<'a, 'b>(
     }
 }
 ```
+
 **说明**:
 
 - **结构体生命周期**: 结构体包含引用时必须标注生命周期
@@ -620,6 +633,7 @@ fn longest_with_announcement<'a, 'b>(
 公告: 比较中...
 结果: hello
 ```
+
 ---
 
 ### 示例2.3: 生命周期省略规则
@@ -707,6 +721,7 @@ fn longest_with_context<'a, 'b>(
     }
 }
 ```
+
 **说明**:
 
 - **省略规则1**: 每个输入引用参数都有独立的生命周期
@@ -719,6 +734,7 @@ fn longest_with_context<'a, 'b>(
 第一个单词: hello
 比较结果: hello
 ```
+
 **何时需要显式标注**:
 
 - ✅ 多个输入引用,且返回值可能来自任一个
@@ -822,6 +838,7 @@ fn first_word(s: &str) -> &str {
     &s[..]
 }
 ```
+
 **说明**:
 
 - **字符串切片**: `&str` 是对 String 的一部分的引用
@@ -854,6 +871,7 @@ literal: hello world
 第一个: 1, 最后一个: 5
 UTF-8 切片: 你
 ```
+
 **切片要点**:
 
 - 🎯 切片是引用,不拥有数据
@@ -984,6 +1002,7 @@ fn create_string() -> String {
     String::from("Created string")
 }
 ```
+
 **说明**:
 
 - **String**: 可增长的堆分配字符串,拥有数据
@@ -1026,6 +1045,7 @@ String 大小: 24 字节 (栈上指针+长度+容量)
 场景3 (所有权): Created string
 场景4 (拼接): Hello World
 ```
+
 **对比总结**:
 
 | 特性     | String          | &str         |
@@ -1142,6 +1162,7 @@ where
     f(&s).to_string()
 }
 ```
+
 **说明**:
 
 - **多生命周期**: 不同引用可以有不同的生命周期参数
@@ -1158,6 +1179,7 @@ x: hello, y: world, z: rust
 选择结果: outer
 外部: outer
 ```
+
 ---
 
 ### 示例3.2: 'static 生命周期详解
@@ -1248,6 +1270,7 @@ fn generic_function<T: std::fmt::Display + 'static>(t: T) {
     println!("  泛型参数: {}", t);
 }
 ```
+
 **说明**:
 
 - **'static 含义**: 引用在整个程序运行期都有效
@@ -1286,6 +1309,7 @@ Trait 对象: 42
 场景2: 发生了一个错误
 场景3: 单例初始化
 ```
+
 **关键要点**:
 
 - 🎯 'static != 不可变
@@ -1408,6 +1432,7 @@ fn demo_rc_refcell() {
     println!("引用计数: {}", Rc::strong_count(&shared_data));
 }
 ```
+
 **说明**:
 
 - **RefCell**: 提供内部可变性,运行时检查借用规则
@@ -1441,6 +1466,7 @@ data2 读取: [1, 2, 3, 4]
 最终数据: [1, 2, 3, 4, 5]
 引用计数: 3
 ```
+
 **使用场景**:
 
 - ✅ 图结构、树结构 (需要循环引用)
@@ -1585,6 +1611,7 @@ impl Config {
     }
 }
 ```
+
 **说明**:
 
 - **Cell**: 为 Copy 类型提供内部可变性,零开销
@@ -1622,6 +1649,7 @@ replace: 旧值=20, 新值=30
 swap 后: cell=40, cell2=30
 take: value=50, cell3=0
 ```
+
 **Cell vs RefCell**:
 
 | 特性       | Cell   | RefCell       |

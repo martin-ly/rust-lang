@@ -96,6 +96,7 @@ graph TB
     style L3 fill:#fff5e1
     style L4 fill:#f5e1ff
 ```
+
 ---
 
 ## 📊 第一部分：基础层示例（Layer 0）
@@ -166,6 +167,7 @@ fn test_memory_model() {
     memory_model_examples();
 }
 ```
+
 #### 示例1-2: 类型系统基础 - Copy vs Move
 
 ```rust
@@ -216,6 +218,7 @@ fn test_type_system() {
     type_system_examples();
 }
 ```
+
 ---
 
 ## 🔷 第二部分：核心层示例（Layer 1）
@@ -287,6 +290,7 @@ fn test_ownership_rules() {
     ownership_rules_examples();
 }
 ```
+
 #### 示例2-2: 所有权转移的各种场景
 
 ```rust
@@ -358,6 +362,7 @@ fn test_ownership_transfer() {
     ownership_transfer_examples();
 }
 ```
+
 ### 2.2 借用系统完整示例
 
 #### 示例2-3: 不可变借用深度解析
@@ -447,6 +452,7 @@ fn test_immutable_borrowing() {
     immutable_borrowing_examples();
 }
 ```
+
 #### 示例2-4: 可变借用深度解析
 
 ```rust
@@ -559,6 +565,7 @@ fn test_mutable_borrowing() {
     mutable_borrowing_examples();
 }
 ```
+
 #### 示例2-5: 借用规则完整演示
 
 ```rust
@@ -649,6 +656,7 @@ fn test_borrowing_rules() {
     borrowing_rules_examples();
 }
 ```
+
 ### 2.3 生命周期系统完整示例
 
 #### 示例2-6: 生命周期基础
@@ -738,6 +746,7 @@ fn test_lifetime() {
     lifetime_examples();
 }
 ```
+
 #### 示例2-7: 高级生命周期模式
 
 ```rust
@@ -857,6 +866,7 @@ fn test_advanced_lifetime() {
     advanced_lifetime_examples();
 }
 ```
+
 ---
 
 ## 🔸 第三部分：应用层示例（Layer 2）
@@ -961,6 +971,7 @@ fn test_box() {
     box_examples();
 }
 ```
+
 #### 示例3-2: `Rc<T>` 和 `Arc<T>` 引用计数
 
 ```rust
@@ -1061,6 +1072,7 @@ fn test_rc_arc() {
     arc_examples();
 }
 ```
+
 #### 示例3-3: `RefCell<T>` 内部可变性
 
 ```rust
@@ -1194,6 +1206,7 @@ fn test_refcell() {
     refcell_examples();
 }
 ```
+
 ---
 
 ## 🔹 第四部分：高级层示例（Layer 3）
@@ -1318,6 +1331,7 @@ fn test_concurrent_ownership() {
     concurrent_ownership_examples();
 }
 ```
+
 #### 示例4-2: 消息传递并发模式
 
 ```rust
@@ -1434,6 +1448,7 @@ fn test_message_passing() {
     message_passing_examples();
 }
 ```
+
 ### 4.2 性能优化实战
 
 #### 示例4-3: 零成本抽象与内联优化
@@ -1543,6 +1558,7 @@ fn test_performance() {
     performance_examples();
 }
 ```
+
 ---
 
 ## 📈 第五部分：综合实战项目
@@ -1670,6 +1686,7 @@ fn test_lru_cache_project() {
     lru_cache_project();
 }
 ```
+
 ---
 
 ## 🎯 第六部分：实战对比矩阵
@@ -1760,6 +1777,7 @@ fn test_data_sharing_comparison() {
     data_sharing_comparison();
 }
 ```
+
 ---
 
 ## 📚 总结与学习路径
@@ -1822,6 +1840,7 @@ graph LR
     style G fill:#e1fff5
     style H fill:#f5ffe1
 ```
+
 ### 📊 示例统计
 
 | 类别 | 示例数量 | 行数 | 测试覆盖 |

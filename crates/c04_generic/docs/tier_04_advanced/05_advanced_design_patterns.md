@@ -115,6 +115,7 @@ fn example() {
     sorter.sort(&mut data);
 }
 ```
+
 ### 访问者模式 (Visitor Pattern)
 
 ```rust
@@ -180,6 +181,7 @@ impl ExprVisitor for Printer {
     }
 }
 ```
+
 ---
 
 ## 2️⃣ 并发设计模式
@@ -263,6 +265,7 @@ impl Actor for CounterActor {
     }
 }
 ```
+
 ### 管道模式 (Pipeline Pattern)
 
 ```rust
@@ -344,6 +347,7 @@ fn build_pipeline() -> (Sender<String>, Receiver<String>) {
     (parse_in, format_out)
 }
 ```
+
 ---
 
 ## 3️⃣ 异步设计模式
@@ -386,6 +390,7 @@ fn spawn_async_actor<A: AsyncActor>(actor: A) -> mpsc::Sender<A::Message> {
     sender
 }
 ```
+
 ### 异步流水线
 
 ```rust
@@ -419,6 +424,7 @@ impl<I: Send + 'static, O: Send + 'static> AsyncPipeline<I, O> {
     }
 }
 ```
+
 ---
 
 ## 4️⃣ 类型驱动设计
@@ -469,6 +475,7 @@ fn type_safe_example() {
     // send_email(timestamp, email, user_id);
 }
 ```
+
 ### 类型状态构建器
 
 ```rust
@@ -560,6 +567,7 @@ struct Request {
     body: Option<String>,
 }
 ```
+
 ---
 
 ## 5️⃣ 资源管理模式
@@ -628,6 +636,7 @@ fn scope_guard_example() {
     // _guard 在作用域结束时自动调用清理函数
 }
 ```
+
 ---
 
 ## 🎯 架构模式
@@ -686,6 +695,7 @@ impl<R: UserRepository> UserService<R> {
     }
 }
 ```
+
 ---
 
 ## 📚 最佳实践

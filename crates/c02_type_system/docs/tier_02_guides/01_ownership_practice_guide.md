@@ -104,6 +104,7 @@ let s = String::from("hello");  // s 是 "hello" 的所有者
 let s2 = s;  // s 的所有权转移到 s2
 // println!("{}", s);  // ❌ 编译错误：s 不再拥有数据
 ```
+
 **类型系统保证**:
 
 ```rust
@@ -118,6 +119,7 @@ fn main() {
     // println!("{}", s);  // ❌ 编译错误：s 已移动
 }
 ```
+
 ### 1.2 类型级别的所有权保证
 
 类型系统在编译期检查所有权规则：
@@ -134,6 +136,7 @@ fn main() {
     println!("{}", slice);  // ✅ s 仍然有效
 }
 ```
+
 ### 1.3 所有权类型设计
 
 设计类型时考虑所有权：
@@ -151,6 +154,7 @@ struct ConfigRef<'a> {
     value: &'a [i32],  // 借用数组切片
 }
 ```
+
 ---
 
 ## 2. 结构体中的所有权
@@ -177,6 +181,7 @@ fn main() {
     println!("{} is {} years old", person.name, person.age);
 } // person 及其所有字段被释放
 ```
+
 ### 2.2 引用字段
 
 结构体可以包含引用，但需要生命周期参数：
@@ -199,6 +204,7 @@ fn main() {
     println!("{} is {} years old", person.name, person.age);
 } // person 被释放，但 name 和 age 仍然有效
 ```
+
 ### 2.3 所有权转移模式
 
 结构体的所有权转移：
@@ -221,6 +227,7 @@ fn main() {
     // println!("{}", data.value);  // ❌ 编译错误
 }
 ```
+
 ---
 
 ## 3. 枚举中的所有权
@@ -250,6 +257,7 @@ fn process_message(msg: Message) {
     }
 } // msg 及其数据被释放
 ```
+
 ### 3.2 引用数据的枚举
 
 枚举也可以包含引用：
@@ -273,6 +281,7 @@ fn main() {
     }
 }
 ```
+
 ### 3.3 所有权模式匹配
 
 模式匹配时的所有权：
@@ -296,6 +305,7 @@ fn take_option(o: Option<String>) {
     // s 在这里已被释放
 }
 ```
+
 ---
 
 ## 4. 泛型与所有权
@@ -325,6 +335,7 @@ fn main() {
     println!("{}", value);
 }
 ```
+
 ### 4.2 所有权约束
 
 使用 trait 约束控制所有权：
@@ -342,6 +353,7 @@ fn main() {
     // println!("{}", s);  // ❌ 编译错误
 }
 ```
+
 ### 4.3 移动语义与泛型
 
 泛型函数中的移动语义：
@@ -357,6 +369,7 @@ fn main() {
     println!("{}", s2);
 }
 ```
+
 ---
 
 ## 5. 智能指针与所有权
@@ -375,6 +388,7 @@ fn main() {
     // boxed 不再有效
 }
 ```
+
 ### 5.2 Rc 与共享所有权
 
 `Rc<T>` 提供共享所有权：
@@ -394,6 +408,7 @@ fn main() {
     println!("{}", data2);
 } // 所有引用计数归零时，数据被释放
 ```
+
 ### 5.3 Arc 与线程安全的所有权
 
 `Arc<T>` 提供线程安全的共享所有权：
@@ -414,6 +429,7 @@ fn main() {
     handle.join().unwrap();
 }
 ```
+
 ---
 
 ## 6. 集合类型的所有权
@@ -436,6 +452,7 @@ fn main() {
     // vec 不再有效
 }
 ```
+
 ### 6.2 HashMap 的所有权
 
 `HashMap<K, V>` 拥有键和值的所有权：
@@ -453,6 +470,7 @@ fn main() {
     }
 }
 ```
+
 ### 6.3 集合的所有权传递
 
 集合的所有权转移：
@@ -470,6 +488,7 @@ fn main() {
     // println!("{:?}", vec);  // ❌ 编译错误
 }
 ```
+
 ---
 
 ## 7. 函数签名与所有权
@@ -494,6 +513,7 @@ fn process_mut(data: &mut String) {
     data.push_str(" world");
 }
 ```
+
 ### 7.2 返回值所有权
 
 返回值的所有权：
@@ -509,6 +529,7 @@ fn get_slice<'a>(s: &'a str) -> &'a str {
     &s[..]
 }
 ```
+
 ### 7.3 所有权最佳实践
 
 **推荐模式**:
@@ -528,6 +549,7 @@ fn take_ownership(data: String) -> String {
     format!("Processed: {}", data)
 }
 ```
+
 ---
 
 ## 8. 实战案例
@@ -566,6 +588,7 @@ fn main() {
     println!("Settings: {:?}", settings);
 }
 ```
+
 ### 8.2 案例2: 资源管理器
 
 ```rust
@@ -607,6 +630,7 @@ fn main() {
     }
 }
 ```
+
 ### 8.3 案例3: 数据管道
 
 ```rust
@@ -637,6 +661,7 @@ fn main() {
     println!("{:?}", processed);
 }
 ```
+
 ---
 
 ## 9. 常见问题与解决方案
@@ -650,6 +675,7 @@ let s = String::from("hello");
 let s2 = s;
 println!("{}", s);  // ❌ 编译错误
 ```
+
 **解决方案**:
 
 ```rust
@@ -657,6 +683,7 @@ let s = String::from("hello");
 let s2 = s.clone();  // 克隆数据
 println!("{}", s);   // ✅ 现在可以了
 ```
+
 ### 问题2: 结构体字段所有权
 
 **错误代码**:
@@ -670,6 +697,7 @@ let person = Person { name: String::from("Alice") };
 let name = person.name;  // 所有权转移
 println!("{}", person.name);  // ❌ 编译错误
 ```
+
 **解决方案**:
 
 ```rust
@@ -677,6 +705,7 @@ let name = person.name.clone();  // 克隆
 // 或
 let name = &person.name;  // 借用
 ```
+
 ### 问题3: 循环中的所有权
 
 **错误代码**:
@@ -688,6 +717,7 @@ for s in vec {
 }
 println!("{:?}", vec);  // ❌ 编译错误
 ```
+
 **解决方案**:
 
 ```rust
@@ -697,6 +727,7 @@ for s in &vec {  // 借用
 }
 println!("{:?}", vec);  // ✅
 ```
+
 ---
 
 ## 10. 总结与最佳实践

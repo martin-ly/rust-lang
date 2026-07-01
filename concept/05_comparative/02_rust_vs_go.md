@@ -1,4 +1,6 @@
-> **内容分级**: [综述级]
+> **内容分级**:
+>
+> [综述级]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 
@@ -189,6 +191,7 @@ graph TD
     E --> E1[Rust: 性能优先]
     E --> E2[Go: 开发速度优先]
 ```
+
 > **认知功能**: 建立 Rust vs Go 的全景认知框架，将复杂对比简化为四个可记忆维度。在学习初期用作"导航图"，遇到具体问题时快速定位对比维度。关键洞察：两种语言并非简单的优劣之分，而是在"安全-效率"与"简单-性能"光谱上的不同权衡点。[来源: 💡 原创分析]
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
@@ -216,6 +219,7 @@ sequenceDiagram
     GC->>G2: data := <-ch
     Note right of G2: 运行时调度 + GC
 ```
+
 > **认知功能**: 通过时序对比可视化 Rust 所有权转移与 Go 值拷贝的并发通信差异。对照阅读时关注"编译期验证 vs 运行时调度"的本质区别。关键洞察：Rust channel 传递所有权并由编译器验证 Send/Sync，Go channel 传递值拷贝且安全依赖程序员纪律。[来源: 💡 原创分析]
 
 ## 四、决策树：何时选 Rust vs Go
@@ -249,6 +253,7 @@ graph TD
     style A3 fill:#ff9
     style WARN1 fill:#f96
 ```
+
 > **认知功能**: 将技术选型问题转化为可操作的决策路径，降低选型焦虑。建议按顺序回答每个节点问题，不要跳过前置条件。关键洞察：P99 延迟和 GC 容忍度是最先决策的分水岭，团队经验往往比纯技术因素更重要。[来源: 💡 原创分析]
 > **决策节点解释**:
 >
@@ -290,6 +295,7 @@ graph TD
     style F3 fill:#6f6
     style T fill:#ff9
 ```
+
 > **认知功能**: 通过反例分析破除"Rust 适合所有后端"的绝对化认知，培养批判性思维。建议在每个分支节点先自行判断再查看结论，训练辩证分析能力。关键洞察：Go 在快速迭代场景的反例与 Rust 在低延迟场景的优势形成互补，而非对立。[来源: 💡 原创分析]
 
 ### 6.2 反例: Go 的 GC 停顿 vs Rust 的无 GC
@@ -310,12 +316,14 @@ fn process<T: Serializer>(item: T) -> Vec<u8> {
     item.serialize() // 单态化后直接内联
 }
 ```
+
 ```go
 // Go: interface 动态派发 — 每次调用需 itab 查找
 func Process(s Serializer) []byte {
     return s.Serialize() // 通过 itab 间接跳转
 }
 ```
+
 | **指标** | **Rust Trait（静态）** | **Go Interface（动态）** |
 |:---|:---|:---|
 | 调用指令数 | 直接 CALL（1 条） | LEA + MOV + CALL（3-4 条） |
@@ -349,6 +357,7 @@ fn main() {
     handle.join().unwrap();
 }
 ```
+
 > **关键机制**: `move` 闭包（Closures）将 `tx` 的所有权转移到新线程；`send(data)` 将 `String` 的所有权转移到 channel；`recv()` 将所有权转移到接收端。整个过程中编译器通过 `Send` trait 验证跨线程传递的合法性。 来源: [TRPL Ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 
 ### 7.2 Go Channel（值拷贝 + 共享堆）
@@ -377,6 +386,7 @@ func main() {
     time.Sleep(100 * time.Millisecond) // 等待 goroutine 退出（实际应使用 sync.WaitGroup）
 }
 ```
+
 > **关键机制**: Go 的 channel 传递的是值的拷贝（若传递指针则共享堆）。没有编译期所有权检查，开发者需自行避免数据竞争。`go` 关键字启动的 goroutine 由运行时调度器管理，栈动态增长（2KB 起始）。 [来源: Effective Go / Go Memory Model]
 
 ### 7.3 对比总结
@@ -437,6 +447,7 @@ fn main() {
     }
 }
 ```
+
 ```go
 // Go: 多返回值 + error interface
 package main
@@ -463,6 +474,7 @@ func main() {
     fmt.Println(data)
 }
 ```
+
 > **关键差异**: Rust 的 `?` 使错误传播成为"默认路径"，Go 需要显式 `if err != nil`。Go 1.18+ 的泛型未改变错误处理（Error Handling）范式。 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/) / Effective Go
 
 ### 8.3 错误处理反命题
@@ -479,6 +491,7 @@ graph TD
     style F2 fill:#f96
     style T fill:#ff9
 ```
+
 > **认知功能**: 揭示 Rust 与 Go 错误处理各自的优势边界，避免非黑即白的判断。建议结合 §8.1 对比矩阵阅读，关注 Go 的堆栈追踪优势与 Rust 的强制安全边界。关键洞察：当错误需要丰富上下文或代码呈线性脚本风格时，Go 的显式处理反而更具工程价值。[来源: 💡 原创分析]
 
 ---
@@ -526,6 +539,7 @@ pub fn parse_u32(s: &str) -> Result<u32, std::num::ParseIntError> {
     s.parse()
 }
 ```
+
 ```go
 // Go: Example 测试——输出匹配
 func ExampleParseUint() {
@@ -534,6 +548,7 @@ func ExampleParseUint() {
     // Output: 42
 }
 ```
+
 > **关键差异**: Rust 的文档测试深度集成到文档生成（`rustdoc`），代码示例不编译通过即阻止发布。Go 的 Example 测试较弱，输出匹配而非断言。 来源: [TRPL Ch14](https://doc.rust-lang.org/book/title-page.html)
 
 ---
@@ -572,6 +587,7 @@ graph TD
     style F3 fill:#f96
     style T fill:#ff9
 ```
+
 > **认知功能**: 纠偏"Rust 性能全面碾压 Go"的刻板印象，建立场景化性能认知。建议在阅读 §10.1 基准数据后回看此图，区分"绝对性能"与"工程效率"的不同维度。关键洞察：IO 密集型和编译迭代速度是 Go 的两个关键反例阵地，CPU/内存敏感路径才是 Rust 的主场。[来源: 💡 原创分析]
 
 ---
@@ -635,6 +651,7 @@ func main() {
     }
 }
 ```
+
 ```rust,ignore
 // ✅ Rust: async/await + Tokio 的零成本抽象
 #[tokio::main]
@@ -650,6 +667,7 @@ async fn main() {
     }
 }
 ```
+
 > **定理**：在**纯 IO 密集型**场景（网络代理、API 网关）中，Rust async 和 Go goroutine 的性能差距通常在 **20% 以内**——Rust 的优势更多体现在**内存效率**和**延迟可预测性**，而非绝对吞吐量。
 > **来源**: [TechEmpower Framework Benchmarks 2024] · [Tokio 博客: Tokio vs Go] · [Go 调度器文档] · [Rust 异步（Async）书]
 
@@ -670,6 +688,7 @@ async fn main() {
 │  - 零成本抽象、内存安全、可预测延迟          │
 └─────────────────────────────────────────────┘
 ```
+
 **真实案例**：
 
 - **Discord**：Go 服务层 + Rust 状态服务（减少 GC 延迟 90%）
@@ -686,6 +705,7 @@ pub extern "C" fn rust_parse_json(input: *const c_char) -> *mut c_char {
     // 高性能 JSON 解析
 }
 ```
+
 ```go
 // Go 侧（通过 cgo）
 // #cgo LDFLAGS: -lrust_parser
@@ -699,6 +719,7 @@ func ParseJSON(input string) string {
     return C.GoString(result)
 }
 ```
+
 > **警告**：cgo 调用有 **~100ns** 的固定开销，高频调用应批量处理。gRPC/共享内存 是比 cgo 更优的跨语言通信方案。
 > **来源**: [Discord 工程博客] · [Shopify 工程博客] · [Vercel Turborepo] · [Go CGO 文档]
 
@@ -795,6 +816,7 @@ impl Reader for MyReader {
     }
 }
 ```
+
 > **Go 对比**: Go 使用**结构类型**（structural typing）——只要类型有对应方法，就自动满足接口。Rust 使用**名义类型**（nominal typing）——必须显式 `impl Trait for Type`。Go 的隐式接口减少样板代码，但可能导致" accidentally satisfied" 接口（类型无意间实现接口，产生意外行为）。Rust 的显式实现增加代码量，但确保接口实现是设计者的有意选择，且编译错误更精确。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：Go 的 nil 指针与 Rust 的 `Option`（编译错误）
@@ -816,6 +838,7 @@ fn fixed() {
     }
 }
 ```
+
 > **Go 对比**: Go 的 `nil` 是指针类型的零值，空接口值也是 `nil`，但**接口值包含类型和值两部分**。Go 中 `var p *int = nil` 是合法的空指针，但解引用会导致运行时 panic。Rust 没有 `nil` 指针——引用（Reference）（`&T`、`&mut T`）永远有效，`Option<T>` 显式编码可空值。`None` 和 `Some` 在类型层面区分，编译器强制处理两种情况。这消除了 Go/C 中常见的 nil pointer dereference 漏洞。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：Go 的接口与 Rust 的 trait 的隐式实现差异（编译错误）
@@ -847,6 +870,7 @@ fn main() {
     // use_reader(&mut s); // 编译错误
 }
 ```
+
 > **修正**: Go 的接口是**结构化**的（structural）：任何类型只要有接口要求的方法，就自动实现该接口。Rust 的 trait 是**名义化**的（nominal）：必须显式 `impl Trait for Type`，即使类型已有同名方法。这是设计哲学的差异：Go 追求隐式、简洁，但方法签名不匹配时产生难以调试的错误；Rust 追求显式、安全，trait 实现是契约的明确声明。Rust 的显式实现也支持**孤儿规则**（orphan rule）：不能为外部类型实现外部 trait，防止意外冲突。Go 无此限制，但不同包的方法可能意外"实现"接口。这与 Haskell 的 typeclass（名义化，需 `instance` 声明）或 Scala 的 structural types（类似 Go 的隐式实现）类似——Rust 选择了 Haskell 的名义化路径。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html)] · [来源: [Go Interfaces](https://go.dev/tour/methods/9)]
 
 ### 10.4 边界测试：Go 的 nil 与 Rust 的 `Option` 的语义差异（编译错误）
@@ -868,6 +892,7 @@ fn main() {
     // unsafe { println!("{}", *raw); } // UB!
 }
 ```
+
 > **修正**: Go 的 `nil` 是多重含义的：指针 nil、接口 nil、channel nil、map nil、slice nil，且 "nil interface" 不等于 "nil 指针放入 interface"。Rust 用 `Option<T>` 统一表达"可能无值"：`Option<&T>` 的 `None` 对应 nil 指针，`Option<Box<T>>` 的 `None` 对应 nil 堆指针。Rust 无隐式 nil：所有引用必须有效（或显式 `Option`），裸指针可能为 null 但只能在 `unsafe` 中解引用。这与 Go 的 "nil 是零值"（所有引用类型的默认值）或 Java 的 `null`（所有引用类型的默认值）不同——Rust 消除了 billion-dollar mistake（Tony Hoare 对 null 的称呼）通过类型系统（Type System）强制显式处理缺失值。来源: [The Rust Programming Language] · 来源: [Null References: The Billion Dollar Mistake]
 
 ### 10.3 边界测试：Go 的接口nil与Rust的Option显式空值（运行时陷阱）
@@ -887,6 +912,7 @@ fn main() {
     // let r = p.unwrap_or(&0); // 提供默认值
 }
 ```
+
 > **修正**: Go 的**接口 nil 陷阱**：接口值由（类型，值）对组成，nil 指针赋值给接口后，接口值不为 nil（类型信息存在）。这导致 `if r != nil` 为 true，但底层指针为 nil，解引用 panic。Rust 的 `Option<&T>` 是**显式空值**：`None` 和 `Some(&T)` 是不同的变体，编译器强制处理所有情况（`match`、`if let`、`unwrap`）。Rust 无 "nil 指针但非 None" 的概念——空值是显式的、类型安全的。这与 Haskell 的 `Maybe a`（`Nothing` / `Just a`）或 Swift 的 `Optional<T>`（`nil` / `T`）相同——Rust 的 `Option` 是代数数据类型，空值状态在类型系统中显式编码。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)] · [来源: [Go Interface Nil](https://golang.org/doc/faq#nil_error)]
 
 ## 嵌入式测验（Embedded Quiz）

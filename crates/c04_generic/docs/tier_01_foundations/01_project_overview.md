@@ -83,6 +83,7 @@ let max_number = find_max(&numbers);  // 100
 let chars = vec!['y', 'm', 'a', 'q'];
 let max_char = find_max(&chars);      // 'y'
 ```
+
 ### 本项目的目标
 
 本项目旨在提供 **最全面、最系统、最实用** 的 Rust 泛型编程学习资源：
@@ -129,6 +130,7 @@ impl<T> Point<T> {
     }
 }
 ```
+
 ### 2. 深入的 Trait 系统
 
 ```rust
@@ -158,6 +160,7 @@ where
     // ...
 }
 ```
+
 ### 3. 高级泛型特性 (Rust 1.92.0+)
 
 ```rust
@@ -183,6 +186,7 @@ trait AsyncProcessor {
     async fn process(&self, data: &str) -> Result<String, Error>;
 }
 ```
+
 ### 4. 类型安全与零成本抽象
 
 Rust 的泛型在编译时进行 **单态化** (Monomorphization)，生成特定类型的代码，实现零运行时开销：
@@ -197,6 +201,7 @@ fn add<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
 // fn add_i32(a: i32, b: i32) -> i32 { a + b }
 // fn add_f64(a: f64, b: f64) -> f64 { a + b }
 ```
+
 ---
 
 ## 📚 文档体系
@@ -244,6 +249,7 @@ fn add<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
    ├── 03_对比矩阵/                      → 25+ 技术对比表
    └── 04_历史文档/                      → 历史报告与总结
 ```
+
 ### 文档层级说明
 
 | Tier       | 目标用户    | 学习时间 | 主要内容            | 深度       |
@@ -289,6 +295,7 @@ fn main() {
     println!("Vector: {:?}", vec_container.get());
 }
 ```
+
 ### 15分钟深入理解
 
 #### 示例 1: 泛型约束
@@ -315,6 +322,7 @@ fn main() {
     // print_value(vec![1, 2, 3]); // ❌ Vec<i32> 没有实现 Display
 }
 ```
+
 #### 示例 2: 多重约束
 
 ```rust
@@ -333,6 +341,7 @@ fn main() {
     print_both(3.14);      // ✅ f64 也都实现了
 }
 ```
+
 #### 示例 3: 关联类型
 
 ```rust
@@ -369,6 +378,7 @@ fn main() {
     }
 }
 ```
+
 ### 30分钟实战案例
 
 完整的类型安全构建器模式 (Builder Pattern)：
@@ -455,6 +465,7 @@ fn main() {
     //     .build();  // 错误：build() 方法不存在于 UserBuilder<Set, Unset>
 }
 ```
+
 **这个例子展示了**:
 
 - ✅ 类型状态模式：使用泛型类型参数表示状态
@@ -657,6 +668,7 @@ trait Container {
     fn iter(&self) -> Self::Iter<'_>;
 }
 ```
+
 📂 查看: [`RUST_192_GENERIC_IMPROVEMENTS`](../RUST_192_GENERIC_IMPROVEMENTS.md)
 
 ---

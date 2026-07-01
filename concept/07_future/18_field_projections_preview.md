@@ -77,6 +77,7 @@ struct Packet {
 let p = Packet { header: 0x1234, payload: [0; 1024] };
 let h = &p.header; // ✅ 简单
 ```
+
 但在某些场景中，我们需要**在不拥有完整结构体的情况下**获取字段引用：
 
 - **内核驱动**: 从已知基地址的原始内存映射中读取字段
@@ -113,6 +114,7 @@ fn project_status(base: &DeviceRegs) -> &u32 {
     unsafe { &*ptr::from_ref(base).byte_add(<field_of!(DeviceRegs, status) as Field>::OFFSET).cast() }
 }
 ```
+
 ---
 
 ## 二、技术细节
@@ -136,6 +138,7 @@ impl FieldProjection<DeviceRegs, u32> for DeviceRegs {
     fn project_mut(parent: &mut DeviceRegs) -> &mut u32 { &mut parent.status }
 }
 ```
+
 ### 2.2 与 `Pin` 的协同
 
 Field projections 可与 `Pin` 结合，实现**安全的自引用结构**初始化：
@@ -154,6 +157,7 @@ struct SelfRef {
     ptr: Projected<&[u8], field=buffer>,
 }
 ```
+
 ---
 
 ## 三、使用场景
@@ -183,6 +187,7 @@ impl UartRegs {
     }
 }
 ```
+
 ### 场景 2：安全地自引用结构
 
 ```rust,ignore
@@ -207,6 +212,7 @@ impl Parser {
     }
 }
 ```
+
 ### 场景 3：零拷贝反序列化
 
 ```rust,ignore
@@ -224,6 +230,7 @@ fn parse_packet(bytes: &[u8]) -> Option<&Packet> {
     Some(p)
 }
 ```
+
 ---
 
 ## 四、反命题与边界分析
@@ -241,6 +248,7 @@ let tx_offset = offset_of!(UartRegs, tx); // 编译期常量
 
 // field projections 是 offset_of! 的运行时安全扩展
 ```
+
 | 特性 | `offset_of!` | Field Projections |
 |------|-------------|-------------------|
 | 时机 | 编译期 | 运行时（Runtime）/编译期 |

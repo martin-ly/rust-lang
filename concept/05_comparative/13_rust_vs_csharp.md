@@ -1,4 +1,6 @@
-> **生态状态提示**：本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
+> **生态状态提示**：
+>
+> 本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
 >
 > - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
@@ -122,6 +124,7 @@
   │ 非托管互操作    │ unsafe / Marshal│ FFI / unsafe    │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **内存洞察**: **C# 的 GC 简化了内存管理但有停顿，Rust 的所有权（Ownership）消除了停顿但增加了学习成本**。
 > [来源: [C# Memory Management](https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/)]
 
@@ -167,6 +170,7 @@
   ├── Rust 性能更优
   └── C# 反射可操作泛型参数
 ```
+
 > **泛型洞察**: **C# 的 Reified 泛型更灵活，Rust 的单态化（Monomorphization）更高效**——设计目标不同。
 > [来源: [C# Generics](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/)]
 
@@ -214,6 +218,7 @@
   ├── Rust Future 更轻量
   └── C# 有同步上下文概念
 ```
+
 > **异步洞察**: **C# 的异步更集成但更重，Rust 的异步更灵活但更底层**。
 > [来源: [C# Async](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/)]
 
@@ -265,6 +270,7 @@
   ├── Rust 编译器强制穷尽性
   └── 两者都在快速演进
 ```
+
 > **模式洞察**: **C# 9+ 的模式匹配（Pattern Matching）非常强大，Rust 的 match 更严格**——两者都在借鉴对方。
 > [来源: [C# Pattern Matching](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/functional/pattern-matching)]
 
@@ -318,6 +324,7 @@
   ├── Rust 错误需显式处理
   └── C# 有全局异常处理器
 ```
+
 > **错误洞察**: **C# 的异常适合复杂错误场景，Rust 的 Result 适合系统编程**——零成本是 Rust 的关键优势。
 > [来源: [C# Exceptions](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/exceptions/)]
 
@@ -369,6 +376,7 @@ unsafe 对比:
         fn message_box(hwnd: isize, text: *const c_char, caption: *const c_char, type_: u32) -> i32;
     }
 ```
+
 > **unsafe 洞察**: **C# 的 unsafe 更简单但能力有限，Rust 的 unsafe 更强大但责任更重**。
 > [来源: [C# Unsafe Code](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/unsafe-code)]
 
@@ -403,6 +411,7 @@ unsafe 对比:
   ├── Rust crates 增长快
   └── C# 需要 .NET SDK
 ```
+
 > **构建洞察**: **Rust 的 Cargo 比 C# 的 MSBuild 更简洁**——单一工具链减少了配置复杂度。
 > [来源: [.NET CLI](https://docs.microsoft.com/en-us/dotnet/core/tools/)]
 
@@ -440,6 +449,7 @@ unsafe 对比:
   ├── 跨平台一致
   └── WASM 支持成熟
 ```
+
 > **互操作洞察**: **C# 是 Windows 生态的最佳公民，Rust 是跨平台互操作的通用胶水**。
 > [来源: [C# Interop](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/interop/)]
 
@@ -464,6 +474,7 @@ graph TD
     style RUST fill:#c8e6c9
     style EITHER fill:#fff3e0
 ```
+
 > **认知功能**: **.NET/Windows 选 C#，系统/性能选 Rust**——两者在现代生态中互补。
 > [来源: [.NET vs Rust Discussion](https://devblogs.microsoft.com/dotnet/)]
 
@@ -502,6 +513,7 @@ graph TD
 ├── C# Linux/macOS 改善中
 └── Rust 嵌入式/WASM 优势
 ```
+
 > **边界要点**: Rust vs C# 的边界与**生态**、**学习曲线**、**工具链**、**运行时（Runtime）**和**平台**相关。
 > [来源: [.NET Blog](https://devblogs.microsoft.com/dotnet/)]
 
@@ -547,6 +559,7 @@ graph TD
   ✅ 启用 nullable 并使用 ? 注解
      string? s = null;
 ```
+
 > **陷阱总结**: Rust vs C# 的陷阱主要与**风格模仿**、**async**、**资源管理**和**可空性**相关。
 
 ---
@@ -572,6 +585,7 @@ fn main() {
     println!("{:?}", doubled);
 }
 ```
+
 ## 相关概念文件
 
 - [Ownership](../01_foundation/01_ownership.md) — 所有权（Ownership）
@@ -626,6 +640,7 @@ async fn main_fixed() {
     println!("{}", data);
 }
 ```
+
 > **C# 对比**: C# 的 `async/await` 可在任何方法中使用（包括 `Main`），编译器自动生成状态机。Rust 的 `async fn` 返回 `Future`，必须在异步运行时上执行。C# 的 `Task` 与 Rust 的 `Future` 类似，但 C# 有隐式运行时（线程池），Rust 要求显式选择运行时（Tokio）。Rust 的设计更灵活（可选择无运行时），但增加了认知负担。C# 的 `await` 可在 `catch`/`finally` 中使用，Rust 的 `?` 运算符在 `async` 中有类似限制。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：C# 的 LINQ 与 Rust 的迭代器（编译错误）
@@ -641,6 +656,7 @@ fn main() {
         .collect(); // ✅ 显式方法链
 }
 ```
+
 > **C# 对比**: C# 的 LINQ 提供查询表达式语法（`from x in data where x > 1 select x * 2`），编译器转换为方法调用。Rust 只有方法链（`filter().map().collect()`），没有查询表达式。LINQ 的延迟执行与 Rust 的惰性迭代器（Iterator）相同，但 C# 的 `IEnumerable` 有运行时（Runtime）开销（虚方法调用），Rust 的迭代器通过单态化（Monomorphization）实现零成本。Rust 的迭代器是更底层的抽象，性能更优，但可读性不如 LINQ 查询表达式。来源: [Rust Standard Library]
 
 ### 10.3 边界测试：C# 的 async/await 与 Rust 的 `?` 在 async 中的交互（编译错误）
@@ -663,6 +679,7 @@ fn main() {
     // });
 }
 ```
+
 > **修正**: C# 的 `async/await` 从 `Main` 方法开始就支持：`static async Task Main()` 是合法的，编译器自动生成状态机包装。
 > Rust 的 `main` 不能是 `async fn`——`main` 是程序入口点，操作系统直接调用，无运行时调度 async 任务。
 > 必须用 `#[tokio::main]` 宏（Macro）或手动创建 runtime 并 `block_on`。这是设计差异：C# 的 async 是语言级别的（编译器内置状态机生成），Rust 的 async 是库级别的（`Future` trait + runtime crate）。
@@ -692,6 +709,7 @@ fn main() {
     // File 未实现 Debug，即使 Wrapper 是本地类型，derive 也失败
 }
 ```
+
 > **修正**: C# 的**属性**（attributes）主要是**元数据**：`[Serializable]`、`[Obsolete]` 等标记供运行时反射读取，不改变代码行为（少数如 `[MethodImpl]` 影响 JIT）。Rust 的**派生宏**（`#[derive(...)]`）是**代码生成**：在编译期生成 trait 实现代码（`Debug::fmt`、`Clone::clone` 等）。这是编译期 vs 运行期的根本差异：C# 的属性轻量但能力有限，Rust 的 derive 强大但增加编译时间。C# 的代码生成需额外工具（T4 模板、Source Generators），Rust 的宏是语言原生特性。这与 Java 的注解（类似 C# 属性，运行时反射）或 Python 的装饰器（运行时元编程）不同——Rust 的宏是编译期元编程，零运行时开销。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] · [来源: [C# Attributes](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/)]
 
 ### 10.3 边界测试：C# 的 async/await 与 Rust 的 Future 语义差异（运行时行为差异）
@@ -719,6 +737,7 @@ fn main() {
     // Rust: async fn 返回 Future，执行在 .await 或 spawn 时开始
 }
 ```
+
 > **修正**: Rust 的 `async fn` 是**惰性**的：调用时不执行函数体，只创建一个 `Future` 状态机。执行在 `.await` 或 `tokio::spawn` 时开始。C# 的 `async` 方法是**立即执行**的：调用时立即执行到第一个 `await`，然后返回 `Task`。语义差异影响：1) Rust 的 `async fn` 可组合（`future::join(t1, t2).await`）而不立即执行；2) C# 的 `Task.WhenAll` 组合已运行的任务；3) Rust 的 `Drop` 在 Future 被取消时执行（异步清理），C# 的 `IDisposable` 需显式 `using`。这与 JavaScript 的 Promise（立即执行，类似 C#）或 Kotlin 的 suspend function（惰性，类似 Rust）不同——Rust 的惰性 async 提供更多控制，但需注意意外未执行。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html)] · [来源: [Async Rust](https://rust-lang.github.io/async-book/)]
 
 ## 嵌入式测验（Embedded Quiz）

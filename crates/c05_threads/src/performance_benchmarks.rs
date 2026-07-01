@@ -20,9 +20,8 @@ use std::time::Instant;
 type TaskResult = (usize, Vec<i32>);
 type Task = Box<dyn FnOnce() -> TaskResult + Send>;
 
-
 use super::advanced_concurrency::{
-    parallel_map, parallel_reduce, HighPerformanceThreadPool, LockFreeRingBuffer, LockFreeStack,
+    HighPerformanceThreadPool, LockFreeRingBuffer, LockFreeStack, parallel_map, parallel_reduce,
 };
 
 // ============================================================================

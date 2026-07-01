@@ -24,6 +24,7 @@ src/
 ├── advanced_patterns/  # 高级模式
 └── gat/                # 泛型关联类型
 ```
+
 ## 主要类型和 Trait
 
 ### 泛型约束 Trait
@@ -76,6 +77,7 @@ impl Point<f32, f32> {
     }
 }
 ```
+
 ### 高级 Trait 约束
 
 ```rust
@@ -93,6 +95,7 @@ where
     }
 }
 ```
+
 ### 泛型关联类型 (GAT)
 
 ```rust
@@ -114,6 +117,7 @@ impl<T> Container for VecContainer<T> {
     }
 }
 ```
+
 ### Trait 对象
 
 ```rust
@@ -137,6 +141,7 @@ fn draw_all(components: &[Box<dyn Drawable>]) {
     }
 }
 ```
+
 ## 依赖关系
 
 ### 上游依赖
@@ -158,6 +163,7 @@ rayon = { workspace = true }
 serde = { workspace = true }
 anyhow = { workspace = true }
 ```
+
 ## 运行方式
 
 ```bash
@@ -170,6 +176,7 @@ cargo run -p c04_generic
 # 运行基准测试
 cargo bench -p c04_generic
 ```
+
 ## 学习路径建议
 
 1. 掌握基础泛型语法

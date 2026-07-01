@@ -108,6 +108,7 @@ Rust 1.91 允许在 const 上下文中创建对非静态常量的引用，这对
 static VALUE: i32 = 42;
 const REF: &i32 = &VALUE;  // 只能引用 static
 ```
+
 **Rust 1.91**:
 
 ```rust
@@ -124,6 +125,7 @@ impl GenericConfig<i32> {
     pub const DOUBLE_VALUE: i32 = *Self::VALUE_REF * 2;
 }
 ```
+
 #### 2. 泛型 const 函数
 
 ```rust
@@ -134,6 +136,7 @@ const FACTORIAL_10: u32 = const_generics::const_generic_factorial(
     *const_generics::CONST_GENERIC_REF
 );
 ```
+
 ### 实际应用场景
 
 #### 配置系统
@@ -153,6 +156,7 @@ fn create_buffer() -> Vec<u8> {
     vec![0u8; *GenericConfig::<usize>::SIZE_REF]
 }
 ```
+
 ---
 
 ## JIT 编译器优化对泛型函数的影响
@@ -176,6 +180,7 @@ use c04_generic::rust_191_features::generic_jit_optimizations;
 let numbers = vec![1, 2, 3, 4, 5];
 let result = generic_jit_optimizations::generic_iterator_pipeline(&numbers);
 ```
+
 #### 2. 复杂泛型迭代器链
 
 ```rust
@@ -185,6 +190,7 @@ let result = generic_jit_optimizations::complex_generic_pipeline(
     |&x| x > 3
 );
 ```
+
 ### 性能对比
 
 | 场景       | Rust 1.91 (历史) | Rust 1.92.0 (当前) | 性能提升 |
@@ -214,6 +220,7 @@ use c04_generic::rust_191_features::optimized_generic_containers;
 // Rust 1.91 优化：小对象分配性能提升 25-30%
 let vectors = optimized_generic_containers::create_generic_vectors(42, 1000);
 ```
+
 #### 2. 泛型集合操作
 
 ```rust
@@ -221,6 +228,7 @@ let vectors = optimized_generic_containers::create_generic_vectors(42, 1000);
 let data = vec![1, 2, 2, 3, 3, 3, 4, 5];
 let result = optimized_generic_containers::optimized_generic_collection_ops(&data);
 ```
+
 ---
 
 ## 泛型类型推断优化
@@ -247,12 +255,14 @@ let result = generic_type_inference::complex_generic_function(
     |items| items.iter().sum::<i32>(),
 );
 ```
+
 #### 2. 嵌套泛型类型推断
 
 ```rust
 // Rust 1.91 优化：嵌套泛型类型推断性能提升
 let nested = generic_type_inference::nested_generic_inference(&data);
 ```
+
 ---
 
 ## 泛型关联类型 (GAT) 优化
@@ -276,6 +286,7 @@ use c04_generic::rust_191_features::generic_associated_types;
 let collection = generic_associated_types::GenericCollection::new(vec![1, 2, 3, 4, 5]);
 let sum: i32 = collection.iter().sum();
 ```
+
 #### 2. GAT Builder Pattern
 
 ```rust
@@ -283,6 +294,7 @@ let sum: i32 = collection.iter().sum();
 let builder = generic_associated_types::GenericBuilder::new(42);
 let result = builder.build();
 ```
+
 ---
 
 ## 高阶 trait 边界 (HRTB) 优化
@@ -306,12 +318,14 @@ use c04_generic::rust_191_features::higher_ranked_trait_bounds;
 let numbers = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 let filtered = higher_ranked_trait_bounds::process_with_hrb(&numbers, |&x| x % 2 == 0);
 ```
+
 #### 2. HRTB 映射函数
 
 ```rust
 // Rust 1.91 优化：HRTB 处理更高效
 let mapped = higher_ranked_trait_bounds::map_with_hrb(&numbers, |&x| x * 2);
 ```
+
 ---
 
 ## 单态化 (Monomorphization) 优化
@@ -335,12 +349,14 @@ use c04_generic::rust_191_features::monomorphization_optimization;
 let int_result = monomorphization_optimization::generic_compute(42);
 let float_result = monomorphization_optimization::generic_compute(3.14);
 ```
+
 #### 2. 复杂泛型操作
 
 ```rust
 // Rust 1.91 优化：复杂泛型的单态化性能提升
 let doubled = monomorphization_optimization::complex_generic_op(&numbers, |&x| x * 2);
 ```
+
 ---
 
 ## 实际应用示例
@@ -362,6 +378,7 @@ fn high_performance_processing() {
     println!("处理结果: {:?}", result);
 }
 ```
+
 ### 示例 2: const 泛型配置
 
 ```rust
@@ -373,6 +390,7 @@ fn use_const_config() {
     println!("双倍配置: {}", GenericConfig::<i32>::DOUBLE_VALUE);
 }
 ```
+
 ### 示例 3: GAT 迭代器
 
 ```rust
@@ -385,6 +403,7 @@ fn use_gat_iterator() {
     println!("集合求和: {}", sum);
 }
 ```
+
 ---
 
 ## 迁移指南
@@ -397,6 +416,7 @@ fn use_gat_iterator() {
 rustup update stable
 rustc --version  # 应该显示 rustc 1.91.0
 ```
+
 #### 2. 利用新特性
 
 **使用 const 上下文增强**:
@@ -410,6 +430,7 @@ const REF: &i32 = &VALUE;
 const VALUE: i32 = 42;
 const REF: &i32 = &VALUE;  // 可以引用 const
 ```
+
 **利用 JIT 优化**:
 
 ```rust
@@ -419,12 +440,14 @@ let result = items.iter()
     .filter(|&x| x > 10)
     .collect();  // 性能提升 10-25%
 ```
+
 **使用优化的容器操作**:
 
 ```rust
 // Rust 1.91: 小对象分配自动优化
 let vectors = create_generic_vectors(value, 1000);  // 性能提升 25-30%
 ```
+
 #### 3. 性能优化建议
 
 1. **利用 JIT 优化**: 使用链式迭代器操作会自动受益于性能提升

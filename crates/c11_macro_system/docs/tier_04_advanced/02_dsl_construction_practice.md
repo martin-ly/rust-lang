@@ -125,6 +125,7 @@ DSL构建实践
 └── 性能优化
     └── 编译时间优化
 ```
+
 ### 多维概念对比矩阵
 
 | 解析器技术     | 性能 | 复杂度 | 错误恢复 | 适用场景   | Rust 1.92.0 |
@@ -148,6 +149,7 @@ DSL构建实践
 │       │       │   ├── 是 → Nom 组合子
 │       │       │   └── 否 → 宏解析器
 ```
+
 ---
 
 ## 1. 概述
@@ -205,6 +207,7 @@ html! {
     </div>
 }
 ```
+
 #### 2.1.2 用户研究
 
 **考虑因素**：
@@ -233,6 +236,7 @@ ui! {
     Label { text: "Status: OK" }
 }
 ```
+
 #### 2.2.2 语法糖设计
 
 ```rust
@@ -248,6 +252,7 @@ query! {
     SELECT id, name FROM users WHERE age = 30
 }
 ```
+
 #### 2.2.3 类型安全
 
 ```rust
@@ -263,6 +268,7 @@ sql! {
 //     SELECT users.invalid_field FROM users
 // }
 ```
+
 ---
 
 ### 2.3 表达能力与简洁性平衡
@@ -299,6 +305,7 @@ config! {
     ],
 }
 ```
+
 ---
 
 ### 2.4 错误处理设计
@@ -321,6 +328,7 @@ fn validate_email(email: &str) -> Result<(), String> {
     }
 }
 ```
+
 #### 2.4.2 错误消息质量
 
 ```rust
@@ -336,6 +344,7 @@ fn validate_email(email: &str) -> Result<(), String> {
 //    |
 //    = note: to close object starting at line 8
 ```
+
 ---
 
 ## 3. 解析器构建
@@ -375,6 +384,7 @@ fn macro_parser_example() {
     println!("{:?}", config);
 }
 ```
+
 #### 3.1.2 表达式解析
 
 ```rust
@@ -403,6 +413,7 @@ fn expression_parser() {
     println!("Result: {}", result);
 }
 ```
+
 ---
 
 ### 3.2 Nom 组合子
@@ -413,6 +424,7 @@ fn expression_parser() {
 [dependencies]
 nom = "7.1"
 ```
+
 ```rust
 use nom::{
     IResult,
@@ -456,6 +468,7 @@ fn nom_parser_example() {
     }
 }
 ```
+
 #### 3.2.2 复杂表达式解析
 
 ```rust
@@ -526,6 +539,7 @@ fn test_nom_expression() {
     );
 }
 ```
+
 ---
 
 ### 3.3 Pest PEG解析器
@@ -537,6 +551,7 @@ fn test_nom_expression() {
 pest = "2.7"
 pest_derive = "2.7"
 ```
+
 ```pest
 // grammar.pest
 WHITESPACE = _{ " " | "\t" | "\n" }
@@ -547,6 +562,7 @@ number = @{ ASCII_DIGIT+ }
 key_value = { identifier ~ "=" ~ number }
 config = { SOI ~ key_value ~ ("," ~ key_value)* ~ EOI }
 ```
+
 #### 3.3.2 Rust 解析器
 
 ```rust
@@ -588,6 +604,7 @@ fn test_pest_parser() {
     );
 }
 ```
+
 ---
 
 ### 3.4 手写递归下降解析器
@@ -689,6 +706,7 @@ impl Lexer {
     }
 }
 ```
+
 #### 3.4.2 语法分析
 
 ```rust
@@ -817,6 +835,7 @@ fn test_recursive_descent() {
     );
 }
 ```
+
 ---
 
 ## 4. 错误恢复
@@ -859,6 +878,7 @@ fn report_error(input: &str, span: Span, message: &str) {
     eprintln!("  | {}^", " ".repeat(column));
 }
 ```
+
 ---
 
 ### 4.2 部分解析与恢复
@@ -891,6 +911,7 @@ impl Parser {
     }
 }
 ```
+
 ---
 
 ### 4.3 友好错误消息
@@ -916,6 +937,7 @@ let error = format_error(
     Some("to close object starting at line 8")
 );
 ```
+
 ---
 
 ### 4.4 多错误报告
@@ -941,6 +963,7 @@ impl ErrorCollector {
     }
 }
 ```
+
 ---
 
 ## 5. 实战案例
@@ -987,6 +1010,7 @@ fn html_dsl_example() {
     println!("{}", output);
 }
 ```
+
 ---
 
 ### 5.2 SQL查询构建器
@@ -1019,6 +1043,7 @@ fn sql_dsl_example() {
     println!("{}", query2);
 }
 ```
+
 ---
 
 ### 5.3 配置文件DSL
@@ -1047,6 +1072,7 @@ fn config_dsl_example() {
     println!("{:?}", cfg);
 }
 ```
+
 ---
 
 ### 5.4 状态机描述语言
@@ -1118,6 +1144,7 @@ fn state_machine_example() {
     assert_eq!(sm.current, State::Stopped);
 }
 ```
+
 ---
 
 ## 6. 性能优化
@@ -1144,6 +1171,7 @@ fn good_repeat<F: Fn()>(n: usize, f: F) {
     }
 }
 ```
+
 ---
 
 ### 6.2 生成代码优化
@@ -1160,6 +1188,7 @@ macro_rules! generate_getter {
     };
 }
 ```
+
 ---
 
 ## 7. 相关资源

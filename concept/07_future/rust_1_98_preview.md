@@ -64,6 +64,7 @@ fn process(node: &pin mut ListNode) {
     println!("{}", node.value);
 }
 ```
+
 **深度文档**: [15_pin_ergonomics_preview.md](15_pin_ergonomics_preview.md)
 
 **教学提示**: 这是 async/self-referential 类型的基础；稳定后将大幅简化 futures 和 pin-project 类 crate 的教学。
@@ -106,6 +107,7 @@ where
     let _ = tmp.as_ref();
 }
 ```
+
 ---
 
 ### 1.3 Field Projections
@@ -143,6 +145,7 @@ impl FieldProjection for Form {
     // ...
 }
 ```
+
 ---
 
 ### 1.4 Return Type Notation (RTN)
@@ -166,6 +169,7 @@ where
     tokio::spawn(async move { p.process().await });
 }
 ```
+
 **深度文档**: [12_return_type_notation_preview.md](12_return_type_notation_preview.md)
 
 **1.98+ 展望**: RTN 可能在 1.98 或 1.99 进入 FCP，是 async-fn-in-traits 完全替代 `#[async_trait]` 的关键拼图。
@@ -198,6 +202,7 @@ impl AsyncDrop for AsyncFile {
     }
 }
 ```
+
 **深度文档**: [18_async_drop_preview.md](18_async_drop_preview.md)
 
 ---
@@ -247,6 +252,7 @@ fn demo_198_apis() {
     assert_eq!(*boxed, 100);
 }
 ```
+
 **代码实现**:
 
 [`demo_float_algebraic()`](../../../crates/c08_algorithms/src/rust_197_features.rs) ·
@@ -323,6 +329,7 @@ codegen-backend = true
 [build]
 rustflags = ["-Zcodegen-backend=cranelift"]
 ```
+
 ---
 
 ### 3.2 Parallel Frontend
@@ -383,6 +390,7 @@ rustflags = ["-Zcodegen-backend=cranelift"]
 [dependencies]
 serde = { version = "1.0", public = true }
 ```
+
 **1.98+ 展望**: 可能在 1.98 或 1.99 稳定 MVP。
 
 ---

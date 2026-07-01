@@ -188,6 +188,7 @@ crates/C11_macro_system_proc/
 │   └── lib.rs          # 宏实现
 └── tests/              # 测试
 ```
+
 ### 3.2 实现的宏
 
 | 宏类型   | 宏名称      | 功能            |
@@ -208,6 +209,7 @@ proc-macro2 = "1.0"
 [dev-dependencies]
 trybuild = { version = "1.0", features = ["diff"] }
 ```
+
 ---
 
 ## 4. 知识覆盖完整度
@@ -569,6 +571,7 @@ cargo expand --package C11_macro_system
 # 编译文档
 cargo doc --package C11_macro_system_proc --open
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

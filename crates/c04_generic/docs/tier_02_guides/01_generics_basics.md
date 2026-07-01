@@ -104,6 +104,7 @@ fn main() {
     println!("{}", max('a', 'z'));     // 'z'
 }
 ```
+
 ### 1.2 为什么需要泛型？
 
 **问题**: 没有泛型时的代码重复
@@ -123,6 +124,7 @@ fn max_char(a: char, b: char) -> char {
 
 // 每种类型都需要一个函数！
 ```
+
 **解决方案**: 使用泛型
 
 ```rust
@@ -132,6 +134,7 @@ fn max<T: PartialOrd>(a: T, b: T) -> T {
 
 // 一个函数处理所有可比较的类型！
 ```
+
 **泛型的价值**:
 
 1. **代码复用**: 一份代码，多种类型
@@ -153,6 +156,7 @@ fn main() {
     print("hello"); // 编译器生成 print_str
 }
 ```
+
 编译器为每个具体类型生成专门的函数版本，实现零成本抽象。
 
 **2. 约束系统 (Trait Bounds)**:
@@ -165,6 +169,7 @@ fn duplicate<T: Clone + std::fmt::Debug>(value: T) -> (T, T) {
     (value, copy)
 }
 ```
+
 **3. 类型推断**:
 
 ```rust
@@ -176,6 +181,7 @@ v.push(42); // 编译器推断 Vec<i32>
 let v: Vec<i32> = Vec::new();
 let v = Vec::<i32>::new(); // Turbofish 语法
 ```
+
 ---
 
 ## 2. 泛型函数
@@ -189,6 +195,7 @@ fn function_name<T>(param: T) -> T {
     // 函数体
 }
 ```
+
 **示例 1: 简单泛型函数**:
 
 ```rust
@@ -205,6 +212,7 @@ fn main() {
     println!("{}, {}, {}", num, text, flag);
 }
 ```
+
 **示例 2: 使用泛型引用**:
 
 ```rust
@@ -229,6 +237,7 @@ fn main() {
     println!("{}, {}", x, y); // x, y 仍然可用
 }
 ```
+
 ### 2.2 多个类型参数
 
 ```rust
@@ -245,6 +254,7 @@ fn main() {
     println!("{:?}", p1);
 }
 ```
+
 ### 2.3 带约束的泛型函数
 
 ```rust
@@ -262,6 +272,7 @@ fn main() {
     // print_twice(vec![1, 2, 3]); // 错误：Vec 没有实现 Display
 }
 ```
+
 ### 2.4 实战案例：查找最大值
 
 ```rust
@@ -292,6 +303,7 @@ fn main() {
     println!("空列表: {:?}", find_max(&empty)); // None
 }
 ```
+
 ---
 
 ## 3. 泛型结构体
@@ -305,6 +317,7 @@ struct StructName<T> {
     field: T,
 }
 ```
+
 **示例 1: 简单泛型结构体**:
 
 ```rust
@@ -320,6 +333,7 @@ fn main() {
     println!("{}", int_wrapper.value);
 }
 ```
+
 ### 3.2 多个类型参数
 
 ```rust
@@ -342,6 +356,7 @@ fn main() {
     println!("{}, {}", pair1.first, pair1.second);
 }
 ```
+
 ### 3.3 字段中使用泛型
 
 ```rust
@@ -378,6 +393,7 @@ fn main() {
     println!("{}", container.get_or_default(5)); // 0 (default)
 }
 ```
+
 ### 3.4 实战案例：坐标点
 
 ```rust
@@ -418,6 +434,7 @@ fn main() {
     println!("距离: {}", pf.distance_from_origin()); // 5.0
 }
 ```
+
 ---
 
 ## 4. 泛型枚举
@@ -447,6 +464,7 @@ fn main() {
     }
 }
 ```
+
 **`Result<T, E>`**
 
 ```rust
@@ -467,6 +485,7 @@ fn main() {
     }
 }
 ```
+
 ### 4.2 自定义泛型枚举
 
 ```rust
@@ -495,6 +514,7 @@ fn main() {
     // 输出: 1, 3, 0
 }
 ```
+
 ### 4.3 实战案例：树结构
 
 ```rust
@@ -546,6 +566,7 @@ fn main() {
     tree.print(0);
 }
 ```
+
 ---
 
 ## 5. 泛型方法实现
@@ -586,6 +607,7 @@ fn main() {
     }
 }
 ```
+
 ### 5.2 方法中的泛型参数
 
 ```rust
@@ -617,6 +639,7 @@ fn main() {
     println!("{}", c3.value); // 2
 }
 ```
+
 ### 5.3 为具体类型实现方法
 
 ```rust
@@ -654,6 +677,7 @@ fn main() {
     println!("曼哈顿距离: {}", pi.manhattan_distance());
 }
 ```
+
 ---
 
 ## 6. Const 泛型
@@ -683,6 +707,7 @@ fn main() {
     println!("arr2 size: {}", arr2.data.len());
 }
 ```
+
 ### 6.2 实战案例：固定大小数组
 
 ```rust
@@ -731,6 +756,7 @@ fn main() {
     println!("长度: {}/{}", vec.len(), vec.capacity());
 }
 ```
+
 ---
 
 ## 7. 默认类型参数
@@ -751,6 +777,7 @@ fn main() {
     println!("{}, {}", c1.value, c2.value);
 }
 ```
+
 ### 7.2 实战案例：可配置的容器
 
 ```rust
@@ -791,6 +818,7 @@ fn main() {
     println!("{:?}", cache.get(&"key1")); // Some(100)
 }
 ```
+
 ---
 
 ## 8. 泛型约束基础
@@ -810,6 +838,7 @@ fn main() {
     print_value(3.14);
 }
 ```
+
 ### 8.2 多个约束
 
 ```rust
@@ -825,6 +854,7 @@ fn main() {
     print_debug_and_display("hello");
 }
 ```
+
 ### 8.3 where 子句
 
 ```rust
@@ -844,6 +874,7 @@ fn main() {
     compare_and_print("hello", "world");
 }
 ```
+
 ---
 
 ## 9. 实战综合案例
@@ -905,6 +936,7 @@ fn main() {
     println!("d = {:?}", cache.get(&String::from("d"))); // None
 }
 ```
+
 ### 9.2 案例 2：数据转换管道
 
 ```rust
@@ -942,6 +974,7 @@ fn main() {
     println!("{}", result); // "Result: 13"
 }
 ```
+
 ---
 
 ## 10. 常见陷阱与最佳实践
@@ -961,6 +994,7 @@ fn max<T: PartialOrd>(a: T, b: T) -> T {
     if a > b { a } else { b }
 }
 ```
+
 **错误 2: 类型参数不一致**:
 
 ```rust
@@ -973,6 +1007,7 @@ struct Point<T, U> {
     y: U,
 }
 ```
+
 **错误 3: 所有权问题**:
 
 ```rust
@@ -990,6 +1025,7 @@ fn first<T>(a: &T, b: &T) -> &T {
     a
 }
 ```
+
 ### 10.2 最佳实践
 
 **1. 优先使用泛型而不是代码复制**:
@@ -1004,6 +1040,7 @@ fn print<T: std::fmt::Display>(v: T) {
     println!("{}", v);
 }
 ```
+
 **2. 为类型参数选择清晰的名称**:
 
 ```rust
@@ -1016,6 +1053,7 @@ fn convert<Input, Output, Error>(
     converter: Output,
 ) -> Result<Output, Error> { ... }
 ```
+
 **3. 使用 where 子句提高可读性**:
 
 ```rust
@@ -1028,6 +1066,7 @@ where
     T: Clone + Debug + Display + PartialOrd,
 { ... }
 ```
+
 **4. 合理使用默认类型参数**:
 
 ```rust
@@ -1037,6 +1076,7 @@ struct Container<T, S = Vec<T>> {
     _marker: std::marker::PhantomData<T>,
 }
 ```
+
 ---
 
 ## 📚 延伸阅读
@@ -1068,6 +1108,7 @@ fn main() {
     assert_eq!(y, 5);
 }
 ```
+
 参考答案
 
 ```rust
@@ -1075,6 +1116,7 @@ fn swap<T>(a: &mut T, b: &mut T) {
     std::mem::swap(a, b);
 }
 ```
+
 **练习 2: 泛型队列**:
 
 实现一个简单的泛型队列。
@@ -1090,6 +1132,7 @@ impl<T> Queue<T> {
     fn dequeue(&mut self) -> Option<T> { todo!() }
 }
 ```
+
 参考答案
 
 ```rust
@@ -1115,6 +1158,7 @@ impl<T> Queue<T> {
     }
 }
 ```
+
 **练习 3: 泛型二叉搜索树**:
 
 实现一个简单的泛型二叉搜索树的插入功能。

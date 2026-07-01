@@ -37,6 +37,7 @@ cargo run -p c05_threads --example basic
 # 运行基准测试
 cargo bench -p c05_threads
 ```
+
 ### 推荐学习路径
 
 **新手入门** (3-5天):
@@ -109,6 +110,7 @@ use std::sync::mpsc;
 let (tx, rx) = mpsc::channel();
 // 不要通过共享内存来通信
 ```
+
 **共享状态** (Shared State):
 
 ```rust
@@ -117,6 +119,7 @@ use std::sync::{Arc, Mutex};
 let data = Arc::new(Mutex::new(0));
 // 使用Mutex保护共享数据
 ```
+
 ---
 
 ## 🌟 核心概念

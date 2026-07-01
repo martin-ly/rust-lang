@@ -127,6 +127,7 @@
 └── 选择合适的分发
     └── 决策树
 ```
+
 ---
 
 ## 🎯 概述
@@ -190,6 +191,7 @@ fn main() {
     dynamic_dispatch(&cat);  // 运行时查找
 }
 ```
+
 ### 1.2 静态 vs 动态
 
 **静态分发示例**:
@@ -227,6 +229,7 @@ fn main() {
     render(&rectangle);  // 调用 Rectangle::draw
 }
 ```
+
 **动态分发示例**:
 
 ```rust
@@ -268,6 +271,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 2. 静态分发
@@ -292,6 +296,7 @@ fn main() {
 // fn process_f64(value: f64) { println!("Value: {}", value); }
 // fn process_str(value: &str) { println!("Value: {}", value); }
 ```
+
 ### 2.2 性能优势
 
 **内联优化**:
@@ -321,6 +326,7 @@ fn main() {
     println!("Result: {}", result);
 }
 ```
+
 ### 2.3 代码膨胀
 
 **问题示例**:
@@ -341,6 +347,7 @@ fn main() {
     // ... 代码膨胀！
 }
 ```
+
 **优化方案**:
 
 ```rust
@@ -360,6 +367,7 @@ fn main() {
     thin_wrapper(2_i64);
 }
 ```
+
 ---
 
 ## 3. 动态分发
@@ -410,6 +418,7 @@ fn main() {
     }
 }
 ```
+
 ### 3.2 虚函数表
 
 **vtable 结构**:
@@ -426,6 +435,7 @@ struct TraitObject {
 // - size 和 alignment
 // - trait 方法指针
 ```
+
 **示例**:
 
 ```rust
@@ -461,6 +471,7 @@ fn main() {
     animal.move_forward();
 }
 ```
+
 ### 3.3 性能开销
 
 **基准测试**:
@@ -510,6 +521,7 @@ fn main() {
     println!("Dynamic: {:?}", start.elapsed());
 }
 ```
+
 ---
 
 ## 4. 对象安全
@@ -543,6 +555,7 @@ trait NotSafe3 {
     fn new() -> Self;
 }
 ```
+
 ### 4.2 常见陷阱
 
 **Clone trait**:
@@ -572,6 +585,7 @@ fn main() {
     // let animal: &dyn Animal = &dog;  // 编译错误！
 }
 ```
+
 ### 4.3 解决方案
 
 **使用自定义方法**:
@@ -601,6 +615,7 @@ fn main() {
     cloned.make_sound();
 }
 ```
+
 ---
 
 ## 5. 选择合适的分发
@@ -616,6 +631,7 @@ fn main() {
       ├─ 是 → 使用静态分发 (泛型)
       └─ 否 → 两者都可
 ```
+
 ### 5.2 性能对比
 
 | 特性           | 静态分发   | 动态分发               |
@@ -689,6 +705,7 @@ fn main() {
         (dynamic_time.as_nanos() as f64 / static_time.as_nanos() as f64 - 1.0) * 100.0);
 }
 ```
+
 ### 5.5 混合策略实践
 
 **智能选择分发方式**:
@@ -738,6 +755,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 6. 实战案例
@@ -805,6 +823,7 @@ fn main() {
     manager.execute_all();
 }
 ```
+
 ### 案例 2: GUI 组件
 
 ```rust
@@ -878,6 +897,7 @@ fn main() {
     window.render_all();
 }
 ```
+
 ### 案例 3: 日志系统
 
 ```rust
@@ -926,6 +946,7 @@ fn main() {
     log_many_dynamic(&file, 3);
 }
 ```
+
 ### 案例 4: 序列化系统
 
 **动态分发的实际应用**:
@@ -1008,6 +1029,7 @@ fn main() {
     println!("Binary: {:?}", binary_data);
 }
 ```
+
 ### 案例 5: 事件处理系统
 
 **混合使用静态和动态分发**:
@@ -1069,6 +1091,7 @@ fn main() {
     dispatcher.dispatch("key_a");
 }
 ```
+
 ---
 
 ## 7. 优化技巧
@@ -1090,6 +1113,7 @@ fn slow_path(processor: &dyn Process, data: &[u8]) {
     processor.process(data);
 }
 ```
+
 **技巧 2: 小对象优化**:
 
 ```rust
@@ -1098,6 +1122,7 @@ enum SmallVec<T> {
     Heap(Vec<T>),
 }
 ```
+
 **技巧 3: 缓存 vtable 查找**:
 
 ```rust
@@ -1113,6 +1138,7 @@ trait Shape {
     fn area(&self) -> f64;
 }
 ```
+
 **技巧 4: 枚举分发**:
 
 ```rust
@@ -1150,6 +1176,7 @@ fn main() {
     }
 }
 ```
+
 **技巧 5: 内联小函数**:
 
 ```rust
@@ -1172,6 +1199,7 @@ fn process<C: Compute>(c: &C, values: &[i32]) -> Vec<i32> {
     values.iter().map(|&v| c.compute(v)).collect()
 }
 ```
+
 **技巧 6: 分层分发**:
 
 ```rust
@@ -1209,6 +1237,7 @@ impl Shape {
     }
 }
 ```
+
 **技巧 7: Profile-Guided Optimization**:
 
 ```rust
@@ -1235,6 +1264,7 @@ trait Process {
     fn process(&self, data: &[i32]);
 }
 ```
+
 ---
 
 ## 8. 跨版本兼容性说明
@@ -1349,6 +1379,7 @@ fn vtable_analysis() {
     // 输出: 8 bytes (一个指针)
 }
 ```
+
 **VTable 结构**：
 
 ```text
@@ -1364,6 +1395,7 @@ fn vtable_analysis() {
 | move_to() ptr     | ← 方法指针
 +-------------------+
 ```
+
 ---
 
 ### VTable 生成示例
@@ -1403,6 +1435,7 @@ static CAT_ANIMAL_VTABLE: VTable = VTable {
     move_to: Cat::move_to,
 };
 ```
+
 ---
 
 ## ⚡ 性能优化技术
@@ -1442,6 +1475,7 @@ fn performance_comparison() {
     }
 }
 ```
+
 ---
 
 ### 2. Devirtualization（去虚化）
@@ -1467,6 +1501,7 @@ fn process_animals(animals: Vec<Box<dyn Animal>>) {
     }
 }
 ```
+
 ---
 
 ### 3. 缓存优化（Cache Locality）
@@ -1503,6 +1538,7 @@ impl EnumProcessor {
     }
 }
 ```
+
 ---
 
 ## 📊 性能基准测试
@@ -1628,6 +1664,7 @@ fn run_all_benchmarks() {
     println!("Dynamic: {} ns ({:.2}x)", dynamic_ns, dynamic_ns as f64 / static_ns as f64);
 }
 ```
+
 **典型性能结果**（Intel i7, Release mode）：
 
 | 分派方式     | 时间 (ns)  | 相对速度 | 说明       |
@@ -1652,6 +1689,7 @@ fn static_call(dog: &Dog) {
 // call Dog::speak  ; 直接调用
 // ret
 ```
+
 ---
 
 ### 动态分派的汇编
@@ -1668,6 +1706,7 @@ fn dynamic_call(animal: &dyn Animal) {
 // call rax               ; 间接调用
 // ret
 ```
+
 **关键区别**：
 
 - 静态：1条call指令
@@ -1699,6 +1738,7 @@ fn process_batched(fast: &[FastProcessor], slow: &[SlowProcessor]) {
     }
 }
 ```
+
 ---
 
 ### 2. 小对象优化（Small Object Optimization）
@@ -1728,6 +1768,7 @@ impl<T> SmallBox<T> {
     }
 }
 ```
+
 ---
 
 ### 3. 专门化（Specialization）
@@ -1756,6 +1797,7 @@ impl Process for i32 {
     }
 }
 ```
+
 ---
 
 ## 📈 选择决策树
@@ -1784,6 +1826,7 @@ impl Process for i32 {
                               • 考虑缓存局部性
                               • 使用内联存储
 ```
+
 ---
 
 ## 🧪 实战案例：插件系统
@@ -1880,6 +1923,7 @@ fn plugin_system_example() {
     println!("Result: {}", result);
 }
 ```
+
 ---
 
 ## 🏆 最佳实践总结

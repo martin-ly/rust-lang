@@ -128,6 +128,7 @@ USER nonroot:nonroot
 
 ENTRYPOINT ["/app/myapp"]
 ```
+
 #### 镜像优化技巧
 
 | 技巧 | 效果 | 实施难度 |
@@ -159,6 +160,7 @@ FROM debian:bookworm-slim as runtime
 COPY --from=builder /app/target/release/app /usr/local/bin/
 ENTRYPOINT ["/usr/local/bin/app"]
 ```
+
 ---
 
 ### Kubernetes
@@ -209,6 +211,7 @@ spec:
             exec:
               command: ["/bin/sh", "-c", "sleep 10"]
 ```
+
 #### HPA 配置
 
 ```yaml
@@ -244,6 +247,7 @@ spec:
         value: 10
         periodSeconds: 60
 ```
+
 ---
 
 ### Serverless
@@ -270,6 +274,7 @@ async fn handler(event: LambdaEvent<Value>) -> Result<Value, Error> {
     }))
 }
 ```
+
 #### Cargo Lambda
 
 ```bash
@@ -282,6 +287,7 @@ cargo lambda build --release --target x86_64-unknown-linux-musl
 # 部署
 cargo lambda deploy --region us-east-1
 ```
+
 ---
 
 ## 📈 监控与可观测性
@@ -332,6 +338,7 @@ async fn metrics_middleware<B>(
     response
 }
 ```
+
 ### 分布式追踪
 
 #### OpenTelemetry + Jaeger
@@ -365,6 +372,7 @@ async fn process_user_request(user_id: u64) -> Result<(), Error> {
     Ok(result)
 }
 ```
+
 ---
 
 ## 🔒 安全
@@ -381,6 +389,7 @@ cargo audit
 # 集成到 CI
 cargo audit --deny warnings
 ```
+
 ```yaml
 # .github/workflows/security.yml
 name: Security Audit
@@ -401,6 +410,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
+
 ### 密钥管理
 
 #### AWS Secrets Manager
@@ -421,6 +431,7 @@ async fn get_database_url() -> Result<String, Error> {
     Ok(resp.secret_string().unwrap_or_default().to_string())
 }
 ```
+
 ---
 
 ## ⚡ 性能优化
@@ -447,6 +458,7 @@ fn criterion_benchmark(c: &mut Criterion) {
 criterion_group!(benches, criterion_benchmark);
 criterion_main!(benches);
 ```
+
 #### flamegraph
 
 ```bash
@@ -459,6 +471,7 @@ cargo flamegraph --bin myapp
 perf record -F 99 -g -- ./myapp
 cargo flamegraph --perfdata perf.data
 ```
+
 ### 内存优化
 
 #### 内存分析工具
@@ -471,6 +484,7 @@ heaptrack ./target/release/myapp
 # valgrind (开发环境)
 valgrind --tool=massif ./target/release/myapp
 ```
+
 #### 优化技巧
 
 | 技术 | 效果 | 场景 |
@@ -559,6 +573,7 @@ impl CircuitBreaker {
     }
 }
 ```
+
 ### 优雅降级
 
 ```rust
@@ -595,6 +610,7 @@ impl Service {
     }
 }
 ```
+
 ---
 
 ## 🔗 参考资源

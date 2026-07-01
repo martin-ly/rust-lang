@@ -69,6 +69,7 @@ macro_rules! macro_name {
     // 可以有任意多个规则
 }
 ```
+
 **完整示例**:
 
 ```rust
@@ -94,6 +95,7 @@ macro_rules! create_function {
 create_function!(foo);
 create_function!(bar, x: i32);
 ```
+
 ---
 
 ### 1.2 宏调用形式
@@ -110,6 +112,7 @@ my_macro![arg1, arg2];
 // 花括号 {}
 my_macro! { arg1, arg2 }
 ```
+
 **约定**:
 
 - `()` - 函数式调用（如 `vec!()`, `println!()`）
@@ -131,6 +134,7 @@ macro_rules! my_macro {
 use my_crate::my_macro;
 my_macro!();
 ```
+
 **注意**: `#[macro_export]` 会将宏放在 crate 根，即使定义在模块中。
 
 ---
@@ -178,6 +182,7 @@ macro_rules! follow_set {
     // ($e:expr $i:ident) => { };
 }
 ```
+
 ---
 
 ### 2.3 使用示例
@@ -223,6 +228,7 @@ fragment_examples!(pat Some(x) = Some(10));
 fragment_examples!(block { println!("Block"); });
 fragment_examples!(tt let x = vec![1, 2, 3];);
 ```
+
 ---
 
 ## 3. 重复模式 (Repetition)
@@ -232,6 +238,7 @@ fragment_examples!(tt let x = vec![1, 2, 3];);
 ```rust
 $( pattern )* separator
 ```
+
 - `*` - 零次或多次
 - `+` - 一次或多次
 - `?` - 零次或一次
@@ -260,6 +267,7 @@ let v2 = repeat_demo!(1; 2; 3);        // [1, 2, 3]
 let t1 = repeat_demo!(1);              // (1,)
 let t2 = repeat_demo!(1, 2);           // (1, 2)
 ```
+
 ---
 
 ### 3.2 嵌套重复
@@ -288,6 +296,7 @@ nested_repeat!(
 // let b = vec![4, 5];
 // let c = vec![6, 7, 8, 9];
 ```
+
 ---
 
 ### 3.3 分隔符规则
@@ -313,6 +322,7 @@ separator_demo!(1, 2, 3);         // 逗号
 separator_demo!(1; 2; 3);         // 分号
 separator_demo!(1 and 2 and 3);   // 自定义
 ```
+
 ---
 
 ## 4. 模式匹配规则
@@ -333,6 +343,7 @@ macro_rules! priority_demo {
 priority_demo!(special);  // 匹配规则 1
 priority_demo!(foo);      // 匹配规则 2
 ```
+
 ---
 
 ### 4.2 贪婪匹配
@@ -351,6 +362,7 @@ macro_rules! greedy {
 greedy!(1, 2, 3, 4);
 // 匹配: $x = [1, 2, 3], $last = 4
 ```
+
 ---
 
 ### 4.3 歧义处理
@@ -370,6 +382,7 @@ macro_rules! avoid_ambiguity {
 
 let v = avoid_ambiguity!(1, 2, 3 ; 4);
 ```
+
 ---
 
 ## 5. 元变量 (Metavariables)
@@ -390,6 +403,7 @@ macro_rules! naming {
     ($p:pat) => { };       // p for pattern
 }
 ```
+
 ---
 
 ### 5.2 作用域
@@ -411,6 +425,7 @@ macro_rules! scope_demo {
     };
 }
 ```
+
 ---
 
 ### 5.3 重复中的元变量
@@ -430,6 +445,7 @@ repeat_vars!(x: 1, y: 2, z: 3);
 // let y = 2;
 // let z = 3;
 ```
+
 ---
 
 ## 6. 内置宏操作
@@ -448,6 +464,7 @@ macro_rules! debug_var {
 let x = 42;
 debug_var!(x);  // 输出: x = 42
 ```
+
 ---
 
 ### 6.2 concat
@@ -464,6 +481,7 @@ macro_rules! const_name {
 const NAME: &str = const_name!("Hello", "World");
 // NAME = "Hello_World"
 ```
+
 ---
 
 ### 6.3 其他工具宏
@@ -485,6 +503,7 @@ macro_rules! tools {
     };
 }
 ```
+
 ---
 
 ## 7. 递归宏
@@ -504,6 +523,7 @@ macro_rules! count {
 
 const LEN: usize = count!(a b c d e);  // 5
 ```
+
 ---
 
 ### 7.2 递归限制
@@ -518,6 +538,7 @@ macro_rules! deep_recursion {
     ($n:tt) => { 1 + deep_recursion!($n - 1) };
 }
 ```
+
 ---
 
 ### 7.3 尾递归优化
@@ -538,6 +559,7 @@ macro_rules! sum {
 
 const TOTAL: i32 = sum!(1, 2, 3, 4, 5);  // 15
 ```
+
 ---
 
 ## 8. 高级技巧
@@ -560,6 +582,7 @@ macro_rules! tt_muncher {
 
 tt_muncher!(let x = 1 + 2;);
 ```
+
 ---
 
 ### 8.2 增量 TT Muncher
@@ -586,6 +609,7 @@ macro_rules! reverse {
 
 reverse!(1 + 2 * 3);  // 展开为: 3 * 2 + 1
 ```
+
 ---
 
 ### 8.3 回调模式
@@ -605,6 +629,7 @@ macro_rules! double {
 
 const RESULT: i32 = call_with_result!(double, 21);  // 42
 ```
+
 ---
 
 ## 9. 常见陷阱
@@ -624,6 +649,7 @@ macro_rules! hygiene_trap {
 let value = 10;
 let result = hygiene_trap!(5);  // value 不受影响
 ```
+
 ---
 
 ### 9.2 类型推断失败
@@ -639,6 +665,7 @@ macro_rules! infer_fail {
     };
 }
 ```
+
 ---
 
 ### 9.3 表达式歧义
@@ -652,6 +679,7 @@ macro_rules! expr_ambiguity {
     (($a:expr) + ($b:expr) * ($c:expr)) => { };
 }
 ```
+
 ---
 
 **相关文档**:

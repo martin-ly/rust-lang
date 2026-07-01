@@ -192,6 +192,7 @@ struct Container<T> {
 let x = identity(42);         // T = i32
 let c = Container { value: "hello" }; // T = &str
 ```
+
 **相关术语**: [Type Parameter](#type-parameter-类型参数-), [Monomorphization](#monomorphization-单态化-), [Generic Function](#generic-function-泛型函数-)
 
 **参考文档**: [`tier_02_guides/01_generics_basics.md`](../tier_02_guides/01_generics_basics.md)
@@ -216,6 +217,7 @@ struct Pair<T, U> {
     second: U,
 }
 ```
+
 **命名约定**:
 
 - 单字母大写: `T`, `U`, `V`, `E`, `K`, `V`
@@ -249,6 +251,7 @@ fn combine<T, U>(first: T, second: U) -> (T, U) {
     (first, second)
 }
 ```
+
 **相关术语**: [Type Parameter](#type-parameter-类型参数-), [Trait Bound](#trait-bound-trait-约束-), [Monomorphization](#monomorphization-单态化-)
 
 **参考文档**: [`tier_02_guides/01_generics_basics.md`](../tier_02_guides/01_generics_basics.md)
@@ -277,6 +280,7 @@ fn sum<const N: usize>(arr: &[i32; N]) -> i32 {
     arr.iter().sum()
 }
 ```
+
 **应用场景**:
 
 - 固定大小数组
@@ -311,6 +315,7 @@ let r2: MyResult<String, ParseError> = MyResult {
     value: Err(ParseError),  // E = ParseError
 };
 ```
+
 **相关术语**: [Type Parameter](#type-parameter-类型参数-), [Generic](#generic-泛型-)
 
 **参考文档**: [`tier_03_references/01_generics_syntax_reference.md`](../tier_03_references/01_generics_syntax_reference.md)
@@ -345,6 +350,7 @@ impl Drawable for Circle {
     }
 }
 ```
+
 **标准库重要 trait**:
 
 - `Clone`, `Copy`: 复制语义
@@ -384,6 +390,7 @@ where
     // ...
 }
 ```
+
 **语法形式**:
 
 1. `<T: Trait>`: 内联约束
@@ -436,6 +443,7 @@ let animals: Vec<Box<dyn Animal>> = vec![
     Box::new(Cat),
 ];
 ```
+
 **特点**:
 
 - ✅ 运行时多态
@@ -474,6 +482,7 @@ fn get_numbers() -> impl Iterator<Item = i32> {
 // 多个 trait
 fn process(x: impl Clone + Send + Display) { /* ... */ }
 ```
+
 **与 trait 对象的对比**:
 
 ```rust
@@ -487,6 +496,7 @@ fn dynamic_dispatch() -> Box<dyn Display> {
     Box::new(42)  // 运行时确定类型
 }
 ```
+
 **相关术语**: [RPITIT](#rpitit-返回位置-impl-trait-), [Static Dispatch](#static-dispatch-静态分发-), [Trait Object](#trait-object-trait-对象-)
 
 **参考文档**: [`tier_02_guides/02_trait_system.md`](../tier_02_guides/02_trait_system.md)
@@ -526,6 +536,7 @@ impl Display for MyType {
 
 impl AdvancedDisplay for MyType {}
 ```
+
 **相关术语**: [Trait](#trait-trait-), [Trait Bound](#trait-bound-trait-约束-)
 
 **参考文档**: [`tier_03_references/02_trait_system_reference.md`](../tier_03_references/02_trait_system_reference.md)
@@ -558,6 +569,7 @@ fn save<T: Serializable>(data: T) {
     // 只接受实现了 Serializable 的类型
 }
 ```
+
 **常见标记 trait**:
 
 - `Send`: 可跨线程传递
@@ -605,6 +617,7 @@ impl<T: Display> Printable for T {
 42.print();        // ✅
 "hello".print();   // ✅
 ```
+
 **相关术语**: [Trait](#trait-trait-), [Coherence](#coherence-一致性-)
 
 **参考文档**: [`tier_04_advanced/05_advanced_design_patterns.md`](../tier_04_advanced/05_advanced_design_patterns.md)
@@ -645,6 +658,7 @@ impl Container for IntList {
     }
 }
 ```
+
 **与泛型参数的对比**:
 
 ```rust
@@ -659,6 +673,7 @@ trait ContainerAssoc {
     fn add(&mut self, item: Self::Item);
 }
 ```
+
 **相关术语**: [GAT](#gat-generic-associated-types-泛型关联类型-), [Trait](#trait-trait-), [Type Parameter](#type-parameter-类型参数-)
 
 **参考文档**: [`tier_02_guides/03_associated_types.md`](../tier_02_guides/03_associated_types.md)
@@ -701,6 +716,7 @@ impl<'data, T> LendingIterator for WindowsMut<'data, T> {
     }
 }
 ```
+
 **应用场景**:
 
 - Lending iterators（借用迭代器）
@@ -745,6 +761,7 @@ fn process<C: Config>(data: &[u8]) {
     println!("Processing with {}", C::NAME);
 }
 ```
+
 **相关术语**: [Associated Type](#associated-type-关联类型-), [Const Generic](#const-generic-常量泛型-)
 
 **参考文档**: [`tier_03_references/02_trait_system_reference.md`](../tier_03_references/02_trait_system_reference.md)
@@ -774,6 +791,7 @@ where
     // ...
 }
 ```
+
 **约束类型**:
 
 1. Trait bounds: `T: Trait`
@@ -824,6 +842,7 @@ where
     }
 }
 ```
+
 **优势**:
 
 - 更清晰的约束表达
@@ -869,6 +888,7 @@ where
     // ...
 }
 ```
+
 **应用场景**:
 
 - 闭包参数是引用
@@ -907,6 +927,7 @@ impl<'a> Borrowed<'a> {
     }
 }
 ```
+
 **生命周期省略规则**:
 
 1. 每个引用参数获得独立的生命周期
@@ -948,6 +969,7 @@ where
 // 逆变：fn(T) 对 T 是逆变的
 // 如果 T' 是 T 的子类型，则 fn(T) 是 fn(T') 的子类型
 ```
+
 **常见类型的型变**:
 
 - `&'a T`: 对 `'a` 和 `T` 都协变
@@ -990,6 +1012,7 @@ fn example() {
     }
 }
 ```
+
 **相关术语**: [Lifetime](#lifetime-生命周期-), [Variance](#variance-型变-)
 
 **参考文档**: [`tier_04_advanced/02_generics_and_lifetimes.md`](../tier_04_advanced/02_generics_and_lifetimes.md)
@@ -1018,6 +1041,7 @@ let y = add(1.0, 2.0);   // T = f64
 // fn add_i32(a: i32, b: i32) -> i32 { a + b }
 // fn add_f64(a: f64, b: f64) -> f64 { a + b }
 ```
+
 **特点**:
 
 - ✅ 零运行时开销
@@ -1064,6 +1088,7 @@ for animal in &animals {
     animal.make_sound();
 }
 ```
+
 **相关术语**: [Trait Object](#trait-object-trait-对象-), [Dynamic Dispatch](#dynamic-dispatch-动态分发-), [Monomorphization](#monomorphization-单态化-)
 
 **参考文档**: [`tier_03_references/05_compiler_behavior_reference.md`](../tier_03_references/05_compiler_behavior_reference.md)
@@ -1086,6 +1111,7 @@ fn process<T: Display>(value: T) {
 process(42);         // 调用 <i32 as Display>::fmt
 process("hello");    // 调用 <&str as Display>::fmt
 ```
+
 **相关术语**: [Monomorphization](#monomorphization-单态化-), [Dynamic Dispatch](#dynamic-dispatch-动态分发-)
 
 **参考文档**: [`tier_04_advanced/03_zero_cost_abstractions.md`](../tier_04_advanced/03_zero_cost_abstractions.md)
@@ -1110,6 +1136,7 @@ let y: &str = "hello";
 process(&x);  // 运行时查找 <i32 as Display>::fmt
 process(&y);  // 运行时查找 <&str as Display>::fmt
 ```
+
 **vtable 结构**:
 
 ```rust
@@ -1127,6 +1154,7 @@ struct TraitObject {
     vtable: *const DisplayVTable,
 }
 ```
+
 **相关术语**: [Trait Object](#trait-object-trait-对象-), [Fat Pointer](#fat-pointer-胖指针-), [Static Dispatch](#static-dispatch-静态分发-)
 
 **参考文档**: [`tier_04_advanced/03_zero_cost_abstractions.md`](../tier_04_advanced/03_zero_cost_abstractions.md)
@@ -1160,6 +1188,7 @@ assert_eq!(size_of::<&i32>(), 8);           // 普通引用：1个指针
 assert_eq!(size_of::<&dyn Display>(), 16);  // trait 对象：2个指针
 assert_eq!(size_of::<&[i32]>(), 16);        // 切片：指针+长度
 ```
+
 **相关术语**: [Trait Object](#trait-object-trait-对象-), [Dynamic Dispatch](#dynamic-dispatch-动态分发-)
 
 **参考文档**: [`tier_03_references/05_compiler_behavior_reference.md`](../tier_03_references/05_compiler_behavior_reference.md)
@@ -1214,6 +1243,7 @@ door.open();  // ✅ Unlocked 状态可以打开
 // PhantomData 不占用空间
 assert_eq!(std::mem::size_of::<Door<Locked>>(), 0);
 ```
+
 **应用场景**:
 
 - 类型状态模式
@@ -1254,6 +1284,7 @@ assert_eq!(size_of::<[i32; 0]>(), 0);
 let vec: Vec<()> = vec![(); 1000000];
 // 没有分配任何堆内存！
 ```
+
 **应用**:
 
 - 状态标记
@@ -1300,6 +1331,7 @@ impl Factory for IntFactory {
     }
 }
 ```
+
 **与 async trait 配合**:
 
 ```rust
@@ -1311,6 +1343,7 @@ trait AsyncService {
     fn process(&self, data: &str) -> impl Future<Output = Result<String, Error>> + '_;
 }
 ```
+
 **相关术语**: [Impl Trait](#impl-trait-impl-trait-), [GAT](#gat-generic-associated-types-泛型关联类型-), [Associated Type](#associated-type-关联类型-)
 
 **参考文档**: [`RUST_192_GENERIC_IMPROVEMENTS.md`](../RUST_192_GENERIC_IMPROVEMENTS.md)
@@ -1334,6 +1367,7 @@ impl<F> Functor<F> for F {
     // ...
 }
 ```
+
 **Rust 中的近似实现** (使用 GAT):
 
 ```rust
@@ -1354,6 +1388,7 @@ impl Functor for Option<_> {
     }
 }
 ```
+
 **相关术语**: [GAT](#gat-generic-associated-types-泛型关联类型-), [Type Constructor](#type-constructor-类型构造器-), [Associated Type](#associated-type-关联类型-)
 
 **参考文档**: [`tier_04_advanced/04_type_level_programming.md`](../tier_04_advanced/04_type_level_programming.md)
@@ -1385,6 +1420,7 @@ for x in 1..=100 {
 
 // 编译后生成的汇编代码几乎相同！
 ```
+
 **泛型的零成本抽象**:
 
 ```rust
@@ -1397,6 +1433,7 @@ fn process<T: Display>(items: &[T]) {
 
 // 编译后为每个类型生成专门代码，无虚函数调用开销
 ```
+
 **相关术语**: [Monomorphization](#monomorphization-单态化-), [Static Dispatch](#static-dispatch-静态分发-)
 
 **参考文档**: [`tier_04_advanced/03_zero_cost_abstractions.md`](../tier_04_advanced/03_zero_cost_abstractions.md)
@@ -1431,6 +1468,7 @@ let result = vec![1, 2, 3]
 fn identity<T>(x: T) -> T { x }
 let x = identity::<i32>(42);  // ← turbofish
 ```
+
 **命名来源**: 语法 `::<>` 看起来像一条鱼 🐟
 
 **相关术语**: [Type Parameter](#type-parameter-类型参数-), [Generic](#generic-泛型-)
@@ -1453,6 +1491,7 @@ let x = identity::<i32>(42);  // ← turbofish
    fn identity<T>(x: T) -> T { x }
    // 对所有类型 T 都适用
    ```
+
 2. **Ad-hoc 多态**: trait 和重载
 
    ```rust
@@ -1462,12 +1501,14 @@ let x = identity::<i32>(42);  // ← turbofish
    }
    // 不同类型有不同的实现
    ```
+
 3. **子类型多态**: trait 对象
 
    ```rust
    let animal: &dyn Animal = &Dog;
    // 运行时多态
    ```
+
 **相关术语**: [Generic](#generic-泛型-), [Trait Object](#trait-object-trait-对象-), [Static Dispatch](#static-dispatch-静态分发-), [Dynamic Dispatch](#dynamic-dispatch-动态分发-)
 
 **参考文档**: [`tier_02_guides/02_trait_system.md`](../tier_02_guides/02_trait_system.md)
@@ -1498,6 +1539,7 @@ struct Container<T> {
 // Container 是类型构造器
 // Container<i32> 是具体类型
 ```
+
 **相关术语**: [Generic](#generic-泛型-), [Type Parameter](#type-parameter-类型参数-), [Higher-Kinded Types](#higher-kinded-types-hkt-高阶类型-)
 
 **参考文档**: [`tier_04_advanced/04_type_level_programming.md`](../tier_04_advanced/04_type_level_programming.md)
@@ -1533,6 +1575,7 @@ impl Display for MyType {
 // ❌ 不可以：trait 和类型都在其他 crate
 // impl Display for i32 {}  // 编译错误
 ```
+
 **解决方法：newtype 模式**:
 
 ```rust
@@ -1546,6 +1589,7 @@ impl Display for MyInt {
     }
 }
 ```
+
 **相关术语**: [Trait](#trait-trait-), [Orphan Rule](#orphan-rule-孤儿规则-)
 
 **参考文档**: [`tier_03_references/02_trait_system_reference.md`](../tier_03_references/02_trait_system_reference.md)
@@ -1571,6 +1615,7 @@ impl Display for Vec<i32> { /* ... */ }
 // 如果允许，当同时依赖 A 和 B 时，编译器无法确定使用哪个实现
 // 孤儿规则防止了这种情况
 ```
+
 **相关术语**: [Coherence](#coherence-一致性-), [Trait](#trait-trait-)
 
 **参考文档**: [`tier_04_advanced/05_advanced_design_patterns.md`](../tier_04_advanced/05_advanced_design_patterns.md)

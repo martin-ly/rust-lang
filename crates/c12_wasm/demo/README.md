@@ -5,7 +5,8 @@
 ## 📚 演示页面列表
 
 | 文件                       | 描述         | 功能数 |
-| :--- | :--- | :--- || [index.html](index.html) | 综合示例页面 | 20+    |
+| :--- | :--- | :--- |
+| [index.html](index.html) | 综合示例页面 | 20+    |
 
 ## 🚀 快速开始
 
@@ -17,6 +18,7 @@ wasm-pack build --target web
 
 # 这会生成 pkg/ 目录，包含编译后的 WASM 模块
 ```
+
 ### 2. 启动本地服务器
 
 由于浏览器的 CORS 策略，需要通过 HTTP 服务器访问演示页面。
@@ -32,6 +34,7 @@ python -m SimpleHTTPServer 8080
 
 # 然后访问: http://localhost:8080/demo/
 ```
+
 #### 方式 2: 使用 Node.js
 
 ```bash
@@ -43,6 +46,7 @@ http-server -p 8080
 
 # 访问: http://localhost:8080/demo/
 ```
+
 #### 方式 3: 使用 Rust
 
 ```bash
@@ -54,6 +58,7 @@ basic-http-server .
 
 # 访问: http://localhost:4000/demo/
 ```
+
 ### 3. 访问演示页面
 
 打开浏览器访问：
@@ -61,6 +66,7 @@ basic-http-server .
 ```text
 http://localhost:8080/demo/index.html
 ```
+
 ## 📖 功能演示
 
 ### 1. 基础示例标签
@@ -110,11 +116,13 @@ http://localhost:8080/demo/index.html
        input * 2
    }
    ```
+
 2. 重新构建 WASM：
 
    ```bash
    wasm-pack build --target web
    ```
+
 3. 在 `index.html` 中添加 UI 和调用代码：
 
    ```html
@@ -134,6 +142,7 @@ http://localhost:8080/demo/index.html
      }
    </script>
    ```
+
 ## 🔧 开发技巧
 
 ### 1. 实时重新加载
@@ -149,6 +158,7 @@ live-server --port=8080
 
 # 文件修改后会自动刷新浏览器
 ```
+
 ### 2. 调试 WASM
 
 在浏览器中使用开发者工具：
@@ -171,6 +181,7 @@ performance.measure("wasm-duration", "wasm-start", "wasm-end")
 // 查看结果
 console.log(performance.getEntriesByName("wasm-duration"))
 ```
+
 ### 4. 错误处理
 
 WASM 函数可能抛出错误，使用 try-catch 捕获：
@@ -183,6 +194,7 @@ try {
   showResult("result", `错误: ${err}`, "error")
 }
 ```
+
 ## 📊 浏览器兼容性
 
 ### 完全支持的浏览器
@@ -201,6 +213,7 @@ if (typeof WebAssembly === "object") {
   alert("您的浏览器不支持 WebAssembly，请升级浏览器")
 }
 ```
+
 ## 🐛 常见问题
 
 ### Q: 页面显示 "WASM 未加载"
@@ -232,6 +245,7 @@ npm install -g wasm-opt
 # 优化 WASM 文件
 wasm-opt -Oz -o pkg/c12_wasm_bg_optimized.wasm pkg/c12_wasm_bg.wasm
 ```
+
 ### Q: 某些功能不工作
 
 **解决方案**：

@@ -71,6 +71,7 @@ enum Option<T> {
     None,
 }
 ```
+
 **单态化**: 编译时为每个具体类型生成代码，零成本抽象
 
 **相关文档**:
@@ -97,6 +98,7 @@ impl Summary for Article {
     }
 }
 ```
+
 **Trait Bounds**: 约束泛型类型必须实现特定 trait
 
 **相关文档**:
@@ -122,6 +124,7 @@ let items: Vec<Box<dyn Summary>> = vec![
     Box::new(tweet),
 ];
 ```
+
 **限制**: trait 必须是对象安全的（不能有泛型方法、返回 Self 等）
 
 **相关文档**:
@@ -150,6 +153,7 @@ impl Iterator for Counter {
     fn next(&mut self) -> Option<u32> { /* ... */ }
 }
 ```
+
 **相关文档**:
 
 - [Trait 系统指南](../tier_02_guides/04_trait_system_guide.md)
@@ -177,6 +181,7 @@ fn calculate_speed(distance: Meters, time: Seconds) -> f64 {
     distance.0 / time.0
 }
 ```
+
 **相关文档**:
 
 - [基础类型指南](../tier_02_guides/01_basic_types_guide.md)
@@ -196,6 +201,7 @@ struct Marker<T>(PhantomData<T>); // ZST
 
 let x: () = (); // unit 类型，ZST
 ```
+
 **用途**:
 
 - 类型标记
@@ -230,6 +236,7 @@ struct Slice<'a, T> {
     phantom: PhantomData<&'a T>,
 }
 ```
+
 **相关文档**:
 
 - [高级泛型模式](../tier_04_advanced/02_advanced_generics_patterns.md)
@@ -258,6 +265,7 @@ fn forever() -> ! {
     loop {}
 }
 ```
+
 **特性**: 可以强制转换为任何类型
 
 **相关文档**:
@@ -285,6 +293,7 @@ fn use_pinned(pinned: Pin<&mut T>) {
     // pinned 保证不会移动
 }
 ```
+
 **相关文档**:
 
 - [安全性参考](../tier_03_references/04_safety_reference.md)
@@ -302,12 +311,14 @@ let x = 5; // 推导为 i32
 let s = String::from("hello"); // 推导为 String
 let v = vec![1, 2, 3]; // 推导为 Vec<i32>
 ```
+
 **Turbofish 语法**: `::<>` 显式指定类型
 
 ```rust
 let numbers = Vec::<i32>::new();
 let result = parse::<i32>("42");
 ```
+
 **相关文档**:
 
 - [基础类型指南](../tier_02_guides/01_basic_types_guide.md)
@@ -334,6 +345,7 @@ fn hello(name: &str) {
 let s = String::from("Rust");
 hello(&s); // &String -> &str (Deref 强制转换)
 ```
+
 **相关文档**:
 
 - [类型转换参考](../tier_03_references/01_type_conversions_reference.md)
@@ -360,6 +372,7 @@ impl fmt::Display for Wrapper {
     }
 }
 ```
+
 **相关文档**:
 
 - [Trait 系统指南](../tier_02_guides/04_trait_system_guide.md)
@@ -412,6 +425,7 @@ fn add<T: Add<Output=T>>(a: T, b: T) -> T {
 let x = add(1, 2);     // add_i32
 let y = add(1.0, 2.0); // add_f64
 ```
+
 **相关文档**:
 
 - [性能优化参考](../tier_03_references/05_performance_optimization_reference.md)
@@ -434,6 +448,7 @@ struct ImportantExcerpt<'a> {
     part: &'a str,
 }
 ```
+
 **省略规则**: 编译器可以自动推导生命周期
 
 **相关文档**:
@@ -461,6 +476,7 @@ impl Container for Vec<String> {
     }
 }
 ```
+
 **Rust 版本**: 1.65+ 稳定
 
 **相关文档**:
@@ -484,6 +500,7 @@ where
     println!("{}", result);
 }
 ```
+
 **用途**: 处理任意生命周期的情况
 
 **相关文档**:
@@ -510,6 +527,7 @@ fn foo<T>(x: T) {} // 等价于 fn foo<T: Sized>(x: T)
 // 允许 DST
 fn foo<T: ?Sized>(x: &T) {}
 ```
+
 **相关文档**:
 
 - [基础类型指南](../tier_02_guides/01_basic_types_guide.md)
@@ -535,6 +553,7 @@ struct MyType { /* ... */ }
 use std::rc::Rc;
 let rc = Rc::new(5); // Rc 不是 Send/Sync
 ```
+
 **相关文档**:
 
 - [安全性参考](../tier_03_references/04_safety_reference.md)
@@ -556,6 +575,7 @@ let s: &str = "hello"; // OK
 let arr: &[i32] = &[1, 2, 3]; // OK
 let obj: &dyn Trait = &value; // OK
 ```
+
 ### Const Generic
 
 **定义**: 常量泛型，允许泛型参数是常量。
@@ -571,6 +591,7 @@ fn create_array<T, const N: usize>() -> [T; N] {
     // ...
 }
 ```
+
 **Rust 版本**: 1.51+ 部分支持，1.92.0+ 完全增强
 
 ### Type Alias
@@ -583,6 +604,7 @@ fn create_array<T, const N: usize>() -> [T; N] {
 type Kilometers = i32;
 type Result<T> = std::result::Result<T, std::io::Error>;
 ```
+
 ### Turbofish
 
 **定义**: 使用 `::<>` 显式指定泛型参数。
@@ -593,6 +615,7 @@ type Result<T> = std::result::Result<T, std::io::Error>;
 let v = Vec::<i32>::new();
 let x = parse::<i32>("42");
 ```
+
 ---
 
 ## 📚 延伸阅读

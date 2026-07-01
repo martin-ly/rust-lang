@@ -122,6 +122,7 @@
 └── 组合使用
     └── Rc<RefCell<T>>
 ```
+
 ---
 
 ## 📖 1. 概述
@@ -172,6 +173,7 @@ use List::{Cons, Nil};
 let list = Cons(1, Box::new(Cons(2, Box::new(Cons(3, Box::new(Nil))))));
 println!("{:?}", list);
 ```
+
 **特点**:
 
 - ✅ 单一所有权
@@ -195,6 +197,7 @@ let large = Box::new(LargeStruct {
     data: [0; 1024 * 1024],
 });
 ```
+
 #### 场景 2: 递归类型
 
 ```rust
@@ -229,6 +232,7 @@ impl TreeNode {
     }
 }
 ```
+
 #### 场景 3: Trait 对象
 
 ```rust
@@ -252,6 +256,7 @@ for shape in shapes {
     shape.draw();
 }
 ```
+
 ---
 
 ## 🔗 3. `Rc<T>` - 引用计数
@@ -271,6 +276,7 @@ println!("count = {}", Rc::strong_count(&a)); // 输出: count = 3
 
 // 当所有 Rc 离开作用域，数据被释放
 ```
+
 **特点**:
 
 - ✅ 多个所有者
@@ -308,6 +314,7 @@ let parent2 = Node {
     children: vec![Rc::clone(&child)],
 };
 ```
+
 #### 场景 2: 共享配置
 
 ```rust
@@ -327,6 +334,7 @@ let config = Rc::new(Config {
 let server1 = Rc::clone(&config);
 let server2 = Rc::clone(&config);
 ```
+
 ---
 
 ## 🔐 4. `Arc<T>` - 原子引用计数
@@ -355,6 +363,7 @@ for handle in handles {
     handle.join().unwrap();
 }
 ```
+
 **特点**:
 
 - ✅ 多个所有者
@@ -388,6 +397,7 @@ for handle in handles {
     handle.join().unwrap();
 }
 ```
+
 #### 场景 2: 并发缓存
 
 ```rust
@@ -406,6 +416,7 @@ let cache = Arc::new(Cache {
 let cache1 = Arc::clone(&cache);
 let cache2 = Arc::clone(&cache);
 ```
+
 ---
 
 ## 🧬 5. `RefCell<T>` - 内部可变性
@@ -429,6 +440,7 @@ println!("data = {}", data.borrow());
 // let r1 = data.borrow_mut();
 // let r2 = data.borrow_mut(); // panic!
 ```
+
 **特点**:
 
 - ✅ 内部可变性
@@ -471,6 +483,7 @@ counter.increment(); // &self 方法
 counter.increment();
 println!("count = {}", counter.get());
 ```
+
 #### 场景 2: 观察者模式
 
 ```rust
@@ -497,6 +510,7 @@ impl Observable {
     }
 }
 ```
+
 ---
 
 ## 🔄 6. 组合使用
@@ -521,6 +535,7 @@ let data2 = Rc::clone(&data);
 
 println!("data = {}", data.borrow()); // 35
 ```
+
 **应用**: 图、树、观察者模式
 
 ---
@@ -552,6 +567,7 @@ for handle in handles {
 
 println!("Result: {}", *counter.lock().unwrap());
 ```
+
 **应用**: 并发计数器、共享状态
 
 ---
@@ -580,6 +596,7 @@ struct SafeNode {
     next: Option<Weak<RefCell<SafeNode>>>,
 }
 ```
+
 ---
 
 ### 陷阱 2: RefCell panic
@@ -597,6 +614,7 @@ let r1 = data.borrow_mut();
 drop(r1);
 let r2 = data.borrow();
 ```
+
 ---
 
 ### 陷阱 3: Arc 性能
@@ -614,6 +632,7 @@ for _ in 0..1000000 {
     let _clone = Arc::clone(&arc);
 }
 ```
+
 ---
 
 ## ✅ 8. 最佳实践
@@ -635,6 +654,7 @@ for _ in 0..1000000 {
       └─ 只读
          └─ 使用 Arc<T>
 ```
+
 ---
 
 ### 实践建议

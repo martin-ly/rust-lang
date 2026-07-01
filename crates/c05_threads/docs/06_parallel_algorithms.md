@@ -119,6 +119,7 @@ graph TB
     style D fill:#f3e5f5
     style E fill:#fce4ec
 ```
+
 ### 并行算法选择决策树
 
 ```mermaid
@@ -145,6 +146,7 @@ graph TD
     style Reduce fill:#fff59d
     style Map fill:#90caf9
 ```
+
 ---
 
 ## 📊 并行算法多维对比矩阵
@@ -303,6 +305,7 @@ impl ThreadPool {
     }
 }
 ```
+
 ### 2.2 并行归并排序
 
 #### 2.2.1 基本并行归并排序
@@ -383,6 +386,7 @@ fn main() {
     println!("Sorted: {:?}", sorted);
 }
 ```
+
 ### 2.3 并行快速排序
 
 #### 2.3.1 并行快速排序实现
@@ -451,6 +455,7 @@ fn main() {
     println!("Sorted: {:?}", data);
 }
 ```
+
 ## 3. 并行归约
 
 ### 3.1 基本归约算法
@@ -516,6 +521,7 @@ fn main() {
     println!("Product: {}", product);
 }
 ```
+
 ### 3.2 树形归约
 
 #### 3.2.1 树形归约算法
@@ -595,6 +601,7 @@ fn main() {
     println!("Tree reduction sum: {}", sum);
 }
 ```
+
 ## 4. 并行映射
 
 ### 4.1 基本映射算法
@@ -661,6 +668,7 @@ fn main() {
     println!("Squared: {:?}", squared);
 }
 ```
+
 ### 4.2 分块映射
 
 #### 4.2.1 分块映射优化
@@ -741,6 +749,7 @@ fn main() {
     println!("First 10 squared: {:?}", &squared[..10]);
 }
 ```
+
 ## 5. 并行扫描
 
 ### 5.1 前缀和算法
@@ -815,6 +824,7 @@ fn main() {
     println!("Prefix sum: {:?}", prefix_sum);
 }
 ```
+
 ## 6. 并行搜索
 
 ### 6.1 并行线性搜索
@@ -883,6 +893,7 @@ fn main() {
     }
 }
 ```
+
 ### 6.2 并行二分搜索
 
 #### 6.2.1 并行二分搜索实现
@@ -993,6 +1004,7 @@ fn main() {
     }
 }
 ```
+
 ## 7. 图算法并行化
 
 ### 7.1 并行BFS
@@ -1090,6 +1102,7 @@ fn main() {
     println!("Distances from node 0: {:?}", distances);
 }
 ```
+
 ## 8. 最佳实践
 
 ### 8.1 任务粒度控制
@@ -1194,6 +1207,7 @@ fn main() {
     });
 }
 ```
+
 ### 8.2 负载均衡
 
 #### 8.2.1 工作窃取负载均衡
@@ -1323,6 +1337,7 @@ fn main() {
     println!("All tasks completed");
 }
 ```
+
 ### 8.3 性能优化
 
 #### 8.3.1 缓存友好的并行算法
@@ -1397,6 +1412,7 @@ fn main() {
     println!("First 10 processed items: {:?}", &data[..10]);
 }
 ```
+
 ---
 
 ## 💡 思维导图：并行算法设计策略
@@ -1444,6 +1460,7 @@ mindmap
         复杂实现
         特定场景
 ```
+
 ---
 
 ## 📋 快速参考
@@ -1481,6 +1498,7 @@ let prefix_sum: Vec<_> = data.par_iter()
 use rayon::join;
 rayon::join(|| process_left(), || process_right());
 ```
+
 ### 性能调优检查清单
 
 - ✅ 数据量足够大（> 10K元素）
@@ -1552,6 +1570,7 @@ Rust 1.92.0 的并行算法提供了（自 Rust 1.90 引入）：
    // ⚠️  仅在特殊需求时手工实现
    let sum = manual_parallel_sum(&data, num_threads);
    ```
+
 2. **控制任务粒度**
 
    ```rust
@@ -1560,6 +1579,7 @@ Rust 1.92.0 的并行算法提供了（自 Rust 1.90 引入）：
        process_chunk(chunk);
    });
    ```
+
 3. **避免伪共享**
 
    ```rust
@@ -1568,6 +1588,7 @@ Rust 1.92.0 的并行算法提供了（自 Rust 1.90 引入）：
        .map(|chunk| chunk.iter().sum::<i32>())
        .sum();
    ```
+
 4. **测量性能**
 
    ```rust
@@ -1576,6 +1597,7 @@ Rust 1.92.0 的并行算法提供了（自 Rust 1.90 引入）：
    data.par_sort();
    println!("并行耗时: {:?}", start.elapsed());
    ```
+
 ### 性能权衡
 
 ```mermaid
@@ -1594,6 +1616,7 @@ graph LR
     style D fill:#81c784
     style E fill:#4fc3f7
 ```
+
 ### 9.3 未来发展方向
 
 1. **硬件感知**: 利用特定硬件特性优化算法

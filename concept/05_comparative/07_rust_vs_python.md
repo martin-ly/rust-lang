@@ -90,6 +90,7 @@ graph LR
     R3 -->|"对立"| P3
     R4 -->|"互补"| P4
 ```
+
 > **认知功能**: 此图展示 Rust 与 Python 的**设计哲学对立与互补**。两者在抽象成本、安全时机、显隐偏好上对立，但在"解决实际问题"的目标上互补。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 不要用 Rust 的哲学评判 Python，也不要用 Python 的哲学评判 Rust——它们解决不同问题域。
@@ -133,6 +134,7 @@ graph LR
           return None
       return data[0] * 2  # 运行时可能 TypeError
 ```
+
 > **类型洞察**: Python 的**可选类型提示**（PEP 484）试图弥合动态与静态的鸿沟，但无法提供 Rust 的编译期保证——类型提示是**文档和辅助工具**，不是**安全保证**。
 > [来源: [PEP 484 — Type Hints](https://peps.python.org/pep-0484/)] · [来源: [mypy Documentation](https://mypy.readthedocs.io/)]
 
@@ -170,6 +172,7 @@ graph LR
   │ 内存占用        │ 精确控制        │ 解释器开销大     │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **内存洞察**: Python 的**引用（Reference）计数 + GC** 模型在开发体验上更友好，但带来了运行时（Runtime）开销和不确定性。Rust 的所有权（Ownership）模型在编译期解决内存问题，但要求程序员更深入地理解内存语义。
 > [来源: [Python C API — Memory Management](https://docs.python.org/3/c-api/memory.html)] · [来源: [Rustonomicon — Ownership](https://doc.rust-lang.org/nomicon/ownership.html)]
 
@@ -197,6 +200,7 @@ def read_config(path: str) -> dict:
         return tomllib.load(f)
 # 调用者可能忘记处理 FileNotFoundError / TOMLDecodeError
 ```
+
 > **错误处理（Error Handling）洞察**: Rust 的 `Result` 强制**显式错误处理**——忽略 Result 会产生编译警告。Python 的异常是**隐式的控制流**——容易遗漏处理，导致运行时崩溃。Python 的类型提示可以部分缓解（标注 `-> dict` 不表达可能抛出的异常），但无法达到 Rust 的编译期保证。
 > [来源: [Rust Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)] · [来源: [Python Exceptions](https://docs.python.org/3/tutorial/errors.html)]
 
@@ -235,6 +239,7 @@ def read_config(path: str) -> dict:
   ├── 无需运行时锁（除非显式使用）
   └── 真正的零成本抽象
 ```
+
 > **并发洞察**: Python 的 **GIL** 是**设计权衡**——它简化了内存管理和 C 扩展开发，但限制了 CPU 并行能力。Rust 通过**类型系统（Type System）**在编译期消除数据竞争，实现了真正的 fearless concurrency。
 > [来源: [Python GIL](https://wiki.python.org/moin/GlobalInterpreterLock)] · [来源: [Rust Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)]
 
@@ -273,6 +278,7 @@ def read_config(path: str) -> dict:
       y: int
   # 运行时生成 __init__, __repr__ 等
 ```
+
 > **元编程洞察**: Rust 的宏（Macro）是**编译期代码生成**——零运行时开销，但限制于编译期可用信息。Python 的元编程是**运行时动态修改**——极其灵活，但有性能代价和可维护性风险。
 > [来源: [Rust Macros](https://doc.rust-lang.org/book/ch19-06-macros.html)] · [来源: [Python Decorators](https://docs.python.org/3/glossary.html#term-decorator)]
 
@@ -312,6 +318,7 @@ CLI 工具:
   → Rust
   → 确定性执行、内存安全、Substrate/Solana 生态
 ```
+
 > **选型洞察**: Rust 和 Python 不是**竞争关系**，而是**互补关系**——Python 负责快速探索和生态利用，Rust 负责性能瓶颈和系统底层。
 > [来源: [PyO3 Documentation](https://pyo3.rs/)] · [来源: [Rust in Production](https://www.rust-lang.org/)]
 
@@ -335,6 +342,7 @@ graph TD
     style PYTHON fill:#fff3e0
     style HYBRID fill:#e3f2fd
 ```
+
 > **认知功能**: 此决策树展示 Rust 与 Python 的**互补性**。Rust 不会取代 Python——它们在不同场景下各有优势。
 > **使用建议**: 新项目根据性能需求、生态依赖和团队技能选型；现有 Python 项目可通过 PyO3 逐步引入 Rust。
 > **关键洞察**: **混合架构**（Python 主逻辑 + Rust 性能模块（Module））是工业界的最佳实践——例如 Python 的 NumPy/Pandas 底层都是 C/Fortran，未来可能更多用 Rust。
@@ -370,6 +378,7 @@ graph TD
 ├── 两者的运行时模型不同，不能直接互操作
 └── 混合异步代码需要 careful 的桥接（如 tokio 的 block_on）
 ```
+
 > **边界要点**: Rust 与 Python 的边界主要与**类型系统的完备性**、**学习成本**、**FFI 开销**和**异步（Async）模型差异**相关。这些边界决定了两者在实践中的最佳协作方式。
 > [来源: [PyO3 Performance Guide](https://pyo3.rs/main/performance.html)]
 
@@ -422,6 +431,7 @@ graph TD
   ✅ 重新设计为所有权传递或不可变共享
      // Rust 的优势就是编译期保证，不要绕过它
 ```
+
 > **陷阱总结**: Rust 和 Python 的陷阱主要源于**跨语言思维惯性**——用 Python 风格写 Rust（过度分配、共享状态），或用 Rust 风格写 Python（过度工程化）。理解各自的语言哲学是避免这些陷阱的关键。
 > [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)] · [来源: [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html)]
 
@@ -495,6 +505,7 @@ fn fixed() {
     let v = Value::Str(String::from("hello")); // ✅ shadowing
 }
 ```
+
 > **Python 对比**: Python 是动态类型——变量名只是标签，可以指向任何类型的对象：`x = 42; x =
 
 ## 十、边界测试：Rust 与 Python 的编译错误对比
@@ -520,6 +531,7 @@ fn fixed() {
     let v = Value::Str(String::from("hello")); // shadowing
 }
 ```
+
 > **Python 对比**: Python 是动态类型——变量名只是标签，可以指向任何类型的对象：`x = 42; x = "hello"` 完全合法。Rust 是静态类型——变量类型在编译期确定，`x = 42` 后 `x` 的类型是 `i32`，不能再赋值为 `String`。Rust 的 shadowing（`let x = ...`）创建新变量而非修改原变量。这消除了 Python 中常见的类型错误（如 `len(42)`），但增加了类型标注的样板代码。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：Python 的 GIL 与 Rust 的所有权并发（编译错误）
@@ -548,6 +560,7 @@ fn fixed() {
     }).join().unwrap();
 }
 ```
+
 > **Python 对比**: Python 通过 **GIL**（Global Interpreter Lock）保证单线程执行字节码，实现"线程安全"——但代价是真正的并行计算受限（CPU 密集型任务无法利用多核）。Rust 没有 GIL，通过**所有权和类型系统**保证线程安全：`Rc<T>`（非原子）不能跨线程，`Arc<T>`（原子）可以。编译器在编译期拒绝数据竞争，无需运行时锁。这使得 Rust 的并发程序既有 C/C++ 的性能，又有 Python 的安全性——但无需全局锁。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.5 边界测试：Python 的 GIL 与 Rust 的 `Arc<Mutex<T>>` 的性能对比（运行时开销）
@@ -577,6 +590,7 @@ fn main() {
     // 但 Mutex 开销在高度争用时显著
 }
 ```
+
 > **修正**: Python 的 **GIL**（Global Interpreter Lock）使多线程 Python 代码**串行执行**——同一时刻只有一个线程执行 Python 字节码。Rust 的 `Arc<Mutex<T>>` 允许**真并行**，但 `Mutex` 的锁争用（lock contention）在高频访问时成为瓶颈。性能对比：1) Python GIL：无锁开销，但无并行；2) Rust `Mutex`：有锁开销（原子操作（Atomic Operations） + 内核调度），但可并行；3) Rust `AtomicUsize`：无锁，最高性能。Rust 的优势：开发者可根据场景选择同步原语（`Mutex`、`RwLock`、`Atomic`、无锁结构），Python 无此选择。这与 Java 的 `synchronized`（类似 Mutex，但 JVM 优化更成熟）或 Go 的 `sync.Mutex`（类似 Rust，但 goroutine 调度更轻量）类似——Rust 提供底层控制，但正确使用需要理解内存模型。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-03-shared-state.html)] · [来源: [Python GIL](https://wiki.python.org/moin/GlobalInterpreterLock)]
 
 ### 10.3 边界测试：Python 式动态类型在 Rust 中的不可表达（编译错误）
@@ -589,6 +603,7 @@ fn main() {
     println!("{}", x);
 }
 ```
+
 > **修正**: Python 是**动态类型**：变量无固定类型，`x = 42` 后 `x = "hello"` 完全合法。Rust 是**静态类型**：变量类型在编译期确定且不可变（但值可变，若绑定为 `mut`）。Rust 模拟动态类型的方案：1) `enum`（代数数据类型）：`enum Value { Int(i32), Str(String) }`；2) `Box<dyn Any>`（运行时类型擦除）；3) `serde_json::Value`（通用 JSON 值）。代价：代码膨胀、运行时开销、模式匹配（Pattern Matching）噪音。这与 Go 的 `interface{}`（类似动态类型，但需类型断言）或 TypeScript 的 `any`（编译期绕过检查）不同——Rust 的静态类型是核心设计语言，动态类型是额外抽象。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)] · [来源: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html)]
 
 ## 嵌入式测验（Embedded Quiz）

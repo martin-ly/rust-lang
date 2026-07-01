@@ -112,6 +112,7 @@ fn main() {
     println!("{} {}", result1, result2);
 }
 ```
+
 ### 1.2 单态化
 
 **为每个具体类型生成专门代码**:
@@ -127,6 +128,7 @@ fn main() {
     process("hi");    // 生成 process_str
 }
 ```
+
 **性能对比**:
 
 ```rust
@@ -170,6 +172,7 @@ fn main() {
     println!("Dynamic: {:?}", start.elapsed());
 }
 ```
+
 ### 1.3 内联优化
 
 **#[inline] 属性**:
@@ -199,6 +202,7 @@ fn main() {
     println!("Result: {}", result);
 }
 ```
+
 ---
 
 ## 2. 内存布局优化
@@ -232,6 +236,7 @@ fn main() {
     println!("Optimized: {}", mem::size_of::<Optimized>());      // 8
 }
 ```
+
 ### 2.2 枚举优化
 
 **空指针优化**:
@@ -247,6 +252,7 @@ fn main() {
     // 利用 Box 不为 null，None 用 null 表示
 }
 ```
+
 **Discriminant 优化**:
 
 ```rust
@@ -271,6 +277,7 @@ fn main() {
     println!("WithData: {}", mem::size_of::<WithData>());   // 16 (8 + 8)
 }
 ```
+
 ### 2.3 零大小类型
 
 **ZST 不占空间**:
@@ -293,6 +300,7 @@ fn main() {
     println!("Vec<Empty> capacity: {}", vec.capacity());  // 不分配
 }
 ```
+
 ---
 
 ## 3. 避免分配
@@ -322,6 +330,7 @@ fn main() {
     reference_stack(&data);
 }
 ```
+
 ### 3.2 SmallVec 和 Cow
 
 **SmallVec**:
@@ -340,6 +349,7 @@ fn main() {
     println!("Now on heap: {:?}", vec);
 }
 ```
+
 **Cow (Clone on Write)**:
 
 ```rust
@@ -365,6 +375,7 @@ fn main() {
     println!("{} {}", result1, result2);
 }
 ```
+
 ### 3.3 Arena 分配
 
 **批量分配，批量释放**:
@@ -396,6 +407,7 @@ fn main() {
     // arena 析构时一次性释放所有节点
 }
 ```
+
 ---
 
 ## 4. 编译时计算
@@ -418,6 +430,7 @@ fn main() {
     println!("Sum5: {}", sum(&arr5));
 }
 ```
+
 ### 4.2 Const 函数
 
 **编译时求值**:
@@ -437,6 +450,7 @@ fn main() {
     println!("5! = {}", FACT_5);  // 120，编译时已知
 }
 ```
+
 ### 4.3 类型级计算
 
 **使用类型系统进行计算**:
@@ -473,6 +487,7 @@ fn main() {
     let _: <One as Add<Two>>::Output = Succ(PhantomData::<Two>);
 }
 ```
+
 ### 4.4 编译时字符串处理
 
 **const fn进阶**:
@@ -511,6 +526,7 @@ fn main() {
     println!("0xFF = {}", HEX_VALUE);  // 255，编译时已知
 }
 ```
+
 ### 4.5 Build-Time Code Generation
 
 **使用build.rs生成代码**:
@@ -540,6 +556,7 @@ fn compute_expensive(x: u32) -> u32 {
     x * x + 2 * x + 1
 }
 ```
+
 ```rust
 // main.rs
 include!(concat!(env!("OUT_DIR"), "/lookup_table.rs"));
@@ -552,6 +569,7 @@ fn main() {
     println!("Value: {}", fast_compute(10));
 }
 ```
+
 ---
 
 ## 5. 缓存友好
@@ -599,6 +617,7 @@ fn main() {
     println!("SoA sum: {}", sum_x_soa(&soa));
 }
 ```
+
 ### 5.2 内存对齐
 
 **对齐到缓存行**:
@@ -615,6 +634,7 @@ fn main() {
     println!("Alignment: {}", mem::align_of::<CacheLineAligned>());
 }
 ```
+
 ### 5.3 预取
 
 **预取数据到缓存**:
@@ -647,6 +667,7 @@ fn main() {
     println!("Sum: {}", result);
 }
 ```
+
 ### 5.4 向量化计算
 
 **SIMD优化**:
@@ -696,6 +717,7 @@ fn main() {
     }
 }
 ```
+
 ### 5.5 数据结构的缓存优化
 
 **热/冷数据分离**:
@@ -741,6 +763,7 @@ impl EntitySystem {
     }
 }
 ```
+
 ### 5.6 批处理优化
 
 **批量处理提升缓存命中**:
@@ -787,6 +810,7 @@ fn expensive_operation(_item: &Item) {
     // 昂贵操作
 }
 ```
+
 ---
 
 ## 6. 性能测量
@@ -812,6 +836,7 @@ fn criterion_benchmark(c: &mut Criterion) {
 criterion_group!(benches, criterion_benchmark);
 criterion_main!(benches);
 ```
+
 ### 6.2 Profiling
 
 **使用 perf/flamegraph**:
@@ -825,6 +850,7 @@ perf report
 # Flamegraph
 cargo flamegraph
 ```
+
 ### 6.3 优化策略
 
 **逐步优化**:
@@ -852,6 +878,7 @@ fn main() {
     });
 }
 ```
+
 ---
 
 ## 7. 实战案例
@@ -890,6 +917,7 @@ fn main() {
     let _map2 = fast_hashmap();
 }
 ```
+
 ### 案例 2: 零拷贝解析
 
 ```rust
@@ -922,6 +950,7 @@ fn main() {
     println!("Borrowed: {:?}", borrowed);
 }
 ```
+
 ### 案例 3: SIMD 优化
 
 ```rust
@@ -962,6 +991,7 @@ fn main() {
     println!("SIMD: {}", result2);
 }
 ```
+
 ### 案例 4: 自定义分配器
 
 **使用自定义分配器**:
@@ -993,6 +1023,7 @@ fn main() {
     println!("Allocated {} times", unsafe { ALLOCATION_COUNT });
 }
 ```
+
 ### 案例 5: 内存池优化
 
 **对象池模式**:
@@ -1070,6 +1101,7 @@ fn main() {
     println!("Len: {}", obj2.len());
 }
 ```
+
 ---
 
 ## 8. 常见陷阱
@@ -1085,6 +1117,7 @@ fn clear_code() {
     // 清晰易懂的实现
 }
 ```
+
 **陷阱 2: 不测量就优化**:
 
 ```rust
@@ -1107,6 +1140,7 @@ fn benchmark(c: &mut Criterion) {
 fn version_a() {}
 fn version_b() {}
 ```
+
 **陷阱 3: 忽略编译器优化**:
 
 ```rust
@@ -1118,6 +1152,7 @@ fn simple_sum(data: &[i32]) -> i32 {
     data.iter().sum()  // 已经很快
 }
 ```
+
 ---
 
 ## 9. 编译器优化深度
@@ -1143,6 +1178,7 @@ fn vectorized_sum(data: &[f32]) -> f32 {
 // 对应的 LLVM IR 会使用 SIMD 指令：
 // %vec_sum = call <4 x float> @llvm.vector.reduce.add.v4f32
 ```
+
 **优化级别**:
 
 ```rust
@@ -1158,6 +1194,7 @@ strip = true            # 移除调试符号
 inherits = "release"
 debug = true            # 保留调试信息用于profiling
 ```
+
 ### 9.2 内联策略深度
 
 **内联决策因素**:
@@ -1187,6 +1224,7 @@ fn benchmark_target() {
     // ...
 }
 ```
+
 **跨crate内联**:
 
 ```rust
@@ -1206,6 +1244,7 @@ pub fn add_generic<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
     a + b  // 单态化后自动跨crate内联
 }
 ```
+
 ### 9.3 死代码消除（DCE）
 
 ```rust
@@ -1231,6 +1270,7 @@ fn benchmark() {
 
 fn expensive_computation() -> i32 { 42 }
 ```
+
 ### 9.4 循环优化
 
 ```rust
@@ -1259,6 +1299,7 @@ fn licm_example(data: &[i32], multiplier: i32) -> Vec<i32> {
         .collect()
 }
 ```
+
 ### 9.5 常量折叠与常量传播
 
 ```rust
@@ -1287,6 +1328,7 @@ fn runtime_example() {
     }
 }
 ```
+
 ---
 
 ## 10. 高级优化实战案例集
@@ -1327,6 +1369,7 @@ fn benchmark_json_parsing() {
     }
 }
 ```
+
 ### 案例 7: 高性能哈希表
 
 ```rust
@@ -1364,6 +1407,7 @@ fn fast_int_map() {
     }
 }
 ```
+
 ### 案例 8: 批处理与流水线优化
 
 ```rust
@@ -1421,6 +1465,7 @@ fn load_data(_: Data) -> LoadedData { LoadedData }
 fn compute(_: LoadedData) -> ProcessedData { ProcessedData }
 fn output_result(_: ProcessedData) {}
 ```
+
 ### 案例 9: 分层缓存策略
 
 ```rust
@@ -1471,6 +1516,7 @@ impl<K: Clone + Eq + std::hash::Hash, V: Clone> TieredCache<K, V> {
     }
 }
 ```
+
 ### 案例 10: 预计算与查表法
 
 ```rust
@@ -1511,6 +1557,7 @@ fn render_loop() {
     }
 }
 ```
+
 ---
 
 ## 11. 跨版本兼容性说明

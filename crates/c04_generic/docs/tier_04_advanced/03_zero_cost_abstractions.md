@@ -132,6 +132,7 @@
 └── 缓存友好设计
     └── 数据局部性
 ```
+
 ### 多维概念对比矩阵
 
 | 优化技术       | 性能提升 | 复杂度 | 适用场景 | Rust 1.92.0 |
@@ -157,6 +158,7 @@
 │       │       │   ├── 是 → 内联优化
 │       │       │   └── 否 → 单态化
 ```
+
 ---
 
 ## 🎯 零成本抽象原则
@@ -195,6 +197,7 @@ fn main() {
     print_value(3.14);        // 调用 print_value_f64
 }
 ```
+
 ### 单态化的优势
 
 1. **零运行时开销**: 没有虚函数表查找
@@ -217,6 +220,7 @@ fn main() {
     process(vec![vec![1], vec![2]]);     // 版本 4: Vec<i32>
 }
 ```
+
 **权衡**: 二进制体积 vs 运行时性能
 
 ---
@@ -252,6 +256,7 @@ fn optimized_example() {
     println!("{}", z);
 }
 ```
+
 ### 常量折叠
 
 ```rust
@@ -273,6 +278,7 @@ fn main() {
     println!("{} {}", FACT_5, fact);
 }
 ```
+
 ### 死代码消除
 
 ```rust
@@ -288,6 +294,7 @@ fn dead_code_elimination() {
     println!("{}", x);
 }
 ```
+
 ---
 
 ## 3️⃣ 迭代器优化
@@ -316,6 +323,7 @@ fn iterator_chain(data: &[i32]) -> i32 {
 
 // 编译后生成相同的汇编代码！
 ```
+
 ### 迭代器融合
 
 ```rust
@@ -342,6 +350,7 @@ fn manual_fused(data: Vec<i32>) -> Vec<i32> {
     result
 }
 ```
+
 ---
 
 ## 4️⃣ SIMD 优化
@@ -362,6 +371,7 @@ fn add_vectors(a: &[f32], b: &[f32]) -> Vec<f32> {
 // - SSE/AVX (x86)
 // - NEON (ARM)
 ```
+
 ### 显式 SIMD (portable_simd)
 
 ```rust
@@ -384,6 +394,7 @@ fn simd_add(a: &[f32], b: &[f32]) -> Vec<f32> {
     result
 }
 ```
+
 ### SIMD 性能对比
 
 | 操作     | 标量  | SIMD (4-wide) | 加速比 |
@@ -426,6 +437,7 @@ fn process_soa(points: &Points) -> f32 {
 
 // SoA 通常快 2-3 倍（更好的缓存利用率）
 ```
+
 ### 内存对齐
 
 ```rust
@@ -452,6 +464,7 @@ fn alignment_demo() {
     println!("Aligned: {} bytes", size_of::<Aligned>());      // 16 bytes (aligned)
 }
 ```
+
 ---
 
 ## 6️⃣ 性能分析工具
@@ -476,6 +489,7 @@ fn criterion_benchmark(c: &mut Criterion) {
 criterion_group!(benches, criterion_benchmark);
 criterion_main!(benches);
 ```
+
 ### cargo-asm - 查看生成的汇编
 
 ```bash
@@ -485,6 +499,7 @@ cargo install cargo-asm
 # 查看汇编
 cargo asm --lib mylib::my_function
 ```
+
 ### perf - Linux 性能分析
 
 ```bash
@@ -493,6 +508,7 @@ cargo build --release
 perf record --call-graph=dwarf ./target/release/my_program
 perf script | stackcollapse-perf.pl | flamegraph.pl > flame.svg
 ```
+
 ---
 
 ## 🎯 优化实战案例
@@ -523,6 +539,7 @@ fn parse_fast(input: &str) -> Vec<i32> {
 
 // 基准测试结果: parse_fast 快约 30%
 ```
+
 ### 案例 2: 批量处理优化
 
 ```rust
@@ -560,6 +577,7 @@ fn process_batch(data: &[u8]) -> Vec<u8> {
 
 // 基准测试结果: process_batch 快约 8-10x
 ```
+
 ---
 
 ## 📚 优化清单

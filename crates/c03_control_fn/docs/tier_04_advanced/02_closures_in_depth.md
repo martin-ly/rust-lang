@@ -105,6 +105,7 @@
 └── 递归闭包
     └── Y组合子
 ```
+
 ---
 
 ## 1. 闭包的内部表示
@@ -147,6 +148,7 @@ fn main() {
     println!("{}", closure(5));  // 35
 }
 ```
+
 ### 零大小闭包
 
 ```rust
@@ -165,6 +167,7 @@ fn main() {
     println!("{}", fn_ptr());
 }
 ```
+
 ### 捕获大小分析
 
 ```rust
@@ -185,6 +188,7 @@ fn main() {
     // 相同大小，因为 u8/u16/u32 都是 Copy
 }
 ```
+
 ---
 
 ## 2. 高阶函数模式
@@ -215,6 +219,7 @@ fn main() {
     println!("{}", op(3, 4));  // 12
 }
 ```
+
 ### 闭包组合子
 
 ```rust
@@ -239,6 +244,7 @@ fn main() {
     println!("{}", triple(10));  // 30
 }
 ```
+
 ### 柯里化
 
 ```rust
@@ -271,6 +277,7 @@ fn main() {
     println!("{}", add_5(10));  // 15
 }
 ```
+
 ---
 
 ## 3. 闭包与生命周期
@@ -299,6 +306,7 @@ fn main() {
     println!("{}", text);
 }
 ```
+
 ### HRTB（高阶trait边界）
 
 ```rust
@@ -322,6 +330,7 @@ fn main() {
     });
 }
 ```
+
 ### 闭包返回引用
 
 ```rust
@@ -337,6 +346,7 @@ fn main() {
     println!("{}", getter(4));  // 5
 }
 ```
+
 ---
 
 ## 4. 闭包trait对象
@@ -356,6 +366,7 @@ fn main() {
     }
 }
 ```
+
 ### trait对象生命周期
 
 ```rust
@@ -399,6 +410,7 @@ fn main() {
     processor.process("测试消息");
 }
 ```
+
 ---
 
 ## 5. 捕获策略优化
@@ -436,6 +448,7 @@ fn main() {
     println!("{}", data.name);
 }
 ```
+
 ### Clone vs Move
 
 ```rust
@@ -458,6 +471,7 @@ fn main() {
     println!("{:?}", data);
 }
 ```
+
 ---
 
 ## 6. 递归闭包
@@ -499,6 +513,7 @@ fn main() {
     println!("5! = {}", f(5));  // 120
 }
 ```
+
 ### Y组合子
 
 ```rust
@@ -538,6 +553,7 @@ fn main() {
     println!("5! = {}", factorial(5));
 }
 ```
+
 ---
 
 ## 7. 异步闭包
@@ -562,6 +578,7 @@ fn main() {
     println!("异步闭包示例（需要运行时执行）");
 }
 ```
+
 ### async move 与生命周期
 
 ```rust
@@ -581,6 +598,7 @@ fn main() {
     // runtime.block_on(future);
 }
 ```
+
 ---
 
 ## 8. 实战案例
@@ -630,6 +648,7 @@ fn main() {
     eh.emit("hover");
 }
 ```
+
 ### 惰性求值
 
 ```rust
@@ -672,6 +691,7 @@ fn main() {
     println!("值: {}", lazy.get());  // 使用缓存
 }
 ```
+
 ### 函数缓存（Memoization）
 
 ```rust
@@ -728,6 +748,7 @@ fn main() {
     println!("{}", fib.call(5));  // 使用缓存
 }
 ```
+
 ---
 
 **最后更新**: 2025-12-11

@@ -97,6 +97,7 @@
 │  └─────┘  │  │  └─────┘  │  │  └─────┘  │
 └───────────┘  └───────────┘  └───────────┘
 ```
+
 ---
 
 ## 🐳 容器化
@@ -153,6 +154,7 @@ EXPOSE 8080
 
 ENTRYPOINT ["/app/myapp"]
 ```
+
 ### Distroless 镜像
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -170,6 +172,7 @@ COPY --from=builder /app/target/release/myapp /myapp
 # 需要静态链接: RUSTFLAGS='-C target-feature=+crt-static'
 ENTRYPOINT ["/myapp"]
 ```
+
 ```bash
 # 构建命令
 docker build -t myapp:v1.0.0 .
@@ -178,6 +181,7 @@ docker build -t myapp:v1.0.0 .
 docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
     aquasec/trivy image myapp:v1.0.0
 ```
+
 ---
 
 ## ☸️ Kubernetes 配置
@@ -314,6 +318,7 @@ spec:
                   - rust-app
               topologyKey: kubernetes.io/hostname
 ```
+
 ### Service
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -355,6 +360,7 @@ spec:
   - name: http
     port: 8080
 ```
+
 ### ConfigMap
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -383,6 +389,7 @@ data:
   # 日志格式
   LOG_FORMAT: "json"
 ```
+
 ### Secret
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -400,6 +407,7 @@ stringData:
   api-key: "secret-api-key"
   jwt-secret: "jwt-signing-secret"
 ```
+
 ### HPA (水平自动伸缩)
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -456,6 +464,7 @@ spec:
         periodSeconds: 15
       selectPolicy: Max
 ```
+
 ### VPA (垂直自动伸缩)
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -485,6 +494,7 @@ spec:
         memory: 1Gi
       controlledResources: ["cpu", "memory"]
 ```
+
 ---
 
 ## 📈 可观测性
@@ -514,6 +524,7 @@ spec:
     interval: 30s
     scrapeTimeout: 10s
 ```
+
 ### Logging
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -546,6 +557,7 @@ data:
       </regexp>
     </filter>
 ```
+
 ### Tracing
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -579,6 +591,7 @@ spec:
           receivers: [otlp]
           exporters: [jaeger]
 ```
+
 ---
 
 ## 🛡️ 安全性
@@ -624,6 +637,7 @@ spec:
     - protocol: UDP
       port: 53
 ```
+
 ### PodSecurityPolicy
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -648,6 +662,7 @@ spec:
   fsGroup:
     rule: 'RunAsAny'
 ```
+
 ---
 
 ## ⚡ 性能优化
@@ -668,6 +683,7 @@ resources:
     memory: "128Mi"  # 防止 OOM
     cpu: "1000m"     # 1 核心
 ```
+
 ### 启动优化
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -689,6 +705,7 @@ async fn main() {
     axum::serve(listener, app).await.unwrap();
 }
 ```
+
 ### 优雅关闭
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -722,6 +739,7 @@ async fn graceful_shutdown() {
     // 4. 退出
 }
 ```
+
 ---
 
 ## 🔗 参考资源

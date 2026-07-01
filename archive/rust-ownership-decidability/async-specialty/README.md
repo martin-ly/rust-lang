@@ -346,6 +346,7 @@ async fn blink_task(pin: PB0) {
 **维护者**: Rust Async Specialty Team
 **创建日期**: 2026-03-05
 **状态**: 🚧 持续推进中
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -362,17 +363,10 @@ async fn blink_task(pin: PB0) {
 ## 权威来源索引
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
-
 > **来源: [TRPL Ch. 4 - Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)**
-
 > **来源: [Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)**
-
 > **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)**
-
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
-
 > **来源: [TRPL Ch. 17 - Async](https://doc.rust-lang.org/book/ch17-00-async-await.html)**
-
 > **来源: [Tokio Documentation](https://tokio.rs/)**
-
 > **来源: [RFC 2394 - Async/Await](https://rust-lang.github.io/rfcs/2394-async_await.html)**

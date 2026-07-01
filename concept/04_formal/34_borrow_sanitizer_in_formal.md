@@ -53,6 +53,7 @@ BorrowSanitizer 在编译时向 LLVM IR 插入两类 intrinsic：
 ; 示例：对引用进行 retag
 %x = call ptr @__rust_retag_reg(ptr %y, ...)
 ```
+
 运行时（Runtime），BorrowSanitizer 维护一个 **shadow stack** 和 **shadow memory**，记录每个指针 tag 的状态（如 Active、Frozen、Disabled）。当发生非法读/写时，报告类似 Miri 的错误信息。
 
 ### 2.3 错误报告示例
@@ -63,6 +64,7 @@ help: the accessed tag <TAG>(unprotected) has state Disabled which forbids this 
 help: the accessed tag <TAG>(unprotected) was created here, in the initial state Frozen
 help: the accessed tag <TAG>(unprotected) later transitioned due to a foreign write
 ```
+
 ---
 
 ## 三、BorrowSanitizer vs Miri vs AddressSanitizer
@@ -108,6 +110,7 @@ rustc -Zsanitizer=borrow main.rs
 # 或
 cargo bsan test
 ```
+
 目前需要通过 `cargo-bsan` 插件和定制编译器使用。2026 年项目目标包括：完成 shadow-stack 运行时、提出 `__rust_retag` intrinsics MCP、向 LLVM 上游提交组件 PR，最终使 `-Zsanitizer=borrow` 可直接在 nightly 使用。
 
 ---

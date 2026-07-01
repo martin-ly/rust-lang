@@ -95,6 +95,7 @@ Target Triple 格式: <arch><sub>-<vendor>-<sys>-<abi>
   ├── wasm32-*: WebAssembly（浏览器或独立运行时）
   └── *-uefi-*: UEFI 固件
 ```
+
 > **认知功能**: Target Triple 是 Rust **跨平台抽象的基石**——它精确标识了编译目标的架构、操作系统和 ABI，使编译器能生成正确的代码。
 > [来源: [The rustc Book — Targets](https://doc.rust-lang.org/rustc/targets/index.html)]
 
@@ -134,6 +135,7 @@ if cfg!(target_endian = "little") {
     // 编译期确定的分支（无运行时开销）
 }
 ```
+
 > **cfg 洞察**: `cfg` 是 Rust **零成本条件编译**的机制——不匹配的分支在编译期被完全消除，不产生任何运行时（Runtime）开销。
 > [来源: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)]
 
@@ -168,6 +170,7 @@ Rust 的两种运行模式:
   ├── 无 panic 处理（需自定义 panic_handler）
   └── 无堆栈展开（通常 panic = abort）
 ```
+
 > **no_std 洞察**: `no_std` 是 Rust **嵌入式和系统编程**的关键能力——它证明了 Rust 不仅是一门高级语言，也可以用于最底层的系统开发。
 > [来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)]
 
@@ -207,6 +210,7 @@ Rust 的两种运行模式:
   ├── Tier 2: 保证构建（ARM Linux, WASM 等）
   └── Tier 3: 社区维护（各种嵌入式目标）
 ```
+
 > **工具链洞察**: Rust 的交叉编译比 C/C++ **更简单**——`rustup target add` 一键安装目标支持，`cross` 工具自动处理 Docker 容器。
 > [来源: [cross crate](https://github.com/cross-rs/cross)]
 
@@ -248,6 +252,7 @@ Rust 的两种运行模式:
 // 使用自定义 target
 // rustc --target=thumbv7em-none-eabihf.json
 ```
+
 > **自定义 Target 洞察**: Rust 的 **Target 规范 JSON** 是嵌入式开发的强大工具——它允许为任意 LLVM 支持的架构定义编译目标。
 > [来源: [rustc Target Specification](https://doc.rust-lang.org/rustc/targets/custom.html)]
 
@@ -280,6 +285,7 @@ Rust 的两种运行模式:
   ├── #[no_mangle]
   └── 链接器脚本（linker script）
 ```
+
 > **嵌入式洞察**: Rust 的 **嵌入式生态**是语言安全优势的最直接体现——在无法调试的硬件上，编译期保证的价值被放大到极致。
 
 ---
@@ -327,6 +333,7 @@ Rust 的两种运行模式:
   │ wasm64-unknown-unknown │ 3       │ ❌      │ 未来    │
   └────────────────────────┴─────────┴─────────┴─────────┘
 ```
+
 > **平台矩阵**: Rust 的 **Tier 系统**反映了平台支持的成熟度——Tier 1 有 CI 保证，Tier 2 保证可构建，Tier 3 是社区维护。
 > [来源: [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html)] · [来源: [AWS Docs](https://aws.amazon.com/)]
 
@@ -347,6 +354,7 @@ graph TD
     style CROSS fill:#c8e6c9
     style NATIVE fill:#fff3e0
 ```
+
 > **认知功能**: 交叉编译的决策很简单——**只在需要在其他平台上运行时（Runtime）配置**。
 > [来源: [Rustup Cross-compilation](https://rust-lang.github.io/rustup//cross-compilation.html)]
 
@@ -386,6 +394,7 @@ graph TD
 ├── 这是高度平台特定的
 └── 每个芯片 family 有不同的要求
 ```
+
 > **边界要点**: 交叉编译的边界主要与**C 依赖**、**proc-macro**、**测试执行**、**标准库限制**和**链接器脚本**相关。
 > [来源: [Cargo Book — Build Scripts](https://doc.rust-lang.org/cargo/reference/build-scripts.html)]
 
@@ -434,6 +443,7 @@ graph TD
   ✅ 使用 to_be_bytes() / from_be_bytes()
      // 显式指定字节序
 ```
+
 > **陷阱总结**: 交叉编译的陷阱主要与**target 安装**、**cfg 重叠**、**no_std 限制**、**host/target 混淆**和**大小端**相关。
 > [来源: [Rust Embedded FAQs](https://docs.rust-embedded.org/book/)]
 
@@ -504,6 +514,7 @@ fn main() {
     linux_only(); // 在 Windows 目标上不可用
 }
 ```
+
 > **修正**:
 > Rust 的 `#[cfg]` 属性是条件编译的核心机制。`target_os`、`target_arch`、`target_family` 等条件控制代码的编译。
 > 交叉编译时（如从 x86_64 Linux 编译到 ARM Android），条件编译根据目标平台而非宿主平台过滤代码。
@@ -530,6 +541,7 @@ fn fixed() {
     let v = Vec::from([1, 2, 3]); // ✅ 使用 alloc::Vec
 }
 ```
+
 > **修正**:
 > 嵌入式和内核开发使用 `#![no_std]` 禁用标准库（`std` 依赖操作系统）。
 > `no_std` 环境下，`Vec`、`String`、`Box` 等堆分配类型通过 `alloc` crate 提供；完全不分配的环境（如某些微控制器）连 `alloc` 也不可用。
@@ -552,6 +564,7 @@ fn main() {
 }
 // ❌ 编译错误: linker 程序未找到
 ```
+
 > **修正**: 交叉编译需要**目标平台的链接器**：Rust 编译器（`rustc`）生成目标平台的 LLVM IR 和对象文件，但最终的链接步骤需要平台特定的链接器（`gcc`、`ld`、`lld`）。常见错误：1) 未安装交叉编译工具链（`apt install gcc-aarch64-linux-gnu`）；2) 链接器路径配置错误（`.cargo/config.toml` 中的 `linker` 指向不存在的路径）；3) 使用 `cross` 工具但 Docker 镜像未下载。解决方案：1) `cross` 工具（使用 Docker 容器封装交叉编译环境）；2) `cargo-zigbuild`（使用 Zig 作为链接器，内置多目标支持）；3) `lld`（LLVM 链接器，支持多种目标）。这与 Go 的交叉编译（内置链接器，无需外部工具）或 C 的交叉编译（同样需外部工具链）不同——Rust 正在逐步整合 `lld`，未来可能无需外部链接器。[来源: [Cargo Configuration](https://doc.rust-lang.org/cargo/reference/config.html)] · [来源: [Rust Cross Compilation](https://rust-lang.github.io/rustup//cross-compilation.html)]
 
 ### 10.4 边界测试：`cfg` 条件与目标平台的不一致（编译错误/逻辑错误）
@@ -568,6 +581,7 @@ fn main() {
     println!("{}", platform_specific());
 }
 ```
+
 > **修正**: `cfg` 条件编译根据目标平台选择代码，但若所有条件都不满足，函数不存在，调用点编译错误。安全模式：添加默认实现或 `_` 通配：`#[cfg(not(any(target_os = "linux", target_os = "macos")))] fn platform_specific() -> &'static str { "other" }`。或使用 `cfg!` 宏（Macro）在运行时检查：`if cfg!(target_os = "linux") { ... } else { ... }`。交叉编译时的常见陷阱：1) 开发在 Linux 上，忘记 Windows 路径；2) `target_family = "unix"` 和 `target_family = "windows"` 的互斥性；3) `target_arch` 的嵌套（`target_arch = "x86_64"` 下还有 `target_feature = "sse2"`）。这与 C 的 `#ifdef _WIN32`（预处理器，相同模式）或 Go 的 `//go:build`（构建约束，类似 `cfg`）类似——跨平台代码的 `cfg` 覆盖是质量保证的关键。来源: [Rust Reference — Conditional Compilation] · 来源: [The Rust Programming Language]
 > **过渡**: 交叉编译：多目标平台支持与条件编译 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 

@@ -92,6 +92,7 @@ mindmap
       RustInk["Rust/ink!<br/>所有权 + Wasm"]
       EVM[EVM/Solidity<br/>运行时检查]
 ```
+
 > **认知路径**: 本 mindmap 从四个维度组织区块链安全知识：**Rust 链架构**回答"有哪些主流 Rust 链"，**漏洞类别消除**回答"Rust 消除了哪些 Solidity 漏洞"，**形式化验证**回答"如何证明合约正确"，**跨链对比**回答"Move vs Rust vs Solidity 的安全模型差异"。
 > **认知功能**: 本 mindmap 以四层架构组织区块链安全知识全景，帮助读者建立"链架构→漏洞消除→形式化验证→跨链对比"的系统认知框架。[来源: 💡 原创分析]
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -140,6 +141,7 @@ fn process_instruction(
     Ok(())
 }
 ```
+
 > **Solana 运行时借用（Borrowing）检查**: Sealevel 并行执行引擎在**运行时（Runtime）**对账户状态进行借用检查（与 Rust 编译期借用检查同构），确保并行交易无数据竞争。 [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 
 ---
@@ -167,6 +169,7 @@ graph TD
     D --> G
     E --> G
 ```
+
 > **来源**: [Solana Docs — Sealevel] · [Anatoly Yakovenko — Sealevel Paper]
 > **认知功能**: 此流程图揭示 Solana 如何将 Rust 的 `&`/`&mut` 借用语义映射到运行时并行调度策略，实现"无数据竞争的并行合约执行"。[来源: 💡 原创分析]
 > **使用建议**: 设计并行交易时，优先将账户标记为 read-only 以最大化并行度；mutually exclusive writes 需显式排序。
@@ -216,6 +219,7 @@ mod erc20 {
     }
 }
 ```
+
 ### 2.3 Near Protocol：用户友好与分片执行
 >
 
@@ -282,6 +286,7 @@ mod verification {
     }
 }
 ```
+
 | Kani 特性 | 合约验证应用 |
 |:---|:---|
 | `#[kani::proof]` | 验证函数级不变量（如转账后总量守恒） |
@@ -373,6 +378,7 @@ classDiagram
     note for RustTrait "Trait 系统:<br/>默认可 Copy/Drop<br/>显式 impl 选择行为"
     note for SolidityModifier "修饰器模式:<br/>运行时检查<br/>人工审计依赖"
 ```
+
 > **认知功能**: 此类图将三种合约语言的安全机制进行**类型系统级别的对比**。Move 的 Ability 系统（默认最严格，显式放宽）与 Rust 的 Trait 系统（默认宽松，显式约束）形成对偶。Solidity 没有编译期资源语义，依赖运行时修饰器和人工审计——这是 Solidity 合约漏洞频发的根本类型论原因。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
@@ -400,6 +406,7 @@ let coin2 = coin1;  // coin1 被 move，不是 copy
 let coin: Coin = get_coin();
 // 函数结尾未消费 coin → 编译器拒绝
 ```
+
 > **核心洞察**: Move 的 abilities 是**能力安全（Capability Security）**在类型系统中的表达。与 Rust 的所有权转移不同，Move 通过**编译期 ability 检查**和**字节码验证器（bytecode verifier）**双重保障资源安全。 [来源: [lib.rs](https://lib.rs/)]
 
 ### 4.2 Sui 的 Object-Centric 模型 vs Aptos 的账户存储模型
@@ -425,6 +432,7 @@ public fun get_balance(addr: address): u64 acquires Coin {
     coin.value
 }
 ```
+
 ### 4.3 Move 与 Rust 合约的形式化差异
 
 | 安全维度 | Move (Sui/Aptos) | Rust (ink!/Solana) | 形式化根基 |
@@ -451,6 +459,7 @@ pub fn transfer(&mut self, to: AccountId, value: Balance) {
     self.balances.insert(to, &(self.balance_of(to) + value));
 }
 ```
+
 ```move
 // ✅ Move: ability 系统防止双花
 struct Coin has key, store { value: u64 }
@@ -465,6 +474,7 @@ public fun split(coin: Coin, amount: u64): (Coin, Coin) {
     (coin, other)  // 必须返回两个 Coin，不能隐式丢弃
 }
 ```
+
 > **来源**: [Move Book — Abilities] · [Sui Docs — Object Model] · [Aptos Docs — Move on Aptos] · [Move Prover Paper]
 
 ---
@@ -512,6 +522,7 @@ mod verification {
     }
 }
 ```
+
 > **Interlay 的验证策略**: 将 pallet 的**纯计算逻辑**（数学运算、状态转换函数）与**Substrate 运行时依赖**分离，对纯逻辑进行 Kani 验证。运行时交互（存储读写、事件发射）通过 mock 抽象，不进入验证路径。
 
 ### 5.2 FRAME 存储与 Kani 的集成挑战
@@ -538,6 +549,7 @@ fn verify_weight_calculation_does_not_overflow() {
     assert!(weight.proof_size() > 0);
 }
 ```
+
 ### 5.3 形式化验证的覆盖边界
 
 | 可验证 | 不可验证（当前工具限制）|
@@ -604,6 +616,7 @@ fn process_instruction(
     Ok(())
 }
 ```
+
 > **SBF Verifier 的形式化根基**: Solana 字节码验证器实现了**控制流完整性（CFI）**和**内存安全（Memory Safety）**的静态检查。这与 Rust 编译器的借用检查器是互补的——Rust 保证源代码级安全，SBF verifier 保证字节码级安全。
 
 ### 8.2 Polkadot PVF：Wasm 验证函数的形式化
@@ -707,6 +720,7 @@ fn fixed() {
     }
 }
 ```
+
 > **修正**:
 > 区块链和加密货币应用对时序攻击（timing attack）高度敏感。
 > 标准库的 `==` 运算符在发现第一个不匹配字节时立即返回，执行时间与匹配字节数相关，可能泄露密钥信息。
@@ -733,6 +747,7 @@ impl Contract {
     }
 }
 ```
+
 > **修正**:
 > 智能合约的漏洞（如 The DAO 攻击）常源于"检查-生效-交互"（Checks-Effects-Interactions）模式的违反。
 > Rust 的所有权系统不直接防止重入攻击，但编译期检查确保状态修改的顺序可被静态分析。
@@ -752,6 +767,7 @@ fn sign(sk: &SecretKey, msg: &[u8]) -> Vec<u8> {
     todo!()
 }
 ```
+
 > **修正**:
 > 椭圆曲线签名（ECDSA、Schnorr）要求消息先经过密码学哈希（SHA-256、Keccak-256）压缩为固定长度（32 字节），再作为签名输入。
 > 直接对原始消息签名是安全漏洞（长度扩展攻击、消息结构歧义）。
@@ -775,6 +791,7 @@ fn hash_data(data: &[u8]) -> [u8; 32] {
     todo!()
 }
 ```
+
 > **修正**: 区块链的共识节点和轻客户端常在资源受限环境运行（嵌入式、WASM、TEE），要求 `no_std`（无标准库）。
 > Rust 的密码学生态（`rust-crypto`）积极支持 `no_std`：`sha2`、`sha3`、`blake2` 等 crate 提供 `default-features = false` 配置，禁用 `std` 依赖。
 > 但某些高级功能（如 `update` 的流式接口、并行哈希）可能需要 `std` 或 `alloc`。
@@ -797,6 +814,7 @@ fn main() {
     println!("{:?}", v);
 }
 ```
+
 > **修正**:
 > 区块链智能合约（如 Substrate pallet）和嵌入式系统常用 `#![no_std]` 以减少依赖和二进制大小。
 > `no_std` 禁用 `std`，仅保留 `core` 和（若启用）`alloc`。
@@ -824,6 +842,7 @@ fn main() {
     panic!("no panic handler");
 }
 ```
+
 > **修正**: `#![no_std]` 禁用标准库，包括默认的 panic 处理程序。`no_std` 二进制必须提供 `#[panic_handler]`：
 
 ```rust,ignore
@@ -832,6 +851,7 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
     loop {} // 或 halt、reboot
 }
 ```
+
 嵌入式和区块链（Substrate pallet）常用 `no_std`。其他限制：1) 无 `println!`（无标准输出）；2) 无 `Vec`/`String`（需 `alloc` crate）；3) 无堆分配默认支持（需自定义 `#[global_allocator]`）。Substrate 的 `sp-io` crate 提供 `no_std` 兼容的打印和 panic 处理。这与 Solidity（无 std 概念，运行时是 EVM）或 Go（无 `no_std` 等价物）不同——Rust 的 `no_std` 使资源受限环境开发成为可能，但需要手动提供底层设施。[来源: [The Rust Reference](https://doc.rust-lang.org/reference/names/preludes.html)] · [来源: [Substrate no_std](https://docs.substrate.io/build/)]
 > **过渡**: Blockchain & Smart Contract Security（区块链与智能合约安全） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Blockchain & Smart Contract Security（区块链与智能合约安全） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

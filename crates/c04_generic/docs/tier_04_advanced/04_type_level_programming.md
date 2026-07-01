@@ -90,6 +90,7 @@ fn type_level_numbers() {
     let _two: Two;
 }
 ```
+
 ### 类型级加法
 
 ```rust
@@ -119,6 +120,7 @@ fn verify_addition() {
     let _: Sum1 = Succ(PhantomData::<Four>);  // Two + Three = Five
 }
 ```
+
 ### 类型级乘法
 
 ```rust
@@ -144,6 +146,7 @@ where
 // 使用示例
 type Product = <Two as Mul<Three>>::Output;  // Six = Two * Three
 ```
+
 ---
 
 ## 2️⃣ 类型级布尔逻辑
@@ -214,6 +217,7 @@ type Result1 = <True as And<False>>::Output;  // False
 type Result2 = <True as Or<False>>::Output;   // True
 type Result3 = <False as Not>::Output;        // True
 ```
+
 ---
 
 ## 3️⃣ 类型级列表
@@ -302,6 +306,7 @@ fn hlist_operations() {
     println!("{} {}", first, second);
 }
 ```
+
 ---
 
 ## 4️⃣ Higher-Kinded Types (HKT) 模拟
@@ -363,6 +368,7 @@ where
     F::map(fa, f)
 }
 ```
+
 ---
 
 ## 5️⃣ 类型级状态机
@@ -457,6 +463,7 @@ fn protocol_example() {
     // protocol.transition(AckMessage);
 }
 ```
+
 ---
 
 ## 6️⃣ 类型级证明
@@ -516,6 +523,7 @@ impl<T, const N: usize> Array<T, N> {
     }
 }
 ```
+
 ---
 
 ## 🎯 实战项目

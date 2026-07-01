@@ -194,6 +194,7 @@ let b = 3.14;   // 推导为 f64
 let s = String::from("hello");
 // let len = s + 5; // 编译错误！不能将 String 和 i32 相加
 ```
+
 ### 1.3 类型分类
 
 Rust 的类型可以分为以下几类：
@@ -237,6 +238,7 @@ Rust 类型系统
     ├── Never 类型 (!)
     └── 单元类型 (())
 ```
+
 ---
 
 ## 2. 标量类型 (Scalar Types)
@@ -280,6 +282,7 @@ fn main() {
     println!("size = {}, index = {}", size, index);
 }
 ```
+
 #### 整数字面量
 
 Rust 支持多种整数字面量格式：
@@ -310,6 +313,7 @@ fn main() {
     println!("byte: {}, typed: {}, large: {}", byte, typed, large);
 }
 ```
+
 #### 整数溢出
 
 整数溢出行为：
@@ -342,6 +346,7 @@ fn main() {
     println!("saturating: {}", z); // 255
 }
 ```
+
 #### 最佳实践
 
 ```rust
@@ -367,6 +372,7 @@ fn main() {
     println!("population: {}, million: {}", population, million);
 }
 ```
+
 ### 2.2 浮点数类型
 
 #### 基本浮点数类型
@@ -400,6 +406,7 @@ fn main() {
     println!("sum: {}, product: {}", sum, product);
 }
 ```
+
 #### 浮点数精度
 
 ```rust
@@ -425,6 +432,7 @@ fn main() {
     // assert_relative_eq!(a, b, epsilon = 1e-10);
 }
 ```
+
 #### 特殊值
 
 ```rust
@@ -446,6 +454,7 @@ fn main() {
     println!("nan != nan: {}", nan != nan); // true!
 }
 ```
+
 #### 最佳实践2
 
 ```rust
@@ -476,6 +485,7 @@ fn some_calculation() -> f64 {
     42.0
 }
 ```
+
 ### 2.3 布尔类型
 
 #### 基本用法
@@ -499,6 +509,7 @@ fn main() {
     println!("is_greater: {}, is_equal: {}", is_greater, is_equal);
 }
 ```
+
 #### 布尔运算
 
 ```rust
@@ -525,6 +536,7 @@ fn expensive_operation() -> bool {
     true
 }
 ```
+
 #### 类型大小
 
 ```rust
@@ -539,6 +551,7 @@ fn main() {
     println!("b: {}", b);
 }
 ```
+
 ### 2.4 字符类型
 
 #### 基本用法2
@@ -559,6 +572,7 @@ fn main() {
     println!("size of char: {} bytes", mem::size_of::<char>());
 }
 ```
+
 #### Unicode 支持
 
 ```rust
@@ -585,6 +599,7 @@ fn main() {
     println!("ascii: {}, chinese: {}, emoji: {}", ascii, chinese, emoji);
 }
 ```
+
 #### 常见陷阱
 
 ```rust
@@ -609,6 +624,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 3. 复合类型 (Compound Types)
@@ -638,6 +654,7 @@ fn main() {
     println!("tup2: ({}, {}, {})", tup2.0, tup2.1, tup2.2);
 }
 ```
+
 #### 解构
 
 ```rust
@@ -663,6 +680,7 @@ fn find_min_max(numbers: &[i32]) -> (i32, i32) {
     (min, max)
 }
 ```
+
 #### 单元类型
 
 ```rust
@@ -681,6 +699,7 @@ fn main() {
     println!("unit: {:?}", unit);
 }
 ```
+
 ### 3.2 数组类型
 
 #### 基本用法32
@@ -707,6 +726,7 @@ fn main() {
     println!("length of a: {}", a.len());
 }
 ```
+
 #### 数组操作
 
 ```rust
@@ -732,6 +752,7 @@ fn main() {
     println!("slice: {:?}", slice);
 }
 ```
+
 #### 多维数组
 
 ```rust
@@ -754,6 +775,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 4. 字符串类型
@@ -779,6 +801,7 @@ fn main() {
     println!("hello: {}, world: {}", hello, world);
 }
 ```
+
 #### 字符串字面量
 
 ```rust
@@ -803,6 +826,7 @@ fn main() {
     println!("multi_line: {}", multi_line);
 }
 ```
+
 #### 切片操作
 
 ```rust
@@ -833,6 +857,7 @@ fn main() {
     println!("valid: {}", valid);
 }
 ```
+
 ### 4.2 String 类型
 
 #### 创建 String
@@ -853,6 +878,7 @@ fn main() {
     println!("s3: '{}', s4: '{}'", s3, s4);
 }
 ```
+
 #### 修改 String
 
 ```rust
@@ -884,6 +910,7 @@ fn main() {
     println!("after clear: '{}'", s);
 }
 ```
+
 #### String vs &str
 
 ```rust
@@ -918,6 +945,7 @@ fn print_str(s: &str) {
     println!("{}", s);
 }
 ```
+
 ---
 
 ## 5. 引用类型
@@ -943,6 +971,7 @@ fn calculate_length(s: &String) -> usize {
     s.len()
 } // s 离开作用域，但因为它只是引用，所以不会释放内存
 ```
+
 #### 借用规则
 
 ```rust
@@ -958,6 +987,7 @@ fn main() {
     // 所有引用都有效
 }
 ```
+
 ### 5.2 可变引用 (&mut T)
 
 #### 基本用法52
@@ -976,6 +1006,7 @@ fn change(s: &mut String) {
     s.push_str(", world");
 }
 ```
+
 #### 可变性规则
 
 ```rust
@@ -1007,6 +1038,7 @@ fn main() {
     r6.push_str("!");
 }
 ```
+
 ### 5.3 引用的生命周期
 
 ```rust
@@ -1025,6 +1057,7 @@ fn main() {
     println!("r: {}", r);
 }
 ```
+
 ---
 
 ## 6. 智能指针类型
@@ -1046,6 +1079,7 @@ fn main() {
     println!("large data allocated on heap");
 }
 ```
+
 #### 递归类型
 
 ```rust
@@ -1072,6 +1106,7 @@ fn print_list(list: &List) {
     }
 }
 ```
+
 ### 6.2 `Rc<T> 和 Arc<T>`
 
 #### 引用计数
@@ -1095,6 +1130,7 @@ fn main() {
     println!("count after c goes out of scope: {}", Rc::strong_count(&a));
 }
 ```
+
 #### 多线程共享
 
 ```rust
@@ -1120,6 +1156,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 7. 切片类型
@@ -1145,6 +1182,7 @@ fn sum_slice(slice: &[i32]) -> i32 {
     slice.iter().sum()
 }
 ```
+
 ### 7.2 字符串切片
 
 ```rust
@@ -1173,6 +1211,7 @@ fn first_word(s: &str) -> &str {
     &s[..]
 }
 ```
+
 ---
 
 ## 8. 指针类型
@@ -1197,6 +1236,7 @@ fn main() {
     }
 }
 ```
+
 ### 8.2 函数指针
 
 ```rust
@@ -1213,6 +1253,7 @@ fn main() {
     println!("The answer is: {}", answer); // 12
 }
 ```
+
 ---
 
 ## 9. Never 类型 (!)
@@ -1235,6 +1276,7 @@ fn main() {
     println!("guess: {}", guess);
 }
 ```
+
 ### 9.2 实际应用
 
 ```rust
@@ -1246,6 +1288,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 10. 类型推导与类型标注
@@ -1267,6 +1310,7 @@ fn main() {
     println!("x: {}, y: {}, z: {}, c: {}", x, y, z, c);
 }
 ```
+
 ### 10.2 显式类型标注
 
 ```rust
@@ -1284,6 +1328,7 @@ fn main() {
     println!("x: {}, y: {}, guess: {}", x, y, guess);
 }
 ```
+
 ### 10.3 Turbofish 语法
 
 ```rust
@@ -1305,6 +1350,7 @@ fn main() {
     println!("num: {}", num);
 }
 ```
+
 ---
 
 ## 11. 类型别名
@@ -1323,6 +1369,7 @@ fn main() {
     println!("x + y = {}", x + y); // ✅ 可以相加
 }
 ```
+
 ### 11.2 泛型类型别名
 
 ```rust
@@ -1341,6 +1388,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 12. 类型大小与内存布局
@@ -1368,6 +1416,7 @@ fn main() {
     println!("size of [i32; 5]: {} bytes", mem::size_of::<[i32; 5]>());
 }
 ```
+
 ### 12.2 零大小类型 (ZST)
 
 ```rust
@@ -1386,6 +1435,7 @@ fn main() {
     println!("size of PhantomData<i32>: {} bytes", mem::size_of::<PhantomData<i32>>());
 }
 ```
+
 ### 12.3 内存对齐
 
 ```rust
@@ -1414,6 +1464,7 @@ fn main() {
     println!("size of B: {} bytes", mem::size_of::<B>());
 }
 ```
+
 ---
 
 ## 13. 实战案例
@@ -1441,6 +1492,7 @@ fn fahrenheit_to_celsius(fahrenheit: f64) -> f64 {
     (fahrenheit - 32.0) * 5.0 / 9.0
 }
 ```
+
 ### 案例 2: 简单计算器
 
 ```rust
@@ -1464,6 +1516,7 @@ fn calculate(a: f64, b: f64, operator: char) -> f64 {
     }
 }
 ```
+
 ### 案例 3: 字符串处理
 
 ```rust
@@ -1487,6 +1540,7 @@ fn count_words(text: &str) -> usize {
     text.split_whitespace().count()
 }
 ```
+
 ---
 
 ## 14. 常见陷阱与最佳实践
@@ -1523,6 +1577,7 @@ fn main() {
     println!("valid: {}", valid);
 }
 ```
+
 ### 14.2 最佳实践
 
 ```rust
@@ -1548,6 +1603,7 @@ fn main() {
     }
 }
 ```
+
 ### 14.6 实战案例：高性能数据处理
 
 **案例：优化大规模数值计算**:
@@ -1586,6 +1642,7 @@ fn main() {
 // Slow: 3.2ms
 // Fast: 1.1ms  (3x faster!)
 ```
+
 ---
 
 ## 15. 总结

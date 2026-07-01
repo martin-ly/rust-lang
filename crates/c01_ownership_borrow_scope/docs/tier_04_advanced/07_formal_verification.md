@@ -144,6 +144,7 @@
    - 符号化输入
    - 路径探索
 ```
+
 ### 1.2 为什么验证 Rust
 
 #### Rust 的独特挑战
@@ -159,6 +160,7 @@
 // 2. 借用检查正确 (borrow checking correctness)
 // 3. unsafe 不破坏安全性
 ```
+
 #### 验证目标
 
 **核心定理**: 如果 Rust 程序通过类型检查，则它是内存安全的。
@@ -184,6 +186,7 @@ x ↦ v         : x 指向值 v
 P ∗ Q         : 分离连接 (P 和 Q 在不相交的堆上)
 P -∗ Q        : 魔杖 (如果给 P，可以得到 Q)
 ```
+
 **示例**:
 
 ```rust
@@ -195,6 +198,7 @@ let mut y = Box::new(10);
 // x ↦ 5 ∗ y ↦ 10
 // 表示 x 和 y 指向不同的内存位置
 ```
+
 #### Hoare 三元组
 
 ```text
@@ -204,6 +208,7 @@ P: 前置条件
 C: 命令/程序
 Q: 后置条件
 ```
+
 **示例**:
 
 ```rust
@@ -211,6 +216,7 @@ Q: 后置条件
 *x = 10;
 // {x ↦ 10}
 ```
+
 ---
 
 ## 2. RustBelt 项目
@@ -257,6 +263,7 @@ Expressions e ::=
     | e₁ := e₂                (赋值)
     | box e                   (分配)
 ```
+
 ### 2.3 核心定理
 
 #### 类型健全性
@@ -291,6 +298,7 @@ struct Arc<T> {
 // 2. 线程安全
 // 3. 无内存泄漏（除非循环引用）
 ```
+
 **验证内容**:
 
 - `Arc::new` 创建正确的共享所有权
@@ -311,6 +319,7 @@ struct Mutex<T> {
 // 2. 无死锁（在某些假设下）
 // 3. 内存安全
 ```
+
 ---
 
 ## 3. Coq 中的 Rust 模型
@@ -344,6 +353,7 @@ Proof.
   - reflexivity.
 Qed.
 ```
+
 ### 3.2 Rust 所有权的编码
 
 #### 所有权类型
@@ -365,6 +375,7 @@ Inductive ty : Type :=
   | TRef : ownership -> ty -> ty
   | TBox : ty -> ty.
 ```
+
 #### 借用检查
 
 ```coq
@@ -380,6 +391,7 @@ Definition can_borrow (ctx : context) (x : var) (o : ownership) : Prop :=
   | _ => False
   end.
 ```
+
 ### 3.3 证明示例
 
 #### 简单的所有权转移
@@ -405,6 +417,7 @@ Proof.
     apply ownership_transferred.
 Qed.
 ```
+
 ---
 
 ## 4. Iris 框架
@@ -433,6 +446,7 @@ l ↦{q} v   (* q 是分数，0 < q ≤ 1 *)
 (* 示例：两个共享借用 *)
 l ↦{1/2} v ∗ l ↦{1/2} v  ≡  l ↦ v
 ```
+
 #### 生命周期
 
 ```coq
@@ -442,6 +456,7 @@ l ↦{1/2} v ∗ l ↦{1/2} v  ≡  l ↦ v
 (* 借用 *)
 &α v  :=  ∃ l. l ↦{1/2} v ∗ α.[l ↦{1/2} v]
 ```
+
 ### 4.3 验证 unsafe 代码
 
 #### Vec 的 push 方法
@@ -460,6 +475,7 @@ impl<T> Vec<T> {
     }
 }
 ```
+
 **Iris 规范**:
 
 ```coq
@@ -467,6 +483,7 @@ impl<T> Vec<T> {
   vec_push(v, value)
 {vec_inv v' ∗ ⌜v' = v ++ [value]⌝}
 ```
+
 **证明要点**:
 
 1. 容量检查保证有空间
@@ -511,6 +528,7 @@ Proof.
   - (* Other cases ... *)
 Qed.
 ```
+
 #### Preservation
 
 **定理**: 如果 `Γ ⊢ e : τ` 且 `e → e'`，则 `Γ ⊢ e' : τ`。
@@ -529,6 +547,7 @@ Definition no_dangling_pointers (σ : state) : Prop :=
     l ∈ dom(valid_refs σ) ->
     l ∈ dom(heap σ).
 ```
+
 **证明**: 通过归纳法，证明每个操作保持此不变量。
 
 #### 无数据竞争
@@ -542,6 +561,7 @@ Definition no_data_races (σ : state) : Prop :=
     has_mut_ref σ l β ->
     False.
 ```
+
 ### 5.3 并发安全性
 
 #### Send 和 Sync
@@ -552,6 +572,7 @@ Definition no_data_races (σ : state) : Prop :=
 // 如果 T: Send，则 T 可以安全地跨线程转移
 // 如果 T: Sync，则 &T 可以安全地跨线程共享
 ```
+
 **形式化**:
 
 ```coq
@@ -561,6 +582,7 @@ Definition is_send (τ : ty) : Prop :=
 Definition is_sync (τ : ty) : Prop :=
   forall v, val_safe τ v -> thread_safe (share v).
 ```
+
 ---
 
 ## 6. 验证工具链
@@ -585,6 +607,7 @@ fn main() {
     assert!(y == 6);
 }
 ```
+
 #### Creusot
 
 **Creusot** 将 Rust 编译为 Why3，用于演绎验证。
@@ -597,6 +620,7 @@ pub fn add(a: u32, b: u32) -> u32 {
     a + b
 }
 ```
+
 #### Kani
 
 **Kani** 是亚马逊开发的 Rust 模型检查器。
@@ -613,6 +637,7 @@ fn check_division() {
     assert!(result * y <= x);
 }
 ```
+
 ### 6.2 工具对比
 
 | 工具         | 方法      | 优点       | 限制         |
@@ -645,6 +670,7 @@ fn check_overflow() {
 // RustBelt: 标准库组件
 // Arc, Mutex 等的完整证明
 ```
+
 ---
 
 ## 7. 实践应用
@@ -664,6 +690,7 @@ fn check_overflow() {
    ↓
 5. 重复 2-4
 ```
+
 ### 7.2 最佳实践
 
 #### 规范编写
@@ -691,6 +718,7 @@ impl Account {
     }
 }
 ```
+
 #### 模块化验证
 
 ```rust
@@ -710,6 +738,7 @@ fn use_verified(x: i32) -> i32 {
     verified::abs(x)  // 已知非负
 }
 ```
+
 ### 7.3 案例研究
 
 #### 二分查找
@@ -745,6 +774,7 @@ fn binary_search(arr: &[i32], target: i32) -> Result<usize, usize> {
     Err(left)
 }
 ```
+
 ---
 
 ## 相关资源

@@ -2472,6 +2472,7 @@ fn resource_cleanup_semantics() {
 <a id="811-arcmutex-语义"></a>
 
 <a id="811-arcmutex-语义"></a>
+
 #### 8.1.1 Arc<Mutex<T>> 语义
 
 ```rust

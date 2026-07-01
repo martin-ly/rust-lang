@@ -95,6 +95,7 @@ mv knowledge_system/* analysis/knowledge_enhanced/
 
 # 创建索引
 ```
+
 **文件清单**:
 
 - 知识体系索引
@@ -115,6 +116,7 @@ mv theory_enhanced/* analysis/rust_theory/
 # 同时移动01_theory/
 mv 01_theory/* analysis/rust_theory/
 ```
+
 ### Step 4: 创建appendices结构 (15分钟)
 
 **目录结构**:
@@ -131,6 +133,7 @@ appendices/
 └── 04_历史文档/
     └── (归档的旧文档)
 ```
+
 ### Step 5: 处理02_core/和03_advanced/ (10分钟)
 
 **审查重复**:
@@ -192,6 +195,7 @@ c02_type_system/docs/
     ├── PHASE2_4_COMPLETION_REPORT_2025_10_22.md
     └── (其他历史报告)
 ```
+
 ### 质量指标
 
 - ✅ **无重复内容**: 消除核心概念重复

@@ -160,6 +160,7 @@
        }
    }
    ```
+
 2. **实现复杂的内部状态管理**
 
    ```rust
@@ -192,6 +193,7 @@
        assert_eq!(counter.get(), 2);
    }
    ```
+
 3. **与 Rc 配合实现共享可变状态**
 
    ```rust
@@ -211,6 +213,7 @@
        assert_eq!(*data_clone.borrow(), vec![1, 2, 3, 4]);
    }
    ```
+
 #### 常见陷阱 ⚠️
 
 1. **运行时 panic**
@@ -224,6 +227,7 @@
    // let borrow2 = data.borrow();    // ❌ PANIC! 同时存在可变借用
    // let borrow3 = data.borrow_mut(); // ❌ PANIC! 同时存在多个可变借用
    ```
+
 2. **忘记释放借用**
 
    ```rust
@@ -241,6 +245,7 @@
        // 或者使用代码块限制借用的生命周期
    }
    ```
+
 3. **循环借用导致死锁**
 
    ```rust
@@ -262,6 +267,7 @@
        }
    }
    ```
+
 #### 最佳实践 ✅
 
 1. **限制借用的作用域**
@@ -280,6 +286,7 @@
    // 现在可以安全地再次借用
    let read_borrow = data.borrow();
    ```
+
 2. **使用 try_borrow 避免 panic**
 
    ```rust
@@ -297,6 +304,7 @@
        }
    }
    ```
+
 3. **清晰的文档说明**
 
    ````rust
@@ -334,6 +342,7 @@
        }
    }
    ````
+
 ### 1.2 Cell 使用场景
 
 #### 核心特点
@@ -376,6 +385,7 @@
        }
    }
    ```
+
 2. **性能计数器**
 
    ```rust
@@ -409,6 +419,7 @@
        }
    }
    ```
+
 3. **标志位和状态**
 
    ```rust
@@ -443,6 +454,7 @@
        }
    }
    ```
+
 #### Cell vs RefCell 对比
 
 | 特性           | `Cell<T>`          | `RefCell<T>`                   |
@@ -485,6 +497,7 @@ fn mutex_example() {
     println!("Result: {}", *counter.lock().unwrap());
 }
 ```
+
 **关键特点**:
 
 - ✅ 线程安全（实现了 `Sync`）
@@ -529,6 +542,7 @@ fn rwlock_example() {
     }
 }
 ```
+
 **使用场景**:
 
 - ✅ 读多写少的场景
@@ -558,6 +572,7 @@ fn rwlock_example() {
     ↓ 是          ↓ 否                  ↓ 是         ↓ 否
 使用 Cell<T>   使用 RefCell<T>       使用 RwLock<T>   使用 Mutex<T>
 ```
+
 #### 选择矩阵
 
 | 场景                  | 推荐方案     | 原因       |
@@ -598,6 +613,7 @@ fn cached_data() {
     // ... 使用 ...
 }
 ```
+
 ---
 
 ## 2. 智能指针高级用法
@@ -637,6 +653,7 @@ fn use_trait_object(drawable: Box<dyn Draw>) {
     drawable.draw();
 }
 ```
+
 #### 性能优化
 
 1. **使用 Box::leak 创建 'static 生命周期**
@@ -652,6 +669,7 @@ fn use_trait_object(drawable: Box<dyn Draw>) {
        // ⚠️ 注意：这会导致内存泄漏，除非是有意为之
    }
    ```
+
 2. **Box::into_raw 用于 FFI**
 
    ```rust
@@ -671,6 +689,7 @@ fn use_trait_object(drawable: Box<dyn Draw>) {
        }
    }
    ```
+
 3. **原地初始化（Rust 1.90+）**
 
    ```rust
@@ -680,6 +699,7 @@ fn use_trait_object(drawable: Box<dyn Draw>) {
        Box::new([0u8; 1000000])
    }
    ```
+
 #### 常见陷阱
 
 ```rust
@@ -698,6 +718,7 @@ fn best(x: i32) -> i32 {
     x + 1
 }
 ```
+
 ### 2.2 Rc 引用计数模式
 
 #### 基本概念
@@ -722,6 +743,7 @@ fn rc_basic_example() {
     println!("引用计数: {}", Rc::strong_count(&data));  // 2
 }
 ```
+
 #### 高级模式
 
 1. **Rc + RefCell 实现共享可变状态**
@@ -760,6 +782,7 @@ fn rc_basic_example() {
        println!("Root: {:?}", root);
    }
    ```
+
 2. **计数器和缓存**
 
    ```rust
@@ -792,6 +815,7 @@ fn rc_basic_example() {
        assert_eq!(Rc::strong_count(&s1), 3);  // cache + s1 + s2
    }
    ```
+
 #### 性能考虑
 
 - ✅ **克隆开销**: `Rc::clone()` 只增加引用计数，开销很小
@@ -826,6 +850,7 @@ fn arc_basic_example() {
     }
 }
 ```
+
 #### 与 Mutex 配合
 
 ```rust
@@ -866,6 +891,7 @@ fn shared_state_example() {
     println!("Final counter: {}", *state.counter.lock().unwrap());
 }
 ```
+
 #### Rc vs Arc 对比
 
 | 特性          | `Rc<T>`    | `Arc<T>`               |
@@ -924,6 +950,7 @@ fn tree_with_parent() {
     println!("Weak count: {}", Rc::weak_count(&root));
 }
 ```
+
 #### 缓存模式
 
 ```rust
@@ -962,6 +989,7 @@ impl Cache {
     }
 }
 ```
+
 #### 观察者模式
 
 ```rust
@@ -998,6 +1026,7 @@ impl Subject {
     }
 }
 ```
+
 ---
 
 ## 3. 复杂所有权设计
@@ -1015,6 +1044,7 @@ struct SelfReferential {
     pointer: &String,  // 想要指向 self.data
 }
 ```
+
 **为什么不行**？
 
 - 移动 `SelfReferential` 会使 `pointer` 失效
@@ -1065,6 +1095,7 @@ fn main() {
     println!("Pointer: {}", pinned.pointer_value());
 }
 ```
+
 #### 解决方案 2: 使用索引
 
 ```rust
@@ -1094,6 +1125,7 @@ impl Arena {
     }
 }
 ```
+
 #### 解决方案 3: Rental/Ouroboros Crate
 
 ```rust
@@ -1120,6 +1152,7 @@ fn main() {
     });
 }
 ```
+
 ### 3.2 树和图结构
 
 #### 树结构实现
@@ -1175,6 +1208,7 @@ fn tree_example() {
     Node::print_tree(&root, 0);
 }
 ```
+
 #### 图结构实现
 
 ```rust
@@ -1258,6 +1292,7 @@ fn graph_example() {
     graph.print_graph();
 }
 ```
+
 ### 3.3 观察者模式
 
 ```rust
@@ -1340,6 +1375,7 @@ fn observer_pattern_example() {
     subject.notify("Event 2");
 }
 ```
+
 ### 3.4 状态机设计
 
 ```rust
@@ -1440,6 +1476,7 @@ impl StateMachine {
     }
 }
 ```
+
 ---
 
 ## 4. 实战案例
@@ -1555,6 +1592,7 @@ fn web_server_example() {
     }
 }
 ```
+
 ### 4.2 数据库连接池
 
 ```rust
@@ -1637,6 +1675,7 @@ fn db_pool_example() {
     }
 }
 ```
+
 ### 4.3 缓存系统
 
 ```rust
@@ -1734,6 +1773,7 @@ fn cache_example() {
     assert_eq!(value, "computed_value");
 }
 ```
+
 ### 4.4 插件架构
 
 ```rust
@@ -1832,6 +1872,7 @@ fn plugin_system_example() {
     println!("Reverse: {}", result);
 }
 ```
+
 ---
 
 ## 相关资源

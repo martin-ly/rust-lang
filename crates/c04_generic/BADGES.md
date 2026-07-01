@@ -82,6 +82,7 @@
 [![Rust Version](https://img.shields.io/badge/rust-1.70+-blue.svg)](https://www.rust-lang.org/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ```
+
 ### HTML 格式
 
 ```html
@@ -101,6 +102,7 @@
   <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License" />
 </a>
 ```
+
 ## 徽章生成
 
 ### 自定义徽章
@@ -110,6 +112,7 @@
 ```text
 https://img.shields.io/badge/{label}-{message}-{color}
 ```
+
 ### 颜色选项
 
 - `brightgreen`: 成功状态

@@ -96,6 +96,7 @@ cargo run --example message_passing
 # 运行共享状态示例
 cargo run --example shared_state
 ```
+
 ### 运行特定模块演示
 
 ```bash
@@ -117,6 +118,7 @@ cargo run -p c05_threads --example backpressure_overview_demo
 # 限速 + 批量示例
 cargo run -p c05_threads --example stream_rate_batch_demo
 ```
+
 ### 运行测试
 
 ```bash
@@ -132,6 +134,7 @@ cargo test lockfree::lockfree_ring_buffer
 cargo test synchronization::adaptive_locks
 cargo test rust_192_features
 ```
+
 ### 运行基准测试
 
 ```bash
@@ -147,6 +150,7 @@ cargo bench --bench concurrency_benchmark
 # 启用 CPU 原生优化
 RUSTFLAGS="-C target-cpu=native" cargo bench -p c05_threads
 ```
+
 ---
 
 ## 学习建议
@@ -158,6 +162,7 @@ RUSTFLAGS="-C target-cpu=native" cargo bench -p c05_threads
    ```bash
    cargo run --example thread_spawning
    ```
+
    - `thread::spawn()`
    - `JoinHandle` 和 `join()`
    - 闭包在线程中的使用
@@ -167,6 +172,7 @@ RUSTFLAGS="-C target-cpu=native" cargo bench -p c05_threads
    cargo run --example message_passing
    cargo run --example message_passing_demo
    ```
+
    - `mpsc::channel()`
    - 发送和接收消息
    - 多生产者单消费者
@@ -175,6 +181,7 @@ RUSTFLAGS="-C target-cpu=native" cargo bench -p c05_threads
    ```bash
    cargo run --example shared_state
    ```
+
    - `Arc<T>` - 原子引用计数
    - `Mutex<T>` - 互斥锁
    - `RwLock<T>` - 读写锁
@@ -186,6 +193,7 @@ RUSTFLAGS="-C target-cpu=native" cargo bench -p c05_threads
    ```bash
    cargo run --example thread_safety
    ```
+
    - `Send` trait
    - `Sync` trait
    - 线程安全边界
@@ -195,6 +203,7 @@ RUSTFLAGS="-C target-cpu=native" cargo bench -p c05_threads
    cargo run --example lock_free
    cargo run --example crossbeam_demo
    ```
+
    - 原子操作
    - 内存顺序
    - epoch 内存管理
@@ -204,6 +213,7 @@ RUSTFLAGS="-C target-cpu=native" cargo bench -p c05_threads
    cargo run --example parallel_patterns
    cargo run --example thread_pools
    ```
+
    - 分治模式
    - 工作窃取
    - 线程池管理
@@ -216,6 +226,7 @@ RUSTFLAGS="-C target-cpu=native" cargo bench -p c05_threads
    cargo run --example rayon_parallel
    cargo run --example thread_affinity
    ```
+
    - 数据并行 (Rayon)
    - CPU 亲和性
    - NUMA 感知
@@ -224,6 +235,7 @@ RUSTFLAGS="-C target-cpu=native" cargo bench -p c05_threads
    ```bash
    cargo run --example rust_192_features_demo
    ```
+
    - `rotate_right` 在任务队列中的应用
    - `NonZero::div_ceil` 在线程池计算中的应用
    - 增强的线程管理 API
@@ -243,6 +255,7 @@ let handle = thread::spawn(|| {
 
 handle.join().unwrap();
 ```
+
 ### 消息传递
 
 ```rust
@@ -257,6 +270,7 @@ thread::spawn(move || {
 
 let msg = rx.recv().unwrap();
 ```
+
 ### 共享状态
 
 ```rust
@@ -281,6 +295,7 @@ for handle in handles {
 
 println!("Result: {}", *counter.lock().unwrap());
 ```
+
 ### 作用域线程 (Rust 1.93.0+)
 
 ```rust
@@ -298,6 +313,7 @@ thread::scope(|s| {
 
 println!("Processed: {:?}", data);
 ```
+
 ---
 
 ## ⚠️ 安全注意事项
@@ -325,6 +341,7 @@ thread::spawn(move || {
     println!("{:?}", data);
 });
 ```
+
 ---
 
 ## 相关文档
@@ -372,6 +389,7 @@ opt-level = 3
 # 绑定到 NUMA 节点 (Linux)
 # numactl --membind=0 --cpunodebind=0 ./program
 ```
+
 ---
 
 *示例基于 Rust 1.94+，Edition 2024*:

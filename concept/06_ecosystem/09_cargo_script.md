@@ -21,6 +21,7 @@ edition = "2024"
 clap = { version = "4", features = ["derive"] }
 chrono = "0.4"
 ```
+
 use clap::Parser;
 use chrono::Local;
 
@@ -38,6 +39,7 @@ fn main() {
     println!("[{}] 处理: {} -> {}", Local::now(), args.input, args.output);
     // 实际过滤逻辑...
 }
+
 ```
 运行方式：
 ```bash
@@ -135,6 +137,7 @@ chmod +x script.rs && ./script.rs
 cargo install rust-script
 rust-script script.rs
 ```
+
 ### 1.2 嵌入式 Manifest
 
 单文件通过 frontmatter 或 Markdown 代码块声明依赖与元数据：
@@ -157,6 +160,7 @@ fn main() {
     println!("Hello, {}!", args.name);
 }
 ```
+
 **rust-script 风格（YAML frontmatter）**:
 
 ```rust,ignore
@@ -172,6 +176,7 @@ clap = "4"
 
 fn main() { /* ... */ }
 ```
+
 > [来源: [RFC 3503 §Syntax](https://github.com/rust-lang/rfcs/pull/3503) — frontmatter 语法最终选定为 Markdown 代码块 `` ```cargo ``，以兼容 rustdoc 和 IDE 高亮。
 
 ---
@@ -204,6 +209,7 @@ edition = "2024"     # 默认当前 edition
 [dependencies]
 # 从 frontmatter 解析
 ```
+
 > [来源: [Cargo Book — Script Manifest](https://doc.rust-lang.org/cargo/reference/unstable.html#script) — 单文件脚本在 Cargo 内部被建模为一个**匿名临时 crate**，编译缓存存储于 `~/.cargo/script-cache/`。
 
 ---
@@ -249,6 +255,7 @@ graph TD
     style L fill:#9f9
     style H fill:#ff9
 ```
+
 > **认知功能**：
 > 此流程图揭示 Cargo Script 的"隐式编译"本质——单文件并非解释执行，而是经 frontmatter 解析、临时 crate 生成、缓存复用等步骤透明地完成编译。
 > 建议在理解执行延迟来源（首次编译 vs 缓存命中）和调试脚本依赖问题时调用此心智模型。
@@ -283,6 +290,7 @@ graph TD
     style F fill:#ff9
     style H fill:#ff9
 ```
+
 > **认知功能**：
 > 此决策树提供工程场景下的工具选择启发式——当项目规模、依赖复杂度或构建需求突破单文件边界时，应果断迁移至传统 Cargo 项目。
 > 建议在面对"这个脚本该用 Cargo Script 还是 cargo new？"的抉择时激活此判断框架。
@@ -325,12 +333,14 @@ fn main() {
     }
 }
 ```
+
 ### 4.2 CI/CD 辅助脚本
 
 ```bash
 # GitHub Actions 中直接执行
 cargo run --manifest-path .github/scripts/deploy.rs
 ```
+
 Cargo Script 的**自包含性**使其成为 CI 脚本的理想选择：
 
 - 无需预先安装额外工具（除 Cargo 外）
@@ -363,6 +373,7 @@ fn main() {
     println!("Total age in Beijing: {}", total);
 }
 ```
+
 ---
 
 ## 五、形式化定位
@@ -383,6 +394,7 @@ $$
 传统项目:  Crate → Module Tree → Files
 Cargo Script:  File = Crate (单模块，无子模块)
 ```
+
 这一定位决定了 Cargo Script **不支持 `mod foo;`** — 因为文件边界即 crate 边界，不存在"当前 crate 内的其他文件"。
 
 ---
@@ -476,6 +488,7 @@ fn main() {
     let _data: Data = serde_json::from_str(r#"{"value": 42}"#).unwrap();
 }
 ```
+
 > **修正**:
 > Cargo Script（Rust 1.79+ 实验性支持）允许在文件头部通过 frontmatter 声明依赖。
 > 依赖解析遵循与普通 Cargo 项目相同的规则，但错误信息可能更复杂（因为无显式 Cargo.toml）。
@@ -493,6 +506,7 @@ fn main() {
     helper::do_something();
 }
 ```
+
 > **修正**: Cargo Script 单文件模式不支持子模块（`mod foo;`），因为无文件系统目录结构。
 > 若需多模块，必须使用常规 Cargo 项目（`cargo new`）。
 > 这与 Python 的 `if __name__ == "__main__"` 单文件脚本不同——Rust 的模块系统严格映射到文件系统。
@@ -513,6 +527,7 @@ fn main() {
     let _ = serde_json::from_str::<i32>("42").unwrap();
 }
 ```
+
 > **修正**:
 > `cargo script`（Rust 1.79+ 实验性）的 frontmatter 依赖声明使用与 `Cargo.toml` 相同的版本解析规则。
 > `serde_json = "1"` 允许任何 `1.x.x` 版本，Cargo 选择满足所有依赖约束的最新版本。
@@ -543,6 +558,7 @@ fn main() {
     println!("cargo script demo");
 }
 ```
+
 > **修正**:
 > Cargo script（`cargo` shebang）是 Rust 1.79+ 的实验性功能，允许在 `.rs` 文件中内嵌 `Cargo.toml` 元数据。
 > 版本冲突的解决：
@@ -574,6 +590,7 @@ fn main() {
     println!("cargo script demo");
 }
 ```
+
 > **修正**:
 > Cargo script 的 **shebang**（`#!/usr/bin/env cargo`）是 Unix 特性，Windows 不支持。
 > Windows 运行 cargo script：

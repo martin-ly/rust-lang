@@ -138,6 +138,7 @@
 └── 类型级证明
     └── 不变量证明
 ```
+
 ### 多维概念对比矩阵
 
 | 类型技巧         | 复杂度 | 性能   | 类型安全 | 适用场景   | Rust 1.92.0 |
@@ -163,6 +164,7 @@
 │       │       │   ├── 是 → 类型状态模式
 │       │       │   └── 否 → Newtype
 ```
+
 ### 证明树图
 
 ```text
@@ -177,6 +179,7 @@
 └── 形式化验证
     └── 类型系统证明
 ```
+
 ---
 
 ## 🎯 学习目标
@@ -227,6 +230,7 @@ impl<'a, T> Slice<'a, T> {
     }
 }
 ```
+
 **为什么需要 PhantomData？**
 
 1. **生命周期标记**: 告诉编译器该类型与某个生命周期相关
@@ -287,6 +291,7 @@ fn shorten_lifetime<'a, 'b: 'a>(iter: Iter<'b, i32>) -> Iter<'a, i32> {
     iter
 }
 ```
+
 ---
 
 ### 1.3 类型状态模式
@@ -385,6 +390,7 @@ fn example() {
     //     .send();
 }
 ```
+
 ---
 
 ### 1.4 幽灵类型的高级应用
@@ -468,6 +474,7 @@ fn example() {
     // let time = calculate_time(distance_feet, speed);
 }
 ```
+
 **示例 2: 类型级权限系统**:
 
 ```rust
@@ -556,6 +563,7 @@ fn example() {
     // exe_file.read();
 }
 ```
+
 ---
 
 ## 2️⃣ Zero-Sized Types (ZSTs)
@@ -585,6 +593,7 @@ fn zst_basics() {
     assert_eq!(size_of::<std::marker::PhantomData<i32>>(), 0);
 }
 ```
+
 **ZST 的特性**:
 
 1. **零内存开销**: 不占用栈或堆内存
@@ -637,6 +646,7 @@ fn example() {
     }
 }
 ```
+
 **示例 2: 零成本的类型标记**:
 
 ```rust
@@ -688,6 +698,7 @@ fn example() {
     assert_eq!(std::mem::size_of_val(&desc), std::mem::size_of::<Vec<i32>>());
 }
 ```
+
 ---
 
 ### 2.3 ZST 在标准库中的应用
@@ -709,6 +720,7 @@ fn std_lib_zsts() {
     // () 是 ZST，所以只存储键
 }
 ```
+
 **示例 2: 标准库的迭代器适配器**:
 
 ```rust
@@ -725,6 +737,7 @@ fn iterator_adapters() {
     // 整个迭代器链在编译时优化，几乎零开销
 }
 ```
+
 ---
 
 ### 2.4 ZST 的高级技巧
@@ -807,6 +820,7 @@ fn example() {
     // let (_, _) = empty.pop();
 }
 ```
+
 **示例 2: ZST 标记和条件编译**:
 
 ```rust
@@ -852,6 +866,7 @@ fn example() {
     let platform = Platform::<Windows>::new();
 }
 ```
+
 ---
 
 ## 3️⃣ 类型状态模式 (Typestate Pattern)
@@ -984,6 +999,7 @@ fn example() -> Result<(), ()> {
     Ok(())
 }
 ```
+
 ---
 
 ### 3.3 构建器模式的类型安全版本
@@ -1095,6 +1111,7 @@ fn example() {
     //     .build();
 }
 ```
+
 ---
 
 ### 3.4 协议状态管理
@@ -1215,6 +1232,7 @@ fn example() {
     println!("{} {}", request.method, request.path);
 }
 ```
+
 ---
 
 ## 4️⃣ 类型安全 API 设计
@@ -1322,6 +1340,7 @@ fn example() {
     println!("Speed: {} m/s", speed.value());
 }
 ```
+
 ---
 
 ### 4.2 New Type Pattern
@@ -1398,6 +1417,7 @@ fn safe_example() {
     println!("{}", post);
 }
 ```
+
 ---
 
 ### 4.3 类型级不变量
@@ -1468,6 +1488,7 @@ fn example() {
     println!("Last: {}", vec.last());
 }
 ```
+
 **示例: 排序保证的向量**:
 
 ```rust
@@ -1546,6 +1567,7 @@ fn example() {
     }
 }
 ```
+
 ---
 
 ### 4.4 编译时验证
@@ -1607,6 +1629,7 @@ fn example() {
     // arr.get(Succ<Succ<Succ<Zero>>>);
 }
 ```
+
 ---
 
 ## 5️⃣ 编译时状态机
@@ -1701,6 +1724,7 @@ fn example() {
     // let machine = TypeStateMachine::new().stop();
 }
 ```
+
 ---
 
 ### 5.2 类型级状态转换
@@ -1833,6 +1857,7 @@ fn example() {
     // let task = Task::new("Invalid".to_string()).prepare().prepare();
 }
 ```
+
 ---
 
 ### 5.3 实战案例：TCP 连接状态
@@ -1950,6 +1975,7 @@ fn example() -> io::Result<()> {
     Ok(())
 }
 ```
+
 ---
 
 ## 6️⃣ 类型级不变量与证明
@@ -2027,6 +2053,7 @@ fn example() {
     strong_password.authenticate("stored_hash");
 }
 ```
+
 ---
 
 ### 6.2 使用类型系统进行证明
@@ -2121,6 +2148,7 @@ fn example() {
     println!("Tail: {:?}", non_empty.tail());
 }
 ```
+
 ---
 
 ### 6.3 索引安全性
@@ -2184,6 +2212,7 @@ fn example() {
     }
 }
 ```
+
 ---
 
 ## 🎯 实战项目
@@ -2210,6 +2239,7 @@ let query = QueryBuilder::new()
     .join("posts", "users.id = posts.user_id")
     .build();
 ```
+
 ---
 
 ### 项目 2: 编译时验证的状态机
@@ -2237,6 +2267,7 @@ define_state_machine! {
     ]
 }
 ```
+
 ---
 
 ## 📊 性能分析
@@ -2286,6 +2317,7 @@ mod benches {
     }
 }
 ```
+
 ---
 
 ## 🔍 常见陷阱与解决方案
@@ -2307,6 +2339,7 @@ struct WrapperCorrect<'a, T> {
     _marker: PhantomData<&'a mut T>,  // 告诉编译器我们可能会 drop T
 }
 ```
+
 **陷阱 2: 型变问题**:
 
 ```rust
@@ -2322,6 +2355,7 @@ struct ContainerFixed<T> {
     _marker: PhantomData<*const T>,  // 与指针的型变一致
 }
 ```
+
 **陷阱 3: 过度使用类型状态**:
 
 ```rust
@@ -2337,6 +2371,7 @@ struct Reasonable<MainState, SubState> {
     _state: PhantomData<(MainState, SubState)>,
 }
 ```
+
 ---
 
 ## 📚 延伸阅读

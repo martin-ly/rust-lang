@@ -264,6 +264,7 @@ crates/c06_async/
 └── benches/         # 基准测试
     └── performance_benchmarks.rs
 ```
+
 ## 🚀 快速开始
 
 ### 环境要求
@@ -293,6 +294,7 @@ cargo test --test integration_test_suite
 # 运行基准测试
 cargo bench
 ```
+
 ## 📚 全面代码梳理和注释 (2025年10月最新)
 
 ### 🌟 核心文档体系 (必读)
@@ -354,6 +356,7 @@ cargo bench
 ```bash
 cargo run --example reactor_pattern_comprehensive_2025
 ```
+
 **内容**:
 
 - 1,800+ 行完整实现
@@ -368,6 +371,7 @@ cargo run --example reactor_pattern_comprehensive_2025
 ```bash
 cargo run --example actor_pattern_comprehensive_2025
 ```
+
 **内容**:
 
 - 2,100+ 行完整实现
@@ -382,6 +386,7 @@ cargo run --example actor_pattern_comprehensive_2025
 ```bash
 cargo run --example csp_pattern_comprehensive_2025
 ```
+
 **内容**:
 
 - 1,100+ 行完整实现
@@ -395,6 +400,7 @@ cargo run --example csp_pattern_comprehensive_2025
 ```bash
 cargo run --example ultimate_async_theory_practice_2025
 ```
+
 **内容**:
 
 - Actor/Reactor/CSP 三种模式的数学模型和完整实现
@@ -448,16 +454,19 @@ cargo run --example ultimate_async_theory_practice_2025
    ```bash
    cargo run --example comprehensive_async_demo
    ```
+
 2. **运行时对比示例**
 
    ```bash
    cargo run --example runtime_comparison_demo
    ```
+
 3. **最佳实践示例**
 
    ```bash
    cargo run --example async_best_practices
    ```
+
 ## 示例运行（模块 → 示例 → 解释）
 
 - actix 最小示例（Actor 消息交互）：
@@ -465,66 +474,79 @@ cargo run --example ultimate_async_theory_practice_2025
   ```bash
   cargo run -p c06_async --example actix_basic
   ```
+
 - utils 策略执行器最小示例（重试/退避/超时/并发）：
 
   ```bash
   cargo run -p c06_async --example utils_strategy_smoke
   ```
+
 - tokio 最小示例（JoinSet/计时器）：
 
   ```bash
   cargo run -p c06_async --example tokio_smoke
   ```
+
 - streams 最小示例（IntervalStream/StreamExt）：
 
   ```bash
   cargo run -p c06_async --example streams_smoke
   ```
+
 - futures 最小示例（join_all）：
 
   ```bash
   cargo run -p c06_async --example futures_smoke
   ```
+
 - **新增：综合异步演示**
 
   ```bash
   cargo run --example comprehensive_async_demo
   ```
+
 - **新增：运行时对比演示**
 
   ```bash
   cargo run --example runtime_comparison_demo
   ```
+
 - **新增：最佳实践演示**
 
   ```bash
   cargo run --example async_best_practices
   ```
+
 - **新增：异步编程模式演示**
 
   ```bash
   cargo run --example async_patterns_demo
   ```
+
 - **新增：异步网络编程演示**
 
   ```bash
   cargo run --example async_network_demo
   ```
+
 - **新增：异步数据库和缓存演示**
 
   ```bash
   cargo run --example async_database_demo
   ```
+
 - **新增：异步性能优化演示**
 
   ```bash
   cargo run --example async_performance_demo
   ```
+
 - **⭐ 最新：终极理论与实践指南 2025**
 
   ```bash
   cargo run --example ultimate_async_theory_practice_2025
   ```
+
   包含:
   - Actor/Reactor/CSP 三种模式的数学模型和完整实现
   - 异步设计模式(Builder, Factory, Adapter, Strategy, Observer)
@@ -535,6 +557,7 @@ cargo run --example ultimate_async_theory_practice_2025
   ```bash
   cargo run --example tokio_smol_latest_features_2025
   ```
+
   包含:
   - Tokio JoinSet, TaskLocal, Runtime Metrics
   - Smol lightweight Executor, async-io 集成
@@ -544,6 +567,7 @@ cargo run --example ultimate_async_theory_practice_2025
   ```bash
   cargo run --example async_performance_optimization_2025 --release
   ```
+
   包含:
   - 对象池 - 减少 50-80% 分配开销
   - 零拷贝技术 - Bytes 库的高效使用
@@ -554,6 +578,7 @@ cargo run --example ultimate_async_theory_practice_2025
   ```bash
   cargo run --example async_debugging_monitoring_2025
   ```
+
   包含:
   - Tracing 结构化日志完整使用
   - 性能指标收集 (Metrics)
@@ -564,57 +589,68 @@ cargo run --example ultimate_async_theory_practice_2025
   ```bash
   cargo run --example real_world_app_demo
   ```
+
 - **新增：高级异步工具演示**
 
   ```bash
   cargo run --example advanced_tools_demo
   ```
+
 - **新增：异步测试框架演示**
 
   ```bash
   cargo run --example async_testing_demo
   cargo test --example async_testing_demo
   ```
+
 - **新增：异步监控和诊断工具演示**
 
   ```bash
   cargo run --example async_monitoring_demo
   ```
+
 - **新增：异步性能基准测试**
 
   ```bash
   cargo bench --bench async_benchmarks
   ```
+
 - **新增：微服务架构异步演示**
 
   ```bash
   cargo run --example microservices_async_demo
   ```
+
 - **新增：分布式系统异步演示**
 
   ```bash
   cargo run --example distributed_systems_demo
   ```
+
 - **新增：AI集成异步演示**
 
   ```bash
   cargo run --example ai_integration_demo
   ```
+
 - **新增：区块链异步演示**
 
   ```bash
   cargo run --example blockchain_async_demo
   ```
+
 - **新增：边缘计算异步演示**
 
   ```bash
   cargo run --example edge_computing_demo
   ```
+
 - **🌟 新增：2025综合模式示例** ⭐ 强烈推荐
 
   ```bash
   cargo run --example comprehensive_async_patterns_2025
   ```
+
   **包含内容**:
   - ✅ Actor 模式完整实现 (银行账户示例)
   - ✅ Reactor 模式事件循环 (日志处理)
@@ -627,6 +663,7 @@ cargo run --example ultimate_async_theory_practice_2025
   ```bash
   cargo run --example ultimate_async_theory_practice_2025
   ```
+
   **包含内容**:
   - ✅ Actor 模型完整形式化 (数学定义、完整实现、银行转账演示)
   - ✅ Reactor 模式理论实践 (事件驱动、优先级队列、网络服务器)
@@ -640,6 +677,7 @@ cargo run --example ultimate_async_theory_practice_2025
   ```bash
   cargo run --example tokio_smol_latest_features_2025
   ```
+
   **Tokio 特性**:
   - ✅ JoinSet 动态任务集管理
   - ✅ TaskLocal 任务本地存储
@@ -663,6 +701,7 @@ cargo run --example ultimate_async_theory_practice_2025
   cargo run --example glommio_comprehensive_2025
   # 注意：仅支持 Linux 5.1+ (需要 io_uring)
   ```
+
   **核心特性**:
   - ✅ Thread-per-core 架构 - 每核心一线程，无切换开销
   - ✅ 基于 io_uring - Linux 高性能异步 I/O
@@ -689,6 +728,7 @@ cargo run --example ultimate_async_theory_practice_2025
   cargo run -p c06_async --example utils_observed_limit_breaker
   # 指标： http://127.0.0.1:9899/metrics
   ```
+
 - utils 可配置服务（端口/限速/熔断/超时 可配置 + tracing 日志）：
 
   ```bash
@@ -701,28 +741,33 @@ cargo run --example ultimate_async_theory_practice_2025
   # 工作负载：POST http://127.0.0.1:8088/work  body: {"n": 7}
   # 指标：     GET http://127.0.0.1:9899/metrics
   ```
+
 - 最小混合样例（Actor×CSP）：
 
   ```bash
   cargo run --example actor_csp_hybrid_minimal
   ```
+
 - 进阶混合样例（监督 + 限速 + 指标 + 取消）：
 
   ```bash
   cargo run --example actor_csp_hybrid_advanced
   # 浏览 http://127.0.0.1:9898/metrics 获取 Prometheus 指标
   ```
+
 - API 网关样例（统一观测集成）：
 
   ```bash
   cargo run --example async_api_gateway_2025
   # 浏览 http://127.0.0.1:9897/metrics 获取 Prometheus 指标
   ```
+
 - Actor 桥接（xtra，可选特性）：
 
   ```bash
   cargo run --features xtra --example actor_xtra_bridge
   ```
+
 ## 选型与样例选择指南（最小 vs 进阶）
 
 - 最小样例 `actor_csp_hybrid_minimal.rs`：
@@ -744,6 +789,7 @@ cargo run --example ultimate_async_theory_practice_2025
   docker compose -f deployment/docker-compose.observability.yml up -d
   # Prometheus: http://localhost:9090  Grafana: http://localhost:3000 (admin/admin)
   ```
+
 - 抓取配置：`configs/prometheus.yml`
 - 面板模板：`docs/dashboard_templates/gateway_dashboard.json`、`docs/dashboard_templates/hybrid_dashboard.json`
 - 一键脚本：
@@ -755,6 +801,7 @@ cargo run --example ultimate_async_theory_practice_2025
   # Bash
   scripts/start_observe.sh --gateway --hybrid
   ```
+
 ### 基本用法
 
 ```rust
@@ -777,6 +824,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 ## 📊 性能基准
 
 ### 运行指南
@@ -794,6 +842,7 @@ cargo bench --bench rust_190_comprehensive_benchmarks
 # 可选：在浏览器查看指标（如使用 bench_with_metrics）
 # http://127.0.0.1:9900/metrics
 ```
+
 ### Rust 1.93.0 特性基准测试 ⭐ NEW
 
 新增的 `rust_192_comprehensive_benchmarks` 基准测试套件包括：
@@ -841,6 +890,7 @@ docker build -t rust-async-190 .
 # 运行容器
 docker run -p 8080:8080 rust-async-190
 ```
+
 ### Kubernetes 部署
 
 ```bash
@@ -850,12 +900,14 @@ kubectl apply -f deployment/kubernetes/deployment.yaml
 # 检查状态
 kubectl get pods -n rust-async-190
 ```
+
 ### 自动化部署
 
 ```bash
 # 使用部署脚本
 ./deployment/scripts/deploy.sh --env production --version 1.90.0
 ```
+
 ## 📚 文档
 
 ### 🌟 2025年新增核心文档

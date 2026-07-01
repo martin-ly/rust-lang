@@ -104,6 +104,7 @@
   ├── 流处理: Vector, Materialize 等实时数据管道
   └── 消息队列: NATS (部分 Rust 重写), Fluvio
 ```
+
 > **认知功能**: Rust 在分布式系统中的**独特定位**是"基础设施层"——代理、存储、流处理等需要**极致性能**和**绝对安全**的组件。
 > [来源: [Why Rust for Infrastructure](https://www.pingcap.com/blog/why-choose-rust-to-develop-tikv/)]
 
@@ -141,6 +142,7 @@ Rust async 运行时的分布式价值:
   │ 取消            │ 无（需手动）     │ Drop 传播        │
   └─────────────────┴──────────────────┴──────────────────┘
 ```
+
 > **运行时（Runtime）洞察**: Rust async 的**内存效率**（~200 字节 vs Go 的 ~2KB）使其在**海量连接**场景（代理、网关）具有数量级优势。
 > [来源: [tokio.rs](https://tokio.rs/)]
 
@@ -174,6 +176,7 @@ Rust async 运行时的分布式价值:
   ├── Weighted: 权重分配
   └── Health-based: 基于健康检查
 ```
+
 > **服务发现洞察**: Rust 的**服务网格代理**（如 Linkerd2-proxy）正在重写基础设施层——用 Rust 替换 C++ 实现的 sidecar。
 > [来源: [Linkerd Architecture](https://linkerd.io/2020/12/03/why-linkerd-doesnt-use-envoy/)]
 
@@ -231,6 +234,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 // ├── 与 Tower 服务中间件集成
 // └── 类型安全的 Protocol Buffers
 ```
+
 > **gRPC 洞察**: Tonic 是 Rust **分布式服务通信**的事实标准——它将 gRPC 的**类型安全**与 Rust 的**内存安全（Memory Safety）**结合。
 > [来源: [tonic crate](https://docs.rs/tonic/latest/tonic/)]
 
@@ -261,6 +265,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   ├── raft-zero: 零分配 Raft
   └── openraft: 异步 Raft 实现
 ```
+
 > **共识洞察**: TiKV（Rust 实现的分布式数据库）证明了 Rust 在**分布式共识**场景的可行性——内存安全（Memory Safety）对正确性至关重要。
 > [来源: [Raft Paper](https://raft.github.io/raft.pdf), [raft-rs](https://github.com/tikv/raft-rs)]
 
@@ -320,6 +325,7 @@ async fn main() {
 // ├── bastion: 容错 Actor 系统
 // └── coerce: 分布式 Actor
 ```
+
 > **Actor 洞察**: Actor 模型在 Rust 中通过**所有权（Ownership）**天然实现——每个 Actor 拥有其状态，消息传递对应所有权转移。
 > [来源: [Actix Documentation](https://actix.rs/)]
 
@@ -360,6 +366,7 @@ async fn main() {
   → etcd
   → 环境变量 + serde
 ```
+
 > **模式矩阵**: Rust 的**分布式生态**正在快速成熟——从服务框架（tonic/axum）到基础设施（Linkerd/TiKV）形成完整链条。
 > [来源: [Are we distributed yet?](https://arewedistributedyet.com/)]
 
@@ -384,6 +391,7 @@ graph TD
     style CONSULT fill:#fff3e0
     style GO fill:#c8e6c9
 ```
+
 > **认知功能**: Rust 在分布式系统中的**最佳切入点是基础设施层**——代理、存储、数据管道。业务服务层 Go/Java 生态更成熟。
 > [来源: [When to use Rust](https://www.pingcap.com/blog/why-choose-rust-to-develop-tikv/)]
 
@@ -423,6 +431,7 @@ graph TD
 ├── 某些协议可能需要 FFI
 └── 缓解: 侧车模式（sidecar）
 ```
+
 > **边界要点**: Rust 分布式系统的边界主要与**生态成熟度**、**编译时间**、**人才**、**调试**和**集成**相关。
 > [来源: [Rust in Production](https://github.com/rust-lang-cn)]
 
@@ -467,6 +476,7 @@ graph TD
   ✅ 设计为分区容忍（CAP 中的 P）
      // 使用断路器、重试、降级策略
 ```
+
 > **陷阱总结**: 分布式系统的陷阱与**语言无关**——超时、背压、状态共享、错误处理（Error Handling）、网络分区是所有分布式系统的普遍挑战。
 > [来源: [Distributed Systems in Rust](https://www.youtube.com/watch?v=OuhmIS_N4SA)]
 
@@ -483,6 +493,7 @@ graph TD
 | [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
 | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [tonic crate](https://docs.rs/tonic/latest/tonic/) | ✅ 一级 | gRPC 框架 |
@@ -555,6 +566,7 @@ struct MessageV2Fixed {
     timestamp: u64,
 }
 ```
+
 > **修正**: 分布式系统的核心挑战之一是**消息版本兼容性**。
 > Rust 的 `serde` 默认严格反序列化——缺失字段报错。
 > 使用 `#[serde(default)]` 可为新增字段提供默认值，保持向后兼容。
@@ -589,6 +601,7 @@ struct TransactionFixed {
     state: Arc<TransactionState>,
 }
 ```
+
 > **修正**: 分布式事务协调器通常需要将事务状态传递给线程池中的工作者。`Rc<T>` 不能跨线程，`Arc<T>` 可以。Rust 编译器在编译期验证这些约束，阻止将非 Send 类型传递到多线程环境中。这与 Java 的 `ExecutorService.submit()`（运行时才可能报错）或 Go 的 goroutine（自动共享，但可能数据竞争）不同——Rust 在编译期消除并发错误。分布式系统中的 Saga 模式、2PC（两阶段提交）等算法在 Rust 中实现时，类型系统（Type System）保证事务状态的线程安全传递。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.3 边界测试：序列化消息的大小限制（运行时错误）
@@ -608,6 +621,7 @@ fn send(msg: &LargeMessage) {
     let _bytes = bincode::serialize(msg).unwrap();
 }
 ```
+
 > **修正**: 分布式系统中，消息大小直接影响延迟、吞吐和可靠性。大消息导致：1) 网络分片（IP 分片、TCP 流式传输），增加丢包重传成本；2) 内存压力（反序列化时分配大缓冲区）；3) 序列化/反序列化 CPU 开销。Rust 的序列化生态（`serde` + `bincode`/`postcard`/`protobuf`）在编译期验证结构可序列化，但不限制大小。安全模式：1) 应用层限制消息大小（`MAX_MESSAGE_SIZE`）；2) 使用流式序列化（`serde_json::to_writer` 到网络流）；3) 分块传输（chunked transfer）。这与 gRPC 的 `max_message_size` 配置或 Kafka 的 `max.request.size` 类似——大小限制是协议设计的一部分，Rust 的类型系统（Type System）不自动处理，但允许零成本的紧凑序列化（`postcard` 比 JSON 小 50%+）。来源: [serde Documentation] · 来源: [Cap'n Proto Rust]
 
 ### 10.4 边界测试：分布式共识的时钟偏差（逻辑错误）
@@ -628,6 +642,7 @@ fn main() {
     }
 }
 ```
+
 > **修正**: 分布式系统中的超时和 TTL（time-to-live）必须使用**单调时钟**（monotonic clock），而非**挂钟时间**（wall-clock time）。`std::time::Instant` 是单调的（保证只增不减），`SystemTime` 是挂钟的（可能回退）。Rust 的标准库明确区分二者：`Instant::now()` 用于测量间隔和超时，`SystemTime::now()` 用于显示和日志。分布式共识算法（Raft、Paxos）的选举超时、心跳间隔必须用 `Instant`。这与 Go 的 `time.Now()`（挂钟）和 `time.Since()`（基于单调时钟）或 Java 的 `System.nanoTime()`（单调）类似——Rust 的类型命名比 Go 更清晰（`Instant` vs `SystemTime`）。时钟偏差是分布式系统的经典问题：即使使用单调时钟，不同节点的时钟速率也可能不同（时钟漂移），需通过协议（如 Cristian 算法、Berkeley 算法）补偿。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/time/struct.Instant.html)] · [来源: [Distributed Systems Concepts](https://www.distributed-systems.net/index.php/books/ds3/)]
 
 ### 10.5 边界测试：Raft 共识中的网络分区与脑裂（运行时一致性破坏）
@@ -642,6 +657,7 @@ struct RaftNode {
 // ❌ 运行时问题: 网络分区时，两个分区各自选出新 leader
 // 分区恢复后，需通过 term 比较解决冲突，但期间可能写入冲突数据
 ```
+
 > **修正**: Raft 共识算法在**网络分区**（network partition）时保证安全性：1) 需要多数派（majority）才能当选 leader；2) 分区后，小分区无法选举（无法达到多数）；3) 大分区继续服务，但小分区不可用。极端情况：1) 对称分区（各 50%）→ 双方无法选举，完全不可用；2) 领导者隔离 → 旧 leader 在小分区继续接收写入（但未提交），恢复后回滚。这与 Paxos（类似多数派原则）或 PBFT（拜占庭容错，容忍恶意节点）不同——Raft 牺牲部分可用性换取一致性（CAP 定理的 CP 系统）。Rust 实现（`raft-rs`、`openraft`）需注意：1) 心跳超时和选举超时的配置（网络延迟）；2) 预投票（PreVote）防止 term 无限递增；3) 成员变更（joint consensus）的复杂性。[来源: [Raft Paper](https://raft.github.io/raft.pdf)] · [来源: [openraft Documentation](https://docs.rs/openraft/)]
 
 ### 10.3 边界测试：Raft 的日志不一致与快照安装（运行时一致性风险）
@@ -663,6 +679,7 @@ fn install_snapshot(node: &mut RaftNode, snapshot: Snapshot) {
 
 fn main() {}
 ```
+
 > **修正**: Raft 的**快照机制**：领导者将状态机快照发送给慢跟随者，跟随者丢弃所有日志，用快照替代。风险：1) 快照安装期间，旧领导者的日志追加可能与新领导者冲突；2) 快照分片传输时，部分日志丢失；3) 快照过大导致网络拥塞。Rust 实现（`raft-rs`、`openraft`）：1) 快照分段传输；2) 预投票（PreVote）防止 term 无限递增；3) 成员变更使用 joint consensus。这与 Paxos（无显式快照机制，依赖状态机复制）或 ZooKeeper（ZAB 协议，类似 Raft 但有不同快照策略）不同——Raft 的设计目标是可理解性，但工业实现仍需处理大量边界情况。[来源: [Raft Paper](https://raft.github.io/raft.pdf)] · [来源: [openraft](https://docs.rs/openraft/)]
 > **过渡**: 分布式 系统：Rust 在微服务 与集群中的工程实践 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 分布式 系统：Rust 在微服务 与集群中的工程实践 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

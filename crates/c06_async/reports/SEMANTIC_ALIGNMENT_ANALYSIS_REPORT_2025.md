@@ -87,6 +87,7 @@
 //! - 异步生成器 (Async Generators)  // ❌ 未稳定
 //! - 改进的借用检查器 (Polonius)  // ❌ 实验性特性
 ```
+
 ### 2. 版本信息不一致
 
 #### 问题描述2
@@ -101,6 +102,7 @@
 # Cargo.toml
 rust-version = "1.90"  # ❌ 版本不存在
 ```
+
 ### 3. 依赖版本过时
 
 #### 问题描述3
@@ -116,6 +118,7 @@ rust-version = "1.90"  # ❌ 版本不存在
 lru = "0.12.0"  # ❌ 最新版本是 0.13.x
 smol = "2.0.2"  # ❌ 版本号格式错误
 ```
+
 ### 4. 文档与代码实现脱节
 
 #### 问题描述4
@@ -139,6 +142,7 @@ async fn improved_async_performance() -> Result<()> {
     Ok(result)
 }
 ```
+
 #### 1.2 更好的错误处理
 
 ```rust
@@ -149,6 +153,7 @@ async fn better_error_handling() -> Result<Data> {
     Ok(data)
 }
 ```
+
 #### 1.3 增强的并发原语
 
 ```rust
@@ -162,6 +167,7 @@ async fn enhanced_concurrency() {
     // 自动释放机制改进
 }
 ```
+
 ### 2. 实验性特性（需要特性标志）
 
 #### 2.1 异步 Drop（实验性）
@@ -181,6 +187,7 @@ impl AsyncDrop for AsyncResource {
     }
 }
 ```
+
 ## 📊 最新开源库特性对比
 
 ### 1. Tokio 生态系统
@@ -206,6 +213,7 @@ async fn tokio_latest_features() {
     }).await;
 }
 ```
+
 #### 1.2 性能优化
 
 - **工作窃取调度器**: 更高效的任务分配
@@ -231,6 +239,7 @@ async fn smol_features() {
     Timer::after(Duration::from_secs(1)).await;
 }
 ```
+
 #### 2.2 性能优势
 
 - **更低的内存占用**: 相比 Tokio 减少 30-40%
@@ -252,6 +261,7 @@ async fn glommio_example() {
     }).await;
 }
 ```
+
 #### 3.2 Embassy
 
 ```rust
@@ -263,6 +273,7 @@ async fn main(spawner: Spawner) {
     spawner.spawn(background_task()).unwrap();
 }
 ```
+
 ## 🔧 修正方案
 
 ### 1. 更新 Cargo.toml
@@ -318,6 +329,7 @@ sqlx = { version = "0.7", features = ["runtime-tokio-rustls", "postgres"] }
 # 监控
 prometheus = "0.13"
 ```
+
 ### 2. 修正文档声明
 
 #### 2.1 更新 README.md
@@ -351,6 +363,7 @@ prometheus = "0.13"
 - **并发优化**: CPU 密集型和 I/O 密集型任务分离
 - **结构化并发**: 任务生命周期管理和取消传播
 ```
+
 ### 3. 更新代码实现
 
 #### 3.1 修正特性声明
@@ -367,6 +380,7 @@ prometheus = "0.13"
 //! 注意：AsyncDrop、Async Generators 等特性仍在开发中，
 //! 本模块提供了模拟实现以供学习和测试使用。
 ```
+
 #### 3.2 添加实际可用的特性
 
 ```rust
@@ -423,6 +437,7 @@ impl ImprovedAsyncResourceManager {
     }
 }
 ```
+
 ### 4. 添加实际测试
 
 #### 4.1 性能基准测试
@@ -453,6 +468,7 @@ mod tests {
     }
 }
 ```
+
 ## 📈 性能对比数据
 
 ### 1. 实际测试结果

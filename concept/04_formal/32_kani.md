@@ -1,4 +1,6 @@
-> **内容分级**: [综述级]
+> **内容分级**:
+>
+> [综述级]
 >
 > **本节关键术语**: Kani · 有界模型检查（Bounded Model Checking） · CBMC · Harness · 函数合约（Function Contracts） · 循环合约（Loop Contracts） · Autoharness — [完整对照表](../00_meta/terminology_glossary.md)
 >
@@ -87,22 +89,26 @@ cargo install kani-verifier
 # 2. 下载并配置 CBMC 等依赖
 cargo kani setup
 ```
+
 验证安装：
 
 ```bash
 cargo kani --version
 ```
+
 ### 验证单个 harness
 
 ```bash
 # 在 crate 目录下执行
 cargo kani --harness verify_increment_contract
 ```
+
 ### 验证整个 crate
 
 ```bash
 cargo kani
 ```
+
 Kani 会自动发现所有标注了 `#[kani::proof]` 的 harness 并逐一验证。
 
 ---
@@ -121,6 +127,7 @@ fn verify_abs_returns_nonnegative() {
     assert!(result >= 0);
 }
 ```
+
 > **注意**: Kani 宏（Macro）只在 `cfg(kani)` 下可用。项目内 crate 的 Kani 示例通常被 `#[cfg(kani)]` 包裹，普通 `cargo build/test` 会跳过它们。
 
 ### 非确定性输入：`kani::any()`
@@ -136,6 +143,7 @@ fn verify_saturation_add() {
     assert!(result >= a); // 饱和加法不会减小原值
 }
 ```
+
 ### 假设与断言：`kani::assume` / `assert!`
 
 - `kani::assume(cond)`：限制验证只考虑满足 `cond` 的输入。
@@ -150,6 +158,7 @@ fn verify_slice_first_when_non_empty() {
     assert!(*first >= 0); // 断言
 }
 ```
+
 ### 函数合约：`#[kani::requires]` / `#[kani::ensures]`
 
 函数合约允许在被测函数上直接声明前置条件和后置条件，无需手写 harness。
@@ -161,6 +170,7 @@ fn increment(x: u32) -> u32 {
     x + 1
 }
 ```
+
 > 项目内完整示例: [`crates/c01_ownership_borrow_scope/src/kani_examples.rs`](../../crates/c01_ownership_borrow_scope/src/kani_examples.rs)
 
 ### 循环合约：`#[kani::loop_invariant]`
@@ -182,6 +192,7 @@ fn sum_of_nonnegative_array_is_nonnegative() {
     assert!(sum >= 0);
 }
 ```
+
 > 项目内完整示例: [`crates/c02_type_system/src/kani_examples.rs`](../../crates/c02_type_system/src/kani_examples.rs)
 
 ### 循环展开：`#[kani::unwind(...)]`
@@ -200,6 +211,7 @@ fn verify_bounded_sum() {
     // 仅对 4 个元素有效，展开 5 次足够
 }
 ```
+
 > **警告**: `unwind` 值过小会导致 **UNWINDING ASSERTION** 失败；过大则会指数级增加验证时间。
 
 ### Autoharness
@@ -210,6 +222,7 @@ Kani 0.65+ 支持自动生成 harness，减少手写验证代码的工作量。
 # 为函数 increment_all 自动生成并运行 harness
 kani autoharness --function increment_all --harness-depth 2
 ```
+
 | 参数 | 含义 |
 |:---|:---|
 | `--harness-depth` | 生成 harness 时递归调用其他函数的深度 |
@@ -230,6 +243,7 @@ fn verify_checked_add_no_panic() {
     let _ = a.checked_add(b);
 }
 ```
+
 ### 示例 2：循环与循环合约
 
 ```rust,ignore
@@ -250,6 +264,7 @@ fn verify_increment_all_elements() {
     assert_eq!(new_sum, old_sum + 4);
 }
 ```
+
 > 实际循环合约写法请参考项目内 [`crates/c01_ownership_borrow_scope/src/kani_examples.rs`](../../crates/c01_ownership_borrow_scope/src/kani_examples.rs)。
 
 ### 示例 3：数据结构边界条件
@@ -265,6 +280,7 @@ fn verify_vec_push_safety() {
     assert!(v.last() == Some(&elem));
 }
 ```
+
 ---
 
 ## 五、项目内已有 Kani 示例导航
