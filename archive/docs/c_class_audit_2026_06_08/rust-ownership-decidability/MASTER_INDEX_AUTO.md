@@ -38,7 +38,6 @@
     - [Async Ecosystem](#async-ecosystem)
   - [Cross-Reference Map](#cross-reference-map)
     - [Files Referenced By](#files-referenced-by)
-<a id="this-index-was-auto-generated-last-updated-2026-03-06t114117918595"></a>
   - [*This index was auto-generated. Last updated: 2026-03-06T11:41:17.918595*](#this-index-was-auto-generated-last-updated-2026-03-06t114117918595)
   - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引-1)

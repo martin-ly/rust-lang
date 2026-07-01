@@ -17,7 +17,7 @@
     - [1. 已稳定特性 \[Stable X.XX\]](#1-已稳定特性-stable-xxx)
     - [2. 开发中特性 \[Unstable/Nightly\]](#2-开发中特性-unstablenightly)
     - [3. 理论模型 \[Theoretical\]](#3-理论模型-theoretical)
-  - [🏷️ 文件头标注模板](#文件头标注模板)
+  - [🏷️ 文件头标注模板](#️-文件头标注模板)
     - [模板 A: 真实特性](#模板-a-真实特性)
     - [模板 B: 理论模型](#模板-b-理论模型)
   - [📊 版本对照表](#-版本对照表)
@@ -28,7 +28,6 @@
     - [检查脚本使用](#检查脚本使用)
   - [📅 维护责任](#-维护责任)
   - [📝 变更记录](#-变更记录)
-<a id="维护者-rust-ownership-decidability-team"></a>
   - [**维护者**: Rust-Ownership-Decidability Team](#维护者-rust-ownership-decidability-team)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
