@@ -22,22 +22,22 @@
 
 ## 目录 {#目录}
 
-- [Linkage 与符号机制](#linkage-与符号机制)
-  - [目录](#目录)
-  - [研究目标](#研究目标)
-  - [概念定义](#概念定义)
-  - [属性关系](#属性关系)
-  - [解释与论证](#解释与论证)
-    - [为什么 Rust 默认要 name mangling](#为什么-rust-默认要-name-mangling)
-    - [`extern crate` 的演进](#extern-crate-的演进)
-    - [`#[linkage = "internal"]` 与 `static`](#linkage-internal-与-static)
-  - [Rust 示例](#rust-示例)
-    - [1. 基本 FFI 导出](#1-基本-ffi-导出)
-    - [2. `extern crate` 别名（Rust 2018+ 场景）](#2-extern-crate-别名rust-2018-场景)
-    - [3. 显式符号名](#3-显式符号名)
-  - [反例与边界](#反例与边界)
-  - [权威来源对照表](#权威来源对照表)
-  - [学术/社区来源参考](#学术社区来源参考)
+- [Linkage 与符号机制 {#linkage-与符号机制}](#linkage-与符号机制-linkage-与符号机制)
+  - [目录 {#目录}](#目录-目录)
+  - [研究目标 {#研究目标}](#研究目标-研究目标)
+  - [概念定义 {#概念定义}](#概念定义-概念定义)
+  - [属性关系 {#属性关系}](#属性关系-属性关系)
+  - [解释与论证 {#解释与论证}](#解释与论证-解释与论证)
+    - [为什么 Rust 默认要 name mangling {#为什么-rust-默认要-name-mangling}](#为什么-rust-默认要-name-mangling-为什么-rust-默认要-name-mangling)
+    - [`extern crate` 的演进 {#extern-crate-的演进}](#extern-crate-的演进-extern-crate-的演进)
+    - [`#[linkage = "internal"]` 与 `static` {#linkage-internal-与-static}](#linkage--internal-与-static-linkage-internal-与-static)
+  - [Rust 示例 {#rust-示例}](#rust-示例-rust-示例)
+    - [1. 基本 FFI 导出 {#1-基本-ffi-导出}](#1-基本-ffi-导出-1-基本-ffi-导出)
+    - [2. `extern crate` 别名（Rust 2018+ 场景） {#2-extern-crate-别名rust-2018-场景}](#2-extern-crate-别名rust-2018-场景-2-extern-crate-别名rust-2018-场景)
+    - [3. 显式符号名 {#3-显式符号名}](#3-显式符号名-3-显式符号名)
+  - [反例与边界 {#反例与边界}](#反例与边界-反例与边界)
+  - [权威来源对照表 {#权威来源对照表}](#权威来源对照表-权威来源对照表)
+  - [学术/社区来源参考 {#学术社区来源参考}](#学术社区来源参考-学术社区来源参考)
 
 ---
 

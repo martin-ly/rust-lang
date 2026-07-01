@@ -13,22 +13,22 @@
 
 ## 目录 {#目录}
 
-- [Rust Reference 分章节深度对齐](#rust-reference-分章节深度对齐)
-  - [目录](#目录)
-  - [一、对齐说明](#一对齐说明)
-  - [二、前言与介绍](#二前言与介绍)
-  - [三、词法结构](#三词法结构)
-  - [四、类型系统](#四类型系统)
-  - [五、表达式](#五表达式)
-  - [六、Items](#六items)
-  - [七、Attributes](#七attributes)
-  - [八、Crates 与 Source Files](#八crates-与-source-files)
-  - [九、Unsafe Rust](#九unsafe-rust)
-  - [十、链接与 ABI](#十链接与-abi)
-  - [十一、未覆盖缺口](#十一未覆盖缺口)
-  - [相关概念](#相关概念)
-  - [学术权威参考](#学术权威参考)
-  - [社区权威参考](#社区权威参考)
+- [Rust Reference 分章节深度对齐 {#rust-reference-分章节深度对齐}](#rust-reference-分章节深度对齐-rust-reference-分章节深度对齐)
+  - [目录 {#目录}](#目录-目录)
+  - [一、对齐说明 {#一对齐说明}](#一对齐说明-一对齐说明)
+  - [二、前言与介绍 {#二前言与介绍}](#二前言与介绍-二前言与介绍)
+  - [三、词法结构 {#三词法结构}](#三词法结构-三词法结构)
+  - [四、类型系统 {#四类型系统}](#四类型系统-四类型系统)
+  - [五、表达式 {#五表达式}](#五表达式-五表达式)
+  - [六、Items {#六items}](#六items-六items)
+  - [七、Attributes {#七attributes}](#七attributes-七attributes)
+  - [八、Crates 与 Source Files {#八crates-与-source-files}](#八crates-与-source-files-八crates-与-source-files)
+  - [九、Unsafe Rust {#九unsafe-rust}](#九unsafe-rust-九unsafe-rust)
+  - [十、链接与 ABI {#十链接与-abi}](#十链接与-abi-十链接与-abi)
+  - [十一、未覆盖缺口 {#十一未覆盖缺口}](#十一未覆盖缺口-十一未覆盖缺口)
+  - [相关概念 {#相关概念}](#相关概念-相关概念)
+  - [学术权威参考 {#学术权威参考}](#学术权威参考-学术权威参考)
+  - [社区权威参考 {#社区权威参考}](#社区权威参考-社区权威参考)
 
 ---
 

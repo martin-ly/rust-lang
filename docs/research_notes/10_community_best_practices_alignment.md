@@ -13,16 +13,16 @@
 
 ## 目录 {#目录}
 
-- [社区最佳实践对齐矩阵](#社区最佳实践对齐矩阵)
-  - [目录](#目录)
-  - [一、对齐说明](#一对齐说明)
-  - [二、API Guidelines](#二api-guidelines)
-  - [三、Rust Design Patterns](#三rust-design-patterns)
-  - [四、Rust Performance Book](#四rust-performance-book)
-  - [五、This Week in Rust / Inside Rust Blog](#五this-week-in-rust-inside-rust-blog)
-  - [六、未覆盖缺口](#六未覆盖缺口)
-  - [相关概念](#相关概念)
-  - [学术权威参考](#学术权威参考)
+- [社区最佳实践对齐矩阵 {#社区最佳实践对齐矩阵}](#社区最佳实践对齐矩阵-社区最佳实践对齐矩阵)
+  - [目录 {#目录}](#目录-目录)
+  - [一、对齐说明 {#一对齐说明}](#一对齐说明-一对齐说明)
+  - [二、API Guidelines {#二api-guidelines}](#二api-guidelines-二api-guidelines)
+  - [三、Rust Design Patterns {#三rust-design-patterns}](#三rust-design-patterns-三rust-design-patterns)
+  - [四、Rust Performance Book {#四rust-performance-book}](#四rust-performance-book-四rust-performance-book)
+  - [五、This Week in Rust / Inside Rust Blog {#五this-week-in-rust-inside-rust-blog}](#五this-week-in-rust--inside-rust-blog-五this-week-in-rust-inside-rust-blog)
+  - [六、未覆盖缺口 {#六未覆盖缺口}](#六未覆盖缺口-六未覆盖缺口)
+  - [相关概念 {#相关概念}](#相关概念-相关概念)
+  - [学术权威参考 {#学术权威参考}](#学术权威参考-学术权威参考)
 
 ---
 

@@ -12,20 +12,20 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [项目完成度矩阵](#项目完成度矩阵)
-  - [📑 目录](#目录)
-  - [📊 总体概览](#总体概览)
-  - [📦 Crates 完成度](#crates-完成度)
-  - [📚 Content 完成度](#content-完成度)
-    - [详细清单](#详细清单)
-      - [emerging/](#emerging)
-      - [ecosystem/](#ecosystem)
-      - [production/](#production)
-      - [academic/](#academic)
-  - [📝 Docs 完成度](#docs-完成度)
-  - [⚠️ 已知问题](#已知问题)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [项目完成度矩阵 {#项目完成度矩阵}](#项目完成度矩阵-项目完成度矩阵)
+  - [📑 目录 {#目录}](#-目录-目录)
+  - [📊 总体概览 {#总体概览}](#-总体概览-总体概览)
+  - [📦 Crates 完成度 {#crates-完成度}](#-crates-完成度-crates-完成度)
+  - [📚 Content 完成度 {#content-完成度}](#-content-完成度-content-完成度)
+    - [详细清单 {#详细清单}](#详细清单-详细清单)
+      - [emerging/ {#emerging}](#emerging-emerging)
+      - [ecosystem/ {#ecosystem}](#ecosystem-ecosystem)
+      - [production/ {#production}](#production-production)
+      - [academic/ {#academic}](#academic-academic)
+  - [📝 Docs 完成度 {#docs-完成度}](#-docs-完成度-docs-完成度)
+  - [⚠️ 已知问题 {#已知问题}](#️-已知问题-已知问题)
+  - [相关概念 {#相关概念}](#相关概念-相关概念)
+  - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
 ## 📊 总体概览 {#总体概览}
 >

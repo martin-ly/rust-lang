@@ -18,21 +18,21 @@
 
 >
 
-- [Core Theorems — English Summary](#core-theorems-english-summary)
-  - [📑 目录](#目录)
-  - [Overview](#overview)
-  - [Theorem Summary](#theorem-summary)
-  - [Auxiliary Lemmas](#auxiliary-lemmas)
-  - [L3 Machine-Checkable Scaffolding](#l3-machine-checkable-scaffolding)
-  - [Formal Language and Proofs](#formal-language-and-proofs)
-  - [Related Documents](#related-documents)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [权威来源索引](#权威来源索引)
-  - [社区权威参考](#社区权威参考)
+- [Core Theorems — English Summary {#core-theorems-english-summary}](#core-theorems--english-summary-core-theorems-english-summary)
+  - [📑 目录 {#目录}](#-目录-目录)
+  - [Overview {#overview}](#overview-overview)
+  - [Theorem Summary {#theorem-summary}](#theorem-summary-theorem-summary)
+  - [Auxiliary Lemmas {#auxiliary-lemmas}](#auxiliary-lemmas-auxiliary-lemmas)
+  - [L3 Machine-Checkable Scaffolding {#l3-machine-checkable-scaffolding}](#l3-machine-checkable-scaffolding-l3-machine-checkable-scaffolding)
+  - [Formal Language and Proofs {#formal-language-and-proofs}](#formal-language-and-proofs-formal-language-and-proofs)
+  - [Related Documents {#related-documents}](#related-documents-related-documents)
+  - [🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}](#-rust-194-深度整合更新-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点 {#本文档的rust-194更新要点}](#本文档的rust-194更新要点-本文档的rust-194更新要点)
+      - [核心特性应用 {#核心特性应用}](#核心特性应用-核心特性应用)
+      - [代码示例更新 {#代码示例更新}](#代码示例更新-代码示例更新)
+      - [相关文档 {#相关文档}](#相关文档-相关文档)
+  - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
+  - [社区权威参考 {#社区权威参考}](#社区权威参考-社区权威参考)
 
 > **创建日期**: 2026-02-14
 

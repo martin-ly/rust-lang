@@ -13,19 +13,19 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [Rust 前沿特性跟踪](#rust-前沿特性跟踪)
-  - [📋 目录](#目录)
-  - [🎯 目标](#目标)
-  - [📊 特性跟踪矩阵](#特性跟踪矩阵)
-  - [🔬 正在开发的特性](#正在开发的特性)
-    - [Generic Const Expressions (generic\_const\_exprs)](#generic-const-expressions-generic_const_exprs)
-    - [Async Closures](#async-closures)
-    - [Impl Trait in Associated Type](#impl-trait-in-associated-type)
-    - [Type Alias Impl Trait (TAIT)](#type-alias-impl-trait-tait)
-  - [📈 版本路线图](#版本路线图)
-  - [🔗 参考资源](#参考资源)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [Rust 前沿特性跟踪 {#rust-前沿特性跟踪}](#rust-前沿特性跟踪-rust-前沿特性跟踪)
+  - [📋 目录 {#目录}](#-目录-目录)
+  - [🎯 目标 {#目标}](#-目标-目标)
+  - [📊 特性跟踪矩阵 {#特性跟踪矩阵}](#-特性跟踪矩阵-特性跟踪矩阵)
+  - [🔬 正在开发的特性 {#正在开发的特性}](#-正在开发的特性-正在开发的特性)
+    - [Generic Const Expressions (generic\_const\_exprs) {#generic-const-expressions-generic\_const\_exprs}](#generic-const-expressions-generic_const_exprs-generic-const-expressions-generic_const_exprs)
+    - [Async Closures {#async-closures}](#async-closures-async-closures)
+    - [Impl Trait in Associated Type {#impl-trait-in-associated-type}](#impl-trait-in-associated-type-impl-trait-in-associated-type)
+    - [Type Alias Impl Trait (TAIT) {#type-alias-impl-trait-tait}](#type-alias-impl-trait-tait-type-alias-impl-trait-tait)
+  - [📈 版本路线图 {#版本路线图}](#-版本路线图-版本路线图)
+  - [🔗 参考资源 {#参考资源}](#-参考资源-参考资源)
+  - [相关概念 {#相关概念}](#相关概念-相关概念)
+  - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
 ---
 

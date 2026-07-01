@@ -9,22 +9,22 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Rust 形式化工程系统 - 主索引](#rust-形式化工程系统---主索引)
-  - [📑 目录](#目录)
-  - [🏛️ 理论体系与论证体系结构（顶层入口）](#理论体系与论证体系结构顶层入口)
-  - [理论基础 (01\_theoretical\_foundations)](#理论基础-01_theoretical_foundations)
-    - [类型系统子路径](#类型系统子路径)
-  - [编程范式 (02\_programming\_paradigms)](#编程范式-02_programming_paradigms)
-  - [设计模式 (03\_design\_patterns)](#设计模式-03_design_patterns)
-  - [工具链生态 (06\_toolchain\_ecosystem)](#工具链生态-06_toolchain_ecosystem)
-  - [软件工程 (05\_software\_engineering)](#软件工程-05_software_engineering)
-  - [研究议程 (09\_research\_agenda)](#研究议程-09_research_agenda)
-  - [质量保障 (10\_quality\_assurance)](#质量保障-10_quality_assurance)
-  - [证明与公理→定理链](#证明与公理定理链)
-  - [返回](#返回)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引-1)
-  - [权威来源索引](#权威来源索引-1)
+- [Rust 形式化工程系统 - 主索引 {#rust-形式化工程系统---主索引}](#rust-形式化工程系统---主索引-rust-形式化工程系统---主索引)
+  - [📑 目录 {#目录}](#-目录-目录)
+  - [🏛️ 理论体系与论证体系结构（顶层入口） {#理论体系与论证体系结构顶层入口}](#️-理论体系与论证体系结构顶层入口-理论体系与论证体系结构顶层入口)
+  - [理论基础 (01\_theoretical\_foundations) {#理论基础-01\_theoretical\_foundations}](#理论基础-01_theoretical_foundations-理论基础-01_theoretical_foundations)
+    - [类型系统子路径 {#类型系统子路径}](#类型系统子路径-类型系统子路径)
+  - [编程范式 (02\_programming\_paradigms) {#编程范式-02\_programming\_paradigms}](#编程范式-02_programming_paradigms-编程范式-02_programming_paradigms)
+  - [设计模式 (03\_design\_patterns) {#设计模式-03\_design\_patterns}](#设计模式-03_design_patterns-设计模式-03_design_patterns)
+  - [工具链生态 (06\_toolchain\_ecosystem) {#工具链生态-06\_toolchain\_ecosystem}](#工具链生态-06_toolchain_ecosystem-工具链生态-06_toolchain_ecosystem)
+  - [软件工程 (05\_software\_engineering) {#软件工程-05\_software\_engineering}](#软件工程-05_software_engineering-软件工程-05_software_engineering)
+  - [研究议程 (09\_research\_agenda) {#研究议程-09\_research\_agenda}](#研究议程-09_research_agenda-研究议程-09_research_agenda)
+  - [质量保障 (10\_quality\_assurance) {#质量保障-10\_quality\_assurance}](#质量保障-10_quality_assurance-质量保障-10_quality_assurance)
+  - [证明与公理→定理链 {#证明与公理定理链}](#证明与公理定理链-证明与公理定理链)
+  - [返回 {#返回}](#返回-返回)
+  - [相关概念 {#相关概念}](#相关概念-相关概念)
+  - [权威来源索引 {#权威来源索引-1}](#权威来源索引-权威来源索引-1)
+  - [权威来源索引 {#权威来源索引-1}](#权威来源索引-权威来源索引-1-1)
 
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-02-28

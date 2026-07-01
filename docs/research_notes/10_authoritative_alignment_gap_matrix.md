@@ -27,20 +27,20 @@
 
 ## 📑 目录 {#目录}
 
-- [docs/research\_notes 权威国际化对齐缺口矩阵](#docsresearch_notes-权威国际化对齐缺口矩阵)
-  - [📑 目录](#目录)
-  - [📊 矩阵说明](#矩阵说明)
-  - [🔬 experiments/ 实验主题](#experiments-实验主题)
-  - [🧮 formal\_methods/ 形式化方法](#formal_methods-形式化方法)
-  - [📐 type\_theory/ 类型理论](#type_theory-类型理论)
-  - [📦 formal\_modules/ 形式化模块](#formal_modules-形式化模块)
-  - [🏗️ software\_design\_theory/ 软件设计理论](#software_design_theory-软件设计理论)
-  - [🔧 形式化工具](#形式化工具)
-  - [🗺️ 后续执行路线图](#后续执行路线图)
-    - [P0：立即执行（官方来源与核心安全）](#p0立即执行官方来源与核心安全)
-    - [P1：短期完善（学术来源与工程实践）](#p1短期完善学术来源与工程实践)
-    - [P2：中期增强（社区来源与扩展主题）](#p2中期增强社区来源与扩展主题)
-  - [📚 权威来源索引](#权威来源索引)
+- [docs/research\_notes 权威国际化对齐缺口矩阵 {#docsresearch\_notes-权威国际化对齐缺口矩阵}](#docsresearch_notes-权威国际化对齐缺口矩阵-docsresearch_notes-权威国际化对齐缺口矩阵)
+  - [📑 目录 {#目录}](#-目录-目录)
+  - [📊 矩阵说明 {#矩阵说明}](#-矩阵说明-矩阵说明)
+  - [🔬 experiments/ 实验主题 {#experiments-实验主题}](#-experiments-实验主题-experiments-实验主题)
+  - [🧮 formal\_methods/ 形式化方法 {#formal\_methods-形式化方法}](#-formal_methods-形式化方法-formal_methods-形式化方法)
+  - [📐 type\_theory/ 类型理论 {#type\_theory-类型理论}](#-type_theory-类型理论-type_theory-类型理论)
+  - [📦 formal\_modules/ 形式化模块 {#formal\_modules-形式化模块}](#-formal_modules-形式化模块-formal_modules-形式化模块)
+  - [🏗️ software\_design\_theory/ 软件设计理论 {#software\_design\_theory-软件设计理论}](#️-software_design_theory-软件设计理论-software_design_theory-软件设计理论)
+  - [🔧 形式化工具 {#形式化工具}](#-形式化工具-形式化工具)
+  - [🗺️ 后续执行路线图 {#后续执行路线图}](#️-后续执行路线图-后续执行路线图)
+    - [P0：立即执行（官方来源与核心安全） {#p0立即执行官方来源与核心安全}](#p0立即执行官方来源与核心安全-p0立即执行官方来源与核心安全)
+    - [P1：短期完善（学术来源与工程实践） {#p1短期完善学术来源与工程实践}](#p1短期完善学术来源与工程实践-p1短期完善学术来源与工程实践)
+    - [P2：中期增强（社区来源与扩展主题） {#p2中期增强社区来源与扩展主题}](#p2中期增强社区来源与扩展主题-p2中期增强社区来源与扩展主题)
+  - [📚 权威来源索引 {#权威来源索引}](#-权威来源索引-权威来源索引)
 
 ---
 
