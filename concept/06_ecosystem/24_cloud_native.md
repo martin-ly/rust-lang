@@ -107,6 +107,7 @@
   ├── 高性能 → 低资源消耗
   └── 小二进制 → 快速启动和部署
 ```
+
 > **认知功能**: **Rust 是云原生基础设施的理想语言**——内存安全（Memory Safety）和高性能降低了运营成本。
 > [来源: [CNCF — Cloud Native Definition](https://github.com/cncf/toc/blob/main/DEFINITION.md)]
 
@@ -149,6 +150,7 @@ Rust 云原生优势:
   │ 学习曲线        │ 低              │ 高              │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **优势洞察**: **Rust 在资源效率和可靠性上优于 Go**——但生态成熟度仍需时间。
 > [来源: [Rust Cloud Native](https://rust-cloud-native.github.io/)]
 
@@ -199,6 +201,7 @@ Axum:
   ├── 类型安全路由
   └── 性能优秀
 ```
+
 > **Axum 洞察**: **Axum 是 Rust 云原生 Web 框架的首选**——模块（Module）化和类型安全使其适合大规模服务。
 > [来源: [Axum](https://github.com/tokio-rs/axum)]
 
@@ -242,6 +245,7 @@ Actix-web:
   ├── Actix: 历史更久，生态更大
   └── Axum: 更现代，类型安全更强
 ```
+
 > **Actix 洞察**: **Actix-web 是 Rust 最成熟的 Web 框架**——Actor 模型提供独特的并发优势。
 > [来源: [Actix](https://actix.rs/)]
 
@@ -272,6 +276,7 @@ Actix-web:
   ├── 内存安全
   └── 适合 sidecar 模式
 ```
+
 > **服务网格洞察**: **Linkerd2-proxy 证明 Rust 适合服务网格**——轻量级、安全、高性能。
 > [来源: [Linkerd](https://linkerd.io/)]
 
@@ -311,6 +316,7 @@ Actix-web:
   │ 适用场景        │ 传统工作负载    │ Serverless      │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **容器洞察**: **Firecracker 重新定义了容器隔离**——微虚拟机兼顾安全性和密度。
 > [来源: [Firecracker](https://firecracker-microvm.github.io/)]
 
@@ -349,6 +355,7 @@ Actix-web:
   ├── OpenTelemetry [来源: [OpenTelemetry](https://opentelemetry.io/)] Rust SDK
   └── Jaeger 客户端
 ```
+
 > **可观测性洞察**: **Vector 证明 Rust 在数据管道中的优势**——高吞吐、低资源占用。
 > [来源: [Vector](https://vector.dev/)]
 
@@ -370,6 +377,7 @@ graph TD
     style RUST fill:#c8e6c9
     style GO fill:#fff3e0
 ```
+
 > **认知功能**: **Rust 适合追求极致性能和安全的云原生场景**——快速开发场景 Go 仍占优。
 
 ---
@@ -402,6 +410,7 @@ graph TD
 ├── 容器基础镜像选择
 └── 缓解: 使用 distroless 镜像
 ```
+
 > **边界要点**: Rust 云原生的边界与**生态**、**开发速度**、**团队**、**调试**和**部署**相关。
 > [来源: [CNCF Landscape](https://landscape.cncf.io/)]
 
@@ -445,6 +454,7 @@ graph TD
   ✅ 使用 tracing / log
      // 结构化、可配置
 ```
+
 > **陷阱总结**: 云原生的陷阱主要与**运行时（Runtime）**、**优化**、**状态**、**健康检查**和**日志**相关。
 > [来源: [Twelve-Factor App](https://12factor.net/)]
 
@@ -469,6 +479,7 @@ fn main() {
     println!("{:?}", data);
 }
 ```
+
 ### 编译验证示例
 
 ```rust
@@ -481,6 +492,7 @@ fn main() {
     }
 }
 ```
+
 ```rust
 fn health_check() -> &'static str {
     "ok"
@@ -490,6 +502,7 @@ fn main() {
     println!("{}", health_check());
 }
 ```
+
 ## 相关概念文件
 
 - [Async](../03_advanced/02_async.md) — 异步编程
@@ -543,6 +556,7 @@ fn main() {
     // });
 }
 ```
+
 > **修正**: Rust 异步生态存在多个运行时（tokio、Tokio、smol、embassy），它们的任务调度器和 I/O 驱动互不兼容。
 > 在 tokio runtime 上执行 Tokio 的 I/O 操作（如 `async_std::fs::read`）会导致 panic 或死锁，因为 I/O 事件注册到了错误的 reactor。
 > 解决方案：
@@ -571,6 +585,7 @@ fn main() {
     // let cfg: Config = serde_json::from_str(json).unwrap(); // 编译错误
 }
 ```
+
 > **修正**: `serde::Deserialize` 为带有生命周期（Lifetimes）参数的 struct 生成反序列化实现时，要求生命周期与反序列化器的数据源绑定。
 > 但 `serde_json::from_str` 返回的 `Config` 必须拥有独立生命周期——它无法持有对输入字符串的引用（Reference）（因为输入字符串可能在函数返回后被释放）。
 > 正确做法是使用 `String` 而非 `&str`，让 `Config` 拥有数据。
@@ -599,6 +614,7 @@ async fn server() {
     }
 }
 ```
+
 > **修正**: Kubernetes 的 Pod 终止流程：1) `kubectl delete pod` → Kubelet 发送 `SIGTERM`（默认 30 秒宽限期）；2) 容器未退出 → 发送 `SIGKILL` 强制终止。Rust 的云原生应用必须处理 `SIGTERM`：1) 停止接受新连接；2) 完成正在处理的请求；3) 刷新缓冲区、关闭数据库连接；4) 退出进程。未处理 `SIGTERM` 导致强制终止，数据丢失、连接泄漏。`tokio::signal` 提供跨平台信号处理（Unix 的 `SIGTERM`/`SIGINT`，Windows 的 `Ctrl+C`/`Ctrl+Break`）。这与 Go 的 `signal.Notify`、Node.js 的 `process.on('SIGTERM')` 类似——云原生应用的生命周期管理是可靠性工程的基础。[来源: [Tokio Signal Documentation](https://docs.rs/tokio/)] · [来源: [Kubernetes Pod Lifecycle](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/)]
 
 ### 10.5 边界测试：Kubernetes 探针配置不当导致的级联重启（运行时可用性下降）
@@ -619,6 +635,7 @@ async fn main() {
     axum::serve(tokio::net::TcpListener::bind(addr).await.unwrap(), app).await.unwrap();
 }
 ```
+
 > **修正**: Kubernetes 的**探针**（probe）决定 pod 的生命周期：1) `livenessProbe`：失败 → kubelet 重启容器（用于检测死锁/无限循环）；2) `readinessProbe`：失败 → 从 service endpoints 移除（用于依赖未就绪时，如 DB 连接中）；3) `startupProbe`：失败 → 重启（用于慢启动应用，避免 liveness 过早触发）。常见反模式：1) liveness 检查外部依赖（DB、缓存）→ 外部故障导致全部 pod 重启，级联故障；2) readiness 和 liveness 相同 → 无法区分"未就绪"和"已死"；3) 超时过短 → 正常慢请求触发重启。Rust 云原生应用应暴露 `/health/live`（简单，仅检查进程存活）、`/health/ready`（检查所有依赖就绪）。这与 Go 的 Kubernetes 客户端或 Java 的 Spring Boot Actuator 类似——探针设计是分布式系统的可靠性基石。[来源: [Kubernetes Probes](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)] · [来源: [AWS Well-Architected](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html)]
 
 ### 10.3 边界测试：Kubernetes 的 readiness 与 liveness 探针混淆（运行时可用性下降）
@@ -641,6 +658,7 @@ async fn health_check() -> &'static str {
     "ready"
 }
 ```
+
 > **修正**: Kubernetes 探针的区分：1) **livenessProbe**：检测死锁/无限循环，失败 → 重启容器；2) **readinessProbe**：检测依赖就绪，失败 → 从 service endpoints 移除（不重启）；3) **startupProbe**：保护慢启动应用，失败 → 重启。反模式：1) 同一端点处理两种探针 → 无法区分状态；2) liveness 检查外部依赖 → 外部故障导致全部 pod 重启，级联故障；3) 超时过短 → 正常慢请求触发重启。Rust 云原生应用应暴露 `/health/live`（简单存活检查）和 `/health/ready`（依赖就绪检查）。这与 Go 的 Kubernetes 客户端或 Java 的 Spring Boot Actuator 类似——探针设计是分布式系统可靠性的基石。[来源: [Kubernetes Probes](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)] · [来源: [AWS Well-Architected](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html)]
 > **过渡**: Rust 云原生生态 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 云原生生态 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

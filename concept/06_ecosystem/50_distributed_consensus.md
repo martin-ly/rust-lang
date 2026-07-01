@@ -106,6 +106,7 @@
   将共识扩展为一系列值的共识（日志复制）。
   若所有节点以相同顺序应用相同的操作序列，则状态一致。
 ```
+
 > **来源**: [FLP Result](https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf) · [Consensus in Distributed Systems](https://algodist.labri.fr/index.php/Main/GT)
 
 ### 1.2 FLP 不可能结果
@@ -131,6 +132,7 @@ FLP 不可能性的直观解释:
   3. 部分同步 (Partial Synchrony): 系统最终变得同步（PBFT, Tendermint）
   4. 领导者选举超时: Raft 使用随机超时打破对称性
 ```
+
 > **来源**: [FLP Paper](https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf) · [Impossibility of Distributed Consensus with One Faulty Process](https://dl.acm.org/doi/10.1145/3149.214121)
 
 ### 1.3 容错模型
@@ -185,6 +187,7 @@ Phase 2 — Accept:
   一旦多数 Acceptor 接受了某个值，该值被确定（Chosen）
   Learner 通过查询 Acceptor 获知已确定的值
 ```
+
 **Paxos 的安全保证**:
 
 ```text
@@ -200,6 +203,7 @@ Phase 2 — Accept:
   · 若 n2 < n1: 同理矛盾
   · 故 n1 = n2 → v1 = v2（同一编号只能接受一个值）
 ```
+
 > **来源**: [Paxos Made Simple](https://lamport.azurewebsites.net/pubs/paxos-simple.pdf) · [The Part-Time Parliament — Lamport 1998](https://lamport.azurewebsites.net/pubs/lamport-paxos.pdf)
 
 ### 3.2 Multi-Paxos 与日志复制
@@ -221,6 +225,7 @@ Leader 选举:
   · 节点可能缺少某些槽位的日志
   · 通过 Leader 补全：Follower 向 Leader 请求缺失条目
 ```
+
 > **来源**: [Paxos Made Live — Chandra et al. 2007](https://read.seas.harvard.edu/~kohler/class/08w-dsi/chandra07paxos.pdf)
 
 ---
@@ -247,6 +252,7 @@ Raft 状态机:
   · 每个 Term 最多一个 Leader
   · 旧 Term 的 Leader 发现新 Term 时立即降级
 ```
+
 ```rust,ignore
 // Raft 节点核心状态（教育性简化）
 #[derive(Debug, Clone)]
@@ -276,6 +282,7 @@ struct LogEntry {
     command: Vec<u8>,
 }
 ```
+
 **Raft 日志复制流程**:
 
 ```text
@@ -295,6 +302,7 @@ Leader:
   4. 应用到状态机，返回客户端
   5. 在下次心跳中通知 Follower commit_index
 ```
+
 > **来源**: [Raft Paper](https://raft.github.io/raft.pdf) · [Raft Visualization](https://raft.github.io/) · [Consensus: Bridging Theory and Practice — Ongaro 2014](https://web.stanford.edu/~ouster/cgi-bin/papers/OngaroPhD.pdf)
 
 ### 4.2 Rust 实现：raft-rs
@@ -352,6 +360,7 @@ fn raft_event_loop(mut raft: Raft<Arc<dyn Storage>>) {
     }
 }
 ```
+
 **raft-rs 的线程安全设计**:
 
 ```text
@@ -372,6 +381,7 @@ Rust 优势:
   · Ready 结构体的所有权转移确保状态一致性
   · Storage trait 允许自定义持久化后端
 ```
+
 > **来源**: [raft-rs Documentation](https://docs.rs/raft/latest/raft/) · [TiKV Architecture](https://tikv.org/docs/) · [etcd Raft](https://github.com/etcd-io/raft)
 
 ---
@@ -408,6 +418,7 @@ Phase 3 — Commit:
   · 则至少有一个正确节点同时发送了对 m 和 m' 的 Prepare
   · 但正确节点不会发送矛盾 Prepare → m = m'
 ```
+
 **PBFT 的局限**:
 
 | **局限** | **影响** | **缓解** |
@@ -446,6 +457,7 @@ Leader 更换:
   · Leader 聚合签名（QC）: O(1) 大小
   · 总计: O(n) 消息，O(1) 额外状态/节点
 ```
+
 > **来源**: [HotStuff Paper](https://arxiv.org/abs/1803.05069) · [Diem BFT](https://developers.diem.com/docs/technical-papers/the-diem-blockchain-paper/) · [Chained HotStuff](https://hackernoon.com/chained-hotstuff-a-enhanced-hotstuff-protocol-for-improved-performance)
 
 ### 5.3 Tendermint：链式 BFT
@@ -474,6 +486,7 @@ Precommit:
   · 锁定时只能投票给相同（或更高）提案
   · 防止在同一高度提交两个不同区块
 ```
+
 > **来源**: [Tendermint Core Documentation](https://docs.tendermint.com/master/introduction/what-is-tendermint.html) · [Cosmos SDK](https://docs.cosmos.network/) · [Tendermint BFT Paper](https://arxiv.org/abs/1807.04938)
 
 ---
@@ -519,6 +532,7 @@ Precommit:
                       │         └── 否 → HotStuff ✅（线性通信优势）
                       └── 否 → 研究原型 → 任意 BFT ✅
 ```
+
 > **来源**: [Consensus in Blockchain](https://arxiv.org/abs/1904.04098) · [Comparing BFT Protocols](https://decentralizedthoughts.github.io/2019-06-23-what-is-the-difference-between/)
 
 ---
@@ -542,6 +556,7 @@ raft-rs 核心特性:
   · TiDB: 分布式 HTAP 数据库
   · dragonboat: 高性能多组 Raft（Raft 论文第 10 节）
 ```
+
 > **来源**: [raft-rs Documentation](https://docs.rs/raft/latest/raft/) · [TiKV Deep Dive](https://tikv.org/deep-dive/introduction/)
 
 ### 7.2 hotstuff-rs / tendermint-rs
@@ -574,6 +589,7 @@ async fn query_tendermint_consensus() -> anyhow::Result<()> {
     Ok(())
 }
 ```
+
 > **来源**: [tendermint-rs GitHub](https://github.com/informalsystems/tendermint-rs) · [Cosmos SDK Rust](https://github.com/cosmos/cosmos-rust)
 
 ---
@@ -612,6 +628,7 @@ async fn query_tendermint_consensus() -> anyhow::Result<()> {
 └── 根结论: ❌ 共识算法在网络分区或超过容错阈值时无法保证可用性。
            工程上通过监控、自动恢复和降级策略缓解。
 ```
+
 > **来源**: [CAP Theorem](https://en.wikipedia.org/wiki/CAP_theorem) · [Raft Dissertation](https://web.stanford.edu/~ouster/cgi-bin/papers/OngaroPhD.pdf) · [Byzantine Fault Tolerance](https://en.wikipedia.org/wiki/Byzantine_fault)
 
 ### 8.2 边界极限
@@ -653,6 +670,7 @@ async fn query_tendermint_consensus() -> anyhow::Result<()> {
 //   Candidate 在增加 Term 前，先发送 PreVote RPC
 //   若无法获得多数 PreVote，不增加 Term，避免干扰现有 Leader
 ```
+
 > **来源**: [Raft Pre-Vote](https://raft.github.io/raft.pdf) §9.6 · [Raft Thesis](https://web.stanford.edu/~ouster/cgi-bin/papers/OngaroPhD.pdf) §3.4
 
 ### 9.2 边界测试：Leader 崩溃后未提交的日志丢失（活性违反）
@@ -673,6 +691,7 @@ async fn query_tendermint_consensus() -> anyhow::Result<()> {
 //   2. 客户端使用唯一请求 ID，服务端去重
 //   3. 新 Leader 的选举限制：只有包含最新 committed 日志的节点才能成为 Leader
 ```
+
 > **来源**: [Raft Leader Election Restriction](https://raft.github.io/raft.pdf) §5.4.1 · [Raft Log Consistency](https://raft.github.io/raft.pdf) §5.3
 
 ### 9.3 边界测试：拜占庭节点发送矛盾消息（安全性违反）
@@ -696,6 +715,7 @@ async fn query_tendermint_consensus() -> anyhow::Result<()> {
 //   f=2 → n ≥ 7
 //   任何声称 f < n/3 不满足的系统都不安全
 ```
+
 > **来源**: [PBFT Safety Proof](https://pmg.csail.mit.edu/papers/osdi99.pdf) §4 · [Byzantine Fault Tolerance](https://en.wikipedia.org/wiki/Byzantine_fault)
 
 ---

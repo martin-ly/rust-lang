@@ -49,6 +49,7 @@ Rust 编译器（rustc）流水线:
 │  机器码 / WASM / 目标平台二进制                                  │
 └─────────────────────────────────────────────────────────────────┘
 ```
+
 ---
 
 ## 二、并行前端（Parallel Frontend）
@@ -86,6 +87,7 @@ cargo +nightly build -Z threads=8
 # 查看是否使用了并行前端:
 CARGO_BUILD_RUSTC_WRAPPER="" RUSTFLAGS="-Z threads=8" cargo build --verbose
 ```
+
 ---
 
 ## 三、Cranelift 后端
@@ -108,6 +110,7 @@ Cranelift 是 [Bytecode Alliance](https://bytecodealliance.org/) 开发的代码
 cargo build          # LLVM debug: 24s
 cargo build          # Cranelift debug: 8s  ← 3x 提速
 ```
+
 Cranelift 的提速来源：
 
 1. **简化 IR**: 基于 SSA 的轻量 IR，无需 LLVM 复杂的 Pass 管道
@@ -130,6 +133,7 @@ codegen-backend = true
 [profile.dev]
 codegen-backend = "cranelift"
 ```
+
 ### 3.4 与 LLVM 的互补关系
 
 ```text
@@ -137,6 +141,7 @@ codegen-backend = "cranelift"
             ↓
 CI/发布: LLVM → 极致优化
 ```
+
 ---
 
 ## 四、build-std（从源码构建标准库）
@@ -164,6 +169,7 @@ RUSTFLAGS="-Z build-std=core,alloc" cargo build --target x86_64-unknown-none
 # 与 Sanitizer 联用:
 RUSTFLAGS="-Z build-std -Z sanitizer=memory" cargo build --target x86_64-unknown-linux-gnu
 ```
+
 ### 4.3 限制与注意事项
 
 - **编译时间**: 从零构建 `std` 需额外 30-60 秒
@@ -190,6 +196,7 @@ RUSTFLAGS="-Z build-std -Z sanitizer=memory" cargo build --target x86_64-unknown
 Miri:     解释执行 → 检测所有 UB（最严格）→ 极慢 → 用于小代码验证
 Sanitizer: 编译期插桩 → 检测运行时可见的 UB → 中等开销 → 用于集成测试
 ```
+
 ### 5.3 实战示例
 
 ```bash
@@ -203,6 +210,7 @@ RUSTFLAGS="-Z sanitizer=thread" cargo test --target x86_64-unknown-linux-gnu
 RUSTFLAGS="-Z sanitizer=memory -Z build-std" \
   cargo test --target x86_64-unknown-linux-gnu
 ```
+
 ---
 
 ## 六、反命题与选型建议
@@ -220,6 +228,7 @@ RUSTFLAGS="-Z sanitizer=memory -Z build-std" \
     └─> 生产发布 (cargo build --release)
         └─> 必选 LLVM (LTO + 全优化 Pass)
 ```
+
 ### 6.2 build-std 适用场景
 
 - ✅ 自定义嵌入式目标
@@ -352,6 +361,7 @@ fn main() {
     println!("2 + 3 = {}", optimized_add(2, 3));
 }
 ```
+
 ### 反命题与边界
 
 > **反命题**: "Rust 编译器基础设施深度解析 是万能解决方案，适用于所有场景" —— 错误。任何技术选择都有权衡，需根据具体需求、团队能力与项目约束综合评估。

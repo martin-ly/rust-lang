@@ -32,6 +32,7 @@ Week 3: Concurrency & CLI Project (12h) [Required]
     ├─ Day 16: Building a CLI Tool (2h) [Required]
     └─ Day 17–18: Final Project + Review (4h) [Required]
 ```
+
 ---
 
 ## Week 1: Rust Fundamentals & Ownership (12h)

@@ -104,6 +104,7 @@
 async fn foo() -> i32 { 42 }
 // 等价于: fn foo() -> impl Future<Output = i32>
 ```
+
 **常见错误**: 在 `async` 块中使用阻塞 IO → 阻塞整个执行器线程
 **关联**: Future · Pin · Waker · Tokio
 **深入**: [`02_async.md`](../03_advanced/02_async.md)
@@ -136,6 +137,7 @@ async fn foo() -> i32 { 42 }
 let r = &x; let r2 = &x;     // ✅ 共享借用
 let r = &x; let r2 = &mut x; // ❌ E0502
 ```
+
 **关联**: 生命周期 · 分离逻辑 · 分数权限
 **深入**: [`02_borrowing.md`](../01_foundation/02_borrowing.md)
 
@@ -150,6 +152,7 @@ HttpRequestBuilder::new()
     .url("/")
     .build()  // 编译错误如果缺少必填字段
 ```
+
 **关联**: 消费型方法链 · 类型状态
 **深入**: [`02_patterns.md`](../06_ecosystem/02_patterns.md)
 
@@ -176,6 +179,7 @@ struct Point { x: i32, y: i32 }
 let p1 = Point { x: 1, y: 2 };
 let p2 = p1;  // p1 仍可用（Copy）
 ```
+
 **常见错误**: 为含 `String`/`Vec` 的类型实现 Copy → 编译错误 E0204
 **关联**: Move · Clone · 仿射逻辑 weakening
 **深入**: [`01_ownership.md`](../01_foundation/01_ownership.md)
@@ -201,6 +205,7 @@ impl Drop for MyType {
     fn drop(&mut self) { println!("Dropping!"); }
 }
 ```
+
 **常见错误**: `mem::forget` 或循环引用（Rc）会阻止 Drop 执行
 **关联**: RAII · 所有权 · 资源管理
 **深入**: [`01_ownership.md`](../01_foundation/01_ownership.md)
@@ -226,6 +231,7 @@ impl Drop for MyType {
 enum Option<T> { None, Some(T) }
 enum Result<T, E> { Ok(T), Err(E) }
 ```
+
 **常见错误**: `match` 未穷尽 → 编译错误 E0004
 **关联**: 模式匹配 · ADT · 和类型
 **深入**: [`04_type_system.md`](../01_foundation/04_type_system.md)
@@ -243,6 +249,7 @@ fn read_file(path: &str) -> Result<String, io::Error> {
     Ok(buf)
 }
 ```
+
 **关联**: Option · panic · Try trait
 **深入**: [`04_error_handling.md`](../02_intermediate/04_error_handling.md)
 
@@ -259,6 +266,7 @@ trait Future {
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
 }
 ```
+
 **关联**: async/await · Pin · Waker · Executor
 **深入**: [`02_async.md`](../03_advanced/02_async.md)
 
@@ -272,6 +280,7 @@ extern "C" {
     fn sqrt(x: f64) -> f64;
 }
 ```
+
 **常见错误**: ABI 不匹配、内存布局差异、未初始化的悬垂指针
 **关联**: unsafe · repr(C) · 内存布局
 **深入**: [`03_unsafe.md`](../03_advanced/03_unsafe.md)
@@ -287,6 +296,7 @@ extern "C" {
 fn identity<T>(x: T) -> T { x }
 // 单态化后生成: fn identity_i32(x: i32) -> i32 { x }
 ```
+
 **常见错误**: 过度泛化导致编译时间爆炸、二进制膨胀
 **关联**: Trait bounds · 单态化 · 参数性定理
 **深入**: [`02_generics.md`](../02_intermediate/02_generics.md)
@@ -302,6 +312,7 @@ trait LendingIterator {
     fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
 }
 ```
+
 **关联**: 关联类型 · 生命周期泛型 · HKT 模拟
 **深入**: [`02_generics.md`](../02_intermediate/02_generics.md)
 
@@ -334,6 +345,7 @@ fn make_iter() -> impl Iterator<Item = i32> {
     vec![1, 2, 3].into_iter()
 }
 ```
+
 **常见错误**: `impl Trait` 在 Trait 定义中不稳定（需 RPITIT）；不能作为结构体字段类型
 **关联**: dyn Trait · 存在类型 · 零成本抽象
 **深入**: [`04_type_system.md`](../01_foundation/04_type_system.md)
@@ -367,6 +379,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
 }
 ```
+
 **常见错误**: 返回局部变量的引用 → E0597
 **关联**: 借用 · 区域类型 · 子类型
 **深入**: [`03_lifetimes.md`](../01_foundation/03_lifetimes.md)
@@ -395,6 +408,7 @@ macro_rules! vec {
     }};
 }
 ```
+
 **常见错误**: 宏展开后的优先级问题（需用 `{}` 包裹）；递归宏深度溢出
 **关联**: 过程宏 · 卫生宏 · 元编程
 **深入**: [`04_macros.md`](../03_advanced/04_macros.md)
@@ -409,6 +423,7 @@ let s1 = String::from("hello");
 let s2 = s1;  // s1 被 move，之后不可用
 // println!("{}", s1); // E0382
 ```
+
 **关联**: Copy · Drop · 线性逻辑
 **深入**: [`01_ownership.md`](../01_foundation/01_ownership.md)
 
@@ -424,6 +439,7 @@ struct Meters(u32);
 struct Kilometers(u32);
 // Meters 和 Kilometers 是不同的类型，不能混用
 ```
+
 **关联**: 类型安全 · 零大小类型 · 封装
 **深入**: [`02_patterns.md`](../06_ecosystem/02_patterns.md)
 
@@ -446,6 +462,7 @@ struct Kilometers(u32);
 let x: Option<i32> = Some(5);
 let y = x.unwrap_or(0);  // 安全取值
 ```
+
 **关联**: Result · ? 运算符 · Monad
 **深入**: [`04_error_handling.md`](../02_intermediate/04_error_handling.md)
 
@@ -471,6 +488,7 @@ let y = x.unwrap_or(0);  // 安全取值
 let mut future = Box::pin(my_async_fn());
 let _ = future.as_mut().poll(cx);
 ```
+
 **常见错误**: `Unpin` 类型上 Pin 无实际约束；手动创建 Pin 需 unsafe
 **关联**: async · Future · 自引用 · !Unpin
 **深入**: [`02_async.md`](../03_advanced/02_async.md)
@@ -484,6 +502,7 @@ let _ = future.as_mut().poll(cx);
 struct MyPtr<T> { ptr: *mut (), _marker: PhantomData<T> }
 // 告诉编译器 MyPtr<T> 拥有 T 的 variance
 ```
+
 **关联**: 方差 · 类型标记 · 零大小类型
 **深入**: [`02_generics.md`](../02_intermediate/02_generics.md)
 
@@ -508,6 +527,7 @@ fn may_fail() -> Result<i32, String> {
 }
 let val = may_fail()?;  // ? 传播错误
 ```
+
 **关联**: Option · ? 运算符 · panic
 **深入**: [`04_error_handling.md`](../02_intermediate/04_error_handling.md)
 
@@ -551,6 +571,7 @@ let val = may_fail()?;  // ? 传播错误
 trait Drawable { fn draw(&self); }
 impl Drawable for Circle { fn draw(&self) { ... } }
 ```
+
 **关键限制**: Orphan Rule — 不能为外部类型实现外部 Trait
 **关联**: 泛型 · dyn Trait · 关联类型 · 特化
 **深入**: [`01_traits.md`](../02_intermediate/01_traits.md)
@@ -566,6 +587,7 @@ struct Closed; struct Open;
 impl Door<Closed> { fn open(self) -> Door<Open> { ... } }
 // 只有 Door<Closed> 能调用 open()
 ```
+
 **关联**: PhantomData · 泛型 · 编译期状态机
 **深入**: [`02_patterns.md`](../06_ecosystem/02_patterns.md)
 
@@ -582,6 +604,7 @@ unsafe {
     *raw_ptr = 42;  // 编译器不检查别名规则
 }
 ```
+
 **核心原则**: unsafe 块的安全性由程序员保证，但类型系统仍有效
 **关联**: 原始指针 · Miri · FFI · Safety Contract
 **深入**: [`03_unsafe.md`](../03_advanced/03_unsafe.md)
@@ -599,6 +622,7 @@ v.push(4);           // O(1) amortized
 let x = v[0];        // O(1)
 v.insert(1, 5);      // O(n)
 ```
+
 **常见错误**: `v[i]` 越界 → panic；迭代时修改 → 编译错误 E0499
 **关联**: Slice · 迭代器 · 集合类型
 **深入**: [`04_type_system.md`](../01_foundation/04_type_system.md)
@@ -619,6 +643,7 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
     Poll::Ready(self.result)
 }
 ```
+
 **关联**: Future · async · Executor · 协作式调度
 **深入**: [`02_async.md`](../03_advanced/02_async.md)
 
@@ -675,6 +700,7 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
       ├─ 泛型 → <T: Trait>
       └─ 编译期计算 → const generics / const fn
 ```
+
 [来源: [TRPL — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust Reference — Interior Mutability](https://doc.rust-lang.org/reference/interior-mutability.html)]
 
 ---

@@ -102,6 +102,7 @@ SQLx:
   │ 灵活性          │ 高              │ 中              │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **认知功能**: **SQLx 将数据库错误从运行时转移到编译期**——重构时编译器自动捕获失效查询。
 > [来源: [SQLx](https://github.com/launchbadge/sqlx)]
 
@@ -143,6 +144,7 @@ Diesel:
   ├── diesel migration run
   └── 版本化数据库变更
 ```
+
 > **Diesel 洞察**: **Diesel 是 Rust ORM 的标杆**——编译期保证查询正确性，无需运行时验证。
 > [来源: [Diesel](https://diesel.rs/)]
 
@@ -185,6 +187,7 @@ SeaORM:
   │ 生态成熟度      │ 高              │ 中              │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **SeaORM 洞察**: **SeaORM 是 Rust 异步（Async） ORM 的首选**——牺牲了部分类型安全换取开发效率。
 > [来源: [SeaORM](https://www.sea-ql.org/SeaORM/)] · [来源: [Tokio Docs](https://tokio.rs/)]
 
@@ -239,6 +242,7 @@ Toasty:
   │ 官方背景        │ 社区            │ 社区            │ Tokio 团队      │
   └─────────────────┴─────────────────┴─────────────────┴─────────────────┘
 ```
+
 > **Toasty 洞察**: **Toasty 是 Rust ORM 的"官方级"尝试**——由 Tokio 团队主导，定位为"应用级查询引擎"而非纯 SQL 生成器。应用 Schema 与数据库 Schema 解耦的设计使其能统一 SQL 和 NoSQL 语义，但 API 尚未稳定（0.x 阶段），不建议用于生产关键系统。
 > [来源: [Tokio Blog — Toasty Released](https://tokio.rs/blog/2026-04-03-toasty-released)] · [来源: [Toasty GitHub](https://github.com/tokio-rs/toasty)] · [来源: [Toasty crates.io](https://crates.io/crates/toasty)]
 
@@ -273,6 +277,7 @@ Toasty:
   ├── 离线模式: sqlx-data.json
   └── CI/CD 考虑
 ```
+
 > **SQL 洞察**: **原始 SQL 提供最大灵活性**——SQLx 的编译期检查保证了安全性。
 > [来源: [SQLx Queries](https://docs.rs/sqlx/latest/sqlx/macro.query.html)]
 
@@ -307,6 +312,7 @@ Toasty:
   ├── IDE 支持
   └── 重构安全
 ```
+
 > **构建器洞察**: **查询构建器在类型安全和灵活性之间取得平衡**——适合大多数 CRUD 场景。
 > [来源: [Diesel Queries](https://diesel.rs/guides/getting-started.html)]
 
@@ -341,6 +347,7 @@ Toasty:
   ├── 版本控制
   └── 环境一致性
 ```
+
 > **迁移洞察**: **迁移管理是生产数据库的核心**——所有主要 ORM 都提供成熟的迁移工具。
 > [来源: [Diesel Migrations](https://diesel.rs/guides/getting-started/)]
 
@@ -378,6 +385,7 @@ Toasty:
   ├── 连接数过少导致等待
   └── 根据负载调优
 ```
+
 > **连接池洞察**: **连接池是数据库访问的必备组件**——正确配置直接影响系统吞吐量。
 > [来源: [SQLx Pool](https://docs.rs/sqlx/latest/sqlx/pool/struct.Pool.html)]
 
@@ -420,6 +428,7 @@ Toasty:
   ├── Repeatable Read
   └── Serializable
 ```
+
 > **事务洞察**: **事务保证数据一致性（Coherence）**——Rust 的类型系统（Type System）确保事务不会意外提交。
 > [来源: [SQLx Transactions](https://docs.rs/sqlx/latest/sqlx/struct.Transaction.html)]
 
@@ -443,6 +452,7 @@ graph TD
     style SQL fill:#c8e6c9
     style ORM fill:#c8e6c9
 ```
+
 > **认知功能**: **ORM 适合 CRUD，原始 SQL 适合复杂查询**——两者互补使用。
 > [来源: [SQLx vs ORM](https://github.com/launchbadge/sqlx)]
 
@@ -476,6 +486,7 @@ graph TD
 ├── 设置和清理开销
 └── 缓解: 使用 sqlx::test, testcontainers
 ```
+
 > **边界要点**: 数据库访问的边界与**编译时间**、**动态查询**、**数据库特性**、**连接管理**和**测试**相关。
 > [来源: [Rust Database Guide](https://rust-lang-nursery.github.io/rust-cookbook/database.html)]
 
@@ -531,6 +542,7 @@ graph TD
          query.fetch_one(&mut conn).await?
      }; // conn 在这里释放
 ```
+
 > **陷阱总结**: 数据库访问的陷阱主要与**N+1**、**连接泄漏**、**类型**、**NULL**和**连接池**相关。
 > [来源: [SQLx Best Practices](https://docs.rs/sqlx/latest/sqlx/)]
 
@@ -556,6 +568,7 @@ fn main() {
     println!("{:?}", data);
 }
 ```
+
 ### 编译验证示例
 
 ```rust
@@ -568,6 +581,7 @@ fn main() {
     println!("{:?}", names);
 }
 ```
+
 ```rust
 fn main() {
     let mut conn = std::collections::HashMap::new();
@@ -576,6 +590,7 @@ fn main() {
     println!("{:?}", conn.get("user"));
 }
 ```
+
 ## 相关概念文件
 
 - [Async](../03_advanced/02_async.md) — 异步编程
@@ -636,6 +651,7 @@ async fn good_query(pool: &sqlx::SqlitePool) -> Result<(), sqlx::Error> {
     Ok(())
 }
 ```
+
 > **修正**: SQLx 的宏（Macro）（`query!`、`query_as!`）在编译期解析 SQL 并验证返回类型与数据库 schema 的一致性（Coherence）。若类型不匹配，编译错误而非运行时 panic。这是 Rust"将错误提前到编译期"哲学在数据库访问层的典型应用。与 Go/Java 的运行时反射映射相比，SQLx 提供零开销、类型安全的查询接口。编译期验证要求开发时数据库可访问（或使用 `sqlx-data.json` 离线模式），这是类型安全的代价。来源: [SQLx Documentation]
 
 ### 10.2 边界测试：连接池的生命周期管理（编译错误）
@@ -653,6 +669,7 @@ async fn fetch_data(pool: &SqlitePool) -> Result<String, sqlx::Error> {
     Ok(row.name) // ✅ 返回所有权
 }
 ```
+
 > **修正**: 数据库查询返回的行数据通常引用（Reference）连接池内部缓冲区。在 Rust 中，这些引用不能逃离异步函数——它们的生命周期（Lifetimes）与连接租用期绑定。正确做法是返回拥有所有权（Ownership）的值（`String`、`Vec<u8>`），而非引用。这与 Go 的 `sql.Rows.Scan`（复制到变量）或 Java 的 `ResultSet.getString`（返回新字符串）类似，但 Rust 的类型系统（Type System）显式追踪生命周期，阻止悬垂引用。连接池的租用-归还模式通过 RAII 自动管理，防止连接泄漏。来源: [SQLx Documentation]
 
 ### 10.6 边界测试：连接池的 `deadlock` 与异步等待（运行时死锁）
@@ -673,6 +690,7 @@ async fn nested_query(pool: &SqlitePool) -> Result<(), sqlx::Error> {
     Ok(())
 }
 ```
+
 > **修正**: 数据库连接池的**死锁**是常见生产问题：事务持有连接不放，同时尝试从池中获取新连接。若池大小为 N，并发事务数 ≥ N 时，所有事务等待新连接，但无连接可用——死锁。Rust 的 `sqlx` 和 `deadpool` 不提供自动死锁检测，需开发者避免：1) 在事务内只使用事务对象（`&mut tx`），不直接从 pool 获取连接；2) 限制并发事务数（`tokio::sync::Semaphore`）；3) 设置连接获取超时（`pool.acquire().timeout(...)`）。这与 Java 的 HikariCP（同样可能死锁）或 Go 的 `sql.DB`（连接管理在标准库，但死锁仍可能发生）类似——连接池死锁是通用问题，Rust 的类型系统不自动预防，但编译期查询检查减少了 SQL 错误。[来源: [sqlx Documentation](https://docs.rs/sqlx/)] · [来源: [Database Connection Pool Patterns](https://docs.oracle.com/en/database/oracle/oracle-database/19/jjucp/)]
 
 ### 10.5 边界测试：连接池耗尽与异步等待超时（运行时超时/崩溃）
@@ -691,6 +709,7 @@ async fn query(pool: &sqlx::PgPool) {
 // 若连接池大小 = 10，并发请求 = 100，90 个请求排队
 // 若无超时配置，可能永远等待
 ```
+
 > **修正**: 数据库连接池（`sqlx`、`deadpool`、`bb8`）管理有限的数据库连接资源。**池耗尽**（pool exhaustion）是高并发系统的常见问题：1) 连接未正确释放（忘记 `drop` guard、长事务）；2) 池大小配置过小（`max_connections = 10` 对应 1000 QPS）；3) 慢查询占用连接过久。`sqlx` 的 `acquire_timeout` 配置获取连接的超时，防止无限等待。异步 Rust 的特殊风险：`await` 持有连接 guard 跨越 await 点 → 其他任务无法获取连接 → 死锁。安全模式：在最小作用域内使用连接，或在 `async` 块开始时获取，结束前释放。这与 Go 的 `sql.DB`（内置连接池，默认无上限）或 Java 的 HikariCP（类似配置）不同——Rust 的显式生命周期使连接泄漏更难发生，但 async/await 引入了新的持有模式。[来源: [sqlx Documentation](https://docs.rs/sqlx/)] · [来源: [PostgreSQL Connection Pooling](https://wiki.postgresql.org/wiki/PgBouncer)]
 
 ### 10.3 边界测试：连接池的 `deadpool` 与 async 生命周期（运行时超时/崩溃）
@@ -708,6 +727,7 @@ async fn query(pool: &Pool) -> Result<String, Box<dyn std::error::Error>> {
 
 fn main() {}
 ```
+
 > **修正**: Async 数据库连接池（`deadpool`、`sqlx::Pool`、`bb8`）的管理：1) `pool.get().await` 获取连接，连接 guard 在 drop 时归还；2) 连接跨越多个 `await` 点 → 长时间占用，可能导致池耗尽；3) 慢查询阻塞连接 → 其他请求等待超时。优化：1) 最小作用域使用连接（`{ let client = pool.get().await?; ... }`）；2) 设置 `acquire_timeout`（获取连接的超时）；3) 设置 `max_connections`（根据数据库容量）；4) 使用连接池的 `statement cache` 减少准备开销。`sqlx` 的 compile-time checked queries 是 Rust 数据库访问的独特优势——SQL 在编译期验证，避免运行时语法错误。这与 Go 的 `sql.DB`（内置连接池，默认无上限）或 Java 的 HikariCP（类似配置）不同——Rust 的显式生命周期使连接泄漏更难发生，但 async/await 引入了新的持有模式。[来源: [deadpool](https://docs.rs/deadpool/)] · [来源: [sqlx](https://docs.rs/sqlx/)]
 > **过渡**: Rust 数据库访问生态 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 数据库访问生态 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

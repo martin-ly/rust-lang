@@ -72,6 +72,7 @@ mindmap
       instanceOf[instanceOf<br/>实例归属]
       appliesTo[appliesTo<br/>规则适用]
 ```
+
 > **认知功能**: 本 mindmap 展示知识图谱的**双层结构**——实体类型定义"有什么"，关系类型定义"如何连"。这与 `concept_index.md` 的倒排索引形成互补：索引回答"在哪找"，本体回答"是什么关系"。[来源: 💡 原创分析]
 
 ---
@@ -126,6 +127,7 @@ mindmap
 | instanceOf | ❌ 否 | ❌ 否 | ❌ 否 | Property → Concept / Rule → Concept |
 | appliesTo | ❌ 否 | ❌ 否 | ❌ 否 | Rule → Concept / Rule → Property |
 ```
+
 ---
 
 ## 四、三元组实例
@@ -153,6 +155,7 @@ ex:Lifetimes  ex:equivalentTo   ex:RegionTypes .
 ex:OwnershipUniqueness  ex:counterExample  ex:Rc .
 ex:OwnershipUniqueness  ex:counterExample  ex:Arc .
 ```
+
 ### L2 进阶概念层三元组
 
 ```turtle
@@ -172,6 +175,7 @@ ex:SmartPointer  ex:dependsOn   ex:Ownership .
 ex:Pin           ex:dependsOn   ex:Borrowing .
 ex:Pin           ex:mutexWith   ex:Move .
 ```
+
 ### L3 高级概念层三元组
 
 ```turtle
@@ -190,6 +194,7 @@ ex:Future       ex:equivalentTo ex:CPS .
 ex:UnsafeRust   ex:mutexWith    ex:CompilerGuarantee .
 ex:UnsafeRust   ex:counterExample  ex:SafeRust_Soundness .
 ```
+
 ### L4 形式化层三元组
 
 ```turtle
@@ -208,6 +213,7 @@ ex:RustBelt     ex:entails      ex:ThreadSafety .
 ex:Kani         ex:refines      ex:Miri .
 ex:Creusot      ex:refines      ex:Kani .
 ```
+
 ---
 
 ## 五、知识图谱可视化
@@ -251,6 +257,7 @@ graph TD
     AXM[r:AXM] -->|appliesTo| B
     OR[r:OrphanRule] -->|appliesTo| TR
 ```
+
 > **认知功能**: 本图将 `concept/` 的核心概念网络用**显式关系类型**重新绘制。与 `inter_layer_map.md` 的区别：后者使用颜色和箭头样式隐含关系类型，本图直接在边上标注关系名，支持精确的语义查询（如"找出所有 dependsOn 关系"）。[来源: 💡 原创分析]
 
 ---
@@ -298,6 +305,7 @@ ex:Borrowing rdf:type ex:Concept ;
     ex:counterExample ex:UnsafeCell ;
     ex:definedIn <https://doc.rust-lang.org/reference/lifetime-elision.html> .
 ```
+
 ### JSON-LD 格式示例
 
 ```json
@@ -319,6 +327,7 @@ ex:Borrowing rdf:type ex:Concept ;
   "ex:aspMarker": {"@id": "ex:S"}
 }
 ```
+
 ---
 
 ## 八、来源与可信度

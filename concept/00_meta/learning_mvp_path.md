@@ -39,6 +39,7 @@ Week 2: 并发与工程化（20h）
 ├─ Day 12-13: 异步基础                  [6h]  🟡
 └─ Day 14:   综合项目：多线程/异步 CLI  [4h]  🔴
 ```
+
 ### 必修/选修快速对照
 
 | 模块 | 类型 | 对应 L3 测验 | TRPL 3rd Ed 章节 |
@@ -264,6 +265,7 @@ cargo test --test l3_advanced_systems
 cargo test --test l3_async_concurrency
 cargo test --test l3_ecosystem_alignment
 ```
+
 ---
 
 ## 扩展路径

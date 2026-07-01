@@ -107,6 +107,7 @@ ECS 调度器                    特定系统和组件
 
 关键原则: 引擎不假设游戏类型；游戏不依赖引擎内部实现
 ```
+
 > **来源**: [Game Engine Architecture Book](https://www.gameenginebook.com/) ·
 > [Game Programming Patterns](https://gameprogrammingpatterns.com/)
 
@@ -137,6 +138,7 @@ ECS 调度器                    特定系统和组件
 │  └───────────────────────────────────────────────┘          │
 └─────────────────────────────────────────────────────────────┘
 ```
+
 > **来源**: [Game Engine Architecture — Jason Gregory](https://www.gameenginebook.com/) ·
 > [Bevy Engine Architecture](https://bevyengine.org/learn/book/)
 
@@ -198,6 +200,7 @@ while running:
   · 物理使用固定步长（避免确定性问题）
   · 渲染插值物理状态（视觉平滑）
 ```
+
 ```rust,ignore
 // Rust 中的游戏主循环骨架
 use winit::event::{Event, WindowEvent};
@@ -245,6 +248,7 @@ fn game_loop(event_loop: EventLoop<()>, mut app: App) {
     });
 }
 ```
+
 > **来源**: [Game Programming Patterns — Game Loop](https://gameprogrammingpatterns.com/game-loop.html) ·
 > [Fix Your Timestep! — Gaffer On Games](https://gafferongames.com/post/fix_your_timestep/)
 
@@ -286,6 +290,7 @@ impl Engine {
     }
 }
 ```
+
 > **来源**: [Bevy Subsystem Design](https://bevyengine.org/learn/book/) ·
 > [Rust Ownership for Engine Architecture](https://docs.rs/bevy/latest/bevy/)
 
@@ -343,6 +348,7 @@ fn main() {
     }
 }
 ```
+
 > **来源**: [Bevy ECS Guide](https://bevyengine.org/learn/book/) ·
 > [bevy_ecs crate](https://docs.rs/bevy_ecs/latest/bevy_ecs/)
 
@@ -376,6 +382,7 @@ Vulkan 核心概念:
   · Descriptor Set: 资源绑定（UBO、纹理、采样器）
   · Swapchain: 双/三缓冲呈现
 ```
+
 > **来源**: [Vulkan Tutorial](https://vulkan-tutorial.com/) ·
 > [Vulkan Spec](https://www.khronos.org/registry/vulkan/specs/1.3/html/vkspec.html) ·
 > [Learning Modern 3D Graphics Programming](https://paroj.github.io/gltut/)
@@ -449,6 +456,7 @@ fn render_frame(
     output.present();
 }
 ```
+
 **wgpu 的安全保证**:
 
 | **错误类别** | **传统 Vulkan/C++** | **wgpu/Rust** |
@@ -493,6 +501,7 @@ fn render_frame(
 Forward Rendering:    直接计算最终颜色（简单，透明友好）
 Deferred Rendering:   先写 G-Buffer，后光照计算（大量光源时更优）
 ```
+
 > **来源**: [Real-Time Rendering — Chapter 2](https://www.realtimerendering.com/) ·
 > [Learn OpenGL — Rendering Pipeline](https://learnopengl.com/Getting-started/Hello-Triangle)
 
@@ -559,6 +568,7 @@ fn physics_step(
     );
 }
 ```
+
 **Rapier 特性矩阵**:
 
 | **特性** | **支持** | **说明** |
@@ -605,6 +615,7 @@ impl PhysicsSync {
     }
 }
 ```
+
 > **来源**: [Fix Your Timestep!](https://gafferongames.com/post/fix_your_timestep/) ·
 > [Rapier Interpolation](https://rapier.rs/docs/user_guides/rust/advanced_collision_detection#continuous-collision-detection)
 
@@ -630,6 +641,7 @@ PCM 样本流
                                              ▼
                                         音频输出 (OS 音频后端)
 ```
+
 > **来源**: [Game Audio Programming](https://api.pageplace.de/preview/DT0400.9781498746748_A28523397/preview-9781498746748_A28523397.pdf) ·
 > [OpenAL Specification](https://www.openal.org/documentation/)
 
@@ -670,6 +682,7 @@ fn spatial_audio_example() {
     // rodio 本身不直接支持 HRTF，需配合 ears/OpenAL 或自定义 DSP
 }
 ```
+
 > **来源**: [rodio Documentation](https://docs.rs/rodio/latest/rodio/) ·
 > [cpal Documentation](https://docs.rs/cpal/latest/cpal/) ·
 > [symphonia GitHub](https://github.com/pdeljanov/Symphonia)
@@ -731,6 +744,7 @@ impl AssetServer {
     }
 }
 ```
+
 > **来源**: [Bevy Asset System](https://bevyengine.org/learn/book/) ·
 > [Tokio Async I/O](https://docs.rs/tokio/latest/tokio/fs/index.html)
 
@@ -772,6 +786,7 @@ impl HotReloader {
     }
 }
 ```
+
 > **来源**: [notify crate](https://docs.rs/notify/latest/notify/) ·
 > [Bevy Hot Reloading](https://bevyengine.org/learn/book/)
 
@@ -814,6 +829,7 @@ struct InputSync {
     inputs: HashMap<PlayerId, PlayerInput>,
 }
 ```
+
 > **来源**: [Source Multiplayer Networking](https://developer.valvesoftware.com/wiki/Source_Multiplayer_Networking) ·
 > [Quake 3 Networking Model](https://fabiensanglard.net/quake3/network.php) ·
 > [GGPO Rollback](https://www.ggpo.net/)
@@ -839,6 +855,7 @@ struct InputSync {
   · 收到服务器纠正时，回滚到对应帧
   · 重放从该帧到当前帧的所有本地输入
 ```
+
 > **来源**: [Client-Side Prediction — Gabriel Gambetta](https://www.gabrielgambetta.com/client-side-prediction-live-demo.html) · [GGPO Rollback Netcode](https://github.com/pond3r/ggpo)
 
 ---
@@ -880,6 +897,7 @@ struct InputSync {
 └── 根结论: ❌ ECS 是高性能大规模场景的优秀选择，但不是银弹。
            好的引擎应支持多种架构模式（Bevy 的 ECS + 传统节点树）。
 ```
+
 > **来源**: [Bevy ECS Design](https://bevyengine.org/learn/book/) ·
 > [OOP vs ECS — Martin Cave](https://www.gamedeveloper.com/programming/oop-is-dead-long-live-ecs) ·
 > [Game Programming Patterns](https://gameprogrammingpatterns.com/)
@@ -928,6 +946,7 @@ fn good_multithreaded_rendering(device: &wgpu::Device) {
     queue.submit(vec![command_buffer]);
 }
 ```
+
 > **来源**: [wgpu CommandEncoder](https://docs.rs/wgpu/latest/wgpu/struct.CommandEncoder.html) ·
 > [wgpu Multithreading](https://github.com/gfx-rs/wgpu/wiki/Encoders,-Command-Buffers,-and-Queues)
 
@@ -957,6 +976,7 @@ fn good_update(delta_time: f32, accumulator: &mut f32, physics: &mut PhysicsWorl
     // accumulator / FIXED_DT = 插值因子，用于渲染平滑
 }
 ```
+
 > **来源**: [Fix Your Timestep!](https://gafferongames.com/post/fix_your_timestep/) ·
 > [Rapier Fixed Timestep](https://rapier.rs/docs/user_guides/rust/common_mistakes#using-a-variable-timestep)
 
@@ -989,6 +1009,7 @@ enum AssetState {
     Failed(String),
 }
 ```
+
 > **来源**: [Bevy Asset Loading](https://bevyengine.org/learn/book/) ·
 > [Error Handling in Rust](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
 

@@ -92,6 +92,7 @@ C++ ABI Object Model（FFI 必备）
     ↓
 RTTI / Friend / Preprocessor（逐个主题扫尾）
 ```
+
 ### 路径 B：按问题域切入
 
 | 你来自 C++ 的哪个领域 | 起点 | 延伸阅读 |

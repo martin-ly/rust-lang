@@ -116,6 +116,7 @@ WfMC 工作流参考模型（1995）:
   │ 应用    │   │ 引擎        │   │ (XPDL/BPMN) │
   └─────────┘   └─────────────┘   └──────────────┘
 ```
+
 > **来源**: [WfMC — Reference Model](https://wfmc.org/public-documents/) ·
 > [来源: [Milner — π-Calculus](https://www.amazon.com/Communicating-Mobile-Systems-Calculus-Cambridge/dp/0521658691)] · [来源: [Clarke & Emerson 1981](https://dl.acm.org/doi/10.1145/567446.567462)]
 > [WfMC — XPDL](https://www.wfmc.org/standards/xpdl)
@@ -175,6 +176,7 @@ where F: FnMut() -> Fut, Fut: Future<Output = Result<Output>>
     }
 }
 ```
+
 > **来源**: [WfMC — Workflow Patterns](http://www.workflowpatterns.com/) ·
 > [来源: [Plotkin — SOS](https://homepages.inf.ed.ac.uk/gdp/publications/sos_jlap.pdf)] · [来源: [Rust async-book](https://rust-lang.github.io/async-book/)]
 > [van der Aalst — Process Mining](https://www.springer.com/gp/book/9783662498507)
@@ -200,6 +202,7 @@ BPMN 元素          Petri 网               π 演算               LTL
 消息流            外部库所               通道通信 x⟨y⟩         ◇(sent → ◇received)
 池/泳道           子网                   限制 νx.P             □(role → ◇action)
 ```
+
 > **来源**: [OMG BPMN 2.0](https://www.omg.org/spec/BPMN/2.0/) ·
 > [Dijkman 2008 — BPMN to Petri Nets](https://www.researchgate.net/publication/220659968_Semantics_and_analysis_of_business_process_models_in_BPMN) ·
 > [Wong & Gibbons 2008](https://doi.org/10.1007/978-3-540-89743-1_8)
@@ -246,6 +249,7 @@ BPMN 示例: 订单审批流程
                │
            [发货] → [End]
 ```
+
 ```rust,ignore
 // Rust 中的工作流图表示
 #[derive(Debug, Clone)]
@@ -313,6 +317,7 @@ impl WorkflowGraph {
     }
 }
 ```
+
 > **来源**: [WfMC — XPDL](https://www.wfmc.org/standards/xpdl) ·
 > [Workflow Patterns — Control Flow](http://www.workflowpatterns.com/patterns/control/)
 
@@ -335,6 +340,7 @@ impl WorkflowGraph {
   Failed ──retry()──→ Ready
   Completed ──next()──→ Ready(下一个节点)
 ```
+
 ```rust,ignore
 // Rust 中的工作流状态机
 #[derive(Debug, Clone, PartialEq)]
@@ -400,6 +406,7 @@ enum Action {
     Retry,
 }
 ```
+
 > **来源**: [Workflow Patterns — State Patterns](http://www.workflowpatterns.com/patterns/state/) · [van der Aalst — Workflow Management](https://www.springer.com/gp/book/9783540761942)
 
 ### 3.3 执行语义
@@ -429,6 +436,7 @@ W₁ ↓ s₁    W₂ ↓ s₂
 ─────────────────── [Parallel]
 W₁ ∥ W₂ ↓ (s₁, s₂)
 ```
+
 > **来源**: [Plotkin — Structural Operational Semantics](https://homepages.inf.ed.ac.uk/gdp/publications/sos_jlap.pdf) · [Winskel — The Formal Semantics of Programming Languages](https://mitpress.mit.edu/9780262731034/the-formal-semantics-of-programming-languages/)
 
 ---
@@ -451,6 +459,7 @@ Rust 的 `async/await` 与工作流模型存在**结构同构**（Structural Iso
   超时          ↔   tokio::time::timeout
   补偿事务      ↔   Drop guard / scope guard
 ```
+
 ```rust
 // 工作流 = 异步函数的复合
 
@@ -490,6 +499,7 @@ where G: FnMut() -> bool, W: FnMut() -> Future<Output = Result<T>>
     Ok(())
 }
 ```
+
 > **来源**: [Rust async-book](https://rust-lang.github.io/async-book/) · [Tokio — Combinators](https://docs.rs/tokio/latest/tokio/macro.join.html)
 
 ### 4.2 类型系统映射
@@ -527,6 +537,7 @@ where
 // 编译期保证：顺序组合要求 W1 的输出类型 = W2 的输入类型
 // Sequential<W1, W2> 仅在 T1(W1::Output) == T1(W2::Input) 时编译通过
 ```
+
 > **类型系统保证的工作流性质**:
 >
 > - **输入输出匹配**: 顺序组合时，编译器检查前驱的输出类型与后继的输入类型一致
@@ -582,6 +593,7 @@ impl Future for OrderWorkflowState {
     }
 }
 ```
+
 > **来源**: [Rust async-book — Under the Hood](https://rust-lang.github.io/async-book//01_getting_started/04_async_await_primer.html) · [Rust Reference — Generators](https://doc.rust-lang.org/reference/items/functions.html#generator-functions)
 
 ---
@@ -607,6 +619,7 @@ impl Future for OrderWorkflowState {
   激发后新标识 M':
   M'(p) = M(p) - W(p, t) + W(t, p)  （消耗输入 token，产生输出 token）
 ```
+
 ```rust,ignore
 // Petri 网工作流引擎的 Rust 实现
 #[derive(Debug, Clone, Hash, Eq, PartialEq)]
@@ -684,6 +697,7 @@ impl PetriNet {
     }
 }
 ```
+
 > **Petri 网的验证能力**:
 >
 > - **可达性**（Reachability）: 从初始标识能否到达目标标识？→ BFS/DFS
@@ -720,6 +734,7 @@ impl PetriNet {
   子流程创建  → 限制 νx.P
   循环        → 复制 !P
 ```
+
 ```rust,ignore
 // π 演算进程的 Rust 表示（教育性实现）
 #[derive(Debug, Clone)]
@@ -774,6 +789,7 @@ impl PiProcess {
     }
 }
 ```
+
 > **π 演算的验证能力**:
 >
 > - **强互模拟**（Strong Bisimulation）: 两个进程是否行为等价？
@@ -805,6 +821,7 @@ LTL 语法:
 
   LTL 只量化单条路径，无前缀 A/E
 ```
+
 | **性质类别** | **CTL 公式** | **LTL 公式** | **工作流含义** |
 |:---|:---|:---|:---|
 | **可达性** | `EF completed` | `F completed` | 工作流最终完成 |
@@ -882,6 +899,7 @@ fn backward_reachability(seed: &HashSet<usize>, transitions: &[(usize, usize)]) 
     result
 }
 ```
+
 > **来源**: [Clarke & Emerson 1981](https://dl.acm.org/doi/10.1145/567446.567462) · [Queille & Sifakis 1982](https://dl.acm.org/doi/10.1109/TSE.1982.235252) · [Pnueli 1977 — The Temporal Logic of Programs](https://ieeexplore.ieee.org/document/4567924)
 
 ---
@@ -905,6 +923,7 @@ fn backward_reachability(seed: &HashSet<usize>, transitions: &[(usize, usize)]) 
 │ · 版本管理   │ · 超时管理   │ · 历史归档   │ · 告警规则   │
 └──────────────┴──────────────┴──────────────┴──────────────┘
 ```
+
 ```rust,ignore
 // Rust 工作流引擎骨架
 pub struct WorkflowEngine {
@@ -937,6 +956,7 @@ pub struct WorkflowEvent {
     pub timestamp: DateTime<Utc>,
 }
 ```
+
 > **来源**: [WfMC — Reference Model](https://wfmc.org/public-documents/) · [Temporal — Workflow Engine](https://docs.temporal.io/)
 
 ### 6.2 分布式执行模型
@@ -964,6 +984,7 @@ pub struct WorkflowEvent {
   中心化: 一致性好、单点故障、扩展受限
   去中心化: 高可用、最终一致、复杂度高
 ```
+
 ```rust
 // 去中心化工作流：基于事件总线的状态同步
 use tokio::sync::broadcast;
@@ -1003,6 +1024,7 @@ impl DistributedWorkflowWorker {
     }
 }
 ```
+
 > **来源**: [Temporal — Distributed Execution](https://docs.temporal.io/clusters) · [Cadence — Uber's Workflow Engine](https://cadenceworkflow.io/)
 
 ### 6.3 故障恢复
@@ -1037,6 +1059,7 @@ async fn recover_workflow(
     Ok(state)
 }
 ```
+
 > **来源**: [Sagas Pattern](https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/saga/saga) · [Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html)
 
 ---
@@ -1075,6 +1098,7 @@ async fn recover_workflow(
 │   └── 环境假设：验证假设的环境条件可能不成立
 └── 根结论: ❌ 形式化验证提高置信度，但不能替代测试和监控
 ```
+
 > **来源**: [来源: [van der Aalst — Process Mining](https://www.springer.com/gp/book/9783662498507)]
 
 ### 7.2 边界极限
@@ -1120,6 +1144,7 @@ impl WorkflowState {
     }
 }
 ```
+
 > **修正**: 使用 exhaustive match 确保所有状态转换都被覆盖：
 >
 > ```rust
@@ -1160,6 +1185,7 @@ fn bad_reachability_analysis() {
 //                            ↓
 //                        P_end
 ```
+
 > **修正**: **工作流网（Workflow Net）**应满足以下结构约束以避免无界性：
 >
 > 1. 有且仅有一个源库所（source place）和一个汇库所（sink place）
@@ -1204,6 +1230,7 @@ async fn unbounded_backoff() -> Result<Output> {
     }
 }
 ```
+
 > **修正**: 工作流循环必须同时满足：
 >
 > 1. **最大重试次数**: `if attempt >= MAX_RETRIES { return Err(...) }`

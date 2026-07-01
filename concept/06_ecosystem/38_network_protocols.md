@@ -65,6 +65,7 @@ QUIC 长包头结构:
  |                          Payload (*)                          |
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ```
+
 > **关键洞察**: QUIC 的包号是**单调递增**的（即使重传也用新包号），这与 TCP 的"重传相同序列号"根本不同。这使得 QUIC 可以精确测量 RTT（无重传歧义），也是 Rust 实现中状态机设计的核心约束。[来源: [RFC 9000](https://www.rfc-editor.org/info/rfc9000) §12.3] ✅
 
 ### 1.3 Rust 实现：quinn
@@ -94,6 +95,7 @@ impl Connection {
     }
 }
 ```
+
 > **关键洞察**: quinn 的设计中，**流（Stream）**的所有权（Ownership）模型与 Rust 的 `mpsc::channel` 同构——发送端（`SendStream`）和接收端（`RecvStream`）分离，各自独立关闭。这种设计自然映射到 QUIC 的"流独立传输"语义：一个流的丢包不影响其他流。[来源: quinn Documentation] ✅
 
 ---
@@ -126,6 +128,7 @@ QPACK 解决:
   2. 每个 header block 显式引用动态表条目（通过索引）
   3. 若引用的条目未收到，stream 独立阻塞（不影响其他 stream）
 ```
+
 > **关键洞察**: QPACK 的设计体现了 QUIC"流独立"的哲学——即使头部压缩（通常是有全局状态的）也被拆分为独立的流。这与 Rust 的所有权模型有有趣的映射：动态表的更新是"共享状态"（`&mut`），但每个流的头部解码是"独立计算"（`&`），通过显式索引（类似 `Rc::clone`）引用（Reference）共享状态。来源: [RFC 9204](https://datatracker.ietf.org/doc/html/rfc9204) ✅
 
 ---
@@ -144,6 +147,7 @@ eBPF 程序类型:
   - Sockops: 套接字操作优化
   - LSM（Linux Security Module）: 安全策略
 ```
+
 ### 3.2 Rust + eBPF：aya-rs
 
 ```rust
@@ -171,6 +175,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 ### 3.3 Rust 实现 eBPF 的独特优势
 
 | 维度 | Rust（aya-rs） | C（libbpf） | Go（cilium/ebpf） |
@@ -241,6 +246,7 @@ async fn quic_stream_split(stream: (SendStream, RecvStream)) {
     });
 }
 ```
+
 > **修正**: QUIC 流的发送端和接收端各自独立，需确保它们实现 `Send` 才能在任务间传递。
 
 ### 编译错误 2：eBPF 程序类型约束
@@ -256,6 +262,7 @@ fn load_ebpf() {
     };
 }
 ```
+
 > **修正**: eBPF 程序必须用 `#[aya::ebpf]` 宏（Macro）标记，编译为 `bpfel-unknown-none` 目标，然后通过 `aya` 加载到内核。
 
 ### 编译错误 3：async fn 在 const fn 中调用
@@ -269,6 +276,7 @@ const fn network_setup() {
     async_connect();
 }
 ```
+
 > **修正**: `const fn` 仅支持编译期可求值操作。异步网络操作必须在运行时通过 async runtime 执行。
 
 ### 编译错误 4：QUIC 连接的生命周期与所有权转移（编译错误）
@@ -291,6 +299,7 @@ async fn handle_conn_fixed(conn: Connection) {
     let (mut send2, mut recv2) = conn2.open_bi().await.unwrap();
 }
 ```
+
 > **修正**: Quinn（Rust QUIC 实现）的 `Connection` 类型内部使用 `Arc` 管理状态，因此可以 `Clone`。但 QUIC 的流（stream）语义要求应用层理解连接、双向流、单向流的所有权关系。若自定义网络协议实现未正确设计所有权，可能出现"连接已关闭但仍尝试发送"的编译期或运行时（Runtime）错误。[来源: [Quinn Documentation](https://docs.rs/quinn/)]
 
 ### 编译错误 5：Tokio `UdpSocket` 的 `send` 与 `send_to` 混用（编译错误）
@@ -316,6 +325,7 @@ async fn fixed_udp2(socket: &UdpSocket) {
     socket.send_to(b"hello", "127.0.0.1:8080").await.unwrap(); // ✅ send_to
 }
 ```
+
 > **修正**: Tokio 的 `UdpSocket` 严格区分"已连接"和"未连接"模式。`connect` 后必须使用 `send`/`recv`（无需地址），未连接时必须使用 `send_to`/`recv_from`（需显式地址）。这是操作系统 UDP socket API 的 Rust 类型安全封装——编译器通过 API 设计阻止非法调用，而非运行时（Runtime）返回错误。来源: [Tokio Documentation]
 
 ---

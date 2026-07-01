@@ -118,6 +118,7 @@ RESTful API 设计:
   表述（Representation）: JSON / XML / MessagePack
   状态码（Status Code）: 200 OK, 201 Created, 400 Bad Request, 404 Not Found, 500 Internal Server Error
 ```
+
 > **来源**: [Fielding 2000](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm) · [RFC 7231](https://tools.ietf.org/html/rfc7231) · [Richardson Maturity Model](https://martinfowler.com/articles/richardsonMaturityModel.html)
 > [来源: [gRPC Documentation](https://grpc.io/docs/)] · [来源: [RFC 7231](https://tools.ietf.org/html/rfc7231)]
 
@@ -140,6 +141,7 @@ GraphQL vs REST 的关键差异:
   REST: 服务端定义端点 → 客户端适应响应结构
   GraphQL: 客户端定义查询 → 服务端按查询返回精确字段
 ```
+
 ```graphql
 # GraphQL Query 示例：客户端精确指定字段
 query GetUserWithOrders($userId: ID!) {
@@ -159,6 +161,7 @@ query GetUserWithOrders($userId: ID!) {
   }
 }
 ```
+
 > **来源**: [GraphQL Spec](https://spec.graphql.org/) ·
 > [来源: [RFC 7807](https://tools.ietf.org/html/rfc7807)] · [来源: [tonic](https://docs.rs/tonic/latest/tonic/)]
 > [GraphQL Best Practices](https://graphql.org/learn/best-practices/) ·
@@ -186,6 +189,7 @@ gRPC 核心特征:
     ├── 健康检查: grpc.health.v1.Health 标准服务
     └── 负载均衡: 客户端负载均衡 + 服务发现集成
 ```
+
 > **来源**: [gRPC Documentation](https://grpc.io/docs/) ·
 > [Protocol Buffers](https://developers.google.com/protocol-buffers) ·
 > [HTTP/2 RFC 7540](https://tools.ietf.org/html/rfc7540)
@@ -233,6 +237,7 @@ HTTP 方法语义:
   PATCH  /users/123   → 部分更新（200 OK / 204 No Content）
   DELETE /users/123   → 删除（200 OK / 204 No Content / 404）
 ```
+
 ```rust
 // axum 中的 RESTful 路由
 use axum::{
@@ -267,6 +272,7 @@ struct UpdateUserRequest {
     email: Option<String>,
 }
 ```
+
 > **来源**: [RFC 7231](https://tools.ietf.org/html/rfc7231) ·
 > [RESTful API Design Best Practices](https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design)
 
@@ -315,6 +321,7 @@ async fn get_user_v2(Path(id): Path<Uuid>, headers: HeaderMap) -> Result<Json<Us
     }
 }
 ```
+
 > **来源**: [Microsoft — API Versioning](https://learn.microsoft.com/en-us/azure/architecture/microservices/design/api-design#api-versioning) ·
 > [Stripe API Versioning](https://stripe.com/docs/api/versioning)
 
@@ -391,6 +398,7 @@ impl From<AppError> for (StatusCode, ProblemDetails) {
     }
 }
 ```
+
 > **来源**: [RFC 7807 — Problem Details](https://tools.ietf.org/html/rfc7807) ·
 > [Microsoft — REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md)
 
@@ -474,6 +482,7 @@ fn api_routes() -> Router {
         .route("/users/:id", get(get_user).put(update_user).delete(delete_user))
 }
 ```
+
 > **来源**: [axum Documentation](https://docs.rs/axum/latest/axum/) ·
 > [tower-http](https://docs.rs/tower-http/latest/tower_http/)
 
@@ -515,6 +524,7 @@ struct Address {
     postal_code: String,
 }
 ```
+
 > **来源**: [serde Documentation](https://serde.rs/) ·
 > [validator crate](https://docs.rs/validator/latest/validator/) ·
 > [garde crate](https://docs.rs/garde/latest/garde/)
@@ -546,6 +556,7 @@ fn api_with_docs() -> Router {
 // 生成的 OpenAPI JSON 可通过 /api-docs/openapi.json 访问
 // Swagger UI 可通过 /swagger-ui 访问
 ```
+
 > **来源**: [OpenAPI Specification](https://spec.openapis.org/oas/latest.html) ·
 > [utoipa Documentation](https://docs.rs/utoipa/latest/utoipa/) ·
 > [Swagger UI](https://swagger.io/tools/swagger-ui/)
@@ -607,6 +618,7 @@ enum OrderStatus {
 // 创建 Schema
 pub type UserSchema = Schema<QueryRoot, EmptyMutation, EmptySubscription>;
 ```
+
 > **来源**: [async-graphql](https://docs.rs/async-graphql/latest/async_graphql/) ·
 > [GraphQL Spec — Type System](https://spec.graphql.org/draft/#sec-Type-System)
 
@@ -667,6 +679,7 @@ impl User {
     }
 }
 ```
+
 > **来源**: [GraphQL N+1 Problem](https://graphql.org/learn/best-practices/#graphql-n-1-problem) ·
 > [DataLoader Pattern](https://github.com/graphql/dataloader) ·
 > [async-graphql DataLoader](https://docs.rs/async-graphql/latest/async_graphql/dataloader/index.html)
@@ -691,6 +704,7 @@ impl SubscriptionRoot {
     }
 }
 ```
+
 > **来源**: [GraphQL Subscriptions](https://graphql.org/blog/2015-10-16-subscriptions/) ·
 > [async-graphql Subscription](https://docs.rs/async-graphql/latest/async_graphql/attr.Subscription.html)
 
@@ -740,6 +754,7 @@ message ListUsersResponse {
   int32 total = 2;
 }
 ```
+
 ```rust
 // tonic: 从 .proto 编译生成的 Rust 代码
 use tonic::{transport::Server, Request, Response, Status};
@@ -791,6 +806,7 @@ impl UserService for UserServiceImpl {
     }
 }
 ```
+
 > **来源**: [tonic Documentation](https://docs.rs/tonic/latest/tonic/) ·
 > [Protocol Buffers Guide](https://developers.google.com/protocol-buffers/docs/proto3) ·
 > [gRPC Basics](https://grpc.io/docs/languages/rust/basics/)
@@ -851,6 +867,7 @@ impl UserService for UserServiceImpl {
     }
 }
 ```
+
 > **来源**: [tonic — Streaming](https://docs.rs/tonic/latest/tonic/codec/) ·
 > [gRPC Streaming](https://grpc.io/docs/what-is-grpc/core-concepts/)
 
@@ -891,6 +908,7 @@ Server::builder()
     .serve(addr)
     .await?;
 ```
+
 > **来源**: [tonic — Interceptor](https://docs.rs/tonic/latest/tonic/service/interceptor/index.html) ·
 > [tower — Middleware](https://docs.rs/tower/latest/tower/)
 
@@ -924,6 +942,7 @@ API 网关架构:
   · 日志: 请求/响应日志、分布式追踪
   · 协议转换: REST ↔ gRPC ↔ GraphQL
 ```
+
 ```rust
 // API Gateway 路由实现（axum）
 use axum::{
@@ -965,6 +984,7 @@ async fn proxy_to_user_service(req: Request<Body>) -> Result<Response<Body>, Sta
         .unwrap())
 }
 ```
+
 > **来源**: [Microsoft — API Gateway Pattern](https:/docs.microsoft.com/en-us/azure/architecture/microservices/design/gateway) ·
 > [Kong Gateway](https://docs.konghq.com/) ·
 > [Traefik](https://doc.traefik.io/traefik/)
@@ -1036,6 +1056,7 @@ async fn proxy_to_user_service(req: Request<Body>) -> Result<Response<Body>, Sta
 │   └── 更好的策略：向后兼容的演进（加字段而非改字段）+ 内容协商
 └── 根结论: ❌ URL 版本化是可行的但非最优。优先采用向后兼容的演进策略，仅在破坏性变更时使用版本化。
 ```
+
 > **来源**: [来源: [GraphQL vs REST](https://www.howtographql.com/basics/1-graphql-is-the-better-rest/)]
 
 ### 9.2 边界极限
@@ -1077,6 +1098,7 @@ impl User {
 //   2. SELECT * FROM orders WHERE user_id = $1 → 1000 次（每个 user 一次）
 // 总计: 1001 次查询 → 数据库过载
 ```
+
 > **修正**: 使用 **DataLoader** 模式批量加载：
 >
 > ```rust
@@ -1105,6 +1127,7 @@ async fn parse_json(body: String) -> Result<Json<Value>, StatusCode> {
     Ok(Json(value))
 }
 ```
+
 > **修正**: 始终设置请求体大小限制和解析深度限制：
 >
 > ```rust
@@ -1142,6 +1165,7 @@ struct UserV2 {
 // 旧客户端（V1）收到 V2 响应时：
 // serde_json::from_str::<UserV1>(v2_json) → 错误：missing field `phone`
 ```
+
 > **修正**: 向后兼容的演进规则：
 >
 > 1. **只添加字段**，从不删除

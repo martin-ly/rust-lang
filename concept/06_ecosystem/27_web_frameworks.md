@@ -112,6 +112,7 @@ Web 框架职能分层:
   └─────────────────────────────────────────┘
 > [来源: [Axum Docs]]
 ```
+
 > **认知功能**: Rust Web 框架的竞争力来自 L1+L2 的零成本抽象（Zero-Cost Abstraction）——无 GC、无运行时解释器，编译后即为高效原生代码。[来源: 💡 原创分析]
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
@@ -145,6 +146,7 @@ Rust Web 框架演进:
   2024: Axum 0.7 / Actix-web 4.x / Rocket 0.5 — 生态成熟期
         [来源: crates.io 版本记录]
 ```
+
 > **洞察**: Rust Web 框架经历了从"百花齐放"到"头部收敛"的过程——Axum 和 Actix-web 占据生态主导地位，Rocket 坚守声明式哲学，Poem 填补 OpenAPI/GraphQL  niche。[来源: 💡 原创分析]
 
 ### 1.3 框架架构生态图
@@ -200,6 +202,7 @@ graph TD
     style ROCKET fill:#fff3e0
     style POEM fill:#bbdefb
 ```
+
 > **认知功能**: 生态依赖全景图——展示四个框架在 Tokio/Hyper/Tower 基础设施上的位置，以及上层扩展生态的兼容关系。关键洞察：TOWER 生态的共享性是 Axum 的核心优势，而 Actix-web 和 Rocket 的自研抽象层带来了生态隔离。[来源: 💡 原创分析]
 
 ---
@@ -228,6 +231,7 @@ Axum 架构特征:
     ├── hyper (HTTP 协议)
     └── tracing (可观测性)
 ```
+
 ```rust,ignore
 // ✅ Axum 典型 Handler
 use axum::{extract::State, routing::get, Router};
@@ -244,6 +248,7 @@ let app = Router::new()
     .route("/", get(handler))
     .with_state(Arc::new(AppState { db }));
 ```
+
 ```rust
 use std::collections::HashMap;
 
@@ -292,6 +297,7 @@ fn main() {
     println!("status: {}, body: {}", res.status, res.body);
 }
 ```
+
 > **Axum 洞察**: **Axum 是 Tokio 生态的"原生 Web 层"**——它不重新发明轮子，而是将 Tower 的 Service 抽象和 Hyper 的 HTTP 能力封装为符合人体工程学的 API。[来源: Axum docs]
 
 ### 2.2 Actix-web：Actor 模型的工业级实现
@@ -314,6 +320,7 @@ Actix-web 架构特征:
     ├── actix-utils
     └── tokio (底层运行时)
 ```
+
 ```rust,ignore
 // ✅ Actix-web 典型 Handler
 use actix_web::{get, web, App, HttpServer, Responder};
@@ -332,6 +339,7 @@ HttpServer::new(|| {
 .run()
 .await
 ```
+
 > **Actix-web 洞察**: **Actix-web 是 Rust 最成熟的生产级框架**——Actor 模型提供独特的并发隔离能力，且生态历史最久（2017 年起），文档和社区资源最丰富。来源: [Actix docs](https://actix.rs/)
 
 ### 2.3 Rocket：声明式编程与类型安全
@@ -353,6 +361,7 @@ Rocket 架构特征:
     ├── hyper (HTTP 协议)
     └── yansi (终端着色)
 ```
+
 ```rust,ignore
 // ✅ Rocket 典型 Handler
 #[macro_use] extern crate rocket;
@@ -367,6 +376,7 @@ fn rocket() -> _ {
     rocket::build().mount("/", routes![index])
 }
 ```
+
 > **Rocket 洞察**: **Rocket 的声明式宏（Macro）系统提供了 Rust Web 框架中最优雅的 API**——但 Fairings 中间件模型与主流 Tower/Service 生态不兼容，是特立独行的选择。[来源: Rocket docs]
 
 ### 2.4 Poem：模块化与 OpenAPI 优先
@@ -388,6 +398,7 @@ Poem 架构特征:
     ├── hyper
     └── 可选: poem-openapi, poem-grpc
 ```
+
 ```rust,ignore
 // ✅ Poem 典型 Handler
 use poem::{handler, Route, Server, listener::TcpListener};
@@ -402,6 +413,7 @@ Server::new(TcpListener::bind("0.0.0.0:3000"))
     .run(app)
     .await;
 ```
+
 > **Poem 洞察**: **Poem 是 Rust Web 框架中的"瑞士军刀"**——核心轻量，但通过 poem-openapi 等扩展提供类型安全的 OpenAPI 生成，是 API 文档驱动开发的首选。[来源: Poem docs]
 
 ---
@@ -439,6 +451,7 @@ Server::new(TcpListener::bind("0.0.0.0:3000"))
   └── 支持 poem-lambda（AWS Lambda 适配层）
   [来源: Poem docs — Runtime]
 ```
+
 > **关键洞察**: **所有主流 Rust Web 框架均绑定 Tokio**——这不是偶然，而是生态收敛的结果。Tokio 的 M:N 调度、工作窃取线程池和丰富的生态（tonic、hyper、axum）使其成为事实标准。来源: [Tokio docs](https://tokio.rs/) [来源: 💡 原创分析]
 
 ### 3.2 运行时兼容性矩阵
@@ -479,6 +492,7 @@ fn main() {
     println!("final: {}", result);
 }
 ```
+
 ```text
 中间件模型对比:
 
@@ -507,6 +521,7 @@ fn main() {
   特征: 生命周期钩子、非环绕式
   [来源: Rocket docs: Fairings]
 ```
+
 ### 4.2 中间件对比矩阵
 
 | **中间件能力** | **Axum** | **Actix-web** | **Rocket** | **Poem** |
@@ -561,6 +576,7 @@ TechEmpower Round 22+ 解读（JSON 序列化 / 单次查询 / 多次查询）:
   └──────────────┴────────────────────────────────────────┘
   [来源: TechEmpower Round 22+ 结果近似]
 ```
+
 > **性能洞察**: **Rust Web 框架的整体性能远超 GC 语言**——即使是最"慢"的 Rocket，也数倍于 Go 和 Node.js。在 Rust 内部选择时，性能差异通常不是首要决策因素。[来源: TechEmpower] [来源: 💡 原创分析]
 
 ### 5.2 资源占用对比
@@ -608,6 +624,7 @@ graph TD
     style ROCKET fill:#fff3e0
     style POEM fill:#c8e6c9
 ```
+
 > **认知功能**: 工程选型导航器——从生态兼容性、性能需求、API 风格偏好、社区成熟度四个维度出发，将框架特征与项目需求匹配。关键洞察：Axum 是 2024+ 新项目 safest default，Actix-web 是保守/成熟项目的稳妥选择。[来源: 💡 原创分析]
 
 ### 6.2 场景化推荐矩阵
@@ -650,6 +667,7 @@ graph TD
     style F4 fill:#f66
     style T fill:#6f6
 ```
+
 > **认知功能**: 破除"Axum 万能论"——Tower 生态的复杂性、声明式宏的缺失、OpenAPI 的非原生支持、Actor 模型的缺乏，均为 Axum 的明确边界。[来源: 💡 原创分析]
 
 ### 7.2 反命题："Web 框架性能决定一切"
@@ -681,6 +699,7 @@ graph TD
     → 维持现有选择是理性决策
     [来源: 💡 原创分析]
 ```
+
 > **修正认知**: **框架性能只是技术选型的维度之一**——生态成熟度、团队熟悉度、编译速度、与现有架构的兼容性往往更重要。Rust 框架间的性能差异（< 2x）远小于 Rust 与 GC 语言的差异（> 5x）。[来源: 💡 原创分析]
 
 ---
@@ -728,6 +747,7 @@ graph TD
      // AppError + impl IntoResponse
   [来源: Axum docs: Error handling]
 ```
+
 ---
 
 ## 九、来源与延伸阅读
@@ -808,6 +828,7 @@ fn app() -> Router {
     Router::new().route("/", get(handler)) // handler 签名不兼容
 }
 ```
+
 > **修正**: axum 的路由系统要求处理函数（handler）返回实现 `IntoResponse` 的类型。`String` 实际上实现了 `IntoResponse`，但此示例展示的是更常见的问题：自定义类型未实现 `IntoResponse`，或函数签名不符合 `Fn(Request) -> Future<Output = Response>`。axum 使用 `tower::Service` trait 抽象处理函数，编译期通过宏生成 `Service` 实现。若类型不匹配，编译错误会指出缺少 `IntoResponse` 实现。这与 Go 的 `http.HandlerFunc`（任何 `func(w, r)` 都可用）或 Python Flask 的返回值（自动 `str()` 转换）不同——Rust Web 框架在编译期验证响应类型可序列化。[来源: [axum Documentation](https://docs.rs/axum/)] · [来源: [Tower Documentation](https://docs.rs/tower/)]
 
 ### 10.2 边界测试：共享状态的生命周期与 `Clone` 约束（编译错误）
@@ -830,6 +851,7 @@ fn app(state: Arc<AppState>) -> Router {
     Router::new().route("/", get(handler)).with_state(state)
 }
 ```
+
 > **修正**: Web 服务器需要在多个请求处理任务间共享状态（数据库连接、配置、缓存）。`Arc<T>` 提供共享所有权（Ownership），但只给予 `&T` 访问。若需可变修改，必须使用：1) `Arc<Mutex<T>>`（互斥锁）；2) `Arc<RwLock<T>>`（读写锁）；3) 通道（channel）将修改请求发送到单线程执行器。直接修改 `Arc<T>` 内部数据会被编译器阻止——这是 Rust"共享不可变，可变不共享"原则的体现。与 Go 的 `map`（非并发安全（Concurrency Safety），需 `sync.RWMutex` 包裹）或 Node.js 的单线程事件循环（无并发修改问题）不同，Rust 在类型层面要求显式同步原语。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-03-shared-state.html)] · [来源: [axum Documentation](https://docs.rs/axum/)]
 
 ### 10.6 边界测试：HTTP 请求的 body 大小限制与内存 DoS（运行时 OOM）
@@ -847,6 +869,7 @@ fn app() -> Router {
     Router::new().route("/", post(handler))
 }
 ```
+
 > **修正**: Web 框架的默认配置通常**无请求体大小限制**，恶意客户端可发送 GB 级数据导致 OOM。安全模式：1) `axum` 的 `DefaultBodyLimit`（默认 2MB，可配置）；2) 流式处理（`axum::extract::BodyStream` 分块读取）；3) 反向代理（Nginx、Traefik）前置大小限制。Rust 的内存安全（Memory Safety）不防止 OOM——`Vec::push` 在内存不足时 panic（或 abort）。这与 Node.js 的 `body-parser`（默认 100KB 限制）、Go 的 `http.MaxBytesReader`、Python 的 Flask（`MAX_CONTENT_LENGTH`）类似——生产环境的 Web 服务必须配置请求限制。[来源: [axum Documentation](https://docs.rs/axum/)] · [来源: [OWASP DoS](https://owasp.org/www-community/attacks/Denial_of_Service)]
 
 ### 10.5 边界测试：Axum 的 extractor 顺序与请求体消耗（运行时 panic）
@@ -866,6 +889,7 @@ async fn handler(Json(payload): Json<Payload>, /* Json(payload2): Json<Payload> 
 
 // Router::new().route("/", post(handler))
 ```
+
 > **修正**: Axum 的 **extractor** 从请求中提取数据：`Path`、`Query`、`Json`、`Form` 等。请求体（body）是**单次消耗**的流：一个 extractor 读取后，后续 extractor 无法再次读取。规则：1) 最多一个 body extractor 每个 handler；2) `Json` 和 `Form` 互斥；3) 若需多次使用 body，先提取为 `Bytes`，再克隆解析。这与 Actix-web（类似 body 限制，但 `web::Json` 和 `web::Form` 同样互斥）或 Rocket（类似，使用 `Data` guard）不同——Axum 的编译期类型安全不保护 body 消耗次数（流性质决定），需运行时检查。axum 0.7+ 的改进：更清晰的错误消息（"body has already been consumed"）。这与 Tower 的 `Service` 抽象一致：body 是 `http_body::Body` trait，消费后不可复用。[来源: [Axum Extractors](https://docs.rs/axum/)] · [来源: [Tower Service](https://docs.rs/tower/)]
 
 ### 10.4 边界测试：Axum 的 extractor 顺序与请求体消耗（运行时 panic）
@@ -888,6 +912,7 @@ async fn handler(Json(payload): Json<Payload>) {
 
 fn main() {}
 ```
+
 > **修正**: Axum 的 **extractor** 从请求中提取数据，请求体（body）是**单次消费**的流。`Json(payload)` 读取整个 body 并解析为 JSON，第二个 `Json` extractor 无 body 可读 → panic（"body has already been consumed"）。解决：1) 最多一个 body extractor 每个 handler；2) 若需多次使用 body，先提取为 `Bytes`，再克隆解析；3) 使用 `axum::extract::Request` 直接访问原始请求。这与 Actix-web（类似 body 限制）或 Rocket（类似，使用 `Data` guard）不同——Axum 的编译期类型安全不保护 body 消耗次数（流性质决定），需运行时检查。[来源: [Axum Extractors](https://docs.rs/axum/)] · [来源: [Tower Service](https://docs.rs/tower/)]
 > **过渡**: Rust Web 框架对比与选型 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust Web 框架对比与选型 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

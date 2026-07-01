@@ -125,6 +125,7 @@ fn main() {
     ));
 }
 ```
+
 > ⚠️ **注意**: `DefaultHasher` 仅适用于数据结构哈希，**不应用于密码学场景**。密码学哈希请使用 `sha2`/`blake3` crate。
 
 ### 1.1 Kerckhoffs 原则
@@ -144,6 +145,7 @@ fn main() {
   ↑
   密码系统的安全性必须在上述所有攻击模型下保持
 ```
+
 > **来源**: [Kerckhoffs 1883 — La Cryptographie Militaire](https://www.petitcolas.net/fabien/kerckhoffs/) · [Katz & Lindell — Introduction to Modern Cryptography](https://www.cs.umd.edu/~jkatz/imc.html)
 
 ### 1.2 密码学原语分类
@@ -178,6 +180,7 @@ Rust 的安全保证与密码学威胁的对应:
   Send/Sync           → 确保密钥材料安全跨线程传递
   const fn            → 编译期密码学常量验证
 ```
+
 > **来源**: [OWASP — Threat Modeling](https://owasp.org/www-community/Application_Threat_Modeling) · [NIST SP 800-57](https://csrc.nist.gov/publications/detail/sp/800-57-part-1/rev-5/final)
 
 ---
@@ -213,6 +216,7 @@ AES-GCM 参数:
   ✅ 消息长度限制：单个密钥加密的总数据量 ≤ 2^39 - 256 位（~64GB）
   ✅ 推荐使用 96 位随机 Nonce（计数器或 CSPRNG）
 ```
+
 ```rust,ignore
 use aes_gcm::{
     aead::{Aead, AeadCore, KeyInit, OsRng},
@@ -238,6 +242,7 @@ fn decrypt_aes_gcm(key: &[u8; 32], ciphertext_with_nonce: &[u8]) -> Result<Vec<u
     cipher.decrypt(nonce, ciphertext)
 }
 ```
+
 > **来源**: [NIST FIPS 197](https://csrc.nist.gov/publications/detail/fips/197/final) · [NIST SP 800-38D](https://csrc.nist.gov/publications/detail/sp/800-38d/final) · [aes-gcm crate](https://docs.rs/aes-gcm/latest/aes_gcm/)
 
 ### 3.2 ChaCha20-Poly1305
@@ -262,6 +267,7 @@ AES-GCM vs ChaCha20-Poly1305:
   └─────────────────┴─────────────────┴─────────────────────────────┘
   cpb = cycles per byte
 ```
+
 ```rust,ignore
 use chacha20poly1305::{
     aead::{Aead, AeadCore, KeyInit, OsRng},
@@ -278,6 +284,7 @@ fn encrypt_chacha20(key: &[u8; 32], plaintext: &[u8]) -> Result<Vec<u8>, chacha2
     Ok(result)
 }
 ```
+
 > **来源**: [RFC 8439](https://tools.ietf.org/html/rfc8439) · [ChaCha20 Design](https://cr.yp.to/chacha.html) · [chacha20poly1305 crate](https://docs.rs/chacha20poly1305/latest/chacha20poly1305/)
 
 ---
@@ -308,6 +315,7 @@ RSA vs Ed25519 对比:
   │ 量子威胁        │ Shor 完全破解    │ Shor 完全破解                │
   └─────────────────┴─────────────────┴─────────────────────────────┘
 ```
+
 ```rust,ignore
 use ed25519_dalek::{SigningKey, Signer, Verifier, VerifyingKey};
 use rand::rngs::OsRng;
@@ -330,6 +338,7 @@ fn verify_signature(
     verifying_key.verify(message, signature)
 }
 ```
+
 > **来源**: [RFC 8032 — EdDSA](https://tools.ietf.org/html/rfc8032) · [ed25519-dalek crate](https://docs.rs/ed25519-dalek/latest/ed25519_dalek/) · [Curve25519 Paper](https://cr.yp.to/ecdh/curve25519-20060209.pdf)
 
 ### 4.2 X25519 密钥交换
@@ -354,6 +363,7 @@ let bob_shared = bob_secret.diffie_hellman(&alice_public);
 
 assert_eq!(alice_shared.as_bytes(), bob_shared.as_bytes());
 ```
+
 > **来源**: [RFC 7748](https://tools.ietf.org/html/rfc7748) · [x25519-dalek crate](https://docs.rs/x25519-dalek/latest/x25519_dalek/)
 
 ---
@@ -379,6 +389,7 @@ assert_eq!(alice_shared.as_bytes(), bob_shared.as_bytes());
   ✅ 原像抗性：给定 hash(x)，找到 x 在计算上不可行
   ✅ 第二原像抗性：给定 x，找到 y ≠ x 使 hash(x) = hash(y) 不可行
 ```
+
 ```rust,ignore
 use sha2::{Sha256, Digest};
 use blake3;
@@ -400,6 +411,7 @@ fn keyed_hash_blake3(key: &[u8; 32], data: &[u8]) -> [u8; 32] {
     blake3::keyed_hash(key, data).into()
 }
 ```
+
 > **来源**: [NIST FIPS 180-4](https://csrc.nist.gov/publications/detail/fips/180/4/final) · [BLAKE3 Paper](https://blake3.io/blake3.pdf) · [sha2 crate](https://docs.rs/sha2/latest/sha2/) · [blake3 crate](https://docs.rs/blake3/latest/blake3/)
 
 ### 5.2 HMAC
@@ -424,6 +436,7 @@ fn hmac_verify(key: &[u8], message: &[u8], signature: &[u8]) -> bool {
     mac.verify_slice(signature).is_ok()
 }
 ```
+
 > **来源**: [RFC 2104 — HMAC](https://tools.ietf.org/html/rfc2104) · [hmac crate](https://docs.rs/hmac/latest/hmac/)
 
 ### 5.3 密钥派生（KDF）
@@ -446,6 +459,7 @@ Argon2id 推荐参数（OWASP 2023）:
   迭代: 2 (t=2)
   并行度: 1 (p=1)
 ```
+
 ```rust,ignore
 use argon2::{Argon2, PasswordHasher, PasswordVerifier, password_hash::{
     SaltString, PasswordHash, PasswordHasher as _, PasswordVerifier as _,
@@ -478,6 +492,7 @@ fn derive_keys(master_key: &[u8], salt: &[u8]) -> ([u8; 32], [u8; 32]) {
     (okm1, okm2)
 }
 ```
+
 > **来源**: [RFC 9106 — Argon2](https://tools.ietf.org/html/rfc9106) · [OWASP Password Storage](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html) · [RFC 5869 — HKDF](https://tools.ietf.org/html/rfc5869) · [argon2 crate](https://docs.rs/argon2/latest/argon2/) · [hkdf crate](https://docs.rs/hkdf/latest/hkdf/)
 
 ---
@@ -507,6 +522,7 @@ fn ring_sign(key_pair: &Ed25519KeyPair, message: &[u8]) -> ring::signature::Sign
     key_pair.sign(message)
 }
 ```
+
 > **设计特点**:
 >
 > - `ring` 的 API 刻意保持**小表面积**，只暴露最常用的操作（AES-GCM、ChaCha20-Poly1305、Ed25519、X25519、SHA-256/384/512）
@@ -547,6 +563,7 @@ fn create_tls_server(cert_chain: Vec<CertificateDer<'static>>, key: PrivateKeyDe
     Arc::new(config)
 }
 ```
+
 > **rustls 的安全设计**:
 >
 > - 默认禁用 TLS 1.0/1.1（只支持 TLS 1.2+）
@@ -573,6 +590,7 @@ fn create_tls_server(cert_chain: Vec<CertificateDer<'static>>, key: PrivateKeyDe
   - 常量时间操作（通过 `subtle` crate 的条件选择）
   - 零知识证明友好（Ristretto 群编码消除 cofactor 问题）
 ```
+
 > **来源**: [dalek-cryptography GitHub](https://github.com/dalek-cryptography) · [curve25519-dalek](https://docs.rs/curve25519-dalek/latest/curve25519_dalek/) · [Ristretto Group](https://ristretto.group/)
 
 ---
@@ -594,6 +612,7 @@ fn create_tls_server(cert_chain: Vec<CertificateDer<'static>>, key: PrivateKeyDe
 
 常量时间比较: 无论输入如何，执行时间固定
 ```
+
 ```rust,ignore
 use subtle::ConstantTimeEq;
 
@@ -620,6 +639,7 @@ fn ct_compare_impl(a: &[u8], b: &[u8]) -> bool {
     // 实际应使用 subtle::Choice 避免分支
 }
 ```
+
 > **Rust 的侧信道防护工具链**:
 >
 > - `subtle` crate: 常量时间条件选择（`Choice`、`CtOption`）
@@ -661,6 +681,7 @@ fn ct_compare_impl(a: &[u8], b: &[u8]) -> bool {
     3. 混合方案：PQ + 传统并用（如 X25519 + ML-KEM）
     4. Rust 生态尚不成熟，主要依赖 C 封装（pqclean）
 ```
+
 > **来源**: [NIST PQC](https://csrc.nist.gov/projects/post-quantum-cryptography) · [FIPS 203](https://csrc.nist.gov/pubs/fips/203/final) · [FIPS 204](https://csrc.nist.gov/pubs/fips/204/final) · [FIPS 205](https://csrc.nist.gov/pubs/fips/205/final)
 
 ---
@@ -697,6 +718,7 @@ fn ct_compare_impl(a: &[u8], b: &[u8]) -> bool {
 │   └── 实际系统的薄弱环节通常是密钥管理，而非算法强度
 └── 根结论: ❌ AES-128 在大多数场景下已足够。选择 AES-256 应基于合规要求，而非纯粹的安全需求。
 ```
+
 ### 9.2 边界极限
 >
 
@@ -728,6 +750,7 @@ fn insecure_password_verify(stored: &[u8], provided: &[u8]) -> bool {
 // guess "p..." → 2μs (第一个字节正确，继续比较)
 // ... 逐步缩小范围，最终恢复完整密码
 ```
+
 > **修正**: 使用 `subtle::ConstantTimeEq` 或 `constant_time_eq`：
 >
 > ```rust
@@ -756,6 +779,7 @@ fn broken_encrypt(key: &[u8; 32], plaintext: &[u8]) -> Vec<u8> {
 //   c1 ⊕ c2 = m1 ⊕ m2  → 已知明文攻击恢复密钥流！
 // 更糟: 恢复密钥流后可伪造任意消息的认证标签
 ```
+
 > **修正**: Nonce 必须**唯一且不可预测**。推荐方案：
 >
 > 1. **计数器**: 每次加密递增（需持久化计数器）
@@ -783,6 +807,7 @@ fn weak_hash_password(password: &str) -> String {
 // 8 位密码（字母+数字）: ~2^47 种组合
 // 在 modern GPU 上: 可在数小时/数天内破解
 ```
+
 > **修正**: 遵循 **OWASP 2023 推荐参数**：
 >
 > ```rust

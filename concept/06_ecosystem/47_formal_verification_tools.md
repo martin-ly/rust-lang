@@ -121,6 +121,7 @@ Rust 形式化验证生态可按验证方法分层：
 │  · 零运行时开销，但表达能力有限                              │
 └─────────────────────────────────────────────────────────────┘
 ```
+
 > **来源**: [Hoare 1969](https://doi.org/10.1145/363235.363259) ·
 > [Formal Methods in Software Engineering](https://www.cis.upenn.edu/~cis5000/) ·
 > [Rust Formal Methods Working Group](https://github.com/rust-lang)
@@ -156,6 +157,7 @@ struct MyData(*mut i32);  // 包含裸指针 → 默认不实现 Send/Sync
 // 若手动实现 unsafe impl Send for MyData {}，
 // 验证器需证明跨线程使用是安全的
 ```
+
 > **来源**: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) ·
 > [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) ·
 > [Tree Borrows — PLDI 2025](https://perso.crans.org/vanille/treebor/)
@@ -221,6 +223,7 @@ mod verification {
     }
 }
 ```
+
 **Kani 的核心能力**:
 
 | **能力** | **说明** | **局限** |
@@ -270,6 +273,7 @@ mod verification_066 {
     }
 }
 ```
+
 ### 3.2 MIRI：运行时 UB 检测器
 
 > **[MIRI](https://github.com/rust-lang/miri)** 是 Rust 的 MIR（中级中间表示）解释器，用于检测**未定义行为**（Undefined Behavior, UB）。
@@ -308,6 +312,7 @@ fn unaligned_read() {
     // unsafe { let _ = *ptr; }  // MIRI: UB！u64 需 8 字节对齐
 }
 ```
+
 **MIRI 的运行方式**:
 
 ```bash
@@ -320,6 +325,7 @@ cargo +nightly miri run
 # 测试整个 crate
 cargo +nightly miri test
 ```
+
 > **来源**: [MIRI README](https://github.com/rust-lang/miri) ·
 > [Rustonomicon — Undefined Behavior](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) ·
 > [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
@@ -378,6 +384,7 @@ impl Node {
     }
 }
 ```
+
 **Prusti 的设计权衡**:
 
 | **优势** | **劣势** |
@@ -411,6 +418,7 @@ fn get<T>(vec: &Vec<T>, index: usize) -> &T {
     &vec[index]
 }
 ```
+
 **Creusot 的翻译流水线**:
 
 ```text
@@ -420,6 +428,7 @@ Rust 源码 → Creusot 前端 → WhyML → Why3 → SMT 求解器 (Alt-Ergo/Z3
                              Rust 的 Option<T> → WhyML 的 option t
                              Rust 的 Vec<T> → WhyML 的 seq t
 ```
+
 > **来源**: [Creusot Paper — ICFP 2022](https://hal.inria.fr/hal-03737818) · [Why3 Platform](http://why3.lri.fr/) · [Pearlite Specification Language](https://creusot.rs/guide/pearlite.html)
 
 ### 4.3 Verus：SMT-LIB 验证器
@@ -463,6 +472,7 @@ fn binary_search(v: &Vec<u64>, k: u64) -> (r: usize)
 
 } // verus!
 ```
+
 **Verus 的独特设计**:
 
 | **特性** | **说明** |
@@ -506,6 +516,7 @@ pub fn safe_get(vec: &Vec<i32>, i: usize) -> i32 {
     vec[i]  // Flux 保证不会发生越界
 }
 ```
+
 **Flux vs 标准 Rust 类型系统（Type System）**:
 
 ```text
@@ -522,6 +533,7 @@ Flux 精化类型:    Vec<i32{v: v>0}>  →  编译期还保证所有元素 > 0
   · 复杂数据结构（如自定义树）的谓词可能难以表达
   · 求解器可能超时
 ```
+
 > **来源**: [Flux GitHub](https://github.com/liquid-rust/flux) · [Liquid Types — PLDI 2008](https://goto.ucsd.edu/~rjhala/liquid/liquid_types.pdf) · [Refinement Types Survey](https://arxiv.org/abs/2010.07763)
 > **2025 最新进展 — Generic Refinement Types (POPL 2025)**: Flux 团队将精化类型扩展到**泛型上下文**，解决了原始 Flux 无法处理泛型函数（如 `fn max<T: Ord>(a: T, b: T) -> T`）的精化谓词问题。Generic Refinement Types 允许类型参数携带精化约束（如 `T{v: v >= 0}`），并通过**约束抽象**（Constraint Abstraction）在实例化时求解具体谓词。这是精化类型从"特定类型上的轻量验证"向"通用库级验证"的关键跃迁。[来源: [POPL 2025 — Lehmann et al., "Generic Refinement Types"](https://dl.acm.org/doi/10.1145/3704886)]
 
@@ -545,6 +557,7 @@ Rust MIR
   Rust 的 &mut T  →  函数式表示中的 "更新后返回新状态"
   Rust 的 ownership →  线性类型 / 区域参数
 ```
+
 > **来源**: [Aeneas GitHub](https://github.com/AeneasVerif/aeneas) · [Aeneas Charon (Rust → LLBC)](https://github.com/AeneasVerif/charon) · [Lean 4](https://lean-lang.org/)
 
 ---
@@ -585,6 +598,7 @@ Rust MIR
                       ├── SMT / Z3 → Verus ✅
                       └── 无偏好 → Verus（生态最活跃）✅
 ```
+
 > **来源**: [Formal Methods for Rust — Rust Lang Blog](https://rustverify.com/) · [Rust Verification Workshop](https://rustverify.com/)
 
 ---
@@ -615,6 +629,7 @@ Iris 分离逻辑公式
   · 工作量巨大（每行代码可能需要数行证明）
   · 目前为研究原型
 ```
+
 > **来源**: [RefinedRust GitLab](https://gitlab.mpi-sws.org/lgaeher/refinedrust) · [Iris Project](https://iris-project.org/) · [Coq Proof Assistant](https://coq.inria.fr/)
 
 ### 7.2 RustBelt 验证框架
@@ -638,6 +653,7 @@ Theorem (RustBelt): 对于任何通过 Rust 借用检查器的程序 P，
   3. 证明类型系统规则在语义上是 sound 的
   4. 将标准库中的 unsafe 原语（Box, Rc, Arc, Vec）建模为 Iris 资源代数
 ```
+
 **RustBelt 的后续工作**:
 
 | **项目** | **贡献** | **状态** |
@@ -672,6 +688,7 @@ F* / Rocq 规范
   · 生成 Rocq 代码用于深层形式化证明
   · 活跃开发中（2024-2025）
 ```
+
 > **与 Kani 的对比**: hax 面向**演绎验证**（需要写规范），Kani 面向**有界模型检验**（自动探索路径）。hax 更适合密码学协议的规范验证，Kani 更适合通用代码的 bug 检测。
 
 ### 7.4 Kani verify-std：标准库验证计划
@@ -723,6 +740,7 @@ F* / Rocq 规范
 └── 根结论: ❌ 目前只有 Kani 和 MIRI 达到日常可用水平。演绎验证工具（Prusti/Creusot/Verus）
            适合安全关键模块的定向验证，不适合整个大型项目。
 ```
+
 > **来源**: [Formal Methods Reality Check](https://www.hillelwayne.com/post/theorem-prover-showdown/) · [Kani Production Use](https://github.com/model-checking/kani/tree/main/papers) · [Verus README](https://github.com/verus-lang/verus/blob/main/README.md)
 
 ### 8.2 边界极限
@@ -761,6 +779,7 @@ fn safe_access(arr: &[i32], idx: usize) -> i32 {
     if idx < arr.len() { arr[idx] } else { 0 }
 }
 ```
+
 > **修正**: Kani 的验证范围仅限于有 `#[kani::proof]` 注解的函数。未被 harness 覆盖的代码仍需通过测试和代码审查保证正确性。
 > **来源**: [Kani Tutorial](https://model-checking.github.io/kani/tutorial-first-steps.html) · [Kani Coverage](https://model-checking.github.io/kani/reference/experimental/coverage.html)
 
@@ -785,6 +804,7 @@ fn main() {
     conditional_ub(false);  // MIRI 运行时只执行 false 分支，true 分支的 UB 未被发现！
 }
 ```
+
 > **修正**: MIRI 需要结合**高覆盖率测试**使用。使用 `cargo miri test` 运行所有测试用例，确保尽可能多的代码路径被执行。对于安全关键代码，结合 Kani 进行静态验证。
 > **来源**: [MIRI Book](https://github.com/rust-lang/miri) · [Code Coverage in Rust](https://doc.rust-lang.org/rustc/instrument-coverage.html)
 
@@ -804,6 +824,7 @@ fn caller() {
     let _ = sqrt_approx(0.0);  // Prusti 错误: 前置条件不满足！
 }
 ```
+
 > **修正**: 写规范时需仔细考虑边界条件。前置条件应恰好描述函数要求的最小条件：
 >
 > ```rust

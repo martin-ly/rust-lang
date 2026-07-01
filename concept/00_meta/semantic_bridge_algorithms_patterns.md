@@ -94,6 +94,7 @@
 
 > **语义桥洞察**: 算法、设计模式和工作流模式在语义空间中是同构的——三者都可以用"输入 → 变换 → 输出"的抽象统一描述。[来源: [Wikipedia — Algorithm](https://en.wikipedia.org/wiki/Algorithm)] · [来源: [Wikipedia — Software Design Pattern](https://en.wikipedia.org/wiki/Software_design_pattern)]
 ```
+
 ### 2.2 同构映射表
 
 | 算法概念 | 设计模式对应 | 工作流模式对应 | 统一语义 |
@@ -128,6 +129,7 @@ fn merge_sort<T: Ord + Clone>(data: &[T]) -> Vec<T> {
     merge(&left, &right) // 合并
 }
 ```
+
 ### 3.2 设计模式层：Composite + Strategy
 
 ```rust,ignore
@@ -154,6 +156,7 @@ impl<T: Ord + Clone> DataStructure<T> for Node<T> {
     }
 }
 ```
+
 ### 3.3 工作流层：Parallel Split + Synchronization
 
 ```text
@@ -167,6 +170,7 @@ impl<T: Ord + Clone> DataStructure<T> for Node<T> {
                                            │
                                         [结束]
 ```
+
 ### 3.4 统一语义[来源: [Category Theory for Programmers — Bartosz Milewski](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)]
 
 > **形式化命题** [Tier 3]: 归并排序、Composite 模式的分治遍历、以及 Parallel Split + Synchronization 工作流模式，在语义上等价于 **"二叉树的后序遍历 + 节点聚合"**。
@@ -258,6 +262,7 @@ fn main() {
     println!("factorial(5) = {}", factorial(5));
 }
 ```
+
 #### 范畴论语境
 
 递归数据类型可以看作其形状函子的**初始代数（Initial Algebra）**。对于表达式树，形状函子为：
@@ -268,6 +273,7 @@ Expr ≅ F(Expr)                  // 不动点方程
 eval : Expr → i64               // F-代数（F-algebra）
 eval = cata(f)                  // catamorphism（折叠）
 ```
+
 Composite 的 `eval` 就是一个 catamorphism；工作流 Sequence 则是把该 catamorphism 展开为线性指令序列。**后序遍历 + 节点聚合**的统一结构正是初始代数的折叠语义。[来源: [Category Theory for Programmers — Bartosz Milewski](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)]
 
 > **关联章节**: [Control Flow](../01_foundation/07_control_flow.md) · [Design Patterns](../06_ecosystem/02_patterns.md) · [Algorithms](../06_ecosystem/29_algorithms_competitive_programming.md)
@@ -289,6 +295,7 @@ fn fibonacci(n: usize) -> usize {
     memo[n]
 }
 ```
+
 ### 4.2 设计模式层：Memoization + Strategy
 
 ```rust
@@ -318,6 +325,7 @@ impl MemoizedFib {
     }
 }
 ```
+
 ### 4.3 工作流层：Deferred Choice + Sequence
 
 ```text
@@ -327,6 +335,7 @@ impl MemoizedFib {
   ├── 命中 ──→ [返回缓存值] ──→ [结束]
   └── 未命中 ──→ [计算子问题 n-1] ──→ [计算子问题 n-2] ──→ [合并结果] ──→ [存入缓存] ──→ [结束]
 ```
+
 ### 4.4 统一语义
 
 > **形式化命题** [Tier 3]: 动态规划、Memoization 设计模式、和 Deferred Choice 工作流模式，在语义上等价于 **"有向无环图的拓扑序遍历 + 记忆化求值"**。
@@ -432,6 +441,7 @@ fn main() {
     println!("lazy first 10: {:?}", LazyFib::new().take(10).collect::<Vec<_>>());
 }
 ```
+
 #### 范畴论语境
 
 惰性求值可以被建模为 **Thunk 函子** `T(A) = () → A` 上的 `let` 共享：第一次 `force` 将 thunk 替换为其值，后续 `force` 直接返回该值。Memoization 则把这一局部共享扩展为**全局 DAG 节点缓存**。从范畴论角度看，二者都是把 `eval : DAG → Value` 提升为 `eval_memo : DAG → Value`，使得同态节点共享同一个值对象；DP 的填表顺序则是 DAG 拓扑排序的一种具体实现。[来源: [Wikipedia — Lazy Evaluation](https://en.wikipedia.org/wiki/Lazy_evaluation)] · [来源: [CLRS — Introduction to Algorithms](https://mitpress.mit.edu/books/introduction-algorithms-fourth-edition)]
@@ -566,6 +576,7 @@ fn main() {
     println!("collected: {:?}", collector.ids);
 }
 ```
+
 #### 范畴论语境
 
 图的 DFS 可以看作 **余代数（coalgebra）** 上的遍历：设 `P(X)` 为幂集函子，则邻接表可表示为 `next : V → P(V)`。DFS Iterator 是从该余代数出发构造的**轨迹（trace）**，即反复应用 `next` 并记录访问历史的序列。Visitor 则是定义在该轨迹上的代数操作：对每一个访问到的节点应用一个函数。Iterator 的惰性本质把图这一余代数结构展开为**最终的 `Option<(A, S)` 煤gebra**，其中 `S` 是迭代器状态。因此，图遍历 ↔ Visitor ↔ Iterator 的同构可以概括为：**从图的余代数到线性轨迹的展开，再对轨迹施加代数操作**。[来源: [Category Theory for Programmers — Coalgebras](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)]
@@ -599,6 +610,7 @@ fn main() {
   └── 需要尝试 + 撤销 + 重试?
       └── → 回溯算法 / Command + Memento / Cancel + Compensate
 ```
+
 ---
 
 ## 七、知识来源关系

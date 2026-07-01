@@ -57,6 +57,7 @@ Rust Stream Processing Ecosystem
     ├── Redpanda — C++ 实现，但 Rust 客户端生态丰富
     └── 嵌入式: rdkafka (librdkafka 绑定)、sea-streamer
 ```
+
 ---
 
 ## 二、timely-dataflow：Rust 的分布式数据流引擎
@@ -85,6 +86,7 @@ fn main() {
     });
 }
 ```
+
 > **关键洞察**: TD 的 API 设计刻意保持底层——它提供的是"数据流图的构建块"，而非高阶流 DSL。这与 Flink 的 Table API 或 Spark 的 DataFrame API 形成鲜明对比。TD 的目标用户是系统构建者（如 Materialize），而非业务开发者。[来源: Timely Dataflow README] ✅
 
 ---
@@ -120,6 +122,7 @@ fn main() {
     }).unwrap();
 }
 ```
+
 ### 3.2 DD 的增量运算符
 
 | 运算符 | 增量语义 | Rust Trait 表达 |
@@ -152,6 +155,7 @@ async fn process_stream<S: Stream<Item = i32> + Unpin>(mut stream: S) {
     }
 }
 ```
+
 ### 4.2 背压的内建支持
 
 ```rust
@@ -165,6 +169,7 @@ let mut stream = ReceiverStream::new(rx);
 // 消费者处理速度自然决定生产者速度
 tx.send(42).await.unwrap();
 ```
+
 > **关键洞察**: Rust 的 `Stream` trait + 有界 channel = 拉取式背压（pull-based backpressure）。这与 Reactive Streams（Java）的 `request(n)` 或 Flink 的 credit-based 背压不同——Rust 的背压是"隐式的"，由 `await` 点的阻塞自然产生，无需显式信号协议。这是 Rust 所有权（Ownership）+async 模型的独特产物。[来源: 💡 原创分析] · [Tokio Documentation](https://tokio.rs/) ✅
 
 ---
@@ -208,6 +213,7 @@ Materialize Architecture
     └── 增量视图维护
     └── 严格串行化一致性
 ```
+
 ### 6.2 与 Flink 的对比
 
 | 维度 | Materialize | Apache Flink |
@@ -293,6 +299,7 @@ async fn correct_process<S: Stream<Item = i32> + Unpin>(mut stream: S) {
     }
 }
 ```
+
 > **修正**: 流处理必须使用循环（`while let`）而非递归，因为流可能是无界的。
 
 ### 8.4 选型决策树
@@ -312,6 +319,7 @@ async fn correct_process<S: Stream<Item = i32> + Unpin>(mut stream: S) {
   └── 需要与现有 Flink/Kafka 生态集成?
       └── → rdkafka (Rust 客户端) + 自定义处理
 ```
+
 ### 8.5 Kafka 生态与 Rust 客户端
 >
 
@@ -344,6 +352,7 @@ async fn kafka_consumer() {
     }
 }
 ```
+
 | **Kafka 客户端** | **实现语言** | **特点** | **适用场景** |
 |:---|:---|:---|:---|
 | **rdkafka** | C (librdkafka) + Rust 绑定 | 功能完整、性能高、生产验证 | 生产环境 Kafka 集成 |
@@ -401,6 +410,7 @@ struct EventFixed {
     data: String,
 }
 ```
+
 > **修正**: Kafka/RabbitMQ 等消息队列的 Rust 客户端（`rdkafka`、`lapin`）通常要求消息类型实现 `DeserializeOwned`（从字节流拥有式反序列化）。这与 Go/Java 的弱类型消费（`[]byte` 或 `Object`）不同——Rust 在编译期验证消息格式与类型定义的一致性。消费者无法"假装"消费某种消息类型——若队列中的消息格式不匹配，反序列化失败并返回 `Err`。这是 Rust 在分布式系统中保持类型安全的延伸：编译期类型检查跨越进程边界。[来源: [rdkafka Documentation](https://docs.rs/rdkafka/)]
 
 ### 10.2 边界测试：背压与无界缓冲的内存风险（运行时 UB / OOM）
@@ -428,6 +438,7 @@ async fn producer_fixed(tx: mpsc::Sender<i32>) {
     }
 }
 ```
+
 > **修正**: 流处理系统的核心挑战之一是**背压**（backpressure）——当消费者速度慢于生产者时，如何防止内存溢出。Rust 的 `tokio::sync::mpsc::channel(n)` 是有界 channel，缓冲区满时 `send().await` 挂起，自然传播背压。`UnboundedSender` 无此保护，可能导致 OOM。这与 Flink 的显式背压机制或 Kafka 的拉取模型不同——Rust 的背压是"隐式的"，由 `await` 点的挂起自然产生，无需额外 API。这是所有权 + async/await + 有界 channel 的结合成果。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
 
 ### 10.3 边界测试：背压（backpressure）与无界通道的内存爆炸（运行时 OOM）
@@ -450,6 +461,7 @@ async fn consumer(mut rx: mpsc::UnboundedReceiver<i32>) {
     }
 }
 ```
+
 > **修正**: 流处理系统中，**背压**（backpressure）是防止生产者淹没消费者的关键机制。`mpsc::unbounded_channel` 无队列大小限制，生产者永不阻塞，消费者慢时内存爆炸。`mpsc::channel(n)` 有界通道：队列满时 `send().await` 阻塞（异步）或 `send()` 返回 `TrySendError::Full`（同步）。流处理框架（`tokio-stream`、`futures::Stream`、`fluvio`）内置背压：下游慢时自动反压上游。这与 Akka Streams（`BufferOverflowStrategy.backpressure`）、Reactive Streams 规范（`Subscription.request(n)`）或 Kafka 的 consumer lag（应用层背压）类似——Rust 的流生态遵循 Reactive Streams 原则，但实现更底层、更零成本。[来源: [Tokio Channels](https://docs.rs/tokio/)] · [来源: [Reactive Streams](https://www.reactive-streams.org/)]
 
 ### 10.4 边界测试：窗口操作的 watermark 与延迟数据（运行时逻辑错误）
@@ -465,6 +477,7 @@ fn windowed_sum(events: Stream<Event>) -> Stream<WindowResult> {
         // 延迟到达的事件可能被分配到错误的窗口或丢弃
 }
 ```
+
 > **修正**: 流处理的**窗口操作**（windowing）将无界流划分为有界块（时间窗口、计数窗口）。窗口的触发和清理需要**watermark**：一个时间戳，表示"小于此时间戳的数据都已到达"。无 watermark 时：1) 窗口永不关闭（内存泄漏）；2) 延迟数据被错误处理（Error Handling）（分配到已关闭窗口）。Rust 的流处理库（`timely-dataflow`、`differential-dataflow`）提供 watermark 支持，但 API 复杂。这与 Apache Flink 的 `WatermarkStrategy`、Spark Streaming 的 `Watermark` 或 Kafka Streams 的 `suppress` 类似——窗口和 watermark 是流处理的核心概念，语言层面的类型系统（Type System）难以完全自动化，需开发者根据业务逻辑配置。来源: [Timely Dataflow] · 来源: [Streaming Systems Book]
 > **过渡**: 流处理生态：Rust 实现与工业系统全景 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: 流处理生态：Rust 实现与工业系统全景 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

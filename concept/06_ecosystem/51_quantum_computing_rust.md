@@ -85,6 +85,7 @@
 │  n 个比特表示 n 个状态            n 个量子比特表示 2ⁿ 个振幅 │
 └─────────────────────────────────────────────────────────────┘
 ```
+
 > **来源**: [Qiskit Textbook — Qubit](https://qiskit.org/textbook/ch-states/introduction.html) · [IBM Quantum Learning](https://learning.quantum.ibm.com/)
 
 ### 1.2 量子叠加与测量
@@ -102,6 +103,7 @@
   2. 测量会不可逆地破坏叠加信息
   3. 无法通过单次测量确定完整的量子态（量子态层析需要大量重复）
 ```
+
 > **来源**: [Nielsen & Chuang — Chapter 2](https://www.cambridge.org/highereducation/books/quantum-computation-and-quantum-information/01E10196D0A682A6AEFFEA52D53BE9AE) · [Wikipedia — Quantum Superposition](https://en.wikipedia.org/wiki/Quantum_superposition)
 
 ### 1.3 量子纠缠与贝尔态
@@ -124,6 +126,7 @@
   · 超密编码 (Superdense Coding)
   · 量子密钥分发 (QKD — BB84, E91)
 ```
+
 > **来源**: [Bell State — Wikipedia](https://en.wikipedia.org/wiki/Bell_state) · [Quantum Teleportation Original Paper](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.70.1895)
 
 ### 1.4 量子门与量子电路
@@ -157,6 +160,7 @@
     │
   ──⊕──
 ```
+
 > **来源**: [Qiskit — Quantum Gates](https://qiskit.org/textbook/ch-gates/introduction.html) · [Quantum Circuit — Wikipedia](https://en.wikipedia.org/wiki/Quantum_circuit)
 
 ---
@@ -209,6 +213,7 @@ fn main() {
     println!("Measurement: {:?}", result);
 }
 ```
+
 ```text
 roqoqo 生态组件:
   ┌─────────────────────────────────────────────────────────────┐
@@ -220,6 +225,7 @@ roqoqo 生态组件:
   │  └── qoqo-iqm (IQM 硬件后端)                                 │
   └─────────────────────────────────────────────────────────────┘
 ```
+
 > **来源**: [HQS Quantum Simulations — qoqo](https://hqsquantumsimulations.github.io/qoqo/) · [roqoqo-quest GitHub](https://github.com/HQSquantumsimulations/qoqo-quest)
 
 ### 3.2 rustqip：图构建式量子模拟
@@ -243,6 +249,7 @@ fn main() -> Result<(), CircuitError> {
     Ok(())
 }
 ```
+
 > **来源**: [rustqip crates.io](https://crates.io/crates/qip) · [rustqip Documentation](https://docs.rs/qip/)
 
 ### 3.3 q1tsim、qasmsim、rusq 等模拟器
@@ -264,6 +271,7 @@ Rust 量子模拟器生态定位:
   教学 / 原型   →  quantum, rusq
   跨语言绑定    →  rust-libquantum, qoqo (Python)
 ```
+
 > **来源**: [Are We Quantum Yet?](https://arewequantumyet.github.io/) · [qasmsim GitHub](https://github.com/delapuente/qasmsim) · [q1tsim crates.io](https://crates.io/crates/q1tsim)
 
 ### 3.4 与 Python 量子生态的交互
@@ -284,6 +292,7 @@ Rust ↔ Python 量子生态的交互路径:
 注意: Q# (Microsoft) 有自己的运行时和编译器，Rust 可通过
   WASM 或经典宿主程序与之交互，但不存在原生 `qsharp-runtime` crate。
 ```
+
 > **来源**:
 > [qoqo-qiskit GitHub](https://github.com/HQSquantumsimulations/qoqo-qiskit) ·
 > [PyO3](https://pyo3.rs/) ·
@@ -304,6 +313,7 @@ Rust ↔ Python 量子生态的交互路径:
   │  Gradient compute  │   N/A      │     1×       │   ~3×       │
   └────────────────────┴────────────┴──────────────┴─────────────┘
 ```
+
 > **来源**: [LogosQ arXiv 2512.23183](https://arxiv.org/abs/2512.23183) · [qforge crates.io](https://crates.io/crates/qforge) · [quantrs2 crates.io](https://crates.io/crates/quantrs2)
 
 ---
@@ -330,6 +340,7 @@ Rust ↔ Python 量子生态的交互路径:
   状态向量模拟是内存受限（memory-bound）而非计算受限。
   优化重点：内存布局、缓存局部性、SIMD、分布式存储。
 ```
+
 > **来源**: [QuEST — State Vector](https://quest.qtechtheory.org/) · [Quantum Simulator Survey](https://arxiv.org/abs/2301.02619)
 
 ### 4.2 张量网络收缩
@@ -352,6 +363,7 @@ Rust ↔ Python 量子生态的交互路径:
   └──────────────────────────────────────────────────────────────┘
   * 注：最坏情况仍为指数，但对特定电路（如 1D/2D 局域门）多项式可行
 ```
+
 > **来源**:
 > [Tensor Network Contraction](https://arxiv.org/abs/1905.01330) ·
 > [Google AI — Quantum Supremacy](https://www.nature.com/articles/s41586-019-1666-5)
@@ -384,6 +396,7 @@ fn apply_phase_simd(state: &mut [Complex64]) {
     // Rust 的 packed_simd 或 std::simd 可提供类型安全的向量操作
 }
 ```
+
 ```text
 Rust 在量子模拟中的性能优势:
   1. 内存安全: 无数据竞争保证 → 并行化无需 GC 暂停
@@ -392,6 +405,7 @@ Rust 在量子模拟中的性能优势:
   4. 跨平台: x86_64 / ARM / WASM 统一代码库
   5. FFI 能力: 可安全绑定 QuEST (C) 或 CUDA 内核
 ```
+
 > **来源**: [Rayon Documentation](https://docs.rs/rayon/) · [Rust std::simd RFC](https://github.com/rust-lang/rfcs/pull/2948) · [LogosQ Performance Analysis](https://arxiv.org/abs/2512.23183)
 
 ---
@@ -422,6 +436,7 @@ Mosca 不等式（迁移决策）:
   现状: 许多高价值数据（医疗、政府）需要 25-50 年保密期
   结论: 对于长期数据，迁移期限已过
 ```
+
 > **来源**:
 > [NIST FIPS 203](https://csrc.nist.gov/pubs/fips/203/final) ·
 > [NIST FIPS 204](https://csrc.nist.gov/pubs/fips/204/final) ·
@@ -455,6 +470,7 @@ ML-DSA (Dilithium) 核心机制:
   │  SLH-DSA-128 │    32 B     │  7,856 B    │  哈希函数    │
   └──────────────┴─────────────┴─────────────┴──────────────┘
 ```
+
 > **来源**: [CRYSTALS Official Site](https://pq-crystals.org/) · [FIPS 203 Specification](https://csrc.nist.gov/pubs/fips/203/final) · [FIPS 204 Specification](https://csrc.nist.gov/pubs/fips/204/final)
 
 ### 5.3 pqclean-rust、pqcrypto、liboqs-rust
@@ -481,6 +497,7 @@ fn main() {
     assert_eq!(ss_alice.as_bytes(), ss_bob.as_bytes());
 }
 ```
+
 ```text
 Rust PQC crate 生态:
   ┌─────────────────────────────────────────────────────────────┐
@@ -495,6 +512,7 @@ Rust PQC crate 生态:
 注意: 目前生产级 PQC 实现仍主要依赖经过审计的 C 代码（PQClean）
       Rust 原生纯实现（如 qux-pqc）正在发展中，需谨慎评估。
 ```
+
 > **来源**: [PQClean Project](https://github.com/PQClean/PQClean) · [pqcrypto crates](https://docs.rs/pqcrypto-kyber/) · [liboqs Documentation](https://openquantumsafe.org/)
 
 ### 5.4 rustls 的后量子 TLS 实践
@@ -521,6 +539,7 @@ fn setup_pq_client() -> ClientConfig {
     .with_no_client_auth()
 }
 ```
+
 ```text
 rustls 后量子 TLS 状态:
   · rustls 0.23.22+: ML-KEM 密钥交换内置（prefer-post-quantum）
@@ -528,6 +547,7 @@ rustls 后量子 TLS 状态:
   · 实验性 ML-DSA 签名: 通过 aws-lc-rs-unstable feature
   · 生产状态: 混合 KEX 已可用；纯 PQC 签名证书链仍需生态成熟
 ```
+
 > **来源**: [rustls Documentation](https://docs.rs/rustls/) · [rustls-post-quantum README](https://github.com/rustls/rustls/tree/main/rustls-post-quantum) · [IETF TLS ML-KEM Draft](https://datatracker.ietf.org/doc/draft-ietf-tls-mlkem/)
 
 ---
@@ -557,6 +577,7 @@ rustls 后量子 TLS 状态:
   Ansatz: |ψ(γ, β)⟩ = e^{-iβ_p H_M} e^{-iγ_p H_C} ... e^{-iβ_1 H_M} e^{-iγ_1 H_C} |+⟩^⊗n
   经典优化: 调整 2p 个参数 (γ, β) 以最大化 ⟨C⟩
 ```
+
 > **来源**: [Qiskit — VQE Tutorial](https://qiskit.org/textbook/ch-applications/vqe-molecules.html) · [PennyLane — QAOA](https://docs.pennylane.ai/en/stable/code/api/pennylane.qaoa.cost.maxcut.html)
 
 ### 6.2 参数移位与梯度计算
@@ -599,6 +620,7 @@ fn parameter_shift_gradient(
     grad
 }
 ```
+
 ```text
 Rust 在量子-经典混合工作流中的优势:
   1. 零成本 FFI: Rust 高性能模拟 ↔ Python 优化器（scipy.optimize）
@@ -606,6 +628,7 @@ Rust 在量子-经典混合工作流中的优势:
   3. 并行评估: rayon 可并行计算不同参数的移位评估
   4. 内存安全: 长时间运行的 VQE 迭代不会出现内存泄漏
 ```
+
 > **来源**: [PennyLane Gradients](https://docs.pennylane.ai/en/stable/introduction/interfaces.html) · [Rayon Parallel Iteration](https://docs.rs/rayon/) · [LogosQ Type Safety](https://arxiv.org/abs/2512.23183)
 
 ---
@@ -648,6 +671,7 @@ Rust 在量子-经典混合工作流中的优势:
 └── 根结论: ❌ 量子计算仅在特定问题（因式分解、模拟量子系统、优化）上有
            指数或多项式级优势，远非万能计算方案。
 ```
+
 > **来源**:
 > [Shor's Algorithm](https://arxiv.org/abs/quant-ph/9508027) ·
 > [Google Quantum Supremacy](https://www.nature.com/articles/s41586-019-1666-5) ·
@@ -702,6 +726,7 @@ fn measure_state(state: &QubitState) -> (f64, f64) {
     (p0, p1) // 返回概率，但原量子态在真实系统中已坍缩
 }
 ```
+
 > **修正**: 不可克隆定理（No-Cloning Theorem）表明不存在一个通用的幺正算符 $U$ 使得 $U|\psi\rangle|0\rangle = |\psi\rangle|\psi\rangle$ 对所有 $|\psi\rangle$ 成立。量子通信协议（如 QKD）的安全性正是建立在此定理之上。
 >
 > **来源**: [No-Cloning Theorem — Wootters & Zurek 1982](https://www.nature.com/articles/299802a0) · [Dieks 1982](https://doi.org/10.1016/0375-9601(82)90084-6)
@@ -729,6 +754,7 @@ fn simulate_30_qubits() -> Vec<Complex64> {
 // 3. 使用单精度浮点数（f32 / Complex32）将内存减半
 // 4. 量子蒙特卡洛或矩阵乘积态（MPS）近似
 ```
+
 > **来源**: [QuEST Performance Notes](https://quest.qtechtheory.org/) · [Tensor Network Methods](https://arxiv.org/abs/1905.01330)
 
 ### 8.3 边界测试：使用非厄米算符进行量子演化（类型/逻辑错误）
@@ -766,6 +792,7 @@ fn main() {
     // ❌ 编译错误: `NonHermitian` does not implement `UnitaryEvolution`
 }
 ```
+
 > **修正**: 概率守恒要求 $\langle\psi(t)|\psi(t)\rangle = 1$ 对所有 $t$ 成立。若哈密顿量 $H \neq H^\dagger$，则 $U = e^{-iHt}$ 不是幺正的，$\langle\psi(t)|\psi(t)\rangle$ 将随时间指数增长或衰减，违反量子力学的基本公设。
 >
 > **来源**: [Nielsen & Chuang — Unitary Evolution](https://www.cambridge.org/highereducation/books/quantum-computation-and-quantum-information/01E10196D0A682A6AEFFEA52D53BE9AE) · [Quantum Mechanics Postulates](https://en.wikipedia.org/wiki/Mathematical_formulation_of_quantum_mechanics)

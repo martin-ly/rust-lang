@@ -117,6 +117,7 @@ ECS (Entity-Component-System):
       }
   }
 ```
+
 > **认知功能**: **ECS 将数据与逻辑解耦，实现缓存友好和天然并行**——Rust 的类型系统（Type System）完美支持这种数据导向设计。
 > [来源: [Bevy ECS](https://bevyengine.org/learn/book/)]
 
@@ -157,6 +158,7 @@ Bevy 引擎架构:
       .add_systems(Update, (move_system, collision_system))
       .run();
 ```
+
 > **Bevy 洞察**: **Bevy 是 Rust 游戏开发的标杆**——利用 Rust 的所有权（Ownership）和类型系统（Type System）实现编译期系统依赖图验证。
 > [来源: [Bevy Architecture](https://bevyengine.org/learn/book/)]
 
@@ -199,6 +201,7 @@ WGPU:
       .await
       .unwrap();
 ```
+
 > **WGPU 洞察**: **WGPU 代表了 Rust 图形编程的未来**——类型安全、跨平台、现代 GPU 特性全支持。
 > [来源: [WGPU](https://wgpu.rs/)] · [来源: [WebGPU Spec](https://www.w3.org/TR/webgpu/)]
 
@@ -233,6 +236,7 @@ WGPU:
       *output = Vec4::new(1.0, 0.0, 0.0, 1.0);
   }
 ```
+
 > **渲染洞察**: **rust-gpu 是 Rust 在 GPU 编程领域的革命**——用安全语言编写着色器，编译到 SPIR-V。
 > [来源: [rust-gpu](https://github.com/EmbarkStudios/rust-gpu)]
 
@@ -269,6 +273,7 @@ Rust 物理引擎:
       .build();
   let collider = ColliderBuilder::ball(0.5).build();
 ```
+
 > **物理洞察**: **Rapier 是 Rust 物理引擎的领导者**——纯 Rust 实现，性能接近 Bullet/PhysX。
 > [来源: [Rapier Physics](https://rapier.rs/)]
 
@@ -296,6 +301,7 @@ Rust 音频生态:
   ├── 多种音频格式
   └── 元数据提取
 ```
+
 > **音频洞察**: **Rodio 和 CPAL 覆盖游戏音频全需求**——从播放到底层音频 I/O。
 > [来源: [rodio](https://github.com/RustAudio/rodio)] · [来源: [cpal](https://github.com/RustAudio/cpal)]
 
@@ -322,6 +328,7 @@ graph TD
     style RUST fill:#c8e6c9
     style ENGINE fill:#fff3e0
 ```
+
 > **认知功能**: **Rust 游戏开发适合技术驱动型团队**——需要编辑器生态的应选 Unity/Unreal。
 > [来源: [Are We Game Yet?](https://arewegameyet.rs/)]
 
@@ -356,6 +363,7 @@ graph TD
 ├── 构建流程比 Unity 复杂
 └── 缓解: bevy_mobile、cargo-mobile
 ```
+
 > **边界要点**: Rust 游戏开发的边界与**编辑器**、**学习曲线**、**资产管线**、**调试**和**移动平台**相关。
 > [来源: [Bevy Roadmap](https://bevyengine.org/)]
 
@@ -403,6 +411,7 @@ graph TD
   ✅ 测试多平台
      // CI 中测试不同后端
 ```
+
 > **陷阱总结**: Rust 游戏开发的陷阱主要与**ECS 设计**、**系统调度**、**资源竞争**、**共享状态**和**跨平台**相关。
 > [来源: [Bevy Learn](https://bevyengine.org/learn/)]
 
@@ -427,6 +436,7 @@ fn main() {
     println!("{:?}", data);
 }
 ```
+
 ### 编译验证示例
 
 ```rust
@@ -448,6 +458,7 @@ fn main() {
     println!("{:?}", a.add(b));
 }
 ```
+
 ```rust
 #[derive(Debug)]
 enum GameState {
@@ -461,6 +472,7 @@ fn main() {
     println!("{:?}", state);
 }
 ```
+
 ```rust
 fn main() {
     let mut positions = vec![(0.0, 0.0), (1.0, 2.0)];
@@ -471,6 +483,7 @@ fn main() {
     println!("{:?}", positions);
 }
 ```
+
 ## 相关概念文件
 
 - [Concurrency](../03_advanced/01_concurrency.md) — 并发
@@ -521,6 +534,7 @@ fn update_score(mut score: ResMut<Score>, score2: ResMut<Score>) {
     score2.0 += 20;
 }
 ```
+
 > **修正**: Bevy 的 ECS 架构中，**Resource** 是全局唯一状态（如游戏分数、配置）。System 函数通过 `Res<T>`（不可变）和 `ResMut<T>`（可变）访问资源。编译器拒绝同一 System 中对同一资源的多个可变引用（Mutable Reference），防止数据竞争。这与 Unity 的 `MonoBehaviour`（运行时（Runtime）空引用检查）或 Godot 的节点树（手动管理）不同——Bevy 在编译期保证资源访问的安全性，运行时无检查开销。ECS 的 archetype 存储进一步优化缓存局部性。[来源: [Bevy Documentation](https://docs.rs/bevy/)]
 
 ### 10.2 边界测试：游戏循环中的 `Send` 约束（编译错误）
@@ -539,6 +553,7 @@ fn load_system(mut commands: Commands) {
     commands.spawn(Texture { data: Rc::new(vec![0; 1024]) });
 }
 ```
+
 > **修正**: 游戏引擎通常使用线程池并行执行系统（如渲染、物理、AI 同时更新）。Bevy 要求所有 Component 和 Resource 实现 `Send + Sync`。`Rc<T>` 使用非原子引用（Reference）计数，不能跨线程；`Arc<T>` 可以。这与单线程游戏引擎（如某些 2D 框架）不同——Bevy 的并行调度是核心特性，类型系统确保并行安全。对于确实不能跨线程的资源（如 GPU 句柄），使用 `NonSend` 和 `NonSendMut` 标记，限制其在主线程系统上访问。[来源: [Bevy Documentation](https://docs.rs/bevy/)]
 
 ### 10.3 边界测试：游戏循环中的固定时间步长与渲染解耦（运行时卡顿）
@@ -571,6 +586,7 @@ fn main() {
 fn update(_dt: Duration) {}
 fn render() {}
 ```
+
 > **修正**: 游戏循环中，**固定时间步长**（fixed timestep）将物理/逻辑更新与渲染帧率解耦：更新按固定间隔（如 60 Hz）执行，渲染按显示刷新率执行。若使用变量 `dt`（实际帧间隔），帧率波动导致物理模拟不稳定（低帧率时物体穿透、高帧率时计算浪费）。Rust 的游戏引擎（Bevy、Fyrox、macroquad）内置固定时间步长支持。这与 Unity 的 `FixedUpdate`（固定 50 Hz，与 `Update` 分离）或 Godot 的 `_physics_process`（类似）相同——游戏开发的经典模式。Rust 的类型系统帮助表达时间单位（`Duration` 而非裸 `f64` 秒），减少单位混淆。[来源: [Game Loop Pattern](https://gameprogrammingpatterns.com/game-loop.html)] · [来源: [Bevy Time Documentation](https://docs.rs/bevy/)]
 
 ### 10.4 边界测试：WGPU 的着色器编译与平台支持差异（运行时 panic）
@@ -590,6 +606,7 @@ fn create_render_pipeline(device: &wgpu::Device) {
     let _ = shader;
 }
 ```
+
 > **修正**: WGPU 是 Rust 的跨平台图形 API（WebGPU 标准的实现），抽象了 Vulkan、Metal、DX12、OpenGL、WebGL。但不同后端的能力不同：1) WebGL2 不支持计算着色器（compute shaders）；2) 旧 GPU 不支持 Vulkan 的某些扩展；3) 某些纹理格式在特定平台上不可用。WGPU 在**适配器创建**时报告能力（`adapter.limits()`、`adapter.features()`），但着色器编译时的错误可能晚于预期。安全模式：1) 运行时检查 `device.features()` 和 `device.limits()`；2) 提供降级着色器（如 compute 的 CPU fallback）；3) 使用 `wgpu::ShaderSource::Glsl` 或 `SpirV` 替代 WGSL（若后端支持更好）。这与 Unity 的 shader variants（自动选择平台特定着色器）或 Unreal 的 RHI（Render Hardware Interface，类似 WGPU）类似——跨平台图形编程的核心挑战是能力差异管理。[来源: [WGPU Documentation](https://docs.rs/wgpu/)] · [来源: [WebGPU Standard](https://www.w3.org/TR/webgpu/)]
 > **过渡**: Rust 游戏开发生态 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Rust 游戏开发生态 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

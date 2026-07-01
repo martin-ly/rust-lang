@@ -115,6 +115,7 @@ ex:equivalentTo a owl:ObjectProperty ;
     rdfs:label "equivalent to"@en, "等价于"@zh ;
     rdf:type owl:SymmetricProperty, owl:TransitiveProperty, owl:ReflexiveProperty .
 ```
+
 ### 4.2 RDF-star 元数据注解
 
 在 v1 中，三元组 `ex:Ownership ex:dependsOn ex:TypeSystem` 是一条无标签边。v2 使用 RDF-star 对该边附加元数据：
@@ -128,6 +129,7 @@ ex:equivalentTo a owl:ObjectProperty ;
     dcterms:created "2026-06-27"^^xsd:date ;
     prov:wasDerivedFrom <https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html> .
 ```
+
 **元数据字段规范**：
 
 | 字段 | 类型 | 必填 | 说明 |
@@ -222,6 +224,7 @@ ex:AffineLogic a ex:Theory ;
     ex:version "1.96.0" ;
     ex:reviewed true .
 ```
+
 ---
 
 ## 七、JSON-LD 1.1 示例
@@ -274,6 +277,7 @@ ex:AffineLogic a ex:Theory ;
   }
 }
 ```
+
 > **注**：JSON-LD 1.1 对 RDF-star 的 `@annotation` 语法是社区草案，生产环境可回退为 Turtle/N-Triples-star 序列化。
 
 ---
@@ -306,6 +310,7 @@ v2 配套 SHACL shapes 定义在 `concept/00_meta/kg_shapes.ttl`，可验证：
 ```bash
 cargo run --bin kg-validate -- concept/00_meta/kg_data.json concept/00_meta/kg_shapes.ttl
 ```
+
 ---
 
 **维护者**: Rust 学习项目团队

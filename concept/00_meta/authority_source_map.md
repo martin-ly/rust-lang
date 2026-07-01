@@ -83,6 +83,7 @@ Nomicon:     https://doc.rust-lang.org/nomicon/
 RFCs:        https://rust-lang.github.io/rfcs/
 Rust By Ex:  https://doc.rust-lang.org/rust-by-example/
 ```
+
 ### 学术
 
 ```
@@ -92,6 +93,7 @@ Tree Borrows:          https://plv.mpi-sws.org/rustbelt/
 Iris Project:          https://iris-project.org/
 Ralf Jung 主页:         https://ralfj.de/
 ```
+
 ### 社区权威博客
 
 ```
@@ -101,6 +103,7 @@ Jon Gjengset:          https://thesquareplanet.com/blog/ · YouTube: @JonGjengse
 Ralf Jung (blog):      https://www.ralfj.de/blog/
 dtolnay:               https://dtolnay.github.io/
 ```
+
 ---
 
 ## 四、执行批次 [来源: Authority Source Sprint 执行记录; 对齐方法论参照 AGENTS.md 质量铁三角 — Bloom 层级 100%、来源标注率 ≥15%、跨文件链接 ≥3/文件]

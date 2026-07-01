@@ -98,6 +98,7 @@ rustc 核心架构:
 │              LLVM IR → 机器代码 / Cranelift                  │
 └─────────────────────────────────────────────────────────────┘
 ```
+
 > **关键设计决策**:
 >
 > - **查询系统**: 编译步骤表示为可缓存的查询（`tcx.type_of(def_id)`），天然支持增量编译
@@ -135,6 +136,7 @@ Phase 6 — 代码生成
   MIR → LLVM IR（或 Cranelift IR）
   LLVM 优化、机器代码生成
 ```
+
 | **阶段** | **输入** | **输出** | **核心 crate** | **关键操作** |
 |:---|:---|:---|:---|:---|
 | 词法分析 | `.rs` 源码 | `TokenStream` | `rustc_lexer` | Unicode 识别、注释剥离 |
@@ -178,6 +180,7 @@ Rust 语法分析的特点:
   - 错误恢复：遇到语法错误后继续解析，报告多个错误
   - 宏友好：TokenStream 保留原始 token 信息，支持宏的卫生性（hygiene）
 ```
+
 ```rust,ignore
 // rustc 中的 AST 节点示例（简化）
 pub enum ExprKind {
@@ -192,6 +195,7 @@ pub enum ExprKind {
     // ...
 }
 ```
+
 > **来源**: [Rustc Dev Guide — Parsing](https://rustc-dev-guide.rust-lang.org/the-parser.html)
 
 ### 3.2 宏展开
@@ -213,6 +217,7 @@ pub enum ExprKind {
     }
     make_var!(x);  // x 只在宏展开的作用域内可见
 ```
+
 > **来源**: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html) · [Rustc Dev Guide — Macro Expansion](https://rustc-dev-guide.rust-lang.org/macro-expansion.html)
 
 ---
@@ -243,6 +248,7 @@ for i in 0..10 { println!("{}", i); }
     }
 }
 ```
+
 > **来源**: [Rustc Dev Guide — HIR](https://rustc-dev-guide.rust-lang.org/hir.html)
 
 ### 4.2 类型检查
@@ -266,6 +272,7 @@ fn infer_example() {
 fn use_debug<T: Debug>(t: T) { println!("{:?}", t); }
 use_debug(42);  // 检查 i32: Debug → 是（标准库实现）
 ```
+
 > **来源**: [Rustc Dev Guide — Type Checking](https://rustc-dev-guide.rust-lang.org/hir-typeck/summary.html) · [Chalk Book](https://rust-lang.github.io/chalk/book/)
 
 ---
@@ -303,6 +310,7 @@ Chalk vs rustc 传统求解器:
   │ GAT / 高阶类型   │ 部分支持        │ 设计目标                    │
   └─────────────────┴─────────────────┴─────────────────────────────┘
 ```
+
 > **来源**: [Chalk Book](https://rust-lang.github.io/chalk/book/) · [Niko Matsakis — Chalk](https://smallcultfollowing.com/babysteps/blog/2017/01/26/lowering-rust-traits-to-logic/)
 
 ### 5.2 类型推断
@@ -322,6 +330,7 @@ Rust 类型推断的特点:
   - 泛型参数必须可推断（通常通过函数参数）
   - `collect()` 需要显式类型标注（因为多个类型可实现 `FromIterator`）
 ```
+
 > **来源**: [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/types.html) · [Rustc Dev Guide — Type Checking](https://rustc-dev-guide.rust-lang.org/hir-typeck/summary.html)
 
 ---
@@ -353,6 +362,7 @@ MIR 语句示例:
       switchInt(move _3) -> [0: bb2, otherwise: bb3];  // match 分支
   }
 ```
+
 ```rust,ignore
 // Rust 源代码
 fn example(x: Option<i32>) -> i32 {
@@ -391,6 +401,7 @@ fn example(_1: Option<i32>) -> i32 {
     }
 }
 ```
+
 > **来源**: [Rustc Dev Guide — MIR](https://rustc-dev-guide.rust-lang.org/mir/index.html)
 
 ### 6.2 MIR 优化
@@ -413,6 +424,7 @@ MIR 优化阶段（在 borrowck 之后、codegen 之前）:
   - -C opt-level=s: 优化代码大小
   - -C opt-level=z: 极致代码大小优化
 ```
+
 > **来源**: [Rustc Dev Guide — Optimizations](https://rustc-dev-guide.rust-lang.org/)
 
 ### 6.3 常量求值（MIRI / Const Eval）
@@ -435,6 +447,7 @@ MIRI（MIR Interpreter）:
   - 用于常量求值和编译期检查
   - 独立工具 miri 用于运行时 UB 检测
 ```
+
 > **来源**: [Rustc Dev Guide — Const Evaluation](https://rustc-dev-guide.rust-lang.org/const-eval/interpret.html) · [MIRI](https://github.com/rust-lang/miri)
 
 ---
@@ -467,6 +480,7 @@ NLL 的实现:
   - 计算每个引用的"实际使用范围"（live range）
   - 检查借用在整个 live range 内不冲突
 ```
+
 > **来源**: [Rust [RFC 2094](https://rust-lang.github.io/rfcs//2094-nll.html) — NLL](<https://rust-lang.github.io/rfcs//2094-nll.html>) · [Niko Matsakis — NLL](https://smallcultfollowing.com/babysteps/blog/2016/04/27/non-lexical-lifetimes-introduction/)
 
 ### 7.2 Polonius：基于逻辑的借用检查
@@ -495,6 +509,7 @@ Polonius 状态（2025）:
   - 2026 目标: 稳定化（替代 NLL 成为默认）
   - 解决了 NLL problem case #3（lending iterator）
 ```
+
 > **来源**: [Polonius Paper — OOPSLA 2018](https://hal.inria.fr/hal-03827702/) · [Rustc Dev Guide — Polonius](https://rustc-dev-guide.rust-lang.org/borrow-check.html) · [Niko Matsakis — Polonius](https://smallcultfollowing.com/babysteps/blog/2019/01/17/polonius-and-region-errors/)
 
 ### 7.3 别名模型：Tree Borrows
@@ -519,6 +534,7 @@ Tree Borrows 的核心规则:
   - 子节点不能访问父节点不允许的内存
   - 读取操作向下传播（父 → 子），写入操作向上验证（子 → 父）
 ```
+
 > **来源**: [Tree Borrows Paper — PLDI 2025](https://perso.crans.org/vanille/treebor/) · [Rustc Dev Guide — Tree Borrows](https://rustc-dev-guide.rust-lang.org/mir/index.html) · [Miri Tree Borrows Implementation](https://github.com/rust-lang/miri/blob/master/src/borrow_tracker/tree_borrows/mod.rs)
 
 ---
@@ -544,6 +560,7 @@ LLVM 优化管道:
   - 关键优化: 内联、常量传播、死代码消除、循环优化、向量化
   - Rust 特有的优化: 单态化后的函数去重、panic 路径优化
 ```
+
 > **来源**: [LLVM Documentation](https://llvm.org/docs/) · [Rustc Dev Guide — Code Generation](https://rustc-dev-guide.rust-lang.org/backend/codegen.html)
 
 ### 8.2 增量编译
@@ -565,6 +582,7 @@ LLVM 优化管道:
   -  crate 边界: 跨 crate 的 inline 函数修改需要重新编译所有调用者
   -  配置变更: Cargo.toml 或 feature flag 变更通常触发全量编译
 ```
+
 > **来源**: [Rustc Dev Guide — Queries](https://rustc-dev-guide.rust-lang.org/query.html) · [Rustc Dev Guide — Incremental Compilation](https://rustc-dev-guide.rust-lang.org/queries/incremental-compilation.html)
 
 ---
@@ -591,6 +609,7 @@ rustc 查询系统的核心设计:
   - 并行化: 无依赖的查询可并行执行
   - 调试: 查询追踪（-Z self-profile）精确显示编译时间分布
 ```
+
 > **来源**: [Rustc Dev Guide — Query System](https://rustc-dev-guide.rust-lang.org/query.html)
 
 ---
@@ -628,6 +647,7 @@ rustc 查询系统的核心设计:
 │   └── 语言的根本限制（线性逻辑）不会因为求解器改进而消失
 └── 根结论: ❌ Polonius 显著改进借用检查，但不会消除所有权系统的所有限制。
 ```
+
 ### 10.2 边界极限
 >
 
@@ -659,6 +679,7 @@ fn main() {
     // 默认递归限制: 128 层
 }
 ```
+
 > **修正**: 宏递归必须有终止条件。
 > 编译器通过 `recursion_limit` 控制最大展开深度（默认 128），可通过 `#![recursion_limit = "256"]` 增加。
 > [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros-by-example.html)]
@@ -675,6 +696,7 @@ process::<String>(vec);  // 生成 process_String
 process::<Vec<u8>>(vec); // 生成 process_Vec_u8
 // 若有 100 个不同类型调用 → 100 份代码 → 二进制巨大
 ```
+
 > **修正**: 使用 `dyn Trait` 动态分发替代泛型（Generics）：
 >
 > ```rust
@@ -703,6 +725,7 @@ fn undefined_behavior() {
 // error: Undefined Behavior: attempting a write access using <tag>
 //        at alloc[...], but that tag does not exist in the borrow stack
 ```
+
 > **修正**: Miri 是检测 unsafe 代码 UB 的强大工具，但需在 CI 中定期运行（因为它只检测执行到的代码路径）。不能替代代码审查。
 > [来源: [MIRI Book](https://github.com/rust-lang/miri)] ·
 > [Rustonomicon — Undefined Behavior](https://doc.rust-lang.org/nomicon/what-unsafe-does.html)

@@ -31,6 +31,7 @@ fn make_callback() -> impl FnOnce() -> Pin<Box<dyn Future<Output = i32> + Send>>
     })
 }
 ```
+
 这种写法的问题：
 
 1. **语法冗余**：闭包（Closures） + `async move` 块两层嵌套。
@@ -47,6 +48,7 @@ fn make_callback() -> impl AsyncFnOnce() -> i32 {
     }
 }
 ```
+
 > **关键洞察**：`async || {}` 不是“返回 Future 的闭包（Closures）”，而是**真正的异步（Async）闭包**——调用它返回一个 Future，且捕获语义与同步闭包一致。
 
 ---
@@ -73,6 +75,7 @@ let add = async |a: i32, b: i32| -> i32 {
 // 调用：返回 Future，需要 await
 let result = add(1, 2).await;
 ```
+
 ### 2.2 捕获模式
 
 async closures 的捕获规则**与同步闭包一致**：编译器根据闭包体对捕获变量的使用方式，自动选择借用（Borrowing）或移动。
@@ -105,6 +108,7 @@ async fn capture_examples() {
     println!("{}", s); // ✅ s 仍可用
 }
 ```
+
 > ⚠️ 注意：async closure 体本身是一个 async block，调用时才产生 Future。捕获发生在闭包创建时，Future 内部再引用（Reference）这些捕获。
 
 ### 2.3 与 `|x| async move {}` 的对比
@@ -154,6 +158,7 @@ where
     async move { f(21).await }
 }
 ```
+
 ### 3.1 trait 层级
 
 ```text
@@ -165,6 +170,7 @@ where
              ▼
         AsyncFnOnce<Args>
 ```
+
 - `AsyncFn`：可多次不可变调用（`&self`）。
 - `AsyncFnMut`：可多次可变调用（`&mut self`）。
 - `AsyncFnOnce`：可消费式调用一次（`self`）。
@@ -189,6 +195,7 @@ where
 // 使用
 let evens = process_items(vec![1, 2, 3, 4], async |x| *x % 2 == 0).await;
 ```
+
 ### 3.3 形式化 trait 草图
 
 标准库中的实际定义更复杂，但核心形状可简化为：
@@ -215,6 +222,7 @@ pub trait AsyncFnOnce<Args> {
     fn async_call_once(self, args: Args) -> Self::CallOnceFuture;
 }
 ```
+
 `CallRefFuture<'a>` 是泛型关联类型（GAT），它允许返回的 `Future` 借用 `&self`。这正是 `AsyncFn` 与 `Fn` 的本质差异：同步 `Fn` 只能返回一个已经构造好的值，无法让返回值携带 `self` 的生命周期。
 
 ---
@@ -253,6 +261,7 @@ where
     }
 }
 ```
+
 ### 4.2 中间件链
 
 ```rust
@@ -283,6 +292,7 @@ async fn middleware_chain(
     next(req).await
 }
 ```
+
 > 💡 设计提示：由于 `AsyncFn` 暂不支持 `dyn`，生产级中间件通常仍用泛型（Generics） `impl AsyncFn(...)` 或返回 `Pin<Box<dyn Future>>` 的传统闭包。
 
 ### 4.3 并行处理：Tokio JoinSet
@@ -308,6 +318,7 @@ where
     results
 }
 ```
+
 每次 `f.clone()` 产生一个独立副本，从而满足 `tokio::spawn` 对 `'static` 的要求。
 
 ### 4.4 框架实战：Axum 处理函数
@@ -330,6 +341,7 @@ async fn main() {
     axum::serve(listener, app).await.unwrap();
 }
 ```
+
 ---
 
 ## 5. 限制与边界
@@ -341,6 +353,7 @@ fn make_dyn() -> Box<dyn AsyncFn(i32) -> bool> {
     Box::new(async |x| x > 0)
 }
 ```
+
 原因：`AsyncFn` 包含关联类型 `CallRefFuture<'a>`，使其不符合 object-safe（dyn-compatible）条件。
 
 **替代方案**：
@@ -350,6 +363,7 @@ fn make_dyn() -> Box<dyn Fn(i32) -> std::pin::Pin<Box<dyn std::future::Future<Ou
     Box::new(|x| Box::pin(async move { x > 0 }))
 }
 ```
+
 ### 5.2 Send 约束与 RTN
 
 如果需要在 trait bound 中表达“返回的 Future 是 `Send`”，目前需要 **Return Type Notation (RTN)**，该特性仍在 nightly / RFC 阶段：
@@ -358,6 +372,7 @@ fn make_dyn() -> Box<dyn Fn(i32) -> std::pin::Pin<Box<dyn std::future::Future<Ou
 // RTN 语法（ nightly，尚未 stable ）
 F: AsyncFn(i32) -> bool + AsyncFn(i32) -> Send,
 ```
+
 在 stable Rust 1.85–1.96 中，通常通过 `async move` + 闭包或泛型（Generics）边界间接保证 Send。
 
 ### 5.3 递归调用
@@ -367,6 +382,7 @@ let f = async || {
     f().await; // ❌ 递归类型可能无限展开
 };
 ```
+
 需要显式装箱（`Box::pin`）或改用 `async_recursion` 等 crate。
 
 ### 5.4 与 `tokio::spawn` 的生命周期冲突
@@ -387,6 +403,7 @@ async fn bad_spawn() {
     });
 }
 ```
+
 **修复**：使用 `async move ||` 转移所有权，或用 `Arc` 共享 `'static` 数据。
 
 ```rust,ignore
@@ -403,6 +420,7 @@ async fn good_spawn() {
     });
 }
 ```
+
 ### 5.5 `async move ||` 的 FnOnce 语义
 
 `async move ||` 按值捕获非 `Copy` 环境时，闭包本身会被消耗，只能调用一次。
@@ -420,6 +438,7 @@ async fn bad_once() {
     let len2 = f(5).await; // ❌ 编译错误：f 已被消耗
 }
 ```
+
 若需多次调用，应改用 `async ||`（按引用捕获）或在 `async move ||` 中捕获 `Arc<Mutex<T>>` 等共享所有权类型。
 
 ---
@@ -437,6 +456,7 @@ Future trait          (1.36)
               → Async Drop                  (nightly)
                 → Gen blocks / AsyncIterator  (nightly)
 ```
+
 > **状态标注模板**：
 >
 > - ✅ `async closures` — **stable 1.85.0**
@@ -488,6 +508,7 @@ let process = |items: Vec<i32>| -> Pin<Box<dyn Future<Output = i32> + Send>> {
     })
 };
 ```
+
 <details>
 <summary>参考答案</summary>
 
@@ -496,6 +517,7 @@ let process = async |items: Vec<i32>| -> i32 {
     items.iter().sum()
 };
 ```
+
 </details>
 
 ### 练习 2：判断正误

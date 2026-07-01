@@ -32,6 +32,7 @@
 > **来源**: [TRPL — ...](.) · [Rust Reference — ...](.) · [RFC ...](.)
 ---
 ```
+
 ### 字段说明
 
 | 字段 | 必填 | 长度/格式 | 说明 |
@@ -82,14 +83,17 @@
 ```rust
 // 最小可运行示例
 ```
+
 ## 六、思维表征
 
 ### 6.1 思维导图
+
 ```mermaid
 mindmap
   root((Concept))
     ...
 ```
+
 ### 6.2 决策树/矩阵（如适用）
 
 ## 七、反命题与边界
@@ -101,6 +105,7 @@ mindmap
 - [TRPL — ...](.)
 - [Rust Reference — ...](.)
 - [RFC ...](.)
+
 ```
 ---
 
@@ -111,6 +116,7 @@ mindmap
 ```markdown
 所有权（Ownership）是 Rust 的核心机制。
 ```
+
 对于已收录在术语表中的术语，应优先使用术语表中的英文对照：
 
 | 中文 | 英文 | 备注 |
@@ -149,6 +155,7 @@ mindmap
 ```bash
 python scripts/add_bilingual_annotations.py --mode enforce
 ```
+
 ---
 
 **维护者**: Rust 学习项目团队

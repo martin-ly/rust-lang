@@ -1,4 +1,6 @@
-> **内容分级**: [专家级]
+> **内容分级**:
+>
+> [专家级]
 > **代码状态**: ✅ 含可编译示例
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
@@ -84,6 +86,7 @@ graph LR
     style A fill:#e3f2fd
     style E fill:#e8f5e9
 ```
+
 **类型安全的阶段衔接**：
 
 ```rust
@@ -93,6 +96,7 @@ let result: Vec<i32> = [1, 2, 3, 4, 5]
     .map(|x| x * x)         // Iterator<Item = i32> (closure returns i32)
     .collect();             // Vec<i32> —— 类型推导确保 collect 目标明确
 ```
+
 每个组合子（`filter`、`map`）返回一个新的 `Iterator` 实现，其 `Item` 关联类型精确描述输出元素类型。编译器在组合点验证类型匹配——若将 `.map(|x| x.to_string())` 插入 `.filter()` 之后，`.collect::<Vec<i32>>()` 将产生编译错误，因为管道类型已变为 `Iterator<Item = String>`。
 
 **并行管道：rayon**
@@ -108,6 +112,7 @@ let sum_of_squares: i32 = [1, 2, 3, 4, 5]
     .map(|&x| x * x)
     .sum();                 // 归约操作自动并行分治
 ```
+
 `rayon` 的并行管道基于**工作窃取 (Work-Stealing)** 调度：每个阶段的数据被划分为小任务，线程池动态平衡负载。组合接口与标准库一致，但底层执行模型完全不同——这是**接口稳定性与实现可替换性**的典范。
 
 **通道作为有界/无界管道**
@@ -123,6 +128,7 @@ let (tx, rx) = bounded::<i32>(100);
 // 无界管道：无限缓冲，潜在内存风险
 let (tx2, rx2) = unbounded::<i32>();
 ```
+
 | 通道类型 | 缓冲区 | 发送行为 | 适用场景 |
 |:---|:---:|:---|:---|
 | `bounded(n)` | 固定 `n` | 满时阻塞/返回错误 | 背压敏感系统、流控 |
@@ -146,6 +152,7 @@ graph LR
     style S fill:#fff3e0
     style C fill:#e8f5e9
 ```
+
 **Stream 组合子的类型安全**：
 
 ```rust
@@ -156,6 +163,7 @@ let s = stream::iter(1..=100)
     .buffered(10)                    // Stream<Item = i32>，最多 10 个并发
     .filter(|x| futures::future::ready(x % 3 == 0));
 ```
+
 `buffered(n)` 将 `Stream<Item = impl Future<Output = T>>` 转换为 `Stream<Item = T>`，同时限制并发度为 `n`。这是**资源受限的组合**——类型系统（Type System）不仅保证数据正确性，还编码了执行策略约束。
 
 **背压传播：tokio::sync::mpsc**
@@ -181,6 +189,7 @@ while let Some(data) = rx.recv().await {
     process(data).await;
 }
 ```
+
 **生命周期（Lifetimes）防止 use-after-close**：Rust 的借用（Borrowing）检查器确保管道关闭后无法再发送数据。`tx.send()` 返回 `Result`，而编译器拒绝在 `rx` 被 `drop` 后继续持有引用（Reference）——这是**协议安全性**的类型系统保证。
 
 **async_stream 宏（Macro）**：生成自定义 Stream 的声明式方式
@@ -199,6 +208,7 @@ let s = stream! {
 // s: impl Stream<Item = i32>
 let sum: i32 = s.fold(0, |acc, x| async move { acc + x }).await;
 ```
+
 ---
 
 ### 2.3 事件驱动组合 (Event-Driven Composition)
@@ -216,6 +226,7 @@ graph TB
     style M fill:#fce4ec
     style H fill:#e8f5e9
 ```
+
 **`tokio::select!` 的类型安全事件路由**：
 
 ```rust
@@ -244,6 +255,7 @@ loop {
     }
 }
 ```
+
 `select!` 的每个分支都是**编译期类型检查**的：分支的 Future 输出类型无需一致，因为每个分支有独立的处理逻辑。这与 Go 的 `select`（基于接口和运行时反射）形成对比——Rust 的版本在编译期验证所有事件类型的完备处理。
 
 **发布-订阅 (Pub/Sub) 模式**
@@ -263,6 +275,7 @@ bus.broadcast(Event::Startup);
 assert_eq!(rx1.recv().unwrap(), Event::Startup);
 assert_eq!(rx2.recv().unwrap(), Event::Startup);
 ```
+
 **类型安全的观察者模式**：通过 Trait Object 实现动态事件路由，同时保持类型边界
 
 ```rust
@@ -286,6 +299,7 @@ impl<E> EventBus<E> {
     }
 }
 ```
+
 ---
 
 ### 2.4 层组合 (Layer Composition)
@@ -305,6 +319,7 @@ graph LR
     style L3 fill:#e1f5fe
     style S fill:#fff3e0
 ```
+
 **`Service` Trait —— 请求-响应的态射**：
 
 ```rust,compile_fail
@@ -317,6 +332,7 @@ pub trait Service<Request> {
     fn call(&mut self, req: Request) -> Self::Future;
 }
 ```
+
 **`Layer` Trait —— 服务的函子**：
 
 ```rust
@@ -325,6 +341,7 @@ pub trait Layer<S> {
     fn layer(&self, inner: S) -> Self::Service;
 }
 ```
+
 `Layer` 接收一个 `Service` 并返回一个新的 `Service`，在两者之间注入横切关注点（超时、重试、限流、日志）。关键洞察：层的组合是**类型驱动的**——每层精确声明其输入和输出 Service 的类型约束，编译器验证整个栈的类型一致性（Coherence）。
 
 ```rust
@@ -339,6 +356,7 @@ let service = ServiceBuilder::new()
     .layer(RateLimitLayer::new(100, Duration::from_secs(1)))
     .service(core_service);
 ```
+
 **Layer 的幺半群结构**：
 
 | 性质 | 说明 | Tower 对应 |
@@ -362,6 +380,7 @@ let service = ServiceBuilder::new()
 ```
 (I.into_iter().a()).b()).c()  ≅  I.into_iter().a()).b()).c()
 ```
+
 即适配器的组合顺序在语义上等价于按写法的顺序执行，但**分组方式不影响结果**。
 
 **证明要点**：每个适配器返回的 `Iterator` 实现是**惰性的**——不存储中间集合，只记录转换函数。`next()` 调用时，数据从源经过函数链直接流出。函数复合天然满足结合律。
@@ -378,11 +397,13 @@ let v2: Vec<i32> = (0..10)
     .filter(|x| x % 6 == 0)
     .collect(); // 注意：filter 条件需调整，但结合律仍成立
 ```
+
 **定理 1.2（单位元）**：`into_iter()`（或 `iter()`）本身作为单位元：
 
 ```
 I.into_iter() ∘ id = id ∘ I.into_iter() = I.into_iter()
 ```
+
 其中 `id` 可以是 `.map(|x| x)` 或 `.filter(|_| true)`，不改变元素。
 
 ### 定理 2：Tower Layer 组合形成幺半群
@@ -402,6 +423,7 @@ use tower::layer::util::Identity;
 // Identity.layer(S) ≅ S
 // L.layer(Identity.layer(S)) ≅ L.layer(S)
 ```
+
 ### 定理 3：有界通道组合保持背压
 >
 > **[来源类型: 原创分析]** 基于异步运行时内存安全（Memory Safety）模型。
@@ -421,6 +443,7 @@ loop {
     // 若 rx 处理慢，内存将持续增长直至 OOM
 }
 ```
+
 ---
 
 ## 四、反模式
@@ -454,6 +477,7 @@ let service: BoxService<Request, Response, Error> = ServiceBuilder::new()
     .service(inner)
     .boxed();
 ```
+
 ### 4.2 `dyn Trait` 在热路径上破坏单态化
 >
 
@@ -471,6 +495,7 @@ where
     items.filter(|x| x > &0).map(|x| x * 2).sum()
 }
 ```
+
 | 维度 | `dyn Trait` | 泛型单态化 |
 |:---|:---|:---|
 | 运行时开销 | 虚表查找 + 间接调用 | 直接调用 + 内联 |
@@ -510,6 +535,7 @@ async fn good() {
     });
 }
 ```
+
 ---
 
 ## 五、组合模式选型决策矩阵
@@ -594,6 +620,7 @@ fn compose_fixed<T: ReadWrite>(rw: &T) {
     // ✅ 泛型接受任何实现 Read + Write 的类型
 }
 ```
+
 > **修正**: Rust 的 trait object（`dyn Trait`）有对象安全性限制：只能包含一个"主 trait" 和若干 auto trait（`Send`、`Sync` 等）。不能直接写 `dyn TraitA + TraitB`（除非 TraitB 是 auto trait）。这是因为 vtable 只能存储一个主 trait 的方法指针。系统设计中的"接口组合"需通过泛型（`T: TraitA + TraitB`）或创建新的组合 trait（`trait Combo: TraitA + TraitB {}`）实现。这与 Java 的多接口继承或 Go 的隐式接口不同——Rust 在类型安全和运行时效率之间做了明确权衡。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.2 边界测试：插件系统的 ABI 稳定性（运行时 UB）
@@ -614,6 +641,7 @@ pub struct PluginVTable {
     pub process: extern "C" fn(*const c_void, *const c_char) -> *mut c_char,
 }
 ```
+
 > **修正**: Rust 的 trait 和泛型**不保证 ABI 稳定性**——不同编译器版本、不同优化级别可能生成不同的 vtable 布局。设计插件系统时，必须使用 `#[repr(C)]` 结构体（Struct）和 `extern "C"` 函数作为 FFI 边界。这与 COM（Windows）或 GObject（GNOME）的虚表稳定 ABI 不同——Rust 优先类型安全和零成本抽象（Zero-Cost Abstraction），牺牲了跨版本二进制兼容性。`abi_stable` crate 提供了一种在 Rust 插件间维持 ABI 稳定的方案，但增加了运行时开销。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.3 边界测试：trait 组合子的菱形继承问题（编译错误）
@@ -640,6 +668,7 @@ fn main() {
     // <MyType as B>::method(&t);
 }
 ```
+
 > **修正**: Rust 的 trait 系统**不允许菱形继承**导致的歧义：若一个类型实现了多个具有同名方法的 trait，调用时必须显式指定 trait（`Trait::method(&obj)` 或 `<Type as Trait>::method(&obj)`）。这与 C++ 的虚继承（解决菱形问题，但复杂）或 Python 的 MRO（Method Resolution Order，线性化继承链）不同——Rust 不自动解决歧义，要求开发者显式选择。这是设计决策：自动选择可能隐藏 bug（开发者不知道调用了哪个方法），显式选择使代码意图清晰。`trait B: A` 表示 B 继承 A 的方法，但 `MyType` 分别实现 `B` 和 `C` 时，两个 `method` 是独立的，无覆盖关系。这与 Java 的接口默认方法（`default` 方法可被覆盖，菱形冲突需显式解决）类似——Rust 和 Java 8+ 都拒绝自动解决，要求显式指定。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)] · [来源: [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html)]
 
 ### 10.4 边界测试：组合优于继承时的 boilerplate 问题（逻辑错误）
@@ -665,6 +694,7 @@ impl Car {
     // 每增加一个组件，需添加更多转发方法
 }
 ```
+
 > **修正**: Rust 不支持继承（无 `class Car extends Vehicle`），强制使用**组合**（composition）。组合的代价是**boilerplate**：需手动编写转发方法暴露内部组件的 API。缓解工具：1) `Deref` 委托（仅适用于智能指针（Smart Pointer）模式，不推荐领域类型）；2) `delegate` crate（宏（Macro）自动生成转发方法）；3) 公开内部字段（`pub engine: Engine`，牺牲封装）。Rust 的设计哲学：组合更灵活（运行时替换组件）、更安全（无继承层次导致的脆弱基类问题），但确实增加了样板代码。这与 Go 的 struct 嵌入（类似组合，但自动转发方法，是 Go 唯一的"继承"机制）或 Java 的委托模式（手动编写，与 Rust 类似）不同——Rust 正在探索 `#[derive(Delegate)]` 等宏简化组合委托。来源: [The Rust Programming Language] · 来源: [Rust API Guidelines]
 
 ### 10.3 边界测试：泛型组件的类型参数爆炸（编译错误/设计反模式）
@@ -689,6 +719,7 @@ fn use_service<D, K, V>(s: &dyn Service<D, K, V>) {
 
 fn main() {}
 ```
+
 > **修正**: 泛型参数过多的解决方案：1) **关联类型**：`trait Database { type Output; }` — 每个实现只有一个输出类型；2) **trait object**：`&dyn Database` — 运行时擦除类型；3) **类型别名**：`type UserService = dyn Service<User, String, User>`；4) **newtype**：`struct UserService(Box<dyn Service<User, String, User>>)`。设计原则：公共 API 减少泛型参数（使用关联类型或 trait object），内部实现使用泛型（性能关键路径）。这与 Java 的泛型（类型擦除，无单态化）或 C# 的泛型（运行时特化，但共享代码）不同——Rust 的泛型是编译期单态化，参数过多导致代码膨胀和编译时间增加。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-01-syntax.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 ---
