@@ -24,6 +24,7 @@
 ```bash
 python scripts/i18n/check_concept_headers.py
 ```
+
 - 验收标准：符合 EN + Summary 要求的文件比例 = 100%
 - 如发现缺失：由维护者或贡献者在 7 天内补齐
 
@@ -32,6 +33,7 @@ python scripts/i18n/check_concept_headers.py
 ```bash
 python scripts/i18n/check_terminology_consistency.py
 ```
+
 - 验收标准：无“通用占位符误用”
 - 如发现不一致：在 issue 中标注 `i18n-terminology`，7 天内讨论并修复
 
@@ -40,6 +42,7 @@ python scripts/i18n/check_terminology_consistency.py
 ```bash
 python scripts/i18n/check_external_links.py
 ```
+
 - 验收标准：
   - 失效链接（4xx/5xx/timeout）< 1% 的外部链接总数
   - 重定向链接逐步更新为最终 URL

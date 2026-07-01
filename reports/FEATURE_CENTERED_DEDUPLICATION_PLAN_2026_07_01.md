@@ -90,4 +90,4 @@
 
 ### 3.2 Rust 1.96
 
-| # | File | Target authoritative source | 
+| # | File | Target authoritative source |
