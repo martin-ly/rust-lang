@@ -80,6 +80,7 @@ fn process_string(s: String) {
     println!("{}", s);
 } // s 在这里自动释放
 ```
+
 ```cpp
 // C++: 使用智能指针
 #include <memory>
@@ -96,6 +97,7 @@ int main() {
     return 0;
 }
 ```
+
 ```go
 // Go: GC 自动管理
 package main
@@ -112,6 +114,7 @@ func main() {
     fmt.Println(s)    // 仍然可用
 }
 ```
+
 ```python
 # Python: GC 自动管理 {#python-gc-自动管理}
 def process_string(s):
@@ -121,6 +124,7 @@ s = "hello"
 process_string(s)  # 引用传递
 print(s)           # 仍然可用
 ```
+
 ### 内存管理形式化对比 {#内存管理形式化对比}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -185,6 +189,7 @@ fn main() {
     println!("结果: {}", *counter.lock().unwrap());
 }
 ```
+
 ```cpp
 // C++: 需要手动同步
 #include <mutex>
@@ -208,6 +213,7 @@ int main() {
     return 0;
 }
 ```
+
 ```go
 // Go: 使用 channel 通信
 go func() {
@@ -227,6 +233,7 @@ go func() {
     println("结果:", counter)
 }()
 ```
+
 ```python
 # Python: GIL 限制真正的并行 {#python-gil-限制真正的并行}
 import threading
@@ -247,6 +254,7 @@ t1.join()
 t2.join()
 print(f"结果: {counter}")
 ```
+
 ### 并发模型形式化对比 {#并发模型形式化对比}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -304,6 +312,7 @@ fn main() {
     }
 }
 ```
+
 ```cpp
 // C++: 异常处理
 #include <fstream>
@@ -333,6 +342,7 @@ int main() {
     }
 }
 ```
+
 ```go
 // Go: 多返回值错误处理
 package main
@@ -365,6 +375,7 @@ func main() {
     fmt.Println("结果:", result)
 }
 ```
+
 ```python
 # Python: 异常处理 {#python-异常处理}
 def read_and_parse(filename):
@@ -384,6 +395,7 @@ try:
 except Exception as e:
     print(f"错误: {e}")
 ```
+
 ### 错误处理形式化对比 {#错误处理形式化对比}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -435,6 +447,7 @@ fn max<T: Ord>(a: T, b: T) -> T {
 // 使用
 let result = max(10, 20);  // 自动推断 T = i32
 ```
+
 ```cpp
 // C++: 模板
 template<typename T>
@@ -473,6 +486,7 @@ def max_val(a, b):
 # 使用 {#使用}
 result = max_val(10, 20)
 ```
+
 ### 类型系统形式化对比 {#类型系统形式化对比}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -520,6 +534,7 @@ $ cargo build
 $ cargo test
 $ cargo doc
 ```
+
 ```bash
 # C++: 使用 CMake + Conan {#c-使用-cmake-conan}
 $ mkdir my_project && cd my_project
@@ -528,6 +543,7 @@ $ conan new cmake_lib -d name=my_project -d version=1.0
 $ conan install . --build=missing
 $ cmake --build build
 ```
+
 ```bash
 # Go: 使用 go modules {#go-使用-go-modules}
 $ mkdir my_project && cd my_project
@@ -536,6 +552,7 @@ $ go get github.com/gin-gonic/gin
 $ go build
 $ go test ./...
 ```
+
 ```bash
 # Python: 使用 pip + venv {#python-使用-pip-venv}
 $ mkdir my_project && cd my_project
@@ -544,6 +561,7 @@ $ source venv/bin/activate
 $ pip install requests flask
 $ python -m pytest
 ```
+
 ---
 
 ## 📊 综合对比矩阵 {#综合对比矩阵}

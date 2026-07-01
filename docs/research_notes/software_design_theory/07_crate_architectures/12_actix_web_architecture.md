@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **Actix-web 的 Actor 模型、Transform 中间件与 FromRequest 架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [Web 框架生态](../../../../concept/06_ecosystem/27_web_frameworks.md)
 > - [Actix-web vs Axum](../../../../content/ecosystem/web_frameworks/actix_web_vs_axum.md)
 >
@@ -63,6 +64,7 @@ HttpServer (Actor 系统入口)
 
                     └── Handler (用户业务逻辑)
 ```
+
 ### 2.1 层级职责 {#21-层级职责}
 
 >
@@ -145,6 +147,7 @@ flowchart TD
 
     style AppLayer fill:#fff3e0
 ```
+
 **关键点**: 每个 `Worker` 是一个独立的 Actix `Actor`，运行在自己的 `Arbiter`（事件循环）中。Master Actor 负责在多个 Worker 之间分发新连接，实现负载均衡。
 
 > [来源: Actix-web 源码 — `actix-web/src/server.rs`]
@@ -187,6 +190,7 @@ async fn main() -> std::io::Result<()> {
 
 }
 ```
+
 > [来源: Actix-web 文档 — Getting Started](https://actix.rs/docs/getting-started/)
 
 ---
@@ -225,6 +229,7 @@ pub trait Actor {
 
 }
 ```
+
 每个实现了 `Actor` trait 的类型都拥有自己的状态和一个 mailbox。
 
 外部通过向 mailbox 发送消息来与 Actor 通信，Actor 按顺序处理消息，**同一 Actor 的消息处理是串行的，从而消除了数据竞争**。
@@ -257,6 +262,7 @@ impl Actor for MyActor {
 
 }
 ```
+
 > [来源: Actix 文档 — Actors](https://actix.rs/actix/actix/trait.Actor.html)
 
 ### 3.3 `Handler<M>` Trait {#33-handlerm-trait}
@@ -276,6 +282,7 @@ pub trait Handler<M: Message> {
 
 }
 ```
+
 在 Actix-web 中，`HttpServer` 的内部 Worker 就是 Actor。
 
 HTTP 请求被封装为消息投递到 Worker 的 mailbox，Worker 的 `Handler` 实现负责调用路由系统。
@@ -321,6 +328,7 @@ sequenceDiagram
 
     Worker-->>Client: HTTP Response
 ```
+
 **重要洞察**: Worker Actor 的 mailbox 机制天然提供了**反压 (backpressure)**。
 
 当 Handler 处理速度低于请求到达速度时，未处理请求会在 mailbox 中排队，而非无限制地创建任务，从而避免内存爆炸。
@@ -357,6 +365,7 @@ pub trait FromRequest: Sized {
 
 }
 ```
+
 与 Axum 的 `FromRequest` 不同，Actix-web 的版本接收 `&HttpRequest` 和 `&mut Payload`（请求体流），支持异步提取。
 
 ### 4.2 核心提取器 {#42-核心提取器}
@@ -428,6 +437,7 @@ async fn protected_endpoint(api_key: ApiKey) -> impl Responder {
 
 }
 ```
+
 > [来源: Actix-web 文档 — Extractors](https://actix.rs/docs/extractors/)
 
 ---
@@ -454,6 +464,7 @@ pub trait Transform<S> {
 
 }
 ```
+
 `Transform` 是中间件的"工厂"，负责将一个 `Service` 包装为另一个 `Service`。每个请求都会经过这个包装链。
 
 ### 5.2 `ServiceRequest` / `ServiceResponse` {#52-servicerequest-serviceresponse}
@@ -564,6 +575,7 @@ where
 
 }
 ```
+
 ### 5.3 中间件注册 {#53-中间件注册}
 
 >
@@ -580,6 +592,7 @@ App::new()
 
     .wrap(actix_web::middleware::DefaultHeaders::new().add(("X-Version", "1.0")))
 ```
+
 中间件按注册顺序**逆序**执行：最后注册的中间件最先接触请求，最后接触响应（洋葱模型）。
 
 > [来源: Actix-web 文档 — Middleware](https://actix.rs/docs/middleware/)
@@ -638,6 +651,7 @@ HttpServer::new(app_factory)
 
     .await
 ```
+
 Worker 数默认等于逻辑 CPU 核心数。对于 I/O 密集型工作负载，可适当增加；对于 CPU 密集型，保持默认值即可。
 
 ### 7.2 优雅关闭 (Graceful Shutdown) {#72-优雅关闭-graceful-shutdown}
@@ -670,6 +684,7 @@ tokio::select! {
 
 }
 ```
+
 > [来源: Actix-web 文档 — Server — Graceful shutdown](https://actix.rs/docs/server/#graceful-shutdown)
 
 ---

@@ -109,6 +109,7 @@ fn main() {
     println!("你好, {}!", args[1]);
 }
 ```
+
 ### 2. 使用 clap 构建专业 CLI {#2-使用-clap-构建专业-cli}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -119,6 +120,7 @@ fn main() {
 [dependencies]
 clap = { version = "4.0", features = ["derive"] }
 ```
+
 ```rust,ignore
 use clap::{Parser, Subcommand};
 
@@ -163,6 +165,7 @@ fn main() {
     }
 }
 ```
+
 ### 3. 异步 CLI 示例 {#3-异步-cli-示例}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -175,6 +178,7 @@ tokio = { version = "1.0", features = ["full"] }
 reqwest = { version = "0.11", features = ["json"] }
 clap = { version = "4.0", features = ["derive"] }
 ```
+
 ```rust,ignore
 use clap::Parser;
 use reqwest;
@@ -198,6 +202,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 ### 4. 带进度条的 CLI {#4-带进度条的-cli}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -208,6 +213,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 [dependencies]
 indicatif = "0.17"
 ```
+
 ```rust,ignore
 use indicatif::{ProgressBar, ProgressStyle};
 use std::thread;
@@ -229,6 +235,7 @@ fn main() {
     pb.finish_with_message("完成！");
 }
 ```
+
 ### 5. 错误处理最佳实践 {#5-错误处理最佳实践}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -271,6 +278,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 推荐学习路径 {#推荐学习路径}
@@ -315,6 +323,7 @@ fn read_config(path: &str) -> Result<Config, Box<dyn std::error::Error>> {
     Ok(config)
 }
 ```
+
 ### 2. 提供有意义的错误信息 {#2-提供有意义的错误信息}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -327,6 +336,7 @@ fn main() {
     }
 }
 ```
+
 ### 3. 使用 exit codes {#3-使用-exit-codes}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -344,6 +354,7 @@ fn main() -> ExitCode {
     }
 }
 ```
+
 ---
 
 ## 使用场景 {#使用场景}
@@ -360,6 +371,7 @@ fn main() -> ExitCode {
 // 使用 std::env 处理简单参数
 // 适用于：批量重命名、日志分析、数据转换
 ```
+
 ### 场景2: 专业级 CLI 应用 {#场景2-专业级-cli-应用}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -445,6 +457,7 @@ fn parse_key_value_pairs(args: &[String]) -> Vec<(String, String)> {
         .collect()
 }
 ```
+
 ### ControlFlow 在验证管道中的应用 {#controlflow-在验证管道中的应用}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -460,6 +473,7 @@ fn validate_args(args: &CliArgs) -> ControlFlow<ValidationError, ()> {
     ControlFlow::Continue(())
 }
 ```
+
 ### LazyLock 在配置管理中的应用 {#lazylock-在配置管理中的应用}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -475,6 +489,7 @@ pub fn get_config() -> Option<&'static CliConfig> {
     CLI_CONFIG.get()
 }
 ```
+
 **最后更新**: 2026-05-08 (添加 Rust 1.95+ 持续更新)
 
 ---

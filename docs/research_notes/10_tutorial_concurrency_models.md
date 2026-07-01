@@ -122,6 +122,7 @@ Rust提供了多种并发模型，从传统的线程到现代的异步编程。
 
 └─────────────────────────────────────>
 ```
+
 ### Send 和 Sync {#send-和-sync}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -141,6 +142,7 @@ pub unsafe auto trait Sync {}
 
 // 规则: T: Sync 当且仅当 &T: Send
 ```
+
 **自动实现规则:**
 
 - 原始类型(i32, bool等): Send + Sync
@@ -186,6 +188,7 @@ let handle = thread::spawn(|| {
 
 handle.join().unwrap();
 ```
+
 ### 线程间通信 {#线程间通信}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -218,6 +221,7 @@ let received = rx.recv().unwrap();
 
 println!("Got: {}", received);
 ```
+
 ### 共享状态 {#共享状态}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -261,6 +265,7 @@ for handle in handles {
 
 println!("Result: {}", *counter.lock().unwrap()); // 10
 ```
+
 ---
 
 ## 第三部分：同步原语 {#第三部分同步原语}
@@ -303,6 +308,7 @@ let r2 = data.read().unwrap();
 
 } // 写锁释放
 ```
+
 ### 原子操作 {#原子操作}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -335,6 +341,7 @@ counter.fetch_add(1, Ordering::SeqCst);
 
 counter.compare_exchange(current, new, Ordering::Acquire, Ordering::Relaxed);
 ```
+
 **内存序选择:**
 
 - `Relaxed`: 无顺序约束，性能最高
@@ -369,6 +376,7 @@ let f = async { 42 };  // 尚未执行
 
 let result = f.await;  // 在async上下文中执行
 ```
+
 ### async/await {#asyncawait}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
@@ -403,6 +411,7 @@ async fn fetch_multiple() -> Result<(), Error> {
 
 }
 ```
+
 ### 运行时选择 {#运行时选择}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -444,6 +453,7 @@ let (a, b) = rayon::join(
 
 );
 ```
+
 ### 生产者-消费者 {#生产者-消费者}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -482,6 +492,7 @@ thread::spawn(move || {
 
 });
 ```
+
 ### Actor模型 {#actor模型}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -529,6 +540,7 @@ impl Handler<MyMessage> for MyActor {
 
 }
 ```
+
 ---
 
 ## 第六部分：最佳实践 {#第六部分最佳实践}
@@ -591,6 +603,7 @@ async fn good2() {
 
 }
 ```
+
 ---
 
 ## 第一部分：OS线程 {#第一部分os线程}
@@ -621,6 +634,7 @@ let handle = thread::spawn(|| {
 
 let result = handle.join().unwrap();
 ```
+
 **限制**: 创建成本高，数量受限(~几百)。
 
 ---
@@ -656,6 +670,7 @@ async fn main() {
 
 }
 ```
+
 **优势**: 轻量级，可创建数百万任务。
 
 ---
@@ -684,6 +699,7 @@ let sum: i32 = (0..1_000_000)
 
     .sum();
 ```
+
 **优势**: 自动工作窃取，负载均衡。
 
 ---
@@ -730,6 +746,7 @@ impl Handler<Message> for MyActor {
 
 }
 ```
+
 ---
 
 ## 第五部分：选择决策 {#第五部分选择决策}
@@ -758,6 +775,7 @@ impl Handler<Message> for MyActor {
 
     └── Actor → actix
 ```
+
 ---
 
 ## 总结 {#总结}

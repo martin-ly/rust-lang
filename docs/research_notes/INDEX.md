@@ -122,6 +122,7 @@
 - 按三大支柱的文档树
 - 概念族↔文档↔Def/Axiom/定理 映射表（支柱 1/2/3）
 - 文档↔思维表征 映射表（思维导图/矩阵/证明树/决策树）、文档依赖简表
+
 1. **[README.md](README.md)** - 主索引和导航中心
    - 系统概述
    - 研究方向
@@ -388,6 +389,7 @@
 7p. **[10_research_notes_systematization_completion_report.md](10_research_notes_systematization_completion_report.md)** - docs/research_notes 系统化层次化梳理完成报告 🆕
 
 - 四阶段完成情况、新增文件清单、自动化检查结果、8 大主-topic 覆盖矩阵
+
 1. **[10_comprehensive_systematic_overview.md](10_comprehensive_systematic_overview.md)** - 全面系统化梳理总览
    - 五大梳理维度（概念定义、属性关系、解释论证、形式化证明、思维表征）
    - 语义归纳与概念族谱
@@ -404,30 +406,45 @@
    - 语义归纳与概念族谱统一
 3. **[10_language_semantics_expressiveness.md](10_language_semantics_expressiveness.md)** - 构造性语义与表达能力边界 🆕
 4. **[10_design_mechanism_rationale.md](10_design_mechanism_rationale.md)** - 设计机制论证 🆕
+
 - Pin 堆/栈区分使用场景的完整论证
 - 所有权、借用、生命周期、型变、异步等设计理由
 - 动机→设计决策→形式化→决策树→反例
+
 1. **[10_argumentation_gap_index.md](10_argumentation_gap_index.md)** - 论证缺口与设计理由综合索引 🆕
+
 - 四维缺口分类（定义、关系、证明、设计理由）
 - 论证缺口追踪矩阵、设计理由缺口追踪矩阵
 - 思维表征覆盖矩阵
+
 1. **[10_theoretical_and_argumentation_system_architecture.md](10_theoretical_and_argumentation_system_architecture.md)** - 理论体系与论证体系结构 🆕
+
 - 理论体系四层架构（公理→语义→定理→边界）
 - 论证体系五层结构（概念→属性→论证→证明→表征）
 - 安全与非安全全面论证
+
 1. **[10_safe_unsafe_comprehensive_analysis.md](10_safe_unsafe_comprehensive_analysis.md)** - 安全与非安全全面论证与分析 🆕
+
 - 安全/unsafe 定义与边界、契约体系、UB 分类、安全抽象
+
 1. **[10_rust_193_language_features_comprehensive_analysis.md](10_rust_193_language_features_comprehensive_analysis.md)** - Rust 1.93 语言特性全面分析 🆕
 2. **[10_rust_193_counterexamples_index.md](10_rust_193_counterexamples_index.md)** - Rust 1.93 相关反例与边界集中索引 🆕（与 FORMAT_AND_CONTENT_ALIGNMENT_PLAN F2.4 对齐）
+
 - 92 项语言特性全覆盖（内存、类型、Trait、控制流、并发、宏、模块、常量、FFI、1.93 新增）
 - 每项含动机、设计决策、形式化引用、反例
 - 配套 [RUST_193_FEATURE_MATRIX](10_rust_193_feature_matrix.md) 按特性族五维矩阵
+
 1. **[10_core_features_full_chain.md](10_core_features_full_chain.md)** - 核心特性完整链 🆕
+
 - 13 项核心特性（所有权、借用、生命周期、Pin、Send/Sync、Future、Trait、泛型、match、for、Option/Result、闭包、?）统一链
 - 定义→概念→属性→关系→解释→示例→论证→形式化证明
+
 1. **[10_feature_template.md](10_feature_template.md)** - 特性精简模板 🆕
+
 - 79 项非核心特性的「概念→形式化引用→反例」模板
+
 1. **[10_incremental_update_flow.md](10_incremental_update_flow.md)** - 版本增量更新流程 🆕
+
 - 1.94+ 发布后：对比、更新 RUST_XXX、补新特性；检查清单
 
 ### 进展跟踪 {#进展跟踪}

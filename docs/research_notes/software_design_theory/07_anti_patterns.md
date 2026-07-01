@@ -147,6 +147,7 @@ let s2 = s;
 
 println!("{}", s);  // 编译错误：value used after move
 ```
+
 **代码示例：循环 Rc 泄漏**:
 
 ```rust
@@ -169,6 +170,7 @@ a.borrow_mut().next = Some(b.clone());  // 环：a → b → a
 
 // drop 时 strong_count 永不归零，内存泄漏
 ```
+
 ### 3.2 借用反模式 {#32-借用反模式}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -194,6 +196,7 @@ for x in &mut v {
 
 }
 ```
+
 **代码示例：Clone 满足借用（过度克隆）**:
 
 ```rust
@@ -215,6 +218,7 @@ fn process(data: &Vec<String>) -> Vec<String> {
 
 // 更好：用 &str、迭代器链、或 Cow 避免不必要的 clone
 ```
+
 ### 3.3 设计模式反模式 {#33-设计模式反模式}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -249,6 +253,7 @@ where
 
 // 更好：按需抽象，优先 impl Trait 或具体类型
 ```
+
 ### 3.4 并发反模式 {#34-并发反模式}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -336,6 +341,7 @@ thread::spawn(move || {
 
 });
 ```
+
 **正确**：`Arc<Mutex<T>>`。
 
 ```rust,ignore
@@ -349,6 +355,7 @@ thread::spawn(move || {
 
 });
 ```
+
 ### 场景 2：迭代中修改 {#场景-2迭代中修改}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -362,6 +369,7 @@ let to_add: Vec<_> = v.iter().filter(|x| x > 0).cloned().collect();
 
 v.extend(to_add);
 ```
+
 ### 场景 3：单产品却用 Abstract Factory {#场景-3单产品却用-abstract-factory}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -377,6 +385,7 @@ trait Creator {
 
 }
 ```
+
 ### 场景 4：无共享用 Flyweight {#场景-4无共享用-flyweight}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -388,6 +397,7 @@ trait Creator {
 ```rust,ignore
 let item = Item::new();  // 无需缓存
 ```
+
 ### 场景 5：错误类型用 unwrap {#场景-5错误类型用-unwrap}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -409,6 +419,7 @@ let x = match result {
 
 };
 ```
+
 ---
 
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}

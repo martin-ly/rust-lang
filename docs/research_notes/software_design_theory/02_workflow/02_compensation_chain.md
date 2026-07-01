@@ -72,6 +72,7 @@
 ```text
 C := [(a₁, c₁), (a₂, c₂), ..., (aₙ, cₙ)]
 ```
+
 其中：
 
 - `aᵢ`：第 `i` 步正向操作。
@@ -86,6 +87,7 @@ C := [(a₁, c₁), (a₂, c₂), ..., (aₙ, cₙ)]
 ```text
 ∀ i, state(cᵢ(aᵢ(s))) ≈ state(s)
 ```
+
 ### Axiom CC2: 补偿幂等性 {#axiom-cc2-补偿幂等性}
 
 > **来源**: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)
@@ -95,6 +97,7 @@ C := [(a₁, c₁), (a₂, c₂), ..., (aₙ, cₙ)]
 ```text
 ∀ c ∈ C. exec(c, s) = s' → exec(c, s') = s'
 ```
+
 ### Theorem CC1: 最终一致性 {#theorem-cc1-最终一致性}
 
 > **来源**: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)
@@ -117,6 +120,7 @@ C := [(a₁, c₁), (a₂, c₂), ..., (aₙ, cₙ)]
 ```text
 ∀ C. |C| = n < ∞ → 补偿过程在至多 n 步后结束
 ```
+
 **证明概要**：已完成正向操作的集合 `completed` 长度不超过 `n`；每执行一次补偿减少一个元素，故有限步后结束。
 
 ---
@@ -245,6 +249,7 @@ fn main() {
     assert!(result.is_err());
 }
 ```
+
 > **来源**: [Tokio Tutorial](https://tokio.rs/tokio/tutorial)
 
 **实现要点**：
@@ -270,6 +275,7 @@ async fn compensate_inventory(item_id: u64) {
         .await;
 }
 ```
+
 若网络超导致补偿被执行两次，库存会多增一次。
 
 **修复**：使用幂等键或状态检查。
@@ -282,6 +288,7 @@ async fn compensate_inventory(item_id: u64, idempotency_key: &str) {
     // 执行补偿并记录 idempotency_key
 }
 ```
+
 ### 反例 2：补偿顺序错误 {#反例-2补偿顺序错误}
 
 ```rust,ignore
@@ -290,6 +297,7 @@ for step in completed {
     step.compensate().await?;
 }
 ```
+
 若正向步骤为"扣库存 → 扣款"，正向顺序补偿会先退款再释放库存，中间状态可能出现"钱已退但库存仍被占用"。
 
 **修复**：必须按正向顺序的逆序执行补偿。
@@ -299,6 +307,7 @@ for &idx in self.completed.iter().rev() {
     self.steps[idx].compensate().await?;
 }
 ```
+
 ### 边界：补偿失败 {#边界补偿失败}
 
 补偿操作本身也可能失败（网络中断、下游服务不可用）。此时：

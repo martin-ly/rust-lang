@@ -163,6 +163,7 @@ $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用
    ```rust,ignore
    struct Adapter { inner: S }  // A 拥有 S
    ```
+
 2. **借用链**：`op_T(&self)` 中：
    - `&self` 借用 $A$
    - `&self.inner` 借用 $S$（子借用）
@@ -207,6 +208,7 @@ $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用
 
    }
    ```
+
    - 单层委托：无冲突
    - 多层委托：递归检查
 
@@ -299,6 +301,7 @@ let a = Adapter { inner: LegacyLogger };
 
 a.log("hello");
 ```
+
 **形式化对应**：`Adapter` 即 $A$；`Logger` 即 $T$；`LegacyLogger` 即 $S$。`inner` 为 $A \supset S$。
 
 ---
@@ -365,6 +368,7 @@ fn main() {
 
 }
 ```
+
 ### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
@@ -441,6 +445,7 @@ borrow_checker_proof
 
 推论 AD-C1 (纯 Safe Adapter)
 ```
+
 ### 与 Rust 类型系统的联系 {#与-rust-类型系统的联系}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -499,6 +504,7 @@ borrow_checker_proof
 
 { Q  }  // 后置条件
 ```
+
 > 以上规约以霍尔三元组风格表述；Rust 编译器通过所有权、借用与类型检查在编译期强制大部分不变式与前置条件。
 
 ---
@@ -575,6 +581,7 @@ fn fetch_data<H: HttpClient>(client: &H, url: &str) -> Result<String, Box<dyn st
 
 }
 ```
+
 **形式化对应**：`ReqwestAdapter` 即 $A$；`HttpClient` 即 $T$；`ReqwestClient` 即 $S$；`map_err` 转换错误类型，满足 Axiom AD1。
 
 ---
@@ -621,6 +628,7 @@ impl Adapter {
 
 }
 ```
+
 **风险**：破坏封装，Adapter 无法保证目标接口语义。
 
 ### 反例 2：引用型 Adapter 生命周期不匹配 {#反例-2引用型-adapter-生命周期不匹配}
@@ -639,6 +647,7 @@ fn make() -> Adapter<'static> {
 
 }
 ```
+
 **编译器错误**：`cannot return value referencing local variable local`。
 
 ### 反例 3：委托链中出现可变借用冲突 {#反例-3委托链中出现可变借用冲突}
@@ -652,6 +661,7 @@ impl Target for Adapter {
 
 }
 ```
+
 **编译器错误**：`cannot borrow self.adaptee as mutable, as it is behind a & reference`。
 
 **修复**：将 `request` 改为 `&mut self` 或使用内部可变性。
@@ -674,6 +684,7 @@ impl Target for Adapter {
 
 └── S 为抽象，需解耦实现 → Bridge
 ```
+
 ---
 
 ## 与 GoF 对比 {#与-gof-对比}
@@ -760,6 +771,7 @@ mindmap
 
       异步转换
 ```
+
 ---
 
 ## 与其他模式的关系图 {#与其他模式的关系图}
@@ -788,6 +800,7 @@ graph LR
 
     style D2 fill:#9E9E9E,stroke:#616161,color:#fff
 ```
+
 ---
 
 ## 实质内容五维自检 {#实质内容五维自检}

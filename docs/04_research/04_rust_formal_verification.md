@@ -111,6 +111,7 @@ Iris 逻辑的核心概念:
 │  • 模态算子 (Modality): ▷ (later), □ (persistently)   │
 └────────────────────────────────────────────────────────┘
 ```
+
 #### 关键逻辑规则（直观理解） {#关键逻辑规则直观理解}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -124,6 +125,7 @@ P ∗ Q 表示资源 P 和 Q 占据不相交的内存区域
 
 例如:  owning(x) ∗ owning(y)  意味着 x 和 y 拥有不同的堆内存
 ```
+
 **点态谓词 (Points-to Predicate)**:
 
 ```
@@ -133,6 +135,7 @@ P ∗ Q 表示资源 P 和 Q 占据不相交的内存区域
 - 如果 ℓ ↦ v 成立，那么 ℓ 的内存是有效的
 - ℓ ↦ v 不能与其他 ℓ ↦ v' 同时成立（唯一所有权）
 ```
+
 ### 2.4 RustBelt 的方法论 {#24-rustbelt-的方法论}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -155,6 +158,7 @@ RustBelt 将 Rust 类型翻译为 Iris 逻辑断言：
 │  ⟦ &T ⟧     =  ∃ ℓ. readonly(ℓ)  (共享只读访问)         │
 └─────────────────────────────────────────────────────────┘
 ```
+
 ### 2.5 RustBelt 的关键结论 {#25-rustbelt-的关键结论}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -243,6 +247,7 @@ RefinedRust 工作流程:
 │     - Isabelle: 交互式 (复杂不变式)                       │
 └─────────────────────────────────────────────────────────┘
 ```
+
 ### 3.4 精炼类型 (Refinement Types) 示例 {#34-精炼类型-refinement-types-示例}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -266,6 +271,7 @@ impl<T> Vec<T> {
     }
 }
 ```
+
 ### 3.5 RefinedRust vs RustBelt 对比 {#35-refinedrust-vs-rustbelt-对比}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -376,6 +382,7 @@ impl<T> Vec<T> {
         │         │  │ 模型    │  │ (PLDI'24)│
         └─────────┘  └─────────┘  └──────────┘
 ```
+
 ---
 
 ## 5. 与项目已有形式化证明内容的衔接 {#5-与项目已有形式化证明内容的衔接}

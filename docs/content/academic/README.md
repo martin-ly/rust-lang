@@ -100,6 +100,7 @@ RustBelt 论文链:
 ├─ PLDI 2025: Tree Borrows (演进)
 └─ 博士论文: Ralf Jung (完整理论)
 ```
+
 ### 所有权形式化 {#所有权形式化}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -123,6 +124,7 @@ Definition own_exclusive (l: loc) : iProp :=
 Definition own_shared (l: loc) (v: val) : iProp :=
   □ (l ↦□ v).
 ```
+
 **定理: 内存安全**:
 
 ```
@@ -140,6 +142,7 @@ Definition own_shared (l: loc) (v: val) : iProp :=
 3. 生命周期保证引用有效性
 4. Send/Sync 保证线程安全
 ```
+
 ### 分离逻辑应用 {#分离逻辑应用}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -165,6 +168,7 @@ fn example() {
 // 借用: own(y, &mut x) * x 被借出
 // 结束: own(x, 6)
 ```
+
 ---
 
 ## 🌳 Tree Borrows {#tree-borrows}
@@ -202,6 +206,7 @@ fn tree_borrows_allows() {
     *y = 2;  // Tree Borrows: OK, Stacked Borrows: UB
 }
 ```
+
 ### 实际影响 {#实际影响}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -220,6 +225,7 @@ fn tree_borrows_allows() {
 # 测试你的代码在 Tree Borrows 下的行为 {#测试你的代码在-tree-borrows-下的行为}
 MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 ```
+
 ---
 
 ## 🔍 Polonius {#polonius}
@@ -255,6 +261,7 @@ error(Loan, Point) :-
     loan_invalidated(Loan, Point),
     borrow_live_at(Loan, Point).
 ```
+
 **优势**:
 
 1. **非词法生命周期**: 支持更精确的借用范围
@@ -281,6 +288,7 @@ fn polonius_accepts() {
     x = 10;  // Polonius: OK
 }
 ```
+
 ---
 
 ## 🛠️ 验证工具 {#验证工具}
@@ -313,6 +321,7 @@ mod verification {
     }
 }
 ```
+
 **验证 unsafe 代码**:
 
 ```rust,ignore
@@ -327,6 +336,7 @@ fn verify_raw_ptr() {
     }
 }
 ```
+
 ### Prusti {#prusti}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -360,6 +370,7 @@ fn find_max(array: &[i32]) -> i32 {
     max
 }
 ```
+
 ### Creusot {#creusot}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -381,6 +392,7 @@ fn fac(n: u64) -> u64 {
     }
 }
 ```
+
 ### Aeneas {#aeneas}
 
 **定位**: 生成 Lean 4 证明义务的验证器
@@ -405,6 +417,7 @@ fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
     None
 }
 ```
+
 ---
 
 ## 📈 研究前沿 {#研究前沿}

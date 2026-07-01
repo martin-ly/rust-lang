@@ -122,6 +122,7 @@
 
                     [顶层 CSO-T1, USF-T1]
 ```
+
 ### 1.3 域间定理推导链（显式） {#13-域间定理推导链显式}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
@@ -175,6 +176,7 @@
 
                     CE-MAT-T1 (L1/L2 静态可判定；L3/L4 需额外验证)
 ```
+
 **显式推导**：
 
 - **CE-T1** ← ownership T3（无悬垂、无双重释放、无泄漏 ⇒ 组合保持）

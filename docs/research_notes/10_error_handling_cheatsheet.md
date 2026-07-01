@@ -67,6 +67,7 @@ opt.ok_or(err)      // Option -> Result
 opt.map(|v| ...)    // 映射
 opt.and_then(|v| ...) // 链式操作
 ```
+
 ### Result {#result}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -77,6 +78,7 @@ res?                // 传播错误
 res.map_err(|e| ...) // 错误映射
 res.and_then(|v| ...) // 链式操作
 ```
+
 ---
 
 ## ?操作符 {#操作符}
@@ -90,6 +92,7 @@ fn may_fail() -> Result<T, Error> {
     Ok(y)
 }
 ```
+
 ---
 
 ## 错误转换 {#错误转换}
@@ -105,6 +108,7 @@ impl From<IOError> for MyError {
 // 使用
 let file = File::open("file")?;  // IOError自动转为MyError
 ```
+
 ---
 
 ## panic vs Result {#panic-vs-result}

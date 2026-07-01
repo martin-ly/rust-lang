@@ -99,6 +99,7 @@ let s2: String = "world".to_string();
 let s3: &str = "hello";
 let s4: &str = &s1; // String 自动解引用为 &str
 ```
+
 ### 类型特点 {#类型特点}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -136,6 +137,7 @@ let s5 = "a".repeat(5); // "aaaaa"
 // 预分配容量
 let mut s6 = String::with_capacity(10);
 ```
+
 ### 从其他类型创建 {#从其他类型创建}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -154,6 +156,7 @@ let s3 = 'a'.to_string();
 let bytes = b"hello";
 let s4 = String::from_utf8(bytes.to_vec()).unwrap();
 ```
+
 ---
 
 ## ✂️ 字符串操作 {#字符串操作}
@@ -184,6 +187,7 @@ let s1 = String::from("Hello, ");
 let s2 = String::from("world!");
 let s3 = s1 + &s2; // s1 被移动
 ```
+
 ### 删除内容 {#删除内容}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -206,6 +210,7 @@ s.clear();
 let mut s = String::from("hello");
 s.drain(1..3); // 移除索引 1-2
 ```
+
 ### 替换 {#替换}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -225,6 +230,7 @@ let s2 = s.replacen("l", "L", 2);
 let mut s = String::from("hello");
 s.replace_range(0..1, "H");
 ```
+
 ### 查找和检查 {#查找和检查}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -247,6 +253,7 @@ let pos = s.find("world"); // Option<usize>
 // rfind - 从右查找
 let pos = s.rfind("l");
 ```
+
 ### 分割 {#分割}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -274,6 +281,7 @@ for part in s.split_terminator(',') {
     println!("{}", part);
 }
 ```
+
 ### 修剪 {#修剪}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -293,6 +301,7 @@ let end_trimmed = s.trim_end();
 // trim_matches - 去除匹配的字符
 let trimmed = s.trim_matches(' ');
 ```
+
 ---
 
 ## 🔄 字符串转换 {#字符串转换}
@@ -313,6 +322,7 @@ let s1 = "hello".to_string();
 let s2 = String::from("hello");
 let s3 = format!("{}", "hello");
 ```
+
 ### 大小写转换 {#大小写转换}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -332,6 +342,7 @@ let first = chars.next().unwrap().to_uppercase();
 let rest: String = chars.as_str().to_lowercase();
 let capitalized = format!("{}{}", first, rest);
 ```
+
 ### 数字转换 {#数字转换}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -347,6 +358,7 @@ let n = 42;
 let s = n.to_string();
 let s = format!("{}", n);
 ```
+
 ### 字符和字节 {#字符和字节}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -370,6 +382,7 @@ let char_count = s.chars().count();
 // 字节数量
 let byte_count = s.len();
 ```
+
 ---
 
 ## 🖨️ 格式化输出 {#格式化输出}
@@ -395,6 +408,7 @@ eprintln!("Error: {}", "something went wrong");
 // eprint! - 输出到标准错误（不带换行）
 eprint!("Warning: ");
 ```
+
 ### format! 宏 {#format-宏}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -414,6 +428,7 @@ let s = format!("Name: {name}, Age: {age}");
 // 位置参数
 let s = format!("{1} and {0}", "first", "second");
 ```
+
 ### write! 和 writeln {#write-和-writeln}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -430,6 +445,7 @@ write!(s, "Hello, {}!", "world").unwrap();
 writeln!(s, "Line 1").unwrap();
 writeln!(s, "Line 2").unwrap();
 ```
+
 ---
 
 ## 🎨 格式化选项 {#格式化选项}
@@ -461,6 +477,7 @@ println!("{:*>10}", value);    // "********42"
 println!("{:*<10}", value);    // "42********"
 println!("{:*^10}", value);    // "****42****"
 ```
+
 ### 数字格式化 {#数字格式化}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -491,6 +508,7 @@ println!("{:+}", n);           // "+1234"
 // 补零
 println!("{:05}", n);          // "01234"
 ```
+
 ### 浮点数格式化 {#浮点数格式化}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -512,6 +530,7 @@ println!("{:E}", f);           // "3.14159E0"
 // 宽度和小数位数
 println!("{:10.2}", f);        // "      3.14"
 ```
+
 ### 字符串格式化 {#字符串格式化}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -528,6 +547,7 @@ println!("{:.3}", s);          // "hel"
 // 宽度和截断
 println!("{:10.3}", s);        // "hel       "
 ```
+
 ### 指针和引用 {#指针和引用}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -542,6 +562,7 @@ println!("{:p}", &value);
 println!("{:?}", value);       // "42"
 println!("{:#?}", vec![1, 2, 3]); // 美化格式
 ```
+
 ---
 
 ## 🎯 常用模式 {#常用模式}
@@ -571,6 +592,7 @@ s.push_str(", world!");
 let parts = vec!["Hello", "world"];
 let s = parts.join(", ");
 ```
+
 ### 字符串模板 {#字符串模板}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -587,6 +609,7 @@ let text = format!(
     "first", "second", "third"
 );
 ```
+
 ### 错误消息格式化 {#错误消息格式化}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -612,6 +635,7 @@ let err = Error {
 };
 println!("{}", err); // "Error 404: Not Found"
 ```
+
 ### 表格格式化 {#表格格式化}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -630,6 +654,7 @@ for (name, age, role) in rows {
 // Bob        25  Designer
 // Charlie    35  Manager
 ```
+
 ### 进度条格式化 {#进度条格式化}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -647,6 +672,7 @@ print!("\r[{}{}] {:.1}%",
     percent
 );
 ```
+
 ---
 
 ## 💡 代码示例 {#代码示例}
@@ -686,6 +712,7 @@ println!("Display: {}", p);      // Display: (1, 2)
 println!("Debug: {:?}", p);       // Debug: Point { x: 1.0, y: 2.0 }
 println!("Pretty: {:#?}", p);      // Pretty: 格式化多行输出
 ```
+
 ### 示例 2: 自定义格式化参数 {#示例-2-自定义格式化参数}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -721,6 +748,7 @@ let data = HexBytes(&[0x48, 0x65, 0x6c, 0x6c, 0x6f]);
 println!("{}", data);        // 48 65 6c 6c 6f
 println!("{:x}", data);      // 48656c6c6f
 ```
+
 ### 示例 3: 安全的字符串切片 {#示例-3-安全的字符串切片}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -749,6 +777,7 @@ let s = "Hello 世界";
 println!("{:?}", safe_slice(s, 0, 5));  // Some("Hello")
 println!("{:?}", safe_slice(s, 6, 8));  // Some("世界")
 ```
+
 ### 示例 4: 字符串模板引擎 {#示例-4-字符串模板引擎}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -784,6 +813,7 @@ vars.insert("count", "5");
 println!("{}", template.render(&vars));
 // Hello, Alice! You have 5 new messages.
 ```
+
 ### 示例 5: CSV 解析器 {#示例-5-csv-解析器}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -822,6 +852,7 @@ let row = CsvRow::from_line(r#"John Doe, 30, "New York, NY""#);
 println!("{:?}", row.fields);
 // ["John Doe", "30", "New York, NY"]
 ```
+
 ---
 
 ## 🎯 使用场景 {#使用场景}
@@ -907,6 +938,7 @@ let entry = LogEntry {
 };
 println!("{}", entry.format_colored());
 ```
+
 ---
 
 ## 🚫 反例速查 {#反例速查}
@@ -925,6 +957,7 @@ for i in 0..1000 {
     s = s + &i.to_string();  // ❌ 每次分配新 String
 }
 ```
+
 **原因**: `+` 会分配新 String，频繁拼接开销大。
 
 **修正**:
@@ -933,6 +966,7 @@ for i in 0..1000 {
 let s: String = (0..1000).map(|i| i.to_string()).collect();
 // 或使用 s.push_str
 ```
+
 ---
 
 ### 反例 2: 按字节索引切片 UTF-8 {#反例-2-按字节索引切片-utf-8}
@@ -946,6 +980,7 @@ let s = "hello";
 let c = &s[1..2];  // 若 "he" 是字符边界则 OK
 let c = &s[1..3];  // ❌ 可能 panic：非字符边界
 ```
+
 **原因**: 字符串按字节索引，切分必须在 UTF-8 字符边界。
 
 **修正**: 使用 `s.chars().nth(1)` 或 `char_indices()` 按字符处理。
@@ -962,6 +997,7 @@ let c = &s[1..3];  // ❌ 可能 panic：非字符边界
 let bytes = vec![0x80, 0x81, 0x82];
 let s = String::from_utf8(bytes).unwrap();  // ❌ panic: 无效的 UTF-8
 ```
+
 **原因**: 不是所有字节序列都是有效的 UTF-8。
 
 **修正**:
@@ -979,6 +1015,7 @@ match String::from_utf8(bytes) {
 // 或使用 lossy 转换
 let s = String::from_utf8_lossy(&[0x80, 0x81, 0x82]);
 ```
+
 ---
 
 ### 反例 4: format!  panic 导致的拒绝服务 {#反例-4-format-panic-导致的拒绝服务}
@@ -995,6 +1032,7 @@ fn log_user_input(input: &str) {
 
 log_user_input("Hello {world}");  // panic!
 ```
+
 **原因**: `format!` 族宏会将字符串解释为格式字符串。
 
 **修正**:
@@ -1007,6 +1045,7 @@ fn log_user_input(input: &str) {
     println!("{input}");
 }
 ```
+
 ---
 
 ### 反例 5: 在热路径上频繁分配字符串 {#反例-5-在热路径上频繁分配字符串}
@@ -1025,6 +1064,7 @@ fn process_logs(logs: &[LogEntry]) -> String {
     result
 }
 ```
+
 **原因**: 频繁的字符串分配和复制会严重影响性能。
 
 **修正**:
@@ -1040,6 +1080,7 @@ fn process_logs(logs: &[LogEntry]) -> String {
     result
 }
 ```
+
 ---
 
 ## 📚 相关文档 {#相关文档}
@@ -1143,6 +1184,7 @@ pub fn get_config() -> Option<&'static Config> {
 let phi = f64::consts::GOLDEN_RATIO;
 let gamma = f64::consts::EULER_GAMMA;
 ```
+
 **性能提升**: array_windows +15-30%, LazyLock::get() -40% 延迟, ControlFlow +10-15% 提前终止效率。
 
 **最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)

@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **Bevy 游戏引擎的 ECS 架构与 Archetype 存储设计**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [游戏 ECS](../../../../concept/06_ecosystem/07_game_ecs.md)
 > - [游戏开发](../../../../concept/06_ecosystem/21_game_development.md)
 > - [游戏引擎内部](../../../../concept/06_ecosystem/49_game_engine_internals.md)
@@ -97,6 +98,7 @@ fn main() {
 
 }
 ```
+
 > [来源: Bevy 0.15 API Reference — bevy::ecs::system::Query](https://docs.rs/bevy/0.15.0/bevy/ecs/system/struct.Query.html)
 
 ---
@@ -124,6 +126,7 @@ pub struct Entity {
 
 }
 ```
+
 `Entity` 不包含任何业务数据，仅作为组件表的"行索引"。这种设计使得实体创建/销毁的开销极低（O(1)），且避免了传统 OOP 中继承层次带来的紧耦合。
 
 > [来源: Rust Reference — Ownership and Borrowing](https://doc.rust-lang.org/reference/ownership.html)
@@ -164,6 +167,7 @@ struct PlayerControlled;
 
 struct MeshRenderer;
 ```
+
 存储策略的选择直接影响性能：
 
 - **Table 存储**: 组件数据密集排列，适合大部分实体都拥有的组件（如 `Transform`）
@@ -214,6 +218,7 @@ fn complex_system(
 
 }
 ```
+
 > [来源: TRPL — Trait 与泛型](https://doc.rust-lang.org/book/ch10-00-generics.html)
 
 ---
@@ -249,6 +254,7 @@ Archetype "Position + Velocity + Sprite"
 
          ↑ 连续内存块，CPU 缓存行友好
 ```
+
 > [来源: Bevy Engine Blog — ECS Architecture Deep Dive](https://bevyengine.org/news/bevy-0-6/)
 
 ### 3.2 Archetype 迁移 {#32-archetype-迁移}
@@ -271,6 +277,7 @@ fn add_health(mut commands: Commands, query: Query<Entity, Without<Health>>) {
 
 }
 ```
+
 迁移操作涉及：
 
 1. 在目标 Archetype 中分配新行
@@ -311,6 +318,7 @@ graph TD
 
     style A fill:#f5f5f5,stroke:#9e9e9e,stroke-width:1px
 ```
+
 上图展示了 Archetype 之间的**边迁移图**。每个节点是一个唯一的组件组合，边代表一次组件添加/移除操作。Bevy 维护此图以实现 O(1) 的 Archetype 查找。
 
 > [来源: Bevy ECS Source — archetype.rs](https://github.com/bevyengine/bevy/blob/main/crates/bevy_ecs/src/archetype.rs)
@@ -396,6 +404,7 @@ fn main() {
 
 }
 ```
+
 > [来源: Bevy 0.15 Docs — System Ordering](https://bevyengine.org/learn/quick-start/getting-started/systems/)
 
 ### 4.2 依赖图与并行执行 {#42-依赖图与并行执行}
@@ -429,6 +438,7 @@ graph LR
 
     style E fill:#fce4ec
 ```
+
 调度器通过分析 `Query` 的泛型参数自动判断冲突：
 
 - `Query<&Position>` + `Query<&Position>` → **并行安全**（只读）
@@ -482,6 +492,7 @@ app.add_systems(Update,
 
 );
 ```
+
 > [来源: Bevy Docs — States](https://bevyengine.org/learn/quick-start/getting-started/states/)
 
 ---
@@ -541,6 +552,7 @@ where
 
 }
 ```
+
 `for<'w, 's>` 确保系统函数可以对 World 进行任意生命周期的借用，而调度器在调用 `run` 时独占整个 `&mut World`，从而**静态保证**没有两个系统可以同时写入同一组件。
 
 > [来源: Rust Reference — Higher-Ranked Trait Bounds](https://doc.rust-lang.org/reference/trait-bounds.html#higher-ranked-trait-bounds)
@@ -576,6 +588,7 @@ fn spawn_enemy(mut commands: Commands, assets: Res<AssetServer>) {
 
 }
 ```
+
 命令在当前阶段的所有系统执行完毕后，由 `apply_deferred` 统一应用。这是**命令模式 (Command Pattern)** 的典型实现，避免了并行突变竞争。
 
 > [来源: Game Programming Patterns — Command Pattern by Robert Nystrom](https://gameprogrammingpatterns.com/command.html)
@@ -618,6 +631,7 @@ fn debug_stats(world: &World, entity: Entity) {
 
 }
 ```
+
 > [来源: Bevy Reflect Docs](https://docs.rs/bevy_reflect/latest/bevy_reflect/)
 
 ---
@@ -667,6 +681,7 @@ fn update_score(mut score: ResMut<Score>, query: Query<&Health, With<Player>>) {
 
 }
 ```
+
 资源与组件的关键区别：
 
 - **Component**: 每个实体可有一个，存储在 Archetype 中
@@ -761,6 +776,7 @@ fn handle_damage(
 
 }
 ```
+
 事件在帧间自动清理，默认采用**环形缓冲区**实现，支持高效的多生产者/多消费者场景。
 
 > [来源: Bevy Source — event.rs](https://github.com/bevyengine/bevy/blob/main/crates/bevy_ecs/src/event.rs)
@@ -809,6 +825,7 @@ ECS 并非银弹，以下场景传统模式更合适：
 
    }
    ```
+
 2. **配置与元数据**: 静态配置用资源 + TOML/JSON 文件，而非组件
 3. **深层嵌套关系**: 父子 Transform 层级在 Bevy 中通过 `Parent`/`Children` 组件模拟，但过度嵌套会影响性能
 4. **小规模原型**: < 1000 个实体时，ECS 的复杂度可能不值得
@@ -845,6 +862,7 @@ fn better_system(a_query: Query<&Position, With<A>>) { }
 
 fn better_system_b(b_query: Query<&Position, With<B>>) { }
 ```
+
 > [来源: Bevy Performance Guidelines](https://bevyengine.org/learn/advanced-concepts/performance/)
 
 ---
@@ -928,6 +946,7 @@ graph TD
 
     style bevy_render fill:#fff3e0,stroke:#f57c00
 ```
+
 ---
 
 ## 相关架构与延伸阅读 {#相关架构与延伸阅读}

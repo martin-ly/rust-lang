@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **Crate 架构反例分析**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [设计模式](../../../../concept/06_ecosystem/02_patterns.md)
 > - [架构模式](../../../../concept/06_ecosystem/35_architecture_patterns.md)
 >
@@ -68,11 +69,13 @@ crate-a/Cargo.toml -> crate-b
 crate-b/Cargo.toml -> crate-c
 crate-c/Cargo.toml -> crate-a
 ```
+
 ### 编译器错误 {#编译器错误-1}
 
 ```text
 error: cyclic package dependency: package `a` depends on itself
 ```
+
 ### 修复方案 {#修复方案-6}
 
 - 提取公共抽象到第四个 crate。
@@ -91,11 +94,13 @@ name = "foo"
 [[lib]]
 name = "bar"
 ```
+
 ### 编译器错误 {#编译器错误-1}
 
 ```text
 error: cannot have more than one lib target
 ```
+
 ### 修复方案 {#修复方案-6}
 
 - 拆分为多个 package 或 workspace member。
@@ -111,6 +116,7 @@ error: cannot have more than one lib target
 // crate-a/src/lib.rs
 pub fn parse(input: &str) -> internal_crate::Token { ... }
 ```
+
 ### 问题 {#问题-3}
 
 用户被迫依赖 `internal_crate`，升级 `internal_crate` 会破坏下游。
@@ -153,6 +159,7 @@ b = ["dep:b"]
 c = ["dep:c"]
 d = ["a", "b", "c", "dep:d"]
 ```
+
 ### 问题 {#问题-3}
 
 - feature 组合指数增长，测试覆盖困难。
@@ -177,6 +184,7 @@ serde = "1.0.150"
 # crate-b/Cargo.toml {#crate-bcargotoml}
 serde = "1.0.200"
 ```
+
 ### 问题 {#问题-3}
 
 - Cargo 可能同时引入两个不兼容版本，增加二进制体积。

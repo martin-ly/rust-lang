@@ -165,6 +165,7 @@ $$D_1(D_2(D_3(\cdots))) \text{ 形成有效委托链}$$
 
    impl<C: Component> Component for Decorator<C> { ... }
    ```
+
 2. **借用链**：
    - `op(&self)` 借用装饰器
    - `self.inner.op()` 借用内部组件
@@ -176,6 +177,7 @@ $$D_1(D_2(D_3(\cdots))) \text{ 形成有效委托链}$$
    ```rust,ignore
    let d1 = Decorator1 { inner: Decorator2 { inner: ConcreteComponent } };
    ```
+
    - 类型检查：`Decorator2` 实现 `Component`
    - 借用链：`d1.op()` → `d1.inner.op()` → `d2.inner.op()`
 4. **无数据竞争**：
@@ -299,6 +301,7 @@ let coffee = MilkDecorator { inner: PlainCoffee };
 
 assert_eq!(coffee.cost(), 2.5);
 ```
+
 **形式化对应**：`MilkDecorator` 即 $D$；`PlainCoffee` 即 $T$；`cost` 先调用 `inner.cost()` 再加价。
 
 ---
@@ -350,6 +353,7 @@ fn main() {
 
 }
 ```
+
 ### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
@@ -426,6 +430,7 @@ borrow_checker_proof
 
 推论 DE-C1 (纯 Safe Decorator)
 ```
+
 ### 与 Rust 类型系统的联系 {#与-rust-类型系统的联系}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -484,6 +489,7 @@ borrow_checker_proof
 
 { Q  }  // 后置条件
 ```
+
 > 以上规约以霍尔三元组风格表述；Rust 编译器通过所有权、借用与类型检查在编译期强制大部分不变式与前置条件。
 
 ---
@@ -573,6 +579,7 @@ impl<C: HttpClient> HttpClient for RetryDecorator<C> {
 
 // 使用：LogDecorator { inner: RetryDecorator { inner: ReqwestClient, max_retries: 2 } }
 ```
+
 **形式化对应**：`LogDecorator`/`RetryDecorator` 即 $D$；委托链满足 Axiom DE1、DE2。
 
 ---
@@ -619,6 +626,7 @@ struct B<C>(A<C>);
 
 type X = B<B<B<...>>>; // 无法终止
 ```
+
 **编译器错误**：`overflow evaluating the requirement`。
 
 ### 反例 2：装饰器持有 &mut 导致借用冲突 {#反例-2装饰器持有-mut-导致借用冲突}
@@ -640,6 +648,7 @@ fn use(c: &mut impl Coffee) {
 
 }
 ```
+
 **编译器错误**：`cannot borrow c as immutable because it is also borrowed as mutable`。
 
 ### 反例 3：trait object 装饰丢失 Send {#反例-3trait-object-装饰丢失-send}
@@ -653,6 +662,7 @@ let c = MilkDecorator { component: Box::new(SimpleCoffee) as Box<dyn Coffee> };
 
 share(Box::new(c)); // 错误
 ```
+
 **编译器错误**：`the trait Send is not implemented for dyn Coffee`。
 
 ---
@@ -671,6 +681,7 @@ share(Box::new(c)); // 错误
 
 └── 需解耦实现？ → Bridge
 ```
+
 ---
 
 ## 与 GoF 对比 {#与-gof-对比}
@@ -755,6 +766,7 @@ mindmap
 
       缓存/重试
 ```
+
 ---
 
 ## 与其他模式的关系图 {#与其他模式的关系图}
@@ -783,6 +795,7 @@ graph LR
 
     style P fill:#9E9E9E,stroke:#616161,color:#fff
 ```
+
 ---
 
 ## 实质内容五维自检 {#实质内容五维自检}

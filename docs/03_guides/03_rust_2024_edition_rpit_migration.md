@@ -61,6 +61,7 @@ fn example<'a>(x: &'a str) -> impl Iterator<Item = char> + 'a {
     x.chars()
 }
 ```
+
 在旧版中，编译器**不会**自动将 `'a` 与返回类型关联，需要显式标注 `+ 'a`。
 
 ### Rust 2024 Edition {#rust-2024-edition}
@@ -72,6 +73,7 @@ fn example(x: &str) -> impl Iterator<Item = char> {
     x.chars()
 }
 ```
+
 在新版中，编译器**自动捕获**所有输入生命周期，上述代码无需显式标注 `'a` 即可编译。
 
 ## 影响分析 {#影响分析}
@@ -103,6 +105,7 @@ fn get_words(text: &str) -> impl Iterator<Item = &str> {
     text.split_whitespace()
 }
 ```
+
 #### 示例 2：可能的兼容性问题 {#示例-2可能的兼容性问题}
 
 ```rust,ignore
@@ -117,6 +120,7 @@ fn make_iter(_x: &str) -> impl Iterator<Item = i32> {
     vec![1, 2, 3].into_iter()
 }
 ```
+
 #### 示例 3：精确控制（使用 `use<...>` 语法） {#示例-3精确控制使用-use-语法}
 
 ```rust
@@ -128,6 +132,7 @@ fn precise_example<'a, 'b>(
     x.chars()
 }
 ```
+
 ## 迁移步骤 {#迁移步骤}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -142,6 +147,7 @@ fn precise_example<'a, 'b>(
 [package]
 edition = "2024"
 ```
+
 ### 步骤 2：运行编译器检查 {#步骤-2运行编译器检查}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -149,6 +155,7 @@ edition = "2024"
 ```bash
 cargo check
 ```
+
 观察是否有生命周期相关的编译错误。
 
 ### 步骤 3：处理常见错误 {#步骤-3处理常见错误}
@@ -163,6 +170,7 @@ fn process(data: &str) -> impl Iterator<Item = char> {
     "static".chars()
 }
 ```
+
 **解决方案**：使用 `use<>` 精确捕获，或添加 `+ 'static`：
 
 ```rust
@@ -170,6 +178,7 @@ fn process(data: &str) -> impl Iterator<Item = char> + use<> {
     "static".chars()
 }
 ```
+
 #### 错误类型 B：trait bounds 不匹配 {#错误类型-btrait-bounds-不匹配}
 
 ```rust
@@ -178,6 +187,7 @@ fn get_ref<'a>(x: &'a str) -> impl std::fmt::Display + 'a {
     x
 }
 ```
+
 **解决方案**：在 Rust 2024 中，可以简化为：
 
 ```rust
@@ -185,6 +195,7 @@ fn get_ref(x: &str) -> impl std::fmt::Display {
     x
 }
 ```
+
 ### 步骤 4：使用精确捕获优化 {#步骤-4使用精确捕获优化}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -202,6 +213,7 @@ where
     x.chars()
 }
 ```
+
 ## 最佳实践 {#最佳实践}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**

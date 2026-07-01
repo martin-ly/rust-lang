@@ -41,6 +41,7 @@ fn rule3() {
     // s 不再有效
 }
 ```
+
 ## 所有权与函数 {#所有权与函数}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -72,6 +73,7 @@ fn demo() {
     // s2 仍然有效，因为只是借用
 }
 ```
+
 ## 相关研究笔记 {#相关研究笔记-1}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -131,6 +133,7 @@ fn custom_copy() {
     println!("p1 = {:?}, p2 = {:?}", p1, p2);  // 两者都有效
 }
 ```
+
 ### Drop 与资源管理 {#drop-与资源管理}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -179,6 +182,7 @@ fn raii_pattern() {
     }  // 锁在这里自动释放
 }
 ```
+
 ### 所有权与闭包 {#所有权与闭包}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -232,6 +236,7 @@ fn call_fn<F: Fn()>(f: F) { f(); }
 fn call_fn_mut<F: FnMut()>(f: &mut F) { f(); }
 fn call_fn_once<F: FnOnce()>(f: F) { f(); }
 ```
+
 ---
 
 ## 相关研究笔记 {#相关研究笔记-1}

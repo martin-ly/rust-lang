@@ -84,6 +84,7 @@
 
 }  // x和r的生命周期结束
 ```
+
 ### 为什么需要生命周期？ {#为什么需要生命周期}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -105,6 +106,7 @@ let r;
 
 // r仍然有效，但指向无效内存
 ```
+
 ---
 
 ## 第二部分：生命周期语法 {#第二部分生命周期语法}
@@ -130,6 +132,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 // 表示x、y和返回值都有相同的生命周期
 ```
+
 ### 生命周期省略 {#生命周期省略}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
@@ -146,6 +149,7 @@ fn first_word(s: &str) -> &str { ... }
 
 // fn first_word<'a>(s: &'a str) -> &'a str
 ```
+
 **三条省略规则**:
 
 1. 每个引用参数有自己的生命周期
@@ -173,6 +177,7 @@ let s: &'static str = "hello";
 
 // 字符串字面量是'static
 ```
+
 ### 子类型关系 {#子类型关系}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -192,6 +197,7 @@ take_str(s);  // 可以传给需要 &'a str 的函数
 
 fn take_str<'a>(s: &'a str) {}
 ```
+
 ---
 
 ## 第四部分：结构体中的生命周期 {#第四部分结构体中的生命周期}
@@ -219,6 +225,7 @@ fn main() {
 
 }
 ```
+
 ---
 
 ## 第五部分：常见模式 {#第五部分常见模式}
@@ -237,6 +244,7 @@ fn identity<'a>(x: &'a str) -> &'a str {
 
 }
 ```
+
 ### 模式2: 多个独立生命周期 {#模式2-多个独立生命周期}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -254,6 +262,7 @@ fn parse<'a, 'b>(
 
 }
 ```
+
 ### 模式3: 方法 {#模式3-方法}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -269,6 +278,7 @@ impl<'a> Person<'a> {
 
 }
 ```
+
 ---
 
 ## 第六部分：高级话题 {#第六部分高级话题}
@@ -292,6 +302,7 @@ println!("{}", y);  // y最后一次使用
 
 let z = &mut x;  // OK！NLL允许
 ```
+
 ### HRTB (高阶trait bound) {#hrtb-高阶trait-bound}
 
 >
@@ -310,6 +321,7 @@ where
 
 }
 ```
+
 ---
 
 ## 总结 {#总结}
@@ -346,6 +358,7 @@ where
 
             └── trait
 ```
+
 ---
 
 **维护者**: Rust Formal Methods Research Team

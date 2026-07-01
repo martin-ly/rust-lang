@@ -91,6 +91,7 @@
 ```text
 error[E0382]: borrow of moved value: `x`
 ```
+
 **原因**: 值被移动后再次使用
 
 **解决方案**:
@@ -111,6 +112,7 @@ let x = String::from("hello");
 let y = &x;  // 借用而非移动
 println!("{}", x);
 ```
+
 ### 2. 生命周期错误 {#2-生命周期错误}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -122,6 +124,7 @@ println!("{}", x);
 ```text
 error[E0597]: `x` does not live long enough
 ```
+
 **原因**: 引用的生命周期不够长
 
 **解决方案**:
@@ -144,6 +147,7 @@ fn get_ref<'a>(s: &'a str) -> &'a str {
     s
 }
 ```
+
 ### 3. 类型不匹配 {#3-类型不匹配}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -155,6 +159,7 @@ fn get_ref<'a>(s: &'a str) -> &'a str {
 ```text
 error[E0308]: mismatched types
 ```
+
 **原因**: 类型不匹配
 
 **解决方案**:
@@ -168,6 +173,7 @@ let x: i32 = "42".parse().unwrap();
 // 或
 let x = "42".parse::<i32>().unwrap();
 ```
+
 ---
 
 ## 🐛 运行时错误 {#运行时错误}
@@ -185,6 +191,7 @@ let x = "42".parse::<i32>().unwrap();
 ```text
 thread 'main' panicked at 'index out of bounds'
 ```
+
 **原因**: 数组越界访问
 
 **解决方案**:
@@ -202,6 +209,7 @@ if let Some(value) = arr.get(10) {
     // 处理越界情况
 }
 ```
+
 ### 2. 死锁 {#2-死锁}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -225,6 +233,7 @@ let mutex2 = Arc::new(Mutex::new(0));
 // ✅ 解决方案：统一锁的顺序
 // 所有线程都按相同顺序获取锁
 ```
+
 ### 3. 内存泄漏 {#3-内存泄漏}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -253,6 +262,7 @@ struct Node {
     next: Option<Weak<RefCell<Node>>>,
 }
 ```
+
 ---
 
 ## ⚡ 性能问题 {#性能问题}
@@ -276,6 +286,7 @@ incremental = true  # 启用增量编译
 [dependencies]
 serde = { workspace = true }
 ```
+
 ### 2. 运行时性能问题 {#2-运行时性能问题}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -290,6 +301,7 @@ perf report
 # 使用 cargo-flamegraph {#使用-cargo-flamegraph}
 cargo flamegraph --bin my_app
 ```
+
 **优化技巧**:
 
 - 使用 `release` 模式编译
@@ -312,6 +324,7 @@ cargo flamegraph --bin my_app
 ```text
 error: timeout while waiting for connection
 ```
+
 **解决方案**:
 
 ```rust,ignore
@@ -326,6 +339,7 @@ match timeout(Duration::from_secs(5), connect()).await {
     }
 }
 ```
+
 ### 2. DNS 解析失败 {#2-dns-解析失败}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -335,6 +349,7 @@ match timeout(Duration::from_secs(5), connect()).await {
 ```text
 error: failed to resolve hostname
 ```
+
 **Rust 1.93 改进**：Rust 1.93 更新了 musl 到 1.2.5，显著改进了 DNS 解析器的可靠性，特别是对于大型 DNS 记录和递归名称服务器。如果使用 musl 目标，升级到 Rust 1.93 可以解决许多 DNS 解析问题。
 
 **解决方案**:
@@ -351,6 +366,7 @@ use tokio::net::TcpStream;
 
 let stream = TcpStream::connect("example.com:80").await?;
 ```
+
 **如果仍遇到问题，可以添加重试机制**:
 
 ```rust,ignore
@@ -378,6 +394,7 @@ while retries > 0 {
     }
 }
 ```
+
 **musl 1.2.5 改进说明**（Rust 1.93+）：
 
 - 改进了 DNS 解析器，特别是对于大型 DNS 记录
@@ -418,6 +435,7 @@ while retries > 0 {
 ```text
 error: future cannot be sent between threads safely
 ```
+
 **解决方案**:
 
 ```rust,ignore
@@ -429,6 +447,7 @@ async fn test_async() {
     // ...
 }
 ```
+
 ---
 
 ## 📚 调试技巧 {#调试技巧}
@@ -442,6 +461,7 @@ async fn test_async() {
 ```rust,ignore
 println!("调试信息: {:?}", value);
 ```
+
 ### 2. 使用 dbg! 宏 {#2-使用-dbg-宏}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -449,6 +469,7 @@ println!("调试信息: {:?}", value);
 ```rust,ignore
 let value = dbg!(calculate_value());
 ```
+
 ### 3. 使用调试器 {#3-使用调试器}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -460,6 +481,7 @@ gdb ./target/debug/my_app
 # 使用 lldb (macOS) {#使用-lldb-macos}
 lldb ./target/debug/my_app
 ```
+
 ### 4. 使用日志 {#4-使用日志}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -471,6 +493,7 @@ info!("信息: {}", value);
 warn!("警告: {}", value);
 error!("错误: {}", value);
 ```
+
 ---
 
 ## 🔍 常见问题 FAQ {#常见问题-faq}
@@ -619,6 +642,7 @@ let result = items.iter().try_for_each(|&n| {
     else { ControlFlow::Continue(()) }
 });
 ```
+
 **最后更新**: 2026-05-08 (添加 Rust 1.95+ 特性)
 
 ---
@@ -655,6 +679,7 @@ pub fn get_config() -> Option<&'static Config> {
     LazyLock::get(&CONFIG)
 }
 ```
+
 ### array_windows 边界问题 {#array_windows-边界问题}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -679,6 +704,7 @@ fn process(data: &[i32]) -> Vec<i32> {
         .collect()
 }
 ```
+
 ### ControlFlow 类型推断问题 {#controlflow-类型推断问题}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -706,6 +732,7 @@ fn search(items: &[i32]) -> ControlFlow<i32, ()> {
     ControlFlow::Continue(())
 }
 ```
+
 **最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)
 
 ---

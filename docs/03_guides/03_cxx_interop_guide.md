@@ -85,6 +85,7 @@ fn compute_distance(a: &ffi::Point, b: &ffi::Point) -> f64 {
     ((a.x - b.x).powi(2) + (a.y - b.y).powi(2)).sqrt()
 }
 ```
+
 ```cpp
 // include/cxx_bridge.h (由 cxx 自动生成)
 // src/wrapper.cpp (手写 C++ 实现)
@@ -101,6 +102,7 @@ std::unique_ptr<Canvas> create_canvas() {
     return std::make_unique<Canvas>();
 }
 ```
+
 ### build.rs {#buildrs}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -112,6 +114,7 @@ fn main() {
         .compile("cxx-demo");
 }
 ```
+
 ## bindgen {#bindgen}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -145,6 +148,7 @@ fn main() {
         .expect("Couldn't write bindings!");
 }
 ```
+
 ```rust,ignore
 // src/lib.rs
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
@@ -162,6 +166,7 @@ pub mod safe_wrapper {
     }
 }
 ```
+
 ## cxx vs bindgen 对比 {#cxx-vs-bindgen-对比}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -187,6 +192,7 @@ use c13_embedded::cxx_interop;
 cxx_interop::explain_cxx_bridge();
 cxx_interop::explain_bindgen_workflow();
 ```
+
 启用 `cxx-interop` feature 后可尝试真实 cxx 桥接（需要 C++ 编译器）。
 
 ## 参考 {#参考}

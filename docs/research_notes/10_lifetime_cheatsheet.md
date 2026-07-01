@@ -86,6 +86,7 @@ fn process<'a, 'b>(x: &'a Data, y: &'b Data) -> &'a Data
 where
     'a: 'b,  // 'a 至少和 'b 一样长
 ```
+
 ---
 
 ## 生命周期省略规则 {#生命周期省略规则-1}
@@ -99,17 +100,20 @@ where
    ```rust,ignore
    fn foo(x: &i32, y: &i32)  // 隐式: fn foo<'a, 'b>(x: &'a i32, y: &'b i32)
    ```
+
 2. **单一输入生命周期应用到输出**
 
    ```rust,ignore
    fn foo(x: &i32) -> &i32   // 隐式: fn foo<'a>(x: &'a i32) -> &'a i32
    ```
+
 3. **`&self`的生命周期应用到输出**
 
    ```rust,ignore
    fn foo(&self) -> &T       // 隐式: fn foo<'a>(&'a self) -> &'a T
    fn foo(&self, x: &T) -> &T  // 规则1+3: fn foo<'a, 'b>(&'a self, x: &'b T) -> &'a T
    ```
+
 ---
 
 ## 结构体生命周期 {#结构体生命周期-1}
@@ -134,6 +138,7 @@ impl<'a> Parser<'a> {
     }
 }
 ```
+
 ---
 
 ## 'static 生命周期 {#static-生命周期}
@@ -153,6 +158,7 @@ where
 // 全局常量
 static GLOBAL: i32 = 42;
 ```
+
 ---
 
 ## 高阶Trait Bound (HRTB) {#高阶trait-bound-hrtb}
@@ -172,6 +178,7 @@ where
 let closure = |s: &str| println!("{}", s);
 call_with_ref(closure);
 ```
+
 ---
 
 ## 常见模式 {#常见模式}
@@ -189,6 +196,7 @@ fn identity<'a>(x: &'a str) -> &'a str {
     x
 }
 ```
+
 ### 返回与特定输入关联 {#返回与特定输入关联}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -200,6 +208,7 @@ fn get_name<'a>(person: &'a Person) -> &'a str {
     &person.name
 }
 ```
+
 ### 多个输入，返回其中一个 {#多个输入返回其中一个}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
@@ -211,6 +220,7 @@ fn choose<'a>(first: &'a str, second: &'a str, use_first: bool) -> &'a str {
     if use_first { first } else { second }
 }
 ```
+
 ---
 
 ## 生命周期错误与修复 {#生命周期错误与修复}
@@ -242,6 +252,7 @@ Box<dyn Parser<'a> + 'a>
 trait Read {}
 &dyn Read                // &'_ dyn Read (匿名生命周期)
 ```
+
 ---
 
 ## 型变与生命周期 {#型变与生命周期}
@@ -260,6 +271,7 @@ fn example() {
 // &'a mut T 对 'a 不变
 // &'a mut T 对 T 不变
 ```
+
 ---
 
 ## 与泛型结合 {#与泛型结合}
@@ -283,6 +295,7 @@ where
     T: Display + 'a,
 { x }
 ```
+
 ---
 
 ## 自我引用结构 {#自我引用结构}
@@ -317,6 +330,7 @@ impl SelfReferential {
     }
 }
 ```
+
 ---
 
 ## 快速诊断 {#快速诊断}
@@ -336,6 +350,7 @@ impl SelfReferential {
 原因: 返回局部变量的引用
 解决: 返回值所有权或'static
 ```
+
 ## 生命周期基础 {#生命周期基础}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -348,6 +363,7 @@ impl SelfReferential {
 'a: 'b  // 'a 至少和 'b 一样长（'a 包含 'b）
 T: 'a   // T 中所有引用至少存活 'a
 ```
+
 ### 常见生命周期 {#常见生命周期}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -373,6 +389,7 @@ T: 'a   // T 中所有引用至少存活 'a
 2. 只有一个输入生命周期 → 赋给所有输出
 3. `&self`/`&mut self`存在 → self的生命周期赋给输出
 ```
+
 ### 示例 {#示例}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -388,6 +405,7 @@ fn foo(x: &str) -> &str { x }  // 规则2
 fn method(&self, x: &str) -> &str { self.0 }
 // 等价于: fn method<'a, 'b>(&'a self, x: &'b str) -> &'a str
 ```
+
 ---
 
 ## 常见生命周期模式 {#常见生命周期模式}
@@ -403,6 +421,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
 }
 ```
+
 ### 模式2: 返回self的引用 {#模式2-返回self的引用}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -412,6 +431,7 @@ impl<'a> Parser<'a> {
     fn input(&self) -> &'a str { self.input }
 }
 ```
+
 ### 模式3: 独立生命周期 {#模式3-独立生命周期}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -421,6 +441,7 @@ fn parse<'a, 'b>(input: &'a str, config: &'b Config) -> &'a str {
     // 返回与input关联的数据
 }
 ```
+
 ---
 
 ## 生命周期约束 {#生命周期约束}
@@ -434,6 +455,7 @@ fn parse<'a, 'b>(input: &'a str, config: &'b Config) -> &'a str {
 ```rust,ignore
 F: for<'a> Fn(&'a str) -> &'a str
 ```
+
 ### 多重约束 {#多重约束}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -445,6 +467,7 @@ where
     T: 'a,   // T 中所有引用至少 'a
 {}
 ```
+
 ---
 
 ## 常见错误 {#常见错误}
@@ -467,6 +490,7 @@ fn good() -> String {
     String::from("hello")  // 转移所有权
 }
 ```
+
 ### 错误2: 生命周期不匹配 {#错误2-生命周期不匹配}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -478,6 +502,7 @@ fn longest(x: &str, y: &str) -> &str { ... }
 // ✅ 修复
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str { ... }
 ```
+
 ---
 
 ## 结构体生命周期 {#结构体生命周期-1}
@@ -494,6 +519,7 @@ let name = String::from("Alice");
 let p = Person { name: &name };
 // name 必须在这里之后才能 drop
 ```
+
 ---
 
 ## 生命周期与子类型 {#生命周期与子类型}
@@ -505,12 +531,14 @@ let p = Person { name: &name };
 
 长生命周期是短生命周期的子类型
 ```
+
 ```rust
 let s: &'static str = "hello";
 take_str(s);  // 可以传给需要 &'a str 的函数
 
 fn take_str<'a>(s: &'a str) {}
 ```
+
 ---
 
 ## 技巧 {#技巧}
@@ -527,6 +555,7 @@ struct OwnedData {
     data: String,  // 等价于 data: String + 'static
 }
 ```
+
 ### 技巧2: 生命周期推断 {#技巧2-生命周期推断}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -535,6 +564,7 @@ struct OwnedData {
 // 大多数情况下不需要显式标注
 let r = &x;  // 编译器自动推断
 ```
+
 ### 技巧3: 显式drop {#技巧3-显式drop}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -547,6 +577,7 @@ let r = &x;  // 编译器自动推断
 }  // 或等待作用域结束
 // 现在可以修改 x 了
 ```
+
 ---
 
 ## 快速决策 {#快速决策}
@@ -563,6 +594,7 @@ let r = &x;  // 编译器自动推断
 └── 泛型约束？
     └── T: 'a
 ```
+
 ---
 
 **维护者**: Rust Formal Methods Research Team

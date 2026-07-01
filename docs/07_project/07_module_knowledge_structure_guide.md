@@ -178,6 +178,7 @@ fn main() {
     println!("{}", async_programming.generate_markdown());
 }
 ```
+
 ### 知识结构批量生成器 {#知识结构批量生成器}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -273,6 +274,7 @@ fn main() {
     generator.generate_all();
 }
 ```
+
 ### 思维表征模板生成器 {#思维表征模板生成器}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -361,6 +363,7 @@ fn main() {
     println!("{}", ThinkingRepresentationTemplates::proof_tree_template("实现线程安全"));
 }
 ```
+
 ---
 
 ## 形式化链接 {#形式化链接}
@@ -426,6 +429,7 @@ fn main() {
 - [相关概念1]
 - [相关概念2]
 ```
+
 #### 示例：异步编程 {#示例异步编程}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -452,6 +456,7 @@ fn main() {
 - 异步运行时
 - 并发执行
 ```
+
 ### 2. 属性特征补充 {#2-属性特征补充}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -481,6 +486,7 @@ fn main() {
 - **空间复杂度**: [复杂度]
 - **适用场景**: [场景描述]
 ```
+
 ### 3. 关系连接补充 {#3-关系连接补充}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -510,6 +516,7 @@ fn main() {
 
 - [概念A] --[implements]--> [概念B]
 ```
+
 ### 4. 解释论证补充 {#4-解释论证补充}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -541,6 +548,7 @@ fn main() {
 - **安全保证**: [安全性]
 - **性能保证**: [性能特性]
 ```
+
 ### 5. 形式证明补充 {#5-形式证明补充}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -572,6 +580,7 @@ fn main() {
 - **类型安全**: [证明]
 - **内存安全**: [证明]
 ```
+
 ---
 
 ## 🗺️ 思维表征方式补充 {#思维表征方式补充}
@@ -599,6 +608,7 @@ fn main() {
     └── [子主题3]
     ```
 ````
+
 ### 2. 概念矩阵补充 {#2-概念矩阵补充}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -616,6 +626,7 @@ fn main() {
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 概念B | 属性1 | 属性2 | 评估结果 |
 ```
+
 ### 3. 决策图网补充 {#3-决策图网补充}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -632,6 +643,7 @@ fn main() {
     └── 否 → [默认方案]
     ```
 ````
+
 ### 4. 证明图网补充 {#4-证明图网补充}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -648,6 +660,7 @@ fn main() {
     └── 结论: [最终结果和保证]
     ```
 ````
+
 ---
 
 ## 📊 模块文档知识结构 {#模块文档知识结构}

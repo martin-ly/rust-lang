@@ -72,6 +72,7 @@ EventSourcing := (E, S, apply, snapshot)
 
     snapshot: ℕ → S              -- 快照函数
 ```
+
 ### Def ES2: 事件不变性 {#def-es2-事件不变性}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -81,6 +82,7 @@ EventSourcing := (E, S, apply, snapshot)
 ```text
 ∀e ∈ E. Immutable(e)
 ```
+
 事件一旦创建，不可修改。
 
 ### Def ES3: 状态重建 {#def-es3-状态重建}
@@ -92,6 +94,7 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 
           = fold(apply, S₀, [e₁, e₂, ..., eₙ])
 ```
+
 当前状态是初始状态应用所有事件的结果。
 
 ---
@@ -108,6 +111,7 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 ```text
 ∀eᵢ, eⱼ ∈ E. i < j → timestamp(eᵢ) ≤ timestamp(eⱼ)
 ```
+
 事件按时间顺序存储。
 
 ### Axiom ES2: 应用函数确定性 {#axiom-es2-应用函数确定性}
@@ -117,6 +121,7 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 ```text
 ∀s, e. apply(s, e) = s' 是确定性的
 ```
+
 给定相同状态和事件，结果总是相同。
 
 ### Axiom ES3: 版本控制 {#axiom-es3-版本控制}
@@ -126,6 +131,7 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 ```text
 ∀e ∈ E. version(e) = sequence_number ∈ ℕ
 ```
+
 每个事件有唯一的版本号。
 
 ---
@@ -142,6 +148,7 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 ```text
 ∀t. State(t) 可通过重放 E[0..t] 重建
 ```
+
 **证明概要**:
 
 1. 根据 Def ES3，状态是 fold 的结果
@@ -156,6 +163,7 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 ```text
 ∀t. 历史状态 State(t) 可查询
 ```
+
 **证明概要**:
 
 1. 事件不可变 (Def ES2)
@@ -260,6 +268,7 @@ impl<A: Aggregate> EventSourcedRepository<A> {
 
 }
 ```
+
 ---
 
 ## 5. 与 CQRS 的关系 {#5-与-cqrs-的关系}
@@ -290,6 +299,7 @@ impl<A: Aggregate> EventSourcedRepository<A> {
 
 └─────────────┘                 └─────────────┘
 ```
+
 ---
 
 **相关阅读**:

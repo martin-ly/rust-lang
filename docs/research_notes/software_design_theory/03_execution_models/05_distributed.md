@@ -128,6 +128,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 }
 ```
+
 ### Actor (actix) {#actor-actix}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -166,6 +167,7 @@ impl Handler<MyMessage> for MyActor {
 
 }
 ```
+
 **形式化对应**：gRPC 为 RPC；actor 为消息传递。两者均为 Safe，库封装网络细节。
 
 ---
@@ -258,6 +260,7 @@ let bytes = serde_json::to_vec(&req)?;
 
 let parsed: Request = serde_json::from_slice(&bytes)?;
 ```
+
 ---
 
 ## RPC 与 Actor 对比 {#rpc-与-actor-对比}
@@ -313,6 +316,7 @@ where
 
 }
 ```
+
 ---
 
 ## 安全边界与 FFI {#安全边界与-ffi}

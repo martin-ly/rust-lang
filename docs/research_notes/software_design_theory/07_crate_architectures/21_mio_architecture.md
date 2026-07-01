@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **mio 跨平台 IO 多路复用（epoll/kqueue/IOCP）架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [异步编程](../../../../concept/03_advanced/02_async.md)
 > - [网络编程](../../../../concept/03_advanced/18_network_programming.md)
 >
@@ -91,6 +92,7 @@ loop {
 
 }
 ```
+
 > [来源: mio Examples — TCP Server](https://github.com/tokio-rs/mio/tree/master/examples)
 
 ---
@@ -155,6 +157,7 @@ graph TB
 
     EVENTS --> |"Token + 事件类型"| FUT
 ```
+
 > **认知功能**: 此图展示 mio 在 Rust 异步栈中的精确位置——它在应用 Futures 和操作系统 epoll/kqueue/IOCP 之间充当薄层适配器。mio 不管理任务状态机，只回答"哪些 IO 对象已就绪"这个问题。
 > [来源: mio Docs — Poll](https://docs.rs/mio/latest/mio/struct.Poll.html)
 
@@ -232,6 +235,7 @@ impl Server {
 
 }
 ```
+
 **零成本保证**：
 
 - `Token` 是 `#[repr(transparent)]` 包装 `usize`，内存布局与 `usize` 完全一致
@@ -281,6 +285,7 @@ const RW: Interest = Interest::READABLE.add(Interest::WRITABLE);
 
 registry.register(&mut socket, Token(0), RW)?;
 ```
+
 **类型安全**：
 
 - `Interest` 的构造只能通过关联常量，避免了无效位组合
@@ -315,6 +320,7 @@ impl Registry {
 
 }
 ```
+
 **设计理由**：
 
 - `Registry` 被设计为从 `Poll` 中 `try_clone()` 获取多份，分发给不同线程
@@ -366,6 +372,7 @@ sequenceDiagram
 
     T1->>T1: 处理就绪 Futures
 ```
+
 **平台实现对比**：
 
 | 平台 | 唤醒原语 | 开销 | 特点 |
@@ -413,6 +420,7 @@ impl std::task::Wake for IoWaker {
 
 }
 ```
+
 > [来源: Tokio Source — waker.rs](https://github.com/tokio-rs/tokio/blob/master/tokio/src/runtime/waker.rs)
 
 ---
@@ -458,6 +466,7 @@ let mut events = Events::with_capacity(1024);
 
 poll.poll(&mut events, None)?;
 ```
+
 **抽象开销分析**：
 
 - **系统调用次数**：完全相同（`epoll_create1` → `epoll_ctl` → `epoll_wait`）
@@ -524,6 +533,7 @@ graph BT
 
     MIO --> EPOLL
 ```
+
 > **关键事实**: 几乎所有 Rust 异步网络 IO 最终都归结为 mio 的 `Poll::poll()` 调用。Tokio 的 `TcpListener::accept().await` 在底层就是：注册 `READABLE` 兴趣 → `mio::Poll::poll()` → 收到就绪事件 → 调用 `std::net::TcpListener::accept_nonblocking()`。
 > [来源: Tokio Runtime Internals](https://tokio.rs/tokio/topics)
 

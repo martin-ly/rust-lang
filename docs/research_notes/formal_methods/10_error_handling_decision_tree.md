@@ -158,6 +158,7 @@
 
                     └───────────────────────┘
 ```
+
 ---
 
 ## 决策维度详解 {#决策维度详解}
@@ -243,6 +244,7 @@
 
               └──────────────┘    └───────────────┘
 ```
+
 #### 2.1 本地处理场景 {#21-本地处理场景}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -305,6 +307,7 @@
 
    └────────────────────────────────────────────────┘
 ```
+
 #### 策略选择矩阵 {#策略选择矩阵}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -371,6 +374,7 @@ fn should_retry(error: &Error) -> RetryDecision {
 
 }
 ```
+
 #### 3.2 降级策略 {#32-降级策略}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -455,6 +459,7 @@ fn should_retry(error: &Error) -> RetryDecision {
 
                     └───────────────────┘
 ```
+
 #### 对比表 {#对比表}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -524,6 +529,7 @@ fn should_retry(error: &Error) -> RetryDecision {
 
     └────────────────────┘        └───────────────────────┘
 ```
+
 #### 详细对比 {#详细对比-1}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
@@ -562,6 +568,7 @@ let value = result.expect("critical: must succeed");
 
 let value = result.unwrap();        // 仅用于原型/测试
 ```
+
 ---
 
 ### thiserror vs anyhow {#thiserror-vs-anyhow}
@@ -614,6 +621,7 @@ let value = result.unwrap();        // 仅用于原型/测试
 
 └────────────────────────────────────────────────────────────────┘
 ```
+
 #### 详细对比 {#详细对比-1}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -685,6 +693,7 @@ fn main() -> Result<()> {
 
 }
 ```
+
 ---
 
 ### 自定义错误类型设计 {#自定义错误类型设计}
@@ -764,6 +773,7 @@ fn main() -> Result<()> {
 
     └────────────────────────┘
 ```
+
 #### 设计原则 {#设计原则}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -859,6 +869,7 @@ pub enum AppError {
 
 }
 ```
+
 ---
 
 ### 错误链和上下文 {#错误链和上下文}
@@ -895,6 +906,7 @@ pub enum AppError {
 
 └────────────────────────────────────────────────────────────────┘
 ```
+
 #### anyhow 上下文链 {#anyhow-上下文链}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -946,6 +958,7 @@ fn process_user(user_id: Uuid) -> Result<()> {
 
 //   3: failed to find user 550e8400-e29b-41d4-a716-446655440000
 ```
+
 #### thiserror 错误源 {#thiserror-错误源}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -1013,6 +1026,7 @@ fn load_config(path: &str) -> Result<Config, ConfigError> {
 
 }
 ```
+
 ---
 
 ## 最佳实践 {#最佳实践}
@@ -1118,6 +1132,7 @@ impl From<ApplicationError> for ApiError {
 
 }
 ```
+
 #### 模式 B: 错误状态码映射 {#模式-b-错误状态码映射}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -1152,6 +1167,7 @@ impl HttpStatusCode for ApiError {
 
 }
 ```
+
 #### 模式 C: 错误 Builder {#模式-c-错误-builder}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -1249,6 +1265,7 @@ let err = ErrorBuilder::new(ErrorCode::NotFound)
 
     .build();
 ```
+
 ---
 
 ### 2. 错误转换和映射 {#2-错误转换和映射}
@@ -1296,6 +1313,7 @@ fn read_config() -> Result<Config, AppError> {
 
 }
 ```
+
 #### 2.2 映射错误 (`map_err`) {#22-映射错误-map_err}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -1332,6 +1350,7 @@ fn load_users() -> Result<Vec<User>> {
 
 }
 ```
+
 #### 2.3 错误类型转换矩阵 {#23-错误类型转换矩阵}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -1411,6 +1430,7 @@ async fn authenticate_user(
 
 }
 ```
+
 #### 3.2 用户友好的错误报告 {#32-用户友好的错误报告}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -1482,6 +1502,7 @@ fn suggest_fixes(err: &anyhow::Error) -> String {
 
 }
 ```
+
 #### 3.3 错误聚合和监控 {#33-错误聚合和监控}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -1518,6 +1539,7 @@ pub fn report_error(err: &AppError) {
 
 }
 ```
+
 ---
 
 ### 4. 测试错误处理 {#4-测试错误处理}
@@ -1587,6 +1609,7 @@ mod tests {
 
 }
 ```
+
 #### 4.2 测试错误传播 {#42-测试错误传播}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -1617,6 +1640,7 @@ fn test_error_propagation() {
 
 }
 ```
+
 #### 4.3 测试错误处理逻辑 {#43-测试错误处理逻辑}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -1687,6 +1711,7 @@ async fn test_circuit_breaker() {
 
 }
 ```
+
 ---
 
 ## 反模式警示 {#反模式警示}
@@ -1727,6 +1752,7 @@ let port = config.parse::<u16>()
 
 let val = Some(42).expect("this is a bug: value should exist");
 ```
+
 ### ❌ 反模式 2: 过度使用 `String` 作为错误 {#反模式-2-过度使用-string-作为错误}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -1779,6 +1805,7 @@ match do_something() {
 
 }
 ```
+
 ### ❌ 反模式 3: 错误的 `?` 使用导致信息丢失 {#反模式-3-错误的-使用导致信息丢失}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -1828,6 +1855,7 @@ fn process_file(path: &str) -> Result<Data> {
 
 }
 ```
+
 ### ❌ 反模式 4: 混淆 `Option` 和 `Result` {#反模式-4-混淆-option-和-result}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -1880,6 +1908,7 @@ fn find_user(id: Uuid) -> Result<User, FindUserError> {
 
 }
 ```
+
 ### ❌ 反模式 5: 忽略错误 {#反模式-5-忽略错误}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -1923,6 +1952,7 @@ let Ok(result) = operation() else {
 
 let _ = cache.insert(key, value); // 缓存失败可接受
 ```
+
 ### ❌ 反模式 6: 过度详细的错误类型 {#反模式-6-过度详细的错误类型}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -1977,6 +2007,7 @@ enum DatabaseError {
 
 }
 ```
+
 ### ❌ 反模式 7: 跨线程边界传递非 Send 错误 {#反模式-7-跨线程边界传递非-send-错误}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -2020,6 +2051,7 @@ enum GoodError {
 
 }
 ```
+
 ### ❌ 反模式 8: 在热路径中创建错误字符串 {#反模式-8-在热路径中创建错误字符串}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -2069,6 +2101,7 @@ enum LazyError {
 
 }
 ```
+
 ---
 
 ## 代码示例 {#代码示例}
@@ -2622,6 +2655,7 @@ fn main() {
 
 }
 ```
+
 ### 完整示例 2: 带重试和断路器的错误处理 {#完整示例-2-带重试和断路器的错误处理}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -3360,6 +3394,7 @@ mod tests {
 
 }
 ```
+
 ### 完整示例 3: anyhow + thiserror 混合使用 {#完整示例-3-anyhow-thiserror-混合使用}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -3956,6 +3991,7 @@ mod examples {
 
 }
 ```
+
 ---
 
 ## 附录 {#附录}

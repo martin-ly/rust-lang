@@ -74,6 +74,7 @@ T: Send + Sync      T: Send + !Sync    !Send + !Sync
 ├── Vec<T>          └── mpsc::Sender
 └── Arc<T>(T:Sync)
 ```
+
 ---
 
 ## 同步原语 {#同步原语}
@@ -114,6 +115,7 @@ thread::Builder::new()
     .name("worker".into())
     .spawn(|| { /* ... */ });
 ```
+
 ---
 
 ## Send/Sync {#sendsync}
@@ -156,6 +158,7 @@ thread::spawn(move || {
 let num = counter.lock().unwrap();
 println!("{}", *num);
 ```
+
 ### RwLock {#rwlock}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -177,6 +180,7 @@ let r2 = data.read().unwrap();
     *w += 1;
 }
 ```
+
 ---
 
 ## 通道通信 {#通道通信}
@@ -207,6 +211,7 @@ for received in rx {
     println!("{}", received);
 }
 ```
+
 ### 多生产者 {#多生产者}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -228,6 +233,7 @@ for received in rx {
     println!("{}", received);
 }
 ```
+
 ---
 
 ## 原子操作 {#原子操作}
@@ -257,6 +263,7 @@ counter.compare_exchange(
     Ordering::Relaxed,
 );
 ```
+
 ### 内存序 {#内存序}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -292,6 +299,7 @@ for _ in 0..3 {
     });
 }
 ```
+
 ### Condvar {#condvar}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -315,6 +323,7 @@ while !*started {
     started = cvar.wait(started).unwrap();
 }
 ```
+
 ---
 
 ## 线程局部存储 {#线程局部存储}
@@ -333,6 +342,7 @@ COUNTER.with(|c| {
     c.set(c.get() + 1);
 });
 ```
+
 ---
 
 ## 常见模式 {#常见模式}
@@ -356,6 +366,7 @@ for i in 0..8 {
 
 pool.join();
 ```
+
 ### 并行迭代 {#并行迭代}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -368,6 +379,7 @@ let sum: i32 = (0..100).into_par_iter().sum();
 let mut vec = vec![1, 2, 3, 4, 5];
 vec.par_iter_mut().for_each(|x| *x *= 2);
 ```
+
 ---
 
 ## 死锁预防 {#死锁预防}
@@ -381,6 +393,7 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 □ 考虑使用lock_bud检测
 □ 优先使用通道而非共享状态
 ```
+
 ---
 
 ## 性能检查清单 {#性能检查清单}
@@ -394,6 +407,7 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 □ 使用线程池避免创建开销
 □ 批处理减少同步
 ```
+
 ---
 
 **维护者**: Rust Formal Methods Research Team

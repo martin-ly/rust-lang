@@ -149,6 +149,7 @@
 
             async 模块组合：await 链保持 Send
 ```
+
 ---
 
 ## 组合与所有权 {#组合与所有权}
@@ -207,6 +208,7 @@ where
 
 }
 ```
+
 **定理 IT-T3（中间件类型保持）**：若核心服务 $S$ 满足 `Service<Request, Response = R, Error = E>`，中间件 $L$ 保持 `Request`/`Response` 类型不变（或在 `Layer` 签名中显式转换），则组合后类型安全由 CE-T3 保持。
 
 *证明*：`Layer::layer` 的泛型约束在编译期实例化；`Service` trait 的关联类型保证响应/错误类型一致。∎
@@ -275,6 +277,7 @@ fn visit<V: Visitor>(v: &mut V, node: &Node) {
 
 }
 ```
+
 ---
 
 ## 完整多模式组合链条：Builder + Factory + Repository {#完整多模式组合链条builder-factory-repository}
@@ -345,6 +348,7 @@ fn place_order<R: OrderRepo>(repo: &R, t: OrderType, amount: u64) -> Result<(), 
 
 }
 ```
+
 **形式化对应**：Builder 满足 B-T2；Factory 满足 FM-T1；Repository 为 43 完全扩展模式；组合由 CE-T1–T3 保持内存安全、数据竞争自由、类型安全。
 
 ---
@@ -439,6 +443,7 @@ trait OrderRepo { fn save(&mut self, o: Order) -> Result<u64, String>; }
 
 // 组合：Factory.create_builder().add_item(...).build()? → repo.save(order)?
 ```
+
 ### 链条 2：Decorator + Strategy + Observer（完整实现） {#链条-2decorator-strategy-observer完整实现}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -514,6 +519,7 @@ fn run_with_observer<S: Service>(s: &S, tx: &mpsc::Sender<i32>) -> i32 {
 
 // assert_eq!(rx.recv().unwrap(), 2);
 ```
+
 ### 链条 3：Composite + Visitor + Iterator（完整实现） {#链条-3composite-visitor-iterator完整实现}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -595,6 +601,7 @@ impl Node {
 
 // assert_eq!(t.iter().collect::<Vec<_>>(), vec![2, 1]);
 ```
+
 ### 链条 4：Chain of Responsibility + Command + Observer {#链条-4chain-of-responsibility-command-observer}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -657,6 +664,7 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 
 // 业务完成后：tx.send(ProcessedEvent) — Observer
 ```
+
 **组合要点**：链为 `Vec<Box<dyn Handler>>` 顺序尝试；业务节点持 `Command`；处理完成后通过 channel 发送事件；符合 CE-T1、CE-T2。
 
 ---

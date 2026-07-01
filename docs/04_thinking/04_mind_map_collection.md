@@ -123,6 +123,7 @@ mindmap
         OptionT
         ? 操作符
 ```
+
 ### 2. 所有权系统思维导图 {#2-所有权系统思维导图}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -174,6 +175,7 @@ mindmap
         内部可变性
         运行时借用检查
 ```
+
 ### 3. 借用系统思维导图 {#3-借用系统思维导图}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -236,6 +238,7 @@ mindmap
         读写分离
         多读单写
 ```
+
 ### 4. 生命周期系统思维导图 {#4-生命周期系统思维导图}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -282,6 +285,7 @@ mindmap
         T: 'static
         T: Clone + 'a
 ```
+
 ### 5. 泛型系统思维导图 {#5-泛型系统思维导图}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -332,6 +336,7 @@ mindmap
       零成本抽象
       代码膨胀
 ```
+
 ### 6. Trait 系统思维导图 {#6-trait-系统思维导图}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -400,6 +405,7 @@ mindmap
         Clone
         Sized
 ```
+
 ### 7. 并发编程思维导图 {#7-并发编程思维导图}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -465,6 +471,7 @@ mindmap
         Condvar
         等待/通知
 ```
+
 ### 8. 异步编程思维导图 {#8-异步编程思维导图}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -525,6 +532,7 @@ mindmap
       错误传播
       取消安全
 ```
+
 ### 9. 系统编程思维导图 {#9-系统编程思维导图}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -585,6 +593,7 @@ mindmap
         域名解析
         缓存机制
 ```
+
 ### 10. 形式化与语义思维导图 {#10-形式化与语义思维导图}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -633,6 +642,7 @@ mindmap
       技术选型 → 决策树
       边界违反 → 反例索引
 ```
+
 ### 11. 理论体系与论证体系结构思维导图 {#11-理论体系与论证体系结构思维导图}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -688,6 +698,7 @@ mindmap
         并发
         FFI
 ```
+
 ### 12. 设计机制论证思维导图 {#12-设计机制论证思维导图}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -750,6 +761,7 @@ mindmap
       反例
         生命周期缩短导致悬垂
 ```
+
 ---
 
 ## 📊 模块知识思维导图 {#模块知识思维导图}
@@ -796,6 +808,7 @@ mindmap
       RefCell, Mutex
       自定义智能指针
 ```
+
 ### 2. C02 类型系统思维导图 {#2-c02-类型系统思维导图}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -839,6 +852,7 @@ mindmap
       类型别名
         type Alias = Type
 ```
+
 ### 3. C05 线程与并发思维导图 {#3-c05-线程与并发思维导图}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -882,6 +896,7 @@ mindmap
       无锁队列
       无锁栈
 ```
+
 ### 4. C06 异步编程思维导图 {#4-c06-异步编程思维导图}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -921,6 +936,7 @@ mindmap
       Actor模式
       CSP模式
 ```
+
 ### 5. C07 进程管理思维导图 {#5-c07-进程管理思维导图}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -954,6 +970,7 @@ mindmap
       CPU优化
       I/O优化
 ```
+
 ### 6. C08 算法与数据结构思维导图 {#6-c08-算法与数据结构思维导图}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -988,6 +1005,7 @@ mindmap
       哈希表
       堆/优先队列
 ```
+
 ---
 
 ## 🔗 知识关联思维导图 {#知识关联思维导图}
@@ -1026,6 +1044,7 @@ mindmap
       WASM (C12)
         结合 connects 异步编程 (C06)
 ```
+
 ---
 
 ## 📚 相关文档 {#相关文档}

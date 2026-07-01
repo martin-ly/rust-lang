@@ -137,6 +137,7 @@ scope(|s| {
 
 assert_eq!(data, [2, 4, 6]);
 ```
+
 **Def 1.6（Crossbeam Channel）**：
 
 `crossbeam::channel` 提供多生产者多消费者（MPMC）通道，有 `bounded` 与 `unbounded` 两种，适用于高吞吐并发。
@@ -148,6 +149,7 @@ let (tx, rx) = bounded(100);
 
 // MPMC: tx/rx 均可 clone；有界通道自带背压
 ```
+
 **定理 CC-T3**：`crossbeam::scope` 借用的栈数据在 scope 结束前有效；子线程退出时 join，故无悬垂借用。
 
 *证明*：由 `scope` 契约，所有 `spawn` 的线程在 scope 闭包返回前完成；借用生命周期不超出 scope。∎
@@ -182,6 +184,7 @@ thread::spawn(move || {
 
 assert_eq!(rx.recv().unwrap(), 42);
 ```
+
 ### 共享状态 {#共享状态}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -224,6 +227,7 @@ for h in handles {
 
 assert_eq!(*data.lock().unwrap(), 10);
 ```
+
 **形式化对应**：`Arc<Mutex<T>>` 中 `T` 需 `Send`；`MutexGuard` 为 RAII，释放锁时 drop。符合所有权与借用规则。
 
 ---
@@ -302,6 +306,7 @@ assert_eq!(*data.lock().unwrap(), 10);
 
 // 解决：全局锁顺序（如按地址排序）
 ```
+
 **实践**：缩小锁范围、使用 `try_lock`、`Condvar` 等待条件、或优先 channel 传递所有权。
 
 ---

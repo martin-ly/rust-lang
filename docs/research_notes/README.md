@@ -107,6 +107,7 @@ research_notes/                  # 主索引、组织说明与正在升级的核
 # 例如：10_00_organization_and_navigation、10_proof_index、10_authoritative_alignment_guide、 {#例如10_00_organization_and_navigation10_proof_index10_authoritative_alignment_guide}
 # 10_international_formal_verification_index、10_authoritative_alignment_gap_matrix 等 {#10_international_formal_verification_index10_authoritative_alignment_gap_matrix-等}
 ```
+
 ---
 
 ## 🎯 研究目标 {#研究目标}
@@ -535,6 +536,7 @@ grep -r "关键词" docs/research_notes/
 # 查找特定主题 {#查找特定主题}
 find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 ```
+
 ---
 
 ## 📞 联系方式 {#联系方式}

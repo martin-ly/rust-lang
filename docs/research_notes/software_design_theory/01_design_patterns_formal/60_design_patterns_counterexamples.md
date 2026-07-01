@@ -64,6 +64,7 @@ fn update_config(c: AppConfig) {
     *CONFIG.lock().unwrap() = c;
 }
 ```
+
 ### 问题 {#问题-6}
 
 - 隐藏依赖，测试困难。
@@ -87,6 +88,7 @@ struct Subject<'a> {
     observers: Vec<&'a dyn Observer>, // ❌ 观察者生命周期耦合过紧
 }
 ```
+
 ### 问题 {#问题-6}
 
 - 难以动态增删观察者。
@@ -114,6 +116,7 @@ impl Counter {
     }
 }
 ```
+
 ### 问题 {#问题-6}
 
 `RefCell` 将编译期检查推迟到运行时，可能 panic：
@@ -123,6 +126,7 @@ let c = Counter { value: RefCell::new(0) };
 let a = c.value.borrow();
 let b = c.value.borrow_mut(); // ❌ 运行时 panic
 ```
+
 ### 修复方案 {#修复方案-6}
 
 - 优先使用 `&mut self` 暴露可变接口。
@@ -139,6 +143,7 @@ let req = RequestBuilder::new()
     .method("GET")
     .build(); // ❌ 缺少 url
 ```
+
 ### 问题 {#问题-6}
 
 - 运行时才发现必要字段缺失。
@@ -169,6 +174,7 @@ impl Admin {
     }
 }
 ```
+
 ### 问题 {#问题-6}
 
 - `Deref` 应仅用于智能指针语义，不能表达 is-a 关系。
@@ -195,6 +201,7 @@ where
     fn process(&self, input: I, ctx: &C) -> Result<O, E>;
 }
 ```
+
 ### 问题 {#问题-6}
 
 - 类型参数过多，调用方负担大。
@@ -217,6 +224,7 @@ struct Service {
     data: Arc<Mutex<HashMap<String, Vec<User>>>>,
 }
 ```
+
 ### 问题 {#问题-6}
 
 - 所有读写共用一把大锁，并发度低。

@@ -70,6 +70,7 @@ Outbox := (T_db, T_outbox, M, P_relay)
 
     P_relay     -- 中继进程
 ```
+
 ### Def OB2: 事务边界 {#def-ob2-事务边界}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -88,6 +89,7 @@ Transaction := (db_ops, outbox_ops)
 
     atomic(db_ops ∧ outbox_ops)
 ```
+
 业务操作和消息记录在**同一事务**中。
 
 ### Def OB3: 消息状态 {#def-ob3-消息状态}
@@ -103,6 +105,7 @@ MessageStatus :=
 
   | Processed    -- 已处理
 ```
+
 ---
 
 ## 2. 基本假设 (Axiom) {#2-基本假设-axiom}
@@ -117,6 +120,7 @@ MessageStatus :=
 ```text
 (db_ops ∧ outbox_ops) 要么同时成功，要么同时失败
 ```
+
 ### Axiom OB2: 中继幂等性 {#axiom-ob2-中继幂等性}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -124,6 +128,7 @@ MessageStatus :=
 ```text
 ∀m ∈ M. relay(m) = success → relay(m) = success (idempotent)
 ```
+
 中继进程必须幂等，可处理重复消息。
 
 ### Axiom OB3: 最终投递 {#axiom-ob3-最终投递}
@@ -133,6 +138,7 @@ MessageStatus :=
 ```text
 ∀msg ∈ T_outbox. status = Pending → ◇(status = Published)
 ```
+
 所有待投递消息最终会被投递。
 
 ---
@@ -149,6 +155,7 @@ MessageStatus :=
 ```text
 db_ops 成功 → ◇(msg ∈ M)
 ```
+
 **证明概要**:
 
 1. db_ops 成功意味着事务提交
@@ -163,6 +170,7 @@ db_ops 成功 → ◇(msg ∈ M)
 ```text
 msg.id 唯一 → 消费者收到 msg 一次且仅一次
 ```
+
 **证明概要**:
 
 1. 消息有唯一ID
@@ -358,6 +366,7 @@ impl<M: MessageBroker> OutboxRelay<M> {
 
 }
 ```
+
 ---
 
 ## 5. 与 Saga 模式的关系 {#5-与-saga-模式的关系}
@@ -379,6 +388,7 @@ Outbox 模式常与 Saga 配合使用：
 
 └─────────────┘                 └─────────────┘               └─────────────┘
 ```
+
 ---
 
 **相关阅读**:

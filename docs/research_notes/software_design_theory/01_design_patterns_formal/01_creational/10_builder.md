@@ -163,6 +163,7 @@ $$\mathit{build}(b) = t \implies \nexists b': B,\, b' = b \land \mathit{build}(b
 
    // builder.build()?;  // 编译错误：builder 已移动
    ```
+
 3. **无悬垂**：根据 ownership T2，值被消费后不可再访问
    - 编译期检查：借用检查器拒绝后续使用
 
@@ -193,6 +194,7 @@ $$\mathit{build}(b) = t \implies \nexists b': B,\, b' = b \land \mathit{build}(b
 
    struct Complete;
    ```
+
 2. **状态转换**：
 
    > 以下代码片段为示意性伪代码，非完整可编译示例。
@@ -216,6 +218,7 @@ $$\mathit{build}(b) = t \implies \nexists b': B,\, b' = b \land \mathit{build}(b
 
    }
    ```
+
 3. **编译期保证**：
    - `ConfigBuilder<SetHost>::build()` 不存在 → 编译错误
    - 必须按顺序调用 `host()` → `port()` → `build()`
@@ -346,6 +349,7 @@ fn main() -> Result<(), String> {
 
 }
 ```
+
 **形式化对应**：`build(self)` 即 $\mathit{build} : B \to \mathrm{Result}(T)$；`self` 被消费，符合 Axiom B2。
 
 ---
@@ -463,6 +467,7 @@ fn main() {
 
 }
 ```
+
 ### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
@@ -539,6 +544,7 @@ ownership_model T2
 
 推论 B-C1 (纯 Safe Builder)
 ```
+
 ### 与 Rust 类型系统的联系 {#与-rust-类型系统的联系}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -597,6 +603,7 @@ ownership_model T2
 
 { Q  }  // 后置条件
 ```
+
 > 以上规约以霍尔三元组风格表述；Rust 编译器通过所有权、借用与类型检查在编译期强制大部分不变式与前置条件。
 
 ---
@@ -704,6 +711,7 @@ fn main() -> Result<(), String> {
 
 }
 ```
+
 **形式化对应**：`build(self)` 消费 $B$；`ok_or` 保证必填；由 Axiom B1、B2。
 
 ---
@@ -752,6 +760,7 @@ let cfg = ConfigBuilder::new()
 
     .build(); // 错误：host 未设置
 ```
+
 **编译器错误**：`no method named port found for struct ConfigBuilder<Empty>`（类型状态模式）或运行期 `unwrap()` panic。
 
 **修复**：使用类型状态 Builder 强制先调用 `host()`。
@@ -767,6 +776,7 @@ let c1 = b.build();
 
 let c2 = b.build(); // 错误：b 已移动
 ```
+
 **编译器错误**：`use of moved value: b`。
 
 **原因**：`build(self)` 消费 Builder；若需复用，应在调用前 clone 或重新构造。
@@ -784,6 +794,7 @@ r.host("h".into());
 
 b.port(80); // 错误：r 仍借用 b
 ```
+
 **编译器错误**：`cannot borrow b as mutable more than once at a time`。
 
 **修复**：使用消费 `self` 的链式 API，避免中间可变引用。
@@ -815,6 +826,7 @@ b.port(80); // 错误：r 仍借用 b
 
 └── 需克隆已有对象？ → Prototype
 ```
+
 ---
 
 ## 与 GoF 对比 {#与-gof-对比}
@@ -901,6 +913,7 @@ mindmap
 
       对象初始化
 ```
+
 ---
 
 ## 与其他模式的关系图 {#与其他模式的关系图}
@@ -929,6 +942,7 @@ graph LR
 
     style FM2 fill:#9E9E9E,stroke:#616161,color:#fff
 ```
+
 ---
 
 ## 实质内容五维自检 {#实质内容五维自检}

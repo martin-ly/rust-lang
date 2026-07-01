@@ -103,6 +103,7 @@ Rust Source
 
     └── Whole-crate proof → 可能展开内部实现，但利用可见性降低复杂度
 ```
+
 **关键关系：**
 
 1. **形式化工具通常将可见性视为证明抽象边界**：公开 API 必须有完整的前后置条件；私有函数可以仅被局部验证，不需要对外暴露规范。
@@ -184,6 +185,7 @@ impl BoundedCounter {
 
 }
 ```
+
 Aeneas 可为此生成 Lean 函数，后置条件包括 `value <= 100`；私有字段 `value` 在规范中被抽象为 ghost state。
 
 ### 2. coq-of-rust 翻译概念 {#2-coq-of-rust-翻译概念}
@@ -204,6 +206,7 @@ Module BoundedCounter.
 
 End BoundedCounter.
 ```
+
 ### 3. RustBelt 风格的规范 {#3-rustbelt-风格的规范}
 
 ```text
@@ -220,6 +223,7 @@ End BoundedCounter.
 
 { b. if b then c ↦ BoundedCounter(n+1) else c ↦ BoundedCounter(n) }
 ```
+
 私有字段 `value` 通过 `BoundedCounter` 谓词封装，外部证明只能使用这些 Hoare triple。
 
 ---

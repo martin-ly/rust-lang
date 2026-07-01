@@ -187,6 +187,7 @@ fn lub_coercion_example() {
 
 }
 ```
+
 ### 场景 2：性能改进验证 {#场景-2性能改进验证}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -236,6 +237,7 @@ fn performance_improvement_example() {
 
 }
 ```
+
 ### 场景 3：API 稳定化跟踪 {#场景-3api-稳定化跟踪}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -275,6 +277,7 @@ fn api_stabilization_example() {
 
 }
 ```
+
 ---
 
 ## 相关文档 {#相关文档-1}

@@ -69,6 +69,7 @@ fn main() {
     println!("Index of 5: {:?}", idx);
 }
 ```
+
 ---
 
 ## 📊 核心功能 {#核心功能}
@@ -100,6 +101,7 @@ fn parallel_sort_example() {
     assert!(data.is_sorted());
 }
 ```
+
 ### 2. 搜索算法 {#2-搜索算法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -121,6 +123,7 @@ fn searching_examples() {
     assert_eq!(interpolation_search(&sorted, &9), Some(4));
 }
 ```
+
 ### 3. 图算法 {#3-图算法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -144,6 +147,7 @@ fn graph_example() {
     println!("Path: {:?}", path);
 }
 ```
+
 ### 4. 动态规划 {#4-动态规划}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -164,6 +168,7 @@ fn dp_examples() {
     assert_eq!(knapsack_01(&items, 5), 7);
 }
 ```
+
 ### 5. 数据结构 {#5-数据结构}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -195,6 +200,7 @@ fn data_structure_examples() {
     assert_eq!(seg.query_sum(1, 3), 15); // 3 + 5 + 7
 }
 ```
+
 ### 6. 机器学习算法 {#6-机器学习算法}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -223,6 +229,7 @@ fn ml_examples() {
     println!("Prediction for 6.0: {:?}", reg.predict(6.0));
 }
 ```
+
 ### 7. LeetCode 分类实现 {#7-leetcode-分类实现}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -266,6 +273,7 @@ fn execution_mode_examples() {
     let async_result = ExecutionMode::Async.execute(|| async_compute());
 }
 ```
+
 ---
 
 ## 🔧 形式化验证 {#形式化验证}
@@ -290,6 +298,7 @@ fn verified_algorithms() {
     assert_eq!(arr, vec![1, 1, 3, 4, 5]);
 }
 ```
+
 ---
 
 ## 🐛 常见问题与解决方案 {#常见问题与解决方案}

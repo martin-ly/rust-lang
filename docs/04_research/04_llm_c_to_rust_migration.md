@@ -91,6 +91,7 @@ c2rust transpile compile_commands.json
 # 特定文件翻译 {#特定文件翻译}
 c2rust transpile --output-dir ./rust_output compile_commands.json
 ```
+
 生成 `compile_commands.json` (使用 bear 或 cmake):
 
 ```bash
@@ -100,6 +101,7 @@ bear -- make
 # 或 cmake {#或-cmake}
 cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .
 ```
+
 ### 2.3 翻译示例 {#23-翻译示例}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -121,6 +123,7 @@ int* create_array(int n) {
     return arr;
 }
 ```
+
 **C2Rust 输出**:
 
 ```rust,ignore
@@ -144,6 +147,7 @@ pub unsafe extern "C" fn create_array(n: libc::c_int) -> *mut libc::c_int {
     return arr;
 }
 ```
+
 ### 2.4 C2Rust 的局限 {#24-c2rust-的局限}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -206,6 +210,7 @@ pub unsafe extern "C" fn create_array(n: libc::c_int) -> *mut libc::c_int {
 │     - 检查内存安全属性                                    │
 └─────────────────────────────────────────────────────────┘
 ```
+
 ### 3.3 关键创新 {#33-关键创新}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -276,6 +281,7 @@ SafeNet 架构:
 │  - 边界条件验证                              │
 └─────────────────────────────────────────────┘
 ```
+
 ### 4.3 关键特点 {#43-关键特点}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -359,6 +365,7 @@ Phase 4: 工程化
 ├── 4.2 性能基准对比
 └── 4.3 文档和注释更新
 ```
+
 ### 5.3 Prompt 工程模板 {#53-prompt-工程模板}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -379,11 +386,13 @@ Phase 4: 工程化
 ```c
 [PASTE C CODE HERE]
 ```
+
 相关上下文:
 
 - 此函数属于 [模块名] 模块
 - 输入参数约束: [约束条件]
 - 返回值语义: [语义说明]
+
 ```
 ---
 
@@ -416,6 +425,7 @@ c2rust transpile compile_commands.json
 
 # 2. 人工清理关键路径 (预计: 每 1000 行 C 代码需 1-2 天) {#2-人工清理关键路径-预计-每-1000-行-c-代码需-1-2-天}
 ```
+
 #### 场景 B: 高安全要求系统 {#场景-b-高安全要求系统}
 
 **推荐**: In Rust We Trust 方法 + Kani 验证
@@ -425,6 +435,7 @@ c2rust transpile compile_commands.json
 # 2. SAW/Kani 形式化验证 {#2-sawkani-形式化验证}
 # 3. 人工审查所有 unsafe 边界 {#3-人工审查所有-unsafe-边界}
 ```
+
 #### 场景 C: 大规模工业迁移 {#场景-c-大规模工业迁移}
 
 **推荐**: 混合策略
@@ -437,6 +448,7 @@ c2rust transpile compile_commands.json
 5. Miri + 单元测试验证
 6. 渐进式替换和集成测试
 ```
+
 #### 场景 D: 学习和教学 {#场景-d-学习和教学}
 
 **推荐**: 纯 LLM + 人工对比

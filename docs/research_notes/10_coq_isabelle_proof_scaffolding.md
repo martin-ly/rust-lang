@@ -77,6 +77,7 @@ Inductive transfer_ownership (v: variable) (o: Ownership) : Prop :=
 
       transfer_ownership v (Owned new_owner).
 ```
+
 ### 借用规则 {#借用规则}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -102,6 +103,7 @@ Inductive valid_borrow (r: reference) (ctx: context) : Prop :=
 
       valid_borrow r ctx.
 ```
+
 ## Isabelle 脚手架 {#isabelle-脚手架}
 
 >
@@ -141,6 +143,7 @@ fun subtype :: "'a rust_type => 'a rust_type => bool" where
 
 end
 ```
+
 ## 证明策略 {#证明策略}
 
 >
@@ -161,6 +164,7 @@ Ltac prove_ownership :=
 
   auto.
 ```
+
 ### 借用检查策略 {#借用检查策略}
 
 >
@@ -179,6 +183,7 @@ Ltac check_borrow :=
 
   end.
 ```
+
 ## 相关文档 {#相关文档-1}
 
 >

@@ -285,6 +285,7 @@ let b = f.get("hello");
 
 assert!(Arc::ptr_eq(&a, &b));  // 同一实例
 ```
+
 **形式化对应**：`FlyweightFactory` 为缓存；`get` 即 $\mathit{get}$；`Arc<str>` 为共享不可变。
 
 ---
@@ -355,6 +356,7 @@ fn main() {
 
 }
 ```
+
 ### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
@@ -431,6 +433,7 @@ Send/Sync 约束
 
 推论 FL-C1 (纯 Safe Flyweight)
 ```
+
 ### 与 Rust 类型系统的联系 {#与-rust-类型系统的联系}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -489,6 +492,7 @@ Send/Sync 约束
 
 { Q  }  // 后置条件
 ```
+
 > 以上规约以霍尔三元组风格表述；Rust 编译器通过所有权、借用与类型检查在编译期强制大部分不变式与前置条件。
 
 ---
@@ -594,6 +598,7 @@ struct GlyphInstance {
 
 }
 ```
+
 **形式化对应**：`GlyphKey` 即 $K$；`Arc<GlyphData>` 即 $F$；`get` 即 $\mathit{get}$；Axiom FL1 由 `GlyphData` 不可变保证。
 
 ---
@@ -636,6 +641,7 @@ struct GlyphInstance {
 ```rust,ignore
 struct TreeType { name: String, count: Cell<u32> }
 ```
+
 **风险**：多个线程通过 `Arc<TreeType>` 同时修改 `count` 产生数据竞争（若未同步）。
 
 **修复**：使用 `AtomicU32` 或将可变状态移出享元。
@@ -652,6 +658,7 @@ impl TreeFactory {
 
 }
 ```
+
 **编译器错误**：无法返回局部 `RwLockGuard` 保护的引用。
 
 ### 反例 3：HashMap 键不稳定 {#反例-3hashmap-键不稳定}
@@ -661,6 +668,7 @@ impl TreeFactory {
 ```rust,ignore
 let key = format!("{}#{}", color, name);
 ```
+
 **风险**：名称与颜色顺序颠倒导致相同类型被重复缓存。
 
 ---
@@ -681,6 +689,7 @@ let key = format!("{}#{}", color, name);
 
 └── 仅单次使用？ → 普通创建
 ```
+
 ---
 
 ## 与 GoF 对比 {#与-gof-对比}
@@ -765,6 +774,7 @@ mindmap
 
       配置共享
 ```
+
 ---
 
 ## 与其他模式的关系图 {#与其他模式的关系图}
@@ -789,6 +799,7 @@ graph LR
 
     style PO fill:#9E9E9E,stroke:#616161,color:#fff
 ```
+
 ---
 
 ## 实质内容五维自检 {#实质内容五维自检}

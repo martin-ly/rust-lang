@@ -66,6 +66,7 @@ fn main() {
     chains.demonstrate_let_chains();
 }
 ```
+
 ---
 
 ## 📊 核心功能 {#核心功能}
@@ -102,6 +103,7 @@ fn process_nested_options() {
     // use(a, b, c);
 }
 ```
+
 ### 2. 函数系统 {#2-函数系统}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -121,6 +123,7 @@ fn conditional_execution() {
     executor.execute(50, |x| println!("Valid: {}", x));
 }
 ```
+
 ### 3. 闭包 {#3-闭包}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -143,6 +146,7 @@ fn closure_patterns() {
     let custom = designer.create_with_strategy(CaptureStrategy::Mixed);
 }
 ```
+
 ### 4. 模式匹配 {#4-模式匹配}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -164,6 +168,7 @@ fn advanced_matching() {
     matcher.match_with_guard(|x| x > 10);
 }
 ```
+
 ### 5. if let guards (Rust 1.95.0) {#5-if-let-guards-rust-1950}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -184,6 +189,7 @@ fn demonstrate_if_let_guards() {
     syntax.demonstrate_syntax();
 }
 ```
+
 **if let guards 核心用法:**
 
 ```rust,ignore
@@ -210,6 +216,7 @@ fn process_message(msg: Message, current_user: Option<User>) {
     }
 }
 ```
+
 ### 6. 协程与生成器 {#6-协程与生成器}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -230,6 +237,7 @@ fn async_control_flow() {
     gen.demonstrate_yield();
 }
 ```
+
 ---
 
 ## ⚡ 性能优化 {#性能优化}
@@ -266,6 +274,7 @@ fn robust_control_flow() -> ControlFlowResult<()> {
     )
 }
 ```
+
 ---
 
 ## 🐛 常见问题与解决方案 {#常见问题与解决方案}

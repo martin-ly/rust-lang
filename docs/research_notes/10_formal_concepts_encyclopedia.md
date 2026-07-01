@@ -86,6 +86,7 @@
 ```text
 ∀v: Value, ∃!x: Var, owns(x, v)
 ```
+
 **理解要点**:
 
 - **唯一性**: 一个值不能被多个变量同时拥有
@@ -107,6 +108,7 @@ let y = x;  // 所有权从x转移到y
 
 // x 不再有效
 ```
+
 **形式化规则**:
 
 ```text
@@ -116,6 +118,7 @@ Move(x, y, v):
 
   post: owns(y, v) ∧ ¬valid(x)
 ```
+
 #### 复制 (Copy) {#复制-copy}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -136,6 +139,7 @@ let y = x;  // 复制，x仍然有效
 
 println!("{}", x);  // OK
 ```
+
 ---
 
 ### 1.2 借用 (Borrowing) {#12-借用-borrowing}
@@ -163,6 +167,7 @@ println!("{}", x);  // OK
 
         ∧ ∀r': Ref, can_read(r', v) → r' = r ∨ r' is imm borrow of v
 ```
+
 **约束**:
 
 - 可以有多个不可变借用同时存在
@@ -188,6 +193,7 @@ println!("{}", x);  // OK
 
         ∧ ∀r': Ref, ¬can_access(r', v) ∨ r' = r
 ```
+
 **约束**:
 
 - 同一时间只能有一个可变借用
@@ -221,11 +227,13 @@ println!("{}", x);  // OK
 
 &'a T: 类型T的引用，生命周期为'a
 ```
+
 **生命周期关系**:
 
 ```
 'a: 'b  表示 'a 至少和 'b 一样长（'a包含'b）
 ```
+
 **理解示例**:
 
 ```rust
@@ -237,6 +245,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 // 返回的引用生命周期与x和y中较短的一致
 ```
+
 ---
 
 ## 二、类型系统 {#二类型系统}
@@ -260,6 +269,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 Γ ⊢ e : τ ∧ e → e'  →  Γ ⊢ e' : τ  [保持性]
 ```
+
 ### 2.2 型变 (Variance) {#22-型变-variance}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -300,6 +310,7 @@ impl Eq for MyType {
 
 }
 ```
+
 **Trait对象**:
 
 ```
@@ -307,6 +318,7 @@ dyn Trait: 动态分发，运行时确定具体类型
 
 impl Trait: 静态分发，编译时确定
 ```
+
 ---
 
 ## 三、生命周期 {#三生命周期}
@@ -393,6 +405,7 @@ trait Future {
 
 }
 ```
+
 **状态机转换**:
 
 ```
@@ -402,6 +415,7 @@ Pending -> Ready(Output)  (完成)
 
 Wake -> poll() -> ...
 ```
+
 **Pin与自引用**:
 
 - `Pin<P>`: 保证指针指向的值不会被移动
@@ -431,11 +445,13 @@ Coordinator -> Service A -> Compensate A
 
            -> Service C -> Compensate C
 ```
+
 **编制式 (Choreography)**: 事件驱动，各服务自主决策
 
 ```
 Service A -(event)-> Service B -(event)-> Service C
 ```
+
 **形式化**:
 
 ```
@@ -445,6 +461,7 @@ Saga = [LocalTx₁, LocalTx₂, ..., LocalTxₙ]
 
 执行失败时：执行 Compensateᵢ₋₁, ..., Compensate₁
 ```
+
 ### 5.2 CQRS模式 {#52-cqrs模式}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -460,6 +477,7 @@ Command → Write Model → Event Store
 
 Query   ← Read Model ← Projector
 ```
+
 **适用场景**:
 
 - 读多写少
@@ -482,6 +500,7 @@ Closed (正常) --失败率>阈值--> Open (熔断)
 
     └── 成功次数>阈值 ─── Half-Open <--
 ```
+
 ---
 
 ## 六、工作流 {#六工作流}
@@ -509,6 +528,7 @@ T: 转移函数 S × Event → S
 
 F: 终结状态集合
 ```
+
 ### 6.2 补偿事务 {#62-补偿事务}
 
 >
@@ -521,11 +541,13 @@ F: 终结状态集合
 ```
 T₁, T₂, T₃ 失败 → C₂, C₁
 ```
+
 **向前补偿 (Forward Compensation)**:
 
 ```
 执行补偿操作使系统达到一致状态（不撤销已完成操作）
 ```
+
 ---
 
 ## 附录：反例索引 {#附录反例索引}
@@ -547,11 +569,13 @@ let y = x;
 
 println!("{}", x);  // 错误: value borrowed here after move
 ```
+
 **反例 2: 双重释放（C/C++问题，Rust防止）**
 
 ```rust
 // Rust中不可能发生，因为所有权系统禁止
 ```
+
 ### A.2 借用反例 {#a2-借用反例}
 
 >
@@ -568,6 +592,7 @@ let r2 = &mut x;  // 错误: cannot borrow as mutable
 
 println!("{}", r1);
 ```
+
 **反例 2: 悬垂引用**
 
 ```rust
@@ -581,6 +606,7 @@ let r;
 
 }
 ```
+
 ### A.3 Send/Sync反例 {#a3-sendsync反例}
 
 >
@@ -602,6 +628,7 @@ thread::spawn(move || {
 
 });
 ```
+
 ---
 
 **维护者**: Rust Formal Methods Research Team

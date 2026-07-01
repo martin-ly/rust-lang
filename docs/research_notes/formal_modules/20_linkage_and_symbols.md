@@ -88,6 +88,7 @@ Source Crate
 
     └── 默认 mangled 名称         → 不便于外部链接
 ```
+
 **关键关系：**
 
 1. **语言可见性 ≠ 链接器符号可见性**：`pub fn foo()` 在 Rust 源程序中对其他 crate 可见，但在生成的目标文件中其符号名被 mangled，外部 C 代码无法直接链接。
@@ -135,6 +136,7 @@ pub extern "C" fn add(a: i32, b: i32) -> i32 {
 
 }
 ```
+
 编译为 `cdylib` 后，C 代码可直接链接 `add` 符号：
 
 ```toml
@@ -142,6 +144,7 @@ pub extern "C" fn add(a: i32, b: i32) -> i32 {
 
 crate-type = ["cdylib"]
 ```
+
 ### 2. `extern crate` 别名（Rust 2018+ 场景） {#2-extern-crate-别名rust-2018-场景}
 
 ```rust
@@ -152,6 +155,7 @@ extern crate old_name as new_name;
 
 pub use new_name::SomeType;
 ```
+
 ### 3. 显式符号名 {#3-显式符号名}
 
 ```rust
@@ -163,6 +167,7 @@ pub extern "C" fn add(a: i32, b: i32) -> i32 {
 
 }
 ```
+
 ---
 
 ## 反例与边界 {#反例与边界}

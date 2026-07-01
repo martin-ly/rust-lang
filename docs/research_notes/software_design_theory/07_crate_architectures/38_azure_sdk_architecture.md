@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **azure-sdk-rust 的 TokenCredential / Pager / Poller 统一抽象架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [云原生](../../../../concept/06_ecosystem/24_cloud_native.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
@@ -62,6 +63,7 @@ use azure_identity::DeveloperToolsCredential;
 
 let credential = DeveloperToolsCredential::new(None)?;
 ```
+
 本地开发优先使用 `DeveloperToolsCredential`，它会依次尝试 Azure CLI (`az login`) 与 Azure Developer CLI (`azd auth login`) 获取令牌。生产环境可替换为 `ManagedIdentityCredential`、`ClientSecretCredential` 等，而服务客户端构造代码保持不变。
 
 > [来源: [Azure Identity library for Rust](https://docs.rs/azure_identity/latest/azure_identity/)]
@@ -81,6 +83,7 @@ let service_client = BlobServiceClient::new(
     None,
 )?;
 ```
+
 > [来源: [Azure Storage Blob client library for Rust](https://docs.rs/azure_storage_blob/latest/azure_storage_blob/)]
 
 ### 2.3 分页：统一 `Pager<T>` {#23-分页统一-pagert}
@@ -95,6 +98,7 @@ while let Some(container) = pager.try_next().await? {
     println!("{:?}", container.name);
 }
 ```
+
 这种设计让调用方无需关心分页协议细节，与 AWS SDK 的 `.into_paginator()` 形成对照。
 
 > [来源: [Azure SDK design guidelines - Pagination](https://azure.github.io/azure-sdk/general_design_patterns.html#pagination)]
@@ -107,6 +111,7 @@ while let Some(container) = pager.try_next().await? {
 let poller = container_client.create(None).await?;
 let response = poller.await?;
 ```
+
 ---
 
 ## 3. 类型系统价值 {#3-类型系统价值}

@@ -108,6 +108,7 @@ fn split_borrow(arr: &mut [i32]) {
     *second = 2;
 }
 ```
+
 > **注意**: 上述 `split_borrow` 在 Rust 1.96 中通过**Two-Phase Borrows**已有部分支持，但复杂场景仍受限。
 
 ### 2.3 NLL 的架构瓶颈 {#23-nll-的架构瓶颈}
@@ -155,6 +156,7 @@ error(L, P) :-
     loan_live_at(L, P),
     invalidates(L, P).
 ```
+
 ### 3.2 起源 (Origin) 与 贷款 (Loan) 的精确追踪 {#32-起源-origin-与-贷款-loan-的精确追踪}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -199,6 +201,7 @@ fn path_sensitive_example(vec: &mut Vec<i32>) {
     // Polonius: 路径 A 和 B 互斥，不会同时借用，因此合法
 }
 ```
+
 ---
 
 ## 4. 与当前 Borrow Checker 的对比示例 {#4-与当前-borrow-checker-的对比示例}
@@ -240,6 +243,7 @@ fn process_value(val: &mut Value) {
     // Polonius: 精确知道每个变体的借用互不干扰
 }
 ```
+
 #### 示例 B：循环内精确索引借用 {#示例-b循环内精确索引借用}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -257,6 +261,7 @@ fn bubble_sort(arr: &mut [i32]) {
     }
 }
 ```
+
 > **注意**: 当前稳定版中 `slice::swap` 已内部处理借用，但手动实现仍可能触发借用检查错误。
 
 ---
@@ -282,6 +287,7 @@ fn bubble_sort(arr: &mut [i32]) {
 2026-04  Location-sensitive prototype 在 nightly 可用，解决 lending iterator 模式 [来源: [NLL Problem Case #3](https://rust-lang.github.io/rfcs/2094-nll.html)]
 2026-??  预计稳定     Polonius Alpha 目标稳定版本 (取决于性能基准测试和社区反馈)
 ```
+
 ### 5.2 当前状态 (2026-04-24) {#52-当前状态-2026-04-24}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -310,6 +316,7 @@ rustc -Zpolonius your_code.rs
 # 或使用 cargo {#或使用-cargo}
 RUSTFLAGS="-Zpolonius" cargo build
 ```
+
 ---
 
 ## 6. 对本项目的影响 {#6-对本项目的影响}

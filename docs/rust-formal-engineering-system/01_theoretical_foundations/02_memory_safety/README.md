@@ -31,6 +31,7 @@ mindmap
       边界检查
       借用检查
 ```
+
 ## 与核心文档的关联 {#与核心文档的关联}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -102,6 +103,7 @@ fn no_use_after_free() {
     // println!("{}", r);
 }
 ```
+
 ## 更多代码示例 {#更多代码示例}
 
 ### 内存布局与对齐 {#内存布局与对齐}
@@ -134,6 +136,7 @@ fn memory_layout() {
     println!("&u8: {} 字节", mem::size_of::<&u8>());
 }
 ```
+
 ### 安全抽象边界 {#安全抽象边界}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -191,6 +194,7 @@ impl Drop for SafeBuffer {
     }
 }
 ```
+
 ### 编译时内存安全检查 {#编译时内存安全检查}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -223,6 +227,7 @@ fn prevent_use_after_free() {
     println!("{}", r);  // 保证 r 仍然有效
 }
 ```
+
 ---
 
 ## 相关研究笔记 {#相关研究笔记}

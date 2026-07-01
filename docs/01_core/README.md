@@ -24,33 +24,33 @@
 
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [Rust 核心概念 (Core Concepts)](#rust-核心概念-core-concepts)
-  - [目录](#目录)
-  - [1. 所有权 (Ownership)](#1-所有权-ownership)
-    - [概念定义](#概念定义-2)
-    - [所有权规则](#所有权规则)
-    - [移动语义 (Move Semantics)](#移动语义-move-semantics)
-    - [Copy 类型](#copy-类型)
-  - [2. 借用与引用 (Borrowing \& References)](#2-借用与引用-borrowing-references)
-    - [概念定义](#概念定义-2)
-    - [借用规则](#借用规则)
-    - [悬垂引用防护](#悬垂引用防护)
-  - [3. 生命周期 (Lifetimes)](#3-生命周期-lifetimes)
-    - [概念定义](#概念定义-2)
-    - [生命周期省略规则 (Elision Rules)](#生命周期省略规则-elision-rules)
-    - [`'static` 生命周期](#static-生命周期)
-  - [4. 类型系统基础 (Type System Basics)](#4-类型系统基础-type-system-basics)
-    - [核心类型分类](#核心类型分类)
-    - [泛型与 Trait](#泛型与-trait)
-    - [Rust 2024 Edition 类型系统增强](#rust-2024-edition-类型系统增强)
-  - [5. 内存安全保证 (Memory Safety Guarantees)](#5-内存安全保证-memory-safety-guarantees)
-    - [Rust 消除的内存错误类别](#rust-消除的内存错误类别)
-    - [unsafe Rust](#unsafe-rust)
-  - [6. 与 Wikipedia 概念对齐](#6-与-wikipedia-概念对齐)
-  - [学习路径](#学习路径)
-  - [相关链接](#相关链接)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
+- [Rust 核心概念 (Core Concepts) {#rust-核心概念-core-concepts}](#rust-核心概念-core-concepts-rust-核心概念-core-concepts)
+  - [目录 {#目录}](#目录-目录)
+  - [1. 所有权 (Ownership) {#1-所有权-ownership}](#1-所有权-ownership-1-所有权-ownership)
+    - [概念定义 {#概念定义-2}](#概念定义-概念定义-2)
+    - [所有权规则 {#所有权规则}](#所有权规则-所有权规则)
+    - [移动语义 (Move Semantics) {#移动语义-move-semantics}](#移动语义-move-semantics-移动语义-move-semantics)
+    - [Copy 类型 {#copy-类型}](#copy-类型-copy-类型)
+  - [2. 借用与引用 (Borrowing \& References) {#2-借用与引用-borrowing-references}](#2-借用与引用-borrowing--references-2-借用与引用-borrowing-references)
+    - [概念定义 {#概念定义-2}](#概念定义-概念定义-2-1)
+    - [借用规则 {#借用规则}](#借用规则-借用规则)
+    - [悬垂引用防护 {#悬垂引用防护}](#悬垂引用防护-悬垂引用防护)
+  - [3. 生命周期 (Lifetimes) {#3-生命周期-lifetimes}](#3-生命周期-lifetimes-3-生命周期-lifetimes)
+    - [概念定义 {#概念定义-2}](#概念定义-概念定义-2-2)
+    - [生命周期省略规则 (Elision Rules) {#生命周期省略规则-elision-rules}](#生命周期省略规则-elision-rules-生命周期省略规则-elision-rules)
+    - [`'static` 生命周期 {#static-生命周期}](#static-生命周期-static-生命周期)
+  - [4. 类型系统基础 (Type System Basics) {#4-类型系统基础-type-system-basics}](#4-类型系统基础-type-system-basics-4-类型系统基础-type-system-basics)
+    - [核心类型分类 {#核心类型分类}](#核心类型分类-核心类型分类)
+    - [泛型与 Trait {#泛型与-trait}](#泛型与-trait-泛型与-trait)
+    - [Rust 2024 Edition 类型系统增强 {#rust-2024-edition-类型系统增强}](#rust-2024-edition-类型系统增强-rust-2024-edition-类型系统增强)
+  - [5. 内存安全保证 (Memory Safety Guarantees) {#5-内存安全保证-memory-safety-guarantees}](#5-内存安全保证-memory-safety-guarantees-5-内存安全保证-memory-safety-guarantees)
+    - [Rust 消除的内存错误类别 {#rust-消除的内存错误类别}](#rust-消除的内存错误类别-rust-消除的内存错误类别)
+    - [unsafe Rust {#unsafe-rust}](#unsafe-rust-unsafe-rust)
+  - [6. 与 Wikipedia 概念对齐 {#6-与-wikipedia-概念对齐}](#6-与-wikipedia-概念对齐-6-与-wikipedia-概念对齐)
+  - [学习路径 {#学习路径}](#学习路径-学习路径)
+  - [相关链接 {#相关链接}](#相关链接-相关链接)
+  - [相关概念 {#相关概念}](#相关概念-相关概念)
+  - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
 ---
 
@@ -72,6 +72,7 @@
     // s 在此有效
 } // s 离开作用域，"hello" 被释放
 ```
+
 ### 所有权规则 {#所有权规则}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -89,6 +90,7 @@ let s1 = String::from("hello");
 let s2 = s1; // s1 的所有权移动到 s2
 // println!("{}", s1); // ❌ 编译错误：s1 已失效
 ```
+
 ### Copy 类型 {#copy-类型}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -100,6 +102,7 @@ let x = 5;
 let y = x; // i32 是 Copy，x 仍然有效
 println!("x = {}, y = {}", x, y); // ✅
 ```
+
 | 类型类别 | 示例 | 语义 |
 |---------|------|------|
 | Copy 标量 | `i32`, `f64`, `bool`, `char` | 复制 |
@@ -128,6 +131,7 @@ let s1 = String::from("hello");
 let len = calculate_length(&s1); // 不可变借用
 println!("'{}' 的长度是 {}", s1, len); // ✅ s1 仍然有效
 ```
+
 ### 借用规则 {#借用规则}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -148,6 +152,7 @@ println!("{} and {}", r1, r2); // r1, r2 最后一次使用
 let r3 = &mut s; // ✅ r1, r2 不再使用，可变借用合法
 r3.push_str(" world");
 ```
+
 ### 悬垂引用防护 {#悬垂引用防护}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -160,6 +165,7 @@ fn dangle() -> &String { // ❌ 编译错误
     &s
 } // s 被释放，返回的引用悬垂
 ```
+
 ---
 
 ## 3. 生命周期 (Lifetimes) {#3-生命周期-lifetimes}
@@ -176,6 +182,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
 }
 ```
+
 ### 生命周期省略规则 (Elision Rules) {#生命周期省略规则-elision-rules}
 
 编译器自动推断常见模式：
@@ -191,6 +198,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ```rust
 let s: &'static str = "我是字符串字面量，存储在二进制中";
 ```
+
 ⚠️ **常见误解**：`'static` 不意味着内存泄漏或永不释放，而是指数据在程序结束前一直有效。
 
 ---
@@ -229,6 +237,7 @@ fn notify<T: Summary>(item: &T) {
     println!("快讯！{}", item.summarize());
 }
 ```
+
 ### Rust 2024 Edition 类型系统增强 {#rust-2024-edition-类型系统增强}
 
 - **RPIT lifetime capture rules**: `impl Trait` 的默认生命周期捕获更精确
@@ -262,6 +271,7 @@ unsafe {
     // 等等...
 }
 ```
+
 ⚠️ **原则**：`unsafe` 块越小越好，且必须有 `// SAFETY:` 注释说明为何安全。
 
 ---
@@ -304,6 +314,7 @@ unsafe {
 ├── 14. Higher-Ranked Trait Bounds (for<'a>)
 └── 15. 形式化语义理解 (Stacked Borrows / Tree Borrows)
 ```
+
 ---
 
 ## 相关链接 {#相关链接}

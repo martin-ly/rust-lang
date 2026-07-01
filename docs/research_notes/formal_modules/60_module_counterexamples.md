@@ -73,6 +73,7 @@ pub mod b;
 // src/b.rs
 pub mod a;
 ```
+
 ### 编译器错误 {#编译器错误-2}
 
 ```text
@@ -84,11 +85,13 @@ error[E0585]: found a documentation comment that doesn't document anything
    |
    = help: doc comments must come before what they document, maybe a comment was intended with `//`?
 ```
+
 实际更典型的错误形式为：
 
 ```text
 error[E0433]: failed to resolve: use of undeclared crate or module `b`
 ```
+
 或当通过 `use` 引用自身时产生循环引用错误。
 
 ### 根因 {#根因-6}
@@ -122,6 +125,7 @@ pub mod shared;
 // src/bar.rs
 pub mod shared; // ❌ shared 已被 foo 引入
 ```
+
 ### 编译器错误 {#编译器错误-2}
 
 ```text
@@ -133,11 +137,13 @@ error[E0583]: file not found for module `shared`
    |
    = help: to create what the `shared` module refers to, use file src/bar/shared.rs or src/bar/shared/mod.rs
 ```
+
 即使文件存在，也会在 crate 命名空间中出现重复定义：
 
 ```text
 error[E0428]: the name `shared` is defined multiple times
 ```
+
 ### 根因 {#根因-6}
 
 `mod` 是 **声明式** 的：它把文件挂载到当前模块命名空间下。每个模块在 crate 根命名空间中必须有唯一路径。
@@ -163,11 +169,13 @@ mod outer {
     }
 }
 ```
+
 ### 编译器错误 {#编译器错误-2}
 
 ```text
 error[E0433]: failed to resolve: could not find `deep` in `inner`
 ```
+
 ### 根因 {#根因-6}
 
 `pub(in path)` 的限制路径必须是当前 crate 中真实存在的模块，并且该路径必须能够从当前项访问到。
@@ -197,6 +205,7 @@ fn main() {
     use foo::bar; // ✅ 绝对路径：crate::foo::bar
 }
 ```
+
 反例：试图用相对路径 `self::` / `super::` 时不写前缀：
 
 ```rust
@@ -209,6 +218,7 @@ mod baz {
     use foo::bar; // ❌ 实际查找 crate::foo，而 foo 在 crate 根存在，可能意外成功
 }
 ```
+
 ### 边界情况 {#边界情况}
 
 在子模块内部引用父模块的兄弟模块时，必须使用 `super::` 或 `crate::`：
@@ -222,6 +232,7 @@ mod baz {
     use super::foo::bar; // ✅ 正确
 }
 ```
+
 ### 根因 {#根因-6}
 
 `use` 路径总是绝对解析，除非显式使用 `self::`、`super::` 或 `crate::` 限定。
@@ -238,6 +249,7 @@ mod baz {
 // Cargo.toml 已声明 serde = "1"
 extern crate serde; // ⚠️ 冗余，Edition 2018+ 通常不需要
 ```
+
 ### 边界与例外 {#边界与例外}
 
 仍需 `extern crate` 的场景：
@@ -262,11 +274,13 @@ Edition 2018 把 crate 作为名称空间中的顶级模块，自动注入。
 [lib]
 crate-type = ["cdylib"]
 ```
+
 然后尝试 `cargo test` 运行单元测试，可能因为无法生成测试二进制而失败；或尝试把 cdylib 当 rlib 链接：
 
 ```text
 error: cannot satisfy dependencies so `serde` only shows up once
 ```
+
 ### 典型错误 {#典型错误}
 
 把 `bin` crate 的 `crate-type` 设为 `lib`：
@@ -276,6 +290,7 @@ error: cannot satisfy dependencies so `serde` only shows up once
 name = "app"
 crate-type = ["cdylib"] # ❌ bin 不能有 crate-type
 ```
+
 ### 修复方案 {#修复方案-5}
 
 - `lib` 默认是 `rlib`；需要 C ABI 时再加 `cdylib`/`staticlib`。
@@ -303,6 +318,7 @@ pub mod safe_wrapper {
     }
 }
 ```
+
 将 `internal` 设为 `pub` 后，外部代码可以直接调用 `safe_wrapper::internal::raw_pointer_op`，绕过安全封装。
 
 ### 根因 {#根因-6}
@@ -331,12 +347,14 @@ pub extern "C" fn init() {}
 #[no_mangle]
 pub extern "C" fn init() {}
 ```
+
 ### 链接器错误 {#链接器错误}
 
 ```text
 error: linking with `cc` failed: exit code: 1
   = note: ld: duplicate symbol '_init' in .../libcrate_a.a and .../libcrate_b.a
 ```
+
 ### 根因 {#根因-6}
 
 链接器全局符号表要求每个符号唯一。`#[no_mangle]` 使 Rust 函数进入全局符号表。

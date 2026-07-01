@@ -70,6 +70,7 @@
 
 6. 理解背后的原理
 ```
+
 ---
 
 ## 一、所有权反例 {#一所有权反例}
@@ -96,6 +97,7 @@ fn main() {
 
 }
 ```
+
 **编译器错误**:
 
 ```text
@@ -117,6 +119,7 @@ error[E0382]: borrow of moved value: `x`
 
   |                    ^ value borrowed here after move
 ```
+
 **解释**:
 
 - `String`不实现`Copy` trait，赋值时转移所有权
@@ -144,6 +147,7 @@ println!("{}", x);  // OK
 
 println!("{}", y);  // OK
 ```
+
 **形式化原理**:
 
 ```
@@ -155,6 +159,7 @@ Move(x, y, v) 后:
 
 - 使用Moved状态的变量 = 错误
 ```
+
 ---
 
 ### 反例 1.2: 部分移动后的使用 {#反例-12-部分移动后的使用}
@@ -194,6 +199,7 @@ fn main() {
 
 }
 ```
+
 **编译器错误**:
 
 ```
@@ -213,6 +219,7 @@ error[E0382]: borrow of partially moved value: `p`
 
   |                    ^ value borrowed here after partial move
 ```
+
 **解释**:
 
 - 结构体的单个字段可以被移动
@@ -238,6 +245,7 @@ let Person { name, age } = p;
 
 // 之后不能再用p
 ```
+
 ---
 
 ## 二、借用反例 {#二借用反例}
@@ -266,6 +274,7 @@ fn main() {
 
 }
 ```
+
 **编译器错误**:
 
 ```
@@ -287,6 +296,7 @@ error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immuta
 
   |                  -- immutable borrow later used here
 ```
+
 **解释**:
 
 - 规则: 要么多个不可变借用，要么一个可变借用
@@ -314,6 +324,7 @@ let r2 = &mut x;
 
 *r2 += 1;
 ```
+
 **形式化原理**:
 
 ```
@@ -321,6 +332,7 @@ borrowed_imm(x, r₁, v) → cannot borrowed_mut(x, r₂, v)
 
 until r₁ is dropped
 ```
+
 ---
 
 ### 反例 2.2: 多个可变借用 {#反例-22-多个可变借用}
@@ -346,6 +358,7 @@ fn main() {
 
 }
 ```
+
 **编译器错误**:
 
 ```
@@ -367,6 +380,7 @@ error[E0499]: cannot borrow `x` as mutable more than once at a time
 
   |     -------- first borrow later used here
 ```
+
 **解释**:
 
 - 可变借用具有排他性
@@ -388,6 +402,7 @@ let r2 = &mut x;
 
 *r2 = 20;
 ```
+
 ---
 
 ### 反例 2.3: 悬垂引用 {#反例-23-悬垂引用}
@@ -407,6 +422,7 @@ fn dangling() -> &String {
 
 }
 ```
+
 **编译器错误**:
 
 ```
@@ -424,6 +440,7 @@ error[E0106]: missing lifetime specifier
 
   = help: this function's return type contains a borrowed value, but there is no value for it to be borrowed from
 ```
+
 **解释**:
 
 - `s`在栈上分配，函数结束时被释放
@@ -452,6 +469,7 @@ fn not_dangling2(s: &String) -> &String {
 
 }
 ```
+
 **形式化原理**:
 
 ```
@@ -459,6 +477,7 @@ lifetime(&s) ⊆ lifetime(s)
 
 函数结束 → s被释放 → &s无效
 ```
+
 ---
 
 ## 三、生命周期反例 {#三生命周期反例}
@@ -489,6 +508,7 @@ fn longest(x: &str, y: &str) -> &str {
 
 }
 ```
+
 **编译器错误**:
 
 ```
@@ -506,6 +526,7 @@ error[E0106]: missing lifetime specifier
 
   = help: this function's return type contains a borrowed value with an elided lifetime, but the lifetime cannot be derived from the arguments
 ```
+
 **解释**:
 
 - 返回的引用可能是`x`或`y`
@@ -521,11 +542,13 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 }
 ```
+
 **理解**:
 
 ```
 'a 表示: 返回的引用至少和x、y中较短的生命周期一样长
 ```
+
 ---
 
 ## 四、Send/Sync反例 {#四sendsync反例}
@@ -558,6 +581,7 @@ fn main() {
 
 }
 ```
+
 **编译器错误**:
 
 ```
@@ -575,6 +599,7 @@ error[E0277]: `Rc<i32>` cannot be sent between threads safely
 
   = help: the trait `Send` is not implemented for `Rc<i32>`
 ```
+
 **解释**:
 
 - `Rc`使用非原子引用计数
@@ -595,6 +620,7 @@ thread::spawn(move || {
 
 });
 ```
+
 **形式化原理**:
 
 ```
@@ -602,6 +628,7 @@ Rc<T>: !Send because ref_count++ is not atomic
 
 Arc<T>: Send because AtomicUsize operations are thread-safe
 ```
+
 ---
 
 ### 反例 4.2: RefCell跨线程 {#反例-42-refcell跨线程}
@@ -629,6 +656,7 @@ fn main() {
 
 }
 ```
+
 **编译器错误**:
 
 ```
@@ -646,6 +674,7 @@ error[E0277]: `RefCell<i32>` cannot be sent between threads safely
 
    = help: the trait `Send` is not implemented for `RefCell<i32>`
 ```
+
 **解释**:
 
 - `RefCell`在运行时检查借用规则
@@ -666,6 +695,7 @@ thread::spawn(move || {
 
 });
 ```
+
 ---
 
 ## 五、异步反例 {#五异步反例}
@@ -694,6 +724,7 @@ async fn bad() {
 
 }
 ```
+
 **警告**: 这会导致死锁！
 
 **解释**:
@@ -726,6 +757,7 @@ async fn good() {
 
 }
 ```
+
 ---
 
 ## 六、设计模式反例 {#六设计模式反例}
@@ -759,6 +791,7 @@ fn get_instance() -> &'static Singleton {
 
 }
 ```
+
 **问题**:
 
 - 需要`unsafe`
@@ -780,6 +813,7 @@ fn get_instance() -> &'static Singleton {
 
 }
 ```
+
 ---
 
 ## 七、反例索引表 {#七反例索引表}

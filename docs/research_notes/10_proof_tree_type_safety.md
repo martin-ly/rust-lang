@@ -52,6 +52,7 @@
 
 2. 保持性 (Preservation): 若 e → e'，则 ⊢ e' : T
 ```
+
 ---
 
 ## 🌿 证明树结构 {#证明树结构}
@@ -146,6 +147,7 @@ T-TY1: 类型安全 (Progress + Preservation)
 
         └── ✓ ⊢ &e' : &T
 ```
+
 ---
 
 ## 📋 关键引理 {#关键引理}
@@ -193,6 +195,7 @@ Proof (结构归纳):
 
   应用规则: 应用保持 ✓
 ```
+
 ### Lemma 2: 模式匹配保持类型 {#lemma-2-模式匹配保持类型}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -221,6 +224,7 @@ Proof:
 
 4. 替换后类型保持 ✓
 ```
+
 ---
 
 ## 🎯 Rust 代码验证 {#rust-代码验证}
@@ -262,6 +266,7 @@ fn type_safety_theorem() {
 
 }
 ```
+
 ---
 
 ## 📊 类型系统规则 {#类型系统规则}
@@ -304,6 +309,7 @@ fn type_safety_theorem() {
 
         Γ ⊢ &mut e : &mut T
 ```
+
 ---
 
 ## 📊 证明复杂度 {#证明复杂度}

@@ -117,6 +117,7 @@
 
             容器继承内容关系    │                      │
 ```
+
 ---
 
 ## 一、三种型变详解 {#一三种型变详解}
@@ -135,6 +136,7 @@
 ```text
 T <: U  →  C<T> <: C<U>
 ```
+
 **示例**:
 
 ```rust,ignore
@@ -151,6 +153,7 @@ let b1: Box<&'static str> = Box::new("hello");
 
 let b2: Box<&'a str> = b1;  // OK
 ```
+
 **为什么协变**:
 
 - 容器"继承"内容的子类型关系
@@ -178,6 +181,7 @@ let b2: Box<&'a str> = b1;  // OK
 ```text
 T <: U  →  C<U> <: C<T>
 ```
+
 **示例**:
 
 ```rust,ignore
@@ -192,6 +196,7 @@ fn handler(_: &'static str) {}
 
 let f: fn(&'a str) = handler;  // 可能错误，具体取决于'a
 ```
+
 **为什么逆变**:
 
 - 输入位置需要"更泛化"的类型
@@ -218,6 +223,7 @@ let f: fn(&'a str) = handler;  // 可能错误，具体取决于'a
 ```text
 T = U  →  C<T> = C<U>
 ```
+
 **示例**:
 
 ```rust
@@ -225,6 +231,7 @@ let mut r1: &mut &'static str = &mut "hello";
 
 // let r2: &mut &'a str = r1;  // 错误！&mut T是不变的
 ```
+
 **为什么不变**:
 
 - 内部可变性：可以通过`&mut`修改内容
@@ -282,6 +289,7 @@ fn(T) -> U
 
 //      U: 协变(+)
 ```
+
 **理解**:
 
 - 参数位置：函数需要"足够泛化"才能接受更多输入
@@ -303,6 +311,7 @@ struct Contravariant<T>(fn(T));
 
 // Contravariant<T> 对T是逆变的
 ```
+
 ---
 
 ## 四、型变的实际影响 {#四型变的实际影响}
@@ -331,6 +340,7 @@ fn example<'a>(s: &'a str) {
 
 fn takes_str<'a>(s: &'a str) {}
 ```
+
 ### 影响2: 智能指针的使用 {#影响2-智能指针的使用}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -355,6 +365,7 @@ let mut r: &mut &'static str = &mut "hello";
 
 // process_mut(r);  // 错误！&mut是不变的
 ```
+
 ### 影响3: 回调函数的类型 {#影响3-回调函数的类型}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -377,6 +388,7 @@ where
 
 set_handler(|s: &'static str| { });  // OK
 ```
+
 ---
 
 ## 五、型变与类型安全 {#五型变与类型安全}
@@ -406,6 +418,7 @@ let local = String::from("local");
 
 // 但*r1仍然指向它！悬垂引用！
 ```
+
 **结论**: `&mut`的不变性保证了借用规则的安全性。
 
 ---
@@ -463,6 +476,7 @@ let local = String::from("local");
 
                 └── 高级类型特性中的型变
 ```
+
 ---
 
 ## 七、记忆口诀 {#七记忆口诀}
@@ -477,6 +491,7 @@ let local = String::from("local");
 
 可变的都是不变 (=): 内部可变性需要精确类型匹配
 ```
+
 ---
 
 ## 八、何时需要关注型变 {#八何时需要关注型变}

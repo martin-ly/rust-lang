@@ -84,6 +84,7 @@ fn undefined_behavior_example() {
 
 }
 ```
+
 **适用场景**:
 
 - 不安全代码审查
@@ -97,6 +98,7 @@ rustup component add miri
 
 miri run  # 或 cargo miri test
 ```
+
 ### 2. Kani - 位精确模型检查器 {#2-kani---位精确模型检查器}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -120,6 +122,7 @@ fn check_vector_push() {
 
 }
 ```
+
 **能力矩阵**:
 
 | 特性 | 支持度 | 说明 |
@@ -160,6 +163,7 @@ fn find_min(arr: &[i32]) -> usize {
 
 }
 ```
+
 ---
 
 ## 验证能力矩阵 {#验证能力矩阵}
@@ -210,6 +214,7 @@ graph TD
 
     E --> E3[Loom]
 ```
+
 ### 性能与可扩展性 {#性能与可扩展性}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -246,6 +251,7 @@ graph TD
 
     └── 测试 + sanitizers
 ```
+
 ---
 
 ## 与 Rust 版本兼容性 {#与-rust-版本兼容性}
@@ -306,6 +312,7 @@ jobs:
 
           args: "--workspace"
 ```
+
 ---
 
 ## 相关文档 {#相关文档-1}

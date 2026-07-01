@@ -175,6 +175,7 @@ mindmap
 
         Aeneas
 ```
+
 ---
 
 ## 核心证明技术 {#核心证明技术}
@@ -224,6 +225,7 @@ mod proofs {
 
 }
 ```
+
 ### 2. 分离逻辑 {#2-分离逻辑}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
@@ -246,6 +248,7 @@ fn separation_logic_example() {
 
 } // 资源在此处分别释放
 ```
+
 ### 3. 双模拟 {#3-双模拟}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -282,6 +285,7 @@ trait Bisimulation {
 
 struct Action(String);
 ```
+
 ---
 
 ## 程序逻辑 {#程序逻辑}
@@ -303,6 +307,7 @@ C: 命令/程序
 
 Q: 后置条件
 ```
+
 ```rust
 // Hoare 逻辑在 Rust 中的体现（通过类型系统）
 
@@ -328,6 +333,7 @@ fn find_max(slice: &[i32]) -> Option<&i32> {
 
 }
 ```
+
 ### Iris 框架概念 {#iris-框架概念}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -372,6 +378,7 @@ graph LR
 
     F --> F1[Why3后端]
 ```
+
 ### 证明策略选择 {#证明策略选择}
 
 >

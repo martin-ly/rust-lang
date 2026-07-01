@@ -137,6 +137,7 @@ let y = x;
 
 println!("{}", x);
 ```
+
 <details>
 
 <summary>答案</summary>
@@ -155,6 +156,7 @@ let y = x.clone();
 
 let y = &x;
 ```
+
 </details>
 
 ---
@@ -214,6 +216,7 @@ let x = &cell;
 
 x.set(10);  // 内部修改
 ```
+
 常用类型：`Cell`, `RefCell`, `Mutex`, `RwLock`
 
 </details>
@@ -231,6 +234,7 @@ let r2 = &mut x;
 
 println!("{}", r1);
 ```
+
 <details>
 
 <summary>答案</summary>
@@ -272,6 +276,7 @@ println!("{}", y);  // y最后一次使用
 
 let z = &mut x;  // 在NLL之前编译错误
 ```
+
 </details>
 
 ---
@@ -293,6 +298,7 @@ struct Slice<'a, T: 'a> {
 
 }
 ```
+
 </details>
 
 ---
@@ -325,6 +331,7 @@ mem::swap(&mut a, &mut b);  // a和b交换
 
 let old = mem::replace(&mut a, new);  // a=new，返回旧值
 ```
+
 </details>
 
 ---
@@ -363,6 +370,7 @@ let old = mem::replace(&mut a, new);  // a=new，返回旧值
 ```rust
 let x: &'static str = Box::leak(Box::new(String::from("hello")));
 ```
+
 用途：
 
 - 全局状态
@@ -397,6 +405,7 @@ struct ArcInner<T> {
 
 }
 ```
+
 clone: `count.fetch_add(1, Relaxed)`
 
 drop: `if count.fetch_sub(1, Release) == 1 { 释放 }`
@@ -461,6 +470,7 @@ trait Iterator {
 
 }
 ```
+
 每个实现只能有一个Item类型。
 
 </details>
@@ -514,6 +524,7 @@ trait Iterator {
 ```rust,ignore
 F: for<'a> Fn(&'a str) -> &'a str
 ```
+
 </details>
 
 ---
@@ -541,6 +552,7 @@ trait Container {
 
 }
 ```
+
 </details>
 
 ---
@@ -558,6 +570,7 @@ impl<T> Trait for T { default fn method() {} }
 
 impl Trait for i32 { fn method() {} }  // 特化
 ```
+
 目前不稳定，需要feature flag。
 
 </details>
@@ -575,6 +588,7 @@ impl Trait for i32 { fn method() {} }  // 特化
 ```rust
 assert_eq!(size_of::<Option<&i32>>(), size_of::<&i32>());
 ```
+
 </details>
 
 ---
@@ -605,6 +619,7 @@ struct MySlice {
 
 let ptr: *const MySlice;  // 包含长度信息
 ```
+
 通常与`#[repr(C)]`和指针操作配合。
 
 </details>
@@ -713,6 +728,7 @@ enum FooFuture {
 
 }
 ```
+
 执行器轮询Future，在`.await`处可能让出。
 
 </details>
@@ -784,6 +800,7 @@ some_async().await;
 
 let guard = tokio_mutex.lock().await;
 ```
+
 </details>
 
 ---
@@ -805,6 +822,7 @@ tokio::select! {
 
 }
 ```
+
 </details>
 
 ---
@@ -852,6 +870,7 @@ impl Runtime {
 
 }
 ```
+
 </details>
 
 ---
@@ -1063,6 +1082,7 @@ struct LruCache<K, V> {
 
 // 内部维护访问顺序（链表）
 ```
+
 关键点：
 
 - `Mutex`保护共享状态
@@ -1125,6 +1145,7 @@ impl Saga {
 
 }
 ```
+
 </details>
 
 ---
@@ -1170,6 +1191,7 @@ impl ConnectionPool {
 
 }
 ```
+
 </details>
 
 ---
@@ -1229,6 +1251,7 @@ impl Future for MyFuture {
 
 }
 ```
+
 </details>
 
 ---
@@ -1273,6 +1296,7 @@ trait EventStore {
 
 }
 ```
+
 </details>
 
 ---

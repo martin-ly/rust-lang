@@ -171,6 +171,7 @@ cargo test -p exercises --lib algorithms
 # 检查研究笔记结构 {#检查研究笔记结构}
 cd scripts/maintenance && python check_research_notes.py
 ```
+
 当前算法模块已包含 **25 个独立算法函数 + 5 个数据结构实现**，配套 **47 个单元测试**，全部通过。
 
 > **来源: [ACM Digital Library](https://dl.acm.org/)**

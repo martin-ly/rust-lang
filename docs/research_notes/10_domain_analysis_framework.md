@@ -116,6 +116,7 @@
 - x: Borrowed ⊕ x: Borrowed = Valid
 - x: Borrowed ⊕ x: MutBorrowed = Invalid
 ```
+
 **逻辑模型** (分离逻辑):
 
 ```text
@@ -126,11 +127,13 @@
 - emp            (空堆)
 - P * Q          (分离合取)
 ```
+
 **操作语义**:
 
 ```text
 Γ, H ⊢ e ⇓ v, H'  (表达式 e 在环境 Γ 和堆 H 下求值为 v，新堆 H')
 ```
+
 #### 关键定理 {#关键定理}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -177,6 +180,7 @@ graph TB
     B -.-> K
     C -.-> L
 ```
+
 ---
 
 ### 领域 2: 类型系统 {#领域-2-类型系统}
@@ -223,6 +227,7 @@ Trait 作为类型类:
 - F: C → C, F(A) = Vec<A>
 - map: (A → B) → F(A) → F(B)
 ```
+
 **逻辑模型** (Curry-Howard 对应):
 
 ```text
@@ -235,6 +240,7 @@ A + B     : A 或 B
 ∀A.F(A)   : 对所有 A, F(A)
 ∃A.F(A)   : 存在 A 使得 F(A)
 ```
+
 #### 关键定理 {#关键定理-1}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -273,6 +279,7 @@ A + B     : A 或 B
     ├── 约束: 'a: 'b
     └── 省略规则
 ```
+
 ---
 
 ### 领域 3: 并发与并行 {#领域-3-并发与并行}
@@ -311,6 +318,7 @@ Rust 映射:
 - tx.send(v)         ≈  c!v
 - rx.recv()          ≈  c?v
 ```
+
 **操作语义** (Actor 模型):
 
 ```text
@@ -318,6 +326,7 @@ Rust 映射:
 (Send, m, dest) → (Idle, ε)  (发送消息 m 到 dest)
 (Receive, m) → (Process(m), ε)  (接收并处理消息)
 ```
+
 #### 关键定理 {#关键定理-2}
 
 | 定理 | 陈述 | 证明 | 重要性 |
@@ -370,6 +379,7 @@ Rust特有:
 - Newtype: 包装函子 W(A) = struct Wrapper(A);
 - 类型状态: 泛型参数作为状态标签
 ```
+
 **类型论模型**:
 
 ```text
@@ -384,6 +394,7 @@ Rust特有:
 - RAII: 线性类型
   type Resource: Linear = { acquire, release }
 ```
+
 #### 设计模式矩阵 {#设计模式矩阵}
 
 | 模式 | 意图 | Rust实现 | 形式化类型 |
@@ -441,6 +452,7 @@ Rust特有:
   ▼
 目标代码
 ```
+
 #### 工具链层次 {#工具链层次}
 
 ```text
@@ -466,6 +478,7 @@ Rust特有:
     ├── rustdoc (文档)
     └── Miri (UB检测)
 ```
+
 ---
 
 ## 领域边界与交叉 {#领域边界与交叉}
@@ -514,6 +527,7 @@ graph TB
     E -.-> C
     E -.-> D
 ```
+
 ---
 
 ## 领域抽象模型 {#领域抽象模型}

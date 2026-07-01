@@ -91,6 +91,7 @@ cargo install cargo-tarpaulin
 # 或使用 cargo-llvm-cov {#或使用-cargo-llvm-cov}
 cargo install cargo-llvm-cov
 ```
+
 ### 运行覆盖率测试 {#运行覆盖率测试}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -104,6 +105,7 @@ cargo tarpaulin --out Html --output-dir coverage
 # 使用 cargo-llvm-cov {#使用-cargo-llvm-cov}
 cargo llvm-cov --html
 ```
+
 ---
 
 ## 📊 覆盖率工具 {#覆盖率工具}
@@ -137,6 +139,7 @@ cargo tarpaulin --exclude-files '*/tests/*'
 # 设置覆盖率阈值 {#设置覆盖率阈值}
 cargo tarpaulin --fail-under 80
 ```
+
 ### 2. cargo-llvm-cov {#2-cargo-llvm-cov}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -164,6 +167,7 @@ cargo llvm-cov --lcov --output-path lcov.info
 # 排除某些文件 {#排除某些文件-1}
 cargo llvm-cov --exclude '*/tests/*'
 ```
+
 ---
 
 ## 🎯 覆盖率目标 {#覆盖率目标}
@@ -226,6 +230,7 @@ mod tests {
     }
 }
 ```
+
 ### 2. 集成测试 {#2-集成测试}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -240,6 +245,7 @@ fn test_integration() {
     assert!(result.is_ok());
 }
 ```
+
 ### 3. 文档测试 {#3-文档测试}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -258,6 +264,7 @@ pub fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 ````
+
 ### 4. 异步测试 {#4-异步测试}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -269,6 +276,7 @@ async fn test_async_function() {
     assert!(result.is_ok());
 }
 ```
+
 ---
 
 ## 🔧 提高覆盖率 {#提高覆盖率}
@@ -295,6 +303,7 @@ fn test_edge_cases() {
     assert_eq!(process(&[i32::MIN]), Some(i32::MIN));
 }
 ```
+
 ### 2. 测试错误路径 {#2-测试错误路径}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -312,6 +321,7 @@ fn test_error_handling() {
     assert!(process_with_timeout().is_err());
 }
 ```
+
 ### 3. 测试并发场景 {#3-测试并发场景}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -341,6 +351,7 @@ fn test_concurrent_access() {
     assert_eq!(*data.lock().unwrap(), 10);
 }
 ```
+
 ---
 
 ## 📊 覆盖率报告 {#覆盖率报告}
@@ -358,6 +369,7 @@ cargo tarpaulin --out Html --output-dir coverage
 # 在浏览器中打开 {#在浏览器中打开}
 open coverage/tarpaulin-report.html
 ```
+
 ### 解读报告 {#解读报告}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -402,6 +414,7 @@ jobs:
       - name: Upload to codecov
         uses: codecov/codecov-action@v2
 ```
+
 ### 2. 覆盖率阈值 {#2-覆盖率阈值}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -411,6 +424,7 @@ jobs:
 [package.metadata.tarpaulin]
 fail-under = 80  # 覆盖率低于 80% 时失败
 ```
+
 ### 3. 排除文件 {#3-排除文件}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -424,6 +438,7 @@ exclude-files = [
     "*/benches/*",
 ]
 ```
+
 ---
 
 ## 📚 相关资源 {#相关资源}
@@ -460,6 +475,7 @@ exclude-files = [
 # 使用 cargo-tarpaulin 生成覆盖率报告 {#使用-cargo-tarpaulin-生成覆盖率报告}
 # 设置覆盖率阈值阻止低质量代码合并 {#设置覆盖率阈值阻止低质量代码合并}
 ```
+
 ### 场景3: 覆盖率提升 {#场景3-覆盖率提升}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -552,6 +568,7 @@ fn test_sliding_window_processing() {
     assert_eq!(windows[7], (8, 9, 10));
 }
 ```
+
 ### ControlFlow 在测试验证管道中的应用 {#controlflow-在测试验证管道中的应用}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -573,6 +590,7 @@ fn validate_test_results(results: &[TestResult]) -> ControlFlow<Vec<TestFailure>
     }
 }
 ```
+
 ### LazyLock 在测试固件管理中的应用 {#lazylock-在测试固件管理中的应用}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -591,6 +609,7 @@ pub fn is_test_db_ready() -> bool {
     LazyLock::get(&TEST_DB).is_some()
 }
 ```
+
 **最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)
 
 ---

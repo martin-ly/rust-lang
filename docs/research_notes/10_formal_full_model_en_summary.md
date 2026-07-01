@@ -98,6 +98,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
            [ CSO-T1, USF-T1 ]
 ```
+
 ---
 
 ## Axiom → Composition Theorem DAG (Pillars 1+3) {#axiom-composition-theorem-dag-pillars-13}

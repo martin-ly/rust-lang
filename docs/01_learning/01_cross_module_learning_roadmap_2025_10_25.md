@@ -53,6 +53,7 @@
 ```text
 C01 → C02 → C03 → 项目
 ```
+
 ### 路径 2: 有编程经验 {#路径-2-有编程经验}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -62,6 +63,7 @@ C01 → C02 → C03 → 项目
 ```text
 C01 → C04 → C05 → 项目
 ```
+
 ### 路径 3: 系统程序员 {#路径-3-系统程序员}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -69,6 +71,7 @@ C01 → C04 → C05 → 项目
 ```text
 C01 → C07 → C08 → C10
 ```
+
 ### 路径 4: Web 开发者 {#路径-4-web-开发者}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -76,6 +79,7 @@ C01 → C07 → C08 → C10
 ```text
 C01 → C06 → C10 → C12
 ```
+
 ### 路径 5: Rust 1.95/1.96 特性探索者 {#路径-5-rust-195196-特性探索者}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -83,6 +87,7 @@ C01 → C06 → C10 → C12
 ```text
 isqrt → get_disjoint_mut → async Fn → 综合项目
 ```
+
 ---
 
 ## 🆕 Rust 1.95/1.96 特性在各模块中的应用 {#rust-195196-特性在各模块中的应用}
@@ -114,6 +119,7 @@ fn ownership_with_196_features() {
     v2.push(200);
 }
 ```
+
 **学习建议**: 结合 C01 的所有权概念理解 `get_disjoint_mut` 的编译时安全检查。
 
 ### C04 泛型 → async Fn Trait (≥1.85, Ed 2024) {#c04-泛型-async-fn-trait-185-ed-2024}
@@ -134,6 +140,7 @@ trait OldProcessor {
     async fn process(&self, data: Vec<u8>) -> Result<Vec<u8>, Error>;
 }
 ```
+
 **模块关联**: C06 (异步) + C04 (泛型) + ≥1.85 async Fn
 
 **学习建议**: 在学习 C04 泛型时，尝试用 1.85 的 `async Fn` 语法重构异步代码。
@@ -166,6 +173,7 @@ static CONFIG: LazyLock<String> = LazyLock::new(|| {
     "app_config".to_string()
 });
 ```
+
 **学习建议**: C05 线程基础 → 1.95+ LazyLock → thread::Builder 高级控制
 
 ### C08 算法 → isqrt (≥1.84) {#c08-算法-isqrt-184}
@@ -202,6 +210,7 @@ fn triangle_inequality(points: &[(f64, f64)]) -> bool {
     })
 }
 ```
+
 **学习建议**: C08 算法基础 → isqrt (≥1.84) 优化 → 1.95+ array_windows 组合应用
 
 ---
@@ -223,6 +232,7 @@ Rust ≥1.84 isqrt ───┐
 Rust 1.95+ 数学常量 ──┼→ 数学计算项目
 C08 高级算法 ────────┘
 ```
+
 **推荐项目**: 数字信号处理器、几何计算库
 
 ### 学习路线 B: 并发与数据结构方向 {#学习路线-b-并发与数据结构方向}
@@ -238,6 +248,7 @@ Rust ≥1.83 get_disjoint_mut ─┐
 Rust 1.95+ LazyLock ──────────┼→ 并发缓存系统
 C05 高级并发模式 ────────────┘
 ```
+
 **推荐项目**: 高性能缓存系统、并发任务调度器
 
 ### 学习路线 C: 异步编程方向 {#学习路线-c-异步编程方向}
@@ -253,6 +264,7 @@ Rust ≥1.85 async Fn ─┐
 Rust 1.95+ ControlFlow ─┼→ 异步 Web 服务
 Tokio 生态 ────────────┘
 ```
+
 **推荐项目**: REST API 服务、实时数据处理管道
 
 ### 学习路线 D: 系统编程方向 {#学习路线-d-系统编程方向}
@@ -268,6 +280,7 @@ Rust 1.95.0 if let guards ───┐
 Rust 1.95+ Unsafe 改进 ───────┼→ 系统监控工具
 C07 高级系统编程 ────────────┘
 ```
+
 **推荐项目**: 系统监控工具、容器运行时组件
 
 ---

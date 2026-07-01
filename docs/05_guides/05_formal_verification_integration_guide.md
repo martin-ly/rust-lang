@@ -55,6 +55,7 @@
 │ Aeneas       │ 高级抽象          │ 算法证明      │ 高             │
 └──────────────┴──────────────────┴──────────────┴────────────────┘
 ```
+
 ---
 
 ## 🧪 Miri - 内存安全验证 {#miri---内存安全验证}
@@ -79,6 +80,7 @@ MIRIFLAGS="-Zmiri-stacked-borrows" cargo miri test
 # 严格模式（最严格检查） {#严格模式最严格检查}
 MIRIFLAGS="-Zmiri-tree-borrows -Zmiri-tag-raw-pointers" cargo miri test
 ```
+
 ### 代码示例 {#代码示例}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -125,6 +127,7 @@ fn test_tree_borrows_self_referential() {
     assert_eq!(boxed.ptr, "hello");  // ✅ Tree Borrows: OK
 }
 ```
+
 ### CI/CD 集成 {#cicd-集成}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -153,6 +156,7 @@ jobs:
         env:
           MIRIFLAGS: "-Zmiri-tree-borrows -Zmiri-ignore-leaks"
 ```
+
 ---
 
 ## 🔍 Kani - 模型检查 {#kani---模型检查}
@@ -195,6 +199,7 @@ mod verification {
     }
 }
 ```
+
 ### 高级特性 {#高级特性}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -260,6 +265,7 @@ fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
     None
 }
 ```
+
 ---
 
 ## 📐 Prusti - 契约编程 {#prusti---契约编程}
@@ -315,6 +321,7 @@ fn safe_get(array: &[i32], index: usize) -> i32 {
     array[index]
 }
 ```
+
 ### 循环不变量 {#循环不变量}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -376,6 +383,7 @@ fn binary_search_prusti(arr: &[i32], target: i32) -> Option<usize> {
     None
 }
 ```
+
 ---
 
 ## 🎓 工具选择决策树 {#工具选择决策树}
@@ -405,6 +413,7 @@ fn binary_search_prusti(arr: &[i32], target: i32) -> Option<usize> {
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
+
 ---
 
 ## 🔗 综合示例 {#综合示例}
@@ -540,6 +549,7 @@ mod miri_tests {
     }
 }
 ```
+
 ---
 
 ## 📊 验证覆盖率目标 {#验证覆盖率目标}

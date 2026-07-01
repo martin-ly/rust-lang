@@ -144,6 +144,7 @@ Rust Formal Methods Research Notes 是一套全面的Rust形式化方法文档�
 
 └── 探索 10_coq_formalization_matrix.md
 ```
+
 ### 路径二：问题导向 {#路径二问题导向}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -187,6 +188,7 @@ Rust Formal Methods Research Notes 是一套全面的Rust形式化方法文档�
 
     └── 查看 10_application_trees.md 应用场景
 ```
+
 ---
 
 ## 文档结构导航 {#文档结构导航}
@@ -255,6 +257,7 @@ grep -r "T-OW2" docs/research_notes --include="*.md"
 
 grep -r "```rust" docs/research_notes --include="*.md" -l
 ```
+
 ### 阅读建议 {#阅读建议}
 
 >

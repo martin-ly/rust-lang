@@ -74,6 +74,7 @@ cargo install wasm-pack
 # 创建项目 {#创建项目}
 wasm-pack new my-wasm-project
 ```
+
 ## 📋 常用 API {#常用-api}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -93,6 +94,7 @@ extern "C" {
     fn log(s: &str);
 }
 ```
+
 ### 处理对象 {#处理对象}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -114,6 +116,7 @@ impl Person {
     }
 }
 ```
+
 ### 异步函数 {#异步函数}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -130,6 +133,7 @@ pub async fn fetch_data(url: &str) -> Result<JsValue, JsValue> {
     // ...
 }
 ```
+
 ---
 
 ## 🔧 编译配置 {#编译配置}
@@ -152,6 +156,7 @@ wasm-bindgen-futures = "0.4"
 js-sys = "0.3"
 web-sys = { version = "0.3", features = ["Window"] }
 ```
+
 ### 编译命令 {#编译命令}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -168,6 +173,7 @@ wasm-pack build --target nodejs
 # Bundler 目标 {#bundler-目标}
 wasm-pack build --target bundler
 ```
+
 ---
 
 ## 🌐 在浏览器中使用 {#在浏览器中使用}
@@ -182,6 +188,7 @@ wasm-pack build --target bundler
   console.log(add(2, 3)) // 5
 </script>
 ```
+
 ---
 
 ## ⚡ 性能优化 {#性能优化}
@@ -200,6 +207,7 @@ codegen-units = 1
 panic = "abort"
 strip = true
 ```
+
 ### 使用 wasm-opt {#使用-wasm-opt}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -207,6 +215,7 @@ strip = true
 ```bash
 wasm-opt -Os pkg/my_project_bg.wasm -o pkg/my_project_optimized.wasm
 ```
+
 ---
 
 ## 🚫 反例速查 {#反例速查}
@@ -225,6 +234,7 @@ fn bad() {
     std::thread::sleep(Duration::from_secs(1));  // ❌ wasm 无线程
 }
 ```
+
 **原因**: wasm 单线程，`thread::sleep` 等会阻塞主线程。
 
 **修正**: 使用 `wasm-bindgen-futures`、`gloo-timers` 等异步定时。
@@ -242,6 +252,7 @@ for i in 0..10000 {
     js_sys::Reflect::get(&obj, &i.into());  // ❌ 每次跨 JS 边界
 }
 ```
+
 **原因**: Rust↔JS 调用有开销，频繁调用会显著影响性能。
 
 **修正**: 批量传递数据，减少跨边界调用次数。
@@ -336,6 +347,7 @@ impl ImageProcessor {
     }
 }
 ```
+
 ### 场景 2: 实时数据可视化 {#场景-2-实时数据可视化}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -400,6 +412,7 @@ impl ChartRenderer {
     }
 }
 ```
+
 ### 场景 3: Web Worker 计算密集型任务 {#场景-3-web-worker-计算密集型任务}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -436,6 +449,7 @@ pub fn process_task(task_json: &str) -> String {
     serde_json::to_string(&output).unwrap()
 }
 ```
+
 ---
 
 ## 📐 形式化方法链接 {#形式化方法链接}
@@ -518,6 +532,7 @@ pub fn get_config() -> Option<&'static Config> {
 let phi = f64::consts::GOLDEN_RATIO;
 let gamma = f64::consts::EULER_GAMMA;
 ```
+
 **性能提升**: array_windows +15-30%, LazyLock::get() -40% 延迟, ControlFlow +10-15% 提前终止效率。
 
 **最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)
@@ -548,6 +563,7 @@ pub fn apply_kernel(data: &[u8]) -> Vec<u8> {
         .collect()
 }
 ```
+
 ### LazyLock 在 WASM 状态管理中的应用 {#lazylock-在-wasm-状态管理中的应用}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -568,6 +584,7 @@ pub fn get_state() -> String {
         .unwrap_or_else(|| "{}".to_string())
 }
 ```
+
 ### 性能提升总结 {#性能提升总结}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**

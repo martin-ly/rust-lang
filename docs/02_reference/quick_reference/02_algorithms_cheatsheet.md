@@ -107,6 +107,7 @@ println!("Heap sorted: {:?}", data);
 sort_parallel(&mut data, SortingAlgo::Quick);
 println!("Parallel sorted: {:?}", data);
 ```
+
 ### 搜索算法 {#搜索算法-1}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -135,6 +136,7 @@ if let Some(index) = parallel_search(&data, &7) {
     println!("Parallel search found at index: {}", index);
 }
 ```
+
 ---
 
 ## 📋 常用算法 {#常用算法}
@@ -201,6 +203,7 @@ let (distances, predecessors) = dijkstra_sync(&weighted, &0);
 println!("Distances: {:?}", distances);
 println!("Predecessors: {:?}", predecessors);
 ```
+
 ### 动态规划 {#动态规划}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -223,6 +226,7 @@ let capacity = 10usize;
 let max_value = knapsack_01_sync(&weights, &values, capacity);
 println!("Max knapsack value: {}", max_value);
 ```
+
 ---
 
 ## 📊 数据结构 {#数据结构}
@@ -257,6 +261,7 @@ cache.put("b", 2);
 println!("{:?}", cache.get(&"a"));
 cache.put("c", 3); // 淘汰最早未使用的条目
 ```
+
 ### 线段树 {#线段树}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -275,6 +280,7 @@ println!("Sum[1..3] = {}", st.query_sum(1, 3));
 st.update_point(2, 10);
 println!("After update, Sum[1..3] = {}", st.query_sum(1, 3));
 ```
+
 ### 哈希表 {#哈希表}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -290,6 +296,7 @@ if let Some(value) = map.get("key1") {
     println!("Value: {}", value);
 }
 ```
+
 ### BTreeMap/BTreeSet 与 append（Rust 1.93） {#btreemapbtreeset-与-appendrust-193}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -339,6 +346,7 @@ let mut data = vec![64, 34, 25, 12, 22, 11, 90];
 quicksort(&mut data);
 assert_eq!(data, vec![11, 12, 22, 25, 34, 64, 90]);
 ```
+
 ### 示例 2: 二分搜索实现 {#示例-2-二分搜索实现}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -364,6 +372,7 @@ let arr = vec![1, 3, 5, 7, 9, 11, 13];
 assert_eq!(binary_search(&arr, &7), Some(3));
 assert_eq!(binary_search(&arr, &4), None);
 ```
+
 ### 示例 3: 动态规划 - 最长公共子序列 {#示例-3-动态规划---最长公共子序列}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -408,6 +417,7 @@ fn lcs(s1: &str, s2: &str) -> String {
 // 使用
 assert_eq!(lcs("ABCDGH", "AEDFHR"), "ADH");
 ```
+
 ### 示例 4: 图的 BFS 和 DFS {#示例-4-图的-bfs-和-dfs}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -477,6 +487,7 @@ g.add_edge(1, 2);
 println!("BFS: {:?}", g.bfs(0));
 println!("DFS: {:?}", g.dfs(0));
 ```
+
 ### 示例 5: 滑动窗口最大值 {#示例-5-滑动窗口最大值}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -522,6 +533,7 @@ fn max_sliding_window(nums: &[i32], k: usize) -> Vec<i32> {
 let nums = vec![1, 3, -1, -3, 5, 3, 6, 7];
 assert_eq!(max_sliding_window(&nums, 3), vec![3, 3, 5, 5, 6, 7]);
 ```
+
 ---
 
 ## 🎯 使用场景 {#使用场景}
@@ -585,6 +597,7 @@ impl LogAnalyzer {
     }
 }
 ```
+
 ---
 
 ## ⚡ 并行算法 {#并行算法}
@@ -604,6 +617,7 @@ let mut data = vec![64, 34, 25, 12, 22, 11, 90];
 data.par_sort();
 println!("Sorted: {:?}", data);
 ```
+
 ### 并行搜索 {#并行搜索}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -619,6 +633,7 @@ if let Some(&value) = found {
     println!("Found: {}", value);
 }
 ```
+
 ---
 
 ## 🔧 算法选择指南 {#算法选择指南}
@@ -661,6 +676,7 @@ let sum: i32 = data.iter()
     .map(|x| x * 2)
     .sum();
 ```
+
 ### 避免不必要的分配 {#避免不必要的分配}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -675,6 +691,7 @@ fn process_slice(slice: &[i32]) {
 let mut buffer = Vec::with_capacity(1024);
 // 复用 buffer
 ```
+
 ---
 
 ## 🐛 常见错误 {#常见错误}
@@ -694,6 +711,7 @@ if let Some(value) = data.get(index) {
     // 安全访问
 }
 ```
+
 ### 整数溢出 {#整数溢出}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -705,6 +723,7 @@ let result = a + b;  // 可能溢出
 // ✅ 正确
 let result = a.checked_add(b)?;
 ```
+
 ---
 
 ## 🚫 反例速查 {#反例速查}
@@ -721,6 +740,7 @@ let result = a.checked_add(b)?;
 let v = vec![3, 1, 2];
 let _ = v.binary_search(&2);  // ❌ 结果未定义：未排序
 ```
+
 **原因**: `binary_search` 要求切片已排序。
 
 **修正**:
@@ -730,6 +750,7 @@ let mut v = vec![3, 1, 2];
 v.sort();
 let _ = v.binary_search(&2);
 ```
+
 ---
 
 ### 反例 2: sort 与 sort_by 混用导致不稳定 {#反例-2-sort-与-sort_by-混用导致不稳定}
@@ -743,6 +764,7 @@ let _ = v.binary_search(&2);
 v.sort_by(|a, b| a.0.cmp(&b.0));
 v.sort_by(|a, b| a.1.cmp(&b.1));  // 可能破坏第一键顺序
 ```
+
 **原因**: 多次排序时需用 `sort_by_key` 组合键，或 `sort_by` 一次性比较。
 
 **修正**: 使用 `sort_by_key(|x| (x.0, x.1))` 或单次 `sort_by` 组合比较。
@@ -762,6 +784,7 @@ fn factorial(n: u64) -> u64 {
 
 factorial(100_000);  // thread 'main' has overflowed its stack
 ```
+
 **原因**: 递归调用会消耗栈空间，深度过大时溢出。
 
 **修正**: 使用迭代或尾递归优化：
@@ -775,6 +798,7 @@ fn factorial(n: u64) -> u64 {
     result
 }
 ```
+
 ---
 
 ### 反例 4: 整数溢出 {#反例-4-整数溢出}
@@ -788,6 +812,7 @@ let a: i32 = 2_000_000_000;
 let b: i32 = 2_000_000_000;
 let sum = a + b;  // ❌ 溢出：结果为 -294967296
 ```
+
 **原因**: Rust 中整数溢出在 release 模式下是未定义行为（debug 模式会 panic）。
 
 **修正**: 使用检查溢出方法：
@@ -796,6 +821,7 @@ let sum = a + b;  // ❌ 溢出：结果为 -294967296
 let sum = a.checked_add(b).expect("overflow");
 // 或使用 wrapping_add、saturating_add
 ```
+
 ---
 
 ### 反例 5: 不当使用递归导致重复计算 {#反例-5-不当使用递归导致重复计算}
@@ -811,6 +837,7 @@ fn fib(n: u32) -> u32 {
 
 fib(50);  // 极慢！
 ```
+
 **原因**: 朴素递归存在大量重复计算。
 
 **修正**: 使用记忆化或迭代：
@@ -825,6 +852,7 @@ fn fib(n: usize) -> usize {
     dp[n]
 }
 ```
+
 ---
 
 ## 📚 相关文档 {#相关文档}
@@ -976,6 +1004,7 @@ pub fn stream_anomaly_detection(data: &[f64]) -> Vec<usize> {
 /// | 异常检测 | 62ms | **41ms** | **+34%** |
 /// | KMP表构建 | 12ms | **9ms** | **+25%** |
 ```
+
 ---
 
 ### ControlFlow 在搜索算法中的应用 {#controlflow-在搜索算法中的应用}
@@ -1096,6 +1125,7 @@ pub fn find_rotate_min(nums: &[i32]) -> Option<i32> {
     Some(nums[left])
 }
 ```
+
 ---
 
 ### LazyLock 在算法预处理中的应用 {#lazylock-在算法预处理中的应用}
@@ -1159,6 +1189,7 @@ pub fn select_algorithm(n: usize) -> Algorithm {
     }
 }
 ```
+
 ---
 
 ### 数学常量在数值算法中的应用 {#数学常量在数值算法中的应用}
@@ -1226,6 +1257,7 @@ pub fn harmonic_number(n: u64) -> f64 {
     n_f64.ln() + f64::consts::EULER_GAMMA + 1.0 / (2.0 * n_f64)
 }
 ```
+
 ---
 
 ### 生产场景：实时数据处理管道 {#生产场景实时数据处理管道}
@@ -1290,6 +1322,7 @@ impl StreamProcessor {
 /// | P99 延迟 | 45ms | 18ms | **-60%** |
 /// | 内存分配 | 2.1MB/s | 0.3MB/s | **-86%** |
 ```
+
 ---
 
 ### 总结 {#总结}

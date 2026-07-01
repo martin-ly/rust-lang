@@ -149,6 +149,7 @@ impl ConfigFactory for DefaultFactory {
 
 // 工厂返回 Builder 链；所有权与 CE-T1 一致
 ```
+
 ### 示例 2：Repository + Service Layer + DTO（完整链条） {#示例-2repository-service-layer-dto完整链条}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -201,6 +202,7 @@ impl<R: OrderRepository> OrderService<R> {
 
 // 模块依赖：Service 依赖 Repository；所有权沿调用链传递；CE-T1/T2/T3
 ```
+
 ### 实例推导：CE-T1–T3 作用于模式组合（R1-01 最小交付） {#实例推导ce-t1t3-作用于模式组合r1-01-最小交付}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -286,6 +288,7 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 
              推论 CE-C1
 ```
+
 | 定理 | 依赖 | 来源 |
 | :--- | :--- | :--- |
 | CE-T1 | ownership T2、T3 | [ownership_model](../../../research_notes/formal_methods/10_ownership_model.md) |
@@ -387,6 +390,7 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 
     └── L4；架构模式（Repository、Gateway、DTO）+ 契约/集成测试/Miri/模糊测试（见 § L3/L4 验证手段）
 ```
+
 **衔接**：与 [02_workflow_safe_complete_models](../02_workflow_safe_complete_models/README.md)、
 
 [02_complete_43_catalog](../02_workflow_safe_complete_models/02_complete_43_catalog.md)、
@@ -419,6 +423,7 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 
 └── 不可表达 → 规避或重构；如全局可变、多继承
 ```
+
 | 表达力 | L1/L2 | L3/L4 |
 | :--- | :--- | :--- |
 | **等价** | cargo check 判定 CE-T1–T3 | cargo check + 集成测试 + 契约 |
@@ -528,6 +533,7 @@ flowchart TB
 
     L4 --> L2_L4模式
 ```
+
 ### ASCII 形式化树图（模块→crate→进程→网络） {#ascii-形式化树图模块crate进程网络}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -583,6 +589,7 @@ L4 跨进程/跨网络（分布式、微服务）
 
 架构模式→成熟度层级（与 02_complete_43_catalog 20 扩展模式对应）
 ```
+
 ---
 
 ## 定理速查 {#定理速查}
@@ -619,6 +626,7 @@ L4 跨进程/跨网络（分布式、微服务）
 ├── 需事务边界？ → Unit of Work + Repository
 └── 需跨边界？ → DTO + Gateway + Remote Facade
 ```
+
 ---
 
 ## 组合反例（层次推进） {#组合反例层次推进}

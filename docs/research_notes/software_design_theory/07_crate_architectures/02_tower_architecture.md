@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **Tower 中间件抽象与 Service/Layer trait 的架构设计**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [Tower 形式化生态](../../../../concept/06_ecosystem/05_formal_ecosystem_tower.md)
 > - [系统可组合性](../../../../concept/06_ecosystem/30_system_composability.md)
 > - [Web 框架生态](../../../../concept/06_ecosystem/27_web_frameworks.md)
@@ -65,6 +66,7 @@ pub trait Service<Request> {
 
 }
 ```
+
 > [来源: [Tower Service Trait](https://docs.rs/tower/latest/tower/trait.Service.html)]
 
 ### 2.1 为什么需要 `poll_ready`？ {#21-为什么需要-poll_ready}
@@ -113,6 +115,7 @@ where
 
 }
 ```
+
 > [来源: [Tokio 文档 - Backpressure](https://tokio.rs/tokio/tutorial)]
 
 ### 2.2 `Service` 的函子性质 {#22-service-的函子性质}
@@ -140,6 +143,7 @@ graph LR
 
     style K fill:#fff3e0
 ```
+
 > [来源: [Wikipedia - Kleisli Category](https://en.wikipedia.org/wiki/Kleisli_category)]
 
 ---
@@ -164,6 +168,7 @@ pub trait Layer<S> {
 
 }
 ```
+
 > [来源: [Tower Layer Trait](https://docs.rs/tower/latest/tower/trait.Layer.html)]
 
 ### 3.1 Layer 的幺半群结构 {#31-layer-的幺半群结构}
@@ -204,6 +209,7 @@ let s2 = ServiceBuilder::new()
 
     .service(core);
 ```
+
 > [来源: [抽象代数 - Monoid](https://en.wikipedia.org/wiki/Monoid)] · [Tower 源码](https://github.com/tower-rs/tower)]
 
 ### 3.2 `ServiceBuilder`：声明式层组合 {#32-servicebuilder声明式层组合}
@@ -237,6 +243,7 @@ graph LR
 
     style Tr fill:#e1f5fe
 ```
+
 ```rust,ignore
 use tower::{ServiceBuilder, ServiceExt};
 
@@ -261,6 +268,7 @@ let service = ServiceBuilder::new()
 
     .service(core_handler);
 ```
+
 > [来源: [Tower ServiceBuilder](https://docs.rs/tower/latest/tower/struct.ServiceBuilder.html)]
 
 ---
@@ -319,6 +327,7 @@ sequenceDiagram
 
     Timeout-->>Client: Future
 ```
+
 **背压阻断示例**：当 RateLimit 的令牌桶耗尽时：
 
 ```
@@ -338,6 +347,7 @@ Client -> Timeout.poll_ready()
 
  <- Client: Pending
 ```
+
 此时请求不会到达 `Core`，避免了"限流器失效后下游被压垮"的级联故障。这是**背压的完整性保证**。
 
 > [来源: [Tokio 文档 - Backpressure](https://tokio.rs/tokio/tutorial)]
@@ -369,6 +379,7 @@ impl Service<HttpRequest> for MyHandler {
 
 }
 ```
+
 与 Java 的 `Service<T, R>`（需显式传递两个类型参数）不同，Rust 的关联类型使得**输出类型由实现推导**，调用方无需重复声明。这减少了泛型参数爆炸，同时保持编译期类型安全。
 
 > [来源: [Rust Reference - Associated Types](https://doc.rust-lang.org/reference/items/associated-items.html)]
@@ -398,6 +409,7 @@ let stack = ServiceBuilder::new()
 
 // 无 Box、无 vtable、无运行时分发
 ```
+
 对比基于 `dyn Service` 的实现：
 
 | 特性 | Tower 泛型栈 | `dyn Service` 栈 |
@@ -436,6 +448,7 @@ pub struct Timeout<S, Request> {
 
 }
 ```
+
 > [来源: [Rust Reference - Pin](https://doc.rust-lang.org/std/pin/index.html)]
 
 ---
@@ -465,6 +478,7 @@ Tower 的抽象与函数式编程中的经典概念存在深刻对应：
 ```haskell
 newtype Kleisli m a b = Kleisli { runKleisli :: a -> m b }
 ```
+
 Tower 的 `Service` 是其 Rust 模拟：
 
 ```rust
@@ -474,6 +488,7 @@ Tower 的 `Service` 是其 Rust 模拟：
 
 // call:    Request -> Future<Result<Response, E>>
 ```
+
 `Future<Result<Response, E>>` 是 Rust 的异步 Monad（尽管 Rust 不正式使用 Monad 术语），而 `Service` 是这个 Monad 上的 Kleisli Arrow。
 
 > 来源: [Wikipedia - Kleisli Category](https://en.wikipedia.org/wiki/Kleisli_category)] · [Tower 设计文档]
@@ -689,6 +704,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 }
 ```
+
 > [来源: [Tower 示例代码](https://github.com/tower-rs/tower/tree/master/tower/examples)] · [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
@@ -721,6 +737,7 @@ graph BT
 
     style C fill:#fff3e0
 ```
+
 Tower 处于"抽象 sweet spot"——足够底层以支持任意请求-响应协议，又足够高层以提供有意义的组合原语。它不显式依赖 HTTP 或 gRPC 语义，却通过 `Service<Request>` 的泛型参数让上层框架注入自己的协议类型。
 
 > 来源: [Tower 设计文档]

@@ -141,6 +141,7 @@ sudo apt-get install coq
 
 brew install coq
 ```
+
 **基本使用**：
 
 ```coq
@@ -167,6 +168,7 @@ Definition move_rule (s: OwnershipState) : OwnershipState :=
 
   end.
 ```
+
 ### Isabelle/HOL {#isabellehol}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -186,6 +188,7 @@ Definition move_rule (s: OwnershipState) : OwnershipState :=
 
 # https://isabelle.in.tum.de/ {#httpsisabelleintumde}
 ```
+
 **基本使用**：
 
 ```isabelle
@@ -206,6 +209,7 @@ where "move_rule s = (case s of Owned ⇒ Moved | _ ⇒ s)"
 
 end
 ```
+
 ---
 
 ## 📚 验证准备工作 {#验证准备工作}
@@ -271,6 +275,7 @@ formal_verification/
 
 └── common.v                   # 公共定义
 ```
+
 ---
 
 ## 🔬 验证实施步骤 {#验证实施步骤}
@@ -334,6 +339,7 @@ Proof.
 
 Qed.
 ```
+
 **验证内容**：
 
 - [ ] 所有权唯一性
@@ -402,6 +408,7 @@ Proof.
 
 Qed.
 ```
+
 **验证内容**：
 
 - [ ] 借用规则正确性
@@ -448,6 +455,7 @@ Proof.
 
 Qed.
 ```
+
 **验证内容**：
 
 - [ ] 引用有效性
@@ -502,6 +510,7 @@ Proof.
 
 Admitted.
 ```
+
 **验证内容**：
 
 - [ ] 类型推导正确性
@@ -548,6 +557,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 (* 定理 6.1 状态一致性、6.2 并发安全、6.3 进度保证 *)
 ```
+
 **验证内容**：
 
 - [ ] 状态一致性（定理 6.1）
@@ -570,6 +580,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 (* 定理 1 Pin 保证、定理 2 自引用类型安全、定理 3 Pin 投影安全 *)
 ```
+
 **验证内容**：
 
 - [ ] Pin 保证（定理 1）

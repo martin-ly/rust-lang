@@ -31,6 +31,7 @@ assert_eq!(n.lowest_one(), 2);
 // 表示 self 所需的最少位数（返回同类型 NonZero）
 assert_eq!(n.bit_width(), NonZeroU32::new(5).unwrap());
 ```
+
 ### `char::is_control()` const 稳定化 {#charis_control-const-稳定化}
 
 ```rust
@@ -40,6 +41,7 @@ const NUL_CTRL: bool = '\0'.is_control();  // true
 assert!(!SPACE_CTRL);
 assert!(NUL_CTRL);
 ```
+
 ### `NonZeroU32::midpoint` / `isqrt` {#nonzerou32midpoint-isqrt}
 
 ```rust
@@ -52,6 +54,7 @@ assert_eq!(a.midpoint(b).get(), 15);
 let n = NonZeroU32::new(25).unwrap();
 assert_eq!(n.isqrt().get(), 5);
 ```
+
 ### `ptr::fn_addr_eq` {#ptrfn_addr_eq}
 
 ```rust
@@ -60,6 +63,7 @@ let f: fn() = sample;
 
 assert!(std::ptr::fn_addr_eq(f, f));
 ```
+
 ### `const mem::size_of_val` / `const mem::align_of_val` {#const-memsize_of_val-const-memalign_of_val}
 
 ```rust
@@ -70,6 +74,7 @@ const fn size_and_align<T>(val: &T) -> (usize, usize) {
 let x = 42u64;
 assert_eq!(size_and_align(&x), (8, 8));
 ```
+
 ### `BuildHasherDefault::new` const {#buildhasherdefaultnew-const}
 
 ```rust
@@ -83,6 +88,7 @@ let mut hasher = bh.build_hasher();
 hasher.write_u32(123);
 let _ = hasher.finish();
 ```
+
 ---
 
 ## Beta Cutoff 风险 / 可能推迟至 1.98 的 API {#beta-cutoff-风险-可能推迟至-198-的-api}

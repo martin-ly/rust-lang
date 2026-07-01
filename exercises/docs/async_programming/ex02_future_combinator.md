@@ -27,12 +27,14 @@
 cd exercises
 cargo test async_programming::ex02_future_combinator
 ```
+
 或运行整个主题的测试：
 
 ```bash
 cd exercises
 cargo test async_programming::
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

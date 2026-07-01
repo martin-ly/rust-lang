@@ -180,6 +180,7 @@ mindmap
 
         sled
 ```
+
 ---
 
 ## 核心概念详解 {#核心概念详解}
@@ -249,6 +250,7 @@ fsm! {
 
 }
 ```
+
 ### 3. Saga 模式实现 {#3-saga-模式实现}
 
 >
@@ -321,6 +323,7 @@ impl SagaOrchestrator {
 
 }
 ```
+
 ---
 
 ## Rust 工作流工具链 {#rust-工作流工具链}
@@ -377,6 +380,7 @@ impl WorkflowEngine {
 
 }
 ```
+
 ---
 
 ## 工作流模式实现 {#工作流模式实现}
@@ -414,6 +418,7 @@ async fn parallel_branch(activities: Vec<Activity>) -> Vec<Result<Output, Error>
 
 }
 ```
+
 ### 2. 定时器与延迟 {#2-定时器与延迟}
 
 >
@@ -442,6 +447,7 @@ impl TimerActivity {
 
 }
 ```
+
 ### 3. 事件驱动工作流 {#3-事件驱动工作流}
 
 >
@@ -483,6 +489,7 @@ impl EventDrivenWorkflow {
 
 }
 ```
+
 ---
 
 ## 相关文档 {#相关文档-1}

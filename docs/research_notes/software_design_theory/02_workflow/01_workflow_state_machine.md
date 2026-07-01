@@ -78,6 +78,7 @@
 ```text
 M := (S, E, T ⊆ S × E × S, s₀ ∈ S, F ⊆ S)
 ```
+
 其中：
 
 - `S`：有限非空状态集合。
@@ -95,6 +96,7 @@ M := (S, E, T ⊆ S × E × S, s₀ ∈ S, F ⊆ S)
 ```text
 ∀ instance, ∀ t, ∃! s ∈ S : state(instance, t) = s
 ```
+
 ### Theorem WF1: 状态可达性 {#theorem-wf1-状态可达性}
 
 > **来源**: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)
@@ -164,6 +166,7 @@ fn main() {
     assert!(matches!(err, Err(TransitionError::InvalidTransition { .. })));
 }
 ```
+
 > **来源**: [Rust Standard Library](https://doc.rust-lang.org/std/)
 
 ### 4.2 Typestate 模式 {#42-typestate-模式}
@@ -216,6 +219,7 @@ fn main() {
     // let bad = Order::new(43).ship();
 }
 ```
+
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ### 4.3 持久化工作流 {#43-持久化工作流}
@@ -301,6 +305,7 @@ fn main() {
     assert_eq!(wf.current().unwrap(), OrderState::Shipped);
 }
 ```
+
 > **来源**: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)
 
 ---
@@ -315,6 +320,7 @@ fn main() {
 let state = OrderState::Shipped;
 state.transition(OrderEvent::Pay).unwrap(); // Err: invalid transition
 ```
+
 **违反**：Axiom WF1 与 Theorem WF1 要求迁移必须属于 `T`。
 
 **修复**：在应用事件前检查当前状态与事件的组合是否合法；Typestate 模式可进一步在编译期禁止。
@@ -343,6 +349,7 @@ t1.join().unwrap();
 t2.join().unwrap();
 // 实际结果依赖线程调度顺序，可能出现非预期状态
 ```
+
 **违反**：Axiom WF1 的状态唯一性在逻辑层面被打破。
 
 **修复**：

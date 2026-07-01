@@ -106,6 +106,7 @@ await Ready(v)    →  v
 
 await Pending     →  suspend（挂起，稍后继续）
 ```
+
 ---
 
 ## Rust 实现与代码示例 {#rust-实现与代码示例}
@@ -143,6 +144,7 @@ async fn main_async() {
 
 // async fn main() { main_async().await; }
 ```
+
 **自引用 Future 与 Pin**：
 
 ```rust,ignore
@@ -184,6 +186,7 @@ impl SelfReferential {
 
 }
 ```
+
 **形式化对应**：`async fn` 返回 `impl Future`；`await` 为 poll 循环的语法糖；Pin 保证 `pointer` 指向的地址不变。
 
 ---
@@ -251,6 +254,7 @@ Future 执行流程（简化）：
 
     → Ready(v)
 ```
+
 ### 多任务组合 {#多任务组合}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
@@ -278,6 +282,7 @@ use futures::stream::Stream;
 
 // `next().await` 每次异步拉取一个元素
 ```
+
 | 场景 | 选型 | 说明 |
 | :--- | :--- | :--- |
 | 异步序列 | `futures::stream::Stream` / `tokio_stream::Stream` | 事件流、消息流 |
@@ -324,6 +329,7 @@ async fn parent() -> Result<(), Error> {
 
 }
 ```
+
 | 机制 | 作用 |
 | :--- | :--- |
 | `tokio::join!` | 并发执行，等待全部完成 |
@@ -356,6 +362,7 @@ let handle = tokio::spawn(async { ... });
 
 handle.abort();  // 显式取消
 ```
+
 **定理 AS-T3**：`Future` 的 `drop` 保证资源释放；`select!` 的未选中分支被 drop，自动取消。
 
 ---

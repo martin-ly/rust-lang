@@ -100,6 +100,7 @@ research_notes/
 ├── 实验研究 (5个)
 └── 综合研究 (2个)
 ```
+
 ---
 
 ## 📚 文档统计 {#文档统计}
@@ -454,6 +455,7 @@ fn main() {
     }
 }
 ```
+
 ### 示例 2: 研究进度跟踪代码 {#示例-2-研究进度跟踪代码}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -504,6 +506,7 @@ fn main() {
     println!("{}", tracker.generate_report());
 }
 ```
+
 ---
 
 ## 🔗 形式化链接 {#形式化链接}

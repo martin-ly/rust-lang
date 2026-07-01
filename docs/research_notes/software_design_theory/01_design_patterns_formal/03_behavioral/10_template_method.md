@@ -167,6 +167,7 @@ trait 默认方法：`fn template(&self) { self.hook1(); self.hook2(); }`；由 
 
    }
    ```
+
 2. **默认方法**：`template` 有默认实现
 3. **必需方法**：`step1`、`step2` 需实现
 4. **类型安全**：编译期检查实现完整性
@@ -278,6 +279,7 @@ let a = ImplA;
 
 assert_eq!(a.template(), "A1A2");
 ```
+
 ---
 
 ## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
@@ -332,6 +334,7 @@ fn main() {
 
 }
 ```
+
 ### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
@@ -404,6 +407,7 @@ Axiom TM2 (钩子可选)
 
 推论 TM-C1 (近似表达)
 ```
+
 ---
 
 ## 形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}
@@ -442,6 +446,7 @@ Axiom TM2 (钩子可选)
 
 { Q  }  // 后置条件
 ```
+
 > 以上规约以霍尔三元组风格表述；Rust 编译器通过所有权、借用与类型检查在编译期强制大部分不变式与前置条件。
 
 ---
@@ -515,6 +520,7 @@ impl DataImport for CsvImport {
 
 }
 ```
+
 ---
 
 ## 相关模式 {#相关模式}
@@ -559,6 +565,7 @@ impl DataMiner for BadMiner {
 
 }
 ```
+
 Rust 中允许，但违背模板方法意图。
 
 ### 反例 2：Hook 签名不匹配 {#反例-2hook-签名不匹配}
@@ -572,6 +579,7 @@ impl DataMiner for PdfMiner {
 
 }
 ```
+
 **编译器错误**：`method open has an incompatible type for trait`。
 
 ### 反例 3：模板中保留中间借用 {#反例-3模板中保留中间借用}
@@ -593,6 +601,7 @@ trait DataMiner {
 
 }
 ```
+
 **编译器错误**：无法同时不可变和可变借用 self。
 
 ---
@@ -613,6 +622,7 @@ trait DataMiner {
 
 └── 需状态转换？ → State
 ```
+
 ---
 
 ## 与 GoF 对比 {#与-gof-对比}
@@ -699,6 +709,7 @@ mindmap
 
       数据处理
 ```
+
 ---
 
 ## 与其他模式的关系图 {#与其他模式的关系图}
@@ -723,6 +734,7 @@ graph LR
 
     style O fill:#9C27B0,stroke:#6A1B9A,color:#fff
 ```
+
 ---
 
 ## 实质内容五维自检 {#实质内容五维自检}

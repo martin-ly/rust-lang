@@ -113,6 +113,7 @@ impl<T> Deref for Shared<T> {
     }
 }
 ```
+
 ### 1.2 零成本抽象的所有权转移 {#12-零成本抽象的所有权转移}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -130,6 +131,7 @@ pub fn borrow_value<T>(value: &T) -> &T {
     value
 }
 ```
+
 ---
 
 ## 2. 高级类型系统技巧 {#2-高级类型系统技巧}
@@ -159,6 +161,7 @@ trait Iterable {
     fn iter<'a>(&'a self) -> Self::Iterator<'a>;
 }
 ```
+
 ### 2.2 类型级编程 {#22-类型级编程}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -185,6 +188,7 @@ impl<T, const N: usize> Array<T, N> {
     }
 }
 ```
+
 ---
 
 ## 3. 高级并发模式 {#3-高级并发模式}
@@ -221,6 +225,7 @@ impl LockFreeCounter {
     }
 }
 ```
+
 ### 3.2 工作窃取算法 {#32-工作窃取算法}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -252,6 +257,7 @@ impl<T> WorkStealingQueue<T> {
     }
 }
 ```
+
 ---
 
 ## 4. 高级异步编程 {#4-高级异步编程}
@@ -298,6 +304,7 @@ impl Future for Delay {
     }
 }
 ```
+
 ### 4.2 异步流处理 {#42-异步流处理}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -319,6 +326,7 @@ where
     results
 }
 ```
+
 ---
 
 ## 5. 高级宏编程 {#5-高级宏编程}
@@ -341,6 +349,7 @@ macro_rules! count {
 /// 使用示例
 const COUNT: usize = count!(a b c d e); // 5
 ```
+
 ### 5.2 过程宏基础 {#52-过程宏基础}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -355,6 +364,7 @@ struct MyStruct {
     field: i32,
 }
 ```
+
 ---
 
 ## 6. 性能优化深度指南 {#6-性能优化深度指南}
@@ -382,6 +392,7 @@ struct PackedStruct {
     c: u8,
 }
 ```
+
 ### 6.2 零成本抽象 {#62-零成本抽象}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -401,6 +412,7 @@ pub fn fast_add(a: i32, b: i32) -> i32 {
     a + b
 }
 ```
+
 ---
 
 ## 7. 内存安全深度分析 {#7-内存安全深度分析}
@@ -429,6 +441,7 @@ fn subtype_example<'a: 'b, 'b>(x: &'a str, y: &'b str) -> &'b str {
     }
 }
 ```
+
 ### 7.2 借用检查器深入理解 {#72-借用检查器深入理解}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -450,6 +463,7 @@ fn borrow_checker_example() {
     vec.push(4);
 }
 ```
+
 ---
 
 ## 8. 错误处理最佳实践 {#8-错误处理最佳实践}
@@ -483,6 +497,7 @@ impl fmt::Display for MyError {
 
 impl std::error::Error for MyError {}
 ```
+
 ### 8.2 错误传播模式 {#82-错误传播模式}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -504,6 +519,7 @@ fn process_file(path: &str) -> Result<Vec<i32>, MyError> {
     Ok(vec![])
 }
 ```
+
 ---
 
 ## 📚 相关资源 {#相关资源}
@@ -552,6 +568,7 @@ pub fn multi_window_analysis(prices: &[f64]) -> MultiWindowMetrics {
     MultiWindowMetrics { sma5, sma10, sma20 }
 }
 ```
+
 #### 2. 窗口内的复杂模式匹配 {#2-窗口内的复杂模式匹配}
 
 ```rust,ignore
@@ -576,6 +593,7 @@ pub fn detect_complex_pattern(data: &[u8]) -> Vec<PatternMatch> {
         .collect()
 }
 ```
+
 ### ControlFlow 的高级用法 {#controlflow-的高级用法}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -603,6 +621,7 @@ fn nested_processing(data: &[Vec<i32>]) -> ControlFlow<Error, Vec<Result>> {
     ControlFlow::Continue(results)
 }
 ```
+
 #### 2. 与泛型结合 {#2-与泛型结合}
 
 ```rust,ignore
@@ -619,6 +638,7 @@ where
     ControlFlow::Continue(())
 }
 ```
+
 ### LazyLock 的高级模式 {#lazylock-的高级模式}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -652,6 +672,7 @@ pub fn get_merged_config() -> MergedConfig {
     MergedConfig::merge(base, env, runtime)
 }
 ```
+
 #### 2. 条件初始化 {#2-条件初始化}
 
 ```rust,ignore
@@ -672,6 +693,7 @@ where
     LazyLock::get(&SPECIAL_FEATURE).map(f)
 }
 ```
+
 ### 数学常量的高级应用 {#数学常量的高级应用}
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -698,6 +720,7 @@ pub fn log_complexity_analysis(n: usize, base: f64) -> Complexity {
     Complexity::Logarithmic(log_val as usize)
 }
 ```
+
 **性能提示**: 在高级应用中，结合 `array_windows` 的编译期优化和 `LazyLock` 的运行时优化，可实现极致性能。
 
 **最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)

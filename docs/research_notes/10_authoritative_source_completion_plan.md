@@ -98,6 +98,7 @@ python scripts/maintenance/suggest_authoritative_sources.py
 # 将报告写入指定 Markdown 文件 {#将报告写入指定-markdown-文件}
 python scripts/maintenance/suggest_authoritative_sources.py --output=suggestions.md
 ```
+
 ### 输出示例 {#输出示例}
 
 ```markdown
@@ -115,6 +116,7 @@ python scripts/maintenance/suggest_authoritative_sources.py --output=suggestions
 |------|----------|--------------|
 | `docs/research_notes/formal_modules/10_module_system_specification.md` | P1 | [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) |
 ```
+
 ---
 
 ## 五、下一阶段补全优先级 {#五下一阶段补全优先级}

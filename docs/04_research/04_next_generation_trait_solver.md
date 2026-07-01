@@ -72,6 +72,7 @@ flowchart LR
 
     style C fill:#ffcccc
 ```
+
 在 `rustc` 内部，类型检查器通过 `ObligationForest`（义务森林）结构将待求解的约束传递给 `trait solver`。每个 `Obligation`（义务）代表一个需要证明的类型命题，例如 `T: Display` 或 `Vec<T>: IntoIterator`。
 
 ### 1.2 基于 SLG 的求解策略 {#12-基于-slg-的求解策略}
@@ -99,6 +100,7 @@ flowchart TD
     H -->|是| I[返回 Yes]
     H -->|否| J[返回 No / Ambiguity]
 ```
+
 ---
 
 ## 2. 新一代 Solver 的核心动机 {#2-新一代-solver-的核心动机}
@@ -172,6 +174,7 @@ flowchart TD
     E --> F[归档 2021]
     F --> G[经验吸收至 next-gen solver]
 ```
+
 ### 3.2 Chalk 的经验与教训 {#32-chalk-的经验与教训}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -231,6 +234,7 @@ flowchart LR
     F -->|是| G[接受 impl]
     F -->|否| H[编译错误]
 ```
+
 统一框架的优势：
 
 1. **Specialization 稳定化基础**：可回溯求解能精确判断 `impl` 之间的覆盖关系
@@ -256,6 +260,7 @@ rustc +nightly -Znext-solver
 # 当前 nightly（已默认启用，可切换回旧版） {#当前-nightly已默认启用可切换回旧版}
 rustc +nightly -Ztrait-solver=classic
 ```
+
 ### 5.2 稳定化路线图 {#52-稳定化路线图}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -273,6 +278,7 @@ gantt
     RFC 提交         :milestone, 2025-07, 0M
     稳定版预计 landed  :milestone, 2026-06, 0M
 ```
+
 ### 5.3 已知问题 {#53-已知问题}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -331,6 +337,7 @@ flowchart TD
     E --> I[更快的增量编译]
     E --> J[Specialization 支撑]
 ```
+
 具体关联：
 
 - **Specialization 稳定化**（`RFC 1210`）：直接依赖新 solver 的重叠 `impl` 检查能力

@@ -72,6 +72,7 @@ CircuitBreaker := (S, T, f_threshold, t_timeout)
 
     t_timeout ∈ Time               -- 超时时间
 ```
+
 ### Def CB2: 状态转换 {#def-cb2-状态转换}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -89,6 +90,7 @@ State_Transition :=
 
   | HalfOpen --(failure)--> Open
 ```
+
 ### Def CB3: 故障计数器 {#def-cb3-故障计数器}
 
 >
@@ -97,6 +99,7 @@ State_Transition :=
 ```
 FailureCount(t) := |{r ∈ T | time(r) ∈ [t - window, t] ∧ result(r) = failure}|
 ```
+
 滑动窗口内的故障请求计数。
 
 ---
@@ -114,6 +117,7 @@ FailureCount(t) := |{r ∈ T | time(r) ∈ [t - window, t] ∧ result(r) = failu
 ```
 ∀t. State(t) = Closed ⊕ Open ⊕ HalfOpen
 ```
+
 任一时刻只处于一个状态。
 
 ### Axiom CB2: 故障阈值正性 {#axiom-cb2-故障阈值正性}
@@ -124,6 +128,7 @@ FailureCount(t) := |{r ∈ T | time(r) ∈ [t - window, t] ∧ result(r) = failu
 ```
 f_threshold > 0
 ```
+
 阈值必须为正整数。
 
 ### Axiom CB3: 超时单调性 {#axiom-cb3-超时单调性}
@@ -134,6 +139,7 @@ f_threshold > 0
 ```
 t₁ < t₂ → CanRetry(t₁) → CanRetry(t₂)
 ```
+
 一旦可以重试，之后一直可以重试（直到状态改变）。
 
 ---
@@ -151,6 +157,7 @@ t₁ < t₂ → CanRetry(t₁) → CanRetry(t₂)
 ```
 State = Open → ∀req. Reject(req)
 ```
+
 **证明概要**:
 
 1. 当状态为 Open 时，熔断器打开
@@ -167,6 +174,7 @@ State = Open ∧ (now - last_failure) > t_timeout
 
 → ◇(State = HalfOpen)
 ```
+
 **证明概要**:
 
 1. 超时时间到达后，状态自动转为 HalfOpen
@@ -320,6 +328,7 @@ impl CircuitBreaker {
 
 }
 ```
+
 ---
 
 ## 5. 配置建议 {#5-配置建议}

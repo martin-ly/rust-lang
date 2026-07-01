@@ -71,6 +71,7 @@ Timeout := (Op, t_max, handler)
 
     handler: Error → Action  -- 超时处理器
 ```
+
 ### Def TO2: 操作结果 {#def-to2-操作结果}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
@@ -86,6 +87,7 @@ OperationResult<T> :=
 
   | Error(E)        -- 其他错误
 ```
+
 ### Def TO3: 超时类型 {#def-to3-超时类型}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -101,6 +103,7 @@ TimeoutType :=
 
   | TotalTimeout        -- 总时间限制
 ```
+
 ---
 
 ## 2. 基本假设 (Axiom) {#2-基本假设-axiom}
@@ -115,6 +118,7 @@ TimeoutType :=
 ```text
 t_execution > t_max → result = Timeout
 ```
+
 执行时间超过限制必然触发超时。
 
 ### Axiom TO2: 时钟单调性 {#axiom-to2-时钟单调性}
@@ -124,6 +128,7 @@ t_execution > t_max → result = Timeout
 ```text
 t₁ < t₂ → elapsed(t₁) < elapsed(t₂)
 ```
+
 时间测量是单调递增的。
 
 ### Axiom TO3: 资源释放 {#axiom-to3-资源释放}
@@ -133,6 +138,7 @@ t₁ < t₂ → elapsed(t₁) < elapsed(t₂)
 ```text
 Timeout → resources_released
 ```
+
 超时后必须释放相关资源。
 
 ---
@@ -149,6 +155,7 @@ Timeout → resources_released
 ```text
 ∀Op. resource_usage(Op) ≤ f(t_max)
 ```
+
 **证明概要**:
 
 1. 操作在 t_max 后强制终止
@@ -162,6 +169,7 @@ Timeout → resources_released
 ```text
 Timeout → system_continues
 ```
+
 **证明概要**:
 
 1. 超时阻止无限等待
@@ -326,6 +334,7 @@ impl TimeoutHttpClient {
 
 }
 ```
+
 ---
 
 ## 5. 超时配置建议 {#5-超时配置建议}

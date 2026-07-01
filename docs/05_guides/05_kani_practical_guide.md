@@ -21,6 +21,7 @@ Kani 是 Amazon Web Services (AWS) 开发的 Rust 专用**有界模型检查器 
 ```text
 Rust 源码 → MIR (Mid-level IR) → Goto-C → CBMC (C Bounded Model Checker)
 ```
+
 | 层级 | 组件 | 职责 |
 | :--- | :--- | :--- |
 | 前端 | `rustc` | 将 Rust 代码编译为 MIR |
@@ -45,6 +46,7 @@ flowchart LR
     D --> E[交互式证明<br/>Coq / Isabelle]
     style C fill:#f9f,stroke:#333
 ```
+
 Kani 占据**符号执行层**：比属性测试更强（穷尽而非采样），比演绎验证更易用（无需写复杂不变量），但受限于状态空间爆炸。
 
 ---
@@ -78,6 +80,7 @@ cargo kani --setup
 cargo kani --version
 # 预期输出: kani 0.55.0 {#预期输出-kani-0550}
 ```
+
 > [来源: [Kani Installation Guide](https://model-checking.github.io/kani/install-guide.html)]
 
 ### 2.3 Cargo.toml 配置 {#23-cargotoml-配置}
@@ -91,6 +94,7 @@ cargo kani --version
 [dev-dependencies]
 # 如需在测试代码中使用 kani 宏（非验证时编译），可条件编译 {#如需在测试代码中使用-kani-宏非验证时编译可条件编译}
 ```
+
 Kani 的验证代码通常放在单独文件中，通过 `#[cfg(kani)]` 或 `#[kani::proof]` 属性标记，不影响正常编译。
 
 ---
@@ -128,11 +132,13 @@ mod verification {
     }
 }
 ```
+
 运行验证：
 
 ```bash
 cargo kani --function check_abs_non_negative
 ```
+
 Kani 会为 `x` 生成符号值，探索 `x < 0` 和 `x >= 0` 两条路径，并验证 `result >= 0` 在所有路径上成立。
 
 > ⚠️ **注意**：`abs(i32::MIN)` 在 Rust 中会发生溢出（`-i32::MIN == i32::MIN`），上述证明会**失败**。这展示了 Kani 的价值——它能发现边界情况。
@@ -164,6 +170,7 @@ mod verification {
     }
 }
 ```
+
 > [来源: [Kani Tutorial — Proof Harnesses](https://model-checking.github.io/kani/tutorial-proofs.html)]
 > [来源: [Rust Reference — Integer Overflow](https://doc.rust-lang.org/reference/expressions/operator-expr.html#overflow)]
 
@@ -187,6 +194,7 @@ fn check_any_where() {
     kani::assert(x + y >= 20 && x + y <= 40, "和在范围内");
 }
 ```
+
 ### 3.3 `kani::assume()` — 前置条件约束 {#33-kaniassume-前置条件约束}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -213,6 +221,7 @@ fn check_isqrt() {
     kani::assert((r + 1) * (r + 1) > x || r == u32::MAX, "(r+1)² > x");
 }
 ```
+
 > [来源: [Kani Documentation — Nondeterministic Variables](https://model-checking.github.io/kani/tutorial-nondeterministic-variables.html)]
 
 ### 3.4 `kani::assert()` — 验证目标 {#34-kaniassert-验证目标}
@@ -237,6 +246,7 @@ fn check_division() {
     // 验证：除零 panic 不会发生（由 assume 保证，Kani 会确认）
 }
 ```
+
 Kani 与普通 `assert!()` 的区别：
 
 | 特性 | `assert!()` | `kani::assert()` |
@@ -283,6 +293,7 @@ mod verification {
     }
 }
 ```
+
 > [来源: [Kani Documentation — Loop Unwinding](https://model-checking.github.io/kani/tutorial-loop-unwinding.html)]
 
 ### 4.2 手动循环不变量 {#42-手动循环不变量}
@@ -324,6 +335,7 @@ fn check_find_correctness() {
     }
 }
 ```
+
 ### 4.3 递归深度限制 {#43-递归深度限制}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -350,6 +362,7 @@ fn check_factorial() {
     kani::assert(result >= 1, "阶乘结果 ≥ 1");
 }
 ```
+
 ---
 
 ## 5. Unsafe 代码验证 {#5-unsafe-代码验证}
@@ -398,6 +411,7 @@ mod verification {
     }
 }
 ```
+
 > [来源: [The Rustonomicon — Transmutes](https://doc.rust-lang.org/nomicon/transmutes.html)]
 > [来源: [Rust Reference — Raw Pointers](https://doc.rust-lang.org/reference/types/pointer.html)]
 
@@ -426,6 +440,7 @@ fn check_alloc_non_null() {
     kani::assert(!ptr.is_null() || n == 0, "分配成功或大小为 0");
 }
 ```
+
 ---
 
 ## 6. 完整案例 {#6-完整案例}
@@ -514,6 +529,7 @@ mod vec_verification {
     }
 }
 ```
+
 > [来源: [Rust Reference — Vec Implementation](https://doc.rust-lang.org/std/vec/struct.Vec.html)]
 > [来源: [Kani Firecracker Verification Examples](https://github.com/model-checking/kani/tree/main/tests)]
 
@@ -576,6 +592,7 @@ mod bsearch_verification {
     }
 }
 ```
+
 > [来源: [Rust Standard Library — slice::binary_search](https://doc.rust-lang.org/std/primitive.slice.html#method.binary_search)]
 > [来源: [Java Bug Report — Binary Search Overflow](https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html)]
 
@@ -670,6 +687,7 @@ mod ringbuf_verification {
     }
 }
 ```
+
 ---
 
 ## 7. Kani Proof vs Unit Test：当测试通过而 Kani 发现 Bug {#7-kani-proof-vs-unit-test当测试通过而-kani-发现-bug}
@@ -714,6 +732,7 @@ fn check_average_no_overflow() {
     // Kani 报告：a = 0xFFFFFFFF, b = 1 时 a + b 溢出！
 }
 ```
+
 修复：
 
 ```rust
@@ -721,6 +740,7 @@ pub fn average_fixed(a: u32, b: u32) -> u32 {
     a / 2 + b / 2 + (a % 2 + b % 2) / 2
 }
 ```
+
 > [来源: [Kani Documentation — Comparison with Testing](https://model-checking.github.io/kani/tutorial-comparison.html)]
 
 ### 7.3 协作工作流 {#73-协作工作流}
@@ -736,6 +756,7 @@ flowchart LR
     C --> E[MIRI 检查 UB]
     E --> F[unsafe 代码审计]
 ```
+
 ---
 
 ## 8. 限制与最佳实践 {#8-限制与最佳实践}
@@ -785,6 +806,7 @@ jobs:
       - name: Run proofs
         run: cargo kani
 ```
+
 ---
 
 ## 9. 相关文件 {#9-相关文件}
@@ -827,6 +849,7 @@ jobs:
 // │ #[cfg(kani)]             — 条件编译（仅验证时）            │
 // └────────────────────────────────────────────────────────────┘
 ```
+
 > **总结**: Kani 是 Rust 生态中最易上手的形式化验证工具。通过在 MIR 层进行有界模型检查，它能在不修改源码结构的前提下，穷尽验证中小规模代码的所有执行路径。它与单元测试形成互补：测试覆盖"常见情况"，Kani 消灭"边界恶魔"。
 
 ---

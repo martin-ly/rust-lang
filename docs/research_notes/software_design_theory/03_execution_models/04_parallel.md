@@ -124,6 +124,7 @@ let sum: i32 = v.par_iter()
 
 assert_eq!(sum, 999 * 1000);
 ```
+
 ### std::thread 任务并行 {#stdthread-任务并行}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -144,6 +145,7 @@ let b = h2.join().unwrap();
 
 assert_eq!(a + b, 15);
 ```
+
 **形式化对应**：`par_iter` 将迭代器划分为子范围，各线程处理；`map` 为纯函数，无共享可变；`join` 等待子线程完成，获取返回值。
 
 ---
@@ -235,6 +237,7 @@ loop {
 
 }
 ```
+
 **内存顺序**：`SeqCst`（最强）> `Acquire`/`Release` > `Relaxed`。跨线程同步需 `Acquire`-`Release` 配对。
 
 ---
@@ -266,6 +269,7 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 
 }
 ```
+
 **形式化对应**：`rayon::join` 为 fork-join；`split_at_mut` 保证 disjoint 借用；`Send` 允许跨线程传递。
 
 ---

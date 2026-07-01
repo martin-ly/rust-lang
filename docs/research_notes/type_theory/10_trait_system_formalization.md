@@ -723,6 +723,7 @@ Trait 系统安全性证明树
 
       （impl Trait 与 dyn Trait 可替换边界）
 ```
+
 ---
 
 ### 证明工作完成总结 {#证明工作完成总结}
@@ -856,6 +857,7 @@ fn main() {
 
 }
 ```
+
 **形式化描述**:
 
 - $\text{Display} = \{\text{display} : \&self \to \text{String}\}$
@@ -931,6 +933,7 @@ fn main() {
 
 }
 ```
+
 **形式化描述**:
 
 - $\text{Draw} = \{\text{draw} : \&self \to ()\}$
@@ -976,6 +979,7 @@ impl<T: PartialEq> Container<T> for VecContainer<T> {
 
 }
 ```
+
 **泛型 Trait 分析**：
 
 - `Container<T>` 是泛型 Trait，类型参数为 `T`
@@ -1019,6 +1023,7 @@ impl Iterator for Counter {
 
 }
 ```
+
 **关联类型分析**：
 
 - 关联类型由实现者指定
@@ -1100,6 +1105,7 @@ fn use_trait_objects() {
 
 }
 ```
+
 **Trait 对象分析**：
 
 - `dyn Draw` 是 Trait 对象类型
@@ -1141,6 +1147,7 @@ fn main() {
 
 }
 ```
+
 **形式化描述**:
 
 - $\text{Add}[\alpha, \beta] = \{\text{add} : \alpha \times \beta \to \text{Output}\}$
@@ -1239,6 +1246,7 @@ fn main() {
 
 }
 ```
+
 **Trait 约束分析**：
 
 - `T: Clone` 约束类型 T 必须实现 Clone Trait
@@ -1305,6 +1313,7 @@ fn main() {
 
 }
 ```
+
 ### 示例 8: 高级 Trait 特性 - 默认实现和关联函数 {#示例-8-高级-trait-特性---默认实现和关联函数}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -1390,6 +1399,7 @@ fn main() {
 
 }
 ```
+
 ### 示例 9: Trait 对象集合 {#示例-9-trait-对象集合}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -1477,6 +1487,7 @@ fn main() {
 
 }
 ```
+
 **Trait 对象集合分析**：
 
 - 使用 `Vec<Box<dyn Trait>>` 存储不同类型的 Trait 对象
@@ -1662,6 +1673,7 @@ let mut objects: Vec<MaybeUninit<dyn Trait>> = Vec::new();
 
 objects.assume_init_drop(); // Rust 1.93.0 新方法
 ```
+
 **形式化表示**：
 
 $$\text{TraitObjectInit}[\tau] \equiv \text{MaybeUninit}[\text{dyn Trait}] \rightarrow \text{SafeInit}[\text{dyn Trait}]$$
@@ -1691,6 +1703,7 @@ trait Deref {
 
 }
 ```
+
 **形式化定义**:
 
 $$
@@ -1719,6 +1732,7 @@ T : Deref<Target = U>
 
 Γ ⊢ &*x : &U
 ```
+
 ### 定义 DEREF-2 (DerefMut Trait) {#定义-deref-2-derefmut-trait}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -1732,6 +1746,7 @@ trait DerefMut: Deref {
 
 }
 ```
+
 **形式化定义**:
 
 $$
@@ -1777,6 +1792,7 @@ T : Deref<Target = U>
 
 Γ ⊢ x : T  ~>  &U  (自动解引用)
 ```
+
 ### 定理 DEREF-T1 (Deref一致性) {#定理-deref-t1-deref一致性}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -1837,6 +1853,7 @@ fn box_deref() {
 
 }
 ```
+
 #### 示例2: 自定义智能指针 {#示例2-自定义智能指针}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -1873,6 +1890,7 @@ fn custom_smart_pointer() {
 
 }
 ```
+
 #### 示例3: 函数参数中的Deref强制转换 {#示例3-函数参数中的deref强制转换}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -1893,6 +1911,7 @@ fn deref_coercion_in_args() {
 
 }
 ```
+
 **形式化分析**:
 
 1. `&m`类型: `&MyBox<String>`
@@ -1926,6 +1945,7 @@ fn deref_mut_example() {
 
 }
 ```
+
 ### 与智能指针的集成 {#与智能指针的集成}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**

@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **Diesel ORM 查询构建器与类型状态（Typestate）架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [数据库访问](../../../../concept/06_ecosystem/23_database_access.md)
 > - [数据库系统](../../../../concept/06_ecosystem/37_database_systems.md)
 >
@@ -127,6 +128,7 @@ graph LR
 
     style Runtime fill:#fff3e0
 ```
+
 **架构要点解读：**
 
 | 层级 | 职责 | 核心组件 |
@@ -222,6 +224,7 @@ pub trait QueryDsl: Sized {
 
 }
 ```
+
 ### 3.2 类型状态流水线实例 {#32-类型状态流水线实例}
 
 >
@@ -288,6 +291,7 @@ let results: Vec<User> = limited.load(conn)?;
 
 // 编译期验证：User 的字段类型必须与 SELECT 子句匹配
 ```
+
 ### 3.3 为什么无效 SQL 不可表示 {#33-为什么无效-sql-不可表示}
 
 >
@@ -328,6 +332,7 @@ users::table
 
     .load::<User>(conn)?;
 ```
+
 > 来源: [Diesel Query Builder 文档](https://diesel.rs/guides/all-about-inserts.html)
 > 来源: [Rust Reference, Trait 与泛型章节, https://doc.rust-lang.org/reference/items/traits.html](https://doc.rust-lang.org/reference/)
 
@@ -369,6 +374,7 @@ pub trait Connection: SimpleConnection + Sized + Send {
 
 }
 ```
+
 ### 4.2 连接池与 PooledConnection {#42-连接池与-pooledconnection}
 
 >
@@ -418,6 +424,7 @@ fn query_user(pool: &PgPool, user_id: i32) -> QueryResult<User> {
 
 }
 ```
+
 ### 4.3 事务管理与闭包 API {#43-事务管理与闭包-api}
 
 >
@@ -489,6 +496,7 @@ fn transfer_funds(
 
 }
 ```
+
 > 来源: Diesel Connection 文档, https: /  / [docs.rs](https://docs.rs/) / [diesel](https://diesel.rs/) / latest / [diesel](https://diesel.rs/) / connection / trait.Connection.html
 > 来源: [Rust Reference, RAII 与 Drop trait, https://doc.rust-lang.org/reference/items/traits.html#drop](https://doc.rust-lang.org/reference/)
 
@@ -572,6 +580,7 @@ table! {
 
 // }
 ```
+
 ### 5.2 `diesel_cli` 与 `infer_schema!` {#52-diesel_cli-与-infer_schema}
 
 >
@@ -611,6 +620,7 @@ diesel migration run
 
 diesel print-schema > src/schema.rs
 ```
+
 ```rust,ignore
 // src/schema.rs（由 diesel_cli 自动生成）
 
@@ -642,6 +652,7 @@ diesel::joinable!(posts -> users (user_id));
 
 diesel::allow_tables_to_appear_in_same_query!(users, posts);
 ```
+
 ### 5.3 可查询类型与表定义的关联 {#53-可查询类型与表定义的关联}
 
 >
@@ -707,6 +718,7 @@ struct UserChangeset {
 
 }
 ```
+
 > 来源: [Diesel Schema 文档](https://diesel.rs/guides/schema-in-depth.html)
 > 来源: [Rust Reference, 过程宏, https://doc.rust-lang.org/reference/procedural-macros.html](https://doc.rust-lang.org/reference/)
 
@@ -779,6 +791,7 @@ impl Backend for Sqlite {
 
 }
 ```
+
 ### 6.2 方言差异的编译期处理 {#62-方言差异的编译期处理}
 
 >
@@ -837,6 +850,7 @@ use diesel::dsl::now;
 
 // Diesel 通过 backend-specific SQL 函数封装这些差异
 ```
+
 ### 6.3 Feature Flag 驱动的条件编译 {#63-feature-flag-驱动的条件编译}
 
 >
@@ -857,6 +871,7 @@ diesel = { version = "2.1", features = ["sqlite", "chrono"] }
 
 diesel = { version = "2.1", features = ["mysql", "chrono"] }
 ```
+
 ```rust,ignore
 // 同一套业务代码，通过泛型参数兼容多后端
 
@@ -891,6 +906,7 @@ let pg_users = fetch_active_users(&mut pg_conn)?;
 
 let sqlite_users = fetch_active_users(&mut sqlite_conn)?;
 ```
+
 > 来源: Diesel Backend 文档, https: /  / [docs.rs](https://docs.rs/) / [diesel](https://diesel.rs/) / latest / [diesel](https://diesel.rs/) / backend / trait.Backend.html
 > 来源: [Rust Reference, Monomorphization, https://doc.rust-lang.org/reference/items/generics.html](https://doc.rust-lang.org/reference/)
 
@@ -932,6 +948,7 @@ let results: Vec<UserRow> = diesel::sql_query(format!(
 
 // 注意：此时类型安全降级为运行时检查
 ```
+
 ### 7.2 极其复杂的原始 SQL {#72-极其复杂的原始-sql}
 
 >
@@ -976,6 +993,7 @@ let results = diesel::sql_query(complex_query)
 
     .load::<EmployeeHierarchy>(conn)?;
 ```
+
 ### 7.3 NoSQL 场景 {#73-nosql-场景}
 
 >
@@ -1013,6 +1031,7 @@ let row: (i64, String) = sqlx::query_as("SELECT id, name FROM users WHERE id = $
 
     .await?;
 ```
+
 ### 7.5 适用光谱总结 {#75-适用光谱总结}
 
 >

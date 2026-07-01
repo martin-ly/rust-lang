@@ -284,6 +284,7 @@ fn test_inlining() {
 
 }
 ```
+
 **优化效果**：
 
 - `#[inline]` 提示编译器内联函数
@@ -309,6 +310,7 @@ fn loop_optimization() {
 
 }
 ```
+
 **优化效果**：
 
 - 循环展开：减少循环开销
@@ -334,6 +336,7 @@ fn dead_code_elimination() {
 
 }
 ```
+
 ## 💻 代码示例（完整基准测试） {#代码示例完整基准测试}
 
 >
@@ -383,6 +386,7 @@ criterion_group!(benches, bench_compute_sum);
 
 criterion_main!(benches);
 ```
+
 ### 示例 2：内联优化 {#示例-2内联优化}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -459,6 +463,7 @@ criterion_group!(benches, bench_add);
 
 criterion_main!(benches);
 ```
+
 ### 示例 3：循环优化 {#示例-3循环优化}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -519,6 +524,7 @@ fn sum_array_unrolled(arr: &[i32]) -> i32 {
 
 }
 ```
+
 ### 示例 4：死代码消除 {#示例-4死代码消除}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -552,6 +558,7 @@ fn dead_code_example() {
 
 }
 ```
+
 ---
 
 ## 📊 实验结果 {#实验结果}

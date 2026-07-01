@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **sentry 错误追踪与性能监控的 Hub/Scope/Transaction 架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [日志与可观测性](../../../../concept/06_ecosystem/13_logging_observability.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
@@ -57,6 +58,7 @@ let _guard = sentry::init((
 ));
 sentry::capture_message("Hello World!", sentry::Level::Info);
 ```
+
 > [来源: [sentry Examples](https://github.com/getsentry/sentry-rust/tree/master/sentry/examples)]
 
 ---
@@ -77,6 +79,7 @@ graph TD
     SCOPE -->|附加到| EVENT[Event / Transaction]
     EVENT -->|Transport| SENTRY[Sentry Server]
 ```
+
 > [来源: [sentry Hub Docs](https://docs.rs/sentry/latest/sentry/struct.Hub.html)]
 
 | 类型 | 职责 | 关键方法 |
@@ -100,6 +103,7 @@ let _guard = sentry::init(("https://key@sentry.io/42", sentry::ClientOptions {
     ..Default::default()
 }));
 ```
+
 > [来源: [sentry init Docs](https://docs.rs/sentry/latest/sentry/fn.init.html)]
 
 ### 2.3 错误与消息捕获 {#23-错误与消息捕获}
@@ -111,6 +115,7 @@ if let Err(e) = do_something().await {
     sentry::capture_error(&e);
 }
 ```
+
 > [来源: [sentry capture_error Docs](https://docs.rs/sentry/latest/sentry/fn.capture_error.html)]
 
 ### 2.4 Scope 与 Breadcrumb {#24-scope-与-breadcrumb}
@@ -131,6 +136,7 @@ sentry::configure_scope(|scope| {
     });
 });
 ```
+
 > [来源: [sentry Scope Docs](https://docs.rs/sentry/latest/sentry/struct.Scope.html)]
 
 ### 2.5 性能监控：Transaction 与 Span {#25-性能监控transaction-与-span}
@@ -144,6 +150,7 @@ let tx = sentry::start_transaction(ctx);
 }
 tx.finish();
 ```
+
 > [来源: [sentry Performance Docs](https://docs.sentry.io/platforms/rust/performance/)]
 
 ---

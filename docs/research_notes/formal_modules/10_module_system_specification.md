@@ -90,6 +90,7 @@ Crate
 
     └── pub use path::item → 重导出（改变可见性入口）
 ```
+
 **关键关系：**
 
 1. **可见性是偏序关系**：`pub` ⊇ `pub(crate)` ⊇ `pub(super)` ⊇ `pub(in path)` ⊇ 默认私有。越靠近 crate root，`pub(in path)` 的实际范围越大。
@@ -142,6 +143,7 @@ pub mod outer {
 
 }
 ```
+
 ### 2. 使用 `pub(in path)` {#2-使用-pubin-path}
 
 ```rust
@@ -177,6 +179,7 @@ pub mod c {
 
 }
 ```
+
 ### 3. `pub use` 重导出 {#3-pub-use-重导出}
 
 ```rust
@@ -191,6 +194,7 @@ mod internal {
 
 pub use internal::InnerStruct as PublicStruct; // 对外暴露
 ```
+
 ---
 
 ## 反例与边界 {#反例与边界}

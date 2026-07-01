@@ -268,6 +268,7 @@ struct QuickSort; impl SortStrategy for QuickSort { ... }
 
 struct MergeSort; impl SortStrategy for MergeSort { ... }
 ```
+
 **Iterator**：`Iterator` trait 为语言原生；语义等价且更强（零成本抽象）。
 
 ---
@@ -333,6 +334,7 @@ impl Target for Adapter {
 
 }
 ```
+
 **形式化对应**：Adapter 持有 `Adaptee`；`impl Target for Adapter` 委托；所有权清晰：`Adapter` 拥有 `Adaptee`。
 
 ---
@@ -368,6 +370,7 @@ impl Node {
 
 }
 ```
+
 **形式化对应**：`Box<Node>` 递归；`Vec` 聚合子节点；穷尽 match 保证所有变体处理。
 
 ---
@@ -408,6 +411,7 @@ struct Button { label: String }
 
 impl Widget for Button { fn render(&self) { /* ... */ } }
 ```
+
 ### 示例 2：观察者模式 {#示例-2观察者模式}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**

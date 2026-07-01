@@ -370,6 +370,7 @@ fn analyze_memory_usage() {
 
 }
 ```
+
 ### 示例 2：Vec 增长模式分析 {#示例-2vec-增长模式分析}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -410,6 +411,7 @@ fn analyze_vec_growth() {
 
 }
 ```
+
 ### 示例 3：内存泄漏检测 {#示例-3内存泄漏检测}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -504,6 +506,7 @@ impl SafeNode {
 
 }
 ```
+
 ### 示例 4：内存布局分析 {#示例-4内存布局分析}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -534,6 +537,7 @@ fn analyze_memory_layout() {
 
 }
 ```
+
 **分析要点**：`size_of`/`align_of` 与 [ALIGNMENT_GUIDE](../../02_reference/ALIGNMENT_GUIDE.md) 对齐知识衔接；`#[repr(C)]` 用于 FFI 与布局控制。
 
 ---

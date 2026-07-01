@@ -194,6 +194,7 @@ Pending ──────────> Ready
 
     Poll::Ready
 ```
+
 **状态机正确性**：
 
 1. **确定性**：每个状态和输入唯一确定下一个状态
@@ -462,6 +463,7 @@ Pending ────────────────> Ready(v)
 
     Poll (!CanProgress)
 ```
+
 ### 4. async/await 语义形式化 {#4-asyncawait-语义形式化}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -733,6 +735,7 @@ impl Future for SimpleFuture {
 
 }
 ```
+
 **状态机分析**：
 
 - 初始状态：`Pending`（`value = None`）
@@ -763,6 +766,7 @@ async fn main() {
 
 }
 ```
+
 **状态机分析**：
 
 - `async_function` 被转换为状态机
@@ -784,6 +788,7 @@ async fn combined_future() -> i32 {
 
 }
 ```
+
 **状态机分析**：
 
 - 状态 0：等待第一个 `async_function`（`Pending`）
@@ -874,6 +879,7 @@ impl Future for SimpleFuture {
 
 }
 ```
+
 ### 示例 2：异步状态转换 {#示例-2异步状态转换}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -964,6 +970,7 @@ impl Future for AsyncCounter {
 
 }
 ```
+
 ### 示例 3：并发安全保证 {#示例-3并发安全保证}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -1030,6 +1037,7 @@ impl Future for ConcurrentSafeFuture {
 
 }
 ```
+
 ### 示例 4：async/await 状态机转换 {#示例-4asyncawait-状态机转换}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -1134,6 +1142,7 @@ impl Future for ExampleAsyncState {
 
 }
 ```
+
 **状态机分析**：
 
 - 状态 0 (Start)：初始化，设置 x = 10
@@ -1219,6 +1228,7 @@ async fn futures_unordered_example() {
 
 }
 ```
+
 **并发安全分析**：
 
 - `join!`：等待所有 Future 完成，保证并发安全
@@ -1324,6 +1334,7 @@ impl TimerFuture {
 
 }
 ```
+
 **状态转换分析**：
 
 - 初始状态：`Pending`，`completed = false`
@@ -1561,6 +1572,7 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 
       （Eventually Ready）
 ```
+
 ### 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**

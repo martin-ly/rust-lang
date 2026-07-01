@@ -70,6 +70,7 @@
 
 5. 边界有反例   → 重要断言有边界条件时，补充反例说明违反后果
 ```
+
 ### 1.2 论证流向（双向） {#12-论证流向双向}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -142,6 +143,7 @@
 
 应用层（CE-T1–T3、设计选型、错误码映射）
 ```
+
 ---
 
 ## 二、论证脉络关系图 {#二论证脉络关系图}
@@ -222,6 +224,7 @@ ownership T3            borrow T2                 type T2
 
                     组合反例→错误码映射
 ```
+
 ### 2.2 三大支柱论证衔接 {#22-三大支柱论证衔接}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -250,6 +253,7 @@ type T3 ────────────────────────
 
   (Actor/channel/async/Mutex)        (CE-MAT1 成熟度层级)
 ```
+
 ### 2.3 域间定理推导链（显式） {#23-域间定理推导链显式}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -338,6 +342,7 @@ software_design_theory
 
 04_compositional_engineering
 ```
+
 ### 3.2 文档引用关系表 {#32-文档引用关系表}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**

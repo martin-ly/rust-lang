@@ -69,12 +69,14 @@
 curl -s https://api.github.com/repos/rust-lang/book/releases/latest | jq .tag_name
 curl -s https://api.github.com/repos/rust-lang-cn/book/releases/latest | jq .tag_name
 ```
+
 ### 4.2 基于文件哈希的章节一致性检查 {#42-基于文件哈希的章节一致性检查}
 
 ```bash
 # 对比原版与翻译的目录结构 {#对比原版与翻译的目录结构}
 diff <(ls en/src) <(ls zh-CN/src)
 ```
+
 ### 4.3 维护脚本 {#43-维护脚本}
 
 已提供 `scripts/maintenance/check_i18n_translation_gap.py`：
@@ -87,6 +89,7 @@ diff <(ls en/src) <(ls zh-CN/src)
 ```bash
 python scripts/maintenance/check_i18n_translation_gap.py
 ```
+
 术语一致性检查以 [`data/i18n_terminology.yaml`](../../data/i18n_terminology.yaml) 作为权威数据源，脚本可读取该文件并对照各语言翻译中的关键术语使用情况。该文件涵盖所有权、类型系统、并发安全、异步、包管理等核心概念，是检测术语偏差与未覆盖缺口的标准来源。
 
 > 当前版本仅做版本号/最新 commit 差距检测，缺失章节与术语差异待后续扩展。
@@ -128,6 +131,7 @@ python scripts/maintenance/check_i18n_translation_gap.py
    ▼
 运行 check_research_notes.py 验证
 ```
+
 ---
 
 ## 七、未覆盖缺口 {#七未覆盖缺口}

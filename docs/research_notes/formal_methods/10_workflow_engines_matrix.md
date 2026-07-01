@@ -140,6 +140,7 @@
 
    (开发)     (集成)      (部署)    ( mastery)  (生产)     (企业)
 ```
+
 ---
 
 ## 深度对比 {#深度对比}
@@ -231,6 +232,7 @@ async fn compensate_payment(ctx: &mut WorkflowContext, order_id: String) {
 
 }
 ```
+
 ### 自研状态机模式 {#自研状态机模式}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -315,6 +317,7 @@ impl<S: State> Workflow<S> {
 
 }
 ```
+
 ---
 
 ## 设计模式映射 {#设计模式映射}
@@ -380,6 +383,7 @@ impl<S: State> Workflow<S> {
 
                └── 生产环境调优
 ```
+
 ---
 
 **维护者**: Rust Formal Methods Research Team

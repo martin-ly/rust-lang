@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **surrealdb 文档-图数据库的 Connection 抽象与 SurrealQL 架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [数据库访问](../../../../concept/06_ecosystem/23_database_access.md)
 > - [数据库系统](../../../../concept/06_ecosystem/37_database_systems.md)
 >
@@ -60,6 +61,7 @@ db.use_ns("namespace").use_db("database").await?;
 
 let created: Vec<Person> = db.create("person").content(person).await?;
 ```
+
 > [来源: [surrealdb Examples](https://github.com/surrealdb/surrealdb/tree/main/examples)]
 
 ---
@@ -83,6 +85,7 @@ graph TD
     SURREAL -->|create / select / update / delete| CRUD[类型化 CRUD]
     SURREAL -->|query| QL[SurrealQL 查询]
 ```
+
 > [来源: [surrealdb Connection Docs](https://docs.rs/surrealdb/latest/surrealdb/connection/trait.Connection.html)]
 
 | 类型 | 职责 | 关键方法 |
@@ -120,6 +123,7 @@ let updated: Option<Person> = db.update(("person", "alice")).merge(json!({ "age"
 // 按 ID 删除
 let deleted: Option<Person> = db.delete(("person", "alice")).await?;
 ```
+
 > [来源: [surrealdb CRUD Docs](https://docs.rs/surrealdb/latest/surrealdb/struct.Surreal.html)]
 
 ### 2.3 SurrealQL 查询与参数绑定 {#23-surrealql-查询与参数绑定}
@@ -135,6 +139,7 @@ let mut result = db
 
 let adults: Vec<Person> = result.take(0)?;
 ```
+
 > [来源: [SurrealQL Documentation](https://docs.surrealdb.com/docs/surrealql)]
 
 ### 2.4 远程连接：认证、命名空间与数据库 {#24-远程连接认证命名空间与数据库}
@@ -145,6 +150,7 @@ SurrealDB 使用三层命名空间：`namespace` → `database` → `table`。`S
 db.signin(Root { username: "root", password: "root" }).await?;
 db.use_ns("rust_learning").use_db("c10_networks_demo").await?;
 ```
+
 > [来源: [surrealdb Authentication Docs](https://docs.rs/surrealdb/latest/surrealdb/opt/auth/index.html)]
 
 ### 2.5 嵌入式引擎 {#25-嵌入式引擎}
@@ -157,6 +163,7 @@ use surrealdb::engine::local::Mem;
 let db = Surreal::new::<Mem>(()).await?;
 db.use_ns("test").use_db("test").await?;
 ```
+
 > [来源: [surrealdb Local Engine Docs](https://docs.rs/surrealdb/latest/surrealdb/engine/local/index.html)]
 
 ---

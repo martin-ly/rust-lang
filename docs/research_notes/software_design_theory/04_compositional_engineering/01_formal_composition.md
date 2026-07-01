@@ -165,6 +165,7 @@ fn main() {
 
 }
 ```
+
 **形式化对应**：`mod a`、`mod b` 为 $M_1$、$M_2$；`main` 组合两者。依赖：$b \prec a$。
 
 ---
@@ -194,6 +195,7 @@ let svc = ServiceBuilder::new()
 
     .service(core_service);
 ```
+
 **定理 CE-T5（中间件栈保持组合有效性）**：若每个 `Layer` 实现满足 `Service` 契约（`poll_ready`、`call`），则栈组合仍满足 CE-T1–T3。
 
 *证明*：`Layer::layer` 为纯函数式包装；不引入共享可变；`Service` 请求/响应类型在编译期确定。∎
@@ -250,6 +252,7 @@ impl<R: Repository<Order>, F: ProductFactory> OrderService<R, F> {
 
 // 组合满足 CE-T1：各组件 Safe 则组合 Safe
 ```
+
 **Decorator 链组合**：
 
 ```rust
@@ -269,6 +272,7 @@ impl<S: Service> Service for Logging<S> {
 
 // Logging(Core) 或 Logging(Logging(Core))；组合无环
 ```
+
 ---
 
 ## 类型驱动组合（Type-Driven Composition） {#类型驱动组合type-driven-composition}
@@ -310,6 +314,7 @@ impl Client<Configured> {
 
 }
 ```
+
 **定理 CE-T4（类型状态保持安全）**：若类型状态转换仅通过特定 `impl` 块提供，则运行时不会进入未配置即调用的状态。
 
 *证明*：`connect` 仅对 `Client<Configured>` 实现；`Client<Unconfigured>` 无该方法；编译期排除非法调用。∎
@@ -337,6 +342,7 @@ fn run_strategy<S: SortStrategy>(s: S, v: &mut [i32]) {
 
 }
 ```
+
 ---
 
 ## Crate 组合 {#crate-组合}
@@ -377,6 +383,7 @@ fn main() {
 
 }
 ```
+
 **Def 1.3 对应**：$M_1 = \mathrm{crate\_a}$，$M_2 = \mathrm{crate\_b}$，$M_3 = \mathrm{crate\_c}$；$M_3 \prec M_2 \prec M_1$；无环。
 
 ---

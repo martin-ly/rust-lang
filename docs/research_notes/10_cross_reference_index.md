@@ -111,6 +111,7 @@
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
+
 ### 文档类型分布 {#文档类型分布}
 >
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
@@ -241,6 +242,7 @@
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
+
 ---
 
 ## 📜 定理跨文档引用网络 {#定理跨文档引用网络}
@@ -288,6 +290,7 @@
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
+
 ### 跨文档定理引用矩阵 {#跨文档定理引用矩阵}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -376,6 +379,7 @@ graph TD
 
     style CROSS_REF fill:#f9f,stroke:#333,stroke-width:4px
 ```
+
 ### 横向关联 {#横向关联}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**

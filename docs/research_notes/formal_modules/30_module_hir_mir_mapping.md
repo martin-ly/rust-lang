@@ -98,6 +98,7 @@ Source AST
 
             └── 模块边界已消失，仅保留 DefId 引用
 ```
+
 **关键关系：**
 
 1. **模块边界在 HIR 中保留，在 MIR 中淡化**：HIR 仍按模块组织 item，方便 crate 级分析和增量编译；MIR 只关注函数/闭包体，模块信息通过 `DefId` 的 `DefPath` 间接保留。
@@ -149,6 +150,7 @@ pub mod network {
 
 fn private_helper() {}
 ```
+
 ### 2. 概念上的 HIR ItemTree 表示 {#2-概念上的-hir-itemtree-表示}
 
 ```text
@@ -166,6 +168,7 @@ Crate (DefId 0)
 
     └── Item: Fn "private_helper" (private)
 ```
+
 ### 3. MIR 视角 {#3-mir-视角}
 
 ```text
@@ -177,6 +180,7 @@ Body of crate::network::tcp::connect
 
 │   └── return
 ```
+
 MIR 不再出现 `network` 或 `tcp` 节点，函数通过 `DefId` 引用；模块层级信息退化为 `DefPath` 中的字符串段。
 
 ---

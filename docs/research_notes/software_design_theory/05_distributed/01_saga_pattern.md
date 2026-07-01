@@ -72,6 +72,7 @@ Saga := (T, C, ≺, σ)
 
     σ: T → {success, failed}   -- 状态函数
 ```
+
 ### Def S2: Saga 执行状态 {#def-s2-saga-执行状态}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -89,6 +90,7 @@ State(Saga) :=
 
   | Compensated      -- 已回滚补偿
 ```
+
 ### Def S3: 补偿正确性 {#def-s3-补偿正确性}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -100,6 +102,7 @@ Correct(cᵢ, tᵢ) := ∀s. exec(tᵢ, s) = s' ∧ exec(cᵢ, s') = s''
 
                    → s ≈ s''
 ```
+
 即：执行 tᵢ 后再执行 cᵢ，系统状态回到语义等价于原始状态。
 
 ---
@@ -116,6 +119,7 @@ Correct(cᵢ, tᵢ) := ∀s. exec(tᵢ, s) = s' ∧ exec(cᵢ, s') = s''
 ```text
 ∀c ∈ C. exec(c, s) = s' → exec(c, s') = s'
 ```
+
 补偿操作必须是**幂等的**，可多次执行而不改变结果。
 
 ### Axiom S2: 偏序无环性 {#axiom-s2-偏序无环性}
@@ -125,6 +129,7 @@ Correct(cᵢ, tᵢ) := ∀s. exec(tᵢ, s) = s' ∧ exec(cᵢ, s') = s''
 ```text
 ¬∃t₁, t₂, ..., tₙ ∈ T. t₁ ≺ t₂ ≺ ... ≺ tₙ ≺ t₁
 ```
+
 执行顺序必须是无环的偏序关系。
 
 ### Axiom S3: 最终一致性 {#axiom-s3-最终一致性}
@@ -134,6 +139,7 @@ Correct(cᵢ, tᵢ) := ∀s. exec(tᵢ, s) = s' ∧ exec(cᵢ, s') = s''
 ```text
 ∀tᵢ ∈ T. σ(tᵢ) = success → ◇(∀tⱼ ≺ tᵢ. σ(tⱼ) = success)
 ```
+
 若事务成功，则其所有前驱最终也成功（或已补偿）。
 
 ---
@@ -153,6 +159,7 @@ Saga 满足弱原子性：
 
 ∀Saga. Completed ∨ Compensated
 ```
+
 **证明概要**:
 
 1. Saga 按顺序执行事务 t₁, t₂, ..., tₙ
@@ -169,6 +176,7 @@ Saga 满足弱原子性：
 ```text
 ∀Saga. Compensating(cᵢ) → ◇Compensated
 ```
+
 **证明概要**:
 
 1. 补偿操作数量有限 (|C| = |T| = n)
@@ -253,6 +261,7 @@ impl<S, E> SagaExecutor<S, E> {
 
 }
 ```
+
 ---
 
 ## 5. 与其他模式的关系 {#5-与其他模式的关系}

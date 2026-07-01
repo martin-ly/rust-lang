@@ -65,6 +65,7 @@ fn generate_password(length: usize) -> String {
         .collect()
 }
 ```
+
 ---
 
 ## 参考实现 {#参考实现}

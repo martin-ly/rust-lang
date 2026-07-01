@@ -464,6 +464,7 @@ Pin 安全性证明树
 
       （投影后仍满足 Pin 保证）
 ```
+
 ### 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -537,6 +538,7 @@ fn main() {
 
 }
 ```
+
 **形式化描述**:
 
 - $\text{MyStruct} : \text{Unpin}$
@@ -596,6 +598,7 @@ impl SelfReferential {
 
 }
 ```
+
 **形式化描述**:
 
 - $\text{SelfReferential} = \{\text{data} : \text{String}, \text{self\_ref} : \text{Option}(\*const \text{String})\}$
@@ -659,6 +662,7 @@ async fn use_future() {
 
 }
 ```
+
 **Future 和 Pin 分析**：
 
 - Future 可能包含自引用
@@ -738,6 +742,7 @@ fn use_self_referential() {
 
 }
 ```
+
 **自引用结构体分析**：
 
 - 使用原始指针实现自引用
@@ -780,6 +785,7 @@ impl Wrapper {
 
 }
 ```
+
 **Pin 投影分析**：
 
 - 从被 Pin 的结构体中获取被 Pin 的字段
@@ -825,6 +831,7 @@ async fn use_future() {
 
 }
 ```
+
 **形式化描述**:
 
 - $\text{Future} = \{\text{poll} : \text{Pin}[\&mut \text{Self}] \times \text{Context} \to \text{Poll}[\text{Output}]\}$

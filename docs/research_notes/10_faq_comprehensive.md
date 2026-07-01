@@ -145,6 +145,7 @@ let y = x;                      // 复制值
 
 println!("{}", x);              // OK！x仍然有效
 ```
+
 **记忆**: 复杂类型Move，简单类型Copy。
 
 ---
@@ -177,6 +178,7 @@ fn main() {
 
 }
 ```
+
 ---
 
 ### Q4: &和&mut为什么不能同时存在？ {#q4-和mut为什么不能同时存在}
@@ -203,6 +205,7 @@ let r2 = &x;        // 读者2
 
 println!("{} {}", r1, r2); // 读者还在用
 ```
+
 ---
 
 ### Q5: 什么是悬垂引用？Rust如何防止？ {#q5-什么是悬垂引用rust如何防止}
@@ -235,6 +238,7 @@ fn not_dangling() -> String {
 
 }
 ```
+
 ---
 
 ### Q6: 如何理解"所有权系统防止内存泄漏"？ {#q6-如何理解所有权系统防止内存泄漏}
@@ -278,6 +282,7 @@ thread::spawn(move || {
 
 });
 ```
+
 ---
 
 ### Q8: `RefCell`和`Mutex`有什么区别？ {#q8-refcell和mutex有什么区别}
@@ -310,6 +315,7 @@ let mutex = Mutex::new(5);
 
 *mutex.lock().unwrap() = 10;  // 线程安全
 ```
+
 ---
 
 ### Q9: 什么是"内部可变性"模式？ {#q9-什么是内部可变性模式}
@@ -369,6 +375,7 @@ let arc = Arc::new(5);
 
 let arc2 = Arc::clone(&arc);
 ```
+
 ---
 
 ### Q11: 为什么String不能Copy？ {#q11-为什么string不能copy}
@@ -392,6 +399,7 @@ i32, f64, bool, char, (i32, i32), [i32; 4]
 
 String, Vec<T>, Box<T>, Rc<T>
 ```
+
 ---
 
 ### Q12: `clone()`和`to_owned()`有什么区别？ {#q12-clone和to_owned有什么区别}
@@ -413,6 +421,7 @@ let v = vec![1, 2, 3];
 
 let v2 = v.clone();  // Vec<i32>
 ```
+
 ---
 
 ### Q13: 如何修复"cannot borrow as mutable"错误？ {#q13-如何修复cannot-borrow-as-mutable错误}
@@ -447,6 +456,7 @@ let mut x = 5;
 
 let r2 = &mut x;  // OK
 ```
+
 ---
 
 ### Q14: `mem::swap`和`mem::replace`有什么用？ {#q14-memswap和memreplace有什么用}
@@ -481,6 +491,7 @@ assert_eq!(old, "hello");
 
 assert_eq!(s, "world");
 ```
+
 ---
 
 ### Q15: 什么是"零成本抽象"？ {#q15-什么是零成本抽象}
@@ -531,6 +542,7 @@ i32, f64, [i32; 5], String
 
 str, [i32], dyn Trait
 ```
+
 使用：
 
 ```rust
@@ -538,6 +550,7 @@ fn foo<T: Sized>(x: T) {}  // 默认约束
 
 fn bar<T: ?Sized>(x: &T) {}  // 允许DST
 ```
+
 ---
 
 ### Q18: `impl Trait`和`dyn Trait`有什么区别？ {#q18-impl-trait和dyn-trait有什么区别}
@@ -559,6 +572,7 @@ fn foo(x: impl Trait) {}
 
 fn bar(x: &dyn Trait) {}
 ```
+
 ---
 
 ### Q19: 什么是型变(Variance)？ {#q19-什么是型变variance}
@@ -582,6 +596,7 @@ fn(&'a str) <: fn(&'static str)
 
 &mut &'static str 和 &mut &'a str 无关
 ```
+
 ---
 
 ### Q20: `'static`生命周期是什么意思？ {#q20-static生命周期是什么意思}
@@ -601,6 +616,7 @@ let s: &'static str = "hello";  // 字面量
 
 const X: i32 = 5;  // 'static
 ```
+
 ---
 
 ### Q21: 什么是关联类型(Associated Type)？ {#q21-什么是关联类型associated-type}
@@ -627,6 +643,7 @@ impl Iterator for Vec<i32> {
 
 }
 ```
+
 对比泛型参数：
 
 - 关联类型：每个实现一个类型
@@ -649,6 +666,7 @@ trait Container {
 
 }
 ```
+
 使用场景：
 
 - 返回借用的迭代器
@@ -672,6 +690,7 @@ const fn add(a: i32, b: i32) -> i32 {
 
 const X: i32 = add(1, 2);  // 编译时常量
 ```
+
 限制：
 
 - 不能使用堆分配
@@ -710,6 +729,7 @@ impl Trait for i32 {
 
 }
 ```
+
 **注意**: 目前不稳定，需要`#![feature(specialization)]`
 
 ---
@@ -728,6 +748,7 @@ assert_eq!(size_of::<Option<&i32>>(), size_of::<&i32>());
 
 // 两者都是8字节（64位系统）
 ```
+
 好处：
 
 - `Option<&T>`无额外开销
@@ -760,6 +781,7 @@ fn foo<'a>(x: &'a str) -> &'a str { x }
 
 fn foo(x: &str) -> &str { x }  // 规则2
 ```
+
 ---
 
 ### Q27: 生命周期约束如何写？ {#q27-生命周期约束如何写}
@@ -792,6 +814,7 @@ where
 
 }
 ```
+
 ---
 
 ### Q28: 什么是生命周期子类型？ {#q28-什么是生命周期子类型}
@@ -808,6 +831,7 @@ take_str(s);  // 可以传给需要&'a str的函数
 
 fn take_str<'a>(s: &'a str) {}
 ```
+
 协变：可以用长生命周期代替短生命周期。
 
 ---
@@ -836,6 +860,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 }
 ```
+
 ---
 
 ### Q30: `for<'a>`语法是什么？ {#q30-fora语法是什么}
@@ -859,6 +884,7 @@ where
 
 }
 ```
+
 使用场景：
 
 - 回调函数
@@ -892,6 +918,7 @@ fn main() {
 
 } // name和p同时结束，OK
 ```
+
 ---
 
 ### Q32: 自引用结构如何处理？ {#q32-自引用结构如何处理}
@@ -923,6 +950,7 @@ let mut pinned = Pin::new(Box::new(SelfReferential {
 
 }));
 ```
+
 ---
 
 ### Q33: 异步函数中的生命周期 {#q33-异步函数中的生命周期}
@@ -949,6 +977,7 @@ fn main() {
 
 }
 ```
+
 ---
 
 ### Q34: 什么是`PhantomData`？ {#q34-什么是phantomdata}
@@ -971,6 +1000,7 @@ struct Slice<'a, T: 'a> {
 
 }
 ```
+
 ---
 
 ### Q35: 生命周期和泛型如何结合？ {#q35-生命周期和泛型如何结合}
@@ -992,6 +1022,7 @@ where
 
 }
 ```
+
 约束：
 
 - `T: 'a`表示T不包含比`'a`短的引用
@@ -1032,6 +1063,7 @@ let data: Arc<i32> = Arc::new(5);
 
 thread::spawn(move || { println!("{}", data); });  // OK
 ```
+
 ---
 
 ### Q37: 为什么`Cell`不是Sync？ {#q37-为什么cell不是sync}
@@ -1047,6 +1079,7 @@ let cell = Cell::new(0);
 
 // thread::spawn(|| cell.set(1));  // 错误！Cell不是Send也不是Sync
 ```
+
 使用`Mutex`或`RwLock`进行线程安全的内部可变性。
 
 ---
@@ -1090,6 +1123,7 @@ let cell = Cell::new(0);
 
 }  // 自动释放
 ```
+
 ---
 
 ### Q40: async/await原理是什么？ {#q40-asyncawait原理是什么}
@@ -1122,6 +1156,7 @@ enum FooFuture {
 
 }
 ```
+
 执行器轮询Future，在`.await`处可能让出线程。
 
 ---
@@ -1151,6 +1186,7 @@ async fn self_referential() {
 
 }
 ```
+
 ---
 
 ### Q42: `tokio::spawn`和`thread::spawn`区别？ {#q42-tokiospawn和threadspawn区别}
@@ -1180,6 +1216,7 @@ tokio::spawn(async {
 
 });
 ```
+
 数量：
 
 - OS线程：几百个
@@ -1203,6 +1240,7 @@ i32, String, Vec<T>
 
 async fn, Pin<&mut T>
 ```
+
 ---
 
 ### Q44: `select!`宏是什么？ {#q44-select宏是什么}
@@ -1222,6 +1260,7 @@ tokio::select! {
 
 }
 ```
+
 ---
 
 ### Q45: 如何避免跨await持锁？ {#q45-如何避免跨await持锁}
@@ -1255,6 +1294,7 @@ some_async().await;  // OK
 
 let guard = tokio_mutex.lock().await;
 ```
+
 ---
 
 ## 五、形式化方法 (10问) {#五形式化方法-10问}
@@ -1347,6 +1387,7 @@ let saga = Saga::new()
 
     .step(create_shipment, cancel_shipment);
 ```
+
 ---
 
 ### Q52: CQRS适合什么场景？ {#q52-cqrs适合什么场景}

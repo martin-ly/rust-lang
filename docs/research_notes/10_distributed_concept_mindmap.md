@@ -194,6 +194,7 @@ mindmap
 
         raft-rs
 ```
+
 ---
 
 ## 核心概念详解 {#核心概念详解}
@@ -233,6 +234,7 @@ struct DistributedSystem {
 
 }
 ```
+
 ### 2. 共识算法对比 {#2-共识算法对比}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -275,6 +277,7 @@ impl ConsistentHash {
 
 }
 ```
+
 ---
 
 ## Rust 分布式系统工具链 {#rust-分布式系统工具链}
@@ -308,6 +311,7 @@ graph LR
 
     E --> E2[io_uring]
 ```
+
 ### 关键库生态系统 {#关键库生态系统}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -360,6 +364,7 @@ enum CircuitState {
 
 }
 ```
+
 ### 2. 限流控制 {#2-限流控制}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
@@ -405,6 +410,7 @@ impl RateLimiter {
 
 }
 ```
+
 ---
 
 ## 相关文档 {#相关文档-1}

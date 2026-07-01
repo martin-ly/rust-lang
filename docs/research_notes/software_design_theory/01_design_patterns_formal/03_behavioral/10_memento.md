@@ -150,6 +150,7 @@ $$\mathit{restore}(o, m)\text{ 要求 }m\text{ 与 }o\text{ 版本兼容}$$
 
    struct Memento { state: String }
    ```
+
 2. **状态捕获**：
    - `save()`：`self.clone()` 创建状态副本
    - 所有权转移至 Memento
@@ -279,6 +280,7 @@ o.restore(&m);
 
 assert_eq!(o.state, "A");
 ```
+
 ---
 
 ## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
@@ -331,6 +333,7 @@ fn main() {
 
 }
 ```
+
 ### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
@@ -407,6 +410,7 @@ Axiom MO2 (兼容性)
 
 推论 MO-C1 (近似表达)
 ```
+
 ---
 
 ## 形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}
@@ -445,6 +449,7 @@ Axiom MO2 (兼容性)
 
 { Q  }  // 后置条件
 ```
+
 > 以上规约以霍尔三元组风格表述；Rust 编译器通过所有权、借用与类型检查在编译期强制大部分不变式与前置条件。
 
 ---
@@ -500,6 +505,7 @@ Axiom MO2 (兼容性)
 ```rust,ignore
 struct Memento<'a> { editor: &'a Editor }
 ```
+
 **风险**：生命周期与发起者绑定，难以长期存储。
 
 ### 反例 2：恢复后修改备忘录影响发起者 {#反例-2恢复后修改备忘录影响发起者}
@@ -513,6 +519,7 @@ m.text.push_str("x");
 
 editor.restore(&m);
 ```
+
 若备忘录字段为引用或共享 `Rc`，可能意外影响状态。
 
 ### 反例 3：备忘录字段未完整捕获状态 {#反例-3备忘录字段未完整捕获状态}
@@ -522,6 +529,7 @@ editor.restore(&m);
 ```rust,ignore
 struct EditorState { text: String } // 缺少 cursor
 ```
+
 **风险**：恢复后 cursor 仍保留旧值，状态不一致。
 
 ---
@@ -542,6 +550,7 @@ struct EditorState { text: String } // 缺少 cursor
 
 └── 需状态转换？ → State
 ```
+
 ---
 
 ## 与 GoF 对比 {#与-gof-对比}
@@ -626,6 +635,7 @@ mindmap
 
       审计日志
 ```
+
 ---
 
 ## 与其他模式的关系图 {#与其他模式的关系图}
@@ -650,6 +660,7 @@ graph LR
 
     style P fill:#4CAF50,stroke:#2E7D32,color:#fff
 ```
+
 ---
 
 ## 实质内容五维自检 {#实质内容五维自检}

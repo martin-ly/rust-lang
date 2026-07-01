@@ -86,6 +86,7 @@ Crate 安全边界
 
     └── private    → 最强封装，仅当前模块可见
 ```
+
 **关键关系：**
 
 1. **可见性是安全的“软边界”**：Rust 借用检查器不直接检查可见性，但可见性限制了哪些代码能构造或破坏类型的内部状态，从而间接保证 unsafe 代码所依赖的 invariant。
@@ -173,6 +174,7 @@ impl Drop for SafeHandle {
 
 }
 ```
+
 ### 2. 内部可变性抽象：简化版 `Cell` {#2-内部可变性抽象简化版-cell}
 
 ```rust
@@ -210,6 +212,7 @@ impl<T: Copy> MyCell<T> {
 
 }
 ```
+
 `value` 为私有，外部无法绕过 `get`/`set` 直接读取/写入，从而保证 `T: Copy` 这一内部可变性契约。
 
 ### 3. `unsafe trait` 的模块内实现 {#3-unsafe-trait-的模块内实现}
@@ -229,6 +232,7 @@ mod inner {
 
 pub use inner::MyType;
 ```
+
 ---
 
 ## 反例与边界 {#反例与边界}

@@ -201,6 +201,7 @@
 
 └── 结论：绝大多数 GoF 与扩展模式为纯 Safe
 ```
+
 ---
 
 ## 设计模式 × 安全边界 {#设计模式-安全边界}
@@ -370,6 +371,7 @@ fn config() -> &'static Config {
 
 // 安全：OnceLock 线程安全；无 static mut
 ```
+
 ### 示例 2：需共享可变状态的 Observer {#示例-2需共享可变状态的-observer}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -389,6 +391,7 @@ let (tx, rx) = mpsc::channel::<Event>();
 
 // 安全：消息传递无共享；Send 约束保证
 ```
+
 ### 示例 3：需 FFI 的 Gateway {#示例-3需-ffi-的-gateway}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
@@ -415,6 +418,7 @@ impl PaymentGateway for FFIPaymentGateway {
 
 // 调用方：仅用 trait，无 unsafe；SafeB(Gateway) = Unsafe 但对外 Safe
 ```
+
 ---
 
 ## 引用 {#引用}

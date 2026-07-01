@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **Crossbeam 无锁并发原语与 EBR 内存回收架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [并发编程](../../../../concept/03_advanced/01_concurrency.md)
 > - [并发模式](../../../../concept/03_advanced/10_concurrency_patterns.md)
 > - [无锁编程](../../../../concept/03_advanced/16_lock_free.md)
@@ -72,6 +73,7 @@ let q = ArrayQueue::new(10);
 
 q.push(1).unwrap();
 ```
+
 > [来源: Crossbeam Examples](https://github.com/crossbeam-rs/crossbeam/tree/master/crossbeam-channel/examples)
 
 ---
@@ -142,6 +144,7 @@ graph TB
 
     HAZ --> LOCAL
 ```
+
 > **认知功能**: 此图展示 Crossbeam 的核心设计——所有无锁数据结构共享同一个 Epoch 回收系统。当一个线程从数据结构中移除节点时，该节点不会立即被释放，而是加入"延迟销毁队列"，直到全局 epoch 推进到所有活跃线程都已确认通过该 epoch 为止。
 > [来源: Brown, T. (2015). "Reclaiming Memory for Lock-Free Data Structures". TAAPS]
 
@@ -185,6 +188,7 @@ stateDiagram-v2
 
     end note
 ```
+
 **关键不变量**：
 
 - 当线程处于 `Active` 状态时，它看到的所有共享节点至少在一个 epoch 前是有效的
@@ -242,6 +246,7 @@ impl Guard {
 
 }
 ```
+
 **类型安全保证**：
 
 - `Guard` 的 RAII 语义确保 `unpin()` 总是被调用，即使发生 panic
@@ -267,6 +272,7 @@ let cell = AtomicCell::new(42);
 
 let old = cell.fetch_add(1);  // SeqCst 默认排序
 ```
+
 ```rust,ignore
 // crossbeam-queue 中的无锁队列使用精心选择的内存排序
 
@@ -289,6 +295,7 @@ struct Slot<T> {
 
 }
 ```
+
 **内存排序策略**：
 
 - `head` 和 `tail` 使用 `Acquire`/`Release` 配对，保证 buffer 访问的 happens-before 关系
@@ -320,6 +327,7 @@ crossbeam::scope(|s| {
 
 }).unwrap();
 ```
+
 **形式化保证**：
 
 - `Scope::spawn` 的签名要求闭包参数 `'scope` 生命周期覆盖整个 scope 块
@@ -385,6 +393,7 @@ pub fn push(&self, value: T) -> Result<(), T> {
 
 }
 ```
+
 **正确性定理**：
 
 - **线性化**：`tail.compare_exchange_weak` 的成功 CAS 是 `push` 的线性化点
@@ -415,6 +424,7 @@ graph LR
 
     style S2 fill:#f9f,stroke:#333
 ```
+
 每个 Segment 是一个小型 `ArrayQueue`，当当前 Segment 满时，分配新的 Segment 并原子地链接到链表尾部。`tail` 指针使用**双重 CAS** 同时更新段内索引和段指针。
 
 > [来源: Crossbeam Queue — SegQueue](https://docs.rs/crossbeam-queue/latest/crossbeam_queue/struct.SegQueue.html)
@@ -485,6 +495,7 @@ graph BT
 
     PI --> Q
 ```
+
 > **关键事实**: Tokio 的 `runtime::task` 模块和 Rayon 的 `ThreadPool` 都直接依赖 `crossbeam-deque` 实现工作窃取。没有 Crossbeam，Rust 的异步和数据并行生态将失去最重要的调度基础设施。
 > [来源: Tokio Cargo.toml](https://github.com/tokio-rs/tokio/blob/master/tokio/Cargo.toml)
 > [来源: Rayon Cargo.toml](https://github.com/rayon-rs/rayon/blob/master/Cargo.toml)

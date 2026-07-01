@@ -529,6 +529,7 @@ OwnState := {Owned, Borrowed_Imm(q), Borrowed_Mut, Moved}
 
   where q ∈ (0,1] is fractional permission
 ```
+
 - **Owned**: 完全所有权 $(1, v)$
 - **Borrowed_Imm(q)**: 共享只读权限 $(q, v)$, $q < 1$
 - **Borrowed_Mut**: 独占写入权限 $(1, v)$ + 排他性标记
@@ -601,6 +602,7 @@ own s "hello"  (* s ↦_1 "hello" *)
 
 move s s'  (* s ↦_0 ⊥ * s' ↦_1 "hello" *)
 ```
+
 **实际验证工作流**:
 
 1. 编写 Rust 程序
@@ -797,6 +799,7 @@ fn example() {
 
 }
 ```
+
 ```coq
 (* Aeneas 翻译到 Coq (示意) *)
 
@@ -818,6 +821,7 @@ Definition example : unit :=
 
   tt.
 ```
+
 **与本文档的对应**:
 
 - 预言变量保持了本文规则 6（借用唯一性）的语义
@@ -912,6 +916,7 @@ let r = &mut x;  // r 从 x 生成
 
 // x = 10 预言实现
 ```
+
 ```coq
 (* Aeneas Coq *)
 
@@ -927,6 +932,7 @@ let r' := write r 10 in
 
 let x2 := finalize_borrow r' π in      (* x2 = π = 10 *)
 ```
+
 **borrow_generated_from 在这里的角色**:
 
 - 建立 $r$ 与 $x$ 的关联
@@ -971,6 +977,7 @@ fn complex_borrow_chain() {
 
 }  // 借用链结束，顺序释放
 ```
+
 **Aeneas 翻译**:
 
 ```coq
@@ -994,6 +1001,7 @@ let data2 := finalize_borrow r1' π1 in
 
 data2  (* [100; 2; 3] *)
 ```
+
 **与本文档的集成**:
 
 - Aeneas 的 `borrow_generated_from` 可作为 Def 1.3 ($\Omega$) 的**精细化 (refinement)**
@@ -1181,6 +1189,7 @@ OwnState := {Owned, Borrowed_Imm(q), Borrowed_Mut, Moved}
 
   where q ∈ (0,1] 为分数权限
 ```
+
 这与本文档 Def 1.3 的所有权环境 `Ω` 完全兼容，并可作为其机械证明的底层模型。
 
 ### 4. Oxide（ICFP 2023）类型系统语义 {#4-oxideicfp-2023类型系统语义}
@@ -1458,6 +1467,7 @@ CMU 15-799 教授的分离逻辑是 Rust 所有权系统的理论基础。
 ```text
 {Ω(x) = Owned} let y = x; {Ω(x) = Moved ∧ Ω(y) = Owned ∧ Γ(y) = Γ(x)}
 ```
+
 #### Separation Logic 在 Rust 中的体现 {#separation-logic-在-rust-中的体现}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -1757,6 +1767,7 @@ $$
 
 Γ ⊢ RefCell::try_map(r, f) : Result<Ref<U>, Ref<T>>
 ```
+
 **语义定义**:
 
 $$
@@ -1868,6 +1879,7 @@ impl Config {
 
 }
 ```
+
 **与 map 的对比**:
 
 | 方法 | 签名 | 用途 | 失败处理 |
@@ -2205,6 +2217,7 @@ fn transitive_ownership() {
 
 }
 ```
+
 ---
 
 #### **引理 6.2 (Copy 类型与 Move 类型的行为差异)** {#引理-62-copy-类型与-move-类型的行为差异}
@@ -2283,6 +2296,7 @@ fn copy_vs_move() {
 
 }
 ```
+
 ---
 
 #### **推论 6.3 (Safe Rust 子集的内存安全保证)** {#推论-63-safe-rust-子集的内存安全保证}
@@ -2440,6 +2454,7 @@ fn use_after_move() {
 
 }
 ```
+
 **形式化分析**:
 
 - 移动后: $\Omega(s1) = \text{Moved}$, $\Omega(s2) = \text{Owned}$
@@ -2475,6 +2490,7 @@ fn double_mutable_borrow() {
 
 }
 ```
+
 **形式化分析**:
 
 - 规则 6 要求: $\forall b_1, b_2: \text{type}(b_1) = \&mut T \land \text{type}(b_2) = \&mut T \land \text{target}(b_1) = \text{target}(b_2) \rightarrow b_1 = b_2$
@@ -2505,6 +2521,7 @@ fn dangling_reference() -> &'static String {
 
 }  // s 在这里被释放，引用悬垂
 ```
+
 **形式化分析**:
 
 - 规则 8: $\text{borrow}(x, b) \rightarrow \text{scope}(b) \subseteq \text{scope}(x)$
@@ -2546,6 +2563,7 @@ fn mixed_borrow_violation() {
 
 }
 ```
+
 **形式化分析**:
 
 - 规则 6 推论: 不可变借用和可变借用互斥
@@ -2605,6 +2623,7 @@ fn partial_move() {
 
 }
 ```
+
 **形式化分析**:
 
 - 结构体 $S$ 的字段所有权: $\Omega(S.f_i)$ 可独立移动
@@ -2640,6 +2659,7 @@ fn iterator_invalidation() {
 
 }
 ```
+
 **形式化分析**:
 
 - `for item in &vec` 创建不可变借用 `&vec`
@@ -2702,6 +2722,7 @@ fn self_referential_move() {
 
 }
 ```
+
 **形式化分析**:
 
 - 移动语义: 值被**按位复制**到新位置，原位置失效
@@ -2751,6 +2772,7 @@ fn data_race() {
 
 }
 ```
+
 **正确版本** (使用 Arc<Mutex<T>>):
 
 ```rust
@@ -2783,6 +2805,7 @@ fn safe_concurrent_access() {
 
 }
 ```
+
 **形式化分析**:
 
 - `Send` 和 `Sync` trait 约束线程间共享
@@ -2917,6 +2940,7 @@ fn safe_concurrent_access() {
 
       └─ 资源代数 ↔ 所有权状态
 ```
+
 ### 证明依赖图 {#证明依赖图}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -3023,6 +3047,7 @@ fn safe_concurrent_access() {
 
               └────────────────────────┘
 ```
+
 ### 概念定义-属性关系-解释论证 层次汇总 {#概念定义-属性关系-解释论证-层次汇总}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -3175,6 +3200,7 @@ fn main() {
 
 } // s2 离开作用域，值被丢弃
 ```
+
 **形式化描述**:
 
 - 初始状态: $\Omega(s1) = \text{Owned}$, $\Gamma(s1) = \text{"hello"}$
@@ -3212,6 +3238,7 @@ fn calculate_length(s: &String) -> usize {
 
 } // 借用结束，s 的所有权未转移
 ```
+
 **形式化描述**:
 
 - 借用期间: $\Omega(s) = \text{Owned}$, 存在借用引用
@@ -3236,6 +3263,7 @@ fn main() {
 
 } // x 和 y 都离开作用域，但整数是基本类型，不需要释放
 ```
+
 **形式化描述**:
 
 - 由于 `i32` 实现 `Copy`，执行 `let y = x;` 时：
@@ -3273,6 +3301,7 @@ fn scope_example() {
 
 }
 ```
+
 **形式化分析**：
 
 - 借用 `r` 的作用域是 `[t1, t2]`
@@ -3334,6 +3363,7 @@ fn complex_ownership() {
 
 }
 ```
+
 **形式化分析**：
 
 - 部分移动：结构体的部分字段被移动
@@ -3371,6 +3401,7 @@ fn ownership_with_functions() {
 
 }
 ```
+
 **形式化分析**：
 
 - 函数参数接收所有权：`move(s1, param)`
@@ -3398,6 +3429,7 @@ fn main() {
 
 }
 ```
+
 **形式化描述**:
 
 - 进入内部作用域: $\Omega(s) = \text{Owned}$, $\Gamma(s) = \text{"hello"}$
@@ -3532,6 +3564,7 @@ fn ownership_with_parameters() {
 
 }
 ```
+
 **形式化分析**:
 
 - 函数调用时：$\text{move}(s, \text{param})$
@@ -3603,6 +3636,7 @@ fn complex_ownership() {
 
 }
 ```
+
 **形式化分析**:
 
 - 部分移动：$\Omega(\text{line.start}) = \text{Moved}$，$\Omega(\text{line.end}) = \text{Owned}$
@@ -3632,6 +3666,7 @@ fn error_example() {
 
 }
 ```
+
 **形式化分析**:
 
 - 移动后：$\Omega(s1) = \text{Moved}$，$\Omega(s2) = \text{Owned}$
@@ -3673,6 +3708,7 @@ fn ownership_and_borrowing() {
 
 }
 ```
+
 **形式化分析**:
 
 - 借用期间：$\Omega(s) = \text{Owned}$，存在借用引用

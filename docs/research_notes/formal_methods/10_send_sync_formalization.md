@@ -248,6 +248,7 @@ Def SEND1, SYNC1
 
     前提: [async_state_machine](10_async_state_machine.md) Def SPAWN1
 ```
+
 ---
 
 ## 🔗 与 spawn/Future/Arc 衔接 {#与-spawnfuturearc-衔接}

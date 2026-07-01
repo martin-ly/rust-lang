@@ -125,6 +125,7 @@
 
 > **用途**: （可选）文档定位、推荐读者
 ```
+
 - **子目录扩展**：formal_methods、type_theory、software_design_theory 子文档可增加「分类」「安全边界」「23 模式矩阵」等；与上述五类并存，不替代「Rust 版本」。
 - **格式**：每行一条 `> **key**: value`；key 与冒号间无空格，冒号后一空格。
 - 详见 FORMAT_AND_CONTENT_ALIGNMENT_PLAN F1.1。

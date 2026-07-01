@@ -49,6 +49,7 @@ HTTP              HTTP              HTTP
                          └── TCP              └── UDP
                                                └── TLS 1.3 (内建)
 ```
+
 **核心洞察**: HTTP/3 不是"HTTP over UDP"，而是"HTTP over QUIC"——QUIC 同时解决了传输可靠性和安全性。
 
 ---
@@ -98,6 +99,7 @@ HTTP              HTTP              HTTP
     └── 内部服务网格?
             └── 已用 gRPC? ──▶ gRPC over QUIC (实验性)
 ```
+
 ---
 
 ## 代码示例 {#代码示例}
@@ -144,6 +146,7 @@ async fn quic_client(
     Ok(())
 }
 ```
+
 ### QUIC 服务器（quinn） {#quic-服务器quinn}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -187,6 +190,7 @@ async fn handle_connection(connection: quinn::Connection) {
     }
 }
 ```
+
 ### HTTP/3 客户端（h3 + quinn） {#http3-客户端h3-quinn}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -226,6 +230,7 @@ async fn http3_get(url: &str) -> Result<String, Box<dyn std::error::Error>> {
     Ok(String::from_utf8_lossy(&body).to_string())
 }
 ```
+
 ---
 
 ## 与 HTTP/2 的对比 {#与-http2-的对比}

@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **ort ONNX Runtime Rust 绑定的 Session/Tensor/ExecutionProvider 架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [机器学习生态](../../../../concept/06_ecosystem/46_machine_learning_ecosystem.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
@@ -65,6 +66,7 @@ let input = Tensor::from_array(([1usize, 1, 1, 1], vec![1.0_f32].into_boxed_slic
 let outputs = session.run(ort::inputs![input])?;
 let (_shape, data) = outputs[0].try_extract_tensor::<f32>()?;
 ```
+
 > [来源: [ort docs.rs – Session](https://docs.rs/ort/latest/ort/session/struct.Session.html)]
 
 ---
@@ -99,6 +101,7 @@ let session = Session::builder()?
     .with_execution_providers([CUDAExecutionProvider::default().build()])?
     .commit_from_file("yolov8m.onnx")?;
 ```
+
 > [来源: [ort docs.rs – GraphOptimizationLevel](https://docs.rs/ort/latest/ort/session/builder/enum.GraphOptimizationLevel.html)]
 
 ### 2.2 张量输入输出 {#22-张量输入输出}
@@ -110,6 +113,7 @@ let input = Tensor::from_array(([1usize, 3, 224, 224], vec![0.0_f32; 3 * 224 * 2
 let outputs = session.run(ort::inputs!["image" => input])?;
 let (_shape, data) = outputs["output0"].try_extract_tensor::<f32>()?;
 ```
+
 > [来源: [ort docs.rs – Tensor](https://docs.rs/ort/latest/ort/value/struct.Tensor.html)]
 
 ### 2.3 执行提供者（Execution Provider） {#23-执行提供者execution-provider}

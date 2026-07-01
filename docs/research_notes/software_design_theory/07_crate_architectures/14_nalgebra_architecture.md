@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **nalgebra / ndarray 的类型级维度与 BLAS 后端架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [算法与竞赛编程](../../../../concept/06_ecosystem/29_algorithms_competitive_programming.md)
 > - [Rust 数据科学](../../../../concept/06_ecosystem/55_rust_for_data_science.md)
 > - [性能优化](../../../../concept/06_ecosystem/15_performance_optimization.md)
@@ -73,6 +74,7 @@ where
 
 }
 ```
+
 | 参数 | 含义 | 典型值 |
 |:---|:---|:---|
 | `T` | 元素类型 | `f32`, `f64`, `i32`, `Complex<f64>` |
@@ -121,6 +123,7 @@ let b: Matrix2x3<f64> = Matrix2x3::new(
 
 let c: DMatrix<f64> = DMatrix::from_element(100, 100, 0.0);
 ```
+
 `U2`、`U3` 等是零大小类型 (ZST)，运行时不占空间，仅用于类型检查。
 
 ### 2.3 `DimName` Trait 与 Const Generics 演进 {#23-dimname-trait-与-const-generics-演进}
@@ -154,6 +157,7 @@ impl DimName for U3 {
 
 }
 ```
+
 Rust 1.51+ 引入 const generics 后，nalgebra 逐步引入了 `Const<N>` 作为现代替代方案：
 
 ```rust,ignore
@@ -166,6 +170,7 @@ let m: SMatrix<f64, 3, 3> = SMatrix::identity();
 
 // 等价于：Matrix<f64, Const<3>, Const<3>, _>
 ```
+
 `Const<N>` 将编译期整数直接嵌入类型系统，比 `DimName` 更直接、更符合 Rust 语言演进方向。
 
 > [来源: Rust Reference — Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics)
@@ -198,6 +203,7 @@ let result = m * v;
 
 // ERROR: mismatched types: expected `Const<3>`, found `Const<4>`
 ```
+
 ---
 
 ## 3. ndarray 核心: 泛型存储与 N 维视图 {#3-ndarray-核心-泛型存储与-n-维视图}
@@ -231,6 +237,7 @@ where
 
 }
 ```
+
 | 参数 | 含义 | 典型值 |
 |:---|:---|:---|
 | `S` | 数据存储 | `OwnedRepr<T>` (Vec), `ViewRepr<&T>`, `ViewRepr<&mut T>` |
@@ -265,6 +272,7 @@ let mut data = Array2::zeros((3, 4));
 
 let mut_view: ArrayViewMut2<f64> = data.slice_mut(s![0..2, 0..2]);
 ```
+
 **关键洞察**: `ArrayView` 不拥有数据，仅持有指向底层存储的指针、维度信息和 strides。创建视图是 O(1) 操作，没有数据复制。
 
 ### 3.3 `Dimension` Trait 与形状抽象 {#33-dimension-trait-与形状抽象}
@@ -291,6 +299,7 @@ pub trait Dimension: Clone + Eq + Debug + Send + Sync + Default {
 
 }
 ```
+
 `Dimension` trait 使 ndarray 能够统一处理静态维度（`Ix1`, `Ix2`）和动态维度（`IxDyn`）：
 
 ```rust,ignore
@@ -308,6 +317,7 @@ let shape = vec![2, 3, 4];
 
 let adyn: ArrayD<f64> = ArrayD::zeros(IxDyn(&shape));
 ```
+
 > [来源: ndarray 文档 — Dimension trait](https://docs.rs/ndarray/latest/ndarray/trait.Dimension.html)
 
 ---
@@ -342,6 +352,7 @@ pub type Mat4<T> = SMatrix<T, 4, 4>;
 
 let transform: Mat4<f64> = Mat4::identity();
 ```
+
 `Const<N>` 的优势在于：**维度信息完全由编译期整数决定，不依赖复杂的类型级编程**，更易于阅读与维护。
 
 ### 4.2 ndarray: `Dimension` + 广播 {#42-ndarray-dimension-广播}
@@ -368,6 +379,7 @@ let c = &a + &b;
 
 assert_eq!(c.shape(), &[2, 3]);
 ```
+
 广播规则在编译期部分验证，运行时检查剩余维度兼容性。
 
 > [来源: ndarray 文档 — Broadcasting](https://docs.rs/ndarray/latest/ndarray/doc/ndarray/struct.ArrayBase.html#broadcasting)
@@ -395,6 +407,7 @@ ndarray-linalg = { version = "0.16", features = ["openblas-static"] }
 
 # 或 "intel-mkl-static", "netlib-static" {#或-intel-mkl-static-netlib-static}
 ```
+
 ```rust,ignore
 use ndarray::{array, Array2};
 
@@ -419,6 +432,7 @@ let a_inv = a.inv().unwrap();
 
 let (eigvals, eigvecs) = a.eigh(ndarray_linalg::UPLO::Upper).unwrap();
 ```
+
 > [来源: ndarray-linalg 文档](https://docs.rs/ndarray-linalg/latest/ndarray_linalg/)
 
 ### 5.2 `nalgebra-lapack` {#52-nalgebra-lapack}
@@ -433,6 +447,7 @@ nalgebra = "0.32"
 
 nalgebra-lapack = "0.23"  # 绑定 LAPACK
 ```
+
 nalgebra-lapack 为 nalgebra 的 `OMatrix`（ owned matrix ）类型提供 LAPACK 功能：SVD、QR、LU、Cholesky 分解等。
 
 ### 5.3 特征门控的设计优势 {#53-特征门控的设计优势}
@@ -477,6 +492,7 @@ flowchart LR
 
     style PureRust fill:#fff9c4
 ```
+
 **关键设计**: 不启用 BLAS 时，代码仍可编译运行，使用纯 Rust 实现；启用后自动路由到优化后端。这使依赖 crate 无需强制下游链接系统库。
 
 > [来源: BLAS Standard — Netlib](https://www.netlib.org/blas/)
@@ -517,6 +533,7 @@ fn transform_point(m: &Matrix3<f64>, p: &Matrix3x1<f64>) -> Matrix3x1<f64> {
 
 }
 ```
+
 **ndarray（动态维度）**:
 
 ```rust,ignore
@@ -529,6 +546,7 @@ fn transform_point(m: &Array2<f64>, p: &ArrayView1<f64>) -> ndarray::Result<Arra
 
 }
 ```
+
 **NumPy（Python）**:
 
 ```python
@@ -539,6 +557,7 @@ def transform_point(m: np.ndarray, p: np.ndarray) -> np.ndarray:
 
     return m @ p  # 运行时验证维度
 ```
+
 > [来源: NumPy 文档 — Broadcasting](https://numpy.org/doc/stable/user/basics.broadcasting.html)
 
 ---

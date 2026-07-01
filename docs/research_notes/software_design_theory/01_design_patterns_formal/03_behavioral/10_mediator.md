@@ -151,6 +151,7 @@ $$\text{避免循环引用；用 }\mathit{Weak}\text{ 或重构为无环}$$
    ```rust,ignore
    struct Mediator { colleagues: Vec<Weak<Colleague>> }
    ```
+
 2. **所有权与弱引用**：
    - `Rc<Colleague>`：拥有同事
    - `Weak<Colleague>`：不增加引用计数
@@ -184,6 +185,7 @@ channel 或回调消息传递满足借用规则；无数据竞争。
 
    // rx.recv() → 接收所有权
    ```
+
 2. **所有权转移**：
    - 消息发送时所有权转移
    - 无共享可变状态
@@ -273,6 +275,7 @@ let m = Mediator {
 
 m.broadcast("hello");
 ```
+
 ---
 
 ## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
@@ -331,6 +334,7 @@ fn main() {
 
 }
 ```
+
 ### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
@@ -407,6 +411,7 @@ ownership_model
 
 推论 ME-C1 (纯 Safe Mediator)
 ```
+
 ---
 
 ## 形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}
@@ -445,6 +450,7 @@ ownership_model
 
 { Q  }  // 后置条件
 ```
+
 > 以上规约以霍尔三元组风格表述；Rust 编译器通过所有权、借用与类型检查在编译期强制大部分不变式与前置条件。
 
 ---
@@ -505,6 +511,7 @@ fn run_room(rx: mpsc::Receiver<ChatMessage>) {
 
 }
 ```
+
 ---
 
 ## 相关模式 {#相关模式}
@@ -547,6 +554,7 @@ struct A { b: Rc<RefCell<B>> }
 
 struct B { a: Rc<RefCell<A>> }
 ```
+
 **风险**：循环引用，违背中介者解耦目的。
 
 ### 反例 2：Mediator 持有组件可变引用导致借用冲突 {#反例-2mediator-持有组件可变引用导致借用冲突}
@@ -556,6 +564,7 @@ struct B { a: Rc<RefCell<A>> }
 ```rust,ignore
 struct Mediator { components: Vec<&mut Component> }
 ```
+
 **编译器错误**：无法构造生命周期正确的自引用集合。
 
 ### 反例 3：channel 关闭后发送 {#反例-3channel-关闭后发送}
@@ -567,6 +576,7 @@ drop(rx);
 
 mediator.notify("btn", Event::Clicked); // send 返回 Err
 ```
+
 **运行期**：`send` 返回 `Err(SendError)`，需显式处理。
 
 ---
@@ -587,6 +597,7 @@ mediator.notify("btn", Event::Clicked); // send 返回 Err
 
 └── 需沿链传递？ → Chain of Responsibility
 ```
+
 ---
 
 ## 与 GoF 对比 {#与-gof-对比}
@@ -671,6 +682,7 @@ mindmap
 
       表单协调
 ```
+
 ---
 
 ## 与其他模式的关系图 {#与其他模式的关系图}
@@ -695,6 +707,7 @@ graph LR
 
     style CR fill:#9E9E9E,stroke:#616161,color:#fff
 ```
+
 ---
 
 ## 实质内容五维自检 {#实质内容五维自检}

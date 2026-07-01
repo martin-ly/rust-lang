@@ -124,6 +124,7 @@ async fn get_user(
         .map_err(|_| StatusCode::NOT_FOUND)
 }
 ```
+
 **核心设计**:
 
 - 基于 Tower 的服务抽象
@@ -184,6 +185,7 @@ async fn main() -> std::io::Result<()> {
     .await
 }
 ```
+
 **核心设计**:
 
 - Actor 模型架构
@@ -238,6 +240,7 @@ fn rocket() -> _ {
         .mount("/", routes![create_user, get_user])
 }
 ```
+
 **核心设计**:
 
 - 宏驱动的声明式路由
@@ -304,6 +307,7 @@ async fn transfer_funds(
     Ok(())
 }
 ```
+
 **核心优势**:
 
 - 编译时 SQL 验证
@@ -359,6 +363,7 @@ fn create_user(conn: &mut PgConnection, name: &str, email: &str) -> QueryResult<
         .get_result(conn)
 }
 ```
+
 ---
 
 ### Sea-ORM {#sea-orm}
@@ -391,6 +396,7 @@ async fn find_user_with_posts(db: &DatabaseConnection, user_id: i32) -> Result<O
         .map(|result| result.into_iter().next())
 }
 ```
+
 ---
 
 ## ⚡ 异步运行时 {#异步运行时}
@@ -445,6 +451,7 @@ async fn task_management_example() {
     }
 }
 ```
+
 **性能调优**:
 
 - 工作线程数 = CPU 核心数
@@ -487,6 +494,7 @@ mod custom_format {
     }
 }
 ```
+
 ---
 
 ## 🧪 测试工具 {#测试工具}
@@ -523,6 +531,7 @@ mod tests {
     }
 }
 ```
+
 ---
 
 ## 📈 监控与可观测性 {#监控与可观测性}
@@ -559,6 +568,7 @@ fn init_tracing() {
         .init();
 }
 ```
+
 ---
 
 ## 🔗 参考资源 {#参考资源}

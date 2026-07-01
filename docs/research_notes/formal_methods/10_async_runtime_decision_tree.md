@@ -114,6 +114,7 @@
 
     └── 嵌入式Linux → tokio/rt-multi-thread
 ```
+
 ---
 
 ## 主流运行时对比 {#主流运行时对比}
@@ -195,6 +196,7 @@
 
     └── sync (Mutex, RwLock, Notify)
 ```
+
 ---
 
 ## 代码示例 {#代码示例}
@@ -242,6 +244,7 @@ async fn handle_connection(mut socket: tokio::net::TcpStream) {
 
 }
 ```
+
 ### 混合同步/异步代码 {#混合同步异步代码}
 
 >
@@ -267,6 +270,7 @@ async fn main() {
 
 }
 ```
+
 ---
 
 **维护者**: Rust Formal Methods Research Team

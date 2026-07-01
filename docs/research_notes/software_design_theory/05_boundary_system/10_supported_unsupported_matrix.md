@@ -234,6 +234,7 @@
 
     └── 是 → 需 FFI（unsafe 封装）
 ```
+
 ---
 
 ## 典型 crate 映射 {#典型-crate-映射}
@@ -335,6 +336,7 @@ async fn serve() {
 
 }
 ```
+
 ### 示例 2：no_std 嵌入式 {#示例-2no_std-嵌入式}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**

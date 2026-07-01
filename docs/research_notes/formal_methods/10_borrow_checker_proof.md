@@ -329,6 +329,7 @@ void vulnerable() {
 
 }
 ```
+
 **Rust 借用检查器的防护**:
 
 ```rust
@@ -349,6 +350,7 @@ fn safe_buffer() {
 
 }
 ```
+
 **形式化对应**:
 
 - 6.826 漏洞成因: `gets` 不检查输入长度，覆盖返回地址
@@ -544,6 +546,7 @@ let guard = mutex.lock().unwrap();  // {I(R)} lock() {R}
 
 // {R} drop(guard) {I(R)}
 ```
+
 **形式化对应**（Def MUTEX1）：
 
 - $I(R)$: `Mutex<T>` 的锁不变式（内部数据满足某些条件）
@@ -708,6 +711,7 @@ Oxide 的 progress & preservation 证明补充了 RustBelt 的语义类型安全
 
 形式化: RustBelt (Iris) / RustSEM (K) / Aeneas (Coq/F*) ──证明──→ 内存安全定理
 ```
+
 **结论**: 借用检查器是「静态前端」，Tree Borrows 与 RustSEM 提供「运行时可执行的别名语义」，RustBelt 提供「高阶并发分离逻辑证明」，四者共同构成 Rust 内存安全的多层次证据链。
 
 ---
@@ -1408,6 +1412,7 @@ mindmap
 
       Unsafe 契约
 ```
+
 ---
 
 ## 🌳 证明树 {#证明树}
@@ -1592,6 +1597,7 @@ graph TD
 
     T2 --> C2
 ```
+
 ---
 
 ## 📋 概念定义-属性关系-解释论证 汇总表 {#概念定义-属性关系-解释论证-汇总表}
@@ -1673,6 +1679,7 @@ fn immutable_borrow_example() {
 
 }
 ```
+
 **形式化分析**：
 
 - $r_1, r_2 \in I$（不可变借用集合）
@@ -1702,6 +1709,7 @@ fn mutable_borrow_example() {
 
 }
 ```
+
 **形式化分析**：
 
 - $r_1 \in M$（可变借用集合）
@@ -1739,6 +1747,7 @@ fn data_race_prevention() {
 
 }
 ```
+
 **形式化分析**：
 
 - 借用检查器检测到潜在的 Axiom 2 违反
@@ -1781,6 +1790,7 @@ fn borrow_scope_example() {
 
 }
 ```
+
 **形式化分析**:
 
 - 借用作用域：$[\text{start}, \text{end}]$
@@ -1818,6 +1828,7 @@ fn valid_borrow<'a>(s: &'a String) -> &'a String {
 
 }
 ```
+
 **形式化分析**:
 
 - 错误情况：$\text{Lifetime}(r) \not\subseteq \text{Scope}(r)$
@@ -1896,6 +1907,7 @@ fn complex_borrow() {
 
 }
 ```
+
 **形式化分析**:
 
 - 方法调用创建借用
@@ -2105,6 +2117,7 @@ Axiom 1: 同一时间只能有一个可变借用指向同一内存
 
 Axiom 2: 可变借用与不可变借用互斥
 ```
+
 **形式化**:
 
 $$
@@ -2128,6 +2141,7 @@ let r = &mut x;
 
 *r = new_val;
 ```
+
 ```coq
 (* Aeneas 翻译 *)
 
@@ -2143,6 +2157,7 @@ let x' := finalize_borrow (cur', prophecy) in
 
 ...
 ```
+
 **核心洞察**:
 
 - 可变借用的"副作用"被翻译为**显式状态传递**
@@ -2160,6 +2175,7 @@ let x' := finalize_borrow (cur', prophecy) in
 ```text
 borrow_generated_from(b, x) ≡ 借用 b 从变量 x 生成
 ```
+
 **性质**:
 
 - 追踪借用的来源
@@ -2209,6 +2225,7 @@ Theorem 1: Check(P) = Pass → DataRaceFree(P)
 
 - 两者结合 → 数据竞争自由
 ```
+
 #### Aeneas 保证 {#aeneas-保证}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -2224,6 +2241,7 @@ Theorem 1: Check(P) = Pass → DataRaceFree(P)
 
 原始 Rust 程序无数据竞争
 ```
+
 **关键观察**:
 
 - Aeneas 只接受 Safe Rust 子集
@@ -2319,6 +2337,7 @@ Theorem 1: Check(P) = Pass → DataRaceFree(P)
 
 └─────────────────────────────────────────────────────────────┘
 ```
+
 ### 与本文形式化的整合 {#与本文形式化的整合}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**

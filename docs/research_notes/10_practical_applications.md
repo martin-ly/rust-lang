@@ -190,6 +190,7 @@ impl Syscall {
     }
 }
 ```
+
 **性能表现**：
 
 - 内存安全：零内存安全漏洞
@@ -247,6 +248,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 }
 ```
+
 **性能表现**：
 
 - 高并发：支持百万级并发连接
@@ -323,6 +325,7 @@ async fn main() -> std::io::Result<()> {
     .await
 }
 ```
+
 **性能表现**：
 
 - 吞吐量：> 200,000 req/s
@@ -418,6 +421,7 @@ impl TiKVEngine {
     }
 }
 ```
+
 **性能表现**：
 
 - 吞吐量：> 100,000 ops/s
@@ -504,6 +508,7 @@ impl TockOS {
     }
 }
 ```
+
 **性能表现**：
 
 - 内存占用：< 64KB
@@ -613,6 +618,7 @@ async fn main() {
     axum::serve(listener, app).await.unwrap();
 }
 ```
+
 **性能特点**：
 
 - 高并发处理能力
@@ -677,6 +683,7 @@ async fn process_task(task: DataTask, worker_id: usize) {
     tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
 }
 ```
+
 **性能特点**：
 
 - 高吞吐量
@@ -765,6 +772,7 @@ impl<T> Drop for SafeVec<T> {
     }
 }
 ```
+
 **性能特点**：
 
 - 内存安全：编译时保证内存安全
@@ -871,6 +879,7 @@ impl<T> Drop for SafeVec<T> {
     }
 }
 ```
+
 **安全特点**：
 
 - 内存安全保证

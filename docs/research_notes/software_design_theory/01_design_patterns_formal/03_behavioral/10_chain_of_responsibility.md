@@ -196,6 +196,7 @@ $$\mathit{handle}(h, r) \text{ 不处理 } \implies \mathit{next}(h) \neq \mathr
 
    }
    ```
+
 2. **借用分析**：
    - `&self` 借用当前处理器
    - `ref n` 借用 `next` 中的 `Box<Handler>`
@@ -302,6 +303,7 @@ let h1 = Handler {
 
 h1.handle(&"B".into());  // 委托至 h2
 ```
+
 **形式化对应**：`Handler` 即 $H$；`Request` 即 $R$；`next_handler` 即 $\mathrm{Option}\langle H \rangle$。
 
 ---
@@ -356,6 +358,7 @@ fn main() {
 
 }
 ```
+
 ### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
@@ -432,6 +435,7 @@ borrow_checker_proof
 
 推论 CR-C1 (纯 Safe Chain)
 ```
+
 ### 与 Rust 类型系统的联系 {#与-rust-类型系统的联系}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -490,6 +494,7 @@ borrow_checker_proof
 
 { Q  }  // 后置条件
 ```
+
 > 以上规约以霍尔三元组风格表述；Rust 编译器通过所有权、借用与类型检查在编译期强制大部分不变式与前置条件。
 
 ---
@@ -581,6 +586,7 @@ let chain = LogHandler {
 
 };
 ```
+
 **形式化对应**：`LogHandler`、`AuthHandler` 即 $H$；`Request` 即 $R$；`next` 即 $\mathrm{Option}\langle H \rangle$；Axiom CR1 由 `Box` 链无环保证。
 
 ---
@@ -627,6 +633,7 @@ h2.set_next(Box::new(h1)); // 循环
 
 h1.handle("x"); // stack overflow
 ```
+
 ### 反例 2：trait object 不满足对象安全 {#反例-2trait-object-不满足对象安全}
 
 > 以下代码故意展示编译失败，用于说明对应反例。
@@ -635,6 +642,7 @@ h1.handle("x"); // stack overflow
 ```rust,ignore
 trait Handler { fn handle<T>(&self, req: T); }
 ```
+
 **编译器错误**：`cannot be made into an object`。
 
 ### 反例 3：请求生命周期不足 {#反例-3请求生命周期不足}
@@ -644,6 +652,7 @@ trait Handler { fn handle<T>(&self, req: T); }
 ```rust,ignore
 fn handle(&self, request: &str) -> Option<String> { Some(request.into()) }
 ```
+
 若返回的 `String` 依赖 `request`，需确保不返回对 `request` 的引用。
 
 ---
@@ -664,6 +673,7 @@ fn handle(&self, request: &str) -> Option<String> { Some(request.into()) }
 
 └── 需封装操作？ → Command
 ```
+
 ---
 
 ## 与 GoF 对比 {#与-gof-对比}
@@ -748,6 +758,7 @@ mindmap
 
       权限检查
 ```
+
 ---
 
 ## 与其他模式的关系图 {#与其他模式的关系图}
@@ -772,6 +783,7 @@ graph LR
 
     style CO fill:#9E9E9E,stroke:#616161,color:#fff
 ```
+
 ---
 
 ## 实质内容五维自检 {#实质内容五维自检}

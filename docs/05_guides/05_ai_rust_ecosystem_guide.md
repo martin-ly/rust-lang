@@ -176,6 +176,7 @@
 candle-core = "0.8"
 candle-nn = "0.8"
 ```
+
 ```rust,ignore
 use candle_core::{Device, Tensor};
 
@@ -187,6 +188,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 ### 4.2 Candle 神经网络推理 {#42-candle-神经网络推理}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -216,6 +218,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 ### 4.3 Burn 最小示例 {#43-burn-最小示例}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -225,6 +228,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 burn = { version = "0.20", features = ["train"] }
 burn-ndarray = "0.20"
 ```
+
 ```rust,ignore
 use burn::tensor::Tensor;
 use burn_ndarray::NdArrayBackend;
@@ -253,6 +257,7 @@ fn main() {
     println!("Product: {:?}", product.to_data());
 }
 ```
+
 ### 4.4 使用 Candle 加载预训练模型 {#44-使用-candle-加载预训练模型}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -287,6 +292,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 ### 4.5 本地 LLM 推理 (llm crate) {#45-本地-llm-推理-llm-crate}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -295,6 +301,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 [dependencies]
 llm = { git = "https://github.com/rustformers/llm" }
 ```
+
 ```rust,ignore
 use llm::Model;
 
@@ -338,6 +345,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 ### 4.6 并发数据加载器 {#46-并发数据加载器}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -394,6 +402,7 @@ fn tokenize_and_embed(text: &str) -> Vec<f32> {
         .collect()
 }
 ```
+
 ---
 
 ## 五、RAG 索引建议 {#五rag-索引建议}
@@ -438,6 +447,7 @@ fn process_large_tensor() -> candle_core::Result<()> {
     Ok(())
 }
 ```
+
 ### 6.2 批量处理 {#62-批量处理}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -455,6 +465,7 @@ fn batch_inference(model: &dyn Model, inputs: &[Tensor]) -> Vec<Tensor> {
         .collect()
 }
 ```
+
 ### 6.3 错误处理 {#63-错误处理}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -476,6 +487,7 @@ enum AIError {
 
 type Result<T> = std::result::Result<T, AIError>;
 ```
+
 ---
 
 ## 七、后续计划（扩展方向） {#七后续计划扩展方向}
@@ -515,6 +527,7 @@ type Result<T> = std::result::Result<T, AIError>;
 // 使用 mistral.rs 或 llm crate 构建本地推理 API
 // 适用于：隐私敏感场景、离线环境、边缘设备
 ```
+
 ### 场景3: 嵌入式 AI 推理 {#场景3-嵌入式-ai-推理}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -597,6 +610,7 @@ pub fn sliding_predict(model: &Model, data: &[f32]) -> Vec<f32> {
         .collect()
 }
 ```
+
 ### LazyLock 在模型缓存中的应用 {#lazylock-在模型缓存中的应用}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -619,6 +633,7 @@ pub fn quick_inference(input: &[f32]) -> Option<Vec<f32>> {
     LazyLock::get(&AI_MODEL).map(|model| model.infer(input))
 }
 ```
+
 ### ControlFlow 在数据处理管道中的应用 {#controlflow-在数据处理管道中的应用}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -646,6 +661,7 @@ fn preprocess_pipeline(
     ControlFlow::Continue(processed)
 }
 ```
+
 ### 数学常量在算法优化中的应用 {#数学常量在算法优化中的应用}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -680,6 +696,7 @@ pub fn golden_ratio_search_lr(
     (a + b) / 2.0
 }
 ```
+
 **性能提升**: 使用 `array_windows` 进行特征提取，吞吐量提升 25%。
 
 **最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)

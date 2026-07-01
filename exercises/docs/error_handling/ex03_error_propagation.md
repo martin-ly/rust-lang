@@ -27,12 +27,14 @@
 cd exercises
 cargo test error_handling::ex03_error_propagation
 ```
+
 或运行整个主题的测试：
 
 ```bash
 cd exercises
 cargo test error_handling::
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

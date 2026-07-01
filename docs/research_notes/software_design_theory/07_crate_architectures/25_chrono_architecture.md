@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **chrono 日期时间库的类型化时区与 Duration 架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [字符串与文本](../../../../concept/01_foundation/09_strings_and_text.md)
 > - [数据库系统](../../../../concept/06_ecosystem/37_database_systems.md)
 >
@@ -71,6 +72,7 @@ graph TD
     UTC -->|with_timezone| LOC
     LOC -->|with_timezone| UTC
 ```
+
 | 类型 | 语义 | 典型使用场景 |
 |:--|:--|:--|
 | `NaiveDate` | 无时间区分的日期 | 生日、截止日期 |
@@ -98,6 +100,7 @@ let sh = FixedOffset::east_opt(8 * 3600).unwrap();
 let sh_dt = utc.with_timezone(&sh);
 let local = utc.with_timezone(&Local);
 ```
+
 ### 2.3 `Duration` 与 `TimeDelta` {#23-duration-与-timedelta}
 
 > **[来源: [chrono docs.rs – TimeDelta](https://docs.rs/chrono/latest/chrono/struct.TimeDelta.html)]**
@@ -111,6 +114,7 @@ let now = Utc::now();
 let later = now + Duration::days(1) + Duration::hours(2);
 let diff = later - now;
 ```
+
 > **[来源: [Rust Standard Library – std::time::Duration](https://doc.rust-lang.org/std/time/struct.Duration.html)]**
 
 与 `std::time::Duration` 的关键差异：
@@ -137,6 +141,7 @@ let dt: DateTime<FixedOffset> =
     DateTime::parse_from_str("2026-06-29T21:50:42+08:00", "%Y-%m-%dT%H:%M:%S%z")?;
 let formatted = dt.format("%Y年%m月%d日 %H:%M:%S %:z").to_string();
 ```
+
 常用格式说明符：
 
 | 说明符 | 含义 | 示例 |
@@ -163,6 +168,7 @@ use chrono::{DateTime, Utc};
 let s = "2026-06-29T21:50:42+08:00";
 let dt: DateTime<Utc> = s.parse::<DateTime<Utc>>()?;
 ```
+
 ---
 
 ## 4. 时区处理最佳实践 {#4-时区处理最佳实践}
@@ -180,6 +186,7 @@ use chrono::{Local, Utc};
 let stored = Utc::now();              // 存数据库
 let display = stored.with_timezone(&Local); // 展示给用户
 ```
+
 ---
 
 ## 5. 反例边界 {#5-反例边界}
@@ -197,6 +204,7 @@ let naive = NaiveDateTime::parse_from_str("2026-06-29T21:50:42", "%Y-%m-%dT%H:%M
 // ❌ 错误：未声明时区即视为 UTC 发送给服务端
 let utc_assumed = naive.and_utc(); // 实际语义为 "此时刻的本地时间视为 UTC"
 ```
+
 ### 5.2 时区忽略 {#52-时区忽略}
 
 直接比较 `DateTime<Utc>` 与 `DateTime<Local>` 在类型上不允许，必须先统一时区：
@@ -210,6 +218,7 @@ let b = Local::now();
 // let same = a == b;
 let same = a == b.with_timezone(&Utc); // ✅ 统一时区后再比较
 ```
+
 ### 5.3 Duration 为负 {#53-duration-为负}
 
 `chrono::Duration` 支持负值，但 `std::time::Duration` 不支持，混用会导致 panic 或转换失败。
@@ -222,6 +231,7 @@ let chrono_dur = Duration::seconds(-10);
 // ❌ 错误：chrono::Duration::to_std() 对负值返回 Err
 let _std: StdDuration = chrono_dur.to_std().unwrap();
 ```
+
 ### 5.4 格式化字符串错误 {#54-格式化字符串错误}
 
 `%Z` 与 `%z` 含义不同：前者是时区名称（chrono 输出为数字偏移），后者是数值偏移；解析时大小写敏感。
@@ -232,6 +242,7 @@ use chrono::NaiveDate;
 // ❌ 错误：%m 与 %d 对应的输入缺少前导零时解析失败
 let d = NaiveDate::parse_from_str("2026-6-9", "%Y-%m-%d");
 ```
+
 ---
 
 ## 6. 设计模式与类型系统利用 {#6-设计模式与类型系统利用}

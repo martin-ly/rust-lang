@@ -116,6 +116,7 @@ cargo doc --no-deps
 # 生成私有项的文档 {#生成私有项的文档}
 cargo doc --document-private-items
 ```
+
 ---
 
 ### 1.2 文档结构 {#12-文档结构}
@@ -138,6 +139,7 @@ target/doc/
 ├── settings.html            # 设置页
 └── help.html               # 帮助页
 ```
+
 ---
 
 ## 2. 文档注释语法 {#2-文档注释语法}
@@ -165,6 +167,7 @@ pub fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 ````
+
 **内部文档注释** (`//!`):
 
 ```rust
@@ -176,6 +179,7 @@ pub fn multiply(a: i32, b: i32) -> i32 {
     a * b
 }
 ```
+
 **块文档注释**:
 
 ```rust,ignore
@@ -196,6 +200,7 @@ pub fn divide(a: i32, b: i32) -> Result<i32, String> {
  * 用于模块级文档
  */
 ```
+
 ---
 
 ### 2.2 Markdown 支持 {#22-markdown-支持}
@@ -235,6 +240,7 @@ pub fn divide(a: i32, b: i32) -> Result<i32, String> {
 /// | 单元格 | 单元格 |
 pub fn demo() {}
 ```
+
 ---
 
 ### 2.3 代码块 {#23-代码块}
@@ -252,6 +258,7 @@ pub fn demo() {}
 /// ```
 pub fn example() {}
 ````
+
 **指定语言**:
 
 ````rust,ignore
@@ -269,6 +276,7 @@ pub fn example() {}
 /// ```
 pub fn multi_lang() {}
 ````
+
 **编译失败的示例**:
 
 ````rust,ignore
@@ -278,6 +286,7 @@ pub fn multi_lang() {}
 /// ```
 pub fn error_demo() {}
 ````
+
 ---
 
 ## 3. 文档测试 (Doc Tests) {#3-文档测试-doc-tests}
@@ -305,11 +314,13 @@ pub fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 ````
+
 **运行文档测试**:
 
 ```bash
 cargo test --doc
 ```
+
 ---
 
 ### 3.2 高级测试选项 {#32-高级测试选项}
@@ -327,6 +338,7 @@ cargo test --doc
 /// ```
 pub fn demo() {}
 ````
+
 **`no_run`**: 编译但不运行
 
 ````rust,ignore
@@ -336,6 +348,7 @@ pub fn demo() {}
 /// ```
 pub fn exit_demo() {}
 ````
+
 **`ignore`**: 忽略测试
 
 ````rust,ignore
@@ -344,6 +357,7 @@ pub fn exit_demo() {}
 /// ```
 pub fn ignored() {}
 ````
+
 **`should_panic`**: 应该 panic
 
 ````rust,ignore
@@ -352,6 +366,7 @@ pub fn ignored() {}
 /// ```
 pub fn panic_demo() {}
 ````
+
 ---
 
 ### 3.3 测试属性 {#33-测试属性}
@@ -377,6 +392,7 @@ pub fn panic_demo() {}
 /// ```
 pub struct MyType;
 ````
+
 ---
 
 ## 4. 文档链接 {#4-文档链接}
@@ -405,6 +421,7 @@ pub fn add(a: i32, b: i32) -> i32 {
 /// 示例结构体
 pub struct MyStruct;
 ```
+
 ---
 
 ### 4.2 链接语法 {#42-链接语法}
@@ -423,6 +440,7 @@ pub struct MyStruct;
 /// - [custom text][`Type`]: 自定义显示文本
 pub fn link_examples() {}
 ```
+
 **链接到特定项类型**:
 
 ```rust
@@ -434,6 +452,7 @@ pub fn link_examples() {}
 /// - [macro@my_macro]: 宏
 pub fn explicit_links() {}
 ```
+
 ---
 
 ### 4.3 链接到外部文档 {#43-链接到外部文档}
@@ -446,6 +465,7 @@ pub fn explicit_links() {}
 /// 参考 [Rust Book](https://doc.rust-lang.org/book/)
 pub fn external_links() {}
 ```
+
 ---
 
 ## 5. 文档组织 {#5-文档组织}
@@ -470,6 +490,7 @@ pub fn external_links() {}
 
 pub fn function() {}
 ````
+
 ---
 
 ### 5.2 crate 级文档 {#52-crate-级文档}
@@ -498,6 +519,7 @@ pub fn function() {}
 #![doc(html_logo_url = "https://example.com/logo.png")]
 #![doc(html_favicon_url = "https://example.com/favicon.ico")]
 ````
+
 ---
 
 ### 5.3 文档章节 {#53-文档章节}
@@ -539,6 +561,7 @@ pub fn function() {}
 /// 空间复杂度: O(1)
 pub fn documented_function() {}
 ````
+
 ---
 
 ## 6. JSON 输出 (Rust 1.54+) {#6-json-输出-rust-154}
@@ -558,6 +581,7 @@ cargo +nightly rustdoc -- -Z unstable-options --output-format json
 # 或使用 rustdoc 直接生成 {#或使用-rustdoc-直接生成}
 rustdoc src/lib.rs -Z unstable-options --output-format json
 ```
+
 ---
 
 ### 6.2 JSON 格式 {#62-json-格式}
@@ -587,6 +611,7 @@ rustdoc src/lib.rs -Z unstable-options --output-format json
   }
 }
 ```
+
 ---
 
 ### 6.3 应用场景 {#63-应用场景}
@@ -614,12 +639,14 @@ rustdoc src/lib.rs -Z unstable-options --output-format json
 #![doc(html_root_url = "https://docs.example.com/my-crate/")]
 #![doc(html_playground_url = "https://play.rust-lang.org/")]
 ```
+
 **Cargo.toml 配置**:
 
 ```toml
 [package.metadata.docs.rs]
 rustdoc-args = ["--html-in-header", "header.html"]
 ```
+
 **`header.html`**:
 
 ```html
@@ -630,6 +657,7 @@ rustdoc-args = ["--html-in-header", "header.html"]
   }
 </style>
 ```
+
 ---
 
 ### 7.2 自定义 HTML {#72-自定义-html}
@@ -645,6 +673,7 @@ rustdoc-args = ["--html-in-header", "header.html"]
     html_playground_url = "https://play.rust-lang.org/"
 )]
 ```
+
 ---
 
 ### 7.3 Logo 和 Favicon {#73-logo-和-favicon}
@@ -656,6 +685,7 @@ rustdoc-args = ["--html-in-header", "header.html"]
 #![doc(html_favicon_url = "https://example.com/favicon.ico")]
 #![doc(html_root_url = "https://docs.rs/my-crate/")]
 ```
+
 ---
 
 ## 8. 文档属性 {#8-文档属性}
@@ -683,6 +713,7 @@ pub fn add(a: i32, b: i32) -> i32 {  // 搜索别名
     a + b
 }
 ```
+
 ---
 
 ### 8.2 条件文档 {#82-条件文档}
@@ -696,6 +727,7 @@ pub fn conditional_doc() {}
 #[doc(cfg(feature = "async"))]
 pub async fn async_function() {}  // 显示需要的 feature
 ```
+
 ---
 
 ## 9. 私有项文档 {#9-私有项文档}
@@ -710,12 +742,14 @@ pub async fn async_function() {}  // 显示需要的 feature
 # 生成包含私有项的文档 {#生成包含私有项的文档}
 cargo doc --document-private-items
 ```
+
 ```rust
 /// 私有函数也可以有文档
 fn private_helper() {
     // ...
 }
 ```
+
 ---
 
 ### 9.2 内部文档 {#92-内部文档}
@@ -730,6 +764,7 @@ pub fn internal_api() {}  // 公开但隐藏的 API
 #[doc = "Internal use only"]
 pub(crate) fn crate_internal() {}
 ```
+
 ---
 
 ## 10. 搜索与索引 {#10-搜索与索引}
@@ -763,6 +798,7 @@ pub fn add(a: i32, b: i32) -> i32 {
 }
 // 可以通过 "addition", "sum", "plus" 搜索到此函数
 ```
+
 ---
 
 ## 11. CI/CD 集成 {#11-cicd-集成}
@@ -798,6 +834,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./target/doc
 ```
+
 ---
 
 ### 11.2 文档部署 {#112-文档部署}
@@ -811,6 +848,7 @@ jobs:
 all-features = true
 rustdoc-args = ["--cfg", "docsrs"]
 ```
+
 **自定义域名**:
 
 创建 `CNAME` 文件:
@@ -818,6 +856,7 @@ rustdoc-args = ["--cfg", "docsrs"]
 ```text
 docs.example.com
 ```
+
 ---
 
 ## 12. 最佳实践 {#12-最佳实践}
@@ -968,6 +1007,7 @@ impl Processor {
 #[derive(Default)]
 struct Config;
 ````
+
 ---
 
 ## 14. 故障排查 {#14-故障排查}
@@ -984,12 +1024,14 @@ struct Config;
 # 检查断开的链接 {#检查断开的链接}
 cargo rustdoc -- -D rustdoc::broken-intra-doc-links
 ```
+
 **2. 文档测试失败**:
 
 ```bash
 # 运行文档测试并显示详细输出 {#运行文档测试并显示详细输出}
 cargo test --doc -- --nocapture
 ```
+
 **3. JSON 输出错误**:
 
 ```bash
@@ -997,6 +1039,7 @@ cargo test --doc -- --nocapture
 rustup override set nightly
 cargo +nightly rustdoc -- -Z unstable-options --output-format json
 ```
+
 ---
 
 ## 15. 相关资源 {#15-相关资源}
@@ -1113,6 +1156,7 @@ pub fn multiply(a: i32, b: i32) -> i32 {
     a.checked_mul(b).expect("Integer overflow")
 }
 ```
+
 ### 16.2 文档测试高级用法 {#162-文档测试高级用法}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -1157,6 +1201,7 @@ pub fn process(input: &str) -> Result<String, Error> {
     // 实现
 }
 ```
+
 ### 16.3 形式化文档链接 {#163-形式化文档链接}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -1206,6 +1251,7 @@ impl<T: Clone + Default> MyType<T> {
     }
 }
 ```
+
 ### 16.4 条件文档示例 {#164-条件文档示例}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -1235,6 +1281,7 @@ pub fn x86_64_optimized() -> i32 {
     // x86_64 特定实现
 }
 ```
+
 ### 16.5 形式化规范链接 {#165-形式化规范链接}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**

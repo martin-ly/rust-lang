@@ -74,6 +74,7 @@ CQRS_System := (C, Q, S_c, S_q, P_sync)
 
     P_sync: S_c → S_q           -- 同步投影函数
 ```
+
 ### Def CQ2: 命令与查询的分离 {#def-cq2-命令与查询的分离}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -85,6 +86,7 @@ Command := input → (S_c → S_c') × Events
 
 Query   := input → S_q → output
 ```
+
 - **命令**产生副作用（状态变更 + 事件）
 - **查询**无副作用（纯函数）
 
@@ -97,6 +99,7 @@ Consistency_Boundary := Δt ∈ Time
 
   where: exec(c, t) → P_sync(s_c) = s_q  at time t + Δt
 ```
+
 读写模型之间存在**时间延迟 Δt**。
 
 ---
@@ -113,6 +116,7 @@ Consistency_Boundary := Δt ∈ Time
 ```
 ∀c ∈ C. exec(c, s) = (s', ev) → exec(c, s') ≠ (s'', ev')
 ```
+
 命令执行后，同一命令再次执行产生不同结果（基于版本/ID去重）。
 
 ### Axiom CQ2: 投影单调性 {#axiom-cq2-投影单调性}
@@ -122,6 +126,7 @@ Consistency_Boundary := Δt ∈ Time
 ```
 ∀s_c₁, s_c₂. s_c₁ ⊆ s_c₂ → P_sync(s_c₁) ⊆ P_sync(s_c₂)
 ```
+
 同步投影是**单调的**，新事件不会撤销已同步的数据。
 
 ### Axiom CQ3: 查询一致性级别 {#axiom-cq3-查询一致性级别}
@@ -131,6 +136,7 @@ Consistency_Boundary := Δt ∈ Time
 ```
 Query_Consistency(q) ∈ {Strong, Eventual, Bounded_Staleness}
 ```
+
 不同查询可配置不同一致性级别。
 
 ---
@@ -147,6 +153,7 @@ Query_Consistency(q) ∈ {Strong, Eventual, Bounded_Staleness}
 ```
 ∀c ∈ C, q ∈ Q. c 和 q 可并发执行
 ```
+
 **证明概要**:
 
 1. 命令操作写模型 S_c
@@ -161,6 +168,7 @@ Query_Consistency(q) ∈ {Strong, Eventual, Bounded_Staleness}
 ```
 ∀Q'. |Q'| = n → Scale_Out(n) ∈ O(n)
 ```
+
 **证明概要**:
 
 1. 查询模型 S_q 是只读的
@@ -275,6 +283,7 @@ impl<E, S> ProjectionSync<E, S> {
 
 }
 ```
+
 ---
 
 ## 5. 与其他模式的关系 {#5-与其他模式的关系}

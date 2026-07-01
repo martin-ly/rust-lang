@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **metrics 指标门面与 Prometheus 导出的 Recorder trait 架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [日志与可观测性](../../../../concept/06_ecosystem/13_logging_observability.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
@@ -58,6 +59,7 @@ process_query().await;
 histogram!("query_duration_seconds").record(start.elapsed().as_secs_f64());
 counter!("queries_total", "op" => "search").increment(1);
 ```
+
 > [来源: [metrics Examples](https://github.com/metrics-rs/metrics/tree/main/metrics/examples)]
 
 ---
@@ -76,6 +78,7 @@ graph TD
     RECORDER -->|implements| TCP[metrics-exporter-tcp]
     RECORDER -->|implements| OTLP[OpenTelemetry integration]
 ```
+
 > [来源: [metrics Recorder Docs](https://docs.rs/metrics/latest/metrics/trait.Recorder.html)]
 
 | 类型 | 职责 | 关键方法 |
@@ -111,6 +114,7 @@ PrometheusBuilder::new()
     .with_http_listener("0.0.0.0:9090".parse()?)
     .install()?;
 ```
+
 > [来源: [metrics-exporter-prometheus docs.rs](https://docs.rs/metrics-exporter-prometheus/latest/metrics_exporter_prometheus/)]
 
 ### 2.4 描述指标 {#24-描述指标}
@@ -121,6 +125,7 @@ PrometheusBuilder::new()
 metrics::describe_counter!("http_requests_total", "Total number of HTTP requests");
 metrics::describe_histogram!("http_request_duration_seconds", Unit::Seconds, "HTTP request latency");
 ```
+
 > [来源: [metrics describe_counter Docs](https://docs.rs/metrics/latest/metrics/macro.describe_counter.html)]
 
 ---

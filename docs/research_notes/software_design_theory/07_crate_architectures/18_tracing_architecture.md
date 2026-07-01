@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **Tracing 可观测性库（Span / Event / Subscriber / Layer）架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [日志与可观测性](../../../../concept/06_ecosystem/13_logging_observability.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
@@ -63,6 +64,7 @@ async fn process_request(req: Request) -> Response {
 
 }
 ```
+
 > [来源: Tracing Examples — Async Instrumentation](https://github.com/tokio-rs/tracing/tree/master/examples)
 
 ---
@@ -131,6 +133,7 @@ graph TB
 
     SUB --> L1 & L2 & L3 & L4
 ```
+
 > **认知功能**: 此图展示 Tracing 的核心分层——应用代码通过宏生成事件，分发器根据 `Level` 和 `Filter` 进行快速路由决策，最终由 `Subscriber` + `Layer` 组合消费。与 `log` crate 的"全局 Logger"不同，Tracing 支持**线程局部和作用域级的 Subscriber 切换**。
 > [来源: Tracing Docs — Subscriber](https://docs.rs/tracing-subscriber/latest/tracing_subscriber/)
 
@@ -181,6 +184,7 @@ stateDiagram-v2
 
     end note
 ```
+
 每个状态转换都对应 `Subscriber` trait 的一个回调方法，允许后端精确追踪执行流程。
 
 > [来源: Tracing Docs — Span Lifecycle](https://docs.rs/tracing/latest/tracing/span/struct.Span.html)
@@ -217,6 +221,7 @@ impl<T: Value> Value for Option<T> { /* ... */ }
 
 impl<T: Value> Value for &[T] { /* ... */ }
 ```
+
 ```rust,ignore
 // 编译期保证：不支持的类型无法通过
 
@@ -224,6 +229,7 @@ info!(count = 42u32);           // ✅ OK
 
 info!(data = vec![1,2,3]);      // ❌ 编译错误：Vec<i32> 未实现 Value
 ```
+
 > **定理 T1**: Tracing 的 `Value` trait 系统确保所有记录到 Span/Event 的字段都在编译期通过类型检查，消除了传统日志中 `"key=" + value.to_string()` 的运行时格式化错误。
 > [来源: Tracing Docs — `Value` trait](https://docs.rs/tracing-core/latest/tracing_core/field/trait.Value.html)
 
@@ -253,6 +259,7 @@ async fn handle_request(req: Request, _ctx: Context) -> Result<Response, Error> 
 
 }
 ```
+
 **零成本保证**：
 
 - `level = "info"` 在编译期生成 `Metadata` 静态常量
@@ -287,6 +294,7 @@ let subscriber = tracing_subscriber::registry()
 
 subscriber.init();
 ```
+
 **组合性定理**：
 
 - `Layer< S >` 对 `S: Subscriber` 构成**函子 (Functor)**：每个 Layer 可以独立包装 Subscriber
@@ -331,6 +339,7 @@ subscriber.init();
 
 }
 ```
+
 | 场景 | 运行时开销 | 证明 |
 |:---|:---|:---|
 | 无 Subscriber | 0 | `enabled()` 返回 `false`，后续代码被编译器 DCE 消除 |
@@ -366,6 +375,7 @@ static MY_EVENT_METADATA: Metadata<'static> = Metadata::new(
 
 );
 ```
+
 这意味着：
 
 - **目标文件大小**: Metadata 在只读数据段（`.rodata`），不占用运行时堆内存
@@ -401,6 +411,7 @@ std::thread::spawn(move || {
 
 });
 ```
+
 **安全保证**：
 
 - `Span: Send + Sync`，因为底层 `Id` 是整数 + 对 `Subscriber` 的虚调用
@@ -434,6 +445,7 @@ struct Inner {
 
 }
 ```
+
 - `Span::clone()` 增加引用计数
 - `Span::drop()` 减少引用计数，当计数归零时触发 `on_close`
 - 不存在循环引用风险，因为 `Span` 之间是**父子关系**（树形），而非循环图
@@ -489,6 +501,7 @@ sequenceDiagram
 
     OTel->>Exp: Export Span
 ```
+
 > **核心价值**: 开发者只需学习 Tracing API，即可获得 Jaeger、Zipkin、Honeycomb 等全链路追踪能力，无需直接操作 OpenTelemetry 的复杂 SDK。
 > [来源: OpenTelemetry Rust Docs](https://docs.rs/opentelemetry/latest/opentelemetry/)
 > [来源: Tracing OpenTelemetry Integration](https://docs.rs/tracing-opentelemetry/latest/tracing_opentelemetry/)

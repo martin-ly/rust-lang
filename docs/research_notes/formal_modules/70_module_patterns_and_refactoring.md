@@ -62,6 +62,7 @@ my_parser/
     ├── parser.rs       // L4 实现机制：语法分析
     └── error.rs        // L3 领域概念：错误类型
 ```
+
 ### `lib.rs` 示例 {#librs-示例}
 
 ```rust
@@ -86,6 +87,7 @@ pub fn parse(input: &str) -> Result<Expr, ParseError> {
     parse_tokens(&tokens)
 }
 ```
+
 > **原则**：`pub` 项构成稳定 API；私有模块保留重构自由度。
 
 ---
@@ -117,6 +119,7 @@ pub use core::types::{Config, Request, Response};
 // 高级用户仍可访问完整内部路径
 pub mod adapters;
 ```
+
 ### 好处 {#好处}
 
 - 内部重构（如拆分 `core::types`）不影响大多数用户。
@@ -152,6 +155,7 @@ impl StableTrait for MyType {
     fn stable_method(&self) {}
 }
 ```
+
 > **应用场景**：标准库中 `ExactSizeIterator`、`ToString` 等均使用类似 sealed trait 技术保证未来可扩展。
 
 ---
@@ -183,6 +187,7 @@ pub fn reverse_buffer(buf: &mut [u8]) {
     unsafe { raw::swap_bytes(buf.as_mut_ptr(), buf.len()) };
 }
 ```
+
 > **原则**：unsafe 代码块的正确性依赖调用处维持的不变量；将这些不变量封装在私有模块中，避免外部破坏。
 
 ---
@@ -204,6 +209,7 @@ resolver = "3"
 thiserror = "2"
 serde = { version = "1", features = ["derive"] }
 ```
+
 ### 子 crate 依赖 {#子-crate-依赖}
 
 ```toml
@@ -217,6 +223,7 @@ edition = "2024"
 my_parser = { path = "../my_parser" }
 serde = { workspace = true }
 ```
+
 ### 注意事项 {#注意事项}
 
 - 一个 package 只能有一个 `lib`，但可以有多个 `bin`。
@@ -237,6 +244,7 @@ pub mod ast;
 pub mod error;
 pub mod utils;
 ```
+
 问题：
 
 - 用户必须了解内部模块才能找到 API。
@@ -260,6 +268,7 @@ pub fn parse(input: &str) -> Result<Expr, ParseError> {
     // ...
 }
 ```
+
 ### 验证清单 {#验证清单}
 
 - [ ] `cargo check` 通过。

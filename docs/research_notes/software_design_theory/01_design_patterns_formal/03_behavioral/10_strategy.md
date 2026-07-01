@@ -149,6 +149,7 @@ trait 定义策略接口；`impl Trait` 或 `dyn Trait` 实现多态；由 [trai
    ```rust
    trait Strategy { fn execute(&self, data: &[i32]) -> i32; }
    ```
+
 2. **多态实现**：
    - `impl Strategy for StrategyA`
    - `impl Strategy for StrategyB`
@@ -177,6 +178,7 @@ trait 定义策略接口；`impl Trait` 或 `dyn Trait` 实现多态；由 [trai
    ```rust,ignore
    fn run(&self) -> i32 { self.strategy.execute(&self.data) }
    ```
+
 2. **借用分析**：
    - `&self` 借用上下文
    - `&self.strategy` 借用策略
@@ -278,6 +280,7 @@ let ctx = Context::new(SumStrategy, vec![1, 2, 3]);
 
 assert_eq!(ctx.run(), 6);
 ```
+
 ---
 
 ## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
@@ -332,6 +335,7 @@ fn main() {
 
 }
 ```
+
 ### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
@@ -408,6 +412,7 @@ borrow_checker_proof
 
 推论 SR-C1 (纯 Safe Strategy)
 ```
+
 ---
 
 ## 形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}
@@ -446,6 +451,7 @@ borrow_checker_proof
 
 { Q  }  // 后置条件
 ```
+
 > 以上规约以霍尔三元组风格表述；Rust 编译器通过所有权、借用与类型检查在编译期强制大部分不变式与前置条件。
 
 ---
@@ -510,6 +516,7 @@ impl<S: CompressStrategy> Exporter<S> {
 
 }
 ```
+
 ---
 
 ## 相关模式 {#相关模式}
@@ -556,6 +563,7 @@ fn make_cart() -> ShoppingCart<'static> {
 
 }
 ```
+
 **编译器错误**：`cannot return value referencing local variable card`。
 
 ### 反例 2：策略需要 &mut 但上下文为 &self {#反例-2策略需要-mut-但上下文为-self}
@@ -571,6 +579,7 @@ impl Context {
 
 }
 ```
+
 **编译器错误**：无法通过 &self 获取 &mut。
 
 ### 反例 3：泛型策略导致代码膨胀 {#反例-3泛型策略导致代码膨胀}
@@ -580,6 +589,7 @@ impl Context {
 ```rust,ignore
 struct Context<S: Strategy> { strategy: S }
 ```
+
 每个具体策略生成一份代码，单态化膨胀。若策略类型众多，改用 `Box<dyn Strategy>`。
 
 ---
@@ -600,6 +610,7 @@ struct Context<S: Strategy> { strategy: S }
 
 └── 需状态转换？ → State
 ```
+
 ---
 
 ## 与 GoF 对比 {#与-gof-对比}
@@ -684,6 +695,7 @@ mindmap
 
       渲染后端
 ```
+
 ---
 
 ## 与其他模式的关系图 {#与其他模式的关系图}
@@ -708,6 +720,7 @@ graph LR
 
     style TM fill:#9E9E9E,stroke:#616161,color:#fff
 ```
+
 ---
 
 ## 实质内容五维自检 {#实质内容五维自检}

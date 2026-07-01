@@ -151,6 +151,7 @@ fn read_lines(path: &str) -> Result<Vec<String>, std::io::Error> {
 
 // 若中间 panic，栈展开时按创建逆序 drop；无泄漏
 ```
+
 ```rust
 // RAII：MutexGuard 自动释放锁
 
@@ -167,6 +168,7 @@ let m = Mutex::new(0);
 
 }                                         // 作用域结束，g drop，锁释放
 ```
+
 ### 1.4 常见陷阱 {#14-常见陷阱}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
@@ -241,6 +243,7 @@ fn process_order(user: UserId, order: OrderId) {
 
 }
 ```
+
 ```rust
 #[repr(transparent)]
 
@@ -263,6 +266,7 @@ impl std::ops::Add for Meter {
 
 // 零成本；防止 Meter + Kilogram 混用
 ```
+
 ### 2.4 常见陷阱 {#24-常见陷阱}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -433,6 +437,7 @@ fn load_or_default(path: &str) -> Result<u32, AppError> {
 
 }
 ```
+
 ### 6.4 常见陷阱 {#64-常见陷阱}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -511,6 +516,7 @@ fn combine_all() -> Option<u32> {
 
 }
 ```
+
 ### 7.4 与 Builder 必填校验衔接 {#74-与-builder-必填校验衔接}
 
 >
@@ -541,6 +547,7 @@ impl ConfigBuilder {
 
 }
 ```
+
 ---
 
 ## 八、Cow（Clone-on-Write）模式 {#八cowclone-on-write模式}
@@ -623,6 +630,7 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 
 }
 ```
+
 ### 8.4 常见陷阱 {#84-常见陷阱}
 
 >

@@ -73,6 +73,7 @@
 cargo install mdbook
 cargo install mdbook-quiz
 ```
+
 ### 2. 构建和预览 {#2-构建和预览}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -84,6 +85,7 @@ cd book
 mdbook build    # 构建
 mdbook serve    # 预览（自动刷新）
 ```
+
 ### 3. 访问测验 {#3-访问测验}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -107,6 +109,7 @@ mdbook serve    # 预览（自动刷新）
 ```bash
 mkdir -p book/src/quizzes
 ```
+
 ### 步骤 2：创建 TOML 测验文件 {#步骤-2创建-toml-测验文件}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -118,6 +121,7 @@ mkdir -p book/src/quizzes
 ```bash
 touch book/src/quizzes/your_topic.toml
 ```
+
 ### 步骤 3：编写测验内容 {#步骤-3编写测验内容}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -141,6 +145,7 @@ options = [
 explanation = "详细解释为什么正确答案是正确的，以及其他选项为什么错误。"
 difficulty = "基础"
 ```
+
 ### 步骤 4：创建 Markdown 入口文件 {#步骤-4创建-markdown-入口文件}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -156,6 +161,7 @@ difficulty = "基础"
 
 {{#quiz ./your_topic.toml}}
 ```
+
 ### 步骤 5：更新 SUMMARY.md {#步骤-5更新-summarymd}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -167,6 +173,7 @@ difficulty = "基础"
 ```markdown
 - [主题测验](quizzes/README.md)
 ```
+
 ### 步骤 6：更新测验索引 {#步骤-6更新测验索引}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -236,6 +243,7 @@ options = [
 explanation = "解释文本"
 difficulty = "基础"
 ```
+
 ### 多选题 (MultipleChoice) {#多选题-multiplechoice}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -255,6 +263,7 @@ options = [
 explanation = "解释文本"
 difficulty = "进阶"
 ```
+
 ### 判断题 (TrueFalse) {#判断题-truefalse}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -268,6 +277,7 @@ answer = false  # true 或 false
 explanation = "解释文本"
 difficulty = "基础"
 ```
+
 ### 填空题 (FillInBlank) {#填空题-fillinblank}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -281,6 +291,7 @@ answer = ["答案1", "答案2"]  # 允许多个正确答案
 explanation = "解释文本"
 difficulty = "进阶"
 ```
+
 ### 代码块格式 {#代码块格式}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -296,6 +307,7 @@ difficulty = "进阶"
     ```
     选择正确答案：'''
 ```
+
 注意使用三引号（'''）来支持多行字符串。
 
 ## 测验文件结构示例 {#测验文件结构示例}
@@ -317,6 +329,7 @@ difficulty = "进阶"
 [[questions]]
 # ... 挑战题目 ... {#挑战题目}
 ```
+
 ## 常见问题 {#常见问题}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -331,6 +344,7 @@ A: 确保两者都使用最新版本：
 cargo install mdbook --force
 cargo install mdbook-quiz --force
 ```
+
 ### Q: 测验不显示怎么办？ {#q-测验不显示怎么办}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**

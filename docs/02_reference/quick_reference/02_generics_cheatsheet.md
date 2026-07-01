@@ -101,6 +101,7 @@ mindmap
       上下文推导
       Turbofish 语法
 ```
+
 ---
 
 ## 📊 概念定义-属性关系-解释论证 {#概念定义-属性关系-解释论证}
@@ -140,6 +141,7 @@ graph TD
     K --> L[返回值生命周期]
     L --> F
 ```
+
 ---
 
 ## 🎯 核心概念 {#核心概念}
@@ -164,6 +166,7 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
     largest
 }
 ```
+
 ### 泛型结构体 {#泛型结构体}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -180,6 +183,7 @@ struct Point<T> {
 let integer = Point { x: 5, y: 10 };
 let float = Point { x: 1.0, y: 4.0 };
 ```
+
 ### 泛型枚举 {#泛型枚举}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -197,6 +201,7 @@ enum Result<T, E> {
     Err(E),
 }
 ```
+
 ---
 
 ## 📐 Trait 约束 {#trait-约束}
@@ -219,6 +224,7 @@ where
     // 函数体
 }
 ```
+
 ### 常见 Trait 约束 {#常见-trait-约束}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -241,6 +247,7 @@ fn print<T: Display>(item: T) {
     println!("{}", item);
 }
 ```
+
 ---
 
 ## 🔧 高级特性 {#高级特性}
@@ -258,6 +265,7 @@ trait Iterator {
     fn next(&mut self) -> Option<Self::Item>;
 }
 ```
+
 ### 泛型关联类型 (GATs) {#泛型关联类型-gats}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -269,6 +277,7 @@ trait StreamingIterator {
     fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
 }
 ```
+
 ### const 泛型 {#const-泛型}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -281,6 +290,7 @@ struct Array<T, const N: usize> {
 // 使用
 let arr: Array<i32, 5> = Array { data: [0; 5] };
 ```
+
 ---
 
 ## 🎯 常见模式 {#常见模式}
@@ -296,6 +306,7 @@ fn swap<T>(x: &mut T, y: &mut T) {
     std::mem::swap(x, y);
 }
 ```
+
 ### 模式 2: 泛型方法 {#模式-2-泛型方法}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -314,6 +325,7 @@ impl Point<f32> {
     }
 }
 ```
+
 ### 模式 3: 泛型 Trait 实现 {#模式-3-泛型-trait-实现}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -325,6 +337,7 @@ impl<T: Display> ToString for T {
     }
 }
 ```
+
 ---
 
 ## 📚 性能考虑 {#性能考虑}
@@ -340,6 +353,7 @@ impl<T: Display> ToString for T {
 let integer = largest(&[1, 2, 3]);  // 生成 largest_i32
 let float = largest(&[1.0, 2.0]);   // 生成 largest_f64
 ```
+
 **优势**:
 
 - ✅ 零运行时开销
@@ -367,6 +381,7 @@ fn largest<T>(list: &[T]) -> &T {
     largest
 }
 ```
+
 **原因**: 泛型 `T` 需约束才能使用 `>` 等操作符。
 
 **修正**:
@@ -380,6 +395,7 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
     largest
 }
 ```
+
 ---
 
 ### 反例 2: 泛型与 trait 对象混用不当 {#反例-2-泛型与-trait-对象混用不当}
@@ -394,6 +410,7 @@ fn print_all<T: Display>(items: Vec<T>) {
 }
 // 调用时需每种 T 单态化，无法动态混合类型
 ```
+
 **原因**: 需混合不同类型时应用 `dyn Display`。
 
 **修正**:
@@ -403,6 +420,7 @@ fn print_all(items: Vec<Box<dyn Display>>) {
     for i in items { println!("{}", i); }
 }
 ```
+
 ---
 
 ## 📚 相关文档 {#相关文档}
@@ -454,6 +472,7 @@ fn init_array<T, const N: usize>(init: impl Fn(usize) -> T) -> [T; N] {
     unsafe { std::mem::transmute(array) }
 }
 ```
+
 **影响**: 更安全的泛型数组初始化
 
 ---
@@ -480,6 +499,7 @@ where
 const CONFIG: i32 = get_config::<i32>();
 const REF: &i32 = &CONFIG;  // ✅ 现在支持
 ```
+
 **影响**: 更灵活的泛型 const 函数和编译时配置
 
 ---
@@ -570,6 +590,7 @@ fn main() {
     }
 }
 ```
+
 ### 场景 2: 类型安全的构建器 {#场景-2-类型安全的构建器}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -629,6 +650,7 @@ fn main() {
     println!("请求: {}", request);
 }
 ```
+
 ### 场景 3: 泛型事件处理器 {#场景-3-泛型事件处理器}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -694,6 +716,7 @@ fn main() {
     bus.publish(&event);
 }
 ```
+
 ---
 
 ## ⚠️ 边界情况 {#边界情况}
@@ -726,6 +749,7 @@ fn main() {
     println!("使用 newtype 包装");
 }
 ```
+
 ### 边界 2: 生命周期与泛型的交互 {#边界-2-生命周期与泛型的交互}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -751,6 +775,7 @@ fn main() {
     println!("值: {}", container.get());
 }
 ```
+
 ### 边界 3: 复杂 Trait 约束 {#边界-3-复杂-trait-约束}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -774,6 +799,7 @@ fn main() {
     println!("和: {:?}", sum(&floats));
 }
 ```
+
 ### 形式化理论 {#形式化理论}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -826,6 +852,7 @@ pub fn get_config() -> Option<&'static Config> {
 let phi = f64::consts::GOLDEN_RATIO;
 let gamma = f64::consts::EULER_GAMMA;
 ```
+
 **性能提升**: array_windows +15-30%, LazyLock::get() -40% 延迟, ControlFlow +10-15% 提前终止效率。
 
 **最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)
@@ -866,6 +893,7 @@ where
     }
 }
 ```
+
 ### LazyLock 在泛型常量中的应用 {#lazylock-在泛型常量中的应用}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -878,6 +906,7 @@ static TYPE_CACHE: LazyLock<HashMap<TypeId, String>> = LazyLock::new(|| {
     HashMap::new()
 });
 ```
+
 ### 性能提升总结 {#性能提升总结}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**

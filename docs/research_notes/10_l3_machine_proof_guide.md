@@ -134,6 +134,7 @@ opam install coq-iris
 
 coqtop --version
 ```
+
 ---
 
 ## 三、T-OW2所有权唯一性L3证明 {#三t-ow2所有权唯一性l3证明}
@@ -203,6 +204,7 @@ Definition ownership_unique (σ : State) : Prop :=
 
     x1 = x2.
 ```
+
 ### 3.3 状态转移规则 {#33-状态转移规则}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -265,6 +267,7 @@ Inductive reachable : State -> Prop :=
 
       reachable σ2.
 ```
+
 ### 3.4 主定理证明骨架 {#34-主定理证明骨架}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -320,6 +323,7 @@ Proof.
 
 Admitted.
 ```
+
 ---
 
 ## 四、T-BR1数据竞争自由L3证明 {#四t-br1数据竞争自由l3证明}
@@ -378,6 +382,7 @@ Definition data_race_free (accesses : list (nat * Loc * Access)) : Prop :=
 
     ~ data_race a1 a2.
 ```
+
 ### 4.3 主定理证明骨架 {#43-主定理证明骨架}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -418,6 +423,7 @@ Proof.
 
 Admitted.
 ```
+
 ---
 
 ## 五、T-TY3类型安全L3证明 {#五t-ty3类型安全l3证明}
@@ -496,6 +502,7 @@ Inductive typed (Gamma : ctx) : expr -> ty -> Prop :=
 
 where "Gamma '|-' e ':' tau" := (typed Gamma e tau).
 ```
+
 ### 5.2 进展性定理 {#52-进展性定理}
 
 >
@@ -546,6 +553,7 @@ Proof.
 
 Admitted.
 ```
+
 ---
 
 ## 六、与Aeneas工具链对接 {#六与aeneas工具链对接}
@@ -575,6 +583,7 @@ make setup-charon
 
 make
 ```
+
 ### 6.2 Rust到Lean翻译示例 {#62-rust到lean翻译示例}
 
 >
@@ -603,6 +612,7 @@ charon cargo --preset=aeneas
 
 ./bin/aeneas -backend lean example.llbc
 ```
+
 ---
 
 ## 七、验证与测试 {#七验证与测试}
@@ -622,6 +632,7 @@ coq_makefile -f _CoqProject -o Makefile
 
 make
 ```
+
 ### 7.2 证明完整性检查 {#72-证明完整性检查}
 
 >
@@ -639,6 +650,7 @@ grep -r "Admitted" *.v | wc -l
 
 grep -r "Qed" *.v | wc -l
 ```
+
 ---
 
 ## 八、里程碑 {#八里程碑}

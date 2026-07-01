@@ -207,6 +207,7 @@ trait Family {
 
 }
 ```
+
 **高阶类型 (Higher-Kinded Types)**：
 
 - GATs 提供受限的高阶类型能力
@@ -491,6 +492,7 @@ $$\text{TypeFamily} : \text{Param} \to \text{Type}$$
 
        └────────────────────────────→ AT-C1: 违反则编译错误
 ```
+
 ---
 
 ## ✅ 证明目标 {#证明目标}
@@ -570,6 +572,7 @@ impl Iterator for MyIterator {
 
 }
 ```
+
 **形式化描述**:
 
 - $\text{Iterator} = \{\text{Item} : \text{Lifetime} \to \text{Type}, \text{next} : \&mut \text{Self} \to \text{Option}(\text{Item})\}$
@@ -618,6 +621,7 @@ fn main() {
 
 }
 ```
+
 **形式化描述**:
 
 - $\text{Array} : \text{Type} \times \text{Const} \to \text{Type}$
@@ -652,6 +656,7 @@ fn use_family() {
 
 }
 ```
+
 **类型族分析**：
 
 - GATs 实现类型族模式
@@ -683,6 +688,7 @@ fn use_const_generic() {
 
 }
 ```
+
 **const 泛型分析**：
 
 - `const N: usize` 是 const 泛型参数
@@ -738,6 +744,7 @@ impl<'a, T> Iterator for SliceIter<'a, T> {
 
 }
 ```
+
 **GATs 与生命周期分析**：
 
 - GATs 允许关联类型依赖于生命周期参数
@@ -793,6 +800,7 @@ impl<T> Functor for OptionFunctor<T> {
 
 }
 ```
+
 **类型级函数分析**：
 
 - GATs 实现类型级函数
@@ -859,6 +867,7 @@ fn use_matrix() {
 
 }
 ```
+
 **const 泛型矩阵分析**：
 
 - const 泛型允许类型依赖于维度
@@ -922,6 +931,7 @@ impl AsyncIterator for AsyncRange {
 
 }
 ```
+
 **GATs 与异步分析**：
 
 - GATs 支持异步迭代器
@@ -962,6 +972,7 @@ fn use_family<F: Family>() -> F::Member<i32> {
 
 }
 ```
+
 **形式化描述**:
 
 - $\text{Family} = \{\text{Member} : \text{Type} \to \text{Type}\}$
@@ -1131,6 +1142,7 @@ let mut item: <MyContainer as Container>::Item<String> = MaybeUninit::uninit();
 
 let reference = unsafe { item.assume_init_ref() };
 ```
+
 ### const 上下文增强（Rust 1.91.1+） {#const-上下文增强rust-1911}
 
 >

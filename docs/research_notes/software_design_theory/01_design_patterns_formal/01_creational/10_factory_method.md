@@ -278,6 +278,7 @@ let product = create_product(ProductType::A);
 
 assert_eq!(product.operation(), "Product A");
 ```
+
 **形式化对应**：`create_product` 即 $\mathit{factory}$；`ProductType` 为 $C$ 的变体；`Box<dyn Product>` 为 $T$。所有权：`Box::new` 产生拥有权，返回时转移。
 
 ---
@@ -351,6 +352,7 @@ fn main() {
 
 }
 ```
+
 ### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
@@ -427,6 +429,7 @@ ownership_model T2
 
 推论 FM-C1 (纯 Safe Factory)
 ```
+
 ### 与 Rust 类型系统的联系 {#与-rust-类型系统的联系}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -485,6 +488,7 @@ ownership_model T2
 
 { Q  }  // 后置条件
 ```
+
 > 以上规约以霍尔三元组风格表述；Rust 编译器通过所有权、借用与类型检查在编译期强制大部分不变式与前置条件。
 
 ---
@@ -546,6 +550,7 @@ impl Creator for CreatorA {
 
 }
 ```
+
 **编译器错误**：`the trait bound String: Product is not satisfied`。
 
 ### 反例 2：返回借用导致生命周期错误 {#反例-2返回借用导致生命周期错误}
@@ -563,6 +568,7 @@ impl Creator for CreatorWithLocal {
 
 }
 ```
+
 **编译器错误**：`missing lifetime specifier`。
 
 ### 反例 3：默认方法中可变修改 Creator {#反例-3默认方法中可变修改-creator}
@@ -578,6 +584,7 @@ trait Creator {
 
 }
 ```
+
 **编译器错误**：`cannot borrow *self as mutable, as it is behind a & reference`。
 
 **修复**：将 `some_operation` 也改为 `&mut self` 或拆分状态。
@@ -613,6 +620,7 @@ trait Creator {
 
 └── 需克隆已有？ → Prototype
 ```
+
 ---
 
 ## 与 GoF 对比 {#与-gof-对比}
@@ -695,6 +703,7 @@ mindmap
 
       框架扩展点
 ```
+
 ---
 
 ## 与其他模式的关系图 {#与其他模式的关系图}
@@ -723,6 +732,7 @@ graph LR
 
     style SF fill:#9E9E9E,stroke:#616161,color:#fff
 ```
+
 ---
 
 ## 实质内容五维自检 {#实质内容五维自检}

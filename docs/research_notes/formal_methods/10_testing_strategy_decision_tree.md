@@ -101,6 +101,7 @@
 
    └─────────┘                  └─────────┘                   └─────────┘
 ```
+
 ---
 
 ## 一、测试类型选择决策树 {#一测试类型选择决策树}
@@ -148,6 +149,7 @@
 
 ⏱️ 执行时间: <10ms / 测试
 ```
+
 **代码示例：**
 
 ```rust
@@ -263,6 +265,7 @@ mod tests {
 
 }
 ```
+
 ---
 
 ### 1.2 集成测试 (Integration Tests) {#12-集成测试-integration-tests}
@@ -305,6 +308,7 @@ mod tests {
 
 ⏱️ 执行时间: <1s / 测试套件
 ```
+
 **代码示例：**
 
 ```rust,ignore
@@ -432,6 +436,7 @@ pub async fn setup_test_db() -> Database {
 
 }
 ```
+
 ---
 
 ### 1.3 文档测试 (Doc Tests) {#13-文档测试-doc-tests}
@@ -474,6 +479,7 @@ pub async fn setup_test_db() -> Database {
 
 ⏱️ 执行时间: 随 cargo test 自动执行
 ```
+
 **代码示例：**
 
 ```rust
@@ -647,6 +653,7 @@ impl Validator {
 
 // doctest = true
 ```
+
 ---
 
 ### 1.4 基准测试 (Benchmarks) {#14-基准测试-benchmarks}
@@ -689,6 +696,7 @@ impl Validator {
 
 ⏱️ 执行时间: 数秒到数分钟
 ```
+
 **代码示例：**
 
 ```rust,ignore
@@ -791,6 +799,7 @@ criterion_group!(benches, sorting_benchmark, async_benchmark);
 
 criterion_main!(benches);
 ```
+
 **Cargo.toml 配置：**
 
 ```toml
@@ -805,6 +814,7 @@ harness = false
 
 criterion = { version = "0.5", features = ["async_tokio"] }
 ```
+
 ---
 
 ### 1.5 模糊测试 (Fuzz Testing) {#15-模糊测试-fuzz-testing}
@@ -847,6 +857,7 @@ criterion = { version = "0.5", features = ["async_tokio"] }
 
 ⏱️ 执行时间: 持续运行（CI 或夜间）
 ```
+
 **代码示例：**
 
 ```rust,ignore
@@ -893,6 +904,7 @@ fuzz_target!(|data: &[u8]| {
 
 });
 ```
+
 **设置和运行：**
 
 ```bash
@@ -920,6 +932,7 @@ cargo fuzz run parser -- -max_total_time=300
 
 cargo fuzz run parser crash-abc123
 ```
+
 ---
 
 ### 1.6 属性测试 (Property Testing) {#16-属性测试-property-testing}
@@ -962,6 +975,7 @@ cargo fuzz run parser crash-abc123
 
 ⏱️ 执行时间: 秒级（默认 100-10000 次迭代）
 ```
+
 **代码示例：**
 
 ```rust,ignore
@@ -1089,6 +1103,7 @@ impl ReferenceStateMachine for MyStateMachine {
 
 }
 ```
+
 ---
 
 ## 二、测试工具选择矩阵 {#二测试工具选择矩阵}
@@ -1208,6 +1223,7 @@ async fn test_timer_behavior() {
 
 }
 ```
+
 ### 2.3 模拟对象：mockall {#23-模拟对象mockall}
 
 > **[来源: PLDI - Programming Language Design]**
@@ -1351,6 +1367,7 @@ pub struct UserService {
 
 }
 ```
+
 ### 2.4 快照测试：insta {#24-快照测试insta}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -1460,6 +1477,7 @@ fn test_all_fixtures() {
 
 }
 ```
+
 **工作流程：**
 
 ```bash
@@ -1482,6 +1500,7 @@ cargo insta accept
 
 cargo insta reject
 ```
+
 ### 2.5 基准测试：Criterion {#25-基准测试criterion}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
@@ -1575,6 +1594,7 @@ criterion_group!(benches, bench_database_operations);
 
 criterion_main!(benches);
 ```
+
 ---
 
 ## 三、测试策略维度 {#三测试策略维度}
@@ -1615,6 +1635,7 @@ criterion_main!(benches);
 
        ──────────────────────────
 ```
+
 **Rust 项目金字塔实现：**
 
 ```text
@@ -1640,6 +1661,7 @@ my_project/
 
     └── *.rs          # 端到端测试 (可选)
 ```
+
 ### 3.2 覆盖率目标 {#32-覆盖率目标}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -1677,6 +1699,7 @@ exclude = ["integration_tests"]
 
 timeout = "300s"
 ```
+
 ```yaml
 # .github/workflows/coverage.yml {#githubworkflowscoverageyml}
 
@@ -1717,6 +1740,7 @@ jobs:
 
           fail_ci_if_error: true
 ```
+
 ### 3.3 CI 集成策略 {#33-ci-集成策略}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -1856,6 +1880,7 @@ jobs:
 
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
+
 ### 3.4 性能回归防护 {#34-性能回归防护}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -1925,6 +1950,7 @@ criterion_group! {
 
 criterion_main!(benches);
 ```
+
 ---
 
 ## 四、最佳实践 {#四最佳实践}
@@ -1979,6 +2005,7 @@ crates/
 
         └── test_helpers/     # 跨 crate 测试工具
 ```
+
 **命名约定：**
 
 ```rust,ignore
@@ -2009,6 +2036,7 @@ mod tests {
 
 }
 ```
+
 ### 4.2 测试数据管理 {#42-测试数据管理}
 
 > **[来源: IEEE - Programming Language Standards]**
@@ -2133,6 +2161,7 @@ pub fn generate_test_users(count: usize) -> Vec<User> {
 
 }
 ```
+
 ### 4.3 异步测试模式 {#43-异步测试模式}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -2268,6 +2297,7 @@ async fn test_shared_state() {
 
 }
 ```
+
 ### 4.4 测试文档化 {#44-测试文档化}
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
@@ -2374,6 +2404,7 @@ mod test_documentation {
 
 }
 ```
+
 ---
 
 ## 五、决策流程图 {#五决策流程图}
@@ -2451,6 +2482,7 @@ mod test_documentation {
 
       └─► 否 ──► 常规断言
 ```
+
 ---
 
 ## 六、快速参考卡片 {#六快速参考卡片}
@@ -2507,6 +2539,7 @@ cargo fuzz run target_name
 
 cargo flamegraph
 ```
+
 ### 6.2 常用属性 {#62-常用属性}
 
 > **[来源: PLDI - Programming Language Design]**
@@ -2603,6 +2636,7 @@ name = "my_benchmark"
 
 harness = false
 ```
+
 ### 7.2 测试环境配置 {#72-测试环境配置}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
@@ -2649,6 +2683,7 @@ pub mod test_config {
 
 }
 ```
+
 ---
 
 ## 八、参考资源 {#八参考资源}

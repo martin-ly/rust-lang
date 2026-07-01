@@ -100,6 +100,7 @@
 > **对齐状态**: ✅ 一致
 > **最后检查**: 2026-02-20
 ```
+
 ### P1: 学术权威 {#p1-学术权威}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -121,6 +122,7 @@
 > **引用**: POPL 2018
 > **对齐状态**: ✅ 一致
 ```
+
 ### P2: 社区权威 {#p2-社区权威}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -143,6 +145,7 @@
 > **对齐状态**: ✅ 一致（本项目有扩展）
 > **差异说明**: 本项目添加了形式化定义
 ```
+
 ---
 
 ## 对齐维度 {#对齐维度}
@@ -193,6 +196,7 @@ let s = String::from("hello");
 let r = &s;
 // ✅ 一致
 ```
+
 ### 维度 3: 最佳实践对齐 {#维度-3-最佳实践对齐}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -291,6 +295,7 @@ let r = &s;
 > **原因**:
 > 本项目目标是形式化验证，因此需要补充形式化内容。
 ```
+
 ### 差异论证要求 {#差异论证要求}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -399,6 +404,7 @@ let r = &s;
                             │
                             └──→ 执行更新
 ```
+
 ---
 
 **维护者**: Rust Formal Methods Research Team

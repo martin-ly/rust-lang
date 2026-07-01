@@ -348,6 +348,7 @@ fn calculate_length(s: &String) -> usize {
     s.len()
 }
 ```
+
 ### 路径 2 代码示例：并发编程实践 {#路径-2-代码示例并发编程实践}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -369,6 +370,7 @@ fn main() {
     println!("收到: {}", received);
 }
 ```
+
 ### 路径 3 代码示例：异步编程实践 {#路径-3-代码示例异步编程实践}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -388,6 +390,7 @@ async fn main() {
     println!("{}", result);
 }
 ```
+
 ### 路径 4 代码示例：高级特性实践 {#路径-4-代码示例高级特性实践}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -411,6 +414,7 @@ fn main() {
     println!("{}", process("文本"));
 }
 ```
+
 ---
 
 ## 🎯 学习建议 {#学习建议}
@@ -602,6 +606,7 @@ fn main() {
 ├── 错误处理基础
 └── 准备进入中级学习
 ```
+
 **推荐资源**:
 
 - [Rust Book 中文版](https://kaisery.github.io/trpl-zh-cn/)
@@ -646,6 +651,7 @@ fn main() {
 ├── C10: 网络编程
 └── 实践: 构建 HTTP 服务器
 ```
+
 **代码示例 - 从 Python 迁移到 Rust**:
 
 ```rust
@@ -658,6 +664,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
         .collect()
 }
 ```
+
 **推荐资源**:
 
 - [跨语言对比文档](../02_reference/02_cross_language_comparison.md)
@@ -701,6 +708,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 ├── [国际对标索引](../../archive/research_notes_2026_06_25/10_international_formal_verification_index.md)
 └── 研究项目: 选择一个开放问题深入研究
 ```
+
 **关键形式化文档索引**:
 
 | 主题 | 文档 | 核心定理 |
@@ -743,6 +751,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 ├── FFI 与系统接口
 └── 实践: 维护 crate 或贡献标准库
 ```
+
 **推荐资源**:
 
 - [Rust 编译器开发指南](https://rustc-dev-guide.rust-lang.org/)
@@ -847,6 +856,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
        ├── Axum 服务抽象
        └── SQLx 编译时检查
 ```
+
 ### 学习资源 {#学习资源}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**

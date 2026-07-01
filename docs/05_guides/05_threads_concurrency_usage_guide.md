@@ -108,6 +108,7 @@ let handle = thread::spawn(|| {
 // 等待线程完成
 handle.join().unwrap();
 ```
+
 ### 作用域线程（Rust 1.89+） {#作用域线程rust-189}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -130,6 +131,7 @@ thread::scope(|s| {
     });
 }); // 所有线程在这里自动等待完成
 ```
+
 ---
 
 ## 📊 核心功能 {#核心功能}
@@ -161,6 +163,7 @@ for i in 0..10 {
 
 pool.join(); // 等待所有任务完成
 ```
+
 #### 线程属性 {#线程属性}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -178,6 +181,7 @@ let handle = builder.spawn(|| {
     println!("线程名称: {:?}", thread::current().name());
 }).unwrap();
 ```
+
 ### 2. 消息传递 {#2-消息传递}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -206,6 +210,7 @@ for received in rx {
     println!("收到: {}", received);
 }
 ```
+
 #### 多生产者单消费者 {#多生产者单消费者}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -231,6 +236,7 @@ for received in rx {
     println!("收到: {}", received);
 }
 ```
+
 ### 3. 共享状态 {#3-共享状态}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -261,6 +267,7 @@ for handle in handles {
 
 println!("结果: {}", *counter.lock().unwrap());
 ```
+
 #### RwLock（读写锁） {#rwlock读写锁}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -287,6 +294,7 @@ thread::spawn(move || {
     *value += 1;
 });
 ```
+
 ### 4. 同步原语 {#4-同步原语}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -324,6 +332,7 @@ impl Semaphore {
     }
 }
 ```
+
 #### 屏障（Barrier） {#屏障barrier}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -349,6 +358,7 @@ for handle in handles {
     handle.join().unwrap();
 }
 ```
+
 ### 5. 无锁数据结构 {#5-无锁数据结构}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -384,6 +394,7 @@ thread::spawn(move || {
     }
 });
 ```
+
 ---
 
 ## ⚡ 性能优化 {#性能优化}
@@ -409,6 +420,7 @@ let mutex = Arc::new(Mutex::new(data));
 }
 // 锁已释放，可以进行其他操作
 ```
+
 ### 2. 使用无锁数据结构 {#2-使用无锁数据结构}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -420,6 +432,7 @@ use c05_threads::lockfree::*;
 let queue = Arc::new(LockFreeQueue::new());
 // 无锁操作，性能更好
 ```
+
 ### 3. 工作窃取 {#3-工作窃取}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -430,6 +443,7 @@ use c05_threads::concurrency::work_stealing::WorkStealingQueue;
 let queue = WorkStealingQueue::new();
 // 工作窃取调度器可以自动平衡负载
 ```
+
 ---
 
 ## 🛡️ 并发安全代码示例（5+ 模式） {#并发安全代码示例5-模式}
@@ -495,6 +509,7 @@ impl ConfigManager {
     }
 }
 ```
+
 ### 模式 2: 无锁计数器与统计 {#模式-2-无锁计数器与统计}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -578,6 +593,7 @@ struct StatsSnapshot {
     error_count: u64,
 }
 ```
+
 ### 模式 3: 线程安全的工作队列 {#模式-3-线程安全的工作队列}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -688,6 +704,7 @@ impl ThreadPool {
     }
 }
 ```
+
 ### 模式 4: 多阶段流水线并行 {#模式-4-多阶段流水线并行}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -774,6 +791,7 @@ where
     }
 }
 ```
+
 ### 模式 5: 并发安全缓存 {#模式-5-并发安全缓存}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -891,6 +909,7 @@ where
     }
 }
 ```
+
 ---
 
 ## ⚠️ 数据竞争案例与解决方案 {#数据竞争案例与解决方案}
@@ -960,6 +979,7 @@ fn fixed_with_atomic() {
     println!("结果: {}", counter.load(Ordering::SeqCst));
 }
 ```
+
 ### 案例 2: Send/Sync 违规 {#案例-2-sendsync-违规}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -1007,6 +1027,7 @@ fn thread_safe_types() {
     println!("{}", *data.lock().unwrap());
 }
 ```
+
 ### 案例 3: 死锁 {#案例-3-死锁}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -1132,6 +1153,7 @@ impl HierarchicalMutex {
     }
 }
 ```
+
 ### 案例 4: 优先级反转 {#案例-4-优先级反转}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -1184,6 +1206,7 @@ fn priority_inversion_example() {
     high_priority.join().unwrap();
 }
 ```
+
 ### 案例 5: 条件变量误用 {#案例-5-条件变量误用}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -1238,6 +1261,7 @@ fn good_condition_variable() {
     println!("主线程收到通知");
 }
 ```
+
 ---
 
 ## 🐛 常见问题 {#常见问题}
@@ -1269,6 +1293,7 @@ thread::spawn(move || {
 
 // ✅ 解决方案：统一锁的顺序
 ```
+
 ### 数据竞争 {#数据竞争}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -1280,6 +1305,7 @@ let counter = Arc::new(0); // 不能直接共享
 // ✅ 使用同步原语
 let counter = Arc::new(Mutex::new(0));
 ```
+
 ---
 
 ## 📚 相关文档 {#相关文档}
@@ -1368,6 +1394,7 @@ fn execute_query(_conn: &Connection, query: &str) -> Result<String, String> {
     Ok(format!("结果: {}", query))
 }
 ```
+
 **性能提升**: 在高并发场景下，使用 `get()` 可将热路径延迟降低 **15-30%**，避免原子操作和锁竞争。
 
 #### 生产场景 2: 单线程延迟初始化 + 可变更新 {#生产场景-2-单线程延迟初始化-可变更新}
@@ -1432,6 +1459,7 @@ fn main() {
     assert_eq!(cache.get(), &[1, 2, 3]);
 }
 ```
+
 #### 生产场景 3: 全局配置的多阶段初始化 {#生产场景-3-全局配置的多阶段初始化}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -1477,6 +1505,7 @@ pub fn get_config(key: &str) -> Option<&'static str> {
         .map(|s| s.as_str())
 }
 ```
+
 ### array_windows 在并发流处理中的应用 {#array_windows-在并发流处理中的应用}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -1554,6 +1583,7 @@ fn parallel_dynamic_windows(data: &[f64], size: usize) -> Vec<f64> {
         .collect()
 }
 ```
+
 #### 性能对比：array_windows vs 动态 windows {#性能对比array_windows-vs-动态-windows}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**

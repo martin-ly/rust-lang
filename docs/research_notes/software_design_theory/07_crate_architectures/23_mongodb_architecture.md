@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **mongodb-rust-driver 的 BSON 模型与异步连接池架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [数据库访问](../../../../concept/06_ecosystem/23_database_access.md)
 > - [数据库系统](../../../../concept/06_ecosystem/37_database_systems.md)
 >
@@ -63,6 +64,7 @@ let coll = db.collection::<mongodb::bson::Document>("items");
 
 coll.insert_one(doc! { "name": "rust", "score": 95 }).await?;
 ```
+
 > [来源: mongodb-rust-driver Examples](https://github.com/mongodb/mongo-rust-driver/tree/main/tests)
 
 ---
@@ -84,6 +86,7 @@ graph TD
     COLL -->|create_index| INDEX[IndexModel<br/>索引定义]
     CLIENT -->|start_session| SESSION[ClientSession<br/>事务会话]
 ```
+
 > [来源: mongodb-rust-driver Client Docs](https://docs.rs/mongodb/latest/mongodb/struct.Client.html)
 
 | 类型 | 职责 | 共享能力 |
@@ -115,6 +118,7 @@ typed_coll.insert_one(Item { name: "rust".into(), score: 95 }).await?;
 let doc_coll = db.collection::<mongodb::bson::Document>("items");
 let found = doc_coll.find_one(doc! { "name": "rust" }).await?;
 ```
+
 > [来源: mongodb-rust-driver CRUD Docs](https://docs.rs/mongodb/latest/mongodb/struct.Collection.html)
 
 **关键设计**：`insert_one`/`find_one`/`update_one`/`delete_one` 等方法将 BSON 的动态性约束在 `Document` 类型与 serde 序列化边界内，业务层可获得静态类型保证。
@@ -137,6 +141,7 @@ while let Some(doc) = cursor.try_next().await? {
     println!("{:?}", doc);
 }
 ```
+
 > [来源: mongodb-rust-driver Aggregate Docs](https://docs.rs/mongodb/latest/mongodb/struct.Collection.html#method.aggregate)
 
 `Cursor` 同时实现 `Stream<Item = Result<T>>` 与 `advance()`/`deserialize_current()` 手动模式，兼容 `futures::StreamExt`/`TryStreamExt` 组合子。
@@ -153,6 +158,7 @@ let index = IndexModel::builder()
 
 coll.create_index(index).await?;
 ```
+
 > [来源: mongodb-rust-driver Index Docs](https://docs.rs/mongodb/latest/mongodb/struct.IndexModel.html)
 
 索引模型使用 builder 模式避免字段缺失，并通过 `IndexOptions` 控制唯一性、TTL、部分索引等高级行为。
@@ -167,6 +173,7 @@ while let Some(event) = change_stream.next_if_any().await? {
     println!("op={:?}, doc={:?}", event.operation_type, event.full_document);
 }
 ```
+
 > [来源: mongodb-rust-driver ChangeStream Docs](https://docs.rs/mongodb/latest/mongodb/change_stream/struct.ChangeStream.html)
 
 `ChangeStream` 内置断点续传：通过 `resume_token()` 获取恢复令牌，可在故障后使用 `resume_after`/`start_after` 选项重建流。
@@ -185,6 +192,7 @@ coll.delete_one(doc! { "y": 2 }).session(&mut session).await?;
 
 session.commit_transaction().await?;
 ```
+
 > [来源: mongodb-rust-driver Transaction Docs](https://docs.rs/mongodb/latest/mongodb/struct.ClientSession.html)
 
 **重要边界**：事务需要副本集或分片集群；单节点 `mongod` 不支持多文档事务。
@@ -202,6 +210,7 @@ opts.server_api = Some(ServerApi::builder().version(ServerApiVersion::V1).build(
 
 let client = Client::with_options(opts)?;
 ```
+
 > [来源: mongodb-rust-driver ClientOptions Docs](https://docs.rs/mongodb/latest/mongodb/options/struct.ClientOptions.html)
 
 连接池内置于 `Client`，默认大小与 MongoDB 官方驱动推荐值一致；通过 `Clone` 共享 `Client` 即可获得池复用，无需额外引入第三方池 crate。

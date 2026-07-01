@@ -140,6 +140,7 @@ RustSEM (Rust Semantic Model) 定义 Rust 语言的完整操作语义。
 
   | Box<τ>               堆指针
 ```
+
 ### 2.2 程序状态 {#22-程序状态}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -158,6 +159,7 @@ H: 堆 (Heap)      地址 → 值
 
 P: 权限集         当前有效权限
 ```
+
 ---
 
 ## 三、语义域 {#三语义域}
@@ -190,6 +192,7 @@ P: 权限集         当前有效权限
 
 Λ: 生命周期环境 变量 → 生命周期集合
 ```
+
 ### 3.3 求值上下文 {#33-求值上下文}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -217,6 +220,7 @@ P: 权限集         当前有效权限
 
   | if E then e1 else e2  条件
 ```
+
 ---
 
 ## 四、小步操作语义 {#四小步操作语义}
@@ -235,16 +239,19 @@ P: 权限集         当前有效权限
 ```text
 (λx. e) v → e[x/v]    (Beta)
 ```
+
 **let归约**:
 
 ```text
 let x = v in e → e[x/v]    (Let)
 ```
+
 **序列归约**:
 
 ```text
 v; e → e    (Seq)
 ```
+
 ### 4.2 借用语义 {#42-借用语义}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -258,6 +265,7 @@ x ∈ dom(Σ)  Ω(x) = Owned
 
 Σ, &x → Σ, &x    (Borrow-Shr)
 ```
+
 **可变借用创建**:
 
 ```text
@@ -267,6 +275,7 @@ x ∈ dom(Σ)  Ω(x) = Owned  ∀y ∈ dom(Σ). no_borrow(y)
 
 Σ, &mut x → Σ[Ω(x) := BorrowedMut], &mut x    (Borrow-Mut)
 ```
+
 **借用冲突**:
 
 ```text
@@ -276,6 +285,7 @@ x ∈ dom(Σ)  Ω(x) = Owned  ∀y ∈ dom(Σ). no_borrow(y)
 
 Σ, &x → Error    (Borrow-Error)
 ```
+
 ### 4.3 所有权语义 {#43-所有权语义}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -289,6 +299,7 @@ x ∈ dom(Σ)  Ω(x) = Owned  ∀y ∈ dom(Σ). no_borrow(y)
 
 Σ, move(x) → Σ[Ω(x) := Moved], v    (Move)
 ```
+
 **复制语义** (Copy类型):
 
 ```text
@@ -298,6 +309,7 @@ x ∈ dom(Σ)  Γ(x) : Copy
 
 Σ, x → Σ, Σ(x)    (Copy)
 ```
+
 **Drop语义**:
 
 ```text
@@ -307,6 +319,7 @@ x ∈ dom(Σ)  Γ(x) : Copy
 
 Σ, drop(x) → Σ[Ω(x) := Dropped]    (Drop)
 ```
+
 ---
 
 ## 五、大步操作语义 {#五大步操作语义}
@@ -327,6 +340,7 @@ x ∈ dom(Σ)  Γ(x) : Copy
 
 Σ ⊢ let x = e₁ in e₂ ⇓ v₂    (E-Let)
 ```
+
 **应用求值**:
 
 ```text
@@ -336,6 +350,7 @@ x ∈ dom(Σ)  Γ(x) : Copy
 
 Σ ⊢ e₁ e₂ ⇓ v    (E-App)
 ```
+
 ### 5.2 求值错误规则 {#52-求值错误规则}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -349,6 +364,7 @@ x ∈ dom(Σ)  Γ(x) : Copy
 
 Σ ⊢ x ⇓ Error-Use-After-Move    (E-Error-Moved)
 ```
+
 **借用检查错误**:
 
 ```text
@@ -358,6 +374,7 @@ BorrowCheck(e) = Fail
 
 Σ ⊢ e ⇓ Error-Borrow    (E-Error-Borrow)
 ```
+
 ---
 
 ## 六、类型系统语义 {#六类型系统语义}
@@ -378,6 +395,7 @@ x : τ ∈ Γ
 
 Γ ⊢ x : τ    (T-Var)
 ```
+
 **Lambda**:
 
 ```text
@@ -387,6 +405,7 @@ x : τ ∈ Γ
 
 Γ ⊢ λx:τ₁. e : τ₁ → τ₂    (T-Lam)
 ```
+
 **应用**:
 
 ```text
@@ -396,6 +415,7 @@ x : τ ∈ Γ
 
 Γ ⊢ e₁ e₂ : τ₂    (T-App)
 ```
+
 ### 6.2 借用类型规则 {#62-借用类型规则}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -409,6 +429,7 @@ x : τ ∈ Γ
 
 Γ ⊢ &e : &τ    (T-Borrow-Shr)
 ```
+
 **可变借用**:
 
 ```text
@@ -418,6 +439,7 @@ x : τ ∈ Γ
 
 Γ ⊢ &mut e : &mut τ    (T-Borrow-Mut)
 ```
+
 **解引用**:
 
 ```text
@@ -434,6 +456,7 @@ x : τ ∈ Γ
 
 Γ ⊢ *e : τ    (T-Deref-Mut)
 ```
+
 ---
 
 ## 七、内存模型语义 {#七内存模型语义}
@@ -454,6 +477,7 @@ a ∉ dom(H)
 
 H, alloc(v) → H[a := v], a    (Alloc)
 ```
+
 **读取**:
 
 ```text
@@ -463,6 +487,7 @@ H(a) = v
 
 H, !a → H, v    (Read)
 ```
+
 **写入** (可变权限):
 
 ```text
@@ -472,6 +497,7 @@ a ∈ dom(H)    θ(a) = Write :: _
 
 H, a := v → H[a := v], ()    (Write)
 ```
+
 ### 7.2 Stacked Borrows 简化模型 {#72-stacked-borrows-简化模型}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -489,6 +515,7 @@ H, a := v → H[a := v], ()    (Write)
 
 - Pop: 函数返回时弹出
 ```
+
 **SB读取**:
 
 ```text
@@ -498,6 +525,7 @@ H, a := v → H[a := v], ()    (Write)
 
 H, θ, *a → H, θ, H(a)    (SB-Read)
 ```
+
 **SB写入**:
 
 ```text
@@ -507,6 +535,7 @@ H, θ, *a → H, θ, H(a)    (SB-Read)
 
 H, θ, *a := v → H[a := v], θ, ()    (SB-Write)
 ```
+
 ---
 
 ## 八、并发语义 {#八并发语义}
@@ -525,6 +554,7 @@ S ⊢ e →* e'    spawn(e') = t
 
 S, spawn(e) → S ∪ {t}, t    (Spawn)
 ```
+
 ### 8.2 共享状态 {#82-共享状态}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -538,6 +568,7 @@ H(a) = v    atomic(a)
 
 H, atomic_read(a) → H, v    (Atomic-Read)
 ```
+
 **原子写入**:
 
 ```text
@@ -547,6 +578,7 @@ atomic(a)
 
 H, atomic_write(a, v) → H[a := v], ()    (Atomic-Write)
 ```
+
 ### 8.3 Send/Sync 语义 {#83-sendsync-语义}
 
 >
@@ -566,6 +598,7 @@ safe_to_send(τ)    (Send)
 
 ∀x : τ. &x : Send    (Sync)
 ```
+
 ---
 
 ## 九、相关资源 {#九相关资源}
@@ -632,6 +665,7 @@ Rust 语义层次
 
    └─ 并发内存模型
 ```
+
 ---
 
 **维护者**: Rust Formal Methods Research Team

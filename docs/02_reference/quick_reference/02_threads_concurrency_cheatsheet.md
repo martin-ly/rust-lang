@@ -100,6 +100,7 @@ mindmap
       内存顺序
       CAS 操作
 ```
+
 ---
 
 ## 📊 概念定义-属性关系-解释论证 {#概念定义-属性关系-解释论证}
@@ -146,6 +147,7 @@ graph TD
 
     F --> P[ fearless concurrency ]
 ```
+
 ---
 
 ## 🎯 核心概念 {#核心概念}
@@ -168,6 +170,7 @@ let handle = thread::spawn(|| {
 
 handle.join().unwrap();
 ```
+
 ### 作用域线程 (Rust 1.93.0+) {#作用域线程-rust-1930}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -185,6 +188,7 @@ thread::scope(|s| {
     });
 });  // 自动等待所有线程完成
 ```
+
 ---
 
 ## 📐 同步原语 {#同步原语}
@@ -207,6 +211,7 @@ let m = Mutex::new(5);
     *num = 6;
 }  // 锁自动释放
 ```
+
 ### RwLock {#rwlock}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -230,6 +235,7 @@ let lock = RwLock::new(5);
     *w += 1;
 }
 ```
+
 ### Arc (原子引用计数) {#arc-原子引用计数}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -249,6 +255,7 @@ for i in 0..3 {
     });
 }
 ```
+
 ---
 
 ## 🎯 消息传递 {#消息传递}
@@ -270,6 +277,7 @@ thread::spawn(move || {
 
 let received = rx.recv().unwrap();
 ```
+
 ### 多生产者 {#多生产者}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -292,6 +300,7 @@ for received in rx {
     println!("收到: {}", received);
 }
 ```
+
 ---
 
 ## 🔧 无锁数据结构 {#无锁数据结构}
@@ -310,6 +319,7 @@ let counter = AtomicUsize::new(0);
 counter.fetch_add(1, Ordering::SeqCst);
 let value = counter.load(Ordering::SeqCst);
 ```
+
 ### 内存顺序 {#内存顺序}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -328,6 +338,7 @@ Ordering::AcqRel
 // 宽松（最弱）
 Ordering::Relaxed
 ```
+
 **内存顺序选型决策树**（详见 [06_boundary_analysis](../../../archive/research_notes_2026_06_25/software_design_theory/03_execution_models/06_boundary_analysis.md)）：
 
 | 场景 | 推荐 | 说明 |
@@ -403,6 +414,7 @@ for i in 0..8 {
     });
 }
 ```
+
 ### 示例 2: 条件变量使用 {#示例-2-条件变量使用}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -469,6 +481,7 @@ thread::spawn(move || {
     }
 });
 ```
+
 ### 示例 3: 屏障同步 {#示例-3-屏障同步}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -493,6 +506,7 @@ for h in handles {
     h.join().unwrap();
 }
 ```
+
 ### 示例 4: OnceLock 初始化（Rust 1.70+ 推荐） {#示例-4-oncelock-初始化rust-170-推荐}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -515,6 +529,7 @@ for h in handles {
     h.join().unwrap();
 }
 ```
+
 ### 示例 5: 并发生产者-消费者（多对多） {#示例-5-并发生产者-消费者多对多}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -553,6 +568,7 @@ for h in handles {
     h.join().unwrap();
 }
 ```
+
 ---
 
 ## 🎯 使用场景 {#使用场景}
@@ -623,6 +639,7 @@ fn main() {
     }
 }
 ```
+
 ---
 
 ## 🔍 死锁检测与运行时验证 {#死锁检测与运行时验证}
@@ -658,6 +675,7 @@ thread::spawn(|| {
     println!("{}", rc);  // ❌ Rc 不是 Send
 });
 ```
+
 **原因**: `thread::spawn` 要求闭包捕获的类型实现 `Send`。
 
 **修正**:
@@ -668,6 +686,7 @@ thread::spawn(move || {
     println!("{}", arc);
 });
 ```
+
 ---
 
 ### 反例 2: 死锁 - 重复获取同一 Mutex {#反例-2-死锁---重复获取同一-mutex}
@@ -681,6 +700,7 @@ let m = Mutex::new(1);
 let g1 = m.lock().unwrap();
 let g2 = m.lock().unwrap();  // ❌ 死锁：同一线程重复获取
 ```
+
 **原因**: `Mutex` 非递归，同一线程重复 lock 会死锁。
 
 **修正**:
@@ -689,6 +709,7 @@ let g2 = m.lock().unwrap();  // ❌ 死锁：同一线程重复获取
 let g = m.lock().unwrap();
 // 使用 g，作用域结束后释放
 ```
+
 ---
 
 ### 反例 3: 锁顺序不一致导致死锁 {#反例-3-锁顺序不一致导致死锁}
@@ -714,6 +735,7 @@ thread::spawn(move || {
 });
 // ❌ 死锁：循环等待
 ```
+
 **原因**: 不同线程以不同顺序获取锁，形成循环等待。
 
 **修正**:
@@ -730,6 +752,7 @@ thread::spawn(move || {
     let _b = lock_b.lock().unwrap();  // 再获取 b
 });
 ```
+
 ---
 
 ### 反例 4: 在持有锁时进行阻塞操作 {#反例-4-在持有锁时进行阻塞操作}
@@ -750,6 +773,7 @@ thread::spawn(move || {
 
 // 其他线程无法获取锁，被阻塞 10 秒
 ```
+
 **原因**: 长时间持有锁会严重影响并发性能。
 
 **修正**:
@@ -763,6 +787,7 @@ thread::spawn(move || {
     thread::sleep(Duration::from_secs(10));  // 无锁时休眠
 });
 ```
+
 ---
 
 ## 📚 相关文档 {#相关文档}
@@ -812,6 +837,7 @@ use std::collections::HashMap;
 // ✅ 并发场景下的内存分配性能提升
 let shared_map: Arc<HashMap<i32, String>> = Arc::new(HashMap::new());
 ```
+
 **影响**:
 
 - 并发场景下的内存分配性能提升
@@ -895,6 +921,7 @@ pub fn get_thread_config() -> Option<&'static ThreadPoolConfig> {
     LazyLock::get(&THREAD_POOL_CONFIG)
 }
 ```
+
 ### array_windows 在并发数据处理中的应用 {#array_windows-在并发数据处理中的应用}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -907,6 +934,7 @@ fn parallel_window_process(data: &[i32]) -> Vec<i32> {
         .collect()
 }
 ```
+
 **最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)
 
 ---

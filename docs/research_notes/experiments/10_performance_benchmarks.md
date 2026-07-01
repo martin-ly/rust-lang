@@ -686,6 +686,7 @@ criterion_group!(
 
 criterion_main!(allocation_benches);
 ```
+
 #### 并发性能测试实现 {#并发性能测试实现}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -843,6 +844,7 @@ criterion_group!(
 
 criterion_main!(concurrency_benches);
 ```
+
 #### 序列化性能测试实现 {#序列化性能测试实现}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -1027,6 +1029,7 @@ criterion_group!(
 
 criterion_main!(serialization_benches);
 ```
+
 ### 2. 测试环境配置 {#2-测试环境配置}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -1065,6 +1068,7 @@ name = "serialization"
 
 harness = false
 ```
+
 ### 3. 数据收集机制 {#3-数据收集机制}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -1121,6 +1125,7 @@ fn main() {
 
 }
 ```
+
 ### 4. 结果分析工具实现 {#4-结果分析工具实现}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -1320,6 +1325,7 @@ fn main() {
 
 }
 ```
+
 ---
 
 ## 💻 代码示例 {#代码示例}
@@ -1361,6 +1367,7 @@ criterion_group!(benches, bench_fib);
 
 criterion_main!(benches);
 ```
+
 ### 示例 2：内存分配性能测试 {#示例-2内存分配性能测试}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -1407,6 +1414,7 @@ criterion_group!(benches, stack_allocation, heap_allocation);
 
 criterion_main!(benches);
 ```
+
 ### 示例 3：并发性能测试 {#示例-3并发性能测试}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -1471,6 +1479,7 @@ criterion_group!(benches, concurrent_increment);
 
 criterion_main!(benches);
 ```
+
 ## 💻 代码示例1 {#代码示例1}
 
 >
@@ -1543,6 +1552,7 @@ criterion_group!(benches, stack_allocation, heap_allocation, preallocated_vec);
 
 criterion_main!(benches);
 ```
+
 ### 示例 2：并发性能基准测试 {#示例-2并发性能基准测试}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -1666,6 +1676,7 @@ criterion_group!(concurrency_benches, mutex_contention, rwlock_read_heavy);
 
 criterion_main!(concurrency_benches);
 ```
+
 ### 示例 3：序列化性能基准测试 {#示例-3序列化性能基准测试}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -1808,6 +1819,7 @@ criterion_group!(
 
 criterion_main!(serialization_benches);
 ```
+
 ---
 
 ## 📋 数据收集执行指南 {#数据收集执行指南}

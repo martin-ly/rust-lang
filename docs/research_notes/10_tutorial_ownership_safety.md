@@ -128,6 +128,7 @@
 
    性能 <--------> 易用性
 ```
+
 | 语言 | 策略 | 优点 | 缺点 |
 | :--- | :--- | :--- | :--- |
 | C/C++ | 手动管理 | 最高性能 | 容易出错(悬垂指针、双重释放等) |
@@ -174,6 +175,7 @@ fn makes_copy(i: i32) {
 
 }
 ```
+
 ---
 
 ## 第二部分：所有权规则 {#第二部分所有权规则}
@@ -213,6 +215,7 @@ fn makes_copy(i: i32) {
 
 // println!("{}", s); // 错误! s已失效
 ```
+
 ### 内存表示 {#内存表示}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -243,6 +246,7 @@ s离开作用域时:
 
 3. 清理栈空间
 ```
+
 ---
 
 ## 第三部分：移动语义 {#第三部分移动语义}
@@ -266,6 +270,7 @@ let s2 = s1;  // s1的所有权移动到s2
 
 println!("{}", s2);    // OK
 ```
+
 **为什么移动而不是复制?**
 
 - 性能: 避免深拷贝
@@ -297,6 +302,7 @@ let s2 = s1;                    // 移动: s1失效，只有s2释放
 
 // 安全!
 ```
+
 ---
 
 ## 第四部分：Copy trait {#第四部分copy-trait}
@@ -330,6 +336,7 @@ println!("{}", x); // OK! x仍然有效
 
 // - 只包含Copy类型的元组
 ```
+
 ### 自定义类型的Copy {#自定义类型的copy}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -365,6 +372,7 @@ struct Container {
 
 // 不能derive(Copy)!
 ```
+
 ---
 
 ## 第五部分：借用 {#第五部分借用}
@@ -392,6 +400,7 @@ let s1 = String::from("hello");
 
 let (s2, len) = calculate_length(s1);  // 繁琐!
 ```
+
 ```rust
 // 使用借用: 简洁安全
 
@@ -408,6 +417,7 @@ let len = calculate_length(&s1);  // 借用s1
 
 println!("{} 长度是 {}", s1, len);  // s1仍然可用!
 ```
+
 ### 借用规则 {#借用规则}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -437,6 +447,7 @@ let r1 = &s;
 
 println!("{}", r1);  // r1最后使用在这里
 ```
+
 ### 借用与作用域 {#借用与作用域}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -460,6 +471,7 @@ let r2 = &mut s;  // OK!
 
 r2.push_str("!");
 ```
+
 ---
 
 ## 第六部分：悬垂引用 {#第六部分悬垂引用}
@@ -485,6 +497,7 @@ fn dangle() -> &String {  // 错误! 返回悬垂引用
 
 // error[E0106]: 缺少生命周期说明符
 ```
+
 ### 正确的做法 {#正确的做法}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -509,6 +522,7 @@ fn first_word(s: &str) -> &str {
 
 }
 ```
+
 ---
 
 ## 第七部分：字符串切片 {#第七部分字符串切片}
@@ -541,6 +555,7 @@ let world = &s[6..11];   // "world"
 
 // world: &str --指向--> s的[6..11]
 ```
+
 ### 字符串字面量 {#字符串字面量}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -552,6 +567,7 @@ let s: &'static str = "hello";  // 'static生命周期
 
 // 'static表示整个程序运行期间有效
 ```
+
 ---
 
 ## 第八部分：实践模式 {#第八部分实践模式}
@@ -579,6 +595,7 @@ let processed = process(data);  // 转移所有权
 
 // data不再可用
 ```
+
 ### 模式2: 借用检查 {#模式2-借用检查}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -605,6 +622,7 @@ let a1 = analyze(&data);  // 借用
 
 let a2 = analyze(&data);  // 可以同时多次借用
 ```
+
 ### 模式3: 可变借用 {#模式3-可变借用}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -627,6 +645,7 @@ let mut data = vec![1.0, 2.0, 3.0];
 
 normalize(&mut data);  // 可变借用修改数据
 ```
+
 ---
 
 ## 第九部分：常见错误 {#第九部分常见错误}
@@ -718,6 +737,7 @@ normalize(&mut data);  // 可变借用修改数据
 
         └── 编译时检查安全
 ```
+
 ## 引言 {#引言-1}
 
 >
@@ -771,6 +791,7 @@ void leak() {
 
 }
 ```
+
 这些错误导致：
 
 - 安全漏洞（70%的安全问题与内存有关）
@@ -833,6 +854,7 @@ void leak() {
 
         └── 书仍在原处，别人临时使用
 ```
+
 **关键**: 任何时候，书的位置和状态都是明确的。
 
 ---
@@ -860,6 +882,7 @@ let s2 = s1;  // 所有权转移到s2
 
 println!("{}", s2);     // OK，s2是现在的所有者
 ```
+
 **形式化保证**:
 
 ```
@@ -871,6 +894,7 @@ Move(s1, s2, v) 后:
 
 - 使用Moved状态的变量 = 编译错误
 ```
+
 ### 安全保证2：没有双重释放 {#安全保证2没有双重释放}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -891,11 +915,13 @@ Move(s1, s2, v) 后:
 
 // 不可能再次释放s，因为s已经不存在了
 ```
+
 **形式化保证**:
 
 ```
 ∀v, ∃!x, owns(x, v) → Drop(x) 只发生一次
 ```
+
 ### 安全保证3：没有数据竞争 {#安全保证3没有数据竞争}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
@@ -928,6 +954,7 @@ let w = &mut data;
 
 w.push(4);  // OK，没有其他引用
 ```
+
 **形式化保证**:
 
 ```
@@ -939,6 +966,7 @@ w.push(4);  // OK，没有其他引用
 
 - 结果: 无数据竞争
 ```
+
 ---
 
 ## 第四部分：形式化视角 {#第四部分形式化视角}
@@ -963,6 +991,7 @@ w.push(4);  // OK，没有其他引用
 
 4. 归纳: 所有操作保持唯一性不变式 ✓
 ```
+
 ### 定理 T-BR1: 数据竞争自由 {#定理-t-br1-数据竞争自由}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -980,6 +1009,7 @@ w.push(4);  // OK，没有其他引用
 
 - 不可能同时存在写者和读者
 ```
+
 ---
 
 ## 第五部分：实际示例 {#第五部分实际示例}
@@ -1012,6 +1042,7 @@ fn main() {
 
 }
 ```
+
 **安全保证**: `main`中的`s`不能再使用，防止悬垂引用。
 
 ### 示例2: 返回值 {#示例2-返回值}
@@ -1035,6 +1066,7 @@ fn main() {
 
 }  // s在这里释放
 ```
+
 **安全保证**: 所有权链条清晰，内存管理正确。
 
 ### 示例3: 借用临时使用 {#示例3-借用临时使用}
@@ -1062,6 +1094,7 @@ fn main() {
 
 }  // s在这里释放
 ```
+
 **安全保证**: 借用不转移所有权，原变量始终有效。
 
 ---
@@ -1083,6 +1116,7 @@ fn main() {
 
 // 生成的代码与C一样高效
 ```
+
 ### Q: 所有权系统限制太多？ {#q-所有权系统限制太多}
 
 >
@@ -1158,6 +1192,7 @@ fn main() {
 
 └─────────────────────────────────────────┘
 ```
+
 ### 下一步学习 {#下一步学习}
 
 >
@@ -1184,6 +1219,7 @@ fn main() {
 
 }
 ```
+
 ---
 
 **维护者**: Rust Formal Methods Research Team

@@ -129,6 +129,7 @@ graph TD
     style D2 fill:#ffe1e1
     style D3 fill:#ffe1e1
 ```
+
 ---
 
 ## 📦 模块化决策树 {#模块化决策树}
@@ -174,6 +175,7 @@ graph TD
     style ArcMutex fill:#e1ffe1
     style RcRefCell fill:#e1ffe1
 ```
+
 ### 2. 类型系统决策树 {#2-类型系统决策树}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -201,6 +203,7 @@ graph TD
     style Start fill:#e1f5ff
     style AssocType fill:#e1ffe1
 ```
+
 ### 3. 控制流决策树 {#3-控制流决策树}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -233,6 +236,7 @@ graph TD
     style Start fill:#e1f5ff
     style ResultType fill:#e1ffe1
 ```
+
 ### 4. 异步编程决策树 {#4-异步编程决策树}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -267,6 +271,7 @@ graph TD
     style Start fill:#e1f5ff
     style Concurrent fill:#e1ffe1
 ```
+
 ### 5. Pin 使用场景决策树 {#5-pin-使用场景决策树}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -301,6 +306,7 @@ graph TD
     style StackPin fill:#e1ffe1
     style HeapPin fill:#fff5e1
 ```
+
 ### 6. 表达能力边界决策树 {#6-表达能力边界决策树}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -337,6 +343,7 @@ graph TD
     style OwnOk fill:#e1ffe1
     style UnsafeMut fill:#ffe1e1
 ```
+
 ---
 
 ## 🔧 技术选型决策树 {#技术选型决策树}
@@ -378,6 +385,7 @@ graph TD
     style Vec fill:#e1ffe1
     style HashMap fill:#e1ffe1
 ```
+
 ### 错误处理策略选择 {#错误处理策略选择}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -411,6 +419,7 @@ graph TD
     style Anyhow fill:#e1ffe1
     style ThisError fill:#e1ffe1
 ```
+
 ### 并发模型选择 {#并发模型选择}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -445,6 +454,7 @@ graph TD
     style TokioMpsc fill:#e1ffe1
     style Rayon fill:#e1ffe1
 ```
+
 ### 序列化库选择 {#序列化库选择}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -474,6 +484,7 @@ graph TD
     style Start fill:#e1f5ff
     style SerdeJson fill:#e1ffe1
 ```
+
 ### Web框架选择 {#web框架选择}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -510,6 +521,7 @@ graph TD
     style Axum fill:#e1ffe1
     style Tonic fill:#e1ffe1
 ```
+
 ### 数据库访问选择 {#数据库访问选择}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -547,6 +559,7 @@ graph TD
     style SqlxPg fill:#e1ffe1
     style DieselPg fill:#e1ffe1
 ```
+
 ---
 
 ## 🐛 调试决策树 {#调试决策树}
@@ -587,6 +600,7 @@ graph TD
     style Start fill:#ffe1e1
     style BorrowErr fill:#fff5e1
 ```
+
 ### 运行时错误调试 {#运行时错误调试}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -619,6 +633,7 @@ graph TD
 
     style Start fill:#ffe1e1
 ```
+
 ### 性能问题调试 {#性能问题调试}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -651,6 +666,7 @@ graph TD
 
     style Start fill:#fff5e1
 ```
+
 ### 内存问题调试 {#内存问题调试}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -685,6 +701,7 @@ graph TD
 
     style Start fill:#ffe1e1
 ```
+
 ---
 
 ## ⚡ 优化决策树 {#优化决策树}
@@ -727,6 +744,7 @@ graph TD
     style Start fill:#e1f5ff
     style Algorithm fill:#e1ffe1
 ```
+
 ### 内存优化决策树 {#内存优化决策树}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -761,6 +779,7 @@ graph TD
     style Start fill:#e1f5ff
     style ReduceAlloc fill:#e1ffe1
 ```
+
 ### I/O优化决策树 {#io优化决策树}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -794,6 +813,7 @@ graph TD
     style Start fill:#e1f5ff
     style FileIO fill:#e1ffe1
 ```
+
 ### 编译优化决策树 {#编译优化决策树}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -828,6 +848,7 @@ graph TD
     style Start fill:#e1f5ff
     style Release fill:#e1ffe1
 ```
+
 ---
 
 ## 📚 学习路径决策树 {#学习路径决策树}
@@ -873,6 +894,7 @@ graph TD
     style CoreConcepts fill:#e1ffe1
     style Advanced fill:#fff5e1
 ```
+
 ### 有经验开发者路径 {#有经验开发者路径}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -915,6 +937,7 @@ graph TD
     style Start fill:#e1f5ff
     style CommonCore fill:#e1ffe1
 ```
+
 ### 专项技能提升路径 {#专项技能提升路径}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -958,6 +981,7 @@ graph TD
     style Systems fill:#e1ffe1
     style WebDev fill:#e1ffe1
 ```
+
 ---
 
 ## 📊 决策矩阵总结 {#决策矩阵总结}

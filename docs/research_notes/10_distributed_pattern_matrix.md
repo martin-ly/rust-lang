@@ -221,6 +221,7 @@
 
 └── CDC (变更捕获)
 ```
+
 ### 4.3 互斥模式 {#43-互斥模式}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
@@ -352,6 +353,7 @@
 
    └─ Event Bus (事件总线)
 ```
+
 ---
 
 **维护者**: Rust Learning Project Team

@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **Wgpu GPU 图形抽象与 Naga 着色器验证架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [游戏开发](../../../../concept/06_ecosystem/21_game_development.md)
 > - [游戏引擎内部](../../../../concept/06_ecosystem/49_game_engine_internals.md)
 > - [嵌入式图形](../../../../concept/06_ecosystem/53_embedded_graphics.md)
@@ -49,6 +50,7 @@ async fn run() {
 
 }
 ```
+
 > [来源: WebGPU 标准规范](https://www.w3.org/TR/webgpu/)
 
 ---
@@ -111,6 +113,7 @@ graph TB
 
     Q -->|submit| CB
 ```
+
 ### 2.1 `Instance`：入口点 {#21-instance入口点}
 
 >
@@ -129,6 +132,7 @@ let instance = wgpu::Instance::new(wgpu::InstanceDescriptor {
 
 });
 ```
+
 ### 2.2 `Adapter`：物理 GPU 抽象 {#22-adapter物理-gpu-抽象}
 
 >
@@ -162,6 +166,7 @@ println!("GPU: {} ({:?})", info.name, info.backend);
 
 println!("驱动: {}", info.driver);
 ```
+
 ### 2.3 `Device` 与 `Queue`：逻辑设备与命令队列 {#23-device-与-queue逻辑设备与命令队列}
 
 >
@@ -200,6 +205,7 @@ let (device, queue) = adapter
 
     .expect("设备创建失败");
 ```
+
 > [来源: WebGPU 标准 — Adapter/Device](https://www.w3.org/TR/webgpu/#adapters)
 
 ---
@@ -304,6 +310,7 @@ let bind_group = device.create_bind_group(&wgpu::BindGroupDescriptor {
 
 });
 ```
+
 如果 `BindGroup` 中的资源类型与 `BindGroupLayoutEntry` 不匹配（例如将 `TextureView` 绑定到期望 `Buffer` 的槽位），`create_bind_group` 调用会在创建期即报错，而非在着色器运行时产生未定义行为。
 
 ### 3.2 着色器验证：Naga 编译器 {#32-着色器验证naga-编译器}
@@ -331,6 +338,7 @@ let shader = device.create_shader_module(wgpu::ShaderModuleDescriptor {
 
 });
 ```
+
 ```wgsl
 // shader.wgsl —— 在编译期由 Naga 验证
 
@@ -385,6 +393,7 @@ fn fs_main(in: VertexOutput) -> @location(0) vec4<f32> {
 
 }
 ```
+
 Naga 在 `create_shader_module` 时执行完整的静态分析：类型检查、接口匹配验证、控制流分析。
 
 如果 WGSL 代码存在类型错误（如将 `vec3<f32>` 赋值给 `vec2<f32>` 的接口）、未初始化变量或无效的资源绑定索引，CPU 侧即刻收到详细的验证错误，**不会在 GPU 驱动层面触发未定义行为**。
@@ -425,6 +434,7 @@ let vertex_buffer = device.create_buffer(&wgpu::BufferDescriptor {
 
 queue.write_buffer(&vertex_buffer, 0, bytemuck::cast_slice(&vertices));
 ```
+
 | 资源类型 | 用途标记 (`*Usages`) | 典型场景 |
 |---|---|---|
 | `Buffer` | `VERTEX`, `INDEX`, `UNIFORM`, `STORAGE`, `COPY_SRC`, `COPY_DST` | 顶点数据、索引、 uniform、计算存储 |
@@ -462,6 +472,7 @@ let depth_texture = device.create_texture(&wgpu::TextureDescriptor {
 
 });
 ```
+
 ### 4.2 内存屏障与同步 {#42-内存屏障与同步}
 
 >
@@ -493,6 +504,7 @@ sequenceDiagram
 
     GPU->>GPU: 执行绘制命令
 ```
+
 ```rust,ignore
 let mut encoder = device.create_command_encoder(&wgpu::CommandEncoderDescriptor {
 
@@ -545,6 +557,7 @@ let mut encoder = device.create_command_encoder(&wgpu::CommandEncoderDescriptor 
 
 queue.submit(std::iter::once(encoder.finish()));
 ```
+
 > [来源: WebGPU 标准 — Resource Usages](https://www.w3.org/TR/webgpu/#resource-usages)
 
 ---
@@ -600,6 +613,7 @@ fn render(&mut self) -> Result<(), wgpu::SurfaceError> {
 
 }
 ```
+
 ### 5.2 异步原语与平台差异 {#52-异步原语与平台差异}
 
 >
@@ -629,6 +643,7 @@ pub async fn run() {
 
 }
 ```
+
 > [来源: Wgpu Wiki — Async Initialization](https://github.com/gfx-rs/wgpu/wiki)
 
 ---
@@ -660,6 +675,7 @@ let instance = wgpu::Instance::new(wgpu::InstanceDescriptor {
 
 });
 ```
+
 后端选择优先级（从高到低）：
 
 | 平台 | 首选后端 | 后备 |
@@ -681,6 +697,7 @@ let instance = wgpu::Instance::new(wgpu::InstanceDescriptor {
 
 wgpu = { version = "23", default-features = false, features = ["wgsl", "vulkan"] }
 ```
+
 | Feature | 说明 |
 |---|---|
 | `vulkan` | 启用 Vulkan 后端 |
@@ -711,6 +728,7 @@ graph LR
 
     F --> J[OpenGL ES / WebGL Driver]
 ```
+
 `wgpu-core` 提供与硬件无关的资源管理和验证逻辑，`wgpu-hal` 是对各底层 API 的统一抽象。
 
 这种分层使得新增后端只需实现 `hal` trait，上层应用代码完全不受影响。
@@ -800,6 +818,7 @@ let render_pipeline = device.create_render_pipeline(&wgpu::RenderPipelineDescrip
 
 });
 ```
+
 所有管线状态（光栅化规则、深度测试、混合模式、裁剪模式）在 `create_render_pipeline` 时冻结为不可变对象，运行时切换管线只需调用 `set_pipeline()`，无需逐状态重新设置。
 
 ### 7.2 计算管线 {#72-计算管线}
@@ -833,6 +852,7 @@ compute_pass.set_bind_group(0, &compute_bind_group, &[]);
 
 compute_pass.dispatch_workgroups(256, 1, 1);
 ```
+
 > [来源: WebGPU 标准 — Compute Passes](https://www.w3.org/TR/webgpu/#compute-passes)
 
 ---

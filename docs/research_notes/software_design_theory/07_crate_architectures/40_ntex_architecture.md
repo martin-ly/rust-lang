@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **ntex 可组合网络服务框架的 HTTP 协议栈与 Service trait 架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [Web 框架生态](../../../../concept/06_ecosystem/27_web_frameworks.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
@@ -66,6 +67,7 @@ async fn main() -> std::io::Result<()> {
         .await
 }
 ```
+
 > [来源: [ntex examples](https://github.com/ntex-rs/ntex/tree/master/ntex/examples)]
 
 ---
@@ -84,6 +86,7 @@ graph LR
     APP --> |route match| HANDLER[#[web::get] async fn]
     HANDLER --> RESP[HttpResponse]
 ```
+
 ntex 的请求生命周期：
 
 1. **`HttpServer`**：监听端口，管理工作线程，负责连接生命周期。
@@ -104,6 +107,7 @@ async fn get_user(id: web::types::Path<u64>) -> impl web::Responder {
     HttpResponse::Ok().body(format!("user id: {id}"))
 }
 ```
+
 > [来源: [ntex::web 宏](https://docs.rs/ntex/latest/ntex/web/attr.get.html)]
 
 `impl Responder` 允许返回 `HttpResponse`、`String`、`&'static str`、`web::Json<T>` 等类型，编译期通过 trait 解析为 HTTP Response。
@@ -124,6 +128,7 @@ async fn create_user(
     HttpResponse::Ok().finish()
 }
 ```
+
 > [来源: [ntex::web::types 文档](https://docs.rs/ntex/latest/ntex/web/types/index.html)]
 
 提取器基于 `FromRequest` trait，在编译期保证 handler 参数与请求类型兼容；缺失或格式错误会返回 `Error`。
@@ -142,6 +147,7 @@ HttpServer::new(|| async {
 .run()
 .await
 ```
+
 > [来源: [ntex::web::server::HttpServer](https://docs.rs/ntex/latest/ntex/web/server/struct.HttpServer.html)]
 
 该设计允许每个 worker 在启动时异步初始化状态（例如建立数据库连接），但也要求开发者显式使用 `async { ... }`。

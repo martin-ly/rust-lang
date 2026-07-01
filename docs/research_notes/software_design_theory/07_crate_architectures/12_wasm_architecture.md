@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **WebAssembly 生态与 wasm-bindgen 架构概览**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [WebAssembly 基础](../../../../concept/06_ecosystem/11_webassembly.md)
 > - [高级 WebAssembly](../../../../concept/06_ecosystem/54_webassembly_advanced.md)
 > - [Rust for WebAssembly](../../../../concept/07_future/28_rust_for_webassembly.md)

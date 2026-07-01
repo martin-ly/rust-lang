@@ -27,6 +27,7 @@ flowchart LR
     E --> F --> |"验证成功"| G[编译为二进制]
     E --> H --> |"验证失败"| I[反例/未证明目标]
 ```
+
 与 Kani 的对比：
 
 | 特性 | Kani (BMC) | Verus (演绎验证) |
@@ -72,6 +73,7 @@ vargo build --release
 # 方式 2: 在项目中使用 verus 宏 {#方式-2-在项目中使用-verus-宏}
 cargo add verus --git https://github.com/verus-lang/verus
 ```
+
 ### 2.3 项目结构 {#23-项目结构}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -83,17 +85,20 @@ my_verus_project/
 └── src/
     └── main.rs
 ```
+
 ```toml
 # rust-toolchain.toml {#rust-toolchaintoml}
 [toolchain]
 channel = "nightly-2024-10-15"
 components = ["rustc-dev", "llvm-tools-preview", "rust-src"]
 ```
+
 ```toml
 # Cargo.toml {#cargotoml}
 [dependencies]
 verus = { git = "https://github.com/verus-lang/verus" }
 ```
+
 > [来源: [Verus Installation Guide](https://verus-lang.github.io/verus/guide/install.html)]
 
 ---
@@ -126,6 +131,7 @@ fn abs(x: i64) -> (result: i64)
 
 } // verus!
 ```
+
 ### 3.2 `ensures` — 后置条件 {#32-ensures-后置条件}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -144,6 +150,7 @@ fn max(a: i32, b: i32) -> (result: i32)
 
 } // verus!
 ```
+
 ### 3.3 `invariant` — 循环不变量 {#33-invariant-循环不变量}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -179,6 +186,7 @@ fn factorial(n: u64) -> (result: u64)
 
 } // verus!
 ```
+
 > [来源: [Verus Guide — Specifications](https://verus-lang.github.io/verus/guide/spec.html)]
 > [来源: [Verus Guide — Loops and Invariants](https://verus-lang.github.io/verus/guide/loops.html)]
 
@@ -209,6 +217,7 @@ fn sum_rec(arr: &[i32], idx: usize) -> (result: i64)
 
 } // verus!
 ```
+
 ---
 
 ## 4. 所有权与规格：Ghost 状态 {#4-所有权与规格ghost-状态}
@@ -247,6 +256,7 @@ fn push_with_ghost<T>(vec: &mut Vec<T>, value: T, ghost_old_len: Ghost<usize>)
 
 } // verus!
 ```
+
 | 类型 | 运行时存在 | 规格中存在 | 用途 |
 |:---|:---:|:---:|:---|
 | `T` (普通) | ✅ | ✅ | 数据和规格 |
@@ -300,6 +310,7 @@ fn verify_all_nonnegative(arr: &[i32]) -> (result: bool)
 
 } // verus!
 ```
+
 ---
 
 ## 5. 可变引用的 Prophecy 编码 {#5-可变引用的-prophecy-编码}
@@ -339,6 +350,7 @@ impl Counter {
 
 } // verus!
 ```
+
 ### 5.2 返回引用后的状态约束 {#52-返回引用后的状态约束}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -360,6 +372,7 @@ fn get_first_mut(arr: &mut [i32]) -> (result: &mut i32)
 
 } // verus!
 ```
+
 > [来源: [Verus Guide — Mutable References](https://verus-lang.github.io/verus/guide/mut-ref.html)]
 
 ---
@@ -408,6 +421,7 @@ impl ConcurrentCounter {
 
 } // verus!
 ```
+
 ### 6.2 Linear Ghost Types for Lock-Free {#62-linear-ghost-types-for-lock-free}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -464,6 +478,7 @@ impl<T> Stack<T> {
 
 } // verus!
 ```
+
 > [来源: [Verus Guide — Concurrency](https://verus-lang.github.io/verus/guide/concurrency.html)]
 > [来源: [PLDI 2023 — Verified Storage Systems with Linear Ghost Types](https://dl.acm.org/doi/10.1145/3591285)]
 
@@ -540,6 +555,7 @@ impl LinkedList {
 
 } // verus!
 ```
+
 ### 7.2 案例二：验证栈的 LIFO 性质 {#72-案例二验证栈的-lifo-性质}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
@@ -598,6 +614,7 @@ proof fn verify_lifo_property()
 
 } // verus!
 ```
+
 ### 7.3 案例三：验证二分查找正确性 {#73-案例三验证二分查找正确性}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
@@ -641,6 +658,7 @@ fn binary_search(arr: &[i32], target: i32) -> (result: Option<usize>)
 
 } // verus!
 ```
+
 > [来源: [Rust Reference — slice::binary_search](https://doc.rust-lang.org/std/primitive.slice.html#method.binary_search)]
 
 ### 7.4 案例四：验证并发计数器 {#74-案例四验证并发计数器}
@@ -692,6 +710,7 @@ fn verify_multiple_increments()
 
 } // verus!
 ```
+
 ---
 
 ## 8. Verus vs Kani：选择指南 {#8-verus-vs-kani选择指南}
@@ -709,6 +728,7 @@ flowchart TD
     G -->|否| H[Kani 更友好]
     G -->|是| I[Verus 更强大]
 ```
+
 ### 8.1 详细对比 {#81-详细对比}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -745,6 +765,7 @@ verus! {
     }
 }
 ```
+
 ---
 
 ## 9. 限制与调试技巧 {#9-限制与调试技巧}
@@ -801,6 +822,7 @@ spec fn spec_sum(arr: &[i32], n: int) -> int
 
 } // verus!
 ```
+
 ### 9.3 常见错误 {#93-常见错误}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -865,6 +887,7 @@ spec fn spec_sum(arr: &[i32], n: int) -> int
 // │ proof { assert(expr); }     — 纯证明断言                     │
 // └──────────────────────────────────────────────────────────────┘
 ```
+
 > **总结**: Verus 将 SMT 自动定理证明带入 Rust 工程实践。通过 `requires`/`ensures`/`invariant` 三件套，程序员可以在不离开 Rust 语法的情况下，为关键代码建立数学级可信保障。它与 Kani 形成完美互补：Kani 负责"快速扫雷"，Verus 负责"深度筑墙"。对于并发算法、数据结构不变量和安全关键系统，Verus 是目前 Rust 生态中最强的演绎验证工具。
 
 ---

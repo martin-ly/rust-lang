@@ -185,6 +185,7 @@ $$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$
 
    // a 仍可使用
    ```
+
 3. **无悬垂**：根据 [ownership_model](../../../formal_methods/10_ownership_model.md) T2，
    - 借用生命周期不超过原对象
    - 返回值所有权独立
@@ -253,6 +254,7 @@ let b = a.clone();  // a 仍有效，b 为独立副本
 
 assert_eq!(a.host, b.host);
 ```
+
 **深拷贝（含嵌套）**：
 
 ```rust
@@ -271,6 +273,7 @@ let tree = Node { value: 1, children: vec![] };
 
 let copy = tree.clone();  // 递归 clone
 ```
+
 **形式化对应**：`clone(&self) -> Self` 即 $\mathit{clone}$；`#[derive(Clone)]` 自动生成实现。
 
 ---
@@ -325,6 +328,7 @@ fn main() {
 
 }
 ```
+
 ### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
@@ -401,6 +405,7 @@ ownership_model T2
 
 推论 P-C1 (Clone 安全使用)
 ```
+
 ### 与 Rust 类型系统的联系 {#与-rust-类型系统的联系}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -459,6 +464,7 @@ ownership_model T2
 
 { Q  }  // 后置条件
 ```
+
 > 以上规约以霍尔三元组风格表述；Rust 编译器通过所有权、借用与类型检查在编译期强制大部分不变式与前置条件。
 
 ---
@@ -518,6 +524,7 @@ let db = Database { conn: RawConn };
 
 let db2 = db.clone(); // 错误
 ```
+
 **编译器错误**：`the method clone exists but its trait bound was not satisfied`。
 
 **修复**：`#[derive(Clone)]` 或手动实现；若包含裸指针需用 `Arc` 等安全抽象。
@@ -537,6 +544,7 @@ let b = a.clone();
 
 b.cache.borrow_mut().push(1); // 同时影响 a
 ```
+
 **运行期风险**：`a` 与 `b` 共享 `RefCell`，可能引发意外 panic。
 
 **修复**：使用 `Arc<Mutex<T>>` 或深拷贝语义明确共享意图。
@@ -550,6 +558,7 @@ b.cache.borrow_mut().push(1); // 同时影响 a
 
 struct Wrapper { data: String }
 ```
+
 **编译器错误**：`the trait Copy may not be implemented for this type; the type String does not implement Copy`。
 
 ---
@@ -586,6 +595,7 @@ struct Wrapper { data: String }
 
 └── 需工厂创建？ → Factory Method
 ```
+
 ---
 
 ## 与 GoF 对比 {#与-gof-对比}
@@ -670,6 +680,7 @@ mindmap
 
       对象快照
 ```
+
 ---
 
 ## 与其他模式的关系图 {#与其他模式的关系图}
@@ -698,6 +709,7 @@ graph LR
 
     style C fill:#9E9E9E,stroke:#616161,color:#fff
 ```
+
 ---
 
 ## 实质内容五维自检 {#实质内容五维自检}

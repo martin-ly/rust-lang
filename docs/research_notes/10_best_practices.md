@@ -159,6 +159,7 @@ fn example_anti_pattern() {
     v.push(4);          // 错误：可变借用与不可变借用冲突
 }
 ```
+
 **引理 BP-L1**：若研究笔记满足 Def BP2，则其满足 Def BP1；实质内容完备蕴含形式化完备。
 
 *证明*：由 Def BP1、BP2；形式化 + 代码 + 场景 + 反例 + 衔接 ⇒ 形式化完备。∎
@@ -223,6 +224,7 @@ fn example_anti_pattern() {
 - 借用规则的逻辑表达
 - 生命周期约束的形式化
 ```
+
 ### 2. 提供理论基础 {#2-提供理论基础}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -247,6 +249,7 @@ fn example_anti_pattern() {
 - **分离逻辑**: 用于表达借用规则
 - **依赖类型**: 用于形式化生命周期
 ```
+
 ### 3. 使用清晰的结构 {#3-使用清晰的结构}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -278,6 +281,7 @@ fn example_anti_pattern() {
 ## 参考文献 {#参考文献}
 > **[来源: [crates.io](https://crates.io/)]**
 ```
+
 ---
 
 ## 📚 内容组织最佳实践 {#内容组织最佳实践}
@@ -316,6 +320,7 @@ fn example_anti_pattern() {
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 ```
+
 ### 2. 渐进式展开 {#2-渐进式展开}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -350,6 +355,7 @@ fn example_anti_pattern() {
 
 最后介绍高级类型...
 ```
+
 ### 3. 交叉引用 {#3-交叉引用}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -367,6 +373,7 @@ fn example_anti_pattern() {
 
 有关类型系统的更多信息，请参考 [类型系统基础](type_theory/10_type_system_foundations.md)。
 ```
+
 ---
 
 ## 🔗 链接管理最佳实践 {#链接管理最佳实践}
@@ -389,6 +396,7 @@ fn example_anti_pattern() {
 ✅ 正确: [研究路线图](10_research_roadmap.md)
 ❌ 错误: 研究路线图
 ```
+
 ### 2. 提供描述性链接文本 {#2-提供描述性链接文本}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -405,6 +413,7 @@ fn example_anti_pattern() {
 ✅ 正确: 查看 [研究路线图](10_research_roadmap.md) 了解研究计划
 ❌ 错误: 点击 [这里](10_research_roadmap.md)
 ```
+
 ### 3. 维护链接完整性 {#3-维护链接完整性}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -451,6 +460,7 @@ fn main() {
     println!("{}", y);
 }
 ```
+
 ### 2. 添加注释和说明 {#2-添加注释和说明}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -477,6 +487,7 @@ fn main() {
     // s 在这里不再可用
 }
 ```
+
 ### 3. 展示错误和解决方案 {#3-展示错误和解决方案}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -507,6 +518,7 @@ fn main() {
     let r3 = &mut s; // 现在可以创建可变借用
 }
 ```
+
 ---
 
 ## 📖 文档格式最佳实践 {#文档格式最佳实践}
@@ -539,6 +551,7 @@ fn main() {
 
 > **[来源: IEEE - Programming Language Standards]**
 ```
+
 ### 2. 使用列表和表格 {#2-使用列表和表格}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -572,6 +585,7 @@ fn main() {
 | perf         | 性能分析 | Linux 系统工具 |
 | flamegraph   | 火焰图   | 可视化性能     |
 ```
+
 ### 3. 使用代码块和引用 {#3-使用代码块和引用}
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -593,6 +607,7 @@ fn main() {
 
 > **注意**: 这是一个重要的概念，需要特别注意。
 ```
+
 ---
 
 ## 🔍 可发现性最佳实践 {#可发现性最佳实践}
@@ -614,6 +629,7 @@ fn main() {
 ```markdown
 > **关键词**: 所有权、借用、生命周期、形式化验证
 ```
+
 ### 2. 更新索引文件 {#2-更新索引文件}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -634,6 +650,7 @@ fn main() {
 - [所有权模型形式化](formal_methods/10_ownership_model.md) - 所有权模型的形式化定义
 - [借用检查器证明](formal_methods/10_borrow_checker_proof.md) - 借用检查器的正确性证明
 ```
+
 ### 3. 提供多种查找方式 {#3-提供多种查找方式}
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -683,6 +700,7 @@ git commit -m "添加所有权模型形式化研究笔记
 
 相关: #123"
 ```
+
 ### 3. 响应反馈 {#3-响应反馈}
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**

@@ -118,6 +118,7 @@
 
 └── 各模块交叉引用：INDEX、QUICK_FIND、00_MASTER_INDEX
 ```
+
 ### 实质内容检查清单（完成度） {#实质内容检查清单完成度}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
@@ -307,6 +308,7 @@
 
 **借用 (Borrowing)**: 允许临时访问值而不获取所有权。借用可以是不可变的（`&T`）或可变的（`&mut T`）。
 ```
+
 ### 2. 完善理论背景 {#2-完善理论背景}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -334,6 +336,7 @@
 
 **区域类型 (Region Types)**: 用于形式化生命周期的类型系统。区域类型可以表示引用的有效作用域。
 ```
+
 ### 3. 添加理论联系 {#3-添加理论联系}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -390,6 +393,7 @@ let s2 = s1;  // 所有权转移: s1 → s2
 
 ```
 ````
+
 ### 2. 添加更多规则 {#2-添加更多规则}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -447,6 +451,7 @@ fn main() {
 
 ```
 ````
+
 **说明**: 这是最基本的所有权转移示例。`s1` 的所有权转移到 `s2` 后，`s1` 不再可用。
 
 ### 示例 2: 函数参数的所有权转移 {#示例-2-函数参数的所有权转移}
@@ -472,6 +477,7 @@ fn main() {
 
 }
 ```
+
 **说明**: 当值作为函数参数传递时，所有权也会转移。
 
 ### 2. 添加复杂场景 {#2-添加复杂场景}
@@ -515,6 +521,7 @@ fn main() {
 
 ```
 ````
+
 **错误信息**:
 
 ```text
@@ -536,6 +543,7 @@ error[E0382]: borrow of moved value: `s1`
 
   |                    ^^ value borrowed here after move
 ```
+
 **解释**: 当所有权转移后，原变量不再可用。这是 Rust 所有权系统的基本规则。
 
 ---
@@ -589,6 +597,7 @@ error[E0382]: borrow of moved value: `s1`
 
    - 链接: 项目链接
 ```
+
 ### 2. 添加官方文档 {#2-添加官方文档}
 
 >
@@ -621,6 +630,7 @@ error[E0382]: borrow of moved value: `s1`
 
   - 相关内容: 所有权的详细规范
 ```
+
 ### 3. 链接相关代码 {#3-链接相关代码}
 
 >
@@ -651,6 +661,7 @@ error[E0382]: borrow of moved value: `s1`
 
   - 文档: `10_ownership_model.md` - 所有权模型文档
 ```
+
 ---
 
 ## ✅ 完善检查清单 {#完善检查清单}

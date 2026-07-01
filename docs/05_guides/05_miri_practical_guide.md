@@ -66,6 +66,7 @@
 │  (机器码)    │                │  (UB 检测)   │
 └─────────────┘                └─────────────┘
 ```
+
 Miri 的核心价值在于：
 
 - **在运行时检测 UB**：即使代码通过了编译器检查，Miri 仍能发现内存安全问题
@@ -96,6 +97,7 @@ rustup component add miri --toolchain nightly
 # 3. 为当前项目配置 Miri {#3-为当前项目配置-miri}
 cargo +nightly miri setup
 ```
+
 ### 基本命令 {#基本命令}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -115,6 +117,7 @@ cargo +nightly miri run
 # 运行单个文件 (无需 Cargo 项目) {#运行单个文件-无需-cargo-项目}
 rustc +nightly -Zmiri --edition 2024 file.rs
 ```
+
 ### 常用环境变量 {#常用环境变量}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -133,6 +136,7 @@ rustc +nightly -Zmiri --edition 2024 file.rs
 # 示例：禁用隔离并启用 Tree Borrows {#示例禁用隔离并启用-tree-borrows}
 MIRIFLAGS="-Zmiri-disable-isolation -Zmiri-tree-borrows" cargo +nightly miri test
 ```
+
 ---
 
 ## 🐛 Miri 捕获的常见 UB 模式 {#miri-捕获的常见-ub-模式}
@@ -162,6 +166,7 @@ fn uaf_example() {
     }
 }
 ```
+
 **Miri 输出示例**：
 
 ```text
@@ -171,6 +176,7 @@ error: Undefined Behavior: pointer to alloc1402 was dereferenced after this allo
 10 |         println!("{}", *ptr);
    |         ^^^^^^^^^^^^^^^^^^^ pointer to alloc1402 was dereferenced after this allocation got freed
 ```
+
 ### 2. Data Race (数据竞争) {#2-data-race-数据竞争}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -201,11 +207,13 @@ fn data_race_example() {
     }
 }
 ```
+
 **Miri 输出示例**：
 
 ```text
 error: Undefined Behavior: Data race detected between Read on thread `<unnamed>` and Write on thread `main`
 ```
+
 ### 3. Aliasing Violations (别名违规) {#3-aliasing-violations-别名违规}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -231,6 +239,7 @@ fn aliasing_violation() {
     }
 }
 ```
+
 ### 4. 其他常见 UB {#4-其他常见-ub}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -272,6 +281,7 @@ Stacked Borrows 模型:
 - 创建新的 &mut 会弹出(pop)所有旧引用
 - 旧的 &mut 在此之后不可再使用
 ```
+
 **优点**：理论成熟，与编译器优化假设一致
 **缺点**：过于严格，某些安全的代码模式被误判为 UB
 
@@ -297,6 +307,7 @@ graph TD
     style F fill:#9f9,stroke:#333
     style G fill:#9f9,stroke:#333
 ```
+
 **Tree Borrows 核心改进**：
 
 | 场景 | Stacked Borrows | Tree Borrows |
@@ -309,6 +320,7 @@ graph TD
 # 启用 Tree Borrows (推荐用于新项目) {#启用-tree-borrows-推荐用于新项目}
 MIRIFLAGS="-Zmiri-tree-borrows" cargo +nightly miri test
 ```
+
 > 💡 **建议**：Tree Borrows 被认为是 Rust 别名规则的未来方向。如果 Miri 在 Stacked Borrows 下报错但代码逻辑上似乎是安全的，尝试 Tree Borrows。
 
 ---
@@ -353,6 +365,7 @@ mod miri_tests {
     }
 }
 ```
+
 ### 步骤 2：为 Miri 添加条件编译标记 {#步骤-2为-miri-添加条件编译标记}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -374,6 +387,7 @@ fn test_miri_specific() {
     // 只会在 Miri 下运行的测试
 }
 ```
+
 ### 步骤 3：处理 Miri 的隔离限制 {#步骤-3处理-miri-的隔离限制}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -387,6 +401,7 @@ MIRIFLAGS="-Zmiri-disable-isolation" cargo +nightly miri test
 # 或仅允许特定外部函数调用 {#或仅允许特定外部函数调用}
 MIRIFLAGS="-Zmiri-allow-unaligned-access" cargo +nightly miri test
 ```
+
 ### 步骤 4：本地开发流程 {#步骤-4本地开发流程}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -405,6 +420,7 @@ MIRIFLAGS="-Zmiri-disable-isolation" cargo +nightly miri test
 # 5. (可选) 使用 Tree Borrows 再次验证 {#5-可选-使用-tree-borrows-再次验证}
 MIRIFLAGS="-Zmiri-tree-borrows" cargo +nightly miri test
 ```
+
 ---
 
 ## ⚠️ Miri 的局限性 {#miri-的局限性}
@@ -432,6 +448,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo +nightly miri test
 │  比例                   │  ~500-1000x      │
 └────────────────────────────────────────────┘
 ```
+
 > 🚫 **绝对不要将 Miri 用于生产环境运行代码**。Miri 是调试和验证工具，不是运行时。
 
 ---
@@ -469,6 +486,7 @@ jobs:
           cargo +nightly miri setup
           cargo +nightly miri test
 ```
+
 ### 策略建议 {#策略建议}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -485,6 +503,7 @@ CI 策略矩阵:
 │ 文档构建              │ stable       │ 每次 PR                  │
 └──────────────────────┴──────────────┴──────────────────────────┘
 ```
+
 ---
 
 ## 📖 参考文献 {#参考文献}

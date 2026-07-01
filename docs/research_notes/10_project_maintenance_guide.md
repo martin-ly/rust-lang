@@ -139,6 +139,7 @@ TUTORIAL_<topic>.md
 
 <scope>_INDEX.md
 ```
+
 ### 头部模板 {#头部模板}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -160,6 +161,7 @@ TUTORIAL_<topic>.md
 
 ---
 ```
+
 ### 内容结构 {#内容结构}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
@@ -196,6 +198,7 @@ TUTORIAL_<topic>.md
 
    □ 版本兼容性检查
    ```
+
 2. **实施更新**
 
    ```text
@@ -207,6 +210,7 @@ TUTORIAL_<topic>.md
 
    □ 添加变更日志条目
    ```
+
 3. **质量验证**
 
    ```text
@@ -218,6 +222,7 @@ TUTORIAL_<topic>.md
 
    □ 同行评审
    ```
+
 4. **发布更新**
 
    ```text
@@ -227,6 +232,7 @@ TUTORIAL_<topic>.md
 
    □ 通知相关方
    ```
+
 ### Rust版本更新 {#rust版本更新}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -251,6 +257,7 @@ TUTORIAL_<topic>.md
 
 - [ ] 验证所有示例代码
 ```
+
 ---
 
 ## 质量控制 {#质量控制}
@@ -296,6 +303,7 @@ du -sh docs/research_notes
 
 echo "=== 检查完成 ==="
 ```
+
 ### 手动审核清单 {#手动审核清单}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -349,6 +357,7 @@ echo "=== 检查完成 ==="
 
 - [ ] 与核心文档衔接
 ```
+
 ---
 
 ## 社区贡献 {#社区贡献}
@@ -367,6 +376,7 @@ echo "=== 检查完成 ==="
 
    git checkout -b docs/update-<topic>
    ```
+
 2. **实施变更**
    - 遵循文档标准
    - 保持风格一致
@@ -383,6 +393,7 @@ echo "=== 检查完成 ==="
 
    - 关联Issue #xxx
    ```
+
 4. **Pull Request**
    - 描述变更内容
    - 说明变更原因
@@ -421,6 +432,7 @@ echo "=== 检查完成 ==="
 
 修订号：错误修复、小更新
 ```
+
 ### 变更日志 {#变更日志-1}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -452,6 +464,7 @@ echo "=== 检查完成 ==="
 
 - 56个思维表征
 ```
+
 ---
 
 ## 备份与归档 {#备份与归档}

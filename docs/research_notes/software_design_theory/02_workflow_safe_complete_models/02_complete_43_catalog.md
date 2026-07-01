@@ -215,6 +215,7 @@ impl Order {
 
 }
 ```
+
 ### Unit of Work {#unit-of-work}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -262,6 +263,7 @@ impl<T> UnitOfWork<T> {
 
 }
 ```
+
 ### Data Mapper {#data-mapper}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
@@ -292,6 +294,7 @@ impl From<UserEntity> for (u64, String, String) {
 
 }
 ```
+
 ### Value Object {#value-object}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -329,6 +332,7 @@ impl Money {
 
 }
 ```
+
 ### Registry (Service Locator) {#registry-service-locator}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -360,6 +364,7 @@ fn register<T: Send + 'static>(service: T) {
 
 // get：需按具体需求设计（返回引用或克隆）；实际项目常用 tioc 等 DI crate
 ```
+
 ### Identity Map {#identity-map}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -389,6 +394,7 @@ impl<T> IdentityMap<T> {
 
 }
 ```
+
 ### Service Layer {#service-layer}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -417,6 +423,7 @@ impl OrderService {
 
 // 事务边界：由调用方或框架控制；Rust 用 async/await 或 block_on
 ```
+
 ### Repository {#repository}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -441,6 +448,7 @@ impl Repository<User> for UserRepository {
 
 }
 ```
+
 ### DTO {#dto}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -460,6 +468,7 @@ pub struct UserDto {
 
 // 无行为，仅数据传输；跨边界序列化
 ```
+
 ### Event Sourcing {#event-sourcing}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -496,6 +505,7 @@ impl Aggregate {
 
 // 事件日志：Vec<Event> 持久化；重现时 fold 重建状态
 ```
+
 ### Specification {#specification}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
@@ -522,6 +532,7 @@ impl<T, A: Specification<T>, B: Specification<T>> Specification<T> for AndSpec<A
 
 // 业务规则组合：and/or/not；trait 组合优于继承
 ```
+
 ### Table Data Gateway (DAO) {#table-data-gateway-dao}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -550,6 +561,7 @@ impl UserGateway {
 
 // 表级 API；与 Repository 区别：Repository 为领域抽象，Gateway 为表映射
 ```
+
 ### Active Record {#active-record}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -608,6 +620,7 @@ impl User {
 
 // 与 DTO 区别：Active Record 有行为；适合简单 CRUD 领域
 ```
+
 ### Gateway（外部系统集成） {#gateway外部系统集成}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -636,6 +649,7 @@ impl PaymentGateway for StripeGateway {
 
 // FFI 场景：若需 C 库绑定，内部可能 unsafe；对外仍为 Safe trait
 ```
+
 ### Model View Controller (MVC) {#model-view-controller-mvc}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -677,6 +691,7 @@ mod controller {
 
 // axum/actix 中：Router 为 Front Controller；Controller 为 handler
 ```
+
 ### Front Controller {#front-controller}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -713,6 +728,7 @@ impl Router {
 
 // 与 axum::Router::route().get(...) 对应；match 路径分发
 ```
+
 ### Remote Facade {#remote-facade}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -750,6 +766,7 @@ pub async fn handle_order_batch(req: OrderBatchRequest) -> OrderBatchResponse {
 
 // gRPC/HTTP 服务端；粗粒度接口减少延迟
 ```
+
 ### Lazy Load {#lazy-load}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -801,6 +818,7 @@ impl<T> Lazy<T> {
 
 }
 ```
+
 ### Plugin (Dependency Injection) {#plugin-dependency-injection}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -838,6 +856,7 @@ impl App {
 
 // 测试时注入 MockStorage；生产注入 SqlStorage
 ```
+
 ### Optimistic Offline Lock {#optimistic-offline-lock}
 
 >
@@ -881,6 +900,7 @@ pub fn update_optimistic(
 
 // 或 AtomicU64 compare_exchange；见 [ownership_model](../../formal_methods/10_ownership_model.md) Def ATOMIC1
 ```
+
 ---
 
 ## 安全边界 {#安全边界}
@@ -933,6 +953,7 @@ pub fn update_optimistic(
 
     └── 基础：Value Object, Registry, Plugin, Optimistic Offline Lock
 ```
+
 ---
 
 ## 扩展模式选型 {#扩展模式选型}
@@ -1010,6 +1031,7 @@ pub fn update_optimistic(
 
     └── 乐观并发控制？ → Optimistic Offline Lock
 ```
+
 ---
 
 ## 扩展模式形式化对应（深入） {#扩展模式形式化对应深入}

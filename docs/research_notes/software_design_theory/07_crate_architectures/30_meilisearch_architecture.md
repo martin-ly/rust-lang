@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **meilisearch-sdk 全文搜索客户端的 HTTP 抽象与索引架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [数据库系统](../../../../concept/06_ecosystem/37_database_systems.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
@@ -69,6 +70,7 @@ let _ = client.wait_for_task(task, None, None).await?;
 
 let results = index.search().with_query("caorl").execute::<Movie>().await?;
 ```
+
 > [来源: [meilisearch-sdk Examples](https://github.com/meilisearch/meilisearch-sdk/tree/main/examples)]
 
 ---
@@ -89,6 +91,7 @@ graph TD
     IDX -->|search| QUERY[SearchQuery<br/>Builder 查询]
     QUERY -->|execute<T>| RESULT[SearchResults<T><br/>类型化命中]
 ```
+
 > [来源: [meilisearch-sdk Client Docs](https://docs.rs/meilisearch-sdk/latest/meilisearch_sdk/client/struct.Client.html)]
 
 | 类型 | 职责 | 关键方法 |
@@ -116,6 +119,7 @@ let raw: SearchResults<serde_json::Value> = index
     .execute::<serde_json::Value>()
     .await?;
 ```
+
 > [来源: [meilisearch-sdk Search Docs](https://docs.rs/meilisearch-sdk/latest/meilisearch_sdk/search/struct.SearchQuery.html)]
 
 ### 2.3 任务模型：异步索引的状态机 {#23-任务模型异步索引的状态机}
@@ -131,6 +135,7 @@ match status {
     _ => {}
 }
 ```
+
 > [来源: [meilisearch-sdk Tasks Docs](https://docs.rs/meilisearch-sdk/latest/meilisearch_sdk/tasks/)]
 
 ### 2.4 搜索 Builder 与过滤语法 {#24-搜索-builder-与过滤语法}
@@ -147,6 +152,7 @@ let results = index
     .execute::<Movie>()
     .await?;
 ```
+
 > [来源: [Meilisearch Filtering & Faceted Search](https://www.meilisearch.com/docs/learn/fine_tuning_results/filtering)]
 
 ### 2.5 Settings：将搜索行为类型化 {#25-settings将搜索行为类型化}
@@ -161,6 +167,7 @@ let settings = Settings::new()
     .with_sortable_attributes(vec!["year".to_string()]);
 let task = index.set_settings(&settings).await?;
 ```
+
 > [来源: [Meilisearch Settings API](https://www.meilisearch.com/docs/reference/api/settings)]
 
 ---

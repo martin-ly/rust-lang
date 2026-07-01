@@ -59,6 +59,7 @@ let greet = |name| {
     greeting
 };
 ```
+
 ### 捕获环境 {#捕获环境}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -82,6 +83,7 @@ let mut closure = || {
 let s = String::from("hello");
 let closure = move || println!("{}", s);
 ```
+
 ---
 
 ## 闭包 Trait {#闭包-trait}
@@ -122,6 +124,7 @@ where
     f(x)
 }
 ```
+
 ---
 
 ## 常见用法 {#常见用法}
@@ -146,6 +149,7 @@ let evens: Vec<&i32> = nums.iter().filter(|x| *x % 2 == 0).collect();
 // fold
 let sum = nums.iter().fold(0, |acc, x| acc + x);
 ```
+
 ### 高阶函数 {#高阶函数}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -162,6 +166,7 @@ where
     move |x| f(g(x))
 }
 ```
+
 ---
 
 ## 相关文档 {#相关文档}
@@ -288,6 +293,7 @@ where
     }
 }
 ```
+
 ---
 
 ### LazyLock 在闭包工厂中的应用 {#lazylock-在闭包工厂中的应用}
@@ -367,6 +373,7 @@ pub fn execute_pipeline(data: Data) -> Data {
         .fold(data, |acc, step| step(acc))
 }
 ```
+
 ---
 
 ### array_windows 在函数式数据处理中的应用 {#array_windows-在函数式数据处理中的应用}
@@ -444,6 +451,7 @@ pub trait WindowedIterator: Iterator {
     }
 }
 ```
+
 ---
 
 ### 数学常量在函数式数值计算中的应用 {#数学常量在函数式数值计算中的应用}
@@ -484,6 +492,7 @@ pub fn euler_smooth() -> impl Fn(f64) -> f64 {
     }
 }
 ```
+
 ---
 
 ### 生产场景：事件处理系统 {#生产场景事件处理系统}
@@ -589,6 +598,7 @@ pub fn setup_processor() -> EventProcessor {
 /// | 传统 trait 对象 | 2.5 | 每次调用 |
 /// | 优化闭包 + ControlFlow | **0.8** | **0** |
 ```
+
 ---
 
 ### 总结 {#总结}

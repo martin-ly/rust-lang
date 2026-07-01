@@ -281,6 +281,7 @@ fn main() {
 
 }
 ```
+
 **形式化描述**:
 
 - $\text{longest} : \forall 'a. \&'a \text{str} \times \&'a \text{str} \to \&'a \text{str}$
@@ -310,6 +311,7 @@ fn first_word(s: &str) -> &str {
 
 }
 ```
+
 **形式化描述**:
 
 - 编译器自动推断生命周期参数
@@ -347,6 +349,7 @@ impl<'a> ImportantExcerpt<'a> {
 
 }
 ```
+
 **形式化描述**:
 
 - $\text{ImportantExcerpt}['a] = \{\text{part} : \&'a \text{str}\}$
@@ -388,6 +391,7 @@ where
 
 }
 ```
+
 **生命周期与泛型分析**：
 
 - 生命周期参数和类型参数可以同时使用
@@ -411,6 +415,7 @@ where
 
 }
 ```
+
 **高阶生命周期分析**：
 
 - 闭包可以捕获生命周期
@@ -563,6 +568,7 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 ```
 'long ⊇ 'short   ⇒   &'long T <: &'short T   （协变）
 ```
+
 这与 Def 2.2 一致，但 Oxide 进一步将 region 解释为**引用的可能来源集合**，使生命周期约束成为别名安全判断的一部分。
 
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}

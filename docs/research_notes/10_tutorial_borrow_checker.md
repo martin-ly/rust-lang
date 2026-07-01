@@ -121,6 +121,7 @@ char* bad() {
 
 // buffer在函数结束时被释放，返回的指针指向无效内存
 ```
+
 ```c
 // C语言示例: 数据竞争
 
@@ -133,6 +134,7 @@ void thread2() { counter++; }
 
 // 没有同步，结果不确定!
 ```
+
 ### Rust的解决方案 {#rust的解决方案}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -152,6 +154,7 @@ fn bad() -> &String {
 
 }
 ```
+
 ```rust
 // Rust: 编译错误!
 
@@ -161,6 +164,7 @@ let ref1 = &mut counter;
 
 let ref2 = &mut counter;  // 错误: 不能有两个可变借用
 ```
+
 ---
 
 ## 第二部分：借用规则 {#第二部分借用规则}
@@ -235,6 +239,7 @@ let ref2 = &mut counter;  // 错误: 不能有两个可变借用
 
                冲突! 编译错误
 ```
+
 ---
 
 ## 第三部分：不可变借用 {#第三部分不可变借用}
@@ -261,6 +266,7 @@ let r3 = &s;  // 不可变借用3 - 允许!
 
 println!("{}, {}, {}", r1, r2, r3);
 ```
+
 ### 为什么多个不可变借用是安全的 {#为什么多个不可变借用是安全的}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -279,6 +285,7 @@ println!("{}, {}, {}", r1, r2, r3);
 
 没有人修改数据，所以同时读取是安全的
 ```
+
 ---
 
 ## 第四部分：可变借用 {#第四部分可变借用}
@@ -310,6 +317,7 @@ let r2 = &mut s;  // OK!
 
 r2.push_str("!");
 ```
+
 ### 为什么需要独占性 {#为什么需要独占性}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -328,6 +336,7 @@ r1.push(1);  // 可能使r2的指针失效
 
 r2[0];       // 悬垂指针! 未定义行为!
 ```
+
 Rust阻止这种情况，保证内存安全。
 
 ---
@@ -354,6 +363,7 @@ let r3 = &mut s;  // 错误! 不能同时有可变和不可变
 
 println!("{}, {}", r1, r2);
 ```
+
 ### 编译器错误分析 {#编译器错误分析}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -381,6 +391,7 @@ error[E0502]: cannot borrow `s` as mutable because it is also borrowed as immuta
 
   |                       -- immutable borrow later used here
 ```
+
 ### 解决冲突 {#解决冲突}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -404,6 +415,7 @@ let r3 = &mut s;  // OK! 现在可以可变借用了
 
 r3.push_str(" world");
 ```
+
 ---
 
 ## 第六部分：NLL (非词法生命周期) {#第六部分nll-非词法生命周期}
@@ -432,6 +444,7 @@ let r2 = &mut s;  // 在NLL之前这会失败!
 
 r2.push_str(" world");
 ```
+
 ### NLL的效果 {#nll的效果}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -462,6 +475,7 @@ r2.push_str(" world");
 
 }
 ```
+
 ---
 
 ## 第七部分：借用与数据结构 {#第七部分借用与数据结构}
@@ -509,6 +523,7 @@ fn main() {
 
 }
 ```
+
 ### 自引用结构的问题 {#自引用结构的问题}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -527,6 +542,7 @@ struct SelfRef {
 
 // 原因: 如果SelfRef被移动，data的地址改变，ptr变成悬垂指针
 ```
+
 **解决方案**: 使用 `Pin` 或索引代替指针。
 
 ---
@@ -554,6 +570,7 @@ let s2 = s.clone();
 
 println!("{}", s);  // OK
 ```
+
 ### 错误2: 在借用期间修改 {#错误2-在借用期间修改}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -576,6 +593,7 @@ println!("{}", r);  // 借用结束
 
 s.push_str(" world");  // OK
 ```
+
 ### 错误3: 返回局部引用 {#错误3-返回局部引用}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -607,6 +625,7 @@ fn good2() -> &'static str {
 
 }
 ```
+
 ---
 
 ## 第九部分：内部可变性 {#第九部分内部可变性}
@@ -634,6 +653,7 @@ let mut r1 = cell.borrow_mut();  // 运行时检查的可变借用
 
 // RefCell在运行时检查借用规则，违反会panic
 ```
+
 ### 内部可变性模式 {#内部可变性模式}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -715,6 +735,7 @@ let mut r1 = cell.borrow_mut();  // 运行时检查的可变借用
 
         └── 零运行时开销
 ```
+
 ## 引言 {#引言-1}
 
 >
@@ -742,6 +763,7 @@ free(ptr);
 
 *ptr = 42;  // 使用已释放内存！悬垂指针！
 ```
+
 传统解决方案：
 
 - **GC**: 运行时开销
@@ -778,6 +800,7 @@ println!("{} {}", r1, r2);
 
 // let r3 = &mut x;  // 错误！
 ```
+
 **为什么?** 防止数据竞争。读者看到的数据可能被写者修改。
 
 ### 规则2: 引用必须始终有效 {#规则2-引用必须始终有效}
@@ -797,6 +820,7 @@ let r;
 
 // r仍然有效，但指向无效内存
 ```
+
 ---
 
 ## 第三部分：工作原理 {#第三部分工作原理}
@@ -817,6 +841,7 @@ let r;
 
 4. 如果有冲突，编译错误
 ```
+
 ### 生命周期标注 {#生命周期标注}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -835,6 +860,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 // - 调用者必须确保返回的引用活得足够长
 ```
+
 ---
 
 ## 第四部分：常见错误与解决 {#第四部分常见错误与解决}
@@ -869,6 +895,7 @@ println!("{}", r1);
 
 let r2 = &mut x;  // OK
 ```
+
 ### 错误2: 悬垂引用 {#错误2-悬垂引用}
 
 >
@@ -894,6 +921,7 @@ fn not_dangling() -> String {
 
 }
 ```
+
 ---
 
 ## 第五部分：高级特性 {#第五部分高级特性}
@@ -917,6 +945,7 @@ println!("{}", y);  // y最后一次使用
 
 let z = &mut x;  // OK！NLL允许
 ```
+
 ### 内部可变性 {#内部可变性}
 
 >
@@ -932,6 +961,7 @@ let y = x.borrow();    // 不可变借用
 
 let z = x.borrow_mut(); // 运行时错误！已有借用
 ```
+
 借用检查器在编译时检查，RefCell在运行时检查。
 
 ---
@@ -951,6 +981,7 @@ let z = x.borrow_mut(); // 运行时错误！已有借用
 ```
 BorrowCheck(P) = OK → DataRaceFree(P)
 ```
+
 **证明思路**:
 
 - 借用规则确保写操作独占
@@ -993,6 +1024,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
             └── 零运行时开销
 ```
+
 ---
 
 **维护者**: Rust Formal Methods Research Team

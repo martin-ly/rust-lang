@@ -162,6 +162,7 @@ $$\Omega(\mathit{create}_i(f)) \cap \Omega(f) = \emptyset$$
 
    }
    ```
+
 2. **关联类型约束**：`type B: Button` 要求 `B` 实现 `Button` trait
    - 对于 `impl GuiFactory for WinFactory`，`type B = WinButton`
    - 编译期检查：`WinButton: Button` 必须成立
@@ -286,6 +287,7 @@ impl GuiFactory for WinFactory {
 
 }
 ```
+
 **形式化对应**：`GuiFactory` 为 $\mathcal{F}$；`create_button`、`create_dialog` 为 $\mathit{create}_i$；关联类型 `B`、`D` 保证产品族一致。
 
 ---
@@ -360,6 +362,7 @@ fn main() {
 
 }
 ```
+
 ### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
@@ -436,6 +439,7 @@ ownership_model T2
 
 推论 AF-C1 (纯 Safe 抽象工厂)
 ```
+
 ### 与 Rust 类型系统的联系 {#与-rust-类型系统的联系}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -494,6 +498,7 @@ ownership_model T2
 
 { Q  }  // 后置条件
 ```
+
 > 以上规约以霍尔三元组风格表述；Rust 编译器通过所有权、借用与类型检查在编译期强制大部分不变式与前置条件。
 
 ---
@@ -562,6 +567,7 @@ let ui: (WinButton, MacDialog) = (
 
 );
 ```
+
 **编译器错误**：`expected struct WinButton, found struct MacButton`（类型不匹配）。
 
 **原因**：关联类型保证一个泛型上下文内产品族一致；跨工厂混用违反 Axiom AF1。
@@ -585,6 +591,7 @@ fn use_button<F: GuiFactory>(f: &F) {
 
 }
 ```
+
 **编译器错误**：`no method named render found for associated type F::B`。
 
 **修复**：`type B: Button;`。
@@ -604,6 +611,7 @@ impl GuiFactory for BadFactory {
 
 }
 ```
+
 **编译器错误**：`missing lifetime specifier`。
 
 **原因**：产品应转移所有权；返回借用会引入与工厂绑定的生命周期，违反 Axiom AF2。
@@ -624,6 +632,7 @@ impl GuiFactory for BadFactory {
 
 └── 需多步骤构建？ → Builder
 ```
+
 ---
 
 ## 与 GoF 对比 {#与-gof-对比}
@@ -712,6 +721,7 @@ mindmap
 
       序列化格式
 ```
+
 ---
 
 ## 与其他模式的关系图 {#与其他模式的关系图}
@@ -740,6 +750,7 @@ graph LR
 
     style P fill:#9E9E9E,stroke:#616161,color:#fff
 ```
+
 ---
 
 ## 实质内容五维自检 {#实质内容五维自检}

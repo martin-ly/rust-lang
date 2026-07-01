@@ -429,6 +429,7 @@ find docs/research_notes -name "*.md" -exec grep -l "\[.*\](.*)" {} \;
 
 markdownlint docs/research_notes/**/*.md
 ```
+
 ### 代码验证 {#代码验证}
 
 >
@@ -439,6 +440,7 @@ markdownlint docs/research_notes/**/*.md
 
 cargo check --examples
 ```
+
 ### 统计信息 {#统计信息}
 
 >
@@ -454,6 +456,7 @@ find docs/research_notes -name "*.md" | wc -l
 
 find docs/research_notes -name "*.md" -exec wc -l {} + | tail -1
 ```
+
 ---
 
 ## 📋 维护检查清单 {#维护检查清单}

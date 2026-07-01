@@ -118,6 +118,7 @@ fn theorem_ow1_ownership_uniqueness() {
 
 }
 ```
+
 ### T-OW2: 移动语义保持性定理 {#t-ow2-移动语义保持性定理}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -151,6 +152,7 @@ fn theorem_ow2_move_semantics() {
 
 }
 ```
+
 ### T-OW3: 资源释放定理 {#t-ow3-资源释放定理}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -196,6 +198,7 @@ fn theorem_ow3_resource_release() {
 
 }
 ```
+
 ---
 
 ## 🧬 借用检查定理映射 {#借用检查定理映射}
@@ -248,6 +251,7 @@ fn theorem_br1_borrow_safety() {
 
 }
 ```
+
 ### T-BR2: 可变借用排他性定理 {#t-br2-可变借用排他性定理}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -275,6 +279,7 @@ fn theorem_br2_mutable_exclusivity(data: &mut Vec<i32>) {
 
 }
 ```
+
 ---
 
 ## 🧬 类型系统定理映射 {#类型系统定理映射}
@@ -318,6 +323,7 @@ fn theorem_ty1_type_safety() {
 
 }
 ```
+
 ### T-TY2: 泛型单态化定理 {#t-ty2-泛型单态化定理}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -351,6 +357,7 @@ fn theorem_ty2_generic_monomorphization<T: std::fmt::Display>(x: T) {
 
 // 运行时无泛型开销
 ```
+
 ---
 
 ## 🧬 生命周期定理映射 {#生命周期定理映射}
@@ -398,6 +405,7 @@ fn theorem_lt1_lifetime_containment() -> String {
 
 } // s1 dropped here
 ```
+
 ### T-LT2: 子类型替换定理 {#t-lt2-子类型替换定理}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -423,6 +431,7 @@ fn theorem_lt2_subtyping<'a>(s: &'a str) -> &'static str {
 
 }
 ```
+
 ---
 
 ## 🧬 并发安全定理映射 {#并发安全定理映射}
@@ -461,6 +470,7 @@ fn theorem_ss1_send_safety() {
 
 }
 ```
+
 ### T-SS2: Sync 安全性定理 {#t-ss2-sync-安全性定理}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -501,6 +511,7 @@ fn theorem_ss2_sync_safety() {
 
 }
 ```
+
 ### T-MT1: Mutex 安全性定理 {#t-mt1-mutex-安全性定理}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -541,6 +552,7 @@ fn theorem_mt1_mutex_safety() {
 
 }
 ```
+
 ---
 
 ## 🧬 异步编程定理映射 {#异步编程定理映射}
@@ -588,6 +600,7 @@ fn theorem_fu1_future_progress() {
 
 }
 ```
+
 ### T-AS1: async/await 等价性定理 {#t-as1-asyncawait-等价性定理}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -616,6 +629,7 @@ fn manual_future() -> impl Future<Output = i32> {
 
 }
 ```
+
 ### T-PI1: Pin 安全性定理 {#t-pi1-pin-安全性定理}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -659,6 +673,7 @@ fn theorem_pi1_pin_safety() {
 
 }
 ```
+
 ---
 
 ## 🧬 分布式系统定理映射 {#分布式系统定理映射}
@@ -697,6 +712,7 @@ async fn theorem_sg1_saga_eventual_consistency() {
 
 }
 ```
+
 ### T-CB1: 熔断故障隔离定理 {#t-cb1-熔断故障隔离定理}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -749,6 +765,7 @@ impl CircuitBreaker {
 
 }
 ```
+
 ---
 
 ## 🧬 工作流引擎定理映射 {#工作流引擎定理映射}
@@ -803,6 +820,7 @@ fn theorem_wf1_workflow_liveness() {
 
 }
 ```
+
 ### T-CC1: 补偿一致性定理 {#t-cc1-补偿一致性定理}
 
 >
@@ -832,6 +850,7 @@ async fn theorem_cc1_compensation_consistency() {
 
 }
 ```
+
 ---
 
 ## 📊 映射完整性验证 {#映射完整性验证}

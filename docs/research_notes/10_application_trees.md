@@ -122,6 +122,7 @@ mindmap
       FFI绑定
       内联汇编
 ```
+
 ### 2.2 技能路径 {#22-技能路径}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -161,6 +162,7 @@ mindmap
    ├─ winapi (Windows)
    └─ nix (Unix工具)
 ```
+
 ---
 
 ## 三、网络服务应用树 {#三网络服务应用树}
@@ -226,6 +228,7 @@ mindmap
         Redis
         Memcached
 ```
+
 ### 3.2 架构层次 {#32-架构层次}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -269,6 +272,7 @@ mindmap
    ├─ 编排 (Kubernetes)
    └─ 可观测性 (Prometheus, Jaeger)
 ```
+
 ---
 
 ## 四、数据系统应用树 {#四数据系统应用树}
@@ -336,6 +340,7 @@ mindmap
         Saga
         Percolator
 ```
+
 ### 4.2 数据系统层次 {#42-数据系统层次}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -379,6 +384,7 @@ mindmap
    ├─ 分片策略
    └─ 复制协议
 ```
+
 ---
 
 ## 五、跨领域通用能力 {#五跨领域通用能力}
@@ -427,6 +433,7 @@ mindmap
    ├─ 基准测试 (criterion)
    └─ 内存分析
 ```
+
 ---
 
 ## 六、相关资源 {#六相关资源}
@@ -480,6 +487,7 @@ Rust 应用领域总览
    ├─ 构建系统 (Cargo)
    └─ 开发工具 (rust-analyzer)
 ```
+
 ---
 
 **维护者**: Rust Learning Project Team

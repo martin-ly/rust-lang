@@ -121,6 +121,7 @@ pub trait Plugin: Send + Sync {
     fn execute(&self, input: &str) -> String;
 }
 ```
+
 注册表负责持有 `Box<dyn Plugin>` 并提供查询/调度接口：
 
 ```rust
@@ -136,6 +137,7 @@ impl PluginRegistry {
     }
 }
 ```
+
 该模式满足 [04_compositional_engineering README](README.md) 中的 **Def CE-ARCH1**：跨边界时，所有权与 `Send/Sync` 沿 `Box<dyn Plugin>` 传递。
 
 ---
@@ -154,6 +156,7 @@ name = "plugin_api"
 version = "0.1.0"
 edition = "2024"
 ```
+
 ```rust
 // plugin_api/src/lib.rs
 use std::ffi::{c_char, CStr, CString};
@@ -173,6 +176,7 @@ pub struct RawPlugin {
 
 pub const PLUGIN_ENTRY_NAME: &[u8] = b"plugin_entry\0";
 ```
+
 ### 4.2 静态注册表示例 {#42-静态注册表示例}
 
 ```rust
@@ -193,6 +197,7 @@ fn main() {
     }
 }
 ```
+
 ### 4.3 动态加载示例 {#43-动态加载示例}
 
 ```rust,ignore
@@ -219,6 +224,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 完整可运行版本见 [crates/c09_design_pattern/examples/plugin_static_registry.rs](../../../../crates/c09_design_pattern/examples/plugin_static_registry.rs) 与 [crates/c09_design_pattern/examples/plugin_dynamic_loading.rs](../../../../crates/c09_design_pattern/examples/plugin_dynamic_loading.rs)。
 
 ---
@@ -269,6 +275,7 @@ fn main() {
     }
 }
 ```
+
 ### 示例 2：使用 libloading 的动态插件 {#示例-2使用-libloading-的动态插件}
 
 ```rust,ignore
@@ -301,6 +308,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 > **注意**：动态示例依赖外部 `.so` 文件，默认以 `ignore` 标注；实际运行时需先构建动态库插件。
 
 ---
@@ -332,6 +340,7 @@ let ptr: *const c_char;
 } // lib 在此 drop，ptr 悬垂
 println!("{}", CStr::from_ptr(ptr).to_str()?); // UB
 ```
+
 正确做法：确保 `Library` 句柄的生命周期覆盖所有从库中获取的指针，或使用拷贝后的值。
 
 ### 6.3 版本兼容性 {#63-版本兼容性}

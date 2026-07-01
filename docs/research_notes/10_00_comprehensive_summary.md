@@ -92,6 +92,7 @@
    UNIFIED_SYSTEMATIC_FRAMEWORK                       ← 统一框架
    ARGUMENTATION_GAP_INDEX                            ← 论证缺口
 ```
+
 ### 3.1 按领域一句话 {#31-按领域一句话}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -131,6 +132,7 @@
     │            │            │            │            │
  Def/Axiom     A/L/T/C      推导、引用链   完整证明/思路  导图/矩阵/决策树/反例
 ```
+
 **核心论证链**：
 
 1. **所有权→内存安全**：规则 1–3 → T2 唯一性 → T3 无悬垂/无双重释放/无泄漏

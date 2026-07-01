@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **Rayon 数据并行与 fork-join 调度架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [并发编程](../../../../concept/03_advanced/01_concurrency.md)
 > - [并发模式](../../../../concept/03_advanced/10_concurrency_patterns.md)
 > - [性能优化](../../../../concept/06_ecosystem/15_performance_optimization.md)
@@ -104,6 +105,7 @@ pub trait ParallelIterator: Sized + Send {
 
 }
 ```
+
 > [来源: Rayon 源码 — `rayon/src/iter/mod.rs`]
 
 关键观察：`ParallelIterator` 要求 `Item: Send`，这意味着迭代产生的每个元素都必须是线程安全的。
@@ -138,6 +140,7 @@ let sum: u64 = (0..1_000_000)
 
     .sum();
 ```
+
 Rayon 的 `ParallelIterator` 支持几乎所有标准库迭代器方法：`map`、`filter`、`fold`、`reduce`、`sum`、`min_by`、`collect`、`find_any` 等。其中 `find_any` 和 `position_any` 是并行特化的（返回"任意"匹配结果即可，无需确定性顺序）。
 
 ### 2.3 `join(f, g)` — 分叉-汇合并行 {#23-joinf-g-分叉-汇合并行}
@@ -173,6 +176,7 @@ fn fibonacci(n: u32) -> u32 {
 
 }
 ```
+
 > [来源: Rayon 文档 — `join`](https://docs.rs/rayon/latest/rayon/fn.join.html)
 
 **重要**: `join` 并非无条件地创建新线程。Rayon 会评估任务粒度——若当前线程已有足够工作，右侧闭包可能直接在当前线程执行（顺序回退）。这避免了微任务带来的调度开销。
@@ -259,6 +263,7 @@ flowchart TD
 
     style DequeN fill:#c8e6c9
 ```
+
 ### 3.2 工作窃取的三条规则 {#32-工作窃取的三条规则}
 
 >
@@ -312,6 +317,7 @@ let bad: Vec<Rc<i32>> = vec![Rc::new(1)];
 
 // bad.par_iter(); // ERROR: `Rc<i32>` cannot be sent between threads safely
 ```
+
 > [来源: Rust Reference — Send and Sync](https://doc.rust-lang.org/reference/special-types-and-traits.html)
 
 ### 4.2 `ParallelIterator` 的 trait bounds {#42-paralleliterator-的-trait-bounds}
@@ -328,6 +334,7 @@ pub trait ParallelIterator: Sized + Send {
 
 }
 ```
+
 这个定义意味着：
 
 - **迭代器本身**必须可跨线程发送（`Send`）
@@ -353,6 +360,7 @@ nums.par_iter_mut().for_each(|x| {
 
 });
 ```
+
 `par_iter_mut()` 要求 `&mut T` 是 `Send`，即 `T: Send`。由于 `&mut` 保证独占访问，每个元素一次只被一个线程修改，仍然安全。
 
 ---
@@ -394,6 +402,7 @@ let squares: Vec<u64> = data.into_par_iter()
 
     .collect();
 ```
+
 > [来源: Rayon 文档 — `ParallelSliceMut`](https://docs.rs/rayon/latest/rayon/slice/trait.ParallelSliceMut.html)
 
 ### 5.2 零成本顺序回退 {#52-零成本顺序回退}
@@ -432,6 +441,7 @@ fn parallel_sum(nums: &[u32]) -> u32 {
 
 }
 ```
+
 实际上，Rayon 的 `ParallelIterator` 实现内部已经包含类似的阈值逻辑，用户通常无需手动管理。
 
 ---
@@ -482,6 +492,7 @@ fn process_data(data: &[u64]) -> Vec<u64> {
 
 }
 ```
+
 **关键点**: `scope` 保证所有 `spawn` 的任务在 `scope` 闭包返回前完成，因此可以安全地借用外部变量（如 `results`）。
 
 > [来源: Rayon 文档 — `scope`](https://docs.rs/rayon/latest/rayon/fn.scope.html)
@@ -518,6 +529,7 @@ pool.install(|| {
 
 });
 ```
+
 自定义线程池在以下场景中有用：
 
 - 限制 CPU 使用率（与其他进程共享机器）

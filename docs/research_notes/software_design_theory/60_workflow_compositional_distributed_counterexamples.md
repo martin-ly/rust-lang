@@ -62,6 +62,7 @@ fn step(state: State) -> State {
     }
 }
 ```
+
 ### 后果 {#后果-4}
 
 工作流永不结束，资源泄漏或任务挂起。
@@ -84,6 +85,7 @@ async fn compensate(order_id: Uuid) {
     // ❌ 网络重试可能导致重复退款
 }
 ```
+
 ### 后果 {#后果-4}
 
 重复补偿造成资金或库存错误。
@@ -106,6 +108,7 @@ async fn long_tx(data: &Mutex<State>) {
     drop(guard);
 }
 ```
+
 ### 后果 {#后果-4}
 
 阻塞异步执行器上的其他任务，降低吞吐量；若 future 跨线程移动可能引发 Send 问题。
@@ -124,6 +127,7 @@ async fn long_tx(data: &Mutex<State>) {
 ```rust
 let id = rand::random::<u64>(); // ❌ 无唯一性保证
 ```
+
 ### 后果 {#后果-4}
 
 不同节点生成相同 ID，导致数据覆盖或合并错误。
@@ -144,6 +148,7 @@ order-service -> payment-service
 payment-service -> notification-service
 notification-service -> order-service
 ```
+
 ### 后果 {#后果-4}
 
 - 启动顺序死锁。
@@ -165,6 +170,7 @@ notification-service -> order-service
 actor.tell(Msg::SetX(1)).await;
 actor.tell(Msg::Compute).await; // 误以为 SetX 一定先处理
 ```
+
 ### 问题 {#问题}
 
 Actor 模型不保证消息投递顺序与处理顺序一致，除非使用同一 actor 邮箱且处理单线程。

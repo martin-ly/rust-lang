@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **Hyper HTTP 实现的 Body trait 与零拷贝解析架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [网络编程](../../../../concept/03_advanced/18_network_programming.md)
 > - [网络协议](../../../../concept/06_ecosystem/38_network_protocols.md)
 > - [Web 框架生态](../../../../concept/06_ecosystem/27_web_frameworks.md)
@@ -66,6 +67,7 @@ pub trait Body {
 
 }
 ```
+
 > [来源: [http_body::Body trait 文档](https://docs.rs/http-body/1.0/http_body/trait.Body.html), [hyper::body 模块](https://docs.rs/hyper/1.0/hyper/body/index.html)]
 
 `Body` trait 是 Hyper 处理流式数据的关键。
@@ -103,6 +105,7 @@ type ClientRequest = Request<hyper::body::Body>;
 
 type ServerResponse<B> = Response<B>;
 ```
+
 `Incoming` 是 Hyper 服务端特有的 body 类型，表示从 TCP 连接中尚未完全读取的 HTTP body。
 
 它只能被消费一次（类似 `impl Stream`），强制开发者以流式方式处理大文件上传或 SSE（Server-Sent Events）。
@@ -146,6 +149,7 @@ flowchart TD
 
     H --> I[返回 Response]
 ```
+
 Hyper 客户端默认维护一个按 `(host, port, scheme)` 键化的连接池。关键行为包括：
 
 - **HTTP/1.1 Keep-Alive**: 连接在请求完成后保持打开，通过 `Connection: keep-alive` 头部协商。
@@ -171,6 +175,7 @@ use h2::{server::Connection, recv::Stream, SendStream};
 
 // 将 h2::Stream 映射为 hyper::Request<Incoming>
 ```
+
 `h2` 实现了完整的 HTTP/2 状态机，包括：流优先级、服务器推送（Server Push）、PING 帧保活、以及 SETTINGS 帧协商。
 
 Hyper 作为上层封装，负责将 `h2` 的流抽象转换为标准的 `http::Request` / `http::Response` 接口。
@@ -230,6 +235,7 @@ loop {
 
 }
 ```
+
 > [来源: [hyper::service 模块](https://docs.rs/hyper/1.0/hyper/service/index.html), [Tower Service 文档](https://docs.rs/tower-service/0.3/tower_service/trait.Service.html)]
 
 `service_fn` 将普通异步函数适配为 Tower `Service`。
@@ -256,6 +262,7 @@ flowchart LR
 
     E --> B
 ```
+
 ```rust,ignore
 use tower::ServiceBuilder;
 
@@ -273,6 +280,7 @@ let service = ServiceBuilder::new()
 
 // service 可直接传递给 hyper::server::conn::http1::Builder::serve_connection
 ```
+
 > [来源: [tower::ServiceBuilder 文档](https://docs.rs/tower/0.4/tower/struct.ServiceBuilder.html)]
 
 ---
@@ -318,6 +326,7 @@ match req.parse(buf) {
 
 }
 ```
+
 > [来源: [httparse crate 文档](https://docs.rs/httparse/1.8/httparse/), [httparse GitHub](https://github.com/seanmonstar/httparse)]
 
 `httparse` 是一个纯 Rust、无标准库依赖（`no_std`）的 HTTP 解析器。其设计特点：
@@ -343,6 +352,7 @@ headers.insert(CONTENT_TYPE, HeaderValue::from_static("application/json"));
 
 headers.insert("x-request-id", HeaderValue::from_str("uuid-1234").unwrap());
 ```
+
 `HeaderMap` 使用自定义的哈希表实现，针对 HTTP header 的访问模式优化：
 
 - **大小写不敏感哈希**: HTTP header name 的查找是 case-insensitive 的。
@@ -394,6 +404,7 @@ async fn slow_handler(req: Request<Incoming>) -> Response<BoxBody> {
 
 }
 ```
+
 ### 6.2 HTTP/2 的窗口流控 {#62-http2-的窗口流控}
 
 >
@@ -422,6 +433,7 @@ sequenceDiagram
 
     C->>S: DATA frame (chunk 2)
 ```
+
 Hyper 通过 `h2` crate 暴露的 API 管理每个流的窗口大小。
 
 `Body::poll_frame()` 的实现会在下游未准备好时返回 `Pending`，`h2` 据此控制 WINDOW_UPDATE 帧的发送节奏。
@@ -493,6 +505,7 @@ flowchart LR
 
     C --> F[HTTP/2 多流并发]
 ```
+
 Hyper 服务端为每个 TCP 连接 `spawn` 一个独立的 Tokio 任务：
 
 ```rust,ignore
@@ -534,6 +547,7 @@ loop {
 
 }
 ```
+
 ### 8.2 HTTP/1.1 与 HTTP/2 的并发差异 {#82-http11-与-http2-的并发差异}
 
 >
@@ -604,6 +618,7 @@ tokio::spawn(async move {
 
 let streaming: Response<_> = Response::new(body);
 ```
+
 > [来源: [http_body_util crate](https://docs.rs/http-body-util/0.1/http_body_util/), [hyper::body 模块](https://docs.rs/hyper/1.0/hyper/body/index.html)]
 
 ---
@@ -640,6 +655,7 @@ flowchart TD
 
     D --> E
 ```
+
 | 上层 Crate | 使用 Hyper 的方式 |
 | :--- | :--- |
 | **Reqwest** | 封装 Hyper 客户端，添加 Cookie、JSON、超时等高级 API |

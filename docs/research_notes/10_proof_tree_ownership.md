@@ -50,6 +50,7 @@
 
 ∀资源 r. 在任意时刻 t, owner(r, t) 是唯一的
 ```
+
 ---
 
 ## 🌿 证明树结构 {#证明树结构}
@@ -120,6 +121,7 @@ T-OW1: 所有权唯一性
 
     └── ✓ 唯一性空真成立
 ```
+
 ---
 
 ## 📋 详细证明 {#详细证明}
@@ -140,6 +142,7 @@ let r = Resource::new();
 
 // 唯一性: ✓ (只有一个所有者)
 ```
+
 ### 归纳步骤 (Inductive Step) {#归纳步骤-inductive-step}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
@@ -153,6 +156,7 @@ let b = a;  // move
 
 // 唯一性保持: ✓
 ```
+
 ---
 
 ## 🔍 关键引理 {#关键引理}
@@ -182,6 +186,7 @@ Proof:
 
 4. 结论: A 无法访问 r ∎
 ```
+
 ### Lemma 2: 借用不转移所有权 {#lemma-2-借用不转移所有权}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -202,6 +207,7 @@ Proof:
 
 3. 结论: 所有权保持为 A ∎
 ```
+
 ---
 
 ## 🎯 Rust 代码验证 {#rust-代码验证}
@@ -239,6 +245,7 @@ fn ownership_uniqueness_theorem() {
 
 } // Case 4: 释放 - s 在这里 drop
 ```
+
 ---
 
 ## 📊 证明复杂度 {#证明复杂度}

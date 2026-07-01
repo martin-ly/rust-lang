@@ -439,6 +439,7 @@ graph TB
     C5 -.->|组合| M4
     C8 -.->|组合| M4
 ```
+
 ### 所有权概念子图 {#所有权概念子图}
 
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
@@ -469,6 +470,7 @@ graph TB
     style C6 fill:#e1f5fe
     style C7 fill:#ffebee
 ```
+
 ### 类型系统概念子图 {#类型系统概念子图}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -493,6 +495,7 @@ graph LR
     style I2 fill:#e8f5e9
     style I3 fill:#fff3e0
 ```
+
 ### 并发概念子图 {#并发概念子图}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -519,6 +522,7 @@ graph TB
     style S18 fill:#f3e5f5
     style S17 fill:#fff8e1
 ```
+
 ---
 
 ## 导航索引 {#导航索引}
@@ -594,6 +598,7 @@ I1 借用检查器
     ▼
 M4 内存安全 ← 形式化定理证明
 ```
+
 **文档路径**:
 
 ```text
@@ -603,6 +608,7 @@ M4 内存安全 ← 形式化定理证明
     ↓
 10_ownership_model.md (L2-L1)
 ```
+
 #### 路径2: 从并发需求到实现机制 {#路径2-从并发需求到实现机制}
 
 ```text
@@ -620,6 +626,7 @@ I4 ARC / I5 Mutex / I6 Future状态机
     ▼
 M3 并发安全 ← 形式化证明
 ```
+
 **文档路径**:
 
 ```text
@@ -629,6 +636,7 @@ threads_concurrency_usage_guide.md (L3-L5)
     ↓
 10_async_state_machine.md (L4)
 ```
+
 #### 路径3: 从泛型到类型安全 {#路径3-从泛型到类型安全}
 
 ```text
@@ -646,6 +654,7 @@ I2 单态化 + I8 生命周期推断
     ▼
 M2 类型安全 ← 形式化证明
 ```
+
 **文档路径**:
 
 ```text
@@ -655,6 +664,7 @@ M2 类型安全 ← 形式化证明
     ↓
 10_lifetime_formalization.md (L2-L4)
 ```
+
 #### 路径4: 互斥关系处理路径 {#路径4-互斥关系处理路径}
 
 ```text
@@ -668,6 +678,7 @@ C6 共享借用 ⊥ C7 可变借用
         │
         └──→ 线程安全: Mutex/RwLock
 ```
+
 **参考文档**:
 
 - [10_concept_hierarchy_framework.md](10_concept_hierarchy_framework.md) - 层间映射

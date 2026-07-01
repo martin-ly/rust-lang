@@ -101,6 +101,7 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 # 例如：10_00_organization_and_navigation、10_proof_index、10_authoritative_alignment_guide、 {#例如10_00_organization_and_navigation10_proof_index10_authoritative_alignment_guide}
 # 10_international_formal_verification_index、10_authoritative_alignment_gap_matrix 等 {#10_international_formal_verification_index10_authoritative_alignment_gap_matrix-等}
 ```
+
 ---
 
 ## 三、归档约定 {#三归档约定}

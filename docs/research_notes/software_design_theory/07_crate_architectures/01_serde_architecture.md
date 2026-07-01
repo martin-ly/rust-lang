@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **Serde 库内部架构分析（Visitor、Serializer/Deserializer trait 设计、单态化优化等）**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [Serde 使用模式](../../../../concept/02_intermediate/09_serde_patterns.md)
 > - [Serde 最佳实践](../../../../content/ecosystem/serialization/serde_best_practices.md)
 >
@@ -112,6 +113,7 @@ graph TB
 
     style FormatSide fill:#e8f5e9
 ```
+
 **架构要点解读：**
 
 | 层级 | 职责 | 代表 Trait |
@@ -145,6 +147,7 @@ pub trait Serialize {
 
 }
 ```
+
 `Serialize` 要求类型能够接受任意实现了 `Serializer` 的格式处理器，并产出该格式定义的成功值或错误。关键设计在于泛型参数 `S`——它不是 trait object，而是具体类型参数，因此编译器可以对每个格式实现进行单态化，消除动态分发。
 
 > 来源: Serde 源码, serde / src / ser / mod.rs, https: /  / [docs.rs](https://docs.rs/) / [serde](https://serde.rs/) / latest / [serde](https://serde.rs/) / ser / trait.Serialize.html
@@ -165,6 +168,7 @@ pub trait Deserialize<'de>: Sized {
 
 }
 ```
+
 `'de` 生命周期参数是 Serde 反序列化设计的精髓。它允许反序列化器从输入缓冲区**借出**数据（如 `&str`、`&[u8]`），而非必须拷贝到堆上。当 `'de = 'static` 时，表示反序列化后的数据独立于输入缓冲区；当 `'de` 为输入缓冲区的生命周期时，支持零拷贝反序列化。
 
 > 来源: Serde 生命周期文档, https: /  / [serde.rs](https://serde.rs/) / lifetimes.html
@@ -207,6 +211,7 @@ pub trait Serializer {
 
 }
 ```
+
 `Serializer` 为每种 Rust 原生类型和复合类型（序列、映射、结构体、枚举）提供了对应的序列化方法。关联类型（如 `SerializeSeq`、`SerializeMap`）进一步将复合类型的**状态化写入**委托给专门的子 trait，避免在序列化中途传递额外的上下文参数。
 
 > 来源: Serde Serializer trait 文档, https: /  / [docs.rs](https://docs.rs/) / [serde](https://serde.rs/) / latest / [serde](https://serde.rs/) / ser / trait.Serializer.html
@@ -255,6 +260,7 @@ pub trait Deserializer<'de>: Sized {
 
 }
 ```
+
 与 `Serializer` 不同，`Deserializer` 不直接返回目标类型，而是将解析后的值**喂给 Visitor**。这种设计的优势在于：
 
 1. **单一职责**：Deserializer 只负责"从格式中读取什么"，Visitor 负责"用读取的值做什么"
@@ -300,6 +306,7 @@ pub trait Visitor<'de>: Sized {
 
 }
 ```
+
 Visitor 是 Deserializer 与目标类型之间的**双向契约**：Deserializer 调用 Visitor 的 `visit_*` 方法告知"我读到了什么"，Visitor 则根据类型需求决定"这是否可接受"。`expecting` 方法用于生成友好的错误消息——当 Deserializer 提供了类型不匹配的值时，Serde 会利用此信息告诉用户"我期望一个整数，但得到了字符串"。
 
 > 来源: Serde Visitor 文档, https: /  / [serde.rs](https://serde.rs/) / impl-deserializer.html
@@ -327,6 +334,7 @@ serde_json::to_string(&data)?;  // 调用链 A
 
 serde_json::to_vec(&data)?;     // 调用链 B（不同的 Serializer 实现）
 ```
+
 编译后，`to_string` 和 `to_vec` 分别生成两套完全展开的机器码：
 
 | 机制 | C++/Java 序列化库 | Serde |
@@ -363,6 +371,7 @@ impl<'a, O: Options> serde::Serializer for &'a mut Serializer<O> {
 
 }
 ```
+
 ### 4.3 类型安全的数据映射 {#43-类型安全的数据映射}
 
 >
@@ -407,6 +416,7 @@ let data: BorrowedData = serde_json::from_str(json)?;
 
 // data.name 指向 json 字符串内部，无堆分配
 ```
+
 ### 5.2 `Cow<'a, str>`：借用与拥有的统一 {#52-cowa-str借用与拥有的统一}
 
 >
@@ -428,6 +438,7 @@ struct FlexibleData<'a> {
 
 }
 ```
+
 `Cow`（Clone-on-Write）在 Serde 反序列化中扮演关键角色：当输入格式允许直接引用时（如 JSON 中的未转义字符串），`Cow::Borrowed` 零拷贝使用；当需要转义或转换时，自动升级为 `Cow::Owned`，无需调用方预先判断。
 
 ### 5.3 `Bytes` crate 与 `serde_bytes` {#53-bytes-crate-与-serde_bytes}
@@ -451,6 +462,7 @@ struct BinaryPayload {
 
 }
 ```
+
 `serde_bytes` 提供了一种高效的透明序列化方式：对于支持字节类型的格式（如 MessagePack、Bincode），直接以原生字节序列传输；对于仅支持通用序列类型的格式（如 JSON），降级为数组。这利用了 `Serializer::serialize_bytes` 方法——格式实现者可以自行决定最佳表示。
 
 > 来源: serde_bytes crate 文档, https: /  / [docs.rs](https://docs.rs/) / serde_bytes / latest / serde_bytes /
@@ -504,6 +516,7 @@ sequenceDiagram
 
     Compiler->>Out: 编译生成的 impl
 ```
+
 ### 6.2 生成的代码示例 {#62-生成的代码示例}
 
 >
@@ -522,6 +535,7 @@ struct Point {
 
 }
 ```
+
 `serde_derive` 生成的 `Serialize` 实现近似如下（简化版）：
 
 ```rust,ignore
@@ -547,6 +561,7 @@ impl Serialize for Point {
 
 }
 ```
+
 ### 6.3 `#[serde(...)]` 属性系统 {#63-serde-属性系统}
 
 >
@@ -672,6 +687,7 @@ struct PacketHeader {
 
 }
 ```
+
 ### 8.2 `#[repr(C)]` FFI 边界 {#82-reprc-ffi-边界}
 
 >
@@ -699,6 +715,7 @@ pub struct MyStruct {
 
 }
 ```
+
 ### 8.3 超大文件的流式处理 {#83-超大文件的流式处理}
 
 >
@@ -726,6 +743,7 @@ for value in stream {
 
 }
 ```
+
 ### 8.4 需要模式演化的长期存储 {#84-需要模式演化的长期存储}
 
 >

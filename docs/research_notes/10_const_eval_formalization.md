@@ -66,6 +66,7 @@ Rust 的常量求值在编译期执行，允许在类型系统和常量定义中
 ```text
 常量上下文 := 静态项 | 常量项 | 枚举判别式 | 数组长度 | 类型别名
 ```
+
 ### Def CE-2: 常量求值器 {#def-ce-2-常量求值器}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -82,6 +83,7 @@ Eval_const(e, env) =
 
   若 e 含副作用 → 编译错误
 ```
+
 ---
 
 ## 3. 常量函数 (const fn) {#3-常量函数-const-fn}
@@ -126,6 +128,7 @@ const fn allowed() {
 
 }
 ```
+
 ### Def CE-4: 禁止的 const fn 操作 {#def-ce-4-禁止的-const-fn-操作}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -156,6 +159,7 @@ const fn forbidden() {
 
 }
 ```
+
 ---
 
 ## 4. 定理 {#4-定理}
@@ -220,6 +224,7 @@ MIR (中级中间表示)
 
 编译时常量值
 ```
+
 ---
 
 ## 6. 高级特性 {#6-高级特性}
@@ -252,6 +257,7 @@ const fn with_const_eval_select<T>(x: T) -> T {
 
 }
 ```
+
 ---
 
 **维护者**: Rust 形式化研究团队

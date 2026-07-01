@@ -109,6 +109,7 @@
 
 4. 得出所有可达状态满足不变式
 ```
+
 ### 1.3 详细证明思路 {#13-详细证明思路}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_System)**
@@ -128,6 +129,7 @@ ownership_unique(S) ≡
 
     → x₁ = x₂
 ```
+
 **步骤 2: 归纳基础**
 
 初始状态：程序开始时，每个值只有一个所有者。
@@ -157,6 +159,7 @@ post: owns(y, v) ∧ ¬valid(x)
 
 - 因此v仍然只有一个所有者(y)
 ```
+
 **情况 B: Copy操作**
 
 ```
@@ -169,6 +172,7 @@ post: owns(x, v) ∧ owns(y, v')
 
 因此不涉及唯一性违反
 ```
+
 **情况 C: Drop操作**
 
 ```
@@ -179,6 +183,7 @@ post: v被释放，x变为Dropped
 
 分析: v不再存在，唯一性自然保持
 ```
+
 **关键引理**: 每个操作都是原子性的，不会出现中间状态。
 
 ### 1.4 推论 {#14-推论}
@@ -211,6 +216,7 @@ post: v被释放，x变为Dropped
 ```
 BorrowCheck(P) = OK → DataRaceFree(P)
 ```
+
 ### 2.2 证明策略 {#22-证明策略}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -230,6 +236,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 3. 证明借用检查通过 ⇒ 无数据竞争
 ```
+
 ### 2.3 详细证明思路 {#23-详细证明思路}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -249,6 +256,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
   (a₁.is_write ∨ a₂.is_write)  // 至少一个写
 ```
+
 **步骤 2: 借用规则分析**
 
 **规则**: 在任意时刻，对于内存位置l：
@@ -270,6 +278,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 - 不存在并发访问，无数据竞争
 ```
+
 **情况 B: 不可变借用**
 
 ```
@@ -281,6 +290,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 - 读-读不冲突，无数据竞争
 ```
+
 **关键观察**: 借用检查器在编译时强制执行上述规则。
 
 ### 2.4 直观理解 {#24-直观理解}
@@ -313,6 +323,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 ```
 Γ ⊢ e : τ → ¬∃e', e →* e' ∧ type_error(e')
 ```
+
 **分解为两个子定理**:
 
 - T-TY1 (进展性): 良类型表达式可以继续求值或已是值
@@ -330,6 +341,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 ```
 类型安全 = 进展性 + 保持性
 ```
+
 ### 3.3 进展性 (T-TY1) {#33-进展性-t-ty1}
 
 >
@@ -368,6 +380,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
   → 或e₂是值，可以β归约
 ```
+
 ### 3.4 保持性 (T-TY2) {#34-保持性-t-ty2}
 
 >
@@ -397,6 +410,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
   → 分支类型与条件类型一致
 ```
+
 **关键引理 (替换引理)**:
 
 ```
@@ -404,6 +418,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 那么 Γ ⊢ [v/x]e : τ₂
 ```
+
 ### 3.5 直观理解 {#35-直观理解}
 
 >
@@ -422,6 +437,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
     └── 非良类型程序 ──→ 编译错误
 ```
+
 **Rust的扩展**:
 
 - 所有权系统扩展了类型安全
@@ -446,6 +462,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 ```
 Γ ⊢ r: &'a T  →  lifetime(r) ⊆ lifetime(T)
 ```
+
 ### 4.2 证明策略 {#42-证明策略}
 
 >
@@ -466,11 +483,13 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 4. 如果引用可能比数据活得长，编译拒绝
 ```
+
 **关键规则 (Outlives)**:
 
 ```
 T: 'a  表示 T中所有引用都存活至少'a
 ```
+
 ---
 
 ## 五、证明技术总结 {#五证明技术总结}

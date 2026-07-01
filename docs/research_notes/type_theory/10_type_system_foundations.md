@@ -393,6 +393,7 @@ fn existential() -> Box<dyn Existential<Output = i32>> {
 
 }
 ```
+
 #### 对应关系的理论意义 {#对应关系的理论意义}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -459,6 +460,7 @@ fn swap_iso<A, B>() -> Iso<(A, B), (B, A)> {
 
 }
 ```
+
 **9. 否定 ($\neg A$): 函数到空类型**
 
 ```rust,ignore
@@ -492,6 +494,7 @@ fn absurd<A>(never: !) -> A {
 
 }
 ```
+
 **10. 量词与容器类型**
 
 ```rust,ignore
@@ -533,6 +536,7 @@ fn displayable(value: impl std::fmt::Display) -> Box<dyn std::fmt::Display> {
 
 }
 ```
+
 **11. 自然数与 Peano 算术 (递归类型)**
 
 ```rust,ignore
@@ -600,6 +604,7 @@ impl Nat {
 
 }
 ```
+
 ---
 
 #### 依赖类型与 Rust 的 const 泛型 {#依赖类型与-rust-的-const-泛型}
@@ -625,6 +630,7 @@ head: Vec<T, S n> -> T  // 输入必须至少有一个元素 (S n = n+1)
 
 index: Vec<T, n> -> (i: Nat) -> (p: i < n) -> T
 ```
+
 **Rust 的 const 泛型（依赖类型的受限形式）**:
 
 ```rust
@@ -706,6 +712,7 @@ fn test_matrix() {
 
 }
 ```
+
 **const 泛型的类型理论意义**:
 
 ```rust
@@ -782,6 +789,7 @@ impl<T, const N: usize> ArrayExt<N> for [T; N] {
 
 }
 ```
+
 **Curry-Howard 视角下的依赖类型**:
 
 | 依赖类型概念 | 逻辑对应 | Rust const 泛型 |
@@ -830,6 +838,7 @@ impl<const N: usize> Index<N> {
 
 }
 ```
+
 Rust 的 const 泛型代表了向依赖类型系统迈进的一步，虽然在表达力上仍不及 Coq、Idris 或 Agda 等完整依赖类型语言，但已在实用性和类型安全之间取得了良好平衡。
 
 ---
@@ -1937,6 +1946,7 @@ fn identity<T>(x: T) -> T {
 
 }
 ```
+
 **System F 表示**:
 
 $$\text{identity} = \Lambda \alpha. \lambda x:\alpha. x : \forall \alpha. \alpha \to \alpha$$
@@ -1946,6 +1956,7 @@ $$\text{identity} = \Lambda \alpha. \lambda x:\alpha. x : \forall \alpha. \alpha
 ```rust,ignore
 let x = identity(5i32);  // T = i32
 ```
+
 **System F 表示**:
 
 $$(\Lambda \alpha. \lambda x:\alpha. x)[\text{Int}] = \lambda x:\text{Int}. x : \text{Int} \to \text{Int}$$
@@ -2084,6 +2095,7 @@ W(Γ, let x = e₁ in e₂) =
 
   return (S₂ ∘ S₁, τ₂)
 ```
+
 **泛化 (Generalization)**:
 
 $$\text{gen}(\Gamma, \tau) = \forall \alpha_1...\alpha_n. \tau$$
@@ -2142,6 +2154,7 @@ unify(C(τ₁,...,τₙ), C(τ₁',...,τₙ')) =
 
 unify(τ₁, τ₂) = fail (if constructors differ)
 ```
+
 **出现检查 (Occurs Check)**: 防止递归类型，确保 $\alpha$ 不在 $\tau$ 的自由变量中。
 
 ---
@@ -2200,6 +2213,7 @@ C(Γ, let x = e₁ in e₂ : τ) =
 
   return C₁ ∪ C₂
 ```
+
 **约束求解算法 (Algorithm Solve)**:
 
 ```text
@@ -2236,6 +2250,7 @@ solve({C(τ₁,...) = C'(τ₁',...)} ∪ C) =
 
   else solve({τ₁ = τ₁', ...} ∪ C)
 ```
+
 ---
 
 #### 5.6 类型推导示例 {#56-类型推导示例}
@@ -2247,6 +2262,7 @@ solve({C(τ₁,...) = C'(τ₁',...)} ∪ C) =
 ```rust,ignore
 fn identity(x) { x }
 ```
+
 推导过程：
 
 1. $W(\Gamma, \lambda x. x)$
@@ -2262,6 +2278,7 @@ fn identity(x) { x }
 ```rust,ignore
 fn compose(f, g, x) { f(g(x)) }
 ```
+
 推导过程：
 
 1. 约束：$f : \beta \to \gamma$, $g : \alpha \to \beta$, $x : \alpha$
@@ -2397,6 +2414,7 @@ fn main() {
 
 }
 ```
+
 **形式化分析**:
 
 表达式：$\text{add}(5, "hello")$
@@ -2428,6 +2446,7 @@ error[E0308]: mismatched types
 
    |                         ^^^^^^^ expected `i32`, found `&str`
 ```
+
 **理论解释**: 这违反了类型规则 2（函数应用）。统一算法无法求解 $\&\text{Str} = \text{Int}$，因为这两个类型构造器不同且没有子类型关系。
 
 ---
@@ -2445,6 +2464,7 @@ fn main() {
 
 }
 ```
+
 **形式化分析**:
 
 表达式：$y + 5$
@@ -2470,6 +2490,7 @@ error[E0425]: cannot find value `y` in this scope
 
   |             ^ not found in this scope
 ```
+
 **理论解释**: 这违反了类型规则 1（变量规则）。在类型环境 $\Gamma$ 中找不到变量 $y$ 的绑定。
 
 ---
@@ -2495,6 +2516,7 @@ where
 
 }
 ```
+
 **形式化分析**:
 
 尝试推导类型：
@@ -2519,6 +2541,7 @@ error[E0277]: the trait bound `F: FnOnce<(F,)>` is not satisfied
 
    |     ^^^^ expected an `FnOnce<(F,)>` closure, found `F`
 ```
+
 **理论解释**:
 
 - 约束 $\alpha = \alpha \to \beta$ 会导致无限类型
@@ -2534,6 +2557,7 @@ fn omega(f: Box<dyn Fn(Box<dyn Fn(_) -> !>) -> !>) -> ! {
 
 }
 ```
+
 ---
 
 ### 反例 4: 多态限制违反 {#反例-4-多态限制违反}
@@ -2561,6 +2585,7 @@ where
 
 }
 ```
+
 **更隐蔽的例子**:
 
 ```rust
@@ -2577,6 +2602,7 @@ fn lambda_poly() {
 
 }
 ```
+
 **形式化分析**:
 
 在 HM 类型系统中，let 绑定的变量可以是多态的，但 Lambda 绑定的变量不能：
@@ -2591,6 +2617,7 @@ let id = λx. x in        // id : ∀α. α → α (多态)
 
 (λid. id 5 (id "hello")) (λx. x)  // 错误! id 不是多态
 ```
+
 **理论解释**:
 
 - **let 多态**: `let x = e₁ in e₂` 中，$x$ 可以被实例化为不同类型
@@ -2617,6 +2644,7 @@ unsafe fn bad_deref() {
 
 }
 ```
+
 **形式化分析**:
 
 在 Safe Rust 中，进展性保证以下情况不会发生：
@@ -2657,6 +2685,7 @@ unsafe fn unsafe_operations() {
 
 }
 ```
+
 **理论解释**:
 
 - **类型安全** $\neq$ **无运行时错误**
@@ -2707,6 +2736,7 @@ fn use_complex() {
 
 }
 ```
+
 **约束分析**:
 
 生成的约束：
@@ -2738,6 +2768,7 @@ fn dangling_reference() -> &i32 {
 
 }
 ```
+
 **形式化分析**:
 
 扩展类型系统包含生命周期：
@@ -2760,6 +2791,7 @@ error[E0106]: missing lifetime specifier
 
 error[E0515]: cannot return reference to local variable `x`
 ```
+
 ---
 
 ### 反例 8: Trait 解析失败 {#反例-8-trait-解析失败}
@@ -2780,6 +2812,7 @@ impl MyTrait for String {}  // 可以: 当前 crate 的 trait
 
 // 既不是当前 crate 的 trait，也不是当前 crate 的类型
 ```
+
 **矛盾实现**:
 
 ```rust,ignore
@@ -2819,6 +2852,7 @@ impl<T> Same<T> for T {
 
 // }
 ```
+
 **理论解释**:
 
 - **孤儿规则**: 防止 impl 冲突，保证 trait 解析的一致性
@@ -2879,6 +2913,7 @@ impl<T> Same<T> for T {
 
   └─ 规则正确性 + 约束求解 ────────→ 定理 4,5: 类型推导正确性
 ```
+
 ---
 
 ## ✅ 证明目标 {#证明目标}
@@ -2926,6 +2961,7 @@ fn main() {
 
 }
 ```
+
 **形式化描述**:
 
 - $\Gamma = \{x : \text{i32}, y : \text{f64}\}$
@@ -2953,6 +2989,7 @@ fn main() {
 
 }
 ```
+
 **形式化描述**:
 
 - $\text{add} : \text{i32} \times \text{i32} \to \text{i32}$
@@ -2978,6 +3015,7 @@ fn use_generic() {
 
 }
 ```
+
 **类型推导分析**：
 
 - 第一次调用：`T = i32`，从参数 `5` 推导
@@ -3031,6 +3069,7 @@ fn use_constraint() {
 
 }
 ```
+
 **类型约束分析**：
 
 - `T: Display` 表示 `T` 必须实现 `Display` trait
@@ -3070,6 +3109,7 @@ fn type_inference_example() {
 
 }
 ```
+
 **类型推导分析**：
 
 - 字面量类型：整数默认为 `i32`，浮点数默认为 `f64`
@@ -3101,6 +3141,7 @@ fn type_safety_example() {
 
 }
 ```
+
 **形式化分析**:
 
 - 类型检查：$\Gamma \vdash x : \text{i32}$，$\Gamma \vdash y : \text{f64}$
@@ -3129,6 +3170,7 @@ fn main() {
 
 }
 ```
+
 **形式化描述**:
 
 - $\text{generic\_inference} : \forall \alpha. \alpha \to \alpha$
@@ -3161,6 +3203,7 @@ fn type_correct_example() {
 
 }
 ```
+
 **形式化分析**:
 
 - 类型检查器在编译时检测类型错误
@@ -3200,6 +3243,7 @@ fn type_inference_example() {
 
 }
 ```
+
 **类型推导分析**：
 
 - 字面量类型：整数默认为 `i32`，浮点数默认为 `f64`
@@ -3224,6 +3268,7 @@ fn main() {
 
 }
 ```
+
 **形式化描述**:
 
 - $\text{identity} : \forall \alpha. \alpha \to \alpha$
@@ -3542,6 +3587,7 @@ $。
 
 Γ ⊢ e.ok() : Option<C>
 ```
+
 **语义定义**:
 
 $$
@@ -3611,6 +3657,7 @@ fn process_with_ok(items: &[i32]) -> Option<i32> {
 
 }
 ```
+
 **类型理论意义**:
 
 - `ControlFlow<B, C>` 与 `Option<C>` 之间的自然转换
@@ -3650,6 +3697,7 @@ T : PartialOrd
 
 Γ ⊢ (..=end) : RangeToInclusive<T>
 ```
+
 **操作语义**:
 
 $$
@@ -3709,6 +3757,7 @@ for i in range {
 
 }
 ```
+
 **类型系统影响**:
 
 - 完善范围类型族：`Range`, `RangeFrom`, `RangeFull`, `RangeInclusive`, `RangeTo`, `RangeToInclusive`
@@ -3738,6 +3787,7 @@ for i in range {
 
 Γ ⊢ n.fmt_into(&mut buf) : Result<(), std::fmt::Error>
 ```
+
 **语义**:
 
 $$
@@ -3807,6 +3857,7 @@ fn format_numbers_old(numbers: &[i32]) -> String {
 
 }
 ```
+
 **内存优化意义**:
 
 - 避免 `to_string()` 的临时分配
@@ -3828,6 +3879,7 @@ fn format_numbers_old(numbers: &[i32]) -> String {
 ```rust,ignore
 fn truncate_front(&mut self, len: usize)
 ```
+
 **语义**: 从队列头部截断，保留后 `len` 个元素。
 
 **复杂度**: $O(n)$，其中 $n$ 为被移除元素数量。

@@ -114,6 +114,7 @@ impl SagaCoordinator {
 
 }
 ```
+
 ### 2. CQRS 模式 {#2-cqrs-模式}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -160,6 +161,7 @@ impl OrderQueryHandler {
 
 }
 ```
+
 ---
 
 ## 与 Rust 特性结合 {#与-rust-特性结合}

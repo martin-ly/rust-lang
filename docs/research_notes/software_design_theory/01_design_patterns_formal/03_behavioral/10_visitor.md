@@ -150,6 +150,7 @@ Rust 用 `match` 单分发或 trait 模拟；无 OOP 风格双重分发，表达
 
    }
    ```
+
 2. **穷尽匹配**：编译器检查所有变体被处理
 3. **可扩展性**：新 Visitor 实现 trait 即可
 4. **无双重分发**：Rust 无 OOP 虚函数双重分发
@@ -263,6 +264,7 @@ impl Visitor for PrintVisitor {
 
 }
 ```
+
 ---
 
 ## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
@@ -330,6 +332,7 @@ fn main() {
 
 }
 ```
+
 ### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
@@ -404,6 +407,7 @@ type_system
 
 推论 VI-C1 (近似表达)
 ```
+
 ---
 
 ## 完整场景示例：AST 美化打印 {#完整场景示例ast-美化打印}
@@ -462,6 +466,7 @@ impl ExprVisitor<String> for PrettyPrint {
 
 // 输出："(1 + 2)"
 ```
+
 ---
 
 ## 形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}
@@ -500,6 +505,7 @@ impl ExprVisitor<String> for PrettyPrint {
 
 { Q  }  // 后置条件
 ```
+
 > 以上规约以霍尔三元组风格表述；Rust 编译器通过所有权、借用与类型检查在编译期强制大部分不变式与前置条件。
 
 ---
@@ -562,6 +568,7 @@ impl Shape for Triangle {
 
 }
 ```
+
 **风险**：编译通过但运行期未处理，破坏访问者契约。
 
 ### 反例 2：访问者中可变借用元素 {#反例-2访问者中可变借用元素}
@@ -575,6 +582,7 @@ impl Visitor for BadVisitor {
 
 }
 ```
+
 **编译器错误**：trait 签名不匹配，`accept` 传入 `&Circle`。
 
 ### 反例 3：遍历中修改元素集合 {#反例-3遍历中修改元素集合}
@@ -584,6 +592,7 @@ impl Visitor for BadVisitor {
 ```rust,ignore
 for s in &shapes { s.accept(&mut visitor); shapes.push(...); }
 ```
+
 **编译器错误**：无法同时借用 shapes 不可变和可变。
 
 ---
@@ -604,6 +613,7 @@ for s in &shapes { s.accept(&mut visitor); shapes.push(...); }
 
 └── 需建树？ → Composite
 ```
+
 ---
 
 ## 与 GoF 对比 {#与-gof-对比}
@@ -688,6 +698,7 @@ mindmap
 
       序列化
 ```
+
 ---
 
 ## 与其他模式的关系图 {#与其他模式的关系图}
@@ -712,6 +723,7 @@ graph LR
 
     style IT fill:#9E9E9E,stroke:#616161,color:#fff
 ```
+
 ---
 
 ## 实质内容五维自检 {#实质内容五维自检}

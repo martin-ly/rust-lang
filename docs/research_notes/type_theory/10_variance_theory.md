@@ -373,6 +373,7 @@ fn evil(mut r: &mut &'a str) {
 
 // r 离开后，若有 &'static str 被篡改为 &short，则形成悬垂引用
 ```
+
 **结论**：`&mut T` 必须不变。若协变，可变引用可写入「更短生命周期」的值，导致悬垂。
 
 ### 反例 2：函数参数若协变则悬垂 {#反例-2函数参数若协变则悬垂}
@@ -452,6 +453,7 @@ fn evil(mut r: &mut &'a str) {
 
       参数逆变、返回值协变
 ```
+
 ---
 
 ## ✅ 证明目标 {#证明目标}
@@ -504,6 +506,7 @@ fn covariant_example() {
 
 }
 ```
+
 **形式化描述**:
 
 - `&'a T` 在 `'a` 上是协变的
@@ -547,6 +550,7 @@ fn contravariant_example() {
 
 }
 ```
+
 **形式化描述**:
 
 - `fn(T) -> R` 在参数类型 $T$ 上是逆变的
@@ -577,6 +581,7 @@ fn invariant_example() {
 
 }
 ```
+
 **形式化描述**:
 
 - `&mut T` 在 $T$ 上是不变的
@@ -638,6 +643,7 @@ fn phantom_example() {
 
 }
 ```
+
 **形式化描述**:
 
 - `PhantomData<T>` 在 $T$ 上是协变的
@@ -680,6 +686,7 @@ fn function_pointer_variance() {
 
 }
 ```
+
 **函数指针型变分析**：
 
 - 函数参数是逆变的：`fn(&'long T) <: fn(&'short T)`
@@ -717,6 +724,7 @@ fn variance_memory_safety() {
 
 }
 ```
+
 **型变与内存安全分析**：
 
 - 协变保证引用不会超过其生命周期
@@ -787,6 +795,7 @@ fn use_contravariant_callback() {
 
 }
 ```
+
 **实际应用分析**：
 
 - 协变允许更灵活的类型使用

@@ -296,6 +296,7 @@ impl ReversibleCommand for IncrementCommand {
 
 }
 ```
+
 **形式化对应**：`Command` trait 或 `Fn`/`FnOnce` 即 $C$；`execute` 即 $\mathit{execute}$。
 
 ---
@@ -357,6 +358,7 @@ fn main() {
 
 }
 ```
+
 ### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
@@ -437,6 +439,7 @@ Send/Sync
 
 推论 CM-C1 (纯 Safe Command)
 ```
+
 ### 与 Rust 类型系统的联系 {#与-rust-类型系统的联系}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -495,6 +498,7 @@ Send/Sync
 
 { Q  }  // 后置条件
 ```
+
 > 以上规约以霍尔三元组风格表述；Rust 编译器通过所有权、借用与类型检查在编译期强制大部分不变式与前置条件。
 
 ---
@@ -598,6 +602,7 @@ impl Editor {
 
 // 使用：editor.apply(Box::new(InsertCommand { pos: 0, ch: 'x' }));
 ```
+
 **形式化对应**：`EditorCommand` 即 $C$；`execute`/`undo` 为可逆操作；由 Axiom CM1、CM2。
 
 ---
@@ -647,6 +652,7 @@ impl Command for AddText {
 
 }
 ```
+
 **风险**：撤销过度，破坏接收者状态。
 
 ### 反例 2：命令历史持有已移动接收者 {#反例-2命令历史持有已移动接收者}
@@ -661,6 +667,7 @@ invoker.run(Box::new(cmd));
 
 doc.borrow_mut().push_str("x"); // 错误
 ```
+
 **编译器错误**：`use of moved value: doc`。
 
 ### 反例 3：RefCell 运行时借用冲突 {#反例-3refcell-运行时借用冲突}
@@ -672,6 +679,7 @@ let borrow = doc.borrow();
 
 cmd.execute(); // 尝试可变借用，panic
 ```
+
 **运行期 panic**：`already borrowed: BorrowMutError`。
 
 ---
@@ -692,6 +700,7 @@ cmd.execute(); // 尝试可变借用，panic
 
 └── 需沿链传递？ → Chain of Responsibility
 ```
+
 ---
 
 ## 与 GoF 对比 {#与-gof-对比}
@@ -776,6 +785,7 @@ mindmap
 
       事务管理
 ```
+
 ---
 
 ## 与其他模式的关系图 {#与其他模式的关系图}
@@ -804,6 +814,7 @@ graph LR
 
     style F fill:#9E9E9E,stroke:#616161,color:#fff
 ```
+
 ---
 
 ## 实质内容五维自检 {#实质内容五维自检}

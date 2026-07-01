@@ -37,6 +37,7 @@ mindmap
       编译时检查
       空指针安全
 ```
+
 ## 与核心文档的关联 {#与核心文档的关联}
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
@@ -96,6 +97,7 @@ fn implication(x: i32) -> String {
     x.to_string()  // 给定 i32，可以构造 String
 }
 ```
+
 ### 泛型与参数多态 {#泛型与参数多态}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -131,6 +133,7 @@ impl<T> ContainerTrait for Container<T> {
     }
 }
 ```
+
 ### 型变（Variance） {#型变variance}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -165,6 +168,7 @@ fn invariance(x: &mut &'static str) {
 // Cell<T> : 对 T 不变
 // fn(T) -> U : 对 T 逆变，对 U 协变
 ```
+
 ### 类型推导 {#类型推导}
 
 ```rust,ignore
@@ -193,6 +197,7 @@ fn mixed_inference<T: Default>(items: &[T]) -> Vec<T> {
     result
 }
 ```
+
 ### 类型安全保证 {#类型安全保证}
 
 ```rust
@@ -216,6 +221,7 @@ fn type_safety() {
     }
 }
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

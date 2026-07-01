@@ -66,6 +66,7 @@
 │   qualification│         │  类型安全约束    │         │  分支覆盖率      │
 └───────────────┘         └─────────────────┘         └─────────────────┘
 ```
+
 ---
 
 ## 二、官方路线时间线 {#二官方路线时间线}
@@ -114,6 +115,7 @@ FLS 并非完全禁止 `unsafe`，而是要求：
 2. Safety Comment 必须引用 **规范条款**
 3. `unsafe` 使用必须通过 **审计工具** 验证
 ```
+
 **项目对齐状态**:
 
 ```rust,ignore
@@ -125,6 +127,7 @@ unsafe { ptr::read(addr) } // ❌ 缺少 Safety Comment
 // FLS-REF: FLS-C-0001-EX-003 (已验证指针有效性)
 unsafe { ptr::read(addr) }
 ```
+
 ---
 
 ## 四、MISRA Rust Guidelines 映射 {#四misra-rust-guidelines-映射}
@@ -176,6 +179,7 @@ fn process(data: &[u8]) {
     }
 }
 ```
+
 ---
 
 ## 五、MC/DC Coverage（完全缺失项） {#五mcdc-coverage完全缺失项}
@@ -199,6 +203,7 @@ MC/DC:
   每个条件独立影响判定结果
   即: 对于 N 个条件的判定，需要 N+1 个测试用例
 ```
+
 ### 5.2 Rust 中的 MC/DC 现状 {#52-rust-中的-mcdc-现状}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -234,6 +239,7 @@ fn landing_gear_valid(hydraulic_ok: bool,
 // | 3    | T       | F      | F         | F    | manual 独立影响 |
 // | 4    | F       | F      | T         | T    | emergency 独立影响 |
 ```
+
 ---
 
 ## 六、Safety-Critical Lints 矩阵 {#六safety-critical-lints-矩阵}
@@ -318,6 +324,7 @@ graph TD
     C --> C2[ISO 26262]
     C --> C3[IEC 61508]
 ```
+
 ---
 
 ## 决策树：安全关键项目合规路径 {#决策树安全关键项目合规路径}
@@ -334,6 +341,7 @@ graph TD
     Q2 -->|D| A5[完整形式化验证]
     Q2 -->|A-C| A6[模型检查 + 测试覆盖]
 ```
+
 ---
 
 ## 权威来源索引 {#权威来源索引}

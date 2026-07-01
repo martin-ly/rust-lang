@@ -94,6 +94,7 @@ let s1 = s;  // s所有权移动到s1，s失效
 // 4. 借用不获取所有权
 let len = calculate_length(&s1);  // 借用s1
 ```
+
 ### 借用规则 {#借用规则}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -129,6 +130,7 @@ where 'a: 'b  // 'a 至少和 'b 一样长
 // 结构体
 struct Parser<'a> { input: &'a str }
 ```
+
 ### 省略规则 {#省略规则}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -252,6 +254,7 @@ unsafe {
     // 3. 满足类型不变式
 }
 ```
+
 ### 常见unsafe操作 {#常见unsafe操作}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -281,6 +284,7 @@ fn foo() -> impl Future<Output = i32> {
     async { 42 }
 }
 ```
+
 ### 组合操作 {#组合操作}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -304,6 +308,7 @@ async fn safe_write(path: &str, data: &[u8]) {
     tokio::fs::rename(&temp, path).await?;
 }
 ```
+
 ---
 
 ## 并发模式速查 {#并发模式速查}
@@ -324,6 +329,7 @@ let data = Arc::new(RwLock::new(vec![]));
 data.read().unwrap();
 data.write().unwrap().push(1);
 ```
+
 ### 消息传递 {#消息传递}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -338,6 +344,7 @@ let val = rx.recv().unwrap();
 let (tx, _rx) = broadcast::channel(16);
 tx.send("hello").unwrap();
 ```
+
 ---
 
 ## 常见错误速查 {#常见错误速查}
@@ -379,6 +386,7 @@ tx.send("hello").unwrap();
 2. 所有者离开作用域，值被丢弃
 3. 所有权可以转移(Move)或借用(Borrow)
 ```
+
 ### 借用两规则 {#借用两规则}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -387,6 +395,7 @@ tx.send("hello").unwrap();
 规则1: 要么一个可变引用(&mut)，要么多个不可变引用(&)
 规则2: 引用必须始终有效（不能悬垂）
 ```
+
 ### 生命周期关系 {#生命周期关系}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -396,6 +405,7 @@ tx.send("hello").unwrap();
 &'a T   →  引用存活至少 'a
 T: 'a   →  T中所有引用存活至少 'a
 ```
+
 ---
 
 ## 核心定理 (Core Theorems) {#核心定理-core-theorems}
@@ -446,6 +456,7 @@ T: 'a   →  T中所有引用存活至少 'a
 不变 (=):  &mut T      T = U → &mut T = &mut U
 不变 (=):  Cell<T>     T = U → Cell<T> = Cell<U>
 ```
+
 ---
 
 ## 分布式模式速查 {#分布式模式速查}
@@ -481,6 +492,7 @@ let y = x.clone();   // 克隆
 // 或
 let y = &x;          // 借用
 ```
+
 ### 错误2: 借用冲突 {#错误2-借用冲突}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -499,6 +511,7 @@ println!("{}", r1);
 } // r1在这里结束
 let r2 = &mut x;  // OK
 ```
+
 ### 错误3: Rc跨线程 {#错误3-rc跨线程}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -516,6 +529,7 @@ thread::spawn(move || {
     println!("{}", data);  // OK
 });
 ```
+
 ---
 
 ## 证明技术速查 {#证明技术速查-1}
@@ -543,6 +557,7 @@ thread::spawn(move || {
 ```
 所有权 → 借用 → 生命周期 → Send/Sync
 ```
+
 ### 进阶者 (4-8周) {#进阶者-4-8周}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -550,6 +565,7 @@ thread::spawn(move || {
 ```
 形式化定义 → 核心定理 → 型变 → 证明思路
 ```
+
 ### 专家 (8-24周) {#专家-8-24周}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -557,6 +573,7 @@ thread::spawn(move || {
 ```
 Coq → Iris → RustBelt → 工具开发
 ```
+
 ---
 
 ## 文档导航 {#文档导航}

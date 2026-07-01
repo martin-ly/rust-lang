@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **redis-rs 客户端的连接复用、PubSub 与 Cluster 架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [数据库访问](../../../../concept/06_ecosystem/23_database_access.md)
 > - [数据库系统](../../../../concept/06_ecosystem/37_database_systems.md)
 >
@@ -65,6 +66,7 @@ let mut conn = client.get_multiplexed_async_connection().await?;
 conn.set("key", "value").await?;
 let value: String = conn.get("key").await?;
 ```
+
 > [来源: redis-rs Examples](https://github.com/redis-rs/redis-rs/tree/main/redis/examples)
 
 ---
@@ -86,6 +88,7 @@ graph LR
     C -->|pub/sub| E[PubSub<br/>订阅模式]
     A -->|cluster| F[ClusterClient<br/>集群模式]
 ```
+
 > [来源: redis-rs Connection Docs](https://docs.rs/redis/latest/redis/aio/)
 
 | 连接类型 | 线程/任务共享 | 自动重连 | 适用场景 |
@@ -109,6 +112,7 @@ let mut conn = ConnectionManager::new(client).await?;
 // 即使底层 TCP 断开，后续命令也会自动排队并在重连后发出
 let _: () = conn.set("foo", "bar").await?;
 ```
+
 > [来源: redis-rs ConnectionManager](https://docs.rs/redis/latest/redis/aio/struct.ConnectionManager.html)
 
 **关键设计**：`ConnectionManager` 内部维护一个 `Arc<Mutex<MultiplexedConnection>>` 状态机，断线时通过 `tokio::sync::watch` 通知等待者，从而将网络抖动与业务逻辑解耦。
@@ -129,6 +133,7 @@ for i in 0..100 {
     }));
 }
 ```
+
 > [来源: redis-rs MultiplexedConnection](https://docs.rs/redis/latest/redis/aio/struct.MultiplexedConnection.html)
 
 这种设计避免了每个任务独占一个 TCP 连接的开销，同时保证 `Send + Sync`，可安全地在 `tokio::spawn` 间共享。
@@ -147,6 +152,7 @@ while let Some(msg) = stream.next().await {
     println!("{payload}");
 }
 ```
+
 > [来源: redis-rs PubSub](https://docs.rs/redis/latest/redis/aio/struct.PubSub.html)
 
 **注意**：Redis Pub/Sub 在连接进入订阅模式后，不能再在该连接上执行普通命令。发布操作需要通过另一个 `MultiplexedConnection` 完成。
@@ -166,6 +172,7 @@ let reply: StreamReadReply = conn
     .xread_options(&["mystream"], &["$"], &opts)
     .await?;
 ```
+
 > [来源: redis-rs Streams](https://docs.rs/redis/latest/redis/streams/)
 
 Streams 支持**消费者组（Consumer Group）**、**挂起消息重投递（XPENDING/XCLAIM）**，使其可用于实现可靠的分布式任务队列。
@@ -187,6 +194,7 @@ let mut conn = client.get_async_connection().await?;
 
 conn.set("key", "value").await?;
 ```
+
 > [来源: redis-rs Cluster](https://docs.rs/redis/latest/redis/cluster/index.html)
 
 Cluster 客户端内部维护 slot-to-node 映射表，并在收到重定向时惰性更新，业务代码无需感知数据分片细节。
@@ -223,6 +231,7 @@ let _: () = redis::pipe()
     .query_async(&mut conn)
     .await?;
 ```
+
 > [来源: redis-rs Pipeline](https://docs.rs/redis/latest/redis/struct.Pipeline.html)
 
 Pipeline 将多个命令打包为一次网络往返，适合批量写入或读取；事务则保证命令序列的原子执行。

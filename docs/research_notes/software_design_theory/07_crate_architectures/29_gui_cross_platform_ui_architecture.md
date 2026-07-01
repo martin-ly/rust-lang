@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **跨平台 UI 生态（Tauri / Dioxus / Leptos / egui / iced）架构比较**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [游戏开发](../../../../concept/06_ecosystem/21_game_development.md)
 > - [响应式编程](../../../../concept/06_ecosystem/40_reactive_programming.md)
 >
@@ -102,6 +103,7 @@ graph TD
     ICED --> ELM
     ICED --> WGPU
 ```
+
 > **[来源: [wgpu 官方文档](https://wgpu.rs/)]**
 
 ---
@@ -125,6 +127,7 @@ tauri::Builder::default()
     .run(tauri::generate_context!())
     .unwrap();
 ```
+
 | 特性 | 说明 |
 |:---|:---|
 | `#[tauri::command]` | 标记可被前端调用的 Rust 函数 |
@@ -149,6 +152,7 @@ fn Counter() -> Element {
     }
 }
 ```
+
 | 特性 | 说明 |
 |:---|:---|
 | `#[component]` | 声明组件，支持 props |
@@ -174,6 +178,7 @@ fn Counter() -> impl IntoView {
     }
 }
 ```
+
 | 特性 | 说明 |
 |:---|:---|
 | `signal` | 创建读写信号对 |
@@ -198,6 +203,7 @@ impl eframe::App for MyApp {
     }
 }
 ```
+
 | 特性 | 说明 |
 |:---|:---|
 | `egui::Ui` | 每帧传入的绘制上下文 |
@@ -229,6 +235,7 @@ impl Counter {
     }
 }
 ```
+
 | 特性 | 说明 |
 |:---|:---|
 | `Model` | 应用状态 |
@@ -252,6 +259,7 @@ std::thread::spawn(|| {
     app_state.count += 1; // 可能触发渲染器内部状态不一致
 });
 ```
+
 ### 4.2 状态管理：响应式信号循环依赖 {#42-状态管理响应式信号循环依赖}
 
 Dioxus / Leptos 中，信号 A 派生自信号 B，同时 B 又派生自 A，会导致无限递归或死锁。
@@ -262,6 +270,7 @@ let b = Memo::new(move |_| a.get() + 1);
 // ❌ 错误：在 b 的派生函数中写入 a
 create_effect(move |_| { set_a.set(b.get() + 1); });
 ```
+
 ### 4.3 渲染阻塞：即时模式中的重型计算 {#43-渲染阻塞即时模式中的重型计算}
 
 egui 每帧都在主线程执行 `ui` 函数。若在其中进行 I/O 或复杂计算，会直接阻塞渲染。
@@ -275,6 +284,7 @@ impl eframe::App for MyApp {
     }
 }
 ```
+
 ### 4.4 生命周期：Tauri Command 中的非 Send 类型 {#44-生命周期tauri-command-中的非-send-类型}
 
 Tauri 命令可能在异步运行时中执行，返回的 Future 及其捕获的状态必须满足 `Send`。
@@ -289,6 +299,7 @@ async fn bad_command() -> String {
     async { format!("{}", local) }.await
 }
 ```
+
 ### 4.5 平台差异：Web 与原生 API 混用 {#45-平台差异web-与原生-api-混用}
 
 Dioxus / Leptos 的 Web 示例使用浏览器 API（如 `web_sys`），在原生桌面目标下不可用。
@@ -297,6 +308,7 @@ Dioxus / Leptos 的 Web 示例使用浏览器 API（如 `web_sys`），在原生
 // ❌ 错误：在 dioxus-desktop 目标中调用 web-sys API
 let window = web_sys::window().unwrap();
 ```
+
 ---
 
 ## 5. 设计模式与类型系统利用 {#5-设计模式与类型系统利用}

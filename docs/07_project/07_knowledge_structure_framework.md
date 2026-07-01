@@ -220,6 +220,7 @@ fn main() {
     println!("知识图谱构建完成，包含 {} 个概念", graph.concepts.len());
 }
 ```
+
 ### 多维矩阵生成器 {#多维矩阵生成器}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -289,6 +290,7 @@ fn main() {
     println!("{}", matrix.to_markdown());
 }
 ```
+
 ### 思维导图文本生成器 {#思维导图文本生成器}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -351,6 +353,7 @@ fn main() {
     println!("{}", map.render());
 }
 ```
+
 ---
 
 ## 形式化链接 {#形式化链接}
@@ -404,6 +407,7 @@ fn main() {
 ├── 版本: [Rust 版本要求]
 └── 相关概念: [相关概念列表]
 ```
+
 #### 示例：所有权（Ownership） {#示例所有权ownership}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -420,6 +424,7 @@ fn main() {
     ├── 移动语义（Move Semantics）
     └── 作用域（Scope）
 ```
+
 ### 2. 属性特征层 {#2-属性特征层}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -448,6 +453,7 @@ fn main() {
     ├── 空间复杂度: [复杂度]
     └── 适用场景: [场景描述]
 ```
+
 ### 3. 关系连接层 {#3-关系连接层}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -473,6 +479,7 @@ fn main() {
 ├── 约束: [约束条件]
 └── 示例: [关系示例]
 ```
+
 ### 4. 解释论证层 {#4-解释论证层}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -496,6 +503,7 @@ fn main() {
     ├── 安全保证: [安全性]
     └── 性能保证: [性能特性]
 ```
+
 ### 5. 形式证明层 {#5-形式证明层}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -522,6 +530,7 @@ fn main() {
     ├── 类型安全: [证明]
     └── 内存安全: [证明]
 ```
+
 ---
 
 ## 🗺️ 思维表征方式 {#思维表征方式}
@@ -552,6 +561,7 @@ mindmap
       异步
       消息传递
 ```
+
 #### 文本思维导图 {#文本思维导图}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -594,6 +604,7 @@ Rust 核心概念
         ├── 定义: 线程间通信
         └── 示例: mpsc::channel
 ```
+
 ### 2. 多维概念矩阵 {#2-多维概念矩阵}
 
 > **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
@@ -665,6 +676,7 @@ Rust 核心概念
     ├── 属性: 关系类型、强度
     └── 关系: 连接的概念
 ```
+
 #### 示例知识图谱片段 {#示例知识图谱片段}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -685,6 +697,7 @@ Rust 核心概念
     ├── 函数参数
     └── 返回值
 ```
+
 ---
 
 ## 📊 模块知识结构 {#模块知识结构}
@@ -727,6 +740,7 @@ Rust 核心概念
     ├── 规则: 生命周期标注规则
     └── 应用: 泛型生命周期参数
 ```
+
 ### 2. C02: 类型系统 {#2-c02-类型系统}
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -919,6 +933,7 @@ Rust 核心概念
     └── --[结合]--> 算法数据结构 (C08)
         └── --[应用]--> 设计模式 (C09)
 ```
+
 ### 知识依赖图 {#知识依赖图}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -936,6 +951,7 @@ graph TD
     C --> J[宏系统 C11]
     E --> K[WASM C12]
 ```
+
 ---
 
 ## 📚 相关文档 {#相关文档}

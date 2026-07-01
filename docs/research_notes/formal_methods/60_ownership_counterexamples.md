@@ -60,11 +60,13 @@ let s = String::from("hello");
 let t = s;
 println!("{}", s); // ❌ s 已移动
 ```
+
 ### 编译器错误 {#编译器错误-5}
 
 ```text
 error[E0382]: borrow of moved value: `s`
 ```
+
 ### 修复方案 {#修复方案-6}
 
 - 使用 `clone()` 显式复制堆数据。
@@ -83,11 +85,13 @@ let a = &mut v;
 let b = &mut v; // ❌ 第二个可变借用
 a.push(4);
 ```
+
 ### 编译器错误 {#编译器错误-5}
 
 ```text
 error[E0499]: cannot borrow `v` as mutable more than once at a time
 ```
+
 ### 修复方案 {#修复方案-6}
 
 - 缩小借用作用域，使两次借用不重叠。
@@ -105,11 +109,13 @@ let first = &v[0];
 v.push(4); // ❌ 不可变借用 first 仍有效
 println!("{}", first);
 ```
+
 ### 编译器错误 {#编译器错误-5}
 
 ```text
 error[E0502]: cannot borrow `v` as mutable because it is also borrowed as immutable
 ```
+
 ### 修复方案 {#修复方案-6}
 
 - 将读取操作提前到修改之前完成。
@@ -127,12 +133,14 @@ fn dangling() -> &String {
     &s // ❌ 返回局部变量的引用
 }
 ```
+
 ### 编译器错误 {#编译器错误-5}
 
 ```text
 error[E0106]: missing lifetime specifier
 error[E0515]: cannot return reference to local variable `s`
 ```
+
 ### 修复方案 {#修复方案-6}
 
 - 返回拥有所有权的值 `String`。
@@ -151,6 +159,7 @@ struct Parser {
     current: &str, // 指向 text 内部
 }
 ```
+
 `Parser` 被移动后，`current` 仍指向旧地址，导致悬垂。
 
 ### 编译器错误 {#编译器错误-5}
@@ -158,6 +167,7 @@ struct Parser {
 ```text
 error[E0106]: missing lifetime specifier
 ```
+
 （因为无法表达自引用生命周期）
 
 ### 修复方案 {#修复方案-6}
@@ -191,6 +201,7 @@ fn main() {
     }
 }
 ```
+
 ### 后果 {#后果}
 
 运行时数据竞争、未定义行为（UB）。编译器不会报错，因为 `unsafe impl` 是用户承诺。
@@ -211,11 +222,13 @@ fn longest(x: &str, y: &str) -> &str {
     if x.len() > y.len() { x } else { y }
 }
 ```
+
 ### 编译器错误 {#编译器错误-5}
 
 ```text
 error[E0106]: missing lifetime specifier
 ```
+
 ### 修复方案 {#修复方案-6}
 
 ```rust
@@ -223,6 +236,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
 }
 ```
+
 必要时使用 `Cow<'a, str>` 或返回拥有所有权的 `String` 以解除生命周期耦合。
 
 ---

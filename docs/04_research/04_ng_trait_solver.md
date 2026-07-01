@@ -75,6 +75,7 @@ where
     for<'a> T: Fn(&'a str) -> &'a str,
 {}
 ```
+
 #### B. 关联类型归一化 (Associated Type Normalization) {#b-关联类型归一化-associated-type-normalization}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -92,6 +93,7 @@ trait Iterable {
 // 深层嵌套的关联类型投影可能失败
 type DeepItem<T: Iterable> = <<T as Iterable>::Iter as Iterator>::Item;
 ```
+
 #### C. 隐式自动 trait 推导 {#c-隐式自动-trait-推导}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -166,6 +168,7 @@ Next-gen trait solver（内部代号 `new-solver`）是 Rust 编译器团队从 
                                │  (响应缓存复用)  │
                                └─────────────────┘
 ```
+
 ### 2.2 关键技术改进 {#22-关键技术改进}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -197,6 +200,7 @@ enum Goal<'tcx> {
     ForAll(Box<Goal<'tcx>>),
 }
 ```
+
 #### B. 延迟归一化 (Lazy Normalization) {#b-延迟归一化-lazy-normalization}
 
 ```rust
@@ -211,6 +215,7 @@ fn use_foo<T: Foo>(x: T::Bar) {
     // 新 solver 可以更灵活地处理未完全确定的具体类型
 }
 ```
+
 #### C. 改进的 Coherence / Specialization 支持 {#c-改进的-coherence-specialization-支持}
 
 新 solver 为 specialization 的稳定化奠定了基础，支持更精确的重叠 impl 检查。
@@ -248,6 +253,7 @@ Chalk 架构:
 │  - 基于 Tarjan 的高效搜索           │
 └─────────────────────────────────────┘
 ```
+
 ### 3.2 Chalk 的局限性 {#32-chalk-的局限性}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -289,6 +295,7 @@ Rust 1.0  Solver ──→ NLL Era ──→ Chalk 实验 ──→ Next-gen Sol
      │
      └── 原始基于 obligation 的 solver
 ```
+
 ---
 
 ## 4. 对现代 Rust 特性的影响 {#4-对现代-rust-特性的影响}
@@ -309,6 +316,7 @@ trait LendingIterator {
     fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
 }
 ```
+
 **Next-gen solver 的改进**:
 
 - 更精确的 GAT 投影归一化
@@ -323,6 +331,7 @@ trait Container {
     fn iter(&self) -> Self::Iter<'_>;
 }
 ```
+
 ### 4.2 RPITIT (Return Position Impl Trait In Traits) {#42-rpitit-return-position-impl-trait-in-traits}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -334,6 +343,7 @@ trait Factory {
     fn create(&self) -> impl Iterator<Item = i32>;
 }
 ```
+
 **Next-gen solver 的改进**:
 
 - 更稳定的隐式关联类型推断
@@ -355,6 +365,7 @@ trait AsyncProcessor {
     // fn process(&self, data: &[u8]) -> impl Future<Output = Vec<u32>> + Send;
 }
 ```
+
 **关键问题**: `Send`  bounds 的隐式推导
 
 ```rust
@@ -370,6 +381,7 @@ trait AsyncServiceSend: Send + Sync {
 
 // 新 solver 目标: 更智能的 Send/Sync 推导，减少显式标注需求
 ```
+
 ### 4.4 Specialization (特化) {#44-specialization-特化}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -393,6 +405,7 @@ impl<T: Clone> Convert<T> for &T {
     fn convert(&self) -> T { (*self).clone() }
 }
 ```
+
 **Next-gen solver 的角色**:
 
 Specialization 的稳定化严重依赖新 solver 的重叠 impl 检查能力。新 solver 的可回溯约束求解是安全 specialization 的理论基础。
@@ -416,6 +429,7 @@ rustc +nightly -Ztrait-solver=next
 # 切换回旧 solver (临时) {#切换回旧-solver-临时}
 rustc +nightly -Ztrait-solver=classic
 ```
+
 ### 5.2 对项目的影响评估 {#52-对项目的影响评估}
 >
 > **[来源: [crates.io](https://crates.io/)]**

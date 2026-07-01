@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **Ratatui TUI 框架的 Widget 渲染与差分更新架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [CLI 开发](../../../../concept/06_ecosystem/25_cli_development.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
@@ -73,6 +74,7 @@ fn main() -> std::io::Result<()> {
 
 }
 ```
+
 > [来源: Ratatui Tutorial — Hello World](https://ratatui.rs/tutorials/hello-world/)
 
 ---
@@ -154,6 +156,7 @@ graph LR
 
     DRAW --> FLUSH
 ```
+
 > **认知功能**: 此图展示 Ratatui 的渲染管线——与传统 GUI 框架的"保留模式"（维护一棵 widget 树）不同，Ratatui 的每帧都是**纯函数**：`fn ui(state) -> Buffer`。这种设计消除了状态同步的复杂性，但要求用户自行管理跨帧状态。
 > [来源: Ratatui Docs — Concepts](https://ratatui.rs/concepts/)
 
@@ -188,6 +191,7 @@ pub struct Cell {
 
 }
 ```
+
 **内存效率**：
 
 - `Buffer::content` 是 `Vec<Cell>` 而非 `Vec<Vec<Cell>>`，保证**缓存行连续**
@@ -232,6 +236,7 @@ impl Widget for Block<'_> {
 
 }
 ```
+
 **设计决策分析**：
 
 - **消费 `self`**：每帧构造新的 widget，天然支持即时模式——不存在"旧 widget 残留状态"的问题
@@ -268,6 +273,7 @@ let list = List::new(items).block(Block::default().title("Menu"));
 
 frame.render_stateful_widget(list, area, &mut list_state);
 ```
+
 **类型安全保证**：
 
 - `State` 被定义为关联类型，编译期确定每个 widget 对应的状态类型
@@ -305,6 +311,7 @@ let layout = Layout::default()
 
 // layout[0], layout[1], layout[2], layout[3] 是互不重叠的 Rect
 ```
+
 **运行时保证**：
 
 - `split()` 在运行时求解约束系统，返回的 `Rect` 数组满足：
@@ -365,6 +372,7 @@ impl Terminal {
 
 }
 ```
+
 **差分算法**：
 
 - 遍历两个 `Buffer` 的 `content` 数组
@@ -415,6 +423,7 @@ pub trait Backend {
 
 }
 ```
+
 **已有实现**：
 
 | Backend | 底层库 | 平台 | 特性 |
@@ -466,6 +475,7 @@ fn test_ui_renders_correctly() {
 
 }
 ```
+
 **测试优势**：
 
 - UI 逻辑完全与终端 IO 解耦，测试无需模拟PTY
@@ -520,6 +530,7 @@ loop {
 
 }
 ```
+
 > [来源: Ratatui Async Guide](https://ratatui.rs/concepts/rendering/)
 
 ---

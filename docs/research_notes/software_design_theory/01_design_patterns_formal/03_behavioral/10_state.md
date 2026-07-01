@@ -138,6 +138,7 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
    ```rust
    enum State { A, B, C }
    ```
+
 2. **穷尽匹配**：
 
    > 以下代码片段为示意性伪代码，非完整可编译示例。
@@ -145,6 +146,7 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
    ```rust,ignore
    match state { State::A => ..., State::B => ..., State::C => ... }
    ```
+
    - 编译器检查所有变体被处理
 3. **完备性**：所有状态转换有定义
 
@@ -173,6 +175,7 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
 
    struct Unlocked;
    ```
+
 2. **状态特定方法**：
 
    > 以下代码片段为示意性伪代码，非完整可编译示例。
@@ -182,6 +185,7 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
 
    impl Config<Unlocked> { fn lock(self) -> Config<Locked> { ... } fn get(&self) -> i32 { ... } }
    ```
+
 3. **编译期检查**：
    - `Config<Locked>::get()` 不存在 → 编译错误
    - 非法状态不可构造
@@ -279,6 +283,7 @@ impl Config<Unlocked> {
 
 }
 ```
+
 ---
 
 ## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
@@ -356,6 +361,7 @@ fn main() {
 
 }
 ```
+
 ### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
@@ -426,6 +432,7 @@ enum + match / 类型状态
 
 推论 ST-C1 (纯 Safe State)
 ```
+
 ---
 
 ## 形式化属性：不变式、前置/后置条件与安全边界 {#形式化属性不变式前置后置条件与安全边界}
@@ -464,6 +471,7 @@ enum + match / 类型状态
 
 { Q  }  // 后置条件
 ```
+
 > 以上规约以霍尔三元组风格表述；Rust 编译器通过所有权、借用与类型检查在编译期强制大部分不变式与前置条件。
 
 ---
@@ -538,6 +546,7 @@ impl Order {
 
 }
 ```
+
 ---
 
 ## 相关模式 {#相关模式}
@@ -582,6 +591,7 @@ post.request_review();
 
 old.handle(); // 错误：old 已移动
 ```
+
 **编译器错误**：`use of moved value: old`。
 
 ### 反例 2：状态未实现 Send 导致跨线程失败 {#反例-2状态未实现-send-导致跨线程失败}
@@ -591,6 +601,7 @@ old.handle(); // 错误：old 已移动
 ```rust,ignore
 fn send_post(p: Post) -> impl FnOnce() { move || { p.request_review(); } }
 ```
+
 若 `Box<dyn State>` 未 `+ Send`，无法将闭包发送到线程。
 
 ### 反例 3：允许非法状态转移 {#反例-3允许非法状态转移}
@@ -604,6 +615,7 @@ impl Post {
 
 }
 ```
+
 **风险**：绕过 Draft/Moderation 直接 Published，破坏业务规则。
 
 ---
@@ -624,6 +636,7 @@ impl Post {
 
 └── 需保存/恢复？ → Memento
 ```
+
 ---
 
 ## 与 GoF 对比 {#与-gof-对比}
@@ -708,6 +721,7 @@ mindmap
 
       解析器
 ```
+
 ---
 
 ## 与其他模式的关系图 {#与其他模式的关系图}
@@ -732,6 +746,7 @@ graph LR
 
     style O fill:#9C27B0,stroke:#6A1B9A,color:#fff
 ```
+
 ---
 
 ## 实质内容五维自检 {#实质内容五维自检}

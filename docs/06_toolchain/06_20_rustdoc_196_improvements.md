@@ -42,6 +42,7 @@ Rust 1.96 对文档生成工具 `rustdoc` 进行了三项重要改进，影响 c
 )]
 pub fn old_api() {}
 ```
+
 **问题**: 多行 `note` 在文档中的换行可能不符合预期——有时全部挤在一行，有时产生过多空白。
 
 ### 2.2 变更后行为（1.96+） {#22-变更后行为196}
@@ -75,6 +76,7 @@ Rust 1.96 将 deprecation notes 的渲染方式与普通文档对齐：
 )]
 pub fn old_api() {}
 ```
+
 > **关键差异**: `"  \\n"`（两个空格 + 反斜杠换行）在 Rust 字符串字面量中渲染为 Markdown 软换行，rustdoc 会正确将其转换为 `<br>` 或段落分隔。
 
 ---
@@ -97,6 +99,7 @@ pub fn old_api() {}
 /// ```
 pub fn add(a: i32, b: i32) -> i32 { a + b }
 ```
+
 ### 3.2 1.96 的变更 {#32-196-的变更}
 
 **变更前**: lint 在以下位置触发：
@@ -137,6 +140,7 @@ impl Drawable for Circle {
     fn draw(&self) { /* ... */ }
 }
 ```
+
 ---
 
 ## 四、Sidebar 方法与关联函数分离 {#四sidebar-方法与关联函数分离}
@@ -161,6 +165,7 @@ rustdoc 生成的 HTML 文档侧边栏（sidebar）中，**方法（methods）**
 ├── Methods
 │   └── display    ← 方法 (&self / &mut self 接收器)
 ```
+
 ### 4.2 为什么分离 {#42-为什么分离}
 
 | 维度 | 关联函数 | 方法 |
@@ -192,6 +197,7 @@ rustdoc 生成的 HTML 文档侧边栏（sidebar）中，**方法（methods）**
 /// - [`process()`](Self::process): 处理数据
 /// - [`validate()`](Self::validate): 验证状态
 ```
+
 ---
 
 ## 五、综合对比与迁移建议 {#五综合对比与迁移建议}

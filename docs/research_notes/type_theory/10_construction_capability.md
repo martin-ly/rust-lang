@@ -209,6 +209,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 
     └── panic!、loop {}、发散；无构造子
 ```
+
 ---
 
 ## 确定性判定 {#确定性判定}

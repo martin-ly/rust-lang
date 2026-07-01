@@ -99,6 +99,7 @@ flowchart TD
     D --> H[Lifetime 推断补全]
     E --> I[需要语言级修复]
 ```
+
 | 模式 | 语言语义风险 | 编译器保护机制 | 结果 |
 |------|-----------|-------------|------|
 | 未初始化的局部变量读取 | `UB`（未定义行为） | `SSA` 形式 + `Dead Store Elimination` | 实际不可达或已初始化 |
@@ -129,6 +130,7 @@ flowchart LR
     E --> F[编译期拒绝整类错误]
     F --> G[零开销保证]
 ```
+
 ### 3.2 Rust 的编译器"拯救"机制 {#32-rust-的编译器拯救机制}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -177,6 +179,7 @@ free(p);
 // 某些编译器在此处通过 alias analysis 发现 p 不再被使用，
 // 从而不会生成实际的悬空解引用代码
 ```
+
 然而，这种保护是**不可靠的**：
 
 - 优化级别变化（`-O0` vs `-O2`）可能导致行为完全不同
@@ -197,6 +200,7 @@ flowchart LR
     D --> E[运行时仍需检查]
     E --> F[部分安全，非完整保证]
 ```
+
 `unique_ptr` 提供了所有权抽象，但：
 
 - `.get()` 返回的原始指针仍可导致 `UB`
@@ -258,6 +262,7 @@ flowchart TD
     J --> K[形式化验证的必要性]
     K --> L[Rust 类型系统的设计哲学]
 ```
+
 ### 6.2 各组件的角色 {#62-各组件的角色}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -296,6 +301,7 @@ Endangered by Language, Saved by Compiler.
 In Proceedings of the ACM SIGPLAN Symposium on Principles of
 Programming Languages (POPL 2026).
 ```
+
 **BibTeX**:
 
 ```bibtex
@@ -310,6 +316,7 @@ Programming Languages (POPL 2026).
   doi={10.1145/3704880}
 }
 ```
+
 **相关资源**:
 
 1. **RustBelt 论文**: Jung, R., et al. "RustBelt: Securing the Foundations of the Rust Programming Language". *POPL 2018*. DOI: `10.1145/3158154`

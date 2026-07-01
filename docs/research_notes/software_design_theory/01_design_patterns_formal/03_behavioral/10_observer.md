@@ -287,6 +287,7 @@ impl Subject2 {
 
 }
 ```
+
 ---
 
 ## Rust 1.96+ / Edition 2024 代码示例更新 {#rust-196-edition-2024-代码示例更新}
@@ -335,6 +336,7 @@ fn main() {
 
 }
 ```
+
 ### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
@@ -411,6 +413,7 @@ RefCell / Mutex
 
 推论 OB-C1 (纯 Safe Observer)
 ```
+
 ---
 
 ## 完整场景示例：订单事件通知 {#完整场景示例订单事件通知}
@@ -459,6 +462,7 @@ fn main() {
 
 }
 ```
+
 ---
 
 ## 相关模式 {#相关模式}
@@ -511,6 +515,7 @@ impl Subject {
 
 // 回调里调用 subject.add_observer(...)
 ```
+
 **编译器错误**：无法同时可变/不可变借用 Subject。
 
 ### 反例 2：channel 发送未处理错误 {#反例-2channel-发送未处理错误}
@@ -520,6 +525,7 @@ impl Subject {
 ```rust,ignore
 self.sender.send(event).unwrap();
 ```
+
 **运行期 panic**：所有 Receiver 已 drop 时 `unwrap` panic。
 
 **修复**：`self.sender.send(event).ok();`。
@@ -541,6 +547,7 @@ let subject = Subject::new();
 
 subject.notify();
 ```
+
 **编译器错误**：引用型 Observer 生命周期不足。
 
 ---
@@ -561,6 +568,7 @@ subject.notify();
 
 └── 需封装操作？ → Command
 ```
+
 ---
 
 ## 与 GoF 对比 {#与-gof-对比}
@@ -645,6 +653,7 @@ mindmap
 
       状态监听
 ```
+
 ---
 
 ## 与其他模式的关系图 {#与其他模式的关系图}
@@ -669,6 +678,7 @@ graph LR
 
     style S fill:#9C27B0,stroke:#6A1B9A,color:#fff
 ```
+
 ---
 
 ## 实质内容五维自检 {#实质内容五维自检}
@@ -814,6 +824,7 @@ graph LR
 
 { Q  }  // 后置条件
 ```
+
 > 以上规约以霍尔三元组风格表述；Rust 编译器通过所有权、借用与类型检查在编译期强制大部分不变式与前置条件。
 
 ---

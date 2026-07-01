@@ -75,6 +75,7 @@
 ```text
 LRT := (W, R, P, C)
 ```
+
 其中：
 
 - `W`：工作项集合，每个工作项是一个可独立提交的步骤。
@@ -91,6 +92,7 @@ LRT := (W, R, P, C)
 ```text
 ∀ w ∈ W, committed(w) → observable(w)
 ```
+
 ### Axiom LT2: 持久化可靠性 {#axiom-lt2-持久化可靠性}
 
 > **来源**: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)
@@ -100,6 +102,7 @@ LRT := (W, R, P, C)
 ```text
 ∀ w ∈ W, scheduled(w) ∨ completed(w) ∨ compensated(w) → persisted(state(w))
 ```
+
 ### Theorem LT1: 业务一致性 {#theorem-lt1-业务一致性}
 
 > **来源**: [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)
@@ -284,6 +287,7 @@ fn main() {
     c.run().unwrap();
 }
 ```
+
 > **来源**: [Rust Standard Library](https://doc.rust-lang.org/std/)
 
 **实现要点**：
@@ -314,6 +318,7 @@ impl BadCoordinator {
     }
 }
 ```
+
 若进程在执行完某步后崩溃，`executed` 丢失，重启后会重复执行该步骤，违反业务一致性。
 
 **修复**：
@@ -330,6 +335,7 @@ let items = vec![
 ];
 let order = topo_order(&items); // Err: DependencyCycle
 ```
+
 `R` 中出现循环依赖时，拓扑排序无法完成，长事务无法启动。
 
 **修复**：在定义工作项时通过 DAG 约束依赖；启动前显式检测循环。

@@ -72,6 +72,7 @@ Retry := (Op, policy, predicate)
 
     predicate: Error → bool  -- 是否可重试的判断
 ```
+
 ### Def RT2: 退避策略 {#def-rt2-退避策略}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -89,6 +90,7 @@ BackoffStrategy :=
 
   | Custom(fn attempt -> Duration)
 ```
+
 ### Def RT3: 抖动 (Jitter) {#def-rt3-抖动-jitter}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -104,6 +106,7 @@ Jitter := None | Full | Equal | Decorrelated
 
     Decorrelated: delay' = random(initial, delay * 3)
 ```
+
 ---
 
 ## 2. 基本假设 (Axiom) {#2-基本假设-axiom}
@@ -118,6 +121,7 @@ Jitter := None | Full | Equal | Decorrelated
 ```text
 attempts ≤ max_attempts
 ```
+
 重试次数必须有限，防止无限循环。
 
 ### Axiom RT2: 幂等性要求 {#axiom-rt2-幂等性要求}
@@ -127,6 +131,7 @@ attempts ≤ max_attempts
 ```text
 ∀Op ∈ Retry. Idempotent(Op) ∨ (predicate only for transient errors)
 ```
+
 非幂等操作只能对瞬态错误重试。
 
 ### Axiom RT3: 退避单调性 {#axiom-rt3-退避单调性}
@@ -136,6 +141,7 @@ attempts ≤ max_attempts
 ```text
 n < m → backoff(n) ≤ backoff(m)
 ```
+
 等待时间不递减（通常递增）。
 
 ---
@@ -159,6 +165,7 @@ P(success) ≤ 1 - (1 - p)^n
 
     n = 最大重试次数
 ```
+
 **证明概要**:
 
 1. 单次失败概率 = 1 - p
@@ -174,6 +181,7 @@ P(success) ≤ 1 - (1 - p)^n
 ```text
 ExponentialBackoff → prevents thundering herd
 ```
+
 **证明概要**:
 
 1. 指数退避使等待时间快速增加
@@ -419,6 +427,7 @@ pub async fn fetch_with_retry(url: &str) -> Result<String, RetryError<reqwest::E
 
 }
 ```
+
 ---
 
 ## 5. 重试策略选择 {#5-重试策略选择}
@@ -471,6 +480,7 @@ pub fn is_retryable_error<E: std::error::Error>(e: &E) -> bool {
 
 }
 ```
+
 ---
 
 **相关阅读**:

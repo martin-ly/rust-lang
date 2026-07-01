@@ -164,6 +164,7 @@ use std::sync::Arc;
 let data = Arc::new(vec![1, 2, 3]);
 let data_clone = Arc::clone(&data);
 ```
+
 **❌ 避免**: 不必要的所有权转移、不必要的 clone
 
 ```rust
@@ -177,6 +178,7 @@ fn good_process(data: &[i32]) -> i32 {
     data.iter().sum()
 }
 ```
+
 ### 1.2 类型安全 {#12-类型安全}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -211,6 +213,7 @@ fn find_user(id: UserId) -> Option<User> {
     None
 }
 ```
+
 ### 1.3 错误处理 {#13-错误处理}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -246,6 +249,7 @@ fn read_config(path: &str) -> Result<Config> {
     Ok(config)
 }
 ```
+
 ---
 
 ## 2. 性能优化最佳实践 {#2-性能优化最佳实践}
@@ -282,6 +286,7 @@ fn process_string(s: Cow<str>) -> String {
     }
 }
 ```
+
 ### 2.2 迭代器优化 {#22-迭代器优化}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -308,6 +313,7 @@ for (idx, value) in data.iter().enumerate() {
     println!("{}: {}", idx, value);
 }
 ```
+
 ### 2.3 零成本抽象 {#23-零成本抽象}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -334,6 +340,7 @@ fn error_handler() {
     // 错误处理路径，很少执行
 }
 ```
+
 ---
 
 ## 3. 错误处理最佳实践 {#3-错误处理最佳实践}
@@ -377,6 +384,7 @@ impl fmt::Display for CustomError {
 
 impl std::error::Error for CustomError {}
 ```
+
 ### 3.2 错误传播 {#32-错误传播}
 
 > **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
@@ -398,6 +406,7 @@ fn process_file(path: &str) -> Result<Vec<u8>, AppError> {
     Ok(parsed)
 }
 ```
+
 ---
 
 ## 4. 测试最佳实践 {#4-测试最佳实践}
@@ -434,6 +443,7 @@ mod tests {
     }
 }
 ```
+
 ### 4.2 集成测试 {#42-集成测试}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -479,6 +489,7 @@ fn test_concurrent_access() {
     assert_eq!(*data.lock().unwrap(), 10);
 }
 ```
+
 ### 4.3 文档测试 {#43-文档测试}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -507,6 +518,7 @@ pub fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 ```
+
 ---
 
 ## 5. 文档最佳实践 {#5-文档最佳实践}
@@ -549,6 +561,7 @@ pub fn process(input: &str, options: &Options) -> Result<ProcessResult, ProcessE
     // 实现
 }
 ```
+
 ### 5.2 README 文档 {#52-readme-文档}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -584,6 +597,7 @@ pub fn process(input: &str, options: &Options) -> Result<ProcessResult, ProcessE
         - [API 文档](https://docs.rs/my_crate)
         - [用户指南](https://my_crate.github.io/guide)
 ```
+
 ---
 
 ## 6. 安全性最佳实践 {#6-安全性最佳实践}
@@ -617,6 +631,7 @@ fn process_input(input: &UserInput) -> Result<(), ValidationError> {
     Ok(())
 }
 ```
+
 ### 6.2 资源管理 {#62-资源管理}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -658,6 +673,7 @@ impl<'a> Drop for LockGuard<'a> {
     }
 }
 ```
+
 ---
 
 ## 7. 并发编程最佳实践 {#7-并发编程最佳实践}
@@ -702,6 +718,7 @@ thread::spawn(move || {
 
 let received = rx.recv().unwrap();
 ```
+
 ### 7.2 无锁编程 {#72-无锁编程}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -726,6 +743,7 @@ fn get_count() -> usize {
 // - Acquire/Release: 用于生产者-消费者模式
 // - SeqCst: 最严格的全序保证
 ```
+
 ---
 
 ## 8. 异步编程最佳实践 {#8-异步编程最佳实践}
@@ -767,6 +785,7 @@ async fn cpu_intensive_task(data: Vec<u8>) -> Vec<u8> {
     .unwrap()
 }
 ```
+
 ### 8.2 错误处理 {#82-错误处理}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -793,6 +812,7 @@ enum AsyncError {
     Timeout,
 }
 ```
+
 ---
 
 ## 9. 模块设计最佳实践 {#9-模块设计最佳实践}
@@ -821,6 +841,7 @@ pub mod utils {
 pub use core::engine::Engine;
 pub use core::types::{Config, Result};
 ```
+
 ### 9.2 可见性控制 {#92-可见性控制}
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
@@ -842,6 +863,7 @@ mod inner {
     pub fn public_fn() {}
 }
 ```
+
 ---
 
 ## 10. 项目组织最佳实践 {#10-项目组织最佳实践}
@@ -877,6 +899,7 @@ my_project/
 └── docs/               # 文档
     └── guide.md
 ```
+
 ### 10.2 特性标志 {#102-特性标志}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -899,6 +922,7 @@ tokio = { version = "1.0", features = ["full"], optional = true }
 [dev-dependencies]
 criterion = "0.5"
 ```
+
 ```rust
 // 条件编译
 #[cfg(feature = "serde")]
@@ -910,6 +934,7 @@ pub struct Config {
     // ...
 }
 ```
+
 ---
 
 ## 11. 工具使用 {#11-工具使用}
@@ -935,6 +960,7 @@ cargo clippy --fix
 # 检查特定 lint {#检查特定-lint}
 cargo clippy -- -D warnings
 ```
+
 ### 11.2 rustfmt {#112-rustfmt}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -946,6 +972,7 @@ cargo fmt
 # 检查格式 {#检查格式}
 cargo fmt -- --check
 ```
+
 ### 11.3 依赖管理 {#113-依赖管理}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -964,6 +991,7 @@ async-trait = { version = "0.1", optional = true }
 tokio-test = "0.4"
 mockall = "0.12"
 ```
+
 ---
 
 ## 12. 性能监控 {#12-性能监控}
@@ -995,6 +1023,7 @@ fn criterion_benchmark(c: &mut Criterion) {
 criterion_group!(benches, criterion_benchmark);
 criterion_main!(benches);
 ```
+
 ### 12.2 性能分析 {#122-性能分析}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -1012,6 +1041,7 @@ cargo flamegraph --bin my_app
 cargo install cargo-valgrind
 cargo valgrind --bin my_app
 ```
+
 ---
 
 ## 13. 代码示例 {#13-代码示例}
@@ -1055,6 +1085,7 @@ impl FromStr for UserId {
     }
 }
 ```
+
 ### 13.2 Builder 模式 {#132-builder-模式}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -1121,6 +1152,7 @@ let config = Config::builder()
     .retries(5)
     .build()?;
 ```
+
 ### 13.3 状态机模式 {#133-状态机模式}
 
 > **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
@@ -1188,6 +1220,7 @@ let running = machine.start();
 let stopped = running.stop();
 println!("运行时长: {:?}", stopped.duration());
 ```
+
 ---
 
 ## 14. 使用场景 {#14-使用场景}
@@ -1338,6 +1371,7 @@ fn bad_example(data: &[i32], n: usize) -> Vec<i32> {
     }
 }
 ```
+
 #### 性能检查清单 {#性能检查清单-1}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -1364,6 +1398,7 @@ fn bad_example(data: &[i32], n: usize) -> Vec<i32> {
 │   └─ 否 → 使用 ControlFlow<B, C>
 └─ 否 → 使用 Option<T> 或返回 T
 ```
+
 #### 最佳实践：验证管道 {#最佳实践验证管道}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -1397,6 +1432,7 @@ fn validate_and_process(input: &UserInput) -> ControlFlow<ValidationError, Proce
     ControlFlow::Continue(process_input(input))
 }
 ```
+
 #### 最佳实践：搜索与短路 {#最佳实践搜索与短路}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -1419,6 +1455,7 @@ fn find_first_valid_connection(connections: &[Connection]) -> Option<&Connection
     }
 }
 ```
+
 ---
 
 ### 3. LazyLock/LazyCell - 延迟初始化优化 {#3-lazylocklazycell---延迟初始化优化}
@@ -1459,6 +1496,7 @@ impl DatabasePool {
     }
 }
 ```
+
 #### 单线程可变缓存模式 {#单线程可变缓存模式}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -1498,6 +1536,7 @@ impl<T> LocalCache<T> {
     }
 }
 ```
+
 ---
 
 ### 4. 数学常量 - 精确计算 {#4-数学常量---精确计算}
@@ -1544,6 +1583,7 @@ where
     (a + b) / 2.0
 }
 ```
+
 ---
 
 ### 5. 综合性能优化检查清单 {#5-综合性能优化检查清单-1}
@@ -1607,6 +1647,7 @@ pub fn get_config() -> Option<&'static Config> {
 let phi = f64::consts::GOLDEN_RATIO;
 let gamma = f64::consts::EULER_GAMMA;
 ```
+
 **最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 最佳实践)
 
 ---
@@ -1680,6 +1721,7 @@ fn bad_distance(p1: (i64, i64), p2: (i64, i64)) -> i64 {
     (dx * dx + dy * dy).sqrt() as i64  // 可能有精度丢失！
 }
 ```
+
 #### 性能检查清单 {#性能检查清单-1}
 
 - [ ] 是否避免了 `f64` 转换开销？
@@ -1702,6 +1744,7 @@ fn bad_distance(p1: (i64, i64), p2: (i64, i64)) -> i64 {
 │   └─ 否 → 考虑拆分操作或使用内部可变性
 └─ 否 → 使用普通 get_mut()
 ```
+
 #### 最佳实践：并发状态管理 {#最佳实践并发状态管理}
 
 ```rust,ignore
@@ -1763,6 +1806,7 @@ pub fn update_multiple_configs(updates: &[(&str, &str)]) -> Result<(), String> {
     }
 }
 ```
+
 #### 常见模式 {#常见模式}
 
 ```rust,ignore
@@ -1791,6 +1835,7 @@ fn upsert_and_update(map: &mut HashMap<String, i32>, insert_key: &str, update_ke
     *updated += *inserted;
 }
 ```
+
 ---
 
 ### 3. async Fn Trait - 异步抽象改进 {#3-async-fn-trait---异步抽象改进}
@@ -1849,6 +1894,7 @@ where
     }
 }
 ```
+
 #### 与 ControlFlow 结合 {#与-controlflow-结合}
 
 ```rust,ignore
@@ -1872,6 +1918,7 @@ where
     ControlFlow::Continue(results)
 }
 ```
+
 ---
 
 ### 4. Vec::pop_if - 条件弹出 {#4-vecpop_if---条件弹出}
@@ -1939,6 +1986,7 @@ impl<K: Eq, V> LRUCache<K, V> {
     }
 }
 ```
+
 ---
 
 ### 5. 综合性能优化检查清单 {#5-综合性能优化检查清单-1}
@@ -2011,6 +2059,7 @@ trait NewProcessor {
     async fn process(&self, data: Vec<u8>) -> Result<(), Error>;
 }
 ```
+
 ---
 
 ### 7. 快速参考卡片 {#7-快速参考卡片}
@@ -2055,6 +2104,7 @@ fn process_with_control_flow(data: &[i64]) -> ControlFlow<Error, Vec<i64>> {
         })
 }
 ```
+
 ---
 
 **新增最佳实践** | **最后更新**: 2026-05-08 | **状态**: ✅ 已完成
@@ -2103,6 +2153,7 @@ graph TD
     S --> S1[单元测试]
     S --> S2[模糊测试]
 ```
+
 ---
 
 ## 决策树：错误处理策略选择 {#决策树错误处理策略选择}
@@ -2119,6 +2170,7 @@ graph TD
     Q3 -->|是| A4["#[error(transparent)] 包装"]
     Q3 -->|否| A5[直接返回具体错误]
 ```
+
 ---
 
 ## 权威来源索引 {#权威来源索引}

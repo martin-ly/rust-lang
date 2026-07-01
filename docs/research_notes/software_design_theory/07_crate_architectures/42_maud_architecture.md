@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **Maud 编译期 HTML DSL 宏与 Render trait 架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [Web 框架生态](../../../../concept/06_ecosystem/27_web_frameworks.md)
 >
 > 本文件保留架构级深度内容，与上述使用指南形成互补。
@@ -61,6 +62,7 @@ fn main() {
     println!("{}", markup.into_string());
 }
 ```
+
 > [来源: [maud book](https://maud.lambda.xyz/)]
 
 ---
@@ -92,6 +94,7 @@ fn page(title: &str, items: &[&str]) -> Markup {
     }
 }
 ```
+
 > [来源: [maud::html macro](https://docs.rs/maud/latest/maud/macro.html.html)]
 
 DSL 规则：
@@ -115,6 +118,7 @@ impl Render for User {
     }
 }
 ```
+
 > [来源: [maud::Render trait](https://docs.rs/maud/latest/maud/trait.Render.html)]
 
 `Render` trait 允许自定义类型直接参与模板拼接，实现类型级别的组件化。
@@ -129,6 +133,7 @@ graph LR
     MARKUP --> STRING[into_string()]
     MARKUP --> RESPONSE[IntoResponse]
 ```
+
 由于宏在编译期完成所有工作，运行期只有字符串写入操作，无 AST 遍历或模板缓存。
 
 ### 2.4 Web 框架集成 {#24-web-框架集成}
@@ -138,6 +143,7 @@ graph LR
 ```toml
 maud = { version = "0.27.0", features = ["axum"] }
 ```
+
 ```rust,ignore
 use axum::{routing::get, Router};
 use maud::html;
@@ -146,6 +152,7 @@ async fn hello() -> impl axum::response::IntoResponse {
     html! { h1 { "Hello from Maud + Axum" } }
 }
 ```
+
 > [来源: [maud framework support](https://maud.lambda.xyz/frameworks.html)]
 
 ---

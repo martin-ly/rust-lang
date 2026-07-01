@@ -226,6 +226,7 @@ fn main() {
 
 }
 ```
+
 **形式化对应**：`A`、`B` 为模块；`main` 组合两者。所有权：`a` 移入 `B::new`，符合 T2；无悬垂、无泄漏。
 
 ---
@@ -373,6 +374,7 @@ impl<S: OrderServiceTrait> OrderController<S> {
 
 }
 ```
+
 **CE-T1/T2/T3 验证**：各层 Safe；所有权沿 DTO→Order→Repository 传递；无共享可变；`cargo check` 通过即 CE-T3。
 
 ---

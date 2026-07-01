@@ -125,6 +125,7 @@ Aeneas 能力范围
 
    └─ HOL4 (经典证明器)
 ```
+
 ### 2.3 与类似工具对比 {#23-与类似工具对比}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -223,6 +224,7 @@ Aeneas 集成架构
 
    └─ 验证报告
 ```
+
 ### 4.2 项目集成点 {#42-项目集成点}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -283,6 +285,7 @@ fn iterative_sum(n: u32) -> u32 {
 
 }
 ```
+
 ---
 
 ## 五、实施路线图 {#五实施路线图}
@@ -331,6 +334,7 @@ Phase 4: 文档完善 (Week 7-8)
 
 └── 社区分享
 ```
+
 ### 5.2 里程碑 {#52-里程碑}
 
 >
@@ -379,6 +383,7 @@ fn double_ref(v: &i32) -> i32 {
 
 }
 ```
+
 ### 6.2 数据结构验证示例 {#62-数据结构验证示例}
 
 >
@@ -414,6 +419,7 @@ fn list_length<T>(head: &Option<Box<Node<T>>>) -> usize {
 
 }
 ```
+
 ### 6.3 算法验证示例 {#63-算法验证示例}
 
 >
@@ -455,6 +461,7 @@ fn binary_search(arr: &[i32], target: i32) -> bool {
 
 }
 ```
+
 ---
 
 ## 七、相关资源 {#七相关资源}
@@ -514,6 +521,7 @@ Aeneas 工具生态
 
    └─ hol4-backend (HOL4证明)
 ```
+
 ---
 
 **维护者**: Rust Formal Methods Research Team

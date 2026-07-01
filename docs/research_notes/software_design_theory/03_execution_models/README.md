@@ -188,6 +188,7 @@ fn process_batch<S: ProcessStrategy>(data: Vec<i32>, strategy: &S) -> Vec<i32> {
 
 }
 ```
+
 ### 场景 2：高并发 Web 服务（异步 + Observer + 通道） {#场景-2高并发-web-服务异步-observer-通道}
 
 >
@@ -210,6 +211,7 @@ tokio::spawn(async move {
 
 // 处理请求后 tx.send(event)
 ```
+
 ### 场景 3：图像处理（并行 + Iterator） {#场景-3图像处理并行-iterator}
 
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
@@ -229,6 +231,7 @@ let processed: Vec<u8> = pixels
 
     .collect();
 ```
+
 ### 场景 4：多服务编排（分布式 + Proxy + DTO） {#场景-4多服务编排分布式-proxy-dto}
 
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
@@ -248,6 +251,7 @@ struct OrderOrchestrator<I: InventoryService, P: PaymentService> {
 
 }
 ```
+
 ### 选型决策流程（层次推进） {#选型决策流程层次推进}
 
 > **来源: [ACM](https://dl.acm.org/)**
@@ -261,6 +265,7 @@ struct OrderOrchestrator<I: InventoryService, P: PaymentService> {
 
 4. 否 → 同步（std）
 ```
+
 ---
 
 ## 常见陷阱与规避（执行模型） {#常见陷阱与规避执行模型}
@@ -329,6 +334,7 @@ fn main() {
 
 }
 ```
+
 ### 示例 2：并发 + Observer（std::thread + mpsc） {#示例-2并发-observerstdthread-mpsc}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -371,6 +377,7 @@ fn main() {
 
 }
 ```
+
 ### 示例 3：并行 + Strategy（rayon，需 `cargo add rayon`） {#示例-3并行-strategyrayon需-cargo-add-rayon}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -412,6 +419,7 @@ fn main() {
 
 }
 ```
+
 ---
 
 ## 🆕 Rust 1.94 深度整合更新 {#rust-194-深度整合更新}

@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **Reqwest HTTP 客户端的 ClientBuilder 与中间件扩展架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [网络编程](../../../../concept/03_advanced/18_network_programming.md)
 > - [网络协议](../../../../concept/06_ecosystem/38_network_protocols.md)
 >
@@ -75,6 +76,7 @@ let user: User = client
 
     .await?;
 ```
+
 > [来源: Hyper 官方文档](https://docs.rs/hyper/latest/hyper/)
 
 ---
@@ -103,6 +105,7 @@ graph LR
 
     E -->|text/json/bytes...| F[解析后的载荷]
 ```
+
 ### 2.1 `ClientBuilder`：全局配置层 {#21-clientbuilder全局配置层}
 
 >
@@ -150,6 +153,7 @@ let client = ClientBuilder::new()
 
     .build()?;
 ```
+
 `Client` 被设计为可克隆（`Clone`）且线程安全（`Send + Sync + 'static`），内部通过 `Arc` 共享连接池状态，因此应在应用生命周期内复用同一 `Client` 实例，而非为每个请求创建新实例。
 
 > [来源: Reqwest 官方文档 — ClientBuilder](https://docs.rs/reqwest/latest/reqwest/struct.ClientBuilder.html)
@@ -182,6 +186,7 @@ let request = client
 
     .build()?;  // 构建为不可变的 Request 对象
 ```
+
 `RequestBuilder` 在 `send()` 被调用前不会触发网络 I/O，允许在发送前对请求进行任意修改、检查甚至克隆。
 
 ### 2.3 `Response`：响应处理层 {#23-response响应处理层}
@@ -223,6 +228,7 @@ let json: serde_json::Value = resp.json().await?;         // JSON 反序列化
 
 let stream = resp.bytes_stream();                         // 流式处理（返回 Stream）
 ```
+
 > [来源: Rust Reference — Methods](https://doc.rust-lang.org/reference/items/associated-items.html#methods)
 
 ---
@@ -299,6 +305,7 @@ impl Middleware for LoggingMiddleware {
 
 }
 ```
+
 ### 3.2 中间件组合与 Tower 集成 {#32-中间件组合与-tower-集成}
 
 >
@@ -331,6 +338,7 @@ let client: ClientWithMiddleware = MiddlewareClientBuilder::new(
 
     .build();
 ```
+
 ```mermaid
 graph TD
 
@@ -354,6 +362,7 @@ graph TD
 
     B --> A
 ```
+
 `reqwest_middleware` 的设计与 Tower 的 `Service` trait 兼容，使得 Tower 生态系统中的限流（rate limiting）、熔断（circuit breaker）、负载均衡等组件可以无缝接入。
 
 > [来源: reqwest-middleware crate 文档](https://docs.rs/reqwest-middleware/latest/reqwest_middleware/)
@@ -413,6 +422,7 @@ async fn main() -> Result<(), reqwest::Error> {
 
 }
 ```
+
 ### 4.2 同步 API：`blocking` 模块 {#42-同步-apiblocking-模块}
 
 >
@@ -447,6 +457,7 @@ fn main() -> Result<(), reqwest::Error> {
 
 }
 ```
+
 ```mermaid
 sequenceDiagram
 
@@ -471,6 +482,7 @@ sequenceDiagram
 
     Blocking-->>User: Response
 ```
+
 这种设计的优势在于**代码复用**：`blocking` 模块与异步模块共享相同的 `hyper` 连接池、TLS 实现和协议处理逻辑，仅在最外层通过 `block_on` 桥接。
 
 但代价是 `blocking::Client` 会占用一个 OS 线程运行内部事件循环，不适合在已有异步运行时中混用。
@@ -502,6 +514,7 @@ let client = reqwest::Client::builder()
 
     .build()?;
 ```
+
 - **HTTP/1.1**：连接池利用 `keep-alive`（`Connection: keep-alive`）复用 TCP 连接，每个连接在同一时刻只能处理一个请求
 - **HTTP/2**：单个 TCP 连接支持多路复用（multiplexing），多个请求可并发在同一条连接上传输，连接池的"连接数"概念在此场景下意义不同
 
@@ -531,6 +544,7 @@ graph TB
 
     F -->|http/1.1| G
 ```
+
 Reqwest 支持两种 TLS 后端（通过 feature flags 选择）：
 
 - **`rustls-tls`**（默认）：纯 Rust 实现的 TLS，静态链接，无系统依赖
@@ -541,6 +555,7 @@ Reqwest 支持两种 TLS 后端（通过 feature flags 选择）：
 
 reqwest = { version = "0.12", default-features = false, features = ["rustls-tls"] }
 ```
+
 > [来源: Hyper 官方文档 — Client](https://docs.rs/hyper/latest/hyper/client/index.html)
 
 ---
@@ -614,6 +629,7 @@ let user: UserResponse = client
 
     .await?;
 ```
+
 ### 6.2 表单与多部分表单 {#62-表单与多部分表单}
 
 >
@@ -660,6 +676,7 @@ let resp = client
 
     .await?;
 ```
+
 > [来源: serde 官方文档](https://docs.rs/serde/latest/serde/)
 
 ---
@@ -686,6 +703,7 @@ match client.get("https://invalid.url").send().await {
 
 }
 ```
+
 通过 `Error::source()` 可遍历错误链，定位 TLS 握手失败、DNS 解析失败或 HTTP 协议错误的根因。
 
 ---

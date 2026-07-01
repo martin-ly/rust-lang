@@ -291,6 +291,7 @@ impl<S: SortStrategy> Context<S> {
 
 // 与 GoF：Context 持有 Strategy 接口；Rust 用 trait 等价
 ```
+
 **Factory Method 模式**：
 
 ```rust
@@ -315,6 +316,7 @@ impl Creator for StringCreator {
 
 // 虚工厂方法：create 在 trait 中；子类 impl 对应 Rust 的 impl
 ```
+
 **Bridge 模式**：
 
 ```rust
@@ -338,6 +340,7 @@ impl<R: Renderer> Page<R> {
 
 // 抽象与实现解耦；R 可替换，无继承
 ```
+
 ---
 
 ## 近似表达示例（代码级） {#近似表达示例代码级}
@@ -372,6 +375,7 @@ fn config() -> &'static Config {
 
 // 差异：无全局可变；显式 get_or_init；线程安全由 OnceLock 保证
 ```
+
 **Observer 近似（channel 替代）**：
 
 ```rust,ignore
@@ -385,6 +389,7 @@ let (tx, rx) = mpsc::channel();
 
 // 差异：消息传递而非回调注册；一对多需 broadcast channel
 ```
+
 **Visitor 近似（match 穷尽）**：
 
 ```rust
@@ -405,6 +410,7 @@ fn interpret(e: &Expr) -> i32 {
 
 // 差异：单分发 match 替代 OOP 双重分发；穷尽匹配保证覆盖
 ```
+
 **Memento 近似（Clone）**：
 
 ```rust,ignore
@@ -425,6 +431,7 @@ impl Originator {
 
 // 差异：无私有封装；State 可被任意修改；需类型 impl Clone/Serialize
 ```
+
 ---
 
 ## 选择建议 {#选择建议}

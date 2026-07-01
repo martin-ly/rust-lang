@@ -58,6 +58,7 @@ Fallback(S, F, R) :=
   若 S(a) 返回 Err(_) 或超时
   则返回 F(a) 作为近似结果 R
 ```
+
 回退强调**失败时的替代结果**：可能是默认值、缓存值、本地计算值或从备用服务获取的值。结果语义上可能不是最强一致，但仍可接受。
 
 ### Def Degrade（降级） {#def-degrade降级}
@@ -70,6 +71,7 @@ Degrade(S, S', R) :=
   当系统处于高负载、依赖不可用或触发特定条件时
   主动将请求路由到 S'，以牺牲部分功能换取可用性
 ```
+
 降级强调**主动减少服务范围**：从完整功能切换到受限功能，并在条件解除后恢复。
 
 ### Fallback vs Degrade 对比 {#fallback-vs-degrade-对比}
@@ -120,6 +122,7 @@ pub enum FallbackReason {
     CircuitOpen,
 }
 ```
+
 > **来源**: [The Rust Programming Language – Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html)
 
 ### 3.2 async 策略组合 {#32-async-策略组合}
@@ -147,6 +150,7 @@ where
     }
 }
 ```
+
 > **来源**: [Tokio Tutorial](https://tokio.rs/tokio/tutorial) | [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)
 
 ### 3.3 代码示例 {#33-代码示例}
@@ -170,6 +174,7 @@ match outcome {
     ServiceOutcome::Degraded(v) => warn!("降级模式: {}", v),
 }
 ```
+
 ---
 
 ## 四、反例边界 {#四反例边界}

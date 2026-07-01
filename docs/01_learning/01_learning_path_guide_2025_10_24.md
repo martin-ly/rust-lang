@@ -58,6 +58,7 @@ C01 (所有权) → C02 (类型) → C03 (控制流)
      ↓              ↓              ↓
   练习          练习          练习
 ```
+
 ### 路径 2: 进阶开发者 (6-8 周) {#路径-2-进阶开发者-6-8-周}
 
 > **来源: [IEEE](https://standards.ieee.org/)**
@@ -69,6 +70,7 @@ C04 (泛型) → C05 (并发) → C06 (异步)
      ↓           ↓           ↓
   项目实战    项目实战    项目实战
 ```
+
 ### 路径 3: 系统程序员 (8-12 周) {#路径-3-系统程序员-8-12-周}
 
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
@@ -78,6 +80,7 @@ C07 (进程) → C08 (算法) → C10 (网络) → C12 (WASM)
      ↓           ↓            ↓            ↓
    系统工具    数据结构     网络服务     Web 应用
 ```
+
 ### 路径 4: Rust 1.95/1.96 特性专题 (2-3 周) {#路径-4-rust-195196-特性专题-2-3-周}
 
 > **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
@@ -98,6 +101,7 @@ C07 (进程) → C08 (算法) → C10 (网络) → C12 (WASM)
 ├── ControlFlow 进阶
 └── LazyLock 生产模式
 ```
+
 ---
 
 ## 🆕 Rust 1.95/1.96 特性学习路径 {#rust-195196-特性学习路径}
@@ -163,6 +167,7 @@ async fn use_async_fn_trait() {
     }
 }
 ```
+
 ### 阶段 3: 综合应用 (第 6-7 天) {#阶段-3-综合应用-第-6-7-天}
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -176,6 +181,7 @@ async fn use_async_fn_trait() {
 ├── 使用 HashMap::get_disjoint_mut (≥1.83) 管理状态
 └── 使用 async Fn (≥1.85, Ed 2024) 处理异步 I/O
 ```
+
 ---
 
 ## 📋 推荐学习顺序 {#推荐学习顺序}
@@ -195,6 +201,7 @@ async fn use_async_fn_trait() {
       ↓
 5. 进阶: async/await + ≥1.85 async Fn 改进
 ```
+
 ### 对于有经验的开发者 {#对于有经验的开发者}
 >
 > **[来源: [crates.io](https://crates.io/)]**
@@ -208,6 +215,7 @@ async fn use_async_fn_trait() {
       ↓
 4. 综合项目: 高性能服务器
 ```
+
 ### 对于系统程序员 {#对于系统程序员}
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
@@ -221,6 +229,7 @@ async fn use_async_fn_trait() {
       ↓
 5. 项目: 系统监控工具
 ```
+
 ---
 
 ## 🛠️ 实践项目建议 {#实践项目建议}

@@ -172,6 +172,7 @@ $$\mathit{delegate}(p) \text{ 满足借用/所有权规则；无循环依赖}$$
 
    }
    ```
+
 2. **借用检查**：
    - `&self` 借用代理
    - `self.inner.get_or_init()` 返回 `&RealSubject`
@@ -213,6 +214,7 @@ $$\mathit{delegate}(p) \text{ 满足借用/所有权规则；无循环依赖}$$
 
    }
    ```
+
 2. **前置条件**：权限检查在委托前执行
 3. **透明性**：接口一致，客户端无感知
 
@@ -313,6 +315,7 @@ let p = LazyProxy::new();
 
 assert_eq!(p.request(), "real");
 ```
+
 **形式化对应**：`LazyProxy` 即 $P$；`RealSubject` 即 $T$；`request` 延迟加载后委托。
 
 ---
@@ -390,6 +393,7 @@ fn main() {
 
 }
 ```
+
 ### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
@@ -466,6 +470,7 @@ borrow_checker_proof
 
 推论 PR-C1 (纯 Safe Proxy)
 ```
+
 ### 与 Rust 类型系统的联系 {#与-rust-类型系统的联系}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -524,6 +529,7 @@ borrow_checker_proof
 
 { Q  }  // 后置条件
 ```
+
 > 以上规约以霍尔三元组风格表述；Rust 编译器通过所有权、借用与类型检查在编译期强制大部分不变式与前置条件。
 
 ---
@@ -586,6 +592,7 @@ let borrowed = proxy.real.borrow();
 
 proxy.display(); // panic：已有不可变借用，尝试可变借用
 ```
+
 **运行期 panic**：`already borrowed: BorrowMutError`。
 
 ### 反例 2：代理生命周期短于主题 {#反例-2代理生命周期短于主题}
@@ -598,6 +605,7 @@ struct Proxy<'a> { subject: &'a RealImage }
 
 fn make() -> Proxy<'static> { let r = RealImage::new(""); Proxy { subject: &r } }
 ```
+
 **编译器错误**：`cannot return value referencing local variable r`。
 
 ### 反例 3：保护代理未验证权限 {#反例-3保护代理未验证权限}
@@ -611,6 +619,7 @@ impl Image for ProxyImage {
 
 }
 ```
+
 **风险**：若作为保护代理，缺少权限检查即转发，破坏安全策略。
 
 ---
@@ -633,6 +642,7 @@ impl Image for ProxyImage {
 
 └── 扩展行为（同接口）？ → Decorator
 ```
+
 ---
 
 ## 与 GoF 对比 {#与-gof-对比}
@@ -719,6 +729,7 @@ mindmap
 
       结果缓存
 ```
+
 ---
 
 ## 与其他模式的关系图 {#与其他模式的关系图}
@@ -747,6 +758,7 @@ graph LR
 
     style A fill:#9E9E9E,stroke:#616161,color:#fff
 ```
+
 ---
 
 ## 实质内容五维自检 {#实质内容五维自检}

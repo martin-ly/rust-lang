@@ -288,6 +288,7 @@ fn get_instance() -> &'static String {
 
 }
 ```
+
 ### 方式二：LazyLock（纯 Safe） {#方式二lazylock纯-safe}
 
 > **来源: [PLDI](https://www.sigplan.org/Conferences/PLDI/)**
@@ -305,6 +306,7 @@ fn get_instance() -> &'static String {
 
 }
 ```
+
 ### 方式三：带内部可变（Safe） {#方式三带内部可变safe}
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
@@ -322,6 +324,7 @@ fn get_instance() -> Arc<Mutex<i32>> {
 
 }
 ```
+
 **形式化对应**：`get_or_init` 保证仅初始化一次；`OnceLock` 内部同步，无数据竞争。
 
 ---
@@ -368,6 +371,7 @@ fn main() {
 
 }
 ```
+
 ### Edition 2024 关键兼容点 {#edition-2024-关键兼容点}
 
 | 特性 | 应用场景 | 兼容说明 |
@@ -452,6 +456,7 @@ Mutex/RwLock (内部可变)
 
 推论 S-C1 (纯 Safe Singleton)
 ```
+
 ### 与 Rust 类型系统的联系 {#与-rust-类型系统的联系}
 
 > **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
@@ -511,6 +516,7 @@ Mutex/RwLock (内部可变)
 
 { Q  }  // 后置条件
 ```
+
 > 以上规约以霍尔三元组风格表述；Rust 编译器通过所有权、借用与类型检查在编译期强制大部分不变式与前置条件。
 
 ---
@@ -570,6 +576,7 @@ static mut INSTANCE: Config = Config { db_url: String::new() };
 
 unsafe { INSTANCE.db_url = "x".into(); }
 ```
+
 **编译器警告/错误**：`static mut` 已废弃推荐用法；任何非同步访问均为 UB。
 
 **修复**：使用 `OnceLock<Config>` 或 `LazyLock<Mutex<Config>>`。
@@ -584,6 +591,7 @@ let local = String::from("temp");
 
 static CFG: LazyLock<String> = LazyLock::new(|| local.clone());
 ```
+
 **编译器错误**：`closure may outlive the current function, but it borrows local, which is owned by the current function`。
 
 **原因**：`static` 初始化闭包必须为 `'static`。
@@ -597,6 +605,7 @@ static mut COUNTER: u64 = 0;
 
 unsafe { COUNTER += 1; } // 多线程数据竞争
 ```
+
 **后果**：未定义行为（UB）。
 
 **修复**：`static COUNTER: AtomicU64 = AtomicU64::new(0);` 或 `Mutex<u64>`。
@@ -674,6 +683,7 @@ mindmap
 
       服务注册表
 ```
+
 ---
 
 ## 与其他模式的关系图 {#与其他模式的关系图}
@@ -706,6 +716,7 @@ graph LR
 
     style P fill:#9E9E9E,stroke:#616161,color:#fff
 ```
+
 ---
 
 ## 实质内容五维自检 {#实质内容五维自检}

@@ -1,6 +1,7 @@
 > **Canonical 说明**: 本文件专注 **regex crate 的 DFA/NFA/Hybrid 正则引擎架构**。
 >
 > 若只需要使用指南与生态定位，请优先参考：
+>
 > - [字符串与文本](../../../../concept/01_foundation/09_strings_and_text.md)
 > - [字符串与编码](../../../../concept/01_foundation/18_strings_and_encoding.md)
 >
@@ -60,6 +61,7 @@ use regex::Regex;
 let re = Regex::new(r"\d{4}-\d{2}-\d{2}").unwrap();
 assert!(re.is_match("2026-06-29"));
 ```
+
 > [来源: regex Examples](https://docs.rs/regex/latest/regex/#example)
 
 ---
@@ -84,6 +86,7 @@ graph TD
     RE -->|captures| CAP
     RE -->|replace_all| SUB
 ```
+
 > [来源: regex Regex Docs](https://docs.rs/regex/latest/regex/struct.Regex.html)
 
 | 类型 | 职责 | 典型使用场景 |
@@ -108,6 +111,7 @@ assert_eq!(&caps[0], "2026-06-29");
 assert_eq!(&caps["year"], "2026");
 assert_eq!(&caps["month"], "06");
 ```
+
 > [来源: regex Captures Docs](https://docs.rs/regex/latest/regex/struct.Captures.html)
 
 **关键设计**：`Captures` 通过生命周期借用输入字符串，避免匹配过程中的拷贝；`caps.name("year")` 返回 `Option<Match>`，强制调用者处理缺失的分组。
@@ -124,6 +128,7 @@ for ident in re.find_iter("let foo = bar + 1;") {
     println!("{}", ident.as_str());
 }
 ```
+
 > [来源: regex Match Docs](https://docs.rs/regex/latest/regex/struct.Match.html)
 
 | 方法 | 返回类型 | 语义 |
@@ -149,6 +154,7 @@ let incremented = re.replace_all("a1b2c3", |caps: &regex::Captures| {
     caps[0].parse::<i32>().unwrap().wrapping_add(1).to_string()
 });
 ```
+
 > [来源: regex Replacer Docs](https://docs.rs/regex/latest/regex/trait.Replacer.html)
 
 **类型注意**：`replace_all` 返回 `Cow<str>`，当没有匹配时直接借用原字符串，无需分配。
@@ -169,6 +175,7 @@ let set = RegexSet::new(&[
 let matches: Vec<usize> = set.matches("abc123").into_iter().collect();
 assert!(matches.contains(&2));
 ```
+
 > [来源: regex RegexSet Docs](https://docs.rs/regex/latest/regex/struct.RegexSet.html)
 
 ---
@@ -199,6 +206,7 @@ graph LR
     LIT -->|前缀命中| EXEC
     NFA -->|捕获/复杂模式| EXEC
 ```
+
 > [来源: regex Implementation Notes](https://docs.rs/regex/latest/regex/#module-level-documentation)
 
 **关键保证**：`regex` 默认拒绝包含无界量词嵌套的结构（如 `(a+)+`），从源头避免灾难性回溯。这一限制通过**禁止部分 PCRE 风格扩展**（如反向引用、递归模式）实现。
