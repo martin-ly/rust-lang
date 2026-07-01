@@ -57,7 +57,7 @@
 | [quality_dashboard_v2](quality_dashboard_v2.md) | 思维表征覆盖率仪表板：332 图表 / 20 种类型 | 1 |
 | [problem_graph](problem_graph.md) | 问题图谱：六大系统级问题分解树（全局→概念→方法） | 6 |
 | [competency_graph](competency_graph.md) | 能力图谱：六维雷达 + Dreyfus 映射 + 自评工具 | 3 |
-| [kg_ontology](kg_ontology.md) | 知识图谱本体：8 实体类型 + 8 关系类型 + RDF/OWL 格式 | 2 |
+| [kg_ontology](kg_ontology_v2.md) | 知识图谱本体：8 实体类型 + 8 关系类型 + RDF/OWL 格式 | 2 |
 | [rustbelt_predicate_map](rustbelt_predicate_map.md) | RustBelt 谓词映射：own/shr/生命周期令牌 L4→L1 可视化 | 4 |
 | [paradigm_transition_matrix](paradigm_transition_matrix.md) | 范式转换矩阵：C++/Java/Go/Python → Rust 模式映射 | 3 |
 | [audit_checklist](audit_checklist.md) | 质量门禁：跨文件一致性检查清单 | 1 |

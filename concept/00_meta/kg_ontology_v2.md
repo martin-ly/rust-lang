@@ -6,7 +6,7 @@
 > **受众**: [研究者]
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **Bloom 层级**: 元（Meta）
-> **定位**: 本文件是 `kg_ontology.md` 的 v2 升级版，在保留原有教学关系本体的基础上，显式对齐 W3C RDF 1.2、RDF-star、SKOS、JSON-LD 1.1 与 SHACL 数据形状标准，使项目知识图谱从"规范文档"进化为"可验证、可查询、可多语言消费"的 Linked Data。
+> **定位**: 本文件是 `kg_ontology.md`（已归档为 `archive/kg_ontology_v1_archived.md`）的 v2 升级版，在保留原有教学关系本体的基础上，显式对齐 W3C RDF 1.2、RDF-star、SKOS、JSON-LD 1.1 与 SHACL 数据形状标准，使项目知识图谱从"规范文档"进化为"可验证、可查询、可多语言消费"的 Linked Data。
 > **对齐来源**: [W3C RDF 1.2 Concepts] · [W3C RDF-star] · [W3C SKOS Reference] · [W3C JSON-LD 1.1] · [W3C SHACL] · [ISO 704:2022] · [ISO/IEC 21838-1:2021]
 > **定理链**: N/A — 描述性/综述性/导航性文档
 >
@@ -35,7 +35,7 @@
 
 ## 一、升级动机与目标
 
-v1 本体（`kg_ontology.md`）已成功定义了 Rust 知识体系的显式关系类型，并生成了机器可读的 `kg_data.json`。v2 升级目标：
+v1 本体（`kg_ontology.md`，已归档为 `archive/kg_ontology_v1_archived.md`）已成功定义了 Rust 知识体系的显式关系类型，并生成了机器可读的 `kg_data.json`。v2 升级目标：
 
 1. **标准对齐**：显式映射到 RDF 1.2、SKOS、JSON-LD 1.1，降低与国际工具链的集成成本。
 2. **三元组元数据**：引入 RDF-star，使每条关系边可附加来源、版本、置信度、审校状态。

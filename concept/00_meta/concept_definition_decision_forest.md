@@ -1058,7 +1058,7 @@ graph TD
 
 ---
 
-> **相关文件**: [定理推理森林](theorem_inference_forest.md) · [失效分析树集](fault_tree_analysis_collection.md) · [边界扩展树](boundary_extension_tree.md) · [知识图谱本体](kg_ontology.md)
+> **相关文件**: [定理推理森林](theorem_inference_forest.md) · [失效分析树集](fault_tree_analysis_collection.md) · [边界扩展树](boundary_extension_tree.md) · [知识图谱本体](kg_ontology_v2.md)
 
 ## 认知路径
 

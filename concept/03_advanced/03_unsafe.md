@@ -103,6 +103,11 @@
       - [命题: "unsafe 代码可以安全地封装"](#命题-unsafe-代码可以安全地封装)
       - [命题: "Miri 可以检测所有 UB"](#命题-miri-可以检测所有-ub)
       - [边界极限测试代码](#边界极限测试代码)
+  - [九、Rustonomicon 实现深度](#九rustonomicon-实现深度)
+    - [9.1 实现 `Vec<T>` 的核心 unsafe 技术](#91-实现-vect-的核心-unsafe-技术)
+    - [9.2 实现 `Arc<T>`：原子引用计数](#92-实现-arct-原子引用计数)
+    - [9.3 实现 `Mutex<T>`：互斥与 poisoning](#93-实现-mutext-互斥与-poisoning)
+    - [9.4 Drop-Check（dropck）与 `#[may_dangle]`](#94-drop-checkdropck与-may_dangle)
   - [十、知识来源关系（Provenance）](#十知识来源关系provenance)
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
     - [补充章节：FFI 与 repr 属性完整规范](#补充章节ffi-与-repr-属性完整规范)
@@ -3227,6 +3232,151 @@ fn main() {
 ---
 
 > **测验设计来源**: [Bloom Taxonomy 2001] · [Rust Reference — Unsafe Operations](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+
+## 九、Rustonomicon 实现深度
+
+> **来源**: [The Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+> [Rust Standard Library Source](https://github.com/rust-lang/rust/tree/master/library) ·
+> [Rust Reference: Drop Check](https://doc.rust-lang.org/reference/destructors.html)
+
+本章节从 Rustonomicon 视角出发，拆解四个经典 unsafe 实现：**`Vec<T>`、`Arc<T>`、`Mutex<T>` 与 Drop-Check**。理解这些实现是掌握"安全抽象 = unsafe 实现 + safe 接口 + 人工证明"这一范式的关键。
+
+### 9.1 实现 `Vec<T>` 的核心 unsafe 技术
+
+`Vec<T>` 是 Rust 标准库中最具代表性的 unsafe 安全抽象。其内部结构可简化为：
+
+```rust,ignore
+pub struct Vec<T> {
+    buf: RawVec<T>, // 管理容量与堆内存
+    len: usize,     // 当前元素数量
+}
+
+struct RawVec<T> {
+    ptr: NonNull<T>,
+    cap: usize,
+}
+```
+
+关键 unsafe 决策：
+
+| 问题 | 解决方案 | 安全契约 |
+|:---|:---|:---|
+| 空 Vec 不分配堆内存 | `NonNull::dangling()` 提供对齐的非空占位指针 | 长度必须为 0，任何访问前检查 `len` |
+| 增长 buffer | `alloc::alloc(Layout::array::<T>(new_cap).unwrap())` | 旧内存内容按位复制到新内存，旧 buffer 释放 |
+| `push` | `ptr::write(self.as_mut_ptr().add(len), value)` | 目标位置未初始化，必须用 `ptr::write` 避免 drop 旧值 |
+| `pop` | `ptr::read(self.as_mut_ptr().add(len - 1))` + `len -= 1` | 读取后原位置逻辑失效，不能再次 drop |
+| `Drop` | 逐个调用 `ptr::drop_in_place`，再释放 buffer | 必须确保每个初始化元素被 drop 且仅 drop 一次 |
+
+**`push` 的简化实现**：
+
+```rust,ignore
+pub fn push(&mut self, value: T) {
+    if self.len == self.buf.cap {
+        self.buf.grow();
+    }
+    unsafe {
+        ptr::write(self.as_mut_ptr().add(self.len), value);
+    }
+    self.len += 1;
+}
+```
+
+### 9.2 实现 `Arc<T>`：原子引用计数
+
+`Arc<T>` 允许多线程共享所有权，核心是在堆上分配一个包含引用计数和数据的 `ArcInner<T>`：
+
+```rust,ignore
+struct ArcInner<T> {
+    strong: AtomicUsize, // 强引用计数
+    weak: AtomicUsize,   // 弱引用计数（含所有 Arc）
+    data: T,
+}
+
+pub struct Arc<T> {
+    ptr: NonNull<ArcInner<T>>,
+    _marker: PhantomData<ArcInner<T>>,
+}
+```
+
+关键 unsafe 技术：
+
+- **`NonNull<ArcInner<T>>`**：保证内部指针非空，使 `Arc<T>` 本身可以是 covariant over `T`。
+- **原子操作**：
+  - `clone`：`fetch_add(1, Acquire)` 或 `Relaxed`（视具体内存序要求）。
+  - `drop`：`fetch_sub(1, Release)`；若减到 0，使用 `fence(Acquire)` 保证 `data` 的写操作对释放线程可见，再 drop `data`。
+- **`unsafe impl Send/Sync`**：
+  - `Arc<T>: Send` 要求 `T: Send + Sync`（共享引用可跨线程）。
+  - `Arc<T>: Sync` 要求 `T: Send + Sync`。
+
+### 9.3 实现 `Mutex<T>`：互斥与 poisoning
+
+标准库 `Mutex<T>` 的简化核心：
+
+```rust,ignore
+pub struct Mutex<T> {
+    inner: sys::Mutex, // 平台相关底层锁
+    poison: Cell<bool>, // 标记是否在持有锁时 panic
+    data: UnsafeCell<T>,
+}
+
+unsafe impl<T: Send> Send for Mutex<T> {}
+unsafe impl<T: Send> Sync for Mutex<T> {}
+```
+
+- **`UnsafeCell<T>`**：提供内部可变性，允许在 `&Mutex<T>` 下修改 `T`。
+- **`Send + Sync` 条件**：`Mutex<T>: Sync` 只要 `T: Send`，因为锁保证了任意时刻只有一个线程能访问 `T`。
+- **Poisoning**：如果线程在持有 `MutexGuard` 时 panic，`Drop` 将 `poison` 设为 `true`，后续 `lock()` 返回 `PoisonError`，提示调用者数据可能处于不一致状态。
+
+### 9.4 Drop-Check（dropck）与 `#[may_dangle]`
+
+Drop-Check 是借用检查器的一个扩展，确保在 drop 时不会访问已经失效的引用。
+
+#### 9.4.1 基本问题
+
+```rust,ignore
+pub struct Foo<'a> {
+    x: &'a i32,
+}
+
+impl<'a> Drop for Foo<'a> {
+    fn drop(&mut self) {
+        println!("{}", self.x); // 若 'a 已失效，则悬垂引用
+    }
+}
+```
+
+Rust 要求：**若类型实现 `Drop`，则其生命周期参数必须严格长于该类型本身**。这就是 dropck 规则。
+
+#### 9.4.2 `#[may_dangle]`
+
+某些类型（如 `Box<T>`、`Vec<T>`）的 `Drop` 实现实际上不会访问泛型参数 `T`。若严格遵守 dropck，会导致过度保守的借用错误。`#[may_dangle]` 属性告诉编译器：
+
+> 此 `Drop` 实现不会访问标记为 `#[may_dangle]` 的类型参数，请放宽 dropck 检查。
+
+```rust,ignore
+unsafe impl<#[may_dangle] T: ?Sized> Drop for Box<T> {
+    fn drop(&mut self) {
+        // 仅释放内存，不访问 T 的内容
+    }
+}
+```
+
+**注意**：`#[may_dangle]` 是 `unsafe` 属性，因为错误使用会导致 drop 时访问已释放内存。标准库中仅对确实不访问 `T` 的类型使用。
+
+#### 9.4.3 `PhantomData<T>` 与 dropck
+
+对于自定义容器，若 `T` 不直接作为字段出现（如通过裸指针持有），需要用 `PhantomData<T>` 向编译器声明"逻辑上拥有 `T`"，以确保 dropck 正确推断：
+
+```rust,ignore
+pub struct MyBox<T: ?Sized> {
+    ptr: NonNull<T>,
+    _marker: PhantomData<T>, // 声明逻辑所有权
+}
+```
+
+> **定理**: `PhantomData<T>` 不改变运行时表示，但影响编译期的 variance、dropck 与 auto trait 推导。
+
+---
 
 ## 自 docs/05_guides/05_unsafe_rust_guide.md 合并的补充内容
 

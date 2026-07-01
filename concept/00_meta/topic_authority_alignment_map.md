@@ -31,7 +31,7 @@
 - `concept/00_meta/inter_layer_map.md` — 跨层知识图谱（Inter-Layer Dependency Map）
 - `concept/00_meta/inter_layer_topology.md` — Rust 知识体系跨层依赖与蕴含拓扑图
 - `concept/00_meta/intra_layer_model_map.md` — Rust 知识体系层次内模型间映射图
-- `concept/00_meta/kg_ontology.md` — Rust 知识体系知识图谱本体规范（Knowledge Graph Ontology）
+- `concept/00_meta/kg_ontology_v2.md` — Rust 知识体系知识图谱本体规范（Knowledge Graph Ontology）
 - `concept/00_meta/kg_ontology_v2.md` — Rust 知识体系知识图谱本体规范 v2.0（RDF 1.2 / RDF-star / SKOS 对齐版）
 - `concept/00_meta/kg_tlo_alignment.md` — Rust 知识体系顶层本体（TLO）对齐
 - `concept/00_meta/knowledge_mindmap.md` — Rust 知识体系全局思维导图（Knowledge Mindmap）
