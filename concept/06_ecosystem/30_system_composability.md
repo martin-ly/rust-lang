@@ -14,7 +14,7 @@
 > **层级**: L6 生态工程
 > **A/S/P 标记**: **S+P** — StructureProcedure
 > **双维定位**: P×Eva — 评估系统可组合性
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [Iterator](../02_intermediate/15_iterator_patterns.md)
+> **前置概念**: · [Rust vs Go](../05_comparative/02_rust_vs_go.md) [Ownership](../01_foundation/01_ownership.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [Iterator](../02_intermediate/15_iterator_patterns.md)
 > **后置概念**: [Tower 架构](../04_formal/10_category_theory.md) · [应用域](04_application_domains.md)
 > **主要来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Tokio 文档](https://docs.rs/tokio/) · [Tower 文档](https://docs.rs/tower/) · [rayon 文档](https://docs.rs/rayon/)
 

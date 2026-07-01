@@ -9,7 +9,7 @@
 > **层级**: L6 应用主题
 > **A/S/P 标记**: **A+S+P** — 全维度
 > **双维定位**: P×Cre — 设计 ECS 游戏架构
-> **前置概念**:
+> **前置概念**: · [Rust vs C++](../05_comparative/01_rust_vs_cpp.md)
 >
 > [Ownership](../01_foundation/01_ownership.md) ·
 > [Borrowing](../01_foundation/02_borrowing.md) ·

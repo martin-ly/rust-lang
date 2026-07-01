@@ -8,7 +8,7 @@
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **P** — Process / Platform
 > **双维定位**: P×App — 将 Cargo 1.96 工具链变更应用于构建、发布与依赖治理
-> **前置概念**: [Toolchain](01_toolchain.md) · [Public/Private Dependencies](10_public_private_deps.md) · [Cargo Security](72_cargo_security_cves.md) · [Security Practices](19_security_practices.md)
+> **前置概念**: · [Rust vs Go](../05_comparative/02_rust_vs_go.md) [Toolchain](01_toolchain.md) · [Public/Private Dependencies](10_public_private_deps.md) · [Cargo Security](72_cargo_security_cves.md) · [Security Practices](19_security_practices.md)
 > **后置概念**: [Rust Version Tracking](../07_future/05_rust_version_tracking.md) · [Rust 1.96 Stabilized](../07_future/rust_1_96_stabilized.md)
 
 ---
