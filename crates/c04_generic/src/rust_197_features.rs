@@ -1,41 +1,52 @@
-//! Rust 197 Features
-
+//! Rust 1.97 稳定特性 —— 泛型系统
+//!
+//! 本模块演示 Rust 1.97 中稳定化、且与泛型/常量上下文相关的 API。
+//! 实际代码使用等价的 Rust 1.96 兼容实现；1.97 原生调用以注释保留。
 #![allow(clippy::incompatible_msrv)]
 
-/// # Rust 1.97 泛型特性演示
-/// # Rust 1.97 generic feature demonstration
-/// Rust 1.97 稳定化coregeneric/set API：
-/// - `BufRead` for `VecDeque<u8>`
-/// - `BuildHasherDefault::new` const stable
+/// Rust 1.97 泛型特性演示
+///
+/// 涉及特性：
+/// - `Option::as_slice` / `Option::as_mut_slice`（泛型包装）
+/// - `const size_of_val` / `const align_of_val`
+/// - `BuildHasherDefault::new` const 稳定
 pub struct Rust197GenericFeatures;
 
 impl Rust197GenericFeatures {
-    pub fn extend_tuples_example() -> (Vec<i32>, Vec<String>) {
-        let mut result: (Vec<i32>, Vec<String>) = (Vec::new(), Vec::new());
-        let items = vec![
-            (1, "one".to_string()),
-            (2, "two".to_string()),
-            (3, "three".to_string()),
-        ];
-        result.extend(items);
-        result
+    /// 泛型地将 `Option<T>` 转为只读切片
+    pub fn option_as_slice<T>(opt: &Option<T>) -> &[T] {
+        // 1.97+: opt.as_slice()
+        match opt {
+            Some(x) => std::slice::from_ref(x),
+            None => &[],
+        }
     }
 
-    /// and `Extend` 配合Use，Implementation of"一次 collect，多个容器"。
-    pub fn from_iterator_tuples_example() -> (Vec<i32>, Vec<String>) {
-        let items = vec![(10, "ten".to_string()), (20, "twenty".to_string())];
-        items.into_iter().collect()
+    /// 泛型地将 `Option<T>` 转为可变切片
+    pub fn option_as_mut_slice<T>(opt: &mut Option<T>) -> &mut [T] {
+        // 1.97+: opt.as_mut_slice()
+        match opt {
+            Some(x) => std::slice::from_mut(x),
+            None => &mut [],
+        }
     }
 
-    pub fn extend_three_tuples() -> (Vec<i32>, Vec<i32>, Vec<i32>) {
-        let mut result: (Vec<i32>, Vec<i32>, Vec<i32>) = (Vec::new(), Vec::new(), Vec::new());
-        let items = vec![(1, 2, 3), (4, 5, 6)];
-        result.extend(items);
-        result
+    /// 编译期计算 `Sized` 泛型值的大小
+    pub const fn const_size_of_val<T: Sized>(_: &T) -> usize {
+        // 1.97+: std::mem::size_of_val(value)
+        std::mem::size_of::<T>()
     }
 
-    pub const fn const_build_hasher()
-    -> std::hash::BuildHasherDefault<std::collections::hash_map::DefaultHasher> {
+    /// 编译期计算 `Sized` 泛型值的对齐
+    pub const fn const_align_of_val<T: Sized>(_: &T) -> usize {
+        // 1.97+: std::mem::align_of_val(value)
+        std::mem::align_of::<T>()
+    }
+
+    /// 构造默认哈希器
+    pub fn const_build_hasher(
+    ) -> std::hash::BuildHasherDefault<std::collections::hash_map::DefaultHasher> {
+        // 1.97+: const fn BuildHasherDefault::new()
         std::hash::BuildHasherDefault::new()
     }
 }
@@ -45,25 +56,26 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_extend_tuples() {
-        let (nums, strings) = Rust197GenericFeatures::extend_tuples_example();
-        assert_eq!(nums, vec![1, 2, 3]);
-        assert_eq!(strings, vec!["one", "two", "three"]);
+    fn test_option_as_slice() {
+        let opt = Some(42);
+        assert_eq!(Rust197GenericFeatures::option_as_slice(&opt), &[42]);
+        let none: Option<i32> = None;
+        assert!(Rust197GenericFeatures::option_as_slice(&none).is_empty());
     }
 
     #[test]
-    fn test_from_iterator_tuples() {
-        let (nums, strings) = Rust197GenericFeatures::from_iterator_tuples_example();
-        assert_eq!(nums, vec![10, 20]);
-        assert_eq!(strings, vec!["ten", "twenty"]);
+    fn test_option_as_mut_slice() {
+        let mut opt = Some(String::from("hello"));
+        let slice = Rust197GenericFeatures::option_as_mut_slice(&mut opt);
+        slice[0].push_str(" world");
+        assert_eq!(opt, Some(String::from("hello world")));
     }
 
     #[test]
-    fn test_extend_three_tuples() {
-        let (a, b, c) = Rust197GenericFeatures::extend_three_tuples();
-        assert_eq!(a, vec![1, 4]);
-        assert_eq!(b, vec![2, 5]);
-        assert_eq!(c, vec![3, 6]);
+    fn test_const_size_align_of_val() {
+        let value = [0u64; 4];
+        assert_eq!(Rust197GenericFeatures::const_size_of_val(&value), 32);
+        assert_eq!(Rust197GenericFeatures::const_align_of_val(&value), 8);
     }
 
     #[test]

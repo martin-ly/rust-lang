@@ -1,101 +1,143 @@
-//! Rust 1.97 特性跟踪模块 —— 设计模式
-//! Rust 1.97 featurestracingmodule design pattern
+//! Rust 1.97 稳定特性 —— 设计模式
+//! Rust 1.97.0 stabilized features —— design patterns
+//!
+//! 本文件展示与设计模式（Null Object、Value Object、Factory）相关的 Rust 1.97.0 稳定特性。
+//! 当前工具链为 Rust 1.96.0，所有 1.97 新 API 调用均保留在注释中；
+//! 可执行代码使用语义等价的 1.96 兼容实现。
+//! 权威列表见 `concept/07_future/rust_1_97_stabilized.md`。
 #![allow(clippy::incompatible_msrv)]
 
-use std::ffi::CString;
-use std::fmt;
+use std::collections::hash_map::DefaultHasher;
+use std::hash::BuildHasherDefault;
 use std::num::NonZeroU32;
-use std::str::FromStr;
 
 /// # Rust 1.97 设计模式特性演示
-/// # Rust 1.97 design feature demonstration
+/// # Rust 1.97 design-pattern feature demonstration
 ///
-/// Rust 1.97 稳定化的核心设计模式相关 API：
-/// Rust 1.97 core design API：
-/// - `FromStr` for `CString` — 从字符串解析 C 字符串
-/// - `FromStr` for `CString` string C string
-/// - `LowerExp` / `UpperExp` for `NonZero` — 科学计数法格式化
-/// - `Option::as_slice` / `as_mut_slice` Null Object pattern
+/// 涉及特性：
+/// - `Option::as_slice` / `as_mut_slice`（Rust 1.97+）：Null Object 模式
+/// - `NonZeroU32` 位操作 `highest_one` / `lowest_one` / `bit_width`（Rust 1.97+）
+/// - `NonZeroU32::midpoint` / `isqrt`（Rust 1.97+）
+/// - `BuildHasherDefault::new` 成为 `const fn`（Rust 1.97+）
 pub struct Rust197DesignPatternFeatures;
 
 impl Rust197DesignPatternFeatures {
-    /// 使用 `FromStr` for `CString` 从字符串创建 C 字符串
-    /// use `FromStr` for `CString` stringcreate C string
+    /// 将 `Option<T>` 视为切片：`Some(x)` -> `[x]`，`None` -> `[]`。
     ///
-    /// 如果输入包含 NUL 字节，返回错误。
-    /// if NUL ，。
-    pub fn parse_c_string(input: &str) -> Result<CString, CStringParseError> {
-        CString::from_str(input).map_err(|_| CStringParseError)
+    /// Rust 1.97: `opt.as_slice()`
+    pub fn option_as_slice<T>(opt: &Option<T>) -> &[T] {
+        match opt {
+            Some(x) => std::slice::from_ref(x),
+            None => &[],
+        }
     }
 
-    /// 使用 `NonZeroU32` 的科学计数法格式化
+    /// 将 `Option<T>` 视为可变切片：`Some(x)` -> `[x]`，`None` -> `[]`。
     ///
-    /// Rust 1.97 为 `NonZero` 类型实现了 `LowerExp` 和 `UpperExp`。
-    pub fn format_nonzero_scientific(n: NonZeroU32) -> (String, String) {
-        let lower = format!("{:e}", n);
-        let upper = format!("{:E}", n);
-        (lower, upper)
+    /// Rust 1.97: `opt.as_mut_slice()`
+    pub fn option_as_mut_slice<T>(opt: &mut Option<T>) -> &mut [T] {
+        match opt {
+            Some(x) => std::slice::from_mut(x),
+            None => &mut [],
+        }
     }
 
-    /// 使用 `Option::as_slice` 实现 Null Object 模式
-    /// use `Option::as_slice` implementation Null Object pattern
-    /// `None` as ，`Some` as element ，
-    /// 统一处理"可能存在的值"和"空值"两种情况。
-    /// "may in "and ""situation 。
-    pub fn option_to_slice<T>(opt: &Option<T>) -> &[T] {
-        opt.as_slice()
+    /// 返回 `NonZeroU32` 最高设置位的位索引。
+    ///
+    /// Rust 1.97: `n.highest_one()`
+    pub fn nonzero_highest_one(n: NonZeroU32) -> u32 {
+        let v = n.get();
+        u32::BITS - 1 - v.leading_zeros()
+    }
+
+    /// 返回 `NonZeroU32` 最低设置位的位索引。
+    ///
+    /// Rust 1.97: `n.lowest_one()`
+    pub fn nonzero_lowest_one(n: NonZeroU32) -> u32 {
+        n.get().trailing_zeros()
+    }
+
+    /// 返回表示 `NonZeroU32` 所需的最少位数。
+    ///
+    /// Rust 1.97: `n.bit_width()`
+    pub fn nonzero_bit_width(n: NonZeroU32) -> u32 {
+        let v = n.get();
+        u32::BITS - v.leading_zeros()
+    }
+
+    /// 计算两个 `NonZeroU32` 的中点，结果仍为非零。
+    ///
+    /// Rust 1.97: `a.midpoint(b)`
+    pub fn nonzero_midpoint(a: NonZeroU32, b: NonZeroU32) -> NonZeroU32 {
+        let mid = a.get().midpoint(b.get());
+        NonZeroU32::new(mid).expect("midpoint of two positive non-zero values is non-zero")
+    }
+
+    /// 计算 `NonZeroU32` 的整数平方根，结果仍为非零。
+    ///
+    /// Rust 1.97: `n.isqrt()`
+    pub fn nonzero_isqrt(n: NonZeroU32) -> NonZeroU32 {
+        let r = n.get().isqrt();
+        NonZeroU32::new(r).expect("isqrt of a positive integer is non-zero")
+    }
+
+    /// 构造默认哈希器。
+    ///
+    /// Rust 1.97 起 `BuildHasherDefault::new` 是 `const fn`，可写为：
+    /// `pub const HASHER: BuildHasherDefault<DefaultHasher> = BuildHasherDefault::new();`
+    /// 在 1.96 中只能在运行期调用。
+    pub fn default_hasher() -> BuildHasherDefault<DefaultHasher> {
+        BuildHasherDefault::new()
     }
 }
-
-/// `CString` 解析错误的标记类型
-/// `CString` error type
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub struct CStringParseError;
-
-impl fmt::Display for CStringParseError {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "input contains NUL byte, cannot create C string")
-    }
-}
-
-impl std::error::Error for CStringParseError {}
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
-    fn test_parse_c_string_valid() {
-        let result = Rust197DesignPatternFeatures::parse_c_string("hello");
-        assert!(result.is_ok());
-        assert_eq!(result.unwrap().to_bytes(), b"hello");
+    fn test_option_as_slice() {
+        let some = Some(42);
+        assert_eq!(Rust197DesignPatternFeatures::option_as_slice(&some), &[42]);
+        let none: Option<i32> = None;
+        assert!(Rust197DesignPatternFeatures::option_as_slice(&none).is_empty());
     }
 
     #[test]
-    fn test_parse_c_string_with_nul() {
-        let result = Rust197DesignPatternFeatures::parse_c_string("he\0llo");
-        assert!(result.is_err());
+    fn test_option_as_mut_slice() {
+        let mut some = Some(42);
+        let slice = Rust197DesignPatternFeatures::option_as_mut_slice(&mut some);
+        assert_eq!(slice, &mut [42]);
+        slice[0] = 100;
+        assert_eq!(some, Some(100));
+
+        let mut none: Option<i32> = None;
+        assert!(Rust197DesignPatternFeatures::option_as_mut_slice(&mut none).is_empty());
     }
 
     #[test]
-    fn test_format_nonzero_scientific() {
-        let n = NonZeroU32::new(1000).unwrap();
-        let (lower, upper) = Rust197DesignPatternFeatures::format_nonzero_scientific(n);
-        assert_eq!(lower, "1e3");
-        assert_eq!(upper, "1E3");
+    fn test_nonzero_bit_operations() {
+        let n = NonZeroU32::new(0b00010100).unwrap(); // 20
+        assert_eq!(Rust197DesignPatternFeatures::nonzero_highest_one(n), 4);
+        assert_eq!(Rust197DesignPatternFeatures::nonzero_lowest_one(n), 2);
+        assert_eq!(Rust197DesignPatternFeatures::nonzero_bit_width(n), 5);
     }
 
     #[test]
-    fn test_option_to_slice_some() {
-        let opt = Some(42);
-        let slice = Rust197DesignPatternFeatures::option_to_slice(&opt);
-        assert_eq!(slice, &[42]);
+    fn test_nonzero_midpoint() {
+        let a = NonZeroU32::new(10).unwrap();
+        let b = NonZeroU32::new(20).unwrap();
+        assert_eq!(Rust197DesignPatternFeatures::nonzero_midpoint(a, b).get(), 15);
     }
 
     #[test]
-    fn test_option_to_slice_none() {
-        let opt: Option<i32> = None;
-        let slice = Rust197DesignPatternFeatures::option_to_slice(&opt);
-        assert!(slice.is_empty());
+    fn test_nonzero_isqrt() {
+        let n = NonZeroU32::new(25).unwrap();
+        assert_eq!(Rust197DesignPatternFeatures::nonzero_isqrt(n).get(), 5);
+    }
+
+    #[test]
+    fn test_default_hasher() {
+        let _ = Rust197DesignPatternFeatures::default_hasher();
     }
 }

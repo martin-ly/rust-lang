@@ -1,44 +1,71 @@
-//! Rust 1.97 特性跟踪模块 —— 类型系统
-//! Rust 1.97 feature module —— type system
+//! Rust 1.97 稳定特性 —— 类型系统
+//!
+//! 本模块演示 Rust 1.97 中稳定化的类型/数值相关 API。
+//! 实际代码使用等价的 Rust 1.96 兼容实现；1.97 原生调用以注释保留。
 #![allow(clippy::incompatible_msrv)]
 
 use std::num::NonZeroU32;
 
-/// # Rust 1.97 特性演示
-/// # Rust 1.97 feature demonstration
-/// Rust 1.97 稳定化coretypesystem API：
-/// - `BuildHasherDefault::new`
+/// Rust 1.97 类型系统特性演示
+///
+/// 涉及特性：
+/// - `NonZero` 位操作：`highest_one`、`lowest_one`、`bit_width`
+/// - `NonZeroU32::midpoint` / `isqrt`
+/// - `char::is_control` const 稳定
+/// - `BuildHasherDefault::new` const 稳定
+/// - `ptr::fn_addr_eq`
 pub struct Rust197Features;
 
 impl Rust197Features {
-    pub fn float_midpoint(a: f64, b: f64) -> f64 {
-        a.midpoint(b)
+    /// 返回 `NonZeroU32` 最高置位位的位置
+    pub fn nonzero_highest_one(n: NonZeroU32) -> u32 {
+        // 1.97+: n.highest_one()
+        n.get().ilog2()
     }
 
-    /// 使用 `u32::midpoint` 计算无符号整数中点（无溢出）
-    /// `u32::midpoint` symbol in point （）
-    pub fn uint_midpoint(a: u32, b: u32) -> u32 {
-        a.midpoint(b)
+    /// 返回 `NonZeroU32` 最低置位位的位置
+    pub fn nonzero_lowest_one(n: NonZeroU32) -> u32 {
+        // 1.97+: n.lowest_one()
+        n.get().trailing_zeros()
     }
 
+    /// 返回表示 `NonZeroU32` 所需的有效位宽
+    pub fn nonzero_bit_width(n: NonZeroU32) -> u32 {
+        // 1.97+: n.bit_width()
+        n.get().ilog2() + 1
+    }
+
+    /// 计算两个 `NonZeroU32` 的无溢出中点
     pub fn nonzero_midpoint(a: NonZeroU32, b: NonZeroU32) -> NonZeroU32 {
-        a.midpoint(b)
+        // 1.97+: a.midpoint(b)
+        // 两个非零无符号数的中点仍为非零，unwrap 安全。
+        NonZeroU32::new(a.get().midpoint(b.get())).unwrap()
     }
 
-    /// 使用 `u32::isqrt` 计算整数平方根
-    /// `u32::isqrt`
-    pub fn integer_sqrt(n: u32) -> u32 {
-        n.isqrt()
+    /// 计算 `NonZeroU32` 的整数平方根
+    pub fn nonzero_isqrt(n: NonZeroU32) -> NonZeroU32 {
+        // 1.97+: n.isqrt()
+        // 非零整数的 isqrt 仍为非零，unwrap 安全。
+        NonZeroU32::new(n.get().isqrt()).unwrap()
     }
 
-    /// 使用 `i32::checked_isqrt` 安全计算有符号整数平方根
-    /// `i32::checked_isqrt` symbol
-    pub fn checked_integer_sqrt(n: i32) -> Option<i32> {
-        n.checked_isqrt()
+    /// 编译期判断字符是否为控制字符
+    pub const fn is_control(c: char) -> bool {
+        // 1.97+: c.is_control() in const context
+        matches!(c, '\u{0}'..='\u{1F}' | '\u{7F}'..='\u{9F}')
     }
 
-    pub fn nonzero_sqrt(n: NonZeroU32) -> NonZeroU32 {
-        n.isqrt()
+    /// 构造默认哈希器
+    pub fn build_hasher_default_new(
+    ) -> std::hash::BuildHasherDefault<std::collections::hash_map::DefaultHasher> {
+        // 1.97+: const fn BuildHasherDefault::new()
+        std::hash::BuildHasherDefault::new()
+    }
+
+    /// 可移植的函数指针地址比较
+    pub fn fn_addr_eq(f: fn(), g: fn()) -> bool {
+        // 1.97+: std::ptr::fn_addr_eq(f, g)
+        f as usize == g as usize
     }
 }
 
@@ -47,15 +74,11 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_float_midpoint() {
-        assert_eq!(Rust197Features::float_midpoint(0.0, 10.0), 5.0);
-        assert_eq!(Rust197Features::float_midpoint(1.0, 3.0), 2.0);
-    }
-
-    #[test]
-    fn test_uint_midpoint() {
-        assert_eq!(Rust197Features::uint_midpoint(0, 10), 5);
-        assert_eq!(Rust197Features::uint_midpoint(u32::MAX, u32::MAX), u32::MAX);
+    fn test_nonzero_bit_ops() {
+        let n = NonZeroU32::new(0b00010100).unwrap(); // 20
+        assert_eq!(Rust197Features::nonzero_highest_one(n), 4);
+        assert_eq!(Rust197Features::nonzero_lowest_one(n), 2);
+        assert_eq!(Rust197Features::nonzero_bit_width(n), 5);
     }
 
     #[test]
@@ -66,21 +89,29 @@ mod tests {
     }
 
     #[test]
-    fn test_integer_sqrt() {
-        assert_eq!(Rust197Features::integer_sqrt(16), 4);
-        assert_eq!(Rust197Features::integer_sqrt(15), 3);
-        assert_eq!(Rust197Features::integer_sqrt(0), 0);
-    }
-
-    #[test]
-    fn test_checked_integer_sqrt() {
-        assert_eq!(Rust197Features::checked_integer_sqrt(16), Some(4));
-        assert_eq!(Rust197Features::checked_integer_sqrt(-1), None);
-    }
-
-    #[test]
-    fn test_nonzero_sqrt() {
+    fn test_nonzero_isqrt() {
         let n = NonZeroU32::new(25).unwrap();
-        assert_eq!(Rust197Features::nonzero_sqrt(n).get(), 5);
+        assert_eq!(Rust197Features::nonzero_isqrt(n).get(), 5);
+    }
+
+    #[test]
+    fn test_is_control() {
+        assert!(Rust197Features::is_control('\n'));
+        assert!(Rust197Features::is_control('\u{7F}'));
+        assert!(!Rust197Features::is_control(' '));
+        assert!(!Rust197Features::is_control('a'));
+    }
+
+    #[test]
+    fn test_build_hasher_default_new() {
+        let _ = Rust197Features::build_hasher_default_new();
+    }
+
+    #[test]
+    fn test_fn_addr_eq() {
+        fn a() {}
+        fn b() {}
+        assert!(Rust197Features::fn_addr_eq(a, a));
+        assert!(!Rust197Features::fn_addr_eq(a, b));
     }
 }

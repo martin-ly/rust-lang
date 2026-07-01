@@ -1,30 +1,44 @@
-//! Rust 1.97 特性跟踪模块 —— 过程宏
-//! Rust 1.97 feature module ——
+//! Rust 1.97 稳定特性 —— 过程宏辅助
+//! Rust 1.97.0 stabilized features —— procedural macro helpers
+//!
+//! 本文件展示与过程宏实现相关的 Rust 1.97.0 稳定特性。
+//! 当前工具链为 Rust 1.96.0，所有 1.97 新 API/行为均保留在注释中；
+//! 可执行代码使用语义等价的 1.96 兼容实现。
+//! 权威列表见 `concept/07_future/rust_1_97_stabilized.md`。
 #![allow(clippy::incompatible_msrv, dead_code)]
 
-/// # Rust 1.97 特性演示
-/// # Rust 1.97 feature demonstration
+/// # Rust 1.97 过程宏辅助特性
+/// # Rust 1.97 procedural-macro helper features
+///
+/// 涉及特性：
+/// - 空 `export_name` 在 Rust 1.97 中被明确拒绝
+/// - `linker-messages` lint 在 Rust 1.97 恢复默认 warn
+/// - Rust 1.97 在 struct 模式中拒绝元组索引简写
 pub struct Rust197Features;
 
 impl Rust197Features {
-    pub fn repeat_derives(trait_name: &str, count: usize) -> Vec<String> {
-        std::iter::repeat_n(format!("#[derive({})]", trait_name), count).collect()
+    /// 判断给定的 `export_name` 字符串在 Rust 1.97 下是否合法。
+    ///
+    /// Rust 1.97: `#[export_name = ""]` 产生编译错误。
+    pub fn is_valid_export_name(name: &str) -> bool {
+        !name.is_empty()
     }
 
-    /// 使用 `Option::is_none_or` 验证可选宏属性
-    /// `Option::is_none_or` attribute
-    pub fn is_valid_attribute(attr: Option<&str>) -> bool {
-        attr.is_none_or(|a| !a.is_empty())
+    /// 返回 `linker-messages` lint 的配置说明。
+    ///
+    /// Rust 1.97 将链接器输出消息从默认 allow 恢复为 warn-by-default。
+    pub fn linker_messages_doc() -> &'static str {
+        r#"
+Rust 1.97+: linker-messages lint is warn-by-default.
+Use RUSTFLAGS="-A linker-messages" to keep silence.
+"#
     }
 
-    /// 组合两者检查宏输入
-    /// combination input
-    /// combination
-    pub fn check_macro_input(input: Option<&str>, expected_len: usize) -> Vec<String> {
-        match input {
-            Some(a) if !a.is_empty() => std::iter::repeat_n(a.to_string(), expected_len).collect(),
-            _ => Vec::new(),
-        }
+    /// 检查字段名列表是否包含元组索引简写（纯数字字段名）。
+    ///
+    /// Rust 1.97 在 struct 模式中拒绝 `let S { 0 }` 这类简写。
+    pub fn has_numeric_field_name(fields: &[&str]) -> bool {
+        fields.iter().any(|f| f.parse::<usize>().is_ok())
     }
 }
 
@@ -33,27 +47,19 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_repeat_derives() {
-        assert_eq!(
-            Rust197Features::repeat_derives("Clone", 2),
-            vec!["#[derive(Clone)]", "#[derive(Clone)]"]
-        );
+    fn test_is_valid_export_name() {
+        assert!(Rust197Features::is_valid_export_name("foo"));
+        assert!(!Rust197Features::is_valid_export_name(""));
     }
 
     #[test]
-    fn test_is_valid_attribute() {
-        assert!(Rust197Features::is_valid_attribute(None));
-        assert!(Rust197Features::is_valid_attribute(Some("derive")));
-        assert!(!Rust197Features::is_valid_attribute(Some("")));
+    fn test_linker_messages_doc() {
+        assert!(Rust197Features::linker_messages_doc().contains("linker-messages"));
     }
 
     #[test]
-    fn test_check_macro_input() {
-        assert_eq!(
-            Rust197Features::check_macro_input(Some("ident"), 2),
-            vec!["ident", "ident"]
-        );
-        assert!(Rust197Features::check_macro_input(Some(""), 2).is_empty());
-        assert!(Rust197Features::check_macro_input(None, 2).is_empty());
+    fn test_has_numeric_field_name() {
+        assert!(Rust197Features::has_numeric_field_name(&["name", "0"]));
+        assert!(!Rust197Features::has_numeric_field_name(&["name", "age"]));
     }
 }

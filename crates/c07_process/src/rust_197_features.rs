@@ -1,65 +1,47 @@
-//! Rust 1.97 特性跟踪模块 —— 进程与 FFI
-//! Rust 1.97 feature module —— process and FFI
+//! Rust 1.97 稳定特性 —— 进程与 FFI
+//! Rust 1.97.0 stabilized features —— process and FFI
+//!
+//! 本文件展示与进程管理、FFI 和系统编程相关的 Rust 1.97.0 稳定特性。
+//! 当前工具链为 Rust 1.96.0，所有 1.97 新 API 调用均保留在注释中；
+//! 可执行代码使用语义等价的 1.96 兼容实现。
+//! 权威列表见 `concept/07_future/rust_1_97_stabilized.md`。
 #![allow(clippy::incompatible_msrv)]
 
-use std::fs::{File, FileTimes};
 use std::io;
-use std::time::SystemTime;
 
-/// # Rust 1.97 进程/文件系统特性演示
-/// # Rust 1.97 process /file system feature demonstration
+/// # Rust 1.97 进程/FFI 特性演示
+/// # Rust 1.97 process/FFI feature demonstration
 ///
-/// Rust 1.97 稳定化的核心文件系统与进程 API：
-/// Rust 1.97 core file system and process API：
-/// - `FileTimes` / `FileTimesExt` / `File::set_modified` / `File::set_times`
-/// - `io::ErrorKind::QuotaExceeded` / `CrossesDevices`
-/// - `Default` for `ExitCode`
+/// 涉及特性：
+/// - `std::ptr::fn_addr_eq`（Rust 1.97+）：可移植的函数指针地址比较
+/// - Windows `WSAESHUTDOWN` 正确映射为 `io::ErrorKind::BrokenPipe`（Rust 1.97+）
 pub struct Rust197ProcessFeatures;
 
 impl Rust197ProcessFeatures {
-    /// 使用 `FileTimes` 构建文件时间修改请求
+    /// 比较两个函数指针的地址是否相等。
     ///
-    /// `FileTimes` 允许原子地设置文件的访问时间和修改时间。
-    /// `FileTimes` time and time 。
-    pub fn build_file_times(
-        accessed: Option<SystemTime>,
-        modified: Option<SystemTime>,
-    ) -> FileTimes {
-        let times = FileTimes::new();
-        if let Some(t) = accessed {
-            let _ = times.set_accessed(t);
+    /// Rust 1.97 使用 `std::ptr::fn_addr_eq(f1, f2)` 处理 provenance 问题；
+    /// 在 1.96 中可转换为裸指针 `*const ()` 后比较。
+    #[allow(clippy::fn_to_numeric_cast_any)]
+    pub fn function_pointers_equal<A, R>(f1: fn(A) -> R, f2: fn(A) -> R) -> bool {
+        // Rust 1.97:
+        // std::ptr::fn_addr_eq(f1, f2)
+        std::ptr::eq(f1 as *const (), f2 as *const ())
+    }
+
+    /// 将 Windows 套接字错误 `WSAESHUTDOWN` 映射为 `BrokenPipe`。
+    ///
+    /// Rust 1.97 起 `io::Error::from_raw_os_error(WSAESHUTDOWN).kind()` 会返回
+    /// `io::ErrorKind::BrokenPipe`。在 1.96 中等价做法是检查原始错误码并手动映射。
+    pub fn wsa_shutdown_error_kind() -> io::ErrorKind {
+        const WSAESHUTDOWN: i32 = 10058;
+        let err = io::Error::from_raw_os_error(WSAESHUTDOWN);
+        // Rust 1.97:
+        // err.kind() == io::ErrorKind::BrokenPipe
+        match err.raw_os_error() {
+            Some(WSAESHUTDOWN) => io::ErrorKind::BrokenPipe,
+            _ => err.kind(),
         }
-        if let Some(t) = modified {
-            let _ = times.set_modified(t);
-        }
-        times
-    }
-
-    /// 使用 `File::set_times` 原子更新文件时间戳
-    pub fn update_file_times(path: &str, times: FileTimes) -> io::Result<()> {
-        let file = File::options().write(true).open(path)?;
-        file.set_times(times)
-    }
-
-    /// 使用 `File::set_modified` 快捷设置修改时间
-    /// use `File::set_modified` fastset time
-    pub fn set_modified_time(path: &str, time: SystemTime) -> io::Result<()> {
-        let file = File::options().write(true).open(path)?;
-        file.set_modified(time)
-    }
-
-    /// 创建 `io::ErrorKind::QuotaExceeded` 错误
-    /// create `io::ErrorKind::QuotaExceeded` error
-    /// represent 。
-    pub fn quota_exceeded_error() -> io::ErrorKind {
-        io::ErrorKind::QuotaExceeded
-    }
-
-    /// 创建 `io::ErrorKind::CrossesDevices` 错误
-    /// create `io::ErrorKind::CrossesDevices` error
-    /// represent edge （for example file system rename）。
-    pub fn crosses_devices_error() -> io::ErrorKind {
-        io::ErrorKind::CrossesDevices
     }
 }
 
@@ -67,33 +49,24 @@ impl Rust197ProcessFeatures {
 mod tests {
     use super::*;
 
-    #[test]
-    fn test_build_file_times() {
-        let now = SystemTime::now();
-        let times = Rust197ProcessFeatures::build_file_times(Some(now), Some(now));
-        // FileTimes 内部状态无法直接检查，但确保构造不 panic
-        let _ = times;
+    fn add_one(x: i32) -> i32 {
+        x + 1
+    }
+    fn add_two(x: i32) -> i32 {
+        x + 2
     }
 
     #[test]
-    fn test_quota_exceeded_error() {
+    fn test_function_pointers_equal() {
+        assert!(Rust197ProcessFeatures::function_pointers_equal(add_one, add_one));
+        assert!(!Rust197ProcessFeatures::function_pointers_equal(add_one, add_two));
+    }
+
+    #[test]
+    fn test_wsa_shutdown_error_kind() {
         assert_eq!(
-            Rust197ProcessFeatures::quota_exceeded_error(),
-            io::ErrorKind::QuotaExceeded
+            Rust197ProcessFeatures::wsa_shutdown_error_kind(),
+            io::ErrorKind::BrokenPipe
         );
-    }
-
-    #[test]
-    fn test_crosses_devices_error() {
-        assert_eq!(
-            Rust197ProcessFeatures::crosses_devices_error(),
-            io::ErrorKind::CrossesDevices
-        );
-    }
-
-    #[test]
-    fn test_error_kind_display() {
-        let err = io::Error::new(io::ErrorKind::QuotaExceeded, "disk quota exceeded");
-        assert_eq!(err.kind(), io::ErrorKind::QuotaExceeded);
     }
 }
